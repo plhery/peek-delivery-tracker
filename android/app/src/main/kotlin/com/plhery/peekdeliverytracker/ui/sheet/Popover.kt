@@ -68,8 +68,9 @@ data class PopoverSize(val minWidth: Dp, val idealWidth: Dp, val minHeight: Dp, 
 
 /**
  * `.popover(isPresented:)` as iPadOS 26 draws it, over the whole window ([LocalTabOverlay]): on glass, its arrow pointing
- * at [anchor] (the source's bounds in the window), under it where there is room and over it otherwise, centred on it
- * as far as the window allows. It takes its ideal size, down to its least where the window is short of room, and stays
+ * at [anchor] (the source's bounds in the window), under it where there is room and over it otherwise, or over it first
+ * where [above] (iOS 26's confirmation dialog off a list's row), centred on it as far as the window allows, its corners
+ * [radius] round. It takes its ideal size, down to its least where the window is short of room, and stays
  * in the window's safe area, what it holds scrolling where even its least would not fit. Nothing dims; a tap outside
  * it, or the system's back, dismisses it. It grows from its arrow on a spring and shrinks back as it goes; the window
  * made again (a rotation) finds it there without growing again. TalkBack reaches only the popover, named [paneTitle],
@@ -83,6 +84,8 @@ fun Popover(
     paneTitle: String,
     size: PopoverSize,
     onClosed: () -> Unit = {},
+    above: Boolean = false,
+    radius: Dp = POPOVER_RADIUS,
     content: @Composable () -> Unit,
 ) {
     var present by remember { mutableStateOf(visible) }
@@ -94,7 +97,7 @@ fun Popover(
     val closed by rememberUpdatedState(onClosed)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
-            PopoverLayer(visible, anchor, { dismiss() }, paneTitle, size, host?.backdrop, memory, {
+            PopoverLayer(visible, anchor, { dismiss() }, paneTitle, size, PopoverLook(above, radius), host?.backdrop, memory, {
                 present = false
                 closed()
             }, content)
@@ -112,6 +115,7 @@ private fun PopoverLayer(
     onDismiss: () -> Unit,
     paneTitle: String,
     size: PopoverSize,
+    look: PopoverLook,
     backdrop: MaterialBackdrop?,
     memory: SheetMemory,
     onGone: () -> Unit,
@@ -146,11 +150,11 @@ private fun PopoverLayer(
         val bars = WindowInsets.systemBars.union(WindowInsets.displayCutout)
         val frame = with(density) {
             popoverFrame(
-                anchor.translate(-origin), size, constraints.maxWidth.toFloat(), constraints.maxHeight.toFloat(),
+                anchor.translate(-origin), size, look.above, constraints.maxWidth.toFloat(), constraints.maxHeight.toFloat(),
                 SafeInsets(bars.getLeft(this, direction).toFloat(), bars.getTop(this).toFloat(), bars.getRight(this, direction).toFloat(), bars.getBottom(this).toFloat()),
             )
         }
-        val shape = with(density) { remember(frame) { PopoverShape(frame, ARROW_HEIGHT.toPx(), ARROW_WIDTH.toPx(), POPOVER_RADIUS.toPx()) } }
+        val shape = with(density) { remember(frame, look) { PopoverShape(frame, ARROW_HEIGHT.toPx(), ARROW_WIDTH.toPx(), look.radius.toPx()) } }
         Box(
             Modifier
                 .layout { measurable, constraints ->
@@ -189,6 +193,10 @@ private fun PopoverLayer(
     }
 }
 
+/** Which side of its source a popover takes first, and its corners. */
+@Immutable
+private data class PopoverLook(val above: Boolean, val radius: Dp)
+
 /** Where a popover stands: its bounds, its arrow included, whether it is under its source, and its arrow's tip across it. */
 @Immutable
 private data class PopoverFrame(val bounds: Rect, val below: Boolean, val tip: Float)
@@ -198,10 +206,10 @@ private data class SafeInsets(val left: Float, val top: Float, val right: Float,
 
 /**
  * The popover's frame in a window `width` × `height`, in by a margin from its safe area ([safe]): under its source
- * while there is room for its ideal height there, or wherever has more; as wide and tall as it would be, down to its
+ * while there is room for its ideal height there, or over it first where `above`, or wherever has more; as wide and tall as it would be, down to its
  * least, and no larger than the room it has. Its body stays in the window however close to its edge the source is.
  */
-private fun Density.popoverFrame(anchor: Rect, size: PopoverSize, width: Float, height: Float, safe: SafeInsets): PopoverFrame {
+private fun Density.popoverFrame(anchor: Rect, size: PopoverSize, above: Boolean, width: Float, height: Float, safe: SafeInsets): PopoverFrame {
     val margin = POPOVER_MARGIN.toPx()
     val arrow = ARROW_HEIGHT.toPx()
     val start = safe.left + margin
@@ -210,7 +218,8 @@ private fun Density.popoverFrame(anchor: Rect, size: PopoverSize, width: Float, 
     val bottom = height - safe.bottom - margin
     val roomBelow = max(0f, bottom - anchor.bottom - arrow)
     val roomAbove = max(0f, anchor.top - top - arrow)
-    val below = roomBelow >= size.idealHeight.toPx() || roomBelow >= roomAbove
+    val ideal = size.idealHeight.toPx()
+    val below = if (above) roomAbove < ideal && roomBelow > roomAbove else roomBelow >= ideal || roomBelow >= roomAbove
     val room = if (below) roomBelow else roomAbove
     val across = max(0f, end - start)
     val w = min(size.idealWidth.toPx(), across).coerceAtLeast(min(size.minWidth.toPx(), across))

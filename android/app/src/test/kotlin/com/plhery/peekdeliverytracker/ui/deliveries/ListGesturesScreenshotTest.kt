@@ -14,12 +14,14 @@ import androidx.compose.ui.test.TouchInjectionScope
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
@@ -34,8 +36,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The list's gestures on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), in the
- * demo, light and dark: a card swiped open on its action, a card's menu, the Undo of an archive, the pull halfway to
- * its threshold, and the seal's tick once every parcel has been checked.
+ * demo, light and dark: a card swiped open on its action, a card's menu, its delete question (on a tablet too), the Undo
+ * of an archive, the pull halfway to its threshold, and the seal's tick once every parcel has been checked.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -49,8 +51,8 @@ class ListGesturesScreenshotTest {
     private lateinit var view: View
     private lateinit var source: FakeDeliveries
 
-    /** The demo's list with the iPhone's bars: the status bar 62 points tall, the gesture bar 24. */
-    private fun show(dark: Boolean) {
+    /** The demo's list with the iPhone's bars: the status bar 62 points tall unless `top` says otherwise, the gesture bar 24. */
+    private fun show(dark: Boolean, top: Int = 62) {
         source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
         compose.waitsForMaps()
         compose.setContent {
@@ -63,7 +65,7 @@ class ListGesturesScreenshotTest {
         compose.runOnUiThread {
             val scale = view.resources.displayMetrics.density
             val insets = WindowInsetsCompat.Builder()
-                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, (62 * scale).toInt(), 0, 0))
+                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, (top * scale).toInt(), 0, 0))
                 .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, (24 * scale).toInt()))
                 .setVisible(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(), true)
                 .build()
@@ -114,6 +116,14 @@ class ListGesturesScreenshotTest {
         compose.screenshot("gestures_menu_${theme(dark)}")
     }
 
+    /** A card's menu's Delete: its question in a popover pointing at the card. */
+    private fun askDelete(name: String) {
+        compose.card(name).performTouchInput { longClick() }
+        compose.waitForIdle()
+        compose.onNodeWithTag(menuItemTag(ParcelMenuItem.Delete)).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+    }
+
     private fun undo(dark: Boolean) {
         show(dark)
         archive("Belgian chocolate")
@@ -159,6 +169,23 @@ class ListGesturesScreenshotTest {
 
     @Test
     fun aCardsMenuInDark() = menu(dark = true)
+
+    /** Next up's, under its card, as the first card leaves no room over it. */
+    @Test
+    fun aCardsDeleteQuestion() {
+        show(dark = false)
+        askDelete("New trainers")
+        compose.screenshot("delete_popover_card_light")
+    }
+
+    /** An iPad, 1032 × 1376, the list beside a page: the question over its card, though there is more room under it. */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun aCardsDeleteQuestionOnATablet() {
+        show(dark = false, top = 24)
+        askDelete("Birthday gift")
+        compose.screenshot("delete_popover_card_tablet_light")
+    }
 
     @Test
     fun theUndoOfAnArchive() = undo(dark = false)

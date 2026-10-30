@@ -9,8 +9,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasClickAction
@@ -122,32 +125,71 @@ class CardMenuTest {
         inList("Birthday gift").assertDoesNotExist()
     }
 
+    /** A tap away from the delete question, at the window's bottom left. */
+    private fun tapOutside() {
+        compose.onRoot().performTouchInput { click(Offset(10f, height - 10f)) }
+        compose.waitForIdle()
+    }
+
+    /** The delete question's content, its arrow left out, in points. */
+    private fun question(): Rect = drawn(compose.onNodeWithTag(DELETE_POPOVER))
+
     @Test
-    fun deleteAsksFirstAndOnlyAYesDeletes() {
+    fun deleteAsksFirstInAPopoverWithoutCancelAndOnlyAYesDeletesOnceItHasGone() {
         show()
         longPress("Birthday gift")
         choose(ParcelMenuItem.Delete)
         compose.onNodeWithTag(CARD_MENU).assertDoesNotExist()
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        compose.onNodeWithTag(DELETE_POPOVER).assertExists()
         compose.onNode(hasText("Delete this parcel permanently?")).assertExists()
-        compose.onNodeWithTag(DELETE_CANCEL).performClick()
-        compose.waitForIdle()
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertDoesNotExist()
+        compose.onNode(SemanticsMatcher.expectValue(SemanticsProperties.PaneTitle, "Delete this parcel permanently?")).assertExists()
+        // No Cancel: a tap outside answers no.
+        compose.onNode(hasText("Cancel")).assertDoesNotExist()
+        tapOutside()
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
         assertEquals(emptyList<Any>(), source.deleted)
 
         // Back answers no as well.
         longPress("Birthday gift")
         choose(ParcelMenuItem.Delete)
         back()
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertDoesNotExist()
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
         assertEquals(emptyList<Any>(), source.deleted)
 
         longPress("Birthday gift")
         choose(ParcelMenuItem.Delete)
-        compose.onNodeWithTag(DELETE_CONFIRM).performClick()
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(DELETE_CONFIRM).assertTextEquals("Delete permanently").performClick()
+        compose.mainClock.advanceTimeByFrame()
+        // Not while the popover goes.
+        assertEquals(emptyList<Any>(), source.deleted)
+        compose.mainClock.autoAdvance = true
         compose.waitForIdle()
         assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.deleted)
         inList("Birthday gift").assertDoesNotExist()
+    }
+
+    @Test
+    fun theQuestionPointsAtItsCardOverItWhereItFitsAndUnderItOtherwise() {
+        show()
+        longPress("Birthday gift")
+        choose(ParcelMenuItem.Delete)
+        var card = drawn(compose.onNode(cardNamed("Birthday gift"), useUnmergedTree = true))
+        var asked = question()
+        assertEquals(238f, asked.width, 0.5f)
+        // Its arrow, 13 tall, between it and the card's top, centred on the card.
+        assertEquals(card.top - 13f, asked.bottom, 1f)
+        assertEquals(card.center.x, asked.center.x, 1f)
+        back()
+
+        // Next up's card, the first, leaves no room over it.
+        longPress("New trainers")
+        choose(ParcelMenuItem.Delete)
+        card = drawn(compose.onNode(cardNamed("New trainers"), useUnmergedTree = true))
+        asked = question()
+        assertEquals(card.bottom + 13f, asked.top, 1f)
+        assertEquals(card.center.x, asked.center.x, 1f)
+        back()
     }
 
     @Test
@@ -284,7 +326,7 @@ class CardMenuTest {
     private fun assertTheLastItemTaps() {
         item(ParcelMenuItem.Delete).performScrollTo()
         choose(ParcelMenuItem.Delete)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        compose.onNodeWithTag(DELETE_POPOVER).assertExists()
     }
 
     @Test
@@ -323,6 +365,24 @@ class CardMenuTest {
         assertEveryItemOnScreen()
         assertTrue(drawn(item(ParcelMenuItem.Open)).top >= lifted().bottom)
         assertTheLastItemTaps()
+    }
+
+    /** In a regular window the question is wider, and over its card though there is more room under it. */
+    @Test
+    @Config(qualifiers = TABLET)
+    fun besideAParcelTheQuestionStandsOverItsCard() {
+        show()
+        longPress("Birthday gift")
+        choose(ParcelMenuItem.Delete)
+        val card = drawn(compose.onNode(cardNamed("Birthday gift"), useUnmergedTree = true))
+        val asked = question()
+        assertEquals(288f, asked.width, 0.5f)
+        assertTrue("More room under $card", window().bottom.value - card.bottom > card.top)
+        assertEquals(card.top - 13f, asked.bottom, 1f)
+        assertEquals(card.center.x, asked.center.x, 1f)
+        tapOutside()
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
+        assertEquals(emptyList<Any>(), source.deleted)
     }
 
     @Test
@@ -421,12 +481,11 @@ class CardMenuTest {
         val view = talkBack()
         longPress("Birthday gift")
         choose(ParcelMenuItem.Delete)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        compose.onNodeWithTag(DELETE_POPOVER).assertExists()
         inList("Birthday gift").assertDoesNotExist()
         compose.onNodeWithContentDescription("Friends").assertDoesNotExist()
         assertTrue(compose.onNode(hasText("Delete this parcel permanently?", substring = true)).hasTalkBackFocus(view))
-        compose.onNodeWithTag(DELETE_CANCEL).performClick()
-        compose.waitForIdle()
+        back()
         assertTrue(compose.card("Birthday gift").hasTalkBackFocus(view))
 
         source.failure = IllegalStateException("No connection")

@@ -13,10 +13,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasClickAction
@@ -437,19 +440,40 @@ class ParcelPageTest {
         closed()
     }
 
+    /** A tap away from the delete question, at the window's bottom left. */
+    private fun tapOutside() {
+        compose.onRoot().performTouchInput { click(Offset(10f, height - 10f)) }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+    }
+
     @Test
     fun deleteAsksFirstThenDeletesAndGoesBackToTheList() {
         show()
         open("Birthday gift")
         openMenu()
         choose(ParcelMenuItem.Delete)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
-        // On a phone, an action sheet at the bottom.
+        // Off the •••, as its menu stands: no arrow, its top at the button's, 10 in from the window's edge, 238 wide.
+        val button = bounds(compose.onNodeWithTag(PAGE_MENU_BUTTON, useUnmergedTree = true))
+        val asked = bounds(compose.onNodeWithTag(DELETE_POPOVER))
+        val window = compose.onRoot().getBoundsInRoot()
+        assertEquals(button.top.value, asked.top.value, 0.5f)
+        assertEquals(window.right.value - 10f, asked.right.value, 0.5f)
+        assertEquals(238f, width(asked), 0.5f)
+        // No Cancel: a tap outside answers no.
+        compose.onNode(hasText("Cancel")).assertDoesNotExist()
+        tapOutside()
         compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
-        compose.onNodeWithTag(DELETE_CANCEL).performClick()
-        compose.mainClock.advanceTimeBy(1_000)
         assertEquals(emptyList<Any>(), source.deleted)
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+
+        // Back answers no as well.
+        openMenu()
+        choose(ParcelMenuItem.Delete)
+        back()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
+        assertEquals(emptyList<Any>(), source.deleted)
 
         openMenu()
         choose(ParcelMenuItem.Delete)
@@ -515,7 +539,7 @@ class ParcelPageTest {
         compose.mainClock.advanceTimeBy(1_000)
         // Nor does its key ask.
         press(KeyEvent.KEYCODE_DEL, ctrl)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertDoesNotExist()
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
         compose.runOnUiThread { source.archiving?.complete(Unit) }
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
@@ -574,10 +598,10 @@ class ParcelPageTest {
         compose.waitForIdle()
         openMenu()
         choose(ParcelMenuItem.Delete)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        compose.onNodeWithTag(DELETE_POPOVER).assertExists()
         source.parcels.value = parcels.filterNot { it.id == gift }
         compose.mainClock.advanceTimeBy(1_000)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertDoesNotExist()
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
         assertNull(deliveries.deleting)
         assertEquals(emptyList<Any>(), source.deleted)
     }
@@ -591,9 +615,8 @@ class ParcelPageTest {
         val entry = DemoCards.parcel("Birthday gift").trackingNumbers.first()
         assertEquals(TrackingNumberCopy.text(entry.number, entry.carrier), clipboard())
         press(KeyEvent.KEYCODE_DEL, ctrl)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
-        compose.onNodeWithTag(DELETE_CANCEL).performClick()
-        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(DELETE_POPOVER).assertExists()
+        tapOutside()
         press(KeyEvent.KEYCODE_ESCAPE)
         compose.mainClock.advanceTimeBy(1_000)
         closed()
@@ -628,7 +651,10 @@ class ParcelPageTest {
         closed()
     }
 
-    /** In a regular window the page's delete question stands off its •••, and the next card's parcel takes its place. */
+    /**
+     * In a regular window the page's delete question stands off its ••• as on a phone, wider, and the next card's parcel
+     * takes its place.
+     */
     @Test
     @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
     fun besideTheListDeleteAsksOffTheMenusButtonAndTheNextCardTakesThePagesPlace() {
@@ -636,10 +662,13 @@ class ParcelPageTest {
         open("Birthday gift")
         openMenu()
         choose(ParcelMenuItem.Delete)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertDoesNotExist()
         val button = bounds(compose.onNodeWithTag(PAGE_MENU_BUTTON, useUnmergedTree = true))
         val popover = bounds(compose.onNodeWithTag(DELETE_POPOVER))
-        assertTrue("Popover $popover under $button", popover.top >= button.bottom)
+        // Over the button, from its top, 10 in from the window's edge.
+        assertEquals(button.top.value, popover.top.value, 0.5f)
+        assertEquals(compose.onRoot().getBoundsInRoot().right.value - 10f, popover.right.value, 0.5f)
+        assertTrue("$popover over $button", popover.right >= button.right)
+        assertEquals(288f, width(popover), 0.5f)
         compose.onNodeWithTag(DELETE_CONFIRM).performClick()
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
@@ -729,6 +758,22 @@ class ParcelPageTest {
         back()
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
+        assertTrue(compose.onNodeWithTag(PAGE_MENU_BUTTON).hasTalkBackFocus(view))
+    }
+
+    @Test
+    fun talkBackStartsAtTheDeleteQuestionNamedByItAndGoesBackToTheButton() {
+        show(AuthenticationState.Welcome)
+        val view = talkBack()
+        open("Birthday gift")
+        openMenu()
+        choose(ParcelMenuItem.Delete)
+        compose.onNode(SemanticsMatcher.expectValue(SemanticsProperties.PaneTitle, "Delete this parcel permanently?")).assertExists()
+        assertTrue(compose.onNode(hasText("Delete this parcel permanently?", substring = true)).hasTalkBackFocus(view))
+        back()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        compose.onNodeWithTag(DELETE_POPOVER).assertDoesNotExist()
         assertTrue(compose.onNodeWithTag(PAGE_MENU_BUTTON).hasTalkBackFocus(view))
     }
 }

@@ -13,12 +13,14 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.GraphicsContext
@@ -785,6 +787,12 @@ internal class DeliveriesState(
     /** Where TalkBack goes back to once the menu and what it opened have closed: the card the menu came from. */
     var returnFocus: AccessibilityFocus? = null
 
+    /** A card's delete question, answered and still on its way out: TalkBack goes back to the card once it has gone. */
+    var deleteGoing: Boolean by mutableStateOf(false)
+
+    /** The cards and archived rows on the list as drawn, by their parcel: a card's delete question points at its card. */
+    internal val cardMenus: SnapshotStateMap<UUID, CardMenuSource> = mutableStateMapOf()
+
     /**
      * The swipes of the cards open on the list as drawn, in the order they opened: the last one's action is kept from
      * the system's back gesture.
@@ -847,7 +855,7 @@ internal class DeliveriesState(
      */
     val modal: Boolean
         get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
-            mapCover != null || carrierEditor != null || carrierEditorClosing
+            mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes

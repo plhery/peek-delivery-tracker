@@ -29,8 +29,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -50,8 +48,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -116,6 +116,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.PopoverSize
 import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_HEIGHT
 import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_WIDTH
 import com.plhery.peekdeliverytracker.ui.sheet.RowHighlight
+import com.plhery.peekdeliverytracker.ui.sheet.SheetMemory
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
@@ -152,7 +153,7 @@ internal class CardMenuSource(
     var parcel: Parcel by mutableStateOf(parcel)
 
     /** The whole card in the window, the part the list cuts off included. */
-    var bounds: Rect = Rect.Zero
+    var bounds: Rect by mutableStateOf(Rect.Zero)
         private set
 
     val focus = AccessibilityFocus()
@@ -174,14 +175,19 @@ internal class CardMenuSource(
     }
 }
 
-/** A card's menu, which closes as the card goes: off the list, or as the window turns and the list is drawn anew. */
+/**
+ * A card's menu, which closes as the card goes: off the list, or as the window turns and the list is drawn anew. The
+ * card stands in [DeliveriesState.cardMenus] while it is drawn, for its delete question to point at.
+ */
 @Composable
 internal fun rememberCardMenu(state: DeliveriesState, parcel: Parcel, cornerRadius: Dp, fill: Color? = null): CardMenuSource {
     val picture = rememberGraphicsLayer()
     val source = remember(state, parcel.id, cornerRadius, fill, picture) { CardMenuSource(parcel, cornerRadius, fill, picture, state) }
     SideEffect { source.parcel = parcel }
     DisposableEffect(source) {
+        state.cardMenus[parcel.id] = source
         onDispose {
+            if (state.cardMenus[parcel.id] === source) state.cardMenus.remove(parcel.id)
             if (state.menu?.source === source) state.menu = null
             if (state.returnFocus === source.focus) state.returnFocus = null
         }
@@ -295,18 +301,19 @@ internal fun CardMenuHost(state: DeliveriesState) {
     val pageParcel = state.liveMenuParcel(deleting?.pageId?.takeIf { it == state.navigator.navigation.shown })
     val unasked = deleting?.fromPage == true && pageParcel == null
     LaunchedEffect(unasked) { if (unasked) state.deleting = null }
-    // In a regular window the page's question stands off its •••, as an iPad's confirmation dialog stands off its menu.
     val window = LocalWindowInfo.current.containerSize
     val regular = with(LocalDensity.current) { window.width.toDp() >= REGULAR_WIDTH && window.height.toDp() >= REGULAR_HEIGHT }
-    val popover = deleting?.fromPage == true && regular
-    DeletePopover(state, visible = request == null && deleting != null && popover)
+    // The page's question, made again with the window, is there already, as a popover is.
+    val asked = rememberSaveable(saver = SheetMemory.Saver) { SheetMemory() }
+    if (deleting?.fromPage != true) asked.forget()
+    CardDeleteQuestion(state, deleting?.takeIf { request == null && !it.fromPage }, regular)
     // The page's rename alert goes with its page, as the iPhone's goes with the page it stands over.
     val renaming = state.renaming
     val unnamed = renaming?.pageId != null && renaming.pageId != state.navigator.navigation.shown
     LaunchedEffect(unnamed) { if (unnamed) state.cancelRename() }
     val content: (@Composable () -> Unit)? = when {
         request != null -> { { CardMenuOverlay(state, request) } }
-        deleting != null && !popover -> { { DeleteConfirmation(state, deleting) } }
+        deleting != null && deleting.fromPage && !unasked -> { { PageDeleteQuestion(state, deleting, regular, asked) } }
         renaming != null && !unnamed -> { { RenameAlert(state, renaming) } }
         error != null -> { { ActionErrorAlert(state, error) } }
         else -> null
@@ -456,13 +463,13 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
 }
 
 /**
- * A menu's coming and going over the window, the card's and the page's: it grows in on a spring as it opens, TalkBack
- * going to its first item ([first]), and shrinks away as it closes ([close]); under Reduce Motion it only fades. The
- * back gesture closes it.
+ * A menu's coming and going over the window, the card's and the page's, and the page's delete question's: it grows in
+ * on a spring as it opens, TalkBack going to its first item ([first]), and shrinks away as it closes ([close]); under
+ * Reduce Motion it only fades. Made again with the window `up`, it is there already. The back gesture closes it.
  */
 @Stable
-internal class MenuPresence(private val scope: CoroutineScope, private val onClosed: () -> Unit) {
-    val shown = Animatable(0f)
+internal class MenuPresence(private val scope: CoroutineScope, up: Boolean, private val onClosed: () -> Unit) {
+    val shown = Animatable(if (up) 1f else 0f)
     val first = AccessibilityFocus()
     var reduceMotion = false
     private var closing = false
@@ -479,12 +486,12 @@ internal class MenuPresence(private val scope: CoroutineScope, private val onClo
     }
 }
 
-/** The presence of the menu `request` opened, which `onClosed` forgets once it has gone. */
+/** The presence of the menu `request` opened, there already where `up`, which `onClosed` forgets once it has gone. */
 @Composable
-internal fun rememberMenuPresence(request: Any, onClosed: () -> Unit): MenuPresence {
+internal fun rememberMenuPresence(request: Any, up: Boolean = false, onClosed: () -> Unit): MenuPresence {
     val scope = rememberCoroutineScope()
     val closed by rememberUpdatedState(onClosed)
-    val menu = remember(request) { MenuPresence(scope) { closed() } }
+    val menu = remember(request) { MenuPresence(scope, up) { closed() } }
     menu.reduceMotion = PeekTheme.reduceMotion
     LaunchedEffect(menu) { menu.first.request() }
     LaunchedEffect(menu) { menu.shown.animateTo(1f, if (menu.reduceMotion) Motion.easeOut(0.2) else Motion.spring(0.3, 0.15)) }
@@ -655,88 +662,113 @@ private fun promptIds(saved: String): Pair<UUID, UUID?> {
 }
 
 /**
- * `parcelDeleteConfirmation` (iOS's `confirmationDialog`, its title shown): an action sheet at the foot of the screen
- * asking before the parcel goes for good, its message under the question, Delete, and Cancel apart under it.
+ * `parcelDeleteConfirmation` asked from the page's ••• (B-S11), as iOS 26 shows a confirmation dialog off a menu: the
+ * question on glass with no arrow ([DeleteQuestion]), growing out of the ••• as its menu does, its top at the button's
+ * and its trailing edge 10 past the button's, over nothing dimmed; as tall as what it holds, scrolling past the window.
+ * A tap outside or the back gesture cancels, as there is no Cancel; Delete acts once it has gone, on the page's parcel
+ * as it is then. It goes at once with its parcel, deleted elsewhere. TalkBack reaches only it, from the question, and
+ * the window made again finds it there without growing again.
  */
 @Composable
-private fun DeleteConfirmation(state: DeliveriesState, request: DeleteRequest) {
-    val localizer = LocalLocalizer.current
-    val shown = remember(request) { Animatable(0f) }
-    val scope = rememberCoroutineScope()
-    val reduceMotion = PeekTheme.reduceMotion
-    val question = remember(request) { AccessibilityFocus() }
-    LaunchedEffect(request) { question.request() }
-    LaunchedEffect(request) { shown.animateTo(1f, Motion.easeOut(if (reduceMotion) 0.2 else 0.3)) }
-    fun answer(delete: Boolean) {
-        scope.launch {
-            shown.animateTo(0f, Motion.easeOut(0.2))
-            state.deleting = null
-            if (delete) state.confirmDelete(request)
-        }
-    }
-    BackHandler { answer(delete = false) }
-    Box(
+private fun PageDeleteQuestion(state: DeliveriesState, request: DeleteRequest, regular: Boolean, memory: SheetMemory) {
+    val density = LocalDensity.current
+    val title = LocalLocalizer.current.text("detail.deleteQuestion")
+    val menu = rememberMenuPresence(request, up = memory.up) { state.deleting = null }
+    LaunchedEffect(menu) { memory.up = true }
+    val width = if (regular) DELETE_WIDTH_REGULAR else DELETE_WIDTH
+    val shape = ContinuousRoundedShape(if (regular) DELETE_RADIUS_REGULAR else DELETE_RADIUS)
+    BoxWithConstraints(
         Modifier
             .fillMaxSize()
-            .testTag(DELETE_CONFIRMATION)
-            .graphicsLayer { alpha = shown.value }
-            .background(DIM)
-            .pointerInput(request) { detectTapGestures { answer(delete = false) } },
+            .pointerInput(request) { detectTapGestures { menu.close() } },
     ) {
-        val safe = WindowInsets.safeDrawing
-        val bottom = with(LocalDensity.current) { safe.getBottom(this).toDp() }
-        Column(
+        val windowWidth = constraints.maxWidth.toFloat()
+        val windowHeight = constraints.maxHeight.toFloat()
+        val insets = WindowInsets.safeDrawing
+        val direction = LocalLayoutDirection.current
+        var origin by remember { mutableStateOf(Offset.Zero) }
+        val anchor = state.pageMenuButton.translate(-origin)
+        val frame = with(density) {
+            val side = DELETE_SIDE.toPx()
+            val across = width.toPx()
+            val leftmost = insets.getLeft(this, direction) + side
+            val rightmost = max(leftmost, windowWidth - insets.getRight(this, direction) - side)
+            val left = (anchor.right + DELETE_OUTSET.toPx() - across).coerceIn(leftmost, max(leftmost, rightmost - across))
+            val top = max(anchor.top, insets.getTop(this).toFloat())
+            val bottom = max(top, windowHeight - insets.getBottom(this) - MENU_MARGIN.toPx())
+            Rect(left, top, left + across, bottom)
+        }
+        Box(Modifier.fillMaxSize().onGloballyPositioned { origin = it.positionInWindow() })
+        GlassSurface(
+            shape,
             Modifier
-                .align(Alignment.BottomCenter)
-                .widthIn(max = 500.dp)
-                .padding(start = 8.dp, end = 8.dp, bottom = bottom + 8.dp)
-                .graphicsLayer { translationY = (1 - shown.value) * size.height * if (reduceMotion) 0f else 1f }
-                .pointerInput(Unit) { detectTapGestures { } },
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+                .layout { measurable, _ ->
+                    val across = frame.width.roundToInt()
+                    val placeable = measurable.measure(Constraints(across, across, 0, frame.height.roundToInt()))
+                    layout(placeable.width, placeable.height) { placeable.place(frame.left.roundToInt(), frame.top.roundToInt()) }
+                }
+                // Made again with the window, it shows once the ••• has been laid out again.
+                .graphicsLayer { if (state.pageMenuButton == Rect.Zero) alpha = 0f }
+                .growingMenu(menu, TransformOrigin(1f, 0f))
+                .pointerInput(Unit) { detectTapGestures { } }
+                .testTag(DELETE_POPOVER)
+                .semantics { paneTitle = title }
+                .dropShadow(shape, MENU_SHADOW),
         ) {
-            GlassSurface(ContinuousRoundedShape(SHEET_RADIUS), Modifier.fillMaxWidth()) {
-                DeleteQuestion(question) { answer(delete = true) }
-            }
-            GlassSurface(ContinuousRoundedShape(SHEET_RADIUS), Modifier.fillMaxWidth()) {
-                SheetButton(localizer.text("common.cancel"), bold = true, tag = DELETE_CANCEL) { answer(delete = false) }
-            }
+            DeleteQuestion(menu.first, Modifier.verticalScroll(rememberScrollState())) { menu.close { state.confirmDelete(request) } }
         }
     }
 }
 
 /**
- * The page's delete question in a regular window: a popover off its •••, as an iPad shows a confirmation dialog off the
- * menu it is attached to rather than over the page and the list. A popover shows no Cancel: a tap outside or the back
- * gesture stands for it. Delete acts once the popover has gone, on the parcel the page shows by then.
+ * `parcelDeleteConfirmation` asked from a card's menu (B-S11), as iOS 26 shows a confirmation dialog off a list's row:
+ * once the menu has closed, a popover whose arrow points at the card, over it where it fits, as an iPad puts it even
+ * with more room under it, and under it otherwise, as for a phone's first card ([DeleteQuestion]). `request` is the
+ * card's question while it is asked. A tap outside or the back gesture cancels; Delete acts once the popover has gone,
+ * on the parcel it asked about. It goes with its card: with the parcel deleted elsewhere, or with a window made again
+ * whose list no longer shows the card.
  */
 @Composable
-private fun DeletePopover(state: DeliveriesState, visible: Boolean) {
+private fun CardDeleteQuestion(state: DeliveriesState, request: DeleteRequest?, regular: Boolean) {
     val localizer = LocalLocalizer.current
+    // The card asked about, which the popover keeps pointing at as it goes.
+    val last = remember { AskedCard() }
+    if (request != null) last.parcelId = request.parcelId
+    val card = last.parcelId?.let { state.cardMenus[it] }
+    card?.bounds?.let { last.bounds = it }
+    val missing = request != null && card == null
+    LaunchedEffect(missing) {
+        if (!missing) return@LaunchedEffect
+        // A window made again lays its list out first.
+        repeat(2) { withFrameNanos { } }
+        state.deleting = null
+    }
     var confirmed by remember { mutableStateOf<DeleteRequest?>(null) }
     // As tall as what it says, which a popover doesn't work out itself.
     var height by remember { mutableIntStateOf(0) }
     val tall = with(LocalDensity.current) { height.toDp() }
     val question = remember { AccessibilityFocus() }
-    LaunchedEffect(visible) { if (visible) question.request() }
+    val asking = request != null
+    LaunchedEffect(asking) { if (asking) state.deleteGoing = true }
+    val width = if (regular) DELETE_WIDTH_REGULAR else DELETE_WIDTH
     Popover(
-        visible = visible,
-        anchor = state.pageMenuButton,
+        visible = asking,
+        anchor = last.bounds,
         onDismiss = { state.deleting = null },
         paneTitle = localizer.text("detail.deleteQuestion"),
-        size = PopoverSize(DELETE_POPOVER_WIDTH, DELETE_POPOVER_WIDTH, tall, tall),
+        size = PopoverSize(width, width, tall, tall),
         onClosed = {
+            state.deleteGoing = false
             confirmed?.let(state::confirmDelete)
             confirmed = null
         },
+        above = true,
+        radius = if (regular) DELETE_RADIUS_REGULAR else DELETE_RADIUS,
     ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(Alignment.Top, unbounded = true)
-                .onSizeChanged { height = it.height }
-                .testTag(DELETE_POPOVER),
-        ) {
-            DeleteQuestion(question) {
+        // TalkBack goes to the question once the popover is there to reach.
+        LaunchedEffect(Unit) { question.request() }
+        Box(Modifier.fillMaxSize().testTag(DELETE_POPOVER).verticalScroll(rememberScrollState())) {
+            DeleteQuestion(question, Modifier.onSizeChanged { height = it.height }) {
                 confirmed = state.deleting
                 state.deleting = null
             }
@@ -744,23 +776,37 @@ private fun DeletePopover(state: DeliveriesState, visible: Boolean) {
     }
 }
 
-/** The delete question and its message, then Delete under a line, as the sheet and the popover both ask it. */
+/** The card a delete question was last asked about, and where it last stood in the window. */
+private class AskedCard {
+    var parcelId: UUID? = null
+    var bounds: Rect = Rect.Zero
+}
+
+/**
+ * The delete question as iOS 26 asks it in a popover (`ParcelDeleteConfirmation`): "Delete this parcel?" in the
+ * headline's weight and its message under it in the secondary colour, both leading, 30 in from the sides, then Delete
+ * in a capsule as an alert's buttons are ([AlertButton]), in the label's colour as it has no role. TalkBack reads the
+ * question and its message as one, from [focus].
+ */
 @Composable
-private fun DeleteQuestion(focus: AccessibilityFocus, delete: () -> Unit) {
+private fun DeleteQuestion(focus: AccessibilityFocus, modifier: Modifier = Modifier, delete: () -> Unit) {
     val localizer = LocalLocalizer.current
     val type = PeekTheme.type
     val colors = PeekTheme.colors
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier.fillMaxWidth().padding(start = ALERT_BUTTON_SIDE, top = ALERT_TOP, end = ALERT_BUTTON_SIDE, bottom = ALERT_BUTTON_SIDE)) {
         Column(
-            Modifier.padding(horizontal = 16.dp, vertical = 14.dp).semantics(mergeDescendants = true) {}.accessibilityFocus(focus),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(4.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = QUESTION_INSET)
+                .semantics(mergeDescendants = true) {}
+                .accessibilityFocus(focus),
+            verticalArrangement = Arrangement.spacedBy(MESSAGE_GAP),
         ) {
-            Text(localizer.text("detail.deleteQuestion"), color = colors.secondaryLabel, style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines(), textAlign = TextAlign.Center)
-            Text(localizer.text("detail.deleteDescription"), color = colors.secondaryLabel, style = type.style(IosTextStyle.Footnote).sfLines(), textAlign = TextAlign.Center)
+            Text(localizer.text("detail.deleteQuestion"), color = colors.label, style = type.headline.uiKitLines(IosTextStyle.Headline))
+            Text(localizer.text("detail.deleteDescription"), color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline))
         }
-        Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
-        SheetButton(localizer.text("detail.delete"), bold = false, tag = DELETE_CONFIRM, action = delete)
+        Spacer(Modifier.height(DELETE_BUTTON_GAP))
+        AlertButton(localizer.text("detail.delete"), DELETE_CONFIRM, Modifier.fillMaxWidth(), delete)
     }
 }
 
@@ -977,24 +1023,6 @@ private fun TextStyle.uiKitLines(style: IosTextStyle): TextStyle = copy(
     lineHeightStyle = LineHeightStyle(alignment = LineHeightStyle.Alignment.Center, trim = LineHeightStyle.Trim.None),
 )
 
-@Composable
-private fun SheetButton(title: String, bold: Boolean, tag: String, height: Dp = 56.dp, modifier: Modifier = Modifier, action: () -> Unit) {
-    val type = PeekTheme.type
-    Box(
-        modifier
-            .fillMaxWidth()
-            .heightIn(min = height)
-            .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            title, Modifier.padding(horizontal = ALERT_BUTTON_PADDING), color = PeekTheme.colors.accent,
-            style = type.style(IosTextStyle.Body, if (bold) FontWeight.SemiBold else FontWeight.Normal).sfLines(), textAlign = TextAlign.Center,
-        )
-    }
-}
-
 private val DIM = Color.Black.copy(alpha = 0.2f)
 internal val MENU_WIDTH = 250.dp
 internal val MENU_RADIUS = 24.dp
@@ -1004,7 +1032,6 @@ private val MENU_GAP = 21.dp
 private val PREVIEW_SIDE = 22.dp
 private val ROW_HEIGHT = 42.dp
 private val SEPARATOR_BLOCK = 21.dp
-private val SHEET_RADIUS = 14.dp
 
 /** An alert as the iPhone draws it in iOS 26 ([AlertCard]), measured on its rename alert. */
 private val ALERT_RADIUS = 34.dp
@@ -1028,19 +1055,29 @@ private val FIELD_INSET = 15.dp
 /** Between an alert's or the delete question's title and its message. */
 private val MESSAGE_GAP = 6.dp
 
-/** The room on either side of an alert's or a sheet's button title. */
+/** The room on either side of an alert's button title. */
 private val ALERT_BUTTON_PADDING = 8.dp
 
-/** UIKit's action sheet in a popover, as wide as an iPad draws it. */
-private val DELETE_POPOVER_WIDTH = 304.dp
+/**
+ * The delete question, as wide as iOS 26 draws it on a phone and in a regular window, and its corners; the page's 10 in
+ * from the window's trailing edge, 10 past its •••'s.
+ */
+private val DELETE_WIDTH = 238.dp
+private val DELETE_WIDTH_REGULAR = 288.dp
+private val DELETE_RADIUS = 34.dp
+private val DELETE_RADIUS_REGULAR = 30.dp
+private val DELETE_SIDE = 10.dp
+private val DELETE_OUTSET = 10.dp
+
+/** The question and its message 30 in from the delete question's sides, 14 in from its button's. */
+private val QUESTION_INSET = 14.dp
+private val DELETE_BUTTON_GAP = 19.dp
 internal val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 24.dp, y = 8.dp)
 private val PREVIEW_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.1f), radius = 16.dp, y = 6.dp)
 
 const val CARD_MENU = "deliveries.cardMenu"
 const val CARD_MENU_PREVIEW = "deliveries.cardMenu.preview"
-const val DELETE_CONFIRMATION = "deliveries.deleteConfirmation"
 const val DELETE_CONFIRM = "deliveries.deleteConfirmation.delete"
-const val DELETE_CANCEL = "deliveries.deleteConfirmation.cancel"
 const val DELETE_POPOVER = "deliveries.deleteConfirmation.popover"
 const val RENAME_ALERT = "deliveries.renameAlert"
 const val RENAME_FIELD = "deliveries.renameAlert.field"

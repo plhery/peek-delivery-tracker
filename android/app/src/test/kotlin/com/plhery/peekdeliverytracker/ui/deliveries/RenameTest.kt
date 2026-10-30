@@ -390,9 +390,34 @@ class RenameTest {
         compose.card("Birthday gift").performTouchInput { longClick() }
         compose.waitForIdle()
         choose(ParcelMenuItem.Delete)
-        compose.onNodeWithTag(DELETE_CONFIRMATION).assertExists()
+        compose.onNodeWithTag(DELETE_POPOVER).assertExists()
         recreation.recreate()
         settle()
+        // Still pointing at its card.
+        val card = compose.onNode(cardNamed("Birthday gift"), useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
+        val asked = bounds(DELETE_POPOVER)
+        assertEquals(card.center.x, asked.center.x, px(1f))
+        assertEquals(card.top - px(13f), asked.bottom, px(1f))
+        compose.onNodeWithTag(DELETE_CONFIRM).performClick()
+        settle()
+        assertEquals(listOf(gift.id), source.deleted)
+    }
+
+    @Test
+    fun thePagesDeleteQuestionStaysThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation)
+        open("Birthday gift")
+        compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
+        settle()
+        choose(ParcelMenuItem.Delete)
+        compose.onNodeWithTag(DELETE_POPOVER).assertExists()
+        recreation.recreate()
+        settle()
+        val button = compose.onNode(hasTestTag(PAGE_MENU_BUTTON), useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
+        val asked = bounds(DELETE_POPOVER)
+        assertEquals(button.top, asked.top, 1f)
+        assertEquals(px(238f), asked.width, 1f)
         compose.onNodeWithTag(DELETE_CONFIRM).performClick()
         settle()
         assertEquals(listOf(gift.id), source.deleted)

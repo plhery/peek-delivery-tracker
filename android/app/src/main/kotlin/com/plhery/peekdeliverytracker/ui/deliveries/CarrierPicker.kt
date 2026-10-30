@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -54,6 +53,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
@@ -65,6 +65,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
@@ -75,6 +76,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.CarrierPickerSearch
@@ -455,9 +457,9 @@ private fun PickerCell(
 
 /**
  * `automaticRow`: the wand in ochre, or a small spinner while the number is being looked up, then "add.detect" in the
- * ink over the "picker.recommended" tag, when it is, beside the description; checked on the ochre surface while chosen,
- * and selected for TalkBack, which reads its words in order. At the accessibility text sizes the symbol gives its room
- * to the words and the tag stands above the description.
+ * ink over the "picker.recommended" tag, when it is, beside the description; checked on the ochre surface while chosen.
+ * TalkBack reads its words in order, a button, and "selected" only while it is chosen, as `.isSelected` is added only
+ * then. At the accessibility text sizes the symbol gives its room to the words and the tag stands above the description.
  */
 @Composable
 private fun AutomaticRow(automatic: CarrierPickerAutomatic, selected: Boolean, stacked: Boolean, start: Dp, end: Dp, onChoose: () -> Unit) {
@@ -469,7 +471,8 @@ private fun AutomaticRow(automatic: CarrierPickerAutomatic, selected: Boolean, s
         start, end, separatorStart = 0.dp,
         Modifier
             .testTag(CARRIER_PICKER_AUTOMATIC)
-            .selectable(selected, interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onChoose),
+            .clickable(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onChoose)
+            .semantics { if (selected) this.selected = true },
     ) {
         if (!stacked) {
             Box(Modifier.width(MARK_WIDTH), contentAlignment = Alignment.Center) {
@@ -506,7 +509,8 @@ private fun AutomaticRow(automatic: CarrierPickerAutomatic, selected: Boolean, s
  * A carrier's row (`row(_:highlight:alias:)`): its truck, its name in the ink with the part the query matched marked
  * in the accent and semibold, and under it the other name it was found by or its countries; its tag at the trailing
  * end, or under the name at the accessibility text sizes; checked on the ochre surface while chosen. TalkBack reads it
- * as one element (`readsAsItsLabel`): its name, then its subtitle and tag, a button, selected while chosen.
+ * as one element (`readsAsItsLabel`): its name, then its subtitle and tag (the label and value VoiceOver reads), a
+ * button, and "selected" only on the chosen one. No state description: Compose would read it in place of "selected".
  */
 @Composable
 private fun CarrierRow(
@@ -534,10 +538,10 @@ private fun CarrierRow(
         start, end, separatorStart = MARK_WIDTH + ROW_SPACING,
         Modifier
             .testTag(carrierPickerRowTag(entry.carrier))
-            .selectable(selected, interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onChoose)
+            .clickable(interactionSource = null, indication = RowHighlight.Row, role = Role.Button, onClick = onChoose)
             .clearAndSetSemantics {
-                contentDescription = definition.displayName
-                if (value.isNotEmpty()) stateDescription = value
+                contentDescription = listOf(definition.displayName, value).filter(String::isNotEmpty).joinToString(", ")
+                if (selected) this.selected = true
             },
     ) {
         CarrierTruck(identity)
@@ -662,23 +666,38 @@ private fun LetterRail(letters: List<String>, label: String, onLetter: (String) 
     }
 }
 
-/** The rail's letters, the one under the finger on its ochre plate (`RoundedRectangle(cornerRadius: 5)`). */
+/**
+ * The rail's letters, the one under the finger on its ochre plate (`RoundedRectangle(cornerRadius: 5)`). Each stands
+ * where the finger finds it ([LetterRail]'s `select`): from its own place on the rail, `RAIL_PADDING` and `index` rows
+ * of [rowHeight] down, rounded to the pixel once, rather than after rows each rounded, whose error would grow down the
+ * rail where a row isn't a whole number of pixels.
+ */
 @Composable
 private fun RailLetters(letters: List<String>, current: String?, rowHeight: Dp) {
     val colors = PeekTheme.colors
     val ochre = colors.resolve(ExperimentalPalette.ochre)
     val font = PeekTheme.type.fixed(min(11f, rowHeight.value * 0.72f), FontWeight.SemiBold)
-    Column(Modifier.padding(end = 4.dp).padding(vertical = RAIL_PADDING)) {
-        for (letter in letters) {
-            val chosen = letter == current
-            Box(
-                Modifier
-                    .size(LETTER_WIDTH, rowHeight)
-                    .then(if (chosen) Modifier.background(ochre, RoundedCornerShape(5.dp)) else Modifier),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(letter, color = if (chosen) colors.background else ochre, style = font, maxLines = 1, softWrap = false)
+    Layout(
+        content = {
+            for (letter in letters) {
+                val chosen = letter == current
+                Box(
+                    if (chosen) Modifier.background(ochre, RoundedCornerShape(5.dp)) else Modifier,
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(letter, color = if (chosen) colors.background else ochre, style = font, maxLines = 1, softWrap = false)
+                }
             }
+        },
+        modifier = Modifier.padding(end = 4.dp),
+    ) { measurables, _ ->
+        val padding = RAIL_PADDING.toPx()
+        val row = rowHeight.toPx()
+        val width = LETTER_WIDTH.roundToPx()
+        fun edge(index: Int) = (padding + row * index).roundToInt()
+        val placeables = measurables.mapIndexed { index, letter -> letter.measure(Constraints.fixed(width, edge(index + 1) - edge(index))) }
+        layout(width, (padding * 2 + row * letters.size).roundToInt()) {
+            placeables.forEachIndexed { index, letter -> letter.place(0, edge(index)) }
         }
     }
 }

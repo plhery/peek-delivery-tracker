@@ -263,7 +263,25 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'gcx'
   | 'tusou'
   | 'wise-express'
-  | 'rhenus-de';
+  | 'rhenus-de'
+  | 'skybox'
+  | 'delivro'
+  | 'tforce-integrated-solutions'
+  | 'holisol'
+  | 'ubx-uk'
+  | 'ttk-europe'
+  | 'inntralog'
+  | 'dg-transporte'
+  | 'bonds-couriers'
+  | 'amalgamated-distribution'
+  | 'victorian-freight-specialists'
+  | 'vt-freight-express'
+  | 'aland-post'
+  | 'aruba-post'
+  | 'gibraltar-post'
+  | 'samoa-post'
+  | 'burundi-post'
+  | 'correo-paraguayo';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -11,6 +11,9 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
+import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import java.time.Instant
 
 /**
@@ -22,11 +25,13 @@ val LocalLocalizer = staticCompositionLocalOf<Localizer> { error("No Localizer: 
 /** The localizer's language as it changes, so what is written in it is written again. */
 val LocalLanguage = compositionLocalOf { AppLanguage.En }
 
-/** `localizer` and its language for `content`. */
+/** `localizer` and its language for `content`, with the fonts spaced for the language ([PeekTypography]). */
 @Composable
 fun ProvideLocalizer(localizer: Localizer, content: @Composable () -> Unit) {
     val language by localizer.languageFlow.collectAsState()
-    CompositionLocalProvider(LocalLocalizer provides localizer, LocalLanguage provides language, content = content)
+    CompositionLocalProvider(LocalLocalizer provides localizer, LocalLanguage provides language) {
+        ProvideDynamicTypeSize(PeekTheme.dynamicTypeSize, language, content)
+    }
 }
 
 /**

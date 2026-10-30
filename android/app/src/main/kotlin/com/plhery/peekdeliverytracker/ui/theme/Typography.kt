@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.isUnspecified
+import com.plhery.peekdeliverytracker.core.AppLanguage
 
 /**
  * SwiftUI's font designs. SF Pro Rounded, New York and SF Mono can't ship outside Apple's platforms (X-AD38): the
@@ -37,10 +38,11 @@ private val roundedFamily: FontFamily get() = FontFamily.Default
  * The iPhone app's fonts at one content size category. Sizes are points, drawn as that many dp whatever Android's
  * own font scaling would make of them: the category already carries the reader's text size, as Dynamic Type does.
  * Line heights are the system font's own; letter spacing gives Roboto SF's widths at each size and weight
- * ([SfWidths]), so lines wrap and truncate where the iPhone's do.
+ * ([SfWidths]), so lines wrap and truncate where the iPhone's do. In Chinese there is none: the copy is mostly Han
+ * characters, which Noto Sans CJK sets as far apart as the iPhone's PingFang does.
  */
 @Immutable
-class PeekTypography(val size: DynamicTypeSize, private val density: Density) {
+class PeekTypography(val size: DynamicTypeSize, private val density: Density, val language: AppLanguage = AppLanguage.En) {
     /** `.font(.body)`, `.font(.title2.weight(.bold))`, `.font(.system(.title, design: .rounded))`. */
     fun style(style: IosTextStyle, weight: FontWeight = style.weight, design: FontDesign = FontDesign.Default): TextStyle =
         fixed(style.pointSize(size), weight, design)
@@ -51,7 +53,8 @@ class PeekTypography(val size: DynamicTypeSize, private val density: Density) {
             fontSize = points(size),
             fontWeight = weight,
             fontFamily = design.family,
-            letterSpacing = design.widths?.let { SfWidths.em(size, weight, it).em } ?: TextUnit.Unspecified,
+            letterSpacing = design.widths?.takeIf { language != AppLanguage.Zh }?.let { SfWidths.em(size, weight, it).em }
+                ?: TextUnit.Unspecified,
         )
 
     /** `@ScaledMetric(relativeTo:)`: a length at Large, grown as the style's size grows from Large to this category. */
@@ -115,9 +118,16 @@ fun TextStyle.italic(): TextStyle = copy(fontStyle = FontStyle.Italic)
  * at `opsz` = size) against Android's variable Roboto 3 (AOSP external/roboto-fonts) at the same `wght`, with
  * spacing = (SF width − Roboto width) / (characters × size), averaged over the seven languages, which lie within
  * 0.005 em of each other. Robolectric's static Roboto 2.138 is within 0.0005 em of Roboto 3 at the weights it ships.
+ * Cyrillic takes the same values: Russian's strings, measured the same way, come within 0.006 em of English's.
  * Rows are the sizes between which straight lines stay within 0.0005 em of every size measured (6 to 80 points);
  * the jump from 19 to 20 points is where SF turns from its text to its display spacing. Below 6 and above 80 points
  * the end rows hold, and between rows and weights the values are interpolated in a straight line.
+ *
+ * Han characters take none ([PeekTypography] in Chinese). Noto Sans CJK sets them a full em apart, as PingFang does;
+ * the system font, which falls back to PingFang's UI faces, sets them 0.006 to 0.009 em closer up to 19 points, and
+ * about 0.04 to 0.05 em closer from 20 points, where it turns to the display face, so Chinese titles are a little
+ * wider than the iPhone's. Up to 19 points, the Chinese copy as a whole, Han and the Latin in it, would take −0.004 to
+ * +0.014 em, the most in small bold text.
  *
  * Only Roboto is tuned: a phone whose maker replaces the system sans keeps these values, which then only come near
  * the iPhone's widths. Robolectric has no semibold or heavy Roboto and draws 600 as Medium (500) and 800 as Black
@@ -180,11 +190,18 @@ val LocalDynamicTypeSize = staticCompositionLocalOf { DynamicTypeSize.Large }
 
 val LocalPeekTypography = staticCompositionLocalOf { PeekTypography(DynamicTypeSize.Large, Density(1f)) }
 
-/** Sets the content size category, and the fonts and Material's text style that follow it, for `content`. */
+/**
+ * Sets the content size category, and the fonts and Material's text style that follow it, for `content`. The fonts
+ * are spaced for `language`, by default the language of the fonts outside.
+ */
 @Composable
-fun ProvideDynamicTypeSize(size: DynamicTypeSize, content: @Composable () -> Unit) {
+fun ProvideDynamicTypeSize(
+    size: DynamicTypeSize,
+    language: AppLanguage = LocalPeekTypography.current.language,
+    content: @Composable () -> Unit,
+) {
     val density = LocalDensity.current
-    val typography = remember(size, density) { PeekTypography(size, density) }
+    val typography = remember(size, density, language) { PeekTypography(size, density, language) }
     CompositionLocalProvider(
         LocalDynamicTypeSize provides size,
         LocalPeekTypography provides typography,
@@ -196,5 +213,5 @@ fun ProvideDynamicTypeSize(size: DynamicTypeSize, content: @Composable () -> Uni
 /** `.dynamicTypeSize(...cap)` (A-AX03): `content` grows no further than `cap`, as with `...accessibility1`. */
 @Composable
 fun CappedDynamicTypeSize(cap: DynamicTypeSize, content: @Composable () -> Unit) {
-    ProvideDynamicTypeSize(LocalDynamicTypeSize.current.capped(at = cap), content)
+    ProvideDynamicTypeSize(LocalDynamicTypeSize.current.capped(at = cap), content = content)
 }

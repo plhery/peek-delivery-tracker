@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
@@ -32,10 +33,10 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * A parcel's page's frame on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), in
- * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark, its ••• menu open, its
- * rename alert light and dark and at an accessibility text size, its delete question light and dark, the list's error
- * alert light and dark, the page of a parcel gone, and the page beside the list on a tablet on its side, the history
- * beside the pass. The page dragged down, under its bar, is
+ * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark and in Russian and
+ * Chinese, its ••• menu open, its rename alert light and dark and at an accessibility text size, its delete question
+ * light and dark, the list's error alert light and dark, the page of a parcel gone, and the page beside the list on a
+ * tablet on its side, the history beside the pass. The page dragged down, under its bar, is
  * ParcelZoomScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
@@ -50,16 +51,25 @@ class ParcelPageScreenshotTest {
     private lateinit var view: View
     private lateinit var deliveries: DeliveriesState
 
-    /** The demo's list with the window's bars in points: the iPhone's status bar 62 tall and gesture bar 24 by default. */
-    private fun show(dark: Boolean = false, top: Int = 62, bottom: Int = 24, fontScale: Float = 1f) {
-        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+    /**
+     * The demo's list in `language` with the window's bars in points: the iPhone's status bar 62 tall and gesture bar 24
+     * by default.
+     */
+    private fun show(
+        dark: Boolean = false,
+        top: Int = 62,
+        bottom: Int = 24,
+        fontScale: Float = 1f,
+        language: AppLanguage = AppLanguage.En,
+    ) {
+        val source = FakeDeliveries(DemoCards.parcels(language), AuthenticationState.Demo)
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalDensity provides Density(density.density, fontScale)) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
+                    RootHost(state = AuthenticationState.Demo, language = language, dark = dark, reduceMotion = false, source = source)
                 }
             }
         }
@@ -76,9 +86,9 @@ class ParcelPageScreenshotTest {
         compose.waitForIdle()
     }
 
-    /** Birthday gift's page, landed. */
-    private fun open() {
-        compose.openCard("Birthday gift")
+    /** Birthday gift's page in `language`, landed. */
+    private fun open(language: AppLanguage = AppLanguage.En) {
+        compose.openCard(DemoCards.parcel("Birthday gift", language).label)
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
     }
@@ -95,6 +105,20 @@ class ParcelPageScreenshotTest {
         show(dark = true)
         open()
         compose.screenshot("page_dark")
+    }
+
+    @Test
+    fun thePageAtRestInRussian() {
+        show(language = AppLanguage.Ru)
+        open(AppLanguage.Ru)
+        compose.screenshot("page_ru")
+    }
+
+    @Test
+    fun thePageAtRestInChinese() {
+        show(language = AppLanguage.Zh)
+        open(AppLanguage.Zh)
+        compose.screenshot("page_zh")
     }
 
     @Test

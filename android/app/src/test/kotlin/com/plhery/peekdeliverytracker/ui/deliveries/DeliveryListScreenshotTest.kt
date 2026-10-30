@@ -147,6 +147,25 @@ class DeliveryListScreenshotTest {
     }
 
     @Test
+    fun theTopOfTheListInRussian() {
+        show(AppLanguage.Ru)
+        compose.screenshot("list_top_ru")
+    }
+
+    @Test
+    fun theTopOfTheListInChinese() {
+        show(AppLanguage.Zh)
+        compose.screenshot("list_top_zh")
+    }
+
+    /** Chinese at the largest text size, Accessibility 5. */
+    @Test
+    fun theTopOfTheListInChineseAtTheLargestText() {
+        show(AppLanguage.Zh, fontScale = 3f)
+        compose.screenshot("list_top_zh_text5")
+    }
+
+    @Test
     fun theTopOfTheListInTwiceTheText() {
         show(fontScale = 2f)
         compose.screenshot("list_top_text2")

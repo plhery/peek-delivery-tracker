@@ -70,7 +70,7 @@ fun PeekTheme(
                 LocalRippleConfiguration provides null,
                 LocalOverscrollFactory provides RubberBandOverscrollFactory,
             ) {
-                ProvideDynamicTypeSize(dynamicTypeSize, content)
+                ProvideDynamicTypeSize(dynamicTypeSize, content = content)
             }
         }
     }

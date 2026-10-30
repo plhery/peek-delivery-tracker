@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -8,9 +9,13 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.isUnspecified
 import androidx.compose.ui.unit.sp
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.ui.ProvideLocalizer
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
@@ -140,6 +145,41 @@ class TypographyTest {
         // Serif and monospaced text keeps its own font's widths.
         assertTrue(type.style(IosTextStyle.Body, design = FontDesign.Serif).letterSpacing.isUnspecified)
         assertTrue(type.style(IosTextStyle.Body, design = FontDesign.Monospaced).letterSpacing.isUnspecified)
+    }
+
+    @Test
+    fun chineseKeepsHanCharactersOwnWidths() {
+        val chinese = PeekTypography(DynamicTypeSize.Large, Density(2f), AppLanguage.Zh)
+        assertTrue(chinese.body.letterSpacing.isUnspecified)
+        assertTrue(chinese.style(IosTextStyle.LargeTitle, design = FontDesign.Rounded).letterSpacing.isUnspecified)
+        assertTrue(chinese.fixed(11f, FontWeight.Bold).letterSpacing.isUnspecified)
+        // `.tracking(_:)` still adds its points.
+        assertEquals((1.7f / 17).toDouble(), chinese.tracking(chinese.body, 1.7f).letterSpacing.value.toDouble(), 1e-6)
+        // Cyrillic takes the Latin languages' values.
+        val russian = PeekTypography(DynamicTypeSize.Large, Density(2f), AppLanguage.Ru)
+        assertEquals(0.0035f, russian.body.letterSpacing.value, 1e-6f)
+        assertEquals(SfWidths.em(28f, FontWeight.Normal), russian.title.letterSpacing.value, 1e-6f)
+    }
+
+    @Test
+    fun theLocalizersLanguageSpacesTheFontsInside() {
+        val localizer = Localizer(AppLanguage.Zh, variant = "android")
+        var spacing = TextUnit.Unspecified
+        var capped: PeekTypography? = null
+        themed(1f) {
+            ProvideLocalizer(localizer) {
+                spacing = LocalTextStyle.current.letterSpacing
+                CappedDynamicTypeSize(DynamicTypeSize.Small) { capped = PeekTheme.type }
+            }
+        }
+        assertTrue(spacing.isUnspecified)
+        assertEquals(AppLanguage.Zh, capped?.language)
+        assertTrue(capped!!.body.letterSpacing.isUnspecified)
+
+        localizer.language = AppLanguage.Ru
+        compose.waitForIdle()
+        assertEquals(0.0035f, spacing.value, 1e-6f)
+        assertEquals(AppLanguage.Ru, capped?.language)
     }
 
     @Test

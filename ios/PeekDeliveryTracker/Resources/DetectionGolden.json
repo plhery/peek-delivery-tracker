@@ -15052,6 +15052,56 @@
     ]
   },
   {
+    "input": "12116797125",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "blue-dart",
+      "japan-post",
+      "aramex",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "gls-pl"
+    ]
+  },
+  {
+    "input": "12116798105",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "blue-dart",
+      "japan-post",
+      "aramex",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "gls-pl"
+    ]
+  },
+  {
     "input": "12123456780101006623123454",
     "carrier": "mondial-relay",
     "confidence": "high",
@@ -67573,6 +67623,38 @@
     ]
   },
   {
+    "input": "ALJCD8350000036YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "alljoy"
+    ]
+  },
+  {
+    "input": "ALJTR1802280025196",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "alljoy"
+    ]
+  },
+  {
+    "input": "ALJTR1804030053054",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "alljoy"
+    ]
+  },
+  {
+    "input": "ALJTR1804030072701",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "alljoy"
+    ]
+  },
+  {
     "input": "AM010404344",
     "carrier": "unknown",
     "confidence": "low",
@@ -76028,6 +76110,14 @@
     "confidence": "high",
     "candidates": [
       "purolator"
+    ]
+  },
+  {
+    "input": "EWSCH9911667340YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "profit-fields"
     ]
   },
   {
@@ -97951,6 +98041,22 @@
       "colis-prive",
       "aramex-au",
       "aramex-nz"
+    ]
+  },
+  {
+    "input": "ZESZE2017704771YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "zes-express"
+    ]
+  },
+  {
+    "input": "ZESZE2018075101YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "zes-express"
     ]
   },
   {

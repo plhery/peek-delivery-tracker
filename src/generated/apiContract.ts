@@ -35823,6 +35823,174 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://shipwizmo.com/"
+  },
+  "alljoy": {
+    "displayName": "AllJoy",
+    "aliases": [
+      "ALLJOY SUPPLY CHAIN CO.,LTD",
+      "Alljoy Supply Chain",
+      "Alljoy Logistics",
+      "全和悦",
+      "全和悦供应链",
+      "深圳市全和悦供应链管理有限公司",
+      "深圳市全和悦国际货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#004899",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://web.alljoylogistics.com/track?order={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "web.alljoylogistics.com"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "order"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^ALJTR\\d{13}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^ALJ[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://web.alljoylogistics.com/track"
+  },
+  "dpe-express": {
+    "displayName": "DPE Express",
+    "aliases": [
+      "递必易",
+      "递必易国际货运代理有限公司",
+      "广州递必易国际货运代理有限公司",
+      "Delivery Perfect Express",
+      "Delivery Perfect Express Co., Ltd."
+    ],
+    "countries": [
+      "CN",
+      "MY"
+    ],
+    "color": "#4f3282",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dpe.net.my/tracking.php"
+  },
+  "goodmaji": {
+    "displayName": "Goodmaji",
+    "aliases": [
+      "GoodMaji",
+      "Good Maji",
+      "好馬吉",
+      "好马吉",
+      "好馬吉物流",
+      "好馬吉股份有限公司",
+      "Goodmaji.com"
+    ],
+    "countries": [
+      "TW",
+      "MY",
+      "SG"
+    ],
+    "color": "#2dbbec",
+    "selectable": true,
+    "timezone": "Asia/Taipei",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://system.goodmaji.com/web/shipmenthistory.aspx"
+  },
+  "profit-fields": {
+    "displayName": "Profit Fields",
+    "aliases": [
+      "8DT",
+      "EWS Profit Fields",
+      "Profit Fields (8DT)",
+      "永利八达通",
+      "永利八达通物流",
+      "深圳永利八达通物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#009844",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.8dt.com/tracking?track={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "8dt.com",
+          "www.8dt.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "track"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^EWS[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.8dt.com/tracking"
+  },
+  "zes-express": {
+    "displayName": "ZES Express",
+    "aliases": [
+      "Eshun",
+      "Eshun International Logistics",
+      "Eshun (ZES Express)",
+      "俄顺国际物流",
+      "俄顺国际",
+      "俄顺物流",
+      "Эшун"
+    ],
+    "countries": [
+      "CN",
+      "RU"
+    ],
+    "color": "#102a83",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^ZESZE\\d{10}YQ$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.zes-express.com/"
   }
 } as const;
 
@@ -36785,7 +36953,12 @@ export const CARRIER_IDS = [
   "kec-ecommerce",
   "thelorry",
   "toyou",
-  "wizmo"
+  "wizmo",
+  "alljoy",
+  "dpe-express",
+  "goodmaji",
+  "profit-fields",
+  "zes-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -6012,7 +6012,8 @@
         "DHL Parcel Poland",
         "DHL Parcel Polska",
         "DHL eCommerce Polska",
-        "DHL Poland"
+        "DHL Poland",
+        "DHL Parcel (PL)"
       ],
       "countries": [
         "PL"
@@ -8655,7 +8656,9 @@
         "Hellenic Post",
         "Ελληνικά Ταχυδρομεία",
         "ELTA Courier",
-        "ΕΛΤΑ Courier"
+        "ΕΛΤΑ Courier",
+        "ISS Parcels",
+        "IS&S Parcels"
       ],
       "countries": [
         "GR"
@@ -35533,7 +35536,8 @@
       "timezone": "America/Toronto",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "whiz-delivery",
+        "recognitionRank": 104
       },
       "trackingUrlTemplate": "https://track.whizdelivery.ca/track/{trackingNumber}",
       "linkRules": [
@@ -35990,6 +35994,325 @@
         }
       ],
       "trackingSearchUrl": "https://www.zes-express.com/"
+    },
+    "dex-pk": {
+      "displayName": "DEX Pakistan",
+      "aliases": [
+        "Daraz Express Pakistan",
+        "DEX PK"
+      ],
+      "countries": [
+        "PK"
+      ],
+      "color": "#f85606",
+      "selectable": true,
+      "timezone": "Asia/Karachi",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "www.dex.com.pk",
+            "dex.com.pk"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "references"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^PKDEX\\d{9}$",
+          "confidence": "high"
+        }
+      ],
+      "trackingSearchUrl": "https://www.dex.com.pk/tracking"
+    },
+    "efs-asia": {
+      "displayName": "EFS Asia",
+      "aliases": [
+        "EFS Co., Ltd.",
+        "이에프에스",
+        "주식회사 이에프에스",
+        "EFS Korea"
+      ],
+      "countries": [
+        "KR"
+      ],
+      "color": "#224f8c",
+      "selectable": true,
+      "timezone": "Asia/Seoul",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://web.efs.asia/script/users/tracking.php?search_no={trackingNumber}&mode=search&lang=",
+      "linkRules": [
+        {
+          "domains": [
+            "web.efs.asia"
+          ],
+          "pathPattern": "^/script/users/tracking\\.php$",
+          "params": [
+            "search_no"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://web.efs.asia/script/users/tracking.php"
+    },
+    "faster-ae": {
+      "displayName": "Faster Express & Cargo",
+      "aliases": [
+        "Faster Express",
+        "Faster.ae",
+        "Faster Express Logistics",
+        "迅捷中东物流",
+        "Faster International Supply Chain Management Co., Ltd."
+      ],
+      "countries": [
+        "AE",
+        "SA",
+        "KW",
+        "QA",
+        "OM",
+        "BH"
+      ],
+      "color": "#004497",
+      "selectable": true,
+      "timezone": "Asia/Dubai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://faster.ae/track?no={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "faster.ae"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "no"
+          ]
+        },
+        {
+          "domains": [
+            "op.faster.ae"
+          ],
+          "pathPattern": "^/webTrack/?$",
+          "params": [
+            "ids"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://faster.ae/track"
+    },
+    "hart2hart-express": {
+      "displayName": "Hart2Hart Express",
+      "aliases": [
+        "Hart 2 Hart Express",
+        "Hart 2 Hart",
+        "Hart2Hart",
+        "Hart 2 Hart Express Limited"
+      ],
+      "countries": [
+        "GB",
+        "MT"
+      ],
+      "color": "#ed1c24",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://harttohart.couriernavigator-secure.com/tracking?consign_note={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "harttohart.couriernavigator-secure.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "consign_note"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://harttohart.couriernavigator-secure.com/tracking"
+    },
+    "kart2door": {
+      "displayName": "Kart2Door",
+      "aliases": [
+        "Kart 2 Door",
+        "Kart2Door/SmartKargo"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#f36c09",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.kart2door.com/EcomTracking?axb={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.kart2door.com",
+            "kart2door.com"
+          ],
+          "pathPattern": "^/EcomTracking/?$",
+          "params": [
+            "axb"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.kart2door.com/EcomTracking"
+    },
+    "lex-my": {
+      "displayName": "LEX Malaysia",
+      "aliases": [
+        "Lazada Express Malaysia",
+        "LEX MY",
+        "Lazada Express (Malaysia) Sdn Bhd"
+      ],
+      "countries": [
+        "MY"
+      ],
+      "color": "#1076ff",
+      "selectable": true,
+      "timezone": "Asia/Kuala_Lumpur",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://lex.com.my/tracking?references={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "lex.com.my"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "references"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^TMYLE\\d{9}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://lex.com.my/tracking"
+    },
+    "parxl": {
+      "displayName": "Parxl",
+      "aliases": [
+        "Parxl by Singapore Airlines",
+        "SIA Parxl",
+        "Singapore Airlines Parxl"
+      ],
+      "countries": [
+        "SG"
+      ],
+      "color": "#129bb0",
+      "selectable": true,
+      "timezone": "Asia/Singapore",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.parxl.com/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.parxl.com"
+          ],
+          "path": "^/([A-Za-z0-9]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.parxl.com/"
+    },
+    "shipglobal-in": {
+      "displayName": "ShipGlobal India",
+      "aliases": [
+        "ShipGlobal.in",
+        "Ship Global Express",
+        "Ship Global Express Private Limited",
+        "Ship Global Express Pvt. Ltd."
+      ],
+      "countries": [
+        "IN"
+      ],
+      "color": "#214a9c",
+      "selectable": true,
+      "timezone": "Asia/Kolkata",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://shipglobal.in/tracking/?awb={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "shipglobal.in",
+            "www.shipglobal.in"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "awb"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^SG3\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{7}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://shipglobal.in/tracking/"
+    },
+    "top-logistics-au": {
+      "displayName": "Top Logistics Australia",
+      "aliases": [
+        "Top Logistics Australia Pty Ltd",
+        "Top Logistics Australia (TLA)"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#193064",
+      "selectable": true,
+      "timezone": "Australia/Sydney",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://toplogistics.com.au/?s={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "toplogistics.com.au"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "s"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://toplogistics.com.au/"
     }
   }
 }

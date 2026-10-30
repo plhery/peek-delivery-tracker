@@ -58704,6 +58704,12 @@
     ]
   },
   {
+    "input": "807012132",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "80720052822",
     "carrier": "unknown",
     "confidence": "low",
@@ -87290,6 +87296,94 @@
     ]
   },
   {
+    "input": "PK-DEX019530220",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX033160361",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX033570235",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX039503154",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX052993599",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX073402105",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX163343659",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX195986651",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX196031888",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX198953042",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
+    "input": "PK-DEX213016631",
+    "carrier": "dex-pk",
+    "confidence": "high",
+    "candidates": [
+      "dex-pk"
+    ]
+  },
+  {
     "input": "PK010486891101",
     "carrier": "unknown",
     "confidence": "low",
@@ -92227,6 +92321,38 @@
     ]
   },
   {
+    "input": "SG32501172241595",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "shipglobal-in"
+    ]
+  },
+  {
+    "input": "SG32507053310966",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "shipglobal-in"
+    ]
+  },
+  {
+    "input": "SG32608136704360",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "shipglobal-in"
+    ]
+  },
+  {
+    "input": "SG32609207155583",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "shipglobal-in"
+    ]
+  },
+  {
     "input": "SG577041359GB",
     "carrier": "royal-mail",
     "confidence": "high",
@@ -93404,7 +93530,8 @@
       "whiz-delivery"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "whiz-delivery"
     ]
   },
   {
@@ -93416,7 +93543,8 @@
       "whiz-delivery"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "whiz-delivery"
     ]
   },
   {
@@ -94369,6 +94497,14 @@
     ],
     "asked": [
       "australia-post"
+    ]
+  },
+  {
+    "input": "TMYLE003782555",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "lex-my"
     ]
   },
   {

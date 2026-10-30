@@ -11,6 +11,8 @@ data class CarrierRequirement(
     val validator: String? = null,
     val whenTrackingNumber: String? = null,
     val optional: Boolean? = null,
+    /** The carrier's lookup reads the country the postcode is from, so the field names it; others read the postcode alone. */
+    val readsCountry: Boolean? = null,
     val label: String,
     val type: String,
     val placeholder: String? = null,

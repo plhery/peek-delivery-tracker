@@ -1130,16 +1130,20 @@ class CarrierCatalogTests {
     @Test
     fun aPostcodeCanBeFromAnotherCountryThanTheCarriersOwn() {
         // PostNL's 3S labels take any country's postcode, Heppner its four countries' shapes, DPD Germany Germany's.
+        // DPD takes any country's too, but reads the postcode alone, as Heppner does.
         val postNL = postcodeRequirement(CarrierId.SpringGDS, "3SABCD1234567")
         val heppner = postcodeRequirement(CarrierId.Heppner, "23456789")
         val dpdGermany = postcodeRequirement(CarrierId.DpdDe, "12345678901234")
+        val dpd = postcodeRequirement(CarrierId.Dpd, "06080000000001")
         assertEquals("NL", catalog.homeCountry(CarrierId.SpringGDS))
 
-        // Any real country, or the carrier's own. A field that takes one alone offers no choice.
+        // Any real country, or the carrier's own, where the carrier's lookup reads it. Otherwise, or for a field that
+        // takes one alone, no choice is offered.
         val any = catalog.postcodeCountries(CarrierId.SpringGDS, requirement = postNL)
         for (country in listOf("NL", "BE", "LU", "GB", "XK")) assertTrue(country, any.contains(country))
         for (code in listOf("EU", "EZ", "UN", "ZZ", "IC", "AC", "419")) assertFalse(code, any.contains(code))
-        assertEquals(listOf("FR", "CH", "BE", "LU"), catalog.postcodeCountries(CarrierId.Heppner, requirement = heppner))
+        assertEquals(listOf("FR"), catalog.postcodeCountries(CarrierId.Heppner, requirement = heppner))
+        assertEquals(listOf("CH"), catalog.postcodeCountries(CarrierId.Dpd, requirement = dpd))
         assertEquals(listOf("DE"), catalog.postcodeCountries(CarrierId.DpdDe, requirement = dpdGermany))
 
         // The menu lists the carrier's own first, then the others by name in the app's language.
@@ -1165,6 +1169,7 @@ class CarrierCatalogTests {
         val emirati = catalog.postcodeRequirement(postNL, CarrierId.SpringGDS, country = "AE")
         assertNull(catalog.postcodeExample(CarrierId.SpringGDS, requirement = emirati, region = "AE"))
         assertEquals(heppner, catalog.postcodeRequirement(heppner, CarrierId.Heppner, country = "BE"))
+        assertEquals(dpd, catalog.postcodeRequirement(dpd, CarrierId.Dpd, country = "FR"))
 
         // Only a postcode from abroad goes with its country: one from home goes as it always has.
         assertNull(catalog.sentPostcodeCountry("NL", postcode = "1012 AB", carrier = CarrierId.SpringGDS))
@@ -1176,8 +1181,8 @@ class CarrierCatalogTests {
         // else on the carrier's home.
         assertEquals("BE", catalog.initialPostcodeCountry(CarrierId.SpringGDS, requirement = postNL, region = "BE"))
         assertEquals("NL", catalog.initialPostcodeCountry(CarrierId.SpringGDS, requirement = postNL, region = null))
-        assertEquals("BE", catalog.initialPostcodeCountry(CarrierId.Heppner, requirement = heppner, region = "be"))
-        assertEquals("FR", catalog.initialPostcodeCountry(CarrierId.Heppner, requirement = heppner, region = "DE"))
+        assertEquals("FR", catalog.initialPostcodeCountry(CarrierId.Heppner, requirement = heppner, region = "be"))
+        assertEquals("CH", catalog.initialPostcodeCountry(CarrierId.Dpd, requirement = dpd, region = "FR"))
         assertEquals("DE", catalog.initialPostcodeCountry(CarrierId.DpdDe, requirement = dpdGermany, region = "FR"))
         fun parcel(carrier: CarrierId, postcode: String?, data: CarrierData?) =
             this@CarrierCatalogTests.parcel("3SABCD1234567", "", carrier, "2026-10-01T08:00:00Z", dpdPostcode = postcode, carrierData = data)
@@ -1190,6 +1195,13 @@ class CarrierCatalogTests {
         assertEquals("BE", initial(parcel(CarrierId.SpringGDS, postcode = "1000", data = abroad)))
         assertEquals("A postcode changed since", "NL", initial(parcel(CarrierId.SpringGDS, postcode = "1012 AB", data = abroad)))
         assertEquals("NL", initial(parcel(CarrierId.SpringGDS, postcode = "1012 AB", data = null)))
+    }
+
+    @Test
+    fun theDevicesCountryIsItsClocksThenItsRegionSetting() {
+        assertEquals("CH", CarrierCatalog.deviceCountry(timeZone = "Europe/Zurich", region = "FR"))
+        assertEquals("A clock several countries keep", "FR", CarrierCatalog.deviceCountry(timeZone = "America/New_York", region = "FR"))
+        assertNull(CarrierCatalog.deviceCountry(timeZone = "America/New_York", region = null))
     }
 
     @Test

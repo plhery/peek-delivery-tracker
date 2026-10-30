@@ -17,14 +17,13 @@ import java.nio.file.StandardCopyOption
 import java.time.Duration
 import java.time.Instant
 import java.util.Locale
+import java.util.TimeZone
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.MapSerializer
-import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
@@ -265,7 +264,7 @@ class CarrierCatalog private constructor(
     fun postcodeExample(
         carrier: CarrierId,
         requirement: CarrierRequirement,
-        region: String? = currentRegion(),
+        region: String? = deviceCountry(),
     ): String? {
         requirement.placeholder?.let { return it.nonEmpty }
         if (requirement.field != CarrierRequirement.Field.DpdPostcode) return null
@@ -277,11 +276,14 @@ class CarrierCatalog private constructor(
     fun homeCountry(carrier: CarrierId): String? = info(carrier).countries?.firstOrNull()
 
     /**
-     * The countries a postcode for this field can be from: any when the carrier takes any country's, otherwise
-     * the carrier's own, whose shapes its check reads.
+     * The countries a postcode for this field can be named from: any when the carrier takes any country's,
+     * otherwise the carrier's own, whose shapes its check reads. Only its home where its lookup reads the
+     * postcode alone, so the reader is not asked which.
      */
-    fun postcodeCountries(carrier: CarrierId, requirement: CarrierRequirement): List<String> =
-        if (requirement.takesAnyPostcode) countries else info(carrier).countries ?: emptyList()
+    fun postcodeCountries(carrier: CarrierId, requirement: CarrierRequirement): List<String> {
+        if (requirement.readsCountry != true) return (info(carrier).countries ?: emptyList()).take(1)
+        return if (requirement.takesAnyPostcode) countries else info(carrier).countries ?: emptyList()
+    }
 
     /** Swift's `(own:, others:)`. */
     data class PostcodeCountryChoices(val own: List<String>, val others: List<String>)
@@ -293,6 +295,7 @@ class CarrierCatalog private constructor(
         language: AppLanguage,
     ): PostcodeCountryChoices {
         val own = info(carrier).countries ?: emptyList()
+        if (requirement.readsCountry != true) return PostcodeCountryChoices(own.take(1), emptyList())
         if (!requirement.takesAnyPostcode) return PostcodeCountryChoices(own, emptyList())
         return PostcodeCountryChoices(own, countriesByName(language).filter { it !in own })
     }
@@ -306,7 +309,7 @@ class CarrierCatalog private constructor(
         carrier: CarrierId,
         requirement: CarrierRequirement,
         parcel: Parcel? = null,
-        region: String? = currentRegion(),
+        region: String? = deviceCountry(),
     ): String? {
         val home = homeCountry(carrier)
         val postcode = parcel?.dpdPostcode?.nonEmpty
@@ -322,12 +325,12 @@ class CarrierCatalog private constructor(
 
     /**
      * The field for a postcode from `country`: the carrier's own for its home country, or when its check reads
-     * only its own countries' shapes; otherwise any country's shape, with that country's example or none,
-     * never the carrier's.
+     * only its own countries' shapes or its lookup the postcode alone; otherwise any country's shape, with that
+     * country's example or none, never the carrier's.
      */
     fun postcodeRequirement(requirement: CarrierRequirement, carrier: CarrierId, country: String?): CarrierRequirement {
         if (requirement.field != CarrierRequirement.Field.DpdPostcode || !requirement.takesAnyPostcode ||
-            country == null || country == homeCountry(carrier)
+            requirement.readsCountry != true || country == null || country == homeCountry(carrier)
         ) return requirement
         return requirement.copy(
             pattern = CarrierRequirement.anyPostcode,
@@ -951,15 +954,30 @@ class CarrierCatalog private constructor(
             return "https://track.amazon.$domain/tracking/${urlEncode(normalized)}"
         }
 
-        /** One postcode per country, shown as the example in a field that takes any country's. */
-        val postcodeExamples: Map<String, String> by lazy {
+        /** shared/postcode-examples.json: one postcode per country, and the countries that alone keep a clock's time. */
+        @Serializable
+        private class PostcodeExamplesFile(
+            val examples: Map<String, String>,
+            val timeZones: Map<String, String>,
+        )
+
+        private val postcodeExamplesFile: PostcodeExamplesFile? by lazy {
             runCatching {
-                ApiJson.decodeFromString(
-                    MapSerializer(String.serializer(), String.serializer()),
-                    SharedResources.text("PostcodeExamples.json"),
-                )
-            }.getOrElse { emptyMap() }
+                ApiJson.decodeFromString(PostcodeExamplesFile.serializer(), SharedResources.text("PostcodeExamples.json"))
+            }.getOrNull()
         }
+
+        /** One postcode per country, shown as the example in a field that takes any country's. */
+        val postcodeExamples: Map<String, String> by lazy { postcodeExamplesFile?.examples ?: emptyMap() }
+
+        /**
+         * The country this phone is set up for, as the web reads it: its clock's when one country keeps that
+         * time, otherwise its region setting.
+         */
+        fun deviceCountry(
+            timeZone: String = TimeZone.getDefault().id,
+            region: String? = currentRegion(),
+        ): String? = postcodeExamplesFile?.timeZones?.get(timeZone) ?: region
 
         /** Every country a delivery postcode can be from: ISO 3166-1's, and Kosovo, as the service takes them.
          * Apple's regions also name unions, groupings and reserved codes, which are left out. */

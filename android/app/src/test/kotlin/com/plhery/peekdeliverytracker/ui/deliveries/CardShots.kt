@@ -79,6 +79,12 @@ object DemoCards {
     fun notice(parcel: Parcel, language: AppLanguage = AppLanguage.En): String? =
         parcel.notice(CAPTURED)?.let { Localizer(language, variant = "android").text(it.localizationKey) }
 
+    /** Birthday gift handed over by its carrier to Swiss Post, which delivers it: its pass carries both marks. */
+    fun handover(): Parcel {
+        val gift = parcel("Birthday gift")
+        return gift.copy(carrierData = (gift.carrierData ?: CarrierData()).copy(activeTrackingCarrier = CarrierId.SwissPost, originalCarrier = gift.carrier))
+    }
+
     /** A parcel nobody has answered for yet, whose number points to GLS, which does not list it yet (A-S103). */
     fun probable(language: AppLanguage = AppLanguage.En): Parcel {
         val created = DateParser.isoString(CAPTURED.minus(Duration.ofHours(20)))

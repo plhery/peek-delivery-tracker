@@ -351,6 +351,25 @@ class TabShellTest {
         assertEquals(7.5f, capsule.top.value, 0.5f)
     }
 
+    /** Half open on a table, the hinge level across the window: the bar stays centred, as it is told only of an upright one. */
+    @Test
+    @Config(qualifiers = "w700dp-h840dp-xhdpi")
+    fun aLevelHingeLeavesTheBarCentred() {
+        var activity by mutableStateOf<Activity?>(null)
+        compose.setContent {
+            view = LocalView.current
+            activity = LocalActivity.current
+            RootHost()
+        }
+        compose.waitForIdle()
+        val hinge = FoldingFeature(activity!!, center = 840, size = 0, state = androidx.window.layout.FoldingFeature.State.HALF_OPENED, orientation = Orientation.HORIZONTAL)
+        fold.overrideWindowLayoutInfo(TestWindowLayoutInfo(listOf(hinge)))
+        compose.waitForIdle()
+        val capsule = bounds(TAB_BAR)
+        assertEquals(350f, (capsule.left.value + capsule.right.value) / 2, 0.5f)
+        assertEquals(7.5f, capsule.top.value, 0.5f)
+    }
+
     /** A dual screen spanned by a window too narrow for the top bar: the bottom bar keeps to the start screen. */
     @Test
     @Config(qualifiers = "w580dp-h900dp-xhdpi")

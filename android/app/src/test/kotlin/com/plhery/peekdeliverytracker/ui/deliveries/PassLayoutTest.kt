@@ -81,4 +81,25 @@ class PassLayoutTest {
         assertEquals(590.0, layout.barWidth!!, 0.0)
         assertEquals(426.0, layout.barMaxHeight, 0.0)
     }
+
+    @Test
+    fun withALevelHingeTheRouteKeepsAboveItAndTheSummaryUnderIt() {
+        val safe = EdgeInsets(top = 24.0, leading = 0.0, bottom = 24.0, trailing = 0.0)
+        val layout = MapCoverLayout.of(840.0, 1200.0, safe, barHeight = 180.0, hinge = null, level = 590.0..610.0)
+        // The route ends 24 above the hinge, whatever the summary's height; the summary stays centred and, at the
+        // accessibility sizes, keeps 24 under the hinge above its 12 off the foot.
+        assertEquals(EdgeInsets(top = 24.0 + 4 + 48, leading = 0.0, bottom = 634.0, trailing = 0.0), layout.insets)
+        assertEquals(layout.insets, MapCoverLayout.of(840.0, 1200.0, safe, barHeight = 400.0, hinge = null, level = 590.0..610.0).insets)
+        assertEquals(542.0, layout.barMaxHeight, 0.0)
+        assertNull(layout.barWidth)
+    }
+
+    @Test
+    fun aWindowSplitBothWaysKeepsToItsUprightHinge() {
+        val safe = EdgeInsets(top = 24.0, leading = 0.0, bottom = 24.0, trailing = 0.0)
+        assertEquals(
+            MapCoverLayout.of(1200.0, 900.0, safe, barHeight = 180.0, hinge = 590.0..610.0),
+            MapCoverLayout.of(1200.0, 900.0, safe, barHeight = 180.0, hinge = 590.0..610.0, level = 440.0..460.0),
+        )
+    }
 }

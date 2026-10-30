@@ -40,4 +40,21 @@ class KeyframeAnimatorTest {
         compose.mainClock.advanceTimeBy(1000)
         assertEquals(PeekKeyframes.pullPop.value(10.0), shown, 1e-12)
     }
+
+    @Test
+    fun keptStillItStaysAtRestAndAsksForNoFrames() {
+        var trigger by mutableIntStateOf(0)
+        var shown = 0.0
+        compose.setContent {
+            val scale by keyframeAnimator(1.0, trigger, still = true) { PeekKeyframes.pullPop }
+            shown = scale
+        }
+        compose.waitForIdle()
+        val before = compose.mainClock.currentTime
+        trigger += 1
+        // The clock runs on only while frames are asked for: a pop would take it on by its length.
+        compose.waitForIdle()
+        assertTrue("${compose.mainClock.currentTime - before} ms", compose.mainClock.currentTime - before <= 32)
+        assertEquals(1.0, shown, 0.0)
+    }
 }

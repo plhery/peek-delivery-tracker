@@ -111,6 +111,10 @@ class LivePassScreenshotTest {
     @Test
     fun theBellOffInDark() = pass("pass_bell_off_dark", dark = true) { DemoCards.parcel("Birthday gift").copy(notificationsMuted = true) }
 
+    /** Handed over to Swiss Post: its mark hangs under Chronopost's, and the map starts that much lower. */
+    @Test
+    fun aHandover() = pass("pass_handover_light") { DemoCards.handover() }
+
     /** At twice the text size, an accessibility size: the buttons under the marks, and the map that much lower. */
     @Test
     fun largeText() = pass("pass_light_text2", fontScale = 2f) { DemoCards.parcel("Birthday gift") }

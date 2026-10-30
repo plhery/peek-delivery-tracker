@@ -2682,6 +2682,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-rastreo",
+      "title": "GOFO Express rastreo: número GFUS, estados y qué hacer",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
+    },
+    {
+      "id": "first-line",
+      "catalog": "first-line",
+      "slug": "first-line-seguimiento",
+      "title": "FIRST LINE seguimiento: números 1ST, estados y entrega",
+      "name": "FIRST LINE",
+      "color": "#55207a"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-seguimiento",

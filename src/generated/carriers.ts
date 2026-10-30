@@ -1400,6 +1400,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GEODIS Poland tracking: shipment number, statuses, delivery",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "sending-tracking",
+      "title": "Sending tracking in Spain: number, statuses and phone",
+      "name": "Sending",
+      "color": "#e52021"
+    },
+    {
+      "id": "hywl",
+      "catalog": "hywl",
+      "slug": "hywl-tracking",
+      "title": "HYWL tracking: Huiyi Logistics TRK numbers and scans",
+      "name": "Huiyi Logistics",
+      "color": "#0b8f91"
     }
   ],
   "de": [
@@ -2584,6 +2600,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Correios Brasil seguimiento: código, estados y aduanas",
       "name": "Correios Brazil",
       "color": "#ffd500"
+    },
+    {
+      "id": "sending",
+      "catalog": "sending",
+      "slug": "sending-seguimiento",
+      "title": "Sending seguimiento: número, estados y teléfono",
+      "name": "Sending",
+      "color": "#e52021"
     }
   ],
   "pt": [

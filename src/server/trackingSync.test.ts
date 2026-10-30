@@ -922,6 +922,22 @@ describe('status observation collection', () => {
     }));
   });
 
+  it('keeps the progress it read in a carrier answer no rule stages when the same answer comes again', async () => {
+    const store = eventStore();
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'pending', current_stage: 'registered', events: [
+      { time: '2026-10-29T08:02:46Z', description: 'Synthetic scan no rule reads' },
+      { time: '2026-10-16T09:57:36Z', description: 'Synthetic label', stage: 'registered' },
+    ] }), fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+    const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-10-30T21:13:16Z'));
+    let parcel: JsonObject = { id: 'unread', carrier: 'jrt', tracking_number: 'TEST1234', current_stage: 'pending' };
+    for (const check of [1, 2]) {
+      const summary = await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: store.identities() }, { trigger: 'added' });
+      parcel = { ...parcel, ...store.client.updatePackage.mock.calls.at(-1)![1] };
+      expect({ check, errors: summary.errors, stage: parcel.current_stage }).toEqual({ check, errors: 0, stage: 'in_transit' });
+    }
+  });
+
   it('keeps a scan dated hours after its check out of the watermark, then and once its time has passed', async () => {
     const store = eventStore();
     // A sender's notice on its own clock under the carrier's offset, five hours ahead of the first check.
@@ -6298,6 +6314,20 @@ describe('tracking anomaly detection', () => {
       null,
       new Date('2026-08-31T12:00:00Z'),
     )).toContain('progress_disappeared');
+  });
+
+  it('takes no progress back from a carrier answer the sync reads past the label', () => {
+    // A scan no rule reads yet is stored in transit; the same answer keeps that progress at the next check.
+    const answer: CarrierResult = { status: 'pending', current_stage: 'registered', events: [
+      { time: '2026-08-30T09:00:00Z', description: 'Synthetic label', stage: 'registered' },
+      { time: '2026-08-31T09:00:00Z', description: 'Synthetic scan no rule reads' },
+    ] };
+    const detect = (result: CarrierResult, selected: string) => detectSyncAnomalies({ carrier: 'jrt', current_stage: 'in_transit' },
+      result, [], 'jrt', selected, new Date('2026-08-31T12:00:00Z'));
+    expect(detect(answer, 'in_transit')).toEqual([]);
+    // Read at the label it still takes the progress back, and a provider's answer read past it is still a fallback.
+    expect(detect(answer, 'registered')).toEqual(['progress_disappeared']);
+    expect(detect({ ...answer, tracking_provider: 'Ship24' }, 'in_transit')).toEqual(['fallback_without_progress']);
   });
 
   it('tells a fallback that knows less from a source that contradicts the saved summary', () => {

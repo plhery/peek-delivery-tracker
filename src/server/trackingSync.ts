@@ -1145,9 +1145,13 @@ export function detectSyncAnomalies(
   if (result.status === 'delivered' && selectedStage !== 'delivered') {
     anomalies.add('delivered_status_conflict');
   }
-  // Progress only an old reading of a provider's scan showed is none an answer can take back.
+  // Progress only an old reading of a provider's scan showed is none an answer can take back. Nor does
+  // the carrier's own answer the sync reads past the label: a scan no rule reads yet is stored in transit
+  // (`scanStages`), and the answer that showed that progress shows it again at the next check.
   const progressStage = rereadStage(parcel);
-  if (progressStage !== 'pending' && !(progressStage === 'registered' ? resultHasUpdate(result) : hasRoutingProgress(result))) {
+  const readPastLabel = typeof result.tracking_provider !== 'string' && !['pending', 'registered'].includes(selectedStage ?? 'pending');
+  if (progressStage !== 'pending' && !readPastLabel
+    && !(progressStage === 'registered' ? resultHasUpdate(result) : hasRoutingProgress(result))) {
     // A fallback provider that knows less than the source of the saved summary
     // contradicts nothing while the carrier's own adapter is asked again within
     // hours. That adapter, or the provider the summary came from, answering

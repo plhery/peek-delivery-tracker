@@ -52,7 +52,9 @@ Lines JRT writes in Chinese only show in Peek in the English other forwarders gi
 - `Flight has arrived`, `The flight has arrived and is awaiting dismantling`, `The NOA has been received` (the airline's notice of arrival), `Dismantling and picking up goods in progress`: landed, before customs.
 - `Customs clearance of the cargo is in progress` ("At customs"), `Customs clearance completed`, then `The goods have been handed over to the carrier`, to the company that delivers.
 
-**DHL's and FedEx's lines.** Into Europe, the tracker goes on with DHL's scans, mostly in lower case: `the instruction data for this shipment have been provided by the sender to dhl electronically` (DHL has the label's data: "Label created"), `The shipment has been posted by the sender at the retail outlet` (JRT has handed the parcel in at a Deutsche Post outlet), `the shipment has been processed in the parcel center of origin` and `loaded to movement / tour vehicle` ("In transit"). Some parcels open with `Shipment information sent to FedEx` instead: the label's data has gone to FedEx, which delivers the last leg ("Label created").
+In `The flight is expected to depart on … and land on …` and `The flight has departed and is expected to … land`, dates are month.day: 11.12 is 12 November.
+
+**DHL's and FedEx's lines.** Into Europe, the tracker goes on with DHL's scans, mostly in lower case: `the instruction data for this shipment have been provided by the sender to dhl electronically` (DHL has the label's data: "Label created"), `The shipment has been posted by the sender at the retail outlet` (JRT has handed the parcel in at a Deutsche Post outlet), `the shipment has been processed in the parcel center of origin` and `loaded to movement / tour vehicle` ("In transit"). Later DHL lines are copied too: `not delivered-consignee could not be reached` (nobody was in: "Delivery attempted"), `held for consignee collection` (left at a pickup point: "Ready for pickup"), `shipment will be returned to origin-not ordered` (refused as not ordered: "Returned to sender") and `the shipment has been successfully delivered` ("Delivered", or "Returned to sender" when it follows a return line, since the parcel has then reached the sender). Some parcels open with `Shipment information sent to FedEx` instead: the label's data has gone to FedEx, which delivers the last leg ("Label created").
 
 Every time on JRT's tracker is Beijing time, DHL's copied scans included: 17:00 there is 09:00 in London and 10:00 in Berlin in winter.
 
@@ -90,7 +92,7 @@ Peek shows the status, each line with its place, and the service name and destin
 
 Peek follows parcels into Europe on JRT's tracker only, with the DHL scans it copies. The one hand-over Peek takes from JRT's record is to [Swiss Post](carrier:swiss-post), when the record names a Swiss Post line and number for a parcel to Switzerland or Liechtenstein. With any other delivering number from the seller, add it as a parcel of its own.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and hourly once JRT goes quiet (12 hours at its first lines, or two days with nothing new). It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to JRT's customs lines, not to its flights or `已交服务商`. Peek can't contact JRT or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and hourly once JRT goes quiet (12 hours at its first lines, or two days with nothing new). It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to JRT's "At customs" lines and to DHL's copied missed-attempt, pickup-point, delivery and return lines, not to JRT's flights or `已交服务商`. Peek can't contact JRT or the seller for you.
 
 ## Questions about JRT tracking
 

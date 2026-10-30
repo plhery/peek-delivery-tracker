@@ -2030,6 +2030,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "lietuvos-pastas-suivi",
+      "title": "Suivi colis Lietuvos paštas\u00a0: poste lituanienne, LP EXPRESS",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
+    },
+    {
       "id": "post-luxembourg",
       "catalog": "post-luxembourg",
       "slug": "post-luxembourg-suivi-colis",

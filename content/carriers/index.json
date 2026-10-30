@@ -179,5 +179,6 @@
   { "id": "roadie", "catalog": "roadie", "name": "Roadie", "languages": ["en"] },
   { "id": "ecms-express", "catalog": "ecms-express", "name": "ECMS Express", "languages": ["en"] },
   { "id": "chunghwa-post", "catalog": "chunghwa-post", "name": "Chunghwa Post", "languages": ["en"] },
-  { "id": "raben", "catalog": "raben", "name": "Raben", "languages": ["en"] }
+  { "id": "raben", "catalog": "raben", "name": "Raben", "languages": ["en"] },
+  { "id": "jd-logistics", "catalog": "jd-logistics", "name": "JD Logistics", "languages": ["en"] }
 ]

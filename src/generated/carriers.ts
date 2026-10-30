@@ -1456,6 +1456,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Raben tracking: shipment number, statuses and delivery",
       "name": "Raben",
       "color": "#df0020"
+    },
+    {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "jd-logistics-tracking",
+      "title": "JD Logistics tracking: JD numbers, statuses and contact",
+      "name": "JD Logistics",
+      "color": "#e1251b"
     }
   ],
   "de": [

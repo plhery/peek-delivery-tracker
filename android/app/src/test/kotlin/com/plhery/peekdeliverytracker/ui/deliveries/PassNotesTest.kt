@@ -362,7 +362,7 @@ class PassNotesTest {
         assertEquals(listOf("parcel-pickup-directions"), source.actions.filter { it.startsWith("parcel-pickup") })
         val started = opened()
         assertEquals(Intent.ACTION_VIEW, started?.action)
-        assertEquals("https://www.google.com/maps/dir/?api=1&destination=Bahnhofplatz%2015%2C%208001%20Z%C3%BCrich", started?.dataString)
+        assertEquals("https://www.google.com/maps/dir/?api=1&destination=Kiosk%20im%20Hauptbahnhof%2C%20Bahnhofplatz%2015%2C%208001%20Z%C3%BCrich", started?.dataString)
     }
 
     @Test

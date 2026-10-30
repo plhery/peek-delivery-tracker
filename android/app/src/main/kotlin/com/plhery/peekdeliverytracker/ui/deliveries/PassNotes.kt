@@ -234,14 +234,15 @@ private fun PickupButtons(stacked: Boolean, content: @Composable () -> Unit) {
 }
 
 /**
- * Where the directions go (`mapsURL`): Google Maps' directions to the point's address, or its search for the point's
- * name where the carrier gives no address. Unlike a `geo:` URI, either opens in a maps app or else in the browser.
+ * Where the directions go (`mapsURL`): Google Maps' directions to the point's name and address, or its search for the
+ * point's name where the carrier gives no address. Unlike a `geo:` URI, either opens in a maps app or else in the
+ * browser.
  */
 internal val PickupPoint.directionsUrl: String
     get() = if (address == null) {
-        "https://www.google.com/maps/search/?api=1&query=${Uri.encode(name)}"
+        "https://www.google.com/maps/search/?api=1&query=${Uri.encode(query)}"
     } else {
-        "https://www.google.com/maps/dir/?api=1&destination=${Uri.encode(address)}"
+        "https://www.google.com/maps/dir/?api=1&destination=${Uri.encode(query)}"
     }
 
 /**

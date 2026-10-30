@@ -308,6 +308,33 @@ class PassNotesTest {
     }
 
     @Test
+    fun aCustomsRequestIsFlaggedWithWhatItAsksForUntilALaterScanOrTheArchive() {
+        val gift = DemoCards.parcel("Birthday gift")
+        val asked = gift.scanned(TrackingStage.InTransit, "Duties are due.", RecipientAction.Duties)
+        pass(asked)
+        assertTrue(textExists("Import duties or taxes to pay"))
+        // What customs asks for wins over the missed delivery its scan may also be.
+        for ((action, words) in listOf(RecipientAction.TaxId to "Customs needs your tax number", RecipientAction.Documents to "Customs needs documents from you")) {
+            passParcel = gift.scanned(TrackingStage.FailedAttempt, "Over to you.", action)
+            compose.waitForIdle()
+            assertTrue(textExists(words))
+            assertFalse(textExists("Check the carrier’s next steps"))
+        }
+
+        val moved = TrackingEvent(
+            id = UUID.nameUUIDFromBytes("${gift.id}-moved".toByteArray()), packageId = gift.id, stage = TrackingStage.InTransit,
+            description = "Released by customs.", occurredAt = DateParser.isoString(CAPTURED.minus(Duration.ofMinutes(30))),
+        )
+        passParcel = asked.copy(trackingEvents = asked.trackingEvents + moved)
+        compose.waitForIdle()
+        assertFalse(textExists("Import duties or taxes to pay"))
+
+        passParcel = asked.copy(archivedAt = archivedTime)
+        compose.waitForIdle()
+        assertFalse(textExists("Import duties or taxes to pay"))
+    }
+
+    @Test
     fun theCarriersPromptsAndMarksOpenTheEditorOnTheCarrierTheyName() {
         val gift = DemoCards.parcel("Birthday gift")
         show(

@@ -368,17 +368,19 @@ private fun PageHistory(state: DeliveriesState, parcel: Parcel, pageId: UUID, hi
     Column(modifier, verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) { HistoryParts(state, parcel, pageId, history) }
 }
 
-/** The history's parts: `ParcelJournal` where the page shows what the carrier answered, then the sync line. */
+/** The history's parts: the journal where the page shows what the carrier answered, then the sync line. */
 @Composable
 private fun HistoryParts(state: DeliveriesState, parcel: Parcel, pageId: UUID, history: Boolean) {
-    if (history) ParcelJournal(parcel)
+    if (history) Journal(parcel)
     SyncStatus(state, parcel, pageId)
 }
 
-/** `ParcelJournal`, the tracking history. Not ported yet. */
-@Suppress("UNUSED_PARAMETER")
+/** The tracking history ([ParcelJournal]) in its carrier's ink. */
 @Composable
-private fun ParcelJournal(parcel: Parcel) = Unit
+private fun Journal(parcel: Parcel) {
+    val identity = shownCarrierIdentity(parcel, LocalLocalizer.current, LocalLanguage.current) ?: return
+    ParcelJournal(parcel, PeekTheme.colors.resolve(identity.ink), Modifier.testTag(PAGE_JOURNAL))
+}
 
 /**
  * The sync line ([SyncLine]) in its carrier's ink, with its refresh where there is a carrier to ask again: not for the
@@ -645,3 +647,4 @@ const val PAGE_NAME = "parcelPage.name"
 const val PAGE_ROUTE = "parcelPage.route"
 const val PAGE_PROMPT = "parcelPage.prompt"
 const val PAGE_QUIET = "parcelPage.quiet"
+const val PAGE_JOURNAL = "parcelPage.journal"

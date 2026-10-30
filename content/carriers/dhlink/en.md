@@ -68,7 +68,7 @@ As read on 22 October 2026, DHLink's contact page lists one customer service add
 
 ## Track a DHLink parcel with Peek
 
-[Peek](/) can't tell DHLink by the number's shape alone: its FC, XZG, YLUS, QH and EYT numbers are only weak matches. Paste it all the same: Peek follows more than 3,500 carriers. It shows "asking DHLink…" and "DHLink has this parcel." when DHLink knows the number; otherwise pick DHLink with "Change". A CN number goes to China Post.
+[Peek](/) can't tell DHLink by the number's shape alone: its FC, XZG, YLUS, QH and EYT numbers are only weak matches. Paste it all the same: Peek follows more than 3,500 carriers. It shows "Checking tracking services…" and then "DHLink has this parcel." when DHLink knows the number; otherwise pick DHLink with "Change". A CN number goes to China Post.
 
 Peek reads DHLink's tracker. It shows the status, the history with each scan's place and the destination country, and lists each scan once. Scans in China are read on Beijing time and USPS scans on the time of their US state; others keep the time DHLink gives. DHLink gives no expected delivery date, delivery time, weight or service name, and Peek drops postcodes and order references. When the "Last Leg No." is a GOFO number (GFUS and 14 digits) or a SwiftX one (SWX and 18 digits), Peek shows that carrier and its number, asks it and switches to it once it shows newer progress. Other last-leg numbers stay on DHLink's history.
 

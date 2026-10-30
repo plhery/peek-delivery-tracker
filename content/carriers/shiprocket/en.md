@@ -79,7 +79,7 @@ Most of this help is written for sellers. Shiprocket's tracking site also warns:
 
 ## Tracking Shiprocket parcels with Peek
 
-For a 13-digit number starting 832, [Peek](/) asks Shiprocket: the Add sheet shows "asking Shiprocket…", then "Shiprocket has this parcel." As Delhivery's waybills share that length, Peek doesn't name Shiprocket from the number alone; if no answer comes, pick Shiprocket with "Change". A shiprocket.co/tracking/ link names Shiprocket whatever the number.
+For a 13-digit number starting 832, [Peek](/) asks Shiprocket: the Add sheet shows "Checking tracking services…", then "Shiprocket has this parcel." As Delhivery's waybills share that length, Peek doesn't name Shiprocket from the number alone; if no answer comes, pick Shiprocket with "Change". A shiprocket.co/tracking/ link names Shiprocket whatever the number.
 
 Peek reads Shiprocket's tracking page every 10 minutes from 8 am to 10 pm Swiss time (about noon to 2 am in India), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time, including the morning of a delivery day. It shows the status, each scan with its place where the page gives one, the service name, Shiprocket's delivery estimate while the parcel is on its way, and the delivery time of a parcel delivered in India. Scans abroad carry no time zone: Peek reads each on the clock of its place and shows it in your device's time zone, and a ShiprocketX delivery abroad gives no delivery time. Lines show as the page writes them, except exact matches such as `Delivered`, which appear in Peek's own words. Peek leaves out the seller, the order's contents, your name and address, and shows no proof of delivery; it doesn't switch to the carrier abroad.
 

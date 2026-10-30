@@ -8023,7 +8023,17 @@ export const CARRIER_CAPABILITIES = {
         "path": "^/pub/tracking/([^/?#]+)/?$"
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^63\\d{9}$",
+        "confidence": "low",
+        "preferred": true
+      },
+      {
+        "pattern": "^6(?:0[1-9]|[1-9]\\d)\\d{8}$",
+        "confidence": "low"
+      }
+    ],
     "trackingUrlTemplate": "https://myspeedy.speedy.bg/pub/tracking/{trackingNumber}",
     "trackingSearchUrl": "https://myspeedy.speedy.bg/pub/tracking/"
   },
@@ -35111,7 +35121,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Tokyo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tonami",
+      "recognitionRank": 791
     },
     "trackingUrlTemplate": "https://trc1.tonami.co.jp/trc/search3/excSearch3?id%5B0%5D={trackingNumber}",
     "linkRules": [
@@ -35390,7 +35401,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "optima-overnight",
+      "recognitionRank": 53
     },
     "trackingUrlTemplate": "https://www.shipoptima.com/pages/tracking?tracking={trackingNumber}",
     "linkRules": [

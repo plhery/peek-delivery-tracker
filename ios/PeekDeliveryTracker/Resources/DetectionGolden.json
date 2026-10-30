@@ -47893,6 +47893,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -47903,12 +47904,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -47916,6 +47920,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -47926,12 +47931,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -48520,7 +48528,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -48578,7 +48587,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -48983,7 +48993,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -49273,7 +49284,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -49720,7 +49732,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -49877,7 +49890,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -50368,7 +50382,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -50673,6 +50688,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -50683,12 +50699,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -50847,6 +50866,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -50857,12 +50877,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -50870,6 +50893,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -50883,12 +50907,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -50896,6 +50923,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -50906,12 +50934,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -50946,6 +50977,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -50956,12 +50988,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -50969,6 +51004,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -50979,12 +51015,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -50992,6 +51031,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -51003,12 +51043,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -51016,6 +51059,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "speedy",
       "postlogistics",
       "gls-ch",
       "gls-fr",
@@ -51026,12 +51070,15 @@
       "mainfreight",
       "ppl"
     ],
+    "preferred": [
+      "speedy"
+    ],
     "asked": [
+      "speedy",
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "ppl"
+      "postlogistics"
     ]
   },
   {
@@ -51144,7 +51191,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -51170,7 +51218,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -51196,7 +51245,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -51280,7 +51330,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "dhl-ecommerce-pl",
@@ -51973,7 +52024,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "dhl-ecommerce-pl",
@@ -51999,7 +52051,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -52251,7 +52304,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -52401,7 +52455,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -52424,7 +52479,8 @@
       "gls-at",
       "gls-pl",
       "mainfreight",
-      "ppl"
+      "ppl",
+      "speedy"
     ],
     "asked": [
       "gls-fr",
@@ -86186,6 +86242,9 @@
     "candidates": [
       "optima-overnight",
       "transmission"
+    ],
+    "asked": [
+      "optima-overnight"
     ]
   },
   {
@@ -86376,6 +86435,9 @@
     "candidates": [
       "optima-overnight",
       "transmission"
+    ],
+    "asked": [
+      "optima-overnight"
     ]
   },
   {

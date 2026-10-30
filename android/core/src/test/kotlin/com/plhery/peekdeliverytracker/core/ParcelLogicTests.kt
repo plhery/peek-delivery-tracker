@@ -26,6 +26,7 @@ import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.RecipientAction
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -407,6 +408,38 @@ class ParcelLogicTests {
             assertEquals(attention, parcel.attention())
             assertEquals(stage, parcel.currentStage)
         }
+    }
+
+    @Test
+    fun customsRequestToTheRecipientNeedsActionWhileItIsTheNewestScan() {
+        val now = DateParser.date("2026-08-09T12:00:00Z")!!
+        val id = UUID.randomUUID()
+        // As the server serves it (parcelPriority.test.ts).
+        val held = ApiJson.decodeFromString(
+            TrackingEvent.serializer(),
+            """
+                {"id":"${UUID.randomUUID()}","package_id":"$id","stage":"customs","description":"Duties or taxes are due on this package",
+                 "occurred_at":"2026-08-09T08:00:00Z","recipient_action":"duties"}
+            """.trimIndent(),
+        )
+        assertEquals(RecipientAction.Duties, held.recipientAction)
+        var parcel = makeParcel(id = id, events = listOf(event(id, TrackingStage.InTransit, "2026-08-08T10:00:00Z"), held))
+        assertEquals(ParcelAttention.CustomsDuties, parcel.attention(now))
+        assertEquals("attention.customs_duties", parcel.notice(now)?.localizationKey)
+        assertNull(ParcelOrganizer.nextDelivery(listOf(parcel), now))
+        parcel = parcel.copy(syncStatus = SyncStatus.Error)
+        assertEquals(ParcelAttention.CustomsDuties, parcel.attention(now))
+        // Each request reads as the web's label.
+        for ((action, attention) in listOf(
+            RecipientAction.TaxId to ParcelAttention.CustomsTaxId, RecipientAction.Duties to ParcelAttention.CustomsDuties,
+            RecipientAction.Documents to ParcelAttention.CustomsDocuments,
+        )) {
+            assertEquals(attention, ParcelAttention(action))
+            assertEquals("attention.customs_${action.rawValue}", attention.localizationKey)
+        }
+        // Paid: the carrier moved on.
+        val released = makeParcel(id = id, events = listOf(held, event(id, TrackingStage.InTransit, "2026-08-09T10:00:00Z")))
+        assertNull(released.attention(now))
     }
 
     @Test

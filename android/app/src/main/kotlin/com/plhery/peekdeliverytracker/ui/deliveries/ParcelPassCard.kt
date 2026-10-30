@@ -27,6 +27,7 @@ import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.GradientColorSpace
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.deliveringCarrier
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
@@ -96,12 +97,14 @@ fun ParcelPassCard(
     val drawsRoute = placed && !PeekTheme.dynamicTypeSize.isAccessibilitySize
     // A past delivery's card is paler, once it stands among the past deliveries.
     val past = !arrived && (stage?.isFinal == true || parcel.isArchived)
-    // Customs and a pickup say all they need in the status line; after a missed delivery or a problem, the carrier
-    // waits on the reader.
-    val carrierIssue = stage == TrackingStage.Customs || stage == TrackingStage.ReadyForPickup
+    // Customs and a pickup say all they need in the status line; after a missed delivery or a problem, or while customs
+    // asks the reader for something, the carrier waits on the reader.
+    val actionNeeded = parcel.currentEvent?.recipientAction != null ||
+        stage == TrackingStage.FailedAttempt || stage == TrackingStage.Exception
+    val carrierIssue = !actionNeeded && (stage == TrackingStage.Customs || stage == TrackingStage.ReadyForPickup)
     val flag = if (notice != null && !carrierIssue) notice else if (parcel.updateFailed) localizer.text("attention.sync_error") else null
     val flagSymbol = when {
-        notice != null && (stage == TrackingStage.FailedAttempt || stage == TrackingStage.Exception) -> "exclamationmark.triangle"
+        notice != null && actionNeeded -> "exclamationmark.triangle"
         parcel.updateFailed -> "arrow.clockwise"
         else -> "clock"
     }

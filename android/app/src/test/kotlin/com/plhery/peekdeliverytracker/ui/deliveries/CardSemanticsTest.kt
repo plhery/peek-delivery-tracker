@@ -30,6 +30,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.RecipientAction
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
@@ -163,6 +164,21 @@ class CardSemanticsTest {
             "${fullName(missed)}, Trail weekend kit 🏕️, Delivery attempted, Check the carrier’s next steps",
             button().label(),
         )
+    }
+
+    @Test
+    fun aCustomsRequestIsFlaggedAfterItsStatus() {
+        compose.waitsForMaps()
+        val trail = DemoCards.parcel("Trail weekend kit")
+        val latest = trail.trackingEvents.maxBy { it.occurredAt }
+        // Customs says all it needs in the status line, unless it asks the reader for something.
+        val held = trail.copy(
+            trackingEvents = trail.trackingEvents.map {
+                if (it.id == latest.id) it.copy(stage = TrackingStage.Customs, recipientAction = RecipientAction.Duties) else it
+            },
+        )
+        compose.setContent { CardHost { ParcelPassCard(held, notice = DemoCards.notice(held), onOpen = {}) } }
+        assertTrue(button().label().endsWith(", ${localizer.parcelStatus(held)}, Import duties or taxes to pay"))
     }
 
     @Test

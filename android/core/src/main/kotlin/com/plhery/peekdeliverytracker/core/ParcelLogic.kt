@@ -5,6 +5,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.RecipientAction
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -409,6 +410,8 @@ fun Parcel.notice(now: Instant = Instant.now()): ParcelAttention? {
 val Parcel.updateFailed: Boolean get() = syncStatus == SyncStatus.Error && !numberToCheck
 
 fun Parcel.attention(now: Instant = Instant.now()): ParcelAttention? {
+    // The carrier waits on the recipient until a later scan says it moved on.
+    currentEvent?.recipientAction?.let { return ParcelAttention(it) }
     when (currentStage) {
         TrackingStage.FailedAttempt -> return ParcelAttention.FailedAttempt
         TrackingStage.ReadyForPickup -> return ParcelAttention.ReadyForPickup
@@ -578,6 +581,9 @@ object GeneratedTrack {
 enum class ParcelAttention(val rawValue: String) {
     SyncError("sync_error"),
     FailedAttempt("failed_attempt"),
+    CustomsTaxId("customs_tax_id"),
+    CustomsDuties("customs_duties"),
+    CustomsDocuments("customs_documents"),
     ReadyForPickup("ready_for_pickup"),
     Customs("customs"),
     Exception("exception"),
@@ -586,6 +592,15 @@ enum class ParcelAttention(val rawValue: String) {
     NotAnnounced("not_announced");
 
     val localizationKey: String get() = "attention.$rawValue"
+
+    companion object {
+        /** What customs asks the recipient for before it lets the parcel go. */
+        operator fun invoke(action: RecipientAction): ParcelAttention = when (action) {
+            RecipientAction.TaxId -> CustomsTaxId
+            RecipientAction.Duties -> CustomsDuties
+            RecipientAction.Documents -> CustomsDocuments
+        }
+    }
 }
 
 enum class ParcelStatusFilter(val rawValue: String) {

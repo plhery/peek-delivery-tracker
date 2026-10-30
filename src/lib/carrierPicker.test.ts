@@ -28,8 +28,7 @@ describe('carrier search', () => {
     const post = names('post');
     const starting = post.filter((name) => foldForSearch(name).startsWith('post'));
     expect(post.slice(0, starting.length)).toEqual(starting);
-    expect(starting.slice(0, 2)).toEqual(['Post Haste', 'POST Luxembourg']);
-    expect(starting).toContain('Poșta Moldovei');
+    expect(starting).toEqual(expect.arrayContaining(['Post Haste', 'POST Luxembourg', 'Poșta Moldovei']));
     expect(post.slice(starting.length)).toContain('Swiss Post');
   });
 

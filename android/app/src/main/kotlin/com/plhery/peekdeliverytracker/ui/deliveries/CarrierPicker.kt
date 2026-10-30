@@ -50,7 +50,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.toRect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
@@ -79,6 +81,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierPickerSearch
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -89,14 +92,28 @@ import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.CarrierTruck
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.sheet.BAR_ROW
+import com.plhery.peekdeliverytracker.ui.sheet.FORM_BOTTOM
+import com.plhery.peekdeliverytracker.ui.sheet.FormHeader
+import com.plhery.peekdeliverytracker.ui.sheet.FormScrollEdge
+import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetAttachment
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetInsets
+import com.plhery.peekdeliverytracker.ui.sheet.ROW_HEIGHT
 import com.plhery.peekdeliverytracker.ui.sheet.RowHighlight
+import com.plhery.peekdeliverytracker.ui.sheet.SECTION_BOTTOM
+import com.plhery.peekdeliverytracker.ui.sheet.SECTION_GAP
+import com.plhery.peekdeliverytracker.ui.sheet.SECTION_RADIUS
+import com.plhery.peekdeliverytracker.ui.sheet.SEPARATOR
+import com.plhery.peekdeliverytracker.ui.sheet.TITLE_GAP
+import com.plhery.peekdeliverytracker.ui.sheet.drawFormRows
+import com.plhery.peekdeliverytracker.ui.sheet.drawFormSeparator
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
+import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.math.floor
 import kotlin.math.max
@@ -137,8 +154,10 @@ internal fun CarrierPicker(
     tags: Map<CarrierId, CarrierPickerTag> = emptyMap(),
     leading: (@Composable () -> Unit)? = null,
 ) {
-    val identities = LocalCarrierIdentities.current ?: return
-    val catalog = identities.catalog
+    // Before the identities are read, the catalog the app has names the carriers, as the filters' do: only the marks
+    // wait for them.
+    val identities = LocalCarrierIdentities.current
+    val catalog = remember(identities) { identities?.catalog ?: CarrierCatalog.shared }
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val colors = PeekTheme.colors
@@ -149,8 +168,8 @@ internal fun CarrierPicker(
     val list = rememberLazyListState()
     val trimmed = CarrierPickerSearch.trimmedQuery(query)
     val searching = trimmed.isNotEmpty()
-    val letters = remember(identities, language) { CarrierPickerSearch.letterSections(catalog, language) }
-    val results = remember(identities, language, trimmed, opening) {
+    val letters = remember(catalog, language) { CarrierPickerSearch.letterSections(catalog, language) }
+    val results = remember(catalog, language, trimmed, opening) {
         if (!searching) emptyList()
         else CarrierPickerSearch.search(trimmed, catalog, language, preferred = opening.firstOrNull()?.carriers.orEmpty().toSet())
     }
@@ -189,34 +208,27 @@ internal fun CarrierPicker(
             items(entries, key = { it.key }, contentType = { it::class }) { entry ->
                 when (entry) {
                     is PickerEntry.Gap -> Spacer(Modifier.height(SECTION_GAP))
-                    is PickerEntry.Header -> SectionHeader(entry, start, end)
+                    // `Section(title)` and the letters' `header: { Text(letter) }`, over their rows.
+                    is PickerEntry.Header -> FormHeader(
+                        entry.title,
+                        Modifier.fillMaxWidth().padding(start = start * 2, end = end + start).testTag(carrierPickerHeaderTag(entry.key)),
+                    )
                     is PickerEntry.Automatic -> if (automatic != null) {
                         AutomaticRow(automatic, selected = selection == null, stacked, start, end) { choose(null) }
                     }
                     is PickerEntry.Carrier -> CarrierRow(
-                        entry, selected = selection == entry.carrier, tag = tags[entry.carrier], stacked, start, end,
+                        entry, catalog, selected = selection == entry.carrier, tag = tags[entry.carrier], stacked, start, end,
                     ) { choose(entry.carrier) }
-                    is PickerEntry.Empty -> PickerCell(first = true, last = true, colors.secondaryGroupedBackground, start, end, separatorStart = 0.dp) {
+                    is PickerEntry.Empty -> PickerCell(first = true, last = true, fill = null, start, end, separatorStart = 0.dp) {
                         Text(entry.text, color = colors.secondaryLabel, style = PeekTheme.type.body.sfLines())
                     }
                 }
             }
         }
-        // iOS 26's hard scroll edge on an attached sheet, as SheetPage draws it: once the list has scrolled under the
-        // bar, a band the cells' colour down to a hairline EDGE_BELOW under the search field.
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(barHeight + EDGE_BELOW)
-                .drawBehind {
-                    val scrolled = if (list.firstVisibleItemIndex > 0) EDGE_BELOW.toPx() else list.firstVisibleItemScrollOffset.toFloat()
-                    val shown = (scrolled / EDGE_BELOW.toPx()).coerceIn(0f, 1f)
-                    if (shown <= 0f) return@drawBehind
-                    drawRect(colors.secondaryGroupedBackground, alpha = shown * EDGE_OPACITY)
-                    val line = 1.dp.toPx()
-                    drawRect(colors.separator, Offset(0f, size.height - line), Size(size.width, line), alpha = shown)
-                },
-        )
+        // The sheet's scroll edge under the search field, as SheetPage's under its bar.
+        FormScrollEdge(barHeight) {
+            if (list.firstVisibleItemIndex > 0) Float.POSITIVE_INFINITY else list.firstVisibleItemScrollOffset.toFloat()
+        }
         Column(
             Modifier
                 .fillMaxWidth()
@@ -399,31 +411,17 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
     }
 }
 
-/** `Section(title)` and the letters' `header: { Text(letter) }`, over their rows, as FormSection heads its rows. */
-@Composable
-private fun SectionHeader(entry: PickerEntry.Header, start: Dp, end: Dp) {
-    Text(
-        entry.title,
-        Modifier
-            .fillMaxWidth()
-            .padding(start = start * 2, end = end + start, top = HEADER_TOP, bottom = HEADER_BOTTOM)
-            .testTag(carrierPickerHeaderTag(entry.key))
-            .semantics { heading() },
-        color = PeekTheme.colors.secondaryLabel,
-        style = PeekTheme.type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
-    )
-}
-
 /**
  * A row of an inset grouped section: inset `start` and `end` from the list's sides, its section's rounded corners on
  * the first's top and the last's bottom, and a hairline under it but the last, from `separatorStart`, where its words
- * begin, to the margin. The row's ground is `fill`: the cells' colour, or the chosen row's (`.listRowBackground`).
+ * begin, to the margin. Its ground and hairline are a form's, on the sheet's glass or its opaque ground (FormSection's),
+ * unless it has a `fill` of its own, as the chosen row has (`.listRowBackground`).
  */
 @Composable
 private fun PickerCell(
     first: Boolean,
     last: Boolean,
-    fill: Color,
+    fill: Color?,
     start: Dp,
     end: Dp,
     separatorStart: Dp,
@@ -431,6 +429,7 @@ private fun PickerCell(
     content: @Composable RowScope.() -> Unit,
 ) {
     val colors = PeekTheme.colors
+    val attachment = LocalSheetAttachment.current
     val side = LocalSheetInsets.current.formSide
     val top = if (first) SECTION_RADIUS else 0.dp
     val bottom = if (last) SECTION_RADIUS else 0.dp
@@ -438,12 +437,13 @@ private fun PickerCell(
         Modifier
             .padding(start = start, end = end, bottom = if (last) SECTION_BOTTOM else 0.dp)
             .clip(UnevenContinuousRoundedShape(top, bottom, bottom, top))
-            .background(fill)
             .drawBehind {
+                val attached = attachment()
+                if (fill != null) drawRect(fill) else drawFormRows(Outline.Rectangle(size.toRect()), attached, colors)
                 if (last) return@drawBehind
                 val line = SEPARATOR.toPx()
                 val from = (side + separatorStart).toPx()
-                drawRect(colors.separator, Offset(from, size.height - line), Size(size.width - from - side.toPx(), line))
+                drawFormSeparator(Offset(from, size.height - line), Size(size.width - from - side.toPx(), line), attached, colors)
             }
             .then(modifier)
             .fillMaxWidth()
@@ -467,7 +467,7 @@ private fun AutomaticRow(automatic: CarrierPickerAutomatic, selected: Boolean, s
     val type = PeekTheme.type
     val ochre = colors.resolve(ExperimentalPalette.ochre)
     PickerCell(
-        first = true, last = true, if (selected) colors.resolve(ExperimentalPalette.ochreSurface) else colors.secondaryGroupedBackground,
+        first = true, last = true, if (selected) colors.resolve(ExperimentalPalette.ochreSurface) else null,
         start, end, separatorStart = 0.dp,
         Modifier
             .testTag(CARRIER_PICKER_AUTOMATIC)
@@ -508,13 +508,15 @@ private fun AutomaticRow(automatic: CarrierPickerAutomatic, selected: Boolean, s
 /**
  * A carrier's row (`row(_:highlight:alias:)`): its truck, its name in the ink with the part the query matched marked
  * in the accent and semibold, and under it the other name it was found by or its countries; its tag at the trailing
- * end, or under the name at the accessibility text sizes; checked on the ochre surface while chosen. TalkBack reads it
+ * end, or under the name at the accessibility text sizes; checked on the ochre surface while chosen. The truck's room
+ * stays empty until the identities are read. TalkBack reads it
  * as one element (`readsAsItsLabel`): its name, then its subtitle and tag (the label and value VoiceOver reads), a
  * button, and "selected" only on the chosen one. No state description: Compose would read it in place of "selected".
  */
 @Composable
 private fun CarrierRow(
     entry: PickerEntry.Carrier,
+    catalog: CarrierCatalog,
     selected: Boolean,
     tag: CarrierPickerTag?,
     stacked: Boolean,
@@ -522,19 +524,18 @@ private fun CarrierRow(
     end: Dp,
     onChoose: () -> Unit,
 ) {
-    val identities = LocalCarrierIdentities.current ?: return
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val definition = remember(identities, entry.carrier, language) { identities.catalog.info(entry.carrier, language) }
-    val identity = remember(identities, entry.carrier, language) { identities.of(entry.carrier, language) }
+    val definition = remember(catalog, entry.carrier, language) { catalog.info(entry.carrier, language) }
+    val identity = carrierIdentity(entry.carrier, language)
     val subtitle = remember(definition, entry.alias, localizer, language) { CarrierPickerSearch.subtitle(definition, entry.alias, localizer) }
     val value = CarrierPickerSearch.accessibilityValue(subtitle, tag?.label)
     val mark = colors.accent.copy(alpha = HIGHLIGHT_OPACITY)
     val name = remember(definition, entry.highlight, mark) { highlighted(definition.displayName, entry.highlight, mark) }
     PickerCell(
-        entry.first, entry.last, if (selected) colors.resolve(ExperimentalPalette.ochreSurface) else colors.secondaryGroupedBackground,
+        entry.first, entry.last, if (selected) colors.resolve(ExperimentalPalette.ochreSurface) else null,
         start, end, separatorStart = MARK_WIDTH + ROW_SPACING,
         Modifier
             .testTag(carrierPickerRowTag(entry.carrier))
@@ -544,7 +545,7 @@ private fun CarrierRow(
                 if (selected) this.selected = true
             },
     ) {
-        CarrierTruck(identity)
+        if (identity != null) CarrierTruck(identity) else Spacer(Modifier.width(MARK_WIDTH))
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(name, color = colors.ink, style = type.body.sfLines())
             if (subtitle.isNotEmpty()) Text(subtitle, color = colors.secondaryLabel, style = type.caption.sfLines())
@@ -734,23 +735,9 @@ internal fun carrierPickerRowTag(carrier: CarrierId) = "carrierPicker.carrier.${
 /** A section's header: `section:<id>`, `letter:<letter>`, or `results`. */
 internal fun carrierPickerHeaderTag(key: String) = "carrierPicker.header.$key"
 
-// The bar's and an inset grouped list's measures, as SheetPage and FormSection take them.
-private val BAR_ROW = 44.dp
-private val TITLE_GAP = 8.dp
-private val EDGE_BELOW = 11.dp
-private const val EDGE_OPACITY = 0.95f
-private val FORM_BOTTOM = 20.dp
-private val ROW_HEIGHT = 52.dp
-
 /** UIKit's cells' layout margins above and below, which a row of two lines shows. */
 private val ROW_VERTICAL = 11.dp
 private val ROW_SPACING = 12.dp
-private val HEADER_TOP = 21.dp
-private val HEADER_BOTTOM = 10.dp
-private val SECTION_GAP = 29.dp
-private val SECTION_BOTTOM = 6.dp
-private val SEPARATOR = 1.dp
-private val SECTION_RADIUS = 26.dp
 
 /** UISearchTextField: 36 tall in `tertiarySystemFill`, 8 above and below it in the bar. */
 private val SEARCH_HEIGHT = 36.dp

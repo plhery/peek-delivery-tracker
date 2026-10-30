@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -19,6 +20,8 @@ import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PixelMap
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
@@ -43,6 +46,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
@@ -58,6 +62,9 @@ import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.ProvideLocalizer
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetAttachment
+import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
+import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
@@ -75,12 +82,21 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
-/** The carrier picker on its own, in English on the sheet's grouped ground, as the change-carrier sheet will push it. */
+/**
+ * The carrier picker on its own, in English on the sheet's grouped ground, as the change-carrier sheet will push it:
+ * attached, unless [attachment] says the sheet floats on its glass, and with the identities read unless [identities] is null.
+ */
 @Composable
-internal fun PickerHost(dark: Boolean = false, fontScale: Float = 1f, content: @Composable () -> Unit) {
+internal fun PickerHost(
+    dark: Boolean = false,
+    fontScale: Float = 1f,
+    identities: CarrierIdentities? = DemoCards.identities,
+    attachment: () -> Float = { 1f },
+    content: @Composable () -> Unit,
+) {
     val density = LocalDensity.current
-    CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
-        PeekTheme(dark = dark, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = DemoCards.identities) {
+    CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalSheetAttachment provides attachment) {
+        PeekTheme(dark = dark, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = identities) {
             ProvideLocalizer(remember { Localizer(AppLanguage.En, variant = "android") }) {
                 Box(Modifier.fillMaxSize().background(PeekTheme.colors.groupedBackground).testTag(SHOT)) { content() }
             }
@@ -104,7 +120,8 @@ internal val PICKER_TAGS = mapOf(CarrierId.SwissPost to CarrierPickerTag("Has th
  * sections it opened with and the letters; a search narrowing them with its count or saying none matches, the rail gone
  * meanwhile; a choice going to onSelect, then leaving; the rail answering from the first touch, jumping at once to the
  * letter under the finger and ticking for each new one, its bubble level with it; TalkBack's rows and rail; the tag
- * under the name at an accessibility text size; and the query and sections through a window made again.
+ * under the name at an accessibility text size; the query and sections through a window made again; the form's
+ * ground on a sheet's glass; and everything but the marks before the identities are read.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -116,6 +133,8 @@ class CarrierPickerTest {
     private val events = mutableListOf<String>()
     private var sections by mutableStateOf(PICKER_SECTIONS)
     private var tags by mutableStateOf(PICKER_TAGS)
+    private var identities by mutableStateOf<CarrierIdentities?>(DemoCards.identities)
+    private var attachment by mutableFloatStateOf(1f)
     private val catalog get() = DemoCards.identities.catalog
     private val letters get() = CarrierPickerSearch.letterSections(catalog, AppLanguage.En).map { it.letter }
     private val localizer = Localizer(AppLanguage.En, variant = "android")
@@ -129,7 +148,7 @@ class CarrierPickerTest {
     ) {
         val content: @Composable () -> Unit = {
             val picker: @Composable () -> Unit = {
-                PickerHost(fontScale = fontScale) {
+                PickerHost(fontScale = fontScale, identities = identities, attachment = { attachment }) {
                     CarrierPicker(
                         selection, sections,
                         onSelect = { events += "select ${it?.rawValue}" },
@@ -192,6 +211,18 @@ class CarrierPickerTest {
     }
 
     private fun px(dp: Float): Float = dp * compose.activity.resources.displayMetrics.density
+
+    /** What `tag` shows, once it has drawn. */
+    private fun image(tag: String): PixelMap {
+        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+        return compose.onAllNodesWithTag(tag).onFirst().captureToImage().toPixelMap()
+    }
+
+    private fun assertColor(expected: Color, actual: Color) {
+        val close = listOf(expected.red to actual.red, expected.green to actual.green, expected.blue to actual.blue)
+            .all { (wanted, got) -> abs(wanted - got) <= 2.5f / 255 }
+        assertTrue("$expected, not $actual", close)
+    }
 
     /**
      * The header `key` heads the list under the bar: its words 21 under the list's top, which is the bar's foot, 8 under
@@ -454,6 +485,49 @@ class CarrierPickerTest {
         val description = compose.onNode(hasText("Peek finds the carrier for you."), useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
         assertTrue(tag.right <= description.left && abs(tag.center.y - description.center.y) < px(8f))
         assertEquals(height(plain), height(tagged))
+    }
+
+    @Test
+    fun onASheetsGlassTheRowsAndTheScrollEdgeAreTheFormsAsTheyAreOnItsGround() {
+        attachment = 0f
+        show()
+        compose.onNodeWithTag(CARRIER_PICKER_LIST).performScrollToIndex(3)
+        val colors = PeekColors(dark = false)
+        val planzer = row(CarrierId.Planzer).fetchSemanticsNode().boundsInRoot
+        // A row's trailing margin, where nothing is written, and the corner above the bar, where only the edge's band is.
+        val margin = (planzer.right - px(4f)).roundToInt() to planzer.center.y.roundToInt()
+        val shot = image(SHOT)
+        assertColor(Color.Black.copy(alpha = 0.07f).compositeOver(colors.groupedBackground), shot[margin.first, margin.second])
+        assertColor(colors.groupedBackground, shot[2, 2])
+        attachment = 1f
+        val attached = image(SHOT)
+        assertColor(colors.secondaryGroupedBackground, attached[margin.first, margin.second])
+        assertColor(colors.secondaryGroupedBackground.copy(alpha = 0.95f).compositeOver(colors.groupedBackground), attached[2, 2])
+    }
+
+    @Test
+    fun beforeTheIdentitiesAreReadTheBarTheFieldAndTheRowsShowAndOnlyTheMarksWait() {
+        identities = null
+        show()
+        compose.onNodeWithText(localizer.text("add.carrier")).assertExists()
+        field().assertExists()
+        header("section:fits").assertExists()
+        compose.onNodeWithTag(CARRIER_PICKER_AUTOMATIC).assertExists()
+        val read = row(CarrierId.Planzer).description()
+        row(CarrierId.SwissPost).assertIsSelected()
+        // The truck's room, 27 by 18 at the row's leading margin: empty, then the truck's colours once they are read.
+        fun mark(): Set<Color> {
+            val image = image(carrierPickerRowTag(CarrierId.Planzer))
+            val xs = px(20f).roundToInt() until px(20f + 27f).roundToInt()
+            val ys = (image.height / 2 - px(9f).roundToInt()) until (image.height / 2 + px(9f).roundToInt())
+            return xs.flatMap { x -> ys.map { y -> image[x, y] } }.toSet()
+        }
+        assertEquals(1, mark().size)
+        identities = DemoCards.identities
+        compose.waitForIdle()
+        assertTrue(mark().size > 1)
+        assertEquals(read, row(CarrierId.Planzer).description())
+        assertTrue(read.orEmpty().startsWith(catalog.info(CarrierId.Planzer, AppLanguage.En).displayName))
     }
 
     @Test

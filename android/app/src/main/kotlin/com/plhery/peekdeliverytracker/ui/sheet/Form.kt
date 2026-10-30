@@ -45,9 +45,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
@@ -83,6 +85,7 @@ import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
+import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
@@ -111,7 +114,6 @@ internal fun SheetPage(
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val scroll = rememberScrollState()
-    val attachment = LocalSheetAttachment.current
     val backdrop = rememberMaterialBackdrop()
     val insets = LocalSheetInsets.current
     val bottom = if (!insets.reachesBottom) 0.dp else with(LocalDensity.current) { WindowInsets.navigationBars.getBottom(this).toDp() }
@@ -132,20 +134,7 @@ internal fun SheetPage(
                 content()
             }
         }
-        // iOS 26's hard scroll edge on an attached sheet: once the form has scrolled under the bar, a band the cells'
-        // colour, which leaves a ghost of what is under it, down to a hairline EDGE_BELOW under the bar.
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(barHeight + EDGE_BELOW)
-                .drawBehind {
-                    val shown = (scroll.value / EDGE_BELOW.toPx()).coerceIn(0f, 1f) * attachment()
-                    if (shown <= 0f) return@drawBehind
-                    drawRect(colors.secondaryGroupedBackground, alpha = shown * EDGE_OPACITY)
-                    val line = 1.dp.toPx()
-                    drawRect(colors.separator, Offset(0f, size.height - line), Size(size.width, line), alpha = shown)
-                },
-        )
+        FormScrollEdge(barHeight) { scroll.value.toFloat() }
         // The title in the middle of the bar, or as near it as clears the confirmation, and cut short where even
         // the room before the confirmation is too little, as the confirmation grows with the text.
         Layout(
@@ -200,6 +189,29 @@ private fun ConfirmationButton(title: String, onConfirm: () -> Unit, backdrop: M
 }
 
 /**
+ * iOS 26's hard scroll edge on an attached sheet, over the top of a page whose bar is [barHeight] tall: once what is
+ * under the bar has scrolled ([scrolled], in pixels), a band the cells' colour, which leaves a ghost of what is under
+ * it, down to a hairline EDGE_BELOW under the bar. On the sheet's glass there is none ([LocalSheetAttachment]).
+ */
+@Composable
+internal fun FormScrollEdge(barHeight: Dp, scrolled: () -> Float) {
+    val colors = PeekTheme.colors
+    val attachment = LocalSheetAttachment.current
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(barHeight + EDGE_BELOW)
+            .drawBehind {
+                val shown = (scrolled() / EDGE_BELOW.toPx()).coerceIn(0f, 1f) * attachment()
+                if (shown <= 0f) return@drawBehind
+                drawRect(colors.secondaryGroupedBackground, alpha = shown * EDGE_OPACITY)
+                val line = 1.dp.toPx()
+                drawRect(colors.separator, Offset(0f, size.height - line), Size(size.width, line), alpha = shown)
+            },
+    )
+}
+
+/**
  * Where a page's bar and form stand in a sheet or a popover: the bar's row `barTop` under its top, clear of a sheet's
  * grabber, its confirmation `barSide` in from the side, and the form's sections and rows `formSide` in, UIKit's layout
  * margins, 16 on a surface narrower than 414 points, as a popover is, and 20 from there. Where the surface reaches the
@@ -232,12 +244,7 @@ fun FormSection(header: String?, modifier: Modifier = Modifier, content: @Compos
     val side = LocalSheetInsets.current.formSide
     Column(modifier.fillMaxWidth().padding(horizontal = side).padding(bottom = SECTION_BOTTOM)) {
         if (header != null) {
-            Text(
-                header,
-                Modifier.padding(start = side, end = side, top = HEADER_TOP, bottom = HEADER_BOTTOM).semantics { heading() },
-                color = colors.secondaryLabel,
-                style = PeekTheme.type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
-            )
+            FormHeader(header, Modifier.padding(horizontal = side))
         } else {
             Spacer(Modifier.height(SECTION_GAP))
         }
@@ -249,21 +256,10 @@ fun FormSection(header: String?, modifier: Modifier = Modifier, content: @Compos
                 .fillMaxWidth()
                 .drawBehind {
                     val attached = attachment()
-                    val outline = shape.createOutline(size, layoutDirection, this)
-                    val veil = if (colors.dark) Color.White.copy(alpha = GLASS_ROWS_DARK) else Color.Black.copy(alpha = GLASS_ROWS_LIGHT)
-                    if (attached < 1f) drawOutline(outline, veil, alpha = 1 - attached)
-                    if (attached > 0f) drawOutline(outline, colors.secondaryGroupedBackground, alpha = attached)
+                    drawFormRows(shape.createOutline(size, layoutDirection, this), attached, colors)
                     val inset = side.toPx()
                     val line = SEPARATOR.toPx()
-                    // On glass, the hairlines are the rows' own colour darkened (lightened in dark), as the
-                    // iPhone's show; on the ground, the separator.
-                    val glassLine = if (colors.dark) Color.White.copy(alpha = GLASS_SEPARATOR_DARK) else Color.Black.copy(alpha = GLASS_SEPARATOR_LIGHT)
-                    for (y in bounds) {
-                        val origin = Offset(inset, y - line)
-                        val lineSize = Size(size.width - 2 * inset, line)
-                        if (attached < 1f) drawRect(glassLine, origin, lineSize, alpha = 1 - attached)
-                        if (attached > 0f) drawRect(colors.separator, origin, lineSize, alpha = attached)
-                    }
+                    for (y in bounds) drawFormSeparator(Offset(inset, y - line), Size(size.width - 2 * inset, line), attached, colors)
                 },
         ) { measurables, constraints ->
             val placeables = measurables.map { it.measure(constraints.copy(minHeight = 0)) }
@@ -279,6 +275,37 @@ fun FormSection(header: String?, modifier: Modifier = Modifier, content: @Compos
             }
         }
     }
+}
+
+/** A section's header over its rows, headline semibold in the secondary grey; TalkBack reads it as a heading. */
+@Composable
+internal fun FormHeader(title: String, modifier: Modifier = Modifier) {
+    Text(
+        title,
+        Modifier.padding(top = HEADER_TOP, bottom = HEADER_BOTTOM).then(modifier).semantics { heading() },
+        color = PeekTheme.colors.secondaryLabel,
+        style = PeekTheme.type.style(IosTextStyle.Headline, FontWeight.SemiBold).sfLines(),
+    )
+}
+
+/**
+ * The ground of a form's rows in [outline]: white (dark grey in dark) on the sheet's opaque ground, a veil on its glass,
+ * the one giving way to the other as the sheet attaches ([attached], [LocalSheetAttachment]).
+ */
+internal fun DrawScope.drawFormRows(outline: Outline, attached: Float, colors: PeekColors) {
+    val veil = if (colors.dark) Color.White.copy(alpha = GLASS_ROWS_DARK) else Color.Black.copy(alpha = GLASS_ROWS_LIGHT)
+    if (attached < 1f) drawOutline(outline, veil, alpha = 1 - attached)
+    if (attached > 0f) drawOutline(outline, colors.secondaryGroupedBackground, alpha = attached)
+}
+
+/**
+ * A hairline between a form's rows: on glass, the rows' own colour darkened (lightened in dark), as the iPhone's show;
+ * on the opaque ground, the separator.
+ */
+internal fun DrawScope.drawFormSeparator(origin: Offset, size: Size, attached: Float, colors: PeekColors) {
+    val glassLine = if (colors.dark) Color.White.copy(alpha = GLASS_SEPARATOR_DARK) else Color.Black.copy(alpha = GLASS_SEPARATOR_LIGHT)
+    if (attached < 1f) drawRect(glassLine, origin, size, alpha = 1 - attached)
+    if (attached > 0f) drawRect(colors.separator, origin, size, alpha = attached)
 }
 
 /** A row's words, as an inline picker's label heads its options. */
@@ -516,20 +543,21 @@ private class HighlightNode(private val interactionSource: InteractionSource, pr
     }
 }
 
-private val BAR_ROW = 44.dp
-private val TITLE_GAP = 8.dp
+// A page's bar and an inset grouped form's measures, which the carrier picker's list takes too.
+internal val BAR_ROW = 44.dp
+internal val TITLE_GAP = 8.dp
 private val CONFIRM_PADDING = 16.dp
 private val EDGE_BELOW = 11.dp
 private const val EDGE_OPACITY = 0.95f
-private val FORM_BOTTOM = 20.dp
-private val ROW_HEIGHT = 52.dp
+internal val FORM_BOTTOM = 20.dp
+internal val ROW_HEIGHT = 52.dp
 private val ROW_VERTICAL = 6.dp
 private val HEADER_TOP = 21.dp
 private val HEADER_BOTTOM = 10.dp
-private val SECTION_GAP = 29.dp
-private val SECTION_BOTTOM = 6.dp
-private val SEPARATOR = 1.dp
-private val SECTION_RADIUS = 26.dp
+internal val SECTION_GAP = 29.dp
+internal val SECTION_BOTTOM = 6.dp
+internal val SEPARATOR = 1.dp
+internal val SECTION_RADIUS = 26.dp
 private const val GLASS_ROWS_LIGHT = 0.07f
 private const val GLASS_ROWS_DARK = 0.08f
 private const val GLASS_SEPARATOR_LIGHT = 0.11f

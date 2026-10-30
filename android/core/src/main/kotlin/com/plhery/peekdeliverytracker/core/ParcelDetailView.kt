@@ -16,6 +16,12 @@ object TrackingNumberCopy {
 }
 
 /**
+ * The name `parcelRenameAlert` saves: the one typed, trimmed of whitespace and newlines, cut to its first 80
+ * characters as a reader sees them (Swift's `prefix(80)`).
+ */
+fun parcelName(typed: String): String = typed.trimmingWhitespacesAndNewlines().characterPrefix(80)
+
+/**
  * Where the parcel waits for collection (`waitingAt`): its pickup point while it is ready for pickup, which the page
  * gives a card; afterwards the point is a plain fact ([shipmentFacts]).
  */

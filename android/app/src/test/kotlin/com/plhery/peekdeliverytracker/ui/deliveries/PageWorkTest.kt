@@ -205,7 +205,7 @@ class PageWorkTest {
         compose.runOnUiThread {
             deliveries.choseOnPage(gift, ParcelMenuItem.Archive, parcel(gift))
             deliveries.choseOnPage(gift, ParcelMenuItem.Restore, parcel(gift))
-            deliveries.confirmDelete(DeleteRequest(parcel(gift), gift))
+            deliveries.confirmDelete(DeleteRequest(gift, gift))
         }
         compose.runOnUiThread { source.archiving?.complete(Unit) }
         settle()

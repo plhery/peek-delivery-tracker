@@ -16,7 +16,7 @@ import org.junit.Test
 
 /**
  * What the parcel's page reads of a parcel (ParcelDetailView.swift): its pickup card, the carrier's words, the
- * shipment's facts and its journal's days and rows.
+ * shipment's facts, its journal's days and rows, and the name its rename alert saves.
  */
 class ParcelDetailViewTests {
     private val id = UUID.randomUUID()
@@ -32,6 +32,18 @@ class ParcelDetailViewTests {
         assertNull(parcel(TrackingStage.Delivered, point).waitingAt)
         assertNull(parcel(TrackingStage.ReadyForPickup, CarrierData(pickupPoint = " \n ")).waitingAt)
         assertNull(parcel(TrackingStage.ReadyForPickup, null).waitingAt)
+    }
+
+    @Test
+    fun aNameIsSavedTrimmedAndCutTo80CharactersAsTheyAreSeen() {
+        assertEquals("Desk lamp", parcelName("  Desk lamp \n"))
+        assertEquals("", parcelName(" \n\t "))
+        assertEquals("a".repeat(80), parcelName("a".repeat(81)))
+        // A family emoji is one character of several scalars, kept whole.
+        val family = "\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67"
+        assertEquals("a".repeat(79) + family, parcelName("a".repeat(79) + family + "b"))
+        // Trimmed before it is cut: the spaces in front don't count.
+        assertEquals("b".repeat(80), parcelName("   " + "b".repeat(80) + "c"))
     }
 
     @Test

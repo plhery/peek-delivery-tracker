@@ -25,9 +25,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 /**
  * The deliveries' stores as a test sets them: its parcels, the session, what loads, and what the list asked of them.
  * A new process is a new `launch`, and the app's scope outlives every window, on the test's clock once `RootHost` shows
- * them ([dispatcher]). Archiving, restoring, deleting, muting and changing the carrier change the parcels as the store
- * does, or fail with `failure`, an archive once `archiving` lets it go when a test holds it, a mute once `muting` does,
- * a carrier change once `changing` does and a parcel's check once `checkingParcel` does; a check of
+ * them ([dispatcher]). Archiving, restoring, deleting, renaming, muting and changing the carrier change the parcels as
+ * the store does, or fail with `failure`, an archive once `archiving` lets it go when a test holds it, a mute once
+ * `muting` does, a carrier change once `changing` does and a parcel's check once `checkingParcel` does; a check of
  * every parcel answers `checkResult`, or waits for `checking` when a test holds it. The rating prompt keeps its days in
  * a store of its own, in UTC, and the system's prompt is a fake that notes each step ([reviewCalls]).
  */
@@ -88,14 +88,15 @@ class FakeDeliveries(
     var checkingParcel: CompletableDeferred<Unit>? = null
 
     /**
-     * The parcels archived, restored and deleted, in their order, each mute asked for with its new setting, and each
-     * carrier change with its carrier, and the parcels checked one by one.
+     * The parcels archived, restored and deleted, in their order, each mute asked for with its new setting, each
+     * carrier change with its carrier, each name given, and the parcels checked one by one.
      */
     val archived = mutableListOf<UUID>()
     val restored = mutableListOf<UUID>()
     val deleted = mutableListOf<UUID>()
     val mutes = mutableListOf<Pair<UUID, Boolean>>()
     val carrierChanges = mutableListOf<Pair<UUID, CarrierId>>()
+    val renames = mutableListOf<Pair<UUID, String>>()
     val checked = mutableListOf<UUID>()
 
     var viewerLinks: Map<UUID, String> = emptyMap()
@@ -167,6 +168,12 @@ class FakeDeliveries(
         deleted += parcel.id
         parcels.value = parcels.value.filter { it.id != parcel.id }
         if (undoParcel.value?.id == parcel.id) undoParcel.value = null
+    }
+
+    override suspend fun rename(parcel: Parcel, label: String) {
+        failure?.let { throw it }
+        renames += parcel.id to label
+        parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(label = label) else it }
     }
 
     override suspend fun setMuted(parcel: Parcel, muted: Boolean) {

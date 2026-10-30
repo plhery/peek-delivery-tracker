@@ -47,6 +47,7 @@ import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.displayedCarrier
+import com.plhery.peekdeliverytracker.core.parcelName
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
@@ -254,6 +255,24 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
 )
 
 /**
+ * What a menu opened over the deliveries that waits for an answer, each held for the launch ([rememberForLaunch]) as
+ * the iPhone's `@State` is through a rotation: the delete it asks about and the parcel being named
+ * ([DeleteRequest.saved], [RenameRequest.saved]), and the name typed so far.
+ */
+internal class PromptStates(
+    val deleting: MutableState<String?>,
+    val renaming: MutableState<String?>,
+    val name: MutableState<String>,
+)
+
+@Composable
+internal fun rememberPromptStates(launch: UUID): PromptStates = PromptStates(
+    deleting = rememberForLaunch<String?>(launch, null),
+    renaming = rememberForLaunch<String?>(launch, null),
+    name = rememberForLaunch(launch, ""),
+)
+
+/**
  * A message under the list (`ListToast`): what a check of the parcels found, or that a number was copied. Each one
  * shown is another ([id]), even with the same words, and has its own four seconds.
  */
@@ -267,7 +286,7 @@ internal data class Announcement(val text: String, val count: Int)
 /**
  * What the deliveries' list and the parcel beside it share: the parcels as the list arranges them, the window's
  * arrangement, the navigation, the list's scroll and the archive's shelf; and what ParcelListView keeps for its
- * feedback: the pull, the toast, the error of an action, the card menu open and the delete it asks about.
+ * feedback: the pull, the toast, the error of an action, the card menu open, the delete it asks about and the rename.
  *
  * The list's own work (a refresh, the pull, a card on its way out) runs in `scope`, the tab's, so that drawing the
  * list again, as the window turns, doesn't cancel it, as the iPhone's pull runs in a task of its own. Its changes to
@@ -284,6 +303,7 @@ internal class DeliveriesState(
     sampleShownState: MutableState<Boolean>,
     mapCoverState: MutableState<String?>,
     private val views: ListViewStates,
+    private val prompts: PromptStates,
     private val now: () -> Instant,
     val scope: CoroutineScope,
 ) {
@@ -767,8 +787,25 @@ internal class DeliveriesState(
      */
     val openSwipes: SnapshotStateList<ArchiveSwipe> = mutableStateListOf()
 
-    /** The parcel a menu asks about before deleting it (`prompts.deleting`). */
-    var deleting: DeleteRequest? by mutableStateOf(null)
+    /** The parcel a menu asks about before deleting it (`prompts.deleting`), kept with the window. */
+    var deleting: DeleteRequest?
+        get() = prompts.deleting.value?.let { DeleteRequest.from(it) }
+        set(value) {
+            prompts.deleting.value = value?.saved
+        }
+
+    /**
+     * The parcel being named (`prompts.renaming`, the page's `showingTitleEditor`), kept with the window: its alert
+     * stands over the deliveries until answered ([saveRename], [cancelRename]).
+     */
+    var renaming: RenameRequest?
+        get() = prompts.renaming.value?.let { RenameRequest.from(it) }
+        private set(value) {
+            prompts.renaming.value = value?.saved
+        }
+
+    /** What the rename alert's field holds (`prompts.name`, the page's `editedTitle`), kept with the window as typed. */
+    var renameText: String by prompts.name
 
     /** The parcel page's ••• menu, open over the window. */
     var pageMenu: PageMenuRequest? by mutableStateOf(null)
@@ -799,7 +836,8 @@ internal class DeliveriesState(
      * A menu, the question it asks, an alert or the page's map shows over the list, and TalkBack reaches nothing else.
      */
     val modal: Boolean
-        get() = menu != null || pageMenu != null || deleting != null || actionError != null || pageError != null || mapCover != null
+        get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
+            mapCover != null
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes
@@ -1044,9 +1082,66 @@ internal class DeliveriesState(
      * parcel it shows by then, in the page's `run` (`delete(_:)`), which leaves the page once deleted.
      */
     fun confirmDelete(request: DeleteRequest) {
-        val pageId = request.pageId ?: return delete(request.parcel)
+        val pageId = request.pageId
+        if (pageId == null) {
+            source.parcels.value.firstOrNull { it.id == request.parcelId }?.let(::delete)
+            return
+        }
         val parcel = menuParcel(pageId) ?: return
         leaveOnPage(pageId) { source.permanentlyDelete(parcel) }
+    }
+
+    /**
+     * Asks for `parcel`'s new name, from its own (`editedTitle = parcel.label`, `prompts.name = parcel.label`): from a
+     * card's menu, or from the page with `pageId`, which then saves it.
+     */
+    private fun rename(parcel: Parcel, pageId: UUID?) {
+        renameText = parcel.label
+        renaming = RenameRequest(parcel.id, pageId)
+    }
+
+    /**
+     * A tap on the name on the pass of the page with `pageId`, as its ••• menu's Rename (`chose(.rename, on:)`):
+     * TalkBack goes back to `focus` once the alert has closed.
+     */
+    fun renameOnPage(pageId: UUID, focus: AccessibilityFocus?) {
+        if (modal) return
+        val parcel = menuParcel(pageId) ?: return
+        returnFocus = focus
+        rename(parcel, pageId)
+    }
+
+    /**
+     * The rename alert's Save: the name typed, trimmed and cut to 80 characters ([parcelName]), goes to the store
+     * (`store.rename(_:label:)`) for the parcel as it is now. Asked from a page, in its `run`: one change at a time, and
+     * an alert over the page says why it failed. Asked from a card, in the app's scope, a failure said in the list's
+     * alert (`actionError`).
+     */
+    fun saveRename() {
+        val request = renaming ?: return
+        renaming = null
+        val label = parcelName(renameText)
+        val pageId = request.pageId
+        if (pageId != null) {
+            val parcel = menuParcel(pageId) ?: return
+            workOnPage(pageId) { source.rename(parcel, label) }
+            return
+        }
+        val parcel = source.parcels.value.firstOrNull { it.id == request.parcelId } ?: return
+        source.scope.launch {
+            try {
+                source.rename(parcel, label)
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                actionError = source.errorMessage(error)
+            }
+        }
+    }
+
+    /** The rename alert's Cancel, or the back gesture: the name stays as it was. */
+    fun cancelRename() {
+        renaming = null
     }
 
     /**
@@ -1075,18 +1170,19 @@ internal class DeliveriesState(
 
     /**
      * What the ••• menu of the page with `pageId` asked of its parcel (ParcelDetailView's `chose(_:on:)`). The page is
-     * open already. Naming the parcel and changing its carrier open what comes with the page's sections, and do nothing
-     * yet; the page shares a parcel from its own button. Copying puts the first number on the clipboard and says so on
-     * its row. Archiving and restoring save the change, then leave the page; deleting asks first. Only one change of the
-     * page's is saved at a time, and an alert over it says why one failed.
+     * open already. Naming the parcel asks for its new name; changing its carrier opens what comes with its step, and
+     * does nothing yet; the page shares a parcel from its own button. Copying puts the first number on the clipboard
+     * and says so on its row. Archiving and restoring save the change, then leave the page; deleting asks first. Only
+     * one change of the page's is saved at a time, and an alert over it says why one failed.
      */
     fun choseOnPage(pageId: UUID, item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
-            ParcelMenuItem.Open, ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
+            ParcelMenuItem.Open, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
+            ParcelMenuItem.Rename -> rename(parcel, pageId)
             ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(pageId, it) }
             ParcelMenuItem.Archive -> leaveOnPage(pageId) { saveArchive(parcel) }
             ParcelMenuItem.Restore -> leaveOnPage(pageId) { source.restore(parcel) }
-            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, pageId)
+            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel.id, pageId)
         }
     }
 
@@ -1113,9 +1209,10 @@ internal class DeliveriesState(
                 returnFocus = null
                 navigator.open(parcel.id)
             }
-            // Naming a parcel, sharing it and changing its carrier open what comes with the parcel's page: the
-            // menu offers them, and they do nothing yet.
-            ParcelMenuItem.Rename, ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
+            ParcelMenuItem.Rename -> rename(parcel, pageId = null)
+            // Sharing a parcel and changing its carrier open what comes with their steps: the menu offers them, and
+            // they do nothing yet.
+            ParcelMenuItem.Share, ParcelMenuItem.ChangeCarrier -> Unit
             ParcelMenuItem.CopyTrackingNumber -> {
                 val says = copyTrackingNumber(parcel) ?: return
                 val copied = text("detail.copied")
@@ -1124,7 +1221,7 @@ internal class DeliveriesState(
             }
             ParcelMenuItem.Archive -> archive(parcel)
             ParcelMenuItem.Restore -> restore(parcel)
-            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel, pageId = null)
+            ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel.id, pageId = null)
         }
     }
 

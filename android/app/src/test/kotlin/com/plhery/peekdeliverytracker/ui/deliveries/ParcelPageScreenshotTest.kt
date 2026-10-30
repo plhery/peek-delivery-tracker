@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.screenshot
@@ -28,9 +29,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * A parcel's page's frame on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), in
- * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark, its ••• menu open, the
- * page of a parcel gone, and the page beside the list on a tablet on its side, the history beside the pass. The page
- * dragged down, under its bar, is ParcelZoomScreenshotTest's.
+ * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark, its ••• menu open, its
+ * rename alert light and dark, the page of a parcel gone, and the page beside the list on a tablet on its side, the
+ * history beside the pass. The page dragged down, under its bar, is ParcelZoomScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -97,6 +98,30 @@ class ParcelPageScreenshotTest {
         compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
         compose.mainClock.advanceTimeBy(1_000)
         compose.screenshot("page_menu_light")
+    }
+
+    /** The rename alert over the page, on the parcel's name, as its ••• menu's Rename opens it. */
+    private fun rename() {
+        compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(menuItemTag(ParcelMenuItem.Rename)).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+    }
+
+    @Test
+    fun theRenameAlert() {
+        show()
+        open()
+        rename()
+        compose.screenshot("page_rename_light")
+    }
+
+    @Test
+    fun theRenameAlertInDark() {
+        show(dark = true)
+        open()
+        rename()
+        compose.screenshot("page_rename_dark")
     }
 
     @Test

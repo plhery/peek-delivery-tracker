@@ -78,6 +78,9 @@ interface DeliveriesSource {
 
     suspend fun permanentlyDelete(parcel: Parcel)
 
+    /** `store.rename(_:label:)`: names the parcel `label`, trimmed of whitespace and newlines. */
+    suspend fun rename(parcel: Parcel, label: String)
+
     /** `store.setMuted(_:muted:)`: switches the parcel's notifications off, or back on. Nothing for a guest's parcel. */
     suspend fun setMuted(parcel: Parcel, muted: Boolean)
 
@@ -160,6 +163,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override suspend fun restore(parcel: Parcel) = container.parcels.restore(parcel)
 
     override suspend fun permanentlyDelete(parcel: Parcel) = container.parcels.permanentlyDelete(parcel)
+
+    override suspend fun rename(parcel: Parcel, label: String) = container.parcels.rename(parcel, label)
 
     override suspend fun setMuted(parcel: Parcel, muted: Boolean) = container.parcels.setMuted(parcel, muted)
 

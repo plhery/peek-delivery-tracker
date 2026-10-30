@@ -5,30 +5,38 @@ import android.view.KeyEvent
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
@@ -46,9 +54,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.layer.GraphicsLayer
@@ -74,7 +85,11 @@ import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
@@ -249,8 +264,9 @@ private const val MIN_PREVIEW = 1f / 3
 private const val BESIDE_SCALE = 0.5f
 
 /**
- * The open menu, the delete it asks about, or the alert of an action that failed, over the whole window where the tab
- * shell is there to draw it ([LocalTabOverlay]), over the list otherwise. Nothing while none is open.
+ * The open menu, the delete it asks about, the rename alert, or the alert of an action that failed, over the whole
+ * window where the tab shell is there to draw it ([LocalTabOverlay]), over the list otherwise. Nothing while none is
+ * open.
  */
 @Composable
 internal fun CardMenuHost(state: DeliveriesState) {
@@ -274,9 +290,14 @@ internal fun CardMenuHost(state: DeliveriesState) {
     val regular = with(LocalDensity.current) { window.width.toDp() >= REGULAR_WIDTH && window.height.toDp() >= REGULAR_HEIGHT }
     val popover = deleting?.fromPage == true && regular
     DeletePopover(state, visible = request == null && deleting != null && popover)
+    // The page's rename alert goes with its page, as the iPhone's goes with the page it stands over.
+    val renaming = state.renaming
+    val unnamed = renaming?.pageId != null && renaming.pageId != state.navigator.navigation.shown
+    LaunchedEffect(unnamed) { if (unnamed) state.cancelRename() }
     val content: (@Composable () -> Unit)? = when {
         request != null -> { { CardMenuOverlay(state, request) } }
         deleting != null && !popover -> { { DeleteConfirmation(state, deleting) } }
+        renaming != null && !unnamed -> { { RenameAlert(state, renaming) } }
         error != null -> { { ActionErrorAlert(state, error) } }
         else -> null
     }
@@ -592,9 +613,35 @@ internal fun keyboardConnected(): Boolean {
 }
 
 /** A delete a menu asks about first: its parcel, and the page whose ••• asked, if one did, whose question stands off it. */
-@Stable
-internal class DeleteRequest(val parcel: Parcel, val pageId: UUID?) {
+@Immutable
+internal data class DeleteRequest(val parcelId: UUID, val pageId: UUID?) {
     val fromPage: Boolean get() = pageId != null
+
+    /** As a window keeps it. */
+    val saved: String get() = savedPrompt(parcelId, pageId)
+
+    companion object {
+        fun from(saved: String): DeleteRequest = promptIds(saved).let { (parcelId, pageId) -> DeleteRequest(parcelId, pageId) }
+    }
+}
+
+/** A parcel being named: from a card's menu, or from the page with `pageId`, which saves the name as one of its changes. */
+@Immutable
+internal data class RenameRequest(val parcelId: UUID, val pageId: UUID?) {
+    /** As a window keeps it. */
+    val saved: String get() = savedPrompt(parcelId, pageId)
+
+    companion object {
+        fun from(saved: String): RenameRequest = promptIds(saved).let { (parcelId, pageId) -> RenameRequest(parcelId, pageId) }
+    }
+}
+
+/** A prompt's parcel and the page that asked, if one did, as a window keeps them: their ids, a space between. */
+private fun savedPrompt(parcelId: UUID, pageId: UUID?): String = listOfNotNull(parcelId, pageId).joinToString(" ")
+
+private fun promptIds(saved: String): Pair<UUID, UUID?> {
+    val ids = saved.split(" ").map(UUID::fromString)
+    return ids[0] to ids.getOrNull(1)
 }
 
 /**
@@ -707,6 +754,100 @@ private fun DeleteQuestion(focus: AccessibilityFocus, delete: () -> Unit) {
     }
 }
 
+/**
+ * `parcelRenameAlert` (B-S10), drawn as iOS draws an alert with a text field: "Edit parcel name", the field holding the
+ * name typed so far, "Parcel" while it is empty, then Cancel and Save name side by side. The field takes the focus and
+ * the keyboard as the alert opens, the cursor after the name, and the keyboard's Done saves, as Return does; the back
+ * gesture cancels. The alert stands in the middle of what the keyboard leaves of the window. TalkBack starts at its
+ * title.
+ */
+@Composable
+private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
+    val localizer = LocalLocalizer.current
+    val type = PeekTheme.type
+    val colors = PeekTheme.colors
+    val heading = remember(request) { AccessibilityFocus() }
+    val focus = remember(request) { FocusRequester() }
+    // The name typed so far, from the window's: a window made again finds it as it was.
+    var field by remember(request) { mutableStateOf(state.renameText.let { TextFieldValue(it, TextRange(it.length)) }) }
+    LaunchedEffect(request) {
+        focus.requestFocus()
+        heading.request()
+    }
+    BackHandler(onBack = state::cancelRename)
+    val title = localizer.text("detail.editTitle")
+    val font = type.style(IosTextStyle.Footnote)
+    Box(
+        Modifier
+            .fillMaxSize()
+            .testTag(RENAME_ALERT)
+            .background(DIM)
+            .pointerInput(Unit) { detectTapGestures { } }
+            .imePadding(),
+        contentAlignment = Alignment.Center,
+    ) {
+        GlassSurface(ContinuousRoundedShape(ALERT_RADIUS), Modifier.width(ALERT_WIDTH).semantics { paneTitle = title }) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    Modifier.padding(start = 16.dp, top = 20.dp, end = 16.dp, bottom = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                ) {
+                    Text(
+                        title, Modifier.accessibilityFocus(heading), color = colors.label, style = type.style(IosTextStyle.Headline).sfLines(),
+                        textAlign = TextAlign.Center,
+                    )
+                    val placeholder = localizer.text("common.parcel")
+                    BasicTextField(
+                        field,
+                        onValueChange = {
+                            field = it
+                            state.renameText = it.text
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag(RENAME_FIELD)
+                            .focusRequester(focus)
+                            .semantics { contentDescription = placeholder },
+                        textStyle = font.copy(color = colors.label),
+                        singleLine = true,
+                        cursorBrush = SolidColor(colors.accent),
+                        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(onDone = { state.saveRename() }),
+                        decorationBox = { text ->
+                            val shape = ContinuousRoundedShape(FIELD_RADIUS)
+                            Box(
+                                Modifier
+                                    .background(if (colors.dark) colors.groupedBackground else colors.secondaryGroupedBackground, shape)
+                                    .border(FIELD_BORDER, colors.divider, shape)
+                                    .padding(horizontal = 6.dp, vertical = 5.dp),
+                                contentAlignment = Alignment.CenterStart,
+                            ) {
+                                if (field.text.isEmpty()) {
+                                    Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = 1)
+                                }
+                                text()
+                            }
+                        },
+                    )
+                }
+                Box(Modifier.fillMaxWidth().height(1.dp).background(colors.separator))
+                Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min)) {
+                    SheetButton(
+                        localizer.text("common.cancel"), bold = true, tag = RENAME_CANCEL, height = 44.dp, modifier = Modifier.weight(1f),
+                        action = state::cancelRename,
+                    )
+                    Box(Modifier.width(1.dp).fillMaxHeight().background(colors.separator))
+                    SheetButton(
+                        localizer.text("detail.saveTitle"), bold = false, tag = RENAME_SAVE, height = 44.dp, modifier = Modifier.weight(1f),
+                        action = state::saveRename,
+                    )
+                }
+            }
+        }
+    }
+}
+
 /** `.alert("native.errorTitle")` with the error's words and Close, as iOS draws an alert. */
 @Composable
 private fun ActionErrorAlert(state: DeliveriesState, message: String) {
@@ -743,17 +884,20 @@ private fun ActionErrorAlert(state: DeliveriesState, message: String) {
 }
 
 @Composable
-private fun SheetButton(title: String, bold: Boolean, tag: String, height: Dp = 56.dp, action: () -> Unit) {
+private fun SheetButton(title: String, bold: Boolean, tag: String, height: Dp = 56.dp, modifier: Modifier = Modifier, action: () -> Unit) {
     val type = PeekTheme.type
     Box(
-        Modifier
+        modifier
             .fillMaxWidth()
             .heightIn(min = height)
             .testTag(tag)
             .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action),
         contentAlignment = Alignment.Center,
     ) {
-        Text(title, color = PeekTheme.colors.accent, style = type.style(IosTextStyle.Body, if (bold) FontWeight.SemiBold else FontWeight.Normal).sfLines())
+        Text(
+            title, Modifier.padding(horizontal = 8.dp), color = PeekTheme.colors.accent,
+            style = type.style(IosTextStyle.Body, if (bold) FontWeight.SemiBold else FontWeight.Normal).sfLines(), textAlign = TextAlign.Center,
+        )
     }
 }
 
@@ -770,6 +914,10 @@ private val SHEET_RADIUS = 14.dp
 private val ALERT_RADIUS = 14.dp
 private val ALERT_WIDTH = 270.dp
 
+/** The rename alert's field, as UIKit draws an alert's: 7-point corners in a hairline. */
+private val FIELD_RADIUS = 7.dp
+private val FIELD_BORDER = 0.5.dp
+
 /** UIKit's action sheet in a popover, as wide as an iPad draws it. */
 private val DELETE_POPOVER_WIDTH = 304.dp
 internal val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 24.dp, y = 8.dp)
@@ -781,6 +929,10 @@ const val DELETE_CONFIRMATION = "deliveries.deleteConfirmation"
 const val DELETE_CONFIRM = "deliveries.deleteConfirmation.delete"
 const val DELETE_CANCEL = "deliveries.deleteConfirmation.cancel"
 const val DELETE_POPOVER = "deliveries.deleteConfirmation.popover"
+const val RENAME_ALERT = "deliveries.renameAlert"
+const val RENAME_FIELD = "deliveries.renameAlert.field"
+const val RENAME_CANCEL = "deliveries.renameAlert.cancel"
+const val RENAME_SAVE = "deliveries.renameAlert.save"
 const val ACTION_ERROR = "deliveries.actionError"
 const val ACTION_ERROR_CLOSE = "deliveries.actionError.close"
 

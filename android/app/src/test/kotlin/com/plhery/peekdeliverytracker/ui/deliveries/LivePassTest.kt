@@ -147,7 +147,7 @@ class LivePassTest {
             CardHost(reduceMotion = false) {
                 LivePassCard(
                     parcel(), atlas(), sample = false, readerLink = readerLink, bell = null, working = false, onMap = { onMap() },
-                    onEditCarrier = {},
+                    onEditCarrier = {}, onRename = {},
                 )
             }
         }
@@ -297,8 +297,8 @@ class LivePassTest {
         node(PAGE_GLOBE).assertContentDescriptionEquals("Open the map")
         node(PAGE_SHARE).assertContentDescriptionEquals("Share this parcel")
         val actions = source.actions.toList()
-        // The carrier editor, the rename and the share sheet come with their steps.
-        for (tag in listOf(PAGE_MARKS, PAGE_NAME, PAGE_SHARE)) {
+        // The carrier editor and the share sheet come with their steps; the name's rename is RenameTest's.
+        for (tag in listOf(PAGE_MARKS, PAGE_SHARE)) {
             node(tag).performClick()
             settle()
         }
@@ -643,7 +643,10 @@ class LivePassTest {
         compose.mainClock.autoAdvance = false
         compose.setContent {
             CardHost(reduceMotion = reduceMotion) {
-                LivePassCard(parcel, WorldAtlases.loadedOrNull(), sample = false, readerLink = false, bell = null, working = false, onMap = {}, onEditCarrier = {})
+                LivePassCard(
+                    parcel, WorldAtlases.loadedOrNull(), sample = false, readerLink = false, bell = null, working = false, onMap = {},
+                    onEditCarrier = {}, onRename = {},
+                )
             }
         }
         var frames = 0

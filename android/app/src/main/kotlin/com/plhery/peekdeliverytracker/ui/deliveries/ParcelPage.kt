@@ -269,6 +269,7 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     LivePassCard(
         parcel, atlas, sample = sample, readerLink = state.source.viewerLink(parcel) != null, bell = bell,
         working = state.pageWorking(pageId), onMap = { state.openMap(pageId, it) }, onEditCarrier = { state.editCarrier(pageId, it) },
+        onRename = { state.renameOnPage(pageId, it) },
     )
 }
 

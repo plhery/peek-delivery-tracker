@@ -134,10 +134,11 @@ fun DeliveriesTab(
     val sampleShown = rememberForLaunch(launch, false)
     val mapCover = rememberForLaunch<String?>(launch, null)
     val views = rememberListViewStates(launch)
+    val prompts = rememberPromptStates(launch)
     val now = LocalNow.current
     val scope = rememberCoroutineScope()
     val state = remember(source, navigator, listState) {
-        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, sampleShown, mapCover, views, now, scope)
+        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, sampleShown, mapCover, views, prompts, now, scope)
     }
     state.localizer = LocalLocalizer.current
     // What the paper and the flights are drawn with, as the list was last drawn.

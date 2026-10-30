@@ -475,15 +475,13 @@ class ParcelPageTest {
     }
 
     @Test
-    fun theOtherItemsDoNothingYet() {
+    fun changeCarrierDoesNothingYet() {
         show()
         open("Birthday gift")
-        for (other in listOf(ParcelMenuItem.Rename, ParcelMenuItem.ChangeCarrier)) {
-            openMenu()
-            choose(other)
-            compose.onNodeWithTag(PAGE_MENU).assertDoesNotExist()
-            compose.onNodeWithTag(PARCEL_PAGE).assertExists()
-        }
+        openMenu()
+        choose(ParcelMenuItem.ChangeCarrier)
+        compose.onNodeWithTag(PAGE_MENU).assertDoesNotExist()
+        compose.onNodeWithTag(PARCEL_PAGE).assertExists()
         assertEquals(emptyList<Any>(), source.archived)
         assertEquals(emptyList<Any>(), source.deleted)
     }

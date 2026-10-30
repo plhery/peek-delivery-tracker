@@ -129,8 +129,8 @@ internal class PassBell(val opensAlerts: Boolean, val mute: (muted: Boolean, sav
  *
  * `atlas` is null until it is read, `sample` is the made-up parcel nothing on can change or share, `readerLink`
  * someone else's parcel followed through its link, and `working` a change being saved, which the bell waits for.
- * `onMap` opens the map, TalkBack going back to the given element once it closes, and `onEditCarrier` the carrier
- * editor, on the carrier a prompt names.
+ * `onMap` opens the map, TalkBack going back to the given element once it closes, `onEditCarrier` the carrier
+ * editor, on the carrier a prompt names, and `onRename` the rename alert, TalkBack going back to the name.
  */
 @Composable
 internal fun LivePassCard(
@@ -142,6 +142,7 @@ internal fun LivePassCard(
     working: Boolean,
     onMap: (AccessibilityFocus?) -> Unit,
     onEditCarrier: (initialCarrier: CarrierId?) -> Unit,
+    onRename: (AccessibilityFocus?) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val localizer = LocalLocalizer.current
@@ -170,6 +171,7 @@ internal fun LivePassCard(
     var headerHeight by remember { mutableFloatStateOf(0f) }
     val metrics = PassRouteMetrics.of(handover = delivery != null, largeText = large, headerHeight = headerHeight.toDouble())
     val globeFocus = remember { AccessibilityFocus() }
+    val nameFocus = remember { AccessibilityFocus() }
     val open by rememberUpdatedState { onMap(globeFocus) }
 
     // A map that keeps clear of the second mark and the buttons waits to know where they stand, rather than moving
@@ -293,7 +295,7 @@ internal fun LivePassCard(
             }
             Row(horizontalArrangement = Arrangement.spacedBy(18.dp), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.weight(1f)) {
-                    // The name is tapped to change it, as the ••• menu's item does: the rename comes with its step.
+                    // The name is tapped to change it, as the ••• menu's item does.
                     Text(
                         parcel.label.ifEmpty { localizer.text("common.parcel") },
                         Modifier
@@ -302,10 +304,10 @@ internal fun LivePassCard(
                                 if (sample) {
                                     Modifier
                                 } else {
-                                    Modifier.clickable(
+                                    Modifier.accessibilityFocus(nameFocus).clickable(
                                         interactionSource = null, indication = PlainPress, role = Role.Button,
                                         onClickLabel = localizer.text("detail.editTitle"),
-                                    ) {}
+                                    ) { onRename(nameFocus) }
                                 },
                             ),
                         color = colors.label,

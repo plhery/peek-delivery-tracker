@@ -88,7 +88,7 @@ class PassNotesScreenshotTest {
     private fun pass(name: String, dark: Boolean = false, parcel: () -> Parcel) = shot(name, dark) {
         LivePassCard(
             parcel(), rememberWorldAtlas(), sample = false, readerLink = false,
-            bell = PassBell(opensAlerts = false) { _, _ -> }, working = false, onMap = {}, onEditCarrier = {},
+            bell = PassBell(opensAlerts = false) { _, _ -> }, working = false, onMap = {}, onEditCarrier = {}, onRename = {},
         )
     }
 

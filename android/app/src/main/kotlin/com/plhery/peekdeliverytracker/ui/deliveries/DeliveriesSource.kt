@@ -12,6 +12,8 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.NativeRoute
+import com.plhery.peekdeliverytracker.core.ParcelShareModel
+import com.plhery.peekdeliverytracker.core.ParcelShareNotes
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
@@ -128,6 +130,21 @@ interface DeliveriesSource {
     /** `store.viewerLink(for:)`: the link someone else's parcel is followed through, which its menu reads. */
     fun viewerLink(parcel: Parcel): String?
 
+    /**
+     * `store.shareClient(for:)`: how the share sheet reaches the parcel's link (reads it, makes it, changes what it
+     * shows, stops it), through the account, the device's own parcels or the demo's made-up links.
+     */
+    fun shareClient(parcel: Parcel): ParcelShareModel.Client
+
+    /** `ParcelShareNotes()`: the words this phone keeps for the links it shares, in its preferences, 60 parcels at most. */
+    val shareNotes: ParcelShareNotes
+
+    /** The site the parcels' links lead to (`ParcelLinkRoute.address`'s `AppConfiguration.current.apiBaseURL`). */
+    val linkBaseUrl: String
+
+    /** The share sheets open, for as long as this process lasts ([ParcelShares]). */
+    val shares: ParcelShares
+
     /** `localizer.errorMessage(error)`. */
     fun errorMessage(error: Throwable): String
 
@@ -225,6 +242,14 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
 
+    override fun shareClient(parcel: Parcel): ParcelShareModel.Client = container.parcels.shareClient(parcel)
+
+    override val shareNotes: ParcelShareNotes by lazy { ParcelShareNotes(container.defaults) }
+
+    override val linkBaseUrl: String get() = container.configuration.apiBaseUrl
+
+    override val shares: ParcelShares get() = SHARES
+
     override fun errorMessage(error: Throwable): String = container.localizer.errorMessage(error)
 
     override fun showWelcome() = container.session.showWelcome()
@@ -245,6 +270,9 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
         /** What this process's pages wait for, for every window it makes, as its launch is. */
         val PAGE_WORK = PageWork()
+
+        /** This process's share sheets, for every window it makes, as its pages' work is. */
+        val SHARES = ParcelShares()
     }
 }
 

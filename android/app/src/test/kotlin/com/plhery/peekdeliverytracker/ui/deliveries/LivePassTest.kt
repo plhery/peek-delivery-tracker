@@ -147,7 +147,7 @@ class LivePassTest {
             CardHost(reduceMotion = false) {
                 LivePassCard(
                     parcel(), atlas(), sample = false, readerLink = readerLink, bell = null, working = false, onMap = { onMap() },
-                    onEditCarrier = { _, _ -> }, onRename = {},
+                    onEditCarrier = { _, _ -> }, onRename = {}, onShare = {},
                 )
             }
         }
@@ -298,8 +298,8 @@ class LivePassTest {
         node(PAGE_GLOBE).assertContentDescriptionEquals("Open the map")
         node(PAGE_SHARE).assertContentDescriptionEquals("Share this parcel")
         val actions = source.actions.toList()
-        // The marks open the carrier editor on the parcel (ChangeCarrierTest's); the share sheet comes with its step,
-        // the name's rename is RenameTest's.
+        // The marks open the carrier editor on the parcel (ChangeCarrierTest's); the share sheet, which opening counts
+        // nothing, is ParcelShareTest's, the name's rename RenameTest's.
         node(PAGE_MARKS).performClick()
         settle()
         assertEquals(gift, deliveries.carrierEditor?.parcelId)
@@ -310,7 +310,7 @@ class LivePassTest {
         settle()
         assertEquals(actions, source.actions)
         assertNull(deliveries.mapCover)
-        assertTrue(exists(PAGE_CONTENT))
+        assertEquals(gift, deliveries.sharing?.parcelId)
     }
 
     /** The demo with Birthday gift handed over to Swiss Post, which delivers it: two marks on its pass. */
@@ -652,7 +652,7 @@ class LivePassTest {
             CardHost(reduceMotion = reduceMotion) {
                 LivePassCard(
                     parcel, WorldAtlases.loadedOrNull(), sample = false, readerLink = false, bell = null, working = false, onMap = {},
-                    onEditCarrier = { _, _ -> }, onRename = {},
+                    onEditCarrier = { _, _ -> }, onRename = {}, onShare = {},
                 )
             }
         }

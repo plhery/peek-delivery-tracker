@@ -9,14 +9,18 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.NotificationPreset
+import com.plhery.peekdeliverytracker.core.ParcelShareModel
+import com.plhery.peekdeliverytracker.core.ParcelShareNotes
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
+import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.time.Instant
 import java.time.ZoneOffset
@@ -39,12 +43,17 @@ import kotlinx.coroutines.launch
  * parcel's check once `checkingParcel` does; a check of every parcel answers `checkResult`, or waits for `checking`
  * when a test holds it. The server refuses the numbers of `refusals`, once `refusing` lets its answer go. The demo is
  * the demo's session. The rating prompt keeps its days in a store of its own, in UTC, and the system's prompt is a
- * fake that notes each step ([reviewCalls]).
+ * fake that notes each step ([reviewCalls]). The parcels' links are the service's (`shareLinks`), and the words kept
+ * for them this device's (`shareDefaults`): both outlast a process, as the service and the device's store do.
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
     session: AuthenticationState = AuthenticationState.Welcome,
     override val launch: UUID = UUID.randomUUID(),
+    val shareLinks: MutableMap<UUID, ParcelShare> = mutableMapOf(),
+    private val shareDefaults: UserDefaults = PreferencesDefaults(
+        ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("share-${UUID.randomUUID()}", Context.MODE_PRIVATE),
+    ),
 ) : DeliveriesSource {
     override val parcels = MutableStateFlow(parcels)
     override val loading = MutableStateFlow(false)
@@ -292,6 +301,58 @@ class FakeDeliveries(
 
     override fun viewerLink(parcel: Parcel): String? = viewerLinks[parcel.id]
 
+    /** Holds each reading of a link, each change and each stop until the test lets it go. */
+    var shareLoading: CompletableDeferred<Unit>? = null
+    var shareSaving: CompletableDeferred<Unit>? = null
+    var shareStopping: CompletableDeferred<Unit>? = null
+
+    /** What reading a link throws, and what changing or stopping one throws, when they fail. */
+    var shareLoadFailure: Exception? = null
+    var shareFailure: Exception? = null
+
+    /** Each link made or changed, with what it was sent, and each link stopped, in their order. */
+    val shareRequests = mutableListOf<Pair<UUID, ParcelShareModel.Settings>>()
+    val shareStops = mutableListOf<UUID>()
+
+    private var linksMade = 0
+
+    /** The service's links, in [shareLinks]: a new one for a parcel that has none, with a made-up id. */
+    override fun shareClient(parcel: Parcel): ParcelShareModel.Client {
+        val id = parcel.id
+        return ParcelShareModel.Client(
+            current = {
+                shareLoading?.await()
+                shareLoadFailure?.let { throw it }
+                shareLinks[id]
+            },
+            share = { settings ->
+                shareSaving?.await()
+                shareFailure?.let { throw it }
+                shareRequests += id to settings
+                val old = shareLinks[id]
+                val link = ParcelShare(
+                    id = old?.id ?: "TestLink%04d".format(++linksMade),
+                    showNumber = settings.showNumber,
+                    gift = settings.gift,
+                    createdAt = old?.createdAt ?: SHARED_AT,
+                    giftWords = settings.giftWords ?: old?.giftWords,
+                )
+                shareLinks[id] = link
+                link
+            },
+            stop = {
+                shareStopping?.await()
+                shareFailure?.let { throw it }
+                shareStops += id
+                shareLinks.remove(id)
+            },
+        )
+    }
+
+    override val shareNotes = ParcelShareNotes(shareDefaults)
+    override val linkBaseUrl = "https://example.com/"
+    override val shares = ParcelShares()
+
     override fun errorMessage(error: Throwable): String = error.message ?: "error"
 
     override fun showWelcome() {
@@ -309,7 +370,7 @@ class FakeDeliveries(
     }
 
     /** The same stores in a process started again, after the system closed the app. */
-    fun newProcess(): FakeDeliveries = FakeDeliveries(parcels.value, session.value)
+    fun newProcess(): FakeDeliveries = FakeDeliveries(parcels.value, session.value, shareLinks = shareLinks, shareDefaults = shareDefaults)
 
     /** What a carrier change sent: the parcel's id, the carrier, the link, the postcode and its country, and a provider's postcode. */
     data class CarrierChangeRequest(
@@ -323,6 +384,7 @@ class FakeDeliveries(
 
     private companion object {
         val ARCHIVED_AT: String = Instant.parse("2026-05-01T09:00:00Z").toString()
+        const val SHARED_AT = "2026-05-01T09:00:00Z"
 
         /** A frame, where no window gives its own. */
         const val FRAME_MILLIS = 16L

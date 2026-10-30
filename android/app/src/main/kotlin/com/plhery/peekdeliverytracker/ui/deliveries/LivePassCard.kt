@@ -135,8 +135,9 @@ internal class PassBell(
  * `atlas` is null until it is read, `sample` is the made-up parcel nothing on can change or share, `readerLink`
  * someone else's parcel followed through its link, and `working` a change being saved, which the bell waits for.
  * `onMap` opens the map, TalkBack going back to the given element once it closes, `onEditCarrier` the carrier
- * editor, on the carrier a prompt names, TalkBack going back to the mark or the button that opened it, and `onRename`
- * the rename alert, TalkBack going back to the name.
+ * editor, on the carrier a prompt names, TalkBack going back to the mark or the button that opened it, `onRename`
+ * the rename alert, TalkBack going back to the name, and `onShare` the share sheet, or the reader link's own share,
+ * TalkBack going back to the share button.
  */
 @Composable
 internal fun LivePassCard(
@@ -149,6 +150,7 @@ internal fun LivePassCard(
     onMap: (AccessibilityFocus?) -> Unit,
     onEditCarrier: (initialCarrier: CarrierId?, focus: AccessibilityFocus?) -> Unit,
     onRename: (AccessibilityFocus?) -> Unit,
+    onShare: (AccessibilityFocus?) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val localizer = LocalLocalizer.current
@@ -180,6 +182,7 @@ internal fun LivePassCard(
     val nameFocus = remember { AccessibilityFocus() }
     val marksFocus = remember { AccessibilityFocus() }
     val neededFocus = remember { AccessibilityFocus() }
+    val shareFocus = remember { AccessibilityFocus() }
     val open by rememberUpdatedState { onMap(globeFocus) }
 
     // A map that keeps clear of the second mark and the buttons waits to know where they stand, rather than moving
@@ -256,8 +259,7 @@ internal fun LivePassCard(
                         }
                     }
                     if (readerLink || !sample) {
-                        // The share sheet, and the reader link's own share, come with their step.
-                        HeaderButton(localizer.text("link.shareAria"), PAGE_SHARE, enabled = true, Modifier, {}) {
+                        HeaderButton(localizer.text("link.shareAria"), PAGE_SHARE, enabled = true, Modifier.accessibilityFocus(shareFocus), { onShare(shareFocus) }) {
                             PeekSymbol("square.and.arrow.up", font = type.fixed(16f), tint = tint)
                         }
                     }

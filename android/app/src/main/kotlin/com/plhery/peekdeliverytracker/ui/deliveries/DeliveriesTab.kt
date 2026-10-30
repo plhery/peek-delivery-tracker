@@ -1,7 +1,9 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Intent
 import android.os.Build
 import android.view.KeyEvent
 import androidx.activity.compose.LocalActivity
@@ -157,6 +159,17 @@ fun DeliveriesTab(
         // From Android 13 the system confirms a copy itself, and the app says nothing more.
         Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
     }
+    // A parcel's link through the system's share sheet (`ShareLink`, `LinkActivitySheet`), which says nothing of what
+    // came of it; false where it couldn't be shown.
+    state.handOut = { address ->
+        val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, address)
+        try {
+            context.startActivity(Intent.createChooser(send, null))
+            true
+        } catch (_: ActivityNotFoundException) {
+            false
+        }
+    }
     // A message under the list has four seconds while it shows, from when it came; a newer one, even in the same
     // words, has its own. Counted here rather than by the list, which a turn of the window draws anew. An archive's
     // Undo counts its seven in the app's scope ([DeliveriesState.archive]).
@@ -267,6 +280,8 @@ fun DeliveriesTab(
         CarrierEditorHost(state)
         // A parcel's alerts, over the whole window where the tab shell draws them.
         ParcelAlertsHost(state)
+        // A parcel's share sheet, a page's or a card's, over the whole window where the tab shell draws it.
+        ParcelShareHost(state)
         // The page's map, over the whole window where the tab shell draws it.
         ParcelMapHost(state)
         // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.

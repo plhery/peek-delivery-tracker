@@ -89,6 +89,7 @@ class PassNotesScreenshotTest {
         LivePassCard(
             parcel(), rememberWorldAtlas(), sample = false, readerLink = false,
             bell = PassBell(opensAlerts = false) { _, _ -> }, working = false, onMap = {}, onEditCarrier = { _, _ -> }, onRename = {},
+            onShare = {},
         )
     }
 

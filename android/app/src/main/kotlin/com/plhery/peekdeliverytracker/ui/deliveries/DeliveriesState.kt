@@ -39,8 +39,10 @@ import com.plhery.peekdeliverytracker.core.DeliveryCardPlace
 import com.plhery.peekdeliverytracker.core.DeliveryListLayout
 import com.plhery.peekdeliverytracker.core.FirstOpenJourney
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.ParcelSectionKind
+import com.plhery.peekdeliverytracker.core.ParcelShareModel
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.core.ParcelStore
@@ -261,8 +263,8 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
 /**
  * What a menu opened over the deliveries that waits for an answer, each held for the launch ([rememberForLaunch]) as
  * the iPhone's `@State` is through a rotation: the delete it asks about, the parcel being named, the carrier editor
- * open and a parcel's alerts open ([DeleteRequest.saved], [RenameRequest.saved], [CarrierEditorRequest.saved],
- * [AlertsRequest.saved]), and the name typed so far.
+ * open, a parcel's alerts open and its share sheet open ([DeleteRequest.saved], [RenameRequest.saved],
+ * [CarrierEditorRequest.saved], [AlertsRequest.saved], [ShareRequest.saved]), and the name typed so far.
  */
 internal class PromptStates(
     val deleting: MutableState<String?>,
@@ -270,6 +272,7 @@ internal class PromptStates(
     val name: MutableState<String>,
     val changingCarrier: MutableState<String?>,
     val alerts: MutableState<String?>,
+    val sharing: MutableState<String?>,
 )
 
 @Composable
@@ -279,6 +282,7 @@ internal fun rememberPromptStates(launch: UUID): PromptStates = PromptStates(
     name = rememberForLaunch(launch, ""),
     changingCarrier = rememberForLaunch<String?>(launch, null),
     alerts = rememberForLaunch<String?>(launch, null),
+    sharing = rememberForLaunch<String?>(launch, null),
 )
 
 /**
@@ -858,7 +862,8 @@ internal class DeliveriesState(
      */
     val modal: Boolean
         get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
-            mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing || alerts != null || alertsClosing
+            mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing || alerts != null || alertsClosing ||
+            sharing != null || sharingClosing
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes
@@ -1004,6 +1009,96 @@ internal class DeliveriesState(
         source.action(if (accepted) "email-offer-accept" else "email-offer-decline")
         source.pageWork.answerEmailOffer(pageId, accepted, source.scope) { source.setEmailOnDelivery(accepted) }
     }
+
+    /**
+     * A parcel's share sheet open over the window (a page's `showingShare`, the list's `prompts.sharing`), kept with the
+     * window: on the parcel of the page that asked, or of a card's menu ([ParcelShareHost]). What it shows and does is
+     * the source's for as long as it is open ([ParcelShares]).
+     */
+    var sharing: ShareRequest?
+        get() = prompts.sharing.value?.let { ShareRequest.from(it) }
+        private set(value) {
+            prompts.sharing.value = value?.saved
+        }
+
+    /** The share sheet has closed and is still on its way down: TalkBack goes back once it has gone. */
+    var sharingClosing: Boolean by mutableStateOf(false)
+        private set
+
+    /**
+     * The parcel a card's menu asked to share, as it was then (`prompts.sharing`): the sheet shows it, even once it has
+     * left the list, until its sheet has gone. A window made again keeps only its id, and holds the parcel it finds by
+     * it from then on.
+     */
+    private var sharingParcel: Parcel? = null
+
+    /**
+     * The parcel the share sheet `request` shows: the page's as it is now (`if let parcel`), none once gone, or the one
+     * the card's menu found.
+     */
+    fun sharedParcel(request: ShareRequest, parcels: List<Parcel>): Parcel? {
+        val pageId = request.pageId
+        if (pageId != null) return pageParcel(pageId, parcels)
+        val parcel = sharingParcel?.takeIf { it.id == request.parcelId } ?: parcels.firstOrNull { it.id == request.parcelId }
+        if (parcel != null) sharingParcel = parcel
+        return parcel
+    }
+
+    /**
+     * The share button of the page with `pageId`'s pass: a parcel followed through someone else's link hands that link
+     * out as it is, through the system's share sheet (`ShareLink(item: ParcelLinkRoute.address(id: readerLink))`),
+     * counting nothing, as ShareLink does; one of the reader's own opens its share sheet (`showingShare = true`).
+     * TalkBack goes back to `focus`, the button, once the sheet has closed.
+     */
+    fun shareOnPage(pageId: UUID, focus: AccessibilityFocus?) {
+        if (modal || navigator.navigation.shown != pageId) return
+        val parcel = menuParcel(pageId) ?: return
+        val readerLink = source.viewerLink(parcel)
+        if (readerLink != null) {
+            handOut(ParcelLinkRoute.address(id = readerLink, baseUrl = source.linkBaseUrl))
+            return
+        }
+        if (focus != null) returnFocus = focus
+        openShare(ShareRequest(UUID.randomUUID(), parcel.id, pageId), parcel)
+    }
+
+    /**
+     * Opens the share sheet of `request` on `parcel` (`ParcelShareSheet(parcel:client:demo:)`): its model, which starts
+     * reading the parcel's link at once (`.task { await model.load() }`), held by the source while the sheet is open.
+     */
+    private fun openShare(request: ShareRequest, parcel: Parcel) {
+        sharing?.let { source.shares.forget(it.id) }
+        sharingParcel = parcel.takeIf { request.pageId == null }
+        sharingClosing = false
+        val model = ParcelShareModel(parcel.id, parcel.label, source.shareClient(parcel), source.shareNotes, source.linkBaseUrl)
+        source.shares.open(request.id, ParcelShareSheetWork(model, demo = source.isDemo, scope = source.scope))
+        sharing = request
+    }
+
+    /**
+     * ✕, a tap outside, the back, a drag down, or its page gone (`dismiss()`): the share sheet closes. Its reading of
+     * the link stops; a switch on its way to the service still gets there, as the iPhone's `Task` does. Its sheet keeps
+     * what it showed as it goes down ([shareClosed]).
+     */
+    fun closeShare() {
+        val request = sharing ?: return
+        source.shares.forget(request.id)
+        sharing = null
+        sharingClosing = true
+    }
+
+    /** The share sheet has gone, and with it the parcel it showed. */
+    fun shareClosed() {
+        if (sharing != null) return
+        sharingClosing = false
+        sharingParcel = null
+    }
+
+    /**
+     * Hands `address` to the system's share sheet (`UIActivityViewController`), the composition's: whether it could be
+     * shown.
+     */
+    var handOut: (address: String) -> Boolean = { false }
 
     /**
      * The carrier editor open over the window (a page's `carrierEditor`, the list's `prompts.changingCarrier`), kept
@@ -1376,14 +1471,15 @@ internal class DeliveriesState(
 
     /**
      * What the ••• menu of the page with `pageId` asked of its parcel (ParcelDetailView's `chose(_:on:)`). The page is
-     * open already. Naming the parcel asks for its new name; changing its carrier opens the carrier editor; the page
-     * shares a parcel from its own button. Copying puts the first number on the clipboard
-     * and says so on its row. Archiving and restoring save the change, then leave the page; deleting asks first. Only
+     * open already. Naming the parcel asks for its new name; changing its carrier opens the carrier editor; sharing it
+     * opens its share sheet, as its pass's button does, where a menu offers it (the iPhone's Mac menu bar; the page's
+     * ••• doesn't). Copying puts the first number on the clipboard and says so on its row. Archiving and restoring save the change, then leave the page; deleting asks first. Only
      * one change of the page's is saved at a time, and an alert over it says why one failed.
      */
     fun choseOnPage(pageId: UUID, item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
-            ParcelMenuItem.Open, ParcelMenuItem.Share -> Unit
+            ParcelMenuItem.Open -> Unit
+            ParcelMenuItem.Share -> if (navigator.navigation.shown == pageId) openShare(ShareRequest(UUID.randomUUID(), parcel.id, pageId), parcel)
             ParcelMenuItem.ChangeCarrier -> editCarrier(pageId)
             ParcelMenuItem.Rename -> rename(parcel, pageId)
             ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(pageId, it) }
@@ -1408,7 +1504,10 @@ internal class DeliveriesState(
         return copy(TrackingNumberCopy.text(entry.number, entry.carrier))
     }
 
-    /** What a card's menu asked of its parcel. Archiving it is the same as swiping it away, Undo and all. */
+    /**
+     * What a card's menu asked of its parcel. Sharing it opens its share sheet on the parcel as the menu found it
+     * (`prompts.sharing = parcel`). Archiving it is the same as swiping it away, Undo and all.
+     */
     fun chose(item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
             ParcelMenuItem.Open -> {
@@ -1417,8 +1516,7 @@ internal class DeliveriesState(
                 navigator.open(parcel.id)
             }
             ParcelMenuItem.Rename -> rename(parcel, pageId = null)
-            // Sharing a parcel opens what comes with its step: the menu offers it, and it does nothing yet.
-            ParcelMenuItem.Share -> Unit
+            ParcelMenuItem.Share -> openShare(ShareRequest(UUID.randomUUID(), parcel.id, pageId = null), parcel)
             ParcelMenuItem.ChangeCarrier ->
                 openCarrierEditor(CarrierEditorRequest(UUID.randomUUID(), parcel.id, pageId = null, initialCarrier = null), parcel)
             ParcelMenuItem.CopyTrackingNumber -> {

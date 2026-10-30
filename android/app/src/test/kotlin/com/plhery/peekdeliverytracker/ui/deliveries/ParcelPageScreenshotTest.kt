@@ -1,0 +1,118 @@
+package com.plhery.peekdeliverytracker.ui.deliveries
+
+import android.view.View
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.screenshot
+import java.util.UUID
+import org.junit.Rule
+import org.junit.Test
+import org.junit.rules.RuleChain
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import org.robolectric.annotation.GraphicsMode
+
+/**
+ * A parcel's page's frame on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), in
+ * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark, its ••• menu open, the
+ * page of a parcel gone, and the page beside the list on a tablet on its side, the history beside the pass. The page
+ * dragged down, under its bar, is ParcelZoomScreenshotTest's.
+ */
+@RunWith(AndroidJUnit4::class)
+@GraphicsMode(GraphicsMode.Mode.NATIVE)
+@Config(qualifiers = CARD_PHONE)
+class ParcelPageScreenshotTest {
+    private val compose = createComposeRule()
+
+    @get:Rule
+    val rules: RuleChain = RuleChain.outerRule(ZurichTime()).around(compose)
+
+    private lateinit var view: View
+    private lateinit var deliveries: DeliveriesState
+
+    /** The demo's list with the window's bars in points: the iPhone's status bar 62 tall and gesture bar 24 by default. */
+    private fun show(dark: Boolean = false, top: Int = 62, bottom: Int = 24) {
+        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        compose.waitsForMaps()
+        compose.setContent {
+            view = LocalView.current
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                Box(Modifier.fillMaxSize().testTag(SHOT)) {
+                    RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
+                }
+            }
+        }
+        compose.waitForIdle()
+        compose.runOnUiThread {
+            val scale = view.resources.displayMetrics.density
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, (top * scale).toInt(), 0, 0))
+                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, (bottom * scale).toInt()))
+                .setVisible(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(), true)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+        compose.waitForIdle()
+    }
+
+    /** Birthday gift's page, landed. */
+    private fun open() {
+        compose.openCard("Birthday gift")
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+    }
+
+    @Test
+    fun thePageAtRest() {
+        show()
+        open()
+        compose.screenshot("page_light")
+    }
+
+    @Test
+    fun thePageAtRestInDark() {
+        show(dark = true)
+        open()
+        compose.screenshot("page_dark")
+    }
+
+    @Test
+    fun theMenuOpen() {
+        show()
+        open()
+        compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.screenshot("page_menu_light")
+    }
+
+    @Test
+    fun aParcelGone() {
+        show()
+        compose.runOnUiThread { deliveries.navigator.open(UUID(0, 1)) }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.screenshot("page_missing_light")
+    }
+
+    /** An iPad on its side, 1376 × 1032: the list beside Birthday gift's page, which has room for the two columns. */
+    @Test
+    @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
+    fun besideTheListOnATablet() {
+        show(top = 24, bottom = 24)
+        open()
+        compose.screenshot("page_tablet_light")
+    }
+}

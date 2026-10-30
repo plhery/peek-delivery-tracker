@@ -293,9 +293,9 @@ internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
             CapsuleShape,
             Modifier.align(Alignment.CenterStart).offset(x = padding.calculateStartPadding(direction) + BAR_MARGIN).size(BAR_BUTTON),
         ) {
-            BarButton(
-                "chevron.left", localized("detail.back"), PAGE_BACK, Modifier.align(Alignment.Center), scale = SymbolScale.Large,
-            ) { navigator.pop(navigator.navigation.path.dropLast(1)) }
+            BarButton("chevron.left", localized("detail.back"), PAGE_BACK, Modifier.align(Alignment.Center)) {
+                navigator.pop(navigator.navigation.path.dropLast(1))
+            }
         }
         if (parcel != null) {
             GlassSurface(
@@ -323,16 +323,12 @@ internal fun PageMenuButton(state: DeliveriesState, parcel: Parcel, modifier: Mo
     }
 }
 
-/** A button of the page's bar: a symbol in the ink, semibold, 44 square. */
+/**
+ * A button of the page's bar, 44 square: a symbol in the ink, semibold at the body's size and at the large image scale,
+ * as the iPhone's bar draws its items (its ‹ 20 points tall, its ••• 4).
+ */
 @Composable
-private fun BarButton(
-    symbol: String,
-    label: String,
-    tag: String,
-    modifier: Modifier,
-    scale: SymbolScale = SymbolScale.Medium,
-    action: () -> Unit,
-) {
+private fun BarButton(symbol: String, label: String, tag: String, modifier: Modifier, action: () -> Unit) {
     Box(
         modifier
             .size(BAR_BUTTON)
@@ -344,7 +340,7 @@ private fun BarButton(
             },
         contentAlignment = Alignment.Center,
     ) {
-        PeekSymbol(symbol, font = PeekTheme.type.style(IosTextStyle.Body, FontWeight.SemiBold), scale = scale, tint = PeekTheme.colors.ink)
+        PeekSymbol(symbol, font = PeekTheme.type.style(IosTextStyle.Body, FontWeight.SemiBold), scale = SymbolScale.Large, tint = PeekTheme.colors.ink)
     }
 }
 

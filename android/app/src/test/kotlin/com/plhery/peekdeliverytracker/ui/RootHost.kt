@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -41,6 +42,7 @@ fun RootHost(
     // The app's scope keeps the test's time, as the composition's effects do.
     val effects = rememberCoroutineScope()
     effects.coroutineContext[ContinuationInterceptor]?.let { shown.dispatcher = it }
+    shown.frameClock = effects.coroutineContext[MonotonicFrameClock]
     SideEffect { shown.session.value = state }
     CompositionLocalProvider(LocalNow provides { CAPTURED }) {
         PeekTheme(

@@ -120,8 +120,8 @@ interface DeliveriesSource {
     val notificationPreferences: StateFlow<NotificationPreferences?>
 
     /**
-     * `store.setEmailOnDelivery(_:)`: switches the account's delivery email on or off, then says whether the store has it
-     * on once saved (`store.deliveryEmail?.isOn`), which [deliveryEmail] may say only a moment later.
+     * `store.setEmailOnDelivery(_:)`: switches the account's delivery email on or off, then, once [deliveryEmail] has
+     * what was saved ([saveEmailOnDelivery]), says whether the store has it on (`store.deliveryEmail?.isOn`).
      */
     suspend fun setEmailOnDelivery(enabled: Boolean): Boolean
 
@@ -220,10 +220,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override val notificationPreferences get() = container.parcels.notificationPreferencesFlow
 
-    override suspend fun setEmailOnDelivery(enabled: Boolean): Boolean {
-        container.parcels.setEmailOnDelivery(enabled)
-        return container.parcels.deliveryEmail?.isOn == true
-    }
+    override suspend fun setEmailOnDelivery(enabled: Boolean): Boolean =
+        saveEmailOnDelivery(container.deliveryEmail, { container.parcels.deliveryEmail }) { container.parcels.setEmailOnDelivery(enabled) }
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
 
@@ -248,6 +246,17 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         /** What this process's pages wait for, for every window it makes, as its launch is. */
         val PAGE_WORK = PageWork()
     }
+}
+
+/**
+ * The delivery email's choice saved (`save`), returning once `shown`, the email the pages read, holds what the store
+ * now has (`stored`), and whether that has it on (`store.deliveryEmail?.isOn`). The app's `shown` follows the store a
+ * frame later; the iPhone sets the store and the offer in one turn (`setEmailOnDelivery`, then `answerEmailOffer`), so
+ * an offer answered never shows open again, its answers back, for the frame before the account's choice reaches it.
+ */
+internal suspend fun saveEmailOnDelivery(shown: StateFlow<DeliveryEmail?>, stored: () -> DeliveryEmail?, save: suspend () -> Unit): Boolean {
+    save()
+    return shown.first { it == stored() }?.isOn == true
 }
 
 /**

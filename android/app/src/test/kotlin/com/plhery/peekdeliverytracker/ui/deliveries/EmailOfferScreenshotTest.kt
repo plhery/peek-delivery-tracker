@@ -16,12 +16,14 @@ import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.screenshot
+import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Rule
 import org.junit.Test
@@ -30,7 +32,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * The delivery email offered on a delivered parcel's page, with the iPhone's bars, the account never having chosen:
+ * The delivery email offered on a delivered parcel's page, with the iPhone's bars, in an account that has never chosen:
  * open, Turn on saving, failed and accepted, light and dark, and open at the largest Android text size. Under Reduce
  * Motion, so the delivered box is at rest: with motion, where it is depends on when its map was made.
  */
@@ -45,18 +47,21 @@ class EmailOfferScreenshotTest {
     private lateinit var deliveries: DeliveriesState
     private lateinit var source: FakeDeliveries
 
+    /** The account shown: the demo has none, and so no delivery email. */
+    private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 9), email = "reader@example.com"))
+
     private val delivered = DemoCards.parcels().first { it.currentStage == TrackingStage.Delivered && it.archivedAt == null }
 
     /** The delivered parcel's page with the window's bars. */
     private fun show(dark: Boolean = false, fontScale: Float = 1f) {
-        source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo).apply { signedInWithEmail(null, address = "reader@example.com") }
+        source = FakeDeliveries(DemoCards.parcels(), reader).apply { signedInWithEmail(null, address = "reader@example.com") }
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = true, source = source, identities = pinnedIdentities)
+                    RootHost(state = reader, dark = dark, reduceMotion = true, source = source, identities = pinnedIdentities)
                 }
             }
         }

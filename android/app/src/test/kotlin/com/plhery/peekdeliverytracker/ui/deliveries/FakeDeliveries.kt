@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.app.Activity
 import android.content.Context
+import androidx.compose.runtime.MonotonicFrameClock
 import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
@@ -25,7 +26,9 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 
 /**
  * The deliveries' stores as a test sets them: its parcels, the session, what loads, and what the list asked of them.
@@ -57,6 +60,9 @@ class FakeDeliveries(
 
     /** Where the app's scope runs: the main thread, or the test's clock, which `RootHost` hands in. */
     var dispatcher: ContinuationInterceptor = Dispatchers.Main.immediate
+
+    /** The frames of the window `RootHost` shows, which the delivery email the pages read follows the store by. */
+    var frameClock: MonotonicFrameClock? = null
 
     override val scope: CoroutineScope get() = CoroutineScope(job + dispatcher)
 
@@ -222,24 +228,37 @@ class FakeDeliveries(
         parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(emailMuted = muted) else it }
     }
 
+    /** The address the account signed in with, which its delivery email names. */
+    private var address: String? = null
+
+    /** `store.deliveryEmail`: what the store has now, which [deliveryEmail] takes a frame after the store changes. */
+    private val storedEmail: DeliveryEmail? get() = DeliveryEmail(isDemo = false, preferences = notificationPreferences.value, address = address)
+
     /**
      * The account signed in as `address`, its preferences on `stages` with the email available, and its delivery email
      * as `choice` says: on, off, or never chosen.
      */
     fun signedInWithEmail(choice: Boolean?, address: String = "reader@example.com", stages: List<NotificationStage> = NotificationPreset.Important.stages) {
-        val preferences = NotificationPreferences(enabledStages = stages, timezone = "Europe/Zurich", emailOnDelivery = choice, emailAvailable = true)
-        notificationPreferences.value = preferences
-        deliveryEmail.value = DeliveryEmail(isDemo = false, preferences = preferences, address = address)
+        this.address = address
+        notificationPreferences.value = NotificationPreferences(enabledStages = stages, timezone = "Europe/Zurich", emailOnDelivery = choice, emailAvailable = true)
+        deliveryEmail.value = storedEmail
     }
 
-    override suspend fun setEmailOnDelivery(enabled: Boolean): Boolean {
+    /**
+     * The choice saved in the store's preferences, which the delivery email the pages read takes on the window's next
+     * frame, as the app's `stateIn` does, and what the app's source makes of that ([saveEmailOnDelivery]).
+     */
+    override suspend fun setEmailOnDelivery(enabled: Boolean): Boolean = saveEmailOnDelivery(deliveryEmail, { storedEmail }) {
         choosing?.await()
         failure?.let { throw it }
         emailChoices += enabled
-        val preferences = notificationPreferences.value?.copy(emailOnDelivery = enabled && !emailRefused) ?: return false
-        notificationPreferences.value = preferences
-        deliveryEmail.value = deliveryEmail.value?.let { DeliveryEmail(isDemo = false, preferences = preferences, address = it.address) }
-        return deliveryEmail.value?.isOn == true
+        val preferences = notificationPreferences.value ?: return@saveEmailOnDelivery
+        notificationPreferences.value = preferences.copy(emailOnDelivery = enabled && !emailRefused)
+        val saved = storedEmail
+        scope.launch {
+            frameClock?.withFrameNanos {} ?: delay(FRAME_MILLIS)
+            deliveryEmail.value = saved
+        }
     }
 
     override suspend fun changeCarrier(
@@ -304,5 +323,8 @@ class FakeDeliveries(
 
     private companion object {
         val ARCHIVED_AT: String = Instant.parse("2026-05-01T09:00:00Z").toString()
+
+        /** A frame, where no window gives its own. */
+        const val FRAME_MILLIS = 16L
     }
 }

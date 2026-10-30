@@ -28,7 +28,16 @@ import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.height
+import androidx.compose.ui.unit.width
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import android.view.accessibility.AccessibilityManager
+import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.test.onRoot
+import com.plhery.peekdeliverytracker.core.AuthUser
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.util.UUID
+import org.robolectric.Shadows.shadowOf
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -63,14 +72,17 @@ class ParcelAlertsTest {
 
     private val gift get() = DemoCards.parcel("Birthday gift").id
 
-    /** The demo's parcels, signed in with the email on unless `prepare` says otherwise, made again by `recreation`. */
+    /** The account the tests sign in with: the demo has none, and so no delivery email. */
+    private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 7), email = "reader@example.com"))
+
+    /** The demo's parcels in an account, its email on unless `prepare` says otherwise, made again by `recreation`. */
     private fun show(fontScale: Float = 1f, recreation: Recreation? = null, prepare: FakeDeliveries.() -> Unit = { signedInWithEmail(true) }) {
-        source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo).apply(prepare)
+        source = FakeDeliveries(DemoCards.parcels(), reader).apply(prepare)
         compose.waitsForMaps()
         val content: @Composable () -> Unit = {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
-                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false)
+                RootHost(state = reader, source = source, reduceMotion = false)
             }
         }
         if (recreation != null) recreation.setContent(content) else compose.setContent(content)
@@ -129,13 +141,22 @@ class ParcelAlertsTest {
 
     @Test
     fun withoutTheAccountsPreferencesTheBellOpensNothing() {
-        show {
-            signedInWithEmail(true)
-            notificationPreferences.value = null
-        }
-        openAlerts()
+        show()
+        compose.openCard("Birthday gift")
+        settle()
+        // The store has let go of the account's preferences (signing out); the email the page reads still says on for
+        // the frame before it follows, so the bell still offers the alerts.
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { source.notificationPreferences.value = null }
+        node(PAGE_BELL).performClick()
+        assertEquals(null, deliveries.alerts)
+        assertFalse(deliveries.modal)
+        compose.runOnUiThread { source.deliveryEmail.value = null }
+        compose.mainClock.autoAdvance = true
+        settle()
         assertFalse(exists(PARCEL_ALERTS))
         assertFalse(deliveries.modal)
+        assertEquals(emptyList<Any>(), source.mutes)
     }
 
     @Test
@@ -247,6 +268,109 @@ class ParcelAlertsTest {
         node(PAGE_BELL).performClick()
         settle()
         assertEquals(listOf(gift to true), source.mutes)
+    }
+
+    /** The gift delivered, as the store would have it once its carrier says so. */
+    private fun deliverTheGift() {
+        compose.runOnUiThread {
+            source.parcels.value = source.parcels.value.map { parcel ->
+                if (parcel.id != gift) parcel else parcel.copy(trackingEvents = parcel.trackingEvents.map { it.copy(stage = TrackingStage.Delivered) })
+            }
+        }
+        settle()
+    }
+
+    @Test
+    fun theSheetClosesItselfOnceTheParcelArrives() {
+        show()
+        openAlerts()
+        deliverTheGift()
+        assertFalse(exists(PARCEL_ALERTS))
+        assertFalse(deliveries.modal)
+        // A delivered parcel's bell mutes it.
+        node(PAGE_BELL).performClick()
+        settle()
+        assertEquals(listOf(gift to true), source.mutes)
+    }
+
+    @Test
+    fun theSheetClosesItselfOnceTheParcelArrivesEvenWhileASwitchSaves() {
+        show()
+        openAlerts()
+        source.muting = CompletableDeferred()
+        flip(PARCEL_ALERTS_EMAIL)
+        node(PARCEL_ALERTS_DONE).performClick()
+        deliverTheGift()
+        assertFalse(exists(PARCEL_ALERTS))
+        assertFalse(deliveries.modal)
+        // The save goes on; what came of it is no longer the sheet's to say.
+        source.failure = IllegalStateException("No connection")
+        source.muting?.complete(Unit)
+        settle()
+        assertFalse(exists(ACTION_ERROR))
+        assertFalse(exists(PARCEL_ALERTS))
+        assertFalse(deliveries.modal)
+    }
+
+    /**
+     * How much smaller the floating sheet draws what it holds: laid out across the window, and drawn scaled into the
+     * panel, whose bounds give positions as drawn and sizes as laid out.
+     */
+    private fun sheetScale(): Float = node(SHEET_PANEL).getUnclippedBoundsInRoot().width / compose.onRoot().getUnclippedBoundsInRoot().width
+
+    @Test
+    fun onAPhoneTheSheetIsAsTallAsWhatItShows() {
+        show()
+        openAlerts()
+        val panel = node(SHEET_PANEL).getUnclippedBoundsInRoot()
+        val content = node(PARCEL_ALERTS).getUnclippedBoundsInRoot()
+        assertEquals(content.top.value, panel.top.value, 1f)
+        assertEquals(panel.height.value, content.height.value * sheetScale(), 1f)
+        // Well short of the large detent.
+        assertTrue("$panel", panel.top > 400.dp)
+    }
+
+    @Test
+    fun talkBackGoesBackToTheBellOnceTheSheetCloses() {
+        show()
+        val root = compose.onRoot().fetchSemanticsNode().root as ViewRootForTest
+        val manager = shadowOf(compose.activity.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread {
+            manager.setEnabled(true)
+            manager.setTouchExplorationEnabled(true)
+            root.forceAccessibilityForTesting(true)
+        }
+        openAlerts()
+        node(PARCEL_ALERTS_DONE).performClick()
+        settle()
+        assertFalse(exists(PARCEL_ALERTS))
+        val bell = node(PAGE_BELL).fetchSemanticsNode().id
+        var focused = false
+        compose.runOnUiThread { focused = root.view.accessibilityNodeProvider.createAccessibilityNodeInfo(bell)?.isAccessibilityFocused == true }
+        assertTrue(focused)
+    }
+
+    /** How far in from the switch row's leading edge its title starts, as laid out. */
+    private fun titleInset(tag: String, title: String): Float {
+        val words = compose.onNode(hasText(title) and hasAnyAncestor(hasTestTag(tag)), useUnmergedTree = true).getUnclippedBoundsInRoot()
+        return (words.left - node(tag).getUnclippedBoundsInRoot().left).value / sheetScale()
+    }
+
+    @Test
+    fun eachSwitchsSymbolStandsBeforeItsWords() {
+        show()
+        openAlerts()
+        // 14 in, the symbol's 22, then 12.
+        assertEquals(48f, titleInset(PARCEL_ALERTS_NOTIFICATIONS, "Notifications"), 1f)
+        assertEquals(48f, titleInset(PARCEL_ALERTS_EMAIL, "Email when it arrives"), 1f)
+    }
+
+    @Test
+    fun atTheAccessibilitySizesTheSwitchesSymbolsAreLeftOut() {
+        show(fontScale = 2f)
+        openAlerts()
+        assertEquals(14f, titleInset(PARCEL_ALERTS_NOTIFICATIONS, "Notifications"), 1f)
+        assertEquals(14f, titleInset(PARCEL_ALERTS_EMAIL, "Email when it arrives"), 1f)
     }
 
     @Test

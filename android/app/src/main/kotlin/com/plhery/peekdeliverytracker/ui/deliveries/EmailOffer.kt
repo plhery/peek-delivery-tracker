@@ -38,9 +38,12 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Constraints
@@ -261,8 +264,10 @@ private fun OfferCard(address: String, phase: EmailOfferPhase, turnOn: () -> Uni
 /**
  * An answer of the offer: its words in subheadline, 14 in from its sides, 44 tall at least, on `ground` with
  * 12-point corners where it has one, giving under the finger. While its answer is saved, its words give their place to
- * a spinner in `spinner`, staying where they are so the button keeps its size (`answer(_:saving:tint:)`), and both
- * answers are disabled meanwhile.
+ * a spinner in `spinner`, staying where they are so the button keeps its size (`answer(_:saving:tint:)`), the two
+ * fading across in the column's 0.2 s on an ease in and out (at once under Reduce Motion), and both answers are
+ * disabled meanwhile. TalkBack then hears the button in progress, not its words, as VoiceOver leaves out a view at
+ * opacity 0.
  */
 @Composable
 private fun OfferButton(
@@ -281,14 +286,32 @@ private fun OfferButton(
         Modifier
             .testTag(tag)
             .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = action)
+            .semantics { if (saving) progressBarRangeInfo = ProgressBarRangeInfo.Indeterminate }
             .then(if (ground != null) Modifier.background(ground, shape) else Modifier)
             .heightIn(min = 44.dp)
             .padding(horizontal = 14.dp),
         contentAlignment = Alignment.Center,
     ) {
-        val words by animateFloatAsState(if (saving) 0f else 1f, if (PeekTheme.reduceMotion) Motion.linear(0.0) else Motion.easeInOut(OFFER_MOTION), label = "answer")
-        Text(label, Modifier.alpha(words), color = ink, style = PeekTheme.type.style(IosTextStyle.Subheadline, weight).sfLines())
-        if (saving) ActivityIndicator(Modifier.wrapContentSize(unbounded = true), size = REGULAR_SPINNER, tint = spinner)
+        val reduceMotion = PeekTheme.reduceMotion
+        val words by animateFloatAsState(if (saving) 0f else 1f, if (reduceMotion) Motion.linear(0.0) else Motion.easeInOut(OFFER_MOTION), label = "answer")
+        Text(
+            label,
+            Modifier.alpha(words).then(if (saving) Modifier.clearAndSetSemantics {} else Modifier),
+            color = ink,
+            style = PeekTheme.type.style(IosTextStyle.Subheadline, weight).sfLines(),
+        )
+        // The button says it is in progress, as the iPhone's reads its `ProgressView`, rather than the spinner apart.
+        val progress = @Composable { ActivityIndicator(Modifier.clearAndSetSemantics {}, size = REGULAR_SPINNER, tint = spinner) }
+        if (reduceMotion) {
+            if (saving) Box(Modifier.wrapContentSize(unbounded = true)) { progress() }
+        } else {
+            AnimatedVisibility(
+                saving,
+                Modifier.wrapContentSize(unbounded = true),
+                enter = fadeIn(Motion.easeInOut(OFFER_MOTION)),
+                exit = fadeOut(Motion.easeInOut(OFFER_MOTION)),
+            ) { progress() }
+        }
     }
 }
 

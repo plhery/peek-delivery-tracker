@@ -130,9 +130,10 @@ export function readCarrierIndex(directory = carriersRoot) {
   return carriers;
 }
 
-/** The mark a question ends with in a language: Greek asks with ";". */
+/** The mark a question ends with in a language: Greek asks with ";", Chinese with the full-width "？". */
 export function questionMark(language) {
-  return language === 'el' ? ';' : '?';
+  if (language === 'el') return ';';
+  return language === 'zh' ? '？' : '?';
 }
 
 /**

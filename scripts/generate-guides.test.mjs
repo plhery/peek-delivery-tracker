@@ -301,3 +301,22 @@ test('a Greek page asks its questions with ";", as Greek does', () => {
   }
   refusesCarriers(greek('?'), /el\.md: "Ερώτηση 1\?" stands among the questions, and ends with ";"/);
 });
+
+test('a Chinese page asks its questions with the full-width "？", as Chinese does', () => {
+  const index = carrierIndex();
+  const carrier = index.find(({ languages }) => !languages.includes('zh'));
+  const chinese = (mark) => ({ list, file }) => {
+    list(index.map((listed) => (listed === carrier ? { ...carrier, languages: [...carrier.languages, 'zh'] } : listed)));
+    const questions = [1, 2, 3].map((number) => `### 问题 ${number}${mark}\n\n回答 ${number}。`);
+    // Chinese is an app language: its page links only carriers with a Chinese page, and none has one here.
+    const english = readFileSync(file(carrier.id, 'en'), 'utf8').replace(/\[([^\]]+)\]\(carrier:[^)]+\)/g, '$1');
+    writeFileSync(file(carrier.id, 'zh'), asking(english.replace(/^slug: .+$/m, 'slug: genzong'), ...questions));
+  };
+  const directory = copyCarriers(chinese('？'));
+  try {
+    assert.ok(readCarriers(directory).find(({ id }) => id === carrier.id).pages.zh);
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
+  refusesCarriers(chinese('?'), /zh\.md: "问题 1\?" stands among the questions, and ends with "？"/);
+});

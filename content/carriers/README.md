@@ -55,7 +55,7 @@ The answer, its first sentence answering the question.
 
 - The page draws its title, its date and a box to track a parcel above the text, and the
   other carriers' pages below it: the text builds none of these.
-- Its last `## ` section is its questions: 3 to 5 `### ` headings, each ending with `?` (`;` in Greek),
+- Its last `## ` section is its questions: 3 to 5 `### ` headings, each ending with `?` (`;` in Greek, `？` in Chinese),
   each answered below it. Search engines are told them as the page's questions and answers.
 - It links another carrier's page by id as `[Planzer](carrier:planzer)`, which leads to
   that page in the page's language. The carrier must have a page in that language; a

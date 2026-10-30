@@ -3274,6 +3274,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "ru": [
     {
+      "id": "helthjem",
+      "catalog": "helthjem",
+      "slug": "helthjem-otslezhivanie",
+      "title": "Отслеживание Helthjem: трек-номер, статусы и пункты выдачи",
+      "name": "Helthjem",
+      "color": "#ffb202"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-germaniya-otslezhivanie",
+      "title": "Отслеживание J&T Express в Германии: статусы и телефон",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "yto-express-otslezhivanie",

@@ -72,7 +72,7 @@ Relevé le 11 octobre 2026, le site de suivi de 4PX donne un seul contact pour t
 
 ## Suivre un colis 4PX avec Peek
 
-[Peek](/) reconnaît d'emblée un numéro `4PX…CN`. Pour un numéro LP terminé par CN, il affiche « Peek demande à 4PX… », puis « 4PX a ce colis. » si 4PX le connaît ; sinon, choisis le transporteur avec « Changer ». Un lien de track.4px.com contenant `#/result/0/` suivi du numéro est lu comme 4PX quel que soit le numéro, ce qui marche aussi pour le numéro du transporteur local. Les commandes en plusieurs colis sont confiées à des services de suivi universels.
+[Peek](/) reconnaît d'emblée un numéro `4PX…CN`. Pour un numéro LP terminé par CN, il affiche « Vérification des services de suivi… », puis « 4PX a ce colis. » si 4PX le connaît ; sinon, choisis le transporteur avec « Changer ». Un lien de track.4px.com contenant `#/result/0/` suivi du numéro est lu comme 4PX quel que soit le numéro, ce qui marche aussi pour le numéro du transporteur local. Les commandes en plusieurs colis sont confiées à des services de suivi universels.
 
 Peek interroge 4PX en anglais et affiche le statut, l'historique avec le lieu de chaque scan sur une carte, l'heure de livraison, le pays de destination et le transporteur local avec son numéro. Quand ce transporteur figure dans sa liste, Peek peut suivre le colis chez lui dès qu'il montre une étape plus récente. `Out for delivery` et `Delivery attempt unsuccessful` s'affichent avec les mots de Peek, les autres lignes telles que 4PX les écrit. 4PX ne donne ni date de livraison prévue, ni détails de point de retrait, ni poids.
 

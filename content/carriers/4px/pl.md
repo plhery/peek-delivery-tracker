@@ -72,7 +72,7 @@ Polskiego numeru, adresu ani biura dla odbiorców 4PX nie podaje. W sprawie zam�
 
 ## Śledzenie paczki 4PX w Peek
 
-[Peek](/) rozpoznaje numer `4PX…CN` od razu. Przy numerze z LP, 13 cyframi i CN pokazuje „Peek pyta: 4PX…”, a potem „4PX ma tę przesyłkę.”, gdy 4PX zna numer; jeśli nie, wybierz przewoźnika przyciskiem „Zmień”. Link z track.4px.com z `#/result/0/` i numerem jest czytany jako 4PX bez względu na numer w środku, więc działa też z numerem „Tracking No.”. Zamówienia z kilkoma paczkami sprawdza w uniwersalnych serwisach śledzenia.
+[Peek](/) rozpoznaje numer `4PX…CN` od razu. Przy numerze z LP, 13 cyframi i CN pokazuje „Sprawdzanie usług śledzenia…”, a potem „4PX ma tę przesyłkę.”, gdy 4PX zna numer; jeśli nie, wybierz przewoźnika przyciskiem „Zmień”. Link z track.4px.com z `#/result/0/` i numerem jest czytany jako 4PX bez względu na numer w środku, więc działa też z numerem „Tracking No.”. Zamówienia z kilkoma paczkami sprawdza w uniwersalnych serwisach śledzenia.
 
 Peek czyta 4PX po angielsku i pokazuje status, historię z miejscem każdego skanu na mapie, godzinę doręczenia, kraj docelowy oraz lokalnego przewoźnika z jego numerem. Gdy ten przewoźnik jest na liście Peek (na przykład USPS), śledzenie przechodzi do niego, gdy tam pojawią się nowsze skany. `Out for delivery` i `Delivery attempt unsuccessful` widzisz w słowach Peek, pozostałe linie tak, jak pisze je 4PX. Przewidywanej daty dostawy, danych punktu odbioru ani wagi przy 4PX tu nie zobaczysz.
 

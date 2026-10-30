@@ -72,7 +72,7 @@ Einen Kontakt für Empfänger in Deutschland, Österreich oder der Schweiz verö
 
 ## 4PX Paket verfolgen mit Peek
 
-[Peek](/) erkennt eine Nummer der Form `4PX…CN` sofort. Bei einer LP-Nummer mit CN am Ende zeigt die App „Peek fragt bei 4PX nach …“ und dann „4PX hat dieses Paket.“, wenn 4PX sie kennt; sonst wählst du den Paketdienst mit „Ändern“. Einen Link von track.4px.com mit `#/result/0/` und der Nummer liest Peek immer als 4PX, egal welche Nummer drinsteht, auch die Sendungsverfolgungsnummer vor Ort. Bestellungen aus mehreren Paketen laufen über universelle Tracking-Dienste.
+[Peek](/) erkennt eine Nummer der Form `4PX…CN` sofort. Bei einer LP-Nummer mit CN am Ende zeigt die App „Trackingdienste werden geprüft…“ und dann „4PX hat dieses Paket.“, wenn 4PX sie kennt; sonst wählst du den Paketdienst mit „Ändern“. Einen Link von track.4px.com mit `#/result/0/` und der Nummer liest Peek immer als 4PX, egal welche Nummer drinsteht, auch die Sendungsverfolgungsnummer vor Ort. Bestellungen aus mehreren Paketen laufen über universelle Tracking-Dienste.
 
 Peek liest 4PX auf Englisch und zeigt den Status, den Verlauf mit dem Ort jedes Scans auf einer Karte, die Zustellzeit, das Zielland und den Paketdienst vor Ort mit seiner Nummer, wenn dieser in Peeks Liste steht. Dann fragt Peek auch ihn und wechselt zu ihm, sobald er neuere Schritte zeigt. `Out for delivery` und `Delivery attempt unsuccessful` erscheinen in Peeks eigenen Worten auf Deutsch, die übrigen Zeilen so, wie 4PX sie schreibt. Ein voraussichtliches Lieferdatum, Angaben zur Abholstelle oder ein Gewicht zeigt Peek bei 4PX nicht.
 

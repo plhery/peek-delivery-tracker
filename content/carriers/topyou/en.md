@@ -20,7 +20,7 @@ TopYou's waybills are TYZR, one letter, ten digits and YQ, 17 characters in all.
 
 Spaces and lower case don't matter when you paste the number into Peek. TopYou's own tracker tells capitals from lower case, so type the number there in capitals. If you can't find it in your order's details, see [how to find your tracking number](guide:find-tracking-number).
 
-**A second number.** TopYou's record can also hold the delivering carrier's own number, which TopYou's tracker shows. The tracker finds the parcel by either number.
+**A second number.** TopYou's record can also hold the delivering carrier's own number, which TopYou's tracker shows.
 
 **No link to share.** TopYou's tracker takes the number in a form only, so no link opens one parcel: copy the number instead.
 
@@ -35,7 +35,6 @@ TopYou writes its scans in English. In the order a parcel gets them:
 | `Arrived at airport of the original country` | At the airport it flies from, before the flight. | "In transit" |
 | `Departed from Airport to destination country` | The flight to your country has left. | "In transit" |
 | `Arrived at destination airport` | Landed in your country. | "In transit" |
-| `Awaiting the import declaration` | Waiting for your country's import customs. | "At customs" |
 | `Departed from customs of` | Your country's customs have released it. TopYou leaves the country after "of" blank, and Peek drops the "of". | "In transit" |
 | `At U.S. Postal Service facility, Accepted by U.S. Postal Service` | In the US: USPS has taken the parcel over from TopYou after the flight. It isn't a new shipment. | "In transit" |
 
@@ -47,24 +46,26 @@ TopYou writes its scans in English. In the order a parcel gets them:
 | `Shipment arrived at a carrier facility` | Moving on from TopYou's first warehouse. The parcel isn't being accepted again. | "In transit" |
 | `Shipment started the customs clearance process at origin` | China's export customs, before the flight. Not your country's import customs. | "At customs" |
 | `Shipment arrived in the destination country` | It has reached your country. | "In transit" |
+| `Shipment started the customs clearance process at destination` | Your country's import customs have it. | "At customs" |
+| `Shipment completed the customs clearance process at destination` | Cleared, and on its way to the delivering carrier. | "In transit" |
 
-**USPS's scans.** For parcels to the United States, TopYou's tracker goes on with USPS's scans in USPS's words, each with its place, such as `Out for delivery, Out for delivery with the U.S. Postal Service` ("Out for delivery" in Peek) and `Delivered, Package delivered by U.S. Postal Service to addressee` ("Delivered").
+**The delivering carrier's scans.** After the hand-over, TopYou's tracker can go on with the delivering carrier's own scans, each with its place: USPS's on a parcel to the United States.
 
 ## Who delivers TopYou parcels
 
-**United States.** USPS takes the parcel over from TopYou's line after the flight, and TopYou's tracker relays its scans up to the delivery. The second number on TopYou's record is then the one [USPS](carrier:usps) tracks it by.
+**United States.** USPS takes the parcel over from TopYou's line after the flight, and TopYou's tracker can go on with its scans. The second number on TopYou's record is then the one [USPS](carrier:usps) tracks it by.
 
 **Elsewhere.** TopYou's record can give the delivering carrier's number, but not its name, and the name of the TopYou line your parcel travels on doesn't tell you either: a line can bear another carrier's name. So ask the seller which company delivers your order.
 
 ## TopYou parcel not arriving or tracking stuck
 
-**Stuck on `Awaiting the import declaration`.** The parcel is waiting for your country's customs. If you're asked for import charges, see [parcels held at customs](guide:customs); if it stays there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
+**Stuck on `Shipment started the customs clearance process at destination`.** Your country's customs have the parcel. If you're asked for import charges, see [parcels held at customs](guide:customs); if it stays there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
 
 **Nothing after `Departed from customs of`.** The delivering carrier should have the parcel. Look for its number on TopYou's tracker, or ask the seller which carrier delivers and under which number. Background in [tracking a parcel from China](guide:tracking-from-china).
 
 **Not found or no scans yet.** TopYou's tracker answers 查询不到 (not found) for a number it doesn't know, and can answer 暂无轨迹信息 (no tracking information yet) for one it knows but hasn't scanned. Peek shows "Waiting for the carrier" for both and keeps checking. Check the number against the seller's message, character by character; if nothing comes after a few days, ask the seller whether the parcel was really sent.
 
-**Delivered, but nothing came.** On a US parcel the delivered scan is USPS's: ask your post office, then tell the seller. More in [delivered but not received](guide:delivered-not-received).
+**Delivered, but nothing came.** On a US parcel USPS delivers: ask your post office, then tell the seller. More in [delivered but not received](guide:delivered-not-received).
 
 **Lost or returned.** The seller booked the parcel with TopYou, so the seller, or the marketplace, is the one to ask for a refund or a new parcel. See [lost parcels](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
 
@@ -76,11 +77,11 @@ As of 28 October 2026, Peek couldn't check TopYou's website, so it lists no cont
 
 [Peek](/) recognises a TopYou number by its shape: TYZR, a letter, ten digits and YQ, which no other carrier in its catalog uses, and asks TopYou's tracker by that number only. If all you have is the delivering carrier's number, paste that instead: Peek follows more than 3,500 carriers.
 
-Peek reads TopYou's own tracker and shows the status, each scan in the words of TopYou or of the carrier it relays, the destination country and the weight on TopYou's record. A place that is only a country is left off TopYou's own scans, so the airport scan in China doesn't look like it's in your country. When TopYou's record marks the parcel delivered or returned, Peek shows "Delivered" or "Returned to sender", even if the last scan's words don't. TopYou's own scans are on Beijing time and the USPS scans it relays on the local clock of their place; Peek shows them all in your device's time zone. There's no expected delivery date: TopYou gives none.
+Peek reads TopYou's own tracker and shows the status, each scan in the words of TopYou or of the carrier it relays, the destination country and the weight on TopYou's record. A place that is only a country is left off TopYou's own scans, so the airport scan in China doesn't look like it's in your country. When TopYou's record marks the parcel delivered or returned, Peek shows "Delivered" or "Returned to sender", even if the last scan's words don't. TopYou's own scans are on Beijing time and the delivering carrier's scans it relays on the local clock of their place; Peek shows them all in your device's time zone. There's no expected delivery date: TopYou gives none.
 
-Until a hand-over, Peek shows the TopYou number only. When TopYou's record holds the delivering carrier's number, Peek tries it with your country's post if it is an international postal number (two letters, nine digits, two letters), or else with the one carrier its layout surely belongs to, as long as Peek reads that carrier's own tracker. Once that carrier shows a scan at least as recent as TopYou's latest, Peek follows the parcel there and shows both numbers, with TopYou's scans kept in the history. A number Peek can't pin to one carrier, such as 20 digits alone, which USPS and others use, isn't tried: Peek stays with TopYou's tracker, which shows USPS's scans on a US parcel anyway.
+Until a hand-over, Peek shows the TopYou number only. When TopYou's record holds the delivering carrier's number, Peek tries it with your country's post if it is an international postal number (two letters, nine digits, two letters), or else with the one carrier its layout surely belongs to, as long as Peek reads that carrier's own tracker. Once that carrier shows a scan at least as recent as TopYou's latest, Peek follows the parcel there and shows both numbers, with TopYou's scans kept in the history. A number Peek can't pin to one carrier, such as 20 digits alone, which USPS and others use, isn't tried: Peek stays with TopYou's tracker, which can show the delivering carrier's scans too.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to the customs lines (`Awaiting the import declaration`, and `Shipment started the customs clearance process at origin` on newer waybills) and the delivery, not to the flight or the customs release. Peek can't contact TopYou or the seller for you.
+Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to the customs lines (`Shipment started the customs clearance process at origin` and `Shipment started the customs clearance process at destination`) and the delivery, not to the flight or the customs release. Peek can't contact TopYou or the seller for you.
 
 ## Questions about TopYou tracking
 
@@ -94,12 +95,12 @@ Because TopYou's tracker writes the destination country next to its own scans, e
 
 ### Who delivers TopYou parcels in my country?
 
-In the United States, USPS, whose scans TopYou's tracker shows. Elsewhere TopYou's record can give the delivering carrier's number but not its name: ask the seller which company delivers.
+In the United States, USPS, which takes the parcel over from TopYou's line after the flight. Elsewhere TopYou's record can give the delivering carrier's number but not its name: ask the seller which company delivers.
 
 ### Who do I contact about a missing TopYou parcel?
 
 The seller you ordered from: it booked the parcel with TopYou. Peek couldn't check TopYou's website for contact details.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, TYZR number shape, capitals on TopYou's tracker, search by either number, no tracking link, scan wordings and their stages, the destination country beside TopYou's own scans, Beijing and local clocks, USPS taking over in the US and its relayed scans, the second number and the line name, unknown numbers and numbers without scans, what Peek shows and how it hands a parcel over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, TYZR number shape, capitals on TopYou's tracker, no tracking link, scan wordings and their stages, the destination country beside TopYou's own scans, Beijing and local clocks, USPS taking over in the US, the delivering carrier's relayed scans, the second number and the line name, unknown numbers and numbers without scans, what Peek shows and how it hands a parcel over
 :::

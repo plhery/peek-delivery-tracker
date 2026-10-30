@@ -83,7 +83,7 @@ A 11 de octubre de 2026, la web de seguimiento de 4PX da un único contacto para
 
 ## Seguir un paquete de 4PX con Peek
 
-[Peek](/) reconoce al momento un número `4PX…CN`. Con un número LP que acaba en CN, verás «preguntando a 4PX…» y luego «4PX tiene este paquete.» si 4PX lo conoce; si no, elige la empresa con «Cambiar». Un enlace de track.4px.com con `#/result/0/` y el número se lee como 4PX sea cual sea el número, así que sirve también para el «N de envio». Los pedidos de varios bultos se siguen con servicios de seguimiento universales.
+[Peek](/) reconoce al momento un número `4PX…CN`. Con un número LP que acaba en CN, verás «Comprobando servicios de seguimiento…» y luego «4PX tiene este paquete.» si 4PX lo conoce; si no, elige la empresa con «Cambiar». Un enlace de track.4px.com con `#/result/0/` y el número se lee como 4PX sea cual sea el número, así que sirve también para el «N de envio». Los pedidos de varios bultos se siguen con servicios de seguimiento universales.
 
 Peek lee 4PX en inglés y muestra el estado, el historial con el lugar de cada escaneo en un mapa, la hora de entrega, el país de destino y, cuando es una empresa de la lista de Peek (USPS, por ejemplo), la empresa local con su número. Entonces puede seguir el paquete con ella en cuanto muestre novedades, aunque no pasa con todos. `Out for delivery` y `Delivery attempt unsuccessful` aparecen con las palabras de Peek; el resto, como lo escribe 4PX. 4PX no da fecha prevista de entrega, datos del punto de recogida ni peso.
 

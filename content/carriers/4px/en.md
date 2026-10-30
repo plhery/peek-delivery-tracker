@@ -72,7 +72,7 @@ As read on 11 October 2026, 4PX's tracking site lists one contact for everyone, 
 
 ## Track a 4PX parcel with Peek
 
-[Peek](/) recognises a `4PX…CN` number straight away. For an LP number ending in CN, the app shows "asking 4PX…" and then "4PX has this parcel." when 4PX knows it; if it doesn't, pick the carrier with "Change". A link from track.4px.com with `#/result/0/` and the number is read as 4PX whatever number it holds, so it works for the local "Tracking No." too. Orders of several packages go to universal tracking services.
+[Peek](/) recognises a `4PX…CN` number straight away. For an LP number ending in CN, the app shows "Checking tracking services…" and then "4PX has this parcel." when 4PX knows it; if it doesn't, pick the carrier with "Change". A link from track.4px.com with `#/result/0/` and the number is read as 4PX whatever number it holds, so it works for the local "Tracking No." too. Orders of several packages go to universal tracking services.
 
 It reads 4PX in English and shows the status, the history with the place of each scan on a map, the delivery time, the destination country and the local carrier with its number. When that carrier is in Peek's list (USPS, for example), the parcel can be followed there once it shows newer progress. `Out for delivery` and `Delivery attempt unsuccessful` appear in Peek's own words; other lines as 4PX writes them. 4PX gives no expected delivery date, pickup point details or weight.
 

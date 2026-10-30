@@ -80,7 +80,7 @@ A 4PX não publica nenhum contacto para quem recebe em Portugal nem noutro país
 
 ## Rastrear encomenda 4PX com o Peek
 
-O [Peek](/) reconhece logo um número `4PX…CN`. Com um número LP terminado em CN, mostra «a consultar 4PX…» e depois «4PX tem esta encomenda.» quando a 4PX o conhece; se não, escolhe tu a transportadora em «Alterar». Uma ligação do track.4px.com com `#/result/0/` e o número é lida como 4PX seja qual for o número, por isso serve também para o número local. As encomendas com vários volumes vão para serviços universais de seguimento.
+O [Peek](/) reconhece logo um número `4PX…CN`. Com um número LP terminado em CN, mostra «A verificar serviços de seguimento…» e depois «4PX tem esta encomenda.» quando a 4PX o conhece; se não, escolhe tu a transportadora em «Alterar». Uma ligação do track.4px.com com `#/result/0/` e o número é lida como 4PX seja qual for o número, por isso serve também para o número local. As encomendas com vários volumes vão para serviços universais de seguimento.
 
 O Peek lê a 4PX em inglês e mostra o estado, o histórico com o local de cada leitura num mapa, a hora de entrega, o país de destino e, quando a reconhece na sua lista (os USPS, por exemplo), a transportadora local com o número dela. A encomenda pode então passar a ser seguida aí, depois de lá aparecerem leituras mais recentes. `Out for delivery` e `Delivery attempt unsuccessful` aparecem com as palavras do Peek; o resto, como a 4PX escreve. O Peek não mostra data de entrega prevista, dados do ponto de levantamento nem peso.
 

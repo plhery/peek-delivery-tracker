@@ -56,7 +56,7 @@ import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
-import { datedAfterCheck, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
+import { datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
 import { carrierMovedAt, eventStage, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { DIRECT_HISTORY, directHistory } from './providerCopies';
@@ -2230,6 +2230,17 @@ export class TrackingSyncService {
         values.carrier_data = {
           ...(isRecord(values.carrier_data) ? values.carrier_data : isRecord(parcel.carrier_data) ? parcel.carrier_data : {}),
           earlier_checked_at: result.earlier_checked_at,
+        };
+      }
+      // Nor does an answer set aside as older keep the words of a scan dated hours after its check: the
+      // saved summary gives way to the newest other stored scan.
+      const lineInstead = olderSnapshot && !keepSaved ? insteadOfAheadLine(parcel.last_status_text, stored, now) : null;
+      if (lineInstead) {
+        values.last_status_text = String(lineInstead.description ?? '').trim() || null;
+        values.carrier_data = {
+          ...(isRecord(values.carrier_data) ? values.carrier_data : isRecord(parcel.carrier_data) ? parcel.carrier_data : {}),
+          last_status_text: values.last_status_text,
+          last_update: new Date(Date.parse(String(lineInstead.occurred_at))).toISOString(),
         };
       }
       const eventsToPersist = keepSaved || (preserveSummary && (result.tracking_provider === 'UPU' || localOnlyFallback)) ? [] : events;

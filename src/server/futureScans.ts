@@ -70,6 +70,23 @@ export function withoutAheadWatermark(time: number, events: readonly JsonObject[
   return time > newest && time <= Math.max(now.getTime(), ...aheadOf) ? newest : time;
 }
 
+/**
+ * The stored scan a saved status line (`line`) gives way to when only scans dated over an hour after their
+ * check tell it: an answer set aside as older keeps the saved summary, and the parcel would keep their words
+ * (a delivery partner's own newest scan older than the earlier carrier's). It is the newest other stored scan;
+ * null when another scan tells the line, or none is stored.
+ */
+export function insteadOfAheadLine(line: unknown, stored: readonly JsonObject[], now: Date): JsonObject | null {
+  const storedAhead = storedAheadOfCheck(stored);
+  const scans = stored.filter((row) => !String(row.provider_event_id ?? '').startsWith('app:')
+    && row.observed_without_provider_timestamp !== true);
+  const ahead = (row: JsonObject) => datedAfterCheck(row.occurred_at, 'UTC', now) || storedAhead.has(scanKey(row.time, row.description));
+  const telling = scans.filter((row) => row.description === line);
+  if (telling.length === 0 || !telling.every(ahead)) return null;
+  return scans.filter((row) => !ahead(row) && Number.isFinite(Date.parse(String(row.occurred_at ?? ''))))
+    .sort((left, right) => Date.parse(String(right.occurred_at)) - Date.parse(String(left.occurred_at)))[0] ?? null;
+}
+
 /** The stored rows dated over an hour after they were first stored, by `scanKey`. */
 export function storedAheadOfCheck(stored: readonly JsonObject[]): Set<string> {
   return new Set(stored.filter((row) => datedAfterCheck(row.occurred_at, 'UTC', new Date(String(row.created_at))))

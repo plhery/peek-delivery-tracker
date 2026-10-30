@@ -769,6 +769,8 @@ status line or stage, then or once its time has passed: the sync stores and flag
 (`future_event_timestamp`) and takes both from the answer's newest other scan
 ([futureScans.ts](../src/server/futureScans.ts)). Nor does it hold the watermark: one it set,
 capped at the check, or at its own time once that has passed, comes back to the newest other scan.
+An answer set aside as older (a delivery partner's own newest scan before the earlier carrier's) keeps
+the saved summary, but not that scan's words: the status line becomes the newest other stored scan's.
 A watermark a provider's summary set is that provider's newest scan,
 which the sync stored, so one past every stored scan comes back to the newest, its copies
 having moved since. The router holds a carrier

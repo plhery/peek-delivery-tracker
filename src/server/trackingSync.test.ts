@@ -965,6 +965,39 @@ describe('status observation collection', () => {
     expect(await check()).toEqual({ stage: 'in_transit', line: departure.description, watermark: '2026-10-30T10:53:06.000Z' });
   });
 
+  it('gives up the line of a scan dated ahead when an answer set aside as older keeps the saved summary', async () => {
+    const store = eventStore();
+    // A delivery partner's notice on the sender's clock, five hours ahead, beside its own earlier scan; the
+    // earlier carrier's departure, stored before, is the parcel's newest scan.
+    const notice = { time: '2026-10-30T18:16:41Z', description: 'Synthetic notice of a handover', stage: 'accepted', provider_code: 'N' };
+    const own = { time: '2026-10-30T09:56:57Z', description: 'Synthetic pre-advice', stage: 'accepted', provider_code: 'P' };
+    store.rows.set('aliexpress:departure', { id: 'row-departure', provider_event_id: 'aliexpress:departure', occurred_at: '2026-10-30T10:53:06Z',
+      stage: 'in_transit', description: 'Synthetic departure', raw_data: { time: '2026-10-30T10:53:06Z' }, created_at: '2026-10-30T11:00:23Z' });
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'accepted', current_stage_source: 'carrier_map',
+      last_status_text: notice.description, last_update: notice.time, events: [notice, own] }),
+    fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+    let now = new Date('2026-10-30T13:21:00Z');
+    const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'ahead', carrier: 'ctt', tracking_number: 'TEST1234', current_stage: 'in_transit',
+      last_status_text: 'Synthetic departure', carrier_data: { routing: { version: 1, last_event_at: '2026-10-30T10:53:06.000Z' } } };
+    const check = async () => {
+      await service.syncPackage({ ...parcel, [STORED_EVENT_IDENTITIES]: store.identities() }, { trigger: 'scheduled' });
+      parcel = { ...parcel, ...store.client.updatePackage.mock.calls.at(-1)![1] };
+      for (const row of store.rows.values()) row.created_at ??= now.toISOString();
+      return { stage: parcel.current_stage, line: parcel.last_status_text,
+        watermark: ((parcel.carrier_data as JsonObject).routing as JsonObject).last_event_at };
+    };
+    expect(await check()).toEqual({ stage: 'in_transit', line: 'Synthetic departure', watermark: '2026-10-30T10:53:06.000Z' });
+    // A summary and watermark the notice set at an earlier check: the partner's answer, older than the
+    // departure, keeps the saved summary but not the notice's words.
+    parcel = { ...parcel, last_status_text: notice.description, carrier_data: { ...parcel.carrier_data as JsonObject,
+      last_status_text: notice.description, last_update: notice.time,
+      routing: { ...(parcel.carrier_data as JsonObject).routing as JsonObject, last_event_at: '2026-10-30T13:50:51.969Z' } } };
+    now = new Date('2026-10-30T22:50:00Z');
+    expect(await check()).toEqual({ stage: 'in_transit', line: 'Synthetic departure', watermark: '2026-10-30T10:53:06.000Z' });
+    expect((parcel.carrier_data as JsonObject).last_update).toBe('2026-10-30T10:53:06.000Z');
+  });
+
   it('closes the wording a carrier map leaves unmapped on purpose once it is recorded', async () => {
     const client = fakeClient();
     const adapter = { fetch: vi.fn().mockResolvedValue({

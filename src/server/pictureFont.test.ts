@@ -126,7 +126,8 @@ describe('the renderer', () => {
     return found;
   }
 
-  it.each([GEIST, GELASIO, NOTO_SANS_SC])('draws every character the reader finds in $name without asking the web', async (face) => {
+  // Thousands of Chinese characters take a busy runner well past the usual 10 s.
+  it.each([GEIST, GELASIO, NOTO_SANS_SC])('draws every character the reader finds in $name without asking the web', { timeout: 60_000 }, async (face) => {
     const text = characters(face);
     expect([...text].length).toBeGreaterThan(600);
     expect(await drawn(text, face, [face])).not.toHaveBeenCalled();

@@ -63,6 +63,7 @@ import androidx.core.view.ViewCompat
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
+import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.ParcelAttention
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.ParcelPageColumns
@@ -73,6 +74,9 @@ import com.plhery.peekdeliverytracker.core.attention
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
 import com.plhery.peekdeliverytracker.core.isArchived
+import com.plhery.peekdeliverytracker.core.quotedWords
+import com.plhery.peekdeliverytracker.core.shipmentFacts
+import com.plhery.peekdeliverytracker.core.waitingAt
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -86,6 +90,7 @@ import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
+import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
@@ -209,19 +214,19 @@ private fun showsHistory(parcel: Parcel): Boolean =
 
 /**
  * `liveParcelPass`: the pass, then what the parcel waits for and what its carrier says, then its numbers, links and
- * details, 12 apart, a line under them where the history stands under the pass (`divided`). TalkBack goes through its
- * parts before it leaves them (`.accessibilityElement(children: .contain)`).
+ * details, then what the page says where no carrier is asked or why the last check failed, 12 apart, a line under them
+ * where the history stands under the pass (`divided`). TalkBack goes through its parts before it leaves them
+ * (`.accessibilityElement(children: .contain)`).
  */
 @Composable
 private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID, divided: Boolean, modifier: Modifier) {
     Column(modifier.semantics { isTraversalGroup = true }, verticalArrangement = Arrangement.spacedBy(PASS_SPACING)) {
         PassHeader(state, parcel, pageId)
         // The delivery email's offer comes with the account's alerts.
-        PickupPoint(parcel)
+        PickupPoint(state, parcel)
         CarrierNotes(state, parcel)
         ShipmentIdentity(parcel)
-        // The shipment's facts, what to do where no carrier is asked, and why the last check failed come with the
-        // shipment's identity.
+        ShipmentDetails(state, parcel, pageId)
         if (divided) Box(Modifier.fillMaxWidth().height(1.dp).background(PeekTheme.colors.separator))
     }
 }
@@ -247,34 +252,75 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     }
     LivePassCard(
         parcel, atlas, sample = sample, readerLink = state.source.viewerLink(parcel) != null, bell = bell,
-        working = state.pageWorking, onMap = { state.openMap(pageId, it) },
+        working = state.pageWorking, onMap = { state.openMap(pageId, it) }, onEditCarrier = { state.editCarrier(pageId, it) },
     )
 }
 
-/** `pickupPointCard`, while the parcel waits at its pickup point. Not ported yet: nothing shows. */
-@Suppress("UNUSED_PARAMETER")
+/**
+ * [PickupPointCard] while the parcel waits at its pickup point ([waitingAt]); afterwards the point is one of its
+ * facts. Its directions and its copy are counted, and the copy puts the point's name and address on the clipboard with
+ * the success tap ([DeliveriesState.copy]).
+ */
 @Composable
-private fun PickupPoint(parcel: Parcel) = Unit
+private fun PickupPoint(state: DeliveriesState, parcel: Parcel) {
+    val point = parcel.waitingAt ?: return
+    val identity = shownCarrierIdentity(parcel, LocalLocalizer.current, LocalLanguage.current) ?: return
+    PickupPointCard(
+        point, identity,
+        onDirections = { state.source.action("parcel-pickup-directions") },
+        onCopy = {
+            state.source.action("parcel-pickup-copy", DeliveryAnalytics.Outcome.Success)
+            state.copy(point.query)
+        },
+        Modifier.testTag(PAGE_PICKUP),
+    )
+}
 
 /**
- * `ParcelQuietNote` while the parcel goes quiet, with a carrier to name: without one the note would say Peek keeps
- * asking an unknown carrier. What the carrier says the parcel waits for comes with the pickup card.
+ * What the carrier says the parcel waits on ([CarrierSaysNote]), where its last scan does ([carrierWaits]) and says
+ * something; then `ParcelQuietNote` while the parcel goes quiet, with a carrier to name: without one the note would
+ * say Peek keeps asking an unknown carrier.
  */
 @Composable
 private fun CarrierNotes(state: DeliveriesState, parcel: Parcel) {
     val now = LocalNow.current()
+    val localizer = LocalLocalizer.current
+    val language = LocalLanguage.current
+    val words = carrierWaits(parcel)?.quotedWords
+    if (words != null) {
+        val carrier = LocalCarrierIdentities.current?.displayName(parcel.activeTrackingCarrier, language)
+        if (carrier != null) CarrierSaysNote(words, carrier, Modifier.testTag(PAGE_CARRIER_SAYS))
+    }
     if (parcel.isArchived || parcel.displayedCarrier == CarrierId.Unknown || parcel.attention(now) != ParcelAttention.Stalled) return
-    val identity = shownCarrierIdentity(parcel, LocalLocalizer.current, LocalLanguage.current) ?: return
+    val identity = shownCarrierIdentity(parcel, localizer, language) ?: return
     ParcelQuietNote(
         parcel, PeekTheme.colors.resolve(identity.ink), onHelp = { state.source.action("parcel-carrier-help") },
         Modifier.testTag(PAGE_QUIET),
     )
 }
 
-/** `shipmentIdentity`: the numbers and the carrier's links, then the details and what a check said. Not ported yet. */
+/** `shipmentIdentity`: the numbers and the carrier's links. Not ported yet. */
 @Suppress("UNUSED_PARAMETER")
 @Composable
 private fun ShipmentIdentity(parcel: Parcel) = Unit
+
+/**
+ * After the numbers, the shipment's facts where the parcel has carrier data ([ShipmentFacts]), then what the page says
+ * where no carrier is asked, or why the last check failed ([TrackingNotes]): its carrier changes open the editor, and
+ * its switch moves the parcel to the carrier its number names, where the parcel is the reader's to change rather than
+ * the sample or followed through someone else's link.
+ */
+@Composable
+private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
+    val localizer = LocalLocalizer.current
+    localizer.shipmentFacts(parcel)?.let { ShipmentFacts(it, Modifier.testTag(PAGE_FACTS)) }
+    val identity = shownCarrierIdentity(parcel, localizer, LocalLanguage.current) ?: return
+    TrackingNotes(
+        parcel, editable = state.sample(pageId) == null && state.source.viewerLink(parcel) == null, working = state.pageWorking,
+        ink = PeekTheme.colors.resolve(identity.ink), onEditCarrier = { state.editCarrier(pageId) },
+        onSwitch = { state.switchCarrierOnPage(pageId, parcel, it) },
+    )
+}
 
 /** The history's column beside the pass, its parts 20 apart. */
 @Composable

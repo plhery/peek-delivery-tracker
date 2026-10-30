@@ -60,6 +60,7 @@ import com.plhery.peekdeliverytracker.core.NonTrackingShape
 import com.plhery.peekdeliverytracker.core.ParcelAttention
 import com.plhery.peekdeliverytracker.core.Rect
 import com.plhery.peekdeliverytracker.core.WorldAtlas
+import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.allAlertsMuted
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -77,6 +78,8 @@ import com.plhery.peekdeliverytracker.core.inputSuggestedPrompt
 import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.likelyCarrierPrompt
 import com.plhery.peekdeliverytracker.core.nonTrackingShape
+import com.plhery.peekdeliverytracker.core.refusedPostcode
+import com.plhery.peekdeliverytracker.core.showsMoreWithPostcode
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -120,12 +123,14 @@ internal class PassBell(val opensAlerts: Boolean, val mute: (muted: Boolean, sav
  *   once drawn (B-AN03, B-AN04), at once under Reduce Motion, and a tap on it opens the map. Decorative: the globe is
  *   TalkBack's way in.
  * - The carrier the app swapped from, and what the parcel's carrier needs (B-S73, B-S74) where it is the reader's to
- *   change. The name, which a tap renames (B-G01), beside the stamp; the sender and who delivers; the status and its
- *   date; that the sender still has it; what the carrier waits on; that the scans are made up; the journey's steps.
+ *   change. The name, which a tap renames (B-G01), beside the stamp; the sender and who delivers; the postcode the
+ *   carrier refused or couldn't check (B-ST09), and that the carrier shows more with one; the status and its date;
+ *   that the sender still has it; what the carrier waits on; that the scans are made up (B-ST11); the journey's steps.
  *
  * `atlas` is null until it is read, `sample` is the made-up parcel nothing on can change or share, `readerLink`
  * someone else's parcel followed through its link, and `working` a change being saved, which the bell waits for.
- * `onMap` opens the map, TalkBack going back to the given element once it closes.
+ * `onMap` opens the map, TalkBack going back to the given element once it closes, and `onEditCarrier` the carrier
+ * editor, on the carrier a prompt names.
  */
 @Composable
 internal fun LivePassCard(
@@ -136,6 +141,7 @@ internal fun LivePassCard(
     bell: PassBell?,
     working: Boolean,
     onMap: (AccessibilityFocus?) -> Unit,
+    onEditCarrier: (initialCarrier: CarrierId?) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val localizer = LocalLocalizer.current
@@ -206,8 +212,7 @@ internal fun LivePassCard(
             val marks = @Composable {
                 val label = listOfNotNull(localizer.text("detail.changeCarrierFrom", mapOf("carrier" to branding.fullName)), deliveryLine)
                     .joinToString(". ")
-                // The carrier editor comes with its step.
-                val change = {}
+                val change = { onEditCarrier(null) }
                 PassMarks(
                     branding, delivery, frames, change.takeIf { editable },
                     Modifier
@@ -275,16 +280,17 @@ internal fun LivePassCard(
                         color = colors.label,
                         style = type.footnote.sfLines(),
                     )
-                    // The carrier editor comes with its step.
                     Text(
                         localizer.text("detail.inputNeededAction"),
-                        Modifier.clickable(interactionSource = null, indication = PlainPress, role = Role.Button) {},
+                        Modifier.clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { onEditCarrier(null) },
                         color = colors.accent,
                         style = type.footnote.sfLines(),
                     )
                 }
             }
-            if (editable) carrierPrompt(parcel, now, localizer, identities, language)?.let { CarrierPrompt(it, ink) }
+            if (editable) {
+                carrierPrompt(parcel, now, localizer, identities, language)?.let { prompt -> CarrierPrompt(prompt, ink) { onEditCarrier(prompt.carrier) } }
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(18.dp), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.weight(1f)) {
                     // The name is tapped to change it, as the ••• menu's item does: the rename comes with its step.
@@ -317,8 +323,27 @@ internal fun LivePassCard(
                     if (deliveryLine != null) Text(deliveryLine, color = secondary, style = type.caption.sfLines())
                 }
             }
-            // The postcode the carrier refused or couldn't check, and the one that would show more, come with the
-            // carrier editor.
+            val active = identities.displayName(parcel.activeTrackingCarrier, language)
+            // The postcode the parcel's carrier refused, or the DPD postcode it couldn't check.
+            val postcode = parcel.refusedPostcode
+                ?: if (parcel.carrierData?.dpdPostcodeVerified == false) parcel.dpdPostcode?.ifEmpty { null } else null
+            if (postcode != null) {
+                PostcodeNote(
+                    localizer.text(
+                        if (parcel.refusedPostcode == null) "detail.postcodeNotVerified" else "detail.postcodeRefused",
+                        mapOf("carrier" to active, "postcode" to postcode),
+                    ),
+                    localizer.text("detail.editPostcode").takeIf { parcel.archivedAt == null && editable },
+                    Modifier.testTag(PAGE_POSTCODE),
+                ) { onEditCarrier(null) }
+            }
+            if (editable && parcel.showsMoreWithPostcode(identities.catalog)) {
+                PostcodeNote(
+                    localizer.text("detail.postcodeShowsMore", mapOf("carrier" to identities.displayName(parcel.carrier, language))),
+                    localizer.text("detail.inputNeededAction"),
+                    Modifier.testTag(PAGE_POSTCODE_MORE),
+                ) { onEditCarrier(null) }
+            }
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(localizer.parcelStatus(parcel), color = ink, style = type.subheadline.sfLines())
                 val date = localizer.parcelCompletionDate(parcel, now) ?: localizer.parcelDeliveryEstimate(parcel, now)
@@ -451,8 +476,11 @@ private fun BellButton(parcel: Parcel, bell: PassBell, working: Boolean, tint: C
     }
 }
 
-/** What the page asks of the parcel's carrier, and the words of the button that answers it, if it has one. */
-internal class CarrierPromptCopy(val text: String, val action: String?)
+/**
+ * What the page asks of the parcel's carrier, the words of the button that answers it, if it has one, and the carrier
+ * the editor that button opens starts on, where it names one.
+ */
+internal class CarrierPromptCopy(val text: String, val action: String?, val carrier: CarrierId? = null)
 
 /**
  * The first of what the page asks of the parcel's carrier: the delivery postcode its carrier, or the one its number
@@ -471,9 +499,10 @@ internal fun carrierPrompt(
         localizer.text(key, mapOf("carrier" to identities.displayName(carrier, language)))
     val action = localizer.text("detail.inputNeededAction")
     parcel.inputNeededPrompt?.let {
-        return CarrierPromptCopy(named(if (it.carrier == parcel.carrier) "detail.carrierInputNeeded" else "detail.inputNeeded", it.carrier), action)
+        val key = if (it.carrier == parcel.carrier) "detail.carrierInputNeeded" else "detail.inputNeeded"
+        return CarrierPromptCopy(named(key, it.carrier), action, it.carrier)
     }
-    parcel.inputSuggestedPrompt?.let { return CarrierPromptCopy(named("detail.inputSuggested", it.carrier), action) }
+    parcel.inputSuggestedPrompt?.let { return CarrierPromptCopy(named("detail.inputSuggested", it.carrier), action, it.carrier) }
     parcel.likelyCarrierPrompt(now)?.let {
         val text = named(if (it.waited) "link.likely.week" else "link.likely.body", it.carrier)
         return CarrierPromptCopy(text, if (it.waited) localizer.text("link.likely.choose") else null)
@@ -488,10 +517,10 @@ internal fun carrierPrompt(
 
 /**
  * What the page asks of the parcel's carrier in footnote, in the card's ink, and the button that answers it, semibold
- * and 44 tall, which gives under the finger. The carrier editor it opens comes with its step.
+ * and 44 tall, which gives under the finger and opens the carrier editor (`action`).
  */
 @Composable
-private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color) {
+private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color, action: () -> Unit) {
     val type = PeekTheme.type
     Column(Modifier.testTag(PAGE_PROMPT).semantics { isTraversalGroup = true }, verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Text(prompt.text, color = tint, style = type.footnote.sfLines())
@@ -499,7 +528,7 @@ private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color) {
             Box(
                 Modifier
                     .heightIn(min = HEADER_BUTTON)
-                    .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) {},
+                    .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = action),
                 contentAlignment = Alignment.CenterStart,
             ) {
                 Text(prompt.action, color = tint, style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines())
@@ -508,8 +537,29 @@ private fun CarrierPrompt(prompt: CarrierPromptCopy, tint: Color) {
     }
 }
 
+/**
+ * What a postcode note says, in caption secondary, and under it, 4 apart, the button that opens the carrier editor
+ * (`action`) in caption semibold, as the iPhone's plain buttons dim while pressed, where it has one.
+ */
+@Composable
+private fun PostcodeNote(text: String, button: String?, modifier: Modifier, action: () -> Unit) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(text, color = colors.secondaryLabel, style = type.caption.sfLines())
+        if (button != null) {
+            Text(
+                button,
+                Modifier.clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action),
+                color = colors.accent,
+                style = type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines(),
+            )
+        }
+    }
+}
+
 /** The scan after which the carrier waits on the reader ([waitsOnReader]), while the parcel isn't archived. */
-private fun carrierWaits(parcel: Parcel): TrackingEvent? =
+internal fun carrierWaits(parcel: Parcel): TrackingEvent? =
     parcel.currentEvent?.takeIf { !parcel.isArchived && it.waitsOnReader() }
 
 /**

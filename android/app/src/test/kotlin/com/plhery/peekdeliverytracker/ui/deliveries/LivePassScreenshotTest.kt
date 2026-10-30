@@ -63,7 +63,7 @@ class LivePassScreenshotTest {
                 Box(Modifier.background(PeekTheme.colors.paper).padding(18.dp)) {
                     LivePassCard(
                         parcel(), rememberWorldAtlas(), sample = false, readerLink = false,
-                        bell = PassBell(opensAlerts = false) { _, _ -> }, working = false, onMap = {},
+                        bell = PassBell(opensAlerts = false) { _, _ -> }, working = false, onMap = {}, onEditCarrier = {},
                     )
                 }
             }

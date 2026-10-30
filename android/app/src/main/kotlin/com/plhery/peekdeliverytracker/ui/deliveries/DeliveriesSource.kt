@@ -6,11 +6,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
+import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -70,6 +72,12 @@ interface DeliveriesSource {
     /** `store.setMuted(_:muted:)`: switches the parcel's notifications off, or back on. Nothing for a guest's parcel. */
     suspend fun setMuted(parcel: Parcel, muted: Boolean)
 
+    /**
+     * `store.changeCarrier(_:carrier:trackingURL: nil, dpdPostcode: nil, dpdPostcodeCountry: nil)`: moves the parcel to
+     * `carrier` as it is, with no link nor postcode, as the page's switch to the carrier its number names does.
+     */
+    suspend fun changeCarrier(parcel: Parcel, carrier: CarrierId)
+
     /** `store.deliveryEmail`, as the account's preferences and the session change: null without one. */
     val deliveryEmail: StateFlow<DeliveryEmail?>
 
@@ -84,7 +92,7 @@ interface DeliveriesSource {
 
     fun view(screen: String)
 
-    fun action(name: String)
+    fun action(name: String, outcome: DeliveryAnalytics.Outcome? = null)
 
     /** When the list asks for a rating (ReviewPrompt): the days used, the bad days and the asks, kept on this phone. */
     val reviewPrompt: ReviewPrompt
@@ -143,6 +151,9 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override suspend fun setMuted(parcel: Parcel, muted: Boolean) = container.parcels.setMuted(parcel, muted)
 
+    override suspend fun changeCarrier(parcel: Parcel, carrier: CarrierId) =
+        container.parcels.changeCarrier(parcel, carrier, trackingUrl = null, dpdPostcode = null, dpdPostcodeCountry = null)
+
     override val deliveryEmail get() = container.deliveryEmail
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
@@ -153,7 +164,7 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override fun view(screen: String) = container.analytics.view(screen)
 
-    override fun action(name: String) = container.analytics.action(name)
+    override fun action(name: String, outcome: DeliveryAnalytics.Outcome?) = container.analytics.action(name, outcome)
 
     override val reviewPrompt get() = container.reviewPrompt
 

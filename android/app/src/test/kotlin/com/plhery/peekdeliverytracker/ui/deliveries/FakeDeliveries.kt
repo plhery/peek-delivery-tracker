@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
+import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.time.Instant
@@ -23,8 +25,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 /**
  * The deliveries' stores as a test sets them: its parcels, the session, what loads, and what the list asked of them.
  * A new process is a new `launch`, and the app's scope outlives every window, on the test's clock once `RootHost` shows
- * them ([dispatcher]). Archiving, restoring, deleting and muting change the parcels as the store does, or fail with
- * `failure`, an archive once `archiving` lets it go when a test holds it, and a mute once `muting` does; a check of
+ * them ([dispatcher]). Archiving, restoring, deleting, muting and changing the carrier change the parcels as the store
+ * does, or fail with `failure`, an archive once `archiving` lets it go when a test holds it, a mute once `muting` does
+ * and a carrier change once `changing` does; a check of
  * every parcel answers `checkResult`, or waits for `checking` when a test holds it. The rating prompt keeps its days in
  * a store of its own, in UTC, and the system's prompt is a fake that notes each step ([reviewCalls]).
  */
@@ -49,9 +52,10 @@ class FakeDeliveries(
 
     override val scope: CoroutineScope get() = CoroutineScope(job + dispatcher)
 
-    /** The screens and actions counted, in their order. */
+    /** The screens and actions counted, in their order, and the outcome each action was counted with. */
     val views = mutableListOf<String>()
     val actions = mutableListOf<String>()
+    val outcomes = mutableListOf<DeliveryAnalytics.Outcome?>()
 
     /** Each screen counted is told here too, as the app tells the tabs' and the list's to one analytics. */
     var onView: (String) -> Unit = {}
@@ -74,11 +78,18 @@ class FakeDeliveries(
     /** Holds each mute until the test lets it go. */
     var muting: CompletableDeferred<Unit>? = null
 
-    /** The parcels archived, restored and deleted, in their order, and each mute asked for with its new setting. */
+    /** Holds each carrier change until the test lets it go. */
+    var changing: CompletableDeferred<Unit>? = null
+
+    /**
+     * The parcels archived, restored and deleted, in their order, each mute asked for with its new setting, and each
+     * carrier change with its carrier.
+     */
     val archived = mutableListOf<UUID>()
     val restored = mutableListOf<UUID>()
     val deleted = mutableListOf<UUID>()
     val mutes = mutableListOf<Pair<UUID, Boolean>>()
+    val carrierChanges = mutableListOf<Pair<UUID, CarrierId>>()
 
     var viewerLinks: Map<UUID, String> = emptyMap()
 
@@ -152,6 +163,13 @@ class FakeDeliveries(
         parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(notificationsMuted = muted) else it }
     }
 
+    override suspend fun changeCarrier(parcel: Parcel, carrier: CarrierId) {
+        changing?.await()
+        failure?.let { throw it }
+        carrierChanges += parcel.id to carrier
+        parcels.value = parcels.value.map { if (it.id == parcel.id) it.copy(carrier = carrier, syncError = null) else it }
+    }
+
     override fun viewerLink(parcel: Parcel): String? = viewerLinks[parcel.id]
 
     override fun errorMessage(error: Throwable): String = error.message ?: "error"
@@ -165,8 +183,9 @@ class FakeDeliveries(
         onView(screen)
     }
 
-    override fun action(name: String) {
+    override fun action(name: String, outcome: DeliveryAnalytics.Outcome?) {
         actions += name
+        outcomes += outcome
     }
 
     /** The same stores in a process started again, after the system closed the app. */

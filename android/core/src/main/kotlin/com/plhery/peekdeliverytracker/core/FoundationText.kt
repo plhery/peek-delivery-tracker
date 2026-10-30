@@ -498,16 +498,37 @@ internal fun foundationKilometres(value: Double, language: AppLanguage): String 
 }
 
 /**
- * A number without its sign as ICU writes it: ∞, NaN, or the shortest decimal that reads back as it rounded half to
- * even to `fractionDigits` ("0.015" is 0.02 although the Double is a little less), its whole digits grouped by
- * three from the language's `groupingFrom`.
+ * `value.formatted(.number.locale(language.locale).precision(.fractionLength(0...fractionDigits)))` from Foundation's
+ * tables: the number as [foundationNumber] writes it in the language's digits, which its plain numbers share with
+ * its money, without the zeros that would end its fraction ("1.2", "2"), after a minus for a negative value.
  */
-private fun foundationNumber(value: Double, fractionDigits: Int, digits: FormatData.Digits): String {
+internal fun foundationDecimal(value: Double, fractionDigits: Int, language: AppLanguage): String {
+    val digits = FormatData.language(language).money
+    val sign = if (value < 0) digits.minus else ""
+    return sign + foundationNumber(value, fractionDigits, digits, fewestFractionDigits = 0)
+}
+
+/**
+ * A number without its sign as ICU writes it: ∞, NaN, or the shortest decimal that reads back as it rounded half to
+ * even to `fractionDigits` ("0.015" is 0.02 although the Double is a little less), the zeros that end its fraction
+ * dropped down to `fewestFractionDigits`, its whole digits grouped by three from the language's `groupingFrom`.
+ */
+private fun foundationNumber(
+    value: Double,
+    fractionDigits: Int,
+    digits: FormatData.Digits,
+    fewestFractionDigits: Int = fractionDigits,
+): String {
     if (value.isNaN()) return "NaN"
     if (value.isInfinite()) return "\u221E"
     val magnitude = abs(value)
     val decimal = if (magnitude == 0.0) BigDecimal.ZERO else shortestDecimal(magnitude)
-    val text = decimal.setScale(fractionDigits, RoundingMode.HALF_EVEN).toPlainString()
+    var rounded = decimal.setScale(fractionDigits, RoundingMode.HALF_EVEN)
+    if (fewestFractionDigits < fractionDigits) {
+        rounded = rounded.stripTrailingZeros()
+        if (rounded.scale() < fewestFractionDigits) rounded = rounded.setScale(fewestFractionDigits)
+    }
+    val text = rounded.toPlainString()
     val whole = text.substringBefore('.')
     val grouped = if (whole.length < digits.groupingFrom) {
         whole
@@ -515,7 +536,8 @@ private fun foundationNumber(value: Double, fractionDigits: Int, digits: FormatD
         val head = (whole.length - 1) % 3 + 1
         (listOf(whole.take(head)) + whole.drop(head).chunked(3)).joinToString(digits.group)
     }
-    return if (fractionDigits > 0) grouped + digits.decimal + text.substringAfter('.') else grouped
+    val fraction = text.substringAfter('.', "")
+    return if (fraction.isNotEmpty()) grouped + digits.decimal + fraction else grouped
 }
 
 // ASCII digits alone, as Swift reads them: `\d` would take any script's.

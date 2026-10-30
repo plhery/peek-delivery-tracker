@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.GraphicsContext
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveredConfetti
 import com.plhery.peekdeliverytracker.core.DeliveredHold
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
@@ -810,6 +811,46 @@ internal class DeliveriesState(
         }
     }
 
+    /**
+     * The carrier editor a button of a parcel's page last asked for ([editCarrier]): null until one has. The editor
+     * comes with its step, and nothing shows it yet.
+     */
+    var carrierEditor: CarrierEditorRequest? by mutableStateOf(null)
+        private set
+
+    /**
+     * Opens the carrier editor on the page with `pageId` (`carrierEditor = CarrierEditorRequest(initialCarrier:)`), on
+     * `initialCarrier` where a prompt names one. The editor comes with its step.
+     */
+    fun editCarrier(pageId: UUID, initialCarrier: CarrierId? = null) {
+        carrierEditor = CarrierEditorRequest(pageId, initialCarrier)
+    }
+
+    /**
+     * The page's switch to the carrier its parcel's number names (`switchCarrier(_:to:)`): one tap moves the parcel to
+     * `carrier` (`store.changeCarrier` in the page's `run`), one change at a time, and an alert says why it failed. A
+     * carrier that needs the postcode opens the editor on it instead.
+     */
+    fun switchCarrierOnPage(pageId: UUID, parcel: Parcel, carrier: CarrierId) {
+        if (CarrierCatalog.shared.requirements(carrier, parcel.trackingNumber).isNotEmpty()) {
+            editCarrier(pageId, carrier)
+            return
+        }
+        if (pageWorking) return
+        pageWorking = true
+        source.scope.launch {
+            try {
+                source.changeCarrier(parcel, carrier)
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                actionError = source.errorMessage(error)
+            } finally {
+                pageWorking = false
+            }
+        }
+    }
+
     /** Where TalkBack goes back to once the filters have closed: their button. */
     val filtersButton = AccessibilityFocus()
 
@@ -1091,6 +1132,13 @@ internal class DeliveriesState(
         listState.scrollToItem(index)
     }
 }
+
+/**
+ * The carrier editor asked for on the page with `pageId`, opening on `initialCarrier` where a prompt names one
+ * (`CarrierEditorRequest`): each request another, as each of the iPhone's has its own id.
+ */
+@Stable
+internal class CarrierEditorRequest(val pageId: UUID, val initialCarrier: CarrierId?)
 
 /**
  * Swift's `<` on the carriers' names: code unit by code unit, near enough to Swift's comparison of their Unicode

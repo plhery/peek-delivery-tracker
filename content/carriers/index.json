@@ -177,5 +177,7 @@
   { "id": "hywl", "catalog": "hywl", "name": "Huiyi Logistics", "languages": ["en"] },
   { "id": "ywe", "catalog": "ywe", "name": "YWE", "languages": ["en"] },
   { "id": "roadie", "catalog": "roadie", "name": "Roadie", "languages": ["en"] },
-  { "id": "ecms-express", "catalog": "ecms-express", "name": "ECMS Express", "languages": ["en"] }
+  { "id": "ecms-express", "catalog": "ecms-express", "name": "ECMS Express", "languages": ["en"] },
+  { "id": "chunghwa-post", "catalog": "chunghwa-post", "name": "Chunghwa Post", "languages": ["en"] },
+  { "id": "raben", "catalog": "raben", "name": "Raben", "languages": ["en"] }
 ]

@@ -1440,6 +1440,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ECMS Express tracking: numbers, scans and who delivers",
       "name": "ECMS Express",
       "color": "#12823d"
+    },
+    {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "chunghwa-post-tracking",
+      "title": "Chunghwa Post (Taiwan Post) tracking: numbers and statuses",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
+    },
+    {
+      "id": "raben",
+      "catalog": "raben",
+      "slug": "raben-tracking",
+      "title": "Raben tracking: shipment number, statuses and delivery",
+      "name": "Raben",
+      "color": "#df0020"
     }
   ],
   "de": [

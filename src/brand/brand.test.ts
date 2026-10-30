@@ -332,6 +332,13 @@ describe('carrier brand', () => {
       'rhenus-it',
       'emons',
       'noerpel',
+      'super-parcel-track',
+      'ural-express',
+      'onex',
+      'gcx',
+      'tusou',
+      'wise-express',
+      'rhenus-de',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

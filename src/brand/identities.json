@@ -1087,6 +1087,9 @@
   "gati": {
     "decal": "gati"
   },
+  "gcx": {
+    "decal": "gcx"
+  },
   "gdex": {
     "decal": "gdex"
   },
@@ -1915,6 +1918,9 @@
   "one-world-express": {
     "decal": "one-world-express"
   },
+  "onex": {
+    "decal": "onex"
+  },
   "ontrac": {
     "decal": "ontrac"
   },
@@ -2280,6 +2286,9 @@
   "relais-colis": {
     "decal": "relais-colis"
   },
+  "rhenus-de": {
+    "decal": "rhenus-de"
+  },
   "rhenus-it": {
     "decal": "rhenus-it"
   },
@@ -2587,6 +2596,9 @@
   "sunyou": {
     "decal": "sunyou"
   },
+  "super-parcel-track": {
+    "decal": "super-parcel-track"
+  },
   "surat-kargo": {
     "decal": "surat-kargo"
   },
@@ -2786,6 +2798,9 @@
   "tusk-logistics": {
     "decal": "tusk-logistics"
   },
+  "tusou": {
+    "decal": "tusou"
+  },
   "tws-express": {
     "decal": "tws-express",
     "palette": {
@@ -2831,6 +2846,9 @@
       "accent": "#f5c86b"
     },
     "decal": "ups"
+  },
+  "ural-express": {
+    "decal": "ural-express"
   },
   "urbano": {
     "decal": "urbano"
@@ -2928,6 +2946,9 @@
   },
   "winit": {
     "decal": "winit"
+  },
+  "wise-express": {
+    "decal": "wise-express"
   },
   "wizmo": {
     "decal": "wizmo"

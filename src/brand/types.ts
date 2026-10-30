@@ -256,7 +256,14 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'transnatur'
   | 'rhenus-it'
   | 'emons'
-  | 'noerpel';
+  | 'noerpel'
+  | 'super-parcel-track'
+  | 'ural-express'
+  | 'onex'
+  | 'gcx'
+  | 'tusou'
+  | 'wise-express'
+  | 'rhenus-de';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

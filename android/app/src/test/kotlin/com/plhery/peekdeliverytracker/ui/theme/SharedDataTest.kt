@@ -12,6 +12,8 @@ import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -58,6 +60,24 @@ class SharedDataTest {
         assertEquals("DHL", dhl.name)
         assertEquals("dhl", dhl.decal)
         assertTrue(identities.of(CarrierId("c3x"), AppLanguage.En).decal == "c3x")
+    }
+
+    /**
+     * A window made again (a rotation, a change of theme) draws the liveries from its first frame, as the iPhone's views
+     * live on through those, rather than without the carriers for a frame.
+     */
+    @Test
+    fun aWindowMadeAgainHasTheLiveriesFromItsFirstFrame() {
+        val catalog = CarrierCatalog(SharedResources.text("CarrierCatalog.json").encodeToByteArray())
+        val loaded = runBlocking { CarrierIdentities.load(catalog) }
+        assertSame(loaded, runBlocking { CarrierIdentities.load(catalog) })
+        val frames = mutableListOf<CarrierIdentities?>()
+        compose.setContent { frames += rememberCarrierIdentities(catalog) }
+        compose.waitForIdle()
+        assertSame(loaded, frames.first())
+        assertTrue(frames.all { it === loaded })
+        // Another catalog's are its own.
+        assertNull(CarrierIdentities.loaded(CarrierCatalog(SharedResources.text("CarrierCatalog.json").encodeToByteArray())))
     }
 
     @Test

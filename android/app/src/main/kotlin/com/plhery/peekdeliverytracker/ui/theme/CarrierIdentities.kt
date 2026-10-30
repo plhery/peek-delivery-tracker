@@ -9,6 +9,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.CarrierBrandAssets
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.CarrierDefinition
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -35,11 +36,29 @@ class CarrierIdentities private constructor(val catalog: CarrierCatalog) {
     fun displayName(carrier: CarrierId, language: AppLanguage): String = catalog.info(carrier, language).displayName
 
     companion object {
-        /** Decodes the brand data on the IO dispatcher, or finds it decoded already, for the liveries of `catalog`. */
-        suspend fun load(catalog: CarrierCatalog): CarrierIdentities = withContext(Dispatchers.IO) {
-            CarrierBrandAssets.shared
-            CarrierIdentities(catalog)
-        }
+        /** The identities last made, with the catalog's definitions they were made for. */
+        @Volatile
+        private var last: Made? = null
+
+        private class Made(val definitions: Map<CarrierId, CarrierDefinition>, val identities: CarrierIdentities)
+
+        /**
+         * The identities made already for `catalog` as it stands, or null. A window made again (a rotation, a change of
+         * theme) draws them from its first frame, as the iPhone's views live on through those, rather than without the
+         * carriers for a frame, which takes a page's place back to its top.
+         */
+        fun loaded(catalog: CarrierCatalog, definitions: Map<CarrierId, CarrierDefinition> = catalog.definitions): CarrierIdentities? =
+            last?.takeIf { it.identities.catalog === catalog && it.definitions === definitions }?.identities
+
+        /**
+         * Decodes the brand data on the IO dispatcher, or finds it decoded already, for the liveries of `catalog` as it
+         * stands (`definitions`); the same identities while those haven't changed.
+         */
+        suspend fun load(catalog: CarrierCatalog, definitions: Map<CarrierId, CarrierDefinition> = catalog.definitions): CarrierIdentities =
+            loaded(catalog, definitions) ?: withContext(Dispatchers.IO) {
+                CarrierBrandAssets.shared
+                CarrierIdentities(catalog)
+            }.also { last = Made(definitions, it) }
     }
 }
 
@@ -48,13 +67,13 @@ val LocalCarrierIdentities = staticCompositionLocalOf<CarrierIdentities?> { null
 
 /**
  * The identities of the app's catalog (AppContainer's, null until it is read), made again as it refreshes; null until
- * there is a catalog and Brand.json has been read.
+ * there is a catalog and Brand.json has been read, which a window made again finds done.
  */
 @Composable
 fun rememberCarrierIdentities(catalog: CarrierCatalog?): CarrierIdentities? {
-    val identities by produceState<CarrierIdentities?>(null, catalog) {
+    val identities by produceState(catalog?.let { CarrierIdentities.loaded(it) }, catalog) {
         if (catalog == null) return@produceState
-        catalog.definitionsFlow.collect { value = CarrierIdentities.load(catalog) }
+        catalog.definitionsFlow.collect { value = CarrierIdentities.load(catalog, it) }
     }
     return identities
 }

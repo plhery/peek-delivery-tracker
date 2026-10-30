@@ -1153,6 +1153,36 @@ describe('scans a carrier and a universal provider both report', () => {
       const fewer = [copies[0]!, { ...copies[1]!, description: "Colis retardé à l'agence" }];
       expect(pairs(sharedScans(scans, fewer).reused)).toEqual([['chronopost:moving', 'unknown:moving']]);
     });
+
+    // ParcelsApp gives two Austrian Post scans of one minute in English, dated to that minute.
+    const tied = (id: string, description: string, order: number, stage = 'in_transit') => {
+      const copy = scan(id, '2026-01-24T05:18:00.000Z', description, stage);
+      return { ...copy, raw_data: { ...copy.raw_data, tie_order: order } };
+    };
+    const english = [tied('unknown:transit', 'Package in transit', 0), tied('unknown:arrived', 'Accepted in the destination country', 1)];
+    const german = [row('austrian-post:arrived', '2026-01-24T05:18:09+00:00', 'Sendung im Zielland angekommen', 'in_transit'),
+      row('austrian-post:transit', '2026-01-24T05:18:11+00:00', 'Sendung in Zustellung an Partner', 'in_transit')];
+
+    it('pair as many scans of one source with them from the oldest when each pair\'s stages agree', () => {
+      expect(pairs(sharedScans(english, german).skipped))
+        .toEqual([['unknown:arrived', 'austrian-post:transit'], ['unknown:transit', 'austrian-post:arrived']]);
+      // The carrier's scans take over the copies stored first.
+      const carrier = german.map((own) => scan(String(own.provider_event_id), String(own.occurred_at), own.description, own.stage));
+      expect(pairs(sharedScans(carrier, english.map((copy) => ({ ...row(copy.provider_event_id, '2026-01-24T05:18:00+00:00', copy.description, copy.stage), raw_data: copy.raw_data }))).reused))
+        .toEqual([['austrian-post:arrived', 'unknown:transit'], ['austrian-post:transit', 'unknown:arrived']]);
+      // Scans of one instant pair by delivery progress first.
+      const progress = [tied('unknown:accepted', 'Accepted', 1, 'accepted'), tied('unknown:moving', 'Moving', 0)];
+      const rows = [{ ...german[0]!, stage: 'accepted' }, german[1]!];
+      expect(pairs(sharedScans(progress, rows).skipped))
+        .toEqual([['unknown:accepted', 'austrian-post:arrived'], ['unknown:moving', 'austrian-post:transit']]);
+    });
+
+    it('stay unmatched in pairs whose stages disagree, or with fewer or more scans than rows', () => {
+      const backwards = [{ ...german[0]!, stage: 'out_for_delivery' }, { ...german[1]!, stage: 'accepted' }];
+      expect(sharedScans([tied('unknown:accepted', 'Accepted', 0, 'accepted'), tied('unknown:out', 'Out for delivery', 1, 'out_for_delivery')], backwards).skipped.size).toBe(0);
+      expect(sharedScans([english[0]!], german).skipped.size).toBe(0);
+      expect(sharedScans([...english, tied('unknown:again', 'Item processed', 2)], german).skipped.size).toBe(0);
+    });
   });
 
   it('keeps every scan a carrier repeats in a minute, and an earlier carrier\'s relay of a delivery scan', () => {

@@ -61,6 +61,7 @@ import { createHash } from 'node:crypto';
 import { DateTime, FixedOffsetZone } from 'luxon';
 import { eventTimestamp, sameInstantIdentityPolicy, trackingPlace, type SameInstantIdentityPolicy, type SameInstantScan } from 'universal-parcel-scraper/app';
 import { locatePlace } from 'universal-parcel-scraper/places';
+import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { isRecord, type JsonObject } from './types';
 
 /**
@@ -864,7 +865,10 @@ export function rewordedScans(
  * several rows in other wording there, the one whose wording opens with every
  * word of the scan's, or the scan's with every word of its, is the match
  * (ParcelsApp dates two Chronopost scans to one minute, and adds the reason
- * after "Colis retardé durant l'acheminement"). Failing that, the same wording matches a
+ * after "Colis retardé durant l'acheminement"). When none does, as many new
+ * scans of one source (and provider) as such rows pair with them from the
+ * oldest, if each pair's stages agree (ParcelsApp's English copies of two
+ * Austrian Post scans of one minute). Failing that, the same wording matches a
  * whole number of quarter hours up to 14 h away: the same scan read in the
  * wrong zone, a copy compared to the minute of a carrier's scan in whole
  * minutes (17TRACK's seconds on USPS's minute). Failing that, a carrier's row for a universal scan, or a
@@ -986,6 +990,45 @@ export function sharedScans(
     && !observedOnly(row)), carrierHeld);
   const readsClock = (copy: JsonObject, scan: JsonObject) => providerOf(copy) !== '' && readsWallClock(copy, scan)
     && (readers.has(providerOf(copy)) || opensAlike(copy, scan));
+  /**
+   * The rows another source wrote in a scan's minute that may hold it in other wording, and any stage: a
+   * provider's copy and a carrier's scan, one of them to the minute, or both in one second (ParcelsApp's whole
+   * second of CTT Express's milliseconds), with no row at the scan's own instant. An earlier carrier's relay
+   * of a delivery scan (India Post's to the minute, Nova Poshta's) is no such pair.
+   */
+  const restagedOf = (event: JsonObject): JsonObject[] => {
+    const universal = sourceOf(identity(event)) === UNIVERSAL;
+    const at = instantOf(event);
+    if (stageOf(event) === '' || occupied.has(at)) return [];
+    return rows.filter((row) => {
+      if ((sourceOf(identity(row)) === UNIVERSAL) === universal || !sameTruncated(at, instantOf(row))
+        || shown.has(instantOf(row)) || placesApart(event, row)) return false;
+      const [copy, own] = universal ? [event, row] : [row, event];
+      const second = (at: number) => Math.floor(at / 1_000);
+      return instantOf(copy) % MINUTE_MS === 0 || (sourceOf(identity(own)) !== relaying
+        && (instantOf(own) % MINUTE_MS === 0 || second(instantOf(copy)) === second(instantOf(own))));
+    });
+  };
+  /**
+   * Of several such rows in none of the scans' words, the one in the scan's place when the new scans of its
+   * source (and provider) that the same rows could hold are as many, both taken from the oldest, and the stages
+   * of each pair agree: ParcelsApp's English copies of two Austrian Post scans of one minute, dated to that minute.
+   */
+  const inOrder = (event: JsonObject, candidates: readonly JsonObject[]): JsonObject | undefined => {
+    const peers = pending.filter((scan) => {
+      if (sourceOf(identity(scan)) !== sourceOf(identity(event)) || providerOf(scan) !== providerOf(event)) return false;
+      const theirs = restagedOf(scan);
+      return theirs.length === candidates.length && theirs.every((row) => candidates.includes(row));
+    });
+    if (peers.length !== candidates.length || peers.some((scan) => candidates.some((row) => (
+      sameWording(wordingOf(scan), wordingOf(row)) || opensAlike(scan, row))))) return undefined;
+    const tie = (row: JsonObject) => tieOrder(row.tie_order ?? (isRecord(row.raw_data) ? row.raw_data.tie_order : undefined));
+    const oldestFirst = (list: readonly JsonObject[]) => [...list].sort((left, right) => instantOf(left) - instantOf(right)
+      || EVENT_STAGE_ORDER.indexOf(stageOf(left)) - EVENT_STAGE_ORDER.indexOf(stageOf(right))
+      || tie(left) - tie(right) || identity(left).localeCompare(identity(right)));
+    const [scans, ordered] = [oldestFirst(peers), oldestFirst(candidates)];
+    return scans.every((scan, index) => stagesAgree(stageOf(scan), stageOf(ordered[index]!))) ? ordered[scans.indexOf(event)] : undefined;
+  };
   /** The row a scan repeats; `alone` when no other new scan stands at its instant. */
   const matchOf = (event: JsonObject, alone: boolean): JsonObject | undefined => {
     const universal = sourceOf(identity(event)) === UNIVERSAL;
@@ -996,16 +1039,7 @@ export function sharedScans(
     const worded = exact.filter((row) => sameWording(wordingOf(row), wording));
     const truncated = occupied.has(at) ? [] : eligible.filter((row) => sameTruncated(at, instantOf(row)) && !shown.has(instantOf(row)));
     const minuted = truncated.filter((row) => sameWording(wordingOf(row), wording));
-    // Other wording, and any stage, only for a provider's copy and a carrier's scan, one of them to the minute,
-    // or both in one second (ParcelsApp's whole second of CTT Express's milliseconds).
-    // An earlier carrier's relay of a delivery scan (India Post's to the minute, Nova Poshta's) is no such pair.
-    const restaged = stageOf(event) === '' ? [] : truncated.filter((row) => {
-      if ((sourceOf(identity(row)) === UNIVERSAL) === universal || placesApart(event, row)) return false;
-      const [copy, own] = universal ? [event, row] : [row, event];
-      const second = (at: number) => Math.floor(at / 1_000);
-      return instantOf(copy) % MINUTE_MS === 0 || (sourceOf(identity(own)) !== relaying
-        && (instantOf(own) % MINUTE_MS === 0 || second(instantOf(copy)) === second(instantOf(own))));
-    });
+    const restaged = restagedOf(event);
     const apart = occupied.has(at) ? [] : eligible.filter((row) => !shown.has(instantOf(row)) && !placesApart(event, row));
     const zoned = apart.filter((row) => zoneApart(at, instantOf(row)));
     const paired = (row: JsonObject) => (sourceOf(identity(row)) === UNIVERSAL) !== universal;
@@ -1020,7 +1054,7 @@ export function sharedScans(
     return worded.length === 1 ? worded[0]
       : worded.length === 0 && staged ? exact[0]
         : minuted.length > 0 ? (minuted.length === 1 ? minuted[0] : undefined)
-          : restaged.length > 0 ? (restaged.length === 1 ? restaged[0] : openingAlike(event, restaged))
+          : restaged.length > 0 ? (restaged.length === 1 ? restaged[0] : openingAlike(event, restaged) ?? inOrder(event, restaged))
             : shifted.length === 1 ? shifted[0]
               : shifted.length === 0 && reclocked.length === 1 ? reclocked[0]
                 : shifted.length + reclocked.length === 0 && clocked.length === 1 ? clocked[0] : undefined;

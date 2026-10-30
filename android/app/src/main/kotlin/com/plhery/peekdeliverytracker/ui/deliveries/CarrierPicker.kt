@@ -101,6 +101,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.offset
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierPickerSearch
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
@@ -128,10 +129,13 @@ import com.plhery.peekdeliverytracker.ui.sheet.TITLE_GAP
 import com.plhery.peekdeliverytracker.ui.sheet.drawFormRows
 import com.plhery.peekdeliverytracker.ui.sheet.drawFormSeparator
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
+import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
@@ -162,7 +166,7 @@ internal data class CarrierPickerAutomatic(val description: String, val recommen
  * (`.searchable(placement: .navigationBarDrawer(displayMode: .always))`): while it holds a query, the list is the
  * matches under their count, best first and the matched part marked, or says none matches, and the rail goes. From the
  * field's first focus the search is on, as UISearchController's `isActive`: the bar goes up out of the way, the field
- * taking its place, and Cancel shows beside the field, which empties it, puts the keyboard away and ends the search, as
+ * taking its place, and a ✕ shows beside the field, which empties it, puts the keyboard away and ends the search, as
  * the system's back does meanwhile. With the keyboard up, the list's foot and the rail end above it. A choice goes to
  * [onSelect], then the picker is left ([onLeave]), as `choose` dismisses it. The query, the sections it opened with,
  * whether the search is on and the place in the list stay through a window made again.
@@ -190,7 +194,7 @@ internal fun CarrierPicker(
     val reduceMotion = PeekTheme.reduceMotion
     val focusManager = LocalFocusManager.current
     var query by rememberSaveable { mutableStateOf("") }
-    // The search is on from the field's first focus until Cancel. The bar's room goes on the system's ease meanwhile
+    // The search is on from the field's first focus until its ✕. The bar's room goes on the system's ease meanwhile
     // (`searchPresentationToolbarBehavior`'s automatic hides it on the iPhone), at once under Reduce Motion.
     var searchOn by rememberSaveable { mutableStateOf(false) }
     val endSearch = {
@@ -241,7 +245,7 @@ internal fun CarrierPicker(
     }
     val navigation = if (!insets.reachesBottom) 0.dp else with(density) { WindowInsets.navigationBars.getBottom(this).toDp() }
     val bottom = maxOf(navigation, keyboard)
-    var barHeight by remember { mutableStateOf(insets.barTop + BAR_ROW + SEARCH_HEIGHT + SEARCH_PADDING * 2) }
+    var barHeight by remember { mutableStateOf(insets.barTop + BAR_ROW + SEARCH_TOP + SEARCH_HEIGHT + SEARCH_BOTTOM) }
     // `.contentMargins(.trailing, ...)`: the rows keep clear of the rail's touch strip.
     val start = insets.formSide
     val end = if (searching) SEARCHING_MARGIN else RAIL_WIDTH
@@ -309,14 +313,22 @@ internal fun CarrierPicker(
                 }
             }
             Row(
-                Modifier.fillMaxWidth().padding(horizontal = insets.formSide, vertical = SEARCH_PADDING),
+                Modifier
+                    .fillMaxWidth()
+                    // 10 under the bar's row, the field rising into the row's place as the bar goes.
+                    .layout { measurable, constraints ->
+                        val top = (SEARCH_TOP.toPx() * bar.value).roundToInt()
+                        val placeable = measurable.measure(constraints.offset(vertical = -top))
+                        layout(placeable.width, placeable.height + top) { placeable.place(0, top) }
+                    }
+                    .padding(start = insets.formSide, end = insets.formSide, bottom = SEARCH_BOTTOM),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 SearchField(
                     query, { query = it }, localizer.text("picker.search", mapOf("count" to catalog.selectableCarriers.size)),
                     localizer.text("picker.clear"), onFocus = { searchOn = true }, Modifier.weight(1f),
                 )
-                SearchCancel(searchOn, localizer.text("common.cancel"), endSearch)
+                SearchClose(searchOn, localizer.text("common.close"), endSearch)
             }
         }
         if (!searching) {
@@ -425,94 +437,106 @@ private fun PickerBar(title: String, leading: (@Composable () -> Unit)?) {
 }
 
 /**
- * The search field under the bar (`.searchable`), as UIKit's: a capsule in the tertiary fill, the glass and the
- * prompt in the secondary grey, and once it holds something the button that empties it. It takes no capitalisation or
- * correction (`.autocorrectionDisabled()`, `.textInputAutocapitalization(.never)`), and the keyboard's Search puts the
- * keyboard away, the search left on. TalkBack reads it by its prompt.
+ * The search field under the bar (`.searchable`), as iOS 26 draws it: a 44 capsule of the bar's glass, as the stack's ‹
+ * is, the magnifying glass in the label's colour, the prompt in the secondary grey, and once it holds something the
+ * button that empties it, in the label's colour. It takes no capitalisation or correction (`.autocorrectionDisabled()`,
+ * `.textInputAutocapitalization(.never)`), and the keyboard's Search puts the keyboard away, the search left on.
+ * TalkBack reads it by its prompt.
  */
 @Composable
 private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String, clear: String, onFocus: () -> Unit, modifier: Modifier) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.body
     val focusManager = LocalFocusManager.current
-    Row(
-        modifier
-            .heightIn(min = SEARCH_HEIGHT)
-            .background(if (colors.dark) SEARCH_FILL_DARK else SEARCH_FILL_LIGHT, CapsuleShape)
-            .padding(start = 11.dp, end = if (query.isEmpty()) 11.dp else 4.dp),
-        horizontalArrangement = Arrangement.spacedBy(6.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        PeekSymbol("magnifyingglass", Modifier.clearAndSetSemantics {}, font = font, tint = colors.secondaryLabel)
-        BasicTextField(
-            query,
-            onValueChange = onQuery,
-            modifier = Modifier
-                .weight(1f)
-                .testTag(CARRIER_PICKER_SEARCH)
-                .onFocusChanged { if (it.isFocused) onFocus() }
-                .semantics { contentDescription = prompt },
-            textStyle = font.copy(color = colors.label),
-            singleLine = true,
-            cursorBrush = SolidColor(colors.accent),
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrectEnabled = false,
-                imeAction = ImeAction.Search,
-            ),
-            keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
-            decorationBox = { field ->
-                Box(contentAlignment = Alignment.CenterStart) {
-                    if (query.isEmpty()) {
-                        Text(
-                            prompt, Modifier.clearAndSetSemantics {}, color = colors.secondaryLabel, style = font,
-                            maxLines = 1, overflow = TextOverflow.Ellipsis,
-                        )
+    GlassSurface(CapsuleShape, modifier.testTag(CARRIER_PICKER_FIELD), backdrop = null, behind = colors.groupedBackground) {
+        Row(
+            Modifier
+                .heightIn(min = SEARCH_HEIGHT)
+                .padding(start = SEARCH_LEADING, end = if (query.isEmpty()) SEARCH_LEADING else CLEAR_TRAILING),
+            horizontalArrangement = Arrangement.spacedBy(SEARCH_SPACING),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            PeekSymbol("magnifyingglass", Modifier.clearAndSetSemantics {}, font = font, tint = colors.label)
+            BasicTextField(
+                query,
+                onValueChange = onQuery,
+                modifier = Modifier
+                    .weight(1f)
+                    .testTag(CARRIER_PICKER_SEARCH)
+                    .onFocusChanged { if (it.isFocused) onFocus() }
+                    .semantics { contentDescription = prompt },
+                textStyle = font.copy(color = colors.label),
+                singleLine = true,
+                cursorBrush = SolidColor(colors.accent),
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.None,
+                    autoCorrectEnabled = false,
+                    imeAction = ImeAction.Search,
+                ),
+                keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
+                decorationBox = { field ->
+                    Box(contentAlignment = Alignment.CenterStart) {
+                        if (query.isEmpty()) {
+                            Text(
+                                prompt, Modifier.clearAndSetSemantics {}, color = colors.secondaryLabel, style = font,
+                                maxLines = 1, overflow = TextOverflow.Ellipsis,
+                            )
+                        }
+                        field()
                     }
-                    field()
+                },
+            )
+            if (query.isNotEmpty()) {
+                Box(
+                    Modifier
+                        .size(SEARCH_HEIGHT)
+                        .testTag(CARRIER_PICKER_CLEAR)
+                        .clickable(interactionSource = null, indication = PlainPress) { onQuery("") }
+                        .semantics {
+                            contentDescription = clear
+                            role = Role.Button
+                        },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    PeekSymbol("xmark.circle.fill", font = font, tint = colors.label)
                 }
-            },
-        )
-        if (query.isNotEmpty()) {
-            Box(
-                Modifier
-                    .size(28.dp, SEARCH_HEIGHT)
-                    .testTag(CARRIER_PICKER_CLEAR)
-                    .clickable(interactionSource = null, indication = PlainPress) { onQuery("") }
-                    .semantics {
-                        contentDescription = clear
-                        role = Role.Button
-                    },
-                contentAlignment = Alignment.Center,
-            ) {
-                PeekSymbol("xmark.circle.fill", font = font, tint = colors.secondaryLabel)
             }
         }
     }
 }
 
 /**
- * The search bar's Cancel while the search is on, at the field's trailing end in the ink, the tint the list's tabs
- * give what they present (`.tint(Brand.ink)`), the field narrowing to make its room as it comes in, on the system's
- * ease (at once under Reduce Motion).
+ * The search's ✕ while it is on, where UISearchBar had its Cancel: a 44 glass circle 10 from the field's trailing end,
+ * drawn as the stack's ‹ is, its xmark in the label's colour at the medium weight the iPhone draws it. TalkBack reads
+ * "Close", as VoiceOver does. The field narrows to make its room as it comes in, on the system's ease (at once under
+ * Reduce Motion).
  */
 @Composable
-private fun SearchCancel(shown: Boolean, title: String, onCancel: () -> Unit) {
+private fun SearchClose(shown: Boolean, label: String, onClose: () -> Unit) {
+    val colors = PeekTheme.colors
     val reduceMotion = PeekTheme.reduceMotion
+    // Unclipped, so that the glass's shadow shows round the circle.
     AnimatedVisibility(
         shown,
-        enter = if (reduceMotion) EnterTransition.None else fadeIn(Motion.easeInOut()) + expandHorizontally(Motion.easeInOut(), Alignment.Start),
-        exit = if (reduceMotion) ExitTransition.None else fadeOut(Motion.easeInOut()) + shrinkHorizontally(Motion.easeInOut(), Alignment.Start),
+        enter = if (reduceMotion) EnterTransition.None else fadeIn(Motion.easeInOut()) + expandHorizontally(Motion.easeInOut(), Alignment.Start, clip = false),
+        exit = if (reduceMotion) ExitTransition.None else fadeOut(Motion.easeInOut()) + shrinkHorizontally(Motion.easeInOut(), Alignment.Start, clip = false),
     ) {
-        Box(
-            Modifier
-                .padding(start = CANCEL_GAP)
-                .heightIn(min = SEARCH_HEIGHT)
-                .testTag(CARRIER_PICKER_CANCEL)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onCancel),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(title, color = PeekTheme.colors.ink, style = PeekTheme.type.body, maxLines = 1)
+        Box(Modifier.padding(start = CLOSE_GAP)) {
+            GlassSurface(CapsuleShape, Modifier.size(CLOSE_SIZE), backdrop = null, behind = colors.groupedBackground) {
+                Box(
+                    Modifier
+                        .size(CLOSE_SIZE)
+                        .testTag(CARRIER_PICKER_CANCEL)
+                        .clickable(interactionSource = null, indication = PressStyle.tactile(CLOSE_PRESSED), onClick = onClose)
+                        .semantics {
+                            contentDescription = label
+                            role = Role.Button
+                        },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    PeekSymbol("xmark", font = PeekTheme.type.fixed(CLOSE_SYMBOL, FontWeight.Medium), scale = SymbolScale.Large, tint = colors.label)
+                }
+            }
         }
     }
 }
@@ -830,6 +854,7 @@ private fun LetterBubble(letter: String, y: Dp) {
 internal const val CARRIER_PICKER = "carrierPicker"
 internal const val CARRIER_PICKER_LIST = "carrierPicker.list"
 internal const val CARRIER_PICKER_SEARCH = "carrierPicker.search"
+internal const val CARRIER_PICKER_FIELD = "carrierPicker.field"
 internal const val CARRIER_PICKER_CLEAR = "carrierPicker.clear"
 internal const val CARRIER_PICKER_CANCEL = "carrierPicker.cancel"
 internal const val CARRIER_PICKER_AUTOMATIC = "carrierPicker.automatic"
@@ -846,14 +871,22 @@ internal fun carrierPickerHeaderTag(key: String) = "carrierPicker.header.$key"
 private val ROW_VERTICAL = 11.dp
 private val ROW_SPACING = 12.dp
 
-/** UISearchTextField: 36 tall in `tertiarySystemFill`, 8 above and below it in the bar. */
-private val SEARCH_HEIGHT = 36.dp
-private val SEARCH_PADDING = 8.dp
-private val SEARCH_FILL_LIGHT = Color(118, 118, 128).copy(alpha = 0.12f)
-private val SEARCH_FILL_DARK = Color(118, 118, 128).copy(alpha = 0.24f)
+/**
+ * iOS 26's search field: 44 tall, 10 under the bar's row and 16 over the list; the magnifying glass 12 in from its
+ * leading end and 8 before the words, the clear button's middle 25 in from its trailing end.
+ */
+private val SEARCH_HEIGHT = 44.dp
+private val SEARCH_TOP = 10.dp
+private val SEARCH_BOTTOM = 16.dp
+private val SEARCH_LEADING = 12.dp
+private val SEARCH_SPACING = 8.dp
+private val CLEAR_TRAILING = 3.dp
 
-/** UISearchBar's room between the field and its Cancel. */
-private val CANCEL_GAP = 8.dp
+/** The search's ✕: a 44 circle 10 from the field, its xmark as large as the stack's ‹. */
+private val CLOSE_SIZE = 44.dp
+private val CLOSE_GAP = 10.dp
+private const val CLOSE_SYMBOL = 17f
+private const val CLOSE_PRESSED = 0.94f
 private val SEARCHING_MARGIN = 20.dp
 private val MARK_WIDTH = 27.dp
 private val TRAILING_SPACER = 8.dp

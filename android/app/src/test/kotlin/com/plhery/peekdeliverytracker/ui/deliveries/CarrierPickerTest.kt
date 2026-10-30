@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -277,13 +278,13 @@ class CarrierPickerTest {
     }
 
     /**
-     * The header `key` heads the list under the bar: its words 21 under the list's top, which is the bar's foot, 8 under
-     * the search field's capsule, itself a little under the field.
+     * The header `key` heads the list under the bar: its words 21 under the list's top, which is the bar's foot, 16 under
+     * the search field's capsule.
      */
     private fun assertAtTop(key: String) {
-        val under = field().fetchSemanticsNode().boundsInRoot.bottom
+        val under = compose.onNodeWithTag(CARRIER_PICKER_FIELD).fetchSemanticsNode().boundsInRoot.bottom
         val top = header(key).top()
-        assertTrue("$key at $top, the field ending at $under", top - under in px(21f)..px(21f + 24f))
+        assertTrue("$key at $top, the field ending at $under", top - under in px(16f + 21f)..px(16f + 21f + 24f))
     }
 
     /** Two carriers with short names and no line under them, which the sections can show tagged and not. */
@@ -379,7 +380,7 @@ class CarrierPickerTest {
     }
 
     @Test
-    fun searchingTheBarGivesTheFieldItsPlaceAndCancelEndsTheSearch() {
+    fun searchingTheBarGivesTheFieldItsPlaceAndTheCloseCircleEndsTheSearch() {
         show()
         title().assertExists()
         cancel().assertDoesNotExist()
@@ -388,9 +389,10 @@ class CarrierPickerTest {
         field().assertIsFocused()
         cancel().assertExists().assertHasClickAction()
         title().assertDoesNotExist()
-        assertEquals(top - px(44f), field().top(), px(1f))
+        // The bar's row and the 10 under it.
+        assertEquals(top - px(54f), field().top(), px(1f))
 
-        // The keyboard's Search puts the keyboard away; the search stays on, Cancel with it.
+        // The keyboard's Search puts the keyboard away; the search stays on, the ✕ with it.
         field().performTextInput("colis")
         field().performImeAction()
         field().assertIsNotFocused()
@@ -405,7 +407,7 @@ class CarrierPickerTest {
         assertEquals(top, field().top(), px(1f))
         header("section:fits").assertExists()
 
-        // The system's back ends a search as Cancel does, before it would leave the picker.
+        // The system's back ends a search as the ✕ does, before it would leave the picker.
         field().performTextInput("dpd")
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
         compose.waitForIdle()
@@ -414,6 +416,54 @@ class CarrierPickerTest {
         title().assertExists()
         assertTrue(compose.activity.onBackPressedDispatcher.hasEnabledCallbacks().not())
     }
+
+    /**
+     * iOS 26's: the field a 44 capsule of glass 20 in from the sides, its magnifying glass in the label's colour; while
+     * searching a 44 glass circle 10 from it, at the side's margin, its xmark in the label's colour, which TalkBack
+     * reads "Close" as a button.
+     */
+    @Test
+    fun theFieldIsA44GlassCapsuleAndWhileSearchingA44CircleClosesIt() {
+        val colors = PeekColors(dark = false)
+        show()
+        val window = compose.onRoot().fetchSemanticsNode().size.width.toFloat()
+        fun capsule() = compose.onNodeWithTag(CARRIER_PICKER_FIELD).fetchSemanticsNode().boundsInRoot
+        val idle = capsule()
+        assertEquals(px(44f), idle.height, px(0.5f))
+        assertEquals(px(20f), idle.left, px(0.5f))
+        assertEquals(window - px(20f), idle.right, px(0.5f))
+        val face = image(CARRIER_PICKER_FIELD)
+        // Glass, lighter than the ground round it, where the grey fill was darker.
+        val glass = face[face.width - px(10f).roundToInt(), face.height / 2]
+        assertTrue("$glass", glass.red > colors.groupedBackground.red)
+        assertTrue("the magnifying glass in grey", darkest(face, 0 until px(44f).roundToInt()) < 0.15f)
+
+        field().performClick()
+        compose.waitForIdle()
+        val searching = capsule()
+        val close = cancel().fetchSemanticsNode().boundsInRoot
+        assertEquals(px(44f), searching.height, px(0.5f))
+        assertEquals(px(44f), close.width, px(0.5f))
+        assertEquals(px(44f), close.height, px(0.5f))
+        assertEquals(searching.right + px(10f), close.left, px(1f))
+        assertEquals(window - px(20f), close.right, px(1f))
+        assertEquals(searching.center.y, close.center.y, px(0.5f))
+        cancel().assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button))
+        assertEquals(localizer.text("common.close"), cancel().description())
+        val circle = image(CARRIER_PICKER_CANCEL)
+        assertTrue("the xmark not in the label's colour", darkest(circle, 0 until circle.width) < 0.15f)
+        val rim = circle[circle.width / 2, px(6f).roundToInt()]
+        assertTrue("$rim", rim.red > colors.groupedBackground.red)
+
+        // The clear button, once the field holds something, in the label's colour too.
+        field().performTextInput("colis")
+        val clear = image(CARRIER_PICKER_CLEAR)
+        assertTrue("the clear button in grey", darkest(clear, 0 until clear.width) < 0.15f)
+    }
+
+    /** The darkest red of `image`'s columns `xs`, 0 to 1. */
+    private fun darkest(image: PixelMap, xs: IntRange): Float =
+        xs.minOf { x -> (0 until image.height).minOf { y -> image[x, y].red } }
 
     @Test
     fun withTheKeyboardUpTheListsFootAndTheRailEndAboveIt() {

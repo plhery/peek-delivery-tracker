@@ -20,7 +20,7 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The carrier picker on a phone, Swiss Post chosen, the two carriers that fit the number and one used before over the
- * letters: light and dark, a search marking what it matched (the bar gone, Cancel beside the field), the rail held on M
+ * letters: light and dark, a search marking what it matched (the bar gone, the ✕ beside the field), the rail held on M
  * with its bubble, and at the largest Android text size.
  */
 @RunWith(AndroidJUnit4::class)

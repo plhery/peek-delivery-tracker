@@ -71,7 +71,6 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Quando un corriere ha bisogno di qualcosa da te prima che la dogana svincoli il pacco (il tuo codice fiscale, dazi o tasse da pagare, o dei documenti), la tua lista e la pagina del pacco lo indicano, e la pagina riporta le parole del corriere. Con una nuova scansione l’avviso sparisce.
-• Con un account, un pacco salvato senza codice postale ora riceve quello del tuo ultimo pacco, al prossimo controllo, se il suo corriere, come DPD, mostra di più con il codice postale. Se non ce n’è nessuno, la pagina del pacco dice che il corriere mostra di più con il codice postale di consegna e propone di aggiungerlo.
-• Il campo del codice postale non chiede più il paese, tranne per Mondial Relay e PostNL, che ne hanno bisogno per il tracciamento.
+• Peek ora parla portoghese brasiliano, russo e cinese semplificato. Segue la lingua del tuo dispositivo; puoi sceglierne un’altra nelle Impostazioni di Peek, alla voce Lingua.
+• I testi italiani dell’app e delle notifiche sono stati corretti e resi più coerenti.
 ```

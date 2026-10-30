@@ -71,7 +71,6 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Braucht ein Paketdienst etwas von dir, bevor der Zoll dein Paket freigibt (deine Steuernummer, Unterlagen oder die Zahlung von Zoll oder Einfuhrsteuern), zeigen deine Liste und die Seite des Pakets das an, und die Seite zitiert den Paketdienst. Mit einem neuen Scan verschwindet der Hinweis.
-• Mit Konto bekommt ein ohne Postleitzahl gespeichertes Paket jetzt bei der nächsten Abfrage die Postleitzahl deines letzten Pakets, wenn sein Paketdienst, etwa DPD, damit mehr zeigt. Gibt es keine, sagt seine Seite, dass der Paketdienst mit der Postleitzahl mehr zeigt, und bietet an, sie einzugeben.
-• Das Feld für die Postleitzahl fragt nicht mehr nach einem Land, außer bei Mondial Relay und PostNL, die es für die Sendungsverfolgung brauchen.
+• Peek spricht jetzt brasilianisches Portugiesisch, Russisch und vereinfachtes Chinesisch. Die App folgt der Sprache deines Geräts; eine andere wählst du in den Einstellungen von Peek unter „Sprache“.
+• Die deutschen Texte der App und der Mitteilungen sind korrigiert und verwenden jetzt einheitliche Begriffe.
 ```

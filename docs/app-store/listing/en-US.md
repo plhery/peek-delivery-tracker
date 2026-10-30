@@ -73,7 +73,5 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• When a carrier needs something from you before customs releases your package (your tax ID, import duties or taxes, or documents), your list and the package’s page say what’s needed, and the page quotes the carrier’s words. A later scan clears it.
-• With an account, a package saved without a postal code now gets the one you gave your latest package at its next check, if its carrier shows more with one, as DPD does. If there’s none to give, its page says the carrier shows more with the delivery postal code and offers to add it.
-• The postal code field no longer asks for a country, except for Mondial Relay and PostNL, whose tracking needs one.
+• Peek now speaks Brazilian Portuguese, Russian, and Simplified Chinese. It follows your device’s language; you can choose another in Peek’s Settings, under Language.
 ```

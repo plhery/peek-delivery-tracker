@@ -71,7 +71,5 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• Quando uma transportadora precisa de algo seu antes de a alfândega liberar a encomenda (seu número fiscal, impostos ou taxas de importação, ou documentos), sua lista e a página da encomenda dizem o que falta, e a página cita as palavras da transportadora. Uma nova movimentação tira o aviso.
-• Com uma conta, uma encomenda salva sem código postal agora recebe, na próxima verificação, o código postal que você deu à sua última encomenda, se a transportadora mostrar mais com ele, como faz a DPD. Se não houver nenhum, a página da encomenda diz que a transportadora mostra mais com o código postal de entrega e se oferece para adicioná-lo.
-• O campo do código postal não pede mais o país, exceto para a Mondial Relay e a PostNL, cujo rastreamento precisa dele.
+• O Peek agora fala português do Brasil, além de russo e chinês simplificado. Ele usa o idioma do seu dispositivo, e você pode escolher outro nas Configurações do Peek, em Idioma.
 ```

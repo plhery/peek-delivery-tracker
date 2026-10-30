@@ -71,7 +71,6 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Cuando un transportista necesita algo de ti antes de que Aduanas libere tu paquete (tu número fiscal, aranceles o impuestos por pagar, o documentos), tu lista y la página del paquete lo indican, y la página cita al transportista. Con un nuevo escaneo, el aviso desaparece.
-• Con una cuenta, un paquete guardado sin código postal recibe ahora el de tu último paquete en la siguiente consulta, si su transportista, como DPD, muestra más con el código postal. Si no hay ninguno, la página del paquete indica que el transportista muestra más con el código postal de entrega y te ofrece añadirlo.
-• El campo del código postal ya no pide el país, salvo con Mondial Relay y PostNL, cuyo seguimiento lo necesita.
+• Peek ya habla portugués de Brasil, ruso y chino simplificado. Sigue el idioma de tu dispositivo; puedes elegir otro en los Ajustes de Peek, en Idioma.
+• Los textos en español de la app y de las notificaciones se han corregido y unificado.
 ```

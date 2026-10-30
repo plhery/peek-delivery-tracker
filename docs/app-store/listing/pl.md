@@ -71,7 +71,6 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Gdy przewoźnik potrzebuje czegoś od Ciebie, zanim urząd celny wyda przesyłkę (numeru podatkowego, opłaty cła lub podatków albo dokumentów), lista i strona przesyłki to pokazują, a strona przytacza słowa przewoźnika. Po kolejnym skanie komunikat znika.
-• Przesyłka zapisana na koncie bez kodu pocztowego dostaje teraz przy najbliższym sprawdzeniu kod podany dla ostatniej przesyłki, o ile jej przewoźnik, np. DPD, pokazuje z nim więcej. Gdy nie ma żadnego, strona przesyłki informuje, że przewoźnik pokazuje więcej z kodem pocztowym odbiorcy, i proponuje jego dodanie.
-• Pole kodu pocztowego nie pyta już o kraj, z wyjątkiem Mondial Relay i PostNL, które potrzebują go do śledzenia.
+• Nowe języki w Peek: brazylijski portugalski, rosyjski i chiński uproszczony. Aplikacja używa języka urządzenia, a inny możesz wybrać w jej Ustawieniach, w pozycji Język.
+• Polskie teksty w aplikacji i w powiadomieniach zostały poprawione i ujednolicone.
 ```

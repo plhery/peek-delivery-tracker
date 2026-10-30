@@ -71,7 +71,6 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Quando uma transportadora precisa de algo de ti antes de a alfândega libertar a encomenda (o teu número fiscal, direitos ou impostos a pagar, ou documentos), a tua lista e a página da encomenda indicam-no, e a página cita as palavras da transportadora. Com uma nova leitura, o aviso desaparece.
-• Com uma conta, uma encomenda guardada sem código postal recebe agora o da tua última encomenda na consulta seguinte, se a transportadora, como a DPD, mostrar mais com o código postal. Se não houver nenhum, a página da encomenda diz que a transportadora mostra mais com o código postal de entrega e propõe adicioná-lo.
-• O campo do código postal já não pede o país, exceto com a Mondial Relay e a PostNL, cujo seguimento precisa dele.
+• O Peek já fala português do Brasil, russo e chinês simplificado. Segue o idioma do teu dispositivo; podes escolher outro nas Definições do Peek, em Idioma.
+• Os textos em português da app e das notificações foram corrigidos e uniformizados.
 ```

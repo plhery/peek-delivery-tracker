@@ -73,7 +73,6 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Quand un transporteur attend quelque chose de toi avant que la douane libère ton colis (ton numéro fiscal, des droits de douane ou taxes à payer, ou des documents), ta liste et la fiche du colis l’indiquent, et la fiche cite le message du transporteur. L’indication disparaît dès le scan suivant.
-• Avec un compte, un colis enregistré sans code postal reçoit désormais celui de ton dernier colis, à sa prochaine vérification, si son transporteur en montre plus avec un code postal, comme DPD. S’il n’y en a aucun, sa fiche indique que le transporteur en montre plus avec le code postal de livraison et propose de l’ajouter.
-• Le champ du code postal ne demande plus de pays, sauf pour Mondial Relay et PostNL, dont le suivi en a besoin.
+• Peek parle désormais portugais du Brésil, russe et chinois simplifié. Il suit la langue de ton appareil ; tu peux en choisir une autre dans les Réglages de Peek, rubrique Langue.
+• Les textes français de l’app et des notifications ont été corrigés et harmonisés.
 ```

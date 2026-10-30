@@ -21,7 +21,7 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The carrier picker on a phone, Swiss Post chosen, the two carriers that fit the number and one used before over the
  * letters: light and dark, a search marking what it matched (the bar gone, the ✕ beside the field), the rail held on M
- * with its bubble, and at the largest Android text size.
+ * with its bubble, and at the largest Android text size. The catalog is pinned ([pinnedIdentities]).
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -34,7 +34,7 @@ class CarrierPickerScreenshotTest {
 
     private fun show(dark: Boolean = false, fontScale: Float = 1f, automatic: CarrierPickerAutomatic = PICKER_AUTOMATIC.copy(recommended = false)) {
         compose.setContent {
-            PickerHost(dark = dark, fontScale = fontScale) {
+            PickerHost(dark = dark, fontScale = fontScale, identities = pinnedIdentities) {
                 CarrierPicker(CarrierId.SwissPost, PICKER_SECTIONS, onSelect = {}, onLeave = {}, automatic = automatic, tags = tags)
             }
         }
@@ -63,7 +63,7 @@ class CarrierPickerScreenshotTest {
     @Test
     fun theRailHeldOnALetter() {
         show()
-        val letters = CarrierPickerSearch.letterSections(DemoCards.identities.catalog, AppLanguage.En).map { it.letter }
+        val letters = CarrierPickerSearch.letterSections(pinnedIdentities.catalog, AppLanguage.En).map { it.letter }
         val rail = compose.onNodeWithTag(LETTER_RAIL)
         val bounds = rail.fetchSemanticsNode().boundsInRoot
         val padding = 12 * compose.density.density

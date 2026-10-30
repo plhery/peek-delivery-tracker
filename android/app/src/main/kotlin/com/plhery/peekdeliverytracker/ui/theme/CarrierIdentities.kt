@@ -20,10 +20,11 @@ import kotlinx.coroutines.withContext
 /**
  * Each carrier's livery (colours, truck decal, names) from Brand.json and the app's carrier catalog, both decoded once
  * and off the main thread: they are over a megabyte each. Made again for each change of the catalog, so a screen that
- * remembers a carrier's identity takes the new one, as the iPhone's views observing the catalog do.
+ * remembers a carrier's identity takes the new one, as the iPhone's views observing the catalog do. The app makes them
+ * through [load]; tests may make them for a catalog of their own.
  */
 @Stable
-class CarrierIdentities private constructor(val catalog: CarrierCatalog) {
+class CarrierIdentities internal constructor(val catalog: CarrierCatalog) {
     /** `CarrierVisualIdentity(carrier)`, its names in `language`. */
     fun of(carrier: CarrierId, language: AppLanguage): CarrierVisualIdentity =
         CarrierVisualIdentity.of(carrier, catalog, language)

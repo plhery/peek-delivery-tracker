@@ -44,7 +44,7 @@ import org.robolectric.annotation.GraphicsMode
  * Changing a parcel's carrier over the demo's list, with the iPhone's bars: automatic detection at the medium detent,
  * light and dark; Mondial Relay's postcode at the large detent with its country beside it, light and dark, its
  * countries' menu, and at the largest Android text size; DPD's optional postcode while the change is saved, and once
- * it failed; and the picker pushed in the sheet. On synthetic parcels.
+ * it failed; and the picker pushed in the sheet. On synthetic parcels, with the catalog pinned ([pinnedIdentities]).
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -80,7 +80,7 @@ class ChangeCarrierScreenshotTest {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = AuthenticationState.Demo, dark = dark, source = source)
+                    RootHost(state = AuthenticationState.Demo, dark = dark, source = source, identities = pinnedIdentities)
                 }
             }
         }

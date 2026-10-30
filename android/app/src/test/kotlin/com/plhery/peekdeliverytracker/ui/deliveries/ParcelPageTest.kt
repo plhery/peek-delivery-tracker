@@ -78,8 +78,11 @@ class ParcelPageTest {
     /** The text's size, times the normal. */
     private var fontScale by mutableFloatStateOf(1f)
 
-    /** The demo's deliveries, in the demo (whose bar stands over a page) or before signing in. */
-    private fun show(session: AuthenticationState = AuthenticationState.Demo) {
+    /**
+     * The demo's deliveries, in the demo (whose bar stands over a page) or before signing in, with a hardware keyboard
+     * where `keyboard`.
+     */
+    private fun show(session: AuthenticationState = AuthenticationState.Demo, keyboard: Boolean = false) {
         source = FakeDeliveries(DemoCards.parcels(), session)
         compose.setContent {
             val density = LocalDensity.current
@@ -87,7 +90,7 @@ class ParcelPageTest {
                 LocalDensity provides Density(density.density, fontScale),
                 LocalDeliveriesState provides { deliveries = it },
             ) {
-                RootHost(state = session, source = source, reduceMotion = false)
+                WithKeyboard(keyboard) { RootHost(state = session, source = source, reduceMotion = false) }
             }
         }
         compose.waitForIdle()
@@ -414,6 +417,27 @@ class ParcelPageTest {
         compose.mainClock.advanceTimeBy(1_000)
         compose.onNodeWithTag(PAGE_MENU).assertDoesNotExist()
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+    }
+
+    /**
+     * With a keyboard, the menu shows each item's keys under its title, as Android writes them, never squeezing the
+     * title into broken words beside them, in a menu as wide as ever.
+     */
+    @Test
+    fun withAKeyboardTheMenusKeysStandUnderTheirTitles() {
+        show(keyboard = true)
+        open("Birthday gift")
+        openMenu()
+        item(ParcelMenuItem.Rename).assertContentDescriptionEquals("Edit parcel name")
+        item(ParcelMenuItem.Archive).assertContentDescriptionEquals("Archive parcel, Meta+Ctrl+A")
+        item(ParcelMenuItem.Delete).assertContentDescriptionEquals("Delete permanently, Ctrl+Backspace")
+        fun height(item: ParcelMenuItem) = bounds(item(item)).let { (it.bottom - it.top).value }
+        // A line for the title, one for its keys, and the row's padding.
+        val line = 17 * (1950f + 494f) / 2048f
+        assertEquals(42f, height(ParcelMenuItem.Rename), 0.5f)
+        assertEquals(10 + 2 * line + 10, height(ParcelMenuItem.Archive), 0.5f)
+        assertEquals(10 + 2 * line + 10, height(ParcelMenuItem.Delete), 0.5f)
+        assertEquals(MENU_WIDTH.value, width(bounds(item(ParcelMenuItem.Delete))), 0.5f)
     }
 
     @Test

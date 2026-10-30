@@ -566,9 +566,12 @@ private fun MenuItemRow(
             PeekSymbol(item.symbol, font = type.body, tint = ink)
         }
         Spacer(Modifier.width(12.dp))
-        Text(title, Modifier.weight(1f), color = ink, style = type.body.sfLines())
-        if (key != null) {
-            Text(key, Modifier.padding(start = 8.dp), color = colors.secondaryLabel, style = type.body.sfLines(), textAlign = TextAlign.End)
+        // UIKit writes the keys as glyphs (⇧⌘C) at the row's end, beside any title. Android writes them out
+        // (Shift+Ctrl+C), which beside a title in a menu this narrow would squeeze it into broken words: they stand
+        // under it.
+        Column(Modifier.weight(1f)) {
+            Text(title, color = ink, style = type.body.sfLines())
+            if (key != null) Text(key, color = colors.secondaryLabel, style = type.body.sfLines())
         }
     }
 }

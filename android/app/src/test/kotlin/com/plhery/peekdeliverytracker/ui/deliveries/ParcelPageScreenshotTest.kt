@@ -34,9 +34,9 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * A parcel's page's frame on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), in
  * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark and in Russian and
- * Chinese, its ••• menu open, its rename alert light and dark and at an accessibility text size, its delete question
- * light and dark, the list's error alert light and dark, the page of a parcel gone, and the page beside the list on a
- * tablet on its side, the history beside the pass. The page dragged down, under its bar, is
+ * Chinese, its ••• menu open without and with a keyboard, its rename alert light and dark and at an accessibility text
+ * size, its delete question light and dark, the list's error alert light and dark, the page of a parcel gone, and the
+ * page beside the list on a tablet on its side, the history beside the pass. The page dragged down, under its bar, is
  * ParcelZoomScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
@@ -61,6 +61,7 @@ class ParcelPageScreenshotTest {
         bottom: Int = 24,
         fontScale: Float = 1f,
         language: AppLanguage = AppLanguage.En,
+        keyboard: Boolean = false,
     ) {
         val source = FakeDeliveries(DemoCards.parcels(language), AuthenticationState.Demo)
         compose.waitsForMaps()
@@ -69,7 +70,9 @@ class ParcelPageScreenshotTest {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalDensity provides Density(density.density, fontScale)) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = AuthenticationState.Demo, language = language, dark = dark, reduceMotion = false, source = source)
+                    WithKeyboard(keyboard) {
+                        RootHost(state = AuthenticationState.Demo, language = language, dark = dark, reduceMotion = false, source = source)
+                    }
                 }
             }
         }
@@ -128,6 +131,16 @@ class ParcelPageScreenshotTest {
         compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
         compose.mainClock.advanceTimeBy(1_000)
         compose.screenshot("page_menu_light")
+    }
+
+    /** The menu with a keyboard: each item's keys under its title. */
+    @Test
+    fun theMenuOpenWithAKeyboard() {
+        show(keyboard = true)
+        open()
+        compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.screenshot("page_menu_keys")
     }
 
     /** The rename alert over the page, on the parcel's name, as its ••• menu's Rename opens it. */

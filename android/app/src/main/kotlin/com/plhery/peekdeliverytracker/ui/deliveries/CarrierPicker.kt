@@ -507,9 +507,9 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
 
 /**
  * The search's ✕ while it is on, where UISearchBar had its Cancel: a 44 glass circle 10 from the field's trailing end,
- * drawn as the stack's ‹ is, its xmark in the label's colour at the medium weight the iPhone draws it. TalkBack reads
- * "Close", as VoiceOver does. The field narrows to make its room as it comes in, on the system's ease (at once under
- * Reduce Motion).
+ * drawn as the stack's ‹ is, its xmark in the label's colour at Material's lightest weight, the nearest to the iPhone's
+ * 2-point stroke. TalkBack reads "Close", as VoiceOver does. The field narrows to make its room as it comes in, on the
+ * system's ease (at once under Reduce Motion).
  */
 @Composable
 private fun SearchClose(shown: Boolean, label: String, onClose: () -> Unit) {
@@ -534,7 +534,7 @@ private fun SearchClose(shown: Boolean, label: String, onClose: () -> Unit) {
                         },
                     contentAlignment = Alignment.Center,
                 ) {
-                    PeekSymbol("xmark", font = PeekTheme.type.fixed(CLOSE_SYMBOL, FontWeight.Medium), scale = SymbolScale.Large, tint = colors.label)
+                    PeekSymbol("xmark", font = PeekTheme.type.fixed(CLOSE_SYMBOL, FontWeight.Normal), scale = SymbolScale.Large, tint = colors.label)
                 }
             }
         }

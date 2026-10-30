@@ -2126,6 +2126,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "speedaf-suivi",
+      "title": "Suivi colis Speedaf Express\u00a0: numéro, statuts et contacts",
+      "name": "Speedaf",
+      "color": "#ff8300"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-suivi-colis",

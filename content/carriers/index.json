@@ -156,7 +156,7 @@
   { "id": "linhan", "catalog": "linhan", "name": "LinHan International", "languages": ["en"] },
   { "id": "mtscn", "catalog": "mtscn", "name": "Meiteshun Logistics", "languages": ["en", "pt", "es"] },
   { "id": "cttyex", "catalog": "cttyex", "name": "CTTYEX", "languages": ["en"] },
-  { "id": "speedaf", "catalog": "speedaf", "name": "Speedaf", "languages": ["en"] },
+  { "id": "speedaf", "catalog": "speedaf", "name": "Speedaf", "languages": ["en", "fr"] },
   { "id": "yilong-logistics", "catalog": "yilong-logistics", "name": "Yilong Logistics", "languages": ["en"] },
   { "id": "quick-rabbit", "catalog": "quick-rabbit", "name": "Quick Rabbit", "languages": ["en", "es"] },
   { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en"] },

@@ -34,7 +34,8 @@ export function shownParcel(row: JsonObject): JsonObject {
   const events = shownEvents(row)
     .sort((a, b) => Date.parse(String(b.occurred_at)) - Date.parse(String(a.occurred_at))
       || EVENT_STAGE_ORDER.indexOf(String(b.stage)) - EVENT_STAGE_ORDER.indexOf(String(a.stage))
-      || tieOrder(b.tie_order) - tieOrder(a.tie_order));
+      || tieOrder(b.tie_order) - tieOrder(a.tie_order)
+      || String(b.id).localeCompare(String(a.id)));
   row = withoutPlaceholderAnswers(row);
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   return {

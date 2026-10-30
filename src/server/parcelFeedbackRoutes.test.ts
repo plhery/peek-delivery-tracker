@@ -117,6 +117,16 @@ describe('what the service held when an answer arrived', () => {
     expect(JSON.stringify(shown)).not.toMatch(/In transit|Sorted|Zürich|ParcelsApp/);
   });
 
+  it('orders scans of one instant and stage as the timeline does, by their source\'s order and then by id', () => {
+    const at = '2026-10-01T10:00:00+00:00';
+    const scan = (id: string, tieOrder?: number) => ({
+      id, package_id: packageId, stage: 'in_transit', description: `Scan ${id}`, location: null, occurred_at: at,
+      provider_event_id: `swiss-post:${id}`, ...(tieOrder === undefined ? {} : { tie_order: tieOrder }),
+    });
+    const shown = shownParcel(storedPackage({ tracking_events: [scan('e3'), scan('e5'), scan('e1', 0), scan('e2', 1), scan('e4')] }));
+    expect((shown.events as JsonObject[]).map((event) => event.description)).toEqual(['Scan e2', 'Scan e1', 'Scan e5', 'Scan e4', 'Scan e3']);
+  });
+
   it('keeps the six newest scans of a long journey, each cut to size', () => {
     const events = Array.from({ length: 9 }, (_, index) => ({
       stage: 'in_transit', description: '🙂'.repeat(300), location: 'x'.repeat(300), occurred_at: `2026-10-0${index + 1}T10:00:00+00:00`,

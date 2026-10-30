@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.ui.zoom
 
-import android.os.Looper
 import androidx.activity.BackEventCompat
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
@@ -47,6 +46,7 @@ import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.awaitFrame
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -54,10 +54,8 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
-import java.time.Duration
 import kotlin.math.abs
 
 /**
@@ -387,8 +385,9 @@ class ZoomStackTest {
     /**
      * How much of each of the bar's squares is drawn, against what is drawn just beside it, 80 dp down: black over
      * anything, a square drawn at `a` leaves `1 - a` of what is under it. It shows `bar`. Robolectric's capture now and
-     * then shows a layer's alpha a frame or two late, so with the flight held it lets the window draw again; a
-     * crossfade's layer can still be a frame behind then, at `before`.
+     * then shows a layer's alpha a frame or two late, or keeps an old frame until the window is asked to draw again, so
+     * with the flight held it has the window draw and commit frames ([awaitFrame]); a crossfade's layer can still be a
+     * frame behind then, at `before`.
      */
     private fun assertDrawn(bar: ZoomBar, before: ZoomBar) {
         fun drawn(): Pair<Float, Float> {
@@ -401,7 +400,7 @@ class ZoomStackTest {
         repeat(3) {
             if (bar.drawnIn(d)) return
             // The window draws on Robolectric's own clock, which the test's frame clock doesn't move.
-            shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+            compose.awaitFrame()
             d = drawn()
         }
         assertTrue(

@@ -61,7 +61,7 @@ gift	featured_seasonal_and_gifts	0	ParcelShareSheet:184 16 regular; PassportView
 globe	language	0	ParcelLinkSheet:475 17 regular; SignInView:1054 inherited; ParcelDetailView:307 17 regular; ParcelMapView:198 12 medium; PassportView:265 22 ultraLight; FriendsStore:219 22 ultraLight	close
 globe.europe.africa	public	0	PassportView:270 22 ultraLight; FriendsStore:219 22 ultraLight	close: a globe with land, though not Europe and Africa facing
 hand.raised	front_hand	0	SettingsViews:653 15 light	close
-hourglass	hourglass	0	PassportView:278 22 ultraLight; FriendsStore:219 22 ultraLight	close
+hourglass	hourglass	0	PassportView:278 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelDetailView:1777 17 regular	close
 house	home	0	PassportView:276 22 ultraLight; FriendsStore:219 22 ultraLight	close
 info.circle	info	0	ParcelShareSheet:144 13 regular; ParcelShareSheet:195 13 regular; ParcelShareSheet:196 13 regular; ParcelDetailView:577 17 regular	close
 keyboard	keyboard	0	FirstOpenView:749 15 regular	close

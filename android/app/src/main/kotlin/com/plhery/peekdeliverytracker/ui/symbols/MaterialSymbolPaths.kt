@@ -13,7 +13,7 @@ internal const val LARGE_SCALE = 1.27f
 /** SF's cap height at 100 pt, the height of a symbol's alignment rectangle: an image scale keeps its middle in place. */
 internal const val CAP_HEIGHT = 70.00f
 
-/** The SF Symbols Android draws (84), each as its Material Symbols outlines (134). */
+/** The SF Symbols Android draws (84), each as its Material Symbols outlines (135). */
 internal val materialSymbols: Map<String, SymbolArt> = mapOf(
     "archivebox" to SymbolArt(
         "inventory_2", fill = false, sf = floatArrayOf(122.00f, 108.00f, 12.50f, 9.25f, 96.50f, 90.00f, 89.00f),
@@ -329,6 +329,7 @@ internal val materialSymbols: Map<String, SymbolArt> = mapOf(
         "hourglass", fill = false, sf = floatArrayOf(82.00f, 108.00f, 12.25f, 9.50f, 56.75f, 89.75f, 89.00f),
         outlines = listOf(
             MaterialOutline(100, 20, floatArrayOf(244.00f, -812.00f, 472.00f, 664.00f), "M314-168h332v-120q0-71-47.5-120.5T480-458q-71 0-118.5 49.61Q314-358.77 314-288v120Zm166-334q71 0 118.5-49.61T646-672v-120H314v120q0 71 47.5 120.5T480-502ZM254.29-148q-4.24 0-7.27-2.82-3.02-2.83-3.02-7 0-4.18 2.88-7.18 2.87-3 7.12-3h40v-120q0-76 50-131.5T470-480q-75-6-125.5-61T294-672v-120h-40q-4.25 0-7.12-2.82-2.88-2.83-2.88-7 0-4.18 2.87-7.18t7.11-3h451.73q4.24 0 7.26 2.82 3.03 2.83 3.03 7 0 4.18-2.87 7.18-2.88 3-7.13 3h-40v120q0 76-50.5 131T490-480q76 5 126 60.5T666-288v120h40q4.25 0 7.13 2.82 2.87 2.83 2.87 7 0 4.18-2.87 7.18t-7.11 3H254.29ZM480-168Zm0-624Z"),
+            MaterialOutline(400, 20, floatArrayOf(192.00f, -864.00f, 576.00f, 768.00f), "M324-168h312v-120q0-65-45.5-110.5T480-444q-65 0-110.5 45.5T324-288v120Zm156-348q65 0 110.5-45.5T636-672v-120H324v120q0 65 45.5 110.5T480-516ZM228.29-96Q213-96 202.5-106.29t-10.5-25.5q0-15.21 10.35-25.71T228-168h24v-120q0-59 28-109.5t78-82.5q-49-32-77.5-82.5T252-672v-120h-24q-15.3 0-25.65-10.29Q192-812.58 192-827.79t10.34-25.71q10.35-10.5 25.64-10.5h503.73q15.29 0 25.79 10.29t10.5 25.5q0 15.21-10.35 25.71T732-792h-24v120q0 59-28.5 109.5T602-480q50 32 78 82.5T708-288v120h24q15.3 0 25.65 10.29Q768-147.42 768-132.21t-10.34 25.71Q747.31-96 732.02-96H228.29ZM480-168Zm0-624Z"),
         ),
     ),
     "house" to SymbolArt(

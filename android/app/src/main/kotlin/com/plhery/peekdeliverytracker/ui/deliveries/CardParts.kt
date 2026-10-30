@@ -1,12 +1,20 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -21,6 +29,7 @@ import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -36,6 +45,7 @@ import androidx.compose.ui.node.findNearestAncestor
 import androidx.compose.ui.node.requireLayoutCoordinates
 import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -45,15 +55,23 @@ import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.onLongClick
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.DateParser
+import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.automaticallyChangedFrom
+import com.plhery.peekdeliverytracker.core.core
+import com.plhery.peekdeliverytracker.core.displayedCarrier
+import com.plhery.peekdeliverytracker.core.localizationKey
+import com.plhery.peekdeliverytracker.core.metadata
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.ExperimentalSurfaceShadow
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
@@ -207,6 +225,103 @@ internal fun automaticCarrierNotice(parcel: Parcel): String? {
 private fun stillAhead(parcel: Parcel, time: Instant): Boolean {
     val changed = parcel.carrierData?.autoChangedAt?.let(DateParser::date) ?: return false
     return time.isBefore(changed)
+}
+
+/**
+ * `ExperimentalJourneyRail` (A-S74): the six steps of a journey as capsules 3 tall, 4 apart when `compact` and 5
+ * otherwise, those up to `stage`'s in `tint` and the rest in the secondary grey at 15 %, eased over 0.24 s as the
+ * parcel moves on (at once under Reduce Motion). TalkBack reads it as one element: "Delivery progress", and the step.
+ */
+@Composable
+fun JourneyRail(stage: TrackingStage?, tint: Color, modifier: Modifier = Modifier, compact: Boolean = false) {
+    val localizer = LocalLocalizer.current
+    val colors = PeekTheme.colors
+    val reduceMotion = PeekTheme.reduceMotion
+    val steps = TrackingStage.core.size
+    val current = (stage?.metadata?.progress ?: 0).coerceIn(0, steps - 1)
+    val label = localizer.text("native.deliveryProgress")
+    val step = localizer.text(
+        "progress.step",
+        mapOf("step" to current + 1, "total" to steps, "stage" to localizer.text(stage?.localizationKey ?: "status.pending")),
+    )
+    val rest = colors.secondaryLabel.copy(alpha = colors.secondaryLabel.alpha * 0.15f)
+    Row(
+        modifier
+            .fillMaxWidth()
+            .height(3.dp)
+            .clearAndSetSemantics {
+                contentDescription = label
+                stateDescription = step
+            },
+        horizontalArrangement = Arrangement.spacedBy(if (compact) 4.dp else 5.dp),
+    ) {
+        repeat(steps) { index ->
+            val fill by animateColorAsState(
+                if (index <= current) tint else rest,
+                if (reduceMotion) snap() else Motion.easeOut(0.24),
+                label = "journey step",
+            )
+            Box(Modifier.weight(1f).fillMaxHeight().background(fill, CapsuleShape))
+        }
+    }
+}
+
+/**
+ * `ParcelQuietNote` (B-S75): what a parcel that stopped moving is told, on the secondary grey at 8 % in 16-point
+ * corners: why parcels go quiet, that its carrier leaves out its journey in the destination country where it does
+ * (`hidesDestinationLeg`), and where to ask the carrier (`helpLink`) in `tint`, which opens in the browser after
+ * `onHelp`. No link where neither the carrier that has it nor the one it is filed under has a help page.
+ */
+@Composable
+fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: Modifier = Modifier) {
+    val localizer = LocalLocalizer.current
+    val language = LocalLanguage.current
+    val identities = LocalCarrierIdentities.current ?: return
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val uriHandler = LocalUriHandler.current
+    val carrier = identities.displayName(parcel.displayedCarrier, language)
+    val active = identities.displayName(parcel.activeTrackingCarrier, language)
+    val abroad = if (identities.catalog.hidesDestinationLeg(parcel)) {
+        " " + localizer.text("link.quietAbroad", mapOf("carrier" to active))
+    } else {
+        ""
+    }
+    val help = identities.catalog.helpLink(parcel, language)
+    val secondary = colors.secondaryLabel
+    Row(
+        modifier
+            .fillMaxWidth()
+            .background(secondary.copy(alpha = secondary.alpha * 0.08f), RoundedCornerShape(16.dp))
+            // The link's own height leaves room below it.
+            .padding(start = 16.dp, top = 14.dp, end = 16.dp, bottom = if (help == null) 14.dp else 4.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.Top,
+    ) {
+        PeekSymbol("hourglass", font = type.fixed(17f), tint = secondary)
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(localizer.text("link.quiet", mapOf("carrier" to carrier)) + abroad, color = secondary, style = type.footnote.sfLines())
+            if (help != null) {
+                Row(
+                    Modifier
+                        .heightIn(min = 44.dp)
+                        .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) {
+                            onHelp()
+                            uriHandler.openUri(help.url)
+                        },
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        localizer.text("link.help", mapOf("carrier" to help.name)),
+                        color = tint,
+                        style = type.style(IosTextStyle.Footnote, FontWeight.SemiBold).sfLines(),
+                    )
+                    PeekSymbol("arrow.up.right", font = type.fixed(10f), tint = tint)
+                }
+            }
+        }
+    }
 }
 
 /**

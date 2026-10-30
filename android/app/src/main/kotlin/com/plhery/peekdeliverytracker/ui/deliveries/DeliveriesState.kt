@@ -758,8 +758,45 @@ internal class DeliveriesState(
     var pageWorking: Boolean by mutableStateOf(false)
         private set
 
-    /** A menu, the question it asks or an alert shows over the list, and TalkBack reaches nothing else. */
-    val modal: Boolean get() = menu != null || pageMenu != null || deleting != null || actionError != null
+    /** The parcel page's map, open over the whole window (`showingMap`). */
+    var mapCover: MapCoverRequest? by mutableStateOf(null)
+
+    /**
+     * A menu, the question it asks, an alert or the page's map shows over the list, and TalkBack reaches nothing else.
+     */
+    val modal: Boolean get() = menu != null || pageMenu != null || deleting != null || actionError != null || mapCover != null
+
+    /**
+     * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes
+     * back to `focus` once it has closed.
+     */
+    fun openMap(pageId: UUID, focus: AccessibilityFocus?) {
+        if (modal) return
+        source.action("parcel-map-open")
+        mapCover = MapCoverRequest(pageId)
+        returnFocus = focus
+    }
+
+    /**
+     * The page's bell (`store.setMuted(_:muted:)` in the page's `run`): switches the parcel's notifications off or back
+     * on, one change at a time, then `saved`, where the bell rings; an alert says why it failed.
+     */
+    fun muteOnPage(parcel: Parcel, muted: Boolean, saved: () -> Unit) {
+        if (pageWorking) return
+        pageWorking = true
+        source.scope.launch {
+            try {
+                source.setMuted(parcel, muted)
+                saved()
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                actionError = source.errorMessage(error)
+            } finally {
+                pageWorking = false
+            }
+        }
+    }
 
     /** Where TalkBack goes back to once the filters have closed: their button. */
     val filtersButton = AccessibilityFocus()

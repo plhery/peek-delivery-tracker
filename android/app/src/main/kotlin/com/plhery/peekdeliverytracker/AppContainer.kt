@@ -18,6 +18,7 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierCatalogRefreshResult
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
+import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.DeliveryLiveActivities
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DemoRepository
@@ -248,6 +249,11 @@ class AppContainer(
         invitationShown = false,
         asksInDemo = reviewForced(),
     )
+
+    /** `parcels.deliveryEmail` as the account's preferences and the session change. */
+    val deliveryEmail: StateFlow<DeliveryEmail?> = combine(session.stateFlow, parcels.notificationPreferencesFlow) { _, _ ->
+        parcels.deliveryEmail
+    }.stateIn(scope, SharingStarted.Eagerly, parcels.deliveryEmail)
 
     private val catalogState = MutableStateFlow<CarrierCatalog?>(null)
 

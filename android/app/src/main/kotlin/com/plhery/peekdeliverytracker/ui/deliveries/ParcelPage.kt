@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -52,7 +51,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
@@ -61,25 +60,35 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
+import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
+import com.plhery.peekdeliverytracker.core.ParcelAttention
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.ParcelPageColumns
 import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
+import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.attention
+import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
+import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.LocalLanguage
+import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
-import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
 import com.plhery.peekdeliverytracker.ui.zoom.pageBarItem
 import java.util.UUID
 import kotlin.math.max
@@ -131,7 +140,7 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
             .semantics { paneTitle = title },
     ) {
         if (parcel != null) {
-            PageScroll(state, parcel, PageMargins(start, top, end, bottom))
+            PageScroll(state, parcel, parcelId, PageMargins(start, top, end, bottom))
             if (top > 0.dp) SoftTopEdge(top)
         } else {
             ContentUnavailable(
@@ -150,7 +159,7 @@ private class PageMargins(val start: Dp, val top: Dp, val end: Dp, val bottom: D
 
 /** The page's ScrollView: the paper, in one column or two, and the question under it. */
 @Composable
-private fun PageScroll(state: DeliveriesState, parcel: Parcel, margins: PageMargins) {
+private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, margins: PageMargins) {
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val history = showsHistory(parcel)
     BoxWithConstraints(Modifier.fillMaxSize()) {
@@ -179,13 +188,13 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, margins: PageMarg
             if (columns) {
                 // Given the room, the history stands beside the pass rather than under it.
                 Row(paper(PAGE_COLUMNS), horizontalArrangement = Arrangement.spacedBy(ParcelPageColumns.gap.dp)) {
-                    LiveParcelPass(parcel, divided = false, Modifier.weight(1f))
+                    LiveParcelPass(state, parcel, pageId, divided = false, Modifier.weight(1f))
                     PageHistory(parcel, history, Modifier.weight(1f))
                 }
             } else {
                 // The history's parts in the paper's own column, where a part not drawn leaves no gap.
                 Column(paper(PAGE_SINGLE_COLUMN), verticalArrangement = Arrangement.spacedBy(STACK_SPACING)) {
-                    LiveParcelPass(parcel, divided = true, Modifier.fillMaxWidth())
+                    LiveParcelPass(state, parcel, pageId, divided = true, Modifier.fillMaxWidth())
                     HistoryParts(parcel, history)
                 }
             }
@@ -200,31 +209,43 @@ private fun showsHistory(parcel: Parcel): Boolean =
 
 /**
  * `liveParcelPass`: the pass, then what the parcel waits for and what its carrier says, then its numbers, links and
- * details, 12 apart, a line under them where the history stands under the pass (`divided`).
+ * details, 12 apart, a line under them where the history stands under the pass (`divided`). TalkBack goes through its
+ * parts before it leaves them (`.accessibilityElement(children: .contain)`).
  */
 @Composable
-private fun LiveParcelPass(parcel: Parcel, divided: Boolean, modifier: Modifier) {
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(PASS_SPACING)) {
-        PassHeader(parcel)
+private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID, divided: Boolean, modifier: Modifier) {
+    Column(modifier.semantics { isTraversalGroup = true }, verticalArrangement = Arrangement.spacedBy(PASS_SPACING)) {
+        PassHeader(state, parcel, pageId)
+        // The delivery email's offer comes with the account's alerts.
         PickupPoint(parcel)
-        CarrierNotes(parcel)
+        CarrierNotes(state, parcel)
         ShipmentIdentity(parcel)
+        // The shipment's facts, what to do where no carrier is asked, and why the last check failed come with the
+        // shipment's identity.
         if (divided) Box(Modifier.fillMaxWidth().height(1.dp).background(PeekTheme.colors.separator))
     }
 }
 
 /**
- * The pass at the page's top: the carrier's marks and buttons, the map, the name, the stamp, the sender and the
- * status with its steps. Until it is ported, the parcel's name, as the pass titles it.
+ * The pass at the page's top ([LivePassCard]): the bell where alerts can be had, which needs an account and a parcel
+ * of the deliveries, and opens the parcel's alerts while the account's email is on; the share and the carrier where
+ * the parcel is the reader's own, rather than followed through someone else's link; and the map once the atlas is read.
  */
 @Composable
-private fun PassHeader(parcel: Parcel) {
-    val name = parcel.label.ifEmpty { localized("common.parcel") }
-    Text(
-        name,
-        Modifier.semantics { heading() },
-        color = PeekTheme.colors.label,
-        style = PeekTheme.type.style(IosTextStyle.Title2, FontWeight.Bold),
+private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
+    val session by state.source.session.collectAsState()
+    val email by state.source.deliveryEmail.collectAsState()
+    val sample = state.sample(pageId) != null
+    // A scan has a place, so the card shows the route once the map data has loaded.
+    val atlas = rememberWorldAtlas(wanted = parcel.trackingEvents.any { it.place != null })
+    val bell = if (session != AuthenticationState.Welcome && !sample) {
+        PassBell(opensAlerts = email?.bellOpensAlerts(parcel) == true) { muted, saved -> state.muteOnPage(parcel, muted, saved) }
+    } else {
+        null
+    }
+    LivePassCard(
+        parcel, atlas, sample = sample, readerLink = state.source.viewerLink(parcel) != null, bell = bell,
+        working = state.pageWorking, onMap = { state.openMap(pageId, it) },
     )
 }
 
@@ -233,10 +254,20 @@ private fun PassHeader(parcel: Parcel) {
 @Composable
 private fun PickupPoint(parcel: Parcel) = Unit
 
-/** What the carrier says the parcel waits for, and `ParcelQuietNote` while it goes quiet. Not ported yet. */
-@Suppress("UNUSED_PARAMETER")
+/**
+ * `ParcelQuietNote` while the parcel goes quiet, with a carrier to name: without one the note would say Peek keeps
+ * asking an unknown carrier. What the carrier says the parcel waits for comes with the pickup card.
+ */
 @Composable
-private fun CarrierNotes(parcel: Parcel) = Unit
+private fun CarrierNotes(state: DeliveriesState, parcel: Parcel) {
+    val now = LocalNow.current()
+    if (parcel.isArchived || parcel.displayedCarrier == CarrierId.Unknown || parcel.attention(now) != ParcelAttention.Stalled) return
+    val identity = shownCarrierIdentity(parcel, LocalLocalizer.current, LocalLanguage.current) ?: return
+    ParcelQuietNote(
+        parcel, PeekTheme.colors.resolve(identity.ink), onHelp = { state.source.action("parcel-carrier-help") },
+        Modifier.testTag(PAGE_QUIET),
+    )
+}
 
 /** `shipmentIdentity`: the numbers and the carrier's links, then the details and what a check said. Not ported yet. */
 @Suppress("UNUSED_PARAMETER")
@@ -502,3 +533,12 @@ const val PAGE_BAR = "parcelPage.bar"
 const val PAGE_BACK = "parcelPage.back"
 const val PAGE_MENU_BUTTON = "parcelPage.menuButton"
 const val PAGE_MENU = "parcelPage.menu"
+const val PAGE_PASS = "parcelPage.pass"
+const val PAGE_MARKS = "parcelPage.marks"
+const val PAGE_GLOBE = "parcelPage.globe"
+const val PAGE_SHARE = "parcelPage.share"
+const val PAGE_BELL = "parcelPage.bell"
+const val PAGE_NAME = "parcelPage.name"
+const val PAGE_ROUTE = "parcelPage.route"
+const val PAGE_PROMPT = "parcelPage.prompt"
+const val PAGE_QUIET = "parcelPage.quiet"

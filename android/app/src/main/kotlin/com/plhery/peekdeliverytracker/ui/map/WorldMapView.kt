@@ -59,6 +59,7 @@ import com.plhery.peekdeliverytracker.ui.theme.easing
 import com.plhery.peekdeliverytracker.core.UnitCurve
 import androidx.compose.animation.core.tween
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import java.time.Instant
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.ceil
 import kotlinx.coroutines.CancellationException
@@ -83,7 +84,8 @@ import androidx.compose.ui.geometry.Size as ComposeSize
  * time shows nothing until then; `entrance` is how the drawing then comes in, as SwiftUI's `.transition(.opacity)`
  * brings a map in once the atlas is read, and null shows it at once. A map whose picture changes keeps the old one
  * until the new one is made. Where its picture has to be there at once ([LocalMapsAtOnce]), the map makes it then, and
- * shows it with its first frame. Sizes, insets and boxes are in points (dp). Decorative.
+ * shows it with its first frame. An opened map names a facility as such (`sites`) and shades the night side as it is at
+ * `night`. Sizes, insets and boxes are in points (dp). Decorative.
  */
 @Composable
 fun WorldMapView(
@@ -93,7 +95,9 @@ fun WorldMapView(
     palette: MapPalette,
     modifier: Modifier = Modifier,
     labels: MapLabels = MapLabels.All,
+    sites: Boolean = false,
     showsContext: Boolean = true,
+    night: Instant? = null,
     live: Boolean = false,
     pip: PipRequest? = null,
     fades: Boolean = false,
@@ -110,7 +114,7 @@ fun WorldMapView(
     val context = LocalContext.current.applicationContext
     BoxWithConstraints(modifier.clearAndSetSemantics {}) {
         val request = MapSceneRequest(
-            atlas, route, mode, palette, labels, showsContext, pip, quiet, insets, covered, buttons, language,
+            atlas, route, mode, palette, labels, sites, showsContext, night, pip, quiet, insets, covered, buttons, language,
             maxWidth.value.toDouble(), maxHeight.value.toDouble(), colors.dark, colors.highContrast,
         )
         val atOnce = LocalMapsAtOnce.current
@@ -212,7 +216,9 @@ internal data class MapSceneRequest(
     val mode: ParcelRoute.Mode,
     val palette: MapPalette,
     val labels: MapLabels,
+    val sites: Boolean,
     val showsContext: Boolean,
+    val night: Instant?,
     val pip: PipRequest?,
     val quiet: Boolean,
     val insets: EdgeInsets,
@@ -309,18 +315,18 @@ internal object MapScenes {
             // or Pip his spot beside the parcel; a route that leaves him no spot at its end is framed with room for him.
             val shown = { camera: GlobeCamera, box: Rect? ->
                 MapOverlay(
-                    route, camera, size, insets, labels, sites = false, mode = mode, context = false, atlas = atlas, locale = locale,
+                    route, camera, size, insets, labels, sites = sites, mode = mode, context = false, atlas = atlas, locale = locale,
                     countryName = { it }, pip = standing, covered = box, buttons = buttons, measurer = widths,
                 ).shown
             }
             GlobeCamera.framing(route, mode, size, insets, covered = covered, shown = shown, pip = standing != null, closeUps = false)
         }
         val overlay = MapOverlay(
-            route, camera, size, insets, labels, sites = false, mode = mode, context = showsContext, atlas = atlas, locale = locale,
+            route, camera, size, insets, labels, sites = sites, mode = mode, context = showsContext, atlas = atlas, locale = locale,
             countryName = { TrackingLocation.countryName(it, language) }, pip = standing, covered = covered, buttons = buttons,
             measurer = widths,
         )
-        val base = MapPainter.drawBase(size, atlas, route, camera, palette, night = null) + MapPainter.drawLegs(overlay, palette, quiet)
+        val base = MapPainter.drawBase(size, atlas, route, camera, palette, night = night) + MapPainter.drawLegs(overlay, palette, quiet)
         val marks = MapPainter.drawMarks(overlay, palette, moving = false, quiet = quiet, measurer = widths)
         val wide = ceil(width).toInt().coerceAtLeast(1)
         val tall = ceil(height).toInt().coerceAtLeast(1)

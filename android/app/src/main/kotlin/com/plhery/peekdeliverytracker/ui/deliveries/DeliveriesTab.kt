@@ -254,6 +254,8 @@ fun DeliveriesTab(
         }
         // The page's ••• menu, over the whole window where the tab shell draws it.
         PageMenuHost(state)
+        // The page's map, over the whole window where the tab shell draws it.
+        ParcelMapHost(state)
         // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.
         DeliveredPaper(state)
     }

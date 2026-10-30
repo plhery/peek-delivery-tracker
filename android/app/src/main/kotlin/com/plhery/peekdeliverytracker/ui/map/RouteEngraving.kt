@@ -66,6 +66,15 @@ fun RouteEngraving(
     )
 }
 
+object RouteEngravingMetrics {
+    /**
+     * `RouteEngraving.handoverRoom`: a second carrier's mark adds a line to the top of a card with a map. The card grows
+     * by two lines, and its route starts that much lower, so it keeps the room it has on any other card. Pip keeps his
+     * ceiling: beside the parcel's dot, he only keeps off the mark.
+     */
+    const val HANDOVER_ROOM: Double = 40.0
+}
+
 /**
  * `CardRoute` (A-S83): a parcel's whole journey, small, at the end of its card. It belongs to the card's picture and is
  * not there to be read: no names, no Pip, no pulse, and a line and dots as pale as the map they lie on. `surface` is

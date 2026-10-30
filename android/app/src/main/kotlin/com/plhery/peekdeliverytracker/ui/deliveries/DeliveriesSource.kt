@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
@@ -65,6 +66,12 @@ interface DeliveriesSource {
     suspend fun restore(parcel: Parcel)
 
     suspend fun permanentlyDelete(parcel: Parcel)
+
+    /** `store.setMuted(_:muted:)`: switches the parcel's notifications off, or back on. Nothing for a guest's parcel. */
+    suspend fun setMuted(parcel: Parcel, muted: Boolean)
+
+    /** `store.deliveryEmail`, as the account's preferences and the session change: null without one. */
+    val deliveryEmail: StateFlow<DeliveryEmail?>
 
     /** `store.viewerLink(for:)`: the link someone else's parcel is followed through, which its menu reads. */
     fun viewerLink(parcel: Parcel): String?
@@ -133,6 +140,10 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override suspend fun restore(parcel: Parcel) = container.parcels.restore(parcel)
 
     override suspend fun permanentlyDelete(parcel: Parcel) = container.parcels.permanentlyDelete(parcel)
+
+    override suspend fun setMuted(parcel: Parcel, muted: Boolean) = container.parcels.setMuted(parcel, muted)
+
+    override val deliveryEmail get() = container.deliveryEmail
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
 

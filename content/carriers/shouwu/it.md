@@ -49,7 +49,7 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | All'aeroporto di Shanghai, poi decollato dalla Cina. | «In transito» |
 | `Arrived at airport of Destination` | Atterrato nel Paese di arrivo. | «In transito» |
 | `Shipment started the customs clearance process at destination` | Sdoganamento in corso nel Paese di arrivo. | «In dogana» |
-| `Custom clearance completed` | La dogana di arrivo l'ha lasciato passare. | «In transito» |
+| `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | La dogana di arrivo l'ha lasciato passare. | «In transito» |
 | `Delivery to local courier` | Passato al corriere che consegna nel tuo Paese, non a te. | «In transito» |
 | `First parcel scan along Poste Italiane’s logistic network` | Poste Italiane ha ricevuto il pacco: è la sua prima scansione. | «In transito» |
 | `In transit along Poste Italiane’s logistic network` | In viaggio nella rete di Poste Italiane. | «In transito» |

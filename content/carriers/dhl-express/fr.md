@@ -34,6 +34,7 @@ Voici les libellés de scan que Peek lit chez DHL Express, dans l'anglais de DHL
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | En transit | Il avance dans le réseau de DHL. |
 | `Scheduled to depart on the next planned movement` | En transit | Il attend dans un site son prochain camion ou vol. |
 | `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | À la douane | Il passe la douane (voir plus bas). |
+| `On hold awaiting for payment of shipment related fees` | À la douane | Tu dois payer des droits ou des frais, et DHL garde le colis tant qu'ils ne sont pas réglés. Ce n'est pas un problème d'envoi. |
 | `Payment is received and recorded for shipment related fees` | À la douane | Les droits ou frais sont payés ; il reste en douane jusqu'à la fin du dédouanement. |
 | `Clearance processing complete at` | En transit | La douane en a fini avec lui, il repart. |
 | `Arrived at DHL Delivery Facility` | En transit | Il est arrivé au site DHL qui va le livrer. |

@@ -38,7 +38,7 @@ Straightship's tracker is in English. It shows a summary, with a "Package Status
 | `Delivered` | Delivered, with the town and province. |
 | `Package is being returned to shipper` | On its way back to the seller. |
 
-Two attempt lines tell you what to do. `An attempt was made to deliver your package-consignee closed (please e-mail SS@straightship.com to make arrangement)` means the place it was addressed to was closed; the same line ending in `unable to leave package at safe location` means the driver found nowhere safe to leave it. Both ask you to email Straightship to arrange the next delivery.
+Two attempt lines tell you what to do. `An attempt was made to deliver your package-consignee closed (please e-mail SS@straightship.com to make arrangement)` means the place it was addressed to was closed; the same line with `unable to leave package at safe location` in place of `consignee closed` means the driver found nowhere safe to leave it. Both ask you to email Straightship to arrange the next delivery.
 
 Three things confuse people:
 
@@ -100,7 +100,7 @@ Peek checks every 10 minutes from 8:00 to 22:00 Swiss time (about 2:00 to 16:00 
 
 ### Is Straightship legit?
 
-Yes. Straightship Solutions Limited is a logistics company in Burnaby, British Columbia, founded by Justin Thompson, William Qu and Kevin O'Byrne. Its site lists SHEIN, Canada Post, FedEx, COSCO and YTO among its partners and says it has over 85 delivery hubs.
+Yes. Straightship Solutions Limited is a logistics company in Burnaby, British Columbia. Its site lists SHEIN, Canada Post, FedEx, COSCO and YTO among its partners and says it has over 85 delivery hubs.
 
 ### What does "Package will be delivered before 9:00pm" mean?
 
@@ -120,13 +120,12 @@ Straightship's own drivers, from its depots across Canada, as far as its tracker
 
 :::sources
 - [Straightship: Home](https://www.straightship.com/new/) – Asia to North America, own fleet, tracking box, POD image, partners, phone, email, hours
-- [Straightship: About](https://www.straightship.com/new/about.html) – founders, door-to-door from Asia to North America
+- [Straightship: About](https://www.straightship.com/new/about.html) – door-to-door from Asia to North America
 - [Straightship: Services](https://www.straightship.com/new/services.html) – own network covering 95% of Canada's population; US-to-Canada service with last-mile options of its own network, Canada Post, Purolator or UPS; customs clearance
 - [Straightship: 服务 (services, Chinese)](https://www.straightship.com/new/cn/services.html) – the same US-to-Canada service with its own network, Canada Post, FedEx or UPS for the last mile
 - [Straightship: Resources](https://www.straightship.com/new/resources.html) – over 85 delivery hubs
 - [Straightship: Contact](https://www.straightship.com/new/contact.html) – contact reasons, tracking number required, 2 business days
 - [Straightship: Privacy Policy](https://www.straightship.com/new/privacy.html) – Straightship Solutions Limited, Burnaby
-- [Straightship: Canada B2C Shipment Tracking](https://www.straightship.com/track-your-shipment/tracking-id/STRTD000000000/) – tracker heading, "No results found!", customer service hours
 - [CBSA: Importing casual goods by courier](https://www.cbsa-asfc.gc.ca/import/courier/lvs-efv/prsn-eng.html) – couriers account for duty and taxes, clearance fees outside the CBSA's control
 - [CBSA: Protect yourself against fraud](https://www.cbsa-asfc.gc.ca/security-securite/pyaf-pvcf-eng.html) – the courier organizes payment before delivery and holds the parcel, no SIN or card requests
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings, UTC note, summary values

@@ -32,6 +32,7 @@ These are scan wordings Peek reads from DHL Express, in DHL's English, roughly i
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | In transit | It's moving through DHL's network. |
 | `Scheduled to depart on the next planned movement` | In transit | It's waiting at a facility for its next truck or flight. |
 | `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | At customs | It's going through customs (see below). |
+| `On hold awaiting for payment of shipment related fees` | At customs | You owe duties or fees, and DHL holds the parcel until they're paid. Nothing is wrong with the shipment. |
 | `Payment is received and recorded for shipment related fees` | At customs | The duties or fees have been paid; it stays at customs until clearance is complete. |
 | `Clearance processing complete at` | In transit | Customs has finished with it and it's moving again. |
 | `Arrived at DHL Delivery Facility` | In transit | It has reached the DHL facility that delivers it. |

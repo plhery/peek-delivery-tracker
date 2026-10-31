@@ -32,6 +32,7 @@ Estos son los textos de escaneo que Peek lee de DHL Express, en el inglés de DH
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | En tránsito | Avanza por la red de DHL. |
 | `Scheduled to depart on the next planned movement` | En tránsito | Espera en un centro su próximo camión o vuelo. |
 | `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | En aduanas | Está pasando la aduana (más abajo). |
+| `On hold awaiting for payment of shipment related fees` | En aduanas | Tienes que pagar aranceles o gastos, y DHL retiene el paquete hasta que estén pagados. No es un problema del envío. |
 | `Payment is received and recorded for shipment related fees` | En aduanas | Ya se han pagado los aranceles o gastos; sigue en aduanas hasta que termine el despacho. |
 | `Clearance processing complete at` | En tránsito | La aduana ha terminado con él y vuelve a moverse. |
 | `Arrived at DHL Delivery Facility` | En tránsito | Ha llegado al centro de DHL que lo reparte. |

@@ -32,6 +32,7 @@ To skany, które Peek odczytuje z DHL Express, w angielskim brzmieniu DHL, mniej
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | W transporcie | Paczka jedzie przez sieć DHL. |
 | `Scheduled to depart on the next planned movement` | W transporcie | Czeka w placówce na najbliższy transport lub lot. |
 | `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | W urzędzie celnym | Trwa odprawa celna (więcej niżej). |
+| `On hold awaiting for payment of shipment related fees` | W urzędzie celnym | Musisz zapłacić cło lub opłaty; do tego czasu DHL wstrzymuje paczkę. To nie jest problem z przesyłką. |
 | `Payment is received and recorded for shipment related fees` | W urzędzie celnym | Cło lub opłaty są zapłacone; paczka czeka w urzędzie celnym do końca odprawy. |
 | `Clearance processing complete at` | W transporcie | Odprawa się skończyła i paczka jedzie dalej. |
 | `Arrived at DHL Delivery Facility` | W transporcie | Paczka dotarła do placówki DHL, która ją doręczy. |

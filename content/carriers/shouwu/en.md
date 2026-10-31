@@ -49,7 +49,7 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | At the airport in Shanghai, then flown out of China. | "In transit" |
 | `Arrived at airport of Destination` | Landed in your country. | "In transit" |
 | `Shipment started the customs clearance process at destination` | Your country's customs are clearing it. | "At customs" |
-| `Custom clearance completed` | Your country's customs have let it through. | "In transit" |
+| `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | Your country's customs have let it through. | "In transit" |
 | `Delivery to local courier` | Handed to the courier that delivers in your country, not to you. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
 | `Delivered by post man` | The local post has delivered it. | "Delivered", once Shouwu's status says `Delivered` |

@@ -32,6 +32,7 @@ Estas são as leituras que o Peek recebe da DHL Express, no inglês da DHL, mais
 | `Processed at`, `Arrived at DHL Sort Facility`, `Shipment has departed from a DHL facility`, `Shipment is in transit to destination` | Em trânsito | Está a avançar na rede da DHL. |
 | `Scheduled to depart on the next planned movement` | Em trânsito | Espera num centro pelo próximo camião ou voo. |
 | `Customs clearance status updated. Note - The Customs clearance process` …, `Processed for clearance at`, `Clearance event` | Na alfândega | Está a passar pela alfândega (ver abaixo). |
+| `On hold awaiting for payment of shipment related fees` | Na alfândega | Tens de pagar direitos ou taxas, e a DHL retém a encomenda até estarem pagos. Não é um problema do envio. |
 | `Payment is received and recorded for shipment related fees` | Na alfândega | Os direitos ou taxas estão pagos; fica na alfândega até o desalfandegamento terminar. |
 | `Clearance processing complete at` | Em trânsito | A alfândega acabou e a encomenda segue viagem. |
 | `Arrived at DHL Delivery Facility` | Em trânsito | Chegou ao centro da DHL que a vai entregar. |

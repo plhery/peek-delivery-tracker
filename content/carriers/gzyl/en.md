@@ -45,6 +45,8 @@ GZYL writes its steps in English, typos included. In the order a parcel gets the
 | `Package is on the way` | Moving on in your country, with a town. It doesn't say the parcel is out for delivery. | "In transit" |
 | `Delivered` | The delivery, with the town. It may be a plan, not a scan: see below. | "Delivered" |
 
+**Through the United States.** A parcel can also show `Los Angeles Processing Center has received it`, with a city in brackets after it: a processing centre in the United States has taken it on its way to its destination. Peek shows "In transit".
+
 **A line in Chinese.** For an order with no scans yet, the platform GZYL's tracker runs on writes `货物电子信息已经收到` by itself: "the goods' electronic information has been received". The seller has created the order, but nobody has scanned the parcel. Peek shows the line in Chinese, under "Label created".
 
 **Times.** Every time on GZYL's tracker is on Beijing's clock, steps in your country included, with no time zone shown. In winter, a step at 20:00 there is noon in London and 7am in New York.

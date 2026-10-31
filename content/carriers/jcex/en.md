@@ -21,7 +21,7 @@ Lower case and spaces don't matter in Peek. JCEX's tracker takes up to 100 numbe
 
 **Where to find it.** No JCEX page says how the number reaches you. The seller books the parcel and gives the number in the shipping email or on the order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
 
-**No second number.** JCEX's tracker has room for a second number, `跟踪单号` (tracking number), next to the waybill. In the JCEX histories read so far it stays empty, even when USPS or Colissimo makes the delivery: their scans appear in JCEX's history instead.
+**A second number.** JCEX's tracker can show a second number, `跟踪单号` (tracking number), next to the waybill when JCEX fills it in. Peek doesn't read it: when USPS or Colissimo makes the delivery, their scans appear in JCEX's history instead.
 
 ## JCEX tracking statuses explained
 
@@ -53,7 +53,7 @@ Two things confuse people. JCEX files the handover to the delivering carrier's d
 
 JCEX doesn't deliver in your country itself. Its pages say small parcels (up to 2 kg, by air) are delivered by the post, and heavier express parcels by the post or a commercial courier. In histories read on JCEX's tracker, USPS delivered in the United States and Colissimo, [La Poste](carrier:la-poste)'s parcel service, in France.
 
-JCEX publishes no rules for delivery attempts, notice cards, pickup points or how long a parcel is held: those are the delivering carrier's, and its lines in JCEX's history say what it did. In one French history, Colissimo wrote that it couldn't deliver the parcel and would take it out for delivery again the next day (except Sundays and public holidays). JCEX doesn't show that carrier's own number, so ask the seller for it if you need to rearrange a delivery.
+JCEX publishes no rules for delivery attempts, notice cards, pickup points or how long a parcel is held: those are the delivering carrier's, and its lines in JCEX's history say what it did. In one French history, Colissimo wrote that it couldn't deliver the parcel and would take it out for delivery again the next day (except Sundays and public holidays). Peek doesn't show that carrier's own number, so ask the seller for it if you need to rearrange a delivery.
 
 ## JCEX parcel not arriving or tracking stuck
 
@@ -80,9 +80,9 @@ Its contact page also lists branches across China, which serve sellers, and no c
 
 [Peek](/) names JCEX at once from a `JCZ…DH` number, which no other carrier in its catalog shares. A track.jcex.com link with `?nums=` and the number can be pasted too. Peek tracks JCEX's JCZ waybill numbers only: for an order number, ask the seller for the waybill.
 
-Peek reads JCEX's own tracking and shows the status, the history with each scan's place on a map, the delivery time and the destination country. It shows a line's English text where JCEX has one (JCEX's page shows the Chinese, such as `签收` for `Delivered`), and the delivering carrier's lines as it wrote them, except exact matches such as `Delivered`, which appear in Peek's own words. `Arrive at the delivery point` and the handover to the depot count as in transit, not as ready to collect or delivered. Each scan's time is read on the clock JCEX gives it, China's or your country's, and shown in your own time zone.
+Peek reads JCEX's own tracking and shows the status, the history with each scan's place on a map, the delivery time and the destination country. It shows a line's English text where JCEX has one, and the delivering carrier's lines as it wrote them, except exact matches such as `Delivered`, which appear in Peek's own words. `Arrive at the delivery point` and the handover to the depot count as in transit, not as ready to collect or delivered. Each scan's time is read on the clock JCEX gives it, China's or your country's, and shown in your own time zone. Rows dated after the lookup, and the timeline JCEX sometimes writes ahead up to the handover, aren't scans: Peek leaves them out, and shows a row JCEX repeats once.
 
-As JCEX names no delivering carrier and no second number, Peek follows the JCEX number to the end rather than switching to USPS or Colissimo, whose scans arrive through JCEX's history. It shows no expected delivery date, service or proof of delivery for JCEX.
+As JCEX names no delivering carrier and Peek doesn't read the second number, Peek follows the JCEX number to the end rather than switching to USPS or Colissimo, whose scans arrive through JCEX's history. It shows no expected delivery date, service or proof of delivery for JCEX.
 
 It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact JCEX or the seller for you.
 

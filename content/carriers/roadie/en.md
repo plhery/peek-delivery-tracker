@@ -37,6 +37,7 @@ Roadie's tracker lists the steps newest first, each with its time, and an estima
 | `Transferred to Carrier` | Roadie has handed the delivery to another carrier. The tracker then shows that carrier's tracking number, and a link to UPS's tracking when UPS has it. |
 | `Delayed` | The delivery is late. Roadie's tracker says it will share a new delivery date soon. |
 | `Canceled` | The delivery won't go ahead. The tracker can say why: the order was canceled, the item was out of stock or already delivered, or the order was lost. Contact the shop. |
+| `Expired` | Roadie's tracker shows this with an alert and no steps, as it does for a canceled delivery. Ask the shop what happened to it. |
 
 **The ZIP code lock.** Roadie's tracker hides the delivery address, the delivery photo and the next carrier's tracking number until you type the delivery ZIP code under "Unlock Delivery Details". After a delivery, the photo stays there for 14 days.
 

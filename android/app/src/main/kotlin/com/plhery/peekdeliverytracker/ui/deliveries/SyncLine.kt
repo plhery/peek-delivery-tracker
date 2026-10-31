@@ -72,8 +72,8 @@ internal fun SyncLine(parcel: Parcel, tint: Color, working: Boolean, onRefresh: 
 
 /**
  * The sync line's refresh: an arrow in caption in `tint`, in 26 square, which TalkBack hears as "Check now". It waits
- * while `working`, its arrow turning a turn a second, or pulsing under Reduce Motion, as the list's does
- * ([refreshing]). Compose takes touches up to 48 square around so small a button, as Android asks, and leaves the
+ * at half strength while `working`, its arrow turning a turn a second, or pulsing under Reduce Motion, as the list's
+ * does ([refreshing]). Compose takes touches up to 48 square around so small a button, as Android asks, and leaves the
  * line as the iPhone lays it.
  */
 @Composable
@@ -84,6 +84,7 @@ private fun RefreshButton(tint: Color, working: Boolean, onRefresh: () -> Unit) 
             .size(REFRESH_SIDE)
             .testTag(PAGE_REFRESH)
             .clickable(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button, onClick = onRefresh)
+            .plainDisabled(!working)
             .semantics { contentDescription = label },
         contentAlignment = Alignment.Center,
     ) {

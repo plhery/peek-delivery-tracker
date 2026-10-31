@@ -446,7 +446,7 @@ private fun PassMarks(
     }
 }
 
-/** A button of the card's top row, 44 square, as the iPhone's plain buttons dim while pressed. */
+/** A button of the card's top row, 44 square, as the iPhone's plain buttons dim while pressed or off. */
 @Composable
 private fun HeaderButton(
     label: String,
@@ -461,6 +461,7 @@ private fun HeaderButton(
             .size(HEADER_BUTTON)
             .testTag(tag)
             .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .plainDisabled(enabled)
             .semantics { contentDescription = label },
         contentAlignment = Alignment.Center,
     ) {

@@ -448,7 +448,7 @@ private fun Sharing(work: ParcelShareSheetWork, parcel: Parcel, working: Boolean
 /**
  * The heading, "share.titleNamed" with the parcel's name or "share.title", title2 semibold across what the close
  * button leaves it, 16 from it: an ✕ of 13 semibold in a circle of the ink at 7 %, 36 across in 44, a plain button
- * named "common.close", off while sharing, copying or stopping is under way.
+ * named "common.close", off and faded while sharing, copying or stopping is under way.
  */
 @Composable
 private fun ShareHeader(name: String?, working: Boolean, close: () -> Unit) {
@@ -469,6 +469,7 @@ private fun ShareHeader(name: String?, working: Boolean, close: () -> Unit) {
                 .size(44.dp)
                 .testTag(PARCEL_SHARE_CLOSE)
                 .clickable(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button, onClick = close)
+                .plainDisabled(!working)
                 .semantics { contentDescription = closeLabel },
             contentAlignment = Alignment.Center,
         ) {
@@ -761,7 +762,10 @@ private fun PrimaryButton(title: String, symbol: String?, tag: String, enabled: 
     }
 }
 
-/** "share.stop" in footnote secondary, underlined, at the trailing end, 44 tall, a plain button; off while working. */
+/**
+ * "share.stop" in footnote secondary, underlined, at the trailing end, 44 tall, a plain button; off and faded while
+ * working.
+ */
 @Composable
 private fun StopButton(enabled: Boolean, stop: () -> Unit) {
     val colors = PeekTheme.colors
@@ -770,6 +774,7 @@ private fun StopButton(enabled: Boolean, stop: () -> Unit) {
             Modifier
                 .testTag(PARCEL_SHARE_STOP)
                 .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = stop)
+                .plainDisabled(enabled)
                 .heightIn(min = 44.dp),
             contentAlignment = Alignment.Center,
         ) {

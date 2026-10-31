@@ -81,6 +81,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.draw.rotate
@@ -985,6 +986,12 @@ private const val NARROW = "narrow"
 
 /** `.buttonStyle(.plain)`: the label dims a little while pressed. */
 internal val PlainPress = PressStyle(opacity = 0.7f, animation = MotionCurve.EaseOut(0.12))
+
+/**
+ * `.buttonStyle(.plain)` while `.disabled`: the whole button, what it is drawn on too, at half strength, as SwiftUI
+ * draws it. A button of the default style in its own colour keeps it.
+ */
+internal fun Modifier.plainDisabled(enabled: Boolean): Modifier = if (enabled) this else alpha(0.5f)
 
 /** Whether TalkBack, or another service that explores by touch, is on: the list adds a refresh button for it. */
 @Composable

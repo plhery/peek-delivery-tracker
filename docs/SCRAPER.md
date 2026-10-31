@@ -223,10 +223,11 @@ node scripts/replay-stored-scans.mjs --from <previous version> --sql replay.sql 
 ```
 
 `--from` replays the rows with the release the app had before too and keeps the rows it reads as
-they are stored: the ones this release changes. The report names rows by their ids' first eight
-characters and shows no number, place or wording. `replay.sql` updates those rows, each guarded
-on its stored values, in one transaction left open to roll back or commit. A row a fixed bug wrote
-is changed as any named-row fix is: a backup first, then a rolled-back run before the commit.
+they are stored or otherwise than this release: the ones this release changes. The report names
+rows by their ids' first eight characters and shows no number, place or wording. `replay.sql`
+updates those rows, each guarded on its stored values, in one transaction left open to roll back
+or commit. A row a fixed bug wrote is changed as any named-row fix is: a backup first, then a
+rolled-back run before the commit.
 
 An open parcel whose rows showed progress, none of them once the changes apply, steps back with
 them: to the label when a row shows one, else to pending, guarded on its saved stage. Until then

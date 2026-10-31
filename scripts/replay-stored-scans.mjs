@@ -1,12 +1,12 @@
 // A dry run of the installed scraper release over production's stored scans, asking no provider
 // (docs/SCRAPER.md). `--query` prints the read-only export to run on the database; its output, one
 // parcel a line, goes to stdin. `--from <version>` replays the rows with that earlier release too
-// and keeps the rows it reads as they are stored: the ones this release changes. It takes
-// 0.621.0-main.2946 or later, the first release to export `carrierHomeZone`, which the replay
-// imports; an older one fails on that import. The report names rows by their ids' first eight
-// characters and shows no number, place or wording. `--sql <file>` writes the guarded transaction
-// that would apply the changes and step back the open parcels no row then shows past the label,
-// `--source <a,b>` keeps the rows of those sources only.
+// and keeps the rows it reads as they are stored or otherwise than this one: the ones this release
+// changes. It takes 0.621.0-main.2946 or later, the first release to export `carrierHomeZone`,
+// which the replay imports; an older one fails on that import. The report names rows by their ids'
+// first eight characters and shows no number, place or wording. `--sql <file>` writes the guarded
+// transaction that would apply the changes and step back the open parcels no row then shows past
+// the label, `--source <a,b>` keeps the rows of those sources only.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -54,7 +54,7 @@ const sources = option('--source')?.split(',') ?? null;
 const from = option('--from');
 const lines = readFileSync(0, 'utf8').split('\n').map((line) => line.trim()).filter((line) => line.startsWith('{'));
 const parcels = lines.map((line) => JSON.parse(line)).map((parcel) => ({ ...parcel, events: parcel.events ?? [] }));
-const key = (change) => `${change.kind} ${change.row}`;
+const key = (change) => `${change.kind} ${change.row} ${change.to}`;
 const earlier = from ? new Set(parcels.flatMap((await earlierRelease(from)).replayParcel).map(key)) : new Set();
 const replayed = parcels.flatMap(replayParcel).filter((change) => !sources || sources.includes(change.source));
 const changes = replayed.filter((change) => !earlier.has(key(change)));
@@ -64,7 +64,7 @@ const short = (id) => id.slice(0, 8);
 const minute = (iso) => iso.slice(0, 16).replace('T', ' ') + 'Z';
 
 console.log(`Replayed ${parcels.reduce((sum, parcel) => sum + parcel.events.length, 0)} stored rows of ${parcels.length} parcels with universal-parcel-scraper ${version}.`);
-if (from) console.log(`Left out ${replayed.length - changes.length} rows ${from} already reads otherwise than they are stored.`);
+if (from) console.log(`Left out ${replayed.length - changes.length} rows ${from} already reads as this release does, otherwise than they are stored.`);
 for (const kind of ['clock', 'stage']) {
   const found = changes.filter((change) => change.kind === kind);
   console.log(`\n${kind === 'clock' ? 'Clocks' : 'Stages'}: ${found.length} rows on ${new Set(found.map((change) => change.parcel)).size} parcels, ${found.filter((change) => change.open).length} of them on open parcels.`);

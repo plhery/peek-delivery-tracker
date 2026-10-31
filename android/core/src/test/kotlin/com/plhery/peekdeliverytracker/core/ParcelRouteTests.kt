@@ -1515,6 +1515,28 @@ class ParcelRouteTests {
     }
 
     @Test
+    fun aPlaceAboveTheCloseButtonsRowHasNoName() {
+        // A tablet upright, 800 × 1280, its status bar 24 tall and its gesture bar 32, the map moved by hand so Paris's dot
+        // stands near its top left corner. Above the close button's row, which ends 76 down, it keeps its dot but not its
+        // name, on the iPhone too: a place the frame's insets leave out isn't named (`names(_:)`), and no side of its dot
+        // has room for a name inside them (`nameBox`). At 75, within the 2 the insets give a place, it has its name.
+        val size = Size(800.0, 1280.0)
+        val safe = EdgeInsets(top = 24.0, leading = 0.0, bottom = 32.0, trailing = 0.0)
+        // Close by on its side, then moved, and turned upright: a moved map keeps its camera through the turn.
+        val start = matchaFrame(Size(1280.0, 800.0), safe)
+        val paris = checkNotNull(matcha.stops.firstOrNull { it.place.name == "Paris" }).place.point
+        fun moved(y: Double): MapOverlay {
+            val at = GlobeProjection(start).project(paris)
+            val camera = GlobeCamera(start.center, start.scale, Point(start.offset.x + 170 - at.x, start.offset.y + y - at.y))
+            return matchaCloseBy(size, safe, camera)
+        }
+        val high = moved(65.0)
+        assertTrue(high.dots.any { abs(it.point.x - 170) < 1e-6 && abs(it.point.y - 65) < 1e-6 })
+        assertFalse(high.labels.any { it.text == "Paris" })
+        assertTrue(moved(75.0).labels.any { it.text == "Paris" })
+    }
+
+    @Test
     fun demoParcelsCarryPlaces() {
         val parcels = DemoRepository.seed()
         val matcha = parcels.firstOrNull { it.label.startsWith("Matcha") }

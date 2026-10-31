@@ -39,6 +39,8 @@ iMile's scans below are in its English wording, as Peek reads them. Names in 【
 | `Our delivery associate is out for delivery.` | On the van today. |
 | `User not at home` | The attempt failed: this is the driver's reason. |
 | `Delivery attempt finished,return to Local logistics company warehouse.` | After a failed attempt, the parcel is back at the station. |
+| `The delivery method has been confirmed with the recipient as Self-Pickup.` | After a failed attempt, you've agreed to collect the parcel yourself. It hasn't moved yet. |
+| `The parcel has been delivered to …. Please collect your parcel promptly at … using your pickup code.` | It waits at the pickup point the line names, at the address it gives: collect it with your pickup code. "Delivered" means to that point, not to you; Peek shows "Ready for pickup". |
 | `【Contact Error】need to return.` | The driver couldn't reach you, and the return starts. |
 | `Your order has been delivered successfully.` | Delivered. |
 | `Order delivery failed, returning to sender.` | It is going back to the sender. |
@@ -58,7 +60,7 @@ iMile's International Dropship Delivery service lists a "Self-owned last-mile de
 
 **US, Canada and Ireland.** None of the three is on iMile's list of office locations, and iMile's pages don't say who delivers its parcels there. Ask the shop which carrier delivers, and keep checking iMile's tracking page.
 
-**Failed attempts and pickup.** iMile publishes no rule for these countries on how many attempts it makes, notice cards or how long it keeps a parcel. Its own scans tell you what happened: the driver's reason, then the parcel back at the station, then either a new run or `【Contact Error】need to return.` iMile lists PUDOs (pick up, drop off points) among its services but names none in these countries. Its general FAQ, written mostly for the UAE, says:
+**Failed attempts and pickup.** iMile publishes no rule for these countries on how many attempts it makes, notice cards or how long it keeps a parcel. Its own scans tell you what happened: the driver's reason, then the parcel back at the station, then a new run, `【Contact Error】need to return.` or, if you agreed to collect it, a line naming the pickup point where it waits (see above). iMile lists PUDOs (pick up, drop off points) among its services but names none in these countries. Its general FAQ, written mostly for the UAE, says:
 
 - its customer hotline takes "rescheduling requests";
 - to change the address, contact customer support "before the shipment reaches the final delivery stage", or use the iMile Online Bot;

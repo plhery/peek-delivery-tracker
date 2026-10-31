@@ -39,6 +39,8 @@ Los escaneos de iMile están en inglés, tal como los lee Peek. Lo que va entre 
 | `Our delivery associate is out for delivery.` | Sale hoy a reparto. |
 | `User not at home` | El intento ha fallado: es el motivo que anota el repartidor. |
 | `Delivery attempt finished,return to Local logistics company warehouse.` | Tras el intento fallido, el paquete vuelve a la delegación. |
+| `The delivery method has been confirmed with the recipient as Self-Pickup.` | Tras el intento fallido, has aceptado recoger tú el paquete. Todavía no se ha movido. |
+| `The parcel has been delivered to …. Please collect your parcel promptly at … using your pickup code.` | Te espera en el punto de recogida que nombra el paso, en la dirección que da: recógelo con tu código de recogida. «Delivered» quiere decir entregado en ese punto, no a ti; Peek muestra «Listo para recoger». |
 | `【Contact Error】need to return.` | El repartidor no ha podido contactar contigo y empieza la devolución. |
 | `Your order has been delivered successfully.` | Entregado. |
 | `Order delivery failed, returning to sender.` | Vuelve al remitente. |
@@ -54,7 +56,7 @@ Otros motivos que puede anotar el repartidor, además de `User not at home`: `wr
 
 **No vayas a la sede.** El aviso legal de iMile España da su domicilio social en la calle Gamonal 11, en Madrid, y avisa: «Únicamente domicilio social. No se presta servicio de paquetería en esta dirección».
 
-**Intentos y puntos de recogida.** iMile no publica para España cuántos intentos hace, si deja aviso ni cuánto guarda el paquete, y no da ninguna lista de puntos de recogida. Lo que pasó lo cuentan sus propios escaneos: el motivo del repartidor, la vuelta a la delegación y después otra salida a reparto o `【Contact Error】need to return.`. Su política de privacidad incluye, entre los usos de tus datos, enviarte novedades del seguimiento y «facilitar opciones de entrega cómodas (como la selección de franjas horarias concretas)», pero no explica cómo pedirlas.
+**Intentos y puntos de recogida.** iMile no publica para España cuántos intentos hace, si deja aviso ni cuánto guarda el paquete, y no da ninguna lista de puntos de recogida. Lo que pasó lo cuentan sus propios escaneos: el motivo del repartidor, la vuelta a la delegación y después otra salida a reparto, `【Contact Error】need to return.` o, si aceptas recogerlo tú, un paso con el punto de recogida donde te espera (ver arriba). Su política de privacidad incluye, entre los usos de tus datos, enviarte novedades del seguimiento y «facilitar opciones de entrega cómodas (como la selección de franjas horarias concretas)», pero no explica cómo pedirlas.
 
 **Cambiar la dirección.** Las preguntas frecuentes generales de iMile, pensadas sobre todo para Emiratos, dicen que hay que contactar con atención al cliente antes de que el envío llegue a la fase final de entrega, o usar su asistente en línea. Más en [cambiar la dirección de entrega](guide:change-delivery-address) y [entrega fallida](guide:missed-delivery).
 

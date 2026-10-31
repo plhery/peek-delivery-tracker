@@ -39,6 +39,8 @@ iMiles Scans sind auf Englisch, so wie Peek sie liest. In den Klammern 【】 st
 | `Our delivery associate is out for delivery.` | Heute in Zustellung. |
 | `User not at home` | Der Zustellversuch ist gescheitert. Das ist der Grund, den der Fahrer einträgt. |
 | `Delivery attempt finished,return to Local logistics company warehouse.` | Nach dem gescheiterten Versuch geht das Paket zurück in den Stützpunkt. |
+| `The delivery method has been confirmed with the recipient as Self-Pickup.` | Nach dem gescheiterten Versuch hast du zugestimmt, das Paket selbst abzuholen. Es hat sich noch nicht bewegt. |
+| `The parcel has been delivered to …. Please collect your parcel promptly at … using your pickup code.` | Es liegt an der Abholstelle, die die Zeile nennt, unter der angegebenen Adresse: Hol es mit deinem Abholcode ab. „Delivered“ heißt hier: an diese Stelle, nicht an dich. Peek zeigt „Abholbereit“. |
 | `【Contact Error】need to return.` | Der Fahrer hat dich nicht erreicht, die Rücksendung beginnt. |
 | `Your order has been delivered successfully.` | Zugestellt. |
 | `Order delivery failed, returning to sender.` | Es geht zurück an den Absender. |
@@ -60,7 +62,7 @@ Weitere Gründe, die der Fahrer eintragen kann, neben `User not at home`: `wrong
 - Holst du es nicht ab, gilt es als unzustellbar und geht zurück an den Absender.
 - Mitteilungen gehen an die E-Mail-Adresse, die für dich angegeben wurde, sonst per Post.
 
-**Deutschland und Schweiz.** Für diese beiden Länder veröffentlicht iMile keine solchen Regeln. Wie viele Versuche es gibt, ob du benachrichtigt wirst, wie lange ein Paket wartet und wo du es abholen kannst, sagt iMile nicht. Was passiert ist, zeigen die Scans: der Grund des Fahrers, die Rückkehr in den Stützpunkt, danach eine neue Tour oder `【Contact Error】need to return.`. Mehr in [Zustellung verpasst](guide:missed-delivery).
+**Deutschland und Schweiz.** Für diese beiden Länder veröffentlicht iMile keine solchen Regeln. Wie viele Versuche es gibt, ob du benachrichtigt wirst, wie lange ein Paket wartet und wo du es abholen kannst, sagt iMile nicht. Was passiert ist, zeigen die Scans: der Grund des Fahrers, die Rückkehr in den Stützpunkt, danach eine neue Tour, `【Contact Error】need to return.` oder, wenn du das Paket selbst abholst, eine Zeile mit der Abholstelle, an der es wartet (siehe oben). Mehr in [Zustellung verpasst](guide:missed-delivery).
 
 **Adresse ändern.** iMiles allgemeine FAQ, vor allem für die Emirate geschrieben, sagen: Kontaktiere den Kundenservice, bevor die Sendung die letzte Zustellphase erreicht, oder nutze den Online-Bot. Siehe auch [Lieferadresse ändern](guide:change-delivery-address).
 

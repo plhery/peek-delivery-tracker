@@ -39,6 +39,8 @@ Le scansioni di iMile sono in inglese, così come le legge Peek. Tra le parentes
 | `Our delivery associate is out for delivery.` | È in consegna oggi. |
 | `User not at home` | Il tentativo non è riuscito: è il motivo indicato dal corriere. |
 | `Delivery attempt finished,return to Local logistics company warehouse.` | Dopo il tentativo fallito, il pacco torna in sede. |
+| `The delivery method has been confirmed with the recipient as Self-Pickup.` | Dopo il tentativo fallito hai scelto di ritirare tu il pacco. Non si è ancora mosso. |
+| `The parcel has been delivered to …. Please collect your parcel promptly at … using your pickup code.` | Ti aspetta nel punto di ritiro indicato nella riga, all'indirizzo che riporta: ritiralo con il tuo codice. «Delivered» vuol dire consegnato a quel punto, non a te; Peek mostra «Pronto per il ritiro». |
 | `【Contact Error】need to return.` | Il corriere non è riuscito a contattarti e parte il reso. |
 | `Your order has been delivered successfully.` | Consegnato. |
 | `Order delivery failed, returning to sender.` | Sta tornando al mittente. |
@@ -56,7 +58,7 @@ Altri motivi che il corriere può indicare, oltre a `User not at home`: `wrong a
 
 **Tempi.** Per il 2026 iMile si dà come obiettivo il primo tentativo entro 2 giorni lavorativi dalla presa in carico per almeno il 99% dei pacchi nell'Italia continentale, ed entro 3 giorni lavorativi per almeno il 96% in Sicilia, Sardegna e altre aree che indica iMile. Sono obiettivi: la Carta dice che i tempi di consegna sono indicativi e non sono una garanzia.
 
-**Giacenza e ritiro.** iMile «non dispone di sportelli, punti vendita o altri locali aperti al pubblico», e la sede legale non è un punto di assistenza. La Carta non parla di punti di ritiro né di quanti giorni resta in giacenza un pacco non consegnato: dice solo che le spedizioni non consegnabili si gestiscono secondo le sue procedure operative. Il resto lo raccontano le scansioni: il motivo del corriere, il ritorno in sede e poi un nuovo giro o `【Contact Error】need to return.`. Vedi anche [consegna fallita](guide:missed-delivery).
+**Giacenza e ritiro.** iMile «non dispone di sportelli, punti vendita o altri locali aperti al pubblico», e la sede legale non è un punto di assistenza. La Carta non parla di punti di ritiro né di quanti giorni resta in giacenza un pacco non consegnato: dice solo che le spedizioni non consegnabili si gestiscono secondo le sue procedure operative. Il resto lo raccontano le scansioni: il motivo del corriere, il ritorno in sede e poi un nuovo giro, `【Contact Error】need to return.` oppure, se hai scelto di ritirarlo tu, una riga con il punto di ritiro dove ti aspetta (vedi sopra). Vedi anche [consegna fallita](guide:missed-delivery).
 
 **Avvisi e prova di consegna.** iMile manda notifiche via e-mail sullo stato della consegna «ove previste dal servizio» e raccoglie la prova di consegna «ove prevista»: firme, codici PIN o foto del luogo di consegna, secondo l'informativa sulla privacy. Sulla pagina di tracciamento c'è una vista della prova di consegna che ti chiede di confermare di essere la persona autorizzata.
 

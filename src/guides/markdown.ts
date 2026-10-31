@@ -458,9 +458,20 @@ export function plainBlocks(blocks: readonly Block[]): string {
   return blocks.flatMap(runsOf).map(plainText).join(' ');
 }
 
+/** Scripts written without spaces between words: Chinese, and Japanese with it. */
+const UNSPACED = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u;
+let unspacedWords: Intl.Segmenter | undefined;
+
+/** The words between two spaces: one, or as many as a dictionary finds in Chinese or Japanese text. */
+function wordsIn(token: string): number {
+  if (!UNSPACED.test(token)) return 1;
+  unspacedWords ??= new Intl.Segmenter('zh', { granularity: 'word' });
+  return [...unspacedWords.segment(token)].filter(({ isWordLike }) => isWordLike).length;
+}
+
 /** How many words a guide has, for its reading time and to tell a translation that lost a part. */
 export function wordCount(blocks: readonly Block[]): number {
-  return blocks.flatMap(runsOf).reduce((count, run) => count + plainText(run).split(/\s+/).filter(Boolean).length, 0);
+  return blocks.flatMap(runsOf).reduce((count, run) => count + plainText(run).split(/\s+/).filter(Boolean).reduce((words, token) => words + wordsIn(token), 0), 0);
 }
 
 /** The drawn blocks of a guide in order, which every translation shares: `steps:4`, `anatomy:RR 12345678 5 CH`. */

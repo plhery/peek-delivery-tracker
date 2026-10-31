@@ -115,6 +115,14 @@ describe('a guide’s Markdown', () => {
       .toThrow('content/guides/x/en.md: a guide holds one ":::checker" at most');
   });
 
+  it('counts the words of Chinese, which puts no spaces between them, as a dictionary finds them', () => {
+    // Eight characters, four words to a reader: the dictionary's split may differ a little between ICU versions.
+    const chinese = wordCount(parseBlocks('邮件到达处理中心'));
+    expect(chinese).toBeGreaterThan(1);
+    expect(chinese).toBeLessThan(8);
+    expect(wordCount(parseBlocks('Straightship 的 `STRTD` 单号'))).toBe(2 + wordCount(parseBlocks('的单号')));
+  });
+
   it('refuses a drawing it does not know or cannot finish', () => {
     expect(() => parseBlocks(':::gallery\n- A\n:::')).toThrow(/there is no ":::gallery"/);
     for (const opening of [':::', ':::Steps', '::: steps', ':::steps:']) {

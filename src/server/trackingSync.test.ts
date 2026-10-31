@@ -2984,7 +2984,7 @@ describe('TrackingSyncService', () => {
     expect(client.startSyncAttempt.mock.calls[0][1]).toMatchObject({ trigger });
   });
 
-  it('records a check that asked no carrier and no provider as skipped, which no refresh count or health sample reads', async () => {
+  it('records a check that asked no carrier and no provider as skipped, its fetch too, which no refresh count, health sample or error line reads', async () => {
     const refresh = vi.spyOn(metrics, 'recordRefresh');
     const check = async (attempted: number) => {
       const parcel = { id: 'cooling', carrier: 'jd-logistics', tracking_number: 'TEST1234', current_stage: 'in_transit' };
@@ -2998,11 +2998,13 @@ describe('TrackingSyncService', () => {
       await expect(service.syncPackage(parcel, { trigger: 'scheduled' })).resolves.toMatchObject({ checked: 1, errors: 1 });
       // The parcel still shows that its sources are down.
       expect(client.updatePackage.mock.lastCall![1]).toMatchObject({ sync_status: 'error' });
-      return { outcome: client.completeSyncAttempt.mock.lastCall![1].outcome, health: client.recordTrackingHealth.mock.calls.length };
+      const [, values, steps] = client.completeSyncAttempt.mock.lastCall!;
+      const fetch = (steps as Array<{ step: string; status: string }>).find((step) => step.step === 'fetch')?.status;
+      return { outcome: values.outcome, fetch, health: client.recordTrackingHealth.mock.calls.length };
     };
-    await expect(check(0)).resolves.toEqual({ outcome: 'skipped', health: 0 });
+    await expect(check(0)).resolves.toEqual({ outcome: 'skipped', fetch: 'skipped', health: 0 });
     expect(refresh).not.toHaveBeenCalled();
-    await expect(check(1)).resolves.toEqual({ outcome: 'error', health: 1 });
+    await expect(check(1)).resolves.toEqual({ outcome: 'error', fetch: 'failed', health: 1 });
     expect(refresh).toHaveBeenCalledExactlyOnceWith('jd-logistics', 'jd-logistics', 'error');
   });
 

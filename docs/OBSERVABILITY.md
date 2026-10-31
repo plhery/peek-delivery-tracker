@@ -112,8 +112,9 @@ All tables and views here are service-role only.
   input it lacks or refuses, ends `refused`: the carrier answered, so its error counts
   (`error_percent`, `metrics.health`, `carrier_refresh_total`) leave it out. A check that asked
   no carrier and no provider, each still waiting out a failure or an input, ends `skipped`
-  whatever the parcel shows: no refresh count, health sample or check total reads it, and the
-  24-hour health counts it apart (`skipped`). A successful
+  whatever the parcel shows, its `fetch` step `skipped` too, so it logs no error: no refresh
+  count, health sample or check total reads it, and the 24-hour health counts it apart
+  (`skipped`). A successful
   `fetch` names the source that served the parcel (`source_carrier`, `unknown` for a universal provider) and has `carrier_answered`
   when the carrier answered too, on local clocks, in part or with the label alone. When another source served a
   parcel filed under a carrier, `direct_outcome` says how that carrier's own lookup went in the

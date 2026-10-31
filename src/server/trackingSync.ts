@@ -1889,7 +1889,10 @@ export class TrackingSyncService {
           if (withdrawn) audit.reportAnomalies(['scans_withdrawn'], completion);
           return 'waiting';
         }
-        audit.record('fetch', 'failed', performance.now() - fetchStartedAt,
+        // A check whose sources all still wait out a failure or an input asked nobody: its fetch is skipped, not
+        // failed, so a parcel in that wait logs no error each time the schedule comes round.
+        const asked = !(error instanceof RoutingDeferred) || error.attempted > 0;
+        audit.record('fetch', asked ? 'failed' : 'skipped', performance.now() - fetchStartedAt,
           { ...(error instanceof RoutingDeferred ? deferredFetchDetails(error) : {}), ...sharedAnswers(checks) }, error);
         throw error;
       }

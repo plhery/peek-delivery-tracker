@@ -39460,6 +39460,157 @@
         }
       ],
       "trackingSearchUrl": "https://utec.ua/"
+    },
+    "arrow-express": {
+      "displayName": "Arrow Express",
+      "aliases": [
+        "Arrow Express Ltd",
+        "Arrow Express Malta",
+        "arrowEXPRESS"
+      ],
+      "countries": [
+        "MT"
+      ],
+      "color": "#014fb1",
+      "selectable": true,
+      "timezone": "Europe/Malta",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://arrow-express.eu/"
+    },
+    "citilogistics": {
+      "displayName": "Citilogistics",
+      "aliases": [
+        "Citi Logistics",
+        "CitiLogistics",
+        "Citilogistics Inc."
+      ],
+      "countries": [
+        "CA"
+      ],
+      "color": "#ed1b2e",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.citilogistics.ca/"
+    },
+    "comone-express": {
+      "displayName": "ComOne Express",
+      "aliases": [
+        "Com1 Express",
+        "Com1 Logistics",
+        "ComOne Int'l Logistics",
+        "ComOne International Logistics",
+        "商壹国际",
+        "商壹国际物流",
+        "商壹国际物流有限公司"
+      ],
+      "countries": [
+        "CN",
+        "MY",
+        "SG"
+      ],
+      "color": "#29166f",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.com1logistics.com/tracking.html?trackNo={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.com1logistics.com",
+            "com1logistics.com"
+          ],
+          "pathPattern": "^/tracking\\.html$",
+          "params": [
+            "trackNo"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.com1logistics.com/tracking.html"
+    },
+    "dpx-logistics": {
+      "displayName": "DPX Logistics",
+      "aliases": [
+        "Document Parcel Express",
+        "Document Parcel Express Co., Ltd.",
+        "DPX eCommerce",
+        "บริษัท ดอคคิวเมนท์ พาร์เซล เอ็กซ์เพรส จำกัด"
+      ],
+      "countries": [
+        "TH"
+      ],
+      "color": "#003b66",
+      "selectable": true,
+      "timezone": "Asia/Bangkok",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://dpxlogistics.com/en/track/index.html#{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "dpxlogistics.com",
+            "www.dpxlogistics.com"
+          ],
+          "pathPattern": "^/(?:en|th)/track/(?:index\\.html)?$",
+          "fragment": "^(\\d{12})$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://dpxlogistics.com/en/track/"
+    },
+    "geswl": {
+      "displayName": "GESWL Express",
+      "aliases": [
+        "ZCE",
+        "ZCE - Geswl Express",
+        "GESWL",
+        "GESWL Global Express",
+        "Shanghai Yisu International Logistics",
+        "翼速国际物流",
+        "翼速國際物流",
+        "上海翼速国际物流有限公司"
+      ],
+      "countries": [
+        "CN",
+        "JP"
+      ],
+      "color": "#01419a",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.geswl.com:8088/ld_express//businessExpressController.do?gotrack&ids={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.geswl.com"
+          ],
+          "pathPattern": "^/ld_express//?businessExpressController\\.do$",
+          "params": [
+            "ids"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.geswl.com/"
     }
   },
   "servers": [
@@ -43268,7 +43419,12 @@
           "yuema-express",
           "dex-i",
           "jy-express",
-          "utec-logistics"
+          "utec-logistics",
+          "arrow-express",
+          "citilogistics",
+          "comone-express",
+          "dpx-logistics",
+          "geswl"
         ]
       },
       "Stage": {

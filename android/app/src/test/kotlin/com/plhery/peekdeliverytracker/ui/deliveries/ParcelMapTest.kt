@@ -80,7 +80,9 @@ class ParcelMapTest {
         val content: @Composable () -> Unit = {
             CompositionLocalProvider(
                 LocalDeliveriesState provides { deliveries = it },
-                LocalMapCameraWatch provides { interactive, camera -> (if (interactive) opened else peeked) += camera },
+                LocalMapCameraWatch provides { interactive, peek, camera ->
+                    if (interactive) opened += camera else if (peek) peeked += camera
+                },
             ) {
                 RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion)
             }

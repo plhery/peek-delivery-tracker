@@ -35,8 +35,9 @@ import kotlinx.coroutines.async
  * the parcel's dot pulsing until the journey is over, and Pip beside it, kept below `ceiling` (the card's top row) and
  * above `floor` (where the card writes over the bottom of the map). `covered` is what the card writes over the map
  * below its top row, `buttons` its buttons over the top, and `room` how much lower the route starts below a second
- * carrier's mark. With `peek`, two fingers zoom it closer until they lift (A-G13); off on Next up, which is one tap
- * target in a scrolling list. Decorative.
+ * carrier's mark. Its camera flies to a new frame (A-AN46), as a scan, a refresh, the text size or the language frames
+ * it anew. With `peek`, two fingers zoom it closer until they lift (A-G13); off on Next up, which is one tap target in
+ * a scrolling list. Decorative.
  */
 @Composable
 fun RouteEngraving(
@@ -58,7 +59,7 @@ fun RouteEngraving(
     WorldMapView(
         atlas = atlas, route = route, mode = route.defaultMode(stage),
         palette = remember(identity) { MapPalette.tint(identity.ink, identity.surface) },
-        modifier = modifier, labels = MapLabels.Ends, showsContext = false, peek = peek,
+        modifier = modifier, labels = MapLabels.Ends, showsContext = false, peek = peek, flies = true,
         // The parcel's dot pulses until the journey is over.
         live = stage != TrackingStage.Delivered && stage != TrackingStage.Returned,
         // Pip keeps below the top row of the parcel's page, and of Next up alike, so both show the same picture.
@@ -80,7 +81,8 @@ object RouteEngravingMetrics {
 /**
  * `CardRoute` (A-S83): a parcel's whole journey, small, at the end of its card. It belongs to the card's picture and is
  * not there to be read: no names, no Pip, no pulse, and a line and dots as pale as the map they lie on. `surface` is
- * the card's own colour, paler on a past delivery. Decorative and takes no touches.
+ * the card's own colour, paler on a past delivery. Decorative and takes no touches. A new frame shows at once, where
+ * the iPhone flies it there: a list has many of them, and each would draw again every frame as it flew.
  */
 @Composable
 fun CardRoute(

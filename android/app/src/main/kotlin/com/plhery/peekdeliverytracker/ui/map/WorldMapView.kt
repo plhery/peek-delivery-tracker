@@ -95,9 +95,11 @@ import androidx.compose.ui.geometry.Size as ComposeSize
  * (`fadesIn`); Pip stands in front of the fade, beside the parcel's dot, when `pip` asks for him on a palette with a
  * card.
  *
- * The camera of a map that moves (`interactive` or `peek`) flies to a new frame (A-AN46): along the great circle, eased
- * in and out, lifted out over a long way, from wherever a flight under way has got to, and straight there under Reduce
- * Motion; any other map shows its new frame at once. A change of view (`mode`), or of `recenter`, brings a moved map
+ * The camera of a map that `flies`, as one that moves (`interactive` or `peek`) does, flies to a new frame (A-AN46):
+ * along the great circle, eased in and out, lifted out over a long way, from wherever a flight under way has got to,
+ * and straight there under Reduce Motion. It takes its first frame as it first shows, without flying, as the iPhone's
+ * `onAppear`. Any other map shows each new frame at once, where the iPhone flies every map: the cards' small routes,
+ * many in a list, would each draw again every frame. A change of view (`mode`), or of `recenter`, brings a moved map
  * back; a new frame or scan leaves it where it was put. An `interactive` map turns under one finger and zooms under
  * two, about where they first stood (A-G12): its first move frees it (`onFreeChange`), and Pip keeps his spot beside
  * the dot while it moves under him, and waits for a flight to land. A `peek` map zooms under two fingers and flies back
@@ -124,6 +126,7 @@ fun WorldMapView(
     showsContext: Boolean = true,
     interactive: Boolean = false,
     peek: Boolean = false,
+    flies: Boolean = false,
     night: Instant? = null,
     live: Boolean = false,
     pip: PipRequest? = null,
@@ -175,10 +178,11 @@ fun WorldMapView(
             if (!ready) return@LaunchedEffect
             if (entrance == null) shown.snapTo(1f) else shown.animateTo(1f, entrance)
         }
-        val motion = rememberGlobeMotion(scene?.camera, request, mode, recenter, reduceMotion, interactive || peek, onFreeChange)
+        val moves = interactive || peek || flies
+        val motion = rememberGlobeMotion(scene?.camera, request, mode, recenter, reduceMotion, moves, onFreeChange)
         val drawn = motion.scene(scene, request, interactive) ?: return@BoxWithConstraints
         val watch = LocalMapCameraWatch.current
-        if (watch != null && (interactive || peek)) SideEffect { watch(interactive, drawn.camera) }
+        if (watch != null && moves) SideEffect { watch(interactive, peek, drawn.camera) }
         Box(
             Modifier
                 .fillMaxSize()
@@ -214,11 +218,11 @@ fun WorldMapView(
 
 /**
  * A map's camera as it moves ([GlobeMotion]) for a map whose target, the camera that frames it, is `target` once its
- * picture is made. A map that `moves` under the fingers takes its target two frames after it first has one, as the
- * opened map lays out its summary in its first, so it never flies to the frame it opened at. Then a new target flies
- * the camera there unless the map is free, and a new `mode` or `recenter` flies it there whatever. Any other map
- * shows each target as it comes, and asks for no frame. A map a hand moved stays where it was put through the window
- * made again, and Pip keeps the spot he has there; any other takes its new frame as it shows.
+ * picture is made. A map that `moves`, under the fingers or flying, takes its target two frames after it first has
+ * one, as the opened map lays out its summary in its first, so it never flies to the frame it opened at. Then a new
+ * target flies the camera there unless the map is free, and a new `mode` or `recenter` flies it there whatever. Any
+ * other map shows each target as it comes, and asks for no frame. A map a hand moved stays where it was put through
+ * the window made again, and Pip keeps the spot he has there; any other takes its new frame as it shows.
  */
 @Composable
 private fun rememberGlobeMotion(
@@ -380,10 +384,10 @@ private class MapMotion(private val context: Context, kept: GlobeCamera? = null)
 internal val LocalMapsAtOnce = staticCompositionLocalOf { false }
 
 /**
- * Hears where each map that moves (`interactive` or `peek`) looks from, each time it is composed: for tests, which see
- * its pixels but not its camera.
+ * Hears where each map that moves (`interactive` or `peek`) or `flies` looks from, each time it is composed: for tests,
+ * which see its pixels but not its camera.
  */
-internal val LocalMapCameraWatch = staticCompositionLocalOf<((interactive: Boolean, camera: GlobeCamera) -> Unit)?> { null }
+internal val LocalMapCameraWatch = staticCompositionLocalOf<((interactive: Boolean, peek: Boolean, camera: GlobeCamera) -> Unit)?> { null }
 
 /** The scene if it is made, without waiting. */
 @OptIn(ExperimentalCoroutinesApi::class)

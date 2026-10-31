@@ -97762,6 +97762,38 @@
     ]
   },
   {
+    "input": "UTECP2999403070YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "utec-logistics"
+    ]
+  },
+  {
+    "input": "UTECP3639000492YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "utec-logistics"
+    ]
+  },
+  {
+    "input": "UTECP5809021107YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "utec-logistics"
+    ]
+  },
+  {
+    "input": "UTECP5809031583YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "utec-logistics"
+    ]
+  },
+  {
     "input": "UU000000005DE",
     "carrier": "intl-post",
     "confidence": "high",

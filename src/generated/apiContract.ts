@@ -6920,7 +6920,9 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "ePost Global",
     "aliases": [
       "ePostGlobal",
-      "EPG"
+      "EPG",
+      "PPX Track",
+      "PPXTrack"
     ],
     "countries": [
       "US"
@@ -6949,6 +6951,23 @@ export const CARRIER_CAPABILITIES = {
         "params": [
           "id"
         ]
+      },
+      {
+        "domains": [
+          "ppxtrack.com",
+          "www.ppxtrack.com"
+        ],
+        "pathPattern": "^/$",
+        "params": [
+          "id"
+        ]
+      },
+      {
+        "domains": [
+          "ppxtrack.com",
+          "www.ppxtrack.com"
+        ],
+        "path": "^/t/[^/?#]+/(EPG\\d{10,15})/?$"
       }
     ],
     "detectionRules": [
@@ -39341,6 +39360,101 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.yue777.com/genzong.php"
+  },
+  "dex-i": {
+    "displayName": "DEX-I",
+    "aliases": [
+      "Dex-i",
+      "DEXI",
+      "Destinations Express",
+      "递壹时",
+      "递壹时国际物流",
+      "广州递壹时国际货物代理有限公司"
+    ],
+    "countries": [
+      "CN",
+      "SG",
+      "MY"
+    ],
+    "color": "#3b2280",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.dex-i.com/site/tracking?trackingNums={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.dex-i.com",
+          "dex-i.com"
+        ],
+        "pathPattern": "^/site/tracking$",
+        "params": [
+          "trackingNums"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dex-i.com/site/tracking"
+  },
+  "jy-express": {
+    "displayName": "JY Express",
+    "aliases": [
+      "JY-EXP",
+      "捷优国际",
+      "广东捷优国际供应链有限公司",
+      "Guangdong Jieyou International Supply Chain"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#005aa0",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://jieyou.nextsls.com/tracking/app#/tracking"
+  },
+  "utec-logistics": {
+    "displayName": "UTEC Logistics",
+    "aliases": [
+      "UTEC",
+      "UTEC Express",
+      "UTEC Group"
+    ],
+    "countries": [
+      "UA"
+    ],
+    "color": "#014886",
+    "selectable": true,
+    "timezone": "Europe/Kyiv",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://utec.ua/tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "utec.ua",
+          "www.utec.ua"
+        ],
+        "path": "^/tracking/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^UTECP\\d{10}[A-Z]{2}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://utec.ua/"
   }
 } as const;
 
@@ -40409,7 +40523,10 @@ export const CARRIER_IDS = [
   "xd-express",
   "xlmiles",
   "yoseus",
-  "yuema-express"
+  "yuema-express",
+  "dex-i",
+  "jy-express",
+  "utec-logistics"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

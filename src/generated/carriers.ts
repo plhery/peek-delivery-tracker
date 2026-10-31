@@ -1536,6 +1536,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "India Post tracking: Speed Post numbers and statuses",
       "name": "India Post",
       "color": "#b82025"
+    },
+    {
+      "id": "morning-global",
+      "catalog": "morning-global",
+      "slug": "morning-global-tracking",
+      "title": "Morning Global tracking: BR…MG numbers, statuses, contact",
+      "name": "Morning Global",
+      "color": "#050059"
     }
   ],
   "de": [

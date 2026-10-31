@@ -1520,6 +1520,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ePost Global tracking: EPG numbers and who delivers",
       "name": "ePost Global",
       "color": "#27967a"
+    },
+    {
+      "id": "gls-at",
+      "catalog": "gls-at",
+      "slug": "gls-austria-tracking",
+      "title": "GLS Austria tracking: statuses, Parcel Shops and contact",
+      "name": "GLS Austria",
+      "color": "#ffdd00"
     }
   ],
   "de": [

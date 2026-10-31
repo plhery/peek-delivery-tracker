@@ -351,6 +351,11 @@ describe('carrier mark', () => {
     'utec-logistics',
     'dex-i',
     'jy-express',
+    'citilogistics',
+    'comone-express',
+    'arrow-express',
+    'geswl',
+    'dpx-logistics',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

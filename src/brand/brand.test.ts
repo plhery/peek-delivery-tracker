@@ -415,6 +415,11 @@ describe('carrier brand', () => {
       'utec-logistics',
       'dex-i',
       'jy-express',
+      'citilogistics',
+      'comone-express',
+      'arrow-express',
+      'geswl',
+      'dpx-logistics',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

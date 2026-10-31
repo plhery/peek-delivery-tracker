@@ -339,7 +339,12 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'tuodatong'
   | 'utec-logistics'
   | 'dex-i'
-  | 'jy-express';
+  | 'jy-express'
+  | 'citilogistics'
+  | 'comone-express'
+  | 'arrow-express'
+  | 'geswl'
+  | 'dpx-logistics';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

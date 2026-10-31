@@ -219,6 +219,9 @@
   "ark-express": {
     "decal": "ark-express"
   },
+  "arrow-express": {
+    "decal": "arrow-express"
+  },
   "arrow-xl": {
     "decal": "arrow-xl"
   },
@@ -488,6 +491,9 @@
   "citi-sprint": {
     "decal": "citi-sprint"
   },
+  "citilogistics": {
+    "decal": "citilogistics"
+  },
   "city-air-express": {
     "decal": "city-air-express"
   },
@@ -537,6 +543,9 @@
   },
   "collicare": {
     "decal": "collicare"
+  },
+  "comone-express": {
+    "decal": "comone-express"
   },
   "connect-couriers": {
     "decal": "connect-couriers"
@@ -859,6 +868,9 @@
   },
   "dpex": {
     "decal": "dpex"
+  },
+  "dpx-logistics": {
+    "decal": "dpx-logistics"
   },
   "dragon-star-curier": {
     "decal": "dragon-star-curier"
@@ -1205,6 +1217,9 @@
   },
   "geodis-pl": {
     "family": "geodis"
+  },
+  "geswl": {
+    "decal": "geswl"
   },
   "ghana-post": {
     "decal": "ghana-post"

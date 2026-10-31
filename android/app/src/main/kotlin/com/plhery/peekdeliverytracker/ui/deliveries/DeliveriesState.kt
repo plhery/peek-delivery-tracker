@@ -1026,22 +1026,13 @@ internal class DeliveriesState(
         private set
 
     /**
-     * The parcel a card's menu asked to share, as it was then (`prompts.sharing`): the sheet shows it, even once it has
-     * left the list, until its sheet has gone. A window made again keeps only its id, and holds the parcel it finds by
-     * it from then on.
+     * The parcel the share sheet `request` shows, with its `work`: the page's as it is now (`if let parcel`), none once
+     * gone, or the one the card's menu found, as it was then, even once it has left the list and through the window made
+     * again ([ParcelShareSheetWork.parcel]).
      */
-    private var sharingParcel: Parcel? = null
-
-    /**
-     * The parcel the share sheet `request` shows: the page's as it is now (`if let parcel`), none once gone, or the one
-     * the card's menu found.
-     */
-    fun sharedParcel(request: ShareRequest, parcels: List<Parcel>): Parcel? {
-        val pageId = request.pageId
-        if (pageId != null) return pageParcel(pageId, parcels)
-        val parcel = sharingParcel?.takeIf { it.id == request.parcelId } ?: parcels.firstOrNull { it.id == request.parcelId }
-        if (parcel != null) sharingParcel = parcel
-        return parcel
+    fun sharedParcel(request: ShareRequest, work: ParcelShareSheetWork, parcels: List<Parcel>): Parcel? {
+        val pageId = request.pageId ?: return work.parcel
+        return pageParcel(pageId, parcels)
     }
 
     /**
@@ -1055,7 +1046,7 @@ internal class DeliveriesState(
         val parcel = menuParcel(pageId) ?: return
         val readerLink = source.viewerLink(parcel)
         if (readerLink != null) {
-            handOut(ParcelLinkRoute.address(id = readerLink, baseUrl = source.linkBaseUrl))
+            handOut(ParcelLinkRoute.address(id = readerLink, baseUrl = source.linkBaseUrl), null)
             return
         }
         if (focus != null) returnFocus = focus
@@ -1068,10 +1059,10 @@ internal class DeliveriesState(
      */
     private fun openShare(request: ShareRequest, parcel: Parcel) {
         sharing?.let { source.shares.forget(it.id) }
-        sharingParcel = parcel.takeIf { request.pageId == null }
         sharingClosing = false
         val model = ParcelShareModel(parcel.id, parcel.label, source.shareClient(parcel), source.shareNotes, source.linkBaseUrl)
-        source.shares.open(request.id, ParcelShareSheetWork(model, demo = source.isDemo, scope = source.scope))
+        val work = ParcelShareSheetWork(model, demo = source.isDemo, scope = source.scope, parcel = parcel.takeIf { request.pageId == null })
+        source.shares.open(request.id, work)
         sharing = request
     }
 
@@ -1087,18 +1078,18 @@ internal class DeliveriesState(
         sharingClosing = true
     }
 
-    /** The share sheet has gone, and with it the parcel it showed. */
+    /** The share sheet has gone. */
     fun shareClosed() {
         if (sharing != null) return
         sharingClosing = false
-        sharingParcel = null
     }
 
     /**
      * Hands `address` to the system's share sheet (`UIActivityViewController`), the composition's: whether it could be
-     * shown.
+     * shown. `chosen` runs once the reader has chosen the app it goes to, even after the window has gone; never where
+     * they back out.
      */
-    var handOut: (address: String) -> Boolean = { false }
+    var handOut: (address: String, chosen: (() -> Unit)?) -> Boolean = { _, _ -> false }
 
     /**
      * The carrier editor open over the window (a page's `carrierEditor`, the list's `prompts.changingCarrier`), kept
@@ -1471,15 +1462,14 @@ internal class DeliveriesState(
 
     /**
      * What the ••• menu of the page with `pageId` asked of its parcel (ParcelDetailView's `chose(_:on:)`). The page is
-     * open already. Naming the parcel asks for its new name; changing its carrier opens the carrier editor; sharing it
-     * opens its share sheet, as its pass's button does, where a menu offers it (the iPhone's Mac menu bar; the page's
-     * ••• doesn't). Copying puts the first number on the clipboard and says so on its row. Archiving and restoring save the change, then leave the page; deleting asks first. Only
-     * one change of the page's is saved at a time, and an alert over it says why one failed.
+     * open already. Naming the parcel asks for its new name; changing its carrier opens the carrier editor. Copying puts
+     * the first number on the clipboard and says so on its row. Archiving and restoring save the change, then leave the
+     * page; deleting asks first. Only one change of the page's is saved at a time, and an alert over it says why one
+     * failed. The menu offers no Share, as the iPhone's doesn't (only the iPad's menu bar does): the pass's button shares.
      */
     fun choseOnPage(pageId: UUID, item: ParcelMenuItem, parcel: Parcel) {
         when (item) {
-            ParcelMenuItem.Open -> Unit
-            ParcelMenuItem.Share -> if (navigator.navigation.shown == pageId) openShare(ShareRequest(UUID.randomUUID(), parcel.id, pageId), parcel)
+            ParcelMenuItem.Open, ParcelMenuItem.Share -> Unit
             ParcelMenuItem.ChangeCarrier -> editCarrier(pageId)
             ParcelMenuItem.Rename -> rename(parcel, pageId)
             ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(pageId, it) }

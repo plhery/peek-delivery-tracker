@@ -1,8 +1,11 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.ClipboardManager
+import android.content.ComponentName
 import android.content.Intent
+import android.content.IntentSender
 import android.os.Looper
+import android.service.chooser.ChooserResult
 import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
@@ -49,6 +52,7 @@ import androidx.core.content.IntentCompat
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -81,13 +85,15 @@ import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
+import org.robolectric.util.ReflectionHelpers
+import org.robolectric.util.ReflectionHelpers.ClassParameter
 
 /**
- * A parcel's share sheet (B-S51–B-S57, B-ST32, B-SE01–B-SE03, B-H07, B-L08): opened from its pass's share button, its
- * page's menu and its card's menu, a reader link's page sharing its address at once; the link read, made, changed and
- * stopped; the switches shown at once and put back when the service refuses; the gift's words within their limits;
- * the address copied and handed to the system's share sheet; the detents, the form on a tablet, the window made again,
- * and what TalkBack reads.
+ * A parcel's share sheet (B-S51–B-S57, B-ST32, B-SE01–B-SE03, B-H07, B-L08): opened from its pass's share button and
+ * its card's menu, a reader link's page sharing its address at once; the link read, made, changed and stopped; the
+ * switches shown at once and put back when the service refuses; the gift's words within their limits; the address
+ * copied and handed to the system's share sheet, once at a time, counted once an app is chosen; the keyboard and the
+ * navigation bar; the detents, the form on a tablet, the window made again, and what TalkBack reads.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -169,14 +175,31 @@ class ParcelShareTest {
     /** The sheet's work, which the source keeps while it is open. */
     private fun work(): ParcelShareSheetWork = source.shares.sheet(deliveries.sharing!!.id)!!
 
-    /** What the window last handed to the system's share sheet: the address, or null. */
-    private fun handedOut(): String? {
-        val started = shadowOf(compose.activity).nextStartedActivity ?: return null
-        assertEquals(Intent.ACTION_CHOOSER, started.action)
-        val send = IntentCompat.getParcelableExtra(started, Intent.EXTRA_INTENT, Intent::class.java)!!
+    /** The system's share sheet the window last opened, or null. */
+    private fun chooser(): Intent? = shadowOf(compose.activity).nextStartedActivity?.also { assertEquals(Intent.ACTION_CHOOSER, it.action) }
+
+    /** The address the system's share sheet `chooser` was given. */
+    private fun address(chooser: Intent): String? {
+        val send = IntentCompat.getParcelableExtra(chooser, Intent.EXTRA_INTENT, Intent::class.java)!!
         assertEquals(Intent.ACTION_SEND, send.action)
         assertEquals("text/plain", send.type)
         return send.getStringExtra(Intent.EXTRA_TEXT)
+    }
+
+    /** What the window last handed to the system's share sheet: the address, or null. */
+    private fun handedOut(): String? = chooser()?.let(::address)
+
+    /** What the system's share sheet `chooser` sends where it went: from Android 15 under the chooser result's key. */
+    private fun sender(chooser: Intent): IntentSender? =
+        IntentCompat.getParcelableExtra(chooser, Intent.EXTRA_CHOOSER_RESULT_INTENT_SENDER, IntentSender::class.java)
+            ?: IntentCompat.getParcelableExtra(chooser, Intent.EXTRA_CHOSEN_COMPONENT_INTENT_SENDER, IntentSender::class.java)
+
+    /** The system's share sheet `chooser` says where it went, as it does through its sender: an app, or `went`. */
+    private fun choose(chooser: Intent, went: Intent = Intent().putExtra(Intent.EXTRA_CHOSEN_COMPONENT, ComponentName("com.example.mail", "com.example.mail.Compose"))) {
+        val sender = sender(chooser)!!
+        compose.runOnUiThread { sender.sendIntent(compose.activity, 0, went, null, null) }
+        shadowOf(Looper.getMainLooper()).idle()
+        compose.waitForIdle()
     }
 
     private fun shareActions(): List<Any?> = source.actions.indices.filter { source.actions[it] == "parcel-link-share" }.map { source.outcomes[it] }
@@ -220,24 +243,15 @@ class ParcelShareTest {
     }
 
     @Test
-    fun thePagesMenuOpensTheSheetOnItsParcel() {
-        show()
-        compose.openCard("Birthday gift")
-        settle()
-        compose.runOnUiThread { deliveries.choseOnPage(gift, ParcelMenuItem.Share, DemoCards.parcel("Birthday gift")) }
-        settle()
-        assertTrue(exists(PARCEL_SHARE))
-        assertEquals(gift, deliveries.sharing?.pageId)
-    }
-
-    @Test
     fun aParcelFollowedThroughItsLinkSharesThatLinkAtOnce() {
         show { viewerLinks = mapOf(gift to "TestLink6789") }
         openShare()
         assertFalse(exists(PARCEL_SHARE))
         assertNull(deliveries.sharing)
-        assertEquals("https://example.com/p/TestLink6789", handedOut())
-        // As ShareLink, which counts nothing.
+        val chooser = chooser()!!
+        assertEquals("https://example.com/p/TestLink6789", address(chooser))
+        // As ShareLink, which counts nothing: whatever app is chosen, the window doesn't hear of it.
+        assertNull(sender(chooser))
         assertEquals(emptyList<Any>(), shareActions())
     }
 
@@ -283,8 +297,85 @@ class ParcelShareTest {
         assertEquals("https://example.com/p/TestLink0001", handedOut())
         assertTrue(shows(PARCEL_SHARE_ADDRESS, "example.com/p/TestLink0001"))
         assertTrue(exists(PARCEL_SHARE_STOP))
-        // Android doesn't learn what came of it: counted started, as the iPhone counts a ShareLink.
-        assertEquals(listOf(DeliveryAnalytics.Outcome.Started), shareActions())
+        // Nothing counted as the system's share sheet opens.
+        assertEquals(emptyList<Any>(), shareActions())
+    }
+
+    @Test
+    fun theShareCountsASuccessOnceAnAppIsChosenEvenAfterTheSheetHasClosedAndNothingWhenBackedOutOf() {
+        show { shareLinks[gift] = giftLink }
+        openShare()
+        node(PARCEL_SHARE_ACTION).performClick()
+        settle()
+        val first = chooser()!!
+        assertEquals("https://example.com/p/TestLink2345", address(first))
+        // Backed out of: the share sheet sends nothing, and nothing is counted.
+        settle()
+        assertEquals(emptyList<Any>(), shareActions())
+        node(PARCEL_SHARE_ACTION).performClick()
+        settle()
+        val second = chooser()!!
+        // The sheet closes before the app is chosen: the success still counts.
+        node(PARCEL_SHARE_CLOSE).performClick()
+        settle()
+        assertFalse(exists(PARCEL_SHARE))
+        choose(second)
+        assertEquals(listOf(DeliveryAnalytics.Outcome.Success), shareActions())
+    }
+
+    @Test
+    fun theShareSheetsOwnCopyCountsASuccessAndAResultWithoutATargetNothing() {
+        show { shareLinks[gift] = giftLink }
+        openShare()
+        fun result(type: Int): Intent = Intent().putExtra(
+            Intent.EXTRA_CHOOSER_RESULT,
+            ReflectionHelpers.callConstructor(
+                ChooserResult::class.java,
+                ClassParameter.from(Int::class.javaPrimitiveType, type),
+                ClassParameter.from(ComponentName::class.java, null),
+                ClassParameter.from(Boolean::class.javaPrimitiveType, false),
+            ),
+        )
+        node(PARCEL_SHARE_ACTION).performClick()
+        settle()
+        choose(chooser()!!, result(ChooserResult.CHOOSER_RESULT_UNKNOWN))
+        assertEquals(emptyList<Any>(), shareActions())
+        settle()
+        node(PARCEL_SHARE_ACTION).performClick()
+        settle()
+        choose(chooser()!!, result(ChooserResult.CHOOSER_RESULT_COPY))
+        assertEquals(listOf(DeliveryAnalytics.Outcome.Success), shareActions())
+    }
+
+    @Test
+    fun aSecondTapOnShareWhileTheShareSheetComesUpOpensNoOther() {
+        show { shareLinks[gift] = giftLink }
+        openShare()
+        node(PARCEL_SHARE_ACTION).performClick()
+        node(PARCEL_SHARE_ACTION).performClick()
+        compose.waitForIdle()
+        assertEquals("https://example.com/p/TestLink2345", handedOut())
+        assertNull(handedOut())
+        // The window hasn't gone to it yet: another tap goes nowhere.
+        node(PARCEL_SHARE_ACTION).performClick()
+        compose.waitForIdle()
+        assertNull(handedOut())
+        // The window goes to the share sheet and stays there past the guard: Share waits for it to come back.
+        compose.activityRule.scenario.moveToState(Lifecycle.State.STARTED)
+        compose.mainClock.advanceTimeBy(1_500)
+        assertTrue(work().choosing)
+        compose.activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        compose.waitForIdle()
+        assertFalse(work().choosing)
+        node(PARCEL_SHARE_ACTION).performClick()
+        compose.waitForIdle()
+        assertEquals("https://example.com/p/TestLink2345", handedOut())
+        // A window that never goes to it hands it out again after a moment.
+        compose.mainClock.advanceTimeBy(1_500)
+        compose.waitForIdle()
+        node(PARCEL_SHARE_ACTION).performClick()
+        compose.waitForIdle()
+        assertEquals("https://example.com/p/TestLink2345", handedOut())
     }
 
     @Test
@@ -657,6 +748,27 @@ class ParcelShareTest {
         assertTrue(first != deliveries.sharing!!.id)
         assertFalse(spins(PARCEL_SHARE_LINK))
         assertTrue(exists(PARCEL_SHARE_PENDING))
+    }
+
+    @Test
+    fun aCardsSheetKeepsItsParcelOnceItHasLeftTheListAndThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation) { shareLinks[gift] = giftLink }
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed("Birthday gift"))
+        compose.card("Birthday gift").performTouchInput { longClick() }
+        compose.waitForIdle()
+        node(menuItemTag(ParcelMenuItem.Share)).performClick()
+        settle()
+        // Deleted on another device.
+        compose.runOnUiThread { source.parcels.value = source.parcels.value.filter { it.id != gift } }
+        settle()
+        assertTrue(shows(PARCEL_SHARE_TITLE, "Birthday gift"))
+        assertTrue(exists(PARCEL_SHARE_PREVIEW))
+        recreation.recreate()
+        settle()
+        assertTrue(shows(PARCEL_SHARE_TITLE, "Birthday gift"))
+        assertTrue(exists(PARCEL_SHARE_PREVIEW))
+        assertTrue(shows(PARCEL_SHARE_ADDRESS, "example.com/p/TestLink2345"))
     }
 
     // The keyboard and the navigation bar.

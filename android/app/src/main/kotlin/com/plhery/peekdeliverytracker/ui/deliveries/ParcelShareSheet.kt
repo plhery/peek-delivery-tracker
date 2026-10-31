@@ -73,6 +73,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
@@ -94,6 +96,7 @@ import com.plhery.peekdeliverytracker.core.giftDetail
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
 import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
+import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -119,7 +122,9 @@ import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 
 // ParcelShareSheet.swift: sharing one of the reader's parcels, from its page's pass or its card's menu. What the link
 // shows, as the other person will see it, the switches that change it, the link, and the way to stop.
@@ -171,11 +176,18 @@ internal class ShareNews(val address: String, val copy: Boolean)
 
 /**
  * One share sheet's [ParcelShareModel], working in the app's `scope`, and what the sheet keeps beside it: the words as
- * the fields show them, the large detent, "Copied" for its two seconds, and the address made ready, until the window
- * shown by then has handed it out or copied it ([heard]). `demo` says the demo's links are made up on this phone.
+ * the fields show them, the large detent, "Copied" for its two seconds, the address made ready, until the window
+ * shown by then has handed it out or copied it ([heard]), and the system's share sheet on its way ([choosing]). `demo`
+ * says the demo's links are made up on this phone. A card's sheet keeps the parcel as the menu found it ([parcel]),
+ * through the window made again, even once it has left the list.
  */
 @Stable
-internal class ParcelShareSheetWork(val model: ParcelShareModel, val demo: Boolean, private val scope: CoroutineScope) {
+internal class ParcelShareSheetWork(
+    val model: ParcelShareModel,
+    val demo: Boolean,
+    private val scope: CoroutineScope,
+    val parcel: Parcel? = null,
+) {
     /** `model.words`, as typed: set with each keystroke, so the fields never show a frame behind it. */
     var words: ParcelShareWords by mutableStateOf(model.words)
         private set
@@ -188,6 +200,17 @@ internal class ParcelShareSheetWork(val model: ParcelShareModel, val demo: Boole
         private set
 
     var news: ShareNews? by mutableStateOf(null)
+        private set
+
+    /**
+     * From a Share until the window is back from the system's share sheet, or it couldn't be shown ([chosen]): one share
+     * sheet at a time, as the iPhone presents one, so a second tap meanwhile goes nowhere.
+     */
+    var choosing: Boolean by mutableStateOf(false)
+        private set
+
+    /** The window has started the system's share sheet, and waits to come back from it ([choosing]). */
+    var chooserOpen: Boolean by mutableStateOf(false)
         private set
 
     /** The link's reading, and the words' watch, which the sheet's closing ends. */
@@ -213,17 +236,39 @@ internal class ParcelShareSheetWork(val model: ParcelShareModel, val demo: Boole
         this.words = model.words
     }
 
-    /** The primary button: the address, with the link made now where there is none, for the system's share sheet. */
-    fun handOut() = ready(copy = false)
+    /**
+     * The primary button: the address, with the link made now where there is none, for the system's share sheet; nothing
+     * while one is on its way ([choosing]).
+     */
+    fun handOut() {
+        if (choosing) return
+        choosing = true
+        ready(copy = false)
+    }
 
     /** Copy (`copy()`): the address, with the link made now where there is none, for the clipboard. */
     fun copy() = ready(copy = true)
 
     private fun ready(copy: Boolean) {
         scope.launch {
-            val address = model.addressToHandOut() ?: return@launch
+            val address = model.addressToHandOut()
+            if (address == null) {
+                if (!copy) chosen()
+                return@launch
+            }
             news = ShareNews(address, copy)
         }
+    }
+
+    /** The window has started the system's share sheet. */
+    fun chooserOpened() {
+        chooserOpen = true
+    }
+
+    /** The window is back from the system's share sheet, or it couldn't be shown: Share hands the address out again. */
+    fun chosen() {
+        choosing = false
+        chooserOpen = false
     }
 
     /** The window has handed out or copied `news`. */
@@ -259,11 +304,13 @@ private data class SharingShown(val request: ShareRequest, val work: ParcelShare
  * as what it shows and then the large detent on a phone, which it opens to while a gift's words are typed; a form as
  * tall as what it shows on a tablet, scrolling where that is more than the window. The page's goes with its page and
  * draws nothing once its parcel has gone, as the iPhone's `if let parcel` does; a card's shows the parcel as the menu
- * found it. While sharing, copying or stopping is under way nothing sends it away
+ * found it ([ParcelShareSheetWork.parcel]). While sharing, copying or stopping is under way nothing sends it away
  * (`interactiveDismissDisabled(model.working)`). The address made ready goes to the clipboard, with the success tap,
- * "parcel-link-share" counted a success and TalkBack told ([DeliveriesState.copy]); or to the system's share sheet,
- * where Android says nothing of what came of it, so it is counted started, as the iPhone counts a ShareLink whose
- * outcome it doesn't learn, and a share sheet that couldn't be shown counts an error and says so.
+ * "parcel-link-share" counted a success and TalkBack told ([DeliveriesState.copy]); or to the system's share sheet
+ * (`LinkActivitySheet`), counted a success once the reader chooses an app for it, even after the sheet has closed,
+ * and nothing where they back out; Android tells the app chosen, not whether it went on to send, as the iPhone's
+ * completion does ([ShareTargetChosen]). A share sheet that couldn't be shown counts an error and says so. Until the
+ * window has gone to the system's share sheet and come back, or [CHOOSER_GUARD] without it going, Share does nothing.
  */
 @Composable
 internal fun ParcelShareHost(state: DeliveriesState) {
@@ -282,7 +329,7 @@ internal fun ParcelShareHost(state: DeliveriesState) {
     var kept by remember { mutableStateOf<SharingShown?>(null) }
     if (request != null && work != null && !unshown) kept = SharingShown(request, work)
     val shown = kept
-    val parcel = shown?.let { state.sharedParcel(it.request, state.parcels) }
+    val parcel = shown?.let { state.sharedParcel(it.request, it.work, state.parcels) }
     val working = shown?.work?.model?.workingFlow?.collectAsState()?.value == true
     val localizer = LocalLocalizer.current
     val focusManager = LocalFocusManager.current
@@ -298,14 +345,26 @@ internal fun ParcelShareHost(state: DeliveriesState) {
             work.showCopied()
         } else {
             focusManager.clearFocus()
-            if (state.handOut(ready.address)) {
-                state.source.action("parcel-link-share", DeliveryAnalytics.Outcome.Started)
+            // The source's, not the window's: the app chosen may come once the window has gone.
+            val source = state.source
+            if (state.handOut(ready.address) { source.action("parcel-link-share", DeliveryAnalytics.Outcome.Success) }) {
+                work.chooserOpened()
             } else {
                 state.source.action("parcel-link-share", DeliveryAnalytics.Outcome.Error)
                 work.model.handOutFailed()
+                work.chosen()
             }
         }
         work.heard(ready)
+    }
+    // Back from the system's share sheet: the window paused for it and resumed, or never paused within the guard.
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val chooserOpen = work?.takeIf { current }?.chooserOpen == true
+    LaunchedEffect(work, chooserOpen, lifecycle) {
+        val opened = work?.takeIf { chooserOpen } ?: return@LaunchedEffect
+        val left = withTimeoutOrNull(CHOOSER_GUARD) { lifecycle.currentStateFlow.first { !it.isAtLeast(Lifecycle.State.RESUMED) } }
+        if (left != null) lifecycle.currentStateFlow.first { it.isAtLeast(Lifecycle.State.RESUMED) }
+        opened.chosen()
     }
     Sheet(
         visible = current,
@@ -982,6 +1041,9 @@ private val LABEL_SPACING = 6.dp
 
 /** How long "Copied" shows after a copy. */
 private const val COPIED_DURATION = 2_000L
+
+/** How long Share waits for the window to go to the system's share sheet before it hands the address out again. */
+private const val CHOOSER_GUARD = 1_000L
 
 /** An address's scheme, which the link row leaves out. */
 private val SCHEME = Regex("^https?://")

@@ -39,6 +39,12 @@
             </intent-filter>
         </activity>
 
+        <!-- The app a parcel's link went to through the share sheet (ShareTargetChosen): the share sheet alone sends to
+             it, through the PendingIntent the app gave it. -->
+        <receiver
+            android:name=".platform.ShareTargetChosen"
+            android:exported="false" />
+
         <!-- The account's export, handed to the share sheet (CacheExportFiles). -->
         <provider
             android:name="androidx.core.content.FileProvider"

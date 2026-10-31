@@ -73,6 +73,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesKey
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
+import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -159,12 +160,13 @@ fun DeliveriesTab(
         // From Android 13 the system confirms a copy itself, and the app says nothing more.
         Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
     }
-    // A parcel's link through the system's share sheet (`ShareLink`, `LinkActivitySheet`), which says nothing of what
-    // came of it; false where it couldn't be shown.
-    state.handOut = { address ->
+    // A parcel's link through the system's share sheet (`ShareLink`, `LinkActivitySheet`), which tells `chosen` of the
+    // app it went to, if any (ShareTargetChosen); false where it couldn't be shown.
+    state.handOut = { address, chosen ->
         val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, address)
+        val sender = chosen?.let { ShareTargetChosen.sender(context, it) }
         try {
-            context.startActivity(Intent.createChooser(send, null))
+            context.startActivity(Intent.createChooser(send, null, sender))
             true
         } catch (_: ActivityNotFoundException) {
             false

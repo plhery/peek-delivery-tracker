@@ -378,13 +378,13 @@ it('names the day of a scan the carrier dated without a clock time, and serves n
   expect(served.tracking_events.some((scan) => 'local_time' in scan || 'observed' in scan || 'time' in scan)).toBe(false);
 });
 
-it('serves a stage change seen without the carrier\'s words without Peek\'s stand-in, so the apps name the stage', () => {
+it('serves a scan or stage change seen without the carrier\'s words without Peek\'s stand-in, so the apps name the stage', () => {
   const row = { id: 'parcel', carrier: 'aliexpress', tracking_events: [
     { ...event('seen', null, '2026-10-20T22:25:08+00:00'), stage: 'registered', description: 'Tracking update', observed: true },
     { ...event('scan', null, '2026-10-20T20:00:00+00:00'), stage: 'in_transit', description: 'Tracking update' },
   ] };
   const served = withEventPlaces(row) as { tracking_events: Array<Record<string, unknown>> };
-  expect(served.tracking_events.map((scan) => [scan.id, scan.description])).toEqual([['seen', ''], ['scan', 'Tracking update']]);
+  expect(served.tracking_events.map((scan) => [scan.id, scan.description])).toEqual([['seen', ''], ['scan', '']]);
   expect((withoutEventSources(row) as typeof served).tracking_events[0].description).toBe('Tracking update');
 });
 

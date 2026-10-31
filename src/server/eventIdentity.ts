@@ -82,7 +82,7 @@ export const UNIVERSAL_PROVIDER = 'universal_provider';
  */
 export const RETIMED_FROM = 'retimed_from';
 
-/** Peek's words for a step its source gave none for. */
+/** Peek's words for a step its source gave none for, stored but served as none, so the apps name its stage. */
 export const UNWORDED_STEP = 'Tracking update';
 
 /** A stored scan's identity: its source, its time as the source gave it, its place and its wording. */

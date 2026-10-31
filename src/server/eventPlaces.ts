@@ -18,15 +18,15 @@ let reported = false;
  * Peek's own rows, relay copies and provider copies apart: the API returns none
  * of them. A row of a relay pair names the other row instead (`relayLeads`), and
  * a carrier's repeat of a scan the newest of its run (scanRepeats.ts). A
- * scan dated by its day alone names that day. A stage change Peek saw with no
- * words from the carrier (AliExpress's undated record) is served without
- * Peek's stand-in, so the apps name the stage. A scan in which the carrier asks
+ * scan dated by its day alone names that day. A scan or stage change its source
+ * gave no words for is served without Peek's stand-in, so the apps name its
+ * stage. A scan in which the carrier asks
  * the recipient to act names what (`recipient_action`, see `scanAction`).
  */
 function served(event: JsonObject, relayOf?: string): JsonObject {
   const action = scanAction(event);
   const rest: JsonObject = { ...dated(event), ...(relayOf ? { relay_of: relayOf } : {}),
-    ...(event.observed === true && event.description === UNWORDED_STEP ? { description: '' } : {}) };
+    ...(event.description === UNWORDED_STEP ? { description: '' } : {}) };
   delete rest.point;
   delete rest.provider_event_id;
   delete rest.universal_provider;

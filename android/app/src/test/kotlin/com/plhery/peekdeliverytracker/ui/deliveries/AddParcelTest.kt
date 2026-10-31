@@ -44,6 +44,7 @@ import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
@@ -78,6 +79,8 @@ import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.time.Duration
 import java.util.UUID
+import kotlin.math.PI
+import kotlin.math.exp
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -319,6 +322,46 @@ class AddParcelTest {
         assertClosed()
         assertEquals("deliveries", source.views.last())
         assertFalse(deliveries.modal)
+    }
+
+    /** How far the cover is from up, 0 up to 1 at the window's foot, a frame apart from the frame after `change`. */
+    private fun coverTravel(change: () -> Unit): List<Float> {
+        val window = compose.onRoot().getUnclippedBoundsInRoot().height.value
+        compose.mainClock.autoAdvance = false
+        change()
+        val travel = (0 until 40).map {
+            compose.mainClock.advanceTimeByFrame()
+            if (exists(COVER_PANEL)) bounds(COVER_PANEL).top.value / window else 1f
+        }
+        compose.mainClock.autoAdvance = true
+        return travel
+    }
+
+    @Test
+    fun theCoverComesUpAndGoesDownOnUIKitsCoverSpring() {
+        show()
+        // UIKit's cover, as recorded: critically damped, its response 0.34 s, over the window's height.
+        val omega = 2 * PI / 0.34
+        fun left(seconds: Double) = if (seconds <= 0) 1.0 else (1 + omega * seconds) * exp(-omega * seconds)
+        // Each frame from the first that moves, a frame into the spring, stands within a frame of its place on it.
+        fun assertSpring(remaining: List<Float>) {
+            val start = remaining.indexOfFirst { it < 0.999f }
+            assertTrue(start >= 0)
+            val frame = 0.016
+            for (k in start until start + 16) {
+                val played = (k - start + 1) * frame
+                val range = left(played + frame) - 0.01..left(played - frame) + 0.01
+                assertTrue("frame ${k - start}: ${remaining[k]}", remaining[k] in range)
+            }
+            assertEquals(0f, remaining.last(), 0.002f)
+        }
+        val up = coverTravel { node(ADD_BUTTON).performClick() }
+        assertSpring(up)
+        settle()
+        val down = coverTravel { node(ADD_CLOSE).performClick() }
+        assertSpring(down.map { 1 - it })
+        settle()
+        assertClosed()
     }
 
     @Test
@@ -973,7 +1016,7 @@ class AddParcelTest {
         open()
         assertFalse(exists(COVER_PANEL))
         val panel = node(SHEET_PANEL).getUnclippedBoundsInRoot()
-        assertEquals(540f, panel.width.value, 1f)
+        assertEquals(580f, panel.width.value, 1f)
         node(ADD_TRACKING).assertIsFocused()
         // The window stacking meanwhile, Add stays a form, while it is up and on its way down.
         fun stack(): Boolean {
@@ -1033,19 +1076,47 @@ class AddParcelTest {
 
     @Test
     @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
-    fun inTheFormSheetAddStandsAboveTheKeyboard() {
+    fun inTheFormSheetAddRisesToTheMiddleOfWhatTheKeyboardLeavesAndStandsAboveItWhereItCant() {
         show()
         open()
         val window = compose.onRoot().getUnclippedBoundsInRoot().bottom.value
-        val foot = node(SHEET_PANEL).getUnclippedBoundsInRoot().bottom.value
+        val panel = node(SHEET_PANEL).getUnclippedBoundsInRoot()
+        assertEquals(660f, (panel.bottom - panel.top).value, 1f)
+        assertEquals((window - 660f) / 2, panel.top.value, 1f)
         val resting = bounds(ADD_SAVE).bottom.value
-        // A keyboard over the sheet's foot.
-        val keyboard = (window - foot + 160).toInt()
+        // A keyboard over the sheet's foot: the sheet rises to the middle of what it leaves, Add with it.
+        val keyboard = (window - panel.bottom.value + 160).toInt()
         keyboard(keyboard)
-        val lifted = bounds(ADD_SAVE).bottom.value
-        // As far as the keyboard covers the sheet, and no further.
-        assertEquals(resting - 160, lifted, 1f)
-        assertEquals(foot, node(SHEET_PANEL).getUnclippedBoundsInRoot().bottom.value, 1f)
+        val risen = (window - keyboard - 660f) / 2
+        assertEquals(risen, node(SHEET_PANEL).getUnclippedBoundsInRoot().top.value, 1f)
+        assertEquals(resting - (panel.top.value - risen), bounds(ADD_SAVE).bottom.value, 1f)
+        // A keyboard leaving less than the sheet: the sheet at the window's top, Add above the keyboard, and the form
+        // scrolling above Add.
+        keyboard(900)
+        assertEquals(0f, node(SHEET_PANEL).getUnclippedBoundsInRoot().top.value, 1f)
+        assertEquals(window - 900 - 16, bounds(ADD_SAVE).bottom.value, 1f)
+        node(ADD_NAME).performScrollTo()
+        assertTrue(bounds(ADD_NAME).bottom.value <= bounds(ADD_SAVE).top.value - 16)
+    }
+
+    @Test
+    @Config(qualifiers = "w732dp-h412dp-xhdpi")
+    fun onAPhoneOnItsSideWithItsKeyboardUpTheTitleScrollsWithTheFormAndAddStaysWhole() {
+        show()
+        open()
+        // Room for the title over the form while the keyboard is down.
+        compose.onNode(hasTestTag(ADD_TITLE) and hasAnyAncestor(hasScrollAction())).assertDoesNotExist()
+        keyboard(270)
+        val window = compose.onRoot().getUnclippedBoundsInRoot()
+        val button = bounds(ADD_SAVE)
+        // Add whole, above the keyboard.
+        assertEquals(50f, button.height.value, 0.5f)
+        assertEquals(window.bottom.value - 270 - 16, button.bottom.value, 1f)
+        // The title gives way to the form, and the number's field, with the focus, stays in sight above Add.
+        compose.onNode(hasTestTag(ADD_TITLE) and hasAnyAncestor(hasScrollAction())).assertExists()
+        node(ADD_TRACKING).assertIsFocused()
+        val field = bounds(ADD_TRACKING)
+        assertTrue("$field over $button", field.top.value >= 0f && field.bottom.value <= button.top.value - 16 + 0.5f)
     }
 
     @Test

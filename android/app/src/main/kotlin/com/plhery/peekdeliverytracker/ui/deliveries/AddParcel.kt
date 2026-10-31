@@ -64,6 +64,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -97,6 +98,7 @@ import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
@@ -339,7 +341,8 @@ private class AddFocus {
 }
 
 /**
- * `AddParcelView`: the title and its ✕ over the form, with it at the accessibility sizes; the tracking field with what
+ * `AddParcelView`: the title and its ✕ over the form, with it at the accessibility sizes and where the window is too low
+ * for the title, Add and the number's field together (a phone on its side, its keyboard up); the tracking field with what
  * it found under it, the details the carrier needs, the name, and why it failed; Add pinned at the foot, above the
  * keyboard. A number settles as the field is left, pasted, filled in or chosen, and then the carriers are asked about
  * it, Amazon checked, and a carrier picked by hand that refuses it pointed out; the keyboard opens on the field 300 ms
@@ -445,20 +448,32 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     val error = if (form.pasteFailed) localizer.text("add.pasteFailed") else work.failure(request.id)
     val duplicate = work.duplicate(request.id)
 
+    // What the title and Add leave the form, which the number's field needs.
+    var viewHeight by remember { mutableIntStateOf(0) }
+    var headingHeight by remember { mutableIntStateOf(0) }
+    var buttonHeight by remember { mutableIntStateOf(0) }
+    val density = LocalDensity.current
+    val low by remember(density) {
+        derivedStateOf { viewHeight > 0 && viewHeight - headingHeight - buttonHeight < with(density) { FIELD_ROOM.roundToPx() } }
+    }
+    val headingScrolls = large || low
+    val heading = Modifier.onSizeChanged { headingHeight = it.height }
+
     Column(
         modifier
             .fillMaxSize()
             .background(colors.background)
-            .then(if (cover) Modifier.windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)) else Modifier),
+            .then(if (cover) Modifier.windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)) else Modifier)
+            .onSizeChanged { viewHeight = it.height },
     ) {
-        if (!large) AddHeading(saving, state::closeAdd)
+        if (!headingScrolls) AddHeading(saving, state::closeAdd, heading)
         KeyboardScrollColumn(
             Modifier.weight(1f).fillMaxWidth(),
             rememberScrollState(),
             dismissesKeyboard = true,
             contentModifier = Modifier.fillMaxWidth(),
         ) {
-            if (large) AddHeading(saving, state::closeAdd)
+            if (headingScrolls) AddHeading(saving, state::closeAdd, heading)
             // While it saves, the form's controls are off and dim as they do (`.disabled(saving)`); TalkBack still
             // reads them, as off.
             CompositionLocalProvider(LocalFormEnabled provides !saving) {
@@ -495,7 +510,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                 }
             }
         }
-        AddButton(addition, saving, cover, actions::save)
+        AddButton(addition, saving, cover, actions::save, Modifier.onSizeChanged { buttonHeight = it.height })
     }
     AddPicker(state, addition, form, actions)
 }
@@ -687,11 +702,11 @@ private fun AnimatedVisibilityScope.Going(content: @Composable () -> Unit) {
  * "Close", off while Add saves.
  */
 @Composable
-private fun AddHeading(saving: Boolean, close: () -> Unit) {
+private fun AddHeading(saving: Boolean, close: () -> Unit, modifier: Modifier = Modifier) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val closeLabel = localized("common.close")
-    Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
+    Box(modifier.fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
         Row(
             Modifier
                 .widthIn(max = CONTENT_WIDTH)
@@ -1402,7 +1417,7 @@ private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.
  * further than accessibility2.
  */
 @Composable
-private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean, save: () -> Unit) {
+private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean, save: () -> Unit, modifier: Modifier = Modifier) {
     val colors = PeekTheme.colors
     val reduceMotion = PeekTheme.reduceMotion
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
@@ -1423,7 +1438,7 @@ private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean,
             .padding(bottom = lift)
     }
     Box(
-        Modifier
+        modifier
             .fillMaxWidth()
             .background(colors.background)
             .then(keyboard),
@@ -1645,6 +1660,8 @@ private const val BUTTON_MOTION = 0.2
 private const val DISABLED_OPACITY = 0.45f
 private const val MINIMUM_SCALE = 0.7f
 private val CONTENT_WIDTH = 560.dp
+/** The number's label and its field, two lines tall, which the title gives way to in a window too low for both. */
+private val FIELD_ROOM = 96.dp
 private val MARK_WIDTH = 27.dp
 private val ROW_RISE = 6.dp
 

@@ -680,8 +680,8 @@ class ChangeCarrierTest {
         show()
         fromCard(chair)
         val panel = node(SHEET_PANEL).getUnclippedBoundsInRoot()
-        assertEquals(540f, (panel.right - panel.left).value, 1f)
-        assertEquals((compose.onRoot().getUnclippedBoundsInRoot().right.value - 540f) / 2, panel.left.value, 1f)
+        assertEquals(580f, (panel.right - panel.left).value, 1f)
+        assertEquals((compose.onRoot().getUnclippedBoundsInRoot().right.value - 580f) / 2, panel.left.value, 1f)
         val top = panel.top.value
         assertTrue("At $top", top > windowHeight() * 0.2f)
         // The picker comes in where the form was.

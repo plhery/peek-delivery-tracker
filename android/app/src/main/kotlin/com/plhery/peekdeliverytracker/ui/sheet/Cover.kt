@@ -32,9 +32,9 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 
 /**
  * `.fullScreenCover(isPresented:)`: the whole window, its tab bar and the system's bars too ([LocalTabOverlay]), on the
- * app's background. It comes up from the window's foot and goes back down on the come-and-go spring of the app's sheets
- * ([Sheet]), which no drag moves and nothing dims around: only what it holds closes it ([onDismiss] from its own
- * button), and the system's back, as long as it is [dismissible]; otherwise the back is kept from what is under it.
+ * app's background. It comes up from the window's foot and goes back down on UIKit's cover spring ([CoverSpring]),
+ * which no drag moves and nothing dims around: only what it holds closes it ([onDismiss] from its own button), and the
+ * system's back, as long as it is [dismissible]; otherwise the back is kept from what is under it.
  * TalkBack reaches only the cover, named [paneTitle], and only a menu opened in it while one is open ([LocalSheetMenus]);
  * on its way down it takes no touch and TalkBack no longer reaches it, as UIKit's cover going down. Once it has gone,
  * [onClosed] runs. The window made again (a rotation) finds it up, without coming up again. What it holds lays out the
@@ -93,12 +93,12 @@ private fun CoverLayer(
             if (shown.value < 1f) {
                 // Once laid out, from the window's foot.
                 withFrameNanos {}
-                shown.animateTo(1f, Motion.smooth(PRESENT_DURATION))
+                shown.animateTo(1f, CoverSpring)
             }
             memory.up = true
         } else {
             memory.forget()
-            shown.animateTo(0f, Motion.smooth(PRESENT_DURATION))
+            shown.animateTo(0f, CoverSpring)
             onGone()
         }
     }
@@ -135,7 +135,7 @@ private val Untouchable = Modifier.pointerInput(Unit) {
     }
 }
 
-/** The cover's own, as UIKit's cover moves: the sheets' come-and-go spring. */
-private const val PRESENT_DURATION = 0.5
+/** UIKit's cover, both ways: critically damped, its response 0.34 s, a little quicker than the sheets' spring. */
+private val CoverSpring = Motion.springWithResponse<Float>(response = 0.34, dampingFraction = 1.0)
 
 internal const val COVER_PANEL = "cover.panel"

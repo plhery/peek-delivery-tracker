@@ -138,8 +138,9 @@ internal class SheetMenus {
  *   its speed would carry it, as UIKit projects a flick; dragged down past its lowest detent, it goes. A scroll in it
  *   first takes it to the large detent, as a keyboard up for what it holds does. In a window lower than 480 (a phone
  *   on its side) it stands at the large detent whatever its detents, as iOS's does in compact height.
- * - Where the window is regular, it is a form sheet in the window's middle, 540 wide and 620 tall at most, opaque, which
- *   a drag down sends away too. A sheet with the [SheetDetent.Fitted] detent is as tall there as what it holds, as tall
+ * - Where the window is regular, it is a form sheet in the window's middle, 580 wide and 660 tall at most, opaque, which
+ *   a drag down sends away too; with the keyboard up, it stands in the middle of what the keyboard leaves above it,
+ *   following the keyboard as it comes and goes, as iPadOS moves a form sheet. A sheet with the [SheetDetent.Fitted] detent is as tall there as what it holds, as tall
  *   as the window's safe area at most (`fittedSheet`'s form).
  *
  * The window under it dims, black at 20 % (48 % in dark), and a tap there dismisses it, as the system's back and its
@@ -533,9 +534,14 @@ private fun SheetLayer(
             if (regular) {
                 val shape = ContinuousRoundedShape(FORM_RADIUS)
                 val ground = remember(colors) { @Composable { bounds: Modifier -> Box(bounds.background(colors.groupedBackground)) } }
+                // In the middle of the window above the keyboard, as it moves, and back with the sheet on its way down.
+                val raised = {
+                    val above = height - ime.getBottom(density)
+                    (firstRest - max(safeTop, (above - formHeight) / 2)).coerceAtLeast(0f) * presence()
+                }
                 Box(
                     Modifier
-                        .placedAt({ Size(formWidth, formHeight) }) { Offset((width - formWidth) / 2, motion.top + backOffset()) }
+                        .placedAt({ Size(formWidth, formHeight) }) { Offset((width - formWidth) / 2, motion.top + backOffset() - raised()) }
                         .testTag(SHEET_PANEL)
                         .then(modifier)
                         .dropShadow(shape, SHEET_SHADOW)
@@ -715,8 +721,9 @@ private const val MEDIUM_TOP = 0.4714f
 private val FLOAT_INSET = 8.dp
 private val LARGE_MIN_TOP = 10.dp
 private val TOP_RADIUS = 38.dp
-private val FORM_WIDTH = 540.dp
-private val FORM_HEIGHT = 620.dp
+/** `.presentationSizing(.form)` on iPadOS 26. */
+private val FORM_WIDTH = 580.dp
+private val FORM_HEIGHT = 660.dp
 private val FORM_MARGIN = 20.dp
 private val FORM_RADIUS = 38.dp
 private val GRABBER_TOP = 5.dp

@@ -389,7 +389,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-tracking",
-      "title": "GOFO France tracking: statuses, delivery and contact",
+      "title": "GOFO France tracking: GFFR numbers, statuses and help",
       "name": "GOFO France",
       "color": "#fc4c02"
     },
@@ -397,7 +397,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "gofo-it",
       "catalog": "gofo-it",
       "slug": "gofo-italy-tracking",
-      "title": "GOFO Italy tracking: statuses, delivery and contact",
+      "title": "GOFO Italy tracking: GFIT numbers, statuses and complaints",
       "name": "GOFO Italy",
       "color": "#fc4c02"
     },
@@ -1301,7 +1301,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "gofo-ca",
       "catalog": "gofo-ca",
       "slug": "gofo-canada-tracking",
-      "title": "GOFO Canada tracking: GFCA numbers, statuses, contact",
+      "title": "GOFO Canada tracking: GFCA numbers, statuses and delays",
       "name": "GOFO Canada",
       "color": "#fc4c02"
     },
@@ -1889,7 +1889,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "gofo-fr",
       "catalog": "gofo-fr",
       "slug": "gofo-france-suivi",
-      "title": "GOFO France suivi colis\u00a0: statuts, livraison et contact",
+      "title": "GOFO France suivi colis\u00a0: numéros GFFR, statuts et aide",
       "name": "GOFO France",
       "color": "#fc4c02"
     },
@@ -2235,7 +2235,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "gofo-it",
       "catalog": "gofo-it",
       "slug": "gofo-italy-tracking",
-      "title": "GOFO Italy tracking: stati, consegna e contatti",
+      "title": "GOFO Italy tracking: codici GFIT, stati e reclami",
       "name": "GOFO Italy",
       "color": "#fc4c02"
     },

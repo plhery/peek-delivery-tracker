@@ -53,7 +53,7 @@ YunExpress flies parcels out of China, has them cleared through customs, then ha
 
 **UK and Ireland.** YunExpress launched a dedicated UK line in 2016, but its pages name no delivery partner in the UK or Ireland, and no office or phone line for recipients there: for delivery, ask the carrier named in your tracking. One of its lines delivers across the UK, including islands within it, but not to offshore islands such as Jersey and Guernsey. Its pages say nothing to UK buyers about VAT or duty; see [what you may pay](guide:customs).
 
-**US.** YunExpress's Chinese site offers sellers a last-mile service, CIRRO-E-COMMERCE, without saying which parcels it carries. It also launched a "US Standard Postal Service" line in 2020, but doesn't say which local carrier delivers a given US parcel. Some US scans name [GOFO](carrier:gofo), a last-mile carrier founded in August 2023. Neither company's site says they're the same company, and GOFO's doesn't mention YunExpress.
+**US.** YunExpress's Chinese site offers sellers a last-mile service, CIRRO-E-COMMERCE, without saying which parcels it carries. It also launched a "US Standard Postal Service" line in 2020, but doesn't say which local carrier delivers a given US parcel. Some US histories show [GOFO](carrier:gofo) delivering: their scans are relayed from GOFO, the last-mile carrier named in them, and GOFO's own tracking knows those parcels by the same YT number.
 
 YunExpress says nothing to recipients about delivery attempts, cards, holding times or rescheduling; for those, check the local carrier named in the tracking.
 
@@ -75,7 +75,7 @@ In October 2026, YunExpress listed no phone number, form or office for recipient
 - **Phone** 400-8575-500 on yunexpress.cn, a mainland China number; it doesn't say whether it works from abroad.
 - **Regional contacts** for Asia and Australia only.
 
-Yuntrack's Feedback box is about the website. Start with the shop, which holds the contract, then the local carrier named in the tracking. If that's GOFO, in the US, its recipient hotline is +1 (949) 688-6032, 9am to 9pm EST Monday to Friday and 11am to 7pm EST at weekends; its email is cs@mail.gofo.com.
+Yuntrack's Feedback box is about the website. Start with the shop, which holds the contract, then the local carrier named in the tracking. If that's GOFO, in the US, its customer service is on its US site, gofo.com.
 
 ## Tracking a YunExpress parcel with Peek
 
@@ -121,7 +121,5 @@ By YunExpress's own estimates for sellers, Standard Express takes 3 to 5 busines
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – customs checks
 - [YunExpress: 云途物流YunExpress](https://www.yunexpress.cn/) – small parcels, China number, CIRRO-E-COMMERCE
 - [YunExpress: Contact Us](https://sg.yunexpress.com/contact/) – regional contacts
-- [GOFO: About Us](https://www.gofo.com/us/about-us) – founding and role
-- [GOFO: Customer Service](https://www.gofo.com/us/customer-service) – recipient hotline
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows, GOFO's scans in YunExpress histories
 :::

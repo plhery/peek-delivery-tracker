@@ -1,16 +1,16 @@
 ---
-title: GOFO Italy tracking: stati, consegna e contatti
-description: Tracking GOFO in Italia: dove trovi il codice GFIT o CIIT, cosa vogliono dire gli stati, consegna fallita, pacco smarrito e numero di telefono.
+title: GOFO Italy tracking: codici GFIT, stati e reclami
+description: Tracking GOFO in Italia: com'è fatto il codice GFIT o CIIT, cosa vogliono dire gli stati di GOFO e come fare reclamo se il pacco è in ritardo o smarrito.
 slug: gofo-italy-tracking
 published: 2026-10-11
 updated: 2026-10-27
 ---
 
-GOFO Italy è un corriere dell'ultimo miglio che consegna in Italia gli ordini online di negozi e marchi di e-commerce; ha assorbito CIRRO Parcel, e il tracciamento indica ancora spesso quel nome come servizio. Per seguire il pacco inserisci il codice che inizia con `GFIT` o `CIIT` sulla [pagina di tracciamento di GOFO](https://www.gofo.com/it/tracking-results/), che accetta anche più codici insieme. Il codice te lo dà il negozio che ha spedito: guarda nell'e-mail di conferma dell'ordine o di spedizione.
+GOFO Italy è la rete italiana di GOFO, un corriere di pacchi presente in diversi Paesi, e consegna pacchi in Italia. Nell'elenco dei corrieri di Peek si chiama anche CIRRO Parcel Italy. I suoi codici di tracking iniziano con `GFIT` o `CIIT`: segui il pacco sulla pagina di tracciamento italiana di GOFO, su gofo.com, oppure incolla il codice nel campo qui sopra. Non hai ancora il codice? Leggi [codice tracking, dove si trova](guide:find-tracking-number).
 
-## Codice di tracking GOFO: com'è fatto e dove si trova
+## Codice di tracking GOFO: com'è fatto
 
-Secondo GOFO, i codici italiani iniziano di solito con `CIIT` o `GFIT`, seguiti da 13 o 14 cifre, da scrivere senza caratteri speciali:
+Queste sono le forme che Peek attribuisce a GOFO Italy, in maiuscolo o in minuscolo:
 
 | Forma | Esempio inventato |
 | --- | --- |
@@ -19,77 +19,68 @@ Secondo GOFO, i codici italiani iniziano di solito con `CIIT` o `GFIT`, seguiti 
 | CIIT e 13 cifre | `CIIT1234567890123` |
 | CIIT e 14 cifre | `CIIT12345678901234` |
 
-Il codice lo fornisce il mittente o il negozio online, nell'e-mail di conferma dell'ordine o nella notifica di spedizione. Se non lo trovi, o se il tracciamento di GOFO lo dà come non valido, GOFO ti chiede di contattare direttamente il venditore. Altri posti dove cercarlo: [codice tracking, dove si trova](guide:find-tracking-number).
-
-Le due lettere dopo `GF` o `CI` indicano il Paese. I codici `GFFR` e `CIFR` sono di GOFO France, `GFUS` con 14 cifre è di GOFO Express negli Stati Uniti, una rete diversa, e `GFCA` con 14 cifre è di GOFO Canada. Se il tuo codice inizia con `GFIT` ma ha 12 o 15 cifre, c'è un errore di battitura oppure non è un codice di GOFO Italy.
+Le altre reti di GOFO seguono lo stesso schema, con il proprio Paese dopo `GF` o `CI`. I codici `GFFR` e `CIFR` sono di GOFO France, `GFNL` di GOFO Paesi Bassi e `GFES` di GOFO Spagna. Un `GFUS` con 14 cifre, un `GF` con solo 13 o un `CR` con 12 sono di GOFO Express negli Stati Uniti, una rete diversa, e un `GFCA` con 14 cifre è di GOFO Canada. Se il tuo codice inizia con `GFIT` ma ha 12 o 15 cifre, Peek non lo attribuisce a GOFO Italy: controlla che non ci sia un errore di battitura. Per confrontare le forme: [formati dei codici di tracking](guide:tracking-number-formats).
 
 ## Stati del tracking GOFO: cosa vogliono dire
 
-Il sito italiano di GOFO mostra le scansioni in italiano; con il pulsante English (gofo.com/it/en) le vedi in inglese. Ecco le diciture italiane, nell'ordine in cui un pacco le incontra:
+Peek legge il tracciamento italiano di GOFO e ne riporta le parole così come sono. Ecco le diciture più comuni, nell'ordine in cui un pacco le incontra:
 
 | Le parole di GOFO | Cosa vuol dire per te |
 | --- | --- |
-| `Il pacco è in fase di preparazione da parte del mittente e ci sarà presto consegnato` | Il negozio ha creato l'etichetta, ma GOFO non ha ancora il pacco. |
-| `Registrato presso il centro di trasferimento` | Scansionato in un centro di smistamento GOFO. |
-| `Il pacco ha lasciato il centro di smistamento` | È partito da un centro di smistamento. |
-| `Arrivato alla struttura di destinazione regionale GOFO` | È al deposito GOFO della tua zona, quello che lo consegnerà. |
-| `Preparazione alla consegna` | Lo stanno preparando per il giro di consegna. |
-| `Il corriere è fuori per la consegna` | È sul furgone del corriere. |
-| `Consegna fallita, tipo:Destinatario assente` | Non consegnato perché non c'era nessuno. |
-| `Consegna fallita, tipo:L'indirizzo è errato` | Non consegnato perché l'indirizzo è sbagliato. |
-| `Il pacco è stato restituito al centro di smistamento` | È tornato al centro di smistamento dopo i tentativi falliti. |
+| `Il pacco è in fase di preparazione da parte del mittente e ci sarà presto consegnato` | Il mittente sta preparando il pacco e lo affiderà presto a GOFO. |
+| `Registrato presso il centro di trasferimento` | Scansionato in un centro di trasferimento GOFO. |
+| `Il pacco ha lasciato il centro di smistamento` | È partito da un centro di smistamento GOFO. |
+| `Arrivato alla struttura di destinazione regionale GOFO` | È alla struttura regionale GOFO della tua zona. |
+| `Preparazione alla consegna` | Lo stanno preparando al deposito, prima che parta il corriere. |
+| `Il corriere è fuori per la consegna` | È con il corriere. |
+| `Consegna fallita, tipo:Destinatario assente` | Non consegnato: non c'era nessuno. |
+| `Consegna fallita, tipo:L'indirizzo è errato` | Non consegnato: l'indirizzo è sbagliato. |
+| `Il pacco è stato restituito al centro di smistamento` | È tornato al centro di smistamento di GOFO dopo una consegna non riuscita. |
 | `Consegnato` | Consegnato. |
 
-Due stati confondono. Il primo, quando il negozio sta ancora preparando il pacco, GOFO lo mette sotto l'etichetta `In transito`, anche se non si è ancora mosso niente. E `Il pacco è stato restituito al centro di smistamento` non vuol dire che il pacco torna al negozio: è di nuovo al centro di smistamento di GOFO, che ti chiede di scrivere a cs@it.gofo.com per confermare una nuova consegna. Dopo un tentativo con indirizzo errato, cerca l'e-mail di GOFO con il modulo per correggere i dati.
+Due righe possono trarre in inganno. Finché alla prima non ne segue un'altra, GOFO non ha il pacco, e Peek lo mostra come «Etichetta creata». E `Il pacco è stato restituito al centro di smistamento` non vuol dire che il pacco torna al negozio: è di nuovo al centro di smistamento di GOFO, e Peek lo mostra come «Problema segnalato». Una consegna appare come `Consegnato` e basta, in ogni lingua: la riga di consegna di GOFO può dire di più, anche dettagli sul destinatario, che Peek lascia fuori.
 
-La pagina di GOFO riassume anche lo stato con etichette come `In consegna` (di solito il pacco arriva entro 1–2 giorni lavorativi, dice GOFO), `In elaborazione`, `Avviso`, `Restituito` (GOFO non spiega cosa voglia dire esattamente) e `Non trovato` (codice non trovato).
+Il tracciamento di GOFO raggruppa anche i pacchi in grandi categorie. `Avviso` è un problema segnalato da GOFO, che Peek mostra come «Problema segnalato»; da solo non vuol dire che c'è stato un tentativo di consegna. `Restituito` è un pacco che torna al mittente, mostrato come «Restituito al mittente».
 
-## Consegna GOFO: tentativi, giacenza e punti di ritiro
+Se GOFO Italy ha ricevuto il pacco da [YunExpress](carrier:yunexpress), il tracciamento di YunExpress può riportare le scansioni di GOFO in inglese: `Preparing for delivery` al deposito prima che parta il corriere, e `Package departed from sorting center` accanto all'italiano `Il pacco ha lasciato il centro di smistamento`.
 
-GOFO consegna all'indirizzo e fa fino a tre tentativi. Se non ci sei, il corriere può lasciare il pacco in un luogo sicuro, come la cassetta della posta o da un vicino; se preferisci di no, GOFO ti chiede di avvisarlo in anticipo. Dopo l'ultimo tentativo fallito il pacco torna al magazzino di GOFO e resta lì 14 giorni, secondo le domande frequenti di GOFO. In quel tempo contatta GOFO per fissare una nuova consegna: senza risposta entro 14 giorni, il pacco torna in automatico al mittente.
+## Pacco GOFO in ritardo, non consegnato, smarrito o danneggiato
 
-Per ora GOFO non permette di cambiare la data di consegna né di farsi consegnare in un punto di ritiro. Per cambiare indirizzo usa il modulo che GOFO manda da cs@it.gofo.com; se non arriva o il link non funziona, contatta GOFO. Quando il pacco è già affidato al corriere, l'indirizzo non si può più cambiare. GOFO non ha nemmeno un servizio di reso: per restituire qualcosa, chiedi al venditore.
+**Nessun aggiornamento.** Peek continua a chiedere a GOFO. Quando un pacco resta quattro giorni senza nuove scansioni, la sua pagina in Peek lo segnala e rimanda alla pagina di assistenza di GOFO Italy («Chiedi aiuto a GOFO Italy»). Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
 
-GOFO non dà un orario preciso. Le sue FAQ dicono che, una volta arrivato in Italia, il pacco viene consegnato di solito entro 3–5 giorni lavorativi. Le sue pagine non dicono se consegna il sabato o la domenica.
+**Consegna fallita.** Dopo `Consegna fallita, tipo:Destinatario assente` o `Consegna fallita, tipo:L'indirizzo è errato`, Peek mostra «Tentativo di consegna»; un tentativo fallito con un altro motivo dopo `tipo:` appare come «Problema segnalato». Cosa succede dopo dipende da GOFO: leggi [consegna mancata](guide:missed-delivery) per sapere cosa controllare.
 
-## Pacco GOFO non consegnato, smarrito o danneggiato
+**In ritardo.** Secondo le norme europee sui consumatori, il negozio deve consegnarti l'ordine entro 30 giorni, salvo una data diversa concordata. Se non lo fa, sollecitalo e concedigli un'ulteriore proroga ragionevole; se scade anche quella, puoi recedere dal contratto ed essere rimborsato.
 
-**Nessun aggiornamento.** I pacchi da fuori UE possono non comparire da GOFO finché non è finito lo sdoganamento. GOFO ti chiede di contattarlo se non cambia nulla per più di 5 giorni lavorativi dall'arrivo in Italia o nell'UE. Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
+**`Consegnato`, ma il pacco non c'è.** Il negozio è responsabile della consegna del tuo ordine: spetta a lui contattare il corriere e dimostrare che il pacco è stato consegnato, e se non ci riesce deve inviarti un articolo identico o rimborsarti. Per cosa controllare prima intorno a casa, leggi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
-**`Consegnato`, ma il pacco non c'è.** GOFO consiglia di guardare prima la prova di consegna: sulla sua pagina di tracciamento, «VISUALIZZA POD» mostra foto e posizione, dopo che hai inserito le ultime 6 cifre del numero di telefono del destinatario. Poi controlla cassetta della posta, pianerottolo, ingresso, vicini e portiere o amministratore, e contatta subito GOFO. Una foto dell'ingresso aiuta, ma non è obbligatoria. Leggi anche [pacco consegnato ma non ricevuto](guide:delivered-not-received).
+**Danneggiato.** Il negozio è responsabile dei danni dalla spedizione fino alla consegna, quindi, quando puoi, controlla il pacco in presenza del corriere. Se la scatola ha danni visibili, l'AGCOM dice che puoi rifiutarla oppure accettarla con riserva. Altro in [pacco danneggiato](guide:damaged-parcel).
 
-**Pacco smarrito, o articoli mancanti o rotti in una scatola intatta.** Contatta il venditore. Le FAQ italiane di GOFO dicono che per un pacco smarrito deve essere il mittente a chiedere il rimborso a GOFO.
+## Come fare reclamo per una consegna GOFO Italy
 
-**Imballo danneggiato, problemi con il corriere o un «tentativo fallito» che contesti.** Manda la tua segnalazione al servizio clienti di GOFO.
+Comincia dal negozio che ha spedito il pacco, perché risponde lui della consegna. Per un reclamo contro il corriere, l'AGCOM, l'autorità per le comunicazioni che regola anche il settore postale, prevede un percorso per gli operatori postali, e i pacchi fino a 31,5 kg rientrano nei servizi postali:
 
-**Reclamo formale.** La Carta del servizio di GOFO prevede il reclamo gratuito per e-mail, PEC, raccomandata A/R o telefono, con risposta entro 45 giorni. Se la risposta non ti soddisfa, o non arriva, puoi chiedere la conciliazione scrivendo a cs@it.gofo.com; si chiude entro 60 giorni. Dopo, puoi rivolgerti all'AGCOM con il Formulario CP, entro 90 giorni dalla fine della conciliazione.
+1. Manda all'operatore un reclamo scritto, con il modulo del suo sito o uno richiesto via e-mail. Deve risponderti entro 45 giorni.
+2. Se la risposta non ti soddisfa, o non arriva entro 45 giorni, chiedi all'operatore la conciliazione. Si chiude entro 60 giorni.
+3. Se non basta, hai 90 giorni per chiedere all'AGCOM la definizione della controversia con il Formulario CP. L'AGCOM decide entro 150 giorni, e la decisione vincola entrambe le parti.
 
-## GOFO Italia: contatti e numero di telefono
+L'AGCOM può imporre rimborsi o indennizzi, non risarcimenti dei danni: per quelli, e in qualsiasi momento, puoi rivolgerti al giudice ordinario. Se l'operatore non risponde al reclamo o alla richiesta di conciliazione, segnalalo sul Portale delle segnalazioni dell'AGCOM. Il Contact Center dell'AGCOM risponde dal lunedì al venerdì, dalle 10:00 alle 14:00, al numero verde 800.185060 da telefono fisso o allo 081.750750 da cellulare o dall'estero.
 
-Come li elenca la pagina di assistenza di GOFO Italy:
+## Assistenza clienti GOFO Italy
 
-- **Linea di assistenza per i destinatari**, per problemi di consegna e tracciamento: +39 02 9994 9488, dal lunedì al venerdì, 9:00–18:00, festivi esclusi. GOFO non indica il costo della chiamata.
-- **E-mail:** cs@it.gofo.com.
-- **PEC** per i reclami: gofo.italia@legalmail.it.
-- **Posta** per i reclami, con raccomandata A/R: GOFO Italia S.R.L, Via Juan Manuel Fangio 11, Comparto D, 20045 Lainate (MI).
-
-Nelle ore di punta GOFO consiglia l'e-mail. La sua pagina di tracciamento parla di assistenza 24/7 e il riquadro dei risultati indica 10:00–18:00, ma la pagina contatti dà gli orari qui sopra. Nelle FAQ italiane il numero compare una volta con una cifra in meno: quello giusto è +39 02 9994 9488. GOFO non ha chat né app, e nelle sue pagine non c'è un avviso sugli SMS falsi.
+La pagina di assistenza di GOFO Italy si trova sul suo sito italiano, gofo.com, e Peek la indica con «Chiedi aiuto a GOFO Italy» quando un pacco non si muove più. La società, GOFO Italia s.r.l., ha sede legale in Via Juan Manuel Fangio 11, 20045 Lainate (MI). Tieni a portata di mano il codice `GFIT` o `CIIT` e il numero d'ordine.
 
 ## Tracking GOFO Italy con Peek
 
-[Peek](/) riconosce da solo i codici `GFIT` e `CIIT`, in maiuscolo o minuscolo. Puoi incollare anche un link del sito italiano di GOFO (gofo.com/it o gofoexpress.it, con `id=` e il codice): a decidere è il codice che contiene.
+[Peek](/) riconosce da solo i codici `GFIT` e `CIIT`. Puoi incollare anche un link della pagina di tracciamento italiana di GOFO (su gofo.com o gofoexpress.it, con `id=` e il codice).
 
-Peek controlla il tracciamento italiano di GOFO ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, il nome del servizio (spesso `CIRRO Parcel`) e l'ora di consegna, ogni scansione su una mappa, e ti manda notifiche: ogni scansione, solo i passaggi importanti o solo il giorno di consegna. Le scansioni restano nelle parole italiane di GOFO, e una consegna appare come `Consegnato`. Gli orari sono letti nel fuso orario che dà GOFO e mostrati in quello del tuo dispositivo. Peek non mostra una data di consegna prevista, un punto di ritiro o il peso, e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
+Peek controlla il tracciamento italiano di GOFO ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, il nome del servizio e l'ora di consegna, ogni scansione su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Finché GOFO non elenca una prima scansione, Peek mostra «In attesa del corriere» e continua a chiedere invece di dare il codice per sconosciuto. Peek non mostra una data di consegna prevista né il peso, e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
 
 ## Domande sul tracking GOFO
 
 ### Dov'è il mio pacco GOFO?
 
-Te lo dice l'ultima riga del tracciamento: `Arrivato alla struttura di destinazione regionale GOFO` vuol dire che è al deposito della tua zona, `Il corriere è fuori per la consegna` che è con il corriere. Se vedi solo la riga di preparazione, il negozio non l'ha ancora affidato a GOFO.
-
-### In quanto tempo arriva un pacco GOFO in Italia?
-
-Di solito in 3–5 giorni lavorativi da quando il pacco è in Italia, secondo le FAQ di GOFO. Un orario preciso GOFO non lo dà.
+Te lo dice l'ultima riga del tracciamento: `Arrivato alla struttura di destinazione regionale GOFO` vuol dire che è alla struttura regionale della tua zona, `Preparazione alla consegna` che lo stanno preparando per il corriere, e `Il corriere è fuori per la consegna` che è con il corriere. Se vedi solo la riga di preparazione, il mittente non l'ha ancora affidato a GOFO.
 
 ### GOFO consegna il sabato?
 
@@ -97,23 +88,21 @@ Le pagine di GOFO Italy non lo dicono, né per il sabato né per la domenica. Se
 
 ### Cos'è GOFO Italia, ed è affidabile?
 
-È GOFO Italia S.R.L, una società di Lainate, vicino a Milano, con autorizzazione postale generale del Ministero delle Imprese e del Made in Italy e sotto la vigilanza dell'AGCOM. Lavora solo per aziende, e le consegne le fanno partner autorizzati.
+È la società italiana di GOFO: GOFO Italia s.r.l., con sede legale a Lainate, in provincia di Milano. L'AGCOM, l'autorità di regolamentazione del settore postale, riporta nella Determina n. 12/26/DSP del 2 settembre 2026 di averle contestato, il 17 giugno 2026, tre violazioni: aver svolto attività postale per servizi rientranti nel servizio universale senza la prescritta licenza individuale, senza aver predisposto la Carta dei servizi e senza aver attivato procedure di risoluzione delle controversie con l'utenza. Secondo la determina, la società ha ammesso gli addebiti sulla Carta dei servizi e sulle procedure per le controversie e, per queste due violazioni, ha pagato la sanzione in misura ridotta: per questa parte l'AGCOM ha archiviato il procedimento. La società si è invece opposta alla contestazione sull'inidoneità del suo titolo abilitativo, e su questo punto il procedimento, scrive l'AGCOM, «seguirà l'ordinario iter procedimentale».
 
 ### GOFO e CIRRO Parcel sono la stessa cosa?
 
-Sì. GOFO Express ha acquisito CIRRO Parcel, la divisione dell'ultimo miglio di CIRRO in Francia, Paesi Bassi e Italia, e ora le due società lavorano con un solo nome, GOFO: per questo alcuni codici iniziano con `CIIT`.
+In Italia, per il tracking, sì: l'elenco dei corrieri di Peek dà a GOFO Italy anche il nome CIRRO Parcel Italy. Un tracciamento che dice solo «Cirro» può indicare la rete italiana, francese o olandese di GOFO, oppure la linea internazionale di Cirro, che affida i pacchi alle poste nazionali con i loro codici.
+
+### Cosa faccio se il mio pacco GOFO è smarrito?
+
+Contatta il negozio. Per le norme europee risponde della consegna finché il pacco non ti arriva: se non può dimostrarla, deve inviarti di nuovo l'articolo o rimborsarti. Se la colpa è del corriere, vale il percorso di reclamo AGCOM descritto sopra. Altro in [pacco smarrito](guide:lost-parcel).
 
 :::sources
-- [GOFO Italy: Assistenza Clienti](https://www.gofo.com/it/contact-us/) – formato del codice, tentativi, 14 giorni, cambio indirizzo, tempi di consegna, pacchi smarriti e danneggiati, telefono, e-mail
-- [GOFO Italy: Carta del Servizio Clienti](https://www.gofo.com/it/carta-del-servizio-clienti/) – reclami, 45 giorni, conciliazione, AGCOM
-- [GOFO Italy: Carta dei Servizi Postali](https://www.gofo.com/it/wp-content/uploads/2026/05/GOFO_Italia_Carta_dei_Servizi_Postali_v2.1.pdf) – canali di reclamo, autorizzazione postale, servizio B2B, distribuzione affidata ad altri operatori
-- [GOFO Italy: Traccia la Tua Spedizione](https://www.gofo.com/it/tracking-results/) – pagina di tracciamento, più codici insieme, diciture delle scansioni, assistenza 24/7
-- [GOFO Italy: script della pagina di tracciamento](https://www.gofo.com/it/wp-content/plugins/cirro-tracking-new/assets/js/tracking-results.js) – etichette di stato, verifica per la prova di consegna, orari
-- [GOFO Italy: Informazioni Societarie](https://www.gofo.com/it/informazioni-societarie/) – società, indirizzo, PEC
-- [GOFO Italy: Home](https://www.gofo.com/it/) – corriere dell'ultimo miglio, partner di consegna
-- [GOFO Italy: Spedisci con Noi](https://www.gofo.com/it/ship-with-us/) – solo clienti aziendali
-- [GOFO Italy: GOFO Express acquisisce CIRRO Parcel](https://www.gofo.com/it/gofo-express-acquisisce-cirro-parcel/) – CIRRO Parcel è diventato GOFO
-- [GOFO Italy: Customer Support](https://www.gofo.com/it/en/contact-us/) – FAQ in inglese, numero di telefono completo
-- [AGCOM: FAQ contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – conciliazione, 90 giorni, Formulario CP
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
+- [AGCOM: Determina n. 12/26/DSP](https://www.agcom.it/sites/default/files/provvedimenti/determina/2026/Determina%20arch%20parziale%2012_26_DSP%20-%20Gofo%20pdf.pdf) – GOFO Italia s.r.l., sede legale a Lainate, procedimento AGCOM del 2026 e sanzione pagata in misura ridotta (2 settembre 2026)
+- [AGCOM: FAQ contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – reclamo entro 45 giorni, conciliazione entro 60, Formulario CP entro 90, pacchi fino a 31,5 kg, pacchi danneggiati, Contact Center
+- [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – consegna entro 30 giorni, proroga, danni fino alla consegna
+- [Your Europe: FAQ, spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_it.htm) – il negozio dimostra la consegna, controllo in presenza dello spedizioniere
+- [GOFO Italy: Assistenza Clienti](https://www.gofo.com/it/contact-us/) – nessuna indicazione sulle consegne del sabato e della domenica
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme dei codici, link, diciture italiane e categorie, scansioni di GOFO riportate da YunExpress, CIRRO Parcel Italy, cosa mostra e lascia fuori Peek
 :::

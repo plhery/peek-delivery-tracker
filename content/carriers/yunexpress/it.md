@@ -49,7 +49,7 @@ Quello che confonde di più è `Delivered to local carrier`: «delivered» qui v
 
 YunExpress porta i pacchi in aereo fuori dalla Cina, li fa sdoganare nel Paese di destinazione e poi li affida a un corriere locale. Dice di aver lanciato una linea dedicata verso l'Italia nel 2017 e una verso la Svizzera nel 2020. Sulle sue pagine però non nomina nessun partner per la consegna in Italia o in Ticino, solo in generale «premium global carrier networks».
 
-Nelle cronologie YunExpress compaiono righe di Poste Italiane e di GOFO in Italia, un corriere dell'ultimo miglio nato nel 2023, ma YunExpress non li presenta come partner. Chi ha il tuo pacco lo dicono le righe dopo `Delivered to local carrier` e la colonna «Last Mile Tracking». Come passano di mano i pacchi dalla Cina lo spiega la guida [tracciare un pacco dalla Cina](guide:tracking-from-china).
+Nelle cronologie YunExpress compaiono righe di Poste Italiane e di GOFO, un corriere dell'ultimo miglio in Italia, ma YunExpress non li presenta come partner. Chi ha il tuo pacco lo dicono le righe dopo `Delivered to local carrier` e la colonna «Last Mile Tracking». Come passano di mano i pacchi dalla Cina lo spiega la guida [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 Su tentativi di consegna, avvisi, giacenza o nuova data, YunExpress non pubblica nulla per i destinatari. Se non eri in casa, guarda quale corriere compare nel tracking: valgono le sue regole per avviso, giacenza e ritiro.
 
@@ -124,6 +124,5 @@ Non ne indica: la sede è a Shenzhen, in Cina, e per l'Italia YunExpress non pub
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – durata dei controlli doganali
 - [YunExpress: 云途物流YunExpress](https://www.yunexpress.cn/) – numero della Cina continentale
 - [YunExpress: Contact Us](https://sg.yunexpress.com/contact/) – contatti regionali
-- [GOFO: About Us](https://www.gofo.com/us/about-us) – GOFO, corriere dell'ultimo miglio nato nel 2023
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, righe di Poste Italiane e GOFO nelle cronologie YunExpress
 :::

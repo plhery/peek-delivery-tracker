@@ -319,6 +319,9 @@
   "blueex": {
     "decal": "blueex"
   },
+  "bombax": {
+    "decal": "bombax"
+  },
   "bombino": {
     "decal": "bombino"
   },
@@ -393,6 +396,9 @@
   },
   "campost": {
     "decal": "campost"
+  },
+  "canada-air-express": {
+    "decal": "canada-air-express"
   },
   "canada-post": {
     "decal": "canada-post",
@@ -914,6 +920,9 @@
   "eco-express-ae": {
     "decal": "eco-express-ae"
   },
+  "ecom-logistics": {
+    "decal": "ecom-logistics"
+  },
   "econt": {
     "decal": "econt"
   },
@@ -1177,6 +1186,9 @@
   "foxpost": {
     "decal": "foxpost"
   },
+  "fragilepak": {
+    "decal": "fragilepak"
+  },
   "franch-express": {
     "decal": "franch-express"
   },
@@ -1396,6 +1408,9 @@
   },
   "hitch": {
     "decal": "hitch"
+  },
+  "hkd-express": {
+    "decal": "hkd-express"
   },
   "holisol": {
     "decal": "holisol"
@@ -2673,6 +2688,9 @@
     "palette": {
       "accent": "#1c2024"
     }
+  },
+  "sm-express": {
+    "decal": "sm-express"
   },
   "smsa-express": {
     "decal": "smsa-express"

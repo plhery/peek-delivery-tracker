@@ -424,6 +424,12 @@ describe('carrier brand', () => {
       'fastwl',
       'tig-freight',
       'yha',
+      'ecom-logistics',
+      'fragilepak',
+      'hkd-express',
+      'canada-air-express',
+      'bombax',
+      'sm-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

@@ -2,7 +2,9 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.EnterExitState
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FiniteAnimationSpec
@@ -69,6 +71,8 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.Layout
@@ -595,7 +599,24 @@ private fun Turning(moment: Moment, content: @Composable (Moment) -> Unit) {
         },
         contentAlignment = Alignment.CenterStart,
         label = "feedback moment",
-    ) { content(it) }
+    ) { Staying { content(it) } }
+}
+
+/**
+ * What is being replaced takes no tap on its way out, and TalkBack doesn't reach it, as SwiftUI hit-tests nothing it is
+ * removing: an answer tapped again as it goes isn't given twice, nor another answer after it.
+ */
+@Composable
+private fun AnimatedVisibilityScope.Staying(content: @Composable () -> Unit) {
+    val leaving = transition.targetState == EnterExitState.PostExit
+    Box(if (leaving) Modifier.clearAndSetSemantics {}.then(Untouched) else Modifier, propagateMinConstraints = true) { content() }
+}
+
+/** Takes every touch on its way to what it holds, which then sees none. */
+private val Untouched = Modifier.pointerInput(Unit) {
+    awaitPointerEventScope {
+        while (true) awaitPointerEvent(PointerEventPass.Initial).changes.forEach { it.consume() }
+    }
 }
 
 /**
@@ -980,7 +1001,7 @@ private fun FeedbackWord(work: ParcelFeedbackWork, backdrop: MaterialBackdrop?, 
         contentAlignment = Alignment.BottomCenter,
         label = "feedback word",
     ) { word ->
-        if (word != null) WordToast(work, word, backdrop)
+        if (word != null) Staying { WordToast(work, word, backdrop) }
     }
 }
 

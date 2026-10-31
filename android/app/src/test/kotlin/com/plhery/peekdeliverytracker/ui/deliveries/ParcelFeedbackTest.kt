@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.platform.LocalDensity
@@ -30,10 +31,12 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextReplacement
+import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.Density
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -904,6 +907,65 @@ class ParcelFeedbackTest {
         assertTrue("The words are drawn before: $before", before > 200)
         assertTrue("Fading at 112 ms: $half", half > 20)
         assertEquals("Gone after 0.2 s", 0, gone)
+    }
+
+    // What an answer replaces, on its way out.
+
+    /** Where `tag` stands in the window, in pixels, to touch there once TalkBack no longer reaches it. */
+    private fun centre(tag: String): Offset = node(tag).fetchSemanticsNode().boundsInRoot.center
+
+    private fun touch(at: Offset) = compose.onRoot().performTouchInput { click(at) }
+
+    @Test
+    fun aYesTappedAgainAsTheQuestionTurnsIsGivenOnce() {
+        show()
+        openQuestion()
+        val yes = centre(FEEDBACK_YES)
+        compose.mainClock.autoAdvance = false
+        node(FEEDBACK_YES).performClick()
+        compose.mainClock.advanceTimeBy(32)
+        assertFalse("TalkBack no longer reaches it", exists(FEEDBACK_YES))
+        touch(yes)
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(1, source.feedbackRequests.size)
+        assertEquals(listOf(DeliveryAnalytics.Outcome.Success), counted("parcel-feedback-right"))
+    }
+
+    @Test
+    fun theWayBacksAnswersTappedAsItsQuestionGoesAreTakenOnce() {
+        show()
+        open(gift)
+        visitCarrier()
+        val yes = centre(FEEDBACK_BACK_YES)
+        val no = centre(FEEDBACK_BACK_NO)
+        compose.mainClock.autoAdvance = false
+        node(FEEDBACK_BACK_YES).performClick()
+        compose.mainClock.advanceTimeBy(32)
+        assertFalse("TalkBack no longer reaches it", exists(FEEDBACK_BACK_YES))
+        touch(yes)
+        compose.mainClock.advanceTimeBy(32)
+        touch(no)
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(1, source.feedbackRequests.size)
+        assertEquals(listOf(DeliveryAnalytics.Outcome.Success), counted("parcel-feedback-right"))
+        assertNull(work().words)
+        assertFalse(exists(FEEDBACK_WORDS_SHEET))
+        assertEquals(ParcelFeedbackModel.Word.BackRight, work().word)
+    }
+
+    @Test
+    fun theRowsYesTappedAsItsQuestionGoesOpensNothing() {
+        show()
+        openQuestion(lamp)
+        val yes = centre(FEEDBACK_YES)
+        compose.mainClock.autoAdvance = false
+        node(FEEDBACK_NOT_YET).performClick()
+        compose.mainClock.advanceTimeBy(32)
+        touch(yes)
+        compose.mainClock.advanceTimeBy(1_000)
+        assertFalse(work(lamp).namingCarrier)
+        assertFalse(exists(FEEDBACK_CARRIER_SHEET))
+        assertEquals(ParcelFeedbackModel.Moment.Early, work(lamp).moment)
     }
 
     // The window made again.

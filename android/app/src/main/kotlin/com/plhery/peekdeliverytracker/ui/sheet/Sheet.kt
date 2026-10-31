@@ -150,8 +150,10 @@ internal class SheetMenus {
  * between its detents on a snappy one. [detent] is the detent asked for (`presentationDetents(_:selection:)`): the
  * sheet comes up at it and moves to it each time it changes; where a drag, or a keyboard, leaves it at another,
  * [onDetentChange] hears which. TalkBack reaches only the sheet, named [paneTitle], and only its menu while one is open
- * ([FormMenuRow]). Once it has gone, [onClosed] runs, where TalkBack's focus goes back to what opened it. The window
- * made again (a rotation) finds it at the detent it had, without coming up again.
+ * ([FormMenuRow]). Once it has come up, [onShown] runs (`present(_:animated:completion:)`'s completion); once it has
+ * gone, [onClosed] runs, where TalkBack's focus goes back to what opened it. The window made again (a rotation) finds it
+ * at the detent it had, without coming up again, and [onShown] runs again there. Without its [grabber] it is UIKit's
+ * page sheet, which shows none.
  */
 @Composable
 fun Sheet(
@@ -164,6 +166,8 @@ fun Sheet(
     detent: SheetDetent? = null,
     onDetentChange: (SheetDetent) -> Unit = {},
     dismissible: Boolean = true,
+    onShown: () -> Unit = {},
+    grabber: Boolean = true,
     content: @Composable () -> Unit,
 ) {
     var present by remember { mutableStateOf(visible) }
@@ -174,6 +178,7 @@ fun Sheet(
     val dismiss by rememberUpdatedState(onDismiss)
     val closed by rememberUpdatedState(onClosed)
     val detentChanged by rememberUpdatedState(onDetentChange)
+    val shown by rememberUpdatedState(onShown)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
             SheetLayer(
@@ -182,7 +187,7 @@ fun Sheet(
                     present = false
                     closed()
                 },
-                detent, { detentChanged(it) }, dismissible, content,
+                detent, { detentChanged(it) }, dismissible, { shown() }, grabber, content,
             )
         }
     }
@@ -225,6 +230,9 @@ private class SheetMotion(hidden: Float) {
 
     /** Made again already up, it keeps to its rest at once while the window's bars come, for its first frames. */
     var restoring = false
+
+    /** It has come up, and said so, since it was last asked to. */
+    var arrived = false
     var job: Job? = null
 
     /** The speed a drag let go of the sheet at as it dismissed it, which its way out keeps. */
@@ -314,6 +322,8 @@ private fun SheetLayer(
     detent: SheetDetent?,
     onDetentChange: (SheetDetent) -> Unit,
     dismissible: Boolean,
+    onShown: () -> Unit,
+    grabber: Boolean,
     content: @Composable () -> Unit,
 ) {
     val density = LocalDensity.current
@@ -395,6 +405,14 @@ private fun SheetLayer(
                 then()
             }
         }
+        // Up at a rest: said once each time it comes up, whichever way it got there.
+        fun arrive() {
+            memory.up = true
+            if (showing && !motion.arrived) {
+                motion.arrived = true
+                onShown()
+            }
+        }
         fun settle(velocity: Float) {
             if (!motion.moved) return
             motion.moved = false
@@ -410,7 +428,7 @@ private fun SheetLayer(
                     onDetentChange(detents[chosen])
                 }
                 memory.up = true
-                animateTo(target, velocity, Motion.snappy(DETENT_DURATION))
+                animateTo(target, velocity, Motion.snappy(DETENT_DURATION)) { arrive() }
             }
         }
         val settling by rememberUpdatedState<(Float) -> Unit> { settle(it) }
@@ -423,6 +441,7 @@ private fun SheetLayer(
                     motion.shown = true
                     repeat(RESTORING_FRAMES) { withFrameNanos {} }
                     motion.restoring = false
+                    arrive()
                     return@LaunchedEffect
                 }
                 // Opened again on its way out after the back gesture: from where the gesture left it.
@@ -432,10 +451,11 @@ private fun SheetLayer(
                     backProgress = 0f
                 }
                 withFrameNanos {}
-                animateTo(motion.rest(memory.detent), 0f, Motion.smooth(PRESENT_DURATION)) { memory.up = true }
+                animateTo(motion.rest(memory.detent), 0f, Motion.smooth(PRESENT_DURATION)) { arrive() }
                 motion.shown = true
             } else {
                 memory.forget()
+                motion.arrived = false
                 val velocity = motion.releaseVelocity
                 motion.releaseVelocity = 0f
                 animateTo(motion.hidden, velocity, Motion.smooth(PRESENT_DURATION)) { onGone() }
@@ -456,7 +476,7 @@ private fun SheetLayer(
                 return@LaunchedEffect
             }
             if (abs(target - motion.top) < 1f) return@LaunchedEffect
-            animateTo(target, 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { memory.up = true }
+            animateTo(target, 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { arrive() }
         }
 
         // Asked for another detent, it moves there.
@@ -464,7 +484,7 @@ private fun SheetLayer(
             if (requested == null || requested == memory.detent) return@LaunchedEffect
             memory.detent = requested
             if (!visible || !motion.shown || motion.moved) return@LaunchedEffect
-            animateTo(motion.rest(requested), 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { memory.up = true }
+            animateTo(motion.rest(requested), 0f, if (reduceMotion) Motion.smooth(0.2) else Motion.snappy(DETENT_DURATION)) { arrive() }
         }
 
         // While it can't be sent away, the back goes nowhere, rather than to what is under it.
@@ -553,7 +573,7 @@ private fun SheetLayer(
                         LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus,
                         LocalSheetInsets provides SheetInsets.sheet(FORM_WIDTH, reachesBottom = false), LocalSheetGround provides ground,
                     ) {
-                        Grabber(Modifier.align(Alignment.TopCenter))
+                        if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
                         if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
                     }
                 }
@@ -606,7 +626,7 @@ private fun SheetLayer(
                                     .scaledFrom(scale)
                                     .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier),
                             ) { content() }
-                            Grabber(Modifier.align(Alignment.TopCenter))
+                            if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
                         }
                     }
                 }

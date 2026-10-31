@@ -4,10 +4,8 @@ import com.plhery.peekdeliverytracker.core.AppleSignInAuthorizing
 import com.plhery.peekdeliverytracker.core.AppleSignInCredential
 import com.plhery.peekdeliverytracker.core.AuthenticationError
 import com.plhery.peekdeliverytracker.core.DeviceAttestation
-import com.plhery.peekdeliverytracker.core.NativeVerificationFailed
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.PushNotifications
-import com.plhery.peekdeliverytracker.core.TurnstilePresenter
 import com.plhery.peekdeliverytracker.core.WebAuthenticating
 import com.plhery.peekdeliverytracker.core.WidgetCenter
 
@@ -43,11 +41,6 @@ object NoDeviceAttestation : DeviceAttestation {
     override suspend fun attest(keyId: String, clientDataHash: ByteArray): ByteArray = throw DeviceAttestation.InvalidKey()
 
     override suspend fun assert(keyId: String, clientDataHash: ByteArray): ByteArray = throw DeviceAttestation.InvalidKey()
-}
-
-/** The browser check fails, as a sheet that could not load does, until M4 shows it while adding a parcel. */
-object NoTurnstile : TurnstilePresenter {
-    override suspend fun token(url: String): String = throw NativeVerificationFailed()
 }
 
 /** No browser to sign in with, as when none can open the page, until M5 opens a Custom Tab. */

@@ -153,11 +153,11 @@ import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
-import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.CarrierTruck
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.experimentalSurface
 import com.plhery.peekdeliverytracker.ui.keptFocus
+import com.plhery.peekdeliverytracker.ui.sheet.BarCancel
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetGround
@@ -167,13 +167,11 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
-import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
-import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
@@ -1519,28 +1517,8 @@ private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: Ad
                 onLeave = close,
                 automatic = automatic,
                 tags = tags,
-                leading = { PickerCancel(close) },
+                leading = { BarCancel(close, ADD_PICKER_CANCEL) },
             )
-        }
-    }
-}
-
-/** Cancel at the picker's leading end, on its glass capsule, as the bar's `.cancellationAction` stands. */
-@Composable
-private fun PickerCancel(cancel: () -> Unit) {
-    val colors = PeekTheme.colors
-    ProvideDynamicTypeSize(DynamicTypeSize.Large) {
-        GlassSurface(CapsuleShape, Modifier.heightIn(min = 44.dp), backdrop = null, behind = colors.groupedBackground) {
-            Box(
-                Modifier
-                    .heightIn(min = 44.dp)
-                    .testTag(ADD_PICKER_CANCEL)
-                    .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), role = Role.Button, onClick = cancel)
-                    .padding(horizontal = 16.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(localized("common.cancel"), color = colors.label, style = PeekTheme.type.body, maxLines = 1)
-            }
         }
     }
 }

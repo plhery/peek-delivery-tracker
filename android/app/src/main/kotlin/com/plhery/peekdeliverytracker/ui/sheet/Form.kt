@@ -76,6 +76,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
+import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
@@ -86,6 +87,7 @@ import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
@@ -222,6 +224,69 @@ private fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBack
                 title, color = if (enabled) colors.label else colors.tertiaryLabel,
                 style = PeekTheme.type.style(IosTextStyle.Body, weight), maxLines = 1,
             )
+        }
+    }
+}
+
+/**
+ * The inline bar's row of a stack in a sheet with no confirmation, as the carrier picker's and the browser check's: the
+ * title in its middle as a heading, [leading] at its leading end (the stack's ‹, or a [BarCancel]). The title keeps as
+ * clear of the trailing end as of a ‹, and moves over where [leading] is wider, as UIKit's does past a Cancel, cut short
+ * where even that room is too little.
+ */
+@Composable
+internal fun InlineBar(title: String, leading: (@Composable () -> Unit)?, modifier: Modifier = Modifier) {
+    val insets = LocalSheetInsets.current
+    Layout(
+        content = {
+            // At the default text size whatever the reader's, as UIKit's inline title stands.
+            ProvideDynamicTypeSize(DynamicTypeSize.Large) {
+                Text(
+                    title,
+                    Modifier.semantics { heading() },
+                    color = PeekTheme.colors.label,
+                    style = PeekTheme.type.headline,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
+            if (leading != null) Box { leading() }
+        },
+        modifier = modifier.fillMaxWidth().height(BAR_ROW),
+    ) { measurables, constraints ->
+        val loose = constraints.copy(minWidth = 0, minHeight = 0)
+        val width = constraints.maxWidth
+        val height = constraints.maxHeight
+        val side = insets.barSide.roundToPx()
+        val clear = (insets.barSide + BAR_ROW + TITLE_GAP).roundToPx()
+        val start = measurables.getOrNull(1)?.measure(loose)
+        val titleStart = max(clear, if (start == null) 0 else side + start.width + TITLE_GAP.roundToPx())
+        val titleEnd = width - clear
+        val heading = measurables[0].measure(loose.copy(maxWidth = max(0, titleEnd - titleStart)))
+        layout(width, height) {
+            val x = ((width - heading.width) / 2f).roundToInt().coerceAtMost(titleEnd - heading.width).coerceAtLeast(titleStart)
+            heading.place(x, ((height - heading.height) / 2f).roundToInt())
+            start?.place(side, ((height - start.height) / 2f).roundToInt())
+        }
+    }
+}
+
+/** Cancel at an [InlineBar]'s leading end, on its glass capsule, as the bar's `.cancellationAction` stands. */
+@Composable
+internal fun BarCancel(cancel: () -> Unit, tag: String) {
+    val colors = PeekTheme.colors
+    ProvideDynamicTypeSize(DynamicTypeSize.Large) {
+        GlassSurface(CapsuleShape, Modifier.heightIn(min = BAR_ROW), backdrop = null, behind = colors.groupedBackground) {
+            Box(
+                Modifier
+                    .heightIn(min = BAR_ROW)
+                    .testTag(tag)
+                    .clickable(interactionSource = null, indication = PressStyle.tactile(CANCEL_PRESSED), role = Role.Button, onClick = cancel)
+                    .padding(horizontal = CONFIRM_PADDING),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(localized("common.cancel"), color = colors.label, style = PeekTheme.type.body, maxLines = 1)
+            }
         }
     }
 }
@@ -613,6 +678,7 @@ private class HighlightNode(private val interactionSource: InteractionSource, pr
 internal val BAR_ROW = 44.dp
 internal val TITLE_GAP = 8.dp
 private val CONFIRM_PADDING = 16.dp
+private const val CANCEL_PRESSED = 0.94f
 private val EDGE_BELOW = 11.dp
 private const val EDGE_OPACITY = 0.95f
 internal val FORM_BOTTOM = 20.dp

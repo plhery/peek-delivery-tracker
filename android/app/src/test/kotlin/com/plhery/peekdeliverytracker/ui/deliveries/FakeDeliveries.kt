@@ -7,6 +7,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.GivenPostcode
+import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.TurnstilePresenter
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
@@ -322,6 +324,9 @@ class FakeDeliveries(
     /** Holds an addition until completed; `failure` fails it. */
     var adding: CompletableDeferred<Unit>? = null
 
+    /** The browser check each addition asks for first, where a test gives one, as a lookup the server refuses does. */
+    var verification: TurnstilePresenter? = null
+
     /** The id the next parcel added takes, else a random one. */
     var addedId: UUID? = null
 
@@ -342,6 +347,7 @@ class FakeDeliveries(
         dpdPostcodeCountry: String?,
     ): Parcel {
         adding?.await()
+        verification?.token(VERIFICATION_PAGE)
         failure?.let { throw it }
         additions += AdditionRequest(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry)
         val parcel = Parcel(
@@ -457,7 +463,10 @@ class FakeDeliveries(
         feedbackRequests += parcel.id to feedback
     }
 
-    override fun errorMessage(error: Throwable): String = error.message ?: "error"
+    /** The app's words for an error, where a test gives them ([localizer]), else the error's own message. */
+    override fun errorMessage(error: Throwable): String = localizer?.errorMessage(error) ?: error.message ?: "error"
+
+    var localizer: Localizer? = null
 
     override fun showWelcome() {
         welcomes++
@@ -510,3 +519,6 @@ class FakeDeliveries(
         const val FRAME_MILLIS = 16L
     }
 }
+
+/** The browser check's page an addition asks for, on a made-up service. */
+const val VERIFICATION_PAGE = "https://peek.example/api/public/native/turnstile?language=en"

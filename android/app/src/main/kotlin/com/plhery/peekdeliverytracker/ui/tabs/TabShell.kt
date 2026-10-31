@@ -215,6 +215,9 @@ fun TabReselectionEffect(onReselect: suspend () -> Unit) {
  * phone and at the top in a window at least 600 wide and 480 tall, as iPadOS puts it. Each tab keeps its saved state
  * while another is shown. A change of tab plays the selection haptic and counts the tab's screen. On a hardware
  * keyboard, Ctrl or Meta with 1, 2 or 3 chooses a tab, as ⌘1–3 do on the iPhone, while this window has the keys.
+ * [overlays] draws over whichever tab is chosen and whatever it presented, outside every tab's saved state, through
+ * an overlay host of its own above the tab's: what the app presents over the window whatever is in front, as the
+ * browser check comes up over Add's cover. While it shows, TalkBack reaches nothing under it.
  */
 @Composable
 fun TabShell(
@@ -223,6 +226,7 @@ fun TabShell(
     labels: List<String>,
     onView: (String) -> Unit,
     modifier: Modifier = Modifier,
+    overlays: @Composable () -> Unit = {},
     content: @Composable (PeekTab) -> Unit,
 ) {
     val tabs = PeekTab.entries
@@ -240,6 +244,8 @@ fun TabShell(
     val holder = rememberSaveableStateHolder()
     val backdrop = rememberMaterialBackdrop()
     val overlay = remember(backdrop) { TabOverlay(backdrop) }
+    // Over the tab's layers, whichever came first, as the iPhone presents on what it presented last.
+    val front = remember(backdrop) { TabOverlay(backdrop) }
     val visibility = remember { TabBarVisibility() }
     val density = LocalDensity.current
     BoxWithConstraints(modifier.fillMaxSize()) {
@@ -254,7 +260,7 @@ fun TabShell(
         val (windowHinge, levelHinge) = windowHinges(constraints.maxWidth, constraints.maxHeight)
         val hinge = windowHinge?.start
         // Under what a tab draws over the window, which is modal, as the iPhone's menus, alerts and sheets are.
-        val hidden = if (overlay.covered) Modifier.clearAndSetSemantics {} else Modifier
+        val hidden = if (overlay.covered || front.covered) Modifier.clearAndSetSemantics {} else Modifier
         Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background).then(hidden)) {
             CompositionLocalProvider(
                 LocalTabBarPadding provides footprint,
@@ -265,6 +271,7 @@ fun TabShell(
                 LocalTabBarVisibility provides visibility,
             ) {
                 holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
+                CompositionLocalProvider(LocalTabOverlay provides front, content = overlays)
             }
         }
         // A bar the tab hides isn't placed, from the frame that hides it, and TalkBack doesn't reach it.
@@ -272,7 +279,7 @@ fun TabShell(
             val bar = measurable.measure(constraints)
             layout(bar.width, bar.height) { if (!visibility.hidden) bar.place(0, 0) }
         }
-        val barHidden = if (overlay.covered || visibility.hidden) Modifier.clearAndSetSemantics {} else Modifier
+        val barHidden = if (overlay.covered || front.covered || visibility.hidden) Modifier.clearAndSetSemantics {} else Modifier
         if (top) {
             TopTabBar(
                 labels, selection, tap, backdrop,
@@ -287,7 +294,8 @@ fun TabShell(
                 Modifier.align(Alignment.BottomStart).then(shown).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(barHidden),
             )
         }
-        overlay.Content()
+        Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier) { overlay.Content() }
+        front.Content()
     }
 }
 

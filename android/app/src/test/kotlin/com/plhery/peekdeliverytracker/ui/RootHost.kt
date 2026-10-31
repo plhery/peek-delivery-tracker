@@ -23,7 +23,7 @@ import kotlin.coroutines.ContinuationInterceptor
  * showing [source]'s parcels (the demo's unless a test gives its own), under Reduce Motion unless asked otherwise. The
  * session is told to the deliveries too, and their screens counted to [onView] with the tabs'; their app's scope runs
  * on the test's clock. The carriers are the bundled catalog's unless [identities] pins others. Transparency is full
- * unless [reduceTransparency].
+ * unless [reduceTransparency]. The tabs show [browserCheck]'s sheet, where a test gives one.
  */
 @Composable
 fun RootHost(
@@ -36,6 +36,7 @@ fun RootHost(
     inbox: DeliveriesInbox? = null,
     identities: CarrierIdentities = DemoCards.identities,
     reduceTransparency: Boolean = false,
+    browserCheck: TurnstileSheet? = null,
     deliveries: (@Composable () -> Unit)? = null,
 ) {
     val localizer = remember(language) { Localizer(language, variant = "android") }
@@ -51,7 +52,7 @@ fun RootHost(
             dark = dark, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = reduceTransparency,
             carrierIdentities = identities,
         ) {
-            PeekRoot(state, localizer, onView, inbox) {
+            PeekRoot(state, localizer, onView, inbox, browserCheck) {
                 if (deliveries != null) {
                     deliveries()
                 } else {

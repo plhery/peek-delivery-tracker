@@ -19,6 +19,7 @@ okhttp = "5.5.1"
 navigation3 = "1.2.0"
 window = "1.5.1"
 play-review = "2.0.2"
+webkit = "1.17.1"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -40,6 +41,7 @@ navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref =
 window = { module = "androidx.window:window", version.ref = "window" }
 window-testing = { module = "androidx.window:window-testing", version.ref = "window" }
 play-review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "play-review" }
+webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
 mockwebserver = { module = "com.squareup.okhttp3:mockwebserver3", version.ref = "okhttp" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }

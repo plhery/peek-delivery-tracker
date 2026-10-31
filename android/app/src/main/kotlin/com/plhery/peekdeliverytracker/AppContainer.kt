@@ -50,7 +50,6 @@ import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.NoAppleSignIn
 import com.plhery.peekdeliverytracker.platform.NoDeviceAttestation
 import com.plhery.peekdeliverytracker.platform.NoPushNotifications
-import com.plhery.peekdeliverytracker.platform.NoTurnstile
 import com.plhery.peekdeliverytracker.platform.NoWebAuthentication
 import com.plhery.peekdeliverytracker.platform.NoWidgets
 import com.plhery.peekdeliverytracker.platform.OkHttpTransport
@@ -60,6 +59,8 @@ import com.plhery.peekdeliverytracker.platform.PlayReviews
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
 import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
+import com.plhery.peekdeliverytracker.platform.WebViewTurnstilePages
+import com.plhery.peekdeliverytracker.ui.TurnstileSheet
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
@@ -91,8 +92,8 @@ import okhttp3.OkHttpClient
  * saves it and then takes it in, with no suspension between, so a sign-out can never land in between and see a late
  * write bring the account back, and a save that failed is the sign-in's or refresh's failure.
  *
- * What the app cannot do yet is a stand-in (platform/StandIns.kt): notifications, the widget, sign-in and the browser
- * check.
+ * What the app cannot do yet is a stand-in (platform/StandIns.kt): notifications, the widget, sign-in and device
+ * attestation.
  */
 class AppContainer(
     private val context: Context,
@@ -149,10 +150,16 @@ class AppContainer(
         analytics = analytics::action,
     )
 
-    /** `NativeVerification.shared`, its records in the keychain service the iPhone keeps them in. */
+    /** `NativeTurnstilePresenter.shared`: the browser check's sheet, in a WebView, over whichever window is in front. */
+    val turnstile = TurnstileSheet(WebViewTurnstilePages)
+
+    /**
+     * `NativeVerification.shared`, its records in the keychain service the iPhone keeps them in. The browser check is
+     * its only way through (X-AD29): no device attestation stands in for App Attest.
+     */
     val verification = NativeVerification(
         provider = NoDeviceAttestation,
-        present = NoTurnstile,
+        present = turnstile,
         persistence = KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.appAttest"),
         language = { localizer.language },
     )

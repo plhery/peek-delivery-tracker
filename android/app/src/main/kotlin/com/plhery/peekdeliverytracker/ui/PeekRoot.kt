@@ -49,7 +49,7 @@ import kotlinx.coroutines.withContext
 fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val state by container.session.stateFlow.collectAsState()
     val source = remember(container) { ContainerDeliveries(container) }
-    PeekRoot(state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox) {
+    PeekRoot(state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile) {
         DeliveriesTab(source, inbox = inbox)
     }
 }
@@ -58,7 +58,8 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * RootView's routing, in its order: the launch screen while the session is read, the arrival while nobody is signed in
  * and this phone follows nothing on its own, the tabs otherwise. A state replaces the one before it at once. The tab
  * chosen is kept with the window and through process death, as `@SceneStorage("tab")` keeps it, whatever the state
- * shows in between. A parcel waiting in [inbox] chooses the deliveries.
+ * shows in between. A parcel waiting in [inbox] chooses the deliveries. The tabs show [browserCheck]'s sheet over
+ * whatever is in front while it asks for a token.
  */
 @Composable
 internal fun PeekRoot(
@@ -66,6 +67,7 @@ internal fun PeekRoot(
     localizer: Localizer,
     onView: (String) -> Unit,
     inbox: DeliveriesInbox? = null,
+    browserCheck: TurnstileSheet? = null,
     deliveries: @Composable () -> Unit,
 ) {
     val language by localizer.languageFlow.collectAsState()
@@ -83,7 +85,10 @@ internal fun PeekRoot(
                     AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
                     AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
                         val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-                        TabShell(selection = tab, onSelect = { tab = it }, labels = labels, onView = onView) { shown ->
+                        TabShell(
+                            selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
+                            overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
+                        ) { shown ->
                             when (shown) {
                                 PeekTab.Deliveries -> deliveries()
                                 PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)

@@ -88,7 +88,6 @@ import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
@@ -123,6 +122,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.BAR_ROW
 import com.plhery.peekdeliverytracker.ui.sheet.FORM_BOTTOM
 import com.plhery.peekdeliverytracker.ui.sheet.FormHeader
 import com.plhery.peekdeliverytracker.ui.sheet.FormScrollEdge
+import com.plhery.peekdeliverytracker.ui.sheet.InlineBar
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetAttachment
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetInsets
 import com.plhery.peekdeliverytracker.ui.sheet.ROW_HEIGHT
@@ -131,19 +131,16 @@ import com.plhery.peekdeliverytracker.ui.sheet.SECTION_BOTTOM
 import com.plhery.peekdeliverytracker.ui.sheet.SECTION_GAP
 import com.plhery.peekdeliverytracker.ui.sheet.SECTION_RADIUS
 import com.plhery.peekdeliverytracker.ui.sheet.SEPARATOR
-import com.plhery.peekdeliverytracker.ui.sheet.TITLE_GAP
 import com.plhery.peekdeliverytracker.ui.sheet.drawFormRows
 import com.plhery.peekdeliverytracker.ui.sheet.drawFormSeparator
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
-import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
-import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
@@ -319,7 +316,7 @@ internal fun CarrierPicker(
                             layout(placeable.width, height) { placeable.placeWithLayer(0, height - placeable.height) { alpha = bar.value } }
                         },
                 ) {
-                    PickerBar(localizer.text("add.carrier"), leading)
+                    InlineBar(localizer.text("add.carrier"), leading)
                 }
             }
             Row(
@@ -426,28 +423,6 @@ private val OPENING_SAVER = listSaver<List<CarrierPickerSection>, List<String>>(
     save = { sections -> sections.map { listOf(it.id, it.title) + it.carriers.map(CarrierId::rawValue) } },
     restore = { saved -> saved.map { CarrierPickerSection(it[0], it[1], it.drop(2).map(::CarrierId)) } },
 )
-
-/** The inline bar's row: the title in its middle as a heading, [leading] at its leading end. */
-@Composable
-private fun PickerBar(title: String, leading: (@Composable () -> Unit)?) {
-    val insets = LocalSheetInsets.current
-    Box(Modifier.fillMaxWidth().height(BAR_ROW)) {
-        // At the default text size whatever the reader's, as UIKit's inline title stands.
-        ProvideDynamicTypeSize(DynamicTypeSize.Large) {
-            Text(
-                title,
-                Modifier.align(Alignment.Center).padding(horizontal = insets.barSide + BAR_ROW + TITLE_GAP).semantics { heading() },
-                color = PeekTheme.colors.label,
-                style = PeekTheme.type.headline,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-        }
-        if (leading != null) {
-            Box(Modifier.align(Alignment.CenterStart).padding(start = insets.barSide)) { leading() }
-        }
-    }
-}
 
 /**
  * The search field under the bar (`.searchable`), as iOS 26 draws it: a 44 capsule of the bar's glass, as the stack's ‹

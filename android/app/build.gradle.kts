@@ -145,6 +145,9 @@ dependencies {
     implementation(libs.window)
     // StoreKit's `requestReview`: the rating prompt, through Play In-App Review (platform/PlayReviews.kt).
     implementation(libs.play.review.ktx)
+    // WKWebView's script message handler for the browser check: WebViewCompat's message listener and document-start
+    // script (ui/TurnstileSheet.kt, platform/WebViewTurnstilePages.kt).
+    implementation(libs.webkit)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 

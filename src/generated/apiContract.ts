@@ -41014,7 +41014,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Toronto",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "flashbird-ca",
+      "recognitionRank": 106
     },
     "trackingUrlTemplate": "https://flashbird.ca/tracking/{trackingNumber}",
     "linkRules": [
@@ -41150,6 +41151,133 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://vietanexpress.com/tracking-2"
+  },
+  "performance-freight": {
+    "displayName": "Performance Freight",
+    "aliases": [
+      "Performance Freight Systems",
+      "Performance Freight Systems, Inc.",
+      "Performance Freight Systems Inc"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#842d44",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.carrierlogistics.com/scripts/pfeg.pol/boldetail.htm?wbtn=PRO&wpro1={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.carrierlogistics.com"
+        ],
+        "pathPattern": "^/scripts/pfeg\\.pol/boldetail\\.htm$",
+        "params": [
+          "wpro1"
+        ]
+      },
+      {
+        "domains": [
+          "tracking.carrierlogistics.com"
+        ],
+        "pathPattern": "^/scripts/pfeg\\.pol/facts\\.htm$",
+        "params": [
+          "pronum"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/pfeg.pol/facts.htm"
+  },
+  "senyu": {
+    "displayName": "Senyu International",
+    "aliases": [
+      "森屿国际",
+      "Swift Span",
+      "Shenzhen Senyu International Freight Forwarding",
+      "Shenzhen Senyu International Freight Forwarding Co., Ltd.",
+      "Senyu International Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#2a2d6a",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.nextsls.com/trace?app=6ac6efd5743c40077e4616ff"
+  },
+  "stg-ltl": {
+    "displayName": "STG LTL",
+    "aliases": [
+      "Frontline Freight",
+      "Frontline Freight, Inc.",
+      "Frontline Freight Inc"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#142e75",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.carrierlogistics.com/scripts/fro.pol/boldetail.htm?wbtn=PRO&wpro1={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.carrierlogistics.com"
+        ],
+        "pathPattern": "^/scripts/fro\\.pol/boldetail\\.htm$",
+        "params": [
+          "wpro1"
+        ]
+      },
+      {
+        "domains": [
+          "tracking.carrierlogistics.com"
+        ],
+        "pathPattern": "^/scripts/fro\\.pol/facts\\.htm$",
+        "params": [
+          "pronum"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/fro.pol/facts.htm"
+  },
+  "tsb-es": {
+    "displayName": "TSB",
+    "aliases": [
+      "TSB Transdina",
+      "Transdina",
+      "Transdina Cargo",
+      "TSBTrack"
+    ],
+    "countries": [
+      "ES"
+    ],
+    "color": "#32499c",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tsbconnect.net/app/tracking/public?search=true"
   }
 } as const;
 
@@ -42272,7 +42400,11 @@ export const CARRIER_IDS = [
   "emirates-courier-express",
   "espoirer",
   "lm-parcel",
-  "viet-an-express"
+  "viet-an-express",
+  "performance-freight",
+  "senyu",
+  "stg-ltl",
+  "tsb-es"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

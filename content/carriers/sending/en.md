@@ -69,7 +69,7 @@ As Sending's site listed them on 30 October 2026:
 
 [Peek](/) can't tell a Sending number by its shape: 12 digits fit many carriers. Paste it all the same: Peek follows more than 3,500 carriers. When you add it from Spain, Peek asks several carriers that use 12 digits whether they know it, Sending first: you'll see "Checking tracking services…", then "Sending has this parcel" if only Sending knows the number. From anywhere else, that check leaves Sending out. If Sending doesn't come up, press "Change" and pick it, listed under "Fits this number" or found by typing its name. On a parcel you've already added, use "Change carrier".
 
-Peek takes only Sending's 12-digit shipment number: pick Sending for any other and Peek notes next to its name that it "doesn’t issue numbers like this one". For a reference, use the tracker on sending.es. There's no tracking link to paste either: Sending's search form posts the number to its tracker, so no address opens a single parcel.
+Peek takes only Sending's 12-digit shipment number: pick Sending for any other and Peek notes next to its name that it "doesn’t issue numbers like this one". For a reference, use the tracker on sending.es. A link to Sending's tracker on info.sending.es with `localizador=` and the number in it can be pasted too.
 
 Peek shows the status and the history in Sending's Spanish wording, each scan with the town of its Sending branch; a scan dated by its day alone shows just the day. When the progress bar ends at `Entregada`, Peek marks the parcel delivered even if the scans stop earlier, and `FALTA DEFINITIVA` shows as "Needs attention". Peek leaves out the sender's reference, the delivery time window, the sender's and recipient's postcodes and towns, the delivering branch, the delivery options and the name of who signed, and shows no weight or expected delivery date: for the time window, look on sending.es.
 
@@ -109,5 +109,5 @@ It's where Sending's progress bar ends for a parcel written off as missing after
 - [Sending: Política de privacidad](https://www.sending.es/politica-privacidad/) – Sending Transporte y Comunicación, S.A., Coslada
 - [InPost: Quiénes somos (in Spanish)](https://www.inpost.es/quienes-somos) – Mondial Relay in 2021, Sending in 2025
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios (in Spanish)](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 66 bis (30 days), 66 ter (risk until you have the goods, when the shop chose the carrier), 102, 104 and 106 (14 days, told to the seller)
-- [Universal Parcel Scraper: Sending](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/sending) – 12-digit numbers, not-found answer, progress bar, scan wordings and meanings, receipt line, what Peek reads and leaves out
+- [Universal Parcel Scraper: Sending](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/sending) – 12-digit numbers, not-found answer, progress bar, scan wordings and meanings, receipt line, tracker link, what Peek reads and leaves out
 :::

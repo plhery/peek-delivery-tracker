@@ -47,9 +47,9 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | `到达待取` | JS Express's own status, in Chinese: arrived, awaiting collection. Its place is only the country. | "Ready for pickup" |
 | `The delivery address is incorrect. Please ask the recipient to contact their local area?` | JS Express's own notice after the courier failed to deliver: the address is unclear or wrong. It asks you to contact the local office, whose phone number JS Express's page gives; Peek leaves phone numbers out. | "Delivery attempted" |
 
-**The courier's scans.** After `Delivery to local courier`, the history goes on in the courier's words. In the US, USPS's: `Accepted at USPS Origin Facility` (its first scan, not a new shipment), `Out for Delivery`, `Delivered, Front Door/Porch`. In Canada, Straightship's `Package is received at a Straightship station`, then `Delivered` with the town in brackets.
+**The courier's scans.** After `Delivery to local courier`, the history goes on in the courier's words. In the US, USPS's: `Accepted at USPS Origin Facility` (its first scan, not a new shipment), `Out for Delivery`, `Delivered, Front Door/Porch`. In Canada, Straightship's `Package is received at a Straightship station`, then `Package will be delivered before 9:00pm`, the driver's round that day ("Out for delivery": a delivery or an attempt follows), and `Delivered` with the town in brackets.
 
-**Lines that aren't scans.** `SHIPPING INFORMATION RECEIVED`, `SHIPMENT CREATED`, `Data Received`, USPS's `Shipping Label Created, USPS Awaiting Item` and `Package information is created in the system` are a partner's record of the parcel's details, sometimes days before it has the parcel. `Package will be delivered before 9:00pm` is a forecast, not a delivery.
+**Lines that aren't scans.** `SHIPPING INFORMATION RECEIVED`, `SHIPMENT CREATED`, `Data Received`, USPS's `Shipping Label Created, USPS Awaiting Item` and `Package information is created in the system` are a partner's record of the parcel's details, sometimes days before it has the parcel.
 
 **Times out of order.** The times carry no time zone and mix clocks: Beijing time in China, local time at airports and most couriers, and UTC for Straightship, hours ahead of Canada's clocks. Go by the order of the rows, not the times.
 

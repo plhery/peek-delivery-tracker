@@ -11,11 +11,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipe
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -51,14 +54,16 @@ class RubberBandTest {
     private lateinit var scroll: ScrollState
     private var slop = 0f
 
-    /** A list 200 dp wide and 400 dp (800 px) tall, of 20 rows 100 dp tall. */
-    private fun list() {
+    /** A list 200 dp wide and 400 dp (800 px) tall, of 20 rows 100 dp tall, in `around`. */
+    private fun list(around: Modifier = Modifier) {
         compose.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, carrierIdentities = null) {
                 slop = LocalViewConfiguration.current.touchSlop
                 scroll = rememberScrollState()
-                Column(Modifier.testTag("list").size(200.dp, 400.dp).verticalScroll(scroll)) {
-                    repeat(20) { Box(Modifier.testTag("row$it").fillMaxWidth().height(100.dp)) }
+                Box(around) {
+                    Column(Modifier.testTag("list").size(200.dp, 400.dp).verticalScroll(scroll)) {
+                        repeat(20) { Box(Modifier.testTag("row$it").fillMaxWidth().height(100.dp)) }
+                    }
                 }
             }
         }
@@ -122,11 +127,38 @@ class RubberBandTest {
     fun aFlingIntoAnEndGoesPastItThenSpringsBack() {
         val effect = RubberBandOverscroll()
         val shown = mutableListOf<Float>()
-        // Nothing left to scroll: the whole fling reaches the end.
-        runBlocking(Frames { shown += effect.offset.y }) { effect.applyToFling(Velocity(0f, 3000f)) { it } }
+        // Nothing left to scroll: the content takes none of the fling, and the whole of it reaches the end.
+        runBlocking(Frames { shown += effect.offset.y }) { effect.applyToFling(Velocity(0f, 3000f)) { Velocity.Zero } }
         // A critically damped spring of stiffness 100 leaving at 3000 px/s goes furthest at 0.1 s: 3000 × 0.1 / e.
         assertEquals(110.4f, shown.max(), 0.5f)
         assertEquals(Offset.Zero, effect.offset)
         assertTrue(shown.all { it >= 0f })
+    }
+
+    @Test
+    fun aFlingTheContentTakesWholeLeavesNothingPastTheEnd() {
+        val effect = RubberBandOverscroll()
+        val shown = mutableListOf<Float>()
+        runBlocking(Frames { shown += effect.offset.y }) { effect.applyToFling(Velocity(0f, 3000f)) { it } }
+        assertTrue("Shown past the end: ${shown.maxOrNull()}", shown.all { it == 0f })
+        assertEquals(Offset.Zero, effect.offset)
+    }
+
+    @Test
+    fun letGoPastTheTopTheListSpringsBackAndWhatNestsItHearsTheFling() {
+        var flings = 0
+        val nest = object : NestedScrollConnection {
+            override suspend fun onPreFling(available: Velocity): Velocity {
+                flings++
+                return Velocity.Zero
+            }
+        }
+        list(Modifier.nestedScroll(nest))
+        // Pulled down past the top and let go still heading down.
+        compose.onNodeWithTag("list").performTouchInput { swipe(center, center + Offset(0f, 300f), 100) }
+        compose.waitForIdle()
+        assertEquals(1, flings)
+        assertEquals(0f, firstRowTop(), 0.5f)
+        assertEquals(0, scroll.value)
     }
 }

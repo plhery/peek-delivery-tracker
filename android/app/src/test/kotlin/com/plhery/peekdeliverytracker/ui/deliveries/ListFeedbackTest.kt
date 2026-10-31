@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.content.Context
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -11,14 +13,23 @@ import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipe
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DemoRepository
 import com.plhery.peekdeliverytracker.core.ParcelStore
+import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.isDelivered
+import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -30,8 +41,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The list's feedback on a phone: the pull to refresh (A-G05) with its thresholds, the check it starts, and how it
- * ends; the message under the list and its four seconds; the Undo of an archive and its seven; and what TalkBack is
- * told of each.
+ * ends, the list back at its top however it is thrown into it; the message under the list and its four seconds; the
+ * Undo of an archive and its seven; and what TalkBack is told of each.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -41,11 +52,22 @@ class ListFeedbackTest {
     val compose = createAndroidComposeRule<ComponentActivity>()
 
     private lateinit var source: FakeDeliveries
+    private lateinit var deliveries: DeliveriesState
 
-    private fun show() {
-        source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
-        compose.setContent { RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false) }
+    private fun show(parcels: List<Parcel> = DemoCards.parcels()) {
+        source = FakeDeliveries(parcels, AuthenticationState.Demo)
+        compose.setContent {
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false)
+            }
+        }
         compose.waitForIdle()
+    }
+
+    /** The demo's own parcels, which each check moves a stage further, as the demo's check does. */
+    private fun demo(): DemoRepository {
+        val preferences = ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("feedback-${UUID.randomUUID()}", Context.MODE_PRIVATE)
+        return DemoRepository(PreferencesDefaults(preferences), { AppLanguage.En }, { CAPTURED })
     }
 
     private fun dp(value: Float): Float = value * compose.density.density
@@ -59,6 +81,11 @@ class ListFeedbackTest {
             advanceEventTime(200)
             up()
         }
+    }
+
+    /** A quick stroke across the window, from `from` to `to` of its height in 0.3 s, as a thumb flicks the list. */
+    private fun stroke(from: Float, to: Float) {
+        compose.onRoot().performTouchInput { swipe(Offset(width / 2f, height * from), Offset(width / 2f, height * to), 300) }
     }
 
     private fun advance(milliseconds: Long) = compose.mainClock.advanceTimeBy(milliseconds)
@@ -79,6 +106,9 @@ class ListFeedbackTest {
     private fun toast(text: String) = compose.onNode(hasTestTag(INLINE_TOAST) and hasContentDescription(text, substring = true))
 
     private fun top(name: String): Float = compose.card(name).getUnclippedBoundsInRoot().top.value
+
+    /** The top of the list's first row, "On the way" and its search button. */
+    private fun firstRowTop(): Float = compose.onNodeWithTag(SEARCH_BUTTON).getUnclippedBoundsInRoot().top.value
 
     /** Archives the parcel named `name` as TalkBack's action on its card does. */
     private fun archive(name: String) {
@@ -260,5 +290,62 @@ class ListFeedbackTest {
         compose.waitForIdle()
         assertEquals(0, source.refreshes)
         assertTrue("The list scrolled on: ${top("New trainers")} from $rest", top("New trainers") < rest - 50f)
+    }
+
+    @Test
+    @Config(qualifiers = "w360dp-h640dp-xhdpi")
+    fun strokesThatFlingTheListBackIntoItsTopLeaveItAtItsTop() {
+        val demo = demo()
+        show(demo.list())
+        source.checkResult = ParcelStore.RefreshResult.Updated
+        repeat(3) { source.found += demo.refreshAll() }
+        val rest = firstRowTop()
+        compose.mainClock.autoAdvance = false
+        // Four strokes up into the list, then six down: the list flies back into its top, and the last strokes land
+        // on it and pull, which checks the parcels and delivers New trainers.
+        repeat(4) {
+            stroke(0.75f, 0.25f)
+            advance(600)
+        }
+        repeat(6) {
+            stroke(0.25f, 0.75f)
+            advance(400)
+        }
+        advance(5000)
+        assertTrue(source.refreshes > 0)
+        assertTrue(source.parcels.value.first { it.label.startsWith("New trainers") }.isDelivered)
+        assertEquals(0f, deliveries.listPull.past, 0f)
+        assertEquals(0f, deliveries.listPull.held.value, 0f)
+        assertEquals(0f, deliveries.contentShift, 1f)
+        assertEquals(rest, firstRowTop(), 0.5f)
+    }
+
+    @Test
+    fun aPullThatCatchesTheListsBounceAndLosesItsTouchSpringsHome() {
+        show()
+        val rest = top("New trainers")
+        compose.mainClock.autoAdvance = false
+        // Scrolled 250 points into the list, then thrown back: it flies into its top and bounces past it.
+        compose.onNodeWithTag(PARCEL_LIST).performTouchInput {
+            down(Offset(width / 2f, dp(400f)))
+            repeat(25) { moveBy(Offset(0f, -dp(10f))) }
+            advanceEventTime(200)
+            up()
+        }
+        advance(500)
+        compose.onNodeWithTag(PARCEL_LIST).performTouchInput { swipe(Offset(width / 2f, dp(200f)), Offset(width / 2f, dp(300f)), 50) }
+        advanceUntil { deliveries.listState.firstVisibleItemIndex == 0 && deliveries.listState.firstVisibleItemScrollOffset == 0 }
+        advance(50)
+        assertTrue("Bouncing: ${top("New trainers")} from $rest", top("New trainers") > rest + 5f)
+        // A finger catches it there and pulls it on a hundred points, and the system takes the touch away.
+        compose.onNodeWithTag(PARCEL_LIST).performTouchInput {
+            down(Offset(width / 2f, dp(200f)))
+            repeat(20) { moveBy(Offset(0f, dp(5f))) }
+            cancel()
+        }
+        advance(3000)
+        assertEquals(0, source.refreshes)
+        assertEquals(0f, deliveries.listPull.past, 0f)
+        assertEquals(rest, top("New trainers"), 0.5f)
     }
 }

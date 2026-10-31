@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import androidx.activity.ComponentActivity
@@ -37,6 +38,7 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeUp
 import androidx.compose.ui.unit.Density
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -56,6 +58,7 @@ import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.io.IOException
@@ -215,6 +218,11 @@ class ParcelFeedbackTest {
         compose.waitForIdle()
         awayAndBack(seconds)
     }
+
+    /** Where the open sheet's top stands in the window, in points, and the window's height. */
+    private fun sheetTop(): Float = node(SHEET_PANEL).getUnclippedBoundsInRoot().top.value
+
+    private fun windowHeight(): Float = compose.onRoot().getUnclippedBoundsInRoot().bottom.value
 
     private fun lastHaptic(): Int = shadowOf((compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view).lastHapticFeedbackPerformed()
 
@@ -662,6 +670,29 @@ class ParcelFeedbackTest {
         assertNull(work().word)
     }
 
+    /** The window being made again, as the system has it while the activity stops for a rotation. */
+    private fun changingConfigurations(changing: Boolean) {
+        Activity::class.java.getDeclaredField("mChangingConfigurations").apply { isAccessible = true }.setBoolean(compose.activity, changing)
+    }
+
+    @Test
+    fun theWindowStoppingAsItIsMadeAgainIsNoWayToTheCarriersSite() {
+        show()
+        open(gift)
+        node(PAGE_CARRIER_LINK).performScrollTo().performClick()
+        compose.waitForIdle()
+        changingConfigurations(true)
+        compose.activityRule.scenario.moveToState(Lifecycle.State.CREATED)
+        changingConfigurations(false)
+        source.now = source.now.plusSeconds(2)
+        compose.activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        compose.waitForIdle()
+        assertNull(work().word)
+        // The visit still stands: back from the carrier's site, Pip asks.
+        awayAndBack()
+        assertEquals(ParcelFeedbackModel.Word.Back("Chronopost"), work().word)
+    }
+
     // The rating a "Yes" may ask for.
 
     /**
@@ -859,6 +890,55 @@ class ParcelFeedbackTest {
     }
 
     @Test
+    fun theReasonsComeInOneAfterAnother() {
+        show()
+        openQuestion()
+        compose.mainClock.autoAdvance = false
+        node(FEEDBACK_NOT_QUITE).performClick()
+        compose.mainClock.advanceTimeBy(192)
+        val tags = ParcelFeedbackReason.entries.map { FEEDBACK_REASON + it.name }
+        val coming = tags.map { drawn(it).top }
+        compose.mainClock.advanceTimeBy(1_500)
+        // How far under its place each still is, with what the moment's own turn leaves: the first well on its way,
+        // each later than the one before, and the last two, 0.2 s and more late, not yet set off.
+        val under = tags.indices.map { coming[it] - drawn(tags[it]).top }
+        assertTrue("Each later than the one before: $under", under.zipWithNext().all { (a, b) -> b >= a - 0.05f })
+        assertTrue("Staggered: $under", under.last() - under.first() > 2f)
+        assertEquals("The last two not yet set off: $under", under[under.size - 2], under.last(), 0.05f)
+    }
+
+    /** The green of the tick drawn before "Good to know, thanks!", `after` milliseconds after a "Yes" each. */
+    private fun tickDrawn(vararg after: Long): List<Int> {
+        show()
+        openQuestion()
+        compose.mainClock.autoAdvance = false
+        node(FEEDBACK_YES).performClick()
+        var at = 0L
+        return after.map {
+            compose.mainClock.advanceTimeBy(it - at)
+            at = it
+            val words = compose.onNode(hasText("Good to know, thanks!") and hasAnyAncestor(hasTestTag(FEEDBACK_BUBBLE)))
+                .fetchSemanticsNode().layoutInfo.coordinates
+            val box = words.findRootCoordinates().localBoundingBoxOf(words, clipBounds = false)
+            val density = compose.density.density
+            // 16 across, 7 before the words, centred on them.
+            val tick = Rect(box.left - 23 * density, box.center.y - 8 * density, box.left - 7 * density, box.center.y + 8 * density)
+            pixels(tick).count {
+                val green = android.graphics.Color.green(it)
+                green - android.graphics.Color.red(it) > 40 && green - android.graphics.Color.blue(it) > 20
+            }
+        }
+    }
+
+    @Test
+    fun theTickOfTheThanksIsDrawnInAfterItComes() {
+        val (waiting, half, drawn) = tickDrawn(144, 336, 1_000)
+        assertTrue("Drawn: $drawn", drawn > 40)
+        assertEquals("Not yet at 0.14 s", 0, waiting)
+        assertTrue("On its way at 0.34 s: $half of $drawn", half > drawn / 6 && half < drawn * 5 / 6)
+    }
+
+    @Test
     fun underReduceMotionPipDoesNotHop() {
         show(reduceMotion = true)
         openQuestion()
@@ -1041,10 +1121,14 @@ class ParcelFeedbackTest {
         settle()
         tap(FEEDBACK_ADD_NOTE)
         settle()
+        val fitted = sheetTop()
         tap(FEEDBACK_CHIP + ParcelFeedbackReason.Status.name)
         node(FEEDBACK_NOTE).performClick()
         node(FEEDBACK_NOTE).performTextReplacement("A scan from Tuesday")
         settle()
+        // Writing opens it fully.
+        val large = sheetTop()
+        assertTrue("Large at $large, fitted at $fitted", large < fitted - 100f && large < windowHeight() * 0.1f)
         recreation.recreate()
         settle()
         assertTrue(exists(FEEDBACK_WORDS_SHEET))
@@ -1052,6 +1136,30 @@ class ParcelFeedbackTest {
         node(FEEDBACK_NOTE).assertIsFocused()
         assertEquals(true, node(FEEDBACK_CHIP + ParcelFeedbackReason.Status.name).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
         assertTrue(work().large)
+        assertEquals(large, sheetTop(), 1f)
+    }
+
+    @Test
+    fun aSheetDraggedFullyOpenStandsSoThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        openQuestion()
+        tap(FEEDBACK_NOT_QUITE)
+        settle()
+        tap(FEEDBACK_REASON + ParcelFeedbackReason.Steps.name)
+        settle()
+        tap(FEEDBACK_ADD_NOTE)
+        settle()
+        val fitted = sheetTop()
+        node(SHEET_PANEL).performTouchInput { swipeUp(top + 30f, top - 500f, durationMillis = 300) }
+        settle()
+        val large = sheetTop()
+        assertTrue("Large at $large, fitted at $fitted", large < fitted - 100f && large < windowHeight() * 0.1f)
+        // No keyboard to lift it: the sheet stands where the question's own detent says.
+        recreation.recreate()
+        settle()
+        assertTrue(work().large)
+        assertEquals(large, sheetTop(), 1f)
     }
 
     @Test

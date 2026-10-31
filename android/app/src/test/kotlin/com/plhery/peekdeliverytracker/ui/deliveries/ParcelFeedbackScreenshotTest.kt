@@ -40,7 +40,8 @@ import org.robolectric.annotation.GraphicsMode
  * for a reason with the way to a note, and for a note; the row asked where no carrier was found, as it asks, after
  * "Not yet" and once a carrier was named; the words and carrier sheets with what was written; the question asked at
  * the page's foot on the way back from the carrier's site, and an answer that couldn't go. Light and dark, and at the
- * largest Android text size, under Reduce Motion so each stands at rest.
+ * largest Android text size, under Reduce Motion so each stands at rest; Pip asking, the reasons and the thanks for a
+ * "Yes" also with motion, once their springs, rows and tick have settled where Reduce Motion puts them at once.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -67,6 +68,7 @@ class ParcelFeedbackScreenshotTest {
         dark: Boolean = false,
         fontScale: Float = 1f,
         top: Boolean = false,
+        reduceMotion: Boolean = true,
         prepare: FakeDeliveries.() -> Unit = {},
     ) {
         source = FakeDeliveries(listOf(gift, lamp), reader).apply(prepare)
@@ -76,7 +78,7 @@ class ParcelFeedbackScreenshotTest {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = reader, dark = dark, reduceMotion = true, source = source, identities = pinnedIdentities)
+                    RootHost(state = reader, dark = dark, reduceMotion = reduceMotion, source = source, identities = pinnedIdentities)
                 }
             }
         }
@@ -140,6 +142,13 @@ class ParcelFeedbackScreenshotTest {
     }
 
     @Test
+    fun pipAsksWithMotion() {
+        show(reduceMotion = false)
+        settle()
+        compose.screenshot("parcel_feedback_ask_motion_light")
+    }
+
+    @Test
     fun pipAsksInDark() {
         show(dark = true)
         compose.screenshot("parcel_feedback_ask_dark")
@@ -150,6 +159,14 @@ class ParcelFeedbackScreenshotTest {
         show()
         tap(FEEDBACK_NOT_QUITE)
         compose.screenshot("parcel_feedback_reasons_light")
+    }
+
+    @Test
+    fun theReasonsWithMotion() {
+        show(reduceMotion = false)
+        tap(FEEDBACK_NOT_QUITE)
+        settle()
+        compose.screenshot("parcel_feedback_reasons_motion_light")
     }
 
     @Test
@@ -171,6 +188,14 @@ class ParcelFeedbackScreenshotTest {
         show()
         tap(FEEDBACK_YES)
         compose.screenshot("parcel_feedback_right_light")
+    }
+
+    @Test
+    fun thankedForAYesWithMotion() {
+        show(reduceMotion = false)
+        tap(FEEDBACK_YES)
+        settle()
+        compose.screenshot("parcel_feedback_right_motion_light")
     }
 
     @Test
@@ -261,15 +286,34 @@ class ParcelFeedbackScreenshotTest {
         compose.screenshot("parcel_feedback_words_sheet_ax")
     }
 
-    @Test
-    fun theCarrierSheet() {
-        show(lamp)
+    /** The carrier sheet opened from the row's "Yes", with a carrier and its site written, the keyboard gone. */
+    private fun carrierSheet() {
         tap(FEEDBACK_YES)
         doing(lamp) {
             typeWho("Parcel Line")
             typeAddress("https://example.com/track")
         }
+    }
+
+    @Test
+    fun theCarrierSheet() {
+        show(lamp)
+        carrierSheet()
         compose.screenshot("parcel_feedback_carrier_sheet_light")
+    }
+
+    @Test
+    fun theCarrierSheetInDark() {
+        show(lamp, dark = true)
+        carrierSheet()
+        compose.screenshot("parcel_feedback_carrier_sheet_dark")
+    }
+
+    @Test
+    fun theCarrierSheetAtTheLargestTextSize() {
+        show(lamp, fontScale = 2f)
+        carrierSheet()
+        compose.screenshot("parcel_feedback_carrier_sheet_ax")
     }
 
     // At the page's foot.

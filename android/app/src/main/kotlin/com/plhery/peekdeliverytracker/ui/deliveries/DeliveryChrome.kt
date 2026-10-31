@@ -68,7 +68,6 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
@@ -114,15 +113,11 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.MotionCurve
-import com.plhery.peekdeliverytracker.core.PipArtwork
-import com.plhery.peekdeliverytracker.core.PipPalette
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
-import com.plhery.peekdeliverytracker.ui.draw.PipCanvas
-import com.plhery.peekdeliverytracker.ui.draw.rememberPipBlinkClock
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabBarPadding
@@ -872,9 +867,9 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
 }
 
 /**
- * `UnwrappingParcel(open: 0)`, 204 wide: the kraft parcel taped shut on the ground, Pip's face on its left side and
- * the arrow and seal on its right. It gives under the finger, squashing toward the ground, on a spring of response
- * 0.3 s and damping 0.64.
+ * `UnwrappingParcel(open: 0, pressed:)`, 204 wide: the kraft parcel taped shut on the ground ([UnwrappingParcel]), Pip's
+ * face on its left side and the arrow and seal on its right. It gives under the finger, squashing toward the ground,
+ * on a spring of response 0.3 s and damping 0.64.
  */
 @Composable
 private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier = Modifier) {
@@ -883,7 +878,6 @@ private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier =
     val reduceMotion = PeekTheme.reduceMotion
     val spec = if (reduceMotion) snap() else Motion.springWithResponse<Float>(0.3, 0.64)
     val press by animateFloatAsState(if (pressed) 1f else 0f, spec, label = "press")
-    val blink = rememberPipBlinkClock(blinks = !reduceMotion)
     val scale = PARCEL_WIDTH / FRAME_WIDTH
     Box(
         Modifier
@@ -926,58 +920,10 @@ private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier =
                         translationY = 5.dp.toPx() * press
                     },
             ) {
-                PipCanvas(Modifier.size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)) { PipArtwork.box(it, PipPalette.kraft, open = false) }
-                ParcelSideMarks()
-                PipCanvas(Modifier.size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)) {
-                    PipArtwork.kraftFace(it, k = 1.0, happy = 0.0, blink = blink.time)
-                    PipArtwork.frontFlaps(it, PipPalette.kraft, open = false)
-                    PipArtwork.tape(it, PipPalette.kraft)
-                }
+                UnwrappingParcel(open = false, label = null, ribbon = false)
             }
         }
     }
-}
-
-/**
- * The arrow and the seal on the parcel's right side, where it carries no carrier's label (`UnwrappingParcel`): an
- * arrow.up of 18 medium in brown and an asterisk of 14 bold in lilac on its lilac circle, 28 across, both turned -27°.
- * Drawn in Pip's 300 × 310 frame.
- */
-@Composable
-internal fun ParcelSideMarks() {
-    Decoration(218f, 214f) {
-        PeekSymbol(
-            "arrow.up",
-            Modifier.rotate(-27f),
-            font = PeekTheme.type.fixed(18f, FontWeight.Medium),
-            tint = Color(0xFF735C43),
-        )
-    }
-    Decoration(183f, 234f) {
-        Box(
-            Modifier
-                .rotate(-27f)
-                .size(28.dp)
-                .background(Color(0xFFDECCE2), CircleShape)
-                .drawBehind {
-                    val ring = 1.2.dp.toPx()
-                    drawCircle(
-                        Color(0xFFFFF6FF).copy(alpha = 0.48f),
-                        radius = size.minDimension / 2 - 2.5.dp.toPx(),
-                        style = androidx.compose.ui.graphics.drawscope.Stroke(ring),
-                    )
-                },
-            contentAlignment = Alignment.Center,
-        ) {
-            PeekSymbol("asterisk", font = PeekTheme.type.fixed(14f, FontWeight.Bold), tint = Color(0xFF7C6787))
-        }
-    }
-}
-
-/** Something on the parcel's side, centred at (`x`, `y`) of Pip's frame. */
-@Composable
-private fun Decoration(x: Float, y: Float, content: @Composable () -> Unit) {
-    Box(Modifier.offset(x.dp, y.dp).size(0.dp).wrapContentSize(unbounded = true).clearAndSetSemantics {}) { content() }
 }
 
 private val OvalShape = GenericShape { size, _ -> addOval(androidx.compose.ui.geometry.Rect(0f, 0f, size.width, size.height)) }

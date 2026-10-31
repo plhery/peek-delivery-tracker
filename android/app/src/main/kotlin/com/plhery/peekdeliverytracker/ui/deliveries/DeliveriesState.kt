@@ -38,7 +38,9 @@ import com.plhery.peekdeliverytracker.core.DeliveryCardKind
 import com.plhery.peekdeliverytracker.core.DeliveryCardPlace
 import com.plhery.peekdeliverytracker.core.DeliveryListLayout
 import com.plhery.peekdeliverytracker.core.FirstOpenJourney
+import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelAddition
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.ParcelSectionKind
@@ -69,6 +71,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
@@ -269,8 +272,9 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
 /**
  * What a menu opened over the deliveries that waits for an answer, each held for the launch ([rememberForLaunch]) as
  * the iPhone's `@State` is through a rotation: the delete it asks about, the parcel being named, the carrier editor
- * open, a parcel's alerts open and its share sheet open ([DeleteRequest.saved], [RenameRequest.saved],
- * [CarrierEditorRequest.saved], [AlertsRequest.saved], [ShareRequest.saved]), and the name typed so far.
+ * open, a parcel's alerts open, its share sheet open and Add open ([DeleteRequest.saved], [RenameRequest.saved],
+ * [CarrierEditorRequest.saved], [AlertsRequest.saved], [ShareRequest.saved], [AddRequest.saved]), and the name typed so
+ * far.
  */
 internal class PromptStates(
     val deleting: MutableState<String?>,
@@ -279,6 +283,7 @@ internal class PromptStates(
     val changingCarrier: MutableState<String?>,
     val alerts: MutableState<String?>,
     val sharing: MutableState<String?>,
+    val adding: MutableState<String?>,
 )
 
 @Composable
@@ -289,6 +294,7 @@ internal fun rememberPromptStates(launch: UUID): PromptStates = PromptStates(
     changingCarrier = rememberForLaunch<String?>(launch, null),
     alerts = rememberForLaunch<String?>(launch, null),
     sharing = rememberForLaunch<String?>(launch, null),
+    adding = rememberForLaunch<String?>(launch, null),
 )
 
 /**
@@ -406,9 +412,12 @@ internal class DeliveriesState(
     /** Sheets show as forms, and the filters in a popover: side by side, as settled while none is open. */
     val sheetsAsForms: Boolean get() = views.sheetsAsForms.value
 
-    /** `settleSheets()`: sheets take the window's arrangement, but only while none is open, so a resize keeps one as it is. */
+    /**
+     * `settleSheets()`: sheets take the window's arrangement, but only while neither Add nor the filters is open (nor Add
+     * on its way down), so a resize keeps one as it is.
+     */
     fun settleSheets() {
-        if (!showingFilters) views.sheetsAsForms.value = arrangement == DeliveriesArrangement.SideBySide
+        if (!showingFilters && addition == null && !additionClosing) views.sheetsAsForms.value = arrangement == DeliveriesArrangement.SideBySide
     }
 
     /** A search, a status, a carrier or a sort other than the list's own (`hasCustomView`). */
@@ -695,18 +704,121 @@ internal class DeliveriesState(
         if (open) source.action("archive-open")
     }
 
-    /** `showingAdd = true`: Add isn't ported yet, so the button does nothing for now. */
-    fun add() = Unit
+    /**
+     * Add, open over the window (`showingAdd`), kept with the window ([rememberForLaunch]) as the iPhone's `@State` is
+     * through a rotation: each opening its own request, with the text it opens with ([AddRequest]).
+     */
+    var addition: AddRequest?
+        get() = prompts.adding.value?.let(AddRequest::from)
+        private set(value) {
+            prompts.adding.value = value?.saved
+        }
 
-    /** Add with what another app shared (`sharedDraft = draft; showingAdd = true`): Add isn't ported yet. */
+    /** Add has closed and is still on its way down: the list's keys and TalkBack come back once it has gone. */
+    var additionClosing: Boolean by mutableStateOf(false)
+        private set
+
+    /** The parcel Add added while the window was in front (`addedParcelID`), which the list shows once Add has gone. */
+    private var addedParcel: UUID? = null
+
+    /** The card the list brings to its middle once Add has gone (`revealParcelID`). */
+    var revealParcel: UUID? by mutableStateOf(null)
+
+    /** The window is in front (`scenePhase == .active`): only then is a parcel added shown on the list. */
+    var inFront: Boolean = true
+
+    /** What the clipboard holds as text, read as the reader asks for it (`Clipboard.string`); the composition's. */
+    var readClipboard: () -> String? = { null }
+
+    /** `sharedDraft = nil; showingAdd = true`: the + button, the empty list's Add and Ctrl or Meta with N open Add empty. */
+    fun add() = add(FirstParcelRequest.Type)
+
+    /** Add with what another app shared (`sharedDraft = draft; showingAdd = true`): the share target comes with its step. */
     @Suppress("UNUSED_PARAMETER")
     fun addSharedDraft(draft: String) = Unit
 
     /** `showingAccount = true`: the account isn't ported yet, so the button does nothing for now. */
     fun account() = Unit
 
-    /** Add with what the clipboard holds (`onAdd(.paste(Clipboard.string))`): Add isn't ported yet. */
-    fun pasteFirst() = Unit
+    /**
+     * The empty list's Paste (`paste()`: "parcel-paste", then `onAdd(.paste(Clipboard.string ?? ""))`): Add opens with
+     * what the clipboard holds, empty where it holds no text.
+     */
+    fun pasteFirst() {
+        if (addition != null) return
+        source.action("parcel-paste")
+        add(FirstParcelRequest.Paste(readClipboard().orEmpty()))
+    }
+
+    /**
+     * `add(_:)`: Add opens, with pasted or dropped text as its draft, cut to what Add takes in. The scanner comes with
+     * its step: a scan opens Add as typing does.
+     */
+    fun add(request: FirstParcelRequest) {
+        if (addition != null) return
+        val draft = (request as? FirstParcelRequest.Paste)?.draft
+        additionClosing = false
+        addedParcel = null
+        revealParcel = null
+        addition = AddRequest(UUID.randomUUID(), draft)
+        source.view("add-parcel")
+    }
+
+    /**
+     * Text or a link dropped on the list or on the + (`addDropped(_:)`): Add opens with it, as a paste does. False, and
+     * nothing opens, where it holds no number.
+     */
+    fun addDropped(items: List<String>): Boolean {
+        val request = FirstParcelRequest.drop(items, identities?.catalog ?: CarrierCatalog.shared) ?: return false
+        add(request)
+        return true
+    }
+
+    /**
+     * Add's `save()` for `request`: `form`'s number, named `label`, with its carrier, the link and the postcode it needs
+     * and the postcode's country, goes to the store, in the app's scope while Add waits, which a window made again still
+     * hears of ([PageWork.add], by the request's id).
+     */
+    fun saveAddition(request: AddRequest, form: ParcelAddition, label: String) {
+        if (!form.canSave || addition?.id != request.id) return
+        source.pageWork.add(request.id, source.scope, source::errorMessage) {
+            source.add(form.parsed.trackingNumber, label, form.resolvedCarrier, form.sentTrackingUrl, form.sentPostcode, form.sentPostcodeCountry).id
+        }
+    }
+
+    /** `onAdded`: the parcel Add with `request` added, kept to show on the list only while the window is in front. */
+    fun added(request: AddRequest, parcelId: UUID) {
+        if (addition?.id == request.id && inFront) addedParcel = parcelId
+    }
+
+    /** Its close button, Escape, the back, or its parcel saved (`dismiss()`): Add closes, and goes down. */
+    fun closeAdd() {
+        if (addition == null) return
+        addition = null
+        additionClosing = true
+        source.view("deliveries")
+    }
+
+    /** "Open existing" (`dismiss(); onOpenParcel(id)`): Add closes, and the parcel that has the number opens. */
+    fun openExisting(parcelId: UUID) {
+        closeAdd()
+        navigator.open(parcelId)
+    }
+
+    /**
+     * `addClosed()`, once Add has gone (`request`'s): the card it added comes to the list's middle, the search and
+     * filters that would hide it cleared, while the window is in front.
+     */
+    fun addClosed(request: AddRequest?) {
+        if (addition != null) return
+        additionClosing = false
+        request?.let { source.pageWork.forget(it.id) }
+        val parcelId = addedParcel ?: return
+        addedParcel = null
+        if (!inFront) return
+        if (layout.visible.none { it.id == parcelId }) clearFilters()
+        revealParcel = parcelId
+    }
 
     /**
      * Whether the sample parcel Pip holds has been opened (`sample`), kept with the window: its page shows it until the
@@ -870,7 +982,7 @@ internal class DeliveriesState(
     val modal: Boolean
         get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
             mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing || alerts != null || alertsClosing ||
-            sharing != null || sharingClosing || source.feedbacks.covering || feedbackSheetShown
+            sharing != null || sharingClosing || source.feedbacks.covering || feedbackSheetShown || addition != null || additionClosing
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes
@@ -1584,11 +1696,43 @@ internal class DeliveriesState(
         if (reduceMotion) listState.scrollBy(delta) else listState.animateScrollBy(delta, Motion.snappy(0.25))
     }
 
+    /**
+     * `proxy.scrollTo(id, anchor: .center)` on `smooth(duration: 0.35)`: the parcel's card in the list's middle, at once
+     * under Reduce Motion.
+     */
+    suspend fun reveal(parcelId: UUID, reduceMotion: Boolean) {
+        dropFlights()
+        val index = itemIndex(parcelId) ?: return
+        if (listState.layoutInfo.visibleItemsInfo.none { it.index == index }) listState.scrollToItem(index)
+        val info = listState.layoutInfo
+        val item = info.visibleItemsInfo.firstOrNull { it.index == index } ?: return
+        val delta = item.offset + item.size / 2f - (info.viewportStartOffset + info.viewportEndOffset) / 2f
+        if (abs(delta) < 0.5f) return
+        if (reduceMotion) listState.scrollBy(delta) else listState.animateScrollBy(delta, Motion.smooth(REVEAL_DURATION))
+    }
+
     /** The card the list showed at its top when the window turned, at its top again once the list is laid out anew. */
     suspend fun keepCard(parcelId: UUID) {
         val index = itemIndex(parcelId) ?: return
         dropFlights()
         listState.scrollToItem(index)
+    }
+}
+
+/**
+ * Add, open over the window (`showingAdd`), with the text pasted, dropped or shared that it opens with (`sharedDraft`):
+ * each opening another ([id]).
+ */
+@Immutable
+internal data class AddRequest(val id: UUID, val draft: String?) {
+    /** As a window keeps it: the id, then the draft after a space where there is one. */
+    val saved: String get() = if (draft == null) "$id" else "$id $draft"
+
+    companion object {
+        fun from(saved: String): AddRequest {
+            val space = saved.indexOf(' ')
+            return if (space < 0) AddRequest(UUID.fromString(saved), null) else AddRequest(UUID.fromString(saved.substring(0, space)), saved.substring(space + 1))
+        }
     }
 }
 
@@ -1640,6 +1784,9 @@ internal fun cardId(key: Any?): UUID? {
 
 /** The archive's shelf's key in the list. */
 internal const val ARCHIVE_KEY = "archive"
+
+/** `revealParcelID`'s scroll, `smooth(duration: 0.35)`. */
+private const val REVEAL_DURATION = 0.35
 
 /** How long an archived parcel's Undo stays, in milliseconds. */
 private const val UNDO_DURATION = 7_000L

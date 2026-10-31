@@ -10,7 +10,9 @@ import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
+import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
+import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
@@ -20,6 +22,7 @@ import com.plhery.peekdeliverytracker.core.ParcelShareNotes
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
@@ -113,6 +116,31 @@ interface DeliveriesSource {
     /** `store.isDemo`: the demo's parcels, which no server is asked about. */
     val isDemo: Boolean
 
+    /** `store.isGuest`: tracking on this phone, without an account. */
+    val isGuest: Boolean
+
+    /**
+     * `store.add(trackingNumber:label:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:)`: the parcel added, once
+     * [parcels] holds it.
+     */
+    suspend fun add(
+        trackingNumber: String,
+        label: String,
+        carrier: CarrierId,
+        trackingUrl: String?,
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String?,
+    ): Parcel
+
+    /** `store.detectCarrier(trackingNumber:)`: which carrier knows the number, the account's or this phone's lookup. */
+    suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse
+
+    /** `store.givenPostcodes`: the postcodes Add suggests, the parcels' newest first, then this phone's. */
+    val givenPostcodes: List<GivenPostcode>
+
+    /** `store.forgetPostcode(_:)`: this phone stops suggesting the postcode. */
+    fun forgetPostcode(postcode: String)
+
     /**
      * `DeliveryAPIClient.numberRefusal`: whether the server says `question`'s carrier issues no number like its own,
      * which [com.plhery.peekdeliverytracker.core.NumberRefusals] asks once per pair.
@@ -167,6 +195,9 @@ interface DeliveriesSource {
 
     /** Leaves the demo for the first screen. */
     fun showWelcome()
+
+    /** `session.showSignIn()`: the sign-in screen, from a guest's Add. */
+    fun showSignIn()
 
     fun view(screen: String)
 
@@ -247,6 +278,23 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override val isDemo: Boolean get() = container.parcels.isDemo
 
+    override val isGuest: Boolean get() = container.parcels.isGuest
+
+    override suspend fun add(
+        trackingNumber: String,
+        label: String,
+        carrier: CarrierId,
+        trackingUrl: String?,
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String?,
+    ): Parcel = container.parcels.add(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry)
+
+    override suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse = container.parcels.detectCarrier(trackingNumber)
+
+    override val givenPostcodes: List<GivenPostcode> get() = container.parcels.givenPostcodes
+
+    override fun forgetPostcode(postcode: String) = container.parcels.forgetPostcode(postcode)
+
     override suspend fun numberRefusal(question: NumberRefusalRequest): Boolean =
         DeliveryApiClient.numberRefusal(question, container.configuration, container.transport)
 
@@ -285,6 +333,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override fun errorMessage(error: Throwable): String = container.localizer.errorMessage(error)
 
     override fun showWelcome() = container.session.showWelcome()
+
+    override fun showSignIn() = container.session.showSignIn()
 
     override fun view(screen: String) = container.analytics.view(screen)
 
@@ -348,6 +398,8 @@ class PageWork {
     private val leaves = mutableStateMapOf<UUID, List<UUID>>()
     private val offers = mutableStateMapOf<UUID, EmailOfferPhase>()
     private val offerNews = mutableStateMapOf<UUID, EmailOfferPhase>()
+    private val additions = mutableStateMapOf<UUID, UUID>()
+    private val duplicates = mutableStateMapOf<UUID, UUID>()
 
     /** Whether the page with `pageId` waits for a change it asked for. */
     fun working(pageId: UUID): Boolean = pageId in runs
@@ -357,6 +409,7 @@ class PageWork {
 
     fun dismiss(pageId: UUID) {
         failures -= pageId
+        duplicates -= pageId
     }
 
     /**
@@ -395,6 +448,32 @@ class PageWork {
             } else if (cards != null) {
                 leaves[pageId] = cards
             }
+        }
+    }
+
+    /** The parcel the Add sheet with `id` added, once saved, until it has gone ([forget]). */
+    fun added(id: UUID): UUID? = additions[id]
+
+    /** The parcel that has the number the Add sheet with `id` tried to add, with why it failed (`duplicateParcelID`). */
+    fun duplicate(id: UUID): UUID? = duplicates[id]
+
+    /**
+     * Add's `save()` for the sheet with `id`: `work` adds the parcel in `scope` while the sheet waits, as [run] does.
+     * Once saved, the parcel it added ([added]); once failed, why, and the parcel that has the number already where
+     * that is why ([duplicate]).
+     */
+    fun add(id: UUID, scope: CoroutineScope, message: (Throwable) -> String, work: suspend () -> UUID) {
+        if (working(id)) return
+        duplicates -= id
+        run(
+            id, scope,
+            message = { error ->
+                if (error is DeliveryApiError.DuplicateTracking && working(id)) duplicates[id] = error.parcelId
+                message(error)
+            },
+        ) {
+            val parcelId = work()
+            if (working(id)) additions[id] = parcelId
         }
     }
 
@@ -443,6 +522,8 @@ class PageWork {
         leaves -= pageId
         offers -= pageId
         offerNews -= pageId
+        additions -= pageId
+        duplicates -= pageId
     }
 
     /** The change `run` of the page with `pageId` is over: whether the page still waited for it. */

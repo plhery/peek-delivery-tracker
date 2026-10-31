@@ -248,7 +248,10 @@ internal fun PageToolbar(state: DeliveriesState, backdrop: MaterialBackdrop?) {
     }
 }
 
-/** `addButton`: a plus, semibold at 17 points whatever the text size, in the ink. Add isn't ported yet ([DeliveriesState.add]). */
+/**
+ * `addButton`: a plus, semibold at 17 points whatever the text size, in the ink, which opens Add
+ * ([DeliveriesState.add]), as text or a link dropped on it does ([parcelDrop]).
+ */
 @Composable
 private fun AddButton(state: DeliveriesState, modifier: Modifier) {
     val label = localized("app.addParcelAria")
@@ -256,6 +259,7 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
         modifier
             .size(BUTTON_SIDE)
             .testTag(ADD_BUTTON)
+            .parcelDrop(state)
             .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = state::add)
             .semantics {
                 contentDescription = label
@@ -785,8 +789,8 @@ private fun FootLink(title: String, id: String, open: () -> Unit) {
 
 /**
  * `DeliveriesEmptyState`: Pip's closed parcel, which opens a sample when tapped, "Peek", what the list is for, Paste &
- * track, Add a parcel and the hint about Pip. The sample, pasting and adding open what isn't ported yet: the buttons
- * call [DeliveriesState]'s hooks.
+ * track, Add a parcel and the hint about Pip. The sample opens on its page; Paste & track opens Add with what the
+ * clipboard holds ([DeliveriesState.pasteFirst]), Add a parcel opens it empty.
  */
 @Composable
 internal fun DeliveriesEmptyState(state: DeliveriesState) {

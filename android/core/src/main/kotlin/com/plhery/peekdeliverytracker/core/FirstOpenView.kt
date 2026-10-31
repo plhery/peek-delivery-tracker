@@ -17,7 +17,10 @@ import java.util.UUID
 /** How someone starts following their first parcel. The deliveries list owns the sheet that adds it. */
 sealed class FirstParcelRequest {
     /** Whatever is on the clipboard, read once the person asked for it, or text dropped on the deliveries. */
-    data class Paste(val text: String) : FirstParcelRequest()
+    data class Paste(val text: String) : FirstParcelRequest() {
+        /** What Add opens with (`sharedDraft`): the text trimmed, as much of it as Add takes in; none when nothing is left. */
+        val draft: String? get() = text.trimmingWhitespacesAndNewlines().nonEmpty?.characterPrefix(pasteLimit)
+    }
     data object Type : FirstParcelRequest()
     data object Scan : FirstParcelRequest()
 

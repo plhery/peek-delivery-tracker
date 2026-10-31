@@ -521,14 +521,17 @@ internal fun postcodeKeyboard(keys: CarrierChange.PostcodeKeys): KeyboardType = 
 /**
  * `PostcodeCountryMenu`: the postcode's country beside its field, its flag, its code and the up and down chevrons in
  * the ink, which opens the menu of the countries the field takes, the carrier's own first and the others after a
- * hairline, each with its flag and name. TalkBack reads "Delivery country" and the country's name.
+ * hairline, each with its flag and name. TalkBack reads "Delivery country" and the country's name. [modifier] is its
+ * room around what it shows, which a tap anywhere in opens it too (`inset`).
  */
 @Composable
-private fun PostcodeCountryMenu(
+internal fun PostcodeCountryMenu(
     carrier: CarrierId,
     requirement: CarrierRequirement,
     country: String,
     catalog: CarrierCatalog,
+    modifier: Modifier = Modifier,
+    tag: String = CHANGE_CARRIER_COUNTRY,
     choose: (String) -> Unit,
 ) {
     val language = LocalLanguage.current
@@ -563,7 +566,7 @@ private fun PostcodeCountryMenu(
     }
     Row(
         Modifier
-            .testTag(CHANGE_CARRIER_COUNTRY)
+            .testTag(tag)
             .onGloballyPositioned { bounds = it.boundsInWindow() }
             .accessibilityFocus(returnFocus)
             .clickable(interactionSource = null, indication = null, role = Role.Button, onClick = open)
@@ -575,7 +578,8 @@ private fun PostcodeCountryMenu(
                     open()
                     true
                 }
-            },
+            }
+            .then(modifier),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

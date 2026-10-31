@@ -19,13 +19,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -106,8 +104,10 @@ import com.plhery.peekdeliverytracker.ui.draw.KraftPipFace
 import com.plhery.peekdeliverytracker.ui.draw.PipCanvas
 import com.plhery.peekdeliverytracker.ui.draw.SmallPip
 import com.plhery.peekdeliverytracker.ui.draw.Toggle
+import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
+import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
@@ -326,9 +326,10 @@ internal fun ParcelShareHost(state: DeliveriesState) {
 }
 
 /**
- * `ParcelShareSheet`'s body on Brand's background, 22 in from the sides, 26 under the top and 18 over the foot, 560
- * wide at most and 14 between its parts: the heading with the close button, then what sharing shows, or once sharing
- * was stopped from here, that the link shows nothing now and the way to share again.
+ * `ParcelShareSheet`'s body on Brand's background, 22 in from the sides, 26 under the top and 18 over the foot and the
+ * navigation bar under a sheet from the window's bottom, 560 wide at most and 14 between its parts: the heading with
+ * the close button, then what sharing shows, or once sharing was stopped from here, that the link shows nothing now
+ * and the way to share again. It scrolls clear of the keyboard ([KeyboardScrollColumn]).
  */
 @Composable
 private fun ParcelShareSheet(work: ParcelShareSheetWork, parcel: Parcel, close: () -> Unit) {
@@ -339,7 +340,9 @@ private fun ParcelShareSheet(work: ParcelShareSheetWork, parcel: Parcel, close: 
     val working by model.workingFlow.collectAsState()
     val failure by model.failureKeyFlow.collectAsState()
     val saving by model.savingFlow.collectAsState()
-    Box(Modifier.fillMaxSize().background(colors.background).verticalScroll(rememberScrollState())) {
+    val bottom = sheetBottomInset()
+    // Clear of the keyboard, the field with the focus in view above it, and a drag down takes it down.
+    KeyboardScrollColumn(Modifier.fillMaxSize().background(colors.background), bottom = bottom, dismissesKeyboard = true) {
         Column(
             Modifier
                 .testTag(PARCEL_SHARE)
@@ -347,7 +350,7 @@ private fun ParcelShareSheet(work: ParcelShareSheetWork, parcel: Parcel, close: 
                 .wrapContentWidth()
                 .widthIn(max = SHARE_WIDTH)
                 .fillMaxWidth()
-                .padding(start = SHARE_SIDE, top = SHARE_TOP, end = SHARE_SIDE, bottom = SHARE_BOTTOM),
+                .padding(start = SHARE_SIDE, top = SHARE_TOP, end = SHARE_SIDE, bottom = SHARE_BOTTOM + bottom),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             ShareHeader(model.name, working, close)
@@ -578,7 +581,7 @@ private fun WordsField(tag: String, label: String, value: String, name: Boolean,
             singleLine = name,
             minLines = if (name) 1 else 2,
             maxLines = if (name) 1 else 5,
-            cursorBrush = SolidColor(colors.accent),
+            cursorBrush = SolidColor(colors.ink),
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences,
                 imeAction = if (name) ImeAction.Done else ImeAction.Default,

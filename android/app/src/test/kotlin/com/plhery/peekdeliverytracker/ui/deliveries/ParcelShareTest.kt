@@ -2,11 +2,14 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.ClipboardManager
 import android.content.Intent
+import android.os.Looper
 import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
@@ -20,10 +23,13 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasProgressBarRangeInfo
+import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
@@ -40,6 +46,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
 import androidx.compose.ui.unit.width
 import androidx.core.content.IntentCompat
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -56,7 +65,10 @@ import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.io.IOException
+import java.time.Duration
 import java.util.UUID
+import kotlin.math.abs
+import kotlin.math.roundToInt
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -646,4 +658,108 @@ class ParcelShareTest {
         assertFalse(spins(PARCEL_SHARE_LINK))
         assertTrue(exists(PARCEL_SHARE_PENDING))
     }
+
+    // The keyboard and the navigation bar.
+
+    /** A keyboard `height` tall over the window, or none. */
+    private fun keyboard(height: Int) {
+        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        compose.runOnUiThread {
+            val px = (height * view.resources.displayMetrics.density).roundToInt()
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.ime(), Insets.of(0, 0, 0, px))
+                .setVisible(WindowInsetsCompat.Type.ime(), px > 0)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+        compose.waitForIdle()
+    }
+
+    /** A navigation bar `height` tall at the window's foot, as three-button navigation has. */
+    private fun navigationBar(height: Int) {
+        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        compose.runOnUiThread {
+            val px = (height * view.resources.displayMetrics.density).roundToInt()
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, px))
+                .setVisible(WindowInsetsCompat.Type.navigationBars(), true)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+        compose.waitForIdle()
+    }
+
+    /** Scrolls the sheet as far down as it goes. */
+    private fun scrollToEnd() {
+        compose.onNode(hasScrollAction() and hasAnyDescendant(hasTestTag(PARCEL_SHARE))).performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, 10_000f) }
+        settle()
+    }
+
+    private fun windowBottom(): Float = compose.onRoot().getUnclippedBoundsInRoot().bottom.value
+
+    @Test
+    fun theFocusedFieldAndTheButtonsComeAboveTheKeyboard() {
+        show { shareLinks[gift] = giftLink }
+        openShare()
+        flip(PARCEL_SHARE_GIFT)
+        settle()
+        node(PARCEL_SHARE_FROM).performClick()
+        settle()
+        keyboard(KEYBOARD)
+        settle()
+        val above = windowBottom() - KEYBOARD
+        val field = node(PARCEL_SHARE_FROM).getUnclippedBoundsInRoot()
+        assertTrue("From at ${field.top}..${field.bottom}, keyboard from $above", field.bottom.value <= above + 0.5f)
+        assertTrue("From at ${field.top}", field.top.value >= node(SHEET_PANEL).getUnclippedBoundsInRoot().top.value)
+        // The rest scrolls up above it.
+        scrollToEnd()
+        val stop = node(PARCEL_SHARE_STOP).getUnclippedBoundsInRoot()
+        assertTrue("Stop at ${stop.top}..${stop.bottom}, keyboard from $above", stop.bottom.value <= above + 0.5f)
+    }
+
+    @Test
+    fun theSheetEndsClearOfTheNavigationBar() {
+        show(fontScale = 1.3f) { shareLinks[gift] = giftLink }
+        navigationBar(NAVIGATION_BAR)
+        openShare()
+        val clear = windowBottom() - NAVIGATION_BAR
+        val fitted = node(PARCEL_SHARE_STOP).getUnclippedBoundsInRoot()
+        assertTrue("Stop at ${fitted.bottom}, the bar from $clear", fitted.bottom.value <= clear)
+        // At the large detent, with more than it holds, scrolled to its end.
+        flip(PARCEL_SHARE_GIFT)
+        settle()
+        compose.runOnUiThread { work().large = true }
+        settle()
+        scrollToEnd()
+        assertTrue(node(SHEET_PANEL).getUnclippedBoundsInRoot().top < 80.dp)
+        val large = node(PARCEL_SHARE_STOP).getUnclippedBoundsInRoot()
+        assertTrue("Stop at ${large.bottom}, the bar from $clear", large.bottom.value <= clear)
+    }
+
+    @Test
+    fun theCaretIsInk() {
+        show()
+        openShare()
+        flip(PARCEL_SHARE_GIFT)
+        settle()
+        // A few frames into the focus, while the caret is lit, the window drawn on its looper's clock.
+        compose.mainClock.autoAdvance = false
+        node(PARCEL_SHARE_NOTE).performClick()
+        repeat(3) { compose.mainClock.advanceTimeByFrame() }
+        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+        val pixels = node(PARCEL_SHARE_NOTE).captureToImage().toPixelMap()
+        fun count(color: Color): Int {
+            var found = 0
+            for (x in 0 until pixels.width) for (y in 0 until pixels.height) {
+                val pixel = pixels[x, y]
+                if (abs(pixel.red - color.red) < 0.05f && abs(pixel.green - color.green) < 0.05f && abs(pixel.blue - color.blue) < 0.05f) found++
+            }
+            return found
+        }
+        assertTrue(count(Color(0xFF20251E)) > 0)
+        assertEquals(0, count(Color(0xFFF3CF48)))
+    }
 }
+
+private const val KEYBOARD = 336
+private const val NAVIGATION_BAR = 48

@@ -730,8 +730,11 @@ internal class DeliveriesState(
     /** What the clipboard holds as text, read as the reader asks for it (`Clipboard.string`); the composition's. */
     var readClipboard: () -> String? = { null }
 
-    /** `sharedDraft = nil; showingAdd = true`: the + button, the empty list's Add and Ctrl or Meta with N open Add empty. */
-    fun add() = add(FirstParcelRequest.Type)
+    /**
+     * `sharedDraft = nil; showingAdd = true`: the + button, the empty list's Add and Ctrl or Meta with N open Add empty.
+     * TalkBack goes back to the button that opened it, [focus], once Add has gone, as UIKit returns it to what presented.
+     */
+    fun add(focus: AccessibilityFocus? = null) = add(FirstParcelRequest.Type, focus)
 
     /** Add with what another app shared (`sharedDraft = draft; showingAdd = true`): the share target comes with its step. */
     @Suppress("UNUSED_PARAMETER")
@@ -741,34 +744,36 @@ internal class DeliveriesState(
     fun account() = Unit
 
     /**
-     * The empty list's Paste (`paste()`: "parcel-paste", then `onAdd(.paste(Clipboard.string ?? ""))`): Add opens with
-     * what the clipboard holds, empty where it holds no text.
+     * The empty list's Paste (`onAdd(.paste(Clipboard.string ?? ""))`, which counts nothing, unlike the welcome's):
+     * Add opens with what the clipboard holds, empty where it holds no text; TalkBack goes back to it ([focus]) once Add
+     * has gone.
      */
-    fun pasteFirst() {
+    fun pasteFirst(focus: AccessibilityFocus? = null) {
         if (addition != null) return
-        source.action("parcel-paste")
-        add(FirstParcelRequest.Paste(readClipboard().orEmpty()))
+        add(FirstParcelRequest.Paste(readClipboard().orEmpty()), focus)
     }
 
     /**
-     * `add(_:)`: Add opens, with pasted or dropped text as its draft, cut to what Add takes in. The scanner comes with
-     * its step: a scan opens Add as typing does.
+     * `add(_:)`: Add opens, with pasted or dropped text as its draft, cut to what Add takes in; TalkBack goes back to
+     * [focus] once it has gone. The scanner comes with its step: a scan opens Add as typing does.
      */
-    fun add(request: FirstParcelRequest) {
+    fun add(request: FirstParcelRequest, focus: AccessibilityFocus? = null) {
         if (addition != null) return
         val draft = (request as? FirstParcelRequest.Paste)?.draft
         additionClosing = false
         addedParcel = null
         revealParcel = null
+        returnFocus = focus
         addition = AddRequest(UUID.randomUUID(), draft)
         source.view("add-parcel")
     }
 
     /**
      * Text or a link dropped on the list or on the + (`addDropped(_:)`): Add opens with it, as a paste does. False, and
-     * nothing opens, where it holds no number.
+     * nothing opens, where it holds no number, or while Add is up, as the iPhone's list under it takes no drop.
      */
     fun addDropped(items: List<String>): Boolean {
+        if (addition != null) return false
         val request = FirstParcelRequest.drop(items, identities?.catalog ?: CarrierCatalog.shared) ?: return false
         add(request)
         return true
@@ -799,9 +804,23 @@ internal class DeliveriesState(
         source.view("deliveries")
     }
 
-    /** "Open existing" (`dismiss(); onOpenParcel(id)`): Add closes, and the parcel that has the number opens. */
-    fun openExisting(parcelId: UUID) {
+    /** "Open existing" (`dismiss(); onOpenParcel(id)`, the list's `show(_:)`): Add closes, and the parcel opens. */
+    fun openExisting(parcelId: UUID) = show(parcelId)
+
+    /**
+     * `show(_:)`: a parcel asked for from outside the list, by a notification, a link or Add's "Open existing", opens on
+     * the deliveries with nothing left over them: Add, the filters, and a card's menu and what it opened close first.
+     * TalkBack goes on to the page.
+     */
+    fun show(parcelId: UUID) {
         closeAdd()
+        showingFilters = false
+        menu = null
+        if (deleting?.pageId == null) deleting = null
+        if (renaming?.pageId == null) cancelRename()
+        if (sharing?.pageId == null) closeShare()
+        if (carrierEditor?.pageId == null) closeCarrierEditor()
+        returnFocus = null
         navigator.open(parcelId)
     }
 

@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponseAmazonShippingStatus
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -421,5 +422,19 @@ data class ParcelAddition(
 
         /** The name field as it takes `typed` (`onChange(of: label)`): its first [LABEL_LIMIT] characters. */
         fun label(typed: String): String = typed.characterPrefix(LABEL_LIMIT)
+
+        /** A check's answer as text, for a window to keep through being made again, as the iPhone's `@State` stays. */
+        fun keptAnswer(answer: CarrierDetectionResponse): String = ApiJson.encodeToString(CarrierDetectionResponse.serializer(), answer)
+
+        /** The answer [keptAnswer] kept; none where it no longer reads. */
+        fun answer(kept: String): CarrierDetectionResponse? =
+            runCatching { ApiJson.decodeFromString(CarrierDetectionResponse.serializer(), kept) }.getOrNull()
+
+        /** The question a carrier picked by hand was asked, as text for a window to keep ([keptAnswer]). */
+        fun keptQuestion(question: NumberRefusalRequest): String = ApiJson.encodeToString(NumberRefusalRequest.serializer(), question)
+
+        /** The question [keptQuestion] kept; none where it no longer reads. */
+        fun question(kept: String): NumberRefusalRequest? =
+            runCatching { ApiJson.decodeFromString(NumberRefusalRequest.serializer(), kept) }.getOrNull()
     }
 }

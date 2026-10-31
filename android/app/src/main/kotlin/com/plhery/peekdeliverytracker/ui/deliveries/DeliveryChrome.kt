@@ -114,6 +114,7 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.MotionCurve
+import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
@@ -250,17 +251,20 @@ internal fun PageToolbar(state: DeliveriesState, backdrop: MaterialBackdrop?) {
 
 /**
  * `addButton`: a plus, semibold at 17 points whatever the text size, in the ink, which opens Add
- * ([DeliveriesState.add]), as text or a link dropped on it does ([parcelDrop]).
+ * ([DeliveriesState.add]), as text or a link dropped on it does ([parcelDrop]); TalkBack comes back to it once Add has
+ * gone.
  */
 @Composable
 private fun AddButton(state: DeliveriesState, modifier: Modifier) {
     val label = localized("app.addParcelAria")
+    val focus = remember { AccessibilityFocus() }
     Box(
         modifier
             .size(BUTTON_SIDE)
             .testTag(ADD_BUTTON)
+            .accessibilityFocus(focus)
             .parcelDrop(state)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = state::add)
+            .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f)) { state.add(focus) }
             .semantics {
                 contentDescription = label
                 role = Role.Button
@@ -823,12 +827,16 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
             style = type.subheadline,
             textAlign = TextAlign.Center,
         )
+        // TalkBack comes back to the button that opened Add once it has gone.
+        val pasteFocus = remember { AccessibilityFocus() }
+        val addFocus = remember { AccessibilityFocus() }
         Row(
             Modifier
                 .padding(top = 22.dp)
                 .fillMaxWidth()
                 .testTag(EMPTY_PASTE)
-                .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = state::pasteFirst)
+                .accessibilityFocus(pasteFocus)
+                .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) { state.pasteFirst(pasteFocus) }
                 .heightIn(min = 54.dp)
                 .background(colors.accent, ContinuousRoundedShape(16.dp)),
             horizontalArrangement = Arrangement.spacedBy(9.dp, Alignment.CenterHorizontally),
@@ -844,7 +852,8 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
                 .padding(top = 10.dp)
                 .fillMaxWidth()
                 .testTag(EMPTY_ADD)
-                .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = state::add)
+                .accessibilityFocus(addFocus)
+                .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) { state.add(addFocus) }
                 .heightIn(min = 48.dp)
                 .background(colors.paper, quiet)
                 .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), quiet),
@@ -958,10 +967,12 @@ internal fun AllArrived(state: DeliveriesState) {
         )
         Text(localized("app.allArrived"), color = colors.label, style = type.style(IosTextStyle.Title2, FontWeight.SemiBold), textAlign = TextAlign.Center)
         Text(localized("app.allArrivedDescription"), color = colors.secondaryLabel, style = type.subheadline, textAlign = TextAlign.Center)
+        val focus = remember { AccessibilityFocus() }
         Box(
             Modifier
                 .padding(top = 6.dp)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = state::add)
+                .accessibilityFocus(focus)
+                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { state.add(focus) }
                 .background(colors.accent, CapsuleShape)
                 .padding(horizontal = 14.dp, vertical = 7.dp),
         ) {

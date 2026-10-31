@@ -3322,6 +3322,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "dhl",
+      "catalog": "dhl",
+      "slug": "dhl-paket-otslezhivanie",
+      "title": "Отслеживание посылки DHL Paket: статусы и Packstation",
+      "name": "DHL Paket",
+      "color": "#ffcc00"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-germaniya-otslezhivanie",

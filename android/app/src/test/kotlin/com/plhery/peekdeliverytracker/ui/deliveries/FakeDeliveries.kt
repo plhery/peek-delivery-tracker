@@ -46,12 +46,13 @@ import kotlinx.coroutines.launch
  * the store does, or fail with `failure`, an archive once `archiving` lets it go when a test holds it, a mute once
  * `muting` does, an answer to the email's offer once `choosing` does, a carrier change once `changing` does and a
  * parcel's check once `checkingParcel` does; a check of every parcel answers `checkResult`, or waits for `checking`
- * when a test holds it. The server refuses the numbers of `refusals`, once `refusing` lets its answer go. The demo is
- * the demo's session. The rating prompt keeps its days in a store of its own, in UTC, and the system's prompt is a
- * fake that notes each step ([reviewCalls]). The parcels' links are the service's (`shareLinks`), and the words kept
- * for them this device's (`shareDefaults`): both outlast a process, as the service and the device's store do. The
- * pages' answers go to [feedbackRequests], or fail with `feedbackFailure`, once `feedbackSending` lets them go; their
- * model keeps the time of [now], which a test moves on, and remembers them in a store of its own.
+ * when a test holds it, and finds the parcels as `found` next has them, if it has any. The server refuses the numbers
+ * of `refusals`, once `refusing` lets its answer go. The demo is the demo's session. The rating prompt keeps its days
+ * in a store of its own, in UTC, and the system's prompt is a fake that notes each step ([reviewCalls]). The parcels'
+ * links are the service's (`shareLinks`), and the words kept for them this device's (`shareDefaults`): both outlast a
+ * process, as the service and the device's store do. The pages' answers go to [feedbackRequests], or fail with
+ * `feedbackFailure`, once `feedbackSending` lets them go; their model keeps the time of [now], which a test moves on,
+ * and remembers them in a store of its own.
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
@@ -101,6 +102,9 @@ class FakeDeliveries(
     /** What a check of every parcel finds, unless `checking` holds it until the test answers. */
     var checkResult: ParcelStore.RefreshResult? = ParcelStore.RefreshResult.Unchanged
     var checking: CompletableDeferred<ParcelStore.RefreshResult?>? = null
+
+    /** The parcels each check of every parcel finds, in their order, as the demo's moves each a stage further. */
+    val found = ArrayDeque<List<Parcel>>()
 
     /** What the store's changes throw, when they fail. */
     var failure: Exception? = null
@@ -184,7 +188,9 @@ class FakeDeliveries(
         refreshes++
         refreshing.value = true
         try {
-            return checking?.await() ?: checkResult
+            val result = checking?.await() ?: checkResult
+            found.removeFirstOrNull()?.let { parcels.value = it }
+            return result
         } finally {
             refreshing.value = false
         }

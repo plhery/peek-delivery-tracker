@@ -21,6 +21,9 @@ import kotlin.math.abs
 import kotlin.math.exp
 import kotlin.math.sign
 import kotlin.math.sqrt
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 /** Every scrolling container bounces at its ends as an iPhone scroll view does, in place of Android's stretch. */
 data object RubberBandOverscrollFactory : OverscrollFactory {
@@ -64,12 +67,27 @@ class RubberBandOverscroll : OverscrollEffect {
         return delta
     }
 
+    /**
+     * Let go. Compose's `performFling` hands the fling to the container and whatever nests it, such as the list's pull,
+     * and answers what of it they took: it runs exactly once, so that they always hear the finger lift. Past an end,
+     * the content springs back first, and the fling carries on with the speed it has as it comes back into the
+     * content; one that doesn't come back springs home with the whole throw while the fling goes on with none of it.
+     * What the content couldn't take throws it past the end it reached, and it springs back.
+     */
     override suspend fun applyToFling(velocity: Velocity, performFling: suspend (Velocity) -> Velocity) {
         var speed = velocity
         if (offset != Offset.Zero) {
-            speed = bounce(speed) ?: return
+            if (!comesBack(offset.x, velocity.x) && !comesBack(offset.y, velocity.y)) {
+                coroutineScope {
+                    launch(start = CoroutineStart.UNDISPATCHED) { performFling(Velocity.Zero) }
+                    bounce(velocity)
+                }
+                return
+            }
+            // A touch that caught it drags anew, and its own fling comes as it lifts.
+            speed = bounce(velocity) ?: return
         }
-        val left = performFling(speed)
+        val left = speed - performFling(speed)
         if (left != Velocity.Zero) bounce(left)
     }
 
@@ -88,8 +106,8 @@ class RubberBandOverscroll : OverscrollEffect {
 
     /**
      * Springs the content from where it is shown back to its end, leaving at `velocity`. Returns the speed it has when
-     * it reaches the end while still heading into the content, for the content to carry on with; null once it came to
-     * rest at the end, or a touch caught it.
+     * it reaches the end while still heading into the content, for the content to carry on with; none once it came to
+     * rest at the end; null if a touch caught it.
      */
     private suspend fun bounce(velocity: Velocity): Velocity? {
         val run = ++generation
@@ -117,7 +135,7 @@ class RubberBandOverscroll : OverscrollEffect {
                 abs(speed(from.x, velocity.x, time)) < REST_SPEED && abs(speed(from.y, velocity.y, time)) < REST_SPEED
             if (resting) {
                 offset = Offset.Zero
-                return null
+                return Velocity.Zero
             }
             offset = Offset(x, y)
         }
@@ -156,6 +174,9 @@ class RubberBandOverscroll : OverscrollEffect {
         }
 
         private fun direction(shown: Float, velocity: Float): Float = if (shown != 0f) shown.sign else velocity.sign
+
+        /** Whether the spring from `shown` past an end, leaving at `velocity`, comes back past the end into the content. */
+        private fun comesBack(shown: Float, velocity: Float): Boolean = shown * (velocity + FREQUENCY * shown) < 0
 
         /** The critically damped spring's position `time` seconds after leaving `from` at `velocity`, toward 0. */
         private fun spring(from: Float, velocity: Float, time: Double): Float =

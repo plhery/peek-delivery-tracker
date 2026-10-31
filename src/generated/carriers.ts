@@ -1560,6 +1560,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Delhivery tracking: AWB numbers, statuses and support",
       "name": "Delhivery",
       "color": "#ed4136"
+    },
+    {
+      "id": "aras-kargo",
+      "catalog": "aras-kargo",
+      "slug": "aras-kargo-tracking",
+      "title": "Aras Kargo tracking: numbers and statuses in English",
+      "name": "Aras Kargo",
+      "color": "#dc0812"
     }
   ],
   "de": [

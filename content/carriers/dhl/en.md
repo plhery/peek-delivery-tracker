@@ -80,7 +80,7 @@ DHL warns about fake SMS with shortened links or odd country codes, and fake car
 
 Peek reads dhl.de's tracking in English (in German if your Peek is set to German), falling back to a browser on its server when DHL refuses. When several shipments share a 12-digit number, DHL asks for the delivery postcode: the parcel then asks you for it with "Add postcode", and tracking services fill in until you add it. They also fill in when DHL says the number belongs to another DHL service. Peek checks every 10 minutes by day, every 2 minutes once out for delivery, and every hour or two overnight, and can notify you at every scan, at important steps or on delivery day only.
 
-It shows the status, each scan with its place on a map at DHL's exact time, the expected delivery day (no time window) and the destination country, with DHL's wordings as written. It drops your name, address and signature; a branch or Packstation that DHL names in a scan stays as DHL writes it. When a scan abroad links a local post's tracking (Swiss Post, for example), Peek can follow the parcel there. It can't redirect a parcel or book a Liefertag.
+It shows the status, each scan with its place at DHL's exact time, the route through those places on a map, the expected delivery day (no time window) and the destination country, with DHL's wordings as written. It drops your name, address and signature; a branch or Packstation that DHL names in a scan stays as DHL writes it. When a scan abroad links a local post's tracking (Swiss Post, for example), Peek can follow the parcel there. It can't redirect a parcel or book a Liefertag.
 
 ## Questions about DHL Paket tracking
 

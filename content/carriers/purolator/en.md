@@ -77,7 +77,7 @@ Got a text about a delivery attempt with a link? Don't tap it: type the PIN into
 
 ## Tracking Purolator parcels with Peek
 
-[Peek](/) names Purolator at once for 3 letters and 9 digits. A 12-digit number is shared, so if its check digit passes, Peek asks five carriers at once, Purolator among them (first for readers in Canada, the US and the UK), and names the one that knows it. If carriers of different brands know it, or none does, pick Purolator with "Change". Links from purolator.com with `pin=`, `pins=` or `searchValue=` work too.
+[Peek](/) names Purolator at once for 3 letters and 9 digits, except a few letter prefixes that belong to other carriers. A 12-digit number is shared, so if its check digit passes, Peek asks five carriers at once, Purolator among them (first for readers in Canada, the US and the UK), and names the one that knows it. If carriers of different brands know it, or none does, pick Purolator with "Change". Links from purolator.com with `pin=`, `pins=` or `searchValue=` work too.
 
 Peek shows the status, each scan with its town, province and country on a map, the expected delivery day, the destination country and, for single-parcel shipments, the weight. Statuses stay in Purolator's English, exactly as written. The recipient's name is dropped, and Peek doesn't show which counter holds a parcel (only the `Available for pickup…` wording) or let you change a delivery.
 

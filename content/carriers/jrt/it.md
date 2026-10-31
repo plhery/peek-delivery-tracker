@@ -42,7 +42,7 @@ Molte righe di JRT sono in cinese con accanto la traduzione inglese di JRT, e Pe
 | `清关完成，卡车发运 Customs clearance completed; truck dispatched.` | Sdoganato e partito su un camion. | «In transito» |
 | `已交服务商 Delivered to service provider` | Passato al corriere che fa l'ultimo tratto. Non è la consegna a te. | «In transito» |
 
-Le righe che JRT scrive solo in cinese compaiono in Peek con l'inglese che usano altri spedizionieri: `货物电子信息已经收到` come «The electronic cargo information has been received», `到达收货点` come «Arrived at the receiving point», `货物离开操作中心` come «Goods leave the operation center» e `快件操作完成` come «Shipment departed from facility». La riga dell'aeroporto con il volo prenotato, `货物已交机场,预计…号的航班 Goods delivered to airport, scheduled on flight of the …`, indica il giorno del volo in cinese e in inglese; Peek la mostra come «Goods delivered to airport», perché il volo deve ancora partire.
+Sulle spedizioni verso l'Europa, le righe che JRT scrive solo in cinese compaiono in Peek con l'inglese che usano altri spedizionieri: `货物电子信息已经收到` come «The electronic cargo information has been received», `到达收货点` come «Arrived at the receiving point», `货物离开操作中心` come «Goods leave the operation center» e `快件操作完成` come «Shipment departed from facility». La riga dell'aeroporto con il volo prenotato, `货物已交机场,预计…号的航班 Goods delivered to airport, scheduled on flight of the …`, indica il giorno del volo in cinese e in inglese; Peek la mostra come «Goods delivered to airport», perché il volo deve ancora partire.
 
 **Righe solo in inglese.** In Peek sono tutte «In transito», salvo dove indicato:
 
@@ -72,7 +72,7 @@ Nelle date con il punto viene prima il mese: 11.12 è il 12 novembre, non l'11 d
 
 Dopo un reso sono «Restituito al mittente» le righe dei mezzi che finiscono con «(return to sender)», `returned shipment has been received by processing center` (il pacco è di nuovo al centro di JRT) e anche `the shipment has been successfully delivered`, che a quel punto è la consegna al mittente, non a te. Alcuni pacchi cominciano invece con `Shipment information sent to FedEx`: i dati dell'etichetta sono passati a FedEx, che fa l'ultimo tratto («Etichetta creata»).
 
-Tutti gli orari del tracking di JRT sono ora di Pechino, anche quelli copiati da DHL: le 17:00 a Pechino sono le 10:00 in Italia con l'ora solare e le 11:00 con l'ora legale.
+Sulle spedizioni verso l'Europa tutti gli orari del tracking di JRT sono ora di Pechino, anche quelli copiati da DHL: le 17:00 a Pechino sono le 10:00 in Italia con l'ora solare e le 11:00 con l'ora legale.
 
 ## Chi consegna i pacchi JRT in Italia
 
@@ -104,7 +104,7 @@ Al 30 ottobre 2026 Peek non ha trovato contatti di JRT: oltre al tracking non co
 
 [Peek](/) riconosce un numero JRT dalla forma (JRT, dieci cifre e MM, che nessun altro corriere del suo catalogo usa) e riconosce anche un link al tracking di JRT. Con un riferimento UP di sedici cifre mostra «Verifica dei servizi di tracciamento…», chiede al tracking di JRT se lo conosce e, se sì, sceglie JRT. Gli altri riferimenti non hanno una forma riconoscibile: incollali lo stesso, perché Peek segue più di 3.500 corrieri, poi premi «Cambia» e scegli JRT (lo trovi anche scrivendo 今日通 o Jinritong), oppure usa «Cambia corriere» su un pacco già aggiunto. Se hai usato un riferimento, il numero JRT compare poi sotto «JRT lo traccia con il numero». Peek però toglie i trattini, quindi un riferimento che li contiene non viene trovato: chiedi al venditore il numero JRT…MM.
 
-Peek mostra lo stato, ricavato dalle righe e non dal riepilogo di JRT, ogni riga con il suo luogo e, quando JRT li indica, il nome del servizio e il Paese di destinazione. Legge gli orari sull'ora di Pechino e li mostra nel fuso orario del tuo dispositivo. Tiene da parte le righe scritte più di dodici ore prima dell'orario che riportano e quelle datate dopo il controllo. Lascia fuori nomi, indirizzo, CAP, peso, costi, firma e prova di consegna, e non indica una data di consegna prevista: JRT non la dà.
+Peek mostra lo stato, ricavato dalle righe e non dal riepilogo di JRT, ogni riga con il suo luogo e, quando JRT li indica, il nome del servizio e il Paese di destinazione. Legge gli orari sull'ora di Pechino (le righe copiate da UPS e quelle con un luogo negli Stati Uniti, sull'ora locale di quel luogo) e li mostra nel fuso orario del tuo dispositivo. Tiene da parte le righe scritte più di dodici ore prima dell'orario che riportano e quelle datate dopo il controllo. Lascia fuori nomi, indirizzo, CAP, peso, costi, firma e prova di consegna, e non indica una data di consegna prevista: JRT non la dà.
 
 L'unico passaggio a un altro corriere che Peek ricava dai dati di JRT è verso la [Posta Svizzera](carrier:swiss-post), quando i dati nominano una linea e un numero della Posta Svizzera per un pacco diretto in Svizzera o nel Liechtenstein. Se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco a sé.
 

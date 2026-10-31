@@ -1,6 +1,6 @@
 ---
 title: Lingdong International tracking: SZLD numbers and statuses
-description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its few scans mean and why its tracking stops in China.
+description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its scans mean and why its tracking stops before the delivery.
 slug: lingdong-tracking
 published: 2026-10-21
 updated: 2026-10-27
@@ -26,17 +26,22 @@ Lower case and spaces don't matter when you paste the number into Peek.
 
 ## Lingdong tracking statuses explained
 
-Lingdong publishes no list of its statuses. It writes its scans in English, each with a place. The wordings seen on its tracker, in the order a parcel meets them:
+Lingdong publishes no list of its statuses. It writes its scans in English, or in Chinese with the English after. The wordings seen on its tracker, in the order a parcel meets them:
 
 | Lingdong says | What it means for you |
 | --- | --- |
 | `货物电子信息已经收到` | "Electronic shipment information received": the seller has created the order. Lingdong doesn't have the parcel yet. |
 | `Shipment arrived at facility` | The parcel reached Lingdong's warehouse in Shenzhen. It's the first scan in Lingdong's hands. |
 | `Shipment departed from facility` | It left that warehouse on its way abroad. |
+| `预计…航班/Flight scheduled for …`, `预计…号航班【Expect flight ….】` | Booked on a flight: the flight's day stands where the dots are. |
+| `送往航司途中【On the way to the airline company】` | On its way to the airline. |
+| `航班已起飞【The flight has taken off.】`, `航班已启运/Package in transit to destination country` | The flight has left. |
+| `航班抵达【Flight arrival】`, `航班已落地，拆板中/Package arrived at destination country` | The flight has landed; with the second wording, its pallets are being broken down. |
+| `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete` | Your country's customs have cleared it, after the landing and before the delivery. "Domestic" here means your country's, not China's. |
 
 The Chinese line isn't a scan of the parcel. Lingdong's tracking system writes it by itself for an order that has no scans yet, dated when the order was created.
 
-The departure scan is usually the last line. Lingdong's record names no carrier that delivers in your country and no second number, so the history stops there unless Lingdong adds more rows. A parcel can keep `Shipment departed from facility` as its latest line while it flies, clears customs and is delivered by another company.
+Lingdong's record names no carrier that delivers in your country and no second number. After the departure scan, some parcels get the flight and customs lines; for others, `Shipment departed from facility` stays the latest line while the parcel flies, clears customs and is delivered by another company. Either way, Lingdong's history stops before the delivery.
 
 ## Who delivers Lingdong parcels
 
@@ -48,7 +53,7 @@ Lingdong publishes no delivery times and no rules for delivery attempts, notice 
 
 ## Lingdong parcel not arriving or tracking stuck
 
-**Stuck on `Shipment departed from facility`.** That's where Lingdong's tracking usually ends, so a quiet history doesn't mean the parcel has stopped. Ask the seller which carrier delivers it in your country and for that carrier's number; its tracking has the rest. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck on `Shipment departed from facility`.** Lingdong's tracking can end there, and at most it goes on to your country's customs, so a quiet history doesn't mean the parcel has stopped. Ask the seller which carrier delivers it in your country and for that carrier's number; its tracking has the rest. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Only the Chinese line.** `货物电子信息已经收到` on its own means the seller has booked the parcel but it hasn't reached Lingdong's warehouse. If nothing follows for several days, ask the seller whether it has been sent.
 
@@ -70,7 +75,7 @@ Lingdong lists no email and no office outside China. For anything about your ord
 
 [Peek](/) names Lingdong International at once for an SZLD number, a shape no other carrier in its catalog uses. A link to Lingdong's tracker with `documentCode=` and the number in it can be pasted too.
 
-Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country and service name when Lingdong's record gives them. All three wordings show as Lingdong writes them, the Chinese line included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
+Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country and service name when Lingdong's record gives them. Every wording shows as Lingdong writes it, Chinese included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
 
 Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
@@ -84,7 +89,7 @@ It is Shenzhen Lingdong International Freight Forwarding Co., Ltd. (深圳市领
 
 ### Why is my Lingdong tracking stuck on "Shipment departed from facility"?
 
-Because that's usually Lingdong's last scan: it marks the parcel leaving the Shenzhen warehouse, and Lingdong's record names no carrier that delivers it afterwards. Ask the seller for the local carrier's number to follow the rest.
+Because Lingdong's tracking can end there: the scan marks the parcel leaving the Shenzhen warehouse, and for some parcels no flight or customs line follows. Lingdong's record names no carrier that delivers it afterwards. Ask the seller for the local carrier's number to follow the rest.
 
 ### How long does Lingdong take to deliver?
 

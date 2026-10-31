@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-10-30
 ---
 
-JRT (今日通, Jinritong) is 厦门今日通商贸有限公司, a forwarder in Xiamen, China. If a Chinese shop sent your order with JRT, it gives you a number that starts with JRT and ends with MM: paste it in the box above. Its tracker follows the parcel from China through the flight and customs to the company that delivers: into Europe, DHL, whose scans it copies.
+JRT (今日通, Jinritong) is 厦门今日通商贸有限公司, a forwarder in Xiamen, China. If a Chinese shop sent your order with JRT, it gives you a number that starts with JRT and ends with MM: paste it in the box above. Its tracker follows the parcel from China through the flight and customs to the company that delivers: into Europe, DHL, and into the United States, UPS, whose scans it copies.
 
 ## JRT tracking number: what it looks like
 
@@ -41,7 +41,7 @@ Many of JRT's lines are Chinese followed by JRT's own English, and Peek quotes t
 | `清关完成，卡车发运 Customs clearance completed; truck dispatched.` | Through customs and on a truck. | "In transit" |
 | `已交服务商 Delivered to service provider` | Handed to the company that delivers the last leg. Not delivered to you. | "In transit" |
 
-Lines JRT writes in Chinese only show in Peek in the English other forwarders give them: `货物电子信息已经收到` as "The electronic cargo information has been received", `到达收货点` as "Arrived at the receiving point", `货物离开操作中心` as "Goods leave the operation center" and `快件操作完成` as "Shipment departed from facility". The airport line that books a flight, `货物已交机场,预计…号的航班 Goods delivered to airport, scheduled on flight of the …`, names the flight's day in both halves; Peek shows it as "Goods delivered to airport", as the flight is still to come.
+Some lines JRT writes in Chinese only show in Peek in the English other forwarders give them: `货物电子信息已经收到` as "The electronic cargo information has been received", `到达收货点` as "Arrived at the receiving point", `货物离开操作中心` as "Goods leave the operation center" and `快件操作完成` as "Shipment departed from facility". The airport line that books a flight, `货物已交机场,预计…号的航班 Goods delivered to airport, scheduled on flight of the …`, names the flight's day in both halves; Peek shows it as "Goods delivered to airport", as the flight is still to come.
 
 **Lines in English only.** Other JRT lines come in English alone, all "In transit" in Peek unless noted:
 
@@ -56,11 +56,15 @@ In `The flight is expected to depart on … and land on …` and `The flight has
 
 **DHL's and FedEx's lines.** Into Europe, the tracker goes on with DHL's scans, mostly in lower case: `the instruction data for this shipment have been provided by the sender to dhl electronically` (DHL has the label's data: "Label created"), `The shipment has been posted by the sender at the retail outlet` (JRT has handed the parcel in at a Deutsche Post outlet), `the shipment has been processed in the parcel center of origin` and `loaded to movement / tour vehicle` ("In transit"). Later DHL lines are copied too: `not delivered-consignee could not be reached` (nobody was in: "Delivery attempted"), `held for consignee collection` (left at a pickup point: "Ready for pickup"), `shipment will be returned to origin-not ordered` (refused as not ordered: "Returned to sender") and `the shipment has been successfully delivered` ("Delivered", or "Returned to sender" when it follows a return line, since the parcel has then reached the sender). Some parcels open with `Shipment information sent to FedEx` instead: the label's data has gone to FedEx, which delivers the last leg ("Label created").
 
-Every time on JRT's tracker is Beijing time, DHL's copied scans included: 17:00 there is 09:00 in London and 10:00 in Berlin in winter.
+**JRT's and UPS's lines into the United States.** On its line into the United States, JRT writes in Chinese only, and Peek shows its lines in English, all "In transit": `…号航班`, with the flight's month and day where the dots are (`10/22号航班` is 22 October), as "Booked on a flight"; `航班已飞` as "Flight has flown"; `航班抵达` as "Flight has arrived"; `提货中` as "Picking up the goods" (at the airport, after the landing and before customs); `清关完成，已提货，待交仓` as "Customs clearance completed, goods picked up, awaiting hand-over to the warehouse"; and `已交仓` as "Handed over to the warehouse", the delivering company's, before UPS's first scan. The tracker then copies UPS's scans in Chinese, which Peek shows in UPS's own English: `发件人已创建标签，但是 UPS 尚未收到包裹。` ("Shipper created a label, UPS has not received the package yet.": "Label created"); `抵达设施` ("Arrived at Facility"), `离开设施` ("Departed from Facility"), `UPS 设施处理` ("Processing at UPS Facility") and `已提取` ("Picked Up", between UPS's facility scans, not a pickup by you), all "In transit"; `已装上递送车辆` ("Loaded on Delivery Vehicle") and `准备今天递送` ("Out For Delivery Today"), "Out for delivery"; and `已递送` ("Delivered").
+
+On the line into Europe, every time on JRT's tracker is Beijing time, DHL's copied scans included: 17:00 there is 09:00 in London and 10:00 in Berlin in winter. Peek reads UPS's copied scans, and any line placed in the United States, on the local time of their place.
 
 ## Who delivers JRT parcels
 
 **Into Europe**, JRT's lines end with DHL: JRT hands the parcel in at a Deutsche Post outlet, and its tracker copies DHL's scans. JRT's record holds neither DHL's number nor the line's name, so Peek can't follow the parcel on DHL's own tracker. Ask the seller for DHL's number: DHL's tracking follows the parcel to its delivery (see [DHL Paket](carrier:dhl) for its numbers and statuses).
+
+**Into the United States**, JRT's lines end with UPS: JRT hands the parcel over at the delivering company's warehouse (`已交仓`), and its tracker copies UPS's scans up to the delivery.
 
 **With FedEx**, the first line names FedEx, but Peek doesn't follow the parcel on to FedEx's tracking. Ask the seller for FedEx's number and follow it on [FedEx](carrier:fedex).
 
@@ -72,7 +76,7 @@ Every time on JRT's tracker is Beijing time, DHL's copied scans included: 17:00 
 
 **Waiting for a flight.** A flight line gives the day the flight is booked for. If that day passes with no departure line, tell the seller.
 
-**Nothing after `已交服务商`.** JRT's part is done. Unless its tracker copies DHL's scans, the next steps are in the delivering company's tracking: ask the seller for that number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Nothing after `已交服务商` or `已交仓`.** JRT's part is done. Unless its tracker copies DHL's or UPS's scans, the next steps are in the delivering company's tracking: ask the seller for that number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Nothing found.** For a number it doesn't know, JRT's tracker shows one result with the number as the reference and every other column empty. Peek shows "Waiting for the carrier" and keeps checking (for a UP reference you left Peek to match to a carrier, "Waiting for JRT’s first scan"). Compare the number with the seller's message, character by character.
 
@@ -88,11 +92,11 @@ As of 29 October 2026, Peek found no contact details for JRT: it knows no websit
 
 [Peek](/) recognises a JRT number by its shape: JRT, ten digits and MM, which no other carrier in its catalog uses, and a link to JRT's tracker (above). For a UP reference with sixteen digits, Peek asks JRT's tracker whether it knows it, and picks JRT when it does. Any other reference has no shape to go by: paste it all the same, as Peek follows more than 3,500 carriers, then press "Change" and pick JRT (typing 今日通 or Jinritong finds it too), or use "Change carrier" on a parcel you already added. Peek then shows the JRT number under "JRT tracks this as". Peek drops dashes, though, so a reference with dashes isn't found through Peek: ask the seller for the JRT…MM number.
 
-Peek shows the status, each line with its place, and the service name and destination country when JRT's record gives them, going by the lines rather than the record's summary. Times are read on Beijing time and shown in your device's time zone. Peek holds back a line written more than twelve hours before the time it carries, and any line dated after its check. It leaves out the names, address, postcodes, weight, fees, signature and proof of delivery, and shows no expected delivery date: JRT gives none.
+Peek shows the status, each line with its place, and the service name and destination country when JRT's record gives them, going by the lines rather than the record's summary. Times are read on Beijing time, UPS's copied scans and lines placed in the United States on the local time of their place, and shown in your device's time zone. Peek holds back a line written more than twelve hours before the time it carries, and any line dated after its check. It leaves out the names, address, postcodes, weight, fees, signature and proof of delivery, and shows no expected delivery date: JRT gives none.
 
-Peek follows parcels into Europe on JRT's tracker only, with the DHL scans it copies. The one hand-over Peek takes from JRT's record is to [Swiss Post](carrier:swiss-post), when the record names a Swiss Post line and number for a parcel to Switzerland or Liechtenstein. With any other delivering number from the seller, add it as a parcel of its own.
+Peek follows parcels into Europe and the United States on JRT's tracker only, with the DHL and UPS scans it copies. The one hand-over Peek takes from JRT's record is to [Swiss Post](carrier:swiss-post), when the record names a Swiss Post line and number for a parcel to Switzerland or Liechtenstein. With any other delivering number from the seller, add it as a parcel of its own.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and hourly once JRT goes quiet (12 hours at its first lines, or two days with nothing new). It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to JRT's "At customs" lines and to DHL's copied missed-attempt, pickup-point, delivery and return lines, not to JRT's flights or `已交服务商`. Peek can't contact JRT or the seller for you.
+Peek checks every 10 minutes by day and every hour or two overnight, and hourly once JRT goes quiet (12 hours at its first lines, or two days with nothing new). It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to JRT's "At customs" lines, to DHL's copied missed-attempt, pickup-point, delivery and return lines and to UPS's copied out-for-delivery and delivery lines, not to JRT's flights, `已交服务商` or `已交仓`. Peek can't contact JRT or the seller for you.
 
 ## Questions about JRT tracking
 
@@ -106,12 +110,12 @@ Because of its translations. `Cargo delivered to airport` means JRT handed the p
 
 ### Who delivers JRT parcels in my country?
 
-Into Europe, DHL, whose scans JRT's tracker copies. Some parcels go to FedEx. Elsewhere Peek doesn't know: ask the seller which company delivers and for its number.
+Into Europe, DHL, and into the United States, UPS: JRT's tracker copies their scans. Some parcels go to FedEx. Elsewhere Peek doesn't know: ask the seller which company delivers and for its number.
 
 ### Who do I contact about a missing JRT parcel?
 
 The seller you ordered from: it booked the parcel with JRT. Peek knows no website or contact details for JRT besides its tracker.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name and initials, Hualei platform, the tracker on a bare address over plain HTTP, its links and no link published, JRT…MM and UP number shapes, search by number or reference with its dashes, line wordings and their stages, the English for Chinese-only lines, DHL's copied lines and the Deutsche Post outlet, FedEx's line, no DHL number in the record, Swiss Post hand-over, Beijing clock, the answer for an unknown number, what Peek shows, holds back and leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name and initials, Hualei platform, the tracker on a bare address over plain HTTP, its links and no link published, JRT…MM and UP number shapes, search by number or reference with its dashes, line wordings and their stages, the English for Chinese-only lines, DHL's copied lines and the Deutsche Post outlet, the US line and UPS's copied lines on their local clock, FedEx's line, no DHL number in the record, Swiss Post hand-over, Beijing clock, the answer for an unknown number, what Peek shows, holds back and leaves out
 :::

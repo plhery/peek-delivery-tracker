@@ -41,8 +41,11 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | `The goods have been picked up abroad` | The agent in your country has taken the shipment from the airport. Not a new pickup from the seller. | "In transit" |
 | `Inbound to customs temporary warehouse` | In a customs warehouse, waiting for import clearance. | "At customs" |
 | `Released From Import Customs` | Your country's customs have let it through. | "In transit" |
-| `Delivery to local courier` | Handed to the courier that delivers in your country. | "In transit" |
+| `collection by overseas warehouse` | JS Express's warehouse in your country has taken the parcel, after customs. | "In transit" |
+| `Load cargo overseas`, `Vehicles depart from` | That warehouse loads the parcel for the courier, then the truck leaves from the place shown with the scan. | "In transit" |
+| `Delivery to local courier`, `Last Mile Delivery` | Handed to the courier that delivers in your country, before its first scan. Not delivered to you yet. | "In transit" |
 | `到达待取` | JS Express's own status, in Chinese: arrived, awaiting collection. Its place is only the country. | "Ready for pickup" |
+| `The delivery address is incorrect. Please ask the recipient to contact their local area?` | JS Express's own notice after the courier failed to deliver: the address is unclear or wrong. It asks you to contact the local office, whose phone number JS Express's page gives; Peek leaves phone numbers out. | "Delivery attempted" |
 
 **The courier's scans.** After `Delivery to local courier`, the history goes on in the courier's words. In the US, USPS's: `Accepted at USPS Origin Facility` (its first scan, not a new shipment), `Out for Delivery`, `Delivered, Front Door/Porch`. In Canada, Straightship's `Package is received at a Straightship station`, then `Delivered` with the town in brackets.
 

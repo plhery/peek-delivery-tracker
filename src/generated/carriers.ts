@@ -1472,6 +1472,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Singapore Post (SingPost) tracking: numbers and statuses",
       "name": "Singapore Post",
       "color": "#2e5da8"
+    },
+    {
+      "id": "zto",
+      "catalog": "zto",
+      "slug": "zto-express-tracking",
+      "title": "ZTO Express tracking: 中通快递 numbers, statuses, contact",
+      "name": "ZTO Express",
+      "color": "#0279ff"
     }
   ],
   "de": [

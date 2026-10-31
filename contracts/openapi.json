@@ -2559,7 +2559,9 @@
         "PostNord Danmark",
         "PostNord Denmark",
         "Direct Link",
-        "Direct Link Worldwide"
+        "Direct Link Worldwide",
+        "Døgnposten",
+        "Dognposten"
       ],
       "helpUrl": "https://www.postnord.se/kundservice-faq/"
     },
@@ -40261,7 +40263,8 @@
       "timezone": "America/New_York",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "aquiline",
+        "recognitionRank": 74
       },
       "trackingUrlTemplate": "https://aq-track.com/app/track/{trackingNumber}",
       "linkRules": [
@@ -40332,7 +40335,8 @@
       "timezone": "Europe/London",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "ukp-worldwide",
+        "recognitionRank": 73
       },
       "trackingUrlTemplate": "https://www.ukpworldwide.com/tracking/?x={trackingNumber}",
       "linkRules": [
@@ -40375,7 +40379,8 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "wiio",
+        "recognitionRank": 61
       },
       "linkRules": [
         {
@@ -40430,6 +40435,247 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.816kf.com/"
+    },
+    "bel": {
+      "displayName": "BEL",
+      "aliases": [
+        "BEL北俄国际",
+        "北俄国际",
+        "北俄物流",
+        "北俄供应链",
+        "北俄供应链（深圳）有限公司"
+      ],
+      "countries": [
+        "CN",
+        "RU"
+      ],
+      "color": "#293e86",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://8256.kingtrans.cn/WebTrack?action=list&language=en&istrack=false&bills={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "8256.kingtrans.cn"
+          ],
+          "pathPattern": "^/WebTrack$",
+          "params": [
+            "bills"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.8256ru.com/"
+    },
+    "ecohai": {
+      "displayName": "Ecohai",
+      "aliases": [
+        "エコ配",
+        "株式会社エコ配",
+        "ecohai Co., Ltd."
+      ],
+      "countries": [
+        "JP"
+      ],
+      "color": "#00a73c",
+      "selectable": true,
+      "timezone": "Asia/Tokyo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://client.ecohai.co.jp/tracking"
+    },
+    "komon-express": {
+      "displayName": "Komon Express",
+      "aliases": [
+        "Komon",
+        "可蒙",
+        "可蒙快运",
+        "可蒙国际",
+        "深圳市可蒙国际物流有限公司",
+        "Shenzhen Komon International Logistics"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#bf1a20",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^KOMON\\d{10}YQ$",
+          "confidence": "low"
+        }
+      ]
+    },
+    "pago": {
+      "displayName": "PAGO Logistics",
+      "aliases": [
+        "Pago",
+        "PAGO International Logistics",
+        "派格国际物流",
+        "派格物流",
+        "深圳市派格通运货运代理有限公司"
+      ],
+      "countries": [
+        "CN",
+        "US"
+      ],
+      "color": "#d8242b",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.szpago.com/?number={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.szpago.com",
+            "szpago.com"
+          ],
+          "pathPattern": "^/(?:en/)?$",
+          "params": [
+            "number"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.szpago.com/"
+    },
+    "parcelabc": {
+      "displayName": "ParcelABC",
+      "aliases": [
+        "Parcel ABC",
+        "Parcel ABC Limited"
+      ],
+      "countries": [
+        "GB",
+        "ES",
+        "FR",
+        "IT",
+        "DE",
+        "PL",
+        "LT"
+      ],
+      "color": "#8ec642",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "www.parcelabc.com",
+            "parcelabc.com"
+          ],
+          "path": "^/track/([A-Za-z]{4}-?\\d{9})/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.parcelabc.com/content/tracking"
+    },
+    "safeway-express-cargo": {
+      "displayName": "Safe Way Express Cargo",
+      "aliases": [
+        "Safeway Express Cargo",
+        "Safe Way Express Cargo W.L.L",
+        "Safe Way Express Cargo L.L.C",
+        "Safe Way International"
+      ],
+      "countries": [
+        "BH",
+        "SA",
+        "AE",
+        "OM"
+      ],
+      "color": "#15375b",
+      "selectable": true,
+      "timezone": "Asia/Bahrain",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.safewayxp.com/track.php?awb={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.safewayxp.com",
+            "safewayxp.com"
+          ],
+          "pathPattern": "^/track\\.php$",
+          "params": [
+            "awb"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^BH\\d{8}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.safewayxp.com/en/track/"
+    },
+    "w-express-ph": {
+      "displayName": "W Express",
+      "aliases": [
+        "W Express Cargo Philippines",
+        "WExpress",
+        "WWWExpress",
+        "WWW Express",
+        "Wide Wide World Express",
+        "Wide Wide World Express Corporation"
+      ],
+      "countries": [
+        "PH"
+      ],
+      "color": "#1e62af",
+      "selectable": true,
+      "timezone": "Asia/Manila",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.wwwexpress.com.ph/track-and-trace/?trackingNo={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.wwwexpress.com.ph",
+            "wwwexpress.com.ph"
+          ],
+          "pathPattern": "^/track-and-trace/?$",
+          "params": [
+            "trackingNo"
+          ]
+        },
+        {
+          "domains": [
+            "track.wwwexpress.com.ph"
+          ],
+          "pathPattern": "^/WExTrackAndTrace/trackAndTrace/trackAndTraceClient\\.htm$",
+          "params": [
+            "trackingNo"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.wwwexpress.com.ph/track-and-trace/"
     }
   },
   "servers": [
@@ -44267,7 +44513,14 @@
           "btd",
           "ukp-worldwide",
           "wiio",
-          "xyl"
+          "xyl",
+          "bel",
+          "ecohai",
+          "komon-express",
+          "pago",
+          "parcelabc",
+          "safeway-express-cargo",
+          "w-express-ph"
         ]
       },
       "Stage": {

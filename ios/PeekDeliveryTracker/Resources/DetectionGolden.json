@@ -69414,6 +69414,9 @@
     "confidence": "low",
     "candidates": [
       "aquiline"
+    ],
+    "asked": [
+      "aquiline"
     ]
   },
   {
@@ -69422,6 +69425,9 @@
     "confidence": "low",
     "candidates": [
       "aquiline"
+    ],
+    "asked": [
+      "aquiline"
     ]
   },
   {
@@ -69429,6 +69435,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "aquiline"
+    ],
+    "asked": [
       "aquiline"
     ]
   },
@@ -70832,6 +70841,18 @@
     "confidence": "high",
     "candidates": [
       "ekart"
+    ]
+  },
+  {
+    "input": "BH25010654",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "safeway-express-cargo",
+      "tnt-it"
+    ],
+    "asked": [
+      "tnt-it"
     ]
   },
   {
@@ -77916,6 +77937,12 @@
     ]
   },
   {
+    "input": "ESTR-611613545",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "ESUS188691531",
     "carrier": "unknown",
     "confidence": "low",
@@ -79134,6 +79161,12 @@
   },
   {
     "input": "GBS3032083843",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "GBUS-326941893",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -83588,6 +83621,14 @@
     ]
   },
   {
+    "input": "KOMON0018318124YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "komon-express"
+    ]
+  },
+  {
     "input": "KONJC085348",
     "carrier": "unknown",
     "confidence": "none",
@@ -86786,6 +86827,12 @@
   },
   {
     "input": "MS02712561XSG",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "MTDE-664743441",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -96809,6 +96856,12 @@
     ]
   },
   {
+    "input": "TRMT-754347856",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "TS2609040000017",
     "carrier": "unknown",
     "confidence": "low",
@@ -97861,7 +97914,19 @@
     "candidates": []
   },
   {
+    "input": "USDJ-075308286",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "USIN59020704001",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "USUS-613948977",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
@@ -98957,6 +99022,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "ukp-worldwide"
+    ],
+    "asked": [
       "ukp-worldwide"
     ]
   },
@@ -100742,6 +100810,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "wiio"
+    ],
+    "asked": [
       "wiio"
     ]
   },

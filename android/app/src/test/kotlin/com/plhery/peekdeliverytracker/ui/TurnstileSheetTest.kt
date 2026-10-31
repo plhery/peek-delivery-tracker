@@ -74,10 +74,10 @@ import org.robolectric.annotation.GraphicsMode
  * The browser check's sheet (B-S69, B-D41, B-L09) in the app's window, over the tabs and over Add, on pages that stand
  * in for the WebView and hear what a real one would tell its client (platform/WebViewTurnstilePages.kt's
  * [TurnstileClient]): the token, an error, messages to ignore, a load that fails and a renderer gone; Cancel, the sheet
- * sent away (the back over the tabs and over Add, a drag on the bar or on the page at its top) and the caller's
- * cancellation; the timeout; one check at a time, an https page, a WebView able to hold it and a window in front; a
- * window made again and one gone for good; the page under the bar; TalkBack; and Add saving through it. Each page is torn
- * down once. On a made-up service.
+ * sent away (the back over the tabs and over Add, a drag on the bar or on the page at its top, a tap beside the iPad's
+ * page sheet) and the caller's cancellation; the timeout; one check at a time, an https page, a WebView able to hold it
+ * and a window in front; a window made again and one gone for good; the page under the bar; TalkBack; and Add saving
+ * through it. Each page is torn down once. On a made-up service.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -255,7 +255,7 @@ class TurnstileSheetTest {
 
         val tap = ask()
         settle()
-        // Above the sheet, at its large detent under the status bar.
+        // Above the sheet, which stands 10 under the window's top at its large detent where there is no status bar.
         compose.onRoot().performTouchInput { click(center.copy(y = 2f)) }
         settle()
         assertCancelled(tap)
@@ -273,6 +273,22 @@ class TurnstileSheetTest {
         assertCancelled(drag)
         assertGone()
         assertEquals(3, pages.made.size)
+    }
+
+    @Test
+    @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
+    fun inARegularWindowItIsTheIPadsPageSheetWhichATapBesideItSendsAwayAsCancelDoes() {
+        show()
+        val asked = ask()
+        settle()
+        val panel = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot()
+        val frame = listOf(panel.left, panel.top, panel.right, panel.bottom).map { it.value }
+        listOf(224f, 76f, 1152f, 1000f).zip(frame).forEach { (expected, actual) -> assertEquals("$frame", expected, actual, 0.5f) }
+        // Where the iPad's tap sent its page sheet away.
+        compose.onRoot().performTouchInput { click(Offset(100.dp.toPx(), 500.dp.toPx())) }
+        settle()
+        assertCancelled(asked)
+        assertGone()
     }
 
     /** A drag down on the page, from `from` below its top, 600 in all at 60 a frame. */

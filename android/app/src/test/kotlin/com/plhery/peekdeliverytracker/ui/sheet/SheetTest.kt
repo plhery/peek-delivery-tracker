@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.click
@@ -23,6 +24,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
 import androidx.compose.ui.test.swipeUp
+import androidx.compose.ui.unit.dp
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -41,8 +43,9 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The sheet on its own, a field in what it holds: what takes it to its large height, a keyboard up for that field and
  * a window as low as a phone on its side; a drag that moves it without composing what it holds again; the sheet
- * opened again on its way out after the back gesture; the detent asked for; and nothing but its own content sending it
- * away while it isn't dismissible.
+ * opened again on its way out after the back gesture; the detent asked for; nothing but its own content sending it
+ * away while it isn't dismissible; taps on the status bar, which leave it up; and the page sheet in regular windows,
+ * the iPad's, an Android tablet's and an unfolded foldable's, beside the form there.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -57,6 +60,7 @@ class SheetTest {
     private var compositions = 0
     private var detent by mutableStateOf<SheetDetent?>(null)
     private var dismissible by mutableStateOf(true)
+    private var page by mutableStateOf(false)
     private val rested = mutableListOf<SheetDetent>()
 
     /** The backs that reached what the sheet is over. */
@@ -71,7 +75,7 @@ class SheetTest {
                 Box(Modifier.fillMaxSize()) {
                     Sheet(
                         visible, onDismiss = { visible = false }, paneTitle = "Sheet", detent = detent,
-                        onDetentChange = { rested += it }, dismissible = dismissible,
+                        onDetentChange = { rested += it }, dismissible = dismissible, page = page,
                     ) {
                         SideEffect { compositions++ }
                         SheetPage("Sheet", "Done", onConfirm = { visible = false }) {
@@ -104,6 +108,47 @@ class SheetTest {
                 .build()
             ViewCompat.dispatchApplyWindowInsets(view, insets)
         }
+    }
+
+    /** The status bar `status` points tall and the bottom bar `bottom`, as the window's insets tell them. */
+    private fun bars(status: Int, bottom: Int = 0) {
+        compose.runOnUiThread {
+            val scale = view.resources.displayMetrics.density
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, (status * scale).toInt(), 0, 0))
+                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, (bottom * scale).toInt()))
+                .setVisible(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(), true)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+        compose.waitForIdle()
+    }
+
+    /** A tap at (`x`, `y`), in points from the window's top leading corner. */
+    private fun tap(x: Float, y: Float) {
+        compose.onRoot().performTouchInput { click(Offset(x.dp.toPx(), y.dp.toPx())) }
+        compose.waitForIdle()
+    }
+
+    /** The sheet stands at (`left`, `top`), `width` × `height` points. */
+    private fun assertFrame(left: Float, top: Float, width: Float, height: Float) {
+        val panel = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot()
+        val frame = listOf(panel.left, panel.top, panel.right - panel.left, panel.bottom - panel.top).map { it.value }
+        listOf(left, top, width, height).zip(frame).forEach { (expected, actual) -> assertEquals("$frame", expected, actual, 0.5f) }
+    }
+
+    /**
+     * The page sheet stands at (`left`, `top`), `width` × `height`; the form, in its place, as it was, 580 × 660 in the
+     * window's middle.
+     */
+    private fun assertPageSheetThenForm(left: Float, top: Float, width: Float, height: Float) {
+        page = true
+        show()
+        assertFrame(left, top, width, height)
+        page = false
+        compose.waitForIdle()
+        val window = compose.onRoot().getUnclippedBoundsInRoot()
+        assertFrame((window.right.value - 580f) / 2, (window.bottom.value - 660f) / 2, 580f, 660f)
     }
 
     @Test
@@ -179,7 +224,7 @@ class SheetTest {
         compose.waitForIdle()
         assertTrue(visible)
         assertEquals(medium, top(), 1f)
-        compose.onRoot().performTouchInput { click(androidx.compose.ui.geometry.Offset(width / 2f, 40f)) }
+        compose.onRoot().performTouchInput { click(Offset(width / 2f, 40f)) }
         compose.waitForIdle()
         assertTrue(visible)
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
@@ -200,6 +245,70 @@ class SheetTest {
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
         compose.waitForIdle()
         assertEquals(1, hostBacks)
+    }
+
+    @Test
+    fun aTapOnTheStatusBarAboveItAtItsLargeDetentLeavesItUp() {
+        detent = SheetDetent.Large
+        show()
+        bars(status = 62)
+        assertEquals(62f, top(), 1f)
+        // Where the iPhone's taps left its page sheet up.
+        tap(220f, 40f)
+        tap(300f, 57f)
+        tap(60f, 57f)
+        assertTrue(visible)
+    }
+
+    @Test
+    fun aTapOnTheDimJustUnderTheStatusBarSendsItAway() {
+        show()
+        bars(status = 62)
+        tap(195f, 63f)
+        assertFalse(visible)
+    }
+
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun overARegularFormATapOnTheStatusBarLeavesItUpAndOneBesideItSendsItAway() {
+        show()
+        bars(status = 32)
+        tap(516f, 20f)
+        assertTrue(visible)
+        tap(100f, 700f)
+        assertFalse(visible)
+    }
+
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun onTheIPadUprightThePageSheetStands52InAnd32FromItsTopAndBottom() = assertPageSheetThenForm(52f, 32f, 928f, 1312f)
+
+    @Test
+    @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
+    fun onTheIPadOnItsSideThePageSheetIsCentred76DownAnd32Up() = assertPageSheetThenForm(224f, 76f, 928f, 924f)
+
+    @Test
+    @Config(qualifiers = "w800dp-h1280dp-xhdpi")
+    fun onAnAndroidTabletUprightThePageSheetIsAsWideAsTheWindowLess52OnEachSide() = assertPageSheetThenForm(52f, 32f, 696f, 1216f)
+
+    @Test
+    @Config(qualifiers = "w1280dp-h800dp-land-xhdpi")
+    fun onAnAndroidTabletOnItsSideThePageSheetIsAsWideAsTheWindowIsTallLess52OnEachSide() = assertPageSheetThenForm(292f, 76f, 696f, 692f)
+
+    @Test
+    @Config(qualifiers = "w850dp-h880dp-xhdpi")
+    fun onAnUnfoldedFoldableThePageSheetStandsAsInATallWindow() = assertPageSheetThenForm(52f, 32f, 746f, 816f)
+
+    @Test
+    @Config(qualifiers = "w1280dp-h800dp-land-xhdpi")
+    fun thePageSheetStandsUnderTheStatusBarAndOverTheBottomBarWhereTheyAreTallerThanItsMargins() {
+        page = true
+        show()
+        // A status bar lower than 32 leaves its top where it was; a three-button bar, taller than 32, lifts its foot.
+        bars(status = 24, bottom = 48)
+        assertFrame(292f, 76f, 696f, 676f)
+        bars(status = 40, bottom = 20)
+        assertFrame(292f, 84f, 696f, 684f)
     }
 }
 

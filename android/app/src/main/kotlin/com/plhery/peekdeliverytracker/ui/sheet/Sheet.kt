@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.runtime.Composable
@@ -141,10 +142,14 @@ internal class SheetMenus {
  * - Where the window is regular, it is a form sheet in the window's middle, 580 wide and 660 tall at most, opaque, which
  *   a drag down sends away too; with the keyboard up, it stands in the middle of what the keyboard leaves above it,
  *   following the keyboard as it comes and goes, as iPadOS moves a form sheet. A sheet with the [SheetDetent.Fitted] detent is as tall there as what it holds, as tall
- *   as the window's safe area at most (`fittedSheet`'s form).
+ *   as the window's safe area at most (`fittedSheet`'s form). As a [page] sheet (UIKit's `.pageSheet`) it is the
+ *   iPad's larger one, with the form's corners: as wide as the window's shorter side less 52 on each side, centred, its
+ *   top 32 down the window or under the status bar where that is taller, 44 lower in a window wider than it is tall,
+ *   and its foot 32 over the window's bottom or over the bottom bar where that is taller.
  *
- * The window under it dims, black at 20 % (48 % in dark), and a tap there dismisses it, as the system's back and its
- * predictive gesture do, the sheet following the gesture down. While it isn't [dismissible]
+ * The window under it dims, black at 20 % (48 % in dark), and a tap there dismisses it, but in the status bar's strip
+ * at the window's top, whose taps iOS gives to its status bar; the system's back and its predictive gesture dismiss it
+ * too, the sheet following the gesture down. While it isn't [dismissible]
  * (`interactiveDismissDisabled`), none of them does: the back is kept from what is under it, and a drag down past its
  * lowest detent stretches less and less and comes back. It comes and goes on a critically damped spring, and moves
  * between its detents on a snappy one. [detent] is the detent asked for (`presentationDetents(_:selection:)`): the
@@ -152,8 +157,8 @@ internal class SheetMenus {
  * [onDetentChange] hears which. TalkBack reaches only the sheet, named [paneTitle], and only its menu while one is open
  * ([FormMenuRow]). Once it has come up, [onShown] runs (`present(_:animated:completion:)`'s completion); once it has
  * gone, [onClosed] runs, where TalkBack's focus goes back to what opened it. The window made again (a rotation) finds it
- * at the detent it had, without coming up again, and [onShown] runs again there. Without its [grabber] it is UIKit's
- * page sheet, which shows none.
+ * at the detent it had, without coming up again, and [onShown] runs again there. Without its [grabber] it shows none,
+ * as UIKit's page sheet; in a compact window the page sheet is the sheet at its large detent.
  */
 @Composable
 fun Sheet(
@@ -168,6 +173,7 @@ fun Sheet(
     dismissible: Boolean = true,
     onShown: () -> Unit = {},
     grabber: Boolean = true,
+    page: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     var present by remember { mutableStateOf(visible) }
@@ -187,7 +193,7 @@ fun Sheet(
                     present = false
                     closed()
                 },
-                detent, { detentChanged(it) }, dismissible, { shown() }, grabber, content,
+                detent, { detentChanged(it) }, dismissible, { shown() }, grabber, page, content,
             )
         }
     }
@@ -324,6 +330,7 @@ private fun SheetLayer(
     dismissible: Boolean,
     onShown: () -> Unit,
     grabber: Boolean,
+    page: Boolean,
     content: @Composable () -> Unit,
 ) {
     val density = LocalDensity.current
@@ -350,17 +357,30 @@ private fun SheetLayer(
         val largeTop = max(safeTop, with(density) { LARGE_MIN_TOP.toPx() })
         val ime = WindowInsets.ime
         val keyboard by remember(ime, density) { derivedStateOf { ime.getBottom(density) > 0 } }
-        val formWidth = with(density) { min(FORM_WIDTH.toPx(), width - 2 * FORM_MARGIN.toPx()) }
+        // The regular window's sheet, the form or the page sheet. The page sheet keeps PAGE_GAP from the window's top and
+        // bottom, or the bars' room where it is more, as the iPad's keeps its safe area's top and covers its home
+        // indicator, and stands PAGE_WIDE_DROP lower in a window wider than it is tall.
+        val pageHighest = with(density) { max(safeTop, PAGE_GAP.toPx()) }
+        val pageTop = with(density) { if (width > height) pageHighest + PAGE_WIDE_DROP.toPx() else pageHighest }
+        val formWidth = with(density) {
+            if (page) min(width, height) - 2 * PAGE_SIDE.toPx() else min(FORM_WIDTH.toPx(), width - 2 * FORM_MARGIN.toPx())
+        }
         val formRoom = with(density) { height - safeTop - bars.getBottom(this) - 2 * FORM_MARGIN.toPx() }
-        // A fitted sheet's form is as tall as what it holds (`.form.fitted(horizontal: false, vertical: true)`).
-        val formHeight = if (SheetDetent.Fitted in detents && fitted > 0) min(fitted, formRoom) else min(with(density) { FORM_HEIGHT.toPx() }, formRoom)
+        val formHeight = when {
+            page -> with(density) { height - pageTop - max(bars.getBottom(this).toFloat(), PAGE_GAP.toPx()) }
+            // A fitted sheet's form is as tall as what it holds (`.form.fitted(horizontal: false, vertical: true)`).
+            SheetDetent.Fitted in detents && fitted > 0 -> min(fitted, formRoom)
+            else -> min(with(density) { FORM_HEIGHT.toPx() }, formRoom)
+        }
+        // The highest it stands in a regular window, above a keyboard as on its own.
+        val formHighest = if (page) pageHighest else safeTop
         // Low as a phone on its side, the sheet stands at its large detent, as iOS's does in compact height; and a
         // keyboard up for what it holds takes it there, as UIKit lifts a sheet clear of it. A keyboard still going
         // down from a field the sheet came over leaves it at its own detent.
         val compactHeight = maxHeight < REGULAR_HEIGHT
         val lifted = !regular && (compactHeight || keyboard && focused && SheetDetent.Large in detents)
         val rests = when {
-            regular -> listOf(max(safeTop, (height - formHeight) / 2))
+            regular -> listOf(if (page) pageTop else max(safeTop, (height - formHeight) / 2))
             lifted -> listOf(largeTop)
             else -> detents.map { detent ->
                 when (detent) {
@@ -541,24 +561,26 @@ private fun SheetLayer(
         // The dim and the sheet: a layer over the tab, which the glass of an alert over the sheet blurs with the tab.
         val layer = if (backdrop != null) Modifier.materialBackdropLayer(backdrop) else Modifier
         val dim = if (colors.dark) DIM_DARK else DIM_LIGHT
+        val statusBar = WindowInsets.statusBars
         Box(Modifier.fillMaxSize().then(layer)) {
-            // The dim, which a tap dismisses the sheet from.
+            // The dim, which a tap dismisses the sheet from, but in the status bar's strip: the layer covers the window
+            // from its top, so a tap's place in it is its place in the window.
             Box(
                 Modifier
                     .fillMaxSize()
                     .graphicsLayer { alpha = presence() }
                     .background(Color.Black.copy(alpha = dim))
-                    .pointerInput(Unit) { detectTapGestures { if (showing && canDismiss) dismiss() } }
+                    .pointerInput(statusBar) {
+                        detectTapGestures { if (showing && canDismiss && it.y >= statusBar.getTop(this)) dismiss() }
+                    }
                     .clearAndSetSemantics {},
             )
             if (regular) {
                 val shape = ContinuousRoundedShape(FORM_RADIUS)
                 val ground = remember(colors) { @Composable { bounds: Modifier -> Box(bounds.background(colors.groupedBackground)) } }
-                // In the middle of the window above the keyboard, as it moves, and back with the sheet on its way down.
-                val raised = {
-                    val above = height - ime.getBottom(density)
-                    (firstRest - max(safeTop, (above - formHeight) / 2)).coerceAtLeast(0f) * presence()
-                }
+                // Half the keyboard higher, as high as it goes at most, as the keyboard moves, and back with the sheet on
+                // its way down: the form in the middle of the window above the keyboard.
+                val raised = { min(ime.getBottom(density) / 2f, firstRest - formHighest).coerceAtLeast(0f) * presence() }
                 Box(
                     Modifier
                         .placedAt({ Size(formWidth, formHeight) }) { Offset((width - formWidth) / 2, motion.top + backOffset() - raised()) }
@@ -571,7 +593,8 @@ private fun SheetLayer(
                 ) {
                     CompositionLocalProvider(
                         LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus,
-                        LocalSheetInsets provides SheetInsets.sheet(FORM_WIDTH, reachesBottom = false), LocalSheetGround provides ground,
+                        LocalSheetInsets provides SheetInsets.sheet(if (page) with(density) { formWidth.toDp() } else FORM_WIDTH, reachesBottom = false),
+                        LocalSheetGround provides ground,
                     ) {
                         if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
                         if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
@@ -746,6 +769,13 @@ private val FORM_WIDTH = 580.dp
 private val FORM_HEIGHT = 660.dp
 private val FORM_MARGIN = 20.dp
 private val FORM_RADIUS = 38.dp
+/**
+ * `.pageSheet` on iPadOS 26: the window's shorter side less PAGE_SIDE on each side, PAGE_GAP from its top and bottom at
+ * least, and PAGE_WIDE_DROP lower in a window wider than it is tall, measured on the iPad.
+ */
+private val PAGE_SIDE = 52.dp
+private val PAGE_GAP = 32.dp
+private val PAGE_WIDE_DROP = 44.dp
 private val GRABBER_TOP = 5.dp
 private val GRABBER_WIDTH = 36.dp
 private val GRABBER_HEIGHT = 5.dp

@@ -42,9 +42,10 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * The browser check's sheet over Add as a save asks for it, with the iPhone's bars, on a phone light and dark and in a
- * regular window; the page a local placeholder of the check's (the service's page centres the widget in the top 70% of
- * a canvas that follows the appearance). On a synthetic number.
+ * The browser check's sheet over Add as a save asks for it: on a phone with the iPhone's bars, light and dark, and the
+ * page sheet in the iPad's window with its bars, upright and on its side, light and dark; the page a local placeholder
+ * of the check's (the service's page centres the widget in the top 70% of a canvas that follows the appearance). On a
+ * synthetic number.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -60,8 +61,11 @@ class TurnstileSheetScreenshotTest {
     private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 11), email = "reader@example.com"))
     private lateinit var view: View
 
-    /** The demo's list with the iPhone's bars, Add from the +, a number saved, and the check's sheet up over it. */
-    private fun show(dark: Boolean = false) {
+    /**
+     * The demo's list with the iPhone's bars, or the iPad's, Add from the +, a number saved, and the check's sheet up
+     * over it.
+     */
+    private fun show(dark: Boolean = false, iPad: Boolean = false) {
         val source = FakeDeliveries(DemoCards.parcels(AppLanguage.En), reader).apply {
             verification = sheet
             localizer = Localizer(AppLanguage.En, variant = "android")
@@ -74,7 +78,7 @@ class TurnstileSheetScreenshotTest {
             }
         }
         compose.waitForIdle()
-        bars()
+        if (iPad) bars(status = 32, bottom = 20) else bars(status = 62, bottom = 24)
         compose.onNodeWithTag(ADD_BUTTON).performClick()
         settle()
         compose.onNodeWithTag(ADD_TRACKING).performTextReplacement("1Z999AA10123456784")
@@ -84,14 +88,14 @@ class TurnstileSheetScreenshotTest {
         assertEquals(1, pages.made.single().loads)
     }
 
-    /** The iPhone's bars. */
-    private fun bars() {
+    /** The status bar `status` points tall and the bottom bar `bottom`: the iPhone's 62 and 24, the iPad's 32 and 20. */
+    private fun bars(status: Int, bottom: Int) {
         compose.runOnUiThread {
             val scale = view.resources.displayMetrics.density
             fun px(points: Int) = (points * scale).toInt()
             val insets = WindowInsetsCompat.Builder()
-                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, px(62), 0, 0))
-                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, px(24)))
+                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, px(status), 0, 0))
+                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, px(bottom)))
                 .setVisible(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(), true)
                 .build()
             ViewCompat.dispatchApplyWindowInsets(view, insets)
@@ -117,12 +121,37 @@ class TurnstileSheetScreenshotTest {
     }
 
     @Test
-    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    @Config(qualifiers = TABLET)
     fun overAddInARegularWindow() {
-        show()
+        show(iPad = true)
         compose.screenshot("verification_tablet_light")
     }
+
+    @Test
+    @Config(qualifiers = TABLET)
+    fun overAddInARegularWindowInDark() {
+        show(dark = true, iPad = true)
+        compose.screenshot("verification_tablet_dark")
+    }
+
+    @Test
+    @Config(qualifiers = TABLET_LANDSCAPE)
+    fun overAddInARegularWindowOnItsSide() {
+        show(iPad = true)
+        compose.screenshot("verification_tablet_landscape_light")
+    }
+
+    @Test
+    @Config(qualifiers = TABLET_LANDSCAPE)
+    fun overAddInARegularWindowOnItsSideInDark() {
+        show(dark = true, iPad = true)
+        compose.screenshot("verification_tablet_landscape_dark")
+    }
 }
+
+/** The iPad's window, 1032 × 1376 points upright, at twice the pixels. */
+private const val TABLET = "w1032dp-h1376dp-xhdpi"
+private const val TABLET_LANDSCAPE = "w1376dp-h1032dp-land-xhdpi"
 
 /**
  * The check's page as it stands while its widget asks for a tap, drawn locally: the canvas, white or the dark one, and

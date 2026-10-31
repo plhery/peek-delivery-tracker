@@ -326,7 +326,7 @@ internal fun FormScrollEdge(barHeight: Dp, scrolled: () -> Float) {
 @Immutable
 internal data class SheetInsets(val barTop: Dp, val barSide: Dp, val formSide: Dp, val reachesBottom: Boolean) {
     companion object {
-        /** A sheet `width` wide, from the window's bottom unless it is a form sheet in its middle. */
+        /** A sheet `width` wide, from the window's bottom unless it is a regular window's form or page sheet. */
         fun sheet(width: Dp, reachesBottom: Boolean = true) = SheetInsets(19.dp, 20.dp, margin(width), reachesBottom)
 
         /** A popover `width` wide. */

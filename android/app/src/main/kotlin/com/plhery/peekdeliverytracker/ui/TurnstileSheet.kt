@@ -180,12 +180,11 @@ interface TurnstilePages {
 /**
  * The check's sheet in this window, a page sheet with its bar (`.pageSheet` in a UINavigationController): the title
  * inline, Cancel at the bar's leading end, the page under it, and no grabber (B-L09). On a phone it is the app's sheet
- * at its large detent, which a drag down (on the bar, or on the page while it can't scroll up, as the iPhone's web view
- * pulled down at its top takes its sheet down), a tap on the dim or the back sends away as Cancel does. A tap above it
- * at its large detent sends it away as it does the app's other sheets (Sheet), which the iPhone's page sheet is still to
- * be checked against. In a regular window it is the sheet's form in the window's middle for now, until the iPad's page
- * sheet, larger than the form, is measured. The page loads once the sheet is up (`present`'s completion). TalkBack
- * reaches the bar, then the page, in the pane named for the sheet's title.
+ * at its large detent, under the status bar, whose taps leave it up as the iPhone's do; in a regular window it is the
+ * iPad's page sheet, larger than the app's form sheets (Sheet's `page`). A drag down (on the bar, or on the page while
+ * it can't scroll up, as the iPhone's web view pulled down at its top takes its sheet down), a tap on the dim or the
+ * back sends it away as Cancel does. The page loads once the sheet is up (`present`'s completion). TalkBack reaches the
+ * bar, then the page, in the pane named for the sheet's title.
  */
 @Composable
 internal fun TurnstileSheetHost(sheet: TurnstileSheet) {
@@ -214,6 +213,7 @@ internal fun TurnstileSheetHost(sheet: TurnstileSheet) {
         detents = listOf(SheetDetent.Large),
         onClosed = { if (sheet.check == null) shown = null },
         grabber = false,
+        page = true,
         onShown = { up = true },
     ) {
         shown?.let { TurnstileSheetPage(it, up, title, sheet.pages) { sheet.check?.cancel() } }

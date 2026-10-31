@@ -95,7 +95,7 @@ internal fun KeyboardScrollColumn(
 
 /**
  * The navigation bar's height where the sheet reaches the window's bottom ([SheetInsets.reachesBottom]), which what it
- * holds ends clear of; none on a form sheet or a popover.
+ * holds ends clear of; none on a regular window's form or page sheet, or a popover.
  */
 @Composable
 internal fun sheetBottomInset(): Dp {
@@ -106,7 +106,7 @@ internal fun sheetBottomInset(): Dp {
 
 /**
  * Where a keyboard leaves the viewport room: the part of it the keyboard covers, from where it stands in the window (on
- * a sheet that floats and is drawn smaller, or a form sheet in the middle of a large window), and the field with the
+ * a sheet that floats and is drawn smaller, or a regular window's form or page sheet), and the field with the
  * focus, which [focusedOffset] finds a place for in what is left of the scroll.
  */
 @Stable

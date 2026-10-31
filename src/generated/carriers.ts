@@ -2778,6 +2778,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f6851f"
     },
     {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-seguimiento",
+      "title": "JRT seguimiento: número JRT…MM, vuelos, DHL y UPS",
+      "name": "JRT",
+      "color": "#023053"
+    },
+    {
       "id": "sending",
       "catalog": "sending",
       "slug": "sending-seguimiento",

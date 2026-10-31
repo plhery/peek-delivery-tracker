@@ -1311,6 +1311,7 @@ private fun AddTextField(
     val focused = focus.focused == field
     val ochre = colors.resolve(ExperimentalPalette.ochre)
     val shape = RoundedCornerShape(14.dp)
+    val leading = with(LocalDensity.current) { FIELD_LEADING.roundToPx().let { (it / 2).toDp() to (it - it / 2).toDp() } }
     val submit by rememberUpdatedState(onSubmit)
     // The cursor where the reader left it; at the end of what came otherwise (a paste, a suggestion, the window made again).
     var edited by remember { mutableStateOf(TextFieldValue(value, TextRange(value.length))) }
@@ -1363,7 +1364,7 @@ private fun AddTextField(
             keyboardOptions = keyboard,
             keyboardActions = KeyboardActions(onAny = { submit?.invoke() ?: defaultKeyboardAction(keyboard.imeAction) }),
             decorationBox = { text ->
-                Box(contentAlignment = Alignment.TopStart) {
+                Box(Modifier.padding(top = leading.first, bottom = leading.second), contentAlignment = Alignment.TopStart) {
                     if (value.isEmpty()) {
                         Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font, maxLines = maxLines, overflow = TextOverflow.Ellipsis)
                     }
@@ -1662,6 +1663,11 @@ private const val MINIMUM_SCALE = 0.7f
 private val CONTENT_WIDTH = 560.dp
 /** The number's label and its field, two lines tall, which the title gives way to in a window too low for both. */
 private val FIELD_ROOM = 96.dp
+/**
+ * What UIKit's field adds to its lines, half above and half below in whole pixels: the name's line of body is 22 tall
+ * there and the number's two are 42.33, where SF's lines make 20.29 and 40.57.
+ */
+private val FIELD_LEADING = 1.72.dp
 private val MARK_WIDTH = 27.dp
 private val ROW_RISE = 6.dp
 

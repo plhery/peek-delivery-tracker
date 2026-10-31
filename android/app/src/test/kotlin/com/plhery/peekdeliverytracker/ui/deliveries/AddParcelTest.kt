@@ -1226,6 +1226,30 @@ class AddParcelTest {
         }
         assertEquals(baseline(ADD_LINE_NAME), baseline(ADD_LINE_DETAIL), 0.25f)
     }
+
+    /**
+     * The iPhone 17 Pro Max's frames with the UPS sample typed: the number's text 42.33 tall, two lines in its field
+     * 14 in, and the name's 22; the carrier line 6 under the number's field, the name's label 19.96 under the line and
+     * its field 8.04 under the label.
+     */
+    @Test
+    @Config(qualifiers = "w440dp-h956dp-xhdpi")
+    fun theFieldsAndTheRowsBetweenThemStandAsOnTheIPhone() {
+        show()
+        open()
+        type("1Z999AA10123456784")
+        val label = compose.onNode(hasText(text("add.tracking")), useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val tracking = bounds(ADD_TRACKING)
+        val carrier = bounds(ADD_CARRIER)
+        val nameLabel = compose.onNode(hasText(text("design.parcelTitle")), useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val name = bounds(ADD_NAME)
+        assertEquals(42.33f, tracking.height.value, 0.25f)
+        assertEquals(22f, name.height.value, 0.25f)
+        assertEquals(53f, (tracking.top - label.top).value, 0.5f)
+        assertEquals(6f, (carrier.top - tracking.bottom).value - 14f, 0.5f)
+        assertEquals(19.96f, (nameLabel.top - carrier.bottom).value, 0.5f)
+        assertEquals(8.04f, (name.top - nameLabel.bottom).value - 14f, 0.5f)
+    }
 }
 
 /** A window's view that keeps each haptic feedback asked of it. */

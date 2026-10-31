@@ -3420,6 +3420,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "zh": [
     {
+      "id": "fedex",
+      "catalog": "fedex",
+      "slug": "fedex-wuliu-chaxun",
+      "title": "FedEx 联邦快递物流查询：单号格式、状态含义与派送失败",
+      "name": "FedEx",
+      "color": "#4d148c"
+    },
+    {
       "id": "australia-post",
       "catalog": "australia-post",
       "slug": "aozhou-youzheng-wuliu-chaxun",
@@ -3442,6 +3450,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Straightship（迅联捷航）物流查询：STRTD 单号、状态与派送",
       "name": "Straightship",
       "color": "#6aae66"
+    },
+    {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "yto-yuantong-wuliu-chaxun",
+      "title": "圆通速递（YTO）物流查询：YT 单号、物流记录与客服电话",
+      "name": "YTO Express",
+      "color": "#4d148c"
     }
   ],
   "nl": [

@@ -40192,7 +40192,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Hong_Kong",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "we-world-express"
     },
     "linkRules": [],
     "detectionRules": [

@@ -864,7 +864,7 @@ internal class DeliveriesState(
     val modal: Boolean
         get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
             mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing || alerts != null || alertsClosing ||
-            sharing != null || sharingClosing || source.feedbacks.covering
+            sharing != null || sharingClosing || source.feedbacks.covering || feedbackSheetShown
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes
@@ -1025,6 +1025,13 @@ internal class DeliveriesState(
     /** The share sheet has closed and is still on its way down: TalkBack goes back once it has gone. */
     var sharingClosing: Boolean by mutableStateOf(false)
         private set
+
+    /**
+     * A page's feedback sheet is up in this window, or still on its way down until it has gone. The window keeps it, as
+     * it keeps [sharingClosing]: one made again once the question has closed its sheet starts uncovered, whatever the
+     * sheet it had was doing ([ParcelFeedbacks.covering] says whether one is open).
+     */
+    var feedbackSheetShown: Boolean by mutableStateOf(false)
 
     /**
      * The parcel the share sheet `request` shows, with its `work`: the page's as it is now (`if let parcel`), none once

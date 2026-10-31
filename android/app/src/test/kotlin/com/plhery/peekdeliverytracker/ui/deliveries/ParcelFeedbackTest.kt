@@ -973,6 +973,34 @@ class ParcelFeedbackTest {
     }
 
     @Test
+    fun aSheetOnItsWayDownAsTheWindowIsMadeAgainLeavesThePageUncovered() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        open(gift)
+        visitCarrier()
+        tap(FEEDBACK_BACK_NO)
+        settle()
+        assertTrue(exists(FEEDBACK_WORDS_SHEET))
+        compose.mainClock.autoAdvance = false
+        node(FEEDBACK_CLOSE).performClick()
+        compose.mainClock.advanceTimeBy(64)
+        assertNull(work().words)
+        assertTrue("Still on its way down", exists(FEEDBACK_WORDS_SHEET))
+        assertTrue(deliveries.modal)
+        recreation.recreate()
+        settle()
+        assertFalse(exists(FEEDBACK_WORDS_SHEET))
+        assertFalse(deliveries.modal)
+        // A new scan, and the way back from the carrier's site asks about it.
+        val latest = gift.currentEvent!!
+        val scanned = gift.copy(trackingEvents = gift.trackingEvents + latest.copy(id = UUID(2, 1), occurredAt = "2026-10-30T09:00:00Z"))
+        source.parcels.value = listOf(scanned, lamp)
+        settle()
+        visitCarrier()
+        assertEquals(ParcelFeedbackModel.Word.Back("Chronopost"), work().word)
+    }
+
+    @Test
     fun aPageOpenedAgainAsksAfresh() {
         show()
         openQuestion()

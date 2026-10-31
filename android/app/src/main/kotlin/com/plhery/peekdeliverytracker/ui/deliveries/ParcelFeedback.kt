@@ -39,6 +39,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -172,7 +173,11 @@ class ParcelFeedbacks {
     private val works = HashMap<UUID, ParcelFeedbackWork>()
     private var sheets by mutableStateOf(emptySet<UUID>())
 
-    /** A page's sheet is up or on its way down: nothing else over the page takes a tap or TalkBack meanwhile. */
+    /**
+     * A page's question has a sheet open (`feedback.words != nil || feedback.namingCarrier`): nothing else over the page
+     * takes a tap or TalkBack meanwhile. The window that shows it keeps it covered while it goes down
+     * ([DeliveriesState.feedbackSheetShown]).
+     */
     val covering: Boolean get() = sheets.isNotEmpty()
 
     /** The question of the page with `pageId`, made by `make` the first time, working in `scope`. */
@@ -236,14 +241,15 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
     /** The sheet stands at its large detent: dragged there, or opened fully to write (`detent`). */
     var large: Boolean by mutableStateOf(false)
 
-    /** Each sheet up, or on its way down until it has gone, and whether the page has heard either is. */
-    private var wordsUp = false
-    private var carrierUp = false
+    /** A sheet is open, as the page has heard last. */
     private var covered = false
 
     private val jobs = mutableListOf<Job>()
 
     val standing: ParcelFeedbackQuestion? get() = page?.question
+
+    /** A sheet is open, the words' or the carrier's (`feedback.words != nil || feedback.namingCarrier`). */
+    val open: Boolean get() = words != null || namingCarrier
 
     /** Nothing in the words sheet to send, nor in the carrier sheet. */
     val wordsEmpty: Boolean get() = ParcelFeedbackWordsSheet.empty(reasons, note)
@@ -281,7 +287,6 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
             note = ""
             failed = false
             large = false
-            wordsUp = true
         }
         this.words = words
         val naming = model.namingCarrier
@@ -290,7 +295,6 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
             address = ""
             failed = false
             large = false
-            carrierUp = true
         }
         namingCarrier = naming
         page = model.page
@@ -302,8 +306,8 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
     }
 
     private fun covers() {
-        if (covered == (wordsUp || carrierUp)) return
-        covered = wordsUp || carrierUp
+        if (covered == open) return
+        covered = open
         cover(covered)
     }
 
@@ -387,13 +391,6 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
     fun dismissCarrier() {
         model.namingCarrier = false
         pull()
-    }
-
-    /** A sheet has gone. */
-    fun sheetClosed() {
-        if (words == null) wordsUp = false
-        if (!namingCarrier) carrierUp = false
-        covers()
     }
 }
 
@@ -883,6 +880,12 @@ internal fun ParcelFeedbackOverlays(state: DeliveriesState, work: ParcelFeedback
         onDispose { lifecycle.removeObserver(observer) }
     }
     FeedbackWord(work, backdrop, modifier)
+    // A sheet up in this window covers the page until it has gone down, as the share sheet does; the window made again
+    // once the question has closed it starts uncovered, as the iPhone's page reads `covered` from the model alone.
+    val open = work.open
+    SideEffect { if (open) state.feedbackSheetShown = true }
+    DisposableEffect(state) { onDispose { state.feedbackSheetShown = false } }
+    val gone = { if (!work.open) state.feedbackSheetShown = false }
     val localizer = LocalLocalizer.current
     val writing = { work.large = true }
     Sheet(
@@ -890,7 +893,7 @@ internal fun ParcelFeedbackOverlays(state: DeliveriesState, work: ParcelFeedback
         onDismiss = work::dismissWords,
         paneTitle = localizer.text("feedback.whatsOff"),
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
-        onClosed = work::sheetClosed,
+        onClosed = gone,
         detent = if (work.large) SheetDetent.Large else SheetDetent.Fitted,
         onDetentChange = { work.large = it == SheetDetent.Large },
         dismissible = !work.sending,
@@ -902,7 +905,7 @@ internal fun ParcelFeedbackOverlays(state: DeliveriesState, work: ParcelFeedback
         onDismiss = work::dismissCarrier,
         paneTitle = localizer.text("feedback.unknown.title"),
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
-        onClosed = work::sheetClosed,
+        onClosed = gone,
         detent = if (work.large) SheetDetent.Large else SheetDetent.Fitted,
         onDetentChange = { work.large = it == SheetDetent.Large },
         dismissible = !work.sending,

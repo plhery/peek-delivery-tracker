@@ -4386,7 +4386,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-28</lastmod>
+<lastmod>2026-10-31</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers</loc>
@@ -4422,7 +4422,7 @@
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers" />
-<lastmod>2026-10-30</lastmod>
+<lastmod>2026-10-31</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/quickpac-tracking</loc>
@@ -8111,8 +8111,26 @@
 <url>
 <loc>https://peektracker.com/carriers/jrt-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jrt-tracking" />
 <lastmod>2026-10-30</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/jrt-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jrt-tracking" />
+<lastmod>2026-10-31</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/jrt-sledzenie</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jrt-tracking" />
+<lastmod>2026-10-31</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/tianhui-hengyuan-tracking</loc>

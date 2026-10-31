@@ -104,8 +104,8 @@ internal class DeliveryCardPlaces {
     /** What each card shows, as it was last drawn: its menu's picture. */
     private val pictures = mutableMapOf<UUID, GraphicsLayer>()
 
-    /** Where Pip shows in the window, in points, and on whose card. */
-    private var pip: Pair<UUID, Rect>? = null
+    /** Where Pip shows in the window, in points, asked when it is needed, and on whose card. */
+    private var pip: Pair<UUID, () -> Rect?>? = null
 
     /** The list's node, which the places are measured from. */
     var list: LayoutCoordinates? = null
@@ -137,7 +137,7 @@ internal class DeliveryCardPlaces {
         if (pictures[id] === picture) pictures.remove(id)
     }
 
-    fun see(pip: Rect, id: UUID) {
+    fun see(pip: () -> Rect?, id: UUID) {
         this.pip = id to pip
     }
 
@@ -175,9 +175,9 @@ internal class DeliveryCardPlaces {
         val corner = list.positionInWindow()
         val left = corner.x / density.toDouble()
         val top = corner.y / density.toDouble()
-        val seen = pip
-        if (seen != null && seen.first == id) {
-            val mouth = Point(seen.second.center.x.toDouble(), seen.second.top + seen.second.height * 0.38)
+        val seen = pip?.takeIf { it.first == id }?.second?.invoke()
+        if (seen != null) {
+            val mouth = Point(seen.center.x.toDouble(), seen.top + seen.height * 0.38)
             if (CoreRect(left, top, visible.width, visible.height).contains(mouth)) return mouth
         }
         val end = Point(frame.maxX - 52, frame.minY + min(frame.height / 2, 64.0))

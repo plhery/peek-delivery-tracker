@@ -485,7 +485,7 @@ private fun NextCard(state: DeliveriesState, item: ListItem.Next) {
     val selected = state.selects(parcel.id).value
     val place = state.cardPlace(parcel.id)
     val onName = state.names(parcel.id)
-    val sight = remember(state, parcel.id) { { pip: Rect -> state.places.see(pip, parcel.id) } }
+    val sight = remember(state, parcel.id) { { pip: () -> Rect? -> state.places.see(pip, parcel.id) } }
     CardComposed(parcel.id)
     SwipeableCard(state, shown, Radii.nextUp, shadow = true, place, pictured = true) { moved, open, menu, archive ->
         CompositionLocalProvider(LocalPipSight provides sight) {

@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
@@ -25,7 +26,6 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -45,10 +45,12 @@ import com.plhery.peekdeliverytracker.core.PipOpening
 import com.plhery.peekdeliverytracker.core.PipPalette
 import com.plhery.peekdeliverytracker.core.PipPlacement
 import com.plhery.peekdeliverytracker.core.Point
+import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.toRgba
 import kotlinx.coroutines.delay
+import java.time.Instant
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
@@ -129,7 +131,8 @@ fun InkPip(mood: PipMood, side: Int, below: Boolean, ink: Color, surface: Color,
     val dark = PeekTheme.colors.dark
     val reduceMotion = PeekTheme.reduceMotion
     val palette = remember(ink, surface, dark) { PipPalette.ink(AdaptiveColor(ink.toRgba()), AdaptiveColor(surface.toRgba()), dark) }
-    val clock = rememberInkPipClock(mood, reduceMotion)
+    val now = LocalNow.current
+    val clock = rememberInkPipClock(mood, reduceMotion) { secondsSinceReferenceDate(now()) }
     val cache = remember { MapDrawingCache() }
     val arrival = remember { Animatable(if (reduceMotion) 1f else 0f) }
     LaunchedEffect(Unit) {
@@ -154,9 +157,11 @@ fun InkPip(mood: PipMood, side: Int, below: Boolean, ink: Color, surface: Color,
 
 /**
  * Told where Pip shows in the window, by a card that has something come out of his box (`pipSight`): his bounds in
- * points (dp) from the window's top left, as iOS gives his frame in its global space.
+ * points (dp) from the window's top left, worked out when asked and null once he has gone, as iOS gives his frame in
+ * its global space. They are where his spring has him rather than the whole pixels he is drawn on, which a change in
+ * the last digit of its arithmetic could move by one: the paper out of his box would move with them.
  */
-val LocalPipSight = staticCompositionLocalOf<((Rect) -> Unit)?> { null }
+val LocalPipSight = staticCompositionLocalOf<((() -> Rect?) -> Unit)?> { null }
 
 /**
  * Pip beside the parcel's dot, in the map's points, his frame's top left at `place.origin`; he takes no room in the
@@ -189,20 +194,29 @@ fun MapPip(place: PipPlacement, dot: Point?, ink: Color, surface: Color, modifie
             launch { width.animateTo(place.width.toFloat(), Motion.spring(duration = 0.5, bounce = 0.18)) }
         }
     }
+    // His frame's top left from the map's, in points, where the spring has him now.
+    val at by rememberUpdatedState { Point(anchor.x + offset.value.x + (x - standX), anchor.y + offset.value.y + (y - standY)) }
     val placed = modifier
         .layout { measurable, _ ->
             val pipWidth = width.value.dp.roundToPx()
             val pipHeight = (width.value * FRAME.height / FRAME.width).toFloat().dp.roundToPx()
             val pip = measurable.measure(Constraints.fixed(pipWidth, pipHeight))
             layout(0, 0) {
-                val left = anchor.x + offset.value.x + (x - standX)
-                val top = anchor.y + offset.value.y + (y - standY)
-                pip.place((left * density).roundToInt(), (top * density).roundToInt())
+                val stand = at()
+                pip.place((stand.x * density).roundToInt(), (stand.y * density).roundToInt())
             }
         }
         .onGloballyPositioned { coordinates ->
-            val bounds = coordinates.boundsInWindow()
-            sight?.invoke(Rect(bounds.left / pixelsPerPoint, bounds.top / pixelsPerPoint, bounds.right / pixelsPerPoint, bounds.bottom / pixelsPerPoint))
+            val map = coordinates.parentCoordinates ?: return@onGloballyPositioned
+            sight?.invoke {
+                if (!map.isAttached) return@invoke null
+                val stand = at()
+                val right = stand.x + width.value
+                val bottom = stand.y + width.value * FRAME.height / FRAME.width
+                val topLeft = map.localToWindow(Offset((stand.x * pixelsPerPoint).toFloat(), (stand.y * pixelsPerPoint).toFloat()))
+                val bottomRight = map.localToWindow(Offset((right * pixelsPerPoint).toFloat(), (bottom * pixelsPerPoint).toFloat()))
+                Rect(topLeft / pixelsPerPoint, bottomRight / pixelsPerPoint)
+            }
         }
     InkPip(place.mood, place.side, place.below, ink, surface, placed)
 }
@@ -354,11 +368,12 @@ internal class InkPipClock(private var mood: PipMood, reduceMotion: Boolean, pri
     }
 }
 
-/** Seconds since 1 January 2001 by the wall clock (`timeIntervalSinceReferenceDate`). */
-private fun secondsSinceReferenceDate(): Double = (System.currentTimeMillis() - 978_307_200_000L) / 1000.0
+/** `now`'s seconds since 1 January 2001 (`timeIntervalSinceReferenceDate`). */
+private fun secondsSinceReferenceDate(now: Instant): Double = (now.toEpochMilli() - 978_307_200_000L) / 1000.0
 
+/** `wall` is the app's clock ([LocalNow]), which the tests set to the captures' moment, so his bob is the same each time. */
 @Composable
-internal fun rememberInkPipClock(mood: PipMood, reduceMotion: Boolean, wall: () -> Double = ::secondsSinceReferenceDate): InkPipClock {
+internal fun rememberInkPipClock(mood: PipMood, reduceMotion: Boolean, wall: () -> Double): InkPipClock {
     val clock = remember { InkPipClock(mood, reduceMotion, wall) }
     // Before the frame draws, so the news never finds his box drawn open first.
     SideEffect { clock.show(mood, reduceMotion) }

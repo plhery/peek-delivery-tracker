@@ -444,6 +444,13 @@ describe('carrier brand', () => {
       'ukp-worldwide',
       'btd',
       'xyl',
+      'komon-express',
+      'bel',
+      'parcelabc',
+      'pago',
+      'safeway-express-cargo',
+      'w-express-ph',
+      'ecohai',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

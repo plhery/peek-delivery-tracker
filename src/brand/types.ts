@@ -368,7 +368,14 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'wiio'
   | 'ukp-worldwide'
   | 'btd'
-  | 'xyl';
+  | 'xyl'
+  | 'komon-express'
+  | 'bel'
+  | 'parcelabc'
+  | 'pago'
+  | 'safeway-express-cargo'
+  | 'w-express-ph'
+  | 'ecohai';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

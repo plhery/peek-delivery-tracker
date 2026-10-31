@@ -286,6 +286,9 @@
   "barid-al-maghrib": {
     "decal": "barid-al-maghrib"
   },
+  "bel": {
+    "decal": "bel"
+  },
   "belpost": {
     "decal": "belpost"
   },
@@ -934,6 +937,9 @@
   },
   "eco-express-ae": {
     "decal": "eco-express-ae"
+  },
+  "ecohai": {
+    "decal": "ecohai"
   },
   "ecom-logistics": {
     "decal": "ecom-logistics"
@@ -1714,6 +1720,9 @@
   "kolay-gelsin": {
     "decal": "kolay-gelsin"
   },
+  "komon-express": {
+    "decal": "komon-express"
+  },
   "korea-post": {
     "decal": "korea-post"
   },
@@ -2149,6 +2158,9 @@
   "pactic": {
     "decal": "pactic"
   },
+  "pago": {
+    "decal": "pago"
+  },
   "paket-cl": {
     "decal": "paket-cl"
   },
@@ -2175,6 +2187,9 @@
   },
   "parcel-one": {
     "decal": "parcel-one"
+  },
+  "parcelabc": {
+    "decal": "parcelabc"
   },
   "parcelforce": {
     "decal": "parcelforce"
@@ -2531,6 +2546,9 @@
   },
   "saee": {
     "decal": "saee"
+  },
+  "safeway-express-cargo": {
+    "decal": "safeway-express-cargo"
   },
   "safexpress": {
     "decal": "safexpress"
@@ -3214,6 +3232,9 @@
   },
   "vt-freight-express": {
     "decal": "vt-freight-express"
+  },
+  "w-express-ph": {
+    "decal": "w-express-ph"
   },
   "wahana": {
     "decal": "wahana"

@@ -220,13 +220,15 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   expect(incident.tags).toMatchObject({ component: 'tracking-health', incident_state: 'open' });
   expect(incident.contexts?.tracking_health?.next_steps).toContain('maintenance');
   expect(incident.fingerprint).toEqual(['delivery-tracker', 'tracking-health', 'direct', 'la-poste']);
-  // A recovery, a closing or a rescued direct step is a review signal, not an issue.
+  // A recovery, a closing, a rescued direct step or an own lookup its direct incident covers is a review signal, not an issue.
   const before = captured.events.length;
   expect(captureTrackingHealth({ id: 'test-recovery', kind: 'direct', subject: 'la-poste', state: 'recovered',
     attempts: 3, failures: 0, window_hours: 24 })).toBeNull();
   expect(captureTrackingHealth({ id: 'test-closing', kind: 'direct', subject: 'la-poste', state: 'closed',
     attempts: 0, failures: 0, window_hours: 24 })).toBeNull();
   expect(captureTrackingHealth({ id: 'test-rescued', kind: 'direct', subject: 'la-poste', state: 'open', rescued: true,
+    attempts: 12, failures: 8, window_hours: 24 })).toBeNull();
+  expect(captureTrackingHealth({ id: 'test-covered', kind: 'provider', subject: 'la-poste', state: 'open', covered: true,
     attempts: 12, failures: 8, window_hours: 24 })).toBeNull();
   await flushObservability();
   expect(captured.events).toHaveLength(before);

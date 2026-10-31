@@ -625,7 +625,8 @@ Key JSON events:
   A `provider_clock_offset` line also has `scan_id`, the `provider_event_id` of the stored
   row whose scan came on two clocks: the row a provider's copy repeats, or the copy's own;
 - `tracking_health_incident`: a health incident opened, still fails six hours on (warning,
-  info for a direct step whose every failure a fallback step covered), recovered, or closed once no sample of it was left or the carrier answers without its
+  info for a direct step whose every failure a fallback step covered, or a carrier's own lookup
+  failing while its direct step's incident is open and alerted), recovered, or closed once no sample of it was left or the carrier answers without its
   direct step (info), with its `kind`, `subject`,
   `title`, `failures` and `attempts`;
 - `dpd_app_session`: the scraper took up a saved session at start (`outcome` `taken_up`,
@@ -762,7 +763,10 @@ provider failure in an `AggregateError` so every cause is visible.
   alerts. Avoid "more than 0 times in 5 minutes" rules: they fire on every failed check.
 - **Incidents**: carrier and provider outages open once, from thresholds computed in
   Postgres, and remind every six hours while they last. A recovery, or a direct step whose
-  every failure a fallback step covered, is only logged and counted. See [ops/sentry](../ops/sentry/README.md).
+  every failure a fallback step covered, is only logged and counted. So is a carrier's own
+  lookup (`covered`) while its direct step's incident is open and its latest notice reached
+  Sentry: one outage, one alert. Once the direct incident recovers, or its notices are rescued,
+  the lookup's incident alerts again at its next reminder. See [ops/sentry](../ops/sentry/README.md).
 - **Review signals**: routing signals, sync anomalies, health recoveries and covered direct
   failures open no issue;
   see [Review signals](#review-signals).

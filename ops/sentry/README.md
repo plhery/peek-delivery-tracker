@@ -25,6 +25,11 @@ While a threshold is still breached and the 3 latest samples are healthy, an inc
 waits: no recovery and no reminder. It recovers once enough later checks succeed or its
 failures age out of the window; a new failure meanwhile reminds as usual.
 
+A carrier's provider lookup incident opens no issue while the carrier's direct transport
+incident is open and its latest notice reached Sentry (`covered`): one outage, one issue. It
+stays open for the review, and alerts at its next reminder once the direct incident recovers
+or its notices are rescued.
+
 ## Counting rules
 
 - One sample per provider per scheduled refresh, so retries don't inflate the rate.

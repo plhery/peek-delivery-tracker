@@ -17,6 +17,18 @@ create function pg_temp.direct_notice(result jsonb, subject text)
 returns jsonb language sql as $$
   select n from jsonb_array_elements(result) n where n->>'kind'='direct' and n->>'subject'=subject;
 $$;
+-- One check of a carrier with its own lookup: the direct step, the lookup over every step and the parcel's refresh.
+create function pg_temp.own_check(subject text, direct boolean, lookup boolean, refresh boolean)
+returns jsonb language sql as $$
+  select public.record_tracking_health(gen_random_uuid(),'10000000-0000-4000-8000-000000000001',jsonb_build_array(
+    jsonb_build_object('kind','direct','subject',subject,'healthy',direct,'details','{}'::jsonb),
+    jsonb_build_object('kind','provider','subject',subject,'healthy',lookup,'details','{}'::jsonb),
+    jsonb_build_object('kind','refresh','subject',subject,'healthy',refresh,'details','{}'::jsonb)));
+$$;
+create function pg_temp.notice(result jsonb, kind text, subject text)
+returns jsonb language sql as $$
+  select n from jsonb_array_elements(result) n where n->>'kind'=kind and n->>'subject'=subject;
+$$;
 -- A parcel's refresh that answered without a lookup, its number waiting for the owner's input.
 create function pg_temp.input_required_refresh(subject text, package_id uuid)
 returns jsonb language sql as $$
@@ -237,6 +249,52 @@ begin
   assert result->0->>'state'='open', 'A closed incident must reopen on fresh failures';
   assert not has_function_privilege('authenticated','public.record_tracking_health(uuid,uuid,jsonb)','execute');
   assert not has_table_privilege('anon','public.tracking_health_samples','select');
+end;
+$$;
+-- A carrier's own lookup failing beside its direct step's open, alerted incident is the same outage.
+do $$
+declare result jsonb;
+begin
+  -- Both open in one check that got no answer at all: the direct incident alerts, the lookup's is covered.
+  for i in 1..10 loop result := pg_temp.own_check('covered-carrier',false,false,i<10); end loop;
+  assert not (pg_temp.notice(result,'direct','covered-carrier')->'rescued')::boolean
+    and (pg_temp.notice(result,'provider','covered-carrier')->'covered')::boolean,
+    'An own lookup failing beside an alerted direct incident must be covered';
+  perform public.ack_tracking_health(array[(pg_temp.notice(result,'direct','covered-carrier')->>'id')::uuid,
+    (pg_temp.notice(result,'provider','covered-carrier')->>'id')::uuid]);
+  assert (select active and notified_rescued is false from public.tracking_health_incidents where kind='direct' and subject='covered-carrier')
+    and (select active from public.tracking_health_incidents where kind='provider' and subject='covered-carrier'),
+    'A covered own-lookup incident must stay open for the review';
+  -- Its reminder in a later check, while the direct incident waits for its own, is still covered.
+  update public.tracking_health_incidents set last_notified_at=now()-interval '7 hours' where kind='provider' and subject='covered-carrier';
+  result := pg_temp.own_check('covered-carrier',false,false,true);
+  assert pg_temp.notice(result,'direct','covered-carrier') is null
+    and (pg_temp.notice(result,'provider','covered-carrier')->'covered')::boolean,
+    'An own-lookup reminder must stay covered while the direct incident is open and alerted';
+  perform public.ack_tracking_health(array[(pg_temp.notice(result,'provider','covered-carrier')->>'id')::uuid]);
+  -- A direct incident rescued in every check never reached Sentry: the own lookup's incident alerts.
+  for i in 1..10 loop result := pg_temp.own_check('rescued-carrier',false,false,true); end loop;
+  assert (pg_temp.notice(result,'direct','rescued-carrier')->'rescued')::boolean
+    and pg_temp.notice(result,'provider','rescued-carrier')->>'state'='open'
+    and not pg_temp.notice(result,'provider','rescued-carrier') ? 'covered',
+    'An own lookup failing beside a rescued direct incident must alert';
+  perform public.ack_tracking_health(array[(pg_temp.notice(result,'direct','rescued-carrier')->>'id')::uuid,
+    (pg_temp.notice(result,'provider','rescued-carrier')->>'id')::uuid]);
+  update public.tracking_health_incidents set last_notified_at=now()-interval '7 hours' where kind='provider' and subject='rescued-carrier';
+  result := pg_temp.own_check('rescued-carrier',false,false,true);
+  assert not pg_temp.notice(result,'provider','rescued-carrier') ? 'covered',
+    'An own-lookup reminder beside a direct incident acknowledged as rescued must alert';
+  perform public.ack_tracking_health(array[(pg_temp.notice(result,'provider','rescued-carrier')->>'id')::uuid]);
+  -- Nor does a direct incident opened before its notices were recorded.
+  for i in 1..10 loop perform pg_temp.health_sample('unrecorded-carrier',false,'direct'); end loop;
+  update public.tracking_health_incidents set active=true, pending=null, notified_rescued=null where kind='direct' and subject='unrecorded-carrier';
+  for i in 1..10 loop result := pg_temp.health_sample('unrecorded-carrier',false); end loop;
+  assert result->0->>'state'='open' and not result->0 ? 'covered',
+    'An own lookup beside a direct incident with no recorded notice must alert';
+  -- A universal provider has no direct step: unchanged.
+  for i in 1..10 loop result := pg_temp.health_sample('universal-provider',false); end loop;
+  assert result->0->>'state'='open' and not result->0 ? 'covered' and not result->0 ? 'rescued',
+    'A universal provider''s notice must not change';
 end;
 $$;
 -- Expected JD abstentions remain queryable but cannot mask or create actionable outages.

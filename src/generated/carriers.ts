@@ -3298,7 +3298,32 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     }
   ],
-  "zh": [],
+  "zh": [
+    {
+      "id": "australia-post",
+      "catalog": "australia-post",
+      "slug": "aozhou-youzheng-wuliu-chaxun",
+      "title": "澳洲邮政（Australia Post）物流查询：单号、状态与快递柜",
+      "name": "Australia Post",
+      "color": "#dc1928"
+    },
+    {
+      "id": "jcex",
+      "catalog": "jcex",
+      "slug": "jcex-wuliu-chaxun",
+      "title": "JCEX（佳成国际）物流查询：JCZ 单号、状态与派送",
+      "name": "JCEX",
+      "color": "#0080cc"
+    },
+    {
+      "id": "straightship",
+      "catalog": "straightship",
+      "slug": "straightship-wuliu-chaxun",
+      "title": "Straightship（迅联捷航）物流查询：STRTD 单号、状态与派送",
+      "name": "Straightship",
+      "color": "#6aae66"
+    }
+  ],
   "nl": [
     {
       "id": "colis-prive",
@@ -3773,4 +3798,4 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
  * Peek's languages a carrier's page is written in. Each has its carriers' own page; a language without one
  * sends its readers to the English one until a carrier's page is written in it.
  */
-export const CARRIER_LOCALES: readonly Locale[] = ["en","de","fr","it","es","pt","pt-br","pl","ru"];
+export const CARRIER_LOCALES: readonly Locale[] = ["en","de","fr","it","es","pt","pt-br","pl","ru","zh"];

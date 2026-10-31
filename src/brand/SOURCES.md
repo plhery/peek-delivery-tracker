@@ -70,6 +70,7 @@ and [`truck.json`](truck.json).
 | `andreani` | [andreani.com](https://www.andreani.com/) — theme-color and --primary #d71920 (archived page; the live site blocks this network) |
 | `ane-logistics` | [ane56.com](https://www.ane56.com/assets/img/gym-logo.png) — logo PNG yellow, median #fbb707 of the arrow's 330 coloured pixels, shading from #fcca0f to #f49c00; 安能 and ane are black |
 | `anjun` | [anjuntrack.com](https://anjuntrack.com/img/logo.bf7702a9.png) — logo PNG green #009944 (approximate); site CSS #009b4c |
+| `annto` | [annto.com](https://www.annto.com/assets/logo-8a884e97.png) — logo PNG blue, median #007ac3 of 5,644,674 pixels, for 安得智联 and ANN, with orange #ed6c1e (1,148,981) for TO |
 | `anousith` | [app.anousith.express](https://app.anousith.express/logo.jpeg) — app icon red #e0353a (approximate); logo PNG chevron #fe0000 |
 | `anserx` | [anserx.com](https://www.anserx.com/css/style.css) — main site CSS #2478be (14 uses: active nav, product tabs), the exact fill of the logo PNG's light-blue wing; the wing green #9cca2c is in the same CSS and logo |
 | `anteraja` | [anteraja.id](https://anteraja.id/) — app CSS .magenta #ed0677; logo PNG #ec0b78 (approximate) |
@@ -281,6 +282,7 @@ and [`truck.json`](truck.json).
 | `econt` | [econt.com](https://www.econt.com/services/track-shipment) — mask-icon colour #234182, also the app icon fill |
 | `ecoscooting` | [ecoscooting.com](https://www.ecoscooting.com/) |
 | `ecourier` | [ecourier.com.bd](https://ecourier.com.bd/wp-content/themes/ecourier-2.0/images/logo.svg) — logo SVG fill #602D90, dots #FFF242; site CSS #602d90 |
+| `ees-logistics` | [ees-logistics.net](https://www.ees-logistics.net/) — site accent #b62126 (language switch, active tab, slider arrow); its logo image does not load from outside China |
 | `efs-asia` | [efs.asia](https://efs.asia/img/logo.png) — logo PNG navy gradient for EFS and the orbit ring round it, from #1c64a7 across the top of the letters through its main band #224f8c (most frequent pixel #214c89) to #262262 along the ring's bottom, with a red #ec1922 plane above |
 | `egxpress` | [egyptexpress.com.eg](https://www.egyptexpress.com.eg/content/images/eg-logo.svg) — header logo SVG with two fills: orange #ff5200 for the EG mark and the DELIVERING A SMALLER WORLD line, and dark grey #404040 for XPRESS, which covers more of the logo (48,647 pixels to 20,021 drawn 800 px wide) but has no hue |
 | `egypt-post` | [commons.wikimedia.org](https://commons.wikimedia.org/wiki/File:EGYPT_POST.svg) — logo SVG fill rgb(0%,49.8%,24.3%) #007f3e |
@@ -472,6 +474,7 @@ and [`truck.json`](truck.json).
 | `jcex` | [jcex.com](https://www.jcex.com/template/1/jcex/images/jcCts2.png) — header logo PNG flat blue #0080cc (EX), its most frequent pixel; the Jc is orange #f08200 |
 | `jcw-express` | [jcwexpress.com](https://jcwexpress.com/images/logo-jcwexpress-dark-background.png) — header logo PNG for dark grounds: white jcw and EXPRESS with one coloured element, the orange-red #e94a25 wedge dotting the j (30,637 pixels); the [site icon](https://jcwexpress.com/favicon.ico?v=2) sets the logo on dark purple #2d1e52 |
 | `jd-logistics` | [jingdonglogistics.com](https://www.jingdonglogistics.com/) |
+| `jdiex` | [jdiex.com](https://changyunda.oss-cn-shenzhen.aliyuncs.com/Upload20260705/260705_c494a5cd651948b4b90b9057d0629a11.jpg) — logo JPEG blue, median #0166e2 of 9,187 pixels, for JDI, with orange #fe7206 (8,950) for EX; the [site](https://www.jdiex.com/) serves the logo from its hosted system |
 | `jeebly` | [jeebly.com](https://jeebly.com/wp-content/uploads/2021/12/logo.svg) — logo SVG badge fill #db124b |
 | `jersey-post` | [jerseypost.com](https://www.jerseypost.com/public/img/icons/icon180.png) — app icon red #e72b37 (approximate); site CSS #ee3d44 |
 | `jet-logistic` | [jetlogistic.kz](https://jetlogistic.kz/images/logo_retina.png) — emblem blue gradient #00acee to #06a3e0, sampled from the logo PNG (approximate) |
@@ -2017,3 +2020,6 @@ and [`truck.json`](truck.json).
 | `suning-logistics` | SUNING in dark grey single-stroke capitals on yellow | [wuliu.suning.com](https://wuliu.suning.com/staticfile_0113/assets/logo.png) — the logo: SUNING in dark grey capitals over 苏宁物流; the decal sets SUNING in the app's letters in dark grey #2c2c2c |
 | `rrs-logistics` | RRS in white single-stroke capitals on red | [rrswl.com](https://www.rrswl.com/assets/images/ririshun-logo.png) — the logo: 日日顺供应链 in red; the decal sets RRS, the company's initials, in the app's letters |
 | `changjiang-express` | CHANGJIANG in white single-stroke capitals on blue | [changjiangexpress.com](https://www.changjiangexpress.com/Content/theme/logo-5.png) — the logo: a slanted blue and orange CJ mark beside 长江国际速递 over CHANG JIANG INTERNATIONAL EXPRESS in blue; the decal spells CHANGJIANG in the app's letters |
+| `ees-logistics` | EES in white single-stroke capitals on red | [ees-logistics.net](https://www.ees-logistics.net/) — EES is the company's registered English mark, beside 百福东方; the logo image does not load from outside China, so the decal sets EES in the app's letters |
+| `annto` | ANNTO in white single-stroke capitals on blue | [annto.com](https://www.annto.com/assets/logo-8a884e97.png) — the logo: 安得智联 and ANN in heavy blue, TO in orange; the decal spells ANNTO in the app's letters, all in white since the orange is too close to the blue |
+| `jdiex` | JDIEX in white single-stroke capitals on blue | [jdiex.com](https://changyunda.oss-cn-shenzhen.aliyuncs.com/Upload20260705/260705_c494a5cd651948b4b90b9057d0629a11.jpg) — the logo: JDI in heavy blue and EX in orange capitals; the decal spells JDIEX in the app's letters, all in white since the orange is too close to the blue |

@@ -418,7 +418,10 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'sumxpress'
   | 'suning-logistics'
   | 'rrs-logistics'
-  | 'changjiang-express';
+  | 'changjiang-express'
+  | 'ees-logistics'
+  | 'annto'
+  | 'jdiex';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

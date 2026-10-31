@@ -432,11 +432,11 @@ class ParcelPageTest {
         item(ParcelMenuItem.Archive).assertContentDescriptionEquals("Archive parcel, Meta+Ctrl+A")
         item(ParcelMenuItem.Delete).assertContentDescriptionEquals("Delete permanently, Ctrl+Backspace")
         fun height(item: ParcelMenuItem) = bounds(item(item)).let { (it.bottom - it.top).value }
-        // A line for the title, one for its keys, and the row's padding.
+        // A line for the title, one for its keys, and the row's padding: 62 tall, as the iPhone's two-line rows.
         val line = 17 * (1950f + 494f) / 2048f
-        assertEquals(42f, height(ParcelMenuItem.Rename), 0.5f)
-        assertEquals(10 + 2 * line + 10, height(ParcelMenuItem.Archive), 0.5f)
-        assertEquals(10 + 2 * line + 10, height(ParcelMenuItem.Delete), 0.5f)
+        assertEquals(42f, height(ParcelMenuItem.Rename), 0.1f)
+        assertEquals(10.7f + 2 * line + 10.7f, height(ParcelMenuItem.Archive), 0.5f)
+        assertEquals(10.7f + 2 * line + 10.7f, height(ParcelMenuItem.Delete), 0.5f)
         assertEquals(MENU_WIDTH.value, width(bounds(item(ParcelMenuItem.Delete))), 0.5f)
     }
 

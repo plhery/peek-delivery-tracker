@@ -559,7 +559,7 @@ private fun MenuItemRow(
                 role = Role.Button
                 if (enabled) onClick { choose(item); true } else disabled()
             }
-            .padding(start = 26.dp, end = 20.dp, top = 10.dp, bottom = 10.dp),
+            .padding(start = 26.dp, end = 20.dp, top = ROW_PADDING, bottom = ROW_PADDING),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(Modifier.width(26.dp), contentAlignment = Alignment.Center) {
@@ -579,7 +579,7 @@ private fun MenuItemRow(
 @Composable
 private fun MenuSeparator() {
     Box(Modifier.fillMaxWidth().height(SEPARATOR_BLOCK), contentAlignment = Alignment.Center) {
-        Box(Modifier.padding(horizontal = 20.dp).fillMaxWidth().height(1.dp).background(PeekTheme.colors.separator))
+        Box(Modifier.padding(horizontal = SEPARATOR_INSET).fillMaxWidth().height(1.dp).background(PeekTheme.colors.separator))
     }
 }
 
@@ -1038,7 +1038,16 @@ internal val MENU_MARGIN = 21.dp
 private val MENU_GAP = 21.dp
 private val PREVIEW_SIDE = 22.dp
 private val ROW_HEIGHT = 42.dp
+
+/**
+ * The room above and below a row's words, measured on the iPhone's "Copy tracking number": two lines of the body's 17
+ * (20.29 each) in a row 62 tall. A row of one line stays [ROW_HEIGHT].
+ */
+private val ROW_PADDING = 10.7.dp
 private val SEPARATOR_BLOCK = 21.dp
+
+/** A line between groups, 24 in from the glass's sides as the iPhone's. */
+private val SEPARATOR_INSET = 24.dp
 
 /** An alert as the iPhone draws it in iOS 26 ([AlertCard]), measured on its rename alert. */
 private val ALERT_RADIUS = 34.dp

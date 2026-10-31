@@ -182,7 +182,13 @@ one is of the same day, else at the start of the day on the carrier's home clock
 the scraper's `carrierHomeZone` gives. A catalog zone of UTC would put a USPS day on the
 evening before in the United States. A universal provider's copy of such a scan starts the
 day on the clock of the carrier the provider names, not in the zone its answer declares
-(17TRACK's UTC). It replaces the stage change an earlier check stored
+(17TRACK's UTC). Such a scan also follows the newest scan of its day, from the answer or
+stored from any source, whose stage is no further on than its own, by a second (FedEx gives
+its pickup by its day after 17TRACK timed the label). The answer's order stands: the scans
+keep their dates when the move would take one past the next scan the answer lists, a scan
+of that day in a later stage, or a stage change seen that day without a time in its stage
+or a later one, or would change a stage the scans read. A scan dated after the check leads
+none. The day stays the scan's identity, so a row moves in place. It replaces the stage change an earlier check stored
 without a time. So is a scan on a wall clock in no zone (YunExpress's) listed after a dated
 scan, in an answer of the carrier's own lookup that is no fallback. Its identity keeps the clock, so two scans of a day stay two, and once a release
 dates the scan, the scan takes the row over: the same stage, wording, provider code and place,

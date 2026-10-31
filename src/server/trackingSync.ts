@@ -56,6 +56,7 @@ import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
+import { afterSameDayScans } from './dayScans';
 import { datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
 import { carrierMovedAt, eventStage, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
@@ -702,10 +703,13 @@ export function buildEvents(
     older = at;
   }
   const stages = scanStages(scans, instants);
+  // Such a scan also follows the scans of its day before it from any source; the stages stay as read.
+  const ordered = afterSameDayScans(scans, days, dayZone, instants, stages, storedEventIdentities(parcel), observedAt);
+  const dated = scanStages(scans, ordered).every((stage, index) => stage === stages[index]) ? ordered : instants;
   for (const [index, raw] of scans.entries()) {
     const description = String(raw.description ?? UNWORDED_STEP).trim();
     const location = String(raw.location ?? '').trim();
-    const occurredAt = instants[index];
+    const occurredAt = dated[index];
     if (!occurredAt) continue;
     const identity = providerEventId(carrierId, clockDays[index] ? raw.local_time : days[index] ?? raw.time, location, description);
     if (identities.has(identity)) continue;

@@ -273,6 +273,36 @@ describe('tracking event normalization', () => {
       .map((row) => (row.raw_data as JsonObject).observed_without_provider_timestamp)).toEqual([true]);
   });
 
+  it('dates a scan given by its day alone a second after the scans of its day from any source, in its order', () => {
+    // FedEx gives its pickup by its day; 17TRACK timed the label that day (synthetic scans).
+    const pickup = { local_time: '2026-10-30', description: 'Picked up', stage: 'accepted' };
+    const label = { provider_event_id: 'unknown:label', occurred_at: '2026-10-30T19:12:00+00:00', stage: 'registered',
+      description: 'Label created', universal_provider: '17TRACK' };
+    const dated = (stored: JsonObject[], events: JsonObject[] = [pickup], now = new Date('2026-10-31T08:00:00Z')) => buildEvents(
+      { id: 'package-1', carrier: 'fedex', current_stage: 'accepted', [STORED_EVENT_IDENTITIES]: stored },
+      { status: 'in_transit', current_stage: 'accepted', last_status_text: 'Picked up', last_update: null, timezone: 'America/Chicago', events } as CarrierResult,
+      'fedex', now).map((row) => row.occurred_at);
+    // The day starts at 05:00 UTC in Chicago, and stays the scan's identity.
+    expect(dated([])).toEqual(['2026-10-30T05:00:00Z']);
+    expect(dated([label])).toEqual(['2026-10-30T19:12:01Z']);
+    expect(buildEvents({ id: 'package-1', carrier: 'fedex', [STORED_EVENT_IDENTITIES]: [label] }, { status: 'in_transit',
+      current_stage: 'accepted', last_status_text: 'Picked up', last_update: null, timezone: 'America/Chicago', events: [pickup] } as CarrierResult,
+    'fedex', new Date('2026-10-31T08:00:00Z'))[0]!.provider_event_id).toBe(providerEventId('fedex', '2026-10-30', '', 'Picked up'));
+    // Not after a row of a later stage, another day, a time past the check, a row it would pass, or an observed row.
+    expect(dated([{ ...label, stage: 'in_transit' }])).toEqual(['2026-10-30T05:00:00Z']);
+    expect(dated([{ ...label, occurred_at: '2026-10-31T06:00:00+00:00' }])).toEqual(['2026-10-30T05:00:00Z']);
+    expect(dated([label], [pickup], new Date('2026-10-30T19:00:00Z'))).toEqual(['2026-10-30T05:00:00Z']);
+    expect(dated([label, { ...label, provider_event_id: 'unknown:departed', occurred_at: '2026-10-30T18:00:00+00:00', stage: 'in_transit' }]))
+      .toEqual(['2026-10-30T05:00:00Z']);
+    expect(dated([label, { ...label, provider_event_id: 'fedex:seen', occurred_at: '2026-10-30T12:00:00+00:00', stage: 'accepted',
+      observed_without_provider_timestamp: true }])).toEqual(['2026-10-30T05:00:00Z']);
+    // Nor past the next scan the answer lists; a scan of its own answer before it on that day still leads.
+    expect(dated([label], [{ time: '2026-10-30T15:00:00Z', description: 'Shipment information sent', stage: 'registered' }, pickup]))
+      .toEqual(['2026-10-30T15:00:00Z', '2026-10-30T05:00:00Z']);
+    expect(dated([], [pickup, { time: '2026-10-30T15:00:00Z', description: 'Label created', stage: 'registered' }]))
+      .toEqual(['2026-10-30T15:00:01Z', '2026-10-30T15:00:00Z']);
+  });
+
   it('starts a day on the carrier\'s home clock, not its catalog zone of UTC', () => {
     // USPS dates pre-shipment info by its day alone; its catalog zone is UTC (synthetic scans).
     const rows = buildEvents({ id: 'package-1', carrier: 'usps', current_stage: 'registered' }, {

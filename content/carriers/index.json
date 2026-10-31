@@ -46,7 +46,7 @@
   { "id": "dhl-ecommerce-es", "catalog": "dhl-ecommerce-es", "name": "DHL eCommerce Iberia", "languages": ["en", "es", "pt"] },
   { "id": "dhl-ecommerce-pl", "catalog": "dhl-ecommerce-pl", "name": "DHL eCommerce Poland", "languages": ["en", "pl"] },
   { "id": "dhl-ecommerce-uk", "catalog": "dhl-ecommerce-uk", "name": "DHL eCommerce UK", "languages": ["en"] },
-  { "id": "gofo-fr", "catalog": "gofo-fr", "name": "GOFO France", "languages": ["en", "fr"] },
+  { "id": "gofo-fr", "catalog": "gofo-fr", "name": "GOFO France", "languages": ["en", "fr", "es"] },
   { "id": "gofo-it", "catalog": "gofo-it", "name": "GOFO Italy", "languages": ["en", "it"] },
   { "id": "speedpak", "catalog": "speedpak", "name": "SpeedPAK", "languages": ["en", "de", "fr", "it", "es"] },
   { "id": "asendia", "catalog": "asendia", "name": "Asendia", "languages": ["en", "fr", "de", "it"] },

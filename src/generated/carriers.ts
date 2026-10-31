@@ -2674,6 +2674,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "gofo-fr",
+      "catalog": "gofo-fr",
+      "slug": "gofo-france-seguimiento",
+      "title": "GOFO France seguimiento: número GFFR, estados y ayuda",
+      "name": "GOFO France",
+      "color": "#fc4c02"
+    },
+    {
       "id": "speedpak",
       "catalog": "speedpak",
       "slug": "speedpak-seguimiento",

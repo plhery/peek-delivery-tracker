@@ -1097,6 +1097,14 @@ class CarrierCatalogTests {
     }
 
     @Test
+    fun optionalPostcodeHelpSaysWhatThePostcodeGives() {
+        assertEquals("add.requirement.dpdPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId.Dpd))
+        // GLS's own tracker shows no scans at all without it.
+        assertEquals("add.requirement.glsPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId("gls-at")))
+        assertEquals("add.requirement.glsPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId("gls-pl")))
+    }
+
+    @Test
     fun thePostcodeSuggestedIsTheNewestThatFitsTheCarriersOwnFirst() {
         fun parcel(carrier: CarrierId, postcode: String?, day: Int) =
             this@CarrierCatalogTests.parcel("TESTPARCEL123", "", carrier, "2026-10-0${day}T08:00:00Z", dpdPostcode = postcode)

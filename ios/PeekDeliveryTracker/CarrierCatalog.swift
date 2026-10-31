@@ -524,6 +524,13 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         info(for: carrier).tracking.mode == "automatic"
     }
 
+    /// The line under an optional postcode. It lets DPD show more, while GLS's own
+    /// tracker (GLS Austria, GLS Poland) shows no scans at all without it.
+    func optionalPostcodeHelpKey(_ carrier: CarrierID) -> String {
+        info(for: carrier).tracking.adapter == "gls-de"
+            ? "add.requirement.glsPostcodeOptionalHelp" : "add.requirement.dpdPostcodeOptionalHelp"
+    }
+
     /// Carriers the detect route asks at once.
     static let maximumRecognitions = 5
     /// Brands with several catalog networks ("DPD" is `dpd` and `dpd-fr`), as in

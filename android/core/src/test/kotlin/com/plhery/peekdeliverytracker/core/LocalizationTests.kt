@@ -202,6 +202,7 @@ class LocalizationTests {
         val keys = listOf(
             "add.requirement.dpdPostcodeHelp",
             "add.requirement.dpdPostcodeOptionalHelp",
+            "add.requirement.glsPostcodeOptionalHelp",
             "add.requirement.trackingUrlHelp",
             "auth.emailOption",
             "native.configurationHelp",

@@ -14,6 +14,7 @@ import {
   normalizeTrackingNumber,
   notTrackingNumber,
   parseTrackingInput,
+  requirementHelpKey,
   requirementSatisfied,
   tracksAutomatically,
   typedRequirementValue,
@@ -573,9 +574,7 @@ export function AddParcelSheet({
                     )}
                     {requirement.help && (
                       <small className="field__help">
-                        {t(requirement.field === 'trackingUrl' ? 'add.requirement.trackingUrlHelp'
-                          : requirement.optional ? 'add.requirement.dpdPostcodeOptionalHelp'
-                            : 'add.requirement.dpdPostcodeHelp', { carrier: carrier?.name ?? '' })}
+                        {t(requirementHelpKey(resolvedCarrier, requirement), { carrier: carrier?.name ?? '' })}
                       </small>
                     )}
                   </label>

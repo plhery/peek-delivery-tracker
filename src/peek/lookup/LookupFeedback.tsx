@@ -5,7 +5,7 @@ import { Icon } from '../../components/Icon';
 import { useI18n, type MessageKey } from '../../i18n';
 import { amazonOrdersUrl } from '../../lib/amazon';
 import { carrierBrand } from '../../lib/carrierBrand';
-import { carrierInfo, carrierTrackingHintKey, formatTrackingNumber, tracksAutomatically, typedRequirementValue } from '../../lib/carriers';
+import { carrierInfo, carrierTrackingHintKey, formatTrackingNumber, requirementHelpKey, tracksAutomatically, typedRequirementValue } from '../../lib/carriers';
 import { useNumberRefusal } from '../../lib/numberRefusal';
 import { forgetPostcode } from '../../lib/postcodeMemory';
 import { lettersPostcode, postcodeExample } from '../../lib/postcodeExample';
@@ -188,8 +188,7 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
         </button>}
         {inputTrouble && found.missing?.field === requirement.field && <p className="door-message" role="alert">{t(validation)}</p>}
         <p id={`${id}-help`} className="door-aside">
-          {t(found.suggested ? 'detail.inputSuggested' : !postcode ? 'add.requirement.trackingUrlHelp'
-            : requirement.optional ? 'add.requirement.dpdPostcodeOptionalHelp' : 'add.requirement.dpdPostcodeHelp', { carrier: fieldCarrier.name })}
+          {t(found.suggested ? 'detail.inputSuggested' : requirementHelpKey(fieldCarrier.id, requirement), { carrier: fieldCarrier.name })}
         </p>
         <p className="door-private"><Icon name="lock" />{t('door.postcode.private', { carrier: fieldCarrier.name })}</p>
       </div>;

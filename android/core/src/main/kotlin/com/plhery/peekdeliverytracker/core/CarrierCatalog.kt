@@ -166,6 +166,13 @@ class CarrierCatalog private constructor(
     fun tracksAutomatically(carrier: CarrierId): Boolean = info(carrier).tracking.mode == "automatic"
 
     /**
+     * The line under an optional postcode. It lets DPD show more, while GLS's own
+     * tracker (GLS Austria, GLS Poland) shows no scans at all without it.
+     */
+    fun optionalPostcodeHelpKey(carrier: CarrierId): String =
+        if (info(carrier).tracking.adapter == "gls-de") "add.requirement.glsPostcodeOptionalHelp" else "add.requirement.dpdPostcodeOptionalHelp"
+
+    /**
      * The carriers the detect route asks about an ambiguous number, best first: number evidence, then a
      * passing check digit, then the catalog's recognition rank. A carrier whose recognition names the numbers
      * it answers is asked only about those, and one asked only for its own countries is not asked: this build

@@ -44,6 +44,7 @@
   "add.requirement.dpdPostcode": "Código postal de entrega",
   "add.requirement.dpdPostcodeHelp": "A transportadora precisa do código postal de entrega para mostrar as atualizações da sua encomenda.",
   "add.requirement.dpdPostcodeOptionalHelp": "Com ele, {{carrier}} também mostra as movimentações verificadas e a janela de entrega.",
+  "add.requirement.glsPostcodeOptionalHelp": "{{carrier}} só mostra as movimentações com o código postal de entrega.",
   "add.requirement.postcodeCountry": "País de entrega",
   "add.requirement.trackingUrl": "Link de rastreamento completo",
   "add.requirement.trackingUrlHelp": "Cole o link completo do e-mail de envio.",

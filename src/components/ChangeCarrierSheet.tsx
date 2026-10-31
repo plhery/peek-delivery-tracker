@@ -10,6 +10,7 @@ import {
   carrierTrackingHintKey,
   detectCarrierMatch,
   formatTrackingNumber,
+  requirementHelpKey,
   requirementSatisfied,
   typedRequirementValue,
 } from '../lib/carriers';
@@ -230,9 +231,7 @@ export function ChangeCarrierSheet({
               </PostcodeCountry>
               {requirement.help && (
                 <small className="field__help">
-                  {t(requirement.field === 'trackingUrl' ? 'add.requirement.trackingUrlHelp'
-                    : requirement.optional ? 'add.requirement.dpdPostcodeOptionalHelp'
-                      : 'add.requirement.dpdPostcodeHelp', { carrier: carrier.name })}
+                  {t(requirementHelpKey(chosenCarrier, requirement), { carrier: carrier.name })}
                 </small>
               )}
             </label>

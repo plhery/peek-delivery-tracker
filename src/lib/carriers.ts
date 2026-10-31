@@ -95,6 +95,17 @@ export function carrierRequirements(carrierId: CarrierId, trackingNumber: string
 }
 
 /**
+ * The line under a carrier's input. An optional postcode lets DPD show more, while GLS's own
+ * tracker (GLS Austria, GLS Poland) shows no scans at all without it.
+ */
+export function requirementHelpKey(carrierId: CarrierId, requirement: Pick<CarrierInputRequirement, 'field' | 'optional'>) {
+  if (requirement.field === 'trackingUrl') return 'add.requirement.trackingUrlHelp';
+  if (!requirement.optional) return 'add.requirement.dpdPostcodeHelp';
+  return carrierInfo(carrierId).capabilities.tracking.adapter === 'gls-de'
+    ? 'add.requirement.glsPostcodeOptionalHelp' : 'add.requirement.dpdPostcodeOptionalHelp';
+}
+
+/**
  * What a form keeps of a typed value: the digits of a numeric field, single
  * spaces in a postcode. Letters keep their case, so the caret stays in place.
  */

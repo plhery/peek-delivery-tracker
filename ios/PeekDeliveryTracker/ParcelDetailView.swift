@@ -1260,7 +1260,7 @@ struct ChangeCarrierView: View {
                         }
                     } footer: {
                         if postcodeRequirement?.isOptional == true {
-                            Text(localizer.text("add.requirement.dpdPostcodeOptionalHelp", [
+                            Text(localizer.text(catalog.optionalPostcodeHelpKey(selectedCarrier), [
                                 "carrier": catalog.info(for: selectedCarrier, language: localizer.language).displayName,
                             ]))
                         }

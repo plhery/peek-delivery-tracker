@@ -44,6 +44,7 @@
   "add.requirement.dpdPostcode": "收件邮编",
   "add.requirement.dpdPostcodeHelp": "快递公司需要收件地址的邮编，才能显示包裹的动态。",
   "add.requirement.dpdPostcodeOptionalHelp": "填写后，{{carrier}} 还会显示经过核实的扫描记录和派送时段。",
+  "add.requirement.glsPostcodeOptionalHelp": "{{carrier}} 仅在填写收件邮编后才显示扫描记录。",
   "add.requirement.postcodeCountry": "收件国家/地区",
   "add.requirement.trackingUrl": "完整物流链接",
   "add.requirement.trackingUrlHelp": "粘贴发货邮件中的完整链接。",

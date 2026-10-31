@@ -142,6 +142,7 @@ final class LocalizationTests: XCTestCase {
         let keys = [
             "add.requirement.dpdPostcodeHelp",
             "add.requirement.dpdPostcodeOptionalHelp",
+            "add.requirement.glsPostcodeOptionalHelp",
             "add.requirement.trackingUrlHelp",
             "auth.emailOption",
             "native.configurationHelp",

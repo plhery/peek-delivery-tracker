@@ -356,7 +356,7 @@ private fun ChangeCarrierForm(
             val optional = change.postcodeRequirement?.isOptional == true
             FormSection(
                 null,
-                footer = if (optional) localizer.text("add.requirement.dpdPostcodeOptionalHelp", mapOf("carrier" to carrierName)) else null,
+                footer = if (optional) localizer.text(catalog.optionalPostcodeHelpKey(change.selectedCarrier), mapOf("carrier" to carrierName)) else null,
             ) {
                 for (requirement in requirements) {
                     when (requirement.field) {

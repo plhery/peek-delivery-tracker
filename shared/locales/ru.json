@@ -44,6 +44,7 @@
   "add.requirement.dpdPostcode": "Индекс получателя",
   "add.requirement.dpdPostcodeHelp": "Службе доставки нужен индекс получателя, чтобы показать обновления по посылке.",
   "add.requirement.dpdPostcodeOptionalHelp": "С ним {{carrier}} покажет также подтверждённые отметки и интервал доставки.",
+  "add.requirement.glsPostcodeOptionalHelp": "{{carrier}} показывает отметки только при указании индекса получателя.",
   "add.requirement.postcodeCountry": "Страна доставки",
   "add.requirement.trackingUrl": "Полная ссылка отслеживания",
   "add.requirement.trackingUrlHelp": "Вставь полную ссылку из письма об отправке.",

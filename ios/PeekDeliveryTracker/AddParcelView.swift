@@ -629,7 +629,7 @@ struct AddParcelView: View {
                     requirementField(
                         title: localizer.text("add.requirement.dpdPostcode"),
                         help: requirement.isOptional
-                            ? localizer.text("add.requirement.dpdPostcodeOptionalHelp", [
+                            ? localizer.text(catalog.optionalPostcodeHelpKey(resolvedCarrier), [
                                 "carrier": catalog.info(for: resolvedCarrier, language: localizer.language).displayName,
                             ])
                             : localizer.text("add.requirement.dpdPostcodeHelp"),

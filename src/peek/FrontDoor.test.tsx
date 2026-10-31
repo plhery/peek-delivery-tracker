@@ -402,6 +402,18 @@ describe('FrontDoor', () => {
     await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: SHARED, carrier: 'gls-ch', dpdPostcode: '8004' }, expect.any(AbortSignal)));
   });
 
+  it.each([
+    ['dpd', 'With it, DPD Switzerland also shows verified scans and the delivery window.'],
+    // GLS's own tracker shows no scans at all without it.
+    ['gls-at', 'GLS Austria shows its scans only with the delivery postcode.'],
+  ])('says what an optional postcode gives %s', async (carrier, help) => {
+    mocks.detect.mockResolvedValueOnce({ trackingNumber: SHARED, carrier, asked: [carrier] });
+    const { user, field } = door();
+    await user.click(field);
+    await user.paste(SHARED);
+    expect(await screen.findByRole('textbox', { name: /Delivery postcode/ })).toHaveAccessibleDescription(help);
+  });
+
   it('only offers a postcode this device gave before when the carrier can do without', async () => {
     rememberPostcode('gls-ch', '8004');
     mocks.detect.mockResolvedValueOnce({ trackingNumber: SHARED, carrier: 'dpd', asked: ['dpd'] });

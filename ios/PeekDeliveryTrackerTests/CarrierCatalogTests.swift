@@ -943,6 +943,13 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(paack.normalizedValue("sw1a 1aa"), "SW1A1AA")
     }
 
+    func testOptionalPostcodeHelpSaysWhatThePostcodeGives() {
+        XCTAssertEqual(catalog.optionalPostcodeHelpKey(.dpd), "add.requirement.dpdPostcodeOptionalHelp")
+        // GLS's own tracker shows no scans at all without it.
+        XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: "gls-at")), "add.requirement.glsPostcodeOptionalHelp")
+        XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: "gls-pl")), "add.requirement.glsPostcodeOptionalHelp")
+    }
+
     func testThePostcodeSuggestedIsTheNewestThatFitsTheCarriersOwnFirst() throws {
         func requirement(_ carrier: CarrierID, _ number: String) throws -> CarrierRequirement {
             try XCTUnwrap(catalog.requirements(for: carrier, trackingNumber: number).first { $0.field == .dpdPostcode })

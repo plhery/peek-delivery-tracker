@@ -1249,7 +1249,8 @@ export class TrackingSyncService {
         daytime ? MAX_PACKAGES_PER_OWNER_PER_SYNC : MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC);
       const parcels = [...shares.filter((parcel) => !rechecks.has(parcel)),
         ...await this.oneOffPackages(due(true), due(true, true), now,
-          daytime ? MAX_ONE_OFF_PACKAGES_PER_SYNC : MAX_ONE_OFF_PACKAGES_PER_OVERNIGHT_SYNC, context.signal),
+          daytime ? MAX_ONE_OFF_PACKAGES_PER_SYNC : MAX_ONE_OFF_PACKAGES_PER_OVERNIGHT_SYNC, context.signal,
+          daytime ? undefined : (parcel) => !unwatched.has(String(parcel.id))),
         ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)];
       // Copies of one number, in several accounts or followed without one, share their lookups.
       const lookups = new SharedLookups(parcels);
@@ -1410,7 +1411,9 @@ export class TrackingSyncService {
    * that delivers them. They come after every account's share and count as
    * one owner, the followed ones first, each the least recently checked first,
    * so lookups cannot starve accounts. Nor can they stop them: when a list
-   * cannot be read, the others are still checked.
+   * cannot be read, the others are still checked. Overnight, when a run takes
+   * three, the ones someone waits for (`watched`: an alert on, or a link read in
+   * the last hour) go first.
    */
   private async oneOffPackages(
     followedDue: (parcel: JsonObject) => boolean,
@@ -1418,6 +1421,7 @@ export class TrackingSyncService {
     now: Date,
     limit: number,
     signal?: AbortSignal,
+    watched?: (parcel: JsonObject) => boolean,
   ): Promise<JsonObject[]> {
     const list = async (operation: string, read: () => Promise<JsonObject[]>) => {
       try { return await read(); }
@@ -1432,8 +1436,8 @@ export class TrackingSyncService {
     const listed = new Set(followed.map((parcel) => String(parcel.id)));
     const unfiled = await list('list_unfiled_one_off_packages',
       () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS));
-    return [...followed.filter(followedDue), ...unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel))]
-      .slice(0, limit);
+    const due = [...followed.filter(followedDue), ...unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel))];
+    return (watched ? [...due.filter(watched), ...due.filter((parcel) => !watched(parcel))] : due).slice(0, limit);
   }
 
   /**

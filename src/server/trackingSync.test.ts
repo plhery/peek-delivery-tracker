@@ -2644,6 +2644,34 @@ describe('TrackingSyncService', () => {
       .toEqual(['a1', 'b1', 'legacy', 'one-off-1', 'one-off-2', 'one-off-3']);
   });
 
+  it('checks the one-off parcels someone waits for first overnight, whichever was checked longer ago', async () => {
+    const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
+      last_synced_at: '2026-09-09T21:00:00Z', sync_status: 'ok', user_id: null, one_off: true };
+    // Nobody reads these two and no alert is on, but a provider has just named their carrier: due at every run.
+    const named = { carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post', carrier_named_at: '2026-09-09T22:55:00Z' } } };
+    const oneOffs = [
+      { ...due, ...named, id: 'named-1', last_synced_at: '2026-09-09T20:00:00Z' },
+      { ...due, ...named, id: 'named-2', last_synced_at: '2026-09-09T20:30:00Z' },
+      ...['alerted-1', 'alerted-2', 'read-1'].map((id) => ({ ...due, id })),
+    ];
+    const client = fakeClient([]);
+    client.listFollowedOneOffPackages.mockResolvedValue(oneOffs);
+    client.listUnwatchedPackageIds.mockResolvedValue(['named-1', 'named-2']);
+    const now = new Date('2026-09-09T23:00:00Z');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => now);
+    await service.sync();
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['alerted-1', 'alerted-2', 'read-1']);
+    // By day a run takes ten, the least recently checked first.
+    client.startSyncAttempt.mockClear();
+    now.setTime(Date.parse('2026-09-10T09:00:00Z'));
+    client.listFollowedOneOffPackages.mockResolvedValue(oneOffs.map((parcel) => ({ ...parcel,
+      carrier_data: { routing: { ...named.carrier_data.routing, carrier_named_at: '2026-09-10T08:55:00Z' } } })));
+    await service.sync();
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
+      .toEqual(['named-1', 'named-2', 'alerted-1', 'alerted-2', 'read-1']);
+  });
+
   it('asks once for the copies of a number in a run and keeps them on one route', async () => {
     const routing = (preferred: string) => ({ version: 1, configured_carrier: 'unknown', failures: {}, probe_cursor: 0, discovery_cursor: 0,
       preferred_provider: preferred, preferred_number: 'TEST1234', last_success_at: '2026-09-10T11:00:00Z', last_probe_at: '2026-09-10T11:00:00Z' });

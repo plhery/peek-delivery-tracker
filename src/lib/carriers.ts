@@ -12,6 +12,7 @@ import {
   normalizeTrackingNumber,
 } from 'universal-parcel-scraper';
 import { catalogLanguage, tagLocale } from './locale';
+import type { MessageKey } from './messages';
 import {
   activeTrackingCarrierId,
   displayedCarrierId,
@@ -95,14 +96,32 @@ export function carrierRequirements(carrierId: CarrierId, trackingNumber: string
 }
 
 /**
- * The line under a carrier's input. An optional postcode lets DPD show more, while GLS's own
- * tracker (GLS Austria, GLS Poland) shows no scans at all without it.
+ * What an optional postcode gives, by the adapter that asks for it; DPD's line when it only shows more.
+ * GLS's own tracker and Asendia's show no scans without it, the others no parcel at all, or PostNL none
+ * sent within the Netherlands; DHL needs it only for a number several shipments share, Canpar for some
+ * shorter numbers.
  */
-export function requirementHelpKey(carrierId: CarrierId, requirement: Pick<CarrierInputRequirement, 'field' | 'optional'>) {
+const OPTIONAL_POSTCODE_HELP: Readonly<Partial<Record<string, MessageKey>>> = {
+  'gls-de': 'add.requirement.glsPostcodeOptionalHelp',
+  asendia: 'add.requirement.glsPostcodeOptionalHelp',
+  'arrow-xl': 'add.requirement.postcodeOnlyOptionalHelp',
+  paack: 'add.requirement.postcodeOnlyOptionalHelp',
+  xdp: 'add.requirement.postcodeOnlyOptionalHelp',
+  dx: 'add.requirement.postcodeOnlyOptionalHelp',
+  relaytech: 'add.requirement.postcodeOnlyOptionalHelp',
+  'gebrueder-weiss': 'add.requirement.postcodeOnlyOptionalHelp',
+  'a-tu-hora-express': 'add.requirement.postcodeOnlyOptionalHelp',
+  'spring-gds': 'add.requirement.postnlPostcodeOptionalHelp',
+  dhl: 'add.requirement.dhlPostcodeOptionalHelp',
+  canpar: 'add.requirement.canparPostcodeOptionalHelp',
+};
+
+/** The line under a carrier's input. An optional postcode says what it gives (`OPTIONAL_POSTCODE_HELP`). */
+export function requirementHelpKey(carrierId: CarrierId, requirement: Pick<CarrierInputRequirement, 'field' | 'optional'>): MessageKey {
   if (requirement.field === 'trackingUrl') return 'add.requirement.trackingUrlHelp';
   if (!requirement.optional) return 'add.requirement.dpdPostcodeHelp';
-  return carrierInfo(carrierId).capabilities.tracking.adapter === 'gls-de'
-    ? 'add.requirement.glsPostcodeOptionalHelp' : 'add.requirement.dpdPostcodeOptionalHelp';
+  const adapter = carrierInfo(carrierId).capabilities.tracking.adapter;
+  return (adapter ? OPTIONAL_POSTCODE_HELP[adapter] : undefined) ?? 'add.requirement.dpdPostcodeOptionalHelp';
 }
 
 /**

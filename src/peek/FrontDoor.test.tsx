@@ -406,6 +406,8 @@ describe('FrontDoor', () => {
     ['dpd', 'With it, DPD Switzerland also shows verified scans and the delivery window.'],
     // GLS's own tracker shows no scans at all without it.
     ['gls-at', 'GLS Austria shows its scans only with the delivery postcode.'],
+    // ArrowXL's shows no delivery at all.
+    ['arrow-xl', 'ArrowXL shows the parcel only with the delivery postcode.'],
   ])('says what an optional postcode gives %s', async (carrier, help) => {
     mocks.detect.mockResolvedValueOnce({ trackingNumber: SHARED, carrier, asked: [carrier] });
     const { user, field } = door();

@@ -165,12 +165,9 @@ class CarrierCatalog private constructor(
 
     fun tracksAutomatically(carrier: CarrierId): Boolean = info(carrier).tracking.mode == "automatic"
 
-    /**
-     * The line under an optional postcode. It lets DPD show more, while GLS's own
-     * tracker (GLS Austria, GLS Poland) shows no scans at all without it.
-     */
+    /** The line under an optional postcode (`OPTIONAL_POSTCODE_HELP`). */
     fun optionalPostcodeHelpKey(carrier: CarrierId): String =
-        if (info(carrier).tracking.adapter == "gls-de") "add.requirement.glsPostcodeOptionalHelp" else "add.requirement.dpdPostcodeOptionalHelp"
+        info(carrier).tracking.adapter?.let { OPTIONAL_POSTCODE_HELP[it] } ?: "add.requirement.dpdPostcodeOptionalHelp"
 
     /**
      * The carriers the detect route asks about an ambiguous number, best first: number evidence, then a
@@ -897,6 +894,27 @@ class CarrierCatalog private constructor(
 
     companion object {
         private const val MEMO_LIMIT = 4_096
+
+        /**
+         * What an optional postcode gives, by the adapter that asks for it; DPD's line when it only shows more.
+         * GLS's own tracker and Asendia's show no scans without it, the others no parcel at all, or PostNL none
+         * sent within the Netherlands; DHL needs it only for a number several shipments share, Canpar for some
+         * shorter numbers. As the web's `requirementHelpKey`.
+         */
+        private val OPTIONAL_POSTCODE_HELP = mapOf(
+            "gls-de" to "add.requirement.glsPostcodeOptionalHelp",
+            "asendia" to "add.requirement.glsPostcodeOptionalHelp",
+            "arrow-xl" to "add.requirement.postcodeOnlyOptionalHelp",
+            "paack" to "add.requirement.postcodeOnlyOptionalHelp",
+            "xdp" to "add.requirement.postcodeOnlyOptionalHelp",
+            "dx" to "add.requirement.postcodeOnlyOptionalHelp",
+            "relaytech" to "add.requirement.postcodeOnlyOptionalHelp",
+            "gebrueder-weiss" to "add.requirement.postcodeOnlyOptionalHelp",
+            "a-tu-hora-express" to "add.requirement.postcodeOnlyOptionalHelp",
+            "spring-gds" to "add.requirement.postnlPostcodeOptionalHelp",
+            "dhl" to "add.requirement.dhlPostcodeOptionalHelp",
+            "canpar" to "add.requirement.canparPostcodeOptionalHelp",
+        )
         private val refreshInterval: Duration = Duration.ofMinutes(15)
 
         /** Far above the catalog, which grows with each scraper release: a larger answer is refused and the

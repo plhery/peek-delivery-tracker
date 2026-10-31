@@ -17,6 +17,7 @@ import {
   parcelTrackingLinks,
   parcelTrackingNumbers,
   parseTrackingInput,
+  requirementHelpKey,
   requirementSatisfied,
   supportsSwissPostHandoff,
   trackingLinksByNumber,
@@ -1609,6 +1610,20 @@ describe('expanded carrier catalog', () => {
     expect(glsPostcode).toMatchObject({ field: 'dpdPostcode', inputMode: 'text', maxLength: 12 });
     for (const postcode of ['10115', '1012 AB', '75001', '1010']) expect(requirementSatisfied(glsPostcode!, postcode), postcode).toBe(true);
     expect(requirementSatisfied(glsPostcode!, '80')).toBe(false);
+  });
+
+  it('says what an optional postcode gives each carrier', () => {
+    const optional = { field: 'dpdPostcode', optional: true } as const;
+    expect(requirementHelpKey('dpd', optional)).toBe('add.requirement.dpdPostcodeOptionalHelp');
+    // GLS's own tracker and Asendia's show no scans without it.
+    for (const carrier of ['gls-at', 'gls-pl', 'asendia'] as const) expect(requirementHelpKey(carrier, optional), carrier).toBe('add.requirement.glsPostcodeOptionalHelp');
+    for (const carrier of ['arrow-xl', 'paack', 'xdp', 'dx', 'relaytech', 'gebrueder-weiss', 'a-tu-hora-express'] as const) {
+      expect(requirementHelpKey(carrier, optional), carrier).toBe('add.requirement.postcodeOnlyOptionalHelp');
+    }
+    expect(requirementHelpKey('spring-gds', optional)).toBe('add.requirement.postnlPostcodeOptionalHelp');
+    expect(requirementHelpKey('dhl', optional)).toBe('add.requirement.dhlPostcodeOptionalHelp');
+    expect(requirementHelpKey('canpar', optional)).toBe('add.requirement.canparPostcodeOptionalHelp');
+    expect(requirementHelpKey('dhl', { field: 'dpdPostcode', optional: false })).toBe('add.requirement.dpdPostcodeHelp');
   });
 
   it.each([

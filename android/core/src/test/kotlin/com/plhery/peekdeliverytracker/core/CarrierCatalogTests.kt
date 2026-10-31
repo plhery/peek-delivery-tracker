@@ -1102,6 +1102,13 @@ class CarrierCatalogTests {
         // GLS's own tracker shows no scans at all without it.
         assertEquals("add.requirement.glsPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId("gls-at")))
         assertEquals("add.requirement.glsPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId("gls-pl")))
+        assertEquals("add.requirement.glsPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId("asendia")))
+        for (carrier in listOf("arrow-xl", "paack", "xdp", "dx", "relaytech", "gebrueder-weiss", "a-tu-hora-express")) {
+            assertEquals(carrier, "add.requirement.postcodeOnlyOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId(carrier)))
+        }
+        assertEquals("add.requirement.postnlPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId("spring-gds")))
+        assertEquals("add.requirement.dhlPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId.Dhl))
+        assertEquals("add.requirement.canparPostcodeOptionalHelp", catalog.optionalPostcodeHelpKey(CarrierId("canpar")))
     }
 
     @Test

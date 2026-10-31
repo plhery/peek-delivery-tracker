@@ -948,6 +948,13 @@ final class CarrierCatalogTests: XCTestCase {
         // GLS's own tracker shows no scans at all without it.
         XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: "gls-at")), "add.requirement.glsPostcodeOptionalHelp")
         XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: "gls-pl")), "add.requirement.glsPostcodeOptionalHelp")
+        XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: "asendia")), "add.requirement.glsPostcodeOptionalHelp")
+        for carrier in ["arrow-xl", "paack", "xdp", "dx", "relaytech", "gebrueder-weiss", "a-tu-hora-express"] {
+            XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: carrier)), "add.requirement.postcodeOnlyOptionalHelp", carrier)
+        }
+        XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: "spring-gds")), "add.requirement.postnlPostcodeOptionalHelp")
+        XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: "dhl")), "add.requirement.dhlPostcodeOptionalHelp")
+        XCTAssertEqual(catalog.optionalPostcodeHelpKey(CarrierID(rawValue: "canpar")), "add.requirement.canparPostcodeOptionalHelp")
     }
 
     func testThePostcodeSuggestedIsTheNewestThatFitsTheCarriersOwnFirst() throws {

@@ -1512,6 +1512,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "HuaHan Logistics tracking: HHW…YQ numbers and who delivers",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "epost-global-tracking",
+      "title": "ePost Global tracking: EPG numbers and who delivers",
+      "name": "ePost Global",
+      "color": "#27967a"
     }
   ],
   "de": [

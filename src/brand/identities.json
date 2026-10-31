@@ -923,6 +923,9 @@
   "e-commerce-international": {
     "decal": "e-commerce-international"
   },
+  "e24metro-ca": {
+    "decal": "e24metro-ca"
+  },
   "eac-cn": {
     "decal": "eac-cn"
   },
@@ -1081,6 +1084,9 @@
   "exmate": {
     "decal": "exmate"
   },
+  "expedico": {
+    "decal": "expedico"
+  },
   "express-one": {
     "decal": "express-one"
   },
@@ -1215,6 +1221,9 @@
   },
   "freightways-global": {
     "decal": "freightways-global"
+  },
+  "frontier-ca": {
+    "decal": "frontier-ca"
   },
   "fukuyama": {
     "decal": "fukuyama"
@@ -1394,6 +1403,9 @@
   "hct-logistics": {
     "decal": "hct-logistics"
   },
+  "hecny-ecom": {
+    "decal": "hecny-ecom"
+  },
   "helthjem": {
     "decal": "helthjem",
     "palette": {
@@ -1444,6 +1456,12 @@
   },
   "hongkong-post": {
     "decal": "hongkong-post"
+  },
+  "hongsuda": {
+    "decal": "hongsuda",
+    "palette": {
+      "accent": "#000000"
+    }
   },
   "horoz": {
     "decal": "horoz"
@@ -1627,6 +1645,9 @@
   "japan-post": {
     "decal": "japan-post"
   },
+  "jaskipin": {
+    "decal": "jaskipin"
+  },
   "jcex": {
     "decal": "jcex"
   },
@@ -1801,6 +1822,9 @@
   },
   "leopards-courier": {
     "decal": "leopards-courier"
+  },
+  "letter-track": {
+    "decal": "letter-track"
   },
   "lex-my": {
     "decal": "lex-my"
@@ -2194,6 +2218,9 @@
   "parcelforce": {
     "decal": "parcelforce"
   },
+  "parceljet": {
+    "decal": "parceljet"
+  },
   "parcelpoint": {
     "decal": "parcelpoint"
   },
@@ -2202,6 +2229,9 @@
   },
   "parxl": {
     "decal": "parxl"
+  },
+  "pasarex": {
+    "decal": "pasarex"
   },
   "passport": {
     "decal": "passport",
@@ -2447,6 +2477,9 @@
   },
   "pushpak-courier": {
     "decal": "pushpak-courier"
+  },
+  "qls-quince": {
+    "decal": "qls-quince"
   },
   "quality-post": {
     "decal": "quality-post",

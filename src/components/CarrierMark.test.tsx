@@ -387,6 +387,16 @@ describe('carrier mark', () => {
     'safeway-express-cargo',
     'w-express-ph',
     'ecohai',
+    'qls-quince',
+    'hongsuda',
+    'expedico',
+    'pasarex',
+    'parceljet',
+    'letter-track',
+    'frontier-ca',
+    'e24metro-ca',
+    'hecny-ecom',
+    'jaskipin',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

@@ -375,7 +375,17 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'pago'
   | 'safeway-express-cargo'
   | 'w-express-ph'
-  | 'ecohai';
+  | 'ecohai'
+  | 'qls-quince'
+  | 'hongsuda'
+  | 'expedico'
+  | 'pasarex'
+  | 'parceljet'
+  | 'letter-track'
+  | 'frontier-ca'
+  | 'e24metro-ca'
+  | 'hecny-ecom'
+  | 'jaskipin';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

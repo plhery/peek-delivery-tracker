@@ -451,6 +451,16 @@ describe('carrier brand', () => {
       'safeway-express-cargo',
       'w-express-ph',
       'ecohai',
+      'qls-quince',
+      'hongsuda',
+      'expedico',
+      'pasarex',
+      'parceljet',
+      'letter-track',
+      'frontier-ca',
+      'e24metro-ca',
+      'hecny-ecom',
+      'jaskipin',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

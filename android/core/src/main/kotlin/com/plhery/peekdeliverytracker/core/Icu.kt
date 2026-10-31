@@ -31,6 +31,35 @@ object Icu {
 
     /** Distances, which Foundation's measurement format style writes with ICU. */
     val lengths: LengthFormatter = packages.firstNotNullOfOrNull { IcuLengths.from(it) } ?: JdkLengths
+
+    /** Lists of names, which Foundation's `ListFormatter` joins with ICU. */
+    val lists: ListJoiner = packages.firstNotNullOfOrNull { IcuLists.from("$it.text") } ?: ListJoiner { names, _ -> names.joinToString(", ") }
+}
+
+/** ICU's `ListFormatter`: "A, B and C" in a locale's words. */
+fun interface ListJoiner {
+    fun join(names: List<String>, locale: Locale): String
+}
+
+/** ICU's `ListFormatter` (android.icu.text, com.ibm.icu.text), found by name. */
+internal class IcuLists private constructor(packageName: String) : ListJoiner {
+    private val formatterClass = Class.forName("$packageName.ListFormatter")
+    private val getInstance = formatterClass.getMethod("getInstance", Locale::class.java)
+    private val format = formatterClass.getMethod("format", Collection::class.java)
+    private val formatters = ConcurrentHashMap<Locale, Any>()
+
+    override fun join(names: List<String>, locale: Locale): String =
+        format.invoke(formatters.getOrPut(locale) { getInstance.invoke(null, locale) }, names) as String
+
+    companion object {
+        fun from(packageName: String): IcuLists? = try {
+            IcuLists(packageName)
+        } catch (_: ReflectiveOperationException) {
+            null
+        } catch (_: LinkageError) {
+            null
+        }
+    }
 }
 
 /** ICU's UTS #46 processing (`IDNA.nameToASCII`, `nameToUnicode`): the converted name and the `IDNA.Error`s met, by name. */

@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.platform
 import android.content.Context
 import android.net.Uri
 import android.webkit.CookieManager
+import android.webkit.ValueCallback
 import android.webkit.WebView
 import android.widget.FrameLayout
 import androidx.test.core.app.ApplicationProvider
@@ -21,8 +22,9 @@ import org.robolectric.Shadows.shadowOf
 /**
  * The check's WebView as [turnstilePage] sets it up (B-D41, X-AD45), on Robolectric's WebView and a bridge standing in
  * for WebViewCompat's listener and script: WKWebView's defaults, the page's origin alone for the listener and the script,
- * the script defining the handler the service's page posts through, the teardown in the iPhone's order, and a WebView
- * whose listener or script can't be added destroyed. On a made-up service.
+ * the script defining the handler the service's page posts through (at each document's start, or run by the client in
+ * the page where the WebView can't), the teardown in the iPhone's order, and a WebView whose listener or script can't be
+ * added destroyed. On a made-up service.
  */
 @RunWith(AndroidJUnit4::class)
 class WebViewTurnstilePageTest {
@@ -44,7 +46,7 @@ class WebViewTurnstilePageTest {
 
     @Test
     fun theWebViewTakesWKWebViewsDefaultsThePagesGroundAndTheChecksClientAndLoadsOnlyWhenAsked() {
-        val made = turnstilePage(web, page, 0xFF121212.toInt(), events, bridge)
+        val made = turnstilePage(web, page, true, 0xFF121212.toInt(), events, bridge)
         val settings = web.settings
         assertTrue(settings.javaScriptEnabled)
         assertTrue(settings.domStorageEnabled)
@@ -65,7 +67,7 @@ class WebViewTurnstilePageTest {
 
     @Test
     fun theListenerAndTheScriptAreForThePagesOriginAloneItsPortIncluded() {
-        turnstilePage(web, page, 0, events, bridge)
+        turnstilePage(web, page, false, 0, events, bridge)
         assertEquals(setOf("https://peek.example:8443"), bridge.listenedTo)
         assertEquals(setOf("https://peek.example:8443"), bridge.scriptedFor)
         assertEquals("https://peek.example", WebViewTurnstilePage.origin("https://peek.example/api/public/native/turnstile?language=en"))
@@ -73,7 +75,7 @@ class WebViewTurnstilePageTest {
 
     @Test
     fun theScriptDefinesTheHandlerTheServicesPagePostsThroughAndForwardsEachMessageAsJson() {
-        val made = turnstilePage(web, page, 0, events, bridge)
+        val made = turnstilePage(web, page, false, 0, events, bridge)
         // The page posts each message only there (route.ts's `send`).
         val route = File(System.getProperty("user.dir")).resolve("../../app/api/public/native/turnstile/route.ts").readText()
         assertTrue(route.contains("window.webkit?.messageHandlers?.peekVerification?.postMessage({type,token})"))
@@ -89,8 +91,47 @@ class WebViewTurnstilePageTest {
     }
 
     @Test
+    fun whereTheWebViewHasNoDocumentStartScriptTheClientDefinesTheHandlerInThePageAsEachDocumentStartsAndLoads() {
+        val bridge = RecordingBridge(log, documentStart = false)
+        val made = turnstilePage(web, page, false, 0, events, bridge)
+        val client = shadowOf(web).webViewClient as TurnstileClient
+        FrameLayout(context).addView(web)
+        made.load()
+        log.clear()
+        client.onPageStarted(web, page, null)
+        client.onPageFinished(web, page)
+        assertEquals(List(2) { "evaluated ${WebViewTurnstilePage.BRIDGE_SCRIPT}" }, log)
+        // Nowhere but in the page.
+        log.clear()
+        client.onPageStarted(web, "https://elsewhere.example/api/public/native/turnstile?language=de", null)
+        client.onPageFinished(web, "about:blank")
+        assertEquals(emptyList<String>(), log)
+        // Nothing to take away at the teardown, and nothing run after it.
+        made.tearDown()
+        assertEquals(listOf("stop", "listener removed", "destroyed"), log)
+        log.clear()
+        client.onPageFinished(web, page)
+        assertEquals(emptyList<String>(), log)
+        // What the listener hears still reaches the check.
+        val other = LoggedWebView(context, log)
+        turnstilePage(other, page, false, 0, events, bridge).load()
+        bridge.post(other, """{"type":"token","token":"synthetic-token"}""", Uri.parse("https://peek.example:8443"), isMainFrame = true)
+        assertEquals(listOf("token synthetic-token"), heard)
+    }
+
+    @Test
+    fun whereTheWebViewRunsTheScriptAtEachDocumentsStartTheClientRunsNothing() {
+        turnstilePage(web, page, false, 0, events, bridge).load()
+        log.clear()
+        val client = shadowOf(web).webViewClient as TurnstileClient
+        client.onPageStarted(web, page, null)
+        client.onPageFinished(web, page)
+        assertEquals(emptyList<String>(), log)
+    }
+
+    @Test
     fun theTeardownStopsTheLoadTakesTheScriptAndTheListenerAwayThenLeavesTheSheetAndDestroysTheWebView() {
-        val made = turnstilePage(web, page, 0, events, bridge)
+        val made = turnstilePage(web, page, false, 0, events, bridge)
         FrameLayout(context).addView(web)
         made.load()
         log.clear()
@@ -103,7 +144,7 @@ class WebViewTurnstilePageTest {
 
     @Test
     fun aWebViewWhoseRendererHasGoneIsOnlyDestroyed() {
-        val made = turnstilePage(web, page, 0, events, bridge)
+        val made = turnstilePage(web, page, false, 0, events, bridge)
         FrameLayout(context).addView(web)
         (shadowOf(web).webViewClient as TurnstileClient).onRenderProcessGone(web, null)
         assertEquals(listOf("failed"), heard)
@@ -118,7 +159,7 @@ class WebViewTurnstilePageTest {
             val shown = LoggedWebView(context, log)
             log.clear()
             try {
-                turnstilePage(shown, page, 0, events, RecordingBridge(log, failing = failing))
+                turnstilePage(shown, page, false, 0, events, RecordingBridge(log, failing = failing))
                 fail("Expected $failing to fail")
             } catch (_: UnsupportedOperationException) {
             }
@@ -135,8 +176,12 @@ class WebViewTurnstilePageTest {
     }
 }
 
-/** A WebView that notes its load stopped and its destruction, once out of any parent. */
+/** A WebView that notes its load stopped, the scripts run in it and its destruction, once out of any parent. */
 private class LoggedWebView(context: Context, private val log: MutableList<String>) : WebView(context) {
+    override fun evaluateJavascript(script: String, resultCallback: ValueCallback<String>?) {
+        log += "evaluated $script"
+    }
+
     override fun stopLoading() {
         log += "stop"
         super.stopLoading()
@@ -148,8 +193,15 @@ private class LoggedWebView(context: Context, private val log: MutableList<Strin
     }
 }
 
-/** WebViewCompat's listener and script as a test holds them: what was asked, and a listener it can post to. */
-private class RecordingBridge(private val log: MutableList<String>, private val failing: String? = null) : TurnstileBridge {
+/**
+ * WebViewCompat's listener and script as a test holds them: what was asked, and a listener it can post to. Without
+ * `documentStart` the WebView has no document-start script.
+ */
+private class RecordingBridge(
+    private val log: MutableList<String>,
+    private val failing: String? = null,
+    private val documentStart: Boolean = true,
+) : TurnstileBridge {
     var name: String? = null
     var listenedTo: Set<String>? = null
     var scriptedFor: Set<String>? = null
@@ -168,8 +220,9 @@ private class RecordingBridge(private val log: MutableList<String>, private val 
         log += "listener removed"
     }
 
-    override fun script(web: WebView, script: String, origins: Set<String>): () -> Unit {
-        if (failing == "script") throw UnsupportedOperationException("No document-start script")
+    override fun script(web: WebView, script: String, origins: Set<String>): (() -> Unit)? {
+        if (failing == "script") throw UnsupportedOperationException("Adding the document-start script threw")
+        if (!documentStart) return null
         log += "script"
         this.script = script
         scriptedFor = origins

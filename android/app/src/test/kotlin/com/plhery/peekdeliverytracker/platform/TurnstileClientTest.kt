@@ -117,9 +117,10 @@ class TurnstileClientTest {
     }
 
     @Test
-    fun aWebViewWithoutTheMessageListenerAndTheScriptCannotHoldTheCheck() {
+    fun aWebViewWithoutTheMessageListenerCannotHoldTheCheck() {
         assertTrue(WebViewTurnstilePages.supports { true })
-        assertFalse(WebViewTurnstilePages.supports { it == WebViewFeature.WEB_MESSAGE_LISTENER })
+        // Android 12's own WebView (91): the listener without the document-start script, which the client stands in for.
+        assertTrue(WebViewTurnstilePages.supports { it == WebViewFeature.WEB_MESSAGE_LISTENER })
         assertFalse(WebViewTurnstilePages.supports { it == WebViewFeature.DOCUMENT_START_SCRIPT })
         assertFalse(WebViewTurnstilePages.supports { throw IllegalStateException("No WebView package") })
         // Robolectric's WebView has neither feature, as an old WebView doesn't.

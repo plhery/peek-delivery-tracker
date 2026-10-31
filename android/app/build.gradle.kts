@@ -41,6 +41,8 @@ android {
         targetSdk = 37
         versionCode = 1
         versionName = "0.1.0"
+        // What only a device can show (src/androidTest): the WebView's own engine behind the browser check.
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // The iPhone build's settings, under the names its Info.plist gives them (AppConfiguration.from).
         for ((key, setting) in iosSettings) {
             val value = xcconfig[setting].orEmpty().replace("\\", "\\\\").replace("\"", "\\\"")
@@ -165,4 +167,8 @@ dependencies {
     testImplementation(libs.roborazzi.junit.rule)
     testImplementation(libs.mockwebserver)
     testImplementation(libs.window.testing)
+
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.ext.junit)
 }

@@ -252,10 +252,10 @@ private fun TurnstileSheetPage(check: TurnstileCheck, up: Boolean, title: String
 }
 
 /**
- * The page's ground, which the WebView paints where the page leaves its own bare, as the check's does: white, or in dark
- * Chromium's canvas for `color-scheme: dark` (18, 18, 18), whatever the WebView's own background; the iPhone's web view
- * shows the elevated system background there. The bar stands on it as the iPhone's stands on its web view, and the
- * WebView shows it until the page draws.
+ * The page's ground where it leaves its own bare, as the check's does: white, or in dark Chromium's canvas for
+ * `color-scheme: dark` (18, 18, 18). The WebView's own background is it too, which a WebView shows there where it
+ * doesn't paint a canvas of its own (Android 12's, in light); the iPhone's web view shows the elevated system background
+ * there. The bar stands on it as the iPhone's stands on its web view, and the WebView shows it until the page draws.
  */
 internal fun pageGround(dark: Boolean): Color = if (dark) Color(0xFF121212) else Color.White
 

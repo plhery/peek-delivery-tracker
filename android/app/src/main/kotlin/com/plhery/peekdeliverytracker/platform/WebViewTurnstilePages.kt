@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.platform
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.net.http.SslError
 import android.os.Build
@@ -14,6 +15,7 @@ import android.webkit.SslErrorHandler
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.net.toUri
@@ -28,21 +30,23 @@ import java.io.ByteArrayInputStream
 
 /**
  * The browser check's page in a WebView, as the iPhone's WKWebView, by NativeTurnstilePresenter's rules
- * (core/NativeVerification.kt): it needs the WebView's message listener and document-start script, without which the
- * check fails at once.
+ * (core/NativeVerification.kt): it needs the WebView's message listener, without which the check fails at once, and runs
+ * the script that defines the iPhone's handler over it at each document's start where the WebView can, else as each of
+ * the page's documents starts.
  */
 object WebViewTurnstilePages : TurnstilePages {
     override fun supported(): Boolean = supports(WebViewFeature::isFeatureSupported)
 
-    /** Whether a WebView with `feature`s holds the check: its message listener and its document-start script. */
+    /** Whether a WebView with `feature`s holds the check: its message listener. */
     internal fun supports(feature: (String) -> Boolean): Boolean = runCatching {
-        feature(WebViewFeature.WEB_MESSAGE_LISTENER) && feature(WebViewFeature.DOCUMENT_START_SCRIPT)
+        feature(WebViewFeature.WEB_MESSAGE_LISTENER)
     }.getOrDefault(false)
 
-    // A WebView takes light or dark for the page from its context's theme (`isLightTheme`), which the app's says light.
+    // A WebView takes light or dark for the page from its context's theme (`isLightTheme`), which the app's says light;
+    // one from before Android 13's model from force dark (turnstilePage).
     override fun page(context: Context, url: String, dark: Boolean, background: Int, events: TurnstileEvents): TurnstilePage {
         val theme = if (dark) android.R.style.Theme_Material_NoActionBar else android.R.style.Theme_Material_Light_NoActionBar
-        return turnstilePage(WebView(ContextThemeWrapper(context, theme)), url, background, events, WebViewTurnstileBridge)
+        return turnstilePage(WebView(ContextThemeWrapper(context, theme)), url, dark, background, events, WebViewTurnstileBridge)
     }
 }
 
@@ -57,11 +61,14 @@ internal interface TurnstileBridge {
     /** Takes the listener `name` away. */
     fun stopListening(web: WebView, name: String)
 
-    /** Runs `script` at the start of each document at `origins`; what takes it away. */
-    fun script(web: WebView, script: String, origins: Set<String>): () -> Unit
+    /**
+     * Runs `script` at the start of each document at `origins`; what takes it away. Null where this WebView can't
+     * (WebView 91, Android 12's own, has no document-start script): the page's client runs it then.
+     */
+    fun script(web: WebView, script: String, origins: Set<String>): (() -> Unit)?
 }
 
-// The page is made only where WebViewTurnstilePages.supported(): the listener and the script are there.
+// The page is made only where WebViewTurnstilePages.supported(): the listener is there.
 @SuppressLint("RequiresFeature")
 private object WebViewTurnstileBridge : TurnstileBridge {
     override fun listen(web: WebView, name: String, origins: Set<String>, heard: (WebView, String?, Uri, Boolean) -> Unit) =
@@ -71,22 +78,36 @@ private object WebViewTurnstileBridge : TurnstileBridge {
 
     override fun stopListening(web: WebView, name: String) = WebViewCompat.removeWebMessageListener(web, name)
 
-    override fun script(web: WebView, script: String, origins: Set<String>): () -> Unit =
-        WebViewCompat.addDocumentStartJavaScript(web, script, origins)::remove
+    override fun script(web: WebView, script: String, origins: Set<String>): (() -> Unit)? =
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
+            WebViewCompat.addDocumentStartJavaScript(web, script, origins)::remove
+        } else {
+            null
+        }
 }
 
 /**
  * The page at `url` in `web`, with WKWebView's defaults where they matter: JavaScript and DOM storage on, cookies kept
  * as `WKWebsiteDataStore.default()` keeps them, no file or content access, no other window and no zoom, on
- * `background` until it draws. It follows the app's appearance as the iPhone's web view follows its window: the page's
- * own `prefers-color-scheme` says how, and no darkening of the WebView's stands in for a page without a dark look. The
- * page posts through `window.webkit.messageHandlers.peekVerification`, which a script defines at the start of each of
- * its documents over the listener, both for the page's origin alone. Where the listener or the script can't be added,
- * `web` is destroyed, rather than left holding the window, and the error thrown.
+ * `background` until it draws. It follows the app's appearance, dark where `dark`, as the iPhone's web view follows its
+ * window: the page's own `prefers-color-scheme` says how, and no darkening of the WebView's stands in for a page without
+ * a dark look. A WebView from before Android 13's model (Android 12's own) says dark to the page only under force dark,
+ * which asks it for the page's own dark look alone. The page posts through
+ * `window.webkit.messageHandlers.peekVerification`, which a script defines over the listener, both for the page's
+ * origin alone: at the start of each of its documents, or where the WebView can't, as the page's client starts and
+ * finishes each ([TurnstileClient.pageScript]). Where adding the listener or the script throws, `web` is destroyed,
+ * rather than left holding the window, and the error thrown.
  */
 // The check is a script, and the WebView loads the service's page and the check's frames alone.
 @SuppressLint("SetJavaScriptEnabled")
-internal fun turnstilePage(web: WebView, url: String, background: Int, events: TurnstileEvents, bridge: TurnstileBridge): TurnstilePage {
+internal fun turnstilePage(
+    web: WebView,
+    url: String,
+    dark: Boolean,
+    background: Int,
+    events: TurnstileEvents,
+    bridge: TurnstileBridge,
+): TurnstilePage {
     val client = TurnstileClient(url, events)
     try {
         web.settings.apply {
@@ -105,6 +126,14 @@ internal fun turnstilePage(web: WebView, url: String, background: Int, events: T
             web.settings.isAlgorithmicDarkeningAllowed = false
         } else if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
             WebSettingsCompat.setAlgorithmicDarkeningAllowed(web.settings, false)
+        } else {
+            // A WebView from before that model (Android 12's own): dark under force dark, the page's own dark look alone.
+            @Suppress("DEPRECATION")
+            web.settings.forceDark = if (dark) WebSettings.FORCE_DARK_ON else WebSettings.FORCE_DARK_OFF
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK_STRATEGY)) {
+                @Suppress("DEPRECATION")
+                WebSettingsCompat.setForceDarkStrategy(web.settings, WebSettingsCompat.DARK_STRATEGY_WEB_THEME_DARKENING_ONLY)
+            }
         }
         CookieManager.getInstance().setAcceptCookie(true)
         web.setBackgroundColor(background)
@@ -115,6 +144,7 @@ internal fun turnstilePage(web: WebView, url: String, background: Int, events: T
             client.message(isMainFrame, sourceOrigin, view.url, data)
         }
         val removeScript = bridge.script(web, WebViewTurnstilePage.BRIDGE_SCRIPT, origins)
+        if (removeScript == null) client.pageScript = WebViewTurnstilePage.BRIDGE_SCRIPT
         return WebViewTurnstilePage(web, url, client, bridge, removeScript)
     } catch (error: RuntimeException) {
         client.ended = true
@@ -129,7 +159,7 @@ internal class WebViewTurnstilePage(
     private val url: String,
     private val client: TurnstileClient,
     private val bridge: TurnstileBridge,
-    private val removeScript: () -> Unit,
+    private val removeScript: (() -> Unit)?,
 ) : TurnstilePage {
     override val view: View get() = web
 
@@ -143,7 +173,7 @@ internal class WebViewTurnstilePage(
         // A WebView whose renderer has gone takes nothing but its destruction.
         if (!client.gone) {
             web.stopLoading()
-            removeScript()
+            removeScript?.invoke()
             bridge.stopListening(web, BRIDGE)
         }
         (web.parent as? ViewGroup)?.removeView(web)
@@ -183,6 +213,14 @@ internal class TurnstileClient(private val page: String, private val events: Tur
     var gone = false
         private set
 
+    /**
+     * The script that defines the handler in the page where the WebView can't run it at each document's start: run in
+     * the page's main frame as each of its documents starts (`onPageStarted`, which for the load the page asks of it
+     * comes once it is committed) and again once it has loaded, before the page posts anything (only the check's
+     * callbacks do, once Cloudflare's script has come and the check has run).
+     */
+    var pageScript: String? = null
+
     /** A message the page posted, from a frame at `sourceOrigin`, while its main frame's document is at `frameUrl`. */
     fun message(isMainFrame: Boolean, sourceOrigin: Uri, frameUrl: String?, data: String?) {
         if (ended) return
@@ -194,6 +232,16 @@ internal class TurnstileClient(private val page: String, private val events: Tur
             NativeTurnstilePresenter.Answer.Failed -> events.failed()
             null -> Unit
         }
+    }
+
+    override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) = define(view, url)
+
+    override fun onPageFinished(view: WebView?, url: String?) = define(view, url)
+
+    /** [pageScript] run in the page's document at `url`, the page's own alone. */
+    private fun define(view: WebView?, url: String?) {
+        val script = pageScript ?: return
+        if (!ended && url != null && NativeTurnstilePresenter.allows(page, url, true)) view?.evaluateJavascript(script, null)
     }
 
     /** The main frame goes only to the page; a frame of the page only to the check's frames. */

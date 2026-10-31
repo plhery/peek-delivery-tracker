@@ -440,13 +440,18 @@ class NativeVerification(
  *
  * The page is the iPhone's, as the server serves it, and posts each message only through
  * `window.webkit.messageHandlers.peekVerification.postMessage({type, token})`. So in the WebView:
- * - Messages: `WebViewCompat.addWebMessageListener` adds an object, say `peekBridge`, and
- *   `WebViewCompat.addDocumentStartJavaScript` a script that defines the handler on it, both for the page's origin
- *   alone: `window.webkit={messageHandlers:{peekVerification:{postMessage:m=>peekBridge.postMessage(JSON.stringify(m))}}}`.
- *   Without `WebViewFeature.WEB_MESSAGE_LISTENER` and `DOCUMENT_START_SCRIPT` the check fails at once. The listener
- *   gives `answer` its `sourceOrigin`'s scheme and host, `isMainFrame` and `body(message.data)`, and for the frame's
- *   URL, which Android does not report, `webView.url` read there on the main thread: the main frame's document, the
- *   only frame whose messages count. `answer` ignores a message whose frame URL is nil or has a path not the page's.
+ * - Messages: `WebViewCompat.addWebMessageListener` adds an object, say `peekBridge`, for the page's origin alone, and a
+ *   script defines the handler on it:
+ *   `window.webkit={messageHandlers:{peekVerification:{postMessage:m=>peekBridge.postMessage(JSON.stringify(m))}}}`.
+ *   `WebViewCompat.addDocumentStartJavaScript` runs the script at the start of each document at that origin where the
+ *   WebView has `DOCUMENT_START_SCRIPT`. Where it hasn't (Android 12's own WebView 91 has the listener alone),
+ *   `evaluateJavascript` runs it in the page's main frame as each of the page's documents starts (`onPageStarted`,
+ *   which for the load the app asks for comes once it is committed) and again once loaded: before the page can post,
+ *   which it does only from the check's callbacks, once Cloudflare's script has loaded and the check has run. Without
+ *   `WEB_MESSAGE_LISTENER` the check fails at once. The listener gives `answer` its `sourceOrigin`'s scheme and host,
+ *   `isMainFrame` and `body(message.data)`, and for the frame's URL, which Android does not report, `webView.url` read
+ *   there on the main thread: the main frame's document, the only frame whose messages count. `answer` ignores a
+ *   message whose frame URL is nil or has a path not the page's.
  * - Navigation: `shouldOverrideUrlLoading` lets the main frame go only where `allows(page, url, true)`; a redirect of the
  *   main frame it refuses fails the check at once, as WebKit fails the navigation (`didFailProvisionalNavigation`),
  *   where the WebView would report nothing. It sees neither a frame's own loads (an iframe's first, for one) nor a

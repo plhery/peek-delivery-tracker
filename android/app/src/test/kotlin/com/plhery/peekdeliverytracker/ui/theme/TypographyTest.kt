@@ -4,10 +4,14 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.intl.LocaleList
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.isUnspecified
@@ -24,7 +28,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.GraphicsMode
 
+// Text measured as Android lays it out, for where lines break.
+@GraphicsMode(GraphicsMode.Mode.NATIVE)
 @RunWith(AndroidJUnit4::class)
 class TypographyTest {
     @get:Rule
@@ -199,5 +206,26 @@ class TypographyTest {
         assertEquals(FontStyle.Italic, italic.fontStyle)
         assertEquals(body.letterSpacing, italic.letterSpacing)
         assertEquals(body.fontWeight, italic.fontWeight)
+    }
+
+    @Test
+    fun aWordTooLongForItsLineBreaksAtItsHyphenAndOneThatFitsALineGoesThereWhole() {
+        lateinit var measurer: TextMeasurer
+        lateinit var style: TextStyle
+        themed(1f) {
+            ProvideDynamicTypeSize(DynamicTypeSize.Large, AppLanguage.De) {
+                measurer = rememberTextMeasurer()
+                style = PeekTheme.type.title
+            }
+        }
+        assertEquals(LocaleList("de"), style.localeList)
+        fun firstLine(text: String, asWideAs: String): String {
+            val width = measurer.measure(asWideAs, style).size.width
+            return text.substring(0, measurer.measure(text, style, constraints = Constraints(maxWidth = width)).getLineEnd(0))
+        }
+        // Too long by itself: cut at its last hyphen that fits, where Android would cut it after the S.
+        assertEquals("Trail-Wochenend-", firstLine("Trail-Wochenend-Set", asWideAs = "Trail-Wochenend-S"))
+        // A word that fits a line by itself isn't hyphenated: it goes to the next line whole.
+        assertEquals("Kiosk im ", firstLine("Kiosk im Hauptbahnhof", asWideAs = "Kiosk im Hauptbahn"))
     }
 }

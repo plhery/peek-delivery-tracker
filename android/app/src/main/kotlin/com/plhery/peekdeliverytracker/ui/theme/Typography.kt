@@ -11,6 +11,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.intl.LocaleList
+import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.TextUnit
@@ -39,10 +41,15 @@ private val roundedFamily: FontFamily get() = FontFamily.Default
  * own font scaling would make of them: the category already carries the reader's text size, as Dynamic Type does.
  * Line heights are the system font's own; letter spacing gives Roboto SF's widths at each size and weight
  * ([SfWidths]), so lines wrap and truncate where the iPhone's do. In Chinese there is none: the copy is mostly Han
- * characters, which Noto Sans CJK sets as far apart as the iPhone's PingFang does.
+ * characters, which Noto Sans CJK sets as far apart as the iPhone's PingFang does. Text is in the app's language, and
+ * a word too long for a line by itself breaks at a hyphen or a syllable with a hyphen, as the iPhone's does at the
+ * accessibility sizes ("Geburtstags-geschenk"), where Android would cut it between any two letters; a word that fits
+ * a line by itself goes to the next one whole (the simple line break Compose takes by default).
  */
 @Immutable
 class PeekTypography(val size: DynamicTypeSize, private val density: Density, val language: AppLanguage = AppLanguage.En) {
+    private val locales = LocaleList(language.locale.toLanguageTag())
+
     /** `.font(.body)`, `.font(.title2.weight(.bold))`, `.font(.system(.title, design: .rounded))`. */
     fun style(style: IosTextStyle, weight: FontWeight = style.weight, design: FontDesign = FontDesign.Default): TextStyle =
         fixed(style.pointSize(size), weight, design)
@@ -55,6 +62,8 @@ class PeekTypography(val size: DynamicTypeSize, private val density: Density, va
             fontFamily = design.family,
             letterSpacing = design.widths?.takeIf { language != AppLanguage.Zh }?.let { SfWidths.em(size, weight, it).em }
                 ?: TextUnit.Unspecified,
+            localeList = locales,
+            hyphens = Hyphens.Auto,
         )
 
     /** `@ScaledMetric(relativeTo:)`: a length at Large, grown as the style's size grows from Large to this category. */

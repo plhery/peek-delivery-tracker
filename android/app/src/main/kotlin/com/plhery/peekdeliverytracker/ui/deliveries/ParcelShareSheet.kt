@@ -89,6 +89,7 @@ import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.keptFocus
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -604,7 +605,8 @@ private fun GiftWords(work: ParcelShareSheetWork, words: ParcelShareWords) {
 /**
  * `wordsField`: its label in caption secondary, which TalkBack leaves for the field it names, 5 over the field in
  * subheadline, 12 and 10 in on Brand's background with 10-point continuous corners, 44 tall at least. The note grows
- * from two lines to five; who it is from is one line, the name autofill's, whose Done puts the keyboard away.
+ * from two lines to five; who it is from is one line, the name autofill's, whose Done puts the keyboard away. Either
+ * keeps the focus and the keyboard through the window made again.
  */
 @Composable
 private fun WordsField(tag: String, label: String, value: String, name: Boolean, writing: () -> Unit, change: (String) -> Unit) {
@@ -619,6 +621,7 @@ private fun WordsField(tag: String, label: String, value: String, name: Boolean,
             Modifier
                 .fillMaxWidth()
                 .testTag(tag)
+                .keptFocus()
                 .onFocusChanged { if (it.isFocused) writing() }
                 .semantics {
                     contentDescription = label

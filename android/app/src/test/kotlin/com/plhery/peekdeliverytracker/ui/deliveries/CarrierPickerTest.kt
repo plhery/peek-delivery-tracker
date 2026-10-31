@@ -695,6 +695,28 @@ class CarrierPickerTest {
     }
 
     @Test
+    fun theFieldWithTheKeyboardKeepsItThroughAWindowMadeAgainAndWithoutLeavesItAway() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        field().performClick()
+        field().performTextInput("colis")
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        field().assertIsFocused()
+        cancel().assertExists()
+        // The keyboard's Search puts it away, and the next window leaves it away, the search still on.
+        field().performImeAction()
+        field().assertIsNotFocused()
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        field().assertIsNotFocused()
+        cancel().assertExists()
+        assertEquals("colis", fieldText())
+    }
+
+    @Test
     fun theQueryAndTheSectionsStayThroughAWindowMadeAgain() {
         val recreation = Recreation(compose)
         show(recreation = recreation)

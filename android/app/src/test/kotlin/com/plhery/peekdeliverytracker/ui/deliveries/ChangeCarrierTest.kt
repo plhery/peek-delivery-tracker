@@ -23,6 +23,7 @@ import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertTextEquals
@@ -600,6 +601,20 @@ class ChangeCarrierTest {
         node(CHANGE_CARRIER_SAVE).assertIsEnabled().performClick()
         settle()
         assertEquals(listOf(FakeDeliveries.CarrierChangeRequest(chair.id, CarrierId.GlsCh, null, "8001", null, null)), source.carrierRequests)
+    }
+
+    @Test
+    fun aFieldWithTheKeyboardKeepsItThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        fromPage(chair)
+        node(CHANGE_CARRIER_POSTCODE).performClick()
+        node(CHANGE_CARRIER_POSTCODE).performTextInput("80")
+        settle()
+        recreation.recreate()
+        settle()
+        node(CHANGE_CARRIER_POSTCODE).assertIsFocused()
+        assertEquals("80", fieldText(CHANGE_CARRIER_POSTCODE))
     }
 
     @Test

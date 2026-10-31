@@ -26,7 +26,9 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
@@ -41,6 +43,7 @@ import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextReplacement
@@ -717,6 +720,31 @@ class ParcelShareTest {
         assertEquals(ToggleableState.On, state(PARCEL_SHARE_GIFT))
         assertEquals("Happy birthday", editable(PARCEL_SHARE_NOTE))
         assertTrue(node(SHEET_PANEL).getUnclippedBoundsInRoot().top < 80.dp)
+    }
+
+    @Test
+    fun aGiftFieldWithTheKeyboardKeepsItThroughTheWindowMadeAgainAndOneWithoutLeavesItAway() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        openShare()
+        flip(PARCEL_SHARE_GIFT)
+        settle()
+        node(PARCEL_SHARE_FROM).performClick()
+        node(PARCEL_SHARE_FROM).performTextReplacement("Alex")
+        settle()
+        recreation.recreate()
+        settle()
+        node(PARCEL_SHARE_FROM).assertIsFocused()
+        node(PARCEL_SHARE_NOTE).assertIsNotFocused()
+        assertEquals("Alex", editable(PARCEL_SHARE_FROM))
+        // Done puts the keyboard away, and the next window leaves it away.
+        node(PARCEL_SHARE_FROM).performImeAction()
+        settle()
+        node(PARCEL_SHARE_FROM).assertIsNotFocused()
+        recreation.recreate()
+        settle()
+        node(PARCEL_SHARE_FROM).assertIsNotFocused()
+        node(PARCEL_SHARE_NOTE).assertIsNotFocused()
     }
 
     @Test

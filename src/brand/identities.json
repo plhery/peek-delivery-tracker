@@ -741,6 +741,9 @@
   "designer-transport": {
     "decal": "designer-transport"
   },
+  "dex-i": {
+    "decal": "dex-i"
+  },
   "dex-pk": {
     "decal": "dex-pk"
   },
@@ -1629,6 +1632,9 @@
   },
   "juxi-express": {
     "decal": "juxi-express"
+  },
+  "jy-express": {
+    "decal": "jy-express"
   },
   "kargoist": {
     "decal": "kargoist"
@@ -3068,6 +3074,9 @@
       "edge": "#004b87",
       "accent": "#004b87"
     }
+  },
+  "utec-logistics": {
+    "decal": "utec-logistics"
   },
   "uzbekistan-post": {
     "decal": "uzbekistan-post"

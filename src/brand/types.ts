@@ -336,7 +336,10 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'xlmiles'
   | 'yoseus'
   | 'yuema-express'
-  | 'tuodatong';
+  | 'tuodatong'
+  | 'utec-logistics'
+  | 'dex-i'
+  | 'jy-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -412,6 +412,9 @@ describe('carrier brand', () => {
       'yoseus',
       'yuema-express',
       'tuodatong',
+      'utec-logistics',
+      'dex-i',
+      'jy-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

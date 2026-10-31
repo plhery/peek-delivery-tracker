@@ -1528,6 +1528,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GLS Austria tracking: statuses, Parcel Shops and contact",
       "name": "GLS Austria",
       "color": "#ffdd00"
+    },
+    {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "india-post-tracking",
+      "title": "India Post tracking: Speed Post numbers and statuses",
+      "name": "India Post",
+      "color": "#b82025"
     }
   ],
   "de": [

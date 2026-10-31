@@ -213,10 +213,12 @@ internal fun CarrierPicker(
     val list = rememberLazyListState()
     val trimmed = CarrierPickerSearch.trimmedQuery(query)
     val searching = trimmed.isNotEmpty()
-    val letters = remember(catalog, language) { CarrierPickerSearch.letterSections(catalog, language) }
-    val results = remember(catalog, language, trimmed, opening) {
-        if (!searching) emptyList()
-        else CarrierPickerSearch.search(trimmed, catalog, language, preferred = opening.firstOrNull()?.carriers.orEmpty().toSet())
+    // The carriers sorted and their names folded once, not on each letter typed; again for a refreshed catalog.
+    val index = remember(catalog, catalog.definitions, language) { CarrierPickerSearch.Index(catalog, language) }
+    val letters = remember(index) { CarrierPickerSearch.letterSections(index) }
+    val preferred = remember(opening) { opening.firstOrNull()?.carriers.orEmpty().toSet() }
+    val results = remember(index, trimmed, preferred) {
+        if (!searching) emptyList() else CarrierPickerSearch.search(trimmed, index, preferred)
     }
     val entries = remember(letters, results, opening, trimmed, automatic != null, localizer, language) {
         pickerEntries(searching, automatic != null, opening, letters, results) { key, count ->
@@ -329,7 +331,7 @@ internal fun CarrierPicker(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 SearchField(
-                    query, { query = it }, localizer.text("picker.search", mapOf("count" to catalog.selectableCarriers.size)),
+                    query, { query = it }, localizer.text("picker.search", mapOf("count" to index.size)),
                     localizer.text("picker.clear"), onFocus = { searchOn = true }, Modifier.weight(1f),
                 )
                 SearchClose(searchOn, localizer.text("common.close"), endSearch)

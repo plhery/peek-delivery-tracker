@@ -478,6 +478,22 @@ describe('carrier brand', () => {
       'paisley-freight',
       'max-pakket',
       'diakinisis',
+      'shipgce',
+      'espeedpost',
+      '360zebra',
+      'auexpress',
+      'ane-logistics',
+      'china-railway-express',
+      'lhtex',
+      'showl',
+      'elianpost',
+      'bqc-logistics',
+      'king-kong-express',
+      'libang-logistics',
+      'sumxpress',
+      'suning-logistics',
+      'rrs-logistics',
+      'changjiang-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

@@ -20,6 +20,7 @@ and [`truck.json`](truck.json).
 | `247express` | [247express.vn](https://247express.vn/images/logo.png) — logo PNG main fill #ed1f24, shaded with #cd2027 and #991b1e (approximate); the site CSS uses #d92923 for buttons |
 | `2go` | [2go.com.ph](https://2go.com.ph/wp-content/uploads/2025/03/2GO-Only_Magenta-01-2048x882.png) — logo PNG #ec008c (approximate); Elementor primary colour #ec008c |
 | `360lion` | [toms.360lion.com](https://toms.360lion.com/static/img/logo.f9e3a469.png) — logo PNG single fill #cf5d15 (176,075 opaque pixels), for the lion emblem and the 360 LION wordmark |
+| `360zebra` | [360zebra.com](https://www.360zebra.com/img/zb-logo.png?v=20250228) — logo PNG blue, median #014099 of 5,039 pixels, its only colour |
 | `3pe-express` | [3peex.com](https://www.3peex.com/assets/3pe-logo.png) — logo PNG flat blue #005ba3, its most used colour (the upper two thirds of the slanted 3PE), with orange #e77b17 for the letters' lower third and the speed lines either side |
 | `4-72` | [4-72.com.co](https://www.4-72.com.co/info/portal_472/media/bloque5.png) — logo PNG blue #0033a0, yellow #ffc72c, red #e4002b (approximate) |
 | `4sides` | [4sides.ru](https://4sides.ru/apple-touch-icon.png) — app icon and logo PNG flat fill #d4534d; the site CSS --brand-red is the darker #bd4d47 |
@@ -67,6 +68,7 @@ and [`truck.json`](truck.json).
 | `ams-egroup` | [amsegroup.com.au](https://www.amsegroup.com.au/wp-content/uploads/2024/09/ams-logo-blue-transparent.png) — logo PNG navy #234d9b, its most used colour (AMS and GROUP), with light blue #489cd6 for the disc holding a white e |
 | `an-post` | [anpost.com](https://www.anpost.com/) |
 | `andreani` | [andreani.com](https://www.andreani.com/) — theme-color and --primary #d71920 (archived page; the live site blocks this network) |
+| `ane-logistics` | [ane56.com](https://www.ane56.com/assets/img/gym-logo.png) — logo PNG yellow, median #fbb707 of the arrow's 330 coloured pixels, shading from #fcca0f to #f49c00; 安能 and ane are black |
 | `anjun` | [anjuntrack.com](https://anjuntrack.com/img/logo.bf7702a9.png) — logo PNG green #009944 (approximate); site CSS #009b4c |
 | `anousith` | [app.anousith.express](https://app.anousith.express/logo.jpeg) — app icon red #e0353a (approximate); logo PNG chevron #fe0000 |
 | `anserx` | [anserx.com](https://www.anserx.com/css/style.css) — main site CSS #2478be (14 uses: active nav, product tabs), the exact fill of the logo PNG's light-blue wing; the wing green #9cca2c is in the same CSS and logo |
@@ -91,6 +93,7 @@ and [`truck.json`](truck.json).
 | `asyad-express` | [asyadexpress.om](https://web.archive.org/web/20251231194331/https://www.asyadexpress.om/) — header logo PNG: navy #221a37 lettering, cyan #00baeb dot and EXPRESS (approximate; archived, the live site refuses connections here) |
 | `atlantic-courier` | [atlanticcourier.net](https://atlanticcourier.net/static/imgs/atlantic-logo.svg) — logo SVG wordmark fill #E31E24, also the nav CSS button colour |
 | `ats-healthcare` | [atshealthcare.ca](https://www.atshealthcare.ca/_images/Transition_Logo_ATS_Healthcare_v2_small.png) — logo PNG flat red #e41937, its most used colour, the box behind the white ATS Healthcare; the a UPS Healthcare Company line beneath it is black |
+| `auexpress` | [auexpress.com](https://www.auexpress.com/static/media/AuExpressLogo.739c6f0aa97079adf322.png) — logo PNG orange #ff6634 (1,555,057 pixels) for Express, with green #2c6c52 (1,280,176) for Au and 澳邮物流 |
 | `australia-post` | [auspost.com.au](https://auspost.com.au/) |
 | `austrian-post` | [post.at](https://www.post.at/) |
 | `averitt` | [averitt.com](https://www.averitt.com/hs-fs/hubfs/Averitt_logo_250_PNG.png) — logo PNG red #c21f38 (approximate) |
@@ -126,6 +129,7 @@ and [`truck.json`](truck.json).
 | `boxtal` | [boxtal.com](https://www.boxtal.com/) — site CSS --md-sys-color-primary-light #1e5fa6, the catalog colour, on buttons, links and primary surfaces; the [favicon SVG](https://www.boxtal.com/favicon.svg) and the header logo SVG are navy #293a5d with one red #a42636 bar, the wordmark navy #2a3a5d and the YOUR SHIPPING EXPERT line grey #777679 |
 | `boyuan` | [boyuangyl.com](https://www.boyuangyl.com/uploads/allimg/20250628/1-25062Q44S0E8.png) — logo PNG flat red #e60012 and navy #172a88, the two parts of the disc mark; the red is the larger (about 1,470 opaque pixels against 1,070) and gives the catalog colour; the 博远供应链 wordmark and the BOYUANGONGYINGLIAN line are dark grey #222222 |
 | `bpost` | [bpost.be](https://www.bpost.be/) |
+| `bqc-logistics` | [1001000.com](https://www.1001000.com/newwl/static/images/unLogin/logo.png) — logo PNG blue #008adf (3,494 pixels), with orange #f58000 (630) in the mark |
 | `bring-posten` | [bring.com](https://www.bring.com/) |
 | `bringer-parcel` | [bringerparcel.com](https://www.bringerparcel.com/) — theme-color meta #150773; app icon PNG #150773 |
 | `brt` | [brt.it](https://www.brt.it/) |
@@ -156,10 +160,12 @@ and [`truck.json`](truck.json).
 | `centurion-transport` | [centurion.net.au](https://web.archive.org/web/20260502000833/https://centurion.net.au/wp-content/themes/centurion/images/logo.svg) — logo SVG fill #007cc3 for the CENTURION wordmark, about 80% of the coloured area; the centurion's head before it is red #ed1c2e |
 | `ceska-posta` | [ceskaposta.cz](https://www.ceskaposta.cz/) |
 | `ceva-logistics` | [commons.wikimedia.org](https://commons.wikimedia.org/wiki/File:Logo_of_CEVA_Logistics_(2023).svg) — logo SVG fill #1d2546 (navy) and #ff0000 (A) |
+| `changjiang-express` | [changjiangexpress.com](https://www.changjiangexpress.com/Content/theme/logo-5.png) — logo PNG blue #0054a3 (9,348 pixels), with orange #f08519 (419) in the CJ mark |
 | `chazki` | [chazki.com](https://www.chazki.com/) — Squarespace site.css --accent-hsl 211.98,85.28%,45.29% (#116dd6); logo green #35d32f (approximate) |
 | `cheetah-delivery` | [chitadelivery.co.il](https://chitadelivery.co.il/wp-content/uploads/2025/01/Group-40167.png) — header logo PNG: yellow #f8d448, its only saturated colour, is the leaping cheetah on a near-black #12100c emblem beside a black Cheetah Group wordmark; the tracker's [cheetah SVG](https://web.archive.org/web/2025/https://chitadelivery-cx.com/static/media/cheetahLogo.0136fbe7da28bbbe4d0b9d5983ebb748.svg) is the same #f8d448 |
 | `chilexpress` | [chilexpress.cl](https://www.chilexpress.cl/Resources/CSS/style_new_home.css) — site CSS #ffb81c, ink #1d1816 |
 | `china-post` | [chinapost.com.cn](https://www.chinapost.com.cn/) |
+| `china-railway-express` | [95572.com](https://www.95572.com/images/top-logo.png) — logo PNG navy, median #00316c of 1,127 pixels, for CRE and 中铁快运股份有限公司, with yellow #facf6e (239) on the frame |
 | `chinz-logistics` | [chinzlogistics.com](https://parcelmate-site.oss-cn-shenzhen.aliyuncs.com/upload/68a52709-d1b1-4.png) — logo PNG in two flat colours: red #c9122e (7,698 pixels) for the shield emblem and the bar between CHINZ and LOGISTICS, and grey #58585b for the wordmark, which covers more of the logo (13,888) but has no hue; the inline SVG logo on [chinzlogistics.co.nz](https://www.chinzlogistics.co.nz/) uses the same two fills |
 | `chit-chats` | [chitchats.com](https://chitchats.com/) — mask-icon colour #dc2b35 and btn-primary #db2b35 (the catalog colour); logo crown #f32735 |
 | `chronodiali` | [chronodiali.ma](https://chronodiali.ma/assets/logofr.png) — logo cube and 'diali' #009adf (flat PNG fill; the favicon cube is the same); the site's buttons and headings are #0060a2 |
@@ -278,6 +284,7 @@ and [`truck.json`](truck.json).
 | `efs-asia` | [efs.asia](https://efs.asia/img/logo.png) — logo PNG navy gradient for EFS and the orbit ring round it, from #1c64a7 across the top of the letters through its main band #224f8c (most frequent pixel #214c89) to #262262 along the ring's bottom, with a red #ec1922 plane above |
 | `egxpress` | [egyptexpress.com.eg](https://www.egyptexpress.com.eg/content/images/eg-logo.svg) — header logo SVG with two fills: orange #ff5200 for the EG mark and the DELIVERING A SMALLER WORLD line, and dark grey #404040 for XPRESS, which covers more of the logo (48,647 pixels to 20,021 drawn 800 px wide) but has no hue |
 | `egypt-post` | [commons.wikimedia.org](https://commons.wikimedia.org/wiki/File:EGYPT_POST.svg) — logo SVG fill rgb(0%,49.8%,24.3%) #007f3e |
+| `elianpost` | [elianpost.com](https://oss-cn.wyaoo.com/system/site_widget_settings/WwwElianpostCom_Home_Header_01/logo/elian-logo_fu-ben.20260723121926021988018.png) — logo PNG navy #00217f (1,026 pixels) for 易连供应链, with an orange-to-red e mark (#e37e2c, 347) |
 | `elog-luxembourg` | [elog-luxembourg.com](https://www.elog-luxembourg.com/build/website/images/log_logo.52739a0d.svg) — logo SVG: black LOG, the O with a fan of overlapping petals behind it in yellow #ffdd00, green #1fa12e, dark green #008836, blue #00a6d4 and light blue #5ec5ed; yellow, the largest petal, is the most used hue (9,755 pixels in an 800 px render, against 8,091 for the greens and 6,418 for the blues) |
 | `elta` | [logo PNG](https://media.elta.gr/images/0/0/home/hellenic-post-logo4.png) (approximate) |
 | `emex` | [emex.kz](https://www.emex.kz/wp-content/uploads/2022/08/logo.svg) — logo SVG single fill #0d237a, for the monogram of two upright bars and an X between them and the EMEX wordmark beneath |
@@ -294,6 +301,7 @@ and [`truck.json`](truck.json).
 | `eparcel-kr` | [eparcel.kr](https://www.eparcel.kr/Content/css/your_style_glokay.25.css) — site theme blue #286aff (primary buttons, links); the site has no logo image, only the name eParcel.kr in text |
 | `epost-global` | [epostglobalshipping.com](https://epostglobalshipping.com/wp-content/uploads/2025/12/Logo-Full-Color.svg) — globe fill #27967A |
 | `equick` | [equick.cn](http://www.equick.cn/favicon.ico) — favicon background #a70707 (flat), site CSS #a70707 |
+| `espeedpost` | [espeedpost.com](https://www.espeedpost.com/images/logo_espeedpost.png) — logo PNG red #ff0000 (2,861 pixels) for ESPEEDPOST, with orange #ff7700 (658) for its first E and the Chinese name |
 | `espoirer` | [espoirer.com](https://www.espoirer.com/images/logo.svg) — logo SVG mark #e84730 (class cls-1), its only colour; the wordmark is black |
 | `estafeta` | [estafeta.com](https://www.estafeta.com/) |
 | `estes` | [estes-express.com](https://www.estes-express.com/application/themes/estes/images/estes-logo-main-yellow.svg) — logo fill #ffd200; the ball red #e91b2c sampled from the app icon PNG (approximate) |
@@ -488,6 +496,7 @@ and [`truck.json`](truck.json).
 | `kerry-tj` | [zh.wikipedia.org](https://upload.wikimedia.org/wikipedia/zh/8/80/Kerry_TJ_Logistics_logo.svg) — logo SVG fill #ec6900; orange trucks on Commons photos |
 | `kex` | [th.kex-express.com](https://th.kex-express.com/images/favicon/apple-icon-180x180.png) — app icon orange #f36f21 (approximate) |
 | `kex-express-hk` | [kex.kln.com](https://www.kex.kln.com/rs/img/header/logo.svg) — logo SVG fill #F4772B |
+| `king-kong-express` | [kke.com.hk](https://www.kke.com.hk/static/picture/logo-light.png) — logo PNG navy #21347c, its only colour (8,760 pixels) |
 | `kit-tk` | [tk-kit.ru](https://tk-kit.ru/images/static/kit/icons/logo.svg) — logo SVG fills #0c54a0 (square and letters), #fff01e (disc), #f52d0e (dot) |
 | `kiwi-express` | [kiwiexpress.co.nz](https://www.kiwiexpress.co.nz/wp-content/uploads/Kiwi-Express-logo-193W.png) — logo PNG blue for the italic KiwiExpress wordmark and COURIERS, mode #00a1df among shades up to #00abef (approximate); the swoosh over the name is red #f12434 and covers about as many pixels; the [Kiwi Oversize logo](https://kiwioversize.co.nz/wp-content/uploads/2021/07/KiwiExpress-OS-Logo-HOR.png) is mostly #00a7e1 with the same swoosh |
 | `kolay-gelsin` | [kolaygelsin.com](https://kolaygelsin.com/favicon.png) — favicon check mark #3aae2a (approximate) |
@@ -518,6 +527,8 @@ and [`truck.json`](truck.json).
 | `letter-track` | [letter-track.com](https://www.letter-track.com/assets/images/lettertrack-logo-new.png) — logo PNG flat light blue #6c9dce (153,064 pixels), its most used colour, for the envelope icon and Track, with navy #002859 (127,123) for Letter; the [older logo](https://www.letter-track.com/assets/images/LetterTrack_Logo1.png) draws the icon in white on a #689ab4 square |
 | `lex-my` | [lex.com.my](https://img.alicdn.com/imgextra/i4/O1CN01PNjcGu1gVpuCMLEXb_!!6000000004148-2-tps-96-96.png) — site icon PNG flat blue #1076ff for LE (618 pixels), the X a gradient from orange #f5690d to pink #fb25a8; the [header logo](https://gw.alicdn.com/imgextra/i3/O1CN01A5lcXS26g4lbsbavp_!!6000000007690-2-tps-161-50.png) has white LE with the same X |
 | `lex-vn` | [logistics.lazada.vn](https://img.alicdn.com/imgextra/i4/O1CN01PNjcGu1gVpuCMLEXb_!!6000000004148-2-tps-96-96.png) — site icon PNG, the LEX icon lex-my also uses: flat blue #1076ff for LE (618 pixels), the X a gradient from orange #f5690d to pink #fb25a8; the [header logo](https://gw.alicdn.com/imgextra/i3/O1CN01A5lcXS26g4lbsbavp_!!6000000007690-2-tps-161-50.png) has white LE with the same X |
+| `lhtex` | [lhtex.com.cn](https://www.lhtex.com.cn/template/lhtmb/skin/picture/20211105143625_2133910401.png) — logo PNG blue, median #004da1 of 228,647 pixels, with red #e60012 (10,284) for the square inside the mark |
+| `libang-logistics` | [lbexps.com](https://www.lbexps.com/wp-content/themes/liban/images/index_194.png) — logo PNG navy #28285a (1,094 pixels) for THREE BEST and 立邦物流, with red #d82128 (429) for the flower mark |
 | `libanpost` | [libanpost.com](https://www.libanpost.com/styles/css-EN?v=1510261716) — site CSS #006db7 (91 uses), also the logo wordmark blue; wing yellow #fed300 |
 | `liccardi` | [liccarditrasporti.com](https://www.liccarditrasporti.com/wp-content/uploads/2022/06/logo-sito.png) — logo PNG blue #014895 (approximate); site CSS #014895 |
 | `lietuvos-pastas` | [logo SVG](https://www.post.lt/themes/posttheme/images/logo.svg) |
@@ -734,6 +745,7 @@ and [`truck.json`](truck.json).
 | `rpx-hk` | [tracking.rpxonline.com](https://tracking.rpxonline.com/css/rpx.pSIvfYBQ.css) — RPX theme of its tracker, primary #eb1d4d, also the red of the headings on rpxonline.com; the site icon's triangle samples #ed174b and its letters #006b6e (approximate) |
 | `rpx-indonesia` | [rpx.co.id](https://rpx.co.id/static/css/main.css) — site CSS --primary and --gold #c9a73d; logo PNG black #231f20, gold #cbb778 (approximate) |
 | `rr-express-sg` | [rrexpress.com.sg](https://rrexpress.com.sg/img/logo/horizontal-on-white-removebg-preview.png) — logo PNG navy #002f75 and red #df1918 |
+| `rrs-logistics` | [rrswl.com](https://www.rrswl.com/assets/images/ririshun-logo.png) — logo PNG red #c7003a, its only colour (3,757 pixels) |
 | `runner-express` | [runnerexpress.co.il](https://runnerexpress.co.il/uploads/allimg/20200715/1-200G51QJK11.png) — logo PNG flat red #e71c22, the R of Runner and the most used colour (about 1,673,000 opaque pixels); unner and Express are near-black #080404 (about 1,304,000) |
 | `russian-post` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Russian_Post_wordmark.svg) — wordmark fill #1928DC |
 | `rxo` | [rxo.com](https://rxo.com/wp-content/uploads/2025/02/rxo-favicon.svg) — favicon SVG single fill #000000, the R of the RXO wordmark; the [header logo SVG](https://rxo.com/wp-content/themes/rxo/images/rxo-logo-white.svg) is the same wordmark in white; the site's accent colour is mint #00f49c |
@@ -771,12 +783,14 @@ and [`truck.json`](truck.json).
 | `shipa` | [shipa.com](https://shipa.com/static/6add25daa42f483a2844655b94664348/footer_shipa_delivery_logo_spaced_b650c90d74.svg.svg) — Shipa Delivery logo SVG slash fill #00f; shipa.com marks the Shipa Delivery card color="#0000ff" |
 | `shipblu` | [shipblu.com](https://shipblu.com/assets/img/navlogo.972e5b91.svg) — the logo's bird and "Blu" fill #1c5bfe (PNG embedded in the nav logo SVG, approximate), also the most used colour in the site stylesheet; the navy #0a3266 is the "Ship" text, the bird's tail and the footer |
 | `shipentegra` | [shipentegra.com](https://www.shipentegra.com/) — button background rgb(13, 182, 220) = #0db6dc on the home page, and the logo SVG's 'Ship' fill #0eb6dc ([se-logo.svg](https://www.shipentegra.com/img/logos/se-logo.svg)) |
+| `shipgce` | [shipgce.com](https://ebuy.shipgce.com/img/logo2.jpg) — logo JPEG orange, median #e56a26 of 1,162 pixels (with #d96e30, 742), for GCEx, with purple #663289 (1,055) for 飛洋轉運 |
 | `shipglobal-in` | [shipglobal.in](https://shipglobal.in/wp-content/uploads/2025/02/2200X2200.png) — logo PNG flat blue #214a9c for ShipGlobal.in (182,596 pixels), with an orange box corner after it, its top face #f4a11e (also the full stop, 14,186 pixels) and its side #d78228 (10,845); the [app logo](https://app.shipglobal.in/assets/media/shipglobal/logo.png) uses #204a9e |
 | `shiprocket` | [shiprocket.in](https://sr-website-01.shiprocket.in/sr-website/shiprocket_logo-1-TWLqUy.svg) — header logo SVG symbol fill #46237a with a green #18f040 play triangle; the site links and buttons use the lighter #735ae5, the most used colour in the home page CSS and the catalog colour |
 | `shipter` | [shipter.kr](https://www.shipter.kr/logo.png) — logo PNG flat black #000000 for heavy italic SHIPTER (5,890 pixels), its E three bars in blue #005eff (1,007), the logo's only colour |
 | `shipup` | [shipup.co](https://www.shipup.co/) (sampled from the site icon) |
 | `shipx-asia` | [shipx.asia](https://shipx.asia/navbar/shipx-logo.svg) — navbar logo SVG fill #ff00e5, its only chromatic colour, for the X and the top of the i, with a #99008a fold in the X; SHIP, the foot of the i and the X's lower left leg are near-black #1a1a1a |
 | `shouwu` | [sedel.com](http://www.sedel.com/) — customer portal logo JPEG flat red #bf2c34 of the arrow, its most used colour (the catalog #be2c33 is the red's average); the swoosh above it is blue #0f74bc |
+| `showl` | [showl.com](https://www.showl.com/wp-content/uploads/2021/04/Logo-220x73.png) — logo PNG teal #26b7bc (1,506 pixels) for 森鸿国际物流 and its tagline, with red #e50012 (844) for the round mark |
 | `shree-anjani` | [shreeanjanicourier.com](https://shreeanjanicourier.com/img/logo.svg) — logo SVG fill #F58220; site CSS --critical-primary #f58220 |
 | `shree-mahabali-express` | [shreemahabaliexpress.com](https://shreemahabaliexpress.com/img/logo-5.png) — logo PNG red #ff0020 (approximate); the bowl is blue #1429a8 |
 | `shree-mahavir` | [shreemahavircourier.com](https://www.shreemahavircourier.com/) — text colour #e31e25 in the site stylesheet, matching the logo red; wing indigo #393186 |
@@ -825,7 +839,9 @@ and [`truck.json`](truck.json).
 | `stg-ltl` | [stgltl.com](https://media.stgltl.com/wp-content/uploads/2024/05/14002648/LTL-200x107.png) — logo PNG navy #142e75 (2,378 pixels) for STG LTL, red #e0221b (899) for the ring |
 | `sto` | [sto.cn](https://www.sto.cn/) |
 | `straightship` | [straightship.com](https://www.straightship.com/new/) — logo SVG fill #6AAE66 for STRAIGHT (the arc is #73B36E, the site buttons rgb(115, 179, 110)) |
+| `sumxpress` | [sumxpress.com](https://oms.sumxpress.com/resource/img/logo.png) — logo PNG orange, median #f08300 of 4,890 pixels, its only colour |
 | `sundarban-courier` | [sundarbancourierltd.com](https://www.sundarbancourierltd.com/FontendStyle/img/fav-icon.png) — logo frame blue #0b4c9f and tiger #ffbf00 (approximate); site header navy |
+| `suning-logistics` | [wuliu.suning.com](https://wuliu.suning.com/staticfile_0113/css/main.css) — site CSS #faa600, its most used colour (13 uses: buttons and highlights); the [logo PNG](https://wuliu.suning.com/staticfile_0113/assets/logo.png) is SUNING in dark grey over 苏宁物流 |
 | `sunyou` | [sunyou.hk](https://www.sunyou.hk/) (sampled from the site icon) |
 | `super-parcel-track` | [track-sp.com](https://track-sp.com/static/index/sp-track/logo.png) — logo PNG flat red #d71920, its only colour, for the box's left face, the speed lines and the S and P of SUPER PARCEL TRACK; the box's open outline and the rest of the lettering are white, for a dark header |
 | `superb-express` | [superb-express.com](https://superb-express.com/img/index/logo.png) — header logo PNG flat blue #283a96 for Superb-Express, with orange #fd8103 for the top bar and upper left of the S; the tracker page's [white logo](https://superb-express.com/img/oddNumberQuery/logo.png) keeps the same orange |
@@ -1985,3 +2001,19 @@ and [`truck.json`](truck.json).
 | `paisley-freight` | Open cube outline, its top face and left edge white and its right, lower and front edges pale blue, on blue | [paisleyfreight.com](https://www.paisleyfreight.com/icons/apple-touch-icon.png) — the icon: an open cube outline, the top face and left edge in blue and the right, lower and front edges in light blue, each stopping short of the next; the decal draws the cube from centrelines read off the icon at three times its size |
 | `max-pakket` | MAX in black single-stroke capitals on yellow | [maxpakket.nl](https://maxpakket.nl/wp-content/uploads/2025/12/cropped-Max-Pakket-logo.png) — the logo: MAX in black capitals, PAKKET in yellow and .NL in black on three taped cardboard boxes; the decal sets MAX in the app's letters in the logo's black |
 | `diakinisis` | DIAKINISIS in white slanted single-stroke capitals on red | [diakinisis.gr](https://www.diakinisis.gr/imgs/logo.png) — the logo: a red D with a white roof-like notch, then DIAKINISIS in heavy black slanted capitals over Logistics Services; the decal spells the name in the app's letters, slanted like the logo's |
+| `shipgce` | GCEX in white single-stroke capitals on orange | [shipgce.com](https://ebuy.shipgce.com/img/logo2.jpg) — the logo: GCEx in heavy orange italic capitals over GLOBAL COURIER EXPRESS, with 飛洋轉運 in purple below; the decal sets GCEX in the app's letters |
+| `espeedpost` | ESPEEDPOST in white single-stroke capitals on red | [espeedpost.com](https://www.espeedpost.com/images/logo_espeedpost.png) — the logo: ESPEEDPOST in red capitals, the first E orange, beside 易速国际物流; the decal spells the name in the app's letters |
+| `360zebra` | ZEBRA in white single-stroke capitals on blue | [360zebra.com](https://www.360zebra.com/img/zb-logo.png?v=20250228) — the logo: a striped blue globe beside 360 in italic and zebra in heavy blue lowercase; the decal sets ZEBRA in the app's letters |
+| `auexpress` | AUEXPRESS in white single-stroke capitals on orange | [auexpress.com](https://www.auexpress.com/static/media/AuExpressLogo.739c6f0aa97079adf322.png) — the logo: Au in green and Express in orange heavy italic, then 澳邮物流 in green; the decal spells the name in the app's letters |
+| `ane-logistics` | ANE in black single-stroke capitals on yellow | [ane56.com](https://www.ane56.com/assets/img/gym-logo.png) — the logo: 安能 and ane in black, then a yellow arrow pointing up and right; the decal sets ANE in the app's letters in near-black #1a1a1a |
+| `china-railway-express` | CRE in white single-stroke capitals on navy | [95572.com](https://www.95572.com/images/top-logo.png) — the logo: CRE in navy slanted capitals with speed lines, beside 中铁快运股份有限公司 and China Railway Express Co., Ltd.; the decal sets CRE in the app's letters |
+| `lhtex` | LHT in white single-stroke capitals on blue | [lhtex.com.cn](https://www.lhtex.com.cn/template/lhtmb/skin/picture/20211105143625_2133910401.png) — the logo: a blue ring round a stepped mark with a red square, beside EXPRESS and 联昊通速递 in blue; the decal sets the initials LHT in the app's letters |
+| `showl` | SHOWL in white single-stroke capitals on teal | [showl.com](https://www.showl.com/wp-content/uploads/2021/04/Logo-220x73.png) — the logo: a red round seal beside 森鸿国际物流 in teal over a teal tagline; the decal spells the name in the app's letters |
+| `elianpost` | ELIAN in white single-stroke capitals on navy | [elianpost.com](https://oss-cn.wyaoo.com/system/site_widget_settings/WwwElianpostCom_Home_Header_01/logo/elian-logo_fu-ben.20260723121926021988018.png) — the logo: an orange and red e swirl beside 易连供应链 in navy over elian supply chain; the decal sets ELIAN in the app's letters |
+| `bqc-logistics` | BQC in white single-stroke capitals on blue | [1001000.com](https://www.1001000.com/newwl/static/images/unLogin/logo.png) — the logo: a blue and orange bq mark beside 百千诚国际物流 and BQC International logistics in blue; the decal sets BQC in the app's letters |
+| `king-kong-express` | KKE in white single-stroke capitals on navy | [kke.com.hk](https://www.kke.com.hk/static/picture/logo-light.png) — the logo: a striped KK mark beside 京廣速遞 over KING KONG EXPRESS, all in navy; the decal sets the initials KKE in the app's letters |
+| `libang-logistics` | LIBANG in white single-stroke capitals on navy | [lbexps.com](https://www.lbexps.com/wp-content/themes/liban/images/index_194.png) — the logo: THREE BEST in navy capitals over LIBANG International, a red flower mark and 立邦物流 in navy; the decal sets LIBANG in the app's letters |
+| `sumxpress` | SUM in white single-stroke capitals on orange | [sumxpress.com](https://oms.sumxpress.com/resource/img/logo.png) — the logo: SUM in heavy orange slanted capitals with a white swoosh; the decal sets SUM in the app's letters |
+| `suning-logistics` | SUNING in dark grey single-stroke capitals on yellow | [wuliu.suning.com](https://wuliu.suning.com/staticfile_0113/assets/logo.png) — the logo: SUNING in dark grey capitals over 苏宁物流; the decal sets SUNING in the app's letters in dark grey #2c2c2c |
+| `rrs-logistics` | RRS in white single-stroke capitals on red | [rrswl.com](https://www.rrswl.com/assets/images/ririshun-logo.png) — the logo: 日日顺供应链 in red; the decal sets RRS, the company's initials, in the app's letters |
+| `changjiang-express` | CHANGJIANG in white single-stroke capitals on blue | [changjiangexpress.com](https://www.changjiangexpress.com/Content/theme/logo-5.png) — the logo: a slanted blue and orange CJ mark beside 长江国际速递 over CHANG JIANG INTERNATIONAL EXPRESS in blue; the decal spells CHANGJIANG in the app's letters |

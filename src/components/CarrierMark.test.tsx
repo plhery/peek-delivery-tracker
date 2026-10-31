@@ -414,6 +414,22 @@ describe('carrier mark', () => {
     'paisley-freight',
     'max-pakket',
     'diakinisis',
+    'shipgce',
+    'espeedpost',
+    '360zebra',
+    'auexpress',
+    'ane-logistics',
+    'china-railway-express',
+    'lhtex',
+    'showl',
+    'elianpost',
+    'bqc-logistics',
+    'king-kong-express',
+    'libang-logistics',
+    'sumxpress',
+    'suning-logistics',
+    'rrs-logistics',
+    'changjiang-express',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

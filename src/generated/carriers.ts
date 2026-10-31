@@ -1576,6 +1576,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Emirates Post tracking: AE numbers and statuses explained",
       "name": "Emirates Post",
       "color": "#004a98"
+    },
+    {
+      "id": "blue-dart",
+      "catalog": "blue-dart",
+      "slug": "blue-dart-tracking",
+      "title": "Blue Dart tracking: waybill numbers and statuses explained",
+      "name": "Blue Dart",
+      "color": "#0059a9"
     }
   ],
   "de": [

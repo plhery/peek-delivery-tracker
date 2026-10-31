@@ -4303,7 +4303,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^VG\\d{11}$",
-        "confidence": "high"
+        "confidence": "low"
       },
       {
         "pattern": "^JD(?:\\d{13}|[A-Z]\\d{12}|[A-Z]{2}\\d{11})$",
@@ -7150,7 +7150,9 @@ export const CARRIER_CAPABILITIES = {
       "ASM Transporte Urgente",
       "General Logistics Systems Spain",
       "GLS Portugal",
-      "General Logistics Systems Portugal"
+      "General Logistics Systems Portugal",
+      "GLOBALTRANS",
+      "GlobalTrans Toledo"
     ],
     "countries": [
       "ES",
@@ -39744,6 +39746,187 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.yha56.com/"
+  },
+  "bombax": {
+    "displayName": "Bombax",
+    "aliases": [
+      "Bombax Logistics",
+      "Bombax Logistics Pvt. Ltd."
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#ed1849",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://book.bombax.in/booking/Tracking?OrderNo={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "book.bombax.in"
+        ],
+        "pathPattern": "^/booking/tracking$",
+        "params": [
+          "OrderNo"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://book.bombax.in/Booking/Track"
+  },
+  "canada-air-express": {
+    "displayName": "Canada Air Express",
+    "aliases": [
+      "Canada GTL Express",
+      "加拿大民航快递",
+      "民航快递",
+      "Golden Territory Logistic"
+    ],
+    "countries": [
+      "CA",
+      "CN"
+    ],
+    "color": "#b1272d",
+    "selectable": true,
+    "timezone": "America/Vancouver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://main.air-gtc.cn/WaybillInfo.aspx?KeyWord={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "main.air-gtc.cn"
+        ],
+        "pathPattern": "^/WaybillInfo\\.aspx$",
+        "params": [
+          "KeyWord"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.air-gtc.com/"
+  },
+  "ecom-logistics": {
+    "displayName": "Ecom Logistics",
+    "aliases": [
+      "Ecom Logistics Inc.",
+      "EcomLogistics",
+      "ShipEcom"
+    ],
+    "countries": [
+      "CA",
+      "US"
+    ],
+    "color": "#3598dd",
+    "selectable": true,
+    "timezone": "America/Toronto",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://shipecom.com/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "shipecom.com",
+          "www.shipecom.com"
+        ],
+        "path": "^/(?:(?:fr|es)/)?track/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^E\\d{2}[A-Z]\\d{7}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://shipecom.com/track"
+  },
+  "fragilepak": {
+    "displayName": "FragilePAK",
+    "aliases": [
+      "FragilePak",
+      "Fragile Pak",
+      "Progistics Distribution"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#e65525",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.agentgrid.net/progistics/?id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.agentgrid.net"
+        ],
+        "pathPattern": "^/progistics/?$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^902\\d{6}[\\dX]$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://fragilepak.com/expecting-a-delivery/"
+  },
+  "hkd-express": {
+    "displayName": "HKD Express",
+    "aliases": [
+      "Hkdexpress",
+      "昊坤达",
+      "昊坤达国际物流"
+    ],
+    "countries": [
+      "CN",
+      "AU"
+    ],
+    "color": "#140b68",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.hkdexpress.net/track"
+  },
+  "sm-express": {
+    "displayName": "SM Express",
+    "aliases": [
+      "SM Express Cargo",
+      "SM Express Cargo Pvt Ltd",
+      "SM Express Cargo Private Limited"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "color": "#d32028",
+    "selectable": true,
+    "timezone": "Asia/Kolkata",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.smexpress.in/Home/track"
   }
 } as const;
 
@@ -40824,7 +41007,13 @@ export const CARRIER_IDS = [
   "fastwl",
   "tig-freight",
   "uvan",
-  "yha"
+  "yha",
+  "bombax",
+  "canada-air-express",
+  "ecom-logistics",
+  "fragilepak",
+  "hkd-express",
+  "sm-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

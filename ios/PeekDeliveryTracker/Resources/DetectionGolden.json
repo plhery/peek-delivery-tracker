@@ -63402,6 +63402,27 @@
     ]
   },
   {
+    "input": "9024466707",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "tipsa",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "fragilepak"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
     "input": "90247642",
     "carrier": "unknown",
     "confidence": "low",
@@ -63420,6 +63441,14 @@
     ]
   },
   {
+    "input": "902500897X",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "fragilepak"
+    ]
+  },
+  {
     "input": "9026242908",
     "carrier": "unknown",
     "confidence": "low",
@@ -63431,7 +63460,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "fragilepak"
     ],
     "asked": [
       "packeta",
@@ -75610,6 +75640,14 @@
     ],
     "asked": [
       "ecoscooting"
+    ]
+  },
+  {
+    "input": "E28D7629030",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "ecom-logistics"
     ]
   },
   {
@@ -98304,10 +98342,14 @@
   },
   {
     "input": "VG05778167021",
-    "carrier": "jd-logistics",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "la-poste",
       "jd-logistics"
+    ],
+    "asked": [
+      "la-poste"
     ]
   },
   {

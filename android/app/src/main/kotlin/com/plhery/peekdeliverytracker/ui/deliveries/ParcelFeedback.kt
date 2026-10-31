@@ -40,6 +40,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -106,6 +107,7 @@ import androidx.compose.ui.unit.toSize
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.currentStateAsState
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackCarrierSheet
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
@@ -114,6 +116,8 @@ import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel.Moment
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel.Word
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackQuestion
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackWordsSheet
+import com.plhery.peekdeliverytracker.core.ReviewPrompt
+import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
 import com.plhery.peekdeliverytracker.core.labelKey
@@ -221,6 +225,10 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
     var failed: Boolean by mutableStateOf(false)
         private set
 
+    /** A "Yes" the service took was the moment to ask for a rating, and the page hasn't asked yet (`reviewDue`). */
+    var reviewDue: Boolean by mutableStateOf(false)
+        private set
+
     /** Each time a send failed, for TalkBack to hear (`FeedbackFailure`'s announcement). */
     var failures: Int by mutableIntStateOf(0)
         private set
@@ -248,7 +256,9 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
     fun start() {
         val model = model
         jobs += scope.launch {
-            merge(model.pageFlow, model.momentFlow, model.wordsFlow, model.namingCarrierFlow, model.wordFlow, model.sendingFlow).collect { pull() }
+            merge(
+                model.pageFlow, model.momentFlow, model.wordsFlow, model.namingCarrierFlow, model.wordFlow, model.sendingFlow, model.reviewDueFlow,
+            ).collect { pull() }
         }
         jobs += scope.launch {
             model.wordFlow.collectLatest { word ->
@@ -287,6 +297,7 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
         moment = model.moment
         word = model.word
         sending = model.sending
+        reviewDue = model.reviewDue
         covers()
     }
 
@@ -363,6 +374,9 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
             failures++
         }
     }
+
+    /** `takeReviewMoment()`: the page asks for a rating now, true once while the rule still holds. */
+    fun takeReviewMoment(): Boolean = model.takeReviewMoment().also { pull() }
 
     /** A sheet closes (its binding set to nil): its tap outside, its back, its drag down or ✕. */
     fun dismissWords() {
@@ -894,6 +908,29 @@ internal fun ParcelFeedbackOverlays(state: DeliveriesState, work: ParcelFeedback
         dismissible = !work.sending,
     ) {
         CarrierSheet(work, writing)
+    }
+}
+
+/**
+ * `.askingForReview(due: feedback.reviewDue, ready: reviewReady) { feedback.takeReviewMoment() }`: a "Yes" the service
+ * took on a parcel with nothing wrong asks for a rating once the moment has settled (`ReviewPrompt.settle`), while the
+ * page is in front of the reader (`reviewReady`): the window on the screen, nothing over the page or the list, nothing
+ * said at the page's foot, no delivery email offered under its card, and the app settled. The sample asks nothing.
+ * Play's prompt shows over the window's activity.
+ */
+@Composable
+internal fun PageReviewing(state: DeliveriesState, work: ParcelFeedbackWork, parcel: Parcel?, pageId: UUID) {
+    val source = state.source
+    val settled by source.reviewSettled.collectAsState()
+    val deliveryEmail by source.deliveryEmail.collectAsState()
+    val resumed = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
+    val ready = parcel != null && state.sample(pageId) == null && resumed && !state.modal && !state.showingFilters &&
+        work.word == null && !state.offersEmail(parcel, pageId, deliveryEmail) && settled
+    val activity = LocalActivity.current
+    val requester = remember(source, activity) { activity?.let(source::reviews) }
+    LaunchedEffect(work.reviewDue, ready, requester) {
+        if (requester == null) return@LaunchedEffect
+        ReviewPrompt.ask(due = work.reviewDue, ready = ready, take = work::takeReviewMoment, requester = requester, report = source::action)
     }
 }
 

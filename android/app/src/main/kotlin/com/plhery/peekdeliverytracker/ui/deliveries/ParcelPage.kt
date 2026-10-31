@@ -127,7 +127,8 @@ internal val LocalPageTop = compositionLocalOf<Dp?> { null }
  * the window's foot, and no wider than the two columns at their widest (1080) or 640 in one, centred; the ground fades
  * out under the bar over what scrolls under it (`softTopEdge()`). Under the paper stands the question asked about the
  * page, and over the page's foot what it says on the way back from the carrier's site, with its sheets
- * ([ParcelFeedbackOverlays]). No bar names the page; TalkBack hears it as "Parcel details" (`windowTitle`).
+ * ([ParcelFeedbackOverlays]); a "Yes" there may be the moment to ask for a rating ([PageReviewing]). No bar names the
+ * page; TalkBack hears it as "Parcel details" (`windowTitle`).
  *
  * A parcel the deliveries no longer have (deleted elsewhere, or signed out) shows `ContentUnavailableView` instead:
  * "Parcel", a box, and that it is no longer in the list (B-ST01).
@@ -177,6 +178,7 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
             state, feedback, backdrop, Modifier.align(Alignment.BottomCenter).padding(start = start, end = end, bottom = bottom),
         )
     }
+    PageReviewing(state, feedback, parcel, parcelId)
 }
 
 /**

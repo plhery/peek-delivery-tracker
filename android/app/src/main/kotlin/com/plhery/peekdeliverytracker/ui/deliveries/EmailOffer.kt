@@ -48,6 +48,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.deliveryUpdatesPlace
@@ -81,6 +82,16 @@ sealed interface EmailOfferPhase {
 }
 
 /**
+ * The page offers the delivery email under its card, or says it is on (`emailOffer == .accepted ||
+ * email.isOffered(on: parcel)`), as long as its answer is saved too; never on the sample.
+ */
+internal fun DeliveriesState.offersEmail(parcel: Parcel, pageId: UUID, email: DeliveryEmail?): Boolean {
+    val phase = source.pageWork.emailOffer(pageId)
+    return sample(pageId) == null && email != null &&
+        (phase == EmailOfferPhase.Accepted || phase is EmailOfferPhase.Saving || email.isOffered(parcel))
+}
+
+/**
  * Where the delivery email is offered in the pass's column, under the card (`if sample == nil, let email,
  * emailOffer == .accepted || email.isOffered(on: parcel)`): offered once on a delivered parcel to an account that has
  * never chosen, and, once accepted, one line saying so until the page goes. It stays while its answer is saved, and,
@@ -94,8 +105,7 @@ internal fun EmailOfferSlot(state: DeliveriesState, parcel: Parcel, pageId: UUID
     val work = state.source.pageWork
     val phase = work.emailOffer(pageId)
     val email = deliveryEmail
-    val shows = state.sample(pageId) == null && email != null &&
-        (phase == EmailOfferPhase.Accepted || phase is EmailOfferPhase.Saving || email.isOffered(parcel))
+    val shows = state.offersEmail(parcel, pageId, email)
     val localizer = LocalLocalizer.current
     val haptics = rememberHaptics()
     val news = work.emailOfferNews(pageId)

@@ -48,12 +48,15 @@ import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.io.IOException
+import java.time.Duration
 import java.util.UUID
 import kotlin.math.abs
 import kotlinx.coroutines.CompletableDeferred
@@ -654,6 +657,95 @@ class ParcelFeedbackTest {
         assertTrue(deliveries.modal)
         awayAndBack()
         assertNull(work().word)
+    }
+
+    // The rating a "Yes" may ask for.
+
+    /**
+     * The gift out for delivery: nothing about it is wrong whatever the day (`Parcel.untroubled`), so that a "Yes" on it
+     * may be the moment to ask for a rating. At customs, it needs its reader's attention.
+     */
+    private val calm: Parcel get() {
+        val latest = gift.currentEvent!!
+        return gift.copy(trackingEvents = gift.trackingEvents.map { if (it.id == latest.id) it.copy(stage = TrackingStage.OutForDelivery) else it })
+    }
+
+    /** The rating prompt has counted two earlier days with use, as it needs before it asks. */
+    private fun usedTwoEarlierDays() {
+        source.reviewPrompt.used(source.now.minus(Duration.ofDays(2)))
+        source.reviewPrompt.used(source.now.minus(Duration.ofDays(1)))
+    }
+
+    @Test
+    fun aYesOnACalmParcelAsksForARatingOnceTheMomentHasSettled() {
+        show(listOf(calm, lamp))
+        usedTwoEarlierDays()
+        openQuestion(calm)
+        compose.mainClock.autoAdvance = false
+        node(FEEDBACK_YES).performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertTrue(work().reviewDue)
+        // Play's review info is fetched as the moment settles, two seconds, then the prompt shows and the ask counts.
+        assertEquals(listOf("prepare"), source.reviewCalls)
+        compose.mainClock.advanceTimeBy(1_800)
+        assertEquals(listOf("prepare"), source.reviewCalls)
+        compose.mainClock.advanceTimeBy(200)
+        assertEquals(listOf("prepare", "launch"), source.reviewCalls)
+        assertEquals(1, source.actions.count { it == "review-ask" })
+        assertFalse(work().reviewDue)
+        assertFalse(source.reviewPrompt.isDue(source.now, calm = true))
+    }
+
+    @Test
+    fun aYesOnTheWayBackAsksForARatingOnceItsThanksHasGone() {
+        show(listOf(calm, lamp))
+        usedTwoEarlierDays()
+        open(calm)
+        visitCarrier()
+        compose.mainClock.autoAdvance = false
+        node(FEEDBACK_BACK_YES).performClick()
+        compose.mainClock.advanceTimeBy(3_800)
+        assertEquals(ParcelFeedbackModel.Word.BackRight, work().word)
+        assertTrue(work().reviewDue)
+        assertEquals(emptyList<String>(), source.reviewCalls)
+        compose.mainClock.advanceTimeBy(400)
+        assertNull(work().word)
+        assertEquals(listOf("prepare"), source.reviewCalls)
+        compose.mainClock.advanceTimeBy(2_100)
+        assertEquals(listOf("prepare", "launch"), source.reviewCalls)
+    }
+
+    @Test
+    fun theRatingWaitsWhileSomethingIsOverThePage() {
+        show(listOf(calm, lamp))
+        usedTwoEarlierDays()
+        openQuestion(calm)
+        tap(FEEDBACK_YES)
+        node(PAGE_SHARE).performScrollTo().performClick()
+        settle()
+        assertTrue(deliveries.modal)
+        compose.mainClock.advanceTimeBy(3_000)
+        compose.waitForIdle()
+        assertFalse("Prepared, never launched: ${source.reviewCalls}", "launch" in source.reviewCalls)
+        assertTrue(work().reviewDue)
+        back()
+        assertFalse(deliveries.modal)
+        compose.mainClock.advanceTimeBy(2_100)
+        compose.waitForIdle()
+        assertEquals("launch", source.reviewCalls.last())
+        assertEquals(1, source.actions.count { it == "review-ask" })
+    }
+
+    @Test
+    fun aYesThatCouldNotGoAsksForNoRating() {
+        show(listOf(calm, lamp)) { feedbackFailure = IOException("offline") }
+        usedTwoEarlierDays()
+        openQuestion(calm)
+        tap(FEEDBACK_YES)
+        compose.mainClock.advanceTimeBy(3_000)
+        compose.waitForIdle()
+        assertFalse(work().reviewDue)
+        assertEquals(emptyList<String>(), source.reviewCalls)
     }
 
     // Motion.

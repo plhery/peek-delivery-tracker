@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { SELECTABLE_CARRIERS } from '../lib/carriers';
@@ -33,8 +33,11 @@ describe('carrier picker', () => {
     expect(within(within(list).getByRole('group', { name: 'Fits this number' })).getAllByRole('option').map((option) => option.id.split('-').at(-1)))
       .toEqual(['dpd', 'ciblex']);
     const all = within(list).getByRole('group', { name: 'All carriers' });
-    expect(within(all).getAllByRole('option')).toHaveLength(SELECTABLE_CARRIERS.length);
-    expect(within(all).getByRole('option', { name: 'Swiss Post' })).toHaveAccessibleDescription('Switzerland · Liechtenstein');
+    // Counted and found without a role query, which names every row.
+    expect(all.querySelectorAll('[role="option"]')).toHaveLength(SELECTABLE_CARRIERS.length);
+    const swissPost = all.querySelector('[role="option"][id$="-all-swiss-post"]');
+    expect(swissPost).toHaveAccessibleName('Swiss Post');
+    expect(swissPost).toHaveAccessibleDescription('Switzerland · Liechtenstein');
     expect(within(picker).getByRole('navigation', { name: 'Jump to a letter' })).toHaveTextContent(/^AB.*#$/);
   });
 
@@ -87,9 +90,14 @@ describe('carrier picker', () => {
     const user = userEvent.setup();
     const { picker, onSelect, onClose } = renderPicker({ selected: 'dhl', auto: undefined });
     expect(within(picker).queryByRole('option', { name: /^Detect automatically/ })).not.toBeInTheDocument();
-    await everyCarrierListed(picker);
-    expect(within(within(picker).getByRole('group', { name: 'All carriers' })).getByRole('option', { name: 'DHL' }))
-      .toHaveAttribute('aria-selected', 'true');
+    // DHL's row in the A to Z list, found by its id once drawn: a role query names every row, and the list keeps growing.
+    const dhl = await waitFor(() => {
+      const row = picker.querySelector('[data-letter] > [role="option"][id$="-all-dhl"]');
+      if (!row) throw new Error('DHL is not listed yet.');
+      return row;
+    }, { timeout: 15_000 });
+    expect(dhl).toHaveAccessibleName('DHL');
+    expect(dhl).toHaveAttribute('aria-selected', 'true');
     await user.click(within(within(picker).getByRole('group', { name: 'Fits this number' })).getByRole('option', { name: 'Ciblex' }));
     expect(onSelect).toHaveBeenCalledWith('ciblex');
     await user.click(within(picker).getByRole('button', { name: 'Cancel' }));

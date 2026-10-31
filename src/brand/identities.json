@@ -2302,6 +2302,9 @@
   "peqasus-az": {
     "decal": "peqasus-az"
   },
+  "performance-freight": {
+    "decal": "performance-freight"
+  },
   "pfc-express": {
     "decal": "pfc-express"
   },
@@ -2661,6 +2664,9 @@
   "sentral-cargo": {
     "decal": "sentral-cargo"
   },
+  "senyu": {
+    "decal": "senyu"
+  },
   "serpost": {
     "decal": "serpost"
   },
@@ -2862,6 +2868,9 @@
   },
   "steadfast": {
     "decal": "steadfast"
+  },
+  "stg-ltl": {
+    "decal": "stg-ltl"
   },
   "sto": {
     "decal": "sto"
@@ -3101,6 +3110,9 @@
   },
   "trexity": {
     "decal": "trexity"
+  },
+  "tsb-es": {
+    "decal": "tsb-es"
   },
   "tsjy": {
     "decal": "tsjy"

@@ -390,7 +390,11 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'lm-parcel'
   | 'emirates-courier-express'
   | 'viet-an-express'
-  | 'espoirer';
+  | 'espoirer'
+  | 'performance-freight'
+  | 'stg-ltl'
+  | 'tsb-es'
+  | 'senyu';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

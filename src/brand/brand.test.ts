@@ -466,6 +466,10 @@ describe('carrier brand', () => {
       'emirates-courier-express',
       'viet-an-express',
       'espoirer',
+      'performance-freight',
+      'stg-ltl',
+      'tsb-es',
+      'senyu',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

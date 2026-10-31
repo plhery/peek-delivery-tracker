@@ -41277,6 +41277,223 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.tsbconnect.net/app/tracking/public?search=true"
+    },
+    "bfe-express": {
+      "displayName": "BFE Express",
+      "aliases": [
+        "BFEexpress"
+      ],
+      "countries": [
+        "AR",
+        "PE",
+        "UY",
+        "US"
+      ],
+      "color": "#122a88",
+      "selectable": true,
+      "timezone": "America/Argentina/Buenos_Aires",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.bfeexpress.com/track?track_number={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "bfeexpress.com",
+            "www.bfeexpress.com"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "track_number"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.bfeexpress.com/tracking"
+    },
+    "diakinisis": {
+      "displayName": "Diakinisis",
+      "aliases": [
+        "Διακίνησις",
+        "Diakinisis Logistics Services"
+      ],
+      "countries": [
+        "GR"
+      ],
+      "color": "#ed1c24",
+      "selectable": true,
+      "timezone": "Europe/Athens",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://pod.diakinisis.gr/tnt.php"
+    },
+    "global-delivery-network": {
+      "displayName": "Global Delivery Network",
+      "aliases": [
+        "GDN Parcel"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#00588a",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://pds.gdnparcel.com/pds_tracking.asp?track={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "gdnparcel.com",
+            "www.gdnparcel.com",
+            "pds.gdnparcel.com"
+          ],
+          "pathPattern": "^/pds_tracking\\.asp$",
+          "params": [
+            "track"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://gdnparcel.com/"
+    },
+    "max-pakket": {
+      "displayName": "MAX Pakket",
+      "aliases": [
+        "MaxPakket"
+      ],
+      "countries": [
+        "NL"
+      ],
+      "color": "#fed300",
+      "selectable": true,
+      "timezone": "Europe/Amsterdam",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://emens.mendrix.cloud/TrackAndTrace"
+    },
+    "paisley-freight": {
+      "displayName": "Paisley Freight",
+      "countries": [
+        "GB"
+      ],
+      "color": "#2b70b7",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.paisleyfreight.com/tracking"
+    },
+    "sfyd-express": {
+      "displayName": "SFYD Express",
+      "aliases": [
+        "云速递",
+        "云速递国际物流"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#f47920",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://sfydexpress.com/tracking.html?c={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "sfydexpress.com",
+            "www.sfydexpress.com"
+          ],
+          "pathPattern": "^/tracking\\.html$",
+          "params": [
+            "c"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://sfydexpress.com/tracking.html"
+    },
+    "vip-posta": {
+      "displayName": "VIP Posta",
+      "aliases": [
+        "Вип Пошта",
+        "VIP Pošta",
+        "VIP Poshta"
+      ],
+      "countries": [
+        "MK"
+      ],
+      "color": "#02422a",
+      "selectable": true,
+      "timezone": "Europe/Skopje",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://vipposta.mk/home/tracking?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "vipposta.mk",
+            "www.vipposta.mk"
+          ],
+          "pathPattern": "^/home/tracking/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://vipposta.mk/"
+    },
+    "zippd": {
+      "displayName": "Zippd",
+      "aliases": [
+        "DeliveryApp"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#173ded",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.zippd.com/tracking/?code={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "zippd.com",
+            "www.zippd.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "code"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.zippd.com/tracking/"
     }
   }
 }

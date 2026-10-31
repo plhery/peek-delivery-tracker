@@ -301,4 +301,21 @@ class ParcelAdditionTests {
         val germanNames = carriers.map { catalog.info(it, AppLanguage.De).displayName }
         assertEquals("${germanNames[0]}, ${germanNames[1]} und ${germanNames[2]}", form.carrierNames(carriers, german))
     }
+
+    @Test
+    fun theNameTakesEightyCharactersCountedAsTheReaderSeesThem() {
+        assertEquals("a".repeat(80), ParcelAddition.label("a".repeat(81)))
+        // A flag is one character of two code points: the eightieth whole, nothing after it.
+        val flags = "\uD83C\uDDE8\uD83C\uDDED".repeat(81)
+        assertEquals("\uD83C\uDDE8\uD83C\uDDED".repeat(80), ParcelAddition.label(flags))
+        assertEquals("Shoes", ParcelAddition.label("Shoes"))
+    }
+
+    @Test
+    fun aPasteOpensAddWithItsTextTrimmedAndCutToWhatAddTakes() {
+        assertEquals("1Z999AA10123456784", FirstParcelRequest.Paste(" 1Z999AA10123456784\n").draft)
+        assertNull(FirstParcelRequest.Paste(" \n ").draft)
+        assertNull(FirstParcelRequest.Paste("").draft)
+        assertEquals(FirstParcelRequest.pasteLimit, FirstParcelRequest.Paste("x".repeat(FirstParcelRequest.pasteLimit + 5)).draft?.length)
+    }
 }

@@ -418,5 +418,8 @@ data class ParcelAddition(
 
         /** The longest name a parcel takes (`label.prefix(80)`). */
         const val LABEL_LIMIT = 80
+
+        /** The name field as it takes `typed` (`onChange(of: label)`): its first [LABEL_LIMIT] characters. */
+        fun label(typed: String): String = typed.characterPrefix(LABEL_LIMIT)
     }
 }

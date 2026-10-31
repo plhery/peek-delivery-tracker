@@ -44,6 +44,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.Snapshot
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -164,6 +165,11 @@ fun DeliveriesTab(
         // From Android 13 the system confirms a copy itself, and the app says nothing more.
         Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
     }
+    // What the clipboard holds as text, read once the reader asks for it (`Clipboard.string`).
+    state.readClipboard = {
+        context.getSystemService(ClipboardManager::class.java)?.primaryClip
+            ?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.coerceToText(context)?.toString()
+    }
     // A parcel's link through the system's share sheet (`ShareLink`, `LinkActivitySheet`), which tells `chosen` of the
     // app it went to, if any (ShareTargetChosen); false where it couldn't be shown.
     state.handOut = { address, chosen ->
@@ -221,6 +227,7 @@ fun DeliveriesTab(
         SearchCounted(state)
         val lifecycle = LocalLifecycleOwner.current.lifecycle
         val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
+        state.inFront = resumed
         // `watching`: the list is looked at, and may show a card moving.
         val watching = resumed && state.listShown && !state.showingFilters && !state.hasCustomView && !reduceMotion
         HoldingDelivered(state, resumed, watching)
@@ -288,6 +295,9 @@ fun DeliveriesTab(
         ParcelAlertsHost(state)
         // A parcel's share sheet, a page's or a card's, over the whole window where the tab shell draws it.
         ParcelShareHost(state)
+        // Add, over the whole window where the tab shell draws it, and the card it added once it has gone.
+        AddParcelHost(state)
+        Revealing(state, reduceMotion)
         // The page's map, over the whole window where the tab shell draws it.
         ParcelMapHost(state)
         // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.
@@ -437,6 +447,24 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
  * parcel the list's column also takes them, and the focus, so that ↑ and ↓ step through the cards rather than move
  * the focus ([listKeys]).
  */
+/**
+ * The card Add added, brought to the list's middle once Add has gone (`revealParcelID`): a frame later, once the list
+ * holds it, on the smooth spring, at once under Reduce Motion. A scroll of the reader's meanwhile ends it.
+ */
+@Composable
+private fun Revealing(state: DeliveriesState, reduceMotion: Boolean) {
+    val parcelId = state.revealParcel
+    LaunchedEffect(parcelId) {
+        if (parcelId == null) return@LaunchedEffect
+        try {
+            withFrameNanos {}
+            state.reveal(parcelId, reduceMotion)
+        } finally {
+            if (state.revealParcel == parcelId) state.revealParcel = null
+        }
+    }
+}
+
 @Composable
 private fun DeliveriesKeys(state: DeliveriesState, scope: CoroutineScope, reduceMotion: Boolean) {
     val handle by rememberUpdatedState { event: KeyEvent -> state.key(event, scope, reduceMotion) }

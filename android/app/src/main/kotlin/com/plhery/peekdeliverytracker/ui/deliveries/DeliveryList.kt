@@ -314,7 +314,9 @@ private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding
                 pull.height = it.height
                 state.dropFlights()
             }
-            .onPlaced { state.places.list = it },
+            .onPlaced { state.places.list = it }
+            // Text or a link dropped on the list opens Add with it.
+            .parcelDrop(state),
     ) {
         PullIndicator(state.pull, origin = {
             // The top of the content: the list's first item, less the content's own room above it.

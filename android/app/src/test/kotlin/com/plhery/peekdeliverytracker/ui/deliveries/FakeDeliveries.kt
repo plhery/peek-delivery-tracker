@@ -5,6 +5,9 @@ import android.content.Context
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.GivenPostcode
+import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
@@ -18,6 +21,7 @@ import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
 import com.plhery.peekdeliverytracker.core.UserDefaults
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
@@ -26,6 +30,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
+import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.time.Instant
 import java.time.ZoneOffset
@@ -306,6 +311,58 @@ class FakeDeliveries(
 
     override val isDemo: Boolean get() = session.value == AuthenticationState.Demo
 
+    /** Tracking without an account, as a test sets it. */
+    override var isGuest: Boolean = false
+
+    /** Holds an addition until completed; `failure` fails it. */
+    var adding: CompletableDeferred<Unit>? = null
+
+    /** The id the next parcel added takes, else a random one. */
+    var addedId: UUID? = null
+
+    /** What each addition sent. */
+    val additions = mutableListOf<AdditionRequest>()
+
+    /** What `detectCarrier` answers for each number, until `detecting` lets it go; a number without one fails. */
+    val detections = mutableMapOf<String, CarrierDetectionResponse>()
+    var detecting: CompletableDeferred<Unit>? = null
+    val detected = mutableListOf<String>()
+
+    override suspend fun add(
+        trackingNumber: String,
+        label: String,
+        carrier: CarrierId,
+        trackingUrl: String?,
+        dpdPostcode: String?,
+        dpdPostcodeCountry: String?,
+    ): Parcel {
+        adding?.await()
+        failure?.let { throw it }
+        additions += AdditionRequest(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry)
+        val parcel = Parcel(
+            id = addedId ?: UUID.randomUUID(), trackingNumber = CarrierCatalog.normalize(trackingNumber), label = label.trim(),
+            carrier = carrier, createdAt = DateParser.isoString(now), syncStatus = SyncStatus.Pending, notificationsMuted = false,
+            trackingUrl = trackingUrl, dpdPostcode = dpdPostcode,
+        )
+        parcels.value = parcels.value + parcel
+        return parcel
+    }
+
+    override suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse {
+        detected += trackingNumber
+        detecting?.await()
+        return detections[trackingNumber] ?: throw DeliveryApiError.InvalidResponse()
+    }
+
+    override var givenPostcodes: List<GivenPostcode> = emptyList()
+
+    val forgottenPostcodes = mutableListOf<String>()
+
+    override fun forgetPostcode(postcode: String) {
+        forgottenPostcodes += postcode
+        givenPostcodes = givenPostcodes.filter { it.postcode != postcode }
+    }
+
     override suspend fun numberRefusal(question: NumberRefusalRequest): Boolean {
         refusalQuestions += question
         refusing?.await()
@@ -400,6 +457,12 @@ class FakeDeliveries(
         welcomes++
     }
 
+    var signIns = 0
+
+    override fun showSignIn() {
+        signIns++
+    }
+
     override fun view(screen: String) {
         views += screen
         onView(screen)
@@ -421,6 +484,16 @@ class FakeDeliveries(
         val dpdPostcode: String?,
         val dpdPostcodeCountry: String?,
         val providerPostcode: String?,
+    )
+
+    /** What an addition sent: the number, the name, the carrier, the link, the postcode and its country. */
+    data class AdditionRequest(
+        val trackingNumber: String,
+        val label: String,
+        val carrier: CarrierId,
+        val trackingUrl: String?,
+        val dpdPostcode: String?,
+        val dpdPostcodeCountry: String?,
     )
 
     private companion object {

@@ -38448,7 +38448,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Manila",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "consegnia",
+      "recognitionRank": 57
     },
     "trackingUrlTemplate": "https://clc-express.com/track-delivery?awb={trackingNumber}",
     "linkRules": [
@@ -38564,7 +38565,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kuala_Lumpur",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fmx",
+      "recognitionRank": 147
     },
     "trackingUrlTemplate": "https://www.fmx.asia/result_detail.php?p=1&conno={trackingNumber}",
     "linkRules": [
@@ -38646,7 +38648,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Manila",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "hitch",
+      "recognitionRank": 117
     },
     "trackingUrlTemplate": "https://hitch.com.ph/tracking?no={trackingNumber}",
     "linkRules": [
@@ -39927,6 +39930,310 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.smexpress.in/Home/track"
+  },
+  "360lion": {
+    "displayName": "360Lion",
+    "aliases": [
+      "360 Lion",
+      "360Lion Express",
+      "360 Lion Express",
+      "WSH",
+      "纬狮物流",
+      "纬狮物联网",
+      "纬狮物流网络科技有限公司",
+      "Wish Global Logistics"
+    ],
+    "countries": [
+      "CN",
+      "MX",
+      "CL",
+      "PE",
+      "BR",
+      "CO",
+      "EC",
+      "US",
+      "AR",
+      "UY",
+      "BO",
+      "PY",
+      "SV",
+      "CR",
+      "GT",
+      "VE",
+      "PA"
+    ],
+    "color": "#cf5d15",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://toms.360lion.com/track?trackNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "toms.360lion.com"
+        ],
+        "pathPattern": "^/track/?$",
+        "params": [
+          "trackNumber"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^WSH[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.360lion.com/"
+  },
+  "asiafly": {
+    "displayName": "Asiafly",
+    "aliases": [
+      "ASIAFLY",
+      "Asiafly Express",
+      "亚翔国际",
+      "亚翔货物运输有限公司",
+      "Shenzhen Yaxiang International Freight Forwarding",
+      "Shenzhen Yaxiang International Freight Forwarding Co., Ltd."
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#2d2f83",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.asiaflyexp.com/order-search.html?no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.asiaflyexp.com",
+          "asiaflyexp.com"
+        ],
+        "pathPattern": "^/order-search\\.html$",
+        "params": [
+          "no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.asiaflyexp.com/order-search.html"
+  },
+  "cititrans": {
+    "displayName": "Cititrans",
+    "aliases": [
+      "CITITRANS",
+      "亦邦物流",
+      "亦邦国际",
+      "亦邦(深圳)国际物流有限公司",
+      "亦邦国际货运代理（深圳）有限公司"
+    ],
+    "countries": [
+      "CN",
+      "AE",
+      "SA",
+      "OM",
+      "BH",
+      "KE",
+      "NG",
+      "TZ"
+    ],
+    "color": "#1c823a",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cititrans.com/trajectory"
+  },
+  "shunbang-express": {
+    "displayName": "ShunBang Express",
+    "aliases": [
+      "KJY",
+      "ShunBang",
+      "ShunBangExpress",
+      "SHUNBANG EXPRESS TECHNOLOGY",
+      "顺邦科技物流",
+      "跨境翼",
+      "深圳市跨境翼电子商务股份有限公司",
+      "深圳市顺邦科技物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1f438d",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.shunbang.vip/"
+  },
+  "syd": {
+    "displayName": "SYD Express",
+    "aliases": [
+      "SYD",
+      "速邮达物流",
+      "速郵達物流",
+      "深圳市速邮达物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ff0000",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://sud.kingtrans.cn/WebTrack?action=list&language=en&istrack=false&bills={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "sud.kingtrans.cn"
+        ],
+        "pathPattern": "^/WebTrack$",
+        "params": [
+          "bills"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.suyd56.com/Index.html"
+  },
+  "topex-logistics": {
+    "displayName": "Topex Logistics",
+    "aliases": [
+      "迅派物流",
+      "深圳迅派物流科技有限公司",
+      "Shenzhen Xunpai Logistics Technology",
+      "Shenzhen Xunpai Logistics Technology Co., Ltd."
+    ],
+    "countries": [
+      "CN",
+      "BR"
+    ],
+    "color": "#3058a8",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.topex.group/"
+  },
+  "vnlin": {
+    "displayName": "Vnlin",
+    "aliases": [
+      "VNLIN",
+      "Vnlin Express",
+      "Vnlin Shipping",
+      "VNLIN SHIPPING LLC",
+      "合联国际",
+      "合聯國際",
+      "Winlink Logistics",
+      "广州合联物流信息科技有限公司"
+    ],
+    "countries": [
+      "CN",
+      "AE",
+      "SA",
+      "QA",
+      "KW",
+      "OM",
+      "BH"
+    ],
+    "color": "#e00000",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.vnlin.com/trackIndex.html"
+  },
+  "we-world-express": {
+    "displayName": "We World Express",
+    "aliases": [
+      "WeWorld Express",
+      "We World Express Limited"
+    ],
+    "countries": [
+      "HK",
+      "CN",
+      "TR"
+    ],
+    "color": "#2d2a77",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^WWE[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.weworldexpress.com/wwe/track"
+  },
+  "xingyunyi": {
+    "displayName": "XingYunYi",
+    "aliases": [
+      "XYY",
+      "XYY / XingYunYi",
+      "XingYunYi Logistics",
+      "XYY Logistics",
+      "行运易",
+      "行运易物流",
+      "广州行运易国际供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#3b9dff",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.xingyunyi.com/tracking?nums={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.xingyunyi.com",
+          "xingyunyi.com",
+          "www.xingyunyi.cn",
+          "xingyunyi.cn"
+        ],
+        "pathPattern": "^/(?:cn/)?tracking/?$",
+        "params": [
+          "nums"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.xingyunyi.com/tracking"
   }
 } as const;
 
@@ -41013,7 +41320,16 @@ export const CARRIER_IDS = [
   "ecom-logistics",
   "fragilepak",
   "hkd-express",
-  "sm-express"
+  "sm-express",
+  "360lion",
+  "asiafly",
+  "cititrans",
+  "shunbang-express",
+  "syd",
+  "topex-logistics",
+  "vnlin",
+  "we-world-express",
+  "xingyunyi"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

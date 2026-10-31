@@ -67,6 +67,7 @@ import com.plhery.peekdeliverytracker.core.api.ShareParcelRequest
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.awaitFrame
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
@@ -75,6 +76,7 @@ import java.time.Duration
 import java.util.UUID
 import kotlin.math.abs
 import kotlin.math.roundToInt
+import kotlin.math.sign
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -93,9 +95,10 @@ import org.robolectric.util.ReflectionHelpers.ClassParameter
 /**
  * A parcel's share sheet (B-S51–B-S57, B-ST32, B-SE01–B-SE03, B-H07, B-L08): opened from its pass's share button and
  * its card's menu, a reader link's page sharing its address at once; the link read, made, changed and stopped; the
- * switches shown at once and put back when the service refuses; the gift's words within their limits; the address
- * copied and handed to the system's share sheet, once at a time, counted once an app is chosen; the keyboard and the
- * navigation bar; the detents, the form on a tablet, the window made again, and what TalkBack reads.
+ * switches shown at once and put back when the service refuses, and a switch's lens whole under the finger; the gift's
+ * words within their limits; the address copied and handed to the system's share sheet, once at a time, counted once
+ * an app is chosen; the keyboard and the navigation bar; the detents, the form on a tablet, the window made again, and
+ * what TalkBack reads.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -487,6 +490,35 @@ class ParcelShareTest {
         assertTrue(shows(PARCEL_SHARE_FAILURE, "Couldn’t save that."))
         assertFalse(source.shareLinks[gift]!!.gift)
         assertFalse(exists(PARCEL_SHARE_NOTE))
+    }
+
+    @Test
+    fun aSwitchsLensUnderTheFingerShowsWholeOverTheOptions() {
+        show()
+        openShare()
+        // The row as drawn, in the window's pixels, a point of it fewer of them as the floating sheet is scaled down a
+        // little; the switch in it, 63 × 28 at its trailing end 14 in, is off, its knob's centre 20.5 from its leading
+        // end.
+        val row = node(PARCEL_SHARE_NUMBER).fetchSemanticsNode()
+        val point = row.boundsInRoot.width / row.size.width * compose.density.density
+        val start = row.boundsInRoot.right - 77 * point
+        val middle = row.boundsInRoot.center.y
+        node(PARCEL_SHARE_NUMBER).performTouchInput { down(Offset(width - 45.dp.toPx(), height / 2f)) }
+        settle()
+        compose.awaitFrame()
+        val pixels = compose.onRoot().captureToImage().toPixelMap()
+        fun shade(x: Float, y: Float) = pixels[x.roundToInt(), y.roundToInt()].let { 255 * (0.299f * it.red + 0.587f * it.green + 0.114f * it.blue) }
+        val paper = shade(row.boundsInRoot.right - 4 * point, middle)
+        // The lens's rim, from outside in: before the track's leading end, and above and below the knob.
+        fun rim(x: Float, y: Float) = shade(x, y) < paper - 25
+        fun along(from: Float, to: Float) = (0..abs(to - from).roundToInt()).map { from + it * sign(to - from) }
+        val knob = start + 20.5f * point
+        val leading = along(start - 12 * point, start).firstOrNull { rim(it, middle) }
+        val top = along(middle - 26 * point, middle - 14 * point).firstOrNull { rim(knob, it) }
+        val bottom = along(middle + 26 * point, middle + 14 * point).firstOrNull { rim(knob, it) }
+        assertTrue("the lens reaches 9 before the track: $leading, the track at $start", leading != null && leading <= start - 8 * point)
+        assertTrue("and 6 above it: $top, the track at ${middle - 14 * point}", top != null && top <= middle - 19 * point)
+        assertTrue("and below it: $bottom, the track at ${middle + 14 * point}", bottom != null && bottom >= middle + 19 * point)
     }
 
     @Test

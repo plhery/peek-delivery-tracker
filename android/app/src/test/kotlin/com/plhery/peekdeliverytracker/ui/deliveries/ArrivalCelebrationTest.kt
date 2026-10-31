@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
 import androidx.activity.ComponentActivity
@@ -8,7 +10,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.click
@@ -156,16 +160,60 @@ class ArrivalCelebrationTest {
     }
 
     /**
-     * How far the middle of the list's item holding `name`'s card is below the list's, in pixels: the item, with the
-     * room above its card, is what the reveal brings to the middle.
+     * How far the middle of `name`'s card is below the list's, in pixels: the card itself, not the room above it in its
+     * item, is what the reveal brings to the middle (`.id` is on the card).
      */
     private fun offCentre(name: String): Float {
-        val card = compose.card(name).fetchSemanticsNode().boundsInRoot
-        val list = compose.onNodeWithTag(PARCEL_LIST).fetchSemanticsNode().boundsInRoot
-        val info = deliveries.listState.layoutInfo
-        val start = list.top + info.beforeContentPadding
-        val item = info.visibleItemsInfo.first { card.center.y in start + it.offset..start + it.offset + it.size }
-        return start + item.offset + item.size / 2f - list.center.y
+        val card = compose.card(name).fetchSemanticsNode().layoutInfo.coordinates
+        val middle = card.localToRoot(Offset(card.size.width / 2f, card.size.height / 2f)).y
+        return middle - compose.onNodeWithTag(PARCEL_LIST).fetchSemanticsNode().boundsInRoot.center.y
+    }
+
+    /** Where each item the list shows stands, by its key, in pixels. */
+    private fun standing(): Map<Any, Int> = deliveries.listState.layoutInfo.visibleItemsInfo.associate { it.key to it.offset }
+
+    /**
+     * The card of `id` revealed from where the list stands: how far the list moved at each frame until the card's
+     * arrival starts, in pixels, up the screen as positive, each read from an item it showed in both frames.
+     */
+    private fun revealMoves(id: UUID): List<Float> {
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { deliveries.revealParcel = id }
+        val moves = mutableListOf<Float>()
+        var before = standing()
+        repeat(180) {
+            if (deliveries.parcelBurst == id) return moves
+            frame()
+            val now = standing()
+            val seen = now.keys.firstOrNull { it in before } ?: throw AssertionError("The list jumped past all it showed, after $moves")
+            moves += (before.getValue(seen) - now.getValue(seen)).toFloat()
+            before = now
+        }
+        throw AssertionError("No arrival in 3 s, after $moves")
+    }
+
+    /** One scroll of the list, `up` the screen or down it: one way only, frame by frame, with no jump. */
+    private fun assertOneScroll(moves: List<Float>, up: Boolean) {
+        val total = moves.sum()
+        assertTrue("Scrolled $total px: $moves", if (up) total > 400 else total < -400)
+        for (move in moves) {
+            assertTrue("A move of $move px against the scroll: $moves", if (up) move >= 0 else move <= 0)
+            assertTrue("A jump of $move px in $total: $moves", abs(move) <= abs(total) * 0.2f)
+        }
+        // Over the smooth 0.35 s, not at once.
+        assertTrue("Over ${moves.count { it != 0f }} frames: $moves", moves.count { it != 0f } >= 12)
+    }
+
+    /** The window's pixels in `bounds`, drawn now in software, as [drawn] draws a node's. */
+    private fun pixels(bounds: Rect): IntArray {
+        val root = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        val whole = Bitmap.createBitmap(root.width, root.height, Bitmap.Config.ARGB_8888)
+        compose.runOnUiThread { root.draw(Canvas(whole)) }
+        val left = bounds.left.roundToInt()
+        val top = bounds.top.roundToInt()
+        val width = bounds.width.roundToInt()
+        val height = bounds.height.roundToInt()
+        return IntArray(width * height).also { whole.getPixels(it, 0, width, left, top, width, height) }
     }
 
     /** Where the card's layer puts its corners and its middle, in the window's pixels. */
@@ -279,6 +327,42 @@ class ArrivalCelebrationTest {
     }
 
     @Test
+    fun aCardOutOfViewBelowRisesIntoTheMiddleInOneScroll() {
+        show()
+        assertTrue(compose.onAllNodes(cardNamed("Lamp 11")).fetchSemanticsNodes().isEmpty())
+        assertOneScroll(revealMoves(lamp(11).id), up = true)
+        assertEquals(0f, offCentre("Lamp 11"), 1f)
+        frame()
+        frame()
+        assertTrue(shows(PARCEL_BURST))
+        assertEquals(1, taps())
+    }
+
+    @Test
+    fun aCardOutOfViewAboveComesDownIntoTheMiddleInOneScroll() {
+        show()
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToIndex(deliveries.listState.layoutInfo.totalItemsCount - 1)
+        settle()
+        assertTrue(compose.onAllNodes(cardNamed("Lamp 4")).fetchSemanticsNodes().isEmpty())
+        assertOneScroll(revealMoves(lamp(4).id), up = false)
+        assertEquals(0f, offCentre("Lamp 4"), 1f)
+        frame()
+        frame()
+        assertTrue(shows(PARCEL_BURST))
+        assertEquals(1, taps())
+    }
+
+    @Test
+    fun underReduceMotionACardOutOfViewComesToTheMiddleAtOnce() {
+        reduceMotion.value = true
+        show()
+        val moves = revealMoves(lamp(11).id)
+        // The frame the reveal starts on, after the one the list is drawn on.
+        assertEquals(moves.toString(), 1, moves.count { it != 0f })
+        assertEquals(0f, offCentre("Lamp 11"), 1f)
+    }
+
+    @Test
     fun underReduceMotionTheCardComesAtOnceAndNothingFlies() {
         reduceMotion.value = true
         show()
@@ -336,6 +420,29 @@ class ArrivalCelebrationTest {
     }
 
     @Test
+    fun underReduceMotionNextUpKeepsItsShadowAsItBrightens() {
+        reduceMotion.value = true
+        show()
+        val card = compose.card("Lamp 1").fetchSemanticsNode().boundsInRoot
+        // Under the card, above the next one: Next up's shadow and nothing else.
+        val band = Rect(card.left, card.bottom + 2, card.right, card.bottom + 8 * density)
+        val before = pixels(band)
+        val shade = before.maxOf { Color.red(it) } - before.minOf { Color.red(it) }
+        assertTrue("A shadow $shade deep", shade >= 4)
+        val burst = celebrate(lamp(1).id)
+        repeat(22) { frame() }
+        assertTrue(burst.seconds in 0.3..0.45)
+        // The shadow brightened with the card, by a little as it is so faint, rather than gone.
+        val during = pixels(band)
+        val most = before.indices.maxOf { index ->
+            val was = before[index]
+            val now = during[index]
+            maxOf(abs(Color.red(now) - Color.red(was)), abs(Color.green(now) - Color.green(was)), abs(Color.blue(now) - Color.blue(was)))
+        }
+        assertTrue("A change of $most under the card", most <= 2)
+    }
+
+    @Test
     fun theCardWobblesFrameByFrame() {
         show()
         val rest = pose("Lamp 2").centre
@@ -357,22 +464,51 @@ class ArrivalCelebrationTest {
     }
 
     @Test
+    fun theCardsPlaceIsWhereItStandsNotWhereItWobbles() {
+        show()
+        for (name in listOf("Lamp 1", "Lamp 2")) {
+            val id = long.first { it.label == name }.id
+            val still = checkNotNull(deliveries.places.place(id)).frame
+            celebrate(id)
+            repeat(4) { frame() }
+            assertNotEquals(0.0, pose(name).degrees, 1e-3)
+            // What a delivery's flight starts from, its paper comes out of, and lands on. The name, measured where it is
+            // drawn, follows the card, as on the iPhone.
+            assertEquals(still, checkNotNull(deliveries.places.place(id)).frame)
+            compose.runOnUiThread { deliveries.endArrival() }
+            frame()
+        }
+    }
+
+    @Test
     fun theLittleParcelsFlyOutOfEachCardsStamp() {
         show()
         for ((name, inset) in listOf("Lamp 1" to ParcelArrival.NEXT_STUB_INSET, "Lamp 2" to ParcelArrival.STUB_INSET)) {
             val id = long.first { it.label == name }.id
             val burst = celebrate(id)
             assertEquals(inset, burst.stubInset, 0.0)
-            val card = compose.card(name).fetchSemanticsNode().layoutInfo.coordinates.size
-            assertEquals(card.width / density.toDouble(), burst.width, 1e-6)
-            assertEquals(card.height / density.toDouble(), burst.height, 1e-6)
             repeat(18) { frame() }
             repeat(2) {
-                for (index in 0 until 6) {
-                    val expected = particle(index, burst.seconds, burst.width, burst.height, inset)
-                    val drawn = burst.poses[index]
-                    val actual = doubleArrayOf(drawn.x, drawn.y, drawn.rotation, drawn.scale, drawn.opacity)
-                    for (value in expected.indices) assertEquals("$name, pip $index at ${burst.seconds} s", expected[value], actual[value], 1e-9)
+                // Where each is drawn, on the card as it wobbles: its middle, its turn and its scale on the card's.
+                val card = compose.card(name).fetchSemanticsNode().layoutInfo.coordinates
+                val width = card.size.width / density.toDouble()
+                val height = card.size.height / density.toDouble()
+                val cardPose = pose(name)
+                val pips = compose.onNodeWithTag(PARCEL_BURST, useUnmergedTree = true).fetchSemanticsNode().children
+                assertEquals(6, pips.size)
+                pips.forEachIndexed { index, node ->
+                    val at = "$name, pip $index at ${burst.seconds} s"
+                    val (x, y, turn, scale) = particle(index, burst.seconds, width, height, inset).toList()
+                    val pip = node.layoutInfo.coordinates
+                    val side = pip.size.width.toFloat()
+                    assertEquals(at, IOS_PARCELS[index][3] * 1.25 * density, side.toDouble(), 0.5)
+                    val middle = pip.localToRoot(Offset(side / 2, pip.size.height / 2f))
+                    val expected = card.localToRoot(Offset((x * density).toFloat(), (y * density).toFloat()))
+                    assertEquals(at, expected.x, middle.x, 0.05f)
+                    assertEquals(at, expected.y, middle.y, 0.05f)
+                    val drawn = Pose(pip.localToRoot(Offset.Zero), pip.localToRoot(Offset(side, 0f)), middle, side)
+                    assertEquals(at, turn, drawn.degrees - cardPose.degrees, 1e-3)
+                    assertEquals(at, scale, drawn.scale / cardPose.scale, 1e-4)
                 }
                 frame()
             }
@@ -474,6 +610,31 @@ class ArrivalCelebrationTest {
     }
 
     @Test
+    fun theWindowLeavingTheFrontAsAddGoesDownForgetsTheCardItAdded() {
+        show()
+        saveRunningShoes()
+        // Saved: Add has closed, and is on its way down.
+        framesUntil { deliveries.addition == null }
+        assertTrue(deliveries.additionClosing)
+        compose.activityRule.scenario.moveToState(Lifecycle.State.STARTED)
+        frame()
+        frame()
+        compose.activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        // Back in front before Add has gone: once it has, the list shows nothing of the card.
+        framesUntil {
+            assertNull(deliveries.revealParcel)
+            assertNull(deliveries.parcelBurst)
+            !deliveries.additionClosing
+        }
+        repeat(60) {
+            frame()
+            assertNull(deliveries.revealParcel)
+            assertNull(deliveries.parcelBurst)
+        }
+        assertEquals(0, taps())
+    }
+
+    @Test
     fun aCardLeavingTheListEndsOnlyItsOwnArrival() {
         show()
         celebrate(lamp(2).id)
@@ -506,21 +667,6 @@ class ArrivalCelebrationTest {
         assertFalse(shows(PARCEL_BURST))
         assertStill("Lamp 2")
         assertEquals(1, taps())
-    }
-
-    @Test
-    fun anotherCardsArrivalTakesOverWithoutTheFirstEndingIt() {
-        show()
-        celebrate(lamp(2).id)
-        repeat(30) { frame() }
-        val second = celebrate(lamp(3).id)
-        // Past where the first would have ended: the second goes on to its own end.
-        repeat(40) { frame() }
-        assertEquals(lamp(3).id, deliveries.parcelBurst)
-        assertStill("Lamp 2")
-        framesUntil { deliveries.parcelBurst == null }
-        assertTrue(second.seconds >= 0.95)
-        assertEquals(2, taps())
     }
 
     /** iOS's `particle(_:elapsed:origin:spread:)`, written out again: x, y, turn, scale and opacity, in points. */

@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Paint
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.LinearEasing
@@ -20,22 +22,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.ColorMatrix
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.GraphicsLayerScope
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.ParcelArrival
+import com.plhery.peekdeliverytracker.ui.draw.ExperimentalSurfaceShadow
 import com.plhery.peekdeliverytracker.ui.draw.SmallPip
 import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import java.util.UUID
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
@@ -48,11 +53,16 @@ import kotlinx.coroutines.withContext
  * `stubInset` in from its end ([ParcelAddedBurst]); under Reduce Motion it only brightens and back, on 0.75 s, the
  * one motion iOS keeps for it ([KeepMotion]). It stands as it was at once as the arrival ends, which the card leaving
  * the list does, if the arrival is still its own.
+ *
+ * `modifier` goes outside the effect, as the list's `place(of:)` comes after `arrivalCelebration(for:)`: the card's
+ * place in the list is where it stands, not where it wobbles, and the card kept unseen while its picture flies keeps
+ * the little parcels unseen with it.
  */
 @Composable
 internal fun ArrivalCelebration(
     state: DeliveriesState,
     parcelId: UUID,
+    modifier: Modifier = Modifier,
     stubInset: Double = ParcelArrival.STUB_INSET,
     content: @Composable () -> Unit,
 ) {
@@ -67,7 +77,7 @@ internal fun ArrivalCelebration(
         }
     }
     DisposableEffect(state, parcelId) { onDispose { state.burstFinished(parcelId) } }
-    Box(Modifier.arrivalEffect(active, progress, reduceMotion)) {
+    Box(modifier.arrivalEffect(active, progress, reduceMotion)) {
         content()
         if (active.value) ParcelAddedBurst(parcelId, stubInset, Modifier.matchParentSize()) { state.burstFinished(parcelId) }
     }
@@ -81,11 +91,13 @@ private fun DeliveriesState.celebrates(parcelId: UUID): State<Boolean> =
 /**
  * `ParcelArrivalEffect` at the wobble's progress, read as the layer is drawn, while the arrival plays: SwiftUI's offset
  * turned and scaled with the card, as its rotation and scale come after it, the turn and the scale about the card's
- * middle; under Reduce Motion only the brightness.
+ * middle. Under Reduce Motion only the brightness, which clips nothing on the iPhone: what the row draws past its
+ * bounds, Next up's shadow, is drawn brightened in a layer that reaches it ([BRIGHTNESS_REACH]), where a layer's own
+ * colour filter would draw it only within the row.
  */
 private fun Modifier.arrivalEffect(active: State<Boolean>, progress: Animatable<Float, AnimationVector1D>, reduced: Boolean): Modifier =
     graphicsLayer {
-        if (!active.value) return@graphicsLayer
+        if (reduced || !active.value) return@graphicsLayer
         val shown = progress.value.toDouble()
         val offset = ParcelArrival.offsetX(shown, reduced) * density
         val degrees = ParcelArrival.rotation(shown, reduced)
@@ -96,24 +108,41 @@ private fun Modifier.arrivalEffect(active: State<Boolean>, progress: Animatable<
         rotationZ = degrees.toFloat()
         scaleX = scale.toFloat()
         scaleY = scale.toFloat()
-        colorFilter = brightnessFilter(ParcelArrival.brightness(shown, reduced))
+    }.drawWithContent {
+        val paint = if (reduced && active.value) brightnessPaint(ParcelArrival.brightness(progress.value.toDouble(), true)) else null
+        if (paint == null) {
+            drawContent()
+            return@drawWithContent
+        }
+        val canvas = drawContext.canvas.nativeCanvas
+        val reach = BRIGHTNESS_REACH.toPx()
+        val saved = canvas.saveLayer(-reach, -reach, size.width + reach, size.height + reach, paint)
+        drawContent()
+        canvas.restoreToCount(saved)
     }
 
 /**
- * `.brightness(_:)`: `amount` added to each of red, green and blue, in the screen's own steps of 1/255. Each step's
- * filter is made once, so the pulse makes nothing new frame after frame; none at 0.
+ * How far past the row its brightened layer reaches: Next up's shadow ([ExperimentalSurfaceShadow]) has faded out
+ * within twice its blur radius past its offset.
  */
-private fun brightnessFilter(amount: Double): ColorFilter? {
+private val BRIGHTNESS_REACH: Dp = with(ExperimentalSurfaceShadow) { radius * 2 + spread + maxOf(abs(offset.x.value), abs(offset.y.value)).dp }
+
+/**
+ * `.brightness(_:)`: `amount` added to each of red, green and blue, before the colour is premultiplied, in the
+ * screen's own steps of 1/255. Each step's paint is made once, so the pulse makes nothing new frame after frame; none
+ * at 0.
+ */
+private fun brightnessPaint(amount: Double): Paint? {
     val step = (amount * 255).roundToInt().coerceIn(0, 255)
     if (step == 0) return null
-    return brightnessFilters[step] ?: run {
+    return brightnessPaints[step] ?: run {
         val add = step.toFloat()
-        ColorFilter.colorMatrix(ColorMatrix(floatArrayOf(1f, 0f, 0f, 0f, add, 0f, 1f, 0f, 0f, add, 0f, 0f, 1f, 0f, add, 0f, 0f, 0f, 1f, 0f)))
-            .also { brightnessFilters[step] = it }
+        Paint().apply { colorFilter = ColorMatrixColorFilter(floatArrayOf(1f, 0f, 0f, 0f, add, 0f, 1f, 0f, 0f, add, 0f, 0f, 1f, 0f, add, 0f, 0f, 0f, 1f, 0f)) }
+            .also { brightnessPaints[step] = it }
     }
 }
 
-private val brightnessFilters = arrayOfNulls<ColorFilter>(256)
+private val brightnessPaints = arrayOfNulls<Paint>(256)
 
 /**
  * `ParcelAddedBurst`: six small Pips fly, unevenly, out of the card's stamp, `stubInset` in from its end, and follow it

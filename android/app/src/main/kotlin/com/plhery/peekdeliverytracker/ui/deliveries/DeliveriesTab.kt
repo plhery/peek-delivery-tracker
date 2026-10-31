@@ -452,7 +452,8 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
  * The card Add added, brought to the list's middle once Add has gone (`revealParcelID`): a frame later, once the list
  * holds it, on the smooth spring, at once under Reduce Motion. Then its arrival plays (`parcelBurstID`), even where the
  * card needed no scroll, with one tap of success, none as it ends. A drag of the list ends both, the reveal's scroll
- * on the way (`.onScrollPhaseChange`, `.interacting`), as the window leaving the front does.
+ * on the way (`.onScrollPhaseChange`, `.interacting`), as the window leaving the front does, which also forgets the
+ * card Add added while it goes down.
  */
 @Composable
 private fun Revealing(state: DeliveriesState, reduceMotion: Boolean, resumed: Boolean) {
@@ -471,7 +472,7 @@ private fun Revealing(state: DeliveriesState, reduceMotion: Boolean, resumed: Bo
     LaunchedEffect(state) {
         state.listState.interactionSource.interactions.collect { if (it is DragInteraction.Start) state.endArrival() }
     }
-    LaunchedEffect(resumed) { if (!resumed) state.endArrival() }
+    LaunchedEffect(resumed) { if (!resumed) state.leftFront() }
 }
 
 /**

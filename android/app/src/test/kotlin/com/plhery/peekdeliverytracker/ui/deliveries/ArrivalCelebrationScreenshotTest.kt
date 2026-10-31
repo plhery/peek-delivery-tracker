@@ -18,6 +18,9 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.screenshot
+import java.util.UUID
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -27,8 +30,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The arrival of a card just added, 0.3 s in, on the demo's list as the iPhone the captures were taken on shows it
- * (440 × 956 points at three pixels to the point): the card wobbling as the little parcels fly up out of its stamp, on
- * a card on its way and on Next up, in light and dark; then on a tablet, the list beside the first card's parcel.
+ * (440 × 956 points at three pixels to the point), once the list has brought the card to its middle: the card wobbling
+ * as the little parcels fly up out of its stamp, on a card on its way and on Next up, in light and dark; then on a
+ * tablet, the list beside the first card's parcel; and under Reduce Motion, Next up brightened, its shadow with it.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -41,15 +45,19 @@ class ArrivalCelebrationScreenshotTest {
 
     private lateinit var view: View
     private lateinit var deliveries: DeliveriesState
+    private val bursts = mutableMapOf<UUID, ParcelBurstFrame>()
 
     /** The demo's list with the window's bars, `top` and `bottom` points tall. */
-    private fun show(dark: Boolean = false, top: Int = 62, bottom: Int = 24) {
+    private fun show(dark: Boolean = false, top: Int = 62, bottom: Int = 24, reduceMotion: Boolean = false) {
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
-            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+            CompositionLocalProvider(
+                LocalDeliveriesState provides { deliveries = it },
+                LocalParcelBursts provides { id, burst -> bursts[id] = burst },
+            ) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false)
+                    RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = reduceMotion)
                 }
             }
         }
@@ -66,19 +74,25 @@ class ArrivalCelebrationScreenshotTest {
         compose.waitForIdle()
     }
 
-    /** The arrival on the card of the demo's parcel named `name`, 0.3 s after its first frame. */
-    private fun arrive(name: String, shot: String) {
+    /**
+     * The card of the demo's parcel named `name` revealed, as Add's save ends: brought to the list's middle, then its
+     * arrival `seconds` after its first frame, to the frame.
+     */
+    private fun arrive(name: String, shot: String, seconds: Double = 0.3) {
         val parcel = DemoCards.parcels(AppLanguage.En).first { it.label.startsWith(name) }
         compose.mainClock.autoAdvance = false
         compose.runOnUiThread {
-            deliveries.parcelBurst = parcel.id
+            deliveries.revealParcel = parcel.id
             Snapshot.sendApplyNotifications()
         }
-        // Composed, then its first frame, then 0.3 s on.
-        repeat(2 + 19) {
+        var frames = 0
+        while (bursts[parcel.id].let { it == null || it.seconds < seconds - 0.008 }) {
+            check(frames++ < 180) { "No arrival on $name" }
             compose.mainClock.advanceTimeByFrame()
             compose.waitForIdle()
         }
+        assertNull(deliveries.revealParcel)
+        assertEquals(parcel.id, deliveries.parcelBurst)
         compose.screenshot(shot)
     }
 
@@ -112,5 +126,12 @@ class ArrivalCelebrationScreenshotTest {
     fun aTabletBesideTheList() {
         show(top = 24, bottom = 24)
         arrive("Belgian chocolate", "add_arrival_tablet")
+    }
+
+    /** Under Reduce Motion, Next up at the top of its pulse: brightened, its shadow under it brightened too. */
+    @Test
+    fun nextUpUnderReduceMotion() {
+        show(reduceMotion = true)
+        arrive("New trainers", "add_arrival_next_reduced", seconds = 0.375)
     }
 }

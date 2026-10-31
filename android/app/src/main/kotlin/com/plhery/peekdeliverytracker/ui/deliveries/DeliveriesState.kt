@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
+import androidx.compose.animation.core.animate
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.lazy.LazyListState
@@ -758,6 +759,15 @@ internal class DeliveriesState(
     fun endArrival() {
         revealParcel = null
         parcelBurst = null
+    }
+
+    /**
+     * The window has left the front (`scenePhase != .active`): `addedParcelID = nil` too, so that the card Add added
+     * isn't brought to the middle once Add has gone, even where the window is back in front by then.
+     */
+    fun leftFront() {
+        addedParcel = null
+        endArrival()
     }
 
     /** What the clipboard holds as text, read as the reader asks for it (`Clipboard.string`); the composition's. */
@@ -1710,6 +1720,9 @@ internal class DeliveriesState(
     /** The keys of the list's items, in its order, as last drawn ([cardKey] for a card). */
     var itemKeys: List<Any> = emptyList()
 
+    /** The room above each of the list's items, in pixels, as last drawn: a card's is above it, in its item. */
+    var itemTops: List<Float> = emptyList()
+
     /**
      * The card at the top of the list: the first that shows below the list's top, once a card above it has scrolled
      * away. None while the list shows its first card, which keeps the list at its top as the window turns.
@@ -1752,18 +1765,79 @@ internal class DeliveriesState(
     }
 
     /**
-     * `proxy.scrollTo(id, anchor: .center)` on `smooth(duration: 0.35)`: the parcel's card in the list's middle, at once
-     * under Reduce Motion.
+     * `proxy.scrollTo(id, anchor: .center)` on `smooth(duration: 0.35)`: the list scrolls once, from where it stands,
+     * until the parcel's card, not the room above it in its item (`.id` is on the card), is in its middle, as far as
+     * the list goes; at once under Reduce Motion. A card the list doesn't lay out yet is aimed at from the items it
+     * shows, and the aim put right as the card comes into view, the rest of the scroll stretched or shrunk to it, so
+     * that the list never jumps.
      */
     suspend fun reveal(parcelId: UUID, reduceMotion: Boolean) {
         dropFlights()
         val index = itemIndex(parcelId) ?: return
-        if (listState.layoutInfo.visibleItemsInfo.none { it.index == index }) listState.scrollToItem(index)
+        if (reduceMotion) {
+            if (cardOffCentre(index) == null) listState.scrollToItem(index)
+            cardOffCentre(index)?.takeIf { abs(it) >= 0.5f }?.let { listState.scrollBy(it) }
+            return
+        }
+        val aim = cardOffCentre(index) ?: estimatedOffCentre(index) ?: return
+        if (abs(aim) < 0.5f) return
+        listState.scroll {
+            // The scroll as planned: `rest` more pixels from `from`, over the spring's way from `at` to its end.
+            var from = 0f
+            var at = 0f
+            var rest = aim
+            var scrolled = 0f
+            animate(0f, 1f, animationSpec = Motion.smooth(REVEAL_DURATION)) { fraction, _ ->
+                scrolled += scrollBy(from + rest * (fraction - at) / (1 - at) - scrolled)
+                val left = cardOffCentre(index) ?: return@animate
+                if (abs(left - (from + rest - scrolled)) < 0.5f) return@animate
+                if (fraction >= 1) {
+                    scrolled += scrollBy(left)
+                    return@animate
+                }
+                from = scrolled
+                at = fraction
+                rest = left
+            }
+        }
+    }
+
+    /**
+     * How far the middle of the card at `index` is below the list's, in pixels, as far as the list scrolls where one of
+     * its ends shows; null while the list doesn't lay the card out.
+     */
+    private fun cardOffCentre(index: Int): Float? {
         val info = listState.layoutInfo
-        val item = info.visibleItemsInfo.firstOrNull { it.index == index } ?: return
-        val delta = item.offset + item.size / 2f - (info.viewportStartOffset + info.viewportEndOffset) / 2f
-        if (abs(delta) < 0.5f) return
-        if (reduceMotion) listState.scrollBy(delta) else listState.animateScrollBy(delta, Motion.smooth(REVEAL_DURATION))
+        val shown = info.visibleItemsInfo
+        val item = shown.firstOrNull { it.index == index } ?: return null
+        val middle = item.offset + (itemTops.getOrElse(index) { 0f } + item.size) / 2
+        val delta = middle - (info.viewportStartOffset + info.viewportEndOffset) / 2f
+        val first = shown.first()
+        val last = shown.last()
+        val back = if (first.index == 0) minOf(first.offset, 0).toFloat() else Float.NEGATIVE_INFINITY
+        val ahead = if (last.index == info.totalItemsCount - 1) {
+            maxOf(last.offset + last.size - (info.viewportEndOffset - info.afterContentPadding), 0).toFloat()
+        } else {
+            Float.POSITIVE_INFINITY
+        }
+        return delta.coerceIn(back, ahead)
+    }
+
+    /**
+     * Where the middle of the card at `index`, which the list doesn't lay out, would be below the list's, in pixels:
+     * past the items shown, each item between as tall as those shown are on average.
+     */
+    private fun estimatedOffCentre(index: Int): Float? {
+        val info = listState.layoutInfo
+        val shown = info.visibleItemsInfo
+        if (shown.isEmpty()) return null
+        val average = shown.sumOf { it.size }.toFloat() / shown.size
+        val start = if (index > shown.last().index) {
+            shown.last().offset + shown.last().size + (index - shown.last().index - 1) * average
+        } else {
+            shown.first().offset - (shown.first().index - index) * average
+        }
+        return start + (itemTops.getOrElse(index) { 0f } + average) / 2 - (info.viewportStartOffset + info.viewportEndOffset) / 2f
     }
 
     /** The card the list showed at its top when the window turned, at its top again once the list is laid out anew. */

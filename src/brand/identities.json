@@ -313,6 +313,9 @@
   "bex-express": {
     "decal": "bex-express"
   },
+  "bfe-express": {
+    "decal": "bfe-express"
+  },
   "big-smart": {
     "decal": "big-smart"
   },
@@ -821,6 +824,9 @@
   "dhlink": {
     "decal": "dhlink"
   },
+  "diakinisis": {
+    "decal": "diakinisis"
+  },
   "direct-couriers": {
     "decal": "direct-couriers"
   },
@@ -1289,6 +1295,9 @@
   },
   "gio-express": {
     "decal": "gio-express"
+  },
+  "global-delivery-network": {
+    "decal": "global-delivery-network"
   },
   "globalpost": {
     "decal": "globalpost"
@@ -1952,6 +1961,9 @@
   "mauritius-post": {
     "decal": "mauritius-post"
   },
+  "max-pakket": {
+    "decal": "max-pakket"
+  },
   "mayiyinfu": {
     "decal": "mayiyinfu"
   },
@@ -2196,6 +2208,9 @@
   },
   "pago": {
     "decal": "pago"
+  },
+  "paisley-freight": {
+    "decal": "paisley-freight"
   },
   "paket-cl": {
     "decal": "paket-cl"
@@ -2684,6 +2699,9 @@
   },
   "sfc": {
     "decal": "sfc"
+  },
+  "sfyd-express": {
+    "decal": "sfyd-express"
   },
   "shadowfax": {
     "decal": "shadowfax"
@@ -3267,6 +3285,9 @@
   "vinted-go": {
     "decal": "vinted-go"
   },
+  "vip-posta": {
+    "decal": "vip-posta"
+  },
   "vitran-express": {
     "decal": "vitran-express"
   },
@@ -3465,6 +3486,9 @@
   },
   "zimpost": {
     "decal": "zimpost"
+  },
+  "zippd": {
+    "decal": "zippd"
   },
   "zoom-ve": {
     "decal": "zoom-ve"

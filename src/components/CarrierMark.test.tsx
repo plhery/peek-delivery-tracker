@@ -406,6 +406,14 @@ describe('carrier mark', () => {
     'stg-ltl',
     'tsb-es',
     'senyu',
+    'zippd',
+    'global-delivery-network',
+    'vip-posta',
+    'sfyd-express',
+    'bfe-express',
+    'paisley-freight',
+    'max-pakket',
+    'diakinisis',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

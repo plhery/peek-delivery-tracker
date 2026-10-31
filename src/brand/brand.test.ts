@@ -470,6 +470,14 @@ describe('carrier brand', () => {
       'stg-ltl',
       'tsb-es',
       'senyu',
+      'zippd',
+      'global-delivery-network',
+      'vip-posta',
+      'sfyd-express',
+      'bfe-express',
+      'paisley-freight',
+      'max-pakket',
+      'diakinisis',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

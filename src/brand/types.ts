@@ -394,7 +394,15 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'performance-freight'
   | 'stg-ltl'
   | 'tsb-es'
-  | 'senyu';
+  | 'senyu'
+  | 'zippd'
+  | 'global-delivery-network'
+  | 'vip-posta'
+  | 'sfyd-express'
+  | 'bfe-express'
+  | 'paisley-freight'
+  | 'max-pakket'
+  | 'diakinisis';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

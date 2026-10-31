@@ -21,7 +21,7 @@ Voici les formes que Peek attribue à GOFO France, en majuscules ou non :
 
 Une référence de la boutique peut remplacer le numéro : `PK` suivi de 20 chiffres, parfois écrite avec des tirets, comme `PK-1234567890123456789-0` (inventée). Le suivi de GOFO France répond aussi pour ces références, et GOFO les garde à côté de son propre bordereau `GFFR` ou `CIFR`.
 
-Les autres réseaux de GOFO suivent le même modèle, avec leur pays après `GF` ou `CI`. Les numéros `GFIT` ou `CIIT` appartiennent à GOFO Italie, `GFNL` à GOFO Pays-Bas et `GFES` à GOFO Espagne. Un `GFUS` suivi de 14 chiffres, un `GF` suivi de 13 chiffres seulement ou un `CR` suivi de 12 chiffres appartient à GOFO Express aux États-Unis, un réseau à part, et un `GFCA` suivi de 14 chiffres à GOFO Canada. Aucun n'est un numéro de GOFO France. Pour comparer les formes : [à quel transporteur appartient un numéro](guide:tracking-number-formats).
+Les autres réseaux de GOFO suivent le même modèle, avec leur pays après `GF` ou `CI`. Les numéros `GFIT` ou `CIIT` appartiennent à GOFO Italie, `GFNL` ou `CINL` à GOFO Pays-Bas et `GFES` ou `CIES` à GOFO Espagne. Un `GFUS` suivi de 14 chiffres, un `GF` suivi de 13 chiffres seulement ou un `CR` suivi de 12 chiffres appartient à GOFO Express aux États-Unis, un réseau à part, et un `GFCA` suivi de 14 chiffres à GOFO Canada. Aucun n'est un numéro de GOFO France. Pour comparer les formes : [à quel transporteur appartient un numéro](guide:tracking-number-formats).
 
 ## Suivi GOFO : ce que veut dire chaque statut
 
@@ -45,7 +45,7 @@ Le suivi de GOFO range aussi les colis dans de grandes catégories. `Alerte` sig
 
 ## Colis GOFO en retard, manqué, perdu ou abîmé
 
-**Le suivi ne bouge pas.** Peek continue d'interroger GOFO. Quand un colis reste quatre jours sans nouveau scan, sa page dans Peek le signale et renvoie vers la page d'aide de GOFO France (« Demande de l’aide à GOFO France »). Voir aussi [pourquoi un suivi de colis ne bouge plus](guide:tracking-not-updating).
+**Le suivi ne bouge pas.** Peek continue d'interroger GOFO. Si un colis reste quatre jours sans nouveau scan avant de partir en livraison, sa page dans Peek le signale et renvoie vers la page d'aide de GOFO France (« Demande de l’aide à GOFO France »). Voir aussi [pourquoi un suivi de colis ne bouge plus](guide:tracking-not-updating).
 
 **Livraison manquée.** Après `Échec de la livraison, motif : Le destinataire n'est pas chez lui`, Peek affiche « Tentative de livraison » ; un échec avec un autre motif après `motif :` s'affiche « Problème signalé ». La suite dépend de GOFO : lis [les livraisons manquées](guide:missed-delivery) pour savoir quoi vérifier.
 
@@ -57,13 +57,13 @@ Le suivi de GOFO range aussi les colis dans de grandes catégories. `Alerte` sig
 
 ## Service client GOFO France
 
-La page d'aide de GOFO France se trouve sur son site français, gofo.com, et Peek y renvoie avec « Demande de l’aide à GOFO France » quand un colis ne bouge plus. Pour une commande en retard, perdue ou abîmée, commence par la boutique qui l'a envoyée, puisque c'est elle qui répond de la livraison. Garde ton numéro `GFFR` ou `CIFR` et ton numéro de commande sous la main.
+La page d'aide de GOFO France se trouve sur son site français, gofo.com, et Peek y renvoie avec « Demande de l’aide à GOFO France » quand un colis reste quatre jours sans nouveau scan avant de partir en livraison. Pour une commande en retard, perdue ou abîmée, commence par la boutique qui l'a envoyée, puisque c'est elle qui répond de la livraison. Garde ton numéro `GFFR` ou `CIFR` et ton numéro de commande sous la main.
 
 ## Suivre un colis GOFO France avec Peek
 
 [Peek](/) reconnaît tout seul les numéros `GFFR` et `CIFR`. Tu peux aussi coller un lien de la page de suivi française de GOFO (sur gofo.com ou gofoexpress.fr, avec `id=` et le numéro). Une référence `PK` marche aussi : Peek la demande à GOFO France et nomme le transporteur dès que GOFO connaît le numéro.
 
-Peek lit le suivi de GOFO en français toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison. Il affiche le statut, l'historique avec le lieu que GOFO donne pour chaque étape et l'heure de livraison, place chaque étape sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Tant que GOFO n'a listé aucune étape, Peek affiche « En attente du transporteur » et continue de demander au lieu de déclarer le numéro inconnu. Peek n'affiche ni date de livraison prévue, ni poids, et laisse de côté les photos de livraison et les avis de GOFO. Il ne peut pas contacter GOFO ni la boutique à ta place.
+Peek lit le suivi de GOFO en français toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison. Il affiche le statut, l'historique avec le lieu que GOFO donne pour chaque étape, l'heure de livraison et ces lieux sur une carte, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand GOFO ne donne que le code d'un dépôt ou le pays, l'étape s'affiche sans lieu. Tant que GOFO n'a listé aucune étape, Peek affiche « En attente du transporteur » et continue de demander au lieu de déclarer le numéro inconnu. Peek n'affiche ni date de livraison prévue, ni poids, et laisse de côté les photos de livraison et les avis de GOFO. Il ne peut pas contacter GOFO ni la boutique à ta place.
 
 ## Questions sur le suivi GOFO
 

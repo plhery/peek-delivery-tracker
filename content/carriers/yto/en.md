@@ -55,7 +55,7 @@ To have a parcel sent back or to a new address before delivery (`退回/更址`)
 
 ## YTO International: parcels sent abroad
 
-YTO International (圆通国际) dates back to 2006 and says it has over 50 offices in 18 countries and regions. Its tracker, "Express Freight Tracking" on [ytoglobal.com/service](https://www.ytoglobal.com/service), is in English and takes up to 10 numbers separated by commas or semicolons.
+YTO International (圆通国际) dates back to 2006 and says it has over 50 offices in 18 countries and regions. Its tracker on [ytoglobal.com/service](https://www.ytoglobal.com/service) comes in English, as "Express Freight Tracking", and in Chinese, as 国际快递查询, and takes up to 10 numbers separated by commas or semicolons.
 
 YTO's pages don't name the carrier that delivers in your country, only partnerships with "top-notch global logistics service providers". For International Standard Express, its service for individuals, YTO lists 7 to 12 working days from its international warehouse to the UK, Ireland and Canada, 9 to 12 to the United States and 8 to 13 to Australia, "for reference only".
 
@@ -67,7 +67,7 @@ If you're out, its FAQ says to follow the "Redelivery Notification" to arrange a
 
 **No update.** YTO's service agreement with senders counts a parcel as lost if, after its first line, it gets no update for 4 days, or isn't signed for 7 days after it was due. Ask the seller, who booked the parcel and can ask YTO. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
-**Lost or damaged.** For a shop order, the seller paid for the shipment: ask the seller first. Under the same agreement, a lost parcel sent without declared value (`保价`) is compensated up to 300 yuan, or 100 yuan for documents; insured parcels get the actual loss, up to the declared value. Complaints go by phone to the YTO outlet that took the parcel or to YTO's customer service, and YTO's site has complaint (`投诉反馈`) and insured-claim (`保价理赔`) pages behind a login. If YTO's answer to a complaint doesn't satisfy you, or doesn't come in time, China's rules let you appeal to the postal regulator, the State Post Bureau (`消费者申诉` on its site). See also [lost parcels](guide:lost-parcel).
+**Lost or damaged.** For a shop order, the seller paid for the shipment: ask the seller first. Under the same agreement, a lost parcel sent without declared value (`保价`) is compensated up to 300 yuan, or 100 yuan for documents; insured parcels get the actual loss, up to the declared value. Complaints go by phone to the YTO outlet that took the parcel or to YTO's customer service, and YTO's site has complaint (`投诉反馈`) and insured-claim (`保价理赔`) pages behind a login. If YTO's answer to a complaint doesn't satisfy you, or doesn't come in time, China's rules let you appeal to the postal authorities. See also [lost parcels](guide:lost-parcel).
 
 **Returned.** After `退回件扫描`, the parcel is going back, and later delivery scans are the trip back to the sender. Ask the seller; see [returned to sender](guide:returned-to-sender).
 
@@ -126,11 +126,10 @@ YTO International does, with its own tracker on ytoglobal.com. Its pages don't s
 - [YTO Express: 寄快递 (send a parcel)](https://www.yto.net.cn/ytoExpress/subCreatePages/create) – items without declared value compensated up to 300 yuan
 - [YTO Express: International Business Service](https://www.yto.net.cn/en/global/globalProduct) – YTO International's hotline 4006095554, 021-69777888
 - [YTO International: Company Introduction](https://www.ytoglobal.com/about-us) – history from 2006, offices, partners
-- [YTO International: Express Freight Tracking](https://www.ytoglobal.com/service) – English tracker, up to 10 numbers
+- [YTO International: Express Freight Tracking](https://www.ytoglobal.com/service) – tracker in English and Chinese, up to 10 numbers
 - [YTO International: International Standard Express](https://www.ytoglobal.com/product/express-intl) – service for individuals, reference delivery times
 - [YTO International: FAQ](https://www.ytoglobal.com/rich/question) – hotline 400 60 95554, redelivery, delivery appointments, parcels opened for inspection
 - [YTO International: Contact Us](https://www.ytoglobal.com/about-us/contact) – contact form
-- [State Post Bureau of China: 快递市场管理办法 (Express Market Administration Measures)](https://www.spb.gov.cn/gjyzj/c100009/c100012/202401/ababa869e3f04079b6640478a45f941a.shtml) – in force 1 March 2024, inspection on delivery, no locker or station without consent, appeals
-- [State Post Bureau of China: Home page](https://www.spb.gov.cn/) – consumer appeal service
+- [Ministry of Transport of China: 快递市场管理办法 (Express Market Administration Measures)](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – in force 1 March 2024, inspection on delivery, no locker or station without consent, appeals to the postal authorities
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, YTO's scan names, China clock, return trip
 :::

@@ -21,7 +21,7 @@ These are the shapes Peek files under GOFO France, in capitals or not:
 
 A shop's own reference can stand in for the number: `PK` and 20 digits, sometimes written with hyphens, as in `PK-1234567890123456789-0` (invented). GOFO France's tracking answers for those references too, and GOFO keeps them beside its own `GFFR` or `CIFR` waybill.
 
-GOFO's other networks follow the same pattern, with their own country after `GF` or `CI`. `GFIT` or `CIIT` numbers belong to [GOFO Italy](carrier:gofo-it), `GFNL` to GOFO Netherlands and `GFES` to GOFO Spain. `GFUS` with 14 digits, `GF` with only 13, or `CR` with 12 belong to [GOFO Express](carrier:gofo) in the United States, a separate network, and `GFCA` with 14 digits to [GOFO Canada](carrier:gofo-ca). None of these is a GOFO France number. More on telling shapes apart: [tracking number formats](guide:tracking-number-formats).
+GOFO's other networks follow the same pattern, with their own country after `GF` or `CI`. `GFIT` or `CIIT` numbers belong to [GOFO Italy](carrier:gofo-it), `GFNL` or `CINL` to GOFO Netherlands and `GFES` or `CIES` to GOFO Spain. `GFUS` with 14 digits, `GF` with only 13, or `CR` with 12 belong to [GOFO Express](carrier:gofo) in the United States, a separate network, and `GFCA` with 14 digits to [GOFO Canada](carrier:gofo-ca). None of these is a GOFO France number. More on telling shapes apart: [tracking number formats](guide:tracking-number-formats).
 
 ## GOFO tracking statuses: what the French words mean
 
@@ -45,7 +45,7 @@ GOFO's tracking also sorts parcels into broad categories. `Alerte` is a problem 
 
 ## GOFO parcel late, missed, lost or damaged
 
-**Not moving.** Peek keeps asking GOFO. Once a parcel has gone four days without a new scan, Peek's parcel page says so and links to GOFO France's help page ("Get help from GOFO France"). See also [why tracking stops updating](guide:tracking-not-updating).
+**Not moving.** Peek keeps asking GOFO. If four days pass without a new scan before the parcel is out for delivery, Peek's parcel page says so and links to GOFO France's help page ("Get help from GOFO France"). See also [why tracking stops updating](guide:tracking-not-updating).
 
 **Missed delivery.** After `Échec de la livraison, motif : Le destinataire n'est pas chez lui`, Peek shows "Delivery attempted"; a failed attempt with another reason after `motif :` shows as "Needs attention". What happens next is up to GOFO: see [missed deliveries](guide:missed-delivery) for what to check.
 
@@ -57,13 +57,13 @@ GOFO's tracking also sorts parcels into broad categories. `Alerte` is a problem 
 
 ## GOFO France customer service
 
-GOFO France's help page is on its French site, gofo.com, and Peek links to it as "Get help from GOFO France" when a parcel stops moving. For a late, lost or damaged order, start with the shop that sent it, since the shop answers for the delivery. Keep your `GFFR` or `CIFR` number and your order number at hand.
+GOFO France's help page is on its French site, gofo.com, and Peek links to it as "Get help from GOFO France" when four days pass without a new scan before the parcel is out for delivery. For a late, lost or damaged order, start with the shop that sent it, since the shop answers for the delivery. Keep your `GFFR` or `CIFR` number and your order number at hand.
 
 ## Tracking a GOFO France parcel with Peek
 
 [Peek](/) recognises `GFFR` and `CIFR` numbers by themselves. You can also paste a link from GOFO's French tracking page (on gofo.com or gofoexpress.fr, with `id=` and the number). A `PK` reference works too: Peek asks GOFO France about it and names the carrier once GOFO knows the number.
 
-Peek reads GOFO's French tracking every 10 minutes, and every 2 minutes once the parcel is out for delivery. It shows the status, the history with the place GOFO names for each scan, the delivery time and each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Until GOFO lists a first scan, Peek shows "Waiting for the carrier" and keeps asking rather than calling the number unknown. Peek shows no expected delivery date and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
+Peek reads GOFO's French tracking every 10 minutes, and every 2 minutes once the parcel is out for delivery. It shows the status, the history with the place GOFO names for each scan, the delivery time and those places on a map, and it can notify you of every scan, important steps only or delivery day only. Where GOFO gives only a depot code or the country, the scan shows no place. Until GOFO lists a first scan, Peek shows "Waiting for the carrier" and keeps asking rather than calling the number unknown. Peek shows no expected delivery date and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

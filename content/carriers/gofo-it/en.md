@@ -46,7 +46,7 @@ If [YunExpress](carrier:yunexpress) handed your parcel to GOFO Italy, YunExpress
 
 ## GOFO parcel late, missed, lost or damaged
 
-**Not moving.** Peek keeps asking GOFO. Once a parcel has gone four days without a new scan, Peek's parcel page says so and links to GOFO Italy's help page ("Get help from GOFO Italy"). See also [why tracking stops updating](guide:tracking-not-updating).
+**Not moving.** Peek keeps asking GOFO. If four days pass without a new scan before the parcel is out for delivery, Peek's parcel page says so and links to GOFO Italy's help page ("Get help from GOFO Italy"). See also [why tracking stops updating](guide:tracking-not-updating).
 
 **Missed delivery.** After `Consegna fallita, tipo:Destinatario assente` or `Consegna fallita, tipo:L'indirizzo è errato`, Peek shows "Delivery attempted"; a failed attempt with another reason after `tipo:` shows as "Needs attention". What happens next is up to GOFO: see [missed deliveries](guide:missed-delivery) for what to check.
 
@@ -68,13 +68,13 @@ AGCOM can order refunds or compensation set by the rules, not damages; for those
 
 ## GOFO Italy customer service
 
-GOFO Italy's help page is on its Italian site, gofo.com, and Peek links to it as "Get help from GOFO Italy" when a parcel stops moving. The company behind it, GOFO Italia s.r.l., has its registered office at Via Juan Manuel Fangio 11, 20045 Lainate (MI). Keep your `GFIT` or `CIIT` number and your order number at hand.
+GOFO Italy's help page is on its Italian site, gofo.com, and Peek links to it as "Get help from GOFO Italy" when four days pass without a new scan before the parcel is out for delivery. The company behind it, GOFO Italia s.r.l., has its registered office at Via Juan Manuel Fangio 11, 20045 Lainate (MI). Keep your `GFIT` or `CIIT` number and your order number at hand.
 
 ## Tracking a GOFO Italy parcel with Peek
 
 [Peek](/) recognises `GFIT` and `CIIT` numbers by themselves. You can also paste a link from GOFO's Italian tracking page (on gofo.com or gofoexpress.it, with `id=` and the number).
 
-Peek reads GOFO's Italian tracking every 10 minutes, and every 2 minutes once the parcel is out for delivery. It shows the status, the history with the place GOFO names for each scan, the delivery time and each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Until GOFO lists a first scan, Peek shows "Waiting for the carrier" and keeps asking rather than calling the number unknown. Peek shows no expected delivery date and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
+Peek reads GOFO's Italian tracking every 10 minutes, and every 2 minutes once the parcel is out for delivery. It shows the status, the history with the place GOFO names for each scan, the delivery time and those places on a map, and it can notify you of every scan, important steps only or delivery day only. Where GOFO gives only a depot code or the country, the scan shows no place. Until GOFO lists a first scan, Peek shows "Waiting for the carrier" and keeps asking rather than calling the number unknown. Peek shows no expected delivery date and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

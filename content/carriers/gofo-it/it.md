@@ -46,7 +46,7 @@ Se GOFO Italy ha ricevuto il pacco da [YunExpress](carrier:yunexpress), il tracc
 
 ## Pacco GOFO in ritardo, non consegnato, smarrito o danneggiato
 
-**Nessun aggiornamento.** Peek continua a chiedere a GOFO. Quando un pacco resta quattro giorni senza nuove scansioni, la sua pagina in Peek lo segnala e rimanda alla pagina di assistenza di GOFO Italy («Chiedi aiuto a GOFO Italy»). Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
+**Nessun aggiornamento.** Peek continua a chiedere a GOFO. Se un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna, la sua pagina in Peek lo segnala e rimanda alla pagina di assistenza di GOFO Italy («Chiedi aiuto a GOFO Italy»). Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
 
 **Consegna fallita.** Dopo `Consegna fallita, tipo:Destinatario assente` o `Consegna fallita, tipo:L'indirizzo è errato`, Peek mostra «Tentativo di consegna»; un tentativo fallito con un altro motivo dopo `tipo:` appare come «Problema segnalato». Cosa succede dopo dipende da GOFO: leggi [consegna mancata](guide:missed-delivery) per sapere cosa controllare.
 
@@ -68,13 +68,13 @@ L'AGCOM può imporre rimborsi o indennizzi, non risarcimenti dei danni: per quel
 
 ## Assistenza clienti GOFO Italy
 
-La pagina di assistenza di GOFO Italy si trova sul suo sito italiano, gofo.com, e Peek la indica con «Chiedi aiuto a GOFO Italy» quando un pacco non si muove più. La società, GOFO Italia s.r.l., ha sede legale in Via Juan Manuel Fangio 11, 20045 Lainate (MI). Tieni a portata di mano il codice `GFIT` o `CIIT` e il numero d'ordine.
+La pagina di assistenza di GOFO Italy si trova sul suo sito italiano, gofo.com, e Peek la indica con «Chiedi aiuto a GOFO Italy» quando un pacco resta quattro giorni senza nuove scansioni prima di partire per la consegna. La società, GOFO Italia s.r.l., ha sede legale in Via Juan Manuel Fangio 11, 20045 Lainate (MI). Tieni a portata di mano il codice `GFIT` o `CIIT` e il numero d'ordine.
 
 ## Tracking GOFO Italy con Peek
 
 [Peek](/) riconosce da solo i codici `GFIT` e `CIIT`. Puoi incollare anche un link della pagina di tracciamento italiana di GOFO (su gofo.com o gofoexpress.it, con `id=` e il codice).
 
-Peek controlla il tracciamento italiano di GOFO ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, l'ora di consegna e ogni scansione su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Finché GOFO non elenca una prima scansione, Peek mostra «In attesa del corriere» e continua a chiedere invece di dare il codice per sconosciuto. Peek non mostra una data di consegna prevista né il peso, e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
+Peek controlla il tracciamento italiano di GOFO ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, l'ora di consegna e questi luoghi su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Se GOFO indica solo il codice di un deposito o il Paese, la scansione appare senza luogo. Finché GOFO non elenca una prima scansione, Peek mostra «In attesa del corriere» e continua a chiedere invece di dare il codice per sconosciuto. Peek non mostra una data di consegna prevista né il peso, e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
 
 ## Domande sul tracking GOFO
 

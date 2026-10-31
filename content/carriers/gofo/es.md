@@ -57,7 +57,7 @@ Los escaneos de GOFO que lee Peek están en inglés. Estos son los que puede enc
 
 **Solo `Shipping Label Created`, `Pick Up Start` o `Pickup Exception`.** GOFO todavía no tiene el paquete. Si pasan varios días así, pregúntale a la tienda si ya lo envió. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 
-**Parado en el camino.** Si pasan cuatro días sin escaneos nuevos, avísale a la tienda o usa el enlace de ayuda que te muestra Peek (más abajo).
+**Parado en el camino.** Si pasan cuatro días sin escaneos nuevos antes de que el paquete salga a reparto, avísale a la tienda o usa el enlace de ayuda que entonces te muestra Peek (más abajo).
 
 **Intento de entrega fallido.** Lee el motivo que da GOFO después de la coma. Si depende de ti, como un negocio cerrado a la hora del reparto, o si hay un error en tu dirección, avísale a la tienda.
 
@@ -67,7 +67,7 @@ Los escaneos de GOFO que lee Peek están en inglés. Estos son los que puede enc
 
 ## Atención al cliente de GOFO Express
 
-Para cualquier problema con tu pedido, habla primero con la tienda que te lo vendió: es ella quien envió el paquete con GOFO. Si el paquete lleva cuatro días en camino sin escaneos nuevos, aunque solo tenga la etiqueta, Peek muestra un aviso con el enlace «Pide ayuda a GOFO Express», que abre la página de atención al cliente de GOFO en Estados Unidos (gofo.com/us/customer-service).
+Para cualquier problema con tu pedido, habla primero con la tienda que te lo vendió: es ella quien envió el paquete con GOFO. Si el paquete pasa cuatro días sin escaneos nuevos antes de salir a reparto, aunque solo tenga la etiqueta, Peek muestra un aviso con el enlace «Pide ayuda a GOFO Express», que abre la página de atención al cliente de GOFO en Estados Unidos (gofo.com/us/customer-service).
 
 ## Rastrear un paquete de GOFO Express con Peek
 
@@ -75,9 +75,9 @@ Con un número `GFUS`, `GF` o `CR`, con o sin espacios, [Peek](/) le pregunta a 
 
 Mientras GOFO no conozca el número, Peek sigue comprobando. Con un número `GF` o `CR` verás «Esperando el primer escaneo de GOFO Express»; con un `GFUS`, que también puede ser de Cainiao, «Todavía no hay historial de seguimiento». Si sabes que es de GOFO, elígelo con «Cambiar»: hasta el primer escaneo verás «Esperando al transportista». También puedes pegar un enlace de rastreo de GOFO para Estados Unidos (de gofo.com/us o gofoexpress.com) que lleve `searchID=` y el número.
 
-Peek muestra el estado, cada escaneo en un mapa con la ciudad y el estado donde se hizo, la hora de entrega y el país de destino. Los escaneos salen en inglés, como los escribe GOFO, salvo la entrega, que aparece como «Entregado», sin el detalle que GOFO añade a veces tras la coma. GOFO calcula una fecha estimada de entrega, pero Peek no la muestra, y deja fuera las fotos de entrega, las coordenadas y el peso.
+Peek muestra el estado, cada escaneo con la ciudad y el estado que indica GOFO, esos lugares en un mapa, la hora de entrega y el país de destino. Los escaneos salen en inglés, como los escribe GOFO, salvo la entrega, que aparece como «Entregado», sin el detalle que GOFO añade a veces tras la coma. GOFO calcula una fecha estimada de entrega, pero Peek no la muestra, y deja fuera las fotos de entrega, las coordenadas y el peso.
 
-Peek consulta a GOFO cada 10 minutos de 8:00 a 22:00, hora de Suiza (más o menos de 2 a. m. a 4 p. m., hora del Este, o de 11 p. m. a 1 p. m., hora del Pacífico); en esas horas, cada 2 minutos cuando el paquete va en reparto ese día, y cada una o dos horas el resto del tiempo. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede comunicarse con GOFO ni con la tienda por ti.
+Peek consulta a GOFO cada 10 minutos y cada 2 minutos cuando el paquete va en reparto ese día. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede comunicarse con GOFO ni con la tienda por ti.
 
 ## Preguntas sobre el rastreo de GOFO Express
 

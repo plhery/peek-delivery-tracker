@@ -39,7 +39,7 @@ GOFO adds its support phone and email to some scan lines; Peek drops that line, 
 
 ## GOFO Canada parcel late, missed or missing
 
-**Not moving.** If only `Shipping Label Created` shows, GOFO doesn't have the parcel yet: the shop still has to hand it over. Peek keeps asking GOFO, and once a parcel has gone four days without a new scan, Peek's parcel page says so. More on [tracking that isn't updating](guide:tracking-not-updating).
+**Not moving.** If only `Shipping Label Created` shows, GOFO doesn't have the parcel yet: the shop still has to hand it over. Peek keeps asking GOFO, and if four days pass without a new scan before the parcel is out for delivery, Peek's parcel page says so. More on [tracking that isn't updating](guide:tracking-not-updating).
 
 **Missed delivery.** A failed attempt shows as "Delivery attempted", with GOFO's reason in the scan line. What happens next is up to GOFO and the shop: see [missed deliveries](guide:missed-delivery) for what to check. If a text asks you to pay to get a GOFO parcel redelivered, read [delivery scam texts](guide:delivery-scam-texts) before you click anything.
 
@@ -57,7 +57,7 @@ Peek has no help link for GOFO Canada. For a late, missing or damaged order, sta
 
 [Peek](/) recognises a GOFO Canada number by its shape: `GFCA` and 14 digits, in capitals or not, with or without spaces. A GOFO Canada tracking link from gofo.com with `searchID=` and the number in it works too. Peek follows only the `GFCA` waybill, not the shop's reference.
 
-Peek reads GOFO Canada's own tracking: the status, each scan with its time and its town and province (placed on a map), the delivery time and the destination country. Scans appear as GOFO writes them, without the support line. Peek shows no expected delivery date and leaves out the delivery photos, coordinates and weight.
+Peek reads GOFO Canada's own tracking: the status, each scan with its time and the town and province GOFO gives for it, those places on a map, the delivery time and the destination country. Scans appear as GOFO writes them, without the support line. Peek shows no expected delivery date and leaves out the delivery photos, coordinates and weight.
 
 Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or delivery day only. It can't book a redelivery or contact GOFO or the shop for you.
 

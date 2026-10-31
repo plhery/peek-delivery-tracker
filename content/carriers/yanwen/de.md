@@ -34,6 +34,7 @@ Eine deutsche Version hat Yanwens Tracking-Seite nicht: Es gibt sie nur auf Engl
 | `Order processed by shipper` | Der Händler hat den Versand gebucht. Yanwen hat das Paket noch nicht. |
 | `Yanwen Pickup Scan` | Yanwen hat das Paket in China übernommen. |
 | `Yanwen facility - Outbound` | Es hat Yanwens Sortierzentrum verlassen. |
+| `Tendered for Delivery` | Für den Weg ins Ausland übergeben, wenige Minuten nach dem Verlassen von Yanwens Sortierzentrum und vor der Ausfuhrabfertigung. Trotz des Wortlauts noch keine Zustellung. |
 | `International shipment release - Export` | Die Ausfuhr aus China ist abgefertigt. |
 | `Port of departure - Departure` | An die Fluggesellschaft übergeben und abgeflogen. |
 | `Port of destination - Arrival` | Im Zielland oder in seiner Nähe angekommen. |

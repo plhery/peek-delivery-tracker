@@ -35,6 +35,7 @@ La web de seguimiento está en chino, pero los escaneos salen en inglés. Las l�
 | `Leaving Scan` | Ha salido del almacén. |
 | `Export customs declaration completed` | La declaración de exportación, hecha en Shenzhen antes del vuelo; el paquete no está retenido en la aduana. |
 | `Depart from facility to service provider` | Va de FIRST LINE a la empresa que se encarga del siguiente tramo. |
+| `Hand over to airline` | Entregado a la aerolínea en el aeropuerto de Hong Kong, tras la declaración de exportación. |
 | `Order received` | La empresa que lo entregará, como UniUni, tiene los datos del pedido, pero aún no el paquete. |
 
 Después siguen los escaneos de la empresa que reparte, como USPS o UniUni en Estados Unidos, con sus palabras; la web no la nombra, pero su redacción da la pista.
@@ -82,7 +83,7 @@ Peek muestra el estado, el historial (hasta 100 escaneos) y el lugar de cada esc
 
 La web no da fecha prevista de entrega, país de destino, empresa que reparte, número del último tramo ni prueba de entrega, así que Peek tampoco los muestra. Peek no pasa a USPS ni a UniUni: si el vendedor te da el número del último tramo, añádelo como otro paquete.
 
-Peek consulta la web cada 10 minutos de 8:00 a 22:00, hora peninsular española (la misma que en Suiza), cada 2 minutos cuando el paquete va en reparto ese día y cada una o dos horas de noche. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con FIRST LINE ni con el vendedor por ti.
+Peek consulta la web cada 10 minutos y cada 2 minutos cuando el paquete va en reparto ese día. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con FIRST LINE ni con el vendedor por ti.
 
 ## Preguntas sobre el seguimiento de FIRST LINE
 

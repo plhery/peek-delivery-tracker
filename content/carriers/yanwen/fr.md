@@ -34,6 +34,7 @@ Le site de suivi de Yanwen n'existe qu'en anglais et en chinois, et les lignes d
 | `Order processed by shipper` | Le vendeur a réservé l'envoi. Yanwen n'a pas encore le colis. |
 | `Yanwen Pickup Scan` | Yanwen a le colis en Chine. |
 | `Yanwen facility - Outbound` | Il a quitté le centre de tri de Yanwen. |
+| `Tendered for Delivery` | Remis pour le voyage vers l'étranger, quelques minutes après la sortie du centre de tri de Yanwen et avant le dédouanement à l'export. Malgré les mots, ce n'est pas encore la livraison. |
 | `International shipment release - Export` | Le dédouanement à l'export en Chine est fait. |
 | `Port of departure - Departure` | Remis à la compagnie aérienne, il s'envole. |
 | `Port of destination - Arrival` | Arrivé dans ton pays ou près de lui. |

@@ -35,6 +35,7 @@ Strona śledzenia Yanwen ma tylko wersję angielską i chińską, a linie skanó
 | `Order processed by shipper` | Sprzedawca zamówił wysyłkę. Yanwen jeszcze nie ma paczki. |
 | `Yanwen Pickup Scan` | Yanwen ma paczkę w Chinach. |
 | `Yanwen facility - Outbound` | Paczka wyjechała z sortowni Yanwen. |
+| `Tendered for Delivery` | Paczka przekazana do transportu za granicę, kilka minut po wyjeździe z sortowni Yanwen i przed odprawą wywozową. Mimo nazwy to jeszcze nie doręczenie. |
 | `International shipment release - Export` | Odprawa wywozowa w Chinach zakończona. |
 | `Port of departure - Departure` | Paczka odleciała samolotem z Chin. |
 | `Port of destination - Arrival` | Dotarła do kraju docelowego albo w jego pobliże. |

@@ -43,7 +43,7 @@ GZYL writes its steps in English, typos included. In the order a parcel gets the
 | `Arrival sorting, distribution center` | At a distribution centre in your country, with its town after the words. | "In transit" |
 | `Leaving the sorting center` | Leaving a sorting centre, with its town. | "In transit" |
 | `Package is on the way` | Moving on in your country, with a town. It doesn't say the parcel is out for delivery. | "In transit" |
-| `Delivered` | The delivery, with the town. It may be a plan, not a scan: see below. | "Delivered" |
+| `Delivered` | The delivery, with the town. It may be a plan, not a scan: see below. | "Delivered", with a note on the fixed schedule |
 
 **Through the United States.** A parcel can also show `Los Angeles Processing Center has received it`, with a city in brackets after it: a processing centre in the United States has taken it on its way to its destination. Peek shows "In transit".
 
@@ -67,7 +67,7 @@ Peek found no delivery times from GZYL, and no rules for delivery attempts, pick
 
 **GZYL's tracker or a tracking service shows more than Peek.** Peek holds back steps written ahead of the time they show and steps dated after its last check (below), so the extra steps may be GZYL's plan, not scans. Go by the delivery estimate the shop gave, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**`Delivered`, but nothing came.** The step may be part of GZYL's plan, not a scan. Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
+**`Delivered`, but nothing came.** The step may be part of GZYL's plan, not a scan. Unless Swiss Post delivers the parcel, Peek says so under "Delivered": "GZYL’s tracking follows a fixed schedule and shows no signature. If nothing arrived, ask the seller." Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
 
 **Nothing found.** For a number it doesn't know, GZYL's tracker shows one result with your number under 参考号 (reference) and every other field empty. Peek keeps checking, but compare the number with the seller's message.
 
@@ -81,7 +81,7 @@ As of 30 October 2026, Peek found no contact details for GZYL: no website beside
 
 [Peek](/) can't be sure of a GZYL number by its shape alone: YL, ten digits and YQ is only a weak match. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks GZYL's tracker ("Checking tracking services…") and shows "GZYL has this parcel." when the tracker knows the number. Otherwise press "Change" and pick GZYL under "Fits this number" (typing 广州云链 finds it too), or use "Change carrier" on a parcel you've already added. A seller's reference works the same way, and Peek then shows the order's own number, labelled "GZYL tracks this as". Peek drops dashes, though, so a reference with dashes isn't found: ask the seller for the YL…YQ number.
 
-Peek reads GZYL's own tracker and shows the status, each step with its place, and the destination country when GZYL's record gives it. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, weight, fees, signature and proof of delivery GZYL's record can hold, and shows no expected delivery date: GZYL gives none.
+Peek reads GZYL's own tracker and shows the status, each step with its place, and the destination country when GZYL's record gives it. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, fees, signature and proof of delivery GZYL's record can hold, and shows no expected delivery date: GZYL gives none.
 
 Peek holds back any step written more than twelve hours before the time it shows, and any step dated after the moment it checks, on Beijing time. It goes by the steps it keeps, not by the record's summary status. An order whose steps are all held back has no tracking history in Peek yet, and Peek sets aside tracking services' copies of the steps written ahead too. When GZYL's tracker can't be reached, though, Peek asks tracking services instead, and their copies can include steps GZYL wrote ahead.
 
@@ -99,7 +99,7 @@ Not for sure. YL, ten digits and YQ is GZYL's layout, and no other carrier in Pe
 
 ### Why does GZYL say my parcel was delivered when it wasn't?
 
-It may be a step GZYL wrote in advance. GZYL writes much of a parcel's timeline ahead, `Delivered` included, and a step written that way is a plan, not a scan. Peek holds such steps back from GZYL's tracker. Tell the seller the parcel hasn't arrived and ask which company delivers it.
+It may be a step GZYL wrote in advance. GZYL writes much of a parcel's timeline ahead, `Delivered` included, and a step written that way is a plan, not a scan. Peek holds such steps back from GZYL's tracker, and under a "Delivered" it does show, it adds that GZYL's tracking follows a fixed schedule. Tell the seller the parcel hasn't arrived and ask which company delivers it.
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company and other names, the tracker on a bare address, YL…YQ number shape and its weak match, Xinghe Freight on GZYL's tracker, search by number or reference with its dashes, step wordings and their stages, the platform's Chinese line, towns after wordings, Beijing clock, timeline written in advance, the answer for an unknown number, Swiss Post as the only hand-over, what Peek shows, holds back and leaves out

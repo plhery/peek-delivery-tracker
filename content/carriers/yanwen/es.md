@@ -34,6 +34,7 @@ La web de seguimiento de Yanwen solo está en inglés y en chino, y los escaneos
 | `Order processed by shipper` | El vendedor ha registrado el envío. Yanwen aún no tiene el paquete. |
 | `Yanwen Pickup Scan` | Yanwen ya tiene el paquete en China. |
 | `Yanwen facility - Outbound` | Ha salido del centro de clasificación de Yanwen. |
+| `Tendered for Delivery` | Entregado para el viaje al extranjero, minutos después de salir del centro de clasificación de Yanwen y antes de la aduana de exportación. Pese al nombre, todavía no es el reparto. |
 | `International shipment release - Export` | Terminada la aduana de exportación en China. |
 | `Port of departure - Departure` | Entregado a la aerolínea y ha salido el vuelo. |
 | `Port of destination - Arrival` | Ha llegado a tu país o cerca de él. |

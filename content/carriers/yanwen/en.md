@@ -34,6 +34,7 @@ Yanwen's tracking site comes in English and Chinese only, and the scan lines are
 | `Order processed by shipper` | The seller has booked the shipment. Yanwen doesn't have the parcel yet. |
 | `Yanwen Pickup Scan` | Yanwen has the parcel in China. |
 | `Yanwen facility - Outbound` | It has left Yanwen's sorting centre. |
+| `Tendered for Delivery` | Handed over for the trip abroad, minutes after leaving Yanwen's sorting centre and before export customs. Despite the words, not a delivery round. |
 | `International shipment release - Export` | Export customs in China is done. |
 | `Port of departure - Departure` | Handed to the airline and flown out. |
 | `Port of destination - Arrival` | Arrived in or near your country. |

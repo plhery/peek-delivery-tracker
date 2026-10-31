@@ -34,6 +34,7 @@ Il sito di tracciamento di Yanwen esiste solo in inglese e in cinese, e le righe
 | `Order processed by shipper` | Il venditore ha prenotato la spedizione. Yanwen non ha ancora il pacco. |
 | `Yanwen Pickup Scan` | Yanwen ha preso il pacco in Cina. |
 | `Yanwen facility - Outbound` | Il pacco è uscito dal centro di smistamento di Yanwen. |
+| `Tendered for Delivery` | Affidato al trasporto verso l'estero, pochi minuti dopo l'uscita dal centro di smistamento di Yanwen e prima della dogana di esportazione. Nonostante le parole, non è ancora la consegna. |
 | `International shipment release - Export` | La dogana cinese ha chiuso l'esportazione. |
 | `Port of departure - Departure` | Consegnato alla compagnia aerea e partito. |
 | `Port of destination - Arrival` | Arrivato nel tuo Paese o lì vicino. |

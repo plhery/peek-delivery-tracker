@@ -34,6 +34,7 @@ FIRST LINE's tracker is in Chinese, but the scans are in English. FIRST LINE's o
 | `Leaving Scan` | It left the warehouse. |
 | `Export customs declaration completed` | China's export declaration, made in Shenzhen before the flight. The parcel isn't held at customs. |
 | `Depart from facility to service provider` | On its way from FIRST LINE to the company that takes it on. |
+| `Hand over to airline` | Handed to the airline at Hong Kong's airport, after the export declaration. |
 | `Order received` | The delivering company, such as UniUni, has the order's details but not the parcel yet. |
 
 In the US, the delivering company's scans follow in its own words, up to delivery: USPS's or [UniUni](carrier:uniuni)'s in the histories seen, whose pages explain them. FIRST LINE's tracker never names the company, so that wording is the clue.

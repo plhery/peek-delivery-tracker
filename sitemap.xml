@@ -8167,8 +8167,16 @@
 <url>
 <loc>https://peektracker.com/carriers/shouwu-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/shouwu-tracking" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/shouwu-tracking" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/shouwu-tracking" />
 <lastmod>2026-10-30</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/shouwu-tracking</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/shouwu-tracking" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/shouwu-tracking" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/shouwu-tracking" />
+<lastmod>2026-10-31</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/geodis-poland-tracking</loc>

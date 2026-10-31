@@ -49,23 +49,23 @@ The wordings say more. In the order a parcel gets them:
 | `In Transit`, `快件在该国内转运中, 干线中转` | On its way. The Chinese says it's moving inside China, on the line haul. | "In transit" |
 | `Customs Clearance Completed`, `出口清关完成` | China's export customs are done. Not your country's customs. | "In transit" |
 | `Departure from International Hub`, `Arrival at Transit Hub` | Left an international hub, then reached a transit hub on the way. | "In transit" |
-| `Arrival at, 抵达` | Arrived in the destination country, named by its code in 【】. | "In transit" |
+| `Arrival at` | Arrived in the destination country, named by its code in brackets. | "In transit" |
 | `邮件在该国内转运中` | Moving inside the destination country. | "In transit" |
-| `Arrival at Processing Center`, `Departure from Processing Center` | At a processing centre in your country, then leaving it, with your town in 【】. | "In transit" |
-| `Dispatching, 出门投递` | Out for delivery. | "Out for delivery" |
-| `Delivered, 已妥投` | Delivered. | "Delivered" |
+| `Arrival at Processing Center`, `Departure from Processing Center` | At a processing centre in your country, then leaving it, with your town in brackets. | "In transit" |
+| `Dispatching`, `出门投递` | Out for delivery. | "Out for delivery" |
+| `Delivered`, `已妥投` | Delivered. | "Delivered" |
 
 **Places.** HYWL's steps in your country name your town and postcode, and its first step a town and an office code. Peek keeps the town only, and cuts any name after "signed by" or 签收人.
 
 **Times.** HYWL's tracker prints each time with no time zone. Steps whose place is in Chinese, or in Shenzhen, Guangzhou, Dongguan, Huizhou or Hong Kong, are on Beijing time: in winter, 20:00 there is noon in London and 7am in New York.
 
-**Steps dated ahead.** HYWL's tracking page says its staff create the orders and maintain their tracking in an internal back office. Its record can hold steps dated later than the moment you look, and HYWL's tracker shows them all the same, under a status that can be ahead too. Peek holds back each such step from HYWL's tracker until its time has passed: a step in China by Beijing time, any other by its time read as UTC. Peek goes by the steps it keeps, not by HYWL's status. A step dated ahead hasn't happened yet, even `Delivered, 已妥投`.
+**Steps dated ahead.** HYWL's tracking page says its staff create the orders and maintain their tracking in an internal back office. Its record can hold steps dated later than the moment you look, and HYWL's tracker shows them all the same, under a status that can be ahead too. Peek holds back each such step from HYWL's tracker until its time has passed: a step in China by Beijing time, any other by its time read as UTC. Peek goes by the steps it keeps, not by HYWL's status. A step dated ahead hasn't happened yet, even `Delivered`.
 
 ## Who delivers HYWL parcels
 
 HYWL's website says it offers lines with delivery abroad, but it names no company that delivers them, and HYWL's tracker gives neither the company nor its number for the parcel. Peek's code names none either, for any country. So Peek doesn't know who delivers HYWL parcels in the US, the UK, Ireland, Canada or Australia, and can't hand the parcel over to them.
 
-HYWL's own steps run up to the delivery: `Dispatching, 出门投递`, then `Delivered, 已妥投`. Peek found no HYWL delivery times, and no rules for delivery attempts, notice cards, pickup points or how long a parcel is held: those are the delivering company's. If a delivery goes wrong, ask the seller which company delivers your order and for its tracking number, then see [missed delivery](guide:missed-delivery).
+HYWL's own steps run up to the delivery: `Dispatching`, then `Delivered`. Peek found no HYWL delivery times, and no rules for delivery attempts, notice cards, pickup points or how long a parcel is held: those are the delivering company's. If a delivery goes wrong, ask the seller which company delivers your order and for its tracking number, then see [missed delivery](guide:missed-delivery).
 
 ## HYWL parcel not arriving or tracking stuck
 
@@ -75,9 +75,9 @@ HYWL's own steps run up to the delivery: `Dispatching, 出门投递`, then `Deli
 
 **HYWL's tracker shows more than Peek.** Peek holds back the steps on HYWL's tracker dated after the moment it checks, so HYWL's page can show steps Peek doesn't. Check their times: a step dated ahead hasn't happened yet. Go by the delivery estimate the shop gave you, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**Nothing after `Arrival at, 抵达`.** The parcel has reached your country. If you're asked to pay import charges, see [parcels held at customs](guide:customs). If it sits for days, ask the seller which company delivers it and under which number.
+**Nothing after `Arrival at`.** The parcel has reached your country. If you're asked to pay import charges, see [parcels held at customs](guide:customs). If it sits for days, ask the seller which company delivers it and under which number.
 
-**`Delivered, 已妥投`, but nothing came.** First check the step's time: if it's still ahead, the step hasn't happened. If it has passed, tell the seller and ask which company delivered. See [delivered but not received](guide:delivered-not-received).
+**`Delivered`, but nothing came.** First check the step's time: if it's still ahead, the step hasn't happened. If it has passed, tell the seller and ask which company delivered. See [delivered but not received](guide:delivered-not-received).
 
 **Lost or returned.** The seller booked the parcel with HYWL, so the seller, or the marketplace, is the one to ask for a refund or a new parcel. See [lost parcels](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
 
@@ -97,7 +97,7 @@ Peek shows the status, each step with its place, and the destination country whe
 
 When HYWL's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words. Peek doesn't hold back steps dated ahead in their copies, so check each step's time.
 
-Peek stays with HYWL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers `Dispatching, 出门投递` and `Delivered, 已妥投`, not HYWL's export customs or sorting. Peek can't contact HYWL or the seller for you.
+Peek stays with HYWL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers `Dispatching` and `Delivered`, not HYWL's export customs or sorting. Peek can't contact HYWL or the seller for you.
 
 ## Questions about HYWL tracking
 
@@ -111,7 +111,7 @@ In the box above, or on HYWL's tracker at szhywl.it.com, in Chinese: type the nu
 
 ### What do 出门投递 and 已妥投 mean on HYWL tracking?
 
-出门投递 is out for delivery, which HYWL writes `Dispatching, 出门投递`. 已妥投 is delivered: `Delivered, 已妥投`. Check the step's time: HYWL's tracker also shows steps dated ahead, and those haven't happened yet.
+出门投递 is out for delivery, `Dispatching` in HYWL's English wording. 已妥投 is delivered: `Delivered`. Check the step's time: HYWL's tracker also shows steps dated ahead, and those haven't happened yet.
 
 ### Who delivers HYWL parcels in my country?
 

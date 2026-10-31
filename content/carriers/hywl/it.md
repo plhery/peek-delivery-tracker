@@ -49,23 +49,23 @@ Le descrizioni dicono di più. Nell'ordine in cui compaiono:
 | `In Transit`, `快件在该国内转运中, 干线中转` | In viaggio. Il cinese dice che si sta spostando in Cina, sulla tratta principale. | «In transito» |
 | `Customs Clearance Completed`, `出口清关完成` | Lo sdoganamento all'esportazione in Cina è concluso. Non è la dogana italiana. | «In transito» |
 | `Departure from International Hub`, `Arrival at Transit Hub` | Partito da un hub internazionale, poi arrivato a un hub di transito lungo il percorso. | «In transito» |
-| `Arrival at, 抵达` | Arrivato nel Paese di destinazione, indicato dal suo codice tra 【】. | «In transito» |
+| `Arrival at` | Arrivato nel Paese di destinazione, indicato dal suo codice tra parentesi. | «In transito» |
 | `邮件在该国内转运中` | In viaggio nel Paese di destinazione. | «In transito» |
-| `Arrival at Processing Center`, `Departure from Processing Center` | In un centro di smistamento in Italia, poi in partenza, con la tua città tra 【】. | «In transito» |
-| `Dispatching, 出门投递` | In consegna. | «In consegna» |
-| `Delivered, 已妥投` | Consegnato. | «Consegnato» |
+| `Arrival at Processing Center`, `Departure from Processing Center` | In un centro di smistamento in Italia, poi in partenza, con la tua città tra parentesi. | «In transito» |
+| `Dispatching`, `出门投递` | In consegna. | «In consegna» |
+| `Delivered`, `已妥投` | Consegnato. | «Consegnato» |
 
 **Luoghi.** In Italia i passaggi di HYWL riportano la tua città e il CAP, il primo passaggio una città e il codice di un ufficio. Peek tiene solo la città e taglia ogni nome che segue `signed by` o `签收人`.
 
 **Orari.** Il tracking di HYWL mostra gli orari senza fuso orario. I passaggi con il luogo scritto in cinese, o a Shenzhen, Guangzhou, Dongguan, Huizhou o Hong Kong, sono nell'ora di Pechino: le 20:00 a Pechino sono le 13:00 in Italia con l'ora solare e le 14:00 con l'ora legale.
 
-**Passaggi con una data futura.** La pagina di tracking di HYWL dice che il suo personale crea gli ordini e ne aggiorna il tracciamento in un gestionale interno. I suoi dati possono contenere passaggi con una data successiva al momento in cui guardi: il tracking di HYWL li mostra lo stesso, e anche lo stato in alto può essere in anticipo. Peek tiene da parte questi passaggi del tracking di HYWL finché la loro ora non è passata: quelli in Cina secondo l'ora di Pechino, gli altri leggendo l'orario come UTC. Peek si basa sui passaggi che tiene, non sullo stato di HYWL. Un passaggio con una data futura non è ancora successo, nemmeno `Delivered, 已妥投`.
+**Passaggi con una data futura.** La pagina di tracking di HYWL dice che il suo personale crea gli ordini e ne aggiorna il tracciamento in un gestionale interno. I suoi dati possono contenere passaggi con una data successiva al momento in cui guardi: il tracking di HYWL li mostra lo stesso, e anche lo stato in alto può essere in anticipo. Peek tiene da parte questi passaggi del tracking di HYWL finché la loro ora non è passata: quelli in Cina secondo l'ora di Pechino, gli altri leggendo l'orario come UTC. Peek si basa sui passaggi che tiene, non sullo stato di HYWL. Un passaggio con una data futura non è ancora successo, nemmeno `Delivered`.
 
 ## Chi consegna i pacchi HYWL in Italia
 
 Il sito di HYWL dice che offre linee con consegna all'estero, ma non nomina i corrieri che consegnano, e il suo tracking non indica né il corriere né il suo numero. Nemmeno il codice di Peek ne nomina uno, per nessun Paese. Quindi Peek non sa chi consegna i pacchi HYWL in Italia e non può passare il pacco al tracking di quel corriere.
 
-I passaggi di HYWL arrivano fino alla consegna: `Dispatching, 出门投递`, poi `Delivered, 已妥投`. Peek non ha trovato tempi di consegna di HYWL, né regole su tentativi di consegna, avvisi di passaggio, punti di ritiro o giacenza: sono quelle del corriere che consegna. Se la consegna non va a buon fine, chiedi al venditore quale corriere consegna il tuo ordine e il suo numero di tracking, poi leggi [mancata consegna](guide:missed-delivery).
+I passaggi di HYWL arrivano fino alla consegna: `Dispatching`, poi `Delivered`. Peek non ha trovato tempi di consegna di HYWL, né regole su tentativi di consegna, avvisi di passaggio, punti di ritiro o giacenza: sono quelle del corriere che consegna. Se la consegna non va a buon fine, chiedi al venditore quale corriere consegna il tuo ordine e il suo numero di tracking, poi leggi [mancata consegna](guide:missed-delivery).
 
 ## Pacco HYWL fermo o che non arriva
 
@@ -75,9 +75,9 @@ I passaggi di HYWL arrivano fino alla consegna: `Dispatching, 出门投递`, poi
 
 **Il tracking di HYWL mostra più di Peek.** Peek tiene da parte i passaggi datati dopo il suo ultimo controllo, quindi la pagina di HYWL può mostrarne alcuni che Peek non ha. Guarda gli orari: un passaggio con una data futura non è ancora successo. Regolati sulla data di consegna stimata dal negozio e, quando è passata, scrivi al venditore. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-**Niente dopo `Arrival at, 抵达`.** Il pacco è arrivato in Italia. Se ti chiedono di pagare spese d'importazione, leggi [pacco fermo in dogana](guide:customs). Se resta fermo per giorni, chiedi al venditore quale corriere lo consegna e con che numero.
+**Niente dopo `Arrival at`.** Il pacco è arrivato in Italia. Se ti chiedono di pagare spese d'importazione, leggi [pacco fermo in dogana](guide:customs). Se resta fermo per giorni, chiedi al venditore quale corriere lo consegna e con che numero.
 
-**`Delivered, 已妥投`, ma non è arrivato niente.** Prima guarda l'ora del passaggio: se è ancora nel futuro, la consegna non è avvenuta. Se è già passata, avvisa il venditore e chiedi quale corriere ha consegnato. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
+**`Delivered`, ma non è arrivato niente.** Prima guarda l'ora del passaggio: se è ancora nel futuro, la consegna non è avvenuta. Se è già passata, avvisa il venditore e chiedi quale corriere ha consegnato. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
 **Perso o rispedito al mittente.** Il venditore ha prenotato la spedizione con HYWL, quindi chiedi a lui, o al marketplace, un rimborso o un nuovo invio. Vedi [pacco smarrito](guide:lost-parcel) e [pacco rispedito al mittente](guide:returned-to-sender).
 
@@ -97,7 +97,7 @@ Peek mostra lo stato, ogni passaggio con il suo luogo e, quando i dati di HYWL l
 
 Quando il tracking di HYWL non risponde, Peek si rivolge ai servizi di tracciamento e mostra la cronologia che hanno, con le loro parole. Nelle loro copie Peek non tiene da parte i passaggi con una data futura, quindi guarda l'ora di ogni passaggio.
 
-Peek resta sul tracking di HYWL: se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco separato. Peek controlla ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: «Passaggi importanti» comprende `Dispatching, 出门投递` e `Delivered, 已妥投`, non la dogana d'esportazione né lo smistamento di HYWL. Peek non può contattare HYWL o il venditore al posto tuo.
+Peek resta sul tracking di HYWL: se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco separato. Peek controlla ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: «Passaggi importanti» comprende `Dispatching` e `Delivered`, non la dogana d'esportazione né lo smistamento di HYWL. Peek non può contattare HYWL o il venditore al posto tuo.
 
 ## Domande sul tracking HYWL
 
@@ -111,7 +111,7 @@ Nel box qui sopra, oppure sul sito di HYWL, szhywl.it.com, in cinese: scrivi il 
 
 ### Cosa vogliono dire 出门投递 e 已妥投 nel tracking HYWL?
 
-出门投递 significa in consegna (HYWL scrive `Dispatching, 出门投递`), 已妥投 consegnato (`Delivered, 已妥投`). Guarda l'ora del passaggio: il tracking di HYWL mostra anche passaggi con una data futura, che non sono ancora successi.
+出门投递 significa in consegna (`Dispatching` nella versione inglese di HYWL), 已妥投 consegnato (`Delivered`). Guarda l'ora del passaggio: il tracking di HYWL mostra anche passaggi con una data futura, che non sono ancora successi.
 
 ### Chi consegna i pacchi HYWL in Italia?
 

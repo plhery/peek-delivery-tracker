@@ -82,10 +82,6 @@ Peek controlla il tracciamento italiano di GOFO ogni 10 minuti di giorno, ogni 2
 
 Te lo dice l'ultima riga del tracciamento: `Arrivato alla struttura di destinazione regionale GOFO` vuol dire che è alla struttura regionale della tua zona, `Preparazione alla consegna` che lo stanno preparando per il corriere, e `Il corriere è fuori per la consegna` che è con il corriere. Se vedi solo la riga di preparazione, il mittente non l'ha ancora affidato a GOFO.
 
-### GOFO consegna il sabato?
-
-Le pagine di GOFO Italy non lo dicono, né per il sabato né per la domenica. Se aspetti un pacco nel weekend, guarda se arriva `Il corriere è fuori per la consegna`.
-
 ### Cos'è GOFO Italia, ed è affidabile?
 
 È la società italiana di GOFO: GOFO Italia s.r.l., con sede legale a Lainate, in provincia di Milano. L'AGCOM, l'autorità di regolamentazione del settore postale, riporta nella Determina n. 12/26/DSP del 2 settembre 2026 di averle contestato, il 17 giugno 2026, tre violazioni: aver svolto attività postale per servizi rientranti nel servizio universale senza la prescritta licenza individuale, senza aver predisposto la Carta dei servizi e senza aver attivato procedure di risoluzione delle controversie con l'utenza. Secondo la determina, la società ha ammesso gli addebiti sulla Carta dei servizi e sulle procedure per le controversie e, per queste due violazioni, ha pagato la sanzione in misura ridotta: per questa parte l'AGCOM ha archiviato il procedimento. La società si è invece opposta alla contestazione sull'inidoneità del suo titolo abilitativo, e su questo punto il procedimento, scrive l'AGCOM, «seguirà l'ordinario iter procedimentale».
@@ -103,6 +99,5 @@ Contatta il negozio. Per le norme europee risponde della consegna finché il pac
 - [AGCOM: FAQ contenzioso tra utenti e operatori postali](https://www.agcom.it/faq-contenzioso-tra-utenti-e-operatori-postali) – reclamo entro 45 giorni, conciliazione entro 60, Formulario CP entro 90, pacchi fino a 31,5 kg, pacchi danneggiati, Contact Center
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – consegna entro 30 giorni, proroga, danni fino alla consegna
 - [Your Europe: FAQ, spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_it.htm) – il negozio dimostra la consegna, controllo in presenza dello spedizioniere
-- [GOFO Italy: Assistenza Clienti](https://www.gofo.com/it/contact-us/) – nessuna indicazione sulle consegne del sabato e della domenica
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme dei codici, link, diciture italiane e categorie, scansioni di GOFO riportate da YunExpress, CIRRO Parcel Italy, cosa mostra e lascia fuori Peek
 :::

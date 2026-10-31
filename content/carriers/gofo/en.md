@@ -66,11 +66,9 @@ GOFO's delivered scan can add a detail after the comma, and its tracking page al
 
 **Lost.** Ask the shop for a refund or a new shipment; more in [lost parcel](guide:lost-parcel).
 
-## GOFO Express customer service phone number
+## GOFO Express customer service
 
-For anything about the order itself, start with the shop that shipped it. GOFO's own site has a customer service page, the one Peek's "Get help from GOFO Express" link opens. On October 15, 2026, that page listed this WhatsApp line:
-
-- **WhatsApp:** +1 (787) 469-5811, 9 am to 9 pm EST Monday to Friday, 11 am to 8 pm EST Saturday and Sunday.
+For anything about the order itself, start with the shop that shipped it. GOFO's own site has a customer service page, the one Peek's "Get help from GOFO Express" link opens.
 
 ## Tracking GOFO Express parcels with Peek
 
@@ -97,7 +95,6 @@ Check that it's a US GOFO number: GFUS, GF or CR. `GFCA`, `GFFR`, `GFIT`, `GFES`
 Cainiao, which tracks AliExpress orders, follows some of them under GOFO's GFUS number when GOFO delivers them in the US. For a GFUS number, Peek asks both GOFO and Cainiao. More in [AliExpress orders](guide:aliexpress-orders).
 
 :::sources
-- [GOFO: Customer Service](https://www.gofo.com/us/customer-service) – WhatsApp line and its hours, as listed on 15 October 2026
 - [FTC: What To Do if You're Billed for Things You Never Got, or You Get Unordered Products](https://consumer.ftc.gov/articles/what-do-if-youre-billed-things-you-never-got-or-you-get-unordered-products) – shipping deadlines, delays and refunds, card disputes, unordered merchandise
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GOFO's number shapes and its networks in other countries, GFUS and CR numbers, YunExpress numbers, GOFO's tracker and help page, scan wordings and their meanings, what GOFO's page shows and what Peek reads, Cainiao
 :::

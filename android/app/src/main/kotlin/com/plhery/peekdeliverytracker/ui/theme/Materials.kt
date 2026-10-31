@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
@@ -445,6 +446,9 @@ fun GlassSurface(
                 Box(Modifier.pastTheEdge().hazeBlur(HazeInput.Sources(blurred.haze), style, expandLayerBounds = false))
             }
         }
+        // The glass takes the touches within its shape, as a SwiftUI view does where it draws: a tap on a toast's words
+        // or on a bar between its buttons doesn't reach what lies under it. It consumes none, so what holds it scrolls.
+        Box(Modifier.matchParentSize().clip(shape).pointerInput(Unit) {})
         content()
     }
 }

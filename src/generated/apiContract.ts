@@ -40526,7 +40526,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "komon-express",
+      "recognitionRank": 76
     },
     "linkRules": [],
     "detectionRules": [
@@ -40592,7 +40593,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "parcelabc"
     },
     "linkRules": [
       {
@@ -40625,7 +40626,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Bahrain",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "safeway-express-cargo",
+      "recognitionRank": 77
     },
     "trackingUrlTemplate": "https://www.safewayxp.com/track.php?awb={trackingNumber}",
     "linkRules": [

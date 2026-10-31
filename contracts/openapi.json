@@ -40531,7 +40531,8 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "komon-express",
+        "recognitionRank": 76
       },
       "linkRules": [],
       "detectionRules": [
@@ -40597,7 +40598,7 @@
       "timezone": "Europe/London",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "parcelabc"
       },
       "linkRules": [
         {
@@ -40630,7 +40631,8 @@
       "timezone": "Asia/Bahrain",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "safeway-express-cargo",
+        "recognitionRank": 77
       },
       "trackingUrlTemplate": "https://www.safewayxp.com/track.php?awb={trackingNumber}",
       "linkRules": [

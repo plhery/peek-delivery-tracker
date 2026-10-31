@@ -5,4 +5,9 @@
     <issue id="NewerVersionAvailable">
         <ignore regexp="com\.ibm\.icu:icu4j" />
     </issue>
+    <!-- Settings offers the app's languages from Android 13 (res/xml/locales_config.xml); older versions have no such
+         list and ignore it. -->
+    <issue id="UnusedAttribute">
+        <ignore regexp="localeConfig" />
+    </issue>
 </lint>

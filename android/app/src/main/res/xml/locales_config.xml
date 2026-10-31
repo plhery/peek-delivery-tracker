@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The languages the app speaks, which Android's Settings offers for it as the iPhone's offers its
+     CFBundleLocalizations (ios/PeekDeliveryTracker/Info.plist), in AppLanguage's order. The one chosen there comes first
+     in LocaleList.getDefault(), which AppLanguage.current reads when no language is saved (Device.preferredLanguages). -->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en" />
+    <locale android:name="de" />
+    <locale android:name="fr" />
+    <locale android:name="it" />
+    <locale android:name="es" />
+    <locale android:name="pt" />
+    <locale android:name="pt-BR" />
+    <locale android:name="pl" />
+    <locale android:name="ru" />
+    <locale android:name="zh-Hans" />
+</locale-config>

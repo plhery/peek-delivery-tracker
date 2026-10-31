@@ -12,6 +12,9 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.NativeRoute
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.ParcelShareModel
 import com.plhery.peekdeliverytracker.core.ParcelShareNotes
 import com.plhery.peekdeliverytracker.core.ParcelStore
@@ -21,6 +24,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -145,6 +149,19 @@ interface DeliveriesSource {
     /** The share sheets open, for as long as this process lasts ([ParcelShares]). */
     val shares: ParcelShares
 
+    /** The questions the parcel pages ask, for as long as this process lasts ([ParcelFeedbacks]). */
+    val feedbacks: ParcelFeedbacks
+
+    /**
+     * A page's question (ParcelDetailView's `ParcelFeedbackModel()`): its answers run in [scope], remembered in this
+     * phone's preferences ([ParcelFeedbackMemory], which the store forgets as the account changes), counted with
+     * [action], and a "Yes" may make it the moment for [reviewPrompt].
+     */
+    fun feedbackModel(): ParcelFeedbackModel
+
+    /** `store.feedbackClient(for:)`: how a page sends what its reader says of the parcel. */
+    fun feedbackClient(parcel: Parcel): ParcelFeedbackClient
+
     /** `localizer.errorMessage(error)`. */
     fun errorMessage(error: Throwable): String
 
@@ -250,6 +267,21 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override val shares: ParcelShares get() = SHARES
 
+    override val feedbacks: ParcelFeedbacks get() = FEEDBACKS
+
+    override fun feedbackModel(): ParcelFeedbackModel = ParcelFeedbackModel(
+        scope = container.scope, memory = ParcelFeedbackMemory(container.defaults),
+        report = { name, outcome -> container.analytics.action(name, outcome) }, review = container.reviewPrompt, app = FEEDBACK_APP,
+    )
+
+    /**
+     * Nowhere yet, and taken as sent, as the demo's answers are. The service counts an answer under the app it names,
+     * and takes `ios` and `web` only (ParcelFeedbackRequest's `app`): Android's must say `android`, and will once the
+     * service takes it; until then none leaves the phone, rather than say it came from another app. The page thanks its
+     * reader, counts the answer and remembers it as the iPhone does once the service has it (`store.feedbackClient`).
+     */
+    override fun feedbackClient(parcel: Parcel): ParcelFeedbackClient = ParcelFeedbackClient { }
+
     override fun errorMessage(error: Throwable): String = container.localizer.errorMessage(error)
 
     override fun showWelcome() = container.session.showWelcome()
@@ -273,6 +305,15 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
         /** This process's share sheets, for every window it makes, as its pages' work is. */
         val SHARES = ParcelShares()
+
+        /** This process's pages' questions, for every window it makes, as its pages' work is. */
+        val FEEDBACKS = ParcelFeedbacks()
+
+        /**
+         * What a page's answers would say they come from, which [feedbackClient] never sends: the model needs one, and
+         * the service has no `android` to name yet.
+         */
+        val FEEDBACK_APP = ParcelFeedbackRequestApp.Ios
     }
 }
 

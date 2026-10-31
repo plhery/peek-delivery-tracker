@@ -130,7 +130,10 @@ fun DeliveriesTab(
     val launch = source.launch
     val navigator = rememberSaveable(launch, saver = DeliveriesNavigator.saver(launch)) { DeliveriesNavigator() }
     navigator.view = source::view
-    navigator.left = source.pageWork::forget
+    navigator.left = { pageId ->
+        source.pageWork.forget(pageId)
+        source.feedbacks.forget(pageId)
+    }
     val listState = rememberLazyListState()
     val archiveOpen = rememberForLaunch(launch, false)
     val reviewDue = rememberForLaunch(launch, false)

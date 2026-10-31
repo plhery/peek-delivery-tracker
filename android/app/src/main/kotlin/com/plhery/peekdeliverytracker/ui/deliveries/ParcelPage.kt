@@ -44,9 +44,11 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -68,6 +70,8 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.ParcelAttention
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackSubject
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.ParcelPageColumns
 import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
@@ -96,6 +100,8 @@ import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
 import com.plhery.peekdeliverytracker.ui.zoom.pageBarItem
 import java.util.UUID
@@ -119,8 +125,9 @@ internal val LocalPageTop = compositionLocalOf<Dp?> { null }
  * ([ParcelPageColumns]), 28 apart, and in one column it keeps the two 20 apart, a line under the pass. The page
  * scrolls, with no scroll bar, its content 26 apart, 16 in from the window's safe sides, 10 under the bar and 36 over
  * the window's foot, and no wider than the two columns at their widest (1080) or 640 in one, centred; the ground fades
- * out under the bar over what scrolls under it (`softTopEdge()`). Under the paper stands the question Pip asks about the
- * page, once it is ported. No bar names the page; TalkBack hears it as "Parcel details" (`windowTitle`).
+ * out under the bar over what scrolls under it (`softTopEdge()`). Under the paper stands the question asked about the
+ * page, and over the page's foot what it says on the way back from the carrier's site, with its sheets
+ * ([ParcelFeedbackOverlays]). No bar names the page; TalkBack hears it as "Parcel details" (`windowTitle`).
  *
  * A parcel the deliveries no longer have (deleted elsewhere, or signed out) shows `ContentUnavailableView` instead:
  * "Parcel", a box, and that it is no longer in the list (B-ST01).
@@ -141,6 +148,9 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
     val start = if (edges.start) padding.calculateStartPadding(direction) else 0.dp
     val end = if (edges.end) padding.calculateEndPadding(direction) else 0.dp
     val bottom = padding.calculateBottomPadding()
+    val feedback = rememberFeedback(state, parcelId, parcel)
+    // The page's scroll, which the word at its foot shows through its glass.
+    val backdrop = rememberMaterialBackdrop()
     PageKeys(state, parcelId, menuParcel)
     Box(
         Modifier
@@ -150,7 +160,9 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
             .semantics { paneTitle = title },
     ) {
         if (parcel != null) {
-            PageScroll(state, parcel, parcelId, PageMargins(start, top, end, bottom))
+            Box(Modifier.fillMaxSize().materialBackdrop(backdrop)) {
+                PageScroll(state, parcel, parcelId, feedback, PageMargins(start, top, end, bottom))
+            }
             if (top > 0.dp) SoftTopEdge(top)
         } else {
             ContentUnavailable(
@@ -161,7 +173,38 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
                     .testTag(PARCEL_MISSING),
             )
         }
+        ParcelFeedbackOverlays(
+            state, feedback, backdrop, Modifier.align(Alignment.BottomCenter).padding(start = start, end = end, bottom = bottom),
+        )
     }
+}
+
+/**
+ * The page's question (`@StateObject feedback`), the source's for the page's id so that it lasts through the window made
+ * again, told what the page shows each time that changes (`onChange(of: parcel.flatMap(feedbackPage), initial: true)`).
+ */
+@Composable
+private fun rememberFeedback(state: DeliveriesState, pageId: UUID, parcel: Parcel?): ParcelFeedbackWork {
+    val source = state.source
+    val page = feedbackPage(state, pageId, parcel)
+    val client = parcel?.let(source::feedbackClient)
+    val work = source.feedbacks.work(pageId, source.scope) { source.feedbackModel().apply { show(page, client) } }
+    LaunchedEffect(work, page) { work.show(page, client) }
+    return work
+}
+
+/**
+ * `feedbackPage(_:)`: what the question at the end of the page is asked about, or null while it asks nothing. The demo's
+ * stories and the sample are made up: nothing is asked of them.
+ */
+@Composable
+private fun feedbackPage(state: DeliveriesState, pageId: UUID, parcel: Parcel?): ParcelFeedbackModel.Page? {
+    val language = LocalLanguage.current
+    parcel ?: return null
+    return ParcelFeedbackModel.Page(
+        parcel, ParcelFeedbackSubject.Parcel(parcel.id), showsHistory(parcel), madeUp = state.source.isDemo || state.sample(pageId) != null,
+        carrier = CarrierCatalog.shared.info(parcel.displayedCarrier, language).displayName, language = language,
+    )
 }
 
 /** The window's safe sides the page keeps clear of, and its top under the bar. */
@@ -188,10 +231,12 @@ private fun rememberPageScroll(): ScrollState {
 
 /** The page's ScrollView: the paper, in one column or two, and the question under it. */
 @Composable
-private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, margins: PageMargins) {
+private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, feedback: ParcelFeedbackWork, margins: PageMargins) {
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val history = showsHistory(parcel)
-    BoxWithConstraints(Modifier.fillMaxSize()) {
+    // Where the scroll shows what it holds, which the question comes in as it is seen in.
+    val viewport = remember { arrayOfNulls<LayoutCoordinates>(1) }
+    BoxWithConstraints(Modifier.fillMaxSize().onPlaced { viewport[0] = it }) {
         val columns = ParcelPageColumns.fit(
             maxWidth.value.toDouble(), besideList = state.arrangement == DeliveriesArrangement.SideBySide, largeText = largeText, history = history,
         )
@@ -219,7 +264,8 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, mar
                 LiveParcelPass(state, parcel, pageId, divided = !columns, Modifier.fillMaxWidth())
                 PageHistory(state, parcel, pageId, history, Modifier.fillMaxWidth())
             }
-            FeedbackQuestion(Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
+            // Below the paper, on the ground it lies on, 8 in from its sides and no wider than 608.
+            ParcelFeedbackQuestion(feedback, { viewport[0] }, Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
         }
     }
 }
@@ -325,8 +371,7 @@ private fun CarrierNotes(state: DeliveriesState, parcel: Parcel) {
 /**
  * The parcel's numbers and its carriers' pages ([ShipmentNumbers]), in its carrier's ink: none for the sample, whose
  * number is made up, nor for a number a link hides. A copy says so on its row ([DeliveriesState.copyOnPage]), and a
- * page opened is counted. The page's question will hear of the visit too (`feedback.visited`) once it comes, with
- * its step.
+ * page opened is counted, and the page's question hears of the visit (`feedback.visited`), to ask on the way back.
  */
 @Composable
 private fun ShipmentIdentity(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
@@ -338,7 +383,10 @@ private fun ShipmentIdentity(state: DeliveriesState, parcel: Parcel, pageId: UUI
         parcel, links, PeekTheme.colors.resolve(identity.ink),
         copied = state.copiedNumber?.takeIf { it.pageId == pageId }?.number,
         onCopy = { state.copyOnPage(pageId, it) },
-        onLink = { state.source.action("parcel-carrier-link") },
+        onLink = { link ->
+            state.source.action("parcel-carrier-link")
+            state.source.feedbacks.of(pageId)?.visited(link.name)
+        },
         Modifier.testTag(PAGE_IDENTITY),
     )
 }
@@ -425,14 +473,6 @@ private fun SyncStatus(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
         Modifier.testTag(PAGE_SYNC_LINE),
     )
 }
-
-/**
- * Below the paper, on the ground it lies on, Pip asks whether the page is right (`ParcelFeedbackQuestionView`), 8 in
- * from its sides and no wider than 608. Not ported yet: it asks nothing.
- */
-@Suppress("UNUSED_PARAMETER")
-@Composable
-private fun FeedbackQuestion(modifier: Modifier) = Unit
 
 /**
  * The page's bar over the list, which [ZoomStack][com.plhery.peekdeliverytracker.ui.zoom.ZoomStack] keeps at the

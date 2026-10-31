@@ -9,6 +9,9 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.NotificationPreset
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.ParcelShareModel
 import com.plhery.peekdeliverytracker.core.ParcelShareNotes
 import com.plhery.peekdeliverytracker.core.ParcelStore
@@ -20,6 +23,8 @@ import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.time.Instant
@@ -44,7 +49,9 @@ import kotlinx.coroutines.launch
  * when a test holds it. The server refuses the numbers of `refusals`, once `refusing` lets its answer go. The demo is
  * the demo's session. The rating prompt keeps its days in a store of its own, in UTC, and the system's prompt is a
  * fake that notes each step ([reviewCalls]). The parcels' links are the service's (`shareLinks`), and the words kept
- * for them this device's (`shareDefaults`): both outlast a process, as the service and the device's store do.
+ * for them this device's (`shareDefaults`): both outlast a process, as the service and the device's store do. The
+ * pages' answers go to [feedbackRequests], or fail with `feedbackFailure`, once `feedbackSending` lets them go; their
+ * model keeps the time of [now], which a test moves on, and remembers them in a store of its own.
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
@@ -352,6 +359,34 @@ class FakeDeliveries(
     override val shareNotes = ParcelShareNotes(shareDefaults)
     override val linkBaseUrl = "https://example.com/"
     override val shares = ParcelShares()
+
+    /** The pages' questions' clock: the way back asks once the app has been away a second and a half of it. */
+    var now: Instant = CAPTURED
+
+    /** Holds each answer until the test lets it go, and what it throws when it fails. */
+    var feedbackSending: CompletableDeferred<Unit>? = null
+    var feedbackFailure: Exception? = null
+
+    /** Each answer sent, with its parcel's id, in its order. */
+    val feedbackRequests = mutableListOf<Pair<UUID, ParcelFeedbackRequest>>()
+
+    /** What the questions remember, empty for each new source. */
+    private val feedbackDefaults = PreferencesDefaults(
+        ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("feedback-${UUID.randomUUID()}", Context.MODE_PRIVATE),
+    )
+
+    override val feedbacks = ParcelFeedbacks()
+
+    override fun feedbackModel(): ParcelFeedbackModel = ParcelFeedbackModel(
+        scope = scope, memory = ParcelFeedbackMemory(feedbackDefaults) { now }, now = { now }, report = { name, outcome -> action(name, outcome) },
+        review = reviewPrompt, app = ParcelFeedbackRequestApp.Ios,
+    )
+
+    override fun feedbackClient(parcel: Parcel): ParcelFeedbackClient = ParcelFeedbackClient { feedback ->
+        feedbackSending?.await()
+        feedbackFailure?.let { throw it }
+        feedbackRequests += parcel.id to feedback
+    }
 
     override fun errorMessage(error: Throwable): String = error.message ?: "error"
 

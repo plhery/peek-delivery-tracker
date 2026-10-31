@@ -6,13 +6,13 @@ published: 2026-10-13
 updated: 2026-10-27
 ---
 
-Helthjem is a Norwegian network that brings online shops' parcels to your mailbox or doormat, mostly overnight, or to a pickup point. Track yours on helthjem.no/sporing with the number from the shop's shipping email, or paste it in the box above. Helthjem's tracking is in Norwegian only, so the statuses are translated below.
+Helthjem is a Norwegian parcel service for online shops: it leaves parcels on your doormat or in your mailbox, including on night rounds, or sends them to a pickup point. Paste the number in the box above to track yours; Helthjem's own site, helthjem.no, has a tracking page too. Helthjem words its tracking in Norwegian, so the statuses are translated below.
 
 ## Where to find your Helthjem tracking number
 
-The shop gives you the tracking number and a tracking link, usually in its shipping email. Helthjem often emails you too, as "Pakken din fra XX er på vei" (your parcel from XX is on its way); parcels ordered from abroad don't get that email. Nothing came? Ask the shop, and see [how to find your tracking number](guide:find-tracking-number). The pickup code (hentekode) you get when a parcel waits at a pickup point isn't the tracking number.
+The shop that sent the parcel gives you the number, usually in its shipping email or on your order page. Nothing there? Ask the shop, and see [how to find your tracking number](guide:find-tracking-number).
 
-Helthjem publishes no number format. The numbers its tracking answers for look like this (digits invented):
+The numbers Peek links to Helthjem look like this (digits invented), next to Bring numbers that look alike:
 
 | Number | Whose it is |
 | --- | --- |
@@ -21,105 +21,99 @@ Helthjem publishes no number format. The numbers its tracking answers for look l
 | `370111111111111116` | [Bring](carrier:bring): its own 18-digit numbers also start `370` or `373`. |
 | `RR000000005NO` | Bring: postal numbers ending `NO`. |
 
-Helthjem's numbers [look just like Bring's](guide:tracking-number-formats) `370` range; Peek tells them apart by the `37072476` start and the check digit. If helthjem.no answers `Vi finner ingen pakke med dette sporingsnummeret.` (no parcel with this tracking number), check the digits, then try Bring or ask the shop which carrier it booked.
+The last digit of such a number is a check digit. Helthjem's search also takes its 17-digit shipment number, with or without `401` in front.
+
+Helthjem's numbers [look just like Bring's](guide:tracking-number-formats) `370` range; Peek tells them apart by the `37072476` start and the check digit. If Helthjem doesn't know a number, or no longer keeps it, its search finds nothing. Check the digits, then try Bring or ask the shop which carrier it booked.
 
 ## Helthjem tracking statuses in English
 
-The tracking page shows a headline status, a four-step bar (`Registrert`, `På vei`, `Til levering`, `Levert`), the shop the parcel comes from and, behind "Vis alle statuser", the full history. All in Norwegian Bokmål. In the order a parcel meets them:
+Helthjem's tracking page shows the parcel's status and its scans with their places, the expected day, the shop it comes from and, where it applies, the pickup point with its address and a photo of the drop-off. Helthjem files the parcel and each scan under one of twelve states and words them in Norwegian Bokmål. In the order a parcel meets them:
 
 | Status | What it means for you |
 | --- | --- |
 | `Nettbutikken har meldt at en pakke er på vei!` | The shop has [announced a parcel](guide:tracking-statuses). Helthjem doesn't have it yet. |
+| `Vi har mottatt pakken din, og gjør den klar for veien videre.` | Received at the Helthjem terminal the scan names, getting ready for the next leg. |
 | `Pakken er under transport.` | In transit: a terminal or sorter scan. |
-| `Vi har mottatt pakken din, og gjør den klar for veien videre.` | Received at a Helthjem terminal, getting ready for the next leg. |
 | `Planlagt levering natt til 8. oktober!` | Booked on the night round leading into the date shown. No courier has it yet: it goes out that night. |
+| `Budet fikk ikke med seg pakken din ut i natt.` | The night's courier didn't take your parcel out. It waits for a later round. |
 | `Pakken er levert på dørmatten din!` | Delivered on your doormat. |
 | `Pakken er levert i postkassen din!` | Delivered in your mailbox. |
-| `På vei til hentested` | Sent on to a pickup point instead of your home. |
-| `Klar til henting` | Ready for pickup at the point named. |
+| `På vei til hentested`, `Leveres til hentested` | Sent on to a pickup point instead of your home. |
+| `Klar til henting` | Ready for pickup at the point Helthjem's page names. |
 | `Pakken er hentet` | Picked up at the pickup point. |
 | `Pakke ikke hentet` | Not picked up in time: it goes back to the shop. |
 | `Returneres` | Being returned to the shop, or already back. |
+| `Pakken er kansellert` | The shipment was cancelled. |
 
-**The place looks wrong.** It's the terminal that last handled the parcel, such as Vestby, often far from you. The parcel still comes to your address.
+**The place looks wrong.** In `Vi har mottatt pakken din…` and `Pakken er under transport.`, the place is the Helthjem terminal or sorter that handled the parcel, not your address. In 2023 Helthjem ran its own parcel terminal at Vestby, outside Oslo, and the company register still lists a Helthjem branch there, so a Vestby scan says where the parcel was sorted, not where it's going.
 
-## When Helthjem delivers, pickup points and missed parcels
+## Helthjem delivery: night rounds, doormat and pickup points
 
-**When it comes.** At night, Monday to Saturday in large parts of Norway: on most routes before breakfast, by 7 am on Helthjem's English page, though some areas get daytime delivery. Once a parcel reaches Helthjem's terminals, most arrive within 2 to 5 days depending on where you live; parcels from abroad can take longer because of [customs](guide:customs). Around 6 am after a drop-off, Helthjem texts you if it has your mobile number.
+**Who brings it.** In 2023 Helthjem sold parcel delivery to shops and handed the parcels to the newspaper distributors of the Helthjem network, which all offered delivery six days a week. Larger parcels that couldn't be left at the door went with [PostNord](carrier:postnord).
 
-**Where it's left.** In your mailbox or on your doormat, without a signature. A parcel too big for the mailbox may hang there in a bag (`Levert i pose ved postkassen`) when your door is over 250 m away. Most drop-offs are photographed; log in on the tracking page to see the photo, deleted after 30 days.
+**Night rounds.** The day before a home delivery, Helthjem books the parcel on a night round and says so: `Planlagt levering natt til 8. oktober!` means it goes out on the night leading into 8 October. No courier has it at that point.
 
-**Courier couldn't find you.** You get an SMS or email asking where you live, and the courier tries again the next night. No answer by 21:00 and the parcel goes to the nearest pickup point.
+**Where it's left.** On your doormat (`Pakken er levert på dørmatten din!`) or in your mailbox (`Pakken er levert i postkassen din!`). Helthjem's tracking page can show a photo of the drop-off; Peek doesn't, so look there.
 
-**Pickup points (hentested).** About 2,800 in Norway, Helthjem's own and [PostNord's](carrier:postnord). A parcel goes there when the shop offers only that, or when it's too valuable, big or heavy, the address isn't covered or the spot isn't safe. A pickup code comes by email or SMS when it's ready, with a note if you need ID (the sender decides). Anyone with the code can collect it unless ID is required.
+**Pickup points (hentested).** In 2023 Helthjem handed out parcels at shops: for big parcels, for people who'd rather collect them, and where its distributors didn't deliver. A parcel sent there instead of your home shows `På vei til hentested`, and Helthjem puts a new label with a new number on it; your number still finds it. When it's ready, the status turns to `Klar til henting` and Helthjem's page names the point and its address. If nobody collects it in time, `Pakke ikke hentet` follows and it goes back to the shop.
 
-**How long it waits.** 7 days. An SMS three days after the first notice has a link to extend it once, free, by 7 more. After a reminder it goes back to the sender, who pays for the return, and the shop may charge you.
+**PostNord parcels.** When Helthjem marks a parcel as a PostNord product, its tracking page sends you on to PostNord's tracking with the shipment number.
 
-**Changing plans.** The pickup point can't be changed once the parcel reaches Helthjem's terminal. If you'll be away or the address is wrong, customer service can send a shipped parcel to a pickup point, though not every one (some from outside Europe); before it ships, ask the shop.
-
-**Returns.** Book the return with the shop, write its code on the parcel and leave it on your doormat or in your mailbox for Helthjem to collect.
+**Parcels from China via 4PX.** A `Parcel arrival notified` line in 4PX's history is Helthjem's notice that the shop announced the parcel, passed on in English once 4PX hands it over.
 
 ## Helthjem parcel late, missing or damaged
 
-The shop holds the contract with Helthjem, and Helthjem's terms send recipients to the shop.
+**No update.** After a night-round booking or `Budet fikk ikke med seg pakken din ut i natt.`, the parcel is waiting for a night round. If nothing moves for days, ask the shop, and see [tracking that isn't updating](guide:tracking-not-updating).
 
-**No update.** A parcel can go a couple of days without a scan, sometimes a week. Contact customer service if nothing has changed for more than 7 days. See [tracking that isn't updating](guide:tracking-not-updating).
+**Delivered but not there.** The last scan says where it was left: on the doormat or in the mailbox. Look at the delivery photo on Helthjem's page if there is one, check both spots and ask the people you live with. Still missing? Contact the shop, and see [delivered but not received](guide:delivered-not-received).
 
-**Delivered but not there.** Check the mailbox, the doormat, neighbours' doormats and other floors in a block of flats, mailbox racks and the people you live with. Still missing after a day? Contact customer service, and see [delivered but not received](guide:delivered-not-received). The same if tracking shows it both collected and not collected.
+**Lost, damaged or late.** The shop is Helthjem's customer, so start there. Norway's Consumer Council (Forbrukerrådet) says that when something you ordered online doesn't turn up, you contact the seller first. With a Norwegian shop, you can then take the case to the Consumer Authority (Forbrukertilsynet) for mediation. If you paid by credit card, you have a legal right to claim the money back from your bank when you don't get what you ordered. See [lost parcel](guide:lost-parcel).
 
-**Lost, damaged or late.** Claim from the shop; the shop claims from Helthjem within four weeks of the parcel leaving the sender. Helthjem pays nothing for delays beyond normal transit time.
+**Returned or cancelled.** After `Pakke ikke hentet`, `Returneres` or `Pakken er kansellert`, ask the shop about a refund or a new delivery.
 
-## Helthjem customer service and contact number
+## Helthjem customer service and contact
 
-As listed on Helthjem's contact page on 13 October 2026, in Norwegian:
+Helthjem's own site, helthjem.no, has a help and contact page. When four days pass without a new scan before the parcel is out for delivery, Peek's note links to it as "Get help from Helthjem". For the order itself, a refund or a claim, contact the shop: it booked Helthjem.
 
-- **Phone:** 400 64 009, Monday to Friday 08:00 to 16:00.
-- **Chat:** with a person weekdays 08:00 to 16:00 and Saturday 08:00 to 13:00, a chatbot around the clock.
-- **Page:** [Helthjem's help and contact page](https://helthjem.no/kontakt-oss).
-- **Email:** none published.
-
-Have the tracking number or pickup code ready. Helthjem mentions no support in English.
-
-> Helthjem warns about fake SMS and emails. It never asks for card details that way, and once it has your parcel you pay nothing more for it to arrive. Open helthjem.no yourself; a link with other words than helthjem.no is likely fraud. If you gave card details, call your bank at once.
+> Nkom, Norway's communications authority, says to be wary of every link in a text, even when you're expecting a text about a parcel: such links lead to fake pages that ask for card details, and a link that claims to come from a Norwegian company but whose domain doesn't end in `.no` calls for extra care. The police advise looking the site up yourself instead of using the link. More in [delivery scam texts](guide:delivery-scam-texts).
 
 ## Tracking a Helthjem parcel with Peek
 
-[Peek](/) names Helthjem at once from 18 digits starting `37072476`, or the same with `00` in front, when the check digit fits. Other numbers starting `370` or `373` can be Bring's: Peek asks Bring and any other carrier the shape fits. Helthjem's 17-digit shipment numbers and its other 20-digit barcodes need "Change" or a helthjem.no tracking link, which works with any number.
+[Peek](/) names Helthjem at once from 18 digits starting `37072476`, or the same with `00` in front, when the check digit fits. Other numbers starting `370` or `373` can be Bring's: Peek asks Bring and any other carrier the shape fits. Helthjem's 17-digit shipment numbers and its other 20-digit barcodes need "Change", or a link to the parcel on Helthjem's tracking page.
 
 Peek shows the status, each scan's place (including sorter scans Helthjem's page hides), the time it was delivered, the shop that sent it and the pickup point's name while it waits or once collected. When Helthjem relabels a parcel for a pickup point, Peek also shows the new label's number. Statuses stay in Helthjem's Norwegian, and scan times match Helthjem's. When Helthjem books the night round, Peek shows the date in `Planlagt levering natt til …` as the expected day. It leaves out the expected day Helthjem's page shows, the point's address, the photo and postcodes.
 
-When Helthjem marks a parcel as one PostNord delivers, Peek can follow it to PostNord under its shipment number. Peek checks every 10 minutes by day, every 2 on the last mile, and every hour or two overnight, and can notify you when the status changes. It can't contact Helthjem for you.
+When Helthjem marks a parcel as one PostNord delivers, the card says "Delivery with PostNord" and Peek can follow it to PostNord under its shipment number. Peek checks every 10 minutes by day, every 2 on the last mile, and every hour or two overnight, and can notify you when the status changes. It can't contact Helthjem for you.
 
 ## Questions about Helthjem tracking
 
 ### Is Helthjem legit?
 
-Yes. It's a Norwegian network for parcels and newspapers, formed in 2015 by Schibsted, Amedia and Polaris and run by Helthjem Netthandel AS in Oslo. Beware of texts in its name asking for payment.
+Yes. Helthjem Netthandel AS is registered in Oslo as a postal and courier company; at its 2025 general meeting, the Norwegian media group Polaris Media listed a 34% stake in it. In 2023 its parcels travelled with the newspaper distributors that took the Helthjem name in 2015. Be wary of texts in its name with links that ask for card details.
 
 ### What time does Helthjem deliver?
 
-Mostly at night, Monday to Saturday: before breakfast on most routes, by 7 am on its English page. Some areas get daytime drop-offs.
+Home deliveries can come on a night round. When Helthjem books one, its tracking shows `Planlagt levering natt til …` the day before, with the date that night leads into. Peek shows that date as the expected day.
 
-### How long does Helthjem take?
+### What does Budet fikk ikke med seg pakken din ut i natt mean?
 
-Most parcels arrive within 2 to 5 days of reaching Helthjem's terminals, depending on where you live. Parcels from abroad can take longer because of customs.
+The night's courier didn't take your parcel out. It stays with Helthjem and waits for a later night round.
 
-### What is Helthjem's phone number?
+### Why can't Helthjem find my tracking number?
 
-400 64 009, Monday to Friday 08:00 to 16:00. Its chat also has staff on Saturdays from 08:00 to 13:00.
+Helthjem doesn't know the number, or no longer keeps it, or it belongs to another carrier: Bring's numbers also start `370` or `373`. Check the digits, try Bring, or ask the shop which carrier it booked.
+
+### How do I contact Helthjem?
+
+Through the help and contact page on its own site, helthjem.no. For refunds and claims, contact the shop that sent the parcel.
 
 :::sources
-- [Helthjem: Spor pakke](https://helthjem.no/sporing) – tracking form, statuses, Norwegian only
-- [Helthjem: Hjelp og kontakt](https://helthjem.no/kontakt-oss) – phone, hours, chat, missed drop-offs, fraud
-- [Helthjem: Sporing (help)](https://helthjem.no/hjelp/sporing) – terminal place, no update for 7 days
-- [Helthjem: Levering hjem](https://helthjem.no/hjelp/levering-hjem) – night drop-offs, SMS, 2 to 5 days, photo, change of address
-- [Helthjem: Levering til hentested](https://helthjem.no/hjelp/levering-til-hentested) – pickup points, code, ID, 7 plus 7 days
-- [Helthjem: Hvor er pakken levert?](https://helthjem.no/hjelp/hvor-er-pakken-levert) – where to look, shipping email, name labels
-- [Helthjem: Leveringsvilkår fra nettbutikk](https://helthjem.no/leveringsvilkar-nettbutikk) – drop-off points, bag, holding time, claims via the shop
-- [Helthjem: Home page](https://helthjem.no/) – Monday to Saturday
-- [Helthjem: English home page](https://helthjem.no/en) – by 7 am, pickup point count
-- [Helthjem: Hvordan unngå svindelforsøk](https://helthjem.no/svindel) – fake messages
-- [Helthjem: How to avoid fraud attempts](https://helthjem.no/fraud-attempts) – fake messages in English
-- [Helthjem: Om oss](https://helthjem.no/om-oss) – company, history, returns
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Brønnøysund Register Centre: Helthjem Netthandel AS](https://virksomhet.brreg.no/nb/oppslag/enheter/914919010) – company in Oslo, postal and courier services
+- [Brønnøysund Register Centre: Helthjem Netthandel AS avd Vestby](https://virksomhet.brreg.no/nb/oppslag/underenheter/925669946) – Vestby site
+- [Konkurransetilsynet: Schibsted Delivery's notice of its acquisition of Amedia Distribusjon (23 October 2023)](https://konkurransetilsynet.no/wp-content/uploads/2023/10/2023_0474-1-OFF-Schibsted-Delivery-AS-Amedia-Distribusjon-AS-1.pdf) – Helthjem network since 2015, six-day distribution, delivery for shops, PostNord for larger parcels, pickup shops, Vestby terminal
+- [Polaris Media: Annual general meeting 2025](https://www.polarismedia.no/wp-content/uploads/2025/05/Presentasjon-ordin%C3%A6r-generalforsamling-2025-1.pdf) – 34% stake in Helthjem Netthandel
+- [Forbrukerrådet: Netthandel](https://www.forbrukerradet.no/forside/okonomi-og-betaling/netthandel-misfornoyd/) – contact the seller first, mediation, credit card refund
+- [Nkom: Slik kan du avsløre SMS-svindel](https://nkom.no/aktuelt/slik-kan-du-avslore-sms-svindel) – links in parcel texts, fake card pages, .no addresses
+- [Politiet: Beskytt deg mot svindel og ID-tyveri](https://www.politiet.no/rad/beskytt-deg-mot-svindel-og-id-tyveri) – look the site up yourself
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number formats, Helthjem's tracking and help pages, its twelve states and wordings, night rounds, pickup points and new labels, PostNord, 4PX, what Helthjem's page shows and what Peek reads
 :::

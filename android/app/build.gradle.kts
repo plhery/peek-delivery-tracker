@@ -53,6 +53,11 @@ android {
         buildConfig = true
     }
 
+    androidResources {
+        // The map's detail pack is mapped into memory as it is (WorldDetailPacks), which a compressed asset can't be.
+        noCompress += "pack"
+    }
+
     packaging {
         resources {
             // :core's copy of the shared data; the app reads the assets below instead.

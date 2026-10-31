@@ -259,6 +259,12 @@ class WorldDetailStore(
     /** The tiles in the order they were last shown, the oldest first. */
     private var shown: List<String> = emptyList()
 
+    /**
+     * Whether no tile asked for is still being read: one read is over once its tile is among the tiles, or is none.
+     * Not the iPhone's: for tests, which wait for a map's tiles before they look at it.
+     */
+    val isIdle: Boolean get() = synchronized(lock) { asked.isEmpty() }
+
     suspend fun open() {
         if (packState.value == null) packState.compareAndSet(null, bundled())
     }

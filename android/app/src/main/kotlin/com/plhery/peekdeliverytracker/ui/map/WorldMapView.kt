@@ -50,10 +50,12 @@ import androidx.compose.ui.text.font.createFontFamilyResolver
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.DetailTile
 import com.plhery.peekdeliverytracker.core.EdgeInsets
 import com.plhery.peekdeliverytracker.core.GeoPoint
 import com.plhery.peekdeliverytracker.core.GlobeCamera
 import com.plhery.peekdeliverytracker.core.GlobeMotion
+import com.plhery.peekdeliverytracker.core.MapDetail
 import com.plhery.peekdeliverytracker.core.MapLabels
 import com.plhery.peekdeliverytracker.core.MapOverlay
 import com.plhery.peekdeliverytracker.core.MapPainter
@@ -68,6 +70,7 @@ import com.plhery.peekdeliverytracker.core.Size
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.UnitCurve
 import com.plhery.peekdeliverytracker.core.WorldAtlas
+import com.plhery.peekdeliverytracker.core.WorldDetailPack
 import com.plhery.peekdeliverytracker.ui.draw.MapPip
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import com.plhery.peekdeliverytracker.ui.draw.drawMapDrawings
@@ -112,7 +115,13 @@ import androidx.compose.ui.geometry.Size as ComposeSize
  * until the new one is made. Where its picture has to be there at once ([LocalMapsAtOnce]), the map makes it then, and
  * shows it with its first frame. A map that moves is drawn again for each frame it moves in, on the main thread, as the
  * iPhone's `TimelineView` draws it. An opened map names a facility as such (`sites`) and shades the night side as it is
- * at `night`. Sizes, insets and boxes are in points (dp). Decorative.
+ * at `night`.
+ *
+ * Up close, a map given `detail` (only the opened map is) draws what the wide map leaves out (A-S84): it asks for the
+ * tiles its camera shows, where it is put or where it flies to, and draws those that have come, rivers, lakes, built-up
+ * areas and roads, each level as strong as the view is close, and names the towns they hold by closeness. A tile
+ * still on its way draws nothing. Such a map frames a city's journey closer, and its pictures change as tiles come,
+ * so they aren't kept for other maps. Sizes, insets and boxes are in points (dp). Decorative.
  */
 @Composable
 fun WorldMapView(
@@ -138,6 +147,7 @@ fun WorldMapView(
     buttons: Rect? = null,
     recenter: Int = 0,
     language: AppLanguage = AppLanguage.En,
+    detail: MapDetail? = null,
     entrance: FiniteAnimationSpec<Float>? = null,
     onFreeChange: (Boolean) -> Unit = {},
 ) {
@@ -148,6 +158,7 @@ fun WorldMapView(
         val request = MapSceneRequest(
             atlas, route, mode, palette, labels, sites, showsContext, night, pip, quiet, insets, covered, buttons, language,
             maxWidth.value.toDouble(), maxHeight.value.toDouble(), colors.dark, colors.highContrast,
+            detail?.let { SceneDetail(it.pack, it.tiles) },
         )
         val atOnce = LocalMapsAtOnce.current
         val pending = remember(request) { if (atOnce) MapScenes.made(request, context) else MapScenes.request(request, context) }
@@ -180,9 +191,17 @@ fun WorldMapView(
         }
         val moves = interactive || peek || flies
         val motion = rememberGlobeMotion(scene?.camera, request, mode, recenter, reduceMotion, moves, onFreeChange)
+        // A close-up reads the tiles it shows, where the map is put or flies to, and draws them as they come.
+        val need by rememberUpdatedState(detail?.need)
+        val wanted = request.detail?.let { detail ->
+            (motion.state.camera ?: scene?.camera)?.let { detail.pack.keys(it, Size(request.width, request.height)) }
+        }.orEmpty()
+        LaunchedEffect(wanted) { need?.invoke(wanted) }
         val drawn = motion.scene(scene, request, interactive) ?: return@BoxWithConstraints
         val watch = LocalMapCameraWatch.current
         if (watch != null && moves) SideEffect { watch(interactive, peek, drawn.camera, drawn.pip) }
+        val sceneWatch = LocalMapSceneWatch.current
+        if (sceneWatch != null) SideEffect { sceneWatch(interactive, drawn) }
         Box(
             Modifier
                 .fillMaxSize()
@@ -376,6 +395,9 @@ private class MapMotion(private val context: Context, kept: GlobeCamera? = null)
     }
 }
 
+/** Hears each picture a map shows, and whether it is an opened map's: for tests, which see its pixels but not its names. */
+internal val LocalMapSceneWatch = staticCompositionLocalOf<((interactive: Boolean, scene: MapScene) -> Unit)?> { null }
+
 /**
  * Whether the maps here make their pictures as they are composed, on the main thread, rather than show nothing until
  * another thread has made them: for a card drawn only into a picture, as a flight's card is, which shows as the list
@@ -437,10 +459,25 @@ internal data class MapSceneRequest(
     val height: Double,
     val dark: Boolean,
     val highContrast: Boolean,
+    val detail: SceneDetail?,
 )
 
-/** A map drawn: the land and legs, the marks over them, the parcel's dot, Pip's spot, and the camera it is seen from. */
-internal class MapScene(val base: Picture, val marks: Picture, val current: Point?, val pip: PipPlacement?, val camera: GlobeCamera)
+/** What an opened map has of its close-ups as its picture is made: the pack, and the tiles read so far. */
+internal data class SceneDetail(val pack: WorldDetailPack, val tiles: Map<String, DetailTile>)
+
+/**
+ * A map drawn: the land and legs, the marks over them, the parcel's dot, Pip's spot, the camera it is seen from, the
+ * names it writes and how many detail tiles it drew.
+ */
+internal class MapScene(
+    val base: Picture,
+    val marks: Picture,
+    val current: Point?,
+    val pip: PipPlacement?,
+    val camera: GlobeCamera,
+    val labels: List<MapOverlay.Label>,
+    val tiles: Int,
+)
 
 /**
  * The maps' pictures, framed, laid out and recorded off the main thread, the last few dozen kept: the cards of a list
@@ -486,7 +523,7 @@ internal object MapScenes {
             } finally {
                 busy.decrementAndGet()
             }
-        }.also { scenes[request] = it }
+        }.also { if (request.detail == null) scenes[request] = it }
     }
 
     /**
@@ -503,7 +540,8 @@ internal object MapScenes {
             made.completeExceptionally(error)
             return made
         }
-        synchronized(scenes) { scenes[request] = made }
+        // An opened map's close-up changes as its tiles come: kept by the map itself, not here.
+        if (request.detail == null) synchronized(scenes) { scenes[request] = made }
         return made
     }
 
@@ -538,7 +576,8 @@ internal object MapScenes {
     private fun target(request: MapSceneRequest, widths: MapTextWidths): GlobeCamera = with(request) {
         val size = Size(width, height)
         val standing = if (palette.card == null) null else pip
-        if (covered == null && standing == null) return GlobeCamera.framing(route, mode, size, insets, closeUps = false)
+        val closeUps = detail != null
+        if (covered == null && standing == null) return GlobeCamera.framing(route, mode, size, insets, closeUps = closeUps)
         // What the card writes over the map also moves it when a place of the journey would lose its name to it, or
         // Pip his spot beside the parcel; a route that leaves him no spot at its end is framed with room for him.
         val shown = { camera: GlobeCamera, box: Rect? ->
@@ -547,7 +586,18 @@ internal object MapScenes {
                 countryName = { it }, pip = standing, covered = box, buttons = buttons, measurer = widths,
             ).shown
         }
-        GlobeCamera.framing(route, mode, size, insets, covered = covered, shown = shown, pip = standing != null, closeUps = false)
+        GlobeCamera.framing(route, mode, size, insets, covered = covered, shown = shown, pip = standing != null, closeUps = closeUps)
+    }
+
+    /**
+     * `closeUp(_:in:)`: the tiles `camera` shows that have come, whether every one of them has, and their towns; nothing
+     * on a map without close-ups.
+     */
+    private fun closeUp(detail: SceneDetail?, camera: GlobeCamera, size: Size): Triple<List<DetailTile>, Boolean, List<DetailTile.Town>?> {
+        if (detail == null) return Triple(emptyList(), false, null)
+        val keys = detail.pack.keys(camera, size)
+        val tiles = keys.mapNotNull { detail.tiles[it] }
+        return Triple(tiles, keys.isNotEmpty() && tiles.size == keys.size, tiles.flatMap { it.towns })
     }
 
     private fun make(
@@ -561,12 +611,14 @@ internal object MapScenes {
         val size = Size(width, height)
         val standing = if (palette.card == null) null else pip
         val camera = at ?: target(request, widths)
+        val (tiles, tiled, towns) = closeUp(detail, camera, size)
         val overlay = MapOverlay(
             route, camera, size, insets, labels, sites = sites, mode = mode, context = showsContext, atlas = atlas, locale = language.locale,
-            countryName = { TrackingLocation.countryName(it, language) }, pip = standing, covered = covered, buttons = buttons,
-            measurer = widths,
+            countryName = { TrackingLocation.countryName(it, language) }, pip = standing, towns = towns, covered = covered,
+            buttons = buttons, measurer = widths,
         )
-        val base = MapPainter.drawBase(size, atlas, route, camera, palette, night = night) + MapPainter.drawLegs(overlay, palette, quiet)
+        val base = MapPainter.drawBase(size, atlas, route, camera, palette, night = night, tiles = tiles, tiled = tiled) +
+            MapPainter.drawLegs(overlay, palette, quiet)
         val marks = MapPainter.drawMarks(overlay, palette, moving = moving, quiet = quiet, measurer = widths)
         val wide = ceil(width).toInt().coerceAtLeast(1)
         val tall = ceil(height).toInt().coerceAtLeast(1)
@@ -577,6 +629,7 @@ internal object MapScenes {
         }
         MapScene(
             recorded.first, recorded.second, overlay.dots.firstOrNull { it.kind == MapOverlay.DotKind.Current }?.point, overlay.pip, camera,
+            overlay.labels, tiles.size,
         )
     }
 

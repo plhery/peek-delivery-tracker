@@ -429,6 +429,32 @@ class WorldDetailTests {
         }
     }
 
+    /** Tests wait for a map's tiles: the store is idle only once each tile it was asked for is in, or is none. */
+    @Test
+    fun theStoreIsIdleOnlyOnceEachTileAskedForIsIn() = runBlocking {
+        val pack = pack()
+        val dispatcher = StandardTestDispatcher()
+        val scope = CoroutineScope(SupervisorJob() + dispatcher)
+        val store = WorldDetailStore(scope, reading = dispatcher, bundled = { pack })
+        assertTrue(store.isIdle)
+        store.open()
+        store.need(listOf("37_27", "38_27", "nowhere"))
+        assertFalse(store.isIdle)
+        dispatcher.scheduler.advanceUntilIdle()
+        assertTrue(store.isIdle)
+        assertEquals(listOf("37_27", "38_27"), store.tiles.keys.sorted())
+        // A tile already in is not read again.
+        store.need(listOf("37_27"))
+        assertTrue(store.isIdle)
+        // A read cancelled with its scope is over too.
+        store.need(listOf("36_27"))
+        assertFalse(store.isIdle)
+        scope.coroutineContext.job.cancelChildren()
+        dispatcher.scheduler.advanceUntilIdle()
+        assertTrue(store.isIdle)
+        scope.cancel()
+    }
+
     @Test
     fun aReadCancelledBeforeItStartsCanBeAskedForAgain() = runBlocking {
         val pack = pack()

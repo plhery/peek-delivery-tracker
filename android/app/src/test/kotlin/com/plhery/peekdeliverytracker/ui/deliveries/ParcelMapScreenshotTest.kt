@@ -14,6 +14,7 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.pinch
 import androidx.compose.ui.test.swipe
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
@@ -22,10 +23,15 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelRoute
+import com.plhery.peekdeliverytracker.core.Size
+import com.plhery.peekdeliverytracker.core.WorldDetailPack
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.map.LocalMapSceneWatch
+import com.plhery.peekdeliverytracker.ui.map.MapScene
 import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
 import com.plhery.peekdeliverytracker.ui.screenshot
+import kotlin.math.abs
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
@@ -37,7 +43,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The opened map of a parcel with both views, in the demo at the captures' moment: the journey and close by, light and
  * dark, on the iPhone the captures were taken on and on an iPad; a parcel from across the world partway through its
- * flight from one to the other; and turned by hand, neither view selected. The map at its first view is
+ * flight from one to the other; turned by hand, neither view selected; and the demo's nearest journey up close, with
+ * the rivers, lakes, built-up areas, roads and towns of the detail tiles. The map at its first view is
  * LivePassScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
@@ -51,6 +58,9 @@ class ParcelMapScreenshotTest {
 
     private lateinit var view: View
 
+    /** The opened map's last picture. */
+    private var drawn: MapScene? = null
+
     /**
      * The demo's parcel named `name`, by default its first with both views, its map opened, with the system's bars
      * `top` and `bottom` tall.
@@ -63,7 +73,7 @@ class ParcelMapScreenshotTest {
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
-            CompositionLocalProvider(LocalDeliveriesState provides {}) {
+            CompositionLocalProvider(LocalDeliveriesState provides {}, LocalMapSceneWatch provides { interactive, scene -> if (interactive) drawn = scene }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
                 }
@@ -134,6 +144,56 @@ class ParcelMapScreenshotTest {
         compose.mainClock.advanceTimeBy(1_000)
         compose.screenshot("map_dragged_dark")
     }
+
+    /**
+     * Coffee beans' map, the demo's nearest journey, from Zürich to Härkingen and back, zoomed by two fingers about the
+     * parcel's place until it is about `kilometres` across its width, once each tile it shows has come.
+     */
+    private fun closeUp(kilometres: Double, name: String, dark: Boolean = false, top: Int = 62, bottom: Int = 24) {
+        openMap(dark = dark, top = top, bottom = bottom, name = "Coffee beans")
+        val scene = checkNotNull(drawn)
+        val map = compose.onNodeWithTag(MAP_COVER_MAP)
+        val density = compose.density.density
+        val shown = map.fetchSemanticsNode().size
+        val by = WorldDetailPack.spanKilometres(scene.camera, Size(shown.width / density.toDouble(), shown.height / density.toDouble())) / kilometres
+        if (abs(by - 1) > 0.02) {
+            val dot = checkNotNull(scene.current)
+            map.performTouchInput {
+                val middle = Offset(dot.x.toFloat() * density, dot.y.toFloat() * density)
+                val from = if (by > 1) 120f else 480f
+                val to = from * by.toFloat()
+                pinch(middle - Offset(from / 2, 0f), middle - Offset(to / 2, 0f), middle + Offset(from / 2, 0f), middle + Offset(to / 2, 0f), 300)
+            }
+            compose.mainClock.advanceTimeBy(1_000)
+        }
+        compose.screenshot(name)
+    }
+
+    @Test
+    fun upCloseAt300Kilometres() = closeUp(300.0, "map_close_300_light")
+
+    @Test
+    fun upCloseAt300KilometresInDark() = closeUp(300.0, "map_close_300_dark", dark = true)
+
+    @Test
+    fun upCloseAt150Kilometres() = closeUp(150.0, "map_close_150_light")
+
+    @Test
+    fun upCloseAt150KilometresInDark() = closeUp(150.0, "map_close_150_dark", dark = true)
+
+    @Test
+    fun upCloseAt40Kilometres() = closeUp(40.0, "map_close_40_light")
+
+    @Test
+    fun upCloseAt40KilometresInDark() = closeUp(40.0, "map_close_40_dark", dark = true)
+
+    @Test
+    @Config(qualifiers = TABLET)
+    fun upCloseAt150KilometresOnATablet() = closeUp(150.0, "map_close_150_tablet_light", top = 24, bottom = 20)
+
+    @Test
+    @Config(qualifiers = TABLET)
+    fun upCloseAt40KilometresOnATabletInDark() = closeUp(40.0, "map_close_40_tablet_dark", dark = true, top = 24, bottom = 20)
 
     @Test
     @Config(qualifiers = TABLET)

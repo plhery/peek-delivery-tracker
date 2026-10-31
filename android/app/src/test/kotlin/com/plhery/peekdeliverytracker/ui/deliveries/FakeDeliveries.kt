@@ -39,10 +39,12 @@ import kotlin.coroutines.ContinuationInterceptor
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * The deliveries' stores as a test sets them: its parcels, the session, what loads, and what the list asked of them.
@@ -52,12 +54,12 @@ import kotlinx.coroutines.launch
  * `muting` does, an answer to the email's offer once `choosing` does, a carrier change once `changing` does and a
  * parcel's check once `checkingParcel` does; a check of every parcel answers `checkResult`, or waits for `checking`
  * when a test holds it, and finds the parcels as `found` next has them, if it has any. The server refuses the numbers
- * of `refusals`, once `refusing` lets its answer go. The demo is the demo's session. The rating prompt keeps its days
- * in a store of its own, in UTC, and the system's prompt is a fake that notes each step ([reviewCalls]). The parcels'
- * links are the service's (`shareLinks`), and the words kept for them this device's (`shareDefaults`): both outlast a
- * process, as the service and the device's store do. The pages' answers go to [feedbackRequests], or fail with
- * `feedbackFailure`, once `feedbackSending` lets them go; their model keeps the time of [now], which a test moves on,
- * and remembers them in a store of its own.
+ * of `refusals`, once `refusing` lets its answer go (or, for one question, `refusingRegardless`). The demo is the
+ * demo's session. The rating prompt keeps its days in a store of its own, in UTC, and the system's prompt is a fake
+ * that notes each step ([reviewCalls]). The parcels' links are the service's (`shareLinks`), and the words kept for
+ * them this device's (`shareDefaults`): both outlast a process, as the service and the device's store do. The pages'
+ * answers go to [feedbackRequests], or fail with `feedbackFailure`, once `feedbackSending` lets them go; their model
+ * keeps the time of [now], which a test moves on, and remembers them in a store of its own.
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
@@ -138,6 +140,9 @@ class FakeDeliveries(
     /** The carrier and number pairs the server refuses, and what holds its answer until the test lets it go. */
     var refusals: Set<NumberRefusalRequest> = emptySet()
     var refusing: CompletableDeferred<Unit>? = null
+
+    /** What holds the answer to a question until the test lets it go, deaf to its being called off. */
+    val refusingRegardless = mutableMapOf<NumberRefusalRequest, CompletableDeferred<Unit>>()
 
     /** The refusal questions asked, in their order. */
     val refusalQuestions = mutableListOf<NumberRefusalRequest>()
@@ -366,6 +371,7 @@ class FakeDeliveries(
     override suspend fun numberRefusal(question: NumberRefusalRequest): Boolean {
         refusalQuestions += question
         refusing?.await()
+        refusingRegardless[question]?.let { held -> withContext(NonCancellable) { held.await() } }
         return question in refusals
     }
 

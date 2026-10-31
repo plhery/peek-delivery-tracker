@@ -3,26 +3,35 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.net.Uri
 import android.text.InputType
 import android.view.KeyEvent
 import android.view.View
+import android.view.accessibility.AccessibilityManager
 import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
+import androidx.compose.animation.core.AnimationVector1D
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.toPixelMap
+import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertIsNotSelected
+import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.captureToImage
+import androidx.compose.ui.test.getAlignmentLinePosition
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasScrollAction
@@ -35,22 +44,28 @@ import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.height
 import androidx.compose.ui.unit.width
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DateParser
+import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponseAmazonShippingStatus
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -58,6 +73,7 @@ import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.sheet.COVER_PANEL
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
+import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.time.Duration
@@ -72,6 +88,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -113,6 +130,7 @@ class AddParcelTest {
         fontScale: Float = 1f,
         reduceMotion: Boolean = true,
         ticking: View? = null,
+        inbox: DeliveriesInbox? = null,
         prepare: FakeDeliveries.() -> Unit = {},
     ) {
         source = FakeDeliveries(list, session).apply {
@@ -124,7 +142,7 @@ class AddParcelTest {
             val density = LocalDensity.current
             val root = @Composable {
                 CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
-                    RootHost(state = session, source = source, reduceMotion = reduceMotion)
+                    RootHost(state = session, source = source, reduceMotion = reduceMotion, inbox = inbox)
                 }
             }
             if (ticking != null) CompositionLocalProvider(LocalView provides ticking, content = root) else root()
@@ -150,6 +168,11 @@ class AddParcelTest {
 
     private fun value(tag: String): String? = node(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.StateDescription)
 
+    /** What TalkBack says a tap on `tag` does. */
+    private fun clickLabel(tag: String): String? = node(tag).fetchSemanticsNode().config.getOrNull(SemanticsActions.OnClick)?.label
+
+    private fun bounds(tag: String) = compose.onNodeWithTag(tag, useUnmergedTree = true).getUnclippedBoundsInRoot()
+
     /** Add from the list's +, up and with the keyboard on its field. */
     private fun open() {
         node(ADD_BUTTON).performClick()
@@ -168,11 +191,89 @@ class AddParcelTest {
         settle()
     }
 
-    private fun clipboard(text: String?) {
+    private fun clipboard(text: String?) = clip(text?.let { ClipData.newPlainText("", it) })
+
+    private fun clip(clip: ClipData?) {
         val manager = compose.activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         compose.runOnUiThread {
-            if (text == null) manager.clearPrimaryClip() else manager.setPrimaryClip(ClipData.newPlainText("", text))
+            if (clip == null) manager.clearPrimaryClip() else manager.setPrimaryClip(clip)
         }
+    }
+
+    /** `carrier` chosen in the picker, from the carrier line, where `search` finds it. */
+    private fun pick(carrier: CarrierId, search: String) {
+        node(ADD_CARRIER).performClick()
+        settle()
+        node(CARRIER_PICKER_SEARCH).performTextInput(search)
+        compose.waitForIdle()
+        compose.onAllNodesWithTag(carrierPickerRowTag(carrier)).onFirst().performClick()
+        settle()
+    }
+
+    /** TalkBack on, its focus followed by the window's view, which it returns. */
+    private fun talkBack(): View {
+        val root = compose.onRoot().fetchSemanticsNode().root as ViewRootForTest
+        val manager = shadowOf(compose.activity.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread {
+            manager.setEnabled(true)
+            manager.setTouchExplorationEnabled(true)
+            root.forceAccessibilityForTesting(true)
+        }
+        return root.view
+    }
+
+    /** Whether TalkBack's focus is on `node`. */
+    private fun SemanticsNodeInteraction.hasTalkBackFocus(view: View): Boolean {
+        val id = fetchSemanticsNode().id
+        var focused = false
+        compose.runOnUiThread { focused = view.accessibilityNodeProvider.createAccessibilityNodeInfo(id)?.isAccessibilityFocused == true }
+        return focused
+    }
+
+    /** The keyboard up, `height` tall, as the system tells the window. */
+    private fun keyboard(height: Int) {
+        compose.runOnUiThread {
+            val px = (height * view.resources.displayMetrics.density).toInt()
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.ime(), Insets.of(0, 0, 0, px))
+                .setVisible(WindowInsetsCompat.Type.ime(), true)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+        settle()
+    }
+
+    /**
+     * The heights of the row tagged `tag` a frame apart, from the frame after `change` until its spring has long
+     * settled; null while it isn't there.
+     */
+    private fun heights(tag: String, change: () -> Unit): List<Float?> {
+        compose.mainClock.autoAdvance = false
+        change()
+        val heights = (0 until 60).map {
+            compose.mainClock.advanceTimeByFrame()
+            if (exists(tag)) bounds(tag).height.value else null
+        }
+        compose.mainClock.autoAdvance = true
+        return heights
+    }
+
+    /**
+     * Asserts that `heights` open on `.snappy(duration:)` to their end: nothing the frame the row comes in, nor the
+     * next, where its spring starts, then a frame's time of the spring each frame.
+     */
+    private fun assertOpensOnSnappy(duration: Double, heights: List<Float?>) {
+        val full = heights.last()!!
+        val spring = Motion.snappy<Float>(duration).vectorize(Float.VectorConverter)
+        val path = heights.dropWhile { it == null }.map { it!! / full }
+        assertEquals(heights.toString(), 0f, path.first(), 0f)
+        path.drop(1).forEachIndexed { frame, fraction ->
+            val nanos = frame * 16_000_000L
+            val expected = spring.getValueFromNanos(nanos, AnimationVector1D(0f), AnimationVector1D(1f), AnimationVector1D(0f)).value
+            assertEquals("$duration s, frame $frame of $path", expected, fraction, 0.02f)
+        }
+        // And still at its end.
+        assertEquals(full, heights[heights.size - 2]!!, 0.01f)
     }
 
     private fun back() {
@@ -222,11 +323,22 @@ class AddParcelTest {
 
     @Test
     fun aNumberAClaimingCarrierKnowsIsAddedWithItsNameAndItsCardShownOnceAddHasGone() {
-        show()
+        // Enough lamps that the card added, first on the list, is out of sight above where the list stands.
+        val lamps = (1..14).map { index ->
+            lamp.copy(
+                id = UUID(0, 900L + index), trackingNumber = "TESTLAMP%04d".format(index), label = "Lamp $index",
+                createdAt = DateParser.isoString(CAPTURED.minus(Duration.ofHours(index.toLong()))),
+            )
+        }
+        show(list = lamps)
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed("Lamp 14"))
+        settle()
         open()
         type("1Z999AA10123456784")
         assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
-        assertEquals(text("add.line.change"), value(ADD_CARRIER))
+        // The way to change it, said once.
+        assertEquals(text("add.line.change"), clickLabel(ADD_CARRIER))
+        assertNull(value(ADD_CARRIER))
         // UPS needs no check: nothing is asked.
         leave()
         assertEquals(emptyList<String>(), source.detected)
@@ -235,7 +347,7 @@ class AddParcelTest {
         settle()
         assertClosed()
         assertEquals(listOf(FakeDeliveries.AdditionRequest("1Z999AA10123456784", "Running shoes", CarrierId.Ups, null, null, null)), source.additions)
-        compose.onNode(hasText("Running shoes"), useUnmergedTree = true).assertExists()
+        compose.card("Running shoes").assertIsDisplayed()
         assertNull(deliveries.revealParcel)
     }
 
@@ -251,6 +363,20 @@ class AddParcelTest {
         settle()
         assertFalse(deliveries.hasCustomView)
         compose.onNode(hasText("Running shoes"), useUnmergedTree = true).assertExists()
+    }
+
+    @Test
+    fun aSearchThatShowsTheCardAddedStays() {
+        show()
+        compose.runOnUiThread { deliveries.query = "shoes" }
+        settle()
+        open()
+        type("1Z999AA10123456784")
+        node(ADD_NAME).performTextInput("Running shoes")
+        node(ADD_SAVE).performClick()
+        settle()
+        assertEquals("shoes", deliveries.query)
+        compose.card("Running shoes").assertIsDisplayed()
     }
 
     @Test
@@ -297,7 +423,7 @@ class AddParcelTest {
         type(number)
         leave()
         assertEquals("${text("add.detect")}, ${text("add.line.failed")}", description(ADD_CARRIER))
-        assertEquals(text("add.line.change"), value(ADD_CARRIER))
+        assertEquals(text("add.line.change"), clickLabel(ADD_CARRIER))
         node(ADD_SAVE).assertIsEnabled()
         type("$number ")
         node(ADD_TRACKING).performClick()
@@ -313,7 +439,7 @@ class AddParcelTest {
         open()
         type(number)
         leave()
-        assertEquals(text("add.line.choose"), value(ADD_CARRIER))
+        assertEquals(text("add.line.choose"), clickLabel(ADD_CARRIER))
         val detail = node(ADD_CARRIER).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ContentDescription)!!.single()
         assertTrue(detail, detail.contains("GLS Switzerland") && detail.contains(" and "))
         node(ADD_CARRIER).performClick()
@@ -329,7 +455,7 @@ class AddParcelTest {
     }
 
     @Test
-    fun thePickersCancelCloseItAndEscapeLeavesAddUnderIt() {
+    fun escapeAndThePickersCancelCloseItAndLeaveAddUnderIt() {
         show()
         open()
         type("1Z999AA10123456784")
@@ -337,7 +463,11 @@ class AddParcelTest {
         settle()
         node(ADD_PICKER).assertExists()
         press(KeyEvent.KEYCODE_ESCAPE)
+        assertFalse(exists(ADD_PICKER))
         assertNotNull(deliveries.addition)
+        assertTrue(exists(ADD_TITLE))
+        node(ADD_CARRIER).performClick()
+        settle()
         node(ADD_PICKER_CANCEL).assertTextEquals(text("common.cancel")).performClick()
         settle()
         assertFalse(exists(ADD_PICKER))
@@ -607,14 +737,15 @@ class AddParcelTest {
     }
 
     @Test
-    fun theEmptyListsPasteOpensAddWithTheClipboardAndItsAddOpensItEmpty() {
+    fun theEmptyListsPasteOpensAddWithTheClipboardUncountedAndItsAddOpensItEmpty() {
         show(list = emptyList())
         clipboard("1Z999AA10123456784")
         node(EMPTY_PASTE).performClick()
         settle()
         assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
         assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
-        assertEquals(listOf("parcel-paste"), source.actions.filter { it == "parcel-paste" })
+        // Only Add's own Paste and the welcome's count.
+        assertEquals(emptyList<String>(), source.actions.filter { it == "parcel-paste" })
         node(ADD_CLOSE).performClick()
         settle()
         node(EMPTY_ADD).performClick()
@@ -633,6 +764,22 @@ class AddParcelTest {
         settle()
         assertTrue(taken)
         assertEquals("UPS 1Z999AA10123456784", fieldText(ADD_TRACKING))
+        // While Add is up, the list under it takes no drop.
+        compose.runOnUiThread { taken = deliveries.addDropped(listOf("UPS 1Z999AA10123456793")) }
+        settle()
+        assertFalse(taken)
+        assertEquals("UPS 1Z999AA10123456784", fieldText(ADD_TRACKING))
+    }
+
+    @Test
+    fun aDropTakesEachItemsTextOrItsLinkWhateverItsScheme() {
+        val clip = ClipData.newPlainText("", "UPS 1Z999AA10123456784")
+        clip.addItem(ClipData.Item(Uri.parse("ftp://example.com/1Z999AA10123456793")))
+        clip.addItem(ClipData.Item(Uri.parse("https://example.com/track/1Z999AA10123456784")))
+        assertEquals(
+            listOf("UPS 1Z999AA10123456784", "ftp://example.com/1Z999AA10123456793", "https://example.com/track/1Z999AA10123456784"),
+            droppedTexts(clip),
+        )
     }
 
     @Test
@@ -686,6 +833,59 @@ class AddParcelTest {
     }
 
     @Test
+    fun theChecksAnswerAndAForgottenSuggestionStayThroughTheWindowMadeAgainWithNothingAskedTwice() {
+        val number = "12345478901"
+        val recreation = Recreation(compose)
+        val ticking = FeelingView(compose.activity)
+        show(recreation = recreation, ticking = ticking) {
+            isGuest = true
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.GlsCh, asked = listOf(CarrierId.GlsCh, CarrierId.GlsDe))
+            givenPostcodes = listOf(GivenPostcode(carrier = CarrierId.GlsCh, postcode = "3011"))
+        }
+        open()
+        type(number)
+        leave()
+        assertEquals("GLS Switzerland, ${text("add.line.found")}", description(ADD_CARRIER))
+        node(ADD_FORGET_POSTCODE).performClick()
+        settle()
+        assertEquals(listOf(hapticFeedbackConstant(SensoryFeedback.Selection)), ticking.played)
+
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(listOf(number), source.detected)
+        assertEquals("GLS Switzerland, ${text("add.line.found")}", description(ADD_CARRIER))
+        // The suggestion forgotten stays so: not filled in again.
+        assertEquals("", fieldText(ADD_POSTCODE))
+        assertFalse(exists(ADD_FORGET_POSTCODE))
+        assertEquals(listOf("3011"), source.forgottenPostcodes)
+        // No second tick.
+        assertEquals(listOf(hapticFeedbackConstant(SensoryFeedback.Selection)), ticking.played)
+    }
+
+    @Test
+    fun anAmazonCheckStaysThroughTheWindowMadeAgainWithNothingAskedTwice() {
+        val number = "FR4829173650"
+        val recreation = Recreation(compose)
+        show(recreation = recreation) {
+            detections[number] = CarrierDetectionResponse(number, CarrierDetectionResponseAmazonShippingStatus.Available, carrier = CarrierId.AmazonShipping)
+        }
+        open()
+        type(number)
+        leave()
+        node(ADD_HINT).assertTextEquals(text("add.amazonShippingConfirmed"))
+        val asked = source.detected.toList()
+        // Offline now: a second check would find Amazon unavailable.
+        source.detections.remove(number)
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(asked, source.detected)
+        node(ADD_HINT).assertTextEquals(text("add.amazonShippingConfirmed"))
+        node(ADD_SAVE).assertIsEnabled()
+    }
+
+    @Test
     fun atTheAccessibilitySizesTheTitleScrollsWithTheForm() {
         show(fontScale = 2f)
         open()
@@ -730,6 +930,31 @@ class AddParcelTest {
         assertTrue("$before $moving $after", moving > before && moving < after)
         // The accent fills in: darker as Add can add.
         assertTrue("$dim $easing $full", easing < dim && easing > full)
+        assertEquals(full, buttonShade(), 0.01f)
+
+        // The line comes on `.snappy(duration: 0.28)`, the details a carrier needs on `.snappy(duration: 0.3)`.
+        type("")
+        settle()
+        assertOpensOnSnappy(0.28, heights(ADD_FEEDBACK) { node(ADD_TRACKING).performTextReplacement("9999012345678") })
+        type("")
+        settle()
+        assertOpensOnSnappy(0.3, heights(ADD_DETAILS) { node(ADD_TRACKING).performTextReplacement("9999012345678") })
+    }
+
+    @Test
+    fun whatAPasteBringsMovesOnItsSpringAndWhatComesAfterOnTheFormsOwn() {
+        val number = "12345478901"
+        show(reduceMotion = false) {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.GlsCh, asked = listOf(CarrierId.GlsCh, CarrierId.GlsDe))
+            detecting = CompletableDeferred()
+        }
+        open()
+        clipboard(number)
+        // A paste: `withAnimation(.snappy(duration: 0.34))`.
+        assertOpensOnSnappy(0.34, heights(ADD_FEEDBACK) { node(ADD_PASTE).performClick() })
+        assertTrue(exists(ADD_CHECKING))
+        // The check's answer, later: the requirements' own `.snappy(duration: 0.3)`.
+        assertOpensOnSnappy(0.3, heights(ADD_DETAILS) { source.detecting?.complete(Unit) })
     }
 
     /** How light Add's button is in its middle, 0 black to 3 white. */
@@ -750,10 +975,185 @@ class AddParcelTest {
         val panel = node(SHEET_PANEL).getUnclippedBoundsInRoot()
         assertEquals(540f, panel.width.value, 1f)
         node(ADD_TRACKING).assertIsFocused()
-        // Closed by its button, and the sheets keep their arrangement meanwhile.
+        // The window stacking meanwhile, Add stays a form, while it is up and on its way down.
+        fun stack(): Boolean {
+            var forms = false
+            compose.runOnUiThread {
+                deliveries.arrangement = DeliveriesArrangement.Stacked
+                deliveries.settleSheets()
+                forms = deliveries.sheetsAsForms
+            }
+            return forms
+        }
+        assertTrue(stack())
+        compose.mainClock.autoAdvance = false
         node(ADD_CLOSE).performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertNull(deliveries.addition)
+        assertTrue(exists(SHEET_PANEL))
+        assertTrue(stack())
+        compose.mainClock.autoAdvance = true
         settle()
         assertClosed()
+    }
+
+    @Test
+    fun savingLeavesTheNumberAsItStandsWithNothingCheckedUnderTheSpinner() {
+        val number = "12345478901"
+        show {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.GlsCh, asked = listOf(CarrierId.GlsCh, CarrierId.GlsDe))
+            adding = CompletableDeferred()
+        }
+        open()
+        type(number)
+        node(ADD_TRACKING).assertIsFocused()
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(text("add.adding"), description(ADD_SAVE))
+        // The field left to save settles nothing: no check, no "Checking…".
+        assertEquals(emptyList<String>(), source.detected)
+        assertFalse(exists(ADD_CHECKING))
+        assertEquals(text("add.detect"), description(ADD_CARRIER))
+    }
+
+    @Test
+    fun whileItSavesTheFormIsStillReadItsControlsOff() {
+        show { adding = CompletableDeferred() }
+        open()
+        type("1Z999AA10123456784")
+        node(ADD_SAVE).performClick()
+        settle()
+        node(ADD_TRACKING).assertIsNotEnabled()
+        node(ADD_NAME).assertIsNotEnabled()
+        node(ADD_PASTE).assertIsNotEnabled()
+        node(ADD_CARRIER).assertIsNotEnabled()
+        assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
+        assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
+    }
+
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun inTheFormSheetAddStandsAboveTheKeyboard() {
+        show()
+        open()
+        val window = compose.onRoot().getUnclippedBoundsInRoot().bottom.value
+        val foot = node(SHEET_PANEL).getUnclippedBoundsInRoot().bottom.value
+        val resting = bounds(ADD_SAVE).bottom.value
+        // A keyboard over the sheet's foot.
+        val keyboard = (window - foot + 160).toInt()
+        keyboard(keyboard)
+        val lifted = bounds(ADD_SAVE).bottom.value
+        // As far as the keyboard covers the sheet, and no further.
+        assertEquals(resting - 160, lifted, 1f)
+        assertEquals(foot, node(SHEET_PANEL).getUnclippedBoundsInRoot().bottom.value, 1f)
+    }
+
+    @Test
+    fun aParcelALinkAsksForOpensWithAddClosedFirst() {
+        val inbox = DeliveriesInbox()
+        show(inbox = inbox)
+        open()
+        type("1Z999AA10123456784")
+        compose.runOnUiThread { inbox.open(lamp.id) }
+        settle()
+        assertClosed()
+        assertEquals(lamp.id, deliveries.navigator.navigation.shown)
+    }
+
+    @Test
+    fun pasteTakesTextOrALinkButNotAnImageOrAFile() {
+        show()
+        open()
+        clip(ClipData.newRawUri("", Uri.parse("content://com.example.photos/media/12345478901")))
+        node(ADD_PASTE).performClick()
+        settle()
+        compose.onNode(hasText(text("add.pasteFailed"))).assertExists()
+        assertEquals("", fieldText(ADD_TRACKING))
+        clip(ClipData.newRawUri("", Uri.parse("https://example.com/track?number=1Z999AA10123456784")))
+        node(ADD_PASTE).performClick()
+        settle()
+        assertFalse(exists(ADD_ERROR))
+        assertEquals("https://example.com/track?number=1Z999AA10123456784", fieldText(ADD_TRACKING))
+    }
+
+    @Test
+    fun theFieldTakesTwoThousandCharactersPastedOrTyped() {
+        show()
+        open()
+        clipboard("1Z999AA10123456784 " + "a".repeat(20_000))
+        node(ADD_PASTE).performClick()
+        settle()
+        assertEquals("1Z999AA10123456784 " + "a".repeat(2_000 - 19), fieldText(ADD_TRACKING))
+        type("b".repeat(2_500))
+        assertEquals("b".repeat(2_000), fieldText(ADD_TRACKING))
+    }
+
+    @Test
+    fun anAnswerToACarrierNoLongerChosenIsDropped() {
+        val number = "1Z999AA10123456784"
+        val first = NumberRefusalRequest(number, CarrierId.Dpd)
+        val second = NumberRefusalRequest(number, CarrierId.Dhl)
+        val held = CompletableDeferred<Unit>()
+        show {
+            refusals = setOf(second)
+            refusingRegardless[first] = held
+        }
+        open()
+        type(number)
+        pick(CarrierId.Dpd, "DPD")
+        assertEquals(listOf(first), source.refusalQuestions)
+        pick(CarrierId.Dhl, "DHL")
+        val refused = description(ADD_CARRIER)
+        assertTrue("$refused", refused!!.endsWith(text("add.line.refused")))
+        // DPD's answer, come after DHL was chosen.
+        held.complete(Unit)
+        settle()
+        assertEquals(refused, description(ADD_CARRIER))
+    }
+
+    @Test
+    fun talkBackGoesBackToWhatOpenedAddOnceItHasGone() {
+        show(list = emptyList())
+        val root = talkBack()
+        clipboard("1Z999AA10123456784")
+        node(EMPTY_PASTE).performClick()
+        settle()
+        node(ADD_CLOSE).performClick()
+        settle()
+        assertTrue(node(EMPTY_PASTE).hasTalkBackFocus(root))
+        node(ADD_BUTTON).performClick()
+        settle()
+        node(ADD_CLOSE).performClick()
+        settle()
+        assertTrue(node(ADD_BUTTON).hasTalkBackFocus(root))
+    }
+
+    @Test
+    fun thePostcodesDividerFillsItsRowLessTwelveAtEachEnd() {
+        show()
+        open()
+        type("76434219")
+        pick(CarrierId.MondialRelay, "Mondial")
+        val divider = bounds(ADD_COUNTRY_DIVIDER)
+        val menu = bounds(ADD_COUNTRY)
+        // The field's words, 14 in from its edges.
+        val field = bounds(ADD_POSTCODE)
+        val top = minOf(menu.top.value, field.top.value - 14)
+        val bottom = maxOf(menu.bottom.value, field.bottom.value + 14)
+        assertEquals(top + 12, divider.top.value, 0.5f)
+        assertEquals(bottom - 12, divider.bottom.value, 0.5f)
+    }
+
+    @Test
+    fun theCarrierLinesNameAndWhatItSaysStandOnOneBaseline() {
+        show()
+        open()
+        type("1Z999AA10123456784")
+        fun baseline(tag: String): Float {
+            val text = compose.onNodeWithTag(tag, useUnmergedTree = true)
+            return text.getUnclippedBoundsInRoot().top.value + text.getAlignmentLinePosition(FirstBaseline).value
+        }
+        assertEquals(baseline(ADD_LINE_NAME), baseline(ADD_LINE_DETAIL), 0.25f)
     }
 }
 

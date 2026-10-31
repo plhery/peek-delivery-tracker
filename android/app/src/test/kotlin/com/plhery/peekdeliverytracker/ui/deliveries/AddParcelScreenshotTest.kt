@@ -28,7 +28,9 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.screenshot
+import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import java.util.UUID
+import kotlinx.coroutines.CompletableDeferred
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -38,9 +40,11 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * Adding a parcel over the demo's list, signed in, with the iPhone's bars: Add empty, light and dark; a number UPS
- * claims with its name, light and dark; several numbers; Mondial Relay's postcode with its country, in English and
- * German; a save that failed, and a number in the box already; at the largest Android text size; and side by side on a
- * tablet, light and dark. On synthetic numbers, with the catalog pinned ([pinnedIdentities]).
+ * claims with its name, light and dark; several numbers, and a guest's with the offer to sign in; Mondial Relay's
+ * postcode with its country, in English and German; Amazon unable to answer; a check digit that doesn't add up; the
+ * picker over Add; Add saving; a save that failed, and a number in the box already; at the largest Android text size;
+ * and side by side on a tablet, light and dark, and with the keyboard up. On synthetic numbers, with the catalog pinned
+ * ([pinnedIdentities]) where no Amazon is shown.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -56,7 +60,13 @@ class AddParcelScreenshotTest {
     private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 11), email = "reader@example.com"))
 
     /** The demo's list as the captures show it, with the iPhone's bars, then Add from the +, settled. */
-    private fun show(dark: Boolean = false, fontScale: Float = 1f, language: AppLanguage = AppLanguage.En, prepare: FakeDeliveries.() -> Unit = {}) {
+    private fun show(
+        dark: Boolean = false,
+        fontScale: Float = 1f,
+        language: AppLanguage = AppLanguage.En,
+        identities: CarrierIdentities = pinnedIdentities,
+        prepare: FakeDeliveries.() -> Unit = {},
+    ) {
         val source = FakeDeliveries(DemoCards.parcels(language), reader).apply(prepare)
         compose.waitsForMaps()
         compose.setContent {
@@ -64,23 +74,37 @@ class AddParcelScreenshotTest {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
-                    RootHost(state = reader, language = language, dark = dark, source = source, identities = pinnedIdentities)
+                    RootHost(state = reader, language = language, dark = dark, source = source, identities = identities)
                 }
             }
         }
         compose.waitForIdle()
+        bars()
+        click(ADD_BUTTON)
+        settle()
+    }
+
+    /** The iPhone's bars, and a keyboard `keyboard` tall over the window's foot. */
+    private fun bars(keyboard: Int = 0) {
         compose.runOnUiThread {
             val scale = view.resources.displayMetrics.density
             fun px(points: Int) = (points * scale).toInt()
             val insets = WindowInsetsCompat.Builder()
                 .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, px(62), 0, 0))
                 .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, px(24)))
+                .setInsets(WindowInsetsCompat.Type.ime(), Insets.of(0, 0, 0, px(keyboard)))
                 .setVisible(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(), true)
+                .setVisible(WindowInsetsCompat.Type.ime(), keyboard > 0)
                 .build()
             ViewCompat.dispatchApplyWindowInsets(view, insets)
         }
         compose.waitForIdle()
-        click(ADD_BUTTON)
+    }
+
+    /** `number` typed, and the field left for the name. */
+    private fun typeAndLeave(number: String) {
+        compose.onNodeWithTag(ADD_TRACKING).performTextReplacement(number)
+        click(ADD_NAME)
         settle()
     }
 
@@ -148,6 +172,47 @@ class AddParcelScreenshotTest {
     }
 
     @Test
+    fun severalNumbersForAGuest() {
+        show { isGuest = true }
+        compose.onNodeWithTag(ADD_TRACKING).performTextReplacement("Your order ships in two parcels:\nUPS 1Z999AA10123456784\nUPS 1Z999AA10123456793")
+        settle()
+        compose.screenshot("add_parcel_several_guest_light")
+    }
+
+    @Test
+    fun amazonUnableToAnswer() {
+        // The bundled catalog, which knows Amazon's numbers: no picker shows here.
+        show(identities = DemoCards.identities)
+        typeAndLeave("FR4829173650")
+        compose.screenshot("add_parcel_amazon_light")
+    }
+
+    @Test
+    fun aCheckDigitThatDoesNotAddUp() {
+        show()
+        typeAndLeave("LX1234567B5DE")
+        compose.screenshot("add_parcel_typo_light")
+    }
+
+    @Test
+    fun thePickerOverAdd() {
+        show()
+        compose.onNodeWithTag(ADD_TRACKING).performTextReplacement("1Z999AA10123456784")
+        click(ADD_CARRIER)
+        settle()
+        compose.screenshot("add_parcel_picker_light")
+    }
+
+    @Test
+    fun saving() {
+        show { adding = CompletableDeferred() }
+        typeShoes()
+        click(ADD_SAVE)
+        settle()
+        compose.screenshot("add_parcel_saving_light")
+    }
+
+    @Test
     fun aPostcodeAndItsCountry() {
         show()
         chooseMondialRelay()
@@ -192,6 +257,16 @@ class AddParcelScreenshotTest {
         show()
         typeShoes()
         compose.screenshot("add_parcel_tablet_light")
+    }
+
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun sideBySideOnATabletWithTheKeyboardUp() {
+        show()
+        typeShoes()
+        bars(keyboard = 520)
+        settle()
+        compose.screenshot("add_parcel_tablet_keyboard_light")
     }
 
     @Test

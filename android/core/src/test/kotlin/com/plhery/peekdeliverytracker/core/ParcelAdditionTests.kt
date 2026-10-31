@@ -318,4 +318,26 @@ class ParcelAdditionTests {
         assertNull(FirstParcelRequest.Paste("").draft)
         assertEquals(FirstParcelRequest.pasteLimit, FirstParcelRequest.Paste("x".repeat(FirstParcelRequest.pasteLimit + 5)).draft?.length)
     }
+
+    @Test
+    fun theChecksAnswersAreKeptAsTextAndReadBack() {
+        val answer = CarrierDetectionResponse(
+            "12345478901", CarrierDetectionResponseAmazonShippingStatus.Unavailable, carrier = CarrierId.GlsCh,
+            recognized = listOf(CarrierId.GlsCh, CarrierId.GlsDe), asked = listOf(CarrierId.GlsCh), unanswered = listOf(CarrierId.GlsDe),
+        )
+        assertEquals(answer, ParcelAddition.answer(ParcelAddition.keptAnswer(answer)))
+        val question = NumberRefusalRequest("12345478901", CarrierId.Dpd)
+        assertEquals(question, ParcelAddition.question(ParcelAddition.keptQuestion(question)))
+        assertNull(ParcelAddition.answer("not an answer"))
+        assertNull(ParcelAddition.question("{}"))
+    }
+
+    @Test
+    fun whatTheFieldTakesIsCutToThePasteLimitCountedAsTheReaderSeesCharacters() {
+        assertEquals(" 1Z999AA10123456784\n", FirstParcelRequest.taken(" 1Z999AA10123456784\n"))
+        assertEquals("x".repeat(FirstParcelRequest.pasteLimit), FirstParcelRequest.taken("x".repeat(FirstParcelRequest.pasteLimit * 100)))
+        // A flag is one character of two code points: the last one whole, nothing after it.
+        val flag = "\uD83C\uDDE8\uD83C\uDDED"
+        assertEquals(flag.repeat(FirstParcelRequest.pasteLimit), FirstParcelRequest.taken(flag.repeat(FirstParcelRequest.pasteLimit + 1)))
+    }
 }

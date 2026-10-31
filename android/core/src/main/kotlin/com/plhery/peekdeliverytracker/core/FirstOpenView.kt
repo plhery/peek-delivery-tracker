@@ -19,7 +19,7 @@ sealed class FirstParcelRequest {
     /** Whatever is on the clipboard, read once the person asked for it, or text dropped on the deliveries. */
     data class Paste(val text: String) : FirstParcelRequest() {
         /** What Add opens with (`sharedDraft`): the text trimmed, as much of it as Add takes in; none when nothing is left. */
-        val draft: String? get() = text.trimmingWhitespacesAndNewlines().nonEmpty?.characterPrefix(pasteLimit)
+        val draft: String? get() = text.trimmingWhitespacesAndNewlines().nonEmpty?.let(::taken)
     }
     data object Type : FirstParcelRequest()
     data object Scan : FirstParcelRequest()
@@ -27,6 +27,9 @@ sealed class FirstParcelRequest {
     companion object {
         /** As much pasted text as Add takes in. */
         const val pasteLimit = 2000
+
+        /** As much of `text` as Add takes in: its first [pasteLimit] characters. */
+        fun taken(text: String): String = text.characterPrefix(pasteLimit)
 
         /**
          * Text or a link dragged onto the deliveries from another app is taken as a paste: each piece once, one to a

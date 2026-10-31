@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.ContentResolver
 import android.content.Intent
 import android.os.Build
 import android.view.KeyEvent
@@ -165,10 +166,12 @@ fun DeliveriesTab(
         // From Android 13 the system confirms a copy itself, and the app says nothing more.
         Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
     }
-    // What the clipboard holds as text, read once the reader asks for it (`Clipboard.string`).
+    // What the clipboard holds as text, read once the reader asks for it (`Clipboard.string`): its first item's text, or
+    // a link's address; nothing for an image or a file.
     state.readClipboard = {
-        context.getSystemService(ClipboardManager::class.java)?.primaryClip
-            ?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.coerceToText(context)?.toString()
+        context.getSystemService(ClipboardManager::class.java)?.primaryClip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.let { item ->
+            item.text?.toString() ?: item.uri?.takeIf { it.scheme !in LOCAL_SCHEMES }?.toString()
+        }
     }
     // A parcel's link through the system's share sheet (`ShareLink`, `LinkActivitySheet`), which tells `chosen` of the
     // app it went to, if any (ShareTargetChosen); false where it couldn't be shown.
@@ -413,6 +416,9 @@ private const val READ_MILLIS = 650L
 /** How long a message under the list stays, in milliseconds. */
 private const val TOAST_DURATION = 4_000L
 
+/** The schemes of what the phone holds itself, a file or an image, rather than a link. */
+private val LOCAL_SCHEMES = setOf(ContentResolver.SCHEME_CONTENT, ContentResolver.SCHEME_FILE, ContentResolver.SCHEME_ANDROID_RESOURCE)
+
 /**
  * What waits for the list in this window (A-D26, A-L14): a parcel a link asked for, at once and whenever another comes;
  * a parcel's notification opened before the list was there, as it appears; and what another app shared, as it appears
@@ -421,10 +427,11 @@ private const val TOAST_DURATION = 4_000L
 @Composable
 private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
     if (inbox == null) return
+    // With nothing left over the deliveries (`show(_:)`).
     LaunchedEffect(inbox) {
-        inbox.consumePendingParcelNotification()?.let(state.navigator::open)
+        inbox.consumePendingParcelNotification()?.let(state::show)
         inbox.parcel.filterNotNull().collect { parcelId ->
-            state.navigator.open(parcelId)
+            state.show(parcelId)
             inbox.consume(parcelId)
         }
     }
@@ -436,17 +443,6 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
     }
 }
 
-/**
- * The deliveries' keys, which do what their buttons do (A-S99, A-G10): ↑ and ↓ show the card before or after the
- * parcel beside the list and bring it into view, Return opens the one shown by itself, Ctrl or Meta with F opens the
- * search and focuses its field and Escape closes it, Ctrl or Meta with N adds. The parcel's own are on its page. None
- * while the filters, a card's menu, the delete it asks about or an alert are open (`keyboardFree`); while the search
- * field has the focus, only adding, finding and closing the search.
- *
- * As the iPhone's, they are the window's: once nothing in it has used a key, the window gives it over here. Beside a
- * parcel the list's column also takes them, and the focus, so that ↑ and ↓ step through the cards rather than move
- * the focus ([listKeys]).
- */
 /**
  * The card Add added, brought to the list's middle once Add has gone (`revealParcelID`): a frame later, once the list
  * holds it, on the smooth spring, at once under Reduce Motion. A scroll of the reader's meanwhile ends it.
@@ -465,6 +461,17 @@ private fun Revealing(state: DeliveriesState, reduceMotion: Boolean) {
     }
 }
 
+/**
+ * The deliveries' keys, which do what their buttons do (A-S99, A-G10): ↑ and ↓ show the card before or after the
+ * parcel beside the list and bring it into view, Return opens the one shown by itself, Ctrl or Meta with F opens the
+ * search and focuses its field and Escape closes it, Ctrl or Meta with N adds. The parcel's own are on its page. None
+ * while the filters, a card's menu, the delete it asks about or an alert are open (`keyboardFree`); while the search
+ * field has the focus, only adding, finding and closing the search.
+ *
+ * As the iPhone's, they are the window's: once nothing in it has used a key, the window gives it over here. Beside a
+ * parcel the list's column also takes them, and the focus, so that ↑ and ↓ step through the cards rather than move
+ * the focus ([listKeys]).
+ */
 @Composable
 private fun DeliveriesKeys(state: DeliveriesState, scope: CoroutineScope, reduceMotion: Boolean) {
     val handle by rememberUpdatedState { event: KeyEvent -> state.key(event, scope, reduceMotion) }

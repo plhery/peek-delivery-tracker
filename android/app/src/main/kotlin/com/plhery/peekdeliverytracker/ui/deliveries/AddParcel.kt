@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.content.ClipData
 import android.content.ClipDescription
 import android.view.KeyEvent
 import androidx.activity.compose.LocalActivity
@@ -28,12 +29,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
@@ -54,9 +58,12 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -75,6 +82,7 @@ import androidx.compose.ui.draganddrop.toAndroidDragEvent
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.graphicsLayer
@@ -87,6 +95,8 @@ import androidx.compose.ui.input.key.isShiftPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.layout.findRootCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
@@ -124,6 +134,7 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierRecognition
 import com.plhery.peekdeliverytracker.core.CarrierRequirement
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.NumberInText
 import com.plhery.peekdeliverytracker.core.NumberRefusals
 import com.plhery.peekdeliverytracker.core.OrderShop
@@ -165,6 +176,7 @@ import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
+import kotlin.math.roundToInt
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
@@ -213,10 +225,10 @@ internal fun AddParcelHost(state: DeliveriesState) {
 
 /**
  * What Add holds (`AddParcelView`'s `@State`): the name and the text typed, the number chosen among several, the carrier
- * chosen, the number to add as typed, what recognition settled on, the link and the postcode typed, the postcode's
- * country chosen and the postcode filled in from those given before, Amazon's check asked again, the picker open, the
- * keyboard opened once, and a paste that found nothing. Only what was settled is kept of recognition through a window
- * made again: the answers are asked for again.
+ * chosen, the number to add as typed, recognition and the answers of the checks, the link and the postcode typed, the
+ * postcode's country chosen and the postcode filled in from those given before, Amazon's check asked again, the picker
+ * open, the keyboard opened once, and a paste that found nothing. All of it stays through a window made again, as the
+ * iPhone's `@State` does, so no check is asked again for what it answered.
  */
 @Stable
 internal class AddForm(
@@ -225,7 +237,10 @@ internal class AddForm(
     pick: String?,
     carrierOverride: CarrierId?,
     asTyped: String?,
-    settledNumber: String?,
+    recognition: CarrierRecognition,
+    refusedQuestion: NumberRefusalRequest?,
+    verifiedCarrier: CarrierDetectionResponse?,
+    lookedUp: String?,
     trackingUrl: String,
     deliveryPostcode: String,
     chosenPostcodeCountry: String?,
@@ -241,9 +256,12 @@ internal class AddForm(
     var pick by mutableStateOf(pick)
     var carrierOverride by mutableStateOf(carrierOverride)
     var asTyped by mutableStateOf(asTyped)
-    var recognition by mutableStateOf(CarrierRecognition(settledNumber))
-    var refusedQuestion by mutableStateOf<NumberRefusalRequest?>(null)
-    var verifiedCarrier by mutableStateOf<CarrierDetectionResponse?>(null)
+    var recognition by mutableStateOf(recognition)
+    var refusedQuestion by mutableStateOf(refusedQuestion)
+    var verifiedCarrier by mutableStateOf(verifiedCarrier)
+
+    /** Amazon's check this opening last ran to its end, the number and its attempt (the `.task(id:)` it ran for). */
+    var lookedUp = lookedUp
     var trackingUrl by mutableStateOf(trackingUrl)
     var deliveryPostcode by mutableStateOf(deliveryPostcode)
     var chosenPostcodeCountry by mutableStateOf(chosenPostcodeCountry)
@@ -273,27 +291,33 @@ internal class AddForm(
         /** Add as it opens, with `draft` in its field, settled at once (`init(draft:)`). */
         fun start(draft: String?, catalog: CarrierCatalog) = AddForm(
             label = "", trackingInput = draft.orEmpty(), pick = null, carrierOverride = null, asTyped = null,
-            settledNumber = draft?.let { ParcelAddition.trackingNumber(it, catalog) }, trackingUrl = "", deliveryPostcode = "",
+            recognition = CarrierRecognition(draft?.let { ParcelAddition.trackingNumber(it, catalog) }), refusedQuestion = null,
+            verifiedCarrier = null, lookedUp = null, trackingUrl = "", deliveryPostcode = "",
             chosenPostcodeCountry = null, postcodeFill = PostcodeFill(), lookupAttempt = 0, showingPicker = false,
             didFocus = false, pasteFailed = false, preparedFor = null,
         )
 
         val Saver = listSaver<AddForm, Any>(
             save = {
+                val recognition = it.recognition
                 listOf(
                     it.label, it.trackingInput, it.pick.orEmpty(), it.carrierOverride?.rawValue.orEmpty(), it.asTyped.orEmpty(),
-                    it.recognition.settledNumber ?: NONE, it.trackingUrl, it.deliveryPostcode, it.chosenPostcodeCountry.orEmpty(),
+                    recognition.settledNumber ?: NONE, it.trackingUrl, it.deliveryPostcode, it.chosenPostcodeCountry.orEmpty(),
                     it.postcodeFill.postcode ?: NONE, it.postcodeFill.forgotten, it.lookupAttempt, it.showingPicker, it.didFocus,
-                    it.pasteFailed, it.preparedFor?.rawValue ?: NONE,
+                    it.pasteFailed, it.preparedFor?.rawValue ?: NONE, recognition.failedNumber ?: NONE,
+                    recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
+                    it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE,
                 )
             },
             restore = {
                 fun text(index: Int) = (it[index] as String).ifEmpty { null }
                 fun kept(index: Int) = (it[index] as String).takeIf { value -> value != NONE }
                 AddForm(
-                    it[0] as String, it[1] as String, text(2), text(3)?.let(::CarrierId), text(4), kept(5), it[6] as String,
-                    it[7] as String, text(8), PostcodeFill(kept(9), it[10] as Boolean), it[11] as Int, it[12] as Boolean,
-                    it[13] as Boolean, it[14] as Boolean, kept(15)?.let(::CarrierId),
+                    it[0] as String, it[1] as String, text(2), text(3)?.let(::CarrierId), text(4),
+                    CarrierRecognition(kept(5), kept(17)?.let(ParcelAddition::answer), kept(16)),
+                    kept(19)?.let(ParcelAddition::question), kept(18)?.let(ParcelAddition::answer), kept(20),
+                    it[6] as String, it[7] as String, text(8), PostcodeFill(kept(9), it[10] as Boolean), it[11] as Int,
+                    it[12] as Boolean, it[13] as Boolean, it[14] as Boolean, kept(15)?.let(::CarrierId),
                 )
             },
         )
@@ -360,9 +384,13 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         prepareRequiredDetails(form, current(), source.givenPostcodes)
     }
     SensoryFeedbackEffect(SensoryFeedback.Selection, resolved) { old, new -> old != new && new != CarrierId.Unknown }
-    // Amazon numbers are verified before they can be added, a moment after the number stops changing.
+    // Amazon numbers are verified before they can be added, a moment after the number stops changing; once, through a
+    // window made again.
     val lookup = addition.lookupTrackingNumber
     LaunchedEffect(lookup, form.lookupAttempt) {
+        val key = lookup?.let { "$it:${form.lookupAttempt}" }
+        if (key != null && key == form.lookedUp) return@LaunchedEffect
+        form.lookedUp = null
         val number = lookup ?: return@LaunchedEffect
         try {
             delay(LOOKUP_DELAY)
@@ -378,6 +406,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                 carrier = CarrierId.AmazonLogistics,
             )
         }
+        form.lookedUp = key
     }
     // The carriers asked about the settled number.
     val recognitionRequest = addition.recognitionRequest
@@ -400,15 +429,18 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     LaunchedEffect(question) {
         val asked = question ?: return@LaunchedEffect
         val refuses = NumberRefusals.refuses(asked) { source.numberRefusal(it) }
+        ensureActive()
         form.refusedQuestion = if (refuses) asked else null
     }
-    // Escape closes Add, but not from under the picker, which it would close too.
-    AddEscape(enabled = !form.showingPicker && !saving) { state.closeAdd() }
+    // Escape closes Add, or the picker over it (its Cancel, `.cancellationAction`), which then leaves Add up.
+    AddEscape(enabled = !saving) { if (form.showingPicker) form.showingPicker = false else state.closeAdd() }
 
     val actions = remember(form, focus, motion) { AddActions(state, request, form, focus, motion, focusManager) }
     actions.current = { current() }
     actions.reduceMotion = reduceMotion
     actions.saving = saving
+    // A change's spring covers that change only, as `withAnimation` does: what comes later moves on the form's own.
+    SideEffect { motion.duration = null }
 
     val error = if (form.pasteFailed) localizer.text("add.pasteFailed") else work.failure(request.id)
     val duplicate = work.duplicate(request.id)
@@ -427,36 +459,39 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
             contentModifier = Modifier.fillMaxWidth(),
         ) {
             if (large) AddHeading(saving, state::closeAdd)
-            Column(
-                Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .widthIn(max = CONTENT_WIDTH)
-                    .fillMaxWidth()
-                    .padding(start = 20.dp, end = 20.dp, top = 4.dp, bottom = 24.dp)
-                    .then(if (saving) Modifier.clearAndSetSemantics {}.then(Untouched) else Modifier),
-                verticalArrangement = Arrangement.spacedBy(20.dp),
-            ) {
-                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    TrackingSection(addition, form, focus, actions, saving)
-                    val found = addition.parsed.trackingNumber.isNotEmpty()
-                    val shownFeedback = remember { Kept(addition) }
-                    if (found) shownFeedback.value = addition
-                    AddRows(found, motion.duration ?: FEEDBACK_MOTION, reduceMotion) {
-                        CarrierFeedback(state, shownFeedback.value, form, actions)
+            // While it saves, the form's controls are off and dim as they do (`.disabled(saving)`); TalkBack still
+            // reads them, as off.
+            CompositionLocalProvider(LocalFormEnabled provides !saving) {
+                Column(
+                    Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .widthIn(max = CONTENT_WIDTH)
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 4.dp, bottom = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(20.dp),
+                ) {
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        TrackingSection(addition, form, focus, actions, saving)
+                        val found = addition.parsed.trackingNumber.isNotEmpty()
+                        val shownFeedback = remember { Kept(addition) }
+                        if (found) shownFeedback.value = addition
+                        AddRows(found, motion.duration ?: FEEDBACK_MOTION, reduceMotion, Modifier.testTag(ADD_FEEDBACK)) {
+                            CarrierFeedback(state, shownFeedback.value, form, actions)
+                        }
                     }
-                }
-                val details = addition.needsRequiredDetails
-                val shownDetails = remember { Kept(addition) }
-                if (details) shownDetails.value = addition
-                AddRows(details, motion.duration ?: STATE_MOTION, reduceMotion) {
-                    RequiredDetails(state, shownDetails.value, form, focus, actions)
-                }
-                NameField(form, focus, actions, addition)
-                val shownError = remember { Kept(error to duplicate) }
-                if (error != null) shownError.value = error to duplicate
-                AddRows(error != null, STATE_MOTION, reduceMotion, fadeOnly = true) {
-                    val (message, existing) = shownError.value
-                    if (message != null) ErrorBanner(message, existing) { id -> state.openExisting(id) }
+                    val details = addition.needsRequiredDetails
+                    val shownDetails = remember { Kept(addition) }
+                    if (details) shownDetails.value = addition
+                    AddRows(details, motion.duration ?: STATE_MOTION, reduceMotion, Modifier.testTag(ADD_DETAILS)) {
+                        RequiredDetails(state, shownDetails.value, form, focus, actions)
+                    }
+                    NameField(form, focus, actions, addition)
+                    val shownError = remember { Kept(error to duplicate) }
+                    if (error != null) shownError.value = error to duplicate
+                    AddRows(error != null, STATE_MOTION, reduceMotion, fadeOnly = true) {
+                        val (message, existing) = shownError.value
+                        if (message != null) ErrorBanner(message, existing) { id -> state.openExisting(id) }
+                    }
                 }
             }
         }
@@ -464,6 +499,9 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     }
     AddPicker(state, addition, form, actions)
 }
+
+/** Whether the form's controls are on (`.disabled(saving)`'s `isEnabled`). */
+private val LocalFormEnabled = compositionLocalOf { true }
 
 /** A value kept as it was last shown, for what goes out with a transition. */
 private class Kept<T>(var value: T)
@@ -490,10 +528,13 @@ private class AddActions(
     var reduceMotion = false
     var saving = false
 
-    /** The field's text changed (`onChange(of: trackingInput)`): no duplicate, no error, no carrier picked by hand. */
+    /**
+     * The field's text changed (`onChange(of: trackingInput)`): no duplicate, no error, no carrier picked by hand. As
+     * much of it as a paste takes, which the window can keep.
+     */
     fun type(text: String) {
         motion.duration = null
-        setInput(text)
+        setInput(FirstParcelRequest.taken(text))
     }
 
     private fun setInput(text: String) {
@@ -506,10 +547,14 @@ private class AddActions(
         state.source.pageWork.dismiss(request.id)
     }
 
-    /** `paste()`: what the clipboard holds in the field, settled, the keyboard on it; else why nothing came. */
+    /**
+     * `paste()`: what the clipboard holds as text in the field, trimmed and settled, the keyboard on it; else why
+     * nothing came. As much of it as the ways in take ([FirstParcelRequest.pasteLimit]), where the iPhone takes it all:
+     * the window keeps what the field holds, and can't keep a few hundred thousand characters.
+     */
     fun paste() {
         state.source.action("parcel-paste")
-        val value = state.readClipboard()?.trim()?.takeIf { it.isNotEmpty() }
+        val value = state.readClipboard()?.let { FirstParcelRequest.Paste(it).draft }
         if (value == null) {
             state.source.pageWork.dismiss(request.id)
             form.pasteFailed = true
@@ -568,10 +613,12 @@ private class AddActions(
         save()
     }
 
-    /** `save()`. */
+    /** `save()`: saving from before the field gives up the focus, as `saving = true` goes with `focusedField = nil`. */
     fun save() {
         val addition = current()
         if (!addition.canSave || saving) return
+        // The field left to save settles nothing ([left]); what Add then shows follows the save.
+        saving = true
         focusManager.clearFocus()
         clearErrors()
         state.saveAddition(request, addition, form.label)
@@ -600,13 +647,21 @@ private fun prepareRequiredDetails(form: AddForm, addition: ParcelAddition, give
  * doesn't reach them.
  */
 @Composable
-private fun ColumnScope.AddRows(visible: Boolean, duration: Double, reduceMotion: Boolean, fadeOnly: Boolean = false, content: @Composable () -> Unit) {
+private fun ColumnScope.AddRows(
+    visible: Boolean,
+    duration: Double,
+    reduceMotion: Boolean,
+    modifier: Modifier = Modifier,
+    fadeOnly: Boolean = false,
+    content: @Composable () -> Unit,
+) {
     val rise = with(LocalDensity.current) { ROW_RISE.roundToPx() }
     val fade = Motion.snappy<Float>(duration)
     val size = Motion.snappy<IntSize>(duration)
     val offset = Motion.snappy<IntOffset>(duration)
     AnimatedVisibility(
         visible = visible,
+        modifier = modifier,
         enter = when {
             reduceMotion -> EnterTransition.None
             fadeOnly -> fadeIn(fade) + expandVertically(size, Alignment.Top, clip = false)
@@ -732,21 +787,26 @@ private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddF
                     label = localizer.text("door.typo.suggest", mapOf("number" to suggestion)),
                 )
             }
-            TintedButton(AnnotatedString(localized("door.typo.asTyped")), actions::asTyped, ADD_AS_TYPED, enabled = !saving)
+            TintedButton(AnnotatedString(localized("door.typo.asTyped")), actions::asTyped, ADD_AS_TYPED)
         }
     }
 }
 
-/** Paste (`captureActions`): the clipboard symbol and "Paste" in caption, in the secondary grey, 44 tall. */
+/**
+ * Paste (`captureActions`): the clipboard symbol and "Paste" in caption, in the secondary grey, 44 tall; a plain button,
+ * at half strength while off.
+ */
 @Composable
 private fun PasteButton(paste: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
+    val enabled = LocalFormEnabled.current
     Row(
         Modifier
             .heightIn(min = 44.dp)
             .testTag(ADD_PASTE)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = paste),
+            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = paste)
+            .plainDisabled(enabled),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -782,10 +842,14 @@ private fun AmazonOrdersLink(number: String) {
     TintedButton(AnnotatedString(localized("add.openAmazonOrders")), { uriHandler.openUri(CarrierCatalog.amazonOrdersUrl(number)) }, ADD_AMAZON_ORDERS)
 }
 
-/** A plain button as SwiftUI draws one by default: its words in subheadline, in the accent, fading under the finger. */
+/**
+ * A button as SwiftUI draws one by default: its words in subheadline, in the accent, fading under the finger; grey while
+ * off.
+ */
 @Composable
-private fun TintedButton(text: AnnotatedString, onClick: () -> Unit, tag: String, label: String? = null, enabled: Boolean = true) {
+private fun TintedButton(text: AnnotatedString, onClick: () -> Unit, tag: String, label: String? = null) {
     val colors = PeekTheme.colors
+    val enabled = LocalFormEnabled.current
     Text(
         text,
         Modifier
@@ -793,7 +857,7 @@ private fun TintedButton(text: AnnotatedString, onClick: () -> Unit, tag: String
             .testTag(tag)
             .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
             .then(if (label != null) Modifier.semantics { contentDescription = label } else Modifier),
-        color = colors.accent,
+        color = if (enabled) colors.accent else colors.tertiaryLabel,
         style = PeekTheme.type.subheadline.sfLines(),
     )
 }
@@ -875,7 +939,7 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
     val detail = addition.lineDetail(localizer)
     val actionKey = if (addition.choosingCarrier) "add.line.choose" else "add.line.change"
     val action = localized(actionKey)
-    val enabled = !addition.amazonNumber
+    val enabled = !addition.amazonNumber && LocalFormEnabled.current
     val description = listOfNotNull(name, detail).joinToString(", ")
     val nameStyle = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines()
     val detailColor = if (addition.choosingCarrier || addition.refused) ochre else colors.secondaryLabel
@@ -891,8 +955,8 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
             .testTag(ADD_CARRIER)
             .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = open)
             .clearAndSetSemantics {
+                // The way to change it said once, as what a tap does (`accessibilityHint`).
                 contentDescription = description
-                stateDescription = action
                 role = Role.Button
                 if (enabled) {
                     onClick(label = action) {
@@ -920,14 +984,14 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
                 lineAction()
             }
         } else {
+            // On their first baselines where they fit beside each other.
             FlowRow(
                 Modifier.weight(1f),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(2.dp),
-                itemVerticalAlignment = Alignment.Bottom,
             ) {
-                Text(name, color = colors.ink, style = nameStyle)
-                if (detail != null) Text(detail, Modifier.testTag(ADD_LINE_DETAIL), color = detailColor, style = type.caption.sfLines())
+                Text(name, Modifier.alignByBaseline().testTag(ADD_LINE_NAME), color = colors.ink, style = nameStyle)
+                if (detail != null) Text(detail, Modifier.alignByBaseline().testTag(ADD_LINE_DETAIL), color = detailColor, style = type.caption.sfLines())
             }
             lineAction()
         }
@@ -957,17 +1021,18 @@ private fun NumberChoice(state: DeliveriesState, addition: ParcelAddition, actio
         if (state.source.isGuest) {
             FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 Text(localized("door.several.question"), color = colors.secondaryLabel, style = type.caption.sfLines())
+                val enabled = LocalFormEnabled.current
                 Text(
                     localized("door.several.signIn"),
                     Modifier
                         .heightIn(min = 44.dp)
                         .wrapContentHeight(Alignment.CenterVertically)
                         .testTag(ADD_SIGN_IN)
-                        .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) {
+                        .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) {
                             state.closeAdd()
                             state.source.showSignIn()
                         },
-                    color = colors.accent,
+                    color = if (enabled) colors.accent else colors.tertiaryLabel,
                     style = type.style(IosTextStyle.Caption, FontWeight.Medium).copy(textDecoration = TextDecoration.Underline).sfLines(),
                 )
             }
@@ -989,20 +1054,23 @@ private fun NumberRow(addition: ParcelAddition, number: NumberInText, chosen: Bo
     val printed = CarrierCatalog.format(number.match.trackingNumber, carrier)
     val ochre = colors.resolve(ExperimentalPalette.ochre)
     val shape = ContinuousRoundedShape(14.dp)
+    val enabled = LocalFormEnabled.current
     Row(
         Modifier
             .fillMaxWidth()
             .heightIn(min = 56.dp)
             .testTag(numberRowTag(number.normalized))
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.98f), role = Role.Button, onClick = choose)
+            .clickable(interactionSource = null, indication = PressStyle.tactile(0.98f), enabled = enabled, role = Role.Button, onClick = choose)
             .clearAndSetSemantics {
                 contentDescription = name
                 stateDescription = printed
                 selected = chosen
                 role = Role.Button
-                onClick {
-                    choose()
-                    true
+                if (enabled) {
+                    onClick {
+                        choose()
+                        true
+                    }
                 }
             }
             .background(if (chosen) colors.resolve(ExperimentalPalette.ochreSurface) else colors.paper, shape)
@@ -1074,12 +1142,15 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                         PostcodeCountryMenu(
                             addition.resolvedCarrier, carrierRequirement, country, catalog,
                             Modifier.padding(start = 14.dp, top = 14.dp, bottom = 14.dp, end = 10.dp), ADD_COUNTRY,
+                            enabled = LocalFormEnabled.current,
                         ) { form.chosenPostcodeCountry = it }
+                        // `Divider().padding(.vertical, 12)`: the row's height, less 12 at each end.
                         Box(
                             Modifier
+                                .fillMaxHeight()
                                 .padding(vertical = 12.dp)
                                 .width(1.dp / LocalDensity.current.density)
-                                .heightIn(min = 20.dp)
+                                .testTag(ADD_COUNTRY_DIVIDER)
                                 .background(PeekTheme.colors.separator),
                         )
                     }
@@ -1153,6 +1224,7 @@ private fun RequirementField(title: String, help: String, optional: Boolean = fa
         Row(
             Modifier
                 .fillMaxWidth()
+                .height(IntrinsicSize.Min)
                 .background(colors.paper, shape)
                 .border(0.7.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape),
             verticalAlignment = Alignment.CenterVertically,
@@ -1192,9 +1264,10 @@ private fun NameField(form: AddForm, focus: AddFocus, actions: AddActions, addit
 
 /**
  * A field of Add as `drawnField()` draws one: its placeholder in the tertiary grey while it is empty, the cursor in the
- * accent; [framed], 14 in on the paper with 14-point corners, outlined in ochre while it has the focus. TalkBack reads
- * [label] as its name. Its submit key acts ([onSubmit]), as a hardware Return does. It keeps the focus and the keyboard
- * through a window made again. The keyboard offers no suggestions where the field is `.autocorrectionDisabled()`.
+ * accent, its text grey while off; [framed], 14 in on the paper with 14-point corners, outlined in ochre while it has
+ * the focus. TalkBack reads [label] as its name. Its submit key acts ([onSubmit]), as a hardware Return does. It keeps
+ * the focus and the keyboard through a window made again. The keyboard offers no suggestions where the field is
+ * `.autocorrectionDisabled()`.
  */
 @Composable
 private fun AddTextField(
@@ -1219,6 +1292,7 @@ private fun AddTextField(
     val colors = PeekTheme.colors
     val base = PeekTheme.type.body.sfLines()
     val font = if (monospacedDigits) base.copy(fontFeatureSettings = "tnum") else base
+    val enabled = LocalFormEnabled.current
     val focused = focus.focused == field
     val ochre = colors.resolve(ExperimentalPalette.ochre)
     val shape = RoundedCornerShape(14.dp)
@@ -1265,7 +1339,8 @@ private fun AddTextField(
                     contentDescription = label
                     if (postalCode) contentType = ContentType.PostalCode
                 },
-            textStyle = font.copy(color = colors.label),
+            textStyle = font.copy(color = if (enabled) colors.label else colors.tertiaryLabel),
+            enabled = enabled,
             singleLine = maxLines == 1,
             minLines = minLines,
             maxLines = maxLines,
@@ -1319,10 +1394,12 @@ private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.
 }
 
 /**
- * `primaryAction`: Add across the foot, above the keyboard on a cover, on the app's background; "Add parcel", or
- * "Track this one" among several, in headline on the accent, 50 tall at least with 14-point corners, at 45 % while it
- * can't add (easing out over 0.2 s); while it saves, a spinner 10 before "Adding…", faded in. At the accessibility sizes
- * its words keep to one line, shrinking to 70 %, and grow no further than accessibility2.
+ * `primaryAction`: Add across the foot, above the keyboard (`safeAreaInset(edge: .bottom)`), on the app's background: on
+ * a cover above the keyboard and the navigation bar, in the form sheet above the part of the keyboard over its foot,
+ * as the sheet stays where it is. "Add parcel", or "Track this one" among several, in headline on the accent, 50 tall
+ * at least with 14-point corners, at 45 % while it can't add (easing out over 0.2 s); while it saves, a spinner 10
+ * before "Adding…", faded in. At the accessibility sizes its words keep to one line, shrinking to 70 %, and grow no
+ * further than accessibility2.
  */
 @Composable
 private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean, save: () -> Unit) {
@@ -1333,11 +1410,23 @@ private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean,
     val opacity by animateFloatAsState(if (canSave || saving) 1f else DISABLED_OPACITY, if (reduceMotion) snap() else Motion.easeOut(BUTTON_MOTION), label = "add button")
     val words = localized(if (addition.several.isEmpty()) "app.addParcel" else "door.several.track")
     val adding = localized("add.adding")
+    val density = LocalDensity.current
+    // The window's pixels under the sheet's foot, which a keyboard covers first.
+    var below by remember { mutableIntStateOf(0) }
+    val keyboard = if (cover) Modifier.windowInsetsPadding(WindowInsets.ime.union(WindowInsets.navigationBars).only(WindowInsetsSides.Bottom)) else {
+        val lift = with(density) { (WindowInsets.ime.getBottom(this) - below).coerceAtLeast(0).toDp() }
+        Modifier
+            .onGloballyPositioned { foot ->
+                val root = foot.findRootCoordinates()
+                below = (root.size.height - root.localPositionOf(foot, Offset(0f, foot.size.height.toFloat())).y).roundToInt().coerceAtLeast(0)
+            }
+            .padding(bottom = lift)
+    }
     Box(
         Modifier
             .fillMaxWidth()
             .background(colors.background)
-            .then(if (cover) Modifier.windowInsetsPadding(WindowInsets.ime.union(WindowInsets.navigationBars).only(WindowInsetsSides.Bottom)) else Modifier),
+            .then(keyboard),
         contentAlignment = Alignment.TopCenter,
     ) {
         Box(
@@ -1471,12 +1560,7 @@ internal fun Modifier.parcelDrop(state: DeliveriesState): Modifier {
                 val drag = event.toAndroidDragEvent()
                 val permissions = activity?.requestDragAndDropPermissions(drag)
                 try {
-                    val clip = drag.clipData ?: return false
-                    val texts = (0 until clip.itemCount).mapNotNull { index ->
-                        val item = clip.getItemAt(index)
-                        item.text?.toString() ?: item.uri?.takeIf { it.scheme == "http" || it.scheme == "https" }?.toString()
-                    }
-                    return state.addDropped(texts)
+                    return state.addDropped(droppedTexts(drag.clipData ?: return false))
                 } finally {
                     permissions?.release()
                 }
@@ -1487,6 +1571,12 @@ internal fun Modifier.parcelDrop(state: DeliveriesState): Modifier {
         shouldStartDragAndDrop = { event -> event.mimeTypes().any { it.startsWith("text/") || it == ClipDescription.MIMETYPE_TEXT_URILIST } },
         target = target,
     )
+}
+
+/** What a drop holds (`DroppedText`): each item's text, or a link as its whole address whatever its scheme (`url.absoluteString`). */
+internal fun droppedTexts(clip: ClipData): List<String> = (0 until clip.itemCount).mapNotNull { index ->
+    val item = clip.getItemAt(index)
+    item.text?.toString() ?: item.uri?.toString()
 }
 
 internal fun numberRowTag(normalized: String) = "$ADD_NUMBER.$normalized"
@@ -1500,12 +1590,15 @@ internal const val ADD_PASTE = "addParcel.paste"
 internal const val ADD_CARRIER = "addParcel.carrier"
 internal const val ADD_CARRIER_MARK = "addParcel.carrier.mark"
 internal const val ADD_CHECKING = "addParcel.carrier.checking"
+internal const val ADD_LINE_NAME = "addParcel.carrier.name"
 internal const val ADD_LINE_DETAIL = "addParcel.carrier.detail"
 internal const val ADD_SAVE = "addParcel.save"
 internal const val ADD_NUMBER = "addParcel.number"
 internal const val ADD_SEVERAL = "addParcel.several"
 internal const val ADD_SIGN_IN = "addParcel.signIn"
 internal const val ADD_FOUND = "addParcel.found"
+internal const val ADD_FEEDBACK = "addParcel.feedback"
+internal const val ADD_DETAILS = "addParcel.details"
 internal const val ADD_HINT = "addParcel.hint"
 internal const val ADD_NOT_FOUND = "addParcel.notFound"
 internal const val ADD_PICKUP_CODE = "addParcel.pickupCode"
@@ -1521,6 +1614,7 @@ internal const val ADD_USE_CARRIER = "addParcel.useCarrier"
 internal const val ADD_TRACKING_URL = "addParcel.trackingUrl"
 internal const val ADD_POSTCODE = "addParcel.postcode"
 internal const val ADD_COUNTRY = "addParcel.country"
+internal const val ADD_COUNTRY_DIVIDER = "addParcel.country.divider"
 internal const val ADD_USE_POSTCODE = "addParcel.usePostcode"
 internal const val ADD_FORGET_POSTCODE = "addParcel.forgetPostcode"
 internal const val ADD_ERROR = "addParcel.error"

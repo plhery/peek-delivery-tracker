@@ -149,6 +149,29 @@ class ParcelMapTest {
     }
 
     @Test
+    fun aDragOrAPinchFromTheSummaryLeavesTheMapAsItWas() {
+        openMap()
+        val (shown, other) = views()
+        val start = opened.last()
+        val from = opened.size
+        val bar = compose.onNodeWithTag(MAP_BAR)
+        // From the summary's first words, up across the map.
+        bar.performTouchInput { swipe(Offset(width * 0.2f, height * 0.12f), Offset(width * 0.2f, -400f), durationMillis = 300) }
+        settle()
+        bar.performTouchInput {
+            pinch(
+                Offset(width * 0.4f, height * 0.12f), Offset(width * 0.1f, -300f),
+                Offset(width * 0.6f, height * 0.12f), Offset(width * 0.9f, -300f),
+                durationMillis = 300,
+            )
+        }
+        settle()
+        assertTrue(opened.drop(from).all { it == start })
+        view(shown).assertIsSelected()
+        view(other).assertIsNotSelected()
+    }
+
+    @Test
     fun theViewShownBringsAMovedMapBack() {
         openMap()
         val (shown, _) = views()

@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
@@ -190,7 +191,8 @@ internal fun ParcelMapScreen(
                         .fillMaxWidth()
                         .then(if (large) Modifier.heightIn(max = layout.barMaxHeight.dp) else Modifier)
                         .onSizeChanged { barHeight = it.height / density.density }
-                        .testTag(MAP_BAR),
+                        .testTag(MAP_BAR)
+                        .then(TakesTouches),
                     backdrop = backdrop,
                 ) {
                     // At the largest text sizes the summary scrolls, so the map stays in view.
@@ -450,6 +452,13 @@ internal data class MapCoverLayout(val closeTop: Double, val insets: EdgeInsets,
         }
     }
 }
+
+/**
+ * Takes the touches that land on it from what lies under it, as the iPhone's glass takes its hits: a drag or a pinch
+ * that starts on the summary leaves the map alone. It consumes none, so the views and, at the accessibility sizes, the
+ * summary's scroll have every one.
+ */
+private val TakesTouches = Modifier.pointerInput(Unit) { awaitPointerEventScope { while (true) awaitPointerEvent() } }
 
 /** The views: the whole journey, and close by. */
 private val VIEWS = listOf(

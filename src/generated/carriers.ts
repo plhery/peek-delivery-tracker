@@ -1504,6 +1504,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Russian Post tracking (Почта России): numbers and steps",
       "name": "Russian Post",
       "color": "#1928dc"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "huahan-logistics-tracking",
+      "title": "HuaHan Logistics tracking: HHW…YQ numbers and who delivers",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     }
   ],
   "de": [

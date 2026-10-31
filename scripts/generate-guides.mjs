@@ -16,14 +16,16 @@ const carriersOutputPath = path.join(root, 'src', 'generated', 'carriers.ts');
 
 /** What a search result shows before it cuts the text, and how much a page holds to be worth finding. */
 const LIMITS = { title: 60, description: [110, 165], words: 600, translated: [.6, 1.6], questions: [3, 5] };
+/** Chinese characters are about twice as wide as Latin letters: a search result shows about half as many. */
+const CHINESE_DESCRIPTION = [60, 85];
 
 /** What a guide and a carrier's page share: a title and a description a search result shows whole, and its sources last. */
-function searchable(text, where, kind) {
+function searchable(text, where, kind, language) {
   for (const field of ['title', 'description']) {
     if (/^(["']).*\1$/s.test(text[field])) throw new Error(`${where}: the ${field} is wrapped in quotes, which the page would show; write it bare`);
   }
   if (text.title.length > LIMITS.title) throw new Error(`${where}: the title has ${text.title.length} characters; a search result shows about ${LIMITS.title}`);
-  const [shortest, longest] = LIMITS.description;
+  const [shortest, longest] = language === 'zh' ? CHINESE_DESCRIPTION : LIMITS.description;
   if (text.description.length < shortest || text.description.length > longest) {
     throw new Error(`${where}: the description has ${text.description.length} characters; write ${shortest} to ${longest}`);
   }
@@ -60,7 +62,7 @@ export function readGuides(directory = contentRoot, carriers = readCarrierIndex(
       const file = path.join(directory, id, `${locale}.md`);
       const where = `content/guides/${id}/${locale}.md`;
       if (!existsSync(file)) throw new Error(`${where} is missing: a guide is written in every language`);
-      const guide = searchable(parseGuide(readFileSync(file, 'utf8'), where), where, 'guide');
+      const guide = searchable(parseGuide(readFileSync(file, 'utf8'), where), where, 'guide', locale);
       for (const linked of linkedGuides(guide.blocks)) {
         if (linked === id || !ids.includes(linked)) throw new Error(`${where}: "guide:${linked}" leads nowhere`);
       }
@@ -147,7 +149,7 @@ export function readCarriers(directory = carriersRoot, guides = JSON.parse(readF
   const carriers = index.map((carrier) => {
     const pages = Object.fromEntries(carrier.languages.map((locale) => {
       const where = `content/carriers/${carrier.id}/${locale}.md`;
-      const page = searchable(parseCarrierText(readFileSync(path.join(directory, carrier.id, `${locale}.md`), 'utf8'), where), where, 'carrier page');
+      const page = searchable(parseCarrierText(readFileSync(path.join(directory, carrier.id, `${locale}.md`), 'utf8'), where), where, 'carrier page', locale);
       const asked = questions(page.blocks);
       const [fewest, most] = LIMITS.questions;
       if (asked.length < fewest || asked.length > most) {

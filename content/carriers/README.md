@@ -34,7 +34,7 @@ same Markdown:
 ```md
 ---
 title: Quickpac tracking: find your parcel
-description: One or two sentences for the search result, 110 to 165 characters, saying what the reader gets.
+description: One or two sentences for the search result, 110 to 165 characters (60 to 85 in Chinese), saying what the reader gets.
 slug: quickpac-tracking
 published: 2026-10-09
 updated: 2026-10-09

@@ -302,15 +302,15 @@ test('a Greek page asks its questions with ";", as Greek does', () => {
   refusesCarriers(greek('?'), /el\.md: "Ερώτηση 1\?" stands among the questions, and ends with ";"/);
 });
 
-test('a Chinese page asks its questions with the full-width "？", as Chinese does', () => {
+test('a Chinese page asks its questions with the full-width "？", and its description takes 60 to 85 characters, as Chinese does', () => {
   const index = carrierIndex();
   const carrier = index.find(({ languages }) => !languages.includes('zh'));
-  const chinese = (mark) => ({ list, file }) => {
+  const chinese = (mark, description = '这个包裹现在到哪里了：快递单号长什么样，每条物流状态是什么意思，包裹几天不动、派送失败或被退回时，应该先找卖家还是先找快递公司。') => ({ list, file }) => {
     list(index.map((listed) => (listed === carrier ? { ...carrier, languages: [...carrier.languages, 'zh'] } : listed)));
     const questions = [1, 2, 3].map((number) => `### 问题 ${number}${mark}\n\n回答 ${number}。`);
     // Chinese is an app language: its page links only carriers with a Chinese page, and none has one here.
     const english = readFileSync(file(carrier.id, 'en'), 'utf8').replace(/\[([^\]]+)\]\(carrier:[^)]+\)/g, '$1');
-    writeFileSync(file(carrier.id, 'zh'), asking(english.replace(/^slug: .+$/m, 'slug: genzong'), ...questions));
+    writeFileSync(file(carrier.id, 'zh'), asking(english.replace(/^slug: .+$/m, 'slug: genzong').replace(/^description: .+$/m, `description: ${description}`), ...questions));
   };
   const directory = copyCarriers(chinese('？'));
   try {
@@ -319,4 +319,5 @@ test('a Chinese page asks its questions with the full-width "？", as Chinese do
     rmSync(directory, { recursive: true, force: true });
   }
   refusesCarriers(chinese('?'), /zh\.md: "问题 1\?" stands among the questions, and ends with "？"/);
+  refusesCarriers(chinese('？', '太短了。'), /zh\.md: the description has 4 characters; write 60 to 85/);
 });

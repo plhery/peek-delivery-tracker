@@ -1600,6 +1600,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "J&T Express tracking in Saudi Arabia, UAE and Kuwait",
       "name": "J&T Express Middle East",
       "color": "#e60000"
+    },
+    {
+      "id": "dpd-ro",
+      "catalog": "dpd-ro",
+      "slug": "dpd-romania-tracking",
+      "title": "DPD Romania tracking: statuses, Smart Control and contact",
+      "name": "DPD Romania",
+      "color": "#dc0032"
     }
   ],
   "de": [

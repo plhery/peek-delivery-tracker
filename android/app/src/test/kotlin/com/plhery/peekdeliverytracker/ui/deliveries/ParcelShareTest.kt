@@ -44,6 +44,7 @@ import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
@@ -524,6 +525,21 @@ class ParcelShareTest {
         compose.waitForIdle()
         assertEquals("n".repeat(280), editable(PARCEL_SHARE_NOTE))
         assertEquals("f".repeat(60), editable(PARCEL_SHARE_FROM))
+        // Whole characters while their scalars fit: a skin-toned thumb (two scalars) and an accented e (two) are kept
+        // whole at the limit and left out whole past it, never split.
+        val thumb = "\uD83D\uDC4D\uD83C\uDFFD"
+        val accented = "e\u0301"
+        node(PARCEL_SHARE_NOTE).performTextReplacement("n".repeat(278) + thumb)
+        node(PARCEL_SHARE_FROM).performTextReplacement("f".repeat(58) + accented)
+        compose.waitForIdle()
+        assertEquals("n".repeat(278) + thumb, editable(PARCEL_SHARE_NOTE))
+        assertEquals("f".repeat(58) + accented, editable(PARCEL_SHARE_FROM))
+        node(PARCEL_SHARE_NOTE).performTextReplacement("n".repeat(279) + thumb)
+        node(PARCEL_SHARE_FROM).performTextReplacement("f".repeat(59) + accented)
+        compose.waitForIdle()
+        assertEquals("n".repeat(279), editable(PARCEL_SHARE_NOTE))
+        assertEquals("f".repeat(59), editable(PARCEL_SHARE_FROM))
+        node(PARCEL_SHARE_NOTE).performTextReplacement("n".repeat(280))
         node(PARCEL_SHARE_FROM).performTextReplacement("")
         compose.waitForIdle()
         node(PARCEL_SHARE_ACTION).performClick()
@@ -735,12 +751,22 @@ class ParcelShareTest {
 
     @Test
     fun aClosedSheetStopsReadingItsLinkAndOpensAfreshNextTime() {
-        show { shareLoading = CompletableDeferred() }
+        show {
+            shareLinks[gift] = giftLink
+            shareLoading = CompletableDeferred()
+        }
         openShare()
         val first = deliveries.sharing!!.id
+        val closed = work()
         node(PARCEL_SHARE_CLOSE).performClick()
         settle()
         assertNull(source.shares.sheet(first))
+        // The service answers once the sheet has closed: its model doesn't take the link.
+        source.shareLoading?.complete(Unit)
+        settle()
+        assertNull(closed.model.linkFlow.value)
+        assertTrue(closed.model.loadingFlow.value)
+        source.shareLinks.remove(gift)
         source.shareLoading = null
         node(PAGE_SHARE).performClick()
         settle()
@@ -748,6 +774,24 @@ class ParcelShareTest {
         assertTrue(first != deliveries.sharing!!.id)
         assertFalse(spins(PARCEL_SHARE_LINK))
         assertTrue(exists(PARCEL_SHARE_PENDING))
+    }
+
+    @Test
+    fun aPageThatGoesAwayTakesItsSheetWithItForGood() {
+        show { shareLinks[gift] = giftLink }
+        openShare()
+        val first = deliveries.sharing!!.id
+        // Another parcel's page takes its place, as a link to it would.
+        compose.runOnUiThread { deliveries.navigator.open(DemoCards.parcel("Moon lamp").id) }
+        settle()
+        assertFalse(exists(PARCEL_SHARE))
+        assertNull(deliveries.sharing)
+        assertNull(source.shares.sheet(first))
+        compose.runOnUiThread { deliveries.navigator.open(gift) }
+        settle()
+        assertTrue(exists(PAGE_SHARE))
+        assertFalse(exists(PARCEL_SHARE))
+        assertNull(deliveries.sharing)
     }
 
     @Test
@@ -769,6 +813,21 @@ class ParcelShareTest {
         assertTrue(shows(PARCEL_SHARE_TITLE, "Birthday gift"))
         assertTrue(exists(PARCEL_SHARE_PREVIEW))
         assertTrue(shows(PARCEL_SHARE_ADDRESS, "example.com/p/TestLink2345"))
+    }
+
+    @Test
+    fun aStopTheServiceRefusesSaysWhyAndKeepsTheLink() {
+        show { shareLinks[gift] = giftLink }
+        openShare()
+        source.shareFailure = IOException("offline")
+        node(PARCEL_SHARE_STOP).performClick()
+        settle()
+        assertTrue(shows(PARCEL_SHARE_FAILURE, "Check your internet connection"))
+        assertFalse(exists(PARCEL_SHARE_STOPPED))
+        assertTrue(shows(PARCEL_SHARE_ADDRESS, "example.com/p/TestLink2345"))
+        assertTrue(exists(PARCEL_SHARE_STOP))
+        assertEquals(giftLink, source.shareLinks[gift])
+        assertEquals(emptyList<Any>(), source.shareStops)
     }
 
     // The keyboard and the navigation bar.
@@ -870,6 +929,34 @@ class ParcelShareTest {
         }
         assertTrue(count(Color(0xFF20251E)) > 0)
         assertEquals(0, count(Color(0xFFF3CF48)))
+    }
+
+    // The name row.
+
+    @Test
+    fun aLongNameStillShowsCutShortBesideItsTitleAtTheLargestSideBySideText() = longName(fontScale = 1.3f, lines = 1)
+
+    @Test
+    fun aLongNameStillShowsCutShortUnderItsTitleAtTheLargestText() = longName(fontScale = 2f, lines = 2)
+
+    private fun longName(fontScale: Float, lines: Int) {
+        val name = "Grandmother's hand-knitted winter blanket with its matching cushions"
+        show(fontScale = fontScale) {
+            parcels.value = parcels.value.map { if (it.id == gift) it.copy(label = name) else it }
+            shareLinks[gift] = giftLink
+        }
+        compose.runOnUiThread { deliveries.navigator.open(gift) }
+        settle()
+        node(PAGE_SHARE).performClick()
+        settle()
+        val value = compose.onNode(hasText(name) and hasAnyAncestor(hasTestTag(PARCEL_SHARE_NAME)), useUnmergedTree = true)
+        val bounds = value.getUnclippedBoundsInRoot()
+        assertTrue("${bounds.width}", bounds.width > 40.dp)
+        val layouts = mutableListOf<TextLayoutResult>()
+        value.fetchSemanticsNode().config[SemanticsActions.GetTextLayoutResult].action!!.invoke(layouts)
+        val layout = layouts.single()
+        assertEquals(lines, layout.lineCount)
+        assertTrue(layout.isLineEllipsized(lines - 1))
     }
 }
 

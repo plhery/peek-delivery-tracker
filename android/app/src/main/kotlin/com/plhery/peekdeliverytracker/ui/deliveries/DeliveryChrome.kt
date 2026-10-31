@@ -116,6 +116,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.MotionCurve
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
@@ -472,9 +473,10 @@ internal fun CountPill(count: Int, horizontalPadding: Dp) {
 /**
  * `searchControls` (A-S27, A-G09): the search field in one quiet capsule, the glass before it and, once it holds
  * something, the button that empties it; and the filters' button beside it. The field takes the focus as it shows
- * ([DeliveriesState.openSearch]); it doesn't capitalise or correct what is typed, and the keyboard's Search ends the
- * editing. Its trailing room narrows from 13 to 5 as the clear button comes, which fades and grows in from 0.7, on a
- * snappy 0.2 s (at once under Reduce Motion). The filters' button takes the focus from the field, then opens them.
+ * ([DeliveriesState.openSearch]); it doesn't capitalise, correct or suggest what is typed ([NoSuggestions]), and the
+ * keyboard's Search ends the editing. Its trailing room narrows from 13 to 5 as the clear button comes, which fades and
+ * grows in from 0.7, on a snappy 0.2 s (at once under Reduce Motion). The filters' button takes the focus from the
+ * field, then opens them.
  */
 @Composable
 internal fun SearchControls(state: DeliveriesState) {
@@ -526,37 +528,39 @@ internal fun SearchControls(state: DeliveriesState) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             PeekSymbol("magnifyingglass", Modifier.clearAndSetSemantics {}, font = font, tint = colors.secondaryLabel)
-            BasicTextField(
-                query,
-                onValueChange = { state.query = it },
-                modifier = Modifier
-                    .weight(1f)
-                    .testTag(SEARCH_FIELD)
-                    .focusRequester(focus)
-                    .onFocusChanged { if (it.isFocused || !refocus.value && !windowMadeAgain()) state.searchFocused = it.isFocused }
-                    .semantics { contentDescription = label },
-                textStyle = font.copy(color = colors.label),
-                singleLine = true,
-                cursorBrush = SolidColor(colors.ink),
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.None,
-                    autoCorrectEnabled = false,
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Search,
-                ),
-                keyboardActions = KeyboardActions(onSearch = { state.focusSearch(false) }),
-                decorationBox = { field ->
-                    Box(contentAlignment = Alignment.CenterStart) {
-                        if (query.isEmpty()) {
-                            Text(
-                                localized("view.searchPlaceholder"), Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font,
-                                maxLines = 1, overflow = TextOverflow.Ellipsis,
-                            )
+            NoSuggestions {
+                BasicTextField(
+                    query,
+                    onValueChange = { state.query = it },
+                    modifier = Modifier
+                        .weight(1f)
+                        .testTag(SEARCH_FIELD)
+                        .focusRequester(focus)
+                        .onFocusChanged { if (it.isFocused || !refocus.value && !windowMadeAgain()) state.searchFocused = it.isFocused }
+                        .semantics { contentDescription = label },
+                    textStyle = font.copy(color = colors.label),
+                    singleLine = true,
+                    cursorBrush = SolidColor(colors.ink),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrectEnabled = false,
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Search,
+                    ),
+                    keyboardActions = KeyboardActions(onSearch = { state.focusSearch(false) }),
+                    decorationBox = { field ->
+                        Box(contentAlignment = Alignment.CenterStart) {
+                            if (query.isEmpty()) {
+                                Text(
+                                    localized("view.searchPlaceholder"), Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font,
+                                    maxLines = 1, overflow = TextOverflow.Ellipsis,
+                                )
+                            }
+                            field()
                         }
-                        field()
-                    }
-                },
-            )
+                    },
+                )
+            }
             AnimatedVisibility(
                 visible = query.isNotEmpty(),
                 enter = if (reduceMotion) EnterTransition.None else fadeIn(motion) + scaleIn(motion, 0.7f),

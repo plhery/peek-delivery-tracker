@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityNodeInfo
+import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -714,6 +715,24 @@ class CarrierPickerTest {
         field().assertIsNotFocused()
         cancel().assertExists()
         assertEquals("colis", fieldText())
+    }
+
+    /**
+     * `.autocorrectionDisabled()`, `.textInputAutocapitalization(.never)`: the field asks the keyboard for no capitals,
+     * corrections or suggestions, with Search as its action, and asks the same of the keyboard it keeps through a
+     * window made again.
+     */
+    @Test
+    fun theFieldAsksTheKeyboardForNoCapitalsCorrectionsOrSuggestions() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        field().performClick()
+        assertTextWithoutSuggestions(compose.editorInfo(), EditorInfo.IME_ACTION_SEARCH)
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        field().assertIsFocused()
+        assertTextWithoutSuggestions(compose.editorInfo(), EditorInfo.IME_ACTION_SEARCH)
     }
 
     @Test

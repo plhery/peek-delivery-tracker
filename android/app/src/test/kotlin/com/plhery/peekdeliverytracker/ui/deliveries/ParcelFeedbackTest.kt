@@ -3,6 +3,8 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.text.InputType
+import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -436,6 +438,24 @@ class ParcelFeedbackTest {
         node(FEEDBACK_WHERE).assertIsFocused()
         node(FEEDBACK_WHO).assertContentDescriptionEquals("Carrier or shop")
         node(FEEDBACK_WHERE).assertContentDescriptionEquals("Its tracking page, if you have the link")
+    }
+
+    /**
+     * `.autocorrectionDisabled()` on both, `.textInputAutocapitalization(.never)` on the page's: who carries it on the
+     * text keys with its sentences' capitals, whose action is Next, and its page on the address keys, whose action is
+     * Send, neither with corrections or suggestions.
+     */
+    @Test
+    fun theCarrierSheetsFieldsAskTheKeyboardForNoCorrectionsOrSuggestions() {
+        show()
+        openQuestion(lamp)
+        tap(FEEDBACK_YES)
+        settle()
+        node(FEEDBACK_WHO).performClick()
+        assertTextWithoutSuggestions(compose.editorInfo(), EditorInfo.IME_ACTION_NEXT, capitals = InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+        node(FEEDBACK_WHO).performImeAction()
+        node(FEEDBACK_WHERE).assertIsFocused()
+        assertTextWithoutSuggestions(compose.editorInfo(), EditorInfo.IME_ACTION_SEND, variation = InputType.TYPE_TEXT_VARIATION_URI)
     }
 
     // The words sheet.

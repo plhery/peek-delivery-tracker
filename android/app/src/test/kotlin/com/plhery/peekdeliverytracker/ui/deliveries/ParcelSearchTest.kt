@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.view.KeyEvent
 import android.view.View
 import android.view.accessibility.AccessibilityManager
+import android.view.inputmethod.EditorInfo
 import androidx.activity.BackEventCompat
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
@@ -342,6 +343,24 @@ class ParcelSearchTest {
         compose.waitForIdle()
         assertTrue(exists(SEARCH_ROW))
         assertFalse(focused(SEARCH_FIELD))
+    }
+
+    /**
+     * `.textInputAutocapitalization(.never)`, `.autocorrectionDisabled()`: the field asks the keyboard for no capitals,
+     * corrections or suggestions, with Search as its action, and asks the same of the keyboard it keeps through a
+     * window made again.
+     */
+    @Test
+    fun theFieldAsksTheKeyboardForNoCapitalsCorrectionsOrSuggestions() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        openSearch()
+        assertTextWithoutSuggestions(compose.editorInfo(), EditorInfo.IME_ACTION_SEARCH)
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertTrue(focused(SEARCH_FIELD))
+        assertTextWithoutSuggestions(compose.editorInfo(), EditorInfo.IME_ACTION_SEARCH)
     }
 
     @Test

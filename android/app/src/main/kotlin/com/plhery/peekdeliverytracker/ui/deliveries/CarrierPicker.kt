@@ -108,6 +108,7 @@ import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.keptFocus
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
@@ -445,9 +446,10 @@ private fun PickerBar(title: String, leading: (@Composable () -> Unit)?) {
 /**
  * The search field under the bar (`.searchable`), as iOS 26 draws it: a 44 capsule of the bar's glass, as the stack's ‹
  * is, the magnifying glass in the label's colour, the prompt in the secondary grey, and once it holds something the
- * button that empties it, in the label's colour. It takes no capitalisation or correction (`.autocorrectionDisabled()`,
- * `.textInputAutocapitalization(.never)`), and the keyboard's Search puts the keyboard away, the search left on.
- * TalkBack reads it by its prompt. It keeps the focus and the keyboard through the window made again.
+ * button that empties it, in the label's colour. It takes no capitalisation, correction or suggestions
+ * (`.autocorrectionDisabled()`, `.textInputAutocapitalization(.never)`, [NoSuggestions]), and the keyboard's Search
+ * puts the keyboard away, the search left on. TalkBack reads it by its prompt. It keeps the focus and the keyboard
+ * through the window made again.
  */
 @Composable
 private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String, clear: String, onFocus: () -> Unit, modifier: Modifier) {
@@ -463,36 +465,38 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
             verticalAlignment = Alignment.CenterVertically,
         ) {
             PeekSymbol("magnifyingglass", Modifier.clearAndSetSemantics {}, font = font, tint = colors.label)
-            BasicTextField(
-                query,
-                onValueChange = onQuery,
-                modifier = Modifier
-                    .weight(1f)
-                    .testTag(CARRIER_PICKER_SEARCH)
-                    .keptFocus()
-                    .onFocusChanged { if (it.isFocused) onFocus() }
-                    .semantics { contentDescription = prompt },
-                textStyle = font.copy(color = colors.label),
-                singleLine = true,
-                cursorBrush = SolidColor(colors.accent),
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.None,
-                    autoCorrectEnabled = false,
-                    imeAction = ImeAction.Search,
-                ),
-                keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
-                decorationBox = { field ->
-                    Box(contentAlignment = Alignment.CenterStart) {
-                        if (query.isEmpty()) {
-                            Text(
-                                prompt, Modifier.clearAndSetSemantics {}, color = colors.secondaryLabel, style = font,
-                                maxLines = 1, overflow = TextOverflow.Ellipsis,
-                            )
+            NoSuggestions {
+                BasicTextField(
+                    query,
+                    onValueChange = onQuery,
+                    modifier = Modifier
+                        .weight(1f)
+                        .testTag(CARRIER_PICKER_SEARCH)
+                        .keptFocus()
+                        .onFocusChanged { if (it.isFocused) onFocus() }
+                        .semantics { contentDescription = prompt },
+                    textStyle = font.copy(color = colors.label),
+                    singleLine = true,
+                    cursorBrush = SolidColor(colors.accent),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrectEnabled = false,
+                        imeAction = ImeAction.Search,
+                    ),
+                    keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
+                    decorationBox = { field ->
+                        Box(contentAlignment = Alignment.CenterStart) {
+                            if (query.isEmpty()) {
+                                Text(
+                                    prompt, Modifier.clearAndSetSemantics {}, color = colors.secondaryLabel, style = font,
+                                    maxLines = 1, overflow = TextOverflow.Ellipsis,
+                                )
+                            }
+                            field()
                         }
-                        field()
-                    }
-                },
-            )
+                    },
+                )
+            }
             if (query.isNotEmpty()) {
                 Box(
                     Modifier

@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.graphics.Color
+import android.text.InputType
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
@@ -239,6 +240,18 @@ class RenameTest {
         compose.onNodeWithTag(RENAME_ALERT).assertDoesNotExist()
         assertEquals(emptyList<Any>(), source.renames)
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+    }
+
+    /** The name, whose field the iPhone leaves to the keyboard's corrections, keeps the keyboard's suggestions. */
+    @Test
+    fun theNameKeepsTheKeyboardsSuggestions() {
+        show()
+        open("Birthday gift")
+        renameFromPageMenu()
+        field().performClick()
+        val keys = compose.editorInfo().inputType
+        assertEquals(InputType.TYPE_CLASS_TEXT, keys and InputType.TYPE_MASK_CLASS)
+        assertEquals(0, keys and InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS)
     }
 
     @Test

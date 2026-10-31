@@ -75,7 +75,7 @@ Lingdong lists no email and no office outside China. For anything about your ord
 
 [Peek](/) names Lingdong International at once for an SZLD number, a shape no other carrier in its catalog uses. A link to Lingdong's tracker with `documentCode=` and the number in it can be pasted too.
 
-Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country and service name when Lingdong's record gives them. Every wording shows as Lingdong writes it, Chinese included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
+Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country when Lingdong's record gives it. Every wording shows as Lingdong writes it, Chinese included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
 
 Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. If the seller gives you the local carrier's number, add it as a parcel of its own.
 

@@ -88,7 +88,7 @@ As read on 15 October 2026, Aramex's Contact page lists no national phone line o
 
 [Peek](/) reads Aramex Australia's own tracking. The 12-character shape is shared with Aramex New Zealand and Colis Privé, so it asks them at once, Aramex Australia first for a reader in Australia, and names the one that has the parcel; if both Aramex networks know it, you choose with "Change". A label starting with a letter then a digit isn't offered as Aramex: paste its aramex.com.au tracking link or pick Aramex with "Change". Old fastway.com.au links work too. Peek doesn't offer Aramex for the sender's long SSCC barcode number.
 
-It can show the status, the expected day and the service, `Priority Delivery` or `Economy Delivery`. `Delivered` and `In transit` appear in Peek's own words; the others as Aramex writes them. It drops the collection point and its address, opening hours, pickup code, signatory, photo or signature proof, delivery instructions and references.
+It can show the status and the expected day. `Delivered` and `In transit` appear in Peek's own words; the others as Aramex writes them. It drops the collection point and its address, opening hours, pickup code, signatory, photo or signature proof, delivery instructions and references.
 
 Aramex's scan times carry no time zone: Peek reads each on the clock of the scan's place and lists Aramex's own history, shown on a map. It can notify you when the status changes.
 

@@ -74,7 +74,7 @@ La pagina di assistenza di GOFO Italy si trova sul suo sito italiano, gofo.com, 
 
 [Peek](/) riconosce da solo i codici `GFIT` e `CIIT`. Puoi incollare anche un link della pagina di tracciamento italiana di GOFO (su gofo.com o gofoexpress.it, con `id=` e il codice).
 
-Peek controlla il tracciamento italiano di GOFO ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, il nome del servizio e l'ora di consegna, ogni scansione su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Finché GOFO non elenca una prima scansione, Peek mostra «In attesa del corriere» e continua a chiedere invece di dare il codice per sconosciuto. Peek non mostra una data di consegna prevista né il peso, e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
+Peek controlla il tracciamento italiano di GOFO ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore. Mostra lo stato, la cronologia con il luogo che GOFO indica per ogni scansione, l'ora di consegna e ogni scansione su una mappa, e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Finché GOFO non elenca una prima scansione, Peek mostra «In attesa del corriere» e continua a chiedere invece di dare il codice per sconosciuto. Peek non mostra una data di consegna prevista né il peso, e lascia fuori le foto di consegna e gli avvisi di GOFO. Non può contattare GOFO o il negozio al posto tuo.
 
 ## Domande sul tracking GOFO
 

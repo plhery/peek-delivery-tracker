@@ -89,7 +89,7 @@ XDP's website gives no phone number. Its app mentions calls charged at a premium
 
 Peek shows an optional "Delivery or collection postcode" field for XDP. Without a postcode, XDP isn't asked at all and the parcel is followed only through [universal tracking services](guide:universal-tracker). With it, Peek reads XDP's tracking page; the postcode is sent to XDP and, when needed, to tracking services. A wrong postcode reads as not found, just like on XDP's site: fix it with "Change".
 
-XDP's scan times carry no time zone: Peek reads them on UK time and lists XDP's own history. Statuses keep XDP's wording, except `Delivered`, which Peek writes in its own words; the weight and service can be shown, and Peek can notify you when the status changes. There's no expected delivery day, no places for the scans and no window, except inside a wording like `Scheduled for Delivery - Route 11 - ETA: 10:51am to 12:51pm`.
+XDP's scan times carry no time zone: Peek reads them on UK time and lists XDP's own history. Statuses keep XDP's wording, except `Delivered`, which Peek writes in its own words; the weight can be shown, and Peek can notify you when the status changes. There's no expected delivery day, no places for the scans and no window, except inside a wording like `Scheduled for Delivery - Route 11 - ETA: 10:51am to 12:51pm`.
 
 ## Questions about XDP tracking
 

@@ -57,7 +57,7 @@ Peek has no help link for GOFO Canada. For a late, missing or damaged order, sta
 
 [Peek](/) recognises a GOFO Canada number by its shape: `GFCA` and 14 digits, in capitals or not, with or without spaces. A GOFO Canada tracking link from gofo.com with `searchID=` and the number in it works too. Peek follows only the `GFCA` waybill, not the shop's reference.
 
-Peek reads GOFO Canada's own tracking: the status, each scan with its time and its town and province (placed on a map), the delivery time, the service name and the destination country. Scans appear as GOFO writes them, without the support line. Peek shows no expected delivery date and leaves out the delivery photos, coordinates and weight.
+Peek reads GOFO Canada's own tracking: the status, each scan with its time and its town and province (placed on a map), the delivery time and the destination country. Scans appear as GOFO writes them, without the support line. Peek shows no expected delivery date and leaves out the delivery photos, coordinates and weight.
 
 Peek checks every 10 minutes from 8 am to 10 pm Swiss time (about 2 am to 4 pm Eastern, 11 pm to 1 pm Pacific), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or delivery day only. It can't book a redelivery or contact GOFO or the shop for you.
 

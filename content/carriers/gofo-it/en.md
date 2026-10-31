@@ -74,7 +74,7 @@ GOFO Italy's help page is on its Italian site, gofo.com, and Peek links to it as
 
 [Peek](/) recognises `GFIT` and `CIIT` numbers by themselves. You can also paste a link from GOFO's Italian tracking page (on gofo.com or gofoexpress.it, with `id=` and the number).
 
-Peek reads GOFO's Italian tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It shows the status, the history with the place GOFO names for each scan, the service name and the delivery time, each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Until GOFO lists a first scan, Peek shows "Waiting for the carrier" and keeps asking rather than calling the number unknown. Peek shows no expected delivery date and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
+Peek reads GOFO's Italian tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It shows the status, the history with the place GOFO names for each scan, the delivery time and each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Until GOFO lists a first scan, Peek shows "Waiting for the carrier" and keeps asking rather than calling the number unknown. Peek shows no expected delivery date and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

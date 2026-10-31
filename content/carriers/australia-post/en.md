@@ -93,7 +93,7 @@ StarTrack, Australia Post's courier and freight arm, has its own numbers (13 23 
 
 If Australia Post refuses Peek's plain request, a browser on Peek's server opens auspost.com.au instead. Tracking services hold little of Australia Post's history, so if the browser is refused too, the history can be thin.
 
-Peek shows the status, each scan with its place on a map, the service, the time of delivery, the destination country and the name of the Post Office or Parcel Locker holding the parcel. Statuses stay in Australia Post's English; delivered ones read "Delivered". Peek drops the recipient, the address and delivery photos, and shows no expected delivery date. It can't redirect a parcel or change a locker.
+Peek shows the status, each scan with its place on a map, the time of delivery, the destination country and the name of the Post Office or Parcel Locker holding the parcel. Statuses stay in Australia Post's English; delivered ones read "Delivered". Peek drops the recipient, the address and delivery photos, and shows no expected delivery date. It can't redirect a parcel or change a locker.
 
 It checks every 10 minutes from 8am to 10pm Swiss time, about 6pm to 8am in Sydney (4pm to 6am in winter; Perth's clocks are 2 to 3 hours behind Sydney's), every 2 minutes in those hours once out for delivery (every 5 while it needs the browser), and every hour or two the rest of the time, so most of a delivery day is checked every hour or two. It can notify you at every scan, at important steps or on delivery day only. A parcel posted abroad with a postal number bound for Australia can be followed on Australia Post once Australia Post shows progress.
 

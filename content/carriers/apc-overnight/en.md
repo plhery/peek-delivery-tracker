@@ -84,7 +84,7 @@ APC has no national phone line, chat or general email for recipients; its own pa
 
 Paste the 22-digit number or an apcchoice.apc-overnight.com link with `id=` into [Peek](/); no postcode needed. Since the number's shape is shared, Peek asks APC Overnight and Austrian Post at once and shows "APC Overnight has this parcel." when APC knows it. A 22-digit number without a real date isn't offered to APC and isn't APC's: check it with the shop. The 7-digit consignment number on its own can't be tracked here, and apc.co.uk links aren't read.
 
-APC's times carry no time zone: Peek reads them on UK time and lists APC's own history. It can also show the weight and the service, and can notify you when the status changes. `Delivered` and `Out for delivery` appear in Peek's own words; other statuses keep APC's wording. There's no expected delivery day, no 2-hour slot and no pickup point, and rearranging a delivery stays in APC Choice.
+APC's times carry no time zone: Peek reads them on UK time and lists APC's own history. It can also show the weight and notify you when the status changes. `Delivered` and `Out for delivery` appear in Peek's own words; other statuses keep APC's wording. There's no expected delivery day, no 2-hour slot and no pickup point, and rearranging a delivery stays in APC Choice.
 
 ## Questions about APC tracking
 

@@ -86,7 +86,7 @@ Have the barcode or W number ready.
 
 [Peek](/) names Canpar as soon as you paste a full 22-character number, or a canpar.com link containing it. For a shorter barcode, a delivery notice (W) number or a pickup or return tag, pick Canpar with "Change": Peek tracks those too, and asks for the destination postal code when Canpar needs it to find a shorter barcode. It doesn't track a sender's reference: look that up on Canpar's own tracker.
 
-It shows Canpar's status in Canpar's English words, the expected delivery day and the service name. A SMARTSpot parcel shows as ready for pickup, without the shop's name or address. It drops the proof of delivery, recipient, addresses and references. A handoff to a local partner shows as in transit; the partner isn't followed.
+It shows Canpar's status in Canpar's English words and the expected delivery day. A SMARTSpot parcel shows as ready for pickup, without the shop's name or address. It drops the proof of delivery, recipient, addresses and references. A handoff to a local partner shows as in transit; the partner isn't followed.
 
 Canpar's scan times carry no time zone: Peek reads each on the clock of the scan's place and lists Canpar's own history, shown on a map. Peek can notify you when the status changes.
 

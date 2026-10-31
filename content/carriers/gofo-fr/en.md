@@ -63,7 +63,7 @@ GOFO France's help page is on its French site, gofo.com, and Peek links to it as
 
 [Peek](/) recognises `GFFR` and `CIFR` numbers by themselves. You can also paste a link from GOFO's French tracking page (on gofo.com or gofoexpress.fr, with `id=` and the number). A `PK` reference works too: Peek asks GOFO France about it and names the carrier once GOFO knows the number.
 
-Peek reads GOFO's French tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It shows the status, the history with the place GOFO names for each scan, the service name and the delivery time, each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Until GOFO lists a first scan, Peek shows "Waiting for the carrier" and keeps asking rather than calling the number unknown. Peek shows no expected delivery date and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
+Peek reads GOFO's French tracking every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It shows the status, the history with the place GOFO names for each scan, the delivery time and each scan on a map, and it can notify you of every scan, important steps only or delivery day only. Until GOFO lists a first scan, Peek shows "Waiting for the carrier" and keeps asking rather than calling the number unknown. Peek shows no expected delivery date and no weight, and it leaves out delivery photos and GOFO's notices. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 

@@ -107,7 +107,7 @@ Los centros de clasificación y de reparto de Correios no atienden por teléfono
 
 [Peek](/) reconoce al momento como Correios un código de dos letras, nueve cifras y `BR` cuando la cifra de control cuadra. Si no cuadra, Peek no propone ningún transportista y, si eliges Correios Brazil con «Cambiar», te avisa de que «no emite números como este»: revisa el código. También sirven los enlaces del rastreador de Correios con `objetos=`.
 
-Peek trae el historial de Correios y muestra el estado, cada lectura con su ciudad y su estado brasileño, el nombre del servicio y, mientras el paquete va de camino sin retraso, la fecha prevista de Correios. Las horas de las lecturas se leen en la hora local y se muestran en la zona horaria de tu dispositivo. Los estados salen en portugués.
+Peek trae el historial de Correios y muestra el estado, cada lectura con su ciudad y su estado brasileño y, mientras el paquete va de camino sin retraso, la fecha prevista de Correios. Las horas de las lecturas se leen en la hora local y se muestran en la zona horaria de tu dispositivo. Los estados salen en portugués.
 
 Correios no le dice a Peek adónde va el paquete. Si lo añades desde España (por la región de tu iPhone o, en la web, por el país de tu conexión), Peek pregunta también a Correos con el mismo código y pasa a seguirlo allí en cuanto Correos muestra lecturas nuevas, sin perder el historial de Correios; la tarjeta dice entonces «Entrega con Correos». Un paquete que mandas tú con un código acabado en `ES` se sigue en Correos, que tampoco indica el destino, así que Peek solo pregunta a Correios si quien lo sigue está en Brasil.
 

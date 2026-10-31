@@ -100,7 +100,7 @@ Sorting and delivery units take no calls.
 
 [Peek](/) names Correios at once for two letters, nine digits and `BR` when the check digit is right. With a wrong one, Peek names no carrier, and if you pick Correios with "Change" it says Correios "doesn’t issue numbers like this one": check the code. Correios tracking links with `objetos=` work too.
 
-Peek fetches Correios' history and shows the status, each scan with its town and state, the service name, and Correios' expected delivery date while the parcel is in transit and not late. Scan times are read on the local clock and shown in your device's time zone. Statuses stay in Portuguese.
+Peek fetches Correios' history and shows the status, each scan with its town and state, and Correios' expected delivery date while the parcel is in transit and not late. Scan times are read on the local clock and shown in your device's time zone. Statuses stay in Portuguese.
 
 Correios doesn't tell Peek where a parcel is going, so outside Brazil Peek also asks your national post (USPS, Royal Mail, Canada Post, An Post or Australia Post, for example) with the same code and switches once it shows newer scans, keeping Correios' history. A parcel coming into Brazil under another post's code is followed on that post; Peek also asks Correios once that post names Brazil as the destination (or, if it names none, when you're in Brazil).
 

@@ -84,7 +84,7 @@ As listed on PostNord's pages on 12 October 2026:
 
 [Peek](/) names a postal number ending `SE` or `DK`, or 11 digits plus `SE`, as PostNord's straight away. For a 20-digit number starting `00` with Sweden's or Denmark's prefix, Peek asks PostNord first, together with [Swiss Post Cargo](carrier:swiss-post-cargo), [USPS](carrier:usps) and [NZ Post](carrier:nz-post), and for Sweden's prefix [Matkahuolto](carrier:matkahuolto) too, and says "PostNord has this parcel." when only PostNord knows it. Other 10- to 20-digit numbers, such as a DPD number PostNord delivers, work after "Change". Links from tracking.postnord.com work with any number.
 
-Peek shows PostNord's English statuses as written, with each scan's place, the sender, service name, weight, dimensions, destination country and, while the parcel waits, the service point's address. It leaves out SMS and email notices and flags `The shipment item has been stored.` as a problem. It checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, draws each scan on a map and can notify you of changes. It drops your name and shows no expected delivery, even when PostNord's own tracking gives one.
+Peek shows PostNord's English statuses as written, with each scan's place, the sender, weight, dimensions, destination country and, while the parcel waits, the service point's address. It leaves out SMS and email notices and flags `The shipment item has been stored.` as a problem. It checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, draws each scan on a map and can notify you of changes. It drops your name and shows no expected delivery, even when PostNord's own tracking gives one.
 
 ## Questions about PostNord tracking
 
@@ -105,7 +105,7 @@ PostNord Denmark delivers parcels on weekdays between 07:00 and 21:00, without a
 Yes, it's Sweden's and Denmark's postal group. Messages asking for a small fee in its name are often fake.
 
 :::sources
-- [PostNord: Track and trace](https://tracking.postnord.com/en/) – status wordings, headlines, tracking languages, service names
+- [PostNord: Track and trace](https://tracking.postnord.com/en/) – status wordings, headlines, tracking languages
 - [PostNord: Contact PostNord](https://group.postnord.com/contact/) – customer service per country
 - [PostNord: Phishing tips](https://group.postnord.com/cybersecurity/phishing-tips/) – fake messages, payment links
 - [PostNord: The PostNord brand](https://group.postnord.com/aboutus/strategy/the-brand/) – Post Danmark and Posten AB merger

@@ -1121,6 +1121,29 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(pairs(sharedScans([spanish, portuguese], [own], new Map(), 'ctt-express').skipped)).toEqual([['unknown:sent', 'ctt-express:sent']]);
   });
 
+  it('meets a scan or row dated by its day alone at its own instant only, not in its minute or second', () => {
+    // FedEx dates its pickup by the day, a second after 17TRACK's label of that minute; ParcelsApp dates its copy alike.
+    const pickup = { ...scan('fedex:pickup', '2026-10-30T19:12:01Z', 'Picked up', 'accepted'), raw_data: { time: '2026-10-30' } };
+    const label = { ...row('unknown:label', '2026-10-30T19:12:00+00:00', 'Shipment information sent to FedEx', 'registered'),
+      raw_data: { universal_provider: '17TRACK' } };
+    const copy = { ...row('unknown:pickup', '2026-10-30T19:12:01+00:00', 'Picked up', 'accepted'),
+      raw_data: { universal_provider: 'ParcelsApp', time: '2026-10-30' } };
+    expect(sharedScans([pickup], [label]).reused.size).toBe(0);
+    expect(sharedScans([pickup], [{ ...label, description: 'Picked up', stage: 'accepted' }]).reused.size).toBe(0);
+    expect(pairs(sharedScans([pickup], [label, copy]).reused)).toEqual([['fedex:pickup', 'unknown:pickup']]);
+    // Nor does a provider's scan so dated meet a carrier's row in its minute, or one so dated a copy in its minute.
+    const late = { ...scan('unknown:transit', '2026-10-25T01:00:01Z', 'In transit to next facility', 'in_transit'),
+      raw_data: { universal_provider: 'ParcelsApp', time: '2026-10-24' } };
+    const facility = { ...row('usps:arrived', '2026-10-25T01:00:00+00:00', 'Arrived at USPS regional facility', 'in_transit'), location: 'Example, CO' };
+    expect(sharedScans([late], [facility]).skipped.size).toBe(0);
+    expect(sharedScans([scan('unknown:label', '2026-10-30T19:12:00Z', 'Shipment information sent to FedEx', 'registered')],
+      [{ ...row('fedex:pickup', '2026-10-30T19:12:01+00:00', 'Picked up', 'accepted'), raw_data: { time: '2026-10-30' } }]).skipped.size).toBe(0);
+    // Nor in the second: a day dated a second after a scan with milliseconds keeps them.
+    const sorted = { ...row('ctt-express:sorted', '2026-01-21T08:20:58.063+00:00', 'Clasificado', 'in_transit'), raw_data: { time: '2026-01-21' } };
+    expect(sharedScans([scan('unknown:sorted', '2026-01-21T08:20:58Z', 'Sorted', 'in_transit')], [sorted]).skipped.size).toBe(0);
+    expect(sharedScans([scan('unknown:sorted', '2026-01-21T08:20:58Z', 'Sorted', 'in_transit')], [{ ...sorted, raw_data: {} }]).skipped.size).toBe(1);
+  });
+
   describe('several rows in other wording in the scan\'s minute or second', () => {
     // ParcelsApp dates two Chronopost scans to the minute and adds the reason to one; Chronopost dates both to the second.
     const hub = { location: 'Example Hub' };

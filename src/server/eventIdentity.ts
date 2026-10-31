@@ -861,7 +861,10 @@ export function rewordedScans(
  * whole second of CTT Express's milliseconds). The `relaying` carrier, the one
  * a parcel was handed over from, retells the next one's scans to the minute,
  * as India Post does La Poste's, or in the same second, so neither its scan to
- * the minute nor one in the copy's second meets a copy to the second. Of
+ * the minute nor one in the copy's second meets a copy to the second. A scan
+ * or row dated by its day alone has no clock, so it meets no other there: a
+ * copy of it matches at its own instant (FedEx's pickup of the day dated a
+ * second after 17TRACK's label of that minute is no copy of the label). Of
  * several rows in other wording there, the one whose wording opens with every
  * word of the scan's, or the scan's with every word of its, is the match
  * (ParcelsApp dates two Chronopost scans to one minute, and adds the reason
@@ -907,9 +910,10 @@ export function rewordedScans(
  * no provider, is left out, so an absorbed copy does not come back with the
  * provider's next answer. Of several such rows it repeats the one whose wording
  * opens alike, when one alone does, else the first. A universal scan to the
- * whole second repeats the one row a carrier holds in that second, unless the
- * row is an earlier carrier's relay (Ship24 copies a CTT Express scan twice,
- * in CTT Express's words and in CTT Portugal's, without the milliseconds).
+ * whole second repeats the one row a carrier holds in that second, neither of
+ * them dated by its day alone, unless the row is an earlier carrier's relay
+ * (Ship24 copies a CTT Express scan twice, in CTT Express's words and in CTT
+ * Portugal's, without the milliseconds).
  *
  * A provider's scan that matched nothing repeats another provider's row at the
  * shift most of its scans show from that provider's rows, in whole quarter
@@ -999,9 +1003,9 @@ export function sharedScans(
   const restagedOf = (event: JsonObject): JsonObject[] => {
     const universal = sourceOf(identity(event)) === UNIVERSAL;
     const at = instantOf(event);
-    if (stageOf(event) === '' || occupied.has(at)) return [];
+    if (stageOf(event) === '' || occupied.has(at) || dayAlone(event)) return [];
     return rows.filter((row) => {
-      if ((sourceOf(identity(row)) === UNIVERSAL) === universal || !sameTruncated(at, instantOf(row))
+      if ((sourceOf(identity(row)) === UNIVERSAL) === universal || dayAlone(row) || !sameTruncated(at, instantOf(row))
         || shown.has(instantOf(row)) || placesApart(event, row)) return false;
       const [copy, own] = universal ? [event, row] : [row, event];
       const second = (at: number) => Math.floor(at / 1_000);
@@ -1037,7 +1041,8 @@ export function sharedScans(
     const eligible = universal ? rows : rows.filter((row) => sourceOf(identity(row)) === UNIVERSAL);
     const exact = eligible.filter((row) => instantOf(row) === at);
     const worded = exact.filter((row) => sameWording(wordingOf(row), wording));
-    const truncated = occupied.has(at) ? [] : eligible.filter((row) => sameTruncated(at, instantOf(row)) && !shown.has(instantOf(row)));
+    const truncated = occupied.has(at) || dayAlone(event) ? []
+      : eligible.filter((row) => !dayAlone(row) && sameTruncated(at, instantOf(row)) && !shown.has(instantOf(row)));
     const minuted = truncated.filter((row) => sameWording(wordingOf(row), wording));
     const restaged = restagedOf(event);
     const apart = occupied.has(at) ? [] : eligible.filter((row) => !shown.has(instantOf(row)) && !placesApart(event, row));
@@ -1108,7 +1113,8 @@ export function sharedScans(
   // match above gives to neither. An earlier carrier's relay in the second is no such row.
   const heldInSecond = (event: JsonObject) => {
     const at = instantOf(event);
-    const rows = at % 1_000 === 0 ? held.filter((row) => Math.floor(instantOf(row) / 1_000) * 1_000 === at) : [];
+    const rows = at % 1_000 === 0 && !dayAlone(event)
+      ? held.filter((row) => !dayAlone(row) && Math.floor(instantOf(row) / 1_000) * 1_000 === at) : [];
     const row = rows.length === 1 ? rows[0]! : undefined;
     return row && stageOf(event) !== '' && sourceOf(identity(row)) !== relaying && !placesApart(event, row) ? row : undefined;
   };

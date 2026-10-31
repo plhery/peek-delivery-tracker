@@ -363,7 +363,12 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'syd'
   | 'we-world-express'
   | 'vnlin'
-  | 'xingyunyi';
+  | 'xingyunyi'
+  | 'aquiline'
+  | 'wiio'
+  | 'ukp-worldwide'
+  | 'btd'
+  | 'xyl';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

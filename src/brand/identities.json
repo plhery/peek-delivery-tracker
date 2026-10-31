@@ -207,6 +207,9 @@
   "apx-logistics": {
     "decal": "apx-logistics"
   },
+  "aquiline": {
+    "decal": "aquiline"
+  },
   "aramex": {
     "decal": "aramex"
   },
@@ -366,6 +369,9 @@
   },
   "brt": {
     "decal": "dpd"
+  },
+  "btd": {
+    "decal": "btd"
   },
   "bts-uz": {
     "decal": "bts-uz"
@@ -3078,6 +3084,9 @@
   "ues-uy": {
     "decal": "ues-uy"
   },
+  "ukp-worldwide": {
+    "decal": "ukp-worldwide"
+  },
   "ukrposhta": {
     "palette": {
       "accent": "#0e2f4b",
@@ -3230,6 +3239,9 @@
   "whiz-delivery": {
     "decal": "whiz-delivery"
   },
+  "wiio": {
+    "decal": "wiio"
+  },
   "winion-logis": {
     "decal": "winion-logis"
   },
@@ -3286,6 +3298,12 @@
   },
   "xpressbees": {
     "decal": "xpressbees"
+  },
+  "xyl": {
+    "decal": "xyl",
+    "palette": {
+      "accent": "#000000"
+    }
   },
   "yalidine": {
     "decal": "yalidine"

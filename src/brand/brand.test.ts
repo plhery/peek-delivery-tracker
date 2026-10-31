@@ -439,6 +439,11 @@ describe('carrier brand', () => {
       'we-world-express',
       'vnlin',
       'xingyunyi',
+      'aquiline',
+      'wiio',
+      'ukp-worldwide',
+      'btd',
+      'xyl',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

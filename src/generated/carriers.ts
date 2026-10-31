@@ -1480,6 +1480,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "ZTO Express tracking: 中通快递 numbers, statuses, contact",
       "name": "ZTO Express",
       "color": "#0279ff"
+    },
+    {
+      "id": "cne",
+      "catalog": "cne",
+      "slug": "cne-express-tracking",
+      "title": "CNE Express tracking: 3A5V numbers, statuses and contact",
+      "name": "CNE Express",
+      "color": "#e83828"
     }
   ],
   "de": [

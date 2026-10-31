@@ -818,6 +818,11 @@ class LivePassTest {
         compose.mainClock.autoAdvance = false
         node(PAGE_GLOBE).performClick()
         compose.mainClock.advanceTimeBy(1_000)
+        // The map's close-ups, its pack and then its tiles, are drawn off the main thread: let them come in first.
+        repeat(4) {
+            compose.waitForIdle()
+            compose.mainClock.advanceTimeByFrame()
+        }
         val map = node(MAP_COVER_MAP)
         val first = compose.drawn(map)
         compose.mainClock.advanceTimeBy(700)

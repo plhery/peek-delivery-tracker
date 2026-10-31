@@ -10,6 +10,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.testTag
@@ -29,6 +30,7 @@ import com.plhery.peekdeliverytracker.core.DetailTile
 import com.plhery.peekdeliverytracker.core.EdgeInsets
 import com.plhery.peekdeliverytracker.core.GeoPoint
 import com.plhery.peekdeliverytracker.core.GlobeCamera
+import com.plhery.peekdeliverytracker.core.GlobeProjection
 import com.plhery.peekdeliverytracker.core.MapDetail
 import com.plhery.peekdeliverytracker.core.MapLabels
 import com.plhery.peekdeliverytracker.core.MapOverlay
@@ -36,11 +38,16 @@ import com.plhery.peekdeliverytracker.core.MapPalette
 import com.plhery.peekdeliverytracker.core.ParcelRoute
 import com.plhery.peekdeliverytracker.core.Point
 import com.plhery.peekdeliverytracker.core.Size
-import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.WorldDetailPack
+import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.EventPlace
+import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
+import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.core.api.TrackingEvent
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
-import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import com.plhery.peekdeliverytracker.ui.map.LocalMapCameraWatch
 import com.plhery.peekdeliverytracker.ui.map.LocalMapSceneWatch
 import com.plhery.peekdeliverytracker.ui.map.LocalMapsAtOnce
@@ -53,6 +60,8 @@ import com.plhery.peekdeliverytracker.ui.map.WorldDetailPacks
 import com.plhery.peekdeliverytracker.ui.map.WorldDetails
 import com.plhery.peekdeliverytracker.ui.map.WorldMapView
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import java.util.UUID
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
@@ -66,8 +75,10 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The opened map up close (A-S84): it reads the tiles its camera shows and keeps the last sixteen, draws their rivers,
- * lakes, built-up areas and roads, each level as strong as the view is close, names their towns, draws again as each
- * tile comes, and is the only map that does: the page's pass and the list's cards draw none.
+ * lakes, built-up areas and roads, each level as strong as the view is close, keeps the wide map's lakes until every
+ * tile in view has come, names the atlas's cities and their towns, frames a city's journey closer, and draws again as
+ * each tile comes, off the main thread once its first frame is drawn. It is the only map that does: the page's pass and
+ * the list's cards draw none.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -88,8 +99,8 @@ class ParcelMapDetailTest {
 
     private val lastOpened: MapScene get() = scenes.last { it.first }.second
 
-    private fun show() {
-        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+    private fun show(parcels: List<Parcel> = DemoCards.parcels()) {
+        val source = FakeDeliveries(parcels, AuthenticationState.Demo)
         compose.waitsForMaps()
         compose.setContent {
             CompositionLocalProvider(
@@ -107,16 +118,16 @@ class ParcelMapDetailTest {
         compose.waitForIdle()
     }
 
-    /** The demo parcel named `name`, its page opened from the list. */
-    private fun openPage(name: String) {
-        show()
-        compose.openCard(DemoCards.parcel(name).label)
+    /** The parcel named `name`, the demo's or one of `extra`, its page opened from the list. */
+    private fun openPage(name: String, extra: List<Parcel> = emptyList()) {
+        show(extra + DemoCards.parcels())
+        compose.openCard((extra + DemoCards.parcels()).first { it.label.startsWith(name) }.label)
         settle()
     }
 
     /** Its map opened from its page's globe, and at rest. */
-    private fun openMap(name: String) {
-        openPage(name)
+    private fun openMap(name: String, extra: List<Parcel> = emptyList()) {
+        openPage(name, extra)
         compose.onNodeWithTag(PAGE_GLOBE).performClick()
         settle()
     }
@@ -283,35 +294,57 @@ class ParcelMapDetailTest {
         assertTrue(near[0].second)
     }
 
+    /**
+     * The names a close-up of `size` writes `kilometres` across, around Zürich, with every tile it shows, and the towns
+     * of those tiles in the order the map is handed them: a tile at a time by key, the largest first.
+     */
+    private fun named(kilometres: Double, size: Size): Pair<List<String>, List<DetailTile.Town>> {
+        val camera = close(kilometres, size.width, size.height)
+        val tiles = pack.keys(camera, size).map { it to pack.tile(it)!! }
+        val labels = MapScenes.at(request(tiles, size.width, size.height), camera, pip = null, moving = false, context).labels
+        return labels.filter { it.kind == MapOverlay.LabelKind.City }.map { it.text } to tiles.flatMap { it.second.towns }
+    }
+
     @Test
-    fun aCloseUpNamesTheTownsOfTheTilesItShowsButNotTheJourneysOwn() {
-        val size = Size(390.0, 700.0)
-        val camera = close(60.0, size.width, size.height)
-        val keys = pack.keys(camera, size)
-        val tiles = keys.map { it to pack.tile(it)!! }
-        val request = request(tiles, size.width, size.height)
-        val names = MapScenes.at(request, camera, pip = null, moving = false, context).labels
-            .filter { it.kind == MapOverlay.LabelKind.City }.map { it.text }
-        // The names the map would give the towns of these tiles.
-        val expected = MapOverlay(
-            request.route, camera, size, request.insets, MapLabels.All, sites = true, mode = ParcelRoute.Mode.Journey, context = true,
-            atlas = atlas, locale = AppLanguage.En.locale, countryName = { TrackingLocation.countryName(it, AppLanguage.En) },
-            towns = tiles.flatMap { it.second.towns }, measurer = MapTextWidths.of(context),
-        ).labels.filter { it.kind == MapOverlay.LabelKind.City }.map { it.text }
-        assertEquals(expected, names)
-        // More than the seven a map without close-ups names, none of them the journey's own places.
-        assertTrue("$names", names.size > 7)
+    fun aCloseUpNamesTheAtlasCitiesThenTheTilesTownsAboveTheSpansFloorAsManyAsItHasRoomFor() {
+        val cities = atlas.cities.map { it.name }.toSet()
+        val phone = Size(390.0, 700.0)
+        val (names, towns) = named(60.0, phone)
+        val order = towns.map { it.name }
+        val people = towns.associate { it.name to it.thousands }
+        // The atlas's cities first, then the tiles' towns, a tile at a time and the largest first, none of them the
+        // journey's own places.
+        val first = names.indexOfFirst { it !in cities }
+        assertTrue("$names", first >= 0)
+        assertTrue("$names", names.drop(first).all { it in people })
+        assertEquals(names.drop(first), order.filter { it in names.drop(first) })
         assertFalse(names.contains("Zürich"))
         assertFalse(names.contains("Härkingen"))
-        val wide = MapScenes.at(request(null, size.width, size.height), camera, pip = null, moving = false, context).labels
-        assertTrue(wide.count { it.kind == MapOverlay.LabelKind.City } <= 7)
+        // As many as there is room for, its area over 15 000 points: 18 on the phone, more than the 7 of a map without
+        // close-ups, and smaller towns among them so close in, where fewer are in view.
+        assertTrue("$names", names.size in 8..18)
+        assertEquals(18, named(100.0, phone).first.size)
+        assertTrue(names.drop(first).any { people.getValue(it) < 25 })
+        val wide = MapScenes.at(request(null, phone.width, phone.height), close(60.0, phone.width, phone.height), pip = null, moving = false, context)
+        assertTrue(wide.labels.count { it.kind == MapOverlay.LabelKind.City } <= 7)
+        // Further out, only towns of 50 thousand people or more at 300 km, and of 25 thousand at 200.
+        for ((kilometres, floor) in listOf(300.0 to 50, 200.0 to 25)) {
+            val (shown, held) = named(kilometres, phone)
+            val sizes = held.associate { it.name to it.thousands }
+            val tilesTowns = shown.filter { it !in cities }
+            assertTrue("$kilometres km: $shown", tilesTowns.all { sizes.getValue(it) >= floor })
+        }
+        // A tablet has room for 24 names and no more; a small view, or one too wide for close-ups, for 7.
+        assertEquals(24, named(80.0, Size(1032.0, 1376.0)).first.size)
+        assertTrue(named(60.0, Size(300.0, 300.0)).first.size <= 7)
+        assertTrue(named(600.0, Size(1032.0, 1376.0)).first.size <= 7)
     }
 
     @Test
     fun theMapDrawsAgainAsATileComesAndNothingOfOneStillComing() {
         val route = ParcelRoute(DemoCards.parcel("Coffee beans"), atlas, AppLanguage.En)
         val asked = mutableListOf<List<String>>()
-        var tiles by mutableStateOf(emptyMap<String, DetailTile>())
+        val tiles = MutableStateFlow(emptyMap<String, DetailTile>())
         val need = { keys: List<String> -> asked += keys }
         compose.waitsForMaps()
         compose.setContent {
@@ -337,13 +370,201 @@ class ParcelMapDetailTest {
         val before = compose.drawn(compose.onNodeWithTag("map"))
         val urban = MapPalette.map(Brand.ink).urban.light.argb
         assertTrue(count(before, urban) < 200)
-        tiles = keys.associateWith { pack.tile(it)!! }
+        tiles.value = keys.associateWith { pack.tile(it)!! }
         compose.waitForIdle()
         assertEquals(keys.size, scenes.last().second.tiles)
         assertEquals(camera, scenes.last().second.camera)
         val after = compose.drawn(compose.onNodeWithTag("map"))
         assertTrue(count(after, urban) > count(before, urban) + 1_000)
         assertEquals(listOf(keys), asked)
+    }
+
+    /**
+     * Coffee beans' journey on a map 390 by 600 of its own that turns under a finger, given close-ups (`tiles`, `asked`)
+     * and made at once, as the opened map is ([LocalMapsAtOnce]); composed once `shown`.
+     */
+    private fun showAlone(tiles: MutableStateFlow<Map<String, DetailTile>>, asked: MutableList<List<String>>, shown: () -> Boolean) {
+        val route = ParcelRoute(DemoCards.parcel("Coffee beans"), atlas, AppLanguage.En)
+        compose.waitsForMaps()
+        compose.setContent {
+            CompositionLocalProvider(LocalMapsAtOnce provides true, LocalMapSceneWatch provides { _, scene -> scenes += true to scene }) {
+                PeekTheme(dark = false, highContrast = false, reduceMotion = true, reduceTransparency = false, carrierIdentities = DemoCards.identities) {
+                    Box(Modifier.size(390.dp, 600.dp).testTag("map")) {
+                        if (shown()) {
+                            WorldMapView(
+                                atlas = atlas, route = route, mode = ParcelRoute.Mode.Journey, palette = MapPalette.map(Brand.ink),
+                                sites = true, interactive = true, detail = MapDetail(pack, tiles, { asked += it }),
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        compose.waitForIdle()
+    }
+
+    /**
+     * The map's first picture is made with its first frame, framed then; the tiles that come after are drawn off the
+     * main thread and frame it no more, where it was framed and where a hand put it.
+     */
+    @Test
+    fun aTileThatComesIsDrawnOffTheMainThreadAndFramesTheMapNoMore() {
+        val tiles = MutableStateFlow(emptyMap<String, DetailTile>())
+        val asked = mutableListOf<List<String>>()
+        var shown by mutableStateOf(false)
+        showAlone(tiles, asked) { shown }
+        val framed = MapScenes.timesFramed
+        val made = MapScenes.madeOnMainThread
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread {
+            shown = true
+            Snapshot.sendApplyNotifications()
+        }
+        compose.mainClock.advanceTimeByFrame()
+        // Its first frame has its picture, framed and made then.
+        assertTrue(scenes.isNotEmpty())
+        assertEquals(framed + 1, MapScenes.timesFramed)
+        assertEquals(made + 1, MapScenes.madeOnMainThread)
+        compose.mainClock.autoAdvance = true
+        settle()
+        val camera = scenes.last().second.camera
+        val size = Size(390.0, 600.0)
+        val keys = pack.keys(camera, size)
+        assertEquals(keys, asked.last())
+        assertEquals(0, scenes.last().second.tiles)
+        // The tiles come: drawn where the map was framed, framed no more and made off the main thread.
+        tiles.value = keys.associateWith { pack.tile(it)!! }
+        compose.waitForIdle()
+        assertEquals(keys.size, scenes.last().second.tiles)
+        assertEquals(camera, scenes.last().second.camera)
+        assertEquals(framed + 1, MapScenes.timesFramed)
+        assertEquals(made + 1, MapScenes.madeOnMainThread)
+        // Turned by hand to where it needs a tile it hasn't been given: each frame of the turn is drawn on the main
+        // thread, as the iPhone draws it, and the tile that comes after is not.
+        var turns = 0
+        while (asked.last().all { it in tiles.value }) {
+            assertTrue("Never reached another tile", turns++ < 8)
+            compose.onNodeWithTag("map").performTouchInput {
+                swipe(Offset(width * 0.85f, height * 0.4f), Offset(width * 0.15f, height * 0.4f), durationMillis = 300)
+            }
+            settle()
+        }
+        val put = scenes.last().second.camera
+        val there = pack.keys(put, size)
+        assertEquals(there, asked.last())
+        assertTrue(scenes.last().second.tiles < there.size)
+        val turnedFramed = MapScenes.timesFramed
+        val turnedMade = MapScenes.madeOnMainThread
+        tiles.value += there.filter { it !in tiles.value }.associateWith { pack.tile(it)!! }
+        compose.waitForIdle()
+        assertEquals(there.size, scenes.last().second.tiles)
+        assertEquals(put, scenes.last().second.camera)
+        assertEquals(turnedFramed, MapScenes.timesFramed)
+        assertEquals(turnedMade, MapScenes.madeOnMainThread)
+    }
+
+    /**
+     * The opened map is drawn in the cover's first frame, as it slides up; its pack and its tiles come after, each
+     * drawn off the main thread, the map framed no more for them.
+     */
+    @Test
+    fun theCoversFirstFrameHasItsMapAndItsCloseUpsComeOffTheMainThread() {
+        openPage("Belgian chocolate")
+        val framed = MapScenes.timesFramed
+        val made = MapScenes.madeOnMainThread
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(PAGE_GLOBE).performClick()
+        var frames = 0
+        // The cover's store is opened in the frame the cover first comes in.
+        while (WorldDetails.open.isEmpty()) {
+            assertTrue("The cover never came", frames++ < 60)
+            compose.mainClock.advanceTimeByFrame()
+        }
+        assertTrue(scenes.any { it.first })
+        val first = MapScenes.madeOnMainThread - made
+        compose.mainClock.autoAdvance = true
+        settle()
+        val store = WorldDetails.open.single()
+        val keys = pack.keys(opened.last(), size())
+        assertEquals(keys.size, lastOpened.tiles)
+        // Made on the main thread as the cover came and again once its summary was laid out, framed each time, however
+        // many tiles came after.
+        assertEquals(1, first)
+        assertTrue("${store.tiles.size} tiles", store.tiles.size >= 2)
+        assertEquals(2, MapScenes.madeOnMainThread - made)
+        assertEquals(2, MapScenes.timesFramed - framed)
+    }
+
+    /**
+     * Until every tile in view has come, the wide map's lakes stay, as the iPhone hides them only once the tiles draw
+     * every lake: one tile of two drawn, the lakes of the other's part of the view are still there.
+     */
+    @Test
+    fun untilEveryTileInViewHasComeTheWideMapsLakesStay() {
+        val size = Size(400.0, 300.0)
+        // 150 km across, from Lake Constance east over the edge between two tiles.
+        val camera = GlobeCamera(GeoPoint(longitude = 9.9, latitude = 47.6), size.height / (150 / GeoPoint.EARTH_KILOMETRES), Point(200.0, 150.0))
+        val keys = pack.keys(camera, size)
+        assertEquals(listOf("37_27", "38_27"), keys)
+        fun scene(vararg given: String): MapScene =
+            MapScenes.at(request(given.map { it to pack.tile(it)!! }, size.width, size.height), camera, pip = null, moving = false, context)
+        // West of where the two tiles meet, a few points clear of the eastern tile's cut lines.
+        val projection = GlobeProjection(camera)
+        val edge = (0..20).minOf { projection.project(GeoPoint(longitude = 10.0, latitude = 46.4 + it * 0.12)).x } - 4
+        fun west(scene: MapScene): IntArray {
+            val bitmap = Bitmap.createBitmap(size.width.toInt(), size.height.toInt(), Bitmap.Config.ARGB_8888)
+            Canvas(bitmap).drawPicture(scene.base)
+            val wide = edge.toInt()
+            return IntArray(wide * size.height.toInt()).also { bitmap.getPixels(it, 0, wide, 0, 0, wide, size.height.toInt()) }
+        }
+        val water = MapPalette.map(Brand.ink).ocean!!.light.argb
+        val bare = scene()
+        val lakes = west(bare)
+        assertTrue("${count(lakes, water)} lake pixels", count(lakes, water) > 500)
+        // The eastern tile alone: drawn, and the lakes west of it as the wide map draws them.
+        val east = scene("38_27")
+        assertEquals(1, east.tiles)
+        assertArrayEquals(lakes, west(east))
+        // Both: the tiles draw the lakes now, in their own finer lines.
+        val both = scene("37_27", "38_27")
+        assertEquals(2, both.tiles)
+        assertFalse(lakes.contentEquals(west(both)))
+    }
+
+    /**
+     * A journey within a city, its places a few kilometres apart (made up), opens framed 70 km across the room the
+     * summary leaves once the pack is in, where a map without close-ups frames it at 260 km at the least.
+     */
+    @Test
+    fun aCityJourneyOpensFramedCloserOnceThePackIsIn() {
+        fun place(name: String, longitude: Double, latitude: Double) =
+            EventPlace(latitude = latitude, longitude = longitude, precision = EventPlacePrecision.City, country = "CH", name = name)
+        val id = UUID.fromString("00000000-0000-4000-8000-0000000008b1")
+        fun scan(number: Int, at: String, description: String, stage: TrackingStage, place: EventPlace) = TrackingEvent(
+            id = UUID.fromString("00000000-0000-4000-8000-%012d".format(8_100 + number)), packageId = id, stage = stage,
+            description = description, location = place.name, occurredAt = at, place = place,
+        )
+        val parcel = Parcel(
+            id = id, trackingNumber = "DEMOCITY0001", label = "Bike lights", carrier = CarrierId.SwissPost,
+            createdAt = "2026-10-27T09:00:00Z", lastSyncedAt = "2026-10-29T05:00:00Z", syncStatus = SyncStatus.Ok, notificationsMuted = false,
+            trackingEvents = listOf(
+                scan(1, "2026-10-28T08:00:00Z", "Parcel accepted at the counter", TrackingStage.Accepted, place("Fernwald", 8.47, 47.40)),
+                scan(2, "2026-10-28T16:00:00Z", "Sorted at the parcel centre", TrackingStage.InTransit, place("Lindmatt", 8.58, 47.34)),
+            ),
+        )
+        val route = ParcelRoute(parcel, atlas, AppLanguage.En)
+        assertEquals(ParcelRoute.Scale.City, route.scale)
+        openMap("Bike lights", extra = listOf(parcel))
+        assertTrue("${kilometres()} km", kilometres() in 70.0..130.0)
+    }
+
+    /**
+     * The pack is stored uncompressed, so the app maps it into memory rather than reading its megabytes in: the asset
+     * opens as a file.
+     */
+    @Test
+    fun thePackIsStoredUncompressedToBeMappedIntoMemory() {
+        context.assets.openFd("peek/WorldDetail.pack").use { assertTrue(it.length > 1_000_000) }
     }
 
     @Test

@@ -319,10 +319,13 @@ class WorldDetailStore(
     }
 }
 
-/** What an opened map knows of its close-ups: the tiles read so far, and how to ask for more. */
+/**
+ * What an opened map knows of its close-ups: the tiles read so far, and how to ask for more. The iPhone hands the map
+ * the tiles themselves; here they are handed as they come, for the map to read where it draws them.
+ */
 data class MapDetail(
     val pack: WorldDetailPack,
-    val tiles: Map<String, DetailTile>,
+    val tiles: StateFlow<Map<String, DetailTile>>,
     val need: (List<String>) -> Unit,
 )
 

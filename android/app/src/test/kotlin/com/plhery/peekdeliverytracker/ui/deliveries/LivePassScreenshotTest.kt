@@ -27,6 +27,8 @@ import com.plhery.peekdeliverytracker.core.api.LikelyCarrier
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.map.LocalMapSceneWatch
+import com.plhery.peekdeliverytracker.ui.map.MapScene
 import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
 import com.plhery.peekdeliverytracker.ui.screenshot
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -55,6 +57,9 @@ class LivePassScreenshotTest {
 
     private lateinit var view: View
 
+    /** The opened map's last picture. */
+    private var drawn: MapScene? = null
+
     /** `parcel`'s pass on the page's paper, 18 in from its sides, with a bell that does nothing. */
     private fun pass(name: String, dark: Boolean = false, fontScale: Float = 1f, parcel: () -> Parcel) {
         compose.waitsForMaps()
@@ -78,7 +83,7 @@ class LivePassScreenshotTest {
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
-            CompositionLocalProvider(LocalDeliveriesState provides {}) {
+            CompositionLocalProvider(LocalDeliveriesState provides {}, LocalMapSceneWatch provides { interactive, scene -> if (interactive) drawn = scene }) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
                 }
@@ -152,6 +157,7 @@ class LivePassScreenshotTest {
         open("Birthday gift")
         compose.onNodeWithTag(PAGE_GLOBE).performClick()
         compose.mainClock.advanceTimeBy(1_000)
+        compose.everyTileDrawn { drawn }
         compose.screenshot("map_cover_light")
     }
 
@@ -161,6 +167,7 @@ class LivePassScreenshotTest {
         open("Birthday gift")
         compose.onNodeWithTag(PAGE_GLOBE).performClick()
         compose.mainClock.advanceTimeBy(1_000)
+        compose.everyTileDrawn { drawn }
         compose.screenshot("map_cover_dark")
     }
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.IdlingResource
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
@@ -26,6 +27,8 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DemoRepository
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.Size
+import com.plhery.peekdeliverytracker.core.WorldDetailPack
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -37,8 +40,10 @@ import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.ProvideLocalizer
 import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.map.MapScene
 import com.plhery.peekdeliverytracker.ui.map.MapScenes
 import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
+import com.plhery.peekdeliverytracker.ui.map.WorldDetailPacks
 import com.plhery.peekdeliverytracker.ui.map.WorldDetails
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -47,6 +52,8 @@ import java.time.Instant
 import java.util.TimeZone
 import java.util.UUID
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.rules.ExternalResource
 
 /** The iPhone the list's captures were taken on: 440 points wide at three pixels to the point. */
@@ -124,6 +131,24 @@ fun ComposeContentTestRule.drawn(node: SemanticsNodeInteraction): IntArray {
     val pixels = IntArray(bounds.width.toInt() * bounds.height.toInt())
     whole.getPixels(pixels, 0, bounds.width.toInt(), bounds.left.toInt(), bounds.top.toInt(), bounds.width.toInt(), bounds.height.toInt())
     return pixels
+}
+
+/**
+ * The opened map's last picture (`drawn`, heard through `LocalMapSceneWatch`), once the window is idle: it drew every
+ * detail tile its camera shows, and some, so a shot of it close up never catches a tile on its way. Its span across
+ * its shorter side, in kilometres.
+ */
+internal fun ComposeContentTestRule.everyTileDrawn(drawn: () -> MapScene?): Double {
+    waitForIdle()
+    val scene = checkNotNull(drawn())
+    val pack = checkNotNull(runBlocking { WorldDetailPacks.load(ApplicationProvider.getApplicationContext()).await() })
+    val shown = onNodeWithTag(MAP_COVER_MAP).fetchSemanticsNode().size
+    val scale = density.density.toDouble()
+    val size = Size(shown.width / scale, shown.height / scale)
+    val keys = pack.keys(scene.camera, size)
+    assertTrue("No tile in view", keys.isNotEmpty())
+    assertEquals("Tiles drawn of $keys", keys.size, scene.tiles)
+    return WorldDetailPack.spanKilometres(scene.camera, size)
 }
 
 /**

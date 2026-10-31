@@ -18,7 +18,7 @@ Un numéro TopYou, c'est TYZR, une lettre, dix chiffres et YQ : 17 caractères e
 | `TYZRA000000017YQ` | Neuf chiffres seulement : pas un numéro TopYou. Vérifie qu'il ne manque pas un chiffre. |
 | `JXCAB0000000017YQ` | Finit aussi par YQ, comme chez d'autres transitaires chinois, mais commence par JXC : un numéro [Juxi Express](carrier:juxi-express). |
 
-Espaces et minuscules ne gênent pas Peek. Le site de suivi de TopYou, lui, distingue majuscules et minuscules : tapes-y le numéro en majuscules. Aucun lien n'y ouvre directement un colis. Si tu ne trouves pas le numéro, lis [où trouver son numéro de suivi](guide:find-tracking-number).
+Espaces et minuscules ne gênent pas Peek. Le site de suivi de TopYou, lui, distingue majuscules et minuscules : tapes-y le numéro en majuscules. Peek ne lit pas les liens de ce site : copie plutôt le numéro. Si tu ne trouves pas le numéro, lis [où trouver son numéro de suivi](guide:find-tracking-number).
 
 ## Suivi TopYou : ce que veulent dire les statuts
 
@@ -43,12 +43,15 @@ TopYou écrit ses scans en anglais, et Peek les affiche tels quels. Dans l'ordre
 | `Shipment arrived in the destination country` | Le colis est arrivé dans ton pays. | En transit |
 | `Shipment started the customs clearance process at destination` | Le dédouanement à l'import a commencé dans ton pays. | À la douane |
 | `Shipment completed the customs clearance process at destination` | La douane a fini ; le colis part chez le transporteur qui va le livrer. | En transit |
+| `Shipment is out for delivery` | Malgré les mots, le colis n'est pas encore en livraison : en France et en Italie, c'est la remise à GOFO dans son premier centre de tri, quelques jours avant la tournée du livreur. | En transit |
 
 **Ensuite.** Le site de TopYou peut reprendre les scans du transporteur local jusqu'à la livraison, dans les mots de ce transporteur et avec leur lieu.
 
 ## Qui livre les colis TopYou en France, en Belgique et en Suisse
 
 Après la douane, TopYou remet le colis à un transporteur de ton pays. La fiche TopYou, affichée sur son site, peut donner le numéro sous lequel ce transporteur suit le colis, mais pas son nom. Le nom de la ligne TopYou ne le dit pas non plus : un colis livré par la poste américaine a voyagé sur une ligne appelée « DHL Paket ». Demande donc à la boutique qui livre ta commande, et sous quel numéro.
+
+En France, ce peut être [GOFO France](carrier:gofo-fr) : sur le site de TopYou, la remise apparaît alors comme `Shipment is out for delivery`, puis viennent les scans de GOFO.
 
 Si c'est la poste de ton pays qui a le colis :
 
@@ -84,7 +87,7 @@ Au 30 octobre 2026, Peek n'a pas pu vérifier le site de TopYou : pas de contact
 
 [Peek](/) reconnaît un numéro TopYou à sa forme, qu'aucun autre transporteur de son catalogue n'utilise, et n'interroge TopYou qu'avec ces numéros-là. Si tu n'as que le numéro du transporteur local, colle-le quand même : Peek suit plus de 3 500 transporteurs. Si Peek ne reconnaît pas le transporteur, choisis-le avec « Changer ».
 
-Peek lit le site de TopYou et affiche le statut, chaque scan dans les mots de TopYou ou du transporteur dont il reprend les scans, le pays de destination et le poids enregistré par TopYou. Quand la fiche TopYou marque le colis livré ou renvoyé, Peek affiche « Livré » ou « Retourné à l'expéditeur », même si la dernière ligne dit autre chose. Les scans de TopYou sont à l'heure de Pékin, ceux du transporteur local à l'heure locale ; Peek les affiche dans le fuseau de ton appareil. Pas de date de livraison prévue : TopYou n'en donne pas.
+Peek lit le site de TopYou et affiche le statut, chaque scan dans les mots de TopYou ou du transporteur dont il reprend les scans, le pays de destination et le poids enregistré par TopYou. Quand la fiche TopYou marque le colis livré ou renvoyé, Peek affiche « Livré » ou « Retourné à l'expéditeur », même si la dernière ligne dit autre chose. Les scans de TopYou sont à l'heure de Pékin. Pour ceux du transporteur local qu'il reprend, le site de TopYou n'indique pas toujours le bon fuseau horaire : Peek en retrouve l'heure, et affiche tous les scans dans le fuseau de ton appareil. Pas de date de livraison prévue : TopYou n'en donne pas.
 
 Jusqu'au passage de relais, Peek n'affiche que le numéro TopYou. Si la fiche TopYou contient le numéro du transporteur local, Peek s'en sert pour se renseigner : s'il s'agit d'un numéro postal international valide (deux lettres, neuf chiffres, deux lettres), il interroge la poste du pays de destination indiqué par TopYou, soit La Poste en France, bpost en Belgique et La Poste suisse en Suisse ; sinon, le seul transporteur dont c'est à coup sûr la forme de numéro, si Peek lit son suivi. Ce n'est qu'une question, pas la preuve que ce transporteur livre. Dès qu'il montre un scan au moins aussi récent que le dernier de TopYou, Peek suit le colis chez lui, affiche les deux numéros et garde les scans de TopYou. Un numéro qui ne désigne aucun transporteur à coup sûr, comme 20 chiffres seuls, n'est pas essayé : Peek reste sur le suivi de TopYou.
 
@@ -98,7 +101,7 @@ Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois l
 
 ### Qui livre les colis TopYou en France, en Belgique et en Suisse ?
 
-Un transporteur de ton pays, dont la fiche TopYou peut donner le numéro, mais pas le nom : demande à la boutique. Si ce numéro est postal, Peek interroge lui-même la poste du pays : La Poste, bpost ou La Poste suisse.
+Un transporteur de ton pays, en France parfois GOFO. La fiche TopYou peut donner son numéro, mais pas son nom : demande à la boutique. Si ce numéro est postal, Peek interroge lui-même la poste du pays : La Poste, bpost ou La Poste suisse.
 
 ### Pourquoi TopYou affiche-t-il mon pays alors que le colis est encore en Chine ?
 
@@ -116,5 +119,5 @@ La boutique où tu as commandé : c'est elle qui a réservé l'envoi chez TopYou
 - [La Poste suisse : Questions et réponses concernant la réception](https://www.post.ch/fr/aide-et-contact/reception) – douane
 - [La Poste suisse : Aide et contact](https://www.post.ch/fr/aide-et-contact) – téléphone, tarif, horaires, chat
 - [Douane : Mon colis est bloqué](https://www.douane.gouv.fr/fiche/mon-colis-est-bloque) – à qui s'adresser, SMS et courriels
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – TopYou : société, numéros, site de suivi, scans, deuxième numéro ; ce que Peek affiche et le passage de relais
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – TopYou : société, numéros, site de suivi, scans, remise à GOFO en France, heures des scans, deuxième numéro ; ce que Peek affiche et le passage de relais
 :::

@@ -22,7 +22,7 @@ Spaces and lower case don't matter when you paste the number into Peek. TopYou's
 
 **A second number.** TopYou's record can also hold the delivering carrier's own number, which TopYou's tracker shows.
 
-**No link to share.** TopYou's tracker takes the number in a form only, so no link opens one parcel: copy the number instead.
+**Copy the number, not a link.** Peek reads no link from TopYou's tracker: paste the number itself.
 
 ## TopYou tracking statuses explained
 
@@ -48,12 +48,15 @@ TopYou writes its scans in English. In the order a parcel gets them:
 | `Shipment arrived in the destination country` | It has reached your country. | "In transit" |
 | `Shipment started the customs clearance process at destination` | Your country's import customs have it. | "At customs" |
 | `Shipment completed the customs clearance process at destination` | Cleared, and on its way to the delivering carrier. | "In transit" |
+| `Shipment is out for delivery` | Not out for delivery yet, whatever the words say: in France and Italy, it marks the hand-over to GOFO at its first sorting centre, days before GOFO's driver sets out. | "In transit" |
 
-**The delivering carrier's scans.** After the hand-over, TopYou's tracker can go on with the delivering carrier's own scans, each with its place: USPS's on a parcel to the United States.
+**The delivering carrier's scans.** After the hand-over, TopYou's tracker can go on with the delivering carrier's own scans, each with its place: USPS's on a parcel to the United States, GOFO's in France and Italy.
 
 ## Who delivers TopYou parcels
 
 **United States.** USPS takes the parcel over from TopYou's line after the flight, and TopYou's tracker can go on with its scans. The second number on TopYou's record is then the one [USPS](carrier:usps) tracks it by.
+
+**France and Italy.** GOFO can deliver: [GOFO France](carrier:gofo-fr) or [GOFO Italy](carrier:gofo-it). TopYou's tracker shows the hand-over as `Shipment is out for delivery`, then GOFO's scans.
 
 **Elsewhere.** TopYou's record can give the delivering carrier's number, but not its name, and the name of the TopYou line your parcel travels on doesn't tell you either: a line can bear another carrier's name. So ask the seller which company delivers your order.
 
@@ -77,7 +80,7 @@ As of 28 October 2026, Peek couldn't check TopYou's website, so it lists no cont
 
 [Peek](/) recognises a TopYou number by its shape: TYZR, a letter, ten digits and YQ, which no other carrier in its catalog uses, and asks TopYou's tracker by that number only. If all you have is the delivering carrier's number, paste that instead: Peek follows more than 3,500 carriers.
 
-Peek reads TopYou's own tracker and shows the status, each scan in the words of TopYou or of the carrier it relays, the destination country and the weight on TopYou's record. A place that is only a country is left off TopYou's own scans, so the airport scan in China doesn't look like it's in your country. When TopYou's record marks the parcel delivered or returned, Peek shows "Delivered" or "Returned to sender", even if the last scan's words don't. TopYou's own scans are on Beijing time and the delivering carrier's scans it relays on the local clock of their place; Peek shows them all in your device's time zone. There's no expected delivery date: TopYou gives none.
+Peek reads TopYou's own tracker and shows the status, each scan in the words of TopYou or of the carrier it relays, the destination country and the weight on TopYou's record. A place that is only a country is left off TopYou's own scans, so the airport scan in China doesn't look like it's in your country. When TopYou's record marks the parcel delivered or returned, Peek shows "Delivered" or "Returned to sender", even if the last scan's words don't. TopYou's own scans are on Beijing time. For the delivering carrier's scans it relays, TopYou's tracker doesn't always give the right time zone, so Peek works out their time; it shows them all in your device's time zone. There's no expected delivery date: TopYou gives none.
 
 Until a hand-over, Peek shows the TopYou number only. When TopYou's record holds the delivering carrier's number, Peek tries it with your country's post if it is an international postal number (two letters, nine digits, two letters), or else with the one carrier its layout surely belongs to, as long as Peek reads that carrier's own tracker. Once that carrier shows a scan at least as recent as TopYou's latest, Peek follows the parcel there and shows both numbers, with TopYou's scans kept in the history. A number Peek can't pin to one carrier, such as 20 digits alone, which USPS and others use, isn't tried: Peek stays with TopYou's tracker, which can show the delivering carrier's scans too.
 
@@ -95,12 +98,12 @@ Because TopYou's tracker writes the destination country next to its own scans, e
 
 ### Who delivers TopYou parcels in my country?
 
-In the United States, USPS, which takes the parcel over from TopYou's line after the flight. Elsewhere TopYou's record can give the delivering carrier's number but not its name: ask the seller which company delivers.
+In the United States, USPS, which takes the parcel over from TopYou's line after the flight. In France and Italy, it can be GOFO. Elsewhere TopYou's record can give the delivering carrier's number but not its name: ask the seller which company delivers.
 
 ### Who do I contact about a missing TopYou parcel?
 
 The seller you ordered from: it booked the parcel with TopYou. Peek couldn't check TopYou's website for contact details.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, TYZR number shape, capitals on TopYou's tracker, no tracking link, scan wordings and their stages, the destination country beside TopYou's own scans, Beijing and local clocks, USPS taking over in the US, the delivering carrier's relayed scans, the second number and the line name, unknown numbers and numbers without scans, what Peek shows and how it hands a parcel over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, TYZR number shape, capitals on TopYou's tracker, no link Peek reads, scan wordings and their stages, the destination country beside TopYou's own scans, Beijing time and the relayed scans' clocks, USPS taking over in the US and GOFO in France and Italy, the delivering carrier's relayed scans, the second number and the line name, unknown numbers and numbers without scans, what Peek shows and how it hands a parcel over
 :::

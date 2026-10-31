@@ -18,7 +18,7 @@ Eine TopYou-Nummer besteht aus TYZR, einem Buchstaben, zehn Ziffern und YQ, zusa
 | `TYZRA000000017YQ` | Nur neun Ziffern: So sieht keine TopYou-Nummer aus. Prüf, ob eine Ziffer fehlt. |
 | `JXCAB0000000017YQ` | Endet auch auf YQ, wie bei vielen chinesischen Spediteuren, beginnt aber mit JXC: eine Nummer von Juxi Express. |
 
-Leerzeichen und Kleinbuchstaben stören Peek nicht. TopYous eigene Tracking-Seite unterscheidet aber zwischen Groß- und Kleinschreibung, also tipp die Nummer dort in Großbuchstaben ein. Einen Link, der dort ein einzelnes Paket öffnet, gibt es nicht. Steht die Nummer nicht in deiner Bestellung, lies [wo du die Sendungsnummer findest](guide:find-tracking-number).
+Leerzeichen und Kleinbuchstaben stören Peek nicht. TopYous eigene Tracking-Seite unterscheidet aber zwischen Groß- und Kleinschreibung, also tipp die Nummer dort in Großbuchstaben ein. Links von TopYous Seite liest Peek nicht, kopier also die Nummer. Steht die Nummer nicht in deiner Bestellung, lies [wo du die Sendungsnummer findest](guide:find-tracking-number).
 
 **Eine zweite Nummer.** TopYous Datensatz kann auch die Nummer des Paketdiensts enthalten, der das Paket bei dir zustellt, und TopYous Tracking-Seite zeigt sie an. Unter dieser Nummer verfolgt der Zusteller das Paket.
 
@@ -45,6 +45,7 @@ TopYou schreibt seine Scans auf Englisch, und so zeigt sie auch Peek. In der Rei
 | `Shipment arrived in the destination country` | Das Paket ist in deinem Land. | „Unterwegs“ |
 | `Shipment started the customs clearance process at destination` | Die Einfuhrverzollung in deinem Land hat begonnen. | „Beim Zoll“ |
 | `Shipment completed the customs clearance process at destination` | Der Zoll ist erledigt, das Paket ist auf dem Weg zum Paketdienst, der zustellt. | „Unterwegs“ |
+| `Shipment is out for delivery` | Trotz der Worte noch nicht in Zustellung: In Frankreich und Italien ist das die Übergabe an GOFO in dessen erstem Sortierzentrum, Tage bevor GOFOs Fahrer losfährt. | „Unterwegs“ |
 
 **Danach.** TopYous Tracking-Seite kann die Scans des Zustellers weitergeben, bis zur Zustellung, in dessen eigenen Worten und mit Ort.
 
@@ -86,7 +87,7 @@ Stand 30. Oktober 2026 konnte Peek TopYous Website nicht prüfen, deshalb stehen
 
 [Peek](/) erkennt eine TopYou-Nummer an ihrer Form: TYZR, ein Buchstabe, zehn Ziffern und YQ. Kein anderer Paketdienst in Peeks Katalog nutzt sie, und Peek fragt TopYou nur mit solchen Nummern. Hast du nur die Nummer des Zustellers, füg sie ein: Peek verfolgt mehr als 3.500 Paketdienste. Erkennt Peek den Paketdienst nicht an der Nummer, wähl ihn mit „Ändern“ aus.
 
-Peek liest TopYous eigene Tracking-Seite und zeigt den Status, jeden Scan in den Worten von TopYou oder des Zustellers, dessen Scans TopYou weitergibt, das Zielland und das Gewicht aus TopYous Datensatz. Bei TopYous eigenen Scans lässt Peek einen Ort weg, der nur ein Land ist, damit der Scan am Flughafen in China nicht so aussieht, als wäre das Paket schon bei dir. Meldet TopYous Datensatz das Paket als zugestellt oder zurückgeschickt, zeigt Peek „Zugestellt“ oder „Zurück an Absender“, auch wenn die letzte Zeile anders lautet. TopYous eigene Scans laufen auf Pekinger Zeit, die weitergegebenen auf Ortszeit; Peek zeigt alle in der Zeitzone deines Geräts. Einen voraussichtlichen Liefertermin gibt es nicht, weil TopYou keinen nennt.
+Peek liest TopYous eigene Tracking-Seite und zeigt den Status, jeden Scan in den Worten von TopYou oder des Zustellers, dessen Scans TopYou weitergibt, das Zielland und das Gewicht aus TopYous Datensatz. Bei TopYous eigenen Scans lässt Peek einen Ort weg, der nur ein Land ist, damit der Scan am Flughafen in China nicht so aussieht, als wäre das Paket schon bei dir. Meldet TopYous Datensatz das Paket als zugestellt oder zurückgeschickt, zeigt Peek „Zugestellt“ oder „Zurück an Absender“, auch wenn die letzte Zeile anders lautet. TopYous eigene Scans laufen auf Pekinger Zeit. Bei den weitergegebenen Scans des Zustellers gibt TopYous Seite nicht immer die richtige Zeitzone an; Peek ermittelt ihre Uhrzeit und zeigt alle Scans in der Zeitzone deines Geräts. Einen voraussichtlichen Liefertermin gibt es nicht, weil TopYou keinen nennt.
 
 Bis zu einer Übergabe zeigt Peek nur die TopYou-Nummer. Steht in TopYous Datensatz die Nummer des Zustellers, fragt Peek damit nach: Bei einer internationalen Postnummer (zwei Buchstaben, neun Ziffern, zwei Buchstaben) fragt es die Post des Ziellands, das TopYou nennt, also DHL in Deutschland, die Österreichische Post in Österreich und die Schweizerische Post in der Schweiz. Sonst fragt es den einen Paketdienst, zu dem die Form der Nummer sicher passt, sofern Peek dessen eigene Sendungsverfolgung liest. Zeigt dieser einen Scan, der mindestens so neu ist wie TopYous letzter, verfolgt Peek das Paket dort weiter, zeigt beide Nummern und behält TopYous Scans im Verlauf. Eine Nummer, die zu keinem Paketdienst sicher passt, etwa 20 Ziffern allein, probiert Peek nicht aus; dann bleibt es bei TopYous Tracking-Seite.
 
@@ -118,5 +119,5 @@ Den Shop, bei dem du bestellt hast: Er hat den Versand bei TopYou gebucht. Konta
 - [Österreichische Post: Kontaktieren Sie uns telefonisch](https://www.post.at/k/c/hotline) – Hotline, Zeiten, Kontaktformular
 - [Die Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – Abholstelle, 15 Tage für Auslandsendungen, kostenlose Verlängerung ohne Konto
 - [Die Post: Hilfe und Kontakt](https://www.post.ch/de/hilfe-und-kontakt) – Telefon, Preis, Zeiten, Chat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmenname, TYZR-Form, Großbuchstaben auf TopYous Seite, kein Link, Scan-Texte und ihre Stufen, Zielland bei TopYous Scans, Pekinger und Ortszeit, weitergegebene Scans des Zustellers, zweite Nummer und Linienname, unbekannte Nummern und Nummern ohne Scans, was Peek zeigt und wie es übergibt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmenname, TYZR-Form, Großbuchstaben auf TopYous Seite, kein Link, Scan-Texte und ihre Stufen, Zielland bei TopYous Scans, Pekinger Zeit und Uhrzeit der weitergegebenen Scans, weitergegebene Scans des Zustellers, zweite Nummer und Linienname, unbekannte Nummern und Nummern ohne Scans, was Peek zeigt und wie es übergibt
 :::

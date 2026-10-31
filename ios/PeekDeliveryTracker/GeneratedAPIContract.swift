@@ -1032,6 +1032,41 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let tccCo = CarrierID(rawValue: "tcc-co")
     static let xcargo = CarrierID(rawValue: "xcargo")
     static let zimpost = CarrierID(rawValue: "zimpost")
+    static let airwingsIndia = CarrierID(rawValue: "airwings-india")
+    static let apxLogistics = CarrierID(rawValue: "apx-logistics")
+    static let arkExpress = CarrierID(rawValue: "ark-express")
+    static let chinzLogistics = CarrierID(rawValue: "chinz-logistics")
+    static let citiSprint = CarrierID(rawValue: "citi-sprint")
+    static let citymailPk = CarrierID(rawValue: "citymail-pk")
+    static let consegnia = CarrierID(rawValue: "consegnia")
+    static let elogLuxembourg = CarrierID(rawValue: "elog-luxembourg")
+    static let fastgo = CarrierID(rawValue: "fastgo")
+    static let fmx = CarrierID(rawValue: "fmx")
+    static let freightwaysGlobal = CarrierID(rawValue: "freightways-global")
+    static let hitch = CarrierID(rawValue: "hitch")
+    static let jancoExpress = CarrierID(rawValue: "janco-express")
+    static let jcwExpress = CarrierID(rawValue: "jcw-express")
+    static let mXpress = CarrierID(rawValue: "m-xpress")
+    static let markExpress = CarrierID(rawValue: "mark-express")
+    static let nege = CarrierID(rawValue: "nege")
+    static let patuen = CarrierID(rawValue: "patuen")
+    static let promedDelivery = CarrierID(rawValue: "promed-delivery")
+    static let shipxAsia = CarrierID(rawValue: "shipx-asia")
+    static let sptLogistics = CarrierID(rawValue: "spt-logistics")
+    static let sptexp = CarrierID(rawValue: "sptexp")
+    static let superbExpress = CarrierID(rawValue: "superb-express")
+    static let tapuzDelivery = CarrierID(rawValue: "tapuz-delivery")
+    static let thabitLogistics = CarrierID(rawValue: "thabit-logistics")
+    static let togoPost = CarrierID(rawValue: "togo-post")
+    static let tuodatong = CarrierID(rawValue: "tuodatong")
+    static let turkmenpost = CarrierID(rawValue: "turkmenpost")
+    static let usasd = CarrierID(rawValue: "usasd")
+    static let vXpress = CarrierID(rawValue: "v-xpress")
+    static let worldPackage = CarrierID(rawValue: "world-package")
+    static let xdExpress = CarrierID(rawValue: "xd-express")
+    static let xlmiles = CarrierID(rawValue: "xlmiles")
+    static let yoseus = CarrierID(rawValue: "yoseus")
+    static let yuemaExpress = CarrierID(rawValue: "yuema-express")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2017,6 +2052,41 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .tccCo,
         .xcargo,
         .zimpost,
+        .airwingsIndia,
+        .apxLogistics,
+        .arkExpress,
+        .chinzLogistics,
+        .citiSprint,
+        .citymailPk,
+        .consegnia,
+        .elogLuxembourg,
+        .fastgo,
+        .fmx,
+        .freightwaysGlobal,
+        .hitch,
+        .jancoExpress,
+        .jcwExpress,
+        .mXpress,
+        .markExpress,
+        .nege,
+        .patuen,
+        .promedDelivery,
+        .shipxAsia,
+        .sptLogistics,
+        .sptexp,
+        .superbExpress,
+        .tapuzDelivery,
+        .thabitLogistics,
+        .togoPost,
+        .tuodatong,
+        .turkmenpost,
+        .usasd,
+        .vXpress,
+        .worldPackage,
+        .xdExpress,
+        .xlmiles,
+        .yoseus,
+        .yuemaExpress,
     ]
 
     init(from decoder: Decoder) throws {

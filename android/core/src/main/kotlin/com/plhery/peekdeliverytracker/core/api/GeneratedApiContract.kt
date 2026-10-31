@@ -1041,6 +1041,41 @@ value class CarrierId(val rawValue: String) {
         val TccCo = CarrierId("tcc-co")
         val Xcargo = CarrierId("xcargo")
         val Zimpost = CarrierId("zimpost")
+        val AirwingsIndia = CarrierId("airwings-india")
+        val ApxLogistics = CarrierId("apx-logistics")
+        val ArkExpress = CarrierId("ark-express")
+        val ChinzLogistics = CarrierId("chinz-logistics")
+        val CitiSprint = CarrierId("citi-sprint")
+        val CitymailPk = CarrierId("citymail-pk")
+        val Consegnia = CarrierId("consegnia")
+        val ElogLuxembourg = CarrierId("elog-luxembourg")
+        val Fastgo = CarrierId("fastgo")
+        val Fmx = CarrierId("fmx")
+        val FreightwaysGlobal = CarrierId("freightways-global")
+        val Hitch = CarrierId("hitch")
+        val JancoExpress = CarrierId("janco-express")
+        val JcwExpress = CarrierId("jcw-express")
+        val MXpress = CarrierId("m-xpress")
+        val MarkExpress = CarrierId("mark-express")
+        val Nege = CarrierId("nege")
+        val Patuen = CarrierId("patuen")
+        val PromedDelivery = CarrierId("promed-delivery")
+        val ShipxAsia = CarrierId("shipx-asia")
+        val SptLogistics = CarrierId("spt-logistics")
+        val Sptexp = CarrierId("sptexp")
+        val SuperbExpress = CarrierId("superb-express")
+        val TapuzDelivery = CarrierId("tapuz-delivery")
+        val ThabitLogistics = CarrierId("thabit-logistics")
+        val TogoPost = CarrierId("togo-post")
+        val Tuodatong = CarrierId("tuodatong")
+        val Turkmenpost = CarrierId("turkmenpost")
+        val Usasd = CarrierId("usasd")
+        val VXpress = CarrierId("v-xpress")
+        val WorldPackage = CarrierId("world-package")
+        val XdExpress = CarrierId("xd-express")
+        val Xlmiles = CarrierId("xlmiles")
+        val Yoseus = CarrierId("yoseus")
+        val YuemaExpress = CarrierId("yuema-express")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2026,6 +2061,41 @@ value class CarrierId(val rawValue: String) {
             TccCo,
             Xcargo,
             Zimpost,
+            AirwingsIndia,
+            ApxLogistics,
+            ArkExpress,
+            ChinzLogistics,
+            CitiSprint,
+            CitymailPk,
+            Consegnia,
+            ElogLuxembourg,
+            Fastgo,
+            Fmx,
+            FreightwaysGlobal,
+            Hitch,
+            JancoExpress,
+            JcwExpress,
+            MXpress,
+            MarkExpress,
+            Nege,
+            Patuen,
+            PromedDelivery,
+            ShipxAsia,
+            SptLogistics,
+            Sptexp,
+            SuperbExpress,
+            TapuzDelivery,
+            ThabitLogistics,
+            TogoPost,
+            Tuodatong,
+            Turkmenpost,
+            Usasd,
+            VXpress,
+            WorldPackage,
+            XdExpress,
+            Xlmiles,
+            Yoseus,
+            YuemaExpress,
         )
     }
 }

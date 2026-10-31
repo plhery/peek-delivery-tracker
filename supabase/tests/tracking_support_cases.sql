@@ -290,6 +290,8 @@ begin
   perform public.record_tracking_support_observation('HELDTEST1234', pending, '{}', '2026-10-19T10:00:00Z', 'detection:held');
   assert (select held_until = '2026-10-19T11:00:00Z'::timestamptz and fix_status = 'open'
     from public.tracking_support_cases where tracking_number = 'HELDTEST1234'), 'A pending browser recognition holds the case';
+  assert (select detection_candidates = array['fedex', 'dhl'] from public.tracking_support_cases
+    where tracking_number = 'HELDTEST1234'), 'A case keeps the candidates in their rank';
   -- Progress that settles nothing, or comes from a provider, leaves it open.
   perform public.record_tracking_support_observation('HELDTEST1234', '{"configured_carrier":"fedex"}',
     settled - 'support_settled', '2026-10-19T10:10:00Z', 'test:held-unsettled');

@@ -122,6 +122,7 @@ import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -281,8 +282,8 @@ private const val BESIDE_SCALE = 0.5f
 
 /**
  * The open menu, the delete it asks about, the rename alert, or the alert of an action that failed, over the whole
- * window where the tab shell is there to draw it ([LocalTabOverlay]), over the list otherwise. Nothing while none is
- * open.
+ * window where the tab shell is there to draw it ([LocalTabOverlay]), their glass showing the tab through it
+ * ([GlassOverlayLayer]), over the list otherwise. Nothing while none is open.
  */
 @Composable
 internal fun CardMenuHost(state: DeliveriesState) {
@@ -322,8 +323,21 @@ internal fun CardMenuHost(state: DeliveriesState) {
         content?.invoke()
         return
     }
-    OverlayLayer(host, CARD_MENU, content)
+    GlassOverlayLayer(host, CARD_MENU, content)
 }
+
+/**
+ * [OverlayLayer] for a layer whose glass stands straight over the tab, a menu's or an alert's: the glass in it blurs
+ * what the tab draws ([TabOverlay.backdrop]), as the iPhone's menus and alerts show the screen through theirs. The
+ * shell draws its layers outside the tab, where no backdrop reaches them, and glass with none is drawn solid. A sheet
+ * or a popover hands its own glass the backdrop; what stands on that glass blurs nothing behind it.
+ */
+@Composable
+internal fun GlassOverlayLayer(host: TabOverlay, key: Any, content: (@Composable () -> Unit)?) = OverlayLayer(
+    host,
+    key,
+    content?.let { layer -> @Composable { CompositionLocalProvider(LocalMaterialBackdrop provides host.backdrop, layer) } },
+)
 
 /**
  * Draws `content` over the window as the shell's layer `key` ([LocalTabOverlay]) while it isn't null, taking the latest
@@ -352,7 +366,8 @@ private val LocalLayerPass = staticCompositionLocalOf<LayerPass?> { null }
 
 /**
  * The card's menu (A-S41, A-G04): the screen dims, the card lifts in its shape, and the parcel's items stand beside it on
- * glass in their groups, each with its symbol, and the keys that press them on the parcel the keyboard acts on. A tap
+ * glass in their groups, the dimmed screen showing through it, each with its symbol, and the keys that press them on
+ * the parcel the keyboard acts on. A tap
  * outside, the back gesture or a choice closes it; a choice acts once it has closed. TalkBack reaches only the menu,
  * from its first item.
  */
@@ -445,6 +460,7 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
                 .pointerInput(Unit) { detectTapGestures { } }
                 .semantics { paneTitle = parcel.label.ifEmpty { localizer.text("common.parcel") } }
                 .dropShadow(ContinuousRoundedShape(MENU_RADIUS), MENU_SHADOW),
+            dim = DIM.alpha,
         ) {
             Column(
                 Modifier
@@ -971,13 +987,17 @@ internal fun ErrorAlert(message: String, close: () -> Unit) {
 }
 
 /**
- * An alert as iOS 26 draws it: a glass card 320 wide, the same on a tablet, with continuous corners, named [title]
- * for TalkBack, what it holds in a column 15 in from its sides, under its title's room at the top and 16 over its
- * foot, scrolling where the room [modifier] gives it is shorter.
+ * An alert as iOS 26 draws it: a glass card 320 wide, the same on a tablet, with continuous corners, the window dimmed
+ * under it showing through, named [title] for TalkBack, what it holds in a column 15 in from its sides, under its
+ * title's room at the top and 16 over its foot, scrolling where the room [modifier] gives it is shorter.
  */
 @Composable
 private fun AlertCard(title: String, modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
-    GlassSurface(ContinuousRoundedShape(ALERT_RADIUS), Modifier.width(ALERT_WIDTH).then(modifier).semantics { paneTitle = title }) {
+    GlassSurface(
+        ContinuousRoundedShape(ALERT_RADIUS),
+        Modifier.width(ALERT_WIDTH).then(modifier).semantics { paneTitle = title },
+        dim = DIM.alpha,
+    ) {
         Column(
             Modifier
                 .verticalScroll(rememberScrollState())

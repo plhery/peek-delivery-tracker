@@ -34,8 +34,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * A parcel's page's frame on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), in
  * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark and in Russian and
- * Chinese, its ••• menu open without and with a keyboard, its rename alert light and dark and at an accessibility text
- * size, its delete question light and dark, the list's error alert light and dark, the page of a parcel gone, and the
+ * Chinese, its ••• menu open without and with a keyboard, its rename alert light and dark, at an accessibility text
+ * size and under Reduce Transparency light and dark, its delete question light and dark, the list's error alert light and dark, the page of a parcel gone, and the
  * page beside the list on a tablet on its side, the history beside the pass. The page dragged down, under its bar, is
  * ParcelZoomScreenshotTest's.
  */
@@ -53,7 +53,7 @@ class ParcelPageScreenshotTest {
 
     /**
      * The demo's list in `language` with the window's bars in points: the iPhone's status bar 62 tall and gesture bar 24
-     * by default.
+     * by default. Transparency is full unless [reduceTransparency].
      */
     private fun show(
         dark: Boolean = false,
@@ -62,6 +62,7 @@ class ParcelPageScreenshotTest {
         fontScale: Float = 1f,
         language: AppLanguage = AppLanguage.En,
         keyboard: Boolean = false,
+        reduceTransparency: Boolean = false,
     ) {
         val source = FakeDeliveries(DemoCards.parcels(language), AuthenticationState.Demo)
         compose.waitsForMaps()
@@ -71,7 +72,10 @@ class ParcelPageScreenshotTest {
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalDensity provides Density(density.density, fontScale)) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     WithKeyboard(keyboard) {
-                        RootHost(state = AuthenticationState.Demo, language = language, dark = dark, reduceMotion = false, source = source)
+                        RootHost(
+                            state = AuthenticationState.Demo, language = language, dark = dark, reduceMotion = false, source = source,
+                            reduceTransparency = reduceTransparency,
+                        )
                     }
                 }
             }
@@ -165,6 +169,23 @@ class ParcelPageScreenshotTest {
         open()
         rename()
         compose.screenshot("page_rename_dark")
+    }
+
+    /** Under Reduce Transparency, its glass all but opaque, the page no longer showing through. */
+    @Test
+    fun theRenameAlertUnderReduceTransparency() {
+        show(reduceTransparency = true)
+        open()
+        rename()
+        compose.screenshot("page_rename_reduce_transparency_light")
+    }
+
+    @Test
+    fun theRenameAlertUnderReduceTransparencyInDark() {
+        show(dark = true, reduceTransparency = true)
+        open()
+        rename()
+        compose.screenshot("page_rename_reduce_transparency_dark")
     }
 
     /** At an accessibility text size, its buttons one over the other, Cancel last. */

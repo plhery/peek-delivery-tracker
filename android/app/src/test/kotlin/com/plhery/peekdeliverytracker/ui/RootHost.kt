@@ -22,7 +22,8 @@ import kotlin.coroutines.ContinuationInterceptor
  * The root as the app shows it, in the app's copy for `language`, at the captures' moment ([CAPTURED]), the deliveries
  * showing [source]'s parcels (the demo's unless a test gives its own), under Reduce Motion unless asked otherwise. The
  * session is told to the deliveries too, and their screens counted to [onView] with the tabs'; their app's scope runs
- * on the test's clock. The carriers are the bundled catalog's unless [identities] pins others.
+ * on the test's clock. The carriers are the bundled catalog's unless [identities] pins others. Transparency is full
+ * unless [reduceTransparency].
  */
 @Composable
 fun RootHost(
@@ -34,6 +35,7 @@ fun RootHost(
     source: FakeDeliveries? = null,
     inbox: DeliveriesInbox? = null,
     identities: CarrierIdentities = DemoCards.identities,
+    reduceTransparency: Boolean = false,
     deliveries: (@Composable () -> Unit)? = null,
 ) {
     val localizer = remember(language) { Localizer(language, variant = "android") }
@@ -46,7 +48,7 @@ fun RootHost(
     SideEffect { shown.session.value = state }
     CompositionLocalProvider(LocalNow provides { CAPTURED }) {
         PeekTheme(
-            dark = dark, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = false,
+            dark = dark, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = reduceTransparency,
             carrierIdentities = identities,
         ) {
             PeekRoot(state, localizer, onView, inbox) {

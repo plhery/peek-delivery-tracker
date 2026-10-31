@@ -1592,6 +1592,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ekart tracking: tracking IDs, statuses and RTO explained",
       "name": "Ekart",
       "color": "#0074D9"
+    },
+    {
+      "id": "j-and-t-middle-east",
+      "catalog": "j-and-t-middle-east",
+      "slug": "jt-express-middle-east-tracking",
+      "title": "J&T Express tracking in Saudi Arabia, UAE and Kuwait",
+      "name": "J&T Express Middle East",
+      "color": "#e60000"
     }
   ],
   "de": [

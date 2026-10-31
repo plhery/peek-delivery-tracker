@@ -1090,6 +1090,9 @@
   "fastgo": {
     "decal": "fastgo"
   },
+  "fastwl": {
+    "decal": "fastwl"
+  },
   "fedex": {
     "palette": {
       "accent": "#ff6600"
@@ -2904,6 +2907,9 @@
   "thhy": {
     "decal": "thhy"
   },
+  "tig-freight": {
+    "decal": "tig-freight"
+  },
   "tiki": {
     "decal": "tiki"
   },
@@ -3093,6 +3099,9 @@
   "utec-logistics": {
     "decal": "utec-logistics"
   },
+  "uvan": {
+    "decal": "uvan"
+  },
   "uzbekistan-post": {
     "decal": "uzbekistan-post"
   },
@@ -3257,6 +3266,9 @@
   },
   "ydh": {
     "decal": "ydh"
+  },
+  "yha": {
+    "decal": "yha"
   },
   "yilong-logistics": {
     "decal": "yilong-logistics"

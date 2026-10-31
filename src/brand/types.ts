@@ -344,7 +344,11 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'comone-express'
   | 'arrow-express'
   | 'geswl'
-  | 'dpx-logistics';
+  | 'dpx-logistics'
+  | 'uvan'
+  | 'fastwl'
+  | 'tig-freight'
+  | 'yha';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

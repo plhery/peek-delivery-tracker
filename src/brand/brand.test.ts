@@ -420,6 +420,10 @@ describe('carrier brand', () => {
       'arrow-express',
       'geswl',
       'dpx-logistics',
+      'uvan',
+      'fastwl',
+      'tig-freight',
+      'yha',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

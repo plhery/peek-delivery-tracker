@@ -435,6 +435,12 @@ class ChangeCarrierTest {
         compose.onNode(hasText("Example Provider needs the delivery postcode to look up this parcel.")).assertExists()
         assertEquals(ContentType.PostalCode, node(CHANGE_CARRIER_PROVIDER_POSTCODE).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ContentType))
         node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
+        // Capitals, without corrections or suggestions (`.autocorrectionDisabled()`).
+        val keys = keyboard(CHANGE_CARRIER_PROVIDER_POSTCODE).inputType
+        assertEquals(InputType.TYPE_CLASS_TEXT, keys and InputType.TYPE_MASK_CLASS)
+        assertTrue(keys and InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS != 0)
+        assertTrue(keys and InputType.TYPE_TEXT_FLAG_AUTO_CORRECT == 0)
+        assertTrue(keys and InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS != 0)
         node(CHANGE_CARRIER_PROVIDER_POSTCODE).performTextInput("ab")
         node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
         node(CHANGE_CARRIER_PROVIDER_POSTCODE).performTextReplacement(" sw1a 1aa ")
@@ -638,31 +644,34 @@ class ChangeCarrierTest {
         val sofa = parcel(6, "Sofa", CarrierId.Planzer, "9999012345678")
         show(parcels + sofa)
         fromCard(chair)
-        // Mondial Relay's postcode, from Switzerland: digits first, and the letters Android has for them.
+        // Mondial Relay's postcode, from Switzerland: digits first, and the letters Android has for them, without
+        // corrections or suggestions (`.autocorrectionDisabled()`).
         val postcode = keyboard(CHANGE_CARRIER_POSTCODE)
         assertEquals(InputType.TYPE_CLASS_TEXT, postcode.inputType and InputType.TYPE_MASK_CLASS)
         assertTrue(postcode.inputType and InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS != 0)
         assertTrue(postcode.inputType and InputType.TYPE_TEXT_FLAG_AUTO_CORRECT == 0)
-        // GLS takes digits alone: the number pad.
+        assertTrue(postcode.inputType and InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS != 0)
+        // GLS takes digits alone: the number pad, which has no suggestions to leave out and is given no text flag.
         pushPicker()
         pick(CarrierId.GlsCh)
-        assertEquals(InputType.TYPE_CLASS_NUMBER, keyboard(CHANGE_CARRIER_POSTCODE).inputType and InputType.TYPE_MASK_CLASS)
+        val digits = keyboard(CHANGE_CARRIER_POSTCODE).inputType
+        assertEquals(InputType.TYPE_CLASS_NUMBER, digits and InputType.TYPE_MASK_CLASS)
+        assertTrue(digits and InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS == 0)
         node(CHANGE_CARRIER_CANCEL).performClick()
         settle()
 
-        // The link: the web address keys, no capitals nor corrections.
+        // The link: the web address keys, no capitals, corrections or suggestions.
         fromCard(sofa)
         val link = keyboard(CHANGE_CARRIER_URL)
         assertEquals(InputType.TYPE_TEXT_VARIATION_URI, link.inputType and InputType.TYPE_MASK_VARIATION)
         assertTrue(link.inputType and (InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS or InputType.TYPE_TEXT_FLAG_AUTO_CORRECT) == 0)
+        assertTrue(link.inputType and InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS != 0)
     }
 
     /** The keyboard the field tagged `tag` opens with, once it has the focus. */
     private fun keyboard(tag: String): EditorInfo {
         node(tag).performClick()
-        compose.waitForIdle()
-        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
-        return EditorInfo().also { info -> compose.runOnUiThread { view.onCreateInputConnection(info) } }
+        return compose.editorInfo()
     }
 
     @Test

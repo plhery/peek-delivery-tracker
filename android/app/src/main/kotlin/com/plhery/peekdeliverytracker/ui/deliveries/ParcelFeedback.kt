@@ -129,6 +129,7 @@ import com.plhery.peekdeliverytracker.core.labelKey
 import com.plhery.peekdeliverytracker.core.text
 import com.plhery.peekdeliverytracker.core.thanksKey
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.SmallPip
@@ -1125,9 +1126,10 @@ private fun WordsSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
 }
 
 /**
- * ParcelFeedbackCarrierSheet (B-S62): who carries the parcel, without autocorrection, whose Next goes to its page; its
- * page as its reader has it, on the address keyboard without capitals or autocorrection, whose Send sends where there
- * is something to; why the last send failed; Send; and what an answer carries.
+ * ParcelFeedbackCarrierSheet (B-S62): who carries the parcel, without autocorrection or suggestions ([NoSuggestions]),
+ * whose Next goes to its page; its page as its reader has it, on the address keyboard without capitals, autocorrection
+ * or suggestions, whose Send sends where there is something to; why the last send failed; Send; and what an answer
+ * carries.
  */
 @Composable
 private fun CarrierSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
@@ -1136,34 +1138,38 @@ private fun CarrierSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
     FeedbackSheet(localizer.text("feedback.unknown.title"), FEEDBACK_CARRIER_SHEET, work.sending, work::dismissCarrier) {
         val whoLabel = localizer.text("feedback.unknown.who")
         FeedbackField(whoLabel) { focused ->
-            BasicTextField(
-                work.who,
-                work::typeWho,
-                Modifier.feedbackField(FEEDBACK_WHO, whoLabel, focused, writing),
-                textStyle = fieldStyle(),
-                singleLine = true,
-                cursorBrush = SolidColor(PeekTheme.colors.ink),
-                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, autoCorrectEnabled = false, imeAction = ImeAction.Next),
-                keyboardActions = KeyboardActions(onNext = { next.requestFocus() }),
-                decorationBox = { FieldFrame(focused.value, it) },
-            )
+            NoSuggestions {
+                BasicTextField(
+                    work.who,
+                    work::typeWho,
+                    Modifier.feedbackField(FEEDBACK_WHO, whoLabel, focused, writing),
+                    textStyle = fieldStyle(),
+                    singleLine = true,
+                    cursorBrush = SolidColor(PeekTheme.colors.ink),
+                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences, autoCorrectEnabled = false, imeAction = ImeAction.Next),
+                    keyboardActions = KeyboardActions(onNext = { next.requestFocus() }),
+                    decorationBox = { FieldFrame(focused.value, it) },
+                )
+            }
         }
         val whereLabel = localizer.text("feedback.unknown.where")
         FeedbackField(whereLabel) { focused ->
             // An address as its reader has it, with or without its scheme: a person reads it, nothing opens it.
-            BasicTextField(
-                work.address,
-                work::typeAddress,
-                Modifier.feedbackField(FEEDBACK_WHERE, whereLabel, focused, writing).focusRequester(next),
-                textStyle = fieldStyle(),
-                singleLine = true,
-                cursorBrush = SolidColor(PeekTheme.colors.ink),
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false, keyboardType = KeyboardType.Uri, imeAction = ImeAction.Send,
-                ),
-                keyboardActions = KeyboardActions(onSend = { if (!work.carrierEmpty) work.sendCarrier() }),
-                decorationBox = { FieldFrame(focused.value, it) },
-            )
+            NoSuggestions {
+                BasicTextField(
+                    work.address,
+                    work::typeAddress,
+                    Modifier.feedbackField(FEEDBACK_WHERE, whereLabel, focused, writing).focusRequester(next),
+                    textStyle = fieldStyle(),
+                    singleLine = true,
+                    cursorBrush = SolidColor(PeekTheme.colors.ink),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None, autoCorrectEnabled = false, keyboardType = KeyboardType.Uri, imeAction = ImeAction.Send,
+                    ),
+                    keyboardActions = KeyboardActions(onSend = { if (!work.carrierEmpty) work.sendCarrier() }),
+                    decorationBox = { FieldFrame(focused.value, it) },
+                )
+            }
         }
         if (work.failed) FeedbackFailure()
         SendButton(busy = work.sending, disabled = work.carrierEmpty, work::sendCarrier)

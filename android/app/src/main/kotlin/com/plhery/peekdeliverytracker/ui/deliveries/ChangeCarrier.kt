@@ -61,6 +61,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.keptFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
@@ -470,6 +471,7 @@ private fun CarrierRow(change: CarrierChange, refused: Boolean, focus: Accessibi
 /**
  * A field of the form as iOS draws one, its placeholder in the tertiary grey while it is empty, the cursor in the
  * accent. TalkBack reads the placeholder as its name. A postcode's ([postalCode]) offers the postcodes autofill knows.
+ * The keyboard offers no suggestions, as each of the form's fields is `.autocorrectionDisabled()` ([NoSuggestions]).
  * It keeps the focus and the keyboard through the window made again.
  */
 @Composable
@@ -484,28 +486,30 @@ private fun androidx.compose.foundation.layout.RowScope.CarrierField(
 ) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.body.sfLines()
-    BasicTextField(
-        value,
-        onValueChange,
-        Modifier
-            .weight(1f)
-            .testTag(tag)
-            .keptFocus()
-            .semantics {
-                contentDescription = placeholder
-                if (postalCode) contentType = ContentType.PostalCode
+    NoSuggestions {
+        BasicTextField(
+            value,
+            onValueChange,
+            Modifier
+                .weight(1f)
+                .testTag(tag)
+                .keptFocus()
+                .semantics {
+                    contentDescription = placeholder
+                    if (postalCode) contentType = ContentType.PostalCode
+                },
+            textStyle = font.copy(color = colors.label),
+            singleLine = singleLine,
+            cursorBrush = SolidColor(colors.accent),
+            keyboardOptions = keyboard,
+            decorationBox = { text ->
+                Box(contentAlignment = Alignment.CenterStart) {
+                    if (value.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font)
+                    text()
+                }
             },
-        textStyle = font.copy(color = colors.label),
-        singleLine = singleLine,
-        cursorBrush = SolidColor(colors.accent),
-        keyboardOptions = keyboard,
-        decorationBox = { text ->
-            Box(contentAlignment = Alignment.CenterStart) {
-                if (value.isEmpty()) Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = font)
-                text()
-            }
-        },
-    )
+        )
+    }
 }
 
 /** The keyboard a postcode field opens with: Android has no letters that open on their numbers, so the letters. */

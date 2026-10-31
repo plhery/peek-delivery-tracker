@@ -75,6 +75,7 @@ import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.map.LocalMapsAtOnce
 import com.plhery.peekdeliverytracker.ui.map.WorldMapView
+import com.plhery.peekdeliverytracker.ui.map.rememberWorldDetail
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.WindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.WindowLevelHinge
@@ -101,8 +102,8 @@ import kotlin.math.max
  * The map turns under a finger and zooms under two (A-G12), and flies between the views (A-AN46). Once moved, neither
  * view is selected, and either brings it back; the view shown brings it back too (A-G14). TalkBack hears the map as
  * one image named by its ends, as VoiceOver does, with nothing to adjust, reaches it through `mapFocus`, and hears the
- * views as a group, "Map view" as it comes to them, the one shown selected. The detail close up (rivers, roads and
- * towns from the detail tiles) comes with its step.
+ * views as a group, "Map view" as it comes to them, the one shown selected. Up close it draws the rivers, lakes,
+ * built-up areas, roads and towns of the detail tiles, read as it needs them ([rememberWorldDetail]).
  */
 @Composable
 internal fun ParcelMapScreen(
@@ -136,6 +137,7 @@ internal fun ParcelMapScreen(
     val palette = remember(accent) { MapPalette.map(accent) }
     val system = WindowInsets.safeDrawing
     val label = mapLabel(route, localizer)
+    val detail = rememberWorldDetail()
 
     BoxWithConstraints(modifier.fillMaxSize().background(colors.background).testTag(MAP_COVER)) {
         val safe = with(density) {
@@ -170,7 +172,8 @@ internal fun ParcelMapScreen(
                     // Pip came along from the card. Here he keeps clear of what lies over the map: the summary and the
                     // button that closes it.
                     pip = PipMood(stage)?.let { PipRequest(it, inset = true) },
-                    insets = layout.insets, recenter = recenter, language = language, onFreeChange = { free = it },
+                    insets = layout.insets, recenter = recenter, language = language, detail = detail,
+                    onFreeChange = { free = it },
                 )
             }
         }

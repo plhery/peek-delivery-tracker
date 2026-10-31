@@ -39,6 +39,7 @@ import com.plhery.peekdeliverytracker.ui.ProvideLocalizer
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.map.MapScenes
 import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
+import com.plhery.peekdeliverytracker.ui.map.WorldDetails
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import java.time.Duration
@@ -125,11 +126,14 @@ fun ComposeContentTestRule.drawn(node: SemanticsNodeInteraction): IntArray {
     return pixels
 }
 
-/** The maps' pictures are made on other threads: the test waits until each is drawn. */
+/**
+ * The maps' pictures are made on other threads, and an opened map's detail tiles read on them: the test waits until
+ * each is drawn, and each tile a map asked for is in.
+ */
 fun ComposeContentTestRule.waitsForMaps() {
     runBlocking { WorldAtlases.load().await() }
     registerIdlingResource(object : IdlingResource {
-        override val isIdleNow: Boolean get() = MapScenes.isIdle && WorldAtlases.isIdle
+        override val isIdleNow: Boolean get() = MapScenes.isIdle && WorldAtlases.isIdle && WorldDetails.isIdle
     })
 }
 

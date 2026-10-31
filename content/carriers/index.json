@@ -190,5 +190,6 @@
   { "id": "epost-global", "catalog": "epost-global", "name": "ePost Global", "languages": ["en"] },
   { "id": "gls-at", "catalog": "gls-at", "name": "GLS Austria", "languages": ["en"] },
   { "id": "india-post", "catalog": "india-post", "name": "India Post", "languages": ["en"] },
-  { "id": "morning-global", "catalog": "morning-global", "name": "Morning Global", "languages": ["en"] }
+  { "id": "morning-global", "catalog": "morning-global", "name": "Morning Global", "languages": ["en"] },
+  { "id": "border-express", "catalog": "border-express", "name": "Border Express", "languages": ["en"] }
 ]

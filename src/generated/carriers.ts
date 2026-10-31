@@ -1544,6 +1544,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Morning Global tracking: BR…MG numbers, statuses, contact",
       "name": "Morning Global",
       "color": "#050059"
+    },
+    {
+      "id": "border-express",
+      "catalog": "border-express",
+      "slug": "border-express-tracking",
+      "title": "Border Express tracking: consignment numbers and statuses",
+      "name": "Border Express",
+      "color": "#cc092f"
     }
   ],
   "de": [

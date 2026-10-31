@@ -6,7 +6,7 @@ published: 2026-10-31
 updated: 2026-10-31
 ---
 
-JRT (今日通, Jinritong) è 厦门今日通商贸有限公司, uno spedizioniere di Xiamen, in Cina. Se un negozio cinese ha spedito il tuo ordine con JRT, ti avrà dato un numero che inizia con JRT e finisce con MM: incollalo nel box qui sopra. Il tracking di JRT segue il pacco dalla Cina al volo, alla dogana e poi al corriere che lo consegna: verso l'Europa la cronologia finisce con DHL, di cui copia le scansioni.
+JRT (今日通, Jinritong) è 厦门今日通商贸有限公司, uno spedizioniere di Xiamen, in Cina. Se un negozio cinese ha spedito il tuo ordine con JRT, ti avrà dato un numero che inizia con JRT e finisce con MM: incollalo nel box qui sopra. Il tracking di JRT segue il pacco dalla Cina al volo, alla dogana e poi al corriere che lo consegna: verso l'Europa la cronologia finisce con DHL, di cui copia le scansioni, tranne sulla linea di JRT per l'Irlanda con FedEx nel nome del prodotto, dove il pacco passa a FedEx.
 
 ## Numero di tracking JRT: com'è fatto
 
@@ -46,6 +46,8 @@ Molte righe di JRT sono in cinese con accanto la traduzione inglese di JRT, e Pe
 
 Sulle spedizioni verso l'Europa, le righe che JRT scrive solo in cinese compaiono in Peek con l'inglese che usano altri spedizionieri: `货物电子信息已经收到` come «The electronic cargo information has been received», `到达收货点` come «Arrived at the receiving point», `货物离开操作中心` come «Goods leave the operation center» e `快件操作完成` come «Shipment departed from facility». La riga dell'aeroporto con il volo prenotato, `货物已交机场,预计…号的航班 Goods delivered to airport, scheduled on flight of the …`, indica il giorno del volo in cinese e in inglese; Peek la mostra come «Goods delivered to airport», perché il volo deve ancora partire.
 
+Più avanti nel viaggio verso l'Europa arrivano altre tre righe solo in cinese, che Peek mostra in inglese, tutte «In transito»: `航班已抵达` come «Flight has arrived» (l'atterraggio nell'aeroporto europeo indicato nella riga), `清关完成，中转德国中` come «Customs cleared, in transit to Germany» (sdoganato all'aeroporto di arrivo e in viaggio verso la Germania, dove passa al corriere che consegna) e `抵达德国，已交服务商` come «Arrived in Germany, handed to the delivering carrier» (affidato al corriere che consegna, per esempio DHL: non è la consegna a te).
+
 **Righe solo in inglese.** In Peek sono tutte «In transito», salvo dove indicato:
 
 - `Shipment arrived at facility`, `Sending to the airport`, `The goods have been packed and sent to the airline`: in viaggio verso l'aeroporto.
@@ -78,9 +80,9 @@ Sulle spedizioni verso l'Europa tutti gli orari del tracking di JRT sono ora di 
 
 ## Chi consegna i pacchi JRT in Italia
 
-**Verso l'Europa** la cronologia di JRT finisce con DHL, a cui JRT affida il pacco in una filiale Deutsche Post. Quando JRT ha consegnato il pacco, nei suoi dati il numero DHL prende il posto di quello JRT, ma il nome della linea continua a mancare. Se Peek riconosce quel numero come DHL, mostra «Consegna con DHL» con il numero e passa al tracking di DHL appena DHL scansiona il pacco (vedi sotto). Altrimenti chiedi al venditore il numero DHL: con quello il tracking di DHL segue il pacco fino alla consegna (numeri e stati nella pagina [DHL Paket](carrier:dhl)).
+**Verso l'Europa**, salvo sulla linea per l'Irlanda con FedEx (vedi sotto), la cronologia di JRT finisce con DHL, a cui JRT affida il pacco in una filiale Deutsche Post. Quando JRT ha consegnato il pacco, nei suoi dati il numero DHL prende il posto di quello JRT, ma il nome della linea continua a mancare. Se Peek riconosce quel numero come DHL, mostra «Consegna con DHL» con il numero e passa al tracking di DHL appena DHL scansiona il pacco (vedi sotto). Altrimenti chiedi al venditore il numero DHL: con quello il tracking di DHL segue il pacco fino alla consegna (numeri e stati nella pagina [DHL Paket](carrier:dhl)).
 
-**Con FedEx** la prima riga nomina FedEx, ma Peek non segue il pacco sul tracking di FedEx: chiedi al venditore il numero FedEx e seguilo su [FedEx](carrier:fedex).
+**Sulla linea per l'Irlanda con FedEx nel nome del prodotto** JRT passa il pacco a FedEx, e da quel momento nei suoi dati il numero FedEx prende il posto di quello JRT. Se quel numero ha una delle forme dei numeri FedEx, Peek mostra «Consegna con FedEx» con il numero e passa al tracking di FedEx appena FedEx scansiona il pacco, come con DHL (vedi sotto). Se a consegnare è FedEx e Peek non mostra un numero FedEx, chiedilo al venditore e seguilo su [FedEx](carrier:fedex).
 
 **Senza DHL né FedEx nella cronologia** Peek non sa chi consegna il pacco: chiedi al venditore quale corriere te lo porta e con che numero. Tentativi di consegna, punti di ritiro e giacenza seguono le regole di quel corriere, non di JRT. Ti chiedono di pagare qualcosa per la dogana? Leggi [pacco fermo in dogana](guide:customs).
 
@@ -90,7 +92,7 @@ Sulle spedizioni verso l'Europa tutti gli orari del tracking di JRT sono ora di 
 
 **In attesa del volo.** Le righe del volo indicano il giorno per cui è prenotato. Se quel giorno passa senza una riga di partenza, avvisa il venditore.
 
-**Niente dopo `已交服务商`.** JRT ha finito la sua parte. Se il suo tracking non copia le scansioni di DHL e Peek non mostra il numero DHL, i passi successivi sono sul tracking di chi consegna: chiedi al venditore quel numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Niente dopo `已交服务商`.** JRT ha finito la sua parte. Se il suo tracking non copia le scansioni di DHL e Peek non mostra il numero DHL o FedEx, i passi successivi sono sul tracking di chi consegna: chiedi al venditore quel numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Nessun risultato.** Per un numero sconosciuto il tracking di JRT mostra un solo risultato, con il numero come riferimento e il resto vuoto. Peek mostra «In attesa del corriere» e continua a controllare. Confronta il numero con il messaggio del venditore, carattere per carattere.
 
@@ -104,11 +106,11 @@ Al 30 ottobre 2026 Peek non ha trovato contatti di JRT: oltre al tracking non co
 
 ## Tracciare un pacco JRT con Peek
 
-[Peek](/) riconosce un numero JRT dalla forma (JRT, dieci cifre e MM, che nessun altro corriere del suo catalogo usa) e riconosce anche un link al tracking di JRT. Con un riferimento UP di sedici cifre mostra «Verifica dei servizi di tracciamento…», chiede al tracking di JRT se lo conosce e, se sì, sceglie JRT. Gli altri riferimenti non hanno una forma riconoscibile: incollali lo stesso, perché Peek segue più di 3.500 corrieri, poi premi «Cambia» e scegli JRT (lo trovi anche scrivendo 今日通 o Jinritong), oppure usa «Cambia corriere» su un pacco già aggiunto. Se hai usato un riferimento, il numero JRT compare poi sotto «JRT lo traccia con il numero», finché JRT non consegna il pacco e nei dati non resta il numero DHL. Peek però toglie i trattini, quindi un riferimento che li contiene non viene trovato: chiedi al venditore il numero JRT…MM.
+[Peek](/) riconosce un numero JRT dalla forma (JRT, dieci cifre e MM, che nessun altro corriere del suo catalogo usa) e riconosce anche un link al tracking di JRT. Con un riferimento UP di sedici cifre mostra «Verifica dei servizi di tracciamento…», chiede al tracking di JRT se lo conosce e, se sì, sceglie JRT. Gli altri riferimenti non hanno una forma riconoscibile: incollali lo stesso, perché Peek segue più di 3.500 corrieri, poi premi «Cambia» e scegli JRT (lo trovi anche scrivendo 今日通 o Jinritong), oppure usa «Cambia corriere» su un pacco già aggiunto. Se hai usato un riferimento, il numero JRT compare poi sotto «JRT lo traccia con il numero», finché JRT non consegna il pacco e nei dati non resta il numero DHL o FedEx. Peek però toglie i trattini, quindi un riferimento che li contiene non viene trovato: chiedi al venditore il numero JRT…MM.
 
 Peek mostra lo stato, ricavato dalle righe e non dal riepilogo di JRT, ogni riga con il suo luogo e, quando JRT lo indica, il Paese di destinazione. Legge gli orari sull'ora di Pechino (le righe copiate da UPS e quelle con un luogo negli Stati Uniti, sull'ora locale di quel luogo) e li mostra nel fuso orario del tuo dispositivo. Tiene da parte le righe scritte più di dodici ore prima dell'orario che riportano e quelle datate dopo il controllo. Lascia fuori nomi, indirizzo, CAP, peso, costi, firma e prova di consegna, e non indica una data di consegna prevista: JRT non la dà.
 
-Verso l'Europa, quando i dati di JRT contengono un numero che Peek riconosce come DHL, Peek interroga anche DHL e passa al suo tracking appena DHL mostra una scansione recente almeno quanto l'ultima di JRT, tenendo quelle di JRT nella cronologia; fino ad allora resta sul tracking di JRT, con le scansioni di DHL che copia. L'unico altro passaggio che Peek ricava dai dati di JRT è verso la [Posta Svizzera](carrier:swiss-post), quando i dati nominano una linea e un numero della Posta Svizzera per un pacco diretto in Svizzera o nel Liechtenstein. Se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco a sé.
+Verso l'Europa, quando i dati di JRT contengono un numero che Peek riconosce come DHL, Peek interroga anche DHL e passa al suo tracking appena DHL mostra una scansione recente almeno quanto l'ultima di JRT, tenendo quelle di JRT nella cronologia; fino ad allora resta sul tracking di JRT, con le scansioni di DHL che copia. Sulla linea per l'Irlanda con FedEx nel nome del prodotto Peek fa lo stesso con FedEx, quando i dati di JRT contengono un numero con una delle forme dei numeri FedEx. L'unico altro passaggio che Peek ricava dai dati di JRT è verso la [Posta Svizzera](carrier:swiss-post), quando i dati nominano una linea e un numero della Posta Svizzera per un pacco diretto in Svizzera o nel Liechtenstein. Se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco a sé.
 
 Peek controlla ogni 10 minuti di giorno, ogni una o due ore di notte e ogni ora quando JRT tace (dopo 12 ore ferme alle prime righe o due giorni senza novità). Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: con «Passaggi importanti» ti avvisa per le righe di dogana di JRT e per quelle di DHL su tentativo, ritiro, consegna e reso, non per i voli né per `已交服务商`. Peek non può contattare JRT o il venditore al posto tuo.
 
@@ -124,12 +126,12 @@ Peek controlla ogni 10 minuti di giorno, ogni una o due ore di notte e ogni ora 
 
 ### Chi consegna i pacchi JRT in Italia?
 
-Verso l'Europa la cronologia di JRT finisce con DHL, che fa l'ultimo tratto e di cui JRT copia le scansioni; alcuni pacchi passano invece a FedEx. Negli altri casi Peek non lo sa: chiedi al venditore quale corriere consegna e con che numero.
+Verso l'Europa la cronologia di JRT finisce con DHL, che fa l'ultimo tratto e di cui JRT copia le scansioni; alcuni pacchi passano invece a FedEx, come quelli della linea di JRT per l'Irlanda con FedEx nel nome del prodotto. Negli altri casi Peek non lo sa: chiedi al venditore quale corriere consegna e con che numero.
 
 ### A chi mi rivolgo se il pacco JRT non arriva?
 
 Al venditore da cui hai comprato: è lui che ha prenotato la spedizione con JRT. Oltre al tracking, Peek non conosce siti né contatti di JRT.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome e iniziali dell'azienda, piattaforma Hualei, tracking su un indirizzo numerico in HTTP semplice, i suoi link e nessun link pubblicato, forme JRT…MM e UP, ricerca per numero o riferimento con i trattini, diciture delle righe e loro fasi, date mese.giorno, l'inglese delle righe solo in cinese, righe copiate da DHL (tentativo, ritiro, consegna, reso) e filiale Deutsche Post, riga di FedEx, il numero DHL nei dati dopo la consegna e il passaggio a DHL, passaggio alla Posta Svizzera, ora di Pechino, risposta per un numero sconosciuto, cosa Peek mostra, tiene da parte e lascia fuori
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome e iniziali dell'azienda, piattaforma Hualei, tracking su un indirizzo numerico in HTTP semplice, i suoi link e nessun link pubblicato, forme JRT…MM e UP, ricerca per numero o riferimento con i trattini, diciture delle righe e loro fasi, date mese.giorno, l'inglese delle righe solo in cinese, le righe solo in cinese verso l'Europa dall'atterraggio al passaggio in Germania, righe copiate da DHL (tentativo, ritiro, consegna, reso) e filiale Deutsche Post, riga di FedEx, il numero DHL o FedEx nei dati dopo la consegna, il passaggio a DHL e, sulla linea per l'Irlanda, a FedEx, passaggio alla Posta Svizzera, ora di Pechino, risposta per un numero sconosciuto, cosa Peek mostra, tiene da parte e lascia fuori
 :::

@@ -6,7 +6,7 @@ published: 2026-10-31
 updated: 2026-10-31
 ---
 
-JRT (今日通, Jinritong) to 厦门今日通商贸有限公司, firma spedycyjna z Xiamen w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez JRT, dostajesz numer, który zaczyna się od JRT i kończy na MM: wklej go w pole powyżej. Śledzenie JRT pokazuje drogę paczki z Chin: lot, odprawę celną i przekazanie firmie, która ją doręcza. Przy wysyłkach do Europy w historii JRT pojawia się dalej DHL: JRT przepisuje jego skany.
+JRT (今日通, Jinritong) to 厦门今日通商贸有限公司, firma spedycyjna z Xiamen w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez JRT, dostajesz numer, który zaczyna się od JRT i kończy na MM: wklej go w pole powyżej. Śledzenie JRT pokazuje drogę paczki z Chin: lot, odprawę celną i przekazanie firmie, która ją doręcza. Przy wysyłkach do Europy w historii JRT pojawia się dalej DHL: JRT przepisuje jego skany. Wyjątkiem jest linia JRT do Irlandii z FedEx w nazwie produktu: tam ostatni odcinek ma FedEx.
 
 ## Numer przesyłki JRT: jak wygląda
 
@@ -46,6 +46,8 @@ Wiele linii JRT to tekst po chińsku, a za nim angielskie tłumaczenie samego JR
 
 Przy przesyłkach do Europy linie, które JRT pisze tylko po chińsku, Peek pokazuje w angielskim brzmieniu, jakie nadają im inni spedytorzy: `货物电子信息已经收到` jako „The electronic cargo information has been received”, `到达收货点` jako „Arrived at the receiving point”, `货物离开操作中心` jako „Goods leave the operation center”, a `快件操作完成` jako „Shipment departed from facility”. Linia `货物已交机场,预计…号的航班 Goods delivered to airport, scheduled on flight of the …` podaje dzień zarezerwowanego lotu w obu częściach; Peek pokazuje ją jako „Goods delivered to airport”, bo lot jeszcze się nie odbył.
 
+Przy przesyłkach do Europy JRT pisze tylko po chińsku także trzy linie z dalszej części drogi. Peek pokazuje je po angielsku, wszystkie ze statusem „W transporcie”: `航班已抵达` jako „Flight has arrived” (lądowanie na europejskim lotnisku podanym w linii), `清关完成，中转德国中` jako „Customs cleared, in transit to Germany” (odprawa na lotnisku przylotu zakończona, paczka jedzie do Niemiec, gdzie trafi do firmy, która doręcza) i `抵达德国，已交服务商` jako „Arrived in Germany, handed to the delivering carrier” (przekazanie firmie, która doręcza, np. DHL; to jeszcze nie doręczenie do Ciebie).
+
 **Linie tylko po angielsku.** Inne linie JRT są wyłącznie po angielsku i w Peek mają status „W transporcie”, chyba że zaznaczono inaczej:
 
 - `Shipment arrived at facility`, `Sending to the airport`, `The goods have been packed and sent to the airline`: paczka jest w drodze na lotnisko.
@@ -63,9 +65,9 @@ Przy przesyłkach do Europy wszystkie godziny w śledzeniu JRT są podane w czas
 
 ## Kto doręcza paczki JRT w Polsce
 
-**Przy wysyłkach do Europy** historia JRT kończy się skanami DHL: JRT nadaje paczkę w placówce Deutsche Post, a jego śledzenie przepisuje skany DHL. Jeśli widzisz je w historii przesyłki, ostatni odcinek ma DHL. Gdy JRT przekaże już paczkę DHL, w jego rekordzie numer DHL zastępuje numer JRT (nazwy kanału wysyłki nadal brak). Jeśli Peek rozpozna ten numer jako numer DHL, pokaże „Doręcza: DHL” z tym numerem i przejdzie do śledzenia DHL, gdy tylko DHL zeskanuje paczkę (więcej niżej). Jeśli nie, poproś sprzedawcę o numer DHL: śledzenie DHL prowadzi paczkę aż do doręczenia (numery i statusy DHL opisuje strona [DHL Paket](carrier:dhl)).
+**Przy wysyłkach do Europy** historia JRT kończy się skanami DHL (poza linią do Irlandii z FedEx, opisaną niżej): JRT nadaje paczkę w placówce Deutsche Post, a jego śledzenie przepisuje skany DHL. Jeśli widzisz je w historii przesyłki, ostatni odcinek ma DHL. Gdy JRT przekaże już paczkę DHL, w jego rekordzie numer DHL zastępuje numer JRT (nazwy kanału wysyłki nadal brak). Jeśli Peek rozpozna ten numer jako numer DHL, pokaże „Doręcza: DHL” z tym numerem i przejdzie do śledzenia DHL, gdy tylko DHL zeskanuje paczkę (więcej niżej). Jeśli nie, poproś sprzedawcę o numer DHL: śledzenie DHL prowadzi paczkę aż do doręczenia (numery i statusy DHL opisuje strona [DHL Paket](carrier:dhl)).
 
-**Przy FedEx** pierwsza linia historii wymienia FedEx, ale Peek nie śledzi paczki dalej w systemie FedEx. Poproś sprzedawcę o numer FedEx i śledź go na stronie [FedEx](carrier:fedex).
+**Na linii do Irlandii z FedEx w nazwie produktu** JRT przekazuje paczkę firmie FedEx, a w jego rekordzie numer FedEx zastępuje wtedy numer JRT. Jeśli ten numer ma jeden z kształtów numerów FedEx, Peek pokaże „Doręcza: FedEx” z tym numerem i przejdzie do śledzenia FedEx, gdy tylko FedEx zeskanuje paczkę, tak jak przy DHL (więcej niżej). Jeśli paczkę doręcza FedEx, a Peek nie pokazuje numeru FedEx, poproś sprzedawcę o ten numer i śledź go na stronie [FedEx](carrier:fedex).
 
 **W pozostałych przypadkach** Peek nie wie, kto doręcza paczki JRT. Zapytaj sprzedawcę, która firma doręcza Twoje zamówienie i pod jakim numerem: próby doręczenia, punkty odbioru i czas przechowania paczki to zasady tej firmy. Musisz zapłacić cło albo VAT? Zobacz poradnik o [paczce zatrzymanej przez urząd celny](guide:customs).
 
@@ -75,7 +77,7 @@ Przy przesyłkach do Europy wszystkie godziny w śledzeniu JRT są podane w czas
 
 **Czeka na lot.** Linia o locie podaje dzień, na który go zarezerwowano. Jeśli ten dzień minie bez linii o starcie samolotu, daj znać sprzedawcy.
 
-**Nic po `已交服务商`.** JRT skończył swoją część. Jeśli jego śledzenie nie przepisuje skanów DHL, a Peek nie pokazuje numeru DHL, dalsze kroki są w śledzeniu firmy, która doręcza: poproś sprzedawcę o jej numer. Więcej w poradnikach [status przesyłki się nie zmienia](guide:tracking-not-updating) i [śledzenie paczki z Chin](guide:tracking-from-china).
+**Nic po `已交服务商`.** JRT skończył swoją część. Jeśli jego śledzenie nie przepisuje skanów DHL, a Peek nie pokazuje numeru DHL ani FedEx, dalsze kroki są w śledzeniu firmy, która doręcza: poproś sprzedawcę o jej numer. Więcej w poradnikach [status przesyłki się nie zmienia](guide:tracking-not-updating) i [śledzenie paczki z Chin](guide:tracking-from-china).
 
 **Nic nie znaleziono.** Gdy JRT nie zna numeru, jego strona pokazuje jeden wynik z tym numerem jako numerem referencyjnym i wszystkimi innymi kolumnami pustymi. Peek pokazuje wtedy „Oczekiwanie na przewoźnika” (a gdy sam dobiera przewoźnika do numeru z UP: „Oczekiwanie na pierwszy skan przewoźnika JRT”) i sprawdza dalej. Porównaj numer z wiadomością od sprzedawcy, znak po znaku.
 
@@ -91,11 +93,11 @@ Stan na 29 października 2026 Peek nie znalazł danych kontaktowych JRT: poza st
 
 ## Śledzenie paczki JRT w Peek
 
-[Peek](/) rozpoznaje numer JRT po samym kształcie: JRT, dziesięć cyfr i MM, a takich numerów nie ma żaden inny przewoźnik z jego katalogu. Rozpoznaje też link do strony śledzenia JRT (opisany wyżej). Przy numerze referencyjnym z UP i szesnastoma cyframi Peek pyta stronę JRT, czy go zna, i wybiera JRT, gdy zna. Inny numer referencyjny nie ma kształtu, po którym dałoby się go rozpoznać: i tak go wklej, bo Peek śledzi ponad 3500 przewoźników, a potem kliknij „Zmień” i wybierz JRT (znajdziesz go też, wpisując 今日通 albo Jinritong). Przy dodanej już przesyłce użyj „Zmień przewoźnika”. Gdy śledzisz przesyłkę po numerze referencyjnym, Peek pokaże numer JRT przy „JRT śledzi przesyłkę pod numerem”, dopóki JRT nie przekaże paczki DHL i w rekordzie nie pojawi się numer DHL. Peek usuwa jednak myślniki, więc numeru referencyjnego z myślnikami przez Peek nie znajdziesz: poproś sprzedawcę o numer JRT…MM.
+[Peek](/) rozpoznaje numer JRT po samym kształcie: JRT, dziesięć cyfr i MM, a takich numerów nie ma żaden inny przewoźnik z jego katalogu. Rozpoznaje też link do strony śledzenia JRT (opisany wyżej). Przy numerze referencyjnym z UP i szesnastoma cyframi Peek pyta stronę JRT, czy go zna, i wybiera JRT, gdy zna. Inny numer referencyjny nie ma kształtu, po którym dałoby się go rozpoznać: i tak go wklej, bo Peek śledzi ponad 3500 przewoźników, a potem kliknij „Zmień” i wybierz JRT (znajdziesz go też, wpisując 今日通 albo Jinritong). Przy dodanej już przesyłce użyj „Zmień przewoźnika”. Gdy śledzisz przesyłkę po numerze referencyjnym, Peek pokaże numer JRT przy „JRT śledzi przesyłkę pod numerem”, dopóki JRT nie przekaże paczki dalej i w rekordzie nie pojawi się numer DHL albo FedEx. Peek usuwa jednak myślniki, więc numeru referencyjnego z myślnikami przez Peek nie znajdziesz: poproś sprzedawcę o numer JRT…MM.
 
 Peek pokazuje status, każdą linię z jej miejscem, a także kraj docelowy, gdy rekord JRT go podaje. Status ustala na podstawie linii, nie podsumowania w rekordzie. Godziny odczytuje w czasie pekińskim (przepisane skany UPS i linie z miejscem w Stanach Zjednoczonych w czasie lokalnym tego miejsca) i pokazuje w strefie czasowej Twojego urządzenia. Pomija linię zapisaną ponad dwanaście godzin przed godziną, którą nosi, i każdą linię z datą późniejszą niż jego sprawdzenie. Nie odczytuje nazwisk, adresu, kodów pocztowych, wagi, opłat, podpisu ani potwierdzenia doręczenia i nie pokazuje przewidywanej daty doręczenia: JRT jej nie podaje.
 
-Paczki do Europy Peek śledzi na stronie JRT, razem z przepisanymi skanami DHL, dopóki rekord JRT nie poda numeru, który Peek rozpozna jako numer DHL. Wtedy Peek pyta też DHL i przechodzi do jego śledzenia, gdy DHL pokaże skan nie starszy niż ostatni skan JRT; skany JRT zostają w historii. Jedyne inne przekazanie, które Peek bierze z rekordu JRT, to przekazanie Poczcie Szwajcarskiej, gdy rekord podaje jej kanał wysyłki i numer przy paczce do Szwajcarii lub Liechtensteinu. Gdy sprzedawca poda Ci numer innej firmy, która doręcza, dodaj go jako osobną przesyłkę.
+Paczki do Europy Peek śledzi na stronie JRT, razem z przepisanymi skanami DHL, dopóki rekord JRT nie poda numeru, który Peek rozpozna jako numer DHL. Wtedy Peek pyta też DHL i przechodzi do jego śledzenia, gdy DHL pokaże skan nie starszy niż ostatni skan JRT; skany JRT zostają w historii. Tak samo jest na linii do Irlandii z FedEx w nazwie produktu: gdy rekord JRT poda numer o jednym z kształtów numerów FedEx, Peek pyta też FedEx i przechodzi do jego śledzenia na tych samych zasadach. Jedyne inne przekazanie, które Peek bierze z rekordu JRT, to przekazanie Poczcie Szwajcarskiej, gdy rekord podaje jej kanał wysyłki i numer przy paczce do Szwajcarii lub Liechtensteinu. Gdy sprzedawca poda Ci numer innej firmy, która doręcza, dodaj go jako osobną przesyłkę.
 
 Peek sprawdza paczkę w dzień co 10 minut, a w nocy co godzinę lub dwie. Co godzinę sprawdza ją też wtedy, gdy JRT milknie: po 12 godzinach przy pierwszych liniach albo po dwóch dniach bez nowej linii. Powiadomienia możesz dostawać o każdym skanie („Każdy skan”), tylko o ważnych etapach („Ważne etapy”) albo tylko o doręczeniu („Tylko doręczenie”). „Ważne etapy” (dostawa, odbiór, odprawa celna, nieudane doręczenia i zwroty) powiadomią Cię o liniach JRT ze statusem „W urzędzie celnym” i o przepisanych liniach DHL o nieudanym doręczeniu, paczce w punkcie odbioru, doręczeniu i zwrocie, ale nie o lotach ani o `已交服务商`. Peek nie skontaktuje się za Ciebie z JRT ani ze sprzedawcą.
 
@@ -111,12 +113,12 @@ Przez tłumaczenia. `Cargo delivered to airport` znaczy, że JRT przekazał pacz
 
 ### Kto doręcza paczki JRT w Polsce?
 
-Przy wysyłkach do Europy historia JRT pokazuje DHL, którego skany przepisuje śledzenie JRT; część paczek trafia do FedEx. Poza tym Peek nie wie: zapytaj sprzedawcę, która firma doręcza i pod jakim numerem.
+Przy wysyłkach do Europy historia JRT pokazuje DHL, którego skany przepisuje śledzenie JRT; część paczek trafia do FedEx, na przykład te na linii JRT do Irlandii z FedEx w nazwie produktu. Poza tym Peek nie wie: zapytaj sprzedawcę, która firma doręcza i pod jakim numerem.
 
 ### Do kogo pisać, gdy paczka JRT zaginęła?
 
 Do sprzedawcy, u którego kupowałeś: to on zamówił przesyłkę u JRT. Peek nie zna żadnej strony ani danych kontaktowych JRT poza stroną śledzenia.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inicjały, platforma Hualei, strona śledzenia pod adresem IP po zwykłym HTTP, jej linki i brak opublikowanego linku, kształty numerów JRT…MM i UP, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie linii i ich etapy, angielskie wersje linii chińskich, przepisane linie DHL (także doręczenie, próba doręczenia, odbiór i zwrot) i placówka Deutsche Post, linia FedEx, numer DHL w rekordzie po przekazaniu paczki i przekazanie DHL, przekazanie Poczcie Szwajcarskiej, zegar pekiński, odpowiedź na nieznany numer, co Peek pokazuje, pomija i czego nie odczytuje
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inicjały, platforma Hualei, strona śledzenia pod adresem IP po zwykłym HTTP, jej linki i brak opublikowanego linku, kształty numerów JRT…MM i UP, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie linii i ich etapy, angielskie wersje linii chińskich, chińskie linie przy przesyłkach do Europy od lądowania do przekazania w Niemczech, przepisane linie DHL (także doręczenie, próba doręczenia, odbiór i zwrot) i placówka Deutsche Post, linia FedEx, numer DHL albo FedEx w rekordzie po przekazaniu paczki, przekazanie DHL i, na linii do Irlandii, FedEx, przekazanie Poczcie Szwajcarskiej, zegar pekiński, odpowiedź na nieznany numer, co Peek pokazuje, pomija i czego nie odczytuje
 :::

@@ -54,9 +54,11 @@ import com.plhery.peekdeliverytracker.core.Rect as MapRect
 import com.plhery.peekdeliverytracker.ui.deliveries.OverlayLayer
 import com.plhery.peekdeliverytracker.ui.draw.toComposePath
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
+import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.materialBackdropLayer
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import kotlin.math.max
 import kotlin.math.min
@@ -157,6 +159,8 @@ private fun PopoverLayer(
         val shape = with(density) { remember(frame, look) { PopoverShape(frame, ARROW_HEIGHT.toPx(), ARROW_WIDTH.toPx(), look.radius.toPx()) } }
         Box(
             Modifier
+                // A layer over the tab, which the glass of an alert over the popover blurs with the tab.
+                .then(if (backdrop != null) Modifier.materialBackdropLayer(backdrop) else Modifier)
                 .layout { measurable, constraints ->
                     val bounds = frame.bounds
                     val placeable = measurable.measure(Constraints.fixed(bounds.width.roundToInt(), bounds.height.roundToInt()))
@@ -189,7 +193,8 @@ private fun PopoverLayer(
                 }
             }
         }
-        menus.content?.invoke()
+        val above = remember(backdrop) { backdrop?.layered() }
+        CompositionLocalProvider(LocalMaterialBackdrop provides above) { menus.content?.invoke() }
     }
 }
 

@@ -264,10 +264,16 @@ internal class ParcelShareSheetWork(
         if (this.news === news) this.news = null
     }
 
-    /** The address was copied: "Copied" for two seconds, each copy its own, as the iPhone's task does. */
+    private var clearing: Job? = null
+
+    /**
+     * The address was copied: "Copied" for two seconds from the last copy (B-AN09). The iPhone's earlier task clears a
+     * later copy's word early; this doesn't.
+     */
     fun showCopied() {
         copied = true
-        scope.launch {
+        clearing?.cancel()
+        clearing = scope.launch {
             delay(COPIED_DURATION)
             copied = false
         }

@@ -613,6 +613,14 @@ class ParcelShareTest {
         compose.mainClock.advanceTimeBy(200)
         assertTrue(shows(PARCEL_SHARE_COPY, "Copy"))
         assertFalse(shows(PARCEL_SHARE_COPY, "Copied"))
+        // A second copy says it for 2 s from then, not until the first one's time is up as the iPhone's does.
+        node(PARCEL_SHARE_COPY).performClick()
+        compose.mainClock.advanceTimeBy(1_500)
+        node(PARCEL_SHARE_COPY).performClick()
+        compose.mainClock.advanceTimeBy(1_900)
+        assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))
+        compose.mainClock.advanceTimeBy(200)
+        assertFalse(shows(PARCEL_SHARE_COPY, "Copied"))
         // Nothing went to the system's share sheet.
         assertNull(handedOut())
     }

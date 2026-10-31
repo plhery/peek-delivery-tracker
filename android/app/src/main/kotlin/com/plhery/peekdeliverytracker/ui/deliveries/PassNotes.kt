@@ -16,10 +16,11 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,7 +58,6 @@ import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 // What `liveParcelPass` shows under the card: the pickup point's card, what the carrier says, the shipment's facts,
 // and what the page says where no carrier is asked or the last check failed.
@@ -73,7 +73,7 @@ import kotlinx.coroutines.launch
  * in equal halves while each reads on one line in its half, otherwise one under the other ([PickupButtons]).
  * Directions (B-G16, B-L06) calls `onDirections` and opens [directionsUrl], "Show on map" with a search where the
  * carrier gives no address, which has no copy. The copy calls `onCopy`, which puts the address on the clipboard, and
- * says "Copied" for 2 s in the room of its own words (B-H02).
+ * says "Copied" for 2 s from the last tap in the room of its own words (B-H02, B-AN09).
  */
 @Composable
 internal fun PickupPointCard(
@@ -91,8 +91,15 @@ internal fun PickupPointCard(
     val surface = colors.resolve(identity.surface)
     val secondary = colors.secondaryLabel
     val uriHandler = LocalUriHandler.current
-    val scope = rememberCoroutineScope()
     var copied by remember { mutableStateOf(false) }
+    // How many times it copied: each copy says it for 2 s from then, where the iPhone's earlier task clears a later
+    // copy's word.
+    var copies by remember { mutableIntStateOf(0) }
+    LaunchedEffect(copies) {
+        if (copies == 0) return@LaunchedEffect
+        delay(COPIED_DURATION)
+        copied = false
+    }
     val address = point.address
     Column(
         modifier
@@ -148,11 +155,7 @@ internal fun PickupPointCard(
                 val copy = {
                     onCopy()
                     copied = true
-                    // Each copy clears the word after its own 2 s, as the iPhone's task does.
-                    scope.launch {
-                        delay(COPIED_DURATION)
-                        copied = false
-                    }
+                    copies++
                     Unit
                 }
                 val label = localizer.text(if (copied) "detail.copied" else "detail.pickupCopyAddress")

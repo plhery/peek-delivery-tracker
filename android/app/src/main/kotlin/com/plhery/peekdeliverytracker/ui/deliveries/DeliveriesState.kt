@@ -1240,19 +1240,21 @@ internal class DeliveriesState(
 
     /**
      * Copies one of the numbers of the page with `pageId` (the page's `copy(_:carrier:)`): counted, on the clipboard as
-     * its carrier's site takes it with the success tap ([copyNumber]), and said on its row for 2 s. A copy's time ends
-     * the word while it still says that number, as the iPhone's task checks, so a copy of another number since keeps
-     * its whole 2 s and a second copy of the same one doesn't.
+     * its carrier's site takes it with the success tap ([copyNumber]), and said on its row for 2 s from the last copy
+     * (B-AN09), of that number or another. The iPhone's task ends the word 2 s after an earlier copy of the same
+     * number; this doesn't.
      */
     fun copyOnPage(pageId: UUID, entry: ParcelTrackingNumber) {
         copyNumber(entry)
-        val copied = CopiedNumber(pageId, entry.number)
-        copiedNumber = copied
-        scope.launch {
+        copiedNumber = CopiedNumber(pageId, entry.number)
+        copiedClearing?.cancel()
+        copiedClearing = scope.launch {
             delay(COPIED_DURATION)
-            if (copiedNumber == copied) copiedNumber = null
+            copiedNumber = null
         }
     }
+
+    private var copiedClearing: Job? = null
 
     /** `refreshFromPull()`: holds the pull open until every parcel has been checked, then shows the result on the seal. */
     fun refreshFromPull() {

@@ -449,11 +449,13 @@ class PassNotesTest {
         copy.assertContentDescriptionEquals("Copy address")
         assertFalse(textExists("Copied"))
 
-        // As on the iPhone, a second copy's word goes when the first one's time is up.
+        // A second copy says it for 2 s from then, not until the first one's time is up as the iPhone's does.
         copy.performClick()
         compose.mainClock.advanceTimeBy(1_500)
         copy.performClick()
-        compose.mainClock.advanceTimeBy(600)
+        compose.mainClock.advanceTimeBy(1_900)
+        copy.assertContentDescriptionEquals("Copied")
+        compose.mainClock.advanceTimeBy(200)
         copy.assertContentDescriptionEquals("Copy address")
         compose.mainClock.autoAdvance = true
         assertEquals(3, source.actions.count { it == "parcel-pickup-copy" })

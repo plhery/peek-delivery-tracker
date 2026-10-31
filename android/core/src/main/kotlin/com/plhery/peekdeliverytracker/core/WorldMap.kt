@@ -30,7 +30,7 @@ import kotlinx.serialization.json.jsonObject
 
 // From WorldMap.swift, everything but the views: the map data, the camera and its projection, the outlines it fills,
 // the palettes, the layout of what is drawn over the land, and what MapPainter draws, as steps for :app's canvas to
-// carry out. WorldMapView and PulsingHalo are :app's.
+// carry out. What WorldMapView keeps of its camera and does to it is GlobeMotion; the view and PulsingHalo are :app's.
 
 // MARK: - Map data
 
@@ -486,6 +486,139 @@ data class GlobeCamera(
             )
         }
     }
+}
+
+/**
+ * `moveGesture`'s drag: one finger turns the globe from where the gesture started. The centre moves against the
+ * finger's `translation`, in points, a point of the globe's surface per point at its scale, and its latitude stays
+ * within 80° of the equator.
+ */
+fun GlobeCamera.dragged(translation: Size): GlobeCamera {
+    val degrees = 180 / PI / scale
+    return GlobeCamera(
+        center = GeoPoint(
+            longitude = center.longitude - translation.width * degrees,
+            latitude = swiftMax(-80.0, swiftMin(80.0, center.latitude + translation.height * degrees)),
+        ),
+        scale = scale,
+        offset = offset,
+    )
+}
+
+/**
+ * `zoomArea(_:)`: where zooming settles a globe that no longer fills a view of `size` with `insets`, the middle of
+ * what the insets leave, and how much view there is, the shorter side of it.
+ */
+data class GlobeZoomArea(val middle: Point, val viewport: Double) {
+    companion object {
+        fun of(size: Size, insets: EdgeInsets): GlobeZoomArea = GlobeZoomArea(
+            Point((insets.leading + size.width - insets.trailing) / 2, (insets.top + size.height - insets.bottom) / 2),
+            swiftMin(size.width - insets.leading - insets.trailing, size.height - insets.top - insets.bottom),
+        )
+    }
+}
+
+/**
+ * `WorldMapView.Flight`: the camera flying from `from` to `to` over `duration` seconds (`GlobeCamera.flightDuration`),
+ * along `GlobeCamera.flight`, eased in and out. Each flight is its own: a flight is never equal to another.
+ */
+class GlobeFlight(val from: GlobeCamera, val to: GlobeCamera, viewport: Double) {
+    private val path = GlobeCamera.flight(from, to, viewport)
+
+    val duration: Double = GlobeCamera.flightDuration(from, to)
+
+    /** The camera `progress` of the way through the flight's time, 0 to 1. */
+    fun camera(progress: Double): GlobeCamera = path(GlobeCamera.easeInOut(swiftMin(1.0, swiftMax(0.0, progress))))
+}
+
+/**
+ * What `WorldMapView` keeps of its camera, and what its flights, drags and pinches do to it, each change a new value.
+ * `camera` is where the map was put: the target it last flew to, or where a hand left it; null until the map shows,
+ * when it shows its target. `flight` carries it there; `progress` is how far through its time the flight on the
+ * screen is, 0 to 1, as the view reads it from the frame clock. `gestureStart` is the camera the gesture under way
+ * started from, `zooming` whether it pinched, `free` whether a hand moved the map since it last flew, and `heldPip`
+ * where Pip stood when it did: he keeps that spot beside the dot while the map is moved under him.
+ */
+data class GlobeMotion(
+    val camera: GlobeCamera? = null,
+    val flight: GlobeFlight? = null,
+    val gestureStart: GlobeCamera? = null,
+    val zooming: Boolean = false,
+    val free: Boolean = false,
+    val heldPip: PipSpot? = null,
+) {
+    /** The camera on the screen: the flight's, where the map was put, or the target of a map that hasn't moved. */
+    fun shown(target: GlobeCamera, progress: Double): GlobeCamera = flight?.camera(progress) ?: camera ?: target
+
+    /** Whether a flight is still on its way: the faint names wait for it to land, and Pip with them on an opened map. */
+    fun moving(progress: Double): Boolean = flight != null && progress < 1
+
+    /** `onAppear`: a map that shows takes its target. */
+    fun appeared(target: GlobeCamera): GlobeMotion = if (camera == null) copy(camera = target) else this
+
+    /**
+     * `fly(to:size:)`: to `target`, from wherever the flight on the screen has got to, over a view `viewport` across;
+     * at once under Reduce Motion. A moved map is no longer free, and Pip looks for his best spot again. Nothing
+     * changes for a map already there or on its way.
+     */
+    fun flown(target: GlobeCamera, progress: Double, viewport: Double, reduceMotion: Boolean): GlobeMotion {
+        if (!free && camera == target) return this
+        val from = flight?.camera(progress) ?: camera
+        val landed = copy(camera = target, flight = null, free = false, heldPip = null)
+        if (from == null || from == target || reduceMotion) return landed
+        return landed.copy(flight = GlobeFlight(from, target, viewport))
+    }
+
+    /** The flight's time is up (the iPhone's `asyncAfter`): unless another flight took its place, it is over. */
+    fun landed(flight: GlobeFlight): GlobeMotion = if (this.flight === flight) copy(flight = null) else this
+
+    /**
+     * `beginGesture()`: the gesture starts from wherever the flight on the screen has got to, and stops it there. The
+     * map is put there too, so a pinch that starts as the camera flies goes on from where it is rather than from where
+     * the flight was going, as a pinch that starts mid-drag does.
+     */
+    fun begun(progress: Double): GlobeMotion {
+        if (gestureStart != null) return this
+        val flying = flight ?: return copy(gestureStart = camera)
+        val here = flying.camera(progress)
+        return copy(gestureStart = here, camera = here, flight = null)
+    }
+
+    /**
+     * One finger turning the globe by `translation` since the gesture started; nothing once the gesture has pinched.
+     * The first move frees the map, and Pip keeps the spot he had where the gesture started (`pipSpot`).
+     */
+    fun dragged(translation: Size, progress: Double, pipSpot: (GlobeCamera?) -> PipSpot?): GlobeMotion {
+        val begun = begun(progress)
+        val start = begun.gestureStart
+        if (begun.zooming || start == null) return begun
+        return begun.copy(camera = start.dragged(translation)).freed(pipSpot)
+    }
+
+    /**
+     * Two fingers zooming by `magnification` about `around`, where they first stood, in a view of `size` with
+     * `insets`. A pinch starts from where the map is now, even mid-drag. It frees the map, as a drag does.
+     */
+    fun pinched(magnification: Double, around: Point, size: Size, insets: EdgeInsets, progress: Double, pipSpot: (GlobeCamera?) -> PipSpot?): GlobeMotion {
+        val begun = begun(progress)
+        val zooming = if (begun.zooming) begun else begun.copy(zooming = true, gestureStart = begun.camera ?: begun.gestureStart)
+        val start = zooming.gestureStart ?: return zooming
+        val area = GlobeZoomArea.of(size, insets)
+        return zooming.copy(camera = start.zoomed(magnification, around, area.middle, area.viewport)).freed(pipSpot)
+    }
+
+    /** `peekGesture`'s change: a card's map zooms under the fingers, and isn't freed by it. */
+    fun peeked(magnification: Double, around: Point, size: Size, insets: EdgeInsets, progress: Double): GlobeMotion {
+        val begun = begun(progress)
+        val start = begun.gestureStart ?: return begun
+        val area = GlobeZoomArea.of(size, insets)
+        return begun.copy(camera = start.zoomed(magnification, around, area.middle, area.viewport))
+    }
+
+    /** The fingers lifted. A card's map then flies back to its target ([flown]). */
+    fun ended(): GlobeMotion = copy(gestureStart = null, zooming = false)
+
+    private fun freed(pipSpot: (GlobeCamera?) -> PipSpot?): GlobeMotion = if (free) this else copy(free = true, heldPip = pipSpot(gestureStart))
 }
 
 /** Swift's `min()` of a sequence: the first of the smallest, nil when empty. */

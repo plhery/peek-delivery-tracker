@@ -8,16 +8,24 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
@@ -30,7 +38,10 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.input.pointer.PointerInputScope
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.createFontFamilyResolver
@@ -39,6 +50,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.EdgeInsets
 import com.plhery.peekdeliverytracker.core.GlobeCamera
+import com.plhery.peekdeliverytracker.core.GlobeMotion
 import com.plhery.peekdeliverytracker.core.MapLabels
 import com.plhery.peekdeliverytracker.core.MapOverlay
 import com.plhery.peekdeliverytracker.core.MapPainter
@@ -46,22 +58,23 @@ import com.plhery.peekdeliverytracker.core.MapPalette
 import com.plhery.peekdeliverytracker.core.ParcelRoute
 import com.plhery.peekdeliverytracker.core.PipPlacement
 import com.plhery.peekdeliverytracker.core.PipRequest
+import com.plhery.peekdeliverytracker.core.PipSpot
 import com.plhery.peekdeliverytracker.core.Point
 import com.plhery.peekdeliverytracker.core.Rect
 import com.plhery.peekdeliverytracker.core.Size
 import com.plhery.peekdeliverytracker.core.TrackingLocation
+import com.plhery.peekdeliverytracker.core.UnitCurve
 import com.plhery.peekdeliverytracker.core.WorldAtlas
 import com.plhery.peekdeliverytracker.ui.draw.MapPip
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import com.plhery.peekdeliverytracker.ui.draw.drawMapDrawings
-import com.plhery.peekdeliverytracker.ui.theme.Motion
-import com.plhery.peekdeliverytracker.ui.theme.easing
-import com.plhery.peekdeliverytracker.core.UnitCurve
-import androidx.compose.animation.core.tween
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.easing
 import java.time.Instant
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.ceil
+import kotlin.math.max
+import kotlin.math.min
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
@@ -74,18 +87,27 @@ import androidx.compose.ui.graphics.Canvas as ComposeCanvas
 import androidx.compose.ui.geometry.Size as ComposeSize
 
 /**
- * `WorldMapView` as the cards show it (A-S86): the journey on the globe, framed once for its size, with no gestures and
- * no flights between cameras. The land, the legs, the parcel's pulsing dot (`live`, never under Reduce Motion) and the
- * marks are faded toward the bottom (`fades`) and in from the leading edge (`fadesIn`); Pip stands in front of the
- * fade, beside the parcel's dot, when `pip` asks for him on a palette with a card.
+ * `WorldMapView` (A-S86): the journey on the globe, framed for its size. The land, the legs, the parcel's pulsing dot
+ * (`live`, never under Reduce Motion) and the marks are faded toward the bottom (`fades`) and in from the leading edge
+ * (`fadesIn`); Pip stands in front of the fade, beside the parcel's dot, when `pip` asks for him on a palette with a
+ * card.
  *
- * Framing and laying out the map is a few milliseconds of work, so it is done off the main thread and kept
+ * The camera of a map that moves (`interactive` or `peek`) flies to a new frame (A-AN46): along the great circle, eased
+ * in and out, lifted out over a long way, from wherever a flight under way has got to, and straight there under Reduce
+ * Motion; any other map shows its new frame at once. A change of view (`mode`), or of `recenter`, brings a moved map
+ * back; a new frame or scan leaves it where it was put. An `interactive` map turns under one finger and zooms under
+ * two, about where they first stood (A-G12): its first move frees it (`onFreeChange`), and Pip keeps his spot beside
+ * the dot while it moves under him, and waits for a flight to land. A `peek` map zooms under two fingers and flies back
+ * as they lift (A-G13); one finger is left to what lies under it.
+ *
+ * Framing and laying out a map at rest is a few milliseconds of work, so it is done off the main thread and kept
  * ([MapScenes]): a card scrolled back into view finds its picture done, and shows it at once. A map seen for the first
  * time shows nothing until then; `entrance` is how the drawing then comes in, as SwiftUI's `.transition(.opacity)`
  * brings a map in once the atlas is read, and null shows it at once. A map whose picture changes keeps the old one
  * until the new one is made. Where its picture has to be there at once ([LocalMapsAtOnce]), the map makes it then, and
- * shows it with its first frame. An opened map names a facility as such (`sites`) and shades the night side as it is at
- * `night`. Sizes, insets and boxes are in points (dp). Decorative.
+ * shows it with its first frame. A map that moves is drawn again for each frame it moves in, on the main thread, as the
+ * iPhone's `TimelineView` draws it. An opened map names a facility as such (`sites`) and shades the night side as it is
+ * at `night`. Sizes, insets and boxes are in points (dp). Decorative.
  */
 @Composable
 fun WorldMapView(
@@ -97,6 +119,8 @@ fun WorldMapView(
     labels: MapLabels = MapLabels.All,
     sites: Boolean = false,
     showsContext: Boolean = true,
+    interactive: Boolean = false,
+    peek: Boolean = false,
     night: Instant? = null,
     live: Boolean = false,
     pip: PipRequest? = null,
@@ -106,8 +130,10 @@ fun WorldMapView(
     insets: EdgeInsets = EdgeInsets(),
     covered: Rect? = null,
     buttons: Rect? = null,
+    recenter: Int = 0,
     language: AppLanguage = AppLanguage.En,
     entrance: FiniteAnimationSpec<Float>? = null,
+    onFreeChange: (Boolean) -> Unit = {},
 ) {
     val colors = PeekTheme.colors
     val reduceMotion = PeekTheme.reduceMotion
@@ -146,8 +172,16 @@ fun WorldMapView(
             if (!ready) return@LaunchedEffect
             if (entrance == null) shown.snapTo(1f) else shown.animateTo(1f, entrance)
         }
-        val drawn = scene ?: return@BoxWithConstraints
-        Box(Modifier.fillMaxSize().graphicsLayer { alpha = shown.value }) {
+        val motion = rememberGlobeMotion(scene?.camera, request, mode, recenter, reduceMotion, interactive || peek, onFreeChange)
+        val drawn = motion.scene(scene, request, interactive) ?: return@BoxWithConstraints
+        val watch = LocalMapCameraWatch.current
+        if (watch != null && (interactive || peek)) SideEffect { watch(interactive, drawn.camera) }
+        Box(
+            Modifier
+                .fillMaxSize()
+                .graphicsLayer { alpha = shown.value }
+                .then(if (interactive || peek) Modifier.pointerInput(interactive) { motion.follow(this, interactive) } else Modifier),
+        ) {
             Box(
                 Modifier
                     .fillMaxSize()
@@ -176,11 +210,148 @@ fun WorldMapView(
 }
 
 /**
+ * A map's camera as it moves ([GlobeMotion]) for a map whose target, the camera that frames it, is `target` once its
+ * picture is made. A map that `moves` under the fingers takes its target two frames after it first has one, as the
+ * opened map lays out its summary in its first, so it never flies to the frame it opened at. Then a new target flies
+ * the camera there unless the map is free, and a new `mode` or `recenter` flies it there whatever. Any other map
+ * shows each target as it comes, and asks for no frame.
+ */
+@Composable
+private fun rememberGlobeMotion(
+    target: GlobeCamera?,
+    request: MapSceneRequest,
+    mode: ParcelRoute.Mode,
+    recenter: Int,
+    reduceMotion: Boolean,
+    moves: Boolean,
+    onFreeChange: (Boolean) -> Unit,
+): MapMotion {
+    val context = LocalContext.current.applicationContext
+    val density = LocalDensity.current.density
+    val motion = remember { MapMotion(context) }
+    motion.target = target
+    motion.request = request
+    motion.reduceMotion = reduceMotion
+    motion.density = density
+    motion.onFreeChange = onFreeChange
+    val current by rememberUpdatedState(target)
+    LaunchedEffect(target != null, moves) {
+        if (target == null || !moves) return@LaunchedEffect
+        withFrameNanos {}
+        withFrameNanos {}
+        current?.let { motion.update(motion.state.appeared(it)) }
+    }
+    // `onChange(of: target)`, `onChange(of: mode)` and `onChange(of: recenter)`, once the map shows.
+    LaunchedEffect(target) { if (!motion.state.free) motion.fly() }
+    LaunchedEffect(mode) { motion.fly() }
+    LaunchedEffect(recenter) { motion.fly() }
+    val flight = motion.state.flight
+    LaunchedEffect(flight) {
+        if (flight == null) return@LaunchedEffect
+        val start = withFrameNanos { it }
+        while (motion.progress < 1) {
+            val now = withFrameNanos { it }
+            motion.progress = min(1.0, (now - start) / 1e9 / flight.duration)
+        }
+        motion.update(motion.state.landed(flight))
+    }
+    return motion
+}
+
+/**
+ * What [WorldMapView] keeps of its camera: the [GlobeMotion], how far through its time the flight shown is, read off
+ * the frame clock, and what the map's gestures do. Its parts are snapshot state, read as the map is composed.
+ */
+@Stable
+private class MapMotion(private val context: Context) {
+    var state: GlobeMotion by mutableStateOf(GlobeMotion())
+        private set
+
+    /** How far the flight shown is through its time: each flight starts at 0. */
+    var progress: Double by mutableDoubleStateOf(0.0)
+
+    var target: GlobeCamera? = null
+    lateinit var request: MapSceneRequest
+    var reduceMotion = false
+    var density = 1f
+    var onFreeChange: (Boolean) -> Unit = {}
+
+    fun update(next: GlobeMotion) {
+        val was = state
+        if (next.flight !== was.flight) progress = 0.0
+        state = next
+        if (next.free != was.free) onFreeChange(next.free)
+    }
+
+    /** `fly(to:size:)`, to the target, once the map shows. */
+    fun fly() {
+        val to = target ?: return
+        if (state.camera == null) return
+        update(state.flown(to, progress, max(request.width, request.height), reduceMotion))
+    }
+
+    /**
+     * The picture to show: the map's own at rest, at its target, and otherwise the map drawn now for the camera on the
+     * screen, with Pip where he stands then, none on an opened map while it flies, and the faint names waiting for it
+     * to land.
+     */
+    @Composable
+    fun scene(rest: MapScene?, request: MapSceneRequest, interactive: Boolean): MapScene? {
+        val target = rest?.camera ?: return null
+        val now = state
+        val camera = now.camera
+        if (camera == null || (now.flight == null && !now.free && camera == target)) return rest
+        val shown = now.shown(target, progress)
+        val moving = now.moving(progress)
+        val pip = request.pip?.takeUnless { interactive && moving }?.copy(held = now.heldPip)
+        return remember(request, shown, pip, moving) { MapScenes.at(request, shown, pip, moving, context) }
+    }
+
+    /** Where Pip stands on the map as `camera` shows it. */
+    private fun pipSpot(camera: GlobeCamera?): PipSpot? = camera?.let { MapScenes.pipSpot(request, it, context) }
+
+    private val size: Size get() = Size(request.width, request.height)
+
+    /**
+     * Follows the fingers on the map: on an opened map, a drag turns it and a pinch zooms it, both freeing it; on a
+     * card's, a pinch zooms it until the fingers lift, and the map flies back to its target.
+     */
+    suspend fun follow(scope: PointerInputScope, interactive: Boolean) {
+        scope.detectGlobeGestures(
+            pinchOnly = !interactive,
+            onDrag = { translation ->
+                update(state.dragged(Size(translation.x / density.toDouble(), translation.y / density.toDouble()), progress, ::pipSpot))
+            },
+            onPinch = { magnification, around ->
+                val anchor = Point(around.x / density.toDouble(), around.y / density.toDouble())
+                update(
+                    if (interactive) {
+                        state.pinched(magnification.toDouble(), anchor, size, request.insets, progress, ::pipSpot)
+                    } else {
+                        state.peeked(magnification.toDouble(), anchor, size, request.insets, progress)
+                    },
+                )
+            },
+            onEnd = {
+                update(state.ended())
+                if (!interactive) target?.let { update(state.flown(it, progress, max(request.width, request.height), reduceMotion)) }
+            },
+        )
+    }
+}
+
+/**
  * Whether the maps here make their pictures as they are composed, on the main thread, rather than show nothing until
  * another thread has made them: for a card drawn only into a picture, as a flight's card is, which shows as the list
  * draws it from the first frame it is seen in.
  */
 internal val LocalMapsAtOnce = staticCompositionLocalOf { false }
+
+/**
+ * Hears where each map that moves (`interactive` or `peek`) looks from, each time it is composed: for tests, which see
+ * its pixels but not its camera.
+ */
+internal val LocalMapCameraWatch = staticCompositionLocalOf<((interactive: Boolean, camera: GlobeCamera) -> Unit)?> { null }
 
 /** The scene if it is made, without waiting. */
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -231,8 +402,8 @@ internal data class MapSceneRequest(
     val highContrast: Boolean,
 )
 
-/** A map drawn: the land and legs, the marks over them, the parcel's dot, and Pip's spot. */
-internal class MapScene(val base: Picture, val marks: Picture, val current: Point?, val pip: PipPlacement?)
+/** A map drawn: the land and legs, the marks over them, the parcel's dot, Pip's spot, and the camera it is seen from. */
+internal class MapScene(val base: Picture, val marks: Picture, val current: Point?, val pip: PipPlacement?, val camera: GlobeCamera)
 
 /**
  * The maps' pictures, framed, laid out and recorded off the main thread, the last few dozen kept: the cards of a list
@@ -304,30 +475,62 @@ internal object MapScenes {
             .also { text = it }
     }
 
-    private fun make(request: MapSceneRequest, measurer: TextMeasurer, widths: MapTextWidths): MapScene = with(request) {
-        val size = Size(width, height)
-        val locale = language.locale
-        val standing = if (palette.card == null) null else pip
-        val camera = if (covered == null && standing == null) {
-            GlobeCamera.framing(route, mode, size, insets, closeUps = false)
-        } else {
-            // What the card writes over the map also moves it when a place of the journey would lose its name to it,
-            // or Pip his spot beside the parcel; a route that leaves him no spot at its end is framed with room for him.
-            val shown = { camera: GlobeCamera, box: Rect? ->
-                MapOverlay(
-                    route, camera, size, insets, labels, sites = sites, mode = mode, context = false, atlas = atlas, locale = locale,
-                    countryName = { it }, pip = standing, covered = box, buttons = buttons, measurer = widths,
-                ).shown
-            }
-            GlobeCamera.framing(route, mode, size, insets, covered = covered, shown = shown, pip = standing != null, closeUps = false)
+    /**
+     * `request`'s map seen from `camera`, made now on this thread and not kept, as a map that moves draws each frame:
+     * Pip as `pip` asks, and the faint names left out while it is `moving`.
+     */
+    fun at(request: MapSceneRequest, camera: GlobeCamera, pip: PipRequest?, moving: Boolean, context: Context): MapScene {
+        val (measurer, widths) = text(context)
+        return make(request, measurer, widths, camera, pip, moving)
+    }
+
+    /** `pipSpot(at:size:)`: where Pip stands on `request`'s map seen from `camera`, looking for his best spot. */
+    fun pipSpot(request: MapSceneRequest, camera: GlobeCamera, context: Context): PipSpot? = with(request) {
+        val standing = (if (palette.card == null) null else pip) ?: return null
+        val widths = text(context).second
+        synchronized(widths) {
+            MapOverlay(
+                route, camera, Size(width, height), insets, labels, sites = sites, mode = mode, context = showsContext, atlas = atlas,
+                locale = language.locale, countryName = { TrackingLocation.countryName(it, language) }, pip = standing, covered = covered,
+                buttons = buttons, measurer = widths,
+            ).pip?.spot
         }
+    }
+
+    /** `targetCamera(in:)`: the camera that frames `request`'s route. */
+    private fun target(request: MapSceneRequest, widths: MapTextWidths): GlobeCamera = with(request) {
+        val size = Size(width, height)
+        val standing = if (palette.card == null) null else pip
+        if (covered == null && standing == null) return GlobeCamera.framing(route, mode, size, insets, closeUps = false)
+        // What the card writes over the map also moves it when a place of the journey would lose its name to it, or
+        // Pip his spot beside the parcel; a route that leaves him no spot at its end is framed with room for him.
+        val shown = { camera: GlobeCamera, box: Rect? ->
+            MapOverlay(
+                route, camera, size, insets, labels, sites = sites, mode = mode, context = false, atlas = atlas, locale = language.locale,
+                countryName = { it }, pip = standing, covered = box, buttons = buttons, measurer = widths,
+            ).shown
+        }
+        GlobeCamera.framing(route, mode, size, insets, covered = covered, shown = shown, pip = standing != null, closeUps = false)
+    }
+
+    private fun make(
+        request: MapSceneRequest,
+        measurer: TextMeasurer,
+        widths: MapTextWidths,
+        at: GlobeCamera? = null,
+        pip: PipRequest? = request.pip,
+        moving: Boolean = false,
+    ): MapScene = with(request) {
+        val size = Size(width, height)
+        val standing = if (palette.card == null) null else pip
+        val camera = at ?: target(request, widths)
         val overlay = MapOverlay(
-            route, camera, size, insets, labels, sites = sites, mode = mode, context = showsContext, atlas = atlas, locale = locale,
+            route, camera, size, insets, labels, sites = sites, mode = mode, context = showsContext, atlas = atlas, locale = language.locale,
             countryName = { TrackingLocation.countryName(it, language) }, pip = standing, covered = covered, buttons = buttons,
             measurer = widths,
         )
         val base = MapPainter.drawBase(size, atlas, route, camera, palette, night = night) + MapPainter.drawLegs(overlay, palette, quiet)
-        val marks = MapPainter.drawMarks(overlay, palette, moving = false, quiet = quiet, measurer = widths)
+        val marks = MapPainter.drawMarks(overlay, palette, moving = moving, quiet = quiet, measurer = widths)
         val wide = ceil(width).toInt().coerceAtLeast(1)
         val tall = ceil(height).toInt().coerceAtLeast(1)
         // The measurer is the layout's too, which measures under the widths' lock.
@@ -335,7 +538,9 @@ internal object MapScenes {
             record(wide, tall) { drawMapDrawings(base, dark, highContrast) } to
                 record(wide, tall) { drawMapDrawings(marks, dark, highContrast, textMeasurer = measurer) }
         }
-        MapScene(recorded.first, recorded.second, overlay.dots.firstOrNull { it.kind == MapOverlay.DotKind.Current }?.point, overlay.pip)
+        MapScene(
+            recorded.first, recorded.second, overlay.dots.firstOrNull { it.kind == MapOverlay.DotKind.Current }?.point, overlay.pip, camera,
+        )
     }
 
     private fun record(width: Int, height: Int, draw: DrawScope.() -> Unit): Picture {

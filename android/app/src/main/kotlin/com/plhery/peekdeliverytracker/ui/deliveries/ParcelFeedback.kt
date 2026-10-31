@@ -629,7 +629,7 @@ private fun AnimatedVisibilityScope.Staying(content: @Composable () -> Unit) {
 }
 
 /** Takes every touch on its way to what it holds, which then sees none. */
-private val Untouched = Modifier.pointerInput(Unit) {
+internal val Untouched = Modifier.pointerInput(Unit) {
     awaitPointerEventScope {
         while (true) awaitPointerEvent(PointerEventPass.Initial).changes.forEach { it.consume() }
     }

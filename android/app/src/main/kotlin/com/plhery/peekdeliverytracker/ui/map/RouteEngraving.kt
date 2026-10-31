@@ -35,7 +35,8 @@ import kotlinx.coroutines.async
  * the parcel's dot pulsing until the journey is over, and Pip beside it, kept below `ceiling` (the card's top row) and
  * above `floor` (where the card writes over the bottom of the map). `covered` is what the card writes over the map
  * below its top row, `buttons` its buttons over the top, and `room` how much lower the route starts below a second
- * carrier's mark. The pinch that peeks closer on the parcel's page comes with that page. Decorative.
+ * carrier's mark. With `peek`, two fingers zoom it closer until they lift (A-G13); off on Next up, which is one tap
+ * target in a scrolling list. Decorative.
  */
 @Composable
 fun RouteEngraving(
@@ -51,12 +52,13 @@ fun RouteEngraving(
     covered: Rect? = null,
     buttons: Rect? = null,
     room: Double = 0.0,
+    peek: Boolean = true,
     entrance: FiniteAnimationSpec<Float>? = null,
 ) {
     WorldMapView(
         atlas = atlas, route = route, mode = route.defaultMode(stage),
         palette = remember(identity) { MapPalette.tint(identity.ink, identity.surface) },
-        modifier = modifier, labels = MapLabels.Ends, showsContext = false,
+        modifier = modifier, labels = MapLabels.Ends, showsContext = false, peek = peek,
         // The parcel's dot pulses until the journey is over.
         live = stage != TrackingStage.Delivered && stage != TrackingStage.Returned,
         // Pip keeps below the top row of the parcel's page, and of Next up alike, so both show the same picture.

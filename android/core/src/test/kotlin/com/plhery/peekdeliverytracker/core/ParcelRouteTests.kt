@@ -8,7 +8,10 @@ import java.time.Instant
 import java.util.Locale
 import java.util.UUID
 import kotlin.math.PI
+import kotlin.math.exp
 import kotlin.math.hypot
+import kotlin.math.ln
+import kotlin.math.sqrt
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -278,6 +281,188 @@ class ParcelRouteTests {
         val globe = camera.zoomed(by = 1e-6, around = Point(20.0, 20.0), middle = Point(200.0, 150.0), viewport = 300.0)
         assertEquals(135.0, globe.scale, 1e-9)
         assertEquals(Point(200.0, 150.0), globe.offset)
+    }
+
+    /** Android's own, as the iPhone tests none of it: a pinch comes no closer than 20 km across the view, and drifts back. */
+    @Test
+    fun zoomStopsAtATownAndDriftsBackOnlyOnceTheGlobeNoLongerFillsTheView() {
+        val middle = Point(200.0, 150.0)
+        val camera = GlobeCamera(center = zurich.point, scale = 2_000.0, offset = Point(200.0, 150.0))
+        // 300 across, at most 20 km of the Earth.
+        val town = camera.zoomed(by = 1e6, around = Point(100.0, 100.0), middle = middle, viewport = 300.0)
+        assertEquals(300 / (20 / GeoPoint.EARTH_KILOMETRES), town.scale, 1e-6)
+        // Close in, the place under the fingers stays: no drift while the globe is over 2.5 halves of the view.
+        val near = GlobeCamera(center = zurich.point, scale = 400.0, offset = Point(100.0, 60.0))
+        val held = near.zoomed(by = 1.0, around = Point(0.0, 0.0), middle = middle, viewport = 300.0)
+        assertEquals(Point(100.0, 60.0), held.offset)
+        // Halfway between 2.5 and 1 half of the view, it drifts halfway back to the middle.
+        val half = near.zoomed(by = 262.5 / 400, around = Point(100.0, 60.0), middle = middle, viewport = 300.0)
+        assertEquals(262.5, half.scale, 1e-9)
+        assertEquals(150.0, half.offset.x, 1e-9)
+        assertEquals(105.0, half.offset.y, 1e-9)
+        // The middle and size of the room the insets leave.
+        val area = GlobeZoomArea.of(Size(400.0, 800.0), EdgeInsets(top = 100.0, leading = 10.0, bottom = 300.0, trailing = 30.0))
+        assertEquals(Point(190.0, 300.0), area.middle)
+        assertEquals(360.0, area.viewport, 0.0)
+    }
+
+    /** Android's own: one finger turns the globe a point of its surface per point, and never past 80° of latitude. */
+    @Test
+    fun aDragTurnsTheGlobeUnderTheFingerAndStopsShortOfThePoles() {
+        val camera = GlobeCamera(center = GeoPoint(10.0, 40.0), scale = 1_000.0, offset = Point(200.0, 150.0))
+        val turned = camera.dragged(Size(100.0, -50.0))
+        assertEquals(10 - 100 * 180 / PI / 1_000, turned.center.longitude, 1e-12)
+        assertEquals(40 - 50 * 180 / PI / 1_000, turned.center.latitude, 1e-12)
+        assertEquals(camera.scale, turned.scale, 0.0)
+        assertEquals(camera.offset, turned.offset)
+        assertEquals(80.0, camera.dragged(Size(0.0, 10_000.0)).center.latitude, 0.0)
+        assertEquals(-80.0, camera.dragged(Size(0.0, -10_000.0)).center.latitude, 0.0)
+        // On the equator, the place under the finger moves with it.
+        val equator = GlobeCamera(center = GeoPoint(10.0, 0.0), scale = 1_000.0, offset = Point(200.0, 150.0))
+        val place = checkNotNull(GlobeProjection(equator).invert(Point(200.0, 150.0)))
+        val moved = GlobeProjection(equator.dragged(Size(3.0, 0.0))).project(place)
+        assertEquals(203.0, moved.x, 1e-4)
+    }
+
+    /** Android's own: how long a flight lasts, the path it takes and its easing, as `WorldMapView` flies. */
+    @Test
+    fun aFlightEasesAlongTheGreatCircleAndLiftsOnALongWay() {
+        assertEquals(0.0, GlobeCamera.easeInOut(0.0), 0.0)
+        assertEquals(0.0625, GlobeCamera.easeInOut(0.25), 1e-12)
+        assertEquals(0.5, GlobeCamera.easeInOut(0.5), 1e-12)
+        assertEquals(0.9375, GlobeCamera.easeInOut(0.75), 1e-12)
+        assertEquals(1.0, GlobeCamera.easeInOut(1.0), 0.0)
+        val zurichView = GlobeCamera(center = zurich.point, scale = 3_000.0, offset = Point(200.0, 300.0))
+        val kyotoView = GlobeCamera(center = kyoto.point, scale = 300.0, offset = Point(180.0, 320.0))
+        val angle = zurich.point.angle(kyoto.point)
+        // 0.7 s, half a second a radian and 0.12 s a factor e of zoom: a long way takes the most, 1.5 s.
+        assertEquals(1.5, GlobeCamera.flightDuration(zurichView, kyotoView), 0.0)
+        val nearby = GlobeCamera(center = basel.point, scale = 6_000.0, offset = Point(200.0, 300.0))
+        assertEquals(0.7 + zurich.point.angle(basel.point) * 0.5 + ln(2.0) * 0.12, GlobeCamera.flightDuration(zurichView, nearby), 1e-12)
+        val long = GlobeFlight(zurichView, kyotoView, viewport = 400.0)
+        assertEquals(1.5, long.duration, 0.0)
+        assertEquals(zurichView.scale, long.camera(0.0).scale, 1e-6)
+        assertEquals(zurich.point.longitude, long.camera(0.0).center.longitude, 1e-9)
+        assertEquals(kyoto.point.latitude, long.camera(1.0).center.latitude, 1e-9)
+        assertEquals(kyotoView.offset.x, long.camera(1.0).offset.x, 1e-9)
+        // Halfway through its time it is halfway along the great circle, lifted out to the widest view: the travel is
+        // the angle at the smaller scale, and the lift ln(travel / viewport) · 0.8, at most 2.2.
+        val middle = long.camera(0.5)
+        assertEquals(angle / 2, zurich.point.angle(middle.center), 1e-9)
+        val lift = minOf(ln(angle * 300 / 400) * 0.8, 2.2)
+        assertTrue(lift > 0)
+        assertEquals(sqrt(3_000.0 * 300.0) * exp(-lift), middle.scale, 1e-6)
+        assertEquals(190.0, middle.offset.x, 1e-9)
+        // A quarter of the time is a sixteenth of the way, eased in.
+        assertEquals(angle / 16, zurich.point.angle(long.camera(0.25).center), 1e-9)
+        // A short way doesn't lift: the scale goes straight from one to the other, in proportion.
+        val short = GlobeFlight(zurichView, nearby, viewport = 400.0)
+        assertEquals(sqrt(3_000.0 * 6_000.0), short.camera(0.5).scale, 1e-6)
+        // Past the end of its time, it is at its end.
+        assertEquals(nearby.scale, short.camera(1.4).scale, 1e-6)
+        assertEquals(0.0, nearby.center.angle(short.camera(1.4).center), 1e-9)
+    }
+
+    /** Android's own: what `WorldMapView`'s flights do to its camera, as `fly(to:size:)` does. */
+    @Test
+    fun aMapFliesFromWhereItIsAndJumpsUnderReduceMotion() {
+        val first = GlobeCamera(center = zurich.point, scale = 3_000.0, offset = Point(200.0, 300.0))
+        val second = GlobeCamera(center = basel.point, scale = 6_000.0, offset = Point(200.0, 300.0))
+        val third = GlobeCamera(center = kyoto.point, scale = 2_000.0, offset = Point(200.0, 300.0))
+        val shown = GlobeMotion().appeared(first)
+        assertEquals(first, shown.camera)
+        assertEquals(shown, shown.appeared(second))
+        // Already there: nothing.
+        assertEquals(shown, shown.flown(first, progress = 0.0, viewport = 400.0, reduceMotion = false))
+        val flying = shown.flown(second, progress = 0.0, viewport = 400.0, reduceMotion = false)
+        val flight = checkNotNull(flying.flight)
+        assertEquals(first, flight.from)
+        assertEquals(second, flight.to)
+        assertEquals(second, flying.camera)
+        assertTrue(flying.moving(0.5))
+        assertFalse(flying.moving(1.0))
+        assertEquals(flight.camera(0.3), flying.shown(first, 0.3))
+        // On its way there: nothing either.
+        assertEquals(flying, flying.flown(second, progress = 0.5, viewport = 400.0, reduceMotion = false))
+        // Another target, partway: from where the flight has got to.
+        val turned = flying.flown(third, progress = 0.4, viewport = 400.0, reduceMotion = false)
+        assertEquals(flight.camera(0.4), turned.flight?.from)
+        // The first flight's time ending leaves the second flying; the second's lands it.
+        assertEquals(turned, turned.landed(flight))
+        val landed = turned.landed(checkNotNull(turned.flight))
+        assertNull(landed.flight)
+        assertEquals(third, landed.shown(first, 0.0))
+        // Under Reduce Motion, straight there.
+        val jumped = flying.flown(third, progress = 0.4, viewport = 400.0, reduceMotion = true)
+        assertNull(jumped.flight)
+        assertEquals(third, jumped.camera)
+        // A map not shown yet just takes its target.
+        assertNull(GlobeMotion().flown(third, progress = 0.0, viewport = 400.0, reduceMotion = false).flight)
+    }
+
+    /** Android's own: what a drag and a pinch do to the opened map's camera, as `moveGesture` does. */
+    @Test
+    fun aDragOrPinchStartsFromWhereTheMapIsAndFreesIt() {
+        val size = Size(400.0, 800.0)
+        val insets = EdgeInsets(top = 100.0, bottom = 300.0)
+        val home = GlobeCamera(center = zurich.point, scale = 3_000.0, offset = Point(200.0, 300.0))
+        val away = GlobeCamera(center = kyoto.point, scale = 2_000.0, offset = Point(200.0, 300.0))
+        val spot = PipSpot(Size(4.0, 5.0), width = 34.0, side = 1, below = false)
+        var asked = mutableListOf<GlobeCamera?>()
+        val pipSpot = { camera: GlobeCamera? -> asked.add(camera); spot }
+        // A drag as the camera flies starts from where it has got to, and stops it there.
+        val flying = GlobeMotion().appeared(home).flown(away, progress = 0.0, viewport = 400.0, reduceMotion = false)
+        val here = checkNotNull(flying.flight).camera(0.5)
+        val dragged = flying.dragged(Size(30.0, 0.0), progress = 0.5, pipSpot = pipSpot)
+        assertNull(dragged.flight)
+        assertEquals(here, dragged.gestureStart)
+        assertEquals(here.dragged(Size(30.0, 0.0)), dragged.camera)
+        // The first move frees it, and Pip keeps where he stood as it started; later moves ask no more.
+        assertTrue(dragged.free)
+        assertEquals(spot, dragged.heldPip)
+        assertEquals(listOf<GlobeCamera?>(here), asked)
+        val further = dragged.dragged(Size(60.0, 20.0), progress = 0.0, pipSpot = pipSpot)
+        assertEquals(here.dragged(Size(60.0, 20.0)), further.camera)
+        assertEquals(1, asked.size)
+        // A pinch mid-drag starts from where the drag left the map, about where the fingers first stood.
+        val pinched = further.pinched(2.0, Point(150.0, 250.0), size, insets, progress = 0.0, pipSpot = pipSpot)
+        val area = GlobeZoomArea.of(size, insets)
+        assertEquals(further.camera?.zoomed(2.0, Point(150.0, 250.0), area.middle, area.viewport), pinched.camera)
+        assertTrue(pinched.zooming)
+        // Once it pinched, the finger left doesn't turn the globe; the pinch goes on from where it started.
+        assertEquals(pinched, pinched.dragged(Size(100.0, 0.0), progress = 0.0, pipSpot = pipSpot))
+        val wider = pinched.pinched(3.0, Point(150.0, 250.0), size, insets, progress = 0.0, pipSpot = pipSpot)
+        assertEquals(further.camera?.zoomed(3.0, Point(150.0, 250.0), area.middle, area.viewport), wider.camera)
+        val ended = wider.ended()
+        assertNull(ended.gestureStart)
+        assertFalse(ended.zooming)
+        assertTrue(ended.free)
+        // A new target leaves a free map where it is; flying it home makes it no longer free, and Pip looks again.
+        val home2 = ended.flown(home, progress = 0.0, viewport = 400.0, reduceMotion = false)
+        assertFalse(home2.free)
+        assertNull(home2.heldPip)
+        assertEquals(wider.camera, home2.flight?.from)
+        // A pinch as the camera flies goes on from where it has got to, not from where it was going.
+        asked = mutableListOf()
+        val mid = flying.pinched(2.0, Point(150.0, 250.0), size, insets, progress = 0.5, pipSpot = pipSpot)
+        assertEquals(here.zoomed(2.0, Point(150.0, 250.0), area.middle, area.viewport), mid.camera)
+        assertEquals(listOf<GlobeCamera?>(here), asked)
+    }
+
+    /** Android's own: a card's map zooms under a pinch without being freed, and flies back as the fingers lift. */
+    @Test
+    fun aPeekZoomsWithoutFreeingTheMapAndFliesBack() {
+        val size = Size(360.0, 176.0)
+        val insets = EdgeInsets(top = 40.0, leading = 16.0, bottom = 44.0, trailing = 16.0)
+        val home = GlobeCamera(center = zurich.point, scale = 3_000.0, offset = Point(180.0, 90.0))
+        val peeked = GlobeMotion().appeared(home).peeked(1.5, Point(100.0, 80.0), size, insets, progress = 0.0)
+        val area = GlobeZoomArea.of(size, insets)
+        assertEquals(home.zoomed(1.5, Point(100.0, 80.0), area.middle, area.viewport), peeked.camera)
+        assertFalse(peeked.free)
+        val back = peeked.ended().flown(home, progress = 0.0, viewport = 360.0, reduceMotion = false)
+        assertEquals(peeked.camera, back.flight?.from)
+        assertEquals(home, back.flight?.to)
+        assertEquals(home, back.ended().flown(home, progress = 0.0, viewport = 360.0, reduceMotion = true).camera)
     }
 
     /** CGPath's even-odd `contains` becomes MapPath.containsEvenOdd, which flattens the rim's arcs and the disk. */

@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -92,8 +93,10 @@ import kotlin.math.max
  * height. Beside an upright hinge the summary keeps to the second part of the window and the route to the first; with
  * a level hinge (`levelHinge`), the route keeps above it and the summary under it.
  *
- * Moving the map, its flights between views, recentring and the detail tiles close up come with the map's gestures.
- * TalkBack hears the map as one image named by its ends, and reaches it through `mapFocus`.
+ * The map turns under a finger and zooms under two (A-G12), and flies between the views (A-AN46). Once moved, neither
+ * view is selected, and either brings it back; the view shown brings it back too (A-G14). TalkBack hears the map as
+ * one image named by its ends, as VoiceOver does, with nothing to adjust, reaches it through `mapFocus`, and hears the
+ * views as a group named "Map view", the one shown selected.
  */
 @Composable
 internal fun ParcelMapScreen(
@@ -117,6 +120,9 @@ internal fun ParcelMapScreen(
     // The night side as it is when the map opens.
     val time = remember { now() }
     var chosen by remember { mutableStateOf<ParcelRoute.Mode?>(null) }
+    // Moved by hand since it last flew: then neither view is selected, and either flies it back.
+    var free by remember { mutableStateOf(false) }
+    var recenter by remember { mutableIntStateOf(0) }
     var barHeight by remember { mutableFloatStateOf(BAR_HEIGHT_GUESS) }
     val mode = chosen ?: route.defaultMode(stage)
     val backdrop = rememberMaterialBackdrop()
@@ -153,11 +159,11 @@ internal fun ParcelMapScreen(
             CompositionLocalProvider(LocalMapsAtOnce provides true) {
                 WorldMapView(
                     atlas = atlas, route = route, mode = mode, palette = palette, modifier = Modifier.fillMaxSize(), sites = true,
-                    night = time, live = stage != TrackingStage.Delivered && stage != TrackingStage.Returned,
+                    interactive = true, night = time, live = stage != TrackingStage.Delivered && stage != TrackingStage.Returned,
                     // Pip came along from the card. Here he keeps clear of what lies over the map: the summary and the
                     // button that closes it.
                     pip = PipMood(stage)?.let { PipRequest(it, inset = true) },
-                    insets = layout.insets, language = language,
+                    insets = layout.insets, recenter = recenter, language = language, onFreeChange = { free = it },
                 )
             }
         }
@@ -209,11 +215,12 @@ internal fun ParcelMapScreen(
                                     },
                                 horizontalArrangement = Arrangement.spacedBy(2.dp),
                             ) {
-                                ViewButton(localizer.text("map.journey"), "globe", selected = mode == ParcelRoute.Mode.Journey) {
-                                    chosen = ParcelRoute.Mode.Journey
-                                }
-                                ViewButton(localizer.text("map.nearby"), "location", selected = mode == ParcelRoute.Mode.Now) {
-                                    chosen = ParcelRoute.Mode.Now
+                                // A view is selected while the map shows it as it framed it; the one shown recentres it.
+                                for ((target, key, symbol) in VIEWS) {
+                                    ViewButton(localizer.text(key), symbol, selected = mode == target && !free) {
+                                        if (target == mode) recenter++
+                                        chosen = target
+                                    }
                                 }
                             }
                         }
@@ -443,6 +450,12 @@ internal data class MapCoverLayout(val closeTop: Double, val insets: EdgeInsets,
         }
     }
 }
+
+/** The views: the whole journey, and close by. */
+private val VIEWS = listOf(
+    Triple(ParcelRoute.Mode.Journey, "map.journey", "globe"),
+    Triple(ParcelRoute.Mode.Now, "map.nearby", "location"),
+)
 
 /** Until the summary is laid out, the map keeps clear of about as much as it takes. */
 private const val BAR_HEIGHT_GUESS = 220f

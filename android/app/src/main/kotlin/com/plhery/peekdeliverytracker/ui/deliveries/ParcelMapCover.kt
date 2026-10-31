@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
@@ -60,7 +61,7 @@ internal fun ParcelMapHost(state: DeliveriesState) {
  * `.fullScreenCover { ParcelMapScreen(…) }`: the map comes up from the window's foot over 0.5 s and goes back down as
  * its button or the back gesture closes it, and goes at once with its page or its parcel. A window made again (a
  * rotation, a fold) finds it up, as it was. TalkBack reaches only the map, from the map itself, and goes back to the
- * globe as it closes.
+ * globe as it closes. On its way down it takes no touch: a view button tapped as it goes flies nothing.
  */
 @Composable
 private fun ParcelMapCover(state: DeliveriesState, request: MapCoverRequest, hinge: WindowHinge?, levelHinge: WindowLevelHinge?) {
@@ -100,7 +101,9 @@ private fun ParcelMapCover(state: DeliveriesState, request: MapCoverRequest, hin
             .fillMaxSize()
             .graphicsLayer { translationY = (1 - shown.value) * size.height }
             // What lies under the map takes no touches while it is open.
-            .pointerInput(Unit) { detectTapGestures { } },
+            .pointerInput(Unit) { detectTapGestures { } }
+            // On its way down it takes no touch, and TalkBack no longer reaches it, as UIKit's cover going down.
+            .then(if (closing) Modifier.clearAndSetSemantics {}.then(Untouched) else Modifier),
     ) {
         ParcelMapScreen(
             atlas = atlas, route = rememberParcelRoute(parcel, atlas, language), stage = parcel.currentStage,

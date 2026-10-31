@@ -160,7 +160,7 @@ fun NextDeliveryPass(
                     .fillMaxWidth()
                     .height(160.dp)
                     .clip(UnevenContinuousRoundedShape(topLeading = Radii.nextUp, topTrailing = Radii.nextUp)),
-                insets = EdgeInsets(top = 40.0, leading = 16.0, bottom = 28.0, trailing = 16.0), floor = 140.0,
+                insets = EdgeInsets(top = 40.0, leading = 16.0, bottom = 28.0, trailing = 16.0), floor = 140.0, peek = false,
                 entrance = if (reduceMotion) null else Motion.easeOut(0.5),
             )
         }

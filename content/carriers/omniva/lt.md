@@ -65,7 +65,7 @@ Atkreipkite dėmesį: `Shipment delivered` po `Shipment is being returned to the
 
 **Nelaukta siunta.** Gavote SMS apie siuntą, kurios nelaukiate? Pagalvokite, ar tai ne dovana ar neseniai internetu pirktas daiktas. Jei siuntos nenorite, praneškite klientų aptarnavimo skyriui arba paskambinusiam kurjeriui, ir ji bus grąžinta siuntėjui. Atsisakyti galite jos neatidarę.
 
-**Siunta iš ne ES šalies.** Omniva nurodo, kad gaunant siuntą iš ne ES šalies reikia muitinės deklaracijos. Europos Komisija skelbia, kad nuo 2026 m. liepos 1 d. mažos vertės (iki 150 €) siuntoms iš ne ES šalių taikomas laikinas 3 € muitas už kiekvieną tarifinę prekių klasę (penki marškinėliai – 3 €, trys marškinėliai ir rankinis laikrodis – 6 €), o jį deklaruoti ir sumokėti turi pardavėjas arba importuotojas. Nuo 2026 m. lapkričio 1 d. ES taikys ir 2 € Sąjungos tvarkymo mokestį. Daugiau rasite [gide apie muitinę](guide:customs) (anglų kalba).
+**Siunta iš ne ES šalies.** Omniva nurodo, kad gaunant siuntą iš ne ES šalies reikia muitinės deklaracijos. Europos Komisija skelbia, kad nuo 2026 m. liepos 1 d. mažos vertės (iki 150 €) siuntoms iš ne ES šalių taikomas laikinas 3 € muitas už kiekvieną tarifinę prekių klasę (penkeri marškinėliai – 3 €, treji marškinėliai ir rankinis laikrodis – 6 €), o jį deklaruoti ir sumokėti turi pardavėjas arba importuotojas. Nuo 2026 m. lapkričio 1 d. ES taikys ir 2 € Sąjungos tvarkymo mokestį. Daugiau rasite [gide apie muitinę](guide:customs) (anglų kalba).
 
 ## Siunta vėluoja, pažeista ar dingo
 

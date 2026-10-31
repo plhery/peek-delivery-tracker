@@ -94,7 +94,7 @@ class CardMapsTest {
         var shown by mutableStateOf(trainers)
         val cameras = mutableListOf<GlobeCamera>()
         compose.setContent {
-            CompositionLocalProvider(LocalMapCameraWatch provides { _, _, camera -> cameras += camera }) {
+            CompositionLocalProvider(LocalMapCameraWatch provides { _, _, camera, _ -> cameras += camera }) {
                 CardHost(reduceMotion = reduceMotion) { Engraving(shown, 163.dp) }
             }
         }

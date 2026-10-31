@@ -1,12 +1,20 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.view.View
 import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityNodeInfo
 import android.view.accessibility.AccessibilityNodeProvider
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -25,6 +33,8 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.pinch
 import androidx.compose.ui.test.swipe
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -36,11 +46,19 @@ import com.plhery.peekdeliverytracker.core.GeoPoint
 import com.plhery.peekdeliverytracker.core.GlobeCamera
 import com.plhery.peekdeliverytracker.core.GlobeFlight
 import com.plhery.peekdeliverytracker.core.GlobeZoomArea
+import com.plhery.peekdeliverytracker.core.MapLabels
+import com.plhery.peekdeliverytracker.core.MapOverlay
 import com.plhery.peekdeliverytracker.core.ParcelRoute
+import com.plhery.peekdeliverytracker.core.PipMood
+import com.plhery.peekdeliverytracker.core.PipPlacement
+import com.plhery.peekdeliverytracker.core.PipRequest
+import com.plhery.peekdeliverytracker.core.Rect
 import com.plhery.peekdeliverytracker.core.Size
+import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import com.plhery.peekdeliverytracker.ui.map.LocalMapCameraWatch
 import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
 import kotlin.math.PI
@@ -78,6 +96,13 @@ class ParcelMapTest {
     private val opened = mutableListOf<GlobeCamera>()
     private val peeked = mutableListOf<GlobeCamera>()
 
+    /** Where Pip stood on the opened map each time it was composed. */
+    private val pips = mutableListOf<PipPlacement?>()
+
+    /** The window's size, where a test turns it; the activity's otherwise. */
+    private var window by mutableStateOf<DpSize?>(null)
+    private lateinit var root: View
+
     /** A parcel whose map has both views. */
     private val twoViews by lazy {
         val atlas = runBlocking { WorldAtlases.load().await() }!!
@@ -88,13 +113,24 @@ class ParcelMapTest {
         source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
         compose.waitsForMaps()
         val content: @Composable () -> Unit = {
+            root = LocalView.current
             CompositionLocalProvider(
                 LocalDeliveriesState provides { deliveries = it },
-                LocalMapCameraWatch provides { interactive, peek, camera ->
-                    if (interactive) opened += camera else if (peek) peeked += camera
+                LocalMapCameraWatch provides { interactive, peek, camera, pip ->
+                    if (interactive) {
+                        opened += camera
+                        pips += pip
+                    } else if (peek) {
+                        peeked += camera
+                    }
                 },
             ) {
-                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion)
+                val sized = window
+                if (sized == null) {
+                    RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion)
+                } else {
+                    Box(Modifier.requiredSize(sized)) { RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion) }
+                }
             }
         }
         if (recreation != null) recreation.setContent(content) else compose.setContent(content)
@@ -251,9 +287,9 @@ class ParcelMapTest {
         assertEquals("Not selected", talkBack.info(view(shown)).stateDescription)
     }
 
-    /** The window made again, and the map back up, as it was, and at rest. */
-    private fun remake(recreation: Recreation) {
-        recreation.recreate()
+    /** The window made again, what changed with it changing in `meanwhile`, and the map back up, as it was, and at rest. */
+    private fun remake(recreation: Recreation, meanwhile: () -> Unit = {}) {
+        recreation.recreate(meanwhile)
         var frames = 0
         while (!exists(MAP_COVER)) {
             check(frames++ < 5) { "The map didn't come back" }
@@ -303,6 +339,132 @@ class ParcelMapTest {
         settle()
         assertEquals(start, opened.last())
         view(shown).assertIsSelected()
+    }
+
+    /** The system's bars and cutouts taking `safe` of the window's sides, in points. */
+    private fun bars(safe: EdgeInsets) {
+        val scale = root.resources.displayMetrics.density
+        fun pixels(points: Double) = (points * scale).toInt()
+        val insets = WindowInsetsCompat.Builder()
+            .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, pixels(safe.top), 0, 0))
+            .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(pixels(safe.leading), 0, pixels(safe.trailing), pixels(safe.bottom)))
+            .setVisible(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(), true)
+            .build()
+        ViewCompat.dispatchApplyWindowInsets(root, insets)
+    }
+
+    /** The opened map as it is drawn: the camera it looks from, Pip's spot, and the names, chips and Pip laid out there. */
+    private class Drawn(val camera: GlobeCamera, val pip: PipPlacement?, val overlay: MapOverlay)
+
+    /**
+     * Matcha ritual's map close by, in a window `size` points whose system takes `safe`: what it draws, and the map laid
+     * out again from what the screen shows (its size, the system's sides, the summary's height) with the app's names.
+     */
+    private fun drawn(size: DpSize, safe: EdgeInsets): Drawn {
+        val atlas = runBlocking { WorldAtlases.load().await() }!!
+        val parcel = DemoCards.parcel("Matcha ritual")
+        val route = ParcelRoute(parcel, atlas, AppLanguage.En)
+        val bar = compose.onNodeWithTag(MAP_BAR).getBoundsInRoot()
+        val width = size.width.value.toDouble()
+        val height = size.height.value.toDouble()
+        val layout = MapCoverLayout.of(width, height, safe, (bar.bottom - bar.top).value.toDouble(), hinge = null)
+        val camera = opened.last()
+        val overlay = MapOverlay(
+            route, camera, Size(width, height), layout.insets, MapLabels.All, sites = true, mode = ParcelRoute.Mode.Now, context = true,
+            atlas = atlas, locale = AppLanguage.En.locale, countryName = { TrackingLocation.countryName(it, AppLanguage.En) },
+            pip = PipRequest(PipMood.Joy, inset = true), measurer = MapTextWidths.of(compose.activity),
+        )
+        return Drawn(camera, pips.last(), overlay)
+    }
+
+    /**
+     * Matcha ritual's map, Nearby chosen in an upright window `upright` points whose system takes `uprightSafe`, then
+     * turned on its side to `side` and `sideSafe` through the window made again, the system's sides reaching it after
+     * its first frame, as they do; then closed and opened again on its side, and Nearby chosen there. What the turned
+     * map draws, and what the one opened on its side draws.
+     */
+    private fun turned(upright: DpSize, uprightSafe: EdgeInsets, side: DpSize, sideSafe: EdgeInsets): Pair<Drawn, Drawn> {
+        val recreation = Recreation(compose)
+        window = upright
+        show(recreation = recreation)
+        compose.runOnUiThread { bars(uprightSafe) }
+        compose.waitForIdle()
+        // Opened from the list's state: on the smallest phone the card would stand under the tab bar.
+        compose.runOnUiThread { deliveries.navigator.open(DemoCards.parcel("Matcha ritual").id) }
+        settle()
+        compose.onNodeWithTag(PAGE_GLOBE).performClick()
+        settle()
+        view("Nearby").performClick()
+        settle()
+        remake(recreation) { window = side }
+        compose.runOnUiThread { bars(sideSafe) }
+        settle()
+        view("Nearby").assertIsSelected()
+        val turned = drawn(side, sideSafe)
+        compose.onNodeWithTag(MAP_CLOSE).performClick()
+        settle()
+        compose.onNodeWithTag(PAGE_GLOBE).performClick()
+        settle()
+        if (views().first != "Nearby") view("Nearby").performClick()
+        settle()
+        return turned to drawn(side, sideSafe)
+    }
+
+    /** The box of the chip pointing to `name`, past the frame's edge. */
+    private fun MapOverlay.chip(name: String): Rect = pointers.first { it.name == name }.let {
+        Rect(it.center.x - it.width / 2, it.center.y - 13, it.width, 26.0)
+    }
+
+    private fun overlaps(a: Rect, b: Rect): Boolean = a.minX < b.maxX && a.maxX > b.minX && a.minY < b.maxY && a.maxY > b.minY
+
+    /**
+     * The iPhone's 956 × 440 points on its side (its Dynamic Island and home indicator taking 62 at each end and 21 at
+     * the foot), Matcha ritual close by: Pip stands below the parcel's dot, between Zürich and the summary, Zürich's name
+     * to the right of its dot, and the chip pointing to Kyoto above and to the right of it, clear of the names, as the
+     * iPhone shows it; the same turned from upright as opened on its side.
+     */
+    @Test
+    @Config(qualifiers = "w956dp-h956dp-xxhdpi")
+    fun turnedOnItsSideTheMapStandsPipBelowTheParcelAsTheIphoneDoes() {
+        val (turned, opened) = turned(
+            DpSize(440.dp, 956.dp), EdgeInsets(top = 62.0, leading = 0.0, bottom = 34.0, trailing = 0.0),
+            DpSize(956.dp, 440.dp), EdgeInsets(top = 0.0, leading = 62.0, bottom = 21.0, trailing = 62.0),
+        )
+        assertEquals(opened.camera, turned.camera)
+        assertEquals(opened.pip, turned.pip)
+        val pip = checkNotNull(turned.pip)
+        assertEquals(pip, turned.overlay.pip)
+        val dot = turned.overlay.dots.first { it.kind == MapOverlay.DotKind.Current }.point
+        assertTrue(pip.below)
+        val zurich = turned.overlay.labels.first { it.text == "Zürich" }.frame
+        assertTrue(zurich.minX > dot.x)
+        assertTrue(zurich.minY < dot.y && zurich.maxY > dot.y)
+        val kyoto = turned.overlay.chip("Kyoto")
+        assertTrue(kyoto.maxY < dot.y - 20 && kyoto.midX > dot.x)
+        assertTrue(turned.overlay.labels.none { overlaps(it.frame, kyoto) })
+        assertFalse(overlaps(pip.box, kyoto))
+    }
+
+    /**
+     * The smallest phone's 640 × 360 points on its side, its status bar 24 tall and its buttons 48 wide at the trailing
+     * end: under the close button's row and above the summary there is no room below the parcel's dot for Pip, and he
+     * stands beside it, over the chip pointing to Kyoto, where the iPhone's own layout puts him in a frame this short;
+     * the same turned from upright as opened on its side.
+     */
+    @Test
+    @Config(qualifiers = "w640dp-h640dp-xhdpi")
+    fun turnedOnASmallPhonesSideTheMapStandsPipBesideTheParcel() {
+        val (turned, opened) = turned(
+            DpSize(360.dp, 640.dp), EdgeInsets(top = 24.0, leading = 0.0, bottom = 48.0, trailing = 0.0),
+            DpSize(640.dp, 360.dp), EdgeInsets(top = 24.0, leading = 0.0, bottom = 0.0, trailing = 48.0),
+        )
+        assertEquals(opened.camera, turned.camera)
+        assertEquals(opened.pip, turned.pip)
+        val pip = checkNotNull(turned.pip)
+        assertEquals(pip, turned.overlay.pip)
+        assertFalse(pip.below)
+        assertEquals(-1, pip.side)
+        assertTrue(overlaps(pip.box, turned.overlay.chip("Kyoto")))
     }
 
     @Test

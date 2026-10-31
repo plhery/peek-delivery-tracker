@@ -182,7 +182,7 @@ fun WorldMapView(
         val motion = rememberGlobeMotion(scene?.camera, request, mode, recenter, reduceMotion, moves, onFreeChange)
         val drawn = motion.scene(scene, request, interactive) ?: return@BoxWithConstraints
         val watch = LocalMapCameraWatch.current
-        if (watch != null && moves) SideEffect { watch(interactive, peek, drawn.camera) }
+        if (watch != null && moves) SideEffect { watch(interactive, peek, drawn.camera, drawn.pip) }
         Box(
             Modifier
                 .fillMaxSize()
@@ -384,10 +384,11 @@ private class MapMotion(private val context: Context, kept: GlobeCamera? = null)
 internal val LocalMapsAtOnce = staticCompositionLocalOf { false }
 
 /**
- * Hears where each map that moves (`interactive` or `peek`) or `flies` looks from, each time it is composed: for tests,
- * which see its pixels but not its camera.
+ * Hears where each map that moves (`interactive` or `peek`) or `flies` looks from, and where Pip stands on it, each time
+ * it is composed: for tests, which see its pixels but not its camera.
  */
-internal val LocalMapCameraWatch = staticCompositionLocalOf<((interactive: Boolean, peek: Boolean, camera: GlobeCamera) -> Unit)?> { null }
+internal val LocalMapCameraWatch =
+    staticCompositionLocalOf<((interactive: Boolean, peek: Boolean, camera: GlobeCamera, pip: PipPlacement?) -> Unit)?> { null }
 
 /** The scene if it is made, without waiting. */
 @OptIn(ExperimentalCoroutinesApi::class)

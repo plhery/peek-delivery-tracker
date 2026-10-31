@@ -270,6 +270,16 @@ class AddParcelScreenshotTest {
     }
 
     @Test
+    @Config(qualifiers = "w732dp-h412dp-xhdpi")
+    fun onAPhoneOnItsSideWithTheKeyboardUpTheTitleScrollsWithTheForm() {
+        show()
+        compose.onNodeWithTag(ADD_TRACKING).performTextReplacement("1Z999AA10123456784")
+        bars(keyboard = 200)
+        settle()
+        compose.screenshot("add_parcel_landscape_keyboard_light")
+    }
+
+    @Test
     @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
     fun sideBySideOnATabletInDark() {
         show(dark = true)

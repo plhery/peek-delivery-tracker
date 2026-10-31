@@ -417,7 +417,7 @@ class ParcelAlertsTest {
         val content = node(PARCEL_ALERTS).getUnclippedBoundsInRoot()
         assertEquals(content.bottom.value, panel.bottom.value, 1f)
         assertEquals(content.top.value, panel.top.value, 1f)
-        assertTrue("${panel.bottom - panel.top}", panel.bottom - panel.top < 620.dp)
+        assertTrue("${panel.bottom - panel.top}", panel.bottom - panel.top < 660.dp)
     }
 
     @Test

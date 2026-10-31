@@ -19,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -49,10 +50,11 @@ import kotlinx.coroutines.flow.collectLatest
  * What scrolls in a sheet that has fields, as a SwiftUI `ScrollView` or `Form` keeps clear of the keyboard: room at its
  * foot for the part of the keyboard over it, less the [bottom] its content leaves there already (the navigation bar's,
  * [sheetBottomInset]), so that the last field can scroll above it; and the field with the focus in view, between [top]
- * from the viewport's top (under a bar) and the keyboard, as the focus moves and as the keyboard comes. The scroll's own,
- * not the reader's: the sheet stays. With [dismissesKeyboard], a drag of the content down takes the keyboard down with
- * the finger (`.scrollDismissesKeyboard(.interactively)`). [modifier] is the viewport's, [contentModifier] is what
- * scrolls in it (its padding). The room isn't counted in what a fitted sheet measures it for.
+ * from the viewport's top (under a bar) and the keyboard, as the focus moves, as the keyboard comes and as the viewport
+ * grows or shrinks (a button over the keyboard under it, a turn). The scroll's own, not the reader's: the sheet stays.
+ * With [dismissesKeyboard], a drag of the content down takes the keyboard down with the finger
+ * (`.scrollDismissesKeyboard(.interactively)`). [modifier] is the viewport's, [contentModifier] is what scrolls in it
+ * (its padding). The room isn't counted in what a fitted sheet measures it for.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -72,7 +74,7 @@ internal fun KeyboardScrollColumn(
     val reduceMotion = PeekTheme.reduceMotion
     LaunchedEffect(keyboard, top, reduceMotion, scroll) {
         val clearance = with(density) { top.toPx() }
-        snapshotFlow { keyboard.focused to keyboard.covered(ime.getBottom(density)) }.collectLatest { (_, covered) ->
+        snapshotFlow { Triple(keyboard.focused, keyboard.covered(ime.getBottom(density)), keyboard.height) }.collectLatest { (_, covered, _) ->
             val offset = keyboard.focusedOffset(clearance, covered)
             if (abs(offset) < 0.5f) return@collectLatest
             if (reduceMotion) scroll.scrollBy(offset) else scroll.animateScrollBy(offset)
@@ -113,6 +115,10 @@ private class SheetKeyboard {
     private var below by mutableFloatStateOf(0f)
     private var scale by mutableFloatStateOf(1f)
 
+    /** The viewport's height. */
+    var height by mutableIntStateOf(0)
+        private set
+
     /** The field with the focus, or null. */
     var focused: LayoutCoordinates? by mutableStateOf(null)
 
@@ -122,6 +128,7 @@ private class SheetKeyboard {
     fun place(viewport: LayoutCoordinates) {
         this.viewport = viewport
         if (!viewport.isAttached) return
+        height = viewport.size.height
         val root = viewport.findRootCoordinates()
         val top = root.localPositionOf(viewport, Offset.Zero).y
         val foot = root.localPositionOf(viewport, Offset(0f, viewport.size.height.toFloat())).y

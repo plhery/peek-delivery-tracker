@@ -13017,7 +13017,9 @@ export const CARRIER_CAPABILITIES = {
       "PEK",
       "Pecom",
       "ТК ПЭК",
-      "Первая экспедиционная компания"
+      "Первая экспедиционная компания",
+      "Easyway PEK",
+      "ПЭК: EASYWAY"
     ],
     "countries": [
       "RU",
@@ -13803,7 +13805,9 @@ export const CARRIER_CAPABILITIES = {
       "Sending by InPost"
     ],
     "countries": [
-      "ES"
+      "ES",
+      "PT",
+      "AD"
     ],
     "color": "#e52021",
     "selectable": true,
@@ -13814,14 +13818,25 @@ export const CARRIER_CAPABILITIES = {
       "recognitionRank": 891,
       "recognitionServedCountriesOnly": true
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "info.sending.es"
+        ],
+        "pathPattern": "^/fgts/pub/locNumSeguimiento\\.seam$",
+        "params": [
+          "localizador"
+        ]
+      }
+    ],
     "detectionRules": [
       {
         "pattern": "^\\d{12}$",
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.sending.es/localiza-tu-envio/"
+    "trackingSearchUrl": "https://www.sending.es/localiza-tu-envio/",
+    "trackingUrlTemplate": "https://info.sending.es/fgts/pub/locNumSeguimiento.seam?web=S&localizador={trackingNumber}"
   },
   "serpost": {
     "displayName": "Serpost",
@@ -16420,7 +16435,7 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "ecms-express"
     },
-    "trackingUrlTemplate": "https://www.ecmsglobal.com/en-us/tracking.html?orderNumber={trackingNumber}",
+    "trackingUrlTemplate": "https://www.ecmsglobal.com/en-us/tracking.html?number={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -16429,6 +16444,7 @@ export const CARRIER_CAPABILITIES = {
         ],
         "pathPattern": "^/(?:en-us|en-uk|zh-cn|ko-kr)/tracking\\.html$",
         "params": [
+          "number",
           "orderNumber"
         ]
       },
@@ -31803,7 +31819,8 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/tracking\\.html$",
         "params": [
           "label"
-        ]
+        ],
+        "ownNumbersOnly": true
       }
     ],
     "detectionRules": [
@@ -34189,7 +34206,8 @@ export const CARRIER_CAPABILITIES = {
       "Agediss by JP",
       "AB Home",
       "VIR by JP",
-      "JP Home Jacky Perrenot"
+      "JP Home Jacky Perrenot",
+      "VIR Transport"
     ],
     "countries": [
       "FR",
@@ -39606,6 +39624,126 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.geswl.com/"
+  },
+  "fastwl": {
+    "displayName": "Fast World Logistic",
+    "aliases": [
+      "Fast World Logistic - FWL",
+      "FastWL"
+    ],
+    "countries": [
+      "FR"
+    ],
+    "color": "#f1592a",
+    "selectable": true,
+    "timezone": "Europe/Paris",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.fastwl.com/suivre-un-colis/?trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.fastwl.com",
+          "fastwl.com"
+        ],
+        "pathPattern": "^/suivre-un-colis/?$",
+        "params": [
+          "trackingNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.fastwl.com/suivre-un-colis/"
+  },
+  "tig-freight": {
+    "displayName": "TIG Freight",
+    "aliases": [
+      "TIG Freight Management",
+      "TIG Freight Management Pty Ltd"
+    ],
+    "countries": [
+      "AU"
+    ],
+    "color": "#17479e",
+    "selectable": true,
+    "timezone": "Australia/Melbourne",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.open360.com/tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.open360.com"
+        ],
+        "path": "^/tracking/([^/?#]+)/?$",
+        "detectFromNumber": true
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.open360.com/tracking/"
+  },
+  "uvan": {
+    "displayName": "UVAN",
+    "aliases": [
+      "UVAN Express",
+      "宇环国际",
+      "宇环国际物流",
+      "深圳市宇环国际物流有限公司",
+      "Shenzhen Yuhuan International Logistics",
+      "Yuhuan International Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0269b8",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://uvan.itdida.com/"
+  },
+  "yha": {
+    "displayName": "YHA Logistics",
+    "aliases": [
+      "YHA",
+      "YHA LOGISTICS",
+      "越航物流",
+      "越航国际物流"
+    ],
+    "countries": [
+      "CN",
+      "HK"
+    ],
+    "color": "#e83e17",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.yha56.com/page/indexDetail/indexDetail2.html?manifestId={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.yha56.com",
+          "yha56.com"
+        ],
+        "pathPattern": "^/page/indexDetail/indexDetail2\\.html$",
+        "params": [
+          "manifestId"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.yha56.com/"
   }
 } as const;
 
@@ -40682,7 +40820,11 @@ export const CARRIER_IDS = [
   "citilogistics",
   "comone-express",
   "dpx-logistics",
-  "geswl"
+  "geswl",
+  "fastwl",
+  "tig-freight",
+  "uvan",
+  "yha"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

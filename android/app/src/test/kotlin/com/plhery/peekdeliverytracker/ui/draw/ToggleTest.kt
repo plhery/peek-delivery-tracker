@@ -46,9 +46,9 @@ import org.robolectric.annotation.GraphicsMode
 import kotlin.math.roundToInt
 
 /**
- * The switch as iOS 26's: nothing drawn past its track, a tap or a drag of its knob across turning it, a drag back
- * leaving it, and its knob swelling into a lens past the track under the finger, without the swell under Reduce Motion,
- * and back; held on and off, light and dark.
+ * The switch as iOS 26's: its track while off, nothing drawn past it, a tap or a drag of its knob across turning it, a
+ * drag back leaving it, and its knob swelling into a lens past the track under the finger, without the swell under
+ * Reduce Motion, and back; held on and off, light and dark.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -102,6 +102,33 @@ class ToggleTest {
                     assertTrue("$knob along, $below below the track: ${Integer.toHexString(pixel)}", channel >= 254)
                 }
             }
+        }
+    }
+
+    @Test
+    fun offItsTrackIsTheTertiaryLabelSeenThrough() {
+        // As the simulator draws it at rest: over white and over black, in light and in dark.
+        val shown = mapOf(
+            (false to Color.White) to Triple(197, 197, 199),
+            (false to Color.Black) to Triple(18, 18, 20),
+            (true to Color.White) to Triple(249, 249, 252),
+            (true to Color.Black) to Triple(70, 70, 73),
+        )
+        var case by mutableStateOf(shown.keys.first())
+        compose.setContent {
+            PeekTheme(dark = case.first, highContrast = false, reduceMotion = false, carrierIdentities = null) {
+                Box(Modifier.background(case.second).padding(INSET)) { Toggle(false, {}) }
+            }
+        }
+        for ((key, expected) in shown) {
+            case = key
+            // The track's free end, past the knob.
+            val pixel = picture().getPixel(px(INSET + 52.dp), px(INSET + 14.dp))
+            val (red, green, blue) = expected
+            val dark = if (key.first) "dark" else "light"
+            assertEquals("$dark red", red.toFloat(), (pixel shr 16 and 0xFF).toFloat(), 1f)
+            assertEquals("$dark green", green.toFloat(), (pixel shr 8 and 0xFF).toFloat(), 1f)
+            assertEquals("$dark blue", blue.toFloat(), (pixel and 0xFF).toFloat(), 1f)
         }
     }
 

@@ -56,12 +56,12 @@ import kotlin.math.abs
 import kotlin.math.roundToInt
 
 /**
- * `Toggle` in its switch style as iOS 26 draws it: a capsule 63 × 28, the system's grey fill while off and `tint` while
- * on, its knob a white capsule 37 × 24, 2 in from its ends, with no shadow past the track. Disabled, it shows at half
- * strength and takes no touch. A tap on it turns it to the other side (`onChange`); so does a drag of the knob across,
- * the knob going to the side of the middle the finger is on and the switch turning there as the finger lifts, a drag
- * back undoing it. It plays no haptic, as SwiftUI's `Toggle` plays none of its own. TalkBack reads it as a switch, on
- * or off, and a row that merges it reads as one with its label.
+ * `Toggle` in its switch style as iOS 26 draws it: a capsule 63 × 28, the see-through grey of the tertiary label while
+ * off and `tint` while on, its knob a white capsule 37 × 24, 2 in from its ends, with no shadow past the track.
+ * Disabled, it shows at half strength and takes no touch. A tap on it turns it to the other side (`onChange`); so does
+ * a drag of the knob across, the knob going to the side of the middle the finger is on and the switch turning there as
+ * the finger lifts, a drag back undoing it. It plays no haptic, as SwiftUI's `Toggle` plays none of its own. TalkBack
+ * reads it as a switch, on or off, and a row that merges it reads as one with its label.
  *
  * Under the finger the knob swells into a glass lens 59.3 × 39.7 about its centre, over the track and past it, 9 past
  * its end and 6 past its top and bottom, holding there while the finger is down and following a drag. As measured
@@ -74,11 +74,11 @@ import kotlin.math.roundToInt
  * when animations are removed.
  *
  * The lens is a drawing ([drawLens]), not a refraction: a rim 0.6 wide at the top and bottom and 1.2 at the ends, 50
- * darker than what lies under it, with a thin line of the track inside it; within, `behind` and the track lighter,
- * the track narrower about the lens's centre and 9 in from its top and bottom, and where the track runs on past an
- * end, the track across the lens's whole height there, the pockets of `behind` ending in rounded tips; a soft shadow
- * below, seen through the glass as round it, and the glass darker under its top edge. Dark was not measured: it is
- * the same lens with the dark track and `behind`.
+ * darker than the track where it crosses it and than `behind` elsewhere, 50 lighter than `behind` in dark, with a thin
+ * line of the track inside it; within, `behind` and the track lighter, the track narrower about the lens's centre and
+ * 9 in from its top and bottom, and where the track runs on past an end, the track across the lens's whole height
+ * there, the pockets of `behind` ending in rounded tips; a soft shadow below, seen through the glass as round it, and
+ * the glass darker under its top edge. Dark, measured over black, is the same lens but for its rim.
  */
 @Composable
 fun Toggle(
@@ -123,7 +123,7 @@ fun Toggle(
             }
             .drawWithContent {
                 drawContent()
-                drawLens(progress, lens.value, track.compositeOver(behind), behind)
+                drawLens(progress, lens.value, track.compositeOver(behind), behind, colors.dark)
             }
             .clip(CapsuleShape)
             .background(track),
@@ -132,9 +132,10 @@ fun Toggle(
 
 /**
  * The knob `slide` of the way across, `grown` of the way from the white knob to the full lens (past 1 as it swells,
- * below 0 as it settles), over the track, opaque `track`, lying on `behind`. At rest it is the knob alone.
+ * below 0 as it settles), over the track, opaque `track`, lying on `behind`, in the `dark` colours or not. At rest it
+ * is the knob alone.
  */
-private fun DrawScope.drawLens(slide: Float, grown: Float, track: Color, behind: Color) {
+private fun DrawScope.drawLens(slide: Float, grown: Float, track: Color, behind: Color, dark: Boolean) {
     val knob = Size(KNOB_WIDTH.roundToPx().toFloat(), KNOB_HEIGHT.roundToPx().toFloat())
     val start = (KNOB_INSET.roundToPx() + ((TRACK_WIDTH - KNOB_WIDTH - KNOB_INSET * 2) * slide).roundToPx()).toFloat()
     val left = if (layoutDirection == LayoutDirection.Ltr) start else size.width - start - knob.width
@@ -152,7 +153,7 @@ private fun DrawScope.drawLens(slide: Float, grown: Float, track: Color, behind:
     if (glass > 0f) {
         clipPath(outline) { drawThrough(lens, track, behind) }
         drawShadow(lens, outline, glass)
-        drawRim(lens, outline, glass, track, behind)
+        drawRim(lens, outline, glass, track, behind, dark)
     }
     if (glass < 1f) drawPath(outline, Color.White.copy(alpha = 1 - glass))
 }
@@ -217,12 +218,15 @@ private fun DrawScope.blurred(deviation: Dp, alpha: Float): Paint = Paint().appl
     asFrameworkPaint().maskFilter = BlurMaskFilter(gaussianBlurRadius(deviation).toPx(), BlurMaskFilter.Blur.NORMAL)
 }
 
-/** The lens's rim, wider at its ends, darker than the track where it crosses it and than `behind` elsewhere. */
-private fun DrawScope.drawRim(lens: Rect, outline: Path, glass: Float, track: Color, behind: Color) {
+/**
+ * The lens's rim, wider at its ends, darker than the track where it crosses it, and elsewhere darker than `behind`, or
+ * lighter in `dark`.
+ */
+private fun DrawScope.drawRim(lens: Rect, outline: Path, glass: Float, track: Color, behind: Color, dark: Boolean) {
     val rim = Path().apply { op(outline, capsule(inside(lens)), PathOperation.Difference) }
     val under = capsule(Rect(Offset.Zero, size))
     clipPath(under) { drawPath(rim, track.shaded(), alpha = glass) }
-    clipPath(under, ClipOp.Difference) { drawPath(rim, behind.shaded(), alpha = glass) }
+    clipPath(under, ClipOp.Difference) { drawPath(rim, behind.shaded(lighter = dark), alpha = glass) }
 }
 
 /** The lens within its rim. */
@@ -234,8 +238,11 @@ private fun Color.lighter(): Color {
     return Color((red + add).coerceAtMost(1f), (green + add).coerceAtMost(1f), (blue + add).coerceAtMost(1f))
 }
 
-/** The colour as the rim shows it: [RIM_SHADE] darker in each channel. */
-private fun Color.shaded(): Color = Color((red - RIM_SHADE).coerceAtLeast(0f), (green - RIM_SHADE).coerceAtLeast(0f), (blue - RIM_SHADE).coerceAtLeast(0f))
+/** The colour as the rim shows it: [RIM_SHADE] darker in each channel, or as much `lighter`. */
+private fun Color.shaded(lighter: Boolean = false): Color {
+    val by = if (lighter) RIM_SHADE else -RIM_SHADE
+    return Color((red + by).coerceIn(0f, 1f), (green + by).coerceIn(0f, 1f), (blue + by).coerceIn(0f, 1f))
+}
 
 /** SwiftUI's `Capsule()` filling `rect`. */
 private fun DrawScope.capsule(rect: Rect): Path = Path().apply {
@@ -331,8 +338,8 @@ private const val LUMA_GREEN = 0.587f
 private const val LUMA_BLUE = 0.114f
 
 /**
- * The rim, at the top and bottom and at the ends, how much darker it is than what lies under it in each of red, green
- * and blue, and the track's line inside it.
+ * The rim, at the top and bottom and at the ends, how much darker (or lighter) it is than what lies under it in each of
+ * red, green and blue, and the track's line inside it.
  */
 private val RIM = 0.6.dp
 private val RIM_END = 1.2.dp
@@ -354,6 +361,9 @@ private val INNER_DROP = 5.5.dp
 private val INNER_BLUR = 3.dp
 private const val INNER_ALPHA = 0.05f
 
-/** The track while off: the system's fill, (120, 120, 128) at 16 % in light and 32 % in dark. */
-private val OFF_LIGHT = Color(120, 120, 128).copy(alpha = 0.16f)
-private val OFF_DARK = Color(120, 120, 128).copy(alpha = 0.32f)
+/**
+ * The track while off: the tertiary label, (60, 60, 67) at 30 % in light and (235, 235, 245) at 30 % in dark, as
+ * measured over white, black, grey and red on the simulator.
+ */
+private val OFF_LIGHT = Color(60, 60, 67).copy(alpha = 0.3f)
+private val OFF_DARK = Color(235, 235, 245).copy(alpha = 0.3f)

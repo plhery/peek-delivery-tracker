@@ -770,7 +770,8 @@ describe('carrier detection', () => {
   it('jd-logistics — JD Logistics', () => {
     // OSS EXAMPLE fixture, VG + 11 digits (modern variants remain to be established).
     // Source: https://gist.github.com/zxp/e83a4a1b7294a5ed6207
-    expect(detectCarrier('VG05778167021')).toBe('jd-logistics');
+    // No real shipment backs the rule, so the scraper offers JD Logistics among the number's candidates.
+    expect(detectCarrierMatch('VG05778167021').candidates).toContain('jd-logistics');
     expectDirectTracking('jd-logistics');
   });
 

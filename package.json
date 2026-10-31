@@ -19,7 +19,16 @@
   },
   "overrides": {
     "browserslist": "4.29.3",
-    "zod": "4.6.7"
+    "zod": "4.6.7",
+    "@sentry/bundler-plugins": {
+      "glob": "14.0.3"
+    },
+    "@serwist/build": {
+      "glob": "14.0.3"
+    },
+    "@serwist/next": {
+      "glob": "14.0.3"
+    }
   },
   "scripts": {
     "contract:generate": "node scripts/generate-api-contract.mjs && node scripts/generate-brand.mjs",

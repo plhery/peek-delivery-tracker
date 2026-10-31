@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.screenshot
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -92,6 +93,27 @@ class GlassTest {
         assertGrey(1f, GlassFace.ReducedTransparency.recipe(dark = false).over(Color.Black, 44f))
         assertGrey(0.057f, GlassFace.ReducedTransparency.recipe(dark = true).over(Color.White, 44f))
         assertGrey(0.057f, GlassFace.ReducedTransparency.recipe(dark = true).over(Color.Black, 44f))
+    }
+
+    @Test
+    fun dimmedTheFaceIsTheFaceOfWhatLiesBehindDimmed() {
+        // Black at a fifth under the glass, over colours that run past 1 and over the ceiling once filtered: the
+        // dimmed face is the face of each colour at 80 %, held to 0…1 and to the ceiling only then, in every face. A
+        // Color holds eight bits a channel, so the colour at 80 % is a step off at most.
+        val colours = listOf(Color.White, Color.Red, YELLOW, Color(0.2f, 0.4f, 0.9f), PAGE)
+        for (face in GlassFace.entries) {
+            for (dark in listOf(false, true)) {
+                val recipe = face.recipe(dark)
+                for (colour in colours) {
+                    val dimmed = recipe.dimmed(0.2f).over(colour, 100f)
+                    val expected = recipe.over(Color(colour.red * 0.8f, colour.green * 0.8f, colour.blue * 0.8f), 100f)
+                    assertEquals("$face $dark $colour", expected.red, dimmed.red, ONE_STEP)
+                    assertEquals("$face $dark $colour", expected.green, dimmed.green, ONE_STEP)
+                    assertEquals("$face $dark $colour", expected.blue, dimmed.blue, ONE_STEP)
+                }
+            }
+        }
+        assertSame(GlassFace.Standard.recipe(dark = false), GlassFace.Standard.recipe(dark = false).dimmed(0f))
     }
 
     @Test
@@ -332,6 +354,9 @@ class GlassTest {
     private val BLUE_CARD = Color(223, 235, 250)
 
     private val YELLOW = Color(1f, 0.8f, 0f)
+
+    /** One eight-bit step, and a little. */
+    private val ONE_STEP = 1.01f / 255
 
     /** An sRGB Color holds eight bits a channel; the recipes' figures are rounded to four places. */
     private val EIGHT_BITS = 0.5f / 255 + 1e-4f

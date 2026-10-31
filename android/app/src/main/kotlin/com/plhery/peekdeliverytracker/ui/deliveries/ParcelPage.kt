@@ -610,7 +610,10 @@ private fun DeliveriesState.pageKey(event: KeyEvent, pageId: UUID, parcel: Parce
 @Stable
 internal class PageMenuRequest(val pageId: UUID)
 
-/** The page's ••• menu, over the whole window where the tab shell is there to draw it ([LocalTabOverlay]). */
+/**
+ * The page's ••• menu, over the whole window where the tab shell is there to draw it ([LocalTabOverlay]), its glass
+ * showing the page through it ([GlassOverlayLayer]).
+ */
 @Composable
 internal fun PageMenuHost(state: DeliveriesState) {
     val request = state.pageMenu
@@ -620,7 +623,7 @@ internal fun PageMenuHost(state: DeliveriesState) {
         content?.invoke()
         return
     }
-    OverlayLayer(host, PAGE_MENU, content)
+    GlassOverlayLayer(host, PAGE_MENU, content)
 }
 
 /**

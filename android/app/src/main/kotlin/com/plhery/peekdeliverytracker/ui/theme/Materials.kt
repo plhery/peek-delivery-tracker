@@ -292,6 +292,16 @@ class GlassRecipe(
     /** The most luminance the face comes out with on that glass: [maxLuma] filled and lifted as the rest. */
     fun cap(minDimension: Float): Float = (maxLuma(minDimension) * (1 - fillAlpha) + fillAlpha * fill + lift).coerceIn(0f, 1f)
 
+    /**
+     * The face of what lies behind dimmed by black at [amount], as the glass shows a dim laid under it: the matrix's
+     * slope scaled by what the dim lets through, its offset, fill, lift and ceiling as they were.
+     */
+    fun dimmed(amount: Float): GlassRecipe = if (amount <= 0f) {
+        this
+    } else {
+        GlassRecipe(black + (white - black) * (1 - amount), black, saturation * (1 - amount), fill, fillAlpha, lift, maxLuma, dimsWhenLarge)
+    }
+
     /** The face over a plain [behind] on a glass whose shorter side is [minDimension] points. */
     fun over(behind: Color, minDimension: Float): Color {
         val input = floatArrayOf(behind.red, behind.green, behind.blue)
@@ -402,6 +412,9 @@ fun glassShadow(minDimension: Float): Shadow {
  * It is drawn solid, the face over `behind` (the page's background) with no lens, where there is no backdrop, and
  * under Reduce Transparency ([PeekTheme.reduceTransparency]), whose face is all but opaque on the iPhone too. Increase
  * Contrast ([PeekColors.highContrast]) takes its own face. Vibrancy, which iOS gives content on glass, is not drawn.
+ *
+ * [dim] is the black a dim under the glass lays over what lies behind, as an alert's or a context menu's glass shows
+ * the screen dimmed under it on the iPhone ([GlassRecipe.dimmed]).
  */
 @Composable
 fun GlassSurface(
@@ -409,11 +422,13 @@ fun GlassSurface(
     modifier: Modifier = Modifier,
     backdrop: MaterialBackdrop? = LocalMaterialBackdrop.current,
     behind: Color = PeekTheme.colors.background,
+    dim: Float = 0f,
     content: @Composable BoxScope.() -> Unit,
 ) {
     val colors = PeekTheme.colors
     val reduceTransparency = PeekTheme.reduceTransparency
-    val recipe = GlassFace.of(colors.highContrast, reduceTransparency).recipe(colors.dark)
+    val face = GlassFace.of(colors.highContrast, reduceTransparency).recipe(colors.dark)
+    val recipe = remember(face, dim) { face.dimmed(dim) }
     val blurred = backdrop?.takeUnless { reduceTransparency }
     Box(modifier) {
         val solid = behind.takeIf { blurred == null }

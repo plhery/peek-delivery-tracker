@@ -1496,6 +1496,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Japan Post tracking: EMS numbers and statuses explained",
       "name": "Japan Post",
       "color": "#cc0000"
+    },
+    {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "russian-post-tracking",
+      "title": "Russian Post tracking (Почта России): numbers and steps",
+      "name": "Russian Post",
+      "color": "#1928dc"
     }
   ],
   "de": [

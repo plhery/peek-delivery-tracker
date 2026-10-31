@@ -40,7 +40,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * The list's feedback on a phone: the pull to refresh (A-G05) with its thresholds, the check it starts, and how it
+ * The list's feedback on a phone: the pull to refresh (A-G06) with its thresholds, the check it starts, and how it
  * ends, the list back at its top however it is thrown into it; the message under the list and its four seconds; the
  * Undo of an archive and its seven; and what TalkBack is told of each.
  */

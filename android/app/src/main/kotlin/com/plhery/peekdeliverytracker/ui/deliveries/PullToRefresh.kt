@@ -85,7 +85,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /**
- * The list's pull to refresh (`.refreshable` and UIRefreshControl, A-G05): the list pulled down past its top follows the
+ * The list's pull to refresh (`.refreshable` and UIRefreshControl, A-G06): the list pulled down past its top follows the
  * finger on UIScrollView's rubber band; pulled past the model's threshold, the refresh starts at once and the list holds
  * a gap of [HOLD] open over its content until it is over, then closes it. It takes the list's drags at its top before
  * the list's own bounce does, through nested scrolling, so the list's flings are left alone, and a fling into the top

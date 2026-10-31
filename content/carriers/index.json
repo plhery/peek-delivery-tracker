@@ -193,5 +193,6 @@
   { "id": "morning-global", "catalog": "morning-global", "name": "Morning Global", "languages": ["en"] },
   { "id": "border-express", "catalog": "border-express", "name": "Border Express", "languages": ["en"] },
   { "id": "delhivery", "catalog": "delhivery", "name": "Delhivery", "languages": ["en"] },
-  { "id": "aras-kargo", "catalog": "aras-kargo", "name": "Aras Kargo", "languages": ["en"] }
+  { "id": "aras-kargo", "catalog": "aras-kargo", "name": "Aras Kargo", "languages": ["en"] },
+  { "id": "emirates-post", "catalog": "emirates-post", "name": "Emirates Post", "languages": ["en"] }
 ]

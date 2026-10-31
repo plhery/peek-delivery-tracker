@@ -1568,6 +1568,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Aras Kargo tracking: numbers and statuses in English",
       "name": "Aras Kargo",
       "color": "#dc0812"
+    },
+    {
+      "id": "emirates-post",
+      "catalog": "emirates-post",
+      "slug": "emirates-post-tracking",
+      "title": "Emirates Post tracking: AE numbers and statuses explained",
+      "name": "Emirates Post",
+      "color": "#004a98"
     }
   ],
   "de": [

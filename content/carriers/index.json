@@ -185,7 +185,7 @@
   { "id": "zto", "catalog": "zto", "name": "ZTO Express", "languages": ["en"] },
   { "id": "cne", "catalog": "cne", "name": "CNE Express", "languages": ["en"] },
   { "id": "japan-post", "catalog": "japan-post", "name": "Japan Post", "languages": ["en"] },
-  { "id": "russian-post", "catalog": "russian-post", "name": "Russian Post", "languages": ["en"] },
+  { "id": "russian-post", "catalog": "russian-post", "name": "Russian Post", "languages": ["en", "ru"] },
   { "id": "huahan", "catalog": "huahan", "name": "HuaHan Logistics", "languages": ["en"] },
   { "id": "epost-global", "catalog": "epost-global", "name": "ePost Global", "languages": ["en"] },
   { "id": "gls-at", "catalog": "gls-at", "name": "GLS Austria", "languages": ["en"] },

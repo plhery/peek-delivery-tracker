@@ -3416,6 +3416,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Отслеживание YTO Express: трек-номер, статусы и телефон",
       "name": "YTO Express",
       "color": "#4d148c"
+    },
+    {
+      "id": "russian-post",
+      "catalog": "russian-post",
+      "slug": "pochta-rossii-otslezhivanie",
+      "title": "Отслеживание посылок Почты России: трек-номер и статусы",
+      "name": "Russian Post",
+      "color": "#1928dc"
     }
   ],
   "zh": [

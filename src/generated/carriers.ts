@@ -1464,6 +1464,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JD Logistics tracking: JD numbers, statuses and contact",
       "name": "JD Logistics",
       "color": "#e1251b"
+    },
+    {
+      "id": "singapore-post",
+      "catalog": "singapore-post",
+      "slug": "singapore-post-tracking",
+      "title": "Singapore Post (SingPost) tracking: numbers and statuses",
+      "name": "Singapore Post",
+      "color": "#2e5da8"
     }
   ],
   "de": [

@@ -1115,6 +1115,16 @@ value class CarrierId(val rawValue: String) {
         val Parcelabc = CarrierId("parcelabc")
         val SafewayExpressCargo = CarrierId("safeway-express-cargo")
         val WExpressPh = CarrierId("w-express-ph")
+        val E24metroCa = CarrierId("e24metro-ca")
+        val Expedico = CarrierId("expedico")
+        val FrontierCa = CarrierId("frontier-ca")
+        val HecnyEcom = CarrierId("hecny-ecom")
+        val Hongsuda = CarrierId("hongsuda")
+        val Jaskipin = CarrierId("jaskipin")
+        val LetterTrack = CarrierId("letter-track")
+        val Parceljet = CarrierId("parceljet")
+        val Pasarex = CarrierId("pasarex")
+        val QlsQuince = CarrierId("qls-quince")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2174,6 +2184,16 @@ value class CarrierId(val rawValue: String) {
             Parcelabc,
             SafewayExpressCargo,
             WExpressPh,
+            E24metroCa,
+            Expedico,
+            FrontierCa,
+            HecnyEcom,
+            Hongsuda,
+            Jaskipin,
+            LetterTrack,
+            Parceljet,
+            Pasarex,
+            QlsQuince,
         )
     }
 }

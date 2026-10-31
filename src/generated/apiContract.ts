@@ -3730,7 +3730,10 @@ export const CARRIER_CAPABILITIES = {
       "US"
     ],
     "trackingSearchUrl": "https://www.gofo.com/us/track",
-    "helpUrl": "https://www.gofo.com/us/customer-service"
+    "helpUrl": "https://www.gofo.com/us/customer-service",
+    "aliases": [
+      "Parcll"
+    ]
   },
   "estafeta": {
     "displayName": "Estafeta",
@@ -4083,7 +4086,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^[A-Z]{2}\\d{9}JP$",
+        "pattern": "^[A-TV-Z][A-Z]\\d{9}JP$",
         "confidence": "high",
         "checksum": "s10"
       },
@@ -4290,7 +4293,10 @@ export const CARRIER_CAPABILITIES = {
       "CN"
     ],
     "trackingSearchUrl": "https://www.zto.com/check",
-    "helpUrl": "https://www.zto.com/introduce/about/contact"
+    "helpUrl": "https://www.zto.com/introduce/about/contact",
+    "aliases": [
+      "中通快递"
+    ]
   },
   "jd-logistics": {
     "displayName": "JD Logistics",
@@ -4521,6 +4527,13 @@ export const CARRIER_CAPABILITIES = {
           "auspost.com.au"
         ],
         "path": "^/mypost/track/details/([^/?#]+)/?$"
+      },
+      {
+        "domains": [
+          "auspost.com.au"
+        ],
+        "pathPattern": "^/mypost/track/?$",
+        "fragment": "^/search\\?(?:[^#]*&)?id=([^&]+)"
       }
     ],
     "detectionRules": [
@@ -5364,7 +5377,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.cne.com/en/track"
+    "trackingSearchUrl": "https://www.cne.com/en/track",
+    "helpUrl": "https://www.cne.com/en/about/contact"
   },
   "dpd-de": {
     "displayName": "DPD Germany",
@@ -27728,7 +27742,7 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "GOFO Netherlands",
     "aliases": [
       "GOFO NL",
-      "CIRRO E-Commerce"
+      "CIRRO Parcel Netherlands"
     ],
     "countries": [
       "NL"
@@ -31721,7 +31735,9 @@ export const CARRIER_CAPABILITIES = {
       "守务国际",
       "上海守务国际",
       "Shanghai Shouwu International",
-      "Shouwu Express"
+      "Shouwu Express",
+      "SW Express",
+      "守务国际物流"
     ],
     "countries": [
       "CN"
@@ -31785,7 +31801,8 @@ export const CARRIER_CAPABILITIES = {
       "远邮",
       "远邮国际",
       "深圳市远邮国际物流有限公司",
-      "Shenzhen Yuanyou International Logistics"
+      "Shenzhen Yuanyou International Logistics",
+      "YY Postal"
     ],
     "countries": [
       "CN"
@@ -40675,6 +40692,314 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.wwwexpress.com.ph/track-and-trace/"
+  },
+  "e24metro-ca": {
+    "displayName": "E24",
+    "aliases": [
+      "Metro E24",
+      "Metro E24 Solutions",
+      "e24 Metro",
+      "Metro Supply Chain",
+      "Metro Supply Chain Group"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#545859",
+    "selectable": true,
+    "timezone": "America/Toronto",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "expedico": {
+    "displayName": "Expedico",
+    "aliases": [
+      "expedico.eu",
+      "Vinteco",
+      "Vinteco s.r.o."
+    ],
+    "countries": [
+      "CZ",
+      "SK",
+      "HU",
+      "BG",
+      "HR",
+      "GR",
+      "PL",
+      "LT",
+      "EE",
+      "LV",
+      "SI",
+      "RO",
+      "IT",
+      "ES",
+      "PT",
+      "DE",
+      "AT"
+    ],
+    "color": "#0074e4",
+    "selectable": true,
+    "timezone": "Europe/Prague",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://expedico.eu/tracking?code={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "expedico.eu",
+          "www.expedico.eu"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "code"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://expedico.eu/tracking"
+  },
+  "frontier-ca": {
+    "displayName": "Frontier Courier",
+    "aliases": [
+      "Frontier",
+      "Frontier Supply Chain Solutions",
+      "Frontier SCS",
+      "Frontier Same Day",
+      "Frontier Saskatchewan",
+      "FrontShip"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#e56119",
+    "selectable": true,
+    "timezone": "America/Winnipeg",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.carrierlogistics.com/scripts/fscf.pol/boldetail.htm?wbtn=PRO&wpro1={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.carrierlogistics.com"
+        ],
+        "pathPattern": "^/scripts/fscf\\.pol/boldetail\\.htm$",
+        "params": [
+          "wpro1"
+        ]
+      },
+      {
+        "domains": [
+          "tracking.carrierlogistics.com"
+        ],
+        "pathPattern": "^/scripts/fscf\\.pol/facts\\.htm$",
+        "params": [
+          "pronum"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/fscf.pol/facts.htm"
+  },
+  "hecny-ecom": {
+    "displayName": "Hecny E-com",
+    "aliases": [
+      "Hecny Group CIS",
+      "Хекни Групп СНГ",
+      "Hecny Logistic",
+      "Yolka Ecom"
+    ],
+    "countries": [
+      "RU"
+    ],
+    "color": "#8328fc",
+    "selectable": true,
+    "timezone": "Europe/Moscow",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://ecom.yolka.io/parcels/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "ecom.yolka.io"
+        ],
+        "path": "^/parcels/([^/?#]+)/?$"
+      },
+      {
+        "domains": [
+          "e-com.hecny.ru",
+          "ecom.hecny.ru"
+        ],
+        "path": "^/(?:(?:ru|en|tr|cn)/)?parcels/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ecom.yolka.io/tracknumber"
+  },
+  "hongsuda": {
+    "displayName": "HSD Express",
+    "aliases": [
+      "HongSuDa",
+      "HongSuDa Logistics",
+      "鸿速达",
+      "鸿速达国际物流",
+      "深圳市鸿速达国际物流有限公司",
+      "Shenzhen HongSuDa International Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#fdaa05",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.hsd-express.cn/en"
+  },
+  "jaskipin": {
+    "displayName": "Jaskipin Express",
+    "aliases": [
+      "Jaskipin",
+      "PT Jaskipin Express Indonesia"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#0843ad",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://jaskipin.co.id/tracking"
+  },
+  "letter-track": {
+    "displayName": "LetterTrack",
+    "aliases": [
+      "LetterTrack Pro"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#6c9dce",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.lettertrackpro.com/uspstracking/"
+  },
+  "parceljet": {
+    "displayName": "Parceljet",
+    "aliases": [
+      "派速捷",
+      "派速捷供应链",
+      "PJ Supply Chain",
+      "PJサプライチェーン",
+      "广州派速捷信息科技有限公司",
+      "Guangzhou Paisujie Information Technology"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#16489d",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.parceljet.com/track"
+  },
+  "pasarex": {
+    "displayName": "PasarEX",
+    "aliases": [
+      "Pasar Express",
+      "PASAR EXPRESS SAS",
+      "Pasar Express S.A."
+    ],
+    "countries": [
+      "CO",
+      "CL",
+      "PA",
+      "BB"
+    ],
+    "color": "#124381",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.pasarex.com/?awb={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.pasarex.com"
+        ],
+        "pathPattern": "^/(?:tracking)?/?$",
+        "params": [
+          "awb"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^AMZPSR\\d{9}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://tracking.pasarex.com/"
+  },
+  "qls-quince": {
+    "displayName": "QLS",
+    "aliases": [
+      "QLS Quince",
+      "Quince Logistics Services",
+      "Quince Logistics"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#0a1e3d",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://qls.quince.com/qls/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "qls.quince.com"
+        ],
+        "path": "^/[a-z0-9-]+/track/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://qls.quince.com/qls/track"
   }
 } as const;
 
@@ -41782,7 +42107,17 @@ export const CARRIER_IDS = [
   "pago",
   "parcelabc",
   "safeway-express-cargo",
-  "w-express-ph"
+  "w-express-ph",
+  "e24metro-ca",
+  "expedico",
+  "frontier-ca",
+  "hecny-ecom",
+  "hongsuda",
+  "jaskipin",
+  "letter-track",
+  "parceljet",
+  "pasarex",
+  "qls-quince"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

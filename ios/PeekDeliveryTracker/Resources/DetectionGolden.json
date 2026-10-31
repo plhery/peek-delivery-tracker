@@ -11588,6 +11588,16 @@
     ]
   },
   {
+    "input": "10161803",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "101692867739",
     "carrier": "unknown",
     "confidence": "low",
@@ -28094,6 +28104,22 @@
       "colis-prive",
       "j-and-t",
       "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "2317575891739",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "la-poste",
+      "correos-chile",
+      "yunda",
+      "korea-post",
+      "fan-courier"
+    ],
+    "asked": [
+      "la-poste",
+      "fan-courier"
     ]
   },
   {
@@ -69288,6 +69314,46 @@
     ]
   },
   {
+    "input": "AMZPSR020816106",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pasarex"
+    ]
+  },
+  {
+    "input": "AMZPSR020965874",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pasarex"
+    ]
+  },
+  {
+    "input": "AMZPSR023935072",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pasarex"
+    ]
+  },
+  {
+    "input": "AMZPSR024279529",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pasarex"
+    ]
+  },
+  {
+    "input": "AMZPSR025530371",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "pasarex"
+    ]
+  },
+  {
     "input": "AN725955",
     "carrier": "unknown",
     "confidence": "low",
@@ -74164,6 +74230,50 @@
     ]
   },
   {
+    "input": "CR000471872667",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gofo"
+    ],
+    "asked": [
+      "gofo"
+    ]
+  },
+  {
+    "input": "CR000478228622",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gofo"
+    ],
+    "asked": [
+      "gofo"
+    ]
+  },
+  {
+    "input": "CR010112295671",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gofo"
+    ],
+    "asked": [
+      "gofo"
+    ]
+  },
+  {
+    "input": "CR010154282837",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gofo"
+    ],
+    "asked": [
+      "gofo"
+    ]
+  },
+  {
     "input": "CR010720791546",
     "carrier": "unknown",
     "confidence": "low",
@@ -74176,6 +74286,17 @@
   },
   {
     "input": "CR010740141269",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gofo"
+    ],
+    "asked": [
+      "gofo"
+    ]
+  },
+  {
+    "input": "CR010781027246",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [

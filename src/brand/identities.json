@@ -11,6 +11,9 @@
   "2go": {
     "decal": "2go"
   },
+  "360lion": {
+    "decal": "360lion"
+  },
   "3pe-express": {
     "decal": "3pe-express"
   },
@@ -233,6 +236,9 @@
   },
   "asendia": {
     "decal": "asendia"
+  },
+  "asiafly": {
+    "decal": "asiafly"
   },
   "asigna": {
     "decal": "asigna"
@@ -499,6 +505,9 @@
   },
   "citilogistics": {
     "decal": "citilogistics"
+  },
+  "cititrans": {
+    "decal": "cititrans"
   },
   "city-air-express": {
     "decal": "city-air-express"
@@ -2650,6 +2659,9 @@
   "shree-nandan": {
     "decal": "shree-nandan"
   },
+  "shunbang-express": {
+    "decal": "shunbang-express"
+  },
   "sicepat": {
     "decal": "sicepat"
   },
@@ -2819,6 +2831,9 @@
   "swiss-post-cargo": {
     "family": "swiss-post"
   },
+  "syd": {
+    "decal": "syd"
+  },
   "t-cat": {
     "decal": "t-cat"
   },
@@ -2966,6 +2981,9 @@
   },
   "top-logistics-au": {
     "decal": "top-logistics-au"
+  },
+  "topex-logistics": {
+    "decal": "topex-logistics"
   },
   "toptrans": {
     "decal": "toptrans"
@@ -3165,6 +3183,9 @@
   "vitran-express": {
     "decal": "vitran-express"
   },
+  "vnlin": {
+    "decal": "vnlin"
+  },
   "vnpost": {
     "decal": "vnpost",
     "palette": {
@@ -3193,6 +3214,9 @@
   },
   "ward-trucking": {
     "decal": "ward-trucking"
+  },
+  "we-world-express": {
+    "decal": "we-world-express"
   },
   "wedo": {
     "family": "allegro-one"
@@ -3247,6 +3271,9 @@
   },
   "xinghe-freight": {
     "decal": "xinghe-freight"
+  },
+  "xingyunyi": {
+    "decal": "xingyunyi"
   },
   "xlcourier": {
     "decal": "xlcourier"

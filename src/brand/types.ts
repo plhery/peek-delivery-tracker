@@ -354,7 +354,16 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'hkd-express'
   | 'canada-air-express'
   | 'bombax'
-  | 'sm-express';
+  | 'sm-express'
+  | 'asiafly'
+  | 'shunbang-express'
+  | 'topex-logistics'
+  | '360lion'
+  | 'cititrans'
+  | 'syd'
+  | 'we-world-express'
+  | 'vnlin'
+  | 'xingyunyi';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

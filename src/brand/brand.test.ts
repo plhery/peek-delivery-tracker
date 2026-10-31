@@ -430,6 +430,15 @@ describe('carrier brand', () => {
       'canada-air-express',
       'bombax',
       'sm-express',
+      'asiafly',
+      'shunbang-express',
+      'topex-logistics',
+      '360lion',
+      'cititrans',
+      'syd',
+      'we-world-express',
+      'vnlin',
+      'xingyunyi',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

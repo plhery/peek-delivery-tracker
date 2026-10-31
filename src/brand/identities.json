@@ -991,6 +991,9 @@
       "accent": "#e42920"
     }
   },
+  "emirates-courier-express": {
+    "decal": "emirates-courier-express"
+  },
   "emirates-post": {
     "decal": "emirates-post"
   },
@@ -1023,6 +1026,9 @@
   },
   "equick": {
     "decal": "equick"
+  },
+  "espoirer": {
+    "decal": "espoirer"
   },
   "estafeta": {
     "decal": "estafeta"
@@ -1170,6 +1176,9 @@
   },
   "flash-express-ph": {
     "decal": "flash-express-ph"
+  },
+  "flashbird-ca": {
+    "decal": "flashbird-ca"
   },
   "fleetex": {
     "decal": "fleetex"
@@ -1861,6 +1870,9 @@
   },
   "liuchen": {
     "decal": "liuchen"
+  },
+  "lm-parcel": {
+    "decal": "lm-parcel"
   },
   "logen": {
     "decal": "logen"
@@ -3230,6 +3242,9 @@
   },
   "victorian-freight-specialists": {
     "decal": "victorian-freight-specialists"
+  },
+  "viet-an-express": {
+    "decal": "viet-an-express"
   },
   "viettel-post": {
     "decal": "viettel-post"

@@ -385,7 +385,12 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'frontier-ca'
   | 'e24metro-ca'
   | 'hecny-ecom'
-  | 'jaskipin';
+  | 'jaskipin'
+  | 'flashbird-ca'
+  | 'lm-parcel'
+  | 'emirates-courier-express'
+  | 'viet-an-express'
+  | 'espoirer';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

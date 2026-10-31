@@ -461,6 +461,11 @@ describe('carrier brand', () => {
       'e24metro-ca',
       'hecny-ecom',
       'jaskipin',
+      'flashbird-ca',
+      'lm-parcel',
+      'emirates-courier-express',
+      'viet-an-express',
+      'espoirer',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

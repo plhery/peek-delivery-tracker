@@ -21,14 +21,122 @@ object CarrierPickerSearch {
 
     data class LetterSection(val letter: String, val carriers: List<CarrierId>)
 
-    private val combiningMarks = Regex("\\p{Mn}+")
+    /**
+     * The catalog's selectable carriers as the picker lists and searches them in one language: in the reader's
+     * alphabetical order, and each name, other name and country name folded once, as `match` folds them again for
+     * each query on the iPhone, so a letter typed folds only the query. Built again for another catalog or language.
+     */
+    class Index(catalog: CarrierCatalog, internal val language: AppLanguage) {
+        private val carriers = catalog.selectableCarriers
+        private val definitions = carriers.map { catalog.info(it, language) }
+
+        /** How many carriers the picker offers (`catalog.selectableCarriers.count`). */
+        val size: Int get() = carriers.size
+
+        /** The carriers in the reader's alphabetical order (`compare`), those it calls equal in the catalog's. */
+        internal val alphabetical: List<Int> = LocalizedComparison.Loose.comparator(language.locale).let { comparator ->
+            carriers.indices.sortedWith { left, right -> comparator.compare(definitions[left].displayName, definitions[right].displayName) }
+        }
+
+        internal fun carrier(position: Int): CarrierId = carriers[position]
+
+        internal fun displayName(position: Int): String = definitions[position].displayName
+
+        /** Folded at the first search, in the catalog's order. */
+        internal val entries: List<Entry> by lazy {
+            val ranks = IntArray(carriers.size)
+            alphabetical.forEachIndexed { rank, position -> ranks[position] = rank }
+            val names = countryNames(language)
+            val countries = HashMap<String, List<Characters>>()
+            carriers.indices.map { position ->
+                val definition = definitions[position]
+                val aliases = definition.aliases ?: emptyList()
+                Entry(
+                    carriers[position],
+                    ranks[position],
+                    Characters(fold(definition.displayName)),
+                    Characters(compact(definition.displayName)),
+                    aliases,
+                    aliases.map { Characters(fold(it)) },
+                    aliases.map { Characters(compact(it)) },
+                    (definition.countries ?: emptyList()).flatMap { code ->
+                        countries.getOrPut(code) { names(code).map { Characters(fold(it)) } }
+                    },
+                )
+            }
+        }
+    }
+
+    /** A carrier's names folded for `match`; [rank] is its place in the reader's alphabetical order. */
+    internal class Entry(
+        val carrier: CarrierId,
+        val rank: Int,
+        val name: Characters,
+        val compactName: Characters,
+        val aliases: List<String>,
+        val foldedAliases: List<Characters>,
+        val compactAliases: List<Characters>,
+        val countryNames: List<Characters>,
+    )
+
+    /**
+     * A string and where each of its Characters ends, so that matching compares Characters, as Swift's `Array(text)`
+     * does, without splitting the string again for each query.
+     */
+    internal class Characters(val text: String) {
+        // None where each UTF-16 unit is a Character, as `characters()` splits ASCII without CR.
+        private val ends: IntArray? = if (text.all { it.code < 0x80 && it != '\r' }) null else characterEnds(text)
+
+        val count: Int get() = ends?.size ?: text.length
+
+        private fun end(index: Int): Int = ends?.get(index) ?: (index + 1)
+
+        private fun start(index: Int): Int = if (index == 0) 0 else end(index - 1)
+
+        fun character(index: Int): String = text.substring(start(index), end(index))
+
+        /** Whether `needle`'s Characters are this text's from `index` on. */
+        fun matches(needle: Characters, index: Int): Boolean {
+            if (needle.count == 0) return true
+            val from = start(index)
+            if (end(index + needle.count - 1) - from != needle.text.length) return false
+            if (!text.regionMatches(from, needle.text, 0, needle.text.length)) return false
+            if (ends == null && needle.ends == null) return true
+            return (0 until needle.count - 1).all { end(index + it) - from == needle.end(it) }
+        }
+
+        fun startsWith(prefix: Characters): Boolean = prefix.count <= count && matches(prefix, 0)
+
+        fun contains(other: Characters): Boolean = offset(other, this, startingWord = false) != null
+    }
 
     /** Lower case without accents, one character for each character, so a match can be highlighted. */
-    fun fold(value: String): String = value.characters().joinToString("") { character ->
+    fun fold(value: String): String {
+        // ASCII folds to its lower case, as each of its characters does on its own.
+        if (value.all { it.code < 0x80 }) return value.lowercase()
+        val folded = StringBuilder(value.length)
+        for (character in value.characters()) folded.append(foldCharacter(character))
+        return folded.toString()
+    }
+
+    private fun foldCharacter(character: String): String {
+        if (character.length == 1 && character[0].code < 0x80) return character.lowercase()
         // Foundation's diacritic- and case-insensitive folding: marks dropped from the decomposed form, then
         // full case folding, which upper-then-lower casing gives for the letters it changes.
-        val folded = combiningMarks.replace(character.nfd(), "").uppercase().lowercase()
-        if (folded.characterCount == 1) folded else character
+        val folded = character.nfd().withoutNonspacingMarks().uppercase().lowercase()
+        return if (folded.characterCount == 1) folded else character
+    }
+
+    /** The text without its nonspacing marks (general category Mn). */
+    private fun String.withoutNonspacingMarks(): String {
+        val kept = StringBuilder(length)
+        var index = 0
+        while (index < length) {
+            val scalar = codePointAt(index)
+            if (Character.getType(scalar).toByte() != Character.NON_SPACING_MARK) kept.appendCodePoint(scalar)
+            index += Character.charCount(scalar)
+        }
+        return kept.toString()
     }
 
     private fun isLetterOrDigit(character: String): Boolean = character.isLetterCharacter || character.isNumberCharacter
@@ -36,50 +144,35 @@ object CarrierPickerSearch {
     private fun compact(value: String): String = fold(value).characters().filter(::isLetterOrDigit).joinToString("")
 
     /** The first match of `query` in `text`, as a character offset; only one that starts a word when asked. */
-    private fun offset(query: String, text: String, startingWord: Boolean): Int? {
-        val characters = text.characters()
-        val needle = query.characters()
-        if (needle.isEmpty() || needle.size > characters.size) return null
-        for (index in 0..(characters.size - needle.size)) {
-            if (characters.subList(index, index + needle.size) != needle) continue
-            if (!startingWord || index == 0 || !isLetterOrDigit(characters[index - 1])) return index
+    private fun offset(query: Characters, text: Characters, startingWord: Boolean): Int? {
+        if (query.count == 0 || query.count > text.count) return null
+        for (index in 0..(text.count - query.count)) {
+            if (!text.matches(query, index)) continue
+            if (!startingWord || index == 0 || !isLetterOrDigit(text.character(index - 1))) return index
         }
         return null
     }
 
-    private fun String.hasPrefixCharacters(prefix: String): Boolean {
-        val characters = characters()
-        val start = prefix.characters()
-        return start.size <= characters.size && characters.subList(0, start.size) == start
-    }
-
-    private fun String.containsCharacters(other: String): Boolean = offset(other, this, startingWord = false) != null
-
-    fun match(
-        carrier: CarrierId,
-        definition: CarrierDefinition,
-        query: String,
-        countryNames: (String) -> List<String>,
-    ): Result? {
-        val folded = fold(query.trimmingWhitespacesAndNewlines())
-        if (folded.isEmpty()) return null
-        val squeezed = compact(query)
-        val name = fold(definition.displayName)
-        val aliases = definition.aliases ?: emptyList()
-        fun lit(start: Int, score: Double) = Result(carrier, score, start until start + folded.characterCount, null)
-        fun plain(score: Double, alias: String? = null) = Result(carrier, score, null, alias)
-        if (name.hasPrefixCharacters(folded)) return lit(0, 0.0)
+    /**
+     * `match`: how well a carrier answers the query, [folded] trimmed and [squeezed] to its letters and digits, its
+     * score lowered by [bonus].
+     */
+    private fun match(entry: Entry, folded: Characters, squeezed: Characters, bonus: Double): Result? {
+        fun lit(start: Int, score: Double) = Result(entry.carrier, score - bonus, start until start + folded.count, null)
+        fun plain(score: Double, alias: String? = null) = Result(entry.carrier, score - bonus, null, alias)
+        val name = entry.name
+        val aliases = entry.aliases.indices
+        if (name.startsWith(folded)) return lit(0, 0.0)
         offset(folded, name, startingWord = true)?.let { word -> if (word > 0) return lit(word, 1.0) }
-        if (squeezed.isNotEmpty() && compact(definition.displayName).hasPrefixCharacters(squeezed)) return plain(1.5)
+        if (squeezed.count > 0 && entry.compactName.startsWith(squeezed)) return plain(1.5)
         aliases.firstOrNull {
-            offset(folded, fold(it), startingWord = true) != null || (squeezed.isNotEmpty() && compact(it).hasPrefixCharacters(squeezed))
-        }?.let { return plain(2.0, alias = it) }
+            offset(folded, entry.foldedAliases[it], startingWord = true) != null ||
+                (squeezed.count > 0 && entry.compactAliases[it].startsWith(squeezed))
+        }?.let { return plain(2.0, alias = entry.aliases[it]) }
         offset(folded, name, startingWord = false)?.let { inside -> if (inside > 0) return lit(inside, 3.0) }
-        if (squeezed.characterCount > 1 && compact(definition.displayName).containsCharacters(squeezed)) return plain(3.5)
-        aliases.firstOrNull { fold(it).containsCharacters(folded) }?.let { return plain(4.0, alias = it) }
-        val inCountry = (definition.countries ?: emptyList()).any { code ->
-            countryNames(code).any { offset(folded, fold(it), startingWord = true) != null }
-        }
+        if (squeezed.count > 1 && entry.compactName.contains(squeezed)) return plain(3.5)
+        aliases.firstOrNull { entry.foldedAliases[it].contains(folded) }?.let { return plain(4.0, alias = entry.aliases[it]) }
+        val inCountry = entry.countryNames.any { offset(folded, it, startingWord = true) != null }
         return if (inCountry) plain(5.0) else null
     }
 
@@ -92,17 +185,22 @@ object CarrierPickerSearch {
         catalog: CarrierCatalog,
         language: AppLanguage,
         preferred: Set<CarrierId> = emptySet(),
-    ): List<Result> {
-        val names = countryNames(language)
-        val comparator = LocalizedComparison.Loose.comparator(language.locale)
-        return catalog.selectableCarriers.mapNotNull { carrier ->
-            val definition = catalog.info(carrier, language)
-            val found = match(carrier, definition, query, names) ?: return@mapNotNull null
-            Result(carrier, found.score - (if (carrier in preferred) 0.3 else 0.0), found.highlight, found.alias)
-        }.sortedWith { left, right ->
-            if (left.score != right.score) return@sortedWith left.score.compareTo(right.score)
-            comparator.compare(catalog.info(left.carrier, language).displayName, catalog.info(right.carrier, language).displayName)
+    ): List<Result> = search(query, Index(catalog, language), preferred)
+
+    /** [search] over an [Index] kept from one query to the next. */
+    fun search(query: String, index: Index, preferred: Set<CarrierId> = emptySet()): List<Result> {
+        val folded = Characters(fold(query.trimmingWhitespacesAndNewlines()))
+        if (folded.count == 0) return emptyList()
+        val squeezed = Characters(compact(query))
+        val found = mutableListOf<Pair<Result, Int>>()
+        for (entry in index.entries) {
+            val result = match(entry, folded, squeezed, if (entry.carrier in preferred) 0.3 else 0.0) ?: continue
+            found += result to entry.rank
         }
+        // Equal scores in the reader's alphabetical order, the index's.
+        return found.sortedWith { (left, leftRank), (right, rightRank) ->
+            if (left.score != right.score) left.score.compareTo(right.score) else leftRank.compareTo(rightRank)
+        }.map { it.first }
     }
 
     /** Every name a country is searched by: the reader's and the English one. */
@@ -113,27 +211,26 @@ object CarrierPickerSearch {
     }
 
     /** Carriers by initial, in the reader's alphabet; names starting with a digit come last under "#". */
-    fun letterSections(catalog: CarrierCatalog, language: AppLanguage): List<LetterSection> {
-        // `compare(options: [.caseInsensitive, .diacriticInsensitive, .numeric], locale:)`.
-        val comparator = LocalizedComparison.Loose.comparator(language.locale)
-        val sorted = catalog.selectableCarriers.sortedWith { left, right ->
-            comparator.compare(catalog.info(left, language).displayName, catalog.info(right, language).displayName)
-        }
-        val sections = mutableListOf<LetterSection>()
+    fun letterSections(catalog: CarrierCatalog, language: AppLanguage): List<LetterSection> =
+        letterSections(Index(catalog, language))
+
+    /** [letterSections] in the order an [Index] has already sorted. */
+    fun letterSections(index: Index): List<LetterSection> {
+        // `compare(options: [.caseInsensitive, .diacriticInsensitive, .numeric], locale:)`, the index's order.
+        val sections = mutableListOf<Pair<String, MutableList<CarrierId>>>()
         val other = mutableListOf<CarrierId>()
-        for (carrier in sorted) {
-            val letter = fold(catalog.info(carrier, language).displayName.characterPrefix(1)).uppercase(language.locale)
+        for (position in index.alphabetical) {
+            val carrier = index.carrier(position)
+            val letter = fold(index.displayName(position).characterPrefix(1)).uppercase(index.language.locale)
             if (letter.characterCount != 1 || !letter.isLetterCharacter) {
                 other += carrier
                 continue
             }
-            if (sections.lastOrNull()?.letter == letter) {
-                sections[sections.size - 1] = LetterSection(letter, sections[sections.size - 1].carriers + carrier)
-            } else {
-                sections += LetterSection(letter, listOf(carrier))
-            }
+            val last = sections.lastOrNull()
+            if (last?.first == letter) last.second += carrier else sections += letter to mutableListOf(carrier)
         }
-        return if (other.isEmpty()) sections else sections + LetterSection("#", other)
+        val letters = sections.map { (letter, carriers) -> LetterSection(letter, carriers) }
+        return if (other.isEmpty()) letters else letters + LetterSection("#", other)
     }
 
     /**

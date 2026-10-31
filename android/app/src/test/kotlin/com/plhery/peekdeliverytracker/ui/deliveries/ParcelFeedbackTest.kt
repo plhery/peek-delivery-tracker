@@ -1117,6 +1117,29 @@ class ParcelFeedbackTest {
         assertTrue(shows(FEEDBACK_BUBBLE, "Did I get this one right?"))
     }
 
+    @Test
+    fun aPageDrawnAgainOnItsWayOutMakesNoQuestionAndOpenedAgainAsksAfresh() {
+        show()
+        openQuestion()
+        tap(FEEDBACK_YES)
+        settle()
+        val first = work()
+        // Back: the page goes back into its card, and the parcels change meanwhile, which draws it again.
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.mainClock.advanceTimeBy(48)
+        assertNull(source.feedbacks.of(gift.id))
+        source.parcels.value = listOf(gift.copy(label = "Birthday gift, wrapped"), lamp)
+        compose.mainClock.advanceTimeBy(48)
+        assertNull(source.feedbacks.of(gift.id))
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertNull(source.feedbacks.of(gift.id))
+        openQuestion()
+        assertNotEquals(first, work())
+        assertTrue(shows(FEEDBACK_BUBBLE, "Did I get this one right?"))
+    }
+
     // Large text.
 
     @Test

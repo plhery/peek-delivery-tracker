@@ -116,12 +116,18 @@ internal class DeliveriesNavigator(
     /** The page with this id has gone, over the list or beside it, as the iPhone's page goes with its state. */
     var left: (UUID) -> Unit = {}
 
+    /** The page with this id opens, over the list or beside it, as the iPhone pushes a page with its state afresh. */
+    var opened: (UUID) -> Unit = {}
+
     private fun update(next: DeliveriesNavigation) {
         val before = navigation
         if (next == before) return
         navigation = next
         if (next.chosen != before.chosen) savedParcel = next.chosen
-        if (next.shown != before.shown) before.shown?.let(left)
+        if (next.shown != before.shown) {
+            before.shown?.let(left)
+            next.shown?.let(opened)
+        }
         next.screen(after = before)?.let(view)
     }
 

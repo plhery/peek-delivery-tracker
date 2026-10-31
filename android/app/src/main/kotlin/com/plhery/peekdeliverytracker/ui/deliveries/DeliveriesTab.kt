@@ -134,6 +134,7 @@ fun DeliveriesTab(
         source.pageWork.forget(pageId)
         source.feedbacks.forget(pageId)
     }
+    navigator.opened = source.feedbacks::open
     val listState = rememberLazyListState()
     val archiveOpen = rememberForLaunch(launch, false)
     val reviewDue = rememberForLaunch(launch, false)

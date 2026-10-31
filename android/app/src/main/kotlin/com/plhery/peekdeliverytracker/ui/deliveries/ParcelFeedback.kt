@@ -170,11 +170,15 @@ import kotlinx.coroutines.launch
  * The questions of this process's pages, by page, each its [ParcelFeedbackModel] and what its views keep beside it
  * ([ParcelFeedbackWork]). The source holds them for the launch, as [PageWork] holds the pages' changes: a page drawn
  * again as the window is made again (a rotation, a fold) finds its moment, an open sheet with what was typed in it and
- * an answer on its way as they were, as the iPhone's `@StateObject` lasts through a rotation. A page that goes forgets
- * its question ([forget]), and opened again asks afresh; an answer on its way still gets there.
+ * an answer on its way as they were, as the iPhone's `@StateObject` lasts through a rotation. Each opening of a page
+ * has a question of its own ([open]), made as the page is first drawn; a page that goes forgets it ([forget]), and
+ * nothing it draws on its way out makes another. An answer on its way still gets there.
  */
 class ParcelFeedbacks {
     private val works = HashMap<UUID, ParcelFeedbackWork>()
+
+    /** The pages open, whose question their drawing makes once; read as they are drawn, which a change draws again. */
+    private var open by mutableStateOf(emptySet<UUID>())
     private var sheets by mutableStateOf(emptySet<UUID>())
 
     /**
@@ -184,17 +188,29 @@ class ParcelFeedbacks {
      */
     val covering: Boolean get() = sheets.isNotEmpty()
 
-    /** The question of the page with `pageId`, made by `make` the first time, working in `scope`. */
-    internal fun work(pageId: UUID, scope: CoroutineScope, make: () -> ParcelFeedbackModel): ParcelFeedbackWork =
-        works.getOrPut(pageId) {
+    /** The page with `pageId` opens: its next drawing makes its question afresh, as the iPhone's push makes a `@StateObject`. */
+    fun open(pageId: UUID) {
+        forget(pageId)
+        open += pageId
+    }
+
+    /**
+     * The question of the open page with `pageId`, made by `make` the first time, working in `scope`; none for a page
+     * that has gone, which keeps the one it had as it leaves.
+     */
+    internal fun work(pageId: UUID, scope: CoroutineScope, make: () -> ParcelFeedbackModel): ParcelFeedbackWork? {
+        if (pageId !in open) return null
+        return works.getOrPut(pageId) {
             ParcelFeedbackWork(make(), scope) { up -> sheets = if (up) sheets + pageId else sheets - pageId }.also { it.start() }
         }
+    }
 
     /** The question of the page with `pageId`, while it has one. */
     internal fun of(pageId: UUID): ParcelFeedbackWork? = works[pageId]
 
     /** The page with `pageId` has gone: its question stops watching its model. */
     fun forget(pageId: UUID) {
+        open -= pageId
         works.remove(pageId)?.close()
         sheets -= pageId
     }

@@ -174,24 +174,29 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
                     .testTag(PARCEL_MISSING),
             )
         }
-        ParcelFeedbackOverlays(
-            state, feedback, backdrop, Modifier.align(Alignment.BottomCenter).padding(start = start, end = end, bottom = bottom),
-        )
+        if (feedback != null) {
+            ParcelFeedbackOverlays(
+                state, feedback, backdrop, Modifier.align(Alignment.BottomCenter).padding(start = start, end = end, bottom = bottom),
+            )
+        }
     }
-    PageReviewing(state, feedback, parcel, parcelId)
+    if (feedback != null) PageReviewing(state, feedback, parcel, parcelId)
 }
 
 /**
  * The page's question (`@StateObject feedback`), the source's for the page's id so that it lasts through the window made
  * again, told what the page shows each time that changes (`onChange(of: parcel.flatMap(feedbackPage), initial: true)`).
+ * Made as the page is first drawn once it has opened; on its way out the page keeps the one it had, and makes none.
  */
 @Composable
-private fun rememberFeedback(state: DeliveriesState, pageId: UUID, parcel: Parcel?): ParcelFeedbackWork {
+private fun rememberFeedback(state: DeliveriesState, pageId: UUID, parcel: Parcel?): ParcelFeedbackWork? {
     val source = state.source
     val page = feedbackPage(state, pageId, parcel)
     val client = parcel?.let(source::feedbackClient)
-    val work = source.feedbacks.work(pageId, source.scope) { source.feedbackModel().apply { show(page, client) } }
-    LaunchedEffect(work, page) { work.show(page, client) }
+    val held = remember { arrayOfNulls<ParcelFeedbackWork>(1) }
+    val work = source.feedbacks.work(pageId, source.scope) { source.feedbackModel().apply { show(page, client) } } ?: held[0]
+    held[0] = work
+    LaunchedEffect(work, page) { work?.show(page, client) }
     return work
 }
 
@@ -233,7 +238,7 @@ private fun rememberPageScroll(): ScrollState {
 
 /** The page's ScrollView: the paper, in one column or two, and the question under it. */
 @Composable
-private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, feedback: ParcelFeedbackWork, margins: PageMargins) {
+private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, feedback: ParcelFeedbackWork?, margins: PageMargins) {
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val history = showsHistory(parcel)
     // Where the scroll shows what it holds, which the question comes in as it is seen in.
@@ -267,7 +272,9 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, fee
                 PageHistory(state, parcel, pageId, history, Modifier.fillMaxWidth())
             }
             // Below the paper, on the ground it lies on, 8 in from its sides and no wider than 608.
-            ParcelFeedbackQuestion(feedback, { viewport[0] }, Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
+            if (feedback != null) {
+                ParcelFeedbackQuestion(feedback, { viewport[0] }, Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
+            }
         }
     }
 }

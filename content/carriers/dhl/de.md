@@ -43,7 +43,7 @@ Auf dhl.de steht die Sendungsverfolgung auf Deutsch und auf Englisch. Die wichti
 
 `Die Sendung befindet sich im Weitertransport zu DHL` bei einem Paket aus dem Ausland heißt: DHL hat es noch nicht, die nächste Meldung kann mehrere Tage dauern. Taucht die Meldung zur Region des Empfängers mehrmals auf, wurde das Paket wahrscheinlich von Hand bearbeitet, mit 1 bis 2 Tagen Verzögerung. Dasselbe gilt für eine wiederholte Meldung zum Zustellfahrzeug: Die Tour konnte nicht abgeschlossen werden. Steht `Für diese Sendung wurde ein Liefertag als Empfangsoption vorgemerkt.` oder eine ähnliche Zeile da, ist eine Empfangsoption gebucht, für dieses Paket oder als Dauerwunsch in deinem DHL-Konto.
 
-Auf der englischen Seite stehen die gleichen Schritte auf Englisch, etwa `The shipment has been loaded into the delivery vehicle` für die Zustellung. Einige Meldungen erscheinen dort trotzdem auf Deutsch.
+Auf der englischen Seite stehen die gleichen Schritte auf Englisch, etwa `The shipment has been loaded into the delivery vehicle` für die Zustellung.
 
 ## DHL Paket nicht zugestellt: Filiale, Packstation, Zweitzustellung
 
@@ -65,7 +65,7 @@ Steht da „zugestellt“, aber nichts ist da? Schau im Feld „Zugestellt an“
 
 Schäden oder fehlenden Inhalt meldest du DHL innerhalb von 7 Tagen nach der Zustellung: Schadensanzeige ausfüllen, dann über 0228 4333112 eine kostenlose Abholung buchen oder das ganze Paket mit allen Teilen in einer Filiale abgeben (nicht im Paketshop oder an der Packstation). DHL meldet sich beim Absender.
 
-**Zoll.** Bei Paketen von außerhalb der EU legt die Deutsche Post die Einfuhrabgaben für dich aus und kassiert sie bei der Zustellung oder in der Filiale, plus 7,50 € Auslagepauschale. Seit dem 1. Juli 2026 fällt für Online-Bestellungen bis 150 € pauschal 3 € Zoll je Warenart an. Mehr in [Paket beim Zoll](guide:customs).
+**Zoll.** Bei Paketen von außerhalb der EU legt die Deutsche Post die Einfuhrabgaben für dich aus und kassiert sie bei der Zustellung oder in der Filiale, plus 7,50 € Auslagepauschale. Seit dem 1. Juli 2026 fällt für Online-Bestellungen bis 150 € pauschal 3 € Zoll je Warenart an. Ab dem 1. November 2026 erhebt die EU auf Online-Bestellungen zusätzlich eine Bearbeitungsgebühr (Union handling fee) von 2 € je Warenart, egal wie viel die Ware wert ist. Mehr in [Paket beim Zoll](guide:customs).
 
 ## DHL Sendungsverfolgung: Kontakt und Telefonnummer
 
@@ -83,9 +83,9 @@ Wurde dein Paket im Ausland zugestellt, kümmert sich bei fehlendem Inhalt das Z
 
 [Peek](/) erkennt DHL sofort an einer `JJD`-Etikettennummer mit 18 Ziffern, einer `0034043…`-Barcode-Nummer mit gültiger Prüfziffer oder einer `C…DE`- oder `L…DE`-Nummer mit gültiger Prüfziffer. Einen 12-stelligen Identcode nutzen auch andere Paketdienste: Peek fragt mehrere davon, ob sie die Nummer kennen, DHL darunter. Eine 10-stellige Nummer fügst du trotzdem ein, denn Peek verfolgt mehr als 3.500 Paketdienste. Landet das Paket nicht bei DHL, wähle „DHL“ über „Paketdienst ändern“. So korrigierst du auch ein Paket, das unter dem falschen DHL-Bereich gelandet ist. Links von dhl.de, deutschepost.de und nolp.dhl.de kannst du ebenfalls einfügen.
 
-Peek liest die Sendungsverfolgung von dhl.de auf Englisch und öffnet sie in einem Browser auf dem eigenen Server, wenn DHL die Anfrage ablehnt. Will DHL eine Postleitzahl oder sagt, die Nummer gehöre zu einem anderen DHL-Dienst, helfen Tracking-Dienste aus. Nachgefragt wird tagsüber alle 10 Minuten, sobald das Paket in Zustellung ist alle 2 Minuten, und nachts alle ein bis zwei Stunden. Auf Wunsch bekommst du Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag.
+Peek liest die Sendungsverfolgung von dhl.de auf Deutsch, wenn du Peek auf Deutsch nutzt, sonst auf Englisch, und öffnet sie in einem Browser auf dem eigenen Server, wenn DHL die Anfrage ablehnt. Teilen sich mehrere Sendungen eine 12-stellige Nummer, will DHL die Postleitzahl der Lieferadresse: Dann fragt dich das Paket in Peek danach („Postleitzahl eingeben“), und bis du sie eingibst, helfen Tracking-Dienste aus. Sie springen auch ein, wenn DHL sagt, die Nummer gehöre zu einem anderen DHL-Dienst. Nachgefragt wird tagsüber alle 10 Minuten, sobald das Paket in Zustellung ist alle 2 Minuten, und nachts alle ein bis zwei Stunden. Auf Wunsch bekommst du Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag.
 
-Du siehst den Status, jeden Scan mit Ort und DHLs genauer Uhrzeit auf einer Karte, den voraussichtlichen Liefertag (ohne Zeitfenster) und das Zielland. Die Meldungen stehen so da, wie DHL sie schreibt, also meist Englisch mit etwas Deutsch. Ob das Paket zugestellt ist, entnimmt Peek DHLs eigener Markierung. Deinen Namen, deine Adresse und die Unterschrift blendet Peek aus, die Adresse einer Packstation oder Filiale zeigt es nicht an. Verweist ein Scan im Ausland auf die Sendungsverfolgung einer Post, etwa der [Schweizerischen Post](carrier:swiss-post), geht die Verfolgung dort weiter. Umleiten, einen Liefertag buchen oder einen Ablageort wählen geht nur bei DHL.
+Du siehst den Status, jeden Scan mit Ort und DHLs genauer Uhrzeit auf einer Karte, den voraussichtlichen Liefertag (ohne Zeitfenster) und das Zielland. Die Meldungen stehen so da, wie DHL sie schreibt. Ob das Paket zugestellt ist, entnimmt Peek DHLs eigener Markierung. Deinen Namen, deine Adresse und die Unterschrift blendet Peek aus; eine Filiale oder Packstation, die DHL in einer Meldung nennt, bleibt dagegen stehen. Verweist ein Scan im Ausland auf die Sendungsverfolgung einer Post, etwa der [Schweizerischen Post](carrier:swiss-post), geht die Verfolgung dort weiter. Umleiten, einen Liefertag buchen oder einen Ablageort wählen geht nur bei DHL.
 
 ## Fragen zur DHL Sendungsverfolgung
 
@@ -122,17 +122,18 @@ Nein. DHL Päckchen und DHL Päckchen International haben keine Sendungsverfolgu
 - [DHL: Hilfe zum Liefertag](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/liefertag.html) – Zustellung um bis zu sechs Werktage verschieben
 - [DHL: Pakete einfach hinterlegen lassen](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/ablageort.html) – Ablageort
 - [DHL: Live-Tracking](https://www.dhl.de/de/privatkunden/pakete-empfangen/sendungen-verfolgen/live-tracking.html) – 90-Minuten-Fenster, Postleitzahl, Ausnahmen
-- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-07-2025.pdf) – DHL Paket GmbH, Nachbarn und Haushalt, Benachrichtigung, sieben Werktage Lagerung
+- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-102026.pdf) – DHL Paket GmbH, Nachbarn und Haushalt, Benachrichtigung, sieben Werktage Lagerung
 - [DHL: Lösungen zu Problemen mit meinem internationalen Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen.html) – Päckchen International, fehlender Inhalt im Ausland
 - [DHL: 0228 4333112](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal-telefon.html) – Telefonnummer, Zeiten, was du bereithalten sollst
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – Kontaktformular und Chat
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – Schadensformular, Abgabe in der Filiale, Absender wird informiert, Postanschrift
 - [DHL: Einfuhrabgaben](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-kosten.html) – Einfuhrabgaben, 7,50 € Auslagepauschale, 3 € Zoll
+- [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll je Warenart bis 150 € seit 1. Juli 2026, 2 € Bearbeitungsgebühr ab 1. November 2026
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – gefälschte SMS und E-Mails, phishing@dhl.com
 - [DHL: Help with problems in shipment tracking](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – Länge der Sendungsnummer, wo sie steht, ungültige Nummern, Päckchen ohne Sendungsverfolgung
 - [DHL: Parcel has arrived, but there is a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – Telefonnummer aus dem Ausland
 - [DHL: Pickup code](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/packstation/abholcode.html) – Abholcode, Karte nach verpasstem Zustellversuch
 - [DHL: Packstation problems and solutions](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/packstation/probleme-loesungen.html) – keine Karte nach 3 bis 4 Tagen
 - [Deutsche Post/DHL: Leistungen und Preise](https://www.dhl.de/dam/jcr:c0eb1285-9a22-40b2-8c51-3f70c1a897be/dp-leistungen-und-preise-092026.pdf) – kostenlose Sendungsverfolgung, Post & DHL App, Hotline-Zeiten
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek bei DHL Paket liest
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek bei DHL Paket liest, auf Deutsch oder Englisch
 :::

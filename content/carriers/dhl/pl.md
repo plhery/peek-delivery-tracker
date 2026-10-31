@@ -25,7 +25,7 @@ Nowy numer może pojawić się w śledzeniu dopiero po 24 godzinach. Jeśli DHL 
 
 ## Statusy DHL Paket: co oznaczają
 
-Po polsku dhl.de nie pokazuje śledzenia, a nawet w wersji angielskiej trafiają się zdania po niemiecku, np. `Die Sendung wurde erfolgreich zugestellt.` (doręczona).
+Po polsku dhl.de nie pokazuje śledzenia: jest ono po niemiecku albo po angielsku. Poniżej angielskie komunikaty DHL; po niemiecku doręczona paczka ma wpis `Die Sendung wurde erfolgreich zugestellt.`
 
 | DHL pisze | Co to znaczy dla Ciebie |
 | --- | --- |
@@ -52,7 +52,7 @@ Gdy Cię nie ma, DHL może zostawić paczkę u sąsiada albo domownika i zawiado
 - **Packstation:** 7 dni kalendarzowych dla paczki zaadresowanej lub przekierowanej do automatu, 9 po nieudanym doręczeniu, bez przedłużenia. Skrytkę otwierasz kodem odbioru z aplikacji Post & DHL, a po nieudanym doręczeniu wystarczy awizo.
 - **Ponowne doręczenie (Zweitzustellung):** po nieudanej próbie możesz je zamówić raz, najpóźniej 2 dni przed końcem terminu odbioru. Zwykle przychodzi 2 dni robocze później.
 
-Przed doręczeniem możesz za darmo przesunąć je maksymalnie o sześć dni roboczych (Liefertag), wskazać miejsce na swojej posesji, gdzie kurier zostawi paczkę (Ablageort), albo wybranego sąsiada (Wunschnachbar), dla jednej paczki lub na stałe. Jako zarejestrowany klient przekierujesz też paczkę do Packstation lub Filiale. Samego adresu nie zmienisz, gdy paczka jest już w drodze.
+Przed doręczeniem możesz za darmo przesunąć je maksymalnie o sześć dni roboczych (Liefertag), wskazać miejsce na swojej posesji, gdzie kurier zostawi paczkę (Ablageort), albo wybranego sąsiada (Nachbar), dla jednej paczki lub na stałe. Jako zarejestrowany klient przekierujesz też paczkę do Packstation lub Filiale. Samego adresu nie zmienisz, gdy paczka jest już w drodze.
 
 ## Paczka z Niemiec w Polsce: kto ją doręcza
 
@@ -90,9 +90,9 @@ DHL nigdy nie prosi SMS-em o dane osobowe ani o płatność; podejrzaną wiadomo
 
 [Peek](/) od razu rozpoznaje DHL po numerze `JJD` z 18 cyframi, numerze `0034043…` z poprawną cyfrą kontrolną albo poprawnym numerze `C…DE` lub `L…DE`. 12-cyfrowy Identcode czy numer 10-cyfrowy pasuje też do innych przewoźników: wklej go mimo to, Peek śledzi ponad 3500 przewoźników, a jeśli paczka nie trafi pod DHL, wybierz „DHL” przez „Zmień przewoźnika”. Działają też linki z dhl.de i deutschepost.de.
 
-Peek czyta śledzenie z dhl.de po angielsku, a gdy DHL odmawia, otwiera je w przeglądarce na swoim serwerze. Gdy DHL żąda kodu pocztowego albo odsyła do innej usługi DHL, pomagają serwisy śledzenia przesyłek. Peek sprawdza paczkę w dzień co 10 minut, a gdy jest w doręczeniu, co 2 minuty, w nocy zaś co godzinę lub dwie, i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy.
+Peek czyta śledzenie z dhl.de po angielsku (po niemiecku, jeśli aplikacja Peek jest ustawiona na niemiecki), a gdy DHL odmawia, otwiera je w przeglądarce na swoim serwerze. Gdy kilka przesyłek ma ten sam 12-cyfrowy numer, DHL żąda kodu pocztowego adresu doręczenia: wtedy Peek poprosi Cię o niego przy paczce („Dodaj kod pocztowy”), a dopóki go nie dodasz, pomagają serwisy śledzenia przesyłek. Pomagają też, gdy DHL odsyła do innej usługi DHL. Peek sprawdza paczkę w dzień co 10 minut, a gdy jest w doręczeniu, co 2 minuty, w nocy zaś co godzinę lub dwie, i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy.
 
-Widzisz status, każdy skan z miejscem na mapie i dokładną godziną DHL, przewidywany dzień doręczenia (bez przedziału godzin) i kraj docelowy, w brzmieniu DHL. Peek nie zapisuje Twojego imienia i nazwiska, adresu ani podpisu, nie pokazuje też adresu Packstation ani Filiale. Jeśli skan za granicą zawiera link do śledzenia DHL eCommerce Polska (sprawdz.dhl.com.pl lub mojdhl.pl) albo DHL Express, Peek może śledzić paczkę dalej u nich. Nie przekieruje paczki, nie zamówi Liefertag i nie skontaktuje się za Ciebie z DHL ani ze sklepem.
+Widzisz status, każdy skan z miejscem na mapie i dokładną godziną DHL, przewidywany dzień doręczenia (bez przedziału godzin) i kraj docelowy, w brzmieniu DHL. Peek nie zapisuje Twojego imienia i nazwiska, adresu ani podpisu, ale Filiale czy Packstation wymienione przez DHL w skanie zostają tak, jak zapisał je DHL. Jeśli skan za granicą zawiera link do śledzenia DHL eCommerce Polska (sprawdz.dhl.com.pl lub mojdhl.pl) albo DHL Express, Peek może śledzić paczkę dalej u nich. Nie przekieruje paczki, nie zamówi Liefertag i nie skontaktuje się za Ciebie z DHL ani ze sklepem.
 
 ## Pytania o śledzenie DHL Paket
 
@@ -134,9 +134,9 @@ Nie. DHL Päckchen i Päckchen International nie mają śledzenia, tylko paczki 
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – formularz i czat
 - [DHL: Parcel has arrived, but there is a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – numer z zagranicy
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – formularz szkody, oddanie w Filiale, adres
-- [DHL: Security notices](https://www.dhl.de/en/toolbar/footer/sicherheitshinweise.html) – fałszywe SMS-y, phishing@dhl.com
+- [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – fałszywe SMS-y, nigdy dane ani płatności SMS-em, phishing@dhl.com
 - [DHL24: portal DHL eCommerce Polska](https://dhl24.com.pl/) – e-mail lub SMS z datą, miejscem i godzinami, zmiana daty lub adresu bez kontaktu z nadawcą
 - [DHL24: Zgłoszenie reklamacji / dyspozycji](https://dhl24.com.pl/pl/claim/disposition/create.html) – formularz reklamacji, numer etykiety lub zlecenia
 - [DHL eCommerce Polska: Mój DHL, śledzenie](https://mojdhl.pl/tracking) – przekierowanie do punktu, odzyskanie PIN-u, „Kontakt”, „Zgłoś reklamację”, paczki z zagranicy po dotarciu do magazynu DHL eCommerce Polska
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje z DHL Paket; numery JJD w Mój DHL
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje z DHL Paket, po angielsku lub po niemiecku; numery JJD w Mój DHL
 :::

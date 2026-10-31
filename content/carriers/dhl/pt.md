@@ -25,7 +25,7 @@ Um número novo pode levar até 24 horas a dar resultados. Se a DHL disser que n
 
 ## Estados DHL Paket: o que quer dizer cada um
 
-O dhl.de mostra o rastreio em alemão ou em inglês, e a versão inglesa mete alguns eventos em alemão. Estes são os que mais dúvidas levantam, tal como a DHL os escreve:
+O dhl.de mostra o rastreio em alemão ou em inglês. Estes são os eventos que mais dúvidas levantam, tal como a DHL os escreve:
 
 | A DHL diz | O que quer dizer para ti |
 | --- | --- |
@@ -51,7 +51,7 @@ Se não estiveres em casa, a DHL pode deixar a encomenda com alguém da tua casa
 - **Packstation:** 7 dias seguidos se a encomenda vinha para lá e 9 se chegou depois de uma entrega falhada, sem prolongamento. Abre-se com o código de levantamento da app Post & DHL ou, depois de uma entrega falhada, com o aviso.
 - **Segunda entrega (Zweitzustellung):** podes pedi-la uma vez, até 2 dias antes de acabar o prazo de levantamento. Costuma chegar 2 dias úteis depois.
 
-Antes da entrega, no dhl.de podes adiá-la até seis dias úteis sem custo (Liefertag), indicar um sítio na tua casa onde a deixar (Ablageort) ou um vizinho de confiança (Wunschnachbar) e, com conta de cliente, desviar as encomendas para uma Packstation ou Filiale. A morada não se pode mudar depois de a encomenda partir.
+Antes da entrega, no dhl.de podes adiá-la até seis dias úteis sem custo (Liefertag), indicar um sítio na tua casa onde a deixar (Ablageort) ou um vizinho de confiança (Nachbar) e, com conta de cliente, desviar as encomendas para uma Packstation ou Filiale. A morada não se pode mudar depois de a encomenda partir.
 
 ## Se estás em Portugal: quem te entrega uma DHL Paket
 
@@ -87,7 +87,7 @@ A DHL avisa para SMS falsos com links encurtados ou indicativos de país estranh
 
 O [Peek](/) reconhece a DHL logo com um número de etiqueta `JJD` de 18 algarismos, um código de barras `0034043…` válido ou um código `C…DE` ou `L…DE` válido. Um Identcode de 12 algarismos pode ser de várias transportadoras: o Peek pergunta a várias, a DHL incluída, se o conhecem. Um número de 10 algarismos, cola-o na mesma: o Peek segue mais de 3.500 transportadoras. Se não aparecer a DHL, escolhe-a em «Alterar transportadora». Os links do dhl.de e do deutschepost.de também funcionam.
 
-O Peek lê o rastreio do dhl.de em inglês, por isso os estados aparecem com o texto inglês da DHL, e se a DHL recusar a consulta usa um navegador no servidor. Se a DHL pedir código postal, ou disser que o número é de outro serviço DHL, entram os serviços de rastreio universais. O Peek consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega».
+O Peek lê o rastreio do dhl.de em inglês (em alemão só se usares o Peek em alemão), por isso os estados aparecem com o texto inglês da DHL, e se a DHL recusar a consulta usa um navegador no servidor. Quando vários envios partilham um número de 12 algarismos, a DHL pede o código postal de entrega: a encomenda pede-to então com «Adicionar código postal», e até o adicionares entram os serviços de rastreio universais. Também entram se a DHL disser que o número é de outro serviço DHL. O Peek consulta a cada 10 minutos durante o dia, a cada 2 quando a encomenda está em distribuição e a cada uma ou duas horas à noite, e avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega».
 
 Mostra o estado, cada evento com o local no mapa, o dia previsto de entrega (sem janela horária) e o país de destino. Não guarda o teu nome, a tua morada nem a assinatura. Se um evento em Portugal tiver o link do rastreio dos CTT ou da DHL eCommerce Iberia, o Peek pode seguir a encomenda aí. Com um código `C…DE` e destino Portugal, também a pode procurar nos CTT. O Peek não consegue desviar uma encomenda, marcar um Liefertag nem reclamar por ti.
 
@@ -120,7 +120,7 @@ Não. Nem a DHL Päckchen nem a DHL Päckchen International têm rastreio; só a
 - [DHL: Zweitzustellung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/dhl-zweitzustellung.html) – segunda entrega, uma vez, 2 dias antes, 2 dias úteis
 - [DHL: Hilfe zum Service Liefertag](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/liefertag.html) – adiar até seis dias úteis
 - [DHL: Ablageort](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/ablageort.html) – sítio para deixar a encomenda
-- [DHL: Preferred neighbour](https://www.dhl.de/en/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/nachbar.html) – vizinho de confiança
+- [DHL: DHL Nachbar](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/nachbar.html) – serviço Nachbar, vizinho de confiança
 - [DHL: Parcel redirection](https://www.dhl.de/en/privatkunden/pakete-empfangen/an-einem-abholort-empfangen/paketumleitung.html) – desvio para Packstation ou Filiale com conta
 - [DHL: My shipment has not been delivered yet](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-nicht-geliefert.html) – 1 a 2 dias úteis na Alemanha, 5 dias úteis, investigação, remetente, morada inalterável
 - [DHL: My parcel was delivered, but there's a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – vizinho, formulário de danos, recolha gratuita, 7 dias

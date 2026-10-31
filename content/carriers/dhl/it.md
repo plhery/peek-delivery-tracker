@@ -25,7 +25,7 @@ Un numero nuovo può metterci fino a 24 ore a comparire nel tracking. Se DHL lo 
 
 ## Stati del tracking DHL Paket: cosa vogliono dire
 
-Su dhl.de l'italiano non c'è, e anche la versione inglese mescola qualche frase in tedesco, come `Die Sendung wurde erfolgreich zugestellt.` (consegnato).
+Su dhl.de l'italiano non c'è: il tracking è in tedesco o in inglese. Qui trovi le frasi inglesi di DHL; in tedesco, un pacco consegnato si legge `Die Sendung wurde erfolgreich zugestellt.`
 
 | DHL scrive | Cosa vuol dire per te |
 | --- | --- |
@@ -52,7 +52,7 @@ Se non sei in casa, DHL può lasciare il pacco a un vicino o a qualcuno che vive
 - **Packstation:** 7 giorni di calendario per un pacco indirizzato o deviato lì, 9 dopo una consegna mancata, senza proroga. Lo sportello si apre con il codice di ritiro dell'app Post & DHL; dopo una consegna mancata basta la cartolina.
 - **Seconda consegna (Zweitzustellung):** dopo una consegna mancata puoi prenotarla una volta, fino a 2 giorni prima che finisca la giacenza. Di solito arriva 2 giorni lavorativi dopo.
 
-Prima della consegna puoi rimandarla gratis fino a sei giorni lavorativi (Liefertag), indicare un posto sulla tua proprietà dove lasciare il pacco (Ablageort) o un vicino di fiducia (Wunschnachbar), per un solo pacco o per tutti, e da cliente registrato deviarlo a una Packstation o a una Filiale. L'indirizzo invece non si cambia più, una volta che il pacco è partito.
+Prima della consegna puoi rimandarla gratis fino a sei giorni lavorativi (Liefertag), indicare un posto sulla tua proprietà dove lasciare il pacco (Ablageort) o un vicino di fiducia (Nachbar), per un solo pacco o per tutti, e da cliente registrato deviarlo a una Packstation o a una Filiale. L'indirizzo invece non si cambia più, una volta che il pacco è partito.
 
 ## Pacco dalla Germania in Italia: chi lo consegna
 
@@ -90,9 +90,9 @@ Per SMS DHL non chiede mai dati personali né pagamenti: un messaggio sospetto l
 
 [Peek](/) riconosce subito DHL da un numero `JJD` con 18 cifre, da un numero `0034043…` con cifra di controllo valida o da un numero `C…DE` o `L…DE` valido. Un Identcode di 12 cifre o un numero di 10 cifre va bene anche per altri corrieri: incollalo lo stesso, Peek segue più di 3.500 corrieri, e se il pacco non finisce sotto DHL scegli «DHL» con «Cambia corriere». Così sistemi anche un pacco finito sotto la rete DHL sbagliata. Funzionano anche i link di dhl.de e deutschepost.de.
 
-Peek legge il tracking di dhl.de in inglese e, se DHL rifiuta la richiesta, lo apre in un browser sul proprio server. Se DHL chiede un CAP o dice che il numero appartiene a un altro servizio DHL, subentrano altri servizi di tracking. Controlla ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore, e può avvisarti a ogni scansione, solo per i passaggi importanti o solo il giorno della consegna.
+Peek legge il tracking di dhl.de in inglese (in tedesco se usi Peek in tedesco) e, se DHL rifiuta la richiesta, lo apre in un browser sul proprio server. Quando più spedizioni condividono un numero di 12 cifre, DHL chiede il CAP di consegna: allora è il pacco in Peek a chiedertelo con «Aggiungi codice postale», e finché non lo aggiungi subentrano altri servizi di tracking. Subentrano anche se DHL dice che il numero appartiene a un altro servizio DHL. Controlla ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore, e può avvisarti a ogni scansione, solo per i passaggi importanti o solo il giorno della consegna.
 
-Vedi lo stato, ogni scansione su una mappa con il luogo e l'ora esatta di DHL, il giorno di consegna previsto (senza fascia oraria) e il Paese di destinazione, con le frasi di DHL così come sono. Peek non conserva né il tuo nome né l'indirizzo né la firma, e non mostra l'indirizzo di una Packstation o di una Filiale. Se una scansione all'estero porta il link al tracking del corriere locale, come Poste Italiane o DHL Express, Peek può seguire il pacco lì; senza link, per un numero `C…DE` diretto in Italia, prova con Poste Italiane. Non può deviare un pacco, prenotare un Liefertag né contattare DHL o il negozio al posto tuo.
+Vedi lo stato, ogni scansione su una mappa con il luogo e l'ora esatta di DHL, il giorno di consegna previsto (senza fascia oraria) e il Paese di destinazione, con le frasi di DHL così come sono. Peek non conserva né il tuo nome né l'indirizzo né la firma; una Filiale o una Packstation che DHL nomina in una scansione resta invece come la scrive DHL. Se una scansione all'estero porta il link al tracking del corriere locale, come Poste Italiane o DHL Express, Peek può seguire il pacco lì; senza link, per un numero `C…DE` diretto in Italia, prova con Poste Italiane. Non può deviare un pacco, prenotare un Liefertag né contattare DHL o il negozio al posto tuo.
 
 ## Domande sul tracking DHL Paket
 
@@ -131,16 +131,16 @@ No. DHL Päckchen e Päckchen International non hanno tracking: ce l'hanno solo 
 - [DHL: Hilfe zum Liefertag](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/empfangen/zustellung/liefertag.html) – rinvio fino a sei giorni lavorativi
 - [DHL: Pakete einfach hinterlegen lassen](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/ablageort.html) – Ablageort
 - [DHL: DHL Nachbar](https://www.dhl.de/de/privatkunden/pakete-empfangen/pakete-zuhause-empfangen/nachbar.html) – vicino di fiducia, per un pacco o per tutti
-- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-07-2025.pdf) – DHL Paket GmbH, vicini e conviventi, avviso
+- [DHL Paket GmbH: AGB Paket/Express National](https://www.dhl.de/dam/jcr:b2845bef-cd08-4139-a4a1-0a9253d0bfd1/dhl-agb-paket-express-national-de-102026.pdf) – DHL Paket GmbH, vicini e conviventi, avviso
 - [DHL: 0228 4333112](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal-telefon.html) – numero, orari, cosa tenere pronto
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – modulo e chat
 - [DHL: Parcel has arrived, but there is a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – numero dall'estero
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – modulo danni, consegna in Filiale, indirizzo postale
-- [DHL: Security notices](https://www.dhl.de/en/toolbar/footer/sicherheitshinweise.html) – SMS falsi, phishing@dhl.com
+- [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – SMS falsi, mai dati o pagamenti via SMS, screenshot a phishing@dhl.com
 - [Deutsche Post/DHL: Leistungen und Preise](https://www.dhl.de/dam/jcr:c0eb1285-9a22-40b2-8c51-3f70c1a897be/dp-leistungen-und-preise-092026.pdf) – tracking gratuito, app Post & DHL
 - [SDA: Home](https://www.sda.it/) – servizi di corriere espresso ex SDA passati a Poste Italiane
 - [Poste Italiane: FAQ Spedizioni e consegne](https://www.poste.it/assistenza/faq-spedizioni-e-consegne) – Cerca spedizioni per spedizioni dall'estero, presa in carico in Italia, pulsante Prenota
 - [Poste Italiane: Ricevere spedizioni dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – importazione solo da Paesi fuori UE
 - [Poste Italiane: Chiamaci](https://www.poste.it/assistenza/chiamaci) – 803 160, +39 06 4526 3160, orari
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge Peek da DHL Paket
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge Peek da DHL Paket, in inglese o in tedesco
 :::

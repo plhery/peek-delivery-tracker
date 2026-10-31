@@ -25,7 +25,7 @@ Un nouveau numéro peut mettre jusqu'à 24 heures à apparaître. Si DHL le dit 
 
 ## Statuts DHL Paket : ce qu'ils veulent dire
 
-Pas de français sur dhl.de, et même la version anglaise glisse des phrases en allemand, comme `Die Sendung wurde erfolgreich zugestellt.` (livré).
+Pas de français sur dhl.de : le suivi y est en allemand ou en anglais. Voici les phrases anglaises de DHL ; en allemand, un colis livré s'affiche `Die Sendung wurde erfolgreich zugestellt.`
 
 | DHL écrit | Ce que ça veut dire pour toi |
 | --- | --- |
@@ -50,7 +50,7 @@ Si tu es absent, DHL peut laisser le colis à un voisin ou à quelqu'un de ton f
 - **Packstation :** 7 jours calendaires pour un colis adressé ou réexpédié là, 9 après une livraison manquée, sans prolongation. Le casier s'ouvre avec le code de retrait de l'app Post & DHL ; après une livraison manquée, l'avis suffit.
 - **Nouvelle livraison (Zweitzustellung) :** après un passage manqué, tu peux en réserver une, jusqu'à 2 jours avant la fin du délai de garde. Elle arrive en général 2 jours ouvrables plus tard.
 
-Avant la livraison, tu peux la repousser gratuitement de six jours ouvrables au plus (Liefertag), indiquer un lieu de dépôt sur ta propriété (Ablageort) ou un voisin de confiance (Wunschnachbar), pour un colis ou pour tous, et, si tu as un compte, faire dévier le colis vers une Packstation ou une Filiale. L'adresse elle-même ne se change plus une fois le colis en route.
+Avant la livraison, tu peux la repousser gratuitement de six jours ouvrables au plus (Liefertag), indiquer un lieu de dépôt sur ta propriété (Ablageort) ou un voisin de confiance (Nachbar), pour un colis ou pour tous, et, si tu as un compte, faire dévier le colis vers une Packstation ou une Filiale. L'adresse elle-même ne se change plus une fois le colis en route.
 
 ## Colis d'Allemagne en France, en Belgique ou en Suisse : qui livre
 
@@ -90,9 +90,9 @@ DHL ne demande jamais de données personnelles ni de paiement par SMS : un faux 
 
 [Peek](/) reconnaît DHL tout de suite avec un numéro `JJD` à 18 chiffres, un numéro `0034043…` dont la clé de contrôle est bonne, ou un numéro `C…DE` ou `L…DE` valable. Un Identcode à 12 chiffres ou un numéro à 10 chiffres peut aussi appartenir à d'autres transporteurs : colle-le quand même, Peek suit plus de 3 500 transporteurs, et si le colis n'est pas classé sous DHL, choisis « DHL » avec « Changer de transporteur ». Les liens de dhl.de et deutschepost.de marchent aussi.
 
-Peek lit le suivi de dhl.de en anglais, au besoin dans un navigateur sur son serveur ; si DHL réclame un code postal ou renvoie vers un autre service DHL, des services de suivi prennent le relais. Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut te prévenir à chaque scan, aux étapes importantes ou le jour de livraison seulement.
+Peek lit le suivi de dhl.de en anglais (en allemand si tu utilises Peek en allemand), au besoin dans un navigateur sur son serveur. Quand plusieurs envois partagent un numéro à 12 chiffres, DHL demande le code postal de livraison : le colis te le demande alors avec « Ajouter le code postal », et des services de suivi prennent le relais jusqu'à ce que tu l'ajoutes. Ils le prennent aussi quand DHL renvoie vers un autre service DHL. Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison, toutes les une à deux heures la nuit, et peut te prévenir à chaque scan, aux étapes importantes ou le jour de livraison seulement.
 
-Tu vois le statut, chaque scan sur une carte, avec son lieu et l'heure exacte de DHL, le jour de livraison prévu (sans créneau) et le pays de destination, avec les phrases de DHL telles quelles. Peek ne conserve ni ton nom, ni ton adresse, ni la signature, et n'affiche pas l'adresse d'une Packstation ou d'une Filiale. Quand un scan à l'étranger renvoie vers le suivi de La Poste, de la Poste suisse ou de DHL Express, Peek peut continuer le suivi chez eux. Sans ce lien, pour un numéro `C…DE` envoyé en France ou en Belgique, il essaie La Poste ou bpost. Il ne peut ni dévier un colis, ni réserver un Liefertag, ni contacter DHL ou la boutique à ta place.
+Tu vois le statut, chaque scan sur une carte, avec son lieu et l'heure exacte de DHL, le jour de livraison prévu (sans créneau) et le pays de destination, avec les phrases de DHL telles quelles. Peek ne conserve ni ton nom, ni ton adresse, ni la signature ; une Filiale ou une Packstation que DHL nomme dans un scan reste affichée comme DHL l'écrit. Quand un scan à l'étranger renvoie vers le suivi de La Poste, de la Poste suisse ou de DHL Express, Peek peut continuer le suivi chez eux. Sans ce lien, pour un numéro `C…DE` envoyé en France ou en Belgique, il essaie La Poste ou bpost. Il ne peut ni dévier un colis, ni réserver un Liefertag, ni contacter DHL ou la boutique à ta place.
 
 ## Questions sur le suivi DHL Paket
 
@@ -130,10 +130,10 @@ Non. DHL Päckchen et Päckchen International n'ont pas de suivi : seuls les col
 - [DHL : Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – formulaire et chat
 - [DHL : Parcel has arrived, but there is a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – numéro depuis l'étranger
 - [DHL : Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – déclaration de dommage, dépôt en Filiale, adresse postale
-- [DHL : Security notices](https://www.dhl.de/en/toolbar/footer/sicherheitshinweise.html) – faux SMS, phishing@dhl.com
+- [DHL : Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – faux SMS, jamais de données ni de paiement par SMS, phishing@dhl.com
 - [Arcep : La résolution des litiges postaux](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – réclamation à La Poste : 3631, horaires, site, courrier, point de contact postal
 - [bpost : Je n'étais pas chez moi, où est mon colis ?](https://www.bpost.be/fr/faq/je-netais-pas-chez-moi-lors-de-la-livraison-de-mon-colis-ou-se-trouve-t-il-present) – voisin, lieu sûr, avis, e-mail
 - [bpost : Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – téléphone, chat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit chez DHL Paket
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit chez DHL Paket, en anglais ou en allemand
 - [Universal Parcel Scraper : La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – messages du suivi de La Poste après un passage manqué et en point de retrait
 :::

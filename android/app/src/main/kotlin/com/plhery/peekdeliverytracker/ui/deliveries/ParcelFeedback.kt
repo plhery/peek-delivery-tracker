@@ -874,10 +874,11 @@ private fun Modifier.overhang(start: Dp = 0.dp, bottom: Dp = 0.dp, vertical: Dp 
 /**
  * `parcelFeedback(_:busy:)`: what the question lays over its page. At the page's foot, 16 in, 8 over its safe foot and
  * 560 wide at most, the word it says: the question asked on the way back from the carrier's site, Pip asking it beside
- * "Yes" and "No"; its thanks; or that an answer couldn't go. Each moves up from under its place and fades in
- * (`spring(response: 0.4, dampingFraction: 0.86)`), and back as it goes, or fades over 0.2 s under Reduce Motion.
- * Then the sheets that take what is off and who carries the parcel. TalkBack hears each word as it comes, the thanks
- * said in place where no word says it, and each failure in a sheet.
+ * "Yes" and "No"; its thanks; or that an answer couldn't go. It moves up from under its place and fades in
+ * (`spring(response: 0.4, dampingFraction: 0.86)`), and back as it goes, one word fading into the next in place, or
+ * fades over 0.2 s under Reduce Motion ([FeedbackWord]). Then the sheets that take what is off and who carries the
+ * parcel. TalkBack hears each word as it comes, the thanks said in place where no word says it, and each failure in a
+ * sheet.
  *
  * The window leaving the screen and coming back (`didEnterBackground`, `didBecomeActive`) is the way to and back from
  * the carrier's site: back while something else is said or asked over the page (`busy`), the question waits.
@@ -980,7 +981,11 @@ private fun FeedbackNews(state: DeliveriesState, work: ParcelFeedbackWork) {
     }
 }
 
-/** The word at the page's foot, one word giving way to the next as one goes and the other comes. */
+/**
+ * The word at the page's foot (`word`). It comes and goes as the iPhone's `if let word` does, and one word giving way
+ * to another fades into it in place on the same spring, as the switch inside it does (`.opacity`, under the overlay's
+ * `.animation(_:value: model.word)`); under Reduce Motion, each fades over 0.2 s.
+ */
 @Composable
 private fun FeedbackWord(work: ParcelFeedbackWork, backdrop: MaterialBackdrop?, modifier: Modifier) {
     val reduceMotion = PeekTheme.reduceMotion
@@ -999,10 +1004,27 @@ private fun FeedbackWord(work: ParcelFeedbackWork, backdrop: MaterialBackdrop?, 
             }
         },
         contentAlignment = Alignment.BottomCenter,
+        // Whether there is a word moves; which word it is only fades.
+        contentKey = { it != null },
         label = "feedback word",
     ) { word ->
-        if (word != null) Staying { WordToast(work, word, backdrop) }
+        if (word != null) Staying { WordsInPlace(work, word, backdrop) }
     }
+}
+
+/** One word fading into the next where it stands, on the word's spring, or over 0.2 s under Reduce Motion. */
+@Composable
+private fun WordsInPlace(work: ParcelFeedbackWork, word: Word, backdrop: MaterialBackdrop?) {
+    val reduceMotion = PeekTheme.reduceMotion
+    AnimatedContent(
+        word,
+        transitionSpec = {
+            val fade: FiniteAnimationSpec<Float> = if (reduceMotion) Motion.easeInOut(0.2) else Motion.springWithResponse(0.4, 0.86)
+            ContentTransform(fadeIn(fade), fadeOut(fade), sizeTransform = null)
+        },
+        contentAlignment = Alignment.BottomCenter,
+        label = "feedback words",
+    ) { Staying { WordToast(work, it, backdrop) } }
 }
 
 /** A word: asked with Pip, 34 wide and 2 under the toast's foot; or its thanks with a tick in green; or a warning. */

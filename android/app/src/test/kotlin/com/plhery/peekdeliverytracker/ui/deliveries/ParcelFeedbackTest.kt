@@ -909,6 +909,47 @@ class ParcelFeedbackTest {
         assertEquals("Gone after 0.2 s", 0, gone)
     }
 
+    /** Where the way back's question is drawn 64 ms after the window came back, and once it has settled. */
+    private fun wordComing(reduceMotion: Boolean): Pair<Rect, Rect> {
+        show(reduceMotion = reduceMotion)
+        open(gift)
+        node(PAGE_CARRIER_LINK).performScrollTo().performClick()
+        compose.waitForIdle()
+        compose.activityRule.scenario.moveToState(Lifecycle.State.CREATED)
+        source.now = source.now.plusSeconds(2)
+        compose.mainClock.autoAdvance = false
+        compose.activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        compose.mainClock.advanceTimeBy(64)
+        val coming = drawn(FEEDBACK_WORD)
+        compose.mainClock.advanceTimeBy(1_000)
+        return coming to drawn(FEEDBACK_WORD)
+    }
+
+    @Test
+    fun aWordComesUpFromUnderItsPlaceAndTheNextFadesIntoItWhereItStands() {
+        val (coming, asked) = wordComing(reduceMotion = false)
+        assertTrue("Under its place on its way up: $coming, at rest $asked", coming.top > asked.top + 10f)
+        node(FEEDBACK_BACK_YES).performClick()
+        compose.mainClock.advanceTimeBy(64)
+        val thanking = drawn(FEEDBACK_WORD)
+        val density = compose.density.density
+        val area = Rect(asked.left * density, asked.top * density, asked.right * density, asked.bottom * density)
+        val fading = pixels(area)
+        compose.mainClock.advanceTimeBy(1_000)
+        val thanked = drawn(FEEDBACK_WORD)
+        // The thanks stands in its place from the start, the question fading out where it stood.
+        assertEquals("$thanking settles at $thanked", thanked.bottom, thanking.bottom, 0.5f)
+        assertEquals(thanked.top, thanking.top, 0.5f)
+        val settled = pixels(area)
+        assertTrue("Still fading at 64 ms", fading.indices.count { fading[it] != settled[it] } > 200)
+    }
+
+    @Test
+    fun underReduceMotionAWordFadesInWhereItStands() {
+        val (coming, asked) = wordComing(reduceMotion = true)
+        assertEquals(asked.top, coming.top, 0.5f)
+    }
+
     // What an answer replaces, on its way out.
 
     /** Where `tag` stands in the window, in pixels, to touch there once TalkBack no longer reaches it. */

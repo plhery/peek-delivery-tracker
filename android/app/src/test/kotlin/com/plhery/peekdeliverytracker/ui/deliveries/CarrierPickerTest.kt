@@ -5,6 +5,7 @@ import android.view.View
 import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityNodeInfo
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -58,6 +59,7 @@ import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
@@ -463,6 +465,43 @@ class CarrierPickerTest {
         val clear = image(CARRIER_PICKER_CLEAR)
         assertTrue("the clear button in grey", darkest(clear, 0 until clear.width) < 0.15f)
     }
+
+    /**
+     * UISearchTextField's whole frame takes the tap: one on the magnifying glass focuses the field, the search on, and
+     * brings the keyboard; one on the capsule's padding brings back the keyboard put away while the field kept the focus.
+     * Nothing is drawn for it, and TalkBack reads the capsule as before: the field by its prompt, no button round it.
+     */
+    @Test
+    fun aTapAnywhereOnTheCapsuleFocusesTheFieldAndBringsTheKeyboard() {
+        show()
+        val capsule = compose.onNodeWithTag(CARRIER_PICKER_FIELD)
+        val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        val methods = compose.activity.getSystemService(InputMethodManager::class.java)
+        val keyboard = shadowOf(methods)
+        val face = image(CARRIER_PICKER_FIELD)
+        capsule.performTouchInput { down(Offset(px(22f), centerY)) }
+        compose.mainClock.advanceTimeBy(200)
+        assertTrue("drawn as before while pressed", image(CARRIER_PICKER_FIELD).sameAs(face))
+        capsule.performTouchInput { up() }
+        compose.waitForIdle()
+        field().assertIsFocused()
+        cancel().assertExists()
+        assertTrue(keyboard.isSoftInputVisible)
+
+        compose.runOnUiThread { methods.hideSoftInputFromWindow(view.windowToken, 0) }
+        assertFalse(keyboard.isSoftInputVisible)
+        capsule.performTouchInput { click(Offset(centerX, px(4f))) }
+        compose.waitForIdle()
+        field().assertIsFocused()
+        assertTrue(keyboard.isSoftInputVisible)
+
+        capsule.assert(SemanticsMatcher.keyNotDefined(SemanticsActions.OnClick))
+        assertEquals(localizer.text("picker.search", mapOf("count" to catalog.selectableCarriers.size)), field().description())
+    }
+
+    /** Whether two captures show the same pixels. */
+    private fun PixelMap.sameAs(other: PixelMap): Boolean =
+        width == other.width && height == other.height && (0 until width).all { x -> (0 until height).all { y -> this[x, y] == other[x, y] } }
 
     /** The darkest red of `image`'s columns `xs`, 0 to 1. */
     private fun darkest(image: PixelMap, xs: IntRange): Float =

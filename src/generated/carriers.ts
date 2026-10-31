@@ -1552,6 +1552,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Border Express tracking: consignment numbers and statuses",
       "name": "Border Express",
       "color": "#cc092f"
+    },
+    {
+      "id": "delhivery",
+      "catalog": "delhivery",
+      "slug": "delhivery-tracking",
+      "title": "Delhivery tracking: AWB numbers, statuses and support",
+      "name": "Delhivery",
+      "color": "#ed4136"
     }
   ],
   "de": [

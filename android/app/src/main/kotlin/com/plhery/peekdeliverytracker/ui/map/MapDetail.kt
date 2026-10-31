@@ -26,7 +26,8 @@ import kotlinx.coroutines.async
  * rivers, lakes, built-up areas, main roads and towns, from the tiles of the bundled pack. The store is the opened
  * map's own, made as it opens and gone as it closes; the pack is read off the main thread as it first opens. Null
  * until the pack is read, as the iPhone's `tiles.pack.map { … }`; then the tiles read so far, more read off the main
- * thread as the map asks for them ([WorldMapView]'s `detail`), and the map drawn again as each one comes.
+ * thread as the map asks for them ([WorldMapView]'s `detail`), and the map drawn again as each one comes. The map reads
+ * the tiles where it draws them, so a tile that comes composes the map again, not the screen that holds it.
  */
 @Composable
 internal fun rememberWorldDetail(): MapDetail? {
@@ -40,9 +41,8 @@ internal fun rememberWorldDetail(): MapDetail? {
     // `.task { await tiles.open() }`.
     LaunchedEffect(store) { WorldDetails.opening { store.open() } }
     val pack by store.packFlow.collectAsState()
-    val tiles by store.tilesFlow.collectAsState()
     val need = remember(store) { { keys: List<String> -> store.need(keys) } }
-    return pack?.let { MapDetail(it, tiles, need) }
+    return remember(pack) { pack?.let { MapDetail(it, store.tilesFlow, need) } }
 }
 
 /**

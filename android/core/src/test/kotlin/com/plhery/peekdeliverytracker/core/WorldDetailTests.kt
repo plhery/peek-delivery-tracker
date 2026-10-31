@@ -173,6 +173,46 @@ class WorldDetailTests {
         assertEquals(listOf(1.0, 1.0, 1.0), WorldDetailPack.strengths(60.0))
     }
 
+    /**
+     * Roads are drawn by level 1.15, 0.85 and 0.65 points wide, and rivers 1.4, 1.05 and 0.8, all wider as the view
+     * closes in, by (260 / km)^0.4 from 1 at 260 km to at most 1.8; and each level is full once its ramp ends (440, 320
+     * and 170 km), not only coming in where it starts.
+     */
+    @Test
+    fun eachLevelsLinesGrowAsTheViewClosesInAndEachIsFullWhereItsRampEnds() {
+        val pack = pack()
+        val palette = MapPalette.map(AdaptiveColor(RgbaColor(1.0, 0.0, 0.0)))
+        val tiles = pack.keys(close(260.0, small), small).mapNotNull { pack.tile(it) }
+        fun strokes(kilometres: Double, color: AdaptiveColor?): List<MapDrawing.Stroke> =
+            MapPainter.drawDetail(tiles, close(kilometres, small), small, palette).filterIsInstance<MapDrawing.Stroke>().filter { it.color === color }
+        fun widths(kilometres: Double, color: AdaptiveColor?): List<Double> = strokes(kilometres, color).map { it.style.lineWidth }
+        fun assertWidths(expected: List<Double>, actual: List<Double>) {
+            assertEquals("$actual", expected.size, actual.size)
+            expected.zip(actual).forEach { (width, drawn) -> assertEquals(width, drawn, 1e-9) }
+        }
+        // At 260 km as wide as they are drawn, the last level not in yet.
+        assertWidths(listOf(1.15, 0.85), widths(260.0, palette.road))
+        assertWidths(listOf(1.4, 1.05), widths(260.0, palette.ocean))
+        // At 60 km about 1.8 times as wide, and no wider closer in.
+        val zoom = Math.pow(260.0 / 60, 0.4)
+        assertEquals(1.798, zoom, 0.001)
+        assertWidths(listOf(1.15, 0.85, 0.65).map { it * zoom }, widths(60.0, palette.road))
+        assertWidths(listOf(1.4, 1.05, 0.8).map { it * zoom }, widths(60.0, palette.ocean))
+        assertWidths(listOf(1.15, 0.85, 0.65).map { it * 1.8 }, widths(40.0, palette.road))
+        assertWidths(listOf(1.4, 1.05, 0.8).map { it * 1.8 }, widths(40.0, palette.ocean))
+        // Each level full where its ramp ends, and not quite a kilometre wider.
+        for ((level, end) in listOf(440.0, 320.0, 170.0).withIndex()) {
+            assertEquals(1.0, WorldDetailPack.strengths(end)[level], 1e-12)
+            assertTrue(WorldDetailPack.strengths(end + 1)[level] < 1)
+            for (color in listOf(palette.road, palette.ocean)) {
+                val drawn = strokes(end, color)
+                assertEquals("$end km", level + 1, drawn.size)
+                drawn.forEach { assertEquals("$end km", 1.0, it.opacity, 1e-9) }
+                assertTrue(strokes(end + 1, color)[level].opacity < 1)
+            }
+        }
+    }
+
     @Test
     fun aCloseUpNamesSmallerTownsTheCloserTheView() {
         val route = ParcelRoute(listOf(zurich))
@@ -262,8 +302,12 @@ class WorldDetailTests {
         val pack = pack()
         val route = ParcelRoute(listOf(zurich))
         val frame = Rect(0.0, 0.0, small.width, small.height)
-        fun steps(kilometres: Double, tiles: List<DetailTile>, palette: MapPalette = MapPalette.map(AdaptiveColor(RgbaColor(1.0, 0.0, 0.0)))) =
-            MapPainter.drawBase(small, atlas, route, close(kilometres, small), palette, night = null, tiles = tiles, tiled = tiles.isNotEmpty())
+        // `tiled` as the map works it out: every tile the view shows has come.
+        fun steps(kilometres: Double, tiles: Map<String, DetailTile>, palette: MapPalette = MapPalette.map(AdaptiveColor(RgbaColor(1.0, 0.0, 0.0)))): List<MapDrawing> {
+            val keys = pack.keys(close(kilometres, small), small)
+            val tiled = keys.isNotEmpty() && keys.all { it in tiles }
+            return MapPainter.drawBase(small, atlas, route, close(kilometres, small), palette, night = null, tiles = tiles.values.toList(), tiled = tiled)
+        }
         // What the tiles add: the steps after the land's layer and before the borders.
         fun detail(steps: List<MapDrawing>): List<MapDrawing> {
             assertTrue(steps.last() is MapDrawing.Stroke)
@@ -274,17 +318,25 @@ class WorldDetailTests {
             is MapDrawing.Fill -> area(lines(step.path), frame)
             else -> 0.0
         }
-        val tiles = pack.keys(close(200.0, small), small).mapNotNull { pack.tile(it) }
-        assertFalse(tiles.isEmpty())
+        val keys = pack.keys(close(200.0, small), small)
+        val tiles = keys.associateWith { pack.tile(it)!! }
+        assertEquals(listOf("37_27", "38_27"), keys)
         // Rivers, roads and built-up areas take a fair share of a close-up, and more of a closer one.
         for (kilometres in listOf(200.0, 100.0)) {
-            assertTrue(detail(steps(kilometres, emptyList())).isEmpty())
+            assertTrue(detail(steps(kilometres, emptyMap())).isEmpty())
             val drawn = detail(steps(kilometres, tiles))
             assertTrue("$kilometres", drawn.sumOf { covered(it) } > 2_000)
         }
+        // The tiles draw every lake once each of the view's has come; until then the wide map's lakes stay, as the
+        // land's layer holds them, under what the tiles that came draw.
+        fun land(steps: List<MapDrawing>): Int = steps.filterIsInstance<MapDrawing.Layer>().single().steps.size
+        assertEquals(2, land(steps(200.0, emptyMap())))
+        assertEquals(2, land(steps(200.0, mapOf("38_27" to tiles.getValue("38_27")))))
+        assertTrue(detail(steps(200.0, mapOf("38_27" to tiles.getValue("38_27")))).isNotEmpty())
+        assertEquals(1, land(steps(200.0, tiles)))
         // A wide view is drawn as it always was.
         val wideWith = steps(700.0, tiles)
-        val wideWithout = steps(700.0, emptyList())
+        val wideWithout = steps(700.0, emptyMap())
         assertTrue(detail(wideWith).isEmpty())
         assertEquals(wideWithout.map { it::class to it.opacity }, wideWith.map { it::class to it.opacity })
         // On a see-through map, water is cut out of the land rather than painted over it.

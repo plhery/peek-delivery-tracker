@@ -33,6 +33,7 @@ import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
 import com.plhery.peekdeliverytracker.ui.screenshot
 import kotlin.math.abs
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -106,6 +107,7 @@ class ParcelMapScreenshotTest {
     fun theJourney() {
         openMap()
         choose("Journey")
+        compose.everyTileDrawn { drawn }
         compose.screenshot("map_journey_light")
     }
 
@@ -113,6 +115,7 @@ class ParcelMapScreenshotTest {
     fun closeByInDark() {
         openMap(dark = true)
         choose("Nearby")
+        compose.everyTileDrawn { drawn }
         compose.screenshot("map_nearby_dark")
     }
 
@@ -142,15 +145,17 @@ class ParcelMapScreenshotTest {
             swipe(Offset(centerX, height * 0.3f), Offset(centerX - 160f, height * 0.3f + 80f), durationMillis = 300)
         }
         compose.mainClock.advanceTimeBy(1_000)
+        compose.everyTileDrawn { drawn }
         compose.screenshot("map_dragged_dark")
     }
 
     /**
      * Coffee beans' map, the demo's nearest journey, from Zürich to Härkingen and back, zoomed by two fingers about the
-     * parcel's place until it is about `kilometres` across its width, once each tile it shows has come.
+     * parcel's place until it is `kilometres` across its width, within 3 %, once each tile it shows has come.
      */
     private fun closeUp(kilometres: Double, name: String, dark: Boolean = false, top: Int = 62, bottom: Int = 24) {
         openMap(dark = dark, top = top, bottom = bottom, name = "Coffee beans")
+        compose.waitForIdle()
         val scene = checkNotNull(drawn)
         val map = compose.onNodeWithTag(MAP_COVER_MAP)
         val density = compose.density.density
@@ -166,6 +171,8 @@ class ParcelMapScreenshotTest {
             }
             compose.mainClock.advanceTimeBy(1_000)
         }
+        val span = compose.everyTileDrawn { drawn }
+        assertEquals("$span km", kilometres, span, kilometres * 0.03)
         compose.screenshot(name)
     }
 
@@ -200,6 +207,7 @@ class ParcelMapScreenshotTest {
     fun theJourneyOnATablet() {
         openMap(top = 24, bottom = 20)
         choose("Journey")
+        compose.everyTileDrawn { drawn }
         compose.screenshot("map_journey_tablet_light")
     }
 
@@ -208,6 +216,7 @@ class ParcelMapScreenshotTest {
     fun closeByOnATabletInDark() {
         openMap(dark = true, top = 24, bottom = 20)
         choose("Nearby")
+        compose.everyTileDrawn { drawn }
         compose.screenshot("map_nearby_tablet_dark")
     }
 }

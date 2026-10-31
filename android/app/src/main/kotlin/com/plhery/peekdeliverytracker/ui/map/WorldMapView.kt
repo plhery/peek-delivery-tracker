@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.map
 
 import android.content.Context
 import android.graphics.Picture
+import android.os.Looper
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.RepeatMode
@@ -17,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -89,6 +91,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import androidx.compose.ui.graphics.Canvas as ComposeCanvas
 import androidx.compose.ui.geometry.Size as ComposeSize
 
@@ -119,9 +123,12 @@ import androidx.compose.ui.geometry.Size as ComposeSize
  *
  * Up close, a map given `detail` (only the opened map is) draws what the wide map leaves out (A-S84): it asks for the
  * tiles its camera shows, where it is put or where it flies to, and draws those that have come, rivers, lakes, built-up
- * areas and roads, each level as strong as the view is close, and names the towns they hold by closeness. A tile
- * still on its way draws nothing. Such a map frames a city's journey closer, and its pictures change as tiles come,
- * so they aren't kept for other maps. Sizes, insets and boxes are in points (dp). Decorative.
+ * areas and roads, each level as strong as the view is close. It names the atlas's cities first, then the towns of
+ * each tile in view, the largest first, a tile at a time in the order of their keys, those above the floor of the
+ * view's span (50 thousand people, then 25, then any), as many as it has room for, 7 to 24, and none of the places of
+ * the journey, which have their names. A tile still on its way draws nothing. Such a map frames a city's journey
+ * closer. Its pictures change as tiles come, so they aren't kept for other maps, and a tile that comes is drawn off the
+ * main thread, the picture shown kept until then. Sizes, insets and boxes are in points (dp). Decorative.
  */
 @Composable
 fun WorldMapView(
@@ -155,32 +162,15 @@ fun WorldMapView(
     val reduceMotion = PeekTheme.reduceMotion
     val context = LocalContext.current.applicationContext
     BoxWithConstraints(modifier.clearAndSetSemantics {}) {
-        val request = MapSceneRequest(
+        val size = Size(maxWidth.value.toDouble(), maxHeight.value.toDouble())
+        // Everything the picture depends on but the tiles it draws: what frames the map, which a tile that comes leaves.
+        val bare = MapSceneRequest(
             atlas, route, mode, palette, labels, sites, showsContext, night, pip, quiet, insets, covered, buttons, language,
-            maxWidth.value.toDouble(), maxHeight.value.toDouble(), colors.dark, colors.highContrast,
-            detail?.let { SceneDetail(it.pack, it.tiles) },
+            size.width, size.height, colors.dark, colors.highContrast, detail?.let { SceneDetail(it.pack, emptyMap()) },
         )
-        val atOnce = LocalMapsAtOnce.current
-        val pending = remember(request) { if (atOnce) MapScenes.made(request, context) else MapScenes.request(request, context) }
-        val made = pending.completedOrNull()
-        // The last scene delivered: until the new request's scene is made, a map whose route, language, stage, carrier
-        // or size changes keeps the picture it shows rather than going blank, as the iPhone draws the new one at once.
-        val delivered by produceState(made, pending) {
-            pending.completedOrNull()?.let {
-                value = it
-                return@produceState
-            }
-            MapScenes.awaiting {
-                value = try {
-                    pending.await()
-                } catch (cancelled: CancellationException) {
-                    throw cancelled
-                } catch (_: Exception) {
-                    null
-                }
-            }
-        }
-        val scene = made ?: delivered
+        // The tiles read so far, read here rather than where they are kept, so that each one composes only the map again.
+        val stored by (detail?.tiles ?: NO_TILES).collectAsState()
+        val scene = rememberRestingScene(bare, stored, context)
         // A map whose picture is already made, as one scrolled back into a list finds it, shows at once: the entrance
         // is for a map that waited for its picture, as the iPhone's card fades its map in once, when the atlas is read.
         val shown = remember { Animatable(if (entrance == null || scene != null) 1f else 0f) }
@@ -190,14 +180,12 @@ fun WorldMapView(
             if (entrance == null) shown.snapTo(1f) else shown.animateTo(1f, entrance)
         }
         val moves = interactive || peek || flies
-        val motion = rememberGlobeMotion(scene?.camera, request, mode, recenter, reduceMotion, moves, onFreeChange)
+        val motion = rememberGlobeMotion(scene?.camera, bare, mode, recenter, reduceMotion, moves, onFreeChange)
         // A close-up reads the tiles it shows, where the map is put or flies to, and draws them as they come.
         val need by rememberUpdatedState(detail?.need)
-        val wanted = request.detail?.let { detail ->
-            (motion.state.camera ?: scene?.camera)?.let { detail.pack.keys(it, Size(request.width, request.height)) }
-        }.orEmpty()
+        val wanted = rememberTileKeys(detail?.pack, motion.state.camera ?: scene?.camera, size)
         LaunchedEffect(wanted) { need?.invoke(wanted) }
-        val drawn = motion.scene(scene, request, interactive) ?: return@BoxWithConstraints
+        val drawn = motion.scene(scene, bare, stored, wanted, interactive) ?: return@BoxWithConstraints
         val watch = LocalMapCameraWatch.current
         if (watch != null && moves) SideEffect { watch(interactive, peek, drawn.camera, drawn.pip) }
         val sceneWatch = LocalMapSceneWatch.current
@@ -234,6 +222,56 @@ fun WorldMapView(
         }
     }
 }
+
+/**
+ * The map's picture at its target: made off the main thread, the picture shown kept until then, unless it has to be
+ * there at once ([LocalMapsAtOnce]). Then the map's first picture is made as it is composed, as is one whose route,
+ * view, size or anything else but its close-ups changes; the pack and the tiles that come after are drawn off the main
+ * thread, as the other maps' pictures are, so a tile neither frames the map again nor holds up a frame. The picture is
+ * handed only the tiles its target shows, so a tile read for another view, or one let go, makes no picture again.
+ */
+@Composable
+private fun rememberRestingScene(bare: MapSceneRequest, stored: Map<String, DetailTile>, context: Context): MapScene? {
+    // What the map last asked for, but its close-ups: a request that differs from it only in those waits for its picture.
+    val last = remember { arrayOfNulls<MapSceneRequest>(1) }
+    val changed = last[0]?.let { it.copy(detail = null) != bare.copy(detail = null) } ?: true
+    val atOnce = LocalMapsAtOnce.current && changed
+    val pack = bare.detail?.pack
+    // The target, framed now for a picture made now, or as it was framed for this request before; until it is framed,
+    // the picture is offered every tile read so far, and takes those its target shows.
+    val target = if (pack == null) null else if (atOnce) MapScenes.target(bare, context) else MapScenes.framed(bare)
+    val keys = rememberTileKeys(pack, target, Size(bare.width, bare.height))
+    val request = bare.withTiles(stored, keys.takeIf { target != null })
+    val pending = remember(request) { if (atOnce) MapScenes.made(request, context) else MapScenes.request(request, context) }
+    SideEffect { last[0] = bare }
+    val made = pending.completedOrNull()
+    // The last scene delivered: until the new request's scene is made, a map whose route, language, stage, carrier
+    // or size changes keeps the picture it shows rather than going blank, as the iPhone draws the new one at once.
+    val delivered by produceState(made, pending) {
+        pending.completedOrNull()?.let {
+            value = it
+            return@produceState
+        }
+        MapScenes.awaiting {
+            value = try {
+                pending.await()
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (_: Exception) {
+                null
+            }
+        }
+    }
+    return made ?: delivered
+}
+
+/** `pack.keys(in:size:)`, the tiles `camera` shows, worked out again only as the camera or the size changes. */
+@Composable
+private fun rememberTileKeys(pack: WorldDetailPack?, camera: GlobeCamera?, size: Size): List<String> =
+    remember(pack, camera, size) { if (pack == null || camera == null) emptyList() else pack.keys(camera, size) }
+
+/** No tiles, for a map without close-ups. */
+private val NO_TILES: StateFlow<Map<String, DetailTile>> = MutableStateFlow(emptyMap())
 
 /**
  * A map's camera as it moves ([GlobeMotion]) for a map whose target, the camera that frames it, is `target` once its
@@ -332,19 +370,39 @@ private class MapMotion(private val context: Context, kept: GlobeCamera? = null)
     /**
      * The picture to show: the map's own at rest, at its target, and otherwise the map drawn now for the camera on the
      * screen, with Pip where he stands then, none on an opened map while it flies, and the faint names waiting for it
-     * to land.
+     * to land. Where the map was put, it is handed the tiles it asked for (`wanted`); a tile that comes to it there is
+     * drawn off the main thread, the picture shown kept until then. A flight's frames each take the tiles they show.
      */
     @Composable
-    fun scene(rest: MapScene?, request: MapSceneRequest, interactive: Boolean): MapScene? {
+    fun scene(rest: MapScene?, bare: MapSceneRequest, stored: Map<String, DetailTile>, wanted: List<String>, interactive: Boolean): MapScene? {
         val target = rest?.camera ?: return null
         val now = state
         val camera = now.camera
         if (camera == null || (now.flight == null && !now.free && camera == target)) return rest
         val shown = now.shown(target, progress)
         val moving = now.moving(progress)
-        val pip = request.pip?.takeUnless { interactive && moving }?.copy(held = now.heldPip)
-        return remember(request, shown, pip, moving) { MapScenes.at(request, shown, pip, moving, context) }
+        val pip = bare.pip?.takeUnless { interactive && moving }?.copy(held = now.heldPip)
+        val request = bare.withTiles(stored, wanted.takeIf { shown == camera })
+        val drawn = remember(bare, shown, pip, moving) { Drawn(request, MapScenes.at(request, shown, pip, moving, context)) }
+        val later by produceState<Drawn?>(null, drawn, request) {
+            // A flight draws its next frame with the tile sooner.
+            if (request == drawn.request || moving) return@produceState
+            val made = MapScenes.later(request, shown, pip, moving, context)
+            MapScenes.awaiting {
+                try {
+                    value = Drawn(request, made.await(), drawn)
+                } catch (cancelled: CancellationException) {
+                    throw cancelled
+                } catch (_: Exception) {
+                    // The picture shown stays.
+                }
+            }
+        }
+        return later?.takeIf { it.over === drawn && request != drawn.request }?.scene ?: drawn.scene
     }
+
+    /** A picture drawn for `request`, and the one drawn now that it takes the place of (`over`), with older tiles. */
+    private class Drawn(val request: MapSceneRequest, val scene: MapScene, val over: Drawn? = null)
 
     /** Where Pip stands on the map as `camera` shows it. */
     private fun pipSpot(camera: GlobeCamera?): PipSpot? = camera?.let { MapScenes.pipSpot(request, it, context) }
@@ -401,7 +459,8 @@ internal val LocalMapSceneWatch = staticCompositionLocalOf<((interactive: Boolea
 /**
  * Whether the maps here make their pictures as they are composed, on the main thread, rather than show nothing until
  * another thread has made them: for a card drawn only into a picture, as a flight's card is, which shows as the list
- * draws it from the first frame it is seen in.
+ * draws it from the first frame it is seen in, and for the opened map's first frame. An opened map's close-ups, its pack
+ * and its tiles, still come off the main thread.
  */
 internal val LocalMapsAtOnce = staticCompositionLocalOf { false }
 
@@ -462,8 +521,19 @@ internal data class MapSceneRequest(
     val detail: SceneDetail?,
 )
 
-/** What an opened map has of its close-ups as its picture is made: the pack, and the tiles read so far. */
+/** What an opened map has of its close-ups as its picture is made: the pack, and the tiles it is handed. */
 internal data class SceneDetail(val pack: WorldDetailPack, val tiles: Map<String, DetailTile>)
+
+/** The request but its tiles: all that frames the map. */
+internal val MapSceneRequest.framing: MapSceneRequest
+    get() = if (detail == null || detail.tiles.isEmpty()) this else copy(detail = detail.copy(tiles = emptyMap()))
+
+/** The request handed the tiles of `keys` read so far, or every tile read so far where its keys aren't known. */
+internal fun MapSceneRequest.withTiles(stored: Map<String, DetailTile>, keys: List<String>?): MapSceneRequest {
+    val detail = detail ?: return this
+    val tiles = if (keys == null) stored else keys.mapNotNull { key -> stored[key]?.let { key to it } }.toMap()
+    return if (tiles == detail.tiles) this else copy(detail = detail.copy(tiles = tiles))
+}
 
 /**
  * A map drawn: the land and legs, the marks over them, the parcel's dot, Pip's spot, the camera it is seen from, the
@@ -498,8 +568,20 @@ internal object MapScenes {
 
     private val waiting = AtomicInteger()
 
+    /** The targets of the opened maps' requests but their tiles, the last few dozen: a tile that comes frames none again. */
+    private val targets = object : LinkedHashMap<MapSceneRequest, GlobeCamera>(KEPT, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<MapSceneRequest, GlobeCamera>?): Boolean = size > KEPT
+    }
+
+    private val framings = AtomicInteger()
+    private val madeHere = AtomicInteger()
+
     /** Whether no picture is being made or on its way to a map, for tests that wait for the maps. */
     val isIdle: Boolean get() = busy.get() == 0 && waiting.get() == 0
+
+    /** How many times a map has been framed, and how many pictures were made on the main thread: for tests. */
+    val timesFramed: Int get() = framings.get()
+    val madeOnMainThread: Int get() = madeHere.get()
 
     /** `delivery`, a map waiting for its picture, counted until the picture is in the map's hands. */
     suspend fun awaiting(delivery: suspend () -> Unit) {
@@ -559,6 +641,28 @@ internal object MapScenes {
         return make(request, measurer, widths, camera, pip, moving)
     }
 
+    /**
+     * [at]'s picture, made on another thread and not kept: for a map at rest where it was put, whose tiles came, which
+     * shows its picture until this one is made.
+     */
+    fun later(request: MapSceneRequest, camera: GlobeCamera, pip: PipRequest?, moving: Boolean, context: Context): Deferred<MapScene> {
+        val (measurer, widths) = text(context)
+        busy.incrementAndGet()
+        return scope.async {
+            try {
+                make(request, measurer, widths, camera, pip, moving)
+            } finally {
+                busy.decrementAndGet()
+            }
+        }
+    }
+
+    /** The camera that frames `request`, framed now on this thread unless it was framed for the same request but its tiles. */
+    fun target(request: MapSceneRequest, context: Context): GlobeCamera = target(request, text(context).second)
+
+    /** The camera that frames `request` if it was framed for the same request but its tiles, without framing it. */
+    fun framed(request: MapSceneRequest): GlobeCamera? = synchronized(targets) { targets[request.framing] }
+
     /** `pipSpot(at:size:)`: where Pip stands on `request`'s map seen from `camera`, looking for his best spot. */
     fun pipSpot(request: MapSceneRequest, camera: GlobeCamera, context: Context): PipSpot? = with(request) {
         val standing = (if (palette.card == null) null else pip) ?: return null
@@ -572,8 +676,20 @@ internal object MapScenes {
         }
     }
 
+    /**
+     * The camera that frames `request`'s route, framed once for an opened map's request but its tiles, which don't
+     * move it; any other map's picture is kept whole ([scenes]).
+     */
+    private fun target(request: MapSceneRequest, widths: MapTextWidths): GlobeCamera {
+        if (request.detail == null) return frame(request, widths)
+        val framing = request.framing
+        synchronized(targets) { targets[framing] }?.let { return it }
+        return frame(framing, widths).also { synchronized(targets) { targets[framing] = it } }
+    }
+
     /** `targetCamera(in:)`: the camera that frames `request`'s route. */
-    private fun target(request: MapSceneRequest, widths: MapTextWidths): GlobeCamera = with(request) {
+    private fun frame(request: MapSceneRequest, widths: MapTextWidths): GlobeCamera = with(request) {
+        framings.incrementAndGet()
         val size = Size(width, height)
         val standing = if (palette.card == null) null else pip
         val closeUps = detail != null
@@ -608,6 +724,7 @@ internal object MapScenes {
         pip: PipRequest? = request.pip,
         moving: Boolean = false,
     ): MapScene = with(request) {
+        if (Looper.myLooper() == Looper.getMainLooper()) madeHere.incrementAndGet()
         val size = Size(width, height)
         val standing = if (palette.card == null) null else pip
         val camera = at ?: target(request, widths)

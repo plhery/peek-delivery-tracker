@@ -183,5 +183,6 @@
   { "id": "jd-logistics", "catalog": "jd-logistics", "name": "JD Logistics", "languages": ["en"] },
   { "id": "singapore-post", "catalog": "singapore-post", "name": "Singapore Post", "languages": ["en"] },
   { "id": "zto", "catalog": "zto", "name": "ZTO Express", "languages": ["en"] },
-  { "id": "cne", "catalog": "cne", "name": "CNE Express", "languages": ["en"] }
+  { "id": "cne", "catalog": "cne", "name": "CNE Express", "languages": ["en"] },
+  { "id": "japan-post", "catalog": "japan-post", "name": "Japan Post", "languages": ["en"] }
 ]

@@ -1488,6 +1488,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CNE Express tracking: 3A5V numbers, statuses and contact",
       "name": "CNE Express",
       "color": "#e83828"
+    },
+    {
+      "id": "japan-post",
+      "catalog": "japan-post",
+      "slug": "japan-post-tracking",
+      "title": "Japan Post tracking: EMS numbers and statuses explained",
+      "name": "Japan Post",
+      "color": "#cc0000"
     }
   ],
   "de": [

@@ -14,6 +14,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -64,6 +65,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -79,6 +82,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
@@ -450,15 +454,32 @@ private fun PickerBar(title: String, leading: (@Composable () -> Unit)?) {
  * is, the magnifying glass in the label's colour, the prompt in the secondary grey, and once it holds something the
  * button that empties it, in the label's colour. It takes no capitalisation, correction or suggestions
  * (`.autocorrectionDisabled()`, `.textInputAutocapitalization(.never)`, [NoSuggestions]), and the keyboard's Search
- * puts the keyboard away, the search left on. TalkBack reads it by its prompt. It keeps the focus and the keyboard
- * through the window made again.
+ * puts the keyboard away, the search left on. A tap anywhere on the capsule, the magnifying glass or its padding,
+ * focuses the field and brings the keyboard, as UISearchTextField's whole frame takes it, with nothing drawn for it and
+ * nothing more for TalkBack to read. TalkBack reads it by its prompt. It keeps the focus and the keyboard through the
+ * window made again.
  */
 @Composable
 private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String, clear: String, onFocus: () -> Unit, modifier: Modifier) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.body
     val focusManager = LocalFocusManager.current
-    GlassSurface(CapsuleShape, modifier.testTag(CARRIER_PICKER_FIELD), backdrop = null, behind = colors.groupedBackground) {
+    val focus = remember { FocusRequester() }
+    val keyboard = LocalSoftwareKeyboardController.current
+    GlassSurface(
+        CapsuleShape,
+        modifier
+            .testTag(CARRIER_PICKER_FIELD)
+            .pointerInput(focus, keyboard) {
+                // The clear button keeps its own taps; on the field, this asks again for what the field's own tap gives.
+                detectTapGestures {
+                    focus.requestFocus()
+                    keyboard?.show()
+                }
+            },
+        backdrop = null,
+        behind = colors.groupedBackground,
+    ) {
         Row(
             Modifier
                 .heightIn(min = SEARCH_HEIGHT)
@@ -474,6 +495,7 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
                     modifier = Modifier
                         .weight(1f)
                         .testTag(CARRIER_PICKER_SEARCH)
+                        .focusRequester(focus)
                         .keptFocus()
                         .onFocusChanged { if (it.isFocused) onFocus() }
                         .semantics { contentDescription = prompt },

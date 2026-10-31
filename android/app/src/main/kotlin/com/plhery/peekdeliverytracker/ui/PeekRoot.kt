@@ -21,6 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -72,16 +74,20 @@ internal fun PeekRoot(
         inbox?.parcel?.filterNotNull()?.collect { tab = PeekTab.Deliveries.ordinal }
     }
     ProvideLocalizer(localizer) {
-        ProvideLinks {
-            when (state) {
-                AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
-                AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
-                AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
-                    val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-                    TabShell(selection = tab, onSelect = { tab = it }, labels = labels, onView = onView) { shown ->
-                        when (shown) {
-                            PeekTab.Deliveries -> deliveries()
-                            PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+        // The tags carry the iPhone's accessibility identifiers (demo.exit, deliveries.search, ...); UI Automator reads
+        // them as resource ids, as XCUITest reads the identifiers. Sized and placed as its one child is.
+        Box(Modifier.semantics { testTagsAsResourceId = true }, propagateMinConstraints = true) {
+            ProvideLinks {
+                when (state) {
+                    AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
+                    AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
+                    AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
+                        val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
+                        TabShell(selection = tab, onSelect = { tab = it }, labels = labels, onView = onView) { shown ->
+                            when (shown) {
+                                PeekTab.Deliveries -> deliveries()
+                                PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                            }
                         }
                     }
                 }

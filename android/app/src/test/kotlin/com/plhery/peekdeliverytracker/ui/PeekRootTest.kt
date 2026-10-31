@@ -16,6 +16,9 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.semantics.SemanticsPropertiesAndroid
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.hasAnyAncestor
@@ -31,11 +34,13 @@ import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_COLUMN
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
+import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.card
 import com.plhery.peekdeliverytracker.ui.deliveries.openCard
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
@@ -98,6 +103,17 @@ class PeekRootTest {
         return pixels.sumOf { pixel ->
             (0 until 3).maxOf { channel -> abs((pixel shr (8 * channel) and 0xFF) - (background shr (8 * channel) and 0xFF)) }.toLong()
         }
+    }
+
+    @Test
+    fun theIphonesIdentifiersReachUiAutomatorAsResourceIds() {
+        var state by mutableStateOf<AuthenticationState>(AuthenticationState.Loading)
+        compose.setContent { RootHost(state = state) }
+        val exposed = hasAnyAncestor(SemanticsMatcher.expectValue(SemanticsPropertiesAndroid.TestTagsAsResourceId, true))
+        compose.onNodeWithTag(LAUNCH).assert(exposed)
+        state = AuthenticationState.Demo
+        compose.waitForIdle()
+        for (tag in listOf(DEMO_EXIT, SEARCH_BUTTON, PARCEL_LIST, TAB_BAR)) compose.onNodeWithTag(tag).assert(exposed)
     }
 
     @Test

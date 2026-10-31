@@ -3272,6 +3272,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-sledzenie",
+      "title": "GZYL śledzenie przesyłki: numer YL…YQ, statusy i kontakt",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
       "id": "geodis-pl",
       "catalog": "geodis-pl",
       "slug": "geodis-polska-sledzenie",

@@ -5549,7 +5549,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       },
       {
-        "pattern": "^(?!PB)[A-Z]{3}[CPR]\\d{10}$",
+        "pattern": "^(?!PB|HRBC)[A-Z]{3}[CPR]\\d{10}$",
         "confidence": "low"
       }
     ],
@@ -28725,7 +28725,8 @@ export const CARRIER_CAPABILITIES = {
   "eco-express-ae": {
     "displayName": "Eco Express",
     "aliases": [
-      "ECO EXPRESS"
+      "ECO EXPRESS",
+      "ECO Freight"
     ],
     "countries": [
       "AE"
@@ -41002,6 +41003,31 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://qls.quince.com/qls/track"
+  },
+  "flashbird-ca": {
+    "displayName": "FlashBird",
+    "countries": [
+      "CA"
+    ],
+    "color": "#0e6ba8",
+    "selectable": true,
+    "timezone": "America/Toronto",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://flashbird.ca/tracking/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "flashbird.ca",
+          "www.flashbird.ca"
+        ],
+        "path": "^/tracking/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://flashbird.ca/tracking"
   }
 } as const;
 
@@ -42119,7 +42145,8 @@ export const CARRIER_IDS = [
   "letter-track",
   "parceljet",
   "pasarex",
-  "qls-quince"
+  "qls-quince",
+  "flashbird-ca"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

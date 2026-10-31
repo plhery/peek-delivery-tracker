@@ -195,5 +195,6 @@
   { "id": "delhivery", "catalog": "delhivery", "name": "Delhivery", "languages": ["en"] },
   { "id": "aras-kargo", "catalog": "aras-kargo", "name": "Aras Kargo", "languages": ["en"] },
   { "id": "emirates-post", "catalog": "emirates-post", "name": "Emirates Post", "languages": ["en"] },
-  { "id": "blue-dart", "catalog": "blue-dart", "name": "Blue Dart", "languages": ["en"] }
+  { "id": "blue-dart", "catalog": "blue-dart", "name": "Blue Dart", "languages": ["en"] },
+  { "id": "ekart", "catalog": "ekart", "name": "Ekart", "languages": ["en"] }
 ]

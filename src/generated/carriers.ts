@@ -1584,6 +1584,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Blue Dart tracking: waybill numbers and statuses explained",
       "name": "Blue Dart",
       "color": "#0059a9"
+    },
+    {
+      "id": "ekart",
+      "catalog": "ekart",
+      "slug": "ekart-tracking",
+      "title": "Ekart tracking: tracking IDs, statuses and RTO explained",
+      "name": "Ekart",
+      "color": "#0074D9"
     }
   ],
   "de": [

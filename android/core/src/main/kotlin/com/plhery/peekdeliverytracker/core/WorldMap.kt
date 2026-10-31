@@ -553,8 +553,15 @@ data class GlobeMotion(
     /** Whether a flight is still on its way: the faint names wait for it to land, and Pip with them on an opened map. */
     fun moving(progress: Double): Boolean = flight != null && progress < 1
 
-    /** `onAppear`: a map that shows takes its target. */
-    fun appeared(target: GlobeCamera): GlobeMotion = if (camera == null) copy(camera = target) else this
+    /**
+     * `onAppear`: a map that shows takes its target. One kept where a hand put it through the window made again
+     * ([kept]) stays there, and Pip takes the spot he has there (`pipSpot`) to keep while it is moved again.
+     */
+    fun appeared(target: GlobeCamera, pipSpot: (GlobeCamera?) -> PipSpot? = { null }): GlobeMotion = when {
+        camera == null -> copy(camera = target)
+        free && heldPip == null -> copy(heldPip = pipSpot(camera))
+        else -> this
+    }
 
     /**
      * `fly(to:size:)`: to `target`, from wherever the flight on the screen has got to, over a view `viewport` across;
@@ -619,6 +626,15 @@ data class GlobeMotion(
     fun ended(): GlobeMotion = copy(gestureStart = null, zooming = false)
 
     private fun freed(pipSpot: (GlobeCamera?) -> PipSpot?): GlobeMotion = if (free) this else copy(free = true, heldPip = pipSpot(gestureStart))
+
+    companion object {
+        /**
+         * The motion of a map whose window is made again (a rotation, a fold), as the iPhone keeps its state through a
+         * turn: one a hand moved, kept at `camera`, stays there, free; any other, with none kept, takes its new frame
+         * as it shows.
+         */
+        fun kept(camera: GlobeCamera?): GlobeMotion = if (camera == null) GlobeMotion() else GlobeMotion(camera = camera, free = true)
+    }
 }
 
 /** Swift's `min()` of a sequence: the first of the smallest, nil when empty. */

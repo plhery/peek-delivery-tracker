@@ -23,6 +23,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
@@ -49,6 +51,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.EdgeInsets
+import com.plhery.peekdeliverytracker.core.GeoPoint
 import com.plhery.peekdeliverytracker.core.GlobeCamera
 import com.plhery.peekdeliverytracker.core.GlobeMotion
 import com.plhery.peekdeliverytracker.core.MapLabels
@@ -214,7 +217,8 @@ fun WorldMapView(
  * picture is made. A map that `moves` under the fingers takes its target two frames after it first has one, as the
  * opened map lays out its summary in its first, so it never flies to the frame it opened at. Then a new target flies
  * the camera there unless the map is free, and a new `mode` or `recenter` flies it there whatever. Any other map
- * shows each target as it comes, and asks for no frame.
+ * shows each target as it comes, and asks for no frame. A map a hand moved stays where it was put through the window
+ * made again, and Pip keeps the spot he has there; any other takes its new frame as it shows.
  */
 @Composable
 private fun rememberGlobeMotion(
@@ -228,7 +232,7 @@ private fun rememberGlobeMotion(
 ): MapMotion {
     val context = LocalContext.current.applicationContext
     val density = LocalDensity.current.density
-    val motion = remember { MapMotion(context) }
+    val motion = rememberSaveable(saver = remember(context) { MapMotion.saver(context) }) { MapMotion(context) }
     motion.target = target
     motion.request = request
     motion.reduceMotion = reduceMotion
@@ -239,12 +243,11 @@ private fun rememberGlobeMotion(
         if (target == null || !moves) return@LaunchedEffect
         withFrameNanos {}
         withFrameNanos {}
-        current?.let { motion.update(motion.state.appeared(it)) }
+        current?.let { motion.appear(it) }
     }
     // `onChange(of: target)`, `onChange(of: mode)` and `onChange(of: recenter)`, once the map shows.
     LaunchedEffect(target) { if (!motion.state.free) motion.fly() }
-    LaunchedEffect(mode) { motion.fly() }
-    LaunchedEffect(recenter) { motion.fly() }
+    LaunchedEffect(mode, recenter) { motion.viewed(mode, recenter) }
     val flight = motion.state.flight
     LaunchedEffect(flight) {
         if (flight == null) return@LaunchedEffect
@@ -263,9 +266,12 @@ private fun rememberGlobeMotion(
  * the frame clock, and what the map's gestures do. Its parts are snapshot state, read as the map is composed.
  */
 @Stable
-private class MapMotion(private val context: Context) {
-    var state: GlobeMotion by mutableStateOf(GlobeMotion())
+private class MapMotion(private val context: Context, kept: GlobeCamera? = null) {
+    var state: GlobeMotion by mutableStateOf(GlobeMotion.kept(kept))
         private set
+
+    /** The view and recentring the map last showed: null until it first shows. */
+    private var view: Pair<ParcelRoute.Mode, Int>? = null
 
     /** How far the flight shown is through its time: each flight starts at 0. */
     var progress: Double by mutableDoubleStateOf(0.0)
@@ -281,6 +287,16 @@ private class MapMotion(private val context: Context) {
         if (next.flight !== was.flight) progress = 0.0
         state = next
         if (next.free != was.free) onFreeChange(next.free)
+    }
+
+    /** `onAppear`, the map's first frame laid out: it takes `target`, unless it was kept where a hand put it. */
+    fun appear(target: GlobeCamera) = update(state.appeared(target, ::pipSpot))
+
+    /** `onChange(of: mode)` and `onChange(of: recenter)`: a view chosen, or the one shown again, flies the map back. */
+    fun viewed(mode: ParcelRoute.Mode, recenter: Int) {
+        val was = view
+        view = mode to recenter
+        if (was != null && was != view) fly()
     }
 
     /** `fly(to:size:)`, to the target, once the map shows. */
@@ -336,6 +352,22 @@ private class MapMotion(private val context: Context) {
                 update(state.ended())
                 if (!interactive) target?.let { update(state.flown(it, progress, max(request.width, request.height), reduceMotion)) }
             },
+        )
+    }
+
+    companion object {
+        /**
+         * Keeps where a hand put the map through the window made again (a rotation, a fold), as the iPhone keeps its
+         * state through a turn: the camera's plain numbers, so the new window shares nothing with the old one (see
+         * `keptFocus`). Nothing for a map at its frame, which takes its new one.
+         */
+        fun saver(context: Context) = Saver<MapMotion, DoubleArray>(
+            save = { motion ->
+                motion.state.camera?.takeIf { motion.state.free }?.let {
+                    doubleArrayOf(it.center.longitude, it.center.latitude, it.scale, it.offset.x, it.offset.y)
+                }
+            },
+            restore = { MapMotion(context, GlobeCamera(GeoPoint(longitude = it[0], latitude = it[1]), it[2], Point(it[3], it[4]))) },
         )
     }
 }

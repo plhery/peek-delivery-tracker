@@ -449,6 +449,31 @@ class ParcelRouteTests {
         assertEquals(listOf<GlobeCamera?>(here), asked)
     }
 
+    /**
+     * Android's own: through the window made again, a map a hand moved stays where it was put, free, with Pip keeping
+     * the spot he has there; one that wasn't takes its new frame without flying.
+     */
+    @Test
+    fun aMovedMapIsKeptWhereItWasPutAndAnyOtherTakesItsNewFrame() {
+        val moved = GlobeCamera(center = kyoto.point, scale = 2_000.0, offset = Point(200.0, 300.0))
+        val target = GlobeCamera(center = zurich.point, scale = 3_000.0, offset = Point(220.0, 340.0))
+        val spot = PipSpot(Size(4.0, 5.0), width = 34.0, side = 1, below = false)
+        val asked = mutableListOf<GlobeCamera?>()
+        val kept = GlobeMotion.kept(moved).appeared(target) { asked.add(it); spot }
+        assertEquals(moved, kept.camera)
+        assertTrue(kept.free)
+        assertNull(kept.flight)
+        assertEquals(spot, kept.heldPip)
+        assertEquals(listOf<GlobeCamera?>(moved), asked)
+        // A drag goes on from it, Pip still where he stood.
+        val dragged = kept.dragged(Size(30.0, 0.0), progress = 0.0) { error("Pip keeps his spot") }
+        assertEquals(moved.dragged(Size(30.0, 0.0)), dragged.camera)
+        assertEquals(spot, dragged.heldPip)
+        // Nothing kept: the map takes its new frame as it shows.
+        val fresh = GlobeMotion.kept(null).appeared(target) { error("No spot to keep") }
+        assertEquals(GlobeMotion(camera = target), fresh)
+    }
+
     /** Android's own: a card's map zooms under a pinch without being freed, and flies back as the fingers lift. */
     @Test
     fun aPeekZoomsWithoutFreeingTheMapAndFliesBack() {

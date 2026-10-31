@@ -4,6 +4,7 @@ import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityNodeInfo
 import android.view.accessibility.AccessibilityNodeProvider
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.ViewRootForTest
@@ -31,6 +32,7 @@ import com.plhery.peekdeliverytracker.core.GeoPoint
 import com.plhery.peekdeliverytracker.core.GlobeCamera
 import com.plhery.peekdeliverytracker.core.ParcelRoute
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.map.LocalMapCameraWatch
 import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
@@ -72,10 +74,10 @@ class ParcelMapTest {
         DemoCards.parcels().first { it.archivedAt == null && ParcelRoute(it, atlas, AppLanguage.En).hasNearView }
     }
 
-    private fun show(reduceMotion: Boolean = false) {
+    private fun show(reduceMotion: Boolean = false, recreation: Recreation? = null) {
         source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
         compose.waitsForMaps()
-        compose.setContent {
+        val content: @Composable () -> Unit = {
             CompositionLocalProvider(
                 LocalDeliveriesState provides { deliveries = it },
                 LocalMapCameraWatch provides { interactive, camera -> (if (interactive) opened else peeked) += camera },
@@ -83,6 +85,7 @@ class ParcelMapTest {
                 RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion)
             }
         }
+        if (recreation != null) recreation.setContent(content) else compose.setContent(content)
         compose.waitForIdle()
     }
 
@@ -92,8 +95,8 @@ class ParcelMapTest {
     }
 
     /** The parcel's map, opened from its page's globe and at rest. */
-    private fun openMap(name: String = twoViews.label, reduceMotion: Boolean = false) {
-        show(reduceMotion)
+    private fun openMap(name: String = twoViews.label, reduceMotion: Boolean = false, recreation: Recreation? = null) {
+        show(reduceMotion, recreation)
         compose.openCard(name)
         settle()
         compose.onNodeWithTag(PAGE_GLOBE).performClick()
@@ -234,6 +237,60 @@ class ParcelMapTest {
         drag(Offset(120f, 0f))
         settle()
         assertEquals("Not selected", talkBack.info(view(shown)).stateDescription)
+    }
+
+    /** The window made again, and the map back up, as it was, and at rest. */
+    private fun remake(recreation: Recreation) {
+        recreation.recreate()
+        var frames = 0
+        while (!exists(MAP_COVER)) {
+            check(frames++ < 5) { "The map didn't come back" }
+            compose.mainClock.advanceTimeByFrame()
+        }
+        compose.mainClock.autoAdvance = true
+        settle()
+    }
+
+    @Test
+    fun theViewChosenStaysThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        openMap(recreation = recreation)
+        val (shown, other) = views()
+        view(other).performClick()
+        settle()
+        val there = opened.last()
+        remake(recreation)
+        view(other).assertIsSelected()
+        view(shown).assertIsNotSelected()
+        assertEquals(there, opened.last())
+    }
+
+    @Test
+    fun aMovedMapStaysWhereItWasPutThroughTheWindowMadeAgain() {
+        val recreation = Recreation(compose)
+        openMap(recreation = recreation)
+        val (shown, other) = views()
+        val start = opened.last()
+        drag(Offset(-160f, 80f))
+        settle()
+        val moved = opened.last()
+        assertNotEquals(start, moved)
+        val from = opened.size
+        remake(recreation)
+        // There from its first frame back, not flown there nor back to its view.
+        assertTrue(opened.size > from)
+        assertTrue(opened.drop(from).all { it == moved })
+        view(shown).assertIsNotSelected()
+        view(other).assertIsNotSelected()
+        // Turned on from there, and brought back by its view.
+        drag(Offset(100f, 0f))
+        settle()
+        val degrees = 180 / PI / moved.scale
+        assertEquals(moved.center.longitude - 50 * degrees, opened.last().center.longitude, 1e-6)
+        view(shown).performClick()
+        settle()
+        assertEquals(start, opened.last())
+        view(shown).assertIsSelected()
     }
 
     @Test

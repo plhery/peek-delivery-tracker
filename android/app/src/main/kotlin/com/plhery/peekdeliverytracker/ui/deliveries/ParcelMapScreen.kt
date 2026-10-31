@@ -23,11 +23,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -121,9 +124,10 @@ internal fun ParcelMapScreen(
     val now = LocalNow.current
     // The night side as it is when the map opens.
     val time = remember { now() }
-    var chosen by remember { mutableStateOf<ParcelRoute.Mode?>(null) }
+    // Kept through the window made again, as the iPhone keeps its state through a turn; the map keeps its camera.
+    var chosen by rememberSaveable(saver = CHOSEN_SAVER) { mutableStateOf<ParcelRoute.Mode?>(null) }
     // Moved by hand since it last flew: then neither view is selected, and either flies it back.
-    var free by remember { mutableStateOf(false) }
+    var free by rememberSaveable(saver = FREE_SAVER) { mutableStateOf(false) }
     var recenter by remember { mutableIntStateOf(0) }
     var barHeight by remember { mutableFloatStateOf(BAR_HEIGHT_GUESS) }
     val mode = chosen ?: route.defaultMode(stage)
@@ -465,6 +469,10 @@ internal data class MapCoverLayout(val closeTop: Double, val insets: EdgeInsets,
  * summary's scroll have every one.
  */
 private val TakesTouches = Modifier.pointerInput(Unit) { awaitPointerEventScope { while (true) awaitPointerEvent() } }
+
+/** The view chosen and whether the map was moved, kept by their plain values: the new window shares nothing with the old. */
+private val CHOSEN_SAVER = Saver<MutableState<ParcelRoute.Mode?>, String>(save = { it.value?.name }, restore = { mutableStateOf(ParcelRoute.Mode.valueOf(it)) })
+private val FREE_SAVER = Saver<MutableState<Boolean>, Boolean>(save = { it.value }, restore = { mutableStateOf(it) })
 
 /** The views: the whole journey, and close by. */
 private val VIEWS = listOf(

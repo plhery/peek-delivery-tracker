@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -97,7 +98,7 @@ import kotlin.math.max
  * The map turns under a finger and zooms under two (A-G12), and flies between the views (A-AN46). Once moved, neither
  * view is selected, and either brings it back; the view shown brings it back too (A-G14). TalkBack hears the map as
  * one image named by its ends, as VoiceOver does, with nothing to adjust, reaches it through `mapFocus`, and hears the
- * views as a group named "Map view", the one shown selected.
+ * views as a group, "Map view" as it comes to them, the one shown selected.
  */
 @Composable
 internal fun ParcelMapScreen(
@@ -211,15 +212,16 @@ internal fun ParcelMapScreen(
                                     .background(colors.label.copy(alpha = colors.label.alpha * 0.06f), CapsuleShape)
                                     .padding(3.dp)
                                     .testTag(MAP_VIEWS)
-                                    .semantics {
-                                        isTraversalGroup = true
-                                        contentDescription = localizer.text("map.view")
-                                    },
+                                    .selectableGroup()
+                                    .semantics { isTraversalGroup = true },
                                 horizontalArrangement = Arrangement.spacedBy(2.dp),
                             ) {
                                 // A view is selected while the map shows it as it framed it; the one shown recentres it.
-                                for ((target, key, symbol) in VIEWS) {
-                                    ViewButton(localizer.text(key), symbol, selected = mode == target && !free) {
+                                // TalkBack reads no group's name of its own: the first view says it, as VoiceOver says
+                                // the group's as it comes to its views.
+                                VIEWS.forEachIndexed { index, (target, key, symbol) ->
+                                    val group = localizer.text("map.view").takeIf { index == 0 }
+                                    ViewButton(localizer.text(key), symbol, selected = mode == target && !free, group = group) {
                                         if (target == mode) recenter++
                                         chosen = target
                                     }
@@ -384,10 +386,10 @@ private fun MapEndpoint(title: String, place: RoutePlace, trailing: Boolean, lar
 /**
  * A button of the switch between the journey and close by: its symbol and words in medium caption, in the paper on
  * the ink while it is the view shown, secondary otherwise, 36 tall and 12 in from its sides. The space between the
- * symbol and the words is `Label`'s, estimated.
+ * symbol and the words is `Label`'s, estimated. TalkBack hears `group`, the switch's name, before its words.
  */
 @Composable
-private fun ViewButton(title: String, symbol: String, selected: Boolean, action: () -> Unit) {
+private fun ViewButton(title: String, symbol: String, selected: Boolean, group: String?, action: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val tint = if (selected) colors.paper else colors.secondaryLabel
@@ -395,7 +397,11 @@ private fun ViewButton(title: String, symbol: String, selected: Boolean, action:
     Row(
         Modifier
             .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action)
-            .semantics { this.selected = selected }
+            .semantics {
+                this.selected = selected
+                // Compose gives TalkBack a description of a node with words of its own as a child before them.
+                if (group != null) contentDescription = group
+            }
             .background(if (selected) colors.ink else Color.Transparent, CapsuleShape)
             .heightIn(min = 36.dp)
             .padding(horizontal = 12.dp),

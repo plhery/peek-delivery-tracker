@@ -1,8 +1,12 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.view.accessibility.AccessibilityManager
+import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityNodeProvider
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -39,6 +43,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -169,6 +174,66 @@ class ParcelMapTest {
         assertTrue(opened.drop(from).all { it == start })
         view(shown).assertIsSelected()
         view(other).assertIsNotSelected()
+    }
+
+    /** The window's accessibility nodes, which TalkBack reads, with TalkBack on. */
+    private fun talkBack(): AccessibilityNodeProvider {
+        val root = compose.onRoot().fetchSemanticsNode().root as ViewRootForTest
+        val manager = shadowOf(compose.activity.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread {
+            manager.setEnabled(true)
+            manager.setTouchExplorationEnabled(true)
+            root.forceAccessibilityForTesting(true)
+        }
+        return root.view.accessibilityNodeProvider
+    }
+
+    private fun AccessibilityNodeProvider.info(id: Int): AccessibilityNodeInfo {
+        var info: AccessibilityNodeInfo? = null
+        compose.runOnUiThread { info = createAccessibilityNodeInfo(id) }
+        return checkNotNull(info)
+    }
+
+    private fun AccessibilityNodeProvider.info(node: SemanticsNodeInteraction): AccessibilityNodeInfo = info(node.fetchSemanticsNode().id)
+
+    /**
+     * What TalkBack says of the node with `id` as it stops there: its own description or words, else those of each of
+     * its children it doesn't stop on, in their order.
+     */
+    private fun AccessibilityNodeProvider.spoken(id: Int): List<String> {
+        val info = info(id)
+        (info.contentDescription ?: info.text)?.let { return listOf(it.toString()) }
+        val childId = AccessibilityNodeInfo::class.java.getMethod("getChildId", Int::class.javaPrimitiveType)
+        return (0 until info.childCount).flatMap { index ->
+            // The child's virtual id, in the high half of the node id.
+            val child = ((childId.invoke(info, index) as Long) ushr 32).toInt()
+            if (info(child).isScreenReaderFocusable) emptyList() else spoken(child)
+        }
+    }
+
+    @Test
+    fun talkBackHearsTheViewsNameAsItComesToThemAndTheOneShownSelected() {
+        openMap()
+        val (shown, other) = views()
+        val talkBack = talkBack()
+        // The group is no stop of its own and says nothing: TalkBack goes from the summary to the first view, which
+        // says the group's name first, as VoiceOver says it coming into the group.
+        val group = talkBack.info(compose.onNodeWithTag(MAP_VIEWS, useUnmergedTree = true))
+        assertFalse(group.isScreenReaderFocusable)
+        assertEquals(null, group.contentDescription ?: group.text)
+        assertEquals(2, group.collectionInfo.rowCount * group.collectionInfo.columnCount)
+        val journey = view("Journey").fetchSemanticsNode().id
+        val nearby = view("Nearby").fetchSemanticsNode().id
+        assertTrue(talkBack.info(journey).isScreenReaderFocusable)
+        assertTrue(talkBack.info(nearby).isScreenReaderFocusable)
+        assertEquals(listOf("Map view", "Journey"), talkBack.spoken(journey))
+        assertEquals(listOf("Nearby"), talkBack.spoken(nearby))
+        assertEquals("Selected", talkBack.info(view(shown)).stateDescription)
+        assertEquals("Not selected", talkBack.info(view(other)).stateDescription)
+        // Moved by hand, neither is.
+        drag(Offset(120f, 0f))
+        settle()
+        assertEquals("Not selected", talkBack.info(view(shown)).stateDescription)
     }
 
     @Test

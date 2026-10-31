@@ -36,8 +36,9 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The opened map of a parcel with both views, in the demo at the captures' moment: the journey and close by, light and
- * dark, on the iPhone the captures were taken on and on an iPad; partway through its flight from one to the other; and
- * turned by hand, neither view selected. The map at its first view is LivePassScreenshotTest's.
+ * dark, on the iPhone the captures were taken on and on an iPad; a parcel from across the world partway through its
+ * flight from one to the other; and turned by hand, neither view selected. The map at its first view is
+ * LivePassScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -50,10 +51,14 @@ class ParcelMapScreenshotTest {
 
     private lateinit var view: View
 
-    /** The demo's parcel with both views, its map opened, with the system's bars `top` and `bottom` tall. */
-    private fun openMap(dark: Boolean = false, top: Int = 62, bottom: Int = 24) {
+    /**
+     * The demo's parcel named `name`, by default its first with both views, its map opened, with the system's bars
+     * `top` and `bottom` tall.
+     */
+    private fun openMap(dark: Boolean = false, top: Int = 62, bottom: Int = 24, name: String? = null) {
         val atlas = runBlocking { WorldAtlases.load().await() }!!
-        val parcel = DemoCards.parcels().first { it.archivedAt == null && ParcelRoute(it, atlas, AppLanguage.En).hasNearView }
+        val parcel = name?.let { DemoCards.parcel(it) }
+            ?: DemoCards.parcels().first { it.archivedAt == null && ParcelRoute(it, atlas, AppLanguage.En).hasNearView }
         val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
         compose.waitsForMaps()
         compose.setContent {
@@ -101,15 +106,20 @@ class ParcelMapScreenshotTest {
         compose.screenshot("map_nearby_dark")
     }
 
-    /** A third of a second into the flight from the journey to close by, lifted out over the way. */
+    /**
+     * About halfway through the flight of a parcel that came from Japan, from its journey to close by: the globe
+     * turns toward Zürich as it closes in, Pip and the faint names waiting for it to land. It isn't lifted out: the
+     * way between the two views' middles is shorter than the window, and `GlobeCamera.flight` lifts only a longer one,
+     * as from a map moved far away by hand.
+     */
     @Test
-    fun onItsWay() {
-        openMap()
+    fun onItsWayAcrossTheWorld() {
+        openMap(name = "Matcha ritual")
         choose("Journey")
         compose.mainClock.autoAdvance = false
         compose.onNode(hasText("Nearby") and hasClickAction()).performClick()
-        repeat(20) { compose.mainClock.advanceTimeByFrame() }
-        compose.screenshot("map_flight_light")
+        repeat(48) { compose.mainClock.advanceTimeByFrame() }
+        compose.screenshot("map_flight_world_light")
         compose.mainClock.autoAdvance = true
     }
 

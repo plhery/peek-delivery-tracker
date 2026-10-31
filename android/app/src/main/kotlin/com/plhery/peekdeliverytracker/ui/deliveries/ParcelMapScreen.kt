@@ -101,7 +101,8 @@ import kotlin.math.max
  * The map turns under a finger and zooms under two (A-G12), and flies between the views (A-AN46). Once moved, neither
  * view is selected, and either brings it back; the view shown brings it back too (A-G14). TalkBack hears the map as
  * one image named by its ends, as VoiceOver does, with nothing to adjust, reaches it through `mapFocus`, and hears the
- * views as a group, "Map view" as it comes to them, the one shown selected.
+ * views as a group, "Map view" as it comes to them, the one shown selected. The detail close up (rivers, roads and
+ * towns from the detail tiles) comes with its step.
  */
 @Composable
 internal fun ParcelMapScreen(

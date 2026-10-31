@@ -25,18 +25,28 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.pinch
 import androidx.compose.ui.test.swipe
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.EdgeInsets
 import com.plhery.peekdeliverytracker.core.GeoPoint
 import com.plhery.peekdeliverytracker.core.GlobeCamera
+import com.plhery.peekdeliverytracker.core.GlobeFlight
+import com.plhery.peekdeliverytracker.core.GlobeZoomArea
 import com.plhery.peekdeliverytracker.core.ParcelRoute
+import com.plhery.peekdeliverytracker.core.Size
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.map.LocalMapCameraWatch
 import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
 import kotlin.math.PI
+import kotlin.math.abs
+import kotlin.math.ceil
+import kotlin.math.max
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -320,14 +330,14 @@ class ParcelMapTest {
         assertEquals(start.center, zoomed.center)
         view(shown).assertIsNotSelected()
         view(other).assertIsNotSelected()
-        // Close in, the globe no longer drifts back: the point between the fingers stays under them.
-        val bounds = map.getBoundsInRoot()
-        val middle = (bounds.bottom - bounds.top).value * 0.3
-        val x = (bounds.right - bounds.left).value / 2.0
-        if (zoomed.scale > 2.5 * 220) {
-            assertEquals(x + (start.offset.x - x) * 2, zoomed.offset.x, 1e-3)
-            assertEquals(middle + (start.offset.y - middle) * 2, zoomed.offset.y, 1e-3)
-        }
+        // Close in, past two and a half times the whole globe, it no longer drifts back: the point between the
+        // fingers stays under them.
+        val (size, area) = zoomArea()
+        assertTrue("Zoomed to ${zoomed.scale}", zoomed.scale >= area.viewport / 2 * 2.5)
+        val x = size.width / 2
+        val y = size.height * 0.3
+        assertEquals(x + (start.offset.x - x) * 2, zoomed.offset.x, 1e-3)
+        assertEquals(y + (start.offset.y - y) * 2, zoomed.offset.y, 1e-3)
 
         // Each pinch 35 times: twice reaches a town 20 km across, and a third goes no closer.
         pinch(from = 20f, to = 700f)
@@ -335,36 +345,87 @@ class ParcelMapTest {
         val closest = opened.last().scale
         pinch(from = 20f, to = 700f)
         assertEquals(closest, opened.last().scale, 0.0)
-        // And out again, to nine tenths of the whole globe and no further.
+        // And out again, to nine tenths of the whole globe and no further, drifted back to the middle of what the
+        // close button and the summary leave of the view.
         pinch(from = 700f, to = 20f)
         pinch(from = 700f, to = 20f)
-        val farthest = opened.last().scale
+        val farthest = opened.last()
         pinch(from = 700f, to = 20f)
-        assertEquals(farthest, opened.last().scale, 0.0)
-        assertEquals(GeoPoint.EARTH_KILOMETRES / 20 / 0.45, closest / farthest, 1e-6)
+        assertEquals(farthest.scale, opened.last().scale, 0.0)
+        assertEquals(area.viewport / 2 * 0.9, farthest.scale, 1e-9)
+        assertEquals(area.middle.x, farthest.offset.x, 1e-9)
+        assertEquals(area.middle.y, farthest.offset.y, 1e-9)
+        assertEquals(GeoPoint.EARTH_KILOMETRES / 20 / 0.45, closest / farthest.scale, 1e-6)
     }
 
-    /** The cameras the opened map was composed with, frame by frame, as `other` view is chosen, and where it began. */
+    /**
+     * The opened map's size, and where zooming settles its globe once it no longer fills the view and how much view
+     * there is: what the system's bars, the close button and the summary leave, as the map screen works it out.
+     */
+    private fun zoomArea(): Pair<Size, GlobeZoomArea> {
+        val density = compose.density.density.toDouble()
+        val decor = compose.activity.window.decorView
+        // Compose's `safeDrawing`.
+        val types = WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout() or WindowInsetsCompat.Type.ime()
+        val system = ViewCompat.getRootWindowInsets(decor)?.getInsets(types) ?: Insets.NONE
+        val safe = EdgeInsets(system.top / density, system.left / density, system.bottom / density, system.right / density)
+        val shown = map.fetchSemanticsNode().size
+        val size = Size(shown.width / density, shown.height / density)
+        val bar = compose.onNodeWithTag(MAP_BAR).fetchSemanticsNode().size.height / density
+        val layout = MapCoverLayout.of(size.width, size.height, safe, bar, null)
+        return size to GlobeZoomArea.of(size, layout.insets)
+    }
+
+    /**
+     * Where the opened map looked from as `other` view is chosen: where it began, the camera it showed at each frame
+     * after, and where it came to rest.
+     */
     private fun flight(reduceMotion: Boolean): Triple<GlobeCamera, List<GlobeCamera>, GlobeCamera> {
         openMap(reduceMotion = reduceMotion)
         val (_, other) = views()
         val start = opened.last()
         compose.mainClock.autoAdvance = false
-        val from = opened.size
         view(other).performClick()
-        repeat(120) { compose.mainClock.advanceTimeByFrame() }
+        val frames = List(120) {
+            compose.mainClock.advanceTimeByFrame()
+            compose.waitForIdle()
+            opened.last()
+        }
         compose.mainClock.autoAdvance = true
         settle()
         view(other).assertIsSelected()
-        return Triple(start, opened.drop(from), opened.last())
+        return Triple(start, frames, opened.last())
     }
+
+    /** Whether `camera` is `expected`, but for the last digits the arithmetic leaves. */
+    private fun near(expected: GlobeCamera, camera: GlobeCamera): Boolean =
+        abs(camera.center.latitude - expected.center.latitude) < 1e-9 &&
+            abs(camera.center.longitude - expected.center.longitude) < 1e-9 &&
+            abs(camera.scale / expected.scale - 1) < 1e-9 &&
+            abs(camera.offset.x - expected.offset.x) < 1e-6 &&
+            abs(camera.offset.y - expected.offset.y) < 1e-6
+
+    private fun assertNear(message: String, expected: GlobeCamera, camera: GlobeCamera) =
+        assertTrue("$message: $camera, not $expected", near(expected, camera))
 
     @Test
     fun aViewFliesTheMapThereAlongTheWay() {
         val (start, frames, end) = flight(reduceMotion = false)
         assertNotEquals(start, end)
-        val between = frames.filter { it != start && it != end }.distinct()
-        assertTrue("Cameras on the way: ${between.size}", between.size >= 20)
+        val (size, _) = zoomArea()
+        val flight = GlobeFlight(start, end, max(size.width, size.height))
+        // The flight's clock starts at the frame that first shows it, where the map began: then each frame shows the
+        // camera that far through its time, along its path, eased in and out.
+        val off = frames.indexOfFirst { !near(start, it) }
+        assertTrue(off >= 0)
+        val landing = ceil(flight.duration * 1e9 / FRAME_NANOS).toInt()
+        for (k in 1..landing) {
+            assertNear("Frame $k of $landing", flight.camera(k * FRAME_NANOS / 1e9 / flight.duration), frames[off + k - 1])
+        }
+        // There as its time is up and no sooner, then at rest.
+        assertFalse(near(end, frames[off + landing - 2]))
+        assertNear("Landed", end, frames[off + landing - 1])
+        assertTrue(frames.drop(off + landing).all { it == end })
     }
 
     @Test
@@ -439,3 +500,6 @@ class ParcelMapTest {
         assertFalse(exists(MAP_COVER))
     }
 }
+
+/** The test clock's frame, in nanoseconds. */
+private const val FRAME_NANOS = 16_000_000L

@@ -69409,6 +69409,30 @@
     ]
   },
   {
+    "input": "AQUAA0351151225YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "aquiline"
+    ]
+  },
+  {
+    "input": "AQUAA6398680926YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "aquiline"
+    ]
+  },
+  {
+    "input": "AQUAA9126450326YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "aquiline"
+    ]
+  },
+  {
     "input": "ARK12543246AU",
     "carrier": "unknown",
     "confidence": "none",
@@ -98929,6 +98953,14 @@
     ]
   },
   {
+    "input": "WHISU000121401",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "ukp-worldwide"
+    ]
+  },
+  {
     "input": "WIN40910152985",
     "carrier": "unknown",
     "confidence": "none",
@@ -100703,6 +100735,14 @@
     ],
     "asked": [
       "tnt-it"
+    ]
+  },
+  {
+    "input": "ZLXHC0100069418YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "wiio"
     ]
   },
   {

@@ -1,7 +1,9 @@
 package com.plhery.peekdeliverytracker.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
+import android.view.MotionEvent
 import android.view.View
 import android.webkit.WebResourceRequest
 import androidx.activity.ComponentActivity
@@ -26,6 +28,7 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
@@ -71,9 +74,10 @@ import org.robolectric.annotation.GraphicsMode
  * The browser check's sheet (B-S69, B-D41, B-L09) in the app's window, over the tabs and over Add, on pages that stand
  * in for the WebView and hear what a real one would tell its client (platform/WebViewTurnstilePages.kt's
  * [TurnstileClient]): the token, an error, messages to ignore, a load that fails and a renderer gone; Cancel, the sheet
- * sent away and the caller's cancellation; the timeout; one check at a time, an https page, a WebView able to hold it
- * and a window in front; a window made again and one gone for good; TalkBack; and Add saving through it. Each page is
- * torn down once. On a made-up service.
+ * sent away (the back over the tabs and over Add, a drag on the bar or on the page at its top) and the caller's
+ * cancellation; the timeout; one check at a time, an https page, a WebView able to hold it and a window in front; a
+ * window made again and one gone for good; the page under the bar; TalkBack; and Add saving through it. Each page is torn
+ * down once. On a made-up service.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -271,6 +275,99 @@ class TurnstileSheetTest {
         assertEquals(3, pages.made.size)
     }
 
+    /** A drag down on the page, from `from` below its top, 600 in all at 60 a frame. */
+    private fun dragOnThePage(from: Float = 100f) {
+        val page = compose.onNodeWithTag(TURNSTILE_PAGE).getUnclippedBoundsInRoot()
+        compose.onRoot().performTouchInput {
+            down(Offset(center.x, page.top.toPx() + from))
+            repeat(10) { moveBy(Offset(0f, 60f)) }
+            up()
+        }
+    }
+
+    @Test
+    fun aDragDownOnThePageWhileItCannotScrollUpTakesTheSheetDownAsCancelDoes() {
+        show()
+        val asked = ask()
+        settle()
+        dragOnThePage()
+        settle()
+        assertCancelled(asked)
+        assertGone()
+    }
+
+    @Test
+    fun aPageScrolledDownScrollsUpFirstUnderADragDownAndTheSheetStays() {
+        show()
+        val asked = ask()
+        settle()
+        val view = pages.made.single().view
+        compose.runOnUiThread { view.scrollY = 2_000 }
+        val panel = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot()
+        dragOnThePage()
+        settle()
+        assertFalse(asked.isCompleted)
+        // 600 up, the finger's way.
+        assertEquals(1_400, view.scrollY)
+        assertEquals(panel, compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot())
+
+        // At its top, the next one takes the sheet down.
+        compose.runOnUiThread { view.scrollY = 0 }
+        dragOnThePage()
+        settle()
+        assertCancelled(asked)
+        assertGone()
+    }
+
+    @Test
+    fun thePageLiesUnderTheBarsRowNotUnderTheBar() {
+        show()
+        ask()
+        settle()
+        val panel = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot()
+        val cancel = compose.onNodeWithTag(TURNSTILE_CANCEL).getUnclippedBoundsInRoot()
+        val page = compose.onNodeWithTag(TURNSTILE_PAGE).getUnclippedBoundsInRoot()
+        assertTrue("$page under $cancel", page.top >= cancel.bottom)
+        // The bar's row: 19 under the sheet's top, 44 tall.
+        assertEquals((panel.top + 63.dp).value, page.top.value, 0.5f)
+        assertEquals(panel.bottom.value, page.bottom.value, 0.5f)
+    }
+
+    @Test
+    fun overAddTheBackSendsTheSheetAwayAsCancelDoesAndLeavesAddUp() {
+        show()
+        saveFromAdd()
+        assertTrue(exists(TURNSTILE_PAGE))
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        settle()
+        assertGone()
+        assertAddUpWithoutAnError()
+    }
+
+    @Test
+    fun overAddInAWindowMadeAgainTheBackSendsTheSheetAwayAsCancelDoesAndLeavesAddUp() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        saveFromAdd()
+        assertTrue(exists(TURNSTILE_PAGE))
+        recreation.recreate()
+        settle()
+        assertEquals(2, pages.made.size)
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        settle()
+        assertGone()
+        assertAddUpWithoutAnError()
+    }
+
+    /** Add still up after the check it asked for was cancelled, not saving, with no error and nothing added. */
+    private fun assertAddUpWithoutAnError() {
+        assertNotNull(deliveries.addition)
+        assertTrue(exists(ADD_SAVE))
+        assertFalse(exists(ADD_ERROR))
+        compose.onNodeWithTag(ADD_SAVE).assertIsEnabled()
+        assertTrue(source.additions.isEmpty())
+    }
+
     @Test
     fun theCallerCancelledTakesTheSheetAway() {
         show()
@@ -457,22 +554,25 @@ class TurnstileSheetTest {
     }
 }
 
-/** A main frame's request, or a frame's, as the WebView hands its client one. */
-internal fun request(url: String, mainFrame: Boolean): WebResourceRequest = object : WebResourceRequest {
+/** A main frame's request, or a frame's, as the WebView hands its client one: a redirect where `redirect`. */
+internal fun request(url: String, mainFrame: Boolean, redirect: Boolean = false, method: String = "GET"): WebResourceRequest = object : WebResourceRequest {
     override fun getUrl(): Uri = Uri.parse(url)
 
     override fun isForMainFrame(): Boolean = mainFrame
 
-    override fun isRedirect(): Boolean = false
+    override fun isRedirect(): Boolean = redirect
 
     override fun hasGesture(): Boolean = false
 
-    override fun getMethod(): String = "GET"
+    override fun getMethod(): String = method
 
     override fun getRequestHeaders(): Map<String, String> = emptyMap()
 }
 
-/** Pages a test holds, each a plain view whose WebView client the test speaks for; or none, as a device without one. */
+/**
+ * Pages a test holds, each a view that takes touches as a WebView does ([TouchedPage]) unless drawn otherwise, whose
+ * WebView client the test speaks for; or none, as a device without one.
+ */
 internal class FakePages(private val draw: ((Context, Boolean) -> View)? = null) : TurnstilePages {
     var supported = true
     var fails = false
@@ -482,7 +582,7 @@ internal class FakePages(private val draw: ((Context, Boolean) -> View)? = null)
 
     override fun page(context: Context, url: String, dark: Boolean, background: Int, events: TurnstileEvents): TurnstilePage {
         if (fails) throw IllegalStateException("No WebView on this device")
-        return FakePage(draw?.invoke(context, dark) ?: View(context), url, dark, events).also { made += it }
+        return FakePage(draw?.invoke(context, dark) ?: TouchedPage(context), url, dark, events).also { made += it }
     }
 }
 
@@ -504,5 +604,24 @@ internal class FakePage(override val view: View, val url: String, val dark: Bool
     /** A message posted, from the page's main frame unless said otherwise, as the message listener hears it. */
     fun post(data: String, origin: String = "https://peek.example", mainFrame: Boolean = true, frameUrl: String? = url) {
         client.message(mainFrame, Uri.parse(origin), frameUrl, data)
+    }
+}
+
+/** A page's view as a WebView takes the touches on it: every one, scrolling the page up with the finger while it is scrolled down. */
+internal class TouchedPage(context: Context) : View(context) {
+    private var lastY = 0f
+
+    override fun canScrollVertically(direction: Int): Boolean = direction > 0 || scrollY > 0
+
+    @SuppressLint("ClickableViewAccessibility") // A stand-in for the WebView, which takes its own touches.
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> lastY = event.rawY
+            MotionEvent.ACTION_MOVE -> {
+                scrollY = (scrollY - (event.rawY - lastY).toInt()).coerceAtLeast(0)
+                lastY = event.rawY
+            }
+        }
+        return true
     }
 }

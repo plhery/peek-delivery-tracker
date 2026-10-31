@@ -271,12 +271,15 @@ internal fun InlineBar(title: String, leading: (@Composable () -> Unit)?, modifi
     }
 }
 
-/** Cancel at an [InlineBar]'s leading end, on its glass capsule, as the bar's `.cancellationAction` stands. */
+/**
+ * Cancel at an [InlineBar]'s leading end, on its glass capsule, as the bar's `.cancellationAction` stands, its glass
+ * taking on [behind], what the bar stands on: the sheet's grouped ground unless said otherwise.
+ */
 @Composable
-internal fun BarCancel(cancel: () -> Unit, tag: String) {
+internal fun BarCancel(cancel: () -> Unit, tag: String, behind: Color = PeekTheme.colors.groupedBackground) {
     val colors = PeekTheme.colors
     ProvideDynamicTypeSize(DynamicTypeSize.Large) {
-        GlassSurface(CapsuleShape, Modifier.heightIn(min = BAR_ROW), backdrop = null, behind = colors.groupedBackground) {
+        GlassSurface(CapsuleShape, Modifier.heightIn(min = BAR_ROW), backdrop = null, behind = behind) {
             Box(
                 Modifier
                     .heightIn(min = BAR_ROW)

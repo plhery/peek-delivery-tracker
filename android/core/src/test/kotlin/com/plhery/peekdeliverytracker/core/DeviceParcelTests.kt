@@ -660,6 +660,57 @@ class DeviceParcelTests {
         assertEquals(emptyList<GivenPostcode>(), memory.entries)
     }
 
+    /**
+     * Add's save on this phone through a browser check the reader closes, as AddParcelView's `save()` takes it (`catch is
+     * CancellationError`: saving ends, with no error): the presenter's CancellationException comes up through
+     * NativeVerification.send, the device's lookup and the store's add as it is, never as an error with a message, and
+     * nothing is added or exchanged.
+     */
+    @Test
+    fun aBrowserCheckClosedEndsAnAddOnThisPhoneAsACancellationWithNoErrorAndNothingAdded() = runTest {
+        val transport = RecordingTransport { request ->
+            when (request.method to request.path) {
+                "GET" to "/api/public/native/verification" -> jsonResponse(200, """{"appAttestAppId":null,"turnstile":true}""")
+                "POST" to "/api/public/parcels" -> jsonResponse(403, """{"error":"Please verify"}""", mapOf("X-Lookup-Verification" to "required"))
+                else -> jsonResponse(404)
+            }
+        }
+        val presented = mutableListOf<String>()
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { url ->
+                presented += url
+                throw CancellationException("The browser check was cancelled.")
+            },
+            emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val storage = Memory()
+        val device = DeviceParcels(
+            DeviceParcelClient.api(postcodeConfiguration, transport, verification, region = { Locale.UK }), storage,
+            PostcodeMemory(MemoryDefaults()), backgroundScope, region = { Locale.UK }, language = { AppLanguage.En },
+        )
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        assertTrue(store.isGuest)
+
+        val ended = try {
+            store.add(trackingNumber = "TESTPARCEL123789", label = "Desk lamp", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+            null
+        } catch (error: CancellationException) {
+            error
+        }
+
+        assertEquals("The browser check was cancelled.", ended?.message)
+        assertEquals(listOf("https://postcodes.test/api/public/native/turnstile?language=en"), presented)
+        assertNull(store.errorMessage)
+        assertTrue(store.parcels.isEmpty())
+        assertTrue(storage.parcels.isEmpty())
+        assertFalse(transport.requests.any { it.path == "/api/public/verification" })
+    }
+
     @Test
     fun aForgottenPostcodeLeavesTheFieldUntilItsDetailsArePreparedAgain() {
         var fill = PostcodeFill()

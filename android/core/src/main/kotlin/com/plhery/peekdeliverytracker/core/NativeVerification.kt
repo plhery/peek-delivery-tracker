@@ -447,10 +447,13 @@ class NativeVerification(
  *   gives `answer` its `sourceOrigin`'s scheme and host, `isMainFrame` and `body(message.data)`, and for the frame's
  *   URL, which Android does not report, `webView.url` read there on the main thread: the main frame's document, the
  *   only frame whose messages count. `answer` ignores a message whose frame URL is nil or has a path not the page's.
- * - Navigation: `shouldOverrideUrlLoading` lets the main frame go only where `allows(page, url, true)`. It does not see
- *   a frame's own loads (an iframe's first, for one), so `shouldInterceptRequest` answers every request not for the
- *   main frame that `allows(page, url, false)` refuses with an empty 403: what the page and the check load comes from
- *   challenges.cloudflare.com. Multiple windows stay off.
+ * - Navigation: `shouldOverrideUrlLoading` lets the main frame go only where `allows(page, url, true)`; a redirect of the
+ *   main frame it refuses fails the check at once, as WebKit fails the navigation (`didFailProvisionalNavigation`),
+ *   where the WebView would report nothing. It sees neither a frame's own loads (an iframe's first, for one) nor a
+ *   navigation by POST, so `shouldInterceptRequest` answers a request not for the main frame that `allows(page, url,
+ *   false)` refuses with an empty 403 (what the page and the check load comes from challenges.cloudflare.com), and one
+ *   for the main frame that `allows(page, url, true)` refuses with an empty 204, which keeps the page as `.cancel` does.
+ *   Multiple windows stay off.
  */
 object NativeTurnstilePresenter {
     const val timeoutSeconds = 90L

@@ -126,7 +126,7 @@ class TurnstileSheetScreenshotTest {
 
 /**
  * The check's page as it stands while its widget asks for a tap, drawn locally: the canvas, white or the dark one, and
- * a 300 × 65 widget centred in its top 70%.
+ * a 300 × 65 widget centred in its top 70%, the page's 70vh in a WebView laid out under the bar.
  */
 private class PlaceholderPage(context: Context, private val dark: Boolean) : View(context) {
     private val scale = context.resources.displayMetrics.density

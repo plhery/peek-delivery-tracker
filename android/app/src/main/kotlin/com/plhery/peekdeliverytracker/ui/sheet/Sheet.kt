@@ -76,8 +76,10 @@ import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.GlassFace
 import com.plhery.peekdeliverytracker.ui.theme.LargeGlassSurface
+import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.materialBackdropLayer
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
@@ -476,17 +478,6 @@ private fun SheetLayer(
             }
         }
 
-        val dim = if (colors.dark) DIM_DARK else DIM_LIGHT
-        // The dim, which a tap dismisses the sheet from.
-        Box(
-            Modifier
-                .fillMaxSize()
-                .graphicsLayer { alpha = presence() }
-                .background(Color.Black.copy(alpha = dim))
-                .pointerInput(Unit) { detectTapGestures { if (showing && canDismiss) dismiss() } }
-                .clearAndSetSemantics {},
-        )
-
         val connection = remember(motion) {
             object : NestedScrollConnection {
                 override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
@@ -526,82 +517,97 @@ private fun SheetLayer(
             .pointerInput(Unit) { detectTapGestures { } }
             .then(hidden)
 
-        if (regular) {
-            val shape = ContinuousRoundedShape(FORM_RADIUS)
-            val ground = remember(colors) { @Composable { bounds: Modifier -> Box(bounds.background(colors.groupedBackground)) } }
+        // The dim and the sheet: a layer over the tab, which the glass of an alert over the sheet blurs with the tab.
+        val layer = if (backdrop != null) Modifier.materialBackdropLayer(backdrop) else Modifier
+        val dim = if (colors.dark) DIM_DARK else DIM_LIGHT
+        Box(Modifier.fillMaxSize().then(layer)) {
+            // The dim, which a tap dismisses the sheet from.
             Box(
                 Modifier
-                    .placedAt({ Size(formWidth, formHeight) }) { Offset((width - formWidth) / 2, motion.top + backOffset()) }
-                    .testTag(SHEET_PANEL)
-                    .then(modifier)
-                    .dropShadow(shape, SHEET_SHADOW)
-                    .clip(shape)
-                    .background(colors.groupedBackground)
-                    .then(sheetModifier),
-            ) {
-                CompositionLocalProvider(
-                    LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus,
-                    LocalSheetInsets provides SheetInsets.sheet(FORM_WIDTH, reachesBottom = false), LocalSheetGround provides ground,
-                ) {
-                    Grabber(Modifier.align(Alignment.TopCenter))
-                    if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
-                }
-            }
-        } else {
-            val floatingRadius = max(displayRadius - inset, with(density) { TOP_RADIUS.toPx() })
-            val shape = remember(floatingRadius, attachment) { SheetShape(floatingRadius, attachment) }
-            val glassDim = remember(presence, dim) { { dim * presence() } }
-            val scale = remember(geometry, attachment) { { (width - 2 * inset * (1 - attachment())) / width } }
-            // Drawn again in what is scaled, it is scaled back, so that its glass blurs the window where it is.
-            val ground = remember(scale, attachment, backdrop, glassDim, colors) {
-                @Composable { bounds: Modifier ->
-                    Box(bounds.scaledFrom { 1 / scale() }) {
-                        FloatingGlass(RectangleShape, backdrop, attachment, Modifier.fillMaxSize(), glassDim)
-                        Box(Modifier.fillMaxSize().drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) })
-                    }
-                }
-            }
-            Box(
-                Modifier
-                    .placedAt({ geometry.panelSize(motion.top, attachment()) }) {
-                        // Down to its lowest rest it grows; past it, and down with the back gesture, it moves.
-                        val attach = attachment()
-                        val layoutTop = min(motion.top, lowest)
-                        val panelHeight = geometry.panelSize(motion.top, attach).height
-                        Offset(inset * (1 - attach), layoutTop + (motion.top - layoutTop + backProgress * BACK_TRAVEL * panelHeight))
-                    }
-                    .testTag(SHEET_PANEL)
-                    .then(modifier)
-                    .dropShadow(shape, SHEET_SHADOW)
-                    .then(sheetModifier),
-            ) {
-                // The glass it floats on, giving way to the opaque ground as it attaches.
-                FloatingGlass(shape, backdrop, attachment, Modifier.matchParentSize(), glassDim)
+                    .fillMaxSize()
+                    .graphicsLayer { alpha = presence() }
+                    .background(Color.Black.copy(alpha = dim))
+                    .pointerInput(Unit) { detectTapGestures { if (showing && canDismiss) dismiss() } }
+                    .clearAndSetSemantics {},
+            )
+            if (regular) {
+                val shape = ContinuousRoundedShape(FORM_RADIUS)
+                val ground = remember(colors) { @Composable { bounds: Modifier -> Box(bounds.background(colors.groupedBackground)) } }
                 Box(
                     Modifier
-                        .matchParentSize()
+                        .placedAt({ Size(formWidth, formHeight) }) { Offset((width - formWidth) / 2, motion.top + backOffset()) }
+                        .testTag(SHEET_PANEL)
+                        .then(modifier)
+                        .dropShadow(shape, SHEET_SHADOW)
                         .clip(shape)
-                        .drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) },
-                )
-                Box(Modifier.matchParentSize().clip(shape)) {
+                        .background(colors.groupedBackground)
+                        .then(sheetModifier),
+                ) {
                     CompositionLocalProvider(
-                        LocalSheetAttachment provides attachment, LocalSheetMenus provides menus, LocalSheetInsets provides insets,
-                        LocalSheetGround provides ground,
+                        LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus,
+                        LocalSheetInsets provides SheetInsets.sheet(FORM_WIDTH, reachesBottom = false), LocalSheetGround provides ground,
                     ) {
-                        // Floating, the sheet is its attached self made smaller to its width, as UIKit draws it: laid
-                        // out across the whole window, and scaled into the inset panel.
-                        Box(
-                            Modifier
-                                .fillMaxSize()
-                                .scaledFrom(scale)
-                                .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier),
-                        ) { content() }
                         Grabber(Modifier.align(Alignment.TopCenter))
+                        if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
+                    }
+                }
+            } else {
+                val floatingRadius = max(displayRadius - inset, with(density) { TOP_RADIUS.toPx() })
+                val shape = remember(floatingRadius, attachment) { SheetShape(floatingRadius, attachment) }
+                val glassDim = remember(presence, dim) { { dim * presence() } }
+                val scale = remember(geometry, attachment) { { (width - 2 * inset * (1 - attachment())) / width } }
+                // Drawn again in what is scaled, it is scaled back, so that its glass blurs the window where it is.
+                val ground = remember(scale, attachment, backdrop, glassDim, colors) {
+                    @Composable { bounds: Modifier ->
+                        Box(bounds.scaledFrom { 1 / scale() }) {
+                            FloatingGlass(RectangleShape, backdrop, attachment, Modifier.fillMaxSize(), glassDim)
+                            Box(Modifier.fillMaxSize().drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) })
+                        }
+                    }
+                }
+                Box(
+                    Modifier
+                        .placedAt({ geometry.panelSize(motion.top, attachment()) }) {
+                            // Down to its lowest rest it grows; past it, and down with the back gesture, it moves.
+                            val attach = attachment()
+                            val layoutTop = min(motion.top, lowest)
+                            val panelHeight = geometry.panelSize(motion.top, attach).height
+                            Offset(inset * (1 - attach), layoutTop + (motion.top - layoutTop + backProgress * BACK_TRAVEL * panelHeight))
+                        }
+                        .testTag(SHEET_PANEL)
+                        .then(modifier)
+                        .dropShadow(shape, SHEET_SHADOW)
+                        .then(sheetModifier),
+                ) {
+                    // The glass it floats on, giving way to the opaque ground as it attaches.
+                    FloatingGlass(shape, backdrop, attachment, Modifier.matchParentSize(), glassDim)
+                    Box(
+                        Modifier
+                            .matchParentSize()
+                            .clip(shape)
+                            .drawBehind { drawRect(colors.groupedBackground, alpha = attachment()) },
+                    )
+                    Box(Modifier.matchParentSize().clip(shape)) {
+                        CompositionLocalProvider(
+                            LocalSheetAttachment provides attachment, LocalSheetMenus provides menus, LocalSheetInsets provides insets,
+                            LocalSheetGround provides ground,
+                        ) {
+                            // Floating, the sheet is its attached self made smaller to its width, as UIKit draws it: laid
+                            // out across the whole window, and scaled into the inset panel.
+                            Box(
+                                Modifier
+                                    .fillMaxSize()
+                                    .scaledFrom(scale)
+                                    .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier),
+                            ) { content() }
+                            Grabber(Modifier.align(Alignment.TopCenter))
+                        }
                     }
                 }
             }
         }
-        menus.content?.invoke()
+        val above = remember(backdrop) { backdrop?.layered() }
+        CompositionLocalProvider(LocalMaterialBackdrop provides above) { menus.content?.invoke() }
     }
 }
 

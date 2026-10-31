@@ -330,7 +330,8 @@ internal fun CardMenuHost(state: DeliveriesState) {
  * [OverlayLayer] for a layer whose glass stands straight over the tab, a menu's or an alert's: the glass in it blurs
  * what the tab draws ([TabOverlay.backdrop]), as the iPhone's menus and alerts show the screen through theirs. The
  * shell draws its layers outside the tab, where no backdrop reaches them, and glass with none is drawn solid. A sheet
- * or a popover hands its own glass the backdrop; what stands on that glass blurs nothing behind it.
+ * or a popover hands its own glass the backdrop, and its menu layer the backdrop with the sheet over it
+ * ([MaterialBackdrop.layered]); what stands on its glass blurs nothing behind it.
  */
 @Composable
 internal fun GlassOverlayLayer(host: TabOverlay, key: Any, content: (@Composable () -> Unit)?) = OverlayLayer(

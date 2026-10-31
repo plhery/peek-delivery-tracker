@@ -60,6 +60,7 @@ import androidx.compose.ui.unit.toIntSize
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import dev.chrisbanes.haze.HazeInput
+import dev.chrisbanes.haze.HazeSourceSelection
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.blur.HazeBlurStyle
 import dev.chrisbanes.haze.blur.HazeColorEffect
@@ -188,9 +189,22 @@ enum class PeekMaterial(private val light: MaterialRecipe, private val dark: Mat
     fun recipe(dark: Boolean): MaterialRecipe = if (dark) this.dark else light
 }
 
-/** What the materials on a screen blur: the content marked with [materialBackdrop]. */
+/**
+ * What the materials on a screen blur: the content marked with [materialBackdrop], and the first `layers` − 1 layers
+ * drawn over it that [materialBackdropLayer] marks, each over the last.
+ */
 @Stable
-class MaterialBackdrop internal constructor(internal val haze: HazeState)
+class MaterialBackdrop internal constructor(internal val haze: HazeState, private val layers: Int = 1) {
+    /** What a material blurs, the layers under this backdrop's top; within a layer, those under that layer. */
+    internal val sources = HazeInput.Sources(haze, HazeSourceSelection.Behind.where { it.zIndex < layers })
+    internal val input = HazeInput.Backdrop(sources)
+
+    /** Where [materialBackdropLayer] marks the layer drawn over this backdrop's top. */
+    internal val nextLayer: Float get() = layers.toFloat()
+
+    /** What stands over the layer drawn over this backdrop's top blurs: this, and that layer over it. */
+    fun layered(): MaterialBackdrop = MaterialBackdrop(haze, layers + 1)
+}
 
 @Composable
 fun rememberMaterialBackdrop(): MaterialBackdrop {
@@ -200,6 +214,13 @@ fun rememberMaterialBackdrop(): MaterialBackdrop {
 
 /** Marks the content the materials in front of it blur, as SwiftUI's blur whatever lies behind them. */
 fun Modifier.materialBackdrop(backdrop: MaterialBackdrop): Modifier = hazeSource(backdrop.haze)
+
+/**
+ * Marks a layer drawn over [backdrop]'s content, a sheet over the tab: the materials in it go on blurring what lies
+ * under it, and what stands over it, given [MaterialBackdrop.layered], blurs it too, as an alert over a sheet shows
+ * the sheet and the screen through its glass on the iPhone.
+ */
+fun Modifier.materialBackdropLayer(backdrop: MaterialBackdrop): Modifier = hazeSource(backdrop.haze, zIndex = backdrop.nextLayer)
 
 /** The backdrop of the screen being drawn, for the materials inside it. */
 val LocalMaterialBackdrop = staticCompositionLocalOf<MaterialBackdrop?> { null }
@@ -234,7 +255,7 @@ fun MaterialSurface(
             }
             // Only what lies within the shape is blurred, its edge pixels held at the edge. Haze 2.0.1's wider capture
             // (expandLayerBounds) drew the blur shifted by its margin in Robolectric's renderer.
-            Box(fill.hazeBlur(HazeInput.Backdrop(backdrop.haze), style, expandLayerBounds = false))
+            Box(fill.hazeBlur(backdrop.input, style, expandLayerBounds = false))
         }
         content()
     }
@@ -443,7 +464,7 @@ fun GlassSurface(
                 // The face reaches GLASS_MARGIN past the shape; the drawing clips it to the shape. It blurs the marked
                 // content: a backdrop input samples what lies behind where it is drawn, and Android 12 draws the face
                 // again for the lens.
-                Box(Modifier.pastTheEdge().hazeBlur(HazeInput.Sources(blurred.haze), style, expandLayerBounds = false))
+                Box(Modifier.pastTheEdge().hazeBlur(blurred.sources, style, expandLayerBounds = false))
             }
         }
         // The glass takes the touches within its shape, as a SwiftUI view does where it draws: a tap on a toast's words
@@ -477,7 +498,7 @@ fun LargeGlassSurface(
         val style = remember(recipe, behind) {
             hazeStyle(gaussianBlurRadius(LARGE_GLASS_BLUR.dp), recipe.colorMatrix, recipe.over(behind, LARGE_GLASS_SIDE), behind)
         }
-        Box(fill.hazeBlur(HazeInput.Backdrop(blurred.haze), style, expandLayerBounds = false))
+        Box(fill.hazeBlur(blurred.input, style, expandLayerBounds = false))
     }
 }
 

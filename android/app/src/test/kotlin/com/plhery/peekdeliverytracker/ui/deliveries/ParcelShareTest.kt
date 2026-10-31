@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewRootForTest
@@ -639,6 +640,33 @@ class ParcelShareTest {
         back()
         assertFalse(exists(PARCEL_SHARE))
         assertTrue(exists(PAGE_CONTENT))
+    }
+
+    @Test
+    fun whileStoppingCloseAndStopWaitAtHalfStrength() {
+        show {
+            shareLinks[gift] = giftLink
+            shareStopping = CompletableDeferred()
+        }
+        openShare()
+        // The darkest of a button's ink, what it is drawn on included.
+        fun ink(tag: String): Float {
+            val pixels = node(tag).captureToImage().toPixelMap()
+            var darkest = 1f
+            for (x in 0 until pixels.width) for (y in 0 until pixels.height) darkest = minOf(darkest, pixels[x, y].luminance())
+            return darkest
+        }
+        val close = ink(PARCEL_SHARE_CLOSE)
+        val stop = ink(PARCEL_SHARE_STOP)
+        node(PARCEL_SHARE_STOP).performClick()
+        settle()
+        node(PARCEL_SHARE_STOP).assertIsNotEnabled()
+        assertTrue("Close at ${ink(PARCEL_SHARE_CLOSE)}, was $close", ink(PARCEL_SHARE_CLOSE) > close + 0.15f)
+        assertTrue("Stop at ${ink(PARCEL_SHARE_STOP)}, was $stop", ink(PARCEL_SHARE_STOP) > stop + 0.1f)
+        source.shareStopping?.complete(Unit)
+        settle()
+        assertFalse(exists(PARCEL_SHARE_STOP))
+        assertEquals(close, ink(PARCEL_SHARE_CLOSE), 0.02f)
     }
 
     @Test

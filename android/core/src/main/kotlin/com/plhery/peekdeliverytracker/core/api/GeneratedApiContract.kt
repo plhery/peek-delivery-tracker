@@ -1142,6 +1142,22 @@ value class CarrierId(val rawValue: String) {
         val SfydExpress = CarrierId("sfyd-express")
         val VipPosta = CarrierId("vip-posta")
         val Zippd = CarrierId("zippd")
+        val ThreeSixtyZebra = CarrierId("360zebra")
+        val AneLogistics = CarrierId("ane-logistics")
+        val Auexpress = CarrierId("auexpress")
+        val BqcLogistics = CarrierId("bqc-logistics")
+        val ChangjiangExpress = CarrierId("changjiang-express")
+        val ChinaRailwayExpress = CarrierId("china-railway-express")
+        val Elianpost = CarrierId("elianpost")
+        val Espeedpost = CarrierId("espeedpost")
+        val KingKongExpress = CarrierId("king-kong-express")
+        val Lhtex = CarrierId("lhtex")
+        val LibangLogistics = CarrierId("libang-logistics")
+        val RrsLogistics = CarrierId("rrs-logistics")
+        val Shipgce = CarrierId("shipgce")
+        val Showl = CarrierId("showl")
+        val Sumxpress = CarrierId("sumxpress")
+        val SuningLogistics = CarrierId("suning-logistics")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2228,6 +2244,22 @@ value class CarrierId(val rawValue: String) {
             SfydExpress,
             VipPosta,
             Zippd,
+            ThreeSixtyZebra,
+            AneLogistics,
+            Auexpress,
+            BqcLogistics,
+            ChangjiangExpress,
+            ChinaRailwayExpress,
+            Elianpost,
+            Espeedpost,
+            KingKongExpress,
+            Lhtex,
+            LibangLogistics,
+            RrsLogistics,
+            Shipgce,
+            Showl,
+            Sumxpress,
+            SuningLogistics,
         )
     }
 }

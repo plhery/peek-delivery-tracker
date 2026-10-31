@@ -41498,6 +41498,398 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.zippd.com/tracking/"
+    },
+    "360zebra": {
+      "displayName": "360 Zebra",
+      "aliases": [
+        "斑马物联网",
+        "斑马物流",
+        "360zebra"
+      ],
+      "countries": [
+        "CN",
+        "US"
+      ],
+      "color": "#014099",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.360zebra.com/web/tracking?trackingnbrs={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "360zebra.com",
+            "www.360zebra.com"
+          ],
+          "pathPattern": "^/web/tracking$",
+          "params": [
+            "trackingnbrs"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.360zebra.com/web/tracking"
+    },
+    "ane-logistics": {
+      "displayName": "ANE Logistics",
+      "aliases": [
+        "Ane Express",
+        "安能物流",
+        "安能快运",
+        "安能"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#fbb707",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.ane56.com/self-Check.html"
+    },
+    "auexpress": {
+      "displayName": "AuExpress",
+      "aliases": [
+        "澳邮",
+        "澳邮物流",
+        "AuExpress International Cargo",
+        "澳邮中国快运"
+      ],
+      "countries": [
+        "AU",
+        "CN"
+      ],
+      "color": "#ff6634",
+      "selectable": true,
+      "timezone": "Australia/Sydney",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.auexpress.com/tracking?OrderId={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "auexpress.com",
+            "www.auexpress.com"
+          ],
+          "pathPattern": "^/tracking$",
+          "params": [
+            "OrderId"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.auexpress.com/tracking"
+    },
+    "bqc-logistics": {
+      "displayName": "BQC Logistics",
+      "aliases": [
+        "百千诚物流",
+        "百千诚",
+        "BQC"
+      ],
+      "countries": [
+        "CN",
+        "HK"
+      ],
+      "color": "#008adf",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.1001000.com/newwl/unLogin/track"
+    },
+    "changjiang-express": {
+      "displayName": "ChangJiang Express",
+      "aliases": [
+        "长江国际速递",
+        "长江速递"
+      ],
+      "countries": [
+        "AU",
+        "CN"
+      ],
+      "color": "#0054a3",
+      "selectable": true,
+      "timezone": "Australia/Melbourne",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.changjiangexpress.com/Home/Query"
+    },
+    "china-railway-express": {
+      "displayName": "China Railway Express",
+      "aliases": [
+        "中铁快运",
+        "中铁快运股份有限公司",
+        "ZTKY",
+        "China Railway Express Co., Ltd."
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#00316c",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.95572.com/"
+    },
+    "elianpost": {
+      "displayName": "Elianpost",
+      "aliases": [
+        "易连供应链",
+        "Elian Supply Chain",
+        "广州易连供应链有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#00217f",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.elianpost.com/commonTracking"
+    },
+    "espeedpost": {
+      "displayName": "Espeedpost",
+      "aliases": [
+        "易速国际物流",
+        "易速国际物流（深圳）有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#ff0000",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.espeedpost.com/html-tracking.html?trackingnumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "espeedpost.com",
+            "www.espeedpost.com"
+          ],
+          "pathPattern": "^/html-tracking\\.html$",
+          "params": [
+            "trackingnumber"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.espeedpost.com/html-tracking.html"
+    },
+    "king-kong-express": {
+      "displayName": "King Kong Express",
+      "aliases": [
+        "京廣速遞",
+        "京广速递",
+        "KKE"
+      ],
+      "countries": [
+        "HK",
+        "CN"
+      ],
+      "color": "#21347c",
+      "selectable": true,
+      "timezone": "Asia/Hong_Kong",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.kke.com.hk/home/index/que"
+    },
+    "lhtex": {
+      "displayName": "LHT Express",
+      "aliases": [
+        "联昊通速递",
+        "联昊通",
+        "Lhtex",
+        "东莞市联昊通速递有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#004da1",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.lhtex.com.cn/"
+    },
+    "libang-logistics": {
+      "displayName": "LiBang International Logistics",
+      "aliases": [
+        "立邦国际物流",
+        "立邦物流",
+        "Lbexps",
+        "深圳市立邦国际物流有限公司"
+      ],
+      "countries": [
+        "CN",
+        "TW",
+        "HK",
+        "TH"
+      ],
+      "color": "#28285a",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.lbexps.com/check"
+    },
+    "rrs-logistics": {
+      "displayName": "RRS Logistics",
+      "aliases": [
+        "日日顺",
+        "日日顺物流",
+        "日日顺供应链",
+        "RRS"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#c7003a",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.rrswl.com/order/searchLishi"
+    },
+    "shipgce": {
+      "displayName": "Feiyang GCEx",
+      "aliases": [
+        "GCEx",
+        "Shipgce",
+        "飛洋轉運",
+        "飞洋转运",
+        "飞洋快递",
+        "飞洋"
+      ],
+      "countries": [
+        "US",
+        "CN",
+        "HK",
+        "TW"
+      ],
+      "color": "#e56a26",
+      "selectable": true,
+      "timezone": "America/Los_Angeles",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ebuy.shipgce.com/listSubOrder.aspx"
+    },
+    "showl": {
+      "displayName": "Showl",
+      "aliases": [
+        "森鸿国际物流",
+        "森鸿国际",
+        "森鸿国际物流（深圳）有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#26b7bc",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://oms.showl.com/tracking"
+    },
+    "sumxpress": {
+      "displayName": "Sumxpress",
+      "aliases": [
+        "速玛物流",
+        "速玛",
+        "速玛物流（深圳）有限公司"
+      ],
+      "countries": [
+        "CN",
+        "AU"
+      ],
+      "color": "#f08300",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://oms.sumxpress.com/#/query?trackingNo={trackingNumber}",
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://oms.sumxpress.com/#/query"
+    },
+    "suning-logistics": {
+      "displayName": "Suning Logistics",
+      "aliases": [
+        "苏宁物流",
+        "苏宁快递",
+        "江苏苏宁物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#faa600",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://wuliu.suning.com/home/toLogisticsDetail.htm"
     }
   }
 }

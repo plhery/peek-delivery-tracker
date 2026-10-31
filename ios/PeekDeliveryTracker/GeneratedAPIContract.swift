@@ -1133,6 +1133,22 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let sfydExpress = CarrierID(rawValue: "sfyd-express")
     static let vipPosta = CarrierID(rawValue: "vip-posta")
     static let zippd = CarrierID(rawValue: "zippd")
+    static let threeSixtyZebra = CarrierID(rawValue: "360zebra")
+    static let aneLogistics = CarrierID(rawValue: "ane-logistics")
+    static let auexpress = CarrierID(rawValue: "auexpress")
+    static let bqcLogistics = CarrierID(rawValue: "bqc-logistics")
+    static let changjiangExpress = CarrierID(rawValue: "changjiang-express")
+    static let chinaRailwayExpress = CarrierID(rawValue: "china-railway-express")
+    static let elianpost = CarrierID(rawValue: "elianpost")
+    static let espeedpost = CarrierID(rawValue: "espeedpost")
+    static let kingKongExpress = CarrierID(rawValue: "king-kong-express")
+    static let lhtex = CarrierID(rawValue: "lhtex")
+    static let libangLogistics = CarrierID(rawValue: "libang-logistics")
+    static let rrsLogistics = CarrierID(rawValue: "rrs-logistics")
+    static let shipgce = CarrierID(rawValue: "shipgce")
+    static let showl = CarrierID(rawValue: "showl")
+    static let sumxpress = CarrierID(rawValue: "sumxpress")
+    static let suningLogistics = CarrierID(rawValue: "suning-logistics")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2219,6 +2235,22 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .sfydExpress,
         .vipPosta,
         .zippd,
+        .threeSixtyZebra,
+        .aneLogistics,
+        .auexpress,
+        .bqcLogistics,
+        .changjiangExpress,
+        .chinaRailwayExpress,
+        .elianpost,
+        .espeedpost,
+        .kingKongExpress,
+        .lhtex,
+        .libangLogistics,
+        .rrsLogistics,
+        .shipgce,
+        .showl,
+        .sumxpress,
+        .suningLogistics,
     ]
 
     init(from decoder: Decoder) throws {

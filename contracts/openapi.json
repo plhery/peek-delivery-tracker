@@ -41872,7 +41872,15 @@
         "adapter": "universal"
       },
       "trackingUrlTemplate": "https://oms.sumxpress.com/#/query?trackingNo={trackingNumber}",
-      "linkRules": [],
+      "linkRules": [
+        {
+          "domains": [
+            "oms.sumxpress.com"
+          ],
+          "pathPattern": "^/?$",
+          "fragment": "^/query\\?(?:[^#]*&)?trackingNo=([^&]+)"
+        }
+      ],
       "detectionRules": [],
       "trackingSearchUrl": "https://oms.sumxpress.com/#/query"
     },
@@ -41896,6 +41904,93 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://wuliu.suning.com/home/toLogisticsDetail.htm"
+    },
+    "annto": {
+      "displayName": "ANNTO",
+      "aliases": [
+        "安得智联",
+        "安得物流",
+        "Annto Logistics",
+        "安得智联供应链科技股份有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#007ac3",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.annto.com/order?orderNoFormMain={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "annto.com",
+            "www.annto.com"
+          ],
+          "pathPattern": "^/order$",
+          "params": [
+            "orderNoFormMain"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.annto.com/order"
+    },
+    "ees-logistics": {
+      "displayName": "EES Logistics",
+      "aliases": [
+        "EES",
+        "百福东方",
+        "百福东方国际物流",
+        "北京百福东方国际物流有限责任公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#b62126",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://api.eesimp.com/imc/pub_logi_info"
+    },
+    "jdiex": {
+      "displayName": "JDIEX",
+      "aliases": [
+        "JDI国际物流",
+        "JDI International Logistics"
+      ],
+      "countries": [
+        "US",
+        "CN"
+      ],
+      "color": "#0166e2",
+      "selectable": true,
+      "timezone": "America/Los_Angeles",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.jdiex.com/select.html?type=cnum&num={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "jdiex.com",
+            "www.jdiex.com"
+          ],
+          "pathPattern": "^/select\\.html$",
+          "query": "^(?=(?:.*&)?type=cnum(?:&|$))(?:.*&)?num=([^&]+)(?=&|$)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.jdiex.com/select.html"
     }
   },
   "servers": [
@@ -45783,7 +45878,10 @@
           "shipgce",
           "showl",
           "sumxpress",
-          "suning-logistics"
+          "suning-logistics",
+          "annto",
+          "ees-logistics",
+          "jdiex"
         ]
       },
       "Stage": {

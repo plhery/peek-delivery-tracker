@@ -8,6 +8,7 @@ import java.time.Instant
 import java.util.Locale
 import java.util.UUID
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.exp
 import kotlin.math.hypot
 import kotlin.math.ln
@@ -1418,6 +1419,99 @@ class ParcelRouteTests {
         )
         assertNotNull(overlay(beside, framing(beside, pip = false)).pip)
         assertEquals(framing(beside, pip = false), framing(beside, pip = true))
+    }
+
+    /** The demo's parcel from Kyoto, delivered in Zürich. */
+    private val matcha: ParcelRoute by lazy {
+        ParcelRoute(DemoRepository.seed().first { it.label.startsWith("Matcha ritual") }, atlas, AppLanguage.En)
+    }
+
+    /**
+     * What the opened map (ParcelMapView.swift's `ParcelMapScreen`) keeps the route and Pip clear of, in a window whose
+     * system takes `safe`: the close button's row, the system's sides, and the summary, 171 tall, and its 24 of air.
+     */
+    private fun openedMapInsets(safe: EdgeInsets): EdgeInsets = EdgeInsets(
+        top = safe.top + maxOf(4.0, 14 - safe.top) + 48, leading = safe.leading, bottom = safe.bottom + 171 + 24, trailing = safe.trailing,
+    )
+
+    /** The parcel from Kyoto's opened map close by, seen from `camera`, in a window `size` whose system takes `safe`. */
+    private fun matchaCloseBy(size: Size, safe: EdgeInsets, camera: GlobeCamera = matchaFrame(size, safe)): MapOverlay = mapOverlay(
+        matcha, camera, size, openedMapInsets(safe), labels = MapLabels.All, sites = true, mode = ParcelRoute.Mode.Now, context = false,
+        pip = PipRequest(PipMood.Joy, inset = true),
+    )
+
+    /** The camera that frames the parcel from Kyoto close by on its opened map, with room for Pip beside its dot. */
+    private fun matchaFrame(size: Size, safe: EdgeInsets): GlobeCamera = GlobeCamera.framing(
+        matcha, ParcelRoute.Mode.Now, size, openedMapInsets(safe), shown = { at, _ -> matchaCloseBy(size, safe, at).shown }, pip = true,
+    )
+
+    private fun MapOverlay.label(text: String): Rect = labels.first { it.text == text }.frame
+
+    private fun MapOverlay.chip(name: String): Rect = pointers.first { it.name == name }.let {
+        Rect(it.center.x - it.width / 2, it.center.y - 13, it.width, 26.0)
+    }
+
+    private val MapOverlay.parcel: Point get() = dots.first { it.kind == MapOverlay.DotKind.Current }.point
+
+    @Test
+    fun theOpenedMapCloseByStandsPipWhereTheIphoneDoesUprightAndOnItsSide() {
+        // An iPhone 17 Pro Max upright, 440 × 956: Basel's name under its dot, Zürich's below and to the left of its, the
+        // chip pointing to Kyoto at the top right, and Pip to the right of the parcel's dot.
+        val upright = matchaCloseBy(Size(440.0, 956.0), EdgeInsets(top = 62.0, leading = 0.0, bottom = 34.0, trailing = 0.0))
+        val dot = upright.parcel
+        val basel = upright.label("Basel")
+        assertTrue(upright.dots.any { abs(it.point.x - basel.midX) < 1e-9 && abs(it.point.y + 8 - basel.minY) < 1e-9 })
+        assertTrue(upright.label("Zürich").maxX < dot.x && upright.label("Zürich").minY > dot.y)
+        // 8 in from the trailing edge, high above the dot.
+        assertEquals(440.0 - 8, upright.chip("Kyoto").maxX, 1e-9)
+        assertTrue(upright.chip("Kyoto").maxY < dot.y - 200)
+        val standing = checkNotNull(upright.pip)
+        assertEquals(-1, standing.side)
+        assertTrue(standing.box.minX > dot.x)
+
+        // On its side, 956 × 440 with no status bar, the Dynamic Island and the home indicator taking 62 at each end and
+        // 21 at the foot: Pip stands below the dot, between it and the summary, Zürich's name moves to the right of the
+        // dot, and the chip stands well above the dot and to its right, clear of the names and of Pip.
+        val side = matchaCloseBy(Size(956.0, 440.0), EdgeInsets(top = 0.0, leading = 62.0, bottom = 21.0, trailing = 62.0))
+        val there = side.parcel
+        val pip = checkNotNull(side.pip)
+        assertTrue(pip.below)
+        assertTrue(pip.box.minY > there.y && pip.box.maxY <= 440.0 - 216)
+        val zurich = side.label("Zürich")
+        assertEquals(there.x + 9, zurich.minX, 1e-9)
+        assertEquals(there.y, zurich.midY, 1e-9)
+        val kyoto = side.chip("Kyoto")
+        // 30 below the close button's row, which ends 62 down.
+        assertEquals(92.0, kyoto.midY, 1e-9)
+        assertTrue(kyoto.midX > there.x && kyoto.maxY < there.y - 40)
+        assertTrue(side.labels.none { it.frame.intersects(kyoto) })
+        assertFalse(pip.box.intersects(kyoto))
+        assertEquals(listOf("Zürich", "Paris", "Basel"), side.labels.map { it.text })
+    }
+
+    @Test
+    fun onAShortWindowOnItsSidePipStandsBesideTheParcelOverTheChip() {
+        // The smallest Android phone on its side, 640 × 360 with its status bar 24 tall and its buttons 48 wide at the
+        // trailing end, and a larger one, 914 × 411, its status bar 28 tall and its gesture bar 24 at the foot. Between
+        // the close button's row and the summary the map is 90 and 117 tall: the spot below the parcel's dot falls past
+        // the summary's top, or leaves Zürich's name no room, and every spot beside the dot touches the route or the
+        // chip. Pip takes the first of the least crowded, to the right of the dot, over the chip, as the iPhone's layout
+        // does in a frame this short.
+        for ((size, safe) in listOf(
+            Size(640.0, 360.0) to EdgeInsets(top = 24.0, leading = 0.0, bottom = 0.0, trailing = 48.0),
+            Size(2400 / 2.625, 1080 / 2.625) to EdgeInsets(top = 74 / 2.625, leading = 0.0, bottom = 24.0, trailing = 0.0),
+        )) {
+            val drawn = matchaCloseBy(size, safe)
+            val place = "${size.width.toInt()} × ${size.height.toInt()}"
+            val pip = checkNotNull(drawn.pip) { place }
+            assertFalse(place, pip.below)
+            assertEquals(place, -1, pip.side)
+            assertTrue(place, pip.box.intersects(drawn.chip("Kyoto")))
+            // Zürich keeps its name, under the dot, and the chip stands just above it.
+            assertEquals(place, drawn.parcel.x, drawn.label("Zürich").midX, 1e-9)
+            assertEquals(place, drawn.parcel.y + 8, drawn.label("Zürich").minY, 1e-9)
+            assertTrue(place, drawn.chip("Kyoto").midY > drawn.parcel.y - 35)
+        }
     }
 
     @Test

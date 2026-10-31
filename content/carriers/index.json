@@ -162,7 +162,7 @@
   { "id": "huaya-express", "catalog": "huaya-express", "name": "Huaya Express", "languages": ["en"] },
   { "id": "gofo-ca", "catalog": "gofo-ca", "name": "GOFO Canada", "languages": ["en"] },
   { "id": "metropolitan-warehouse", "catalog": "metropolitan-warehouse", "name": "Metropolitan Warehouse & Delivery", "languages": ["en"] },
-  { "id": "topyou", "catalog": "topyou", "name": "TopYou", "languages": ["en", "de", "fr"] },
+  { "id": "topyou", "catalog": "topyou", "name": "TopYou", "languages": ["en", "de", "fr", "it"] },
   { "id": "byhd", "catalog": "byhd", "name": "BYHD", "languages": ["en"] },
   { "id": "zto-international", "catalog": "zto-international", "name": "ZTO International", "languages": ["en"] },
   { "id": "mayiyinfu", "catalog": "mayiyinfu", "name": "Mayi Yinfu", "languages": ["en"] },
@@ -178,7 +178,7 @@
   { "id": "ywe", "catalog": "ywe", "name": "YWE", "languages": ["en"] },
   { "id": "roadie", "catalog": "roadie", "name": "Roadie", "languages": ["en"] },
   { "id": "ecms-express", "catalog": "ecms-express", "name": "ECMS Express", "languages": ["en"] },
-  { "id": "chunghwa-post", "catalog": "chunghwa-post", "name": "Chunghwa Post", "languages": ["en"] },
+  { "id": "chunghwa-post", "catalog": "chunghwa-post", "name": "Chunghwa Post", "languages": ["en", "it"] },
   { "id": "raben", "catalog": "raben", "name": "Raben", "languages": ["en"] },
   { "id": "jd-logistics", "catalog": "jd-logistics", "name": "JD Logistics", "languages": ["en"] },
   { "id": "singapore-post", "catalog": "singapore-post", "name": "Singapore Post", "languages": ["en"] }

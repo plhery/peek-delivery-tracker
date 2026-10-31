@@ -2424,6 +2424,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-tracking",
+      "title": "TopYou tracking: codice TYZR, stati e consegna in Italia",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-tracking",
@@ -2446,6 +2454,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "HYWL tracking: numero TRK e stati di Huiyi Logistics",
       "name": "Huiyi Logistics",
       "color": "#0b8f91"
+    },
+    {
+      "id": "chunghwa-post",
+      "catalog": "chunghwa-post",
+      "slug": "chunghwa-post-tracking",
+      "title": "Tracking Chunghwa Post (Taiwan): codice, stati e consegna",
+      "name": "Chunghwa Post",
+      "color": "#e8171f"
     }
   ],
   "es": [

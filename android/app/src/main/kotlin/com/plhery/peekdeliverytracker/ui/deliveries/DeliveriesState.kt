@@ -398,7 +398,7 @@ internal class DeliveriesState(
 
     /**
      * The filters are open: a sheet over the list, or a popover off its button while sheets show as forms. Opening
-     * them counts as `filters-open`.
+     * them counts as `filters-open`, and ends the arrival of a card just added.
      */
     var showingFilters: Boolean
         get() = views.showingFilters.value
@@ -406,7 +406,10 @@ internal class DeliveriesState(
             if (value == views.showingFilters.value) return
             views.showingFilters.value = value
             settleSheets()
-            if (value) source.action("filters-open")
+            if (value) {
+                source.action("filters-open")
+                endArrival()
+            }
         }
 
     /** Sheets show as forms, and the filters in a popover: side by side, as settled while none is open. */
@@ -724,8 +727,38 @@ internal class DeliveriesState(
     /** The card the list brings to its middle once Add has gone (`revealParcelID`). */
     var revealParcel: UUID? by mutableStateOf(null)
 
+    /**
+     * The card whose arrival plays once the list has brought it to its middle (`parcelBurstID`): it wobbles and little
+     * parcels fly out of its stamp ([ArrivalCelebration]), with a tap of success as it starts.
+     */
+    var parcelBurst: UUID? by mutableStateOf(null)
+
     /** The window is in front (`scenePhase == .active`): only then is a parcel added shown on the list. */
     var inFront: Boolean = true
+
+    /**
+     * The reveal's scroll has ended (its `completion`), or it needed none: the card's arrival plays, if the card is still
+     * the one revealed and the window still in front.
+     */
+    fun revealed(parcelId: UUID) {
+        if (revealParcel != parcelId || !inFront) return
+        parcelBurst = parcelId
+        revealParcel = null
+    }
+
+    /** The arrival on the card of `parcelId` is over (`if parcelBurstID == id { parcelBurstID = nil }`), if still its own. */
+    fun burstFinished(parcelId: UUID) {
+        if (parcelBurst == parcelId) parcelBurst = null
+    }
+
+    /**
+     * `revealParcelID = nil; parcelBurstID = nil`: Add, the account or the filters opening, a screen the navigation
+     * shows, a drag of the list and the window leaving the front end the reveal and the arrival.
+     */
+    fun endArrival() {
+        revealParcel = null
+        parcelBurst = null
+    }
 
     /** What the clipboard holds as text, read as the reader asks for it (`Clipboard.string`); the composition's. */
     var readClipboard: () -> String? = { null }
@@ -740,8 +773,11 @@ internal class DeliveriesState(
     @Suppress("UNUSED_PARAMETER")
     fun addSharedDraft(draft: String) = Unit
 
-    /** `showingAccount = true`: the account isn't ported yet, so the button does nothing for now. */
-    fun account() = Unit
+    /**
+     * `showingAccount = true`: the account isn't ported yet, so the button only ends the arrival of a card just added,
+     * as the account opening does.
+     */
+    fun account() = endArrival()
 
     /**
      * The empty list's Paste (`onAdd(.paste(Clipboard.string ?? ""))`, which counts nothing, unlike the welcome's):
@@ -762,7 +798,7 @@ internal class DeliveriesState(
         val draft = (request as? FirstParcelRequest.Paste)?.draft
         additionClosing = false
         addedParcel = null
-        revealParcel = null
+        endArrival()
         returnFocus = focus
         addition = AddRequest(UUID.randomUUID(), draft)
         source.view("add-parcel")

@@ -14,6 +14,7 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -131,7 +132,6 @@ fun DeliveriesTab(
 ) {
     val launch = source.launch
     val navigator = rememberSaveable(launch, saver = DeliveriesNavigator.saver(launch)) { DeliveriesNavigator() }
-    navigator.view = source::view
     navigator.left = { pageId ->
         source.pageWork.forget(pageId)
         source.feedbacks.forget(pageId)
@@ -148,6 +148,11 @@ fun DeliveriesTab(
     val scope = rememberCoroutineScope()
     val state = remember(source, navigator, listState) {
         DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, sampleShown, mapCover, views, prompts, now, scope)
+    }
+    // A screen the navigation shows also ends the arrival of a card just added.
+    navigator.view = { screen ->
+        source.view(screen)
+        state.endArrival()
     }
     state.localizer = LocalLocalizer.current
     // What the paper and the flights are drawn with, as the list was last drawn.
@@ -300,7 +305,7 @@ fun DeliveriesTab(
         ParcelShareHost(state)
         // Add, over the whole window where the tab shell draws it, and the card it added once it has gone.
         AddParcelHost(state)
-        Revealing(state, reduceMotion)
+        Revealing(state, reduceMotion, resumed)
         // The page's map, over the whole window where the tab shell draws it.
         ParcelMapHost(state)
         // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.
@@ -445,20 +450,28 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
 
 /**
  * The card Add added, brought to the list's middle once Add has gone (`revealParcelID`): a frame later, once the list
- * holds it, on the smooth spring, at once under Reduce Motion. A scroll of the reader's meanwhile ends it.
+ * holds it, on the smooth spring, at once under Reduce Motion. Then its arrival plays (`parcelBurstID`), even where the
+ * card needed no scroll, with one tap of success, none as it ends. A drag of the list ends both, the reveal's scroll
+ * on the way (`.onScrollPhaseChange`, `.interacting`), as the window leaving the front does.
  */
 @Composable
-private fun Revealing(state: DeliveriesState, reduceMotion: Boolean) {
+private fun Revealing(state: DeliveriesState, reduceMotion: Boolean, resumed: Boolean) {
     val parcelId = state.revealParcel
     LaunchedEffect(parcelId) {
         if (parcelId == null) return@LaunchedEffect
         try {
             withFrameNanos {}
             state.reveal(parcelId, reduceMotion)
+            state.revealed(parcelId)
         } finally {
             if (state.revealParcel == parcelId) state.revealParcel = null
         }
     }
+    SensoryFeedbackEffect(SensoryFeedback.Success, state.parcelBurst) { _, next -> next != null }
+    LaunchedEffect(state) {
+        state.listState.interactionSource.interactions.collect { if (it is DragInteraction.Start) state.endArrival() }
+    }
+    LaunchedEffect(resumed) { if (!resumed) state.endArrival() }
 }
 
 /**

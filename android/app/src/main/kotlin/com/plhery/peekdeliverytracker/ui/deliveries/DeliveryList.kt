@@ -57,6 +57,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
+import com.plhery.peekdeliverytracker.core.ParcelArrival
 import com.plhery.peekdeliverytracker.core.ParcelSectionKind
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.isDelivered
@@ -125,6 +126,9 @@ val LocalColumnEdges = compositionLocalOf { ColumnEdges(start = true, end = true
  * A parcel delivered as the list is looked at keeps its card a moment, postmarked, and paper comes out of Pip's box
  * ([DeliveriesState.postmark]); then the card flies to its new place over the list ([DeliveredFlights]) as the other
  * cards make room.
+ *
+ * The card of a parcel just added, once brought to the list's middle, wobbles as little parcels fly out of its stamp
+ * ([ArrivalCelebration]).
  *
  * A parcel's page zooms out of its card and back into it ([zoomSource]): the list recedes under the page and the bar's
  * items fade, the bar staying where it is.
@@ -497,12 +501,14 @@ private fun NextCard(state: DeliveriesState, item: ListItem.Next) {
     val onName = state.names(parcel.id)
     val sight = remember(state, parcel.id) { { pip: () -> Rect? -> state.places.see(pip, parcel.id) } }
     CardComposed(parcel.id)
-    SwipeableCard(state, shown, Radii.nextUp, shadow = true, place, pictured = true) { moved, open, menu, archive ->
-        CompositionLocalProvider(LocalPipSight provides sight) {
-            NextDeliveryPass(
-                shown, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected, onLongClick = menu,
-                swipeAction = archive,
-            )
+    ArrivalCelebration(state, parcel.id, ParcelArrival.NEXT_STUB_INSET) {
+        SwipeableCard(state, shown, Radii.nextUp, shadow = true, place, pictured = true) { moved, open, menu, archive ->
+            CompositionLocalProvider(LocalPipSight provides sight) {
+                NextDeliveryPass(
+                    shown, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected, onLongClick = menu,
+                    swipeAction = archive,
+                )
+            }
         }
     }
 }
@@ -525,11 +531,13 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
     }
     val place = state.cardPlace(parcel.id)
     val onName = state.names(parcel.id)
-    SwipeableCard(state, shown, Radii.card, shadow = false, place, pictured = true) { moved, open, menu, archive ->
-        ParcelPassCard(
-            shown, notice = notice, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected,
-            onLongClick = menu, swipeAction = archive,
-        )
+    ArrivalCelebration(state, parcel.id) {
+        SwipeableCard(state, shown, Radii.card, shadow = false, place, pictured = true) { moved, open, menu, archive ->
+            ParcelPassCard(
+                shown, notice = notice, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected,
+                onLongClick = menu, swipeAction = archive,
+            )
+        }
     }
 }
 
@@ -546,20 +554,30 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
         item.kind == ParcelSectionKind.Delivered -> {
             val place = state.cardPlace(parcel.id)
             val onName = state.names(parcel.id)
-            SwipeableCard(state, parcel, Radii.card, shadow = false, place, pictured = true) { moved, open, menu, archive ->
-                DeliveredParcelCard(parcel, onOpen = open, modifier = moved, onName = onName, selected = selected, onLongClick = menu, swipeAction = archive)
+            ArrivalCelebration(state, parcel.id) {
+                SwipeableCard(state, parcel, Radii.card, shadow = false, place, pictured = true) { moved, open, menu, archive ->
+                    DeliveredParcelCard(
+                        parcel, onOpen = open, modifier = moved, onName = onName, selected = selected, onLongClick = menu, swipeAction = archive,
+                    )
+                }
             }
         }
-        item.next -> SwipeableCard(state, parcel, Radii.nextUp, shadow = true, Modifier) { moved, open, menu, archive ->
-            NextDeliveryPass(parcel, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive)
+        item.next -> ArrivalCelebration(state, parcel.id, ParcelArrival.SECTION_NEXT_STUB_INSET) {
+            SwipeableCard(state, parcel, Radii.nextUp, shadow = true, Modifier) { moved, open, menu, archive ->
+                NextDeliveryPass(parcel, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive)
+            }
         }
         else -> {
             val notice = if (item.kind != ParcelSectionKind.Attention) null else remember(parcel, localizer, language) {
                 parcel.notice(now())?.let { localizer.text(it.localizationKey) }
             }
             // An archived parcel found here isn't archived again by a swipe; its menu restores it.
-            SwipeableCard(state, parcel, Radii.card, shadow = false, Modifier, swipes = !parcel.isArchived) { moved, open, menu, archive ->
-                ParcelPassCard(parcel, notice = notice, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive)
+            ArrivalCelebration(state, parcel.id) {
+                SwipeableCard(state, parcel, Radii.card, shadow = false, Modifier, swipes = !parcel.isArchived) { moved, open, menu, archive ->
+                    ParcelPassCard(
+                        parcel, notice = notice, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive,
+                    )
+                }
             }
         }
     }

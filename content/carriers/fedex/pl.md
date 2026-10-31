@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-10-28
 ---
 
-Żeby śledzić paczkę, wklej numer przesyłki FedEx albo link do śledzenia FedEx w pole powyżej. Własne śledzenie FedEx działa na fedex.com i w aplikacji FedEx Mobile.
+Żeby śledzić paczkę, wklej numer przesyłki FedEx albo link do śledzenia FedEx w pole powyżej. Własne śledzenie FedEx działa na fedex.com.
 
 ## FedEx śledzenie przesyłki: gdzie jest numer i ile ma cyfr
 
@@ -45,13 +45,13 @@ Gdy FedEx oznaczy paczkę jako opóźnioną, Peek pokazuje „Zgłoszono problem
 
 Gdy doręczenie się nie uda, skan może podać powód: `Customer not available or business closed`, gdy nikogo nie było, albo `Local delivery restriction - Delivery not attempted`, gdy lokalne ograniczenie nie pozwoliło na próbę doręczenia.
 
-Jeśli poprosisz FedEx o zatrzymanie paczki w punkcie odbioru, w drodze skan może brzmieć `Delivery option requested`, a po dotarciu na miejsce `Ready for pickup`. Peek pokazuje wtedy nazwę i adres punktu, jeśli FedEx je podaje: gdy o zatrzymanie poproszono już po nadaniu, strona FedEx pokazuje niezalogowanym tylko miejscowość. Strona FedEx może nazwać ostatni odcinek `Heading to pickup location`, a Peek liczy go jako „W doręczeniu”. Takie zmiany ustalasz z FedEx, nie w Peek. Więcej w poradnikach [awizo i nieudana próba doręczenia](guide:missed-delivery) i [nieodebrana paczka](guide:uncollected-parcel).
+Jeśli poprosisz FedEx o zatrzymanie paczki w punkcie odbioru, w drodze skan może brzmieć `Delivery option requested`, a po dotarciu na miejsce `Ready for pickup`. Peek pokazuje wtedy pod nagłówkiem „Punkt odbioru” nazwę punktu, a jeśli FedEx go podaje, także jego adres. Takie zmiany ustalasz z FedEx, nie w Peek. Więcej w poradnikach [awizo i nieudana próba doręczenia](guide:missed-delivery) i [nieodebrana paczka](guide:uncollected-parcel).
 
 ## Cło za paczkę FedEx spoza UE
 
 Za paczkę spoza UE mogą należeć się opłaty przywozowe. Dopóki trwa odprawa, śledzenie pokazuje `Clearance in progress` albo `Clearance delay`, a gdy urząd celny zwolni paczkę, `International shipment release - Import`.
 
-Według Krajowej Administracji Skarbowej od 1 lipca 2026 r. zakupy internetowe spoza UE nie korzystają już ze zwolnienia z cła dla przesyłek do 150 EUR. Zamiast niego obowiązuje ryczałtowe cło 3 EUR za każdą pozycję towarową w zgłoszeniu celnym. Tego cła nie płaci konsument, tylko sprzedawca, platforma internetowa lub ich przedstawiciel, ale sprzedawca może je doliczyć do ceny lub kosztów dostawy. Unijny portal Your Europe dodaje, że cło dochodzi do VAT i opłat za dostawę, a pobiera je sprzedawca albo przewoźnik. Więcej w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
+Według Krajowej Administracji Skarbowej od 1 lipca 2026 r. zakupy internetowe spoza UE nie korzystają już ze zwolnienia z cła dla przesyłek do 150 EUR. Zamiast niego obowiązuje ryczałtowe cło 3 EUR za każdą pozycję towarową w zgłoszeniu celnym. Tego cła nie płaci konsument, tylko sprzedawca, platforma internetowa lub ich przedstawiciel, ale sprzedawca może je doliczyć do ceny lub kosztów dostawy. Unijny portal Your Europe dodaje, że cło dochodzi do VAT i opłat za dostawę, a pobiera je sprzedawca albo przewoźnik. Według Komisji Europejskiej od 1 listopada 2026 r. do zakupów internetowych spoza UE dochodzi też unijna opłata manipulacyjna (Union handling fee): 2 EUR za każdą pozycję, bez względu na jej wartość. Więcej w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Przesyłka FedEx opóźniona, zaginiona lub doręczona, a jej nie ma
 
@@ -67,7 +67,7 @@ Przy zakupach w sklepie to sprzedawca odpowiada za to, żeby paczka do Ciebie do
 
 Serwer Peek otwiera stronę śledzenia fedex.com w przeglądarce co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu. FedEx często odmawia takich wizyt. Gdy odmówi albo zażąda weryfikacji odbiorcy, historię uzupełniają serwisy śledzenia przesyłek.
 
-Widzisz status, każdy skan z miejscem i dokładną godziną na mapie, przewidywany dzień doręczenia, godzinę doręczenia i, dopóki paczka czeka, nazwę i adres placówki FedEx, jeśli FedEx je podaje. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie ma tam Twojego imienia i adresu, nadawcy, podpisu, wagi ani wymiarów. Skany są po angielsku, tak jak zapisuje je FedEx (`On FedEx vehicle for delivery` to wydanie do doręczenia). Skan doręczenia, odbiór w placówce i wyjątek w przesyłce (`Delivered`, `Ready for pickup`, `Shipment exception`) Peek pokazuje własnymi słowami: „Dostarczona”, „Do odbioru” i „Problem z przesyłką”. Zmianę doręczenia, cło i reklamację załatwisz tylko w FedEx albo u nadawcy.
+Widzisz status, każdy skan z miejscem i godziną podaną przez FedEx (w strefie czasowej Twojego urządzenia), trasę przez te miejsca na mapie, przewidywany dzień doręczenia, godzinę doręczenia i, dopóki paczka czeka, nazwę i adres placówki FedEx, jeśli FedEx je podaje. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie ma tam Twojego imienia i adresu, nadawcy, podpisu, wagi ani wymiarów. Skany są po angielsku, tak jak zapisuje je FedEx (`On FedEx vehicle for delivery` to wydanie do doręczenia). Skan doręczenia, odbiór w placówce i wyjątek w przesyłce (`Delivered`, `Ready for pickup`, `Shipment exception`) Peek pokazuje własnymi słowami: „Dostarczona”, „Do odbioru” i „Problem z przesyłką”. Zmianę doręczenia, cło i reklamację załatwisz tylko w FedEx albo u nadawcy.
 
 ## Pytania o FedEx śledzenie
 
@@ -86,6 +86,8 @@ Może to być oszustwo. CERT Polska (CSIRT NASK) ostrzegał przed SMS-ami, w kt�
 :::sources
 - [Krajowa Administracja Skarbowa: Zmiany w e-commerce od 1 lipca 2026 r.](https://www.gov.pl/web/kas/zmiany-w-e-commerce-od-1-lipca-2026-r) – koniec zwolnienia do 150 EUR, 3 EUR za pozycję towarową, cła nie płaci konsument
 - [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – cło pobiera sprzedawca lub przewoźnik, 30 dni, dodatkowy termin, rozwiązanie umowy, odpowiedzialność sprzedawcy za uszkodzenia
+- [Komisja Europejska: EU customs reform (po angielsku)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 EUR za pozycję do 150 EUR od 1 lipca 2026 r., opłata 2 EUR od 1 listopada 2026 r.
+- [Komisja Europejska: wytyczne w sprawie cła 3 EUR i Union handling fee (PDF, po angielsku)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 EUR za pozycję, bez względu na wartość
 - [CSIRT NASK: oszustwo na „przesyłkę”](https://www.gov.pl/web/baza-wiedzy/uwaga-csirt-nask-ostrzega-w-okresie-przedswiatecznej-goraczki-zakupowej-wraca-popularne-oszustwo-na-przesylke) – fałszywe SMS-y o przesyłce, dopłata, numer 8080, bank
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – kształty numerów, cyfra kontrolna, skany FedEx, co Peek odczytuje z FedEx
 - [Universal Parcel Scraper: FedEx Poland](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex-pl) – 13-cyfrowe numery krajowe zaczynające się od 6

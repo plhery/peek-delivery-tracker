@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-10-28
 ---
 
-Para seguir a tua encomenda, cola o número de rastreio FedEx, ou uma ligação de rastreio da FedEx, na caixa acima. O rastreio da própria FedEx está no fedex.com e na app FedEx Mobile.
+Para seguir a tua encomenda, cola o número de rastreio FedEx, ou uma ligação de rastreio da FedEx, na caixa acima. O rastreio da própria FedEx está no fedex.com.
 
 ## Número de rastreio FedEx: onde está e quantos dígitos tem
 
@@ -18,7 +18,7 @@ Procura no e-mail de envio ou na página da encomenda da loja. Uma ligação de 
 | `123456789012343` | 15 dígitos: uma forma que o Peek também atribui à FedEx. |
 | `61290000000000000014` | 20 dígitos começados por `6129` ou `7489`: FedEx Ground Economy (antes SmartPost), nos Estados Unidos. |
 
-Doze dígitos também servem a outras transportadoras, como a [MRW](carrier:mrw), a [Mondial Relay](carrier:mondial-relay), a DPD France, a BRT e várias transportadoras asiáticas; quinze dígitos também a DPD France e a BRT. Se o fedex.com não conhecer o número, confirma no e-mail da loja qual é a transportadora.
+Doze dígitos também servem a outras transportadoras, como a [MRW](carrier:mrw), a [Mondial Relay](carrier:mondial-relay), a DPD France, a BRT e várias transportadoras asiáticas; quinze dígitos também a DPD France, a BRT e a Yunda Express. Se o fedex.com não conhecer o número, confirma no e-mail da loja qual é a transportadora.
 
 ## Estados do FedEx tracking: o que quer dizer «Delivery exception»
 
@@ -44,13 +44,13 @@ Quando a FedEx marca uma encomenda como atrasada, o Peek mostra «Problema repor
 
 Se a entrega falhar, uma leitura pode dizer porquê: `Customer not available or business closed` se não estava ninguém, ou `Local delivery restriction - Delivery not attempted` se uma restrição local impediu a tentativa.
 
-Se pedires à FedEx para guardar a encomenda num ponto de recolha, a leitura pode dizer `Delivery option requested` enquanto vai a caminho, e `Ready for pickup` quando lá chega. O Peek mostra então o nome e a morada do ponto, se a FedEx os indicar: quando o pedido é feito depois do envio, a página da FedEx só mostra a localidade a quem não tem sessão iniciada. A página da FedEx pode chamar ao último troço `Heading to pickup location`, que o Peek conta como «Em distribuição». Estas alterações tratas com a FedEx, não no Peek. Mais em [encomenda não entregue](guide:missed-delivery) e [quanto tempo tens para levantar uma encomenda](guide:uncollected-parcel).
+Se pedires à FedEx para guardar a encomenda num ponto de recolha, a leitura pode dizer `Delivery option requested` enquanto vai a caminho, e `Ready for pickup` quando lá chega. O Peek mostra então o ponto em «Ponto de levantamento»: o nome e, se a FedEx a indicar, a morada. Estas alterações tratas com a FedEx, não no Peek. Mais em [encomenda não entregue](guide:missed-delivery) e [quanto tempo tens para levantar uma encomenda](guide:uncollected-parcel).
 
 ## Alfândega: o que pagas numa encomenda FedEx
 
 Uma encomenda que chega de fora da UE pode ter encargos de importação. Enquanto está na alfândega, o rastreio mostra `Clearance in progress` ou `Clearance delay`, e `International shipment release - Import` quando a alfândega a liberta.
 
-Segundo a Autoridade Tributária e Aduaneira, desde 1 de julho de 2026 as compras online importadas numa remessa até 150 € pagam, além do IVA, 3 € de direitos aduaneiros por adição, ou seja, por tipo de produto: uma remessa de 100 € com uma camisa e um chapéu paga 6 €. Segundo o portal Your Europe da UE, cobrar este direito cabe ao vendedor ou à transportadora, e pode já vir incluído no que pagas online. Mais em [encomenda retida na alfândega](guide:customs).
+Segundo a Autoridade Tributária e Aduaneira, desde 1 de julho de 2026 as compras online importadas numa remessa até 150 € pagam, além do IVA, 3 € de direitos aduaneiros por adição, ou seja, por tipo de produto: uma remessa de 100 € com uma camisa e um chapéu paga 6 €. Segundo o portal Your Europe da UE, cobrar este direito cabe ao vendedor ou à transportadora, e pode já vir incluído no que pagas online. E desde 1 de novembro de 2026, segundo a Comissão Europeia, as compras online a lojas de fora da UE pagam ainda uma taxa de tratamento da UE (Union handling fee) de 2 € por tipo de produto, seja qual for o valor. Mais em [encomenda retida na alfândega](guide:customs).
 
 ## Encomenda FedEx atrasada, perdida ou dada como entregue
 
@@ -66,7 +66,7 @@ O [Peek](/) reconhece os números FedEx de 12 e 15 dígitos quando o dígito de 
 
 Um servidor do Peek abre a página de rastreio do fedex.com num navegador. Quando a FedEx recusa, ou pede a verificação do destinatário, serviços de seguimento preenchem o histórico.
 
-Vês o estado, cada leitura num mapa com o local e a hora exata, o dia de entrega previsto, a hora da entrega e, enquanto a encomenda espera, o nome e a morada do local FedEx, se a FedEx os indicar. A verificação é de 10 em 10 minutos, de 5 em 5 quando a encomenda sai para entrega, e as notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega. Ficam de fora o teu nome e morada, o remetente, a assinatura, o peso e as dimensões. As leituras aparecem no inglês da FedEx, menos três: a da entrega, em que a FedEx escreve quem assinou, aparece como «Entregue», e `Ready for pickup` e `Shipment exception` aparecem com as palavras do Peek.
+Vês o estado, cada leitura com o local e a hora indicada pela FedEx (no fuso horário do teu dispositivo), o percurso por esses locais num mapa, o dia de entrega previsto, a hora da entrega e, enquanto a encomenda espera, o nome e a morada do local FedEx, se a FedEx os indicar. A verificação é de 10 em 10 minutos, de 5 em 5 quando a encomenda sai para entrega, e as notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega. Ficam de fora o teu nome e morada, o remetente, a assinatura, o peso e as dimensões. As leituras aparecem no inglês da FedEx, menos três: a da entrega, em que a FedEx escreve quem assinou, aparece como «Entregue», e `Ready for pickup` e `Shipment exception` aparecem com as palavras do Peek.
 
 Nos Estados Unidos, a maior parte das encomendas Ground Economy é entregue pela própria FedEx. Quando a FedEx diz que o correio americano (USPS) tem uma, o Peek segue-a lá.
 
@@ -91,6 +91,8 @@ Desconfia. O Gabinete Cibercrime da Procuradoria-Geral da República alertou, em
 :::sources
 - [Autoridade Tributária e Aduaneira: Mercadorias eCommerce](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição desde 1 de julho de 2026, remessas até 150 €, exemplo de 6 €
 - [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, rescisão e reembolso, responsabilidade do vendedor, quem cobra os 3 €
+- [Comissão Europeia: EU customs reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € por artigo até 150 € desde 1 de julho de 2026, taxa de 2 € desde 1 de novembro de 2026
+- [Comissão Europeia: guia sobre o direito de 3 € e a Union handling fee (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo, seja qual for o valor
 - [Ministério Público, Gabinete Cibercrime: alerta de 5 de julho de 2023](https://cibercrime.ministeriopublico.pt/sites/default/files/documentos/pdf/2023.07.05_alerta_phishing_ctt_visa_4.pdf) – mensagens falsas de encomenda pendente, pequena taxa, o que fazer
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – formatos do número, dígito de controlo, leituras da FedEx, o que o Peek lê da FedEx
 :::

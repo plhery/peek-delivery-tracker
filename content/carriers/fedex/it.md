@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-10-28
 ---
 
-Per seguire il pacco incolla il numero di tracking FedEx, o un link di tracking FedEx, nel box qui sopra. Il tracking di FedEx stesso è su fedex.com e nell'app FedEx Mobile.
+Per seguire il pacco incolla il numero di tracking FedEx, o un link di tracking FedEx, nel box qui sopra. Il tracking di FedEx stesso è su fedex.com.
 
 ## Numero di tracking FedEx: dove si trova e quante cifre ha
 
@@ -18,7 +18,7 @@ Cercalo nell'e-mail di spedizione o nella pagina dell'ordine del negozio. Anche 
 | `123456789012343` | 15 cifre: una forma che Peek collega anche a FedEx. |
 | `61290000000000000014` | 20 cifre che iniziano con `6129` o `7489`: FedEx Ground Economy, negli Stati Uniti. |
 
-Attenzione ai numeri simili: 12 cifre le usano anche [BRT](carrier:brt), DPD France, Mondial Relay e diversi corrieri asiatici, 15 cifre anche BRT e DPD France. Se fedex.com non trova il numero, controlla quale corriere nomina l'e-mail del negozio.
+Attenzione ai numeri simili: 12 cifre le usano anche [BRT](carrier:brt), DPD France, Mondial Relay e diversi corrieri asiatici, 15 cifre anche BRT, DPD France e Yunda Express. Se fedex.com non trova il numero, controlla quale corriere nomina l'e-mail del negozio.
 
 ## Stati del tracking FedEx: cosa significa «Delivery exception»
 
@@ -44,13 +44,13 @@ Quando FedEx segna un pacco come in ritardo, Peek mostra «Problema segnalato»,
 
 Se la consegna non riesce, una scansione può dire perché: `Customer not available or business closed` se non c'era nessuno, `Local delivery restriction - Delivery not attempted` se una restrizione locale ha impedito il tentativo.
 
-Se chiedi a FedEx di tenere il pacco in un punto di ritiro, la scansione può dire `Delivery option requested` mentre il pacco è in viaggio, e `Ready for pickup` quando è arrivato. Peek mostra allora nome e indirizzo del punto, se FedEx li fornisce: se la richiesta arriva dopo la spedizione, la pagina di FedEx mostra solo la città a chi non ha effettuato l'accesso. La pagina di FedEx può chiamare l'ultimo tratto `Heading to pickup location`, che Peek conta come «In consegna». Queste modifiche le fai con FedEx, non in Peek. Altro in [consegna mancata](guide:missed-delivery) e [pacco non ritirato](guide:uncollected-parcel).
+Se chiedi a FedEx di tenere il pacco in un punto di ritiro, la scansione può dire `Delivery option requested` mentre il pacco è in viaggio, e `Ready for pickup` quando è arrivato. Peek mostra allora il punto sotto «Punto di ritiro»: il nome e, se FedEx lo fornisce, l'indirizzo. Queste modifiche le fai con FedEx, non in Peek. Altro in [consegna mancata](guide:missed-delivery) e [pacco non ritirato](guide:uncollected-parcel).
 
 ## Dazi e dogana sui pacchi FedEx
 
 Un pacco che arriva da fuori UE, o dall'estero se abiti in Svizzera, può richiedere dazi o tasse. Finché è in dogana, il tracking mostra `Clearance in progress` o `Clearance delay`, poi `International shipment release - Import` quando la dogana lo rilascia.
 
-- **Italia**: secondo Your Europe, in tutta l'UE agli ordini fino a 150 euro comprati online da paesi extra UE si applica un dazio di 3 euro per articolo, in aggiunta all'IVA e alle spese di consegna. A riscuoterlo è il venditore o il vettore.
+- **Italia**: secondo Your Europe, in tutta l'UE agli ordini fino a 150 euro comprati online da paesi extra UE si applica un dazio di 3 euro per articolo, in aggiunta all'IVA e alle spese di consegna. A riscuoterlo è il venditore o il vettore. Dal 1° novembre 2026, secondo la Commissione europea, sugli acquisti online da paesi extra UE si paga in più una tassa di gestione dell'UE (Union handling fee) di 2 euro per articolo, qualunque sia il valore.
 - **Svizzera (Ticino)**: secondo l'UDSC, nel traffico postale e di corriere l'imposizione la fa il trasportatore, e solo lui può aiutarti a cercare un invio. Per questo lavoro riscuote spese di imposizione, e anche per qualsiasi domanda devi rivolgerti a lui.
 
 Altro in [pacco fermo in dogana](guide:customs).
@@ -69,7 +69,7 @@ Se hai comprato da un negozio, il tuo interlocutore è lui, anche se il pacco lo
 
 Il server di Peek apre la pagina di monitoraggio di fedex.com in un browser. Quando FedEx rifiuta la richiesta, o chiede di verificare il destinatario, subentrano servizi di tracking.
 
-Vedi lo stato, ogni scansione con luogo e ora esatta su una mappa, il giorno di consegna previsto, l'ora di consegna e, finché il pacco aspetta, nome e indirizzo della sede FedEx, se FedEx li fornisce. Controlla ogni 10 minuti, ogni 5 minuti quando il pacco è in consegna, e le notifiche le scegli tu: ogni scansione, solo i passaggi importanti o «Solo la consegna». Non mostra il tuo nome e indirizzo, il mittente, la firma, il peso e le dimensioni. Le scansioni sono in inglese come le scrive FedEx, tranne poche, tra cui quella di consegna: FedEx ci mette il nome di chi ha firmato, quindi compare «Consegnato». Modifiche della consegna, dazi e reclami passano solo da FedEx o dal mittente.
+Vedi lo stato, ogni scansione con il luogo e l'ora indicata da FedEx (nel fuso orario del tuo dispositivo), il percorso tra questi luoghi su una mappa, il giorno di consegna previsto, l'ora di consegna e, finché il pacco aspetta, nome e indirizzo della sede FedEx, se FedEx li fornisce. Controlla ogni 10 minuti, ogni 5 minuti quando il pacco è in consegna, e le notifiche le scegli tu: ogni scansione, solo i passaggi importanti o «Solo la consegna». Non mostra il tuo nome e indirizzo, il mittente, la firma, il peso e le dimensioni. Le scansioni sono in inglese come le scrive FedEx, tranne tre, che Peek mostra con parole sue: quella di consegna, dove FedEx mette il nome di chi ha firmato, compare come «Consegnato», e `Ready for pickup` e `Shipment exception`, se scritte proprio così, come «Pronto per il ritiro» e «Problema con la spedizione». Modifiche della consegna, dazi e reclami passano solo da FedEx o dal mittente.
 
 Negli Stati Uniti FedEx consegna da sé la maggior parte dei pacchi Ground Economy; quando dice che il servizio postale americano ne ha uno, il pacco viene seguito su USPS («Consegna con USPS»).
 
@@ -89,6 +89,8 @@ Può esserlo. La Polizia Postale ha segnalato una campagna di smishing contro ch
 
 :::sources
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – 30 giorni, proroga, recesso e rimborso, responsabilità del commerciante, dazio di 3 euro per articolo riscosso dal venditore o dal vettore
+- [Commissione europea: EU customs reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 euro per articolo fino a 150 euro dal 1° luglio 2026, Union handling fee di 2 euro dal 1° novembre 2026
+- [Commissione europea: guida sul dazio di 3 euro e la Union handling fee (PDF, in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 euro per articolo, qualunque sia il valore
 - [UDSC: Spese di imposizione e tracciabilità dei colli](https://www.bazg.admin.ch/it/costi-imposizione-e-tracciamento-pacchi) – imposizione fatta dal trasportatore, ricerca dell'invio, spese di imposizione (Svizzera)
 - [Polizia Postale: Nuova campagna di smishing «Il tuo pacco è stato consegnato al centro di spedizione»](https://www.commissariatodips.it/notizie/articolo/nuova-campagna-di-smishing-il-tuo-pacco-e-stato-consegnato-al-centro-di-spedizione/index.html) – SMS falso nella stessa chat del corriere, verificare con la società di spedizione
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – forme del numero, cifre di controllo, scansioni di FedEx, cosa legge Peek da FedEx

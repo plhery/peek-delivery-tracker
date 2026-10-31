@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-10-28
 ---
 
-Pega un número de seguimiento de FedEx, o un enlace de seguimiento de FedEx, en la casilla de arriba para seguir el paquete. El seguimiento propio de FedEx está en fedex.com y en la app FedEx Mobile.
+Pega un número de seguimiento de FedEx, o un enlace de seguimiento de FedEx, en la casilla de arriba para seguir el paquete. El seguimiento propio de FedEx está en fedex.com.
 
 ## Número de seguimiento de FedEx: dónde está y cuántas cifras tiene
 
@@ -18,7 +18,7 @@ Míralo en el correo de envío de la tienda o en la página de tu pedido. Un enl
 | `123456789012343` | 15 cifras: otra forma de número de FedEx. |
 | `61290000000000000014` | 20 cifras que empiezan por `6129` o `7489`: FedEx Ground Economy (antes SmartPost), en Estados Unidos. |
 
-Las 12 cifras también las usan [MRW](carrier:mrw), [Mondial Relay](carrier:mondial-relay) y varias empresas europeas y asiáticas. Si fedex.com no encuentra el número, comprueba qué empresa nombra el correo de la tienda. Un número que empieza por `1Z` es de [UPS](carrier:ups), y los números de 10 cifras de [DHL Express](carrier:dhl-express) tampoco son de FedEx.
+Las 12 cifras también las usan [MRW](carrier:mrw), [Mondial Relay](carrier:mondial-relay) y varias empresas europeas y asiáticas; las 15, DPD France, BRT y Yunda Express. Si fedex.com no encuentra el número, comprueba qué empresa nombra el correo de la tienda. Un número que empieza por `1Z` es de [UPS](carrier:ups), y los números de 10 cifras de [DHL Express](carrier:dhl-express) tampoco son de FedEx.
 
 ## Estados del seguimiento de FedEx: qué significa «Delivery exception»
 
@@ -44,13 +44,13 @@ Cuando FedEx marca un paquete como retrasado, Peek muestra «Incidencia», salvo
 
 Si la entrega no se hace, un escaneo puede decir por qué: `Customer not available or business closed` si no había nadie, o `Local delivery restriction - Delivery not attempted` si una restricción local impidió intentarlo.
 
-Si pides a FedEx que guarde el paquete en un punto de recogida, el escaneo puede decir `Delivery option requested` mientras va de camino, y `Ready for pickup` cuando ya ha llegado. Peek muestra entonces el nombre y la dirección del punto si FedEx los da: cuando la retención se pide después del envío, la web de FedEx solo enseña la localidad a quien no ha iniciado sesión. La web de FedEx puede llamar al último tramo `Heading to pickup location`, que Peek cuenta como en reparto. Esos cambios los haces con FedEx, no en Peek. Más en [entrega fallida](guide:missed-delivery) y [paquete no recogido](guide:uncollected-parcel).
+Si pides a FedEx que guarde el paquete en un punto de recogida, el escaneo puede decir `Delivery option requested` mientras va de camino, y `Ready for pickup` cuando ya ha llegado. Peek muestra entonces el punto en «Punto de recogida»: su nombre y, si FedEx la da, su dirección. Esos cambios los haces con FedEx, no en Peek. Más en [entrega fallida](guide:missed-delivery) y [paquete no recogido](guide:uncollected-parcel).
 
 ## Aduanas: qué se paga por un paquete de FedEx
 
 Un paquete que llega de fuera de la UE puede tener gastos de importación. Mientras está en la aduana, el seguimiento muestra `Clearance in progress` o `Clearance delay`, y `International shipment release - Import` cuando la aduana lo libera.
 
-Según la Agencia Tributaria, desde el 1 de julio de 2026 las compras por internet de hasta 150 euros enviadas desde fuera de la UE pagan, además del IVA, un arancel fijo de 3 euros por cada categoría de artículos. Si las condiciones de compra de la tienda dicen que el precio incluye el arancel, el transportista no te cobrará nada por él. Si no, puede pedirte el arancel y el IVA, y quizá unos gastos de gestión, antes de entregarte el paquete. Más en [paquete retenido en aduanas](guide:customs).
+Según la Agencia Tributaria, desde el 1 de julio de 2026 las compras por internet de hasta 150 euros enviadas desde fuera de la UE pagan, además del IVA, un arancel fijo de 3 euros por cada categoría de artículos. Si las condiciones de compra de la tienda dicen que el precio incluye el arancel, el transportista no te cobrará nada por él. Si no, puede pedirte el arancel y el IVA, y quizá unos gastos de gestión, antes de entregarte el paquete. Y desde el 1 de noviembre de 2026, según la Comisión Europea, las compras por internet a tiendas de fuera de la UE pagan además una tasa de tramitación de la UE (Union handling fee) de 2 euros por cada categoría de artículos, sea cual sea su valor. Más en [paquete retenido en aduanas](guide:customs).
 
 ## Paquete de FedEx retrasado, perdido o entregado sin recibirlo
 
@@ -66,7 +66,7 @@ Si compraste en una tienda, es ella quien responde de que el paquete te llegue, 
 
 Para leer los datos, el servidor de Peek abre la página de seguimiento de fedex.com en un navegador. Cuando FedEx la rechaza, o pide verificar al destinatario, los servicios de seguimiento completan el historial.
 
-Ves el estado, cada escaneo en un mapa con su lugar y su hora exacta, el día de entrega previsto, la hora de entrega y, mientras el paquete espera, el nombre y la dirección del centro de FedEx, si FedEx los da. El paquete se consulta cada 10 minutos, cada 5 minutos cuando está en reparto, y recibes notificaciones de cada escaneo, de los pasos importantes o solo el día de entrega. No muestra tu nombre ni tu dirección, el remitente, la firma, el peso ni las medidas. Los escaneos salen en el inglés de FedEx, salvo tres: la entrega, que nombra a quien firmó y Peek muestra como «Entregado», y `Ready for pickup` y `Shipment exception`, que Peek muestra con sus propias palabras.
+Ves el estado, cada escaneo con su lugar y la hora que da FedEx (en la zona horaria de tu dispositivo), el recorrido por esos lugares en un mapa, el día de entrega previsto, la hora de entrega y, mientras el paquete espera, el nombre y la dirección del centro de FedEx, si FedEx los da. El paquete se consulta cada 10 minutos, cada 5 minutos cuando está en reparto, y recibes notificaciones de cada escaneo, de los pasos importantes o solo el día de entrega. No muestra tu nombre ni tu dirección, el remitente, la firma, el peso ni las medidas. Los escaneos salen en el inglés de FedEx, salvo tres: la entrega, que nombra a quien firmó y Peek muestra como «Entregado», y `Ready for pickup` y `Shipment exception`, que Peek muestra con sus propias palabras.
 
 ## Preguntas sobre el seguimiento de FedEx
 
@@ -85,6 +85,8 @@ Desconfía. INCIBE ha avisado de una campaña de SMS falsos que se hacen pasar p
 :::sources
 - [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – arancel de 3 euros desde el 1 de julio de 2026, IVA y gastos de gestión al transportista, la Aduana no cobra al consumidor
 - [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – 30 días, plazo adicional, rescisión y reembolso, el vendedor responde de los daños
+- [Comisión Europea: EU customs reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 euros por artículo hasta 150 euros desde el 1 de julio de 2026, tasa de 2 euros desde el 1 de noviembre de 2026
+- [Comisión Europea: guía sobre el arancel de 3 euros y la Union handling fee (PDF, en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 euros por artículo, sea cual sea su valor
 - [INCIBE: Campaña de smishing que suplanta a empresas de paquetería](https://www.incibe.es/ciudadania/avisos/campana-de-smishing-que-suplanta-empresas-de-paqueteria-con-la-excusa-de-que) – SMS falsos de entrega, 017
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – formas del número, dígitos de control, escaneos de FedEx, qué lee Peek de FedEx
 :::

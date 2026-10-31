@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-10-28
 ---
 
-Pour suivre ton colis, colle le numéro de suivi FedEx, ou un lien de suivi FedEx, dans le champ ci-dessus. Le suivi de FedEx lui-même se trouve sur fedex.com et dans l'application FedEx Mobile.
+Pour suivre ton colis, colle le numéro de suivi FedEx, ou un lien de suivi FedEx, dans le champ ci-dessus. Le suivi de FedEx lui-même se trouve sur fedex.com.
 
 ## Numéro de suivi FedEx : où le trouver et combien de chiffres
 
@@ -18,7 +18,7 @@ Regarde dans l'e-mail d'expédition ou sur la page de commande de la boutique. U
 | `123456789012343` | 15 chiffres : une forme que Peek classe aussi chez FedEx. |
 | `61290000000000000014` | 20 chiffres commençant par `6129` ou `7489` : FedEx Ground Economy (anciennement SmartPost), aux États-Unis. |
 
-Attention aux numéros qui se ressemblent : 12 chiffres, c'est aussi la longueur des numéros de [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay) ou [Colis Privé](carrier:colis-prive), et 15 chiffres celle de DPD France. Si fedex.com ne trouve rien, regarde quel transporteur la boutique nomme dans son e-mail.
+Attention aux numéros qui se ressemblent : 12 chiffres, c'est aussi la longueur des numéros de [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay) ou [Colis Privé](carrier:colis-prive), et 15 chiffres celle de DPD France, de BRT ou de Yunda Express. Si fedex.com ne trouve rien, regarde quel transporteur la boutique nomme dans son e-mail.
 
 ## Statuts du suivi FedEx : « Delivery exception » et les autres
 
@@ -44,13 +44,13 @@ Quand FedEx marque un colis comme retardé, Peek affiche « Problème signalé �
 
 Si la livraison échoue, un scan peut en donner la raison : `Customer not available or business closed` si personne n'était là, ou `Local delivery restriction - Delivery not attempted` si une restriction locale a empêché la tentative.
 
-Si tu demandes à FedEx de garder le colis dans un point de retrait, le scan peut afficher `Delivery option requested` pendant le trajet, puis `Ready for pickup` à l'arrivée. Peek montre alors le nom et l'adresse du point si FedEx les donne : pour une mise en attente demandée après l'envoi, la page de FedEx n'indique que la ville aux visiteurs non connectés. La page de FedEx peut appeler la dernière étape `Heading to pickup location`, que Peek compte comme « En livraison ». Ces changements se font auprès de FedEx, pas dans Peek. Plus d'infos dans [livraison manquée](guide:missed-delivery) et [colis non retiré](guide:uncollected-parcel).
+Si tu demandes à FedEx de garder le colis dans un point de retrait, le scan peut afficher `Delivery option requested` pendant le trajet, puis `Ready for pickup` à l'arrivée. Peek montre alors le point sous « Point de retrait » : son nom et, si FedEx la donne, son adresse. Ces changements se font auprès de FedEx, pas dans Peek. Plus d'infos dans [livraison manquée](guide:missed-delivery) et [colis non retiré](guide:uncollected-parcel).
 
 ## Frais de douane sur un colis FedEx
 
 Un colis venu de l'extérieur de l'UE, ou de l'étranger pour la Suisse, peut demander des frais d'importation. Tant qu'il est en douane, le suivi affiche `Clearance in progress` ou `Clearance delay`, puis `International shipment release - Import` quand la douane le libère.
 
-- **France et Belgique** : comme partout dans l'UE depuis le 1er juillet 2026, une commande de 150 € ou moins venue de l'extérieur de l'UE paie un droit de douane forfaitaire de 3 € par article, en plus de la TVA ; c'est le vendeur ou le transporteur qui le perçoit. En France métropolitaine, la douane précise que ces taxes peuvent t'être demandées à la réception du colis par le transporteur, FedEx compris, qui peut y ajouter ses propres frais de dédouanement, sans lien avec ce que perçoit la douane.
+- **France et Belgique** : comme partout dans l'UE depuis le 1er juillet 2026, une commande de 150 € ou moins venue de l'extérieur de l'UE paie un droit de douane forfaitaire de 3 € par article, en plus de la TVA ; c'est le vendeur ou le transporteur qui le perçoit. En France métropolitaine, la douane précise que ces taxes peuvent t'être demandées à la réception du colis par le transporteur, FedEx compris, qui peut y ajouter ses propres frais de dédouanement, sans lien avec ce que perçoit la douane. Et depuis le 1er novembre 2026, selon la Commission européenne, les achats en ligne venus de l'extérieur de l'UE paient en plus des frais de traitement de l'UE (Union handling fee) de 2 € par article, quelle que soit leur valeur.
 - **Suisse** : selon l'OFDF, dans le trafic de courrier rapide, c'est le transporteur qui dédouane, et lui seul peut t'aider à rechercher ton envoi. Il perçoit des frais de dédouanement pour ce travail ; pour leur montant, renseigne-toi auprès de lui.
 
 Plus d'infos dans [colis bloqué en douane](guide:customs).
@@ -71,7 +71,7 @@ En France, selon Service-Public.fr, quand la livraison passe par le transporteur
 
 Pour FedEx, il ouvre la page de suivi de fedex.com dans un navigateur, sur son propre serveur. Quand FedEx refuse, ou exige une vérification du destinataire, des services de suivi prennent le relais.
 
-Tu vois le statut, chaque scan sur une carte avec son lieu et son heure exacte, le jour de livraison prévu, l'heure de livraison et, tant que le colis attend, le nom et l'adresse du site FedEx qui le garde, si FedEx les donne. Le suivi est vérifié toutes les 10 minutes, toutes les 5 minutes une fois le colis en livraison, et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne garde ni ton nom ni ton adresse, ni l'expéditeur, la signature, le poids ou les dimensions. Les scans s'affichent dans l'anglais de FedEx, sauf trois : la livraison, dont la ligne nomme la personne qui a signé et qui s'affiche donc « Livré », ainsi que `Ready for pickup` et `Shipment exception`, que Peek affiche avec ses propres mots. Pour changer une livraison, payer la douane ou réclamer, adresse-toi à FedEx ou à l'expéditeur.
+Tu vois le statut, chaque scan avec son lieu et l'heure donnée par FedEx (dans le fuseau horaire de ton appareil), le trajet entre ces lieux sur une carte, le jour de livraison prévu, l'heure de livraison et, tant que le colis attend, le nom et l'adresse du site FedEx qui le garde, si FedEx les donne. Le suivi est vérifié toutes les 10 minutes, toutes les 5 minutes une fois le colis en livraison, et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne garde ni ton nom ni ton adresse, ni l'expéditeur, la signature, le poids ou les dimensions. Les scans s'affichent dans l'anglais de FedEx, sauf trois : la livraison, dont la ligne nomme la personne qui a signé et qui s'affiche donc « Livré », ainsi que `Ready for pickup` et `Shipment exception`, que Peek affiche avec ses propres mots. Pour changer une livraison, payer la douane ou réclamer, adresse-toi à FedEx ou à l'expéditeur.
 
 ## Questions sur le suivi FedEx
 
@@ -91,6 +91,8 @@ Ce premier scan veut seulement dire que l'expéditeur a transmis à FedEx les do
 - [Douane : Droit de douane forfaitaire de 3 euros sur les ventes à distance de biens importés](https://www.douane.gouv.fr/fiche/droit-de-douane-forfaitaire-de-3-euros-sur-les-ventes-distance-de-biens-importes) – 3 € par article jusqu'à 150 €, en vigueur depuis le 1er juillet 2026
 - [Douane : Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – taxes demandées à la réception par le transporteur (FedEx cité), ses frais de dédouanement
 - [Your Europe : Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_fr.htm) – 3 € par article dans l'UE, perçu par le vendeur ou le transporteur, responsabilité du commerçant jusqu'à la réception
+- [Commission européenne : EU customs reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € par article jusqu'à 150 € depuis le 1er juillet 2026, frais de traitement de 2 € à partir du 1er novembre 2026
+- [Commission européenne : guide sur le droit de 3 € et l'Union handling fee (PDF, en anglais)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € par article, quelle que soit sa valeur
 - [Service-Public.fr : Achat à distance : livraison du bien ou exécution de la prestation](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – vendeur seul responsable, transfert des risques, 30 jours, délai supplémentaire, annulation, remboursement sous 14 jours
 - [OFDF : Frais de dédouanement et suivi des colis](https://www.bazg.admin.ch/fr/frais-dedouanement-et-suivi-des-colis) – dédouanement par le transporteur, recherche de l'envoi, frais de dédouanement (Suisse)
 - [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – faux SMS au nom de transporteurs, vérifier le vrai suivi, 33700

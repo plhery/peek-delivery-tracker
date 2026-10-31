@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-10-28
 ---
 
-Paste a FedEx tracking number, or a FedEx tracking link, in the box above to follow the parcel. FedEx's own tracking is on fedex.com and in the FedEx Mobile app.
+Paste a FedEx tracking number, or a FedEx tracking link, in the box above to follow the parcel. FedEx's own tracking is on fedex.com.
 
 ## FedEx tracking number: where to find it and how many digits
 
@@ -18,7 +18,7 @@ Look in the shop's shipping email or on your order page. A fedex.com tracking li
 | `123456789012343` | 15 digits: a shape Peek also files under FedEx. |
 | `61290000000000000014` | 20 digits starting `6129` or `7489`: FedEx Ground Economy (formerly SmartPost) in the US. |
 
-Twelve digits also fit [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay), [BRT](carrier:brt) and several Asian couriers, and fifteen fit DPD France and BRT too. If fedex.com doesn't know the number, check which carrier the shop's email names.
+Twelve digits also fit [DPD France](carrier:dpd-fr), [Mondial Relay](carrier:mondial-relay), [BRT](carrier:brt) and several Asian couriers, and fifteen fit DPD France, BRT and Yunda Express too. If fedex.com doesn't know the number, check which carrier the shop's email names.
 
 ## What FedEx tracking statuses mean, including delivery exception
 
@@ -42,14 +42,14 @@ Peek files `Delivery exception` with failed delivery attempts. The scans can say
 
 ## Missed FedEx delivery and pickup locations
 
-If you ask FedEx to hold the parcel at a pickup location, a scan can read `Delivery option requested` while it travels there, then `Ready for pickup` once it has arrived. Peek then shows the location's name and address if FedEx gives them: for a hold asked for after the parcel was sent, FedEx's page shows visitors who aren't signed in only the town. FedEx's page may label the last leg `Heading to pickup location`, which Peek counts as out for delivery. You arrange such changes with FedEx, not in Peek. More in [missed deliveries](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
+If you ask FedEx to hold the parcel at a pickup location, a scan can read `Delivery option requested` while it travels there, then `Ready for pickup` once it has arrived. Peek then shows the location under "Pickup point": its name, and its address when FedEx gives one. You arrange such changes with FedEx, not in Peek. More in [missed deliveries](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
 ## FedEx parcel held at customs
 
 A parcel from outside the UK, or from outside the EU for Ireland, may owe import charges. The tracking shows `Clearance in progress` or `Clearance delay` while it's at customs, and `International shipment release - Import` once customs lets it go.
 
 - **UK**: GOV.UK says the courier contacts you with a bill for any VAT, duty or delivery charges, and normally holds the parcel for about 3 weeks. Unpaid, it goes back to the sender.
-- **Ireland**: since 1 July 2026, most parcels worth €150 or less from outside the EU owe €3 customs duty per item. If the shop didn't collect it at checkout, Revenue says the courier will ask you for it before delivering, and couriers charge their own administration fee on top.
+- **Ireland**: since 1 July 2026, most parcels worth €150 or less from outside the EU owe €3 customs duty per item, and since 1 November 2026 online orders from outside the EU also owe a €2 Union handling fee per item, whatever their value. If the shop didn't collect them at checkout, Revenue says the courier will ask you for both before delivering, and couriers charge their own administration fee on top.
 
 More in [parcels held at customs](guide:customs).
 
@@ -70,7 +70,7 @@ Marked `Delivered` but not there? FedEx's delivery scan names who signed, which 
 
 Peek opens fedex.com's tracking page in a browser on its own server. When FedEx refuses, or asks for recipient verification, tracking services fill in.
 
-It shows the status, each scan with its place and exact time on a map, the expected delivery day, the delivered time and, while the parcel waits, the FedEx location's name and address when FedEx gives them. It checks every 10 minutes, or every 5 minutes once the parcel is out for delivery, and can notify you at every scan, at important steps or on delivery day only. It drops your name and address, the shipper, the signature, weight and dimensions. Scans show in FedEx's English, except the delivered one: FedEx's line names who signed, so Peek shows "Delivered".
+It shows the status, each scan with its place and the time FedEx gives it (in your device's time zone), the route through those places on a map, the expected delivery day, the delivered time and, while the parcel waits, the FedEx location's name and address when FedEx gives them. It checks every 10 minutes, or every 5 minutes once the parcel is out for delivery, and can notify you at every scan, at important steps or on delivery day only. It drops your name and address, the shipper, the signature, weight and dimensions. Scans show in FedEx's English. Three come in Peek's own words, which read the same in English: the delivered scan, shown as "Delivered" because FedEx's line names who signed, and scans reading exactly `Ready for pickup` or `Shipment exception`.
 
 Most Ground Economy parcels are delivered by FedEx itself. When FedEx says the [US Postal Service](carrier:usps) has one, Peek follows it there ("Delivery with USPS").
 
@@ -95,6 +95,9 @@ It can be. Citizens Advice says a message asking you to pay to get a parcel or t
 - [CCPC: Your consumer rights if your order is not delivered](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – 30 days, new date, refund, responsible until you have it (Ireland)
 - [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per item since 1 July 2026, paid to the courier before delivery
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – couriers' administration fee
+- [Revenue: Union Handling Fee, what does this mean for consumers?](https://www.revenue.ie/en/customs/individuals/union-handling-fee/what-does-this-mean.aspx) – duty and the €2 fee per item paid at checkout, or to the courier before delivery
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item, whatever its value
 - [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact the shipping company through a website or number you know
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – number shapes, check digits, FedEx's scan wordings, what Peek reads from FedEx
 :::

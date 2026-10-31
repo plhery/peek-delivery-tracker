@@ -6,7 +6,7 @@ published: 2026-10-13
 updated: 2026-10-28
 ---
 
-Füg eine FedEx-Sendungsnummer oder einen FedEx-Tracking-Link oben ins Feld ein, um dein Paket zu verfolgen. FedEx' eigene Sendungsverfolgung findest du auf fedex.com und in der FedEx Mobile App.
+Füg eine FedEx-Sendungsnummer oder einen FedEx-Tracking-Link oben ins Feld ein, um dein Paket zu verfolgen. FedEx' eigene Sendungsverfolgung findest du auf fedex.com.
 
 ## FedEx Trackingnummer: wo du sie findest
 
@@ -18,7 +18,7 @@ Schau in die Versandbestätigung des Shops oder auf die Bestellseite. Ein Tracki
 | `123456789012343` | 15 Ziffern: eine Form, die Peek unter anderem FedEx zuordnet. |
 | `61290000000000000014` | 20 Ziffern, beginnt mit 6129 oder 7489: FedEx Ground Economy (früher SmartPost) in den USA. |
 
-Zwölf Ziffern sind keine Besonderheit von FedEx: Je nach Prüfziffer passt dieselbe Form zu [GLS](carrier:gls-de), [GLS Schweiz](carrier:gls-ch) oder [DHL](carrier:dhl), dazu zu DPD France, Mondial Relay, BRT und mehreren asiatischen Paketdiensten. Eine Nummer, die mit `1Z` beginnt, ist von [UPS](carrier:ups), eine 10-stellige Frachtbriefnummer kann von [DHL Express](carrier:dhl-express) sein. Kennt fedex.com deine Nummer nicht, schau, welchen Paketdienst die Mail des Shops nennt.
+Zwölf Ziffern sind keine Besonderheit von FedEx: Je nach Prüfziffer passt dieselbe Form zu [GLS](carrier:gls-de), [GLS Schweiz](carrier:gls-ch) oder [DHL](carrier:dhl), dazu zu DPD France, Mondial Relay, BRT und mehreren asiatischen Paketdiensten. Auch eine 15-stellige Nummer kann von DPD France, BRT oder Yunda Express stammen. Eine Nummer, die mit `1Z` beginnt, ist von [UPS](carrier:ups), eine 10-stellige Frachtbriefnummer kann von [DHL Express](carrier:dhl-express) sein. Kennt fedex.com deine Nummer nicht, schau, welchen Paketdienst die Mail des Shops nennt.
 
 ## FedEx Sendungsverfolgung: was die Status bedeuten
 
@@ -44,13 +44,13 @@ Markiert FedEx ein Paket als verspätet, zeigt Peek „Problem gemeldet“, auß
 
 Klappt die Zustellung nicht, kann ein Scan den Grund nennen: `Customer not available or business closed`, wenn niemand da war, oder `Local delivery restriction - Delivery not attempted`, wenn eine örtliche Einschränkung den Zustellversuch verhindert hat.
 
-Bittest du FedEx, das Paket an einem Abholort zu hinterlegen, kann der Scan unterwegs `Delivery option requested` lauten, nach der Ankunft `Ready for pickup`. Peek zeigt dann Name und Adresse des Abholorts, sofern FedEx sie mitliefert: Wurde die Hinterlegung erst nach dem Versand gewünscht, zeigt FedEx' Seite Besuchern ohne Anmeldung nur den Ort. Die letzte Etappe nennt FedEx' Seite eventuell `Heading to pickup location`; Peek zählt sie als „In Zustellung“. Solche Änderungen vereinbarst du mit FedEx, nicht in Peek. Mehr in [Paket verpasst](guide:missed-delivery) und [Paket nicht abgeholt](guide:uncollected-parcel).
+Bittest du FedEx, das Paket an einem Abholort zu hinterlegen, kann der Scan unterwegs `Delivery option requested` lauten, nach der Ankunft `Ready for pickup`. Peek zeigt den Abholort dann unter „Abholstelle“: seinen Namen und, sofern FedEx sie mitliefert, die Adresse. Solche Änderungen vereinbarst du mit FedEx, nicht in Peek. Mehr in [Paket verpasst](guide:missed-delivery) und [Paket nicht abgeholt](guide:uncollected-parcel).
 
 ## FedEx Paket beim Zoll
 
 Kommt ein Paket aus einem Nicht-EU-Staat, können Einfuhrabgaben fällig werden. Solange es beim Zoll ist, zeigt die Sendungsverfolgung `Clearance in progress` oder `Clearance delay`, nach der Freigabe `International shipment release - Import`.
 
-In Deutschland übernimmt laut Zoll in den meisten Fällen der Post- oder Kurierdienst die Zollanmeldung und legt die Einfuhrabgaben aus. Du zahlst sie in der Regel bei der Zustellung, dazu meist eine Servicepauschale, deren Höhe in den AGB des Dienstes steht. Seit dem 1. Juli 2026 fällt für Sendungen aus Nicht-EU-Staaten bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie an, dazu wie bisher die Einfuhrumsatzsteuer von 19 bzw. 7 %. Dieser Pauschalzoll gilt laut dem EU-Portal „Ihr Europa“ in der ganzen EU, also auch in Österreich. Mehr in [Paket beim Zoll](guide:customs).
+In Deutschland übernimmt laut Zoll in den meisten Fällen der Post- oder Kurierdienst die Zollanmeldung und legt die Einfuhrabgaben aus. Du zahlst sie in der Regel bei der Zustellung, dazu meist eine Servicepauschale, deren Höhe in den AGB des Dienstes steht. Seit dem 1. Juli 2026 fällt für Sendungen aus Nicht-EU-Staaten bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie an, dazu wie bisher die Einfuhrumsatzsteuer von 19 bzw. 7 %. Dieser Pauschalzoll gilt laut dem EU-Portal „Ihr Europa“ in der ganzen EU, also auch in Österreich. Ebenfalls EU-weit kommt laut EU-Kommission seit dem 1. November 2026 bei Online-Bestellungen aus Nicht-EU-Staaten eine Bearbeitungsgebühr (Union handling fee) von 2 € je Warenkategorie dazu, egal wie viel die Ware wert ist. Mehr in [Paket beim Zoll](guide:customs).
 
 ## FedEx Paket kommt nicht an, ist verspätet oder beschädigt
 
@@ -68,7 +68,7 @@ Bei 12- und 15-stelligen Nummern mit gültiger Prüfziffer denkt [Peek](/) zuers
 
 Peeks Server öffnet dafür die Tracking-Seite von fedex.com in einem Browser. Das klappt nicht immer: Blockt FedEx den Abruf oder verlangt FedEx eine Bestätigung durch den Empfänger, springen Tracking-Dienste ein.
 
-Antwortet FedEx, siehst du den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den erwarteten Liefertag, die Zustellzeit und, solange das Paket wartet, Name und Adresse des FedEx-Standorts, an dem es liegt, sofern FedEx sie angibt. Peek schaut alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist, und schickt dir auf Wunsch Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind dein Name und deine Adresse, der Versender, die Unterschrift, Gewicht und Abmessungen. Die Scans erscheinen in FedEx' englischer Fassung. Nur den Zustellscan, in dem FedEx den Namen der unterschreibenden Person nennt, sowie `Ready for pickup` und `Shipment exception` zeigt Peek in eigenen Worten auf Deutsch, etwa „Zugestellt“ oder „Abholbereit“.
+Antwortet FedEx, siehst du den Status, jeden Scan mit Ort und der Uhrzeit, die FedEx angibt (in der Zeitzone deines Geräts), die Strecke über diese Orte auf einer Karte, den erwarteten Liefertag, die Zustellzeit und, solange das Paket wartet, Name und Adresse des FedEx-Standorts, an dem es liegt, sofern FedEx sie angibt. Peek schaut alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist, und schickt dir auf Wunsch Mitteilungen bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind dein Name und deine Adresse, der Versender, die Unterschrift, Gewicht und Abmessungen. Die Scans erscheinen in FedEx' englischer Fassung. Nur den Zustellscan, in dem FedEx den Namen der unterschreibenden Person nennt, sowie `Ready for pickup` und `Shipment exception` zeigt Peek in eigenen Worten auf Deutsch, etwa „Zugestellt“ oder „Abholbereit“.
 
 Bestellst du in den USA und übergibt FedEx ein Ground-Economy-Paket an die US-Post, geht die Verfolgung dort weiter („Zustellung durch USPS“). Die meisten dieser Pakete stellt FedEx aber selbst zu.
 
@@ -89,6 +89,8 @@ Nicht unbedingt. Die Verbraucherzentralen warnen vor SMS angeblicher Paketdienst
 :::sources
 - [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – Kurierdienst meldet an und legt aus, Zahlung bei Zustellung, Servicepauschale, 3 € seit 1. Juli 2026, 19 bzw. 7 %
 - [Ihr Europa: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – 30 Tage, Nachfrist, Rücktritt, Haftung des Händlers, 3 € je Position in der EU
+- [Europäische Kommission: EU customs reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € je Position bis 150 € seit 1. Juli 2026, 2 € Union handling fee ab 1. November 2026
+- [Europäische Kommission: Leitfaden zum 3-€-Zoll und zur Union handling fee (PDF, Englisch)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € je Position, unabhängig vom Warenwert
 - [Verbraucherzentrale: Was tun, wenn meine Online-Bestellung nach dem Versand nicht ankommt?](https://www.verbraucherzentrale.de/wissen/digitale-welt/onlinehandel/was-tun-wenn-meine-onlinebestellung-nach-dem-versand-nicht-ankommt-28083) – nichts zahlen ohne Ware, Fehler des Zustellers
 - [Verbraucherzentrale: Paketdienst-SMS: Vorsicht, Abzocke!](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/paketdienstsms-vorsicht-abzocke-58988) – Fake-SMS, Zollgebühren bei Zustellung, Nummer selbst eingeben
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – Nummernformen, Prüfziffern, FedEx' Scans, was Peek bei FedEx liest

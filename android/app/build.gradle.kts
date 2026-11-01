@@ -121,7 +121,7 @@ val debugSharedAssets = tasks.register<Sync>("debugSharedAssets") {
  * The words Android shows for the app outside it, as resources written at build time from the shared copy
  * (Localization.json) in each language the app speaks, so that a change of copy reaches them as it reaches the
  * iPhone's InfoPlist.strings: [strings] names each resource and its key, [qualifiers] each language's resource folder,
- * English the default one. Nothing of it is committed.
+ * English the default one, and the task fails for a language of the copy without one. Nothing of it is committed.
  */
 open class SystemStrings @Inject constructor(objects: ObjectFactory) : DefaultTask() {
     @get:InputFiles
@@ -142,6 +142,9 @@ open class SystemStrings @Inject constructor(objects: ObjectFactory) : DefaultTa
         val file = sharedResources.asFileTree.matching { include("peek/Localization.json") }.singleFile
         @Suppress("UNCHECKED_CAST")
         val copy = groovy.json.JsonSlurper().parse(file, "UTF-8") as Map<String, Map<String, String>>
+        // A language the copy gains needs its folder here, or the app would name itself in English in it.
+        val unplaced = copy.keys - qualifiers.get().keys
+        if (unplaced.isNotEmpty()) throw GradleException("systemStrings has no resource folder for ${unplaced.joinToString()} in Localization.json")
         val output = outputDirectory.get().asFile
         output.deleteRecursively()
         for ((language, qualifier) in qualifiers.get()) {
@@ -201,8 +204,6 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.core.splashscreen)
     implementation(libs.lifecycle.runtime.compose)
-    // Whether the app is in front or left (scenePhase), for the stores (AppContainer). Already there through emoji2.
-    implementation(libs.lifecycle.process)
     // The iPhone's materials: a blur of what lies behind (Materials.kt).
     implementation(libs.haze)
     implementation(libs.haze.blur)

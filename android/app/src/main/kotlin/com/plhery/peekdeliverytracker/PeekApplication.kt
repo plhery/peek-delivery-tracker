@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker
 
 import android.app.Application
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.ProcessLifecycleOwner
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.UserDefaults
@@ -38,8 +37,12 @@ class PeekApplication : Application() {
     /** A parcel's link that came before the stores were made, which opens once they are. */
     private var waitingLink: ParcelLinkRoute? = null
 
+    /** The app in front or left, as the stores follow it: its windows', the share card's aside ([AppForeground]). */
+    internal val foreground = AppForeground()
+
     override fun onCreate() {
         super.onCreate()
+        registerActivityLifecycleCallbacks(foreground)
         val assets = assets
         SharedResources.install { name ->
             try {
@@ -59,7 +62,7 @@ class PeekApplication : Application() {
         making = true
         MainScope().launch {
             val container = makeStores(this@PeekApplication)
-            container.start(ProcessLifecycleOwner.get().lifecycle)
+            container.start(foreground.lifecycle)
             waitingLink?.let(container.links::open)
             waitingLink = null
             containerState.value = container

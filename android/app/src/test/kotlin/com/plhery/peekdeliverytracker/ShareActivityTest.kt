@@ -5,14 +5,20 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.os.Looper
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -27,6 +33,7 @@ import com.plhery.peekdeliverytracker.ui.SHARE_SAVE
 import com.plhery.peekdeliverytracker.ui.SHARE_STATUS
 import com.plhery.peekdeliverytracker.ui.SHARE_TITLE
 import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -44,8 +51,9 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * "Add to Peek" (B-S70, B-ST36, A-L08, B-SE10): the share sheet offers it for plain text, under its name in each of the
  * app's languages, with the app's icon, in a task Recents doesn't keep; its card reads the text and its subject, says
- * what it found, saves it where the app's window takes it, and goes back to the app that shared, saved or not. Its
- * words are the app's language's. On synthetic numbers, the drafts in memory.
+ * what it found, saves it where the app's window takes it, and goes back to the app that shared, saved or not, by its
+ * Cancel or Done, the back or a tap beside it, a turn on the way down included. Its words, and its window's name, are
+ * the app's language's. On synthetic numbers, the drafts in memory.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -57,10 +65,18 @@ class ShareActivityTest {
     private val app = ApplicationProvider.getApplicationContext<PeekApplication>()
     private val defaults = MemoryDefaults()
     private val english = ExtensionLocalizer("en")
+    private val windows = mutableListOf<ActivityController<ShareActivity>>()
 
     @Before
     fun inMemory() {
         app.shareDefaults = { defaults }
+    }
+
+    /** Every card the test opened gone, and its composition let finish, so none waits on in the tests after this one. */
+    @After
+    fun closeWindows() {
+        windows.forEach { it.close() }
+        shadowOf(Looper.getMainLooper()).idle()
     }
 
     private fun share(text: String? = null, subject: String? = null, type: String = "text/plain") = Intent(Intent.ACTION_SEND).apply {
@@ -70,7 +86,8 @@ class ShareActivityTest {
     }
 
     /** The card for `intent`, up. */
-    private fun open(intent: Intent): ActivityController<ShareActivity> = Robolectric.buildActivity(ShareActivity::class.java, intent).setup().also { settle() }
+    private fun open(intent: Intent): ActivityController<ShareActivity> =
+        Robolectric.buildActivity(ShareActivity::class.java, intent).also { windows += it }.setup().also { settle() }
 
     private fun settle() {
         compose.mainClock.advanceTimeBy(1_000)
@@ -131,6 +148,7 @@ class ShareActivityTest {
         val window = open(share("Your parcel TESTLAMP0001 is on its way", subject = "Desk lamp"))
         assertTrue(exists(SHARE_CARD))
         assertEquals("Add to Peek", text(SHARE_TITLE))
+        assertEquals("Add to Peek", window.get().title.toString())
         assertEquals(english.text("shareExtension.ready"), text(SHARE_STATUS))
         compose.onNodeWithTag(SHARE_SAVE).assertIsEnabled()
         assertEquals(english.text("common.cancel"), text(SHARE_CLOSE))
@@ -183,6 +201,58 @@ class ShareActivityTest {
         assertFalse(defaults.hasObject(forKey = ShareInbox.key))
     }
 
+    /** The system's back. */
+    private fun back(window: ActivityController<ShareActivity>) {
+        window.get().onBackPressedDispatcher.onBackPressed()
+        settle()
+    }
+
+    /** A tap on the app that shared, dimmed beside the card's form sheet in a regular window. */
+    private fun besideTheCard() {
+        compose.onRoot().performTouchInput { click(Offset(40.dp.toPx(), centerY)) }
+        settle()
+    }
+
+    /** Each way down but Cancel and Done: before Save it goes back with nothing saved, after it as Done does. */
+    private fun goesBackAsCancelOrDone(close: (ActivityController<ShareActivity>) -> Unit) {
+        val unsaved = open(share("TESTLAMP0001", subject = "Desk lamp"))
+        close(unsaved)
+        assertTrue(unsaved.get().isFinishing)
+        assertEquals(Activity.RESULT_CANCELED, shadowOf(unsaved.get()).resultCode)
+        assertFalse(defaults.hasObject(forKey = ShareInbox.key))
+        unsaved.pause().stop().destroy()
+
+        val saved = open(share("TESTLAMP0001", subject = "Desk lamp"))
+        tap(SHARE_SAVE)
+        close(saved)
+        assertTrue(saved.get().isFinishing)
+        assertEquals(Activity.RESULT_OK, shadowOf(saved.get()).resultCode)
+        assertEquals("TESTLAMP0001", ShareInbox.consume(defaults)?.trackingInput)
+    }
+
+    @Test
+    fun theBackGoesBackToTheAppThatSharedAsCancelBeforeSaveAndAsDoneAfter() = goesBackAsCancelOrDone(::back)
+
+    @Test
+    @Config(qualifiers = TABLET)
+    fun aTapBesideTheCardGoesBackToTheAppThatSharedAsCancelBeforeSaveAndAsDoneAfter() = goesBackAsCancelOrDone { besideTheCard() }
+
+    @Test
+    fun aTurnAsTheCardGoesDownDoesntBringItBackAndItStillGoesBack() {
+        val window = open(share("TESTLAMP0001"))
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(SHARE_CLOSE, useUnmergedTree = true).performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertFalse("On its way down", window.get().isFinishing)
+        window.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(window.get().isFinishing)
+        assertEquals(Activity.RESULT_CANCELED, shadowOf(window.get()).resultCode)
+        assertFalse("Not back", exists(SHARE_CARD))
+        assertFalse(defaults.hasObject(forKey = ShareInbox.key))
+    }
+
     @Test
     fun aSaveThatDoesNotReadBackSaysSoAndCanBeTriedAgain() {
         var keeps = false
@@ -218,10 +288,15 @@ class ShareActivityTest {
     @Test
     fun itSpeaksTheAppsLanguage() {
         defaults.set("fr", forKey = AppLanguage.storageKey)
-        open(share("TESTLAMP0001"))
+        val window = open(share("TESTLAMP0001"))
         val french = ExtensionLocalizer("fr")
         assertEquals("Ajouter à Peek", text(SHARE_TITLE))
+        // The window's name, which TalkBack reads first, whatever the phone's language names the share target.
+        assertEquals("Ajouter à Peek", window.get().title.toString())
         assertEquals(french.text("shareExtension.ready"), text(SHARE_STATUS))
         assertEquals(french.text("common.cancel"), text(SHARE_CLOSE))
     }
 }
+
+/** A regular window, where the card is a form sheet in its middle. */
+private const val TABLET = "w1032dp-h1376dp-xhdpi"

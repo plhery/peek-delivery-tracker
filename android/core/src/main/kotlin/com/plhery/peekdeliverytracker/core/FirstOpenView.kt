@@ -28,7 +28,7 @@ sealed class FirstParcelRequest {
         /** As much pasted text as Add takes in. */
         const val pasteLimit = 2000
 
-        /** As much of `text` as Add takes in: its first [pasteLimit] characters. */
+        /** As much pasted or dropped text as Add opens with: its first [pasteLimit] characters. */
         fun taken(text: String): String = text.characterPrefix(pasteLimit)
 
         /**

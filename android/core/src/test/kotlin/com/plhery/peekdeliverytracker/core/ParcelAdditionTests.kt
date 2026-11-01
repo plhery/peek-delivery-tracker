@@ -342,6 +342,21 @@ class ParcelAdditionTests {
     }
 
     @Test
+    fun theTrackingFieldHoldsAllAShareBringsAndAddsOwnPasteTakesAsMuchTrimmed() {
+        val shared = "x".repeat(SharedContent.textLimit)
+        assertEquals(shared, ParcelAddition.tracking(shared))
+        assertEquals(shared, ParcelAddition.tracking(shared + "y"))
+        // A flag is one character of two code points: the last one whole, nothing after it.
+        val flag = "\uD83C\uDDE8\uD83C\uDDED"
+        assertEquals(flag.repeat(ParcelAddition.TRACKING_LIMIT), ParcelAddition.tracking(flag.repeat(ParcelAddition.TRACKING_LIMIT + 1)))
+        // Add's paste, where the first screen's takes FirstParcelRequest.pasteLimit.
+        assertEquals("1Z999AA10123456784", ParcelAddition.pasted(" 1Z999AA10123456784\n"))
+        assertNull(ParcelAddition.pasted(" \n "))
+        assertNull(ParcelAddition.pasted(""))
+        assertEquals(ParcelAddition.TRACKING_LIMIT, ParcelAddition.pasted(" " + "x".repeat(ParcelAddition.TRACKING_LIMIT + 5))?.length)
+    }
+
+    @Test
     fun aScanDeliversTheFirstBarcodeWithAPayloadTrimmedAndNothingAfterIt() {
         val scan = AddParcelView.FirstScan()
         // A barcode with no text, or only spaces and newlines, delivers nothing and leaves the next one to.

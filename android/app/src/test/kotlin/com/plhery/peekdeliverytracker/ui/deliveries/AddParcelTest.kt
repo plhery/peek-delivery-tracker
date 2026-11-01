@@ -1160,15 +1160,15 @@ class AddParcelTest {
     }
 
     @Test
-    fun theFieldTakesTwoThousandCharactersPastedOrTyped() {
+    fun theFieldTakesTenThousandCharactersPastedOrTypedAsMuchAsAShareBrings() {
         show()
         open()
         clipboard("1Z999AA10123456784 " + "a".repeat(20_000))
         node(ADD_PASTE).performClick()
         settle()
-        assertEquals("1Z999AA10123456784 " + "a".repeat(2_000 - 19), fieldText(ADD_TRACKING))
-        type("b".repeat(2_500))
-        assertEquals("b".repeat(2_000), fieldText(ADD_TRACKING))
+        assertEquals("1Z999AA10123456784 " + "a".repeat(10_000 - 19), fieldText(ADD_TRACKING))
+        type("b".repeat(12_500))
+        assertEquals("b".repeat(10_000), fieldText(ADD_TRACKING))
     }
 
     @Test

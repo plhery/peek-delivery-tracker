@@ -782,11 +782,11 @@ internal class DeliveriesState(
 
     /**
      * What another app shared (`consumeSharedDraft()`'s `sharedDraft = draft; showingAdd = true`): Add opens with its
-     * name and its text, as much of the text as Add takes in ([FirstParcelRequest.taken]), where the iPhone takes it
-     * all; Add already open takes them in place of what it holds, as a paste does (`fill(_:)`, [AddRequest.fill]).
+     * name and its whole text (all a share brings, [ParcelAddition.tracking]), as the iPhone's `init(draft:)`; Add
+     * already open takes them in place of what it holds, as a paste does (`fill(_:)`, [AddRequest.fill]).
      */
     fun addSharedDraft(draft: SharedParcelDraft) {
-        val text = FirstParcelRequest.taken(draft.trackingInput)
+        val text = ParcelAddition.tracking(draft.trackingInput)
         val label = ParcelAddition.label(draft.label)
         val open = addition
         if (open != null) {
@@ -796,10 +796,13 @@ internal class DeliveriesState(
         }
     }
 
-    /** Open Add has taken what another app shared while it was up ([AddRequest.fill]): a window made again doesn't again. */
-    fun filled(request: AddRequest) {
+    /**
+     * Add has taken the text and the name it opened with, or was filled with while it was up ([AddRequest.fill]): its
+     * form keeps them from then on, the window doesn't keep them twice, and a window made again doesn't fill it again.
+     */
+    fun taken(request: AddRequest) {
         val open = addition
-        if (open != null && open.id == request.id && open.fill == request.fill) addition = open.copy(fill = null)
+        if (open != null && open.id == request.id && open.fill == request.fill) addition = open.copy(draft = null, label = "", fill = null)
     }
 
     /**
@@ -1317,7 +1320,7 @@ internal class DeliveriesState(
     /**
      * Hands `address` to the system's share sheet (`UIActivityViewController`), the composition's: whether it could be
      * shown. `chosen` runs once the reader has chosen the app it goes to, even after the window has gone; never where
-     * they back out.
+     * they back out. The app's own "Add to Peek" is offered there, as the iPhone's sheet offers the app's own extension.
      */
     var handOut: (address: String, chosen: (() -> Unit)?) -> Boolean = { _, _ -> false }
 
@@ -1890,7 +1893,8 @@ internal class DeliveriesState(
 /**
  * Add, open over the window (`showingAdd`), with the text pasted, dropped or shared that it opens with (`sharedDraft`)
  * and the name shared with it ([label]), or on the camera ([scanning], AddParcelView's `scanning`): each opening another
- * ([id]). Shared while Add is up, the draft and its name are to fill it ([fill], each share another) until it has.
+ * ([id]). Shared while Add is up, the draft and its name are to fill it ([fill], each share another) until it has. Once
+ * Add has them, its form alone keeps them ([DeliveriesState.taken]).
  */
 @Immutable
 internal data class AddRequest(

@@ -136,7 +136,6 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierRecognition
 import com.plhery.peekdeliverytracker.core.CarrierRequirement
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
-import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.NumberInText
 import com.plhery.peekdeliverytracker.core.NumberRefusals
 import com.plhery.peekdeliverytracker.core.OrderShop
@@ -456,11 +455,11 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     actions.saving = saving
     // A change's spring covers that change only, as `withAnimation` does: what comes later moves on the form's own.
     SideEffect { motion.duration = null }
-    // What another app shared while Add was up takes the field's place, as a paste does (`onChange(of: draft)`), once.
+    // What another app shared while Add was up takes the field's place, as a paste does (`onChange(of: draft)`), once;
+    // then what Add opened or was filled with is kept in its form alone.
     LaunchedEffect(request.fill) {
-        if (request.fill == null) return@LaunchedEffect
-        actions.fill(request.label, request.draft.orEmpty())
-        state.filled(request)
+        if (request.fill != null) actions.fill(request.label, request.draft.orEmpty())
+        state.taken(request)
     }
 
     val error = if (form.pasteFailed) localizer.text("add.pasteFailed") else work.failure(request.id)
@@ -566,11 +565,11 @@ private class AddActions(
 
     /**
      * The field's text changed (`onChange(of: trackingInput)`): no duplicate, no error, no carrier picked by hand. As
-     * much of it as a paste takes, which the window can keep.
+     * much of it as the field holds ([ParcelAddition.tracking]), which the window can keep.
      */
     fun type(text: String) {
         motion.duration = null
-        setInput(FirstParcelRequest.taken(text))
+        setInput(ParcelAddition.tracking(text))
     }
 
     private fun setInput(text: String) {
@@ -585,12 +584,11 @@ private class AddActions(
 
     /**
      * `paste()`: what the clipboard holds as text in the field, trimmed and settled, the keyboard on it; else why
-     * nothing came. As much of it as the ways in take ([FirstParcelRequest.pasteLimit]), where the iPhone takes it all:
-     * the window keeps what the field holds, and can't keep a few hundred thousand characters.
+     * nothing came. As much of it as the field holds ([ParcelAddition.pasted]), where the iPhone takes it all.
      */
     fun paste() {
         state.source.action("parcel-paste")
-        val value = state.readClipboard()?.let { FirstParcelRequest.Paste(it).draft }
+        val value = state.readClipboard()?.let(ParcelAddition::pasted)
         if (value == null) {
             state.source.pageWork.dismiss(request.id)
             form.pasteFailed = true
@@ -624,12 +622,12 @@ private class AddActions(
 
     /**
      * The scanner's result: the barcode's text in the field on the snappy spring, at once under Reduce Motion, the
-     * scanner going down, no field focused, and the number settled. As much of it as the field takes
-     * ([FirstParcelRequest.taken]), where the iPhone takes it all.
+     * scanner going down, no field focused, and the number settled. As much of it as the field holds
+     * ([ParcelAddition.tracking]), where the iPhone takes it all.
      */
     fun scanned(value: String) {
         motion.duration = if (reduceMotion) null else FILL_MOTION
-        val text = FirstParcelRequest.taken(value)
+        val text = ParcelAddition.tracking(value)
         setInput(text)
         form.showingScanner = false
         focusManager.clearFocus()

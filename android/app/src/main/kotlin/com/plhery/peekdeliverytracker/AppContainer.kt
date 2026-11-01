@@ -289,9 +289,10 @@ class AppContainer(
      * session's bootstrap, the catalog's refresh, the parcels of each identity, the browser check's preparation and the
      * sign-in emails' language. Once.
      *
-     * `lifecycle` is the process's (ProcessLifecycleOwner's), whose start and stop are the app coming to the front and
+     * `lifecycle` is the app's windows' ([AppForeground]), whose start and stop are the app coming to the front and
      * leaving it (`scenePhase`): a dialog, the share sheet, a permission prompt or a window beside it in split screen
-     * covers the app without stopping it, and a rotation or a foldable opened makes the window again without a stop.
+     * covers the app without stopping it, a rotation or a foldable opened makes the window again without a stop, and the
+     * share card, the iPhone's extension, neither starts nor stops it.
      */
     fun start(lifecycle: Lifecycle) {
         check(!started) { "The app's stores start once." }

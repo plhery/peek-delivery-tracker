@@ -109,6 +109,23 @@ class SharedDraftTest {
     }
 
     @Test
+    fun aLongDraftFillsAddWholeAndTheNumberNearItsEndIsFoundAndKeptOnce() {
+        val end = " Your parcel 1Z999AA10123456784 is on its way."
+        val text = "The parcel left the warehouse today. ".repeat(250).take(9_000 - end.length) + end
+        assertEquals(9_000, text.length)
+        share(text, label = "Desk lamp")
+        show()
+        assertEquals(text, fieldText(ADD_TRACKING))
+        assertEquals("UPS, ${localizer.text("add.detectedCarrier")}", carrier())
+        assertNull("The window keeps the text in Add's form alone", deliveries.addition?.draft)
+
+        // Typed on, the field keeps it all.
+        compose.onNodeWithTag(ADD_TRACKING).performTextReplacement("$text!")
+        settle()
+        assertEquals("$text!", fieldText(ADD_TRACKING))
+    }
+
+    @Test
     fun aDraftSavedWhileTheAppWasAwayOpensAddAsTheWindowComesBack() {
         show()
         assertNull(deliveries.addition)

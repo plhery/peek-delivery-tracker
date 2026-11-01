@@ -3,7 +3,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.ComponentName
 import android.content.ContentResolver
 import android.content.Intent
 import android.os.Build
@@ -73,7 +72,6 @@ import androidx.navigation3.scene.Scene
 import androidx.navigation3.scene.SceneStrategy
 import androidx.navigation3.scene.SceneStrategyScope
 import androidx.navigation3.ui.NavDisplay
-import com.plhery.peekdeliverytracker.ShareActivity
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesKey
@@ -181,15 +179,14 @@ fun DeliveriesTab(
         }
     }
     // A parcel's link through the system's share sheet (`ShareLink`, `LinkActivitySheet`), which tells `chosen` of the
-    // app it went to, if any (ShareTargetChosen); false where it couldn't be shown. The app's own "Add to Peek" isn't
-    // among the apps, as the iPhone's share sheet leaves out the app's own extension.
+    // app it went to, if any (ShareTargetChosen); false where it couldn't be shown. The app's own "Add to Peek" is among
+    // the apps, as the iPhone's share sheet offers the app's own extension, whose activation rule names no type it
+    // turns away.
     state.handOut = { address, chosen ->
         val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, address)
         val sender = chosen?.let { ShareTargetChosen.sender(context, it) }
-        val chooser = Intent.createChooser(send, null, sender)
-            .putExtra(Intent.EXTRA_EXCLUDE_COMPONENTS, arrayOf(ComponentName(context, ShareActivity::class.java)))
         try {
-            context.startActivity(chooser)
+            context.startActivity(Intent.createChooser(send, null, sender))
             true
         } catch (_: ActivityNotFoundException) {
             false

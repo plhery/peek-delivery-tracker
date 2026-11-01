@@ -59,7 +59,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.plhery.peekdeliverytracker.ShareActivity
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
@@ -187,13 +186,11 @@ class ParcelShareTest {
     /** The system's share sheet the window last opened, or null. */
     private fun chooser(): Intent? = shadowOf(compose.activity).nextStartedActivity?.also { assertEquals(Intent.ACTION_CHOOSER, it.action) }
 
-    /** The address the system's share sheet `chooser` was given, which leaves out the app's own "Add to Peek". */
+    /** The address the system's share sheet `chooser` was given. */
     private fun address(chooser: Intent): String? {
         val send = IntentCompat.getParcelableExtra(chooser, Intent.EXTRA_INTENT, Intent::class.java)!!
         assertEquals(Intent.ACTION_SEND, send.action)
         assertEquals("text/plain", send.type)
-        val excluded = IntentCompat.getParcelableArrayExtra(chooser, Intent.EXTRA_EXCLUDE_COMPONENTS, ComponentName::class.java)?.toList()
-        assertEquals(listOf(ComponentName(compose.activity, ShareActivity::class.java)), excluded)
         return send.getStringExtra(Intent.EXTRA_TEXT)
     }
 

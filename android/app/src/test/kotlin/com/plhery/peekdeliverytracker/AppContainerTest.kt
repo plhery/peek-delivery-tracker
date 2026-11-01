@@ -48,7 +48,7 @@ class AppContainerTest {
     private lateinit var previousCatalog: CarrierCatalog
     private var container: AppContainer? = null
 
-    /** The process's lifecycle (ProcessLifecycleOwner's), in front. */
+    /** The app's windows' lifecycle (AppForeground's), in front. */
     private val process = object : LifecycleOwner {
         override val lifecycle = LifecycleRegistry(this)
     }

@@ -446,6 +446,22 @@ data class ParcelAddition(
         /** The name field as it takes `typed` (`onChange(of: label)`): its first [LABEL_LIMIT] characters. */
         fun label(typed: String): String = typed.characterPrefix(LABEL_LIMIT)
 
+        /**
+         * The most the tracking field holds: the longest text a share brings (`SharedContent`'s 10 000), which Add
+         * takes whole, as the iPhone's does (`init(draft:)`, `fill(_:)`). The iPhone's field has no limit; the window
+         * keeps what this one holds, and can't keep a few hundred thousand characters.
+         */
+        const val TRACKING_LIMIT = SharedContent.textLimit
+
+        /** The tracking field as it takes `text`, typed, pasted, scanned or shared: its first [TRACKING_LIMIT] characters. */
+        fun tracking(text: String): String = text.characterPrefix(TRACKING_LIMIT)
+
+        /**
+         * `paste()`'s text: what the clipboard holds, trimmed, as much of it as the field holds ([tracking]), where the
+         * iPhone takes it all; none when nothing is left.
+         */
+        fun pasted(clipboard: String): String? = clipboard.trimmingWhitespacesAndNewlines().nonEmpty?.let(::tracking)
+
         /** A check's answer as text, for a window to keep through being made again, as the iPhone's `@State` stays. */
         fun keptAnswer(answer: CarrierDetectionResponse): String = ApiJson.encodeToString(CarrierDetectionResponse.serializer(), answer)
 

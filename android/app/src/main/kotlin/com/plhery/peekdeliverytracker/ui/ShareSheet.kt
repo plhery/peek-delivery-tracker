@@ -31,8 +31,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -55,6 +57,8 @@ import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.SystemColors
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
+import kotlin.math.ceil
+import kotlin.math.floor
 
 /** What the share card says (`statusLabel`), which says whether Save is there and on. */
 enum class SharePhase { Reading, Ready, NotFound, Saved, SaveFailed }
@@ -101,7 +105,8 @@ class ShareCard(phase: SharePhase = SharePhase.Reading, content: SharedContent.R
  * ([read], which the card waits for), then that it is ready to save or found nothing; saved (by [save], which reads the
  * draft back) Save goes and Cancel becomes Done, and a save that failed can be tried again. Cancel, Done, a drag down,
  * a tap beside it and the back take it down, and then [onClosed] hears whether it was saved, as the extension
- * completes its request or cancels it. The card speaks [copy]'s language.
+ * completes its request or cancels it; a turn of the phone as it goes down doesn't bring it back. The card speaks
+ * [copy]'s language.
  */
 @Composable
 fun ShareSheet(
@@ -111,7 +116,12 @@ fun ShareSheet(
     onClosed: (saved: Boolean) -> Unit,
     card: ShareCard = rememberSaveable(saver = ShareCard.Saver) { ShareCard() },
 ) {
-    var visible by remember { mutableStateOf(true) }
+    // Kept with the window: made again as it went down, it has gone, and the close goes on to its end.
+    var visible by rememberSaveable { mutableStateOf(true) }
+    val wentDown = remember { !visible }
+    LaunchedEffect(Unit) {
+        if (wentDown) onClosed(card.phase == SharePhase.Saved)
+    }
     LaunchedEffect(card) {
         if (card.phase == SharePhase.Reading) card.read(read())
     }
@@ -204,14 +214,34 @@ private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         val font = PeekTheme.type.body.sfLines()
+        val lines = remember { TitleLines() }
         PeekSymbol("tray.and.arrow.down", font = font, tint = content)
         Spacer(Modifier.width(IMAGE_PADDING))
-        // Taller than the button at the largest sizes, it stands out of it above and below, as UIKit lays it out.
+        // Taller than the button at the largest sizes, it stands out of it above and below, as UIKit lays it out; as
+        // wide as its widest line, so that the symbol stays beside it.
         Text(
-            title, Modifier.weight(1f, fill = false).wrapContentHeight(unbounded = true),
-            style = font, color = content, textAlign = TextAlign.Center,
+            title, Modifier.weight(1f, fill = false).wrapContentHeight(unbounded = true).widestLine(lines),
+            style = font, color = content, textAlign = TextAlign.Center, onTextLayout = { lines.result = it },
         )
     }
+}
+
+/** A title's text as it was last laid out, which it gives as it is measured. */
+private class TitleLines {
+    var result: TextLayoutResult? = null
+}
+
+/**
+ * A title that wraps, as wide as its widest line, as UIKit sizes a button's title to its longest line: the button then
+ * centres its symbol and the title together, 8 apart, where the text's own width would be all the button leaves it.
+ */
+private fun Modifier.widestLine(lines: TitleLines): Modifier = layout { measurable, constraints ->
+    val placeable = measurable.measure(constraints)
+    val text = lines.result
+    if (text == null || text.lineCount < 2) return@layout layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+    val left = floor((0 until text.lineCount).minOf(text::getLineLeft)).toInt()
+    val right = ceil((0 until text.lineCount).maxOf(text::getLineRight)).toInt()
+    layout(right - left, placeable.height) { placeable.place(-left, 0) }
 }
 
 private val SharePhase.statusKey: String

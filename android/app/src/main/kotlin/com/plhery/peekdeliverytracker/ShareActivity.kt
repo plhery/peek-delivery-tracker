@@ -26,7 +26,8 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
  * Cancel and Done finish it, back to the app that shared, as the extension completes its request (saved) or cancels
  * it ([RESULT_OK] or [RESULT_CANCELED] to an app that waits for one). It stands in the sharing app's task; where the
  * share started a task for it, that task (an empty `taskAffinity`, `excludeFromRecents`) goes with it, so Recents keeps
- * none, as ParcelLinkActivity's. The app's stores aren't made for it: the extension runs without the app.
+ * none, as ParcelLinkActivity's. The app's stores aren't made for it, and where they are, it doesn't bring the app to
+ * the front for them ([AppForeground]): the extension runs without the app.
  */
 class ShareActivity : ComponentActivity() {
     private val app: PeekApplication get() = application as PeekApplication
@@ -38,6 +39,8 @@ class ShareActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val defaults = app.shareDefaults()
         val copy = ExtensionLocalizer(defaults.string(AppLanguage.storageKey), Device.preferredLanguages())
+        // The window's name, which TalkBack reads as it comes, in the card's language rather than the label's.
+        title = copy.text("shareExtension.title")
         setContent {
             // The sheet dims what it stands over as the phone's appearance would have it; the card is its own.
             PeekTheme(dark = isSystemInDarkTheme(), carrierIdentities = null) {

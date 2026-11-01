@@ -1864,6 +1864,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TSJY tracking (通世集运): order numbers and statuses",
       "name": "TSJY",
       "color": "#4042e2"
+    },
+    {
+      "id": "stone3pl",
+      "catalog": "stone3pl",
+      "slug": "stone3pl-tracking",
+      "title": "Stone3PL tracking: numbers, statuses and contact",
+      "name": "Stone3PL",
+      "color": "#0066b3"
     }
   ],
   "de": [

@@ -1,12 +1,6 @@
 package com.plhery.peekdeliverytracker.ui
 
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.os.ParcelFileDescriptor
-import android.os.storage.StorageManager
 import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.test.assert
@@ -19,7 +13,6 @@ import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.unit.Density
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
@@ -45,17 +38,12 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.pinnedIdentities
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
-import java.io.ByteArrayOutputStream
-import java.io.File
 import java.io.IOException
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.ExternalResource
 import org.junit.rules.RuleChain
 import org.junit.rules.TestName
 import org.junit.runner.RunWith
@@ -77,14 +65,8 @@ class ParcelLinkSheetDeviceShots {
     @get:Rule
     val rules: RuleChain = RuleChain.outerRule(name).around(MadePreferences()).around(ZurichTime()).around(compose)
 
-    private val instrumentation = InstrumentationRegistry.getInstrumentation()
     private val localizer = Localizer(AppLanguage.En, variant = "android")
-
-    /** The test package's external files, as its own context names them: the app's process may not write there. */
-    private val folder: File = File(
-        checkNotNull(instrumentation.targetContext.getSystemService(StorageManager::class.java).primaryStorageVolume.directory),
-        "Android/data/${instrumentation.context.packageName}/files/linkwalk",
-    )
+    private val shots = DeviceShots(compose, "linkwalk")
 
     private fun text(key: String) = localizer.text(key)
 
@@ -97,11 +79,7 @@ class ParcelLinkSheetDeviceShots {
     ) {
         val links = FakeParcelLinks(session = state).apply { read = { _, _ -> answer() } }
         compose.waitsForMaps()
-        compose.runOnUiThread {
-            // The bars' icons for the app's appearance, without scrim, as MainActivity's `systemBars`.
-            val style = if (dark) SystemBarStyle.dark(Color.TRANSPARENT) else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
-            compose.activity.enableEdgeToEdge(statusBarStyle = style, navigationBarStyle = style)
-        }
+        compose.runOnUiThread { compose.activity.edgeToEdge(dark) }
         compose.setContent {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
@@ -137,44 +115,8 @@ class ParcelLinkSheetDeviceShots {
         assertHeading(localizer.parcelStatus(Parcel(shared = response.parcel)))
     }
 
-    /** Waits until the window has committed two frames asked for after the test settled: the screen shows them. */
-    private fun awaitFrames() {
-        repeat(2) {
-            val drawn = CountDownLatch(1)
-            compose.runOnUiThread {
-                val view = compose.activity.window.decorView
-                view.viewTreeObserver.registerFrameCommitCallback { drawn.countDown() }
-                view.invalidate()
-            }
-            check(drawn.await(5, TimeUnit.SECONDS)) { "The window drew no frame" }
-        }
-    }
-
-    /** `command`'s output, run by the shell through UiAutomation, once it has ended. */
-    private fun shell(command: String): String =
-        ParcelFileDescriptor.AutoCloseInputStream(instrumentation.uiAutomation.executeShellCommand(command)).use { it.readBytes().decodeToString() }
-
-    /**
-     * The whole screen, bars and all, as [folder]/<test>.png. Written by the shell: the app's process, where the test
-     * runs, may neither make nor write another package's external files (scoped storage), and adb reads them.
-     */
-    private fun shot() {
-        compose.waitForIdle()
-        awaitFrames()
-        val taken = checkNotNull(instrumentation.uiAutomation.takeScreenshot()) { "No screenshot" }
-        val screen = if (taken.config == Bitmap.Config.HARDWARE) taken.copy(Bitmap.Config.ARGB_8888, false) else taken
-        val png = ByteArrayOutputStream().use { out ->
-            check(screen.compress(Bitmap.CompressFormat.PNG, 100, out))
-            out.toByteArray()
-        }
-        val file = File(folder, "${name.methodName}.png")
-        shell("mkdir -p $folder")
-        val (output, input) = instrumentation.uiAutomation.executeShellCommandRw("dd of=$file")
-        ParcelFileDescriptor.AutoCloseOutputStream(input).use { it.write(png) }
-        // dd has ended once its output closes.
-        ParcelFileDescriptor.AutoCloseInputStream(output).use { it.readBytes() }
-        assertEquals("$file written", png.size.toString(), shell("stat -c %s $file").trim())
-    }
+    /** The whole screen, bars and all, as linkwalk/<test>.png. */
+    private fun shot() = shots.take(name.methodName)
 
     @Test
     fun withARoute() {
@@ -313,25 +255,5 @@ class ParcelLinkSheetDeviceShots {
     private companion object {
         /** Long enough for all the sheet plays as it shows, the box's spring and its stars included. */
         const val SETTLE_MILLIS = 3_000L
-    }
-}
-
-/**
- * The preferences files a test made, the fakes' and the demo's, which a device keeps on disk where Robolectric forgets
- * them: deleted once its window is gone, whose stop wrote what they had waiting.
- */
-private class MadePreferences : ExternalResource() {
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
-    private val folder = File(context.dataDir, "shared_prefs")
-    private var before = emptySet<String>()
-
-    private fun names(): Set<String> = folder.list().orEmpty().filter { it.endsWith(".xml") }.map { it.removeSuffix(".xml") }.toSet()
-
-    override fun before() {
-        before = names()
-    }
-
-    override fun after() {
-        for (made in names() - before) context.deleteSharedPreferences(made)
     }
 }

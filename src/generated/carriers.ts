@@ -1856,6 +1856,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "17FEIA tracking: FEI…YQ numbers, statuses and delivery",
       "name": "17FEIA",
       "color": "#00a9e4"
+    },
+    {
+      "id": "tsjy",
+      "catalog": "tsjy",
+      "slug": "tsjy-tracking",
+      "title": "TSJY tracking (通世集运): order numbers and statuses",
+      "name": "TSJY",
+      "color": "#4042e2"
     }
   ],
   "de": [

@@ -1824,6 +1824,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SPX Express Singapore tracking: Shopee parcels and statuses",
       "name": "SPX Express Singapore",
       "color": "#ee4d2d"
+    },
+    {
+      "id": "dai-post",
+      "catalog": "dai-post",
+      "slug": "dai-post-tracking",
+      "title": "DAI Post tracking: numbers, statuses and delivery help",
+      "name": "DAI Post",
+      "color": "#008faf"
     }
   ],
   "de": [

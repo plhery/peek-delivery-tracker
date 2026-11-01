@@ -222,5 +222,6 @@
   { "id": "packlink", "catalog": "packlink", "name": "Packlink", "languages": ["en"] },
   { "id": "sto", "catalog": "sto", "name": "STO Express", "languages": ["en"] },
   { "id": "j-and-t-cn", "catalog": "j-and-t-cn", "name": "J&T Express China", "languages": ["en"] },
-  { "id": "tforce-freight", "catalog": "tforce-freight", "name": "TForce Freight", "languages": ["en"] }
+  { "id": "tforce-freight", "catalog": "tforce-freight", "name": "TForce Freight", "languages": ["en"] },
+  { "id": "andreani", "catalog": "andreani", "name": "Andreani", "languages": ["en"] }
 ]

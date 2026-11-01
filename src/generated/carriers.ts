@@ -1800,6 +1800,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TForce Freight tracking: PRO numbers, statuses and claims",
       "name": "TForce Freight",
       "color": "#0053a1"
+    },
+    {
+      "id": "andreani",
+      "catalog": "andreani",
+      "slug": "andreani-tracking",
+      "title": "Andreani tracking: Argentina parcel numbers and statuses",
+      "name": "Andreani",
+      "color": "#d71920"
     }
   ],
   "de": [

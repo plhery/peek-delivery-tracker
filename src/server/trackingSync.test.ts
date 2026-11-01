@@ -4245,8 +4245,8 @@ describe('TrackingSyncService', () => {
 
   it.each([
     ['no post', 'intl-post', 'RR123456785MK'],
-    // A post with no adapter of its own: Russian Post issued the item.
-    ['its own post', 'russian-post', 'RR123456785RU'],
+    // A post with no adapter of its own: Montenegro Post issued the item.
+    ['its own post', 'montenegro-post', 'RR123456785ME'],
   ])('asks the post of the destination a provider names for a postal item filed under %s, then follows it there', async (_, filed, number) => {
     vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: ['ParcelsApp'], carrier: null, tier: () => 'unknown', rank: () => 0 });
     const store = eventStore();

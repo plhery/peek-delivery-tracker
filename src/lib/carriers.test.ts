@@ -1390,12 +1390,10 @@ describe('carrier detection', () => {
     // Source: https://github.com/jkeen/tracking_number_data/blob/main/couriers/ups.json
     expect(detectCarrier('1Z5R89390357567127')).toBe('ups');
     expect(detectCarrier('1ZXX3150YW44070023')).toBe('ups');
-    // Historical fixtures stay low-confidence candidates: format evidence alone never
-    // claims current endpoint support.
+    // Letter-and-ten-digit waybills an old list gave UPS stay low-confidence suggestions:
+    // format evidence alone never claims a carrier, and UPS's adapter takes 1Z numbers only.
     for (const number of ['K1506235620', 'J4603636537', 'V0490119172']) {
-      const match = detectCarrierMatch(number);
-      expect(match).toMatchObject({ carrier: 'unknown', confidence: 'low' });
-      expect(match.candidates).toContain('ups');
+      expect(detectCarrierMatch(number)).toMatchObject({ carrier: 'unknown', confidence: 'low' });
     }
   });
 

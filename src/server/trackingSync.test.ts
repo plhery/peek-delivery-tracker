@@ -1773,10 +1773,11 @@ describe('TrackingSyncService', () => {
       expect.objectContaining({ carrier: 'unknown', provider: 'dhlink', trackingNumber: 'YF2468013579CN', category: 'detected' }));
     expect(report).not.toHaveBeenCalledWith('carrier_mismatch_confirmed', expect.anything());
     // A provider had to name the carrier: detection has a rule to gain.
-    expect((await sync('TEST1234')).fetchUniversal).toHaveBeenCalledOnce();
+    // Speedaf's adapter takes the made-up number; UPS's takes 1Z numbers only.
+    expect((await sync('TEST1234', 'speedaf')).fetchUniversal).toHaveBeenCalledOnce();
     expect(report).toHaveBeenCalledWith('carrier_auto_swapped',
-      { carrier: 'unknown', provider: 'ups', trackingNumber: 'TEST1234', attemptId: expect.any(String) });
-    expect(report).toHaveBeenCalledWith('carrier_mismatch_confirmed', expect.objectContaining({ provider: 'ups', trackingNumber: 'TEST1234' }));
+      { carrier: 'unknown', provider: 'speedaf', trackingNumber: 'TEST1234', attemptId: expect.any(String) });
+    expect(report).toHaveBeenCalledWith('carrier_mismatch_confirmed', expect.objectContaining({ provider: 'speedaf', trackingNumber: 'TEST1234' }));
   });
 
   it('files an unknown parcel under the detected carrier that answered with local clocks once a provider dates it', async () => {
@@ -3112,10 +3113,10 @@ describe('TrackingSyncService', () => {
         // A carrier whose recognition the release brought to the number, and the same carriers as before.
         parcel('taught', waybill, '2026-09-08T12:00:15Z', { ...asked('dhl-express'), recognizers: ['dhl-express'] }),
         parcel('same', waybill, '2026-09-08T12:00:15Z', { ...asked('dhl-express'), recognizers: recognizers(waybill) }),
-        // Delivered, with UPS named by its provider and never asked, then asked.
-        ...[{}, asked('ups')].map((routing, index) => {
+        // Delivered, with Speedaf named by its provider and never asked, then asked.
+        ...[{}, asked('speedaf')].map((routing, index) => {
           const finished = parcel(index ? 'delivered-asked' : 'delivered', 'ABCD0000000001CN', '2026-09-02T09:00:15Z', routing);
-          return { ...finished, current_stage: 'delivered', carrier_data: { ...finished.carrier_data, tracking_provider: 'ParcelsApp', reported_carriers: ['UPS'] } };
+          return { ...finished, current_stage: 'delivered', carrier_data: { ...finished.carrier_data, tracking_provider: 'ParcelsApp', reported_carriers: ['Speedaf'] } };
         })]),
       enqueueSyncJob: vi.fn().mockResolvedValue({ id: 'job' }) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn() }, null,

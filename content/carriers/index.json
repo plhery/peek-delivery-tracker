@@ -220,5 +220,6 @@
   { "id": "dayone", "catalog": "dayone", "name": "DayOne", "languages": ["en"] },
   { "id": "dpd-be", "catalog": "dpd-be", "name": "DPD Belgium", "languages": ["en"] },
   { "id": "packlink", "catalog": "packlink", "name": "Packlink", "languages": ["en"] },
-  { "id": "sto", "catalog": "sto", "name": "STO Express", "languages": ["en"] }
+  { "id": "sto", "catalog": "sto", "name": "STO Express", "languages": ["en"] },
+  { "id": "j-and-t-cn", "catalog": "j-and-t-cn", "name": "J&T Express China", "languages": ["en"] }
 ]

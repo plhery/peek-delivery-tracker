@@ -239,6 +239,17 @@ struct CheckDigitTrouble: Equatable, Sendable {
     let suggestion: String?
 }
 
+extension CarrierDetectionRequest {
+    /// The number as typed, when it spells `trackingNumber` differently: its dashes and spaces tell some carriers'
+    /// numbers apart, and detection reads them. The server ignores one that does not normalize to the number, or
+    /// longer than 80 characters. Mirrors `typedNumber` in `src/lib/carrierDetection.ts`.
+    static func typedNumber(_ typed: String?, for trackingNumber: String) -> String? {
+        guard let trimmed = typed?.trimmingCharacters(in: .whitespacesAndNewlines), trimmed != trackingNumber,
+              trimmed.utf16.count <= 80, CarrierCatalog.normalize(trimmed) == trackingNumber else { return nil }
+        return trimmed
+    }
+}
+
 /// Carrier recognition in the Add sheet: a shape several carriers share is
 /// checked with them once the number is settled (the field loses focus, a
 /// paste, a scan, a shared number), never on each keystroke. It never holds

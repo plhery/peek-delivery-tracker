@@ -75,8 +75,8 @@ final class DeviceParcelTests: XCTestCase {
                                             package: PublicPackage(id: UUID(), label: "", carrier: .dhl, createdAt: "2026-10-01T08:00:00Z", syncStatus: .ok,
                                                                    carrierData: PublicPackageCarrierData(), notificationsMuted: false, trackingEvents: []))
             },
-            detect: { number, prefixOfSaved in
-                calls.add("detect \(number)\(prefixOfSaved ? " prefix" : "")")
+            detect: { number, typed, prefixOfSaved in
+                calls.add("detect \(number)\(typed.map { " as \($0)" } ?? "")\(prefixOfSaved ? " prefix" : "")")
                 throw DeliveryAPIError.serviceFailed(503)
             },
             setAlert: { linkID, key, request in
@@ -253,6 +253,31 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(try body(CarrierDetectionRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "CH"))["lookupCountryHint"], "CH")
         XCTAssertEqual(try body(CreatePackageRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "US"))["lookupCountryHint"], "US")
         XCTAssertEqual(try body(PublicLookupRequest(trackingNumber: "SYNTHETIC", lookupCountryHint: "GB"))["lookupCountryHint"], "GB")
+    }
+
+    func testDetectionSendsTheNumberAsTypedWhenItSpellsTheNumberDifferently() async throws {
+        XCTAssertEqual(CarrierDetectionRequest.typedNumber(" test-1234-5 ", for: "TEST12345"), "test-1234-5")
+        XCTAssertEqual(CarrierDetectionRequest.typedNumber("TEST 1234 5", for: "TEST12345"), "TEST 1234 5")
+        XCTAssertNil(CarrierDetectionRequest.typedNumber("TEST12345", for: "TEST12345"))
+        XCTAssertNil(CarrierDetectionRequest.typedNumber("TEST-1234-6", for: "TEST12345"), "Another number is not this one as typed")
+        XCTAssertNil(CarrierDetectionRequest.typedNumber(nil, for: "TEST12345"))
+        XCTAssertNil(CarrierDetectionRequest.typedNumber(String(repeating: "1-", count: 41), for: String(repeating: "1", count: 41)))
+
+        let body = try XCTUnwrap(JSONSerialization.jsonObject(with: JSONEncoder.deliveryTracker.encode(
+            CarrierDetectionRequest(trackingNumber: "TEST12345", typedNumber: "TEST-1234-5")
+        )) as? [String: Any])
+        XCTAssertEqual(body["trackingNumber"] as? String, "TEST12345")
+        XCTAssertEqual(body["typedNumber"] as? String, "TEST-1234-5")
+        let bare = try XCTUnwrap(JSONSerialization.jsonObject(with: JSONEncoder.deliveryTracker.encode(
+            CarrierDetectionRequest(trackingNumber: "TEST12345")
+        )) as? [String: Any])
+        XCTAssertNil(bare["typedNumber"])
+
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: Memory())
+        _ = try? await device.detect(trackingNumber: "TEST12345", typedNumber: "TEST-1234-5")
+        _ = try? await device.detect(trackingNumber: "TEST12345")
+        XCTAssertEqual(calls.all, ["detect TEST12345 as TEST-1234-5", "detect TEST12345"])
     }
 
     func testTheStartOfANumberThisIPhoneFollowsSaysSoWhenAsked() async throws {

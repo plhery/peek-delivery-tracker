@@ -174,7 +174,7 @@ struct AddParcelView: View {
                 guard let number = lookupTrackingNumber else { return }
                 do {
                     try await Task.sleep(for: .milliseconds(350))
-                    let result = try await store.detectCarrier(trackingNumber: number)
+                    let result = try await store.detectCarrier(trackingNumber: number, typed: parsed.trackingNumber)
                     guard !Task.isCancelled else { return }
                     guard result.trackingNumber == number else { throw DeliveryAPIError.invalidResponse }
                     verifiedCarrier = result
@@ -188,7 +188,8 @@ struct AddParcelView: View {
                 recognition.failedNumber = nil
                 recognition.answer = nil
                 do {
-                    let result = try await store.detectCarrier(trackingNumber: number)
+                    // As typed: its dashes and spaces tell some carriers' numbers apart.
+                    let result = try await store.detectCarrier(trackingNumber: number, typed: parsed.trackingNumber)
                     guard !Task.isCancelled else { return }
                     guard result.trackingNumber == number else { throw DeliveryAPIError.invalidResponse }
                     recognition.answer = result

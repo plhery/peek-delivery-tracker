@@ -160,9 +160,11 @@ final class DeliveryAPIClient {
         return response.packages
     }
 
-    func detectCarrier(trackingNumber: String) async throws -> CarrierDetectionResponse {
+    /// `typedNumber`: the number as typed, from `CarrierDetectionRequest.typedNumber(_:for:)`.
+    func detectCarrier(trackingNumber: String, typedNumber: String? = nil) async throws -> CarrierDetectionResponse {
         try await request("/api/carriers/detect", method: "POST",
-                          body: CarrierDetectionRequest(trackingNumber: trackingNumber, lookupCountryHint: ParcelLookupCountry.hint()))
+                          body: CarrierDetectionRequest(trackingNumber: trackingNumber, lookupCountryHint: ParcelLookupCountry.hint(),
+                                                        typedNumber: typedNumber))
     }
 
     func add(_ input: CreatePackageRequest) async throws -> CreatePackageResponse {

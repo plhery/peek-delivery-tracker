@@ -206,9 +206,11 @@ final class ParcelStore: ObservableObject {
         device.postcodes.forget(postcode)
     }
 
-    func detectCarrier(trackingNumber: String) async throws -> CarrierDetectionResponse {
-        if isGuest { return try await device.detect(trackingNumber: trackingNumber) }
-        return try await api.detectCarrier(trackingNumber: trackingNumber)
+    /// Which carrier knows the number. `typed`: the number as read from the field, dashes and spaces kept.
+    func detectCarrier(trackingNumber: String, typed: String? = nil) async throws -> CarrierDetectionResponse {
+        let typedNumber = CarrierDetectionRequest.typedNumber(typed, for: trackingNumber)
+        if isGuest { return try await device.detect(trackingNumber: trackingNumber, typedNumber: typedNumber) }
+        return try await api.detectCarrier(trackingNumber: trackingNumber, typedNumber: typedNumber)
     }
     var activeCount: Int { parcels.filter(\.isActive).count }
     var isSynchronizing: Bool {

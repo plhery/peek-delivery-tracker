@@ -1832,6 +1832,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DAI Post tracking: numbers, statuses and delivery help",
       "name": "DAI Post",
       "color": "#008faf"
+    },
+    {
+      "id": "eurodis",
+      "catalog": "eurodis",
+      "slug": "eurodis-tracking",
+      "title": "EURODIS tracking: shipment numbers and delivery partners",
+      "name": "EURODIS",
+      "color": "#0b418b"
     }
   ],
   "de": [

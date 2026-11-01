@@ -226,5 +226,6 @@
   { "id": "andreani", "catalog": "andreani", "name": "Andreani", "languages": ["en"] },
   { "id": "mainfreight", "catalog": "mainfreight", "name": "Mainfreight", "languages": ["en"] },
   { "id": "spx-sg", "catalog": "spx-sg", "name": "SPX Express Singapore", "languages": ["en"] },
-  { "id": "dai-post", "catalog": "dai-post", "name": "DAI Post", "languages": ["en"] }
+  { "id": "dai-post", "catalog": "dai-post", "name": "DAI Post", "languages": ["en"] },
+  { "id": "eurodis", "catalog": "eurodis", "name": "EURODIS", "languages": ["en"] }
 ]

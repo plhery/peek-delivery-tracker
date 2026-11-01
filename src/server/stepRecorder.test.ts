@@ -30,7 +30,7 @@ describe('sentryStepRecorder', () => {
     const attributes = { carrier: 'dhl', phase: 'direct', outcome: 'success', error_type: 'none' };
     expect(metrics.distribution).toHaveBeenCalledWith('tracking.scrape.duration', 120.4, { unit: 'millisecond', attributes });
     expect(metrics.count).toHaveBeenCalledWith('tracking.scrape.attempts', 1, { attributes });
-    expect(observability.logOperationalEvent).toHaveBeenCalledWith('tracking_scrape', { ...attributes, duration_ms: 120 });
+    expect(observability.logOperationalEvent).toHaveBeenCalledWith('tracking_scrape', { ...attributes, duration_ms: 120, attempt: 1 });
     expect(observability.reportRoutingEvent).not.toHaveBeenCalled();
   });
 
@@ -46,6 +46,9 @@ describe('sentryStepRecorder', () => {
     expect(metrics.count).toHaveBeenCalledWith('tracking.scrape.fallbacks', 1, {
       attributes: { carrier: 'ups', from_phase: 'direct', to_phase: 'trawl', error_type: 'ChallengeError' },
     });
+    expect(observability.logOperationalEvent).toHaveBeenCalledWith('tracking_scrape', expect.objectContaining({
+      attempt: 2, fallback_from: 'direct', fallback_reason: 'challenge', outcome: 'success',
+    }));
   });
 
   it('counts a fallback but warns of none after a step that answered', () => {

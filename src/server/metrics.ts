@@ -35,7 +35,7 @@ import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason } from './
  */
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 14;
+const RUNTIME_VERSION = 15;
 
 interface PrometheusRuntime {
   version: number;
@@ -44,6 +44,7 @@ interface PrometheusRuntime {
   stepTotal: Counter<'carrier' | 'step' | 'outcome' | 'error_type' | 'reason'>;
   lookupTotal: Counter<'carrier' | 'final_step' | 'outcome' | 'attempts' | 'reason'>;
   fallbackTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason'>;
+  recoveryTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason' | 'outcome'>;
   statusMappingTotal: Counter<'carrier' | 'stage_source'>;
   detectionTotal: Counter<'result'>;
   refreshTotal: Counter<'carrier' | 'served_by' | 'outcome'>;
@@ -115,6 +116,12 @@ function createRuntime(): PrometheusRuntime {
       name: METRICS.fallbackTotal,
       help: 'Recovery steps run after an earlier step failed.',
       labelNames: ['carrier', 'from_step', 'to_step', 'reason'] as const,
+      registers: [registry],
+    }),
+    recoveryTotal: new Counter({
+      name: 'carrier_recovery_total',
+      help: 'Completed recovery steps by their triggering failure and resulting outcome.',
+      labelNames: ['carrier', 'from_step', 'to_step', 'reason', 'outcome'] as const,
       registers: [registry],
     }),
     statusMappingTotal: new Counter({
@@ -342,10 +349,12 @@ export const prometheusStepRecorder: StepRecorder = {
     count(runtime.stepTotal, METRICS.stepTotal, { ...timing, error_type: record.errorType ?? 'none',
       reason: carrierErrorReason(record.error) ?? 'none' });
     if (record.fallbackFrom) {
-      count(runtime.fallbackTotal, METRICS.fallbackTotal, {
+      const recovery = {
         carrier: record.carrier, from_step: record.fallbackFrom, to_step: record.step,
         reason: record.fallbackReason ? stepOutcome(record.fallbackReason, record.fallbackError) : 'error',
-      });
+      };
+      count(runtime.fallbackTotal, METRICS.fallbackTotal, recovery);
+      count(runtime.recoveryTotal, 'carrier_recovery_total', { ...recovery, outcome: timing.outcome });
     }
   },
   lookup(record: LookupRecord) {

@@ -17,6 +17,24 @@ const metrics = await import('./metrics');
 const scraped = async (source = metrics) => { await source.metricsText(); return source.metricsText(); };
 
 describe('prometheus carrier metrics', () => {
+  it('counts retry outcomes separately from first attempts and transitions from other steps', async () => {
+    const first = { carrier: 'fedex', step: 'trawl', attempt: 1, outcome: 'challenge', errorType: 'ChallengeError',
+      durationMs: 100, fallbackFrom: null, fallbackReason: null, fallbackErrorType: null } as const;
+    metrics.prometheusStepRecorder.step(first);
+    const retry = { ...first, attempt: 2, fallbackFrom: 'trawl', fallbackReason: 'challenge' } as const;
+    metrics.prometheusStepRecorder.step({ ...retry, outcome: 'ok', errorType: null });
+    metrics.prometheusStepRecorder.step(retry);
+    metrics.prometheusStepRecorder.step({ ...retry, outcome: 'budget', errorType: 'BudgetExceededError' });
+    metrics.prometheusStepRecorder.step({ ...retry, fallbackFrom: 'api', outcome: 'ok', errorType: null });
+    const text = await scraped();
+    for (const outcome of ['ok', 'challenge', 'budget']) {
+      expect(text).toContain(`carrier_recovery_total{carrier="fedex",from_step="trawl",to_step="trawl",reason="challenge",outcome="${outcome}"} 1`);
+    }
+    expect(text).toContain('carrier_recovery_total{carrier="fedex",from_step="api",to_step="trawl",reason="challenge",outcome="ok"} 1');
+    expect(text).toContain('carrier_fallback_total{carrier="fedex",from_step="trawl",to_step="trawl",reason="challenge"} 3');
+    expect(text).not.toContain('carrier_recovery_total{carrier="fedex",from_step="none"');
+  });
+
   it('records steps, fallbacks and lookups with low-cardinality labels', async () => {
     metrics.prometheusStepRecorder.step({
       carrier: 'ups', step: 'direct', attempt: 1, outcome: 'challenge', errorType: 'ChallengeError', durationMs: 250,

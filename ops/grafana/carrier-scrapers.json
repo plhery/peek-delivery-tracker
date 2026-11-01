@@ -2243,6 +2243,207 @@
           }
         }
       ]
+    },
+    {
+      "type": "row",
+      "id": 60,
+      "title": "FedEx second browser attempt",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 100,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "type": "stat",
+      "id": 61,
+      "title": "FedEx retries",
+      "description": "FedEx only, independent of the carrier filter. Completed browser retries after a challenge; first attempts and optional API fallback excluded. Counters start at instrumentation deployment. A recovered history does not measure completeness.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 101,
+        "w": 8,
+        "h": 4
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "refId": "A",
+          "expr": "sum(increase(carrier_recovery_total{carrier=\"fedex\",from_step=\"trawl\",to_step=\"trawl\",reason=\"challenge\"}[$__range]))",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "wideLayout": true
+      }
+    },
+    {
+      "type": "stat",
+      "id": 62,
+      "title": "FedEx histories recovered",
+      "description": "FedEx only, independent of the carrier filter. Completed browser retries after a challenge; first attempts and optional API fallback excluded. Counters start at instrumentation deployment. A recovered history does not measure completeness.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 101,
+        "w": 8,
+        "h": 4
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "refId": "A",
+          "expr": "sum(increase(carrier_recovery_total{carrier=\"fedex\",from_step=\"trawl\",to_step=\"trawl\",reason=\"challenge\",outcome=\"ok\"}[$__range]))",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "wideLayout": true
+      }
+    },
+    {
+      "type": "stat",
+      "id": 63,
+      "title": "FedEx retry success rate",
+      "description": "FedEx only, independent of the carrier filter. Completed browser retries after a challenge; first attempts and optional API fallback excluded. Counters start at instrumentation deployment. A recovered history does not measure completeness.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 101,
+        "w": 8,
+        "h": 4
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "refId": "A",
+          "expr": "(sum(increase(carrier_recovery_total{carrier=\"fedex\",from_step=\"trawl\",to_step=\"trawl\",reason=\"challenge\",outcome=\"ok\"}[$__range])) or (0 * sum(increase(carrier_recovery_total{carrier=\"fedex\",from_step=\"trawl\",to_step=\"trawl\",reason=\"challenge\"}[$__range])))) / (sum(increase(carrier_recovery_total{carrier=\"fedex\",from_step=\"trawl\",to_step=\"trawl\",reason=\"challenge\"}[$__range])) > 0)",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 1,
+          "noValue": "No retries",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "wideLayout": true
+      }
     }
   ]
 }

@@ -11,6 +11,14 @@ describe('the dashboards', () => {
     for (const { file, dashboard } of dashboards) assert.ok(dashboard.uid && dashboard.title, file);
   });
 
+  it('gives every panel its own id, including panels in collapsed rows', () => {
+    const flatten = panels => panels.flatMap(panel => [panel, ...flatten(panel.panels ?? [])]);
+    for (const { file, dashboard } of dashboards) {
+      const panels = flatten(dashboard.panels);
+      assert.equal(new Set(panels.map(panel => panel.id)).size, panels.length, file);
+    }
+  });
+
   it('name no Grafana id, version or data source of one install', () => {
     for (const { file, dashboard } of dashboards) {
       assert.equal(dashboard.id ?? null, null, file);

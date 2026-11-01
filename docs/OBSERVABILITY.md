@@ -931,6 +931,7 @@ dashboard's failure panels leave out.
 | `carrier_step_total` (+ error_type, reason) | Which step fails, and how. `reason` is the scraper's code for why (`verification_refused`, `portal_not_found`), `none` without one |
 | `carrier_lookup_total` (carrier, final_step, outcome, attempts, reason) | Which step served the result, after how many attempts, and why the last one failed |
 | `carrier_fallback_total` (from_step, to_step, reason) | How often recovery is needed |
+| `carrier_recovery_total` (carrier, from_step, to_step, reason, outcome) | Whether each completed recovery step returned history or failed again |
 | `carrier_status_mapping_total` (carrier, stage_source) | Share of events mapped explicitly, by wording, or not at all |
 | `carrier_detection_total` (result) | Detection confidence served to clients |
 | `carrier_refresh_total` (carrier, served_by, outcome) | Who served each refresh: `adapter`, `other_adapter`, `provider` or `none`, and how it ended: `updated` (a new scan or stage), `unchanged`, `waiting`, `error`, `refused` (the number or its details are the owner's to correct) or `superseded`. A `skipped` check asked nobody and is not counted |
@@ -978,7 +979,15 @@ Useful questions:
   group by 1, 2 order by 3 desc;
   ```
 - **Does an in-adapter retry ever help?**
-  `carrier_lookup_total{final_step="retry",outcome="ok",attempts=~"[2-9]"}`.
+  Compare `carrier_recovery_total{outcome="ok"}` with all outcomes for the same
+  carrier, transition and reason. The FedEx second-attempt panels select
+  `carrier="fedex",from_step="trawl",to_step="trawl",reason="challenge"`, so they
+  exclude the first browser attempt even when an optional API step precedes it.
+  The numerator counts returned histories; not-found, unresolved challenges and
+  timeouts stay in the denominator. No completed retries means no success-rate
+  sample, rather than 0%. The counters start when this instrumentation is deployed.
+  Step logs also carry `attempt`, `fallback_from` and `fallback_reason` to relate
+  each outcome to its preceding failure without a parcel identifier.
 - **Why do a carrier's challenges fail?**
   `sum by (step, reason) (increase(carrier_step_total{carrier="zto",outcome="challenge"}[7d]))`.
   The scraper's [architecture](https://github.com/plhery/universal-parcel-scraper/blob/main/ARCHITECTURE.md)

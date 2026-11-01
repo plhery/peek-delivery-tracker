@@ -70,6 +70,8 @@ export const sentryStepRecorder: StepRecorder = {
     try {
       logOperationalEvent('tracking_scrape', {
         ...attributes, duration_ms: Math.round(record.durationMs), attempt_id: trackingAttemptId(),
+        attempt: record.attempt, fallback_from: record.fallbackFrom ?? undefined,
+        fallback_reason: record.fallbackReason ? stepOutcome(record.fallbackReason, record.fallbackError) : undefined,
         ...failure(attributes.outcome, record.error),
       });
     } catch { /* Preserve the result even if logging fails. */ }

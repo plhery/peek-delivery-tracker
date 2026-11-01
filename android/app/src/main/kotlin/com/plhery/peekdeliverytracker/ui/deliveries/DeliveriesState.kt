@@ -1142,13 +1142,14 @@ internal class DeliveriesState(
         }
 
     /**
-     * A menu, the question it asks, an alert, the page's map or one of its sheets shows over the list, and TalkBack
-     * reaches nothing else.
+     * A menu, the question it asks, an alert, the page's map or one of its sheets, or Settings, shows over the list, and
+     * TalkBack reaches nothing else; nor do the keys, nor the rating's question (`listCovered`, `keyboardFree`).
      */
     val modal: Boolean
         get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
             mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing || alerts != null || alertsClosing ||
-            sharing != null || sharingClosing || source.feedbacks.covering || feedbackSheetShown || addition != null || additionClosing
+            sharing != null || sharingClosing || source.feedbacks.covering || feedbackSheetShown || addition != null || additionClosing ||
+            showingAccount
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes

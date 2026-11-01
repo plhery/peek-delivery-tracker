@@ -596,8 +596,9 @@ private fun SheetLayer(
                         LocalSheetInsets provides SheetInsets.sheet(if (page) with(density) { formWidth.toDp() } else FORM_WIDTH, reachesBottom = false),
                         LocalSheetGround provides ground,
                     ) {
-                        if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
                         if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
+                        // Over what it holds, whose ground would hide it.
+                        if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
                     }
                 }
             } else {

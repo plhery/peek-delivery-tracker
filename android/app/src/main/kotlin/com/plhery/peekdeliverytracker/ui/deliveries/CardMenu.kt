@@ -811,22 +811,33 @@ private class AskedCard {
 @Composable
 private fun DeleteQuestion(focus: AccessibilityFocus, modifier: Modifier = Modifier, delete: () -> Unit) {
     val localizer = LocalLocalizer.current
+    Column(modifier.fillMaxWidth().padding(start = ALERT_BUTTON_SIDE, top = ALERT_TOP, end = ALERT_BUTTON_SIDE, bottom = ALERT_BUTTON_SIDE)) {
+        AlertWords(localizer.text("detail.deleteQuestion"), localizer.text("detail.deleteDescription"), focus)
+        Spacer(Modifier.height(ALERT_WORDS_GAP))
+        AlertButton(localizer.text("detail.delete"), DELETE_CONFIRM, Modifier.fillMaxWidth(), delete)
+    }
+}
+
+/**
+ * The words of an alert that has a message, as iOS 26 sets them (iphone-03-reset-alert.png, the delete question): the
+ * title in the headline's weight and the [message], if any, under it in the secondary colour at the subheadline size,
+ * both leading, 30 in from the alert's sides, [ALERT_WORDS_GAP] over its buttons. TalkBack reads them as one, from
+ * [focus].
+ */
+@Composable
+internal fun AlertWords(title: String, message: String?, focus: AccessibilityFocus) {
     val type = PeekTheme.type
     val colors = PeekTheme.colors
-    Column(modifier.fillMaxWidth().padding(start = ALERT_BUTTON_SIDE, top = ALERT_TOP, end = ALERT_BUTTON_SIDE, bottom = ALERT_BUTTON_SIDE)) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(horizontal = QUESTION_INSET)
-                .semantics(mergeDescendants = true) {}
-                .accessibilityFocus(focus),
-            verticalArrangement = Arrangement.spacedBy(MESSAGE_GAP),
-        ) {
-            Text(localizer.text("detail.deleteQuestion"), color = colors.label, style = type.headline.uiKitLines(IosTextStyle.Headline))
-            Text(localizer.text("detail.deleteDescription"), color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline))
-        }
-        Spacer(Modifier.height(DELETE_BUTTON_GAP))
-        AlertButton(localizer.text("detail.delete"), DELETE_CONFIRM, Modifier.fillMaxWidth(), delete)
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = QUESTION_INSET)
+            .semantics(mergeDescendants = true) {}
+            .accessibilityFocus(focus),
+        verticalArrangement = Arrangement.spacedBy(MESSAGE_GAP),
+    ) {
+        Text(title, color = colors.label, style = type.headline.uiKitLines(IosTextStyle.Headline))
+        if (message != null) Text(message, color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline))
     }
 }
 
@@ -949,15 +960,13 @@ private fun RenameButtons(cancel: String, save: String, onCancel: () -> Unit, on
 private fun ActionErrorAlert(state: DeliveriesState, message: String) = ErrorAlert(message, state::closeError)
 
 /**
- * `.alert("native.errorTitle")` with the error's words and Close, as iOS 26 draws an alert ([AlertCard]): the title,
- * the words under it as the delete question's message, and one Close as wide as the alert, which calls `close`, as the
- * back does. TalkBack starts at the words.
+ * `.alert("native.errorTitle")` with the error's words and Close, as iOS 26 draws an alert that has a message
+ * ([AlertCard], [AlertWords]): the title in the headline's weight and the words under it, both leading, and one Close as
+ * wide as the alert, which calls `close`, as the back does. TalkBack starts at the title and the words.
  */
 @Composable
 internal fun ErrorAlert(message: String, close: () -> Unit) {
     val localizer = LocalLocalizer.current
-    val type = PeekTheme.type
-    val colors = PeekTheme.colors
     val said = remember(message) { AccessibilityFocus() }
     LaunchedEffect(message) { said.request() }
     BackHandler(onBack = close)
@@ -970,18 +979,8 @@ internal fun ErrorAlert(message: String, close: () -> Unit) {
         contentAlignment = Alignment.Center,
     ) {
         AlertCard(localizer.text("native.errorTitle")) {
-            Column(
-                Modifier
-                    .padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE)
-                    .semantics(mergeDescendants = true) {}
-                    .accessibilityFocus(said),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(MESSAGE_GAP),
-            ) {
-                Text(localizer.text("native.errorTitle"), color = colors.label, style = type.body.uiKitLines(IosTextStyle.Body), textAlign = TextAlign.Center)
-                Text(message, color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline), textAlign = TextAlign.Center)
-            }
-            Spacer(Modifier.height(ALERT_BUTTONS_GAP))
+            Box(Modifier.padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE)) { AlertWords(localizer.text("native.errorTitle"), message, said) }
+            Spacer(Modifier.height(ALERT_WORDS_GAP))
             AlertButton(localizer.text("common.close"), ACTION_ERROR_CLOSE, Modifier.padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE).fillMaxWidth(), close)
         }
     }
@@ -1122,7 +1121,8 @@ private val DELETE_OUTSET = 10.dp
 
 /** The question and its message 30 in from the delete question's sides, 14 in from its button's. */
 private val QUESTION_INSET = 14.dp
-private val DELETE_BUTTON_GAP = 19.dp
+/** From the foot of an alert's words that have a message to its buttons ([AlertWords]). */
+internal val ALERT_WORDS_GAP = 19.dp
 internal val MENU_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 24.dp, y = 8.dp)
 private val PREVIEW_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.1f), radius = 16.dp, y = 6.dp)
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import android.view.KeyEvent
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
@@ -11,7 +12,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.getUnclippedBoundsInRoot
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasTestTag
@@ -29,6 +34,9 @@ import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 import androidx.core.content.IntentCompat
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
@@ -39,6 +47,7 @@ import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.DEVICE_ACCOUNT_ROW
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
@@ -83,6 +92,7 @@ class SettingsTest {
 
     private lateinit var source: FakeDeliveries
     private lateinit var deliveries: DeliveriesState
+    private lateinit var window: View
     private val localizer = Localizer(AppLanguage.En, variant = "android")
     private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 7), email = "reader@example.com"))
 
@@ -91,10 +101,17 @@ class SettingsTest {
         AppearanceStore.of(compose.activity).set(AppAppearance.DEFAULT)
     }
 
-    private fun show(session: AuthenticationState = reader, view: View? = null, prepare: FakeDeliveries.() -> Unit = {}) {
+    private fun show(
+        session: AuthenticationState = reader,
+        view: View? = null,
+        recreation: Recreation? = null,
+        prepare: FakeDeliveries.() -> Unit = {},
+    ) {
         source = FakeDeliveries(DemoCards.parcels(), session).apply(prepare)
         compose.waitsForMaps()
-        compose.setContent {
+        val setContent: (@Composable () -> Unit) -> Unit = recreation?.let { it::setContent } ?: compose::setContent
+        setContent {
+            window = LocalView.current
             val root: @Composable () -> Unit = {
                 CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
                     // The window's theme follows the setting, as MainActivity's does.
@@ -153,7 +170,31 @@ class SettingsTest {
         return (color.red + color.green + color.blue) / 3
     }
 
+    /** The keyboard `height` points tall, as the window's insets tell it. */
+    private fun keyboard(height: Int) {
+        compose.runOnUiThread {
+            val px = (height * window.resources.displayMetrics.density).toInt()
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.ime(), Insets.of(0, 0, 0, px))
+                .setVisible(WindowInsetsCompat.Type.ime(), true)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(window, insets)
+        }
+        settle()
+    }
+
     private fun started(): Intent? = shadowOf(compose.activity).nextStartedActivity
+
+    /** A key pressed and let go on a hardware keyboard, with `meta` held, through the window as the system sends it. */
+    private fun press(key: Int, meta: Int) {
+        val window = compose.activity.window.decorView.parent
+        val deliver = window.javaClass.getMethod("dispatchKeyFromIme", KeyEvent::class.java)
+        compose.runOnUiThread {
+            deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_DOWN, key, 0, meta))
+            deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_UP, key, 0, meta))
+        }
+        settle()
+    }
 
     @Test
     fun theAccountButtonOpensSettingsForTheAccountAndCloseClosesIt() {
@@ -179,11 +220,27 @@ class SettingsTest {
     }
 
     @Test
+    fun theListsKeysDontReachTheListBehindSettings() {
+        val ctrl = KeyEvent.META_CTRL_ON or KeyEvent.META_CTRL_LEFT_ON
+        show()
+        open()
+        // `keyboardFree`: Settings over the list keeps its keys from it.
+        press(KeyEvent.KEYCODE_F, ctrl)
+        assertFalse(deliveries.showingSearch)
+        press(KeyEvent.KEYCODE_N, ctrl)
+        assertNull(deliveries.addition)
+        assertTrue(deliveries.showingAccount)
+        press(SETTINGS_CLOSE)
+        press(KeyEvent.KEYCODE_F, ctrl)
+        assertTrue(deliveries.showingSearch)
+    }
+
+    @Test
     fun aGuestWithParcelsIsOfferedAnAccountInTheListAndInSettings() {
         show(AuthenticationState.Welcome) { isGuest = true }
         node(PARCEL_LIST).performScrollToKey("deviceAccount")
         settle()
-        compose.onNode(hasTestTag(DEVICE_ACCOUNT_ROW) and hasText(text("link.account.title"))).performClick()
+        node(DEVICE_ACCOUNT_ROW).assert(hasText(text("link.account.title"))).performClick()
         settle()
         assertEquals(1, source.signIns)
 
@@ -207,7 +264,7 @@ class SettingsTest {
             isGuest = true
             parcels.value = emptyList()
         }
-        assertTrue(compose.onAllNodes(hasTestTag(DEVICE_ACCOUNT_ROW) and hasText(text("link.account.title"))).fetchSemanticsNodes().isEmpty())
+        assertFalse(exists(DEVICE_ACCOUNT_ROW))
         open()
         assertTrue(exists(SETTINGS_SIGN_IN))
         tap(SETTINGS_ACCOUNT_DATA)
@@ -309,6 +366,56 @@ class SettingsTest {
         assertEquals("The export failed.", node(SETTINGS_ERROR).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Text)?.joinToString())
         assertNull(started())
         assertTrue(deliveries.showingAccount)
+    }
+
+    @Test
+    fun theErrorStaysUnderTheDataWhenThePageIsPoppedAndPushedAgain() {
+        show {
+            accountFailure = IOException("The export failed.")
+        }
+        open()
+        tap(SETTINGS_ACCOUNT_DATA)
+        tap(SETTINGS_EXPORT)
+        assertTrue(exists(SETTINGS_ERROR))
+        // AccountView keeps `errorMessage`, not the page pushed over it.
+        press(SETTINGS_BACK)
+        assertFalse(exists(SETTINGS_ERROR))
+        tap(SETTINGS_ACCOUNT_DATA)
+        assertEquals("The export failed.", node(SETTINGS_ERROR).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Text)?.joinToString())
+        // The next run starts without it.
+        source.accountFailure = null
+        source.accountWork = CompletableDeferred()
+        tap(SETTINGS_EXPORT)
+        assertTrue(exists(SETTINGS_WORKING))
+        assertFalse(exists(SETTINGS_ERROR))
+    }
+
+    @Test
+    fun theBackClosesAnAlertAndLeavesTheSheetOpen() {
+        show()
+        open()
+        tap(SETTINGS_ACCOUNT_DATA)
+        tap(SETTINGS_DELETE)
+        assertTrue(exists(SETTINGS_ALERT))
+        back()
+        assertFalse(exists(SETTINGS_ALERT))
+        assertTrue(deliveries.showingAccount)
+        assertTrue(exists(SETTINGS_SIGN_OUT))
+        assertEquals(emptyList<String>(), source.accountCalls.filter { it.startsWith("deleteAccount") })
+    }
+
+    /** A tablet on its side with the keyboard up, as the device run's: the alert stands in the room above it. */
+    @Test
+    @Config(qualifiers = "w1280dp-h800dp-land-xhdpi")
+    fun onATabletTheDeleteAlertStandsAboveTheKeyboard() {
+        show()
+        open()
+        tap(SETTINGS_ACCOUNT_DATA)
+        tap(SETTINGS_DELETE)
+        keyboard(376)
+        val room = compose.onRoot().getUnclippedBoundsInRoot().bottom - 376.dp
+        val cancel = node(SETTINGS_ALERT_CANCEL).getUnclippedBoundsInRoot()
+        assertTrue("${cancel.bottom} above $room", cancel.bottom <= room + 0.5.dp)
     }
 
     @Test
@@ -428,6 +535,32 @@ class SettingsTest {
         assertEquals("https://example.com/email/example?lang=en", started()?.dataString)
         tap(SETTINGS_DELIVERY_EMAIL_PRIVACY)
         assertEquals(source.privacyUrl, started()?.dataString)
+    }
+
+    @Test
+    fun aWindowMadeAgainWhileTheEmailSavesStillHearsItsAnswer() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation) {
+            signedInWithEmail(choice = false)
+            choosing = CompletableDeferred()
+        }
+        open()
+        tap(SETTINGS_DELIVERY_UPDATES)
+        flip(SETTINGS_DELIVERY_EMAIL)
+        node(SETTINGS_DELIVERY_EMAIL).assertIsNotEnabled()
+        // Made again from a saved state read back from a Parcel: nothing saved is the object the run still holds.
+        recreation.recreate(parceled = true)
+        settle()
+        // Still waiting for the answer, the switch where it was flipped.
+        node(SETTINGS_DELIVERY_EMAIL).assertIsNotEnabled()
+        assertEquals(ToggleableState.On, node(SETTINGS_DELIVERY_EMAIL).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ToggleableState))
+        compose.runOnUiThread { source.choosing!!.complete(Unit) }
+        settle()
+        node(SETTINGS_DELIVERY_EMAIL).assertIsEnabled()
+        assertEquals(listOf(true), source.emailChoices)
+        // The page takes taps again.
+        tap(presetTag(NotificationPreset.All))
+        assertEquals(true, node(presetTag(NotificationPreset.All)).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
     }
 
     @Test

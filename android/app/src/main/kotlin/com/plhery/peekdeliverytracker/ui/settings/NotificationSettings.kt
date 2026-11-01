@@ -95,8 +95,9 @@ internal fun DeliveryUpdatesPage(state: DeliveriesState, scroll: ScrollState, on
     var preset by rememberSaveable { mutableStateOf(NotificationPreferencesDraft(preferences).preset) }
     var emailOnDelivery by remember { mutableStateOf(preferences?.emailOnDelivery) }
     var notice by rememberSaveable { mutableStateOf<String?>(null) }
-    var emailChoice by rememberSaveable { mutableStateOf<Boolean?>(null) }
-    var emailFailed by rememberSaveable { mutableStateOf(false) }
+    // Held for the page in the app's scope, as its runs are: a window made again mid-save still waits for the answer.
+    val emailChoice = work.emailChoice(DELIVERY_UPDATES_PAGE)
+    val emailFailed = work.emailFailed(DELIVERY_UPDATES_PAGE)
     var seen by remember { mutableStateOf(preferences) }
     LaunchedEffect(Unit) {
         source.refreshNotificationState()
@@ -115,26 +116,21 @@ internal fun DeliveryUpdatesPage(state: DeliveriesState, scroll: ScrollState, on
             preset = NotificationPreferencesDraft(new).preset
             emailOnDelivery = new.emailOnDelivery
         }
-        if (old?.emailOnDelivery != new?.emailOnDelivery) emailFailed = false
+        if (old?.emailOnDelivery != new?.emailOnDelivery) work.emailFailureSeen(DELIVERY_UPDATES_PAGE)
         seen = new
     }
     val run = { job: suspend () -> Unit -> work.run(DELIVERY_UPDATES_PAGE, source.scope, source::errorMessage, null, job) }
     val setEmail = { enabled: Boolean ->
         if (emailChoice == null) {
-            emailChoice = enabled
-            emailFailed = false
             notice = null
-            source.scope.launch {
+            work.chooseEmail(DELIVERY_UPDATES_PAGE, enabled, source.scope, failed = { state.announce(localizer.text("email.setting.failed")) }) {
                 try {
                     source.setEmailOnDelivery(enabled)
                     source.action("email-delivery-change", DeliveryAnalytics.Outcome.Success)
                 } catch (error: Exception) {
-                    if (error is CancellationException) throw error
-                    emailFailed = true
-                    source.action("email-delivery-change", DeliveryAnalytics.Outcome.Error)
-                    state.announce(localizer.text("email.setting.failed"))
+                    if (error !is CancellationException) source.action("email-delivery-change", DeliveryAnalytics.Outcome.Error)
+                    throw error
                 }
-                emailChoice = null
             }
         }
     }

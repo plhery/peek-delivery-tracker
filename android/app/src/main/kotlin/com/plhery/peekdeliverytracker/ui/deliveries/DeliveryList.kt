@@ -856,5 +856,5 @@ private val SEARCH_DROP = 10.dp
 
 const val ANNOUNCEMENT = "deliveries.announcement"
 
-/** iOS's id for the guest's offer of an account, the same as the account button's. */
+/** iOS's id for the guest's offer of an account (`DeviceAccountRow`); the account button has its own. */
 const val DEVICE_ACCOUNT_ROW = "deliveries.account"

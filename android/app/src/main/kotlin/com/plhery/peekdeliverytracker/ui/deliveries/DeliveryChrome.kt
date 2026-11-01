@@ -1126,7 +1126,7 @@ private const val FRAME_HEIGHT = 310f
 
 /** The test tags of the list's controls. */
 const val ADD_BUTTON = "deliveries.add"
-const val ACCOUNT_BUTTON = "deliveries.account"
+const val ACCOUNT_BUTTON = "deliveries.accountButton"
 const val SEARCH_BUTTON = "deliveries.search"
 const val SEARCH_ROW = "deliveries.searchRow"
 const val SEARCH_FIELD = "deliveries.searchField"

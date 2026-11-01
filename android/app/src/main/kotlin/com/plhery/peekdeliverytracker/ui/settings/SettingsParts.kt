@@ -283,11 +283,16 @@ internal fun SettingsLanguageRow() {
         }
     }
     val picker = @Composable {
-        Row(Modifier.onGloballyPositioned { value = it.boundsInWindow() }, verticalAlignment = Alignment.CenterVertically) {
+        // A menu Picker's button in a Form row: its up-down chevron at the subheadline size, semibold, 11 in from the
+        // button's trailing end, which the menu lines up with.
+        Row(
+            Modifier.onGloballyPositioned { value = it.boundsInWindow() }.padding(end = PICKER_TRAILING),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Text(language.nativeName, color = colors.secondaryLabel, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
             PeekSymbol(
-                "chevron.up.chevron.down", Modifier.padding(start = 5.dp),
-                font = type.style(IosTextStyle.Footnote, FontWeight.Medium), tint = colors.secondaryLabel,
+                "chevron.up.chevron.down", Modifier.padding(start = PICKER_GAP),
+                font = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold), tint = colors.secondaryLabel,
             )
         }
     }
@@ -466,6 +471,9 @@ internal fun settingsLanguageTag(language: AppLanguage) = "$SETTINGS_LANGUAGE.${
 
 private val ROW_PADDING = 15.dp
 private val ROW_HEIGHT = 54.dp
+/** The menu picker's room between its value and its chevron, and after the chevron. */
+private val PICKER_GAP = 5.dp
+private val PICKER_TRAILING = 11.dp
 private val TILE = Brand.color(light = "#F7EFC9", dark = "#49452A")
 private val TILE_LETTER = Brand.color(light = "#695824", dark = "#E2D08D")
 private val MINI_LIGHT = Color(0xFFF2F4EB)

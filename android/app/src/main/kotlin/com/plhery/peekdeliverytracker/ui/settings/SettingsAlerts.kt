@@ -47,10 +47,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.rememberTextMeasurer
-import androidx.compose.ui.text.style.TextAlign
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
-import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.deliveries.ALERT_BUTTONS_GAP
 import com.plhery.peekdeliverytracker.ui.deliveries.ALERT_BUTTON_GAP
 import com.plhery.peekdeliverytracker.ui.deliveries.ALERT_BUTTON_PADDING
@@ -62,14 +60,13 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ALERT_SIDE
 import com.plhery.peekdeliverytracker.ui.deliveries.ALERT_WIDTH
 import com.plhery.peekdeliverytracker.ui.deliveries.AlertButton
 import com.plhery.peekdeliverytracker.ui.deliveries.AlertCard
+import com.plhery.peekdeliverytracker.ui.deliveries.AlertWords
+import com.plhery.peekdeliverytracker.ui.deliveries.ALERT_WORDS_GAP
 import com.plhery.peekdeliverytracker.ui.deliveries.DIM
 import com.plhery.peekdeliverytracker.ui.deliveries.FIELD_INSET
-import com.plhery.peekdeliverytracker.ui.deliveries.MESSAGE_GAP
 import com.plhery.peekdeliverytracker.ui.deliveries.alertButtonFont
 import com.plhery.peekdeliverytracker.ui.deliveries.alertFill
-import com.plhery.peekdeliverytracker.ui.deliveries.uiKitLines
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
-import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlin.math.max
 
@@ -77,8 +74,9 @@ import kotlin.math.max
 internal class AlertField(val placeholder: String, val text: String, val onChange: (String) -> Unit)
 
 /**
- * `.alert(title, isPresented:) { … } message: { … }` as iOS 26 draws it ([AlertCard]): the title, its [message] under it
- * in subheadline secondary, the [field], if any, which takes the focus and the keyboard as it opens, without capitals
+ * `.alert(title, isPresented:) { … } message: { … }` as iOS 26 draws it ([AlertCard], iphone-03-reset-alert.png): the
+ * title in the headline's weight and its [message] under it in subheadline secondary, both leading ([AlertWords]), the
+ * [field], if any, which takes the focus and the keyboard as it opens, without capitals
  * (`.textInputAutocapitalization(.never)`), then Cancel and the [action] side by side, or the action over Cancel where
  * either doesn't fit its half, as at the accessibility text sizes. The action is red where [destructive], and off,
  * greyed, until [actionEnabled]. Cancel and the back close it. It stands in the middle of what the keyboard leaves of
@@ -97,8 +95,6 @@ internal fun SettingsAlert(
     onAction: () -> Unit,
 ) {
     val localizer = LocalLocalizer.current
-    val type = PeekTheme.type
-    val colors = PeekTheme.colors
     val heading = remember { AccessibilityFocus() }
     val focus = remember { FocusRequester() }
     LaunchedEffect(Unit) {
@@ -125,21 +121,12 @@ internal fun SettingsAlert(
                 layout(placeable.width, placeable.height) { placeable.place(0, 0) }
             },
         ) {
-            Column(
-                Modifier.padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE).accessibilityFocus(heading).semantics(mergeDescendants = true) {},
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(MESSAGE_GAP),
-            ) {
-                Text(title, color = colors.label, style = type.body.uiKitLines(IosTextStyle.Body), textAlign = TextAlign.Center)
-                if (message != null) {
-                    Text(message, color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline), textAlign = TextAlign.Center)
-                }
-            }
+            Box(Modifier.padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE)) { AlertWords(title, message, heading) }
             if (field != null) {
                 Spacer(Modifier.height(ALERT_FIELD_GAP))
                 AlertTextField(field, focus)
             }
-            Spacer(Modifier.height(ALERT_BUTTONS_GAP))
+            Spacer(Modifier.height(if (field != null) ALERT_BUTTONS_GAP else ALERT_WORDS_GAP))
             AlertActions(localizer.text("common.cancel"), action, actionTag, destructive, actionEnabled, onCancel, onAction)
         }
     }

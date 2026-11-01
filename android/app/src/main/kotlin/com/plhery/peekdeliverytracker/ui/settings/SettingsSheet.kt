@@ -25,6 +25,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -103,11 +104,14 @@ import kotlinx.coroutines.launch
 
 /**
  * `.sheet(isPresented: $showingAccount) { AccountView() }`: Settings over the deliveries at the large detent with its
- * drag indicator, a form in the middle of a tablet's or an unfolded foldable's window (`.formOnPad()`, the sheet's own
- * form there). Close, a drag down, a tap outside and the system's back close it, none of them while the data page
- * waits for what it asked (`interactiveDismissDisabled(working)`); the back pops a pushed page first. What it asked
- * runs in the app's scope ([com.plhery.peekdeliverytracker.ui.deliveries.PageWork]), so a window made again still
- * waits for it, and the pushed page, the alert open and the address typed stay too; it opens afresh each time.
+ * drag indicator; a form in the middle of the window where the list stands beside the parcel's page
+ * (`FormSizing(applies: sheetsAsForms)`), its bar 10 from the top and the side as the iPad's form has it (ipad-01), and
+ * the iPad's page sheet in any other regular window, an unfolded foldable's or a tablet's at the accessibility text
+ * sizes, as `.presentationSizing` is left alone there. Close, a drag down, a tap outside and the system's back close
+ * it, none of them while the data page waits for what it asked (`interactiveDismissDisabled(working)`); the back pops
+ * a pushed page first. What it asked runs in the app's scope ([com.plhery.peekdeliverytracker.ui.deliveries.PageWork]),
+ * so a window made again still waits for it, and the pushed page, the alert open and the address typed stay too; it
+ * opens afresh each time.
  */
 @Composable
 internal fun AccountSheetHost(state: DeliveriesState) {
@@ -135,8 +139,11 @@ internal fun AccountSheetHost(state: DeliveriesState) {
             openings++
         },
         dismissible = !work.working(SETTINGS_PAGE),
+        page = !state.sheetsAsForms,
     ) {
-        AccountView(state, nav, scrolls)
+        val insets = LocalSheetInsets.current
+        val form = if (!state.sheetsAsForms) insets else insets.copy(barTop = FORM_BAR_TOP, barSide = FORM_BAR_SIDE, formSide = FORM_TITLE_SIDE)
+        CompositionLocalProvider(LocalSheetInsets provides form) { AccountView(state, nav, scrolls) }
     }
 }
 
@@ -307,7 +314,8 @@ private fun SettingsRootPage(
     val guest = source.isGuest
     val email = (session as? AuthenticationState.SignedIn)?.user?.email
     val backdrop = rememberMaterialBackdrop()
-    val barHeight = insets.barTop + BAR_ROW
+    val barTop = insets.barTop + NAV_BAR_DROP
+    val barHeight = barTop + BAR_ROW
     val large = with(density) { LARGE_TITLE.toPx() }
     val fade = with(density) { TITLE_FADE.toPx() }
     val title = localized("settings.title")
@@ -317,7 +325,7 @@ private fun SettingsRootPage(
     }
     Box(Modifier.fillMaxSize()) {
         Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(colors.background)) {
-            Column(Modifier.fillMaxSize().verticalScroll(scroll).padding(top = barHeight, bottom = sheetBottomInset())) {
+            Column(Modifier.fillMaxSize().verticalScroll(scroll).padding(top = barHeight + NAV_BAR_FOOT, bottom = sheetBottomInset())) {
                 Box(Modifier.fillMaxWidth().heightIn(min = LARGE_TITLE).padding(horizontal = insets.formSide), contentAlignment = Alignment.BottomStart) {
                     Text(
                         title, Modifier.padding(bottom = 8.dp).semantics { heading() },
@@ -380,7 +388,7 @@ private fun SettingsRootPage(
             InlineBar(
                 title,
                 leading = { BarButton(localized("common.close"), state::closeAccount, backdrop, FontWeight.Normal, !working, SETTINGS_CLOSE) },
-                modifier = Modifier.padding(top = insets.barTop),
+                modifier = Modifier.padding(top = barTop),
                 titleAlpha = { ((scroll.value - (large - fade)) / fade).coerceIn(0f, 1f) },
             )
         }
@@ -489,21 +497,22 @@ internal fun PushedPage(
 ) {
     val colors = PeekTheme.colors
     val insets = LocalSheetInsets.current
-    val barHeight = insets.barTop + BAR_ROW
+    val barTop = insets.barTop + NAV_BAR_DROP
+    val barHeight = barTop + BAR_ROW
     Box(Modifier.fillMaxSize()) {
         Box(Modifier.fillMaxSize().background(colors.background)) {
             Column(
                 Modifier
                     .fillMaxSize()
                     .verticalScroll(scroll)
-                    .padding(top = barHeight, bottom = sheetBottomInset())
+                    .padding(top = barHeight + NAV_BAR_FOOT, bottom = sheetBottomInset())
                     .then(if (enabled) Modifier else Modifier.semantics { disabled() }.pointerInput(Unit) { swallowTaps() }),
             ) {
                 SettingsColumn(content)
             }
         }
         FormScrollEdge(barHeight) { scroll.value.toFloat() }
-        Box(Modifier.padding(top = insets.barTop).fillMaxWidth().height(BAR_ROW)) {
+        Box(Modifier.padding(top = barTop).fillMaxWidth().height(BAR_ROW)) {
             ProvideDynamicTypeSize(DynamicTypeSize.Large) {
                 InlineBar(title, leading = { SettingsBack(backEnabled, onBack) })
             }
@@ -524,7 +533,9 @@ private suspend fun androidx.compose.ui.input.pointer.PointerInputScope.swallowT
 
 /**
  * The stack's ‹ on its glass circle. TalkBack reads it by the page it goes back to, "Settings", as VoiceOver reads
- * UIKit's back button, and goes there as the page comes in. Off while the data page waits, as the back is.
+ * UIKit's back button, and goes there as the page comes in. Off while the data page waits, as the back is: a
+ * deliberate difference from the iPhone, whose back button still pops the page while AccountView's run goes on
+ * (`.disabled(working)` covers the page, not the bar).
  */
 @Composable
 private fun SettingsBack(enabled: Boolean, onBack: () -> Unit) {
@@ -671,6 +682,19 @@ private const val PUSH_DURATION = 0.5
 private const val FADE_DURATION = 0.35
 /** How far Settings goes out as a page comes in, of its width, as UIKit's push moves the page under. */
 private const val PUSH_PARALLAX = 0.3f
+/**
+ * A NavigationStack's bar in a sheet stands a point lower than a sheet's own bar row (`SheetInsets.barTop`), and what
+ * scrolls under it starts 10 under the bar, as UIKit's navigation bar insets its scroll view.
+ */
+private val NAV_BAR_DROP = 1.dp
+private val NAV_BAR_FOOT = 10.dp
+/**
+ * The iPad's form holds the stack's bar nearer its corner than a page sheet does (ipad-01): its row 10 from the top, its
+ * items 10 from the side, the large title 16 in, and so what scrolls under it 10 higher.
+ */
+private val FORM_BAR_TOP = 9.dp
+private val FORM_BAR_SIDE = 10.dp
+private val FORM_TITLE_SIDE = 16.dp
 /** UIKit's large title's room under the bar, its words 8 over its foot. */
 private val LARGE_TITLE = 52.dp
 /** How far the scroll goes, once the large title is under the bar, while the inline title fades in. */

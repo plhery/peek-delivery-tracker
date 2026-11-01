@@ -186,7 +186,7 @@ fun DeliveriesTab(
         val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
         state.inFront = resumed
         // `watching`: the list is looked at, and may show a card moving.
-        val watching = resumed && state.listShown && !state.showingFilters && !state.hasCustomView && !reduceMotion
+        val watching = resumed && state.listShown && !state.showingFilters && !state.showingAccount && !state.hasCustomView && !reduceMotion
         HoldingDelivered(state, resumed, watching)
         Reviewing(state, resumed, watching, now)
         Consuming(state, inbox)

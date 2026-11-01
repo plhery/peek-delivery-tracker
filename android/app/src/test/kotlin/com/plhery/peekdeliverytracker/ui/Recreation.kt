@@ -1,6 +1,9 @@
 package com.plhery.peekdeliverytracker.ui
 
 import android.app.Activity
+import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -35,13 +38,16 @@ class Recreation(private val compose: ComposeContentTestRule) {
 
     /**
      * Saves the content and takes it away, then composes it again from what it saved, as far as its first frame. What
-     * changed with the window, such as its size as it turns, changes in `meanwhile`, while the content is away.
+     * changed with the window, such as its size as it turns, changes in `meanwhile`, while the content is away. Where
+     * [parceled], what it saved is written to a Parcel and read back, as the system hands it back once it has kept it
+     * outside the process, so nothing comes back as the very object that was saved.
      */
-    fun recreate(meanwhile: () -> Unit = {}) {
+    fun recreate(parceled: Boolean = false, meanwhile: () -> Unit = {}) {
         compose.mainClock.autoAdvance = false
         compose.runOnIdle {
             changingConfigurations(true)
-            registry = SaveableStateRegistry(registry.performSave()) { canBeSaved(it) }
+            val saved = registry.performSave()
+            registry = SaveableStateRegistry(if (parceled) saved.throughParcel() else saved) { canBeSaved(it) }
             shown = false
         }
         frame()
@@ -51,6 +57,23 @@ class Recreation(private val compose: ComposeContentTestRule) {
             shown = true
         }
         frame()
+    }
+
+    /** What was saved, through a Parcel in a Bundle as the activity's saved state holds it. */
+    @Suppress("DEPRECATION", "UNCHECKED_CAST")
+    private fun Map<String, List<Any?>>.throughParcel(): Map<String, List<Any?>> {
+        val bundle = Bundle()
+        forEach { (key, values) -> bundle.putParcelableArrayList(key, ArrayList(values) as ArrayList<Parcelable?>) }
+        val parcel = Parcel.obtain()
+        try {
+            parcel.writeBundle(bundle)
+            parcel.setDataPosition(0)
+            val read = parcel.readBundle(Recreation::class.java.classLoader)!!
+            // Untyped, as the registry's own reading is: the values are of every kind a Bundle holds.
+            return read.keySet().associateWith { read.get(it) as List<Any?> }
+        } finally {
+            parcel.recycle()
+        }
     }
 
     private fun changingConfigurations(changing: Boolean) {

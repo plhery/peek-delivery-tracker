@@ -289,7 +289,7 @@ class ParcelMapTest {
 
     /** The window made again, what changed with it changing in `meanwhile`, and the map back up, as it was, and at rest. */
     private fun remake(recreation: Recreation, meanwhile: () -> Unit = {}) {
-        recreation.recreate(meanwhile)
+        recreation.recreate(meanwhile = meanwhile)
         var frames = 0
         while (!exists(MAP_COVER)) {
             check(frames++ < 5) { "The map didn't come back" }

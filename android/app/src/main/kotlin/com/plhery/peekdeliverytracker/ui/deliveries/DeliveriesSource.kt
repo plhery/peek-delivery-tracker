@@ -495,6 +495,8 @@ class PageWork {
     private val additions = mutableStateMapOf<UUID, UUID>()
     private val duplicates = mutableStateMapOf<UUID, UUID>()
     private val exports = mutableStateMapOf<UUID, File>()
+    private val emailChoices = mutableStateMapOf<UUID, EmailChoice>()
+    private val emailFailures = mutableStateMapOf<UUID, Unit>()
 
     /** Whether the page with `pageId` waits for a change it asked for. */
     fun working(pageId: UUID): Boolean = pageId in runs
@@ -625,6 +627,48 @@ class PageWork {
         }
     }
 
+    /**
+     * The position the delivery email's switch on the page with `pageId` was flipped to, until the server has answered
+     * (`emailChoice`).
+     */
+    fun emailChoice(pageId: UUID): Boolean? = emailChoices[pageId]?.enabled
+
+    /** The last flip of that switch failed (`emailFailed`), until the next one or [emailFailureSeen]. */
+    fun emailFailed(pageId: UUID): Boolean = pageId in emailFailures
+
+    fun emailFailureSeen(pageId: UUID) {
+        emailFailures -= pageId
+    }
+
+    /**
+     * Delivery updates' `setEmail(_:)` on the page with `pageId`: `save` in `scope`, one at a time, the switch held at
+     * `enabled` meanwhile ([emailChoice]) and, once failed, [emailFailed], then `failed`. Nothing reaches the page once
+     * it forgot the flip.
+     */
+    fun chooseEmail(pageId: UUID, enabled: Boolean, scope: CoroutineScope, failed: () -> Unit, save: suspend () -> Unit) {
+        if (pageId in emailChoices) return
+        val choice = EmailChoice(enabled)
+        emailChoices[pageId] = choice
+        emailFailures -= pageId
+        scope.launch {
+            val ok = try {
+                save()
+                true
+            } catch (error: CancellationException) {
+                if (emailChoices[pageId] === choice) emailChoices -= pageId
+                throw error
+            } catch (_: Exception) {
+                false
+            }
+            if (emailChoices[pageId] !== choice) return@launch
+            if (!ok) {
+                emailFailures[pageId] = Unit
+                failed()
+            }
+            emailChoices -= pageId
+        }
+    }
+
     /** The page with `pageId` has gone: it waits for nothing more, and hears nothing of what it asked for. */
     fun forget(pageId: UUID) {
         runs -= pageId
@@ -635,7 +679,12 @@ class PageWork {
         additions -= pageId
         duplicates -= pageId
         exports -= pageId
+        emailChoices -= pageId
+        emailFailures -= pageId
     }
+
+    /** A flip of the delivery email's switch, each its own: one its page forgot comes to nothing once answered. */
+    private class EmailChoice(val enabled: Boolean)
 
     /** The change `run` of the page with `pageId` is over: whether the page still waited for it. */
     private fun end(pageId: UUID, run: Any): Boolean {

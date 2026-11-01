@@ -23,6 +23,10 @@ import com.plhery.peekdeliverytracker.core.WidgetCenter
  * the phone allows is read from Android's own setting and permission ([NotificationAuthorizationStatus.fromAndroid]),
  * as Settings' Delivery updates shows it: nothing has asked yet, so on Android 13 and later a permission not granted
  * is still to be asked, and only the app's notifications turned off in the phone's settings are blocked.
+ *
+ * Its question asks nothing and answers what Android already allows, as iOS's answers at once for a choice already
+ * made: a phone that allows them gets the iPhone's wait for a token that never comes (`native.apnsTokenError`), the
+ * demo turns them on, and only a refusal keeps the invitation away (`dismissNotificationInvitation()`).
  */
 class NoPushNotifications(private val context: Context) : PushNotifications {
     override suspend fun authorizationStatus(): NotificationAuthorizationStatus = NotificationAuthorizationStatus.fromAndroid(
@@ -34,7 +38,7 @@ class NoPushNotifications(private val context: Context) : PushNotifications {
         areNotificationsEnabled = NotificationManagerCompat.from(context).areNotificationsEnabled(),
     )
 
-    override suspend fun requestAuthorization(): Boolean = false
+    override suspend fun requestAuthorization(): Boolean = authorizationStatus() == NotificationAuthorizationStatus.Authorized
 
     override fun registerForRemoteNotifications() {}
 

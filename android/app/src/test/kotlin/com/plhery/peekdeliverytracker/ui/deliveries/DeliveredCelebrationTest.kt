@@ -475,6 +475,26 @@ class DeliveredCelebrationTest {
     }
 
     @Test
+    fun settingsOverTheListAsksNothingUntilItCloses() {
+        show()
+        usedTwoEarlierDays()
+        deliver()
+        advance(1050)
+        advanceUntil(2) { !shows(DELIVERED_FLIGHTS) }
+        frame()
+        assertEquals(listOf("prepare"), source.reviewCalls)
+        // Settings opens as the moment settles (`listCovered`): nothing is asked while it is over the list.
+        advance(1000)
+        compose.runOnUiThread { deliveries.account() }
+        advance(3000)
+        assertEquals(listOf("prepare"), source.reviewCalls)
+        assertEquals(0, source.actions.count { it == "review-ask" })
+        compose.runOnUiThread { deliveries.closeAccount() }
+        advance(3000)
+        assertEquals(listOf("prepare", "prepare", "launch"), source.reviewCalls)
+    }
+
+    @Test
     fun aDayThatWentWrongAsksNothing() {
         show()
         usedTwoEarlierDays()

@@ -103,6 +103,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -160,6 +161,8 @@ import com.plhery.peekdeliverytracker.ui.sheet.BarCancel
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetGround
+import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_HEIGHT
+import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_WIDTH
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
@@ -215,9 +218,10 @@ internal fun AddParcelHost(state: DeliveriesState) {
             onClosed = { state.addClosed(adding) }, dismissible = !saving, content = content,
         )
     } else {
+        // The iPad's form shows no drag indicator: `presentationSizing(.form)` alone.
         Sheet(
             visible = request != null, onDismiss = state::closeAdd, paneTitle = title, detents = listOf(SheetDetent.Large),
-            onClosed = { state.addClosed(adding) }, dismissible = !saving, content = content,
+            onClosed = { state.addClosed(adding) }, dismissible = !saving, grabber = false, content = content,
         )
     }
 }
@@ -1577,11 +1581,15 @@ private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: Ad
     val localizer = LocalLocalizer.current
     val parcels = state.parcels
     val close = { form.showingPicker = false }
+    val window = LocalWindowInfo.current.containerSize
+    val regular = with(LocalDensity.current) { window.width.toDp() >= REGULAR_WIDTH && window.height.toDp() >= REGULAR_HEIGHT }
     Sheet(
         visible = form.showingPicker,
         onDismiss = close,
         paneTitle = localized("add.carrier"),
         detents = listOf(SheetDetent.Large),
+        // The iPad's form shows no drag indicator: `.formOnPad()` alone.
+        grabber = !regular,
     ) {
         // The sections it opened with stay as they were (CarrierPicker keeps them); the tags and the automatic row
         // follow the check.

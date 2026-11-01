@@ -1066,7 +1066,7 @@ describe('persistent tracking routing', () => {
         .catch((error: RoutingDeferred) => error);
       const next = ((deferred as RoutingDeferred).routing as JsonObject & { candidate_probes: JsonObject }).candidate_probes;
       expect(next.dpd).toEqual({ count: 7, retry_at: '2026-09-10T18:00:00.000Z' });
-      expect(next.seur).toEqual({ count: 7, retry_at: '2026-09-11T12:00:00.000Z' });
+      expect(next[fourteen.find((carrier) => carrier !== 'dpd')!]).toEqual({ count: 7, retry_at: '2026-09-11T12:00:00.000Z' });
     });
     it('asks again by the last hourly check of a number nobody has seen', async () => {
       // Added at 08:20 and checked hourly until 14:20; the carrier ranked first is among those asked.

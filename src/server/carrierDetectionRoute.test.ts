@@ -342,7 +342,7 @@ it('does not ask carriers for selected shapes, formats without candidates or una
 // The scraper names the carriers asked about each shape; the route asks them all and returns the one that knows it.
 it.each([
   ['123456789012', 'brt'],
-  ['12345678901243', 'seur'],
+  ['12345678901243', 'dpd-de'],
   ['1000000000000001', 'tnt'],
   // Correos Express is asked only when the GS1 check digit adds up.
   ['1000000000000007', 'correos-express'],

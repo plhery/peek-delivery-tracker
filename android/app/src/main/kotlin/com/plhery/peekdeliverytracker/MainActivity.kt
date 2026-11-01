@@ -33,7 +33,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         // The stores are made with the first window, as the iPhone's are with its app.
         app.makeContainer()
-        // The links that come to this window: a parcel's link first, to the app's stores.
+        // The links that come to this window. A parcel's link comes by ParcelLinkActivity, in memory; one aimed at the
+        // window itself still goes first, to the app's stores.
         val inbox = DeliveriesInbox.of(this, parcelLink = app::openParcelLink)
         splash.setKeepOnScreenCondition { app.container.value == null }
         setContent {

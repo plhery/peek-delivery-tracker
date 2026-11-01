@@ -28,7 +28,8 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Peek">
         <!-- The keyboard never pans the window: the screens make room for it from its insets, and the tab bar stays
-             where it is, behind it, as the iPhone's does. A link comes to the window already open (singleTop). -->
+             where it is, behind it, as the iPhone's does. A parcel's link brings the window forward already open
+             (singleTop), through ParcelLinkActivity. -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -39,22 +40,39 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- The app's own links: peekdeliverytracker://parcel/<uuid> opens one of the deliveries, and
-                 peekdeliverytracker://p/<id> a parcel someone shared, in its sheet. -->
+            <!-- The app's own link to one of the deliveries: peekdeliverytracker://parcel/<uuid>. -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="peekdeliverytracker" />
                 <data android:host="parcel" />
+            </intent-filter>
+        </activity>
+
+        <!-- A parcel someone shared, which opens in its sheet: it hands the link to the app in memory and opens the
+             app's window without it, showing nothing itself, in a task of its own that Recents neither shows nor keeps,
+             so its owner key is written nowhere (ParcelLinkActivity). -->
+        <activity
+            android:name=".ParcelLinkActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.NoDisplay">
+            <!-- In the app's scheme: peekdeliverytracker://p/<id>. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="peekdeliverytracker" />
                 <data android:host="p" />
             </intent-filter>
-            <!-- A parcel someone shared, https://<the site>/p/<id>, on the site and on the host it answered on before
-                 (the iPhone's associated domains, SDT_ASSOCIATED_DOMAIN and SDT_ASSOCIATED_DOMAIN_LEGACY): an App Link
-                 that opens the parcel's sheet. Android verifies each host against its /.well-known/assetlinks.json,
-                 which names this package and the SHA-256 fingerprint of the key the app is signed with (the user's
-                 signing key, or Play's if Play signs the app). Until a host serves that file, Android opens that host's
-                 addresses in the browser. -->
+            <!-- On the site, https://<the site>/p/<id>, and on the host it answered on before (the iPhone's associated
+                 domains, SDT_ASSOCIATED_DOMAIN and SDT_ASSOCIATED_DOMAIN_LEGACY): an App Link. Android verifies each
+                 host against its /.well-known/assetlinks.json, which names this package and the SHA-256 fingerprint of
+                 the key the app is signed with (the user's signing key, or Play's if Play signs the app). Until a host
+                 serves that file, Android opens that host's addresses in the browser. -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

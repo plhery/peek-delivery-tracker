@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui
 
+import android.app.ActivityManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.verify.domain.DomainVerificationManager
@@ -12,6 +13,7 @@ import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.MainActivity
+import com.plhery.peekdeliverytracker.ParcelLinkActivity
 import com.plhery.peekdeliverytracker.PeekApplication
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.DateParser
@@ -39,6 +41,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
@@ -46,12 +49,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * A parcel's link on this device (A-L02, B-L01), which the JVM tests stand in for with Robolectric's window: the app's
- * window takes a link on both of the hosts the manifest claims and in the app's scheme; a link aimed at the package, as
- * a browser sends one, starts the app's window, which shows its sheet once the stores are made, and another link that
- * comes while it runs opens in the same window's sheet in place of the first. On the app's own stores, made offline
- * with links read from memory: nothing goes to the network. The stores are made once a process, so run the class on
- * its own (`-e class`), before any other test makes them.
+ * A parcel's link on this device (A-L02, B-L01), which the JVM tests stand in for with Robolectric's windows: a link on
+ * both of the hosts the manifest claims and in the app's scheme goes to [ParcelLinkActivity], the app's other addresses
+ * to its window; a link aimed at the package, as a browser sends one, starts the app's window, which shows its sheet
+ * once the stores are made, and another link that comes while it runs opens in the same window's sheet in place of the
+ * first. Neither the window's task, which Recents keeps, nor any other of the app's holds the link or its key, and the
+ * trampoline's own task is gone. On the app's own stores, made offline with links read from memory: nothing goes to the
+ * network. The stores are made once a process, so run the class on its own (`-e class`), before any other test makes
+ * them.
  */
 @RunWith(AndroidJUnit4::class)
 class ParcelLinkDeviceTest {
@@ -79,8 +84,20 @@ class ParcelLinkDeviceTest {
             .map { it.activityInfo.name }
 
     /** As a browser sends a link: in a task of its own, aimed at the package. */
-    private fun send(url: String, flags: Int = 0) =
-        context.startActivity(link(url).setPackage(context.packageName).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or flags))
+    private fun send(url: String) = context.startActivity(link(url).setPackage(context.packageName).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
+    /** The app's tasks Recents holds. */
+    private fun tasks(): List<ActivityManager.RecentTaskInfo> = context.getSystemService(ActivityManager::class.java).appTasks.mapNotNull { it.taskInfo }
+
+    /** The app's tasks hold no trampoline and no link: `window`'s, which Recents keeps, starts with the launcher's intent. */
+    private fun assertNoLinkKept(window: MainActivity) {
+        val tasks = tasks()
+        assertEquals(emptyList<Intent>(), tasks.map { it.baseIntent }.filter { it.component?.className == ParcelLinkActivity::class.java.name })
+        val own = tasks.single { it.taskId == window.taskId }.baseIntent
+        assertEquals(own.toString(), Intent.ACTION_MAIN, own.action)
+        assertNull(own.toString(), own.data)
+        assertNull(window.intent.data)
+    }
 
     /** The app's windows in front. */
     private fun windows(): List<MainActivity> {
@@ -92,16 +109,16 @@ class ParcelLinkDeviceTest {
     }
 
     @Test
-    fun theAppsWindowTakesALinkOnBothHostsTheManifestClaimsAndInTheAppsScheme() {
+    fun aLinkOnBothHostsTheManifestClaimsAndInTheAppsSchemeGoesToTheTrampolineAndTheAppsOtherAddressesToItsWindow() {
         // The hosts of the App Link filter, as the system reads them for verification: the site's and the one it
         // answered on before, the hosts whose links the app reads as a parcel's.
         val claimed = context.getSystemService(DomainVerificationManager::class.java)
             .getDomainVerificationUserState(context.packageName)?.hostToStateMap?.keys.orEmpty()
         assertEquals(setOf(site) + configuration.linkHosts, claimed)
-        val window = listOf(MainActivity::class.java.name)
-        for (host in claimed) assertEquals(host, window, takers("https://$host/p/$PLAIN"))
-        assertEquals(window, takers("peekdeliverytracker://p/$PLAIN"))
-        assertEquals(window, takers("peekdeliverytracker://parcel/${UUID.nameUUIDFromBytes(PLAIN.toByteArray())}"))
+        val trampoline = listOf(ParcelLinkActivity::class.java.name)
+        for (host in claimed) assertEquals(host, trampoline, takers("https://$host/p/$PLAIN"))
+        assertEquals(trampoline, takers("peekdeliverytracker://p/$PLAIN"))
+        assertEquals(listOf(MainActivity::class.java.name), takers("peekdeliverytracker://parcel/${UUID.nameUUIDFromBytes(PLAIN.toByteArray())}"))
         assertEquals(emptyList<String>(), takers("https://$site/privacy.html"))
         assertEquals(emptyList<String>(), takers("https://elsewhere.example/p/$PLAIN"))
     }
@@ -110,38 +127,42 @@ class ParcelLinkDeviceTest {
     fun aLinkStartsTheAppsWindowWithItsSheetAndAnotherReplacesItWhileItRuns() {
         val app = context.applicationContext as PeekApplication
         assumeTrue("The app's stores were made before this test, on the network: run the class on its own", app.container.value == null)
-        val reads = mutableListOf<String>()
+        val reads = mutableListOf<Pair<String, String?>>()
         app.makeStores = { application ->
             withContext(Dispatchers.IO) {
                 // Offline, in demo mode, which prepares no browser check: nothing leaves the device.
                 AppContainer(
                     application, configuration.copy(mode = AppConfiguration.Mode.Demo),
                     http = OkHttpClient.Builder().addInterceptor { throw IOException("No network in this test") }.build(),
-                    linkReader = { id, _ -> synchronized(reads) { reads += id }; response(id, gift = id == GIFT) },
+                    linkReader = { id, key -> synchronized(reads) { reads += id to key }; response(id, gift = id == GIFT) },
                 )
             }
         }
 
-        // The app not running: the window starts with the link, which waits for the stores and then opens.
-        send("https://$site/p/$PLAIN", Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        // The app not running: the trampoline hands the link, key and all, to the process, where it waits for the
+        // stores, and starts the window without it, which opens it once they are made.
+        send("https://$site/p/$PLAIN#k=$KEY")
         compose.waitUntil(20_000) { exists(LINK_CARD) }
         val first = windows().single()
         val links = checkNotNull(app.container.value).links
         assertEquals(PLAIN, links.route?.id)
+        assertNoLinkKept(first)
 
-        // While it runs: the window on top takes the next link (singleTop), and its sheet opens it in place.
+        // While it runs: the trampoline brings the window forward (singleTop) and its sheet opens the next link in place.
         send("peekdeliverytracker://p/$GIFT")
         compose.waitUntil(10_000) { exists(LINK_GIFT_CARD) && !exists(LINK_CARD) }
         assertEquals(GIFT, links.route?.id)
-        assertEquals(listOf(PLAIN, GIFT), synchronized(reads) { reads.toList() })
+        assertEquals(listOf(PLAIN to KEY, GIFT to null), synchronized(reads) { reads.toList() })
         assertSame(first, windows().single())
         check(exists(LINK_SHEET))
+        assertNoLinkKept(first)
     }
 }
 
-/** A synthetic DPD parcel's link, on its way, and a synthetic gift's. */
+/** A synthetic DPD parcel's link, on its way, and a synthetic gift's; a synthetic owner key, which neither answers to. */
 private const val PLAIN = "k7Qm2xHd9RtW"
 private const val GIFT = "g8Rn3yJe2SuX"
+private const val KEY = "SyntheticOwnerKeyForDeviceTestsOnly01234567"
 
 private fun ago(minutes: Long): String = DateParser.isoString(Instant.now().minus(Duration.ofMinutes(minutes)))
 

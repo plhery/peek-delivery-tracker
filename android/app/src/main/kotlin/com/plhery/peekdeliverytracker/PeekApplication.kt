@@ -60,9 +60,9 @@ class PeekApplication : Application() {
     /**
      * `open(_:)`'s first route (A-L02): a parcel's link, on the site (`https://<the site>/p/<id>`, or a host it
      * answered on before) or in the app's scheme (`peekdeliverytracker://p/<id>`), opens its sheet over whatever is up,
-     * signed in or not; false for any other address. One that comes before the stores are made waits for them, in the
-     * process rather than in a window's saved state, so the owner key a handed-over link carries is never written down.
-     * On the main thread.
+     * signed in or not; false for any other address. [ParcelLinkActivity] hands each one here. One that comes before
+     * the stores are made waits for them, in the process rather than in a window's saved state, so the owner key a
+     * handed-over link carries is never written down; it goes with the process, as the iPhone's does. On the main thread.
      */
     fun openParcelLink(url: String): Boolean {
         val configuration = BuildSettings.configuration

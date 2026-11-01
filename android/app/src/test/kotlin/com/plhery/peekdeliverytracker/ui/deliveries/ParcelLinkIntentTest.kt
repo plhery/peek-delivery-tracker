@@ -3,7 +3,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertIsEnabled
@@ -15,23 +14,15 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.PeekApplication
-import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
-import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import java.io.IOException
-import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -40,7 +31,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
@@ -74,7 +64,8 @@ class ParcelLinkWindow : ComponentActivity() {
  * or came to it, in the site's form or the app's scheme, once; the window made again keeps the sheet up without reading
  * the link again, and a keep under way with it; a window Recents starts again with the link doesn't follow it again,
  * and the window's intent forgets the link once read; an address that is no parcel's link goes on to the parcel it
- * names. The app takes a link before its stores are made, and opens it once they are.
+ * names. The app takes a parcel's link, and nothing else, before its stores are made (ParcelLinkActivityTest opens it
+ * once they are).
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -202,40 +193,6 @@ class ParcelLinkIntentTest {
         assertNull(links.links.route)
         assertFalse(exists(LINK_SHEET))
         assertEquals(listOf("parcel"), window.get().views.filter { it == "parcel" })
-    }
-
-    @Test
-    fun aLinkThatComesBeforeTheStoresAreMadeWaitsForThemAndOpensWithItsKey() {
-        val app = ApplicationProvider.getApplicationContext<PeekApplication>()
-        val catalog = CarrierCatalog.shared
-        var made: AppContainer? = null
-        app.makeStores = { application ->
-            withContext(Dispatchers.IO) {
-                AppContainer(
-                    application, BuildSettings.configuration.copy(mode = AppConfiguration.Mode.Demo),
-                    http = OkHttpClient.Builder().addInterceptor { throw IOException("No network in this test") }.build(),
-                    linkReader = { _, _ -> LinkFixtures.viewer() },
-                )
-            }.also { made = it }
-        }
-        try {
-            assertTrue(app.openParcelLink("${siteLink(id)}#k=${LinkFixtures.KEY}"))
-            assertNull(app.container.value)
-
-            app.makeContainer()
-            // The stores are made on the IO dispatcher, then started on the main thread.
-            val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
-            while (app.container.value == null && System.nanoTime() < deadline) {
-                shadowOf(Looper.getMainLooper()).idle()
-                Thread.sleep(10)
-            }
-            val route = checkNotNull(app.container.value).links.route
-            assertEquals(id, route?.id)
-            assertEquals(LinkFixtures.KEY, route?.key)
-        } finally {
-            made?.scope?.cancel()
-            CarrierCatalog.install(catalog)
-        }
     }
 
     @Test

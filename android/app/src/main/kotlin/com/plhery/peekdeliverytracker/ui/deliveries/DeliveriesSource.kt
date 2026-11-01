@@ -571,7 +571,8 @@ class DeliveriesInbox(parcel: UUID? = null, private val parcelLink: (String) -> 
 
     /**
      * `.onOpenURL` (A-L02, A-L14), in `open(_:)`'s order: a parcel's link first, which [parcelLink] opens in its sheet,
-     * then `peekdeliverytracker://parcel/<uuid>`, which opens the parcel on the deliveries.
+     * then `peekdeliverytracker://parcel/<uuid>`, which opens the parcel on the deliveries. The app's parcel links come
+     * by ParcelLinkActivity, which keeps them out of the window's intent; one sent to the window itself comes here.
      */
     fun follow(intent: Intent?) {
         if (intent?.action != Intent.ACTION_VIEW) return

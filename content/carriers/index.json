@@ -203,5 +203,6 @@
   { "id": "cdek", "catalog": "cdek", "name": "CDEK", "languages": ["en"] },
   { "id": "forza-delivery", "catalog": "forza-delivery", "name": "Forza Delivery Express", "languages": ["en", "es"] },
   { "id": "quantium-solutions", "catalog": "quantium-solutions", "name": "Quantium Solutions", "languages": ["en"] },
-  { "id": "correos-chile", "catalog": "correos-chile", "name": "Correos de Chile", "languages": ["en"] }
+  { "id": "correos-chile", "catalog": "correos-chile", "name": "Correos de Chile", "languages": ["en"] },
+  { "id": "posta-shqiptare", "catalog": "posta-shqiptare", "name": "Posta Shqiptare", "languages": ["en"] }
 ]

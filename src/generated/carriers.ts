@@ -1648,6 +1648,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Correos de Chile tracking: numbers and statuses explained",
       "name": "Correos de Chile",
       "color": "#d9232d"
+    },
+    {
+      "id": "posta-shqiptare",
+      "catalog": "posta-shqiptare",
+      "slug": "posta-shqiptare-tracking",
+      "title": "Posta Shqiptare tracking: Albanian Post numbers and statuses",
+      "name": "Posta Shqiptare",
+      "color": "#1a3292"
     }
   ],
   "de": [

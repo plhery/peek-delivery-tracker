@@ -6034,6 +6034,40 @@ describe('TrackingSyncService', () => {
     expect(client.completeSyncAttempt.mock.calls.at(-1)![1]).toMatchObject({ outcome: 'refused' });
   });
 
+  it('says the number is wrong when the carrier\'s answer says so, and asks for details on any other refusal', async () => {
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const answer = (reason?: string) => new InvalidInputError('R+L Carriers', 'R+L Carriers says the PRO number fails its check digit',
+      reason ? { reason } : undefined);
+    const adapter = { fetch: vi.fn().mockRejectedValue(answer('wrong_number')),
+      fetchUniversal: vi.fn(async (source: string) => { throw new NotFoundError(source); }) };
+    // A number of R+L's shape: its adapter asks the carrier, which refuses it.
+    const parcel = { id: 'check-digit', carrier: 'rl-carriers', tracking_number: '482915736', current_stage: 'pending',
+      carrier_data: { routing: { version: 1, configured_carrier: 'rl-carriers', consecutive_failures: 0, probe_cursor: 0, discovery_cursor: 0 } } };
+    let now = new Date('2026-09-10T12:00:00Z');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    await expect(service.syncPackage(parcel, { trigger: 'package' })).resolves.toMatchObject({ errors: 1 });
+    const saved = client.updatePackage.mock.calls.at(-1)![1];
+    expect(saved).toMatchObject({ sync_status: 'error', sync_error: 'carrier:refused_number',
+      carrier_data: { routing: { failures: { 'rl-carriers': { kind: 'invalid_input', user_error: 'carrier:invalid_input', wrong_number: true } } } } });
+    // A later check while the carrier's refusal holds says so again without asking it.
+    now = new Date('2026-09-10T12:20:00Z');
+    await service.syncPackage({ ...parcel, ...saved });
+    expect(adapter.fetch).toHaveBeenCalledOnce();
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ sync_error: 'carrier:refused_number' });
+
+    // A refusal the carrier does not mark, or an answer that another carrier tracks the parcel, asks for details as before.
+    for (const reason of [undefined, 'other_carrier']) {
+      now = new Date('2026-09-10T12:00:00Z');
+      adapter.fetch.mockRejectedValue(answer(reason));
+      await service.syncPackage({ ...parcel, id: `unmarked-${reason}` }, { trigger: 'package' });
+      expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ sync_status: 'error', sync_error: 'carrier:invalid_input' });
+      expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.routing.failures['rl-carriers']).not.toHaveProperty('wrong_number');
+    }
+  });
+
   it('asks the owner to correct a placeholder number every source refuses, whatever the parcel showed before', async () => {
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),

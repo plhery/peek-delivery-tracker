@@ -1,5 +1,6 @@
 import 'server-only';
-import { deferredTrackingFailure, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
+import { carrierErrorReason, deferredTrackingFailure, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
+import { REFUSED_NUMBER } from '../lib/messages';
 import { CarrierError, carrierErrorKind, inferStage, stageSource, resultStage, resultHasUpdate, CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 export { classifyStage, inferStage, stageSource, resultStage, resultHasUpdate } from 'universal-parcel-scraper';
 import { AMAZON_ACCOUNT_MESSAGE, AMAZON_HISTORY_EXPIRED, requiresAmazonAccount } from '../lib/amazon';
@@ -1180,14 +1181,15 @@ function thinAnswerId(result: CarrierResult, selectedStage: string | null, event
 type SyncOutcome = 'updated' | 'unchanged' | 'waiting' | 'errors' | 'unsupported' | 'superseded';
 
 /**
- * The copy code a failure is stored with. A number the parcel's own carrier
- * refuses as one it does not issue, such as one chosen by hand that issues no
- * number of its shape, has its own; a refused input, such as a postcode, asks
- * for the parcel's details.
+ * The copy code a failure is stored with. A number the parcel's own carrier refuses has its own:
+ * one its adapter refuses before asking, such as one chosen by hand that issues no number of its
+ * shape, or one the carrier's answer says is wrong (`wrongNumber`, `reason: 'wrong_number'`, such
+ * as R+L's failed check digit). Any other refusal, such as of a postcode or a link, or an answer
+ * that another carrier tracks the parcel, asks for the parcel's details.
  */
-async function failureCopy(code: string | null, carrier: string, parcel: JsonObject): Promise<string | null> {
-  return code === 'carrier:invalid_input' && await refusesNumber(carrier, String(parcel.tracking_number ?? ''))
-    ? 'carrier:refused_number' : code;
+async function failureCopy(code: string | null, carrier: string, parcel: JsonObject, wrongNumber: boolean): Promise<string | null> {
+  return code === 'carrier:invalid_input' && (wrongNumber || await refusesNumber(carrier, String(parcel.tracking_number ?? '')))
+    ? REFUSED_NUMBER : code;
 }
 
 /**
@@ -2467,7 +2469,8 @@ export class TrackingSyncService {
         const refused = (previousStage === 'pending' && error.routing.failures[carrierId]?.user_error === 'carrier:invalid_input')
           || code === PLACEHOLDER_NUMBER;
         const failing = error.stale || refused;
-        const syncError = failing ? await failureCopy(code, carrierId, parcel) ?? error.message : null;
+        const syncError = failing ? await failureCopy(code, carrierId, parcel,
+          error.routing.failures[carrierId]?.wrong_number === true) ?? error.message : null;
         try {
           await persist({ last_synced_at: this.now().toISOString(),
             sync_status: failing ? 'error' : previousStage === 'pending' ? 'waiting' : 'ok',
@@ -2495,7 +2498,8 @@ export class TrackingSyncService {
           await persist({
             last_synced_at: this.now().toISOString(),
             sync_status: 'error',
-            sync_error: await failureCopy(trackingFailureCode(error), carrierId, parcel) ?? message.slice(0, 500),
+            sync_error: await failureCopy(trackingFailureCode(error), carrierId, parcel,
+              carrierErrorReason(error) === 'wrong_number') ?? message.slice(0, 500),
           });
         }, () => ({ purpose: 'record_error' }));
       } catch (persistenceError) {

@@ -58,7 +58,7 @@
       "uid": "peek-checks-stopped",
       "title": "Peek stopped checking parcels",
       "datasource": "metrics",
-      "sql": "select now() as time, case when seconds_since_check > case when extract(hour from now() at time zone 'Europe/Zurich') between 9 and 21 then 1800 else 7200 end then 1 else 0 end as value from metrics.health",
+      "sql": "select now() as time, case when seconds_since_check > 1800 then 1 else 0 end as value from metrics.health",
       "onlyWhile": {
         "datasource": "prometheus",
         "expr": "min(up{job=\"delivery-tracker\"}) or vector(0)"
@@ -67,8 +67,8 @@
       "severity": "critical",
       "noDataState": "Alerting",
       "execErrState": "KeepLast",
-      "summary": "No parcel check has finished for 30 minutes by day, or 2 hours at night, although Peek is up.",
-      "description": "From 08:00 to 22:00 Zurich time a scheduled sync runs every two minutes, and new parcels are checked as they are added; overnight, every 20 minutes. The 30-minute limit holds from 09:00 to 22:00, the 2-hour one otherwise. Sentry's cron monitors see whether the sync runs, not whether it checks anything: here it runs and checks nothing, or every check hangs. It stays quiet while \"Peek unreachable\" fires. Look at the sync_job_completed lines in Loki ({app=\"delivery-tracker\", event=\"sync_job_completed\"}) and at the sync_jobs queue."
+      "summary": "No parcel check has finished for 30 minutes, although Peek is up.",
+      "description": "A scheduled sync runs every two minutes, day and night, and new parcels are checked as they are added. Sentry's cron monitors see whether the sync runs, not whether it checks anything: here it runs and checks nothing, or every check hangs. It stays quiet while \"Peek unreachable\" fires. Look at the sync_job_completed lines in Loki ({app=\"delivery-tracker\", event=\"sync_job_completed\"}) and at the sync_jobs queue."
     },
     {
       "uid": "peek-server-errors",

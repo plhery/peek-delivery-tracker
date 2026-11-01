@@ -1103,9 +1103,8 @@ carrier or provider outage, and a scheduled sync that is missed, fails or passes
 - **Peek scheduled sync slow**: a scheduled sync that finished in the last 2 hours took
   over 7.5 minutes, three quarters of its limit. A run starts no check after 4 minutes, so
   a run this long means a check took minutes.
-- **Peek stopped checking parcels**: no check has finished for 30 minutes between 09:00 and
-  22:00 Zurich time, or for 2 hours otherwise, while Prometheus still reaches Peek. The
-  scheduled sync can run without checking anything.
+- **Peek stopped checking parcels**: no check has finished for 30 minutes, at any hour,
+  while Prometheus still reaches Peek. The scheduled sync can run without checking anything.
 - **Peek server errors**: 5 API requests or more answered a 5xx in 15 minutes, health checks
   and metric scrapes aside. Sentry alerts only on a new or regressed issue, not on a known
   one that starts repeating.

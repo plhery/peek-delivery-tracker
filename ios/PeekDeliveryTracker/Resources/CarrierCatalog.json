@@ -44476,6 +44476,190 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://intellitrack.rtt.co.za/"
+    },
+    "gofast": {
+      "displayName": "GoFast",
+      "aliases": [
+        "够快供应链",
+        "够快"
+      ],
+      "countries": [
+        "CN",
+        "US"
+      ],
+      "color": "#f46a0e",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://gzgk.hailei2018.com/trackIndex.htm?documentCode={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "gzgk.hailei2018.com"
+          ],
+          "pathPattern": "^/trackIndex\\.htm$",
+          "params": [
+            "documentCode"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://gzgk.hailei2018.com/trackIndex.htm"
+    },
+    "hiyes": {
+      "displayName": "Hiyes",
+      "aliases": [
+        "新航通運",
+        "新航通運有限公司",
+        "新航通运",
+        "Hiyes Logistics",
+        "Hiyes Logistics Corporation"
+      ],
+      "countries": [
+        "TW"
+      ],
+      "color": "#00af50",
+      "selectable": true,
+      "timezone": "Asia/Taipei",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.hiyes.com.tw/CargoTracking"
+    },
+    "htt-logistics": {
+      "displayName": "HTT Logistics",
+      "aliases": [
+        "昊通国际物流",
+        "深圳昊通国际物流有限公司",
+        "OOPSTON (昊通国际物流)"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#006dba",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.httlogistics.com/tracking.aspx"
+    },
+    "nas-express": {
+      "displayName": "NAS Express",
+      "aliases": [
+        "NAS Express Couriers",
+        "NAS Express Couriers LLC",
+        "NASEX"
+      ],
+      "countries": [
+        "AE"
+      ],
+      "color": "#f92205",
+      "selectable": true,
+      "timezone": "Asia/Dubai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://online.nasxpress.com/track/"
+    },
+    "odm-express": {
+      "displayName": "ODM Express",
+      "countries": [
+        "MX"
+      ],
+      "color": "#272f6f",
+      "selectable": true,
+      "timezone": "America/Mexico_City",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://odmexpress.com.mx/rastreo-2/?rastreo_fall={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "odmexpress.com.mx",
+            "www.odmexpress.com.mx"
+          ],
+          "pathPattern": "^/rastreo-2/?$",
+          "params": [
+            "rastreo_fall"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://odmexpress.com.mx/rastreo/"
+    },
+    "online-worldwide-logistics": {
+      "displayName": "Online Worldwide",
+      "aliases": [
+        "Online Worldwide Logistics (欧莱物流)",
+        "Online Worldwide Logistics",
+        "Guangzhou Online Worldwide Logistics",
+        "Online Logistics",
+        "欧莱国际货运",
+        "欧莱物流供应链",
+        "广州市欧莱国际货运代理有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#8bc43f",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.online56.com.cn/cargo-tracking/?sn={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "www.online56.com.cn",
+            "online56.com.cn"
+          ],
+          "pathPattern": "^/cargo-tracking/?$",
+          "params": [
+            "sn"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.online56.com.cn/cargo-tracking/"
+    },
+    "ontask-express": {
+      "displayName": "Ontask Express",
+      "aliases": [
+        "Ontask Express (广州安时达)",
+        "安时达",
+        "广州安时达",
+        "广州安时达国际供应链有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#030097",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://logistics.ontaskksad2d.com/"
     }
   }
 }

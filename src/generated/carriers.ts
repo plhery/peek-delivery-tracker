@@ -1760,6 +1760,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DayOne tracking: DOT numbers, statuses and who delivers",
       "name": "DayOne",
       "color": "#e86d1c"
+    },
+    {
+      "id": "dpd-be",
+      "catalog": "dpd-be",
+      "slug": "dpd-belgium-tracking",
+      "title": "DPD Belgium tracking: statuses, delivery and contact",
+      "name": "DPD Belgium",
+      "color": "#dc0032"
     }
   ],
   "de": [

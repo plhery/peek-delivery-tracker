@@ -588,6 +588,13 @@ describe('carrier brand', () => {
       'rtt',
       'cupost',
       'cargo-expreso',
+      'gofast',
+      'hiyes',
+      'htt-logistics',
+      'nas-express',
+      'odm-express',
+      'online-worldwide-logistics',
+      'ontask-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

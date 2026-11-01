@@ -1496,6 +1496,9 @@
   "gobolt": {
     "decal": "gobolt"
   },
+  "gofast": {
+    "decal": "gofast"
+  },
   "gofo": {
     "decal": "gofo"
   },
@@ -1604,6 +1607,9 @@
   "hitch": {
     "decal": "hitch"
   },
+  "hiyes": {
+    "decal": "hiyes"
+  },
   "hkd-express": {
     "decal": "hkd-express"
   },
@@ -1660,6 +1666,9 @@
   },
   "hrx": {
     "decal": "hrx"
+  },
+  "htt-logistics": {
+    "decal": "htt-logistics"
   },
   "huahan": {
     "decal": "huahan"
@@ -2256,6 +2265,9 @@
   "naqel": {
     "decal": "naqel"
   },
+  "nas-express": {
+    "decal": "nas-express"
+  },
   "nationex": {
     "decal": "nationex"
   },
@@ -2354,6 +2366,9 @@
   "ocs-ana": {
     "decal": "ocs-ana"
   },
+  "odm-express": {
+    "decal": "odm-express"
+  },
   "okaken": {
     "decal": "okaken"
   },
@@ -2379,6 +2394,12 @@
   },
   "onex": {
     "decal": "onex"
+  },
+  "online-worldwide-logistics": {
+    "decal": "online-worldwide-logistics"
+  },
+  "ontask-express": {
+    "decal": "ontask-express"
   },
   "ontrac": {
     "decal": "ontrac"

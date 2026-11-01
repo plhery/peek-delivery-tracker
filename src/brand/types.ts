@@ -512,7 +512,14 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'yingtu'
   | 'rtt'
   | 'cupost'
-  | 'cargo-expreso';
+  | 'cargo-expreso'
+  | 'gofast'
+  | 'hiyes'
+  | 'htt-logistics'
+  | 'nas-express'
+  | 'odm-express'
+  | 'online-worldwide-logistics'
+  | 'ontask-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -123,6 +123,6 @@ Your parcel left a ZTO station or hub. It's not a customs step: ZTO words every 
 - [ZTO Global Logistics: Upload the information for custom clearance](https://www.ztoglobal.com/#/en/cn/sendServe/customClearance/uploadIDCard) – ID upload for customs
 - [ZTO Global Logistics: Complaints & Suggestions](https://www.ztoglobal.com/#/en/cn/policy/suggest) – 95311, business line, hours
 - [ZTO: Express Tracking](https://m.ztoglobal.com/?path=Search&lang=en) – mobile tracker
-- [State Post Bureau of China: 快递市场管理办法 (Express Market Administration Measures)](https://www.spb.gov.cn/gjyzj/c100009/c100012/202401/ababa869e3f04079b6640478a45f941a.shtml) – lockers and parcel stations, appeals
+- [Ministry of Transport of China: 快递市场管理办法 (Express Market Administration Measures)](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – lockers and parcel stations, appeals
 - [Universal Parcel Scraper: ZTO International](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/zto-international) – number shapes, earlier numbers, scan wordings and stages, China clock, what Peek keeps
 :::

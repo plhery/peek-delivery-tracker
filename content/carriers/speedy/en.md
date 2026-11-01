@@ -10,7 +10,7 @@ Speedy is a Bulgarian courier, Speedy AD of Sofia, with offices, Speedy Lockers 
 
 ## Speedy tracking number: where to find it
 
-Speedy calls it "the waybill number (tracking number)". The numbers in Speedy's own examples and on its tracker are 11 digits, like `12345678901` (invented), though Speedy publishes no length rule.
+Speedy calls it "the waybill number (tracking number)". The numbers in Speedy's own examples and on its tracker are 11 digits, like `61234567890` (invented), though Speedy publishes no length rule.
 
 You'll find it:
 
@@ -88,7 +88,7 @@ Speedy publishes no opening hours and no chat. These are Bulgarian numbers; Spee
 
 ## Tracking a Speedy parcel with Peek
 
-[Peek](/) can't tell a Speedy parcel from its 11 digits. It asks Swiss Post, [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de) and [DHL eCommerce Poland](carrier:dhl-ecommerce-pl) instead, never Speedy. If none knows it, you'll see "not found yet · Peek keeps checking": pick "Speedy" with "Change". Links from speedy.bg or myspeedy.speedy.bg aren't read, so paste the number itself.
+[Peek](/) can't tell a Speedy parcel from its 11 digits alone, so it asks the likely carriers five at a time, the next five only if none of the first knows the number. Speedy is among them only for numbers starting with 6. From Bulgaria or Romania, Peek asks Speedy first, then [DHL eCommerce Poland](carrier:dhl-ecommerce-pl) only when the number passes its check digit, [GLS France](carrier:gls-fr), [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), Swiss Post's PostLogistics and PPL. Elsewhere, Speedy still comes first for a number starting with 63, but for another number starting with 6 it comes last, after the same carriers, those of your country first. If several carriers know the number, or none does ("not found yet · Peek keeps checking"), pick "Speedy" with "Change". A tracking link from speedy.bg or myspeedy.speedy.bg with the number in it files the parcel under Speedy straight away.
 
 Peek then shows the status, the history with the town (and country) of each scan on a map, the expected delivery day while the parcel is on its way, and the delivery time. When the parcel waits at an office or locker, you see its name, not its address. When [ACS Courier](carrier:acs-courier) delivers the leg in Greece or Cyprus, Speedy names ACS and its number, and Peek can follow the parcel there. It leaves out the recipient, proof of delivery and return number.
 

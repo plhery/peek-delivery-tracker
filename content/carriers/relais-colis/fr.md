@@ -56,7 +56,7 @@ Relais Colis ne publie pas la liste de ses statuts. Chaque ligne du suivi est un
 
 **Relais fermé.** Le colis part chez le commerçant Relais Colis le plus proche du relais choisi, et tu reçois un message avec sa nouvelle adresse.
 
-**Changer de relais ou passer à domicile.** Impossible, dit Relais Colis : le relais d'arrivée ne change pas, et un colis en relais ne peut pas être livré à domicile. Pour trouver un relais près de chez toi, utilise [Trouver un Relais](https://www.relaiscolis.com/relais/trouver), par adresse, code postal ou géolocalisation.
+**Changer de relais ou passer à domicile.** Impossible, dit Relais Colis : le relais d'arrivée ne change pas, et un colis en relais ne peut pas être livré à domicile. Pour trouver un relais près de chez toi, utilise [Trouver un Relais](https://relaiscolis.com/relais/trouver), par adresse, code postal ou géolocalisation.
 
 **Livraison à domicile.** Selon la FAQ de Relais Colis, son équipe te contacte par e-mail ou par téléphone pour fixer un rendez-vous, et te recontacte si tu étais absent. Si personne ne t'a appelé, fais une réclamation auprès de la boutique.
 
@@ -109,30 +109,30 @@ Non. Relais Colis dit ne pas livrer pour le moment dans les DOM-TOM ni à l'étr
 
 :::sources
 - [Relais Colis : Suivre mon colis](https://www.relaiscolis.com/colis/suivre) – longueur du numéro, exemple, message sans données
-- [Relais Colis : Comment suivre mon colis ?](https://www.relaiscolis.com/faq/question/comment-suivre-mon-colis) – 12 à 16 caractères, recherche sans numéro
-- [Relais Colis : Recherche avancée](https://www.relaiscolis.com/colis/recherche-avancee) – e-mail ou téléphone, enseigne
-- [Relais Colis : Où retrouver le numéro de suivi ?](https://www.relaiscolis.com/faq/question/jai-envoye-un-colis-ou-puis-je-retrouver-le-numero-de-suivi-du-colis) – « Mes Commandes »
-- [Relais Colis : Comment sera prévenu le destinataire ?](https://www.relaiscolis.com/faq/question/pr%C3%A9venir%20arriv%C3%A9e%20destinataire) – e-mail ou SMS, délai de garde
-- [Relais Colis : Combien de jours mon colis est-il gardé ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 7 jours ouvrés
-- [Relais Colis : Comment retirer mon colis ?](https://www.relaiscolis.com/faq/question/comment-retirer-mon-colis) – QR code ou pièce d'identité
-- [Relais Colis : Récupérer le colis à la place du destinataire](https://www.relaiscolis.com/faq/question/je-ne-suis-pas-le-destinataire-du-colis-puis-je-le-recuperer-a-sa-place) – procuration
-- [Relais Colis : Mon Relais Colis est fermé](https://www.relaiscolis.com/faq/question/mon-relais-colis-est-ferme-ou-est-mon-colis) – relais de remplacement
-- [Relais Colis : Personne n'est venu récupérer le colis](https://www.relaiscolis.com/faq/question/personne-nest-venu-recuperer-le-colis-que-va-t-il-se-passer) – après le délai
-- [Relais Colis : Changer de commerçant Relais Colis](https://www.relaiscolis.com/faq/question/comment-changer-de-commercant-relais-colis) – relais d'arrivée fixe
-- [Relais Colis : Recevoir son colis à domicile](https://www.relaiscolis.com/faq/question/mon-destinataire-souhaite-recevoir-son-colis-a-domicile-plutot-que-relais-colis) – pas de passage à domicile
-- [Relais Colis : Date et heure de livraison à domicile](https://www.relaiscolis.com/faq/question/comment-connaitre-la-date-et-lheure-de-ma-livraison-a-domicile) – rendez-vous
-- [Relais Colis : J'étais absent lors de la livraison](https://www.relaiscolis.com/faq/question/jetais-absente-lors-de-la-livraison-de-mon-colis-comment-replanifier-un-rendez-vous) – nouveau rendez-vous
-- [Relais Colis : Personne ne m'a contacté](https://www.relaiscolis.com/faq/question/livraison-domicile-personne-ne-ma-contacte) – réclamation auprès de la boutique
-- [Relais Colis : Que faire en cas de retard de livraison ?](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – 3 à 6 jours ouvrés, qui réclame
-- [Relais Colis : Acheminement bloqué](https://www.relaiscolis.com/faq/question/acheminement-de-mon-colis-est-bloque) – 15 jours
-- [Relais Colis : Mon colis est perdu, que faire ?](https://www.relaiscolis.com/faq/question/mon-colis-est-perdu-que-faire) – colis perdu, Service Client
-- [Relais Colis : Mon colis est abîmé, que faire ?](https://www.relaiscolis.com/faq/question/mon-colis-est-abime-que-faire) – refus, 3 et 5 jours
-- [Relais Colis : Livraisons dans les DOM-TOM ou à l'étranger](https://www.relaiscolis.com/faq/question/faites-vous-des-livraisons-dans-les-dom-tom-ou-a-letranger) – France uniquement
+- [Relais Colis : Comment suivre mon colis ?](https://relaiscolis.com/faq/question/comment-suivre-mon-colis) – 12 à 16 caractères, recherche sans numéro
+- [Relais Colis : Recherche avancée](https://relaiscolis.com/colis/recherche-avancee) – e-mail ou téléphone, enseigne
+- [Relais Colis : Où retrouver le numéro de suivi ?](https://relaiscolis.com/faq/question/jai-envoye-un-colis-ou-puis-je-retrouver-le-numero-de-suivi-du-colis) – « Mes Commandes »
+- [Relais Colis : Comment sera prévenu le destinataire ?](https://relaiscolis.com/faq/question/pr%C3%A9venir%20arriv%C3%A9e%20destinataire) – e-mail ou SMS, délai de garde
+- [Relais Colis : Combien de jours mon colis est-il gardé ?](https://relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 7 jours ouvrés
+- [Relais Colis : Comment retirer mon colis ?](https://relaiscolis.com/faq/question/comment-retirer-mon-colis) – QR code ou pièce d'identité
+- [Relais Colis : Récupérer le colis à la place du destinataire](https://relaiscolis.com/faq/question/je-ne-suis-pas-le-destinataire-du-colis-puis-je-le-recuperer-a-sa-place) – procuration
+- [Relais Colis : Mon Relais Colis est fermé](https://relaiscolis.com/faq/question/mon-relais-colis-est-ferme-ou-est-mon-colis) – relais de remplacement
+- [Relais Colis : Personne n'est venu récupérer le colis](https://relaiscolis.com/faq/question/personne-nest-venu-recuperer-le-colis-que-va-t-il-se-passer) – après le délai
+- [Relais Colis : Changer de commerçant Relais Colis](https://relaiscolis.com/faq/question/comment-changer-de-commercant-relais-colis) – relais d'arrivée fixe
+- [Relais Colis : Recevoir son colis à domicile](https://relaiscolis.com/faq/question/mon-destinataire-souhaite-recevoir-son-colis-a-domicile-plutot-que-relais-colis) – pas de passage à domicile
+- [Relais Colis : Date et heure de livraison à domicile](https://relaiscolis.com/faq/question/comment-connaitre-la-date-et-lheure-de-ma-livraison-a-domicile) – rendez-vous
+- [Relais Colis : J'étais absent lors de la livraison](https://relaiscolis.com/faq/question/jetais-absente-lors-de-la-livraison-de-mon-colis-comment-replanifier-un-rendez-vous) – nouveau rendez-vous
+- [Relais Colis : Personne ne m'a contacté](https://relaiscolis.com/faq/question/livraison-domicile-personne-ne-ma-contacte) – réclamation auprès de la boutique
+- [Relais Colis : Que faire en cas de retard de livraison ?](https://relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – 3 à 6 jours ouvrés, qui réclame
+- [Relais Colis : Acheminement bloqué](https://relaiscolis.com/faq/question/acheminement-de-mon-colis-est-bloque) – 15 jours
+- [Relais Colis : Mon colis est perdu, que faire ?](https://relaiscolis.com/faq/question/mon-colis-est-perdu-que-faire) – colis perdu, Service Client
+- [Relais Colis : Mon colis est abîmé, que faire ?](https://relaiscolis.com/faq/question/mon-colis-est-abime-que-faire) – refus, 3 et 5 jours
+- [Relais Colis : Livraisons dans les DOM-TOM ou à l'étranger](https://relaiscolis.com/faq/question/faites-vous-des-livraisons-dans-les-dom-tom-ou-a-letranger) – France uniquement
 - [Relais Colis : Conditions générales de vente](https://relaiscolis.com/page/conditions-generales-de-ventes) – jours ouvrés, jours de livraison, QR code, indemnisation, médiateur
-- [Relais Colis : Besoin d'aide FAQ](https://www.relaiscolis.com/faq) – téléphone, lien de réclamation
-- [Relais Colis : Signalement fraude](https://www.relaiscolis.com/page/signalement-fraude) – faux e-mails et appels
-- [Relais Colis : Trouver un Relais](https://www.relaiscolis.com/relais/trouver) – recherche de relais
-- [Relais Colis : Qui sommes nous ?](https://www.relaiscolis.com/page/qui-sommes-nous) – histoire, GLS France
+- [Relais Colis : Besoin d'aide FAQ](https://relaiscolis.com/faq) – téléphone, lien de réclamation
+- [Relais Colis : Signalement fraude](https://relaiscolis.com/page/signalement-fraude) – faux e-mails et appels
+- [Relais Colis : Trouver un Relais](https://relaiscolis.com/relais/trouver) – recherche de relais
+- [Relais Colis : Qui sommes nous ?](https://relaiscolis.com/page/qui-sommes-nous) – histoire, GLS France
 - [GLS France : GLS France acquiert le réseau Relais Colis](https://gls-group.com/FR/fr/relais-colis-gls/) – près de 7 000 points relais
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit
 :::

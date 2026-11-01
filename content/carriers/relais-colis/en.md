@@ -54,7 +54,7 @@ Relais Colis's site and tracking are in French only, and it publishes no list of
 
 **Relay closed.** The parcel goes to the nearest Relais Colis, and you get a message with its address.
 
-**Changes.** Relais Colis says the arrival relay can't be changed, and a relay parcel can't be switched to home delivery. Find relays with [Trouver un Relais](https://www.relaiscolis.com/relais/trouver).
+**Changes.** Relais Colis says the arrival relay can't be changed, and a relay parcel can't be switched to home delivery. Find relays with [Trouver un Relais](https://relaiscolis.com/relais/trouver).
 
 **Home delivery.** Relais Colis's FAQ says its team contacts you by email or phone to set an appointment, and again after a missed one; if nobody did, claim through the shop.
 
@@ -102,30 +102,30 @@ No. Relais Colis says it doesn't deliver to the French overseas territories or a
 
 :::sources
 - [Relais Colis: Suivre mon colis](https://www.relaiscolis.com/colis/suivre) – number length, example, not-found message
-- [Relais Colis: Comment suivre mon colis ?](https://www.relaiscolis.com/faq/question/comment-suivre-mon-colis) – 12 to 16 characters, search without number
-- [Relais Colis: Prévenir le destinataire](https://www.relaiscolis.com/faq/question/pr%C3%A9venir%20arriv%C3%A9e%20destinataire) – email or SMS, holding time
-- [Relais Colis: Combien de jours mon colis est-il gardé ?](https://www.relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 7 working days
-- [Relais Colis: Comment retirer mon colis ?](https://www.relaiscolis.com/faq/question/comment-retirer-mon-colis) – QR code or ID
-- [Relais Colis: Colis non récupéré](https://www.relaiscolis.com/faq/question/personne-nest-venu-recuperer-le-colis-que-va-t-il-se-passer) – after the deadline
-- [Relais Colis: Retard de livraison](https://www.relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – 3 to 6 working days, who claims
-- [Relais Colis: Acheminement bloqué](https://www.relaiscolis.com/faq/question/acheminement-de-mon-colis-est-bloque) – 15 days
-- [Relais Colis: Colis perdu](https://www.relaiscolis.com/faq/question/mon-colis-est-perdu-que-faire) – lost parcels, email
-- [Relais Colis: Colis abîmé](https://www.relaiscolis.com/faq/question/mon-colis-est-abime-que-faire) – refusal, 3 and 5 days
+- [Relais Colis: Comment suivre mon colis ?](https://relaiscolis.com/faq/question/comment-suivre-mon-colis) – 12 to 16 characters, search without number
+- [Relais Colis: Prévenir le destinataire](https://relaiscolis.com/faq/question/pr%C3%A9venir%20arriv%C3%A9e%20destinataire) – email or SMS, holding time
+- [Relais Colis: Combien de jours mon colis est-il gardé ?](https://relaiscolis.com/faq/question/combien-jours-mon-colis-est-il-gard%C3%A9-relais-colis) – 7 working days
+- [Relais Colis: Comment retirer mon colis ?](https://relaiscolis.com/faq/question/comment-retirer-mon-colis) – QR code or ID
+- [Relais Colis: Colis non récupéré](https://relaiscolis.com/faq/question/personne-nest-venu-recuperer-le-colis-que-va-t-il-se-passer) – after the deadline
+- [Relais Colis: Retard de livraison](https://relaiscolis.com/faq/question/que-faire-en-cas-de-retard-de-livraison) – 3 to 6 working days, who claims
+- [Relais Colis: Acheminement bloqué](https://relaiscolis.com/faq/question/acheminement-de-mon-colis-est-bloque) – 15 days
+- [Relais Colis: Colis perdu](https://relaiscolis.com/faq/question/mon-colis-est-perdu-que-faire) – lost parcels, email
+- [Relais Colis: Colis abîmé](https://relaiscolis.com/faq/question/mon-colis-est-abime-que-faire) – refusal, 3 and 5 days
 - [Relais Colis: Conditions générales de vente](https://relaiscolis.com/page/conditions-generales-de-ventes) – working days, delivery days, QR code, compensation, mediator
-- [Relais Colis: Besoin d'aide FAQ](https://www.relaiscolis.com/faq) – phone, claim link
-- [Relais Colis: Signalement fraude](https://www.relaiscolis.com/page/signalement-fraude) – fraud warning
-- [Relais Colis: Trouver un Relais](https://www.relaiscolis.com/relais/trouver) – relay finder
-- [Relais Colis: Qui sommes nous ?](https://www.relaiscolis.com/page/qui-sommes-nous) – history, GLS
-- [Relais Colis: Livraison à domicile](https://www.relaiscolis.com/faq/question/comment-suivre-mon-colis-livraison-a-domicile) – 10 to 16 characters
-- [Relais Colis: Recherche avancée](https://www.relaiscolis.com/colis/recherche-avancee) – search without number
-- [Relais Colis: Procuration](https://www.relaiscolis.com/faq/question/je-ne-suis-pas-le-destinataire-du-colis-puis-je-le-recuperer-a-sa-place) – proxy
-- [Relais Colis: Relais fermé](https://www.relaiscolis.com/faq/question/mon-relais-colis-est-ferme-ou-est-mon-colis) – closed relay
-- [Relais Colis: Changer de relais](https://www.relaiscolis.com/faq/question/comment-changer-de-commercant-relais-colis) – no change
-- [Relais Colis: Domicile plutôt que relais](https://www.relaiscolis.com/faq/question/mon-destinataire-souhaite-recevoir-son-colis-a-domicile-plutot-que-relais-colis) – no switch
-- [Relais Colis: Rendez-vous à domicile](https://www.relaiscolis.com/faq/question/comment-connaitre-la-date-et-lheure-de-ma-livraison-a-domicile) – appointment
-- [Relais Colis: Absent](https://www.relaiscolis.com/faq/question/jetais-absente-lors-de-la-livraison-de-mon-colis-comment-replanifier-un-rendez-vous) – new appointment
-- [Relais Colis: Personne ne m'a contacté](https://www.relaiscolis.com/faq/question/livraison-domicile-personne-ne-ma-contacte) – the shop
-- [Relais Colis: Étranger](https://www.relaiscolis.com/faq/question/faites-vous-des-livraisons-dans-les-dom-tom-ou-a-letranger) – France only
+- [Relais Colis: Besoin d'aide FAQ](https://relaiscolis.com/faq) – phone, claim link
+- [Relais Colis: Signalement fraude](https://relaiscolis.com/page/signalement-fraude) – fraud warning
+- [Relais Colis: Trouver un Relais](https://relaiscolis.com/relais/trouver) – relay finder
+- [Relais Colis: Qui sommes nous ?](https://relaiscolis.com/page/qui-sommes-nous) – history, GLS
+- [Relais Colis: Livraison à domicile](https://relaiscolis.com/faq/question/comment-suivre-mon-colis-livraison-a-domicile) – 10 to 16 characters
+- [Relais Colis: Recherche avancée](https://relaiscolis.com/colis/recherche-avancee) – search without number
+- [Relais Colis: Procuration](https://relaiscolis.com/faq/question/je-ne-suis-pas-le-destinataire-du-colis-puis-je-le-recuperer-a-sa-place) – proxy
+- [Relais Colis: Relais fermé](https://relaiscolis.com/faq/question/mon-relais-colis-est-ferme-ou-est-mon-colis) – closed relay
+- [Relais Colis: Changer de relais](https://relaiscolis.com/faq/question/comment-changer-de-commercant-relais-colis) – no change
+- [Relais Colis: Domicile plutôt que relais](https://relaiscolis.com/faq/question/mon-destinataire-souhaite-recevoir-son-colis-a-domicile-plutot-que-relais-colis) – no switch
+- [Relais Colis: Rendez-vous à domicile](https://relaiscolis.com/faq/question/comment-connaitre-la-date-et-lheure-de-ma-livraison-a-domicile) – appointment
+- [Relais Colis: Absent](https://relaiscolis.com/faq/question/jetais-absente-lors-de-la-livraison-de-mon-colis-comment-replanifier-un-rendez-vous) – new appointment
+- [Relais Colis: Personne ne m'a contacté](https://relaiscolis.com/faq/question/livraison-domicile-personne-ne-ma-contacte) – the shop
+- [Relais Colis: Étranger](https://relaiscolis.com/faq/question/faites-vous-des-livraisons-dans-les-dom-tom-ou-a-letranger) – France only
 - [GLS France: GLS France acquiert le réseau Relais Colis](https://gls-group.com/FR/fr/relais-colis-gls/) – about 7,000 relays
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

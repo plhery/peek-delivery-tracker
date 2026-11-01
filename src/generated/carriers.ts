@@ -1656,6 +1656,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Posta Shqiptare tracking: Albanian Post numbers and statuses",
       "name": "Posta Shqiptare",
       "color": "#1a3292"
+    },
+    {
+      "id": "dsv",
+      "catalog": "dsv",
+      "slug": "dsv-tracking",
+      "title": "DSV tracking: shipment numbers, statuses and DB Schenker",
+      "name": "DSV",
+      "color": "#002664"
     }
   ],
   "de": [

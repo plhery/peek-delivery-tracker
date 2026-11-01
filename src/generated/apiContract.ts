@@ -1407,6 +1407,10 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "dpd"
       },
       {
+        "pattern": "^(?!10)\\d{14}$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^[A-Z]{2}\\d{9}[A-Z]{2}$",
         "confidence": "low",
         "checksum": "s10"
@@ -42471,6 +42475,49 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://wld-exp.com/#/baseData/TrackQuery"
+  },
+  "cmt-express": {
+    "displayName": "CMT Express",
+    "aliases": [
+      "CMT",
+      "诚贸通",
+      "诚贸通供应链",
+      "深圳诚贸通供应链有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ed010b",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cmtexpress.com.cn/track.aspx"
+  },
+  "kuayuan-express": {
+    "displayName": "Kuayuan Express",
+    "aliases": [
+      "跨源速递",
+      "深圳市跨源速递供应链有限公司",
+      "KuaYuan Express"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#084b86",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.kuayuanexpress.com.cn/"
   }
 } as const;
 
@@ -43642,7 +43689,9 @@ export const CARRIER_IDS = [
   "shenghang",
   "too-express",
   "wangjing-3cq",
-  "wld-express"
+  "wld-express",
+  "cmt-express",
+  "kuayuan-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

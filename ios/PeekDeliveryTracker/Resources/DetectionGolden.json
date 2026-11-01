@@ -1448,6 +1448,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -1464,7 +1465,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -1952,6 +1953,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -1968,7 +1970,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -2498,6 +2500,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -3269,6 +3272,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -4118,6 +4122,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -4176,6 +4181,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -4194,7 +4200,7 @@
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -4636,6 +4642,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -4654,7 +4661,7 @@
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -4683,6 +4690,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -4701,7 +4709,7 @@
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -4712,6 +4720,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -4730,7 +4739,7 @@
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -4808,6 +4817,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -4826,7 +4836,7 @@
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -4837,6 +4847,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -4855,7 +4866,7 @@
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -4891,6 +4902,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -5298,6 +5310,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -5316,7 +5329,7 @@
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -5327,6 +5340,7 @@
       "dpd-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -5345,7 +5359,7 @@
       "dpd-be",
       "dpd",
       "dpd-nl",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -5396,6 +5410,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -5455,6 +5470,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -5501,6 +5517,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -5529,6 +5546,7 @@
       "hermes-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -5559,6 +5577,7 @@
       "hermes-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -5589,6 +5608,7 @@
       "hermes-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -5619,6 +5639,7 @@
       "hermes-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -5649,6 +5670,7 @@
       "hermes-de",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -5678,6 +5700,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -5705,6 +5728,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -6383,6 +6407,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -6616,6 +6641,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -6843,6 +6869,33 @@
       "colis-prive",
       "j-and-t",
       "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "04000000000019",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
     ]
   },
   {
@@ -7105,6 +7158,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7121,7 +7175,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -7131,6 +7185,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7147,7 +7202,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -7589,6 +7644,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7605,7 +7661,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -7615,6 +7671,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7631,7 +7688,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -7699,6 +7756,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7715,7 +7773,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -7725,6 +7783,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7741,7 +7800,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -7773,6 +7832,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7789,7 +7849,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -7847,6 +7907,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7863,7 +7924,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -7906,6 +7967,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -7922,7 +7984,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -8134,6 +8196,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8153,7 +8216,7 @@
       "dpd-be",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -8199,6 +8262,7 @@
       "dpd-at",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8229,6 +8293,7 @@
       "dpd-at",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8259,6 +8324,7 @@
       "dpd-at",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8289,6 +8355,7 @@
       "dpd-at",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8319,6 +8386,7 @@
       "dpd-at",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8407,6 +8475,7 @@
       "dpd-at",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8437,6 +8506,7 @@
       "dpd-at",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8467,6 +8537,7 @@
       "dpd-at",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8813,6 +8884,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8829,7 +8901,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -8870,6 +8942,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -8886,7 +8959,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -8908,6 +8981,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -8935,6 +9009,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -9163,6 +9238,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -9179,7 +9255,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -9189,6 +9265,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -9205,7 +9282,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -9215,6 +9292,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -9231,7 +9309,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -9241,6 +9319,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -9257,7 +9336,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -9364,6 +9443,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -9380,7 +9460,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -9409,6 +9489,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -9425,7 +9506,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -9574,6 +9655,7 @@
       "dpd-pt",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -13524,6 +13606,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -13543,7 +13626,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -13553,6 +13636,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -13583,6 +13667,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -14211,6 +14296,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -14265,6 +14351,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -14283,7 +14370,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -14887,6 +14974,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -14905,7 +14993,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -15061,6 +15149,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -15079,7 +15168,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -15645,6 +15734,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -15663,7 +15753,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -15751,6 +15841,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -16088,6 +16179,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -16121,6 +16213,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -16153,6 +16246,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -16316,6 +16410,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -16509,6 +16604,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -16704,6 +16800,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -16735,6 +16832,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -16838,6 +16936,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -16891,6 +16990,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -16946,6 +17046,7 @@
       "dpd-pl",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -17166,6 +17267,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -17184,7 +17286,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -17443,6 +17545,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -17717,6 +17820,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -17735,7 +17839,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -18040,6 +18144,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -18069,6 +18174,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18086,7 +18192,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -18286,6 +18392,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18317,6 +18424,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18446,6 +18554,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18477,6 +18586,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18507,6 +18617,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18538,6 +18649,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18569,6 +18681,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18600,6 +18713,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18631,6 +18745,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18662,6 +18777,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18693,6 +18809,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18724,6 +18841,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18755,6 +18873,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -18786,6 +18905,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -18818,6 +18938,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -19308,6 +19429,7 @@
       "dpd-uk",
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -19442,6 +19564,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -19471,6 +19594,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -19489,7 +19613,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -19516,6 +19640,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -19534,7 +19659,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -19544,6 +19669,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -19561,7 +19687,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -19664,6 +19790,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -19961,6 +20088,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -19978,7 +20106,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -20042,6 +20170,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -20070,6 +20199,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -20483,6 +20613,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -20501,7 +20632,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -20672,6 +20803,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -20690,7 +20822,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -21241,6 +21373,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -21259,7 +21392,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -21269,6 +21402,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -21287,7 +21421,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -21297,6 +21431,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -21315,7 +21450,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -21325,6 +21460,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -21342,7 +21478,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -21352,6 +21488,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -21369,7 +21506,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -22257,6 +22394,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -22275,7 +22413,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -22327,6 +22465,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -22344,7 +22483,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -22354,6 +22493,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -22371,7 +22511,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -22381,6 +22521,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -22399,7 +22540,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -24126,6 +24267,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -24143,7 +24285,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -24784,6 +24926,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -24801,7 +24944,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -24828,6 +24971,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -24845,7 +24989,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -24880,6 +25024,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -24896,7 +25041,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -25076,6 +25221,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -25093,7 +25239,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -25102,6 +25248,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -25120,7 +25267,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -25172,6 +25319,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -25190,7 +25338,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -25199,6 +25347,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -25227,6 +25376,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -25245,7 +25395,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -25254,6 +25404,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -25386,6 +25537,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -25441,6 +25593,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -25469,6 +25622,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -25497,6 +25651,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -25525,6 +25680,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -25627,6 +25783,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -25645,7 +25802,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -25984,6 +26141,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -26002,7 +26160,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -26190,6 +26348,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -26207,7 +26366,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -26216,6 +26375,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -26244,6 +26404,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -26262,7 +26423,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -26294,6 +26455,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -26311,7 +26473,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -26450,6 +26612,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -26468,7 +26631,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -26477,6 +26640,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -26553,6 +26717,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -26570,7 +26735,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -27208,6 +27373,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -27224,7 +27390,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -27383,6 +27549,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -27974,6 +28141,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -27991,7 +28159,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -28000,6 +28168,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -28016,7 +28185,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -28330,6 +28499,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -28346,7 +28516,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -28762,6 +28932,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -28778,7 +28949,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -28980,6 +29151,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -29086,6 +29258,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29103,7 +29276,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29280,6 +29453,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29297,7 +29471,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29325,6 +29499,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29342,7 +29517,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29421,6 +29596,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29438,7 +29614,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29474,6 +29650,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29491,7 +29668,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29501,6 +29678,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29517,7 +29695,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29527,6 +29705,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29544,7 +29723,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29587,6 +29766,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29603,7 +29783,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29613,6 +29793,7 @@
     "candidates": [
       "dpd",
       "dpd-fr",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29629,7 +29810,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29710,6 +29891,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29727,7 +29909,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -29898,6 +30080,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -29914,7 +30097,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -30680,6 +30863,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -30696,7 +30880,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -31104,6 +31288,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -31121,7 +31306,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -31245,6 +31430,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -31262,7 +31448,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -31874,6 +32060,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -31891,7 +32078,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -32112,6 +32299,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -32129,7 +32317,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -32138,6 +32326,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -32155,7 +32344,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -32362,6 +32551,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -32379,7 +32569,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -32388,6 +32578,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -32404,7 +32595,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -32589,6 +32780,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -32885,6 +33077,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -32902,7 +33095,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -33177,6 +33370,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -33652,6 +33846,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -33669,7 +33864,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -34713,6 +34908,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -34729,7 +34925,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -34738,6 +34934,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -34754,7 +34951,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -34763,6 +34960,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -34780,7 +34978,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -34789,6 +34987,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -34806,7 +35005,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -34985,6 +35184,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -35002,7 +35202,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -35812,6 +36012,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -35828,7 +36029,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -36346,6 +36547,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -36363,7 +36565,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -36430,6 +36632,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -36447,7 +36650,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -36532,6 +36735,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -36549,7 +36753,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -37769,6 +37973,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -37786,7 +37991,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -38017,6 +38222,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -38034,7 +38240,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -38766,6 +38972,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -39110,6 +39317,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -39127,7 +39335,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -39196,6 +39404,12 @@
     "asked": [
       "poste-italiane"
     ]
+  },
+  {
+    "input": "3CAA5082900010",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "3M0MI9",
@@ -39702,6 +39916,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -40032,6 +40247,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -40327,6 +40543,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -40410,6 +40627,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -40427,7 +40645,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -40544,6 +40762,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -40560,7 +40779,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -40852,6 +41071,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -41613,6 +41833,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -42611,6 +42832,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -42628,7 +42850,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -42637,6 +42859,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -42654,7 +42877,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -42913,6 +43136,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -42930,7 +43154,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -43246,6 +43470,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -43396,6 +43621,7 @@
     "candidates": [
       "imile",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -43497,6 +43723,7 @@
     "candidates": [
       "imile",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -43527,6 +43754,7 @@
     "candidates": [
       "imile",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -43649,6 +43877,7 @@
     "candidates": [
       "imile",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -44426,6 +44655,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -44564,6 +44794,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -45260,6 +45491,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -45278,7 +45510,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -46327,6 +46559,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -46344,7 +46577,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -46706,6 +46939,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -46723,7 +46957,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -46842,6 +47076,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -46859,7 +47094,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -47237,6 +47472,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -47254,7 +47490,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -47275,6 +47511,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -47292,7 +47529,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48084,6 +48321,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48100,7 +48338,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48109,6 +48347,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48125,7 +48364,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48204,6 +48443,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48222,7 +48462,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48231,6 +48471,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48248,7 +48489,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48257,6 +48498,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48275,7 +48517,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48284,6 +48526,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48302,7 +48545,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48311,6 +48554,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48328,7 +48572,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48337,6 +48581,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48355,7 +48600,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48364,6 +48609,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48382,7 +48628,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48427,6 +48673,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48444,7 +48691,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48453,6 +48700,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48470,7 +48718,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -48532,6 +48780,7 @@
     "candidates": [
       "nova-poshta",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48561,6 +48810,7 @@
     "candidates": [
       "nova-poshta",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48591,6 +48841,7 @@
     "candidates": [
       "nova-poshta",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48620,6 +48871,7 @@
     "candidates": [
       "nova-poshta",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -48650,6 +48902,7 @@
     "candidates": [
       "nova-poshta",
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -49103,6 +49356,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -49131,6 +49385,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -49159,6 +49414,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -49188,6 +49444,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -49218,6 +49475,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -49247,6 +49505,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -49275,6 +49534,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -49304,6 +49564,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -49333,6 +49594,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -49362,6 +49624,7 @@
     "candidates": [
       "dhl-ecommerce-uk",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -50052,6 +50315,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -50444,6 +50708,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -50461,7 +50726,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -50954,6 +51219,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -51040,6 +51306,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -51057,7 +51324,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -51370,6 +51637,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -51387,7 +51655,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -51396,6 +51664,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -51423,6 +51692,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -51620,6 +51890,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -51647,6 +51918,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -51673,6 +51945,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -51718,6 +51991,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -51829,6 +52103,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -51965,6 +52240,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -52350,6 +52626,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -52367,7 +52644,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -52395,6 +52672,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -52412,7 +52690,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -52512,6 +52790,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -52528,7 +52807,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -52609,6 +52888,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -53089,6 +53369,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53107,7 +53388,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53116,6 +53397,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53134,7 +53416,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53143,6 +53425,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53161,7 +53444,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53170,6 +53453,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53188,7 +53472,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53197,6 +53481,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53215,7 +53500,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53224,6 +53509,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53242,7 +53528,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53251,6 +53537,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53269,7 +53556,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53278,6 +53565,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53296,7 +53584,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53305,6 +53593,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -53322,7 +53611,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -53341,6 +53630,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -53769,6 +54059,7 @@
     "candidates": [
       "city-express-rs",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -55052,6 +55343,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -55070,7 +55362,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -55079,6 +55371,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -55097,7 +55390,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -55164,6 +55457,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -55212,6 +55506,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -55231,7 +55526,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -55240,6 +55535,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -55268,6 +55564,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -55287,7 +55584,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -55601,6 +55898,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -55618,7 +55916,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -55651,6 +55949,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -55767,6 +56066,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -55785,7 +56085,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -56362,6 +56662,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -56380,7 +56681,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -57310,6 +57611,7 @@
     "candidates": [
       "zto-international",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -57340,6 +57642,7 @@
     "candidates": [
       "zto-international",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -57371,6 +57674,7 @@
     "candidates": [
       "zto-international",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -57401,6 +57705,7 @@
     "candidates": [
       "zto-international",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -57432,6 +57737,7 @@
     "candidates": [
       "zto-international",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -57463,6 +57769,7 @@
     "candidates": [
       "zto-international",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -57493,6 +57800,7 @@
     "candidates": [
       "zto-international",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -57524,6 +57832,7 @@
     "candidates": [
       "zto-international",
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -58542,6 +58851,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -58560,7 +58870,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -59005,6 +59315,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -59033,6 +59344,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -59061,6 +59373,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -59891,6 +60204,7 @@
     "candidates": [
       "russian-post",
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -60358,6 +60672,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -60685,6 +61000,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -60702,7 +61018,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -60788,6 +61104,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -61205,6 +61522,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -61222,7 +61540,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -61620,6 +61938,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -61637,7 +61956,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -61646,6 +61965,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -61662,7 +61982,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -61949,6 +62269,7 @@
     "candidates": [
       "dpd",
       "la-poste",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -61992,6 +62313,7 @@
     "candidates": [
       "dpd",
       "la-poste",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -62086,6 +62408,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -62103,7 +62426,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -62228,6 +62551,7 @@
     "candidates": [
       "dpd",
       "la-poste",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -62395,6 +62719,7 @@
     "candidates": [
       "dpd",
       "la-poste",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -62525,6 +62850,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -62542,7 +62868,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -62850,6 +63176,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -62867,7 +63194,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -63163,6 +63490,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -63191,6 +63519,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -63219,6 +63548,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -63247,6 +63577,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -63275,6 +63606,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -63303,6 +63635,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -63331,6 +63664,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -64411,6 +64745,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "hermes-de",
       "seur",
@@ -65517,6 +65852,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -65534,7 +65870,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -65606,6 +65942,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -65624,7 +65961,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -66510,6 +66847,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -66528,7 +66866,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -67054,6 +67392,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -67072,7 +67411,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -67399,6 +67738,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -67417,7 +67757,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -67426,6 +67766,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -67443,7 +67784,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -67821,6 +68162,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -67839,7 +68181,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -67848,6 +68190,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -67866,7 +68209,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -67875,6 +68218,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -67893,7 +68237,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {
@@ -67902,6 +68246,7 @@
     "confidence": "low",
     "candidates": [
       "dpd",
+      "chronopost",
       "ciblex",
       "seur",
       "brt",
@@ -67920,7 +68265,7 @@
       "dpd",
       "dpd-nl",
       "dpd-de",
-      "seur"
+      "chronopost"
     ]
   },
   {

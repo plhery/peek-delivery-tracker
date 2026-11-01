@@ -143,6 +143,11 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
       nextSteps: 'The carrier\'s three latest lookups answered without its direct step, which has not run for six hours (an adapter that goes straight to its browser step). Fresh direct failures open a new incident.',
       impact: 'This describes one direct transport the carrier no longer uses.' };
   }
+  if (incident.state === 'closed' && incident.reason === 'rescued') {
+    return { title: `${scope} closed: every ${subject} check answered through another step`,
+      nextSteps: 'Each direct failure of the last 24 hours came from a check the lookup\'s next step answered (a browser step after a CAPTCHA). Such failures open no incident; one whose check goes unanswered opens a new one.',
+      impact: 'This describes one direct transport. No parcel was left without a fresh answer.' };
+  }
   if (incident.state === 'closed') {
     return { title: `${scope} closed without a recent check: ${subject}`,
       nextSteps: 'Nothing was checked for 24 hours, so no recovery was observed. If it should still be checked, find out why it is not; fresh failures open a new incident.',

@@ -28,7 +28,7 @@ failures age out of the window; a new failure meanwhile reminds as usual.
 A carrier's provider lookup incident opens no issue while the carrier's direct transport
 incident is open and its latest notice reached Sentry (`covered`): one outage, one issue. It
 stays open for the review, and alerts at its next reminder once the direct incident recovers
-or its notices are rescued.
+or closes.
 
 ## Counting rules
 
@@ -98,21 +98,22 @@ or its notices are rescued.
   an hour after a CAPTCHA, keeps its incident until it recovers.
 - A direct step whose failures in the window all came from checks whose refresh still
   answered, through the carrier's browser step or a provider, left no parcel without a fresh
-  answer. Its opening and reminders say `rescued` and are review signals; the incident, its
-  samples and its reminders are otherwise unchanged. One failure that left its parcel without
-  an answer sends the next one to Sentry.
+  answer (Correos Brazil's direct step meets a CAPTCHA, its browser step answers). Such
+  failures open no incident, and an open direct incident closes once every failure of its
+  24-hour window was rescued: a `closed` notice with the reason `rescued`. One failure that
+  left its parcel without an answer opens one, and Sentry hears of it.
 
 ## Delivery
 
 Postgres serializes transitions. A repeated incident notifies at most once per 6 hours;
 recovery at once. An opening or reminder is acknowledged once the SDK has flushed its event,
 so it is delivered at least once (2-minute lease), and duplicates group under the same
-fingerprint. A recovery, a closing or a rescued notice is acknowledged at once.
+fingerprint. A recovery or a closing is acknowledged at once.
 
 Events carry `component:tracking-health`, `incident_kind`, `incident_state` and `provider`
 tags, plus a `tracking_health` context with counts, impact, evidence and next steps.
 Opening and reminders share one issue per incident kind and provider. Every notification,
-recoveries, closings and rescued notices included, is also a `tracking_health_incident` log line and counts in
+recoveries and closings included, is also a `tracking_health_incident` log line and counts in
 `tracking_health_incident_total`, and the hourly review
 ([ops/review/signals.sql](../review/signals.sql)) lists it. Resolve the outage's issue once
 its recovery shows there; the next outage of the same kind and provider then shows as a

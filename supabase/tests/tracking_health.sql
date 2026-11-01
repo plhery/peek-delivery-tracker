@@ -224,14 +224,33 @@ begin
   end loop;
   assert (select active and pending is null from public.tracking_health_incidents where kind='direct' and subject='rescued-tier'),
     'A direct step that still fails must keep its incident open while a fallback answers';
-  -- A direct step failing only in checks whose refresh answered through another step is rescued.
+  -- A direct step failing only in checks whose refresh answered through another step is rescued: no incident.
   for i in 1..10 loop result := pg_temp.direct_check('rescued-direct',false,true); end loop;
-  assert pg_temp.direct_notice(result,'rescued-direct')->>'state'='open'
-    and (pg_temp.direct_notice(result,'rescued-direct')->'rescued')::boolean,
-    'A direct step every refresh survived must be rescued';
-  perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'rescued-direct')->>'id')::uuid]);
-  assert (select active and pending is null from public.tracking_health_incidents where kind='direct' and subject='rescued-direct'),
-    'A rescued direct incident must stay open for the review';
+  assert pg_temp.direct_notice(result,'rescued-direct') is null
+    and (select not active from public.tracking_health_incidents where kind='direct' and subject='rescued-direct'),
+    'A direct step every refresh survived must open no incident';
+  -- An open direct incident closes once every failure of its window was rescued, and stays closed.
+  perform pg_temp.direct_check('rescued-later',false,false);
+  for i in 1..9 loop result := pg_temp.direct_check('rescued-later',false,true); end loop;
+  perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'rescued-later')->>'id')::uuid]);
+  assert pg_temp.direct_check('rescued-later',false,true)='[]',
+    'A direct incident with an unrescued failure in its window must stay open';
+  update public.tracking_health_samples set observed_at=now()-interval '25 hours'
+    where kind='direct' and subject='rescued-later' and attempt_id in (
+      select attempt_id from public.tracking_health_samples where kind='refresh' and subject='rescued-later' and not healthy);
+  result := pg_temp.direct_check('rescued-later',false,true);
+  assert pg_temp.direct_notice(result,'rescued-later')->>'state'='closed'
+    and pg_temp.direct_notice(result,'rescued-later')->>'reason'='rescued',
+    'A direct incident whose window was all rescued must close';
+  perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'rescued-later')->>'id')::uuid]);
+  update public.tracking_health_incidents set last_notified_at=now()-interval '7 hours' where kind='direct' and subject='rescued-later';
+  assert pg_temp.direct_check('rescued-later',false,true)='[]'
+    and (select not active from public.tracking_health_incidents where kind='direct' and subject='rescued-later'),
+    'A closed rescued direct incident must not reopen while its failures are rescued';
+  result := pg_temp.direct_check('rescued-later',false,false);
+  assert pg_temp.direct_notice(result,'rescued-later')->>'state'='open',
+    'A failure whose check went unanswered must reopen it';
+  perform public.ack_tracking_health(array[(pg_temp.direct_notice(result,'rescued-later')->>'id')::uuid]);
   -- One failure that left its parcel without a fresh answer, now or earlier in the window, is not.
   for i in 1..9 loop perform pg_temp.direct_check('unrescued-now',false,true); end loop;
   result := pg_temp.direct_check('unrescued-now',false,false);
@@ -272,18 +291,17 @@ begin
     and (pg_temp.notice(result,'provider','covered-carrier')->'covered')::boolean,
     'An own-lookup reminder must stay covered while the direct incident is open and alerted';
   perform public.ack_tracking_health(array[(pg_temp.notice(result,'provider','covered-carrier')->>'id')::uuid]);
-  -- A direct incident rescued in every check never reached Sentry: the own lookup's incident alerts.
+  -- A direct step rescued in every check opens no incident: the own lookup's incident alerts.
   for i in 1..10 loop result := pg_temp.own_check('rescued-carrier',false,false,true); end loop;
-  assert (pg_temp.notice(result,'direct','rescued-carrier')->'rescued')::boolean
+  assert pg_temp.notice(result,'direct','rescued-carrier') is null
     and pg_temp.notice(result,'provider','rescued-carrier')->>'state'='open'
     and not pg_temp.notice(result,'provider','rescued-carrier') ? 'covered',
-    'An own lookup failing beside a rescued direct incident must alert';
-  perform public.ack_tracking_health(array[(pg_temp.notice(result,'direct','rescued-carrier')->>'id')::uuid,
-    (pg_temp.notice(result,'provider','rescued-carrier')->>'id')::uuid]);
+    'An own lookup failing beside a rescued direct step must alert';
+  perform public.ack_tracking_health(array[(pg_temp.notice(result,'provider','rescued-carrier')->>'id')::uuid]);
   update public.tracking_health_incidents set last_notified_at=now()-interval '7 hours' where kind='provider' and subject='rescued-carrier';
   result := pg_temp.own_check('rescued-carrier',false,false,true);
   assert not pg_temp.notice(result,'provider','rescued-carrier') ? 'covered',
-    'An own-lookup reminder beside a direct incident acknowledged as rescued must alert';
+    'An own-lookup reminder beside a rescued direct step must alert';
   perform public.ack_tracking_health(array[(pg_temp.notice(result,'provider','rescued-carrier')->>'id')::uuid]);
   -- Nor does a direct incident opened before its notices were recorded.
   for i in 1..10 loop perform pg_temp.health_sample('unrecorded-carrier',false,'direct'); end loop;

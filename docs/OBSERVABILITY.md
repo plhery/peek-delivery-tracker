@@ -626,9 +626,9 @@ Key JSON events:
   A `provider_clock_offset` line also has `scan_id`, the `provider_event_id` of the stored
   row whose scan came on two clocks: the row a provider's copy repeats, or the copy's own;
 - `tracking_health_incident`: a health incident opened, still fails six hours on (warning,
-  info for a direct step whose every failure a fallback step covered, or a carrier's own lookup
-  failing while its direct step's incident is open and alerted), recovered, or closed once no sample of it was left or the carrier answers without its
-  direct step (info), with its `kind`, `subject`,
+  info for a carrier's own lookup failing while its direct step's incident is open and
+  alerted), recovered, or closed once no sample of it was left, the carrier answers without its
+  direct step, or every check its direct step failed in 24 hours still answered (info), with its `kind`, `subject`,
   `title`, `failures` and `attempts`;
 - `dpd_app_session`: the scraper took up a saved session at start (`outcome` `taken_up`,
   with `age_ms`, how long ago it opened), or an opening ended, `opened` or `failed`
@@ -763,10 +763,10 @@ provider failure in an `AggregateError` so every cause is visible.
 - **Alerts**: notify on new issues and regressions in `production`, and keep the Cron
   alerts. Avoid "more than 0 times in 5 minutes" rules: they fire on every failed check.
 - **Incidents**: carrier and provider outages open once, from thresholds computed in
-  Postgres, and remind every six hours while they last. A recovery, or a direct step whose
-  every failure a fallback step covered, is only logged and counted. So is a carrier's own
+  Postgres, and remind every six hours while they last. A direct step whose every failure a
+  fallback step covered opens none. A recovery is only logged and counted. So is a carrier's own
   lookup (`covered`) while its direct step's incident is open and its latest notice reached
-  Sentry: one outage, one alert. Once the direct incident recovers, or its notices are rescued,
+  Sentry: one outage, one alert. Once the direct incident recovers or closes,
   the lookup's incident alerts again at its next reminder. See [ops/sentry](../ops/sentry/README.md).
 - **Review signals**: routing signals, sync anomalies, health recoveries and covered direct
   failures open no issue;
@@ -936,7 +936,7 @@ dashboard's failure panels leave out.
 | `carrier_refresh_total` (carrier, served_by, outcome) | Who served each refresh: `adapter`, `other_adapter`, `provider` or `none`, and how it ended: `updated` (a new scan or stage), `unchanged`, `waiting`, `error`, `refused` (the number or its details are the owner's to correct) or `superseded`. A `skipped` check asked nobody and is not counted |
 | `tracking_routing_signal_total` (signal, carrier, subject) | Routing signals for the review: `subject` is the carrier the signal is about, `uncatalogued` for a name a provider gave |
 | `tracking_sync_anomaly_total` (carrier, anomaly) | Suspicious decisions of checks, by anomaly code |
-| `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample left or a direct step the carrier has not run for six hours |
+| `tracking_health_incident_total` (kind, subject, state) | Health incidents that opened or still fail six hours on (`open`), `recovered`, or `closed` with no sample left, a direct step the carrier has not run for six hours, or direct failures whose checks all answered |
 | `carrier_checksum_rejection_total` (carrier, rule) | Parcels a carrier's own lookup first confirmed although detection had left that carrier out on a failed check digit. `rule` is the failing rule's id in the scraper's `carrier.json` |
 | `typo_candidate_total` (checksum, carrier, origin, first_check) | Parcels just added whose number reads as a digit typed twice, by whether their first check found scans, as the `typo_candidate` line says |
 | `public_lookup_total` (outcome) | Lookups without an account: `created`, `reused` (the number was already stored), `limited_burst`, `limited_daily` (the client's day is used up), `limited_network` (its IPv6 /48's day), `limited_global` |

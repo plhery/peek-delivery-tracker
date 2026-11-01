@@ -534,7 +534,7 @@ class DeliveryListTest {
     fun theFootsLinksOpenInTheBrowser() {
         show(width = 600.dp)
         compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
-        compose.onNodeWithTag("$FOOT.privacy", useUnmergedTree = true).performClick()
+        compose.onNodeWithTag("$FOOT.privacy").performClick()
         compose.waitForIdle()
         val started = shadowOf(ApplicationProvider.getApplicationContext<Application>()).nextStartedActivity
         assertEquals(Intent.ACTION_VIEW, started.action)

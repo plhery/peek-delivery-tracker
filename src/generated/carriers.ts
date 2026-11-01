@@ -1776,6 +1776,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Packlink tracking: reference, statuses and who to contact",
       "name": "Packlink",
       "color": "#ff4f00"
+    },
+    {
+      "id": "sto",
+      "catalog": "sto",
+      "slug": "sto-express-tracking",
+      "title": "STO Express tracking: 申通快递 numbers, statuses, contact",
+      "name": "STO Express",
+      "color": "#ff6700"
     }
   ],
   "de": [

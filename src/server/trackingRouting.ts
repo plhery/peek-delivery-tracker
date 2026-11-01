@@ -1686,12 +1686,13 @@ export class TrackingRouter {
         state.direct_retry_at = undefined;
       }
       // The provider names the carrier that delivers a parcel filed under one with no adapter of its
-      // own (DPD Poland's number for a Z-Leading parcel): that carrier is asked, at the gaps of a
-      // carrier's named partner, and answers for the parcel once its own scans confirm it.
-      const partner = this.options.handoff && !directCarrier(declared) && !['unknown', 'intl-post'].includes(declared)
+      // own (DPD Poland's number for a Z-Leading parcel), or the destination of a postal item filed under
+      // no post (intl-post), whose post delivers it: that carrier is asked, at the gaps of a carrier's
+      // named partner, and answers for the parcel once its own scans confirm it.
+      const partner = this.options.handoff && !directCarrier(declared) && declared !== 'unknown'
         && !metadata.original_carrier && universalNumber === number && !withoutProgress
         ? deliveryHandoff(declared, number, value.result) : null;
-      if (partner?.basis === 'partner') {
+      if (partner?.basis === (declared === 'intl-post' ? 'destination' : 'partner')) {
         const handed = await this.options.handoff!(parcel, declared, { ...value.result }).catch((error: unknown) => {
           signal?.throwIfAborted();
           report('provider_failed', partner.carrier, routingFailure(error).kind, error);

@@ -678,7 +678,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   a partner, but the provider can (ParcelsApp's next number, DPD Poland's for a Z-Leading
   parcel). That partner is asked the same way, at the same gaps, and once adopted answers for
   the parcel through the filed carrier on every check. The provider's rows stay as stored, and
-  no earlier carrier is asked alongside it. Parcels filed under no carrier keep their routing.
+  no earlier carrier is asked alongside it. A postal item filed under no post (`intl-post`) is
+  asked at the post of the destination the provider names, the same way. Parcels filed under no
+  carrier keep their routing.
 - Until then the parcel is followed on the origin. The cards, parcel links and the delivered email
   already name the partner the origin names (`delivery_carrier`) as who delivers, and the cards and
   links show its number (`delivery_tracking_number`) after the followed one.

@@ -246,8 +246,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -373,8 +372,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -395,8 +393,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -484,8 +481,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -565,8 +561,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -632,8 +627,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -696,8 +690,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -742,8 +735,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -1025,8 +1017,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -1198,8 +1189,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -1219,6 +1209,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -1547,8 +1539,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -1569,8 +1560,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -1591,8 +1581,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -2426,6 +2415,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -3525,8 +3516,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -3616,8 +3606,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -3842,8 +3831,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -3900,8 +3888,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -3922,8 +3909,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -3944,8 +3930,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -3989,8 +3974,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -4011,8 +3995,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -4033,8 +4016,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -4055,8 +4037,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -4077,8 +4058,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -4102,8 +4082,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -4455,6 +4434,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -4515,6 +4496,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -4761,6 +4744,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -6148,8 +6133,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -6198,8 +6182,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -6220,8 +6203,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -6355,6 +6337,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -6777,6 +6761,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -7330,8 +7316,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -7600,8 +7585,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -7821,8 +7805,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -7871,8 +7854,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -8068,8 +8050,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -8242,6 +8223,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -8426,6 +8409,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -8455,6 +8440,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -8831,8 +8818,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -9067,6 +9053,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -9102,8 +9090,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -9377,8 +9364,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -9824,7 +9810,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -10019,7 +10005,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -10040,6 +10026,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -10228,6 +10216,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -10386,6 +10376,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "saia",
@@ -10486,7 +10478,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -10582,6 +10574,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -11024,7 +11018,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -11259,7 +11253,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -11457,7 +11451,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -11514,7 +11508,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -11666,7 +11660,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -11864,7 +11858,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -11971,7 +11965,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -12139,7 +12133,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -12216,7 +12210,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -12255,7 +12249,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -12703,6 +12697,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -12911,7 +12907,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -13030,7 +13026,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -13351,7 +13347,7 @@
       "gls-de",
       "gls-ch",
       "postlogistics",
-      "gls-pl"
+      "cdek"
     ]
   },
   {
@@ -13565,8 +13561,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14042,8 +14037,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14084,8 +14078,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14106,8 +14099,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14131,8 +14123,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14218,8 +14209,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14263,8 +14253,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14285,8 +14274,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14459,8 +14447,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -14653,6 +14640,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -14810,8 +14799,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -15053,6 +15041,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -15310,8 +15300,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -15373,8 +15362,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -15445,8 +15433,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -15470,8 +15457,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -15589,6 +15575,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -15638,8 +15626,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -15681,6 +15668,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -16167,8 +16156,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -16350,8 +16338,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -16766,8 +16753,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -16902,8 +16888,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17112,8 +17097,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17137,8 +17121,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17329,8 +17312,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17351,8 +17333,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17374,8 +17355,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17396,8 +17376,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17418,8 +17397,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17441,8 +17419,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17463,8 +17440,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17485,8 +17461,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17507,8 +17482,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -17939,8 +17913,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -18071,8 +18044,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -18103,8 +18075,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -18133,8 +18104,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -18997,6 +18967,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -19370,8 +19342,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -19830,6 +19801,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -20681,6 +20654,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -20967,8 +20942,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -21823,8 +21797,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -22169,8 +22142,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -22194,8 +22166,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -22219,8 +22190,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -22244,8 +22214,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -22295,8 +22264,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -22321,8 +22289,7 @@
       "gls-fr",
       "gls-de",
       "gls-ch",
-      "postlogistics",
-      "gls-pl"
+      "postlogistics"
     ]
   },
   {
@@ -24508,6 +24475,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "j-and-t-cargo",
       "lbc-express",
       "metropolitan-warehouse",
@@ -25157,6 +25126,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "j-and-t-cargo",
       "lbc-express",
       "metropolitan-warehouse",
@@ -25919,6 +25890,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -26705,6 +26678,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -27074,6 +27049,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -28240,6 +28217,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -29389,6 +29368,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -29421,6 +29402,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -30748,6 +30731,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -31352,6 +31337,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -33450,6 +33437,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -33609,6 +33598,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -33919,6 +33910,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -34635,6 +34628,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -37361,6 +37356,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -40126,6 +40123,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -41372,6 +41371,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -41580,6 +41581,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -43015,6 +43018,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -43846,6 +43851,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -44514,6 +44521,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -45245,6 +45254,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -45425,6 +45436,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -46852,6 +46865,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -46915,6 +46930,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -47083,6 +47100,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -47450,6 +47469,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -47691,6 +47712,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -48081,6 +48104,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -49817,6 +49842,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -50930,6 +50957,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -51596,6 +51625,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -51759,6 +51790,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -52471,6 +52504,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -52634,6 +52669,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -53047,6 +53084,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -53851,6 +53890,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -56171,6 +56212,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -59087,6 +59130,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -60817,6 +60862,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -61869,6 +61916,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -62591,6 +62640,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -62893,6 +62944,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -63510,6 +63563,8 @@
       "zto",
       "yamato",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sagawa",
@@ -64237,6 +64292,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -64687,6 +64744,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -66745,6 +66804,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -66981,6 +67042,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"
@@ -67637,6 +67700,8 @@
       "sto",
       "zto",
       "j-and-t",
+      "gls-at",
+      "gls-pl",
       "lbc-express",
       "metropolitan-warehouse",
       "sending"

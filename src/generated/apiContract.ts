@@ -23799,7 +23799,8 @@ export const CARRIER_CAPABILITIES = {
           "autoComplete": "postal-code"
         }
       ],
-      "recognitionRank": 606
+      "recognitionRank": 606,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://gls-group.com/PL/pl/sledzenie-paczek/?match={trackingNumber}",
     "linkRules": [
@@ -23820,6 +23821,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^\\d{11}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^\\d{12}$",
+        "confidence": "low",
+        "checksum": "gls"
       }
     ],
     "trackingSearchUrl": "https://gls-group.com/PL/pl/sledzenie-paczek/"
@@ -24916,7 +24922,8 @@ export const CARRIER_CAPABILITIES = {
           "autoComplete": "postal-code"
         }
       ],
-      "recognitionRank": 604
+      "recognitionRank": 604,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://gls-group.com/AT/de/paket-verfolgen/?match={trackingNumber}",
     "linkRules": [
@@ -24937,6 +24944,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^\\d{11}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^\\d{12}$",
+        "confidence": "low",
+        "checksum": "gls"
       }
     ],
     "trackingSearchUrl": "https://gls-group.com/AT/de/paket-verfolgen/"
@@ -31912,7 +31924,8 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/logistics/result/?$",
         "params": [
           "key"
-        ]
+        ],
+        "ownNumbersOnly": true
       }
     ],
     "detectionRules": [
@@ -33068,7 +33081,8 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/index/tracknumber/track$",
         "params": [
           "nos"
-        ]
+        ],
+        "ownNumbersOnly": true
       }
     ],
     "detectionRules": [

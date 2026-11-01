@@ -2,4 +2,9 @@
 <resources>
     <!-- iOS's LaunchBackground colour set, Brand.background in light. -->
     <color name="launch_background">#F4F5F1</color>
+    <!-- The mark's colours (PeekMarkArtwork), which the app's icon is drawn in: its postal yellow (Brand.accent), the
+         eyes' whites and their pupils. -->
+    <color name="mark_yellow">#F3CF48</color>
+    <color name="mark_paper">#FFFAF0</color>
+    <color name="mark_ink">#171714</color>
 </resources>

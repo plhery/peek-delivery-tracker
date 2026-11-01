@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The icon's eyes as AppIcon.png draws them: PeekMarkArtwork's whites, pupils and catchlights in its 512-unit frame,
+     without the tile. The frame fills the 72 dp of the 108 dp canvas that the launcher's mask shows, so the eyes take
+     the share of the icon they take on the iPhone, well inside the 66 dp every mask keeps. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.140625"
+        android:scaleY="0.140625"
+        android:translateX="18"
+        android:translateY="18">
+        <!-- The whites, which overlap. -->
+        <path
+            android:fillColor="@color/mark_paper"
+            android:pathData="M120,262a70,77 0,1 0,140 0a70,77 0,1 0,-140 0zM252,262a70,77 0,1 0,140 0a70,77 0,1 0,-140 0z" />
+        <!-- The pupils, looking down to the right. -->
+        <path
+            android:fillColor="@color/mark_ink"
+            android:pathData="M184.4,269a35,35 0,1 0,70 0a35,35 0,1 0,-70 0zM316.4,269a35,35 0,1 0,70 0a35,35 0,1 0,-70 0z" />
+        <!-- The catchlights at the pupils' upper left. -->
+        <path
+            android:fillColor="@android:color/white"
+            android:pathData="M197,255a10.5,10.5 0,1 0,21 0a10.5,10.5 0,1 0,-21 0zM329,255a10.5,10.5 0,1 0,21 0a10.5,10.5 0,1 0,-21 0z" />
+    </group>
+</vector>

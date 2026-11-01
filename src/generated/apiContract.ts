@@ -784,10 +784,6 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^1Z[A-Z0-9]{16}$",
         "confidence": "low"
-      },
-      {
-        "pattern": "^[HJKV]\\d{10}$",
-        "confidence": "low"
       }
     ],
     "aliases": [
@@ -44379,6 +44375,108 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://tms.yingtu56.com/trackIndex.htm"
+  },
+  "cargo-expreso": {
+    "displayName": "Cargo Expreso",
+    "aliases": [
+      "CAEX"
+    ],
+    "countries": [
+      "GT",
+      "SV",
+      "HN",
+      "CR"
+    ],
+    "color": "#d32027",
+    "selectable": true,
+    "timezone": "America/Guatemala",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://cargoexpreso.com/tracking/?guia={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "cargoexpreso.com",
+          "www.cargoexpreso.com",
+          "www2.cargoexpreso.com"
+        ],
+        "pathPattern": "^/(?:(?:hn|sv|cr|pa)/)?tracking/?$",
+        "params": [
+          "guia"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cargoexpreso.com/tracking/"
+  },
+  "cupost": {
+    "displayName": "CUpost",
+    "aliases": [
+      "CU편의점택배",
+      "CU 편의점택배",
+      "CUpost (CU 편의점택배)",
+      "BGF Networks",
+      "BGF네트웍스",
+      "(주)비지에프네트웍스"
+    ],
+    "countries": [
+      "KR"
+    ],
+    "color": "#4cb756",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.cupost.co.kr/postbox/delivery/allResult.cupost?invoice_no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.cupost.co.kr",
+          "cupost.co.kr"
+        ],
+        "pathPattern": "^/postbox/delivery/(?:all|local)Result\\.cupost$",
+        "params": [
+          "invoice_no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cupost.co.kr/postbox/delivery/all.cupost"
+  },
+  "rtt": {
+    "displayName": "RTT",
+    "aliases": [
+      "RTT Group",
+      "RTT Logistics"
+    ],
+    "countries": [
+      "ZA"
+    ],
+    "color": "#d72429",
+    "selectable": true,
+    "timezone": "Africa/Johannesburg",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://intellitrack.rtt.co.za/?SearchString={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "intellitrack.rtt.co.za"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "SearchString"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://intellitrack.rtt.co.za/"
   }
 } as const;
 
@@ -45620,7 +45718,10 @@ export const CARRIER_IDS = [
   "tpl-rider",
   "union-express",
   "uof-express",
-  "yingtu"
+  "yingtu",
+  "cargo-expreso",
+  "cupost",
+  "rtt"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

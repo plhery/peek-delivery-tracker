@@ -131,6 +131,7 @@ and [`truck.json`](truck.json).
 | `boyuan` | [boyuangyl.com](https://www.boyuangyl.com/uploads/allimg/20250628/1-25062Q44S0E8.png) — logo PNG flat red #e60012 and navy #172a88, the two parts of the disc mark; the red is the larger (about 1,470 opaque pixels against 1,070) and gives the catalog colour; the 博远供应链 wordmark and the BOYUANGONGYINGLIAN line are dark grey #222222 |
 | `bpost` | [bpost.be](https://www.bpost.be/) |
 | `bqc-logistics` | [1001000.com](https://www.1001000.com/newwl/static/images/unLogin/logo.png) — logo PNG blue #008adf (3,494 pixels), with orange #f58000 (630) in the mark |
+| `bridge-intl` | [bri-ems.com](https://www.bri-ems.com/apple-touch-icon.png) — touch icon orange #f1a135 (995 pixels) for the bridge skyline, on light blue #b5ddec with Bridge Intl in blue #3498c8 |
 | `bring-posten` | [bring.com](https://www.bring.com/) |
 | `bringer-parcel` | [bringerparcel.com](https://www.bringerparcel.com/) — theme-color meta #150773; app icon PNG #150773 |
 | `brt` | [brt.it](https://www.brt.it/) |
@@ -156,6 +157,7 @@ and [`truck.json`](truck.json).
 | `ccfs` | [ccfs.com](https://www.ccfs.com/images/CCFS-LTL.svg) — logo SVG: bison fill #AE2326, CCFS wordmark #06508C; the apple-touch icon is the same red bison (#af2127) |
 | `cdek` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:CDEK_logo.svg) — fill #00B33C |
 | `cdl` | [cdldelivers.com](https://cdldelivers.com/) — header background `#3d74b2` in the site CSS; flame `#fb3e3e` from the logo PNG's flat red |
+| `cel-changda` | [celdt.cn](https://gcdn.meidianbang.cn/comdata/69092/202602/20260209181438287e07.png) — logo PNG green, median #4c9529 of 2,631 pixels, for the round mark, with CEL in black |
 | `celeritas` | [celeritastransporte.com](https://celeritastransporte.com/wp-content/uploads/elementor/css/post-9.css) — Elementor --e-global-color-primary #009AAB (secondary #EE7D00) |
 | `central-transport` | [centraltransport.com](https://www.centraltransport.com/favicon.ico) — favicon yellow field with black CT; site CSS #FAE800 |
 | `centurion-transport` | [centurion.net.au](https://web.archive.org/web/20260502000833/https://centurion.net.au/wp-content/themes/centurion/images/logo.svg) — logo SVG fill #007cc3 for the CENTURION wordmark, about 80% of the coloured area; the centurion's head before it is red #ed1c2e |
@@ -214,6 +216,7 @@ and [`truck.json`](truck.json).
 | `courier-it` | [courierit.co.za](https://www.courierit.co.za/) — site CSS #eb2227; logo PNG red #ec2028 (approximate) |
 | `courier-plus-ng` | [courierplus-ng.com](https://www.courierplus-ng.com/wp-content/uploads/2021/06/cropped-mobile-courier-logo-192x192.png) — site icon orange #f16139 (approximate) |
 | `couriersplease` | [couriersplease.com.au](https://www.couriersplease.com.au/) — site CSS #c21e36 (most frequent), logo drawn in currentColor of that red |
+| `cpszy` | [cpszy.com](https://cpszy-media.oss-cn-hongkong.aliyuncs.com/2410/ybrgnzmb9hbsurs8ottd.png) — logo PNG navy, median #192a51 of 61,389 pixels, for 華中轉運, with yellow #f4c721 (14,692) and green #96c65c (3,656) in the swirl |
 | `credifin` | [credifin.com.ar](https://credifin.com.ar/static/media/logo.a9f19338.svg) — logo SVG fill #001d9c (CREDIFIN, emblem ring); red #e1001e |
 | `cruz-del-sur` | [cruzdelsur.com](https://www.cruzdelsur.com/images/logo.png) — logo PNG navy #2a367c and light blue #1392d1 (approximate) |
 | `cse-russia` | [cse.ru](https://www.cse.ru/) — theme-color and inline logo symbol fill #f47920 |
@@ -481,8 +484,10 @@ and [`truck.json`](truck.json).
 | `jetline-couriers` | [jetlinecouriers.in](https://www.jetlinecouriers.in/images/jet-line-logo.png) — logo PNG red #e00000 (approximate); the wings are navy #00004a |
 | `jetpak` | [jetpak.com](https://jetpak.com/media/japd4rg1/jp-logo.png) — logo PNG single colour #d60e1f, the jetpak wordmark and the line over it; the [home page](https://jetpak.com/)'s inline header SVG fills the same logo #d7342c |
 | `jhgj` | [17track.net](https://res.17track.net/asset/carrier/logo/120x120/192049.png) — icon pixels blue #283593, green #78cc1d (approximate) |
+| `jiachen-express` | [jiachenexpress.com](https://changyunda.oss-cn-shenzhen.aliyuncs.com/Upload20260601/260601_df365a5f388a49eb842134f202d08535.jpg) — logo PNG blue, median #184a96 of 7,407 pixels, its only colour |
 | `jifan` | [szjf56.cn](https://www.szjf56.cn/assets/img/jf.png) — header logo PNG flat red #c81011 of the hexagon mark, its most used colour, with anti-aliased shades of it; the 吉凡 lettering under the mark is dark grey |
 | `jitsu` | [gojitsu.com](https://gojitsu.com/hubfs/jitsu-2024/image/logo-jitsu.svg) — logo SVG fill #4DC480, also the site stylesheet's main colour |
+| `jiufang` | [jiufanglogistics.cn](https://jiufangpingtai.oss-cn-shenzhen.aliyuncs.com/assets/images/sub/home/jf-logo.png) — logo PNG navy, median #304773 of 1,726 pixels, for the J and 九方通逊, with orange #e58120 (424) for the E |
 | `jne` | [jne.co.id](https://www.jne.co.id/cfind/source/images/logo.svg) — logo SVG fills #1E3378 (letters) and #E11B22 (swoosh) |
 | `joom-logistics` | [joomlogistics.com](https://web-client.joomcdn.net/web-logistics/_next/static/media/logo-icon.54f18f5a.svg) — the header logo is two mask SVGs, the icon and the Joom Logistics caption, painted with the site CSS --color-black-1000 rgb(45 47 67), #2d2f43, and white in the inverted header and the footer; the CSS accent is purple #7754f6 (--color-purple-700) |
 | `jordan-post` | [jordanpost.com.jo](https://jordanpost.com.jo/wp-content/uploads/2023/03/jpc-logo-large.png) — logo PNG crimson #a42035 (approximate), the same hex as the site CSS; tracker 212.35.69.84 uses #9c0000 |
@@ -547,6 +552,7 @@ and [`truck.json`](truck.json).
 | `logisimple` | [logisimple.pt](https://logisimple.pt/) — site theme CSS #e27900, its primary colour (buttons, icons, separators, active tabs; 19 rules); the customer portal's [logo SVG](https://portal.logisimple.pt/assets/img/logo/logo.svg) and [favicon](https://portal.logisimple.pt/favicon.png) are #f17c00, with the SI of the LOGISIMPLE wordmark in navy #08397b |
 | `logistiq` | [logistiq.io](https://logistiq.io/wp-content/uploads/2022/05/Logo-1.svg) — logo SVG fill #2e65f3 |
 | `logoix` | [logoix.com](https://www.logoix.com/favicon.svg) — favicon SVG fill #EA5B0C |
+| `longcps` | [longcps.com](https://changyunda.oss-cn-shenzhen.aliyuncs.com/Upload20260312/260312_686766b49de24a1fa85a02c2c3b4b287.jpg) — logo PNG navy, median #1e3d7e of 24,500 pixels, for LONGCPS, with orange #e56c27 (3,150) for the swoosh through it |
 | `loomis-express` | [loomisexpress.com](https://loomisexpress.com/loomship/wp-content/themes/canpar/dist/styles/main.css) — main.css: `--primary: #004B8E`, logo letters #004B8E, swoosh #D93835 |
 | `lotte-global` | [lotteglogis.com](https://www.lotteglogis.com/resources/css/common.css) — site CSS #da291c |
 | `lso` | [lso.com](https://cdn.prod.website-files.com/610bd2c21f6eaa53c3ceab9f/68d5ae2b04bd7cdb9aa4c71c_lso-color-white-font.svg) — top tab `fill="#0047BA"` |
@@ -851,6 +857,7 @@ and [`truck.json`](truck.json).
 | `surat-kargo` | [suratkargo.com.tr](https://www.suratkargo.com.tr/KargoTakip/) — tracking page CSS #03387b (archived copy); logo blue #0e4595 (approximate) |
 | `sway` | [shipsway.com](https://c.animaapp.com/mgpjlfgndHyBl1/img/combo-logo-%28purple-green%29.png) — combo logo PNG flat purple #635ff5, its most used colour (the sway wordmark and the lower arc of the S mark), with green #96ff7a for the upper arc; the tracker's [icon](https://track.shipsway.com/icon.svg) sets the S in white and the same green on a #7255f1 tile |
 | `swiftx` | [swiftx-express.com](https://swiftx-express.com/) — site CSS .bg-primary rgb(94 81 211) = #5e51d3; logo swoosh pixels close to it |
+| `sxjd-freight` | [sxjdfreight.com](https://xjm.sxjdfreight.com/publicResource/publicResource/sxwebsite/index/sxjd-logo-white@2x.png) — site accent #ba0c2f (38 uses: links, buttons, highlights); the [white logo](https://xjm.sxjdfreight.com/publicResource/publicResource/sxwebsite/index/sxjd-logo-white@2x.png) sits on the header's near-black #101820 |
 | `syd` | [suyd56.com](https://www.suyd56.com/Up/day_231120/202311201725325075.png) — header logo PNG flat red #ff0000 (1,154 pixels) for 速邮达, a darker red #e71f19 for the box icon, and black #000000 (4,992) for SYD and EXPRESS; the older logo still commented out in the page header is blue #0f4077 |
 | `t-cat` | [t-cat.com.tw](https://www.t-cat.com.tw/images/logo.svg) — logo SVG panel fill #009481, oval #FDD000, cat #040000 |
 | `t-group` | [tgroupspa.com](https://www.tgroupspa.com/) — site CSS #ED7602 (menu hover and current page); header logo orange #ec7601 (approximate) |
@@ -941,6 +948,7 @@ and [`truck.json`](truck.json).
 | `uzbekistan-post` | [uz.post](https://uz.post/assets/index-BSg4lfOx.css) — site CSS .header-section #183e98, also the rendered logo blue; logo orange #f07824 (rendered, approximate) |
 | `v-xpress` | [vxpress.in](https://vxpress.in/wp-content/themes/tf_child/images/v-xpress-logo.svg) — logo SVG fill #0d4689 for the V's left arm, V-Xpress and the tagline band, its most used colour, with orange #faa61a for the two swooshes that make the V's right arm and a chevron in the band, and #2e3192 for ®; the [footer logo](https://vxpress.in/wp-content/themes/tf_child/images/foot-logo.png) and the [site icon](https://vxpress.in/wp-content/uploads/2025/08/cropped-favicon-1-192x192.png) use #0c468a |
 | `valmo` | [valmo.in](https://www.valmo.in/) — site stylesheet --color-valmo-primary #092d5e, the navy of the header and page sections behind the logo |
+| `valueway` | [valueway.net](https://www.valueway.net/Images/top_bg.jpg) — header banner JPEG blue, median #186fb5 of 859 pixels, for VALUE, with red #e0212b (905) for WAY, on a sky background |
 | `vasp-expresso` | [vaspexpresso.pt](https://www.vaspexpresso.pt/media/bajdmcow/vasp-expresso_cor.png) — logo colour #02518a (approximate, PNG); site CSS #005189 |
 | `veho` | [shipveho.com](https://cdn.prod.website-files.com/64a643946cb644441bae82c9/64aba94fc638067da124e619_veho-logo.svg) — header logo SVG single fill #e84931, for the veho wordmark and the Vehuman that forms its o; the tracker's [Vehuman SVG](https://track.shipveho.com/Vehuman_Orange.svg) has the same single fill, and the home page CSS uses it as its accent |
 | `veloces` | [veloces.app](https://s3.amazonaws.com/webflow-prod-assets/6a8dae1d54bfc0f0c317c51c/6a8db5a84a31eff3142b4386_veloces-logo.png) — logo PNG flat fill #fd026f (approximate, from the PNG) |
@@ -2023,3 +2031,11 @@ and [`truck.json`](truck.json).
 | `ees-logistics` | EES in white single-stroke capitals on red | [ees-logistics.net](https://www.ees-logistics.net/) — EES is the company's registered English mark, beside 百福东方; the logo image does not load from outside China, so the decal sets EES in the app's letters |
 | `annto` | ANNTO in white single-stroke capitals on blue | [annto.com](https://www.annto.com/assets/logo-8a884e97.png) — the logo: 安得智联 and ANN in heavy blue, TO in orange; the decal spells ANNTO in the app's letters, all in white since the orange is too close to the blue |
 | `jdiex` | JDIEX in white single-stroke capitals on blue | [jdiex.com](https://changyunda.oss-cn-shenzhen.aliyuncs.com/Upload20260705/260705_c494a5cd651948b4b90b9057d0629a11.jpg) — the logo: JDI in heavy blue and EX in orange capitals; the decal spells JDIEX in the app's letters, all in white since the orange is too close to the blue |
+| `sxjd-freight` | SXJD in white single-stroke capitals on red | [sxjdfreight.com](https://xjm.sxjdfreight.com/publicResource/publicResource/sxwebsite/index/sxjd-logo-white@2x.png) — the logo: a white SXJ monogram beside FREIGHT over 顺心捷达, on the dark header; the decal sets SXJD in the app's letters |
+| `cpszy` | CPS in white single-stroke capitals on navy | [cpszy.com](https://cpszy-media.oss-cn-hongkong.aliyuncs.com/2410/ybrgnzmb9hbsurs8ottd.png) — the logo: a yellow, blue and green swirl beside 華中轉運 in navy brush capitals; the decal sets CPS, the brand's initials, in the app's letters |
+| `valueway` | VALUEWAY in white single-stroke capitals on blue | [valueway.net](https://www.valueway.net/Images/top_bg.jpg) — the logo: VALUE in blue and WAY in red italic capitals, with speed lines, beside 美通物流·快递·报关行; the decal spells VALUEWAY in the app's letters, all in white since the red is too close to the blue |
+| `jiachen-express` | JIACHEN in white single-stroke capitals on blue | [jiachenexpress.com](https://changyunda.oss-cn-shenzhen.aliyuncs.com/Upload20260601/260601_df365a5f388a49eb842134f202d08535.jpg) — the logo: 佳辰国际速递 over JIACHEN INTERNATIONAL EXPRESS in blue; the decal sets JIACHEN in the app's letters |
+| `longcps` | LONGCPS in white single-stroke capitals on navy | [longcps.com](https://changyunda.oss-cn-shenzhen.aliyuncs.com/Upload20260312/260312_686766b49de24a1fa85a02c2c3b4b287.jpg) — the logo: LONGCPS in navy italic capitals crossed by an orange swoosh, over 龙行供应链; the decal sets LONGCPS in the app's letters |
+| `bridge-intl` | BRIDGE in black single-stroke capitals on orange | [bri-ems.com](https://www.bri-ems.com/apple-touch-icon.png) — the icon: an orange bridge skyline over Bridge Intl in blue script on light blue; the decal sets BRIDGE in the app's letters in near-black |
+| `jiufang` | JIUFANG in white single-stroke capitals on navy | [jiufanglogistics.cn](https://jiufangpingtai.oss-cn-shenzhen.aliyuncs.com/assets/images/sub/home/jf-logo.png) — the logo: a navy J and an orange E over Logistics, beside 九方通逊 in navy; the decal spells JIUFANG in the app's letters |
+| `cel-changda` | CEL in black single-stroke capitals on green | [celdt.cn](https://gcdn.meidianbang.cn/comdata/69092/202602/20260209181438287e07.png) — the logo: a green round mark of two swirls beside CEL in heavy black slanted capitals; the decal sets CEL in the app's letters in near-black |

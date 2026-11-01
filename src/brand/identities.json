@@ -382,6 +382,9 @@
   "bqc-logistics": {
     "decal": "bqc-logistics"
   },
+  "bridge-intl": {
+    "decal": "bridge-intl"
+  },
   "bring-posten": {
     "decal": "bring"
   },
@@ -467,6 +470,9 @@
   },
   "cdl": {
     "decal": "cdl"
+  },
+  "cel-changda": {
+    "decal": "cel-changda"
   },
   "celeritas": {
     "decal": "celeritas"
@@ -675,6 +681,9 @@
   },
   "couriersplease": {
     "decal": "couriersplease"
+  },
+  "cpszy": {
+    "decal": "cpszy"
   },
   "credifin": {
     "decal": "credifin"
@@ -1726,6 +1735,9 @@
   "jhgj": {
     "decal": "jhgj"
   },
+  "jiachen-express": {
+    "decal": "jiachen-express"
+  },
   "jifan": {
     "decal": "jifan"
   },
@@ -1734,6 +1746,9 @@
     "palette": {
       "accent": "#000000"
     }
+  },
+  "jiufang": {
+    "decal": "jiufang"
   },
   "jne": {
     "decal": "jne"
@@ -1939,6 +1954,9 @@
   },
   "logoix": {
     "decal": "logoix"
+  },
+  "longcps": {
+    "decal": "longcps"
   },
   "loomis-express": {
     "decal": "loomis-express"
@@ -2984,6 +3002,9 @@
   "swiss-post-cargo": {
     "family": "swiss-post"
   },
+  "sxjd-freight": {
+    "decal": "sxjd-freight"
+  },
   "syd": {
     "decal": "syd"
   },
@@ -3305,6 +3326,9 @@
   },
   "valmo": {
     "decal": "valmo"
+  },
+  "valueway": {
+    "decal": "valueway"
   },
   "vasp-expresso": {
     "decal": "vasp-expresso"

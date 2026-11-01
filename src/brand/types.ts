@@ -421,7 +421,15 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'changjiang-express'
   | 'ees-logistics'
   | 'annto'
-  | 'jdiex';
+  | 'jdiex'
+  | 'sxjd-freight'
+  | 'cpszy'
+  | 'valueway'
+  | 'jiachen-express'
+  | 'longcps'
+  | 'bridge-intl'
+  | 'jiufang'
+  | 'cel-changda';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

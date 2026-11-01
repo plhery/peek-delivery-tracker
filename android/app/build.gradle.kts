@@ -181,4 +181,6 @@ dependencies {
     // The label scanner's cover over this device's camera, found and tapped by its semantics.
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit4)
+    // Compose's test rule idles through Espresso, whose own 3.5 no longer finds Android 17's input manager.
+    androidTestImplementation(libs.espresso.core)
 }

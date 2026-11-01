@@ -1848,6 +1848,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Chronodiali tracking: CHPU numbers, statuses and contact",
       "name": "Chronodiali",
       "color": "#009adf"
+    },
+    {
+      "id": "17feia",
+      "catalog": "17feia",
+      "slug": "17feia-tracking",
+      "title": "17FEIA tracking: FEI…YQ numbers, statuses and delivery",
+      "name": "17FEIA",
+      "color": "#00a9e4"
     }
   ],
   "de": [

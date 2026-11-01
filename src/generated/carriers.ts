@@ -1728,6 +1728,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD Netherlands tracking: statuses, delivery and contact",
       "name": "DPD Netherlands",
       "color": "#dc0032"
+    },
+    {
+      "id": "dpd-at",
+      "catalog": "dpd-at",
+      "slug": "dpd-austria-tracking",
+      "title": "DPD Austria tracking: statuses, Pickup shops and contact",
+      "name": "DPD Austria",
+      "color": "#dc0032"
     }
   ],
   "de": [

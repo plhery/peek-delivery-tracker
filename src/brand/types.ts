@@ -439,7 +439,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'banling'
   | 'jikuaida'
   | 'hye'
-  | 'jet-global';
+  | 'jet-global'
+  | 'kuayuan-express'
+  | 'cmt-express';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

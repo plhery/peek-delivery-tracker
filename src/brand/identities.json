@@ -586,6 +586,9 @@
   "closer-logistics": {
     "decal": "closer-logistics"
   },
+  "cmt-express": {
+    "decal": "cmt-express"
+  },
   "cne": {
     "decal": "cne"
   },
@@ -1839,6 +1842,9 @@
   },
   "ktd": {
     "decal": "ktd"
+  },
+  "kuayuan-express": {
+    "decal": "kuayuan-express"
   },
   "kuayue-express": {
     "decal": "kuayue-express"

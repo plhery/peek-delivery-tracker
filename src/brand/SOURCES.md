@@ -189,6 +189,7 @@ and [`truck.json`](truck.json).
 | `cj-logistics` | [cjlogistics.com](https://www.cjlogistics.com/static/pc/global/template/images/logo/logo_footer_ko.png) — logo petals red #ef151e, orange #ff9700, blue #006ecd (approximate) |
 | `cj-packet` | [cjpacket.com](https://www.cjpacket.com/) — site CSS #ff7700; header logo PNG #ff6702 (approximate) |
 | `closer-logistics` | [closerlogistics.com](https://www.closerlogistics.com/img/logo_closer_line.svg) — logo SVG disc fill #7bb4b8 (cls-14) |
+| `cmt-express` | [cmtexpress.com.cn](https://www.cmtexpress.com.cn/Files/Site/SiteLogo/11bd7492-2e90-40cb-83fc-cdef548e7aba.png) — logo PNG red, median #ed010b of its 8,322 coloured pixels, for the ring, the arrow, CMT and 诚贸通供应链; EXPRESS is black |
 | `codexpress` | [codexpress.com.au](https://www.codexpress.com.au/CODE_Logo_NoTagline_noBG.png) — logo PNG navy #292d42, the wordmark colour and its most frequent pixel; X cyan #00aeef (approximate) |
 | `colis-prive` | [colisprive.fr](https://www.colisprive.fr/) (sampled from the site icon) |
 | `colisweb` | [colisweb.com](https://www.colisweb.com/) (sampled from the site icon) |
@@ -518,6 +519,7 @@ and [`truck.json`](truck.json).
 | `korea-post` | [koreapost.go.kr](https://postman.koreapost.go.kr/kpost/subIndex/4263.do) (Pantone 485 C equivalent) |
 | `kronos-express` | [kronosexpress.com](https://www.kronosexpress.com/) — Elementor primary colour #24297a; logo PNG navy #2c2c83 and orange #ee7d00 (approximate) |
 | `ktd` | [17track.net](https://res.17track.net/asset/carrier/logo/120x120/190522.png) — icon pixels #01234d (approximate) |
+| `kuayuan-express` | [kuayuanexpress.com.cn](https://www.kuayuanexpress.com.cn/image/logo.png) — logo PNG blue, median #084b86 of 111,491 pixels, for the globe, the arrow and KY |
 | `kuayue-express` | [ky-express.com](https://ic-img.ky-express.com/netc/20231102_50405448869_!!1698890325713_292_72.png) — header logo PNG flat purple #7e51e4, its only colour (KYE between two arcs, 跨越速运 and KUAYUE-EXPRESS), also the site's button colour; the [mobile logo SVG](https://ic-img.ky-express.com/cms/images/h5web/78sjjvrt3l-logo.svg) has the darker single fill #6933d4 |
 | `kuehne-nagel` | [kuehne-nagel.com](https://www.kuehne-nagel.com/) |
 | `kun-express` | [kun-express.com](http://www.kun-express.com/public/static/images/logo.png) — header logo PNG flat blue #0761ff, the K and un of KunExpress; Express is navy #202538 |
@@ -2059,3 +2061,5 @@ and [`truck.json`](truck.json).
 | `jikuaida` | JIKUAIDA in white single-stroke capitals on navy | [jikuaida.com](https://www.jikuaida.com/logo.png) — the logo: a navy JK monogram with a red D arc, beside 吉快达物流 over JIKUAIDA LOGISTICS in black; the decal spells JIKUAIDA in the app's letters |
 | `hye` | HYE in white slanted single-stroke capitals on red | [hyexp.net](https://nwzimg.wezhan.cn/contents/sitefiles2070/10352099/images/55805106.png) — the logo: HYE cut out of a slanted red band that fades into wings, over 环洋国际 HYExpress in grey; the decal sets HYE in the app's letters, slanted like the logo's |
 | `jet-global` | JET in white single-stroke capitals on blue | [jetft.com](https://www.jetft.com/static/home/images/logo.png) — the logo: jet in white and orange lowercase over a blue globe, beside Global Logistics Limited and 捷通物流有限公司 on yellow stripes; the decal sets JET in the app's letters |
+| `kuayuan-express` | KY in white single-stroke capitals on blue | [kuayuanexpress.com.cn](https://www.kuayuanexpress.com.cn/image/logo.png) — the logo: a blue globe showing Asia, ringed by an arrow that rises past KY in heavy blue capitals; the decal sets KY in the app's letters |
+| `cmt-express` | CMT in white single-stroke capitals on red | [cmtexpress.com.cn](https://www.cmtexpress.com.cn/Files/Site/SiteLogo/11bd7492-2e90-40cb-83fc-cdef548e7aba.png) — the logo: CMT in white script inside a red ring with a black arc, an arrow leaving it towards EXPRESS in black and 诚贸通供应链 in red; the decal sets CMT in the app's letters |

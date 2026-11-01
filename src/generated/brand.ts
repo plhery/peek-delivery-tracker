@@ -769,6 +769,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "cj-logistics": "cj-logistics",
   "cj-packet": "cj-packet",
   "closer-logistics": "closer-logistics",
+  "cmt-express": "cmt-express",
   "cne": "cne",
   "codexpress": "codexpress",
   "colis-prive": "colis-prive",
@@ -1146,6 +1147,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "korea-post": "korea-post",
   "kronos-express": "kronos-express",
   "ktd": "ktd",
+  "kuayuan-express": "kuayuan-express",
   "kuayue-express": "kuayue-express",
   "kuehne-nagel": "kuehne-nagel",
   "kun-express": "kun-express",
@@ -23925,6 +23927,35 @@ export const CARRIER_TRUCK: TruckGeometry = {
       {
         "type": "polygon",
         "d": "M7.35 10.54L7.2 10.65L7.03 10.73L6.85 10.75L6.66 10.73L6.49 10.65L6.34 10.54L6.23 10.39L6.16 10.22L6.13 9.97L5.09 10.1L5.14 10.49L5.32 10.92L5.6 11.28L5.97 11.56L6.39 11.74L6.85 11.8L7.3 11.74L7.73 11.56L8.09 11.28L8.38 10.92L8.55 10.49L8.61 10.07L8.61 5.8L7.57 5.8L7.57 10L7.54 10.22L7.47 10.39Z",
+        "fill": "accent"
+      }
+    ],
+    "kuayuan-express": [
+      {
+        "type": "polygon",
+        "d": "M12.14 5.8L11.27 6.37L12.98 8.96L12.98 11.8L14.02 11.8L14.02 8.96L15.72 6.37L14.85 5.8L13.5 7.85Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.82 9.01L9.48 11.8L10.37 11.27L8.58 8.25L10.29 6.54L9.56 5.8L7.32 8.04L7.32 5.8L6.28 5.8L6.28 11.8L7.32 11.8L7.32 9.51Z",
+        "fill": "accent"
+      }
+    ],
+    "cmt-express": [
+      {
+        "type": "polygon",
+        "d": "M14.3 6.91L14.3 7.76L15.13 7.76L15.13 11.79L15.98 11.79L15.98 7.76L16.81 7.76L16.81 6.91Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.64 8.86L12.64 11.79L13.49 11.79L13.49 5.8L11.25 9.54L9.01 5.8L9.01 11.79L9.86 11.79L9.86 8.86L11.25 11.19Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.89 6.9L6.37 6.98L5.89 7.22L5.51 7.59L5.27 8.06L5.19 8.55L5.19 10.15L5.27 10.64L5.51 11.11L5.89 11.49L6.37 11.72L6.89 11.8L7.41 11.71L7.88 11.46L8.2 11.13L7.59 10.54L7.36 10.78L7.14 10.9L6.88 10.94L6.62 10.9L6.39 10.79L6.21 10.6L6.09 10.37L6.04 10.08L6.04 8.62L6.09 8.33L6.21 8.1L6.39 7.91L6.62 7.8L6.88 7.76L7.14 7.8L7.36 7.93L7.59 8.16L8.2 7.57L7.88 7.24L7.41 6.99Z",
         "fill": "accent"
       }
     ]

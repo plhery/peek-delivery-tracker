@@ -515,6 +515,8 @@ describe('carrier brand', () => {
       'jikuaida',
       'hye',
       'jet-global',
+      'kuayuan-express',
+      'cmt-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

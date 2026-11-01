@@ -1840,6 +1840,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "EURODIS tracking: shipment numbers and delivery partners",
       "name": "EURODIS",
       "color": "#0b418b"
+    },
+    {
+      "id": "chronodiali",
+      "catalog": "chronodiali",
+      "slug": "chronodiali-tracking",
+      "title": "Chronodiali tracking: CHPU numbers, statuses and contact",
+      "name": "Chronodiali",
+      "color": "#009adf"
     }
   ],
   "de": [

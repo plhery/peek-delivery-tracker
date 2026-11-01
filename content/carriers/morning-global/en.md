@@ -99,9 +99,9 @@ Morning Global gives no opening hours. Its tracker asks you to give your trackin
 
 Peek reads Morning Global's own tracker by the number alone, with no postcode. It shows the status, each line with its place, the destination country and the delivery time. It reads a line's time on the UTC offset given beside the country, a line without one on the clock of its place, a neighbouring line's, your country's or Hong Kong's, and shows every time in your device's time zone. It leaves out the origin, the `Estimated Delivery`, the weight, the pieces, the `Reference` and who signed, so it shows no expected delivery date.
 
-As Morning Global names no delivering partner, Peek follows the parcel on Morning Global's tracker. One exception: if the number also passes the check digit postal numbers carry, Peek asks the post of the destination country with it too, and moves the parcel there only if that post shows a scan at least as recent as Morning Global's newest.
+As Morning Global names no delivering partner, Peek follows the parcel on Morning Global's tracker to the end, even when the number also passes the check digit postal numbers carry: it doesn't ask your country's post about it.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of "Every scan", "Important steps" or "Delivery only": "Important steps" covers `Customs Clearance Begins`, `Out for Delivery` and `Delivered`. It can't contact Morning Global or the shop for you.
+Peek checks at most once an hour, out for delivery too, and waits 2 hours after a failed check; a manual refresh waits the same. It can notify you of "Every scan", "Important steps" or "Delivery only": "Important steps" covers `Customs Clearance Begins`, `Out for Delivery` and `Delivered`. It can't contact Morning Global or the shop for you.
 
 ## Questions about Morning Global tracking
 
@@ -139,5 +139,5 @@ Email cs.mgus@morninglobal.com in the US, cs.mgeu@morninglobal.com in the UK, or
 - [Morning Global: News](https://www.morninglobal.com/news/) – service notices
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee from 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape and links, status wordings and their steps, places and clocks, what Peek reads and leaves out, no delivery partner, hand-off
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape and links, status wordings and their steps, places and clocks, what Peek reads and leaves out, no delivery partner, no hand-off to a post
 :::

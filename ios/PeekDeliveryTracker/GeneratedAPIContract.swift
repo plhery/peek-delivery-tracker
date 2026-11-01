@@ -1212,6 +1212,34 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let viaxpress = CarrierID(rawValue: "viaxpress")
     static let wepost = CarrierID(rawValue: "wepost")
     static let xpressen = CarrierID(rawValue: "xpressen")
+    static let sixtySixPost = CarrierID(rawValue: "66post")
+    static let ahlCourier = CarrierID(rawValue: "ahl-courier")
+    static let bluestreakCouriers = CarrierID(rawValue: "bluestreak-couriers")
+    static let brandingWorldwide = CarrierID(rawValue: "branding-worldwide")
+    static let czlExpress = CarrierID(rawValue: "czl-express")
+    static let didaInternational = CarrierID(rawValue: "dida-international")
+    static let eliExpress = CarrierID(rawValue: "eli-express")
+    static let explusLogistics = CarrierID(rawValue: "explus-logistics")
+    static let flickpost = CarrierID(rawValue: "flickpost")
+    static let goRush = CarrierID(rawValue: "go-rush")
+    static let jiehang = CarrierID(rawValue: "jiehang")
+    static let junfengInternational = CarrierID(rawValue: "junfeng-international")
+    static let ljxExpress = CarrierID(rawValue: "ljx-express")
+    static let maxzeego = CarrierID(rawValue: "maxzeego")
+    static let ondotCourier = CarrierID(rawValue: "ondot-courier")
+    static let penguinBox = CarrierID(rawValue: "penguin-box")
+    static let postaEKosoves = CarrierID(rawValue: "posta-e-kosoves")
+    static let rayspeed = CarrierID(rawValue: "rayspeed")
+    static let rexIndonesia = CarrierID(rawValue: "rex-indonesia")
+    static let ryderLastMile = CarrierID(rawValue: "ryder-last-mile")
+    static let shipglobalUs = CarrierID(rawValue: "shipglobal-us")
+    static let sjlExpress = CarrierID(rawValue: "sjl-express")
+    static let solExpress = CarrierID(rawValue: "sol-express")
+    static let tiui = CarrierID(rawValue: "tiui")
+    static let tplRider = CarrierID(rawValue: "tpl-rider")
+    static let unionExpress = CarrierID(rawValue: "union-express")
+    static let uofExpress = CarrierID(rawValue: "uof-express")
+    static let yingtu = CarrierID(rawValue: "yingtu")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2377,6 +2405,34 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .viaxpress,
         .wepost,
         .xpressen,
+        .sixtySixPost,
+        .ahlCourier,
+        .bluestreakCouriers,
+        .brandingWorldwide,
+        .czlExpress,
+        .didaInternational,
+        .eliExpress,
+        .explusLogistics,
+        .flickpost,
+        .goRush,
+        .jiehang,
+        .junfengInternational,
+        .ljxExpress,
+        .maxzeego,
+        .ondotCourier,
+        .penguinBox,
+        .postaEKosoves,
+        .rayspeed,
+        .rexIndonesia,
+        .ryderLastMile,
+        .shipglobalUs,
+        .sjlExpress,
+        .solExpress,
+        .tiui,
+        .tplRider,
+        .unionExpress,
+        .uofExpress,
+        .yingtu,
     ]
 
     init(from decoder: Decoder) throws {

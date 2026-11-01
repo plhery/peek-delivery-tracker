@@ -1221,6 +1221,34 @@ value class CarrierId(val rawValue: String) {
         val Viaxpress = CarrierId("viaxpress")
         val Wepost = CarrierId("wepost")
         val Xpressen = CarrierId("xpressen")
+        val SixtySixPost = CarrierId("66post")
+        val AhlCourier = CarrierId("ahl-courier")
+        val BluestreakCouriers = CarrierId("bluestreak-couriers")
+        val BrandingWorldwide = CarrierId("branding-worldwide")
+        val CzlExpress = CarrierId("czl-express")
+        val DidaInternational = CarrierId("dida-international")
+        val EliExpress = CarrierId("eli-express")
+        val ExplusLogistics = CarrierId("explus-logistics")
+        val Flickpost = CarrierId("flickpost")
+        val GoRush = CarrierId("go-rush")
+        val Jiehang = CarrierId("jiehang")
+        val JunfengInternational = CarrierId("junfeng-international")
+        val LjxExpress = CarrierId("ljx-express")
+        val Maxzeego = CarrierId("maxzeego")
+        val OndotCourier = CarrierId("ondot-courier")
+        val PenguinBox = CarrierId("penguin-box")
+        val PostaEKosoves = CarrierId("posta-e-kosoves")
+        val Rayspeed = CarrierId("rayspeed")
+        val RexIndonesia = CarrierId("rex-indonesia")
+        val RyderLastMile = CarrierId("ryder-last-mile")
+        val ShipglobalUs = CarrierId("shipglobal-us")
+        val SjlExpress = CarrierId("sjl-express")
+        val SolExpress = CarrierId("sol-express")
+        val Tiui = CarrierId("tiui")
+        val TplRider = CarrierId("tpl-rider")
+        val UnionExpress = CarrierId("union-express")
+        val UofExpress = CarrierId("uof-express")
+        val Yingtu = CarrierId("yingtu")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2386,6 +2414,34 @@ value class CarrierId(val rawValue: String) {
             Viaxpress,
             Wepost,
             Xpressen,
+            SixtySixPost,
+            AhlCourier,
+            BluestreakCouriers,
+            BrandingWorldwide,
+            CzlExpress,
+            DidaInternational,
+            EliExpress,
+            ExplusLogistics,
+            Flickpost,
+            GoRush,
+            Jiehang,
+            JunfengInternational,
+            LjxExpress,
+            Maxzeego,
+            OndotCourier,
+            PenguinBox,
+            PostaEKosoves,
+            Rayspeed,
+            RexIndonesia,
+            RyderLastMile,
+            ShipglobalUs,
+            SjlExpress,
+            SolExpress,
+            Tiui,
+            TplRider,
+            UnionExpress,
+            UofExpress,
+            Yingtu,
         )
     }
 }

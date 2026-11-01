@@ -27453,6 +27453,91 @@
     ]
   },
   {
+    "input": "22201100096755",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "rex-indonesia"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
+    ]
+  },
+  {
+    "input": "22201100157434",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "rex-indonesia"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
+    ]
+  },
+  {
+    "input": "22201114618071",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "rex-indonesia"
+    ],
+    "asked": [
+      "hermes-de",
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de"
+    ]
+  },
+  {
     "input": "222064432219",
     "carrier": "unknown",
     "confidence": "low",
@@ -46232,6 +46317,16 @@
     ]
   },
   {
+    "input": "52-45-0398",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "520000000000000000000001",
     "carrier": "unknown",
     "confidence": "low",
@@ -58375,6 +58470,34 @@
   },
   {
     "input": "777044471534",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "japan-post",
+      "sf-express",
+      "sto",
+      "zto",
+      "yamato",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sagawa",
+      "sending"
+    ],
+    "asked": [
+      "japan-post",
+      "brt",
+      "colis-prive",
+      "j-and-t",
+      "metropolitan-warehouse"
+    ]
+  },
+  {
+    "input": "777062212684",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -78804,6 +78927,22 @@
     ]
   },
   {
+    "input": "EW004577235MY",
+    "carrier": "pos-malaysia",
+    "confidence": "high",
+    "candidates": [
+      "pos-malaysia"
+    ]
+  },
+  {
+    "input": "EW008643669MY",
+    "carrier": "pos-malaysia",
+    "confidence": "high",
+    "candidates": [
+      "pos-malaysia"
+    ]
+  },
+  {
     "input": "EW325552073IN",
     "carrier": "india-post",
     "confidence": "high",
@@ -79334,6 +79473,17 @@
     "confidence": "high",
     "candidates": [
       "fleetoptics"
+    ]
+  },
+  {
+    "input": "FFUSA792916",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "shipglobal-us"
+    ],
+    "preferred": [
+      "shipglobal-us"
     ]
   },
   {
@@ -82405,6 +82555,14 @@
   },
   {
     "input": "IV745750017GB",
+    "carrier": "royal-mail",
+    "confidence": "high",
+    "candidates": [
+      "royal-mail"
+    ]
+  },
+  {
+    "input": "IW688661444GB",
     "carrier": "royal-mail",
     "confidence": "high",
     "candidates": [
@@ -85918,6 +86076,14 @@
     "confidence": "high",
     "candidates": [
       "china-post"
+    ]
+  },
+  {
+    "input": "LP589729485MY",
+    "carrier": "pos-malaysia",
+    "confidence": "high",
+    "candidates": [
+      "pos-malaysia"
     ]
   },
   {
@@ -100121,6 +100287,12 @@
     "asked": [
       "australia-post"
     ]
+  },
+  {
+    "input": "X018660",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "X03206965",

@@ -39,6 +39,10 @@ JD's international tracking gives each step in English, with the place where it 
 | `Shipping Label Created` | no change | That carrier's label, passed on by JD. The parcel's status stays as it was. |
 | `Arrived at GOFO Regional Hub` | "In transit" | In the US: GOFO Express, the carrier JD's history shows delivering there, scanned it at its hub. |
 
+**A parcel from China** meets other steps, in this order. First `Shipment Picked up` (collected from the shop), then `Arrived at Warehouse`, `Weighed at Warehouse` and `Consolidation Completed` at JD's warehouse in China, which holds it until it leaves: all "Received by carrier". Consolidated means packed with other parcels for the flight, not delivered. Then, all "In transit": `Departed from Warehouse.`, `Arrive at airport`, `Customs released from origin port` (export clearance done), `Departure from origin port`, `Arrive at destination port`, `Cleanrance agency picked` (JD's spelling: the clearance agent collected the cleared parcel, not you) and `Handover to local carrier`. In the US, GOFO's steps follow under JD's codes: `Arrived at GOFO Regional Hub`, `In Transit to Next Facility` and `Arrived at GOFO Delivery Station` ("In transit"), then `Out for Delivery` ("Out for delivery").
+
+**The local carrier's number.** On JD's tracker, `Departed from Warehouse.` on a parcel from China ends with "Tracking no" and the number the carrier delivering near you gave the parcel (in the US, a GOFO number starting with GFUS). Peek leaves that number out of the line and doesn't follow the parcel on that carrier's tracker: to see the carrier's own steps, look the number up on its site.
+
 Peek reads JD's other steps by the code JD gives each: the order created ("Label created"); customs clearance started ("At customs"); clearance finished, unloading or loading at a sorting centre and unloading at the destination site ("In transit"); JD's courier on the way to you ("Out for delivery"); signed for ("Delivered"). Each line keeps JD's own words. JD's out-for-delivery line names the courier and gives their phone number: Peek leaves both out.
 
 **Lines from JD's Chinese tracker.** For a parcel inside China, the lines are in Chinese. Among them: `京东快件已取件` (collected from the sender), `已到达【…】` (arrived at the site named in the brackets), `正在派送中` (out for delivery) and `已送达` (delivered).
@@ -47,7 +51,7 @@ Peek reads JD's other steps by the code JD gives each: the order created ("Label
 
 **Parcels from China.** JD's Cross-Border Parcels service, for online sellers shipping from China, lists the US, the UK, Australia, Canada, Mexico and Russia. Sellers choose standard, express or economic shipping. JD flies the parcels out, then hands them to local partners for the last mile, which takes 3 to 6 working days on average, JD says. It doesn't name those partners. In the US, JD's history shows [GOFO Express](carrier:gofo) delivering, and GOFO's steps come in JD's own tracking.
 
-**Parcels from a JD warehouse near you.** JD also runs warehouses abroad: in the US (New Jersey, Los Angeles and Atlanta), in England and in Sydney, among others. A seller who keeps stock there can ship your order from inside your country: that's when the history shows `Picking Completed.` and `Weighed at Warehouse.` first.
+**Parcels from a JD warehouse near you.** JD also runs warehouses abroad: in the US (New Jersey, Los Angeles and Atlanta), in England and in Sydney, among others. A seller who keeps stock there can ship your order from inside your country: that's when the history shows `Picking Completed.` and `Weighed at Warehouse.` first. A parcel from China starts with `Shipment Picked up` instead.
 
 JD's pages don't say how many delivery attempts the local carrier makes, or where a missed parcel waits: that's up to the carrier in your country. See [missed a delivery](guide:missed-delivery).
 
@@ -79,11 +83,11 @@ JD names no time zone for these hours, is closed on public holidays and lists no
 
 [Peek](/) names JD Logistics at once from the JD… shapes in the table above. A VG number fits La Poste's shape too: Peek checks it with La Poste and other tracking services, and if they don't find it, tap "Change" and pick JD Logistics. A jingdonglogistics.com tracking link with `waybillCodes=` files the parcel under JD Logistics whatever number it holds; from a jdl.com link, Peek takes the number only when it has one of the JD… shapes. If your JD number looks different, paste it all the same: Peek follows more than 3,500 carriers. Then tap "Change" and pick JD Logistics under "All carriers" (searching Jingdong or 京东物流 finds it too), or use "Change carrier" on a parcel you've already added.
 
-Peek reads JD's international tracking: the status, each step in JD's words with its town and country (in English, even when JD writes the country in Chinese) and the delivery time. Times are read on the clock of the place that made the scan and shown in your device's time zone. Peek shows no expected delivery date for JD parcels. It leaves out the recipient's details and the delivery photos JD's tracking can hold, and the courier's name and phone number.
+Peek reads JD's international tracking: the status, each step in JD's words with its town and country (in English, even when JD writes the country in Chinese) and the delivery time. Times are read on the clock of the place that made the scan and shown in your device's time zone. Peek shows no expected delivery date for JD parcels. It leaves out the recipient's details and the delivery photos JD's tracking can hold, the courier's name and phone number, and the local carrier's number at the end of a departure line.
 
 For a number starting with JDJ and 12 digits, or JDAZ and 11, Peek also opens JD's Chinese tracker on jdl.com when the international one has nothing. It shows those lines in Chinese, without the courier's name, phone number or the name of whoever signed. For other JD numbers, Peek doesn't open the Chinese tracker: if a parcel inside China shows nothing in Peek, look it up on jdl.com. An empty answer from JD doesn't prove the number wrong: Peek keeps checking.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery (every 5 when it has to open JD's Chinese tracker), and every hour or two overnight. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact JD or the shop for you.
+Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery (every 5 when it has to open JD's Chinese tracker). It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact JD or the shop for you.
 
 ## Questions about JD Logistics tracking
 
@@ -97,7 +101,7 @@ On jingdonglogistics.com/Tracking, or on jdl.com for a parcel inside China. Or p
 
 ### Who delivers JD Logistics parcels in the US?
 
-JD doesn't name its local partners. In the US, JD's history shows GOFO Express delivering: after `Handed over to Carrier` come steps such as `Arrived at GOFO Regional Hub`, in JD's own tracking.
+JD doesn't name its local partners. In the US, JD's history shows GOFO Express delivering: after `Handed over to Carrier` or `Handover to local carrier` come steps such as `Arrived at GOFO Regional Hub` and `Arrived at GOFO Delivery Station`, in JD's own tracking.
 
 ### Why is my JD Logistics tracking not updating?
 

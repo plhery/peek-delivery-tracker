@@ -1293,6 +1293,21 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(makeParcel(id: id).awaitingHandover(now: now))
     }
 
+    func testScheduledDeliveryMatchesWebApp() {
+        let id = UUID()
+        var delivered = makeParcel(id: id, events: [event(id, .delivered, "2026-08-08T12:00:00Z")])
+        XCTAssertFalse(delivered.scheduledDelivery)
+        delivered.carrier = .gzyl
+        XCTAssertTrue(delivered.scheduledDelivery)
+        // A carrier it was handed to delivers for real.
+        delivered.carrierData = CarrierData(deliveryCarrier: .dpdDe, deliveryTrackingNumber: "01234567890123")
+        XCTAssertFalse(delivered.scheduledDelivery)
+
+        var moving = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-08T12:00:00Z")])
+        moving.carrier = .gzyl
+        XCTAssertFalse(moving.scheduledDelivery)
+    }
+
     func testFiltersSearchCompactTrackingNumbers() {
         let parcel = makeParcel(trackingNumber: "99.34.123456.12345678")
         let result = ParcelOrganizer.visible(

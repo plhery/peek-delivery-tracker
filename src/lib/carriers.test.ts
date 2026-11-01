@@ -19,6 +19,7 @@ import {
   parseTrackingInput,
   requirementHelpKey,
   requirementSatisfied,
+  scheduledDelivery,
   supportsSwissPostHandoff,
   trackingLinksByNumber,
   tracksAutomatically,
@@ -2161,6 +2162,18 @@ describe('deliveringCarrierId', () => {
     const handed = { ...followed, originalCarrier: 'chronopost', trackingSource: 'dpd-de', deliveryCarrier: 'gls-de' } as const;
     expect(deliveringCarrierId(handed)).toBe('dpd-de');
     expect(parcelTrackingNumbers({ ...handed, deliveryTrackingNumber: '12345678901' })).toEqual(parcelTrackingNumbers(handed));
+  });
+});
+
+describe('scheduledDelivery', () => {
+  const scheduled = { carrier: 'gzyl', trackingNumber: 'YL0000000000YQ' } as const;
+  it('marks a delivered status its carrier writes on a schedule', () => {
+    expect(scheduledDelivery(scheduled, 'delivered')).toBe(true);
+    expect(scheduledDelivery(scheduled, 'in_transit')).toBe(false);
+    expect(scheduledDelivery({ carrier: 'chronopost', trackingNumber: 'XY123456789FR' }, 'delivered')).toBe(false);
+  });
+  it('leaves a delivery by a carrier it was handed to alone', () => {
+    expect(scheduledDelivery({ ...scheduled, deliveryCarrier: 'dpd-de' }, 'delivered')).toBe(false);
   });
 });
 

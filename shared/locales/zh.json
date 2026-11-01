@@ -570,6 +570,7 @@
   "parcel.autoChangedCarrier": "已自动从 {{carrier}} 切换",
   "parcel.deliveryCarrier": "由 {{carrier}} 派送",
   "parcel.awaitingHandover": "寄件人已创建面单，但还没有把包裹交给 {{carrier}}。交寄之后就会开始跟踪。",
+  "parcel.scheduledDelivery": "{{carrier}} 的物流动态按固定时间表更新，不显示签收人。如果没有收到包裹，请联系卖家。",
   "parcel.updated": "更新时间：{{date}}",
   "peek.dailyLimit": "今天的查询次数已用完。登录即可继续。",
   "peek.onThisDevice": "在这台设备上",

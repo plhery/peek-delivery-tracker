@@ -449,6 +449,13 @@ struct ParcelDetailView: View {
                         .font(.caption).foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
+                if parcel.scheduledDelivery {
+                    Text(localizer.text("parcel.scheduledDelivery",
+                                        ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
+                        .font(.caption).foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 if let waits = carrierWaits(parcel) {
                     ParcelFlag(text: localizer.text(waits.recipientAction.map { ParcelAttention($0).localizationKey }
                                                     ?? (waits.stage == .failedAttempt ? "attention.failed_attempt" : "attention.exception")),

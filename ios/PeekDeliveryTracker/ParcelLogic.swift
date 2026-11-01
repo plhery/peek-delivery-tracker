@@ -385,6 +385,16 @@ extension Parcel {
         return now.timeIntervalSince(first) >= 86_400
     }
 
+    /// Carriers whose tracker writes the delivered step on a fixed schedule, with no signature or delivering carrier
+    /// behind it.
+    private static let scheduledDeliveries: Set<CarrierID> = [.gzyl]
+
+    /// Whether the parcel's delivered status is such a scheduled step: the reader is told so, and to ask the seller if
+    /// nothing came. A carrier it was handed to delivers for real.
+    var scheduledDelivery: Bool {
+        currentStage == .delivered && Self.scheduledDeliveries.contains(displayedCarrier) && deliveringCarrier == nil
+    }
+
     private static let expectedDayPattern = try? NSRegularExpression(pattern: "^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])")
 
     var expectedDayKey: String? {

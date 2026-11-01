@@ -537,6 +537,12 @@ private struct SharedParcelCard: View {
                                             ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
                             .font(.caption).foregroundStyle(.secondary)
                     }
+                    // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
+                    if !gift, parcel.scheduledDelivery {
+                        Text(localizer.text("parcel.scheduledDelivery",
+                                            ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
                 }
                 .multilineTextAlignment(arrived ? .center : .leading)
                 .fixedSize(horizontal: false, vertical: true)

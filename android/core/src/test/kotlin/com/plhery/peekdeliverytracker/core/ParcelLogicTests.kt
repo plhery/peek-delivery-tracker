@@ -1213,6 +1213,22 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun scheduledDeliveryMatchesWebApp() {
+        val id = UUID.randomUUID()
+        val delivered = makeParcel(id, events = listOf(event(id, TrackingStage.Delivered, "2026-08-08T12:00:00Z")))
+        assertFalse(delivered.scheduledDelivery)
+        assertTrue(delivered.copy(carrier = CarrierId.Gzyl).scheduledDelivery)
+        // A carrier it was handed to delivers for real.
+        val handed = delivered.copy(
+            carrier = CarrierId.Gzyl,
+            carrierData = CarrierData(deliveryCarrier = CarrierId.DpdDe, deliveryTrackingNumber = "01234567890123"),
+        )
+        assertFalse(handed.scheduledDelivery)
+        val moving = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-08-08T12:00:00Z")))
+        assertFalse(moving.copy(carrier = CarrierId.Gzyl).scheduledDelivery)
+    }
+
+    @Test
     fun filtersSearchCompactTrackingNumbers() {
         val parcel = makeParcel(trackingNumber = "99.34.123456.12345678")
         val result = ParcelOrganizer.visible(

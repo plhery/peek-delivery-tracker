@@ -12,7 +12,7 @@ import { TrackingJournal } from '../components/TrackingJournal';
 import { localizedDeliveryWindow, localizedEventDescription, stageLabel, trackingFailureMessage, useI18n, type MessageKey } from '../i18n';
 import { trackAction, trackScreen } from '../lib/analytics';
 import { carrierBrand } from '../lib/carrierBrand';
-import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber, tracksAutomatically } from '../lib/carriers';
+import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber, scheduledDelivery, tracksAutomatically } from '../lib/carriers';
 import { writeCarrierHandoff } from '../lib/carrierHandoff';
 import { LANDING_PATH } from '../lib/experience';
 import { numberToCheck } from '../lib/messages';
@@ -279,8 +279,10 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     previousEstimateLine(previousEstimate, parcel, wording),
     deliveryNote,
     // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over.
+    // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
     checking ? null : awaitingHandover(parcel.events, now) ? t('parcel.awaitingHandover', { carrier: displayed.name })
-      : parcelIsUnannounced(parcel) || stage === 'registered' ? t('link.notScanned', { carrier: displayed.name }) : null,
+      : parcelIsUnannounced(parcel) || stage === 'registered' ? t('link.notScanned', { carrier: displayed.name })
+        : scheduledDelivery(parcel, stage) ? t('parcel.scheduledDelivery', { carrier: displayed.name }) : null,
   ].filter((note): note is string => !!note);
 
   // The reveal's last beat: the parcel's own link, offered once the card has settled.

@@ -13,6 +13,7 @@ import {
 } from 'universal-parcel-scraper';
 import { catalogLanguage, tagLocale } from './locale';
 import type { MessageKey } from './messages';
+import type { Stage } from '../types';
 import {
   activeTrackingCarrierId,
   displayedCarrierId,
@@ -200,6 +201,17 @@ function namedDelivery(parcel: Parameters<typeof displayedCarrierId>[0] & NamedD
 export function deliveringCarrierId(parcel: Parameters<typeof namedDelivery>[0]): CarrierId | null {
   const active = activeTrackingCarrierId(parcel);
   return active !== displayedCarrierId(parcel) ? active : namedDelivery(parcel)?.carrier ?? null;
+}
+
+/** Carriers whose tracker writes the delivered step on a fixed schedule, with no signature or delivering carrier behind it. */
+const SCHEDULED_DELIVERIES: ReadonlySet<CarrierId> = new Set<CarrierId>(['gzyl']);
+
+/**
+ * Whether the parcel's delivered status is such a scheduled step: the reader is told so, and to ask the seller if
+ * nothing came. A carrier it was handed to delivers for real.
+ */
+export function scheduledDelivery(parcel: Parameters<typeof deliveringCarrierId>[0], stage: Stage | null | undefined): boolean {
+  return stage === 'delivered' && SCHEDULED_DELIVERIES.has(displayedCarrierId(parcel)) && !deliveringCarrierId(parcel);
 }
 
 /**

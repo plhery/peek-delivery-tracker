@@ -453,6 +453,16 @@ fun Parcel.awaitingHandover(now: Instant = Instant.now()): Boolean {
     return now.timeIntervalSince(first) >= 86_400
 }
 
+/** Carriers whose tracker writes the delivered step on a fixed schedule, with no signature or delivering carrier behind it. */
+private val SCHEDULED_DELIVERIES = setOf(CarrierId.Gzyl)
+
+/**
+ * Whether the parcel's delivered status is such a scheduled step: the reader is told so, and to ask the seller if
+ * nothing came. A carrier it was handed to delivers for real.
+ */
+val Parcel.scheduledDelivery: Boolean
+    get() = currentStage == TrackingStage.Delivered && displayedCarrier in SCHEDULED_DELIVERIES && deliveringCarrier == null
+
 private val expectedDayPattern: Pattern =
     Pattern.compile("^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])", unicodeCharacterClass)
 

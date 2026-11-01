@@ -16,6 +16,7 @@ import {
   normalizeTrackingNumber,
   parcelTrackingLinks,
   parcelTrackingNumbers,
+  scheduledDelivery,
   trackingLinksByNumber,
   tracksAutomatically,
   type ParcelTrackingLink,
@@ -142,7 +143,9 @@ export function ParcelDetail({
   const stalled = !parcel.archivedAt && displayedCarrier.id !== 'unknown' && parcelAttention(parcel) === 'stalled';
   const pickupFact = waitingAt ? undefined : parcel.pickupPoint?.trim();
   // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over.
-  const handoverNote = !parcel.archivedAt && awaitingHandover(parcel.events) ? t('parcel.awaitingHandover', { carrier: displayedCarrier.name }) : null;
+  // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
+  const stageNote = !parcel.archivedAt && awaitingHandover(parcel.events) ? t('parcel.awaitingHandover', { carrier: displayedCarrier.name })
+    : scheduledDelivery(parcel, current?.stage) ? t('parcel.scheduledDelivery', { carrier: displayedCarrier.name }) : null;
   const { placed, route } = useParcelRoute(parcel, languageTag);
   const [mapOpen, setMapOpen] = useState(false);
   // Recognition found the carrier, but it needs the postcode before it can track. Or the parcel's own carrier
@@ -651,7 +654,7 @@ export function ParcelDetail({
           </p>
         )}
         <p className="detail__state">{statusLabel}</p>
-        {handoverNote && <p className="detail__handover">{handoverNote}</p>}
+        {stageNote && <p className="detail__handover">{stageNote}</p>}
         {carrierWaits && <p className="parcel-card__notice detail__flag"><Glyph name="warning" />{t(carrierWaits.recipientAction ? `attention.customs_${carrierWaits.recipientAction}`
           : carrierWaits.stage === 'failed_attempt' ? 'attention.failed_attempt' : 'attention.exception')}</p>}
         {(completionDate || estimate) && (

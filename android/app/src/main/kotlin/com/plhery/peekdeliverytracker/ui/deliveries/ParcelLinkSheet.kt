@@ -128,6 +128,7 @@ import com.plhery.peekdeliverytracker.core.giftDetail
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.masked
+import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -1027,6 +1028,13 @@ private fun SharedParcelCard(
                     if (!gift && parcel.awaitingHandover(now())) {
                         Text(
                             localizer.text("parcel.awaitingHandover", mapOf("carrier" to identities.displayName(parcel.displayedCarrier, language))),
+                            color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
+                        )
+                    }
+                    // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
+                    if (!gift && parcel.scheduledDelivery) {
+                        Text(
+                            localizer.text("parcel.scheduledDelivery", mapOf("carrier" to identities.displayName(parcel.displayedCarrier, language))),
                             color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
                         )
                     }

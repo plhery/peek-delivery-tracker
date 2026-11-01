@@ -570,6 +570,7 @@
   "parcel.autoChangedCarrier": "Swapped automatically from {{carrier}}",
   "parcel.deliveryCarrier": "Delivery with {{carrier}}",
   "parcel.awaitingHandover": "The sender has created the label but hasn’t handed the parcel to {{carrier}} yet. Tracking starts when they do.",
+  "parcel.scheduledDelivery": "{{carrier}}’s tracking follows a fixed schedule and shows no signature. If nothing arrived, ask the seller.",
   "parcel.updated": "Updated: {{date}}",
   "peek.dailyLimit": "No lookups are left for today. Sign in to keep going.",
   "peek.onThisDevice": "On this device",

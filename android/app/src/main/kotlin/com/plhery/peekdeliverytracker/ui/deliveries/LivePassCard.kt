@@ -79,6 +79,7 @@ import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.likelyCarrierPrompt
 import com.plhery.peekdeliverytracker.core.nonTrackingShape
 import com.plhery.peekdeliverytracker.core.refusedPostcode
+import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.showsMoreWithPostcode
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
@@ -370,6 +371,14 @@ internal fun LivePassCard(
             if (!parcel.isArchived && parcel.awaitingHandover(now)) {
                 Text(
                     localizer.text("parcel.awaitingHandover", mapOf("carrier" to displayed)),
+                    color = secondary,
+                    style = type.caption.sfLines(),
+                )
+            }
+            // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.
+            if (parcel.scheduledDelivery) {
+                Text(
+                    localizer.text("parcel.scheduledDelivery", mapOf("carrier" to displayed)),
                     color = secondary,
                     style = type.caption.sfLines(),
                 )

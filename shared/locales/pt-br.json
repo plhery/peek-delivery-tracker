@@ -570,6 +570,7 @@
   "parcel.autoChangedCarrier": "Transportadora trocada automaticamente (antes: {{carrier}})",
   "parcel.deliveryCarrier": "Entrega por {{carrier}}",
   "parcel.awaitingHandover": "O remetente criou a etiqueta, mas ainda não entregou a encomenda a {{carrier}}. O rastreamento começa quando ele entregar.",
+  "parcel.scheduledDelivery": "As atualizações de {{carrier}} seguem um cronograma fixo e não mostram assinatura. Se nada chegou, fale com o vendedor.",
   "parcel.updated": "Atualizada: {{date}}",
   "peek.dailyLimit": "Acabaram as consultas de hoje. Entre para continuar.",
   "peek.onThisDevice": "Neste dispositivo",

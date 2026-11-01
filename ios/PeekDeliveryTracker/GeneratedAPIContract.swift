@@ -1293,6 +1293,48 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let widect = CarrierID(rawValue: "widect")
     static let xpressCourierLink = CarrierID(rawValue: "xpress-courier-link")
     static let zajel = CarrierID(rawValue: "zajel")
+    static let ahamove = CarrierID(rawValue: "ahamove")
+    static let ancDelivers = CarrierID(rawValue: "anc-delivers")
+    static let bestfulfill = CarrierID(rawValue: "bestfulfill")
+    static let braspress = CarrierID(rawValue: "braspress")
+    static let c807Xpress = CarrierID(rawValue: "c807-xpress")
+    static let cathedis = CarrierID(rawValue: "cathedis")
+    static let cpsLastmile = CarrierID(rawValue: "cps-lastmile")
+    static let daiichi = CarrierID(rawValue: "daiichi")
+    static let deliveright = CarrierID(rawValue: "deliveright")
+    static let ecourierUk = CarrierID(rawValue: "ecourier-uk")
+    static let gleColombia = CarrierID(rawValue: "gle-colombia")
+    static let greenwayVn = CarrierID(rawValue: "greenway-vn")
+    static let jamef = CarrierID(rawValue: "jamef")
+    static let kerryExpressTw = CarrierID(rawValue: "kerry-express-tw")
+    static let latamGlobalExpress = CarrierID(rawValue: "latam-global-express")
+    static let lexID = CarrierID(rawValue: "lex-id")
+    static let m24Logistics = CarrierID(rawValue: "m24-logistics")
+    static let mensajerosUrbanos = CarrierID(rawValue: "mensajeros-urbanos")
+    static let moova = CarrierID(rawValue: "moova")
+    static let moovin = CarrierID(rawValue: "moovin")
+    static let multientrega = CarrierID(rawValue: "multientrega")
+    static let omLogistics = CarrierID(rawValue: "om-logistics")
+    static let otsChile = CarrierID(rawValue: "ots-chile")
+    static let peruBoxAir = CarrierID(rawValue: "peru-box-air")
+    static let premierDeliveriesUk = CarrierID(rawValue: "premier-deliveries-uk")
+    static let productCareGroup = CarrierID(rawValue: "product-care-group")
+    static let rangel = CarrierID(rawValue: "rangel")
+    static let rodonaves = CarrierID(rawValue: "rodonaves")
+    static let route1Fulfilment = CarrierID(rawValue: "route1-fulfilment")
+    static let seabourneLogistics = CarrierID(rawValue: "seabourne-logistics")
+    static let sgkHomeDelivery = CarrierID(rawValue: "sgk-home-delivery")
+    static let shalomPe = CarrierID(rawValue: "shalom-pe")
+    static let sorthub = CarrierID(rawValue: "sorthub")
+    static let spfly = CarrierID(rawValue: "spfly")
+    static let stopStart = CarrierID(rawValue: "stop-start")
+    static let svuum = CarrierID(rawValue: "svuum")
+    static let taqbinSg = CarrierID(rawValue: "taqbin-sg")
+    static let theHumanExpress = CarrierID(rawValue: "the-human-express")
+    static let uparcel = CarrierID(rawValue: "uparcel")
+    static let valueLogistics = CarrierID(rawValue: "value-logistics")
+    static let welivery = CarrierID(rawValue: "welivery")
+    static let xpectSameDay = CarrierID(rawValue: "xpect-same-day")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2538,6 +2580,48 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .widect,
         .xpressCourierLink,
         .zajel,
+        .ahamove,
+        .ancDelivers,
+        .bestfulfill,
+        .braspress,
+        .c807Xpress,
+        .cathedis,
+        .cpsLastmile,
+        .daiichi,
+        .deliveright,
+        .ecourierUk,
+        .gleColombia,
+        .greenwayVn,
+        .jamef,
+        .kerryExpressTw,
+        .latamGlobalExpress,
+        .lexID,
+        .m24Logistics,
+        .mensajerosUrbanos,
+        .moova,
+        .moovin,
+        .multientrega,
+        .omLogistics,
+        .otsChile,
+        .peruBoxAir,
+        .premierDeliveriesUk,
+        .productCareGroup,
+        .rangel,
+        .rodonaves,
+        .route1Fulfilment,
+        .seabourneLogistics,
+        .sgkHomeDelivery,
+        .shalomPe,
+        .sorthub,
+        .spfly,
+        .stopStart,
+        .svuum,
+        .taqbinSg,
+        .theHumanExpress,
+        .uparcel,
+        .valueLogistics,
+        .welivery,
+        .xpectSameDay,
     ]
 
     init(from decoder: Decoder) throws {

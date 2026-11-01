@@ -1302,6 +1302,48 @@ value class CarrierId(val rawValue: String) {
         val Widect = CarrierId("widect")
         val XpressCourierLink = CarrierId("xpress-courier-link")
         val Zajel = CarrierId("zajel")
+        val Ahamove = CarrierId("ahamove")
+        val AncDelivers = CarrierId("anc-delivers")
+        val Bestfulfill = CarrierId("bestfulfill")
+        val Braspress = CarrierId("braspress")
+        val C807Xpress = CarrierId("c807-xpress")
+        val Cathedis = CarrierId("cathedis")
+        val CpsLastmile = CarrierId("cps-lastmile")
+        val Daiichi = CarrierId("daiichi")
+        val Deliveright = CarrierId("deliveright")
+        val EcourierUk = CarrierId("ecourier-uk")
+        val GleColombia = CarrierId("gle-colombia")
+        val GreenwayVn = CarrierId("greenway-vn")
+        val Jamef = CarrierId("jamef")
+        val KerryExpressTw = CarrierId("kerry-express-tw")
+        val LatamGlobalExpress = CarrierId("latam-global-express")
+        val LexId = CarrierId("lex-id")
+        val M24Logistics = CarrierId("m24-logistics")
+        val MensajerosUrbanos = CarrierId("mensajeros-urbanos")
+        val Moova = CarrierId("moova")
+        val Moovin = CarrierId("moovin")
+        val Multientrega = CarrierId("multientrega")
+        val OmLogistics = CarrierId("om-logistics")
+        val OtsChile = CarrierId("ots-chile")
+        val PeruBoxAir = CarrierId("peru-box-air")
+        val PremierDeliveriesUk = CarrierId("premier-deliveries-uk")
+        val ProductCareGroup = CarrierId("product-care-group")
+        val Rangel = CarrierId("rangel")
+        val Rodonaves = CarrierId("rodonaves")
+        val Route1Fulfilment = CarrierId("route1-fulfilment")
+        val SeabourneLogistics = CarrierId("seabourne-logistics")
+        val SgkHomeDelivery = CarrierId("sgk-home-delivery")
+        val ShalomPe = CarrierId("shalom-pe")
+        val Sorthub = CarrierId("sorthub")
+        val Spfly = CarrierId("spfly")
+        val StopStart = CarrierId("stop-start")
+        val Svuum = CarrierId("svuum")
+        val TaqbinSg = CarrierId("taqbin-sg")
+        val TheHumanExpress = CarrierId("the-human-express")
+        val Uparcel = CarrierId("uparcel")
+        val ValueLogistics = CarrierId("value-logistics")
+        val Welivery = CarrierId("welivery")
+        val XpectSameDay = CarrierId("xpect-same-day")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2547,6 +2589,48 @@ value class CarrierId(val rawValue: String) {
             Widect,
             XpressCourierLink,
             Zajel,
+            Ahamove,
+            AncDelivers,
+            Bestfulfill,
+            Braspress,
+            C807Xpress,
+            Cathedis,
+            CpsLastmile,
+            Daiichi,
+            Deliveright,
+            EcourierUk,
+            GleColombia,
+            GreenwayVn,
+            Jamef,
+            KerryExpressTw,
+            LatamGlobalExpress,
+            LexId,
+            M24Logistics,
+            MensajerosUrbanos,
+            Moova,
+            Moovin,
+            Multientrega,
+            OmLogistics,
+            OtsChile,
+            PeruBoxAir,
+            PremierDeliveriesUk,
+            ProductCareGroup,
+            Rangel,
+            Rodonaves,
+            Route1Fulfilment,
+            SeabourneLogistics,
+            SgkHomeDelivery,
+            ShalomPe,
+            Sorthub,
+            Spfly,
+            StopStart,
+            Svuum,
+            TaqbinSg,
+            TheHumanExpress,
+            Uparcel,
+            ValueLogistics,
+            Welivery,
+            XpectSameDay,
         )
     }
 }

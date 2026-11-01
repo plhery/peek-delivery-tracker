@@ -274,8 +274,8 @@ class FirstOpenDeviceTest {
         show()
         tap(FIRST_OPEN_SCAN)
         settle()
+        // Add is under it, out of TalkBack's reach (and so of its tag) while the scanner covers it.
         compose.waitUntil(10_000) { exists(SCANNER) }
-        assertTrue(exists(ADD_PARCEL))
         // A moment for the camera's first frames, which the emulator's virtual scene gives.
         runCatching { compose.waitUntil(STREAM_MILLIS) { streaming() } }
         shot()

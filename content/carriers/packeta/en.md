@@ -79,7 +79,7 @@ As read on 11 October 2026:
 
 ## Tracking Packeta parcels with Peek
 
-[Peek](/) recognises a `Z` and ten digits as Packeta at once. Ten digits without the `Z` fit several carriers, so Peek asks them, Packeta among them unless the first digit is 0, and names the one that knows the number; you can also pick Packeta with "Change". Links from tracking.packeta.com work, and packeta.com links with `id=`; zasilkovna.cz links only with the `Z` number inside. No postcode needed.
+[Peek](/) recognises a `Z` and ten digits as Packeta at once. Ten digits without the `Z` fit several carriers, so Peek asks them, Packeta among them if the first digit isn't 0 and the digits are typed in one run or spaced 3-4-3, and names the one that knows the number; you can also pick Packeta with "Change". Links from tracking.packeta.com work, and packeta.com links with `id=`; zasilkovna.cz links only with the `Z` number inside. No postcode needed.
 
 Peek reads Packeta in English and shows its wording as written: the overall status, the newest 20 scans, the shop that sent it, the delivery time and the pickup point or Z-BOX address when the parcel heads there (none for home delivery or returns). It drops your name, address, phone and signature.
 

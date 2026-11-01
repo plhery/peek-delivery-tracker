@@ -75,7 +75,7 @@ Adresu e-mail ani czatu polska strona nie podaje.
 
 ## Śledzenie paczki Packeta w Peek
 
-[Peek](/) rozpoznaje `Z` z dziesięcioma cyframi od razu jako numer Packety. Dziesięć cyfr bez `Z` pasuje do kilku przewoźników, więc Peek pyta ich, w tym Packetę (o ile pierwsza cyfra nie jest zerem), i wskazuje tego, który zna numer; Packetę możesz też wybrać przyciskiem „Zmień”. Możesz też wkleić link z tracking.packeta.com albo link z packeta.com z `id=`; link z zasilkovna.cz zadziała tylko z numerem `Z` w środku. Kod pocztowy nie jest potrzebny.
+[Peek](/) rozpoznaje `Z` z dziesięcioma cyframi od razu jako numer Packety. Dziesięć cyfr bez `Z` pasuje do kilku przewoźników, więc Peek pyta ich, w tym Packetę (o ile pierwsza cyfra nie jest zerem, a cyfry są wpisane bez przerw albo ze spacjami w układzie 3-4-3), i wskazuje tego, który zna numer; Packetę możesz też wybrać przyciskiem „Zmień”. Możesz też wkleić link z tracking.packeta.com albo link z packeta.com z `id=`; link z zasilkovna.cz zadziała tylko z numerem `Z` w środku. Kod pocztowy nie jest potrzebny.
 
 Peek odczytuje śledzenie Packety po angielsku i pokazuje zdania tak, jak je pisze Packeta (tylko `Returned to sender` własnymi słowami: „Zwrócona nadawcy”). Widzisz status, 20 najnowszych skanów, sklep, który wysłał paczkę, godzinę doręczenia oraz adres punktu odbioru albo Z-BOX-a, gdy paczka tam jedzie (przy kurierze i zwrocie go nie ma). Twojego imienia, adresu, telefonu ani podpisu Peek nie pokazuje.
 

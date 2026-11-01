@@ -98,7 +98,7 @@ So stand es am 26. Oktober 2026 auf packeta.de:
 
 ## Packeta-Paket mit Peek verfolgen
 
-[Peek](/) erkennt ein `Z` mit zehn Ziffern sofort als Packeta. Zehn Ziffern ohne `Z` nutzen auch andere Paketdienste. Füg sie trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste und fragt bei dieser Form auch Packeta, außer die erste Ziffer ist eine 0. Kennt Packeta die Nummer, siehst du „Packeta hat dieses Paket.“ Sonst wählst du Packeta mit „Ändern“ selbst aus. Am einfachsten setzt du das `Z` davor. Auch Links von tracking.packeta.com und packeta.com-Links mit `id=` kannst du einfügen. Eine Postleitzahl braucht es nicht.
+[Peek](/) erkennt ein `Z` mit zehn Ziffern sofort als Packeta. Zehn Ziffern ohne `Z` nutzen auch andere Paketdienste. Füg sie trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste und fragt bei dieser Form auch Packeta, wenn die erste Ziffer keine 0 ist und du die Ziffern am Stück oder mit Leerzeichen als 3-4-3 schreibst. Kennt Packeta die Nummer, siehst du „Packeta hat dieses Paket.“ Sonst wählst du Packeta mit „Ändern“ selbst aus. Am einfachsten setzt du das `Z` davor. Auch Links von tracking.packeta.com und packeta.com-Links mit `id=` kannst du einfügen. Eine Postleitzahl braucht es nicht.
 
 Peek zeigt den Status, die neuesten 20 Scans im Wortlaut von Packeta, den Shop als Absender, den Zeitpunkt der Zustellung und, wenn das Paket an einen Pick-Up Point geht, dessen Adresse. Wartet es dort, steht es auf „Abholbereit“, auch am letzten Tag. Nennt ein Scan ein Depot oder eine Abholstelle, zeigt Peek sie als Ort. Deinen Namen, deine Adresse und die Unterschrift lässt Peek weg. Einen voraussichtlichen Liefertag gibt Packeta nicht heraus.
 

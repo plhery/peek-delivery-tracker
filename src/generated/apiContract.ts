@@ -1292,14 +1292,14 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingUrlTemplate": "https://www.relaiscolis.com/colis/suivre?tracking_number={trackingNumber}",
+    "trackingUrlTemplate": "https://relaiscolis.com/colis/suivre?tracking_number={trackingNumber}",
     "aliases": [
       "Relais Colis (Groupe Ducros)"
     ],
     "countries": [
       "FR"
     ],
-    "trackingSearchUrl": "https://www.relaiscolis.com/colis/suivre"
+    "trackingSearchUrl": "https://relaiscolis.com/colis/suivre"
   },
   "la-poste": {
     "displayName": "La Poste / Colissimo",

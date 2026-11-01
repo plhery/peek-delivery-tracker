@@ -5736,6 +5736,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^(?:(?:20[4678]|590|595)\\d{11}|(?:21|51)\\d{12})$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^SH(?!O[CPR])[A-Z]{2}\\d{10}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://novaposhta.ua/en/tracking/",
@@ -15650,7 +15654,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Minsk",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "europochta",
+      "recognitionRank": 786
     },
     "trackingUrlTemplate": "https://evropochta.by/?number={trackingNumber}",
     "linkRules": [
@@ -20073,7 +20078,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "roadie",
+      "recognitionRank": 28,
+      "recognitionPattern": "^1R(?:[0-9A-Z]{26}|[0-9A-F]{14})$"
     },
     "trackingUrlTemplate": "https://track.roadie.com/id/{trackingNumber}",
     "linkRules": [

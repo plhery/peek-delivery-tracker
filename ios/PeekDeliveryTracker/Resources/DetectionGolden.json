@@ -95695,6 +95695,17 @@
     "candidates": []
   },
   {
+    "input": "SHUA5994810530",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "nova-poshta"
+    ],
+    "asked": [
+      "nova-poshta"
+    ]
+  },
+  {
     "input": "SKAMZUS0042185311",
     "carrier": "skypostal",
     "confidence": "high",

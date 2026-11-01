@@ -70,6 +70,14 @@ android {
         }
     }
 
+    sourceSets {
+        // The stores in memory, the demo's parcels and the root host the JVM tests draw on, which the device tests
+        // draw the same screens with (src/sharedTest).
+        for (tests in listOf("test", "androidTest")) {
+            named(tests) { kotlin.directories += "src/sharedTest/kotlin" }
+        }
+    }
+
     testOptions {
         // Robolectric reads the app's manifest, resources and assets.
         unitTests.isIncludeAndroidResources = true

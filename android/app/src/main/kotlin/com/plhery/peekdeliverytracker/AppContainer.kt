@@ -29,6 +29,7 @@ import com.plhery.peekdeliverytracker.core.HttpTransport
 import com.plhery.peekdeliverytracker.core.LiveActivityRevocations
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeVerification
+import com.plhery.peekdeliverytracker.core.ParcelLinkReader
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.PostcodeMemory
@@ -101,6 +102,8 @@ class AppContainer(
     http: OkHttpClient = PeekHttp.client(MemoryCookieJar()),
     val scope: CoroutineScope = MainScope(),
     private val debug: Boolean = BuildConfig.DEBUG,
+    /** What a parcel's link reads: the API's, unless a test gives its own. */
+    linkReader: ParcelLinkReader? = null,
 ) {
     /** `UserDefaults.standard`. */
     val defaults: UserDefaults = PreferencesDefaults.standard(context)
@@ -229,8 +232,9 @@ class AppContainer(
         )
     }
 
-    /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for. */
-    val links: ParcelLinkStore = (if (debug) debugLinkPreview() else null)
+    /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for; a test's reads before both. */
+    val links: ParcelLinkStore = linkReader?.let { ParcelLinkStore(defaults, read = it) }
+        ?: (if (debug) debugLinkPreview() else null)
         ?: ParcelLinkStore(defaults, configuration, api = { id, key -> DeliveryApiClient.publicParcel(id, key, configuration, transport) })
 
     /** The link sheet's presentation (ParcelLinkSheet's `@State`), which outlives the window made again. */

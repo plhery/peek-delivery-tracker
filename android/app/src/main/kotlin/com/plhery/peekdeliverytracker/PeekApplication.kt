@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker
 
 import android.app.Application
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.SharedResources
@@ -20,6 +21,10 @@ class PeekApplication : Application() {
     val container: StateFlow<AppContainer?> = containerState.asStateFlow()
 
     private var making = false
+
+    /** How the stores are made: [AppContainer.make], or a test's own, set before the first window asks for them. */
+    @VisibleForTesting
+    internal var makeStores: suspend (PeekApplication) -> AppContainer = { AppContainer.make(it) }
 
     /** A parcel's link that came before the stores were made, which opens once they are. */
     private var waitingLink: ParcelLinkRoute? = null
@@ -44,7 +49,7 @@ class PeekApplication : Application() {
         if (making) return
         making = true
         MainScope().launch {
-            val container = AppContainer.make(this@PeekApplication)
+            val container = makeStores(this@PeekApplication)
             container.start(ProcessLifecycleOwner.get().lifecycle)
             waitingLink?.let(container.links::open)
             waitingLink = null

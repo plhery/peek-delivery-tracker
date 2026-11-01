@@ -7,6 +7,7 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextReplacement
@@ -133,6 +134,24 @@ class SharedDraftTest {
         comeBack()
         assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
         assertEquals("", fieldText(ADD_NAME))
+        assertEquals(1, received())
+    }
+
+    @Test
+    fun aDraftSavedWhileAnotherTabIsUpWaitsForTheDeliveries() {
+        show()
+        compose.onNodeWithContentDescription("Passport").performClick()
+        settle()
+        share("1Z999AA10123456784")
+        // The list's `.onAppear`, not the window coming back: the other tab keeps it until the deliveries show.
+        comeBack()
+        assertFalse(exists(ADD_PARCEL))
+        assertTrue(defaults.hasObject(forKey = ShareInbox.key))
+        assertEquals(0, received())
+
+        compose.onNodeWithContentDescription("Deliveries").performClick()
+        settle()
+        assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
         assertEquals(1, received())
     }
 

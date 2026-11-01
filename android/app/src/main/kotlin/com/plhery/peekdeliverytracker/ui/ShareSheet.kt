@@ -2,6 +2,8 @@ package com.plhery.peekdeliverytracker.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,6 +57,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.pressEffect
 import com.plhery.peekdeliverytracker.ui.theme.SystemColors
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.math.ceil
@@ -195,34 +198,40 @@ private fun ShareCardView(card: ShareCard, copy: ExtensionLocalizer, onSave: () 
 
 /**
  * Save (`UIButton.Configuration.filled()`): the tray and its title on Peek's yellow, 52 tall across the column whatever
- * the text size, its large corners; off, the grey UIKit gives a filled button turned off.
+ * the text size, its large corners; off, the grey UIKit gives a filled button turned off. Pressed, the yellow fades,
+ * and the tray and title fade over it on their own, so that they take on the yellow beneath rather than the card's.
  */
 @Composable
 private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
     val colors = PeekTheme.colors
     val shape = ContinuousRoundedShape(SAVE_RADIUS)
     val content = if (enabled) INK else colors.tertiaryLabel
-    Row(
+    val presses = remember { MutableInteractionSource() }
+    val pressed by presses.collectIsPressedAsState()
+    Box(
         Modifier
             .fillMaxWidth()
             .height(SAVE_HEIGHT)
             .testTag(SHARE_SAVE)
-            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
-            .background(if (enabled) YELLOW else DISABLED_FILL, shape)
-            .padding(horizontal = SAVE_PADDING),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically,
+            .clickable(interactionSource = presses, indication = null, enabled = enabled, role = Role.Button, onClick = onClick),
     ) {
-        val font = PeekTheme.type.body.sfLines()
-        val lines = remember { TitleLines() }
-        PeekSymbol("tray.and.arrow.down", font = font, tint = content)
-        Spacer(Modifier.width(IMAGE_PADDING))
-        // Taller than the button at the largest sizes, it stands out of it above and below, as UIKit lays it out; as
-        // wide as its widest line, so that the symbol stays beside it.
-        Text(
-            title, Modifier.weight(1f, fill = false).wrapContentHeight(unbounded = true).widestLine(lines),
-            style = font, color = content, textAlign = TextAlign.Center, onTextLayout = { lines.result = it },
-        )
+        Box(Modifier.matchParentSize().pressEffect(PlainPress, pressed).background(if (enabled) YELLOW else DISABLED_FILL, shape))
+        Row(
+            Modifier.fillMaxSize().pressEffect(PlainPress, pressed).padding(horizontal = SAVE_PADDING),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            val font = PeekTheme.type.body.sfLines()
+            val lines = remember { TitleLines() }
+            PeekSymbol("tray.and.arrow.down", font = font, tint = content)
+            Spacer(Modifier.width(IMAGE_PADDING))
+            // Taller than the button at the largest sizes, it stands out of it above and below, as UIKit lays it out;
+            // as wide as its widest line, so that the symbol stays beside it.
+            Text(
+                title, Modifier.weight(1f, fill = false).wrapContentHeight(unbounded = true).widestLine(lines),
+                style = font, color = content, textAlign = TextAlign.Center, onTextLayout = { lines.result = it },
+            )
+        }
     }
 }
 

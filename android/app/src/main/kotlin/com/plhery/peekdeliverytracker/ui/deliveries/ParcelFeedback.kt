@@ -901,17 +901,35 @@ private fun Modifier.overhang(start: Dp = 0.dp, bottom: Dp = 0.dp, vertical: Dp 
  * the carrier's site: back while something else is said or asked over the page (`busy`), the question waits.
  */
 @Composable
-internal fun ParcelFeedbackOverlays(state: DeliveriesState, work: ParcelFeedbackWork, backdrop: MaterialBackdrop?, modifier: Modifier) {
-    FeedbackNews(state, work)
+internal fun ParcelFeedbackOverlays(state: DeliveriesState, work: ParcelFeedbackWork, backdrop: MaterialBackdrop?, modifier: Modifier) =
+    ParcelFeedbackOverlays(
+        work, backdrop, modifier, busy = state.modal, announce = state::announce, cover = { state.feedbackSheetShown = it },
+    )
+
+/**
+ * The same over any page: `busy` while something else is said or asked over it, TalkBack's news through `announce`,
+ * and `cover` told while one of the question's sheets covers the page, until it has gone down.
+ */
+@Composable
+internal fun ParcelFeedbackOverlays(
+    work: ParcelFeedbackWork,
+    backdrop: MaterialBackdrop?,
+    modifier: Modifier,
+    busy: Boolean,
+    announce: (String) -> Unit,
+    cover: (Boolean) -> Unit,
+) {
+    FeedbackNews(work, announce)
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     val activity = LocalActivity.current
-    val busy by rememberUpdatedState(state.modal)
+    val busyNow by rememberUpdatedState(busy)
+    val covers by rememberUpdatedState(cover)
     DisposableEffect(lifecycle, work) {
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
                 // A window made again stays on the screen, as a rotated iPhone's scene does.
                 Lifecycle.Event.ON_STOP -> if (activity?.isChangingConfigurations != true) work.left()
-                Lifecycle.Event.ON_RESUME -> work.returned(busy)
+                Lifecycle.Event.ON_RESUME -> work.returned(busyNow)
                 else -> Unit
             }
         }
@@ -922,9 +940,9 @@ internal fun ParcelFeedbackOverlays(state: DeliveriesState, work: ParcelFeedback
     // A sheet up in this window covers the page until it has gone down, as the share sheet does; the window made again
     // once the question has closed it starts uncovered, as the iPhone's page reads `covered` from the model alone.
     val open = work.open
-    SideEffect { if (open) state.feedbackSheetShown = true }
-    DisposableEffect(state) { onDispose { state.feedbackSheetShown = false } }
-    val gone = { if (!work.open) state.feedbackSheetShown = false }
+    SideEffect { if (open) covers(true) }
+    DisposableEffect(Unit) { onDispose { covers(false) } }
+    val gone = { if (!work.open) covers(false) }
     val localizer = LocalLocalizer.current
     val writing = { work.large = true }
     Sheet(
@@ -982,19 +1000,20 @@ internal fun PageReviewing(state: DeliveriesState, work: ParcelFeedbackWork, par
  * made again.
  */
 @Composable
-private fun FeedbackNews(state: DeliveriesState, work: ParcelFeedbackWork) {
+private fun FeedbackNews(work: ParcelFeedbackWork, announce: (String) -> Unit) {
     val localizer by rememberUpdatedState(LocalLocalizer.current)
+    val say by rememberUpdatedState(announce)
     LaunchedEffect(work) {
-        snapshotFlow { work.word }.drop(1).collect { word -> if (word != null) state.announce(localizer.text(word)) }
+        snapshotFlow { work.word }.drop(1).collect { word -> if (word != null) say(localizer.text(word)) }
     }
     LaunchedEffect(work) {
         snapshotFlow { work.moment }.drop(1).collect { moment ->
             // An answer given on the way back is said by its own word.
-            if (work.word == null) moment.thanksKey?.let { state.announce(localizer.text(it)) }
+            if (work.word == null) moment.thanksKey?.let { say(localizer.text(it)) }
         }
     }
     LaunchedEffect(work) {
-        snapshotFlow { work.failures }.drop(1).collect { state.announce(localizer.text("feedback.failed")) }
+        snapshotFlow { work.failures }.drop(1).collect { say(localizer.text("feedback.failed")) }
     }
 }
 

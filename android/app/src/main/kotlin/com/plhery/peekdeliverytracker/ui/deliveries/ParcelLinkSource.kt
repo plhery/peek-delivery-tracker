@@ -2,10 +2,14 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
@@ -56,6 +60,12 @@ interface ParcelLinkSource {
 
     /** `DeliveryAnalytics.shared.action(_:)`. */
     fun action(name: String)
+
+    /** `ParcelFeedbackModel()`: the question under the parcel's history, as a page's. */
+    fun feedbackModel(): ParcelFeedbackModel
+
+    /** `parcels.feedbackClient(forLink:)`: where an answer about the parcel behind link `linkId` goes. */
+    fun feedbackClient(linkId: String): ParcelFeedbackClient
 }
 
 /** The sheet's stores: the app's container. */
@@ -81,4 +91,17 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
     override fun errorMessage(error: Throwable) = container.localizer.errorMessage(error)
 
     override fun action(name: String) = container.analytics.action(name)
+
+    override fun feedbackModel() = ParcelFeedbackModel(
+        scope = container.scope, memory = ParcelFeedbackMemory(container.defaults),
+        report = { name, outcome -> container.analytics.action(name, outcome) }, review = container.reviewPrompt,
+        // What the answers would say they come from, as a page's: never sent ([feedbackClient]).
+        app = ParcelFeedbackRequestApp.Ios,
+    )
+
+    /**
+     * Nowhere yet, and taken as sent, as a page's answers are ([ContainerDeliveries.feedbackClient]): the service takes
+     * `ios` and `web` only, and Android's answers will say `android` once it takes that.
+     */
+    override fun feedbackClient(linkId: String) = ParcelFeedbackClient { }
 }

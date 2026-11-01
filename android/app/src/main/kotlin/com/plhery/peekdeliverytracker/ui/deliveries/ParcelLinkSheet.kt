@@ -11,6 +11,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -58,8 +59,10 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
@@ -67,13 +70,13 @@ import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
@@ -84,15 +87,20 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.ImportChargesLine
+import com.plhery.peekdeliverytracker.core.Parcel
 import com.plhery.peekdeliverytracker.core.ParcelAttention
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackSubject
 import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
 import com.plhery.peekdeliverytracker.core.ParcelLinkFailure
 import com.plhery.peekdeliverytracker.core.ParcelLinkGift
+import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.ParcelTrackingLink
 import com.plhery.peekdeliverytracker.core.ParcelTrackingNumber
@@ -100,14 +108,13 @@ import com.plhery.peekdeliverytracker.core.PickupPoint
 import com.plhery.peekdeliverytracker.core.PipGeometry
 import com.plhery.peekdeliverytracker.core.PipLabel
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
+import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
 import com.plhery.peekdeliverytracker.core.api.ParcelNumberHint
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
-import com.plhery.peekdeliverytracker.core.Parcel
-import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.attention
 import com.plhery.peekdeliverytracker.core.awaitingHandover
 import com.plhery.peekdeliverytracker.core.collapsingGiftRows
@@ -146,6 +153,7 @@ import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
+import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
@@ -196,11 +204,25 @@ class ParcelLinkSheetState {
         reading = source.scope.launch { source.links.load() }
     }
 
-    /** The sheet has closed: its read stops. */
+    /** The sheet has closed: its read stops, and its question goes with it. */
     internal fun closed() {
         reading?.cancel()
         reading = null
+        feedback?.close()
+        feedback = null
     }
+
+    /**
+     * The question under the parcel's history (`@StateObject feedback`): made as the sheet first comes up, and kept
+     * through each link it opens and the window made again until it closes. An answer on its way still gets there.
+     */
+    private var feedback: ParcelFeedbackWork? = null
+
+    internal fun feedback(source: ParcelLinkSource): ParcelFeedbackWork =
+        feedback ?: ParcelFeedbackWork(source.feedbackModel(), source.scope) {}.also {
+            it.start()
+            feedback = it
+        }
 
     /** Whether `presentation`'s handed-over link is still to be kept or followed, once. */
     internal fun handOver(presentation: UUID): Boolean {
@@ -358,13 +380,34 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
         phase == ParcelLinkStore.Phase.Stopped -> ""
         else -> localizer.text("link.shared")
     }
+    // The question under the history, kept by the sheet on its way out too.
+    val held = remember { arrayOfNulls<ParcelFeedbackWork>(1) }
+    val feedback = (if (route != null) state.feedback(source) else null) ?: held[0]
+    held[0] = feedback
+    val language = LocalLanguage.current
+    val feedbackPage = remember(shown, route, language) { feedbackPage(shown?.response, route, !source.tracksWithoutAccount, language) }
+    LaunchedEffect(feedback, feedbackPage) { feedback?.show(feedbackPage, route?.let { source.feedbackClient(it.id) }) }
+    var covered by remember { mutableStateOf(false) }
+    var announcement by remember { mutableStateOf<Announcement?>(null) }
+
     val scroll = rememberScrollState()
-    LinkSheetPage(title, closeEnabled = !state.adding, close = { links.close() }, scrolled = { scroll.value.toFloat() }) { top, bottom ->
+    LinkSheetPage(
+        title, closeEnabled = !state.adding, close = { links.close() }, scrolled = { scroll.value.toFloat() }, covered = covered,
+        overlays = { backdrop, bottom ->
+            Announcements(announcement, LINK_ANNOUNCEMENT) { if (announcement == it) announcement = it.copy(text = "") }
+            if (feedback != null) {
+                ParcelFeedbackOverlays(
+                    feedback, backdrop, Modifier.align(Alignment.BottomCenter).padding(bottom = bottom), busy = state.adding,
+                    announce = { announcement = Announcement(it, (announcement?.count ?: 0) + 1) }, cover = { covered = it },
+                )
+            }
+        },
+    ) { top, bottom ->
         key(presentation) {
             when (val current = phase) {
                 ParcelLinkStore.Phase.Loading -> Centered(top, bottom) { ActivityIndicator(Modifier.testTag(LINK_LOADING)) }
                 is ParcelLinkStore.Phase.Shown -> LinkShared(
-                    source, state, current.response, top, bottom, scroll,
+                    source, state, current.response, top, bottom, scroll, feedback,
                     keeping = KeepingContext(signedIn, followsHere, canSignIn),
                 )
                 ParcelLinkStore.Phase.Unavailable -> Centered(top, bottom) { Nothing("link.gone.title", "link.gone.body") { links.close() } }
@@ -375,13 +418,29 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
     }
 }
 
+/**
+ * `feedbackPage`: what the question under the history is asked about. A gift as its recipient sees it and a link that
+ * shows no parcel ask nothing; what a build without a server shows is made up ([madeUp]).
+ */
+private fun feedbackPage(response: PublicParcelResponse?, link: ParcelLinkRoute?, madeUp: Boolean, language: AppLanguage): ParcelFeedbackModel.Page? {
+    if (response == null || link == null || response.gift == ParcelLinkGift.Wrapped || response.gift == ParcelLinkGift.Opened) return null
+    val parcel = Parcel(shared = response.parcel)
+    val catalog = CarrierCatalog.shared
+    return ParcelFeedbackModel.Page(
+        parcel, ParcelFeedbackSubject.Link(link.id), catalog.tracksAutomatically(parcel.activeTrackingCarrier) || parcel.hasCarrierUpdate,
+        madeUp = madeUp, carrier = catalog.info(parcel.displayedCarrier, language).displayName, language = language,
+    )
+}
+
 /** Who is looking, for the keeping block: signed in, may follow on this phone, may sign in. */
 private class KeepingContext(val signedIn: Boolean, val followsHere: Boolean, val canSignIn: Boolean)
 
 /**
  * The sheet's `NavigationStack`: the page's ground, what it holds clear of the bar ([content] gets the bar's height
  * and the navigation bar's, to keep clear of), the scroll edge once [scrolled], and the inline bar over it, its
- * [title] in the middle as a heading and Close on glass at its trailing end, semibold as the confirmation.
+ * [title] in the middle as a heading and Close on glass at its trailing end, semibold as the confirmation. Then what is
+ * laid over all of it ([overlays], `parcelFeedback(_:busy:)`), given the page's glass and the room at its foot. While a
+ * sheet of the question's is up over it ([covered]), TalkBack reaches nothing of the page.
  */
 @Composable
 private fun LinkSheetPage(
@@ -389,6 +448,8 @@ private fun LinkSheetPage(
     closeEnabled: Boolean,
     close: () -> Unit,
     scrolled: () -> Float,
+    covered: Boolean,
+    overlays: @Composable BoxScope.(backdrop: MaterialBackdrop, bottom: Dp) -> Unit,
     content: @Composable (top: Dp, bottom: Dp) -> Unit,
 ) {
     val backdrop = rememberMaterialBackdrop()
@@ -396,17 +457,20 @@ private fun LinkSheetPage(
     val barHeight = insets.barTop + BAR_ROW
     val bottom = sheetBottomInset()
     Box(Modifier.fillMaxSize().testTag(LINK_SHEET)) {
-        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
-            content(barHeight, bottom)
+        Box(Modifier.fillMaxSize().then(if (covered) Modifier.clearAndSetSemantics {} else Modifier)) {
+            Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
+                content(barHeight, bottom)
+            }
+            FormScrollEdge(barHeight, scrolled)
+            ProvideDynamicTypeSize(DynamicTypeSize.Large) {
+                FormBar(
+                    title, null, Modifier.fillMaxWidth().padding(top = insets.barTop).height(BAR_ROW),
+                    confirmation = { BarButton(localized("common.close"), close, backdrop, FontWeight.SemiBold, closeEnabled, LINK_CLOSE) },
+                    cancellation = null,
+                )
+            }
         }
-        FormScrollEdge(barHeight, scrolled)
-        ProvideDynamicTypeSize(DynamicTypeSize.Large) {
-            FormBar(
-                title, null, Modifier.fillMaxWidth().padding(top = insets.barTop).height(BAR_ROW),
-                confirmation = { BarButton(localized("common.close"), close, backdrop, FontWeight.SemiBold, closeEnabled, LINK_CLOSE) },
-                cancellation = null,
-            )
-        }
+        overlays(backdrop, bottom)
     }
 }
 
@@ -418,9 +482,10 @@ private fun Centered(top: Dp, bottom: Dp, content: @Composable () -> Unit) {
 
 /**
  * `shared(_:)`: the parcel, its card, a later read's failure, a gift's surprise or note, the keeping block, the quiet
- * parcel's note (B-S76), then 6 in its number, its import charges and its journal. A gift on its way tells its hidden
- * beginning once (`collapsingGiftRows`) and hides its number, in lilac. It scrolls at most 560 wide in the middle, and
- * a pull from its top reads the link again (B-G12).
+ * parcel's note (B-S76), then 6 in its number, its import charges, its journal and the question under it ([feedback]),
+ * which hears of a visit to the carrier's page. A gift on its way tells its hidden beginning once (`collapsingGiftRows`)
+ * and hides its number, in lilac. It scrolls at most 560 wide in the middle, and a pull from its top reads the link
+ * again (B-G12).
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -431,6 +496,7 @@ private fun LinkShared(
     top: Dp,
     bottom: Dp,
     scroll: ScrollState,
+    feedback: ParcelFeedbackWork?,
     keeping: KeepingContext,
 ) {
     val links = source.links
@@ -451,6 +517,8 @@ private fun LinkShared(
     val identity = remember(identities, parcel, language) { identities.of(parcel.displayedCarrier, language) }
     val colors = PeekTheme.colors
     val tint = if (wrapped || opened) colors.resolve(ExperimentalPalette.lilac) else colors.resolve(identity.ink)
+    // Where the scroll shows what it holds, which the question comes in as it is seen in.
+    val viewport = remember { arrayOfNulls<LayoutCoordinates>(1) }
     val pull = rememberPullToRefreshState()
     PullToRefreshBox(
         isRefreshing = state.refreshing,
@@ -472,6 +540,7 @@ private fun LinkShared(
         Column(
             Modifier
                 .fillMaxSize()
+                .onPlaced { viewport[0] = it }
                 .verticalScroll(scroll)
                 .testTag(LINK_SCROLL)
                 .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 32.dp + bottom),
@@ -499,12 +568,13 @@ private fun LinkShared(
                 }
                 Column(Modifier.padding(start = 6.dp, top = 6.dp, end = 6.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                     // The number and the carrier's own page would tell where a gift comes from.
-                    if (!wrapped) SharedParcelNumber(source, parcel, response.parcel.numberHint, tint)
+                    if (!wrapped) SharedParcelNumber(source, parcel, response.parcel.numberHint, tint) { feedback?.visited(it.name) }
                     // A gift's recipient usually pays them at the door.
                     localizer.importCharges(parcel)?.let { SharedImportCharges(it, asksForNumber = parcel.trackingNumber.isEmpty()) }
                     if (identities.catalog.tracksAutomatically(parcel.activeTrackingCarrier) || parcel.hasCarrierUpdate) {
                         ParcelJournal(parcel, tint)
                     }
+                    if (feedback != null) ParcelFeedbackQuestion(feedback, { viewport[0] })
                 }
             }
         }
@@ -1273,15 +1343,25 @@ private fun SharedImportCharges(charges: ImportChargesLine, asksForNumber: Boole
  * SharedParcelNumber (B-S47, B-G04, B-H03): the number as the link shows it. Hidden, "detail.trackingNumber" over the
  * masked number, read as one, and the carrier's search page, which takes a number typed in. Whole, each number, which
  * a long press selects, with its copy and its carriers' pages ([ShipmentNumbers]); a copy puts the number on the
- * clipboard as its carrier's site takes it with the success tap, and says so on its row for two seconds.
+ * clipboard as its carrier's site takes it with the success tap, and says so on its row for two seconds. A carrier's
+ * page opened is counted and told ([onVisit]).
  */
 @Composable
-private fun SharedParcelNumber(source: ParcelLinkSource, parcel: Parcel, hint: ParcelNumberHint?, tint: Color) {
+private fun SharedParcelNumber(
+    source: ParcelLinkSource,
+    parcel: Parcel,
+    hint: ParcelNumberHint?,
+    tint: Color,
+    onVisit: (ParcelTrackingLink) -> Unit,
+) {
     val language = LocalLanguage.current
     val identities = LocalCarrierIdentities.current ?: return
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val onLink = { _: ParcelTrackingLink -> source.action("parcel-carrier-link") }
+    val onLink = { link: ParcelTrackingLink ->
+        source.action("parcel-carrier-link")
+        onVisit(link)
+    }
     if (hint != null) {
         // A hidden number cannot be copied; the carrier's page takes one typed in.
         Column(Modifier.fillMaxWidth()) {
@@ -1347,3 +1427,4 @@ const val LINK_FAILED = "parcelLink.failed"
 const val LINK_TRY_AGAIN = "parcelLink.tryAgain"
 const val LINK_SURPRISE = "parcelLink.surprise"
 const val LINK_GIFT_NOTE = "parcelLink.giftNote"
+const val LINK_ANNOUNCEMENT = "parcelLink.announcement"

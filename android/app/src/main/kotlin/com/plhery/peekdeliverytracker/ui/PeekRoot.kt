@@ -156,7 +156,8 @@ internal fun PeekRoot(
                         }
                     }
                     if (links != null) CompositionLocalProvider(LocalTabOverlay provides front) { ParcelLinkSheetHost(links) }
-                    CompositionLocalProvider(LocalWindowOverlay provides front) { front.Content() }
+                    // What the link's sheet presents in turn comes over it there.
+                    CompositionLocalProvider(LocalWindowOverlay provides front, LocalTabOverlay provides front) { front.Content() }
                     // Each overlay's layers, the link's sheet's and the tabs', over all of it.
                     window.Content()
                 }

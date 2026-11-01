@@ -1,17 +1,26 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DateParser
+import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
+import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.GiftWords
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelLink
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkKind
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
@@ -19,10 +28,13 @@ import com.plhery.peekdeliverytracker.core.api.ParcelNumberHint
 import com.plhery.peekdeliverytracker.core.api.PublicPackage
 import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
-import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.time.Duration
+import java.time.Instant
+import java.time.ZoneOffset
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -96,6 +108,31 @@ class FakeParcelLinks(
     override fun action(name: String) {
         actions += name
     }
+
+    /** The outcome of each answer counted, by its place in [actions]; null for any other action. */
+    val outcomes = mutableMapOf<Int, DeliveryAnalytics.Outcome>()
+
+    /** What the questions remember, empty for each new source. */
+    private val feedbackDefaults = PreferencesDefaults(
+        ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("link-feedback-${UUID.randomUUID()}", Context.MODE_PRIVATE),
+    )
+
+    /** The questions' clock, which a test moves on: the time away at the carrier's site. */
+    var now: Instant = CAPTURED
+
+    /** Each answer sent, with its link's id, in its order. */
+    val feedbackRequests = mutableListOf<Pair<String, ParcelFeedbackRequest>>()
+
+    override fun feedbackModel(): ParcelFeedbackModel = ParcelFeedbackModel(
+        scope = scope, memory = ParcelFeedbackMemory(feedbackDefaults) { now }, now = { now },
+        report = { name, outcome ->
+            outcomes[actions.size] = outcome
+            actions += name
+        },
+        review = ReviewPrompt(feedbackDefaults, version = "1.0", timeZone = { ZoneOffset.UTC }), app = ParcelFeedbackRequestApp.Ios,
+    )
+
+    override fun feedbackClient(linkId: String): ParcelFeedbackClient = ParcelFeedbackClient { feedbackRequests += linkId to it }
 
     companion object {
         val KEPT: UUID = UUID.fromString("00000000-0000-4000-8000-000000000a01")

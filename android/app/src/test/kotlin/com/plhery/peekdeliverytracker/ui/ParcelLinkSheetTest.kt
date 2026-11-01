@@ -19,6 +19,8 @@ import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.isPopup
@@ -32,11 +34,13 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
+import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DateParser
+import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.Parcel
 import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
@@ -45,6 +49,9 @@ import com.plhery.peekdeliverytracker.core.ParcelLinkStopped
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.ui.deliveries.ACTION_ERROR
@@ -52,11 +59,22 @@ import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.ErrorAlert
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_ADD_NOTE
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_BACK_YES
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_BUBBLE
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_NOT_QUITE
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_QUESTION
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_REASON
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_ROW
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_WORD
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_WORDS_SHEET
+import com.plhery.peekdeliverytracker.ui.deliveries.FEEDBACK_YES
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.GlassOverlayLayer
 import com.plhery.peekdeliverytracker.ui.deliveries.INLINE_TOAST
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_ADD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_ALREADY
+import com.plhery.peekdeliverytracker.ui.deliveries.LINK_ANNOUNCEMENT
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_CLOSE
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_FAILED
@@ -108,7 +126,8 @@ import org.robolectric.annotation.GraphicsMode
  * the owner key's hand-over, once a presentation; Close and the back held while keeping; a second link in place of the
  * first; refresh, its ticker and its failure; the gifts; the link resumed after sign-in; the list taking what the sheet
  * closed on; the sheet over another sheet and over a cover; TalkBack; the number, hidden or whole, its copy and its
- * selection, the import charges and the quiet note (B-S46, B-S47, B-S76, B-H03, B-G04). On synthetic links.
+ * selection, the import charges and the quiet note (B-S46, B-S47, B-S76, B-H03, B-G04); the question under the history,
+ * on the sheet and on the way back from the carrier's page, and its note's sheet over the link's. On synthetic links.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -632,6 +651,103 @@ class ParcelLinkSheetTest {
         open(unknown)
         check(exists(LINK_CARD))
         assertFalse(shows(quiet))
+    }
+
+    // The question under the history
+
+    /** The outcomes counted under `action`. */
+    private fun counted(action: String): List<DeliveryAnalytics.Outcome?> =
+        links.actions.indices.filter { links.actions[it] == action }.map { links.outcomes[it] }
+
+    /** What TalkBack is told in the sheet now. */
+    private fun announcement(): String? = compose.onAllNodesWithTag(LINK_ANNOUNCEMENT, useUnmergedTree = true).fetchSemanticsNodes()
+        .singleOrNull()?.config?.getOrNull(SemanticsProperties.ContentDescription)?.singleOrNull()
+
+    /** A tap on the part tagged `tag`, scrolled into view. */
+    private fun tap(tag: String) {
+        compose.onNodeWithTag(tag).performScrollTo().performClick()
+        compose.waitForIdle()
+    }
+
+    /** Whether the part tagged `tag`, or one in it, says `text`. */
+    private fun says(tag: String, text: String): Boolean =
+        compose.onAllNodes(hasText(text, substring = true) and (hasTestTag(tag) or hasAnyAncestor(hasTestTag(tag)))).fetchSemanticsNodes().isNotEmpty()
+
+    @Test
+    fun aParcelsLinkAsksUnderItsHistoryAndYesIsThankedSentForTheLinkAndCounted() {
+        show(FakeParcelLinks())
+        open()
+        compose.onNodeWithTag(FEEDBACK_QUESTION).performScrollTo()
+        settle()
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(FEEDBACK_YES).performClick()
+        compose.mainClock.advanceTimeBy(200)
+        assertEquals("Good to know, thanks!", announcement())
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(says(FEEDBACK_BUBBLE, "Good to know, thanks!"))
+        val (id, request) = links.feedbackRequests.single()
+        assertEquals(viewerId, id)
+        assertEquals(ParcelFeedbackAnswer.Right, request.answer)
+        assertEquals(ParcelFeedbackRequestAsked.Page, request.asked)
+        assertEquals(listOf(DeliveryAnalytics.Outcome.Success), counted("parcel-feedback-right"))
+    }
+
+    @Test
+    fun aGiftAsItsRecipientSeesItAsksNothing() {
+        val opened = "o7Xr6bMh5YaQ"
+        show(FakeParcelLinks().apply { read = { id, _ -> if (id == opened) LinkFixtures.openedGift() else LinkFixtures.wrappedGift() } })
+        open(giftId)
+        check(exists(LINK_GIFT_CARD))
+        assertFalse(exists(FEEDBACK_QUESTION) || exists(FEEDBACK_ROW))
+        open(opened)
+        check(exists(LINK_GIFT_NOTE))
+        assertFalse(exists(FEEDBACK_QUESTION) || exists(FEEDBACK_ROW))
+    }
+
+    @Test
+    fun whatABuildWithoutAServerShowsIsMadeUpAndAsksNothing() {
+        show(FakeParcelLinks(tracksWithoutAccount = false))
+        open()
+        check(exists(LINK_CARD))
+        assertFalse(exists(FEEDBACK_QUESTION) || exists(FEEDBACK_ROW))
+    }
+
+    @Test
+    fun backFromTheCarriersPageTheQuestionAsksAtTheSheetsFootAndYesIsSentAsAskedThere() {
+        show(FakeParcelLinks())
+        open()
+        tap(PAGE_CARRIER_LINK)
+        assertEquals(listOf("parcel-carrier-link"), links.actions.filter { it == "parcel-carrier-link" })
+        compose.activityRule.scenario.moveToState(Lifecycle.State.CREATED)
+        links.now = links.now.plusSeconds(2)
+        compose.activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        compose.waitForIdle()
+        assertTrue(exists(FEEDBACK_WORD))
+        compose.onNodeWithTag(FEEDBACK_BACK_YES).performClick()
+        settle()
+        val request = links.feedbackRequests.single().second
+        assertEquals(ParcelFeedbackAnswer.Right, request.answer)
+        assertEquals(ParcelFeedbackRequestAsked.Back, request.asked)
+    }
+
+    @Test
+    fun aNotesSheetComesOverTheLinksWhichTalkBackLeavesAndTheBackClosesItFirst() {
+        show(FakeParcelLinks())
+        open()
+        tap(FEEDBACK_NOT_QUITE)
+        settle()
+        tap(FEEDBACK_REASON + ParcelFeedbackReason.Steps.name)
+        settle()
+        tap(FEEDBACK_ADD_NOTE)
+        settle()
+        assertTrue(reachable(FEEDBACK_WORDS_SHEET))
+        assertFalse(reachable(LINK_CARD))
+        assertFalse(reachable(LINK_CLOSE))
+        back()
+        assertFalse(exists(FEEDBACK_WORDS_SHEET))
+        assertTrue(reachable(LINK_CARD))
+        assertNotNull(links.links.route)
     }
 
     @Test

@@ -207,5 +207,6 @@
   { "id": "posta-shqiptare", "catalog": "posta-shqiptare", "name": "Posta Shqiptare", "languages": ["en"] },
   { "id": "dsv", "catalog": "dsv", "name": "DSV", "languages": ["en"] },
   { "id": "pin-ag", "catalog": "pin-ag", "name": "PIN AG", "languages": ["en"] },
-  { "id": "pitney-bowes", "catalog": "pitney-bowes", "name": "Pitney Bowes", "languages": ["en"] }
+  { "id": "pitney-bowes", "catalog": "pitney-bowes", "name": "Pitney Bowes", "languages": ["en"] },
+  { "id": "rl-carriers", "catalog": "rl-carriers", "name": "R+L Carriers", "languages": ["en"] }
 ]

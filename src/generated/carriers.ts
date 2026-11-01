@@ -1680,6 +1680,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Pitney Bowes tracking: UPAA, UPBE and PBX numbers explained",
       "name": "Pitney Bowes",
       "color": "#3e53a4"
+    },
+    {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "rl-carriers-tracking",
+      "title": "R+L Carriers tracking: PRO numbers, statuses and claims",
+      "name": "R+L Carriers",
+      "color": "#006647"
     }
   ],
   "de": [

@@ -84,6 +84,25 @@
             </intent-filter>
         </activity>
 
+        <!-- "Add to Peek" in the share sheet, in the phone's language (share_title, written at build time from the
+             shared copy), with the app's icon: the iPhone's share extension, which takes text and a web link, both of
+             which come here as plain text. Its card stands over the app that shared, in that app's task; where the
+             share starts a task, the card's own task (an empty `taskAffinity`) stays out of Recents and out of the
+             app's (ShareActivity). -->
+        <activity
+            android:name=".ShareActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="@string/share_title"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Peek.Share">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
         <!-- The app a parcel's link went to through the share sheet (ShareTargetChosen): the share sheet alone sends to
              it, through the PendingIntent the app gave it. -->
         <receiver

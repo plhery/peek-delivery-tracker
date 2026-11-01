@@ -42,6 +42,22 @@ fun DrawScope.drawPeekMark(side: Double) {
 }
 
 /**
+ * `PeekMarkArtwork.draw(in:size:)` into an image `size` wide, as the share extension draws it: the tile's own corners,
+ * quarter circles as Core Graphics rounds them, where [PeekMark] clips the tile to SwiftUI's continuous ones.
+ * Decorative.
+ */
+@Composable
+fun PeekMarkArtworkImage(size: Dp, modifier: Modifier = Modifier) {
+    val drawing = remember { PeekMarkArtwork.draw() }
+    Canvas(modifier.size(size).clearAndSetSemantics {}) {
+        val scale = (this.size.width / PeekMarkArtwork.frame).toFloat()
+        scale(scale, scale, pivot = Offset.Zero) {
+            drawMapDrawings(drawing, dark = false)
+        }
+    }
+}
+
+/**
  * The mark's eyes alone in one colour, the pupils cut out around their catchlights (the Mac menu bar's icon): `height`
  * tall and as wide as the eyes are at that height, rounded up. Decorative.
  */

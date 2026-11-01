@@ -15,6 +15,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.plhery.peekdeliverytracker.core.ShareInbox
 import com.plhery.peekdeliverytracker.ui.PeekRoot
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
@@ -34,8 +35,8 @@ class MainActivity : ComponentActivity() {
         // The stores are made with the first window, as the iPhone's are with its app.
         app.makeContainer()
         // The links that come to this window. A parcel's link comes by ParcelLinkActivity, in memory; one aimed at the
-        // window itself still goes first, to the app's stores.
-        val inbox = DeliveriesInbox.of(this, parcelLink = app::openParcelLink)
+        // window itself still goes first, to the app's stores. What another app shared waits where ShareActivity saved it.
+        val inbox = DeliveriesInbox.of(this, parcelLink = app::openParcelLink, sharedDrafts = { ShareInbox.consume(app.shareDefaults()) })
         splash.setKeepOnScreenCondition { app.container.value == null }
         setContent {
             val appearance = appearanceSetting()

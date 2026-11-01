@@ -22,6 +22,7 @@ import com.plhery.peekdeliverytracker.core.ParcelShareNotes
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
+import com.plhery.peekdeliverytracker.core.SharedParcelDraft
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
@@ -539,7 +540,11 @@ class PageWork {
  * `parcel/<uuid>`), which the list shows and then takes. Each window has its own ([of]), as each iPhone scene follows
  * its own links, so the window the link came to opens it. The tabs bring the deliveries forward while one waits.
  */
-class DeliveriesInbox(parcel: UUID? = null, private val parcelLink: (String) -> Boolean = { false }) {
+class DeliveriesInbox(
+    parcel: UUID? = null,
+    private val parcelLink: (String) -> Boolean = { false },
+    private val sharedDrafts: () -> SharedParcelDraft? = { null },
+) {
     private val parcelState = MutableStateFlow(parcel)
     private val linkAddedState = MutableStateFlow<LinkAdded?>(null)
 
@@ -585,11 +590,8 @@ class DeliveriesInbox(parcel: UUID? = null, private val parcelLink: (String) -> 
         }
     }
 
-    /**
-     * `ShareInbox.consume()`: what another app shared with this one, for Add. Android has no share target yet, so
-     * nothing is ever waiting.
-     */
-    fun consumeSharedDraft(): String? = null
+    /** `ShareInbox.consume()`: what another app shared with this one through the share card, for Add, once ([sharedDrafts]). */
+    fun consumeSharedDraft(): SharedParcelDraft? = sharedDrafts()
 
     /**
      * `AppDelegate.consumePendingParcelID()`: the parcel of a notification opened before the list was there. The
@@ -608,12 +610,16 @@ class DeliveriesInbox(parcel: UUID? = null, private val parcelLink: (String) -> 
          * its list has shown it. Nor does a window that Recents starts again with the link that began its task, after
          * the process or the phone restarted: the system keeps that link as the task's own and hands it over again
          * (`FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY`). The window's intent forgets the link once it has been read, and with
-         * it any owner key it carried.
+         * it any owner key it carried. What another app shared comes from [sharedDrafts], which takes it away.
          */
-        fun of(activity: ComponentActivity, parcelLink: (String) -> Boolean = { false }): DeliveriesInbox {
+        fun of(
+            activity: ComponentActivity,
+            sharedDrafts: () -> SharedParcelDraft? = { null },
+            parcelLink: (String) -> Boolean = { false },
+        ): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
-            val inbox = DeliveriesInbox(saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink)
+            val inbox = DeliveriesInbox(saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts)
             registry.registerSavedStateProvider(SAVED) { Bundle().apply { putString(PARCEL, inbox.parcel.value?.toString()) } }
             val intent = activity.intent
             if (saved == null && intent != null && intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY == 0) inbox.follow(intent)

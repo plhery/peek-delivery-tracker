@@ -1601,6 +1601,10 @@ class AddParcelTest {
         val requests = listOf(
             AddRequest(id, null), AddRequest(id, null, scanning = true), AddRequest(id, "UPS 1Z999AA10123456784"),
             AddRequest(id, " + two  words", scanning = true), AddRequest(id, ""),
+            // Shared, with its name, and shared again while Add was up.
+            AddRequest(id, "TESTLAMP0001 on its way", label = "Desk lamp: the big one"),
+            AddRequest(id, "UPS 1Z999AA10123456784", scanning = true, label = "Running shoes", fill = UUID(0, 706)),
+            AddRequest(id, "", label = "#7 :2"), AddRequest(id, null, fill = UUID(0, 707)),
         )
         for (request in requests) assertEquals(request, AddRequest.from(request.saved))
     }

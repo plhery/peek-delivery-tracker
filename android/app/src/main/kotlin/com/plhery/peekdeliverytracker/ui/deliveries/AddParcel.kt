@@ -197,7 +197,7 @@ internal fun AddParcelHost(state: DeliveriesState) {
     if (request != null) shown = request
     val adding = shown
     val catalog = LocalCarrierIdentities.current?.catalog ?: CarrierCatalog.shared
-    val form = rememberSaveable(adding?.id, saver = AddForm.Saver) { AddForm.start(adding?.draft, catalog) }
+    val form = rememberSaveable(adding?.id, saver = AddForm.Saver) { AddForm.start(adding?.draft, catalog, adding?.label.orEmpty()) }
     val work = state.source.pageWork
     // Saved, it says so until it has gone, as `save()` leaves `saving` on.
     val saving = adding != null && (work.working(adding.id) || work.added(adding.id) != null)
@@ -290,9 +290,9 @@ internal class AddForm(
     }
 
     companion object {
-        /** Add as it opens, with `draft` in its field, settled at once (`init(draft:)`). */
-        fun start(draft: String?, catalog: CarrierCatalog) = AddForm(
-            label = "", trackingInput = draft.orEmpty(), pick = null, carrierOverride = null, asTyped = null,
+        /** Add as it opens, with `draft` in its field, settled at once, and the name shared with it (`init(draft:)`). */
+        fun start(draft: String?, catalog: CarrierCatalog, label: String = "") = AddForm(
+            label = label, trackingInput = draft.orEmpty(), pick = null, carrierOverride = null, asTyped = null,
             recognition = CarrierRecognition(draft?.let { ParcelAddition.trackingNumber(it, catalog) }), refusedQuestion = null,
             verifiedCarrier = null, lookedUp = null, trackingUrl = "", deliveryPostcode = "",
             chosenPostcodeCountry = null, postcodeFill = PostcodeFill(), lookupAttempt = 0, showingPicker = false,
@@ -456,6 +456,12 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     actions.saving = saving
     // A change's spring covers that change only, as `withAnimation` does: what comes later moves on the form's own.
     SideEffect { motion.duration = null }
+    // What another app shared while Add was up takes the field's place, as a paste does (`onChange(of: draft)`), once.
+    LaunchedEffect(request.fill) {
+        if (request.fill == null) return@LaunchedEffect
+        actions.fill(request.label, request.draft.orEmpty())
+        state.filled(request)
+    }
 
     val error = if (form.pasteFailed) localizer.text("add.pasteFailed") else work.failure(request.id)
     val duplicate = work.duplicate(request.id)
@@ -594,6 +600,19 @@ private class AddActions(
         setInput(value)
         focus.request(ParcelAddition.Field.Tracking)
         form.take(current().settling(value))
+    }
+
+    /**
+     * `fill(_:)`: what another app shared, in the field on the snappy spring, at once under Reduce Motion, its name in
+     * the name's where it has one, no error, and the number settled.
+     */
+    fun fill(label: String, text: String) {
+        motion.duration = if (reduceMotion) null else FILL_MOTION
+        clearErrors()
+        // As `onChange(of: trackingInput)`, which a text that doesn't change doesn't run.
+        if (text != form.trackingInput) form.take(current().typing(text))
+        if (label.isNotEmpty()) form.label = label
+        form.take(current().settling(text))
     }
 
     /** The scan button: the scanner opens over Add, the keyboard gone. */

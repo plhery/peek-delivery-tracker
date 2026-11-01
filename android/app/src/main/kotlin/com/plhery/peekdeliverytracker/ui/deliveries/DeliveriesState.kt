@@ -51,6 +51,7 @@ import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ParcelTrackingNumber
 import com.plhery.peekdeliverytracker.core.PullToRefreshModel
+import com.plhery.peekdeliverytracker.core.SharedParcelDraft
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -779,9 +780,27 @@ internal class DeliveriesState(
      */
     fun add(focus: AccessibilityFocus? = null) = add(FirstParcelRequest.Type, focus)
 
-    /** Add with what another app shared (`sharedDraft = draft; showingAdd = true`): the share target comes with its step. */
-    @Suppress("UNUSED_PARAMETER")
-    fun addSharedDraft(draft: String) = Unit
+    /**
+     * What another app shared (`consumeSharedDraft()`'s `sharedDraft = draft; showingAdd = true`): Add opens with its
+     * name and its text, as much of the text as Add takes in ([FirstParcelRequest.taken]), where the iPhone takes it
+     * all; Add already open takes them in place of what it holds, as a paste does (`fill(_:)`, [AddRequest.fill]).
+     */
+    fun addSharedDraft(draft: SharedParcelDraft) {
+        val text = FirstParcelRequest.taken(draft.trackingInput)
+        val label = ParcelAddition.label(draft.label)
+        val open = addition
+        if (open != null) {
+            addition = open.copy(draft = text, label = label, fill = UUID.randomUUID())
+        } else {
+            open(AddRequest(UUID.randomUUID(), text, label = label), focus = null)
+        }
+    }
+
+    /** Open Add has taken what another app shared while it was up ([AddRequest.fill]): a window made again doesn't again. */
+    fun filled(request: AddRequest) {
+        val open = addition
+        if (open != null && open.id == request.id && open.fill == request.fill) addition = open.copy(fill = null)
+    }
 
     /**
      * `showingAccount = true`: the account isn't ported yet, so the button only ends the arrival of a card just added,
@@ -806,11 +825,15 @@ internal class DeliveriesState(
     fun add(request: FirstParcelRequest, focus: AccessibilityFocus? = null) {
         if (addition != null) return
         val draft = (request as? FirstParcelRequest.Paste)?.draft
+        open(AddRequest(UUID.randomUUID(), draft, scanning = request == FirstParcelRequest.Scan), focus)
+    }
+
+    private fun open(request: AddRequest, focus: AccessibilityFocus?) {
         additionClosing = false
         addedParcel = null
         endArrival()
         returnFocus = focus
-        addition = AddRequest(UUID.randomUUID(), draft, scanning = request == FirstParcelRequest.Scan)
+        addition = request
         source.view("add-parcel")
     }
 
@@ -1865,21 +1888,47 @@ internal class DeliveriesState(
 }
 
 /**
- * Add, open over the window (`showingAdd`), with the text pasted, dropped or shared that it opens with (`sharedDraft`),
- * or on the camera ([scanning], AddParcelView's `scanning`): each opening another ([id]).
+ * Add, open over the window (`showingAdd`), with the text pasted, dropped or shared that it opens with (`sharedDraft`)
+ * and the name shared with it ([label]), or on the camera ([scanning], AddParcelView's `scanning`): each opening another
+ * ([id]). Shared while Add is up, the draft and its name are to fill it ([fill], each share another) until it has.
  */
 @Immutable
-internal data class AddRequest(val id: UUID, val draft: String?, val scanning: Boolean = false) {
-    /** As a window keeps it: the id, a `+` where it scans, then the draft after a space where there is one. */
-    val saved: String get() = "$id${if (scanning) SCANNING else ""}${if (draft == null) "" else " $draft"}"
+internal data class AddRequest(
+    val id: UUID,
+    val draft: String?,
+    val scanning: Boolean = false,
+    val label: String = "",
+    val fill: UUID? = null,
+) {
+    /**
+     * As a window keeps it: the id, a `+` where it scans, `#` and the fill's id where one waits, `:` and the name's
+     * length where there is one, then, after a space where there is a draft, the name and the draft.
+     */
+    val saved: String
+        get() = buildString {
+            append(id)
+            if (scanning) append(SCANNING)
+            fill?.let { append(FILL).append(it) }
+            if (draft == null) return@buildString
+            if (label.isNotEmpty()) append(LABEL).append(label.length)
+            append(' ').append(label).append(draft)
+        }
 
     companion object {
         private const val SCANNING = "+"
+        private const val FILL = "#"
+        private const val LABEL = ":"
 
         fun from(saved: String): AddRequest {
             val head = saved.substringBefore(' ')
-            val draft = if (' ' in saved) saved.substringAfter(' ') else null
-            return AddRequest(UUID.fromString(head.removeSuffix(SCANNING)), draft, scanning = head.endsWith(SCANNING))
+            val rest = if (' ' in saved) saved.substringAfter(' ') else null
+            val ids = head.substringBefore(LABEL)
+            val labelLength = head.substringAfter(LABEL, "").toIntOrNull() ?: 0
+            val opening = ids.substringBefore(FILL)
+            return AddRequest(
+                UUID.fromString(opening.removeSuffix(SCANNING)), rest?.drop(labelLength), scanning = opening.endsWith(SCANNING),
+                label = rest?.take(labelLength).orEmpty(), fill = ids.substringAfter(FILL, "").ifEmpty { null }?.let(UUID::fromString),
+            )
         }
     }
 }

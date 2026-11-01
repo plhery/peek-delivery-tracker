@@ -117,8 +117,71 @@ val debugSharedAssets = tasks.register<Sync>("debugSharedAssets") {
     }
 }
 
+/**
+ * The words Android shows for the app outside it, as resources written at build time from the shared copy
+ * (Localization.json) in each language the app speaks, so that a change of copy reaches them as it reaches the
+ * iPhone's InfoPlist.strings: [strings] names each resource and its key, [qualifiers] each language's resource folder,
+ * English the default one. Nothing of it is committed.
+ */
+open class SystemStrings @Inject constructor(objects: ObjectFactory) : DefaultTask() {
+    @get:InputFiles
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    val sharedResources: ConfigurableFileCollection = objects.fileCollection()
+
+    @get:Input
+    val strings: MapProperty<String, String> = objects.mapProperty(String::class.java, String::class.java)
+
+    @get:Input
+    val qualifiers: MapProperty<String, String> = objects.mapProperty(String::class.java, String::class.java)
+
+    @get:OutputDirectory
+    val outputDirectory: DirectoryProperty = objects.directoryProperty()
+
+    @TaskAction
+    fun write() {
+        val file = sharedResources.asFileTree.matching { include("peek/Localization.json") }.singleFile
+        @Suppress("UNCHECKED_CAST")
+        val copy = groovy.json.JsonSlurper().parse(file, "UTF-8") as Map<String, Map<String, String>>
+        val output = outputDirectory.get().asFile
+        output.deleteRecursively()
+        for ((language, qualifier) in qualifiers.get()) {
+            val values = copy[language] ?: throw GradleException("Localization.json has no $language")
+            val folder = output.resolve(if (qualifier.isEmpty()) "values" else "values-$qualifier").apply { mkdirs() }
+            val lines = strings.get().map { (name, key) ->
+                val text = values[key] ?: copy.getValue("en")[key] ?: throw GradleException("Localization.json has no $key")
+                "    <string name=\"$name\">${resourceText(text)}</string>"
+            }
+            folder.resolve("system_strings.xml").writeText(
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<resources>\n${lines.joinToString("\n")}\n</resources>\n",
+            )
+        }
+    }
+
+    /** `text` as a string resource holds it: aapt's escapes, then XML's. */
+    private fun resourceText(text: String): String {
+        val escaped = text.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"").replace("\n", "\\n")
+            .let { if (it.startsWith("@") || it.startsWith("?")) "\\$it" else it }
+        return escaped.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    }
+}
+
+val systemStrings = tasks.register<SystemStrings>("systemStrings") {
+    sharedResources.from(coreSharedResources)
+    // The share target's name, `CFBundleDisplayName` of the iPhone's ShareExtension.
+    strings.put("share_title", "shareExtension.title")
+    // Localization.json's languages, as the iPhone's .lproj folders name them.
+    qualifiers.putAll(
+        mapOf(
+            "en" to "", "de" to "de", "fr" to "fr", "it" to "it", "es" to "es", "pt" to "pt", "pt-br" to "pt-rBR",
+            "pl" to "pl", "ru" to "ru", "zh" to "b+zh+Hans",
+        ),
+    )
+    outputDirectory.set(layout.buildDirectory.dir("generated/systemStrings"))
+}
+
 androidComponents {
     onVariants { variant ->
+        variant.sources.res?.addGeneratedSourceDirectory(systemStrings) { it.outputDirectory }
         variant.sources.assets?.addGeneratedSourceDirectory(sharedAssets) { it.destinationDirectory }
         if (variant.buildType == "debug") {
             variant.sources.assets?.addGeneratedSourceDirectory(debugSharedAssets) { it.destinationDirectory }

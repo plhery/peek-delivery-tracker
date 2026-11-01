@@ -5,7 +5,9 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.SharedResources
+import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.platform.BuildSettings
+import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.io.FileNotFoundException
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +27,13 @@ class PeekApplication : Application() {
     /** How the stores are made: [AppContainer.make], or a test's own, set before the first window asks for them. */
     @VisibleForTesting
     internal var makeStores: suspend (PeekApplication) -> AppContainer = { AppContainer.make(it) }
+
+    /**
+     * Where what another app shared waits for Add (`ShareInbox.defaults`): the app's own defaults, which [ShareActivity]
+     * saves to, reading the app's language there, and the window takes from; or a test's.
+     */
+    @VisibleForTesting
+    internal var shareDefaults: () -> UserDefaults = { PreferencesDefaults.standard(this) }
 
     /** A parcel's link that came before the stores were made, which opens once they are. */
     private var waitingLink: ParcelLinkRoute? = null

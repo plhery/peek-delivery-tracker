@@ -65,6 +65,13 @@ object SystemColors {
         lightHighContrast = rgb(0, 137, 50),
         darkHighContrast = rgb(74, 217, 104),
     )
+    /** `systemBlue`, the tint of UIKit's controls that set none (the share card's Cancel). */
+    val blue = AdaptiveColor(
+        light = rgb(0, 136, 255),
+        dark = rgb(0, 145, 255),
+        lightHighContrast = rgb(30, 110, 244),
+        darkHighContrast = rgb(92, 184, 255),
+    )
     val orange = AdaptiveColor(
         light = rgb(255, 141, 40),
         dark = rgb(255, 146, 48),

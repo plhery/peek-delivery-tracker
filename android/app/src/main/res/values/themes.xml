@@ -5,6 +5,15 @@
         <item name="android:windowBackground">@color/launch_background</item>
     </style>
 
+    <!-- The share card's window (ShareActivity): see-through, over the app that shared, with no motion of its own, as
+         the card's sheet comes up and goes down itself. -->
+    <style name="Theme.Peek.Share" parent="Theme.Peek">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
     <!-- The launch: the same blank background and no icon, as iOS's UILaunchScreen. -->
     <style name="Theme.Peek.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/launch_background</item>

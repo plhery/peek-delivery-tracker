@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Peek</string>
+    <!-- The same in every language, as the iPhone's. The share target's name, in each, is written at build time from
+         the shared copy (systemStrings in build.gradle.kts). -->
+    <string name="app_name" translatable="false">Peek</string>
 </resources>

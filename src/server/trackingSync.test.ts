@@ -4247,13 +4247,17 @@ describe('TrackingSyncService', () => {
     expect(saved.carrier).toBe('z-leading');
   });
 
-  it('asks the post of the destination a provider names for a postal item filed under no post, then follows it there', async () => {
+  it.each([
+    ['no post', 'intl-post', 'RR123456785MK'],
+    // A post with no adapter of its own: Russian Post issued the item.
+    ['its own post', 'russian-post', 'RR123456785RU'],
+  ])('asks the post of the destination a provider names for a postal item filed under %s, then follows it there', async (_, filed, number) => {
     vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: ['ParcelsApp'], carrier: null, tier: () => 'unknown', rank: () => 0 });
     const store = eventStore();
     const client = Object.assign(store.client, {
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined) });
-    // ParcelsApp follows a Macedonian item bound for France and names no partner; numbers, wording and clocks are invented.
+    // ParcelsApp follows an item bound for France and names no partner; numbers, wording and clocks are invented.
     const out = { time: '2026-10-26T07:00:00Z', description: 'Out for delivery', stage: 'out_for_delivery' };
     const provider: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-10-24T06:34:09Z',
       destination_country: 'FR',
@@ -4264,7 +4268,7 @@ describe('TrackingSyncService', () => {
       .mockResolvedValueOnce(post(out))
       .mockResolvedValueOnce(post({ time: '2026-10-26T11:36:00Z', description: 'Delivered', stage: 'delivered' }, out)),
     fetchUniversal: vi.fn().mockResolvedValue(provider) };
-    let saved: JsonObject = { id: 'destination-post', carrier: 'intl-post', tracking_number: 'RR123456785MK', current_stage: 'pending',
+    let saved: JsonObject = { id: 'destination-post', carrier: filed, tracking_number: number, current_stage: 'pending',
       created_at: '2026-10-21T15:00:00Z', one_off: true };
     const check = async (at: string) => {
       await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
@@ -4274,22 +4278,22 @@ describe('TrackingSyncService', () => {
     };
     // La Poste does not know the item yet: the provider's answer serves the parcel, and the ask is kept for its gap.
     let data = await check('2026-10-26T06:00:00Z');
-    expect(adapter.fetch.mock.calls.map((call) => call.slice(0, 2))).toEqual([['la-poste', 'RR123456785MK']]);
+    expect(adapter.fetch.mock.calls.map((call) => call.slice(0, 2))).toEqual([['la-poste', number]]);
     expect(saved.current_stage).toBe('in_transit');
     expect(data.active_tracking_carrier).toBeUndefined();
-    expect(data.delivery_probe).toMatchObject({ carrier: 'la-poste', number: 'RR123456785MK', misses: 1 });
+    expect(data.delivery_probe).toMatchObject({ carrier: 'la-poste', number, misses: 1 });
     // Once it scans the item, it takes the parcel over.
     data = await check('2026-10-26T09:00:00Z');
     expect(adapter.fetch).toHaveBeenCalledTimes(2);
-    expect(data).toMatchObject({ active_tracking_carrier: 'la-poste', active_tracking_number: 'RR123456785MK',
-      original_carrier: 'intl-post', original_tracking_number: 'RR123456785MK' });
+    expect(data).toMatchObject({ active_tracking_carrier: 'la-poste', active_tracking_number: number,
+      original_carrier: filed, original_tracking_number: number });
     expect(saved.current_stage).toBe('out_for_delivery');
     // The next check asks it alone.
     await check('2026-10-26T12:00:00Z');
-    expect(adapter.fetch.mock.calls.map((call) => call.slice(0, 2))).toEqual(Array(3).fill(['la-poste', 'RR123456785MK']));
+    expect(adapter.fetch.mock.calls.map((call) => call.slice(0, 2))).toEqual(Array(3).fill(['la-poste', number]));
     expect(adapter.fetchUniversal).toHaveBeenCalledTimes(2);
     expect(saved.current_stage).toBe('delivered');
-    expect(saved.carrier).toBe('intl-post');
+    expect(saved.carrier).toBe(filed);
   });
 
   it('hands a Cainiao result to its reported local number through normalization', async () => {

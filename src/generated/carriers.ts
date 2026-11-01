@@ -2984,6 +2984,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Sending seguimiento: número, estados y teléfono",
       "name": "Sending",
       "color": "#e52021"
+    },
+    {
+      "id": "forza-delivery",
+      "catalog": "forza-delivery",
+      "slug": "forza-delivery-rastreo",
+      "title": "Forza Delivery rastreo: número de guía, estados y teléfono",
+      "name": "Forza Delivery Express",
+      "color": "#ea5c1d"
     }
   ],
   "pt": [

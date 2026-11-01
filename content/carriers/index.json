@@ -201,6 +201,6 @@
   { "id": "dpd-ro", "catalog": "dpd-ro", "name": "DPD Romania", "languages": ["en"] },
   { "id": "globalpost", "catalog": "globalpost", "name": "GlobalPost", "languages": ["en"] },
   { "id": "cdek", "catalog": "cdek", "name": "CDEK", "languages": ["en"] },
-  { "id": "forza-delivery", "catalog": "forza-delivery", "name": "Forza Delivery Express", "languages": ["en"] },
+  { "id": "forza-delivery", "catalog": "forza-delivery", "name": "Forza Delivery Express", "languages": ["en", "es"] },
   { "id": "quantium-solutions", "catalog": "quantium-solutions", "name": "Quantium Solutions", "languages": ["en"] }
 ]

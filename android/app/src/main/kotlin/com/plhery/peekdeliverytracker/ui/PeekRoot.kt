@@ -30,7 +30,9 @@ import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
+import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
+import com.plhery.peekdeliverytracker.ui.arrival.ArrivalView
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
@@ -75,7 +77,7 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val source = remember(container) { ContainerDeliveries(container) }
     val links = remember(container) { ContainerParcelLinks(container) }
     PeekRoot(
-        state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile,
+        state, container.localizer, container.session, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile,
         scanner = CameraLabelScanner, links = links, source = source,
     ) {
         DeliveriesTab(source, inbox = inbox)
@@ -84,7 +86,9 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
 
 /**
  * RootView's routing, in its order: the launch screen while the session is read, the arrival while nobody is signed in
- * and this phone follows nothing on its own, the tabs otherwise. A state replaces the one before it at once. The tab
+ * and this phone follows nothing on its own ([session]'s sign-in), the tabs otherwise. A state replaces the one before
+ * it at once, but for a change made with an animation ([RootTransaction]): the arrival's back fades the arrival out
+ * under the tabs fading in. The tab
  * chosen is kept with the window and through process death, as `@SceneStorage("tab")` keeps it, whatever the state
  * shows in between. A parcel waiting in [inbox] chooses the deliveries. The tabs show [browserCheck]'s sheet over
  * whatever is in front while it asks for a token, and scan labels with [scanner].
@@ -104,6 +108,7 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
 internal fun PeekRoot(
     state: AuthenticationState,
     localizer: Localizer,
+    session: SessionStore,
     onView: (String) -> Unit,
     inbox: DeliveriesInbox? = null,
     browserCheck: TurnstileSheet? = null,
@@ -140,6 +145,7 @@ internal fun PeekRoot(
     // tabs present after it: the window's front draws every layer in the order they came.
     val window = rememberSaveable(saver = WindowLayers.Saver) { WindowLayers() }
     val front = remember(window) { TabOverlay(window = window, name = "window") }
+    val transaction = remember { RootTransaction() }
     ProvideLocalizer(localizer) {
         // The tags carry the iPhone's accessibility identifiers (demo.exit, deliveries.search, ...); UI Automator reads
         // them as resource ids, as XCUITest reads the identifiers. Sized and placed as its one child is.
@@ -147,27 +153,29 @@ internal fun PeekRoot(
             ProvideLinks {
                 CompositionLocalProvider(LocalWindowLayers provides window) {
                     Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
-                        when (state) {
-                            AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
-                            AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
-                            AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
-                                val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-                                val linkOpen = links?.links?.routeFlow?.collectAsState()?.value != null
-                                val firstOpen = source?.let { rememberFirstOpen(it.launch) }
-                                firstOpen?.chooseDeliveries = { tab = PeekTab.Deliveries.ordinal }
-                                val covered = if (source != null && firstOpen != null) firstOpen.covers(source, state) else false
-                                CompositionLocalProvider(
-                                    LocalLabelScanner provides scanner, LocalParcelLinkOpen provides linkOpen, LocalFirstOpen provides firstOpen,
-                                ) {
-                                    TabShell(
-                                        selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
-                                        covered = covered,
-                                        cover = { if (source != null && firstOpen != null) FirstOpenHost(firstOpen, source, covered) },
-                                        overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
-                                    ) { shown ->
-                                        when (shown) {
-                                            PeekTab.Deliveries -> deliveries()
-                                            PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                        RootSwitch(state, transaction) { screen ->
+                            when (screen) {
+                                RootScreen.Launch -> LaunchView(remember(language) { localizer.text("auth.loading") })
+                                RootScreen.Arrival -> ArrivalView(state, session, transaction)
+                                RootScreen.Tabs -> {
+                                    val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
+                                    val linkOpen = links?.links?.routeFlow?.collectAsState()?.value != null
+                                    val firstOpen = source?.let { rememberFirstOpen(it.launch) }
+                                    firstOpen?.chooseDeliveries = { tab = PeekTab.Deliveries.ordinal }
+                                    val covered = if (source != null && firstOpen != null) firstOpen.covers(source, state) else false
+                                    CompositionLocalProvider(
+                                        LocalLabelScanner provides scanner, LocalParcelLinkOpen provides linkOpen, LocalFirstOpen provides firstOpen,
+                                    ) {
+                                        TabShell(
+                                            selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
+                                            covered = covered,
+                                            cover = { if (source != null && firstOpen != null) FirstOpenHost(firstOpen, source, covered) },
+                                            overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
+                                        ) { shown ->
+                                            when (shown) {
+                                                PeekTab.Deliveries -> deliveries()
+                                                PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                                            }
                                         }
                                     }
                                 }
@@ -215,12 +223,6 @@ internal fun LaunchView(loading: String) {
             }
         }
     }
-}
-
-/** The arrival and sign-in until they are ported: the page's background. */
-@Composable
-private fun ArrivalPlaceholder() {
-    Box(Modifier.fillMaxSize().background(PeekTheme.colors.background).testTag(ARRIVAL))
 }
 
 /** The passport and friends until they are ported: the page's background. */

@@ -526,7 +526,8 @@ fun FormMenuRow(
  * leading edge at [leading] where a control at a row's leading end opened it, moved up as far as the window needs. It
  * grows from that top corner on a spring; a choice or a tap outside closes it, as the system's back does. TalkBack
  * reaches only the menu, from the chosen option, the sheet or popover under it hidden from it while it is open, and
- * goes back to the row once it has closed.
+ * goes back to the row once it has closed. Its top stands [drop] under the row's (a form row's 8; a `Menu`'s own label
+ * none), its solid glass over [behind], the ground it opens on.
  */
 @Composable
 internal fun SheetMenu(
@@ -536,6 +537,8 @@ internal fun SheetMenu(
     trailing: Float,
     onClose: () -> Unit,
     leading: Float? = null,
+    drop: Dp = MENU_DROP,
+    behind: Color = PeekTheme.colors.groupedBackground,
     onSelect: (Int) -> Unit,
 ) {
     val colors = PeekTheme.colors
@@ -577,7 +580,7 @@ internal fun SheetMenu(
                     layout(constraints.maxWidth, constraints.maxHeight) {
                         val wantedX = if (leading != null) leading - origin.x else trailing - origin.x - width
                         val x = wantedX.roundToInt().coerceIn(margin, max(margin, constraints.maxWidth - width - margin))
-                        val wanted = (row.top - origin.y + MENU_DROP.toPx()).roundToInt()
+                        val wanted = (row.top - origin.y + drop.toPx()).roundToInt()
                         val y = wanted.coerceAtMost(constraints.maxHeight - bottom - placeable.height).coerceAtLeast(top)
                         placeable.place(x, y)
                     }
@@ -595,7 +598,7 @@ internal fun SheetMenu(
                 .semantics { paneTitle = options.getOrNull(selected)?.title.orEmpty() },
         ) {
             // On the glass of a control, its edge lit and shaded, over the sheet's ground.
-            GlassSurface(shape, Modifier.matchParentSize(), backdrop = null, behind = colors.groupedBackground) {}
+            GlassSurface(shape, Modifier.matchParentSize(), backdrop = null, behind = behind) {}
             Column(Modifier.verticalScroll(rememberScrollState()).padding(vertical = MENU_PADDING)) {
                 options.forEachIndexed { index, option ->
                     val chosen = index == selected

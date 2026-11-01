@@ -103,7 +103,7 @@ class TrackingScannerDeviceTest {
     private fun showDeliveries() {
         compose.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
-                PeekRoot(AuthenticationState.Welcome, container.localizer, onView = {}, scanner = CameraLabelScanner) {
+                PeekRoot(AuthenticationState.Welcome, container.localizer, container.session, onView = {}, scanner = CameraLabelScanner) {
                     DeliveriesTab(remember { ContainerDeliveries(container) })
                 }
             }

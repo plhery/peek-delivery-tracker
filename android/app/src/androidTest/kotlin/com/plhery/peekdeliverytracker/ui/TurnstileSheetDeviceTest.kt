@@ -21,6 +21,8 @@ import com.plhery.peekdeliverytracker.platform.DEVICE_PAGE
 import com.plhery.peekdeliverytracker.platform.WebViewTurnstilePages
 import com.plhery.peekdeliverytracker.platform.answerOnDevice
 import com.plhery.peekdeliverytracker.platform.checkPage
+import com.plhery.peekdeliverytracker.ui.arrival.signInConfiguration
+import com.plhery.peekdeliverytracker.ui.arrival.signInSession
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import java.util.Collections
 import kotlin.coroutines.cancellation.CancellationException
@@ -62,6 +64,9 @@ class TurnstileSheetDeviceTest {
     }
     private val sheet = TurnstileSheet(pages)
 
+    /** The session the tabs are shown with, on a fake auth service no test reaches. */
+    private val session = signInSession(scope, signInConfiguration(configured = false))
+
     @Before
     fun open() {
         scenario = ActivityScenario.launch(ComponentActivity::class.java)
@@ -80,7 +85,7 @@ class TurnstileSheetDeviceTest {
         scenario.onActivity {
             it.setContent {
                 PeekTheme(dark = dark, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
-                    PeekRoot(AuthenticationState.Welcome, localizer, onView = {}, browserCheck = sheet) { Box(Modifier.fillMaxSize()) }
+                    PeekRoot(AuthenticationState.Welcome, localizer, session, onView = {}, browserCheck = sheet) { Box(Modifier.fillMaxSize()) }
                 }
             }
         }

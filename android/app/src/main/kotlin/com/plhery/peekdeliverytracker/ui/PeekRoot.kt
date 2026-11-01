@@ -31,16 +31,21 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
-import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesSource
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
+import com.plhery.peekdeliverytracker.ui.deliveries.FirstOpenHost
 import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
+import com.plhery.peekdeliverytracker.ui.deliveries.LocalFirstOpen
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalParcelLinkOpen
 import com.plhery.peekdeliverytracker.ui.deliveries.NoLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetHost
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSource
+import com.plhery.peekdeliverytracker.ui.deliveries.covers
+import com.plhery.peekdeliverytracker.ui.deliveries.rememberFirstOpen
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
@@ -71,7 +76,7 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val links = remember(container) { ContainerParcelLinks(container) }
     PeekRoot(
         state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile,
-        scanner = CameraLabelScanner, links = links,
+        scanner = CameraLabelScanner, links = links, source = source,
     ) {
         DeliveriesTab(source, inbox = inbox)
     }
@@ -90,6 +95,10 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * back closes what is on top. Once it closes on a parcel to open, or on one just added or followed, the deliveries
  * come forward and take it ([inbox]).
  * A link kept for after sign-in opens again once someone is signed in (B-L03).
+ *
+ * With the deliveries' [source], the first open stands over the tabs and their bar, whichever is chosen, for a guest
+ * with nothing followed (TabsView's `showsFirstOpen`), from the first frame: the tab chosen stays as it was until the
+ * first parcel it asks for chooses the deliveries, where Add opens.
  */
 @Composable
 internal fun PeekRoot(
@@ -100,6 +109,7 @@ internal fun PeekRoot(
     browserCheck: TurnstileSheet? = null,
     scanner: LabelScanner = NoLabelScanner,
     links: ParcelLinkSource? = null,
+    source: DeliveriesSource? = null,
     deliveries: @Composable () -> Unit,
 ) {
     val language by localizer.languageFlow.collectAsState()
@@ -143,9 +153,16 @@ internal fun PeekRoot(
                             AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
                                 val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
                                 val linkOpen = links?.links?.routeFlow?.collectAsState()?.value != null
-                                CompositionLocalProvider(LocalLabelScanner provides scanner, LocalParcelLinkOpen provides linkOpen) {
+                                val firstOpen = source?.let { rememberFirstOpen(it.launch) }
+                                firstOpen?.chooseDeliveries = { tab = PeekTab.Deliveries.ordinal }
+                                val covered = if (source != null && firstOpen != null) firstOpen.covers(source, state) else false
+                                CompositionLocalProvider(
+                                    LocalLabelScanner provides scanner, LocalParcelLinkOpen provides linkOpen, LocalFirstOpen provides firstOpen,
+                                ) {
                                     TabShell(
                                         selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
+                                        covered = covered,
+                                        cover = { if (source != null && firstOpen != null) FirstOpenHost(firstOpen, source, covered) },
                                         overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
                                     ) { shown ->
                                         when (shown) {

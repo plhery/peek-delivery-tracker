@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toIntSize
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocusNode
+import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
 
 /**
  * A zoom's namespace (`@Namespace var transition`): the sources its pages zoom out of ([zoomSource],
@@ -108,7 +109,14 @@ fun rememberZoomTransition(): ZoomTransition = remember { ZoomTransition() }
  * comes back here as the page goes, to `focus` where given (one the element marks already), to this otherwise.
  */
 internal fun Modifier.zoomSource(id: Any, transition: ZoomTransition, cornerRadius: Dp = 0.dp, focus: AccessibilityFocus? = null): Modifier =
-    this then ZoomSourceElement(id, transition, cornerRadius, focus)
+    zoomSource(id, transition, UnevenContinuousRoundedShape(cornerRadius, cornerRadius, cornerRadius, cornerRadius), focus)
+
+/**
+ * `matchedTransitionSource(id:in:)` on a view cut to a shape of its own (`.clipShape(UnevenRoundedRectangle(…))`): the
+ * page grows out of `corners`, each corner as round as it is there.
+ */
+internal fun Modifier.zoomSource(id: Any, transition: ZoomTransition, corners: UnevenContinuousRoundedShape, focus: AccessibilityFocus? = null): Modifier =
+    this then ZoomSourceElement(id, transition, corners, focus)
 
 /**
  * What lies under a zooming page and moves with the page: it recedes about its middle as the page comes over it.
@@ -142,19 +150,19 @@ fun Modifier.pageBarItem(transition: ZoomTransition, leading: Boolean): Modifier
 private data class ZoomSourceElement(
     val id: Any,
     val transition: ZoomTransition,
-    val cornerRadius: Dp,
+    val corners: UnevenContinuousRoundedShape,
     val focus: AccessibilityFocus?,
 ) : ModifierNodeElement<ZoomSourceNode>() {
-    override fun create() = ZoomSourceNode(id, transition, cornerRadius, focus)
+    override fun create() = ZoomSourceNode(id, transition, corners, focus)
 
     override fun update(node: ZoomSourceNode) {
-        node.update(id, transition, cornerRadius, focus)
+        node.update(id, transition, corners, focus)
     }
 
     override fun InspectorInfo.inspectableProperties() {
         name = "zoomSource"
         properties["id"] = id
-        properties["cornerRadius"] = cornerRadius
+        properties["corners"] = corners
     }
 }
 
@@ -165,7 +173,8 @@ private data class ZoomSourceElement(
 internal class ZoomSourceNode(
     var id: Any,
     var transition: ZoomTransition,
-    var cornerRadius: Dp,
+    /** Its corners, each as round as it is. */
+    var corners: UnevenContinuousRoundedShape,
     private var givenFocus: AccessibilityFocus?,
 ) : DelegatingNode(), DrawModifierNode, GlobalPositionAwareModifierNode {
     var coordinates: LayoutCoordinates? = null
@@ -184,11 +193,11 @@ internal class ZoomSourceNode(
         if (givenFocus == null) mark = delegate(AccessibilityFocusNode(ownFocus))
     }
 
-    fun update(id: Any, transition: ZoomTransition, cornerRadius: Dp, focus: AccessibilityFocus?) {
+    fun update(id: Any, transition: ZoomTransition, corners: UnevenContinuousRoundedShape, focus: AccessibilityFocus?) {
         if (isAttached && (id != this.id || transition !== this.transition)) unregister()
         this.id = id
         this.transition = transition
-        this.cornerRadius = cornerRadius
+        this.corners = corners
         if ((givenFocus == null) != (focus == null)) {
             mark?.let { undelegate(it) }
             mark = if (focus == null) delegate(AccessibilityFocusNode(ownFocus)) else null

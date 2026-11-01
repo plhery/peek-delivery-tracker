@@ -37,6 +37,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -130,69 +131,13 @@ fun DeliveriesTab(
     modifier: Modifier = Modifier,
     inbox: DeliveriesInbox? = null,
 ) {
-    val launch = source.launch
-    val navigator = rememberSaveable(launch, saver = DeliveriesNavigator.saver(launch)) { DeliveriesNavigator() }
-    navigator.left = { pageId ->
-        source.pageWork.forget(pageId)
-        source.feedbacks.forget(pageId)
-    }
-    navigator.opened = source.feedbacks::open
-    val listState = rememberLazyListState()
-    val archiveOpen = rememberForLaunch(launch, false)
-    val reviewDue = rememberForLaunch(launch, false)
-    val sampleShown = rememberForLaunch(launch, false)
-    val firstOpen = rememberFirstOpenStates(launch)
-    val mapCover = rememberForLaunch<String?>(launch, null)
-    val views = rememberListViewStates(launch)
-    val prompts = rememberPromptStates(launch)
+    // Under the tabs, the first open is the shell's, which asks this tab for the first parcel; on its own, it has none.
+    val firstOpen = LocalFirstOpen.current ?: rememberFirstOpen(source.launch)
+    val state = rememberDeliveriesState(source, firstOpen, firstOpen.adding)
+    val navigator = state.navigator
     val now = LocalNow.current
-    val scope = rememberCoroutineScope()
-    val state = remember(source, navigator, listState) {
-        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, sampleShown, firstOpen, mapCover, views, prompts, now, scope)
-    }
-    // A screen the navigation shows also ends the arrival of a card just added.
-    navigator.view = { screen ->
-        source.view(screen)
-        state.endArrival()
-    }
-    state.localizer = LocalLocalizer.current
-    // What the paper and the flights are drawn with, as the list was last drawn.
-    state.identities = LocalCarrierIdentities.current
-    state.language = LocalLanguage.current
-    state.graphics = LocalGraphicsContext.current
-    state.density = LocalDensity.current
-    state.layoutDirection = LocalLayoutDirection.current
-    LocalPaperSeeds.current?.let { state.seeds = it }
+    val scope = state.scope
     LocalDeliveriesState.current?.invoke(state)
-    val context = LocalContext.current
-    val haptics = rememberHaptics()
-    state.copy = { text ->
-        context.getSystemService(ClipboardManager::class.java)?.setPrimaryClip(ClipData.newPlainText(text, text))
-        haptics.success()
-        // From Android 13 the system confirms a copy itself, and the app says nothing more.
-        Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
-    }
-    // What the clipboard holds as text, read once the reader asks for it (`Clipboard.string`): its first item's text, or
-    // a link's address; nothing for an image or a file.
-    state.readClipboard = {
-        context.getSystemService(ClipboardManager::class.java)?.primaryClip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.let { item ->
-            item.text?.toString() ?: item.uri?.takeIf { it.scheme !in LOCAL_SCHEMES }?.toString()
-        }
-    }
-    // A parcel's link through the system's share sheet (`ShareLink`, `LinkActivitySheet`), which tells `chosen` of the
-    // app it went to, if any (ShareTargetChosen); false where it couldn't be shown. The app's own "Add to Peek" is among
-    // the apps, as the iPhone's share sheet offers the app's own extension, whose activation rule names no type it
-    // turns away.
-    state.handOut = { address, chosen ->
-        val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, address)
-        val sender = chosen?.let { ShareTargetChosen.sender(context, it) }
-        try {
-            context.startActivity(Intent.createChooser(send, null, sender))
-            true
-        } catch (_: ActivityNotFoundException) {
-            false
-        }
-    }
     // A message under the list has four seconds while it shows, from when it came; a newer one, even in the same
     // words, has its own. Counted here rather than by the list, which a turn of the window draws anew. An archive's
     // Undo counts its seven in the app's scope ([DeliveriesState.archive]).
@@ -244,6 +189,10 @@ fun DeliveriesTab(
         HoldingDelivered(state, resumed, watching)
         Reviewing(state, resumed, watching, now)
         Consuming(state, inbox)
+        // The first open's field, scan and paste (`firstParcel`), which chose this tab first: Add opens here for them.
+        LaunchedEffect(state) {
+            snapshotFlow { firstOpen.asked }.filterNotNull().collect { firstOpen.take()?.let { state.add(it.request, it.focus) } }
+        }
         DeliveriesKeys(state, scope, reduceMotion)
         // Over a parcel's page the tab bar has gone, so the tab is tapped again only with the list in view.
         TabReselectionEffect { state.scrollToTop(reduceMotion) }
@@ -313,10 +262,78 @@ fun DeliveriesTab(
         ParcelMapHost(state)
         // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.
         DeliveredPaper(state)
-        // The first open, over the whole shell, its tab bar too, where the tab shell draws it, and under what the tab
-        // presents.
-        FirstOpenHost(state)
     }
+}
+
+/**
+ * DeliveryListView's state for [source], kept with the window and through the process's death for the launch: its
+ * navigation, its list's scroll, what its menus wait on and what it draws with, as the composition last gave them;
+ * [firstOpen] is the first open over the tabs, and [adding] Add open over the window ([PromptStates.adding]).
+ */
+@Composable
+internal fun rememberDeliveriesState(source: DeliveriesSource, firstOpen: FirstOpen, adding: MutableState<String?>): DeliveriesState {
+    val launch = source.launch
+    val navigator = rememberSaveable(launch, saver = DeliveriesNavigator.saver(launch)) { DeliveriesNavigator() }
+    navigator.left = { pageId ->
+        source.pageWork.forget(pageId)
+        source.feedbacks.forget(pageId)
+    }
+    navigator.opened = source.feedbacks::open
+    val listState = rememberLazyListState()
+    val archiveOpen = rememberForLaunch(launch, false)
+    val reviewDue = rememberForLaunch(launch, false)
+    val sampleShown = rememberForLaunch(launch, false)
+    val mapCover = rememberForLaunch<String?>(launch, null)
+    val views = rememberListViewStates(launch)
+    val prompts = rememberPromptStates(launch, adding)
+    val now = LocalNow.current
+    val scope = rememberCoroutineScope()
+    val state = remember(source, navigator, listState) {
+        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, sampleShown, firstOpen, mapCover, views, prompts, now, scope)
+    }
+    // A screen the navigation shows also ends the arrival of a card just added.
+    navigator.view = { screen ->
+        source.view(screen)
+        state.endArrival()
+    }
+    state.localizer = LocalLocalizer.current
+    // What the paper and the flights are drawn with, as the list was last drawn.
+    state.identities = LocalCarrierIdentities.current
+    state.language = LocalLanguage.current
+    state.graphics = LocalGraphicsContext.current
+    state.density = LocalDensity.current
+    state.layoutDirection = LocalLayoutDirection.current
+    LocalPaperSeeds.current?.let { state.seeds = it }
+    val context = LocalContext.current
+    val haptics = rememberHaptics()
+    state.copy = { text ->
+        context.getSystemService(ClipboardManager::class.java)?.setPrimaryClip(ClipData.newPlainText(text, text))
+        haptics.success()
+        // From Android 13 the system confirms a copy itself, and the app says nothing more.
+        Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+    }
+    // What the clipboard holds as text, read once the reader asks for it (`Clipboard.string`): its first item's text, or
+    // a link's address; nothing for an image or a file.
+    state.readClipboard = {
+        context.getSystemService(ClipboardManager::class.java)?.primaryClip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.let { item ->
+            item.text?.toString() ?: item.uri?.takeIf { it.scheme !in LOCAL_SCHEMES }?.toString()
+        }
+    }
+    // A parcel's link through the system's share sheet (`ShareLink`, `LinkActivitySheet`), which tells `chosen` of the
+    // app it went to, if any (ShareTargetChosen); false where it couldn't be shown. The app's own "Add to Peek" is among
+    // the apps, as the iPhone's share sheet offers the app's own extension, whose activation rule names no type it
+    // turns away.
+    state.handOut = { address, chosen ->
+        val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, address)
+        val sender = chosen?.let { ShareTargetChosen.sender(context, it) }
+        try {
+            context.startActivity(Intent.createChooser(send, null, sender))
+            true
+        } catch (_: ActivityNotFoundException) {
+            false
+        }
+    }
+    return state
 }
 
 /**

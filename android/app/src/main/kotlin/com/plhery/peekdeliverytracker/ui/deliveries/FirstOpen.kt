@@ -2,6 +2,8 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.EnterExitState
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.SizeTransform
@@ -44,7 +46,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.FloatState
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -53,6 +57,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -118,7 +123,6 @@ import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLevelHinge
-import com.plhery.peekdeliverytracker.ui.tabs.TabCovering
 import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
@@ -130,41 +134,116 @@ import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.Radii
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
 import com.plhery.peekdeliverytracker.ui.zoom.ZoomStack
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
+import java.util.UUID
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 import kotlinx.coroutines.delay
 
 /**
- * TabsView's first open (A-S08, `showsFirstOpen`): FirstOpenView over the tabs and their bar, for a guest who follows
- * nothing (`FirstOpenPresence`). It stays while Add, opened from it, adds the first parcel, and leaves once Add has
- * gone, so that the list is seen receiving it; it comes back when the last parcel is forgotten. At once on a launch;
- * otherwise it comes in fading and leaves moving up off the top as it fades, over `.smooth(duration: 0.55)`, and with
- * neither under Reduce Motion. While it stands there TalkBack doesn't reach the tabs and their keys are off.
+ * What TabsView keeps of the first open over its tabs, each held for the launch ([rememberForLaunch]) where the iPhone
+ * keeps it in `@State`: whether it stands over the tabs (`showsFirstOpen`), whether its sample parcel's page shows
+ * (`showingSample`), and Add open over the deliveries (`showingAdd`), which is the deliveries' own ([adding],
+ * [PromptStates.adding]). The first parcel it asks for (`firstParcel`, [ask]) chooses the deliveries' tab, where Add has
+ * its host, and the deliveries open Add for it ([take]); nothing else it does changes the tab.
+ */
+@Stable
+internal class FirstOpen(shownState: MutableState<Boolean>, sampleState: MutableState<Boolean>, val adding: MutableState<String?>) {
+    /**
+     * Whether it stands over the tabs, kept with the window: one shown while Add adds the first parcel stays until Add
+     * has gone ([shows]).
+     */
+    var shown: Boolean by shownState
+
+    /** Whether its sample parcel's page shows, in a stack of its own over it. */
+    var sampleShown: Boolean by sampleState
+
+    /** The zoom from its picture to its sample parcel's page. */
+    val zoom = ZoomTransition()
+
+    /** Chooses the deliveries' tab, as the shell's selection: Add is theirs. */
+    var chooseDeliveries: () -> Unit = {}
+
+    /** The first parcel it asked for, until the deliveries take it. */
+    var asked: FirstParcelAsk? by mutableStateOf(null)
+        private set
+
+    /** Add is open over the deliveries. */
+    val addOpen: Boolean get() = adding.value != null
+
+    /**
+     * Whether it stands over the tabs for a reader who is a `guest` with an `empty` list or not: TabsView's rule. It
+     * comes back when the last parcel is forgotten; it leaves when the first parcel is in, once Add has gone, so that
+     * the list is seen receiving it.
+     */
+    fun shows(guest: Boolean, empty: Boolean): Boolean = guest && (empty || (addOpen && shown))
+
+    /**
+     * `firstParcel = request`: the deliveries' tab is chosen and Add opens there for [request], TalkBack going back to
+     * [focus] once it has gone. Nothing while Add is up.
+     */
+    fun ask(request: FirstParcelRequest, focus: AccessibilityFocus?) {
+        if (addOpen) return
+        chooseDeliveries()
+        asked = FirstParcelAsk(request, focus)
+    }
+
+    /** The first parcel asked for, taken once (`firstParcel = nil`). */
+    fun take(): FirstParcelAsk? = asked.also { asked = null }
+}
+
+/** A first parcel asked for from the first open, and where TalkBack goes back to once Add has gone. */
+internal class FirstParcelAsk(val request: FirstParcelRequest, val focus: AccessibilityFocus?)
+
+@Composable
+internal fun rememberFirstOpen(launch: UUID): FirstOpen {
+    val shown = rememberForLaunch(launch, false)
+    val sample = rememberForLaunch(launch, false)
+    val adding = rememberForLaunch<String?>(launch, null)
+    return remember(shown, sample, adding) { FirstOpen(shown, sample, adding) }
+}
+
+/** The shell's first open, which the deliveries' tab opens Add for; null outside a shell. */
+internal val LocalFirstOpen = staticCompositionLocalOf<FirstOpen?> { null }
+
+/**
+ * TabsView's `showsFirstOpen` for [session]: a guest with no parcels, or one whose first parcel Add is adding from it.
+ * Kept with the window as it is composed ([FirstOpen.shown]).
  */
 @Composable
-internal fun FirstOpenHost(state: DeliveriesState) {
-    val source = state.source
-    val session by source.session.collectAsState()
+internal fun FirstOpen.covers(source: DeliveriesSource, session: AuthenticationState): Boolean {
     val parcels by source.parcels.collectAsState()
-    val shows = state.firstOpenShows(guest = session == AuthenticationState.Welcome, empty = parcels.isEmpty())
+    val shows = shows(guest = session == AuthenticationState.Welcome, empty = parcels.isEmpty())
+    SideEffect { shown = shows }
+    return shows
+}
+
+/**
+ * TabsView's first open (A-S08): FirstOpenView over the tabs and their bar while it [shows], for a guest who follows
+ * nothing (`FirstOpenPresence`), whichever tab is chosen. It stays while Add, opened from it, adds the first parcel, and
+ * leaves once Add has gone, so that the list is seen receiving it; it comes back when the last parcel is forgotten. At
+ * once on a launch; otherwise it comes in fading and leaves moving up off the top as it fades, over
+ * `.smooth(duration: 0.55)`, and with neither under Reduce Motion. On its way out it takes no touch, as SwiftUI stops
+ * hit-testing a view it removes.
+ */
+@Composable
+internal fun FirstOpenHost(firstOpen: FirstOpen, source: DeliveriesSource, shows: Boolean) {
     val presence = remember { MutableTransitionState(shows) }
     presence.targetState = shows
-    SideEffect { state.firstOpenShown = shows }
     if (!presence.currentState && !presence.targetState) return
     val reduceMotion = PeekTheme.reduceMotion
-    TabCovering(covers = shows) {
-        AnimatedVisibility(
-            presence,
-            enter = if (reduceMotion) EnterTransition.None else fadeIn(Motion.smooth(PRESENCE_DURATION)),
-            exit = if (reduceMotion) {
-                ExitTransition.None
-            } else {
-                slideOutVertically(Motion.smooth(PRESENCE_DURATION)) { -it } + fadeOut(Motion.smooth(PRESENCE_DURATION))
-            },
-        ) {
-            FirstOpenView(state)
-        }
+    AnimatedVisibility(
+        presence,
+        enter = if (reduceMotion) EnterTransition.None else fadeIn(Motion.smooth(PRESENCE_DURATION)),
+        exit = if (reduceMotion) {
+            ExitTransition.None
+        } else {
+            slideOutVertically(Motion.smooth(PRESENCE_DURATION)) { -it } + fadeOut(Motion.smooth(PRESENCE_DURATION))
+        },
+    ) {
+        val leaving = transition.targetState == EnterExitState.PostExit
+        Box(if (leaving) Untouched else Modifier, propagateMinConstraints = true) { FirstOpenView(firstOpen, source) }
     }
 }
 
@@ -172,7 +251,7 @@ internal fun FirstOpenHost(state: DeliveriesState) {
  * FirstOpenView (A-S09): the sample parcel's journey on its map and the question, laid out as the window has room for
  * ([FirstOpenLayouts]), text no larger than accessibility 1's. Its picture opens the sample parcel's page in the first
  * open's own stack (`navigationDestination`), zooming out of it, and the page goes back to the first open, not to the
- * deliveries under it.
+ * deliveries under it. The page is drawn from a state of the first open's own, as FirstOpenView's stack has its own.
  *
  * The journey (`running`) moves on a scan at a time, each held `FirstOpenJourney.hold(step)`, changing over
  * `.easeInOut(duration: 0.5)`, while the app is in front, Add doesn't cover it, the atlas is read, no parcel link's
@@ -181,8 +260,9 @@ internal fun FirstOpenHost(state: DeliveriesState) {
  * under Reduce Motion), the picture from above and the question from below.
  */
 @Composable
-private fun FirstOpenView(state: DeliveriesState) {
+private fun FirstOpenView(firstOpen: FirstOpen, source: DeliveriesSource) {
     CappedDynamicTypeSize(DynamicTypeSize.Accessibility1) {
+        val state = rememberDeliveriesState(source, firstOpen, rememberForLaunch<String?>(source.launch, null))
         val reduceMotion = PeekTheme.reduceMotion
         var step by rememberSaveable { mutableIntStateOf(FirstOpenJourney.stillStep) }
         var appeared by rememberSaveable { mutableStateOf(false) }
@@ -191,7 +271,7 @@ private fun FirstOpenView(state: DeliveriesState) {
         val lifecycle = LocalLifecycleOwner.current.lifecycle
         val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
         val linkOpen = LocalParcelLinkOpen.current
-        val running = !reduceMotion && resumed && state.addition == null && atlas != null && !linkOpen && !state.firstSampleShown
+        val running = !reduceMotion && resumed && !firstOpen.addOpen && atlas != null && !linkOpen && !firstOpen.sampleShown
         LaunchedEffect(atlas != null) {
             if (atlas == null || appeared) return@LaunchedEffect
             // The story starts from its first scan; a still picture shows the parcel a day away.
@@ -210,13 +290,13 @@ private fun FirstOpenView(state: DeliveriesState) {
 
         val language = LocalLanguage.current
         val identity = carrierIdentity(CarrierId.Dhl, language)
-        val stack = remember(state) { PageStack(state.firstOpenZoom, state::closeFirstSample) }
+        val stack = remember(state) { PageStack(firstOpen.zoom, state::closeFirstSample) }
         Box(Modifier.fillMaxSize().background(PeekTheme.colors.background).semantics { journeyStep = step }) {
             if (identity == null) return@Box
-            val scene = rememberScene(state, identity, step, atlas, appeared, appearance, running, language)
+            val scene = rememberScene(state, firstOpen, identity, step, atlas, appeared, appearance, running, language)
             ZoomStack(
-                transition = state.firstOpenZoom,
-                top = if (state.firstSampleShown) FirstOpenJourney.parcelId else null,
+                transition = firstOpen.zoom,
+                top = if (firstOpen.sampleShown) FirstOpenJourney.parcelId else null,
                 onBack = state::closeFirstSample,
                 root = { FirstOpenLayouts(scene) },
                 page = { CompositionLocalProvider(LocalPageStack provides stack) { ParcelPage(state, FirstOpenJourney.parcelId) } },
@@ -228,7 +308,9 @@ private fun FirstOpenView(state: DeliveriesState) {
 
 /** What every part of the first open draws: the sample parcel at the journey's step, in DHL's colours. */
 private class FirstOpenScene(
+    /** The first open's own state, which its sample's page is drawn from. */
     val state: DeliveriesState,
+    val firstOpen: FirstOpen,
     val identity: CarrierVisualIdentity,
     val step: Int,
     val parcel: Parcel,
@@ -248,6 +330,7 @@ private class FirstOpenScene(
 @Composable
 private fun rememberScene(
     state: DeliveriesState,
+    firstOpen: FirstOpen,
     identity: CarrierVisualIdentity,
     step: Int,
     atlas: WorldAtlas?,
@@ -271,7 +354,7 @@ private fun rememberScene(
     }
     val ping = { at: Int -> FirstOpenJourney.ping(at, localizer) }
     return FirstOpenScene(
-        state, identity, step, parcel(step), atlas, appeared, appearance, running, language, state.source.tracksWithoutAccount,
+        state, firstOpen, identity, step, parcel(step), atlas, appeared, appearance, running, language, state.source.tracksWithoutAccount,
         status, ping,
     )
 }
@@ -328,14 +411,17 @@ private enum class FirstOpenFit { Poster, Page, Scroll }
 private fun FirstOpenFits(scene: FirstOpenScene, insets: Safe, heroHeight: Dp, roomy: Boolean, poster: Boolean, width: Dp, screen: Dp) {
     SubcomposeLayout(Modifier.fillMaxSize()) { constraints ->
         val room = constraints.maxHeight - insets.bottom.roundToPx()
-        val ideal = Constraints(maxWidth = (constraints.maxWidth - insets.start.roundToPx() - insets.end.roundToPx()).coerceAtLeast(0))
-        fun height(slot: FirstOpenFit, content: @Composable () -> Unit): Int =
-            subcompose("probe-$slot") { Box(Modifier.clearAndSetSemantics {}) { content() } }.maxOfOrNull { it.measure(ideal).height } ?: 0
+        // Each at the width it is drawn at: the poster across the window, keeping clear of its safe sides itself, and
+        // the question between them.
+        val window = Constraints(maxWidth = constraints.maxWidth)
+        val between = Constraints(maxWidth = (constraints.maxWidth - insets.start.roundToPx() - insets.end.roundToPx()).coerceAtLeast(0))
+        fun height(slot: FirstOpenFit, within: Constraints, content: @Composable () -> Unit): Int =
+            subcompose("probe-$slot") { Box(Modifier.clearAndSetSemantics {}) { content() } }.maxOfOrNull { it.measure(within).height } ?: 0
         val fit = when {
             // The poster's height holds its safe bottom already.
-            poster && height(FirstOpenFit.Poster) { PosterForeground(scene, insets, width, screen, probe = true) } <= constraints.maxHeight ->
+            poster && height(FirstOpenFit.Poster, window) { PosterForeground(scene, insets, width, screen, probe = true) } <= constraints.maxHeight ->
                 FirstOpenFit.Poster
-            heroHeight.roundToPx() + height(FirstOpenFit.Page) { FirstOpenAsk(scene, roomy, probe = true) } <= room -> FirstOpenFit.Page
+            heroHeight.roundToPx() + height(FirstOpenFit.Page, between) { FirstOpenAsk(scene, roomy, probe = true) } <= room -> FirstOpenFit.Page
             else -> FirstOpenFit.Scroll
         }
         val placeables = subcompose(fit) {
@@ -430,7 +516,7 @@ private fun FirstOpenHero(scene: FirstOpenScene, top: Dp, height: Dp, beside: Bo
         Box(
             Modifier
                 .fillMaxSize()
-                .samplePicture(scene, label)
+                .samplePicture(scene, label, shape)
                 .clip(shape)
                 .background(colors.resolve(identity.surface)),
             contentAlignment = Alignment.BottomStart,
@@ -461,42 +547,43 @@ private fun FirstOpenHero(scene: FirstOpenScene, top: Dp, height: Dp, beside: Bo
 }
 
 /**
- * The picture's button: it opens the sample parcel's page out of itself (`matchedTransitionSource`), giving a little
- * under the finger, read as [label] alone.
+ * The picture's button: it opens the sample parcel's page out of itself (`matchedTransitionSource`), its corners
+ * [corners]'s (`.clipShape(corners)`), square where none are given, giving a little under the finger, read as [label]
+ * alone.
  */
-private fun Modifier.samplePicture(scene: FirstOpenScene, label: String): Modifier = this
-    .zoomSource(FirstOpenJourney.parcelId, scene.state.firstOpenZoom, Radii.heroBottom)
+private fun Modifier.samplePicture(
+    scene: FirstOpenScene,
+    label: String,
+    corners: UnevenContinuousRoundedShape = UnevenContinuousRoundedShape(),
+): Modifier = this
+    .zoomSource(FirstOpenJourney.parcelId, scene.firstOpen.zoom, corners)
     .testTag(FIRST_OPEN_PICTURE)
     .clickable(interactionSource = null, indication = PressStyle.FirstOpenHero, role = Role.Button, onClick = scene.state::openFirstSample)
     .semantics { contentDescription = label }
 
-/** `RouteEngraving` of the sample parcel at its step, once the atlas is read; no zoom under two fingers. */
+/**
+ * `RouteEngraving` of the sample parcel at its step, once the atlas is read; no zoom under two fingers. Its halo pulses
+ * only while the journey runs, as Core Animation's costs the iPhone no frame of its own.
+ */
 @Composable
 private fun SampleRoute(scene: FirstOpenScene, insets: EdgeInsets, floor: Double) {
     val atlas = scene.atlas ?: return
     val route = rememberParcelRoute(scene.parcel, atlas, scene.language)
     RouteEngraving(
         atlas = atlas, route = route, stage = scene.parcel.currentStage, identity = scene.identity, language = scene.language,
-        modifier = Modifier.fillMaxSize(), insets = insets, floor = floor, peek = false,
+        modifier = Modifier.fillMaxSize(), insets = insets, floor = floor, peek = false, running = scene.running,
     )
 }
 
-/** The parcel's status at the journey's step, the next fading in over the last (`.id(step).transition(.opacity)`). */
+/**
+ * The parcel's status at the journey's step, the next fading in over the last where they stand
+ * (`.id(step).transition(.opacity)`), unclipped as its room changes over the step's `.easeInOut(duration: 0.5)`.
+ */
 @Composable
 private fun StepStatus(scene: FirstOpenScene, style: TextStyle) {
     val ink = PeekTheme.colors.resolve(scene.identity.ink)
     val reduceMotion = PeekTheme.reduceMotion
-    AnimatedContent(
-        scene.step,
-        transitionSpec = {
-            if (reduceMotion) {
-                EnterTransition.None togetherWith ExitTransition.None
-            } else {
-                fadeIn(Motion.easeInOut(STEP_DURATION)) togetherWith fadeOut(Motion.easeInOut(STEP_DURATION))
-            }
-        },
-        label = "status",
-    ) { step ->
+    AnimatedContent(scene.step, transitionSpec = { stepStatusTransform(reduceMotion) }, label = "status") { step ->
         Text(scene.status(step), color = ink, style = style)
     }
 }
@@ -511,24 +598,40 @@ private fun StepPing(scene: FirstOpenScene, rise: Dp, bottom: Dp = 0.dp) {
     val reduceMotion = PeekTheme.reduceMotion
     val density = LocalDensity.current
     val travel = with(density) { rise.roundToPx() }
-    AnimatedContent(
-        scene.step,
-        transitionSpec = {
-            if (reduceMotion) {
-                EnterTransition.None togetherWith ExitTransition.None
-            } else {
-                val spec = Motion.easeInOut<Float>(STEP_DURATION)
-                (fadeIn(spec) + slideInVertically(Motion.easeInOut(STEP_DURATION)) { travel }) togetherWith
-                    (fadeOut(spec) + slideOutVertically(Motion.easeInOut(STEP_DURATION)) { travel }) using
-                    SizeTransform(clip = false) { _, _ -> Motion.easeInOut(STEP_DURATION) }
-            }
-        },
-        label = "ping",
-    ) { step ->
+    AnimatedContent(scene.step, transitionSpec = { stepPingTransform(reduceMotion, travel) }, label = "ping") { step ->
         val ping = scene.ping(step) ?: return@AnimatedContent
         FirstOpenPing(ping, scene.identity, Modifier.padding(bottom = bottom))
     }
 }
+
+/**
+ * The status's change from a step to the next: the next fades in over the last where they stand, over the step's
+ * `.easeInOut(duration: 0.5)`, which their room changes over too, unclipped; at once under Reduce Motion.
+ */
+internal fun stepStatusTransform(reduceMotion: Boolean): ContentTransform = if (reduceMotion) {
+    EnterTransition.None togetherWith ExitTransition.None
+} else {
+    ContentTransform(fadeIn(Motion.easeInOut(STEP_DURATION)), fadeOut(Motion.easeInOut(STEP_DURATION)), sizeTransform = stepSize())
+}
+
+/**
+ * The alert's change from a step to the next: the next comes in from [travel] pixels away as the last leaves that way,
+ * both fading, over the step's `.easeInOut(duration: 0.5)`, which their room changes over too, unclipped; at once under
+ * Reduce Motion.
+ */
+internal fun stepPingTransform(reduceMotion: Boolean, travel: Int): ContentTransform = if (reduceMotion) {
+    EnterTransition.None togetherWith ExitTransition.None
+} else {
+    val spec = Motion.easeInOut<Float>(STEP_DURATION)
+    ContentTransform(
+        fadeIn(spec) + slideInVertically(Motion.easeInOut(STEP_DURATION)) { travel },
+        fadeOut(spec) + slideOutVertically(Motion.easeInOut(STEP_DURATION)) { travel },
+        sizeTransform = stepSize(),
+    )
+}
+
+/** A step's words take their new room over the step's curve, drawn whole meanwhile rather than cut to it. */
+private fun stepSize() = SizeTransform(clip = false) { _, _ -> Motion.easeInOut(STEP_DURATION) }
 
 /**
  * `FirstOpenPing`: what an alert would say, a bell 9 points tall and the words in caption medium on one line, shrinking
@@ -641,7 +744,6 @@ private fun FirstOpenAsk(
 private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modifier = Modifier) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val state = scene.state
     val shape = ContinuousRoundedShape(if (large) Radii.firstOpenField else Radii.firstOpenFieldCompact)
     val fieldFocus = remember { AccessibilityFocus() }
     val scanFocus = remember { AccessibilityFocus() }
@@ -662,7 +764,7 @@ private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modi
                 .heightIn(min = if (large) 64.dp else 58.dp)
                 .testTag(FIRST_OPEN_FIELD)
                 .accessibilityFocus(fieldFocus)
-                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { state.add(FirstParcelRequest.Type, fieldFocus) }
+                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { scene.firstOpen.ask(FirstParcelRequest.Type, fieldFocus) }
                 .semantics { contentDescription = fieldLabel },
             contentAlignment = Alignment.CenterStart,
         ) {
@@ -678,7 +780,7 @@ private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modi
                     .size(side)
                     .testTag(FIRST_OPEN_SCAN)
                     .accessibilityFocus(scanFocus)
-                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { state.add(FirstParcelRequest.Scan, scanFocus) }
+                    .clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { scene.firstOpen.ask(FirstParcelRequest.Scan, scanFocus) }
                     .semantics { contentDescription = scanLabel },
                 contentAlignment = Alignment.Center,
             ) {
@@ -698,7 +800,7 @@ private fun PasteButton(scene: FirstOpenScene, large: Boolean, modifier: Modifie
     val focus = remember { AccessibilityFocus() }
     FirstParcelPrimaryButton(localized("landing.pasteAndTrack"), "doc.on.clipboard", large, FIRST_OPEN_PASTE, focus, modifier) {
         state.source.action("parcel-paste")
-        state.add(FirstParcelRequest.Paste(state.readClipboard().orEmpty()), focus)
+        scene.firstOpen.ask(FirstParcelRequest.Paste(state.readClipboard().orEmpty()), focus)
     }
 }
 
@@ -824,7 +926,8 @@ private fun PosterForeground(
             Modifier
                 .fillMaxWidth()
                 .wrapContentWidth()
-                .widthIn(max = 780.dp)
+                // `.frame(maxWidth: 780).padding(.horizontal, 40)`: 780 inside 860.
+                .widthIn(max = POSTER_COLUMN + 80.dp)
                 .padding(start = 40.dp, top = if (portrait) 72.dp else 28.dp, end = 40.dp)
                 .then(
                     if (bounds == null) {
@@ -1026,6 +1129,9 @@ private val PING_TRAVEL = 6.dp
 private const val PING_MINIMUM_SCALE = 0.8f
 private const val ASK_TITLE_MINIMUM_SCALE = 0.7f
 private const val POSTER_TITLE_MINIMUM_SCALE = 0.6f
+
+/** The poster's question at its widest. */
+private val POSTER_COLUMN = 780.dp
 
 /** The least room between the poster's question and its parcel's name. */
 private val POSTER_GAP = 24.dp

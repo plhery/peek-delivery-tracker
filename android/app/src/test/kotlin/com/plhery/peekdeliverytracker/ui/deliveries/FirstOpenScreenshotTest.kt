@@ -37,8 +37,8 @@ import org.robolectric.annotation.GraphicsMode
  * The first open on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), a guest
  * with nothing followed, at the captures' moment, with the iPhone's safe area as a phone's bars: the status bar 62
  * tall and the gesture bar at the foot. Under Reduce Motion, so it shows the journey's still step, unless a shot
- * follows the journey. Then a phone on its side, which scrolls, the poster on a tablet and an unfolded foldable, and
- * the spread of a foldable standing half open.
+ * follows the journey. Then a phone on its side, which scrolls, the poster on a tablet and an unfolded foldable both
+ * ways, and the spread of a foldable standing half open.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -212,6 +212,14 @@ class FirstOpenScreenshotTest {
     fun anUnfoldedFoldable() {
         show(bars = Bars(top = 32, bottom = 24))
         compose.screenshot("first_open_foldable")
+    }
+
+    /** The unfolded foldable on its side, lying flat, as the iPhone's duo-book frames are: the poster. */
+    @Test
+    @Config(qualifiers = "w841dp-h673dp-land-xxhdpi")
+    fun anUnfoldedFoldableOnItsSide() {
+        show(bars = Bars(top = 32, bottom = 24))
+        compose.screenshot("first_open_foldable_landscape")
     }
 
     /** The foldable standing half open as a book: the picture before the fold, the question after it. */

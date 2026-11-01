@@ -28,7 +28,8 @@ import kotlin.coroutines.ContinuationInterceptor
  * Motion unless asked otherwise. The session is told to the deliveries too, and their screens counted to [onView] with
  * the tabs'; their app's scope runs on the test's clock. The carriers are the bundled catalog's unless [identities] pins others. Transparency is full
  * unless [reduceTransparency]. The tabs show [browserCheck]'s sheet, where a test gives one, and scan labels with
- * [scanner] (none unless a test gives one). A parcel's link opens over it from [links], where a test gives them.
+ * [scanner] (none unless a test gives one). A parcel's link opens over it from [links], where a test gives them. The
+ * first open stands over the tabs for a guest with nothing followed, unless a test draws its own [deliveries].
  */
 @Composable
 fun RootHost(
@@ -60,7 +61,8 @@ fun RootHost(
             dark = dark, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = reduceTransparency,
             carrierIdentities = identities,
         ) {
-            PeekRoot(state, localizer, onView, inbox, browserCheck, scanner, links) {
+            // The first open over the tabs is the deliveries' own: none over a page a test draws in their place.
+            PeekRoot(state, localizer, onView, inbox, browserCheck, scanner, links, source = shown.takeIf { deliveries == null }) {
                 if (deliveries != null) {
                     deliveries()
                 } else {

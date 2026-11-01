@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.union
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -81,6 +82,7 @@ import androidx.navigationevent.compose.rememberNavigationEventDispatcherOwner
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabBarPadding
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.TabBarHidden
@@ -351,7 +353,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     val source: ZoomSourceNode? get() = chosenSource?.takeIf { it.id == id && it.isAttached }
     private var sourceSeen = Rect.Zero
     private var fallback: Rect? by mutableStateOf(null)
-    private var sourceRadius = 0f
+    private var sourceCorners = FlightCorners.Square
     private var displayRadius = 0f
     private var density = 1f
     private var surroundings: (() -> Surroundings)? = null
@@ -494,11 +496,13 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
             chosenSource = node
             sourceSeen = frame
             fallback = null
-            sourceRadius = with(around.density) { node.cornerRadius.toPx() }
+            sourceCorners = with(around.density) {
+                node.corners.run { FlightCorners(topLeading.toPx(), bottomLeading.toPx(), bottomTrailing.toPx(), topTrailing.toPx()) }
+            }
         } else {
             chosenSource = null
             fallback = ZoomGeometry.fallback(around.safe, around.density.density, around.hinge)
-            sourceRadius = with(around.density) { Radii.card.toPx() }
+            sourceCorners = FlightCorners.even(with(around.density) { Radii.card.toPx() })
         }
     }
 
@@ -574,7 +578,8 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     fun container(): Rect = if (crossfade || id == null) bounds else ZoomGeometry.frame(small(), large(), progress)
 
-    fun radius(): Float = if (atRest || crossfade) 0f else ZoomGeometry.cornerRadius(sourceRadius, displayRadius, progress)
+    /** The container's corners: the source's, each growing to the display's own as the page comes. */
+    fun corners(): FlightCorners = if (atRest || crossfade) FlightCorners.Square else sourceCorners.toward(displayRadius, progress)
 
     /** How far the page has come over the root. Under Reduce Motion the root stays as it is. */
     fun behind(): Float = if (id == null || crossfade) 0f else progress
@@ -617,7 +622,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         alpha = containerOpacity()
         val cut = !atRest && !crossfade && scale > 0f
         clip = cut
-        shape = if (cut) ContainerCut(frame.height / scale, radius() / scale) else RectangleShape
+        shape = if (cut) ContainerCut(frame.height / scale, corners() / scale) else RectangleShape
     }
 
     fun drawBehindPage(scope: DrawScope, shadow: ShadowPaint) = with(scope) {
@@ -627,16 +632,26 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         val opacity = ZoomGeometry.SHADOW_OPACITY * progress * containerOpacity()
         if (opacity <= 0f) return@with
         val frame = container()
-        val radius = radius()
+        val corners = corners()
         drawIntoCanvas { drawn ->
             val canvas = drawn.nativeCanvas
             // Around the page only, which may let it through as it fades.
             shadow.page.rewind()
-            shadow.page.addRoundRect(frame.left, frame.top, frame.right, frame.bottom, radius, radius, Path.Direction.CW)
+            if (corners.even) {
+                val radius = corners.topLeading
+                shadow.page.addRoundRect(frame.left, frame.top, frame.right, frame.bottom, radius, radius, Path.Direction.CW)
+            } else {
+                shadow.page.addRoundRect(frame.left, frame.top, frame.right, frame.bottom, corners.radii(), Path.Direction.CW)
+            }
             canvas.save()
             canvas.clipOutPath(shadow.page)
             shadow.paint.color = Color.Black.copy(alpha = opacity).toArgb()
-            canvas.drawRoundRect(frame.left, frame.top, frame.right, frame.bottom, radius, radius, shadow.paint)
+            if (corners.even) {
+                val radius = corners.topLeading
+                canvas.drawRoundRect(frame.left, frame.top, frame.right, frame.bottom, radius, radius, shadow.paint)
+            } else {
+                canvas.drawPath(shadow.page, shadow.paint)
+            }
             canvas.restore()
         }
     }
@@ -764,12 +779,41 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     }
 }
 
-/** The page's container in its own pixels: as wide as the window, `height` tall, its corners `radius` round. */
-private data class ContainerCut(val height: Float, val radius: Float) : Shape {
+/**
+ * A flight's corners, in pixels, from the leading top one round; the app lays out left to right, so leading is left.
+ * [even] where all four are as round.
+ */
+@Immutable
+internal data class FlightCorners(val topLeading: Float, val bottomLeading: Float, val bottomTrailing: Float, val topTrailing: Float) {
+    val even: Boolean get() = topLeading == bottomLeading && bottomLeading == bottomTrailing && bottomTrailing == topTrailing
+
+    /** Each corner [progress] of the way to [large]. */
+    fun toward(large: Float, progress: Float) = FlightCorners(
+        ZoomGeometry.cornerRadius(topLeading, large, progress), ZoomGeometry.cornerRadius(bottomLeading, large, progress),
+        ZoomGeometry.cornerRadius(bottomTrailing, large, progress), ZoomGeometry.cornerRadius(topTrailing, large, progress),
+    )
+
+    operator fun div(scale: Float) = FlightCorners(topLeading / scale, bottomLeading / scale, bottomTrailing / scale, topTrailing / scale)
+
+    /** As [Path.addRoundRect] takes them: x and y of the top left, the top right, the bottom right, the bottom left. */
+    fun radii() = floatArrayOf(topLeading, topLeading, topTrailing, topTrailing, bottomTrailing, bottomTrailing, bottomLeading, bottomLeading)
+
+    companion object {
+        val Square = FlightCorners(0f, 0f, 0f, 0f)
+
+        fun even(radius: Float) = FlightCorners(radius, radius, radius, radius)
+    }
+}
+
+/** The page's container in its own pixels: as wide as the window, `height` tall, its corners [corners]. */
+private data class ContainerCut(val height: Float, val corners: FlightCorners) : Shape {
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
         val cut = Size(size.width, height.coerceAtMost(size.height))
-        if (radius <= 0f) return Outline.Rectangle(Rect(Offset.Zero, cut))
-        return ContinuousRoundedShape(with(density) { radius.toDp() }).createOutline(cut, layoutDirection, density)
+        if (corners == FlightCorners.Square) return Outline.Rectangle(Rect(Offset.Zero, cut))
+        if (corners.even) return ContinuousRoundedShape(with(density) { corners.topLeading.toDp() }).createOutline(cut, layoutDirection, density)
+        return with(density) {
+            UnevenContinuousRoundedShape(corners.topLeading.toDp(), corners.bottomLeading.toDp(), corners.bottomTrailing.toDp(), corners.topTrailing.toDp())
+        }.createOutline(cut, layoutDirection, density)
     }
 }
 

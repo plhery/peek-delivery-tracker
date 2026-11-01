@@ -272,21 +272,11 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
 )
 
 /**
- * What TabsView and FirstOpenView keep in `@State` of the first open, each held for the launch ([rememberForLaunch]):
- * whether it stands over the deliveries (`showsFirstOpen`) and whether its sample parcel's page shows (`showingSample`).
- */
-internal class FirstOpenStates(val shown: MutableState<Boolean>, val sample: MutableState<Boolean>)
-
-@Composable
-internal fun rememberFirstOpenStates(launch: UUID): FirstOpenStates =
-    FirstOpenStates(shown = rememberForLaunch(launch, false), sample = rememberForLaunch(launch, false))
-
-/**
  * What a menu opened over the deliveries that waits for an answer, each held for the launch ([rememberForLaunch]) as
  * the iPhone's `@State` is through a rotation: the delete it asks about, the parcel being named, the carrier editor
  * open, a parcel's alerts open, its share sheet open and Add open ([DeleteRequest.saved], [RenameRequest.saved],
  * [CarrierEditorRequest.saved], [AlertsRequest.saved], [ShareRequest.saved], [AddRequest.saved]), and the name typed so
- * far.
+ * far. Add open is [adding], which the first open over the tabs reads too ([FirstOpen.adding]).
  */
 internal class PromptStates(
     val deleting: MutableState<String?>,
@@ -299,14 +289,14 @@ internal class PromptStates(
 )
 
 @Composable
-internal fun rememberPromptStates(launch: UUID): PromptStates = PromptStates(
+internal fun rememberPromptStates(launch: UUID, adding: MutableState<String?>): PromptStates = PromptStates(
     deleting = rememberForLaunch<String?>(launch, null),
     renaming = rememberForLaunch<String?>(launch, null),
     name = rememberForLaunch(launch, ""),
     changingCarrier = rememberForLaunch<String?>(launch, null),
     alerts = rememberForLaunch<String?>(launch, null),
     sharing = rememberForLaunch<String?>(launch, null),
-    adding = rememberForLaunch<String?>(launch, null),
+    adding = adding,
 )
 
 /**
@@ -338,7 +328,7 @@ internal class DeliveriesState(
     archiveOpenState: MutableState<Boolean>,
     reviewDueState: MutableState<Boolean>,
     sampleShownState: MutableState<Boolean>,
-    firstOpenState: FirstOpenStates,
+    val firstOpen: FirstOpen,
     mapCoverState: MutableState<String?>,
     private val views: ListViewStates,
     private val prompts: PromptStates,
@@ -951,28 +941,17 @@ internal class DeliveriesState(
         navigator.open(FirstOpenJourney.parcelId)
     }
 
-    /**
-     * Whether the first open stands over the deliveries (`showsFirstOpen`), kept with the window: one shown while Add
-     * adds the first parcel stays until Add has gone ([firstOpenShows]).
-     */
-    var firstOpenShown: Boolean by firstOpenState.shown
+    /** Whether the first open stands over the tabs (`showsFirstOpen`), the shell's ([FirstOpen.shown]). */
+    val firstOpenShown: Boolean get() = firstOpen.shown
 
     /**
      * Whether the first open shows its sample parcel's page, in a stack of its own over it (`showingSample`), kept with
      * the window. Its picture zooms into the page with [firstOpenZoom].
      */
-    var firstSampleShown: Boolean by firstOpenState.sample
-        private set
+    val firstSampleShown: Boolean get() = firstOpen.sampleShown
 
     /** The zoom from the first open's picture to its sample parcel's page, in the first open's own stack. */
-    val firstOpenZoom = ZoomTransition()
-
-    /**
-     * Whether the first open stands over the deliveries for a reader who is a `guest` with an `empty` list or not:
-     * TabsView's rule. It comes back when the last parcel is forgotten; it leaves when the first parcel is in, once
-     * Add has gone, so that the list is seen receiving it.
-     */
-    fun firstOpenShows(guest: Boolean, empty: Boolean): Boolean = guest && (empty || (addition != null && firstOpenShown))
+    val firstOpenZoom: ZoomTransition get() = firstOpen.zoom
 
     /**
      * The first open's picture opens its parcel's page (`openSample()`), picked up, made up anew as it opens, over the
@@ -982,12 +961,12 @@ internal class DeliveriesState(
         if (firstSampleShown) return
         sampleParcel = null
         sampleShown = true
-        firstSampleShown = true
+        firstOpen.sampleShown = true
     }
 
     /** The first open's sample page goes back into its picture. */
     fun closeFirstSample() {
-        firstSampleShown = false
+        firstOpen.sampleShown = false
     }
 
     /**

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.view.KeyEvent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
@@ -45,10 +46,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -296,53 +302,6 @@ fun TabBarHidden(hidden: Boolean) {
     }
 }
 
-/**
- * What a tab stands over the whole shell, its tab bar too, and under what the tabs present: the first open, as the
- * iPhone's stands over its TabView (`.overlay { FirstOpenView }`). While it [covers] them, TalkBack reaches neither the
- * tab nor the bar (`.accessibilityHidden(showsFirstOpen)`) and the keys that choose a tab are off (`tabKeys`).
- */
-@Stable
-class TabCover {
-    internal var content: (@Composable () -> Unit)? by mutableStateOf(null)
-
-    /** What the tab provides where it asks for the cover, which the cover is composed with. */
-    internal var context: CompositionLocalContext? by mutableStateOf(null)
-
-    /** Whether it stands over the tabs, rather than only drawing on its way in or out. */
-    var covers: Boolean by mutableStateOf(false)
-        internal set
-}
-
-val LocalTabCover = staticCompositionLocalOf<TabCover?> { null }
-
-/**
- * Draws `content` over the whole shell from a tab ([TabCover]), the tabs covered while [covers], composed with what is
- * provided here. Outside a shell it is drawn here, over what the tab drew before it. It stays drawn as long as this
- * does, so that it can go on its own.
- */
-@Composable
-fun TabCovering(covers: Boolean, content: @Composable () -> Unit) {
-    val cover = LocalTabCover.current
-    if (cover == null) {
-        content()
-        return
-    }
-    val current by rememberUpdatedState(content)
-    val covering = remember { @Composable { current() } }
-    // Set as it is composed, before the shell draws the cover, so that it stands there from the frame it comes in:
-    // at once on a launch, with no frame of the tab before it.
-    cover.content = covering
-    cover.context = currentCompositionLocalContext
-    cover.covers = covers
-    DisposableEffect(cover) {
-        onDispose {
-            cover.content = null
-            cover.context = null
-            cover.covers = false
-        }
-    }
-}
-
 /** Runs `onReselect` each time the tab drawing this is tapped again while chosen. */
 @Composable
 fun TabReselectionEffect(onReselect: suspend () -> Unit) {
@@ -360,6 +319,12 @@ fun TabReselectionEffect(onReselect: suspend () -> Unit) {
  * an overlay host of its own above the tab's: what the app presents over the window whatever is in front, as the
  * browser check comes up over Add's cover. While it shows, TalkBack reaches nothing under it. Under a window's front
  * ([LocalWindowLayers]) both hosts draw their layers there, among what is over the shell, in the order they all came.
+ *
+ * [cover] stands over the tab and its bar, whichever tab is chosen, and under what the tabs present, as the iPhone's
+ * first open stands over its TabView (`.overlay { FirstOpenView }`); it keeps no room for the bar under it. While it
+ * [covered] them, from the frame it does, TalkBack reaches neither the tab nor the bar
+ * (`.accessibilityHidden(showsFirstOpen)`), neither takes the focus, so that Tab, the arrows and a D-pad go round the
+ * cover alone, and the keys that choose a tab are off (`tabKeys`). On its way out TalkBack doesn't reach the cover.
  */
 @Composable
 fun TabShell(
@@ -368,6 +333,8 @@ fun TabShell(
     labels: List<String>,
     onView: (String) -> Unit,
     modifier: Modifier = Modifier,
+    covered: Boolean = false,
+    cover: @Composable () -> Unit = {},
     overlays: @Composable () -> Unit = {},
     content: @Composable (PeekTab) -> Unit,
 ) {
@@ -381,9 +348,7 @@ fun TabShell(
             onView(tabs[selection].screen)
         }
     }
-    val cover = remember { TabCover() }
-    // Off while the first open stands over the tabs, as `tabKeys` are.
-    TabKeys(onSelect, enabled = !cover.covers)
+    TabKeys(onSelect, enabled = !covered)
     val tap = { tab: Int -> if (tab == selection) reselections[tab].reselect() else onSelect(tab) }
     val holder = rememberSaveableStateHolder()
     val backdrop = rememberMaterialBackdrop()
@@ -394,6 +359,27 @@ fun TabShell(
     val front = remember(backdrop, window) { TabOverlay(backdrop, window, "tab.front") }
     val visibility = remember { TabBarVisibility() }
     val density = LocalDensity.current
+    // Under the cover the tab and the bar take no focus: what would go into them goes into the cover instead, as a
+    // modal's focus wraps round it, Tab at its top and Shift-Tab at its foot, and what had it lets go.
+    val coveredNow by rememberUpdatedState(covered)
+    val coverFocus = remember { FocusRequester() }
+    val shut = Modifier
+        .focusProperties {
+            onEnter = {
+                if (coveredNow) {
+                    val into = when (requestedFocusDirection) {
+                        FocusDirection.Next -> FocusDirection.Down
+                        FocusDirection.Previous -> FocusDirection.Up
+                        else -> requestedFocusDirection
+                    }
+                    if (!coverFocus.requestFocus(into)) cancelFocusChange()
+                }
+            }
+        }
+        .focusGroup()
+    val focus = remember { ShellFocus() }
+    val focusManager = LocalFocusManager.current
+    LaunchedEffect(covered) { if (covered && (focus.tab || focus.bar)) focusManager.clearFocus() }
     BoxWithConstraints(modifier.fillMaxSize()) {
         val top = maxWidth >= 600.dp && maxHeight >= 480.dp
         // The status bar, or a desktop window's caption bar, and a cutout reaching past them.
@@ -406,10 +392,18 @@ fun TabShell(
         val (windowHinge, levelHinge) = windowHinges(constraints.maxWidth, constraints.maxHeight)
         val hinge = windowHinge?.start
         // Under what a tab draws over the window, which is modal, as the iPhone's menus, alerts and sheets are, and
-        // under the first open.
+        // under the cover.
         val presented = overlay.covered || front.covered
-        val hidden = if (presented || cover.covers) Modifier.clearAndSetSemantics {} else Modifier
-        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background).then(hidden)) {
+        val hidden = if (presented || covered) Modifier.clearAndSetSemantics {} else Modifier
+        Box(
+            Modifier
+                .fillMaxSize()
+                .materialBackdrop(backdrop)
+                .background(PeekTheme.colors.background)
+                .then(hidden)
+                .onFocusChanged { focus.tab = it.hasFocus }
+                .then(shut),
+        ) {
             CompositionLocalProvider(
                 LocalTabBarPadding provides footprint,
                 LocalTabReselection provides reselections[selection],
@@ -417,7 +411,6 @@ fun TabShell(
                 LocalWindowLevelHinge provides levelHinge,
                 LocalTabOverlay provides overlay,
                 LocalTabBarVisibility provides visibility,
-                LocalTabCover provides cover,
             ) {
                 holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
                 CompositionLocalProvider(LocalTabOverlay provides front, content = overlays)
@@ -428,11 +421,12 @@ fun TabShell(
             val bar = measurable.measure(constraints)
             layout(bar.width, bar.height) { if (!visibility.hidden) bar.place(0, 0) }
         }
-        val barHidden = if (presented || cover.covers || visibility.hidden) Modifier.clearAndSetSemantics {} else Modifier
+        val barHidden = if (presented || covered || visibility.hidden) Modifier.clearAndSetSemantics {} else Modifier
+        val barShut = Modifier.onFocusChanged { focus.bar = it.hasFocus }.then(shut)
         if (top) {
             TopTabBar(
                 labels, selection, tap, backdrop,
-                Modifier.align(Alignment.TopStart).then(shown).clearOfTheHinge(hinge).padding(top = topGap).then(barHidden),
+                Modifier.align(Alignment.TopStart).then(shown).clearOfTheHinge(hinge).padding(top = topGap).then(barHidden).then(barShut),
             )
         } else {
             // Clear of a cutout or of navigation buttons at the side, unless a hinge already puts it in the start half.
@@ -440,23 +434,26 @@ fun TabShell(
             val clear = if (hinge == null) Modifier.windowInsetsPadding(sides) else Modifier
             BottomTabBar(
                 labels, selection, tap, backdrop,
-                Modifier.align(Alignment.BottomStart).then(shown).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(barHidden),
+                Modifier.align(Alignment.BottomStart).then(shown).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(barHidden)
+                    .then(barShut),
             )
         }
-        // The first open, over the tab and its bar, under what the tab presents. The bar is under it, so what it draws
-        // keeps no room for one. Read as it is measured, after the tab, which asks for it as it is measured itself: it
-        // stands there from the tab's first frame, at once on a launch. TalkBack doesn't reach it on its way out.
-        ComposedAsMeasured(Modifier.fillMaxSize()) {
-            val covering = cover.content
-            val coverContext = cover.context
-            if (covering != null && coverContext != null) {
-                val coverHidden = presented || !cover.covers
-                Box(Modifier.fillMaxSize().then(if (coverHidden) Modifier.clearAndSetSemantics {} else Modifier)) {
-                    CompositionLocalProvider(coverContext) {
-                        CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp), content = covering)
-                    }
-                }
-            }
+        // The cover, over the tab and its bar, under what the tab presents, with what the tab is given but the bar's
+        // room: the bar is under it.
+        Box(
+            Modifier
+                .fillMaxSize()
+                .then(if (presented || !covered) Modifier.clearAndSetSemantics {} else Modifier)
+                .focusRequester(coverFocus)
+                .focusGroup(),
+        ) {
+            CompositionLocalProvider(
+                LocalWindowHinge provides windowHinge,
+                LocalWindowLevelHinge provides levelHinge,
+                LocalTabOverlay provides overlay,
+                LocalTabBarVisibility provides visibility,
+                content = cover,
+            )
         }
         // What a layer presents over the whole window in turn comes over it, in its own layer.
         Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier) {
@@ -466,14 +463,8 @@ fun TabShell(
     }
 }
 
-/** [content] composed as it is measured, after what comes before it in the layout, so it reads what they wrote then. */
-@Composable
-private fun ComposedAsMeasured(modifier: Modifier, content: @Composable () -> Unit) {
-    SubcomposeLayout(modifier) { constraints ->
-        val placeables = subcompose(Unit, content).map { it.measure(constraints) }
-        layout(constraints.maxWidth, constraints.maxHeight) { placeables.forEach { it.place(0, 0) } }
-    }
-}
+/** Whether the tab or its bar holds the focus, kept across compositions without causing one. */
+private class ShellFocus(var tab: Boolean = false, var bar: Boolean = false)
 
 /**
  * The bar centred across the room it is given or, where a hinge splits the window [hinge] pixels from its left, in

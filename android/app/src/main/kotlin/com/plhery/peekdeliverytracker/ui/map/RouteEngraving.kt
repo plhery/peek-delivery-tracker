@@ -37,7 +37,8 @@ import kotlinx.coroutines.async
  * below its top row, `buttons` its buttons over the top, and `room` how much lower the route starts below a second
  * carrier's mark. Its camera flies to a new frame (A-AN46), as a scan, a refresh, the text size or the language frames
  * it anew. With `peek`, two fingers zoom it closer until they lift (A-G13); off on Next up, which is one tap target in
- * a scrolling list. Decorative.
+ * a scrolling list. The dot pulses only while it is [running], which a picture whose story is stopped turns off.
+ * Decorative.
  */
 @Composable
 fun RouteEngraving(
@@ -55,13 +56,14 @@ fun RouteEngraving(
     room: Double = 0.0,
     peek: Boolean = true,
     entrance: FiniteAnimationSpec<Float>? = null,
+    running: Boolean = true,
 ) {
     WorldMapView(
         atlas = atlas, route = route, mode = route.defaultMode(stage),
         palette = remember(identity) { MapPalette.tint(identity.ink, identity.surface) },
         modifier = modifier, labels = MapLabels.Ends, showsContext = false, peek = peek, flies = true,
         // The parcel's dot pulses until the journey is over.
-        live = stage != TrackingStage.Delivered && stage != TrackingStage.Returned,
+        live = running && stage != TrackingStage.Delivered && stage != TrackingStage.Returned,
         // Pip keeps below the top row of the parcel's page, and of Next up alike, so both show the same picture.
         pip = PipMood(stage)?.let { PipRequest(it, ceiling = ceiling, floor = floor) },
         fades = true, insets = insets.copy(top = insets.top + room), covered = covered, buttons = buttons, language = language,

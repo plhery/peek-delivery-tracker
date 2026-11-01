@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- The API, sign-in, the carrier catalog and parcel links (platform/OkHttpTransport.kt). -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -63,6 +64,19 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/exports" />
         </provider>
+
+        <!-- The label scanner's ML Kit logs its use (the device, the app's and its own versions, timings, error codes;
+             never a frame or a barcode) through Google's data transport, whose CCT backend would send it to Google,
+             where the iPhone's DataScanner sends nothing of the app's. Without that backend the transport finds
+             nowhere to send and drops each batch (platform/CameraLabelScanner.kt). The backend's classes stay: ML Kit
+             links them. -->
+        <service
+            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+            tools:node="merge">
+            <meta-data
+                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+                tools:node="remove" />
+        </service>
     </application>
 
 </manifest>

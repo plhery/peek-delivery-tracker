@@ -56,10 +56,11 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
  * iPhone's fills its view, pinched to zoom between its widest and its nearest (`isPinchToZoomEnabled`), and ML Kit's
  * barcode model, bundled in the app, reading every format it knows (`recognizedDataTypes: [.barcode()]`) in the newest
  * frame at 1280 × 720, the middle of the resolutions the analysis takes (`qualityLevel: .balanced`). It reads on the
- * device, with no account, key or download. Of a frame's barcodes it follows the one nearest the middle, which it tells
- * first, as `recognizesMultipleItems: false` follows one; a tap doesn't focus, as DataScanner's doesn't. Bound to the
- * window's lifecycle, the camera closes while the app is away and opens again as it comes back, as DataScanner pauses
- * and resumes; a window made again (a turn, a fold) opens it again in the new window.
+ * device, with no account, key or download, and the app doesn't send the logs ML Kit keeps of its use
+ * (AndroidManifest.xml). Of a frame's barcodes it follows the one nearest the middle, which it tells first, as
+ * `recognizesMultipleItems: false` follows one; a tap doesn't focus, as DataScanner's doesn't. Bound to the window's
+ * lifecycle, the camera closes while the app is away and opens again as it comes back, as DataScanner pauses and
+ * resumes; a window made again (a turn, a fold) opens it again in the new window.
  *
  * What DataScanner draws that this doesn't: its guidance (`isGuidanceEnabled`), Apple's own words, which the app's copy
  * doesn't hold.

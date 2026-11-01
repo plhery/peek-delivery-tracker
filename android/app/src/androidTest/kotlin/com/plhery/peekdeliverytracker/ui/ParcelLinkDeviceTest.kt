@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.net.Uri
+import android.os.Build
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -79,9 +80,17 @@ class ParcelLinkDeviceTest {
     private fun exists(tag: String) = compose.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
 
     /** The activities of this package a link to `url` aimed at it opens. */
-    private fun takers(url: String): List<String> =
-        context.packageManager.queryIntentActivities(link(url).setPackage(context.packageName), PackageManager.ResolveInfoFlags.of(0))
-            .map { it.activityInfo.name }
+    private fun takers(url: String): List<String> {
+        val link = link(url).setPackage(context.packageName)
+        val found = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            context.packageManager.queryIntentActivities(link, PackageManager.ResolveInfoFlags.of(0))
+        } else {
+            // API 31 and 32 have only the flags as an Int.
+            @Suppress("DEPRECATION")
+            context.packageManager.queryIntentActivities(link, 0)
+        }
+        return found.map { it.activityInfo.name }
+    }
 
     /** As a browser sends a link: in a task of its own, aimed at the package. */
     private fun send(url: String) = context.startActivity(link(url).setPackage(context.packageName).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))

@@ -11,10 +11,12 @@ import androidx.camera.core.CameraState
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.runtime.remember
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.AppContainer
@@ -109,7 +111,9 @@ class TrackingScannerDeviceTest {
         compose.waitUntil(10_000) { exists(EMPTY_SCAN) || exists(ADD_BUTTON) }
         // The empty list's Scan barcode opens Add scanning; a list with parcels has only the bar's +.
         if (exists(EMPTY_SCAN)) {
-            compose.onNodeWithTag(EMPTY_SCAN).performClick()
+            // Its action, not a touch at its middle: on the smallest phone the floating tab bar covers the button's
+            // lower half until the list scrolls, and this activity, not edge to edge, is shorter than the app's.
+            compose.onNodeWithTag(EMPTY_SCAN).performSemanticsAction(SemanticsActions.OnClick)
             streamsThenCancels()
         } else {
             compose.onNodeWithTag(ADD_BUTTON).performClick()

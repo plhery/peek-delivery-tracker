@@ -1784,6 +1784,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "STO Express tracking: 申通快递 numbers, statuses, contact",
       "name": "STO Express",
       "color": "#ff6700"
+    },
+    {
+      "id": "j-and-t-cn",
+      "catalog": "j-and-t-cn",
+      "slug": "jt-express-china-tracking",
+      "title": "J&T Express China tracking: 极兔速递 numbers, statuses, contact",
+      "name": "J&T Express China",
+      "color": "#e62019"
     }
   ],
   "de": [

@@ -19,7 +19,7 @@ J&T Express Australia's waybill is `JTAU` followed by 12 digits, 16 characters i
 | `JTUK000000000000` | `JTUK` and 12 digits: J&T Express UK, not the Australian network. |
 | `JTDE000000000000` | `JTDE` and 12 digits: [J&T Express Germany](carrier:j-and-t-de). |
 | `JTE000000000000` | `JTE` and 12 digits: [J&T Express Middle East](carrier:j-and-t-middle-east), in Saudi Arabia, the UAE and Kuwait. |
-| `JT0000000000000` | `JT` and 13 digits: J&T's networks in South-East Asia and in China (J&T Express China). |
+| `JT0000000000000` | `JT` and 13 digits: J&T's networks in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). |
 
 J&T's networks in other countries have their own trackers and their own numbers: only `JTAU` belongs to the Australian network. If Peek keeps showing "Waiting for the carrier", check all 16 characters against the shop's email, then ask the shop. Spaces, dashes and lower case don't matter in Peek: `jtau 0000 0000 0000` reads the same as the first line. Peek's catalog also knows the carrier as J&T Express (AU), J&T Express AU, J&T Australia and JT Express Australia.
 

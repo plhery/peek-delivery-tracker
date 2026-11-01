@@ -34,8 +34,9 @@ import kotlin.coroutines.ContinuationInterceptor
  * unless [reduceTransparency]. The tabs show [browserCheck]'s sheet, where a test gives one, and scan labels with
  * [scanner] (none unless a test gives one). A parcel's link opens over it from [links], where a test gives them. The
  * first open stands over the tabs for a guest with nothing followed, unless a test draws its own [deliveries]. The
- * arrival signs in with [session], whose state then is the root's in place of [state]; without one it has the debug
- * build's, where sign-in is unavailable, which never changes the state.
+ * arrival signs in with [session], whose state then is the root's in place of [state], its runs going on in the
+ * host's scope as the app's do in its own; without one it has the debug build's, where sign-in is unavailable, which
+ * never changes the state.
  */
 @Composable
 fun RootHost(
@@ -72,7 +73,7 @@ fun RootHost(
             carrierIdentities = identities,
         ) {
             // The first open over the tabs is the deliveries' own: none over a page a test draws in their place.
-            PeekRoot(shownState, localizer, signIn, onView, inbox, browserCheck, scanner, links, source = shown.takeIf { deliveries == null }) {
+            PeekRoot(shownState, localizer, signIn, onView, inbox, browserCheck, scanner, links, source = shown.takeIf { deliveries == null }, work = effects) {
                 if (deliveries != null) {
                     deliveries()
                 } else {

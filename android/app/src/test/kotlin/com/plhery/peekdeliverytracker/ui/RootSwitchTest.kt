@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui
 
+import android.os.Looper
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -23,10 +24,13 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.time.Duration
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -46,10 +50,14 @@ class RootSwitchTest {
     private val transaction = RootTransaction()
     private var arrivalTaps = 0
 
+    /** The states each screen was drawn with, in order. */
+    private val drawn = mutableMapOf<RootScreen, MutableList<AuthenticationState>>()
+
     /** The arrival in red, which counts its taps, and the tabs in blue. */
     private fun show() {
         compose.setContent {
-            RootSwitch(state, transaction) { screen ->
+            RootSwitch(state, transaction) { screen, shown ->
+                drawn.getOrPut(screen) { mutableListOf() } += shown
                 when (screen) {
                     RootScreen.Arrival -> Box(Modifier.fillMaxSize().background(Color.Red).testTag(ARRIVAL).clickable { arrivalTaps++ })
                     RootScreen.Tabs -> Box(Modifier.fillMaxSize().background(Color.Blue).testTag(TABS))
@@ -61,7 +69,13 @@ class RootSwitchTest {
         compose.mainClock.autoAdvance = false
     }
 
+    /**
+     * The window's centre as it draws the last frame: laid out once the composition is idle, and drawn on its looper's
+     * clock, which a frame's length brings up.
+     */
     private fun centre(): Color {
+        compose.waitForIdle()
+        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
         val image = compose.onRoot().captureToImage().toPixelMap()
         return image[image.width / 2, image.height / 2]
     }
@@ -111,6 +125,50 @@ class RootSwitchTest {
         state = AuthenticationState.SignedOut
         frame()
         assertEquals("The record went with the switch before", Color.Red, centre())
+    }
+
+    /**
+     * The screen going is drawn with the state the change led to, and keeps it while it fades: a change during the fade
+     * reaches only the screen shown, with no animation of its own.
+     */
+    @Test
+    fun theScreenGoingKeepsTheStateItLeftOn() {
+        show()
+        transaction.withAnimation(Motion.easeInOut(0.45)) { AuthenticationState.Welcome.also { state = it } }
+        frame()
+        assertEquals(AuthenticationState.Welcome, drawn.getValue(RootScreen.Arrival).last())
+        compose.mainClock.advanceTimeBy(100)
+        state = AuthenticationState.Demo
+        frame()
+        compose.mainClock.advanceTimeBy(100)
+        assertEquals("The arrival keeps the state it left on", setOf(AuthenticationState.SignedOut, AuthenticationState.Welcome), drawn.getValue(RootScreen.Arrival).toSet())
+        assertEquals(AuthenticationState.Demo, drawn.getValue(RootScreen.Tabs).last())
+        val mid = centre()
+        assertTrue("Still fading: $mid", mid.red > 0.05f && mid.blue > 0.05f)
+        compose.mainClock.advanceTimeBy(300)
+        assertEquals(Color.Blue, centre())
+        // The record went with the change it was made with: the next one switches at once.
+        state = AuthenticationState.SignedOut
+        frame()
+        assertEquals(Color.Red, centre())
+    }
+
+    /** A composition that reads the record takes nothing from it: the change it was made with still fades. */
+    @Test
+    fun readingTheRecordLeavesItForTheSwitch() {
+        show()
+        val fade = Motion.easeInOut<Float>(0.45)
+        transaction.withAnimation(fade) { AuthenticationState.Welcome }
+        assertSame(fade, transaction.animation(AuthenticationState.Welcome))
+        assertEquals(null, transaction.animation(AuthenticationState.Demo))
+        state = AuthenticationState.Welcome
+        frame()
+        compose.mainClock.advanceTimeBy(225)
+        val mid = centre()
+        assertTrue("Halfway, both: $mid", mid.red in 0.2f..0.8f && mid.blue in 0.3f..0.9f)
+        assertEquals("Taken once the switch showed it", null, transaction.animation(AuthenticationState.Welcome))
+        compose.mainClock.advanceTimeBy(250)
+        assertEquals(Color.Blue, centre())
     }
 
     private companion object {

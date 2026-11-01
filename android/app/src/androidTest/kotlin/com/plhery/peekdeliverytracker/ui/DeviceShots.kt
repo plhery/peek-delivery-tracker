@@ -47,10 +47,10 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
         ParcelFileDescriptor.AutoCloseInputStream(instrumentation.uiAutomation.executeShellCommand(command)).use { it.readBytes().decodeToString() }
 
     /**
-     * The whole screen as [folder]/<name>.png. Written by the shell: the app's process, where the test runs, may
-     * neither make nor write another package's external files (scoped storage), and adb reads them.
+     * The whole screen as [folder]/<name>.png, which it returns. Written by the shell: the app's process, where the test
+     * runs, may neither make nor write another package's external files (scoped storage), and adb reads them.
      */
-    fun take(name: String) {
+    fun take(name: String): Bitmap {
         compose.waitForIdle()
         awaitFrames()
         val taken = checkNotNull(instrumentation.uiAutomation.takeScreenshot()) { "No screenshot" }
@@ -66,6 +66,7 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
         // dd has ended once its output closes.
         ParcelFileDescriptor.AutoCloseInputStream(output).use { it.readBytes() }
         assertEquals("$file written", png.size.toString(), shell("stat -c %s $file").trim())
+        return screen
     }
 }
 

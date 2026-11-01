@@ -6,6 +6,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
@@ -42,10 +43,10 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
@@ -71,6 +72,7 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -106,11 +108,13 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
@@ -163,15 +167,19 @@ private val NUMBERS = setOf(CharCategory.DECIMAL_DIGIT_NUMBER, CharCategory.LETT
  * (`.scrollDismissesKeyboard(.interactively)`). The language menu opens in [menus].
  *
  * One run at a time (`run(provider:)`): while one is under way every way in, the form's buttons, "Use a different
- * email" and the demo are disabled, as the iPhone's are; the back and the language menu are not. A cancelled run
- * says nothing; any other failure says `Localizer.errorMessage`'s words, an OIDC one with only the generic message its
- * own. The system's back does what the back does ([onBack]), so it never closes the app from here.
+ * email" and the demo are disabled, as the iPhone's are; the back and the language menu are not. A run goes on in
+ * [work] once the screen has gone, as the iPhone's `Task` outlives its view: the email still goes and its outcome is
+ * counted, and a code checked after the back is dropped by the session, whose account changed (`checkGeneration`).
+ * A cancelled run says nothing; any other failure says `Localizer.errorMessage`'s words, an OIDC one with only the
+ * generic message its own. The system's back does what the back does ([onBack]), so it never closes the app from
+ * here.
  */
 @Composable
 internal fun SignInView(
     session: SessionStore,
     scroll: ScrollState,
     menus: SheetMenus,
+    work: CoroutineScope,
     onBack: () -> Unit,
     onAnchor: (LayoutCoordinates) -> Unit,
 ) {
@@ -181,7 +189,6 @@ internal fun SignInView(
     val density = LocalDensity.current
     val configuration = session.configuration
     val form = rememberSaveable(saver = SignInForm.Saver) { SignInForm(SignInStep.Methods, "", "", false, null) }
-    val scope = rememberCoroutineScope()
 
     /** `run(provider:_:)`. */
     fun run(provider: String? = null, operation: suspend () -> Unit) {
@@ -189,12 +196,12 @@ internal fun SignInView(
         form.working = true
         form.activeProvider = provider
         form.errorMessage = null
-        scope.launch {
+        work.launch {
             try {
                 operation()
             } catch (_: AuthenticationError.OauthCancelled) {
             } catch (cancelled: CancellationException) {
-                // A change of account under way (`checkGeneration`) says nothing; the screen going stops the run.
+                // A change of account under way (`checkGeneration`) says nothing.
                 currentCoroutineContext().ensureActive()
             } catch (error: Exception) {
                 val message = localizer.errorMessage(error)
@@ -297,7 +304,8 @@ private fun SignInBack(onBack: () -> Unit) {
  * `AuthenticationLanguageMenu`: the globe and the language's code in upper case (semibold caption) in the secondary
  * grey, 10 in, at least 44 high, read as `language.label` with the language's own name as its value. It opens iOS's
  * menu of the languages by their own names, the one in use checked, its top at the label's and its trailing edge at
- * the label's; a choice sets the app's language (`localizer.language`), which the app saves and passes on.
+ * the label's, on glass that shows the arrival through it; a choice sets the app's language (`localizer.language`),
+ * which the app saves and passes on.
  */
 @Composable
 private fun LanguageMenu(menus: SheetMenus) {
@@ -322,6 +330,7 @@ private fun LanguageMenu(menus: SheetMenus) {
                 },
                 drop = 0.dp,
                 behind = background,
+                backdrop = LocalMaterialBackdrop.current,
             ) { localizer.language = AppLanguage.entries[it] }
         }
     }
@@ -352,8 +361,10 @@ private fun LanguageMenu(menus: SheetMenus) {
 
 /**
  * `methods`: Google's and the OIDC provider's buttons where they are set up (Apple's never on Android), then the email
- * form, or, among other ways in, "Sign in with email", which opens it (`.easeOut(duration: 0.2)`, none under Reduce
- * Motion) rising into place as it fades in, under a rule with "or" in it; the error under them while the form is shut.
+ * form, or, among other ways in, "Sign in with email", which opens it in one layout animation (`.easeOut(duration:
+ * 0.2)`, none under Reduce Motion): the option fades out where it stood as the form, under a rule with "or" in it,
+ * rises into place fading in, and the room they take grows from the option's to the form's, so nothing under them
+ * moves up; the error under them while the form is shut.
  */
 @Composable
 private fun Methods(session: SessionStore, form: SignInForm, run: (String?, suspend () -> Unit) -> Unit) {
@@ -393,35 +404,46 @@ private fun Methods(session: SessionStore, form: SignInForm, run: (String?, susp
             fadeIn(Motion.easeOut(0.2)) + slideInVertically(Motion.easeOut(0.2)) { it } +
                 expandVertically(Motion.easeOut(0.2), expandFrom = Alignment.Top, clip = false)
         }
-        AnimatedVisibility(social && formVisible, enter = if (reduceMotion) EnterTransition.None else fadeIn(Motion.easeOut(0.2)), exit = ExitTransition.None) {
-            OrRule()
-        }
-        AnimatedVisibility(formVisible, enter = expanding, exit = ExitTransition.None) {
-            val localizer = LocalLocalizer.current
-            EmailForm(form, onSend = {
-                run(null) {
-                    session.sendCode(to = form.email.cleanedEmail, language = localizer.language)
-                    form.step = SignInStep.Code
-                }
-            })
-        }
-        if (!formVisible && configuration.emailOtpEnabled) {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .testTag(EMAIL_OPTION)
-                    .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = !form.working, role = Role.Button) {
-                        form.errorMessage = null
-                        form.emailExpanded = true
-                    }
-                    .heightIn(min = 48.dp)
-                    .background(colors.cream, RoundedCornerShape(13.dp)),
-                horizontalArrangement = Arrangement.spacedBy(LABEL_SPACING, Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically,
+        // The option and the form share one place: the option fades out over the form's top while the form's room
+        // grows past the option's, which the place keeps until then.
+        if (configuration.emailOtpEnabled) Box(Modifier.fillMaxWidth()) {
+            // The Box's, not the column's around it.
+            androidx.compose.animation.AnimatedVisibility(
+                !formVisible,
+                enter = EnterTransition.None,
+                exit = if (reduceMotion) ExitTransition.None else fadeOut(Motion.easeOut(0.2)),
             ) {
-                val style = type.style(IosTextStyle.Subheadline, FontWeight.Medium)
-                PeekSymbol("envelope", font = style, tint = colors.ink)
-                Text(localized("auth.emailOption"), color = colors.ink, style = style.sfLines())
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .testTag(EMAIL_OPTION)
+                        .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = !form.working && !form.emailExpanded, role = Role.Button) {
+                            form.errorMessage = null
+                            form.emailExpanded = true
+                        }
+                        .heightIn(min = 48.dp)
+                        .background(colors.cream, RoundedCornerShape(13.dp)),
+                    horizontalArrangement = Arrangement.spacedBy(LABEL_SPACING, Alignment.CenterHorizontally),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    val style = type.style(IosTextStyle.Subheadline, FontWeight.Medium)
+                    PeekSymbol("envelope", font = style, tint = colors.ink)
+                    Text(localized("auth.emailOption"), color = colors.ink, style = style.sfLines())
+                }
+            }
+            Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                AnimatedVisibility(social && formVisible, enter = if (reduceMotion) EnterTransition.None else fadeIn(Motion.easeOut(0.2)), exit = ExitTransition.None) {
+                    OrRule()
+                }
+                AnimatedVisibility(formVisible, enter = expanding, exit = ExitTransition.None) {
+                    val localizer = LocalLocalizer.current
+                    EmailForm(form, onSend = {
+                        run(null) {
+                            session.sendCode(to = form.email.cleanedEmail, language = localizer.language)
+                            form.step = SignInStep.Code
+                        }
+                    })
+                }
             }
         }
         if (!formVisible) form.errorMessage?.let { ErrorLabel(it) }
@@ -464,7 +486,7 @@ private fun EmailForm(form: SignInForm, onSend: () -> Unit) {
 
 /**
  * `codeForm`: where the code went (`auth.codeIntro`), the code's field (the numbers alone, six at most, on the
- * number keyboard, offered by autofill as a one-time code, in medium monospaced title 2 spaced 10 and centred), the
+ * keyboard of digits alone, offered by autofill as a one-time code, in medium monospaced title 2 spaced 10 and centred), the
  * error, "View my parcels", which waits for six digits, and "Use a different email", back to the ways in with the
  * address kept and the code and the error cleared.
  */
@@ -483,7 +505,9 @@ private fun CodeForm(form: SignInForm, onVerify: () -> Unit) {
             SignInTextField(
                 form.code, { form.code = signInCode(it) }, label, CODE_FIELD, modifier,
                 placeholder = "",
-                keyboard = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done),
+                // `.numberPad`'s digits alone: the number keyboard's password variation, with no password semantics or
+                // transformation, so TalkBack reads each digit typed.
+                keyboard = KeyboardOptions(keyboardType = KeyboardType.NumberPassword, imeAction = ImeAction.Done),
                 autofill = ContentType.SmsOtpCode,
                 style = type.tracking(type.style(IosTextStyle.Title2, FontWeight.Medium, FontDesign.Monospaced), 10f).sfLines()
                     .copy(textAlign = TextAlign.Center),
@@ -515,7 +539,7 @@ private fun CodeForm(form: SignInForm, onVerify: () -> Unit) {
 /**
  * `SignInField`: the field under its name (semibold caption), 8 apart; the name is the field's for TalkBack, which
  * doesn't read it apart. The field is 15 in from its sides and at least 54 high, on the system background with corners
- * of 16 and an outline of the separator at 70 %.
+ * of 16 and an outline of SwiftUI's `.separator` at 70 %, UIKit's separator as the iPhone draws it ([PeekColors.divider]).
  */
 @Composable
 private fun SignInField(label: String, field: @Composable (Modifier) -> Unit) {
@@ -527,7 +551,7 @@ private fun SignInField(label: String, field: @Composable (Modifier) -> Unit) {
             Modifier
                 .fillMaxWidth()
                 .background(if (colors.dark) Color.Black else Color.White, shape)
-                .border(1.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.7f), shape)
+                .border(1.dp, colors.divider.copy(alpha = colors.divider.alpha * 0.7f), shape)
                 .padding(horizontal = 15.dp),
         )
     }
@@ -535,8 +559,10 @@ private fun SignInField(label: String, field: @Composable (Modifier) -> Unit) {
 
 /**
  * A field of the form: one line, centred in its 54, the [placeholder] in the placeholder grey while it is empty, the
- * cursor in the accent, read by TalkBack as [label] and offered by autofill as [autofill]. The cursor stays where the
- * reader left it, at the end of what came otherwise.
+ * cursor in the accent, read by TalkBack as [label] and offered by autofill as [autofill]. The placeholder shrinks to
+ * keep to its one line where the field is too narrow for it at the reader's size, as UITextField's does
+ * (`you@example.com` in about 33 points at the largest size). The cursor stays where the reader left it, at the end of
+ * what came otherwise.
  */
 @Composable
 private fun SignInTextField(
@@ -572,7 +598,12 @@ private fun SignInTextField(
         decorationBox = { text ->
             Box(Modifier.fillMaxWidth().heightIn(min = 54.dp), contentAlignment = Alignment.CenterStart) {
                 if (value.isEmpty() && placeholder.isNotEmpty()) {
-                    Text(placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = style, maxLines = 1)
+                    val probe = LocalSignInPlaceholder.current
+                    Text(
+                        placeholder, Modifier.clearAndSetSemantics {}, color = colors.tertiaryLabel, style = style, maxLines = 1, softWrap = false,
+                        autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * PLACEHOLDER_SHRINK, maxFontSize = style.fontSize),
+                        onTextLayout = { probe?.invoke(it) },
+                    )
                 }
                 // The field as wide as its box, so a centred one centres in it rather than in its own least width.
                 Box(Modifier.fillMaxWidth(), propagateMinConstraints = true) { text() }
@@ -711,8 +742,14 @@ private fun DemoLink(enabled: Boolean, modifier: Modifier, onClick: () -> Unit) 
     }
 }
 
+/** Told how the email's placeholder is laid out: the tests check it keeps to one line, whole. */
+internal val LocalSignInPlaceholder = staticCompositionLocalOf<((TextLayoutResult) -> Unit)?> { null }
+
+/** How far the placeholder may shrink, of its style's size. */
+private const val PLACEHOLDER_SHRINK = 0.25f
+
 /** The menu's option for [language]. */
-internal fun languageTag(language: AppLanguage) = "language.${language.rawValue}"
+internal fun languageTag(language: AppLanguage) = "$LANGUAGE_MENU.${language.rawValue}"
 
 private const val GOOGLE = "google"
 private const val OIDC = "oidc"
@@ -724,19 +761,22 @@ private val SMALL_SPINNER: Dp = 16.dp
 /** A `Label`'s symbol to its title. */
 private val LABEL_SPACING: Dp = 8.dp
 
-/** The test tags: the iPhone's accessibility identifiers where it sets them. */
+/**
+ * The test tags: the iPhone's accessibility identifiers where it sets them (`auth.card`, `auth.google`, `auth.oidc`,
+ * `auth.demo`); the others in the app's own style, which no copy key takes.
+ */
 internal const val SIGN_IN = "signIn"
 internal const val AUTH_CARD = "auth.card"
 internal const val GOOGLE_TAG = "auth.google"
 internal const val OIDC_TAG = "auth.oidc"
 internal const val AUTH_DEMO = "auth.demo"
-internal const val WELCOME_BACK = "welcome.back"
-internal const val EMAIL_OPTION = "auth.emailOption"
-internal const val EMAIL_FIELD = "auth.email"
-internal const val EMAIL_SEND = "auth.send"
-internal const val CODE_FIELD = "auth.code"
+internal const val WELCOME_BACK = "signInBack"
+internal const val EMAIL_OPTION = "signInEmailOption"
+internal const val EMAIL_FIELD = "signInEmail"
+internal const val EMAIL_SEND = "signInSend"
+internal const val CODE_FIELD = "signInCode"
 internal const val CODE_VERIFY = "signInVerify"
-internal const val DIFFERENT_EMAIL = "auth.differentEmail"
+internal const val DIFFERENT_EMAIL = "signInDifferentEmail"
 internal const val SIGN_IN_ERROR = "signInError"
-internal const val PRIVACY_LINE = "auth.privacy"
+internal const val PRIVACY_LINE = "signInPrivacy"
 internal const val LANGUAGE_MENU = "languageMenu"

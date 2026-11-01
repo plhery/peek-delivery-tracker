@@ -116,7 +116,9 @@ class ParcelLinkSheetDeviceShots {
     }
 
     /** The whole screen, bars and all, as linkwalk/<test>.png. */
-    private fun shot() = shots.take(name.methodName)
+    private fun shot() {
+        shots.take(name.methodName)
+    }
 
     @Test
     fun withARoute() {

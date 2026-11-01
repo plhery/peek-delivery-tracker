@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.ui
 
+import android.content.res.Configuration
+import android.provider.Settings
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.ComponentActivity
@@ -17,6 +19,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Density
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsAnimationCompat
@@ -43,6 +46,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
+import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -73,6 +77,7 @@ class SignInDeviceTest {
     private val shots = DeviceShots(compose, "signin")
     private val service = FakeAuthService()
     private lateinit var session: SessionStore
+    private var dark = false
 
     /** The keyboard's slides in or out still playing, as the window hears of them. */
     private val keyboardSlides = object : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_CONTINUE_ON_SUBTREE) {
@@ -94,6 +99,7 @@ class SignInDeviceTest {
      * the app's window, whose keyboard resizes its room as MainActivity's manifest asks (`adjustResize`).
      */
     private fun show(dark: Boolean = false, fontScale: Float = 1f) {
+        this.dark = dark
         val guest = FakeDeliveries(emptyList(), AuthenticationState.Welcome)
         compose.waitsForMaps()
         compose.runOnUiThread {
@@ -144,15 +150,31 @@ class SignInDeviceTest {
     }
 
     /**
+     * Whether the device shows a keyboard on the screen for a field: not where a hardware keyboard is connected and
+     * open, unless the system's setting to show the on-screen one with it (`show_ime_with_hard_keyboard`) is on.
+     */
+    private fun showsAKeyboard(): Boolean {
+        val context = compose.activity
+        val hardware = context.resources.configuration.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO
+        return !hardware || Settings.Secure.getInt(context.contentResolver, "show_ime_with_hard_keyboard", 0) != 0
+    }
+
+    /** No keyboard slide playing, and the UI idle. */
+    private fun awaitStill() {
+        compose.waitUntil(5_000) { onUi { keyboardSlides.playing == 0 } }
+        compose.waitForIdle()
+    }
+
+    /**
      * The field with [tag] has the focus and asked for the keyboard; then the keyboard has come up and finished its
-     * slide, where the device shows one, and the field stands above it, the page scrolled to keep it in view.
+     * slide, where the device shows one ([showsAKeyboard]), and the field stands above it, the page scrolled to keep
+     * it in view.
      */
     private fun assertTypingIn(tag: String) {
         compose.onNodeWithTag(tag).assertIsFocused()
         compose.waitUntil(5_000) { acceptingText() }
-        runCatching { compose.waitUntil(KEYBOARD_MILLIS) { keyboardShown() } }
-        compose.waitUntil(5_000) { onUi { keyboardSlides.playing == 0 } }
-        compose.waitForIdle()
+        if (showsAKeyboard()) compose.waitUntil(KEYBOARD_MILLIS) { keyboardShown() }
+        awaitStill()
         val field = compose.onNodeWithTag(tag).fetchSemanticsNode().boundsInWindow
         assertTrue("Above the keyboard: ${field.bottom} in ${roomAboveTheKeyboard()}", field.bottom <= roomAboveTheKeyboard())
     }
@@ -168,7 +190,20 @@ class SignInDeviceTest {
         compose.waitUntil(5_000) { exists(CODE_FIELD) }
     }
 
-    private fun shot() = shots.take(name.methodName)
+    /**
+     * The screen once any keyboard slide has ended and the UI is idle, as [name]; where the arrival shows, its ground
+     * at the window's leading edge, halfway down the room above any keyboard, is the theme's, not a window gone blank.
+     */
+    private fun shot(arrival: Boolean = true) {
+        awaitStill()
+        val screen = shots.take(name.methodName)
+        if (!arrival) return
+        val y = roomAboveTheKeyboard() / 2
+        val ground = PeekColors(dark).background
+        val drawn = Color(screen.getPixel(2, y))
+        val apart = maxOf(kotlin.math.abs(drawn.red - ground.red), kotlin.math.abs(drawn.green - ground.green), kotlin.math.abs(drawn.blue - ground.blue))
+        assertTrue("The arrival's ground at 2, $y: $drawn for $ground", apart < 0.06f)
+    }
 
     @Test
     fun theEmailStep() {
@@ -251,9 +286,10 @@ class SignInDeviceTest {
         compose.waitUntil(5_000) { exists(TAB_BAR) }
         assertEquals(READER_EMAIL, (session.state as AuthenticationState.SignedIn).user.email)
         assertFalse(exists(SIGN_IN))
-        // The keyboard the code step left up goes with it.
-        runCatching { compose.waitUntil(KEYBOARD_MILLIS) { !keyboardShown() } }
-        shot()
+        // The keyboard the code step left up goes with it, its slide down ended.
+        compose.waitUntil(KEYBOARD_MILLIS) { !keyboardShown() && onUi { keyboardSlides.playing == 0 } }
+        assertFalse("The keyboard has gone", keyboardShown())
+        shot(arrival = false)
     }
 
     @Test
@@ -263,7 +299,7 @@ class SignInDeviceTest {
         compose.waitUntil(5_000) { exists(FIRST_OPEN) }
         assertEquals(AuthenticationState.Welcome, session.state)
         assertFalse(exists(SIGN_IN))
-        shot()
+        shot(arrival = false)
     }
 
     /** The system's back, a gesture or the button, does what the back does and leaves the app open. */

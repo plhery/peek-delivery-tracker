@@ -527,7 +527,8 @@ fun FormMenuRow(
  * grows from that top corner on a spring; a choice or a tap outside closes it, as the system's back does. TalkBack
  * reaches only the menu, from the chosen option, the sheet or popover under it hidden from it while it is open, and
  * goes back to the row once it has closed. Its top stands [drop] under the row's (a form row's 8; a `Menu`'s own label
- * none), its solid glass over [behind], the ground it opens on.
+ * none). Its glass is solid over [behind], the ground it opens on, as a form's grouped ground shows under it, unless
+ * it is given the [backdrop] it stands over, which it blurs: the arrival's parcel and card under the sign-in's menu.
  */
 @Composable
 internal fun SheetMenu(
@@ -539,6 +540,7 @@ internal fun SheetMenu(
     leading: Float? = null,
     drop: Dp = MENU_DROP,
     behind: Color = PeekTheme.colors.groupedBackground,
+    backdrop: MaterialBackdrop? = null,
     onSelect: (Int) -> Unit,
 ) {
     val colors = PeekTheme.colors
@@ -597,8 +599,8 @@ internal fun SheetMenu(
                 .pointerInput(Unit) { detectTapGestures { } }
                 .semantics { paneTitle = options.getOrNull(selected)?.title.orEmpty() },
         ) {
-            // On the glass of a control, its edge lit and shaded, over the sheet's ground.
-            GlassSurface(shape, Modifier.matchParentSize(), backdrop = null, behind = behind) {}
+            // On the glass of a control, its edge lit and shaded, over the sheet's ground or what it is given.
+            GlassSurface(shape, Modifier.matchParentSize(), backdrop = backdrop, behind = behind) {}
             Column(Modifier.verticalScroll(rememberScrollState()).padding(vertical = MENU_PADDING)) {
                 options.forEachIndexed { index, option ->
                     val chosen = index == selected

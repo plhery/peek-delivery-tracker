@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -50,14 +51,19 @@ import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
+import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
 import com.plhery.peekdeliverytracker.ui.theme.delay
+import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /** `ArrivalScreen`: the arrival's two screens, which the parcel moves between. */
@@ -72,19 +78,23 @@ internal enum class ArrivalScreen { Welcome, SignIn }
  *
  * Without an invitation the root shows the arrival only for the sign-in: the welcome is the tabs' first open, and the
  * arrival is on it only while the root fades it out after the sign-in's back ([goBack], a SwiftUI transaction through
- * [transaction]). Then the sign-in has gone at once, and the parcel, open as the sign-in shows it, springs toward
- * where WelcomeView would put its anchor ([rememberWelcomeAnchor]) as it fades with the arrival. The welcome itself,
- * its greeting, tilt, press and unwrap, and the invitations come with WelcomeView. The sign-in fades in where it
- * replaces the welcome in an arrival already showing (`.opacity.animation(.easeOut(duration: 0.35).delay(0.25))`,
- * 0.15 s without the delay under Reduce Motion), not when the arrival itself comes in.
+ * [transaction]). Then the sign-in has gone at once, and the parcel springs toward where WelcomeView would put its
+ * anchor ([rememberWelcomeAnchor]), shutting, as it fades with the arrival. The welcome itself, its greeting, tilt,
+ * press and unwrap, and the invitations come with WelcomeView. The sign-in fades in where it replaces the welcome in an
+ * arrival already showing (`.opacity.animation(.easeOut(duration: 0.35).delay(0.25))`, 0.15 s without the delay under
+ * Reduce Motion), not when the arrival itself comes in. Its sends and checks run in [work], which outlives it.
+ *
+ * Everything the arrival draws is the backdrop of the language menu's glass, as the iPhone's menu shows the parcel and
+ * the card through it.
  */
 @Composable
-internal fun ArrivalView(state: AuthenticationState, session: SessionStore, transaction: RootTransaction) {
+internal fun ArrivalView(state: AuthenticationState, session: SessionStore, transaction: RootTransaction, work: CoroutineScope) {
     val screen = if (state == AuthenticationState.Welcome) ArrivalScreen.Welcome else ArrivalScreen.SignIn
     val reduceMotion = PeekTheme.reduceMotion
     val scroll = rememberScrollState()
     val frames = remember { ArrivalParcelFrames() }
     val menus = remember { SheetMenus() }
+    val backdrop = rememberMaterialBackdrop()
     val firstScreen = remember { screen }
     // `goBack`: the welcome, the arrival fading out with the root's switch.
     val goBack = {
@@ -101,21 +111,23 @@ internal fun ArrivalView(state: AuthenticationState, session: SessionStore, tran
             .onPlaced { frames.arrival = it },
     ) {
         val welcome = rememberWelcomeAnchor(constraints.maxWidth, constraints.maxHeight)
-        Box(if (menus.content != null) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
-            if (screen == ArrivalScreen.SignIn) {
-                val appearance = remember { Animatable(if (firstScreen == ArrivalScreen.SignIn) 1f else 0f) }
-                LaunchedEffect(Unit) {
-                    if (appearance.value >= 1f) return@LaunchedEffect
-                    val fade = Motion.easeOut<Float>(if (reduceMotion) 0.15 else 0.35).delay(if (reduceMotion) 0.0 else 0.25)
-                    withContext(KeepMotion) { appearance.animateTo(1f, fade) }
-                }
-                Box(Modifier.graphicsLayer { alpha = appearance.value }, propagateMinConstraints = true) {
-                    SignInView(session, scroll, menus, onBack = goBack, onAnchor = { frames.place(it, scroll) })
+        Box(Modifier.fillMaxSize().materialBackdrop(backdrop), propagateMinConstraints = true) {
+            Box(if (menus.content != null) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
+                if (screen == ArrivalScreen.SignIn) {
+                    val appearance = remember { Animatable(if (firstScreen == ArrivalScreen.SignIn) 1f else 0f) }
+                    LaunchedEffect(Unit) {
+                        if (appearance.value >= 1f) return@LaunchedEffect
+                        val fade = Motion.easeOut<Float>(if (reduceMotion) 0.15 else 0.35).delay(if (reduceMotion) 0.0 else 0.25)
+                        withContext(KeepMotion) { appearance.animateTo(1f, fade) }
+                    }
+                    Box(Modifier.graphicsLayer { alpha = appearance.value }, propagateMinConstraints = true) {
+                        SignInView(session, scroll, menus, work, onBack = goBack, onAnchor = { frames.place(it, scroll) })
+                    }
                 }
             }
+            ArrivalParcel(screen, frames, scroll, welcome)
         }
-        ArrivalParcel(screen, frames, scroll, welcome)
-        menus.content?.invoke()
+        CompositionLocalProvider(LocalMaterialBackdrop provides backdrop) { menus.content?.invoke() }
     }
 }
 
@@ -150,9 +162,12 @@ private class ParcelMove(val from: Rect?) {
 
 /**
  * The overlay's parcel: `UnwrappingParcel` in its 300 × 310 frame scaled to the anchor's width about its centre, which
- * stands at the anchor's, open (`reveal` is 1 on the sign-in, and the recording shows it open as it goes back),
- * clipped to the safe area as SwiftUI's overlay is to the arrival's. It moves with the page's scroll in the same
- * frame, and springs to the other anchor as the screen changes.
+ * stands at the anchor's, clipped to the safe area as SwiftUI's overlay is to the arrival's. It moves with the page's
+ * scroll in the same frame, and springs to the other anchor as the screen changes. It is open on the sign-in (`reveal`
+ * is 1 there) and shut on the welcome (0), and goes from one to the other on that spring, as `open` is its animatable
+ * data and the overlay's `.animation(_:value: screen)` puts the spring in place of the change's own animation: the
+ * back shuts it as it moves while the arrival fades. Under Reduce Motion, where that animation is none, it moves and
+ * shuts at once.
  */
 @Composable
 private fun ArrivalParcel(screen: ArrivalScreen, frames: ArrivalParcelFrames, scroll: ScrollState, welcome: Rect) {
@@ -165,8 +180,13 @@ private fun ArrivalParcel(screen: ArrivalScreen, frames: ArrivalParcelFrames, sc
         shown[0] = screen
         ParcelMove(from)
     }
+    // `reveal`, on the move's spring: `.animation(_:value: screen)` stands over UnwrappingParcel as over its position.
+    val reveal = if (screen == ArrivalScreen.SignIn) 1f else 0f
+    val open = remember { Animatable(reveal) }
     LaunchedEffect(move) {
-        if (move.from != null) move.progress.animateTo(1f, Motion.spring(duration = 0.75, bounce = 0.08))
+        if (move.from == null) return@LaunchedEffect open.snapTo(reveal)
+        launch { open.animateTo(reveal, Motion.spring(duration = 0.75, bounce = 0.08)) }
+        move.progress.animateTo(1f, Motion.spring(duration = 0.75, bounce = 0.08))
     }
     val safe = WindowInsets.safeDrawing
     val direction = LocalLayoutDirection.current
@@ -189,7 +209,7 @@ private fun ArrivalParcel(screen: ArrivalScreen, frames: ArrivalParcelFrames, sc
                     val from = move.from
                     val rect = if (from != null) lerp(from, target, move.progress.value) else target
                     frames.placed = rect
-                    probe?.invoke(rect)
+                    probe?.invoke(rect, open.value)
                     val scale = rect.width / frame.width
                     frame.placeWithLayer((rect.center.x - frame.width / 2f).roundToInt(), (rect.center.y - frame.height / 2f).roundToInt()) {
                         scaleX = scale
@@ -199,13 +219,16 @@ private fun ArrivalParcel(screen: ArrivalScreen, frames: ArrivalParcelFrames, sc
             },
     ) {
         Box(Modifier.testTag(ARRIVAL_PARCEL).clearAndSetSemantics {}) {
-            UnwrappingParcel(open = 1.0, label = null, ribbon = false)
+            UnwrappingParcel(open = open.value.coerceIn(0f, 1f).toDouble(), label = null, ribbon = false)
         }
     }
 }
 
-/** Told where the parcel is drawn each time it is placed, in the arrival's pixels: the tests follow its move. */
-internal val LocalArrivalParcel = staticCompositionLocalOf<((Rect) -> Unit)?> { null }
+/**
+ * Told where the parcel is drawn each time it is placed, in the arrival's pixels, and how far open it is: the tests
+ * follow its move.
+ */
+internal val LocalArrivalParcel = staticCompositionLocalOf<((Rect, Float) -> Unit)?> { null }
 
 internal const val ARRIVAL_PARCEL = "arrivalParcel"
 

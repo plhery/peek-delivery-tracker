@@ -15,6 +15,8 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
+import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
+import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.security.Security
 import java.time.Instant
@@ -26,6 +28,12 @@ import mockwebserver3.Dispatcher
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
 import mockwebserver3.RecordedRequest
+import okhttp3.Interceptor
+import okhttp3.Protocol
+import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
+import okio.Buffer
+import org.json.JSONObject
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -278,5 +286,54 @@ class AppContainerTest {
         idleUntil("the foreground's analytics") { count("GET /api/analytics/config") == 2 }
         settle()
         assertEquals(1, count("GET /api/carriers"))
+    }
+
+    /**
+     * The sign-in counted through the app's own wiring: the screen the session shows is `sign-in`, and the session's
+     * actions go to the analytics (`analytics::action`), each from that screen. The server and Umami's collector are
+     * answered on the client itself (synthetic hosts), so nothing leaves the machine.
+     */
+    @Test
+    fun theSignInIsCountedAsItsScreenWithItsActions() {
+        Security.addProvider(FakeAndroidKeyStore())
+        val sent = mutableListOf<JSONObject>()
+        val answers = Interceptor { chain ->
+            val request = chain.request()
+            val path = request.url.encodedPath
+            val (code, body) = when {
+                path == "/api/analytics/config" -> 200 to
+                    """{"endpoint":"https://collector.example.test/api/send","hostname":"peek.example.test","androidWebsite":"00000000-0000-4000-8000-0000000000a1"}"""
+                request.url.host == "collector.example.test" -> {
+                    val event = JSONObject(Buffer().also { request.body!!.writeTo(it) }.readUtf8()).getJSONObject("payload")
+                    synchronized(sent) { sent += event }
+                    200 to "{}"
+                }
+                path == "/auth/v1/otp" -> 200 to "{}"
+                else -> 404 to "{}"
+            }
+            Response.Builder().request(request).protocol(Protocol.HTTP_1_1).code(code).message("").body(body.toResponseBody()).build()
+        }
+        fun events() = synchronized(sent) { sent.map { "${it.getString("url")} ${it.optString("name")} ${it.getJSONObject("data").optString("outcome")}".trim() } }
+        try {
+            val server = "https://peek.example.test"
+            val configuration = AppConfiguration(
+                mode = AppConfiguration.Mode.Api, apiBaseUrl = server, supabaseUrl = server,
+                supabasePublishableKey = "synthetic-publishable-key", googleAuthEnabled = false, appleAuthEnabled = false,
+                emailOtpEnabled = true, appGroupIdentifier = "group.test.peek",
+            )
+            val http = PeekHttp.client(MemoryCookieJar()).newBuilder().addInterceptor(answers).build()
+            val app = AppContainer(context, configuration, http, scope = MainScope()).also { container = it }
+            app.start(process.lifecycle)
+            idleUntil("the front door's view") { "/front-door" in events() }
+            app.session.showSignIn()
+            idleUntil("the sign-in's view") { "/sign-in" in events() }
+            app.scope.launch { app.session.sendCode("reader@example.com", AppLanguage.En) }
+            idleUntil("the send's outcome") { "/sign-in sign-in-code-send success" in events() }
+            val signIn = events().dropWhile { it != "/sign-in" }
+            assertEquals(listOf("/sign-in", "/sign-in sign-in-code-send started", "/sign-in sign-in-code-send success"), signIn)
+            assertTrue(synchronized(sent) { sent.all { it.getJSONObject("data").getString("mode") == "anonymous" } })
+        } finally {
+            Security.removeProvider("AndroidKeyStore")
+        }
     }
 }

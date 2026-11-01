@@ -243,7 +243,9 @@ class FirstOpenDeviceTest {
         assertFalse(says(text("arrival.welcomeSubtitle")))
     }
 
-    private fun shot() = shots.take(name.methodName)
+    private fun shot() {
+        shots.take(name.methodName)
+    }
 
     @Test
     fun withAServer() {

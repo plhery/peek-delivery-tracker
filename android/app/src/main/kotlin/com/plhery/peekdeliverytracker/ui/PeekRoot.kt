@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -60,6 +61,7 @@ import com.plhery.peekdeliverytracker.ui.tabs.WindowLayers
 import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
@@ -78,7 +80,7 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val links = remember(container) { ContainerParcelLinks(container) }
     PeekRoot(
         state, container.localizer, container.session, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile,
-        scanner = CameraLabelScanner, links = links, source = source,
+        scanner = CameraLabelScanner, links = links, source = source, work = container.scope,
     ) {
         DeliveriesTab(source, inbox = inbox)
     }
@@ -91,7 +93,8 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * under the tabs fading in. The tab
  * chosen is kept with the window and through process death, as `@SceneStorage("tab")` keeps it, whatever the state
  * shows in between. A parcel waiting in [inbox] chooses the deliveries. The tabs show [browserCheck]'s sheet over
- * whatever is in front while it asks for a token, and scan labels with [scanner].
+ * whatever is in front while it asks for a token, and scan labels with [scanner]. The sign-in's sends and checks run
+ * in [work], the app's scope, which outlives the screen as a Swift `Task` outlives its view.
  *
  * A parcel's link ([links]) comes first (A-L02): its sheet shows over whatever state is up, the launch screen, the
  * arrival or the tabs and all they present, in the window's front layer, where nothing under it reaches TalkBack.
@@ -115,6 +118,7 @@ internal fun PeekRoot(
     scanner: LabelScanner = NoLabelScanner,
     links: ParcelLinkSource? = null,
     source: DeliveriesSource? = null,
+    work: CoroutineScope = rememberCoroutineScope(),
     deliveries: @Composable () -> Unit,
 ) {
     val language by localizer.languageFlow.collectAsState()
@@ -153,16 +157,16 @@ internal fun PeekRoot(
             ProvideLinks {
                 CompositionLocalProvider(LocalWindowLayers provides window) {
                     Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
-                        RootSwitch(state, transaction) { screen ->
+                        RootSwitch(state, transaction) { screen, shownState ->
                             when (screen) {
                                 RootScreen.Launch -> LaunchView(remember(language) { localizer.text("auth.loading") })
-                                RootScreen.Arrival -> ArrivalView(state, session, transaction)
+                                RootScreen.Arrival -> ArrivalView(shownState, session, transaction, work)
                                 RootScreen.Tabs -> {
                                     val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
                                     val linkOpen = links?.links?.routeFlow?.collectAsState()?.value != null
                                     val firstOpen = source?.let { rememberFirstOpen(it.launch) }
                                     firstOpen?.chooseDeliveries = { tab = PeekTab.Deliveries.ordinal }
-                                    val covered = if (source != null && firstOpen != null) firstOpen.covers(source, state) else false
+                                    val covered = if (source != null && firstOpen != null) firstOpen.covers(source, shownState) else false
                                     CompositionLocalProvider(
                                         LocalLabelScanner provides scanner, LocalParcelLinkOpen provides linkOpen, LocalFirstOpen provides firstOpen,
                                     ) {

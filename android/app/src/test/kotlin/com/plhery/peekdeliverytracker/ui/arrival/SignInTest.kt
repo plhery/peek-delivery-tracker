@@ -1,13 +1,20 @@
 package com.plhery.peekdeliverytracker.ui.arrival
 
+import android.os.Looper
+import android.text.InputType
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toPixelMap
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -30,8 +37,15 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performFirstLinkClick
+import androidx.compose.ui.test.performImeAction
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.unit.Density
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -42,7 +56,10 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.core.WebAuthenticating
 import com.plhery.peekdeliverytracker.platform.NoWebAuthentication
+import com.plhery.peekdeliverytracker.ui.LocalRootFade
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.RootScreen
+import com.plhery.peekdeliverytracker.ui.deliveries.editorInfo
 import com.plhery.peekdeliverytracker.ui.deliveries.CARD_PHONE
 import com.plhery.peekdeliverytracker.ui.deliveries.FIRST_OPEN
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
@@ -59,6 +76,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
+import java.time.Duration
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -81,14 +100,21 @@ class SignInTest {
     private val events = mutableListOf<Pair<String, Outcome?>>()
     private val opened = mutableListOf<String>()
     private val placed = mutableListOf<Rect>()
+    private val opens = mutableListOf<Float>()
+
+    /** Each screen's opacity as the root last drew it while one faded under another. */
+    private val fades = mutableMapOf<RootScreen, Float>()
+    private var placeholder: TextLayoutResult? = null
+    private lateinit var view: View
     private val en = Localizer(AppLanguage.En, variant = "android")
     private lateinit var session: SessionStore
 
-    /** The sign-in, as a guest with nothing followed reaches it from the first open. */
+    /** The sign-in, as a guest with nothing followed reaches it from the first open, its text at [fontScale]. */
     private fun show(
         configuration: AppConfiguration = signInConfiguration(),
         reduceMotion: Boolean = true,
         web: WebAuthenticating = NoWebAuthentication,
+        fontScale: Float = 1f,
     ) {
         compose.waitsForMaps()
         val guest = FakeDeliveries(emptyList(), AuthenticationState.Welcome)
@@ -105,7 +131,18 @@ class SignInTest {
                     }
                 }
             }
-            CompositionLocalProvider(LocalUriHandler provides links, LocalArrivalParcel provides { placed += it }) {
+            view = LocalView.current
+            val density = LocalDensity.current
+            CompositionLocalProvider(
+                LocalUriHandler provides links,
+                LocalArrivalParcel provides { rect, open ->
+                    placed += rect
+                    opens += open
+                },
+                LocalRootFade provides { screen, alpha -> fades[screen] = alpha },
+                LocalSignInPlaceholder provides { placeholder = it },
+                LocalDensity provides Density(density.density, fontScale),
+            ) {
                 RootHost(session = session, source = guest, reduceMotion = reduceMotion)
             }
         }
@@ -170,6 +207,26 @@ class SignInTest {
         compose.onNodeWithText(text("auth.or")).assertExists()
     }
 
+    /**
+     * C-AN15: the option fades out where it stood as the form opens over it, in one layout animation: the room they
+     * take grows from the option's, so the privacy line under them never moves up, and the option goes once faded.
+     */
+    @Test
+    fun theOptionFadesAsTheFormOpensAndNothingUnderThemMovesUp() {
+        show(signInConfiguration(google = true), reduceMotion = false)
+        val start = compose.onNodeWithTag(PRIVACY_LINE).fetchSemanticsNode().boundsInRoot.top
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(EMAIL_OPTION).performClick()
+        val tops = (1..20).map { frame ->
+            compose.mainClock.advanceTimeByFrame()
+            if (frame == 3) assertTrue("The option fading where it stood", exists(EMAIL_OPTION))
+            compose.onNodeWithTag(PRIVACY_LINE).fetchSemanticsNode().boundsInRoot.top
+        }
+        assertTrue("Never above where it stood: $start, then $tops", tops.all { it >= start - 0.5f })
+        assertTrue("Lower, the form open: $start, then $tops", tops.last() > start + dp(40f))
+        assertFalse(exists(EMAIL_OPTION))
+    }
+
     @Test
     fun theSendWaitsForAnAddressWithAnAt() {
         show()
@@ -212,13 +269,46 @@ class SignInTest {
         field.assertTextEquals("123456", includeEditableText = true)
     }
 
+    /** The sign-in switches to the tabs at once: the frame after the session signs in shows the tabs where the card was. */
+    /**
+     * The code's keyboard is the number keyboard's password variation, digits alone as `.numberPad`'s, with no password
+     * semantics, so TalkBack reads the digits typed, and autofill still offers the code. Neither field lets the
+     * keyboard go fullscreen and cover the page, which the iPhone has no such mode to do.
+     */
+    @Test
+    fun theCodeTakesDigitsAloneAndTalkBackReadsThem() {
+        show()
+        compose.onNodeWithTag(EMAIL_FIELD).performClick()
+        assertEquals(EditorInfo.IME_FLAG_NO_FULLSCREEN, compose.editorInfo().imeOptions and EditorInfo.IME_FLAG_NO_FULLSCREEN)
+        sendCode()
+        compose.onNodeWithTag(CODE_FIELD).performClick()
+        val info = compose.editorInfo()
+        assertEquals(InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD, info.inputType)
+        assertEquals(EditorInfo.IME_FLAG_NO_FULLSCREEN, info.imeOptions and EditorInfo.IME_FLAG_NO_FULLSCREEN)
+        compose.onNodeWithTag(CODE_FIELD).performTextInput(READER_CODE)
+        val field = compose.onNodeWithTag(CODE_FIELD).fetchSemanticsNode().config
+        assertFalse("No password semantics", SemanticsProperties.Password in field)
+        assertEquals(READER_CODE, field[SemanticsProperties.EditableText].text)
+        assertEquals(ContentType.SmsOtpCode, field.getOrNull(SemanticsProperties.ContentType))
+    }
+
     @Test
     fun aCodeTakenSignsInToTheTabs() {
         show()
         sendCode()
         compose.onNodeWithTag(CODE_FIELD).performTextInput(READER_CODE)
+        val inCard = inTheCard()
+        val card = pixel(inCard.first, inCard.second)
+        compose.mainClock.autoAdvance = false
         compose.onNodeWithTag(CODE_VERIFY).performClick()
+        repeat(10) { if (session.state !is AuthenticationState.SignedIn) compose.mainClock.advanceTimeByFrame() }
+        compose.mainClock.advanceTimeByFrame()
+        val next = pixel(inCard.first, inCard.second)
+        compose.mainClock.autoAdvance = true
         compose.waitForIdle()
+        val tabs = pixel(inCard.first, inCard.second)
+        assertTrue("The card was there: $card, $tabs", distance(card, tabs) > 0.02f)
+        assertTrue("The tabs from the frame after: $next, $tabs", distance(next, tabs) < 0.02f)
         assertEquals(READER_EMAIL, (session.state as AuthenticationState.SignedIn).user.email)
         assertEquals("""{"email":"reader@example.com","token":"123456","type":"email"}""", service.body("verify"))
         assertTrue(exists(TAB_BAR))
@@ -257,18 +347,25 @@ class SignInTest {
         compose.onNodeWithTag(EMAIL_SEND).assertIsEnabled()
     }
 
-    /** C-ST02: one run at a time; the back and the language menu stay, as the iPhone leaves them enabled. */
+    /**
+     * C-ST02: one run at a time, even for two taps before the button has redrawn disabled; the keyboard's action starts
+     * none. The back and the language menu stay, as the iPhone leaves them enabled.
+     */
     @Test
     fun aRunUnderWayHoldsEveryOtherOneBack() {
         val held = CompletableDeferred<Unit>()
         service.held = held
         show()
-        sendCode()
+        typeEmail()
+        tapTwiceInOneFrame(EMAIL_SEND)
+        assertEquals("Two taps, one send", 1, service.requests.size)
         compose.onNodeWithTag(EMAIL_SEND).assertIsNotEnabled().assert(hasText(text("auth.sending")))
         compose.onNodeWithTag(AUTH_DEMO).assertIsNotEnabled()
         compose.onNodeWithTag(WELCOME_BACK).assertIsEnabled()
         compose.onNodeWithTag(LANGUAGE_MENU).assertIsEnabled()
-        compose.onNodeWithTag(EMAIL_SEND).performClick()
+        compose.onNodeWithTag(EMAIL_FIELD).performImeAction()
+        compose.waitForIdle()
+        assertEquals(1, service.requests.size)
         held.complete(Unit)
         compose.waitForIdle()
         assertEquals(1, service.requests.size)
@@ -276,14 +373,61 @@ class SignInTest {
         val again = CompletableDeferred<Unit>()
         service.held = again
         compose.onNodeWithTag(CODE_FIELD).performTextInput(READER_CODE)
-        compose.onNodeWithTag(CODE_VERIFY).performClick()
-        compose.waitForIdle()
+        tapTwiceInOneFrame(CODE_VERIFY)
+        assertEquals("Two taps, one check", 2, service.requests.size)
         compose.onNodeWithTag(CODE_VERIFY).assertIsNotEnabled().assert(hasText(text("auth.signingIn")))
         compose.onNodeWithTag(DIFFERENT_EMAIL).assertIsNotEnabled()
         compose.onNodeWithTag(AUTH_DEMO).assertIsNotEnabled()
+        compose.onNodeWithTag(CODE_FIELD).performImeAction()
+        compose.waitForIdle()
+        assertEquals(2, service.requests.size)
         again.complete(Unit)
         compose.waitForIdle()
         assertTrue(exists(TAB_BAR))
+    }
+
+    /**
+     * A send the back cuts off still goes and counts its outcome, as the iPhone's `Task` outlives its view; the
+     * first open is shown meanwhile.
+     */
+    @Test
+    fun aSendCutOffByTheBackStillGoes() {
+        val held = CompletableDeferred<Unit>()
+        service.held = held
+        show()
+        sendCode()
+        compose.onNodeWithTag(WELCOME_BACK).performClick()
+        compose.waitForIdle()
+        assertEquals(AuthenticationState.Welcome, session.state)
+        assertFalse(exists(SIGN_IN))
+        held.complete(Unit)
+        compose.waitForIdle()
+        assertEquals(1, service.requests.size)
+        assertEquals(
+            listOf("sign-in-code-send" to Outcome.Started, "sign-in-code-send" to Outcome.Success),
+            events.filter { it.first == "sign-in-code-send" },
+        )
+        assertTrue(exists(FIRST_OPEN))
+    }
+
+    /** A code the service takes after the back signs nobody in: the session's account changed (`checkGeneration`). */
+    @Test
+    fun aCodeTakenAfterTheBackSignsNobodyIn() {
+        show()
+        sendCode()
+        val held = CompletableDeferred<Unit>()
+        service.held = held
+        compose.onNodeWithTag(CODE_FIELD).performTextInput(READER_CODE)
+        compose.onNodeWithTag(CODE_VERIFY).performClick()
+        compose.waitForIdle()
+        compose.onNodeWithTag(WELCOME_BACK).performClick()
+        compose.waitForIdle()
+        held.complete(Unit)
+        compose.waitForIdle()
+        assertEquals("https://auth.example.test/auth/v1/verify", service.requests.last().url)
+        assertEquals(AuthenticationState.Welcome, session.state)
+        assertTrue(exists(FIRST_OPEN))
+        assertFalse(exists(SIGN_IN))
     }
 
     /** Google's sign-in under way says so on its button; a cancel says nothing, and a failure what the store says. */
@@ -388,12 +532,16 @@ class SignInTest {
         assertEquals(listOf("https://peek.example.test/privacy.html"), opened)
     }
 
+    /** The demo comes at once: the frame after the tap shows the tabs where the card was. */
     @Test
     fun theDemoLinkEntersTheDemoAtOnce() {
         show()
+        val inCard = inTheCard()
+        val card = pixel(inCard.first, inCard.second)
         compose.mainClock.autoAdvance = false
         compose.onNodeWithTag(AUTH_DEMO).performClick()
         compose.mainClock.advanceTimeByFrame()
+        val next = pixel(inCard.first, inCard.second)
         assertEquals(AuthenticationState.Demo, session.state)
         assertTrue(exists(TAB_BAR))
         assertTrue(placed.isNotEmpty())
@@ -402,11 +550,16 @@ class SignInTest {
         assertEquals("The arrival went at once", drawn, placed.size)
         assertEquals("demo-start" to null, events.last())
         assertEquals("demo", defaults.string("sdt.native.experience.v1"))
+        compose.mainClock.advanceTimeBy(1_000)
+        val tabs = pixel(inCard.first, inCard.second)
+        assertTrue("The card was there: $card, $tabs", distance(card, tabs) > 0.02f)
+        assertTrue("The tabs from the frame after: $next, $tabs", distance(next, tabs) < 0.02f)
     }
 
     /**
-     * C-AN11: the back's fade (an ease in and out of 0.45 s). The sign-in goes in the first frame; the parcel, open,
-     * springs from the sign-in's anchor toward the welcome's, larger and lower, as the arrival fades out under the
+     * C-AN11: the back's fade (an ease in and out of 0.45 s): the arrival half gone and the first open half in at
+     * 0.225 s, the arrival gone at 0.45 s. The sign-in goes in the first frame; the parcel springs from the sign-in's
+     * anchor toward the welcome's, larger and lower, and shuts on the same spring, as the arrival fades out under the
      * first open, and goes with it.
      */
     @Test
@@ -429,11 +582,21 @@ class SignInTest {
         assertTrue("The card is gone at once", distance(pixel(inCard.first, inCard.second), page) < 0.02f)
         val start = placed.last()
         assertEquals(anchor.center.y, start.center.y, dp(8f))
-        compose.mainClock.advanceTimeBy(200)
+        assertEquals("Open as it leaves", 1f, opens.last(), 0.02f)
+        compose.mainClock.advanceTimeBy(64)
+        val rising = fades.getValue(RootScreen.Tabs)
+        compose.mainClock.advanceTimeBy(176)
         val mid = placed.last()
         assertTrue("Growing toward the welcome's 300: ${mid.width}", mid.width > anchor.width + dp(20f) && mid.width < dp(296f))
         assertTrue("Lower", mid.center.y > anchor.center.y + dp(10f))
-        compose.mainClock.advanceTimeBy(300)
+        assertEquals("The arrival half gone", 0.5f, fades.getValue(RootScreen.Arrival), 0.08f)
+        val half = fades.getValue(RootScreen.Tabs)
+        assertEquals("The first open half in", 0.5f, half, 0.08f)
+        assertTrue("Rising: $rising, then $half", rising < half - 0.2f)
+        assertTrue("Shutting: ${opens.last()}", opens.last() in 0.25f..0.65f)
+        compose.mainClock.advanceTimeBy(240)
+        assertTrue("Faded out: ${fades[RootScreen.Arrival]}", fades.getValue(RootScreen.Arrival) < 0.03f)
+        assertTrue("All but shut: ${opens.last()}", opens.last() < 0.1f)
         val drawn = placed.size
         compose.mainClock.advanceTimeByFrame()
         compose.mainClock.advanceTimeByFrame()
@@ -441,7 +604,10 @@ class SignInTest {
         assertTrue(exists(FIRST_OPEN))
     }
 
-    /** Under Reduce Motion the fade takes 0.15 s, and the parcel stands at the welcome's anchor from its first frame. */
+    /**
+     * Under Reduce Motion the fade takes 0.15 s, half way at 0.075 s, and the parcel stands at the welcome's anchor,
+     * shut, from its first frame, as the overlay's animation is none there.
+     */
     @Test
     fun theBackUnderReduceMotionFadesFasterWithoutTheSpring() {
         show(reduceMotion = true)
@@ -449,7 +615,14 @@ class SignInTest {
         compose.onNodeWithTag(WELCOME_BACK).performClick()
         compose.mainClock.advanceTimeByFrame()
         assertEquals(dp(300f), placed.last().width, 1f)
-        compose.mainClock.advanceTimeBy(200)
+        assertEquals("Shut at once", 0f, opens.last(), 0.001f)
+        compose.mainClock.advanceTimeBy(80)
+        assertEquals("The arrival half gone", 0.5f, fades.getValue(RootScreen.Arrival), 0.15f)
+        assertEquals("The first open half in", 0.5f, fades.getValue(RootScreen.Tabs), 0.15f)
+        compose.mainClock.advanceTimeBy(80)
+        assertTrue("Faded out: ${fades[RootScreen.Arrival]}", fades.getValue(RootScreen.Arrival) < 0.03f)
+        assertEquals(0f, opens.last(), 0.001f)
+        compose.mainClock.advanceTimeBy(48)
         val drawn = placed.size
         compose.mainClock.advanceTimeByFrame()
         assertEquals(drawn, placed.size)
@@ -466,8 +639,73 @@ class SignInTest {
         assertFalse(compose.activity.isFinishing)
     }
 
-    /** The window's pixel at [x], [y]. */
-    private fun pixel(x: Float, y: Float): Color = compose.onRoot().captureToImage().toPixelMap()[x.toInt(), y.toInt()]
+    /** Two taps on the enabled button with [tag] before it has redrawn: its action, twice in one go on the main thread. */
+    private fun tapTwiceInOneFrame(tag: String) {
+        val tap = checkNotNull(compose.onNodeWithTag(tag).assertIsEnabled().fetchSemanticsNode().config[SemanticsActions.OnClick].action)
+        compose.runOnUiThread {
+            tap()
+            tap()
+        }
+        compose.waitForIdle()
+    }
+
+    /** A point in the card, inside its left edge, which the tabs don't draw the same. */
+    private fun inTheCard(): Pair<Float, Float> {
+        val card = compose.onNodeWithTag(AUTH_CARD).fetchSemanticsNode().boundsInRoot
+        return Pair(card.left + dp(6f), card.center.y)
+    }
+
+    /** The window's bars: the status bar [top] points tall, the navigation bar [bottom]. */
+    private fun bars(top: Int, bottom: Int) {
+        compose.runOnUiThread {
+            fun px(points: Int) = (points * view.resources.displayMetrics.density).toInt()
+            val insets = WindowInsetsCompat.Builder()
+                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, px(top), 0, 0))
+                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, px(bottom)))
+                .setVisible(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(), true)
+                .build()
+            ViewCompat.dispatchApplyWindowInsets(view, insets)
+        }
+        compose.waitForIdle()
+    }
+
+    /**
+     * As iphone-03-methods-ax5: on a narrow phone at the largest text the address's placeholder shrinks to keep to
+     * its one line, whole, as UITextField's does.
+     */
+    @Test
+    @Config(qualifiers = "w360dp-h640dp-xxhdpi")
+    fun atTheLargestTextThePlaceholderShrinksToItsLine() {
+        show(fontScale = 2f)
+        val layout = checkNotNull(placeholder)
+        assertEquals("you@example.com", layout.layoutInput.text.text)
+        assertEquals(1, layout.lineCount)
+        assertEquals("Whole", layout.layoutInput.text.length, layout.getLineEnd(0))
+        assertFalse("Clipped: ${layout.multiParagraph.width} in ${layout.size.width}", layout.hasVisualOverflow)
+    }
+
+    /**
+     * On a phone with three-button navigation, the page scrolled to its end clears the navigation bar, as the iPhone's
+     * ScrollView clears the home indicator: the demo, the page's last item, ends above it.
+     */
+    @Test
+    @Config(qualifiers = "w360dp-h640dp-xxhdpi")
+    fun scrolledToItsEndThePageClearsTheNavigationBar() {
+        show(fontScale = 2f)
+        bars(top = 24, bottom = 48)
+        compose.onNodeWithTag(SIGN_IN).performSemanticsAction(SemanticsActions.ScrollBy) { it(0f, 100_000f) }
+        compose.waitForIdle()
+        val window = compose.onRoot().fetchSemanticsNode().boundsInRoot
+        val demo = compose.onNodeWithTag(AUTH_DEMO).fetchSemanticsNode().boundsInRoot
+        assertTrue("Scrolled: the window is shorter than the page", demo.bottom > dp(200f))
+        assertTrue("Above the bar: ${demo.bottom} in ${window.bottom}", demo.bottom <= window.bottom - dp(48f) + 0.5f)
+    }
+
+    /** The window's pixel at [x], [y], as it draws the last frame (on its looper's clock, which a frame's length brings up). */
+    private fun pixel(x: Float, y: Float): Color {
+        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+        return compose.onRoot().captureToImage().toPixelMap()[x.toInt(), y.toInt()]
+    }
 
     /** The largest difference between two colours in any channel. */
     private fun distance(a: Color, b: Color) = maxOf(kotlin.math.abs(a.red - b.red), kotlin.math.abs(a.green - b.green), kotlin.math.abs(a.blue - b.blue))

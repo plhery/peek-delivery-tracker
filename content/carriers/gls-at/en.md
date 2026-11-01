@@ -10,11 +10,12 @@ GLS Austria (GLS Österreich) has its head office in Ansfelden and 11 depots. It
 
 ## GLS Austria parcel number and Track ID
 
-GLS's Austrian tracking takes parcel numbers and Track IDs, several at once if you separate them with a space, comma or semicolon. The Track ID is on the notification card GLS leaves or emails after a delivery attempt, which also says where your parcel is now. GLS publishes no number format. The shape Peek knows as GLS Austria's:
+GLS's Austrian tracking takes parcel numbers and Track IDs, several at once if you separate them with a space, comma or semicolon. The Track ID is on the notification card GLS leaves or emails after a delivery attempt, which also says where your parcel is now. GLS publishes no number format. The shapes Peek knows as GLS Austria's:
 
 | Number (invented) | What it is |
 | --- | --- |
 | `00000000000` | 11 digits. Also fits [GLS Germany](carrier:gls-de), [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Poland, PostLogistics and others. |
+| `000000000009` | 12 digits, the last a check digit. Also fits GLS Germany, GLS Switzerland, GLS France, GLS Poland, BRT and others. |
 | Track ID | On GLS's notification card. GLS's tracking page takes it; in Peek, use the parcel number. |
 
 If the shop's email names [Austrian Post](carrier:austrian-post) or another carrier, the number is theirs. No number at all? See [how to find your tracking number](guide:find-tracking-number).
@@ -80,9 +81,9 @@ Peek can't contact GLS or the shop for you. As read on 31 October 2026:
 
 ## Tracking a GLS Austria parcel with Peek
 
-Paste the 11-digit number in [Peek](/). Several GLS companies use that shape, so Peek asks the likely ones and goes by your country (your iPhone's region, or on the web where you connect from). In Austria you'll usually see "GLS Austria has this parcel." Elsewhere it usually names another GLS company, such as GLS Germany, which asks the same GLS service but needs the postcode: keep it and give the postcode, or press "Change" and pick GLS Austria. If no GLS company knows the number yet, add it anyway or pick GLS Austria from the carrier list: Peek follows more than 3,500 carriers. A pasted gls-group.com link with /AT/ in its path is tracked as GLS Austria.
+Paste the number in [Peek](/). Several GLS companies use these shapes, so Peek asks the likely ones and goes by your country (your iPhone's region, or on the web where you connect from). In Austria you'll usually see "GLS Austria has this parcel." Elsewhere it usually names another GLS company, such as GLS Germany, which asks the same GLS service but needs the postcode: keep it and give the postcode, or press "Change" and pick GLS Austria. If no GLS company knows the number yet, add it anyway or pick GLS Austria from the carrier list: Peek follows more than 3,500 carriers. A pasted gls-group.com link with /AT/ in its path is tracked as GLS Austria.
 
-The "Delivery postcode" field is marked "Optional", but GLS shows its scans only with it. Without it, Peek only learns whether GLS knows the number: it asks other tracking services meanwhile, and the parcel page offers "Add postcode". With an account, Peek tries the postcode of your latest parcel, once. If GLS doesn't find the parcel with the postcode, Peek says so and offers "Edit postcode". The postcode goes to GLS and, when needed, to tracking services, and never shows on shared links.
+The "Delivery postcode" field is marked "Optional", but GLS shows its scans only with it, as the line under the field says: "GLS Austria shows its scans only with the delivery postcode." Without it, Peek only learns whether GLS knows the number: it asks other tracking services meanwhile, and the parcel page offers "Add postcode". With an account, Peek tries the postcode of your latest parcel, once. If GLS doesn't find the parcel with the postcode, Peek says so and offers "Edit postcode". The postcode goes to GLS and, when needed, to tracking services, and never shows on shared links.
 
 With the postcode, you see the status, each scan's place on a map, the expected day, the weight, the delivery time and, at a Parcel Shop, its name and address. Your name, address, contact details, the signature and the sender's reference are dropped. Peek reads GLS's English service rather than the German page: there, `In Zustellung` reads `In delivery` and `Das Paket wurde erfolgreich zugestellt.` reads `The parcel has been delivered.` A Parcel Shop arrival shows as "Ready for pickup". Times are read as Austrian time. Peek checks GLS about once an hour, delivery day included (4 hours after a failed check), and can notify you of changes.
 
@@ -126,5 +127,5 @@ Not an exact time. You can move delivery to another day, in the same time window
 - [GLS Austria: Home](https://gls-group.com/AT/de/home/) – 11 depots, Ansfelden
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee from 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, GLS Austria's German and English wordings, the postcode
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, what Peek reads, GLS Austria's German and English wordings, the postcode
 :::

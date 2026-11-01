@@ -52,6 +52,7 @@ CNE's tracker puts a status above each parcel's lines. In English, as CNE labels
 | `Arrived at Import Airport`, `Arrived at destination` | It landed in your country. Sorting and customs are still to come: it isn't at your local delivery office. | "In transit" |
 | `The shipment is picked up by customs broker` | A customs broker took it for import clearance. | "At customs" |
 | `Released From Import Customs`, `Pickup from airport` | Through import customs, then collected from the airport. | "In transit" |
+| `Handled by local carrier` | CNE handed it to the carrier that delivers in your country. That carrier's own acceptance comes next. | "In transit" |
 | `Arrived At The Delivery Company`, `Your shipment has arrived at sorting center`, `Parcel Unloaded From Container` | With the carrier that delivers it, or at a sorting centre before it. | "In transit" |
 | `On Board with Courier` | On the courier's van: out for delivery. | "Out for delivery" |
 | `Sorting failed []` | Sorting went wrong. The empty brackets are CNE's. | "Needs attention" |
@@ -63,7 +64,7 @@ After the hand-over, the delivering carrier's own lines appear in CNE's history,
 
 CNE runs its own lines to Europe, the US, Canada, Australia, Brazil and other countries, and picks local partners abroad for the delivery. Its partner page lists USPS, Royal Mail, Austrian Post, Correos, Poste Italiane, GLS, La Poste, DHL, Evri, DPD and POST Luxembourg among its global logistics partners.
 
-Peek reads four of the codes CNE gives its last-mile suppliers: DHL in Germany ([DHL Paket](carrier:dhl)), [Royal Mail](carrier:royal-mail) in the UK, [USPS](carrier:usps) in the US, and US SPX, which Peek takes for [SpeedX](carrier:speedx), a US courier that isn't on CNE's partner page. When CNE names one of them, Peek's parcel card says so ("Delivery with USPS", for example) and shows that carrier's number when CNE gives one.
+Peek reads three of the codes CNE gives its last-mile suppliers: DHL in Germany ([DHL Paket](carrier:dhl)), [Royal Mail](carrier:royal-mail) in the UK and [USPS](carrier:usps) in the US. When CNE names one of them and gives that carrier's own number for the parcel, Peek's parcel card says so ("Delivery with USPS", for example) and shows the number. Without that number, Peek names no delivering carrier: the carrier tracks the parcel by its own number, not CNE's. Other codes, such as US SPX, name no carrier in Peek.
 
 CNE publishes no rules for delivery attempts, notice cards or pickup points: those are the delivering carrier's. See its page, such as [Evri](carrier:evri), [La Poste / Colissimo](carrier:la-poste), [Correos](carrier:correos-spain), [Poste Italiane](carrier:poste-italiane), [Austrian Post](carrier:austrian-post) or [POST Luxembourg](carrier:post-luxembourg), and [missed a delivery](guide:missed-delivery).
 
@@ -77,7 +78,7 @@ CNE's customers are the sellers who book it: for a late, lost, damaged or return
 
 **Nothing yet.** If CNE's tracker finds nothing, CNE has no record of the number yet: Peek shows "Waiting for the carrier" and keeps checking. `Not delivered` means the parcel hasn't been sent yet (未发送 on CNE's Chinese page); Peek then shows the newest line's status, such as "Label created" for `Parcel Infomation Received`. If nothing changes after a few days, check the number with the seller.
 
-**No update for days.** When a parcel still on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
+**No update for days.** When a parcel still on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. While Peek follows the parcel on CNE's tracker, the note adds a "Get help from CNE Express" link to CNE's Contact us page. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
 **At customs.** `Customs inspection` (扣关, held by customs) or `The shipment is picked up by customs broker` means customs has the parcel. CNE clears it on the details the seller declares, so ask the seller first if it stays there.
 
@@ -100,9 +101,9 @@ CNE lists no customer service email; its other offices, across China, serve sell
 
 [Peek](/) names CNE Express at once from a 3A5V number ("Detected carrier"). A cne.com tracking link with `?no=` files the parcel under CNE Express whatever number it holds; if the link holds several, Peek takes the first. For any other CNE number, paste it all the same: Peek follows more than 3,500 carriers, and asks tracking services ("Checking tracking services…"). If they don't name CNE, tap "Change" and pick CNE Express under "All carriers" (searching CNE or 递一物流 finds it too), or use "Change carrier" on a parcel you've already added.
 
-Peek reads CNE's own tracking: the status, each line with its place, the destination country, and the delivering carrier when CNE names one of the four above. It reads `Arrived at destination`, and CNE's line handing the parcel to the local carrier, on Beijing time, works out the other lines' clock from their place or the leg the parcel was on, and shows every time in your device's time zone. It leaves out the seller's order number, the delivering carrier's website and phone, and CNE's proof of delivery. CNE gives no expected delivery date or weight.
+Peek reads CNE's own tracking: the status, each line with its place, the destination country, and the delivering carrier when CNE names one of the three above with its number. It reads `Arrived at destination`, and CNE's line handing the parcel to the local carrier, on Beijing time, works out the other lines' clock from their place or the leg the parcel was on, and shows every time in your device's time zone. It leaves out the seller's order number, the delivering carrier's website and phone, and CNE's proof of delivery. CNE gives no expected delivery date or weight.
 
-When CNE names the delivering carrier and gives its number, Peek asks that carrier too: one of the four above, your country's post for a postal number (two letters, nine digits, two letters), or the one carrier that number's shape points to. Once that carrier shows a scan at least as recent as CNE's newest, Peek follows the parcel there and keeps CNE's history.
+When CNE names the delivering carrier and gives its number, Peek asks that carrier too: one of the three above, your country's post for a postal number (two letters, nine digits, two letters), or the one carrier that number's shape points to. Once that carrier shows a scan at least as recent as CNE's newest, Peek follows the parcel there and keeps CNE's history.
 
 Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact CNE or the seller for you.
 

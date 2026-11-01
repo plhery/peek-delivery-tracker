@@ -51,6 +51,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.covers
 import com.plhery.peekdeliverytracker.ui.deliveries.rememberFirstOpen
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
+import com.plhery.peekdeliverytracker.ui.passport.PassportTab
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLayers
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowOverlay
@@ -178,7 +179,8 @@ internal fun PeekRoot(
                                         ) { shown ->
                                             when (shown) {
                                                 PeekTab.Deliveries -> deliveries()
-                                                PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                                                PeekTab.Passport -> if (source != null) PassportTab(source) else TabPlaceholder(shown)
+                                                PeekTab.Friends -> TabPlaceholder(shown)
                                             }
                                         }
                                     }
@@ -229,7 +231,7 @@ internal fun LaunchView(loading: String) {
     }
 }
 
-/** The passport and friends until they are ported: the page's background. */
+/** Friends until they are ported, and the passport without the deliveries' source: the page's background. */
 @Composable
 private fun TabPlaceholder(tab: PeekTab) {
     Box(Modifier.fillMaxSize().background(PeekTheme.colors.background).testTag(tab.screen))

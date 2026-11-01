@@ -51,7 +51,6 @@ import com.plhery.peekdeliverytracker.core.NotificationPreferencesDraft
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
-import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.REGULAR_SPINNER
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
@@ -76,7 +75,7 @@ import kotlinx.coroutines.launch
  * settings.
  */
 @Composable
-internal fun DeliveryUpdatesPage(state: DeliveriesState, scroll: ScrollState, onBack: () -> Unit) {
+internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack: () -> Unit) {
     val source = state.source
     val work = source.pageWork
     val localizer = LocalLocalizer.current

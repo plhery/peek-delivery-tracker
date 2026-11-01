@@ -29,6 +29,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.withContext
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
@@ -283,20 +284,58 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
 }
 
 /**
- * `AccountToolbarButton`: the account's initial, or a figure, on a 34-point yellow disc, which opens Settings
- * ([DeliveriesState.account]).
+ * A tab's bar with only its inline title and `AccountToolbarItem`, placed as the list's bar places them
+ * ([ListToolbar]): the passport's, whose account button, tagged [accountTag], opens its own Settings.
  */
 @Composable
-private fun AccountButton(state: DeliveriesState, modifier: Modifier) {
-    val session by state.source.session.collectAsState()
-    val initial = (session as? AuthenticationState.SignedIn)?.user?.email?.firstOrNull()?.uppercase()
+internal fun AccountBar(
+    title: String,
+    rowTop: Dp,
+    start: Dp,
+    end: Dp,
+    backdrop: MaterialBackdrop,
+    session: StateFlow<AuthenticationState>,
+    onAccount: () -> Unit,
+    accountTag: String,
+    modifier: Modifier = Modifier,
+) {
+    Box(modifier.fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
+        ProvideDynamicTypeSize(DynamicTypeSize.Large) {
+            Text(
+                title,
+                Modifier.align(Alignment.Center).padding(start = start + 128.dp, end = end + 128.dp).semantics { heading() },
+                color = PeekTheme.colors.label,
+                style = PeekTheme.type.headline,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+        GlassSurface(
+            CapsuleShape,
+            Modifier.align(Alignment.CenterEnd).offset(x = -(end + ACCOUNT_MARGIN)).size(ACCOUNT_GLASS_WIDTH, ROW_HEIGHT),
+            backdrop,
+        ) {
+            AccountButton(session, onAccount, accountTag, Modifier.align(Alignment.Center))
+        }
+    }
+}
+
+/** The list's account button, which opens Settings over the deliveries ([DeliveriesState.account]). */
+@Composable
+private fun AccountButton(state: DeliveriesState, modifier: Modifier) = AccountButton(state.source.session, state::account, ACCOUNT_BUTTON, modifier)
+
+/** `AccountToolbarButton`: the account's initial, or a figure, on a 34-point yellow disc, which opens Settings. */
+@Composable
+private fun AccountButton(session: StateFlow<AuthenticationState>, onClick: () -> Unit, tag: String, modifier: Modifier) {
+    val state by session.collectAsState()
+    val initial = (state as? AuthenticationState.SignedIn)?.user?.email?.firstOrNull()?.uppercase()
     val label = localized("native.account")
     val colors = PeekTheme.colors
     Box(
         modifier
             .size(BUTTON_SIDE)
-            .testTag(ACCOUNT_BUTTON)
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = state::account)
+            .testTag(tag)
+            .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = onClick)
             .semantics {
                 contentDescription = label
                 role = Role.Button

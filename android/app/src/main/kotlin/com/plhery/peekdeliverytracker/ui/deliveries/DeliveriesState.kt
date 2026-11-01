@@ -59,6 +59,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.parcelName
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.settings.AccountHost
 import com.plhery.peekdeliverytracker.ui.settings.DELIVERY_UPDATES_PAGE
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_PAGE
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
@@ -326,7 +327,7 @@ internal data class Announcement(val text: String, val count: Int)
  */
 @Stable
 internal class DeliveriesState(
-    val source: DeliveriesSource,
+    override val source: DeliveriesSource,
     val navigator: DeliveriesNavigator,
     val listState: LazyListState,
     archiveOpenState: MutableState<Boolean>,
@@ -338,7 +339,7 @@ internal class DeliveriesState(
     private val prompts: PromptStates,
     private val now: () -> Instant,
     val scope: CoroutineScope,
-) {
+) : AccountHost {
     /** The parcels as the list last received them: the store's, a moment before it shows them. */
     var parcels: List<Parcel> by mutableStateOf(source.parcels.value)
 
@@ -420,7 +421,7 @@ internal class DeliveriesState(
         }
 
     /** Sheets show as forms, and the filters in a popover: side by side, as settled while none is open. */
-    val sheetsAsForms: Boolean get() = views.sheetsAsForms.value
+    override val sheetsAsForms: Boolean get() = views.sheetsAsForms.value
 
     /**
      * `settleSheets()`: sheets take the window's arrangement, but only while none of Add, the filters and the account is
@@ -813,7 +814,7 @@ internal class DeliveriesState(
     }
 
     /** The account's sheet is open over the window (`showingAccount`, [com.plhery.peekdeliverytracker.ui.settings.AccountSheetHost]). */
-    val showingAccount: Boolean get() = views.showingAccount.value
+    override val showingAccount: Boolean get() = views.showingAccount.value
 
     /**
      * `showingAccount = true`, from the account button: Settings opens over the window, counted as the `account` screen,
@@ -831,7 +832,7 @@ internal class DeliveriesState(
     }
 
     /** `showingAccount = false`: Settings closes, its Close, a drag, the back or what it did; the list is counted again. */
-    fun closeAccount() {
+    override fun closeAccount() {
         if (!showingAccount) return
         views.showingAccount.value = false
         settleSheets()
@@ -1498,7 +1499,7 @@ internal class DeliveriesState(
     var announcement: Announcement? by mutableStateOf(null)
         private set
 
-    fun announce(text: String) {
+    override fun announce(text: String) {
         announcement = Announcement(text, (announcement?.count ?: 0) + 1)
     }
 

@@ -63,7 +63,7 @@ import com.plhery.peekdeliverytracker.platform.CacheExportFiles
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
-import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesSource
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.REGULAR_SPINNER
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
@@ -103,6 +103,26 @@ import kotlinx.coroutines.launch
 // button, its data page and Delivery updates pushed in it, and the data page's alerts.
 
 /**
+ * What Settings asks of the tab whose account button opened it: iOS gives the deliveries and the passport each its own
+ * `showingAccount` and sheet ([com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState],
+ * [com.plhery.peekdeliverytracker.ui.passport.PassportState]).
+ */
+internal interface AccountHost {
+    val source: DeliveriesSource
+
+    /** The sheet is open over the tab. */
+    val showingAccount: Boolean
+
+    /** The sheet shows as the iPad's form, as the tab settled it when it opened. */
+    val sheetsAsForms: Boolean
+
+    fun closeAccount()
+
+    /** Words for TalkBack to say, where Settings says what it did. */
+    fun announce(text: String)
+}
+
+/**
  * `.sheet(isPresented: $showingAccount) { AccountView() }`: Settings over the deliveries at the large detent with its
  * drag indicator; a form in the middle of the window where the list stands beside the parcel's page
  * (`FormSizing(applies: sheetsAsForms)`), its bar 10 from the top and the side as the iPad's form has it (ipad-01), and
@@ -114,7 +134,7 @@ import kotlinx.coroutines.launch
  * opens afresh each time.
  */
 @Composable
-internal fun AccountSheetHost(state: DeliveriesState) {
+internal fun AccountSheetHost(state: AccountHost) {
     val work = state.source.pageWork
     val launch = state.source.launch
     val nav = SettingsNav(
@@ -159,7 +179,7 @@ private class SettingsScrolls(val root: ScrollState, val data: ScrollState, val 
  * other. What it asked going well closes the sheet (`finish()`), and the export, once written, goes to the share sheet.
  */
 @Composable
-private fun AccountView(state: DeliveriesState, nav: SettingsNav, scrolls: SettingsScrolls) {
+private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsScrolls) {
     val source = state.source
     val work = source.pageWork
     val working = work.working(SETTINGS_PAGE)
@@ -292,7 +312,7 @@ private fun Modifier.edgeSwipeBack(enabled: Boolean, push: Animatable<Float, *>,
  */
 @Composable
 private fun SettingsRootPage(
-    state: DeliveriesState,
+    state: AccountHost,
     scroll: ScrollState,
     working: Boolean,
     rowFocus: AccessibilityFocus,
@@ -403,7 +423,7 @@ private fun SettingsRootPage(
  * end while it waits, when nothing on it can be pressed.
  */
 @Composable
-private fun AccountDataPage(state: DeliveriesState, nav: SettingsNav, scroll: ScrollState, working: Boolean, onBack: () -> Unit) {
+private fun AccountDataPage(state: AccountHost, nav: SettingsNav, scroll: ScrollState, working: Boolean, onBack: () -> Unit) {
     val source = state.source
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -583,7 +603,7 @@ private fun SettingsColumn(content: @Composable ColumnScope.() -> Unit) {
  * the sheet once done.
  */
 @Composable
-private fun SettingsAlerts(state: DeliveriesState, nav: SettingsNav) {
+private fun SettingsAlerts(state: AccountHost, nav: SettingsNav) {
     val source = state.source
     val work = source.pageWork
     val localizer = LocalLocalizer.current

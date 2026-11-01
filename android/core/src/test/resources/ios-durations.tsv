@@ -1,0 +1,161 @@
+language	seconds	abbreviated	full
+en	60	1m	1 minute
+en	61	1m	1 minute
+en	119	1m	1 minute
+en	3600	1h	1 hour
+en	3660	1h 1m	1 hour, 1 minute
+en	7322	2h 2m	2 hours, 2 minutes
+en	21599	5h 59m	5 hours, 59 minutes
+en	86399	23h 59m	23 hours, 59 minutes
+en	86400	1d	1 day
+en	90000	1d 1h	1 day, 1 hour
+en	93784	1d 2h	1 day, 2 hours
+en	172800	2d	2 days
+en	190800	2d 5h	2 days, 5 hours
+en	261000	3d	3 days
+en	1033200	11d 23h	11 days, 23 hours
+en	3891600	45d 1h	45 days, 1 hour
+de	60	1min	1 Minute
+de	61	1min	1 Minute
+de	119	1min	1 Minute
+de	3600	1h	1 Stunde
+de	3660	1h 1min	1 Stunde und 1 Minute
+de	7322	2h 2min	2 Stunden und 2 Minuten
+de	21599	5h 59min	5 Stunden und 59 Minuten
+de	86399	23h 59min	23 Stunden und 59 Minuten
+de	86400	1d	1 Tag
+de	90000	1d 1h	1 Tag und 1 Stunde
+de	93784	1d 2h	1 Tag und 2 Stunden
+de	172800	2d	2 Tage
+de	190800	2d 5h	2 Tage und 5 Stunden
+de	261000	3d	3 Tage
+de	1033200	11d 23h	11 Tage und 23 Stunden
+de	3891600	45d 1h	45 Tage und 1 Stunde
+fr	60	1min	1 minute
+fr	61	1min	1 minute
+fr	119	1min	1 minute
+fr	3600	1h	1 heure
+fr	3660	1h 1min	1 heure et 1 minute
+fr	7322	2h 2min	2 heures et 2 minutes
+fr	21599	5h 59min	5 heures et 59 minutes
+fr	86399	23h 59min	23 heures et 59 minutes
+fr	86400	1j	1 jour
+fr	90000	1j 1h	1 jour et 1 heure
+fr	93784	1j 2h	1 jour et 2 heures
+fr	172800	2j	2 jours
+fr	190800	2j 5h	2 jours et 5 heures
+fr	261000	3j	3 jours
+fr	1033200	11j 23h	11 jours et 23 heures
+fr	3891600	45j 1h	45 jours et 1 heure
+it	60	1 min	1 minuto
+it	61	1 min	1 minuto
+it	119	1 min	1 minuto
+it	3600	1 h	1 ora
+it	3660	1 h 1 min	1 ora e 1 minuto
+it	7322	2 h 2 min	2 ore e 2 minuti
+it	21599	5 h 59 min	5 ore e 59 minuti
+it	86399	23 h 59 min	23 ore e 59 minuti
+it	86400	1 g	1 giorno
+it	90000	1 g 1 h	1 giorno e 1 ora
+it	93784	1 g 2 h	1 giorno e 2 ore
+it	172800	2 g	2 giorni
+it	190800	2 g 5 h	2 giorni e 5 ore
+it	261000	3 g	3 giorni
+it	1033200	11 g 23 h	11 giorni e 23 ore
+it	3891600	45 g 1 h	45 giorni e 1 ora
+es	60	1 min	1 minuto
+es	61	1 min	1 minuto
+es	119	1 min	1 minuto
+es	3600	1 h	1 hora
+es	3660	1 h 1 min	1 hora y 1 minuto
+es	7322	2 h 2 min	2 horas y 2 minutos
+es	21599	5 h 59 min	5 horas y 59 minutos
+es	86399	23 h 59 min	23 horas y 59 minutos
+es	86400	1 d	1 día
+es	90000	1 d 1 h	1 día y 1 hora
+es	93784	1 d 2 h	1 día y 2 horas
+es	172800	2 d	2 días
+es	190800	2 d 5 h	2 días y 5 horas
+es	261000	3 d	3 días
+es	1033200	11 d 23 h	11 días y 23 horas
+es	3891600	45 d 1 h	45 días y 1 hora
+pt	60	1min	1 minuto
+pt	61	1min	1 minuto
+pt	119	1min	1 minuto
+pt	3600	1h	1 hora
+pt	3660	1h 1min	1 hora e 1 minuto
+pt	7322	2h 2min	2 horas e 2 minutos
+pt	21599	5h 59min	5 horas e 59 minutos
+pt	86399	23h 59min	23 horas e 59 minutos
+pt	86400	1 dia	1 dia
+pt	90000	1 dia 1h	1 dia e 1 hora
+pt	93784	1 dia 2h	1 dia e 2 horas
+pt	172800	2 dias	2 dias
+pt	190800	2 dias 5h	2 dias e 5 horas
+pt	261000	3 dias	3 dias
+pt	1033200	11 dias 23h	11 dias e 23 horas
+pt	3891600	45 dias 1h	45 dias e 1 hora
+pt-br	60	1min	1 minuto
+pt-br	61	1min	1 minuto
+pt-br	119	1min	1 minuto
+pt-br	3600	1h	1 hora
+pt-br	3660	1h 1min	1 hora e 1 minuto
+pt-br	7322	2h 2min	2 horas e 2 minutos
+pt-br	21599	5h 59min	5 horas e 59 minutos
+pt-br	86399	23h 59min	23 horas e 59 minutos
+pt-br	86400	1 dia	1 dia
+pt-br	90000	1 dia 1h	1 dia e 1 hora
+pt-br	93784	1 dia 2h	1 dia e 2 horas
+pt-br	172800	2 dias	2 dias
+pt-br	190800	2 dias 5h	2 dias e 5 horas
+pt-br	261000	3 dias	3 dias
+pt-br	1033200	11 dias 23h	11 dias e 23 horas
+pt-br	3891600	45 dias 1h	45 dias e 1 hora
+pl	60	1min	1 minuta
+pl	61	1min	1 minuta
+pl	119	1min	1 minuta
+pl	3600	1h	1 godzina
+pl	3660	1h 1min	1 godzina i 1 minuta
+pl	7322	2h 2min	2 godziny i 2 minuty
+pl	21599	5h 59min	5 godzin i 59 minut
+pl	86399	23h 59min	23 godziny i 59 minut
+pl	86400	1 d.	1 dzień
+pl	90000	1 d. 1h	1 dzień i 1 godzina
+pl	93784	1 d. 2h	1 dzień i 2 godziny
+pl	172800	2 dn.	2 dni
+pl	190800	2 dn. 5h	2 dni i 5 godzin
+pl	261000	3 dn.	3 dni
+pl	1033200	11 dn. 23h	11 dni i 23 godziny
+pl	3891600	45 dn. 1h	45 dni i 1 godzina
+ru	60	1 мин	1 минута
+ru	61	1 мин	1 минута
+ru	119	1 мин	1 минута
+ru	3600	1 ч	1 час
+ru	3660	1 ч 1 мин	1 час 1 минута
+ru	7322	2 ч 2 мин	2 часа 2 минуты
+ru	21599	5 ч 59 мин	5 часов 59 минут
+ru	86399	23 ч 59 мин	23 часа 59 минут
+ru	86400	1 д.	1 день
+ru	90000	1 д. 1 ч	1 день 1 час
+ru	93784	1 д. 2 ч	1 день 2 часа
+ru	172800	2 д.	2 дня
+ru	190800	2 д. 5 ч	2 дня 5 часов
+ru	261000	3 д.	3 дня
+ru	1033200	11 д. 23 ч	11 дней 23 часа
+ru	3891600	45 д. 1 ч	45 дней 1 час
+zh	60	1分钟	1分钟
+zh	61	1分钟	1分钟
+zh	119	1分钟	1分钟
+zh	3600	1小时	1小时
+zh	3660	1小时1分钟	1小时1分钟
+zh	7322	2小时2分钟	2小时2分钟
+zh	21599	5小时59分钟	5小时59分钟
+zh	86399	23小时59分钟	23小时59分钟
+zh	86400	1天	1天
+zh	90000	1天1小时	1天1小时
+zh	93784	1天2小时	1天2小时
+zh	172800	2天	2天
+zh	190800	2天5小时	2天5小时
+zh	261000	3天	3天
+zh	1033200	11天23小时	11天23小时
+zh	3891600	45天1小时	45天1小时

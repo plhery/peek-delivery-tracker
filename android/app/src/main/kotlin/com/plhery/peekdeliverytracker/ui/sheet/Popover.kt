@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.sheet
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -47,6 +48,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.MapPath
@@ -64,7 +66,11 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-/** How large a popover would be and how small it may be, `.frame(minWidth:idealWidth:minHeight:idealHeight:)`. */
+/**
+ * How large a popover would be and how small it may be, `.frame(minWidth:idealWidth:minHeight:idealHeight:)`. An
+ * unspecified ideal height is the content's own (`.fixedSize(horizontal: false, vertical: true)`) at the popover's
+ * width.
+ */
 @Immutable
 data class PopoverSize(val minWidth: Dp, val idealWidth: Dp, val minHeight: Dp, val idealHeight: Dp)
 
@@ -76,7 +82,8 @@ data class PopoverSize(val minWidth: Dp, val idealWidth: Dp, val minHeight: Dp, 
  * in the window's safe area, what it holds scrolling where even its least would not fit. Nothing dims; a tap outside
  * it, or the system's back, dismisses it. It grows from its arrow on a spring and shrinks back as it goes; the window
  * made again (a rotation) finds it there without growing again. TalkBack reaches only the popover, named [paneTitle],
- * and only its menu while one is open ([FormMenuRow]); [onClosed] runs once it has gone.
+ * and only its menu while one is open ([FormMenuRow]); [onClosed] runs once it has gone. A [ground] colour stands in
+ * for the glass, as `.presentationBackground(_:)` does.
  */
 @Composable
 fun Popover(
@@ -88,6 +95,7 @@ fun Popover(
     onClosed: () -> Unit = {},
     above: Boolean = false,
     radius: Dp = POPOVER_RADIUS,
+    ground: Color? = null,
     content: @Composable () -> Unit,
 ) {
     var present by remember { mutableStateOf(visible) }
@@ -99,7 +107,7 @@ fun Popover(
     val closed by rememberUpdatedState(onClosed)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
-            PopoverLayer(visible, anchor, { dismiss() }, paneTitle, size, PopoverLook(above, radius), host?.backdrop, memory, {
+            PopoverLayer(visible, anchor, { dismiss() }, paneTitle, size, PopoverLook(above, radius, ground), host?.backdrop, memory, {
                 present = false
                 closed()
             }, content)
@@ -130,6 +138,9 @@ private fun PopoverLayer(
     val shown = remember { Animatable(if (memory.up) 1f else 0f) }
     val menus = remember { SheetMenus() }
     var origin by remember { mutableStateOf(Offset.Zero) }
+    // The content's own height, the arrow's room included, where the popover takes it: unknown until first measured.
+    val fits = !size.idealHeight.isSpecified
+    var natural by remember { mutableStateOf<Int?>(null) }
     val showing by rememberUpdatedState(visible)
     val dismiss by rememberUpdatedState(onDismiss)
     LaunchedEffect(visible) {
@@ -151,8 +162,9 @@ private fun PopoverLayer(
     ) {
         val bars = WindowInsets.systemBars.union(WindowInsets.displayCutout)
         val frame = with(density) {
+            val fitted = if (!fits) size else size.copy(idealHeight = ((natural ?: 0) - ARROW_HEIGHT.roundToPx()).coerceAtLeast(0).toDp())
             popoverFrame(
-                anchor.translate(-origin), size, look.above, constraints.maxWidth.toFloat(), constraints.maxHeight.toFloat(),
+                anchor.translate(-origin), fitted, look.above, constraints.maxWidth.toFloat(), constraints.maxHeight.toFloat(),
                 SafeInsets(bars.getLeft(this, direction).toFloat(), bars.getTop(this).toFloat(), bars.getRight(this, direction).toFloat(), bars.getBottom(this).toFloat()),
             )
         }
@@ -163,13 +175,14 @@ private fun PopoverLayer(
                 .then(if (backdrop != null) Modifier.materialBackdropLayer(backdrop) else Modifier)
                 .layout { measurable, constraints ->
                     val bounds = frame.bounds
+                    if (fits) natural = measurable.maxIntrinsicHeight(bounds.width.roundToInt())
                     val placeable = measurable.measure(Constraints.fixed(bounds.width.roundToInt(), bounds.height.roundToInt()))
                     layout(constraints.maxWidth, constraints.maxHeight) { placeable.place(bounds.left.roundToInt(), bounds.top.roundToInt()) }
                 }
                 .graphicsLayer {
                     val t = shown.value
                     // Made again with the window, it shows once its source has been laid out again.
-                    alpha = if (anchor == Rect.Zero) 0f else t.coerceIn(0f, 1f)
+                    alpha = if (anchor == Rect.Zero || (fits && natural == null)) 0f else t.coerceIn(0f, 1f)
                     val scale = if (reduceMotion) 1f else 0.5f + 0.5f * t
                     scaleX = scale
                     scaleY = scale
@@ -182,9 +195,10 @@ private fun PopoverLayer(
                 // While a menu is open over it, TalkBack reaches only the menu.
                 .then(if (menus.content != null) Modifier.clearAndSetSemantics {} else Modifier),
         ) {
-            SheetGlass(shape, backdrop, Modifier.matchParentSize())
+            val paper = look.ground
+            if (paper != null) Box(Modifier.matchParentSize().background(paper)) else SheetGlass(shape, backdrop, Modifier.matchParentSize())
             val insets = with(density) { SheetInsets.popover(frame.bounds.width.toDp()) }
-            val ground: @Composable (Modifier) -> Unit = { SheetGlass(RectangleShape, backdrop, it) }
+            val ground: @Composable (Modifier) -> Unit = { if (paper != null) Box(it.background(paper)) else SheetGlass(RectangleShape, backdrop, it) }
             CompositionLocalProvider(
                 LocalSheetAttachment provides { 0f }, LocalSheetMenus provides menus, LocalSheetInsets provides insets, LocalSheetGround provides ground,
             ) {
@@ -200,7 +214,7 @@ private fun PopoverLayer(
 
 /** Which side of its source a popover takes first, and its corners. */
 @Immutable
-private data class PopoverLook(val above: Boolean, val radius: Dp)
+private data class PopoverLook(val above: Boolean, val radius: Dp, val ground: Color?)
 
 /** Where a popover stands: its bounds, its arrow included, whether it is under its source, and its arrow's tip across it. */
 @Immutable

@@ -602,15 +602,21 @@ class DeliveriesInbox(parcel: UUID? = null, private val parcelLink: (String) -> 
 
         /**
          * The window's inbox, after its `super.onCreate`: it follows the link that started the window, and each link
-         * that comes to it after, a parcel's link through [parcelLink]. Made again, the window finds the parcel still
-         * waiting, and doesn't follow the link that started it again once its list has shown it.
+         * that comes to it after, a parcel's link through [parcelLink], once each, as the iPhone hears a link once.
+         * Made again, the window finds the parcel still waiting, and doesn't follow the link that started it again once
+         * its list has shown it. Nor does a window that Recents starts again with the link that began its task, after
+         * the process or the phone restarted: the system keeps that link as the task's own and hands it over again
+         * (`FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY`). The window's intent forgets the link once it has been read, and with
+         * it any owner key it carried.
          */
         fun of(activity: ComponentActivity, parcelLink: (String) -> Boolean = { false }): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
             val inbox = DeliveriesInbox(saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink)
             registry.registerSavedStateProvider(SAVED) { Bundle().apply { putString(PARCEL, inbox.parcel.value?.toString()) } }
-            if (saved == null) inbox.follow(activity.intent)
+            val intent = activity.intent
+            if (saved == null && intent != null && intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY == 0) inbox.follow(intent)
+            if (intent?.data != null) activity.intent = Intent(intent).setData(null)
             activity.addOnNewIntentListener { inbox.follow(it) }
             return inbox
         }

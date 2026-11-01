@@ -55,6 +55,7 @@ class FakeParcelLinks(
     override val parcels = MutableStateFlow<List<Parcel>>(emptyList())
     private val job = SupervisorJob()
     override val scope: CoroutineScope get() = CoroutineScope(job + Dispatchers.Main.immediate)
+    override val sheet = ParcelLinkSheetState()
 
     /** How keeping a link ends. */
     var keeping: suspend (ParcelLinkRoute) -> ParcelLinkClaim = { ParcelLinkClaim.Added(KEPT) }

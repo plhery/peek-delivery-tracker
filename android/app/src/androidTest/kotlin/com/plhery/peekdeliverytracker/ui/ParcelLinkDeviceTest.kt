@@ -39,6 +39,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_GIFT_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SHEET
+import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetState
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSource
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import java.time.Duration
@@ -146,6 +147,7 @@ private class MemoryLinks : ParcelLinkSource {
     override val session = MutableStateFlow<AuthenticationState>(AuthenticationState.Welcome)
     override val parcels = MutableStateFlow<List<Parcel>>(emptyList())
     override val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    override val sheet = ParcelLinkSheetState()
     override val authenticationConfigured = true
     override val tracksWithoutAccount = true
 

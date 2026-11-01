@@ -62,6 +62,7 @@ import java.io.IOException
 import java.time.Duration
 import java.time.Instant
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.awaitCancellation
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -163,6 +164,28 @@ class ParcelLinkSheetTest {
         assertHeading(localizer.parcelStatus(Parcel(shared = LinkFixtures.viewer().parcel)))
         assertTrue(shows("••• 3456"))
         assertEquals("One read a presentation", 1, links.reads.size)
+    }
+
+    @Test
+    fun closingTheSheetStopsItsRead() {
+        var stopped = false
+        show(
+            FakeParcelLinks().apply {
+                read = { _, _ ->
+                    try {
+                        awaitCancellation()
+                    } finally {
+                        stopped = true
+                    }
+                }
+            },
+        )
+        open()
+        assertTrue(exists(LINK_LOADING))
+        assertFalse(stopped)
+        compose.onNodeWithTag(LINK_CLOSE).performClick()
+        settle()
+        assertTrue("Close stops the read, as `.task` stops with its view", stopped)
     }
 
     @Test
@@ -394,6 +417,33 @@ class ParcelLinkSheetTest {
         assertTrue(exists(LINK_GIFT_CARD))
         assertFalse(exists(LINK_CARD))
         assertEquals(1, compose.onAllNodesWithTag(LINK_SHEET).fetchSemanticsNodes().size)
+    }
+
+    @Test
+    fun aLinkThatComesWhileTheSheetGoesLetsTheListTakeWhatItClosedOnFirst() {
+        show(
+            FakeParcelLinks().apply { read = { id, _ -> if (id == giftId) LinkFixtures.wrappedGift() else LinkFixtures.keepable() } },
+            FakeParcelLinks.READER,
+        )
+        open()
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(LINK_ADD).performClick()
+        compose.mainClock.advanceTimeByFrame()
+        assertNull("Added: the sheet goes", links.links.route)
+        // Another link before it has gone brings it back up, as a new presentation.
+        compose.runOnUiThread { links.links.open(ParcelLinkRoute(id = giftId)) }
+        repeat(3) { compose.mainClock.advanceTimeByFrame() }
+        assertNull("The list took the parcel added", links.links.arrival)
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(exists(LINK_GIFT_CARD))
+        assertTrue(exists(INLINE_TOAST))
+        assertTrue(shows(text("link.added")))
+
+        compose.onNodeWithTag(LINK_CLOSE).performClick()
+        settle()
+        assertNull(links.links.arrival)
+        assertNull(inbox.linkAdded.value)
     }
 
     // Refresh

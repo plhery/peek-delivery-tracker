@@ -158,40 +158,77 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.max
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * What the sheet does that outlives a presentation's drawing: Add or follow under way (`adding`), a read asked for
- * again (`refreshing`) and why keeping failed (`errorMessage`). Each runs on the app's scope, so the window made again
- * doesn't cancel it half done.
+ * What a presentation of the link's sheet does, kept by the app rather than the window, as the iPhone keeps the sheet's
+ * `@State` with its presentation: the link's read (`.task(id: presentationID)`), Add or follow under way (`adding`), a
+ * read asked for again (`refreshing`), why keeping failed (`errorMessage`), and whether the handed-over link was taken
+ * along (`handedOver`). Each runs on the app's scope, so the window made again (a turn, dark mode, a font size) finds it
+ * as it was: still keeping, Close still off, its error yet to come. A new presentation starts clean; what the one
+ * before still runs no longer touches it. The read is the sheet's own: it stops as the sheet closes or another
+ * presentation comes, as `.task` stops with its view.
  */
 @Stable
-internal class ParcelLinkSheetState(private val source: ParcelLinkSource) {
+class ParcelLinkSheetState {
     var adding by mutableStateOf(false)
         private set
     var refreshing by mutableStateOf(false)
         private set
     var errorMessage by mutableStateOf<String?>(null)
+        private set
+
+    /** The presentation on screen, and the one whose handed-over link was kept or followed. */
+    private var presented: UUID? = null
+    private var handedOver: UUID? = null
+    private var reading: Job? = null
+
+    /** `.task(id: presentationID)`: once a presentation, and not again in the window made again, its link read. */
+    internal fun present(source: ParcelLinkSource, presentation: UUID) {
+        if (presented == presentation) return
+        presented = presentation
+        adding = false
+        refreshing = false
+        errorMessage = null
+        reading?.cancel()
+        reading = source.scope.launch { source.links.load() }
+    }
+
+    /** The sheet has closed: its read stops. */
+    internal fun closed() {
+        reading?.cancel()
+        reading = null
+    }
+
+    /** Whether `presentation`'s handed-over link is still to be kept or followed, once. */
+    internal fun handOver(presentation: UUID): Boolean {
+        if (handedOver == presentation) return false
+        handedOver = presentation
+        return true
+    }
 
     /** `refresh()`: the link read again, once at a time. */
-    fun refresh() {
+    internal fun refresh(source: ParcelLinkSource) {
         if (refreshing) return
+        val presentation = presented
         refreshing = true
         source.scope.launch {
             try {
                 source.links.load()
             } finally {
-                refreshing = false
+                if (presented == presentation) refreshing = false
             }
         }
     }
 
     /** `add()`: the parcel kept in the account. An added parcel closes the sheet; an answer stays on it. */
-    fun add() {
+    internal fun add(source: ParcelLinkSource) {
         val links = source.links
         val link = links.route
         if (adding || link == null) return
+        val presentation = presented
         adding = true
         errorMessage = null
         source.scope.launch {
@@ -201,19 +238,20 @@ internal class ParcelLinkSheetState(private val source: ParcelLinkSource) {
                 if (links.route == link) links.resolve(claim)
             } catch (_: CancellationException) {
             } catch (error: Exception) {
-                errorMessage = source.errorMessage(error)
+                if (presented == presentation) errorMessage = source.errorMessage(error)
             } finally {
-                adding = false
+                if (presented == presentation) adding = false
             }
         }
     }
 
     /** `follow(_:)`: the parcel followed on this phone. One that was here already opens. */
-    fun follow(response: PublicParcelResponse) {
+    internal fun follow(source: ParcelLinkSource, response: PublicParcelResponse) {
         val links = source.links
         val link = links.route
         if (adding || link == null) return
         source.action("parcel-link-alerts")
+        val presentation = presented
         adding = true
         errorMessage = null
         source.scope.launch {
@@ -226,15 +264,15 @@ internal class ParcelLinkSheetState(private val source: ParcelLinkSource) {
                 }
             } catch (_: CancellationException) {
             } catch (error: Exception) {
-                errorMessage = source.errorMessage(error)
+                if (presented == presentation) errorMessage = source.errorMessage(error)
             } finally {
-                adding = false
+                if (presented == presentation) adding = false
             }
         }
     }
 
     /** `signIn()`: the link kept for after sign-in, without its key, and the sign-in shown. */
-    fun signIn() {
+    internal fun signIn(source: ParcelLinkSource) {
         source.action("parcel-link-sign-in")
         source.links.rememberForSignIn()
         if (source.session.value !is AuthenticationState.SignedIn) source.showSignIn()
@@ -244,24 +282,36 @@ internal class ParcelLinkSheetState(private val source: ParcelLinkSource) {
 /**
  * `FrontmostSheet { ParcelLinkSheet() }` (A-S05, B-S50): the link's sheet over whatever is up, the list, a page, Add,
  * the share sheet, a cover or a menu, signed in or not, since it is drawn in the window's front layer over all of
- * them. On a phone it is the large sheet without a grabber, as the iPhone's page sheet; in a regular window it is the
- * form sheet, as the iPad's. It is never refused, so it needs none of the iPhone's 350 ms retries past an alert or a
- * transition. A second link while it is up opens in it, as a new presentation. The person closing it (Close, a drag,
- * the dim, the back) is `links.close()`; once it has gone, `links.dismissed()` lets the list take over. While a keep or
- * a follow runs, none of those closes it (`interactiveDismissDisabled(adding)`, B-G09). The window made again keeps it
- * up, as the store, not the window, holds the link.
+ * them, and under what comes there after it. On a phone it is the large sheet without a grabber, as the iPhone's page
+ * sheet; in a regular window it is the form sheet, as the iPad's. It is never refused, so it needs none of the
+ * iPhone's 350 ms retries past an alert or a transition. A second link while it is up opens in it, as a new
+ * presentation. The person closing it (Close, a drag, the dim, the back) is `links.close()`, which stops its read.
+ * Once it has gone, `links.dismissed()` lets the list take over; so does a link that comes while it is going, which
+ * brings it back up as a new presentation where the iPhone presents a new sheet once the old one has gone, and a window
+ * made again while it was going, which has none to wait for. While a keep or a follow runs, none of those closes it
+ * (`interactiveDismissDisabled(adding)`, B-G09). The window made again keeps it up as it was, as the app, not the
+ * window, holds the link and the presentation's state ([ParcelLinkSheetState]).
  */
 @Composable
 internal fun ParcelLinkSheetHost(source: ParcelLinkSource) {
     val links = source.links
+    val state = source.sheet
     val route by links.routeFlow.collectAsState()
-    val state = remember(source) { ParcelLinkSheetState(source) }
+    val presentation by links.presentationIdFlow.collectAsState()
+    // Up, or still going, in this window, as the sheet keeps itself.
+    var up by remember { mutableStateOf(route != null) }
+    if (route != null) up = true
+    LaunchedEffect(state, route == null) { if (route == null) state.closed() }
+    LaunchedEffect(links, presentation, route == null, up) { if (route != null || !up) links.dismissed() }
     Sheet(
         visible = route != null,
         onDismiss = { links.close() },
         paneTitle = localized("link.shared"),
         detents = listOf(SheetDetent.Large),
-        onClosed = { links.dismissed() },
+        onClosed = {
+            up = false
+            links.dismissed()
+        },
         dismissible = !state.adding,
         grabber = false,
     ) {
@@ -288,26 +338,17 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
     val followsHere = !loadingSession && source.tracksWithoutAccount
     val canSignIn = !loadingSession && source.authenticationConfigured
 
-    // `.task(id: presentationID)`: once per presentation, and not again in the window made again.
-    var loaded by rememberSaveable { mutableStateOf<String?>(null) }
-    LaunchedEffect(presentation) {
-        if (loaded == presentation.toString()) return@LaunchedEffect
-        loaded = presentation.toString()
-        state.errorMessage = null
-        source.scope.launch { links.load() }
-    }
+    LaunchedEffect(state, presentation) { state.present(source, presentation) }
     // The link handed over with its owner key, read as its owner's and nothing done with it yet: kept, or followed.
     val shown = phase as? ParcelLinkStore.Phase.Shown
     val handOver = shown?.response?.takeIf {
         route?.key != null && it.link.role == ParcelLinkRole.Owner && !loadingSession && (signedIn || followsHere)
     }
     val latestHandOver by rememberUpdatedState(handOver)
-    var handedOver by rememberSaveable { mutableStateOf<String?>(null) }
     LaunchedEffect(handOver == null, presentation) {
         val response = latestHandOver ?: return@LaunchedEffect
-        if (handedOver == presentation.toString()) return@LaunchedEffect
-        handedOver = presentation.toString()
-        if (signedIn) state.add() else state.follow(response)
+        if (!state.handOver(presentation)) return@LaunchedEffect
+        if (signedIn) state.add(source) else state.follow(source, response)
     }
 
     val title = when {
@@ -328,7 +369,7 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
                 )
                 ParcelLinkStore.Phase.Unavailable -> Centered(top, bottom) { Nothing("link.gone.title", "link.gone.body") { links.close() } }
                 ParcelLinkStore.Phase.Stopped -> Centered(top, bottom) { Nothing("share.stopped.title", "share.stopped.body") { links.close() } }
-                is ParcelLinkStore.Phase.Failed -> Centered(top, bottom) { Failed(current.failure, state.refreshing) { state.refresh() } }
+                is ParcelLinkStore.Phase.Failed -> Centered(top, bottom) { Failed(current.failure, state.refreshing) { state.refresh(source) } }
             }
         }
     }
@@ -413,7 +454,7 @@ private fun LinkShared(
     val pull = rememberPullToRefreshState()
     PullToRefreshBox(
         isRefreshing = state.refreshing,
-        onRefresh = { state.refresh() },
+        onRefresh = { state.refresh(source) },
         modifier = Modifier.fillMaxSize().padding(top = top),
         state = pull,
         indicator = {
@@ -438,10 +479,10 @@ private fun LinkShared(
         ) {
             Column(Modifier.widthIn(max = 560.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
                 if (wrapped || opened) {
-                    GiftParcelCard(parcel, opened, state.refreshing) { state.refresh() }
+                    GiftParcelCard(parcel, opened, state.refreshing) { state.refresh(source) }
                 } else {
                     SharedParcelCard(source, parcel, route?.name, response.parcel.numberHint, gift == ParcelLinkGift.Own, state.refreshing) {
-                        state.refresh()
+                        state.refresh(source)
                     }
                 }
                 refreshFailure?.let { LinkNote(localizer.text(it.messageKey)) }
@@ -499,7 +540,7 @@ private fun Keeping(
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (claim == ParcelLinkClaim.Full) LinkNote(localizer.text("linkapp.full"))
                 state.errorMessage?.let { LinkNote(it) }
-                LinkPrimaryButton(localizer.text("link.add"), "plus", LINK_ADD, busy = state.adding) { state.add() }
+                LinkPrimaryButton(localizer.text("link.add"), "plus", LINK_ADD, busy = state.adding) { state.add(source) }
                 LinkHint(localizer.text("link.addHint"))
             }
         }
@@ -511,7 +552,7 @@ private fun Keeping(
     } else if (followable && context.followsHere) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             state.errorMessage?.let { LinkNote(it) }
-            LinkPrimaryButton(localizer.text("native.follow.action"), "bell", LINK_FOLLOW, busy = state.adding) { state.follow(response) }
+            LinkPrimaryButton(localizer.text("native.follow.action"), "bell", LINK_FOLLOW, busy = state.adding) { state.follow(source, response) }
             LinkHint(localizer.text("native.follow.hint"))
             if (keepable && context.canSignIn) {
                 val enabled = !state.adding
@@ -520,7 +561,7 @@ private fun Keeping(
                         .fillMaxWidth()
                         .heightIn(min = 44.dp)
                         .testTag(LINK_SIGN_IN)
-                        .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { state.signIn() }
+                        .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { state.signIn(source) }
                         .plainDisabled(enabled),
                     contentAlignment = Alignment.Center,
                 ) {
@@ -534,7 +575,7 @@ private fun Keeping(
             }
         }
     } else if (keepable && context.canSignIn) {
-        LinkPrimaryButton(localizer.text("link.signInToAdd"), null, LINK_SIGN_IN, busy = false) { state.signIn() }
+        LinkPrimaryButton(localizer.text("link.signInToAdd"), null, LINK_SIGN_IN, busy = false) { state.signIn(source) }
     }
 }
 

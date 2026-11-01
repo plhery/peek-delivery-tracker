@@ -27,6 +27,9 @@ interface ParcelLinkSource {
     /** The app's own scope: a read, a keep or a follow under way outlives the window made again. */
     val scope: CoroutineScope
 
+    /** What the sheet's presentation does, kept by the app so that the window made again finds it as it was. */
+    val sheet: ParcelLinkSheetState
+
     /** `session.configuration.authenticationConfigured`: the build has a way to sign in. */
     val authenticationConfigured: Boolean
 
@@ -61,6 +64,7 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
     override val session get() = container.session.stateFlow
     override val parcels get() = container.parcels.parcelsFlow
     override val scope get() = container.scope
+    override val sheet get() = container.linkSheet
     override val authenticationConfigured get() = container.configuration.authenticationConfigured
     override val tracksWithoutAccount get() = container.parcels.tracksWithoutAccount
 

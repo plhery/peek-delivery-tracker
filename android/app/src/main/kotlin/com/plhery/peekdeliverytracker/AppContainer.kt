@@ -61,6 +61,7 @@ import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
 import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
 import com.plhery.peekdeliverytracker.platform.WebViewTurnstilePages
 import com.plhery.peekdeliverytracker.ui.TurnstileSheet
+import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetState
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -231,6 +232,9 @@ class AppContainer(
     /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for. */
     val links: ParcelLinkStore = (if (debug) debugLinkPreview() else null)
         ?: ParcelLinkStore(defaults, configuration, api = { id, key -> DeliveryApiClient.publicParcel(id, key, configuration, transport) })
+
+    /** The link sheet's presentation (ParcelLinkSheet's `@State`), which outlives the window made again. */
+    val linkSheet = ParcelLinkSheetState()
 
     /**
      * `ReviewPrompt.settled(session:store:links:invitation:)` as the stores change: someone's own parcels, loaded and

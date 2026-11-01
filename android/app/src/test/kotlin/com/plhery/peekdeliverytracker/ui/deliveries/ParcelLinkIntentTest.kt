@@ -6,15 +6,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.PeekApplication
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
+import java.io.IOException
+import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
@@ -53,9 +61,10 @@ class ParcelLinkWindow : ComponentActivity() {
 
 /**
  * A parcel's link comes first in the window's routing (A-L02, B-L01): it opens its sheet whether it started the window
- * or came to it, in the site's form or the app's scheme; the window made again keeps the sheet up without reading the
- * link again; an address that is no parcel's link goes on to the parcel it names. The app takes a link before its
- * stores are made.
+ * or came to it, in the site's form or the app's scheme, once; the window made again keeps the sheet up without reading
+ * the link again, and a keep under way with it; a window Recents starts again with the link doesn't follow it again,
+ * and the window's intent forgets the link once read; an address that is no parcel's link goes on to the parcel it
+ * names. The app takes a link before its stores are made.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -126,6 +135,54 @@ class ParcelLinkIntentTest {
         assertTrue(exists(LINK_CARD))
         assertEquals(1, links.reads.size)
         assertEquals(ParcelLinkRoute(id = id), links.links.route)
+    }
+
+    @Test
+    fun aKeepUnderWayOutlivesTheWindowMadeAgainWithCloseOffAndItsErrorShownThere() {
+        val claim = CompletableDeferred<ParcelLinkClaim>()
+        val links = FakeParcelLinks(answer = LinkFixtures.keepable(), session = FakeParcelLinks.READER)
+            .apply { keeping = { claim.await() } }
+            .also { ParcelLinkWindow.links = it }
+        val window = window(intent(siteLink(id)))
+        compose.onNodeWithTag(LINK_ADD).performClick()
+        settle()
+        compose.onNodeWithTag(LINK_CLOSE).assertIsNotEnabled()
+
+        window.recreate()
+        settle()
+        compose.onNodeWithTag(LINK_CLOSE).assertIsNotEnabled()
+        compose.onNodeWithTag(LINK_ADD).assertIsNotEnabled()
+        compose.onNodeWithTag(LINK_ADD).performClick()
+        window.get().onBackPressedDispatcher.onBackPressed()
+        settle()
+        assertTrue("The back keeps the sheet while keeping", exists(LINK_SHEET))
+        assertEquals("One claim", 1, links.kept.size)
+
+        claim.completeExceptionally(IOException("The keep failed"))
+        settle()
+        assertTrue(compose.onAllNodesWithText("The keep failed", substring = true, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty())
+        compose.onNodeWithTag(LINK_CLOSE).assertIsEnabled()
+        assertEquals(1, links.kept.size)
+    }
+
+    @Test
+    fun aWindowRecentsStartsAgainWithTheLinkThatBeganItsTaskDoesNotFollowItAgain() {
+        val links = links()
+        val again = intent(siteLink(id) + "#k=${LinkFixtures.KEY}").addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY)
+        val window = window(again)
+        assertNull(links.links.route)
+        assertEquals(emptyList<Pair<String, String?>>(), links.reads)
+        assertFalse(exists(LINK_SHEET))
+        assertNull("The window's intent forgets it", window.get().intent.data)
+    }
+
+    @Test
+    fun theWindowsIntentForgetsTheLinkAndItsKeyOnceRead() {
+        val links = links()
+        val window = window(intent(siteLink(id) + "#k=${LinkFixtures.KEY}"))
+        assertEquals("Read with its key", listOf(id to LinkFixtures.KEY), links.reads)
+        assertNull(window.get().intent.data)
+        assertFalse(window.get().intent.toUri(0).contains(LinkFixtures.KEY))
     }
 
     @Test

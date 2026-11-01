@@ -1744,6 +1744,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Ozon tracking: order numbers and statuses in English",
       "name": "Ozon",
       "color": "#005bff"
+    },
+    {
+      "id": "citymail",
+      "catalog": "citymail",
+      "slug": "citymail-tracking",
+      "title": "CityMail tracking: numbers, statuses and delivery in Sweden",
+      "name": "CityMail",
+      "color": "#fc4c02"
     }
   ],
   "de": [

@@ -4,6 +4,9 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -30,10 +33,13 @@ import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStopped
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
+import com.plhery.peekdeliverytracker.ui.deliveries.ACTION_ERROR
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
+import com.plhery.peekdeliverytracker.ui.deliveries.ErrorAlert
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeParcelLinks
+import com.plhery.peekdeliverytracker.ui.deliveries.GlassOverlayLayer
 import com.plhery.peekdeliverytracker.ui.deliveries.INLINE_TOAST
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_ADD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_ALREADY
@@ -58,6 +64,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
+import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import java.io.IOException
 import java.time.Duration
 import java.time.Instant
@@ -565,6 +572,47 @@ class ParcelLinkSheetTest {
         settle()
         assertNull(links.links.route)
         assertTrue(reachable(UNDER))
+    }
+
+    @Test
+    fun anAlertTheListShowsAfterTheSheetComesOverItAndTheBackClosesItFirst() {
+        var failed by mutableStateOf(false)
+        show(FakeParcelLinks()) {
+            val host = LocalTabOverlay.current!!
+            GlassOverlayLayer(host, "failure", if (failed) { { ErrorAlert("The refresh failed") { failed = false } } } else null)
+        }
+        open()
+        compose.runOnUiThread { failed = true }
+        settle()
+        // On top, it alone reaches TalkBack.
+        assertTrue(reachable(ACTION_ERROR))
+        assertFalse(reachable(LINK_CARD))
+        assertTrue(exists(LINK_CARD))
+
+        back()
+        assertFalse(failed)
+        assertFalse(exists(ACTION_ERROR))
+        assertNotNull("The back closed the alert, not the sheet", links.links.route)
+        assertTrue(reachable(LINK_CARD))
+        back()
+        assertNull(links.links.route)
+    }
+
+    @Test
+    fun anAlertShownBeforeTheSheetStaysUnderIt() {
+        var failed by mutableStateOf(true)
+        show(FakeParcelLinks()) {
+            val host = LocalTabOverlay.current!!
+            GlassOverlayLayer(host, "failure", if (failed) { { ErrorAlert("The refresh failed") { failed = false } } } else null)
+        }
+        assertTrue(reachable(ACTION_ERROR))
+        open()
+        assertFalse(reachable(ACTION_ERROR))
+        assertTrue(reachable(LINK_CARD))
+        back()
+        assertNull("The back closed the sheet on top", links.links.route)
+        assertTrue(failed)
+        assertTrue(reachable(ACTION_ERROR))
     }
 
     @Test

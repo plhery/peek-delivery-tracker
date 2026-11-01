@@ -43,10 +43,12 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSource
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
+import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLayers
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.TabShell
+import com.plhery.peekdeliverytracker.ui.tabs.WindowLayers
 import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -82,8 +84,10 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * whatever is in front while it asks for a token, and scan labels with [scanner].
  *
  * A parcel's link ([links]) comes first (A-L02): its sheet shows over whatever state is up, the launch screen, the
- * arrival or the tabs and all they present, in the window's front layer, where nothing under it reaches TalkBack. Once
- * it closes on a parcel to open, or on one just added or followed, the deliveries come forward and take it ([inbox]).
+ * arrival or the tabs and all they present, in the window's front layer, where nothing under it reaches TalkBack.
+ * What the tabs present after it, an alert or the browser check, comes over it there, in the order they came, so the
+ * back closes what is on top. Once it closes on a parcel to open, or on one just added or followed, the deliveries
+ * come forward and take it ([inbox]).
  * A link kept for after sign-in opens again once someone is signed in (B-L03).
  */
 @Composable
@@ -121,35 +125,41 @@ internal fun PeekRoot(
             }
         }
     }
-    // Over everything the state shows, as `FrontmostSheet` presents from the frontmost controller.
-    val front = remember { TabOverlay() }
+    // Over everything the state shows, as `FrontmostSheet` presents from the frontmost controller, and under what the
+    // tabs present after it: the window's front draws every layer in the order they came.
+    val window = rememberSaveable(saver = WindowLayers.Saver) { WindowLayers() }
+    val front = remember(window) { TabOverlay(window = window, name = "window") }
     ProvideLocalizer(localizer) {
         // The tags carry the iPhone's accessibility identifiers (demo.exit, deliveries.search, ...); UI Automator reads
         // them as resource ids, as XCUITest reads the identifiers. Sized and placed as its one child is.
         Box(Modifier.semantics { testTagsAsResourceId = true }, propagateMinConstraints = true) {
             ProvideLinks {
-                Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
-                    when (state) {
-                        AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
-                        AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
-                        AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
-                            val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-                            CompositionLocalProvider(LocalLabelScanner provides scanner) {
-                                TabShell(
-                                    selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
-                                    overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
-                                ) { shown ->
-                                    when (shown) {
-                                        PeekTab.Deliveries -> deliveries()
-                                        PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                CompositionLocalProvider(LocalWindowLayers provides window) {
+                    Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
+                        when (state) {
+                            AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
+                            AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
+                            AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
+                                val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
+                                CompositionLocalProvider(LocalLabelScanner provides scanner) {
+                                    TabShell(
+                                        selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
+                                        overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
+                                    ) { shown ->
+                                        when (shown) {
+                                            PeekTab.Deliveries -> deliveries()
+                                            PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    if (links != null) CompositionLocalProvider(LocalTabOverlay provides front) { ParcelLinkSheetHost(links) }
+                    CompositionLocalProvider(LocalWindowOverlay provides front) { front.Content() }
+                    // Each overlay's layers, the link's sheet's and the tabs', over all of it.
+                    window.Content()
                 }
-                if (links != null) CompositionLocalProvider(LocalTabOverlay provides front) { ParcelLinkSheetHost(links) }
-                CompositionLocalProvider(LocalWindowOverlay provides front) { front.Content() }
             }
         }
     }

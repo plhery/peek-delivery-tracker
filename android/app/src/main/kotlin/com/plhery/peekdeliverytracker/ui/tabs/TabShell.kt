@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.tappableElement
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalContext
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Immutable
@@ -29,9 +30,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -138,10 +141,12 @@ val LocalTabReselection = staticCompositionLocalOf { TabReselection() }
  * What a tab draws over the whole window, its tab bar and the system's bars too, as an iPhone's context menu dims all
  * of the screen and a sheet comes up over the tab bar: the shell draws each layer last, in the order they came, and
  * while one shows TalkBack reaches nothing under them. [backdrop] is what the shell's tab draws, for a layer's glass
- * to show through. Null outside a shell, where a tab draws its layers over itself.
+ * to show through. Null outside a shell, where a tab draws its layers over itself. With the window's front ([window])
+ * the layers are drawn there instead, among every other overlay's in the order they all came; [name] tells this
+ * overlay's from the others' there, the same in the window made again.
  */
 @Stable
-class TabOverlay(val backdrop: MaterialBackdrop? = null) {
+class TabOverlay(val backdrop: MaterialBackdrop? = null, private val window: WindowLayers? = null, internal val name: String = "") {
     private val layers = mutableStateListOf<Pair<Any, @Composable () -> Unit>>()
 
     /** Draws `content` as the layer `key`, in its place if it shows already, or takes the layer away with null. */
@@ -152,17 +157,98 @@ class TabOverlay(val backdrop: MaterialBackdrop? = null) {
             index >= 0 -> layers[index] = key to content
             else -> layers += key to content
         }
+        window?.show(this, key, content)
     }
 
     /** Whether a layer shows. */
     val covered: Boolean get() = layers.isNotEmpty()
 
+    /** The layers, in the order they came; where there is a window's front, what they are composed with there. */
+    @Composable
+    fun Content() {
+        if (window != null) {
+            window.Place(this)
+        } else {
+            for ((key, content) in layers) key(key) { content() }
+        }
+    }
+}
+
+/**
+ * The window's front: the layers of every overlay drawing into it, a parcel link's sheet, the tab's sheets, menus and
+ * alerts, the browser check's sheet, in the order they all came, the last on top, as the iPhone presents each over the
+ * one presented before it. The layer on top is the one composed last, whose back handler takes the back. Each is
+ * composed with what its overlay's [TabOverlay.Content] stands under, as it would be there. TalkBack reaches only the
+ * layers of the overlay that showed the one on top: each overlay's layers are modal over what is under them.
+ */
+@Stable
+class WindowLayers private constructor(restored: List<String>) {
+    /** A layer, and where it stood in the window before it was made again, if it was there; `Int.MAX_VALUE` if not. */
+    private class Layer(val host: TabOverlay, val key: Any, val content: @Composable () -> Unit, val rank: Int)
+
+    private val layers = mutableStateListOf<Layer>()
+    private val places = mutableStateMapOf<TabOverlay, CompositionLocalContext>()
+
+    /**
+     * The layers the window had before it was made again, in their order. Its layers come back as they are composed,
+     * not as they came, so each goes back to its place among them, once.
+     */
+    private val restored = restored.toMutableList()
+
+    constructor() : this(emptyList())
+
+    internal fun show(host: TabOverlay, key: Any, content: (@Composable () -> Unit)?) {
+        val index = layers.indexOfFirst { it.host === host && it.key == key }
+        when {
+            content == null -> if (index >= 0) layers.removeAt(index)
+            index >= 0 -> layers[index] = Layer(host, key, content, layers[index].rank)
+            else -> {
+                val rank = restored.indexOf(id(host, key)).takeIf { it >= 0 }?.also { restored[it] = "" } ?: Int.MAX_VALUE
+                val at = layers.indexOfFirst { it.rank > rank }.takeIf { it >= 0 } ?: layers.size
+                layers.add(at, Layer(host, key, content, rank))
+            }
+        }
+    }
+
+    private fun id(host: TabOverlay, key: Any) = "${host.name}/$key"
+
+    /** Where `host` draws its layers: what is provided there, which its layers are composed with. */
+    @Composable
+    internal fun Place(host: TabOverlay) {
+        val context = currentCompositionLocalContext
+        DisposableEffect(host, context) {
+            places[host] = context
+            onDispose { places -= host }
+        }
+    }
+
     /** The layers, in the order they came. */
     @Composable
     fun Content() {
-        for ((key, content) in layers) key(key) { content() }
+        layers.forEachIndexed { index, layer ->
+            val place = places[layer.host] ?: return@forEachIndexed
+            val under = (index + 1 until layers.size).any { layers[it].host !== layer.host }
+            // By the overlay's name, not the overlay, which the window made again makes anew: what a layer saves is
+            // keyed by where it is composed.
+            key(layer.host.name, layer.key) {
+                CompositionLocalProvider(place) {
+                    Box(if (under) Modifier.clearAndSetSemantics {} else Modifier) { layer.content() }
+                }
+            }
+        }
+    }
+
+    companion object {
+        /** The layers' order, which the window made again puts them back in. */
+        val Saver: Saver<WindowLayers, ArrayList<String>> = Saver(
+            save = { window -> ArrayList(window.layers.map { window.id(it.host, it.key) }) },
+            restore = { WindowLayers(it) },
+        )
     }
 }
+
+/** The window's front, where the root draws every overlay's layers in the order they came; null without one. */
+val LocalWindowLayers = staticCompositionLocalOf<WindowLayers?> { null }
 
 val LocalTabOverlay = staticCompositionLocalOf<TabOverlay?> { null }
 
@@ -223,7 +309,8 @@ fun TabReselectionEffect(onReselect: suspend () -> Unit) {
  * keyboard, Ctrl or Meta with 1, 2 or 3 chooses a tab, as ⌘1–3 do on the iPhone, while this window has the keys.
  * [overlays] draws over whichever tab is chosen and whatever it presented, outside every tab's saved state, through
  * an overlay host of its own above the tab's: what the app presents over the window whatever is in front, as the
- * browser check comes up over Add's cover. While it shows, TalkBack reaches nothing under it.
+ * browser check comes up over Add's cover. While it shows, TalkBack reaches nothing under it. Under a window's front
+ * ([LocalWindowLayers]) both hosts draw their layers there, among what is over the shell, in the order they all came.
  */
 @Composable
 fun TabShell(
@@ -249,9 +336,11 @@ fun TabShell(
     val tap = { tab: Int -> if (tab == selection) reselections[tab].reselect() else onSelect(tab) }
     val holder = rememberSaveableStateHolder()
     val backdrop = rememberMaterialBackdrop()
-    val overlay = remember(backdrop) { TabOverlay(backdrop) }
+    // In the window's front, where there is one, among the layers of what is over the shell, in the order they came.
+    val window = LocalWindowLayers.current
+    val overlay = remember(backdrop, window) { TabOverlay(backdrop, window, "tab") }
     // Over the tab's layers, whichever came first, as the iPhone presents on what it presented last.
-    val front = remember(backdrop) { TabOverlay(backdrop) }
+    val front = remember(backdrop, window) { TabOverlay(backdrop, window, "tab.front") }
     val visibility = remember { TabBarVisibility() }
     val density = LocalDensity.current
     BoxWithConstraints(modifier.fillMaxSize()) {

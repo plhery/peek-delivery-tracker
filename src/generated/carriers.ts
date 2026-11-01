@@ -1720,6 +1720,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Poșta Română tracking: numbers, statuses and customs",
       "name": "Poșta Română",
       "color": "#ea0029"
+    },
+    {
+      "id": "dpd-nl",
+      "catalog": "dpd-nl",
+      "slug": "dpd-netherlands-tracking",
+      "title": "DPD Netherlands tracking: statuses, delivery and contact",
+      "name": "DPD Netherlands",
+      "color": "#dc0032"
     }
   ],
   "de": [

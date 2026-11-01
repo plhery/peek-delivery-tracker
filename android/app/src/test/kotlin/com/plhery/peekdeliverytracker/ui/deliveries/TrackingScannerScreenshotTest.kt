@@ -31,10 +31,10 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
- * The label scanner (B-S32) on a device that scans, signed in, with the iPhone's bars and a grey placeholder where the
- * camera shows ([FakeLabelScanner]): the scanner over Add on a phone, light and dark, and over the whole window from
- * Add's form in a regular window; Add with the scan button beside Paste; the empty list with Scan barcode beside Add a
- * parcel, and one under the other at the largest Android text size.
+ * The label scanner (B-S32) on a device that scans, signed in, with the iPhone's bars (the iPad's in a regular window)
+ * and a grey placeholder where the camera shows ([FakeLabelScanner]): the scanner over Add on a phone, light and dark,
+ * and over the whole window from Add's form in a regular window; Add with the scan button beside Paste; the empty list
+ * with Scan barcode beside Add a parcel, and one under the other at the largest Android text size.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -48,8 +48,8 @@ class TrackingScannerScreenshotTest {
     private lateinit var view: View
     private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 11), email = "reader@example.com"))
 
-    /** `parcels` listed as the captures show them, with the iPhone's bars, the device able to scan. */
-    private fun show(dark: Boolean = false, parcels: List<Parcel> = DemoCards.parcels(), fontScale: Float = 1f) {
+    /** `parcels` listed as the captures show them, with the iPhone's bars or the iPad's, the device able to scan. */
+    private fun show(dark: Boolean = false, parcels: List<Parcel> = DemoCards.parcels(), fontScale: Float = 1f, iPad: Boolean = false) {
         val source = FakeDeliveries(parcels, reader)
         compose.waitsForMaps()
         compose.setContent {
@@ -62,17 +62,17 @@ class TrackingScannerScreenshotTest {
             }
         }
         compose.waitForIdle()
-        bars()
+        if (iPad) bars(status = 32, bottom = 20) else bars(status = 62, bottom = 24)
     }
 
-    /** The iPhone's bars. */
-    private fun bars() {
+    /** The status bar `status` tall and the bottom bar `bottom`: the iPhone's 62 and 24, the iPad's 32 and 20. */
+    private fun bars(status: Int, bottom: Int) {
         compose.runOnUiThread {
             val scale = view.resources.displayMetrics.density
             fun px(points: Int) = (points * scale).toInt()
             val insets = WindowInsetsCompat.Builder()
-                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, px(62), 0, 0))
-                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, px(24)))
+                .setInsets(WindowInsetsCompat.Type.statusBars(), Insets.of(0, px(status), 0, 0))
+                .setInsets(WindowInsetsCompat.Type.navigationBars(), Insets.of(0, 0, 0, px(bottom)))
                 .setVisible(WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.navigationBars(), true)
                 .build()
             ViewCompat.dispatchApplyWindowInsets(view, insets)
@@ -113,7 +113,7 @@ class TrackingScannerScreenshotTest {
     @Test
     @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
     fun theScannerOverAddsFormInARegularWindow() {
-        show()
+        show(iPad = true)
         scan()
         compose.screenshot("scanner_tablet_light")
     }

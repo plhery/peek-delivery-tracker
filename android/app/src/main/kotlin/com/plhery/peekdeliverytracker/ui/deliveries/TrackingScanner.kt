@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AddParcelView as AddParcelLogic
 import com.plhery.peekdeliverytracker.ui.sheet.BarCancel
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
@@ -88,9 +90,10 @@ internal fun TrackingScannerCover(visible: Boolean, onScan: (String) -> Unit, on
 
 /**
  * The scanner's `NavigationStack`: under the status bar its inline bar, "Scan a tracking barcode" in its middle and
- * Cancel at its leading end, on the system background a full-screen presentation stands on; under the bar the camera,
- * down to the window's foot (`.ignoresSafeArea(edges: .bottom)`), across its width but clear of a cutout or the system's
- * bar on its sides, as the iPhone's keeps to the safe area there. TalkBack reads the bar first.
+ * Cancel at its leading end, 54 tall as a full-screen presentation's is, 10 of it under their row, on the system
+ * background a full-screen presentation stands on; under the bar the camera, down to the window's foot
+ * (`.ignoresSafeArea(edges: .bottom)`), across its width but clear of a cutout or the system's bar on its sides, as the
+ * iPhone's keeps to the safe area there. TalkBack reads the bar first.
  */
 @Composable
 private fun TrackingScannerView(title: String, onRead: (List<String?>) -> Unit, cancel: () -> Unit) {
@@ -109,7 +112,8 @@ private fun TrackingScannerView(title: String, onRead: (List<String?>) -> Unit, 
             leading = { BarCancel(cancel, SCANNER_CANCEL, behind = ground) },
             Modifier
                 .semantics { traversalIndex = -1f }
-                .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top)),
+                .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top))
+                .padding(bottom = BAR_FOOT),
         )
         scanner.Camera(
             onRead = onRead,
@@ -120,6 +124,9 @@ private fun TrackingScannerView(title: String, onRead: (List<String?>) -> Unit, 
 
 /** UIKit's `systemBackground` at a full-screen presentation's level: white, black in dark. */
 private fun scannerGround(dark: Boolean): Color = if (dark) Color.Black else Color.White
+
+/** The bar under its row of Cancel and the title. */
+private val BAR_FOOT = 10.dp
 
 internal const val SCANNER = "addParcel.scanner"
 internal const val SCANNER_CANCEL = "addParcel.scanner.cancel"

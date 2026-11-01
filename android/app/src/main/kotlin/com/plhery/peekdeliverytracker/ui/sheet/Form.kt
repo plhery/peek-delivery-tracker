@@ -332,6 +332,10 @@ internal data class SheetInsets(val barTop: Dp, val barSide: Dp, val formSide: D
         /** A popover `width` wide. */
         fun popover(width: Dp) = SheetInsets(10.dp, 10.dp, margin(width), reachesBottom = false)
 
+        /** A full-screen cover `width` by `height`: a sheet's, but its bar's items 10 in from a regular window's side. */
+        fun cover(width: Dp, height: Dp) =
+            if (width >= REGULAR_WIDTH && height >= REGULAR_HEIGHT) sheet(width).copy(barSide = 10.dp) else sheet(width)
+
         private fun margin(width: Dp) = if (width >= 414.dp) 20.dp else 16.dp
     }
 }

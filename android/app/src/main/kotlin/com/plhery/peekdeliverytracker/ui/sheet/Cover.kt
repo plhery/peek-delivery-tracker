@@ -110,7 +110,7 @@ private fun CoverLayer(
     // While a menu is open over it, TalkBack reaches only the menu.
     val hidden = if (leaving || menus.content != null) Modifier.clearAndSetSemantics {} else Modifier
     BoxWithConstraints(Modifier.fillMaxSize()) {
-        val width = maxWidth
+        val insets = SheetInsets.cover(maxWidth, maxHeight)
         Box(
             Modifier
                 .fillMaxSize()
@@ -124,7 +124,7 @@ private fun CoverLayer(
                 .then(if (leaving) Untouchable else Modifier)
                 .then(hidden),
         ) {
-            CompositionLocalProvider(LocalSheetMenus provides menus, LocalSheetInsets provides SheetInsets.sheet(width)) { content() }
+            CompositionLocalProvider(LocalSheetMenus provides menus, LocalSheetInsets provides insets) { content() }
         }
         menus.content?.invoke()
     }

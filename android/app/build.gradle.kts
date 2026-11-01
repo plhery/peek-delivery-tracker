@@ -150,6 +150,13 @@ dependencies {
     // WKWebView's script message handler for the browser check: WebViewCompat's message listener and document-start
     // script (ui/TurnstileSheet.kt, platform/WebViewTurnstilePages.kt).
     implementation(libs.webkit)
+    // DataScannerViewController's stand-in for the label scanner: CameraX's preview, analysis and zoom, and ML Kit's
+    // barcode model bundled in the app, read on the device with no account, key or download (platform/CameraLabelScanner.kt).
+    implementation(libs.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+    implementation(libs.camera.mlkit.vision)
+    implementation(libs.mlkit.barcode.scanning)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
@@ -171,4 +178,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
+    // The label scanner's cover over this device's camera, found and tapped by its semantics.
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.compose.ui.test.junit4)
 }

@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
@@ -32,6 +33,7 @@ import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.withContext
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.FirstOpenJourney
+import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
@@ -89,6 +91,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.IntrinsicMeasurable
+import androidx.compose.ui.layout.IntrinsicMeasureScope
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasurePolicy
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
@@ -793,8 +802,11 @@ private fun FootLink(title: String, id: String, open: () -> Unit) {
 
 /**
  * `DeliveriesEmptyState`: Pip's closed parcel, which opens a sample when tapped, "Peek", what the list is for, Paste &
- * track, Add a parcel and the hint about Pip. The sample opens on its page; Paste & track opens Add with what the
- * clipboard holds ([DeliveriesState.pasteFirst]), Add a parcel opens it empty.
+ * track, Scan barcode where the device scans, Add a parcel and the hint about Pip. The sample opens on its page; Paste
+ * & track opens Add with what the clipboard holds ([DeliveriesState.pasteFirst]), Scan barcode opens it on the camera,
+ * Add a parcel opens it empty.
+ *
+ * FirstOpenView's field and its scan button (`canScan`), the first open's, come with the first open.
  */
 @Composable
 internal fun DeliveriesEmptyState(state: DeliveriesState) {
@@ -829,7 +841,6 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
         )
         // TalkBack comes back to the button that opened Add once it has gone.
         val pasteFocus = remember { AccessibilityFocus() }
-        val addFocus = remember { AccessibilityFocus() }
         Row(
             Modifier
                 .padding(top = 22.dp)
@@ -845,24 +856,13 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
             PeekSymbol("doc.on.clipboard", font = type.style(IosTextStyle.Body, FontWeight.Medium), tint = colors.onAccent)
             Text(localized("landing.pasteAndTrack"), color = colors.onAccent, style = type.style(IosTextStyle.Body, FontWeight.SemiBold))
         }
-        // Scanning a label comes with the camera: until then the one quiet button takes the column's width.
-        val quiet = ContinuousRoundedShape(14.dp)
-        Row(
-            Modifier
-                .padding(top = 10.dp)
-                .fillMaxWidth()
-                .testTag(EMPTY_ADD)
-                .accessibilityFocus(addFocus)
-                .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button) { state.add(addFocus) }
-                .heightIn(min = 48.dp)
-                .background(colors.paper, quiet)
-                .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), quiet),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            PeekSymbol("keyboard", font = type.subheadline, tint = colors.ink)
-            Text(localized("app.addParcel"), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium), maxLines = 1)
-        }
+        // Side by side while both fit; otherwise one under the other, each across the column.
+        val canScan = LocalLabelScanner.current.available()
+        FirstThatFits(
+            Modifier.padding(top = 10.dp).fillMaxWidth(),
+            { QuietButtons(state, canScan, wraps = false) },
+            { QuietButtons(state, canScan, wraps = true) },
+        )
         val localizer = LocalLocalizer.current
         val language = LocalLanguage.current
         val hint = remember(localizer, language, colors) {
@@ -882,6 +882,99 @@ internal fun DeliveriesEmptyState(state: DeliveriesState) {
             textAlign = TextAlign.Center,
         )
     }
+}
+
+/**
+ * `quietButtons(wraps:)`: Scan barcode where the device scans ([scan]), then Add a parcel, side by side 10 apart, each
+ * half the row and its words on one line, shrinking to 80 % rather than wrap; or, where [wraps], one under the other 10
+ * apart, each across the column, its words wrapping. Scan barcode opens Add on the camera, Add a parcel opens it empty,
+ * and TalkBack goes back to the one tapped once Add has gone.
+ */
+@Composable
+private fun QuietButtons(state: DeliveriesState, scan: Boolean, wraps: Boolean) {
+    val scanFocus = remember { AccessibilityFocus() }
+    val addFocus = remember { AccessibilityFocus() }
+    val buttons = @Composable {
+        if (scan) {
+            QuietButton(localized("add.scan"), "barcode.viewfinder", wraps, EMPTY_SCAN, scanFocus) { state.add(FirstParcelRequest.Scan, scanFocus) }
+        }
+        QuietButton(localized("app.addParcel"), "keyboard", wraps, EMPTY_ADD, addFocus) { state.add(addFocus) }
+    }
+    if (wraps) Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { buttons() } else EvenRow(10.dp, buttons)
+}
+
+/**
+ * `quiet(_:symbol:wraps:)`: the symbol and the words 8 apart in subheadline, the words medium, in ink, across the
+ * button, at least 48 tall, on the paper with 14-point corners outlined by a hairline of the separator at 30 %; it
+ * gives under the finger (`TactileButtonStyle`).
+ */
+@Composable
+private fun QuietButton(title: String, symbol: String, wraps: Boolean, tag: String, focus: AccessibilityFocus, open: () -> Unit) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val shape = ContinuousRoundedShape(14.dp)
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .testTag(tag)
+            .accessibilityFocus(focus)
+            .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = open)
+            .heightIn(min = 48.dp)
+            .background(colors.paper, shape)
+            .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape),
+        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        PeekSymbol(symbol, font = type.subheadline, tint = colors.ink)
+        val style = type.style(IosTextStyle.Subheadline, FontWeight.Medium)
+        if (wraps) {
+            Text(title, Modifier.weight(1f, fill = false), color = colors.ink, style = style, textAlign = TextAlign.Center)
+        } else {
+            Text(
+                title, Modifier.weight(1f, fill = false), color = colors.ink, style = style, maxLines = 1,
+                autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * QUIET_MINIMUM_SCALE, maxFontSize = style.fontSize),
+            )
+        }
+    }
+}
+
+/**
+ * Views side by side [spacing] apart, each an even share of the row, as tall as the tallest and centred on it, as an
+ * HStack shares its room among views that all take what they are given. Its widest is the sum of theirs, as an HStack's
+ * ideal width, which [FirstThatFits] asks for.
+ */
+@Composable
+private fun EvenRow(spacing: Dp, content: @Composable () -> Unit) {
+    Layout(content, measurePolicy = remember(spacing) { EvenRowPolicy(spacing) })
+}
+
+private class EvenRowPolicy(private val spacing: Dp) : MeasurePolicy {
+    override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
+        val gap = spacing.roundToPx()
+        val share = if (measurables.isEmpty()) 0 else ((constraints.maxWidth - gap * (measurables.size - 1)) / measurables.size).coerceAtLeast(0)
+        val placeables = measurables.map { it.measure(Constraints(minWidth = share, maxWidth = share, maxHeight = constraints.maxHeight)) }
+        val height = (placeables.maxOfOrNull { it.height } ?: 0).coerceIn(constraints.minHeight, constraints.maxHeight)
+        return layout(constraints.maxWidth, height) {
+            placeables.forEachIndexed { index, placeable -> placeable.place(index * (share + gap), (height - placeable.height) / 2) }
+        }
+    }
+
+    override fun IntrinsicMeasureScope.maxIntrinsicWidth(measurables: List<IntrinsicMeasurable>, height: Int): Int =
+        measurables.sumOf { it.maxIntrinsicWidth(height) } + gaps(measurables.size)
+
+    override fun IntrinsicMeasureScope.minIntrinsicWidth(measurables: List<IntrinsicMeasurable>, height: Int): Int =
+        measurables.sumOf { it.minIntrinsicWidth(height) } + gaps(measurables.size)
+
+    override fun IntrinsicMeasureScope.maxIntrinsicHeight(measurables: List<IntrinsicMeasurable>, width: Int): Int =
+        measurables.maxOfOrNull { it.maxIntrinsicHeight(share(width, measurables.size)) } ?: 0
+
+    override fun IntrinsicMeasureScope.minIntrinsicHeight(measurables: List<IntrinsicMeasurable>, width: Int): Int =
+        measurables.maxOfOrNull { it.minIntrinsicHeight(share(width, measurables.size)) } ?: 0
+
+    private fun IntrinsicMeasureScope.gaps(count: Int) = spacing.roundToPx() * (count - 1).coerceAtLeast(0)
+
+    private fun IntrinsicMeasureScope.share(width: Int, count: Int) =
+        if (width == Constraints.Infinity || count == 0) width else ((width - gaps(count)) / count).coerceAtLeast(0)
 }
 
 /**
@@ -1043,6 +1136,8 @@ private const val SEARCH_FIELD_MOTION = 0.2
 private const val NO_RESULTS_SYMBOL = 44f
 /** How wide the words of a view with nothing to show run before they wrap, as the iPhone's wrap them. */
 private val NO_RESULTS_TEXT_WIDTH = 268.dp
+/** `minimumScaleFactor(0.8)` of a quiet button's words on one line. */
+private const val QUIET_MINIMUM_SCALE = 0.8f
 private const val PARCEL_WIDTH = 204f
 private const val FRAME_WIDTH = 300f
 private const val FRAME_HEIGHT = 310f
@@ -1065,4 +1160,5 @@ const val FOOT = "deliveries.foot"
 const val EMPTY_SAMPLE = "deliveries.empty.sample"
 const val EMPTY_PASTE = "deliveries.empty.paste"
 const val EMPTY_ADD = "deliveries.empty.add"
+const val EMPTY_SCAN = "deliveries.empty.scan"
 const val ALL_ARRIVED = "deliveries.allArrived"

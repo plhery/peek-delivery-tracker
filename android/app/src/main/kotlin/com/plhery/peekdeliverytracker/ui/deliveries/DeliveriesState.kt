@@ -800,8 +800,8 @@ internal class DeliveriesState(
     }
 
     /**
-     * `add(_:)`: Add opens, with pasted or dropped text as its draft, cut to what Add takes in; TalkBack goes back to
-     * [focus] once it has gone. The scanner comes with its step: a scan opens Add as typing does.
+     * `add(_:)`: Add opens, with pasted or dropped text as its draft, cut to what Add takes in, or on the camera for a
+     * scan (`scanning = request == .scan`); TalkBack goes back to [focus] once it has gone.
      */
     fun add(request: FirstParcelRequest, focus: AccessibilityFocus? = null) {
         if (addition != null) return
@@ -810,7 +810,7 @@ internal class DeliveriesState(
         addedParcel = null
         endArrival()
         returnFocus = focus
-        addition = AddRequest(UUID.randomUUID(), draft)
+        addition = AddRequest(UUID.randomUUID(), draft, scanning = request == FirstParcelRequest.Scan)
         source.view("add-parcel")
     }
 
@@ -1849,18 +1849,21 @@ internal class DeliveriesState(
 }
 
 /**
- * Add, open over the window (`showingAdd`), with the text pasted, dropped or shared that it opens with (`sharedDraft`):
- * each opening another ([id]).
+ * Add, open over the window (`showingAdd`), with the text pasted, dropped or shared that it opens with (`sharedDraft`),
+ * or on the camera ([scanning], AddParcelView's `scanning`): each opening another ([id]).
  */
 @Immutable
-internal data class AddRequest(val id: UUID, val draft: String?) {
-    /** As a window keeps it: the id, then the draft after a space where there is one. */
-    val saved: String get() = if (draft == null) "$id" else "$id $draft"
+internal data class AddRequest(val id: UUID, val draft: String?, val scanning: Boolean = false) {
+    /** As a window keeps it: the id, a `+` where it scans, then the draft after a space where there is one. */
+    val saved: String get() = "$id${if (scanning) SCANNING else ""}${if (draft == null) "" else " $draft"}"
 
     companion object {
+        private const val SCANNING = "+"
+
         fun from(saved: String): AddRequest {
-            val space = saved.indexOf(' ')
-            return if (space < 0) AddRequest(UUID.fromString(saved), null) else AddRequest(UUID.fromString(saved.substring(0, space)), saved.substring(space + 1))
+            val head = saved.substringBefore(' ')
+            val draft = if (' ' in saved) saved.substringAfter(' ') else null
+            return AddRequest(UUID.fromString(head.removeSuffix(SCANNING)), draft, scanning = head.endsWith(SCANNING))
         }
     }
 }

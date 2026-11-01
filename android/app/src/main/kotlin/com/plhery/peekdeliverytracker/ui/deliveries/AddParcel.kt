@@ -186,8 +186,8 @@ import kotlinx.coroutines.ensureActive
  * over the whole window (`.fullScreenCover`), which only its ✕, Escape and the back close; side by side, the app's sheet
  * as a form in the window's middle (`.sheet` with `.presentationSizing(.form)`), which a tap beside it closes too. None
  * closes it while it saves (`interactiveDismissDisabled(saving)`), and once saved it goes down still saying so. Once it
- * has gone the list shows the card it added (`addClosed`). What was typed, the carrier chosen and the picker open stay
- * through a window made again, the field with the focus keeping it and the keyboard.
+ * has gone the list shows the card it added (`addClosed`). What was typed, the carrier chosen and the picker or the
+ * scanner open stay through a window made again, the field with the focus keeping it and the keyboard.
  */
 @Composable
 internal fun AddParcelHost(state: DeliveriesState) {
@@ -205,8 +205,8 @@ internal fun AddParcelHost(state: DeliveriesState) {
     val cover = !state.sheetsAsForms
     val content: @Composable () -> Unit = {
         if (adding != null) {
-            // Under the picker, TalkBack reaches only the picker.
-            val hidden = if (form.showingPicker) Modifier.clearAndSetSemantics {} else Modifier
+            // Under the picker or the scanner, TalkBack reaches only them.
+            val hidden = if (form.showingPicker || form.showingScanner) Modifier.clearAndSetSemantics {} else Modifier
             AddParcelView(state, adding, form, saving, cover, hidden.testTag(ADD_PARCEL))
         }
     }
@@ -224,11 +224,11 @@ internal fun AddParcelHost(state: DeliveriesState) {
 }
 
 /**
- * What Add holds (`AddParcelView`'s `@State`): the name and the text typed, the number chosen among several, the carrier
- * chosen, the number to add as typed, recognition and the answers of the checks, the link and the postcode typed, the
- * postcode's country chosen and the postcode filled in from those given before, Amazon's check asked again, the picker
- * open, the keyboard opened once, and a paste that found nothing. All of it stays through a window made again, as the
- * iPhone's `@State` does, so no check is asked again for what it answered.
+ * What Add holds (`AddParcelView`'s `@State`): the name and the text typed, the number chosen among several, the
+ * carrier chosen, the number to add as typed, recognition and the answers of the checks, the link and the postcode
+ * typed, the postcode's country chosen and the postcode filled in from those given before, Amazon's check asked again,
+ * the picker or the scanner open, the keyboard or the scanner opened once, and a paste that found nothing. All of it
+ * stays through a window made again, as the iPhone's `@State` does, so no check is asked again for what it answered.
  */
 @Stable
 internal class AddForm(
@@ -250,6 +250,7 @@ internal class AddForm(
     didFocus: Boolean,
     pasteFailed: Boolean,
     preparedFor: CarrierId?,
+    showingScanner: Boolean,
 ) {
     var label by mutableStateOf(label)
     var trackingInput by mutableStateOf(trackingInput)
@@ -268,6 +269,7 @@ internal class AddForm(
     var postcodeFill by mutableStateOf(postcodeFill)
     var lookupAttempt by mutableIntStateOf(lookupAttempt)
     var showingPicker by mutableStateOf(showingPicker)
+    var showingScanner by mutableStateOf(showingScanner)
     var didFocus = didFocus
     var pasteFailed by mutableStateOf(pasteFailed)
 
@@ -294,7 +296,7 @@ internal class AddForm(
             recognition = CarrierRecognition(draft?.let { ParcelAddition.trackingNumber(it, catalog) }), refusedQuestion = null,
             verifiedCarrier = null, lookedUp = null, trackingUrl = "", deliveryPostcode = "",
             chosenPostcodeCountry = null, postcodeFill = PostcodeFill(), lookupAttempt = 0, showingPicker = false,
-            didFocus = false, pasteFailed = false, preparedFor = null,
+            didFocus = false, pasteFailed = false, preparedFor = null, showingScanner = false,
         )
 
         val Saver = listSaver<AddForm, Any>(
@@ -306,7 +308,7 @@ internal class AddForm(
                     it.postcodeFill.postcode ?: NONE, it.postcodeFill.forgotten, it.lookupAttempt, it.showingPicker, it.didFocus,
                     it.pasteFailed, it.preparedFor?.rawValue ?: NONE, recognition.failedNumber ?: NONE,
                     recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
-                    it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE,
+                    it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE, it.showingScanner,
                 )
             },
             restore = {
@@ -317,7 +319,7 @@ internal class AddForm(
                     CarrierRecognition(kept(5), kept(17)?.let(ParcelAddition::answer), kept(16)),
                     kept(19)?.let(ParcelAddition::question), kept(18)?.let(ParcelAddition::answer), kept(20),
                     it[6] as String, it[7] as String, text(8), PostcodeFill(kept(9), it[10] as Boolean), it[11] as Int,
-                    it[12] as Boolean, it[13] as Boolean, it[14] as Boolean, kept(15)?.let(::CarrierId),
+                    it[12] as Boolean, it[13] as Boolean, it[14] as Boolean, kept(15)?.let(::CarrierId), it[21] as Boolean,
                 )
             },
         )
@@ -343,8 +345,9 @@ private class AddFocus {
  * for the title, Add and the number's field together (a phone on its side, its keyboard up); the tracking field with what
  * it found under it, the details the carrier needs, the name, and why it failed; Add pinned at the foot, above the
  * keyboard. A number settles as the field is left, pasted, filled in or chosen, and then the carriers are asked about
- * it, Amazon checked, and a carrier picked by hand that refuses it pointed out; the keyboard opens on the field 300 ms
- * after Add has come up. A carrier found plays a tick (B-H05).
+ * it, Amazon checked, and a carrier picked by hand that refuses it pointed out; 300 ms after Add has come up the
+ * keyboard opens on the field, or the scanner where Add was asked to scan and the device can. A carrier found plays a
+ * tick (B-H05).
  */
 @Composable
 private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: AddForm, saving: Boolean, cover: Boolean, modifier: Modifier) {
@@ -362,6 +365,8 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     val focusManager = LocalFocusManager.current
     val focus = remember { AddFocus() }
     val motion = remember { AddMotion() }
+    val scannerAvailable = LocalLabelScanner.current.available()
+    val canScan by rememberUpdatedState(scannerAvailable)
 
     // Saved: the list hears of the parcel, and Add goes down.
     val added = work.added(request.id)
@@ -370,12 +375,12 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         state.added(request, added)
         state.closeAdd()
     }
-    // Once Add has come up, the keyboard on the field (the scanner comes with its step).
+    // Once Add has come up, the camera for a scan where the device has one, else the keyboard on the field.
     LaunchedEffect(request.id) {
         if (form.didFocus) return@LaunchedEffect
         form.didFocus = true
         delay(FOCUS_DELAY)
-        focus.request(ParcelAddition.Field.Tracking)
+        if (request.scanning && canScan) form.showingScanner = true else focus.request(ParcelAddition.Field.Tracking)
     }
     // A required postcode starts from the last one given that fits; an optional one is only offered.
     val resolved = addition.resolvedCarrier
@@ -433,8 +438,15 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         ensureActive()
         form.refusedQuestion = if (refuses) asked else null
     }
-    // Escape closes Add, or the picker over it (its Cancel, `.cancellationAction`), which then leaves Add up.
-    AddEscape(enabled = !saving) { if (form.showingPicker) form.showingPicker = false else state.closeAdd() }
+    // Escape closes Add, or the picker or the scanner over it (their Cancel, `.cancellationAction`), which then leaves
+    // Add up.
+    AddEscape(enabled = !saving) {
+        when {
+            form.showingScanner -> form.showingScanner = false
+            form.showingPicker -> form.showingPicker = false
+            else -> state.closeAdd()
+        }
+    }
 
     val actions = remember(form, focus, motion) { AddActions(state, request, form, focus, motion, focusManager) }
     actions.current = { current() }
@@ -484,7 +496,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                     verticalArrangement = Arrangement.spacedBy(20.dp),
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        TrackingSection(addition, form, focus, actions, saving)
+                        TrackingSection(addition, form, focus, actions, scannerAvailable)
                         val found = addition.parsed.trackingNumber.isNotEmpty()
                         val shownFeedback = remember { Kept(addition) }
                         if (found) shownFeedback.value = addition
@@ -511,6 +523,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         AddButton(addition, saving, cover, actions::save, Modifier.onSizeChanged { buttonHeight = it.height })
     }
     AddPicker(state, addition, form, actions)
+    TrackingScannerCover(form.showingScanner, onScan = actions::scanned, onCancel = { form.showingScanner = false })
 }
 
 /** Whether the form's controls are on (`.disabled(saving)`'s `isEnabled`). */
@@ -527,7 +540,7 @@ private class AddMotion {
 
 /**
  * What Add does, as its buttons and fields ask: Add's own (`paste`, `fill`, `selectCarrier`, `choose`, `use`,
- * `submitTracking`, `save`), on the latest of what it holds ([current]).
+ * `submitTracking`, `save`, and the scanner's), on the latest of what it holds ([current]).
  */
 private class AddActions(
     private val state: DeliveriesState,
@@ -577,6 +590,27 @@ private class AddActions(
         setInput(value)
         focus.request(ParcelAddition.Field.Tracking)
         form.take(current().settling(value))
+    }
+
+    /** The scan button: the scanner opens over Add, the keyboard gone. */
+    fun scan() {
+        state.source.action("parcel-scan")
+        focusManager.clearFocus()
+        form.showingScanner = true
+    }
+
+    /**
+     * The scanner's result: the barcode's text in the field on the snappy spring, at once under Reduce Motion, the
+     * scanner going down, no field focused, and the number settled. As much of it as the field takes
+     * ([FirstParcelRequest.taken]), where the iPhone takes it all.
+     */
+    fun scanned(value: String) {
+        motion.duration = if (reduceMotion) null else FILL_MOTION
+        val text = FirstParcelRequest.taken(value)
+        setInput(text)
+        form.showingScanner = false
+        focusManager.clearFocus()
+        form.take(current().settling(text))
     }
 
     /** `selectCarrier(_:)`, from the picker. */
@@ -736,13 +770,13 @@ private fun AddHeading(saving: Boolean, close: () -> Unit, modifier: Modifier = 
 }
 
 /**
- * `trackingField`: its label with Paste beside it, under it where they don't fit on one line; the field, two to four
- * lines; and, once the number has settled, why it can't be added as it stands: no number found, a pickup code, a
- * placeholder, a shop's order number, or a check digit that doesn't add up, with the number it may be and the way to
- * add it as typed.
+ * `trackingField`: its label with Paste and, where the device scans ([scanner]), the scan button beside it, under it
+ * where they don't fit on one line; the field, two to four lines; and, once the number has settled, why it can't be
+ * added as it stands: no number found, a pickup code, a placeholder, a shop's order number, or a check digit that
+ * doesn't add up, with the number it may be and the way to add it as typed.
  */
 @Composable
-private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddFocus, actions: AddActions, saving: Boolean) {
+private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddFocus, actions: AddActions, scanner: Boolean) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -753,7 +787,11 @@ private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddF
             itemVerticalAlignment = Alignment.CenterVertically,
         ) {
             Text(localized("add.tracking"), Modifier.padding(end = 4.dp), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
-            PasteButton(actions::paste)
+            // `captureActions`, 12 apart.
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                PasteButton(actions::paste)
+                if (scanner) ScanButton(actions::scan)
+            }
         }
         AddTextField(
             value = form.trackingInput,
@@ -825,6 +863,27 @@ private fun PasteButton(paste: () -> Unit) {
     ) {
         PeekSymbol("doc.on.clipboard", Modifier.clearAndSetSemantics {}, font = type.caption, tint = colors.secondaryLabel)
         Text(localized("add.paste"), color = colors.secondaryLabel, style = type.caption, maxLines = 1)
+    }
+}
+
+/**
+ * The scan button (`captureActions`): the barcode in its viewfinder in body, in the secondary grey, in a 44 square,
+ * read "Scan barcode"; a plain button, at half strength while off.
+ */
+@Composable
+private fun ScanButton(scan: () -> Unit) {
+    val enabled = LocalFormEnabled.current
+    val label = localized("add.scan")
+    Box(
+        Modifier
+            .size(44.dp)
+            .testTag(ADD_SCAN)
+            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = scan)
+            .plainDisabled(enabled)
+            .semantics { contentDescription = label },
+        contentAlignment = Alignment.Center,
+    ) {
+        PeekSymbol("barcode.viewfinder", font = PeekTheme.type.body, tint = PeekTheme.colors.secondaryLabel)
     }
 }
 
@@ -1581,6 +1640,7 @@ internal const val ADD_CLOSE = "addParcel.close"
 internal const val ADD_TRACKING = "addParcel.tracking"
 internal const val ADD_NAME = "addParcel.name"
 internal const val ADD_PASTE = "addParcel.paste"
+internal const val ADD_SCAN = "addParcel.scan"
 internal const val ADD_CARRIER = "addParcel.carrier"
 internal const val ADD_CARRIER_MARK = "addParcel.carrier.mark"
 internal const val ADD_CHECKING = "addParcel.carrier.checking"

@@ -27,6 +27,7 @@ import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
 import com.plhery.peekdeliverytracker.ui.deliveries.OverlayLayer
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
+import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowOverlay
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 
@@ -38,7 +39,8 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
  * TalkBack reaches only the cover, named [paneTitle], and only a menu opened in it while one is open ([LocalSheetMenus]);
  * on its way down it takes no touch and TalkBack no longer reaches it, as UIKit's cover going down. Once it has gone,
  * [onClosed] runs. The window made again (a rotation) finds it up, without coming up again. What it holds lays out the
- * system's bars and the keyboard itself.
+ * system's bars and the keyboard itself. Presented from a sheet or another cover, it covers the whole window all the
+ * same ([LocalWindowOverlay]).
  */
 @Composable
 fun FullScreenCover(
@@ -54,7 +56,7 @@ fun FullScreenCover(
     if (visible) present = true
     val memory = rememberSaveable(saver = SheetMemory.Saver) { SheetMemory() }
     if (!present) memory.forget()
-    val host = LocalTabOverlay.current
+    val host = LocalTabOverlay.current ?: LocalWindowOverlay.current
     val dismiss by rememberUpdatedState(onDismiss)
     val closed by rememberUpdatedState(onClosed)
     val layer: (@Composable () -> Unit)? = if (!present) null else {

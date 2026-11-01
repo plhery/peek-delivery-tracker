@@ -19,13 +19,16 @@ import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
@@ -61,6 +64,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
+import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
@@ -100,7 +104,8 @@ import org.robolectric.annotation.GraphicsMode
  * and a drop; a cover over the whole window on a phone and a form side by side; the field as it is typed, pasted and
  * left, and the carrier line, the check, Amazon's, several numbers, the numbers held back, the details a carrier needs
  * and the name; saving, its error and a duplicate; the card shown once Add has gone; Add through a window made again;
- * its keys, its motion and its tick. On synthetic numbers, signed in where the demo would look nothing up.
+ * its keys, its motion and its tick; a label scanned (B-S32), from Add and from the empty list, behind a scanner whose
+ * barcodes the test gives ([FakeLabelScanner]). On synthetic numbers, signed in where the demo would look nothing up.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -134,6 +139,7 @@ class AddParcelTest {
         reduceMotion: Boolean = true,
         ticking: View? = null,
         inbox: DeliveriesInbox? = null,
+        scanner: LabelScanner = NoLabelScanner,
         prepare: FakeDeliveries.() -> Unit = {},
     ) {
         source = FakeDeliveries(list, session).apply {
@@ -145,7 +151,7 @@ class AddParcelTest {
             val density = LocalDensity.current
             val root = @Composable {
                 CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides { deliveries = it }) {
-                    RootHost(state = session, source = source, reduceMotion = reduceMotion, inbox = inbox)
+                    RootHost(state = session, source = source, reduceMotion = reduceMotion, inbox = inbox, scanner = scanner)
                 }
             }
             if (ticking != null) CompositionLocalProvider(LocalView provides ticking, content = root) else root()
@@ -1249,6 +1255,241 @@ class AddParcelTest {
         assertEquals(6f, (carrier.top - tracking.bottom).value - 14f, 0.5f)
         assertEquals(19.96f, (nameLabel.top - carrier.bottom).value, 0.5f)
         assertEquals(8.04f, (name.top - nameLabel.bottom).value - 14f, 0.5f)
+    }
+
+    /** The scan button tapped, and the scanner up over Add. */
+    private fun scan() {
+        node(ADD_SCAN).performClick()
+        settle()
+    }
+
+    @Test
+    fun theScanButtonOpensTheScannerOverTheWholeWindowWithTheKeyboardGoneAndItsCancelLeavesTheFieldAsItWas() {
+        val scanner = FakeLabelScanner()
+        show(scanner = scanner)
+        open()
+        type("1Z999AA1012345")
+        assertEquals(text("add.scan"), description(ADD_SCAN))
+        assertEquals(0, scanner.running)
+        scan()
+        assertEquals("parcel-scan", source.actions.last())
+        assertEquals(1, scanner.running)
+        val window = compose.onRoot().getUnclippedBoundsInRoot()
+        assertEquals(window, bounds(SCANNER))
+        compose.onNode(hasText(text("add.scanTitle")) and isHeading()).assertExists()
+        // The camera under the bar, across the window and down to its foot.
+        val camera = bounds(SCANNER_CAMERA)
+        assertEquals(window.width, camera.width)
+        assertEquals(window.bottom, camera.bottom)
+        assertTrue(camera.top >= compose.onNode(hasText(text("add.scanTitle")), useUnmergedTree = true).getUnclippedBoundsInRoot().bottom)
+        // Add, under it, out of TalkBack's reach.
+        assertTrue(compose.onAllNodesWithTag(ADD_TRACKING).fetchSemanticsNodes().isEmpty())
+        node(SCANNER_CANCEL).assertTextEquals(text("common.cancel")).performClick()
+        settle()
+        assertFalse(exists(SCANNER))
+        assertEquals(0, scanner.running)
+        assertNotNull(deliveries.addition)
+        assertEquals("1Z999AA1012345", fieldText(ADD_TRACKING))
+        node(ADD_TRACKING).assertIsNotFocused()
+        assertEquals(listOf("parcel-scan"), source.actions.filter { it == "parcel-scan" })
+    }
+
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun inARegularWindowTheScannerCoversTheWholeWindowAddsFormIncludedAndTheBackLeavesTheFormUp() {
+        show(scanner = FakeLabelScanner())
+        open()
+        val panel = node(SHEET_PANEL).getUnclippedBoundsInRoot()
+        scan()
+        val window = compose.onRoot().getUnclippedBoundsInRoot()
+        assertTrue("$panel $window", panel.width < window.width)
+        assertEquals(window, bounds(SCANNER))
+        assertEquals(window.bottom, bounds(SCANNER_CAMERA).bottom)
+        back()
+        assertFalse(exists(SCANNER))
+        assertNotNull(deliveries.addition)
+        assertEquals(panel, node(SHEET_PANEL).getUnclippedBoundsInRoot())
+    }
+
+    @Test
+    fun theFirstBarcodeWithTextFillsTheFieldOnceWithTheScannerGoneNoFieldFocusedAndTheNumberSettled() {
+        val number = "12345478901"
+        val scanner = FakeLabelScanner()
+        show(scanner = scanner) {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.GlsCh, asked = listOf(CarrierId.GlsCh, CarrierId.GlsDe))
+        }
+        open()
+        type("TESTDRAFT")
+        scan()
+        // A barcode with no text, or only spaces, is passed over.
+        compose.runOnUiThread { scanner.read(null, " \n") }
+        settle()
+        assertTrue(exists(SCANNER))
+        // The first with text, trimmed, and nothing after it, in the same frame or the next.
+        compose.runOnUiThread {
+            scanner.read(null, "  $number\n", "1Z999AA10123456784")
+            scanner.read("1Z999AA10123456793")
+        }
+        settle()
+        assertFalse(exists(SCANNER))
+        assertEquals(0, scanner.running)
+        assertEquals(number, fieldText(ADD_TRACKING))
+        node(ADD_TRACKING).assertIsNotFocused()
+        // Settled at once (`settledNumber`), as a field left: its carriers asked about, the one found said.
+        assertEquals(listOf(number), source.detected)
+        assertEquals("GLS Switzerland, ${text("add.line.found")}", description(ADD_CARRIER))
+        assertEquals(listOf("parcel-scan"), source.actions.filter { it == "parcel-scan" })
+    }
+
+    @Test
+    fun aScannedNumberComesOnTheSnappySpring() {
+        val number = "12345478901"
+        val scanner = FakeLabelScanner()
+        show(reduceMotion = false, scanner = scanner) {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.GlsCh, asked = listOf(CarrierId.GlsCh, CarrierId.GlsDe))
+            detecting = CompletableDeferred()
+        }
+        open()
+        scan()
+        // `withAnimation(.snappy(duration: 0.34))`, as a paste.
+        assertOpensOnSnappy(0.34, heights(ADD_FEEDBACK) { compose.runOnUiThread { scanner.read(number) } })
+        assertTrue(exists(ADD_CHECKING))
+    }
+
+    @Test
+    fun underReduceMotionAScannedNumberComesAtOnce() {
+        val number = "12345478901"
+        val scanner = FakeLabelScanner()
+        show(scanner = scanner) {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.GlsCh, asked = listOf(CarrierId.GlsCh, CarrierId.GlsDe))
+            detecting = CompletableDeferred()
+        }
+        open()
+        scan()
+        val heights = heights(ADD_FEEDBACK) { compose.runOnUiThread { scanner.read(number) } }.filterNotNull()
+        assertEquals(heights.toString(), heights.last(), heights.first(), 0.01f)
+    }
+
+    @Test
+    fun theEmptyListsScanOpensAddAndItsScannerOnceAddIsUp() {
+        val scanner = FakeLabelScanner()
+        show(list = emptyList(), scanner = scanner)
+        node(EMPTY_SCAN).assert(hasText(text("add.scan")))
+        compose.mainClock.autoAdvance = false
+        node(EMPTY_SCAN).performClick()
+        compose.mainClock.advanceTimeBy(250)
+        assertNotNull(deliveries.addition)
+        assertFalse(exists(SCANNER))
+        // 300 ms after Add came up.
+        compose.mainClock.advanceTimeBy(100)
+        assertTrue(exists(SCANNER))
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(1, scanner.running)
+        // The list's `onAdd(.scan)` counts nothing.
+        assertEquals(emptyList<String>(), source.actions.filter { it == "parcel-scan" })
+        compose.runOnUiThread { scanner.read("1Z999AA10123456784") }
+        settle()
+        assertFalse(exists(SCANNER))
+        assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
+        assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
+        node(ADD_TRACKING).assertIsNotFocused()
+    }
+
+    @Test
+    fun whereTheDeviceCannotScanTheScanButtonsAreHiddenAndAScanOpensAddOnTheKeyboardUntilItCan() {
+        val scanner = FakeLabelScanner(usable = false)
+        show(list = emptyList(), scanner = scanner)
+        assertFalse(exists(EMPTY_SCAN))
+        assertTrue(exists(EMPTY_ADD))
+        // A scan asked for as the camera was refused: the keyboard, as for Add.
+        compose.runOnUiThread { deliveries.add(FirstParcelRequest.Scan) }
+        settle()
+        assertFalse(exists(SCANNER))
+        node(ADD_TRACKING).assertIsFocused()
+        assertTrue(exists(ADD_PASTE))
+        assertFalse(exists(ADD_SCAN))
+        // The camera allowed in the settings meanwhile: the scan buttons come back.
+        compose.runOnUiThread { scanner.usable = true }
+        settle()
+        assertTrue(exists(ADD_SCAN))
+        node(ADD_CLOSE).performClick()
+        settle()
+        assertTrue(exists(EMPTY_SCAN))
+        assertEquals(0, scanner.running)
+    }
+
+    @Test
+    fun theBackAndEscapeCloseTheScannerAndLeaveAddUnderIt() {
+        val scanner = FakeLabelScanner()
+        show(scanner = scanner)
+        open()
+        type("1Z999AA1012345")
+        scan()
+        back()
+        assertFalse(exists(SCANNER))
+        assertNotNull(deliveries.addition)
+        assertEquals("1Z999AA1012345", fieldText(ADD_TRACKING))
+        scan()
+        press(KeyEvent.KEYCODE_ESCAPE)
+        assertFalse(exists(SCANNER))
+        assertNotNull(deliveries.addition)
+        assertTrue(exists(ADD_TITLE))
+        assertEquals(0, scanner.running)
+        // Escape closes Add once the scanner has gone.
+        press(KeyEvent.KEYCODE_ESCAPE)
+        assertClosed()
+    }
+
+    @Test
+    fun theScannerStaysUpThroughTheWindowMadeAgainAndStillReadsOnce() {
+        val scanner = FakeLabelScanner()
+        val recreation = Recreation(compose)
+        show(recreation = recreation, scanner = scanner)
+        open()
+        type("1Z999AA1012345")
+        scan()
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(exists(SCANNER))
+        assertEquals(1, scanner.running)
+        compose.runOnUiThread {
+            scanner.read("1Z999AA10123456784")
+            scanner.read("1Z999AA10123456793")
+        }
+        settle()
+        assertFalse(exists(SCANNER))
+        assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
+    }
+
+    @Test
+    fun talkBackReachesTheScannersBarFirstWithCancelNamedInAPaneNamedForItsTitle() {
+        show(scanner = FakeLabelScanner())
+        open()
+        scan()
+        val title = text("add.scanTitle")
+        val panes = compose.onAllNodesWithTag(COVER_PANEL, useUnmergedTree = true).fetchSemanticsNodes()
+            .mapNotNull { it.config.getOrNull(SemanticsProperties.PaneTitle) }
+        assertTrue(panes.toString(), title in panes)
+        val cancel = node(SCANNER_CANCEL).fetchSemanticsNode().config
+        assertEquals(Role.Button, cancel.getOrNull(SemanticsProperties.Role))
+        assertEquals(listOf(text("common.cancel")), cancel.getOrNull(SemanticsProperties.Text)?.map { it.text })
+        // Add, under it, out of TalkBack's reach.
+        assertTrue(compose.onAllNodesWithTag(ADD_SAVE).fetchSemanticsNodes().isEmpty())
+        // The bar goes before the camera.
+        val bar = compose.onNode(hasText(title) and isHeading(), useUnmergedTree = true).fetchSemanticsNode()
+        assertEquals(-1f, generateSequence(bar) { it.parent }.firstNotNullOfOrNull { it.config.getOrNull(SemanticsProperties.TraversalIndex) })
+    }
+
+    @Test
+    fun anOpeningOnTheCameraIsKeptWithTheWindowAsItsDraftIs() {
+        val id = UUID.fromString("00000000-0000-4000-8000-000000000705")
+        val requests = listOf(
+            AddRequest(id, null), AddRequest(id, null, scanning = true), AddRequest(id, "UPS 1Z999AA10123456784"),
+            AddRequest(id, " + two  words", scanning = true), AddRequest(id, ""),
+        )
+        for (request in requests) assertEquals(request, AddRequest.from(request.saved))
     }
 }
 

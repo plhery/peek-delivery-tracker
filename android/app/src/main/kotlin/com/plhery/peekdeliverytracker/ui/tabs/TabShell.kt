@@ -167,6 +167,12 @@ class TabOverlay(val backdrop: MaterialBackdrop? = null) {
 val LocalTabOverlay = staticCompositionLocalOf<TabOverlay?> { null }
 
 /**
+ * The overlay a layer is drawn in, for what the layer presents over the whole window in turn, as a full-screen cover
+ * presented from a sheet covers all of the iPad's screen. Null outside a layer.
+ */
+val LocalWindowOverlay = staticCompositionLocalOf<TabOverlay?> { null }
+
+/**
  * Whether the tab bar shows: hidden while anything in the tab asks so ([TabBarHidden]), as a parcel's page hides the
  * iPhone's with `.toolbar(.hidden, for: .tabBar)`.
  */
@@ -294,8 +300,11 @@ fun TabShell(
                 Modifier.align(Alignment.BottomStart).then(shown).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(barHidden),
             )
         }
-        Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier) { overlay.Content() }
-        front.Content()
+        // What a layer presents over the whole window in turn comes over it, in its own layer.
+        Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier) {
+            CompositionLocalProvider(LocalWindowOverlay provides overlay) { overlay.Content() }
+        }
+        CompositionLocalProvider(LocalWindowOverlay provides front) { front.Content() }
     }
 }
 

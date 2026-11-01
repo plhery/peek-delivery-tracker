@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Haptics at the iPhone's intensities (VibrationEffect compositions, Haptics.kt). -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- The label scanner, asked for as it first opens, as the iPhone's camera is (platform/CameraLabelScanner.kt).
+         A device without a camera on its back still takes the app, without the scanner. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <!-- Backups carry the preferences and the parcels this phone follows, never the secrets or the caches
          (res/xml/data_extraction_rules.xml).

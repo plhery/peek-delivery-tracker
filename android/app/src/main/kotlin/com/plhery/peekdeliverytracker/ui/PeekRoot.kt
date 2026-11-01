@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,9 +28,13 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
+import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
+import com.plhery.peekdeliverytracker.ui.deliveries.LocalLabelScanner
+import com.plhery.peekdeliverytracker.ui.deliveries.NoLabelScanner
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
@@ -42,14 +47,17 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.withContext
 
 /**
- * RootView (A-D20): what the session's state shows, from the container's stores. A parcel a link to this window asked
- * for ([inbox]) brings the deliveries forward and opens there.
+ * RootView (A-D20): what the session's state shows, from the container's stores, with the device's camera for the label
+ * scanner. A parcel a link to this window asked for ([inbox]) brings the deliveries forward and opens there.
  */
 @Composable
 fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val state by container.session.stateFlow.collectAsState()
     val source = remember(container) { ContainerDeliveries(container) }
-    PeekRoot(state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile) {
+    PeekRoot(
+        state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile,
+        scanner = CameraLabelScanner,
+    ) {
         DeliveriesTab(source, inbox = inbox)
     }
 }
@@ -59,7 +67,7 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * and this phone follows nothing on its own, the tabs otherwise. A state replaces the one before it at once. The tab
  * chosen is kept with the window and through process death, as `@SceneStorage("tab")` keeps it, whatever the state
  * shows in between. A parcel waiting in [inbox] chooses the deliveries. The tabs show [browserCheck]'s sheet over
- * whatever is in front while it asks for a token.
+ * whatever is in front while it asks for a token, and scan labels with [scanner].
  */
 @Composable
 internal fun PeekRoot(
@@ -68,6 +76,7 @@ internal fun PeekRoot(
     onView: (String) -> Unit,
     inbox: DeliveriesInbox? = null,
     browserCheck: TurnstileSheet? = null,
+    scanner: LabelScanner = NoLabelScanner,
     deliveries: @Composable () -> Unit,
 ) {
     val language by localizer.languageFlow.collectAsState()
@@ -85,13 +94,15 @@ internal fun PeekRoot(
                     AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
                     AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
                         val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-                        TabShell(
-                            selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
-                            overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
-                        ) { shown ->
-                            when (shown) {
-                                PeekTab.Deliveries -> deliveries()
-                                PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                        CompositionLocalProvider(LocalLabelScanner provides scanner) {
+                            TabShell(
+                                selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
+                                overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
+                            ) { shown ->
+                                when (shown) {
+                                    PeekTab.Deliveries -> deliveries()
+                                    PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                                }
                             }
                         }
                     }

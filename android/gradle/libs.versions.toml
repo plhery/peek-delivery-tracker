@@ -20,6 +20,8 @@ navigation3 = "1.2.0"
 window = "1.5.1"
 play-review = "2.0.2"
 webkit = "1.17.1"
+camerax = "1.6.2"
+mlkit-barcode = "17.3.0"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -42,6 +44,11 @@ window = { module = "androidx.window:window", version.ref = "window" }
 window-testing = { module = "androidx.window:window-testing", version.ref = "window" }
 play-review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "play-review" }
 webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
+camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
+camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
+camera-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
+camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camerax" }
+mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkit-barcode" }
 mockwebserver = { module = "com.squareup.okhttp3:mockwebserver3", version.ref = "okhttp" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }

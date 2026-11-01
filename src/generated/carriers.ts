@@ -1688,6 +1688,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "R+L Carriers tracking: PRO numbers, statuses and claims",
       "name": "R+L Carriers",
       "color": "#006647"
+    },
+    {
+      "id": "nox",
+      "catalog": "nox",
+      "slug": "nox-tracking",
+      "title": "nox NachtExpress tracking: statuses, drop-off and contact",
+      "name": "nox",
+      "color": "#fadb00"
     }
   ],
   "de": [

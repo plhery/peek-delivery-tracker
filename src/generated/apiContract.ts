@@ -4206,8 +4206,10 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://www.sto.cn/",
     "aliases": [
       "STO Global",
-      "申通国际"
-    ]
+      "申通国际",
+      "申通快递"
+    ],
+    "helpUrl": "https://page.sto.cn/ued-projects/sto-customer-onlinekf"
   },
   "yunda": {
     "displayName": "Yunda Express",
@@ -17003,7 +17005,8 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       }
     ],
-    "trackingSearchUrl": "https://www.jtexpress.com.cn/"
+    "trackingSearchUrl": "https://www.jtexpress.com.cn/",
+    "helpUrl": "https://www.jtexpress.com.cn/aboutUs.html?type=LX"
   },
   "janio": {
     "displayName": "Janio",
@@ -19766,7 +19769,10 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Moscow",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ozon-logistics",
+      "recognitionRank": 37,
+      "recognitionPattern": "^(?:\\d{13}|\\d{15})$",
+      "browserRecognitionRank": 37
     },
     "trackingUrlTemplate": "https://tracking.ozon.ru/?track={trackingNumber}",
     "linkRules": [

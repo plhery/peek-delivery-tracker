@@ -4538,6 +4538,14 @@
     ]
   },
   {
+    "input": "0138484693-0209-1",
+    "carrier": "ozon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "ozon-logistics"
+    ]
+  },
+  {
     "input": "014081571141",
     "carrier": "unknown",
     "confidence": "low",
@@ -4663,6 +4671,14 @@
     "asked": [
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "0143399352-0060-1",
+    "carrier": "ozon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "ozon-logistics"
     ]
   },
   {

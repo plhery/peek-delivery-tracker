@@ -228,5 +228,6 @@
   { "id": "spx-sg", "catalog": "spx-sg", "name": "SPX Express Singapore", "languages": ["en"] },
   { "id": "dai-post", "catalog": "dai-post", "name": "DAI Post", "languages": ["en"] },
   { "id": "eurodis", "catalog": "eurodis", "name": "EURODIS", "languages": ["en"] },
-  { "id": "chronodiali", "catalog": "chronodiali", "name": "Chronodiali", "languages": ["en"] }
+  { "id": "chronodiali", "catalog": "chronodiali", "name": "Chronodiali", "languages": ["en"] },
+  { "id": "17feia", "catalog": "17feia", "name": "17FEIA", "languages": ["en"] }
 ]

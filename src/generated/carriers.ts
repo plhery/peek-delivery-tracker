@@ -1608,6 +1608,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD Romania tracking: statuses, Smart Control and contact",
       "name": "DPD Romania",
       "color": "#dc0032"
+    },
+    {
+      "id": "globalpost",
+      "catalog": "globalpost",
+      "slug": "globalpost-tracking",
+      "title": "GlobalPost tracking: GP numbers and who delivers",
+      "name": "GlobalPost",
+      "color": "#11003a"
     }
   ],
   "de": [

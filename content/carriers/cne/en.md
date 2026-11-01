@@ -99,13 +99,13 @@ CNE lists no customer service email; its other offices, across China, serve sell
 
 ## Track a CNE Express parcel with Peek
 
-[Peek](/) names CNE Express at once from a 3A5V number ("Detected carrier"). A cne.com tracking link with `?no=` files the parcel under CNE Express whatever number it holds; if the link holds several, Peek takes the first. For any other CNE number, paste it all the same: Peek follows more than 3,500 carriers, and asks tracking services ("Checking tracking services…"). If they don't name CNE, tap "Change" and pick CNE Express under "All carriers" (searching CNE or 递一物流 finds it too), or use "Change carrier" on a parcel you've already added.
+[Peek](/) names CNE Express at once from a 3A5V number ("Detected carrier"). A cne.com tracking link with `?no=` files the parcel under CNE Express whatever number it holds; if the link holds several, Peek takes the first. For any other CNE number, paste it all the same: Peek follows more than 3,500 carriers. When the number's shape fits several carriers, Peek shows "Checking tracking services…" while it asks around; when it fits none, Peek looks the number up once you add it. If Peek doesn't name CNE, tap "Change" and pick CNE Express under "All carriers" (searching CNE or 递一物流 finds it too), or use "Change carrier" on a parcel you've already added.
 
 Peek reads CNE's own tracking: the status, each line with its place, the destination country, and the delivering carrier when CNE names one of the three above with its number. It reads `Arrived at destination`, and CNE's line handing the parcel to the local carrier, on Beijing time, works out the other lines' clock from their place or the leg the parcel was on, and shows every time in your device's time zone. It leaves out the seller's order number, the delivering carrier's website and phone, and CNE's proof of delivery. CNE gives no expected delivery date or weight.
 
 When CNE names the delivering carrier and gives its number, Peek asks that carrier too: one of the three above, your country's post for a postal number (two letters, nine digits, two letters), or the one carrier that number's shape points to. Once that carrier shows a scan at least as recent as CNE's newest, Peek follows the parcel there and keeps CNE's history.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact CNE or the seller for you.
+Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact CNE or the seller for you.
 
 ## Questions about CNE Express tracking
 

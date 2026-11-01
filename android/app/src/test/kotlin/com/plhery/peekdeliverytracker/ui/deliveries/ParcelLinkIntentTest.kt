@@ -5,19 +5,24 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.PeekApplication
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
+import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -62,7 +67,7 @@ class ParcelLinkWindow : ComponentActivity() {
 /**
  * A parcel's link comes first in the window's routing (A-L02, B-L01): it opens its sheet whether it started the window
  * or came to it, in the site's form or the app's scheme, once; the window made again keeps the sheet up without reading
- * the link again, and a keep under way with it; a window Recents starts again with the link doesn't follow it again,
+ * the link again, and a keep under way with it, and a pull's gap until its read is over; a window Recents starts again with the link doesn't follow it again,
  * and the window's intent forgets the link once read; an address that is no parcel's link goes on to the parcel it
  * names. The app takes a parcel's link, and nothing else, before its stores are made (ParcelLinkActivityTest opens it
  * once they are).
@@ -164,6 +169,46 @@ class ParcelLinkIntentTest {
         assertTrue(compose.onAllNodesWithText("The keep failed", substring = true, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty())
         compose.onNodeWithTag(LINK_CLOSE).assertIsEnabled()
         assertEquals(1, links.kept.size)
+    }
+
+    @Test
+    fun thePullsGapStaysOpenInTheWindowMadeAgainUntilItsReadIsOverAndTheButtonsOpensNone() {
+        val links = links()
+        val window = window(intent(siteLink(id)))
+        val rest = compose.onNodeWithTag(LINK_CARD).getBoundsInRoot().top
+        fun gap() = (compose.onNodeWithTag(LINK_CARD).getBoundsInRoot().top - rest).value
+        var answer = CompletableDeferred<PublicParcelResponse?>()
+        links.read = { _, _ -> answer.await() }
+        compose.onNodeWithTag(LINK_SCROLL).performTouchInput {
+            down(center)
+            repeat(28) { moveBy(Offset(0f, 25.dp.toPx())) }
+            up()
+        }
+        settle()
+        assertEquals("Pulled far enough, the link is read again", 2, links.reads.size)
+        assertEquals("The gap the refresh control holds open", 60f, gap(), 1f)
+
+        window.recreate()
+        settle()
+        assertTrue(links.sheet.refreshing)
+        assertEquals("Still open in the window made again", 60f, gap(), 1f)
+        answer.complete(LinkFixtures.viewer())
+        settle()
+        assertEquals("Closed once the read is over", 0f, gap(), 0.5f)
+        assertEquals(2, links.reads.size)
+
+        // The refresh button's read holds no gap open, in the window made again either.
+        answer = CompletableDeferred()
+        compose.onNodeWithTag(LINK_REFRESH).performClick()
+        settle()
+        window.recreate()
+        settle()
+        assertEquals(3, links.reads.size)
+        assertTrue(links.sheet.refreshing)
+        assertEquals(0f, gap(), 0.5f)
+        answer.complete(LinkFixtures.viewer())
+        settle()
+        assertFalse(links.sheet.refreshing)
     }
 
     @Test

@@ -175,9 +175,10 @@ import kotlinx.coroutines.launch
 /**
  * What a presentation of the link's sheet does, kept by the app rather than the window, as the iPhone keeps the sheet's
  * `@State` with its presentation: the link's read (`.task(id: presentationID)`), Add or follow under way (`adding`), a
- * read asked for again (`refreshing`), why keeping failed (`errorMessage`), and whether the handed-over link was taken
- * along (`handedOver`). Each runs on the app's scope, so the window made again (a turn, dark mode, a font size) finds it
- * as it was: still keeping, Close still off, its error yet to come. A new presentation starts clean; what the one
+ * read asked for again (`refreshing`, and [pulled] when a pull asked), why keeping failed (`errorMessage`), and whether
+ * the handed-over link was taken along (`handedOver`). Each runs on the app's scope, so the window made again (a turn,
+ * dark mode, a font size) finds it as it was: still keeping, Close still off, its error yet to come, the pull's gap
+ * still open. A new presentation starts clean; what the one
  * before still runs no longer touches it. The read is the sheet's own: it stops as the sheet closes or another
  * presentation comes, as `.task` stops with its view.
  */
@@ -186,6 +187,13 @@ class ParcelLinkSheetState {
     var adding by mutableStateOf(false)
         private set
     var refreshing by mutableStateOf(false)
+        private set
+
+    /**
+     * The read under way was asked for by a pull (`.refreshable`), whose refresh control holds its gap open over the
+     * content until it is over, in the window made again too.
+     */
+    var pulled by mutableStateOf(false)
         private set
     var errorMessage by mutableStateOf<String?>(null)
         private set
@@ -201,6 +209,7 @@ class ParcelLinkSheetState {
         presented = presentation
         adding = false
         refreshing = false
+        pulled = false
         errorMessage = null
         reading?.cancel()
         reading = source.scope.launch { source.links.load() }
@@ -233,8 +242,9 @@ class ParcelLinkSheetState {
         return true
     }
 
-    /** `refresh()`: the link read again, once at a time. */
-    internal fun refresh(source: ParcelLinkSource) {
+    /** `refresh()`: the link read again, once at a time; `pulled` by a pull, which waits for a read under way. */
+    internal fun refresh(source: ParcelLinkSource, pulled: Boolean = false) {
+        if (pulled) this.pulled = true
         if (refreshing) return
         val presentation = presented
         refreshing = true
@@ -242,7 +252,10 @@ class ParcelLinkSheetState {
             try {
                 source.links.load()
             } finally {
-                if (presented == presentation) refreshing = false
+                if (presented == presentation) {
+                    refreshing = false
+                    this@ParcelLinkSheetState.pulled = false
+                }
             }
         }
     }
@@ -521,15 +534,19 @@ private fun LinkShared(
     // Where the scroll shows what it holds, which the question comes in as it is seen in.
     val viewport = remember { arrayOfNulls<LayoutCoordinates>(1) }
     // `.refreshable`: the content follows the pull on the list's rubber band, and a gap stays open over it while the
-    // link is read again ([ListPull]).
+    // link is read again ([ListPull]). The window made again while a pull's read runs opens with the gap held open.
     val pullScope = rememberCoroutineScope()
-    val pullModel = remember { PullToRefreshModel(pullScope) }
+    val density = LocalDensity.current
+    val pullModel = remember { PullToRefreshModel(pullScope).also { if (state.pulled) it.begin("") } }
     val refresh by rememberUpdatedState {
         pullModel.begin("")
-        state.refresh(source)
+        state.refresh(source, pulled = true)
         if (!state.refreshing) pullModel.settle()
     }
-    val pull = remember(pullModel) { ListPull(pullModel, pullScope) { refresh() } }
+    val pull = remember(pullModel) {
+        val open = if (pullModel.phase == PullToRefreshModel.Phase.Refreshing) with(density) { ListPull.HOLD.toPx() } else 0f
+        ListPull(pullModel, pullScope, { refresh() }, open)
+    }
     val pullPhase by pullModel.phaseFlow.collectAsState()
     LaunchedEffect(state.refreshing) {
         if (!state.refreshing && pullModel.phase == PullToRefreshModel.Phase.Refreshing) pullModel.settle()

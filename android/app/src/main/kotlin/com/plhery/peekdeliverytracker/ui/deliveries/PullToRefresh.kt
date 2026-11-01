@@ -95,7 +95,7 @@ import kotlinx.coroutines.launch
  * The list's is the tab's ([DeliveriesState.listPull]), not the list's, so that a pull or a gap held open lives on as
  * the window turns and the list is drawn anew ([ListPullEffects]). A parcel's link sheet pulls its content so too, as
  * its `.refreshable` scroll view does ([PullEffects]). [refresh] starts the refresh the pull asks for, which begins
- * and settles [model].
+ * and settles [model]. A pull made anew over a refresh still under way starts with its gap `open`.
  *
  * Positions are in pixels: [past] is how far the content shows below its rest, [held] the gap held open.
  */
@@ -104,13 +104,14 @@ internal class ListPull(
     private val model: PullToRefreshModel,
     private val scope: CoroutineScope,
     private val refresh: () -> Unit,
+    open: Float = 0f,
 ) : NestedScrollConnection {
     var density: Density = Density(1f)
     var height: Int = 0
 
     var past by mutableFloatStateOf(0f)
         private set
-    val held = Animatable(0f)
+    val held = Animatable(open)
 
     private var dragging = false
     private var trigger = PullToRefreshTrigger()

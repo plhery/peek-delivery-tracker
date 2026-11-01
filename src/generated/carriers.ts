@@ -1632,6 +1632,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Forza Delivery tracking: guía numbers, statuses, contact",
       "name": "Forza Delivery Express",
       "color": "#ea5c1d"
+    },
+    {
+      "id": "quantium-solutions",
+      "catalog": "quantium-solutions",
+      "slug": "quantium-solutions-tracking",
+      "title": "Quantium Solutions tracking: numbers, statuses and help",
+      "name": "Quantium Solutions",
+      "color": "#00474f"
     }
   ],
   "de": [

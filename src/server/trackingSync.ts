@@ -51,7 +51,7 @@ import {
 } from './trackingAudit';
 import { isRecord, type JsonObject } from './types';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
-import type { UniversalSource } from 'universal-parcel-scraper';
+import { UNIVERSAL_SOURCES, type UniversalSource } from 'universal-parcel-scraper';
 import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, freshnessWindow, hasRoutingProgress, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
@@ -533,7 +533,7 @@ export interface TrackingAdapter {
 
 export class CarrierTrackingAdapter implements TrackingAdapter {
   constructor(
-    readonly universal = new UniversalTracker({ environment: hostAdapterEnvironment(), providers: ['ParcelsApp', 'Ship24', '17TRACK', 'UPU'] }),
+    readonly universal = new UniversalTracker({ environment: hostAdapterEnvironment(), providers: UNIVERSAL_SOURCES }),
     readonly registry: AdapterRegistry = createAdapterRegistry(),
     readonly recorder: StepRecorder = hostStepRecorder(),
   ) {}
@@ -2805,7 +2805,7 @@ export function restagedNews(
   });
 }
 
-const IDENTIFYING_PROVIDERS = new Set(['Ship24', 'ParcelsApp', '17TRACK', 'Postal Ninja']);
+const IDENTIFYING_PROVIDERS = new Set(['Ship24', 'ParcelsApp', '17TRACK', 'Postal Ninja', 'Track718']);
 
 /**
  * Whether a correction files an unknown parcel under the carrier a provider names, as the

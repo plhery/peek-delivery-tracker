@@ -514,7 +514,7 @@ export async function installedRelease() {
       catalog: scraper.CARRIER_CATALOG,
       stages: scraper.STAGES,
       // Every provider the router can ask, the opt-in one included.
-      providers: scraper.universalSources(true),
+      providers: [...new Set([...(scraper.UNIVERSAL_SOURCES ?? []), ...scraper.universalSources(true)])],
     }),
   };
 }

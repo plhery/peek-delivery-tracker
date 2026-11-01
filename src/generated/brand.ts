@@ -591,6 +591,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "139express": "139express",
   "17feia": "17feia",
   "247express": "247express",
+  "2ebox": "2ebox",
   "2go": "2go",
   "360lion": "360lion",
   "360zebra": "360zebra",
@@ -649,6 +650,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "annto": "annto",
   "anousith": "anousith",
   "anserx": "anserx",
+  "antaria": "antaria",
   "anteraja": "anteraja",
   "ap-cargo": "ap-cargo",
   "apc-overnight": "apc-overnight",
@@ -683,6 +685,8 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "bangladesh-post": "bangladesh-post",
   "banling": "banling",
   "barid-al-maghrib": "barid-al-maghrib",
+  "bee-fast": "bee-fast",
+  "beexprss": "beexprss",
   "bel": "bel",
   "belpost": "belpost",
   "best-express-my": "best-express-my",
@@ -732,6 +736,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "cargobus": "cargobus",
   "cargoline": "cargoline",
   "cargus": "cargus",
+  "carry-flap": "carry-flap",
   "castores": "castores",
   "cbl-logistica": "cbl-logistica",
   "ccfs": "ccfs",
@@ -751,6 +756,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "china-railway-express": "china-railway-express",
   "chinz-logistics": "chinz-logistics",
   "chit-chats": "chit-chats",
+  "choir-express": "choir-express",
   "chronodiali": "chronodiali",
   "chronopost": "chronopost",
   "chukou1": "chukou1",
@@ -768,6 +774,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "citysprint": "citysprint",
   "cj-logistics": "cj-logistics",
   "cj-packet": "cj-packet",
+  "ckeex": "ckeex",
   "closer-logistics": "closer-logistics",
   "cmt-express": "cmt-express",
   "cne": "cne",
@@ -781,7 +788,9 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "coordinadora": "coordinadora",
   "copa-courier": "copa-courier",
   "cope-sensitive-freight": "cope-sensitive-freight",
+  "corporate-couriers": "corporate-couriers",
   "corre": "corre",
+  "correios-angola": "correios-angola",
   "correios-br": "correios-br",
   "correo-argentino": "correo-argentino",
   "correo-paraguayo": "correo-paraguayo",
@@ -790,6 +799,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "correos-chile": "correos-chile",
   "correos-cuba": "correos-cuba",
   "correos-de-mexico": "correos-de-mexico",
+  "correos-ecuador": "correos-ecuador",
   "correos-el-salvador": "correos-el-salvador",
   "correos-express": "correos",
   "correos-nicaragua": "correos-nicaragua",
@@ -816,6 +826,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "daewoo-fastex": "daewoo-fastex",
   "daily-xpress": "daily-xpress",
   "dakota-cargo": "dakota-cargo",
+  "danniao": "danniao",
   "danske-fragtmaend": "danske-fragtmaend",
   "dao": "dao",
   "day-ross": "day-ross",
@@ -823,6 +834,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "dayone": "dayone",
   "dayton-freight": "dayton-freight",
   "dd-express": "dd-express",
+  "ddu-express": "ddu-express",
   "dealersend": "dealersend",
   "delhivery": "delhivery",
   "delivengo": "la-poste",
@@ -875,6 +887,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "drop2shop": "drop2shop",
   "dropp": "dropp",
   "dsv": "dsv",
+  "dtd-pk": "dtd-pk",
   "dtdc": "dtdc",
   "dx": "dx",
   "dynalogic": "dynalogic",
@@ -906,6 +919,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "emons": "emons",
   "ems": "ems",
   "ems-vietnam": "ems-vietnam",
+  "endeavour-delivery": "endeavour-delivery",
   "energia-tk": "energia-tk",
   "energo": "energo",
   "envia-colombia": "envia-colombia",
@@ -919,6 +933,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "estes": "estes",
   "estes-forwarding": "estes-forwarding",
   "ethiopian-post": "ethiopian-post",
+  "etomars": "etomars",
   "ets-express": "ets-express",
   "eurodis": "eurodis",
   "euroexpress-ba": "euroexpress-ba",
@@ -935,10 +950,12 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "expedico": "expedico",
   "express-one": "express-one",
   "express-one-bg": "express-one-bg",
+  "ezship": "ezship",
   "famafutar": "famafutar",
   "famiport": "famiport",
   "fan-courier": "fan-courier",
   "far-international": "far-international",
+  "fare-rata": "fare-rata",
   "fargo-courier": "fargo-courier",
   "fargo-uz": "fargo-uz",
   "fastbox": "fastbox",
@@ -946,6 +963,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "faster-ae": "faster-ae",
   "fastfrate": "fastfrate",
   "fastgo": "fastgo",
+  "fasttrack-ar": "fasttrack-ar",
   "fastwl": "fastwl",
   "fedex": "fedex",
   "fedex-freight": "fedex",
@@ -980,6 +998,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "freightways-global": "freightways-global",
   "frontier-ca": "frontier-ca",
   "fukuyama": "fukuyama",
+  "fxdc-post": "fxdc-post",
   "gaash": "gaash",
   "gati": "gati",
   "gcx": "gcx",
@@ -996,6 +1015,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "ghtk": "ghtk",
   "gibraltar-post": "gibraltar-post",
   "gio-express": "gio-express",
+  "global-business-tw": "global-business-tw",
   "global-delivery-network": "global-delivery-network",
   "globalpost": "globalpost",
   "gls-at": "gls",
@@ -1048,6 +1068,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "hkd-express": "hkd-express",
   "holisol": "holisol",
   "homexpress": "homexpress",
+  "honducor": "honducor",
   "hongkong-post": "hongkong-post",
   "hongsuda": "hongsuda",
   "horoz": "horoz",
@@ -1061,6 +1082,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "huahan": "huahan",
   "huaya-express": "huaya-express",
   "hunter-express": "hunter-express",
+  "hy-express": "hy-express",
   "hye": "hye",
   "hywl": "hywl",
   "hzt": "hzt",
@@ -1073,6 +1095,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "imile": "imile",
   "indah-logistik": "indah-logistik",
   "india-post": "india-post",
+  "indopaket": "indopaket",
   "inntralog": "inntralog",
   "inpost": "inpost",
   "instabox": "instabox",
@@ -1088,6 +1111,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "interrapidisimo": "interrapidisimo",
   "intex-paketdienst": "intex-paketdienst",
   "intime-bg": "intime-bg",
+  "ipostel": "ipostel",
   "iran-post": "iran-post",
   "islandwide-express": "islandwide-express",
   "israel-post": "israel-post",
@@ -1176,6 +1200,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "lhtex": "lhtex",
   "libang-logistics": "libang-logistics",
   "libanpost": "libanpost",
+  "libya-post": "libya-post",
   "liccardi": "liccardi",
   "lietuvos-pastas": "lietuvos-pastas",
   "lightning-express": "lightning-express",
@@ -1197,6 +1222,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "m-and-p": "m-and-p",
   "m-one": "m-one",
   "m-xpress": "m-xpress",
+  "macau-post": "macau-post",
   "madhur-courier": "madhur-courier",
   "maersk-ecommerce": "pilot-freight",
   "magyar-posta": "magyar-posta",
@@ -1223,7 +1249,9 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "mhi": "mhi",
   "micro-express": "micro-express",
   "midland-transport": "midland-transport",
+  "mikropakket": "mikropakket",
   "mng-kargo": "dhl",
+  "mobi-logistica": "mobi-logistica",
   "mondial-relay": "mondial-relay",
   "mongol-infinity-post": "mongol-infinity-post",
   "montenegro-post": "montenegro-post",
@@ -1231,6 +1259,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "movin": "movin",
   "mrl-global": "mrl-global",
   "mrw": "mrw",
+  "myanmar-post": "myanmar-post",
   "mylerz": "mylerz",
   "nacex": "nacex",
   "naqel": "naqel",
@@ -1291,6 +1320,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "pallex": "pallex",
   "pandu-logistics": "pandu-logistics",
   "pannon-xp": "pannon-xp",
+  "paositra-malagasy": "paositra-malagasy",
   "paperfly": "paperfly",
   "paquetexpress": "paquetexpress",
   "parcel-one": "parcel-one",
@@ -1383,6 +1413,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "qwintry": "qwintry",
   "raben": "raben",
   "ram-hand-to-hand": "ram-hand-to-hand",
+  "redbox-mv": "redbox-mv",
   "redpack": "redpack",
   "redur": "redur",
   "redx": "redx",
@@ -1397,6 +1428,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "ross-express": "ross-express",
   "royal-express-mm": "royal-express-mm",
   "royal-mail": "royal-mail",
+  "royale-international": "royale-international",
   "rozetka-delivery": "rozetka-delivery",
   "rpx-hk": "rpx-hk",
   "rpx-indonesia": "rpx-indonesia",
@@ -1443,6 +1475,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "shipentegra": "shipentegra",
   "shipgce": "shipgce",
   "shipglobal-in": "shipglobal-in",
+  "shippify": "shippify",
   "shiprocket": "shiprocket",
   "shipter": "shipter",
   "shipup": "shipup",
@@ -1507,7 +1540,9 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "super-parcel-track": "super-parcel-track",
   "superb-express": "superb-express",
   "surat-kargo": "surat-kargo",
+  "suto-logistics": "suto-logistics",
   "sway": "sway",
+  "swftbox": "swftbox",
   "swiftx": "swiftx",
   "swiss-post": "swiss-post",
   "swiss-post-cargo": "swiss-post",
@@ -1553,6 +1588,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "tnt-it": "tnt",
   "today-kr": "today-kr",
   "togo-post": "togo-post",
+  "tolos": "tolos",
   "tonami": "tonami",
   "tonda-global": "tonda-global",
   "too-express": "too-express",
@@ -1607,12 +1643,14 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "valmo": "valmo",
   "valueway": "valueway",
   "vasp-expresso": "vasp-expresso",
+  "vatican-post": "vatican-post",
   "veho": "veho",
   "veloces": "veloces",
   "venipak": "venipak",
   "vestovoy": "vestovoy",
   "via-cargo": "via-cargo",
   "viadireta": "viadireta",
+  "viaxpress": "viaxpress",
   "victorian-freight-specialists": "victorian-freight-specialists",
   "viet-an-express": "viet-an-express",
   "viettel-post": "viettel-post",
@@ -1632,6 +1670,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "ward-trucking": "ward-trucking",
   "we-world-express": "we-world-express",
   "wedo": "allegro-one",
+  "wepost": "wepost",
   "western-bid": "western-bid",
   "whistl": "whistl",
   "whiz-delivery": "whiz-delivery",
@@ -1655,6 +1694,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "xlmiles": "xlmiles",
   "xpo-ltl": "xpo-ltl",
   "xpressbees": "xpressbees",
+  "xpressen": "xpressen",
   "xyl": "xyl",
   "yalidine": "yalidine",
   "yamato": "yamato",
@@ -23956,6 +23996,1269 @@ export const CARRIER_TRUCK: TruckGeometry = {
       {
         "type": "polygon",
         "d": "M6.89 6.9L6.37 6.98L5.89 7.22L5.51 7.59L5.27 8.06L5.19 8.55L5.19 10.15L5.27 10.64L5.51 11.11L5.89 11.49L6.37 11.72L6.89 11.8L7.41 11.71L7.88 11.46L8.2 11.13L7.59 10.54L7.36 10.78L7.14 10.9L6.88 10.94L6.62 10.9L6.39 10.79L6.21 10.6L6.09 10.37L6.04 10.08L6.04 8.62L6.09 8.33L6.21 8.1L6.39 7.91L6.62 7.8L6.88 7.76L7.14 7.8L7.36 7.93L7.59 8.16L8.2 7.57L7.88 7.24L7.41 6.99Z",
+        "fill": "accent"
+      }
+    ],
+    "2ebox": [
+      {
+        "type": "polygon",
+        "d": "M5.18 7.69L5.32 7.85L5.4 8.05L5.41 8.26L5.36 8.43L2.9 10.75L6.09 10.75L6.09 10.08L4.6 10.08L5.96 8.79L6.09 8.34L6.07 7.91L5.91 7.5L5.64 7.17L5.27 6.94L4.85 6.85L4.42 6.88L4.02 7.06L3.7 7.35L3.52 7.68L4.11 8.01L4.24 7.78L4.39 7.63L4.59 7.55L4.8 7.53L5 7.58Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.42 9.14L8.59 9.14L8.59 8.46L7.42 8.46L7.42 7.52L8.85 7.52L8.85 6.85L6.74 6.85L6.74 10.75L8.85 10.75L8.85 10.08L7.42 10.08Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.88 7.84L11.83 7.55L11.69 7.27L11.46 7.04L11.18 6.89L10.88 6.85L9.5 6.85L9.5 10.75L11.1 10.75L11.42 10.7L11.73 10.55L11.97 10.3L12.13 9.99L12.18 9.67L12.18 9.45L12.13 9.13L11.97 8.82L11.72 8.57L11.83 8.34L11.88 8.05Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.2 7.9L11.2 7.99L11.18 8.13L11.13 8.22L11.06 8.29L10.96 8.34L10.83 8.36L10.18 8.36L10.18 7.52L10.83 7.52L10.96 7.55L11.06 7.59L11.13 7.67L11.18 7.76Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.2 9.07L11.32 9.13L11.42 9.22L11.48 9.34L11.5 9.5L11.5 9.62L11.48 9.78L11.42 9.9L11.32 9.99L11.2 10.05L11.04 10.08L10.18 10.08L10.18 9.04L11.04 9.04Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.25 7.3L12.91 7.81L12.8 8.38L12.8 9.22L12.91 9.79L13.25 10.3L13.76 10.64L14.36 10.76L14.97 10.64L15.48 10.3L15.82 9.79L15.93 9.22L15.93 8.38L15.82 7.81L15.48 7.3L14.97 6.96L14.36 6.84L13.76 6.96Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.36 10.07L14.03 10L13.74 9.81L13.55 9.52L13.48 9.15L13.48 8.45L13.55 8.08L13.74 7.79L14.03 7.6L14.36 7.53L14.7 7.6L14.99 7.79L15.18 8.08L15.25 8.45L15.25 9.15L15.18 9.52L14.99 9.81L14.7 10Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.77 6.85L16.2 7.22L17.24 8.8L16.2 10.38L16.77 10.75L17.65 9.42L18.53 10.75L19.1 10.38L18.06 8.8L19.1 7.22L18.53 6.85L17.65 8.18Z",
+        "fill": "accent"
+      }
+    ],
+    "antaria": [
+      {
+        "type": "polygon",
+        "d": "M8.73 6.08L10.18 5.65L10.18 5.83L9.92 7.12L9.85 7.5L9.79 7.61L6.36 8.09L6.34 8.11L9.36 10.04L9.36 10.27L9.27 10.78L9.29 10.83L11.19 9.33L12.03 8.62L13.07 7.68L13.53 7.2L12.34 7.31L12.13 7.3L11.29 5.5L11.26 5.34L11.34 5.36L12.21 5.15L13.05 5L13.66 4.93L14.22 4.9L14.57 4.9L15.06 5L15.27 5.14L15.37 5.34L15.37 5.52L15.29 5.78L14.99 6.31L14.46 6.97L13.53 7.92L12.44 8.92L11.47 9.73L9.41 11.38L7.51 12.83L7.31 12.99L7.33 13.01L8.96 11.89L11.19 10.21L12.77 8.91L13.71 8.07L14.69 7.07L15.09 6.56L15.35 6.18L15.47 5.93L15.57 5.65L15.6 5.37L15.5 5.09L15.28 4.88L14.95 4.75L14.57 4.7L13.91 4.7L12.82 4.85L11.32 5.21L11.24 5.23L11.23 5.27L11.14 5.17L10.56 3.9L10.23 5.53L10.19 5.57L10.12 5.56L8.71 6.06Z",
+        "fill": "#00000c"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.88 13.5L11.42 11.37L11.47 11.35L11.7 11.45L14.55 13.09L14.56 13.04L14.51 12.92L13.23 9.84L13.15 9.6L15.66 7L15.51 6.98L15.26 7.02L14.65 7.71L13.71 8.65L12.39 9.87L10.46 11.47L9.06 12.52L9.01 12.61L8.86 13.48Z",
+        "fill": "#00000c"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.18 13.13L7.32 13.02L7.3 13L7.14 13.12Z",
+        "fill": "#00000c"
+      }
+    ],
+    "bee-fast": [
+      {
+        "type": "polygon",
+        "d": "M9.49 5.37L9.5 5.09L9.4 4.79L9.2 4.55L8.93 4.4L8.65 4.36L7.71 4.36L7.39 4.3L6.72 8.05L7.36 8.16L7.37 8.1L8.3 8.1L8.61 8.06L8.91 7.91L9.17 7.69L9.36 7.42L9.46 7.12L9.5 6.91L9.51 6.6L9.4 6.28L9.21 6.05L9.36 5.83L9.45 5.56Z",
+        "fill": "#3e2311"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.54 6.46L8.68 6.49L8.77 6.53L8.82 6.6L8.86 6.7L8.85 6.84L8.83 6.96L8.78 7.12L8.68 7.25L8.56 7.36L8.41 7.43L8.25 7.45L7.48 7.45L7.66 6.46Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.84 5.18L8.84 5.3L8.82 5.4L8.78 5.54L8.7 5.65L8.6 5.74L8.48 5.79L8.34 5.81L7.78 5.81L7.92 5.01L8.6 5.01L8.72 5.03L8.78 5.06L8.82 5.11Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.03 6.56L12.03 5.91L10.97 5.91L11.13 5.01L12.56 5.01L12.56 4.36L10.59 4.36L9.91 8.1L12.01 8.1L12.01 7.45L10.69 7.45L10.85 6.56Z",
+        "fill": "#3e2311"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.75 6.56L14.75 5.91L13.69 5.91L13.85 5.01L15.28 5.01L15.28 4.36L13.31 4.36L12.64 8.1L14.73 8.1L14.73 7.45L13.41 7.45L13.57 6.56Z",
+        "fill": "#3e2311"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.91 11.83L13.03 12.05L12.91 12.34L12.51 12.59L12.07 12.59L11.72 12.31L11.31 12.81L11.83 13.24L12.7 13.24L13.44 12.78L13.74 12.01L13.36 11.29L12.23 10.92L12.12 10.69L12.24 10.39L12.61 10.15L13.03 10.15L13.36 10.42L13.78 9.93L13.27 9.5L12.42 9.5L11.71 9.96L11.41 10.73L11.77 11.45Z",
+        "fill": "#3e2311"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.86 13.07L8.47 13.29L8.85 12.25L10.03 12.25L10.04 13.18L10.69 13.18L10.66 9.5L9.18 9.5Z",
+        "fill": "#3e2311"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.03 11.6L9.09 11.6L9.63 10.15L10.01 10.15Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.89 10.15L8.23 10.15L8.23 9.5L6.34 9.5L5.68 13.18L6.32 13.3L6.61 11.69L7.71 11.69L7.71 11.04L6.73 11.04Z",
+        "fill": "#3e2311"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.42 13.18L15.06 13.3L15.63 10.15L16.32 10.15L16.32 9.5L14.4 9.5L14.4 10.15L14.97 10.15Z",
+        "fill": "#3e2311"
+      }
+    ],
+    "beexprss": [
+      {
+        "type": "polygon",
+        "d": "M7.12 8.74L7.12 8.63L7.17 8.59L10.26 7.36L9.31 6.81L9.31 6.3L8.81 5.87L7.89 5.25L7.11 4.9L6.26 4.69L5.48 4.67L4.7 4.87L4.22 5.15L4.05 5.33L3.93 5.62L3.88 5.89L3.88 6.27L4.02 6.73L4.28 7.15L4.67 7.54L5.4 8.04L6.31 8.48Z",
+        "fill": "#40c5f3"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.84 8.75L15.68 8.48L16.59 8.04L17.24 7.61L17.71 7.15L17.99 6.72L18.13 6.2L18.11 5.83L18.03 5.51L17.94 5.31L17.77 5.15L17.22 4.84L16.51 4.67L15.73 4.69L14.88 4.9L14.11 5.25L13.18 5.87L12.59 6.39L12.59 6.81L11.67 7.35L14.79 8.59L14.84 8.63Z",
+        "fill": "#40c5f3"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.16 9.67L10.97 8.2L10.98 7.76L10.27 7.37L7.14 8.61Z",
+        "fill": "#ffde00"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.16 12.11L10.96 10.64L10.98 9.27L7.14 10.75Z",
+        "fill": "#ffde00"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.99 7.73L12.58 6.81L12.58 4.93L10.95 4L9.32 4.93L9.32 6.81L10.81 7.68Z",
+        "fill": "#252026"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.82 10.75L14.82 9.7L10.99 8.2L7.12 9.71L7.13 10.75L10.96 9.26L14.76 10.74Z",
+        "fill": "#252026"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.84 13.2L14.84 12.13L11.02 10.64L7.12 12.14L7.13 13.2L10.99 11.69Z",
+        "fill": "#252026"
+      }
+    ],
+    "carry-flap": [
+      {
+        "type": "polygon",
+        "d": "M11.11 13.7L10.23 13.7L9.59 13.44L7.95 12.32L7.71 12.23L7.18 11.67L6.94 11.05L6.94 10.39L6.87 10.27L6.87 8.91L6.82 8.82L6.82 7.89L6.87 7.65L7.01 7.37L7.43 6.95L7.81 6.76L8.26 6.64L9.21 6.26L9.47 5.93L9.95 5.57L11.42 4.86L12.25 4.53L12.87 4.2L13.13 4.1L13.51 4.1L13.67 4.23L13.74 4.44L13.69 5.13L13.5 5.54L13.56 5.67L14.96 6.5L15.39 6.69L15.91 7.07L17.1 6.52L17.46 6.52L17.66 6.73L17.61 7.68L17.4 8.22L17.04 8.86L16.33 9.53L16.33 10.88L16.21 11L16.21 11.31L16.09 11.55L15.72 11.99L15.2 12.25Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.9 7.24L7.06 7.12L7.06 6.96L6.91 6.78L6.05 6.2L5.81 6.35L5.77 6.48L5.93 6.67L6.64 7.18Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.23 6.95L7.35 6.73L7.15 6.22L6.94 5.85L6.91 5.67L6.65 5.59L6.49 5.77L6.49 5.93L6.93 6.86L7.02 6.95Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.71 7.62L6.84 7.53L6.88 7.32L6.72 7.17L5.86 7.12L5.74 7.03L5.54 7.19L5.54 7.39L5.66 7.54Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.31 10.69L15.5 10.26L15.5 9.83L15.33 9.54L15.33 9.41L15.56 9.27L15.81 9.49L15.9 9.37L16.5 8.94L16.76 8.64L15.84 9.12L15.63 8.98L15.69 8.76L17.13 8.03L17.24 7.76L15.61 8.54L15.41 8.53L15.38 8.27L15.6 8.1L17.28 7.32L17.37 7.12L17.37 7L17.31 6.9L17.22 6.88L16.81 7.04L14.11 8.32L13.69 8.63L13.38 9.01L13.14 9.54L13.07 10.17L13.14 10.61L13.3 10.95L13.59 11.24L13.93 11.4L14.31 11.42L14.82 11.23L15.15 10.92Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.77 11.76L9.16 12.69L9.16 12.64L9.76 13.09L10.06 13.23L10.5 13.32L10.8 13.32L11.27 13.23L13.45 12.46L13.46 12.35L13.61 12.41L15.25 11.83L15.46 11.71L15.7 11.47L15.86 11.22L15.97 10.81L15.96 10.05L15.78 10.64L15.61 10.98L15.41 11.25L14.99 11.63L14.52 11.82L13.86 11.82L13.29 11.55L12.95 11.16L12.79 10.68L12.74 9.84L12.84 9.33L12.97 8.99L13.23 8.57L13.52 8.24L13.89 7.98L15.51 7.23L15.25 7.04L13.07 5.85L12.67 5.74L12.02 5.69L11.6 5.79L7.76 7.18L7.41 7.45L7.18 7.85L7.23 10.31L7.34 11.18L7.5 11.47Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.29 5.82L11.6 5.31L12.38 5.19L13.37 4.71L13.38 4.45L13.28 4.41L13.01 4.52Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.21 8.55L9.32 8.25L9.61 7.95L9.93 7.77L11.8 7.11L12.5 7.48L12.9 7.83L13.04 8.16L13.05 8.86L13.23 8.57L13.61 8.17L13.56 7.78L13.38 7.45L13.19 7.26L12.54 6.86L13.93 6.33L13.29 6L11.78 6.48L10.94 6.04L10.78 6.08L10.21 6.31L11.07 6.75L9.57 7.25L9.2 7.5L8.94 7.76L8.69 8.2L8.62 8.53L8.66 12.34L8.77 12.45L9.27 12.72Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.97 12.61L13.45 12.46L13.46 12.35L13.56 12.39L13.58 11.71L13.29 11.55L12.98 11.18Z",
+        "fill": "truck"
+      }
+    ],
+    "choir-express": [
+      {
+        "type": "polygon",
+        "d": "M6.1 5.93L5.51 6.21L5 6.63L4.63 7.17L4.43 7.74L4.09 9.68L4.07 10.28L4.27 10.88L4.68 11.36L5.23 11.66L5.86 11.76L6.49 11.65L7.08 11.37L7.53 10.98L6.86 10.21L6.52 10.51L6.18 10.67L5.85 10.72L5.56 10.68L5.34 10.55L5.18 10.37L5.1 10.12L5.11 9.78L5.43 8L5.55 7.63L5.77 7.33L6.06 7.08L6.39 6.93L6.72 6.88L7.01 6.93L7.23 7.06L7.44 7.32L8.24 6.69L7.91 6.27L7.37 5.95L6.74 5.84Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.61 10.73L9.86 9.31L11.72 9.31L11.72 8.29L10.05 8.29L10.3 6.87L12.56 6.87L12.56 5.85L9.45 5.85L8.38 11.75L11.68 11.75L11.68 10.73Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.14 5.8L15.41 7.86L14.47 5.91L13.55 6.35L14.69 8.72L12.66 11.14L13.44 11.8L15.17 9.74L16.11 11.69L17.04 11.25L15.9 8.88L17.93 6.46Z",
+        "fill": "accent"
+      }
+    ],
+    "ckeex": [
+      {
+        "type": "polygon",
+        "d": "M8.58 6.66L6.99 8.26L6.99 6.66L6.24 6.66L6.24 10.94L6.99 10.94L6.99 9.31L7.34 8.95L8.53 10.94L9.16 10.56L7.89 8.41L9.11 7.18Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M3.93 6.72L3.51 6.93L3.18 7.26L2.97 7.67L2.9 8.1L2.9 9.5L2.97 9.93L3.18 10.34L3.51 10.67L3.93 10.88L4.38 10.95L4.84 10.87L5.25 10.65L5.53 10.36L5 9.84L4.8 10.05L4.6 10.15L4.38 10.19L4.15 10.16L3.95 10.06L3.79 9.9L3.68 9.7L3.64 9.44L3.64 8.16L3.68 7.9L3.79 7.7L3.95 7.54L4.15 7.44L4.38 7.41L4.6 7.45L4.8 7.55L5 7.76L5.53 7.24L5.25 6.95L4.84 6.73L4.38 6.65Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.62 10.2L10.62 9.17L11.9 9.17L11.9 8.43L10.62 8.43L10.62 7.4L12.19 7.4L12.19 6.66L9.87 6.66L9.87 10.94L12.19 10.94L12.19 10.2Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.22 10.2L13.64 10.2L13.64 9.17L14.92 9.17L14.92 8.43L13.64 8.43L13.64 7.4L15.22 7.4L15.22 6.66L12.9 6.66L12.9 10.94L15.22 10.94Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M19.1 7.07L18.48 6.66L17.51 8.13L16.54 6.66L15.92 7.07L17.07 8.8L15.92 10.53L16.54 10.94L17.51 9.47L18.48 10.94L19.1 10.53L17.96 8.8Z",
+        "fill": "#000000"
+      }
+    ],
+    "corporate-couriers": [
+      {
+        "type": "polygon",
+        "d": "M9.68 5.91L9.04 5.8L8.4 5.9L7.82 6.19L7.35 6.64L7.06 7.22L6.96 7.82L6.96 9.78L7.06 10.38L7.35 10.96L7.82 11.41L8.4 11.7L9.04 11.8L9.68 11.69L10.25 11.39L10.65 10.98L9.9 10.26L9.62 10.55L9.34 10.69L9.03 10.75L8.71 10.7L8.43 10.56L8.2 10.34L8.06 10.05L8 9.7L8 7.9L8.06 7.55L8.2 7.26L8.43 7.04L8.71 6.9L9.03 6.85L9.34 6.91L9.62 7.05L9.9 7.34L10.65 6.62L10.25 6.21Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.07 5.91L13.43 5.8L12.79 5.9L12.21 6.19L11.75 6.64L11.45 7.22L11.35 7.82L11.35 9.78L11.45 10.38L11.75 10.96L12.21 11.41L12.79 11.7L13.43 11.8L14.07 11.69L14.64 11.39L15.04 10.98L14.29 10.26L14.01 10.55L13.73 10.69L13.42 10.75L13.1 10.7L12.82 10.56L12.59 10.34L12.45 10.05L12.39 9.7L12.39 7.9L12.45 7.55L12.59 7.26L12.82 7.04L13.1 6.9L13.42 6.85L13.73 6.91L14.01 7.05L14.29 7.34L15.04 6.62L14.64 6.21Z",
+        "fill": "accent"
+      }
+    ],
+    "correios-angola": [
+      {
+        "type": "polygon",
+        "d": "M9.43 4.32L9.4 4.34L8.93 4.75L8.64 5.25L8.9 5.4L9.16 4.94L9.57 4.58L9.92 4.45L12.05 4.45L12.57 5.14L12.93 5.84L12.93 9.48L13.04 9.9L5.94 9.9L5.94 10.33L13.15 10.33L14.13 14L15.04 14L15.04 5.84L15.4 5.2L15.92 4.45L16.36 4.45L16.36 4L9.92 4L9.92 4.13Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.57 6.53L5.76 6.53L5.76 7.7L7.63 7.7L7.63 8.01L6.18 8.01L6.18 8.55L8.77 8.55L8.77 8.85L5.64 8.85L5.64 9.42L12.57 9.42Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.81 6.82L11.64 6.57L10.34 7.46L9.1 6.57L8.92 6.82L10.34 7.83Z",
+        "fill": "truck"
+      }
+    ],
+    "correos-ecuador": [
+      {
+        "type": "polygon",
+        "d": "M11.99 7.11L13.72 10.99L16.41 9.27L18.67 9.27L18.67 8.93L19 8.85L18.72 7.77L17.95 7.16L13.51 7.16L14.18 9.49L14.83 9.3L14.4 7.84L17.71 7.84L18.12 8.16L18.24 8.6L16.22 8.6L14.02 10L12.15 5.81L3 5.81L3 6.49L11.71 6.49L11.86 6.82L11.53 6.59L10.25 8.45L8.34 6.99L4.35 6.99L4.35 7.67L8.11 7.67L8.78 8.17L5.36 8.17L5.36 8.85L8.43 8.85L9.36 10.79L13.03 10.79L13.03 10.11L9.79 10.11L8.91 8.27L10.41 9.41Z",
+        "fill": "#202c5c"
+      }
+    ],
+    "danniao": [
+      {
+        "type": "polygon",
+        "d": "M10.08 8.63L10.24 8.62L10.5 8.52L11.53 8.52L12.18 8.75L14.14 9.74L14.62 9.88L15.2 9.88L15.71 9.69L16.04 9.48L16.47 8.97L16.73 8.33L16.73 7.7L16.48 7.09L16.06 6.58L15.51 6.25L15.05 6.13L14.59 6.14L14.19 6.25L13.01 6.81L12.52 7.13L11.98 7.38L11.58 7.5L10.39 7.5L10.17 7.39L9.93 7.35L8.07 6.35L7.38 6.14L6.87 6.14L6.49 6.25L5.92 6.6L5.52 7.06L5.27 7.63L5.27 8.41L5.46 8.87L5.67 9.18L5.95 9.48L6.34 9.72L6.79 9.87L7.39 9.88L7.77 9.77Z",
+        "fill": "#482c21"
+      },
+      {
+        "type": "circle",
+        "cx": 11,
+        "cy": 5.54,
+        "r": 1.38,
+        "fill": "#482c21"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.55 14.2L10.42 14.2L10.22 14.09L9.93 14.06L9.31 13.75L9.03 13.52L8.47 12.91L8.1 12.11L8.1 11.86L8.02 11.63L8.02 11.17L8.1 10.81L8.33 10.44L8.51 10.25L9.28 9.8L10.36 9.31L10.59 9.31L10.84 9.23L11.16 9.23L11.41 9.31L11.61 9.31L12.01 9.46L12.97 9.94L13.37 10.17L13.61 10.38L13.9 10.83L13.9 10.98L13.98 11.17L13.98 11.54L13.9 11.83L13.9 12.08L13.64 12.71L13.3 13.19L12.69 13.75L12.26 13.97L11.98 14.09L11.78 14.09Z",
+        "fill": "accent"
+      }
+    ],
+    "ddu-express": [
+      {
+        "type": "polygon",
+        "d": "M3.64 11.8L4.98 11.8L5.73 11.7L6.45 11.4L7.07 10.92L7.55 10.3L7.85 9.57L7.95 8.8L7.85 8.02L7.55 7.3L7.07 6.67L6.45 6.2L5.73 5.9L4.98 5.8L3.64 5.8Z",
+        "fill": "#241b3a"
+      },
+      {
+        "type": "polygon",
+        "d": "M4.92 6.84L5.46 6.91L5.93 7.11L6.33 7.42L6.64 7.82L6.84 8.29L6.9 8.8L6.84 9.3L6.64 9.77L6.33 10.18L5.93 10.49L5.46 10.68L4.92 10.75L4.68 10.75L4.68 6.84Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.29 11.8L11.03 11.7L11.76 11.4L12.38 10.92L12.86 10.3L13.16 9.57L13.26 8.8L13.16 8.02L12.86 7.3L12.38 6.67L11.76 6.2L11.03 5.9L10.29 5.8L8.94 5.8L8.94 11.8Z",
+        "fill": "#241b3a"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.76 6.91L11.23 7.11L11.64 7.42L11.95 7.82L12.14 8.29L12.21 8.8L12.14 9.3L11.95 9.77L11.64 10.18L11.23 10.49L10.76 10.68L10.22 10.75L9.98 10.75L9.98 6.84L10.22 6.84Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.52 10.77L14.85 11.2L15.28 11.52L15.77 11.73L16.31 11.8L16.84 11.73L17.34 11.52L17.76 11.2L18.09 10.77L18.3 10.27L18.36 9.77L18.36 5.8L17.32 5.8L17.32 9.71L17.28 10L17.18 10.24L17.02 10.45L16.81 10.61L16.57 10.72L16.31 10.75L16.04 10.72L15.8 10.61L15.59 10.45L15.43 10.24L15.33 10L15.29 9.71L15.29 5.8L14.25 5.8L14.25 9.77L14.32 10.27Z",
+        "fill": "#241b3a"
+      }
+    ],
+    "dtd-pk": [
+      {
+        "type": "polygon",
+        "d": "M9.21 5.8L9.21 6.84L10.22 6.84L10.22 11.8L11.26 11.8L11.26 6.84L12.28 6.84L12.28 5.8Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M5.76 11.8L6.5 11.7L7.23 11.4L7.85 10.92L8.33 10.3L8.63 9.58L8.73 8.8L8.63 8.02L8.33 7.3L7.85 6.68L7.23 6.2L6.5 5.9L5.76 5.8L4.41 5.8L4.41 11.8Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.23 6.91L6.7 7.11L7.11 7.42L7.42 7.82L7.61 8.29L7.68 8.8L7.61 9.31L7.42 9.78L7.11 10.18L6.7 10.49L6.23 10.69L5.69 10.76L5.45 10.76L5.45 6.84L5.69 6.84Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.62 11.8L15.36 11.7L16.09 11.4L16.71 10.92L17.19 10.3L17.49 9.58L17.59 8.8L17.49 8.02L17.19 7.3L16.71 6.68L16.09 6.2L15.36 5.9L14.62 5.8L13.27 5.8L13.27 11.8Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.09 6.91L15.56 7.11L15.97 7.42L16.28 7.82L16.47 8.29L16.54 8.8L16.47 9.31L16.28 9.78L15.97 10.18L15.56 10.49L15.09 10.69L14.55 10.76L14.31 10.76L14.31 6.84L14.55 6.84Z",
+        "fill": "truck"
+      }
+    ],
+    "endeavour-delivery": [
+      {
+        "type": "polygon",
+        "d": "M10.99 3.9L10.25 3.98L9.54 4.19L8.89 4.54L8.32 5.01L7.85 5.59L7.49 6.25L7.28 6.96L7.21 7.7L7.25 8.24L7.37 8.78L7.56 9.29L7.83 9.76L8.25 10.3L9.24 11.24L9.86 11.91L10.28 12.48L10.83 13.42L10.92 13.48L11.01 13.5L11.11 13.47L11.18 13.41L11.7 12.5L12.1 11.93L12.7 11.29L13.64 10.42L13.94 10.08L14.17 9.76L14.44 9.27L14.64 8.76L14.75 8.23L14.79 7.69L14.72 6.94L14.5 6.23L14.15 5.58L13.67 5L13.1 4.54L12.45 4.19L11.74 3.97Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.77 9.95L8.37 9.47L8.08 8.92L7.89 8.33L7.83 7.71L7.89 7.1L8.06 6.5L8.36 5.94L8.75 5.46L9.22 5.06L9.77 4.77L10.36 4.59L10.97 4.52L11.59 4.58L12.19 4.75L12.74 5.04L13.23 5.43L13.51 5.76L13.75 6.12L13.94 6.51L14.08 6.92L14.15 7.36L14.17 7.79L14.12 8.23L14.02 8.65L13.8 9.17L13.48 9.66L13.18 10L12.32 10.8L11.71 11.43L11.42 11.8L11 12.47L10.58 11.82L10.24 11.4L9.62 10.75Z",
+        "fill": "truck"
+      },
+      {
+        "type": "line",
+        "d": "M11 5.74L11 5.19M11.51 5.81L11.65 5.28M11.99 6L12.26 5.53M12.39 6.32L12.78 5.93M12.71 6.72L13.18 6.45M12.9 7.2L13.43 7.06M12.97 7.71L13.52 7.71M12.9 8.22L13.43 8.36M12.71 8.7L13.18 8.97M12.39 9.1L12.78 9.49M11.99 9.42L12.26 9.89M11.51 9.61L11.65 10.14M11 9.68L11 10.23M10.49 9.61L10.35 10.14M10.01 9.42L9.74 9.89M9.61 9.1L9.22 9.49M9.29 8.7L8.82 8.97M9.1 8.22L8.57 8.36M9.03 7.71L8.48 7.71M9.1 7.2L8.57 7.06M9.29 6.72L8.82 6.45M9.61 6.32L9.22 5.93M10.01 6L9.74 5.53M10.49 5.81L10.35 5.28",
+        "stroke": "accent",
+        "strokeWidth": 0.2
+      }
+    ],
+    "etomars": [
+      {
+        "type": "polygon",
+        "d": "M12.7 6.26L10.32 6.24L11.5 4L12.59 5.94Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.47 14L12.61 14L12.55 13.94L12.53 10.88L12.03 10.9L12.03 13.94L11.97 14L11.01 13.98L10.99 10.88L10.45 10.9L10.45 13.94L10.39 14L9.53 14L9.47 13.94L9.47 6.8L9.53 6.74L13.51 6.74L13.57 6.8L13.55 7.76L10.45 7.78L10.45 8.25L10.52 8.32L13.57 8.34L13.55 9.34L10.45 9.36L10.47 9.85L13.51 9.85L13.57 9.92L13.57 13.94Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.89 13.4L7.57 13.4L7.5 13.34L8.94 10.92L8.96 13.34Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.47 13.4L14.09 13.38L14.11 10.92L15.5 13.29Z",
+        "fill": "#000000"
+      }
+    ],
+    "ezship": [
+      {
+        "type": "polygon",
+        "d": "M3.56 9.13L4.7 9.13L4.7 8.47L3.56 8.47L3.56 7.56L4.95 7.56L4.95 6.9L2.9 6.9L2.9 10.7L4.95 10.7L4.95 10.04L3.56 10.04Z",
+        "fill": "#0000c0"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.16 6.9L6.16 7.56L7.46 7.56L5.58 10.7L8.04 10.7L8.04 10.04L6.74 10.04L8.63 6.9Z",
+        "fill": "#0000c0"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.58 9.27L10.77 9.54L10.71 9.81L10.39 10.04L9.94 10.04L9.51 9.74L9.13 10.28L9.73 10.7L10.6 10.7L11.3 10.2L11.47 9.4L10.99 8.71L9.77 8.33L9.59 8.06L9.65 7.78L9.95 7.56L10.38 7.56L10.78 7.86L11.17 7.33L10.59 6.9L9.73 6.9L9.06 7.4L8.89 8.2L9.36 8.89Z",
+        "fill": "#0000c0"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.7 10.7L14.7 6.9L14.04 6.9L14.04 8.47L12.76 8.47L12.76 6.9L12.1 6.9L12.1 10.7L12.76 10.7L12.76 9.13L14.04 9.13L14.04 10.7Z",
+        "fill": "#0000c0"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.33 6.9L15.33 10.7L15.99 10.7L15.99 6.9Z",
+        "fill": "#0000c0"
+      },
+      {
+        "type": "polygon",
+        "d": "M18.76 7.23L18.39 6.98L17.98 6.9L16.62 6.9L16.62 10.7L17.27 10.7L17.27 9.19L17.98 9.19L18.39 9.11L18.76 8.86L19.01 8.49L19.1 8.05L19.01 7.61Z",
+        "fill": "#0000c0"
+      },
+      {
+        "type": "polygon",
+        "d": "M18.29 8.39L18.13 8.49L17.92 8.53L17.27 8.53L17.27 7.56L17.92 7.56L18.13 7.6L18.29 7.71L18.39 7.86L18.43 8.05L18.39 8.23Z",
+        "fill": "truck"
+      }
+    ],
+    "fare-rata": [
+      {
+        "type": "polygon",
+        "d": "M6.16 5.49L6.16 4.57L7.47 4.57L7.47 3.9L5.49 3.9L5.49 7.74L6.16 7.74L6.16 6.15L7.23 6.15L7.23 5.49Z",
+        "fill": "#002043"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.6 7.61L8.25 7.74L8.44 6.72L9.66 6.72L9.85 7.74L10.51 7.61L9.8 3.9L8.3 3.9Z",
+        "fill": "#002043"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.57 6.06L8.85 4.57L9.25 4.57L9.53 6.06Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.69 4.61L13.44 4.23L13.06 3.98L12.65 3.9L11.14 3.9L11.14 7.74L11.81 7.74L11.81 6.21L12.01 6.21L13.29 7.74L13.8 7.31L12.85 6.18L13.06 6.13L13.44 5.88L13.69 5.5L13.78 5.06Z",
+        "fill": "#002043"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.07 5.24L12.96 5.4L12.8 5.51L12.58 5.55L11.81 5.55L11.81 4.57L12.58 4.57L12.8 4.61L12.96 4.71L13.07 4.87L13.1 5.06Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.25 6.15L16.25 5.49L15.1 5.49L15.1 4.57L16.51 4.57L16.51 3.9L14.43 3.9L14.43 7.74L16.51 7.74L16.51 7.07L15.1 7.07L15.1 6.15Z",
+        "fill": "#002043"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.97 10.18L7.71 9.8L7.34 9.55L6.92 9.46L5.42 9.46L5.42 13.3L6.08 13.3L6.08 11.78L6.28 11.78L7.56 13.3L8.07 12.87L7.12 11.74L7.34 11.7L7.71 11.44L7.97 11.07L8.05 10.62Z",
+        "fill": "#002043"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.34 10.81L7.23 10.96L7.08 11.07L6.86 11.11L6.08 11.11L6.08 10.13L6.86 10.13L7.08 10.17L7.23 10.28L7.34 10.44L7.38 10.62Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.66 13.18L9.31 13.3L9.5 12.29L10.72 12.29L10.92 13.3L11.57 13.18L10.87 9.46L9.36 9.46Z",
+        "fill": "#002043"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.63 11.62L9.91 10.13L10.31 10.13L10.6 11.62Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.95 13.3L12.95 10.13L13.6 10.13L13.6 9.46L11.64 9.46L11.64 10.13L12.29 10.13L12.29 13.3Z",
+        "fill": "#002043"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.67 13.18L14.32 13.3L14.52 12.29L15.74 12.29L15.93 13.3L16.58 13.18L15.88 9.46L14.38 9.46Z",
+        "fill": "#002043"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.64 11.62L14.93 10.13L15.33 10.13L15.61 11.62Z",
+        "fill": "truck"
+      }
+    ],
+    "fasttrack-ar": [
+      {
+        "type": "polygon",
+        "d": "M12.92 6.64L13.04 6.87L12.92 7.17L12.52 7.42L12.07 7.42L11.72 7.13L11.31 7.64L11.84 8.07L12.71 8.07L13.45 7.6L13.76 6.83L13.38 6.1L12.24 5.73L12.13 5.51L12.25 5.2L12.62 4.95L13.05 4.95L13.37 5.23L13.8 4.74L13.29 4.3L12.43 4.3L11.71 4.77L11.41 5.54L11.78 6.26Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.84 7.9L8.45 8.12L8.84 7.07L10.03 7.07L10.04 8.01L10.69 8.01L10.65 4.3L9.17 4.3Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.02 6.42L9.08 6.42L9.62 4.95L10.01 4.95Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.86 4.95L8.21 4.95L8.21 4.3L6.31 4.3L5.65 8.01L6.29 8.13L6.58 6.51L7.68 6.51L7.68 5.86L6.7 5.86Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.45 8.01L15.09 8.13L15.66 4.95L16.35 4.95L16.35 4.3L14.42 4.3L14.42 4.95L15 4.95Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.77 10.32L12.65 10.68L12.42 11.92L12.42 12.3L12.54 12.68L12.8 12.99L13.15 13.18L13.56 13.25L13.96 13.18L14.34 13L14.62 12.75L14.19 12.26L13.98 12.45L13.76 12.55L13.55 12.58L13.37 12.56L13.22 12.48L13.13 12.36L13.07 12.2L13.08 11.98L13.28 10.85L13.36 10.61L13.5 10.42L13.68 10.26L13.9 10.16L14.11 10.13L14.29 10.16L14.43 10.24L14.56 10.41L15.08 10.01L14.87 9.74L14.52 9.54L14.12 9.47L13.71 9.53L13.33 9.7L13.01 9.97Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.86 9.41L15.18 13.18L15.82 13.3L16.08 11.84L16.49 11.5L17.19 13.2L17.8 12.95L17.01 11.05L18.31 9.95L17.89 9.45L16.27 10.83L16.5 9.53Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.56 13.29L9.95 12.25L11.14 12.25L11.15 13.18L11.8 13.18L11.76 9.47L10.28 9.47L8.95 13.07Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.19 11.59L10.73 10.13L11.12 10.13L11.13 11.59Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M4.93 10.13L5.62 10.13L5.62 9.47L3.69 9.47L3.69 10.13L4.26 10.13L3.71 13.18L4.35 13.3Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.55 9.82L8.2 9.56L7.8 9.47L6.37 9.47L5.7 13.18L6.34 13.3L6.62 11.75L6.85 11.75L7.82 13.21L8.36 12.85L7.62 11.72L7.91 11.67L8.3 11.44L8.6 11.09L8.76 10.67L8.75 10.22Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.03 10.75L7.87 10.93L7.68 11.05L7.44 11.09L6.74 11.09L6.92 10.13L7.73 10.13L7.92 10.17L8.03 10.25L8.1 10.38L8.1 10.55Z",
+        "fill": "truck"
+      }
+    ],
+    "fxdc-post": [
+      {
+        "type": "polygon",
+        "d": "M3.81 11.42L3.81 9.26L5.27 9.26L5.27 8.34L3.81 8.34L3.81 7.09L5.61 7.09L5.61 6.18L2.9 6.18L2.9 11.42Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.48 6.68L7.88 8.8L6.48 10.92L7.24 11.42L8.42 9.63L9.61 11.42L10.37 10.92L8.97 8.8L10.37 6.68L9.61 6.18L8.42 7.97L7.24 6.18Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.06 11.34L13.69 11.07L14.24 10.66L14.66 10.11L14.92 9.48L15.01 8.8L14.92 8.12L14.66 7.49L14.24 6.94L13.69 6.53L13.06 6.26L12.41 6.18L11.23 6.18L11.23 11.42L12.41 11.42Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.23 7.32L13.59 7.59L13.86 7.95L14.03 8.36L14.09 8.8L14.03 9.24L13.86 9.65L13.59 10.01L13.23 10.28L12.82 10.45L12.35 10.51L12.14 10.51L12.14 7.09L12.35 7.09L12.82 7.15Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.13 6.26L16.62 6.51L16.22 6.91L15.96 7.42L15.87 7.94L15.87 9.66L15.96 10.18L16.22 10.69L16.62 11.09L17.13 11.34L17.69 11.43L18.25 11.33L18.76 11.07L19.1 10.71L18.45 10.08L18.2 10.33L17.96 10.46L17.68 10.51L17.41 10.47L17.16 10.34L16.96 10.15L16.83 9.9L16.78 9.59L16.78 8.01L16.83 7.7L16.96 7.45L17.16 7.26L17.41 7.13L17.68 7.09L17.96 7.14L18.2 7.27L18.45 7.52L19.1 6.89L18.76 6.53L18.25 6.27L17.69 6.17Z",
+        "fill": "accent"
+      }
+    ],
+    "global-business-tw": [
+      {
+        "type": "polygon",
+        "d": "M13.5 8.4L13.54 8.14L13.54 7.96L13.5 7.71L13.37 7.46L13.18 7.26L12.92 7.13L12.67 7.09L11.46 7.09L11.46 10.51L12.86 10.51L13.13 10.47L13.41 10.33L13.62 10.11L13.76 9.84L13.8 9.56L13.8 9.37L13.76 9.09L13.62 8.82L13.4 8.6Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.05 9.01L12.81 9.01L12.95 9.03L13.05 9.09L13.14 9.17L13.19 9.27L13.21 9.41L13.21 9.52L13.19 9.65L13.14 9.76L13.05 9.84L12.95 9.89L12.81 9.92L12.05 9.92Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.89 7.81L12.93 7.89L12.95 8.01L12.95 8.09L12.93 8.21L12.89 8.29L12.82 8.36L12.74 8.4L12.62 8.42L12.05 8.42L12.05 7.68L12.62 7.68L12.74 7.7L12.82 7.74Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.63 9.92L6.63 7.09L6.04 7.09L6.04 10.51L7.75 10.51L7.75 9.92Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.05 7.19L9.52 7.08L9 7.19L8.55 7.49L8.25 7.93L8.15 8.43L8.15 9.17L8.25 9.67L8.55 10.11L9 10.41L9.52 10.52L10.05 10.41L10.5 10.11L10.8 9.67L10.89 9.17L10.89 8.43L10.8 7.93L10.5 7.49Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.24 9.43L10.07 9.68L9.82 9.85L9.52 9.91L9.23 9.85L8.98 9.68L8.81 9.43L8.75 9.11L8.75 8.49L8.81 8.17L8.98 7.92L9.23 7.75L9.52 7.69L9.82 7.75L10.07 7.92L10.24 8.17L10.3 8.49L10.3 9.11Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.83 10.4L16.2 7.09L14.86 7.09L14.23 10.4L14.81 10.51L14.98 9.61L16.07 9.61L16.24 10.51Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.1 9.01L15.35 7.68L15.71 7.68L15.96 9.01Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.98 9.92L17.98 7.09L17.39 7.09L17.39 10.51L19.1 10.51L19.1 9.92Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M4.45 9.86L4.19 9.91L3.92 9.86L3.7 9.71L3.55 9.49L3.49 9.19L3.49 8.4L3.53 8.16L3.63 7.97L3.78 7.82L3.98 7.72L4.19 7.69L4.41 7.72L4.6 7.83L4.78 8.02L5.21 7.6L4.96 7.34L4.6 7.16L4.2 7.09L3.8 7.15L3.43 7.33L3.15 7.61L2.96 7.98L2.9 8.35L2.9 9.25L2.99 9.72L3.27 10.14L3.69 10.42L4.19 10.52L4.68 10.42L5.1 10.14L5.38 9.72L5.47 9.25L5.47 8.64L4.19 8.64L4.19 9.24L4.87 9.24L4.82 9.49L4.67 9.71Z",
+        "fill": "accent"
+      }
+    ],
+    "honducor": [
+      {
+        "type": "polygon",
+        "d": "M11.52 10.9L15.16 9.33L15.16 5.31L11.46 3.9L7.64 5.19L7.64 9.21Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.55 5.35L11.26 4.44L11.37 5.74L13.16 5.8L11.46 6.35Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.64 5.86L14.64 5.79L14.72 5.77L14.72 9.04L11.73 10.32L11.68 6.75L14.45 5.85Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.71 4.47L14.15 5.4L11.78 5.31Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.6 11.4L7.78 11.94L8.34 11.94L7.88 12.27L8.06 12.81L7.6 12.48L7.14 12.81L7.32 12.27L6.86 11.94L7.42 11.94Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.5 11.4L9.68 11.94L10.24 11.94L9.78 12.27L9.96 12.81L9.5 12.48L9.04 12.81L9.22 12.27L8.76 11.94L9.32 11.94Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.4 11.4L11.58 11.94L12.14 11.94L11.68 12.27L11.86 12.81L11.4 12.48L10.94 12.81L11.12 12.27L10.66 11.94L11.22 11.94Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.3 11.4L13.48 11.94L14.04 11.94L13.58 12.27L13.76 12.81L13.3 12.48L12.84 12.81L13.02 12.27L12.56 11.94L13.12 11.94Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.2 11.4L15.38 11.94L15.94 11.94L15.48 12.27L15.66 12.81L15.2 12.48L14.74 12.81L14.92 12.27L14.46 11.94L15.02 11.94Z",
+        "fill": "accent"
+      }
+    ],
+    "hy-express": [
+      {
+        "type": "polygon",
+        "d": "M11 3.9L9.89 4.46L9.89 7.55L7.73 8.66L7.73 6.08L8.83 5.52L8.83 5L6.43 6.22L6.43 11.17L11 13.49L11 13.5L15.57 11.17L15.57 6.22L14.24 5.54L14.24 8.66L13.21 8.14L13.21 5.02Z",
+        "fill": "#041841"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.73 11.31L7.73 9.87L9.89 8.76L9.89 11.14L11.01 11.71L11.01 4.43L12.03 4.94L12.03 9.13L12.78 9.13L14.24 9.87L14.24 10.43L12.03 11.55L12.03 12.46L11 12.98L11 12.97Z",
+        "fill": "truck"
+      }
+    ],
+    "indopaket": [
+      {
+        "type": "polygon",
+        "d": "M6.39 5L5.76 5L5.76 8.6L6.39 8.6Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.14 8.6L9.57 8.6L9.57 5L8.95 5L8.95 7.98L8.71 7.98L8.41 5L6.98 5L6.98 8.6L7.61 8.6L7.61 5.62L7.84 5.62Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.97 8.6L11.42 8.54L11.86 8.36L12.23 8.07L12.52 7.7L12.7 7.27L12.76 6.8L12.7 6.33L12.52 5.9L12.23 5.53L11.86 5.24L11.42 5.06L10.97 5L10.17 5L10.17 8.6Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.26 5.67L11.54 5.78L11.78 5.97L11.97 6.21L12.09 6.5L12.13 6.8L12.09 7.1L11.97 7.39L11.78 7.63L11.54 7.82L11.26 7.93L10.93 7.98L10.79 7.98L10.79 5.62L10.93 5.62Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.82 5.42L15.35 5.1L14.79 4.99L14.24 5.1L13.77 5.42L13.46 5.89L13.35 6.41L13.35 7.19L13.46 7.71L13.77 8.18L14.24 8.5L14.79 8.61L15.35 8.5L15.82 8.18L16.13 7.71L16.24 7.19L16.24 6.41L16.13 5.89Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.61 7.13L15.54 7.47L15.37 7.73L15.11 7.91L14.79 7.97L14.48 7.91L14.22 7.73L14.04 7.47L13.98 7.13L13.98 6.47L14.04 6.13L14.22 5.87L14.48 5.69L14.79 5.63L15.11 5.69L15.37 5.87L15.54 6.13L15.61 6.47Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.79 10.43L16.4 10.43L16.4 13.41L17.03 13.41L17.03 10.43L17.64 10.43L17.64 9.81L15.79 9.81Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.17 9.81L10.82 11.15L10.82 9.81L10.2 9.81L10.2 13.41L10.82 13.41L10.82 12.03L11.12 11.73L12.12 13.41L12.65 13.09L11.58 11.27L12.61 10.25Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.4 11.66L6.64 11.31L6.72 10.89L6.64 10.47L6.4 10.12L6.04 9.88L5.66 9.81L4.36 9.81L4.36 13.41L4.99 13.41L4.99 11.98L5.66 11.98L6.04 11.9Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M5.95 10.57L6.05 10.72L6.08 10.89L6.05 11.07L5.95 11.21L5.8 11.31L5.6 11.35L4.99 11.35L4.99 10.43L5.6 10.43L5.8 10.47Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.94 9.81L7.53 9.81L6.87 13.29L7.48 13.41L7.66 12.45L8.81 12.45L8.99 13.41L9.6 13.29Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.05 10.43L8.42 10.43L8.69 11.83L7.78 11.83Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.2 12.78L13.87 12.78L13.87 11.92L14.95 11.92L14.95 11.29L13.87 11.29L13.87 10.43L15.2 10.43L15.2 9.81L13.25 9.81L13.25 13.41L15.2 13.41Z",
+        "fill": "accent"
+      }
+    ],
+    "ipostel": [
+      {
+        "type": "polygon",
+        "d": "M8.87 4.75L9.62 4.38L10.38 4.14L11.34 4.02L10.66 4L10.61 4.05L10.05 4.09L9.67 4.24L9.53 4.24L8.49 4.71L8.06 4.99L7.1 5.91L6.58 6.67L6.15 7.7L6.38 7.78L6.57 7.78L6.77 7.14L7.24 6.29L7.52 5.91L8.44 5.04Z",
+        "fill": "#f2de1c"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.48 8.13L6.08 8.05L6.06 8.22L6.01 8.27L6.01 8.6L5.96 8.65L5.96 8.99L6.21 9.09L6.37 9.09L6.39 8.55L6.44 8.5L6.44 8.22Z",
+        "fill": "#f2de1c"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.39 9.5L6.22 9.42L5.99 9.39L6.01 9.92L6.06 9.97L6.06 10.16L6.14 10.43L6.32 10.52L6.57 10.52L6.44 10.01Z",
+        "fill": "#f2de1c"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.21 12.96L7.29 12L6.96 11.48L6.72 10.91L6.3 10.86L6.48 11.33L6.86 11.95L7.29 12.47L7.83 12.96L8.54 13.43L9.15 13.72L9.95 13.95L10.47 14L10.47 13.95L9.9 13.86L9.38 13.67L8.82 13.39Z",
+        "fill": "#f2de1c"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.42 7.19L13.99 6.56L13.6 6.16L13.17 5.82L12.65 5.51L12.13 5.31L11.55 5.16L10.95 5.1L10.39 5.12L9.8 5.23L9.28 5.41L8.78 5.66L8.28 6L7.84 6.41L7.49 6.84L7.2 7.31L6.97 7.86L7.48 7.88L7.56 7.92L10.08 7.92L10.15 7.88L10.69 7.88L10.77 7.83L11.11 7.83L11.19 7.78L12.15 7.69L12.22 7.64L12.44 7.64L12.51 7.59L13.61 7.41L13.69 7.36L14.37 7.22Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.57 7.48L15.2 7.29L15.34 7.2L15.58 7.15L15.72 7.05L15.96 7L16.51 6.75L16.55 6.63L16.45 6.58L15.51 6.89L15.36 6.89L15.17 6.98L14.51 7.13L14.42 7.19Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M5.45 7.15L5.32 7.18L5.32 7.38L5.37 7.54L5.64 7.85L6.03 8.04L6.45 8.09L6.6 8.19L6.87 8.19L6.97 7.86L6.74 7.78L6.38 7.78L6.19 7.74L5.68 7.46Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.74 8L16.91 7.9L16.87 7.77L16.55 7.83L16.26 7.97L16.11 7.98L15.51 8.21L14.9 8.35L14.86 8.37L14.92 8.67L15.85 8.38L16.66 8Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.86 8.37L14.57 7.48L14.44 7.48L13.17 7.86L12.99 7.86L12.5 8L11.98 8.05L11.66 8.14L11 8.19L10.92 8.24L9.97 8.28L9.88 8.33L8.09 8.33L8 8.28L7.51 8.28L7.44 8.24L6.87 8.19L6.74 9.15L6.89 9.2L7.3 9.2L7.37 9.25L8.32 9.25L8.41 9.29L10.08 9.25L10.15 9.2L11.11 9.15L11.19 9.1L11.82 9.06L11.9 9.01L12.67 8.92L12.74 8.87L13.38 8.77L13.62 8.68L13.8 8.68L13.87 8.63L14.75 8.45Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M5.27 8.43L5.14 8.46L5.13 8.66L5.23 8.91L5.54 9.22L5.83 9.36L6.21 9.41L6.4 9.51L6.75 9.51L6.74 9.15L6.6 9.1L6.23 9.1L5.59 8.83L5.38 8.62Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.88 9.98L16.09 9.51L16.2 9.5L16.44 9.36L16.47 9.25L16.36 9.2L14.93 9.63Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.93 9.63L14.92 8.67L13.92 8.99L13.78 8.99L13.17 9.18L12.98 9.18L12.74 9.27L12.33 9.32L12.25 9.37L11.05 9.51L10.97 9.56L9.97 9.6L9.89 9.65L7.9 9.65L7.81 9.6L7.32 9.6L7.25 9.56L6.9 9.56L6.75 9.51L6.83 10.05L6.97 10.56L7.17 10.61L7.91 10.61L7.99 10.66L9.89 10.61L9.96 10.57L10.88 10.52L10.96 10.47L12.15 10.33L12.23 10.28L13.33 10.1L13.4 10.04L14.8 9.72Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M5.25 9.79L5.12 9.79L5.08 9.98L5.23 10.36L5.45 10.59L5.84 10.78L7.15 10.98L6.97 10.56L6.33 10.52L6.14 10.43L5.72 10.33L5.45 10.15L5.29 9.95Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.15 10.98L7.58 11.69L8.02 12.17L8.53 12.59L9.05 12.89L9.61 13.11L10.24 13.26L10.85 13.31L11.5 13.25L12.09 13.11L12.69 12.87L13.25 12.53L13.71 12.14L14.11 11.69L14.47 11.14L14.71 10.59L14.88 9.98L14.77 9.98L14.02 10.26L13.69 10.31L13.5 10.4L13.35 10.41L12.93 10.55L12.75 10.55L11.97 10.74L11.48 10.78L11.4 10.83L10.77 10.88L10.69 10.92L10.3 10.92L10.22 10.97L9.59 10.97L9.51 11.02Z",
+        "fill": "accent"
+      }
+    ],
+    "libya-post": [
+      {
+        "type": "polygon",
+        "d": "M16.49 8.2L15.86 7.4L15.19 6.83L14.38 6.34L13.93 6.15L13.69 6.11L13.63 6.19L13.67 6.29L14.64 6.77L15.39 7.32L15.9 7.85L16.33 8.48L15.54 9.52L15.08 8.87L14.52 8.25L13.83 7.61L13.48 7.34L13.4 7.32L13.35 7.5L13.84 7.91L14.32 8.39L15.15 9.49L15.32 9.76L15.09 9.99L14.44 10.53L13.74 10.98L12.64 9.34L12.52 9.18L12.43 9.15L12.36 9.21L12.36 9.3L13.5 11.11L12.72 11.46L11.93 11.71L11.1 11.88L10.26 11.95L8.86 11.89L8.6 11.35L8.5 11.3L8.41 11.42L8.58 11.84L8.78 11.92L8.79 12.03L8.71 12.1L8.91 12.44L9.38 13.05L9.91 13.56L9.89 13.63L9.92 13.7L10.15 13.74L10.68 14.06L11.24 14.32L12.17 14.55L13.1 14.6L14.01 14.47L14.91 14.16L15.57 13.78L16.17 13.29L16.68 12.72L17.09 12.07L17.32 11.56L17.49 11.03L17.61 10.36L17.64 9.64L17.88 8.93L18.04 8.26L17.96 8.17L17.85 8.21L17.58 9.07L17.4 8.31L17.09 7.57L17.43 6.53L17.45 6.43L17.41 6.36L17.33 6.34L17.26 6.39L16.93 7.3L16.44 6.64L15.84 6.08L15.09 5.6L14.61 5.38L14.52 5.39L14.47 5.48L14.51 5.56L15.05 5.82L15.56 6.16L16.02 6.58L16.41 7.06L16.77 7.67Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.18 9.97L16.97 9.18L16.66 8.48L16.91 7.99L17.08 8.51L17.19 9.06L17.24 9.8Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.49 8.78L16.78 9.57L16.95 10.36L16.3 11.22L16.06 10.51L15.72 9.82Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.01 10.84L17.02 11.04L16.86 11.46L16.42 12.23L16.38 11.64Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.09 12.66L15.63 13.1L15.12 13.48L14.8 12.84L15.48 12.42L16.09 11.93L16.13 12.53Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.9 13.61L13.9 14.01L12.92 14.16L12.35 14.14L11.86 14.08L11.34 13.94L10.86 13.75L11.86 13.69L12.83 13.54L13.69 13.31L14.53 12.98Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.43 13.52L9.63 12.9L9 12.13L10.23 12.21L11.43 12.12L12.57 11.85L13.66 11.41L14.35 12.67L13.43 13.05L12.42 13.32L11.22 13.49Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.92 11.27L14.75 10.72L15.49 10.07L15.8 10.79L16.01 11.52L15.36 12.07L14.63 12.53Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M4.27 8.4L4.48 8.04L4.75 7.8L5.09 7.66L5.57 7.62L6.37 7.79L8.25 8.49L9.28 8.75L9.91 8.84L10.57 8.86L11.13 8.82L11.7 8.72L12.39 8.46L12.93 8.1L13.27 7.66L13.43 7.14L13.4 6.66L13.23 6.2L12.89 5.67L12.16 4.84L12.04 4.54L12.1 4.4L12.29 4.37L12.55 4.41L13.8 4.84L14.74 5.09L15.46 5.21L16.16 5.26L16.99 5.22L17.84 5.06L18.9 4.69L18.96 4.62L18.96 4.55L18.85 4.46L17.1 4.68L15.45 4.66L13.97 4.43L12.24 3.93L11.88 3.9L11.58 3.94L11.3 4.06L11.14 4.24L11.07 4.48L11.11 4.79L11.34 5.23L11.93 5.9L12.22 6.3L12.43 6.7L12.53 7.08L12.51 7.37L12.41 7.61L12.22 7.82L11.97 8L11.46 8.2L10.79 8.33L10.04 8.37L9.26 8.32L8.08 8.07L5.92 7.26L5.47 7.17L5.03 7.16L4.55 7.28L4.12 7.54L3.81 7.9L3.43 8.22L3.05 8.75L3.04 8.87L3.13 8.94L3.51 8.82L3.8 8.79L4.07 8.84L4.33 8.95L4.65 9.22L5.94 10.68L6.74 11.37L7.2 11.66L7.69 11.89L8.22 12.05L8.71 12.11L8.8 12.01L8.75 11.89L8 11.59L7.38 11.07L6.92 10.5L6.32 9.55L5.92 9.14L5.17 8.68Z",
+        "fill": "#fbd829"
+      }
+    ],
+    "macau-post": [
+      {
+        "type": "polygon",
+        "d": "M10.82 6.8L10.12 6.83L10.13 6.8L4.57 7.02L10.05 7.24L9.84 8.4L4.29 8.61L9.76 8.82L9.55 10L4.02 10.2L9.47 10.4L9.25 11.59L3.74 11.79L9.18 11.98L9 13.13L8.96 13.19L3.47 13.38L9.62 13.6L12.18 13.6L12.52 13.54L12.81 13.36L13 13.09L13.05 12.85L12.96 12.62L12.77 12.46L12.53 12.41L10.83 12.4L10.62 12.3L10.48 12.11L10.42 11.84L10.43 11.64L10.93 8.79L11.01 8.55L11.1 8.41L11.28 8.23L11.49 8.1L11.73 8.03L15.28 8.02L15.45 8L15.74 7.87L15.92 7.7L16.08 7.42L16.07 7.18L16 7.04L15.88 6.93L15.72 6.85L15.54 6.81Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.61 6.3L9.86 6.25L10.06 6.06L10.18 6.02L10.3 6.05L10.46 6.24L10.63 6.3L10.8 6.25L11.01 6.04L11.13 6L11.28 6.05L11.42 6.24L11.59 6.3L11.75 6.25L11.95 6.06L12.07 6.02L12.2 6.05L12.35 6.24L12.53 6.3L12.69 6.25L12.89 6.06L13.01 6.02L13.15 6.06L13.29 6.24L13.46 6.3L13.63 6.25L13.82 6.06L13.95 6.02L14.07 6.05L14.23 6.24L14.4 6.3L14.56 6.25L14.76 6.06L14.88 6.02L15.01 6.05L15.16 6.24L15.34 6.3L15.5 6.25L15.7 6.06L15.8 6.02L15.94 6.05L16.1 6.24L16.27 6.3L16.44 6.25L16.69 6.04L16.79 6.03L16.91 6.08L17.1 6.32L17.13 6.47L17.06 6.58L16.86 6.75L16.78 6.9L16.81 7.07L16.94 7.23L16.96 7.38L16.9 7.5L16.69 7.66L16.62 7.81L16.64 8L16.77 8.14L16.8 8.29L16.74 8.41L16.53 8.57L16.46 8.73L16.48 8.9L16.62 9.06L16.64 9.21L16.58 9.32L16.37 9.49L16.3 9.64L16.32 9.82L16.45 9.97L16.48 10.12L16.42 10.23L16.21 10.4L16.14 10.55L16.16 10.73L16.3 10.88L16.32 11.03L16.26 11.15L16.05 11.31L15.98 11.47L16 11.64L16.13 11.79L16.16 11.94L16.09 12.06L15.89 12.22L15.81 12.37L15.84 12.56L15.97 12.71L16 12.84L15.95 12.96L15.78 13.08L15.68 13.21L15.65 13.39L15.68 13.49L15.85 13.6L15.91 13.55L16.54 13.03L17.05 12.49L17.4 12.03L17.71 11.55L17.94 11.11L18.16 10.58L18.32 10.11L18.45 9.55L18.51 9.1L18.53 8.58L18.51 8.15L18.43 7.66L18.31 7.19L18.14 6.74L17.92 6.33L17.66 5.95L17.36 5.6L17.01 5.28L16.63 5L16.22 4.77L15.78 4.58L15.3 4.44L14.8 4.34L14.36 4.3L13.92 4.31L13.35 4.36L12.86 4.45L12.3 4.6L11.76 4.8L11.31 5.01L10.81 5.3L10.34 5.63Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.81 9.2L13.63 9.92L13.82 9.89L15.78 9.2L15.77 8.95L15.62 8.73L15.38 8.63L12.49 8.63L12.32 8.66L12.16 8.72L11.96 8.89L11.87 9.04Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.76 10.25L13.57 10.26L13.39 10.22L11.76 9.55L11.52 10.94L11.54 11.12L11.68 11.33L11.92 11.44L14.82 11.44L15.06 11.4L15.33 11.21L15.49 10.93L15.74 9.55Z",
+        "fill": "accent"
+      }
+    ],
+    "mikropakket": [
+      {
+        "type": "polygon",
+        "d": "M7.56 6.82L7.31 10.24L9.6 10.24L10.72 6.82L10.8 6.82L9.84 11.6L10.85 11.8L12.05 5.8L9.98 5.8L8.86 9.21L8.41 9.21L8.66 5.8L6.61 5.8L5.45 11.6L6.46 11.8L7.45 6.82Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.56 9.36L15.2 9.24L15.82 8.87L16.28 8.33L16.55 7.68L16.55 6.98L16.25 6.35L15.71 5.93L15.07 5.8L13.04 5.8L11.88 11.6L12.88 11.8L13.37 9.36Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.88 6.82L14.97 6.82L15.27 6.89L15.43 7.01L15.52 7.21L15.52 7.48L15.4 7.79L15.15 8.08L14.83 8.26L14.46 8.34L13.58 8.34Z",
+        "fill": "truck"
+      }
+    ],
+    "mobi-logistica": [
+      {
+        "type": "polygon",
+        "d": "M17.66 7.75L18.51 7.75L18.51 6.91L17.66 6.91Z",
+        "fill": "#323241"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.97 5.8L5.73 9.53L3.49 5.8L3.49 11.79L4.34 11.79L4.34 8.86L5.73 11.18L7.12 8.86L7.12 11.79L7.97 11.79Z",
+        "fill": "#323241"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.99 7.05L9.35 7.47L8.92 8.11L8.78 8.82L8.78 9.88L8.92 10.59L9.35 11.22L9.99 11.65L10.74 11.8L11.49 11.65L12.13 11.22L12.55 10.59L12.7 9.88L12.7 8.82L12.55 8.11L12.13 7.47L11.49 7.05L10.74 6.9Z",
+        "fill": "#323241"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.16 10.85L10.74 10.94L10.32 10.85L9.96 10.61L9.72 10.26L9.63 9.79L9.63 8.91L9.72 8.44L9.96 8.09L10.32 7.85L10.74 7.76L11.16 7.85L11.52 8.09L11.76 8.44L11.85 8.91L11.85 9.79L11.76 10.26L11.52 10.61Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.42 7.79L16.24 7.43L15.95 7.15L15.6 6.96L15.23 6.91L13.5 6.91L13.5 11.79L15.5 11.79L15.9 11.73L16.29 11.53L16.59 11.22L16.79 10.84L16.85 10.44L16.85 10.16L16.79 9.76L16.59 9.37L16.27 9.06L16.42 8.77L16.48 8.41L16.48 8.15Z",
+        "fill": "#323241"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.63 8.34L15.6 8.51L15.54 8.62L15.45 8.72L15.33 8.78L15.17 8.8L14.35 8.8L14.35 7.75L15.17 7.75L15.33 7.78L15.45 7.84L15.54 7.93L15.6 8.05L15.63 8.22Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.78 9.76L15.9 9.88L15.97 10.03L16.01 10.22L16.01 10.37L15.97 10.57L15.9 10.72L15.78 10.84L15.63 10.91L15.43 10.94L14.35 10.94L14.35 9.65L15.43 9.65L15.63 9.68Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M18.51 8.74L17.66 8.74L17.66 11.79L18.51 11.79Z",
+        "fill": "#323241"
+      }
+    ],
+    "myanmar-post": [
+      {
+        "type": "polygon",
+        "d": "M8.86 11.35L10.35 8.87L10.35 12L11.25 12L11.25 5.6L8.86 9.59L6.47 5.6L6.47 12L7.37 12L7.37 8.87Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.99 9.93L14.56 9.82L15.07 9.48L15.41 8.96L15.53 8.36L15.41 7.75L15.07 7.24L14.56 6.89L13.99 6.78L12.12 6.78L12.12 12L13.02 12L13.02 9.93Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.9 7.69L14.2 7.75L14.42 7.89L14.56 8.1L14.61 8.36L14.56 8.61L14.42 8.82L14.2 8.97L13.9 9.02L13.02 9.02L13.02 7.69Z",
+        "fill": "truck"
+      }
+    ],
+    "paositra-malagasy": [
+      {
+        "type": "polygon",
+        "d": "M15.02 8.85L15.02 11.07L15.67 11.07L15.67 6.52L13.97 9.36L12.26 6.52L12.26 11.07L12.91 11.07L12.91 8.85L13.97 10.61Z",
+        "fill": "#004387"
+      },
+      {
+        "type": "polygon",
+        "d": "M5 9.28L5.24 8.91L5.33 8.48L5.24 8.05L5 7.68L4.63 7.44L4.24 7.36L2.9 7.36L2.9 11.07L3.54 11.07L3.54 9.6L4.24 9.6L4.63 9.52Z",
+        "fill": "#004387"
+      },
+      {
+        "type": "polygon",
+        "d": "M4.54 8.15L4.64 8.3L4.67 8.48L4.64 8.66L4.54 8.81L4.38 8.91L4.17 8.96L3.54 8.96L3.54 8.01L4.17 8.01L4.38 8.05Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.3 10.95L7.62 7.36L6.17 7.36L5.48 10.95L6.12 11.07L6.3 10.09L7.48 10.09L7.67 11.07Z",
+        "fill": "#004387"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.7 8.01L7.09 8.01L7.36 9.45L6.43 9.45Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.73 7.47L10.16 7.35L9.59 7.47L9.11 7.79L8.78 8.28L8.67 8.82L8.67 9.62L8.78 10.16L9.11 10.64L9.59 10.97L10.16 11.08L10.73 10.97L11.22 10.64L11.54 10.16L11.65 9.62L11.65 8.82L11.54 8.28L11.22 7.79Z",
+        "fill": "#004387"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.94 9.91L10.75 10.18L10.48 10.36L10.16 10.42L9.84 10.36L9.57 10.18L9.39 9.91L9.32 9.55L9.32 8.88L9.39 8.53L9.57 8.26L9.84 8.08L10.16 8.01L10.48 8.08L10.75 8.26L10.94 8.53L11.01 8.88L11.01 9.55Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M19.1 10.95L18.42 7.36L16.96 7.36L16.28 10.95L16.91 11.07L17.1 10.09L18.28 10.09L18.47 11.07Z",
+        "fill": "#004387"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.22 9.45L17.5 8.01L17.88 8.01L18.16 9.45Z",
+        "fill": "truck"
+      }
+    ],
+    "redbox-mv": [
+      {
+        "type": "polygon",
+        "d": "M6.05 4.3L12.72 4.3L12.72 7.01L8.86 7.01L8.86 10.86L6.05 10.86Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10.95 9.2L15.95 9.2L15.95 14.3L10.95 14.3Z",
+        "fill": "accent"
+      }
+    ],
+    "royale-international": [
+      {
+        "type": "polygon",
+        "d": "M4.26 12.37L3.1 10.37L3.52 7.83L4.68 9.24Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.81 8.99L4.68 12.79L6.26 8.64L10.14 5.21Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.17 12.57L5.86 12.99L8.7 11.19L12.78 10.82Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.23 8.62L10.01 9.83L12.06 7.63L15.54 6.47Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M17.49 9.8L13.37 10.03L15.57 8.62L18.9 8.3Z",
+        "fill": "accent"
+      }
+    ],
+    "shippify": [
+      {
+        "type": "polygon",
+        "d": "M11.21 4.84L3.3 4.84L5.43 6.88L5.64 7.01L5.91 7.09L6.59 7.11L7.05 7.56L4.91 8.8L12.25 13.01L13.09 13.29L13.99 13.4L14.89 13.33L15.76 13.09L16.57 12.68L17.29 12.12L17.86 11.44L18.31 10.65L18.59 9.81L18.7 8.91L18.63 8.01L18.39 7.14L17.98 6.33L17.42 5.61L16.74 5.04L15.96 4.6L15 4.29L14 4.2L13.38 4.26L12.78 4.4L12.19 4.62L11.63 4.92Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.63 8.14L7.99 8.44L8.26 8.55L8.95 8.59L9.99 9.64L10.33 9.86L10.71 9.94L11.86 9.95L12.1 10.33L12.41 10.66L12.77 10.93L13.2 11.14L13.71 11.28L14.24 11.3L14.72 11.23L15.21 11.05L15.66 10.76L16.01 10.42L16.29 10.03L16.5 9.55L16.6 9.03L16.6 8.53L16.5 8.05L16.31 7.6L16.04 7.19L15.72 6.87L15.36 6.61L14.91 6.41L14.49 6.3L13.99 6.27L13.56 6.33L13.1 6.48L12.26 5.46L12.78 5.22L13.29 5.07L13.87 4.99L14.44 5L15.2 5.14L15.88 5.42L16.51 5.84L17.03 6.35L17.43 6.94L17.73 7.63L17.89 8.37L17.9 9.13L17.76 9.89L17.48 10.58L17.07 11.21L16.55 11.73L15.96 12.13L15.27 12.44L14.53 12.59L13.77 12.61L13.01 12.46L12.32 12.18L6.47 8.8Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.26 5.62L11.48 5.75L12.72 7.25L12.84 7.34L13.08 7.36L13.42 7.19L13.74 7.09L14.31 7.07L14.91 7.26L15.39 7.64L15.59 7.9L15.73 8.21L15.81 8.54L15.83 8.89L15.77 9.23L15.66 9.55L15.48 9.84L15.25 10.08L14.81 10.37L14.35 10.51L13.84 10.51L13.37 10.37L13.07 10.2L12.82 9.97L12.62 9.71L12.41 9.31L12.29 9.21L12.14 9.17L10.65 9.15L10.51 9.06L9.9 8.44L11.24 8.42L11.39 8.3L11.44 8.17L11.42 7.99L11.28 7.85L11.13 7.81L8.5 7.81L8.3 7.71L7.54 6.95L9.1 6.94L9.26 6.83L9.32 6.64L9.29 6.5L9.15 6.36L9.01 6.33L6.05 6.32L5.86 6.23L5.23 5.62Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.21 5.62L5.23 5.62L5.86 6.23L6.05 6.32L9.01 6.33L9.15 6.36L9.29 6.5L9.32 6.64L9.26 6.83L9.1 6.94L7.54 6.95L8.3 7.71L8.5 7.81L11.13 7.81L11.28 7.85L11.42 7.99L11.44 8.17L11.39 8.3L11.24 8.42L9.9 8.44L10.51 9.06L10.65 9.15L12.14 9.17L12.29 9.21L12.41 9.31L12.62 9.71L12.82 9.97L13.07 10.2L13.37 10.37L13.84 10.51L14.35 10.51L14.81 10.37L15.25 10.08L15.48 9.84L15.66 9.55L15.77 9.23L15.83 8.89L15.81 8.54L15.73 8.21L15.59 7.9L15.39 7.64L14.91 7.26L14.31 7.07L13.74 7.09L13.42 7.19L13.08 7.36L12.84 7.34L12.72 7.25L11.48 5.75L11.36 5.65Z",
+        "fill": "#ffdf00"
+      }
+    ],
+    "suto-logistics": [
+      {
+        "type": "polygon",
+        "d": "M14.99 5.8L11.96 5.8L11.96 6.82L12.85 6.82L11.9 11.6L12.9 11.8L13.9 6.82L14.99 6.82Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.73 6.53L7.23 7.73L7.79 8.87L9.56 9.47L9.74 9.81L9.54 10.28L8.9 10.68L8.2 10.68L7.67 10.23L7.01 11.02L7.83 11.7L9.2 11.7L10.36 10.98L10.86 9.77L10.28 8.63L8.52 8.04L8.35 7.7L8.55 7.22L9.16 6.82L9.82 6.82L10.32 7.26L10.99 6.49L10.2 5.8L8.86 5.8Z",
+        "fill": "accent"
+      }
+    ],
+    "swftbox": [
+      {
+        "type": "polygon",
+        "d": "M10.12 7.49L10.61 7.49L10.61 9.88L11.11 9.88L11.11 7.49L11.6 7.49L11.6 6.98L10.12 6.98Z",
+        "fill": "#1d1d1d"
+      },
+      {
+        "type": "polygon",
+        "d": "M3.26 8.5L4.19 8.79L4.34 8.99L4.29 9.2L4.05 9.38L3.7 9.38L3.38 9.15L3.09 9.56L3.54 9.88L4.21 9.88L4.74 9.5L4.87 8.88L4.5 8.36L3.58 8.07L3.44 7.87L3.48 7.65L3.71 7.49L4.04 7.49L4.34 7.71L4.64 7.31L4.2 6.98L3.55 6.98L3.03 7.36L2.9 7.97Z",
+        "fill": "#1d1d1d"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.46 8.68L9.46 8.18L8.65 8.18L8.65 7.49L9.64 7.49L9.64 6.98L8.15 6.98L8.15 9.88L8.65 9.88L8.65 8.68Z",
+        "fill": "#1d1d1d"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.18 7.18L6.87 8.63L6.39 7.1L5.92 8.63L5.61 7.18L5.12 7.29L5.84 10.62L6.39 8.81L6.95 10.62L7.67 7.29Z",
+        "fill": "#1d1d1d"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.85 7.87L13.85 7.72L13.81 7.5L13.71 7.29L13.54 7.12L13.32 7.02L13.11 6.98L12.08 6.98L12.08 9.88L13.27 9.88L13.5 9.84L13.73 9.72L13.92 9.54L14.03 9.31L14.07 9.08L14.07 8.91L14.03 8.67L13.92 8.44L13.73 8.26L13.81 8.09Z",
+        "fill": "#1d1d1d"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.59 8.61L13.23 8.61L13.35 8.63L13.43 8.67L13.5 8.74L13.55 8.83L13.57 8.95L13.57 9.04L13.55 9.15L13.5 9.24L13.43 9.31L13.35 9.36L13.23 9.38L12.59 9.38Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.29 7.59L13.33 7.66L13.34 7.76L13.34 7.83L13.33 7.93L13.29 8L13.24 8.06L13.17 8.09L13.07 8.11L12.59 8.11L12.59 7.49L13.07 7.49L13.17 7.5L13.24 7.54Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.63 6.98L15.21 7.06L14.85 7.3L14.62 7.65L14.54 8.05L14.54 8.81L14.62 9.21L14.85 9.56L15.21 9.8L15.63 9.88L16.05 9.8L16.4 9.56L16.64 9.21L16.72 8.81L16.72 8.05L16.64 7.65L16.4 7.3L16.05 7.06Z",
+        "fill": "#1d1d1d"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.17 9.01L16.04 9.2L15.85 9.33L15.63 9.37L15.41 9.33L15.22 9.2L15.09 9.01L15.04 8.76L15.04 8.1L15.09 7.85L15.22 7.66L15.41 7.53L15.63 7.49L15.85 7.53L16.04 7.66L16.17 7.85L16.21 8.1L16.21 8.76Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M19.1 7.26L18.68 6.98L18.03 7.97L17.37 6.98L16.95 7.26L17.73 8.43L16.95 9.6L17.37 9.88L18.03 8.89L18.68 9.88L19.1 9.6L18.33 8.43Z",
+        "fill": "#1d1d1d"
+      }
+    ],
+    "tolos": [
+      {
+        "type": "polygon",
+        "d": "M9.97 6.6L9.32 10.95L11.53 10.95L11.53 10.2L10.18 10.2L10.71 6.71Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.79 6.77L6.2 7.13L5.76 7.67L5.54 8.28L5.41 9.21L5.44 9.84L5.74 10.43L6.27 10.82L6.92 10.96L7.6 10.83L8.19 10.47L8.63 9.93L8.84 9.32L8.98 8.39L8.95 7.76L8.65 7.17L8.12 6.78L7.46 6.64Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.93 10.2L6.58 10.12L6.32 9.93L6.17 9.64L6.15 9.24L6.27 8.46L6.42 8.04L6.69 7.7L7.06 7.48L7.46 7.4L7.8 7.48L8.06 7.67L8.21 7.96L8.23 8.36L8.12 9.14L7.97 9.56L7.69 9.9L7.32 10.12Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.16 6.64L13.49 6.77L12.9 7.13L12.46 7.67L12.25 8.28L12.11 9.21L12.14 9.84L12.44 10.43L12.97 10.82L13.63 10.96L14.3 10.83L14.89 10.47L15.33 9.93L15.54 9.32L15.68 8.39L15.65 7.76L15.35 7.17L14.82 6.78Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.02 10.12L13.63 10.2L13.28 10.12L13.03 9.93L12.88 9.64L12.86 9.24L12.97 8.46L13.12 8.04L13.4 7.7L13.77 7.48L14.16 7.4L14.51 7.48L14.77 7.67L14.92 7.96L14.93 8.36L14.82 9.14L14.67 9.56L14.39 9.9Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M18.13 9.33L18.28 9.59L18.16 9.92L17.72 10.2L17.21 10.2L16.8 9.88L16.33 10.46L16.95 10.95L17.94 10.95L18.77 10.41L19.1 9.52L18.64 8.71L17.34 8.28L17.19 8.01L17.32 7.67L17.73 7.4L18.22 7.4L18.6 7.72L19.08 7.15L18.49 6.65L17.51 6.65L16.7 7.19L16.38 8.07L16.82 8.89Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M3.04 10.89L3.78 11L4.32 7.4L5.1 7.4L5.1 6.65L2.9 6.65L2.9 7.4L3.57 7.4Z",
+        "fill": "accent"
+      }
+    ],
+    "vatican-post": [
+      {
+        "type": "polygon",
+        "d": "M10.88 4.21L10.63 4.21L10.63 4.45L10.88 4.45L10.88 4.86L10.67 4.91L10.34 5.2L10.21 5.42L11.79 5.42L11.66 5.2L11.33 4.91L11.12 4.86L11.12 4.45L11.37 4.45L11.37 4.21L11.12 4.21L11.12 4L10.88 4Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.86 5.55L10.14 5.55L10.01 5.78L9.91 6.08L12.09 6.08L11.99 5.78Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.87 6.21L9.8 6.44L9.79 6.66L12.21 6.66L12.2 6.44L12.13 6.21Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.22 6.79L9.78 6.79L9.76 7.18L12.24 7.18Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.27 6.68L14.33 6.62L13.94 6.25L11 9.32L8.06 6.25L7.67 6.62L7.73 6.68L7.32 7.07L7.67 7.42L7.9 7.2L8.13 7.43L7.89 7.66L8.24 8.02L8.64 7.63L10.63 9.71L10.09 10.27L9.95 10.29L9.82 10.34L9.7 10.42L9.59 10.52L9.49 10.64L9.42 10.76L9.37 10.9L9.35 11.03L8.79 11.63L8.63 11.56L8.45 11.51L8.27 11.49L8.09 11.51L7.92 11.56L7.76 11.63L7.61 11.73L7.48 11.86L7.37 12.01L7.28 12.19L7.23 12.39L7.22 12.57L7.25 12.78L7.3 12.95L7.4 13.13L7.53 13.29L7.69 13.42L7.85 13.51L8.04 13.57L8.25 13.6L8.43 13.59L8.63 13.54L8.82 13.45L8.98 13.33L9.1 13.19L9.2 13.04L9.27 12.88L9.32 12.7L9.33 12.52L9.31 12.34L9.26 12.17L9.17 12L9.74 11.41L9.88 11.38L10.01 11.33L10.13 11.25L10.24 11.15L10.34 11.03L10.41 10.91L10.46 10.78L10.48 10.64L11 10.09L11.52 10.64L11.54 10.78L11.59 10.91L11.66 11.03L11.76 11.15L11.87 11.25L11.99 11.33L12.12 11.38L12.26 11.41L12.83 12L12.74 12.17L12.69 12.34L12.67 12.52L12.68 12.7L12.73 12.88L12.8 13.04L12.9 13.19L13.02 13.33L13.18 13.45L13.37 13.54L13.57 13.59L13.75 13.6L13.96 13.57L14.15 13.51L14.31 13.42L14.47 13.29L14.59 13.15L14.69 12.97L14.75 12.78L14.78 12.57L14.76 12.37L14.72 12.19L14.64 12.03L14.52 11.86L14.39 11.73L14.24 11.63L14.08 11.56L13.91 11.51L13.73 11.49L13.55 11.51L13.37 11.56L13.21 11.63L12.65 11.03L12.63 10.9L12.58 10.76L12.51 10.64L12.41 10.52L12.3 10.42L12.18 10.34L12.05 10.29L11.91 10.27L11.37 9.71L13.36 7.63L13.76 8.02L14.11 7.66L13.87 7.43L14.1 7.2L14.33 7.42L14.68 7.07Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.78 12.65L8.7 12.83L8.56 12.98L8.38 13.05L8.17 13.05L7.99 12.98L7.85 12.83L7.77 12.65L7.77 12.45L7.85 12.26L7.99 12.12L8.17 12.04L8.38 12.04L8.56 12.12L8.7 12.26L8.78 12.45Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.23 12.65L14.15 12.83L14.01 12.98L13.83 13.05L13.62 13.05L13.44 12.98L13.3 12.83L13.22 12.65L13.22 12.45L13.3 12.26L13.44 12.12L13.62 12.04L13.83 12.04L14.01 12.12L14.15 12.26L14.23 12.45Z",
+        "fill": "truck"
+      }
+    ],
+    "viaxpress": [
+      {
+        "type": "polygon",
+        "d": "M10.57 6.15L9.62 5.8L7.79 10.73L7.2 10.73L7.15 5.97L6.13 5.98L6.19 11.75L8.5 11.75Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M15.87 6.49L15.09 5.83L13.37 7.89L12.44 5.94L11.52 6.38L12.65 8.74L10.63 11.14L11.41 11.8L13.13 9.75L14.07 11.69L14.98 11.25L13.85 8.89Z",
+        "fill": "accent"
+      }
+    ],
+    "wepost": [
+      {
+        "type": "polygon",
+        "d": "M9.8 14.2L8.58 10.95L6.22 10.02L15.78 4.6L14.63 12.98L11.51 11.96Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.93 12.95L9.31 11.14L13.94 6.9L10.56 11.41Z",
+        "fill": "#44cdf2"
+      }
+    ],
+    "xpressen": [
+      {
+        "type": "polygon",
+        "d": "M15.37 4.82L16.02 3.9L14.31 3.9L13.62 4.82Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.52 12.76L7.84 12.76L7.18 13.7L8.85 13.7Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.36 5.27L11.89 7.25L11.33 5.27L9.89 5.27L10.84 8.65L8.07 12.38L9.8 12.38L11.32 10.34L11.89 12.38L13.33 12.38L12.36 8.93L15.09 5.27Z",
         "fill": "accent"
       }
     ]

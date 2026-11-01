@@ -8,6 +8,9 @@
   "247express": {
     "decal": "247express"
   },
+  "2ebox": {
+    "decal": "2ebox"
+  },
   "2go": {
     "decal": "2go"
   },
@@ -195,6 +198,9 @@
   "anserx": {
     "decal": "anserx"
   },
+  "antaria": {
+    "decal": "antaria"
+  },
   "anteraja": {
     "decal": "anteraja"
   },
@@ -300,6 +306,12 @@
   },
   "barid-al-maghrib": {
     "decal": "barid-al-maghrib"
+  },
+  "bee-fast": {
+    "decal": "bee-fast"
+  },
+  "beexprss": {
+    "decal": "beexprss"
   },
   "bel": {
     "decal": "bel"
@@ -459,6 +471,9 @@
   "cargus": {
     "decal": "cargus"
   },
+  "carry-flap": {
+    "decal": "carry-flap"
+  },
   "castores": {
     "decal": "castores"
   },
@@ -518,6 +533,9 @@
   },
   "chit-chats": {
     "decal": "chit-chats"
+  },
+  "choir-express": {
+    "decal": "choir-express"
   },
   "chronodiali": {
     "decal": "chronodiali"
@@ -583,6 +601,9 @@
   "cj-packet": {
     "decal": "cj-packet"
   },
+  "ckeex": {
+    "decal": "ckeex"
+  },
   "closer-logistics": {
     "decal": "closer-logistics"
   },
@@ -622,8 +643,14 @@
   "cope-sensitive-freight": {
     "decal": "cope-sensitive-freight"
   },
+  "corporate-couriers": {
+    "decal": "corporate-couriers"
+  },
   "corre": {
     "decal": "corre"
+  },
+  "correios-angola": {
+    "decal": "correios-angola"
   },
   "correios-br": {
     "palette": {
@@ -652,6 +679,9 @@
   },
   "correos-de-mexico": {
     "decal": "correos-de-mexico"
+  },
+  "correos-ecuador": {
+    "decal": "correos-ecuador"
   },
   "correos-el-salvador": {
     "decal": "correos-el-salvador"
@@ -747,6 +777,9 @@
   "dakota-cargo": {
     "decal": "dakota-cargo"
   },
+  "danniao": {
+    "decal": "danniao"
+  },
   "danske-fragtmaend": {
     "decal": "danske-fragtmaend"
   },
@@ -771,6 +804,9 @@
   },
   "dd-express": {
     "decal": "dd-express"
+  },
+  "ddu-express": {
+    "decal": "ddu-express"
   },
   "dealersend": {
     "decal": "dealersend"
@@ -950,6 +986,9 @@
   "dsv": {
     "decal": "dsv"
   },
+  "dtd-pk": {
+    "decal": "dtd-pk"
+  },
   "dtdc": {
     "decal": "dtdc"
   },
@@ -1054,6 +1093,9 @@
   "ems-vietnam": {
     "decal": "ems-vietnam"
   },
+  "endeavour-delivery": {
+    "decal": "endeavour-delivery"
+  },
   "energia-tk": {
     "decal": "energia-tk"
   },
@@ -1095,6 +1137,9 @@
   },
   "ethiopian-post": {
     "decal": "ethiopian-post"
+  },
+  "etomars": {
+    "decal": "etomars"
   },
   "ets-express": {
     "decal": "ets-express"
@@ -1150,6 +1195,9 @@
   "express-one-bg": {
     "decal": "express-one-bg"
   },
+  "ezship": {
+    "decal": "ezship"
+  },
   "famafutar": {
     "decal": "famafutar"
   },
@@ -1161,6 +1209,9 @@
   },
   "far-international": {
     "decal": "far-international"
+  },
+  "fare-rata": {
+    "decal": "fare-rata"
   },
   "fargo-courier": {
     "decal": "fargo-courier"
@@ -1182,6 +1233,9 @@
   },
   "fastgo": {
     "decal": "fastgo"
+  },
+  "fasttrack-ar": {
+    "decal": "fasttrack-ar"
   },
   "fastwl": {
     "decal": "fastwl"
@@ -1288,6 +1342,9 @@
   "fukuyama": {
     "decal": "fukuyama"
   },
+  "fxdc-post": {
+    "decal": "fxdc-post"
+  },
   "gaash": {
     "decal": "gaash"
   },
@@ -1340,6 +1397,9 @@
   },
   "gio-express": {
     "decal": "gio-express"
+  },
+  "global-business-tw": {
+    "decal": "global-business-tw"
   },
   "global-delivery-network": {
     "decal": "global-delivery-network"
@@ -1520,6 +1580,9 @@
       "accent": "#00864c"
     }
   },
+  "honducor": {
+    "decal": "honducor"
+  },
   "hongkong-post": {
     "decal": "hongkong-post"
   },
@@ -1571,6 +1634,9 @@
   "hunter-express": {
     "decal": "hunter-express"
   },
+  "hy-express": {
+    "decal": "hy-express"
+  },
   "hye": {
     "decal": "hye"
   },
@@ -1609,6 +1675,9 @@
     "palette": {
       "accent": "#fedb01"
     }
+  },
+  "indopaket": {
+    "decal": "indopaket"
   },
   "inntralog": {
     "decal": "inntralog"
@@ -1663,6 +1732,9 @@
     "decal": "intime-bg"
   },
   "intl-post": {},
+  "ipostel": {
+    "decal": "ipostel"
+  },
   "iran-post": {
     "decal": "iran-post"
   },
@@ -1934,6 +2006,9 @@
   "libanpost": {
     "decal": "libanpost"
   },
+  "libya-post": {
+    "decal": "libya-post"
+  },
   "liccardi": {
     "decal": "liccardi"
   },
@@ -1999,6 +2074,9 @@
   },
   "m-xpress": {
     "decal": "m-xpress"
+  },
+  "macau-post": {
+    "decal": "macau-post"
   },
   "madhur-courier": {
     "decal": "madhur-courier"
@@ -2078,8 +2156,14 @@
   "midland-transport": {
     "decal": "midland-transport"
   },
+  "mikropakket": {
+    "decal": "mikropakket"
+  },
   "mng-kargo": {
     "family": "dhl"
+  },
+  "mobi-logistica": {
+    "decal": "mobi-logistica"
   },
   "mondial-relay": {
     "decal": "mondial-relay",
@@ -2111,6 +2195,9 @@
   },
   "mrw": {
     "decal": "mrw"
+  },
+  "myanmar-post": {
+    "decal": "myanmar-post"
   },
   "mylerz": {
     "decal": "mylerz"
@@ -2313,6 +2400,9 @@
   },
   "pannon-xp": {
     "decal": "pannon-xp"
+  },
+  "paositra-malagasy": {
+    "decal": "paositra-malagasy"
   },
   "paperfly": {
     "decal": "paperfly"
@@ -2625,6 +2715,9 @@
   "ram-hand-to-hand": {
     "decal": "ram-hand-to-hand"
   },
+  "redbox-mv": {
+    "decal": "redbox-mv"
+  },
   "redpack": {
     "decal": "redpack"
   },
@@ -2669,6 +2762,9 @@
     "palette": {
       "accent": "#fdda24"
     }
+  },
+  "royale-international": {
+    "decal": "royale-international"
   },
   "rozetka-delivery": {
     "decal": "rozetka-delivery"
@@ -2810,6 +2906,9 @@
   },
   "shipglobal-in": {
     "decal": "shipglobal-in"
+  },
+  "shippify": {
+    "decal": "shippify"
   },
   "shiprocket": {
     "decal": "shiprocket"
@@ -3013,8 +3112,14 @@
   "surat-kargo": {
     "decal": "surat-kargo"
   },
+  "suto-logistics": {
+    "decal": "suto-logistics"
+  },
   "sway": {
     "decal": "sway"
+  },
+  "swftbox": {
+    "decal": "swftbox"
   },
   "swiftx": {
     "decal": "swiftx"
@@ -3173,6 +3278,9 @@
   },
   "togo-post": {
     "decal": "togo-post"
+  },
+  "tolos": {
+    "decal": "tolos"
   },
   "tonami": {
     "decal": "tonami"
@@ -3363,6 +3471,9 @@
   "vasp-expresso": {
     "decal": "vasp-expresso"
   },
+  "vatican-post": {
+    "decal": "vatican-post"
+  },
   "veho": {
     "decal": "veho"
   },
@@ -3380,6 +3491,9 @@
   },
   "viadireta": {
     "decal": "viadireta"
+  },
+  "viaxpress": {
+    "decal": "viaxpress"
   },
   "victorian-freight-specialists": {
     "decal": "victorian-freight-specialists"
@@ -3445,6 +3559,9 @@
   },
   "wedo": {
     "family": "allegro-one"
+  },
+  "wepost": {
+    "decal": "wepost"
   },
   "western-bid": {
     "decal": "western-bid"
@@ -3517,6 +3634,9 @@
   },
   "xpressbees": {
     "decal": "xpressbees"
+  },
+  "xpressen": {
+    "decal": "xpressen"
   },
   "xyl": {
     "decal": "xyl",

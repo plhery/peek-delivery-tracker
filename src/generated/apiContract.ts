@@ -41986,6 +41986,218 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.jdiex.com/select.html"
+  },
+  "bridge-intl": {
+    "displayName": "Bridge Intl",
+    "aliases": [
+      "珀斯宏桥国际速递",
+      "宏桥国际速递",
+      "Bridge International Express"
+    ],
+    "countries": [
+      "AU",
+      "CN"
+    ],
+    "color": "#f1a135",
+    "selectable": true,
+    "timezone": "Australia/Perth",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.bri-ems.com/query"
+  },
+  "cel-changda": {
+    "displayName": "CEL Changda",
+    "aliases": [
+      "CEL HCCD",
+      "珲春畅达",
+      "珲春畅达电子商务有限公司",
+      "深圳畅达数贸跨境电商服务有限公司"
+    ],
+    "countries": [
+      "CN",
+      "RU"
+    ],
+    "color": "#4c9529",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tms.celdt.cn/track_query.aspx"
+  },
+  "cpszy": {
+    "displayName": "CPSZY",
+    "aliases": [
+      "CPS华中转运",
+      "CPS华中转运速递",
+      "華中轉運",
+      "华中转运",
+      "Hunter Logistics Inc."
+    ],
+    "countries": [
+      "US",
+      "CN"
+    ],
+    "color": "#192a51",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.cpszy.com/trace.html?sn={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "cpszy.com",
+          "www.cpszy.com"
+        ],
+        "pathPattern": "^/trace\\.html$",
+        "params": [
+          "sn"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cpszy.com/trace.html"
+  },
+  "jiachen-express": {
+    "displayName": "Jiachen International Express",
+    "aliases": [
+      "佳辰国际速递",
+      "JIACHEN INTERNATIONAL",
+      "Jiachen Express"
+    ],
+    "countries": [
+      "US",
+      "CN"
+    ],
+    "color": "#184a96",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.jiachenexpress.com/select.html?num={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "jiachenexpress.com",
+          "www.jiachenexpress.com"
+        ],
+        "pathPattern": "^/select\\.html$",
+        "params": [
+          "num"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.jiachenexpress.com/select.html"
+  },
+  "jiufang": {
+    "displayName": "JiuFang Logistics",
+    "aliases": [
+      "九方通逊",
+      "九方物流",
+      "JiuFang"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#304773",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.jiufanglogistics.cn/shipmentQueryList"
+  },
+  "longcps": {
+    "displayName": "LONGCPS",
+    "aliases": [
+      "龙行速运",
+      "龙行供应链"
+    ],
+    "countries": [
+      "CA",
+      "CN"
+    ],
+    "color": "#1e3d7e",
+    "selectable": true,
+    "timezone": "America/Toronto",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.longcps.com/select.html?type=cnum&num={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "longcps.com",
+          "www.longcps.com"
+        ],
+        "pathPattern": "^/select\\.html$",
+        "query": "^(?=(?:.*&)?type=cnum(?:&|$))(?:.*&)?num=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.longcps.com/select.html"
+  },
+  "sxjd-freight": {
+    "displayName": "SXJD Freight",
+    "aliases": [
+      "顺心捷达",
+      "顺心快运",
+      "SXJD",
+      "Shunxin Jieda"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ba0c2f",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.sxjdfreight.com/service/waybillList.html"
+  },
+  "valueway": {
+    "displayName": "Valueway Express",
+    "aliases": [
+      "Valueway",
+      "美通快递",
+      "美通物流",
+      "Valueway Global Logistics"
+    ],
+    "countries": [
+      "CA",
+      "CN"
+    ],
+    "color": "#186fb5",
+    "selectable": true,
+    "timezone": "America/Toronto",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.valueway.net/main.html"
   }
 } as const;
 
@@ -43139,7 +43351,15 @@ export const CARRIER_IDS = [
   "suning-logistics",
   "annto",
   "ees-logistics",
-  "jdiex"
+  "jdiex",
+  "bridge-intl",
+  "cel-changda",
+  "cpszy",
+  "jiachen-express",
+  "jiufang",
+  "longcps",
+  "sxjd-freight",
+  "valueway"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

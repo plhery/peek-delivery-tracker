@@ -170,7 +170,7 @@ class AppContainer(
     /** `DeliveryLiveActivities`: none on Android. */
     val liveActivities: DeliveryLiveActivities = DeliveryLiveActivities.None
 
-    val notifications: PushNotifications = NoPushNotifications
+    val notifications: PushNotifications = NoPushNotifications(context)
 
     /**
      * When the app asks for a rating (ReviewPrompt), in this version. A debug build's `sdt.debug.reviewDue` asks at

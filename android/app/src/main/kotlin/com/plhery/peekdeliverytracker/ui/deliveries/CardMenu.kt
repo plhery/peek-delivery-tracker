@@ -993,7 +993,7 @@ internal fun ErrorAlert(message: String, close: () -> Unit) {
  * title's room at the top and 16 over its foot, scrolling where the room [modifier] gives it is shorter.
  */
 @Composable
-private fun AlertCard(title: String, modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
+internal fun AlertCard(title: String, modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
     GlassSurface(
         ContinuousRoundedShape(ALERT_RADIUS),
         Modifier.width(ALERT_WIDTH).then(modifier).semantics { paneTitle = title },
@@ -1012,38 +1012,52 @@ private fun AlertCard(title: String, modifier: Modifier = Modifier, content: @Co
 /**
  * A button of an alert or of the delete question as iOS 26 draws it: a capsule at least 48 tall in the alert's fill
  * ([alertFill]), its title at the body size, medium, in the label colour (an alert's buttons take no tint, and Delete
- * has no role), darkening under the finger as the bar's glass buttons do ([RowHighlight.Capsule]).
+ * has no role) or in red for a destructive one ([destructive]), darkening under the finger as the bar's glass buttons do
+ * ([RowHighlight.Capsule]); off, its title greyed and taking no tap.
  */
 @Composable
-private fun AlertButton(title: String, tag: String, modifier: Modifier, action: () -> Unit) {
+internal fun AlertButton(
+    title: String,
+    tag: String,
+    modifier: Modifier,
+    action: () -> Unit,
+    destructive: Boolean = false,
+    enabled: Boolean = true,
+) {
+    val colors = PeekTheme.colors
     Box(
         modifier
             .heightIn(min = ALERT_CAPSULE_HEIGHT)
             .clip(CapsuleShape)
-            .background(alertFill(PeekTheme.colors.dark))
+            .background(alertFill(colors.dark))
             .testTag(tag)
-            .clickable(interactionSource = null, indication = RowHighlight.Capsule, role = Role.Button, onClick = action)
+            .clickable(interactionSource = null, indication = RowHighlight.Capsule, enabled = enabled, role = Role.Button, onClick = action)
             .padding(horizontal = ALERT_BUTTON_PADDING, vertical = ALERT_CAPSULE_PADDING),
         contentAlignment = Alignment.Center,
     ) {
-        Text(title, color = PeekTheme.colors.label, style = alertButtonFont(), textAlign = TextAlign.Center)
+        val color = when {
+            !enabled -> colors.tertiaryLabel
+            destructive -> colors.red
+            else -> colors.label
+        }
+        Text(title, color = color, style = alertButtonFont(), textAlign = TextAlign.Center)
     }
 }
 
 @Composable
-private fun alertButtonFont(): TextStyle = PeekTheme.type.style(IosTextStyle.Body, FontWeight.Medium).sfLines()
+internal fun alertButtonFont(): TextStyle = PeekTheme.type.style(IosTextStyle.Body, FontWeight.Medium).sfLines()
 
 /**
  * An alert's field and buttons on its glass: in light the system's tertiary fill as the glass's vibrancy deepens it,
  * measured on the iPhone's alert; in dark, which wasn't measured, white at a tenth, the tertiary fill on dark glass.
  */
-private fun alertFill(dark: Boolean): Color = if (dark) ALERT_FILL_DARK else ALERT_FILL_LIGHT
+internal fun alertFill(dark: Boolean): Color = if (dark) ALERT_FILL_DARK else ALERT_FILL_LIGHT
 
 /**
  * Lines as UIKit sets an alert's words: each as tall as the text style's leading at Large (22 for the body's 17
  * points, 20 for the subheadline's 15), the words in the middle of it.
  */
-private fun TextStyle.uiKitLines(style: IosTextStyle): TextStyle = copy(
+internal fun TextStyle.uiKitLines(style: IosTextStyle): TextStyle = copy(
     lineHeight = when (style) {
         IosTextStyle.Subheadline -> 20f / 15f
         else -> 22f / 17f
@@ -1051,7 +1065,7 @@ private fun TextStyle.uiKitLines(style: IosTextStyle): TextStyle = copy(
     lineHeightStyle = LineHeightStyle(alignment = LineHeightStyle.Alignment.Center, trim = LineHeightStyle.Trim.None),
 )
 
-private val DIM = Color.Black.copy(alpha = 0.2f)
+internal val DIM = Color.Black.copy(alpha = 0.2f)
 internal val MENU_WIDTH = 250.dp
 internal val MENU_RADIUS = 24.dp
 internal val MENU_PADDING = 10.dp
@@ -1072,28 +1086,28 @@ private val SEPARATOR_INSET = 24.dp
 
 /** An alert as the iPhone draws it in iOS 26 ([AlertCard]), measured on its rename alert. */
 private val ALERT_RADIUS = 34.dp
-private val ALERT_WIDTH = 320.dp
-private val ALERT_SIDE = 15.dp
-private val ALERT_TOP = 22.dp
-private val ALERT_FIELD_GAP = 14.dp
-private val ALERT_BUTTONS_GAP = 20.dp
+internal val ALERT_WIDTH = 320.dp
+internal val ALERT_SIDE = 15.dp
+internal val ALERT_TOP = 22.dp
+internal val ALERT_FIELD_GAP = 14.dp
+internal val ALERT_BUTTONS_GAP = 20.dp
 
 /** An alert's buttons: 16 from its sides and its foot, 8 apart, each a capsule at least 48 tall. */
-private val ALERT_BUTTON_SIDE = 16.dp
-private val ALERT_BUTTON_GAP = 8.dp
-private val ALERT_CAPSULE_HEIGHT = 48.dp
-private val ALERT_CAPSULE_PADDING = 12.dp
+internal val ALERT_BUTTON_SIDE = 16.dp
+internal val ALERT_BUTTON_GAP = 8.dp
+internal val ALERT_CAPSULE_HEIGHT = 48.dp
+internal val ALERT_CAPSULE_PADDING = 12.dp
 private val ALERT_FILL_LIGHT = Color(118, 118, 128).copy(alpha = 0.3f)
 private val ALERT_FILL_DARK = Color.White.copy(alpha = 0.1f)
 
 /** The words in the rename field, 15 in from its ends. */
-private val FIELD_INSET = 15.dp
+internal val FIELD_INSET = 15.dp
 
 /** Between an alert's or the delete question's title and its message. */
-private val MESSAGE_GAP = 6.dp
+internal val MESSAGE_GAP = 6.dp
 
 /** The room on either side of an alert's button title. */
-private val ALERT_BUTTON_PADDING = 8.dp
+internal val ALERT_BUTTON_PADDING = 8.dp
 
 /**
  * The delete question, as wide as iOS 26 draws it on a phone and in a regular window, and its corners; the page's 10 in

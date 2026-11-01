@@ -232,10 +232,11 @@ internal fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBac
  * The inline bar's row of a stack in a sheet with no confirmation, as the carrier picker's and the browser check's: the
  * title in its middle as a heading, [leading] at its leading end (the stack's ‹, or a [BarCancel]). The title keeps as
  * clear of the trailing end as of a ‹, and moves over where [leading] is wider, as UIKit's does past a Cancel, cut short
- * where even that room is too little.
+ * where even that room is too little. Under a large title, the inline one shows as much as [titleAlpha] says, as it
+ * fades in once the large one has scrolled under the bar, and TalkBack reads the large one alone.
  */
 @Composable
-internal fun InlineBar(title: String, leading: (@Composable () -> Unit)?, modifier: Modifier = Modifier) {
+internal fun InlineBar(title: String, leading: (@Composable () -> Unit)?, modifier: Modifier = Modifier, titleAlpha: (() -> Float)? = null) {
     val insets = LocalSheetInsets.current
     Layout(
         content = {
@@ -243,7 +244,11 @@ internal fun InlineBar(title: String, leading: (@Composable () -> Unit)?, modifi
             ProvideDynamicTypeSize(DynamicTypeSize.Large) {
                 Text(
                     title,
-                    Modifier.semantics { heading() },
+                    if (titleAlpha == null) {
+                        Modifier.semantics { heading() }
+                    } else {
+                        Modifier.graphicsLayer { alpha = titleAlpha() }.clearAndSetSemantics {}
+                    },
                     color = PeekTheme.colors.label,
                     style = PeekTheme.type.headline,
                     maxLines = 1,

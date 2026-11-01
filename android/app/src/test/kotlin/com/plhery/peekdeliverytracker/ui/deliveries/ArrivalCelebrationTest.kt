@@ -574,6 +574,8 @@ class ArrivalCelebrationTest {
         compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
         frame()
         assertNull(deliveries.parcelBurst)
+        compose.runOnUiThread { deliveries.closeAccount() }
+        repeat(60) { frame() }
 
         compose.onNodeWithTag(SEARCH_BUTTON).performClick()
         repeat(30) { frame() }

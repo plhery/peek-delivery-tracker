@@ -59,6 +59,8 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.parcelName
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
+import com.plhery.peekdeliverytracker.ui.settings.DELIVERY_UPDATES_PAGE
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_PAGE
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.zoom.ZoomStack
@@ -242,9 +244,9 @@ internal fun <T> rememberForLaunch(launch: UUID, initial: T): MutableState<T> =
 
 /**
  * What ParcelListView keeps in `@State` for its search and its filters (A-SE04): whether the search shows, the query,
- * the status, the carrier (its raw value, which a window keeps) and the sort, whether the filters are open and whether
- * sheets show as forms, each held for the launch ([rememberForLaunch]), whether the search field has the focus, and
- * the query last counted.
+ * the status, the carrier (its raw value, which a window keeps) and the sort, whether the filters or the account are
+ * open and whether sheets show as forms, each held for the launch ([rememberForLaunch]), whether the search field has
+ * the focus, and the query last counted.
  */
 internal class ListViewStates(
     val showingSearch: MutableState<Boolean>,
@@ -253,6 +255,7 @@ internal class ListViewStates(
     val carrier: MutableState<String?>,
     val sort: MutableState<ParcelSort>,
     val showingFilters: MutableState<Boolean>,
+    val showingAccount: MutableState<Boolean>,
     val sheetsAsForms: MutableState<Boolean>,
     val searchFocused: MutableState<Boolean>,
     val countedQuery: MutableState<String?>,
@@ -266,6 +269,7 @@ internal fun rememberListViewStates(launch: UUID): ListViewStates = ListViewStat
     carrier = rememberForLaunch<String?>(launch, null),
     sort = rememberForLaunch(launch, ParcelSort.Priority),
     showingFilters = rememberForLaunch(launch, false),
+    showingAccount = rememberForLaunch(launch, false),
     sheetsAsForms = rememberForLaunch(launch, false),
     searchFocused = rememberForLaunch(launch, false),
     countedQuery = rememberForLaunch<String?>(launch, null),
@@ -419,11 +423,13 @@ internal class DeliveriesState(
     val sheetsAsForms: Boolean get() = views.sheetsAsForms.value
 
     /**
-     * `settleSheets()`: sheets take the window's arrangement, but only while neither Add nor the filters is open (nor Add
-     * on its way down), so a resize keeps one as it is.
+     * `settleSheets()`: sheets take the window's arrangement, but only while none of Add, the filters and the account is
+     * open (nor Add on its way down), so a resize keeps one as it is.
      */
     fun settleSheets() {
-        if (!showingFilters && addition == null && !additionClosing) views.sheetsAsForms.value = arrangement == DeliveriesArrangement.SideBySide
+        if (!showingFilters && !showingAccount && addition == null && !additionClosing) {
+            views.sheetsAsForms.value = arrangement == DeliveriesArrangement.SideBySide
+        }
     }
 
     /** A search, a status, a carrier or a sort other than the list's own (`hasCustomView`). */
@@ -806,11 +812,31 @@ internal class DeliveriesState(
         if (open != null && open.id == request.id && open.fill == request.fill) addition = open.copy(draft = null, label = "", fill = null)
     }
 
+    /** The account's sheet is open over the window (`showingAccount`, [com.plhery.peekdeliverytracker.ui.settings.AccountSheetHost]). */
+    val showingAccount: Boolean get() = views.showingAccount.value
+
     /**
-     * `showingAccount = true`: the account isn't ported yet, so the button only ends the arrival of a card just added,
-     * as the account opening does.
+     * `showingAccount = true`, from the account button: Settings opens over the window, counted as the `account` screen,
+     * and the arrival of a card just added ends (`revealParcelID = nil; parcelBurstID = nil`). It opens afresh, as the
+     * iPhone's view comes with new state: what an earlier one asked for and didn't see end is forgotten.
      */
-    fun account() = endArrival()
+    fun account() {
+        if (showingAccount) return
+        source.pageWork.forget(SETTINGS_PAGE)
+        source.pageWork.forget(DELIVERY_UPDATES_PAGE)
+        views.showingAccount.value = true
+        settleSheets()
+        endArrival()
+        source.view("account")
+    }
+
+    /** `showingAccount = false`: Settings closes, its Close, a drag, the back or what it did; the list is counted again. */
+    fun closeAccount() {
+        if (!showingAccount) return
+        views.showingAccount.value = false
+        settleSheets()
+        source.view("deliveries")
+    }
 
     /**
      * The empty list's Paste (`onAdd(.paste(Clipboard.string ?? ""))`, which counts nothing, unlike the welcome's):
@@ -878,12 +904,14 @@ internal class DeliveriesState(
     }
 
     /**
-     * `receive(.added)`: a parcel kept or followed from its link's sheet arrives as one just added. Add, the filters and
-     * a card's menu close, a parcel open over the list goes back to it, the list says "link.added" and tells TalkBack,
-     * and, while the window is in front, brings the card to its middle, clearing a search or filters that would hide it.
+     * `receive(.added)`: a parcel kept or followed from its link's sheet arrives as one just added. Add, the account, the
+     * filters and a card's menu close, a parcel open over the list goes back to it, the list says "link.added" and tells
+     * TalkBack, and, while the window is in front, brings the card to its middle, clearing a search or filters that would
+     * hide it.
      */
     fun linkAdded(parcelId: UUID?) {
         closeAdd()
+        closeAccount()
         showingFilters = false
         menu = null
         if (!listShown) navigator.pop(emptyList())
@@ -898,11 +926,12 @@ internal class DeliveriesState(
 
     /**
      * `show(_:)`: a parcel asked for from outside the list, by a notification, a link or Add's "Open existing", opens on
-     * the deliveries with nothing left over them: Add, the filters, and a card's menu and what it opened close first.
-     * TalkBack goes on to the page.
+     * the deliveries with nothing left over them: Add, the account, the filters, and a card's menu and what it opened
+     * close first. TalkBack goes on to the page.
      */
     fun show(parcelId: UUID) {
         closeAdd()
+        closeAccount()
         showingFilters = false
         menu = null
         if (deleting?.pageId == null) deleting = null

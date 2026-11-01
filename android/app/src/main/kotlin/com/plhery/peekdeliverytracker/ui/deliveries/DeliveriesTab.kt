@@ -81,6 +81,7 @@ import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.settings.AccountSheetHost
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.TabReselectionEffect
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
@@ -257,6 +258,8 @@ fun DeliveriesTab(
         ParcelShareHost(state)
         // Add, over the whole window where the tab shell draws it, and the card it added once it has gone.
         AddParcelHost(state)
+        // Settings, from the account button, over the whole window where the tab shell draws it.
+        AccountSheetHost(state)
         Revealing(state, reduceMotion, resumed)
         // The page's map, over the whole window where the tab shell draws it.
         ParcelMapHost(state)

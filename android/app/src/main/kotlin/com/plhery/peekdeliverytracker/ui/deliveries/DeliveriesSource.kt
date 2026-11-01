@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateMapOf
 import com.plhery.peekdeliverytracker.AppContainer
+import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
@@ -14,6 +15,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.NativeRoute
+import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
@@ -29,6 +31,7 @@ import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
+import java.io.File
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -224,6 +227,51 @@ interface DeliveriesSource {
 
     /** The system's prompt for a rating, over the window's `activity` (`requestReview`). */
     fun reviews(activity: Activity): ReviewRequester
+
+    /** `AppConfiguration.version`: the version Settings names under its feedback row and in the mail's subject. */
+    val version: String
+
+    /**
+     * `store.notificationStatus`: what the phone allows the app's notifications, from Android's own setting and
+     * permission ([NotificationAuthorizationStatus.fromAndroid]), once [refreshNotificationState] has read it.
+     */
+    val notificationStatus: StateFlow<NotificationAuthorizationStatus>
+
+    /** `store.notificationsEnabledOnDevice`: pushes registered for this phone. None before M6 brings the push token. */
+    val notificationsEnabledOnDevice: StateFlow<Boolean>
+
+    /** `store.notificationError`: why the account's preferences failed to load or save. */
+    val notificationError: StateFlow<String?>
+
+    /** `store.refreshNotificationState()`: reads the phone's notification setting again. */
+    suspend fun refreshNotificationState()
+
+    /** `store.loadNotificationPreferences()`: the account's or the demo's preferences; none for a guest. */
+    suspend fun loadNotificationPreferences()
+
+    /** `store.enableNotifications(language:)`: whether the welcome notification was sent. */
+    suspend fun enableNotifications(): Boolean
+
+    /** `store.disableNotifications()`. */
+    suspend fun disableNotifications()
+
+    /** `store.saveNotificationPreferences(_:)`. */
+    suspend fun saveNotificationPreferences(value: NotificationPreferences)
+
+    /** `store.exportAccount()`: the account's, the demo's or this phone's parcels, written to a file to share. */
+    suspend fun exportAccount(): File
+
+    /** `store.resetDemoData()`. */
+    suspend fun resetDemoData()
+
+    /** `store.forgetDeviceParcels()`: every parcel this phone follows without an account, here and on the service. */
+    suspend fun forgetDeviceParcels()
+
+    /** `store.deleteAccount(confirmation:)`: the account and all it keeps, `confirmation` the address typed. */
+    suspend fun deleteAccount(confirmation: String)
+
+    /** `store.signOut()`. */
+    suspend fun signOut()
 }
 
 /** The deliveries from the app's container. */
@@ -364,6 +412,34 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override fun reviews(activity: Activity): ReviewRequester = container.reviews(activity)
 
+    override val version: String get() = BuildConfig.VERSION_NAME
+
+    override val notificationStatus get() = container.parcels.notificationStatusFlow
+
+    override val notificationsEnabledOnDevice get() = container.parcels.notificationsEnabledOnDeviceFlow
+
+    override val notificationError get() = container.parcels.notificationErrorFlow
+
+    override suspend fun refreshNotificationState() = container.parcels.refreshNotificationState()
+
+    override suspend fun loadNotificationPreferences() = container.parcels.loadNotificationPreferences()
+
+    override suspend fun enableNotifications(): Boolean = container.parcels.enableNotifications(container.localizer.language)
+
+    override suspend fun disableNotifications() = container.parcels.disableNotifications()
+
+    override suspend fun saveNotificationPreferences(value: NotificationPreferences) = container.parcels.saveNotificationPreferences(value)
+
+    override suspend fun exportAccount(): File = container.parcels.exportAccount()
+
+    override suspend fun resetDemoData() = container.parcels.resetDemoData()
+
+    override suspend fun forgetDeviceParcels() = container.parcels.forgetDeviceParcels()
+
+    override suspend fun deleteAccount(confirmation: String) = container.parcels.deleteAccount(confirmation)
+
+    override suspend fun signOut() = container.parcels.signOut()
+
     private companion object {
         /** This process's launch: the same for every window it makes, another once the system made the process again. */
         val LAUNCH: UUID = UUID.randomUUID()
@@ -418,6 +494,7 @@ class PageWork {
     private val offerNews = mutableStateMapOf<UUID, EmailOfferPhase>()
     private val additions = mutableStateMapOf<UUID, UUID>()
     private val duplicates = mutableStateMapOf<UUID, UUID>()
+    private val exports = mutableStateMapOf<UUID, File>()
 
     /** Whether the page with `pageId` waits for a change it asked for. */
     fun working(pageId: UUID): Boolean = pageId in runs
@@ -467,6 +544,21 @@ class PageWork {
                 leaves[pageId] = cards
             }
         }
+    }
+
+    /**
+     * The account's export the page with `pageId` asked for (AccountView's `exportURL`), once written, until the page
+     * has handed it to the share sheet ([shared]).
+     */
+    fun exported(pageId: UUID): File? = exports[pageId]
+
+    /** Keeps `file` for the page with `pageId` from its change [run] writing it, unless the page forgot that change. */
+    fun export(pageId: UUID, file: File) {
+        if (pageId in runs) exports[pageId] = file
+    }
+
+    fun shared(pageId: UUID) {
+        exports -= pageId
     }
 
     /** The parcel the Add sheet with `id` added, once saved, until it has gone ([forget]). */
@@ -542,6 +634,7 @@ class PageWork {
         offerNews -= pageId
         additions -= pageId
         duplicates -= pageId
+        exports -= pageId
     }
 
     /** The change `run` of the page with `pageId` is over: whether the page still waited for it. */

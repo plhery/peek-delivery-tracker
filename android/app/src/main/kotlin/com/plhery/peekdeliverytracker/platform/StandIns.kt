@@ -1,5 +1,11 @@
 package com.plhery.peekdeliverytracker.platform
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import com.plhery.peekdeliverytracker.core.AppleSignInAuthorizing
 import com.plhery.peekdeliverytracker.core.AppleSignInCredential
 import com.plhery.peekdeliverytracker.core.AuthenticationError
@@ -12,9 +18,21 @@ import com.plhery.peekdeliverytracker.core.WidgetCenter
 // What the app does not do yet, each in the way its interface allows for a phone that cannot: a refusal, a false or
 // nothing at all. Each names the milestone that replaces it.
 
-/** Notifications switched off, never asked and no token, until M6 brings POST_NOTIFICATIONS and Firebase Messaging. */
-object NoPushNotifications : PushNotifications {
-    override suspend fun authorizationStatus(): NotificationAuthorizationStatus = NotificationAuthorizationStatus.Denied
+/**
+ * Notifications never asked for and no token, until M6 brings POST_NOTIFICATIONS' request and Firebase Messaging. What
+ * the phone allows is read from Android's own setting and permission ([NotificationAuthorizationStatus.fromAndroid]),
+ * as Settings' Delivery updates shows it: nothing has asked yet, so on Android 13 and later a permission not granted
+ * is still to be asked, and only the app's notifications turned off in the phone's settings are blocked.
+ */
+class NoPushNotifications(private val context: Context) : PushNotifications {
+    override suspend fun authorizationStatus(): NotificationAuthorizationStatus = NotificationAuthorizationStatus.fromAndroid(
+        sdkInt = Build.VERSION.SDK_INT,
+        granted = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED,
+        askedBefore = false,
+        shouldShowRationale = false,
+        areNotificationsEnabled = NotificationManagerCompat.from(context).areNotificationsEnabled(),
+    )
 
     override suspend fun requestAuthorization(): Boolean = false
 

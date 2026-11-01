@@ -48,11 +48,15 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
 
     /**
      * The whole screen as [folder]/<name>.png, which it returns. Written by the shell: the app's process, where the test
-     * runs, may neither make nor write another package's external files (scoped storage), and adb reads them.
+     * runs, may neither make nor write another package's external files (scoped storage), and adb reads them. Where
+     * another app's window stands over the app's ([ownWindow] false), such as the system's share sheet, it doesn't wait
+     * for the app's frames, which a covered window may not draw.
      */
-    fun take(name: String): Bitmap {
-        compose.waitForIdle()
-        awaitFrames()
+    fun take(name: String, ownWindow: Boolean = true): Bitmap {
+        if (ownWindow) {
+            compose.waitForIdle()
+            awaitFrames()
+        }
         val taken = checkNotNull(instrumentation.uiAutomation.takeScreenshot()) { "No screenshot" }
         val screen = if (taken.config == Bitmap.Config.HARDWARE) taken.copy(Bitmap.Config.ARGB_8888, false) else taken
         val png = ByteArrayOutputStream().use { out ->

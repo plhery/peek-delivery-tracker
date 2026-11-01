@@ -817,7 +817,7 @@ private fun DemoButton(scene: FirstOpenScene, large: Boolean, modifier: Modifier
  * 16; [large], 30 in from its ends. It gives under the finger (`TactileButtonStyle`).
  */
 @Composable
-private fun FirstParcelPrimaryButton(
+internal fun FirstParcelPrimaryButton(
     title: String,
     symbol: String?,
     large: Boolean,

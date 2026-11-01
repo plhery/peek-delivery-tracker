@@ -283,7 +283,7 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
 }
 
 /**
- * `AccountToolbarButton`: the account's initial, or a figure, on a 34-point yellow disc. The account isn't ported yet
+ * `AccountToolbarButton`: the account's initial, or a figure, on a 34-point yellow disc, which opens Settings
  * ([DeliveriesState.account]).
  */
 @Composable

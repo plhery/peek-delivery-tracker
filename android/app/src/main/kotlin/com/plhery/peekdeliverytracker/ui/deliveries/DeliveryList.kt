@@ -12,16 +12,20 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -62,11 +66,13 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
@@ -84,14 +90,19 @@ import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
+import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
+import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.LocalPipSight
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
+import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.Radii
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.zoom.recedingUnderZoom
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
 import java.util.UUID
@@ -407,6 +418,10 @@ private sealed interface ListItem {
 
     @Immutable
     data class Foot(val homePageUrl: String, val privacyUrl: String) : ListItem
+
+    /** The offer of an account to someone following parcels without one ([DeviceAccountRow]). */
+    @Immutable
+    data object DeviceAccount : ListItem
 }
 
 /**
@@ -450,8 +465,8 @@ private fun listEntries(
     layout.next?.let { first(cardKey("next", it.id), "next", ListItem.Next(it)) }
     for (parcel in layout.attention) first(cardKey("attention", parcel.id), "card", ListItem.OnTheWay(parcel, attention = true))
     for (parcel in layout.remaining) first(cardKey("remaining", parcel.id), "card", ListItem.OnTheWay(parcel, attention = false))
-    // Someone following parcels without an account is offered one under them, outside a custom view, which comes with
-    // the sign-in.
+    // Someone following parcels without an account is offered one under them, once and quietly, outside a custom view.
+    if (guest && parcels.isNotEmpty() && !custom) first("deviceAccount", "deviceAccount", ListItem.DeviceAccount)
     for (section in layout.sections) {
         if (section.kind == ParcelSectionKind.Archived) {
             // A custom view shows the archived parcels it finds under their header, rather than on the shelf.
@@ -489,6 +504,56 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
         is ListItem.Header -> SectionHeader(item.kind, item.count)
         is ListItem.SectionCard -> SectionCard(state, item)
         is ListItem.Foot -> DeliveriesFoot(item.homePageUrl, item.privacyUrl)
+        ListItem.DeviceAccount -> DeviceAccountRow { state.source.showSignIn() }
+    }
+}
+
+/**
+ * FirstOpenView's `DeviceAccountRow` (A-S19): "link.account.title" in subheadline medium in the ink over
+ * "native.guest.kept" in caption secondary, 2 apart, and 8 at least from "arrival.signInTitle" in footnote medium on a
+ * cream capsule 34 tall, 12 in; or the capsule 10 under the words at the accessibility sizes. The row is 15 in, 10 above
+ * and below, 66 tall at least, on the paper with 16-point continuous corners and a hairline of 0.75 in the separator at
+ * 0.3, and gives under the finger; a tap asks to sign in (`session.showSignIn()`).
+ */
+@Composable
+private fun DeviceAccountRow(onSignIn: () -> Unit) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val shape = ContinuousRoundedShape(16.dp)
+    val stacked = PeekTheme.dynamicTypeSize.isAccessibilitySize
+    val words = @Composable {
+        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text(localized("link.account.title"), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
+            Text(localized("native.guest.kept"), color = colors.secondaryLabel, style = type.caption.sfLines())
+        }
+    }
+    val capsule = @Composable {
+        Box(
+            Modifier.heightIn(min = 34.dp).background(colors.cream, CapsuleShape).padding(horizontal = 12.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(localized("arrival.signInTitle"), color = colors.ink, style = type.style(IosTextStyle.Footnote, FontWeight.Medium).sfLines())
+        }
+    }
+    val frame = Modifier
+        .fillMaxWidth()
+        .testTag(DEVICE_ACCOUNT_ROW)
+        .clickable(interactionSource = null, indication = PressStyle.Tactile, role = Role.Button, onClick = onSignIn)
+        .heightIn(min = 66.dp)
+        .background(colors.paper, shape)
+        .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape)
+        .padding(horizontal = 15.dp, vertical = 10.dp)
+        .semantics(mergeDescendants = true) {}
+    if (stacked) {
+        Column(frame, verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            words()
+            capsule()
+        }
+    } else {
+        Row(frame, verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.weight(1f).padding(end = 8.dp)) { words() }
+            capsule()
+        }
     }
 }
 
@@ -790,3 +855,6 @@ private const val SEARCH_MOTION = 0.3
 private val SEARCH_DROP = 10.dp
 
 const val ANNOUNCEMENT = "deliveries.announcement"
+
+/** iOS's id for the guest's offer of an account, the same as the account button's. */
+const val DEVICE_ACCOUNT_ROW = "deliveries.account"

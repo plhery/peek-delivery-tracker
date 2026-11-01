@@ -13,6 +13,7 @@ import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
+import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
@@ -34,6 +35,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import java.io.File
 import java.time.Instant
 import java.time.ZoneOffset
 import java.util.UUID
@@ -500,6 +502,81 @@ class FakeDeliveries(
         actions += name
         outcomes += outcome
     }
+
+    override val version = "1.0"
+
+    override val notificationStatus = MutableStateFlow(NotificationAuthorizationStatus.NotDetermined)
+    override val notificationsEnabledOnDevice = MutableStateFlow(false)
+    override val notificationError = MutableStateFlow<String?>(null)
+
+    /** Holds each of the account's actions (an export, a reset, a forget, a deletion, a sign-out, a save) until the test lets it go. */
+    var accountWork: CompletableDeferred<Unit>? = null
+
+    /** What the account's actions throw, when they fail. */
+    var accountFailure: Exception? = null
+
+    /** Whether the welcome notification goes out as notifications are turned on. */
+    var welcomeSent = true
+
+    /**
+     * What the account's actions were asked, in their order: `refreshNotificationState`, `loadNotificationPreferences`,
+     * `enableNotifications`, `disableNotifications`, `saveNotificationPreferences`, `exportAccount`, `resetDemoData`,
+     * `forgetDeviceParcels`, `deleteAccount:<confirmation>` and `signOut`.
+     */
+    val accountCalls = mutableListOf<String>()
+
+    /** The preferences each save sent. */
+    val savedPreferences = mutableListOf<NotificationPreferences>()
+
+    private suspend fun accountCall(name: String) {
+        accountCalls += name
+        accountWork?.await()
+        accountFailure?.let { throw it }
+    }
+
+    override suspend fun refreshNotificationState() {
+        accountCalls += "refreshNotificationState"
+    }
+
+    override suspend fun loadNotificationPreferences() {
+        accountCalls += "loadNotificationPreferences"
+    }
+
+    override suspend fun enableNotifications(): Boolean {
+        accountCall("enableNotifications")
+        notificationsEnabledOnDevice.value = true
+        return welcomeSent
+    }
+
+    override suspend fun disableNotifications() {
+        accountCall("disableNotifications")
+        notificationsEnabledOnDevice.value = false
+    }
+
+    override suspend fun saveNotificationPreferences(value: NotificationPreferences) {
+        accountCall("saveNotificationPreferences")
+        savedPreferences += value
+        notificationPreferences.value = value.copy(emailAvailable = notificationPreferences.value?.emailAvailable)
+        deliveryEmail.value = storedEmail
+    }
+
+    /** The export's file, in the folder the app's FileProvider hands out (cacheDir/exports). */
+    override suspend fun exportAccount(): File {
+        accountCall("exportAccount")
+        val folder = File(ApplicationProvider.getApplicationContext<Context>().cacheDir, "exports").apply { mkdirs() }
+        return File(folder, "peek-export-2026-05-01.json").apply { writeText("{\"packages\":[]}") }
+    }
+
+    override suspend fun resetDemoData() = accountCall("resetDemoData")
+
+    override suspend fun forgetDeviceParcels() {
+        accountCall("forgetDeviceParcels")
+        parcels.value = emptyList()
+    }
+
+    override suspend fun deleteAccount(confirmation: String) = accountCall("deleteAccount:$confirmation")
+
+    override suspend fun signOut() = accountCall("signOut")
 
     /** The same stores in a process started again, after the system closed the app. */
     fun newProcess(): FakeDeliveries = FakeDeliveries(parcels.value, session.value, shareLinks = shareLinks, shareDefaults = shareDefaults)

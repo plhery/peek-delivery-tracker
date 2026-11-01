@@ -25,10 +25,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -46,6 +43,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
@@ -58,12 +56,14 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onPlaced
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
@@ -108,6 +108,7 @@ import com.plhery.peekdeliverytracker.core.ParcelTrackingNumber
 import com.plhery.peekdeliverytracker.core.PickupPoint
 import com.plhery.peekdeliverytracker.core.PipGeometry
 import com.plhery.peekdeliverytracker.core.PipLabel
+import com.plhery.peekdeliverytracker.core.PullToRefreshModel
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -486,9 +487,8 @@ private fun Centered(top: Dp, bottom: Dp, content: @Composable () -> Unit) {
  * parcel's note (B-S76), then 6 in its number, its import charges, its journal and the question under it ([feedback]),
  * which hears of a visit to the carrier's page. A gift on its way tells its hidden beginning once (`collapsingGiftRows`)
  * and hides its number, in lilac. It scrolls at most 560 wide in the middle, and a pull from its top reads the link
- * again (B-G12).
+ * again, pulling the content down under the refresh control (B-G12).
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LinkShared(
     source: ParcelLinkSource,
@@ -520,31 +520,53 @@ private fun LinkShared(
     val tint = if (wrapped || opened) colors.resolve(ExperimentalPalette.lilac) else colors.resolve(identity.ink)
     // Where the scroll shows what it holds, which the question comes in as it is seen in.
     val viewport = remember { arrayOfNulls<LayoutCoordinates>(1) }
-    val pull = rememberPullToRefreshState()
-    PullToRefreshBox(
-        isRefreshing = state.refreshing,
-        onRefresh = { state.refresh(source) },
-        modifier = Modifier.fillMaxSize().padding(top = top),
-        state = pull,
-        indicator = {
-            // The iPhone's refresh control: its spinner, coming in with the pull.
-            Box(
-                Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 12.dp)
-                    .graphicsLayer { alpha = if (state.refreshing) 1f else pull.distanceFraction.coerceIn(0f, 1f) },
-            ) {
-                ActivityIndicator(size = 20.dp, tint = colors.secondaryLabel)
-            }
-        },
+    // `.refreshable`: the content follows the pull on the list's rubber band, and a gap stays open over it while the
+    // link is read again ([ListPull]).
+    val pullScope = rememberCoroutineScope()
+    val pullModel = remember { PullToRefreshModel(pullScope) }
+    val refresh by rememberUpdatedState {
+        pullModel.begin("")
+        state.refresh(source)
+        if (!state.refreshing) pullModel.settle()
+    }
+    val pull = remember(pullModel) { ListPull(pullModel, pullScope) { refresh() } }
+    val pullPhase by pullModel.phaseFlow.collectAsState()
+    LaunchedEffect(state.refreshing) {
+        if (!state.refreshing && pullModel.phase == PullToRefreshModel.Phase.Refreshing) pullModel.settle()
+    }
+    PullEffects(pull, pullModel)
+    val held = with(LocalDensity.current) { pull.held.value.toDp() }
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(top = top)
+            .clipToBounds()
+            .nestedScroll(pull)
+            .onSizeChanged { pull.height = it.height },
     ) {
+        // The iPhone's refresh control: its spinner in the middle of the gap the pull opens, coming in with the pull.
+        Box(
+            Modifier
+                .align(Alignment.TopCenter)
+                .graphicsLayer {
+                    translationY = pull.shown / 2 - 10.dp.toPx()
+                    alpha = when (pullPhase) {
+                        PullToRefreshModel.Phase.Refreshing -> 1f
+                        PullToRefreshModel.Phase.Settling -> (pull.held.value / ListPull.HOLD.toPx()).coerceIn(0f, 1f)
+                        PullToRefreshModel.Phase.Idle -> pullModel.progress.toFloat()
+                    }
+                },
+        ) {
+            ActivityIndicator(size = 20.dp, tint = colors.secondaryLabel)
+        }
         Column(
             Modifier
                 .fillMaxSize()
+                .graphicsLayer { translationY = pull.past }
                 .onPlaced { viewport[0] = it }
                 .verticalScroll(scroll)
                 .testTag(LINK_SCROLL)
-                .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 32.dp + bottom),
+                .padding(start = 16.dp, top = 8.dp + held, end = 16.dp, bottom = 32.dp + bottom),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Column(Modifier.widthIn(max = 560.dp).fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(14.dp)) {

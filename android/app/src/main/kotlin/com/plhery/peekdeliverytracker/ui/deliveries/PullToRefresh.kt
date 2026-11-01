@@ -92,13 +92,19 @@ import kotlinx.coroutines.launch
  * still bounces as before. Thrown back up while pulled, the list takes the pull back and scrolls on with what is left
  * of the throw, as a scroll view's momentum carries on past its top.
  *
- * It is the tab's ([DeliveriesState.listPull]), not the list's, so that a pull or a gap held open lives on as the window
- * turns and the list is drawn anew ([ListPullEffects]).
+ * The list's is the tab's ([DeliveriesState.listPull]), not the list's, so that a pull or a gap held open lives on as
+ * the window turns and the list is drawn anew ([ListPullEffects]). A parcel's link sheet pulls its content so too, as
+ * its `.refreshable` scroll view does ([PullEffects]). [refresh] starts the refresh the pull asks for, which begins
+ * and settles [model].
  *
  * Positions are in pixels: [past] is how far the content shows below its rest, [held] the gap held open.
  */
 @Stable
-internal class ListPull(private val state: DeliveriesState, private val scope: CoroutineScope) : NestedScrollConnection {
+internal class ListPull(
+    private val model: PullToRefreshModel,
+    private val scope: CoroutineScope,
+    private val refresh: () -> Unit,
+) : NestedScrollConnection {
     var density: Density = Density(1f)
     var height: Int = 0
 
@@ -109,8 +115,6 @@ internal class ListPull(private val state: DeliveriesState, private val scope: C
     private var dragging = false
     private var trigger = PullToRefreshTrigger()
     private var spring: Job? = null
-
-    private val model: PullToRefreshModel get() = state.pull
 
     /** How far the content is moved down from its rest: what the list is drawn translated by, beside its gap. */
     val shown: Float get() = past + held.value
@@ -205,7 +209,7 @@ internal class ListPull(private val state: DeliveriesState, private val scope: C
         val shown = shown
         scope.launch { held.snapTo(gap) }
         past = max(0f, shown - gap)
-        state.refreshFromPull()
+        refresh()
     }
 
     /** The refresh is over: the gap closes. */
@@ -233,10 +237,13 @@ internal class ListPull(private val state: DeliveriesState, private val scope: C
 
 /** The tab's side of the pull ([DeliveriesState.listPull]): the window's density, and the gap closing as the refresh settles. */
 @Composable
-internal fun ListPullEffects(state: DeliveriesState) {
-    val pull = state.listPull
+internal fun ListPullEffects(state: DeliveriesState) = PullEffects(state.listPull, state.pull)
+
+/** A pull's side in the window: the window's density, and the gap closing as `model`'s refresh settles. */
+@Composable
+internal fun PullEffects(pull: ListPull, model: PullToRefreshModel) {
     pull.density = LocalDensity.current
-    val phase by state.pull.phaseFlow.collectAsState()
+    val phase by model.phaseFlow.collectAsState()
     LaunchedEffect(pull, phase) {
         if (phase == PullToRefreshModel.Phase.Settling) pull.close()
     }

@@ -948,7 +948,7 @@ internal class DeliveriesState(
     val pull = PullToRefreshModel(scope)
 
     /** The finger's pull on the list, kept here rather than with the list so that a turn of the window keeps it. */
-    val listPull = ListPull(this, scope)
+    val listPull = ListPull(pull, scope, ::refreshFromPull)
 
     var toast: ListToast? by mutableStateOf(null)
         private set

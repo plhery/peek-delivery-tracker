@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -19,6 +20,7 @@ import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
@@ -34,6 +36,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -511,6 +514,33 @@ class ParcelLinkSheetTest {
         assertTrue(exists(LINK_CARD))
         assertTrue(exists(LINK_NOTE))
         assertTrue(shows(text("error.connection")))
+    }
+
+    @Test
+    fun aPullDrawsTheContentDownHoldsAGapOverItWhileTheLinkIsReadAgainThenClosesIt() {
+        show(FakeParcelLinks())
+        open()
+        fun cardTop() = compose.onNodeWithTag(LINK_CARD).getBoundsInRoot().top
+        val rest = cardTop()
+        val answer = CompletableDeferred<PublicParcelResponse?>()
+        links.read = { _, _ -> answer.await() }
+        compose.onNodeWithTag(LINK_SCROLL).performTouchInput {
+            down(center)
+            repeat(28) { moveBy(Offset(0f, 25.dp.toPx())) }
+        }
+        compose.waitForIdle()
+        val pulled = cardTop()
+        assertTrue("The content follows the finger: from $rest to $pulled", pulled > rest + 100.dp)
+        assertEquals("Pulled far enough, the link is read again under the finger", 2, links.reads.size)
+
+        compose.onNodeWithTag(LINK_SCROLL).performTouchInput { up() }
+        settle()
+        assertEquals("The gap the refresh control holds open", 60f, (cardTop() - rest).value, 1f)
+
+        answer.complete(LinkFixtures.viewer())
+        settle()
+        assertEquals(rest.value, cardTop().value, 0.5f)
+        assertEquals(2, links.reads.size)
     }
 
     @Test

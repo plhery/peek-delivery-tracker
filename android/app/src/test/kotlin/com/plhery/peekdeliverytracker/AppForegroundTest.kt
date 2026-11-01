@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Looper
+import android.provider.Settings
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.test.core.app.ApplicationProvider
@@ -52,6 +53,9 @@ class AppForegroundTest {
 
     @Before
     fun offline() {
+        // Animations off: a guest with nothing followed sees the first open, whose carriers roll on frame after frame,
+        // and the main looper would never run dry.
+        Settings.Global.putFloat(app.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 0f)
         app.shareDefaults = { MemoryDefaults() }
         val configuration = BuildSettings.configuration.copy(
             mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://peek.invalid", supabaseUrl = null, supabasePublishableKey = "",
@@ -70,6 +74,7 @@ class AppForegroundTest {
         shadowOf(Looper.getMainLooper()).idle()
         made?.scope?.cancel()
         CarrierCatalog.install(catalog)
+        Settings.Global.putFloat(app.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
     }
 
     private fun window(): ActivityController<MainActivity> =

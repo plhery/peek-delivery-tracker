@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Looper
+import android.provider.Settings
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.test.core.app.ApplicationProvider
@@ -63,6 +64,9 @@ class ParcelLinkActivityTest {
 
     @Before
     fun offline() {
+        // Animations off: a guest with nothing followed sees the first open, whose carriers roll on frame after frame,
+        // and Compose would never be idle.
+        Settings.Global.putFloat(app.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 0f)
         app.makeStores = { application ->
             withContext(Dispatchers.IO) {
                 AppContainer(
@@ -78,6 +82,7 @@ class ParcelLinkActivityTest {
     fun stop() {
         made?.scope?.cancel()
         CarrierCatalog.install(catalog)
+        Settings.Global.putFloat(app.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
     }
 
     private fun link(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url)).addCategory(Intent.CATEGORY_BROWSABLE)

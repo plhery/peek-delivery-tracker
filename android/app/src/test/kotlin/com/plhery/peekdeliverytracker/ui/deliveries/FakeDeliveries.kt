@@ -321,6 +321,9 @@ class FakeDeliveries(
     /** Tracking without an account, as a test sets it. */
     override var isGuest: Boolean = false
 
+    /** Whether the build tracks without an account; a test sets a build without a server. */
+    override var tracksWithoutAccount: Boolean = true
+
     /** Holds an addition until completed; `failure` fails it. */
     var adding: CompletableDeferred<Unit>? = null
 
@@ -480,6 +483,12 @@ class FakeDeliveries(
 
     override fun showSignIn() {
         signIns++
+    }
+
+    var demos = 0
+
+    override fun enterDemo() {
+        demos++
     }
 
     override fun view(screen: String) {

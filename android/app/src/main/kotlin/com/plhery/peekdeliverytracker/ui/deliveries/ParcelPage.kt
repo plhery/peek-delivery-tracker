@@ -36,6 +36,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.Snapshot
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.dropShadow
@@ -103,6 +104,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
 import com.plhery.peekdeliverytracker.ui.zoom.pageBarItem
 import java.util.UUID
 import kotlin.math.max
@@ -115,6 +117,16 @@ import kotlinx.coroutines.withTimeoutOrNull
  * puts it under. Null where the page keeps clear of the bar's row itself.
  */
 internal val LocalPageTop = compositionLocalOf<Dp?> { null }
+
+/**
+ * A stack of pages other than the deliveries': the first open's own (FirstOpenView's `NavigationStack`), which its
+ * sample parcel's page zooms out of with [zoom] and goes back to with [back], over the whole window whatever the
+ * deliveries' arrangement.
+ */
+internal class PageStack(val zoom: ZoomTransition, val back: () -> Unit)
+
+/** The stack the page stands in where it isn't the deliveries'; null in theirs. */
+internal val LocalPageStack = staticCompositionLocalOf<PageStack?> { null }
 
 /**
  * ParcelDetailView's frame (B-S01): the parcel with `parcelId` on its page, over the list or beside it.
@@ -245,7 +257,8 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, fee
     val viewport = remember { arrayOfNulls<LayoutCoordinates>(1) }
     BoxWithConstraints(Modifier.fillMaxSize().onPlaced { viewport[0] = it }) {
         val columns = ParcelPageColumns.fit(
-            maxWidth.value.toDouble(), besideList = state.arrangement == DeliveriesArrangement.SideBySide, largeText = largeText, history = history,
+            maxWidth.value.toDouble(), besideList = LocalPageStack.current == null && state.arrangement == DeliveriesArrangement.SideBySide,
+            largeText = largeText, history = history,
         )
         Column(
             Modifier
@@ -487,7 +500,8 @@ private fun SyncStatus(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
  * The page's bar over the list, which [ZoomStack][com.plhery.peekdeliverytracker.ui.zoom.ZoomStack] keeps at the
  * window's top as the page zooms under it: ‹ on its glass at the leading edge, back to the list as the system's back
  * goes, and the parcel's ••• menu on its own at the trailing edge while the page shows a parcel of the deliveries
- * (none for the sample, nor for a parcel gone). No title: the pass names the parcel.
+ * (none for the sample, nor for a parcel gone). No title: the pass names the parcel. In the first open's stack
+ * ([LocalPageStack]) ‹ goes back to the first open, and reads as UIKit's back button over a screen with no title.
  */
 @Composable
 internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
@@ -495,20 +509,28 @@ internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
     val padding = tabContentPadding()
     val direction = LocalLayoutDirection.current
     val navigator = state.navigator
+    val stack = LocalPageStack.current
+    val zoom = stack?.zoom ?: state.zoom
     Box(Modifier.fillMaxWidth().padding(top = barRowTop()).height(BAR_ROW).testTag(PAGE_BAR)) {
         GlassSurface(
             CapsuleShape,
             Modifier
                 .align(Alignment.CenterStart)
                 .offset(x = padding.calculateStartPadding(direction) + BAR_MARGIN)
-                .pageBarItem(state.zoom, leading = true)
+                .pageBarItem(zoom, leading = true)
                 .size(BAR_BUTTON),
         ) {
             // TalkBack reads it as VoiceOver reads UIKit's back button: the title of what it goes back to, the list's or
-            // the page's under this one.
-            val back = localized(if (navigator.navigation.path.size > 1) "detail.label" else "native.deliveries")
+            // the page's under this one, or Back where that has none.
+            val back = localized(
+                when {
+                    stack != null -> "detail.back"
+                    navigator.navigation.path.size > 1 -> "detail.label"
+                    else -> "native.deliveries"
+                },
+            )
             BarButton("chevron.left", back, PAGE_BACK, Modifier.align(Alignment.Center)) {
-                navigator.pop(navigator.navigation.path.dropLast(1))
+                if (stack != null) stack.back() else navigator.pop(navigator.navigation.path.dropLast(1))
             }
         }
         if (parcel != null) {
@@ -517,7 +539,7 @@ internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
                 Modifier
                     .align(Alignment.CenterEnd)
                     .offset(x = -(padding.calculateEndPadding(direction) + BAR_MARGIN))
-                    .pageBarItem(state.zoom, leading = false)
+                    .pageBarItem(zoom, leading = false)
                     .size(BAR_BUTTON),
             ) {
                 PageMenuButton(state, parcelId, Modifier.align(Alignment.Center))
@@ -579,7 +601,8 @@ private fun BarButton(symbol: String, label: String, tag: String, modifier: Modi
  */
 @Composable
 private fun PageKeys(state: DeliveriesState, pageId: UUID, parcel: Parcel?) {
-    val handle by rememberUpdatedState { event: KeyEvent -> state.pageKey(event, pageId, parcel) }
+    val stack = LocalPageStack.current
+    val handle by rememberUpdatedState { event: KeyEvent -> state.pageKey(event, pageId, parcel, stack) }
     val view = LocalView.current
     DisposableEffect(view) {
         val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event -> handle(event) }
@@ -588,10 +611,16 @@ private fun PageKeys(state: DeliveriesState, pageId: UUID, parcel: Parcel?) {
     }
 }
 
-private fun DeliveriesState.pageKey(event: KeyEvent, pageId: UUID, parcel: Parcel?): Boolean {
+private fun DeliveriesState.pageKey(event: KeyEvent, pageId: UUID, parcel: Parcel?, stack: PageStack?): Boolean {
     if (modal || showingFilters || searchFocused) return false
-    if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen == null) return false
     val act = event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0
+    // The first open's sample page, over the first open: Esc goes back to it.
+    if (stack != null) {
+        if (!event.hasNoModifiers() || event.keyCode != KeyEvent.KEYCODE_ESCAPE) return false
+        if (act) stack.back()
+        return true
+    }
+    if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen == null) return false
     if (arrangement == DeliveriesArrangement.Stacked && event.hasNoModifiers() && event.keyCode == KeyEvent.KEYCODE_ESCAPE) {
         if (act) navigator.pop(navigator.navigation.path.dropLast(1))
         return true

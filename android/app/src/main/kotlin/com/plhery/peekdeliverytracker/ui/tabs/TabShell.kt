@@ -45,6 +45,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -116,20 +117,21 @@ class TabReselection {
 
 /**
  * An upright hinge that splits the window, as a foldable in book posture or a dual screen spanned has: where it starts
- * and ends, in pixels from the window's left.
+ * and ends, in pixels from the window's left, and whether the device stands half open there (`halfOpen`, a fold
+ * that isn't flat), as an iPhone Duo's `window.fold` is.
  */
 @Immutable
-data class WindowHinge(val start: Int, val end: Int)
+data class WindowHinge(val start: Int, val end: Int, val halfOpen: Boolean = false)
 
 /** The hinge splitting the tab's window, null where none does. */
 val LocalWindowHinge = compositionLocalOf<WindowHinge?> { null }
 
 /**
  * A level hinge that splits the window, as a foldable half open on a table has: where it starts and ends, in pixels
- * from the window's top.
+ * from the window's top, and whether the device stands half open there (`halfOpen`).
  */
 @Immutable
-data class WindowLevelHinge(val top: Int, val bottom: Int)
+data class WindowLevelHinge(val top: Int, val bottom: Int, val halfOpen: Boolean = false)
 
 /** The level hinge splitting the tab's window, null where none does. */
 val LocalWindowLevelHinge = compositionLocalOf<WindowLevelHinge?> { null }
@@ -294,6 +296,53 @@ fun TabBarHidden(hidden: Boolean) {
     }
 }
 
+/**
+ * What a tab stands over the whole shell, its tab bar too, and under what the tabs present: the first open, as the
+ * iPhone's stands over its TabView (`.overlay { FirstOpenView }`). While it [covers] them, TalkBack reaches neither the
+ * tab nor the bar (`.accessibilityHidden(showsFirstOpen)`) and the keys that choose a tab are off (`tabKeys`).
+ */
+@Stable
+class TabCover {
+    internal var content: (@Composable () -> Unit)? by mutableStateOf(null)
+
+    /** What the tab provides where it asks for the cover, which the cover is composed with. */
+    internal var context: CompositionLocalContext? by mutableStateOf(null)
+
+    /** Whether it stands over the tabs, rather than only drawing on its way in or out. */
+    var covers: Boolean by mutableStateOf(false)
+        internal set
+}
+
+val LocalTabCover = staticCompositionLocalOf<TabCover?> { null }
+
+/**
+ * Draws `content` over the whole shell from a tab ([TabCover]), the tabs covered while [covers], composed with what is
+ * provided here. Outside a shell it is drawn here, over what the tab drew before it. It stays drawn as long as this
+ * does, so that it can go on its own.
+ */
+@Composable
+fun TabCovering(covers: Boolean, content: @Composable () -> Unit) {
+    val cover = LocalTabCover.current
+    if (cover == null) {
+        content()
+        return
+    }
+    val current by rememberUpdatedState(content)
+    val covering = remember { @Composable { current() } }
+    // Set as it is composed, before the shell draws the cover, so that it stands there from the frame it comes in:
+    // at once on a launch, with no frame of the tab before it.
+    cover.content = covering
+    cover.context = currentCompositionLocalContext
+    cover.covers = covers
+    DisposableEffect(cover) {
+        onDispose {
+            cover.content = null
+            cover.context = null
+            cover.covers = false
+        }
+    }
+}
+
 /** Runs `onReselect` each time the tab drawing this is tapped again while chosen. */
 @Composable
 fun TabReselectionEffect(onReselect: suspend () -> Unit) {
@@ -332,7 +381,9 @@ fun TabShell(
             onView(tabs[selection].screen)
         }
     }
-    TabKeys(onSelect)
+    val cover = remember { TabCover() }
+    // Off while the first open stands over the tabs, as `tabKeys` are.
+    TabKeys(onSelect, enabled = !cover.covers)
     val tap = { tab: Int -> if (tab == selection) reselections[tab].reselect() else onSelect(tab) }
     val holder = rememberSaveableStateHolder()
     val backdrop = rememberMaterialBackdrop()
@@ -354,8 +405,10 @@ fun TabShell(
         val footprint = if (top) PaddingValues(top = topGap + TOP_BAR_HEIGHT) else PaddingValues(bottom = bottomGap + BOTTOM_BAR_HEIGHT)
         val (windowHinge, levelHinge) = windowHinges(constraints.maxWidth, constraints.maxHeight)
         val hinge = windowHinge?.start
-        // Under what a tab draws over the window, which is modal, as the iPhone's menus, alerts and sheets are.
-        val hidden = if (overlay.covered || front.covered) Modifier.clearAndSetSemantics {} else Modifier
+        // Under what a tab draws over the window, which is modal, as the iPhone's menus, alerts and sheets are, and
+        // under the first open.
+        val presented = overlay.covered || front.covered
+        val hidden = if (presented || cover.covers) Modifier.clearAndSetSemantics {} else Modifier
         Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background).then(hidden)) {
             CompositionLocalProvider(
                 LocalTabBarPadding provides footprint,
@@ -364,6 +417,7 @@ fun TabShell(
                 LocalWindowLevelHinge provides levelHinge,
                 LocalTabOverlay provides overlay,
                 LocalTabBarVisibility provides visibility,
+                LocalTabCover provides cover,
             ) {
                 holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
                 CompositionLocalProvider(LocalTabOverlay provides front, content = overlays)
@@ -374,7 +428,7 @@ fun TabShell(
             val bar = measurable.measure(constraints)
             layout(bar.width, bar.height) { if (!visibility.hidden) bar.place(0, 0) }
         }
-        val barHidden = if (overlay.covered || front.covered || visibility.hidden) Modifier.clearAndSetSemantics {} else Modifier
+        val barHidden = if (presented || cover.covers || visibility.hidden) Modifier.clearAndSetSemantics {} else Modifier
         if (top) {
             TopTabBar(
                 labels, selection, tap, backdrop,
@@ -389,11 +443,35 @@ fun TabShell(
                 Modifier.align(Alignment.BottomStart).then(shown).then(clear).clearOfTheHinge(hinge).padding(bottom = bottomGap).then(barHidden),
             )
         }
+        // The first open, over the tab and its bar, under what the tab presents. The bar is under it, so what it draws
+        // keeps no room for one. Read as it is measured, after the tab, which asks for it as it is measured itself: it
+        // stands there from the tab's first frame, at once on a launch. TalkBack doesn't reach it on its way out.
+        ComposedAsMeasured(Modifier.fillMaxSize()) {
+            val covering = cover.content
+            val coverContext = cover.context
+            if (covering != null && coverContext != null) {
+                val coverHidden = presented || !cover.covers
+                Box(Modifier.fillMaxSize().then(if (coverHidden) Modifier.clearAndSetSemantics {} else Modifier)) {
+                    CompositionLocalProvider(coverContext) {
+                        CompositionLocalProvider(LocalTabBarPadding provides PaddingValues(0.dp), content = covering)
+                    }
+                }
+            }
+        }
         // What a layer presents over the whole window in turn comes over it, in its own layer.
         Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier) {
             CompositionLocalProvider(LocalWindowOverlay provides overlay) { overlay.Content() }
         }
         CompositionLocalProvider(LocalWindowOverlay provides front) { front.Content() }
+    }
+}
+
+/** [content] composed as it is measured, after what comes before it in the layout, so it reads what they wrote then. */
+@Composable
+private fun ComposedAsMeasured(modifier: Modifier, content: @Composable () -> Unit) {
+    SubcomposeLayout(modifier) { constraints ->
+        val placeables = subcompose(Unit, content).map { it.measure(constraints) }
+        layout(constraints.maxWidth, constraints.maxHeight) { placeables.forEach { it.place(0, 0) } }
     }
 }
 
@@ -426,11 +504,13 @@ internal fun shortcutTab(event: KeyEvent): Int? {
  * a sheet is a window of its own and keeps its keys, so they don't reach the tabs under it.
  */
 @Composable
-private fun TabKeys(choose: (Int) -> Unit) {
+private fun TabKeys(choose: (Int) -> Unit, enabled: Boolean) {
     val view = LocalView.current
     val current by rememberUpdatedState(choose)
+    val on by rememberUpdatedState(enabled)
     DisposableEffect(view) {
         val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event ->
+            if (!on) return@OnUnhandledKeyEventListenerCompat false
             val tab = shortcutTab(event) ?: return@OnUnhandledKeyEventListenerCompat false
             if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) current(tab)
             true
@@ -462,24 +542,24 @@ private fun windowHinges(windowWidth: Int, windowHeight: Int): Pair<WindowHinge?
         WindowInfoTracker.getOrCreate(activity).windowLayoutInfo(activity).collect { layout ->
             val folds = layout.displayFeatures.filterIsInstance<FoldingFeature>().filter { it.isSeparating }
             upright = folds.firstOrNull { it.orientation == FoldingFeature.Orientation.VERTICAL }
-                ?.let { Hinge(it.bounds.left, it.bounds.right, width) }
+                ?.let { Hinge(it.bounds.left, it.bounds.right, width, it.state == FoldingFeature.State.HALF_OPENED) }
             level = folds.firstOrNull { it.orientation == FoldingFeature.Orientation.HORIZONTAL }
-                ?.let { Hinge(it.bounds.top, it.bounds.bottom, height) }
+                ?.let { Hinge(it.bounds.top, it.bounds.bottom, height, it.state == FoldingFeature.State.HALF_OPENED) }
         }
     }
-    return upright?.takeIf { it.window == windowWidth }?.let { WindowHinge(it.start, it.end) } to
-        level?.takeIf { it.window == windowHeight }?.let { WindowLevelHinge(it.start, it.end) }
+    return upright?.takeIf { it.window == windowWidth }?.let { WindowHinge(it.start, it.end, it.halfOpen) } to
+        level?.takeIf { it.window == windowHeight }?.let { WindowLevelHinge(it.start, it.end, it.halfOpen) }
 }
 
 /**
- * A hinge's start and end from the window's left, or its top for a level one, and the window's size across it (its
- * width, or its height), in pixels.
+ * A hinge's start and end from the window's left, or its top for a level one, the window's size across it (its
+ * width, or its height), in pixels, and whether the device stands half open there.
  */
-private data class Hinge(val start: Int, val end: Int, val window: Int)
+private data class Hinge(val start: Int, val end: Int, val window: Int, val halfOpen: Boolean)
 
 private val HingeSaver = Saver<Hinge?, IntArray>(
-    save = { hinge -> hinge?.let { intArrayOf(it.start, it.end, it.window) } },
-    restore = { Hinge(it[0], it[1], it[2]) },
+    save = { hinge -> hinge?.let { intArrayOf(it.start, it.end, it.window, if (it.halfOpen) 1 else 0) } },
+    restore = { Hinge(it[0], it[1], it[2], it.getOrElse(3) { 0 } == 1) },
 )
 
 private tailrec fun Context.activity(): Activity? = when (this) {

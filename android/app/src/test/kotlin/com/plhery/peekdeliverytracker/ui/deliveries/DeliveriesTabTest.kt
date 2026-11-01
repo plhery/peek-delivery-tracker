@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -512,9 +513,11 @@ class DeliveriesTabTest {
     fun aParcelOpenedBeforeTheParcelsCameBackZoomsOutOfItsCardTheNextTime() {
         var process = FakeDeliveries(DemoCards.parcels())
         val restoration = StateRestorationTester(compose)
+        // Signed in: a guest's list without parcels is the first open's.
+        val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 11)))
         restoration.setContent {
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
-                RootHost(reduceMotion = false, source = remember { process })
+                RootHost(state = reader, reduceMotion = false, source = remember { process })
             }
         }
         compose.waitForIdle()

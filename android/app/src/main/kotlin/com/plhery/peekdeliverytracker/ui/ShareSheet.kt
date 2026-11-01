@@ -263,7 +263,7 @@ private val SharePhase.statusKey: String
     }
 
 /** A system button pressed (UIButton's `.system` type): its title fades to a fifth. */
-private val SystemPress = PressStyle(opacity = 0.2f, animation = MotionCurve.EaseOut(0.12))
+internal val SystemPress = PressStyle(opacity = 0.2f, animation = MotionCurve.EaseOut(0.12))
 
 /** The card's ground, rgb(0.969, 0.953, 0.918). */
 private val PAPER = Color(0.969f, 0.953f, 0.918f)

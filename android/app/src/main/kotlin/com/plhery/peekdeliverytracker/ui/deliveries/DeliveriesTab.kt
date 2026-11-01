@@ -141,13 +141,14 @@ fun DeliveriesTab(
     val archiveOpen = rememberForLaunch(launch, false)
     val reviewDue = rememberForLaunch(launch, false)
     val sampleShown = rememberForLaunch(launch, false)
+    val firstOpen = rememberFirstOpenStates(launch)
     val mapCover = rememberForLaunch<String?>(launch, null)
     val views = rememberListViewStates(launch)
     val prompts = rememberPromptStates(launch)
     val now = LocalNow.current
     val scope = rememberCoroutineScope()
     val state = remember(source, navigator, listState) {
-        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, sampleShown, mapCover, views, prompts, now, scope)
+        DeliveriesState(source, navigator, listState, archiveOpen, reviewDue, sampleShown, firstOpen, mapCover, views, prompts, now, scope)
     }
     // A screen the navigation shows also ends the arrival of a card just added.
     navigator.view = { screen ->
@@ -312,6 +313,9 @@ fun DeliveriesTab(
         ParcelMapHost(state)
         // The paper of a delivery, over the list and the parcel beside it, as the iPhone's is over the whole screen.
         DeliveredPaper(state)
+        // The first open, over the whole shell, its tab bar too, where the tab shell draws it, and under what the tab
+        // presents.
+        FirstOpenHost(state)
     }
 }
 
@@ -521,7 +525,7 @@ private fun Modifier.listKeys(state: DeliveriesState): Modifier {
 /** Acts on a key the deliveries answer, as [DeliveriesKey.available] has them; true once it has used it. */
 private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMotion: Boolean): Boolean {
     val keys = DeliveriesKey.available(
-        free = !showingFilters && !modal, searching = showingSearch, typing = searchFocused, arrangement = arrangement,
+        free = !showingFilters && !modal && !firstOpenShown, searching = showingSearch, typing = searchFocused, arrangement = arrangement,
         navigation = navigator.navigation,
         cards = rows, hasParcels = parcels.isNotEmpty(), canUndo = source.undoParcel.value != null,
     )

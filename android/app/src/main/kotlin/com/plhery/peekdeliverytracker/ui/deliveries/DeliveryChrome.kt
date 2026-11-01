@@ -804,7 +804,8 @@ private fun FootLink(title: String, id: String, open: () -> Unit) {
  * & track opens Add with what the clipboard holds ([DeliveriesState.pasteFirst]), Scan barcode opens it on the camera,
  * Add a parcel opens it empty.
  *
- * FirstOpenView's field and its scan button (`canScan`), the first open's, come with the first open.
+ * A guest with nothing followed sees the first open over it instead ([FirstOpenHost]), with its own field and scan
+ * button; this shows to someone signed in, and in the demo.
  */
 @Composable
 internal fun DeliveriesEmptyState(state: DeliveriesState) {

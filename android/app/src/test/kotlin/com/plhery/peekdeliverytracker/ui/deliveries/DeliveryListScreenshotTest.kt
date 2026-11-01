@@ -31,12 +31,14 @@ import androidx.window.testing.layout.FoldingFeature
 import androidx.window.testing.layout.TestWindowLayoutInfo
 import androidx.window.testing.layout.WindowLayoutInfoPublisherRule
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.isDelivered
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.screenshot
+import java.util.UUID
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -223,9 +225,10 @@ class DeliveryListScreenshotTest {
         compose.screenshot("list_search_light")
     }
 
+    /** Signed in with nothing followed: a guest sees the first open instead. */
     @Test
     fun nothingFollowedYet() {
-        show(parcels = emptyList(), session = AuthenticationState.Welcome)
+        show(parcels = emptyList(), session = AuthenticationState.SignedIn(AuthUser(UUID(0, 11))))
         compose.screenshot("list_empty_light")
     }
 

@@ -121,6 +121,12 @@ interface DeliveriesSource {
     val isGuest: Boolean
 
     /**
+     * `store.tracksWithoutAccount`: whether tracking without an account works at all. A build without a server has only
+     * its demo, which the first open offers in place of its field.
+     */
+    val tracksWithoutAccount: Boolean
+
+    /**
      * `store.add(trackingNumber:label:carrier:trackingURL:dpdPostcode:dpdPostcodeCountry:)`: the parcel added, once
      * [parcels] holds it.
      */
@@ -200,8 +206,11 @@ interface DeliveriesSource {
     /** Leaves the demo for the first screen. */
     fun showWelcome()
 
-    /** `session.showSignIn()`: the sign-in screen, from a guest's Add. */
+    /** `session.showSignIn()`: the sign-in screen, from a guest's Add or the first open's masthead. */
     fun showSignIn()
+
+    /** `session.enterDemo()`: the demo, from the first open of a build without a server. */
+    fun enterDemo()
 
     fun view(screen: String)
 
@@ -284,6 +293,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override val isGuest: Boolean get() = container.parcels.isGuest
 
+    override val tracksWithoutAccount: Boolean get() = container.parcels.tracksWithoutAccount
+
     override suspend fun add(
         trackingNumber: String,
         label: String,
@@ -340,6 +351,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override fun showWelcome() = container.session.showWelcome()
 
     override fun showSignIn() = container.session.showSignIn()
+
+    override fun enterDemo() = container.session.enterDemo()
 
     override fun view(screen: String) = container.analytics.view(screen)
 

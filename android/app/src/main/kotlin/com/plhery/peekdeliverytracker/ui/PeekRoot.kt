@@ -37,6 +37,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalLabelScanner
+import com.plhery.peekdeliverytracker.ui.deliveries.LocalParcelLinkOpen
 import com.plhery.peekdeliverytracker.ui.deliveries.NoLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetHost
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSource
@@ -141,7 +142,8 @@ internal fun PeekRoot(
                             AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
                             AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
                                 val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-                                CompositionLocalProvider(LocalLabelScanner provides scanner) {
+                                val linkOpen = links?.links?.routeFlow?.collectAsState()?.value != null
+                                CompositionLocalProvider(LocalLabelScanner provides scanner, LocalParcelLinkOpen provides linkOpen) {
                                     TabShell(
                                         selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
                                         overlays = { browserCheck?.let { TurnstileSheetHost(it) } },

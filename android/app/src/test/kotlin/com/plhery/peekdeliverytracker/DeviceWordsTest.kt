@@ -19,6 +19,10 @@ class DeviceWordsTest {
     // message only where it offers them (`ParcelStore.offersLiveActivities`), and Android has none.
     private val iPhoneOnlyKeys = setOf("liveActivity.systemDisabled")
 
+    // iOS's accessibility identifiers, which the app's test tags carry: hooks for tests, not copy. The iOS generator
+    // skips `.accessibilityIdentifier` for the same reason.
+    private val identifiers = setOf("welcome.field", "welcome.paste", "welcome.signIn")
+
     /** The keys the Kotlin sources of the app and its core name, found as the iOS generator finds them in Swift. */
     private fun referencedKeys(): Set<String> {
         val module = File(System.getProperty("user.dir"))
@@ -28,7 +32,7 @@ class DeviceWordsTest {
         val prefixes = catalogs.getValue("en").keys.map { it.substringBefore('.') }.toSet()
         val key = Regex(""""([a-z][A-Za-z0-9_-]*(?:\.[A-Za-z0-9_-]+)+)"""")
         return sources.flatMap { file -> key.findAll(file.readText()).map { it.groupValues[1] } }
-            .filter { it.substringBefore('.') in prefixes }
+            .filter { it.substringBefore('.') in prefixes && it !in identifiers }
             .toSet()
     }
 

@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import androidx.compose.runtime.compositionLocalOf
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
@@ -14,6 +15,9 @@ import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
+
+/** Whether a parcel link's sheet is up (`links.route != nil`): the first open's journey waits under it. */
+val LocalParcelLinkOpen = compositionLocalOf { false }
 
 /**
  * What a parcel link's sheet reads and asks of the app's stores: ParcelLinkSheet's `links`, `session`, `parcels` and

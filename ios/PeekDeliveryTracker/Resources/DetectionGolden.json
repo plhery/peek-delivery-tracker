@@ -25045,6 +25045,12 @@
     ]
   },
   {
+    "input": "202347869",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "202401794",
     "carrier": "unknown",
     "confidence": "none",
@@ -40657,6 +40663,16 @@
     ]
   },
   {
+    "input": "41772121",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "4178288994",
     "carrier": "unknown",
     "confidence": "low",
@@ -42080,6 +42096,16 @@
       "gls-ch",
       "postlogistics",
       "ppl"
+    ]
+  },
+  {
+    "input": "45283143",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
     ]
   },
   {
@@ -53251,6 +53277,26 @@
     ]
   },
   {
+    "input": "6626970006",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "tipsa",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
     "input": "6640910312",
     "carrier": "unknown",
     "confidence": "low",
@@ -62450,6 +62496,32 @@
     ]
   },
   {
+    "input": "869100301588",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "poste-italiane",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sending"
+    ],
+    "asked": [
+      "poste-italiane",
+      "brt",
+      "colis-prive",
+      "j-and-t",
+      "metropolitan-warehouse"
+    ]
+  },
+  {
     "input": "87000918244878",
     "carrier": "la-poste",
     "confidence": "high",
@@ -67696,6 +67768,12 @@
       "postlogistics",
       "ppl"
     ]
+  },
+  {
+    "input": "996961867",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "99722999536301000830908",
@@ -95550,6 +95628,30 @@
     "asked": [
       "australia-post",
       "day-ross"
+    ]
+  },
+  {
+    "input": "SN221198170JP",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "etomars"
+    ]
+  },
+  {
+    "input": "SN227061302JP",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "etomars"
+    ]
+  },
+  {
+    "input": "SN274273718JP",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "etomars"
     ]
   },
   {

@@ -1172,6 +1172,46 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let wldExpress = CarrierID(rawValue: "wld-express")
     static let cmtExpress = CarrierID(rawValue: "cmt-express")
     static let kuayuanExpress = CarrierID(rawValue: "kuayuan-express")
+    static let twoEbox = CarrierID(rawValue: "2ebox")
+    static let antaria = CarrierID(rawValue: "antaria")
+    static let beeFast = CarrierID(rawValue: "bee-fast")
+    static let beexprss = CarrierID(rawValue: "beexprss")
+    static let carryFlap = CarrierID(rawValue: "carry-flap")
+    static let choirExpress = CarrierID(rawValue: "choir-express")
+    static let ckeex = CarrierID(rawValue: "ckeex")
+    static let corporateCouriers = CarrierID(rawValue: "corporate-couriers")
+    static let correiosAngola = CarrierID(rawValue: "correios-angola")
+    static let correosEcuador = CarrierID(rawValue: "correos-ecuador")
+    static let danniao = CarrierID(rawValue: "danniao")
+    static let dduExpress = CarrierID(rawValue: "ddu-express")
+    static let dtdPk = CarrierID(rawValue: "dtd-pk")
+    static let endeavourDelivery = CarrierID(rawValue: "endeavour-delivery")
+    static let etomars = CarrierID(rawValue: "etomars")
+    static let ezship = CarrierID(rawValue: "ezship")
+    static let fareRata = CarrierID(rawValue: "fare-rata")
+    static let fasttrackAr = CarrierID(rawValue: "fasttrack-ar")
+    static let fxdcPost = CarrierID(rawValue: "fxdc-post")
+    static let globalBusinessTw = CarrierID(rawValue: "global-business-tw")
+    static let honducor = CarrierID(rawValue: "honducor")
+    static let hyExpress = CarrierID(rawValue: "hy-express")
+    static let indopaket = CarrierID(rawValue: "indopaket")
+    static let ipostel = CarrierID(rawValue: "ipostel")
+    static let libyaPost = CarrierID(rawValue: "libya-post")
+    static let macauPost = CarrierID(rawValue: "macau-post")
+    static let mikropakket = CarrierID(rawValue: "mikropakket")
+    static let mobiLogistica = CarrierID(rawValue: "mobi-logistica")
+    static let myanmarPost = CarrierID(rawValue: "myanmar-post")
+    static let paositraMalagasy = CarrierID(rawValue: "paositra-malagasy")
+    static let redboxMv = CarrierID(rawValue: "redbox-mv")
+    static let royaleInternational = CarrierID(rawValue: "royale-international")
+    static let shippify = CarrierID(rawValue: "shippify")
+    static let sutoLogistics = CarrierID(rawValue: "suto-logistics")
+    static let swftbox = CarrierID(rawValue: "swftbox")
+    static let tolos = CarrierID(rawValue: "tolos")
+    static let vaticanPost = CarrierID(rawValue: "vatican-post")
+    static let viaxpress = CarrierID(rawValue: "viaxpress")
+    static let wepost = CarrierID(rawValue: "wepost")
+    static let xpressen = CarrierID(rawValue: "xpressen")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2297,6 +2337,46 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .wldExpress,
         .cmtExpress,
         .kuayuanExpress,
+        .twoEbox,
+        .antaria,
+        .beeFast,
+        .beexprss,
+        .carryFlap,
+        .choirExpress,
+        .ckeex,
+        .corporateCouriers,
+        .correiosAngola,
+        .correosEcuador,
+        .danniao,
+        .dduExpress,
+        .dtdPk,
+        .endeavourDelivery,
+        .etomars,
+        .ezship,
+        .fareRata,
+        .fasttrackAr,
+        .fxdcPost,
+        .globalBusinessTw,
+        .honducor,
+        .hyExpress,
+        .indopaket,
+        .ipostel,
+        .libyaPost,
+        .macauPost,
+        .mikropakket,
+        .mobiLogistica,
+        .myanmarPost,
+        .paositraMalagasy,
+        .redboxMv,
+        .royaleInternational,
+        .shippify,
+        .sutoLogistics,
+        .swftbox,
+        .tolos,
+        .vaticanPost,
+        .viaxpress,
+        .wepost,
+        .xpressen,
     ]
 
     init(from decoder: Decoder) throws {

@@ -1181,6 +1181,46 @@ value class CarrierId(val rawValue: String) {
         val WldExpress = CarrierId("wld-express")
         val CmtExpress = CarrierId("cmt-express")
         val KuayuanExpress = CarrierId("kuayuan-express")
+        val TwoEbox = CarrierId("2ebox")
+        val Antaria = CarrierId("antaria")
+        val BeeFast = CarrierId("bee-fast")
+        val Beexprss = CarrierId("beexprss")
+        val CarryFlap = CarrierId("carry-flap")
+        val ChoirExpress = CarrierId("choir-express")
+        val Ckeex = CarrierId("ckeex")
+        val CorporateCouriers = CarrierId("corporate-couriers")
+        val CorreiosAngola = CarrierId("correios-angola")
+        val CorreosEcuador = CarrierId("correos-ecuador")
+        val Danniao = CarrierId("danniao")
+        val DduExpress = CarrierId("ddu-express")
+        val DtdPk = CarrierId("dtd-pk")
+        val EndeavourDelivery = CarrierId("endeavour-delivery")
+        val Etomars = CarrierId("etomars")
+        val Ezship = CarrierId("ezship")
+        val FareRata = CarrierId("fare-rata")
+        val FasttrackAr = CarrierId("fasttrack-ar")
+        val FxdcPost = CarrierId("fxdc-post")
+        val GlobalBusinessTw = CarrierId("global-business-tw")
+        val Honducor = CarrierId("honducor")
+        val HyExpress = CarrierId("hy-express")
+        val Indopaket = CarrierId("indopaket")
+        val Ipostel = CarrierId("ipostel")
+        val LibyaPost = CarrierId("libya-post")
+        val MacauPost = CarrierId("macau-post")
+        val Mikropakket = CarrierId("mikropakket")
+        val MobiLogistica = CarrierId("mobi-logistica")
+        val MyanmarPost = CarrierId("myanmar-post")
+        val PaositraMalagasy = CarrierId("paositra-malagasy")
+        val RedboxMv = CarrierId("redbox-mv")
+        val RoyaleInternational = CarrierId("royale-international")
+        val Shippify = CarrierId("shippify")
+        val SutoLogistics = CarrierId("suto-logistics")
+        val Swftbox = CarrierId("swftbox")
+        val Tolos = CarrierId("tolos")
+        val VaticanPost = CarrierId("vatican-post")
+        val Viaxpress = CarrierId("viaxpress")
+        val Wepost = CarrierId("wepost")
+        val Xpressen = CarrierId("xpressen")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2306,6 +2346,46 @@ value class CarrierId(val rawValue: String) {
             WldExpress,
             CmtExpress,
             KuayuanExpress,
+            TwoEbox,
+            Antaria,
+            BeeFast,
+            Beexprss,
+            CarryFlap,
+            ChoirExpress,
+            Ckeex,
+            CorporateCouriers,
+            CorreiosAngola,
+            CorreosEcuador,
+            Danniao,
+            DduExpress,
+            DtdPk,
+            EndeavourDelivery,
+            Etomars,
+            Ezship,
+            FareRata,
+            FasttrackAr,
+            FxdcPost,
+            GlobalBusinessTw,
+            Honducor,
+            HyExpress,
+            Indopaket,
+            Ipostel,
+            LibyaPost,
+            MacauPost,
+            Mikropakket,
+            MobiLogistica,
+            MyanmarPost,
+            PaositraMalagasy,
+            RedboxMv,
+            RoyaleInternational,
+            Shippify,
+            SutoLogistics,
+            Swftbox,
+            Tolos,
+            VaticanPost,
+            Viaxpress,
+            Wepost,
+            Xpressen,
         )
     }
 }

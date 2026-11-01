@@ -4202,7 +4202,11 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "trackingSearchUrl": "https://www.sto.cn/"
+    "trackingSearchUrl": "https://www.sto.cn/",
+    "aliases": [
+      "STO Global",
+      "申通国际"
+    ]
   },
   "yunda": {
     "displayName": "Yunda Express",
@@ -6833,6 +6837,16 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/(?:new/tracking/)?track-shipment/?$",
         "params": [
           "query"
+        ]
+      },
+      {
+        "domains": [
+          "www.dsv.com",
+          "mydsv.dsv.com"
+        ],
+        "pathPattern": "^/(?:mydsv|app)/tracking-public/?$",
+        "params": [
+          "refNumber"
         ]
       }
     ],
@@ -17895,7 +17909,7 @@ export const CARRIER_CAPABILITIES = {
         "domains": [
           "itapps.quantiumworldwide.com"
         ],
-        "pathPattern": "^/itcms_tracking/home/itcms/?$",
+        "pathPattern": "^/itcms_tracking/(?:home/itcms|widget/order_track)/?$",
         "params": [
           "as_order_no"
         ]
@@ -42250,7 +42264,6 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "HYE International Logistics",
     "aliases": [
       "HYE",
-      "HYExpress",
       "HYEXP",
       "环洋国际",
       "环洋国际物流",
@@ -42518,6 +42531,1046 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.kuayuanexpress.com.cn/"
+  },
+  "2ebox": {
+    "displayName": "2ebox",
+    "aliases": [
+      "2 ebox",
+      "2ebox Casilla"
+    ],
+    "countries": [
+      "CL"
+    ],
+    "color": "#dd0f32",
+    "selectable": true,
+    "timezone": "America/Santiago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://2eboxcasilla.com/"
+  },
+  "antaria": {
+    "displayName": "Antaria Services",
+    "aliases": [
+      "Antaria",
+      "Antaria Services S.L.U."
+    ],
+    "countries": [
+      "ES",
+      "PT"
+    ],
+    "color": "#4e96ee",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.antariaclientes.com/seguimiento.php"
+  },
+  "bee-fast": {
+    "displayName": "BeeFast",
+    "aliases": [
+      "BEE FAST"
+    ],
+    "countries": [
+      "AU"
+    ],
+    "color": "#f2ab31",
+    "selectable": true,
+    "timezone": "Australia/Sydney",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.beefast.com.au/#/Tracking"
+  },
+  "beexprss": {
+    "displayName": "BeeXprss",
+    "aliases": [
+      "BeeXprss Courier Service",
+      "UMG Logistics Co., Ltd."
+    ],
+    "countries": [
+      "MM"
+    ],
+    "color": "#fdb51b",
+    "selectable": true,
+    "timezone": "Asia/Yangon",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://beexprss.com/tracking?tracking_name={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "beexprss.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "tracking_name"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://beexprss.com/tracking"
+  },
+  "carry-flap": {
+    "displayName": "CARRY FLAP",
+    "aliases": [
+      "Carry Flap Co., Ltd.",
+      "キャリーフラップ",
+      "キャリーフラップ株式会社"
+    ],
+    "countries": [
+      "JP"
+    ],
+    "color": "#2aa738",
+    "selectable": true,
+    "timezone": "Asia/Tokyo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.carry-flap.com/#/home?invoiceNo={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.carry-flap.com"
+        ],
+        "pathPattern": "^/?$",
+        "fragment": "^/home\\?(?:[^#]*&)?invoiceNo=([^&]+)"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.carry-flap.com/#/home"
+  },
+  "choir-express": {
+    "displayName": "Choir Express",
+    "aliases": [
+      "Choir Express Indonesia",
+      "PT FIA Express Indonesia"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#013780",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://choirexpress.co.id/id/tracking"
+  },
+  "ckeex": {
+    "displayName": "CkeEx",
+    "aliases": [
+      "希凯易",
+      "浙江希凯易国际货运代理有限公司",
+      "City Know Express Co., Ltd.",
+      "绍兴城晓国际货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#e8651b",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.ckeex.com/track.html?nos={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.ckeex.com",
+          "ckeex.com"
+        ],
+        "pathPattern": "^/track\\.html$",
+        "params": [
+          "nos"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.ckeex.com/track.html"
+  },
+  "corporate-couriers": {
+    "displayName": "Corporate Couriers",
+    "aliases": [
+      "Corporate Couriers Logistics"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#e7212d",
+    "selectable": true,
+    "timezone": "America/Vancouver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://corporatecouriers.net/pages/online-order-login/?tracking-number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "corporatecouriers.net",
+          "www.corporatecouriers.net"
+        ],
+        "pathPattern": "^/pages/online-order-login/?$",
+        "params": [
+          "tracking-number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://corporatecouriers.net/pages/online-order-login/"
+  },
+  "correios-angola": {
+    "displayName": "Correios de Angola",
+    "aliases": [
+      "Empresa Nacional de Correios e Telégrafos de Angola",
+      "ENCTA",
+      "Angola Post"
+    ],
+    "countries": [
+      "AO"
+    ],
+    "color": "#e03b2f",
+    "selectable": true,
+    "timezone": "Africa/Luanda",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.correiosdeangola.ao/pesquisaencomenda.aspx"
+  },
+  "correos-ecuador": {
+    "displayName": "Servicios Postales del Ecuador",
+    "aliases": [
+      "Correos del Ecuador",
+      "Empresa Pública de Servicios Postales del Ecuador",
+      "Empresa Pública Correos del Ecuador"
+    ],
+    "countries": [
+      "EC"
+    ],
+    "color": "#eeb61b",
+    "selectable": true,
+    "timezone": "America/Guayaquil",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://sipostal.serviciopostal.gob.ec/Navegacion/Tracking"
+  },
+  "danniao": {
+    "displayName": "Danniao Express",
+    "aliases": [
+      "Dan Niao",
+      "Danniao",
+      "丹鸟",
+      "丹鸟速递",
+      "丹鸟快递",
+      "浙江丹鸟物流科技有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ff6a00",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.danniao.com/?mailNoList={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.danniao.com"
+        ],
+        "pathPattern": "^/$",
+        "params": [
+          "mailNoList"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.danniao.com/"
+  },
+  "ddu-express": {
+    "displayName": "DDU Express",
+    "aliases": [
+      "DDU Shipping & Logistics LLC"
+    ],
+    "countries": [
+      "AE"
+    ],
+    "color": "#f25406",
+    "selectable": true,
+    "timezone": "Asia/Dubai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://ddu-express.com/track-shipment/?trackno={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "ddu-express.com",
+          "www.ddu-express.com"
+        ],
+        "pathPattern": "^/track-shipment/?$",
+        "params": [
+          "trackno"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ddu-express.com/track-shipment/"
+  },
+  "dtd-pk": {
+    "displayName": "DTD Worldwide Express",
+    "aliases": [
+      "DTD Worldwide Express (Pvt.) Ltd."
+    ],
+    "countries": [
+      "PK"
+    ],
+    "color": "#e01818",
+    "selectable": true,
+    "timezone": "Asia/Karachi",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://portal.dtd.com.pk/index.php/public/tracking?tracking={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "portal.dtd.com.pk"
+        ],
+        "pathPattern": "^/index\\.php/public/tracking/?$",
+        "params": [
+          "tracking"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.dtd.com.pk/index.php/public/tracking"
+  },
+  "endeavour-delivery": {
+    "displayName": "Endeavour Delivery",
+    "countries": [
+      "AU"
+    ],
+    "color": "#410156",
+    "selectable": true,
+    "timezone": "Australia/Sydney",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://endeavourdelivery.com.au/track"
+  },
+  "etomars": {
+    "displayName": "Etomars",
+    "aliases": [
+      "SHIPNERGY",
+      "쉽너지",
+      "이투마스",
+      "(주)이투마스",
+      "Etomars Co., Ltd."
+    ],
+    "countries": [
+      "KR",
+      "JP"
+    ],
+    "color": "#1779ec",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://cbt.shipnergy.com/Track/Result?mode=0&ids={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "cbt.shipnergy.com",
+          "track.shipnergy.com"
+        ],
+        "pathPattern": "^/Track/Result/?$",
+        "query": "^(?=(?:.*&)?mode=0(?:&|$))(?:.*&)?ids=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^SN\\d{9}JP$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://cbt.shipnergy.com/Track/Search"
+  },
+  "ezship": {
+    "displayName": "ezShip",
+    "aliases": [
+      "台灣便利配",
+      "斗牛科技股份有限公司"
+    ],
+    "countries": [
+      "TW"
+    ],
+    "color": "#ff8000",
+    "selectable": true,
+    "timezone": "Asia/Taipei",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.ezship.com.tw/receiver_query/ezship_query_shipstatus_2017.jsp"
+  },
+  "fare-rata": {
+    "displayName": "Fare Rata",
+    "aliases": [
+      "OPT (French Polynesia Post)",
+      "Fare Rata SAS",
+      "Office des Postes et Télécommunications de Polynésie française"
+    ],
+    "countries": [
+      "PF"
+    ],
+    "color": "#fecc00",
+    "selectable": true,
+    "timezone": "Pacific/Tahiti",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://espace-client.farerata.pf/suivre-un-envoi"
+  },
+  "fasttrack-ar": {
+    "displayName": "Fast Track",
+    "aliases": [
+      "Servicios Logísticos Integrados S.R.L."
+    ],
+    "countries": [
+      "AR"
+    ],
+    "color": "#ba172a",
+    "selectable": true,
+    "timezone": "America/Argentina/Buenos_Aires",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://fasttrack.com.ar/tracking/"
+  },
+  "fxdc-post": {
+    "displayName": "FXDC Post",
+    "aliases": [
+      "FXDC",
+      "Flamingo Express Dutch Caribbean N.V."
+    ],
+    "countries": [
+      "BQ"
+    ],
+    "color": "#0077c1",
+    "selectable": true,
+    "timezone": "America/Kralendijk",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://my.fxdc-post.com/klant/volgen?ref={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "my.fxdc-post.com"
+        ],
+        "pathPattern": "^/klant/volgen(?:/insluiten)?/?$",
+        "params": [
+          "ref"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://my.fxdc-post.com/klant/volgen"
+  },
+  "global-business-tw": {
+    "displayName": "Global Business",
+    "aliases": [
+      "Tai Wan Global Business",
+      "全球快遞",
+      "全球快遞股份有限公司",
+      "元本通運股份有限公司"
+    ],
+    "countries": [
+      "TW"
+    ],
+    "color": "#de140e",
+    "selectable": true,
+    "timezone": "Asia/Taipei",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://vip.global-business.com.tw/tracking/"
+  },
+  "honducor": {
+    "displayName": "Honducor",
+    "aliases": [
+      "Correos de Honduras",
+      "Empresa de Correos de Honduras",
+      "Honduras Post"
+    ],
+    "countries": [
+      "HN"
+    ],
+    "color": "#255799",
+    "selectable": true,
+    "timezone": "America/Tegucigalpa",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://rastreo.honducor.gob.hn/rastreo?tracking_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "rastreo.honducor.gob.hn"
+        ],
+        "pathPattern": "^/rastreo/?$",
+        "params": [
+          "tracking_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://rastreo.honducor.gob.hn/"
+  },
+  "hy-express": {
+    "displayName": "HY Express",
+    "aliases": [
+      "浩远快递",
+      "义乌浩远国际快递",
+      "义乌市联报国际货运代理有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1d92a1",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://order.hy-express.com/track_query.aspx?track_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "order.hy-express.com"
+        ],
+        "pathPattern": "^/track_query\\.aspx$",
+        "params": [
+          "track_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://order.hy-express.com/track_query.aspx"
+  },
+  "indopaket": {
+    "displayName": "Indopaket",
+    "aliases": [
+      "PT Inti Paket Prima",
+      "Indo Paket"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "color": "#1b75bb",
+    "selectable": true,
+    "timezone": "Asia/Jakarta",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.indopaket.co.id/multi-tracking"
+  },
+  "ipostel": {
+    "displayName": "IPOSTEL",
+    "aliases": [
+      "Instituto Postal Telegráfico de Venezuela",
+      "Venezuela Post"
+    ],
+    "countries": [
+      "VE"
+    ],
+    "color": "#a41449",
+    "selectable": true,
+    "timezone": "America/Caracas",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.ipostel.gob.ve/"
+  },
+  "libya-post": {
+    "displayName": "Libya Post",
+    "aliases": [
+      "Libya Post Company",
+      "شركة بريد ليبيا",
+      "بريد ليبيا"
+    ],
+    "countries": [
+      "LY"
+    ],
+    "color": "#286db4",
+    "selectable": true,
+    "timezone": "Africa/Tripoli",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.libyapost.ly:7040/ipswt/IPSWeb_item_events.aspx?itemid={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.libyapost.ly"
+        ],
+        "pathPattern": "^/ipswt/IPSWeb_item_events\\.aspx$",
+        "params": [
+          "itemid"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.libyapost.ly:7040/ipswt/"
+  },
+  "macau-post": {
+    "displayName": "Macao Post",
+    "aliases": [
+      "Macau Post",
+      "Correios de Macau",
+      "澳門郵政",
+      "澳门邮政",
+      "Macao Post and Telecommunications Bureau",
+      "Direcção dos Serviços de Correios e Telecomunicações",
+      "澳門郵電局"
+    ],
+    "countries": [
+      "MO"
+    ],
+    "color": "#e5001c",
+    "selectable": true,
+    "timezone": "Asia/Macau",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.ctt.gov.mo/macaupost/contents/MailTrack.aspx?lang=en"
+  },
+  "mikropakket": {
+    "displayName": "Mikropakket",
+    "countries": [
+      "NL",
+      "BE"
+    ],
+    "color": "#711e8c",
+    "selectable": true,
+    "timezone": "Europe/Amsterdam",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track.mikropakket.nl/"
+  },
+  "mobi-logistica": {
+    "displayName": "Mobi Logística",
+    "aliases": [
+      "MOBI Logistica",
+      "MOBI Logística Ltda"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#ffc20f",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.mobi.com.br/entrega"
+  },
+  "myanmar-post": {
+    "displayName": "Myanmar Post",
+    "aliases": [
+      "MPT",
+      "Myanma Posts and Telecommunications"
+    ],
+    "countries": [
+      "MM"
+    ],
+    "color": "#ed1c24",
+    "selectable": true,
+    "timezone": "Asia/Yangon",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://myanmarpost.com.mm/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "myanmarpost.com.mm"
+        ],
+        "path": "^/track/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://myanmarpost.com.mm/"
+  },
+  "paositra-malagasy": {
+    "displayName": "Paositra Malagasy",
+    "aliases": [
+      "Madagascar Post"
+    ],
+    "countries": [
+      "MG"
+    ],
+    "color": "#ffd600",
+    "selectable": true,
+    "timezone": "Indian/Antananarivo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.paositramalagasy.mg/"
+  },
+  "redbox-mv": {
+    "displayName": "Redbox",
+    "aliases": [
+      "Redbox MV",
+      "Redbox Maldives",
+      "RB International Pvt Ltd"
+    ],
+    "countries": [
+      "MV"
+    ],
+    "color": "#eb1d25",
+    "selectable": true,
+    "timezone": "Indian/Maldives",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://redbox.mv/tracking?tracking_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "redbox.mv",
+          "www.redbox.mv"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "tracking_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://redbox.mv/tracking"
+  },
+  "royale-international": {
+    "displayName": "Royale International",
+    "aliases": [
+      "Royale International Couriers Limited",
+      "偌亞奧國際",
+      "偌亚奥国际",
+      "HKDC"
+    ],
+    "countries": [
+      "HK"
+    ],
+    "color": "#dc6329",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.royaleinternational.com/tracking?waybillno={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.royaleinternational.com",
+          "royaleinternational.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "waybillno"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.royaleinternational.com/tracking"
+  },
+  "shippify": {
+    "displayName": "Shippify",
+    "aliases": [
+      "Shippify, Inc."
+    ],
+    "countries": [
+      "BR",
+      "CL",
+      "EC",
+      "MX",
+      "PE"
+    ],
+    "color": "#ef414c",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.shippify.co/"
+  },
+  "suto-logistics": {
+    "displayName": "Suto Logistics",
+    "aliases": [
+      "速通物流",
+      "江苏速通物流有限公司",
+      "Sutong Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1b2b56",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.sut56.com/service-query?no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.sut56.com",
+          "sut56.com"
+        ],
+        "pathPattern": "^/service-query/?$",
+        "params": [
+          "no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.sut56.com/service-query"
+  },
+  "swftbox": {
+    "displayName": "swftbox",
+    "aliases": [
+      "swftbox Delivery Services LLC"
+    ],
+    "countries": [
+      "AE"
+    ],
+    "color": "#f5cb38",
+    "selectable": true,
+    "timezone": "Asia/Dubai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://t.swftbox.com/"
+  },
+  "tolos": {
+    "displayName": "Tolos",
+    "aliases": [
+      "MOA Logistics",
+      "MOA Logistics Co., Ltd.",
+      "모아 로지스틱스",
+      "주식회사 모아 로지스틱스"
+    ],
+    "countries": [
+      "KR",
+      "SG",
+      "TW",
+      "MY"
+    ],
+    "color": "#9a6432",
+    "selectable": true,
+    "timezone": "Asia/Seoul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://moalogis.kr/"
+  },
+  "vatican-post": {
+    "displayName": "Poste Vaticane",
+    "aliases": [
+      "Vatican Post",
+      "Poste Vaticane e Filatelia",
+      "Servizio Poste e Filatelia"
+    ],
+    "countries": [
+      "VA"
+    ],
+    "color": "#ffcc00",
+    "selectable": true,
+    "timezone": "Europe/Vatican",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.postevaticane.va/it/tracking?trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "postevaticane.va",
+          "www.postevaticane.va"
+        ],
+        "pathPattern": "^/it/tracking/?$",
+        "params": [
+          "trackingNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.postevaticane.va/it/tracking"
+  },
+  "viaxpress": {
+    "displayName": "ViaXpress",
+    "aliases": [
+      "VIAXPRESS LOGISTICS S.L."
+    ],
+    "countries": [
+      "ES"
+    ],
+    "color": "#00367e",
+    "selectable": true,
+    "timezone": "Europe/Madrid",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://viaxpress.es/envios/"
+  },
+  "wepost": {
+    "displayName": "WePost",
+    "aliases": [
+      "WePost Sdn Bhd",
+      "全民代运",
+      "全民集运"
+    ],
+    "countries": [
+      "MY",
+      "SG"
+    ],
+    "color": "#1672eb",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.wepost.com.my/tracking?nums={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.wepost.com.my",
+          "wepost.com.my"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "nums"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.wepost.com.my/tracking"
+  },
+  "xpressen": {
+    "displayName": "Xpressen",
+    "aliases": [
+      "Xpressen ApS"
+    ],
+    "countries": [
+      "DK"
+    ],
+    "color": "#e3212b",
+    "selectable": true,
+    "timezone": "Europe/Copenhagen",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://track.xpressen.dk/Tracking?t={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "track.xpressen.dk"
+        ],
+        "pathPattern": "^/Tracking/?$",
+        "params": [
+          "t"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track.xpressen.dk/Tracking"
   }
 } as const;
 
@@ -43691,7 +44744,47 @@ export const CARRIER_IDS = [
   "wangjing-3cq",
   "wld-express",
   "cmt-express",
-  "kuayuan-express"
+  "kuayuan-express",
+  "2ebox",
+  "antaria",
+  "bee-fast",
+  "beexprss",
+  "carry-flap",
+  "choir-express",
+  "ckeex",
+  "corporate-couriers",
+  "correios-angola",
+  "correos-ecuador",
+  "danniao",
+  "ddu-express",
+  "dtd-pk",
+  "endeavour-delivery",
+  "etomars",
+  "ezship",
+  "fare-rata",
+  "fasttrack-ar",
+  "fxdc-post",
+  "global-business-tw",
+  "honducor",
+  "hy-express",
+  "indopaket",
+  "ipostel",
+  "libya-post",
+  "macau-post",
+  "mikropakket",
+  "mobi-logistica",
+  "myanmar-post",
+  "paositra-malagasy",
+  "redbox-mv",
+  "royale-international",
+  "shippify",
+  "suto-logistics",
+  "swftbox",
+  "tolos",
+  "vatican-post",
+  "viaxpress",
+  "wepost",
+  "xpressen"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -1223,7 +1223,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                 RequirementField(
                     localized("add.requirement.dpdPostcode"),
                     if (requirement.isOptional) {
-                        localizer.text("add.requirement.dpdPostcodeOptionalHelp", mapOf("carrier" to carrierName))
+                        localizer.text(catalog.optionalPostcodeHelpKey(addition.resolvedCarrier), mapOf("carrier" to carrierName))
                     } else {
                         localized("add.requirement.dpdPostcodeHelp")
                     },

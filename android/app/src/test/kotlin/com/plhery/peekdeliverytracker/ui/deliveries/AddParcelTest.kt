@@ -62,6 +62,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
@@ -468,6 +469,21 @@ class AddParcelTest {
         node(ADD_SAVE).assertIsEnabled().performClick()
         settle()
         assertEquals(listOf(FakeDeliveries.AdditionRequest(number, "", CarrierId.GlsCh, null, "8000", null)), source.additions)
+    }
+
+    @Test
+    fun anOptionalPostcodeSaysWhatItGivesThatCarrier() {
+        val number = "12345478901"
+        val carrier = CarrierId("gls-at")
+        show { detections[number] = CarrierDetectionResponse(number, carrier = carrier, asked = listOf(carrier)) }
+        open()
+        type(number)
+        leave()
+        // GLS's own tracker shows no scans without it (`optionalPostcodeHelpKey`), and Add still saves without it.
+        assertTrue(exists(ADD_POSTCODE))
+        node(ADD_SAVE).assertIsEnabled()
+        val name = CarrierCatalog.shared.info(carrier, AppLanguage.En).displayName
+        compose.onNode(hasText(text("add.requirement.glsPostcodeOptionalHelp", mapOf("carrier" to name)))).assertExists()
     }
 
     @Test

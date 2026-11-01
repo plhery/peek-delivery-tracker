@@ -32,6 +32,7 @@ import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -1184,23 +1185,12 @@ private fun GiftParcelCard(parcel: Parcel, opened: Boolean, refreshing: Boolean,
 }
 
 /**
- * `UnwrappingParcel(open:)` `width` wide, in Pip's frame: closed, or opening once shown, its open box coming over the
- * closed one on `.spring(duration: 0.9, bounce: 0.2)` a quarter of a second after it appears (B-AN20), growing into
- * place with the spring's give; open at once under Reduce Motion. TalkBack doesn't read it.
+ * `UnwrappingParcel(open:celebrating:)` `width` wide, in Pip's frame: closed, or opening once shown
+ * ([rememberLinkOpening]) with its stars thrown as it starts. TalkBack doesn't read it.
  */
 @Composable
 private fun OpeningParcel(width: Dp, label: PipLabel?, ribbon: Boolean, opens: Boolean, modifier: Modifier) {
-    val reduceMotion = PeekTheme.reduceMotion
-    val open = remember { Animatable(0f) }
-    LaunchedEffect(opens, reduceMotion) {
-        if (!opens) {
-            open.snapTo(0f)
-        } else if (reduceMotion) {
-            open.snapTo(1f)
-        } else {
-            open.animateTo(1f, Motion.spring<Float>(duration = 0.9, bounce = 0.2).delay(0.25))
-        }
-    }
+    val open by rememberLinkOpening(opens)
     val frameWidth = PipGeometry.frame.width.toFloat()
     val frameHeight = PipGeometry.frame.height.toFloat()
     val scale = width.value / frameWidth
@@ -1220,20 +1210,29 @@ private fun OpeningParcel(width: Dp, label: PipLabel?, ribbon: Boolean, opens: B
                 }
             },
     ) {
-        val progress = open.value
-        if (progress < 1f) Box(Modifier.graphicsLayer { alpha = 1f - (progress / 0.3f).coerceIn(0f, 1f) }) { UnwrappingParcel(false, label, ribbon) }
-        if (progress > 0f) {
-            Box(
-                Modifier.graphicsLayer {
-                    alpha = (progress / 0.3f).coerceIn(0f, 1f)
-                    val grow = 0.94f + 0.06f * progress
-                    scaleX = grow
-                    scaleY = grow
-                    transformOrigin = TransformOrigin(0.5f, 0.9f)
-                },
-            ) { UnwrappingParcel(true, label, ribbon) }
+        UnwrappingParcel(open.toDouble(), label, ribbon, celebrating = opens)
+    }
+}
+
+/**
+ * How far a parcel's box has opened in the sheet: closed until it `opens`, then open on `.spring(duration: 0.9,
+ * bounce: 0.2)` a quarter of a second later (B-AN20), a little past open before it settles; open at once under Reduce
+ * Motion. The gift's card and the delivered parcel's both play it so (`GiftParcelCard`, `SharedParcelCard`).
+ */
+@Composable
+internal fun rememberLinkOpening(opens: Boolean): State<Float> {
+    val reduceMotion = PeekTheme.reduceMotion
+    val open = remember { Animatable(0f) }
+    LaunchedEffect(opens, reduceMotion) {
+        if (!opens) {
+            open.snapTo(0f)
+        } else if (reduceMotion) {
+            open.snapTo(1f)
+        } else {
+            open.animateTo(1f, Motion.spring<Float>(duration = 0.9, bounce = 0.2).delay(0.25))
         }
     }
+    return open.asState()
 }
 
 /** GiftSurprise (B-S45): under a gift on its way, why the sheet says so little, in footnote secondary, 6 in. */

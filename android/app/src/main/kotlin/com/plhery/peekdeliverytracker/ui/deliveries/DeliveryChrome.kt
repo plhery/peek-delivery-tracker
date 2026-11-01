@@ -1037,7 +1037,8 @@ private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier =
     }
 }
 
-private val OvalShape = GenericShape { size, _ -> addOval(androidx.compose.ui.geometry.Rect(0f, 0f, size.width, size.height)) }
+/** An ellipse filling its box, as SwiftUI's `Ellipse()`. */
+internal val OvalShape = GenericShape { size, _ -> addOval(androidx.compose.ui.geometry.Rect(0f, 0f, size.width, size.height)) }
 
 /**
  * Every parcel has arrived: a fine check, "All arrived", a word about it, and Track another, which opens Add (not

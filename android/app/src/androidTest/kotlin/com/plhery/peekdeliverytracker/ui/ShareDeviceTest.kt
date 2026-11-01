@@ -87,7 +87,12 @@ class ShareDeviceTest {
         return found
     }
 
-    private fun exists(tag: String) = compose.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+    /** Whether a node with [tag] is drawn; false while no window has content yet (the card not up, the test's own empty). */
+    private fun exists(tag: String) = try {
+        compose.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+    } catch (_: IllegalStateException) {
+        false
+    }
 
     private fun text(tag: String): String? =
         compose.onNodeWithTag(tag, useUnmergedTree = true).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Text)?.joinToString()

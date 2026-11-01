@@ -165,6 +165,19 @@ class SettingsDeviceTest {
         return !hardware || Settings.Secure.getInt(context.contentResolver, "show_ime_with_hard_keyboard", 0) != 0
     }
 
+    /**
+     * The keyboard up where the device shows one ([showsAKeyboard]). Where a hardware keyboard is open the system may
+     * still bring the soft one up, late, as Android 17 does on the tablet, so that is given the same time, without failing
+     * where it stays down.
+     */
+    private fun awaitTheKeyboard() {
+        if (showsAKeyboard()) {
+            compose.waitUntil(KEYBOARD_MILLIS) { keyboardShown() }
+        } else {
+            runCatching { compose.waitUntil(KEYBOARD_MILLIS) { keyboardShown() } }
+        }
+    }
+
     /** The window's height above the keyboard, in pixels: all of it where none shows. */
     private fun roomAboveTheKeyboard(): Int {
         var room = 0
@@ -234,7 +247,7 @@ class SettingsDeviceTest {
         tap(SETTINGS_DELETE)
         compose.onNodeWithTag(SETTINGS_ALERT_FIELD).assertIsFocused()
         compose.waitUntil(5_000) { acceptingText() }
-        if (showsAKeyboard()) compose.waitUntil(KEYBOARD_MILLIS) { keyboardShown() }
+        awaitTheKeyboard()
         awaitStill()
         compose.onNodeWithTag(SETTINGS_ALERT_FIELD).performTextInput("reader@example.com")
         compose.onNodeWithTag(SETTINGS_ALERT_ACTION).assertIsEnabled()

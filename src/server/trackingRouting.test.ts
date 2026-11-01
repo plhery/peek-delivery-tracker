@@ -46,6 +46,45 @@ function setup(now = time, options: Partial<ConstructorParameters<typeof Trackin
   return { direct, universal, health, recognize, recognizeBrowser, wait,
     router: new TrackingRouter({ direct, universal, health, recognize, recognizeBrowser, wait, now: () => now, ...options }) };
 }
+
+describe('FedEx public-page fallback', () => {
+  it('asks Track123 first after the direct FedEx challenge', async () => {
+    const { router, direct, universal } = setup(time, { enableTrack123: true });
+    direct.mockRejectedValue(new ChallengeError('FedEx', 'Tracking challenged'));
+    universal.mockImplementation(async source => ({ ...history(), tracking_provider: source }));
+    await router.fetch(parcel({ carrier: 'fedex', tracking_number: '909876543210' }), false);
+    expect(universal.mock.calls[0]?.[0]).toBe('Track123');
+    expect(universal).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the existing providers when Track123 cannot answer', async () => {
+    const { router, direct, universal } = setup(time, { enableTrack123: true });
+    direct.mockRejectedValue(new ChallengeError('FedEx', 'Tracking challenged'));
+    universal.mockImplementation(async source => {
+      if (source === 'Track123') throw new ChallengeError('Track123', 'Guest verification');
+      return { ...history(), tracking_provider: source };
+    });
+    await router.fetch(parcel({ carrier: 'fedex', tracking_number: '909876543210' }), false);
+    expect(universal.mock.calls.map(call => call[0])).toEqual(['Track123', 'ParcelsApp']);
+  });
+
+  it('continues to the existing providers when Track123 trails stored progress', async () => {
+    const { router, direct, universal } = setup(time, { enableTrack123: true });
+    direct.mockRejectedValue(new ChallengeError('FedEx', 'Tracking challenged'));
+    universal.mockImplementation(async source => ({ ...history(source === 'Track123' ? '2026-09-09T11:00:00Z' : '2026-09-10T11:00:00Z'), tracking_provider: source }));
+    const result = await router.fetch(parcel({ carrier: 'fedex', tracking_number: '909876543210', current_stage: 'in_transit',
+      carrier_data: { routing: state({ configured_carrier: 'fedex', last_event_at: '2026-09-10T10:00:00Z' }) } }), false);
+    expect(universal.mock.calls.map(call => call[0])).toEqual(['Track123', 'ParcelsApp']);
+    expect(result.result.tracking_provider).toBe('ParcelsApp');
+  });
+
+  it('does not ask Track123 for another named carrier', async () => {
+    const { router, direct, universal } = setup(time, { enableTrack123: true });
+    direct.mockRejectedValue(new ChallengeError('UPS', 'Tracking challenged'));
+    await router.fetch(parcel({ carrier: 'ups', tracking_number: '1Z999AA10123456784' }), false);
+    expect(universal.mock.calls.map(call => call[0])).not.toContain('Track123');
+  });
+});
 beforeEach(() => vi.spyOn(monitoring, 'reportRoutingEvent').mockImplementation(() => undefined));
 afterEach(() => vi.restoreAllMocks());
 

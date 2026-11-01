@@ -689,6 +689,7 @@ export class TrackingRouter {
     /** Waits out a provider's spacing; tests replace the timer. */
     wait?: (ms: number, signal?: AbortSignal) => Promise<unknown>;
     enablePostalNinja?: boolean;
+    enableTrack123?: boolean;
   }) {}
 
   /**
@@ -769,7 +770,7 @@ export class TrackingRouter {
     // or discovered for the number, else the default order.
     const plan = universalPlan({
       carriers: [universalCarrier, state.confirmed_number === universalNumber ? state.confirmed_carrier : undefined, state.discovered_carrier],
-      trackingNumber: universalNumber, enablePostalNinja: this.options.enablePostalNinja,
+      trackingNumber: universalNumber, enablePostalNinja: this.options.enablePostalNinja, enableTrack123: this.options.enableTrack123,
     });
     const sources = plan.sources;
     // A provider that asked for a postcode the parcel still lacks would only ask
@@ -1403,7 +1404,7 @@ export class TrackingRouter {
     // Postal Ninja and UPU keep their place after the others.
     const rotation: UniversalSource[] = richerSources.filter((source) => source !== 'Postal Ninja');
     const offset = state.discovery_cursor % Math.max(1, rotation.length);
-    const everyProvider = [...new Set<UniversalSource>([...(priority ? [priority] : []), ...fuller, ...(preferred ? [preferred] : []), ...rotation.slice(offset), ...rotation.slice(0, offset),
+    const everyProvider = [...new Set<UniversalSource>([...(sources.includes('Track123') ? ['Track123' as const] : []), ...(priority ? [priority] : []), ...fuller, ...(preferred ? [preferred] : []), ...rotation.slice(offset), ...rotation.slice(0, offset),
       ...sources])];
     const ordered = sparse ? recheckSources(universalNumber, everyProvider, this.options.enablePostalNinja) : everyProvider;
     // Reserve each source’s lookup budget plus transport allowance (UPU needs only 8s).
@@ -1525,6 +1526,8 @@ export class TrackingRouter {
         throw error;
       });
       if (!value) continue;
+      // A newly preferred fallback must not hide progress already held by another source.
+      if (source === 'Track123' && latest(value) < millis(state.last_event_at)) continue;
       // The carrier's partial answer stands unless this history is fuller and not behind it.
       if (partialDirect) {
         const filled = fillPartialAnswer(declared, number, partialDirect.value.result, value.result);

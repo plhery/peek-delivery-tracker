@@ -11,8 +11,10 @@ import { trackingProxyFetcher } from './trackingProxy';
  * read secrets; the environment carries only what the package documents.
  */
 export function hostAdapterEnvironment(env: Record<string, string | undefined> = process.env): AdapterEnvironment {
+  const ipv6Url = env.FEDEX_IPV6_TRAWL_URL?.trim();
   return {
     fetcher: trackingProxyFetcher(env),
+    trawlRoutes: ipv6Url ? { 'fedex-ipv6': new TrawlClient(ipv6Url) } : undefined,
     trawl: TrawlClient.fromEnvironment(env),
     browserExecutablePath: env.TRACKING_CHROMIUM_PATH?.trim() || null,
     recorder: hostStepRecorder(),

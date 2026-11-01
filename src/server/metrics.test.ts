@@ -35,6 +35,21 @@ describe('prometheus carrier metrics', () => {
     expect(text).not.toContain('carrier_recovery_total{carrier="fedex",from_step="none"');
   });
 
+  it('separates retry routes, observed family, dated history and failed IPv6 transport', async () => {
+    const record = { carrier: 'fedex', step: 'trawl', attempt: 2, outcome: 'ok', errorType: null,
+      durationMs: 2000, fallbackFrom: 'trawl', fallbackReason: 'challenge', fallbackErrorType: 'ChallengeError',
+      networkRoute: 'ipv6', networkFamily: 'IPv6', historyAvailable: true } as const;
+    metrics.prometheusStepRecorder.step(record);
+    metrics.prometheusStepRecorder.step({ ...record, outcome: 'transport', networkFamily: 'unknown', historyAvailable: false });
+    metrics.prometheusStepRecorder.step({ ...record, networkRoute: 'default', networkFamily: 'IPv4', historyAvailable: false });
+    metrics.prometheusStepRecorder.step({ ...record, attempt: 2, fallbackFrom: 'api' });
+    const text = await scraped();
+    expect(text).toContain('fedex_network_attempt_total{attempt="retry",route="ipv6",outcome="ok",family="ipv6",history="yes"} 1');
+    expect(text).toContain('fedex_network_attempt_total{attempt="retry",route="ipv6",outcome="transport",family="unknown",history="no"} 1');
+    expect(text).toContain('fedex_network_attempt_total{attempt="retry",route="default",outcome="ok",family="ipv4",history="no"} 1');
+    expect(text).toContain('fedex_network_attempt_total{attempt="initial",route="ipv6",outcome="ok",family="ipv6",history="yes"} 1');
+  });
+
   it('records steps, fallbacks and lookups with low-cardinality labels', async () => {
     metrics.prometheusStepRecorder.step({
       carrier: 'ups', step: 'direct', attempt: 1, outcome: 'challenge', errorType: 'ChallengeError', durationMs: 250,

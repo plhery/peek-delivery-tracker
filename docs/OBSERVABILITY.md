@@ -1151,3 +1151,10 @@ and `GRAFANA_METRICS_UID`.
 5. Check nearby attempts for the same carrier: one odd shipment, or a provider change?
 6. After the fix, run the carrier's tests and one controlled refresh, then check the new
    audit row and, for an outage, its `tracking_health_incident` recovery line.
+
+FedEx network retries are measured by `fedex_network_attempt_total`: selected route,
+observed connection family, outcome and whether dated history was returned. Compare
+`attempt="retry"` recovery rates for `route="default"` and `route="ipv6"` over the same
+window, together with counts and `fedex_network_attempt_duration_seconds`. Unknown
+family means no verified connection, never IPv6 success. First browser attempts,
+including those after optional API credentials fail, remain `attempt="initial"`.

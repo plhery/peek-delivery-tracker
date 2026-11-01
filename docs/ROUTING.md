@@ -912,3 +912,9 @@ catalog name/alias nor a known network of DHL, DPD, GLS or Hermes. The postal un
 which an aggregator lists as "UPU" beside a parcel's carriers, is not reported either, nor is a
 shipping platform a shop books carriers through (Sendcloud, Packlink, Easyship, Shiprocket).
 Timings and metrics are in [OBSERVABILITY.md](OBSERVABILITY.md).
+
+Track123's anonymous public page is enabled only as recovery for a named FedEx parcel.
+It precedes the existing universal providers after direct tracking fails. Public
+recognition and unnamed discovery do not use it, and an unavailable or rejected
+Track123 lookup leaves the remaining providers eligible. A reply behind the parcel’s
+stored progress also leaves them eligible.

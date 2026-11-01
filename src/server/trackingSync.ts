@@ -517,7 +517,7 @@ export interface TrackingAdapter {
 
 export class CarrierTrackingAdapter implements TrackingAdapter {
   constructor(
-    readonly universal = new UniversalTracker({ environment: hostAdapterEnvironment(), providers: UNIVERSAL_SOURCES }),
+    readonly universal = new UniversalTracker({ environment: hostAdapterEnvironment(), providers: ['Track123', ...UNIVERSAL_SOURCES] }),
     readonly registry: AdapterRegistry = createAdapterRegistry(),
     readonly recorder: StepRecorder = hostStepRecorder(),
   ) {}
@@ -1804,6 +1804,7 @@ export class TrackingSyncService {
             ...(this.adapter.recognizeBrowser ? { recognizeBrowser: (carrier: string, number: string, context?: TrackingContext, previousError?: unknown) =>
               once(recognitionKey('browser', carrier, number), () => this.adapter.recognizeBrowser!(carrier, number, context, previousError)) } : {}),
             enablePostalNinja: process.env.TRACKING_ENABLE_POSTAL_NINJA === 'true',
+            enableTrack123: true,
           }).fetch(subject, !askedForCheck(context.trigger), context.signal, addition, sparse)
           : await this.fetchResult(subject, carrierId, checks, askedForCheck(context.trigger), lookupCountry, keepProbe));
       } catch (error) {

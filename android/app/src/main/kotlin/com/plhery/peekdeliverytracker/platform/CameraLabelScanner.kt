@@ -12,6 +12,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.core.resolutionselector.ResolutionStrategy
 import androidx.camera.mlkit.vision.MlKitAnalyzer
@@ -175,14 +176,23 @@ object CameraLabelScanner : LabelScanner {
         }
     }
 
-    /** The back camera's preview and analysis, the newest frame only, pinched to zoom; no photo, no tap to focus. */
+    /**
+     * The back camera's preview and analysis, the newest frame only, pinched to zoom; no photo, no tap to focus. Both
+     * 16:9, so a phone with a 720-wide screen still analyses 1280 x 720, the pixels a label's Code 128 needs at arm's
+     * length (ML Kit asks two for each bar): with CameraX's 4:3 it gets 640 x 480 there, as 1280 x 960 is more than
+     * such a screen lets the two streams share.
+     */
     private fun scannerController(context: Context) = LifecycleCameraController(context).apply {
         cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
         setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
         isPinchToZoomEnabled = true
         isTapToFocusEnabled = false
         imageAnalysisBackpressureStrategy = ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
+        previewResolutionSelector = ResolutionSelector.Builder()
+            .setAspectRatioStrategy(AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
+            .build()
         imageAnalysisResolutionSelector = ResolutionSelector.Builder()
+            .setAspectRatioStrategy(AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
             .setResolutionStrategy(ResolutionStrategy(ANALYSIS_SIZE, ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER))
             .build()
     }

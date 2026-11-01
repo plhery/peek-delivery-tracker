@@ -174,8 +174,11 @@ its next look and the newer one's deploy includes it; if it fails, this one depl
 pushed on its own deploys as soon as it passes, and none waits more than 30 minutes. Runs
 handed over meanwhile queue instead of replacing one another, so none shows as cancelled.
 When its turn comes, in the wait or in the Deploy job, a run stands down and says why if a
-newer commit has passed since. GitHub's list of CI's runs sometimes leaves a run out, so the commit's own
-runs are read from the repository's list too. To deploy the newest tested commit at once, run
+newer commit has passed since. Newer means later in `main`'s git history, which the gate reads
+from GitHub's compare of the commit with `main`, not from when CI's runs started: GitHub
+sometimes logs a push minutes late, so a commit's run can start after its child's. GitHub's
+list of CI's runs sometimes leaves a run out, so the commit's own runs are read from the
+repository's list too. To deploy the newest tested commit at once, run
 `gh workflow run deploy.yml`. Run it too after changing the app's environment in Coolify, instead
 of Coolify's Redeploy: it redeploys the live commit with the new values, and the smoke test and
 the Sentry release follow.

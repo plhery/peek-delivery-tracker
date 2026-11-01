@@ -14,6 +14,18 @@ const at = minute => new Date(Date.UTC(2026, 0, 1, 12, minute)).toISOString();
 const run = (digit, minute, status = 'completed', handoff = 'done') => ({ id: Number(digit), head_sha: sha(digit), created_at: at(minute), status, handoff });
 const handoff = async ({ handoff: state }) => state;
 const minutes = count => Date.parse(at(0)) + count * 60_000;
+// Unless a test says otherwise, git's history follows the digits: commit 2 comes after commit 1.
+const DIGITS = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const laterThan = commit => new Set(DIGITS.map(sha).filter(other => other > commit));
+
+// 1 Nov 2026: GitHub logged the push of d7c619646 3.5 minutes after the push of its child
+// c24c82029, so the parent's CI run started later. Ordered by run times, the gate stood the
+// child down and put the parent live at 09:59Z.
+const PARENT = 'd7c61964639d959356a95d4b3749228f52d63ae3';
+const CHILD = 'c24c82029a6d022d020f5353db81829b40e3e916';
+const PARENT_RUN = { id: 41290262820, head_sha: PARENT, created_at: '2026-11-01T09:46:34Z' };
+const CHILD_RUN = { id: 41294323566, head_sha: CHILD, created_at: '2026-11-01T09:43:03Z' };
+const MAIN_AFTER = { [PARENT]: new Set([CHILD]), [CHILD]: new Set() };
 
 describe('a CI run', () => {
   it('handed its commit over once its hand-over job succeeded, or while it runs', () => {
@@ -45,15 +57,16 @@ describe("CI's runs on main", () => {
 
 describe('deciding a deploy', () => {
   const base = { handoff, now: minutes(10), since: minutes(8), wait: true };
+  const decideFor = options => decide({ ...base, after: laterThan(options.commit), ...options });
 
   it('deploys when CI tests nothing newer', async () => {
     const runs = [run('2', 5, 'completed', 'none'), run('1', 0, 'in_progress', 'running')];
-    assert.equal((await decide({ ...base, commit: sha('1'), runs })).action, 'deploy');
+    assert.equal((await decideFor({ commit: sha('1'), runs })).action, 'deploy');
   });
 
   it('waits while CI tests a newer commit', async () => {
     const runs = [run('3', 7, 'pending', 'none'), run('2', 5, 'in_progress', 'running'), run('1', 0)];
-    const decision = await decide({ ...base, commit: sha('1'), runs });
+    const decision = await decideFor({ commit: sha('1'), runs });
     assert.equal(decision.action, 'wait');
     assert.match(decision.reason, new RegExp(sha('3')));
   });
@@ -61,46 +74,80 @@ describe('deciding a deploy', () => {
   it('waits only for newer commits pushed before the oldest waiting one was handed over', async () => {
     // Commit 1 was handed over at minute 8: commit 3, pushed at minute 9, does not hold it back.
     const later = [run('3', 9, 'in_progress', 'none'), run('1', 0)];
-    const decision = await decide({ ...base, commit: sha('1'), runs: later });
+    const decision = await decideFor({ commit: sha('1'), runs: later });
     assert.equal(decision.action, 'deploy');
     assert.match(decision.reason, /pushed after/);
     const burst = [run('3', 9, 'in_progress', 'none'), run('2', 7, 'in_progress', 'none'), run('1', 0)];
-    assert.match((await decide({ ...base, commit: sha('1'), runs: burst })).reason, new RegExp(sha('2')));
+    assert.match((await decideFor({ commit: sha('1'), runs: burst })).reason, new RegExp(sha('2')));
   });
 
   it('leaves the deploy to a newer commit that passed', async () => {
     const runs = [run('3', 7, 'in_progress', 'none'), run('2', 5), run('1', 0)];
-    assert.equal((await decide({ ...base, commit: sha('1'), runs })).action, 'stand-down');
+    assert.equal((await decideFor({ commit: sha('1'), runs })).action, 'stand-down');
   });
 
   it('deploys when the newer commits failed or change nothing the server runs', async () => {
     const runs = [run('3', 7, 'completed', 'none'), run('2', 5, 'completed', 'none'), run('1', 0)];
-    assert.equal((await decide({ ...base, commit: sha('1'), runs })).action, 'deploy');
+    assert.equal((await decideFor({ commit: sha('1'), runs })).action, 'deploy');
   });
 
   it('stops waiting once tested commits have waited the longest allowed', async () => {
     const runs = [run('2', 5, 'in_progress', 'none'), run('1', 0)];
-    assert.equal((await decide({ ...base, commit: sha('1'), runs, now: minutes(8) + MAX_WAIT_MS - 1 })).action, 'wait');
-    assert.equal((await decide({ ...base, commit: sha('1'), runs, now: minutes(8) + MAX_WAIT_MS })).action, 'deploy');
+    assert.equal((await decideFor({ commit: sha('1'), runs, now: minutes(8) + MAX_WAIT_MS - 1 })).action, 'wait');
+    assert.equal((await decideFor({ commit: sha('1'), runs, now: minutes(8) + MAX_WAIT_MS })).action, 'deploy');
   });
 
   it('deploys at once when asked, but never over a newer tested commit', async () => {
     const testing = [run('2', 5, 'in_progress', 'none'), run('1', 0)];
-    assert.equal((await decide({ ...base, commit: sha('1'), runs: testing, wait: false })).action, 'deploy');
+    assert.equal((await decideFor({ commit: sha('1'), runs: testing, wait: false })).action, 'deploy');
     const passed = [run('2', 5), run('1', 0)];
-    assert.equal((await decide({ ...base, commit: sha('1'), runs: passed, wait: false })).action, 'stand-down');
+    assert.equal((await decideFor({ commit: sha('1'), runs: passed, wait: false })).action, 'stand-down');
   });
 
   it('refuses a commit CI did not pass, and leaves one older than its recent runs', async () => {
     const runs = [run('2', 5), run('1', 0, 'completed', 'none')];
-    assert.equal((await decide({ ...base, commit: sha('1'), runs })).action, 'refuse');
-    assert.equal((await decide({ ...base, commit: sha('9'), runs })).action, 'stand-down');
+    assert.equal((await decideFor({ commit: sha('1'), runs })).action, 'refuse');
+    assert.equal((await decideFor({ commit: sha('9'), runs })).action, 'stand-down');
   });
 
   it('picks the newest commit CI passed for a deploy by hand', async () => {
     const runs = [run('3', 7, 'in_progress', 'running'), run('2', 5, 'completed', 'none'), run('1', 0)];
-    assert.equal(await newestTested(runs, handoff), sha('1'));
-    assert.equal(await newestTested([run('2', 5, 'completed', 'none')], handoff), null);
+    const after = async commit => laterThan(commit);
+    assert.equal(await newestTested(runs, handoff, after), sha('1'));
+    assert.equal(await newestTested([run('2', 5, 'completed', 'none')], handoff, after), null);
+  });
+});
+
+describe('which commit is newer', () => {
+  const runs = [{ ...PARENT_RUN, status: 'completed', handoff: 'done' }, { ...CHILD_RUN, status: 'completed', handoff: 'done' }];
+  const base = { runs, handoff, now: Date.parse('2026-11-01T09:50:00Z'), since: Date.parse('2026-11-01T09:49:14Z'), wait: true };
+
+  it('comes from git history, not CI run times: the child deploys though its run started first', async () => {
+    const decision = await decide({ ...base, commit: CHILD, after: MAIN_AFTER[CHILD] });
+    assert.equal(decision.action, 'deploy');
+    assert.equal((await decide({ ...base, commit: CHILD, after: MAIN_AFTER[CHILD], wait: false })).action, 'deploy');
+  });
+
+  it("leaves the parent's deploy to the child, though the parent's run started later", async () => {
+    const decision = await decide({ ...base, commit: PARENT, after: MAIN_AFTER[PARENT] });
+    assert.equal(decision.action, 'stand-down');
+    assert.match(decision.reason, new RegExp(`^${CHILD} is newer`));
+    assert.equal((await decide({ ...base, commit: PARENT, after: MAIN_AFTER[PARENT], wait: false })).action, 'stand-down');
+  });
+
+  it('waits for a newer commit in git history whose run started before this one', async () => {
+    const testing = [{ ...PARENT_RUN, status: 'completed', handoff: 'done' }, { ...CHILD_RUN, status: 'in_progress', handoff: 'none' }];
+    const decision = await decide({ ...base, runs: testing, commit: PARENT, after: MAIN_AFTER[PARENT] });
+    assert.equal(decision.action, 'wait');
+    assert.match(decision.reason, new RegExp(CHILD));
+  });
+
+  it('picks the child for a deploy by hand, and follows git through several commits', async () => {
+    assert.equal(await newestTested(runs, handoff, async commit => MAIN_AFTER[commit]), CHILD);
+    // Runs listed 3, 1, 2 by time; git's order is 1, 2, 3, then 4, which failed CI.
+    const shuffled = [run('4', 9, 'completed', 'none'), run('3', 2), run('1', 5), run('2', 7)];
+    const order = { [sha('1')]: new Set([sha('2'), sha('3'), sha('4')]), [sha('2')]: new Set([sha('3'), sha('4')]), [sha('3')]: new Set([sha('4')]) };
+    assert.equal(await newestTested(shuffled, handoff, async commit => order[commit]), sha('3'));
   });
 });
 
@@ -134,10 +181,15 @@ process.stdout.write(JSON.stringify(fixture[key]));
   const ciRun = (digit, minute, status = 'completed') => ({ id: Number(digit), run_attempt: 1, event: 'push', head_branch: 'main', head_sha: sha(digit), created_at: at(minute), status });
   const passed = { jobs: [{ name: HANDOFF_JOB, status: 'completed', conclusion: 'success' }] };
   const failed = { jobs: [{ name: HANDOFF_JOB, status: 'completed', conclusion: 'skipped' }] };
-  const gate = (args, { runs, jobs, commitRuns = [] }) => {
+  // GitHub's compare, as the gate's jq filter leaves it: the commits on main after one.
+  const compare = (after) => Object.fromEntries(Object.entries(after).map(([commit, shas]) =>
+    [`repos/owner/app/compare/${commit}...main?per_page=100&page=1`, { total: shas.size, commits: [...shas] }]));
+  const gate = (args, { runs, jobs, commitRuns = [], after = Object.fromEntries(DIGITS.map(sha).map(commit => [commit, laterThan(commit)])), extra = {} }) => {
     const output = path.join(directory, `output-${Math.random()}`);
     writeFileSync(output, '');
     const fixture = {
+      ...compare(after),
+      ...extra,
       'repos/owner/app/actions/workflows/ci.yml/runs': { workflow_runs: runs },
       'repos/owner/app/actions/runs?head_sha=': { workflow_runs: commitRuns },
       'repos/owner/app/actions/workflows/deploy.yml/runs': { workflow_runs: [{ id: 50, created_at: at(9), status: 'in_progress' }] },
@@ -173,6 +225,32 @@ process.stdout.write(JSON.stringify(fixture[key]));
 
   it('stops a re-run of a commit a newer one replaced, without waiting', () => {
     const result = gate([`--commit=${sha('1')}`, '--at-once'], { runs: [ciRun('3', 6, 'in_progress'), ciRun('2', 3), ciRun('1', 0)], jobs: { 3: failed, 2: passed, 1: passed } });
+    assert.equal(result.status, 0, result.log);
+    assert.equal(result.output, `deploy=false\ncommit=${sha('1')}\n`);
+  });
+
+  it('deploys the commit that is newer in git history, not the one whose run started later', () => {
+    const ciRuns = [{ ...ciRun('8', 0), ...PARENT_RUN }, { ...ciRun('9', 0), ...CHILD_RUN }];
+    const options = { runs: ciRuns, jobs: { [PARENT_RUN.id]: passed, [CHILD_RUN.id]: passed }, after: MAIN_AFTER };
+    const child = gate([`--commit=${CHILD}`], options);
+    assert.equal(child.status, 0, child.log);
+    assert.equal(child.output, `deploy=true\ncommit=${CHILD}\n`);
+    const parent = gate([`--commit=${PARENT}`], options);
+    assert.equal(parent.status, 0, parent.log);
+    assert.equal(parent.output, `deploy=false\ncommit=${PARENT}\n`);
+    assert.match(parent.log, new RegExp(`${CHILD} is newer and passed CI`));
+    assert.equal(gate([`--commit=${PARENT}`, '--at-once'], options).output, `deploy=false\ncommit=${PARENT}\n`);
+    assert.equal(gate(['--commit='], options).output, `deploy=true\ncommit=${CHILD}\n`);
+  });
+
+  it('pages through a long comparison', () => {
+    // Commit 1 has 150 commits after it on main; the passed commit 2 is on the second page.
+    const filler = Array.from({ length: 149 }, (_, index) => index.toString(16).padStart(40, 'f'));
+    const fixture = {
+      [`repos/owner/app/compare/${sha('1')}...main?per_page=100&page=1`]: { total: 150, commits: filler.slice(0, 100) },
+      [`repos/owner/app/compare/${sha('1')}...main?per_page=100&page=2`]: { total: 150, commits: [...filler.slice(100), sha('2')] },
+    };
+    const result = gate([`--commit=${sha('1')}`, '--at-once'], { runs: [ciRun('1', 6), ciRun('2', 3)], jobs: { 2: passed, 1: passed }, after: {}, extra: fixture });
     assert.equal(result.status, 0, result.log);
     assert.equal(result.output, `deploy=false\ncommit=${sha('1')}\n`);
   });

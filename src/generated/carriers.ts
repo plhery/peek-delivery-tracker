@@ -1704,6 +1704,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "FAR International tracking: numbers, statuses and contact",
       "name": "FAR International",
       "color": "#003b75"
+    },
+    {
+      "id": "jifan",
+      "catalog": "jifan",
+      "slug": "jifan-tracking",
+      "title": "Jifan tracking: JFGJ numbers, scans and Beijing time",
+      "name": "Jifan",
+      "color": "#c81011"
     }
   ],
   "de": [

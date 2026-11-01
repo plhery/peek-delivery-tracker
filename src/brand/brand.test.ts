@@ -505,6 +505,16 @@ describe('carrier brand', () => {
       'bridge-intl',
       'jiufang',
       'cel-changda',
+      'too-express',
+      'go-world-express',
+      'shenghang',
+      'hzt',
+      'wld-express',
+      'wangjing-3cq',
+      'banling',
+      'jikuaida',
+      'hye',
+      'jet-global',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

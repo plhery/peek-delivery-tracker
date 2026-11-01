@@ -429,7 +429,17 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'longcps'
   | 'bridge-intl'
   | 'jiufang'
-  | 'cel-changda';
+  | 'cel-changda'
+  | 'too-express'
+  | 'go-world-express'
+  | 'shenghang'
+  | 'hzt'
+  | 'wld-express'
+  | 'wangjing-3cq'
+  | 'banling'
+  | 'jikuaida'
+  | 'hye'
+  | 'jet-global';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

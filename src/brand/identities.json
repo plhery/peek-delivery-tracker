@@ -295,6 +295,9 @@
   "bangladesh-post": {
     "decal": "bangladesh-post"
   },
+  "banling": {
+    "decal": "banling"
+  },
   "barid-al-maghrib": {
     "decal": "barid-al-maghrib"
   },
@@ -1380,6 +1383,9 @@
   "go-express": {
     "decal": "go-express"
   },
+  "go-world-express": {
+    "decal": "go-world-express"
+  },
   "go4": {
     "decal": "go4",
     "palette": {
@@ -1562,8 +1568,14 @@
   "hunter-express": {
     "decal": "hunter-express"
   },
+  "hye": {
+    "decal": "hye"
+  },
   "hywl": {
     "decal": "hywl"
+  },
+  "hzt": {
+    "decal": "hzt"
   },
   "icc-worldwide": {
     "decal": "icc-worldwide"
@@ -1723,6 +1735,9 @@
   "jersey-post": {
     "decal": "jersey-post"
   },
+  "jet-global": {
+    "decal": "jet-global"
+  },
   "jet-logistic": {
     "decal": "jet-logistic"
   },
@@ -1740,6 +1755,9 @@
   },
   "jifan": {
     "decal": "jifan"
+  },
+  "jikuaida": {
+    "decal": "jikuaida"
   },
   "jitsu": {
     "decal": "jitsu",
@@ -2769,6 +2787,9 @@
   "shadowfax": {
     "decal": "shadowfax"
   },
+  "shenghang": {
+    "decal": "shenghang"
+  },
   "shipa": {
     "decal": "shipa"
   },
@@ -3153,6 +3174,9 @@
   "tonda-global": {
     "decal": "tonda-global"
   },
+  "too-express": {
+    "decal": "too-express"
+  },
   "top-logistics-au": {
     "decal": "top-logistics-au"
   },
@@ -3404,6 +3428,9 @@
   "wanbexpress": {
     "decal": "wanbexpress"
   },
+  "wangjing-3cq": {
+    "decal": "wangjing-3cq"
+  },
   "ward-trucking": {
     "decal": "ward-trucking"
   },
@@ -3436,6 +3463,9 @@
   },
   "wizmo": {
     "decal": "wizmo"
+  },
+  "wld-express": {
+    "decal": "wld-express"
   },
   "world-package": {
     "decal": "world-package"

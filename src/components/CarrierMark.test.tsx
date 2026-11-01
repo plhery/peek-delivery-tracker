@@ -441,6 +441,16 @@ describe('carrier mark', () => {
     'bridge-intl',
     'jiufang',
     'cel-changda',
+    'too-express',
+    'go-world-express',
+    'shenghang',
+    'hzt',
+    'wld-express',
+    'wangjing-3cq',
+    'banling',
+    'jikuaida',
+    'hye',
+    'jet-global',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

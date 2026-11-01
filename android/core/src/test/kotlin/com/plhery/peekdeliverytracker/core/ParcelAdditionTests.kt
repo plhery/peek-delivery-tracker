@@ -340,4 +340,19 @@ class ParcelAdditionTests {
         val flag = "\uD83C\uDDE8\uD83C\uDDED"
         assertEquals(flag.repeat(FirstParcelRequest.pasteLimit), FirstParcelRequest.taken(flag.repeat(FirstParcelRequest.pasteLimit + 1)))
     }
+
+    @Test
+    fun aScanDeliversTheFirstBarcodeWithAPayloadTrimmedAndNothingAfterIt() {
+        val scan = AddParcelView.FirstScan()
+        // A barcode with no text, or only spaces and newlines, delivers nothing and leaves the next one to.
+        assertNull(scan.read(emptyList()))
+        assertNull(scan.read(listOf(null, " \n\t\u3000")))
+        // Of two read at once, the first with a payload.
+        assertEquals("TESTSCAN0001", scan.read(listOf("", " TESTSCAN0001\n", "TESTSCAN0002")))
+        // Once delivered, nothing more: the same barcode read again, nor another.
+        assertNull(scan.read(listOf("TESTSCAN0001")))
+        assertNull(scan.read(listOf("TESTSCAN0003")))
+        // Each scanner delivers its own first.
+        assertEquals("TESTSCAN0003", AddParcelView.FirstScan().read(listOf("TESTSCAN0003")))
+    }
 }

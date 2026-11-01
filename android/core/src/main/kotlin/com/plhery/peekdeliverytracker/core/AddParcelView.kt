@@ -39,6 +39,29 @@ object AddParcelView {
         text.append(parts.drop(1).joinToString(""))
         return SuggestionLabel(text.toString(), number, marked)
     }
+
+    /**
+     * `TrackingDataScanner.Coordinator`: of what the label scanner reads, the first barcode whose payload, trimmed of
+     * whitespace and newlines, isn't empty, delivered once; nothing after it, however many more it reads.
+     */
+    class FirstScan {
+        private var delivered = false
+
+        /**
+         * `dataScanner(_:didAdd:allItems:)` for the payloads of the barcodes `read` at once, in order (null for one
+         * whose payload isn't text): the one to deliver, trimmed, the first time one has a payload; null otherwise.
+         */
+        fun read(read: List<String?>): String? {
+            if (delivered) return null
+            for (payload in read) {
+                val value = payload?.trimmingWhitespacesAndNewlines()
+                if (value.isNullOrEmpty()) continue
+                delivered = true
+                return value
+            }
+            return null
+        }
+    }
 }
 
 /**

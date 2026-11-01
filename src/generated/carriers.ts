@@ -1792,6 +1792,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "J&T Express China tracking: 极兔速递 numbers, statuses, contact",
       "name": "J&T Express China",
       "color": "#e62019"
+    },
+    {
+      "id": "tforce-freight",
+      "catalog": "tforce-freight",
+      "slug": "tforce-freight-tracking",
+      "title": "TForce Freight tracking: PRO numbers, statuses and claims",
+      "name": "TForce Freight",
+      "color": "#0053a1"
     }
   ],
   "de": [

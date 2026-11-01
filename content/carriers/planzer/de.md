@@ -89,7 +89,7 @@ So stand es am 9. Oktober 2026 auf Planzers Seiten:
 
 Bei einer 13-stelligen Nummer mit 99990 am Anfang fragt es nach dem vollständigen Sendungslink (trackandtrace.planzergroup.com/shared/…, mit accessKey) und liest dann die erreichten Schritte mit ihren Zeiten und ein erwartetes Datum.
 
-Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Planzer für dich kontaktieren kann es nicht. Scan-Orte veröffentlicht Planzer nicht, deshalb fehlen sie auch im Sendungsverlauf.
+Es schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Planzer für dich kontaktieren kann es nicht. Scan-Orte veröffentlicht Planzer nicht, deshalb fehlen sie auch im Sendungsverlauf.
 
 ## Fragen zur Planzer Sendungsverfolgung
 

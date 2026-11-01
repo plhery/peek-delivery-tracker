@@ -82,7 +82,7 @@ Numery z chińskiej strony Cainiao są dla klientów w Chinach oraz dla sprzedaw
 
 Czasem AliExpress od razu podaje numer przewoźnika, który doręczy paczkę, na przykład numer SDA przy paczce do Włoch, choć paczka jest jeszcze w Cainiao. Przy niektórych takich kształtach Peek pyta Cainiao obok tego przewoźnika. Jeśli obaj znają numer, Peek zapisuje paczkę pod „AliExpress / Cainiao”, gdzie są skany sprzed granicy, i na ostatni odcinek pyta też przewoźnika doręczającego: jego skany trafiają do historii, gdy tylko zgłosi on paczkę.
 
-Sprawdza śledzenie w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, w nocy zaś co godzinę lub dwie, pokazuje każdy skan na mapie i powiadomi Cię o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Widzisz status i historię, miejsce skanu, gdy Cainiao je podaje, planowaną dostawę jako przedział dni, gdy Cainiao go podaje, i godzinę doręczenia. Nie skontaktuje się za Ciebie z Cainiao ani nie złoży reklamacji.
+Sprawdza śledzenie co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, pokazuje każdy skan na mapie i powiadomi Cię o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Widzisz status i historię, miejsce skanu, gdy Cainiao je podaje, planowaną dostawę jako przedział dni, gdy Cainiao go podaje, i godzinę doręczenia. Nie skontaktuje się za Ciebie z Cainiao ani nie złoży reklamacji.
 
 ## Pytania o śledzenie Cainiao
 

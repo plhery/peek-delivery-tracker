@@ -73,7 +73,7 @@ Peek solo acepta las 12 cifras del número de envío: si eliges Sending con otro
 
 Verás el estado y el historial con las palabras de Sending, cada escaneo con la población de su delegación; si un escaneo solo tiene fecha, aparece solo el día. Cuando la barra termina en `Entregada`, Peek da el paquete por entregado aunque los escaneos se queden antes, y con `FALTA DEFINITIVA` lo marca como «Incidencia». Peek deja fuera la referencia del remitente, la franja de entrega, los códigos postales y poblaciones de remitente y destinatario, la delegación de reparto, las opciones de entrega y el nombre de quien firmó, y no muestra peso ni fecha prevista de entrega: la franja, mírala en sending.es.
 
-Peek consulta el seguimiento cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede hablar con Sending ni con la tienda por ti, ni cambiar la dirección.
+Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede hablar con Sending ni con la tienda por ti, ni cambiar la dirección.
 
 ## Preguntas sobre el seguimiento de Sending
 

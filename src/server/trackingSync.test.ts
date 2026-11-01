@@ -603,16 +603,14 @@ describe('fair scheduling', () => {
     expect(() => fairSyncPackages(packages, 0)).toThrow('positive');
   });
 
-  it('aligns daytime checks to two minutes and overnight checks to 20 minutes', () => {
+  it('aligns checks to two minutes around the clock', () => {
     expect(secondsUntilNextSync(new Date('2026-07-15T07:03:30Z'))).toBe(30);
     expect(secondsUntilNextSync(new Date('2026-07-15T07:04:00Z'))).toBe(120);
-    expect(secondsUntilNextSync(new Date('2026-07-15T19:59:30Z'))).toBe(30);
-    expect(secondsUntilNextSync(new Date('2026-07-15T20:00:00Z'))).toBe(1_200);
-    // The window a run belongs to opened at the last even minute by day, at the last :00, :20 or :40 overnight.
+    expect(secondsUntilNextSync(new Date('2026-07-15T20:00:00Z'))).toBe(120);
+    expect(secondsUntilNextSync(new Date('2026-07-16T01:15:00Z'))).toBe(60);
+    // The window a run belongs to opened at the last even minute.
     expect(syncWindowStart(new Date('2026-07-15T07:03:30Z'))).toEqual(new Date('2026-07-15T07:02:00Z'));
-    expect(syncWindowStart(new Date('2026-07-15T20:30:00Z'))).toEqual(new Date('2026-07-15T20:20:00Z'));
-    expect(secondsUntilNextSync(new Date('2026-07-15T20:15:00Z'))).toBe(300);
-    expect(secondsUntilNextSync(new Date('2026-07-16T05:50:00Z'))).toBe(600);
+    expect(syncWindowStart(new Date('2026-07-15T20:31:00Z'))).toEqual(new Date('2026-07-15T20:30:00Z'));
     expect(() => secondsUntilNextSync(new Date('invalid'))).toThrow('valid');
   });
 
@@ -2610,7 +2608,7 @@ describe('TrackingSyncService', () => {
     expect(client.completeSyncAttempt.mock.calls[0][1]).not.toMatchObject({ outcome: 'interrupted' });
   });
 
-  it('follows one-off parcels opened in the last 24 hours, after the accounts, ten at most a run by day and three overnight', async () => {
+  it('follows one-off parcels opened in the last 24 hours, after the accounts, ten at most a run around the clock', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T09:00:00Z', sync_status: 'ok' };
     const owned = [
@@ -2637,40 +2635,35 @@ describe('TrackingSyncService', () => {
     ]);
     // The scheduled reconciliation is the account-wide one; it never names a parcel without an owner.
     expect(client.autoLinkPackages).toHaveBeenCalledExactlyOnceWith(undefined);
-    // Overnight, a run every 20 minutes takes three of them. 01:00 in Zurich.
+    // At 01:00 in Zurich a run takes ten as well; the fresh one is due again by then.
     client.startSyncAttempt.mockClear();
     now.setTime(Date.parse('2026-09-09T23:00:00Z'));
     await service.sync();
-    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
-      .toEqual(['a1', 'b1', 'legacy', 'one-off-1', 'one-off-2', 'one-off-3']);
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['a1', 'b1', 'legacy',
+      ...Array.from({ length: 6 }, (_, index) => `one-off-${index + 1}`), 'one-off-fresh', 'one-off-7', 'one-off-8', 'one-off-9']);
   });
 
-  it('checks the one-off parcels someone waits for first overnight, whichever was checked longer ago', async () => {
+  it('checks the one-off parcels someone waits for first, at any hour, whichever was checked longer ago', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T21:00:00Z', sync_status: 'ok', user_id: null, one_off: true };
-    // Nobody reads these two and no alert is on, but a provider has just named their carrier: due at every run.
-    const named = { carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post', carrier_named_at: '2026-09-09T22:55:00Z' } } };
-    const oneOffs = [
-      { ...due, ...named, id: 'named-1', last_synced_at: '2026-09-09T20:00:00Z' },
-      { ...due, ...named, id: 'named-2', last_synced_at: '2026-09-09T20:30:00Z' },
-      ...['alerted-1', 'alerted-2', 'read-1'].map((id) => ({ ...due, id })),
-    ];
-    const client = fakeClient([]);
-    client.listFollowedOneOffPackages.mockResolvedValue(oneOffs);
-    client.listUnwatchedPackageIds.mockResolvedValue(['named-1', 'named-2']);
-    const now = new Date('2026-09-09T23:00:00Z');
-    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
-      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => now);
-    await service.sync();
-    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['alerted-1', 'alerted-2', 'read-1']);
-    // By day a run takes ten, the least recently checked first.
-    client.startSyncAttempt.mockClear();
-    now.setTime(Date.parse('2026-09-10T09:00:00Z'));
-    client.listFollowedOneOffPackages.mockResolvedValue(oneOffs.map((parcel) => ({ ...parcel,
-      carrier_data: { routing: { ...named.carrier_data.routing, carrier_named_at: '2026-09-10T08:55:00Z' } } })));
-    await service.sync();
-    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
-      .toEqual(['named-1', 'named-2', 'alerted-1', 'alerted-2', 'read-1']);
+    for (const at of ['2026-09-09T23:00:00Z', '2026-09-10T09:00:00Z']) {
+      // Nobody reads these eight and no alert is on, but a provider has just named their carrier: due at every run.
+      const named = { carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post',
+        carrier_named_at: new Date(Date.parse(at) - 5 * 60_000).toISOString() } } };
+      const unread = Array.from({ length: 8 }, (_, index) => `named-${index + 1}`);
+      const oneOffs = [
+        ...unread.map((id) => ({ ...due, ...named, id, last_synced_at: '2026-09-09T20:00:00Z' })),
+        ...['alerted-1', 'alerted-2', 'read-1'].map((id) => ({ ...due, id })),
+      ];
+      const client = fakeClient([]);
+      client.listFollowedOneOffPackages.mockResolvedValue(oneOffs);
+      client.listUnwatchedPackageIds.mockResolvedValue(unread);
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+        { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date(at));
+      await service.sync();
+      expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
+        .toEqual(['alerted-1', 'alerted-2', 'read-1', ...unread.slice(0, 7)]);
+    }
   });
 
   it('asks once for the copies of a number in a run and keeps them on one route', async () => {
@@ -2793,7 +2786,7 @@ describe('TrackingSyncService', () => {
     expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'tracking', operation: 'list_one_off_packages' });
   });
 
-  it('keeps a new lookup filed under no carrier on the schedule every 6 hours by day once its number was answered for', async () => {
+  it('keeps a new lookup filed under no carrier on the schedule every 6 hours once its number was answered for', async () => {
     const routing = { version: 1, configured_carrier: 'unknown', failures: {}, preferred_provider: 'Postal Ninja',
       last_success_at: '2026-09-08T10:00:00Z', last_event_at: '2026-09-08T09:00:00Z' };
     const lookup = (id: string, extra: JsonObject = {}): JsonObject => ({ id, user_id: null, one_off: true, carrier: 'unknown',
@@ -2815,10 +2808,12 @@ describe('TrackingSyncService', () => {
       expect(client.listUnfiledOneOffPackages.mock.calls[0][1]).not.toContain('dpd-pl');
       return client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id);
     };
-    // Six hours after its last check (08:00 in Zurich), not before, and not overnight.
+    // Six hours after its last check, not before, overnight too.
     await expect(check('2026-09-09T11:00:00Z', [lookup('seen')])).resolves.toEqual([]);
     await expect(check('2026-09-09T12:00:00Z', [lookup('seen')])).resolves.toEqual(['seen']);
-    await expect(check('2026-09-09T21:00:00Z', [lookup('seen', { last_synced_at: '2026-09-09T12:00:15Z' })])).resolves.toEqual([]);
+    await expect(check('2026-09-09T17:00:00Z', [lookup('seen', { last_synced_at: '2026-09-09T12:00:15Z' })])).resolves.toEqual([]);
+    await expect(check('2026-09-09T23:00:00Z', [lookup('seen', { last_synced_at: '2026-09-09T18:00:15Z' })])).resolves.toEqual([]);
+    await expect(check('2026-09-10T00:00:00Z', [lookup('seen', { last_synced_at: '2026-09-09T18:00:15Z' })])).resolves.toEqual(['seen']);
     // So does one filed under a carrier only providers track: their next answer can name the carrier that delivers it.
     const filed = lookup('filed', { carrier: 'z-leading', carrier_data: { routing: { ...routing, configured_carrier: 'z-leading' } } });
     await expect(check('2026-09-09T11:00:00Z', [filed])).resolves.toEqual([]);
@@ -2832,7 +2827,7 @@ describe('TrackingSyncService', () => {
     await expect(check('2026-09-09T12:00:00Z', [lookup('seen'), followed], [followed])).resolves.toEqual(['followed', 'seen']);
   });
 
-  it('checks a lookup filed under no carrier daily by day once its newest scan is over 14 days old', async () => {
+  it('checks a lookup filed under no carrier daily once its newest scan is over 14 days old', async () => {
     const routing = (lastEvent: string) => ({ version: 1, configured_carrier: 'unknown', failures: {},
       preferred_provider: 'Postal Ninja', last_success_at: '2026-09-08T10:00:00Z', last_event_at: lastEvent });
     const lookup = (id: string, extra: JsonObject = {}): JsonObject => ({ id, user_id: null, one_off: true, carrier: 'unknown',
@@ -2851,11 +2846,11 @@ describe('TrackingSyncService', () => {
       await service.sync();
       return client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id);
     };
-    // Its newest scan is 20 days old: not six hours after its last check, but a day after it, by day.
+    // Its newest scan is 20 days old: not six hours after its last check, but a day after it, overnight too.
     await expect(check('2026-09-09T12:00:00Z', [lookup('quiet')])).resolves.toEqual([]);
     await expect(check('2026-09-09T12:00:00Z', [lookup('quiet', { last_synced_at: '2026-09-08T13:00:15Z' })])).resolves.toEqual([]);
     await expect(check('2026-09-09T12:00:00Z', [lookup('quiet', { last_synced_at: '2026-09-08T12:00:15Z' })])).resolves.toEqual(['quiet']);
-    await expect(check('2026-09-09T21:00:00Z', [lookup('quiet', { last_synced_at: '2026-09-08T12:00:15Z' })])).resolves.toEqual([]);
+    await expect(check('2026-09-09T23:00:00Z', [lookup('quiet', { last_synced_at: '2026-09-08T23:00:15Z' })])).resolves.toEqual(['quiet']);
     // A summary time counts as a scan too; one 13 days old keeps the 6-hour cadence.
     await expect(check('2026-09-09T12:00:00Z', [lookup('recent', { carrier_data: { routing: routing('2026-08-20T09:00:00Z'),
       last_update: '2026-08-27T09:00:00Z' } })])).resolves.toEqual(['recent']);
@@ -2870,7 +2865,7 @@ describe('TrackingSyncService', () => {
     expect(isOpenedParcelSyncDue(lookup('quiet', { last_synced_at: '2026-09-09T10:00:15Z' }), new Date('2026-09-09T12:00:00Z'))).toBe(true);
   });
 
-  it('asks the providers daily by day while a carrier holding the parcel waits for its postcode', async () => {
+  it('asks the providers daily while a carrier holding the parcel waits for its postcode', async () => {
     const waiting = { carrier: 'dhl', field: 'dpdPostcode' };
     const owned = (id: string, extra: JsonObject = {}, needed: JsonObject | null = waiting): JsonObject => ({ id, user_id: 'user-1',
       one_off: false, carrier: 'unknown', current_stage: 'in_transit', tracking_number: ON_THE_HOUR, created_at: '2026-09-05T10:00:00Z',
@@ -2887,11 +2882,11 @@ describe('TrackingSyncService', () => {
       await service.sync();
       return client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id);
     };
-    // Checked three hours ago: a parcel still moving would be due, but this one waits for a day, by day.
+    // Checked three hours ago: a parcel still moving would be due, but this one waits for a day, overnight too.
     await expect(check('2026-09-09T12:00:00Z', [owned('moving', {}, null)])).resolves.toEqual(['moving']);
     await expect(check('2026-09-09T12:00:00Z', [owned('waiting')])).resolves.toEqual([]);
     await expect(check('2026-09-09T12:00:00Z', [owned('waiting', { last_synced_at: '2026-09-08T12:00:15Z' })])).resolves.toEqual(['waiting']);
-    await expect(check('2026-09-09T21:00:00Z', [owned('waiting', { last_synced_at: '2026-09-08T12:00:15Z' })])).resolves.toEqual([]);
+    await expect(check('2026-09-09T23:00:00Z', [owned('waiting', { last_synced_at: '2026-09-08T23:00:15Z' })])).resolves.toEqual(['waiting']);
     // Filed under that carrier, or asked for a link the parcel does not ask the owner for, it keeps its cadence.
     await expect(check('2026-09-09T12:00:00Z', [owned('filed', { carrier: 'dhl' })])).resolves.toEqual(['filed']);
     await expect(check('2026-09-09T12:00:00Z', [owned('link', {}, { carrier: 'dhl', field: 'trackingUrl' })])).resolves.toEqual(['link']);
@@ -2959,14 +2954,14 @@ describe('TrackingSyncService', () => {
 
   it.each([
     { time: '02:00:00', zurich: '04:00', checked: ['owned', 'opened'] },
-    { time: '20:00:00', zurich: '22:00', checked: ['owned', 'opened'] },
+    { time: '20:00:00', zurich: '22:00', checked: ['owned', 'opened', 'unopened'] },
     { time: '06:00:00', zurich: '08:00', checked: ['owned', 'opened', 'unopened'] },
   ])('at $zurich in Zurich, checks $checked', async ({ time, checked }) => {
     const parcel = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       last_synced_at: '2026-09-08T23:55:00Z', sync_status: 'ok' };
     const client = fakeClient([{ ...parcel, id: 'owned', user_id: 'a' }]);
     client.listFollowedOneOffPackages.mockResolvedValue(['opened', 'unopened'].map((id) => ({ ...parcel, id, user_id: null, one_off: true })));
-    // Overnight, a lookup without an account that nobody opened in the last hour waits for the morning.
+    // A lookup without an account that nobody opened in the last hour waits 3 hours, overnight too.
     client.listUnwatchedPackageIds.mockResolvedValue(['owned', 'unopened']);
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
       { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date(`2026-09-09T${time}Z`));
@@ -3197,8 +3192,9 @@ describe('TrackingSyncService', () => {
     const browsing = { ...delivering, carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post', browser_check: true } } };
     expect(isOpenedParcelSyncDue(browsing, at('10:04:59'))).toBe(false);
     expect(isOpenedParcelSyncDue(browsing, at('10:05:00'))).toBe(true);
-    // Overnight it stays hourly.
-    expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T20:00:15Z' }, at('20:02:00'))).toBe(false);
+    // Overnight too.
+    expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T20:00:15Z' }, at('20:01:59'))).toBe(false);
+    expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T20:00:15Z' }, at('20:02:00'))).toBe(true);
     // A provider's cooldown holds a link's reader back as it holds the schedule.
     expect(isOpenedParcelSyncDue({ ...parcel, carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post', next_check_at: '2026-09-09T13:00:00Z' } } }, at('12:00:00'))).toBe(false);
   });
@@ -3506,10 +3502,10 @@ describe('TrackingSyncService', () => {
     await expect(check([{ ...unseen, id: 'young' }], '2026-09-09T11:00:00Z', true)).resolves.toBe(1);
     await expect(check([{ ...unseen, id: 'old' }], '2026-09-09T11:30:00Z')).resolves.toBe(0);
     await expect(check([{ ...unseen, id: 'old' }], '2026-09-10T12:00:00Z')).resolves.toBe(0);
-    // With an alert on, daily by day, not overnight, until 30 days after it was added.
+    // With an alert on, daily, overnight too, until 30 days after it was added.
     await expect(check([{ ...unseen, id: 'alerted' }], '2026-09-09T16:00:00Z', true)).resolves.toBe(0);
     await expect(check([{ ...unseen, id: 'alerted' }], '2026-09-10T12:00:00Z', true)).resolves.toBe(1);
-    await expect(check([{ ...unseen, id: 'alerted' }], '2026-09-10T21:00:00Z', true)).resolves.toBe(0);
+    await expect(check([{ ...unseen, id: 'alerted' }], '2026-09-10T21:00:00Z', true)).resolves.toBe(1);
     await expect(check([{ ...unseen, id: 'alerted', created_at: '2026-08-10T05:30:00Z' }], '2026-09-10T12:00:00Z', true)).resolves.toBe(0);
     // A number a provider has answered for keeps the schedule.
     const seen = { ...unseen, id: 'seen', carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {},
@@ -3547,19 +3543,19 @@ describe('TrackingSyncService', () => {
     expect(isOpenedParcelSyncDue(eightDays, new Date('2026-09-09T10:00:00Z'))).toBe(true);
   });
 
-  it('keeps out-for-delivery parcels hourly overnight and allows manual refreshes', async () => {
+  it('checks out-for-delivery parcels every 2 minutes overnight too and allows manual refreshes', async () => {
     const parcel = {
       id: 'overnight', carrier: 'swiss-post', current_stage: 'out_for_delivery', tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T20:00:15Z', sync_status: 'ok',
     };
     const client = fakeClient([parcel]);
     const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) };
-    let now = new Date('2026-09-09T20:02:00Z');
+    let now = new Date('2026-09-09T20:01:00Z');
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
       adapter, null, () => now);
     await expect(service.sync()).resolves.toMatchObject({ checked: 0 });
     await expect(service.syncPackage(parcel)).resolves.toMatchObject({ checked: 1 });
-    now = new Date('2026-09-09T21:00:00Z');
+    now = new Date('2026-09-09T20:02:00Z');
     await expect(service.sync()).resolves.toMatchObject({ checked: 1 });
   });
 
@@ -5386,15 +5382,15 @@ describe('TrackingSyncService', () => {
     expect(capture()).toHaveLength(1);
   });
 
-  it('keeps the overnight freshness window while thin answers accumulate missed checks', async () => {
+  it('keeps the freshness window while thin answers accumulate missed checks', async () => {
     const logged = vi.spyOn(observability, 'logOperationalEvent').mockImplementation(() => undefined);
     const capture = anomalyLogs(logged, 'progress_disappeared');
     const client = leasedClient();
     const adapter = { fetch: vi.fn(), fetchUniversal: vi.fn().mockResolvedValue(withoutProgress) };
-    const parcel = { id: 'overnight-thin', carrier: 'unknown', tracking_number: 'TEST1234', current_stage: 'in_transit',
+    const parcel = { id: 'thin', carrier: 'unknown', tracking_number: 'TEST1234', current_stage: 'in_transit',
       carrier_data: { tracking_provider: 'Ship24', routing: { version: 1, configured_carrier: 'unknown',
         preferred_provider: 'Ship24', consecutive_failures: 1, last_success_at: '2026-09-10T21:00:00Z' } } };
-    let now = new Date('2026-09-10T23:00:00Z');
+    let now = new Date('2026-09-10T21:30:00Z');
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
     await expect(service.syncPackage(parcel)).resolves.toMatchObject({ waiting: 1, errors: 0 });
     const saved = client.updatePackage.mock.calls.at(-1)![1];
@@ -5402,14 +5398,14 @@ describe('TrackingSyncService', () => {
       consecutive_failures: 2, last_success_at: '2026-09-10T21:00:00Z',
     } } });
     expect(capture()).toEqual([]);
-    now = new Date('2026-09-11T00:00:00Z');
+    now = new Date('2026-09-10T22:00:00Z');
     await expect(service.syncPackage({ ...parcel, ...saved }, { trigger: 'scheduled' })).resolves.toMatchObject({ waiting: 0, errors: 1 });
     expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ sync_status: 'error', carrier_data: { routing: {
       consecutive_failures: 3, last_success_at: '2026-09-10T21:00:00Z',
     } } });
     expect(capture()).toEqual([expect.objectContaining({ carrier: 'unknown', anomaly_code: 'progress_disappeared' })]);
     // The answer came without an error: its anomaly is the refresh incident's evidence.
-    expect(client.recordTrackingHealth).toHaveBeenLastCalledWith(expect.any(String), 'overnight-thin',
+    expect(client.recordTrackingHealth).toHaveBeenLastCalledWith(expect.any(String), 'thin',
       expect.arrayContaining([expect.objectContaining({ kind: 'refresh', healthy: false,
         details: expect.objectContaining({ error_type: 'ProgressDisappeared', anomaly_codes: 'progress_disappeared' }) })]));
   });
@@ -8060,8 +8056,7 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     { name: 'two days on, checked after a day', at: '2026-09-03T08:00:00Z', last: '2026-09-02T10:00:15Z', on: 0, off: 1 },
     { name: 'two days on, never checked', at: '2026-09-03T10:00:00Z', last: null, on: 1, off: 1 },
     { name: 'three days on, checked after a day', at: '2026-09-04T10:00:00Z', last: '2026-09-02T10:00:15Z', on: 1, off: 1 },
-    { name: 'three days on, at 23:00 in Zurich', at: '2026-09-04T21:00:00Z', last: '2026-09-02T10:00:15Z', on: 0, off: 1 },
-    { name: 'three days on, at 08:00 in Zurich', at: '2026-09-05T06:00:00Z', last: '2026-09-02T10:00:15Z', on: 1, off: 1 },
+    { name: 'three days on, at 23:00 in Zurich', at: '2026-09-04T21:00:00Z', last: '2026-09-02T10:00:15Z', on: 1, off: 1 },
     { name: 'six days on, checked after three', at: '2026-09-07T10:00:00Z', last: '2026-09-04T10:00:15Z', on: 0, off: 1 },
     { name: 'a week on, checked after three days', at: '2026-09-08T10:00:00Z', last: '2026-09-04T10:00:15Z', on: 1, off: 0 },
     { name: 'two weeks on, checked after one', at: '2026-09-15T10:00:00Z', last: '2026-09-08T10:00:15Z', on: 0, off: 1 },
@@ -8122,7 +8117,7 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     expect(client.getPackage.mock.calls.map(([id]) => id)).toEqual(['b1', 'c1', 'b2']);
   });
 
-  it('takes five of an account\'s parcels a run by day, and nine in a run overnight', async () => {
+  it('takes five of an account\'s parcels a run, around the clock', async () => {
     const parcel = (id: string, user: string): JsonObject => ({ id, user_id: user, one_off: false, carrier: 'swiss-post',
       current_stage: 'in_transit', tracking_number: `TEST${id}`, created_at: '2026-09-03T09:00:00Z', last_synced_at: null,
       sync_status: 'ok', archived_at: null });
@@ -8130,7 +8125,7 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
     const parcels = [...theirs, parcel('b0', 'b')];
     // 12:00 and 01:00 in Zurich.
     await expect(checked(parcels, '2026-09-04T10:00:00Z')).resolves.toEqual(['a0', 'b0', 'a1', 'a2', 'a3', 'a4']);
-    await expect(checked(parcels, '2026-09-04T23:00:00Z')).resolves.toEqual(['a0', 'b0', ...theirs.slice(1, 9).map(({ id }) => id)]);
+    await expect(checked(parcels, '2026-09-04T23:00:00Z')).resolves.toEqual(['a0', 'b0', 'a1', 'a2', 'a3', 'a4']);
   });
 
   it('starts no check once a run has taken four minutes, and leaves the rest to the next run', async () => {

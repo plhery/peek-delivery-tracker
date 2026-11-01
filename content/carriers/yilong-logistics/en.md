@@ -68,7 +68,7 @@ Peek reads Yilong's tracker directly. It shows each line in Yilong's words, the 
 
 A line dated later than the moment Peek checks, on Beijing time, is held back until that time. Since Yilong's record names no delivery company, Peek follows the parcel only as far as Yilong's history goes, which is normally the airline. When the seller gives you the delivering company's number, add it as a separate parcel.
 
-While the parcel moves, Peek checks Yilong every 10 minutes in the daytime and at least every two hours at night; after two days with nothing new, as usually happens after the airline line, it checks hourly. All of Yilong's lines are early steps, so only the setting that alerts you to every scan reports them: the important-steps and delivery-day settings wait for customs, delivery and the like, which Yilong's tracker doesn't show. Peek can't chase Yilong or the seller for you.
+While the parcel moves, Peek checks Yilong every 10 minutes; after two days with nothing new, as usually happens after the airline line, it checks hourly. All of Yilong's lines are early steps, so only the setting that alerts you to every scan reports them: the important-steps and delivery-day settings wait for customs, delivery and the like, which Yilong's tracker doesn't show. Peek can't chase Yilong or the seller for you.
 
 ## Questions about Yilong Logistics tracking
 

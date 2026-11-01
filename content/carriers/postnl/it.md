@@ -84,7 +84,7 @@ Per tutto il resto, la via più rapida è il negozio o il marketplace dove hai c
 
 Peek legge postnl.post. Mostra lo stato, la cronologia con il Paese di ogni scansione, l'ora di consegna e il Paese di destinazione, con gli orari letti sull'ora locale di ogni Paese e mostrati nel fuso orario del tuo dispositivo. PostNL non dà una data di consegna prevista né il mittente. Con un codice NL, quando PostNL indica l'Italia come destinazione, Peek chiede anche a Poste Italiane con lo stesso codice e passa a Poste appena mostra scansioni più recenti. Se PostNL non indica una destinazione, Peek usa il tuo Paese: nell'app per iPhone la regione impostata, nel browser il Paese da cui hai aggiunto il pacco. postnl.post rifiuta i 3S da 13 caratteri: per quelli Peek cerca il pacco nei [servizi di tracking universali](guide:universal-tracker).
 
-Peek controlla PostNL ogni 30 minuti (anche quando il pacco è in consegna) e di notte ogni una o due ore, e può avvisarti a ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Non può contattare PostNL, Poste o il negozio al posto tuo.
+Peek controlla PostNL ogni 30 minuti (anche quando il pacco è in consegna) e può avvisarti a ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Non può contattare PostNL, Poste o il negozio al posto tuo.
 
 ## Domande sul tracking PostNL
 

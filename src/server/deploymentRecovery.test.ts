@@ -233,7 +233,7 @@ it('finishes the persisted Sentry check-in when a replacement resumes the job', 
 
 it('takes each lost scheduled run once, by clearing the check-in it hands back', async () => {
   const client = new SupabaseServiceClient('https://database.example', 'service-key');
-  const checkIn = { checkInId: 'check-in', monitorSlug: 'delivery-tracker-sync-overnight', startedAt: 1 };
+  const checkIn = { checkInId: 'check-in', monitorSlug: 'delivery-tracker-sync-daytime', startedAt: 1 };
   const request = vi.spyOn(client, 'request').mockResolvedValue([
     { id: 'lost', attempts: 3, check_in: checkIn },
     { id: 'malformed', attempts: 3, check_in: { checkInId: 'check-in' } },

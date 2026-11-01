@@ -92,7 +92,7 @@ Wklej 9-cyfrowy numer. Jeśli jego cyfra kontrolna się zgadza, [Peek](/) pyta o
 
 Peek pokazuje status, historię z miastem i krajem każdego skanu, kraj docelowy i przewidywaną datę doręczenia, dopóki TNT ją podaje. Godziny skanów widzisz w strefie czasowej Twojego urządzenia. Numer referencyjny i podpis zostają na tnt.com. Ponieważ TNT używa numerów ponownie, Peek wybiera przesyłkę z najnowszym skanem: sprawdź, czy trasa się zgadza.
 
-W dzień, od 8:00 do 22:00 czasu szwajcarskiego (w Polsce to ta sama godzina), Peek sprawdza przesyłkę co 10 minut, a gdy jest w doręczeniu, co 2 minuty; w nocy co godzinę lub dwie. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Peek nie zadzwoni za Ciebie do TNT ani do nadawcy, nie zapłaci cła i nie zmieni doręczenia.
+Peek sprawdza przesyłkę co 10 minut, a gdy jest w doręczeniu, co 2 minuty. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Peek nie zadzwoni za Ciebie do TNT ani do nadawcy, nie zapłaci cła i nie zmieni doręczenia.
 
 ## Pytania o śledzenie przesyłki TNT
 

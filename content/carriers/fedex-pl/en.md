@@ -60,7 +60,7 @@ On delivery day, FedEx may add a planned slot under the out-for-delivery scan: `
 
 A link from FedEx's domestic tracking page, on fds2tracking.emea.fedex.com or fedex.com, or a poland.fedex.com link with `packageId=`, opens as FedEx Poland straight away.
 
-Peek reads FedEx's domestic tracking service directly. It shows the status, each scan in FedEx's Polish words with its branch and exact time, the courier's time slot on delivery day, the delivered time and the weight. It drops the number of pieces, the sending and delivering branches, the dispatch date, the return number and the proof of delivery; FedEx shows no sender, name or address there anyway. Peek checks every 10 minutes by day, and every 2 minutes once the parcel is out for delivery; when FedEx gives a slot, from half an hour before it opens. Overnight it checks every hour or two. It can notify you of every scan, important steps or delivery day only. Peek can't change a delivery or complain for you: that's done with FedEx or the sender.
+Peek reads FedEx's domestic tracking service directly. It shows the status, each scan in FedEx's Polish words with its branch and exact time, the courier's time slot on delivery day, the delivered time and the weight. It drops the number of pieces, the sending and delivering branches, the dispatch date, the return number and the proof of delivery; FedEx shows no sender, name or address there anyway. Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery; when FedEx gives a slot, from half an hour before it opens. It can notify you of every scan, important steps or delivery day only. Peek can't change a delivery or complain for you: that's done with FedEx or the sender.
 
 ## Questions about FedEx Poland tracking
 

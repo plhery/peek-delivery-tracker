@@ -71,7 +71,7 @@ Peek czyta śledzenie z serwisu InPost na inposteasy.com, tego samego dla Polski
 
 Statusy są takie, jak przysyła je serwis InPost: po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku; gdy krok nie ma tytułu, możesz zobaczyć surowy kod InPost. Nie każdy kod InPost ma w Peek swój etap, więc paczka czekająca w Paczkomacie nie zawsze dostaje etap „Do odbioru”. Skany bez strefy czasowej są pomijane, a Twoje imię, adres, telefon i podpis nie są odczytywane.
 
-Peek sprawdza śledzenie w dzień co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, w nocy zaś co godzinę lub dwie, i może Cię powiadomić o wszystkich aktualizacjach, tylko o ważnych albo tylko w dniu dostawy. Nie śledzi paczki dalej u innego przewoźnika, nie przedłuży czasu odbioru, nie złoży reklamacji i nie skontaktuje się za Ciebie z InPost.
+Peek sprawdza śledzenie co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, i może Cię powiadomić o wszystkich aktualizacjach, tylko o ważnych albo tylko w dniu dostawy. Nie śledzi paczki dalej u innego przewoźnika, nie przedłuży czasu odbioru, nie złoży reklamacji i nie skontaktuje się za Ciebie z InPost.
 
 ## Pytania o śledzenie przesyłek InPost
 

@@ -102,7 +102,7 @@ So stand es am 26. Oktober 2026 auf packeta.de:
 
 Peek zeigt den Status, die neuesten 20 Scans im Wortlaut von Packeta, den Shop als Absender, den Zeitpunkt der Zustellung und, wenn das Paket an einen Pick-Up Point geht, dessen Adresse. Wartet es dort, steht es auf „Abholbereit“, auch am letzten Tag. Nennt ein Scan ein Depot oder eine Abholstelle, zeigt Peek sie als Ort. Deinen Namen, deine Adresse und die Unterschrift lässt Peek weg. Einen voraussichtlichen Liefertag gibt Packeta nicht heraus.
 
-Verlinkt der Übergabesatz die Sendungsverfolgung eines Partners, den Peek kennt, etwa [DHL](carrier:dhl), [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de) oder [GLS](carrier:gls-de), nennt Peek diesen Partner als Zusteller. Kann Peek ihn selbst abfragen, folgt es dem Paket dorthin, sobald der Partner neue Scans zeigt; Packetas Verlauf bleibt erhalten. Peek schaut tagsüber alle 10 Minuten nach, nachts alle ein bis zwei Stunden, und schickt dir auf Wunsch Mitteilungen: alle Updates, nur wichtige oder nur am Liefertag. Packeta oder den Shop kontaktiert Peek nicht für dich.
+Verlinkt der Übergabesatz die Sendungsverfolgung eines Partners, den Peek kennt, etwa [DHL](carrier:dhl), [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de) oder [GLS](carrier:gls-de), nennt Peek diesen Partner als Zusteller. Kann Peek ihn selbst abfragen, folgt es dem Paket dorthin, sobald der Partner neue Scans zeigt; Packetas Verlauf bleibt erhalten. Peek schaut alle 10 Minuten nach und schickt dir auf Wunsch Mitteilungen: alle Updates, nur wichtige oder nur am Liefertag. Packeta oder den Shop kontaktiert Peek nicht für dich.
 
 ## Fragen zur Packeta Sendungsverfolgung
 

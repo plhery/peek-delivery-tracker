@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { earlierParcelRows, freshnessWindow, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { earlierParcelRows, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { refusesNumber } from './numberRefusal';
 import { STORED_EVENT_IDENTITIES } from './supabase';
 import type { JsonObject } from './types';
@@ -1400,8 +1400,8 @@ describe('persistent tracking routing', () => {
   it.each([
     ['2026-09-10T12:00:00Z', '2026-09-10T11:01:00Z', true],
     ['2026-09-10T12:00:00Z', '2026-09-10T11:00:00Z', false],
-    ['2026-09-10T23:00:00Z', '2026-09-10T20:01:00Z', true],
-    ['2026-09-10T23:00:00Z', '2026-09-10T20:00:00Z', false],
+    ['2026-09-10T23:00:00Z', '2026-09-10T22:01:00Z', true],
+    ['2026-09-10T23:00:00Z', '2026-09-10T22:00:00Z', false],
   ])('defers a 429 at %s only for a successful retrieval at %s', async (now, success, fresh) => {
     const { router, direct, universal } = setup(new Date(now));
     direct.mockRejectedValue(new UpstreamHttpError('UPS', 429, 2 * 3_600_000));
@@ -1726,9 +1726,7 @@ describe('persistent tracking routing', () => {
     await expect(router.fetch(parcel(), false, AbortSignal.abort())).rejects.toThrow();
     expect(universal).not.toHaveBeenCalled();
   });
-  it('computes Zurich day/night windows across DST and resets config-specific cooldowns', () => {
-    expect(freshnessWindow(new Date('2026-12-10T06:59:00Z'))).toBe(10_800_000);
-    expect(freshnessWindow(new Date('2026-12-10T07:00:00Z'))).toBe(3_600_000);
+  it('resets config-specific cooldowns', () => {
     expect(routingState(parcel({ carrier: 'ups', carrier_data: { routing: state({ next_check_at: '2027-01-01T00:00:00Z' }) } })).next_check_at).toBeUndefined();
   });
   it('does not guess a regional carrier from a brand or cross-border provider list', () => {

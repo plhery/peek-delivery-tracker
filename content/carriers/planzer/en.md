@@ -86,7 +86,7 @@ As listed on Planzer Paket's and Quickpac's pages on 9 October 2026:
 
 For a 13-digit number starting 99990, it asks for the complete shared link (trackandtrace.planzergroup.com/shared/…, including its accessKey), then reads the steps reached so far with their times and an expected date.
 
-It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps or delivery day only. Planzer's tracking gives no scan places, so there's little to pin on the map. Peek can't contact Planzer for you.
+It checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. It can notify you of every scan, important steps or delivery day only. Planzer's tracking gives no scan places, so there's little to pin on the map. Peek can't contact Planzer for you.
 
 ## Questions about Planzer tracking
 

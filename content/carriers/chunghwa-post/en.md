@@ -107,7 +107,7 @@ Peek reads Chunghwa Post's international tracker and shows each scan in Chinese,
 
 For a number ending in `TW`, Peek also asks the national post of the country you track it from, with the same number: Poste Italiane from Italy, DHL from Germany, Correos from Spain, Royal Mail from the UK. It switches to that post once it shows fresh scans, and keeps Chunghwa Post's history. The other way round, when your post's tracking names Taiwan as the destination, Peek asks Chunghwa Post with your post's number, unless it starts with U.
 
-Peek checks every 10 minutes by day (8am to 10pm Swiss time), every 2 minutes once the parcel is out for delivery, every hour or two overnight, and hourly after two days without news. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Chunghwa Post, your post or the shop for you.
+Peek checks every 10 minutes, every 2 minutes once the parcel is out for delivery, and hourly after two days without news. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Chunghwa Post, your post or the shop for you.
 
 ## Questions about Chunghwa Post tracking
 

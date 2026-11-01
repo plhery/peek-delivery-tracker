@@ -93,7 +93,7 @@ Es liest die englischen Texte der Post, egal in welcher Sprache du die Seite nut
 
 `Delivered` erscheint als „Zugestellt“, `Delivered to the mailbox/letter box` so, wie die Post es schreibt. Bei `Registered for collection` und `Deposited in the MyPost24 machine` steht das Paket auf „Abholbereit“, die Zeile selbst bleibt englisch.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und nachts alle ein bis zwei Stunden. Auf Wunsch bekommst du Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Pakete von [GLS Schweiz](carrier:gls-ch) und ausländische Postnummern, die in die Schweiz gehen, kann Peek bis zur Post weiterverfolgen. Eine `CH`-Nummer ins Ausland kann es bei der nationalen Post des Ziellands weiterverfolgen, wenn es diese kennt (etwa in Deutschland, Frankreich oder Italien), sobald sie neuere Schritte zeigt. Die Post für dich kontaktieren kann Peek nicht.
+Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist. Auf Wunsch bekommst du Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Pakete von [GLS Schweiz](carrier:gls-ch) und ausländische Postnummern, die in die Schweiz gehen, kann Peek bis zur Post weiterverfolgen. Eine `CH`-Nummer ins Ausland kann es bei der nationalen Post des Ziellands weiterverfolgen, wenn es diese kennt (etwa in Deutschland, Frankreich oder Italien), sobald sie neuere Schritte zeigt. Die Post für dich kontaktieren kann Peek nicht.
 
 ## Fragen zur Post Sendungsverfolgung
 

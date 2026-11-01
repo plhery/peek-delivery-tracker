@@ -85,7 +85,7 @@ Hermes Germany verschickt nach eigener Angabe keine SMS, ausgenommen der Hermes 
 
 Peek zeigt Status und Sendungsverlauf mit den deutschen Sätzen von HES, den geplanten Liefertag mit Zeitfenster, wenn myhes.de eines nennt, den Händler oder Shop, der die Ware verkauft hat, und den Zeitpunkt der Zustellung. Orte gibt HES nicht heraus, deshalb erscheint auf der Karte nichts, und das Live-Tracking des Lieferwagens ist nicht zu sehen. Ein storniertes oder zurückgehendes Paket erscheint als Problem. Dein Name, deine Adresse und Lieferhinweise wie eine Abstellgenehmigung fehlen, alle Zeiten gelten als deutsche Zeit.
 
-Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald die Ware auf Tour ist, nachts alle ein bis zwei Stunden, und du bekommst auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
+Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald die Ware auf Tour ist, und du bekommst auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
 
 ## Fragen zur Hermes Einrichtungs-Service Sendungsverfolgung
 

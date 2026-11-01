@@ -75,7 +75,7 @@ Przy paczce z Allegro Delivery kontaktuj się z Allegro, które odpowiada za obs
 
 Statusy widzisz po polsku, tak jak pisze je ORLEN Paczka, z miastem sortowni na mapie, gdy komunikat je podaje, i z godziną odbioru. Godziny Peek odczytuje według czasu warszawskiego i pokazuje w strefie czasowej Twojego urządzenia. Peek nie pokazuje punktu odbioru, przewidywanej daty dostawy, wagi ani nadawcy, a numer paczki zwrotnej pomija. Paczka z Vinted przekazana przewoźnikowi w innym kraju nie jest śledzona dalej i zostaje w drodze. Odebrane paczki po kilku miesiącach znikają ze śledzenia ORLEN Paczki.
 
-Peek sprawdza śledzenie w dzień co 10 minut, a w nocy co godzinę lub dwie, i może Cię powiadomić o każdej zmianie statusu, tylko o ważnych krokach albo tylko w dniu dostawy.
+Peek sprawdza śledzenie co 10 minut i może Cię powiadomić o każdej zmianie statusu, tylko o ważnych krokach albo tylko w dniu dostawy.
 
 ## Pytania o śledzenie ORLEN Paczka
 

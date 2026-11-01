@@ -547,7 +547,7 @@
   "notifications.save": "Сохранить настройки",
   "notifications.saved": "Настройки сохранены",
   "notifications.saving": "Сохраняем…",
-  "notifications.schedule": "Peek проверяет посылки каждые 10 минут с 08:00 до 22:00 по швейцарскому времени, а ночью — раз в час-два.",
+  "notifications.schedule": "Peek проверяет посылки каждые 10 минут, днём и ночью.",
   "notifications.scope": "На всех твоих устройствах",
   "notifications.state.blocked": "Уведомления заблокированы. Разреши их в системных настройках приложения.",
   "notifications.state.blockedBrowser": "Уведомления заблокированы. Разреши их в настройках сайта в браузере.",

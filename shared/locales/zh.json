@@ -547,7 +547,7 @@
   "notifications.save": "保存偏好设置",
   "notifications.saved": "偏好设置已保存",
   "notifications.saving": "正在保存…",
-  "notifications.schedule": "每天 08:00 至 22:00（瑞士时间）每 10 分钟查询一次包裹，夜间每一到两小时查询一次。",
+  "notifications.schedule": "包裹全天候每 10 分钟查询一次。",
   "notifications.scope": "在你的所有设备上",
   "notifications.state.blocked": "通知已被阻止。请在这个 App 的系统设置中允许通知。",
   "notifications.state.blockedBrowser": "通知已被阻止。请在浏览器的网站设置中允许通知。",

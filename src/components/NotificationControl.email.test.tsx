@@ -62,7 +62,7 @@ describe('the delivery email in Settings', () => {
     // After "Which updates?" and its Save button, before the note on how often tracking is checked.
     const order = (first: Element, second: Element) => first.compareDocumentPosition(second) & Node.DOCUMENT_POSITION_FOLLOWING;
     expect(order(screen.getByRole('button', { name: 'Save preferences' }), section())).toBeTruthy();
-    expect(order(section(), screen.getByText(/every 10 minutes from 08:00 to 22:00/i))).toBeTruthy();
+    expect(order(section(), screen.getByText(/every 10 minutes, day and night/i))).toBeTruthy();
 
     const example = within(section()).getByRole('link', { name: 'See an example' });
     expect(example).toHaveAttribute('href', '/email/example?lang=en');

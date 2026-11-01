@@ -85,7 +85,7 @@ Un numéro à 8 chiffres correspond à Colisweb, Mondial Relay et Heppner, et Pe
 
 Colisweb n'envoie que des codes d'étape : Peek affiche donc chaque étape avec ses propres mots, en français. Il montre le statut, trois étapes (livraison confirmée, commande récupérée par l'équipe, livrée) avec leur heure mais sans lieu, le nom de l'enseigne et l'heure de livraison. Tant que la livraison est programmée, récupérée ou en cours et qu'elle n'est pas en train d'être reprogrammée, il affiche ton créneau : un jour et des heures, à l'heure de Paris. Une livraison annulée apparaît comme retournée à l'expéditeur. Ton nom et ton adresse ne sont pas repris.
 
-Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la livraison en cours, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : chaque scan, les étapes importantes ou le jour de livraison uniquement. Un numéro que Colisweb ne connaît pas n'est pas signalé comme introuvable : compare les chiffres avec ton SMS. Peek ne peut ni changer ton créneau ou ton adresse, ni utiliser le chat de Colisweb, ni contacter le magasin à ta place.
+Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois la livraison en cours, et peut t'envoyer des notifications : chaque scan, les étapes importantes ou le jour de livraison uniquement. Un numéro que Colisweb ne connaît pas n'est pas signalé comme introuvable : compare les chiffres avec ton SMS. Peek ne peut ni changer ton créneau ou ton adresse, ni utiliser le chat de Colisweb, ni contacter le magasin à ta place.
 
 ## Questions sur le suivi Colisweb
 

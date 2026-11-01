@@ -97,7 +97,7 @@ Peek ricava la fase del pacco dallo stato di Shouwu, come nelle tabelle qui sopr
 
 Shouwu non indica a parte chi consegna, quindi Peek non mostra la riga «Consegna con» e non segue il pacco sul tracking del corriere, nemmeno quando una riga nomina Poste Italiane. Se hai il numero del corriere, aggiungilo a Peek come pacco a sé.
 
-Peek controlla ogni 10 minuti di giorno, ogni 2 minuti quando il pacco è in consegna e di notte ogni una o due ore. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» (consegna, ritiro, dogana, tentativi non riusciti e resi) e «Solo la consegna». Peek non può contattare Shouwu o il venditore al posto tuo.
+Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» (consegna, ritiro, dogana, tentativi non riusciti e resi) e «Solo la consegna». Peek non può contattare Shouwu o il venditore al posto tuo.
 
 ## Domande sul tracking Shouwu
 

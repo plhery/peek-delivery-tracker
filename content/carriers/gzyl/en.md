@@ -85,7 +85,7 @@ Peek reads GZYL's own tracker and shows the status, each step with its place, an
 
 Peek holds back any step written more than twelve hours before the time it shows, and any step dated after the moment it checks, on Beijing time. It goes by the steps it keeps, not by the record's summary status. An order whose steps are all held back has no tracking history in Peek yet, and Peek sets aside tracking services' copies of the steps written ahead too. When GZYL's tracker can't be reached, though, Peek asks tracking services instead, and their copies can include steps GZYL wrote ahead.
 
-Peek stays with GZYL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes by day and every hour or two overnight. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers GZYL's two customs steps and `Delivered`, not its flights or sorting. Peek can't contact GZYL or the seller for you.
+Peek stays with GZYL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers GZYL's two customs steps and `Delivered`, not its flights or sorting. Peek can't contact GZYL or the seller for you.
 
 ## Questions about GZYL tracking
 

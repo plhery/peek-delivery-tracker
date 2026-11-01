@@ -147,7 +147,7 @@ takes over from the universal provider again.
 
 When every source fails, the parcel keeps its last progress. The error chip appears only
 after two consecutive checks fail and the last successful check
-is at least 1 h old by day or 3 h overnight. An answer with progress, or one for a parcel
+is at least 1 h old. An answer with progress, or one for a parcel
 awaiting its first movement, resets the streak. Thin answers for a universal-only parcel
 count as missed checks and keep the time of the last successful check. Checks that only
 wait for cooldowns leave it unchanged. Provider failures remain in the audit and health
@@ -265,9 +265,7 @@ The filed carrier's partial answer, its status without scans or only its newest 
 (`summary_only`, `history_truncated`), stands unless a provider holds a fuller history that is
 not behind it, as the scraper's `fillPartialAnswer` decides. That history then takes the
 carrier's facts it lacks, such as the estimate. The carrier is still asked first on every
-check. While no provider holds more, the providers are asked again every 15 min by day and at
-most hourly overnight, when the parcel's checks are due hourly and made at least every 2 hours
-(Refresh cadence).
+check. While no provider holds more, the providers are asked again every 15 min.
 
 The same holds for the filed carrier's own answer with the parcel's label alone, nothing past
 registration, once its earliest scan, else the day the parcel was added, is two days old: a
@@ -285,8 +283,7 @@ check. When Cainiao names the filed carrier as its delivery partner, as for GoFo
 the leg before that carrier, which stays filed and asked first; otherwise the parcel is filed
 under Cainiao. Its label alone or a miss leaves the rest to the providers.
 
-**Rate limits (429).** If the last successful retrieval is recent (under 1 h by day, 3 h
-overnight), the parcel keeps its progress and skips fallback until that window or the
+**Rate limits (429).** If the last successful retrieval is recent (under 1 h), the parcel keeps its progress and skips fallback until that window or the
 retry time runs out. Otherwise the router tries another provider. It never retries the
 throttled one early.
 
@@ -299,11 +296,10 @@ hour's parcels spread over it. It counts no failure, takes no health sample and 
 
 ## Refresh cadence
 
-Daytime is 08:00–22:00 Europe/Zurich. Overnight, everything is due hourly and checked at least every
-2 hours, within an account's share of each run (below), except the parcels followed without an
-account that nobody watches (below).
+The cadence is the same around the clock: carriers and providers scan parcels across every
+time zone.
 
-| Parcels | Daytime |
+| Parcels | Cadence |
 | --- | --- |
 | Out for delivery (direct adapter) | every 2 min; every 5 min while its lookups open a browser; 15 min after a failed check |
 | Out for delivery, until 30 min before its delivery window opens | every 10 min |
@@ -315,18 +311,17 @@ account that nobody watches (below).
 | Registered or accepted, no new event for 12 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | No new event for 48 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | Nobody waiting for it | hourly around the clock; manual refresh still allowed |
-| Followed without an account, no link opened for an hour and no alert on | every 3 h, not overnight; opening a link queues a check at once |
-| Without an account, filed under no carrier or one with no adapter of its own, added in the last 30 days, no link opened for a day and no alert on, once a carrier or provider answered for its number | every 6 h, not overnight |
-| Without an account, filed under no carrier or one with no adapter of its own, newest scan over 14 days old, no link opened for an hour and no alert on | daily, not overnight; opening a link queues a check at once |
-| Another carrier holds it and waits for the delivery postcode (`routing.input_needed`) | daily, not overnight; adding the postcode checks it at once |
+| Followed without an account, no link opened for an hour and no alert on | every 3 h; opening a link queues a check at once |
+| Without an account, filed under no carrier or one with no adapter of its own, added in the last 30 days, no link opened for a day and no alert on, once a carrier or provider answered for its number | every 6 h |
+| Without an account, filed under no carrier or one with no adapter of its own, newest scan over 14 days old, no link opened for an hour and no alert on | daily; opening a link queues a check at once |
+| Another carrier holds it and waits for the delivery postcode (`routing.input_needed`) | daily; adding the postcode checks it at once |
 | Number no carrier or provider has seen (no carrier identified, no history, no input asked) | hourly for 6 h after it was added, then every 6 h, daily after 48 h, weekly after 7 days, around the clock; manual refresh still allowed. An account's parcel, with its rechecks on: 1, 3 and 7 days after it was added, then no more after 14 days (below). An account's parcel whose number points to a carrier (`routing.likely_carrier`, Carrier recognition, below): hourly, as a parcel waiting for its carrier's first scan, for 30 days after it was added |
 | Archived, with a new event in the last 30 days (from when it was added), and no alert on a link shared with someone | daily around the clock; manual refresh still allowed |
 | Delivered on a provider's word alone, which the parcel's carrier did not show (below) | daily around the clock for 3 days |
 
 A parcel checked hourly or less often has an hour of its own, opening at a minute its
-number gives, so by day those checks spread over the hour rather than all falling in its
-first runs; copies of one number open together and share their lookups. Overnight a run
-comes every 20 minutes and checks every parcel due, up to an account's share (below). A carrier tracked only through its own browser, such
+number gives, so those checks spread over the hour rather than all falling in its
+first runs; copies of one number open together and share their lookups. A carrier tracked only through its own browser, such
 as Royal Mail, fails every parcel alike while that browser is down or times out: once it
 fails that way in a run, the run's other checks take the same failure without asking it.
 
@@ -336,9 +331,7 @@ next run, is a parcel a provider just filed under a carrier with an adapter of i
 the check did not ask (an Add preflight's history skips confirming it): that carrier is asked
 without waiting the provider's 15 minutes, archived or delivered too (`carrier_named_at` in its
 routing, which that check clears and which lapses after 15 minutes). A scheduled run handles at most five due parcels
-per account, round-robin. Overnight, when a run comes every 20 minutes, it handles nine, the least recently checked
-first: 27 an hour, so each of the 50 an account can have open is checked at least every 2 hours. A run starts no
-check after 4 minutes; the next run takes the parcels it left, which are still due.
+per account, round-robin, every 2 minutes. A run starts no check after 4 minutes; the next run takes the parcels it left, which are still due.
 
 **Someone is waiting** for a parcel while a notification can reach them: its account has
 browser or phone notifications or the delivery email on and the parcel is not muted for
@@ -396,29 +389,28 @@ opened in the last 24 hours or has an alert on. Otherwise a parcel waits until a
 opened again; that read queues a check at once when the schedule would run one, and never
 more often than the schedule, however often the link is polled. A scheduled check made while
 that one waits stands in for it. One filed under no carrier, or under a carrier only universal
-providers track, stays on the schedule for 30 days after it was added, every 6 hours by day,
+providers track, stays on the schedule for 30 days after it was added, every 6 hours,
 after the followed ones, once a carrier or provider has answered for its number: a check can
 find its carrier, or the carrier that delivers it (Handoffs, below). Once its newest scan is
-more than 14 days old, followed or not, it is checked daily by day instead while no link was
+more than 14 days old, followed or not, it is checked daily instead while no link was
 opened in the last hour and it has no alert on. One whose number nobody
 has seen 6 h after it was added, or whose carrier's last answer is still that it has not found
 the number or has no history for it (the carrier's outage is no answer), leaves the schedule,
 followed or not, unless it has an alert on:
-then it is checked daily by day until 30 days after it was added. Opening a link still queues a
+then it is checked daily until 30 days after it was added. Opening a link still queues a
 check at its cadence, daily rather than weekly after 7 days, since someone is looking. With
 `TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS=true` (off by default), a release's re-check of one
 that left the schedule unseen, or the daily check of one with an alert on, contacts one
 universal provider at most, picked as for an account's recheck (below). One whose links nobody opened in the last hour and that has no alert
-on is checked every 3 hours by day and waits for the morning overnight: nobody reads it,
-and a number no carrier is known for asks every provider in turn. A scheduled run checks at most ten of them, three in a run overnight
-(about as many an hour as by one run an hour), after every account's share, the least recently checked first; overnight, the
-ones with an alert on or a link read in the last hour go first. Their own checks queue behind every account's
+on is checked every 3 hours: nobody reads it, and a number no carrier is known for asks every
+provider in turn. A scheduled run checks at most ten of them, after every account's share: the
+ones with an alert on or a link read in the last hour first, each the least recently checked first. Their own checks queue behind every account's
 refresh and the scheduled run. A delivered or returned one is not checked, but for a
 delivery only a provider reported (above).
 
 **An account's parcel whose number nobody has seen for a day**, with
 `TRACKING_ENABLE_UNSEEN_RECHECKS=true` (off by default), leaves that cadence for three
-rechecks: once 1, 3 and 7 days after it was added, by day, archived or not, and none from
+rechecks: once 1, 3 and 7 days after it was added, archived or not, and none from
 14 days. Any check since the latest of these stands in for it. A scheduled run rechecks
 after every other parcel and lookup, within the account's five, three at most, and skips a
 parcel checked since the run listed it ([`unseenLookup.ts`](../src/server/unseenLookup.ts)).
@@ -539,7 +531,7 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   the parcel behind an input it lists as optional (DHL's postcode, when several shipments
   share a twelve-digit number, and GLS Austria's); a lookup that fails on the way leaves the request.
   The owner adding the postcode files the parcel under that carrier. Until then the providers
-  serve the parcel and are asked daily by day. The parcel's own carrier asks the same way when
+  serve the parcel and are asked daily. The parcel's own carrier asks the same way when
   its adapter needs a postcode it lists for the number and the parcel has none (PostNL's for a
   3S barcode sent within the Netherlands): the providers keep serving the parcel at its usual
   pace, a check the carrier answers drops the request, and with no source serving the parcel

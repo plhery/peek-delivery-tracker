@@ -99,7 +99,7 @@ YWE's tracker can also show a two-hour delivery window while the parcel is in tr
 
 YWE's tracker names no other carrier, so on a parcel added with its YWE number Peek shows no "Delivery with" line and stays with YWE's tracker up to the delivery. If YWE's tracker can't be reached, Peek asks tracking services in the meantime.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact YWE or the seller for you.
+Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact YWE or the seller for you.
 
 ## Questions about YWE tracking
 

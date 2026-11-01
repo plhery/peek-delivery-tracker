@@ -86,7 +86,7 @@ Einen Kontakt für Deutschland, Österreich oder die Schweiz veröffentlicht Yan
 
 Peek zeigt den Status, den Verlauf mit Ort oder Region jedes Scans auf einer Karte, die Zustellzeit, das Zielland und den Paketdienst vor Ort mit seiner Nummer („Zustellung durch“ und sein Name). Nennt Yanwen einen Paketdienst, den Peek kennt, und passt die Nummer zu ihm, fragt Peek dort nach und wechselt, sobald dieser neuere Schritte zeigt. Einen voraussichtlichen Liefertermin oder eine Abholstelle zeigt Peek nicht; Bestellnummern, Kontakte, Postleitzahlen, Zustell-PINs und Türnummern lässt es weg.
 
-Die Uhrzeiten liest Peek mit Yanwens GMT-Abweichung und zeigt sie in der Zeitzone deines Geräts, doppelte Scans fallen weg. `Delivered` und `Out for delivery` zeigt Peek in eigenen Worten, alle anderen Zeilen so, wie Yanwen sie schreibt, auch `Delivered.`. Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Yanwen oder den Shop kontaktieren kann es nicht für dich.
+Die Uhrzeiten liest Peek mit Yanwens GMT-Abweichung und zeigt sie in der Zeitzone deines Geräts, doppelte Scans fallen weg. `Delivered` und `Out for delivery` zeigt Peek in eigenen Worten, alle anderen Zeilen so, wie Yanwen sie schreibt, auch `Delivered.`. Es schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Yanwen oder den Shop kontaktieren kann es nicht für dich.
 
 ## Fragen zur Yanwen Sendungsverfolgung
 

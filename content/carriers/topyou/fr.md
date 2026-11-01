@@ -91,7 +91,7 @@ Peek lit le site de TopYou et affiche le statut, chaque scan dans les mots de To
 
 Jusqu'au passage de relais, Peek n'affiche que le numéro TopYou. Si la fiche TopYou contient le numéro du transporteur local, Peek s'en sert pour se renseigner : s'il s'agit d'un numéro postal international valide (deux lettres, neuf chiffres, deux lettres), il interroge la poste du pays de destination indiqué par TopYou, soit La Poste en France, bpost en Belgique et La Poste suisse en Suisse ; sinon, le seul transporteur dont c'est à coup sûr la forme de numéro, si Peek lit son suivi. Ce n'est qu'une question, pas la preuve que ce transporteur livre. Dès qu'il montre un scan au moins aussi récent que le dernier de TopYou, Peek suit le colis chez lui, affiche les deux numéros et garde les scans de TopYou. Un numéro qui ne désigne aucun transporteur à coup sûr, comme 20 chiffres seuls, n'est pas essayé : Peek reste sur le suivi de TopYou.
 
-Peek vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison et au moins toutes les deux heures la nuit. Ses notifications : « Chaque scan », « Étapes importantes » (les lignes de douane, export en Chine compris, et la livraison, mais pas le vol ni la sortie de douane) ou « Livraison seulement ». Peek ne peut contacter ni TopYou, ni la boutique, ni la poste à ta place.
+Peek vérifie toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison. Ses notifications : « Chaque scan », « Étapes importantes » (les lignes de douane, export en Chine compris, et la livraison, mais pas le vol ni la sortie de douane) ou « Livraison seulement ». Peek ne peut contacter ni TopYou, ni la boutique, ni la poste à ta place.
 
 ## Questions sur le suivi TopYou
 

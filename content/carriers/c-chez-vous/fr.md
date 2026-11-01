@@ -99,7 +99,7 @@ Peek affiche l'étape en cours avec ses propres mots : « Commande enregistrée 
 
 Quelques limites. Peek affiche `En livraison` comme si le livreur était en route, alors que la phrase de C Chez Vous parle encore de la plateforme régionale. Pour une commande en point retrait, il peut afficher « Livré » alors qu'elle t'attend seulement au point : fie-toi au SMS et aux 15 jours. Il ne lit pas `Annulée` : une commande annulée cesse simplement d'avancer.
 
-Il laisse de côté le créneau horaire, le magasin, ton nom, ton adresse, tes coordonnées et les articles commandés. Il vérifie toutes les 10 minutes en journée, toutes les 2 minutes une fois la commande en livraison, toutes les une à deux heures la nuit, et peut t'envoyer des notifications : toutes les mises à jour, les importantes uniquement ou le jour de livraison uniquement. Il ne peut pas déplacer ton rendez-vous.
+Il laisse de côté le créneau horaire, le magasin, ton nom, ton adresse, tes coordonnées et les articles commandés. Il vérifie toutes les 10 minutes, toutes les 2 minutes une fois la commande en livraison, et peut t'envoyer des notifications : toutes les mises à jour, les importantes uniquement ou le jour de livraison uniquement. Il ne peut pas déplacer ton rendez-vous.
 
 ## Questions sur le suivi C Chez Vous
 

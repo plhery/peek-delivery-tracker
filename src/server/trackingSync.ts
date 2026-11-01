@@ -52,7 +52,7 @@ import {
 import { isRecord, type JsonObject } from './types';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
 import type { UniversalSource } from 'universal-parcel-scraper';
-import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, freshnessWindow, hasRoutingProgress, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { answeredWithoutHistory, catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
@@ -75,32 +75,27 @@ import { storedPostcodeCountry } from '../lib/postcodeCountry';
 
 const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
 /**
- * Overnight a run comes every 20 minutes instead of every 2, so it takes 9 of an account's due
- * parcels, the least recently checked first: 27 an hour, so each of the 50 parcels an account can
- * have open is checked at least every 2 hours, and an account still gets fewer checks an hour than by day.
- */
-const MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC = 9;
-/**
  * A scheduled run starts no check after this long. The parcels it leaves are still due, and the
- * next run, 2 minutes later by day and 20 overnight, takes them; a run stays well inside the
- * Sentry cron's 10 minutes, and checks queued meanwhile, such as a link opened, go between runs.
+ * next run, 2 minutes later, takes them; a run stays well inside the Sentry cron's 10 minutes,
+ * and checks queued meanwhile, such as a link opened, go between runs.
  */
 const SCHEDULED_RUN_BUDGET_MS = 4 * 60_000;
-/** One-off parcels have no owner: a scheduled run checks this many of them, all together. */
+/**
+ * One-off parcels have no owner: a scheduled run checks this many of them, all together, the ones
+ * someone waits for first.
+ */
 const MAX_ONE_OFF_PACKAGES_PER_SYNC = 10;
-/** Overnight, when a run comes every 20 minutes, it checks three: about as many an hour as one run an hour did. */
-const MAX_ONE_OFF_PACKAGES_PER_OVERNIGHT_SYNC = 3;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */
 const MAX_UNSEEN_RECHECKS_PER_SYNC = 3;
 /** A one-off parcel stays on the schedule this long after one of its links was last opened. */
 const ONE_OFF_FOLLOWED_MS = 24 * 60 * 60 * 1_000;
 /** A catalog queues the checks of parcels its rules point to another carrier this many at a time. */
 const MAX_REDETECTIONS = 50;
-/** A parcel no notification can reach keeps the daytime cadence this long after its account's apps or one of its links were last opened; then it is checked hourly. */
+/** A parcel no notification can reach keeps the regular cadence this long after its account's apps or one of its links were last opened; then it is checked hourly. */
 const WATCHED_AFTER_OPEN_MS = 60 * 60 * 1_000;
 const VALID_STAGES = new Set<string>(STAGES);
 /**
- * A parcel out for delivery is checked this often by day while its carrier's
+ * A parcel out for delivery is checked this often while its carrier's
  * own adapter answers for it and the carrier sets no longer interval of its own.
  */
 const LAST_MILE_MINUTES = 2;
@@ -113,7 +108,7 @@ const BROWSER_LAST_MILE_MINUTES = 5;
  * After a check on the last mile fails, the next waits this long: a carrier that refused a
  * lookup with a bot check, was down or answered without the parcel's progress rarely answers
  * 2 minutes later, and asking that often draws more bot checks. Routing waits as long after
- * a carrier lookup it falls back from (the providers' 15 minutes by day).
+ * a carrier lookup it falls back from (the providers' 15 minutes).
  */
 const LAST_MILE_BACKOFF_MS = 15 * 60_000;
 /** How long a carrier a provider named and the check did not ask keeps the parcel due at every run. */
@@ -132,10 +127,10 @@ const IDLE_AFTER_MS = 48 * 60 * 60 * 1_000;
  */
 const EARLY_IDLE_AFTER_MS = 12 * 60 * 60 * 1_000;
 const NOT_YET_MOVING = new Set(['registered', 'accepted']);
-/** By day, a lookup without an account that nobody watches is checked this often. */
+/** A lookup without an account that nobody watches is checked this often. */
 const UNWATCHED_ONE_OFF_HOURS = 3;
 /**
- * By day, a lookup without an account filed under no carrier, or under one with no adapter of its
+ * A lookup without an account filed under no carrier, or under one with no adapter of its
  * own, that nobody follows any more is checked this often while it is new (REDETECTION_WINDOW_MS),
  * once a carrier or provider has answered for its number: the next answer can name its carrier,
  * or the carrier that delivers it.
@@ -143,7 +138,7 @@ const UNWATCHED_ONE_OFF_HOURS = 3;
 const UNFILED_ONE_OFF_HOURS = 6;
 /**
  * A lookup without an account filed under no carrier, or under one with no adapter of its own,
- * whose newest scan is older than this is checked daily by day instead, followed or not, while
+ * whose newest scan is older than this is checked daily instead, followed or not, while
  * nobody watches it: its scans have stopped.
  */
 const QUIET_UNFILED_AFTER_MS = 14 * 24 * 60 * 60 * 1_000;
@@ -355,8 +350,7 @@ function deliveringToday(parcel: JsonObject, now: Date): boolean {
  * The start of the parcel's current hour, which opens at a minute of its own: the
  * parcels checked hourly or less often are spread over the hour rather than all due at
  * its start, so no run takes them all. Copies of one number open at the same minute
- * and still share their lookups. Overnight a run comes every 20 minutes and takes every parcel
- * due, up to an account's share of the run (MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC).
+ * and still share their lookups.
  */
 function parcelHourStart(parcel: JsonObject, local: DateTime): DateTime {
   const number = normalizeTrackingNumber(String(parcel.tracking_number ?? ''));
@@ -367,7 +361,7 @@ function parcelHourStart(parcel: JsonObject, local: DateTime): DateTime {
 interface ScheduleContext {
   /**
    * Nobody is waiting for the parcel, so it is checked hourly, as an idle one is, even out for
-   * delivery; a lookup without an account every 3 hours by day, and not overnight.
+   * delivery; a lookup without an account every 3 hours.
    */
   unwatched?: boolean;
   /** A lookup without an account, which leaves the schedule when nobody has seen its number for hours. */
@@ -389,21 +383,19 @@ function isScheduledTrackingSyncDue(
   const unseen = unseenFor(parcel, now);
   if (oneOff && unseen !== null && (unfollowed || unseen >= UNSEEN_HOURLY_MS)) {
     // Past its hourly checks, a lookup someone keeps an alert on, which is what watches a lookup
-    // without an account besides a link opened in the last hour, is checked daily by day, and not
-    // overnight, until 30 days after it was added. One only opened gets its check from the opening.
+    // without an account besides a link opened in the last hour, is checked daily until 30 days
+    // after it was added. One only opened gets its check from the opening.
     if (unfollowed || unwatched || unseen >= ALERTED_UNSEEN_MS) return false;
     const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
-    return local.hour >= 8 && local.hour < 22
-      && !(Date.parse(String(parcel.last_synced_at ?? '')) >= parcelHourStart(parcel, local).minus({ hours: 23 }).toMillis());
+    return !(Date.parse(String(parcel.last_synced_at ?? '')) >= parcelHourStart(parcel, local).minus({ hours: 23 }).toMillis());
   }
   // An account's parcel whose number nobody has answered for a day, with the rechecks on: once
-  // 1, 3 and 7 days after it was added, by day, archived or not, and no more from 14 days. Any
+  // 1, 3 and 7 days after it was added, archived or not, and no more from 14 days. Any
   // check since the latest of these stands in for it, so a run that finds it done skips it.
   // Opening one of its links still checks it daily.
   const recheck = oneOff || opened ? undefined : unseenRecheckDue(parcel, now);
   if (recheck !== undefined) {
-    const hour = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' }).hour;
-    return recheck !== null && hour >= 8 && hour < 22 && !(Date.parse(String(parcel.last_synced_at ?? '')) >= recheck);
+    return recheck !== null && !(Date.parse(String(parcel.last_synced_at ?? '')) >= recheck);
   }
   const archived = parcel.archived_at != null && !sharedAlerts;
   if (archived) {
@@ -423,32 +415,24 @@ function isScheduledTrackingSyncDue(
   if (archived || unconfirmedDelivery(parcel, now)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   // A carrier holds the parcel and waits for its delivery postcode, which the parcel asks the
   // owner for: until the owner adds it, which files the parcel there and checks it at once, the
-  // providers are asked daily by day, and not overnight.
-  if (waitsForPostcode(parcel)) {
-    return local.hour >= 8 && local.hour < 22 && lastChecked < hourStart.minus({ hours: 23 }).toMillis();
-  }
+  // providers are asked daily.
+  if (waitsForPostcode(parcel)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   // A lookup without an account filed under no carrier, or under one with no adapter of its own, whose
-  // newest scan is over 14 days old, followed or not, while nobody watches it: daily by day, and not
-  // overnight. It stays on the schedule as long as before, and opening its link queues a check as before.
+  // newest scan is over 14 days old, followed or not, while nobody watches it: daily. It stays on
+  // the schedule as long as before, and opening its link queues a check as before.
   const newest = newestEvent(parcel);
   if (oneOff && (unfollowed || unwatched) && !directCarrier(String(parcel.carrier))
     && newest !== null && now.getTime() - newest > QUIET_UNFILED_AFTER_MS) {
-    return local.hour >= 8 && local.hour < 22 && lastChecked < hourStart.minus({ hours: 23 }).toMillis();
+    return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   }
   // A lookup without an account filed under no carrier, or under one with no adapter of its own, that
-  // nobody follows any more: every 6 hours by day, and not overnight. A provider's next answer, or a
-  // carrier recognition asks, can name its carrier, or the carrier that delivers it.
-  if (oneOff && unfollowed) {
-    return local.hour >= 8 && local.hour < 22
-      && lastChecked < hourStart.minus({ hours: UNFILED_ONE_OFF_HOURS - 1 }).toMillis();
-  }
+  // nobody follows any more: every 6 hours. A provider's next answer, or a carrier recognition
+  // asks, can name its carrier, or the carrier that delivers it.
+  if (oneOff && unfollowed) return lastChecked < hourStart.minus({ hours: UNFILED_ONE_OFF_HOURS - 1 }).toMillis();
   // A lookup without an account that nobody opened in the last hour and that has no alert on:
-  // every 3 hours by day, and not overnight, when nobody reads it. A number no carrier is known
-  // for asks every provider in turn. Opening its link still queues a check at once.
-  if (oneOff && unwatched) {
-    return local.hour >= 8 && local.hour < 22
-      && lastChecked < hourStart.minus({ hours: UNWATCHED_ONE_OFF_HOURS - 1 }).toMillis();
-  }
+  // every 3 hours, when nobody reads it. A number no carrier is known for asks every provider in
+  // turn. Opening its link still queues a check at once.
+  if (oneOff && unwatched) return lastChecked < hourStart.minus({ hours: UNWATCHED_ONE_OFF_HOURS - 1 }).toMillis();
   if (unseen !== null) {
     // Hourly, then every 6 h, daily, then weekly, around the clock.
     return lastChecked < hourStart.minus({ hours: unseenIntervalHours(unseen, opened) - 1 }).toMillis();
@@ -468,7 +452,7 @@ function isScheduledTrackingSyncDue(
   const activity = lastActivity(parcel);
   const idleAfter = NOT_YET_MOVING.has(String(parcel.current_stage)) ? EARLY_IDLE_AFTER_MS : IDLE_AFTER_MS;
   const idle = unwatched || (activity !== null && now.getTime() - activity >= idleAfter);
-  const byTheMinute = !idle && local.hour >= 8 && local.hour < 22;
+  const byTheMinute = !idle;
   // After a failed check, the last mile waits LAST_MILE_BACKOFF_MS. Routing already holds a parcel
   // that long when its carrier's lookup fails; the error the check saved holds the others, a lookup
   // outside routing (Amazon Shipping) or the carrier's answer without the parcel's progress. The
@@ -1245,14 +1229,11 @@ export class TrackingSyncService {
       // An account's parcel whose number nobody has answered for a day is rechecked after every
       // other parcel and lookup, within its account's share, a few a run.
       const rechecks = new Set(owned.filter((parcel) => unseenRecheckDue(parcel, now) !== undefined));
-      const hour = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' }).hour;
-      const daytime = hour >= 8 && hour < 22;
       const shares = fairSyncPackages([...owned.filter((parcel) => !rechecks.has(parcel)), ...rechecks],
-        daytime ? MAX_PACKAGES_PER_OWNER_PER_SYNC : MAX_PACKAGES_PER_OWNER_PER_OVERNIGHT_SYNC);
+        MAX_PACKAGES_PER_OWNER_PER_SYNC);
       const parcels = [...shares.filter((parcel) => !rechecks.has(parcel)),
-        ...await this.oneOffPackages(due(true), due(true, true), now,
-          daytime ? MAX_ONE_OFF_PACKAGES_PER_SYNC : MAX_ONE_OFF_PACKAGES_PER_OVERNIGHT_SYNC, context.signal,
-          daytime ? undefined : (parcel) => !unwatched.has(String(parcel.id))),
+        ...await this.oneOffPackages(due(true), due(true, true), now, MAX_ONE_OFF_PACKAGES_PER_SYNC,
+          (parcel) => !unwatched.has(String(parcel.id)), context.signal),
         ...shares.filter((parcel) => rechecks.has(parcel)).slice(0, MAX_UNSEEN_RECHECKS_PER_SYNC)];
       // Copies of one number, in several accounts or followed without one, share their lookups.
       const lookups = new SharedLookups(parcels);
@@ -1413,17 +1394,16 @@ export class TrackingSyncService {
    * that delivers them. They come after every account's share and count as
    * one owner, the followed ones first, each the least recently checked first,
    * so lookups cannot starve accounts. Nor can they stop them: when a list
-   * cannot be read, the others are still checked. Overnight, when a run takes
-   * three, the ones someone waits for (`watched`: an alert on, or a link read in
-   * the last hour) go first.
+   * cannot be read, the others are still checked. The ones someone waits for
+   * (`watched`: an alert on, or a link read in the last hour) go first.
    */
   private async oneOffPackages(
     followedDue: (parcel: JsonObject) => boolean,
     unfollowedDue: (parcel: JsonObject) => boolean,
     now: Date,
     limit: number,
+    watched: (parcel: JsonObject) => boolean,
     signal?: AbortSignal,
-    watched?: (parcel: JsonObject) => boolean,
   ): Promise<JsonObject[]> {
     const list = async (operation: string, read: () => Promise<JsonObject[]>) => {
       try { return await read(); }
@@ -1439,7 +1419,7 @@ export class TrackingSyncService {
     const unfiled = await list('list_unfiled_one_off_packages',
       () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS));
     const due = [...followed.filter(followedDue), ...unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel))];
-    return (watched ? [...due.filter(watched), ...due.filter((parcel) => !watched(parcel))] : due).slice(0, limit);
+    return [...due.filter(watched), ...due.filter((parcel) => !watched(parcel))].slice(0, limit);
   }
 
   /**
@@ -1982,7 +1962,7 @@ export class TrackingSyncService {
         && typeof result.tracking_provider === 'string' && !directCarrier(String(parcel.carrier));
       const missedChecks = isRecord(result.routing) ? Number(result.routing.consecutive_failures) : previousRouting.consecutive_failures + 1;
       const lastSuccess = Date.parse(previousRouting.last_success_at ?? '');
-      const recentProgress = Number.isFinite(lastSuccess) && now.getTime() - lastSuccess < freshnessWindow(now);
+      const recentProgress = Number.isFinite(lastSuccess) && now.getTime() - lastSuccess < FRESHNESS_WINDOW_MS;
       // Thin answers use the same failure threshold as exhausted lookups.
       // They do not count as successful checks or reset the failure streak.
       if (universalProgressMissing && (missedChecks < 2 || recentProgress)) {

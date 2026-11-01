@@ -79,7 +79,7 @@ DPD's English contact page lists no phone numbers, and no page says the Contact 
 
 [Peek](/) names DPD Poland at once for 13 digits and a letter. For 14 digits starting 13, Peek asks the likely carriers, DPD Poland first, and shows "DPD Poland has this parcel." when DPD knows the number. For other 14-digit numbers, pick DPD Poland with "Change". A tracktrace.dpd.com.pl or tt.dpd.com.pl link with `p1=` works too; sending codes, reference and order numbers don't.
 
-Peek reads DPD's English tracking and shows the status, the history and the delivery time, in DPD's wording. DPD gives no place for its scans, no expected delivery, sender or weight, and Peek drops your name and the pickup point's address. Peek reads all scans on Warsaw time, the registration and scans abroad included. Peek checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, and can notify you of every scan, important steps or delivery day only. It doesn't follow the parcel after `Sent outside Poland` or keep a return's new number.
+Peek reads DPD's English tracking and shows the status, the history and the delivery time, in DPD's wording. DPD gives no place for its scans, no expected delivery, sender or weight, and Peek drops your name and the pickup point's address. Peek reads all scans on Warsaw time, the registration and scans abroad included. Peek checks every 10 minutes (every 2 once out for delivery) and can notify you of every scan, important steps or delivery day only. It doesn't follow the parcel after `Sent outside Poland` or keep a return's new number.
 
 ## Questions about DPD tracking in Poland
 

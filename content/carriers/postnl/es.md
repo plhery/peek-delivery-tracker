@@ -86,7 +86,7 @@ Para todo lo demás, lo más rápido es la tienda o el marketplace donde compras
 
 Peek lee postnl.post: muestra el estado, el historial con el país de cada escaneo, la hora de entrega y el país de destino. Lee la hora de cada escaneo como hora local del país donde se hizo (en España, la de la península) y te la muestra en la zona horaria de tu dispositivo. PostNL no da fecha prevista de entrega ni el remitente. Con un número NL, en cuanto PostNL indica España como destino, Peek pregunta a Correos por el mismo número; si Correos muestra avances más recientes, Peek pasa a seguirlo allí y verás «Entrega con Correos». Si PostNL aún no indica el destino, Peek toma tu país: la región de tu iPhone en la app o, en el navegador, el país desde el que te conectas. postnl.post da por incorrectos los 3S de 13 caracteres, así que para esos Peek busca el paquete en [servicios de seguimiento universales](guide:universal-tracker).
 
-Peek consulta PostNL cada 30 minutos, también con el paquete en reparto, y cada una o dos horas por la noche, y puede avisarte en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede contactar con PostNL, con Correos ni con la tienda por ti.
+Peek consulta PostNL cada 30 minutos, también con el paquete en reparto, y puede avisarte en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede contactar con PostNL, con Correos ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de PostNL
 

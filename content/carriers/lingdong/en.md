@@ -79,7 +79,7 @@ Peek reads Lingdong's own tracker and shows the status, each scan with its place
 
 Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and can notify you of every scan, important steps only or "Delivery only". It can't contact Lingdong or the seller for you.
+Peek checks every 10 minutes and can notify you of every scan, important steps only or "Delivery only". It can't contact Lingdong or the seller for you.
 
 ## Questions about Lingdong tracking
 

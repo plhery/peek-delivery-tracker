@@ -73,7 +73,7 @@ For an Allegro Delivery parcel, contact Allegro, which handles customer service 
 
 It shows the Polish wordings as written, the sorting-centre town on a map where named, and the delivery time, with times read on Warsaw time and shown in your device's time zone. There is no pickup point, expected delivery, weight or sender, and the return parcel's number is dropped. A Vinted parcel handed to another country's carrier isn't followed and stays in transit. Parcels already picked up drop out of ORLEN Paczka's tracking after some months.
 
-It checks every 10 minutes by day and every hour or two overnight, and can notify you when the status changes.
+It checks every 10 minutes and can notify you when the status changes.
 
 ## Questions about ORLEN Paczka tracking
 

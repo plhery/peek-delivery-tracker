@@ -79,7 +79,7 @@ Hermes lists no customer-service phone line, hours or chat; the head-office numb
 
 It shows the status, history, expected day (not Hermes's time window), sending shop and delivery time. At a ParcelShop it shows "Ready for pickup" with the shop's name and address. It drops your name, address and booked preferences. Each scan keeps Hermes's own sentence, which Peek asks for in English, though some lines stay German; delivery to a neighbour, or pickup at a ParcelShop, counts as delivered. A parcel in a Hermes Box shows "Ready for pickup" until you take it out with its pickup TAN. Hermes gives no scan places, so the map stays empty.
 
-Peek checks every 10 minutes by day, every 2 once out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. It doesn't follow parcels to other carriers, and old numbers show as not found once Hermes deletes them after 30 days. Hermes Einrichtungs-Service (furniture) is a separate carrier, picked by hand.
+Peek checks every 10 minutes, or every 2 once out for delivery, and can notify you of every scan, important steps only or delivery day only. It doesn't follow parcels to other carriers, and old numbers show as not found once Hermes deletes them after 30 days. Hermes Einrichtungs-Service (furniture) is a separate carrier, picked by hand.
 
 ## Questions about Hermes tracking
 

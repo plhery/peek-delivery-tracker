@@ -76,7 +76,7 @@ Einen Kontakt für Empfänger in Deutschland, Österreich oder der Schweiz verö
 
 Peek liest 4PX auf Englisch und zeigt den Status, den Verlauf mit dem Ort jedes Scans auf einer Karte, die Zustellzeit, das Zielland und den Paketdienst vor Ort mit seiner Nummer, wenn dieser in Peeks Liste steht. Dann fragt Peek auch ihn und wechselt zu ihm, sobald er neuere Schritte zeigt. `Out for delivery` und `Delivery attempt unsuccessful` erscheinen in Peeks eigenen Worten auf Deutsch, die übrigen Zeilen so, wie 4PX sie schreibt. Ein voraussichtliches Lieferdatum, Angaben zur Abholstelle oder ein Gewicht zeigt Peek bei 4PX nicht.
 
-Scanzeiten liest Peek in den Zeitzonen von 4PX, Scans ohne Zeitzone in der Ortszeit des Scanorts, und zeigt sie in der Zeitzone deines Geräts. Peek schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und nachts alle ein bis zwei Stunden. Mitteilungen schickt es dir für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. 4PX oder den Shop kontaktieren kann es nicht für dich.
+Scanzeiten liest Peek in den Zeitzonen von 4PX, Scans ohne Zeitzone in der Ortszeit des Scanorts, und zeigt sie in der Zeitzone deines Geräts. Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist. Mitteilungen schickt es dir für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. 4PX oder den Shop kontaktieren kann es nicht für dich.
 
 ## Fragen zur 4PX Sendungsverfolgung
 

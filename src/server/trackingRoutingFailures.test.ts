@@ -51,7 +51,7 @@ it('keeps an hourly parcel clear after one missed check, shows the chip after tw
 
 it.each([
   ['2026-09-10T10:15:00Z', '2026-09-10T10:00:00Z', HOUR],
-  ['2026-09-10T23:15:00Z', '2026-09-10T23:00:00Z', 3 * HOUR],
+  ['2026-09-10T23:15:00Z', '2026-09-10T23:00:00Z', HOUR],
 ])('keeps the freshness window for frequently checked parcels at %s', async (start, lastSuccess, window) => {
   const run = setup(start);
   let snapshot = parcel({ last_success_at: lastSuccess });

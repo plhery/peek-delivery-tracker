@@ -291,18 +291,18 @@ describe('the scheduled sync at start', () => {
     return { runtime, enqueue };
   }
 
-  it('waits for the next run when one already finished in this window, such as after a deploy overnight', async () => {
-    // 04:30 in Zurich: overnight, the window opened at 04:20.
-    const { runtime, enqueue } = starting(async () => new Date('2026-09-09T02:21:00Z'));
+  it('waits for the next run when one already finished in this window, such as after a deploy', async () => {
+    // 04:30 in Zurich, overnight as by day: the window opened at the even minute.
+    const { runtime, enqueue } = starting(async () => new Date('2026-09-09T02:30:01Z'));
     await vi.advanceTimersByTimeAsync(8_000);
     expect(enqueue).not.toHaveBeenCalled();
-    expect(runtime.state.nextScheduledSync).toBe(Date.parse('2026-09-09T02:40:00Z') / 1_000);
-    await vi.advanceTimersByTimeAsync(10 * 60_000);
+    expect(runtime.state.nextScheduledSync).toBe(Date.parse('2026-09-09T02:32:00Z') / 1_000);
+    await vi.advanceTimersByTimeAsync(2 * 60_000);
     expect(enqueue).toHaveBeenCalledExactlyOnceWith({ scheduled: true });
   });
 
   it.each([
-    ['the last run finished in an earlier window', async () => new Date('2026-09-09T01:59:00Z')],
+    ['the last run finished in an earlier window', async () => new Date('2026-09-09T02:29:00Z')],
     ['no run has finished', async () => null],
     ['the last run cannot be read', async () => { throw unreachable(); }],
   ])('runs at once when %s', async (_case, lastRun) => {

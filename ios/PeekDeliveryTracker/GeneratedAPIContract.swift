@@ -15,6 +15,7 @@ struct CarrierDetectionRequest: Codable, Equatable, Hashable, Sendable {
     var trackingNumber: String
     var lookupCountryHint: String? = nil
     var prefixOfSaved: Bool? = nil
+    var typedNumber: String? = nil
 }
 
 struct CarrierDetectionResponse: Codable, Equatable, Hashable, Sendable {

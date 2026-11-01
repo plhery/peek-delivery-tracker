@@ -29,14 +29,15 @@ const MAX_ANSWERS = 500;
 let registry: AdapterRegistry | undefined;
 const answers = new Map<string, { at: number; answer: ApiCarrierDetectionResponse }>();
 
-async function recognize(trackingNumber: string, beforeAsking?: () => Promise<void>, signal?: AbortSignal, health?: SupabaseServiceClient, countryHint?: string | null): Promise<ApiCarrierDetectionResponse> {
+async function recognize(trackingNumber: string, typed: string, beforeAsking?: () => Promise<void>, signal?: AbortSignal, health?: SupabaseServiceClient, countryHint?: string | null): Promise<ApiCarrierDetectionResponse> {
   const priorities = getRecognitionPriorities(trackingNumber);
   const ordering = { countryHint, priorities };
-  const cacheKey = `${trackingNumber}:${countryHint ?? ''}:${JSON.stringify(priorities ?? {})}`;
+  // The typed form picks the carriers asked, so it keys the answer; the carriers are asked about the number itself.
+  const cacheKey = `${typed.trim().toUpperCase()}:${countryHint ?? ''}:${JSON.stringify(priorities ?? {})}`;
   const cached = answers.get(cacheKey);
   if (cached && Date.now() - cached.at < (cached.answer.carrier === 'unknown' ? 30_000 : ANSWER_TTL_MS)) return cached.answer;
-  const candidates = recognitionCandidates(trackingNumber, ordering).slice(0, 2 * MAX_RECOGNITIONS);
-  const browserCandidates = recognitionCandidates(trackingNumber, { ...ordering, phase: 'browser' }).slice(0, MAX_BROWSER_RECOGNITIONS);
+  const candidates = recognitionCandidates(typed, ordering).slice(0, 2 * MAX_RECOGNITIONS);
+  const browserCandidates = recognitionCandidates(typed, { ...ordering, phase: 'browser' }).slice(0, MAX_BROWSER_RECOGNITIONS);
   const deadline = performance.now() + 25_000;
   await beforeAsking?.();
   const errors = new Map<string, unknown>();
@@ -127,10 +128,14 @@ export async function detectCarrier(
     recordDetection('high');
     return { trackingNumber, carrier: ['available', 'expired'].includes(amazonShippingStatus) ? 'amazon-shipping' : 'amazon-logistics', amazonShippingStatus };
   }
-  const detected = detectCarrierMatch(trackingNumber);
+  // The number as typed keeps the dashes and spaces some carriers' numbers are told apart by (a detection rule's
+  // rawPattern). Detection reads it; the carriers, the parcel and the answer keep the number itself.
+  const typed = typeof body.typedNumber === 'string' && body.typedNumber.length <= 80
+    && normalizeTrackingNumber(body.typedNumber) === trackingNumber ? body.typedNumber : trackingNumber;
+  const detected = detectCarrierMatch(typed);
   // Shared shapes need shipment evidence; the shape alone remains a suggestion.
-  const answer = detected.carrier === 'unknown' || recognitionCandidates(trackingNumber).length > 0 || recognitionCandidates(trackingNumber, { phase: 'browser' }).length > 0
-    ? await recognize(trackingNumber, beforeAsking, signal, supportClient, countryHint).catch((error: unknown) => {
+  const answer = detected.carrier === 'unknown' || recognitionCandidates(typed).length > 0 || recognitionCandidates(typed, { phase: 'browser' }).length > 0
+    ? await recognize(trackingNumber, typed, beforeAsking, signal, supportClient, countryHint).catch((error: unknown) => {
       if (signal?.aborted) throw new HttpError(499, 'Carrier check cancelled');
       throw error;
     })

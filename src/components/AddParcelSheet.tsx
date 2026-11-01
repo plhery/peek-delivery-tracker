@@ -225,7 +225,8 @@ export function AddParcelSheet({
     const timer = setTimeout(() => {
       setRecognition(undefined);
       setRecognitionFailure(undefined);
-      void lookupCarrier(normalizedNumber, apiAuth, controller.signal).then((result) => {
+      // As typed: its dashes and spaces tell some carriers' numbers apart.
+      void lookupCarrier(trackingNumber, apiAuth, controller.signal).then((result) => {
         if (!controller.signal.aborted) setRecognition(result);
       }).catch(() => {
         // No answer keeps the number a suggestion; the first sync asks again.
@@ -235,7 +236,7 @@ export function AddParcelSheet({
       });
     }, 200);
     return () => { clearTimeout(timer); controller.abort(); };
-  }, [recognizable, recognitionNumber, normalizedNumber, apiAuth, saving]);
+  }, [recognizable, recognitionNumber, normalizedNumber, trackingNumber, apiAuth, saving]);
   const knownElsewhere = selectedCarrier !== 'auto' && check.status === 'found' && check.carrier !== selectedCarrier
     ? carrierInfo(check.carrier, locale) : null;
   const carrier = trackingNumber ? carrierInfo(resolvedCarrier, locale) : null;

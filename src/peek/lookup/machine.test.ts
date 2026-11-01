@@ -93,6 +93,8 @@ describe('asking the carriers', () => {
     expect(survey(paste)).toMatchObject({ ask: SHARED, check: { status: 'asking', asked: [] } });
     // A number of no known shape has nobody to ask.
     expect(survey(run([pasted(SHAPELESS)])).ask).toBeNull();
+    // The number goes as typed too: an R+L PRO number is told by its dash.
+    expect(survey(run([pasted('31415926-5')]))).toMatchObject({ ask: '314159265', askTyped: '31415926-5' });
   });
 
   it('goes on by itself when a carrier has the pasted parcel', () => {

@@ -16,6 +16,14 @@ it('sends an authenticated, cancellable lookup and checks its shipment identity'
   expect(new Headers(fetcher.mock.calls[0][1]?.headers).get('Authorization')).toBe('Bearer test-token');
 });
 
+it('sends the number as typed too, whose dashes and spaces tell some carriers\' numbers apart', async () => {
+  const fetcher = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+    trackingNumber: '314159265', carrier: 'rl-carriers',
+  })));
+  await expect(lookupCarrier(' 31415926-5 ', auth)).resolves.toMatchObject({ carrier: 'rl-carriers' });
+  expect(fetcher.mock.calls[0][1]?.body).toBe(JSON.stringify({ trackingNumber: '314159265', typedNumber: '31415926-5' }));
+});
+
 it.each([
   { trackingNumber: '999999999999', carrier: 'gls-de' },
   { trackingNumber: '123456789018', carrier: 'invented' },

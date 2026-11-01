@@ -122,7 +122,8 @@ describe('DPD carrier lookup', () => {
     const onAdd = vi.fn().mockResolvedValue(undefined);
     const user = userEvent.setup();
     render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="0608 0000 0000 02" />);
-    await waitFor(() => expect(lookupCarrier).toHaveBeenCalledWith('06080000000002', apiAuth, expect.anything()));
+    // As typed: detection reads the spaces and dashes some carriers' numbers are told apart by.
+    await waitFor(() => expect(lookupCarrier).toHaveBeenCalledWith('0608 0000 0000 02', apiAuth, expect.anything()));
     await screen.findByRole('textbox', { name: /^Delivery postcode/ });
     expect(screen.getByText('DPD Switzerland')).toBeInTheDocument();
     const button = screen.getByRole('button', { name: /^add parcel$/i });

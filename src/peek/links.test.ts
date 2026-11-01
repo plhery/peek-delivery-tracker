@@ -403,7 +403,7 @@ describe('the API backend', () => {
   it('says when the number asked about is the start of one the device follows', async () => {
     const { links, request } = api(json({ trackingNumber: '12345678', carrier: 'unknown' }));
     expect(await links.detectCarrierPublic('1234 5678', undefined, true)).toEqual({ trackingNumber: '12345678', carrier: 'unknown' });
-    expect(JSON.parse(String(request.mock.calls[0][1]!.body))).toEqual({ trackingNumber: '12345678', prefixOfSaved: true });
+    expect(JSON.parse(String(request.mock.calls[0][1]!.body))).toEqual({ trackingNumber: '12345678', typedNumber: '1234 5678', prefixOfSaved: true });
   });
 
   it('asks which carrier a number belongs to, and distrusts an answer about another number', async () => {
@@ -416,10 +416,12 @@ describe('the API backend', () => {
     );
     expect(await links.detectCarrierPublic('1234 5678 99')).toEqual({ trackingNumber: '1234567899', carrier: 'dhl', asked: ['dhl'] });
     expect(request.mock.calls[0][0]).toBe('/api/public/detect');
-    expect(JSON.parse(String(request.mock.calls[0][1]!.body))).toEqual({ trackingNumber: '1234567899' });
+    // The number as typed goes too, for the carriers whose numbers its spaces or dashes tell apart; not when it is the same.
+    expect(JSON.parse(String(request.mock.calls[0][1]!.body))).toEqual({ trackingNumber: '1234567899', typedNumber: '1234 5678 99' });
     for (let attempt = 0; attempt < 3; attempt += 1) {
       expect((await failure(links.detectCarrierPublic('1234567899'))).kind).toBe('server');
     }
+    expect(JSON.parse(String(request.mock.calls[1][1]!.body))).toEqual({ trackingNumber: '1234567899' });
     expect((await failure(links.detectCarrierPublic('1234567899'))).kind).toBe('validation');
   });
 });

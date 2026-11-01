@@ -44678,6 +44678,7 @@ export interface ApiCarrierDetectionRequest {
   "trackingNumber": string;
   "lookupCountryHint"?: string;
   "prefixOfSaved"?: boolean;
+  "typedNumber"?: string;
 }
 
 export interface ApiCarrierDetectionResponse {

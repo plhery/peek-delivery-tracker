@@ -17,6 +17,7 @@ O número da Chronopost costuma ter 13 caracteres: duas letras, nove algarismos 
 | `XY000000005FR` | Duas letras, nove algarismos e `FR`, a começar por PZ, XR, XT, XU, XW ou XY: um número Chronopost. |
 | `AB000000000JB` | A mesma forma, acabada em JB, JF ou TS. |
 | `00000000000000U` | 14 algarismos e uma letra de controlo: a forma dos números da DPD, que a Chronopost também usa. |
+| `20000000000000` | 14 algarismos, sem 10 no início: pode ser da Chronopost, mas a DPD e outras transportadoras também usam esta forma. |
 
 Um número postal acabado em FR com outras letras no início pode ser um Colissimo da [La Poste](carrier:la-poste). Se a Chronopost não conhecer o número, confirma a transportadora no email da loja.
 
@@ -81,7 +82,7 @@ Segundo as páginas de cada empresa, consultadas em outubro de 2026:
 
 ## Rastrear uma encomenda Chronopost com o Peek
 
-O [Peek](/) reconhece logo a Chronopost num número de 13 caracteres começado por PZ, XR, XT, XU, XW ou XY com o algarismo de controlo certo, ou acabado em JB, JF ou TS. Um número de 14 algarismos e uma letra pode ser da Chronopost ou de várias DPD: cola-o na mesma, o Peek segue mais de 3.500 transportadoras e pergunta às prováveis. Se não aparecer a Chronopost, escolhe-a em «Alterar transportadora». Os links do chronopost.fr também funcionam.
+O [Peek](/) reconhece logo a Chronopost num número de 13 caracteres começado por PZ, XR, XT, XU, XW ou XY com o algarismo de controlo certo, ou acabado em JB, JF ou TS. Um número de 14 algarismos e uma letra pode ser da Chronopost ou de várias DPD: cola-o na mesma, o Peek segue mais de 3.500 transportadoras e pergunta às prováveis. Se não aparecer a Chronopost, escolhe-a em «Alterar transportadora». Um número só de 14 algarismos que não comece por 10 também pode ser da Chronopost, mas o Peek não a reconhece só pela forma: toca em «Alterar» e escolhe a Chronopost em «Corresponde a este número». Os links do chronopost.fr também funcionam.
 
 O Peek lê a Chronopost em francês, por isso os estados ficam em francês. Mostra no mapa o depósito de cada evento, o país de destino, a hora de entrega, o número do parceiro no estrangeiro e, enquanto a encomenda espera, o relais ou o cacifo com a morada. Não guarda a tua morada.
 

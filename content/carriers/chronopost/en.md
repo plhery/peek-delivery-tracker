@@ -17,6 +17,7 @@ Chronopost's number usually has 13 characters (two letters, nine digits, two let
 | `XY000000005FR` | Two letters, nine digits, two letters: the usual Chronopost number. |
 | `AB000000000JB` | The same shape ending in JB, JF or TS. |
 | `00000000000000U` | 15 characters, 14 digits and a check letter: a parcel from abroad. |
+| `20000000000000` | 14 digits, not starting with 10: can be Chronopost's, but DPD and other carriers use this shape too. |
 
 The 13-character shape is the international postal format: a number ending FR may be [La Poste](carrier:la-poste)'s Colissimo, one ending CH, GB or DE another country's post. The 15-character shape is also DPD's, so it may be a [DPD Switzerland](carrier:dpd-ch), [DPD Germany](carrier:dpd-de), [DPD Portugal](carrier:dpd-pt) or [DPD UK](carrier:dpd-uk) parcel. If Chronopost doesn't know it, check the carrier the shop's email names.
 
@@ -73,7 +74,7 @@ If Chronopost leaves a written, dated and signed complaint unanswered for at lea
 
 ## Tracking Chronopost parcels with Peek
 
-[Peek](/) recognises 13-character numbers at once when they start PZ, XR, XT, XU, XW or XY with a valid check digit, or end JB, JF or TS. It asks Chronopost alone about those prefixes when the check digit fails and about numbers ending RV or VF; valid ones ending FR with other prefixes go to La Poste. For 14 digits and a check letter it asks Chronopost and the DPD companies that share the shape (DPD Switzerland, Germany, Portugal and UK); if two know it, or none does, you pick with "Change". Chronopost and chronoshop2shop.fr tracking links work too. No postcode is needed.
+[Peek](/) recognises 13-character numbers at once when they start PZ, XR, XT, XU, XW or XY with a valid check digit, or end JB, JF or TS. It asks Chronopost alone about those prefixes when the check digit fails and about numbers ending RV or VF; valid ones ending FR with other prefixes go to La Poste. For 14 digits and a check letter it asks Chronopost and the DPD companies that share the shape (DPD Switzerland, Germany, Portugal and UK); if two know it, or none does, you pick with "Change". Plain 14 digits that don't start with 10 can be Chronopost's too, but Peek doesn't name it from the shape alone: press "Change" and pick Chronopost under "Fits this number". Chronopost and chronoshop2shop.fr tracking links work too. No postcode is needed.
 
 Wordings stay French, except `Livraison effectuée` ("Delivered"). Peek maps each scan's office and shows the destination country, delivery time, partner's number abroad and, while the parcel waits, the relay or locker's name and address. An expected day appears only once a redelivery is booked. It drops your address and the point's contacts. A parcel to Germany with a partner number can be followed to DPD Germany. After a return starts, delivery counts as returned to sender.
 

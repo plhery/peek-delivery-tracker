@@ -1712,6 +1712,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Jifan tracking: JFGJ numbers, scans and Beijing time",
       "name": "Jifan",
       "color": "#c81011"
+    },
+    {
+      "id": "posta-romana",
+      "catalog": "posta-romana",
+      "slug": "posta-romana-tracking",
+      "title": "Poșta Română tracking: numbers, statuses and customs",
+      "name": "Poșta Română",
+      "color": "#ea0029"
     }
   ],
   "de": [

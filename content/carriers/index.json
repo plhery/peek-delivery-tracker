@@ -211,5 +211,6 @@
   { "id": "rl-carriers", "catalog": "rl-carriers", "name": "R+L Carriers", "languages": ["en"] },
   { "id": "nox", "catalog": "nox", "name": "nox", "languages": ["en"] },
   { "id": "far-international", "catalog": "far-international", "name": "FAR International", "languages": ["en"] },
-  { "id": "jifan", "catalog": "jifan", "name": "Jifan", "languages": ["en"] }
+  { "id": "jifan", "catalog": "jifan", "name": "Jifan", "languages": ["en"] },
+  { "id": "posta-romana", "catalog": "posta-romana", "name": "Poșta Română", "languages": ["en"] }
 ]

@@ -214,5 +214,6 @@
   { "id": "jifan", "catalog": "jifan", "name": "Jifan", "languages": ["en"] },
   { "id": "posta-romana", "catalog": "posta-romana", "name": "Poșta Română", "languages": ["en"] },
   { "id": "dpd-nl", "catalog": "dpd-nl", "name": "DPD Netherlands", "languages": ["en"] },
-  { "id": "dpd-at", "catalog": "dpd-at", "name": "DPD Austria", "languages": ["en"] }
+  { "id": "dpd-at", "catalog": "dpd-at", "name": "DPD Austria", "languages": ["en"] },
+  { "id": "ozon-logistics", "catalog": "ozon-logistics", "name": "Ozon", "languages": ["en"] }
 ]

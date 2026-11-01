@@ -1736,6 +1736,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD Austria tracking: statuses, Pickup shops and contact",
       "name": "DPD Austria",
       "color": "#dc0032"
+    },
+    {
+      "id": "ozon-logistics",
+      "catalog": "ozon-logistics",
+      "slug": "ozon-tracking",
+      "title": "Ozon tracking: order numbers and statuses in English",
+      "name": "Ozon",
+      "color": "#005bff"
     }
   ],
   "de": [

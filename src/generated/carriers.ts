@@ -1624,6 +1624,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CDEK tracking (СДЭК): order numbers and statuses in English",
       "name": "CDEK",
       "color": "#00b33c"
+    },
+    {
+      "id": "forza-delivery",
+      "catalog": "forza-delivery",
+      "slug": "forza-delivery-tracking",
+      "title": "Forza Delivery tracking: guía numbers, statuses, contact",
+      "name": "Forza Delivery Express",
+      "color": "#ea5c1d"
     }
   ],
   "de": [

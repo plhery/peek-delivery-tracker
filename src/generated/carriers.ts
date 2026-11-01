@@ -1672,6 +1672,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "PIN AG tracking: registered letters, parcels and pickup",
       "name": "PIN AG",
       "color": "#003366"
+    },
+    {
+      "id": "pitney-bowes",
+      "catalog": "pitney-bowes",
+      "slug": "pitney-bowes-tracking",
+      "title": "Pitney Bowes tracking: UPAA, UPBE and PBX numbers explained",
+      "name": "Pitney Bowes",
+      "color": "#3e53a4"
     }
   ],
   "de": [

@@ -206,5 +206,6 @@
   { "id": "correos-chile", "catalog": "correos-chile", "name": "Correos de Chile", "languages": ["en"] },
   { "id": "posta-shqiptare", "catalog": "posta-shqiptare", "name": "Posta Shqiptare", "languages": ["en"] },
   { "id": "dsv", "catalog": "dsv", "name": "DSV", "languages": ["en"] },
-  { "id": "pin-ag", "catalog": "pin-ag", "name": "PIN AG", "languages": ["en"] }
+  { "id": "pin-ag", "catalog": "pin-ag", "name": "PIN AG", "languages": ["en"] },
+  { "id": "pitney-bowes", "catalog": "pitney-bowes", "name": "Pitney Bowes", "languages": ["en"] }
 ]

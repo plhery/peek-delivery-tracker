@@ -252,19 +252,14 @@ const swiftInlineNames = {
   'NativePushDeviceRequest.locale': 'NativePushLocale',
 };
 
+// Cases named otherwise than their value reads. A value that starts with a digit needs no entry: its
+// number is spelt out (2ebox is twoEbox), and these keep the names the apps had before that.
 const swiftEnumCaseNames = {
   'CarrierId.139express': 'oneThirtyNineExpress',
-  'CarrierId.17feia': 'seventeenFeia',
   'CarrierId.247express': 'twentyFourSevenExpress',
-  'CarrierId.2ebox': 'twoEbox',
-  'CarrierId.2go': 'twoGo',
   'CarrierId.360lion': 'threeSixtyLion',
   'CarrierId.360zebra': 'threeSixtyZebra',
-  'CarrierId.3pe-express': 'threePeExpress',
   'CarrierId.4-72': 'fourSeventyTwo',
-  'CarrierId.4sides': 'fourSides',
-  'CarrierId.5post': 'fivePost',
-  'CarrierId.99minutos': 'ninetyNineMinutos',
   'CarrierId.intl-post': 'internationalPost',
   'CarrierId.spring-gds': 'springGDS',
 };
@@ -359,6 +354,33 @@ function lowerCamelIdentifier(value) {
   return words[0] + words.slice(1).map(upperFirst).join('');
 }
 
+const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+const TENS_WORDS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+const NUMBER_SCALES = [[1_000_000_000, 'Billion'], [1_000_000, 'Million'], [1_000, 'Thousand'], [100, 'Hundred']];
+
+/** A whole number in lower camel case words: 99 is ninetyNine, 1688 oneThousandSixHundredEightyEight. */
+function numberWords(number) {
+  if (number < 20) return NUMBER_WORDS[number];
+  if (number < 100) {
+    return TENS_WORDS[Math.floor(number / 10)] + (number % 10 ? upperFirst(NUMBER_WORDS[number % 10]) : '');
+  }
+  const [size, word] = NUMBER_SCALES.find(([scale]) => number >= scale);
+  const rest = number % size;
+  return numberWords(Math.floor(number / size)) + word + (rest ? upperFirst(numberWords(rest)) : '');
+}
+
+/**
+ * An enum value with the number it starts with spelt out, which Swift and Kotlin need for an
+ * identifier: 99minutos reads ninetyNine-minutos. A number with a leading zero or more than twelve digits
+ * is spelt digit by digit (007 is zeroZeroSeven).
+ */
+function spelledEnumValue(value) {
+  return value.replace(/^\d+/, (digits) => `${/^0\d|\d{13}/.test(digits)
+    ? [...digits].map((digit, index) => (index ? upperFirst : String)(NUMBER_WORDS[digit])).join('')
+    : numberWords(Number(digits))}-`);
+}
+
 function swiftPropertyName(value) {
   return lowerCamelIdentifier(value)
     .replace(/Ids$/, 'IDs')
@@ -380,7 +402,7 @@ function swiftReferenceName(reference) {
 }
 
 function swiftEnumCase(schemaName, value) {
-  return swiftEnumCaseNames[`${schemaName}.${value}`] ?? swiftPropertyName(value);
+  return swiftEnumCaseNames[`${schemaName}.${value}`] ?? swiftPropertyName(spelledEnumValue(value));
 }
 
 function schemaAllowsNull(schema) {
@@ -631,7 +653,7 @@ function kotlinReferenceName(reference) {
 }
 
 function kotlinEnumCase(schemaName, value) {
-  return upperFirst(swiftEnumCaseNames[`${schemaName}.${value}`] ?? lowerCamelIdentifier(value));
+  return upperFirst(swiftEnumCaseNames[`${schemaName}.${value}`] ?? lowerCamelIdentifier(spelledEnumValue(value)));
 }
 
 function kotlinEnumCases(schemaName, values) {

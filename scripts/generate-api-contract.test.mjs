@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { cpSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -38,4 +38,27 @@ test('reads on past a scraper that is the locked one', (t) => {
   assert.notEqual(run.status, 0);
   assert.doesNotMatch(run.stderr, /package-lock\.json locks/);
   assert.match(run.stderr, /openapi\.json/);
+});
+
+test('names a carrier that starts with a digit for Swift and Kotlin without an entry for it', (t) => {
+  const root = checkout('0.1.0', '0.1.0');
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const scraper = import.meta.resolve('universal-parcel-scraper');
+  writeFileSync(path.join(root, 'node_modules', 'universal-parcel-scraper', 'index.js'), [
+    `import { CARRIER_CATALOG as catalog } from ${JSON.stringify(scraper)};`,
+    `export { RECIPIENT_ACTIONS, STAGES } from ${JSON.stringify(scraper)};`,
+    'const [carrier] = Object.values(catalog);',
+    "export const CARRIER_CATALOG = { ...catalog, '1688-express': carrier, '007-cargo': carrier };",
+  ].join('\n'));
+  mkdirSync(path.join(root, 'contracts'));
+  cpSync(fileURLToPath(new URL('../contracts/openapi.json', import.meta.url)), path.join(root, 'contracts', 'openapi.json'));
+  const run = spawnSync(process.execPath, [path.join(root, 'scripts', 'generate-api-contract.mjs')], { encoding: 'utf8' });
+  assert.equal(run.status, 0, run.stderr);
+  const swift = readFileSync(path.join(root, 'ios', 'PeekDeliveryTracker', 'GeneratedAPIContract.swift'), 'utf8');
+  const kotlin = readFileSync(path.join(root, 'android', 'core', 'src', 'main', 'kotlin', 'com', 'plhery', 'peekdeliverytracker',
+    'core', 'api', 'GeneratedApiContract.kt'), 'utf8');
+  assert.match(swift, /static let oneThousandSixHundredEightyEightExpress = CarrierID\(rawValue: "1688-express"\)/);
+  assert.match(swift, /static let zeroZeroSevenCargo = CarrierID\(rawValue: "007-cargo"\)/);
+  assert.match(kotlin, /val OneThousandSixHundredEightyEightExpress = CarrierId\("1688-express"\)/);
+  assert.match(kotlin, /val ZeroZeroSevenCargo = CarrierId\("007-cargo"\)/);
 });

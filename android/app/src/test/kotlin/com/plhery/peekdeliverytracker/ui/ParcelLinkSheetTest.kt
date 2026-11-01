@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.ui
 
+import android.content.ClipboardManager
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,31 +10,43 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isHeading
+import androidx.compose.ui.test.isPopup
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.Parcel
 import com.plhery.peekdeliverytracker.core.ParcelLinkClaim
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStopped
+import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
+import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
+import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.ui.deliveries.ACTION_ERROR
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
@@ -61,10 +75,15 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SIGN_IN
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SURPRISE
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_TRY_AGAIN
 import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
+import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_CARRIER_LINK
+import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_COPY_NUMBER
+import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_NUMBER
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
+import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
+import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.io.IOException
 import java.time.Duration
 import java.time.Instant
@@ -79,6 +98,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -87,7 +107,8 @@ import org.robolectric.annotation.GraphicsMode
  * in memory ([FakeParcelLinks]): each phase; each reader's keeping block and what its action asks of the parcel store;
  * the owner key's hand-over, once a presentation; Close and the back held while keeping; a second link in place of the
  * first; refresh, its ticker and its failure; the gifts; the link resumed after sign-in; the list taking what the sheet
- * closed on; the sheet over another sheet and over a cover; TalkBack. On synthetic links.
+ * closed on; the sheet over another sheet and over a cover; TalkBack; the number, hidden or whole, its copy and its
+ * selection, the import charges and the quiet note (B-S46, B-S47, B-S76, B-H03, B-G04). On synthetic links.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -492,6 +513,126 @@ class ParcelLinkSheetTest {
     }
 
     // Gifts
+
+    // The number, the charges and the quiet note
+
+    /** A parcel's link, every one of its scans moved `days` earlier. */
+    private fun PublicParcelResponse.earlier(days: Long) = copy(
+        parcel = parcel.copy(
+            trackingEvents = parcel.trackingEvents.map {
+                it.copy(occurredAt = DateParser.isoString(checkNotNull(DateParser.date(it.occurredAt)).minus(Duration.ofDays(days))))
+            },
+        ),
+    )
+
+    private fun clipboard(): String? =
+        compose.activity.getSystemService(ClipboardManager::class.java).primaryClip?.getItemAt(0)?.text?.toString()
+
+    private fun rootView(): View = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+
+    @Test
+    fun aHiddenNumberIsReadAsOneMaskedWithTheCarriersSearchPageAndNoCopy() {
+        show(FakeParcelLinks())
+        open()
+        val masked = checkNotNull(LinkFixtures.viewer().parcel.numberHint).masked
+        compose.onNode(hasText(text("detail.trackingNumber")) and hasText(masked)).performScrollTo()
+        assertFalse(exists(PAGE_NUMBER))
+        assertFalse(exists(PAGE_COPY_NUMBER))
+        compose.onNodeWithTag(PAGE_CARRIER_LINK).performScrollTo().performClick()
+        assertEquals(listOf("parcel-carrier-link"), links.actions.filter { it == "parcel-carrier-link" })
+    }
+
+    @Test
+    fun aWholeNumberIsWrittenAsItsCarrierWritesItWithItsCopyAndItsCarriersPage() {
+        show(FakeParcelLinks(LinkFixtures.keepable()))
+        open()
+        compose.onNodeWithTag(PAGE_NUMBER, useUnmergedTree = true).performScrollTo()
+        val numbers = compose.onAllNodesWithTag(PAGE_NUMBER, useUnmergedTree = true).fetchSemanticsNodes()
+            .flatMap { it.config.getOrNull(SemanticsProperties.Text).orEmpty().map { text -> text.text } }
+        assertEquals(listOf(CarrierCatalog.format("TESTPARCEL983456", CarrierId.Dpd)), numbers)
+        compose.onNodeWithTag(PAGE_COPY_NUMBER).assertContentDescriptionEquals(text("detail.copyTracking"))
+        compose.onAllNodesWithTag(PAGE_CARRIER_LINK)[0].performScrollTo().performClick()
+        assertEquals(listOf("parcel-carrier-link"), links.actions.filter { it == "parcel-carrier-link" })
+    }
+
+    @Test
+    fun aLongPressSelectsAWholeNumber() {
+        show(FakeParcelLinks(LinkFixtures.keepable()))
+        open()
+        compose.onNodeWithTag(PAGE_NUMBER, useUnmergedTree = true).performScrollTo()
+        assertEquals(0, compose.onAllNodes(isPopup()).fetchSemanticsNodes().size)
+        compose.onNodeWithTag(PAGE_NUMBER, useUnmergedTree = true).performTouchInput { longClick() }
+        compose.waitForIdle()
+        // The selection's two handles.
+        assertEquals(2, compose.onAllNodes(isPopup()).fetchSemanticsNodes().size)
+    }
+
+    @Test
+    fun theCopyPutsTheNumberOnTheClipboardWithTheSuccessTapAndSaysCopiedForTwoSeconds() {
+        show(FakeParcelLinks(LinkFixtures.keepable()))
+        open()
+        val copy = compose.onNodeWithTag(PAGE_COPY_NUMBER).performScrollTo()
+        compose.mainClock.autoAdvance = false
+        copy.performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertEquals(TrackingNumberCopy.text("TESTPARCEL983456", CarrierId.Dpd), clipboard())
+        assertEquals(hapticFeedbackConstant(SensoryFeedback.Success), shadowOf(rootView()).lastHapticFeedbackPerformed())
+        assertEquals(listOf("parcel-copy-tracking"), links.actions.filter { it == "parcel-copy-tracking" })
+        copy.assertContentDescriptionEquals(text("detail.copied"))
+        compose.mainClock.advanceTimeBy(1_800)
+        copy.assertContentDescriptionEquals(text("detail.copied"))
+        compose.mainClock.advanceTimeBy(200)
+        copy.assertContentDescriptionEquals(text("detail.copyTracking"))
+        compose.mainClock.autoAdvance = true
+    }
+
+    @Test
+    fun importChargesAreReadAsOneAndAHiddenNumberIsAskedForToPayThemOnline() {
+        val charges = ImportCharges(currency = "CHF", customs = 12.0, carrierFee = 18.0, carrierFeeOnline = 9.0)
+        val shown = "n5Tp4zKf3VwY"
+        fun charged(response: PublicParcelResponse) =
+            response.copy(parcel = response.parcel.copy(carrierData = response.parcel.carrierData.copy(importCharges = charges)))
+        val links = FakeParcelLinks().apply {
+            read = { id, _ ->
+                if (id == shown) charged(LinkFixtures.keepable()).let { it.copy(link = it.link.copy(id = shown)) } else charged(LinkFixtures.viewer())
+            }
+        }
+        show(links)
+        open()
+        val title = text("detail.importCharges")
+        val ask = text("detail.importChargesAskNumber")
+        compose.onNode(hasText(title) and hasText(ask)).performScrollTo()
+
+        // A number the link shows is there to pay with.
+        open(shown)
+        compose.onNode(hasText(title)).performScrollTo()
+        assertFalse(shows(ask))
+    }
+
+    @Test
+    fun aParcelThatStoppedMovingIsToldWhyUnlessItIsAWrappedGiftOrItsCarrierIsUnknown() {
+        val unknown = "u6Wq5aLg4XzZ"
+        val links = FakeParcelLinks().apply {
+            read = { id, _ ->
+                when (id) {
+                    // Its scan in transit, from before it was handed out for delivery.
+                    giftId -> LinkFixtures.wrappedGift().let { it.copy(parcel = it.parcel.copy(trackingEvents = it.parcel.trackingEvents.drop(1))) }.earlier(5)
+                    unknown -> LinkFixtures.viewer().let { it.copy(link = it.link.copy(id = unknown), parcel = it.parcel.copy(carrier = CarrierId.Unknown)) }.earlier(5)
+                    else -> LinkFixtures.viewer().earlier(5)
+                }
+            }
+        }
+        val quiet = text("link.quiet", mapOf("carrier" to "")).substringBefore(".")
+        show(links)
+        open()
+        assertTrue(shows(quiet))
+        open(giftId)
+        check(exists(LINK_SURPRISE))
+        assertFalse(shows(quiet))
+        open(unknown)
+        check(exists(LINK_CARD))
+        assertFalse(shows(quiet))
+    }
 
     @Test
     fun aGiftOnItsWayIsWrappedWithItsSurpriseAndNoNumberNorKeeping() {

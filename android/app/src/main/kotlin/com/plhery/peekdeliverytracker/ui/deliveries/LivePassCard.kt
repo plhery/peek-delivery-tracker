@@ -395,7 +395,7 @@ internal fun LivePassCard(
  * button holds both; without `change` they take a tap all the same, rather than pass it to the map behind them.
  */
 @Composable
-private fun PassMarks(
+internal fun PassMarks(
     branding: CarrierVisualIdentity,
     delivery: CarrierVisualIdentity?,
     frames: PassFrames,
@@ -448,7 +448,7 @@ private fun PassMarks(
 
 /** A button of the card's top row, 44 square, as the iPhone's plain buttons dim while pressed or off. */
 @Composable
-private fun HeaderButton(
+internal fun HeaderButton(
     label: String,
     tag: String,
     enabled: Boolean,
@@ -593,7 +593,7 @@ internal fun carrierWaits(parcel: Parcel): TrackingEvent? =
  * its map keeps clear of (`buttonRow`, `deliveryMark`): null until laid out.
  */
 @Stable
-private class PassFrames {
+internal class PassFrames {
     var card: LayoutCoordinates? = null
     var buttonsNode: LayoutCoordinates? = null
     var markNode: LayoutCoordinates? = null

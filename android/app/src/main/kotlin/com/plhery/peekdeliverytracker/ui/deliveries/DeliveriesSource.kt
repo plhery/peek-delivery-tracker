@@ -539,8 +539,9 @@ class PageWork {
  * `parcel/<uuid>`), which the list shows and then takes. Each window has its own ([of]), as each iPhone scene follows
  * its own links, so the window the link came to opens it. The tabs bring the deliveries forward while one waits.
  */
-class DeliveriesInbox(parcel: UUID? = null) {
+class DeliveriesInbox(parcel: UUID? = null, private val parcelLink: (String) -> Boolean = { false }) {
     private val parcelState = MutableStateFlow(parcel)
+    private val linkAddedState = MutableStateFlow<LinkAdded?>(null)
 
     /** The parcel waiting to be shown. */
     val parcel: StateFlow<UUID?> = parcelState.asStateFlow()
@@ -555,10 +556,27 @@ class DeliveriesInbox(parcel: UUID? = null) {
         parcelState.compareAndSet(parcelId, null)
     }
 
-    /** `.onOpenURL` (A-L14): `peekdeliverytracker://parcel/<uuid>` opens the parcel on the deliveries. */
+    /** A parcel kept or followed from its link, which the list receives as one just added (`Arrival.added`). */
+    val linkAdded: StateFlow<LinkAdded?> = linkAddedState.asStateFlow()
+
+    /** The link's sheet has closed on a parcel it added: `parcelId`, when the service said which. */
+    fun added(parcelId: UUID?) {
+        linkAddedState.value = LinkAdded(parcelId)
+    }
+
+    /** The list has received the parcel the link added. */
+    fun consume(added: LinkAdded) {
+        linkAddedState.compareAndSet(added, null)
+    }
+
+    /**
+     * `.onOpenURL` (A-L02, A-L14), in `open(_:)`'s order: a parcel's link first, which [parcelLink] opens in its sheet,
+     * then `peekdeliverytracker://parcel/<uuid>`, which opens the parcel on the deliveries.
+     */
     fun follow(intent: Intent?) {
         if (intent?.action != Intent.ACTION_VIEW) return
         val url = intent.dataString ?: return
+        if (parcelLink(url)) return
         when (val route = NativeRoute(url)) {
             is NativeRoute.Parcel -> open(route.id)
             // The friends, Add and the links' notifications come with their screens.
@@ -584,13 +602,13 @@ class DeliveriesInbox(parcel: UUID? = null) {
 
         /**
          * The window's inbox, after its `super.onCreate`: it follows the link that started the window, and each link
-         * that comes to it after. Made again, the window finds the parcel still waiting, and doesn't follow the link
-         * that started it again once its list has shown it.
+         * that comes to it after, a parcel's link through [parcelLink]. Made again, the window finds the parcel still
+         * waiting, and doesn't follow the link that started it again once its list has shown it.
          */
-        fun of(activity: ComponentActivity): DeliveriesInbox {
+        fun of(activity: ComponentActivity, parcelLink: (String) -> Boolean = { false }): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
-            val inbox = DeliveriesInbox(saved?.getString(PARCEL)?.let(UUID::fromString))
+            val inbox = DeliveriesInbox(saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink)
             registry.registerSavedStateProvider(SAVED) { Bundle().apply { putString(PARCEL, inbox.parcel.value?.toString()) } }
             if (saved == null) inbox.follow(activity.intent)
             activity.addOnNewIntentListener { inbox.follow(it) }
@@ -598,3 +616,6 @@ class DeliveriesInbox(parcel: UUID? = null) {
         }
     }
 }
+
+/** One parcel a link added, told to the list once ([DeliveriesInbox.added]); a new one for each, even of the same parcel. */
+class LinkAdded(val parcelId: UUID?)

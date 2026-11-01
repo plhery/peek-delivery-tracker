@@ -426,8 +426,8 @@ private val LOCAL_SCHEMES = setOf(ContentResolver.SCHEME_CONTENT, ContentResolve
 
 /**
  * What waits for the list in this window (A-D26, A-L14): a parcel a link asked for, at once and whenever another comes;
- * a parcel's notification opened before the list was there, as it appears; and what another app shared, as it appears
- * and each time the app comes back to the front.
+ * a parcel a parcel's link added, likewise; a parcel's notification opened before the list was there, as it appears;
+ * and what another app shared, as it appears and each time the app comes back to the front.
  */
 @Composable
 private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
@@ -438,6 +438,12 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
         inbox.parcel.filterNotNull().collect { parcelId ->
             state.show(parcelId)
             inbox.consume(parcelId)
+        }
+    }
+    LaunchedEffect(inbox) {
+        inbox.linkAdded.filterNotNull().collect { added ->
+            state.linkAdded(added.parcelId)
+            inbox.consume(added)
         }
     }
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {

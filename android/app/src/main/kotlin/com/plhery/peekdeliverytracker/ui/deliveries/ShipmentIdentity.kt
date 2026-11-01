@@ -153,7 +153,7 @@ private fun CopyButton(label: String, action: () -> Unit, content: @Composable (
  * as the iPhone's opens Safari.
  */
 @Composable
-private fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: Color, onLink: (ParcelTrackingLink) -> Unit) {
+internal fun CarrierLinks(links: List<ParcelTrackingLink>, own: Boolean, tint: Color, onLink: (ParcelTrackingLink) -> Unit) {
     val localizer = LocalLocalizer.current
     val type = PeekTheme.type
     val uriHandler = LocalUriHandler.current

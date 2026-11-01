@@ -62,7 +62,6 @@ import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
 import com.plhery.peekdeliverytracker.platform.WebViewTurnstilePages
 import com.plhery.peekdeliverytracker.ui.TurnstileSheet
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
-import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -337,10 +336,6 @@ class AppContainer(
             @Deprecated("Deprecated in Java")
             override fun onLowMemory() = Unit
         })
-        // A link opened before signing in comes back once someone is signed in.
-        scope.launch {
-            session.stateFlow.map { it.signedInUser }.distinctUntilChanged().collect { user -> if (user != null) links.resume() }
-        }
         analytics()
     }
 
@@ -445,7 +440,5 @@ class AppContainer(
                 AuthenticationState.SignedOut -> "signed-out"
                 is AuthenticationState.SignedIn -> user.id.toString().uppercase()
             }
-
-        private val AuthenticationState.signedInUser: UUID? get() = (this as? AuthenticationState.SignedIn)?.user?.id
     }
 }

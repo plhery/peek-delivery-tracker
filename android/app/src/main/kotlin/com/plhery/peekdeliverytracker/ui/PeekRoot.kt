@@ -22,41 +22,53 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.NoLabelScanner
+import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetHost
+import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSource
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
+import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
+import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
+import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.TabShell
 import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 /**
  * RootView (A-D20): what the session's state shows, from the container's stores, with the device's camera for the label
- * scanner. A parcel a link to this window asked for ([inbox]) brings the deliveries forward and opens there.
+ * scanner. A parcel a link to this window asked for ([inbox]) brings the deliveries forward and opens there, and a
+ * parcel's link opens its sheet over all of it.
  */
 @Composable
 fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val state by container.session.stateFlow.collectAsState()
     val source = remember(container) { ContainerDeliveries(container) }
+    val links = remember(container) { ContainerParcelLinks(container) }
     PeekRoot(
         state, container.localizer, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile,
-        scanner = CameraLabelScanner,
+        scanner = CameraLabelScanner, links = links,
     ) {
         DeliveriesTab(source, inbox = inbox)
     }
@@ -68,6 +80,11 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * chosen is kept with the window and through process death, as `@SceneStorage("tab")` keeps it, whatever the state
  * shows in between. A parcel waiting in [inbox] chooses the deliveries. The tabs show [browserCheck]'s sheet over
  * whatever is in front while it asks for a token, and scan labels with [scanner].
+ *
+ * A parcel's link ([links]) comes first (A-L02): its sheet shows over whatever state is up, the launch screen, the
+ * arrival or the tabs and all they present, in the window's front layer, where nothing under it reaches TalkBack. Once
+ * it closes on a parcel to open, or on one just added or followed, the deliveries come forward and take it ([inbox]).
+ * A link kept for after sign-in opens again once someone is signed in (B-L03).
  */
 @Composable
 internal fun PeekRoot(
@@ -77,6 +94,7 @@ internal fun PeekRoot(
     inbox: DeliveriesInbox? = null,
     browserCheck: TurnstileSheet? = null,
     scanner: LabelScanner = NoLabelScanner,
+    links: ParcelLinkSource? = null,
     deliveries: @Composable () -> Unit,
 ) {
     val language by localizer.languageFlow.collectAsState()
@@ -84,29 +102,54 @@ internal fun PeekRoot(
     LaunchedEffect(inbox) {
         inbox?.parcel?.filterNotNull()?.collect { tab = PeekTab.Deliveries.ordinal }
     }
+    // `.onChange(of: session.user?.id, initial: true)`: a link opened before signing in comes back once someone is.
+    LaunchedEffect(links) {
+        val source = links ?: return@LaunchedEffect
+        source.session.map { (it as? AuthenticationState.SignedIn)?.user?.id }.distinctUntilChanged().collect { user ->
+            if (user != null) source.links.resume()
+        }
+    }
+    // `.onChange(of: links.arrival)`: the sheet has gone on a parcel the list now shows.
+    LaunchedEffect(links) {
+        val store = links?.links ?: return@LaunchedEffect
+        store.arrivalFlow.filterNotNull().collect { arrival ->
+            store.consumeArrival()
+            tab = PeekTab.Deliveries.ordinal
+            when (arrival) {
+                is ParcelLinkStore.Arrival.Open -> inbox?.open(arrival.id)
+                is ParcelLinkStore.Arrival.Added -> inbox?.added(arrival.id)
+            }
+        }
+    }
+    // Over everything the state shows, as `FrontmostSheet` presents from the frontmost controller.
+    val front = remember { TabOverlay() }
     ProvideLocalizer(localizer) {
         // The tags carry the iPhone's accessibility identifiers (demo.exit, deliveries.search, ...); UI Automator reads
         // them as resource ids, as XCUITest reads the identifiers. Sized and placed as its one child is.
         Box(Modifier.semantics { testTagsAsResourceId = true }, propagateMinConstraints = true) {
             ProvideLinks {
-                when (state) {
-                    AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
-                    AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
-                    AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
-                        val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
-                        CompositionLocalProvider(LocalLabelScanner provides scanner) {
-                            TabShell(
-                                selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
-                                overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
-                            ) { shown ->
-                                when (shown) {
-                                    PeekTab.Deliveries -> deliveries()
-                                    PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
+                    when (state) {
+                        AuthenticationState.Loading -> LaunchView(remember(language) { localizer.text("auth.loading") })
+                        AuthenticationState.Unconfigured, AuthenticationState.SignedOut -> ArrivalPlaceholder()
+                        AuthenticationState.Welcome, AuthenticationState.Demo, is AuthenticationState.SignedIn -> {
+                            val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
+                            CompositionLocalProvider(LocalLabelScanner provides scanner) {
+                                TabShell(
+                                    selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,
+                                    overlays = { browserCheck?.let { TurnstileSheetHost(it) } },
+                                ) { shown ->
+                                    when (shown) {
+                                        PeekTab.Deliveries -> deliveries()
+                                        PeekTab.Passport, PeekTab.Friends -> TabPlaceholder(shown)
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                if (links != null) CompositionLocalProvider(LocalTabOverlay provides front) { ParcelLinkSheetHost(links) }
+                CompositionLocalProvider(LocalWindowOverlay provides front) { front.Content() }
             }
         }
     }

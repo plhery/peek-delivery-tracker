@@ -162,7 +162,7 @@ internal fun SheetPage(
  * the [cancellation] at its leading one, cut short where even that room is too little.
  */
 @Composable
-private fun FormBar(
+internal fun FormBar(
     title: String,
     titleFocus: AccessibilityFocus?,
     modifier: Modifier,
@@ -209,7 +209,7 @@ private fun FormBar(
 
 /** A button of the bar on its glass capsule: the confirmation `.fontWeight(.semibold)`, greyed while it is off. */
 @Composable
-private fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBackdrop, weight: FontWeight, enabled: Boolean, tag: String?) {
+internal fun BarButton(title: String, onClick: () -> Unit, backdrop: MaterialBackdrop, weight: FontWeight, enabled: Boolean, tag: String?) {
     val colors = PeekTheme.colors
     GlassSurface(CapsuleShape, Modifier.heightIn(min = BAR_ROW), backdrop) {
         Box(

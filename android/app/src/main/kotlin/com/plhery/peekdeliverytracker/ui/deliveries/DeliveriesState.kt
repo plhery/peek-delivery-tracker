@@ -850,6 +850,22 @@ internal class DeliveriesState(
         source.view("deliveries")
     }
 
+    /**
+     * `receive(.added)`: a parcel kept or followed from its link's sheet arrives as one just added. Add, the filters and
+     * a card's menu close, a parcel open over the list goes back to it, the list says "link.added" and tells TalkBack,
+     * and, while the window is in front, brings the card to its middle, clearing a search or filters that would hide it.
+     */
+    fun linkAdded(parcelId: UUID?) {
+        closeAdd()
+        showingFilters = false
+        menu = null
+        if (!listShown) navigator.pop(emptyList())
+        show(text("link.added"))
+        if (parcelId == null || !inFront) return
+        if (layout.visible.none { it.id == parcelId }) clearFilters()
+        revealParcel = parcelId
+    }
+
     /** "Open existing" (`dismiss(); onOpenParcel(id)`, the list's `show(_:)`): Add closes, and the parcel opens. */
     fun openExisting(parcelId: UUID) = show(parcelId)
 

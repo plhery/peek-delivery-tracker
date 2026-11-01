@@ -16,17 +16,19 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.NoLabelScanner
+import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSource
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import java.time.Instant
 import kotlin.coroutines.ContinuationInterceptor
 
 /**
- * The root as the app shows it, in the app's copy for `language`, at the captures' moment ([CAPTURED]), the deliveries
- * showing [source]'s parcels (the demo's unless a test gives its own), under Reduce Motion unless asked otherwise. The
- * session is told to the deliveries too, and their screens counted to [onView] with the tabs'; their app's scope runs
- * on the test's clock. The carriers are the bundled catalog's unless [identities] pins others. Transparency is full
+ * The root as the app shows it, in the app's copy for `language`, at the captures' moment ([CAPTURED]) unless [now]
+ * says otherwise, the deliveries showing [source]'s parcels (the demo's unless a test gives its own), under Reduce
+ * Motion unless asked otherwise. The session is told to the deliveries too, and their screens counted to [onView] with
+ * the tabs'; their app's scope runs on the test's clock. The carriers are the bundled catalog's unless [identities] pins others. Transparency is full
  * unless [reduceTransparency]. The tabs show [browserCheck]'s sheet, where a test gives one, and scan labels with
- * [scanner] (none unless a test gives one).
+ * [scanner] (none unless a test gives one). A parcel's link opens over it from [links], where a test gives them.
  */
 @Composable
 fun RootHost(
@@ -41,6 +43,8 @@ fun RootHost(
     reduceTransparency: Boolean = false,
     browserCheck: TurnstileSheet? = null,
     scanner: LabelScanner = NoLabelScanner,
+    links: ParcelLinkSource? = null,
+    now: () -> Instant = { CAPTURED },
     deliveries: (@Composable () -> Unit)? = null,
 ) {
     val localizer = remember(language) { Localizer(language, variant = "android") }
@@ -51,12 +55,12 @@ fun RootHost(
     effects.coroutineContext[ContinuationInterceptor]?.let { shown.dispatcher = it }
     shown.frameClock = effects.coroutineContext[MonotonicFrameClock]
     SideEffect { shown.session.value = state }
-    CompositionLocalProvider(LocalNow provides { CAPTURED }) {
+    CompositionLocalProvider(LocalNow provides now) {
         PeekTheme(
             dark = dark, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = reduceTransparency,
             carrierIdentities = identities,
         ) {
-            PeekRoot(state, localizer, onView, inbox, browserCheck, scanner) {
+            PeekRoot(state, localizer, onView, inbox, browserCheck, scanner, links) {
                 if (deliveries != null) {
                     deliveries()
                 } else {

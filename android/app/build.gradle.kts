@@ -48,6 +48,9 @@ android {
             val value = xcconfig[setting].orEmpty().replace("\\", "\\\\").replace("\"", "\\\"")
             buildConfigField("String", key, "\"$value\"")
         }
+        // The hosts whose /p/ links open the parcel's sheet, as the iPhone's associated domains name them.
+        manifestPlaceholders["linkHost"] = xcconfig["SDT_ASSOCIATED_DOMAIN"].orEmpty().removePrefix("applinks:")
+        manifestPlaceholders["linkHostLegacy"] = xcconfig["SDT_ASSOCIATED_DOMAIN_LEGACY"].orEmpty().removePrefix("applinks:")
     }
 
     buildFeatures {
@@ -75,6 +78,9 @@ android {
             it.jvmArgs("--add-exports=java.base/jdk.internal.access=ALL-UNNAMED", "--add-opens=java.base/java.io=ALL-UNNAMED")
             // Screenshots draw through Android's own renderer (Roborazzi).
             it.systemProperty("robolectric.pixelCopyRenderMode", "hardware")
+            // Every test runs in one JVM, and an iPad-sized screenshot compares images of 20 MB and more: Gradle's
+            // default 512 MB runs out.
+            it.maxHeapSize = "2g"
         }
     }
 }

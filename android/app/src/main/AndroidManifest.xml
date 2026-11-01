@@ -39,12 +39,27 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- A parcel's link, peekdeliverytracker://parcel/<uuid>, opens it on the deliveries. -->
+            <!-- The app's own links: peekdeliverytracker://parcel/<uuid> opens one of the deliveries, and
+                 peekdeliverytracker://p/<id> a parcel someone shared, in its sheet. -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="peekdeliverytracker" android:host="parcel" />
+                <data android:scheme="peekdeliverytracker" />
+                <data android:host="parcel" />
+                <data android:host="p" />
+            </intent-filter>
+            <!-- A parcel someone shared, https://<the site>/p/<id>, on the site and on the host it answered on before
+                 (the iPhone's associated domains, SDT_ASSOCIATED_DOMAIN and SDT_ASSOCIATED_DOMAIN_LEGACY): an App Link,
+                 verified against the site's assetlinks.json, that opens the parcel's sheet. -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="${linkHost}" />
+                <data android:host="${linkHostLegacy}" />
+                <data android:pathPrefix="/p/" />
             </intent-filter>
         </activity>
 

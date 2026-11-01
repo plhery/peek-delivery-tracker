@@ -1768,6 +1768,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD Belgium tracking: statuses, delivery and contact",
       "name": "DPD Belgium",
       "color": "#dc0032"
+    },
+    {
+      "id": "packlink",
+      "catalog": "packlink",
+      "slug": "packlink-tracking",
+      "title": "Packlink tracking: reference, statuses and who to contact",
+      "name": "Packlink",
+      "color": "#ff4f00"
     }
   ],
   "de": [

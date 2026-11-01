@@ -218,5 +218,6 @@
   { "id": "ozon-logistics", "catalog": "ozon-logistics", "name": "Ozon", "languages": ["en"] },
   { "id": "citymail", "catalog": "citymail", "name": "CityMail", "languages": ["en"] },
   { "id": "dayone", "catalog": "dayone", "name": "DayOne", "languages": ["en"] },
-  { "id": "dpd-be", "catalog": "dpd-be", "name": "DPD Belgium", "languages": ["en"] }
+  { "id": "dpd-be", "catalog": "dpd-be", "name": "DPD Belgium", "languages": ["en"] },
+  { "id": "packlink", "catalog": "packlink", "name": "Packlink", "languages": ["en"] }
 ]

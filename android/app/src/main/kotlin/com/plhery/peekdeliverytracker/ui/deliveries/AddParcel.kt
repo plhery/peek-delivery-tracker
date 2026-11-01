@@ -415,13 +415,15 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         }
         form.lookedUp = key
     }
-    // The carriers asked about the settled number.
+    // The carriers asked about the settled number, given as typed too: its dashes and spaces tell some carriers' numbers
+    // apart, so a question still unanswered goes again when only they change.
     val recognitionRequest = addition.recognitionRequest
-    LaunchedEffect(recognitionRequest) {
+    val typed = addition.parsed.trackingNumber
+    LaunchedEffect(recognitionRequest, typed) {
         val number = recognitionRequest ?: return@LaunchedEffect
         form.recognition = form.recognition.copy(failedNumber = null, answer = null)
         try {
-            val result = source.detectCarrier(number)
+            val result = source.detectCarrier(number, typed)
             ensureActive()
             if (result.trackingNumber != number) throw DeliveryApiError.InvalidResponse()
             form.recognition = form.recognition.copy(answer = result)

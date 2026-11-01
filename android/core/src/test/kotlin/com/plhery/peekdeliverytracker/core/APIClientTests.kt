@@ -174,6 +174,32 @@ class APIClientTests {
         }
     }
 
+    /** As the web's Add sheets send it: the number as typed goes beside it, for the rules that read its dashes and spaces. */
+    @Test
+    fun aDetectionSendsTheNumberAsTypedWhenItDiffers() = runTest {
+        val cases = listOf(
+            " 31415926-5 " to """{"lookupCountryHint":"DE","trackingNumber":"314159265","typedNumber":"31415926-5"}""",
+            "314159265" to """{"lookupCountryHint":"DE","trackingNumber":"314159265"}""",
+            null to """{"lookupCountryHint":"DE","trackingNumber":"314159265"}""",
+        )
+        for ((typed, sent) in cases) {
+            val transport = serving(jsonResponse(200, """{"trackingNumber":"314159265","carrier":"unknown"}"""))
+            client(transport, TestSession()).detectCarrier("314159265", typed)
+            assertEquals("$typed", sent, transport.requests.single().body?.decodeToString())
+        }
+    }
+
+    @Test
+    fun theNumberAsTypedIsTrimmedAndKeptOnlyWhenItDiffersWithinEightyCharacters() {
+        assertEquals("31415926-5", typedTrackingNumber("\n31415926-5 ", "314159265"))
+        assertEquals("0608 0000 0000 02", typedTrackingNumber("0608 0000 0000 02", "06080000000002"))
+        assertNull(typedTrackingNumber(" 314159265\n", "314159265"))
+        assertNull(typedTrackingNumber(null, "314159265"))
+        val long = "1-" + "2".repeat(78)
+        assertEquals(long, typedTrackingNumber(long, "1" + "2".repeat(78)))
+        assertNull(typedTrackingNumber("$long-", "1" + "2".repeat(78)))
+    }
+
     @Test
     fun aQueuedCheckIsSignedWithTheRegisteredKey() = runTest {
         var challenges = 0

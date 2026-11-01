@@ -480,9 +480,10 @@ class ParcelStore(
         device.postcodes.forget(postcode)
     }
 
-    suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse {
-        if (isGuest) return device.detect(trackingNumber)
-        return api.detectCarrier(trackingNumber)
+    /** `typed`: the number as typed, its dashes and spaces kept, which both services read beside it when it differs. */
+    suspend fun detectCarrier(trackingNumber: String, typed: String? = null): CarrierDetectionResponse {
+        if (isGuest) return device.detect(trackingNumber, typed)
+        return api.detectCarrier(trackingNumber, typed)
     }
 
     val activeCount: Int

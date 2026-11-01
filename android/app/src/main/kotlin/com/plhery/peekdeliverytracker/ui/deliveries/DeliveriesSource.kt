@@ -133,8 +133,11 @@ interface DeliveriesSource {
         dpdPostcodeCountry: String?,
     ): Parcel
 
-    /** `store.detectCarrier(trackingNumber:)`: which carrier knows the number, the account's or this phone's lookup. */
-    suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse
+    /**
+     * `store.detectCarrier(trackingNumber:)`: which carrier knows the number, the account's or this phone's lookup.
+     * `typed`: the number as typed, whose dashes and spaces tell some carriers' numbers apart.
+     */
+    suspend fun detectCarrier(trackingNumber: String, typed: String? = null): CarrierDetectionResponse
 
     /** `store.givenPostcodes`: the postcodes Add suggests, the parcels' newest first, then this phone's. */
     val givenPostcodes: List<GivenPostcode>
@@ -290,7 +293,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         dpdPostcodeCountry: String?,
     ): Parcel = container.parcels.add(trackingNumber, label, carrier, trackingUrl, dpdPostcode, dpdPostcodeCountry)
 
-    override suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse = container.parcels.detectCarrier(trackingNumber)
+    override suspend fun detectCarrier(trackingNumber: String, typed: String?): CarrierDetectionResponse =
+        container.parcels.detectCarrier(trackingNumber, typed)
 
     override val givenPostcodes: List<GivenPostcode> get() = container.parcels.givenPostcodes
 

@@ -179,6 +179,14 @@ object ParcelLookupCountry {
     }
 }
 
+/**
+ * The number as typed, sent beside the normalized one when it differs (src/lib/carrierDetection.ts `typedNumber`): its
+ * dashes and spaces tell some carriers' numbers apart (a detection rule's `rawPattern`, an R+L PRO number's dash). The
+ * service reads it only when it normalizes to the number asked about, and takes 80 characters at most.
+ */
+fun typedTrackingNumber(typed: String?, trackingNumber: String): String? =
+    typed?.trimmingWhitespacesAndNewlines()?.takeIf { it != trackingNumber && it.length <= 80 }
+
 sealed class DeliveryApiError(message: String) : Exception(message) {
     class AuthenticationExpired : DeliveryApiError("Your sign-in expired. Please sign in again.")
     class DuplicateTracking(val parcelId: UUID) : DeliveryApiError("This tracking number is already in your delivery box.")
@@ -266,11 +274,15 @@ class DeliveryApiClient(
     suspend fun listPackages(): List<Parcel> =
         request("/api/packages?includeArchived=true", PackageListResponse.serializer()).packages
 
-    suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse = request(
+    /** `typed`: the number as typed, which goes beside it when it differs ([typedTrackingNumber]). */
+    suspend fun detectCarrier(trackingNumber: String, typed: String? = null): CarrierDetectionResponse = request(
         "/api/carriers/detect", CarrierDetectionResponse.serializer(), "POST",
         encode(
             CarrierDetectionRequest.serializer(),
-            CarrierDetectionRequest(trackingNumber = trackingNumber, lookupCountryHint = ParcelLookupCountry.hint(region())),
+            CarrierDetectionRequest(
+                trackingNumber = trackingNumber, lookupCountryHint = ParcelLookupCountry.hint(region()),
+                typedNumber = typedTrackingNumber(typed, trackingNumber),
+            ),
         ),
     )
 

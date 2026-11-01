@@ -151,8 +151,8 @@ class DeviceParcelTests {
                 ),
             )
         },
-        detect = { number, prefixOfSaved ->
-            calls.add("detect $number${if (prefixOfSaved) " prefix" else ""}")
+        detect = { number, prefixOfSaved, typed ->
+            calls.add("detect $number${if (prefixOfSaved) " prefix" else ""}${typed?.let { " as $it" } ?: ""}")
             throw DeliveryApiError.ServiceFailed(503)
         },
         setAlert = { linkId, key, request ->
@@ -385,6 +385,18 @@ class DeviceParcelTests {
             "GB",
             body(PublicLookupRequest.serializer(), PublicLookupRequest(trackingNumber = "SYNTHETIC", lookupCountryHint = "GB"))["lookupCountryHint"],
         )
+    }
+
+    @Test
+    fun aDetectionGivesTheNumberAsTypedWhenItDiffers() = runTest {
+        val calls = Calls()
+        val device = device(client(calls), Memory(), this)
+
+        runCatching { device.detect(trackingNumber = "314159265", typed = " 31415926-5 ") }
+        runCatching { device.detect(trackingNumber = "314159265", typed = "314159265") }
+        runCatching { device.detect(trackingNumber = "314159265") }
+
+        assertEquals(listOf("detect 314159265 as 31415926-5", "detect 314159265", "detect 314159265"), calls.all)
     }
 
     @Test

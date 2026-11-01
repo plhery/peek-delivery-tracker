@@ -471,6 +471,17 @@ class AddParcelTest {
         assertEquals(listOf(FakeDeliveries.AdditionRequest(number, "", CarrierId.GlsCh, null, "8000", null)), source.additions)
     }
 
+    /** As the web's sheet asks: the number as typed goes too, its dash telling an R+L PRO number apart. */
+    @Test
+    fun theNumberIsAskedAboutAsTypedToo() {
+        show()
+        open()
+        type("31415926-5")
+        leave()
+        assertEquals(listOf("314159265"), source.detected)
+        assertEquals(listOf<String?>("31415926-5"), source.detectedAsTyped)
+    }
+
     @Test
     fun anOptionalPostcodeSaysWhatItGivesThatCarrier() {
         val number = "12345478901"

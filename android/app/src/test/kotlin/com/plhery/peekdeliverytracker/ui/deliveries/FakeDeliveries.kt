@@ -338,6 +338,9 @@ class FakeDeliveries(
     var detecting: CompletableDeferred<Unit>? = null
     val detected = mutableListOf<String>()
 
+    /** The number as typed that went beside each one [detected]. */
+    val detectedAsTyped = mutableListOf<String?>()
+
     override suspend fun add(
         trackingNumber: String,
         label: String,
@@ -359,8 +362,9 @@ class FakeDeliveries(
         return parcel
     }
 
-    override suspend fun detectCarrier(trackingNumber: String): CarrierDetectionResponse {
+    override suspend fun detectCarrier(trackingNumber: String, typed: String?): CarrierDetectionResponse {
         detected += trackingNumber
+        detectedAsTyped += typed
         detecting?.await()
         return detections[trackingNumber] ?: throw DeliveryApiError.InvalidResponse()
     }

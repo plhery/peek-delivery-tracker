@@ -5725,6 +5725,12 @@ export const CARRIER_CAPABILITIES = {
           "novaposhta.ua"
         ],
         "path": "^/(?:en/)?tracking/(\\d{14})(?:/|$)"
+      },
+      {
+        "domains": [
+          "novapost.com"
+        ],
+        "path": "^/[a-z]{2}-[a-z]{2}/tracking/((?:RS)?(?:SH|TN)[A-Z]{2}\\d{10}|1\\d{13}|(?:20[4678]|590|595)\\d{11}|(?:21|51)\\d{12})(?:/|$)"
       }
     ],
     "detectionRules": [
@@ -12496,7 +12502,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Istanbul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "kolay-gelsin"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -21260,7 +21266,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Caracas",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "zoom-ve"
     },
     "trackingUrlTemplate": "https://zoom.red/tracking-de-envios-personas/?nro-guia={trackingNumber}&tipo-consulta=1",
     "linkRules": [
@@ -37858,7 +37864,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fm-transportes"
     },
     "trackingUrlTemplate": "https://rastreio.fmtransportes.com.br/#/{trackingNumber}",
     "linkRules": [

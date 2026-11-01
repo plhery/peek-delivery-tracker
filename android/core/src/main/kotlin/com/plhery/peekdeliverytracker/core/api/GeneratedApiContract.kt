@@ -1260,6 +1260,48 @@ value class CarrierId(val rawValue: String) {
         val OdmExpress = CarrierId("odm-express")
         val OnlineWorldwideLogistics = CarrierId("online-worldwide-logistics")
         val OntaskExpress = CarrierId("ontask-express")
+        val SevenHoursExpress = CarrierId("7hours-express")
+        val A2bExpress = CarrierId("a2b-express")
+        val Acex = CarrierId("acex")
+        val Aics = CarrierId("aics")
+        val ApgGlobal = CarrierId("apg-global")
+        val Barq = CarrierId("barq")
+        val BasicShipping = CarrierId("basic-shipping")
+        val BlueskyParcel = CarrierId("bluesky-parcel")
+        val BoltKargo = CarrierId("bolt-kargo")
+        val BtcLogistic = CarrierId("btc-logistic")
+        val ConveyorUniExpress = CarrierId("conveyor-uni-express")
+        val CoupangLogistics = CarrierId("coupang-logistics")
+        val DerKurierSk = CarrierId("der-kurier-sk")
+        val Ecparcel = CarrierId("ecparcel")
+        val Emiro = CarrierId("emiro")
+        val Fimile = CarrierId("fimile")
+        val Flipxpress = CarrierId("flipxpress")
+        val FrontdoorCollective = CarrierId("frontdoor-collective")
+        val FurnitureLogis = CarrierId("furniture-logis")
+        val GoLogisticsAu = CarrierId("go-logistics-au")
+        val Golilla = CarrierId("golilla")
+        val HeyCouriers = CarrierId("hey-couriers")
+        val LogistaParcel = CarrierId("logista-parcel")
+        val LuckyFastExpress = CarrierId("lucky-fast-express")
+        val MegacityCourier = CarrierId("megacity-courier")
+        val MglExpress = CarrierId("mgl-express")
+        val MillerDeliveries = CarrierId("miller-deliveries")
+        val MobelServices = CarrierId("mobel-services")
+        val NkLogistic = CarrierId("nk-logistic")
+        val PentaExpress = CarrierId("penta-express")
+        val PxcPacific = CarrierId("pxc-pacific")
+        val Servex = CarrierId("servex")
+        val Skladusa = CarrierId("skladusa")
+        val Tamex = CarrierId("tamex")
+        val Transfera = CarrierId("transfera")
+        val UEnvios = CarrierId("u-envios")
+        val UsCargo = CarrierId("us-cargo")
+        val VertChezVous = CarrierId("vert-chez-vous")
+        val Wassel = CarrierId("wassel")
+        val Widect = CarrierId("widect")
+        val XpressCourierLink = CarrierId("xpress-courier-link")
+        val Zajel = CarrierId("zajel")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2463,6 +2505,48 @@ value class CarrierId(val rawValue: String) {
             OdmExpress,
             OnlineWorldwideLogistics,
             OntaskExpress,
+            SevenHoursExpress,
+            A2bExpress,
+            Acex,
+            Aics,
+            ApgGlobal,
+            Barq,
+            BasicShipping,
+            BlueskyParcel,
+            BoltKargo,
+            BtcLogistic,
+            ConveyorUniExpress,
+            CoupangLogistics,
+            DerKurierSk,
+            Ecparcel,
+            Emiro,
+            Fimile,
+            Flipxpress,
+            FrontdoorCollective,
+            FurnitureLogis,
+            GoLogisticsAu,
+            Golilla,
+            HeyCouriers,
+            LogistaParcel,
+            LuckyFastExpress,
+            MegacityCourier,
+            MglExpress,
+            MillerDeliveries,
+            MobelServices,
+            NkLogistic,
+            PentaExpress,
+            PxcPacific,
+            Servex,
+            Skladusa,
+            Tamex,
+            Transfera,
+            UEnvios,
+            UsCargo,
+            VertChezVous,
+            Wassel,
+            Widect,
+            XpressCourierLink,
+            Zajel,
         )
     }
 }

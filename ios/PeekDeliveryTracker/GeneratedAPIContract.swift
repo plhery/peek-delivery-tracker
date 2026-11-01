@@ -1251,6 +1251,48 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let odmExpress = CarrierID(rawValue: "odm-express")
     static let onlineWorldwideLogistics = CarrierID(rawValue: "online-worldwide-logistics")
     static let ontaskExpress = CarrierID(rawValue: "ontask-express")
+    static let sevenHoursExpress = CarrierID(rawValue: "7hours-express")
+    static let a2bExpress = CarrierID(rawValue: "a2b-express")
+    static let acex = CarrierID(rawValue: "acex")
+    static let aics = CarrierID(rawValue: "aics")
+    static let apgGlobal = CarrierID(rawValue: "apg-global")
+    static let barq = CarrierID(rawValue: "barq")
+    static let basicShipping = CarrierID(rawValue: "basic-shipping")
+    static let blueskyParcel = CarrierID(rawValue: "bluesky-parcel")
+    static let boltKargo = CarrierID(rawValue: "bolt-kargo")
+    static let btcLogistic = CarrierID(rawValue: "btc-logistic")
+    static let conveyorUniExpress = CarrierID(rawValue: "conveyor-uni-express")
+    static let coupangLogistics = CarrierID(rawValue: "coupang-logistics")
+    static let derKurierSk = CarrierID(rawValue: "der-kurier-sk")
+    static let ecparcel = CarrierID(rawValue: "ecparcel")
+    static let emiro = CarrierID(rawValue: "emiro")
+    static let fimile = CarrierID(rawValue: "fimile")
+    static let flipxpress = CarrierID(rawValue: "flipxpress")
+    static let frontdoorCollective = CarrierID(rawValue: "frontdoor-collective")
+    static let furnitureLogis = CarrierID(rawValue: "furniture-logis")
+    static let goLogisticsAu = CarrierID(rawValue: "go-logistics-au")
+    static let golilla = CarrierID(rawValue: "golilla")
+    static let heyCouriers = CarrierID(rawValue: "hey-couriers")
+    static let logistaParcel = CarrierID(rawValue: "logista-parcel")
+    static let luckyFastExpress = CarrierID(rawValue: "lucky-fast-express")
+    static let megacityCourier = CarrierID(rawValue: "megacity-courier")
+    static let mglExpress = CarrierID(rawValue: "mgl-express")
+    static let millerDeliveries = CarrierID(rawValue: "miller-deliveries")
+    static let mobelServices = CarrierID(rawValue: "mobel-services")
+    static let nkLogistic = CarrierID(rawValue: "nk-logistic")
+    static let pentaExpress = CarrierID(rawValue: "penta-express")
+    static let pxcPacific = CarrierID(rawValue: "pxc-pacific")
+    static let servex = CarrierID(rawValue: "servex")
+    static let skladusa = CarrierID(rawValue: "skladusa")
+    static let tamex = CarrierID(rawValue: "tamex")
+    static let transfera = CarrierID(rawValue: "transfera")
+    static let uEnvios = CarrierID(rawValue: "u-envios")
+    static let usCargo = CarrierID(rawValue: "us-cargo")
+    static let vertChezVous = CarrierID(rawValue: "vert-chez-vous")
+    static let wassel = CarrierID(rawValue: "wassel")
+    static let widect = CarrierID(rawValue: "widect")
+    static let xpressCourierLink = CarrierID(rawValue: "xpress-courier-link")
+    static let zajel = CarrierID(rawValue: "zajel")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2454,6 +2496,48 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .odmExpress,
         .onlineWorldwideLogistics,
         .ontaskExpress,
+        .sevenHoursExpress,
+        .a2bExpress,
+        .acex,
+        .aics,
+        .apgGlobal,
+        .barq,
+        .basicShipping,
+        .blueskyParcel,
+        .boltKargo,
+        .btcLogistic,
+        .conveyorUniExpress,
+        .coupangLogistics,
+        .derKurierSk,
+        .ecparcel,
+        .emiro,
+        .fimile,
+        .flipxpress,
+        .frontdoorCollective,
+        .furnitureLogis,
+        .goLogisticsAu,
+        .golilla,
+        .heyCouriers,
+        .logistaParcel,
+        .luckyFastExpress,
+        .megacityCourier,
+        .mglExpress,
+        .millerDeliveries,
+        .mobelServices,
+        .nkLogistic,
+        .pentaExpress,
+        .pxcPacific,
+        .servex,
+        .skladusa,
+        .tamex,
+        .transfera,
+        .uEnvios,
+        .usCargo,
+        .vertChezVous,
+        .wassel,
+        .widect,
+        .xpressCourierLink,
+        .zajel,
     ]
 
     init(from decoder: Decoder) throws {

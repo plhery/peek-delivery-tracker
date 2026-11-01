@@ -5512,6 +5512,20 @@
     ]
   },
   {
+    "input": "0212202000023",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "la-poste",
+      "correos-chile",
+      "yunda"
+    ],
+    "asked": [
+      "la-poste"
+    ]
+  },
+  {
     "input": "02180171003654",
     "carrier": "unknown",
     "confidence": "low",
@@ -12849,6 +12863,38 @@
     ]
   },
   {
+    "input": "10581503743344",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "dpd",
+      "ciblex",
+      "hermes-de",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "xpressbees"
+    ],
+    "preferred": [
+      "dpd-fr"
+    ],
+    "asked": [
+      "hermes-de",
+      "seur",
+      "brt",
+      "ciblex",
+      "delhivery"
+    ]
+  },
+  {
     "input": "1058233044",
     "carrier": "unknown",
     "confidence": "low",
@@ -13265,6 +13311,36 @@
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "10856925935680",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "dpd",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "xpressbees"
+    ],
+    "preferred": [
+      "dpd-fr"
+    ],
+    "asked": [
+      "seur",
+      "brt",
+      "ciblex",
+      "delhivery"
     ]
   },
   {
@@ -18323,6 +18399,34 @@
     ],
     "asked": [
       "brt"
+    ]
+  },
+  {
+    "input": "15455742503529",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "xpressbees"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
     ]
   },
   {
@@ -35163,6 +35267,33 @@
     ]
   },
   {
+    "input": "31630199728245",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
+    ]
+  },
+  {
     "input": "3171555755",
     "carrier": "unknown",
     "confidence": "low",
@@ -35903,6 +36034,33 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "32796769098312",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
     ]
   },
   {
@@ -36991,6 +37149,32 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "35212641415477",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
     ]
   },
   {
@@ -39888,6 +40072,26 @@
       "mondial-relay",
       "colisweb",
       "heppner"
+    ]
+  },
+  {
+    "input": "4011663590",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "tipsa",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
     ]
   },
   {
@@ -76609,6 +76813,9 @@
     "confidence": "low",
     "candidates": [
       "ecom-logistics"
+    ],
+    "asked": [
+      "ecom-logistics"
     ]
   },
   {
@@ -82520,6 +82727,18 @@
     "candidates": [
       "intelcom"
     ]
+  },
+  {
+    "input": "ISCO00025",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "ISCO00028",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "IT0000000001",
@@ -91500,6 +91719,14 @@
     ]
   },
   {
+    "input": "QJ340363324BR",
+    "carrier": "correios-br",
+    "confidence": "high",
+    "candidates": [
+      "correios-br"
+    ]
+  },
+  {
     "input": "QLR22183032U",
     "carrier": "unknown",
     "confidence": "low",
@@ -95703,6 +95930,22 @@
     ],
     "asked": [
       "nova-poshta"
+    ]
+  },
+  {
+    "input": "SK1003769022UA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "skladusa"
+    ]
+  },
+  {
+    "input": "SK1003769178UA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "skladusa"
     ]
   },
   {

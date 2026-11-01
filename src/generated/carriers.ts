@@ -1808,6 +1808,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Andreani tracking: Argentina parcel numbers and statuses",
       "name": "Andreani",
       "color": "#d71920"
+    },
+    {
+      "id": "mainfreight",
+      "catalog": "mainfreight",
+      "slug": "mainfreight-tracking",
+      "title": "Mainfreight tracking: consignment numbers and statuses",
+      "name": "Mainfreight",
+      "color": "#005eb8"
     }
   ],
   "de": [

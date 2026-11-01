@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.platform
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.SystemClock
 import android.webkit.WebView
@@ -198,24 +199,35 @@ class WebViewTurnstilePageDeviceTest {
 
     @Test
     fun thePagesGroundIsTheOneTheSheetsBarStandsOnInLightAndDark() {
+        // A window of neither ground, so that a page not drawn yet never passes for one.
+        scenario.onActivity { it.window.setBackgroundDrawable(ColorDrawable(Color.MAGENTA)) }
         for (dark in listOf(false, true)) {
             // On the ground the sheet gives it, which the page shows, or covers with a canvas of its own the same.
             show(onceLoaded("requestAnimationFrame(()=>requestAnimationFrame(()=>send('token','drawn')))"), dark, pageGround(dark).toArgb())
             assertHeard("token drawn")
-            // Drawn by the page; on the screen a frame or two later.
-            SystemClock.sleep(500)
-            val at = IntArray(2)
-            var size = 0 to 0
-            scenario.onActivity {
-                page!!.view.getLocationOnScreen(at)
-                size = page!!.view.width to page!!.view.height
-            }
-            val shot = InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot()
-            // Below the page's middle, where nothing of it is drawn.
-            val ground = shot.getPixel(at[0] + size.first / 2, at[1] + size.second * 9 / 10)
-            assertEquals("dark $dark", Integer.toHexString(pageGround(dark).toArgb()), Integer.toHexString(ground))
+            // Drawn by the page; on the screen a frame or two later, or a few more on a busy emulator.
+            val expected = pageGround(dark).toArgb()
+            val until = SystemClock.uptimeMillis() + 3_000
+            var ground: Int
+            do {
+                SystemClock.sleep(200)
+                ground = groundOnScreen()
+            } while (ground != expected && SystemClock.uptimeMillis() < until)
+            assertEquals("dark $dark", Integer.toHexString(expected), Integer.toHexString(ground))
             tearDown()
         }
+    }
+
+    /** The screen's colour below the page's middle, where nothing of it is drawn. */
+    private fun groundOnScreen(): Int {
+        val at = IntArray(2)
+        var size = 0 to 0
+        scenario.onActivity {
+            page!!.view.getLocationOnScreen(at)
+            size = page!!.view.width to page!!.view.height
+        }
+        val shot = InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot()
+        return shot.getPixel(at[0] + size.first / 2, at[1] + size.second * 9 / 10)
     }
 
     /** The bridge of a WebView with the message listener but no document-start script, as Android 12's own. */

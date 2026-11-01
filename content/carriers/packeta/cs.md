@@ -92,11 +92,11 @@ Kontakty, jak je Zásilkovna uváděla na svém webu 25. října 2026:
 
 ## Sledování zásilek Zásilkovny v Peeku
 
-[Peek](/) pozná číslo Zásilkovny, tedy `Z` a 10 číslic, hned podle tvaru, i s mezerami. Deset číslic bez `Z` může patřit několika dopravcům. I tak je vložte (Peek sleduje přes 3 500 dopravců): Peek se zeptá několika z nich včetně Packety. Když Packeta zásilku zná, uvidíte „Packeta has this parcel.“, jinak „Not found at … yet. Peek will keep checking after you add it.“ a Packetu vyberete přes „Change“. Jistější je `Z` připsat. Funguje i odkaz z tracking.packeta.com nebo z packeta.com s `id=`, odkaz ze zasilkovna.cz jen s číslem se `Z`. PSČ netřeba.
+[Peek](/) pozná číslo Zásilkovny, tedy `Z` a 10 číslic, hned podle tvaru, i s mezerami. Deset číslic bez `Z` může patřit několika dopravcům. I tak je vložte (Peek sleduje přes 3 500 dopravců): Peek se zeptá několika z nich, a pokud číslo nezačíná nulou a je napsané vcelku nebo s mezerami jako 3-4-3, i Packety. Když Packeta zásilku zná, uvidíte „Packeta has this parcel.“, jinak „Not found at … yet. Peek will keep checking after you add it.“ a Packetu vyberete přes „Change“. Jistější je `Z` připsat. Funguje i odkaz z tracking.packeta.com nebo z packeta.com s `id=`, odkaz ze zasilkovna.cz jen s číslem se `Z`. PSČ netřeba.
 
 Peek ukáže souhrnný stav a 20 nejnovějších kroků v angličtině, jak je Packeta píše, dále e-shop, který zásilku poslal, čas doručení a adresu výdejního místa nebo Z-BOXu, kam zásilka míří (u doručení domů a u vratky ne). Depo nebo výdejní místo z kroku uvede jako místo, a když je v názvu město, ukáže ho na mapě. Časy Peek čte podle pražského času a ukazuje je v časovém pásmu vašeho zařízení. Vaše jméno, adresu ani podpis si neukládá. Odhad doručení Zásilkovna nedává, takže ho Peek nemá.
 
-Když Zásilkovna předá zásilku dopravci, kterého Peek zná, a odkáže na něj, Peek ukáže, kdo ji doručuje. Jakmile má ten dopravce čerstvé kroky, sleduje ji Peek dál u něj. Přes den zásilku kontroluje každých 10 minut, v noci jednou za hodinu až dvě, a při změně vám může poslat upozornění. Zásilkovnu za vás ale nekontaktuje a nic za vás nereklamuje.
+Když Zásilkovna předá zásilku dopravci, kterého Peek zná, a odkáže na něj, Peek ukáže, kdo ji doručuje. Jakmile má ten dopravce čerstvé kroky, sleduje ji Peek dál u něj. Zásilku kontroluje každých 10 minut a při změně vám může poslat upozornění. Zásilkovnu za vás ale nekontaktuje a nic za vás nereklamuje.
 
 ## Časté otázky ke sledování Zásilkovny
 

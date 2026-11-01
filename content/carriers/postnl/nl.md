@@ -86,7 +86,7 @@ Heb je een pakket verstuurd met PostNL en kom je er met je klacht niet uit, dan 
 
 Peek leest PostNL via postnl.post, in het Engels, zonder postcode. Je ziet de status, de scans met het land waar ze plaatsvonden, het bezorgmoment en het land van bestemming. Een verwachte bezorgdatum geeft postnl.post niet. postnl.post neemt 3S-barcodes van 13 tekens niet aan; voor zo'n barcode zoekt Peek je pakket via [universele volgdiensten](guide:universal-tracker) (in het Engels). Vindt geen ervan iets, volg je pakket dan in PostNL's eigen track & trace. Bij een internationale code die op NL eindigt, vraagt Peek de post van het land van bestemming naar hetzelfde nummer zodra PostNL dat land noemt, en schakelt over als die nieuwere scans heeft.
 
-Peek kijkt overdag elke 30 minuten bij PostNL, ook als de bezorger onderweg is, 's nachts elk uur of om de twee uur, en kan je bij elke scan, bij belangrijke stappen of alleen op de bezorgdag een melding sturen. Peek kan geen contact opnemen met PostNL of de webshop.
+Peek kijkt elke 30 minuten bij PostNL, ook als de bezorger onderweg is, en kan je bij elke scan, bij belangrijke stappen of alleen op de bezorgdag een melding sturen. Peek kan geen contact opnemen met PostNL of de webshop.
 
 ## Vragen over PostNL track & trace
 

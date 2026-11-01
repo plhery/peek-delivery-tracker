@@ -98,7 +98,7 @@ Numbri, mis näeb välja nagu `V00000E0000000`, seob [Peek](/) kuju järgi kohe 
 
 7–10-kohalist saadetise numbrit Peek kuju järgi Venipakiga ei seo ega küsi selle kohta Venipakilt. Kleepige see siiski – Peek jälgib enam kui 3500 vedaja pakke – ja valige Venipak nupuga „Change“ (juba lisatud pakil „Change carrier“) või kleepige Venipaki jälgimislink selle numbriga. Kui saadetises on mitu pakki, palub Peek lisada pakid eraldi, igaüks oma numbriga.
 
-Peek küsib otse Venipakilt ja näitab Venipaki samme kuupäeva ja kellaajaga: olekuid inglise keeles nagu ülal tabelis, terminali ning pakiautomaati või pick-up punkti (koos linnaga), kus pakk ootab või kust see välja võeti. Eeldatavat tarnepäeva ega kaalu Venipak ei anna; kaardi koordinaate, pakkide arvu ega saaja kontrolli Peek ei näita. Päeval kontrollib Peek pakki iga 10 minuti järel, kulleriga teel olevat pakki (`Out for delivery`) iga 2 minuti järel ja öösel iga tunni või kahe järel. Oleku muutumisel võib Peek teile teada anda. Peek ei saa teie eest Venipaki ega e-poega ühendust võtta.
+Peek küsib otse Venipakilt ja näitab Venipaki samme kuupäeva ja kellaajaga: olekuid inglise keeles nagu ülal tabelis, terminali ning pakiautomaati või pick-up punkti (koos linnaga), kus pakk ootab või kust see välja võeti. Eeldatavat tarnepäeva ega kaalu Venipak ei anna; kaardi koordinaate, pakkide arvu ega saaja kontrolli Peek ei näita. Peek kontrollib pakki iga 10 minuti järel ja kulleriga teel olevat pakki (`Out for delivery`) iga 2 minuti järel. Oleku muutumisel võib Peek teile teada anda. Peek ei saa teie eest Venipaki ega e-poega ühendust võtta.
 
 ## Küsimused Venipaki paki jälgimise kohta
 

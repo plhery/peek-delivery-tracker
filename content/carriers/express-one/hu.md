@@ -86,7 +86,7 @@ A [Peek](/) felülete angol nyelvű. A Peek a számból nem ismeri fel, hogy Exp
 
 A lépéseket angolul mutatja, a depós beolvasásoknál a településsel együtt; az időpontokat magyar idő szerint értelmezi, és az eszköze időzónájában jeleníti meg. Az ismeretlen kódú lépéseket állapot nélkül jeleníti meg. Várható kézbesítési időt (az Express One időablakát), súlyt, feladót és aláírást nem mutat.
 
-Ha valaki várja a csomagot (értesítést kért rá, vagy az elmúlt órában megnézte), a Peek napközben, 8 és 22 óra között 10 percenként ellenőrzi, `Out for delivery` állapotban 2 percenként; egyébként óránként, éjjel egy-két óránként. Változáskor értesítést küldhet. Az Express One-nal vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
+Ha valaki várja a csomagot (értesítést kért rá, vagy az elmúlt órában megnézte), a Peek 10 percenként ellenőrzi, `Out for delivery` állapotban 2 percenként; egyébként óránként. Változáskor értesítést küldhet. Az Express One-nal vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
 
 ## Gyakori kérdések az Express One-csomagkövetésről
 

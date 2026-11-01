@@ -100,7 +100,7 @@ Numerį, kuris baigiasi `EE`, prasideda raide C, R, E ar L (bet ne CR, CV ar RO)
 
 Siuntą su kitos šalies pašto numeriu Peek seks per Omniva, jei pasirinksite Omniva per „Change“ (jau pridėtai siuntai – per „Change carrier“) arba įklijuosite Omniva sekimo nuorodą. Pats Peek tokios siuntos Omniva neperduoda.
 
-Peek rodo Omniva būsenas angliškai, kaip lentelėje aukščiau, kiekvieno žingsnio vietą Omniva tinkle, paskirties šalį, įteikimo laiką ir paštomatą, kuriame siunta laukia ar iš kurio buvo atsiimta. Pašto kodų ir nepavykusio pristatymo priežasčių jis nerodo, numatomos pristatymo dienos ir svorio taip pat nėra. Dieną Peek tikrina kas 10 minučių, o kai siunta išvežta pristatyti – kas 2 minutes, naktį – kas valandą ar dvi; žingsnius rodo žemėlapyje ir pasikeitus būsenai gali jums pranešti. Peek negali už jus susisiekti su Omniva ar parduotuve.
+Peek rodo Omniva būsenas angliškai, kaip lentelėje aukščiau, kiekvieno žingsnio vietą Omniva tinkle, paskirties šalį, įteikimo laiką ir paštomatą, kuriame siunta laukia ar iš kurio buvo atsiimta. Pašto kodų ir nepavykusio pristatymo priežasčių jis nerodo, numatomos pristatymo dienos ir svorio taip pat nėra. Peek tikrina kas 10 minučių, o kai siunta išvežta pristatyti – kas 2 minutes; žingsnius rodo žemėlapyje ir pasikeitus būsenai gali jums pranešti. Peek negali už jus susisiekti su Omniva ar parduotuve.
 
 ## Dažni klausimai apie Omniva siuntų sekimą
 

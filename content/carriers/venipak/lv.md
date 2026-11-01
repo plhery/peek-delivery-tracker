@@ -90,7 +90,7 @@ Numuru, kas izskatās kā `V00000E0000000`, [Peek](/) pēc formas uzreiz piesais
 
 7–10 ciparu sūtījuma numuru Peek pēc formas Venipak nepiesaista un Venipak par to nejautā. Tomēr ielīmējiet to – Peek izseko vairāk nekā 3500 pārvadātāju sūtījumus – un izvēlieties Venipak ar „Change“ (jau pievienotam sūtījumam – ar „Change carrier“) vai ielīmējiet Venipak izsekošanas saiti ar šo numuru. Ja sūtījumā ir vairākas pakas, Peek lūgs katru pievienot ar tās pakas numuru.
 
-Peek jautā pašai Venipak un rāda tās soļus ar datumu un laiku: statusus angliski, kā tabulā augstāk, termināli, kā arī pakomātu vai pick-up punktu (ar pilsētu), kurā sūtījums gaida vai no kura tas izņemts. Paredzamo piegādes dienu un svaru Venipak nenorāda, savukārt kartes koordinātas, paku skaitu un saņēmēja pārbaudi Peek nerāda. Dienā Peek pārbauda sūtījumu ik pēc 10 minūtēm, bet, kad tas izvests piegādei, ik pēc 2 minūtēm, naktī ik pēc vienas vai divām stundām. Mainoties statusam, Peek var jums paziņot. Peek nevar jūsu vietā sazināties ar Venipak vai veikalu.
+Peek jautā pašai Venipak un rāda tās soļus ar datumu un laiku: statusus angliski, kā tabulā augstāk, termināli, kā arī pakomātu vai pick-up punktu (ar pilsētu), kurā sūtījums gaida vai no kura tas izņemts. Paredzamo piegādes dienu un svaru Venipak nenorāda, savukārt kartes koordinātas, paku skaitu un saņēmēja pārbaudi Peek nerāda. Peek pārbauda sūtījumu ik pēc 10 minūtēm, bet, kad tas izvests piegādei, ik pēc 2 minūtēm. Mainoties statusam, Peek var jums paziņot. Peek nevar jūsu vietā sazināties ar Venipak vai veikalu.
 
 ## Biežāk uzdotie jautājumi par Venipak sūtījumu izsekošanu
 

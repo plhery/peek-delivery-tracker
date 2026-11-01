@@ -89,7 +89,7 @@ Kot je posta.si navajala 25. oktobra 2026:
 
 Pošiljko iz tujine Peek najprej spremlja pri tuji pošti. Če ta kot namembno državo navede Slovenijo ali je sploh ne navede, vi pa pošiljko dodate iz Slovenije, Peek isto številko preveri še pri Pošti Slovenije. Ko ta pokaže korak, ki ni starejši od zadnjega koraka tuje pošte, Peek pošiljko naprej spremlja pri njej, zgodovina tuje pošte pa ostane. Pošto Slovenije lahko pod »Change« izberete tudi sami, saj njeno iskanje sprejme vsako poštno številko te oblike.
 
-Peek bere storitev, na kateri deluje aplikacija MojaPošta. Podnevi pošiljko preveri vsakih 10 minut, ko je v dostavi vsaki 2 minuti, ponoči vsako uro ali dve, in vas lahko obvesti, ko se status spremeni. Pri korakih vidite pošto, pri dostavljeni pošiljki čas dostave, pri pošiljki, ki čaka na pošti, pa to pošto (pri PS Paketomatu ne). Pričakovanega dneva dostave in teže ni. Korake v tujini Peek bere po tamkajšnjem času in jih prikaže v časovnem pasu vaše naprave.
+Peek bere storitev, na kateri deluje aplikacija MojaPošta. Pošiljko preveri vsakih 10 minut, ko je v dostavi vsaki 2 minuti, in vas lahko obvesti, ko se status spremeni. Pri korakih vidite pošto, pri dostavljeni pošiljki čas dostave, pri pošiljki, ki čaka na pošti, pa to pošto (pri PS Paketomatu ne). Pričakovanega dneva dostave in teže ni. Korake v tujini Peek bere po tamkajšnjem času in jih prikaže v časovnem pasu vaše naprave.
 
 ## Vprašanja o sledenju pošiljk Pošte Slovenije
 

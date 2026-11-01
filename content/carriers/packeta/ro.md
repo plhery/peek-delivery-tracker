@@ -95,11 +95,11 @@ Pe packeta.ro, la 26 octombrie 2026:
 
 ## Urmărirea coletelor Packeta cu Peek
 
-[Peek](/) e în engleză, dar recunoaște imediat un număr Packeta, adică `Z` și 10 cifre, chiar și scris cu spații. Cele 10 cifre fără `Z` se potrivesc mai multor curieri: lipește-le oricum, Peek urmărește peste 3.500 de curieri. Peek întreabă câțiva dintre ei, printre care și Packeta, dacă numărul nu începe cu 0. Dacă doar Packeta are coletul, vezi „Packeta has this parcel.”; altfel apasă „Change” și alege Packeta. Merg și linkurile de pe tracking.packeta.com și cele de pe packeta.com care conțin `id=`. Nu-ți trebuie cod poștal.
+[Peek](/) e în engleză, dar recunoaște imediat un număr Packeta, adică `Z` și 10 cifre, chiar și scris cu spații. Cele 10 cifre fără `Z` se potrivesc mai multor curieri: lipește-le oricum, Peek urmărește peste 3.500 de curieri. Peek întreabă câțiva dintre ei, printre care și Packeta, dacă numărul nu începe cu 0 și e scris legat sau cu spații, în grupe de 3-4-3. Dacă doar Packeta are coletul, vezi „Packeta has this parcel.”; altfel apasă „Change” și alege Packeta. Merg și linkurile de pe tracking.packeta.com și cele de pe packeta.com care conțin `id=`. Nu-ți trebuie cod poștal.
 
 Peek îți arată cei mai noi 20 de pași, magazinul care a trimis coletul, ora livrării și adresa punctului pick-up sau a Z-BOX-ului spre care merge coletul (nu și la livrarea la adresă sau la retur). Depozitul sau punctul numit într-un pas apare ca loc. Peek ia orele Packeta drept ora Pragăi, așa că scanările din depozitele din România pot ieși decalate cu o oră. Packeta nu dă o dată estimată de livrare, deci nici Peek. Numele, adresa și semnătura ta nu le păstrează.
 
-Dacă un pas trimite la urmărirea unui transportator partener pe care Peek îl cunoaște, Peek arată cine livrează coletul și, dacă îl poate urmări direct, trece la el de îndată ce partenerul arată pași noi. Ziua, Peek verifică coletul la fiecare 10 minute, noaptea o dată la una-două ore, și te poate anunța când se schimbă ceva. Nu poate însă contacta Packeta sau magazinul în locul tău.
+Dacă un pas trimite la urmărirea unui transportator partener pe care Peek îl cunoaște, Peek arată cine livrează coletul și, dacă îl poate urmări direct, trece la el de îndată ce partenerul arată pași noi. Peek verifică coletul la fiecare 10 minute și te poate anunța când se schimbă ceva. Nu poate însă contacta Packeta sau magazinul în locul tău.
 
 ## Întrebări despre urmărirea Packeta
 

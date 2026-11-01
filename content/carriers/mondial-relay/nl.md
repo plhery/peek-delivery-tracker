@@ -98,7 +98,7 @@ Gecontroleerd op de Nederlandstalige pagina's van Mondial Relay op 25 oktober 20
 
 Voor een nummer van 8 cijfers vraagt Peek ook de ‘Delivery postcode’, de postcode van het afleveradres. Kent niemand het nummer, dan stelt Peek vanuit Nederland of België zelf Mondial Relay voor (‘Mondial Relay may have this parcel. Add the delivery postcode to track it.’). Voor 10 of 12 cijfers en voor de barcode is geen postcode nodig.
 
-Peek toont bij elke scan het genoemde sorteercentrum en, als Mondial Relay ze geeft, het land van bestemming en de verwachte leveringsdag. Ligt uw pakket klaar, dan ziet u de naam en het adres van het Afhaalpunt of de automaat, nooit uw afhaalcode. Uw naam en adres laat Peek weg. Overdag kijkt Peek elke 10 minuten, vaker zodra de bezorger onderweg is, en 's nachts elk uur of om de twee uur; als u wilt, krijgt u een melding bij elke nieuwe status. Peek kan geen contact opnemen met Mondial Relay of de webshop.
+Peek toont bij elke scan het genoemde sorteercentrum en, als Mondial Relay ze geeft, het land van bestemming en de verwachte leveringsdag. Ligt uw pakket klaar, dan ziet u de naam en het adres van het Afhaalpunt of de automaat, nooit uw afhaalcode. Uw naam en adres laat Peek weg. Peek kijkt elke 10 minuten, en vaker zodra de bezorger onderweg is; als u wilt, krijgt u een melding bij elke nieuwe status. Peek kan geen contact opnemen met Mondial Relay of de webshop.
 
 ## Veelgestelde vragen over Mondial Relay
 

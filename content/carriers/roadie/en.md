@@ -87,13 +87,13 @@ Have the tracking number ready. For a refund, a replacement or a new delivery da
 
 [Peek](/) names Roadie at once from a number of either shape: `1R` and 14 digits or letters a to f, or `1R` and 26 letters or digits. Links from track.roadie.com work too: `/id/…`, `/track/…` and `/track?tracking_number=…`, also with a partner's name in front.
 
-Peek doesn't read Roadie's own tracker. It asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the status and history of the first one that has the delivery, in that service's words, which may not match the steps on Roadie's tracker. That history can lag behind Roadie's, and for some deliveries there's none. Until a service knows the number, Peek shows "Waiting for the carrier"; a service that didn't know it is asked again a day later.
+Peek reads Roadie's own tracker and shows its steps in Roadie's words, as in the table above. It can also show the driver's progress, such as `Driver at pickup` or `Driver approaching delivery`; once the driver is approaching or at your address, the delivery shows as "Out for delivery". Roadie gives no place for a step, so there's no map, and Peek doesn't show the estimated delivery time. Until Roadie knows the number, Peek shows "Waiting for the carrier". When Roadie's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the history of the first one that has the delivery, in that service's words.
 
-So Peek doesn't show the delivery photo, the driver or anything else behind Roadie's ZIP code lock. Until a service has the delivery, "Open the Roadie website" on the parcel's page opens Roadie's tracker for your number. Once one has it, that link goes to the service's page instead, such as "Open the ParcelsApp website": for the photo, open track.roadie.com yourself.
+Peek doesn't show the delivery photo, the driver or anything else behind Roadie's ZIP code lock: "Open the Roadie website" on the parcel's page opens Roadie's tracker for your number. If a tracking service filled in, that link goes to the service's page instead, such as "Open the ParcelsApp website": for the photo, open track.roadie.com yourself.
 
-If a tracking service names the carrier Roadie handed the delivery to, with its number, and Peek reads that carrier's own tracking, as it does UPS's, Peek asks that carrier too. Once it shows a scan at least as recent as the service's latest, Peek follows the delivery there. You can also add that number yourself: Peek names UPS at once for a `1Z` number whose check digit is right.
+Peek doesn't get the number of the carrier Roadie hands a delivery to from Roadie's tracker. After `Transferred to Carrier`, unlock that number on Roadie's tracker with your ZIP code and add it to Peek: it names UPS at once for a `1Z` number whose check digit is right.
 
-While a service has the delivery, Peek checks it every 15 minutes, out for delivery too. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Roadie or the shop for you.
+Peek checks Roadie's tracker every 10 minutes, and every 2 minutes once the delivery is "Out for delivery"; while a service has the delivery, it checks every 15 minutes, out for delivery too. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Roadie or the shop for you.
 
 ## Questions about Roadie tracking
 
@@ -137,5 +137,5 @@ The shop you ordered from: Roadie says recipients get refunds and replacements f
 - [Roadie Support: App and tech support: Contacting Customer Service](https://support.roadie.com/support/article/How-to-Get-Help-and-Contact-Customer-Service) – chat and email
 - [Roadie Support: Roadie Customer Support](https://support.roadie.com/support/s/contactsupport) – contact form
 - [Roadie: Delivery Tracker](https://track.roadie.com/) – lengths, steps, messages, ZIP code lock, 14-day photo, next carrier, "Contact Support" link
-- [Universal Parcel Scraper: Roadie](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/roadie) – number shapes, links, steps, how Peek follows Roadie through tracking services
+- [Universal Parcel Scraper: Roadie](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/roadie) – number shapes, links, steps, what Peek reads from Roadie's tracker
 :::

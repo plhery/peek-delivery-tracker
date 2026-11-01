@@ -92,7 +92,7 @@ Numerį, kuris atrodo kaip `V00000E0000000`, [Peek](/) pagal formą iškart pris
 
 Siuntos numerio iš 7–10 skaitmenų Peek pagal formą „Venipak“ nepriskiria ir „Venipak“ apie jį neklausia. Vis tiek jį įklijuokite – Peek seka daugiau nei 3 500 vežėjų – ir pasirinkite „Venipak“ per „Change“ (jau pridėtai siuntai – per „Change carrier“) arba įklijuokite „Venipak“ sekimo nuorodą su šiuo numeriu. Jei siuntoje kelios pakuotės, Peek paprašys kiekvieną pridėti su jos pakuotės numeriu.
 
-Peek klausia pačios „Venipak“ ir rodo jos žingsnius su data ir laiku: būsenas angliškai, kaip lentelėje aukščiau, terminalą, taip pat paštomatą ar atsiėmimo punktą (su miestu), kuriame siunta laukia ar iš kurio buvo atsiimta. Numatomos pristatymo dienos ir svorio „Venipak“ nepateikia, o žemėlapio koordinačių, pakuočių skaičiaus ir gavėjo patikrinimo Peek nerodo. Dieną Peek tikrina kas 10 minučių, o kai siunta išvežta pristatyti – kas 2 minutes, naktį – kas valandą ar dvi. Pasikeitus būsenai Peek gali jums pranešti. Peek negali už jus susisiekti su „Venipak“ ar parduotuve.
+Peek klausia pačios „Venipak“ ir rodo jos žingsnius su data ir laiku: būsenas angliškai, kaip lentelėje aukščiau, terminalą, taip pat paštomatą ar atsiėmimo punktą (su miestu), kuriame siunta laukia ar iš kurio buvo atsiimta. Numatomos pristatymo dienos ir svorio „Venipak“ nepateikia, o žemėlapio koordinačių, pakuočių skaičiaus ir gavėjo patikrinimo Peek nerodo. Peek tikrina kas 10 minučių, o kai siunta išvežta pristatyti – kas 2 minutes. Pasikeitus būsenai Peek gali jums pranešti. Peek negali už jus susisiekti su „Venipak“ ar parduotuve.
 
 ## Dažni klausimai apie „Venipak“ siuntų sekimą
 

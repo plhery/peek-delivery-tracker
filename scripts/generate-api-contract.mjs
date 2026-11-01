@@ -349,7 +349,8 @@ function upperFirst(value) {
 function lowerCamelIdentifier(value) {
   const words = value.split(/[-_]/).filter(Boolean);
   if (words.length === 0 || /^[0-9]/.test(words[0])) {
-    throw new Error(`Cannot generate a Swift identifier for ${value}; name it in swiftEnumCaseNames`);
+    throw new Error(`Cannot make a Swift or Kotlin identifier of ${value}: its first word must start with a letter. `
+      + 'Name an enum value in swiftEnumCaseNames, or give a property another name in contracts/openapi.json');
   }
   return words[0] + words.slice(1).map(upperFirst).join('');
 }
@@ -403,6 +404,23 @@ function swiftReferenceName(reference) {
 
 function swiftEnumCase(schemaName, value) {
   return swiftEnumCaseNames[`${schemaName}.${value}`] ?? swiftPropertyName(spelledEnumValue(value));
+}
+
+/**
+ * An enum's values with the names `caseName` gives them. Two values given one name (2go is spelt
+ * twoGo, as two-go reads) stop the generator, which names both.
+ */
+function distinctEnumCases(schemaName, values, caseName, language) {
+  const valueByName = new Map();
+  return values.map((value) => {
+    const name = caseName(schemaName, value);
+    if (valueByName.has(name)) {
+      throw new Error(`${schemaName} values ${valueByName.get(name)} and ${value} are both named ${name} in ${language}; `
+        + 'name one of them in swiftEnumCaseNames');
+    }
+    valueByName.set(name, value);
+    return { name, value };
+  });
 }
 
 function schemaAllowsNull(schema) {
@@ -491,19 +509,15 @@ function generatedSwiftEnum(schemaName, swiftName, schema) {
   const lines = [
     `enum ${swiftName}: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {`,
   ];
-  for (const value of schema.enum) {
-    const caseName = swiftEnumCase(schemaName, value);
-    lines.push(caseName === value ? `    case ${caseName}` : `    case ${caseName} = ${JSON.stringify(value)}`);
+  for (const { name, value } of distinctEnumCases(schemaName, schema.enum, swiftEnumCase, 'Swift')) {
+    lines.push(name === value ? `    case ${name}` : `    case ${name} = ${JSON.stringify(value)}`);
   }
   lines.push('', '    var id: String { rawValue }', '}');
   return lines;
 }
 
 function generatedSwiftCarrierIdentifier(schema) {
-  const cases = schema.enum.map((value) => ({
-    name: swiftEnumCase('CarrierId', value),
-    value,
-  }));
+  const cases = distinctEnumCases('CarrierId', schema.enum, swiftEnumCase, 'Swift');
   const lines = [
     'struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, Identifiable {',
     '    let rawValue: String',
@@ -657,10 +671,7 @@ function kotlinEnumCase(schemaName, value) {
 }
 
 function kotlinEnumCases(schemaName, values) {
-  const cases = values.map((value) => ({ name: kotlinEnumCase(schemaName, value), value }));
-  const names = new Set(cases.map((item) => item.name));
-  if (names.size !== cases.length) throw new Error(`Two ${schemaName} values share a Kotlin name`);
-  return cases;
+  return distinctEnumCases(schemaName, values, kotlinEnumCase, 'Kotlin');
 }
 
 const kotlinInlineSchemas = new Map();

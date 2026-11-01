@@ -40,7 +40,8 @@ test('reads on past a scraper that is the locked one', (t) => {
   assert.match(run.stderr, /openapi\.json/);
 });
 
-test('names a carrier that starts with a digit for Swift and Kotlin without an entry for it', (t) => {
+/** Runs the generator on the real scraper catalog and contract, with carriers `ids` added to the catalog. */
+function generateWith(t, ids) {
   const root = checkout('0.1.0', '0.1.0');
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const scraper = import.meta.resolve('universal-parcel-scraper');
@@ -48,11 +49,16 @@ test('names a carrier that starts with a digit for Swift and Kotlin without an e
     `import { CARRIER_CATALOG as catalog } from ${JSON.stringify(scraper)};`,
     `export { RECIPIENT_ACTIONS, STAGES } from ${JSON.stringify(scraper)};`,
     'const [carrier] = Object.values(catalog);',
-    "export const CARRIER_CATALOG = { ...catalog, '1688-express': carrier, '007-cargo': carrier };",
+    `export const CARRIER_CATALOG = { ...catalog, ${ids.map((id) => `${JSON.stringify(id)}: carrier`).join(', ')} };`,
   ].join('\n'));
   mkdirSync(path.join(root, 'contracts'));
   cpSync(fileURLToPath(new URL('../contracts/openapi.json', import.meta.url)), path.join(root, 'contracts', 'openapi.json'));
   const run = spawnSync(process.execPath, [path.join(root, 'scripts', 'generate-api-contract.mjs')], { encoding: 'utf8' });
+  return { root, run };
+}
+
+test('names a carrier that starts with a digit for Swift and Kotlin without an entry for it', (t) => {
+  const { root, run } = generateWith(t, ['1688-express', '007-cargo']);
   assert.equal(run.status, 0, run.stderr);
   const swift = readFileSync(path.join(root, 'ios', 'PeekDeliveryTracker', 'GeneratedAPIContract.swift'), 'utf8');
   const kotlin = readFileSync(path.join(root, 'android', 'core', 'src', 'main', 'kotlin', 'com', 'plhery', 'peekdeliverytracker',
@@ -61,4 +67,18 @@ test('names a carrier that starts with a digit for Swift and Kotlin without an e
   assert.match(swift, /static let zeroZeroSevenCargo = CarrierID\(rawValue: "007-cargo"\)/);
   assert.match(kotlin, /val OneThousandSixHundredEightyEightExpress = CarrierId\("1688-express"\)/);
   assert.match(kotlin, /val ZeroZeroSevenCargo = CarrierId\("007-cargo"\)/);
+});
+
+test('stops on two carriers given one Swift and Kotlin name, naming both, and writes nothing', (t) => {
+  const { run } = generateWith(t, ['2go', 'two-go']);
+  assert.notEqual(run.status, 0);
+  assert.match(run.stderr, /CarrierId values 2go and two-go are both named twoGo in Swift; name one of them in swiftEnumCaseNames/);
+  assert.doesNotMatch(run.stdout, /Wrote/);
+});
+
+test('says how to name a carrier whose first word starts with a digit after a separator', (t) => {
+  const { run } = generateWith(t, ['-9lives']);
+  assert.notEqual(run.status, 0);
+  assert.match(run.stderr, /Cannot make a Swift or Kotlin identifier of -9lives: its first word must start with a letter\. Name an enum value in swiftEnumCaseNames/);
+  assert.doesNotMatch(run.stdout, /Wrote/);
 });

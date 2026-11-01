@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui
 
 import android.accessibilityservice.AccessibilityService
+import android.app.Activity
 import android.app.Instrumentation
 import android.content.Intent
 import android.content.res.Configuration
@@ -22,6 +23,7 @@ import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.unit.Density
 import androidx.core.content.IntentCompat
@@ -34,17 +36,27 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
+import com.plhery.peekdeliverytracker.ui.deliveries.DEVICE_ACCOUNT_ROW
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ACCOUNT_DATA
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ALERT
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ALERT_ACTION
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ALERT_CANCEL
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ALERT_FIELD
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELETE
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_EMAIL
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_EMAIL_EXAMPLE
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_UPDATES
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_EXPORT
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_FEEDBACK
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_FORGET_ALL
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_HOME_PAGE
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SIGN_IN
 import com.plhery.peekdeliverytracker.ui.settings.appearanceTag
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
@@ -68,7 +80,10 @@ import org.junit.runner.RunWith
  * reader@example.com on fake deliveries, which reach no server: opened from the account button; the data page pushed
  * and the system's back taking it off; the appearance set to dark, the window following it, and back to light; the
  * delete alert with the keyboard up on its field and the address typed; the export handed to the system's share sheet,
- * which the back closes. Each saved as settings/<test>.png in the test package's external files, which adb pulls.
+ * which the back closes; a guest's offers of an account, in the list (A-S19) and in Settings, and the question before
+ * the parcels are forgotten; Delivery updates pushed, with the delivery email and its example; the home page and the
+ * feedback mail handed to the system, kept from opening. Each saved as settings/<test>.png in the test package's
+ * external files, which adb pulls.
  * Under Reduce Motion, as the other device tests are. Each test puts back the appearance it found and deletes the
  * export it made; the preferences files the fakes write go once its window has.
  */
@@ -109,12 +124,18 @@ class SettingsDeviceTest {
     }
 
     /**
-     * The reader's deliveries, edge to edge as the app's window, whose keyboard resizes its room (`adjustResize`), and
-     * whose theme and bars follow the appearance as MainActivity's do; Settings opened from the account button.
+     * The deliveries of [session] (the reader's unless said), edge to edge as the app's window, whose keyboard resizes
+     * its room (`adjustResize`), and whose theme and bars follow the appearance as MainActivity's do; Settings opened
+     * from the account button where [open]. [prepare] sets the fakes up before the window shows them.
      */
-    private fun show(fontScale: Float = 1f) {
+    private fun show(
+        fontScale: Float = 1f,
+        session: AuthenticationState = reader,
+        open: Boolean = true,
+        prepare: FakeDeliveries.() -> Unit = {},
+    ) {
         store.set(AppAppearance.Light)
-        source = FakeDeliveries(DemoCards.parcels(), reader)
+        source = FakeDeliveries(DemoCards.parcels(), session).apply(prepare)
         compose.waitsForMaps()
         compose.runOnUiThread {
             val window = compose.activity.window
@@ -130,13 +151,38 @@ class SettingsDeviceTest {
             }
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
-                RootHost(state = reader, dark = dark, reduceMotion = true, source = source)
+                RootHost(state = session, dark = dark, reduceMotion = true, source = source)
             }
         }
         compose.waitForIdle()
+        if (open) openSettings()
+    }
+
+    private fun openSettings() {
         compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
         compose.waitUntil(5_000) { exists(SETTINGS_SHEET) }
         awaitStill()
+    }
+
+    /**
+     * [body] with the views the app asks the system for (a page in the browser, a mail) kept here and not started, so
+     * nothing leaves the device and no browser covers the window; it reads what was asked.
+     */
+    private fun keepingViews(body: (asked: () -> List<Intent>) -> Unit) {
+        val asked = mutableListOf<Intent>()
+        val monitor = object : Instrumentation.ActivityMonitor() {
+            override fun onStartActivity(intent: Intent): Instrumentation.ActivityResult? {
+                if (intent.action != Intent.ACTION_VIEW && intent.action != Intent.ACTION_SENDTO) return null
+                synchronized(asked) { asked += intent }
+                return Instrumentation.ActivityResult(Activity.RESULT_CANCELED, null)
+            }
+        }
+        instrumentation.addMonitor(monitor)
+        try {
+            body { synchronized(asked) { asked.toList() } }
+        } finally {
+            instrumentation.removeMonitor(monitor)
+        }
     }
 
     private fun exists(tag: String) = compose.onAllNodesWithTag(tag).fetchSemanticsNodes().isNotEmpty()
@@ -257,6 +303,65 @@ class SettingsDeviceTest {
         shots.take(name.methodName)
         tap(SETTINGS_ALERT_CANCEL)
         assertFalse(source.accountCalls.any { it.startsWith("deleteAccount") })
+    }
+
+    /**
+     * A guest with parcels on the phone: the list's last row offers an account and opens the sign-in (A-S19); Settings
+     * offers one in place of the account row and has no Delivery updates; the data page asks before it forgets them.
+     */
+    @Test
+    fun aGuestIsOfferedAnAccountAndAskedBeforeForgetting() {
+        show(session = AuthenticationState.Welcome, open = false) { isGuest = true }
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("deviceAccount")
+        compose.onNodeWithTag(DEVICE_ACCOUNT_ROW).assertIsDisplayed()
+        awaitStill()
+        shots.take("${name.methodName}-list")
+        compose.onNodeWithTag(DEVICE_ACCOUNT_ROW).performClick()
+        compose.waitForIdle()
+        assertEquals(1, source.signIns)
+        openSettings()
+        compose.onNodeWithTag(SETTINGS_SIGN_IN).assertIsDisplayed()
+        assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
+        shot()
+        tap(SETTINGS_ACCOUNT_DATA)
+        tap(SETTINGS_FORGET_ALL)
+        compose.waitUntil(5_000) { exists(SETTINGS_ALERT) }
+        awaitStill()
+        shots.take("${name.methodName}-forget")
+        tap(SETTINGS_ALERT_CANCEL)
+        assertFalse(exists(SETTINGS_ALERT))
+        assertFalse("forgetDeviceParcels" in source.accountCalls)
+        assertTrue(exists(SETTINGS_FORGET_ALL))
+    }
+
+    /** Delivery updates pushed for a reader with the delivery email; its example asked of the system's browser. */
+    @Test
+    fun deliveryUpdatesShowTheEmailAndItsExample() = keepingViews { asked ->
+        show { signedInWithEmail(choice = false) }
+        tap(SETTINGS_DELIVERY_UPDATES)
+        compose.waitUntil(5_000) { exists(SETTINGS_DELIVERY_EMAIL) }
+        shot()
+        tap(SETTINGS_DELIVERY_EMAIL_EXAMPLE)
+        compose.waitUntil(5_000) { asked().isNotEmpty() }
+        val example = asked().last().data.toString()
+        assertTrue(example, example.startsWith(source.linkBaseUrl) && "/email/example" in example)
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.waitUntil(5_000) { !exists(SETTINGS_DELIVERY_EMAIL) }
+        assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
+    }
+
+    /** The home page and the feedback mail asked of the system, as the device resolves them. */
+    @Test
+    fun theSiteRowsAskTheSystem() = keepingViews { asked ->
+        show()
+        tap(SETTINGS_HOME_PAGE)
+        compose.waitUntil(5_000) { asked().size == 1 }
+        assertEquals(source.homePageUrl, asked()[0].data.toString())
+        tap(SETTINGS_FEEDBACK)
+        compose.waitUntil(5_000) { asked().size == 2 }
+        assertTrue(asked()[1].data.toString().startsWith("mailto:"))
+        assertTrue(onUi { compose.activity.hasWindowFocus() })
+        shot()
     }
 
     /** The export goes to the system's share sheet as a file the chosen app may read; the back closes the sheet. */

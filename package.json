@@ -78,6 +78,7 @@
     "react-dom": "^19.3.0",
     "serwist": "^9.5.13",
     "sharp": "0.35.5",
+    "undici": "^8.12.3",
     "universal-parcel-scraper": "0.895.1-main.4797",
     "web-push": "^3.6.7"
   },

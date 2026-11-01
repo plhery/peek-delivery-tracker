@@ -2,6 +2,7 @@ import 'server-only';
 
 import { AdapterRegistry, TrawlClient, REGISTRY, type AdapterEnvironment } from 'universal-parcel-scraper/node';
 import { hostStepRecorder } from './stepRecorder';
+import { trackingProxyFetcher } from './trackingProxy';
 
 /**
  * The environment this server hands to every carrier adapter: the private
@@ -11,6 +12,7 @@ import { hostStepRecorder } from './stepRecorder';
  */
 export function hostAdapterEnvironment(env: Record<string, string | undefined> = process.env): AdapterEnvironment {
   return {
+    fetcher: trackingProxyFetcher(env),
     trawl: TrawlClient.fromEnvironment(env),
     browserExecutablePath: env.TRACKING_CHROMIUM_PATH?.trim() || null,
     recorder: hostStepRecorder(),

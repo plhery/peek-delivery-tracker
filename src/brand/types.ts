@@ -509,7 +509,10 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'tpl-rider'
   | 'union-express'
   | 'uof-express'
-  | 'yingtu';
+  | 'yingtu'
+  | 'rtt'
+  | 'cupost'
+  | 'cargo-expreso';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

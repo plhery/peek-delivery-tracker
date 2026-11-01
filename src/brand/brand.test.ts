@@ -585,6 +585,9 @@ describe('carrier brand', () => {
       'union-express',
       'uof-express',
       'yingtu',
+      'rtt',
+      'cupost',
+      'cargo-expreso',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

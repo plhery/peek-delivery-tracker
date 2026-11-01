@@ -474,6 +474,9 @@
   "canpar": {
     "decal": "canpar"
   },
+  "cargo-expreso": {
+    "decal": "cargo-expreso"
+  },
   "cargobus": {
     "decal": "cargobus"
   },
@@ -756,6 +759,9 @@
   },
   "cttyex": {
     "decal": "cttyex"
+  },
+  "cupost": {
+    "decal": "cupost"
   },
   "custom-companies": {
     "decal": "custom-companies",
@@ -2837,6 +2843,9 @@
   },
   "rrs-logistics": {
     "decal": "rrs-logistics"
+  },
+  "rtt": {
+    "decal": "rtt"
   },
   "runner-express": {
     "decal": "runner-express"

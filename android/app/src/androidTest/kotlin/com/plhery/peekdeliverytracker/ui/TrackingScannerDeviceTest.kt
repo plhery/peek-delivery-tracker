@@ -5,26 +5,30 @@ import android.content.pm.PackageManager
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
+import androidx.camera.core.CameraInfo
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.CameraState
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.remember
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.AppContainer
+import com.plhery.peekdeliverytracker.PeekApplication
 import com.plhery.peekdeliverytracker.core.AuthenticationState
-import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
+import com.plhery.peekdeliverytracker.ui.deliveries.ADD_BUTTON
+import com.plhery.peekdeliverytracker.ui.deliveries.ADD_PARCEL
+import com.plhery.peekdeliverytracker.ui.deliveries.ADD_SCAN
+import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
+import com.plhery.peekdeliverytracker.ui.deliveries.EMPTY_SCAN
 import com.plhery.peekdeliverytracker.ui.deliveries.SCANNER
 import com.plhery.peekdeliverytracker.ui.deliveries.SCANNER_CANCEL
-import com.plhery.peekdeliverytracker.ui.deliveries.TrackingScannerCover
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import org.junit.Assume.assumeTrue
 import org.junit.Before
@@ -33,21 +37,31 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * The label scanner over the tabs on this device's back camera (B-S32), which the JVM tests stand in for with a fake:
- * the camera allowed, its preview streams under the bar, and Cancel takes the scanner down and lets the camera go.
- * Skipped on a device without a camera on its back. On the emulator, its virtual scene stands in front of the camera.
+ * The label scanner over Add on this device's back camera (B-S32), which the JVM tests stand in for with a fake: on the
+ * app's own stores, as a guest, the list's Scan barcode opens Add and its scanner, the camera allowed streams under the
+ * bar, and Cancel takes the scanner down to Add and closes the camera; Add's own scan button does the same. Skipped on a
+ * device without a camera on its back. On the emulator, its virtual scene stands in front of the camera.
  */
 @RunWith(AndroidJUnit4::class)
 class TrackingScannerDeviceTest {
     @get:Rule
     val compose = createAndroidComposeRule<ComponentActivity>()
 
+    private val instrumentation = InstrumentationRegistry.getInstrumentation()
+    private lateinit var container: AppContainer
+    private lateinit var back: CameraInfo
+
     @Before
     fun aBackCameraAllowed() {
-        val instrumentation = InstrumentationRegistry.getInstrumentation()
         val context = instrumentation.targetContext
         assumeTrue("No camera on the back", context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA))
         instrumentation.uiAutomation.grantRuntimePermission(context.packageName, Manifest.permission.CAMERA)
+        val app = context.applicationContext as PeekApplication
+        compose.runOnUiThread { app.makeContainer() }
+        compose.waitUntil(20_000) { app.container.value != null }
+        container = checkNotNull(app.container.value)
+        val cameras = ProcessCameraProvider.getInstance(context).get()
+        back = cameras.availableCameraInfos.first { it.lensFacing == CameraSelector.LENS_FACING_BACK }
     }
 
     /** The preview in the window, if any. */
@@ -63,21 +77,45 @@ class TrackingScannerDeviceTest {
         else -> null
     }
 
+    private fun exists(tag: String) = compose.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+
+    private fun camera(): CameraState.Type? {
+        var type: CameraState.Type? = null
+        compose.runOnUiThread { type = back.cameraState.value?.type }
+        return type
+    }
+
+    /** The scanner up with the camera streaming in it; Cancel takes it down to Add, and the camera closes. */
+    private fun streamsThenCancels() {
+        compose.waitUntil(10_000) { exists(SCANNER) }
+        compose.waitUntil(10_000) { preview()?.previewStreamState?.value == PreviewView.StreamState.STREAMING }
+        compose.waitUntil(5_000) { camera() == CameraState.Type.OPEN }
+        compose.onNodeWithTag(SCANNER_CANCEL).performClick()
+        compose.waitUntil(5_000) { !exists(SCANNER) }
+        compose.waitUntil(5_000) { preview() == null }
+        compose.waitUntil(5_000) { camera() == CameraState.Type.CLOSED }
+        check(exists(ADD_PARCEL))
+    }
+
     @Test
-    fun theCameraStreamsUnderTheBarAndCancelTakesTheScannerDown() {
-        val localizer = Localizer(AppLanguage.En, variant = "android")
-        var up by mutableStateOf(true)
+    fun theListsScanAndAddsOwnOpenTheCameraOverAddAndCancelClosesIt() {
         compose.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
-                PeekRoot(AuthenticationState.Welcome, localizer, onView = {}, scanner = CameraLabelScanner) {
-                    Box(Modifier.fillMaxSize())
-                    TrackingScannerCover(visible = up, onScan = { up = false }, onCancel = { up = false })
+                PeekRoot(AuthenticationState.Welcome, container.localizer, onView = {}, scanner = CameraLabelScanner) {
+                    DeliveriesTab(remember { ContainerDeliveries(container) })
                 }
             }
         }
-        compose.waitUntil(10_000) { preview()?.previewStreamState?.value == PreviewView.StreamState.STREAMING }
-        compose.onNodeWithTag(SCANNER_CANCEL).performClick()
-        compose.waitUntil(5_000) { compose.onAllNodesWithTag(SCANNER).fetchSemanticsNodes().isEmpty() }
-        compose.waitUntil(5_000) { preview() == null }
+        compose.waitUntil(10_000) { exists(EMPTY_SCAN) || exists(ADD_BUTTON) }
+        // The empty list's Scan barcode opens Add scanning; a list with parcels has only the bar's +.
+        if (exists(EMPTY_SCAN)) {
+            compose.onNodeWithTag(EMPTY_SCAN).performClick()
+            streamsThenCancels()
+        } else {
+            compose.onNodeWithTag(ADD_BUTTON).performClick()
+            compose.waitUntil(5_000) { exists(ADD_SCAN) }
+        }
+        compose.onNodeWithTag(ADD_SCAN).performClick()
+        streamsThenCancels()
     }
 }

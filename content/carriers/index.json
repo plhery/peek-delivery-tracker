@@ -216,5 +216,6 @@
   { "id": "dpd-nl", "catalog": "dpd-nl", "name": "DPD Netherlands", "languages": ["en"] },
   { "id": "dpd-at", "catalog": "dpd-at", "name": "DPD Austria", "languages": ["en"] },
   { "id": "ozon-logistics", "catalog": "ozon-logistics", "name": "Ozon", "languages": ["en"] },
-  { "id": "citymail", "catalog": "citymail", "name": "CityMail", "languages": ["en"] }
+  { "id": "citymail", "catalog": "citymail", "name": "CityMail", "languages": ["en"] },
+  { "id": "dayone", "catalog": "dayone", "name": "DayOne", "languages": ["en"] }
 ]

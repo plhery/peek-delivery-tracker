@@ -1752,6 +1752,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CityMail tracking: numbers, statuses and delivery in Sweden",
       "name": "CityMail",
       "color": "#fc4c02"
+    },
+    {
+      "id": "dayone",
+      "catalog": "dayone",
+      "slug": "dayone-tracking",
+      "title": "DayOne tracking: DOT numbers, statuses and who delivers",
+      "name": "DayOne",
+      "color": "#e86d1c"
     }
   ],
   "de": [

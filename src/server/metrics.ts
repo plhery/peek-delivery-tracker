@@ -45,6 +45,8 @@ interface PrometheusRuntime {
   lookupTotal: Counter<'carrier' | 'final_step' | 'outcome' | 'attempts' | 'reason'>;
   fallbackTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason'>;
   recoveryTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason' | 'outcome'>;
+  browserNetworkTotal: Counter<'carrier' | 'attempt' | 'route' | 'family' | 'outcome' | 'history' | 'partial'>;
+  browserNetworkDuration: Histogram<'carrier' | 'attempt' | 'route' | 'outcome'>;
   fedexNetworkTotal: Counter<'attempt' | 'route' | 'family' | 'outcome' | 'history'>;
   fedexNetworkDuration: Histogram<'attempt' | 'route' | 'outcome'>;
   statusMappingTotal: Counter<'carrier' | 'stage_source'>;
@@ -125,6 +127,17 @@ function createRuntime(): PrometheusRuntime {
       help: 'Completed recovery steps by their triggering failure and resulting outcome.',
       labelNames: ['carrier', 'from_step', 'to_step', 'reason', 'outcome'] as const,
       registers: [registry],
+    }),
+    browserNetworkTotal: new Counter({
+      name: 'browser_network_attempt_total',
+      help: 'Opt-in browser route trial outcomes by carrier and observed connection family.',
+      labelNames: ['carrier', 'attempt', 'route', 'family', 'outcome', 'history', 'partial'] as const, registers: [registry],
+    }),
+    browserNetworkDuration: new Histogram({
+      name: 'browser_network_attempt_duration_seconds',
+      help: 'Opt-in browser route attempt time by carrier and selected route.',
+      labelNames: ['carrier', 'attempt', 'route', 'outcome'] as const,
+      buckets: [1, 3, 5, 10, 20, 30, 45, 60], registers: [registry],
     }),
     fedexNetworkTotal: new Counter({
       name: 'fedex_network_attempt_total',
@@ -361,6 +374,16 @@ export const prometheusStepRecorder: StepRecorder = {
       () => runtime.stepDuration.observe(timing, record.durationMs / 1000));
     count(runtime.stepTotal, METRICS.stepTotal, { ...timing, error_type: record.errorType ?? 'none',
       reason: carrierErrorReason(record.error) ?? 'none' });
+    if (record.networkRoute && (record.networkAttempt === 'initial' || record.networkAttempt === 'retry')) {
+      const labels = { carrier: record.carrier, attempt: record.networkAttempt,
+        route: record.networkRoute === 'ipv6' || record.networkRoute === 'residential' ? record.networkRoute : 'default',
+        outcome: timing.outcome };
+      const family = record.networkFamily === 'IPv6' ? 'ipv6' : record.networkFamily === 'IPv4' ? 'ipv4' : 'unknown';
+      count(runtime.browserNetworkTotal, 'browser_network_attempt_total', { ...labels, family, partial: timing.outcome === 'ok' && record.historyPartial === true ? 'yes' : 'no',
+        history: timing.outcome === 'ok' && record.historyAvailable === true ? 'yes' : 'no' });
+      afterFirstScrape('browser_network_attempt_duration_seconds' + JSON.stringify(labels),
+        () => runtime.browserNetworkDuration.zero(labels), () => runtime.browserNetworkDuration.observe(labels, record.durationMs / 1000));
+    }
     if (record.carrier === 'fedex' && record.step === 'trawl' && record.networkRoute) {
       const labels = {
         attempt: record.fallbackFrom === 'trawl' ? 'retry' : 'initial',

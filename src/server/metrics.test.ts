@@ -50,6 +50,20 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('fedex_network_attempt_total{attempt="initial",route="ipv6",outcome="ok",family="ipv6",history="yes"} 1');
   });
 
+  it('compares native residential recoveries with normal recoveries without inferring IP family', async () => {
+    const record = { carrier: 'poste-italiane', step: 'browser', attempt: 3, outcome: 'ok', errorType: null,
+      durationMs: 2000, fallbackFrom: 'trawl', fallbackReason: 'challenge', fallbackErrorType: 'ChallengeError',
+      networkAttempt: 'retry', networkRoute: 'residential', networkFamily: 'unknown', historyAvailable: true, historyPartial: true } as const;
+    metrics.prometheusStepRecorder.step(record);
+    metrics.prometheusStepRecorder.step({ ...record, networkRoute: 'default', historyAvailable: false, historyPartial: false });
+    metrics.prometheusStepRecorder.step({ ...record, outcome: 'transport' });
+    const text = await scraped();
+    expect(text).toContain('browser_network_attempt_total{carrier="poste-italiane",attempt="retry",route="residential",outcome="ok",family="unknown",partial="yes",history="yes"} 1');
+    expect(text).toContain('browser_network_attempt_total{carrier="poste-italiane",attempt="retry",route="default",outcome="ok",family="unknown",partial="no",history="no"} 1');
+    expect(text).toContain('browser_network_attempt_total{carrier="poste-italiane",attempt="retry",route="residential",outcome="transport",family="unknown",partial="no",history="no"} 1');
+    expect(text).toContain('browser_network_attempt_duration_seconds_count{carrier="poste-italiane",attempt="retry",route="residential",outcome="ok"} 1');
+  });
+
   it('records steps, fallbacks and lookups with low-cardinality labels', async () => {
     metrics.prometheusStepRecorder.step({
       carrier: 'ups', step: 'direct', attempt: 1, outcome: 'challenge', errorType: 'ChallengeError', durationMs: 250,

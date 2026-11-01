@@ -73,6 +73,13 @@ the recipient, so only its kind and SMTP status are logged and reported. The tok
 unsubscribe link is the right to switch an account's email: `/api/email/unsubscribe` is
 logged without its query, and its error reports leave the request out.
 
+Opt-in browser route trials emit `browser_network_attempt_total` and
+`browser_network_attempt_duration_seconds`, split by carrier, initial/retry, route and
+outcome. The counter separates dated history from a successful empty result and records
+partial-history flag and verified IP family; a residential proxy selection alone leaves family unknown. Compare
+retry arms within the same window, including their denominators and failures. The existing
+FedEx counters remain available. Proxy credentials and addresses never enter these series.
+
 ## Postgres audit
 
 All tables and views here are service-role only.

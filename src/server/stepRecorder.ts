@@ -73,7 +73,7 @@ export const sentryStepRecorder: StepRecorder = {
         attempt: record.attempt, fallback_from: record.fallbackFrom ?? undefined,
         fallback_reason: record.fallbackReason ? stepOutcome(record.fallbackReason, record.fallbackError) : undefined,
         ...(record.networkRoute ? { network_route: record.networkRoute,
-          network_family: record.networkFamily ?? 'unknown', history_available: record.historyAvailable === true } : {}),
+          network_attempt: record.networkAttempt, network_family: record.networkFamily ?? 'unknown', history_available: record.historyAvailable === true, history_partial: record.historyPartial === true } : {}),
         ...failure(attributes.outcome, record.error),
       });
     } catch { /* Preserve the result even if logging fails. */ }

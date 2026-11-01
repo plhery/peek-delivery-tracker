@@ -1,8 +1,9 @@
 // Grafana's HTTP API, reached through curl inside the Grafana container, over ssh, so the admin
 // credentials never leave it. GRAFANA_SSH_HOST and GRAFANA_CONTAINER name the host and container.
-// The credentials reach curl as a config line on its stdin, which the shell's printf builtin
-// writes, so they are in no command line either (the host's ps lists the container's processes);
-// a request's body comes on file descriptor 3.
+// The credentials reach curl as a config line through a pipe on file descriptor 3, which the
+// shell's printf builtin feeds, so they are in no command line either (the host's ps lists the
+// container's processes); a request's body stays on stdin, which curl reads without opening a
+// path (/dev/fd cannot reopen a socket, as stdin can be).
 import { spawnSync } from 'node:child_process';
 
 function required(name) {
@@ -27,13 +28,14 @@ const CREDENTIALS = String.raw`printf '%s:%s' "$GF_SECURITY_ADMIN_USER" "$GF_SEC
 
 export function grafana(method, apiPath, body, { allowMissing = false } = {}) {
   const curl = [
-    'exec 3<&0;',
+    'exec 4<&0;',
     CREDENTIALS,
-    '| curl --config - -sS -w "\\n%{http_code}"',
+    '| curl --config /dev/fd/3 -sS -w "\\n%{http_code}"',
     `-X ${method}`,
     "-H 'Content-Type: application/json'",
-    body === undefined ? '' : '--data-binary @/dev/fd/3',
+    body === undefined ? '' : '--data-binary @-',
     quote(`http://localhost:3000${apiPath}`),
+    '3<&0 <&4',
   ].join(' ');
   const output = ssh(`sudo -n docker exec -i ${quote(required('GRAFANA_CONTAINER'))} sh -c ${quote(curl)}`,
     body === undefined ? '' : JSON.stringify(body)).trimEnd();

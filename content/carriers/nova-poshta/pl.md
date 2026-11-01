@@ -22,6 +22,7 @@ Nova Post nie publikuje długości ani formatu numeru. Jej polska strona śledze
 | --- | --- |
 | `20400000000000` | 14 cyfr zaczynających się od 204, 206, 207, 208, 590 albo 595 |
 | `51000000000000` | 14 cyfr zaczynających się od 21 albo 51 |
+| `SHPL0000000000` | numer międzynarodowy Nova Post: SH albo TN, dwuliterowy kod kraju i 10 cyfr, czasem z RS na początku |
 
 Podobne numery, które nie są Nova Post:
 
@@ -89,7 +90,7 @@ Stan na 22 października 2026, według stron Nova Post:
 
 ## Śledzenie paczki Nova Poshta w Peek
 
-Te same kształty numerów mają inne firmy, więc po samym numerze [Peek](/) nie wskaże Nova Poshta. Pyta za to przewoźników, którzy takich numerów używają, a wśród nich Nova Poshta: od razu, jeśli szukasz z Ukrainy albo numer zaczyna się od 595000, a w innym wypadku dopiero wtedy, gdy pierwsi przewoźnicy go nie znają. Jeśli Nova Poshta zna numer, zobaczysz „Nova Poshta (Ukraine) ma tę przesyłkę.”. Jeśli nie, naciśnij „Zmień” i wybierz „Nova Poshta (Ukraine)” albo wklej link do śledzenia z novaposhta.ua. Linków z novapost.com Peek nie odczytuje: wklej sam numer. Peek śledzi ukraińskie listy przewozowe, także nadane w oddziałach Nova Post za granicą. Numery Nova Global z `NPG` na końcu to osobny przewoźnik, którego Peek rozpoznaje po samym numerze.
+Te same kształty numerów mają inne firmy, więc po samym numerze [Peek](/) nie wskaże Nova Poshta. Pyta za to przewoźników, którzy takich numerów używają, a wśród nich Nova Poshta: od razu, jeśli szukasz z Ukrainy albo numer zaczyna się od 595000, a w innym wypadku dopiero wtedy, gdy pierwsi przewoźnicy go nie znają. Jeśli Nova Poshta zna numer, zobaczysz „Nova Poshta (Ukraine) ma tę przesyłkę.”. Jeśli nie, naciśnij „Zmień” i wybierz „Nova Poshta (Ukraine)” albo wklej link do śledzenia z novaposhta.ua lub novapost.com. Peek śledzi ukraińskie listy przewozowe, także nadane w oddziałach Nova Post za granicą, i międzynarodowe numery Nova Post zaczynające się od SH albo TN. Numery Nova Global z `NPG` na końcu to osobny przewoźnik, którego Peek rozpoznaje po samym numerze.
 
 Pokazuje angielskie komunikaty Nova Poshta, na przykład `Arrived at the branch 12` zamiast polskiego „Dotarła do oddziału”. Widzisz miasto każdego skanu na mapie, przewidywane dotarcie do oddziału lub pod drzwi, wagę, wymiary pojedynczej paczki, oddział lub automat, w którym czeka, kraj docelowy i godzinę doręczenia. Nazwisk, adresów i płatności nie pokazuje. Gdy przesyłka eksportowa wymienia partnera za granicą, [UPS](carrier:ups) albo GoFo Express, Peek może przejść za nią do tego przewoźnika. Sprawdza śledzenie co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu, i powiadomi Cię o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Nie skontaktuje się za Ciebie z Nova Post ani nie złoży reklamacji.
 

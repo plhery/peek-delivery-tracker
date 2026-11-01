@@ -1696,6 +1696,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "nox NachtExpress tracking: statuses, drop-off and contact",
       "name": "nox",
       "color": "#fadb00"
+    },
+    {
+      "id": "far-international",
+      "catalog": "far-international",
+      "slug": "far-international-tracking",
+      "title": "FAR International tracking: numbers, statuses and contact",
+      "name": "FAR International",
+      "color": "#003b75"
     }
   ],
   "de": [

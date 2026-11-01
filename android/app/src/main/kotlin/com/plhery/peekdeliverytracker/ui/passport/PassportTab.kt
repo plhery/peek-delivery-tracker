@@ -247,6 +247,8 @@ internal fun PassportTab(source: DeliveriesSource) {
         AccountBar(
             localized("passport.title"), rowTop, start, end, backdrop, source.session,
             onAccount = { state.account(settingsAsForm) }, accountTag = PASSPORT_ACCOUNT_BUTTON,
+            // Nothing across a fold standing half open: the title over the first page, as the tab bar keeps clear of it.
+            titleWidth = hinge?.let { with(density) { it.start.toDp() } },
         )
         Announcements(state.announcement, PASSPORT_ANNOUNCEMENT, state::announced)
     }

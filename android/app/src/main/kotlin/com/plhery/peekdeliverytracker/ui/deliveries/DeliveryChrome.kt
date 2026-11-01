@@ -285,7 +285,8 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
 
 /**
  * A tab's bar with only its inline title and `AccountToolbarItem`, placed as the list's bar places them
- * ([ListToolbar]): the passport's, whose account button, tagged [accountTag], opens its own Settings.
+ * ([ListToolbar]): the passport's, whose account button, tagged [accountTag], opens its own Settings. Where a fold
+ * stands half open [titleWidth] from the window's leading edge, the title centres over that first half, clear of it.
  */
 @Composable
 internal fun AccountBar(
@@ -298,14 +299,21 @@ internal fun AccountBar(
     onAccount: () -> Unit,
     accountTag: String,
     modifier: Modifier = Modifier,
+    titleWidth: Dp? = null,
 ) {
     Box(modifier.fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
+        val place = if (titleWidth != null) {
+            Modifier.align(Alignment.CenterStart).width(titleWidth).padding(start = start + FOLD_TITLE_MARGIN, end = FOLD_TITLE_MARGIN)
+        } else {
+            Modifier.align(Alignment.Center).padding(start = start + 128.dp, end = end + 128.dp)
+        }
         ProvideDynamicTypeSize(DynamicTypeSize.Large) {
             Text(
                 title,
-                Modifier.align(Alignment.Center).padding(start = start + 128.dp, end = end + 128.dp).semantics { heading() },
+                place.semantics { heading() },
                 color = PeekTheme.colors.label,
                 style = PeekTheme.type.headline,
+                textAlign = TextAlign.Center,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -319,6 +327,9 @@ internal fun AccountBar(
         }
     }
 }
+
+/** How far an [AccountBar]'s title keeps from the edges of the half before a fold. */
+private val FOLD_TITLE_MARGIN = 16.dp
 
 /** The list's account button, which opens Settings over the deliveries ([DeliveriesState.account]). */
 @Composable

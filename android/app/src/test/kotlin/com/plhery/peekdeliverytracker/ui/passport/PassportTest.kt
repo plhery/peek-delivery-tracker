@@ -19,6 +19,7 @@ import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
@@ -487,6 +488,9 @@ class PassportTest {
         val middle = 673.dp / 2
         assertTrue("${bounds(PASSPORT_COVER)}", bounds(PASSPORT_COVER).right <= middle)
         assertTrue("${bounds(PASSPORT_AVERAGE)}", bounds(PASSPORT_AVERAGE).left >= middle)
+        // The bar's title over the first page, clear of the fold.
+        val title = compose.onNode(hasText("Passport") and isHeading(), useUnmergedTree = true).getBoundsInRoot()
+        assertTrue("$title", title.right <= middle)
         assertTrue(popover()!!.startsWith("First arrival"))
         assertEquals(12, stamps().size)
     }

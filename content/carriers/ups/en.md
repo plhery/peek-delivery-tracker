@@ -15,7 +15,6 @@ The shop that sent the parcel gives you the number, usually in its shipping emai
 | Shape (invented) | What it is |
 | --- | --- |
 | `1Z1234567812345674` | UPS's parcel number: `1Z` and 16 letters and digits, 18 characters in all. The last digit is a check digit worked out from the 15 characters before it. |
-| `H1234567890` | A letter (H, J, K or V) and 10 digits. It can be a UPS number, but other carriers use the same shape. |
 
 ## What UPS tracking statuses mean, including Exception
 

@@ -15,7 +15,6 @@ Te lo da la tienda que envía el paquete, normalmente en el correo de envío o e
 | Número (inventado) | Qué es |
 | --- | --- |
 | `1Z1234567812345674` | El número de bulto de UPS: `1Z` y 16 letras y cifras, 18 caracteres en total. El último es un dígito de control calculado a partir de los 15 anteriores. |
-| `H1234567890` | Una letra (H, J, K o V) y 10 cifras. Puede ser un número de UPS, pero otras empresas usan la misma forma. |
 
 ## Estados del seguimiento de UPS: qué significa «Exception»
 
@@ -60,7 +59,7 @@ Según la guía de la CNMC sobre los derechos de los usuarios postales, el enví
 
 ## Seguimiento de UPS con Peek
 
-[Peek](/) reconoce UPS al momento con un número `1Z` cuyo dígito de control es correcto. Si no lo es, propone solo UPS, que lo rechaza por estar mal escrito. Puedes pegar también un enlace de ups.com o cualquier enlace que lleve dentro un número `1Z`. A UPS Peek solo le pregunta por números `1Z`: con otras formas, como `H1234567890`, responden únicamente servicios de seguimiento, también después de «Cambiar transportista».
+[Peek](/) reconoce UPS al momento con un número `1Z` cuyo dígito de control es correcto. Si no lo es, propone solo UPS, que lo rechaza por estar mal escrito. Puedes pegar también un enlace de ups.com o cualquier enlace que lleve dentro un número `1Z`. A UPS Peek solo le pregunta por números `1Z`: con otras formas responden únicamente servicios de seguimiento, también después de «Cambiar transportista».
 
 Para leer los datos, el servidor de Peek abre la página de seguimiento de ups.com en un navegador, cada 10 minutos y cada 5 minutos cuando el paquete está en reparto. Si UPS rechaza la consulta, o solo se puede leer el estado, los servicios de seguimiento completan el historial. Ves el estado, cada escaneo en un mapa con su lugar y su hora exacta, el día de entrega previsto (nunca una franja horaria), la hora de entrega, el país de destino y, mientras el paquete espera, el nombre y la dirección del Access Point. Las notificaciones las eliges tú: cada escaneo, los pasos importantes o solo el día de entrega.
 

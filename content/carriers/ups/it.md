@@ -15,7 +15,6 @@ Il numero te lo dà il negozio che spedisce il pacco, di solito nell'e-mail di s
 | Numero (inventato) | Che cos'è |
 | --- | --- |
 | `1Z1234567812345674` | Il numero di collo UPS: `1Z` seguito da 16 lettere e cifre, 18 caratteri in tutto. L'ultima è una cifra di controllo, calcolata sui 15 caratteri che la precedono. |
-| `H1234567890` | Una lettera (H, J, K o V) e 10 cifre. Può essere un numero UPS, ma la stessa forma la usano anche altri corrieri. |
 
 ## Stati del tracking UPS: cosa vuol dire «Exception»
 
@@ -63,7 +62,7 @@ In Italia anche il corriere espresso è un servizio postale: l'AGCOM lo ha scrit
 
 ## Seguire un pacco UPS con Peek
 
-[Peek](/) riconosce subito UPS da un numero `1Z` la cui ultima cifra supera il controllo di UPS. Se non lo supera, propone solo UPS, che lo rifiuta come sbagliato. Da UPS cerca solo numeri `1Z`: se con «Cambia corriere» scegli UPS per un numero come `H1234567890`, rispondono solo servizi di tracking. Puoi incollare i link di ups.com con un numero e qualsiasi link che contenga un numero `1Z`.
+[Peek](/) riconosce subito UPS da un numero `1Z` la cui ultima cifra supera il controllo di UPS. Se non lo supera, propone solo UPS, che lo rifiuta come sbagliato. Da UPS cerca solo numeri `1Z`: se con «Cambia corriere» scegli UPS per un numero di un'altra forma, rispondono solo servizi di tracking. Puoi incollare i link di ups.com con un numero e qualsiasi link che contenga un numero `1Z`.
 
 Per leggere i dati, il suo server apre la pagina di tracciamento di UPS in un browser, ogni 10 minuti e ogni 5 minuti quando il pacco è in consegna. Se UPS rifiuta la richiesta, subentrano servizi di tracking; se riesce a leggere solo il testo della pagina, mostra lo stato e la cronologia arriva da quei servizi. Vedi lo stato, ogni scansione con luogo e ora esatta su una mappa, il giorno di consegna previsto (mai una fascia oraria), l'ora di consegna, il paese di destinazione e, finché il pacco aspetta, nome e indirizzo dell'Access Point. Le notifiche le scegli tu: ogni scansione, solo i passaggi importanti o «Solo la consegna». Non vedi chi ha firmato, il tuo indirizzo, la prova di consegna, il punto dove è stato lasciato né la foto. Peso e mittente UPS non li fornisce.
 

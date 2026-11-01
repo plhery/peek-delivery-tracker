@@ -15,7 +15,6 @@ C'est la boutique qui t'envoie le numéro, en général dans l'e-mail d'expédit
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
 | `1Z1234567812345674` | Le numéro de colis UPS : `1Z` puis 16 lettres et chiffres, 18 caractères en tout. Le dernier chiffre est une clé de contrôle calculée sur les 15 caractères qui le précèdent. |
-| `H1234567890` | Une lettre (H, J, K ou V) et 10 chiffres. Ça peut être un numéro UPS, mais d'autres transporteurs utilisent la même forme. |
 
 ## Statuts du suivi UPS : « Exception », « Out for Delivery » et les autres
 
@@ -64,7 +63,7 @@ Marqué `DELIVERED` mais introuvable ? La page de UPS peut indiquer où le colis
 
 ## Suivre un colis UPS avec Peek
 
-[Peek](/) reconnaît UPS tout de suite pour un numéro `1Z` dont la clé de contrôle est bonne. Si elle est fausse, seul UPS est proposé, et UPS refuse le numéro comme mal saisi. Tu peux aussi coller un lien ups.com, ou n'importe quel lien qui contient un numéro `1Z`. Peek n'interroge UPS qu'avec des numéros `1Z` : les autres formes, comme `H1234567890`, ne sont suivies que par des services de suivi, même après « Changer de transporteur ».
+[Peek](/) reconnaît UPS tout de suite pour un numéro `1Z` dont la clé de contrôle est bonne. Si elle est fausse, seul UPS est proposé, et UPS refuse le numéro comme mal saisi. Tu peux aussi coller un lien ups.com, ou n'importe quel lien qui contient un numéro `1Z`. Peek n'interroge UPS qu'avec des numéros `1Z` : les autres formes ne sont suivies que par des services de suivi, même après « Changer de transporteur ».
 
 Pour lire le suivi, le serveur de Peek ouvre la page de suivi de ups.com dans un navigateur, toutes les 10 minutes, et toutes les 5 minutes une fois le colis en livraison. Si UPS refuse, ou si seul le statut est lisible, des services de suivi complètent l'historique. Tu vois le statut, chaque scan sur une carte avec son lieu et son heure exacte, le jour de livraison prévu (jamais un créneau horaire), l'heure de livraison, le pays de destination et, tant que le colis attend, le nom et l'adresse du point Access Point. Peek peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 

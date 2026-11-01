@@ -55,7 +55,7 @@ After the flight, the rows come from CTTYEX's agent in your country and the netw
 | `Arrive at the last mile sorting and distribution center` | In the delivering network's last-mile sorting centre, near you. |
 | `Leaving the sorting center` | It has left that sorting centre. |
 
-In the US, the last three rows open with the town, state and ZIP code. These are the wordings Peek has recorded from CTTYEX's tracker; any other line, such as a delivery, shows as CTTYEX writes it.
+In the US, the last three rows open with the town, state and ZIP code. These are some of the wordings Peek has recorded from CTTYEX's tracker; any other line, such as a delivery, shows as CTTYEX writes it.
 
 **Every time is Beijing time.** CTTYEX's tracker prints its times without a time zone, but each one is Beijing time (UTC+8), including the scans made in your country. Beijing's date turns at 16:00 UTC. A scan made in the UK or Ireland after 16:00 in winter, or 17:00 in summer, carries the next day's date; in New York, after 11:00 in winter or noon in summer.
 

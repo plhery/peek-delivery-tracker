@@ -15,7 +15,6 @@ Numer dostajesz od sklepu, który wysyła paczkę, zwykle w e-mailu o wysyłce a
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
 | `1Z1234567812345674` | Numer paczki UPS: `1Z` i 16 liter i cyfr, razem 18 znaków. Ostatni znak to cyfra kontrolna wyliczana z 15 znaków przed nią. |
-| `H1234567890` | Litera (H, J, K lub V) i 10 cyfr. To może być numer UPS, ale taki sam kształt mają numery innych przewoźników. |
 
 ## Statusy UPS: co znaczy „Exception” i inne
 
@@ -62,7 +61,7 @@ UPS Polska Sp. z o.o. jest wpisana do rejestru operatorów pocztowych, który pr
 
 ## Śledzenie paczki UPS w Peek
 
-[Peek](/) od razu rozpoznaje UPS po numerze `1Z`, którego ostatnia cyfra przechodzi kontrolę UPS. Jeśli nie przechodzi, proponuje tylko UPS, a UPS odrzuca numer jako błędnie wpisany. W samym UPS sprawdza tylko numery `1Z`. Inne kształty, takie jak `H1234567890`, dostają więc odpowiedź tylko od serwisów śledzenia przesyłek, także po „Zmień przewoźnika”. Możesz wkleić link z ups.com z numerem, a także każdy link, w którym jest numer `1Z`.
+[Peek](/) od razu rozpoznaje UPS po numerze `1Z`, którego ostatnia cyfra przechodzi kontrolę UPS. Jeśli nie przechodzi, proponuje tylko UPS, a UPS odrzuca numer jako błędnie wpisany. W samym UPS sprawdza tylko numery `1Z`. Inne kształty dostają więc odpowiedź tylko od serwisów śledzenia przesyłek, także po „Zmień przewoźnika”. Możesz wkleić link z ups.com z numerem, a także każdy link, w którym jest numer `1Z`.
 
 Serwer Peek otwiera stronę śledzenia ups.com w przeglądarce co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu. Gdy UPS odmówi albo da się odczytać tylko status, historię uzupełniają serwisy śledzenia. Widzisz status, każdy skan z miejscem i dokładną godziną na mapie, planowany dzień doręczenia (nigdy przedział godzin), godzinę doręczenia, kraj docelowy i, dopóki paczka czeka, nazwę i adres punktu Access Point. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zobaczysz tam, kto podpisał, ani Twojego adresu, potwierdzenia doręczenia, miejsca pozostawienia czy zdjęcia. Wagi ani nadawcy UPS nie przekazuje.
 

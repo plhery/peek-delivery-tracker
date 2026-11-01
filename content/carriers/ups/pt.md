@@ -15,7 +15,6 @@ Quem te dá o número é a loja que envia a encomenda, normalmente no e-mail de 
 | Número (inventado) | O que é |
 | --- | --- |
 | `1Z1234567812345674` | O número de encomenda da UPS: `1Z` seguido de 16 letras e algarismos, 18 caracteres ao todo. O último é um algarismo de controlo calculado a partir dos 15 anteriores. |
-| `H1234567890` | Uma letra (H, J, K ou V) seguida de 10 algarismos. Pode ser um número da UPS, mas outras transportadoras usam o mesmo formato. |
 
 ## Estados do UPS tracking: o que quer dizer «Exception»
 
@@ -60,7 +59,7 @@ Para reclamar, o Your Europe aconselha a tentar primeiro resolver o problema dir
 
 ## Seguir uma encomenda UPS com o Peek
 
-O [Peek](/) reconhece logo a UPS num número `1Z` cujo último algarismo passa no controlo da UPS. Se não passar, propõe só a UPS, que o recusa por estar mal escrito. O Peek só procura números `1Z` na UPS: outras formas, como `H1234567890`, ficam para serviços de seguimento, mesmo depois de «Alterar transportadora». Também podes colar um link do ups.com ou qualquer link com um número `1Z`.
+O [Peek](/) reconhece logo a UPS num número `1Z` cujo último algarismo passa no controlo da UPS. Se não passar, propõe só a UPS, que o recusa por estar mal escrito. O Peek só procura números `1Z` na UPS: outras formas ficam para serviços de seguimento, mesmo depois de «Alterar transportadora». Também podes colar um link do ups.com ou qualquer link com um número `1Z`.
 
 O servidor do Peek abre a página de seguimento do ups.com num navegador e lê a resposta, de 10 em 10 minutos e de 5 em 5 minutos quando a encomenda sai para entrega. Se a UPS recusar, ou se só der para ler o estado, serviços de seguimento preenchem o histórico. Vês o estado, cada leitura num mapa com o local e a hora exata, o dia de entrega previsto (nunca uma janela horária), a hora da entrega, o país de destino e, enquanto a encomenda espera, o nome e a morada do Access Point. As notificações escolhes tu: todas as atualizações, só as importantes ou só no dia da entrega.
 

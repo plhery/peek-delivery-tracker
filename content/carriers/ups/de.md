@@ -15,7 +15,6 @@ Die Nummer bekommst du vom Shop, der das Paket verschickt, meist in der Versandb
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
 | `1Z1234567812345674` | UPS' Paketnummer: `1Z` und 16 Buchstaben und Ziffern, 18 Zeichen. Das letzte Zeichen ist eine Prüfziffer, berechnet aus den 15 Zeichen davor. |
-| `H1234567890` | Ein Buchstabe (H, J, K oder V) und 10 Ziffern. Das kann eine UPS-Nummer sein, andere Paketdienste nutzen aber dieselbe Form. |
 
 ## UPS Status: was „Exception“, „Out for Delivery“ und Co. bedeuten
 
@@ -62,7 +61,7 @@ Ist ein verlorenes, gestohlenes oder beschädigtes Paket mit dem Paketdienst nic
 
 ## UPS-Paket mit Peek verfolgen
 
-[Peek](/) erkennt UPS sofort an einer `1Z`-Nummer, deren letzte Ziffer UPS' Prüfung besteht. Fällt sie durch, wird nur UPS angeboten, und UPS lehnt sie als vertippt ab. Bei UPS selbst fragt Peek nur `1Z`-Nummern ab. Andere Formen wie `H1234567890` aus der Tabelle oben gehen deshalb nie an UPS: Wählst du über „Paketdienst ändern“ UPS, liefern nur Tracking-Dienste den Verlauf. Links von ups.com mit einer Nummer kannst du ebenso einfügen wie jeden Link, in dem eine `1Z`-Nummer steckt.
+[Peek](/) erkennt UPS sofort an einer `1Z`-Nummer, deren letzte Ziffer UPS' Prüfung besteht. Fällt sie durch, wird nur UPS angeboten, und UPS lehnt sie als vertippt ab. Bei UPS selbst fragt Peek nur `1Z`-Nummern ab. Andere Formen gehen deshalb nie an UPS: Wählst du über „Paketdienst ändern“ UPS, liefern nur Tracking-Dienste den Verlauf. Links von ups.com mit einer Nummer kannst du ebenso einfügen wie jeden Link, in dem eine `1Z`-Nummer steckt.
 
 Peeks Server öffnet dafür UPS' Tracking-Seite in einem Browser, alle 10 Minuten und ab der Zustellung alle 5 Minuten. Blockt UPS den Abruf oder ist nur der Status lesbar, liefern Tracking-Dienste den Verlauf. Du siehst den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den geplanten Zustelltag (nie ein Zeitfenster), die Zustellzeit, das Zielland und, solange das Paket wartet, Name und Adresse des Access Points. Mitteilungen bekommst du auf Wunsch bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind, wer unterschrieben hat, deine Adresse, der Zustellnachweis, der Ablageort und das Zustellfoto. Gewicht und Absender gibt UPS nicht heraus.
 

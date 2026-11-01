@@ -1616,6 +1616,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GlobalPost tracking: GP numbers and who delivers",
       "name": "GlobalPost",
       "color": "#11003a"
+    },
+    {
+      "id": "cdek",
+      "catalog": "cdek",
+      "slug": "cdek-tracking",
+      "title": "CDEK tracking (СДЭК): order numbers and statuses in English",
+      "name": "CDEK",
+      "color": "#00b33c"
     }
   ],
   "de": [

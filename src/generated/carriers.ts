@@ -1640,6 +1640,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Quantium Solutions tracking: numbers, statuses and help",
       "name": "Quantium Solutions",
       "color": "#00474f"
+    },
+    {
+      "id": "correos-chile",
+      "catalog": "correos-chile",
+      "slug": "correos-chile-tracking",
+      "title": "Correos de Chile tracking: numbers and statuses explained",
+      "name": "Correos de Chile",
+      "color": "#d9232d"
     }
   ],
   "de": [

@@ -1816,6 +1816,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Mainfreight tracking: consignment numbers and statuses",
       "name": "Mainfreight",
       "color": "#005eb8"
+    },
+    {
+      "id": "spx-sg",
+      "catalog": "spx-sg",
+      "slug": "spx-express-singapore-tracking",
+      "title": "SPX Express Singapore tracking: Shopee parcels and statuses",
+      "name": "SPX Express Singapore",
+      "color": "#ee4d2d"
     }
   ],
   "de": [

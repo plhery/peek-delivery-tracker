@@ -224,5 +224,6 @@
   { "id": "j-and-t-cn", "catalog": "j-and-t-cn", "name": "J&T Express China", "languages": ["en"] },
   { "id": "tforce-freight", "catalog": "tforce-freight", "name": "TForce Freight", "languages": ["en"] },
   { "id": "andreani", "catalog": "andreani", "name": "Andreani", "languages": ["en"] },
-  { "id": "mainfreight", "catalog": "mainfreight", "name": "Mainfreight", "languages": ["en"] }
+  { "id": "mainfreight", "catalog": "mainfreight", "name": "Mainfreight", "languages": ["en"] },
+  { "id": "spx-sg", "catalog": "spx-sg", "name": "SPX Express Singapore", "languages": ["en"] }
 ]

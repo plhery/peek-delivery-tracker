@@ -5279,7 +5279,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -17171,7 +17172,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -19417,7 +19419,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -21708,7 +21711,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -23772,7 +23776,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -27431,6 +27436,29 @@
     ]
   },
   {
+    "input": "2205222222221",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tforce-freight",
+      "la-poste",
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "korea-post",
+      "fan-courier"
+    ],
+    "preferred": [
+      "tforce-freight"
+    ],
+    "asked": [
+      "tforce-freight",
+      "la-poste",
+      "delhivery",
+      "fan-courier"
+    ]
+  },
+  {
     "input": "2205249390CHRPRAQ1FR",
     "carrier": "boxtal",
     "confidence": "high",
@@ -29480,7 +29508,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -30412,7 +30441,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -31607,7 +31637,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -40845,7 +40876,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -40974,7 +41006,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -42368,7 +42401,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -44634,7 +44668,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -47767,7 +47802,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -47990,7 +48026,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -48737,7 +48774,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -48807,7 +48845,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -48855,7 +48894,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -49486,7 +49526,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -49496,7 +49537,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -49868,7 +49910,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -51378,7 +51421,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -53050,7 +53094,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -53895,7 +53940,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -54281,7 +54327,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -56362,7 +56409,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -57169,7 +57217,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -60073,7 +60122,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -61440,7 +61490,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -62261,7 +62312,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -62547,7 +62599,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -65061,7 +65114,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -68795,7 +68849,8 @@
     "candidates": [
       "mondial-relay",
       "colisweb",
-      "heppner"
+      "heppner",
+      "tforce-freight"
     ]
   },
   {
@@ -73251,9 +73306,11 @@
     "candidates": [
       "colis-prive",
       "aramex-au",
-      "aramex-nz"
+      "aramex-nz",
+      "chronodiali"
     ],
     "asked": [
+      "chronodiali",
       "colis-prive",
       "aramex-au",
       "aramex-nz"
@@ -96222,6 +96279,9 @@
     "confidence": "low",
     "candidates": [
       "shipglobal-in"
+    ],
+    "asked": [
+      "shipglobal-in"
     ]
   },
   {
@@ -96229,6 +96289,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "shipglobal-in"
+    ],
+    "asked": [
       "shipglobal-in"
     ]
   },
@@ -96238,6 +96301,9 @@
     "confidence": "low",
     "candidates": [
       "shipglobal-in"
+    ],
+    "asked": [
+      "shipglobal-in"
     ]
   },
   {
@@ -96245,6 +96311,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "shipglobal-in"
+    ],
+    "asked": [
       "shipglobal-in"
     ]
   },

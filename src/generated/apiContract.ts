@@ -5744,7 +5744,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
-        "pattern": "^SH(?!O[CPR])[A-Z]{2}\\d{10}$",
+        "pattern": "^(?:RS)?(?:SH(?!O[CPR])|TN)[A-Z]{2}\\d{10}$",
         "confidence": "low"
       }
     ],
@@ -14483,7 +14483,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "tforce-freight",
-      "recognitionRank": 946
+      "recognitionRank": 946,
+      "recognitionPattern": "^(?:\\d{9}|2205\\d{9})$"
     },
     "trackingUrlTemplate": "https://www.tforcefreight.com/ltl/apps/Tracking?proNumbers={trackingNumber}",
     "linkRules": [
@@ -14509,6 +14510,17 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^\\d{9}$",
+        "confidence": "low",
+        "checksum": "mod7"
+      },
+      {
+        "pattern": "^2205\\d{9}$",
+        "confidence": "low",
+        "checksum": "mod7",
+        "preferred": true
+      },
+      {
+        "pattern": "^\\d{8}$",
         "confidence": "low",
         "checksum": "mod7"
       }
@@ -14886,6 +14898,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^FEI[A-Z]{2}\\d{10}YQ$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^FEI[A-Z]{2}\\d{10}[A-Z]{2}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://www.17feia.com/"
@@ -15300,7 +15316,8 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/orderResult\\.html$",
         "params": [
           "nos"
-        ]
+        ],
+        "ownNumbersOnly": true
       }
     ],
     "detectionRules": [
@@ -27602,6 +27619,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^CHPU\\d{19}$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^CD\\d{10}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://chronodiali.ma/suivi_colis.html"
@@ -36474,7 +36495,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "shipglobal-in",
+      "recognitionRank": 758
     },
     "trackingUrlTemplate": "https://shipglobal.in/tracking/?awb={trackingNumber}",
     "linkRules": [
@@ -36671,7 +36693,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "linear-logistics"
     },
     "trackingUrlTemplate": "https://linearlogistics.co.uk/tracking?q={trackingNumber}",
     "linkRules": [
@@ -38091,7 +38113,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "safexpress"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -44127,7 +44149,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jakarta",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rex-indonesia",
+      "recognitionRank": 766
     },
     "trackingUrlTemplate": "https://www.rex.co.id/id/tracking/?airwaybill={trackingNumber}",
     "linkRules": [

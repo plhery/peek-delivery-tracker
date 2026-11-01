@@ -41349,7 +41349,7 @@
       "timezone": "America/New_York",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "global-delivery-network"
       },
       "trackingUrlTemplate": "https://pds.gdnparcel.com/pds_tracking.asp?track={trackingNumber}",
       "linkRules": [
@@ -42197,6 +42197,279 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.valueway.net/main.html"
+    },
+    "banling": {
+      "displayName": "Banling International Logistics",
+      "aliases": [
+        "Banling",
+        "斑羚国际",
+        "斑羚国际物流",
+        "深圳斑羚国际物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#e82d2c",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://banlingwuliu.com/detail/track/transLogistic.html"
+    },
+    "go-world-express": {
+      "displayName": "Go World Express",
+      "aliases": [
+        "行界物流",
+        "Go World",
+        "GoWorld Express"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#f7931e",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.goworldexpress.cn/track.html"
+    },
+    "hye": {
+      "displayName": "HYE International Logistics",
+      "aliases": [
+        "HYE",
+        "HYExpress",
+        "HYEXP",
+        "环洋国际",
+        "环洋国际物流",
+        "嘉兴环洋电商物流服务有限公司"
+      ],
+      "countries": [
+        "CN",
+        "US"
+      ],
+      "color": "#d60010",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tms.hyexp.net/outtrack?companyId=34&companyNo=HYE"
+    },
+    "hzt": {
+      "displayName": "HZT International Logistics",
+      "aliases": [
+        "HZT",
+        "豪泽通",
+        "豪泽通国际物流",
+        "深圳市豪泽通国际物流有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#1cb2ce",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://hztgjwl.com/query/"
+    },
+    "jet-global": {
+      "displayName": "Jet Global Logistics",
+      "aliases": [
+        "Jet Global Express",
+        "Jet Global Logistics Limited",
+        "捷通物流",
+        "捷通物流有限公司"
+      ],
+      "countries": [
+        "MO",
+        "HK"
+      ],
+      "color": "#1160ae",
+      "selectable": true,
+      "timezone": "Asia/Macau",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.jetft.com/tracking.html?order={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "jetft.com",
+            "www.jetft.com"
+          ],
+          "pathPattern": "^/tracking\\.html$",
+          "params": [
+            "order"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.jetft.com/tracking.html"
+    },
+    "jikuaida": {
+      "displayName": "Jikuaida Logistics",
+      "aliases": [
+        "吉快达物流",
+        "吉快达",
+        "湖南省吉快达物流有限公司",
+        "JIKUAIDA LOGISTICS"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#0a3281",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.jikuaida.com/track.html?nums={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "jikuaida.com",
+            "www.jikuaida.com"
+          ],
+          "pathPattern": "^/track\\.html$",
+          "params": [
+            "nums"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.jikuaida.com/track.html"
+    },
+    "shenghang": {
+      "displayName": "Shenghang International Logistics",
+      "aliases": [
+        "盛航国际物流",
+        "盛航国际",
+        "Shenghang",
+        "广州盛航货运代理有限公司",
+        "Guangzhou Shenghang Freight Agent"
+      ],
+      "countries": [
+        "CN",
+        "MY",
+        "SG"
+      ],
+      "color": "#212184",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.shenghanggj.com/checkexpress?act=cx&order_tracking_search={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "shenghanggj.com",
+            "www.shenghanggj.com"
+          ],
+          "pathPattern": "^/checkexpress$",
+          "query": "^(?=(?:.*&)?act=cx(?:&|$))(?:.*&)?order_tracking_search=([^&]+)(?=&|$)"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.shenghanggj.com/checkexpress"
+    },
+    "too-express": {
+      "displayName": "Too Express",
+      "aliases": [
+        "TooExpress",
+        "TOOEXPRESS",
+        "TOO EXPRESS"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#e4564d",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://oms.tooexp.com/tracking.html"
+    },
+    "wangjing-3cq": {
+      "displayName": "Wangjing 3CQ",
+      "aliases": [
+        "3CQ",
+        "旺鲸",
+        "旺鲸3CQ",
+        "旺鲸3CQ跨境物流平台",
+        "深圳旺鲸科技有限公司"
+      ],
+      "countries": [
+        "CN",
+        "BR"
+      ],
+      "color": "#f97317",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.wjdrop.com/tracking/index?nums={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.wjdrop.com"
+          ],
+          "pathPattern": "^/tracking/index$",
+          "params": [
+            "nums"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.wjdrop.com/tracking/index"
+    },
+    "wld-express": {
+      "displayName": "WLD Express",
+      "aliases": [
+        "Wld Express",
+        "万立德",
+        "万立德国际物流",
+        "深圳市万立德国际物流有限公司",
+        "广州市万立德供应链有限公司"
+      ],
+      "countries": [
+        "CN"
+      ],
+      "color": "#3b43c9",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://wld-exp.com/#/baseData/TrackQuery"
     }
   }
 }

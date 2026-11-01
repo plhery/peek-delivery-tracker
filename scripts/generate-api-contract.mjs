@@ -256,6 +256,7 @@ const swiftEnumCaseNames = {
   'CarrierId.139express': 'oneThirtyNineExpress',
   'CarrierId.17feia': 'seventeenFeia',
   'CarrierId.247express': 'twentyFourSevenExpress',
+  'CarrierId.2ebox': 'twoEbox',
   'CarrierId.2go': 'twoGo',
   'CarrierId.360lion': 'threeSixtyLion',
   'CarrierId.360zebra': 'threeSixtyZebra',

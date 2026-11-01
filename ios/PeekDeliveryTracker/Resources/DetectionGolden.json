@@ -72375,14 +72375,10 @@
   },
   {
     "input": "CA315000362UA",
-    "carrier": "intl-post",
+    "carrier": "ukrposhta",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "ukrposhta",
-      "chronopost"
+      "ukrposhta"
     ]
   },
   {
@@ -75071,6 +75067,22 @@
     ],
     "asked": [
       "gofo"
+    ]
+  },
+  {
+    "input": "CR062438499UA",
+    "carrier": "ukrposhta",
+    "confidence": "high",
+    "candidates": [
+      "ukrposhta"
+    ]
+  },
+  {
+    "input": "CR062611988UA",
+    "carrier": "ukrposhta",
+    "confidence": "high",
+    "candidates": [
+      "ukrposhta"
     ]
   },
   {
@@ -86025,6 +86037,14 @@
     "confidence": "high",
     "candidates": [
       "postnord"
+    ]
+  },
+  {
+    "input": "LP064992122UA",
+    "carrier": "ukrposhta",
+    "confidence": "high",
+    "candidates": [
+      "ukrposhta"
     ]
   },
   {

@@ -50,8 +50,11 @@
                 <data android:host="p" />
             </intent-filter>
             <!-- A parcel someone shared, https://<the site>/p/<id>, on the site and on the host it answered on before
-                 (the iPhone's associated domains, SDT_ASSOCIATED_DOMAIN and SDT_ASSOCIATED_DOMAIN_LEGACY): an App Link,
-                 verified against the site's assetlinks.json, that opens the parcel's sheet. -->
+                 (the iPhone's associated domains, SDT_ASSOCIATED_DOMAIN and SDT_ASSOCIATED_DOMAIN_LEGACY): an App Link
+                 that opens the parcel's sheet. Android verifies each host against its /.well-known/assetlinks.json,
+                 which names this package and the SHA-256 fingerprint of the key the app is signed with (the user's
+                 signing key, or Play's if Play signs the app). Until a host serves that file, Android opens that host's
+                 addresses in the browser. -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

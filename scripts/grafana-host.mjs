@@ -1,5 +1,8 @@
 // Grafana's HTTP API, reached through curl inside the Grafana container, over ssh, so the admin
 // credentials never leave it. GRAFANA_SSH_HOST and GRAFANA_CONTAINER name the host and container.
+// The credentials reach curl as a config line on its stdin, which the shell's printf builtin
+// writes, so they are in no command line either (the host's ps lists the container's processes);
+// a request's body comes on file descriptor 3.
 import { spawnSync } from 'node:child_process';
 
 function required(name) {
@@ -19,13 +22,17 @@ function ssh(command, input = '') {
 
 const quote = value => `'${value.replaceAll("'", "'\\''")}'`;
 
+// curl's `user` config line from the container's admin credentials; sed escapes a quote or a backslash.
+const CREDENTIALS = String.raw`printf '%s:%s' "$GF_SECURITY_ADMIN_USER" "$GF_SECURITY_ADMIN_PASSWORD" | sed 's/[\\"]/\\&/g; 1s/^/user = "/; $s/$/"/'`;
+
 export function grafana(method, apiPath, body, { allowMissing = false } = {}) {
   const curl = [
-    'curl -sS -w "\\n%{http_code}"',
+    'exec 3<&0;',
+    CREDENTIALS,
+    '| curl --config - -sS -w "\\n%{http_code}"',
     `-X ${method}`,
-    '-u "$GF_SECURITY_ADMIN_USER:$GF_SECURITY_ADMIN_PASSWORD"',
     "-H 'Content-Type: application/json'",
-    body === undefined ? '' : '--data-binary @-',
+    body === undefined ? '' : '--data-binary @/dev/fd/3',
     quote(`http://localhost:3000${apiPath}`),
   ].join(' ');
   const output = ssh(`sudo -n docker exec -i ${quote(required('GRAFANA_CONTAINER'))} sh -c ${quote(curl)}`,

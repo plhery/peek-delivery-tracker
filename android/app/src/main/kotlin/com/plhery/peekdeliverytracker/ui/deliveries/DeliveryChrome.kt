@@ -85,7 +85,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -145,7 +144,6 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
-import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import com.plhery.peekdeliverytracker.ui.zoom.fadingUnderZoom
 import com.plhery.peekdeliverytracker.ui.zoom.givingWayToPageBar
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
@@ -979,8 +977,8 @@ private class EvenRowPolicy(private val spacing: Dp) : MeasurePolicy {
 
 /**
  * `UnwrappingParcel(open: 0, pressed:)`, 204 wide: the kraft parcel taped shut on the ground ([UnwrappingParcel]), Pip's
- * face on its left side and the arrow and seal on its right. It gives under the finger, squashing toward the ground,
- * on a spring of response 0.3 s and damping 0.64.
+ * face on its left side and the arrow and seal on its right. It gives under the finger, squashing toward the ground
+ * over its widening shadow, on a spring of response 0.3 s and damping 0.64.
  */
 @Composable
 private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier = Modifier) {
@@ -1011,28 +1009,7 @@ private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier =
                 }
             },
         ) {
-            // The ground's soft shadow, which the press widens and darkens.
-            val shadowWidth = 180f + 8f * press
-            val shadowHeight = 20f - 7f * press
-            Box(
-                Modifier
-                    .offset((151f - shadowWidth / 2).dp, (286f - shadowHeight / 2).dp)
-                    .size(shadowWidth.dp, shadowHeight.dp)
-                    .dropShadow(OvalShape, swiftUiShadow(Color.Black.copy(alpha = 0.08f + 0.06f * press), radius = 9.dp)),
-            )
-            Box(
-                Modifier
-                    .size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)
-                    .graphicsLayer {
-                        val squash = 1f - 0.044f * press
-                        scaleX = squash
-                        scaleY = squash
-                        transformOrigin = TransformOrigin(0.5f, 1f)
-                        translationY = 5.dp.toPx() * press
-                    },
-            ) {
-                UnwrappingParcel(open = false, label = null, ribbon = false)
-            }
+            UnwrappingParcel(0.0, label = null, ribbon = false, pressed = press)
         }
     }
 }

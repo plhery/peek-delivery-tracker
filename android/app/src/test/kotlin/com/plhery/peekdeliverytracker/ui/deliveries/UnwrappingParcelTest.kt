@@ -46,11 +46,14 @@ class UnwrappingParcelTest {
         PeekTheme(dark = false, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = false, carrierIdentities = identities, content = content)
     }
 
-    /** Four of the parcel side by side: about to open, the flaps going up, past upright, and settling. */
+    /**
+     * Four of the parcel side by side: about to open, the flaps going up, past upright, and settling. Off the ground, the
+     * box alone: the link sheet's shots show it standing on its shadow.
+     */
     private fun opening(label: PipLabel?, ribbon: Boolean) {
         theme {
             Row(Modifier.testTag(SHOT).background(Color.White)) {
-                for (open in OPENING) UnwrappingParcel(open, label, ribbon)
+                for (open in OPENING) UnwrappingParcel(open, label, ribbon, grounded = false)
             }
         }
     }
@@ -74,7 +77,7 @@ class UnwrappingParcelTest {
         val celebrating = List(3) { mutableStateOf(false) }
         theme {
             Row(Modifier.testTag(SHOT).background(Color.White)) {
-                for (one in celebrating) UnwrappingParcel(1.0, null, ribbon = false, celebrating = one.value)
+                for (one in celebrating) UnwrappingParcel(1.0, null, ribbon = false, celebrating = one.value, grounded = false)
             }
         }
         compose.mainClock.advanceTimeByFrame()

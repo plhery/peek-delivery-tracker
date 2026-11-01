@@ -954,7 +954,7 @@ private fun ShareFigure(open: Boolean, label: PipLabel?, ribbon: Boolean) {
                 }
             },
     ) {
-        UnwrappingParcel(open, label, ribbon)
+        UnwrappingParcel(open, label, ribbon, grounded = false)
     }
 }
 

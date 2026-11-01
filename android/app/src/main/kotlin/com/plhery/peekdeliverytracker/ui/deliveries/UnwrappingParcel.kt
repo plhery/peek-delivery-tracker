@@ -70,19 +70,31 @@ import kotlin.math.pow
 import kotlin.math.sin
 
 /**
- * `UnwrappingParcel(open:celebrating:label:ribbon:)` in Pip's 300 × 310 frame, `open` of the way from closed (0) to open
- * (1, and a little past while a spring gives): the box behind its sides with the rear flaps folding away from 0.06; the
- * card rising out of it from 0.24 (its check drawn from 0.48) behind a warm glow that breathes as the box opens; the
- * sides with the carrier's label or the arrow and the seal; Pip's face, its eyes turning into happy arcs from 0.2 (a
- * gift's smile showing with them, out from under its ribbon); the front flaps swinging up from 0.2 through upright and
- * out over the face, a little too far, then settling; the tape tearing out of sight and a gift's ribbon coming off by a
- * quarter of the way. The whole box dips just before it opens and lifts and swells as it does, but not under Reduce
- * Motion. `celebrating` throws the stars ([ParcelStarBurst]). At rest it is still but for the blink of a closed box's
- * eyes. It draws its own box where Pip's ([PipArtwork]) differs: the rear right flap folds open to (175, 41), the sides
- * are shaded across the frame without hairlines, and the seam runs from (102.5, 118.5).
+ * `UnwrappingParcel(open:pressed:celebrating:label:ribbon:grounded:)` in Pip's 300 × 310 frame, `open` of the way from
+ * closed (0) to open (1, and a little past while a spring gives): the box behind its sides with the rear flaps folding
+ * away from 0.06; the card rising out of it from 0.24 (its check drawn from 0.48) behind a warm glow that breathes as
+ * the box opens; the sides with the carrier's label or the arrow and the seal; Pip's face, its eyes turning into happy
+ * arcs from 0.2 (a gift's smile showing with them, out from under its ribbon); the front flaps swinging up from 0.2
+ * through upright and out over the face, a little too far, then settling; the tape tearing out of sight and a gift's
+ * ribbon coming off by a quarter of the way. The whole box dips just before it opens and lifts and swells as it does,
+ * but not under Reduce Motion. `celebrating` throws the stars ([ParcelStarBurst]). At rest it is still but for the
+ * blink of a closed box's eyes. It draws its own box where Pip's ([PipArtwork]) differs: the rear right flap folds open
+ * to (175, 41), the sides are shaded across the frame without hairlines, and the seam runs from (102.5, 118.5).
+ *
+ * `grounded`, it stands on a soft shadow, an ellipse 180 × 20 at (151, 286) in black at 8 %, blurred 9; off, as the
+ * share sheet's sticker is cut to its box, it has none. `pressed` is how far a press has gone, 0 to 1, as SwiftUI's
+ * animation carries `pressed` from one look to the other: the box squashes to 0.956 toward the ground and sinks 5, and
+ * its shadow widens to 188, flattens to 13 and darkens to 14 %.
  */
 @Composable
-internal fun UnwrappingParcel(open: Double, label: PipLabel?, ribbon: Boolean, celebrating: Boolean = false) {
+internal fun UnwrappingParcel(
+    open: Double,
+    label: PipLabel?,
+    ribbon: Boolean,
+    celebrating: Boolean = false,
+    pressed: Float = 0f,
+    grounded: Boolean = true,
+) {
     val frame = Modifier.size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)
     val palette = PipPalette.kraft
     val reduceMotion = PeekTheme.reduceMotion
@@ -95,61 +107,75 @@ internal fun UnwrappingParcel(open: Double, label: PipLabel?, ribbon: Boolean, c
     val breath = if (reduceMotion || open == 1.0) 0.0 else sin(open * PI)
     val anticipation = if (reduceMotion) 0.0 else max(0.0, 1 - abs(open - 0.12) / 0.12)
     val wrapping = max(0.0, 1 - open * 4)
-    Box(
-        frame.graphicsLayer {
-            val swell = (1 - anticipation * 0.032 + breath * 0.025).toFloat()
-            scaleX = swell
-            scaleY = swell
-            transformOrigin = TransformOrigin(0.5f, 1f)
-            translationY = (anticipation * 4 - breath * 8).toFloat().dp.toPx()
-        },
-    ) {
-        PipCanvas(frame) {
-            it.fill(PipGeometry.polygon(PipGeometry.inside), palette.inside)
-            // The rear pair folds away before the front panels reveal the box.
-            unwrappingFlap(it, between(PipGeometry.backLeft.closed, PipGeometry.backLeft.opened, rear), palette.backLeft, min(1.0, open))
-            unwrappingFlap(it, between(PipGeometry.backRight.closed, BACK_RIGHT_OPENED, rear), palette.backRight)
-        }
-        val glow = breath * 0.48
-        if (glow > 0) {
+    Box(frame) {
+        if (grounded) {
+            val shadowWidth = 180f + 8f * pressed
+            val shadowHeight = 20f - 7f * pressed
             Box(
                 Modifier
-                    .offset((150f - 124f / 2).dp, (140f - 40f / 2).dp)
-                    .size(124.dp, 40.dp)
-                    .dropShadow(OvalShape, swiftUiShadow(Color(0xFFFFE8AE).copy(alpha = glow.toFloat()), radius = 10.dp)),
+                    .offset((151f - shadowWidth / 2).dp, (286f - shadowHeight / 2).dp)
+                    .size(shadowWidth.dp, shadowHeight.dp)
+                    .dropShadow(OvalShape, swiftUiShadow(Color.Black.copy(alpha = 0.08f + 0.06f * pressed), radius = 9.dp)),
             )
         }
-        if (card > 0) DeliveryCard(ribbon, card, check = phase(0.48, 0.3))
-        UnwrappingSides(frame)
-        if (label != null) PipCanvas(frame) { PipArtwork.label(it, label) }
-        if (label == null) ParcelSideMarks()
-        // A ribbon runs where Pip smiles: until the box opens, the eyes say it all.
-        KraftPipFace(happy = happy, smile = if (ribbon) happy else 1.0)
-        PipCanvas(frame) {
-            // The front flaps swing up through upright and out over the face, go a little too far, and settle just
-            // above level: the left one is a brim over the eyes.
-            PipArtwork.frontFlaps(it, palette, PipOpening.open.copy(front = PipGeometry.settle(phase(0.2, 0.8)), under = min(1.0, open)))
-            // The tape tears out of sight as the flaps open.
-            if (wrapping > 0) it.copy().also { tape -> tape.opacity *= wrapping }.fill(PipGeometry.polygon(tornTape(tear)), palette.tape)
-            val seam = max(0.0, 0.6 - open * 3)
-            if (seam > 0) {
-                val path = MapPath().apply {
-                    move(102.5, 118.5)
-                    addLine(197.5, 166.0)
-                }
-                it.stroke(path, palette.seam.opacity(seam), StrokeStyle(lineWidth = 1.0, dash = listOf(3.0, 3.0)))
+        Box(
+            frame.graphicsLayer {
+                val swell = (1 - anticipation * 0.032 + breath * 0.025).toFloat()
+                val scale = swell + (0.956f - swell) * pressed
+                scaleX = scale
+                scaleY = scale
+                transformOrigin = TransformOrigin(0.5f, 1f)
+                translationY = ((anticipation * 4 - breath * 8).toFloat() * (1 - pressed) + 5f * pressed).dp.toPx()
+            },
+        ) {
+            PipCanvas(frame) {
+                it.fill(PipGeometry.polygon(PipGeometry.inside), palette.inside)
+                // The rear pair folds away before the front panels reveal the box.
+                unwrappingFlap(it, between(PipGeometry.backLeft.closed, PipGeometry.backLeft.opened, rear), palette.backLeft, min(1.0, open))
+                unwrappingFlap(it, between(PipGeometry.backRight.closed, BACK_RIGHT_OPENED, rear), palette.backRight)
             }
-            if (ribbon && wrapping >= 1) PipArtwork.ribbon(it)
+            val glow = breath * 0.48
+            if (glow > 0) {
+                Box(
+                    Modifier
+                        .offset((150f - 124f / 2).dp, (140f - 40f / 2).dp)
+                        .size(124.dp, 40.dp)
+                        .dropShadow(OvalShape, swiftUiShadow(Color(0xFFFFE8AE).copy(alpha = glow.toFloat()), radius = 10.dp)),
+                )
+            }
+            if (card > 0) DeliveryCard(ribbon, card, check = phase(0.48, 0.3))
+            UnwrappingSides(frame)
+            if (label != null) PipCanvas(frame) { PipArtwork.label(it, label) }
+            if (label == null) ParcelSideMarks()
+            // A ribbon runs where Pip smiles: until the box opens, the eyes say it all.
+            KraftPipFace(happy = happy, smile = if (ribbon) happy else 1.0)
+            PipCanvas(frame) {
+                // The front flaps swing up through upright and out over the face, go a little too far, and settle just
+                // above level: the left one is a brim over the eyes.
+                PipArtwork.frontFlaps(it, palette, PipOpening.open.copy(front = PipGeometry.settle(phase(0.2, 0.8)), under = min(1.0, open)))
+                // The tape tears out of sight as the flaps open.
+                if (wrapping > 0) it.copy().also { tape -> tape.opacity *= wrapping }.fill(PipGeometry.polygon(tornTape(tear)), palette.tape)
+                val seam = max(0.0, 0.6 - open * 3)
+                if (seam > 0) {
+                    val path = MapPath().apply {
+                        move(102.5, 118.5)
+                        addLine(197.5, 166.0)
+                    }
+                    it.stroke(path, palette.seam.opacity(seam), StrokeStyle(lineWidth = 1.0, dash = listOf(3.0, 3.0)))
+                }
+                if (ribbon && wrapping >= 1) PipArtwork.ribbon(it)
+            }
+            // The ribbon comes off as the flaps open, faded as one piece.
+            if (ribbon && wrapping > 0 && wrapping < 1) PipCanvas(frame.graphicsLayer { alpha = wrapping.toFloat() }) { PipArtwork.ribbon(it) }
+            ParcelStarBurst(celebrating)
         }
-        // The ribbon comes off as the flaps open, faded as one piece.
-        if (ribbon && wrapping > 0 && wrapping < 1) PipCanvas(frame.graphicsLayer { alpha = wrapping.toFloat() }) { PipArtwork.ribbon(it) }
-        ParcelStarBurst(celebrating)
     }
 }
 
 /** The parcel closed or open, at rest. */
 @Composable
-internal fun UnwrappingParcel(open: Boolean, label: PipLabel?, ribbon: Boolean) = UnwrappingParcel(if (open) 1.0 else 0.0, label, ribbon)
+internal fun UnwrappingParcel(open: Boolean, label: PipLabel?, ribbon: Boolean, grounded: Boolean = true) =
+    UnwrappingParcel(if (open) 1.0 else 0.0, label, ribbon, grounded = grounded)
 
 /** One of the box's flaps at `points`, in `color` with its hairline edge, at `opacity`. */
 private fun unwrappingFlap(context: MapDrawingContext, points: List<Point>, color: AdaptiveColor, opacity: Double = 1.0) {

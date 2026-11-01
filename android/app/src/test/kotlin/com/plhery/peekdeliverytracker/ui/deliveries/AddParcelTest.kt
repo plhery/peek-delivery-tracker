@@ -9,6 +9,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.accessibility.AccessibilityManager
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.ComponentActivity
 import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.VectorConverter
@@ -292,13 +293,18 @@ class AddParcelTest {
 
     /** A key pressed and let go on a hardware keyboard, with `meta` held, through the window as the system sends it. */
     private fun press(key: Int, meta: Int = 0) {
+        send(key, meta)
+        settle()
+    }
+
+    /** A key pressed and let go as [press] does, without waiting for what it does. */
+    private fun send(key: Int, meta: Int = 0) {
         val window = view.rootView.parent
         val deliver = window.javaClass.getMethod("dispatchKeyFromIme", KeyEvent::class.java)
         compose.runOnUiThread {
             deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_DOWN, key, 0, meta))
             deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_UP, key, 0, meta))
         }
-        settle()
     }
 
     private fun assertClosed() {
@@ -1480,6 +1486,113 @@ class AddParcelTest {
         // The bar goes before the camera.
         val bar = compose.onNode(hasText(title) and isHeading(), useUnmergedTree = true).fetchSemanticsNode()
         assertEquals(-1f, generateSequence(bar) { it.parent }.firstNotNullOfOrNull { it.config.getOrNull(SemanticsProperties.TraversalIndex) })
+    }
+
+    /** The top of the full-screen cover named `title`, where it is in its rise or fall. */
+    private fun coverTop(title: String): Float =
+        compose.onAllNodesWithTag(COVER_PANEL, useUnmergedTree = true).fetchSemanticsNodes()
+            .single { it.config.getOrNull(SemanticsProperties.PaneTitle) == title }.boundsInRoot.top
+
+    @Test
+    fun theScannerOpenedAgainOnItsWayDownReadsAgainAsANewPresentation() {
+        val scanner = FakeLabelScanner()
+        show(scanner = scanner)
+        open()
+        scan()
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { scanner.read("1Z999AA10123456784") }
+        compose.waitForIdle()
+        // On its way down, its panel past Add's scan button, which is tapped again.
+        compose.mainClock.advanceTimeBy(150)
+        assertEquals(1, scanner.running)
+        node(ADD_SCAN).performClick()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(exists(SCANNER))
+        assertEquals(1, scanner.running)
+        // `makeCoordinator`'s reader for this presentation, which hasn't delivered yet.
+        compose.runOnUiThread { scanner.read("1Z999AA10123456793") }
+        settle()
+        assertFalse(exists(SCANNER))
+        assertEquals(0, scanner.running)
+        assertEquals("1Z999AA10123456793", fieldText(ADD_TRACKING))
+    }
+
+    @Test
+    fun aBarcodeReadOnTheScannersWayDownAfterCancelTheBackOrEscapeLeavesTheFieldAsItWas() {
+        val scanner = FakeLabelScanner()
+        show(scanner = scanner)
+        open()
+        type("1Z999AA1012345")
+        val closes = listOf(
+            "Cancel" to { node(SCANNER_CANCEL).performClick() },
+            "the back" to { compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() } },
+            "Escape" to { send(KeyEvent.KEYCODE_ESCAPE) },
+        )
+        for ((name, close) in closes) {
+            scan()
+            compose.mainClock.autoAdvance = false
+            close()
+            compose.waitForIdle()
+            compose.mainClock.advanceTimeBy(100)
+            // Still drawn, the camera reading, on its way down.
+            assertEquals(name, 1, scanner.running)
+            compose.runOnUiThread { scanner.read("1Z999AA10123456784") }
+            compose.mainClock.autoAdvance = true
+            settle()
+            assertFalse(name, exists(SCANNER))
+            assertEquals(name, 0, scanner.running)
+            assertNotNull(name, deliveries.addition)
+            assertEquals(name, "1Z999AA1012345", fieldText(ADD_TRACKING))
+        }
+        assertEquals(emptyList<String>(), source.detected)
+    }
+
+    @Test
+    fun addClosedBeforeItsScannerOrItsKeyboardOpensOpensNeither() {
+        val scanner = FakeLabelScanner()
+        show(list = emptyList(), scanner = scanner)
+        val keyboard = shadowOf(compose.activity.getSystemService(InputMethodManager::class.java))
+        for (opening in listOf(EMPTY_SCAN, EMPTY_ADD)) {
+            compose.mainClock.autoAdvance = false
+            node(opening).performClick()
+            compose.mainClock.advanceTimeBy(100)
+            node(ADD_CLOSE).performClick()
+            // Past the 300 ms after which an open Add would open the scanner or the keyboard.
+            compose.mainClock.advanceTimeBy(300)
+            compose.waitForIdle()
+            assertNull(opening, deliveries.addition)
+            assertEquals(opening, 0, scanner.running)
+            assertFalse(opening, keyboard.isSoftInputVisible)
+            compose.mainClock.autoAdvance = true
+            settle()
+            assertClosed()
+            assertEquals(opening, 0, scanner.running)
+            assertFalse(opening, keyboard.isSoftInputVisible)
+        }
+    }
+
+    @Test
+    fun addClosedUnderTheOpenScannerTakesTheScannerDownWithIt() {
+        val scanner = FakeLabelScanner()
+        show(scanner = scanner)
+        open()
+        scan()
+        compose.mainClock.autoAdvance = false
+        // As a notification or a link opening a parcel does (`show(_:)`).
+        compose.runOnUiThread { deliveries.closeAdd() }
+        compose.waitForIdle()
+        compose.mainClock.advanceTimeBy(100)
+        val top = coverTop(text("add.scanTitle"))
+        assertTrue("$top", top > 0f)
+        assertEquals(coverTop(text("add.title")), top, 1f)
+        // It hears nothing more on its way down.
+        compose.runOnUiThread { scanner.read("1Z999AA10123456784") }
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(0, scanner.running)
+        assertClosed()
+        assertEquals(emptyList<String>(), source.detected)
     }
 
     @Test

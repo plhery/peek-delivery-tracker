@@ -69,15 +69,20 @@ val LocalLabelScanner = staticCompositionLocalOf<LabelScanner> { NoLabelScanner 
 /**
  * `TrackingScannerView` in Add's `.fullScreenCover(isPresented: $showingScanner)` (B-S32): over the whole window, Add's
  * form included in a regular window, as UIKit's full-screen presentation covers the iPad too, coming up and going down
- * on UIKit's cover spring ([FullScreenCover]). The first barcode read with a payload goes to [onScan], once
- * ([AddParcelLogic.FirstScan]); Cancel and the back go to [onCancel]. The camera runs until the cover has gone, as
- * `dismantleUIViewController` stops it.
+ * on UIKit's cover spring ([FullScreenCover]). The first barcode read with a payload goes to [onScan], once for each
+ * time it comes up, as `makeCoordinator` makes a reader for each presentation ([AddParcelLogic.FirstScan]), and only
+ * while it is [visible]: what the camera reads on the cover's way down fills nothing. Cancel and the back go to
+ * [onCancel]. The camera runs until the cover has gone, as `dismantleUIViewController` stops it.
  */
 @Composable
 internal fun TrackingScannerCover(visible: Boolean, onScan: (String) -> Unit, onCancel: () -> Unit) {
     val title = localized("add.scanTitle")
+    val first = remember(visible) { AddParcelLogic.FirstScan() }
+    // The camera's callback reads the reader of the moment: none on the way down, a new one as the cover comes up again.
+    val reader by rememberUpdatedState(first.takeIf { visible })
+    val scanned by rememberUpdatedState(onScan)
     FullScreenCover(visible = visible, onDismiss = onCancel, paneTitle = title) {
-        TrackingScannerView(title, onScan, onCancel)
+        TrackingScannerView(title, onRead = { read -> reader?.read(read)?.let { scanned(it) } }, onCancel)
     }
 }
 
@@ -88,11 +93,9 @@ internal fun TrackingScannerCover(visible: Boolean, onScan: (String) -> Unit, on
  * bar on its sides, as the iPhone's keeps to the safe area there. TalkBack reads the bar first.
  */
 @Composable
-private fun TrackingScannerView(title: String, onScan: (String) -> Unit, cancel: () -> Unit) {
+private fun TrackingScannerView(title: String, onRead: (List<String?>) -> Unit, cancel: () -> Unit) {
     val scanner = LocalLabelScanner.current
     val ground = scannerGround(PeekTheme.colors.dark)
-    val first = remember { AddParcelLogic.FirstScan() }
-    val scanned by rememberUpdatedState(onScan)
     Column(
         Modifier
             .fillMaxSize()
@@ -109,7 +112,7 @@ private fun TrackingScannerView(title: String, onScan: (String) -> Unit, cancel:
                 .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top)),
         )
         scanner.Camera(
-            onRead = { read -> first.read(read)?.let { scanned(it) } },
+            onRead = onRead,
             modifier = Modifier.fillMaxWidth().weight(1f).testTag(SCANNER_CAMERA),
         )
     }

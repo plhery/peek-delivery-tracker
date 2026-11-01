@@ -375,11 +375,13 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         state.added(request, added)
         state.closeAdd()
     }
-    // Once Add has come up, the camera for a scan where the device has one, else the keyboard on the field.
+    // Once Add has come up, the camera for a scan where the device has one, else the keyboard on the field; neither once
+    // Add is going down, as the iPhone presents nothing from a view on its way out.
     LaunchedEffect(request.id) {
         if (form.didFocus) return@LaunchedEffect
         form.didFocus = true
         delay(FOCUS_DELAY)
+        if (state.addition?.id != request.id) return@LaunchedEffect
         if (request.scanning && canScan) form.showingScanner = true else focus.request(ParcelAddition.Field.Tracking)
     }
     // A required postcode starts from the last one given that fits; an optional one is only offered.
@@ -523,7 +525,9 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         AddButton(addition, saving, cover, actions::save, Modifier.onSizeChanged { buttonHeight = it.height })
     }
     AddPicker(state, addition, form, actions)
-    TrackingScannerCover(form.showingScanner, onScan = actions::scanned, onCancel = { form.showingScanner = false })
+    // The scanner goes down with Add, closed under it (a notification, a link), as the iPhone's goes with its presenter.
+    val open = state.addition?.id == request.id
+    TrackingScannerCover(form.showingScanner && open, onScan = actions::scanned, onCancel = { form.showingScanner = false })
 }
 
 /** Whether the form's controls are on (`.disabled(saving)`'s `isEnabled`). */

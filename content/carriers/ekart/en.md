@@ -15,9 +15,9 @@ Peek's code knows Ekart's tracking IDs as three letters, then `C`, `P` or `R`, t
 | Tracking ID (invented) | What it is |
 | --- | --- |
 | `FMPP0000000000` | One of the letter groups Peek ties to Ekart (listed below), then `C`, `P` or `R` and ten digits. Peek names Ekart from the shape alone. |
-| `ABCP0000000000` | Other letters in front, same layout. It may be Ekart's, but Peek can't tell from the shape alone: pick Ekart yourself (see below). |
+| `ABCP0000000000` | Other letters in front, same layout. It may be Ekart's, but Peek can't tell from the shape alone, so it asks Ekart (see below). |
 
-The letter groups Peek ties to Ekart are `AMI`, `BAL`, `BGS`, `BSI`, `DEL`, `FLO`, `FMP`, `GLA`, `LUA`, `MYE`, `MYN`, `MYS`, `SDL`, `SHO`, `SPO`, `SRT` and `TEL`. Spaces and lower case don't matter when you paste the ID into Peek. One exception: an ID that starts with `PB` in this layout is read as [Parcelforce](carrier:parcelforce)'s, the UK courier, so if yours came from an Indian shop, press "Change" and pick Ekart.
+The letter groups Peek ties to Ekart are `AMI`, `BAL`, `BGS`, `BSI`, `DEL`, `FLO`, `FMP`, `GLA`, `LUA`, `MYE`, `MYN`, `MYS`, `SDL`, `SHO`, `SPO`, `SRT` and `TEL`. Spaces and lower case don't matter when you paste the ID into Peek. Two exceptions: an ID that starts with `PB` in this layout is read as [Parcelforce](carrier:parcelforce)'s, the UK courier, and one that starts with `HRBC` isn't offered as Ekart's, as it fits an AliExpress shape. If yours came from an Indian shop, press "Change" and pick Ekart.
 
 Use the tracking ID, not the shop's order number. Can't find it? Look for an Ekart tracking link in the shop's message, or see [how to find your tracking number](guide:find-tracking-number).
 
@@ -76,13 +76,13 @@ Before you pay anything a parcel text asks for, read [delivery scam texts](guide
 
 ## Track an Ekart parcel with Peek
 
-Paste the tracking ID in [Peek](/). With one of the letter groups above, then `C`, `P` or `R`, Peek names Ekart at once ("Detected carrier"); "Change" picks another carrier. With other letters in front, Peek shows "Checking tracking services…" and asks tracking services, not Ekart: only if one of them names Ekart does Peek go on to Ekart's tracker. To get Ekart's own lines, press "Change", where Ekart is under "Fits this number", and pick it.
+Paste the tracking ID in [Peek](/). With one of the letter groups above, then `C`, `P` or `R`, Peek names Ekart at once ("Detected carrier"); "Change" picks another carrier. With other letters in front, Peek shows "Checking tracking services…" and asks Ekart's tracker whether it has the ID: once it shows a scan for it, Peek says "Ekart has this parcel." and follows it there. If Ekart's tracker has nothing for it yet, Peek asks tracking services instead; to get Ekart's own lines anyway, press "Change", where Ekart is under "Fits this number", and pick it.
 
 Pasting Ekart's tracking link (ekartlogistics.com, then shipmenttrack and the ID) works too: Peek takes the ID from it and names Ekart, whatever its letters. If the seller sent a shiprocket.co tracking link instead, you can paste that: Peek then follows the parcel on [Shiprocket](carrier:shiprocket)'s tracking page, not Ekart's. Ekart picked by hand for anything other than four letters and ten digits shows "doesn’t issue numbers like this one".
 
 Filed under Ekart, a parcel shows "Waiting for the carrier" until Ekart's first scan. One added without a carrier shows "No tracking history yet". Peek reads Ekart's own tracker, with no account or phone number: each line in Ekart's words, codes included, with its exact time and the city Ekart gives, newest first and without repeats. It shows Ekart's expected delivery date while the parcel is on its way to you, and drops it once the parcel is delivered or heads back.
 
-Peek checks every 10 minutes from 8 am to 10 pm Swiss time (12:30 pm to 2:30 am India time in winter), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time. After two days without news, it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Ekart or the shop for you.
+Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Ekart or the shop for you.
 
 ## Questions about Ekart tracking
 
@@ -109,5 +109,5 @@ The shop or marketplace you ordered from: it booked Ekart. Peek couldn't check E
 :::sources
 - [Universal Parcel Scraper: Ekart](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ekart) – names, tracking ID shapes and how Peek detects them, tracking links, Ekart's tracker, scan wordings and codes with their stages, RTO, expected delivery date
 - [Universal Parcel Scraper: Shiprocket](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/shiprocket) – Shiprocket's tracking links
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Parcelforce's PB shape, carriers recognition asks, hand-offs
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Parcelforce's PB and AliExpress's HRBC shapes, carriers recognition asks, hand-offs
 :::

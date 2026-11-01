@@ -20,7 +20,7 @@ Border Express tracks a delivery by its consignment number. Peek's code knows th
 
 A consignment can hold several items, each with a label barcode of its own. Every label starts with the same letters and digits, and the consignment number ties them together: that's what Border Express's tracker looks up, and it doesn't take a label barcode. Peek does take one, and works the consignment number out from it (see below).
 
-Peek can't tell a Border Express number by its shape alone. Its catalog has no rule for Border Express's consignment numbers, and its rule for the label barcode is only a weak match. Other carriers use the same shapes: for 8 digits, Peek suggests [Mondial Relay](carrier:mondial-relay), [Colisweb](carrier:colisweb) and [Heppner](carrier:heppner), all in Europe, and 4 letters with 8 digits also fits [Colis Privé](carrier:colis-prive)'s 12-character numbers. If the shop said Border Express, pick Border Express instead (see below). Spaces and lower case don't matter when you paste it. No number at all? See [how to find your tracking number](guide:find-tracking-number) and [tracking number formats](guide:tracking-number-formats).
+Peek can't tell a Border Express number by its shape alone. Its catalog has no rule for Border Express's consignment numbers, and its rule for the label barcode is only a weak match. Other carriers use the same shapes: for 8 digits, Peek suggests [Mondial Relay](carrier:mondial-relay), [Colisweb](carrier:colisweb) and [Heppner](carrier:heppner), all in Europe, and TForce Freight, a North American freight carrier, when the last digit passes its check. Four letters with 8 digits also fit [Colis Privé](carrier:colis-prive)'s 12-character numbers. If the shop said Border Express, pick Border Express instead (see below). Spaces and lower case don't matter when you paste it. No number at all? See [how to find your tracking number](guide:find-tracking-number) and [tracking number formats](guide:tracking-number-formats).
 
 ## Border Express tracking statuses explained
 
@@ -33,6 +33,7 @@ Border Express's tracker shows a progress bar and a list of steps, newest first,
 | `In Transit` | On its way through Border Express's network. | "In transit" |
 | `On Board For Delivery` | On the delivery vehicle. The progress bar shows `On Board`. | "Out for delivery" |
 | `Partially Delivered` | Some items of the consignment are delivered; the rest are still on their way. | "In transit" |
+| `Partially Delivered - Final` | Delivery is over: the consignment closes with the items that arrived. If any are missing, ask the sender. | "Delivered" |
 | `Delivered` | Delivered. | "Delivered" |
 
 Peek keeps the steps in Border Express's English, with its own status above them. A step that isn't in this table shows as written, and Peek reads its status from the wording where it can.
@@ -75,7 +76,7 @@ A tracking link from Border Express works too and names Border Express at once (
 
 **What you see.** Peek shows the status, each step with its suburb and state, the expected delivery day until the parcel is delivered, and the time of delivery. It leaves out the progress bar, the despatch date, the number of items and each item's scans, the sender's and your town and postcode, and the name of whoever signed. Peek shows no weight or proof of delivery for Border Express. Each step carries the clock of its state, so steps in states on different time zones fall in the right order.
 
-**How often.** Peek checks every 10 minutes from 8am to 10pm Swiss time, about 6pm to 8am in Sydney (4pm to 6am in winter; Perth's clocks are 2 to 3 hours behind Sydney's), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time, so most of a delivery day is checked every hour or two. If Border Express's tracker can't be reached, Peek asks tracking services instead and shows what they hold, in their words. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Border Express or the shop for you.
+**How often.** Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. If Border Express's tracker can't be reached, Peek asks tracking services instead and shows what they hold, in their words. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Border Express or the shop for you.
 
 ## Questions about Border Express tracking
 
@@ -93,7 +94,7 @@ The parcel is on the delivery vehicle. Peek shows it as "Out for delivery".
 
 ### Why does my Border Express tracking say "Partially Delivered"?
 
-Your consignment has several items, and only some have been delivered. The rest are still on their way, so Peek shows "In transit".
+Your consignment has several items, and only some have been delivered. The rest are still on their way, so Peek shows "In transit". `Partially Delivered - Final` is different: Border Express has closed the consignment with the items that arrived, and Peek shows "Delivered".
 
 ### What does "Shipment Data Received" mean on Border Express tracking?
 

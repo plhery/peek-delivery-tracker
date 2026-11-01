@@ -219,14 +219,23 @@ describe('one-off parcels and their links', () => {
     await expect(client.listUnfiledOneOffPackages(new Date('2026-09-21T10:00:00Z'), ['unknown', 'intl-post', 'z-leading']))
       .resolves.toEqual([{ id: 'unfiled', one_off: true }]);
     await client.listActivePackages();
-    const sent = params(request.mock.calls[0][0]);
-    expect(request.mock.calls[0][0]).toMatch(/^\/rest\/v1\/packages\?/);
-    expect(sent.get('select')).toBe(params(request.mock.calls[1][0]).get('select'));
-    expect(Object.fromEntries([...sent].filter(([key]) => key !== 'select'))).toEqual({
-      one_off: 'is.true', user_id: 'is.null', archived_at: 'is.null', carrier: 'in.(unknown,intl-post,z-leading)',
-      current_stage: 'not.in.(delivered,returned)', created_at: 'gte.2026-09-21T10:00:00.000Z',
-      order: 'last_synced_at.asc.nullsfirst,created_at.asc',
-    });
+    const [path, options] = request.mock.calls[0];
+    expect(path).toMatch(/^\/rest\/v1\/rpc\/unfiled_one_off_packages\?/);
+    expect(options).toEqual({ method: 'POST',
+      body: { p_added_since: '2026-09-21T10:00:00.000Z', p_carriers: ['unknown', 'intl-post', 'z-leading'] } });
+    expect(params(path).get('select')).toBe(params(request.mock.calls[1][0]).get('select'));
+    expect(params(path).get('order')).toBe('last_synced_at.asc.nullsfirst,created_at.asc');
+  });
+
+  it('keeps the carriers of the unfiled one-off parcels out of the URL, however many the catalog holds', async () => {
+    const client = service();
+    const request = vi.spyOn(client, 'request').mockResolvedValue([]);
+    await client.listUnfiledOneOffPackages(new Date('2026-09-21T10:00:00Z'), ['unknown']);
+    await client.listUnfiledOneOffPackages(new Date('2026-09-21T10:00:00Z'),
+      Array.from({ length: 5_000 }, (_, index) => `catalog-carrier-${index}`));
+    const [few, many] = request.mock.calls.map(([path]) => path);
+    expect(many).toBe(few);
+    expect(many.length).toBeLessThan(2_000);
   });
 
   it('lists the parcels nobody is waiting for, in pages past the API\'s row limit, and records that an account read its parcels', async () => {

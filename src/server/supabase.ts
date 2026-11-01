@@ -1044,20 +1044,17 @@ export class SupabaseServiceClient extends SupabaseClient {
    * The open, unarchived one-off parcels filed under one of `carriers` (no
    * carrier, or one with no adapter of its own) and added since `addedSince`,
    * followed or not, the least recently checked first, in the shape of
-   * listActivePackages.
+   * listActivePackages. The carriers go in the body: hundreds of them in the URL
+   * pass the gateway's limit on its length.
    */
   async listUnfiledOneOffPackages(addedSince: Date, carriers: readonly string[]): Promise<JsonObject[]> {
-    const params = query([
-      ['select', `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`],
-      ['one_off', 'is.true'],
-      ['user_id', 'is.null'],
-      ['archived_at', 'is.null'],
-      ['carrier', `in.(${carriers.join(',')})`],
-      ['current_stage', 'not.in.(delivered,returned)'],
-      ['created_at', `gte.${addedSince.toISOString()}`],
-      ['order', 'last_synced_at.asc.nullsfirst,created_at.asc'],
-    ]);
-    return rows(await this.request(`/rest/v1/packages?${params}`));
+    const params = query({
+      select: `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`,
+      order: 'last_synced_at.asc.nullsfirst,created_at.asc',
+    });
+    return rows(await this.request(`/rest/v1/rpc/unfiled_one_off_packages?${params}`, {
+      method: 'POST', body: { p_added_since: addedSince.toISOString(), p_carriers: [...carriers] },
+    }));
   }
 
   /**

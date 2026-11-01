@@ -31,6 +31,7 @@ begin
       'public.forget_parcel_link(text,text)',
       'public.forget_expired_parcel_links()',
       'public.followed_one_off_packages(timestamptz)',
+      'public.unfiled_one_off_packages(timestamptz,text[])',
       'public.link_package_tracking(uuid,uuid)',
       'private.new_parcel_link_id()',
       'private.lock_one_off_number(text)',
@@ -318,6 +319,37 @@ begin
     raise exception 'Scheduled sync would follow %', followed;
   end if;
   delete from public.packages where tracking_number like 'ONEOFFFOLLOW%';
+end;
+$$;
+
+-- Scheduled sync re-detects the open one-off parcels filed under the carriers it names, added
+-- since the date it gives, the least recently checked first.
+do $$
+declare
+  key_a constant text := repeat('a', 64);
+  unfiled text[];
+begin
+  perform public.create_one_off_parcel('ONEOFFUNFILED01', 'unknown', null, null, key_a);
+  perform public.create_one_off_parcel('ONEOFFUNFILED02', 'unknown', null, null, key_a);
+  perform public.create_one_off_parcel('ONEOFFUNFILED03', 'unknown', null, null, key_a);
+  perform public.create_one_off_parcel('ONEOFFUNFILED04', 'unknown', null, null, key_a);
+  perform public.create_one_off_parcel('ONEOFFUNFILED05', 'unknown', null, null, key_a);
+  perform public.create_one_off_parcel('ONEOFFUNFILED06', 'unknown', null, null, key_a);
+  update public.packages set last_synced_at = now() - interval '1 hour' where tracking_number = 'ONEOFFUNFILED01';
+  update public.packages set carrier = 'swiss-post' where tracking_number = 'ONEOFFUNFILED03';
+  update public.packages set current_stage = 'delivered' where tracking_number = 'ONEOFFUNFILED04';
+  update public.packages set archived_at = now() where tracking_number = 'ONEOFFUNFILED05';
+  update public.packages set created_at = now() - interval '31 days' where tracking_number = 'ONEOFFUNFILED06';
+  insert into public.packages (user_id, tracking_number, carrier)
+  values ('c1000000-0000-4000-8000-000000000001', 'ONEOFFUNFILED07', 'unknown');
+
+  select array_agg(tracking_number) into unfiled
+  from public.unfiled_one_off_packages(now() - interval '30 days', array['unknown', 'intl-post'])
+  where tracking_number like 'ONEOFFUNFILED%';
+  if unfiled is distinct from array['ONEOFFUNFILED02', 'ONEOFFUNFILED01'] then
+    raise exception 'Scheduled sync would re-detect %', unfiled;
+  end if;
+  delete from public.packages where tracking_number like 'ONEOFFUNFILED%';
 end;
 $$;
 

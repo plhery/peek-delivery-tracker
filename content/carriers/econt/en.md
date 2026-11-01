@@ -77,7 +77,7 @@ Econt's channels, as read on 12 October 2026 on its [customer service page](http
 
 It then shows Econt's summary status, the history with the office of each office scan on a map, and the delivery time. While the parcel waits, it shows the name of the Econt office storing it; Econt lists its Econtomats as offices, so a locker can appear by name too. Econt gives no expected delivery day or weight. The parcel count, courier's and recipient's names, sender and order references are left out.
 
-Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time; a scan in the hour the clocks repeat in late October stays in the history, in order, though not at its exact time. It checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps or on delivery day only.
+Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time; a scan in the hour the clocks repeat in late October stays in the history, in order, though not at its exact time. It checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of every scan, important steps or on delivery day only.
 
 ## Questions about Econt tracking
 

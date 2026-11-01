@@ -220,17 +220,10 @@ export function clearConfirmation(routing: JsonObject): void {
   delete routing.confirmed_tracking_url; delete routing.confirmed_postcode;
 }
 
-export function freshnessWindow(now: Date): number {
-  const hour = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' }).hour;
-  return hour >= 8 && hour < 22 ? HOUR : 3 * HOUR;
-}
-/**
- * How often a parcel asks the universal providers: every 15 min by day, at most hourly overnight,
- * when its checks are due hourly and made at least every 2 hours.
- */
-function universalSpacing(now: Date): number {
-  return freshnessWindow(now) === HOUR ? 15 * 60_000 : HOUR;
-}
+/** How recent the last successful check is while it still stands for the parcel's progress, around the clock. */
+export const FRESHNESS_WINDOW_MS = HOUR;
+/** How often a parcel asks the universal providers, around the clock. */
+const UNIVERSAL_SPACING_MS = 15 * 60_000;
 const millis = (value: unknown): number => typeof value === 'string' && Number.isFinite(Date.parse(value)) ? Date.parse(value) : 0;
 const iso = (value: number): string => new Date(value).toISOString();
 /**
@@ -794,7 +787,7 @@ export class TrackingRouter {
     }
     // Sparse postal fallback must never become sticky, including saved state.
     if (state.preferred_provider === 'UPU') state.preferred_provider = undefined;
-    const recent = () => millis(state.last_success_at) > 0 && now().getTime() - millis(state.last_success_at) < freshnessWindow(now());
+    const recent = () => millis(state.last_success_at) > 0 && now().getTime() - millis(state.last_success_at) < FRESHNESS_WINDOW_MS;
     const report = (code: string, provider: string, kind?: string, error?: unknown) => reportRoutingEvent(code, {
       carrier: declared, provider, category: kind, trackingNumber: number,
       ...(error ? { errorClass: errorType(error), error } : {}),
@@ -894,7 +887,7 @@ export class TrackingRouter {
       if (state.last_event_at) delete state.likely_carrier;
       // Universal checks are deliberately less frequent than direct in-transit polls.
       state.next_check_at = sources.includes(provider as UniversalSource)
-        ? iso(now().getTime() + universalSpacing(now())) : undefined;
+        ? iso(now().getTime() + UNIVERSAL_SPACING_MS) : undefined;
       // A correction changes the selected carrier, not merely its display source.
       // Delivery-leg handoffs remain separate from correcting an incorrect label.
       // A carrier that answered for this number and handed the parcel on in the
@@ -1164,7 +1157,7 @@ export class TrackingRouter {
         if (carrierErrorKind(error) === 'invalid_input' && state.discovered_carrier === carrier) delete state.discovered_carrier;
         state.direct_retry_at = failure.retry_at;
         if (failure.kind === 'rate_limited' && recent()) {
-          state.next_check_at = iso(Math.min(millis(failure.retry_at), millis(state.last_success_at) + freshnessWindow(now())));
+          state.next_check_at = iso(Math.min(millis(failure.retry_at), millis(state.last_success_at) + FRESHNESS_WINDOW_MS));
           report('fallback_deferred_fresh', carrier, failure.kind);
           defer(false);
         }
@@ -1192,7 +1185,7 @@ export class TrackingRouter {
         && since > 0 && now().getTime() - since >= LABEL_WAIT;
       // Providers are asked for the rest at their own cadence, and on the next check after one held it.
       if (filed && isPartialAnswer(filed.result)) {
-        if (sinceChecked >= universalSpacing(now())) partialDirect = { value: filed, carrier: primary };
+        if (sinceChecked >= UNIVERSAL_SPACING_MS) partialDirect = { value: filed, carrier: primary };
       } else if (filed && label && sinceChecked >= labelSpacing(state.label_rounds, scanCount(filed.result))) {
         partialDirect = { value: filed, carrier: primary, label: true };
       }
@@ -1238,7 +1231,7 @@ export class TrackingRouter {
       && resultStage(partial.value.result) === parcel.current_stage) {
       state.direct_retry_at = undefined;
       const kept = persistResult({ ...partial.value, preserveHistory: true }, partial.carrier);
-      state.next_check_at = iso(now().getTime() + universalSpacing(now()));
+      state.next_check_at = iso(now().getTime() + UNIVERSAL_SPACING_MS);
       return kept;
     }
     // A provider held exactly the scans and stage of that answer in the last 6 h.
@@ -1260,7 +1253,7 @@ export class TrackingRouter {
     if (scheduled && unchanged && localDirectFallback && universalNumber === number && metadata.tracking_provider === copy?.provider
       && parcel.current_stage !== 'pending') {
       const kept = keepLocal(localDirectFallback);
-      state.next_check_at = iso(now().getTime() + universalSpacing(now()));
+      state.next_check_at = iso(now().getTime() + UNIVERSAL_SPACING_MS);
       return kept;
     }
 
@@ -1497,7 +1490,7 @@ export class TrackingRouter {
         if (kind === 'not_found' || kind === 'no_history') answeredEmpty.push(source);
         retryAfterMs = millis(failure.retry_at) - now().getTime();
         if (kind === 'rate_limited' && recent() && !localDirectFallback && !partialDirect) {
-          state.next_check_at = iso(Math.min(millis(failure.retry_at), millis(state.last_success_at) + freshnessWindow(now())));
+          state.next_check_at = iso(Math.min(millis(failure.retry_at), millis(state.last_success_at) + FRESHNESS_WINDOW_MS));
           defer(false);
         }
         return null;

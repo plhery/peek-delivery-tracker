@@ -14,7 +14,7 @@ const DAY_MS = 24 * 60 * 60 * 1_000;
 
 /**
  * A one-off lookup nobody has answered for that someone keeps an alert on is checked
- * daily by day until this long after it was added, rather than leaving the schedule.
+ * daily until this long after it was added, rather than leaving the schedule.
  */
 export const ALERTED_UNSEEN_MS = 30 * DAY_MS;
 

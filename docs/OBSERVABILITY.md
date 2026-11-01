@@ -746,10 +746,11 @@ provider failure in an `AggregateError` so every cause is visible.
   searchable tags.
 - **Source maps**: the server's stay in its image. The browser's are public, beside the
   scripts; see "Browser error reports" below.
-- **Crons**: a scheduled run sends an in-progress check-in to the daytime or overnight
-  monitor, then `ok` or `error` with its duration in seconds. A run handed over at a deploy
-  keeps its check-in. The first check-in also sends the monitor's settings (schedule, 5 or
-  15 minutes of margin, 10 minutes of maximum runtime), which overwrite edits made in Sentry:
+- **Crons**: a scheduled run sends an in-progress check-in to the
+  `delivery-tracker-sync-daytime` monitor, which runs every 2 minutes around the clock despite
+  its name, then `ok` or `error` with its duration in seconds. A run handed over at a deploy
+  keeps its check-in. The first check-in also sends the monitor's settings (schedule, 5
+  minutes of margin, 10 minutes of maximum runtime), which overwrite edits made in Sentry:
   change them in `beginScheduledSyncCheckIn`. Runs never overlap, so a stuck run holds the
   queue: Sentry reports it as timed out after 10 minutes, and as missed once the next run is
   late. A run whose worker died three times is failed by the next claim; the next run closes

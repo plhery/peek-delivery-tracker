@@ -82,7 +82,7 @@ Die Nummern auf Cainiaos chinesischer Seite sind für Kunden in China und für H
 
 Manchmal gibt dir AliExpress schon die Nummer des Paketdiensts vor Ort, etwa eine SDA-Nummer für ein Paket nach Italien, während Cainiao das Paket noch hat. Bei einigen dieser Formen fragt Peek Cainiao neben diesem Paketdienst ab. Kennen beide die Nummer, legt Peek das Paket unter „AliExpress / Cainiao“ ab, wo die Scans von vor der Grenze stehen, und fragt für die letzte Meile auch den Paketdienst vor Ort: Seine Scans kommen in den Verlauf, sobald er das Paket meldet.
 
-Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, zeigt jeden Scan auf einer Karte und kann dir Mitteilungen schicken, für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Du siehst Status und Verlauf auf Englisch, den Ort eines Scans, wenn Cainiao einen nennt, die voraussichtliche Zustellung als Zeitfenster von Tagen, wenn Cainiao eines angibt, die Zustellzeit und die Nummer des Paketdiensts vor Ort, wenn Cainiao sie veröffentlicht. Cainiao kontaktieren oder etwas reklamieren kann es nicht für dich.
+Es schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, zeigt jeden Scan auf einer Karte und kann dir Mitteilungen schicken, für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Du siehst Status und Verlauf auf Englisch, den Ort eines Scans, wenn Cainiao einen nennt, die voraussichtliche Zustellung als Zeitfenster von Tagen, wenn Cainiao eines angibt, die Zustellzeit und die Nummer des Paketdiensts vor Ort, wenn Cainiao sie veröffentlicht. Cainiao kontaktieren oder etwas reklamieren kann es nicht für dich.
 
 ## Fragen zur Cainiao Sendungsverfolgung
 

@@ -171,6 +171,8 @@ export interface Survey {
   remembered: string | null;
   /** The number whose carriers should be asked now. */
   ask: string | null;
+  /** That number as typed: its dashes and spaces tell some carriers' numbers apart. */
+  askTyped: string | null;
   /** The first thing the visitor has to settle before a lookup can go. */
   need: 'number' | 'order' | 'typo' | 'code' | 'carrier' | 'account' | 'input' | 'wait' | null;
 }
@@ -254,6 +256,7 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   // Amazon's tracker is no exception: a placeholder is asked about nowhere.
   const ask = match && !onDevice && !state.job && settledForAsking && !answer
     && ((amazon && !placeholder) || (recognizable && state.carrier === 'auto')) ? normalized : null;
+  const askTyped = ask && match ? match.trackingNumber : null;
   const need: Survey['need'] = order ? 'order' : !match ? 'number' : typo ? 'typo' : onDevice ? null : code || placeholder ? 'code'
     : account === 'checking' || check.status === 'asking' ? 'wait'
       : account ? 'account'
@@ -264,7 +267,7 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
     reading, several, match, normalized, nothing, order: order && (state.raised || calm.order) ? order : null, typo,
     pickup: code && (state.raised || settledNumber === normalized),
     placeholder: placeholder && (state.raised || settledNumber === normalized), onDevice, amazon, account,
-    check, carrier, source, certain, suggested, inputCarrier, fields, missing, input, remembered, ask, need, postcodeCountry,
+    check, carrier, source, certain, suggested, inputCarrier, fields, missing, input, remembered, ask, askTyped, need, postcodeCountry,
     postcodeCountries: match && postcodeField ? postcodeCountries(inputCarrier, match.trackingNumber) : [],
   };
 }

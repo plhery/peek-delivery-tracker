@@ -87,7 +87,7 @@ Drivers can't be called directly. No page says whether 0848 works from abroad.
 
 ## Tracking a Quickpac parcel with Peek
 
-[Peek](/) recognises an 18-digit number starting 44 as Quickpac and reads it from Planzer's tracking site; a tracking link from quickpac.ch or tracking.app.planzer.ch works too. It checks every 10 minutes by day (every 2 minutes once the parcel is out for delivery) and every hour or two overnight, and can notify you of every scan, important steps or delivery day only.
+[Peek](/) recognises an 18-digit number starting 44 as Quickpac and reads it from Planzer's tracking site; a tracking link from quickpac.ch or tracking.app.planzer.ch works too. It checks every 10 minutes (every 2 minutes once the parcel is out for delivery) and can notify you of every scan, important steps or delivery day only.
 
 It shows the status, history, expected delivery, weight, dimensions, delivery time and destination country. It leaves out the recipient address. `Shipped` appears as delivered. Peek can't contact Quickpac for you.
 

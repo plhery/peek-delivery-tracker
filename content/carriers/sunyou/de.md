@@ -90,7 +90,7 @@ Peek liest SunYous Tracking auf Englisch, darum stehen die Zeilen dort englisch,
 
 Nennt SunYou die Nummer des Paketdiensts vor Ort, kann Peek diesen Dienst abfragen, etwa DHL in Deutschland oder bei einer Postnummer die Post des Ziellands, und wechselt zu ihm, sobald er neuere Schritte zeigt. Das Paket behält seine SunYou-Nummer, seine Seite zeigt „Zustellung durch“ und den Dienst, mit dessen eigener Nummer und einem Link. Das klappt nicht bei jedem Paket.
 
-Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. SunYou oder den Händler kontaktieren kann es nicht für dich.
+Es schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. SunYou oder den Händler kontaktieren kann es nicht für dich.
 
 ## Fragen zur SunYou Sendungsverfolgung
 

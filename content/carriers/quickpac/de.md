@@ -100,7 +100,7 @@ Zusteller kannst du nicht direkt anrufen.
 
 ## Quickpac-Sendung mit Peek verfolgen
 
-[Peek](/) erkennt eine 18-stellige Nummer, die mit 44 beginnt, als Quickpac und liest sie auf Planzers Tracking-Seite ab, wo Quickpac-Pakete verfolgt werden. Ein Tracking-Link von quickpac.ch oder tracking.app.planzer.ch geht auch. Es schaut tagsüber alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, nachts alle ein bis zwei Stunden, zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag.
+[Peek](/) erkennt eine 18-stellige Nummer, die mit 44 beginnt, als Quickpac und liest sie auf Planzers Tracking-Seite ab, wo Quickpac-Pakete verfolgt werden. Ein Tracking-Link von quickpac.ch oder tracking.app.planzer.ch geht auch. Es schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag.
 
 Du siehst Status, Verlauf, voraussichtliche Zustellung, Gewicht, Abmessungen, Zustellzeit und Zielland. Die Empfängeradresse, die Planzers Seite zeigt, lässt Peek weg, und `Shipped` erscheint als zugestellt. Deponierungsauftrag, neuen Zustelltag oder Reklamation erledigst du weiter bei Quickpac, Planzer Paket oder dem Shop: Peek kann sie nicht für dich kontaktieren.
 

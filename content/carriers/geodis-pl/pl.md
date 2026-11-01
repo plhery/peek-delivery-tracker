@@ -78,7 +78,7 @@ PL i 16 cyfr to nie znak rozpoznawczy GEODIS (PL oznacza Polskę), więc Peek ni
 
 Peek czyta angielską wersję Strefy Klienta i pokazuje status, każdy skan w angielskim brzmieniu GEODIS z lokalizacją terminala, godzinę doręczenia i kraj dostawy. Skany z polskich terminali odczytuje w czasie warszawskim, a skan z terminala za granicą ma godzinę lokalną tego terminala. Gdy wiersz `Pseudoscan` skasuje wcześniejsze skany, Peek też je pomija, a `Claim Received` nie zmienia statusu. Strona GEODIS nie podaje przewidywanej daty dostawy, wagi, nazwy usługi, nazwiska odbiorcy ani dowodu doręczenia. Peek pomija kod pocztowy i adres dostawy, liczbę sztuk, kody terminali i uwagi, w których może paść nazwisko osoby podpisującej odbiór.
 
-Peek sprawdza przesyłkę w dzień co 10 minut, gdy jedzie już do Ciebie – co 2 minuty, a w nocy co godzinę lub dwie. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni terminu dostawy, nie umówi odbioru z terminala i nie złoży reklamacji: zadzwoń do GEODIS albo napisz do sklepu.
+Peek sprawdza przesyłkę co 10 minut, a gdy jedzie już do Ciebie – co 2 minuty. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni terminu dostawy, nie umówi odbioru z terminala i nie złoży reklamacji: zadzwoń do GEODIS albo napisz do sklepu.
 
 ## Pytania o śledzenie przesyłek GEODIS
 

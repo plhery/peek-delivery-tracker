@@ -78,7 +78,7 @@ J&T Express Germany's channels, as read on [its contact page](https://www.jtexpr
 
 Peek reads J&T's own tracker and shows the status, each scan at its exact time and the delivery time. Scans show in J&T's English, even if you read them in German on jtexpress.de. Peek counts the loading line as out for delivery and `Returns have begun` as a return, so the parcel's status reads "Out for delivery" or "Returned to sender". On the delivered line it keeps the delivery type, such as `Left with neighbor`, without brackets, and drops the hotline sentence. J&T gives no places, expected delivery day or weight, so Peek shows no map. Peek doesn't open the neighbour details behind J&T's postcode check, and on a very long history it keeps the newest 100 scans.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or delivery day only. It can't contact J&T or the shop for you.
+Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of every scan, important steps only or delivery day only. It can't contact J&T or the shop for you.
 
 ## Questions about J&T Express Germany tracking
 

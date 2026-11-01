@@ -84,7 +84,7 @@ W pozostałych sprawach najszybciej pomoże sklep albo platforma, na której kup
 
 Peek odczytuje postnl.post. Widzisz status, historię z krajem każdego skanu, godzinę doręczenia i kraj docelowy. Godziny skanów Peek odczytuje według czasu lokalnego każdego kraju i pokazuje w strefie czasowej Twojego urządzenia. PostNL nie podaje przewidywanej daty doręczenia ani nadawcy. Przy numerze z NL, gdy PostNL wskaże Polskę jako cel, Peek pyta też Pocztę Polską o ten sam numer i przełącza się na nią, gdy pokaże nowsze skany. Gdy PostNL nie podaje kraju docelowego, Peek bierze Twój kraj: w aplikacji na iPhone'a ustawiony region, w przeglądarce kraj, z którego dodano paczkę. Kodów 3S z 13 znakami postnl.post nie przyjmuje, więc dla nich Peek szuka paczki w [uniwersalnych serwisach śledzenia](guide:universal-tracker).
 
-Peek sprawdza PostNL co 30 minut, także gdy paczka jest w doręczeniu, a w nocy co godzinę lub dwie. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Peek nie skontaktuje się za Ciebie z PostNL, Pocztą Polską ani ze sklepem.
+Peek sprawdza PostNL co 30 minut, także gdy paczka jest w doręczeniu. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Peek nie skontaktuje się za Ciebie z PostNL, Pocztą Polską ani ze sklepem.
 
 ## Pytania o śledzenie przesyłki PostNL
 

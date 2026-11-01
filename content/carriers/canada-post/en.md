@@ -82,7 +82,7 @@ Canada Post's channels, as read on 15 October 2026:
 
 Peek shows the status, each scan with its town and province on a map, the expected delivery day, a delivery time window while one is given, the delivery time and the sender's business name. Each scan is read on the clock of the place it happened and shown in your device's time zone. Statuses stay in Canada Post's English; delivered scans read "Delivered" and a parcel back with the sender "Returned to sender". Peek drops delivery options, addresses, signatures and delivery photos, and doesn't show the post office's name or the pickup deadline.
 
-Peek checks every 10 minutes from 8am to 10pm Swiss time (about 2am to 4pm ET, 11pm to 1pm PT), every 2 minutes in those hours once the parcel is out for delivery, and every hour or two the rest of the time, and can notify you at every scan, at important steps or on delivery day only. When a parcel posted abroad with a postal number is bound for Canada, Peek can follow it on Canada Post once Canada Post shows progress.
+Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you at every scan, at important steps or on delivery day only. When a parcel posted abroad with a postal number is bound for Canada, Peek can follow it on Canada Post once Canada Post shows progress.
 
 ## Questions about Canada Post tracking
 

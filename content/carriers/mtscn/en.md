@@ -81,7 +81,7 @@ Peek holds back a step written more than twelve hours before the time it carries
 
 Peek follows the parcel on Meiteshun's tracker. The one hand-over Peek can take from Meiteshun's record is to [Swiss Post](carrier:swiss-post), when the record names a Swiss Post line and number for a parcel to Switzerland or Liechtenstein. With any other delivering number from the seller, add it as a parcel of its own.
 
-Peek checks every 10 minutes by day and every hour or two overnight, and hourly once Meiteshun goes quiet (12 hours at its first lines, or two days with nothing new), which an order whose whole script was written at its creation soon does. It can notify you of every scan, important steps only or "Delivery only", and can't contact Meiteshun or the seller for you.
+Peek checks every 10 minutes, and hourly once Meiteshun goes quiet (12 hours at its first lines, or two days with nothing new), which an order whose whole script was written at its creation soon does. It can notify you of every scan, important steps only or "Delivery only", and can't contact Meiteshun or the seller for you.
 
 ## Questions about Meiteshun tracking
 

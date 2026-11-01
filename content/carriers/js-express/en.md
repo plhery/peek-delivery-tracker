@@ -98,7 +98,7 @@ Peek reads rows in China on Beijing time and Straightship's on UTC, works out th
 
 When the courier's number fits one carrier that works in your country, such as a USPS barcode in the US or a Straightship number in Canada, Peek shows "Delivery with" that carrier, with its number, and asks it too; an international postal number goes to your country's post. Once that carrier shows a scan at least as recent as JS Express's latest, Peek follows the parcel there, showing both numbers and keeping JS Express's scans. Until then it stays with JS Express, whose history often carries the courier's scans too.
 
-Peek checks every 10 minutes by day, every 2 minutes once the parcel is out for delivery, and every hour or two overnight. It can notify you of every scan, important steps only (customs, problems, "Ready for pickup", out for delivery, the delivery and a return) or "Delivery only". It can't contact JS Express or the seller for you.
+Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. It can notify you of every scan, important steps only (customs, problems, "Ready for pickup", out for delivery, the delivery and a return) or "Delivery only". It can't contact JS Express or the seller for you.
 
 ## Questions about JS Express tracking
 

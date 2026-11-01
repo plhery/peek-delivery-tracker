@@ -547,7 +547,7 @@
   "notifications.save": "Salvar preferências",
   "notifications.saved": "Preferências salvas",
   "notifications.saving": "Salvando…",
-  "notifications.schedule": "As encomendas são verificadas a cada 10 minutos das 08:00 às 22:00 (horário da Suíça) e a cada uma ou duas horas durante a noite.",
+  "notifications.schedule": "As encomendas são verificadas a cada 10 minutos, dia e noite.",
   "notifications.scope": "Em todos os seus dispositivos",
   "notifications.state.blocked": "As notificações estão bloqueadas. Permita nas configurações do sistema para este app.",
   "notifications.state.blockedBrowser": "As notificações estão bloqueadas. Permita nas configurações do site, no navegador.",

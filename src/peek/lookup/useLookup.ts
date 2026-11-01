@@ -82,7 +82,7 @@ export function useLookup(onTracked: (lookup: ParcelLookup) => void): Lookup {
     const dispatch = sendRef.current;
 
     // Ask the carriers about the number the state now wants asked, and nobody about any other.
-    const ask = survey(next, live.current.device, live.current.postcodes).ask;
+    const { ask, askTyped } = survey(next, live.current.device, live.current.postcodes);
     if (asking.current?.number !== ask) {
       asking.current?.stop();
       asking.current = null;
@@ -92,7 +92,7 @@ export function useLookup(onTracked: (lookup: ParcelLookup) => void): Lookup {
         const patience = setTimeout(() => { answer(); controller.abort(); }, ASK_PATIENCE_MS);
         asking.current = { number: ask, stop: () => { clearTimeout(patience); controller.abort(); } };
         // A refusal or a failure degrades quietly: the lookup works without the answer.
-        detectCarrierPublic(ask, controller.signal, startsDeviceParcel(ask, live.current.device))
+        detectCarrierPublic(askTyped ?? ask, controller.signal, startsDeviceParcel(ask, live.current.device))
           .then(answer, () => answer()).finally(() => clearTimeout(patience));
       }
     }

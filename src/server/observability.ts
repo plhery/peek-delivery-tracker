@@ -683,26 +683,16 @@ export function databaseUnavailable(error: unknown): boolean {
   return details.code === 'unreachable' || details.status === 502 || details.status === 503 || details.status === 504;
 }
 
-function zurichHour(now: Date): number {
-  return Number(new Intl.DateTimeFormat('en-GB', {
-    hour: '2-digit',
-    hourCycle: 'h23',
-    timeZone: 'Europe/Zurich',
-  }).format(now));
-}
-
 export function beginScheduledSyncCheckIn(now = new Date()): ScheduledCheckIn | null {
   if (!initObservability()) return null;
-  const daytime = zurichHour(now) >= 8 && zurichHour(now) < 22;
-  const monitorSlug = daytime
-    ? 'delivery-tracker-sync-daytime'
-    : 'delivery-tracker-sync-overnight';
+  // The monitor kept its name from when runs came every 20 minutes overnight: renaming it would drop its history.
+  const monitorSlug = 'delivery-tracker-sync-daytime';
   const checkInId = Sentry.captureCheckIn({ monitorSlug, status: 'in_progress' }, {
     schedule: {
       type: 'crontab',
-      value: daytime ? '*/2 8-21 * * *' : '*/20 0-7,22-23 * * *',
+      value: '*/2 * * * *',
     },
-    checkinMargin: daytime ? 5 : 15,
+    checkinMargin: 5,
     // Runs never overlap: a stuck one holds the queue, no later check-in arrives, and
     // Sentry reports it as timed out after ten minutes, far beyond a normal run.
     // Every run's first check-in sends this configuration, replacing edits made in Sentry.

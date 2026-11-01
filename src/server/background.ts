@@ -36,7 +36,7 @@ const MAX_IDLE_POLL_INTERVALS = 10;
 // the handoff waits at most 4 s for it to stop before returning its job to the queue.
 export const CHECK_FINISH_MS = 10_000;
 const ABORT_SETTLE_MS = 4_000;
-// Runs come every 20 minutes overnight: several of the next ones can still close a lost run's check-in.
+// Any run in the next 2 hours can still close a lost run's check-in.
 const LOST_RUN_WINDOW_MS = 2 * 60 * 60_000;
 
 export interface BackgroundState {
@@ -60,21 +60,19 @@ function initialState(): BackgroundState {
   };
 }
 
-/** Minutes between scheduled runs: every 2 by day, every 20 overnight. */
-function runMinutes(local: DateTime): number {
-  return local.hour >= 8 && local.hour < 22 ? 2 : 20;
-}
+/** Minutes between scheduled runs, around the clock. */
+const RUN_MINUTES = 2;
 
-/** When the schedule's current window opened: the last even minute by day, the last :00, :20 or :40 overnight. */
+/** When the schedule's current window opened: the last even minute. */
 export function syncWindowStart(now = new Date()): Date {
   const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
-  return local.startOf('minute').minus({ minutes: local.minute % runMinutes(local) }).toJSDate();
+  return local.startOf('minute').minus({ minutes: local.minute % RUN_MINUTES }).toJSDate();
 }
 
 export function secondsUntilNextSync(now = new Date()): number {
   if (!Number.isFinite(now.getTime())) throw new TypeError('Sync clock must be valid');
   const local = DateTime.fromJSDate(now, { zone: 'Europe/Zurich' });
-  const candidate = local.startOf('minute').plus({ minutes: runMinutes(local) - (local.minute % runMinutes(local)) });
+  const candidate = local.startOf('minute').plus({ minutes: RUN_MINUTES - (local.minute % RUN_MINUTES) });
   return Math.max(1, candidate.toUTC().diff(local.toUTC(), 'seconds').seconds);
 }
 

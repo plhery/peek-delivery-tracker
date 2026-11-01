@@ -143,6 +143,22 @@ it('returns the one carrier that knows an ambiguous number', async () => {
   expect(fourteen[0]).toBe('dpd');
 });
 
+it('detects with the number as typed, whose dash tells an R+L PRO number, and asks the carrier about the number itself', async () => {
+  recognize.mockImplementation(knows('rl-carriers'));
+  const typed = (trackingNumber: string, typedNumber?: string) => POST(new NextRequest('https://delivery.example/api/carriers/detect', {
+    method: 'POST', headers: { 'content-type': 'application/json', Authorization: 'Bearer detection-test' },
+    body: JSON.stringify({ trackingNumber, ...(typedNumber ? { typedNumber } : {}) }),
+  }), { params: Promise.resolve({}) });
+  await expect((await typed('314159265', '31415926-5')).json())
+    .resolves.toEqual({ trackingNumber: '314159265', carrier: 'rl-carriers', asked: ['rl-carriers'] });
+  expect(recognize.mock.calls.map(([carrier, number]) => [carrier, number])).toEqual([['rl-carriers', '314159265']]);
+  // The bare digits fit no carrier's rule, and a typed form of another number is not read.
+  recognize.mockClear();
+  await expect((await typed('314159265')).json()).resolves.toMatchObject({ trackingNumber: '314159265', carrier: 'unknown' });
+  await expect((await typed('314159265', '31415926-4')).json()).resolves.toMatchObject({ trackingNumber: '314159265', carrier: 'unknown' });
+  expect(asked()).toEqual([]);
+});
+
 it('offers a carrier that needs a postcode so the sheet can ask for it', async () => {
   // Both GLS networks answer from one overview: the more common one is returned.
   recognize.mockImplementation(knows('gls-ch', 'gls-de'));

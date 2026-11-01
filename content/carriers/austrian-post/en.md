@@ -89,7 +89,7 @@ As listed on Austrian Post's pages on 11 October 2026:
 
 Peek shows the status, the history with each facility on a map, the weight, the dimensions, the delivery time and an expected delivery (a day, a span of days or a time window) while the parcel is accepted, in distribution or out for delivery. It shows a parcel as ready for pickup, but not where, and no sender. Austrian Post's wordings appear in German, as its tracking gives them, so a delivered parcel shows `Sendung wurde zugestellt`.
 
-Peek checks every 10 minutes by day, every 2 once out for delivery, and every hour or two overnight, and can notify you of every scan, important steps only or on delivery day only. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
+Peek checks every 10 minutes, or every 2 once out for delivery, and can notify you of every scan, important steps only or on delivery day only. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
 
 ## Questions about Austrian Post tracking
 

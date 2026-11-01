@@ -90,7 +90,7 @@ Para reclamar, las condiciones de transporte dan el mismo teléfono y la web, pe
 
 [Peek](/) reconoce el transportista por el número. Varios transportistas comparten los [números de 16 cifras](guide:tracking-number-formats), así que pregunta a los más probables. Uno de 23 cifras apunta a Correos Express. Si no te ofrece Correos Express, repasa las cifras.
 
-Peek consulta el seguimiento cada 10 minutos de día, cada 2 minutos en el último tramo y cada una o dos horas por la noche, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Verás el estado, el historial con el lugar de cada escaneo en un mapa y la entrega prevista, solo mientras el paquete siga en camino. No guarda la prueba de entrega, los datos de contacto ni los comentarios de entrega, y no puede hablar con Correos Express por ti.
+Peek consulta el seguimiento cada 10 minutos, cada 2 minutos en el último tramo, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Verás el estado, el historial con el lugar de cada escaneo en un mapa y la entrega prevista, solo mientras el paquete siga en camino. No guarda la prueba de entrega, los datos de contacto ni los comentarios de entrega, y no puede hablar con Correos Express por ti.
 
 ## Preguntas sobre el seguimiento de Correos Express
 

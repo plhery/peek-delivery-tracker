@@ -98,7 +98,7 @@ Colle le bon de transport. Pour un numéro à 9 chiffres dont la clé de contrô
 
 À 9 chiffres, Peek lit tnt.com : le statut, l'historique avec la ville et le pays de chaque scan, le pays de destination et la date de livraison prévue tant que TNT en donne une. Comme les numéros reviennent, il retient l'envoi dont le dernier scan est le plus récent : vérifie que le trajet est bien le tien. À 16 chiffres, il lit tnt.fr : l'étape en cours et chaque ligne avec son lieu, sans date prévue. Les heures s'affichent dans le fuseau horaire de ton appareil. La référence de l'expéditeur et la signature restent sur les sites de TNT.
 
-Peek vérifie le suivi toutes les 10 minutes en journée, toutes les 2 minutes une fois le colis en livraison et toutes les une à deux heures la nuit, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni contacter TNT ou l'expéditeur, ni payer la douane, ni changer une livraison.
+Peek vérifie le suivi toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni contacter TNT ou l'expéditeur, ni payer la douane, ni changer une livraison.
 
 ## Questions sur le suivi TNT
 

@@ -76,7 +76,7 @@ For a parcel from a shop, the shop is your first contact. GLS Germany's own cont
 
 GLS needs the delivery postcode for the detailed history, so the "Delivery postcode" field is required: without it Peek only learns whether GLS knows the number, and if GLS doesn't find the parcel with the one you gave, Peek says so and lets you change it. Any country's format works. It goes to GLS and, when needed, to tracking services.
 
-You then see the status, each scan's town and country on a map, the expected day, the weight, the delivery time and, at a ParcelShop, its name and address. Your name, address and contact details, the signature and the sender's reference are dropped. GLS's ParcelShop status shows as ready for pickup. Times are read as German time. Peek checks GLS about once an hour by day and every hour or two overnight, delivery day included (4 hours after a failed check), and can notify you of each change. Only a parcel GLS hands to Swiss Post is followed to another carrier.
+You then see the status, each scan's town and country on a map, the expected day, the weight, the delivery time and, at a ParcelShop, its name and address. Your name, address and contact details, the signature and the sender's reference are dropped. GLS's ParcelShop status shows as ready for pickup. Times are read as German time. Peek checks GLS about once an hour, delivery day included (4 hours after a failed check), and can notify you of each change. Only a parcel GLS hands to Swiss Post is followed to another carrier.
 
 ## Questions about GLS tracking in Germany
 

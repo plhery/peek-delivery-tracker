@@ -17,6 +17,7 @@ import type {
 import type { Locale } from '../i18n';
 import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
 import { isDemoBuild } from '../lib/buildMode';
+import { typedNumber } from '../lib/carrierDetection';
 import { CARRIERS, detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
 import { pageLocale } from '../lib/locale';
 import { userErrorKey } from '../lib/userMessages';
@@ -136,7 +137,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
 
     async detectCarrierPublic(number, signal, prefixOfSaved) {
       const trackingNumber = normalizeTrackingNumber(number);
-      const body: ApiCarrierDetectionRequest = { trackingNumber, ...(prefixOfSaved ? { prefixOfSaved } : {}) };
+      const body: ApiCarrierDetectionRequest = { trackingNumber, ...typedNumber(number, trackingNumber), ...(prefixOfSaved ? { prefixOfSaved } : {}) };
       const response = await protectedPost('/api/public/detect', body, signal);
       if (!response.ok) throw await failure(response);
       const result = await answer<ApiCarrierDetectionResponse>(response);

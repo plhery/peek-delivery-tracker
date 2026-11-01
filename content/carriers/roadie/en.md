@@ -93,7 +93,7 @@ So Peek doesn't show the delivery photo, the driver or anything else behind Road
 
 If a tracking service names the carrier Roadie handed the delivery to, with its number, and Peek reads that carrier's own tracking, as it does UPS's, Peek asks that carrier too. Once it shows a scan at least as recent as the service's latest, Peek follows the delivery there. You can also add that number yourself: Peek names UPS at once for a `1Z` number whose check digit is right.
 
-While a service has the delivery, Peek checks it every 15 minutes from 8 am to 10 pm Swiss time (about 2 am to 4 pm Eastern), out for delivery too, and every hour or two the rest of the time. So for a delivery due that evening, Roadie's tracker is quicker. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Roadie or the shop for you.
+While a service has the delivery, Peek checks it every 15 minutes, out for delivery too. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Roadie or the shop for you.
 
 ## Questions about Roadie tracking
 

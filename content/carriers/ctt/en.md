@@ -95,7 +95,7 @@ Peek shows the status and the newest 20 scans with a rough place (depot or point
 
 CTT Express's 22- and 25-digit numbers (`00`, four digits, `00`, then 14 digits, plus `001` for 25) go to CTT Express, which Peek lists separately: history without places, the expected delivery day, weight, delivery time and Spanish wordings such as `El envío fue entregado correctamente`.
 
-Peek checks every 10 minutes by day, every 2 minutes once out for delivery, and every hour or two overnight, and can notify you when the status changes.
+Peek checks every 10 minutes, or every 2 minutes once out for delivery, and can notify you when the status changes.
 
 ## Questions about CTT tracking
 

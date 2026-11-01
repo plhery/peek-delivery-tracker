@@ -74,7 +74,7 @@ Peek legge lo stesso tracking che usa la pagina di Techlink e mostra lo stato, o
 
 Quando i dati di Techlink contengono il numero del corriere che consegna, Peek ne guarda la forma. Un numero postale internazionale (due lettere, nove cifre e due lettere) rimanda alla posta del Paese di destinazione: per un pacco diretto in Italia, Peek interroga [Poste Italiane](carrier:poste-italiane). Un altro numero rimanda al corriere che, nel catalogo di Peek, è l'unico a usare quella forma, e Peek lo interroga se ne legge il tracking. Appena il corriere mostra novità recenti quanto quelle di Techlink, Peek passa a lui: il pacco tiene il numero ZHPHD e mostra l'altro accanto. Altrimenti Peek resta sul tracking di Techlink: aspettati che la cronologia si fermi all'arrivo all'aeroporto di destinazione.
 
-Peek controlla ogni 10 minuti di giorno e ogni una o due ore di notte. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna». Peek non può contattare Techlink o il venditore al posto tuo.
+Peek controlla ogni 10 minuti. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna». Peek non può contattare Techlink o il venditore al posto tuo.
 
 ## Domande sul tracking Techlink
 

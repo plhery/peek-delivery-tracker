@@ -108,7 +108,7 @@ Peek lit directement le suivi de Speedaf : statut, historique, pays de destinati
 
 Les lignes s'affichent telles qu'écrites, en anglais sinon en chinois, sans les noms du livreur, de l'agent et du signataire ni le téléphone du livreur. Peek écarte aussi la preuve de livraison, le lien de paiement des droits et le nombre de colis, et ne suit que ton numéro, pas les autres colis de la même lettre de transport.
 
-Peek vérifie toutes les 10 minutes de 8 h à 22 h (heure de Paris), toutes les 2 minutes une fois le colis en livraison, et toutes les une à deux heures la nuit. Ses notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni payer les droits, ni reprogrammer une livraison, ni contacter Speedaf ou la boutique à ta place.
+Peek vérifie toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison. Ses notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni payer les droits, ni reprogrammer une livraison, ni contacter Speedaf ou la boutique à ta place.
 
 ## Questions sur le suivi Speedaf
 

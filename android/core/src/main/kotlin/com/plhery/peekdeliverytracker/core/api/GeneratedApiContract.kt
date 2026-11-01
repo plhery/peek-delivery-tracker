@@ -24,6 +24,7 @@ data class CarrierDetectionRequest(
     val trackingNumber: String,
     val lookupCountryHint: String? = null,
     val prefixOfSaved: Boolean? = null,
+    val typedNumber: String? = null,
 )
 
 @Serializable

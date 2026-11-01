@@ -73,7 +73,7 @@ describe('NotificationControl', () => {
     render(<NotificationControl apiAuth={apiAuth} />);
 
     await user.click(screen.getByRole('button', { name: 'Notifications' }));
-    expect(await screen.findByText(/every 10 minutes from 08:00 to 22:00/i)).toBeInTheDocument();
+    expect(await screen.findByText(/every 10 minutes, day and night/i)).toBeInTheDocument();
     await user.click(screen.getByRole('switch', { name: 'Notifications' }));
     expect(inspectPushState).toHaveBeenCalledWith(apiAuth);
     expect(enablePushNotifications).toHaveBeenCalledWith('public', apiAuth, 'en');

@@ -90,7 +90,7 @@ Obsługę klienta przy paczkach Allegro Delivery, także Allegro One, prowadzi A
 
 Peek odczytuje śledzenie Allegro po polsku, gdy korzystasz z Peek po polsku (stąd komunikaty jak w tabeli powyżej), a w każdym innym języku po angielsku. Pokazuje historię z dokładnymi godzinami i czas doręczenia. Allegro nie podaje miejsc, więc na mapie nie ma czego zaznaczyć; nie ma też nazwy One Boxa ani One Punktu, przewidywanej daty dostawy, wagi ani nadawcy.
 
-Peek sprawdza śledzenie w dzień co 10 minut, a gdy paczka jest w doręczeniu, co 2 minuty; w nocy co godzinę lub dwie. Może Cię powiadomić o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
+Peek sprawdza śledzenie co 10 minut, a gdy paczka jest w doręczeniu, co 2 minuty. Może Cię powiadomić o każdym skanie, tylko o ważnych krokach albo tylko w dniu dostawy.
 
 ## Pytania o śledzenie Allegro One
 

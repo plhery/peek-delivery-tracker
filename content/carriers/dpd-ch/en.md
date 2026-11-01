@@ -77,7 +77,7 @@ As listed on DPD's Swiss pages on 10 October 2026, for the whole country:
 
 The optional "Delivery postcode" field takes any country's format and is sent to DPD and, when needed, to tracking services. Without it you get one line per step and the expected day, when DPD has one. With it, DPD's scans appear on the map with town and country, plus its notices, the delivery window (in Swiss time), the sender's name and the weight. If DPD refuses the postcode, the parcel page says so and offers "Edit postcode".
 
-At a Pickup Location the shop is named when DPD names it, its address usually only with the postcode. Statuses stay in DPD's English, except plain `Delivered`, shown as "Delivered" in your language. Your name, address and the proof-of-delivery link are dropped. Peek checks every 10 minutes by day (every 2 once out for delivery) and every hour or two overnight, and can notify you of every scan, important steps or delivery day only. It doesn't follow the parcel to another carrier.
+At a Pickup Location the shop is named when DPD names it, its address usually only with the postcode. Statuses stay in DPD's English, except plain `Delivered`, shown as "Delivered" in your language. Your name, address and the proof-of-delivery link are dropped. Peek checks every 10 minutes (every 2 once out for delivery) and can notify you of every scan, important steps or delivery day only. It doesn't follow the parcel to another carrier.
 
 ## Questions about DPD Switzerland tracking
 

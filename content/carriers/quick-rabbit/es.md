@@ -84,7 +84,7 @@ El formulario de la página de contacto es para empresas que piden presupuesto.
 
 Peek lee el propio seguimiento de Quick Rabbit: el estado, el historial con las líneas en inglés de la tabla y la hora de entrega. Lee las horas con el reloj de Madrid y te las muestra en la zona horaria de tu dispositivo. Quick Rabbit no indica lugares, así que no hay mapa. Peek deja fuera la fecha prevista de entrega, la ciudad de destino, la referencia del remitente y las coordenadas del repartidor, que pueden ser las de tu puerta. No hay prueba de entrega ni código del casillero, y Peek no consulta a Citibox: los pasos del casillero son líneas del propio Quick Rabbit.
 
-Peek consulta el seguimiento cada 10 minutos de día, cada 2 cuando el paquete está en reparto y cada una o dos horas por la noche. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede cambiar la entrega, abrir una reclamación ni hablar con Quick Rabbit o con la tienda por ti.
+Peek consulta el seguimiento cada 10 minutos y cada 2 cuando el paquete está en reparto. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede cambiar la entrega, abrir una reclamación ni hablar con Quick Rabbit o con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Quick Rabbit
 

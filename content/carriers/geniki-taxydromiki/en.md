@@ -82,7 +82,7 @@ As listed on taxydromiki.com on 13 October 2026:
 
 Geniki's tracker gives times without a time zone: Peek reads them on Greek time and lists Geniki's own history. Scans appear in Geniki's English wording, as in the table. A scan the table doesn't list keeps Geniki's wording, without a stage of its own. A scan Geniki cancelled is hidden together with its cancellation.
 
-Geniki gives no expected delivery day, no pickup point and no weight, so Peek can't show them. Peek recognises a voucher as Geniki's only if it had a scan in the last 60 days; for an older one, pick Geniki with "Change". Peek can notify you of every scan, important steps only, or on delivery day only. While someone is waiting for the parcel (notifications on, or a look in the last hour), it checks every 10 minutes from 9:00 to 23:00 Greek time and every 2 minutes once it's `Out for Delivery`; otherwise hourly, and every hour or two overnight.
+Geniki gives no expected delivery day, no pickup point and no weight, so Peek can't show them. Peek recognises a voucher as Geniki's only if it had a scan in the last 60 days; for an older one, pick Geniki with "Change". Peek can notify you of every scan, important steps only, or on delivery day only. While someone is waiting for the parcel (notifications on, or a look in the last hour), it checks every 10 minutes, or every 2 minutes once it's `Out for Delivery`; otherwise hourly.
 
 ## Questions about Geniki Taxydromiki tracking
 

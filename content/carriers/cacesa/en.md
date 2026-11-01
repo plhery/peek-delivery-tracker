@@ -89,7 +89,7 @@ No number shape is CACESA's, so [Peek](/) never names CACESA from a number. Add 
 
 Peek shows CACESA's English wordings as written, with the history's times read on Madrid time and shown in your device's time zone. A delivered line shows as delivered. `Start Custom clearance Process` shows as a customs step and the green-channel release as moving on, but Peek shows no duty amount and can't pay it. CACESA gives no places, so there's nothing to pin on the map, and no expected delivery, weight, sender or recipient.
 
-CACESA doesn't name the delivery company, and the parcel goes on under the same number. Peek can follow it only when that number is clearly another carrier's: Ecoscooting for `CNESP` and `CNPRT`, [Correos](carrier:correos-spain) for a postal number ending `ES`, [CTT](carrier:ctt) for one ending `PT`, or [CTT Express](carrier:ctt-express) for its own numbers. `CNES` and `LP` numbers aren't followed. Peek checks every 10 minutes by day and every hour or two overnight, and can notify you when the status changes.
+CACESA doesn't name the delivery company, and the parcel goes on under the same number. Peek can follow it only when that number is clearly another carrier's: Ecoscooting for `CNESP` and `CNPRT`, [Correos](carrier:correos-spain) for a postal number ending `ES`, [CTT](carrier:ctt) for one ending `PT`, or [CTT Express](carrier:ctt-express) for its own numbers. `CNES` and `LP` numbers aren't followed. Peek checks every 10 minutes and can notify you when the status changes.
 
 ## Questions about CACESA tracking
 

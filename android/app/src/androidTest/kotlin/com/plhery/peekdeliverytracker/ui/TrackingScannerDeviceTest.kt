@@ -8,15 +8,19 @@ import androidx.activity.ComponentActivity
 import androidx.camera.core.CameraInfo
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.CameraState
+import androidx.camera.core.ZoomState
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.runtime.remember
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.pinch
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.AppContainer
@@ -30,6 +34,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
 import com.plhery.peekdeliverytracker.ui.deliveries.EMPTY_SCAN
 import com.plhery.peekdeliverytracker.ui.deliveries.SCANNER
+import com.plhery.peekdeliverytracker.ui.deliveries.SCANNER_CAMERA
 import com.plhery.peekdeliverytracker.ui.deliveries.SCANNER_CANCEL
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import org.junit.Assume.assumeTrue
@@ -41,8 +46,9 @@ import org.junit.runner.RunWith
 /**
  * The label scanner over Add on this device's back camera (B-S32), which the JVM tests stand in for with a fake: on the
  * app's own stores, as a guest, the list's Scan barcode opens Add and its scanner, the camera allowed streams under the
- * bar, and Cancel takes the scanner down to Add and closes the camera; Add's own scan button does the same. Skipped on a
- * device without a camera on its back. On the emulator, its virtual scene stands in front of the camera.
+ * bar, and Cancel takes the scanner down to Add and closes the camera; Add's own scan button does the same. Two fingers
+ * drawn apart on the camera zoom it in (B-G14). Skipped on a device without a camera on its back. On the emulator, its
+ * virtual scene stands in front of the camera.
  */
 @RunWith(AndroidJUnit4::class)
 class TrackingScannerDeviceTest {
@@ -87,6 +93,24 @@ class TrackingScannerDeviceTest {
         return type
     }
 
+    /** The camera's zoom, as the preview's controller reads it. */
+    private fun zoom(): ZoomState? {
+        var state: ZoomState? = null
+        compose.runOnUiThread { state = preview()?.controller?.zoomState?.value }
+        return state
+    }
+
+    private fun showDeliveries() {
+        compose.setContent {
+            PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
+                PeekRoot(AuthenticationState.Welcome, container.localizer, onView = {}, scanner = CameraLabelScanner) {
+                    DeliveriesTab(remember { ContainerDeliveries(container) })
+                }
+            }
+        }
+        compose.waitUntil(10_000) { exists(EMPTY_SCAN) || exists(ADD_BUTTON) }
+    }
+
     /** The scanner up with the camera streaming in it; Cancel takes it down to Add, and the camera closes. */
     private fun streamsThenCancels() {
         compose.waitUntil(10_000) { exists(SCANNER) }
@@ -101,14 +125,7 @@ class TrackingScannerDeviceTest {
 
     @Test
     fun theListsScanAndAddsOwnOpenTheCameraOverAddAndCancelClosesIt() {
-        compose.setContent {
-            PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
-                PeekRoot(AuthenticationState.Welcome, container.localizer, onView = {}, scanner = CameraLabelScanner) {
-                    DeliveriesTab(remember { ContainerDeliveries(container) })
-                }
-            }
-        }
-        compose.waitUntil(10_000) { exists(EMPTY_SCAN) || exists(ADD_BUTTON) }
+        showDeliveries()
         // The empty list's Scan barcode opens Add scanning; a list with parcels has only the bar's +.
         if (exists(EMPTY_SCAN)) {
             // Its action, not a touch at its middle: on the smallest phone the floating tab bar covers the button's
@@ -121,5 +138,33 @@ class TrackingScannerDeviceTest {
         }
         compose.onNodeWithTag(ADD_SCAN).performClick()
         streamsThenCancels()
+    }
+
+    @Test
+    fun twoFingersDrawnApartZoomTheCameraIn() {
+        showDeliveries()
+        if (exists(EMPTY_SCAN)) {
+            compose.onNodeWithTag(EMPTY_SCAN).performSemanticsAction(SemanticsActions.OnClick)
+        } else {
+            compose.onNodeWithTag(ADD_BUTTON).performClick()
+            compose.waitUntil(5_000) { exists(ADD_SCAN) }
+            compose.onNodeWithTag(ADD_SCAN).performClick()
+        }
+        compose.waitUntil(10_000) { exists(SCANNER) }
+        compose.waitUntil(10_000) { preview()?.previewStreamState?.value == PreviewView.StreamState.STREAMING }
+        compose.waitUntil(5_000) { zoom() != null }
+        val start = checkNotNull(zoom())
+        assumeTrue("The camera doesn't zoom", start.maxZoomRatio > start.minZoomRatio)
+        // 200 pixels apart, then 500, about the camera's middle.
+        compose.onNodeWithTag(SCANNER_CAMERA).performTouchInput {
+            pinch(
+                center - Offset(100f, 0f), center - Offset(250f, 0f),
+                center + Offset(100f, 0f), center + Offset(250f, 0f),
+                durationMillis = 400,
+            )
+        }
+        compose.waitUntil(5_000) { (zoom()?.zoomRatio ?: 0f) > start.zoomRatio }
+        compose.onNodeWithTag(SCANNER_CANCEL).performClick()
+        compose.waitUntil(5_000) { camera() == CameraState.Type.CLOSED }
     }
 }

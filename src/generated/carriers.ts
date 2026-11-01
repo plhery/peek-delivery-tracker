@@ -1664,6 +1664,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DSV tracking: shipment numbers, statuses and DB Schenker",
       "name": "DSV",
       "color": "#002664"
+    },
+    {
+      "id": "pin-ag",
+      "catalog": "pin-ag",
+      "slug": "pin-ag-tracking",
+      "title": "PIN AG tracking: registered letters, parcels and pickup",
+      "name": "PIN AG",
+      "color": "#003366"
     }
   ],
   "de": [

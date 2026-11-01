@@ -2,7 +2,7 @@ import 'server-only';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { CarrierError, NoHistoryError, UpstreamHttpError } from 'universal-parcel-scraper';
 import type { LookupRecord, StepRecord } from 'universal-parcel-scraper/node';
-import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason } from './trackingFailure';
+import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason, selfPacedRefusal } from './trackingFailure';
 import type { JsonObject } from './types';
 
 export interface HealthSample extends JsonObject {
@@ -82,8 +82,8 @@ function save(kind: 'provider' | 'direct', record: StepRecord | LookupRecord): v
   const outcome = category(record);
   // Neither healthy nor failing: no sample. Nor is a hand-off to the group's unit abroad, which
   // the next step asks: counted as failures, three parcels bound for France made DPD Germany's
-  // direct step look broken on 95% of its checks.
-  if (outcome === 'handed_off' || inconclusive(record, outcome)) return;
+  // direct step look broken on 95% of its checks. Nor a lookup our own pacing refused, which asked nobody.
+  if (outcome === 'handed_off' || inconclusive(record, outcome) || selfPacedRefusal(record.error)) return;
   // A retry cannot count as another lookup or erase the original failed direct attempt: one
   // that answered only marks it recovered.
   if (previous && !previous.healthy) {

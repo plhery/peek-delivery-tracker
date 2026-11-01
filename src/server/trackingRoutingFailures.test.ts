@@ -1,4 +1,5 @@
 import { afterEach, expect, it, vi } from 'vitest';
+import { RateLimitedError } from 'universal-parcel-scraper';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
 import { RoutingDeferred, routingState, TrackingRouter } from './trackingRouting';
 import type { JsonObject } from './types';
@@ -98,4 +99,22 @@ it.each([undefined, -1, 1.5, '2', Number.MAX_SAFE_INTEGER + 1])('starts malforme
 
 it('resets a streak when the configured carrier changes', () => {
   expect(routingState(parcel({ configured_carrier: 'dhl', consecutive_failures: 2 })).consecutive_failures).toBe(0);
+});
+
+it('defers a check our own pacing refused to when the next search frees up, asking no provider and counting no failure', async () => {
+  const run = setup();
+  run.direct.mockRejectedValue(new RateLimitedError('Poste Italiane', 20 * 60_000, 'Searched as often as an hour allows',
+    { reason: 'self_paced' }));
+  const paced = await missed(run.router(), parcel({ consecutive_failures: 1 }));
+  expect(paced).toMatchObject({ stale: false, attempted: 0,
+    routing: { consecutive_failures: 1, next_check_at: '2026-09-10T11:20:00.000Z' } });
+  expect(paced.routing.failures).toEqual({});
+  expect(run.direct).toHaveBeenCalledTimes(1);
+  expect(run.universal).not.toHaveBeenCalled();
+  expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('paced_deferred', expect.objectContaining({ provider: 'la-poste' }));
+  // The carrier's own rate limit, which carries no reason, is a failed check that providers answer for.
+  run.direct.mockRejectedValue(new RateLimitedError('Poste Italiane', 20 * 60_000, 'Too many requests'));
+  const limited = await missed(run.router(), parcel({ consecutive_failures: 1 }));
+  expect(limited).toMatchObject({ attempted: 4, routing: { consecutive_failures: 2, failures: { 'la-poste': { kind: 'rate_limited' } } } });
+  expect(run.universal).toHaveBeenCalled();
 });

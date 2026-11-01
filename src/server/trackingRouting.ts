@@ -1,7 +1,7 @@
 import 'server-only';
 import { createHash } from 'node:crypto';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { ABSTAINED_REASONS, carrierErrorReason, refusedNumberCode, trackingFailureCode, UNKNOWN_ITEM_REASONS } from './trackingFailure';
+import { ABSTAINED_REASONS, carrierErrorReason, refusedNumberCode, selfPacedRefusal, trackingFailureCode, UNKNOWN_ITEM_REASONS } from './trackingFailure';
 
 import { DateTime } from 'luxon';
 import { appInputField, detectCarrierMatch } from '../lib/carriers';
@@ -967,12 +967,14 @@ export class TrackingRouter {
     // and those whose probe failed on the way (a rate limit, a challenge): no answer about the number.
     const heldDirect = new Set<string>();
     const unsettledDirect = new Set<string>();
+    // Carriers our own pacing refused before any request (`self_paced`): asked, but nobody contacted.
+    const pacedDirect = new Set<string>();
     // The clocks of rows a carrier holds back as written ahead of them: a provider relaying them shows them as scans.
     const writtenAhead: string[] = [];
     let attempts = 0;
     // Probes are this parcel's own guesses: they are no evidence of provider health.
     let probeContacts = 0;
-    const attempted = () => attemptedDirect.size - probeContacts + attempts;
+    const attempted = () => attemptedDirect.size - pacedDirect.size - probeContacts + attempts;
     const defer = (stale = !recent()): never => {
       const contacts = attempted();
       // A cooldown-only check supplies no new evidence of failure.
@@ -1133,6 +1135,19 @@ export class TrackingRouter {
         return value;
       } catch (error) {
         signal?.throwIfAborted();
+        // Our own pacing refused the lookup before any request (Poste Italiane's searches an hour, a
+        // DHL Express key's turn): no failure and no contact. The parcel's own carrier defers the
+        // check to when its next search frees up, with no provider asked meanwhile; a candidate
+        // stays unanswered. Parcels a busy hour refuses so spread over the hour.
+        if (selfPacedRefusal(error)) {
+          pacedDirect.add(carrier);
+          if (probe) unsettledDirect.add(carrier);
+          if (candidate && !ownInputs) return null;
+          state.next_check_at = iso(now().getTime() + Math.max(60_000, routingFailure(error).retryAfterMs));
+          report('paced_deferred', carrier, 'rate_limited', error);
+          // Nobody answered, so the parcel's chip stays as the last answered checks left it.
+          defer();
+        }
         const failure = fail(carrier, error);
         if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
         writtenAhead.push(...writtenAheadClocks(error));
@@ -1330,7 +1345,7 @@ export class TrackingRouter {
           if (!(error instanceof RoutingDeferred)) throw error;
           return null;
         });
-        if (attemptedDirect.has(outcome.carrier)) probeContacts++;
+        if (attemptedDirect.has(outcome.carrier) && !pacedDirect.has(outcome.carrier)) probeContacts++;
         if (value) {
           if (state.candidate_probes) delete state.candidate_probes[outcome.carrier];
           return persistResult(value, outcome.carrier);

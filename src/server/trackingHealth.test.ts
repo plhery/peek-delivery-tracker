@@ -53,6 +53,18 @@ describe('tracking health evidence', () => {
     ]);
   });
 
+  it('takes no sample of a lookup our own pacing refused, and counts the carrier\'s own rate limit', async () => {
+    const samples = new Map<string, HealthSample>();
+    const paced = new RateLimitedError('Poste Italiane', 60_000, 'Searched as often as an hour allows', { reason: 'self_paced' });
+    await observeTrackingHealth(samples, async () => {
+      healthStepRecorder.step({ ...step, carrier: 'poste-italiane', outcome: 'rate_limited', errorType: 'RateLimitedError', error: paced });
+      healthStepRecorder.lookup({ carrier: 'poste-italiane', finalStep: 'direct', outcome: 'rate_limited', errorType: 'RateLimitedError', durationMs: 1, attempts: 1, error: paced });
+      healthStepRecorder.lookup({ carrier: 'dhl', finalStep: 'direct', outcome: 'rate_limited', errorType: 'RateLimitedError', durationMs: 1, attempts: 1,
+        error: new RateLimitedError('DHL', 60_000) });
+    });
+    expect([...samples.values()]).toEqual([expect.objectContaining({ kind: 'provider', subject: 'dhl', healthy: false })]);
+  });
+
   it('files a number that names several parcels with the missing inputs', async () => {
     const samples = new Map<string, HealthSample>();
     const several = new IndeterminateError('Australia Post', 'Australia Post lists several articles under this consignment', { reason: 'several_parcels' });

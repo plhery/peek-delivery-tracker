@@ -288,6 +288,13 @@ overnight), the parcel keeps its progress and skips fallback until that window o
 retry time runs out. Otherwise the router tries another provider. It never retries the
 throttled one early.
 
+A lookup our own pacing refuses before any request (`reason: 'self_paced'`: Poste Italiane's
+searches an hour or its pause after a CAPTCHA, a DHL Express key's turn) is no failure and
+no 429 of the carrier's. For the parcel's own carrier, the check is deferred to the refusal's
+`retryAfterMs`, when the next search frees up, with no provider asked meanwhile, so a busy
+hour's parcels spread over it. It counts no failure, takes no health sample and ends
+`skipped`. A carrier asked as a candidate stays unanswered. A carrier's own 429 has no reason.
+
 ## Refresh cadence
 
 Daytime is 08:00–22:00 Europe/Zurich. Overnight, everything is due hourly and checked at least every
@@ -884,6 +891,7 @@ detection or the adapters could act on: each check saves them for the hourly rev
 | --- | --- |
 | `transport_fallback` | A direct path needed browser/TRAWL recovery, even if it then succeeded; not after a step that answered |
 | `provider_failed` | A provider failed for a parcel: `category` `rate_limited` needs less traffic, `schema` parser work, `invalid_input` a number the source refuses |
+| `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
 | `all_providers_unavailable` | Uncovered parcel or broad outage |
 | `health_store_unavailable` | Migration or database coordination problem (Sentry issue) |
 | `carrier_auto_swapped` | A carrier correction was committed. A signal, unless detection already names the new carrier for the number or lists it first among the carriers recognition asks for the parcel's lookup country: then the line has `category` `detected` |

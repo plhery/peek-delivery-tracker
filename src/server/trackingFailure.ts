@@ -31,6 +31,16 @@ export const ABSTAINED_REASONS: ReadonlySet<string> = new Set(['verification_unr
 
 export { PLACEHOLDER_NUMBER } from '../lib/messages';
 
+/**
+ * A lookup our own pacing refused before any request went out (`self_paced`): Poste Italiane
+ * searched as often as an hour allows or paused after a CAPTCHA, a DHL Express key's next turn too
+ * late. Nobody was asked, so it is no failure and no rate limit of the carrier's; its
+ * `retryAfterMs` says when the next search frees up. A carrier's own 429 carries no reason.
+ */
+export function selfPacedRefusal(error: unknown): boolean {
+  return carrierErrorKind(error) === 'rate_limited' && carrierErrorReason(error) === 'self_paced';
+}
+
 /** Why a carrier answered as it did (`parcel_found`, `postcode_mismatch`): the first reason in the error's causes. */
 export function carrierErrorReason(error: unknown): string | undefined {
   const seen = new Set<Error>();

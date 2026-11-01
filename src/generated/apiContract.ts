@@ -5541,7 +5541,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "ekart"
+      "adapter": "ekart",
+      "recognitionRank": 598
     },
     "trackingUrlTemplate": "https://ekartlogistics.com/ekartlogistics-web/shipmenttrack/{trackingNumber}",
     "linkRules": [
@@ -14622,7 +14623,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Istanbul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "trendyol-express"
     },
     "trackingUrlTemplate": "https://kargotakip.trendyol.com/?orderNumber={trackingNumber}",
     "linkRules": [
@@ -31922,7 +31923,7 @@ export const CARRIER_CAPABILITIES = {
         "domains": [
           "www.far800.com"
         ],
-        "pathPattern": "^/logistics/result/?$",
+        "pathPattern": "^/(?:en/)?logistics/result/?$",
         "params": [
           "key"
         ],
@@ -37376,7 +37377,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "skybox"
     },
     "trackingUrlTemplate": "https://www.skybox.net/TrackingInformation/IndexPublic?tracking={trackingNumber}",
     "linkRules": [

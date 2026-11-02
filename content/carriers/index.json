@@ -90,7 +90,7 @@
   { "id": "posta-srbije", "catalog": "posta-srbije", "name": "Pošta Srbije", "languages": ["en", "sr"] },
   { "id": "venipak", "catalog": "venipak", "name": "Venipak", "languages": ["en", "lt", "lv", "et"] },
   { "id": "lietuvos-pastas", "catalog": "lietuvos-pastas", "name": "Lietuvos paštas", "languages": ["en", "lt", "fr"] },
-  { "id": "latvijas-pasts", "catalog": "latvijas-pasts", "name": "Latvijas Pasts", "languages": ["en"] },
+  { "id": "latvijas-pasts", "catalog": "latvijas-pasts", "name": "Latvijas Pasts", "languages": ["en", "ru"] },
   { "id": "dao", "catalog": "dao", "name": "DAO", "languages": ["en", "da"] },
   { "id": "helthjem", "catalog": "helthjem", "name": "Helthjem", "languages": ["en", "ru"] },
   { "id": "matkahuolto", "catalog": "matkahuolto", "name": "Matkahuolto", "languages": ["en", "fi", "sv"] },

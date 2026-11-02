@@ -3023,8 +3023,9 @@ describe('TrackingSyncService', () => {
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
     };
-    let step = 'trawl';
+    let step = 'trawl', browserCall = true;
     const adapter = { fetchUniversal: vi.fn(), fetch: vi.fn(async () => {
+      if (browserCall) observability.reportTrackingBrowser();
       observability.reportTrackingStep(step);
       return { status: 'out_for_delivery', current_stage: 'out_for_delivery', last_update: '2026-09-10T11:00:00Z' } as CarrierResult;
     }) };
@@ -3033,9 +3034,15 @@ describe('TrackingSyncService', () => {
     await service.syncPackage(parcel);
     const browsed = client.updatePackage.mock.calls.at(-1)![1];
     expect(browsed.carrier_data.routing.browser_check).toBe(true);
-    step = 'direct';
+    // A TRAWL step that only sent a plain HTTP request through the browser service opened none.
+    browserCall = false;
     await service.syncPackage({ ...parcel, ...browsed, last_synced_at: '2026-09-10T11:00:00Z' });
-    expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.routing).not.toHaveProperty('browser_check');
+    const plain = client.updatePackage.mock.calls.at(-1)![1];
+    expect(plain.carrier_data.routing).not.toHaveProperty('browser_check');
+    // A local Chromium is a browser by its step alone.
+    step = 'browser';
+    await service.syncPackage({ ...parcel, ...plain, last_synced_at: '2026-09-10T11:00:00Z' });
+    expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.routing.browser_check).toBe(true);
   });
 
   it('queues a check, once per catalog, for the recent parcels its rules now point to another carrier', async () => {

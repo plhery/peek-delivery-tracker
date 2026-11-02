@@ -354,7 +354,8 @@ fresh as the carrier, so a parcel it answers for is checked every 2 minutes whet
 anyone is looking, unless nobody is waiting for it or the carrier sets a longer interval of
 its own. While its lookups open a browser, as FedEx's and UPS's do, each takes seconds of
 the browser service, so it is checked every 5 minutes: the last check that ran a lookup
-says which (`browser_check` in its routing). A universal provider has quotas, costs more and lags behind the carrier: its
+says which (`browser_check` in its routing). A lookup that only sends a plain HTTP request
+through the browser service, as TopYou's and Spee-Dee's do, opens no browser and keeps the 2 minutes. A universal provider has quotas, costs more and lags behind the carrier: its
 parcels keep the regular cadence, and the 15 minutes routing waits after each of its
 answers, even while someone is looking. A parcel counts as served by a universal provider
 while the summary it shows came from one (`tracking_provider` in `carrier_data`).

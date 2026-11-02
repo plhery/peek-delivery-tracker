@@ -190,8 +190,11 @@ function noteHealthIncident(incident: JsonObject): void {
   }, healthReviewSignal(incident) ? 'info' : 'warning');
 }
 
-/** Lookup tiers that open a browser: a local Chromium, the browser service, or a page it solves. */
-const BROWSER_STEPS = new Set(['browser', 'trawl', 'page']);
+/**
+ * The lookup tier that runs a local Chromium. A call to the browser service says itself whether it can open a browser
+ * (adapterRegistry.ts): a `trawl` step that only sends a plain HTTP request through the service opens none.
+ */
+const LOCAL_BROWSER_STEP = 'browser';
 
 export class TrackingSyncAudit {
   readonly attemptId = randomUUID();
@@ -211,7 +214,8 @@ export class TrackingSyncAudit {
   };
   /** Whether the check's lookups went through a browser; null while no lookup tier ran. */
   #browser: boolean | null = null;
-  readonly #step = (step: string): void => { this.#browser = this.#browser === true || BROWSER_STEPS.has(step); };
+  readonly #step = (step: string): void => { this.#browser = this.#browser === true || step === LOCAL_BROWSER_STEP; };
+  readonly #browserCall = (): void => { this.#browser = true; };
   /** The carriers and providers the check's lookups asked, with how each ended; a success stays. */
   readonly #lookups = new Map<string, string>();
   readonly #lookup = (carrier: string, outcome: string): void => {
@@ -236,7 +240,7 @@ export class TrackingSyncAudit {
 
   observeFetch<T>(operation: () => Promise<T>): Promise<T> {
     return withTrackingAttempt(this.attemptId, () => observeTrackingHealth(this.#healthSamples, operation), this.#signal, this.#step,
-      this.#lookup);
+      this.#lookup, this.#browserCall);
   }
 
   /**

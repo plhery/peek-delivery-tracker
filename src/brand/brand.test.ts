@@ -700,6 +700,10 @@ describe('carrier brand', () => {
       'hub-group-final-mile',
       'jetizz',
       'mailex',
+      'znlogic',
+      'ltl-kr',
+      'jiaying-express',
+      'okay-parcel',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

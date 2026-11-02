@@ -2017,6 +2017,9 @@
   "jiachen-express": {
     "decal": "jiachen-express"
   },
+  "jiaying-express": {
+    "decal": "jiaying-express"
+  },
   "jiehang": {
     "decal": "jiehang"
   },
@@ -2281,6 +2284,9 @@
   },
   "lso": {
     "decal": "lso"
+  },
+  "ltl-kr": {
+    "decal": "ltl-kr"
   },
   "lucky-fast-express": {
     "decal": "lucky-fast-express"
@@ -2572,6 +2578,9 @@
   },
   "okaken": {
     "decal": "okaken"
+  },
+  "okay-parcel": {
+    "decal": "okay-parcel"
   },
   "old-dominion": {
     "decal": "old-dominion"
@@ -4155,6 +4164,9 @@
   },
   "zippd": {
     "decal": "zippd"
+  },
+  "znlogic": {
+    "decal": "znlogic"
   },
   "zoom-ve": {
     "decal": "zoom-ve"

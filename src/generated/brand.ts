@@ -1206,6 +1206,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "jetpak": "jetpak",
   "jhgj": "jhgj",
   "jiachen-express": "jiachen-express",
+  "jiaying-express": "jiaying-express",
   "jiehang": "jiehang",
   "jifan": "jifan",
   "jikuaida": "jikuaida",
@@ -1291,6 +1292,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "loomis-express": "loomis-express",
   "lotte-global": "lotte-global",
   "lso": "lso",
+  "ltl-kr": "ltl-kr",
   "lucky-fast-express": "lucky-fast-express",
   "m-and-p": "m-and-p",
   "m-one": "m-one",
@@ -1380,6 +1382,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "ocs-ana": "ocs-ana",
   "odm-express": "odm-express",
   "okaken": "okaken",
+  "okay-parcel": "okay-parcel",
   "old-dominion": "old-dominion",
   "olva-courier": "olva-courier",
   "om-logistics": "om-logistics",
@@ -1863,6 +1866,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "zheldor": "zheldor",
   "zimpost": "zimpost",
   "zippd": "zippd",
+  "znlogic": "znlogic",
   "zoom-ve": "zoom-ve",
   "zr-express": "zr-express",
   "zto": "zto",
@@ -30773,6 +30777,88 @@ export const CARRIER_TRUCK: TruckGeometry = {
       {
         "type": "polygon",
         "d": "M3.2 11.5L3.2 11.93L7.39 11.93L6.74 11.5Z",
+        "fill": "accent"
+      }
+    ],
+    "znlogic": [
+      {
+        "type": "polygon",
+        "d": "M4.67 10.68L7.53 5.91L3.78 5.91L3.78 6.92L5.76 6.92L2.9 11.69L6.65 11.69L6.65 10.68Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.49 11.69L9.49 11.69L9.49 5.91L8.49 5.91Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.59 5.91L13.59 5.91L13.59 10.68L13.21 10.68L12.73 5.91L10.44 5.91L10.44 11.69L11.44 11.69L11.44 6.92L11.83 6.92L12.3 11.69L14.59 11.69Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.37 6.28L15.93 6.72L15.64 7.28L15.55 7.85L15.55 9.75L15.64 10.32L15.93 10.88L16.37 11.32L16.93 11.6L17.55 11.69L18.17 11.59L18.72 11.3L19.1 10.9L18.38 10.21L18.11 10.48L17.84 10.63L17.54 10.68L17.24 10.63L16.96 10.5L16.74 10.28L16.6 10.01L16.55 9.67L16.55 7.93L16.6 7.59L16.74 7.32L16.96 7.1L17.24 6.97L17.54 6.92L17.84 6.97L18.11 7.12L18.38 7.39L19.1 6.7L18.72 6.3L18.17 6.01L17.55 5.91L16.93 6Z",
+        "fill": "accent"
+      }
+    ],
+    "ltl-kr": [
+      {
+        "type": "polygon",
+        "d": "M5.96 11.09L5.96 5.3L4.74 5.3L4.74 12.3L8.24 12.3L8.24 11.09Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.21 5.3L8.21 6.51L9.4 6.51L9.4 12.3L10.61 12.3L10.61 6.51L11.8 6.51L11.8 5.3Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.96 12.3L16.46 12.3L16.46 11.09L14.17 11.09L14.17 5.3L12.96 5.3Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.36 4.66L16.58 5.54L17.14 5.76L16.58 5.98L16.36 6.86L16.14 5.98L15.58 5.76L16.14 5.54Z",
+        "fill": "accent"
+      }
+    ],
+    "jiaying-express": [
+      {
+        "type": "polygon",
+        "d": "M11.04 5.77L13.17 8.99L13.17 12.54L14.47 12.54L14.47 8.99L16.59 5.77L15.51 5.05L13.82 7.62L12.12 5.05Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M8.23 10.98L8.04 11.12L7.83 11.21L7.6 11.24L7.37 11.21L7.15 11.12L6.97 10.98L6.83 10.79L6.74 10.58L6.69 10.26L5.41 10.43L5.47 10.92L5.69 11.45L6.04 11.9L6.5 12.25L7.03 12.47L7.6 12.55L8.17 12.47L8.7 12.25L9.16 11.9L9.51 11.45L9.73 10.92L9.8 10.39L9.8 5.05L8.5 5.05L8.5 10.3L8.46 10.58L8.37 10.79Z",
+        "fill": "accent"
+      }
+    ],
+    "okay-parcel": [
+      {
+        "type": "circle",
+        "cx": 7.99,
+        "cy": 8.8,
+        "r": 3.75,
+        "fill": "accent"
+      },
+      {
+        "type": "circle",
+        "cx": 7.99,
+        "cy": 8.8,
+        "r": 2.45,
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M7.64 10.83L10.02 8L9.26 7.36L7.6 9.33L6.78 8.46L6.06 9.14Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.57 9.06L16.64 12.55L17.76 11.89L15.52 8.11L17.66 5.97L16.74 5.05L13.94 7.85L13.94 5.05L12.64 5.05L12.64 12.55L13.94 12.55L13.94 9.69Z",
         "fill": "accent"
       }
     ]

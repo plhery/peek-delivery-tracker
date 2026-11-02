@@ -624,7 +624,11 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'herona-express'
   | 'hub-group-final-mile'
   | 'jetizz'
-  | 'mailex';
+  | 'mailex'
+  | 'znlogic'
+  | 'ltl-kr'
+  | 'jiaying-express'
+  | 'okay-parcel';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

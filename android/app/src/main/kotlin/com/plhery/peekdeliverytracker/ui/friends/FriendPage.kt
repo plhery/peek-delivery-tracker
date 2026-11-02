@@ -199,7 +199,7 @@ private fun FriendDetail(friend: FriendCard, busy: Boolean, remove: () -> Unit) 
     val language = LocalLanguage.current
     val size = PeekTheme.dynamicTypeSize
     var showAll by rememberSaveable { mutableStateOf(false) }
-    var stamp by remember { mutableStateOf<FriendStamp?>(null) }
+    var stamp by rememberSaveable { mutableStateOf<FriendStamp?>(null) }
     var managing by rememberSaveable { mutableStateOf(false) }
     var confirming by rememberSaveable { mutableStateOf(false) }
     SensoryFeedbackEffect(SensoryFeedback.Impact(SensoryFeedback.Impact.Weight.Light, 0.6), stamp)

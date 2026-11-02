@@ -45,6 +45,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -177,6 +179,7 @@ internal class FriendsState(
     private val panelForm: MutableState<Boolean>,
     private val friend: MutableState<UUID?>,
     private val invitationValue: MutableState<InvitationValue>,
+    arrivingValue: MutableState<UUID?>,
     landedValue: MutableState<Boolean>,
     presentedValue: MutableState<UUID?>,
 ) : AccountHost {
@@ -202,8 +205,8 @@ internal class FriendsState(
     /** `friendTransition`: a friend's page opens out of their card and goes back into it, as a parcel's does. */
     val zoom = ZoomTransition()
 
-    /** `arrivingID`: the friend a reveal lands, first in the circle while the tab shows. */
-    var arriving: UUID? by mutableStateOf(null)
+    /** `arrivingID`: the friend a reveal lands, first in the circle while the tab shows, kept with the window. */
+    var arriving: UUID? by arrivingValue
 
     /** `cardLanded`: whether the friend revealed has landed, kept with the window as the iPhone's `@State` is. */
     var landed: Boolean by landedValue
@@ -288,9 +291,19 @@ internal fun rememberFriendsState(source: DeliveriesSource): FriendsState {
     val panelForm = rememberForLaunch(launch, false)
     val friend = rememberForLaunch<UUID?>(launch, null)
     val invitation = rememberForLaunch(launch, InvitationValue())
+    // `arrivingID`, which `onDisappear` forgets: kept through a rotation, not through another tab chosen, whose holder
+    // saves the tab's state before the tab's own disposal could forget it.
+    val window = LocalActivity.current
+    val arriving = rememberSaveable(
+        launch,
+        saver = listSaver<MutableState<UUID?>, String?>(
+            save = { listOf(launch.toString(), if (window?.isChangingConfigurations == true) it.value?.toString() else null) },
+            restore = { saved -> mutableStateOf(if (saved[0] == launch.toString()) saved[1]?.let(UUID::fromString) else null) },
+        ),
+    ) { mutableStateOf<UUID?>(null) }
     val landed = rememberForLaunch(launch, false)
     val presented = rememberForLaunch<UUID?>(launch, null)
-    return remember(source) { FriendsState(source, showing, forms, panel, panelForm, friend, invitation, landed, presented) }
+    return remember(source) { FriendsState(source, showing, forms, panel, panelForm, friend, invitation, arriving, landed, presented) }
 }
 
 /** The circle's scrolled content and its cards as last placed. */
@@ -551,8 +564,12 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
         state.landed = true
         // `withAnimation`: the landing goes on once the focus let go below ends this task.
         scope.launch { state.landing.animateTo(1f, if (reduceMotion) Motion.easeOut(0.15) else Motion.springWithResponse(0.55, 0.78)) }
-        activity.acknowledge(friendId)
-        activity.consumeFocus(friendId)
+        // `try? await acknowledge`, then `consumeFocus`: the focus is let go even if the tab goes during the acknowledge.
+        try {
+            activity.acknowledge(friendId)
+        } finally {
+            activity.consumeFocus(friendId)
+        }
     }
     val held = with(density) { pull.held.value.toDp() }
     Box(

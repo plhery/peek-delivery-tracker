@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.friends
 
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,6 +47,7 @@ import com.plhery.peekdeliverytracker.core.api.FriendsActivity
 import com.plhery.peekdeliverytracker.core.explanationKey
 import com.plhery.peekdeliverytracker.core.titleKey
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
@@ -100,18 +102,20 @@ class FriendPageTest {
         fontScale: Float = 1f,
         choose: Boolean = true,
         reduceMotion: Boolean = true,
+        recreation: Recreation? = null,
         friends: FakeFriendsClient.() -> Unit = {},
     ) {
         shownSession = session
         source = FakeDeliveries(DemoCards.parcels(), session)
         client.friends()
         compose.waitsForMaps()
-        compose.setContent {
+        val content = @Composable {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalLifecycleOwner provides owner) {
                 RootHost(state = shownSession, dark = false, reduceMotion = reduceMotion, source = source)
             }
         }
+        if (recreation != null) recreation.setContent(content) else compose.setContent(content)
         settle()
         if (choose) choose("Friends")
     }
@@ -480,6 +484,73 @@ class FriendPageTest {
         settle()
         assertEquals(listOf("Cy", "Ada", "Bo", "Di"), cards())
         assertEquals(listOf(FriendFixtures.bo.id, FriendFixtures.cy.id), requests(FriendsAction.AcknowledgeFriend).map { it.friendId })
+    }
+
+    @Test
+    fun aLandedFriendStaysInPlaceThroughTheMinutesLoad() {
+        show(reduceMotion = false)
+        compose.runOnUiThread { source.friendsActivity.reveal(FriendFixtures.di.id) }
+        settle()
+        settle()
+        assertEquals(0f, (left(FriendFixtures.di) - left(FriendFixtures.ada)).value, 0.5f)
+        // Frame by frame up to the minute's load and just after it: a landing begun again would put Di back 100 to the
+        // right, out of sight, for the 120 ms before it scrolls.
+        compose.mainClock.autoAdvance = false
+        val loads = client.loads
+        var frames = 0
+        while (client.loads == loads && frames < 1_000) {
+            compose.mainClock.advanceTimeBy(100)
+            compose.waitForIdle()
+            frames++
+        }
+        assertEquals(loads + 1, client.loads)
+        repeat(8) {
+            compose.mainClock.advanceTimeBy(20)
+            compose.waitForIdle()
+            assertEquals(0f, (left(FriendFixtures.di) - left(FriendFixtures.ada)).value, 0.5f)
+            assertEquals(listOf("Di", "Ada", "Bo", "Cy"), cards())
+        }
+        compose.mainClock.autoAdvance = true
+        assertEquals(listOf(FriendFixtures.di.id), requests(FriendsAction.AcknowledgeFriend).map { it.friendId })
+    }
+
+    @Test
+    fun aLandingCalledOffDuringItsAcknowledgeStillLetsGoOfTheFocus() {
+        show()
+        val held = CompletableDeferred<Unit>()
+        client.acting = held
+        compose.runOnUiThread { source.friendsActivity.reveal(FriendFixtures.bo.id) }
+        settle()
+        assertEquals(listOf(FriendFixtures.bo.id), requests(FriendsAction.AcknowledgeFriend).map { it.friendId })
+        assertEquals(FriendFixtures.bo.id, source.friendsActivity.focusId)
+        // The tab left while the service hasn't answered: the focus goes all the same, as the iPhone's `try?` lets it.
+        choose("Passport")
+        assertNull(source.friendsActivity.focusId)
+        held.complete(Unit)
+        settle()
+        choose("Friends")
+        assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
+        assertFalse(exists(FRIENDS_UNAVAILABLE_FRIEND))
+    }
+
+    @Test
+    fun aRecreatedWindowKeepsTheFriendRevealedFirstAndTheStampsPopover() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        compose.runOnUiThread { source.friendsActivity.reveal(FriendFixtures.cy.id) }
+        settle()
+        assertEquals(listOf("Cy", "Ada", "Bo", "Di"), cards())
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(listOf("Cy", "Ada", "Bo", "Di"), cards())
+        open(FriendFixtures.ada)
+        tap(friendStampTag(FriendStamp.Ten))
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(exists(FRIENDS_PAGE))
+        assertEquals(listOf(text(FriendStamp.Ten.titleKey), text(FriendStamp.Ten.explanationKey) + "\n8 / 10"), popover())
     }
 
     // The accepted notice (C-S31).

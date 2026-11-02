@@ -502,6 +502,26 @@ class FriendsTest {
     }
 
     @Test
+    fun aParcelsLinkOverAFriendsPageTakesTheDeliveriesForwardAndClosesThePage() {
+        val inbox = DeliveriesInbox()
+        show(inbox = inbox)
+        tap(friendCardTag(FriendFixtures.bo.id))
+        assertTrue(exists(FRIENDS_PAGE))
+        val parcel = DemoCards.parcels().first().id
+        compose.runOnUiThread { inbox.follow(Intent(Intent.ACTION_VIEW, Uri.parse("peekdeliverytracker://parcel/$parcel"))) }
+        settle()
+        assertFalse(exists(PeekTab.Friends.screen))
+        assertFalse(exists(FRIENDS_PAGE))
+        // Back from the parcel's page to the list, and on the friends: the circle, loaded afresh, and no page.
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        settle()
+        choose("Friends")
+        assertFalse(exists(FRIENDS_PAGE))
+        assertEquals(2, client.loads)
+        assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
+    }
+
+    @Test
     fun inTheBackgroundTheCircleIsClearedAndItsPanelClosedAndLoadedAgainInFront() {
         show()
         tap(FRIENDS_SHARING)

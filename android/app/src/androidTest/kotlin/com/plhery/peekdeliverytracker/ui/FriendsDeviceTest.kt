@@ -52,6 +52,7 @@ import com.plhery.peekdeliverytracker.ui.friends.FriendFixtures
 import com.plhery.peekdeliverytracker.ui.friends.friendCardTag
 import com.plhery.peekdeliverytracker.ui.friends.friendStampTag
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
+import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
@@ -104,8 +105,11 @@ class FriendsDeviceTest {
         }
     }
 
-    /** The friends tab of [session], its friends as [friends] sets them, edge to edge as the app's window. */
-    private fun show(session: AuthenticationState = AuthenticationState.Demo, friends: FakeFriendsClient.() -> Unit = {}) {
+    /**
+     * The friends tab of [session], its friends as [friends] sets them, edge to edge as the app's window; the deliveries
+     * unless [choose].
+     */
+    private fun show(session: AuthenticationState = AuthenticationState.Demo, choose: Boolean = true, friends: FakeFriendsClient.() -> Unit = {}) {
         store.set(AppAppearance.Light)
         val source = FakeDeliveries(DemoCards.parcels(), session)
         source.friendsClient.friends()
@@ -119,6 +123,7 @@ class FriendsDeviceTest {
             RootHost(state = session, dark = dark, reduceMotion = true, source = source)
         }
         compose.waitForIdle()
+        if (!choose) return
         compose.onNode(hasContentDescription("Friends") and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)).performClick()
         compose.waitUntil(5_000) { exists(if (session == AuthenticationState.Welcome) FRIENDS_SIGN_IN else FRIENDS_SHARING) }
         compose.waitForIdle()
@@ -218,15 +223,19 @@ class FriendsDeviceTest {
         shot()
     }
 
-    /** Someone accepted the account's invitation: the notice over the window, which opens them, landed first. */
+    /**
+     * Someone accepted the account's invitation: the notice over the window, on the deliveries (where the tab bar
+     * stands at the top, the notice covers its middle, as on the iPad), which opens them on the friends, landed first.
+     */
     @Test
     fun theAcceptedNoticeOpensTheFriend() {
-        show(reader) { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
+        show(reader, choose = false) { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
         compose.waitUntil(5_000) { exists(FRIENDS_NOTICE) }
         compose.waitForIdle()
         shots.take("${name.methodName}-notice")
         press(FRIENDS_NOTICE_OPEN)
-        compose.waitUntil(5_000) { !exists(FRIENDS_NOTICE) }
+        compose.waitUntil(5_000) { !exists(FRIENDS_NOTICE) && exists(PeekTab.Friends.screen) }
+        compose.waitUntil(5_000) { exists(friendCardTag(FriendFixtures.bo.id)) }
         compose.waitForIdle()
         shot()
     }

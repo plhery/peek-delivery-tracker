@@ -2148,6 +2148,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "usps",
+      "catalog": "usps",
+      "slug": "usps-sendungsverfolgung",
+      "title": "USPS Sendungsverfolgung: Nummer, Status, Paket aus den USA",
+      "name": "USPS",
+      "color": "#004b87"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-sendungsverfolgung",

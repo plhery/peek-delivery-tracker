@@ -140,7 +140,7 @@ begin
   if not changed or not exists(select 1 from public.packages where id = parcel.id and carrier = 'mondial-relay' and dpd_postcode is null) then
     raise exception 'Barcode carrier edit requires postcode';
   end if;
-  foreach bad in array array['99999980', '12123456780101006623123455'] loop
+  foreach bad in array array['99999971', '12123456780101006623123455'] loop
     begin
       perform test_support.add_parcel(bad, '', 'mondial-relay');
       raise exception 'Unverified barcode or short number created without postcode';

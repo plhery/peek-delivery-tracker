@@ -35,6 +35,15 @@ import java.util.UUID
 val IPHONE_SMALL = DpSize(170.dp, 170.dp)
 val IPHONE_MEDIUM = DpSize(364.dp, 170.dp)
 
+/**
+ * The sizes a launcher gives the widget: a phone's two-by-two upright and on its side, its three-by-two upright, and a
+ * ten-inch tablet's two-by-two on its side.
+ */
+val LAUNCHER_UPRIGHT = DpSize(130.dp, 220.dp)
+val LAUNCHER_ON_ITS_SIDE = DpSize(269.dp, 117.dp)
+val LAUNCHER_UPRIGHT_WIDE = DpSize(203.dp, 220.dp)
+val LAUNCHER_TABLET = DpSize(396.dp, 244.dp)
+
 /** A parcel as the widget shows it, `number` its id. */
 fun widgetParcel(
     number: Int,
@@ -99,7 +108,7 @@ suspend fun publishDemo(
 /** The widget's RemoteViews for `entry` at `size`, as Glance writes them for a launcher. */
 @OptIn(ExperimentalGlanceRemoteViewsApi::class)
 suspend fun widgetViews(context: Context, size: DpSize, entry: DeliveryWidgetEntry<WidgetCardArt>): RemoteViews =
-    GlanceRemoteViews().compose(context, size) { DeliveryWidgetContent(entry, NextDeliveryWidget.isMedium(size)) }.remoteViews
+    GlanceRemoteViews().compose(context, size) { DeliveryWidgetContent(entry, size) }.remoteViews
 
 /** `views` as a launcher shows them: applied in the host's window, `size` big, as a home screen's cells hold a widget. */
 @Composable

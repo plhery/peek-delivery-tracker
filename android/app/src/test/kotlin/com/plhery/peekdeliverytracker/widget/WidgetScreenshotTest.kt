@@ -43,9 +43,10 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The home screen widget as a launcher shows it, its RemoteViews applied at the iPhone's widget sizes, on a wallpaper
- * (a screen wide enough for a small and a medium one side by side, at twice the pixels): the gallery's sample with the iPhone's own pictures over the same cards with the pictures this app draws,
- * and the pictures themselves (the iPhone's, then this app's); words, empty and switched off; light and dark; the
- * largest text.
+ * (a screen wide enough for a small and a medium one side by side, at twice the pixels): the gallery's sample with the
+ * iPhone's own pictures over the same cards with the pictures this app draws, and the pictures themselves (the
+ * iPhone's, then this app's); words, empty and switched off; light and dark; the largest text; and at the sizes a
+ * launcher gives it.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -191,19 +192,60 @@ class WidgetScreenshotTest {
     @Config(qualifiers = "+night")
     fun statesDark() = states(dark = true)
 
-    /** At the phone's largest font scale, which grows the widget's text as Dynamic Type's largest size grows the iPhone's. */
+    /**
+     * At the phone's largest font scale, which is WidgetKit's largest text size for a widget (xxxLarge): the names and
+     * status lines shrink to fit, as `minimumScaleFactor` shrinks them, and the last row's long names are shrunk as far
+     * as they go and end in an ellipsis.
+     */
     @Test
     @Config(fontScale = 2.0f)
     fun largestText() {
         val folder = files.newFolder("WidgetCards")
         val source = widgetSource(app, folder)
+        val long = listOf(
+            widgetParcel(5, "Wanderschuh-Imprägnierspray", carrier = "Swiss Post", detail = "tomorrow"),
+            widgetParcel(6, "Mechanical keyboard switches", carrier = "DPD Switzerland", detail = "Friday"),
+        )
         shoot(
             "largest_text", dark = false,
             listOf(
                 listOf(widget(IPHONE_SMALL, wordsEntry(parcels, medium = false)), widget(IPHONE_MEDIUM, wordsEntry(parcels, medium = true))),
                 listOf(widget(IPHONE_SMALL, source.placeholder(false, CAPTURED)), widget(IPHONE_MEDIUM, source.placeholder(true, CAPTURED))),
                 listOf(widget(IPHONE_SMALL, wordsEntry(emptyList(), medium = false)), widget(IPHONE_MEDIUM, wordsEntry(parcels, medium = true, enabled = false))),
+                listOf(widget(IPHONE_SMALL, wordsEntry(long, medium = false)), widget(IPHONE_MEDIUM, wordsEntry(long, medium = true))),
             ),
         )
     }
+
+    /**
+     * At the sizes a launcher gives a two-by-two widget on a phone, upright (130 × 220) and on its side (269 × 117), a
+     * three-by-two upright (203 × 220), and a two-by-two on a ten-inch tablet on its side (396 × 244): the cards, then
+     * words and nothing on its way.
+     */
+    private fun sizes(name: String) {
+        val folder = files.newFolder("WidgetCards")
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val source = widgetSource(app, folder, store)
+        runBlocking { publishDemo(app, store, folder, scale = app.resources.displayMetrics.density.toDouble()) }
+        fun cards(size: DpSize) = widget(size, source.current(NextDeliveryWidget.isMedium(size), CAPTURED))
+        fun words(size: DpSize) = widget(size, wordsEntry(parcels, NextDeliveryWidget.isMedium(size)))
+        shoot(
+            name, dark = false,
+            listOf(
+                listOf(cards(LAUNCHER_UPRIGHT), cards(LAUNCHER_UPRIGHT_WIDE), cards(LAUNCHER_ON_ITS_SIDE)),
+                listOf(cards(LAUNCHER_TABLET), words(LAUNCHER_ON_ITS_SIDE)),
+                listOf(words(LAUNCHER_UPRIGHT), words(LAUNCHER_UPRIGHT_WIDE), widget(LAUNCHER_UPRIGHT, wordsEntry(emptyList(), medium = false))),
+                listOf(words(LAUNCHER_TABLET), widget(LAUNCHER_ON_ITS_SIDE, wordsEntry(emptyList(), medium = true))),
+            ),
+        )
+    }
+
+    @Test
+    @Config(qualifiers = "w720dp-h1700dp-xhdpi")
+    fun sizesLight() = sizes("sizes_light")
+
+    /** The same sizes at the largest text. */
+    @Test
+    @Config(qualifiers = "w720dp-h1700dp-xhdpi", fontScale = 2.0f)
+    fun sizesLargestText() = sizes("sizes_largest_text")
 }

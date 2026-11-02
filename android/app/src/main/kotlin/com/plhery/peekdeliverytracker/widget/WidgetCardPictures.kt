@@ -68,18 +68,28 @@ import kotlinx.coroutines.yield
  * dark: the route in the card's ink as the parcel's card draws it (`RouteEngraving`, without its pulse, which a picture
  * can't keep), Pip beside the parcel's place, faded in from under the card's top row; Pip alone where the parcel has
  * no places. Then the carrier's mark (`CarrierFleetMark`), last, so that a card whose mark is there has all of them.
- * At the screen's density (`scale`, its pixels per dp, as the iPhone draws them at its screen's scale), the text at
- * the default size (Dynamic Type's Large, which the iPhone draws them at), into the app's caches, which the widget,
- * part of the app, reads.
+ * At the scale the card was named for (its `scale`: the screen's pixels per dp as [scale] read it, as the iPhone draws
+ * them at its screen's scale), the text at the default size (Dynamic Type's Large, which the iPhone draws them at),
+ * into the app's caches, which the widget, part of the app, reads.
  */
 class WidgetCardPictures(
     private val context: Context,
     override val folder: File = folder(context),
-    override val scale: Double = context.resources.displayMetrics.density.toDouble(),
+    /** A scale of its own (a test's), in place of the screen's. */
+    scale: Double? = null,
     /** The world the routes are drawn on: the bundled atlas, read the first time a route is drawn. */
     private val atlas: suspend () -> WorldAtlas? = { WorldAtlas.bundled() },
 ) : DeliveryWidgetArtist {
+    private val fixedScale = scale
+
+    /**
+     * The screen's pixels per dp, read each time: the display size setting, or a foldable's other screen, changes it
+     * while the app runs, and the cards are then named and drawn again for the new one.
+     */
+    override val scale: Double get() = fixedScale ?: context.resources.displayMetrics.density.toDouble()
+
     override suspend fun draw(parcel: Parcel, card: DeliveryWidgetCard, language: AppLanguage): Boolean = withContext(Dispatchers.Default) {
+        val scale = card.scale
         try {
             if (!folder.isDirectory && !folder.mkdirs()) return@withContext false
             // The list's card: the carrier the parcel came with, after a handover too.
@@ -89,17 +99,17 @@ class WidgetCardPictures(
                 for (picture in DeliveryWidgetPicture.routes) {
                     val frame = DeliveryWidgetPictures.frame(picture)
                     val drawn = if (world != null) {
-                        route(parcel, identity, world, frame, dark, language)
+                        route(parcel, identity, world, frame, dark, language, scale)
                     } else {
                         // With no route to draw, Pip still stands where he would be.
-                        lonePip(PipMood(parcel.currentStage) ?: PipMood.Look, identity, frame, dark)
+                        lonePip(PipMood(parcel.currentStage) ?: PipMood.Look, identity, frame, dark, scale)
                     }
                     if (!write(drawn, picture.file(card, dark, folder))) return@withContext false
                     yield()
                 }
             }
             for (dark in listOf(false, true)) {
-                if (!write(mark(identity, dark, language), DeliveryWidgetPicture.Mark.file(card, dark, folder))) return@withContext false
+                if (!write(mark(identity, dark, language, scale), DeliveryWidgetPicture.Mark.file(card, dark, folder))) return@withContext false
             }
             true
         } catch (cancelled: CancellationException) {
@@ -110,7 +120,15 @@ class WidgetCardPictures(
     }
 
     /** `RouteEngraving` at the frame's size, its marks faded toward the bottom, the whole faded in from under the top row. */
-    private suspend fun route(parcel: Parcel, identity: CarrierVisualIdentity, atlas: WorldAtlas, frame: DeliveryWidgetPictures.Frame, dark: Boolean, language: AppLanguage): Bitmap {
+    private suspend fun route(
+        parcel: Parcel,
+        identity: CarrierVisualIdentity,
+        atlas: WorldAtlas,
+        frame: DeliveryWidgetPictures.Frame,
+        dark: Boolean,
+        language: AppLanguage,
+        scale: Double,
+    ): Bitmap {
         val route = ParcelRoute(parcel, atlas, language)
         val stage = parcel.currentStage
         val request = MapSceneRequest(
@@ -122,7 +140,7 @@ class WidgetCardPictures(
         val scene = MapScenes.made(request, context).await()
         val width = frame.size.width.toFloat()
         val height = frame.size.height.toFloat()
-        return picture(frame.size.width, frame.size.height) {
+        return picture(frame.size.width, frame.size.height, scale) {
             layer(width, height) {
                 layer(width, height) {
                     drawContext.canvas.nativeCanvas.drawPicture(scene.base)
@@ -144,7 +162,7 @@ class WidgetCardPictures(
      * `LonePip`: Pip across the top of a card whose parcel has no places, as big as he fits between the card's top row
      * and its words, at its trailing end, looking back at them.
      */
-    private fun lonePip(mood: PipMood, identity: CarrierVisualIdentity, frame: DeliveryWidgetPictures.Frame, dark: Boolean): Bitmap {
+    private fun lonePip(mood: PipMood, identity: CarrierVisualIdentity, frame: DeliveryWidgetPictures.Frame, dark: Boolean, scale: Double): Bitmap {
         val side = -1
         val extents = PipGeometry.extents(mood, side)
         val room = frame.floor - frame.ceiling
@@ -152,7 +170,7 @@ class WidgetCardPictures(
         val unit = width / PipGeometry.frame.width
         val x = frame.size.width - frame.insets.trailing - extents.maxX * unit
         val y = frame.ceiling + (room - extents.height * unit) / 2 - extents.minY * unit
-        return picture(frame.size.width, frame.size.height) { drawPip(mood, side, false, x, y, width, identity, dark) }
+        return picture(frame.size.width, frame.size.height, scale) { drawPip(mood, side, false, x, y, width, identity, dark) }
     }
 
     /** `InkPip`, still: his frame's top left at (`x`, `y`), `width` wide, in the card's ink. */
@@ -169,7 +187,7 @@ class WidgetCardPictures(
      * `CarrierFleetMark`, at its own size: the truck, 27 × 18, then 7 points on the carrier's name in caption bold, in
      * its colour, DHL's in italics, GLS's with its full stop.
      */
-    private fun mark(identity: CarrierVisualIdentity, dark: Boolean, language: AppLanguage): Bitmap {
+    private fun mark(identity: CarrierVisualIdentity, dark: Boolean, language: AppLanguage, scale: Double): Bitmap {
         val density = Density(scale.toFloat(), fontScale = 1f)
         val type = PeekTypography(DynamicTypeSize.Large, density, language)
         val style = type.style(IosTextStyle.Caption, FontWeight.Bold).sfLines().let { if (identity.family == "dhl") it.italic() else it }
@@ -180,7 +198,7 @@ class WidgetCardPictures(
         val textWidth = text.size.width / scale
         val textHeight = text.size.height / scale
         val height = maxOf(TRUCK_HEIGHT, textHeight)
-        return picture(ceil((TRUCK_WIDTH + GAP + textWidth) * scale) / scale, height) {
+        return picture(ceil((TRUCK_WIDTH + GAP + textWidth) * scale) / scale, height, scale) {
             val box = CarrierTruckGeometry.viewBox
             translate(0f, ((height - TRUCK_HEIGHT) / 2).toFloat()) {
                 scale((TRUCK_WIDTH / box.width).toFloat(), (TRUCK_HEIGHT / box.height).toFloat(), pivot = Offset.Zero) { drawMapDrawings(truck, dark) }
@@ -192,8 +210,8 @@ class WidgetCardPictures(
         }
     }
 
-    /** A transparent picture `width` × `height` points at the screen's density, drawn one unit to the point. */
-    private fun picture(width: Double, height: Double, draw: DrawScope.() -> Unit): Bitmap {
+    /** A transparent picture `width` × `height` points at `scale` pixels to the point, drawn one unit to the point. */
+    private fun picture(width: Double, height: Double, scale: Double, draw: DrawScope.() -> Unit): Bitmap {
         val pixels = androidx.compose.ui.geometry.Size((width * scale).roundToInt().toFloat(), (height * scale).roundToInt().toFloat())
         val image = ImageBitmap(pixels.width.toInt(), pixels.height.toInt(), ImageBitmapConfig.Argb8888)
         CanvasDrawScope().draw(Density(scale.toFloat()), LayoutDirection.Ltr, Canvas(image), pixels) {

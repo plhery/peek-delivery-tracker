@@ -2,14 +2,19 @@ package com.plhery.peekdeliverytracker.widget
 
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProviderInfo
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.SystemClock
 import android.util.LruCache
+import androidx.annotation.RequiresApi
 import androidx.collection.intSetOf
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -40,36 +45,36 @@ import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.io.File
+import java.time.Duration
 import java.time.Instant
 import java.util.UUID
+import kotlin.math.sqrt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
  * `NextDeliveryWidget`: the next deliveries on the home screen, in the app's language, as the app's cards once it has
- * drawn them. The iPhone's small and medium families are one widget here, whose layout follows its size: below
- * [MEDIUM]'s width it shows one parcel (small), from it two side by side or one across (medium); a widget between the
- * two sizes shows the small layout stretched to it. It reads what the app published (DeliveryWidgetSharedStore) each
- * time it is drawn, which [DeliveryWidgetUpdates] asks for.
+ * drawn them. The iPhone's small and medium families are one widget here, whose layout follows the size the launcher
+ * gives it in each orientation ([SizeMode.Exact]): one parcel (small), or, where the widget is wide for its height as
+ * the iPhone's medium is, two side by side or one across (medium, [isMedium]). It reads what the app published
+ * (DeliveryWidgetSharedStore) each time it is drawn, which [DeliveryWidgetUpdates] asks for.
  */
 class NextDeliveryWidget : GlanceAppWidget() {
-    override val sizeMode = SizeMode.Responsive(setOf(SMALL, MEDIUM))
-    override val previewSizeMode = SizeMode.Responsive(setOf(SMALL, MEDIUM))
+    override val sizeMode = SizeMode.Exact
+
+    /** The gallery's pictures take declared sizes only: a two-by-two widget's, upright and on its side. */
+    override val previewSizeMode = SizeMode.Responsive(PREVIEW_SIZES)
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val source = DeliveryWidgetSource.of(context)
         DeliveryWidgetUpdates.schedule(context, source.store)
-        provideContent {
-            val revision by DeliveryWidgetUpdates.revision.collectAsState()
-            val medium = isMedium(LocalSize.current)
-            val entry = remember(revision, medium) { source.current(medium, Instant.now()) }
-            DeliveryWidgetContent(entry, medium)
-        }
+        provideContent { NextDeliveryWidgetBody(source) }
     }
 
     /**
@@ -79,42 +84,82 @@ class NextDeliveryWidget : GlanceAppWidget() {
     override suspend fun providePreview(context: Context, widgetCategory: Int) {
         val source = DeliveryWidgetSource.of(context)
         provideContent {
-            val medium = isMedium(LocalSize.current)
+            val size = LocalSize.current
+            val medium = isMedium(size)
             val entry = remember(medium) { source.preview(medium, Instant.now()) }
-            DeliveryWidgetContent(entry, medium)
+            DeliveryWidgetContent(entry, size)
         }
     }
 
     companion object {
-        /** The smallest widget, two cells by two, and the smallest that shows two parcels side by side. */
-        val SMALL = DpSize(110.dp, 110.dp)
-        val MEDIUM = DpSize(270.dp, 110.dp)
+        /**
+         * A two-by-two widget on a phone, upright and on its side: Launcher3's cells on its reference phone grid, which
+         * the gallery's pictures are drawn at.
+         */
+        val PREVIEW_SIZES = setOf(DpSize(130.dp, 220.dp), DpSize(269.dp, 117.dp))
 
-        fun isMedium(size: DpSize): Boolean = size.width >= MEDIUM.width
+        /** The narrowest widget that shows two parcels side by side, two cards on their side on a phone. */
+        private val MEDIUM_WIDTH = 250.dp
+
+        /**
+         * How much wider than tall a widget is from which it is medium: midway, in proportion, between the iPhone's
+         * small widget (170 × 170) and its medium one (364 × 170).
+         */
+        private val MEDIUM_SHAPE = sqrt(364f / 170f)
+
+        /** Whether a widget `size` big shows the iPhone's medium layout: wide enough, and wide for its height. */
+        fun isMedium(size: DpSize): Boolean = size.width >= MEDIUM_WIDTH && size.width.value >= size.height.value * MEDIUM_SHAPE
     }
 }
 
-/** The widget's receiver: the launcher's updates, and the refresh [DeliveryWidgetUpdates] sets an alarm for. */
+/** What a placed widget shows, at the size the launcher gives it, read again from the store at each reload. */
+@Composable
+internal fun NextDeliveryWidgetBody(source: DeliveryWidgetSource) {
+    val revision by DeliveryWidgetUpdates.revision.collectAsState()
+    val size = LocalSize.current
+    val medium = NextDeliveryWidget.isMedium(size)
+    val entry = remember(revision, medium) { source.current(medium, Instant.now()) }
+    DeliveryWidgetContent(entry, size)
+}
+
+/**
+ * The widget's receiver: the launcher's updates, the refresh [DeliveryWidgetUpdates] sets an alarm for, and the
+ * gallery's pictures tried again once the system takes them ([WidgetGalleryPreviews]). The refresh ends with the last
+ * widget.
+ */
 class NextDeliveryWidgetReceiver : GlanceAppWidgetReceiver() {
     override val glanceAppWidget: GlanceAppWidget = NextDeliveryWidget()
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action == DeliveryWidgetUpdates.REFRESH) {
-            val pending = goAsync()
-            DeliveryWidgetUpdates.reload(context) { pending.finish() }
-            return
+        when (intent.action) {
+            DeliveryWidgetUpdates.REFRESH -> {
+                val pending = goAsync()
+                DeliveryWidgetUpdates.reload(context) { pending.finish() }
+            }
+            DeliveryWidgetUpdates.PREVIEWS -> {
+                val pending = goAsync()
+                DeliveryWidgetUpdates.retryPreviews(context) { pending.finish() }
+            }
+            else -> super.onReceive(context, intent)
         }
-        super.onReceive(context, intent)
+    }
+
+    override fun onDisabled(context: Context) {
+        super.onDisabled(context)
+        DeliveryWidgetUpdates.cancel(context)
     }
 }
 
-/** `ShowNextParcelIntent`: turns the widgets of one size to the next parcels, then draws them again. */
+/**
+ * `ShowNextParcelIntent`: turns the widgets of one size to the next parcels, draws them again and sets the timeline's
+ * next entry for the turn's end, before the tap's work is done, as `perform` returns once WidgetKit has reloaded.
+ */
 class ShowNextParcelAction : ActionCallback {
     override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         val parcel = parameters[PARCEL]?.let { runCatching { UUID.fromString(it) }.getOrNull() } ?: return
         val size = parameters[SIZE] ?: return
         DeliveryWidgetSource.of(context).store.setTurn(DeliveryWidgetTurn(parcel = parcel, at = Instant.now()), size = size)
-        DeliveryWidgetUpdates.reload(context)
+        DeliveryWidgetUpdates.update(context)
     }
 
     companion object {
@@ -203,23 +248,31 @@ internal object WidgetPictures {
 /**
  * WidgetKit's reloads and timeline: the widgets drawn again when the app publishes ([GlanceWidgetCenter]), when the
  * next button turns them, and when their timeline would have WidgetKit ask again: 20 minutes on, or sooner when a
- * turn's spell ends. The alarm is inexact and doesn't wake the phone, as WidgetKit's timeline refreshes at its own
- * pace.
+ * turn's spell ends. The alarm is set only while a widget is placed; it doesn't wake the phone, as WidgetKit's timeline
+ * refreshes at its own pace, and without the exact alarm permission it comes in a window ([window]).
  */
 object DeliveryWidgetUpdates {
     const val REFRESH = "com.plhery.peekdeliverytracker.widget.REFRESH"
+    const val PREVIEWS = "com.plhery.peekdeliverytracker.widget.PREVIEWS"
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val revisionState = MutableStateFlow(0)
+    private var previews: WidgetGalleryPreviews? = null
 
     /** Bumped at each reload: a widget being shown reads the store again. */
     val revision: StateFlow<Int> = revisionState.asStateFlow()
 
-    /** Draws every widget again from the store, and sets the next refresh. */
+    /** Draws every widget again from the store, and sets the next refresh, once they are drawn. */
+    suspend fun update(context: Context) {
+        val app = context.applicationContext
+        invalidate(app)
+        NextDeliveryWidget().updateAll(app)
+    }
+
+    /** [update], from where nothing waits for it but `done`. */
     fun reload(context: Context, done: () -> Unit = {}) {
         val app = context.applicationContext
-        revisionState.value += 1
-        schedule(app, DeliveryWidgetSource.of(app).store)
+        invalidate(app)
         scope.launch {
             try {
                 NextDeliveryWidget().updateAll(app)
@@ -229,12 +282,43 @@ object DeliveryWidgetUpdates {
         }
     }
 
-    /** The timeline's next entry: the refresh, or the end of a turn's spell where a widget was turned to other parcels. */
-    fun schedule(context: Context, store: DeliveryWidgetSharedStore, now: Instant = Instant.now()) {
-        val turns = listOf(false, true).map { store.turn(size = DeliveryWidgetTimeline.turnSize(it), now = now) }
-        val at = DeliveryWidgetTimeline.next(now, turns)
+    private fun invalidate(context: Context) {
+        revisionState.update { it + 1 }
+        schedule(context, DeliveryWidgetSource.of(context).store)
+    }
+
+    /**
+     * The timeline's next entry while a widget is `placed`: the refresh, or the end of a turn's spell where a widget was
+     * turned to other parcels. With none placed, there is none.
+     */
+    fun schedule(context: Context, store: DeliveryWidgetSharedStore, now: Instant = Instant.now(), placed: Boolean = isPlaced(context)) {
         val alarms = context.getSystemService(AlarmManager::class.java) ?: return
-        alarms.set(AlarmManager.RTC, at.toEpochMilli(), refresh(context))
+        if (!placed) {
+            alarms.cancel(refresh(context))
+            return
+        }
+        val turns = listOf(false, true).map { store.turn(size = DeliveryWidgetTimeline.turnSize(it), now = now) }
+        val wait = maxOf(Duration.between(now, DeliveryWidgetTimeline.next(now, turns)), MIN_FUTURITY)
+        alarms.setWindow(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + wait.toMillis(), window(wait).toMillis(), refresh(context))
+    }
+
+    /**
+     * The narrowest window an alarm `wait` away is given without the exact alarm permission (AlarmManagerService's
+     * minimum since Android 12): three quarters of the wait, ten minutes at most. A turn's end five minutes on comes
+     * up to 3 min 45 s late, the refresh up to 10 minutes; and later still while the phone sleeps, as the alarm doesn't
+     * wake it.
+     */
+    fun window(wait: Duration): Duration = minOf(wait.multipliedBy(3).dividedBy(4), MAX_WINDOW)
+
+    /** No refresh once the last widget is gone. */
+    fun cancel(context: Context) {
+        context.getSystemService(AlarmManager::class.java)?.cancel(refresh(context))
+    }
+
+    /** Whether a widget is on a home screen. */
+    fun isPlaced(context: Context): Boolean {
+        val widgets = context.getSystemService(AppWidgetManager::class.java) ?: return false
+        return widgets.getAppWidgetIds(ComponentName(context, NextDeliveryWidgetReceiver::class.java)).isNotEmpty()
     }
 
     private fun refresh(context: Context): PendingIntent = PendingIntent.getBroadcast(
@@ -244,33 +328,82 @@ object DeliveryWidgetUpdates {
 
     /**
      * The gallery's pictures of the widget, generated from its content (Android 15 and later) as WidgetKit asks
-     * `getSnapshot` for them: in the app's language, with the reader's own cards once drawn. The system takes only a
-     * few a day, so they are published again only when what they show changes ([previewsKey]); earlier Androids show
-     * the provider's preview layout.
+     * `getSnapshot` for them: in the app's language, with the reader's own cards once drawn ([WidgetGalleryPreviews]).
+     * Earlier Androids show the provider's preview layout.
      */
     fun publishPreviews(context: Context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return
-        val app = context.applicationContext
+        previews(context).request()
+    }
+
+    /** The gallery's pictures, once the system's limit lets them through. */
+    fun retryPreviews(context: Context, done: () -> Unit) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return done()
         scope.launch {
-            runCatching {
-                val key = previewsKey(DeliveryWidgetSource.of(app), Instant.now())
-                val defaults = PreferencesDefaults.standard(app)
-                if (defaults.string(PREVIEWS_KEY) == key) return@runCatching
-                val result = GlanceAppWidgetManager(app)
-                    .setWidgetPreviews(NextDeliveryWidgetReceiver::class, intSetOf(AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN))
-                if (result == GlanceAppWidgetManager.SET_WIDGET_PREVIEWS_RESULT_SUCCESS) defaults.set(key, forKey = PREVIEWS_KEY)
+            try {
+                previews(context).publish()
+            } finally {
+                done()
             }
         }
     }
 
-    /** What the gallery's pictures show: the app's version, and each size's language and cards. */
-    internal fun previewsKey(source: DeliveryWidgetSource, at: Instant): String =
-        (listOf("${BuildConfig.VERSION_CODE}") + listOf(false, true).map { medium ->
-            val entry = source.preview(medium, at)
+    @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    private fun previews(context: Context): WidgetGalleryPreviews = synchronized(this) {
+        previews ?: WidgetGalleryPreviews(scope, SystemGallery(context.applicationContext)).also { previews = it }
+    }
+
+    /** What the gallery's pictures show: the app's version, and each size's language and cards; the sample or the reader's. */
+    internal fun previewsShow(source: DeliveryWidgetSource, at: Instant): WidgetGalleryPreviews.Shows {
+        val entries = listOf(false, true).map { medium -> source.preview(medium, at) }
+        val key = (listOf("${BuildConfig.VERSION_CODE}") + entries.map { entry ->
             "${entry.languageCode} ${entry.isSample} " + entry.shown.joinToString(",") { it.card?.pictures ?: it.id.toString() }
         }).joinToString("\n")
+        return WidgetGalleryPreviews.Shows(key, sample = entries.all { it.isSample })
+    }
 
+    /** The system's gallery, the pictures it holds kept in the app's defaults. */
+    @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    private class SystemGallery(private val context: Context) : WidgetGalleryPreviews.Gallery {
+        private val defaults = PreferencesDefaults.standard(context)
+        private val provider = ComponentName(context, NextDeliveryWidgetReceiver::class.java)
+
+        override fun shows(): WidgetGalleryPreviews.Shows = previewsShow(DeliveryWidgetSource.of(context), Instant.now())
+
+        override var held: WidgetGalleryPreviews.Shows?
+            get() = defaults.string(PREVIEWS_KEY)?.let { WidgetGalleryPreviews.Shows(it, defaults.bool(PREVIEWS_SAMPLE_KEY)) }
+            set(value) {
+                if (value == null) {
+                    defaults.removeObject(PREVIEWS_KEY)
+                    defaults.removeObject(PREVIEWS_SAMPLE_KEY)
+                } else {
+                    defaults.set(value.key, forKey = PREVIEWS_KEY)
+                    defaults.set(value.sample, forKey = PREVIEWS_SAMPLE_KEY)
+                }
+            }
+
+        override suspend fun publish(): Int =
+            GlanceAppWidgetManager(context).setWidgetPreviews(NextDeliveryWidgetReceiver::class, intSetOf(AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN))
+
+        override fun remove() {
+            context.getSystemService(AppWidgetManager::class.java)?.removeWidgetPreview(provider, AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN)
+        }
+
+        override fun retry(after: Duration) {
+            val alarms = context.getSystemService(AlarmManager::class.java) ?: return
+            val retry = PendingIntent.getBroadcast(
+                context, 1, Intent(context, NextDeliveryWidgetReceiver::class.java).setAction(PREVIEWS),
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+            )
+            alarms.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + after.toMillis(), retry)
+        }
+    }
+
+    /** AlarmManager's soonest for an app's alarm. */
+    private val MIN_FUTURITY = Duration.ofSeconds(5)
+    private val MAX_WINDOW = Duration.ofMinutes(10)
     private const val PREVIEWS_KEY = "sdt.deliveryWidget.previews.v1"
+    private const val PREVIEWS_SAMPLE_KEY = "sdt.deliveryWidget.previewsSample.v1"
 }
 
 /**

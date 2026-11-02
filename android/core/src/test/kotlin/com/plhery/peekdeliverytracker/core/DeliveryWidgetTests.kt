@@ -231,9 +231,12 @@ class DeliveryWidgetTests {
             )
             val shared = DeliveryWidgetSharedStore(defaults)
             store.setDeliveryLiveActivitiesEnabled(false)
+            assertEquals(emptyList<String>(), reloads)
+            // Into the demo: what the widget showed goes, a reload.
             session.enterDemo()
             assertTrue(store.isDemo)
-            // Drawing: nothing is published until it ends.
+            assertEquals(listOf(DeliveryWidgetSharedStore.kind), reloads)
+            // Drawing: nothing is published, nor the widget reloaded again, until it ends.
             assertNull(shared.snapshot)
             runCurrent()
             val published = requireNotNull(shared.snapshot).parcels
@@ -241,12 +244,14 @@ class DeliveryWidgetTests {
             assertTrue(published.all { it.card != null })
             assertEquals(published.map { it.id }.toSet(), artist.drawn.map { it.first }.toSet())
             assertEquals(published.size, artist.drawn.size)
-            assertEquals(listOf(DeliveryWidgetSharedStore.kind), reloads.distinct())
+            // One publication, one reload.
+            assertEquals(2, reloads.size)
 
-            // Drawn already: another publication draws nothing.
+            // Drawn already: another publication draws nothing, and the widget, shown nothing new, isn't reloaded.
             store.refreshDeliverySurfaces()
             runCurrent()
             assertEquals(published.size, artist.drawn.size)
+            assertEquals(2, reloads.size)
 
             // A card the artist could not draw stays words, and is not tried again.
             val failed = published.first()
@@ -257,6 +262,7 @@ class DeliveryWidgetTests {
             val again = requireNotNull(shared.snapshot).parcels
             assertNull(again.first { it.id == failed.id }.card)
             assertEquals(published.size - 1, again.count { it.card != null })
+            assertEquals(3, reloads.size)
             val attempts = artist.attempts
             store.refreshDeliverySurfaces()
             runCurrent()

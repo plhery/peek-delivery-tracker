@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- A card's route across its top, as wide as the card and as tall as its picture, light and dark (DayNightPicture). -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- A card's route, filling the room the widget gives it (its drawn size or less, CardBackground), light and dark
+     (DayNightPicture). -->
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_picture"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/widget_picture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:adjustViewBounds="true"
-        android:importantForAccessibility="no"
-        android:scaleType="fitCenter" />
-</FrameLayout>
+    android:layout_height="match_parent"
+    android:importantForAccessibility="no"
+    android:scaleType="fitCenter" />

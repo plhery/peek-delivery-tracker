@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.widget
 
 import android.app.AlarmManager
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -8,9 +10,17 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Looper
+import android.os.SystemClock
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.glance.ExperimentalGlanceApi
 import androidx.glance.GlanceId
+import androidx.glance.appwidget.runComposition
 import androidx.glance.appwidget.testing.unit.hasRunCallbackClickAction
 import androidx.glance.appwidget.testing.unit.hasStartActivityClickAction
 import androidx.glance.appwidget.testing.unit.runGlanceAppWidgetUnitTest
@@ -20,6 +30,7 @@ import androidx.glance.testing.unit.hasTextEqualTo
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.MainActivity
+import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
@@ -28,7 +39,6 @@ import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPictures
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetTimeline
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetTurn
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.platform.BuildSettings
@@ -38,7 +48,10 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import java.time.Duration
 import java.time.Instant
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -80,7 +93,7 @@ class NextDeliveryWidgetTest {
         runGlanceAppWidgetUnitTest {
             setContext(app)
             setAppWidgetSize(size)
-            provideComposable { DeliveryWidgetContent(entry, NextDeliveryWidget.isMedium(size)) }
+            provideComposable { DeliveryWidgetContent(entry, size) }
             test()
         }
 
@@ -101,7 +114,7 @@ class NextDeliveryWidgetTest {
 
     /** `testSmallWidgetShowsItsParcelInWords` (C-W05, C-W23): the header, the badge, the name, the carrier and when. */
     @Test
-    fun smallWidgetShowsItsParcelInWordsAndOpensIt() = show(wordsEntry(three, medium = false), NextDeliveryWidget.SMALL) {
+    fun smallWidgetShowsItsParcelInWordsAndOpensIt() = show(wordsEntry(three, medium = false), IPHONE_SMALL) {
         onNode(hasTextEqualTo(english.text("app.title").uppercase())).assertExists()
         onNode(hasTextEqualTo(english.text("stage.out_for_delivery").uppercase())).assertExists()
         onNode(hasTextEqualTo("Belgian chocolate")).assertExists()
@@ -114,7 +127,7 @@ class NextDeliveryWidgetTest {
 
     /** C-W06: two parcels side by side, each its own link, the second's badge on its way. */
     @Test
-    fun mediumWidgetShowsTwoParcelsEachOpeningItself() = show(wordsEntry(three, medium = true), NextDeliveryWidget.MEDIUM) {
+    fun mediumWidgetShowsTwoParcelsEachOpeningItself() = show(wordsEntry(three, medium = true), IPHONE_MEDIUM) {
         onNode(hasTextEqualTo("Belgian chocolate")).assertExists()
         onNode(hasTextEqualTo("Trail weekend kit")).assertExists()
         onNode(hasTextEqualTo("Desk lamp")).assertDoesNotExist()
@@ -128,7 +141,7 @@ class NextDeliveryWidgetTest {
     @Test
     fun deliveredParcelIsShownWithItsBadge() {
         val delivered = widgetParcel(4, "Moon lamp", detail = "Delivered today", deliveredAt = CAPTURED.minus(Duration.ofHours(2)))
-        show(wordsEntry(listOf(delivered), medium = false), NextDeliveryWidget.SMALL) {
+        show(wordsEntry(listOf(delivered), medium = false), IPHONE_SMALL) {
             onNode(hasTextEqualTo(english.text("stage.delivered").uppercase())).assertExists()
             onNode(hasTextEqualTo("Moon lamp")).assertExists()
         }
@@ -141,24 +154,24 @@ class NextDeliveryWidgetTest {
     @Test
     fun nextButtonTurnsTheWidgetsOfItsSize() {
         val next = english.text("app.nextParcel")
-        show(wordsEntry(three, medium = false), NextDeliveryWidget.SMALL) {
+        show(wordsEntry(three, medium = false), IPHONE_SMALL) {
             onNode(hasContentDescriptionEqualTo(next))
                 .assert(hasRunCallbackClickAction<ShowNextParcelAction>(ShowNextParcelAction.parameters(three[1].id, "small")))
         }
-        show(wordsEntry(three, medium = true), NextDeliveryWidget.MEDIUM) {
+        show(wordsEntry(three, medium = true), IPHONE_MEDIUM) {
             onNode(hasContentDescriptionEqualTo(next))
                 .assert(hasRunCallbackClickAction<ShowNextParcelAction>(ShowNextParcelAction.parameters(three[2].id, "medium")))
         }
         // From the last page, back to the first.
-        show(wordsEntry(three, medium = true, turn = three[2].id), NextDeliveryWidget.MEDIUM) {
+        show(wordsEntry(three, medium = true, turn = three[2].id), IPHONE_MEDIUM) {
             onNode(hasTextEqualTo("Desk lamp")).assertExists()
             onNode(hasContentDescriptionEqualTo(next))
                 .assert(hasRunCallbackClickAction<ShowNextParcelAction>(ShowNextParcelAction.parameters(three[0].id, "medium")))
         }
-        show(wordsEntry(three.take(2), medium = true), NextDeliveryWidget.MEDIUM) {
+        show(wordsEntry(three.take(2), medium = true), IPHONE_MEDIUM) {
             onAllNodes(hasContentDescriptionEqualTo(next)).assertCountEquals(0)
         }
-        show(cardsEntry(three, medium = false), NextDeliveryWidget.SMALL) {
+        show(cardsEntry(three, medium = false), IPHONE_SMALL) {
             onNode(hasContentDescriptionEqualTo(next))
                 .assert(hasRunCallbackClickAction<ShowNextParcelAction>(ShowNextParcelAction.parameters(three[1].id, "small")))
         }
@@ -167,7 +180,7 @@ class NextDeliveryWidgetTest {
     /** `stateView` (C-W09): switched off in the app, or nothing on its way; the widget opens the app. */
     @Test
     fun emptyAndSwitchedOffWidgetsSayWhy() {
-        show(wordsEntry(three, medium = false, enabled = false), NextDeliveryWidget.SMALL) {
+        show(wordsEntry(three, medium = false, enabled = false), IPHONE_SMALL) {
             onNode(hasTextEqualTo(english.text("widget.disabledTitle"))).assertExists()
             // Android's words for the home screen.
             onNode(hasTextEqualTo(english.text("widget.disabledDescription.android"))).assertExists()
@@ -176,14 +189,14 @@ class NextDeliveryWidgetTest {
             onNode(opensApp).assertExists()
             onAllNodes(hasContentDescriptionEqualTo(english.text("app.nextParcel"))).assertCountEquals(0)
         }
-        show(wordsEntry(emptyList(), medium = true), NextDeliveryWidget.MEDIUM) {
+        show(wordsEntry(emptyList(), medium = true), IPHONE_MEDIUM) {
             onNode(hasTextEqualTo(english.text("app.noneOnWay"))).assertExists()
             onNode(hasTextEqualTo(english.text("app.emptyDescription"))).assertExists()
             onNode(opensApp).assertExists()
         }
         // A widget switched off shows no cards, drawn or not.
         val off = cardsEntry(three.map { it.copy(card = card(it.id.toString())) }, medium = false).copy(enabled = false)
-        show(off, NextDeliveryWidget.SMALL) { onNode(hasTextEqualTo(english.text("widget.disabledTitle"))).assertExists() }
+        show(off, IPHONE_SMALL) { onNode(hasTextEqualTo(english.text("widget.disabledTitle"))).assertExists() }
     }
 
     /**
@@ -193,22 +206,22 @@ class NextDeliveryWidgetTest {
     @Test
     fun cardsShowOnceTheirPicturesAreDrawn() {
         val carded = three.map { it.copy(card = card(it.id.toString())) }
-        show(cardsEntry(carded, medium = false), NextDeliveryWidget.SMALL) {
+        show(cardsEntry(carded, medium = false), IPHONE_SMALL) {
             onNode(hasTextEqualTo(english.text("app.title").uppercase())).assertDoesNotExist()
             onNode(hasTextEqualTo("Belgian chocolate")).assertExists()
             onNode(hasTextEqualTo("Out for delivery · today")).assertExists()
             onNode(opens(carded[0]) and hasAnyDescendant(hasTextEqualTo("Belgian chocolate"))).assertExists()
         }
-        show(cardsEntry(carded, medium = true), NextDeliveryWidget.MEDIUM) {
+        show(cardsEntry(carded, medium = true), IPHONE_MEDIUM) {
             onNode(opens(carded[0]) and hasAnyDescendant(hasTextEqualTo("Belgian chocolate"))).assertExists()
             onNode(opens(carded[1]) and hasAnyDescendant(hasTextEqualTo("Trail weekend kit"))).assertExists()
             onNode(hasTextEqualTo("Out for delivery · tomorrow")).assertExists()
         }
         // A status that says when already doesn't say it twice.
         val dated = listOf(carded[0].copy(detail = "Out for delivery"))
-        show(cardsEntry(dated, medium = false), NextDeliveryWidget.SMALL) { onNode(hasTextEqualTo("Out for delivery")).assertExists() }
+        show(cardsEntry(dated, medium = false), IPHONE_SMALL) { onNode(hasTextEqualTo("Out for delivery")).assertExists() }
         // Words while one of them has none.
-        show(cardsEntry(listOf(carded[0], three[1]), medium = true), NextDeliveryWidget.MEDIUM) {
+        show(cardsEntry(listOf(carded[0], three[1]), medium = true), IPHONE_MEDIUM) {
             onNode(hasTextEqualTo(english.text("app.title").uppercase())).assertExists()
         }
     }
@@ -218,12 +231,12 @@ class NextDeliveryWidgetTest {
     fun widgetSpeaksTheAppsLanguage() {
         val french = ExtensionLocalizer("fr")
         assertNotEquals(english.text("app.nextParcel"), french.text("app.nextParcel"))
-        show(wordsEntry(three, medium = false, languageCode = "fr"), NextDeliveryWidget.SMALL) {
+        show(wordsEntry(three, medium = false, languageCode = "fr"), IPHONE_SMALL) {
             onNode(hasTextEqualTo(french.text("stage.out_for_delivery").uppercase(java.util.Locale.FRENCH))).assertExists()
             onNode(hasContentDescriptionEqualTo(french.text("app.nextParcel"))).assertExists()
             onNode(hasContentDescriptionEqualTo(english.text("app.nextParcel"))).assertDoesNotExist()
         }
-        show(wordsEntry(emptyList(), medium = false, languageCode = "fr"), NextDeliveryWidget.SMALL) {
+        show(wordsEntry(emptyList(), medium = false, languageCode = "fr"), IPHONE_SMALL) {
             onNode(hasTextEqualTo(french.text("app.noneOnWay"))).assertExists()
         }
     }
@@ -313,48 +326,182 @@ class NextDeliveryWidgetTest {
         assertEquals(2, own.cards.size)
     }
 
+    /** A widget on the home screen, as a launcher binds one. */
+    private fun place() = shadowOf(AppWidgetManager.getInstance(app)).bindAppWidgetId(1, ComponentName(app, NextDeliveryWidgetReceiver::class.java))
+
+    private val alarms get() = shadowOf(app.getSystemService(AlarmManager::class.java))
+
     /**
-     * `ShowNextParcelIntent.perform` and the timeline (C-W03, C-W21): the turn is kept for the widgets of its size, they
-     * are drawn again, and the widgets come back when the turn's spell ends, or 20 minutes on.
+     * The timeline (C-W03): the refresh is set only while a widget is placed, 20 minutes on in elapsed time, not waking
+     * the phone, in the narrowest window an app has without the exact alarm permission; it goes with the last widget,
+     * and a reload with none placed sets none.
+     */
+    @Test
+    fun refreshIsSetOnlyWhileAWidgetIsPlaced() {
+        val store = DeliveryWidgetSharedStore(com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults())
+        val now = Instant.now()
+        assertFalse(DeliveryWidgetUpdates.isPlaced(app))
+        DeliveryWidgetUpdates.schedule(app, store, now)
+        assertTrue(alarms.scheduledAlarms.isEmpty())
+
+        place()
+        assertTrue(DeliveryWidgetUpdates.isPlaced(app))
+        DeliveryWidgetUpdates.schedule(app, store, now)
+        val alarm = alarms.scheduledAlarms.single()
+        assertEquals(AlarmManager.ELAPSED_REALTIME, alarm.type)
+        assertEquals(SystemClock.elapsedRealtime() + Duration.ofMinutes(20).toMillis(), alarm.triggerAtMs)
+        assertEquals(Duration.ofMinutes(10).toMillis(), alarm.windowLengthMs)
+        // Set again, it replaces itself.
+        DeliveryWidgetUpdates.schedule(app, store, now)
+        assertEquals(1, alarms.scheduledAlarms.size)
+
+        // The last widget removed: the system disables the receiver, and the alarm goes.
+        NextDeliveryWidgetReceiver().onDisabled(app)
+        assertTrue(alarms.scheduledAlarms.isEmpty())
+        DeliveryWidgetUpdates.schedule(app, store, now, placed = true)
+        DeliveryWidgetUpdates.schedule(app, store, now, placed = false)
+        assertTrue(alarms.scheduledAlarms.isEmpty())
+    }
+
+    /**
+     * The end of a turn's spell (C-W21): its window is three quarters of the wait, the narrowest without the exact
+     * alarm permission, so a turn five minutes long ends up to 3 min 45 s late; the refresh comes up to 10 minutes late.
+     */
+    @Test
+    fun turnsEndIsAsCloseAsTheSystemAllows() {
+        place()
+        val store = DeliveryWidgetSharedStore(com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults())
+        val now = Instant.now()
+        store.setTurn(DeliveryWidgetTurn(three[1].id, now), size = "medium")
+        val ends = store.turn(size = "medium", now = now)!!.ends
+        DeliveryWidgetUpdates.schedule(app, store, now)
+        val alarm = alarms.scheduledAlarms.single()
+        val wait = Duration.between(now, ends)
+        assertEquals(Duration.ofSeconds(DeliveryWidgetTurn.spell.toLong()), wait)
+        assertEquals(SystemClock.elapsedRealtime() + wait.toMillis(), alarm.triggerAtMs)
+        assertEquals(Duration.ofSeconds(225), DeliveryWidgetUpdates.window(wait))
+        assertEquals(DeliveryWidgetUpdates.window(wait).toMillis(), alarm.windowLengthMs)
+        assertEquals(Duration.ofMinutes(10), DeliveryWidgetUpdates.window(Duration.ofMinutes(20)))
+        // A turn about to end: no sooner than the system's own five seconds, which still have a window, as a window of
+        // none would ask for an exact alarm.
+        DeliveryWidgetUpdates.schedule(app, store, ends.minusMillis(1))
+        assertEquals(SystemClock.elapsedRealtime() + 5_000, alarms.scheduledAlarms.single().triggerAtMs)
+        assertTrue(alarms.scheduledAlarms.single().windowLengthMs > 0)
+    }
+
+    /**
+     * `ShowNextParcelIntent.perform` (C-W21): the turn is kept for the widgets of its size, they are drawn again, and
+     * the timeline's next entry is the turn's end, all before the tap's work is done.
      */
     @Test
     fun nextActionTurnsTheWidgetsAndTheTimelineComesBack() = runBlocking {
+        place()
         val store = DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(app, BuildSettings.configuration.appGroupIdentifier))
-        val alarms = shadowOf(app.getSystemService(AlarmManager::class.java))
-        val now = Instant.now()
-
-        DeliveryWidgetUpdates.schedule(app, store, now)
-        assertEquals(now.plusSeconds(DeliveryWidgetTimeline.refresh.toLong()).toEpochMilli(), alarms.peekNextScheduledAlarm()!!.triggerAtMs)
-        assertEquals(AlarmManager.RTC, alarms.peekNextScheduledAlarm()!!.getType())
-
-        val revision = DeliveryWidgetUpdates.revision.value
         val parcel = three[1].id
         ShowNextParcelAction().onAction(app, object : GlanceId {}, ShowNextParcelAction.parameters(parcel, "small"))
         val turn = store.turn(size = "small")
         assertEquals(parcel, turn?.parcel)
         assertNull(store.turn(size = "medium"))
-        assertEquals(revision + 1, DeliveryWidgetUpdates.revision.value)
         // The turn's spell ends before the refresh: the widgets come back then.
-        assertEquals(turn!!.ends.toEpochMilli(), alarms.peekNextScheduledAlarm()!!.triggerAtMs)
+        val alarm = alarms.scheduledAlarms.single()
+        assertEquals(AlarmManager.ELAPSED_REALTIME, alarm.type)
+        val wait = alarm.triggerAtMs - SystemClock.elapsedRealtime()
+        assertTrue("$wait", wait in 1..DeliveryWidgetTurn.spell.toLong() * 1000)
 
         // A parameter that isn't a parcel turns nothing.
         ShowNextParcelAction().onAction(app, object : GlanceId {}, androidx.glance.action.actionParametersOf(ShowNextParcelAction.PARCEL to "not a parcel"))
-        assertEquals(revision + 1, DeliveryWidgetUpdates.revision.value)
+        assertEquals(parcel, store.turn(size = "small")?.parcel)
     }
 
-    /** `WidgetCenter.reloadTimelines` (C-W01, A-W08): the app's publishing draws the widgets again, its own kind only; so does their alarm. */
+    /**
+     * `WidgetCenter.reloadTimelines` (C-W01, A-W08): a widget being shown, its composition running as the launcher's
+     * session keeps it, shows what the app published once the app reloads its own kind, and again when its alarm comes.
+     */
+    @OptIn(ExperimentalGlanceApi::class)
     @Test
-    fun widgetCenterAndTheAlarmReloadTheWidgets() {
-        val center = GlanceWidgetCenter(app)
-        val revision = DeliveryWidgetUpdates.revision.value
-        center.reloadTimelines("SomeOtherWidget")
-        assertEquals(revision, DeliveryWidgetUpdates.revision.value)
-        center.reloadTimelines(DeliveryWidgetSharedStore.kind)
-        assertEquals(revision + 1, DeliveryWidgetUpdates.revision.value)
+    fun widgetCenterAndTheAlarmReloadTheWidgets() = runBlocking<Unit> {
+        val store = DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(app, BuildSettings.configuration.appGroupIdentifier))
+        fun publish(parcel: DeliveryWidgetParcel) = check(store.save(DeliveryWidgetSnapshot(CAPTURED, "en", listOf(parcel))))
+        publish(three[0])
+        val shown = Channel<List<String>>(Channel.UNLIMITED)
+        val session = launch {
+            NextDeliveryWidget().runComposition(app, sizes = listOf(IPHONE_SMALL)).collect { views ->
+                val host = FrameLayout(app)
+                host.addView(views.apply(app, host))
+                shown.send(views(host).mapNotNull { (it as? TextView)?.text?.toString() })
+            }
+        }
+        suspend fun showing(label: String): List<List<String>> = withTimeout(10_000) {
+            val seen = mutableListOf<List<String>>()
+            while (seen.lastOrNull()?.contains(label) != true) seen += shown.receive()
+            seen
+        }
+        try {
+            showing("Belgian chocolate")
 
-        app.sendBroadcast(Intent(app, NextDeliveryWidgetReceiver::class.java).setAction(DeliveryWidgetUpdates.REFRESH))
-        shadowOf(Looper.getMainLooper()).idle()
-        assertEquals(revision + 2, DeliveryWidgetUpdates.revision.value)
+            // Another kind's reload leaves the widget as it was: it shows the next publication only once its own comes.
+            publish(three[1])
+            GlanceWidgetCenter(app).reloadTimelines("SomeOtherWidget")
+            publish(three[2])
+            GlanceWidgetCenter(app).reloadTimelines(DeliveryWidgetSharedStore.kind)
+            assertTrue(showing("Desk lamp").none { "Trail weekend kit" in it })
+
+            publish(three[1])
+            app.sendBroadcast(Intent(app, NextDeliveryWidgetReceiver::class.java).setAction(DeliveryWidgetUpdates.REFRESH))
+            shadowOf(Looper.getMainLooper()).idle()
+            showing("Trail weekend kit")
+        } finally {
+            session.cancel()
+        }
+    }
+
+    /**
+     * TalkBack (C-W06, C-W07): every item it stops at says what it opens. The page between two cards opens the app, as
+     * WidgetKit's does, without being an item, as VoiceOver passes over the iPhone's: its cards are.
+     */
+    @Test
+    fun talkBackStopsOnlyWhereThereIsSomethingToSay() = runBlocking<Unit> {
+        val carded = three.map { it.copy(card = card(it.id.toString())) }
+        for ((entry, size) in listOf(cardsEntry(carded, medium = true) to IPHONE_MEDIUM, cardsEntry(carded, medium = false) to IPHONE_SMALL, wordsEntry(three, medium = true) to IPHONE_MEDIUM)) {
+            val host = FrameLayout(app)
+            host.addView(widgetViews(app, size, entry).apply(app, host))
+            val clickable = views(host).filter { it.isClickable }
+            for (view in clickable.filter { it.isImportantForAccessibility }) assertTrue("$view says nothing", spoken(view).isNotBlank())
+            val silent = clickable.filterNot { it.isImportantForAccessibility }
+            if (entry.cards.size == 2) {
+                assertEquals(listOf(R.id.widget_tap), silent.map { it.id })
+                assertTrue(silent.single().hasOnClickListeners())
+                // The two cards and the next button.
+                assertEquals(3, clickable.size - silent.size)
+            } else {
+                assertTrue(silent.isEmpty())
+            }
+        }
+    }
+
+    private fun views(view: View): List<View> = listOf(view) + ((view as? ViewGroup)?.let { group -> (0 until group.childCount).flatMap { views(group.getChildAt(it)) } } ?: emptyList())
+
+    /** What TalkBack reads of a view: its description, else its words and its children's. */
+    private fun spoken(view: View): String = view.contentDescription?.toString()
+        ?: listOfNotNull((view as? TextView)?.text?.toString()).plus((view as? ViewGroup)?.let { group -> (0 until group.childCount).map { spoken(group.getChildAt(it)) } } ?: emptyList())
+            .joinToString(" ").trim()
+
+    /**
+     * Sizes: the medium layout where the widget is wide for its height as the iPhone's medium is, and wide enough for
+     * two cards; a two-by-two widget on a phone is small upright and medium on its side.
+     */
+    @Test
+    fun layoutFollowsTheWidgetsShape() {
+        assertFalse(NextDeliveryWidget.isMedium(IPHONE_SMALL))
+        assertTrue(NextDeliveryWidget.isMedium(IPHONE_MEDIUM))
+        assertFalse(NextDeliveryWidget.isMedium(DpSize(130.dp, 220.dp)))
+        assertFalse(NextDeliveryWidget.isMedium(DpSize(203.dp, 220.dp)))
+        assertTrue(NextDeliveryWidget.isMedium(DpSize(269.dp, 117.dp)))
+        // Wide but square: the small layout, larger.
+        assertFalse(NextDeliveryWidget.isMedium(DpSize(349.dp, 340.dp)))
+        // Wide for its height but too narrow for two cards.
+        assertFalse(NextDeliveryWidget.isMedium(DpSize(200.dp, 110.dp)))
+        assertEquals(NextDeliveryWidget.PREVIEW_SIZES.map { NextDeliveryWidget.isMedium(it) }.toSet(), setOf(false, true))
     }
 
     /**

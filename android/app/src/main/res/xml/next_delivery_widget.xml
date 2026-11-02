@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- NextDeliveryWidget: the iPhone's small and medium families as one widget that follows its size (widget/). Two cells
-     by two to start, as a small widget; widened, it shows two parcels side by side. It updates when the app publishes and
-     on its own alarm, never on the system's period. Its preview is the demo's card from the iPhone widget's sample, until
-     Android 15's generated previews show the widget itself. -->
+     by two to start, as a small widget; wide in the medium's shape, it shows two parcels side by side. It can be made as
+     short as two cells on a phone on its side, shorter than any iPhone's: there it keeps each parcel's name and date and
+     gives up the rest, rather than ask for a third row of cells. It updates when the app publishes and on its own alarm
+     while it is placed, never on the system's period. Its preview is the demo's card from the iPhone widget's sample,
+     until Android 15's generated previews show the widget itself. -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/widget_gallery_description"
     android:initialLayout="@layout/widget_preview"

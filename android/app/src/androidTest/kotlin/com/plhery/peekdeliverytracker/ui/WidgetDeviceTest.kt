@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.key
@@ -44,6 +45,11 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.widget.DeliveryWidgetUpdates
 import com.plhery.peekdeliverytracker.widget.IPHONE_MEDIUM
 import com.plhery.peekdeliverytracker.widget.IPHONE_SMALL
+import com.plhery.peekdeliverytracker.widget.LAUNCHER_ON_ITS_SIDE
+import com.plhery.peekdeliverytracker.widget.LAUNCHER_TABLET
+import com.plhery.peekdeliverytracker.widget.LAUNCHER_UPRIGHT
+import com.plhery.peekdeliverytracker.widget.LAUNCHER_UPRIGHT_WIDE
+import com.plhery.peekdeliverytracker.widget.NextDeliveryWidget
 import com.plhery.peekdeliverytracker.widget.NextDeliveryWidgetReceiver
 import com.plhery.peekdeliverytracker.widget.WidgetCardArt
 import com.plhery.peekdeliverytracker.widget.publishDemo
@@ -67,7 +73,8 @@ import org.junit.runner.RunWith
  * package's external files, which adb pulls:
  * - each state as a launcher draws it: the RemoteViews Glance writes, applied in the test's window at the iPhone's
  *   widget sizes, light and dark, with fakes (a store in memory, synthetic parcels, the demo's cards as this device
- *   draws them, the gallery's sample);
+ *   draws them, the gallery's sample); and the cards and words at the sizes a launcher gives the widget, at the
+ *   device's text size and at the largest;
  * - the widget itself, bound to a host in the test's window where the device lets the test bind it (`appwidget
  *   grantbind`): it reads what the test published to the app's store, and its next button turns it, through Glance's
  *   action and the app's reload. What the app's store held is put back once it ends.
@@ -94,29 +101,35 @@ class WidgetDeviceTest {
     private fun shell(command: String): String =
         ParcelFileDescriptor.AutoCloseInputStream(instrumentation.uiAutomation.executeShellCommand(command)).use { it.readBytes().decodeToString() }
 
-    private fun mode(night: Boolean): Context = context.createConfigurationContext(
+    /** The app's context in `night`'s mode, at `fontScale` where one is given, else at the device's. */
+    private fun mode(night: Boolean, fontScale: Float? = null): Context = context.createConfigurationContext(
         Configuration(context.resources.configuration).apply {
             uiMode = (uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or if (night) Configuration.UI_MODE_NIGHT_YES else Configuration.UI_MODE_NIGHT_NO
+            if (fontScale != null) this.fontScale = fontScale
         },
     )
 
-    private class Page(val night: Boolean, val widgets: List<Pair<DpSize, RemoteViews>>)
+    /** Widgets applied as a launcher at `fontScale` would apply them: the text's sp are that launcher's. */
+    private class Page(val night: Boolean, val widgets: List<Pair<DpSize, RemoteViews>>, val fontScale: Float? = null)
 
     private val page = mutableStateOf<Page?>(null)
 
-    /** The window shows one page of widgets at a time, applied in the page's mode, on a wallpaper of it. */
+    /**
+     * The window shows one page of widgets at a time, applied in the page's mode, on a wallpaper of it; a widget wider
+     * than the page (a tablet's on a phone) spills into its margins.
+     */
     private fun open() = compose.setContent {
         val shown = page.value ?: return@setContent
         Column(
             Modifier.fillMaxSize().background(if (shown.night) Color(0xFF30343A) else Color(0xFFC9D3DD)).safeDrawingPadding().padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            val applied = mode(shown.night)
+            val applied = mode(shown.night, shown.fontScale)
             for ((size, views) in shown.widgets) {
                 key(views) {
                     AndroidView(
                         factory = { android.widget.FrameLayout(it).apply { addView(views.apply(applied, this)) } },
-                        modifier = Modifier.size(size),
+                        modifier = Modifier.requiredSize(size),
                     )
                 }
             }
@@ -158,6 +171,32 @@ class WidgetDeviceTest {
         shoot("words", wordsEntry(parcels, medium = false), wordsEntry(parcels, medium = true))
         shoot("empty", wordsEntry(emptyList(), medium = false), wordsEntry(emptyList(), medium = true))
         shoot("disabled", wordsEntry(parcels, medium = false, enabled = false), wordsEntry(parcels, medium = true, enabled = false))
+    }
+
+    /**
+     * At the sizes a launcher gives the widget (C-W10): a phone's two-by-two upright and its three-by-two, then its
+     * two-by-two on its side and a tablet's; the demo's cards and words, at the device's text size and at the largest,
+     * WidgetKit's xxxLarge, where the names and status lines shrink before they end.
+     */
+    @Test
+    fun widgetsAtALaunchersSizes() {
+        open()
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val source = widgetSource(context, File(folder, "cards"), store)
+        runBlocking { publishDemo(context, store, File(folder, "cards"), context.resources.displayMetrics.density.toDouble()) }
+        val pages = listOf("upright" to listOf(LAUNCHER_UPRIGHT, LAUNCHER_UPRIGHT_WIDE), "side" to listOf(LAUNCHER_ON_ITS_SIDE, LAUNCHER_TABLET))
+        val kinds = listOf<Pair<String, (DpSize) -> DeliveryWidgetEntry<WidgetCardArt>>>(
+            "cards" to { source.current(NextDeliveryWidget.isMedium(it), CAPTURED) },
+            "words" to { wordsEntry(parcels, medium = NextDeliveryWidget.isMedium(it)) },
+        )
+        for (fontScale in listOf(null, LARGEST_TEXT)) {
+            val composed = mode(night = false, fontScale)
+            for ((kind, entry) in kinds) for ((name, sizes) in pages) {
+                val widgets = runBlocking { sizes.map { it to widgetViews(composed, it, entry(it)) } }
+                compose.runOnUiThread { page.value = Page(night = false, widgets, fontScale) }
+                shots.take("sizes_${kind}_$name${if (fontScale != null) "_largest_text" else ""}")
+            }
+        }
     }
 
     /**
@@ -235,5 +274,8 @@ class WidgetDeviceTest {
     private companion object {
         /** The test's own host of widgets, apart from any launcher's. */
         const val HOST = 0x5EE
+
+        /** Android's largest font scale. */
+        const val LARGEST_TEXT = 2f
     }
 }

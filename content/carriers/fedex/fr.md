@@ -36,7 +36,7 @@ Peek lit les scans de FedEx en anglais, tels que FedEx les écrit, et affiche au
 | `Ready for pickup` | Prêt à être retiré | Il t'attend dans un point de retrait. |
 | `Delivered` | Livré | Il a été livré. |
 | `Shipment exception` | Problème signalé | FedEx signale un problème avec l'envoi. |
-| `Returning to shipper` | Retourné à l'expéditeur | Il repart chez l'expéditeur. |
+| `Returning to shipper` | Retourné à l’expéditeur | Il repart chez l'expéditeur. |
 
 Quand FedEx marque un colis comme retardé, Peek affiche « Problème signalé », sauf si le dernier scan est `Package received after FedEx cutoff` : FedEx a reçu le colis après l'heure limite du jour, et il part le jour ouvrable suivant.
 
@@ -71,7 +71,7 @@ En France, selon Service-Public.fr, quand la livraison passe par le transporteur
 
 Pour FedEx, il ouvre la page de suivi de fedex.com dans un navigateur, sur son propre serveur. Quand FedEx refuse, ou exige une vérification du destinataire, des services de suivi prennent le relais.
 
-Tu vois le statut, chaque scan avec son lieu et l'heure donnée par FedEx (dans le fuseau horaire de ton appareil), le trajet entre ces lieux sur une carte, le jour de livraison prévu, l'heure de livraison et, tant que le colis attend, le nom et l'adresse du site FedEx qui le garde, si FedEx les donne. Le suivi est vérifié toutes les 10 minutes, toutes les 5 minutes une fois le colis en livraison, et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne garde ni ton nom ni ton adresse, ni l'expéditeur, la signature, le poids ou les dimensions. Les scans s'affichent dans l'anglais de FedEx, sauf trois : la livraison, dont la ligne nomme la personne qui a signé et qui s'affiche donc « Livré », ainsi que `Ready for pickup` et `Shipment exception`, que Peek affiche avec ses propres mots. Pour changer une livraison, payer la douane ou réclamer, adresse-toi à FedEx ou à l'expéditeur.
+Tu vois le statut, chaque scan avec son lieu et l'heure donnée par FedEx (dans le fuseau horaire de ton appareil), le trajet entre ces lieux sur une carte, le jour de livraison prévu, l'heure de livraison et, tant que le colis attend, le nom et l'adresse du site FedEx qui le garde, si FedEx les donne. Le suivi est vérifié toutes les 10 minutes, toutes les 5 minutes une fois le colis en livraison, et tu peux recevoir des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Peek ne garde ni ton nom ni ton adresse, ni l'expéditeur, la signature, le poids ou les dimensions. Les scans s'affichent dans l'anglais de FedEx, sauf trois : la livraison, dont la ligne nomme la personne qui a signé et qui s'affiche donc « Livré », ainsi que `Ready for pickup` et `Shipment exception`, que Peek affiche avec ses propres mots. Pour changer une livraison, payer la douane ou réclamer, adresse-toi à FedEx ou à l'expéditeur.
 
 ## Questions sur le suivi FedEx
 

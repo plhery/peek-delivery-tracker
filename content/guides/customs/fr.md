@@ -94,7 +94,7 @@ Depuis le 1er juillet 2026, les achats en ligne hors UE de 150 € maximum paien
 - deux pantalons identiques : 3 € ; un pantalon et une paire de chaussures : 6 € ;
 - deux t-shirts de matières différentes (coton et soie) : 6 €.
 
-À partir du 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par ligne de déclaration, comme les 3 €, annonce la Commission européenne. La TVA se calcule aussi dessus. Au-delà de 150 €, ce sont les taux de droits normaux, plus ces 2 €. La « taxe petits colis » française, elle, a été abrogée au 1er juillet 2026. Rien de tout cela en Suisse.
+Depuis le 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par ligne de déclaration, comme les 3 €, selon la Commission européenne. La TVA se calcule aussi dessus. Au-delà de 150 €, ce sont les taux de droits normaux, plus ces 2 €. La « taxe petits colis » française, elle, a été abrogée au 1er juillet 2026. Rien de tout cela en Suisse.
 
 ## Temu, Shein, AliExpress : vais-je payer des frais de douane ?
 

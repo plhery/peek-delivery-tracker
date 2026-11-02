@@ -97,7 +97,7 @@ Dal 1° luglio 2026 l'UE ha tolto l'esenzione dal dazio per le spedizioni fino a
 - due magliette uguali: una voce, 3 €;
 - un libro e una sciarpa, 40 € in tutto: due voci, 6 €. Nell'esempio di Poste, con l'IVA al 22% su 46 € (10,12 €) e i diritti postali, il totale è 17,12 € pagando online o 23,12 € alla consegna.
 
-Dal 1° novembre 2026, annuncia la Commissione europea, sugli acquisti online da fuori UE arriva anche la «tassa di gestione dell'Unione»: 2 € per articolo, che si sommano ai 3 €, valgono anche sopra i 150 € e non vengono mai rimborsati. Poi c'è il contributo italiano di 2 € a spedizione (legge 199/2025), che Poste elenca tra le spese di importazione: la sua partenza è stata rinviata più volte, l'ultima al 1° dicembre 2026 (decreto-legge 162/2026). In Ticino niente di tutto questo: la Svizzera non è nell'UE.
+Dal 1° novembre 2026, secondo la Commissione europea, sugli acquisti online da fuori UE si paga anche la «tassa di gestione dell'Unione»: 2 € per articolo, che si sommano ai 3 €, valgono anche sopra i 150 € e non vengono mai rimborsati. Poi c'è il contributo italiano di 2 € a spedizione (legge 199/2025), che Poste elenca tra le spese di importazione: la sua partenza è stata rinviata più volte, l'ultima al 1° dicembre 2026 (decreto-legge 162/2026). In Ticino niente di tutto questo: la Svizzera non è nell'UE.
 
 ## Su Temu, Shein e AliExpress si paga la dogana?
 

@@ -99,7 +99,7 @@ Desde el 1 de julio de 2026 y hasta el 1 de julio de 2028, las compras online de
 
 Para Correos, dos cosas son el mismo tipo de producto si comparten clasificación arancelaria, descripción y origen. Cuenta la descripción que el remitente declaró al enviar, no la de tu factura: dos artículos que en la factura se llaman igual pueden pagar dos aranceles.
 
-Según la Comisión Europea, desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por tipo de producto, también en envíos de más de 150 €: la camiseta y el reloj pasarían a 10 €. La AEAT ya ha convocado a las empresas para explicarles cómo la aplicará. El IVA va aparte y se calcula también sobre el arancel.
+Según la Comisión Europea, desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por tipo de producto, también en envíos de más de 150 €: la camiseta y el reloj pasan a 10 €. La AEAT ya ha convocado a las empresas para explicarles cómo la aplicará. El IVA va aparte y se calcula también sobre el arancel.
 
 ## ¿Hay que pagar aduanas en AliExpress, Shein o Temu?
 

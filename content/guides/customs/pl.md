@@ -105,7 +105,7 @@ Liczy się liczba różnych rodzajów towaru w paczce, a nie liczba sztuk. Przyk
 - koszulka, słuchawki i etui do telefonu: 9 euro;
 - trzy takie same koszulki: 3 euro.
 
-Komisja Europejska zapowiada, że od 1 listopada 2026 r. dojdzie do tego unijna opłata manipulacyjna: 2 euro za każdą pozycję, bez względu na wartość przesyłki. Jeśli sklep albo przewoźnik przerzuci ją na Ciebie, za koszulkę, słuchawki i etui cło i opłata wyniosą razem 15 euro zamiast 9. Na to wszystko nalicza się jeszcze VAT. Powyżej 150 euro obowiązują zwykłe stawki celne, a 2 euro i tak się dolicza.
+Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi do tego unijna opłata manipulacyjna: 2 euro za każdą pozycję, bez względu na wartość przesyłki. Jeśli sklep albo przewoźnik przerzuci ją na Ciebie, za koszulkę, słuchawki i etui cło i opłata wyniosą razem 15 euro zamiast 9. Na to wszystko nalicza się jeszcze VAT. Powyżej 150 euro obowiązują zwykłe stawki celne, a 2 euro i tak się dolicza.
 
 ## Czy płacę cło za zamówienia z Temu, Shein i AliExpress?
 

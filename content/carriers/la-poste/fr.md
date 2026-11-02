@@ -16,7 +16,7 @@ Colissimo, c'est le service de colis de La Poste. Pour suivre ton colis, colle s
 | `LA000000005FR` | 2 lettres, 9 chiffres et FR : un numéro postal international créé en France, pour un Colissimo ou une lettre suivie ou recommandée. Le chiffre avant FR est une clé de contrôle. |
 | `87000000000000P` | 15 caractères commençant par 863 à 866, 870, 875, 880 ou 885 : un numéro Smart Data, celui que La Poste donne aux lettres suivies et recommandées. Le dernier caractère est une clé de contrôle ; le suivi de La Poste trouve aussi le numéro sans lui. |
 
-Les numéros en …FR qui commencent par XU, XR, XT, XW, XY ou PZ sont des numéros [Chronopost](carrier:chronopost). Un numéro de 12 caractères fait plutôt penser à [Colis Privé](carrier:colis-prive). Un numéro de 13 ou 14 chiffres sans lettre peut aussi venir de DPD ou d'un autre transporteur : regarde le nom dans l'e-mail de la boutique. Plus de pistes dans [où trouver son numéro de suivi](guide:find-tracking-number).
+Les numéros en …FR qui commencent par XU, XR, XT, XW, XY ou PZ sont des numéros [Chronopost](carrier:chronopost). Un numéro de 12 caractères fait plutôt penser à [Colis Privé](carrier:colis-prive). Un numéro de 14 chiffres sans lettre peut aussi venir de DPD ou d'un autre transporteur : regarde le nom dans l'e-mail de la boutique. Plus de pistes dans [où trouver son numéro de suivi](guide:find-tracking-number).
 
 ## Suivi colis La Poste : ce que veulent dire les statuts
 
@@ -36,7 +36,7 @@ Peek affiche les scans de La Poste en français, mot pour mot, et donne au colis
 | `Votre colis est disponible dans votre point de retrait pendant un délai de 15 jours calendaires.` | Prêt à être retiré | Il t'attend au point de retrait, jusqu'à la date limite indiquée. |
 | `Votre colis est livré dans votre boite aux lettres.` | Livré | Livré dans ta boîte aux lettres. |
 | `Votre colis vous a attendu dans votre point de retrait jusqu'à la date limite. Nous sommes contraints de le renvoyer à l'expéditeur.` | Problème signalé | Pas retiré à temps ; il repart chez l'expéditeur. |
-| `Votre colis est livré à son expéditeur à la suite d'un retour.` | Retourné à l'expéditeur | Il est de retour chez l'expéditeur. |
+| `Votre colis est livré à son expéditeur à la suite d'un retour.` | Retourné à l’expéditeur | Il est de retour chez l'expéditeur. |
 
 Le plus trompeur, c'est `Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison.` On croirait le colis encore coincé au dépôt. En fait, c'est le tri du matin avant la tournée : la livraison, ou un passage manqué, suit le même jour.
 
@@ -67,9 +67,9 @@ Les canaux de La Poste, tels que les indiquent l'Arcep et l'annuaire de Service-
 
 ## Suivre un Colissimo avec Peek
 
-[Peek](/) reconnaît La Poste / Colissimo tout de suite pour les numéros Colissimo de 13 caractères dont la clé est valide, les numéros de 14 chiffres commençant par `870`, ainsi que les numéros Smart Data de 15 caractères et les numéros postaux en FR dont le caractère de contrôle est valide. Avec un autre code produit ou une clé fausse, il interroge La Poste seule ; pour 14 chiffres partagés avec DPD et d'autres, il interroge en même temps les transporteurs probables. Les liens laposte.fr avec `code=` ou `idShip=` marchent ; un lien colissimo.fr seulement si le numéro qu'il contient est reconnu tout de suite.
+[Peek](/) reconnaît La Poste / Colissimo tout de suite pour les numéros Colissimo de 13 caractères dont la clé est valide, les numéros de 14 chiffres commençant par `870`, ainsi que les numéros Smart Data de 15 caractères et les numéros postaux en FR dont le caractère de contrôle est valide. Avec un autre code produit ou une clé fausse, il interroge La Poste seule ; pour 14 chiffres partagés avec DPD et d'autres, il interroge en même temps les transporteurs probables. Si tu choisis La Poste pour un numéro qu'elle refuse, par exemple avec une clé fausse, Peek le dit dès la première vérification : « Ce transporteur n’émet pas de numéros de suivi comme celui-ci. Vérifie le numéro ou choisis un autre transporteur. » Les liens laposte.fr avec `code=` ou `idShip=` marchent ; un lien colissimo.fr seulement si le numéro qu'il contient est reconnu tout de suite.
 
-Peek lit le suivi de La Poste en français, avec l'heure exacte de chaque scan. Il affiche le pays de chaque scan sur une carte, la livraison prévue, le nom de la boutique, l'heure de livraison et, pendant que le colis attend, le bureau de poste, le relais ou la consigne avec son adresse. Il ne garde ni ton nom ni ton adresse. Il vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et t'envoie des notifications à chaque scan, aux étapes importantes ou le jour de livraison uniquement.
+Peek lit le suivi de La Poste en français, avec l'heure exacte de chaque scan. Il affiche le pays de chaque scan sur une carte, la livraison prévue, le nom de la boutique, l'heure de livraison et, pendant que le colis attend, le bureau de poste, le relais ou la consigne avec son adresse. Il ne garde ni ton nom ni ton adresse. Il vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et t'envoie des notifications à chaque scan, aux étapes importantes ou le jour de livraison uniquement. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 Un service Chronopost est suivi chez Chronopost, un partenaire nommé par La Poste est suivi chez lui, et un numéro postal envoyé à l'étranger peut être suivi chez la poste du pays, comme [La Poste suisse](carrier:swiss-post), une fois qu'elle montre une progression. Peek ne peut ni modifier une livraison, ni payer la douane.
 

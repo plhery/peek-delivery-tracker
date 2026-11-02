@@ -98,7 +98,7 @@ Since 1 July 2026, online orders from outside the EU worth €150 or less pay �
 - two identical T-shirts: €3;
 - a notepad, a pen and a keyring: €9.
 
-From 1 November 2026, Revenue says a €2 EU handling fee per item is added: €15 for the notepad, pen and keyring. VAT comes on top. Above €150, normal duty rates apply, plus the €2 fee.
+Since 1 November 2026, Revenue says, a €2 EU handling fee per item is added: €15 for the notepad, pen and keyring. VAT comes on top. Above €150, normal duty rates apply, plus the €2 fee.
 
 ## Do I have to pay customs on Temu or Shein orders?
 

@@ -109,7 +109,7 @@ Desde 1 de julho de 2026, as compras até 150 € vindas de fora da UE pagam 3 �
 
 Encomendas enviadas em separado contam como remessas diferentes, mesmo que cheguem no mesmo dia, diz a AT.
 
-A Comissão Europeia anuncia que, a partir de 1 de novembro de 2026, se junta uma taxa de tratamento da União de 2 € por artigo, contado como nos 3 €: por tipo de produto. Quem a deve é quem declara a encomenda (a loja ou a transportadora), que ta pode cobrar: nesse caso, a t-shirt e os sapatos passam a custar 10 €, e o IVA também incide sobre a taxa. Acima de 150 €, aplicam-se os direitos normais, mais estes 2 €.
+A Comissão Europeia indica que, desde 1 de novembro de 2026, se junta uma taxa de tratamento da União de 2 € por artigo, contado como nos 3 €: por tipo de produto. Quem a deve é quem declara a encomenda (a loja ou a transportadora), que ta pode cobrar: nesse caso, a t-shirt e os sapatos passam a custar 10 €, e o IVA também incide sobre a taxa. Acima de 150 €, aplicam-se os direitos normais, mais estes 2 €.
 
 ## Vou pagar alfândega nas compras da Temu, da Shein ou do AliExpress?
 

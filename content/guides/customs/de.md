@@ -19,7 +19,11 @@ Der Zoll prüft die Angaben zu Inhalt und Wert, kann das Paket ansehen, berechne
 | --- | --- |
 | `Der Zollabfertigungsprozess für den Import ins Zielland/Zielgebiet wurde begonnen.` (DHL) | Die Verzollung läuft. Je nach Unterlagen kann das einige Werktage dauern |
 | `Die Sendung wurde dem Zoll übergeben. Ein Schreiben mit Ihren Zollinformationen ist auf dem Weg zu Ihnen.` (DHL) | Das Paket geht an das für dich zuständige Zollamt, ein Brief mit den Infos zur Abholung ist unterwegs |
-| `Zollhindernis` ([Österreichische Post](carrier:austrian-post)) | Für die Verzollung fehlen Unterlagen, die du nachreichen sollst |
+| `Sendung im Zollanmeldungsprozess. Weitere Info folgt.` ([Österreichische Post](carrier:austrian-post)) | Das Paket ist in Österreich angekommen, und die Zollanmeldung läuft |
+| `Sendung ist im Zollprozess verzögert. Grund: unplausibler Warenwert.` (Österreichische Post) | Eine Verzögerung beim Zoll, hier wegen eines unplausiblen Warenwerts. Der Grund nach „Grund:“ wechselt |
+| `Zollhindernis` (Österreichische Post) | Für die Verzollung fehlen Unterlagen, die du nachreichen sollst |
+| `Lagereingang - Zollanmeldungshindernis` (Österreichische Post) | Der Zollanmeldung steht etwas im Weg, das Paket lagert. In der Sendungsverfolgung der Post wirst du um die fehlenden Unterlagen gebeten |
+| `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt` (Österreichische Post) | Deine Antwort ist da. Das Paket bleibt beim Zoll, bis es verzollt ist |
 | `Die Sendung wurde an den Zoll übergeben` ([Schweizerische Post](carrier:swiss-post)) | Der Zoll kontrolliert das Paket an der Grenze. Zugestellt wird nach der Freigabe |
 | `Im Postverzollungsprozess` (Schweizerische Post) | Das Paket ist in der Postverzollung |
 
@@ -101,7 +105,7 @@ Seit 1. Juli 2026 sind Online-Bestellungen bis 150 € in der EU nicht mehr zoll
 - 4 Paar Socken, ein Plüschtier und ein Ladekabel: 9 € (Zoll);
 - 2 Paar Sportschuhe, 5 T-Shirts und 2 Blusen: 9 € (österreichisches Finanzministerium, BMF).
 
-Ab 1. November 2026 erhebt die EU laut EU-Kommission bei Online-Bestellungen außerdem eine Bearbeitungsgebühr von 2 € pro Ware, bei jedem Warenwert. Für Socken, Plüschtier und Ladekabel wären das dann 15 €. Die Einfuhrumsatzsteuer kommt jeweils obendrauf. Über 150 € gelten die normalen Zollsätze, laut BMF zwischen 0 und 17 %. Für die Schweiz gilt beides nicht.
+Seit 1. November 2026 erhebt die EU laut EU-Kommission bei Online-Bestellungen außerdem eine Bearbeitungsgebühr von 2 € pro Ware, bei jedem Warenwert. Für Socken, Plüschtier und Ladekabel sind das zusammen 15 €. Die Einfuhrumsatzsteuer kommt jeweils obendrauf. Über 150 € gelten die normalen Zollsätze, laut BMF zwischen 0 und 17 %. Für die Schweiz gilt beides nicht.
 
 ## Muss ich bei Temu oder Shein Zoll zahlen?
 
@@ -160,6 +164,7 @@ Löst du ein Paket nicht aus, geht es in Deutschland nach den Fristen oben an de
 - [Österreichische Post: Zollhindernisse](https://www.post.at/p/c/zollhindernisse) – Frist, Unterlagen, Entgelt entfällt bei bestätigtem Wert, Rücksendung
 - [Österreichische Post: FAQ Privat](https://www.post.at/p/c/faq-privat) – einige Tage, IOSS, Geschenke, Beschwerde
 - [Österreichische Post: Gefahren im Internet](https://www.post.at/i/c/gefahren-im-internet-tipps) – post.at, Kundenservice, Watchlist Internet
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Zollscans der Österreichischen Post und ihre Bedeutung
 - [BMF: 3-Euro-Zoll](https://www.bmf.gv.at/themen/zoll/internethandel-%28fernverkauf%29/3-euro-zoll.html) – Beispiel, IOSS, keine Erstattung bei Rücksendung
 - [BMF: FAQs E-Commerce](https://www.bmf.gv.at/themen/zoll/internethandel-%28fernverkauf%29/FAQs-E-Commerce.html) – 20 % ab dem ersten Cent, 0 bis 17 %
 - [BMF: Aktuelle Warnungen vor Betrug](https://www.bmf.gv.at/public/informationen/aktuelle-warnungen-betrug.html) – falsches Zollamt, Bescheide per Post oder Databox, keine Kartendaten

@@ -2824,6 +2824,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-germania-tracking",
+      "title": "Tracking J&T Express in Germania: numero JTDE e stati",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-tracking",

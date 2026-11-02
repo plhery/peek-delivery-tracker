@@ -18,7 +18,7 @@ Express One publishes no format. Package IDs seen so far come in two shapes (dig
 
 | Number | Whose it is |
 | --- | --- |
-| `0000000000000` | 13 digits: an Express One package ID, but [La Poste](carrier:la-poste) and other carriers use this length too. |
+| `0000000000000` | 13 digits: an Express One package ID, but [DPD France](carrier:dpd-fr) and other carriers use this length too. |
 | `100000000000000000001011` | 24 digits, ending in a Hungarian postcode: Express One. Austrian Post, [InPost](carrier:inpost), [bpost](carrier:bpost) and [Ciblex](carrier:ciblex) also use 24 digits. |
 | `00000000000000` | 14 digits: DPD, never Express One. |
 | `00000000000` | 11 or 12 digits: GLS, never Express One. |

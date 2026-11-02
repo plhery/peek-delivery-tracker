@@ -16,7 +16,7 @@ A Csomagkövetés háromféle azonosítót fogad el: a csomagazonosítót (a von
 
 | Szám (kitalált példa) | Mit jelent |
 | --- | --- |
-| `0000000000000` | 13 számjegy: lehet Express One-csomagazonosító, de ilyen hosszú a [La Poste](carrier:la-poste) és más szállítók száma is. |
+| `0000000000000` | 13 számjegy: lehet Express One-csomagazonosító, de ilyen hosszú a DPD France és más szállítók száma is. |
 | `000000000000000000000000` | 24 számjegy: lehet Express One-csomagazonosító, de ilyen hosszú az Osztrák Posta, az [InPost](carrier:inpost) és a [Ciblex](carrier:ciblex) száma is. |
 | `00000000000000` | 14 számjegy: többnyire DPD-csomagszám; az Express One-nál a Peek nem követi. |
 | `RR000000005HU` | Két betű, 9 számjegy és `HU`: a [Magyar Posta](carrier:magyar-posta) nemzetközi azonosítója. |
@@ -82,7 +82,7 @@ A Csomagkövetés oldal a +36 1 8 777 444-es számot és egy Messenger-chatbotot
 
 ## Express One-csomagok követése a Peekkel
 
-A [Peek](/) felülete angol nyelvű. A Peek a számból nem ismeri fel, hogy Express One-csomagról van szó: a 13 jegyű számmal más szállítókat, például a La Poste-ot kérdezi meg, a 24 jegyűvel az Osztrák Postát, az InPostot és a Ciblexet. Illessze be így is: a Peek több mint 3500 szállítót követ. Ha egyik sem ismeri, ezt látja: „not found yet · Peek keeps checking”; ilyenkor a „Change” gombbal válassza ki az Express One-t. Ha a tracking.expressone.hu `plc_number=` részt tartalmazó linkjét illeszti be, a Peek abból tudja, hogy Express One-csomagról van szó.
+A [Peek](/) felülete angol nyelvű. A Peek a számból nem ismeri fel, hogy Express One-csomagról van szó: a 13 jegyű számmal más szállítókat, például a Delhiveryt vagy az ukrán postát kérdezi meg, a 24 jegyűvel az Osztrák Postát, az InPostot és a Ciblexet. Illessze be így is: a Peek több mint 3500 szállítót követ. Ha egyik sem ismeri, ezt látja: „not found yet · Peek keeps checking”; ilyenkor a „Change” gombbal válassza ki az Express One-t. Ha a tracking.expressone.hu `plc_number=` részt tartalmazó linkjét illeszti be, a Peek abból tudja, hogy Express One-csomagról van szó.
 
 A lépéseket angolul mutatja, a depós beolvasásoknál a településsel együtt; az időpontokat magyar idő szerint értelmezi, és az eszköze időzónájában jeleníti meg. Az ismeretlen kódú lépéseket állapot nélkül jeleníti meg. Várható kézbesítési időt (az Express One időablakát), súlyt, feladót és aláírást nem mutat.
 

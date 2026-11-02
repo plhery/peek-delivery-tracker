@@ -72,7 +72,7 @@ Il n'y a pas de longueur standard. Voici celles que les transporteurs indiquent 
 | 11 chiffres | GLS en France |
 | 12 chiffres | Mondial Relay ; DPD en France (12 à 15) ; GLS en France, sur l'étiquette (11 chiffres et une clé) |
 | 12 caractères | Colis Privé |
-| 13 caractères | le format postal (`…FR`, `…BE`, `…CH`) ; La Poste (2 caractères, puis 11 chiffres) ; Chronopost |
+| 13 caractères | le format postal (`…FR`, `…BE`, `…CH`) ; La Poste (2 caractères dont au moins une lettre, puis 11 chiffres) ; Chronopost |
 | 14 chiffres | La Poste ; DPD en Belgique, en France et en Suisse |
 | 15 caractères | La Poste (14 chiffres et un caractère de contrôle) ; DPD en France ; Chronopost |
 | 18 chiffres | La Poste suisse (`98…` ou `99…`) ; Quickpac (`44…`) ; bpost (`3232…`) |

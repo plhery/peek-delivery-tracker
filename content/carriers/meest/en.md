@@ -19,6 +19,7 @@ Meest publishes no exact format. Its US page says only that a number "usually st
 | `AA0000000AA00000G` | Two letters, 7 digits, two letters, 5 digits and G: Meest's consolidation number, seen on parcels from China to Europe. |
 | `RR000000005UA` | An international postal number. Meest's tracker answers for some, but the post that issued it tracks it too. |
 | `CV000000005UA` | Postal in shape too: Meest Canada's FAQ gives a number starting CV to a parcel from Ukraine booked on its form. |
+| `IHB0000000000` | IHB and 10 digits: a shape Meest's tracker answers for, which the Italian carrier HR Parcel uses too. |
 | `20400000000000` | 14 digits: a Ukrainian waybill from [Nova Poshta](carrier:nova-poshta), not Meest. |
 
 One trap: the tracking box on us.meest.com, ca.meest.com and uk.meest.com accepts 6 to 16 characters without spaces, so a 17-character consolidation number ending in G is refused there. The same number opens on t.meest-group.com.
@@ -78,7 +79,7 @@ As listed on Meest's sites on 12 October 2026:
 
 ## Tracking a Meest parcel with Peek
 
-[Peek](/) knows Meest's consolidation number (`AA0000000AA00000G`) and asks Meest alone, which settles it. Postal numbers, CV ones included, and senders' references reach Meest only after you pick "Meest" with "Change", or from a Meest link. Typed alone, a postal number goes to the post that issued it, often with Chronopost (CV…PL to Poczta Polska, CV…CA to Canada Post), or to the destination's post ([Ukrposhta](carrier:ukrposhta) for Ukraine); a CV…US number goes only to Chronopost and tracking services. Peek reads links from t.meest-group.com, meest.com country sites (`parcel_number=`) and tracking-iframe.meest.com, but not from pl.meest.com's own tracker.
+[Peek](/) knows Meest's consolidation number (`AA0000000AA00000G`) and asks Meest alone, which settles it. For IHB and 10 digits, it asks both Meest and HR Parcel whether they know the number and picks the one that does. Postal numbers, CV ones included, and senders' references reach Meest only after you pick "Meest" with "Change", or from a Meest link. Typed alone, a postal number goes to the post that issued it, often with Chronopost (CV…PL to Poczta Polska, CV…CA to Canada Post), or to the destination's post ([Ukrposhta](carrier:ukrposhta) for Ukraine); a CV…US number goes only to Chronopost and tracking services. Peek reads links from t.meest-group.com, meest.com country sites (`parcel_number=`) and tracking-iframe.meest.com, but not from pl.meest.com's own tracker.
 
 Meest gives no time zone on its scans: Peek reads them on the clock of the scan's place and lists Meest's own history. Peek keeps the status, the destination country and, when a partner abroad delivers, that carrier and its number: the parcel's page says "Delivery with BOX NOW", for example, and Peek follows that carrier when it can track it directly. It can notify you when the status changes.
 
@@ -121,5 +122,5 @@ Meest America says it usually starts with a letter code followed by digits, and 
 - [Meest Post: Reklamacje](https://www.meestpost.com/pl/complaints) – who may claim, deadlines
 - [Meest Post: Kontakt](https://www.meestpost.com/pl/contact-us) – phone, email, hours
 - [Meest: FAQ](https://pl.meest.com/faq/) – Meest Post delivery times
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows, the IHB number shape
 :::

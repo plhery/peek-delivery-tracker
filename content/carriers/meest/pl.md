@@ -18,6 +18,7 @@ Meest nie publikuje jednego formatu numeru. Jego amerykańska strona pisze tylko
 | --- | --- |
 | `AB1234567CD12345G` | Dwie litery, 7 cyfr, dwie litery, 5 cyfr i G: numer zbiorczy Meest, widziany na paczkach z Chin do Europy. |
 | `RR000000005UA` | Międzynarodowy numer pocztowy. Śledzenie Meest odpowiada na niektóre, ale śledzi go też poczta, która go nadała. |
+| `IHB0000000000` | IHB i 10 cyfr: kształt, na który odpowiada śledzenie Meest; taki sam mają numery włoskiego przewoźnika HR Parcel. |
 | `20400000000000` | 14 cyfr: list przewozowy [Nowej Poczty](carrier:nova-poshta), a nie Meest. |
 
 Uwaga na długość: pole śledzenia na stronach krajowych meest.com i jego polska wersja przyjmują od 6 do 16 znaków („Numer śledzenia musi zawierać od 6 do 16 znaków bez spacji”). Numer zbiorczy z G na końcu ma 17 znaków, więc pole go odrzuci, ale ten sam numer otworzy się na t.meest-group.com.
@@ -78,7 +79,7 @@ Strona meest.pl nie należy do przewoźnika: to inna firma.
 
 ## Śledzenie paczki Meest w Peek
 
-[Peek](/) rozpoznaje numer zbiorczy Meest (`AB1234567CD12345G`) i pyta tylko Meest, a jego odpowiedź to rozstrzyga. Numery pocztowe i numery referencyjne nadawców trafiają do Meest dopiero, gdy wybierzesz „Meest” przyciskiem „Zmień” albo wkleisz link Meest: wpisany numer pocztowy idzie do poczty, która go nadała, albo do poczty kraju docelowego (dla Ukrainy to Ukrposzta). Peek czyta linki z t.meest-group.com, ze stron krajowych meest.com (z `parcel_number=`) i z tracking-iframe.meest.com, ale nie z trackera pl.meest.com/sledz-przesylke.
+[Peek](/) rozpoznaje numer zbiorczy Meest (`AB1234567CD12345G`) i pyta tylko Meest, a jego odpowiedź to rozstrzyga. Przy numerze z IHB i 10 cyframi pyta i Meest, i HR Parcel, czy go znają, i wybiera tego, który go zna. Numery pocztowe i numery referencyjne nadawców trafiają do Meest dopiero, gdy wybierzesz „Meest” przyciskiem „Zmień” albo wkleisz link Meest: wpisany numer pocztowy idzie do poczty, która go nadała, albo do poczty kraju docelowego (dla Ukrainy to Ukrposzta). Peek czyta linki z t.meest-group.com, ze stron krajowych meest.com (z `parcel_number=`) i z tracking-iframe.meest.com, ale nie z trackera pl.meest.com/sledz-przesylke.
 
 Meest nie podaje strefy czasowej przy skanach, więc Peek odczytuje je według czasu miejsca skanu i pokazuje własną historię Meest. Peek zachowuje status, kraj docelowy, a gdy doręcza partner za granicą, także tego przewoźnika i jego numer: strona paczki pokazuje wtedy na przykład „Doręcza: BOX NOW”, a paczka jest śledzona dalej u niego, jeśli da się go sprawdzić bezpośrednio. Może Cię też powiadomić, gdy zmieni się status.
 
@@ -120,5 +121,5 @@ Nie: Meest Post pisze, że wysyła paczki do ponad 30 krajów na świecie, a ter
 - [Meest Post: About us](https://www.meestpost.com/en/about-us) – Meest Polska, Dębica, 1989, ponad 30 krajów
 - [Meest USA: Parcel Track](https://us.meest.com/parcel-track) – kształt numeru
 - [Meest Canada: FAQ](https://ca.meest.com/faq) – przechowanie w oddziale w Ukrainie, powiadomienia
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, kształt numerów IHB
 :::

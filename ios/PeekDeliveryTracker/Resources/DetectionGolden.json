@@ -71215,7 +71215,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -73142,7 +73143,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -73926,7 +73928,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -77019,7 +77022,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -79695,7 +79699,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -81435,7 +81440,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -82674,7 +82680,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -83200,7 +83207,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -83219,7 +83227,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -83856,12 +83865,27 @@
     ]
   },
   {
+    "input": "JFJ100014809",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt-au"
+    ],
+    "asked": [
+      "colis-prive",
+      "purolator"
+    ]
+  },
+  {
     "input": "JFV247545960",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -85288,7 +85312,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -85363,7 +85388,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -85569,7 +85595,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -87517,7 +87544,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -88135,7 +88163,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -90028,7 +90057,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -91492,7 +91522,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -97636,7 +97667,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -98912,7 +98944,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -99389,7 +99422,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -99869,7 +99903,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -100755,7 +100790,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -100832,7 +100868,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -101543,7 +101580,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",
@@ -103060,6 +103098,22 @@
     ]
   },
   {
+    "input": "ZPYAA0041578401YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "znlogic"
+    ]
+  },
+  {
+    "input": "ZPYAA0049859007YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "znlogic"
+    ]
+  },
+  {
     "input": "ZS10000000001",
     "carrier": "china-post",
     "confidence": "high",
@@ -103309,7 +103363,8 @@
     "confidence": "low",
     "candidates": [
       "colis-prive",
-      "purolator"
+      "purolator",
+      "tnt-au"
     ],
     "asked": [
       "colis-prive",

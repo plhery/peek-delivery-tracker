@@ -6984,7 +6984,10 @@
         "ePostGlobal",
         "EPG",
         "PPX Track",
-        "PPXTrack"
+        "PPXTrack",
+        "RR Donnelley",
+        "RRD Donnelley",
+        "RRD International Logistics"
       ],
       "countries": [
         "US"
@@ -10238,7 +10241,8 @@
       "aliases": [
         "Arrow XL",
         "AskAxl",
-        "ArrowXL by JP Home"
+        "ArrowXL by JP Home",
+        "Ask Axl"
       ],
       "countries": [
         "GB"
@@ -32207,7 +32211,8 @@
       "displayName": "Maersk eCommerce",
       "aliases": [
         "Maersk Logistics And Services USA Inc",
-        "Maersk Parcel"
+        "Maersk Parcel",
+        "B2C Europe"
       ],
       "countries": [
         "US"
@@ -32443,7 +32448,9 @@
       "aliases": [
         "通邮",
         "通邮集团",
-        "深圳市通邮物流科技（集团）股份有限公司"
+        "深圳市通邮物流科技（集团）股份有限公司",
+        "SZTY56",
+        "Tongyou"
       ],
       "countries": [
         "CN"
@@ -47578,6 +47585,158 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.mailexglobal.com/"
+    },
+    "jiaying-express": {
+      "displayName": "Jiaying Express",
+      "aliases": [
+        "佳赢物流",
+        "佳赢国际物流",
+        "广州佳赢国际物流有限公司",
+        "Guangzhou Jiaying International Logistics"
+      ],
+      "countries": [
+        "CN",
+        "RU",
+        "KZ"
+      ],
+      "color": "#10346a",
+      "selectable": true,
+      "timezone": "Asia/Shanghai",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.jiayingex.com/track-help/"
+    },
+    "ltl-kr": {
+      "displayName": "LTL KR",
+      "aliases": [
+        "LTL중국배대지",
+        "LTL 중국배대지",
+        "엘티엘"
+      ],
+      "countries": [
+        "KR",
+        "CN"
+      ],
+      "color": "#1b97d5",
+      "selectable": true,
+      "timezone": "Asia/Seoul",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://ltl.kr/order"
+    },
+    "okay-parcel": {
+      "displayName": "Okay Parcel",
+      "aliases": [
+        "OkayParcel",
+        "EAE Global",
+        "EAE Global Limited"
+      ],
+      "countries": [
+        "HK"
+      ],
+      "color": "#f2711c",
+      "selectable": true,
+      "timezone": "Asia/Hong_Kong",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "sys.okayparcel.com"
+          ],
+          "pathPattern": "^/okp/webapps/showtracking\\.php$",
+          "params": [
+            "q"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.okayparcel.com/en"
+    },
+    "tnt-au": {
+      "displayName": "TNT Australia",
+      "aliases": [
+        "TNT Express Australia",
+        "TNT Australia Domestic"
+      ],
+      "countries": [
+        "AU"
+      ],
+      "color": "#ff6600",
+      "selectable": true,
+      "timezone": "Australia/Sydney",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "tnt-au"
+      },
+      "trackingUrlTemplate": "https://www.tntexpress.com.au/interaction/ASPs/trackref_detail.asp?con={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tntexpress.com.au"
+          ],
+          "pathPattern": "^/interaction/(?:asps/trackref_detail\\.asp|trackref\\.aspx)$",
+          "params": [
+            "con"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^(?!(?:BNI|BYS|CLC|CUB|GWD|LTN|MPX|NZC|QSS|QSP|RMP|RWM|XLT))[A-Z]{3}\\d{9}$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://www.tntexpress.com.au/interaction/Trackntrace.aspx"
+    },
+    "znlogic": {
+      "displayName": "Zinc",
+      "aliases": [
+        "ZNlogic",
+        "ZNLOGIC",
+        "ZN Logic",
+        "Zinc Tracking",
+        "Zinc Technologies Inc."
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#ac7138",
+      "selectable": true,
+      "timezone": "America/Los_Angeles",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://tracking.link/tracking?tracking_id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.link"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "tracking_id"
+          ]
+        }
+      ],
+      "detectionRules": [
+        {
+          "pattern": "^ZPY[A-Z]{2}\\d{10}YQ$",
+          "confidence": "low"
+        }
+      ],
+      "trackingSearchUrl": "https://tracking.link/tracking"
     }
   },
   "servers": [
@@ -51676,7 +51835,12 @@
           "herona-express",
           "hub-group-final-mile",
           "jetizz",
-          "mailex"
+          "mailex",
+          "jiaying-express",
+          "ltl-kr",
+          "okay-parcel",
+          "tnt-au",
+          "znlogic"
         ]
       },
       "Stage": {

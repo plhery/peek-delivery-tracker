@@ -19,7 +19,7 @@ J&T Express Germany's waybill is `JTDE` followed by 12 digits, 16 characters in 
 
 **Where to find it.** In the shop's shipping email, on the order page of the shop or marketplace, or in any message about the delivery. If you can't find it, see [how to find a tracking number](guide:find-tracking-number), or ask the shop.
 
-**Numbers that look alike.** J&T's networks in other countries have their own trackers and numbers: `JTUK` and 12 digits is J&T Express UK, `JTAU` and 12 digits [J&T Express Australia](carrier:j-and-t-au), `JTE` and 12 digits J&T Express Middle East, and `JT` with 13 digits is used by J&T in South-East Asia and in China (J&T Express China). Only `JTDE` belongs to the German network. If Peek keeps showing "Waiting for the carrier", compare the number with the shop's email, or ask the shop.
+**Numbers that look alike.** J&T's networks in other countries have their own trackers and numbers: `JTUK` and 12 digits is [J&T Express UK](carrier:j-and-t-uk), `JTAU` and 12 digits [J&T Express Australia](carrier:j-and-t-au), `JTE` and 12 digits [J&T Express Middle East](carrier:j-and-t-middle-east), and `JT` with 13 digits is used by J&T in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). Only `JTDE` belongs to the German network. If Peek keeps showing "Waiting for the carrier", compare the number with the shop's email, or ask the shop.
 
 ## J&T Express Germany tracking statuses explained
 

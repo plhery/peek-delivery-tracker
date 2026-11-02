@@ -3210,6 +3210,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f6851f"
     },
     {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-seguimiento",
+      "title": "TopYou seguimiento: número TYZR, estados y entrega en España",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-seguimiento",

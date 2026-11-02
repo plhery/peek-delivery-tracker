@@ -1344,7 +1344,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
-        "pattern": "^(?!Z[ACS])[A-Z0-9]{2}\\d{11}$",
+        "pattern": "^(?!Z[ACS])(?:[A-Z][A-Z0-9]|\\d[A-Z])\\d{11}$",
         "confidence": "low"
       },
       {
@@ -4270,6 +4270,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^YT\\d{13}$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^G\\d{11}$",
+        "confidence": "low"
       }
     ],
     "trackingUrlTemplate": "https://www.yto.net.cn/ytoExpress/waybill/search",
@@ -24402,7 +24406,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Rome",
     "tracking": {
       "mode": "automatic",
-      "adapter": "liccardi"
+      "adapter": "liccardi",
+      "recognitionRank": 704
     },
     "trackingUrlTemplate": "https://my.liccarditrasporti.com/segui?ldv={trackingNumber}",
     "linkRules": [
@@ -24416,7 +24421,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": []
+    "detectionRules": [
+      {
+        "pattern": "^660\\d{10}$",
+        "confidence": "low"
+      }
+    ]
   },
   "logoix": {
     "displayName": "LogoiX",
@@ -32565,7 +32575,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "starlinks-global"
+      "adapter": "starlinks-global",
+      "recognitionRank": 153
     },
     "trackingUrlTemplate": "https://starlinks.app/track/{trackingNumber}",
     "linkRules": [
@@ -45974,7 +45985,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Sydney",
     "tracking": {
       "mode": "automatic",
-      "adapter": "anc-delivers"
+      "adapter": "anc-delivers",
+      "recognitionRank": 152
     },
     "trackingUrlTemplate": "https://ancdelivers.com.au/track/{trackingNumber}",
     "linkRules": [
@@ -46008,7 +46020,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "bestfulfill"
+      "adapter": "bestfulfill",
+      "recognitionRank": 151
     },
     "trackingUrlTemplate": "https://www.bestfulfillpacket.com/track?number={trackingNumber}",
     "linkRules": [
@@ -47672,7 +47685,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Sydney",
     "tracking": {
       "mode": "automatic",
-      "adapter": "tnt-au"
+      "adapter": "tnt-au",
+      "recognitionRank": 601
     },
     "trackingUrlTemplate": "https://www.tntexpress.com.au/interaction/ASPs/trackref_detail.asp?con={trackingNumber}",
     "linkRules": [
@@ -47790,6 +47804,39 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://redexpress.kg/"
+  },
+  "qatar-post": {
+    "displayName": "Qatar Post",
+    "aliases": [
+      "Q-Post",
+      "Qatar Postal Services Company",
+      "بريد قطر"
+    ],
+    "countries": [
+      "QA"
+    ],
+    "color": "#002e6d",
+    "selectable": true,
+    "timezone": "Asia/Qatar",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.qatarpost.qa/TrackAndTrace?trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.qatarpost.qa",
+          "qatarpost.qa"
+        ],
+        "pathPattern": "^/TrackAndTrace/?$",
+        "params": [
+          "trackingNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.qatarpost.qa/TrackAndTrace"
   }
 } as const;
 
@@ -49154,7 +49201,8 @@ export const CARRIER_IDS = [
   "tnt-au",
   "znlogic",
   "magic-trans",
-  "red-express"
+  "red-express",
+  "qatar-post"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

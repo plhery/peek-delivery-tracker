@@ -7658,6 +7658,10 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^[A-Z]{2}\\d{7}[A-Z]{2}\\d{5}G$",
         "confidence": "low",
         "preferred": true
+      },
+      {
+        "pattern": "^IHB\\d{10}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://t.meest-group.com/n/"
@@ -24348,7 +24352,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^IHB\\d{10}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.hrparcel.com/traccia-spedizioni/"
   },
   "intex-paketdienst": {

@@ -3882,6 +3882,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "china-post",
+      "catalog": "china-post",
+      "slug": "pochta-kitaya-otslezhivanie",
+      "title": "Почта Китая (China Post): отслеживание, статусы, доставка",
+      "name": "China Post",
+      "color": "#006d46"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "yto-express-otslezhivanie",

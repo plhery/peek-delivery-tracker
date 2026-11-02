@@ -2327,7 +2327,7 @@ describe('TrackingSyncService', () => {
     expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'exception' });
   });
   it('reads a naive local snapshot in its carrier\'s zone before comparing it with the watermark', async () => {
-    // India Post reports Kolkata wall time without an offset; routing writes the watermark from that reading.
+    // DTDC reports Kolkata wall time without an offset; routing writes the watermark from that reading.
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-07-01T12:01:30Z' }),
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
@@ -2338,7 +2338,7 @@ describe('TrackingSyncService', () => {
       .mockResolvedValueOnce(snapshot('2026-07-01T10:00:00.000', 'out_for_delivery', 'Out for delivery'))
       .mockResolvedValueOnce(snapshot('2026-07-01T09:00:00.000', 'in_transit', 'In transit')), fetchUniversal: vi.fn() };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-07-01T12:00:00Z'));
-    const parcel = { id: 'naive', carrier: 'india-post', tracking_number: 'TEST1234', current_stage: 'pending' };
+    const parcel = { id: 'naive', carrier: 'dtdc', tracking_number: 'TEST1234', current_stage: 'pending' };
     await service.syncPackage(parcel);
     const fresh = client.updatePackage.mock.calls.at(-1)![1];
     expect(fresh).toMatchObject({ current_stage: 'out_for_delivery', carrier_data: { routing: { last_event_at: '2026-07-01T04:30:00.000Z' } } });

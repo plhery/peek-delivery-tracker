@@ -1748,7 +1748,7 @@ describe('persistent tracking routing', () => {
     // Quickpac reports Swiss wall time without an offset; the stored events read it in Zurich.
     ['quickpac', '2026-07-01T08:00:00.000Z'],
     // A zone no test machine is likely to run in, so the process zone cannot pass for it.
-    ['india-post', '2026-07-01T04:30:00.000Z'],
+    ['dtdc', '2026-07-01T04:30:00.000Z'],
   ])('reads a naive local last update in its carrier\'s zone for the freshness watermark (%s)', async (carrier, watermark) => {
     const { router, direct } = setup(new Date('2026-07-01T12:00:00Z'));
     const local = '2026-07-01T10:00:00.000';

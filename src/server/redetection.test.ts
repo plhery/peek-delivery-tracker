@@ -278,8 +278,8 @@ describe('a carrier whose answer was set aside without movement or on local cloc
   });
 
   it('goes first, without waiting, once the catalog dates the carrier\'s scans', async () => {
-    // Australia Post's clocks aren't local: an answer set aside on them would now be dated.
-    expect(await lead(item('australia-post', 'local_clock'))).toEqual({ carrier: 'australia-post', rank: 0 });
+    // Poste Italiane's clocks aren't local: an answer set aside on them would now be dated.
+    expect(await lead(item('poste-italiane', 'local_clock', { tracking_number: 'EY123456785IT' }))).toEqual({ carrier: 'poste-italiane', rank: 0 });
     // YunExpress's still are.
     expect(await lead(item('yunexpress', 'local_clock'))).not.toEqual({ carrier: 'yunexpress', rank: 0 });
   });

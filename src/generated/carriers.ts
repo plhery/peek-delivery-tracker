@@ -1872,6 +1872,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Stone3PL tracking: numbers, statuses and contact",
       "name": "Stone3PL",
       "color": "#0066b3"
+    },
+    {
+      "id": "j-and-t-uk",
+      "catalog": "j-and-t-uk",
+      "slug": "jt-express-uk-tracking",
+      "title": "J&T Express UK tracking: JTUK numbers and statuses",
+      "name": "J&T Express UK",
+      "color": "#e60000"
     }
   ],
   "de": [

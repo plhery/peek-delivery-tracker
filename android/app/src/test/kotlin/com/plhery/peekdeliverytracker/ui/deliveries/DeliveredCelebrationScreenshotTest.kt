@@ -24,6 +24,7 @@ import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.awaitFrame
 import com.plhery.peekdeliverytracker.ui.screenshot
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -143,6 +144,8 @@ class DeliveredCelebrationScreenshotTest {
             check(frames++ < 30) { "The flights didn't set off" }
             advance(FRAME)
         }
+        // The counts roll with the release's spring.
+        assertTrue(deliveries.listChange?.releasing == true)
         shot(200, "celebration_flight_light")
     }
 

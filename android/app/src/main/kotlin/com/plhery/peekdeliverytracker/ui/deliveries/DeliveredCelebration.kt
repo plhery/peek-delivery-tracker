@@ -500,4 +500,4 @@ const val DELIVERED_FLIGHTS = "deliveries.flights"
 
 /** The list's own motion, and the release's, in seconds. */
 internal const val LIST_MOTION = 0.32
-private const val RELEASE_MOTION = 0.42
+internal const val RELEASE_MOTION = 0.42

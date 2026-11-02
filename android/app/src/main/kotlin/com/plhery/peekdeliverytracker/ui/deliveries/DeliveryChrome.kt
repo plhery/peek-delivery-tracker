@@ -145,7 +145,6 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
-import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
 import com.plhery.peekdeliverytracker.ui.zoom.fadingUnderZoom
 import com.plhery.peekdeliverytracker.ui.zoom.givingWayToPageBar
@@ -477,7 +476,7 @@ private fun DemoBarLine(demo: String, exit: String, named: Boolean) {
  * pulses under Reduce Motion.
  */
 @Composable
-internal fun OverviewRow(state: DeliveriesState, active: Int, refreshes: Boolean) {
+internal fun OverviewRow(state: DeliveriesState, active: Int, change: ListChange?, refreshes: Boolean) {
     val colors = PeekTheme.colors
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     Row(Modifier.fillMaxWidth().heightIn(min = BUTTON_SIDE), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -492,7 +491,7 @@ internal fun OverviewRow(state: DeliveriesState, active: Int, refreshes: Boolean
                     maxLines = if (largeText) 1 else Int.MAX_VALUE,
                     overflow = TextOverflow.Ellipsis,
                 )
-                CountPill(active, horizontalPadding = 6.dp)
+                CountPill(active, horizontalPadding = 6.dp, change, Modifier.testTag(ACTIVE_COUNT))
             }
         }
         val searchLabel = localized(if (state.showingSearch) "view.hideControls" else "view.showControls")
@@ -563,21 +562,6 @@ internal fun Modifier.refreshing(reduceMotion: Boolean): Modifier {
         }
     }
     return graphicsLayer { if (reduceMotion) alpha = effect.value else rotationZ = effect.value }
-}
-
-/** A count in a faint capsule, beside a heading. */
-@Composable
-internal fun CountPill(count: Int, horizontalPadding: Dp) {
-    val secondary = PeekTheme.colors.secondaryLabel
-    Box(
-        Modifier
-            .heightIn(min = 20.dp)
-            .background(secondary.copy(alpha = secondary.alpha * 0.09f), CapsuleShape)
-            .padding(horizontal = horizontalPadding),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text("$count", color = secondary, style = PeekTheme.type.caption2.monospacedDigit(), maxLines = 1, softWrap = false)
-    }
 }
 
 /**

@@ -57,6 +57,7 @@ import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.displayedCarrier
+import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.parcelName
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.settings.AccountHost
@@ -517,12 +518,16 @@ internal class DeliveriesState(
         val held = hold.receive(shown = parcels, next = next, watching = watching)
         // Holding nothing as before is no change: the list isn't arranged again for it.
         if (!held.isEmpty || !hold.isEmpty) hold = held
+        if (listed(next) != listed(parcels)) listChange = ListChange(releasing = false)
         parcels = next
         // The parcel open when the system closed the app opens again as it was, without its zoom.
         if (navigator.restore(next) && arrangement == DeliveriesArrangement.Stacked) {
             navigator.navigation.chosen?.let(zoom::showStill)
         }
     }
+
+    /** `store.parcels.filter { !$0.isArchived }.map(\.id)`: the value the list's animation follows. */
+    private fun listed(parcels: List<Parcel>): List<UUID> = parcels.mapNotNull { parcel -> parcel.id.takeUnless { parcel.isArchived } }
 
     /** Nobody looks at the list any more: the parcels just arrived take their new places at once, unseen (`release()`). */
     fun release() {
@@ -572,6 +577,15 @@ internal class DeliveriesState(
      * has been laid out anew ([ListMotion]).
      */
     var releasing = false
+        private set
+
+    /**
+     * The list's last animated change, which its counts roll with ([CountPill]): the parcels on it, unarchived, added,
+     * archived, brought back, deleted or in another order (`.animation(.snappy(duration: 0.32), value:)` on their ids),
+     * or the held parcels let go (`withAnimation(.spring(duration: 0.42))`). A count that changes without a new one (a
+     * search, a filter, a parcel taking another stage) just changes, as SwiftUI's transaction has no animation then.
+     */
+    var listChange: ListChange? by mutableStateOf(null)
         private set
 
     /** What the list draws with, as it was last drawn: the carriers' liveries, the language and the window's graphics. */
@@ -650,6 +664,7 @@ internal class DeliveriesState(
         flights = taking
         val release = ++releases
         releasing = true
+        listChange = ListChange(releasing = true)
         hold = hold.release()
         scope.launch {
             // The list is laid out anew in the next frame, and its items start moving with the release's spring.

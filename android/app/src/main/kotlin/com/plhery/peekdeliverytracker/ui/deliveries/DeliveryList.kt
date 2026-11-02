@@ -392,7 +392,7 @@ private data class ListEntry(val key: Any, val type: String, val top: Dp, val le
 @Immutable
 private sealed interface ListItem {
     @Immutable
-    data class Overview(val active: Int, val sideBySide: Boolean) : ListItem
+    data class Overview(val active: Int, val sideBySide: Boolean, val change: ListChange?) : ListItem
 
     @Immutable
     data object Empty : ListItem
@@ -421,7 +421,7 @@ private sealed interface ListItem {
     data class Archive(val parcels: List<Parcel>, val grouped: Boolean) : ListItem
 
     @Immutable
-    data class Header(val kind: ParcelSectionKind, val count: Int) : ListItem
+    data class Header(val kind: ParcelSectionKind, val count: Int, val change: ListChange?) : ListItem
 
     /** A card of a section: a past delivery's, or one on its way among the returned or flagged (Next up's own as Next up's). */
     @Immutable
@@ -456,6 +456,8 @@ private fun listEntries(
     val layout = state.layout
     val parcels = state.parcels
     val leaving = state.leaving
+    // The counts take the list's change with them, so that a count and the change it comes with reach its pill together.
+    val change = state.listChange
     val entries = mutableListOf<ListEntry>()
     fun first(key: Any, type: String, item: ListItem) {
         entries += ListEntry(key, type, if (entries.isEmpty()) 0.dp else GROUP_SPACING, cardId(key) in leaving, item)
@@ -465,7 +467,7 @@ private fun listEntries(
     }
 
     val custom = state.hasCustomView
-    if (parcels.isNotEmpty()) first("overview", "overview", ListItem.Overview(layout.active.size, sideBySide))
+    if (parcels.isNotEmpty()) first("overview", "overview", ListItem.Overview(layout.active.size, sideBySide, change))
     if (custom) first("chips", "chips", ListItem.Chips)
     // The error's notice and an invitation to turn notifications on come with the store's errors and the
     // notifications.
@@ -489,7 +491,7 @@ private fun listEntries(
         if (section.kind == ParcelSectionKind.Archived) {
             // A custom view shows the archived parcels it finds under their header, rather than on the shelf.
             if (custom) {
-                section("section-${section.kind.name}", "header", SECTION_SPACING, ListItem.Header(section.kind, section.parcels.size))
+                section("section-${section.kind.name}", "header", SECTION_SPACING, ListItem.Header(section.kind, section.parcels.size, change))
                 section(ARCHIVE_KEY, "archiveGroup", GROUP_SPACING, ListItem.Archive(section.parcels, grouped = true))
             } else {
                 section(ARCHIVE_KEY, "archive", SECTION_SPACING, ListItem.Archive(section.parcels, grouped = false))
@@ -497,7 +499,7 @@ private fun listEntries(
             continue
         }
         val group = "section-${section.kind.name}"
-        section(group, "header", SECTION_SPACING, ListItem.Header(section.kind, section.parcels.size))
+        section(group, "header", SECTION_SPACING, ListItem.Header(section.kind, section.parcels.size, change))
         val spacing = if (section.kind == ParcelSectionKind.Delivered) DELIVERED_SPACING else CARD_SPACING
         for (parcel in section.parcels) {
             section(cardKey(group, parcel.id), "card", spacing, ListItem.SectionCard(section.kind, parcel, parcel.id == layout.next?.id))
@@ -511,7 +513,7 @@ private fun listEntries(
 @Composable
 private fun ListItemContent(state: DeliveriesState, item: ListItem) {
     when (item) {
-        is ListItem.Overview -> Overview(state, item.active, item.sideBySide)
+        is ListItem.Overview -> Overview(state, item.active, item.sideBySide, item.change)
         ListItem.Empty -> DeliveriesEmptyState(state)
         ListItem.Invitation -> {
             val user by state.source.session.collectAsState()
@@ -523,7 +525,7 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
         is ListItem.Next -> NextCard(state, item)
         is ListItem.OnTheWay -> OnTheWayCard(state, item)
         is ListItem.Archive -> ArchiveItem(state, item)
-        is ListItem.Header -> SectionHeader(item.kind, item.count)
+        is ListItem.Header -> SectionHeader(item.kind, item.count, item.change)
         is ListItem.SectionCard -> SectionCard(state, item)
         is ListItem.Foot -> DeliveriesFoot(item.homePageUrl, item.privacyUrl)
         ListItem.DeviceAccount -> DeviceAccountRow { state.source.showSignIn() }
@@ -789,7 +791,7 @@ private fun CardComposed(parcelId: UUID) {
 
 /** A section's name and its count, as the overview's. */
 @Composable
-private fun SectionHeader(kind: ParcelSectionKind, count: Int) {
+private fun SectionHeader(kind: ParcelSectionKind, count: Int, change: ListChange?) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val title = remember(kind, localizer, language) { localizer.text(sectionTitleKey(kind)) }
@@ -799,7 +801,7 @@ private fun SectionHeader(kind: ParcelSectionKind, count: Int) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(title, color = PeekTheme.colors.label, style = PeekTheme.type.headline)
-        CountPill(count, horizontalPadding = 8.dp)
+        CountPill(count, horizontalPadding = 8.dp, change)
     }
 }
 
@@ -818,10 +820,10 @@ private fun sectionTitleKey(kind: ParcelSectionKind): String = when (kind) {
  * and none under reduce motion.
  */
 @Composable
-private fun Overview(state: DeliveriesState, active: Int, sideBySide: Boolean) {
+private fun Overview(state: DeliveriesState, active: Int, sideBySide: Boolean, change: ListChange?) {
     val reduceMotion = PeekTheme.reduceMotion
     Column {
-        OverviewRow(state, active, refreshes = sideBySide || touchExplorationEnabled())
+        OverviewRow(state, active, change, refreshes = sideBySide || touchExplorationEnabled())
         val fade = Motion.snappy<Float>(SEARCH_MOTION)
         val size = Motion.snappy<IntSize>(SEARCH_MOTION)
         val offset = Motion.snappy<IntOffset>(SEARCH_MOTION)

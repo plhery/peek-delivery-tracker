@@ -1888,6 +1888,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "M-ONE tracking (Milšped ONE): statuses, delivery and help",
       "name": "M-ONE",
       "color": "#024da0"
+    },
+    {
+      "id": "early-bird",
+      "catalog": "early-bird",
+      "slug": "early-bird-tracking",
+      "title": "Early Bird tracking: statuses, morning delivery and lockers",
+      "name": "Early Bird",
+      "color": "#dd7f4a"
     }
   ],
   "de": [

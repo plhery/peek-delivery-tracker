@@ -16,7 +16,7 @@ The two shapes in use:
 
 | Shape | Invented example |
 | --- | --- |
-| 14 digits | `12345678901234` |
+| 14 digits | `19999999999980` |
 | 24 digits, the full label barcode | `123456789012345678901234` |
 
 On Ciblex's result page, the line above the history can add a shorter number and the sender's reference in brackets; neither is the tracking number.

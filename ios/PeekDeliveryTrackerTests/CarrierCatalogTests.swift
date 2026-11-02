@@ -10,7 +10,7 @@ final class CarrierCatalogTests: XCTestCase {
         let discovery = catalog.discoveryCandidates(for: "000000000103")
         XCTAssertEqual(Array(discovery.prefix(http.count)), http)
         XCTAssertTrue(discovery.dropFirst(http.count).contains(.fedex))
-        XCTAssertTrue(catalog.recognitionCandidates(for: "33870000000000001", browser: true).contains(.dhlEcommerce))
+        XCTAssertTrue(catalog.recognitionCandidates(for: "33879999999999980", browser: true).contains(.dhlEcommerce))
         XCTAssertEqual(catalog.discoveryCandidates(for: "1Z999AA10123456784"), [])
     }
     func testClaimingCarrierNamesOnlyOneOtherCarrierByShapeAndCheckDigit() {
@@ -24,7 +24,7 @@ final class CarrierCatalogTests: XCTestCase {
     }
     func testMondialRelayLabelBarcodeDetectionAndPublicLink() throws {
         // Published example in Mondial Relay's label specification, not customer data.
-        let barcode = "12123456780101006623123454"
+        let barcode = "12123999999999999999999987"
         XCTAssertEqual(catalog.detect(barcode).carrier, .mondialRelay)
         XCTAssertEqual(catalog.detect(barcode).confidence, .high)
         XCTAssertEqual(catalog.parse("Mon colis: \(barcode)").trackingNumber, barcode)
@@ -35,7 +35,7 @@ final class CarrierCatalogTests: XCTestCase {
         let parcel = Parcel(id: UUID(), trackingNumber: barcode, label: "Example", carrier: .mondialRelay,
             createdAt: "2026-09-10T12:00:00Z", syncStatus: .ok, notificationsMuted: false)
         XCTAssertEqual(try XCTUnwrap(catalog.trackingLinks(for: parcel, language: .fr).first).url.absoluteString,
-            "https://www.mondialrelay.fr/suivi-de-colis/?numeroExpedition=121234567801")
+            "https://www.mondialrelay.fr/suivi-de-colis/?numeroExpedition=121239999999")
     }
 
     func testInPostUKNumbersOpenInPostUK() throws {
@@ -47,7 +47,7 @@ final class CarrierCatalogTests: XCTestCase {
         for number in ["JJD0002233564270287", "JD0002123456789012", "8YDR098765432", "00ABC0000001A001"] {
             XCTAssertEqual(try link(number), "https://inpost.co.uk/tracking/result?parcel_code=\(number)")
         }
-        XCTAssertTrue(try link("640000000000000000000001").hasPrefix("https://inpost.pl/sledzenie-przesylek"))
+        XCTAssertTrue(try link("649999999999999999999980").hasPrefix("https://inpost.pl/sledzenie-przesylek"))
     }
 
     func testCourierGuyProductTrackingLinks() throws {
@@ -130,7 +130,7 @@ final class CarrierCatalogTests: XCTestCase {
 
     func testLinkedGLSParcelKeepsOriginalIdentityAndSwissPostPrimaryLink() throws {
         let parcel = Parcel(
-            id: UUID(), trackingNumber: "993412345612345678", label: "Perfume / Surprise",
+            id: UUID(), trackingNumber: "993412345699999980", label: "Perfume / Surprise",
             carrier: .swissPost, createdAt: "2026-09-10T07:00:00Z", syncStatus: .ok,
             carrierData: CarrierData(originalCarrier: .glsDe, originalTrackingNumber: "12345678901"),
             notificationsMuted: false
@@ -140,16 +140,16 @@ final class CarrierCatalogTests: XCTestCase {
         let links = catalog.trackingLinks(for: parcel, language: .fr)
         XCTAssertEqual(links.map(\.carrier), [.swissPost, .glsDe])
         XCTAssertEqual(links.map(\.role), [.active, .history])
-        XCTAssertTrue(links[0].url.absoluteString.contains("993412345612345678"))
+        XCTAssertTrue(links[0].url.absoluteString.contains("993412345699999980"))
         XCTAssertTrue(links[1].url.absoluteString.contains("12345678901"))
     }
 
     func testDHLHandoffUsesSwissPostURLWhileKeepingDHLHistory() {
         let parcel = Parcel(
-            id: UUID(), trackingNumber: "LF123456785DE", label: "Garden cable",
+            id: UUID(), trackingNumber: "LF999999987DE", label: "Garden cable",
             carrier: .dhl, createdAt: "2026-09-10T07:00:00Z", syncStatus: .ok,
-            trackingURL: "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF123456785DE",
-            carrierData: CarrierData(activeTrackingCarrier: .swissPost, originalCarrier: .dhl, originalTrackingNumber: "LF123456785DE"),
+            trackingURL: "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF999999987DE",
+            carrierData: CarrierData(activeTrackingCarrier: .swissPost, originalCarrier: .dhl, originalTrackingNumber: "LF999999987DE"),
             notificationsMuted: false
         )
         let links = catalog.trackingLinks(for: parcel, language: .en)
@@ -162,27 +162,27 @@ final class CarrierCatalogTests: XCTestCase {
 
     func testHandoffUsesDifferentLocalTrackingNumber() {
         let parcel = Parcel(
-            id: UUID(), trackingNumber: "123456789011", label: "Perfume",
+            id: UUID(), trackingNumber: "123459999981", label: "Perfume",
             carrier: .glsDe, createdAt: "2026-09-10T07:00:00Z", syncStatus: .ok,
             carrierData: CarrierData(activeTrackingCarrier: .swissPost, activeTrackingNumber: "990000000000000001",
-                originalCarrier: .glsDe, originalTrackingNumber: "123456789011"), notificationsMuted: false
+                originalCarrier: .glsDe, originalTrackingNumber: "123459999981"), notificationsMuted: false
         )
-        XCTAssertEqual(parcel.trackingNumbers.map(\.number), ["990000000000000001", "123456789011"])
+        XCTAssertEqual(parcel.trackingNumbers.map(\.number), ["990000000000000001", "123459999981"])
         XCTAssertEqual(parcel.trackingNumbers.map(\.carrier), [.swissPost, .glsDe])
         let links = catalog.trackingLinks(for: parcel, language: .en)
         XCTAssertEqual(links.map(\.carrier), [.swissPost, .glsDe])
         XCTAssertTrue(links[0].url.absoluteString.contains("990000000000000001"))
-        XCTAssertFalse(links[0].url.absoluteString.contains("123456789011"))
-        XCTAssertTrue(links[1].url.absoluteString.contains("123456789011"))
+        XCTAssertFalse(links[0].url.absoluteString.contains("123459999981"))
+        XCTAssertTrue(links[1].url.absoluteString.contains("123459999981"))
     }
 
     func testEachCarrierPageStandsUnderItsOwnNumber() {
         // Two numbers: the delivering carrier's page under the first, the first carrier's under its own.
         let handed = Parcel(
-            id: UUID(), trackingNumber: "123456789011", label: "Perfume",
+            id: UUID(), trackingNumber: "123459999981", label: "Perfume",
             carrier: .glsDe, createdAt: "2026-09-10T07:00:00Z", syncStatus: .ok,
             carrierData: CarrierData(activeTrackingCarrier: .swissPost, activeTrackingNumber: "990000000000000001",
-                originalCarrier: .glsDe, originalTrackingNumber: "123456789011"), notificationsMuted: false
+                originalCarrier: .glsDe, originalTrackingNumber: "123459999981"), notificationsMuted: false
         )
         let pages = ParcelTrackingLink.byNumber(catalog.trackingLinks(for: handed, language: .en), numbers: handed.trackingNumbers)
         XCTAssertEqual(pages.own.map { $0.map(\.carrier) }, [[.swissPost], [.glsDe]])
@@ -190,9 +190,9 @@ final class CarrierCatalogTests: XCTestCase {
 
         // One number followed on two carriers' pages: the earlier carrier's has no number of its own.
         let sameNumber = Parcel(
-            id: UUID(), trackingNumber: "LF123456785DE", label: "Garden cable",
+            id: UUID(), trackingNumber: "LF999999987DE", label: "Garden cable",
             carrier: .dhl, createdAt: "2026-09-10T07:00:00Z", syncStatus: .ok,
-            carrierData: CarrierData(activeTrackingCarrier: .swissPost, originalCarrier: .dhl, originalTrackingNumber: "LF123456785DE"),
+            carrierData: CarrierData(activeTrackingCarrier: .swissPost, originalCarrier: .dhl, originalTrackingNumber: "LF999999987DE"),
             notificationsMuted: false
         )
         let shared = ParcelTrackingLink.byNumber(catalog.trackingLinks(for: sameNumber, language: .en), numbers: sameNumber.trackingNumbers)
@@ -278,11 +278,11 @@ final class CarrierCatalogTests: XCTestCase {
     }
 
     func testDHLEcommerceDetection() {
-        XCTAssertEqual(catalog.detect("33870000000000001").confidence, .low)
-        XCTAssertEqual(catalog.detect("GM1234567890123456").carrier.rawValue, "dhl-ecommerce")
-        XCTAssertEqual(catalog.parse("https://www.dhl.com/ch-en/home/tracking.html?tracking-id=33870000000000001").carrier.rawValue, "dhl-ecommerce")
+        XCTAssertEqual(catalog.detect("33879999999999980").confidence, .low)
+        XCTAssertEqual(catalog.detect("GM9999999999999980").carrier.rawValue, "dhl-ecommerce")
+        XCTAssertEqual(catalog.parse("https://www.dhl.com/ch-en/home/tracking.html?tracking-id=33879999999999980").carrier.rawValue, "dhl-ecommerce")
         XCTAssertEqual(catalog.parse("https://ecommerceportal.dhl.com/track/?tracking-id=ABC123456").carrier.rawValue, "dhl-ecommerce")
-        XCTAssertEqual(catalog.parse("https://www.dhl.com/ch-en/home/tracking.html?tracking-id=LF123456785DE").carrier, .dhl)
+        XCTAssertEqual(catalog.parse("https://www.dhl.com/ch-en/home/tracking.html?tracking-id=LF999999987DE").carrier, .dhl)
         XCTAssertTrue(catalog.tracksAutomatically(CarrierID(rawValue: "dhl-ecommerce")))
     }
 
@@ -292,7 +292,7 @@ final class CarrierCatalogTests: XCTestCase {
             XCTAssertTrue(catalog.tracksAutomatically(carrier))
         }
         XCTAssertTrue(catalog.tracksAutomatically(.unknown))
-        XCTAssertEqual(catalog.parse("https://www.myhermes.de/empfangen/sendungsverfolgung/sendungsinformation#H1234567890123456789").carrier.rawValue, "hermes-de")
+        XCTAssertEqual(catalog.parse("https://www.myhermes.de/empfangen/sendungsverfolgung/sendungsinformation#H9999999999999999980").carrier.rawValue, "hermes-de")
         for (country, carrier) in [("DE", "gls-de"), ("FR", "gls-fr"), ("CH", "gls-ch")] {
             XCTAssertEqual(catalog.parse("https://gls-group.eu/\(country)/en/parcel-tracking?match=12345678901").carrier.rawValue, carrier)
         }
@@ -308,18 +308,18 @@ final class CarrierCatalogTests: XCTestCase {
     func testDetectsHighConfidenceCarriers() {
         XCTAssertEqual(catalog.detect("1Z999AA10123456784").carrier, .ups)
         XCTAssertEqual(catalog.detect("443412345678901234").carrier, .quickpac)
-        XCTAssertEqual(catalog.detect("RA123456785CH").carrier, .swissPost)
-        XCTAssertEqual(catalog.detect("250123456789012").carrier, .dpdFr)
-        XCTAssertEqual(catalog.detect("CC200000000401").carrier, .relaisColis)
-        XCTAssertEqual(catalog.detect("ASE12345678").carrier, .asendia)
-        XCTAssertEqual(catalog.detect("FR1234567890").carrier, .amazonLogistics)
+        XCTAssertEqual(catalog.detect("RA999999987CH").carrier, .swissPost)
+        XCTAssertEqual(catalog.detect("250999999999980").carrier, .dpdFr)
+        XCTAssertEqual(catalog.detect("CC299999999980").carrier, .relaisColis)
+        XCTAssertEqual(catalog.detect("ASE99999980").carrier, .asendia)
+        XCTAssertEqual(catalog.detect("FR9999999981").carrier, .amazonLogistics)
         XCTAssertEqual(catalog.detect("2103/11207088").carrier.rawValue, "nacex")
         XCTAssertEqual(catalog.parse("2103/11207088").carrier.rawValue, "nacex")
         XCTAssertEqual(catalog.parse("Tracking: 2103/11207088").trackingNumber, "2103/11207088")
     }
 
     func testKeepsAmbiguousCarrierForConfirmation() {
-        let result = catalog.detect("12345678901234")
+        let result = catalog.detect("19999999999980")
         XCTAssertEqual(result.carrier, .unknown)
         XCTAssertEqual(result.confidence, .low)
         XCTAssertTrue(result.candidates.contains(.dpd))
@@ -574,11 +574,11 @@ final class CarrierCatalogTests: XCTestCase {
     }
 
     func testRecognisesDutchPostAndExplainsGenericPostalTracking() {
-        let detected = catalog.detect("LX123456785NL")
+        let detected = catalog.detect("LX999999987NL")
         XCTAssertEqual(detected.carrier, .springGDS)
         XCTAssertEqual(detected.confidence, .high)
         XCTAssertEqual(detected.candidates, [.springGDS])
-        XCTAssertEqual(catalog.detect("lx 123.456-785 nl").carrier, .springGDS)
+        XCTAssertEqual(catalog.detect("lx 999.999-987 nl").carrier, .springGDS)
         XCTAssertEqual(catalog.detect("LX123456789NL").carrier, .unknown)
         XCTAssertEqual(catalog.detect("RA123456785IR").carrier, .internationalPost)
         XCTAssertTrue(catalog.tracksAutomatically(.springGDS))
@@ -587,53 +587,53 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(catalog.trackingHintKey(for: .unknown), "add.autoSync")
         XCTAssertEqual(catalog.trackingHintKey(for: .dhl), "add.autoSync")
         for input in [
-            "https://postnl.post/track?barcodes=LX123456785NL",
-            "https://mailingtechnology.com/tracking/?tn=LX123456785NL",
-            "https://postnl.post/details/LX123456785NL",
-            "https://postnl.post/tracktrace?B=LX123456785NL",
-            "Your Myprotein shipment: LX123456785NL",
+            "https://postnl.post/track?barcodes=LX999999987NL",
+            "https://mailingtechnology.com/tracking/?tn=LX999999987NL",
+            "https://postnl.post/details/LX999999987NL",
+            "https://postnl.post/tracktrace?B=LX999999987NL",
+            "Your Myprotein shipment: LX999999987NL",
         ] {
             XCTAssertEqual(catalog.parse(input).carrier, .springGDS)
-            XCTAssertEqual(catalog.parse(input).trackingNumber, "LX123456785NL")
+            XCTAssertEqual(catalog.parse(input).trackingNumber, "LX999999987NL")
         }
     }
 
     func testPostNLTrackingLinkRepairsObsoleteSavedRoute() throws {
         var parcel = Parcel(
-            id: UUID(), trackingNumber: "LX123456785NL", label: "Postal shipment",
+            id: UUID(), trackingNumber: "LX999999987NL", label: "Postal shipment",
             carrier: .springGDS, createdAt: "2026-09-07T13:00:00Z",
             syncStatus: .ok, notificationsMuted: false
         )
-        for savedURL in [nil, "https://postnl.post/details/LX123456785NL"] as [String?] {
+        for savedURL in [nil, "https://postnl.post/details/LX999999987NL"] as [String?] {
             parcel.trackingURL = savedURL
             let link = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: .en).first)
             XCTAssertEqual(link.name, "PostNL")
-            XCTAssertEqual(link.url.absoluteString, "https://postnl.post/track?barcodes=LX123456785NL")
+            XCTAssertEqual(link.url.absoluteString, "https://postnl.post/track?barcodes=LX999999987NL")
         }
-        parcel.trackingURL = "https://mailingtechnology.com/tracking/?tn=LX123456785NL"
+        parcel.trackingURL = "https://mailingtechnology.com/tracking/?tn=LX999999987NL"
         XCTAssertEqual(try XCTUnwrap(catalog.trackingLinks(for: parcel, language: .en).first).url.absoluteString,
                        parcel.trackingURL)
     }
 
     func testRecognisesDHLGermanPostalNumbersAndLinks() {
-        for number in ["LF123456785DE", "LX123456785DE", "CY123456785DE"] {
+        for number in ["LF999999987DE", "LX999999987DE", "CY999999987DE"] {
             let result = catalog.detect(number)
             XCTAssertEqual(result.carrier, .dhl)
             XCTAssertEqual(result.confidence, .high)
             XCTAssertEqual(result.candidates, [.dhl])
         }
-        XCTAssertEqual(catalog.detect("lf 123.456-785 de").carrier, .dhl)
+        XCTAssertEqual(catalog.detect("lf 999.999-987 de").carrier, .dhl)
         XCTAssertEqual(catalog.detect("LF123456789DE").carrier, .unknown)
-        XCTAssertNotEqual(catalog.detect("LF123456785US").carrier, .dhl)
+        XCTAssertNotEqual(catalog.detect("LF999999987US").carrier, .dhl)
         XCTAssertTrue(catalog.tracksAutomatically(.dhl))
         for input in [
-            "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF123456785DE",
-            "https://nolp.dhl.de/nextt-online-public/en/search?piececode=LF123456785DE",
-            "https://www.deutschepost.de/de/s/sendungsverfolgung.html?piececode=LF123456785DE",
-            "Your shipment: LF123456785DE",
+            "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF999999987DE",
+            "https://nolp.dhl.de/nextt-online-public/en/search?piececode=LF999999987DE",
+            "https://www.deutschepost.de/de/s/sendungsverfolgung.html?piececode=LF999999987DE",
+            "Your shipment: LF999999987DE",
         ] {
             XCTAssertEqual(catalog.parse(input).carrier, .dhl)
-            XCTAssertEqual(catalog.parse(input).trackingNumber, "LF123456785DE")
+            XCTAssertEqual(catalog.parse(input).trackingNumber, "LF999999987DE")
         }
         let numeric = catalog.parse("https://www.dhl.de/int-verfolgen/?piececode=1234567890")
         XCTAssertEqual(numeric.carrier, .dhl)
@@ -664,16 +664,16 @@ final class CarrierCatalogTests: XCTestCase {
     }
 
     func testAmazonOrdersOpenTheBuyersStore() throws {
-        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("CH0000000001").host, "www.amazon.de")
-        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("ch 000-0000001", country: "CA").host, "www.amazon.de")
+        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("CH9999999980").host, "www.amazon.de")
+        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("ch 999-9999980", country: "CA").host, "www.amazon.de")
         XCTAssertEqual(CarrierCatalog.amazonOrdersURL("IS0000000001").host, "www.amazon.co.uk")
         XCTAssertEqual(CarrierCatalog.amazonOrdersURL("SK0000000001").host, "www.amazon.com")
-        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("TBA000000000001", country: " ca ").host, "www.amazon.ca")
-        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("TBA000000000001", country: "FR").host, "www.amazon.com")
+        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("TBA999999999980", country: " ca ").host, "www.amazon.ca")
+        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("TBA999999999980", country: "FR").host, "www.amazon.com")
         XCTAssertEqual(CarrierCatalog.amazonOrdersURL("TBM000000000001", country: "CA").host, "www.amazon.com.mx")
         XCTAssertEqual(CarrierCatalog.amazonOrdersURL("", country: "CH").host, "www.amazon.de")
         XCTAssertEqual(CarrierCatalog.amazonOrdersURL("", country: "CA").host, "www.amazon.ca")
-        var parcel = Parcel(id: UUID(), trackingNumber: "TBA000000000001", label: "Example", carrier: .amazonLogistics,
+        var parcel = Parcel(id: UUID(), trackingNumber: "TBA999999999980", label: "Example", carrier: .amazonLogistics,
             createdAt: "2026-09-10T12:00:00Z", syncStatus: .ok, notificationsMuted: false)
         parcel.carrierData = CarrierData(destinationCountry: "CA")
         let link = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: .en).first)
@@ -688,19 +688,19 @@ final class CarrierCatalogTests: XCTestCase {
             XCTAssertTrue(catalog.requiresAmazonAccount(.unknown, trackingNumber: number))
             XCTAssertFalse(catalog.requiresAmazonAccount(.amazonShipping, trackingNumber: number))
         }
-        XCTAssertEqual(catalog.parse("TBA000000000001").carrier, .amazonLogistics)
-        XCTAssertFalse(catalog.isAmazonTrackingNumber("ZZ0000000001"))
+        XCTAssertEqual(catalog.parse("TBA999999999980").carrier, .amazonLogistics)
+        XCTAssertFalse(catalog.isAmazonTrackingNumber("ZZ9999999980"))
         XCTAssertFalse(catalog.isAmazonTrackingNumber("TBA00000000001"))
         XCTAssertTrue(catalog.tracksAutomatically(.amazonShipping))
-        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("BE0000000001").host, "www.amazon.com.be")
-        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("UK0000000001").host, "www.amazon.co.uk")
-        XCTAssertEqual(CarrierCatalog.amazonShippingURL("IT0000000001").host, "track.amazon.it")
-        XCTAssertEqual(CarrierCatalog.amazonShippingURL("TBA000000000001").host, "track.amazon.com")
-        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("TBA000000000001").host, "www.amazon.com")
+        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("BE9999999980").host, "www.amazon.com.be")
+        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("UK9999999980").host, "www.amazon.co.uk")
+        XCTAssertEqual(CarrierCatalog.amazonShippingURL("IT9999999980").host, "track.amazon.it")
+        XCTAssertEqual(CarrierCatalog.amazonShippingURL("TBA999999999980").host, "track.amazon.com")
+        XCTAssertEqual(CarrierCatalog.amazonOrdersURL("TBA999999999980").host, "www.amazon.com")
         XCTAssertEqual(CarrierCatalog.amazonOrdersURL("tbc 000000000001").host, "www.amazon.ca")
         XCTAssertEqual(CarrierCatalog.amazonOrdersURL("TBM000000000001").host, "www.amazon.com.mx")
         XCTAssertEqual(CarrierCatalog.amazonShippingURL("TBC000000000001").host, "track.amazon.com")
-        let parcel = Parcel(id: UUID(), trackingNumber: "UK0000000001", label: "Example", carrier: .amazonShipping,
+        let parcel = Parcel(id: UUID(), trackingNumber: "UK9999999980", label: "Example", carrier: .amazonShipping,
             createdAt: "2026-09-10T12:00:00Z", syncStatus: .ok, notificationsMuted: false)
         XCTAssertEqual(parcel.activeTrackingCarrier, .amazonShipping)
         XCTAssertEqual(catalog.trackingLinks(for: parcel, language: .en).first?.url.host, "track.amazon.co.uk")
@@ -855,7 +855,7 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(catalog.info(for: .unknown, language: .en).displayName, "Unknown carrier")
         XCTAssertEqual(catalog.info(for: .unknown, language: .fr).displayName, "Transporteur inconnu")
         let dpd = try XCTUnwrap(
-            catalog.requirements(for: .dpd, trackingNumber: "12345678901234")
+            catalog.requirements(for: .dpd, trackingNumber: "19999999999980")
                 .first(where: { $0.field == .dpdPostcode })
         )
         // DPD delivers abroad too: any country's postcode, as that country writes it.
@@ -892,7 +892,7 @@ final class CarrierCatalogTests: XCTestCase {
 
         // A national network keeps its own shape and example wherever the device is.
         let dpdGermany = try XCTUnwrap(
-            catalog.requirements(for: .dpdDe, trackingNumber: "12345678901234")
+            catalog.requirements(for: .dpdDe, trackingNumber: "19999999999980")
                 .first(where: { $0.field == .dpdPostcode })
         )
         XCTAssertEqual(catalog.postcodeExample(for: .dpdDe, requirement: dpdGermany, region: "FR"), "10115")
@@ -916,7 +916,7 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertTrue(catalog.requirements(for: .mondialRelay, trackingNumber: "1234567890").isEmpty)
 
         let gls = try XCTUnwrap(
-            catalog.requirements(for: .glsCh, trackingNumber: "993990103198")
+            catalog.requirements(for: .glsCh, trackingNumber: "999999999916")
                 .first(where: { $0.field == .dpdPostcode })
         )
         XCTAssertTrue(gls.accepts("8000"))
@@ -925,7 +925,7 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertFalse(gls.isSatisfied(by: ""))
 
         let heppner = try XCTUnwrap(
-            catalog.requirements(for: .heppner, trackingNumber: "23456789")
+            catalog.requirements(for: .heppner, trackingNumber: "99999980")
                 .first(where: { $0.field == .dpdPostcode })
         )
         XCTAssertTrue(heppner.accepts("1201"))
@@ -969,11 +969,11 @@ final class CarrierCatalogTests: XCTestCase {
             GivenPostcode.candidates(parcels: parcels, remembered: remembered)
         }
         // Mondial Relay and DPD take any country's postcode; GLS Switzerland, Heppner and DPD Germany their countries'.
-        let dpd = try requirement(.dpd, "12345678901234")
+        let dpd = try requirement(.dpd, "19999999999980")
         let mondialRelay = try requirement(.mondialRelay, "76434219")
-        let gls = try requirement(.glsCh, "993990103198")
-        let heppner = try requirement(.heppner, "23456789")
-        let dpdGermany = try requirement(.dpdDe, "12345678901234")
+        let gls = try requirement(.glsCh, "999999999916")
+        let heppner = try requirement(.heppner, "99999980")
+        let dpdGermany = try requirement(.dpdDe, "19999999999980")
 
         // The carrier's own postcode wins over a newer one given to another carrier.
         let parcels = given([parcel(.mondialRelay, "75002", day: 1), parcel(.glsCh, "8000", day: 2), parcel(.dpd, "75001", day: 3)])
@@ -1020,8 +1020,8 @@ final class CarrierCatalogTests: XCTestCase {
         // PostNL's 3S labels take any country's postcode, Heppner its four countries' shapes, DPD Germany Germany's.
         // DPD takes any country's too, but reads the postcode alone, as Heppner does.
         let postNL = try requirement(.springGDS, "3SABCD1234567")
-        let heppner = try requirement(.heppner, "23456789")
-        let dpdGermany = try requirement(.dpdDe, "12345678901234")
+        let heppner = try requirement(.heppner, "99999980")
+        let dpdGermany = try requirement(.dpdDe, "19999999999980")
         let dpd = try requirement(.dpd, "06080000000001")
         XCTAssertEqual(catalog.homeCountry(of: .springGDS), "NL")
 
@@ -1120,7 +1120,7 @@ final class CarrierCatalogTests: XCTestCase {
 
     func testExternalTrackingSitesUseSupportedLanguages() throws {
         var parcel = Parcel(
-            id: UUID(), trackingNumber: "993412345612345678", label: "Parcel",
+            id: UUID(), trackingNumber: "993412345699999980", label: "Parcel",
             carrier: .swissPost, createdAt: "2026-09-07T13:00:00Z",
             syncStatus: .unsupported, notificationsMuted: false
         )
@@ -1171,15 +1171,15 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertTrue(catalog.tracksAutomatically(.internationalPost))
 
         parcel.carrier = .swissPost
-        parcel.trackingNumber = "RA123456785CH"
+        parcel.trackingNumber = "RA999999987CH"
         parcel.trackingURL = nil
         let swissPost = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: .fr).first)
         XCTAssertEqual(swissPost.name, "Swiss Post")
-        XCTAssertEqual(swissPost.url.absoluteString, "https://service.post.ch/ekp-web/ui/entry/search/RA123456785CH?lang=fr")
+        XCTAssertEqual(swissPost.url.absoluteString, "https://service.post.ch/ekp-web/ui/entry/search/RA999999987CH?lang=fr")
 
         parcel.carrier = .dhl
-        parcel.trackingNumber = "LF123456785DE"
-        parcel.trackingURL = "https://www.dhl.de/int-verfolgen/?piececode=LF123456785DE"
+        parcel.trackingNumber = "LF999999987DE"
+        parcel.trackingURL = "https://www.dhl.de/int-verfolgen/?piececode=LF999999987DE"
         let dhl = try XCTUnwrap(catalog.trackingLinks(for: parcel, language: .fr).first)
         XCTAssertEqual(dhl.name, "DHL")
         XCTAssertEqual(dhl.url.absoluteString, parcel.trackingURL)
@@ -1195,7 +1195,7 @@ final class CarrierCatalogTests: XCTestCase {
 
     func testFormattingAndS10Checksum() {
         XCTAssertEqual(CarrierCatalog.format("993412345678901234"), "99.34.123456.78901234")
-        XCTAssertTrue(CarrierCatalog.isValidS10("RA123456785CH"))
+        XCTAssertTrue(CarrierCatalog.isValidS10("RA999999987CH"))
         XCTAssertFalse(CarrierCatalog.isValidS10("RA123456789CH"))
     }
 
@@ -1224,10 +1224,10 @@ final class CarrierCatalogTests: XCTestCase {
         for number in ["PL00ZZ000000001A", "PL00ZZ0000000010100000Z", "PL00ZZ000000002Z", "Z", ""] {
             XCTAssertFalse(CarrierCatalog.isValidCorreosSpainCheckLetter(number))
         }
-        for number in ["12345678901234E", "00000000000000U", "99999999999999Z", "012345678901233"] {
+        for number in ["99999999999984E", "00000000000000U", "99999999999999Z", "012345678901233"] {
             XCTAssertTrue(CarrierCatalog.isValidDpdParcelNumber(number))
         }
-        for number in ["12345678901234F", "123456789012343", "12345678901234", "1234567890123E", "12345678901234EE", "12345678901234e", "12345678901234E\n"] {
+        for number in ["12345678901234F", "123456789012343", "19999999999980", "1234567890123E", "12345678901234EE", "99999999999984e", "99999999999984E\n"] {
             XCTAssertFalse(CarrierCatalog.isValidDpdParcelNumber(number))
         }
         let express = catalog.detect("123 456-7891")
@@ -1248,7 +1248,7 @@ final class CarrierCatalogTests: XCTestCase {
 
     /// Constructed eleven-digit numbers: DHL eCommerce Poland weighs ten digits 4 and 9 from the left.
     func testDhlEcommercePolandNumbersCheckTheirLastDigit() {
-        for number in ["12345678900", "99999999995", "00000000000"] {
+        for number in ["12345678900", "99999999984", "00000000000"] {
             XCTAssertTrue(CarrierCatalog.isValidDhlEcommercePolandNumber(number), number)
             XCTAssertEqual(CarrierCatalog.checksumPasses("dhl-ecommerce-pl", number), true, number)
         }
@@ -1283,7 +1283,7 @@ final class CarrierCatalogTests: XCTestCase {
     func testRecognitionAsksACarrierWhoseCheckDigitPassesFirst() {
         // Synthetic twelve digits; only the first passes Purolator's Luhn check.
         XCTAssertEqual(catalog.recognitionCandidates(for: "300000000004").first, .purolator)
-        XCTAssertFalse(catalog.recognitionCandidates(for: "300000000005").contains(.purolator))
+        XCTAssertFalse(catalog.recognitionCandidates(for: "399999999980").contains(.purolator))
         // Hermes's check digit passes; DPD's networks are only more popular.
         let fourteen = catalog.recognitionCandidates(for: "12345678901231")
         XCTAssertEqual(fourteen.first, .hermesDe)
@@ -1298,7 +1298,7 @@ final class CarrierCatalogTests: XCTestCase {
         let routed = ["42000000" + pic, "420000000000" + pic]
         // A 26-digit PIC stays a suggestion, bare or routed, and so does a routed 22-digit PIC whose
         // Mailer ID does not fit its channel or whose family DHL eCommerce also tracks.
-        let suggested = [longPic, "42000000" + longPic, "42000000" + "9205510000000012345670", "42000000" + "9261290000000012345677"]
+        let suggested = [longPic, "42000000" + longPic, "42000000" + "9205519999999999999984", "42000000" + "9261290000000012345677"]
         for number in suggested {
             XCTAssertTrue(CarrierCatalog.isValidUspsPackageBarcode(number), number)
             let match = catalog.detect(number)
@@ -1485,15 +1485,15 @@ final class CarrierCatalogTests: XCTestCase {
     /// Made-up Deutsche Post Frankier-IDs and the specification's own example: the last character
     /// is the CRC-4 of the nineteen before it as ASCII bytes.
     func testFrankierIdsCheckTheirCrc4() {
-        for number in ["A0123456789ABCDEF01F", "A000000000000000000A", "RA51251496FC301A6903"] {
+        for number in ["A0999999986ABCDEF01F", "A000000000000000000A", "RA51251496FC301A6903"] {
             XCTAssertTrue(CarrierCatalog.isValidFrankierId(number), number)
             XCTAssertEqual(CarrierCatalog.checksumPasses("frankier-id", number), true, number)
         }
         for number in [
             "A0123456789ABCDEF010", "A000000000000000000F", "RA51251496FC301A6902",
             // A check past F, lower case, a character short or over, a separator and a trailing newline.
-            "A0123456789ABCDEF01G", "a0123456789abcdef01f", "A0123456789ABCDEF01", "A0123456789ABCDEF01F0",
-            "A012-3456789ABCDEF01F", "A0123456789ABCDEF01F\n",
+            "A0123456789ABCDEF01G", "a0999999986abcdef01f", "A0123456789ABCDEF01", "A0123456789ABCDEF01F0",
+            "A099-9999986ABCDEF01F", "A0999999986ABCDEF01F\n",
         ] {
             XCTAssertFalse(CarrierCatalog.isValidFrankierId(number), number)
             XCTAssertEqual(CarrierCatalog.checksumPasses("frankier-id", number), false, number)
@@ -1501,8 +1501,8 @@ final class CarrierCatalogTests: XCTestCase {
     }
 
     func testPostlogisticsPrintedReferenceAndTrackingLink() throws {
-        let printed = "12345678-001"
-        let compact = "12345678001"
+        let printed = "19999980-001"
+        let compact = "19999980001"
         XCTAssertEqual(catalog.parse(printed).carrier, .postlogistics)
         XCTAssertEqual(catalog.detect(compact).carrier, .unknown)
         // A link from the former PostLogistics site still names the carrier.
@@ -1520,14 +1520,14 @@ final class CarrierCatalogTests: XCTestCase {
 
     func testHermesCheckDigitAndDepotPreferenceMatchTheWebEngine() {
         XCTAssertTrue(CarrierCatalog.isValidHermesParcelNumber("12345678901231"))
-        XCTAssertFalse(CarrierCatalog.isValidHermesParcelNumber("12345678901234"))
+        XCTAssertFalse(CarrierCatalog.isValidHermesParcelNumber("19999999999980"))
         XCTAssertTrue(catalog.detect("12345678901231").candidates.contains(.hermesDe))
-        XCTAssertFalse(catalog.detect("12345678901234").candidates.contains(.hermesDe))
-        XCTAssertFalse(catalog.detect("12345678901234").candidates.contains(.glsCh))
+        XCTAssertFalse(catalog.detect("19999999999980").candidates.contains(.hermesDe))
+        XCTAssertFalse(catalog.detect("19999999999980").candidates.contains(.glsCh))
 
-        XCTAssertTrue(CarrierCatalog.isValidGlsParcelNumber("123456789011"))
+        XCTAssertTrue(CarrierCatalog.isValidGlsParcelNumber("123459999981"))
         XCTAssertFalse(CarrierCatalog.isValidGlsParcelNumber("123456789012"))
-        XCTAssertTrue(catalog.detect("123456789011").candidates.contains(.glsDe))
+        XCTAssertTrue(catalog.detect("123459999981").candidates.contains(.glsDe))
         XCTAssertFalse(catalog.detect("123456789012").candidates.contains(.glsDe))
         XCTAssertTrue(catalog.detect("12345678901").candidates.contains(.glsDe))
 
@@ -1537,7 +1537,7 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(swissDepot.confidence, .low)
         XCTAssertEqual(swissDepot.preferred, [.dpd])
         XCTAssertEqual(swissDepot.candidates.first, .dpd)
-        XCTAssertEqual(catalog.detect("10000000000001").candidates.first, .dpdFr)
+        XCTAssertEqual(catalog.detect("10009999999980").candidates.first, .dpdFr)
         XCTAssertFalse(catalog.detect("06460000000002").preferred.contains(.dpd))
     }
 
@@ -1570,10 +1570,10 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(dynamic.recognitionCandidates(for: "FX12375678"), [futureExpress])
 
         // A check this build knows still selects a carrier and rejects a mistyped number.
-        XCTAssertEqual(CarrierCatalog.checksumPasses("s10", "RA123456785CH"), true)
+        XCTAssertEqual(CarrierCatalog.checksumPasses("s10", "RA999999987CH"), true)
         XCTAssertEqual(CarrierCatalog.checksumPasses("s10", "RA123456789CH"), false)
-        XCTAssertEqual(dynamic.detect("RA123456785CH").carrier, .internationalPost)
-        XCTAssertEqual(dynamic.detect("RA123456785CH").confidence, .high)
+        XCTAssertEqual(dynamic.detect("RA999999987CH").carrier, .internationalPost)
+        XCTAssertEqual(dynamic.detect("RA999999987CH").confidence, .high)
         XCTAssertFalse(dynamic.detect("RA123456789CH").candidates.contains(.internationalPost))
     }
 
@@ -1597,8 +1597,8 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(dynamic.recognitionCandidates(for: "1234567890"), [plain, future])
 
         // A postal number recovers the rules S10 vouches for, not one behind another check.
-        XCTAssertEqual(dynamic.detect("RA123456785CH").carrier, .internationalPost)
-        XCTAssertEqual(dynamic.recognitionCandidates(for: "RA123456785CH"), [plain])
+        XCTAssertEqual(dynamic.detect("RA999999987CH").carrier, .internationalPost)
+        XCTAssertEqual(dynamic.recognitionCandidates(for: "RA999999987CH"), [plain])
     }
 
     func testACarrierIsOnlySuggestedForANumberItsRecognitionCannotAnswer() throws {
@@ -2178,7 +2178,7 @@ extension CarrierCatalogTests {
     /// "Did you mean …?" marks the characters the suggestion changes, and only those, as the front door does.
     func testSuggestionMarksTheCharactersItChanges() {
         let cases = [
-            (typed: "LX1234567B5DE", suggestion: "LX123456785DE", marked: ["8"]),
+            (typed: "LX9999999B7DE", suggestion: "LX999999987DE", marked: ["8"]),
             (typed: "1X123456785DE", suggestion: "IX123456785DE", marked: ["I"]),
             (typed: "RR12345678SCH", suggestion: "RR123456785CH", marked: ["5"]),
             (typed: "LXZ234567B5DE", suggestion: "LX223456785DE", marked: ["2", "8"]),

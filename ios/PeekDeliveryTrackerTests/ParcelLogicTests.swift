@@ -876,7 +876,7 @@ final class ParcelLogicTests: XCTestCase {
 
     func testGeneratedRequestModelsEncodeAPIFieldNamesAndEnumValues() throws {
         let packageRequest = CreatePackageRequest(
-            trackingNumber: "99.34.123456.12345678",
+            trackingNumber: "99.34.123456.99999980",
             carrier: .swissPost,
             trackingURL: "https://service.post.ch/parcel/123"
         )
@@ -1311,7 +1311,7 @@ final class ParcelLogicTests: XCTestCase {
     }
 
     func testFiltersSearchCompactTrackingNumbers() {
-        let parcel = makeParcel(trackingNumber: "99.34.123456.12345678")
+        let parcel = makeParcel(trackingNumber: "99.34.123456.99999980")
         let result = ParcelOrganizer.visible(
             [parcel],
             query: "9934 123456",
@@ -2042,7 +2042,7 @@ final class ParcelLogicTests: XCTestCase {
             id: UUID(),
             label: label,
             carrier: "Swiss Post",
-            trackingNumber: "99.34.123456.12345678",
+            trackingNumber: "99.34.123456.99999980",
             detail: "Today",
             isOutForDelivery: outForDelivery
         )
@@ -3505,7 +3505,7 @@ extension ParcelLogicTests {
     func testACopiedTrackingNumberIsTheOneItsCarriersSiteTakes() {
         XCTAssertEqual(TrackingNumberCopy.text("1Z999AA10123456784", carrier: .ups), "1Z999AA10123456784")
         // PostLogistics prints its references with a dash, and its site searches for them so.
-        XCTAssertEqual(TrackingNumberCopy.text("12345678001", carrier: .postlogistics), "12345678-001")
+        XCTAssertEqual(TrackingNumberCopy.text("19999980001", carrier: .postlogistics), "19999980-001")
     }
 
     func testTextDroppedOnTheDeliveriesOpensAddOnlyWhenItHoldsATrackingOrOrderNumber() {

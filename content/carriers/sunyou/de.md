@@ -14,7 +14,7 @@ Ein Nummernformat veröffentlicht SunYou nicht. Die Tracking-Seite nimmt 5 bis 5
 
 | Nummer | Wem sie gehört |
 | --- | --- |
-| `SY12345678901` | SY und 11 Ziffern: SunYou. |
+| `SY99999999980` | SY und 11 Ziffern: SunYou. |
 | `SYDE123456789` | SY, zwei Buchstaben und 9 Ziffern: ebenfalls SunYou. |
 | `LP00000000000000` | LP und 14 Ziffern: eine Logistiknummer von AliExpress und Cainiao. |
 | `RR000000005CN` | Zwei Buchstaben, neun Ziffern, CN: eine Nummer von [China Post](carrier:china-post). |

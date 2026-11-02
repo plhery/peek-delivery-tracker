@@ -47,7 +47,7 @@ Así son los números de los transportistas que nombra Decathlon (cifras inventa
 
 | Transportista | El número se parece a |
 | --- | --- |
-| SEUR | 14 cifras, como `12345678901234` |
+| SEUR | 14 cifras, como `19999999999980` |
 | GLS | 10 cifras que empiezan por 1, como `1234567890` |
 | Paack | `PK` y 18 cifras, como `PK123456789012345678` |
 

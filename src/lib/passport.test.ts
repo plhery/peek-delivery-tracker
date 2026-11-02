@@ -4,7 +4,7 @@ import type { ParcelWithEvents, Stage } from '../types';
 
 /** Each scan: its stage, time, location and the country the server placed it in. */
 function parcel(id: string, scans: Array<[Stage, string, string?, string?]>, overrides: Partial<ParcelWithEvents> = {}): ParcelWithEvents {
-  return { id, label: id, syncStatus: 'ok', carrier: 'swiss-post', trackingNumber: '993412345612345678', createdAt: '2026-08-01T00:00:00Z',
+  return { id, label: id, syncStatus: 'ok', carrier: 'swiss-post', trackingNumber: '993412345699999980', createdAt: '2026-08-01T00:00:00Z',
     events: scans.map(([stage, occurredAt, location, placed], index) => ({ id: `${id}-${index}`, parcelId: id, stage, occurredAt, location, description: stage,
       ...(placed ? { place: { latitude: 0, longitude: 0, precision: 'country' as const, country: placed, name: placed } } : {}) })), ...overrides };
 }

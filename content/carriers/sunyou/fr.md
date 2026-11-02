@@ -14,7 +14,7 @@ SunYou ne publie aucun format de numéro, mais ceux qu'on voit sur son suivi ont
 
 | Numéro | Ce que c'est |
 | --- | --- |
-| `SY12345678901` | SY et 11 chiffres : SunYou. |
+| `SY99999999980` | SY et 11 chiffres : SunYou. |
 | `SYFR000000000` | SY, deux lettres et 9 chiffres : SunYou aussi. |
 | `LP00000000000000` | LP et 14 chiffres : une référence logistique d'AliExpress et Cainiao. |
 | `RR000000005CN` | Deux lettres, neuf chiffres, CN : un numéro de [China Post](carrier:china-post). |

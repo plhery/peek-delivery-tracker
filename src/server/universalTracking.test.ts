@@ -31,11 +31,11 @@ describe('universal tracking dispatch', () => {
     const gls = vi.spyOn(adapter.registry.for('gls-de')!, 'track').mockResolvedValue(expected);
     const laPoste = vi.spyOn(adapter.registry.for('delivengo')!, 'track').mockResolvedValue(expected);
     const zto = vi.spyOn(adapter.registry.for('zto')!, 'track').mockResolvedValue(expected);
-    await adapter.fetch('hermes-de', 'H1234567890123456789', null);
+    await adapter.fetch('hermes-de', 'H9999999999999999980', null);
     await adapter.fetch('gls-de', '12345678901', null, '01067');
     await adapter.fetch('delivengo', 'LD123456785FR', null);
     await adapter.fetch('zto', '730000000001', null);
-    expect(hermes).toHaveBeenCalledWith({ number: 'H1234567890123456789', trackingUrl: null, postcode: null });
+    expect(hermes).toHaveBeenCalledWith({ number: 'H9999999999999999980', trackingUrl: null, postcode: null });
     expect(gls).toHaveBeenCalledWith({ number: '12345678901', trackingUrl: null, postcode: '01067' });
     expect(laPoste).toHaveBeenCalledWith({ number: 'LD123456785FR', trackingUrl: null, postcode: null });
     expect(zto).toHaveBeenCalledWith({ number: '730000000001', trackingUrl: null, postcode: null });

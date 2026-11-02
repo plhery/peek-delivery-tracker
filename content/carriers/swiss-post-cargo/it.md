@@ -15,7 +15,7 @@ Il tracking di Swiss Post Cargo accetta il codice a barre di un singolo collo op
 | Numero | Cos'è |
 | --- | --- |
 | `00012345600000000005` | 20 cifre che iniziano con `00`: il codice a barre di un pallet o di un collo (SSCC). L'ultima cifra è di controllo. |
-| `PL-12345678` | `PL-` e 8 cifre: un riferimento cliente. |
+| `PL-99999981` | `PL-` e 8 cifre: un riferimento cliente. |
 
 Guarda nelle e-mail del negozio, poi chiedi al negozio stesso; altri posti dove cercare sono in [dove si trova il codice tracking](guide:find-tracking-number). Se il tracking non trova nulla, ricontrolla le cifre e poi chiedi al mittente.
 
@@ -67,7 +67,7 @@ Per lettere e pacchi della Posta (non Cargo) la linea della Posta Svizzera è il
 
 ## Tracciare una spedizione Swiss Post Cargo con Peek
 
-Un codice a barre di 20 cifre che inizia con `00`, con una cifra di controllo valida, appartiene a chi spedisce, non a un corriere: [Peek](/) mostra «Verifica dei servizi di tracciamento…» e indica Swiss Post Cargo solo se Swiss Post Cargo conosce il numero. Un riferimento `PL-12345678` viene chiesto a Swiss Post Cargo e a TNT Italy, i cui numeri possono avere la stessa forma. Per un altro riferimento da 6 a 40 lettere e cifre, scegli Swiss Post Cargo con «Cambia», oppure incolla un link Track & Trace di tt.swisspost-cargo.com o apv.swisspost-cargo.com. Un numero di pacco della Posta in un link così viene tracciato come Posta Svizzera.
+Un codice a barre di 20 cifre che inizia con `00`, con una cifra di controllo valida, appartiene a chi spedisce, non a un corriere: [Peek](/) mostra «Verifica dei servizi di tracciamento…» e indica Swiss Post Cargo solo se Swiss Post Cargo conosce il numero. Un riferimento `PL-99999981` viene chiesto a Swiss Post Cargo e a TNT Italy, i cui numeri possono avere la stessa forma. Per un altro riferimento da 6 a 40 lettere e cifre, scegli Swiss Post Cargo con «Cambia», oppure incolla un link Track & Trace di tt.swisspost-cargo.com o apv.swisspost-cargo.com. Un numero di pacco della Posta in un link così viene tracciato come Posta Svizzera.
 
 Peek mostra lo stato e la cronologia con il comune di ogni scansione su una mappa, con gli orari letti sull'ora di Zurigo e mostrati nel fuso orario del tuo dispositivo, e l'ora di consegna. Le diciture restano in inglese; `Loaded for Delivery` vale come in consegna. Le righe della firma e della foto confluiscono nella scansione di consegna, senza l'immagine. Peek lascia fuori il tuo nome e indirizzo e non ha data di consegna prevista, peso o punto di ritiro.
 

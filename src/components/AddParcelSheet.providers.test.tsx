@@ -311,9 +311,9 @@ describe('Amazon Logistics account-only tracking', () => {
 describe('public Amazon Shipping discovery', () => {
   it.each(['available', 'expired'] as const)('enables addition only after a matching %s result', async (amazonShippingStatus) => {
     const onAdd = vi.fn().mockResolvedValue(undefined);
-    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: 'UK0000000001', carrier: 'amazon-shipping', amazonShippingStatus });
+    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: 'UK9999999980', carrier: 'amazon-shipping', amazonShippingStatus });
     const user = userEvent.setup();
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="uk 0000-000001" />);
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={onAdd} onClose={vi.fn()} initialTrackingInput="uk 9999-999980" />);
     const button = screen.getByRole('button', { name: /^add parcel$/i });
     expect(button).toBeDisabled();
     expect(screen.getByText(/Amazon Logistics deliveries are usually tracked/)).toBeInTheDocument();
@@ -328,8 +328,8 @@ describe('public Amazon Shipping discovery', () => {
   });
 
   it('keeps retail parcels blocked after a negative response', async () => {
-    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: 'DE0000000001', carrier: 'amazon-logistics', amazonShippingStatus: 'not-found' });
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="DE0000000001" />);
+    vi.mocked(lookupCarrier).mockResolvedValue({ trackingNumber: 'DE9999999980', carrier: 'amazon-logistics', amazonShippingStatus: 'not-found' });
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="DE9999999980" />);
     await waitFor(() => expect(lookupCarrier).toHaveBeenCalledOnce());
     await waitFor(() => expect(screen.queryByText(/Checking for public/)).not.toBeInTheDocument());
     expect(screen.getByRole('button', { name: /^add parcel$/i })).toBeDisabled();
@@ -338,10 +338,10 @@ describe('public Amazon Shipping discovery', () => {
 
   it('lets the user retry an unavailable check without enabling addition', async () => {
     vi.mocked(lookupCarrier).mockRejectedValueOnce(new Error('Network unavailable')).mockResolvedValueOnce({
-      trackingNumber: 'TBA000000000001', carrier: 'amazon-shipping', amazonShippingStatus: 'available',
+      trackingNumber: 'TBA999999999980', carrier: 'amazon-shipping', amazonShippingStatus: 'available',
     });
     const user = userEvent.setup();
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="TBA000000000001" />);
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="TBA999999999980" />);
     await user.click(await screen.findByRole('button', { name: 'Check again' }));
     expect(screen.getByRole('button', { name: /^add parcel$/i })).toBeDisabled();
     await waitFor(() => expect(screen.getByRole('button', { name: /^add parcel$/i })).toBeEnabled());
@@ -358,14 +358,14 @@ describe('public Amazon Shipping discovery', () => {
   it('ignores stale confirmation when the user changes the number', async () => {
     let finish!: (value: Awaited<ReturnType<typeof lookupCarrier>>) => void;
     vi.mocked(lookupCarrier).mockReturnValueOnce(new Promise((resolve) => { finish = resolve; })).mockResolvedValue({
-      trackingNumber: 'BE0000000001', carrier: 'amazon-logistics', amazonShippingStatus: 'not-found',
+      trackingNumber: 'BE9999999980', carrier: 'amazon-logistics', amazonShippingStatus: 'not-found',
     });
     const user = userEvent.setup();
-    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="FR0000000001" />);
+    render(<AddParcelSheet apiAuth={apiAuth} onAdd={vi.fn()} onClose={vi.fn()} initialTrackingInput="FR9999999980" />);
     await waitFor(() => expect(lookupCarrier).toHaveBeenCalledOnce());
     const input = screen.getByRole('textbox', { name: /tracking number/i });
-    await user.clear(input); await user.type(input, 'BE0000000001');
-    finish({ trackingNumber: 'FR0000000001', carrier: 'amazon-shipping', amazonShippingStatus: 'available' });
+    await user.clear(input); await user.type(input, 'BE9999999980');
+    finish({ trackingNumber: 'FR9999999980', carrier: 'amazon-shipping', amazonShippingStatus: 'available' });
     await waitFor(() => expect(lookupCarrier).toHaveBeenCalledTimes(2));
     expect(screen.getByRole('button', { name: /^add parcel$/i })).toBeDisabled();
     expect(screen.getByText('Amazon Logistics')).toBeInTheDocument();

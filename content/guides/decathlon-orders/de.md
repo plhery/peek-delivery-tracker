@@ -50,10 +50,10 @@ So sehen die Nummern der Paketdienste aus, die Decathlon nennt (erfundene Beispi
 | Paketdienst | Die Nummer sieht so aus |
 | --- | --- |
 | DHL | 20 Ziffern ab `00340434`, wie `00340434100000000007`, oder `JJD` mit Buchstaben und Ziffern, wie `JJD000012345678ABC` |
-| Hermes (Deutschland) | `H` und 16 bis 19 Ziffern, wie `H1234567890123456789` |
+| Hermes (Deutschland) | `H` und 16 bis 19 Ziffern, wie `H9999999999999999980` |
 | Österreichische Post | 2 Buchstaben, 9 Ziffern und `AT`, wie `RR000000005AT`, oder 22 oder 24 Ziffern |
 | Schweizerische Post | 18 Ziffern ab `98` oder `99`, wie `990012345612345678` |
-| DPD | 14 Ziffern, wie `12345678901234` |
+| DPD | 14 Ziffern, wie `19999999999980` |
 | Planzer | 13 Ziffern ab `99990`, wie `9999012345678` |
 
 Für andere Shops: [wo du die Sendungsnummer findest](guide:find-tracking-number). Du weißt nicht, zu wem deine Nummer gehört? Gib sie hier ein:

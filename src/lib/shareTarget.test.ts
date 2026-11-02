@@ -9,19 +9,19 @@ describe('PWA share target', () => {
     window.history.replaceState({}, '', shareTargetAddress());
     const fetch = vi.fn().mockResolvedValue(new Response(JSON.stringify({
       label: 'New shoes',
-      trackingInput: 'https://service.post.ch/track\nTracking 993412345612345678',
+      trackingInput: 'https://service.post.ch/track\nTracking 993412345699999980',
     }), { status: 200, headers: { 'Content-Type': 'application/json' } }));
     vi.stubGlobal('fetch', fetch);
 
     await expect(readSharedParcel()).resolves.toEqual({ input: {
       label: 'New shoes',
-      trackingInput: 'https://service.post.ch/track\nTracking 993412345612345678',
+      trackingInput: 'https://service.post.ch/track\nTracking 993412345699999980',
     } });
     expect(fetch).toHaveBeenCalledWith('/share-target/draft', {
       cache: 'no-store',
       credentials: 'same-origin',
     });
-    expect(window.location.href).not.toContain('993412345612345678');
+    expect(window.location.href).not.toContain('993412345699999980');
   });
 
   it('ignores ordinary query strings and removes only the share marker', async () => {

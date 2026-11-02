@@ -14,7 +14,7 @@ A SunYou não publica nenhum formato de número, mas os que aparecem no seguimen
 
 | Número | De quem é |
 | --- | --- |
-| `SY12345678901` | SY e 11 algarismos: SunYou. |
+| `SY99999999980` | SY e 11 algarismos: SunYou. |
 | `SYPT000000000` | SY, duas letras e 9 algarismos: também SunYou. |
 | `LP00000000000000` | LP e 14 algarismos: uma referência logística do AliExpress e da Cainiao. |
 | `RR000000005CN` | Duas letras, 9 algarismos e CN: um número dos [Correios da China](carrier:china-post). |

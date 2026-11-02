@@ -79,7 +79,7 @@ test('explains Amazon Logistics account tracking and blocks addition', async ({ 
 
 test('jumps through the carrier letters while the rail is held, before any release', async ({ page }) => {
   const dialog = page.getByRole('dialog', { name: 'Add a parcel' });
-  await dialog.getByLabel('Tracking number or link').fill('12345678901234');
+  await dialog.getByLabel('Tracking number or link').fill('19999999999980');
   await dialog.getByRole('button', { name: /^Detect automatically/ }).click();
   const picker = page.getByRole('dialog', { name: 'Carrier', exact: true });
   const rail = picker.getByRole('navigation', { name: 'Jump to a letter' });

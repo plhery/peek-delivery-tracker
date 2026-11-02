@@ -15,7 +15,7 @@ Das Tracking von Swiss Post Cargo akzeptiert einen Barcode für ein einzelnes St
 | Nummer | Was sie ist |
 | --- | --- |
 | `00012345600000000005` | 20 Ziffern, beginnt mit 00: der Barcode einer Palette oder eines Stücks (eine SSCC). Die letzte Ziffer ist eine Prüfziffer. |
-| `PL-12345678` | PL- und 8 Ziffern: eine Kundenreferenz. |
+| `PL-99999981` | PL- und 8 Ziffern: eine Kundenreferenz. |
 
 Schau in die E-Mails des Shops und frag sonst dort nach. Weitere Stellen zeigt [Sendungsnummer finden](guide:find-tracking-number). Findet das Tracking nichts, prüf die Ziffern und frag dann den Absender.
 
@@ -67,7 +67,7 @@ Für Briefe und Pakete der Post (nicht Cargo) gilt +41 848 888 888 (CHF 0.08 pro
 
 ## Swiss Post Cargo mit Peek verfolgen
 
-Ein 20-stelliger Barcode mit 00 am Anfang stammt vom Versender, nicht von einem bestimmten Dienst. Stimmt seine Prüfziffer, zeigt [Peek](/) deshalb „Tracking-Dienste werden geprüft…“ und nennt Swiss Post Cargo nur, wenn Swiss Post Cargo die Nummer kennt. Eine Referenz wie `PL-12345678` geht an Swiss Post Cargo und an TNT Italy, deren Nummern dieselbe Form haben können. Für andere Referenzen mit 6 bis 40 Buchstaben und Ziffern wählst du Swiss Post Cargo mit „Ändern“ oder fügst einen Track-&-Trace-Link von tt.swisspost-cargo.com oder apv.swisspost-cargo.com ein. Eine Paketnummer der Post in so einem Link wird als Post-Sendung verfolgt.
+Ein 20-stelliger Barcode mit 00 am Anfang stammt vom Versender, nicht von einem bestimmten Dienst. Stimmt seine Prüfziffer, zeigt [Peek](/) deshalb „Tracking-Dienste werden geprüft…“ und nennt Swiss Post Cargo nur, wenn Swiss Post Cargo die Nummer kennt. Eine Referenz wie `PL-99999981` geht an Swiss Post Cargo und an TNT Italy, deren Nummern dieselbe Form haben können. Für andere Referenzen mit 6 bis 40 Buchstaben und Ziffern wählst du Swiss Post Cargo mit „Ändern“ oder fügst einen Track-&-Trace-Link von tt.swisspost-cargo.com oder apv.swisspost-cargo.com ein. Eine Paketnummer der Post in so einem Link wird als Post-Sendung verfolgt.
 
 Du siehst den Status und den Verlauf mit dem Ort jedes Scans auf einer Karte und den Zeitpunkt der Zustellung. Die Uhrzeiten liest Peek als Schweizer Zeit und zeigt sie in der Zeitzone deines Geräts. Die Scan-Texte bleiben Englisch, weil die Abfrage auf Englisch läuft; `Loaded for Delivery` gilt als in Zustellung. Unterschrift und Foto gehen im Zustellscan auf, ohne das Bild. Dein Name und deine Adresse fehlen, eine voraussichtliche Zustellung, ein Gewicht oder eine Abholstelle gibt es nicht.
 

@@ -124,14 +124,14 @@ do $$
 declare parcel public.packages; changed boolean; bad text;
 begin
   perform set_config('request.jwt.claim.sub', '10000000-0000-0000-0000-000000000001', true);
-  if not public.is_valid_mondial_relay_barcode('12123456780101006623123454') then
+  if not public.is_valid_mondial_relay_barcode('12123999999999999999999987') then
     raise exception 'Published barcode checksum rejected';
   end if;
   foreach bad in array array['00000000000000000000000000', '12123456780101106623123454', '12123456780101006623123455'] loop
     if public.is_valid_mondial_relay_barcode(bad) then raise exception 'Invalid barcode accepted'; end if;
   end loop;
-  parcel := test_support.add_parcel('12123456780101006623123454', 'Public example', 'mondial-relay');
-  if parcel.dpd_postcode is not null or parcel.tracking_number <> '12123456780101006623123454' then
+  parcel := test_support.add_parcel('12123999999999999999999987', 'Public example', 'mondial-relay');
+  if parcel.dpd_postcode is not null or parcel.tracking_number <> '12123999999999999999999987' then
     raise exception 'Barcode identity or empty postcode changed';
   end if;
   changed := public.change_owned_package_carrier(parcel.id, 'unknown');
@@ -140,7 +140,7 @@ begin
   if not changed or not exists(select 1 from public.packages where id = parcel.id and carrier = 'mondial-relay' and dpd_postcode is null) then
     raise exception 'Barcode carrier edit requires postcode';
   end if;
-  foreach bad in array array['87654321', '12123456780101006623123455'] loop
+  foreach bad in array array['99999980', '12123456780101006623123455'] loop
     begin
       perform test_support.add_parcel(bad, '', 'mondial-relay');
       raise exception 'Unverified barcode or short number created without postcode';

@@ -53,7 +53,7 @@ Assim são os números das transportadoras que a Decathlon indica (algarismos in
 | CTT | Duas letras, 9 algarismos e PT, como `RR000000005PT` |
 | NACEX | 4 algarismos, barra e 8 algarismos, como `1234/12345678` |
 | Paack | `PK` e 18 algarismos, como `PK123456789012345678` |
-| DPD | 14 algarismos, como `12345678901234` |
+| DPD | 14 algarismos, como `19999999999980` |
 
 Para outras lojas: [onde encontrar o número de seguimento](guide:find-tracking-number). Não sabes o que tens? Escreve-o aqui:
 

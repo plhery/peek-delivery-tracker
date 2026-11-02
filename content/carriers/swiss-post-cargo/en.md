@@ -15,7 +15,7 @@ Swiss Post Cargo's tracker takes a barcode for one item or a reference from the 
 | Number | What it is |
 | --- | --- |
 | `00012345600000000005` | 20 digits starting `00`: a pallet or item barcode (an SSCC). The last digit is a check digit. |
-| `PL-12345678` | `PL-` and 8 digits: a customer reference. |
+| `PL-99999981` | `PL-` and 8 digits: a customer reference. |
 
 Check the shop's emails, then ask the shop. [How to find your tracking number](guide:find-tracking-number) has more places to look. If the tracker finds nothing, check the digits, then ask the sender.
 
@@ -67,7 +67,7 @@ For Swiss Post letters and parcels (not Cargo), Swiss Post's line is +41 848 888
 
 ## Tracking a Swiss Post Cargo shipment with Peek
 
-A 20-digit barcode starting `00` belongs to whoever shipped it, not to one carrier, so [Peek](/) shows "Checking tracking services…" and names Swiss Post Cargo only if Swiss Post Cargo knows the number. A `PL-12345678` reference is asked of Swiss Post Cargo and TNT Italy, whose numbers can take the same shape. For any other reference of 6 to 40 letters and digits, pick Swiss Post Cargo with "Change", or paste a tt.swisspost-cargo.com or apv.swisspost-cargo.com Track & Trace link. A Swiss Post parcel number in such a link is tracked as Swiss Post.
+A 20-digit barcode starting `00` belongs to whoever shipped it, not to one carrier, so [Peek](/) shows "Checking tracking services…" and names Swiss Post Cargo only if Swiss Post Cargo knows the number. A `PL-99999981` reference is asked of Swiss Post Cargo and TNT Italy, whose numbers can take the same shape. For any other reference of 6 to 40 letters and digits, pick Swiss Post Cargo with "Change", or paste a tt.swisspost-cargo.com or apv.swisspost-cargo.com Track & Trace link. A Swiss Post parcel number in such a link is tracked as Swiss Post.
 
 Peek shows the status and the history with the town of each scan on a map, with the delivery time. Times are read on Zurich time and shown in your device's time zone. Wordings stay in English; `Loaded for Delivery` counts as out for delivery. The signature and photo rows fold into the delivery scan, without the picture. Peek leaves out your name and address and has no expected delivery, weight or pickup point.
 

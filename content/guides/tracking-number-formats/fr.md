@@ -31,7 +31,7 @@ Voici ce que disent les transporteurs et la norme postale sur les numéros que t
 
 | Transporteur | À quoi ressemble le numéro |
 | --- | --- |
-| [La Poste](carrier:la-poste), Colissimo | dans les données de transporteurs de Peek, 13 caractères : 1 chiffre, 1 lettre et 11 chiffres (`8G12345678905`), 2 lettres et 11 chiffres, ou le format postal qui finit par `FR` ; ou 14 chiffres, suivis parfois d'un caractère de contrôle (15 caractères) |
+| [La Poste](carrier:la-poste), Colissimo | dans les données de transporteurs de Peek, 13 caractères : 1 chiffre, 1 lettre et 11 chiffres (`8G99999999983`), 2 lettres et 11 chiffres, ou le format postal qui finit par `FR` ; ou 14 chiffres, suivis parfois d'un caractère de contrôle (15 caractères) |
 | [Chronopost](carrier:chronopost) | dans les données de transporteurs de Peek, 13 caractères (2 lettres, 9 chiffres, 2 lettres), ou 15 caractères (14 chiffres et un caractère de contrôle). Un numéro de 13 caractères qui commence par `XT`, `XR`, `XU`, `XW`, `XY` ou `PZ` et finit par `FR`, ou qui finit par `TS`, `JF` ou `JB`, est Chronopost |
 | Mondial Relay | numéro de 8, 10 ou 12 chiffres, à saisir sans espace avec le code postal de destination, d'après sa page belge. Dans les données de transporteurs de Peek, celui de 10 chiffres est un code d'enseigne suivi du numéro d'expédition de 8 chiffres, celui de 12 y ajoute le rang du colis, et le code-barres de 26 chiffres de l'étiquette est reconnu comme Mondial Relay grâce à ses deux chiffres de contrôle |
 | [Colis Privé](carrier:colis-prive) | 12 caractères, lettres et chiffres, à saisir avec ton code postal |
@@ -57,7 +57,7 @@ Voici ce que disent les transporteurs et la norme postale sur les numéros que t
 
 ### Numéro qui commence par 99 ou 3232 : La Poste suisse ou bpost
 
-Un numéro de 18 chiffres qui commence par `99` vient de La Poste suisse. Son manuel des codes-barres pour les clients commerciaux le découpe en trois : `99`, la référence de La Poste ; 8 chiffres pour la licence d'affranchissement, qui identifie l'expéditeur ; puis 8 chiffres pour le numéro de l'envoi. Il est imprimé avec des points pour être plus lisible, comme `99.34.123456.12345678`.
+Un numéro de 18 chiffres qui commence par `99` vient de La Poste suisse. Son manuel des codes-barres pour les clients commerciaux le découpe en trois : `99`, la référence de La Poste ; 8 chiffres pour la licence d'affranchissement, qui identifie l'expéditeur ; puis 8 chiffres pour le numéro de l'envoi. Il est imprimé avec des points pour être plus lisible, comme `99.34.123456.99999980`.
 
 En Belgique, un numéro de 18 ou 24 chiffres qui commence par `3232`, ou de 24 chiffres qui commence par `3299`, est un code-barres bpost. Un recommandé national bpost a 30 chiffres et commence par `010` ; un recommandé international a 13 caractères et commence par `R`.
 

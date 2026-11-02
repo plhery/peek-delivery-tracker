@@ -7,7 +7,7 @@ insert into auth.sessions (id, user_id)
 values ('98000000-0000-0000-0000-000000000001', '98000000-0000-0000-0000-000000000001');
 insert into public.packages (id, user_id, tracking_number, carrier, current_stage)
 values ('98000000-0000-0000-0000-000000000002', '98000000-0000-0000-0000-000000000001',
-  'JN067614884IN', 'india-post', 'in_transit');
+  'JN999999987IN', 'india-post', 'in_transit');
 
 insert into public.tracking_events (id, package_id, stage, description, location, occurred_at, created_at, provider_event_id, raw_data)
 select ('98000000-0000-0000-0000-' || lpad(id::text, 12, '0'))::uuid,

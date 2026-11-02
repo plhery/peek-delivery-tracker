@@ -3,7 +3,7 @@ import { TrackingRouter } from './trackingRouting';
 import { NotFoundError } from 'universal-parcel-scraper';
 import * as observability from './observability';
 
-const number = 'EB000000005CN';
+const number = 'EB999999987CN';
 const now = new Date('2026-09-21T12:00:00Z');
 const history = { status: 'in_transit', current_stage: 'accepted', last_update: null,
   events: [{ local_time: '2026-09-20T10:00:00', description: 'Posting/Collection', stage: 'accepted' }] };
@@ -56,7 +56,7 @@ describe('UPU fallback routing', () => {
     expect(universal.mock.calls.some(([source]) => source === 'UPU')).toBe(false);
   });
 
-  it.each(['12345678901234', 'EB000000006CN'])('skips UPU and its lease for ineligible %s', async (tracking_number) => {
+  it.each(['19999999999980', 'EB000000006CN'])('skips UPU and its lease for ineligible %s', async (tracking_number) => {
     const { router, health, universal } = setup();
     await expect(router.fetch({ carrier: 'unknown', tracking_number }, false)).rejects.toThrow();
     expect(universal.mock.calls.map(([source]) => source)).toEqual(['ParcelsApp', 'Ship24', '17TRACK']);

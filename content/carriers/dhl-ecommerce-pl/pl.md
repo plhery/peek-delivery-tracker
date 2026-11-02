@@ -14,7 +14,7 @@ DHL nazywa go numerem listu przewozowego. Przy przesyłkach krajowych ma 11 cyfr
 
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
-| `99999999995` | 11 cyfr zakończonych cyfrą kontrolną: numer listu przewozowego. |
+| `99999999984` | 11 cyfr zakończonych cyfrą kontrolną: numer listu przewozowego. |
 | `30000000008` | Też numer listu przewozowego. Numery nie zaczynają się zawsze tą samą cyfrą: zdarzają się 1, 2 i 3. |
 
 Numer znajdziesz w e-mailu ze sklepu o wysyłce. Mój DHL śledzi kilka paczek naraz, a w menu ma też „Zwróć paczkę”: sklep może pozwolić klientom na zwroty w aplikacji.

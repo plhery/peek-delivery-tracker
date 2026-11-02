@@ -16,7 +16,7 @@ Les deux formes utilisées :
 
 | Forme | Exemple inventé |
 | --- | --- |
-| 14 chiffres | `12345678901234` |
+| 14 chiffres | `19999999999980` |
 | 24 chiffres, le code-barres complet de l'étiquette | `123456789012345678901234` |
 
 Sur la page de résultat de Ciblex, la ligne au-dessus de l'historique peut ajouter un numéro plus court et la référence de l'expéditeur entre parenthèses : ni l'un ni l'autre n'est le numéro de suivi.

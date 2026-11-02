@@ -26,7 +26,7 @@ Typed on its own, a Dachser number looks like many other carriers' numbers (digi
 | `12345678901` | 11 digits: GLS and others. |
 | `123456789012` | 12 digits: [FedEx](carrier:fedex), MRW, BRT and others. |
 | `1234567890123` | 13 digits: [La Poste](carrier:la-poste), DPD France and others. |
-| `12345678901234` | 14 digits: SEUR, DPD and others. |
+| `19999999999980` | 14 digits: SEUR, DPD and others. |
 
 If your message names Dachser, trust that over the length of the number.
 

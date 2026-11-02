@@ -302,7 +302,7 @@ test('keeps the card\u2019s map clear of a second carrier\u2019s mark', async ({
       })),
     });
     localStorage.setItem('sdt.demo.parcels.v1', JSON.stringify([
-      parcel('handed', 'Ceramic lamp', { originalCarrier: 'gls-de', originalTrackingNumber: '12345678901', trackingSource: 'swiss-post', activeTrackingNumber: '993412345612345678' }),
+      parcel('handed', 'Ceramic lamp', { originalCarrier: 'gls-de', originalTrackingNumber: '12345678901', trackingSource: 'swiss-post', activeTrackingNumber: '993412345699999980' }),
       parcel('plain', 'Desk lamp', {}),
     ]));
   });

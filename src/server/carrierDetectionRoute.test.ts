@@ -168,7 +168,7 @@ it('offers a carrier that needs a postcode so the sheet can ask for it', async (
 it.each([
   ['RR123456785FI', 'posti', ['posti', 'chronopost']],
   ['RA123456785IR', 'chronopost', ['chronopost']],
-  ['33870000000000001', 'dhl-ecommerce', ['dhl-ecommerce']],
+  ['33879999999999980', 'dhl-ecommerce', ['dhl-ecommerce']],
 ])('confirms a direct carrier for %s instead of returning the generic shape', async (number, carrier, candidates) => {
   recognize.mockImplementation(knows(carrier as string));
   expect(await (await request(number)).json()).toEqual({ trackingNumber: number, carrier, asked: candidates });
@@ -388,7 +388,7 @@ it('keeps unrelated BRT and Colis Privé answers ambiguous', async () => {
     recognized: ['brt', 'colis-prive'], asked: recognitionAskedCarriers(number) });
 });
 
-it.each(['06080000000076', '12345678901234', '12345678909', '1234567890', '12345678'])('asks the carriers the Add sheets name for %s, then the next five', async (number) => {
+it.each(['06080000000076', '19999999999980', '12345678909', '1234567890', '12345678'])('asks the carriers the Add sheets name for %s, then the next five', async (number) => {
   const response = await (await request(number)).json();
   expect(asked().slice(0, MAX_RECOGNITIONS)).toEqual(recognitionAskedCarriers(number));
   expect(asked()).toEqual(bothBatches(number));

@@ -15,7 +15,7 @@ describe('private aggregate recognition priorities', () => {
   it('loads coarse shapes and known finite carrier scores without retaining identifier characters', async () => {
     filesystem.readFileSync.mockReturnValue(JSON.stringify({ version: 1, cohorts: {
       D14: { dpd: 25, 'dhl-ecommerce-uk': 5, 'made-up-carrier': 90, brt: -1, seur: '30' },
-      '12345678901234': { dpd: 80 },
+      '19999999999980': { dpd: 80 },
       A2D9A2: { chronopost: 25 },
       D41: { dpd: 30 }, A2A2: { dpd: 30 }, D0: { dpd: 30 },
     } }));

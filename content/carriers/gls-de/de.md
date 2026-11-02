@@ -19,7 +19,7 @@ Diese Formen kennt Peek:
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
 | `12345678901` | 11 Ziffern. Passt auch zu [GLS Schweiz](carrier:gls-ch), GLS Frankreich, GLS Österreich, GLS Polen, PostLogistics und anderen. |
-| `123456789011` | 12 Ziffern, die letzte eine Prüfziffer. Passt auch zu BRT, Mondial Relay, Colis Privé und anderen. |
+| `123459999981` | 12 Ziffern, die letzte eine Prüfziffer. Passt auch zu BRT, Mondial Relay, Colis Privé und anderen. |
 | `AB123456` | 8 Zeichen aus Buchstaben und Ziffern. Passt auch zu GLS Schweiz, GLS Frankreich und Loggi. |
 | Track-ID | Sechs Buchstaben, auf der Karte. Peek liest sie wie eine Paketnummer; nimmt Peek deine nicht an, verwende die Paketnummer. |
 

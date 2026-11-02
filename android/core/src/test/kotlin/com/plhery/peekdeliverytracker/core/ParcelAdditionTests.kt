@@ -180,9 +180,9 @@ class ParcelAdditionTests {
 
     @Test
     fun aCheckDigitThatDoesNotAddUpIsAskedAboutUntilAddedAsTyped() {
-        val form = addition("LX1234567B5DE")
-        assertEquals(CheckDigitTrouble(suggestion = "LX123456785DE"), form.typo)
-        assertNull(form.copy(asTyped = "LX1234567B5DE").typo)
+        val form = addition("LX9999999B7DE")
+        assertEquals(CheckDigitTrouble(suggestion = "LX999999987DE"), form.typo)
+        assertNull(form.copy(asTyped = "LX9999999B7DE").typo)
     }
 
     @Test

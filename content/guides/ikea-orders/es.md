@@ -53,7 +53,7 @@ Así son los números de los transportistas de paquetería (cifras inventadas):
 
 | Transportista | El número se parece a |
 | --- | --- |
-| SEUR | 14 cifras, como `12345678901234` |
+| SEUR | 14 cifras, como `19999999999980` |
 | Correos | 2 letras, 9 cifras y `ES`, como `RR000000005ES`, o `PR`, 15 cifras y `C`, como `PR123456789012345C` |
 | Correos Express | 16 cifras, como `1234567890123452` |
 

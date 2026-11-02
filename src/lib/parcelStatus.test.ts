@@ -8,7 +8,7 @@ import { translateMessage } from './messages';
 function parcel(syncStatus: SyncStatus, stage: 'pending' | 'in_transit' = 'pending'): ParcelWithEvents {
   return {
     id: 'package-1',
-    trackingNumber: '993412345612345678',
+    trackingNumber: '993412345699999980',
     label: 'Coffee',
     carrier: 'swiss-post',
     createdAt: '2026-07-16T10:00:00Z',

@@ -49,7 +49,7 @@ Voici les formes que Peek reconnaît comme celles d'Amazon, ici avec des chiffre
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
 | `TBA123456789012` | Amazon : `TBA`, `TBC` ou `TBM` et 12 chiffres |
-| `FR1234567890` | Amazon en Europe : un code pays (`FR`, `BE`, `CH` et d'autres) et 10 chiffres |
+| `FR9999999981` | Amazon en Europe : un code pays (`FR`, `BE`, `CH` et d'autres) et 10 chiffres |
 | `123-1234567-1234567` | Ton numéro de commande Amazon : 3, 7 et 7 chiffres. Pas un numéro de suivi |
 | Tout le reste | Le numéro du transporteur, par exemple de Colissimo ou de Chronopost |
 

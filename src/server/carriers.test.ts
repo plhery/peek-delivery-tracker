@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { normalizeCarrierInputs } from './carriers';
 
 describe('Mondial Relay label barcode inputs', () => {
-  const barcode = '12123456780101006623123454'; // Official specification example.
+  const barcode = '12123999999999999999999987'; // Official specification example.
 
   it('accepts a verified barcode without a postcode and preserves optional legacy postcodes', () => {
     expect(normalizeCarrierInputs('mondial-relay', barcode, '', '')).toEqual({ trackingUrl: null, dpdPostcode: null });
@@ -29,9 +29,9 @@ describe('optional carrier inputs', () => {
   });
 
   it('keeps the other postcode carriers required', () => {
-    expect(() => normalizeCarrierInputs('gls-ch', '993990103198', '', '')).toThrow('postcode');
+    expect(() => normalizeCarrierInputs('gls-ch', '999999999916', '', '')).toThrow('postcode');
     expect(() => normalizeCarrierInputs('gls-de', '123456789018', '', '')).toThrow('postcode');
-    expect(() => normalizeCarrierInputs('heppner', '23456789', '', '')).toThrow('postcode');
+    expect(() => normalizeCarrierInputs('heppner', '99999980', '', '')).toThrow('postcode');
     expect(() => normalizeCarrierInputs('ups', '1Z999AA10123456784', '', '8000')).toThrow('not used');
   });
 });

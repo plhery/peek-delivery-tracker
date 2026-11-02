@@ -18,7 +18,7 @@ DPD's own pages don't describe the number's format. The parcel numbers seen on D
 | --- | --- |
 | `15501234567890` | A DPD UK parcel number: 14 digits starting `1550`. |
 | `15501234567890Q` | The same number with DPD's check character on the end. |
-| `12345678901234` | Any other 14 digits: could be DPD UK, another DPD country or another carrier. |
+| `19999999999980` | Any other 14 digits: could be DPD UK, another DPD country or another carrier. |
 
 Other DPD countries also use 14 digits, and so do [DHL eCommerce UK](carrier:dhl-ecommerce-uk), SEUR and BRT, so the digits alone don't prove who has your parcel. DPD's messages do: its SMS now comes from "DPD UK" (or "DPD Local" or "DPDgroup UK"), with the shop's name in the text. DPD Local is DPD's sister brand. In Ireland, parcels go with [DPD Ireland](carrier:dpd-ie), which has its own numbers.
 

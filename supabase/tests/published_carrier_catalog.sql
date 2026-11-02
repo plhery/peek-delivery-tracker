@@ -22,7 +22,7 @@ begin
       raise exception 'Catalog carrier could not be selected';
     end if;
   end loop;
-  select * into parcel from test_support.add_parcel('12345678901234', '', 'dpd-de', null, '00007');
+  select * into parcel from test_support.add_parcel('19999999999980', '', 'dpd-de', null, '00007');
   if parcel.dpd_postcode <> '00007' then raise exception 'Leading-zero postcode was lost'; end if;
   perform public.change_owned_package_carrier(parcel.id, 'dpd-de', null, null);
   if (select dpd_postcode from public.packages where id = parcel.id) is not null then

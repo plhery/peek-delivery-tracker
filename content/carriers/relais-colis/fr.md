@@ -16,7 +16,7 @@ Le formulaire de suivi demande un « numéro de colis » de 12 à 16 caractères
 | --- | --- |
 | `CC1234567890` à `CC12345678901234` | `CC` puis 10 à 14 chiffres : la forme de l'exemple de Relais Colis. |
 | `1234567890` | 10 chiffres. Correspond aussi à DHL, [Mondial Relay](carrier:mondial-relay), TIPSA et d'autres. |
-| `12345678901234` | 14 chiffres. Correspond aussi à DPD, SEUR, BRT, [Ciblex](carrier:ciblex) et d'autres. |
+| `19999999999980` | 14 chiffres. Correspond aussi à DPD, SEUR, BRT, [Ciblex](carrier:ciblex) et d'autres. |
 | `VD1234567890` | `VD` puis 10 chiffres. Correspond aussi à [Colis Privé](carrier:colis-prive). |
 
 **Où le chercher.** Pour un colis entre particuliers, Relais Colis envoie au destinataire un e-mail de confirmation qui permet de suivre le colis ; l'expéditeur, lui, retrouve le numéro dans son compte, rubrique « Mes Commandes ». Pour une commande en ligne, regarde l'e-mail d'expédition de la boutique ou la page de ta commande.

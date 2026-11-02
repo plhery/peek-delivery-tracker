@@ -10,7 +10,7 @@ insert into public.packages (
 ) values (
   '81000000-0000-0000-0000-000000000081',
   '10000000-0000-0000-0000-000000000001',
-  'JN067614884IN',
+  'JN999999987IN',
   'India Post migration fixture',
   'intl-post',
   'in_transit',

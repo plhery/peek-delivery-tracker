@@ -15,7 +15,7 @@ Le suivi de Swiss Post Cargo accepte le code à barres d'une palette ou d'un col
 | Numéro | Ce que c'est |
 | --- | --- |
 | `00012345600000000005` | 20 chiffres commençant par `00` : le code à barres d'une palette ou d'un colis (un SSCC). Le dernier chiffre est un chiffre de contrôle. |
-| `PL-12345678` | `PL-` suivi de 8 chiffres : une référence client. |
+| `PL-99999981` | `PL-` suivi de 8 chiffres : une référence client. |
 
 Regarde les e-mails de la boutique, puis demande-lui. [Où trouver son numéro de suivi](guide:find-tracking-number) donne d'autres pistes. Si le suivi ne trouve rien, vérifie les chiffres, puis demande à l'expéditeur.
 
@@ -67,7 +67,7 @@ Pour les lettres et colis de la Poste (pas Cargo), la ligne de la Poste est le +
 
 ## Suivre un envoi Swiss Post Cargo avec Peek
 
-Un code à barres de 20 chiffres commençant par `00` appartient à l'expéditeur, pas à un transporteur : [Peek](/) affiche « Vérification des services de suivi… » et ne nomme Swiss Post Cargo que si celui-ci connaît le numéro. Une référence `PL-12345678` est demandée à Swiss Post Cargo et à TNT Italy, dont les numéros peuvent avoir la même forme. Pour une autre référence de 6 à 40 lettres et chiffres, choisis Swiss Post Cargo avec « Changer », ou colle un lien Track & Trace de tt.swisspost-cargo.com ou apv.swisspost-cargo.com. Un numéro de colis de la Poste dans un tel lien est suivi comme un colis de la Poste.
+Un code à barres de 20 chiffres commençant par `00` appartient à l'expéditeur, pas à un transporteur : [Peek](/) affiche « Vérification des services de suivi… » et ne nomme Swiss Post Cargo que si celui-ci connaît le numéro. Une référence `PL-99999981` est demandée à Swiss Post Cargo et à TNT Italy, dont les numéros peuvent avoir la même forme. Pour une autre référence de 6 à 40 lettres et chiffres, choisis Swiss Post Cargo avec « Changer », ou colle un lien Track & Trace de tt.swisspost-cargo.com ou apv.swisspost-cargo.com. Un numéro de colis de la Poste dans un tel lien est suivi comme un colis de la Poste.
 
 Peek affiche le statut et l'historique, avec la localité de chaque scan sur une carte, et l'heure de livraison ; les heures, lues à l'heure de Zurich, s'affichent dans le fuseau horaire de ton appareil. Peek interroge le suivi en anglais : les étapes y gardent donc leurs libellés anglais, comme `Data entry POST` ou `DELIVERED SCANNED`, et `Loaded for Delivery` compte comme en cours de livraison. Les lignes signature et photo rejoignent le scan de livraison, sans l'image. Peek laisse de côté ton nom et ton adresse, et n'a ni date de livraison prévue, ni poids, ni point de retrait.
 

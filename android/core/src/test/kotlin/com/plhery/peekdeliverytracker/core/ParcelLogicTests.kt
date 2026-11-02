@@ -771,7 +771,7 @@ class ParcelLogicTests {
     @Test
     fun generatedRequestModelsEncodeApiFieldNamesAndEnumValues() {
         val packageRequest = CreatePackageRequest(
-            trackingNumber = "99.34.123456.12345678",
+            trackingNumber = "99.34.123456.99999980",
             carrier = CarrierId.SwissPost,
             trackingUrl = "https://service.post.ch/parcel/123",
         )
@@ -1231,7 +1231,7 @@ class ParcelLogicTests {
 
     @Test
     fun filtersSearchCompactTrackingNumbers() {
-        val parcel = makeParcel(trackingNumber = "99.34.123456.12345678")
+        val parcel = makeParcel(trackingNumber = "99.34.123456.99999980")
         val result = ParcelOrganizer.visible(
             listOf(parcel),
             query = "9934 123456",

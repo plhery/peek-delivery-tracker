@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-10-27
 ---
 
-Buchstaben und Länge einer Sendungsnummer verraten oft, welcher Paketdienst dein Paket hat. Beginnt sie mit `1Z` und hat 18 Zeichen, ist es UPS. 18 Ziffern ab `99`, gedruckt wie `99.34.123456.12345678`, kommen von der [Schweizerischen Post](carrier:swiss-post), und 13 Zeichen wie `RR000000005CH` (zwei Buchstaben, neun Ziffern, zwei Buchstaben) stammen meist von einer nationalen Post, deren Land in den letzten zwei Buchstaben steht. Schwierig wird es bei reinen Ziffern: 10, 14 oder 22 Stellen passen jeweils zu mehreren Paketdiensten. Dann entscheidet die Versandmail oder ein Tracker, der die infrage kommenden Paketdienste durchprobiert.
+Buchstaben und Länge einer Sendungsnummer verraten oft, welcher Paketdienst dein Paket hat. Beginnt sie mit `1Z` und hat 18 Zeichen, ist es UPS. 18 Ziffern ab `99`, gedruckt wie `99.34.123456.99999980`, kommen von der [Schweizerischen Post](carrier:swiss-post), und 13 Zeichen wie `RR000000005CH` (zwei Buchstaben, neun Ziffern, zwei Buchstaben) stammen meist von einer nationalen Post, deren Land in den letzten zwei Buchstaben steht. Schwierig wird es bei reinen Ziffern: 10, 14 oder 22 Stellen passen jeweils zu mehreren Paketdiensten. Dann entscheidet die Versandmail oder ein Tracker, der die infrage kommenden Paketdienste durchprobiert.
 
 :::checker
 :::
@@ -42,7 +42,7 @@ Das schreiben die Paketdienste selbst und der internationale Poststandard über 
 | [GLS Schweiz](carrier:gls-ch) | kein Format veröffentlicht, auch nicht von der Schweizerischen Post, die GLS-Pakete dort zustellt. In Peeks Paketdienst-Daten dieselben Formen wie bei GLS Deutschland |
 | [UPS](carrier:ups) | `1Z` plus 16 Buchstaben und Ziffern, 18 Zeichen insgesamt, etwa `1Z999AA10123456784`, ein Beispiel mit gültiger UPS-Prüfziffer |
 | [Österreichische Post](carrier:austrian-post) | 22 Ziffern ab `10` oder das Postformat aus zwei Buchstaben, neun Ziffern und `AT` |
-| Schweizerische Post | 18 Ziffern ab `98` oder `99`, mit oder ohne Punkte und Leerzeichen: die Barcode-Nummer für Sendungen innerhalb der Schweiz, auf Paketen von Geschäftskunden gedruckt wie `99.34.123456.12345678`; oder das Postformat mit `CH` am Ende |
+| Schweizerische Post | 18 Ziffern ab `98` oder `99`, mit oder ohne Punkte und Leerzeichen: die Barcode-Nummer für Sendungen innerhalb der Schweiz, auf Paketen von Geschäftskunden gedruckt wie `99.34.123456.99999980`; oder das Postformat mit `CH` am Ende |
 | [Quickpac](carrier:quickpac) | 18 Ziffern, sagt Quickpac, aber nicht, wie sie beginnen. In Peeks Paketdienst-Daten: ab `44` |
 | [Planzer](carrier:planzer) | kein Format veröffentlicht. In Peeks Paketdienst-Daten 20 Ziffern ab `91346097`, eine geteilte Planzer-Sendung 13 Ziffern ab `99990` |
 | Amazon | in Peeks Paketdienst-Daten `TBA`, `TBC` oder `TBM` plus 12 Ziffern oder ein Ländercode plus 10 Ziffern, mehr dazu weiter unten |

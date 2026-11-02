@@ -14,7 +14,7 @@ Los números de SEUR suelen tener 14 o 21 cifras, y un código de 7 cifras tambi
 
 | Número | Qué es |
 | --- | --- |
-| `12345678901234` | 14 cifras |
+| `19999999999980` | 14 cifras |
 | `123456789012345678901` | 21 cifras |
 | `1234567` | 7 cifras |
 

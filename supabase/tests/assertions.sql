@@ -425,7 +425,7 @@ select test_support.add_parcel(
 );
 
 select test_support.add_parcel(
-  '250123456789012', 'DPD France parcel', 'dpd-fr', null, null
+  '250999999999980', 'DPD France parcel', 'dpd-fr', null, null
 );
 
 select test_support.add_parcel(
@@ -433,7 +433,7 @@ select test_support.add_parcel(
 );
 
 select test_support.add_parcel(
-  'CC200000000401', 'Relais Colis parcel', 'relais-colis', null, null
+  'CC299999999980', 'Relais Colis parcel', 'relais-colis', null, null
 );
 
 select test_support.add_parcel(
@@ -441,7 +441,7 @@ select test_support.add_parcel(
 );
 
 select test_support.add_parcel(
-  'PZ123456785JF', 'Chronopost parcel', 'chronopost', null, null
+  'PZ999999987JF', 'Chronopost parcel', 'chronopost', null, null
 );
 
 select test_support.add_parcel(
@@ -461,7 +461,7 @@ select test_support.add_parcel(
 );
 
 select test_support.add_parcel(
-  '993990103198', 'GLS Switzerland parcel', 'gls-ch', null, '8000'
+  '999999999916', 'GLS Switzerland parcel', 'gls-ch', null, '8000'
 );
 
 select test_support.add_parcel(
@@ -473,11 +473,11 @@ select test_support.add_parcel(
 );
 
 select test_support.add_parcel(
-  '23456789', 'Heppner shipment', 'heppner', null, '75001'
+  '99999980', 'Heppner shipment', 'heppner', null, '75001'
 );
 
 select test_support.add_parcel(
-  '12345678901234', 'Ciblex parcel', 'ciblex', null, null
+  '19999999999980', 'Ciblex parcel', 'ciblex', null, null
 );
 
 select test_support.add_parcel(
@@ -485,18 +485,18 @@ select test_support.add_parcel(
 );
 
 select test_support.add_parcel(
-  'ASE12345678', 'Asendia parcel link', 'asendia', null, null
+  'ASE99999980', 'Asendia parcel link', 'asendia', null, null
 );
 
 select test_support.add_parcel(
-  'RR000000005IN', 'India Post parcel', 'india-post', null, null
+  'RR999999987IN', 'India Post parcel', 'india-post', null, null
 );
 
 select test_support.add_parcel(
-  '9010000001234',
+  '9019999999986',
   'Dachser parcel',
   'dachser',
-  'https://customeriberia.dachser.com/customerarea/utilidades/seguimiento-publico/detalle?cliente=generico&numeroUnico=9010000001234&fecha=20260513&clave=TESTKEY9',
+  'https://customeriberia.dachser.com/customerarea/utilidades/seguimiento-publico/detalle?cliente=generico&numeroUnico=9019999999986&fecha=20260513&clave=TESTKEY9',
   null
 );
 
@@ -547,7 +547,7 @@ begin
 
   if not exists (
     select 1 from public.packages
-    where tracking_number = '993990103198'
+    where tracking_number = '999999999916'
       and carrier = 'gls-ch'
       and dpd_postcode = '8000'
       and user_id = '10000000-0000-0000-0000-000000000001'
@@ -557,7 +557,7 @@ begin
 
   if not exists (
     select 1 from public.packages
-    where tracking_number = '23456789'
+    where tracking_number = '99999980'
       and carrier = 'heppner'
       and dpd_postcode = '75001'
       and user_id = '10000000-0000-0000-0000-000000000001'
@@ -589,11 +589,11 @@ begin
     from public.packages
     where user_id = '10000000-0000-0000-0000-000000000001'
       and (tracking_number, carrier) in (
-        ('250123456789012', 'dpd-fr'),
+        ('250999999999980', 'dpd-fr'),
         ('76434219', 'mondial-relay'),
-        ('CC200000000401', 'relais-colis'),
+        ('CC299999999980', 'relais-colis'),
         ('8G12345678901', 'la-poste'),
-        ('PZ123456785JF', 'chronopost'),
+        ('PZ999999987JF', 'chronopost'),
         ('00AB12CD', 'gls-fr'),
         ('99112233445575012', 'colis-prive'),
         ('1G1234567890', 'geodis')
@@ -608,14 +608,14 @@ begin
     where user_id = '10000000-0000-0000-0000-000000000001'
       and (tracking_number, carrier) in (
         ('1234ABC789', 'swiss-post-cargo'),
-        ('993990103198', 'gls-ch'),
+        ('999999999916', 'gls-ch'),
         ('12345678', 'colisweb'),
         ('FGRC45BKLM', 'c-chez-vous'),
-        ('23456789', 'heppner'),
-        ('12345678901234', 'ciblex'),
+        ('99999980', 'heppner'),
+        ('19999999999980', 'ciblex'),
         ('PAACK12345', 'paack'),
-        ('ASE12345678', 'asendia'),
-        ('RR000000005IN', 'india-post')
+        ('ASE99999980', 'asendia'),
+        ('RR999999987IN', 'india-post')
       )
   ) <> 9 then
     raise exception 'regional carrier identifiers were not accepted by the package RPC';
@@ -623,7 +623,7 @@ begin
 
   if not exists (
     select 1 from public.packages
-    where tracking_number = '9010000001234'
+    where tracking_number = '9019999999986'
       and carrier = 'dachser'
       and tracking_url like 'https://customeriberia.dachser.com/%'
       and user_id = '10000000-0000-0000-0000-000000000001'
@@ -2160,7 +2160,7 @@ begin
     raise exception 'Accepted a change to GLS Switzerland without a postcode' using errcode = 'P0002';
   exception when invalid_parameter_value then null; end;
   begin
-    perform test_support.add_parcel('993990103198', '', 'gls-ch', null, null);
+    perform test_support.add_parcel('999999999916', '', 'gls-ch', null, null);
     raise exception 'Accepted a GLS Switzerland parcel without a postcode' using errcode = 'P0002';
   exception when invalid_parameter_value then null; end;
 

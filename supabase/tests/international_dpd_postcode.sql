@@ -37,7 +37,7 @@ begin
     raise exception 'Accepted a foreign postcode for DPD Germany' using errcode = 'P0002';
   exception when invalid_parameter_value then null; end;
   begin
-    perform test_support.add_parcel('993990103198', '', 'gls-ch', null, '75001');
+    perform test_support.add_parcel('999999999916', '', 'gls-ch', null, '75001');
     raise exception 'Accepted a French postcode for GLS Switzerland' using errcode = 'P0002';
   exception when invalid_parameter_value then null; end;
 end;

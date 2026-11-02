@@ -48,7 +48,7 @@ class CarrierChangeTests {
             assertEquals("Peek finds the carrier for you.", change.hint(localizer))
         }
         // An Amazon number is tracked through Amazon Shipping alone: no automatic detection.
-        val amazon = start(parcel(CarrierId.Unknown, number = "FR1234567890"))
+        val amazon = start(parcel(CarrierId.Unknown, number = "FR9999999981"))
         assertEquals(CarrierId.Unknown, amazon.chosenCarrier)
         assertNull(amazon.automaticCarrier)
         assertFalse(amazon.automatic)

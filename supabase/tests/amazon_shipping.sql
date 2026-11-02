@@ -6,15 +6,15 @@ set local role authenticated;
 do $$
 declare parcel public.packages;
 begin
-  parcel := test_support.add_parcel('UK0000000001', 'Shipping', 'amazon-shipping');
+  parcel := test_support.add_parcel('UK9999999980', 'Shipping', 'amazon-shipping');
   if parcel.carrier <> 'amazon-shipping' then raise exception 'Shipping carrier was lost'; end if;
   perform public.change_owned_package_carrier(parcel.id, 'amazon-logistics');
   perform public.change_owned_package_carrier(parcel.id, 'amazon-shipping');
   if (select carrier from public.packages where id = parcel.id) <> 'amazon-shipping' then
     raise exception 'Shipping carrier change failed';
   end if;
-  parcel := test_support.add_parcel('TBA000000000001', 'US Shipping', 'amazon-shipping');
-  if parcel.tracking_number <> 'TBA000000000001' then raise exception 'US number was changed'; end if;
+  parcel := test_support.add_parcel('TBA999999999980', 'US Shipping', 'amazon-shipping');
+  if parcel.tracking_number <> 'TBA999999999980' then raise exception 'US number was changed'; end if;
 end;
 $$;
 rollback;

@@ -37,7 +37,7 @@ begin
   end loop;
 
   -- Mondial Relay's 10- and 12-digit forms and its label barcodes need none.
-  foreach number in array array['1276434222', '127643422301', '12123456780101006623123454'] loop
+  foreach number in array array['1276434222', '127643422301', '12123999999999999999999987'] loop
     select * into parcel from test_support.add_parcel(number, '', 'mondial-relay');
     if parcel.dpd_postcode is not null then raise exception 'Mondial Relay % kept a postcode', number; end if;
     perform public.change_owned_package_carrier(parcel.id, 'mondial-relay', null, '1000');
@@ -48,7 +48,7 @@ begin
 
   -- Heppner keeps its Swiss or French shape.
   begin
-    perform test_support.add_parcel('23456789', '', 'heppner', null, '1012 AB');
+    perform test_support.add_parcel('99999980', '', 'heppner', null, '1012 AB');
     raise exception 'Accepted a Dutch postcode for Heppner' using errcode = 'P0002';
   exception when invalid_parameter_value then null; end;
 end;

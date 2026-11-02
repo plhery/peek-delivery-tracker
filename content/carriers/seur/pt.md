@@ -14,7 +14,7 @@ Os números da SEUR costumam ter 14 ou 21 algarismos, e um código de 7 também 
 
 | Número | O que é |
 | --- | --- |
-| `12345678901234` | 14 dígitos, forma partilhada com a DPD, a BRT e outras. |
+| `19999999999980` | 14 dígitos, forma partilhada com a DPD, a BRT e outras. |
 | `123456789012345678901` | 21 dígitos: só a SEUR. |
 | `1234567` | 7 dígitos: só a SEUR. |
 | `12345678901234567890123` | 23 dígitos: não é da SEUR, é da [Correos Express](carrier:correos-express). |

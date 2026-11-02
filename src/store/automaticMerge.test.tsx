@@ -13,7 +13,7 @@ function Collection({ refreshId }: { refreshId: string }) {
 describe('automatic parcel merge', () => {
   it.each(['origin', 'delivery'])('replaces both entries after refreshing %s', async (refreshId) => {
     const origin: ParcelWithEvents = {
-      id: 'origin', label: 'GLS', carrier: 'gls-de', trackingNumber: '123456789011',
+      id: 'origin', label: 'GLS', carrier: 'gls-de', trackingNumber: '123459999981',
       createdAt: '2026-09-01', syncStatus: 'ok', events: [],
     };
     const delivery: ParcelWithEvents = { ...origin, id: 'delivery', label: 'Post', carrier: 'swiss-post' };

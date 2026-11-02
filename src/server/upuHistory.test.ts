@@ -7,7 +7,7 @@ import type { SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
 import * as observability from './observability';
 
-const number = 'EB000000005CN';
+const number = 'EB999999987CN';
 const now = new Date('2026-09-21T12:00:00Z');
 const scan = (EventCd: string, EventNm: string, EventDT: string) => ({ EventCd, EventNm, EventDT });
 const first = scan('EMA', 'Posting/Collection', '2026-09-18T10:00:00Z');

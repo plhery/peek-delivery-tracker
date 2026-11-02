@@ -312,7 +312,7 @@ describe('looking up a parcel without an account', () => {
     [{ trackingNumber: 'ABCDE' }, 'Tracking numbers use letters and numbers and include a digit, unless a carrier issues them as letters alone'],
     [{ trackingNumber, carrier: 'not-a-carrier' }, 'Choose a supported carrier'],
     [{ trackingNumber, carrier: 'gls-ch' }, expect.stringContaining('postcode')],
-    [{ trackingNumber: 'TBA000000000001', carrier: 'amazon-logistics' }, AMAZON_ACCOUNT_MESSAGE],
+    [{ trackingNumber: 'TBA999999999980', carrier: 'amazon-logistics' }, AMAZON_ACCOUNT_MESSAGE],
   ])('rejects %j like the signed-in route, before counting a lookup', async (body, error) => {
     const claim = allow();
     const create = store();

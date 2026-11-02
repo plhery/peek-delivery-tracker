@@ -114,11 +114,11 @@ describe('createDemoRepo', () => {
   it('adds a parcel as pending until the carrier announces it', async () => {
     const repo = createDemoRepo(window.localStorage);
     const parcel = await repo.add({
-      trackingNumber: '99.34.123456.12345678',
+      trackingNumber: '99.34.123456.99999980',
       label: 'Chocolate 🍫',
     });
 
-    expect(parcel.trackingNumber).toBe('993412345612345678');
+    expect(parcel.trackingNumber).toBe('993412345699999980');
     expect(parcel.carrier).toBe('swiss-post');
     expect(parcel.events).toHaveLength(1);
     expect(parcel.events[0].stage).toBe('pending');
@@ -187,19 +187,19 @@ describe('createDemoRepo', () => {
 
   it('automatically selects Quickpac for parcel numbers starting with 44', async () => {
     const parcel = await createDemoRepo(window.localStorage).add({
-      trackingNumber: '44.00.123456.12345678',
+      trackingNumber: '44.99.999999.99999980',
       label: 'Quickpac parcel',
     });
 
-    expect(parcel.trackingNumber).toBe('440012345612345678');
+    expect(parcel.trackingNumber).toBe('449999999999999980');
     expect(parcel.carrier).toBe('quickpac');
   });
 
   it('keeps a Planzer shared tracking URL', async () => {
     const trackingUrl =
-      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.03316119?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
+      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.99999987?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
     const parcel = await createDemoRepo(window.localStorage).add({
-      trackingNumber: '999.90.03316119',
+      trackingNumber: '999.90.99999987',
       label: 'Plants',
       trackingUrl,
     });

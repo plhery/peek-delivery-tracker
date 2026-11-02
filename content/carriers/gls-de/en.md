@@ -17,7 +17,7 @@ Peek knows these shapes:
 | Number (invented) | What it is |
 | --- | --- |
 | `11111111111` | 11 digits. Also fits [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Austria, GLS Poland, PostLogistics and others. |
-| `123456789011` | 12 digits, the last a check digit. Also fits [BRT](carrier:brt), [Mondial Relay](carrier:mondial-relay), Colis Privé and others. |
+| `123459999981` | 12 digits, the last a check digit. Also fits [BRT](carrier:brt), [Mondial Relay](carrier:mondial-relay), Colis Privé and others. |
 | `AB123456` | 8 letters and digits. Also fits GLS Switzerland, GLS France and Loggi. |
 | Track-ID | Six letters, on the notification card. Peek reads it like a parcel number; if it doesn't take yours, use the parcel number. |
 

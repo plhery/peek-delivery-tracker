@@ -27,7 +27,7 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks(); vi.clearAllMocks(); vi.unstubAllEnvs(); });
 
 describe('Amazon public tracking eligibility', () => {
-  it.each(['FR0000000001', 'DE0000000001', 'BE0000000001', 'UK0000000001', 'TBA000000000001'])('leaves %s blocked without logging an expected absence', async (trackingNumber) => {
+  it.each(['FR9999999980', 'DE9999999980', 'BE9999999980', 'UK9999999980', 'TBA999999999980'])('leaves %s blocked without logging an expected absence', async (trackingNumber) => {
     const fetch = vi.mocked(scraper.amazonShippingEligibility).mockResolvedValue('not-found');
     const report = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
     const response = await detect(request({ trackingNumber }), context);
@@ -39,21 +39,21 @@ describe('Amazon public tracking eligibility', () => {
     const fetch = vi.mocked(scraper.amazonShippingEligibility);
     if (status === 'expired') fetch.mockResolvedValue('expired');
     else fetch.mockResolvedValue('available');
-    expect(await (await detect(request({ trackingNumber: 'FR0000000001' }), context)).json())
-      .toEqual({ trackingNumber: 'FR0000000001', carrier: 'amazon-shipping', amazonShippingStatus: status });
+    expect(await (await detect(request({ trackingNumber: 'FR9999999980' }), context)).json())
+      .toEqual({ trackingNumber: 'FR9999999980', carrier: 'amazon-shipping', amazonShippingStatus: status });
   });
   it('keeps outages distinct from retail results and reports the actual error', async () => {
     const error = new Error('Timed out');
     vi.mocked(scraper.amazonShippingEligibility).mockRejectedValue(error);
     const report = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
-    expect(await (await detect(request({ trackingNumber: 'FR0000000001' }), context)).json())
+    expect(await (await detect(request({ trackingNumber: 'FR9999999980' }), context)).json())
       .toMatchObject({ carrier: 'amazon-logistics', amazonShippingStatus: 'unavailable' });
     expect(report).toHaveBeenCalledWith(error, expect.objectContaining({ operation: 'eligibility' }));
   });
   it('does not accept a forged Shipping selection', async () => {
     vi.mocked(scraper.amazonShippingEligibility).mockResolvedValue('not-found');
     const create = vi.spyOn(SupabaseServiceClient.prototype, 'createAccountPackage');
-    const response = await add(request({ trackingNumber: 'FR0000000001', carrier: 'amazon-shipping' }, '/api/packages'), context);
+    const response = await add(request({ trackingNumber: 'FR9999999980', carrier: 'amazon-shipping' }, '/api/packages'), context);
     expect(response.status).toBe(400);
     expect(create).not.toHaveBeenCalled();
   });
@@ -63,9 +63,9 @@ describe('Amazon public tracking eligibility', () => {
     vi.spyOn(SupabaseUserClient.prototype, 'getPackage').mockResolvedValue({ id: packageId, carrier: 'amazon-shipping' });
     vi.spyOn(SupabaseServiceClient.prototype, 'updatePackage').mockResolvedValue(undefined);
     vi.spyOn(SupabaseServiceClient.prototype, 'enqueueSyncJob').mockResolvedValue({ row: { id: 'job' }, queued: true });
-    const response = await add(request({ trackingNumber: 'FR0000000001', carrier: 'amazon-shipping' }, '/api/packages'), context);
+    const response = await add(request({ trackingNumber: 'FR9999999980', carrier: 'amazon-shipping' }, '/api/packages'), context);
     expect(response.status).toBe(201);
-    expect(fetch).toHaveBeenCalledWith('FR0000000001');
-    expect(create).toHaveBeenCalledWith(userId, 'FR0000000001', '', 'amazon-shipping', null, null);
+    expect(fetch).toHaveBeenCalledWith('FR9999999980');
+    expect(create).toHaveBeenCalledWith(userId, 'FR9999999980', '', 'amazon-shipping', null, null);
   });
 });

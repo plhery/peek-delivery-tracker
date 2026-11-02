@@ -19,16 +19,16 @@ function deviceIn(timeZone: string) {
 
 describe('shipment details', () => {
   it('shows the PostLogistics dash after the stored number has been normalized', () => {
-    show({ carrier: 'postlogistics', trackingNumber: '12345678001' });
-    expect(screen.getByText('12345678-001')).toBeInTheDocument();
+    show({ carrier: 'postlogistics', trackingNumber: '19999980001' });
+    expect(screen.getByText('19999980-001')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /PostLogistics/ })).toHaveAttribute(
-      'href', parcelTrackingLinks({ carrier: 'postlogistics', trackingNumber: '12345678001' })[0].url,
+      'href', parcelTrackingLinks({ carrier: 'postlogistics', trackingNumber: '19999980001' })[0].url,
     );
   });
 
   it('shows a parcel handed to a second carrier with both marks, who delivers, and each website under its number', () => {
     const handed = { carrier: 'gls-de', trackingNumber: '12345678901', originalCarrier: 'gls-de', originalTrackingNumber: '12345678901',
-      trackingSource: 'swiss-post', activeTrackingNumber: '993412345612345678' } as const;
+      trackingSource: 'swiss-post', activeTrackingNumber: '993412345699999980' } as const;
     const view = show(handed);
     const change = screen.getByRole('button', { name: 'Change carrier from GLS Germany. Delivery with Swiss Post' });
     expect([...change.querySelectorAll('.carrier-mark')].map(mark => mark.getAttribute('title'))).toEqual(['GLS Germany', 'Swiss Post']);

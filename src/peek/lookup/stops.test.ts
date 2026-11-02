@@ -6,7 +6,7 @@ import { DOOR_STOPS, doorStops } from './stops';
 // Every number here is fictional.
 const UPS = '1ZDEMO202600000001';
 const SHARED = '01234564890123';
-const TYPO = 'LX1234567B5DE';
+const TYPO = 'LX9999999B7DE';
 
 const run = (events: LookupEvent[], from: LookupState = initialLookup()) => events.reduce((state, event) => lookupStep(state, event), from);
 const stops = (state: LookupState) => doorStops(state, survey(state));

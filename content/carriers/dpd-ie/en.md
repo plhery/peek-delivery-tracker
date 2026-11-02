@@ -18,7 +18,7 @@ DPD Ireland doesn't publish the number's format. The ones seen on its tracker ar
 | --- | --- |
 | `123456789` | The usual DPD Ireland number: 9 digits. |
 | `1234567890` | Now and then 10 digits. |
-| `12345678901234` | 14 digits: a DPD parcel number from [DPD UK](carrier:dpd-uk) or another DPD country, not DPD Ireland. |
+| `19999999999980` | 14 digits: a DPD parcel number from [DPD UK](carrier:dpd-uk) or another DPD country, not DPD Ireland. |
 
 Numbers this short are shared with other carriers, so the digits alone don't prove who has your parcel. DPD's email and the shop's message do.
 

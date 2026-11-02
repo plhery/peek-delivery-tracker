@@ -620,21 +620,21 @@ class AddParcelTest {
     fun aCheckDigitThatDoesNotAddUpOffersTheNumberItMayBeOrAddsItAsTyped() {
         show()
         open()
-        type("LX1234567B5DE")
+        type("LX9999999B7DE")
         leave()
         assertTrue(exists(ADD_TYPO))
-        assertEquals(text("door.typo.suggest", mapOf("number" to "LX123456785DE")), description(ADD_SUGGESTION))
+        assertEquals(text("door.typo.suggest", mapOf("number" to "LX999999987DE")), description(ADD_SUGGESTION))
         node(ADD_SUGGESTION).performClick()
         settle()
-        assertEquals("LX123456785DE", fieldText(ADD_TRACKING))
+        assertEquals("LX999999987DE", fieldText(ADD_TRACKING))
         assertFalse(exists(ADD_TYPO))
 
-        type("LX1234567B5DE")
+        type("LX9999999B7DE")
         leave()
         node(ADD_AS_TYPED).performClick()
         settle()
         assertClosed()
-        assertEquals("LX1234567B5DE", source.additions.single().trackingNumber)
+        assertEquals("LX9999999B7DE", source.additions.single().trackingNumber)
     }
 
     @Test

@@ -16,7 +16,7 @@ Relais Colis's tracking form asks for a "numéro de colis" of 12 to 16 character
 | --- | --- |
 | `CC1234567890` to `CC12345678901234` | `CC` and 10 to 14 digits: the form Relais Colis's own example takes. |
 | `1234567890` | 10 digits. Also fits DHL, [Mondial Relay](carrier:mondial-relay), [TIPSA](carrier:tipsa) and others. |
-| `12345678901234` | 14 digits. Also fits DPD, SEUR, BRT, [Ciblex](carrier:ciblex) and others. |
+| `19999999999980` | 14 digits. Also fits DPD, SEUR, BRT, [Ciblex](carrier:ciblex) and others. |
 | `VD1234567890` | `VD` and 10 digits. Also fits [Colis Privé](carrier:colis-prive). |
 
 Between people, Relais Colis emails the recipient a confirmation to follow the parcel; for a shop order, look in the shop's shipping email or order page. No number? Relais Colis's "Je n'ai pas mon numéro de colis" search uses the recipient's email or phone and the shop's name; see also [how to find a tracking number](guide:find-tracking-number).

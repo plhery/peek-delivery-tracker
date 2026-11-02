@@ -56,7 +56,7 @@ Voici la forme des numéros des transporteurs que nomme Decathlon (exemples inve
 | bpost | `JJBE`, une lettre et 18 chiffres, ou 24 chiffres |
 | PostNL | `3S`, 4 lettres et 7 chiffres, comme `3SABCD1234567` |
 | La Poste suisse | 18 chiffres commençant par `98` ou `99`, comme `990012345612345678` |
-| DPD | 14 chiffres, comme `12345678901234` |
+| DPD | 14 chiffres, comme `19999999999980` |
 | Planzer | 13 chiffres commençant par `99990`, comme `9999012345678` |
 
 Pour les autres boutiques : [où trouver le numéro de suivi](guide:find-tracking-number). Tu ne sais pas à qui est ton numéro ? Tape-le ici :

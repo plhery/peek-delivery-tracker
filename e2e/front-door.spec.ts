@@ -97,13 +97,13 @@ test('says what is wrong with the input: no number, an order number, a check dig
   await expect(page.getByRole('note')).toContainText('That looks like an Amazon order number');
   await expect(page.getByRole('link', { name: 'Open my Amazon orders' })).toHaveAttribute('target', '_blank');
 
-  await field(page).fill('LX1234567B5DE');
+  await field(page).fill('LX9999999B7DE');
   await expect(page.getByText('This number’s check digit doesn’t add up. A letter may have been read as a digit.')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Track it as typed' })).toBeVisible();
   await expect(page).toHaveURL(/\/$/);
-  await page.getByRole('button', { name: 'Did you mean LX123456785DE?' }).click();
+  await page.getByRole('button', { name: 'Did you mean LX999999987DE?' }).click();
   await expect(page).toHaveURL(parcelAddress);
-  await expect(page.getByText('LX123456785DE', { exact: true }).first()).toBeVisible();
+  await expect(page.getByText('LX999999987DE', { exact: true }).first()).toBeVisible();
 });
 
 test('asks for the postcode a chosen carrier needs before opening the parcel', async ({ page }) => {
@@ -219,7 +219,7 @@ test('fits a 320 px phone in German and in the dark, in every state of the field
     'Bestellung unterwegs:\nUPS 1ZDEMO202600000001\nUPS 1ZDEMO202600000029\nSwiss Post 99.34.123456.78901234',
     'Danke für deine Bestellung! Wir melden uns, sobald sie unterwegs ist.',
     '302-4571983-2294617',
-    'LX1234567B5DE',
+    'LX9999999B7DE',
     'https://www.dhl.com/ch-de/home/tracking.html?tracking-id=1234567899&submit=1',
   ]) {
     // Typed text is answered once it has rested.

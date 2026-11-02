@@ -69,8 +69,8 @@ describe('carrier detection', () => {
   });
 
   it('amazon-logistics — Amazon Logistics', () => {
-    expect(detectCarrier('FR1234567890')).toBe('amazon-logistics');
-    expect(detectCarrier('fr 1234-567890')).toBe('amazon-logistics');
+    expect(detectCarrier('FR9999999981')).toBe('amazon-logistics');
+    expect(detectCarrier('fr 9999-999981')).toBe('amazon-logistics');
     // REPORTED REAL TBA label.
     // Source: https://github.com/jkeen/tracking_number_data/issues/2
     expect(detectCarrier('TBA333656997000')).toBe('amazon-logistics');
@@ -78,14 +78,14 @@ describe('carrier detection', () => {
     // Source: https://github.com/jkeen/tracking_number_data/blob/main/couriers/amazon.json
     expect(detectCarrier('TBA000000000000')).toBe('amazon-logistics');
     expect(detectCarrier('TBA010000000000')).toBe('amazon-logistics');
-    expect(detectCarrier('TBA000000000001')).toBe('amazon-logistics');
+    expect(detectCarrier('TBA999999999980')).toBe('amazon-logistics');
     // TBC and TBM are Amazon's Canadian and Mexican prefixes. The C family stays unknown.
     // Source: https://github.com/jkeen/tracking_number_data/blob/main/couriers/amazon.json
     expect(detectCarrier('TBC 000000000000')).toBe('amazon-logistics');
     expect(detectCarrier('TBM502887274000')).toBe('amazon-logistics');
     expect(detectCarrier('C1004444443')).toBe('unknown');
     expect(detectCarrier('C1004444444')).toBe('unknown');
-    expect(detectCarrier('ZZ0000000001')).not.toBe('amazon-logistics');
+    expect(detectCarrier('ZZ9999999980')).not.toBe('amazon-logistics');
     // Country-prefix retail identifiers (synthetic shape checks across marketplaces).
     for (const prefix of ['FR', 'DE', 'BE', 'UK', 'GB', 'IT', 'ES', 'NL', 'AT', 'IE', 'PL', 'SE', 'PT', 'CH']) {
       expect(parseTrackingInput(`Your parcel: ${prefix}0000000001`)).toMatchObject({ carrier: 'amazon-logistics', trackingNumber: `${prefix}0000000001` });
@@ -96,11 +96,11 @@ describe('carrier detection', () => {
   it('amazon-shipping — Amazon Shipping', () => {
     // No exclusive number detector: FR/TBA numbers reconcile to amazon-logistics
     // until public Shipping verification confirms the parcel.
-    expect(detectCarrier('TBA000000000001')).toBe('amazon-logistics');
+    expect(detectCarrier('TBA999999999980')).toBe('amazon-logistics');
     expect(CARRIERS['amazon-shipping'].capabilities.selectable).toBe(false);
     expect(CARRIERS['amazon-shipping'].capabilities.tracking.adapter).toBe('amazon-shipping');
-    expect(parcelTrackingLinks({ carrier: 'amazon-shipping', trackingNumber: 'UK0000000001' })[0])
-      .toMatchObject({ name: 'Amazon Shipping', url: 'https://track.amazon.co.uk/tracking/UK0000000001' });
+    expect(parcelTrackingLinks({ carrier: 'amazon-shipping', trackingNumber: 'UK9999999980' })[0])
+      .toMatchObject({ name: 'Amazon Shipping', url: 'https://track.amazon.co.uk/tracking/UK9999999980' });
   });
 
   it('an-post — An Post', () => {
@@ -120,7 +120,7 @@ describe('carrier detection', () => {
   });
 
   it('asendia — Asendia', () => {
-    expect(detectCarrier('ASE12345678')).toBe('asendia');
+    expect(detectCarrier('ASE99999980')).toBe('asendia');
     // OSS postal partner fixture — not an exclusive Asendia signature (research-only role).
     // Its US suffix names the issuing post, which detection may name.
     // Source: https://gist.github.com/zxp/e83a4a1b7294a5ed6207
@@ -269,13 +269,13 @@ describe('carrier detection', () => {
   });
 
   it('chronopost — Chronopost', () => {
-    expect(detectCarrier('XU123456785FR')).toBe('chronopost');
-    expect(detectCarrier('XW123456785TS')).toBe('chronopost');
-    expect(detectCarrier('PZ123456785JF')).toBe('chronopost');
+    expect(detectCarrier('XU999999987FR')).toBe('chronopost');
+    expect(detectCarrier('XW999999987TS')).toBe('chronopost');
+    expect(detectCarrier('PZ999999987JF')).toBe('chronopost');
     // High-impact fix: 14-digits-plus-letter was overbroad high-confidence Chronopost
     // (stole DPD trailing-L reports and La Poste Y merchant examples). Now a low candidate
     // among others, when the letter is DPD's check character.
-    const shared = detectCarrierMatch('12345678901234E');
+    const shared = detectCarrierMatch('99999999999984E');
     expect(shared).toMatchObject({ carrier: 'unknown', confidence: 'low' });
     expect(shared.candidates).toContain('chronopost');
     // REPORTED REAL DPD Germany trailing-L report — a collision needing carrier context.
@@ -293,7 +293,7 @@ describe('carrier detection', () => {
 
   it('ciblex — Ciblex', () => {
     // 14-digit shipment numbers stay low-confidence suggestions.
-    const match = detectCarrierMatch('12345678901234');
+    const match = detectCarrierMatch('19999999999980');
     expect(match).toMatchObject({ carrier: 'unknown', confidence: 'low' });
     expect(match.candidates).toContain('ciblex');
     // Full label barcodes are sent unchanged and bound to the exact native banner;
@@ -319,7 +319,7 @@ describe('carrier detection', () => {
   it('colisweb — Colisweb', () => {
     // Synthetic baseline only (website says at least eight digits; exactly-eight is unproven).
     // Source: https://github.com/plhery/peek-delivery-tracker/blob/739b360d45d1cf723e0058350bcf19f8e373f076/src/lib/carriers.test.ts
-    const match = detectCarrierMatch('87654321');
+    const match = detectCarrierMatch('99999980');
     expect(match).toMatchObject({ carrier: 'unknown', confidence: 'low' });
   });
 
@@ -412,7 +412,7 @@ describe('carrier detection', () => {
     // Synthetic baseline only (Customer Iberia needs the complete capability URL;
     // a bare number or generic freight label proves nothing about the route).
     // Source: https://github.com/plhery/peek-delivery-tracker/blob/739b360d45d1cf723e0058350bcf19f8e373f076/src/lib/carriers.test.ts
-    expect(detectCarrier('9010000001234')).toBe('unknown');
+    expect(detectCarrier('9019999999986')).toBe('unknown');
   });
 
   it('delhivery — Delhivery', () => {
@@ -430,18 +430,18 @@ describe('carrier detection', () => {
     // Inherited public LD…FR example overlapping La Poste on purpose (manual choice,
     // shared adapter); attribution inherited from the repo, not independently rechecked.
     // Original source (not reloaded): https://www.philaseiten.de/cgi-bin/index.pl?PR=319289
-    expect(detectCarrier('LD156008025FR')).toBe('la-poste');
+    expect(detectCarrier('LD999999987FR')).toBe('la-poste');
   });
 
   it('dhl — DHL', () => {
-    for (const number of ['LF123456785DE', 'LX123456785DE', 'CY123456785DE']) {
+    for (const number of ['LF999999987DE', 'LX999999987DE', 'CY999999987DE']) {
       expect(detectCarrierMatch(number)).toEqual({
         carrier: 'dhl', confidence: 'high', candidates: ['dhl'], preferred: [],
       });
     }
-    expect(detectCarrier('lf 123.456-785 de')).toBe('dhl');
+    expect(detectCarrier('lf 999.999-987 de')).toBe('dhl');
     expect(detectCarrier('LF123456789DE')).toBe('unknown');
-    expect(detectCarrier('LF123456785US')).not.toBe('dhl');
+    expect(detectCarrier('LF999999987US')).not.toBe('dhl');
     // MERCHANT EXAMPLE, Fnac Darty JD family (JD + 18 digits, distinct from JJD/JVGL
     // and from InPost legacy JD + 16 digits). In the JD01 range it is a DHL Express
     // piece; outside it, a DHL Paket plate typed without its J only suggests DHL.
@@ -455,16 +455,16 @@ describe('carrier detection', () => {
     expect(detectCarrierMatch('00340434633751428115')).toEqual({
       carrier: 'dhl', confidence: 'high', candidates: ['dhl'], preferred: [],
     });
-    expect(detectCarrier('JJD0099999999')).toBe('dhl');
+    expect(detectCarrier('JJD9999999980')).toBe('dhl');
     // The Benelux network's prefix; older catalogs filed it under DHL Paket.
-    expect(['dhl', 'dhl-ecommerce-nl']).toContain(detectCarrier('JVGL0099999999'));
+    expect(['dhl', 'dhl-ecommerce-nl']).toContain(detectCarrier('JVGL9999999980'));
     expect(tracksAutomatically('dhl')).toBe(true);
     expect(carrierTrackingHintKey('dhl')).toBe('add.autoSync');
   });
 
   it('dhl-ecommerce — DHL eCommerce', () => {
-    expect(detectCarrierMatch('33870000000000001')).toMatchObject({ carrier: 'unknown', confidence: 'low', candidates: ['dhl-ecommerce'] });
-    expect(detectCarrier('GM1234567890123456')).toBe('dhl-ecommerce');
+    expect(detectCarrierMatch('33879999999999980')).toMatchObject({ carrier: 'unknown', confidence: 'low', candidates: ['dhl-ecommerce'] });
+    expect(detectCarrier('GM9999999999999980')).toBe('dhl-ecommerce');
     // OFFICIAL API-doc identifiers (customer packageId vs DHL dhlPackageId).
     // Source: https://developer.dhl.com/api-reference/references-dhl-ecommerce-americas
     expect(detectCarrier('GM60511234500000001')).toBe('dhl-ecommerce');
@@ -481,11 +481,11 @@ describe('carrier detection', () => {
     expect(detectCarrier('0031043534391640211895625057522')).toBe('unknown');
     expect(tracksAutomatically('dhl-ecommerce')).toBe(true);
     for (const url of [
-      'https://www.dhl.com/ch-en/home/tracking.html?tracking-id=33870000000000001',
+      'https://www.dhl.com/ch-en/home/tracking.html?tracking-id=33879999999999980',
       'https://ecommerceportal.dhl.com/track/?tracking-id=ABC123456',
       'https://webtrack.dhlglobalmail.com/?trackingnumber=ABC123456',
     ]) expect(parseTrackingInput(url)).toMatchObject({ carrier: 'dhl-ecommerce', confidence: 'high', source: 'link' });
-    expect(parseTrackingInput('https://www.dhl.com/ch-en/home/tracking.html?tracking-id=LF123456785DE').carrier).toBe('dhl');
+    expect(parseTrackingInput('https://www.dhl.com/ch-en/home/tracking.html?tracking-id=LF999999987DE').carrier).toBe('dhl');
     expect(parseTrackingInput('https://www.dhl.de/int-verfolgen/?piececode=1234567890').carrier).toBe('dhl');
     expect(parseTrackingInput('https://ecommerceportal.dhl.com.evil.example/?tracking-id=ABC123456').carrier).not.toBe('dhl-ecommerce');
   });
@@ -499,7 +499,7 @@ describe('carrier detection', () => {
   });
 
   it('dpd-fr — DPD France', () => {
-    expect(detectCarrier('250123456789012')).toBe('dpd-fr');
+    expect(detectCarrier('250999999999980')).toBe('dpd-fr');
     // MERCHANT EXAMPLES, Fnac Darty (never force global DPD traffic through France).
     // Source: https://marketplace.fnacdarty.com/s/article/Dois-je-obligatoirement-renseigner-un-num%C3%A9ro-de-suivi-tracking-pour-ma-commande?language=fr_BE
     for (const number of ['1595193512495', '10764000276716']) {
@@ -621,7 +621,7 @@ describe('carrier detection', () => {
   it('gls-ch — GLS Switzerland', () => {
     // Synthetic baseline only (Swiss origin can never come from broad lengths alone).
     // Source: https://github.com/plhery/peek-delivery-tracker/blob/739b360d45d1cf723e0058350bcf19f8e373f076/src/lib/carriers.test.ts
-    const match = detectCarrierMatch('993990103198');
+    const match = detectCarrierMatch('999999999916');
     expect(match).toMatchObject({ carrier: 'unknown', confidence: 'low' });
     expect(match.candidates).toContain('gls-ch');
   });
@@ -669,7 +669,7 @@ describe('carrier detection', () => {
   it('heppner — Heppner', () => {
     // Explicit synthetic existing fixture only (receipt + postcode live in the adapter).
     // Source: https://github.com/plhery/peek-delivery-tracker/blob/739b360d45d1cf723e0058350bcf19f8e373f076/src/server/heppner.test.ts
-    const match = detectCarrierMatch('23456789');
+    const match = detectCarrierMatch('99999980');
     expect(match).toMatchObject({ carrier: 'unknown', confidence: 'low' });
     expect(match.candidates).toContain('heppner');
   });
@@ -678,7 +678,7 @@ describe('carrier detection', () => {
     // Baseline only: repo-called official/public HES sample, not fresh verification.
     // (Furniture-service Hermes, not German small-parcel Hermes or UK Evri.)
     // Source: https://github.com/plhery/peek-delivery-tracker/blob/739b360d45d1cf723e0058350bcf19f8e373f076/src/server/hermes.live.test.ts
-    expect(detectCarrier('62162057330000611')).toBe('unknown');
+    expect(detectCarrier('62162057330000980')).toBe('unknown');
   });
 
   it('hermes-de — Hermes Germany', () => {
@@ -691,8 +691,8 @@ describe('carrier detection', () => {
     }
     // H-prefixed numbers are recognized from text without assigning every
     // fourteen-digit number to Hermes (H… must stay distinct from Evri alphanumerics).
-    expect(parseTrackingInput('Parcel H1234567890123456789 is coming')).toMatchObject({ carrier: 'hermes-de' });
-    expect(parseTrackingInput('https://evil.test/myhermes.de#H1234567890123456789').trackingUrl).toBeUndefined();
+    expect(parseTrackingInput('Parcel H9999999999999999980 is coming')).toMatchObject({ carrier: 'hermes-de' });
+    expect(parseTrackingInput('https://evil.test/myhermes.de#H9999999999999999980').trackingUrl).toBeUndefined();
   });
 
   it('hongkong-post — Hongkong Post', () => {
@@ -703,8 +703,8 @@ describe('carrier detection', () => {
   });
 
   it('india-post — India Post', () => {
-    expect(detectCarrier('JN067614884IN')).toBe('india-post');
-    expect(detectCarrier('jn 067.614-884 in')).toBe('india-post');
+    expect(detectCarrier('JN999999987IN')).toBe('india-post');
+    expect(detectCarrier('jn 999.999-987 in')).toBe('india-post');
     expect(detectCarrier('JN067614885IN')).toBe('unknown');
     // OSS historical S10 fixture, checksum-valid (portal coverage is not every product).
     // Source: https://gist.github.com/zxp/e83a4a1b7294a5ed6207
@@ -743,7 +743,7 @@ describe('carrier detection', () => {
 
   it('intl-post — Unknown postal carrier', () => {
     expect(detectCarrier('RA123456785IR')).toBe('intl-post');
-    expect(detectCarrier('VN987654326US')).toBe('intl-post');
+    expect(detectCarrier('VN999999987US')).toBe('intl-post');
     expect(tracksAutomatically('intl-post')).toBe(true);
   });
 
@@ -786,8 +786,8 @@ describe('carrier detection', () => {
 
   it('la-poste — La Poste / Colissimo', () => {
     // Synthetic numbers carry the Colissimo check digit.
-    expect(detectCarrier('8G12345678905')).toBe('la-poste');
-    expect(detectCarrier('RA123456785FR')).toBe('la-poste');
+    expect(detectCarrier('8G99999999983')).toBe('la-poste');
+    expect(detectCarrier('RA999999987FR')).toBe('la-poste');
     // REPORTED REAL 8U/8G specimens.
     // Sources: https://forum.quechoisir.org/retour-colis-rue-du-commerce-t18643.html (8U01130342039)
     // and https://forum.quechoisir.org/arnaque-par-rue-du-commerce-je-demande-justice-t22371.html (8G45061126689)
@@ -801,7 +801,7 @@ describe('carrier detection', () => {
       const match = detectCarrierMatch(number);
       expect(match).toMatchObject({ carrier: 'la-poste', confidence: 'high' });
     }
-    expect(detectCarrier('870012345678049')).toBe('la-poste');
+    expect(detectCarrier('870999999999961')).toBe('la-poste');
   });
 
   it('landmark-global — Landmark Global', () => {
@@ -833,12 +833,12 @@ describe('carrier detection', () => {
     // its public 12-digit alias without a postcode (routing suffix is not a postcode).
     // Source: https://forum.quechoisir.org/probleme-colis-mondial-relay-gls-t286523-40.html
     expect(detectCarrierMatch('73800244620101503002000732')).toMatchObject({ carrier: 'mondial-relay', confidence: 'high' });
-    const barcode = '12123456780101006623123454';
+    const barcode = '12123999999999999999999987';
     expect(detectCarrierMatch(barcode)).toMatchObject({ carrier: 'mondial-relay', confidence: 'high' });
     expect(parseTrackingInput(`Parcel tracking: ${barcode}`)).toMatchObject({ carrier: 'mondial-relay', trackingNumber: barcode });
     expect(carrierRequirements('mondial-relay', barcode)).toEqual([]);
     expect(parcelTrackingLinks({ carrier: 'mondial-relay', trackingNumber: barcode })[0].url)
-      .toBe('https://www.mondialrelay.fr/suivi-de-colis/?numeroExpedition=121234567801');
+      .toBe('https://www.mondialrelay.fr/suivi-de-colis/?numeroExpedition=121239999999');
     expect(detectCarrierMatch('0'.repeat(26)).carrier).not.toBe('mondial-relay');
     for (const number of [barcode.slice(0, -1) + '5', barcode.slice(0, 14) + '1' + barcode.slice(15)]) {
       expect(detectCarrierMatch(number).carrier).not.toBe('mondial-relay');
@@ -986,16 +986,16 @@ describe('carrier detection', () => {
   it('planzer — Planzer', () => {
     // Planzer-issued 20-digit delivery IDs carry the 91346097 prefix (synthetic
     // shape checks); any other bare 20-digit number stays out of Planzer routing.
-    expect(detectCarrierMatch('91346097123456789012')).toEqual({
+    expect(detectCarrierMatch('91346097999999999980')).toEqual({
       carrier: 'planzer', confidence: 'high', candidates: ['planzer'], preferred: [],
     });
-    expect(detectCarrierMatch('91346 09712 34567 89012')).toEqual({
+    expect(detectCarrierMatch('91346 09799 99999 99980')).toEqual({
       carrier: 'planzer', confidence: 'high', candidates: ['planzer'], preferred: [],
     });
-    expect(detectCarrier('999.90.03316119')).toBe('planzer');
-    expect(detectCarrier('9999003316119')).toBe('planzer');
-    expect(isPlanzerSharedTrackingNumber('999.90.03316119')).toBe(true);
-    expect(isPlanzerSharedTrackingNumber('91346097123456789012')).toBe(false);
+    expect(detectCarrier('999.90.99999987')).toBe('planzer');
+    expect(detectCarrier('9999099999987')).toBe('planzer');
+    expect(isPlanzerSharedTrackingNumber('999.90.99999987')).toBe(true);
+    expect(isPlanzerSharedTrackingNumber('91346097999999999980')).toBe(false);
     // OSS alternate-route examples (eight-digit shipment route and IKEA composite order
     // reference) belong to a separate integration lead, not the 20-digit deliveryNumber route.
     // Source: https://github.com/ha-parcel-integrations/ha-planzer/blob/main/README.md
@@ -1079,7 +1079,7 @@ describe('carrier detection', () => {
     // Deliberate no-result canary only (synthetic all-zeros): no positive shipment
     // evidence, and the canary must never count as successful verification.
     // Source: https://github.com/plhery/peek-delivery-tracker/blob/739b360d45d1cf723e0058350bcf19f8e373f076/src/server/upstreamAdapters.live.test.ts
-    expect(detectCarrier('000000000000000000')).toBe('unknown');
+    expect(detectCarrier('099999999999999980')).toBe('unknown');
   });
 
   it('purolator — Purolator', () => {
@@ -1100,12 +1100,12 @@ describe('carrier detection', () => {
   });
 
   it('quickpac — Quickpac', () => {
-    expect(detectCarrier('44.00.123456.12345678')).toBe('quickpac');
-    expect(detectCarrier('440012345612345678')).toBe('quickpac');
+    expect(detectCarrier('44.99.999999.99999980')).toBe('quickpac');
+    expect(detectCarrier('449999999999999980')).toBe('quickpac');
   });
 
   it('relais-colis — Relais Colis', () => {
-    expect(detectCarrier('CC200000000401')).toBe('relais-colis');
+    expect(detectCarrier('CC299999999980')).toBe('relais-colis');
     // REPORTED REAL ten-digit numeric shipment (home-delivery multi-field flow is separate).
     // Source: https://forum.quechoisir.org/attitude-inadmissible-de-relais-colis-fuyez-t216835.html
     const match = detectCarrierMatch('338 0000 318');
@@ -1159,7 +1159,7 @@ describe('carrier detection', () => {
 
   it('shipup — ShipUp', () => {
     // No exclusive detector: kept as a manual record through universal lookup.
-    expect(detectCarrier('SHIPUP123456')).toBe('unknown');
+    expect(detectCarrier('SHIPUP999980')).toBe('unknown');
     expect(CARRIERS.shipup.capabilities.selectable).toBe(true);
     expect(CARRIERS.shipup.capabilities.tracking.adapter).toBe('universal');
   });
@@ -1185,7 +1185,7 @@ describe('carrier detection', () => {
     }
     // The official tracker also exposes SP followed by 16 digits.
     // Source: https://packages.speedeedelivery.com/package_progress.php
-    expect(detectCarrier('SP0000000000000001')).toBe('spee-dee');
+    expect(detectCarrier('SP9999999999999980')).toBe('spee-dee');
     expect(detectCarrier('SP000000000000001')).toBe('unknown');
     expect(detectCarrier('SP00000000000000001')).toBe('unknown');
     expectDirectTracking('spee-dee');
@@ -1201,10 +1201,10 @@ describe('carrier detection', () => {
   });
 
   it('spring-gds — PostNL', () => {
-    expect(detectCarrierMatch('LX123456785NL')).toEqual({
+    expect(detectCarrierMatch('LX999999987NL')).toEqual({
       carrier: 'spring-gds', confidence: 'high', candidates: ['spring-gds'], preferred: [],
     });
-    expect(detectCarrier('lx 123.456-785 nl')).toBe('spring-gds');
+    expect(detectCarrier('lx 999.999-987 nl')).toBe('spring-gds');
     expect(detectCarrier('LX123456789NL')).toBe('unknown');
     // REPORTED REAL international shipments (foreign last-mile operator is separate).
     // Source: https://www.paketda.de/fragen-antworten.php
@@ -1250,7 +1250,7 @@ describe('carrier detection', () => {
 
   it('sunyou — SunYou', () => {
     // Legacy SY + 11 digits family.
-    expect(detectCarrier('SY12345678901')).toBe('sunyou');
+    expect(detectCarrier('SY99999999980')).toBe('sunyou');
     // CLAIMED REAL CAPTURE, maintainer-captured real-shipment payload, July 2021
     // (never confuse the request orderNo with the returned last-mile trackingNumber).
     // Source: https://github.com/ha-parcel-integrations/ha-sunyou/blob/main/tests/payloads.py
@@ -1261,11 +1261,11 @@ describe('carrier detection', () => {
   });
 
   it('swiss-post — Swiss Post', () => {
-    expect(detectCarrier('99.34.123456.12345678')).toBe('swiss-post');
-    expect(detectCarrier('993412345612345678')).toBe('swiss-post');
-    expect(detectCarrier('98.11.223344.55667788')).toBe('swiss-post');
-    expect(detectCarrier('RA123456785CH')).toBe('swiss-post');
-    expect(detectCarrier('ra123456785ch')).toBe('swiss-post');
+    expect(detectCarrier('99.34.123456.99999980')).toBe('swiss-post');
+    expect(detectCarrier('993412345699999980')).toBe('swiss-post');
+    expect(detectCarrier('98.11.223344.99999980')).toBe('swiss-post');
+    expect(detectCarrier('RA999999987CH')).toBe('swiss-post');
+    expect(detectCarrier('ra999999987ch')).toBe('swiss-post');
     // OSS 2015 public-testnu S10 fixture (regression specimen, not a live shipment).
     // Source: https://gist.github.com/zxp/e83a4a1b7294a5ed6207
     expect(detectCarrier('RS908247336CH')).toBe('swiss-post');
@@ -1299,10 +1299,10 @@ describe('carrier detection', () => {
   it('supports the expanded native tracking formats without claiming shared numeric barcodes', () => {
     expect(detectCarrier('CNPRT00000000000000000001')).toBe('ecoscooting');
     expect(detectCarrier('UUSC000000000001')).toBe('uniuni');
-    expect(detectCarrier('U999900000000001')).toBe('uniuni');
+    expect(detectCarrier('U999999999999980')).toBe('uniuni');
     expect(detectCarrier('900000000001A000000002')).toBe('estafeta');
-    expect(detectCarrier('9000000000001D00000002')).toBe('estafeta');
-    expect(detectCarrier('SPXLAX000002601010000001')).toBe('speedx');
+    expect(detectCarrier('9999999999980D00000002')).toBe('estafeta');
+    expect(detectCarrier('SPXLAX999999999999999980')).toBe('speedx');
     expect(detectCarrierMatch('000000000000000000000001')).toMatchObject({
       carrier: 'unknown', confidence: 'low', candidates: expect.arrayContaining(['ciblex', 'inpost', 'bpost']),
     });
@@ -1379,7 +1379,7 @@ describe('carrier detection', () => {
     expect(detectCarrier('DELIVERY')).toBe('unknown');
     expect(detectCarrier('00123456')).toBe('unknown');
     // S10 shapes with an invalid check digit never detect, whatever the suffix.
-    expect(isValidS10TrackingNumber('RA123456785CH')).toBe(true);
+    expect(isValidS10TrackingNumber('RA999999987CH')).toBe(true);
     expect(isValidS10TrackingNumber('RA123456789CH')).toBe(false);
     expect(detectCarrier('RA123456789CH')).toBe('unknown');
     expect(detectCarrier('RA123456789SG')).toBe('unknown');
@@ -1532,7 +1532,7 @@ describe('ambiguous number shapes', () => {
     expect(shared.candidates).toEqual(expect.arrayContaining(['fedex', 'dpd-fr', 'mondial-relay', 'colis-prive', 'mrw', 'brt', 'sf-express', 'sto', 'zto', 'j-and-t', 'lbc-express']));
     // A valid GLS check digit adds the GLS networks.
     expect(shared.candidates).not.toContain('gls-ch');
-    expect(detectCarrierMatch('123456789011')).toMatchObject({
+    expect(detectCarrierMatch('123459999981')).toMatchObject({
       carrier: 'unknown', confidence: 'low', candidates: expect.arrayContaining(['gls-ch', 'gls-fr', 'gls-de']),
     });
   });
@@ -1627,7 +1627,7 @@ describe('expanded carrier catalog', () => {
   });
 
   it.each([
-    ['https://www.myhermes.de/empfangen/sendungsverfolgung/sendungsinformation#H1234567890123456789', 'hermes-de', 'H1234567890123456789'],
+    ['https://www.myhermes.de/empfangen/sendungsverfolgung/sendungsinformation#H9999999999999999980', 'hermes-de', 'H9999999999999999980'],
     ['https://gls-group.com/DE/de/paketverfolgung?match=12345678901', 'gls-de', '12345678901'],
     ['https://gls-group.eu/FR/fr/suivi-colis?match=12345678901', 'gls-fr', '12345678901'],
     ['https://gls-group.eu/CH/en/parcel-tracking?match=12345678901', 'gls-ch', '12345678901'],
@@ -1650,8 +1650,8 @@ describe('normalizeTrackingNumber', () => {
     expect(carrierInfo('unknown', locale).name).toBe(name);
   });
   it('uppercases and strips spaces, dots and dashes', () => {
-    expect(normalizeTrackingNumber('99.34.123456.12345678')).toBe(
-      '993412345612345678',
+    expect(normalizeTrackingNumber('99.34.123456.99999980')).toBe(
+      '993412345699999980',
     );
     expect(normalizeTrackingNumber(' ra 123 456-789 ch ')).toBe('RA123456789CH');
   });
@@ -1666,9 +1666,9 @@ describe('supportsSwissPostHandoff', () => {
 
   it('uses Swiss Post’s URL after a DHL handoff even with a saved DHL URL', () => {
     const links = parcelTrackingLinks({
-      carrier: 'dhl', trackingNumber: 'LF123456785DE', trackingSource: 'swiss-post',
-      trackingUrl: 'https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF123456785DE',
-      originalCarrier: 'dhl', originalTrackingNumber: 'LF123456785DE',
+      carrier: 'dhl', trackingNumber: 'LF999999987DE', trackingSource: 'swiss-post',
+      trackingUrl: 'https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF999999987DE',
+      originalCarrier: 'dhl', originalTrackingNumber: 'LF999999987DE',
     }, 'en');
     expect(links.map(({ carrier }) => carrier.id)).toEqual(['swiss-post', 'dhl']);
     expect(links[0].url).toContain('https://service.post.ch/');
@@ -1676,19 +1676,19 @@ describe('supportsSwissPostHandoff', () => {
   });
 
   it('uses the confirmed local number after a cross-number carrier swap', () => {
-    const links = parcelTrackingLinks({ carrier: 'gls-de', trackingNumber: '123456789011',
+    const links = parcelTrackingLinks({ carrier: 'gls-de', trackingNumber: '123459999981',
       trackingSource: 'swiss-post', activeTrackingNumber: '990000000000001',
-      originalCarrier: 'gls-de', originalTrackingNumber: '123456789011',
+      originalCarrier: 'gls-de', originalTrackingNumber: '123459999981',
     });
     expect(links.map(({ carrier }) => carrier.id)).toEqual(['swiss-post', 'gls-de']);
     expect(links[0].url).toContain('990000000000001');
-    expect(links[0].url).not.toContain('123456789011');
-    expect(links[1].url).toContain('123456789011');
+    expect(links[0].url).not.toContain('123459999981');
+    expect(links[1].url).toContain('123459999981');
   });
 
   it('keeps GLS identity and uses Swiss Post first for linked tracking numbers', () => {
     const parcel = {
-      carrier: 'swiss-post' as const, trackingNumber: '993412345612345678',
+      carrier: 'swiss-post' as const, trackingNumber: '993412345699999980',
       originalCarrier: 'gls-de' as const, originalTrackingNumber: '12345678901',
       originalTrackingUrl: 'https://www.gls-pakete.de/reach-sendungsverfolgung?match=12345678901',
     };
@@ -1697,7 +1697,7 @@ describe('supportsSwissPostHandoff', () => {
     expect(links.map(({ carrier, role }) => [carrier.id, role])).toEqual([
       ['swiss-post', 'active'], ['gls-de', 'history'],
     ]);
-    expect(links[0].url).toContain('993412345612345678?lang=fr');
+    expect(links[0].url).toContain('993412345699999980?lang=fr');
     expect(links[1].url).toBe(parcel.originalTrackingUrl);
   });
 
@@ -1728,19 +1728,19 @@ describe('supportsSwissPostHandoff', () => {
   it('opens Swiss Post links in the selected app language', () => {
     const [link] = parcelTrackingLinks({
       carrier: 'swiss-post',
-      trackingNumber: '993412345612345678',
-      trackingUrl: 'https://service.post.ch/ekp-web/ui/entry/search/993412345612345678?lang=de',
+      trackingNumber: '993412345699999980',
+      trackingUrl: 'https://service.post.ch/ekp-web/ui/entry/search/993412345699999980?lang=de',
     }, 'fr');
 
     expect(link.url).toBe(
-      'https://service.post.ch/ekp-web/ui/entry/search/993412345612345678?lang=fr',
+      'https://service.post.ch/ekp-web/ui/entry/search/993412345699999980?lang=fr',
     );
   });
 });
 
 describe('unknown postal carrier links', () => {
   it.each(['es', 'pt', 'pl'])('uses supported external-site languages for %s', (locale) => {
-    const [swissPost] = parcelTrackingLinks({ carrier: 'swiss-post', trackingNumber: '993412345612345678' }, locale);
+    const [swissPost] = parcelTrackingLinks({ carrier: 'swiss-post', trackingNumber: '993412345699999980' }, locale);
     expect(new URL(swissPost.url).searchParams.get('lang')).toBe('en');
     const [parcels] = parcelTrackingLinks({
       carrier: 'unknown', trackingNumber: 'ZZ12345678900',
@@ -1776,26 +1776,26 @@ describe('unknown postal carrier links', () => {
     expect(parcelTrackingLinks({ carrier: 'intl-post', trackingNumber: 'RA123456785IR' })[0].url)
       .toBe('https://t.17track.net/en#nums=RA123456785IR');
     const [dhl] = parcelTrackingLinks({
-      carrier: 'dhl', trackingNumber: 'LF123456785DE',
-      trackingUrl: 'https://www.dhl.de/int-verfolgen/?piececode=LF123456785DE',
+      carrier: 'dhl', trackingNumber: 'LF999999987DE',
+      trackingUrl: 'https://www.dhl.de/int-verfolgen/?piececode=LF999999987DE',
     }, 'fr');
     expect(dhl.name).toBe('DHL');
-    expect(dhl.url).toBe('https://www.dhl.de/int-verfolgen/?piececode=LF123456785DE');
+    expect(dhl.url).toBe('https://www.dhl.de/int-verfolgen/?piececode=LF999999987DE');
     const [swissPost] = parcelTrackingLinks({
-      carrier: 'swiss-post', trackingNumber: 'RA123456785CH',
+      carrier: 'swiss-post', trackingNumber: 'RA999999987CH',
     }, 'fr');
     expect(swissPost.name).toBe('Swiss Post');
-    expect(swissPost.url).toBe('https://service.post.ch/ekp-web/ui/entry/search/RA123456785CH?lang=fr');
+    expect(swissPost.url).toBe('https://service.post.ch/ekp-web/ui/entry/search/RA999999987CH?lang=fr');
   });
 });
 
 describe('formatTrackingNumber', () => {
   it('formats Swiss Post and Quickpac barcodes with dots', () => {
-    expect(formatTrackingNumber('993412345612345678')).toBe(
-      '99.34.123456.12345678',
+    expect(formatTrackingNumber('993412345699999980')).toBe(
+      '99.34.123456.99999980',
     );
-    expect(formatTrackingNumber('440012345612345678')).toBe(
-      '44.00.123456.12345678',
+    expect(formatTrackingNumber('449999999999999980')).toBe(
+      '44.99.999999.99999980',
     );
   });
 
@@ -1805,21 +1805,21 @@ describe('formatTrackingNumber', () => {
   });
 
   it('formats Planzer shared-link numbers with their original separators', () => {
-    expect(formatTrackingNumber('9999003316119')).toBe('999.90.03316119');
+    expect(formatTrackingNumber('9999099999987')).toBe('999.90.99999987');
   });
 });
 
 describe('parseTrackingInput', () => {
   it('recognises DHL and Deutsche Post links and shipping text', () => {
     for (const input of [
-      'https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF123456785DE',
-      'https://nolp.dhl.de/nextt-online-public/en/search?piececode=LF123456785DE',
-      'https://www.deutschepost.de/de/s/sendungsverfolgung.html?piececode=LF123456785DE',
-      'https://www.dhl.com/ch-en/home/tracking.html?tracking-id=LF123456785DE',
-      'Your shipment: LF123456785DE',
+      'https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF999999987DE',
+      'https://nolp.dhl.de/nextt-online-public/en/search?piececode=LF999999987DE',
+      'https://www.deutschepost.de/de/s/sendungsverfolgung.html?piececode=LF999999987DE',
+      'https://www.dhl.com/ch-en/home/tracking.html?tracking-id=LF999999987DE',
+      'Your shipment: LF999999987DE',
     ]) {
       expect(parseTrackingInput(input)).toMatchObject({
-        trackingNumber: 'LF123456785DE', carrier: 'dhl', confidence: 'high',
+        trackingNumber: 'LF999999987DE', carrier: 'dhl', confidence: 'high',
       });
     }
     // Explicit DHL links also identify ambiguous numeric IDs.
@@ -1830,52 +1830,52 @@ describe('parseTrackingInput', () => {
 
   it('recognises PostNL numbers in carrier links and shipping messages', () => {
     for (const input of [
-      'https://postnl.post/track?barcodes=LX123456785NL',
-      'https://mailingtechnology.com/tracking/?tn=LX123456785NL',
-      'https://postnl.post/details/LX123456785NL',
-      'https://postnl.post/tracktrace?B=LX123456785NL',
-      'Your Myprotein shipment: LX123456785NL',
+      'https://postnl.post/track?barcodes=LX999999987NL',
+      'https://mailingtechnology.com/tracking/?tn=LX999999987NL',
+      'https://postnl.post/details/LX999999987NL',
+      'https://postnl.post/tracktrace?B=LX999999987NL',
+      'Your Myprotein shipment: LX999999987NL',
     ]) {
       expect(parseTrackingInput(input)).toMatchObject({
-        trackingNumber: 'LX123456785NL', carrier: 'spring-gds', confidence: 'high',
+        trackingNumber: 'LX999999987NL', carrier: 'spring-gds', confidence: 'high',
       });
     }
   });
 
   it('opens the current PostNL page and repairs previously saved obsolete links', () => {
-    for (const trackingUrl of [undefined, 'https://postnl.post/details/LX123456785NL']) {
-      const [link] = parcelTrackingLinks({ carrier: 'spring-gds', trackingNumber: 'LX123456785NL', trackingUrl });
-      expect(link).toMatchObject({ name: 'PostNL', url: 'https://postnl.post/track?barcodes=LX123456785NL' });
+    for (const trackingUrl of [undefined, 'https://postnl.post/details/LX999999987NL']) {
+      const [link] = parcelTrackingLinks({ carrier: 'spring-gds', trackingNumber: 'LX999999987NL', trackingUrl });
+      expect(link).toMatchObject({ name: 'PostNL', url: 'https://postnl.post/track?barcodes=LX999999987NL' });
     }
-    const springUrl = 'https://mailingtechnology.com/tracking/?tn=LX123456785NL';
-    expect(parcelTrackingLinks({ carrier: 'spring-gds', trackingNumber: 'LX123456785NL', trackingUrl: springUrl })[0].url)
+    const springUrl = 'https://mailingtechnology.com/tracking/?tn=LX999999987NL';
+    expect(parcelTrackingLinks({ carrier: 'spring-gds', trackingNumber: 'LX999999987NL', trackingUrl: springUrl })[0].url)
       .toBe(springUrl);
   });
 
   it.each([
-    ['swiss-post', '993412345612345678'],
+    ['swiss-post', '993412345699999980'],
     ['swiss-post-cargo', '1234ABC789'],
-    ['quickpac', '440012345612345678'],
-    ['planzer', '91346097123456789012'],
+    ['quickpac', '449999999999999980'],
+    ['planzer', '91346097999999999980'],
     ['aliexpress', 'LP123456789CN'],
-    ['sunyou', 'SY12345678901'],
+    ['sunyou', 'SY99999999980'],
     ['spring-gds', 'LX123456789DE'],
     ['dhl', '1234567890'],
     ['ups', '1Z999AA10123456784'],
     ['fedex', '123456789012'],
     ['gls-de', '10272483975'],
     ['dpd', '01234567890123'],
-    ['dpd-fr', '250123456789012'],
+    ['dpd-fr', '250999999999980'],
     ['la-poste', '8G12345678901'],
     ['chronopost', '12345678901234Q'],
     ['gls-fr', '00AB12CD'],
     ['colis-prive', '99112233445575012'],
     ['geodis', '1G123GEODIS0'],
-    ['colisweb', '87654321'],
+    ['colisweb', '99999980'],
     ['c-chez-vous', 'FGRC45BKLM'],
-    ['ciblex', '12345678901234'],
+    ['ciblex', '19999999999980'],
     ['paack', 'PAACK12345'],
-    ['asendia', 'ASE12345678'],
+    ['asendia', 'ASE99999980'],
     ['packeta', 'Z1234567890'],
     ['pos-malaysia', 'MYPM00000000015'],
     ['correos-spain', 'PR110604670130400C'],
@@ -1920,9 +1920,9 @@ describe('parseTrackingInput', () => {
       source: 'link',
     });
     expect(parseTrackingInput(
-      'https://www.relaiscolis.com/colis/suivre?trackingNumber=CC200000000401',
+      'https://www.relaiscolis.com/colis/suivre?trackingNumber=CC299999999980',
     )).toMatchObject({
-      trackingNumber: 'CC200000000401',
+      trackingNumber: 'CC299999999980',
       carrier: 'relais-colis',
       confidence: 'high',
       source: 'link',
@@ -1931,10 +1931,10 @@ describe('parseTrackingInput', () => {
 
   it('captures a complete Planzer shared capability link', () => {
     const link =
-      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.03316119?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
+      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.99999987?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
 
     expect(parseTrackingInput(`Your delivery: ${link}.`)).toMatchObject({
-      trackingNumber: '999.90.03316119',
+      trackingNumber: '999.90.99999987',
       carrier: 'planzer',
       trackingUrl: link,
       source: 'link',
@@ -1943,9 +1943,9 @@ describe('parseTrackingInput', () => {
 
   it('uses the number shape to distinguish Quickpac on Planzer links', () => {
     expect(parseTrackingInput(
-      'https://tracking.app.planzer.ch/delivery/info?deliveryNumber=440012345612345678',
+      'https://tracking.app.planzer.ch/delivery/info?deliveryNumber=449999999999999980',
     )).toMatchObject({
-      trackingNumber: '440012345612345678',
+      trackingNumber: '449999999999999980',
       carrier: 'quickpac',
       confidence: 'high',
       source: 'link',
@@ -1954,10 +1954,10 @@ describe('parseTrackingInput', () => {
 
   it('captures a complete Dachser capability link', () => {
     const link =
-      'https://customeriberia.dachser.com/customerarea/utilidades/seguimiento-publico/detalle?cliente=generico&numeroUnico=9010000001234&fecha=20260513&clave=TESTKEY9';
+      'https://customeriberia.dachser.com/customerarea/utilidades/seguimiento-publico/detalle?cliente=generico&numeroUnico=9019999999986&fecha=20260513&clave=TESTKEY9';
 
     expect(parseTrackingInput(`Your delivery: ${link}.`)).toMatchObject({
-      trackingNumber: '9010000001234',
+      trackingNumber: '9019999999986',
       carrier: 'dachser',
       confidence: 'high',
       trackingUrl: link,
@@ -1967,10 +1967,10 @@ describe('parseTrackingInput', () => {
 
   it('does not retain capability URLs from lookalike domains', () => {
     const result = parseTrackingInput(
-      'https://trackandtrace.planzergroup.com.evil.test/shared/sendungen/999.90.03316119?accessKey=secret',
+      'https://trackandtrace.planzergroup.com.evil.test/shared/sendungen/999.90.99999987?accessKey=secret',
     );
 
-    expect(result.trackingNumber).toBe('999.90.03316119');
+    expect(result.trackingNumber).toBe('999.90.99999987');
     expect(result.carrier).toBe('planzer');
     expect(result.trackingUrl).toBeUndefined();
   });
@@ -2020,14 +2020,14 @@ describe('carrier metadata', () => {
   });
 
   it('links Planzer deliveries to the current tracking app', () => {
-    expect(CARRIERS.planzer.trackingUrl?.('91346097123456789012')).toBe(
-      'https://tracking.app.planzer.ch/delivery/info?deliveryNumber=91346097123456789012',
+    expect(CARRIERS.planzer.trackingUrl?.('91346097999999999980')).toBe(
+      'https://tracking.app.planzer.ch/delivery/info?deliveryNumber=91346097999999999980',
     );
   });
 
   it('links Quickpac deliveries to the current Planzer tracking app', () => {
-    expect(CARRIERS.quickpac.trackingUrl?.('440012345612345678')).toBe(
-      'https://tracking.app.planzer.ch/delivery/info?deliveryNumber=440012345612345678',
+    expect(CARRIERS.quickpac.trackingUrl?.('449999999999999980')).toBe(
+      'https://tracking.app.planzer.ch/delivery/info?deliveryNumber=449999999999999980',
     );
   });
 
@@ -2045,7 +2045,7 @@ describe('carrier metadata', () => {
     expect(carrierRequirements('dpd-de', '06080000000001')).toMatchObject([
       { field: 'dpdPostcode', optional: true, pattern: '^[0-9]{5}$', placeholder: '10115' },
     ]);
-    expect(carrierRequirements('gls-ch', '993990103198').map((item) => [item.field, item.optional]))
+    expect(carrierRequirements('gls-ch', '999999999916').map((item) => [item.field, item.optional]))
       .toEqual([['dpdPostcode', undefined]]);
   });
 
@@ -2058,7 +2058,7 @@ describe('carrier metadata', () => {
 
   it('tracks Dachser capability links automatically', () => {
     expect(tracksAutomatically('dachser')).toBe(true);
-    expect(carrierRequirements('dachser', '9010000001234')).toMatchObject([
+    expect(carrierRequirements('dachser', '9019999999986')).toMatchObject([
       {
         field: 'trackingUrl',
         label: 'Dachser tracking URL',
@@ -2074,7 +2074,7 @@ describe('carrier metadata', () => {
       if (carrier.id === 'amazon-logistics') {
         expect(carrier.trackingUrl?.('AB 12/3')).toBe('https://www.amazon.com/gp/your-account/order-history');
       } else if (carrier.id === 'amazon-shipping') {
-        expect(carrier.trackingUrl?.('fr 1234-567890')).toBe('https://track.amazon.fr/tracking/FR1234567890');
+        expect(carrier.trackingUrl?.('fr 9999-999981')).toBe('https://track.amazon.fr/tracking/FR9999999981');
       } else {
         const url = carrier.trackingUrl?.('AB 12/3') ?? '';
         // Carriers with a verified GET deep link embed the encoded number;
@@ -2116,15 +2116,15 @@ describe('carrier metadata', () => {
 
 describe('parcelTrackingNumbers', () => {
   it('prioritizes the domestic number while retaining the original reference', () => {
-    expect(parcelTrackingNumbers({ carrier: 'gls-de', trackingNumber: '123456789011',
-      originalCarrier: 'gls-de', originalTrackingNumber: '123456789011',
+    expect(parcelTrackingNumbers({ carrier: 'gls-de', trackingNumber: '123459999981',
+      originalCarrier: 'gls-de', originalTrackingNumber: '123459999981',
       trackingSource: 'swiss-post', activeTrackingNumber: '990000000000000001',
-    })).toEqual([{ carrier: 'swiss-post', number: '990000000000000001' }, { carrier: 'gls-de', number: '123456789011' }]);
+    })).toEqual([{ carrier: 'swiss-post', number: '990000000000000001' }, { carrier: 'gls-de', number: '123459999981' }]);
   });
   it('shows shared handoff numbers only once', () => {
-    expect(parcelTrackingNumbers({ carrier: 'dhl', trackingNumber: 'LF123456785DE',
-      originalCarrier: 'dhl', originalTrackingNumber: 'LF123456785DE', trackingSource: 'swiss-post',
-    })).toEqual([{ carrier: 'swiss-post', number: 'LF123456785DE' }]);
+    expect(parcelTrackingNumbers({ carrier: 'dhl', trackingNumber: 'LF999999987DE',
+      originalCarrier: 'dhl', originalTrackingNumber: 'LF999999987DE', trackingSource: 'swiss-post',
+    })).toEqual([{ carrier: 'swiss-post', number: 'LF999999987DE' }]);
   });
   it('keeps the followed number first and adds the one the delivering carrier it names gave', () => {
     const named = { carrier: 'chronopost', trackingNumber: 'XY123456789FR', deliveryCarrier: 'dpd-de', deliveryTrackingNumber: '01234567890123' } as const;
@@ -2144,7 +2144,7 @@ describe('parcelTrackingNumbers', () => {
     expect(trackingLinksByNumber(numbers, parcelTrackingLinks(reference, 'en')).numbers.map(({ links }) => links.length)).toEqual([1, 0]);
     // The same number written differently, or one already listed, is not repeated.
     expect(parcelTrackingNumbers({ ...reference, canonicalTrackingNumber: '0000 0000 0000 01' })).toHaveLength(1);
-    const handed = { carrier: 'gls-de', trackingNumber: '123456789011', originalCarrier: 'gls-de', originalTrackingNumber: '123456789011',
+    const handed = { carrier: 'gls-de', trackingNumber: '123459999981', originalCarrier: 'gls-de', originalTrackingNumber: '123459999981',
       trackingSource: 'swiss-post', activeTrackingNumber: '990000000000000001', canonicalTrackingNumber: '990000000000000001' } as const;
     expect(parcelTrackingNumbers(handed)).toHaveLength(2);
   });
@@ -2174,7 +2174,7 @@ describe('scheduledDelivery', () => {
     expect(scheduledDelivery({ carrier: 'chronopost', trackingNumber: 'XY123456789FR' }, 'delivered')).toBe(false);
   });
   it('marks Xinghe Freight, which GZYL\'s tracker writes', () => {
-    expect(scheduledDelivery({ carrier: 'xinghe-freight', trackingNumber: 'GZXH0000000017YQ' }, 'delivered')).toBe(true);
+    expect(scheduledDelivery({ carrier: 'xinghe-freight', trackingNumber: 'GZXH9999999980YQ' }, 'delivered')).toBe(true);
   });
   it('leaves a delivery by a carrier it was handed to alone', () => {
     expect(scheduledDelivery({ ...scheduled, deliveryCarrier: 'dpd-de' }, 'delivered')).toBe(false);
@@ -2195,7 +2195,7 @@ describe('links follow successful tracking retrieval', () => {
     expect(link.role).toBe('active');
   });
   it('keeps the carrier link when the carrier answered the same check', () => {
-    const links = parcelTrackingLinks({ carrier: 'spring-gds', trackingNumber: 'LX123456785NL',
+    const links = parcelTrackingLinks({ carrier: 'spring-gds', trackingNumber: 'LX999999987NL',
       trackingProvider: 'Ship24', carrierAnswered: true }, 'fr');
     expect(links.map(({ name, role }) => [name, role])).toEqual([['PostNL', 'active']]);
     expect(links[0].url).toContain('postnl.post');

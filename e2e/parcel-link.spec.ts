@@ -222,7 +222,7 @@ test('shows a parcel handed from one carrier to another with both marks, its map
       },
     });
     localStorage.setItem('sdt.peek.demo.v1', JSON.stringify({
-      HandEurope22: link('handed', { originalCarrier: 'gls-de', originalTrackingNumber: '12345678901', trackingSource: 'swiss-post', activeTrackingNumber: '993412345612345678' }),
+      HandEurope22: link('handed', { originalCarrier: 'gls-de', originalTrackingNumber: '12345678901', trackingSource: 'swiss-post', activeTrackingNumber: '993412345699999980' }),
       MonoEurope22: link('plain', {}),
     }));
   });

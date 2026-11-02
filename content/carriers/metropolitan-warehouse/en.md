@@ -14,7 +14,7 @@ MWD's tracker has a single field, "Tracking #", and takes 12 digits and nothing 
 
 | Number | What it is |
 | --- | --- |
-| `500000000013` | The MWD tracking number. MWD's order page prints it in groups of four, `5000 0000 0013`. |
+| `599999999980` | The MWD tracking number. MWD's order page prints it in groups of four, `5999 9999 9980`. |
 | `POMS #`, `Client REF# 1`, `Client REF# 2`, `Carrier PRO #` | Other references on MWD's order page: MWD's own, the shop's, and a partner carrier's. You don't track with them. |
 
 The tracker asks for no zip code or phone number, but it may ask you to type a captcha. Anything other than 12 digits gets "Please enter a valid tracking number of 12 digits." A number MWD doesn't hold gets "Tracking id does not exist." Check it against the shop's email, and ask the shop if you have no number at all ([how to find your tracking number](guide:find-tracking-number)). MWD offers shops branded tracking pages, so yours may send you one under its own name instead.

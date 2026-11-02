@@ -3,7 +3,7 @@ begin;
 insert into auth.users (id, email) values ('10000000-0000-0000-0000-000000000002', 'auto-link-test@example.test') on conflict (id) do nothing;
 set local role service_role;
 insert into packages (id,user_id,tracking_number,label,carrier,current_stage,sync_status,carrier_data) values
- ('82000000-0000-0000-0000-000000000001','10000000-0000-0000-0000-000000000001','123456789011','Perfume','gls-de','in_transit','ok','{}'),
+ ('82000000-0000-0000-0000-000000000001','10000000-0000-0000-0000-000000000001','123459999981','Perfume','gls-de','in_transit','ok','{}'),
  ('82000000-0000-0000-0000-000000000002','10000000-0000-0000-0000-000000000001','990000000000000002','Surprise','swiss-post','in_transit','ok','{"international_tracking_number":"12345678901"}'),
  ('82000000-0000-0000-0000-000000000003','10000000-0000-0000-0000-000000000001','223456789011','Same prefix','gls-de','in_transit','ok','{}'),
  ('82000000-0000-0000-0000-000000000004','10000000-0000-0000-0000-000000000001','990000000000000004','Unrelated','swiss-post','in_transit','ok','{"international_tracking_number":"22345678901"}'),
@@ -41,7 +41,7 @@ begin
   if public.auto_link_package_tracking('10000000-0000-0000-0000-000000000001') <> 1 then
     raise exception 'Expected one automatic merge';
   end if;
-  if not exists (select 1 from packages where id='82000000-0000-0000-0000-000000000002' and label='Perfume / Surprise' and current_stage='out_for_delivery' and expected_delivery='2026-09-10' and carrier_data->>'original_tracking_number'='123456789011') then
+  if not exists (select 1 from packages where id='82000000-0000-0000-0000-000000000002' and label='Perfume / Surprise' and current_stage='out_for_delivery' and expected_delivery='2026-09-10' and carrier_data->>'original_tracking_number'='123459999981') then
     raise exception 'Name, progress, ETA or original tracking identity lost';
   end if;
   if (select count(*) from tracking_events where package_id='82000000-0000-0000-0000-000000000002' and provider_event_id like '%:auto-link') <> 2 then
@@ -62,9 +62,9 @@ $$;
 insert into packages (id,user_id,tracking_number,label,carrier,current_stage,sync_status,carrier_data) values
  ('83000000-0000-0000-0000-000000000001','10000000-0000-0000-0000-000000000001','523456789011','GLS order','gls-de','in_transit','ok','{"original_carrier":"gls-de","original_tracking_number":"523456789011","original_canonical_tracking_number":"52345678901","canonical_tracking_number":"990000000000000011","active_tracking_carrier":"swiss-post","active_tracking_number":"990000000000000011"}'),
  ('83000000-0000-0000-0000-000000000002','10000000-0000-0000-0000-000000000001','990000000000000011','Post name','swiss-post','out_for_delivery','ok','{"international_tracking_number":"52345678901"}'),
- ('83000000-0000-0000-0000-000000000003','10000000-0000-0000-0000-000000000001','LX123456785NL','AliExpress order','aliexpress','in_transit','ok','{}'),
- ('83000000-0000-0000-0000-000000000004','10000000-0000-0000-0000-000000000001','990000000000000012','Postal order','swiss-post','in_transit','ok','{"international_tracking_number":"LX123456785NL"}'),
- ('83000000-0000-0000-0000-000000000005','10000000-0000-0000-0000-000000000001','SY12345678901','Partner order','sunyou','in_transit','ok','{"original_carrier":"sunyou","active_tracking_carrier":"swiss-post","active_tracking_number":"990000000000000013"}'),
+ ('83000000-0000-0000-0000-000000000003','10000000-0000-0000-0000-000000000001','LX999999987NL','AliExpress order','aliexpress','in_transit','ok','{}'),
+ ('83000000-0000-0000-0000-000000000004','10000000-0000-0000-0000-000000000001','990000000000000012','Postal order','swiss-post','in_transit','ok','{"international_tracking_number":"LX999999987NL"}'),
+ ('83000000-0000-0000-0000-000000000005','10000000-0000-0000-0000-000000000001','SY99999999980','Partner order','sunyou','in_transit','ok','{"original_carrier":"sunyou","active_tracking_carrier":"swiss-post","active_tracking_number":"990000000000000013"}'),
  ('83000000-0000-0000-0000-000000000006','10000000-0000-0000-0000-000000000001','990000000000000013','Local order','swiss-post','in_transit','ok','{}'),
  -- Handed over under the international number; Swiss Post's later answers add its domestic one.
  ('83000000-0000-0000-0000-000000000007','10000000-0000-0000-0000-000000000001','LTN000000001N1','Refills','landmark-global','in_transit','ok','{"original_carrier":"landmark-global","original_tracking_number":"LTN000000001N1","original_canonical_tracking_number":"LTN000000001","canonical_tracking_number":"990000000000000014","international_tracking_number":"CC000000001BE","active_tracking_carrier":"swiss-post","active_tracking_number":"CC000000001BE"}'),

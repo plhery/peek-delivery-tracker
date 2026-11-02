@@ -101,7 +101,7 @@ declare
     'stage', 'in_transit', 'description', 'Arrived at the hub', 'occurred_at', now()));
 begin
   insert into public.packages(user_id, tracking_number, carrier, current_stage)
-  values ('10000000-0000-0000-0000-000000000001', 'QH000000000001FS', 'unknown', 'in_transit') returning * into parcel;
+  values ('10000000-0000-0000-0000-000000000001', 'QH999999999980FS', 'unknown', 'in_transit') returning * into parcel;
   correction := jsonb_build_object('carrier', 'dhlink', 'tracking_url', null, 'dpd_postcode', null,
     'current_stage', 'in_transit', 'sync_status', 'ok', 'carrier_data', jsonb_build_object(
       'original_carrier', 'dhlink', 'original_tracking_number', parcel.tracking_number,

@@ -947,10 +947,10 @@ describe('persistent tracking routing', () => {
       recognize.mockImplementation(knows('postlogistics'));
       direct.mockResolvedValue(directValue('postlogistics'));
 
-      const result = await router.fetch(parcel({ tracking_number: '12345678002' }), false);
+      const result = await router.fetch(parcel({ tracking_number: '19999999980' }), false);
 
       expect(asked(recognize)).toContain('postlogistics');
-      expect(direct).toHaveBeenCalledWith(expect.objectContaining({ tracking_number: '12345678002' }), 'postlogistics');
+      expect(direct).toHaveBeenCalledWith(expect.objectContaining({ tracking_number: '19999999980' }), 'postlogistics');
       expect(result.correction?.carrier).toBe('postlogistics');
       expect(universal).not.toHaveBeenCalled();
     });
@@ -1022,7 +1022,7 @@ describe('persistent tracking routing', () => {
     it.each([
       ['RR123456785FI', 'posti', ['posti', 'chronopost']],
       ['RA123456785IR', 'chronopost', ['chronopost']],
-      ['33870000000000001', 'dhl-ecommerce', ['dhl-ecommerce']],
+      ['33879999999999980', 'dhl-ecommerce', ['dhl-ecommerce']],
       // Other carriers whose numbers pass the same check are asked beside TNT.
       ['505600001', 'tnt', recognitionAskedCarriers('505600001')],
     ])('tracks %s through its confirmed carrier before a provider', async (number, carrier, candidates) => {
@@ -1832,7 +1832,7 @@ describe('persistent tracking routing', () => {
       delivered_at: '2026-10-12T01:00:01Z', last_update: '2026-10-17T01:00:02Z', events: [
         { time: '2026-10-17T01:00:02Z', description: 'In viaggio', stage: 'in_transit' },
         { time: '2026-10-12T01:00:01Z', description: 'Delivered', stage: 'delivered' }] });
-    const routed = await router.fetch(parcel({ carrier: 'brt', tracking_number: '12345678901234' }), false);
+    const routed = await router.fetch(parcel({ carrier: 'brt', tracking_number: '19999999999980' }), false);
     expect(routed.result).toMatchObject({ tracking_provider: 'ParcelsApp', carrier_answered: true,
       status: 'in_transit', current_stage: 'registered', last_status_text: 'Shipping info sent' });
     expect(routed.result).not.toHaveProperty('delivered_at');
@@ -2597,7 +2597,7 @@ describe('persistent tracking routing', () => {
     }
 
     it('serves the carrier\'s answer, the day as it gave it, and asks no provider for its clock', async () => {
-      const { result, direct, universal } = await check('brt', '12345678901234');
+      const { result, direct, universal } = await check('brt', '19999999999980');
       expect(direct).toHaveBeenCalledOnce();
       expect(universal).not.toHaveBeenCalled();
       expect(result.sourceCarrierId).toBe('brt');
@@ -2609,7 +2609,7 @@ describe('persistent tracking routing', () => {
     });
 
     it('still asks a provider to date a wall clock no zone settles', async () => {
-      const { result, universal } = await check('brt', '12345678901234', round('brt', { local_time: '2026-09-10T07:40:00' }));
+      const { result, universal } = await check('brt', '19999999999980', round('brt', { local_time: '2026-09-10T07:40:00' }));
       expect(universal).toHaveBeenCalled();
       expect(result.result.tracking_provider).toBe('Ship24');
     });

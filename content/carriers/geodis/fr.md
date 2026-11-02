@@ -17,7 +17,7 @@ L'Espace destinataire accepte deux numéros (ici avec des caractères inventés)
 | Forme (inventée) | Ce que c'est |
 | --- | --- |
 | `1G1234567890` | Le « numéro de suivi 1G » : 12 caractères en majuscules, `1G` puis 10 lettres ou chiffres. Il suffit à lui seul. |
-| `12345678901234` | Le « numéro d'envoi » à 14 chiffres, que GEODIS appelle aussi « n° de récépissé ». Il ne marche qu'avec le code postal de livraison. |
+| `19999999999980` | Le « numéro d'envoi » à 14 chiffres, que GEODIS appelle aussi « n° de récépissé ». Il ne marche qu'avec le code postal de livraison. |
 
 Si le code postal ne colle pas, GEODIS répond « Le code postal saisi ne correspond pas à votre envoi ». Sur la page de suivi, ce numéro apparaît en « récépissé n° », à côté du numéro `1G`.
 

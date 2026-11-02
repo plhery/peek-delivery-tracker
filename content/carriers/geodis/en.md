@@ -17,7 +17,7 @@ The recipient space accepts two numbers. Here they are with invented characters:
 | Shape (invented) | What it is |
 | --- | --- |
 | `1G1234567890` | The "1G tracking number": 12 characters, `1G` then 10 capital letters or digits. Enough on its own. |
-| `12345678901234` | The 14-digit shipment number ("numéro d'envoi"). GEODIS only accepts it with the delivery postcode. |
+| `19999999999980` | The 14-digit shipment number ("numéro d'envoi"). GEODIS only accepts it with the delivery postcode. |
 
 Some numbers look close but aren't GEODIS's. A reference like `ABCD12EF34` belongs to [C Chez Vous](carrier:c-chez-vous), which delivers bulky orders in France. An 8-digit number isn't a GEODIS tracking number for Peek: it could be [Heppner](carrier:heppner)'s, Colisweb's or Mondial Relay's. Check which carrier the shop's email names.
 

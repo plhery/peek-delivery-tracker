@@ -59,7 +59,7 @@ describe('China Post provider priority', () => {
   it('leaves a selected EMS carrier on its direct adapter', async () => {
     const { router, direct, universal } = setup();
     direct.mockResolvedValue({ result: history, sourceCarrierId: 'ems', swissPostReady: null, handoffFallbackErrorType: null });
-    await router.fetch({ carrier: 'ems', tracking_number: 'EB000000005CN' }, false);
+    await router.fetch({ carrier: 'ems', tracking_number: 'EB999999987CN' }, false);
     expect(direct).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'ems' }), 'ems');
     expect(universal).not.toHaveBeenCalled();
   });

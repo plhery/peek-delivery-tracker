@@ -14,7 +14,7 @@ Pengyou publishes no number format, and no public page shows a whole Pengyou num
 
 | Number | What it is |
 | --- | --- |
-| `ZZZ000000017PY` | Three letters, nine digits and PY: the layout Peek links to Pengyou. |
+| `ZZZ999999980PY` | Three letters, nine digits and PY: the layout Peek links to Pengyou. |
 | `ZZZ00000001PY` | Only eight digits: not that layout. Check for a missing digit. |
 | `RR000000005PY` | Two letters, nine digits and PY: an international postal number, not Pengyou's. |
 

@@ -14,7 +14,7 @@ DHL calls it the waybill number (numer listu przewozowego). For domestic parcels
 
 | Number (invented) | What it is |
 | --- | --- |
-| `99999999995` | 11 digits ending in the check digit: a waybill number. |
+| `99999999984` | 11 digits ending in the check digit: a waybill number. |
 | `30000000008` | Also a waybill number. They don't all start with the same digit: 1, 2 and 3 all occur. |
 
 Look for it in the shop's shipping email. Mój DHL can follow several parcels at once, and its menu also has "Return your parcel": shops can let customers send returns through the app.

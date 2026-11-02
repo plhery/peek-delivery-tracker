@@ -50,7 +50,7 @@ describe('createApiRepo', () => {
     const requestHeaders = new Headers(fetch.mock.calls[0][1]?.headers);
     expect(requestHeaders.get('X-Requested-With')).toBe('XMLHttpRequest');
     expect(parcels[0]).toMatchObject({
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Coffee beans',
       senderName: 'Example sender',
       pickupPoint: 'Shop', receiverName: 'Alex', weightKg: 1.25, dimensionsText: '20 × 30 × 10 cm', expectedDeliveryFrom: '2026-07-15',
@@ -160,13 +160,13 @@ describe('createApiRepo', () => {
     vi.stubGlobal('fetch', fetch);
 
     await createApiRepo().add({
-      trackingNumber: '99.34.123456.12345678',
+      trackingNumber: '99.34.123456.99999980',
       label: 'Coffee beans',
     });
     expect(fetch).toHaveBeenCalledWith('/api/packages', expect.objectContaining({
       method: 'POST',
       body: JSON.stringify({
-        trackingNumber: '993412345612345678',
+        trackingNumber: '993412345699999980',
         label: 'Coffee beans',
         carrier: 'swiss-post',
       }),
@@ -178,12 +178,12 @@ describe('createApiRepo', () => {
     expect(requestHeaders.get('X-Requested-With')).toBe('XMLHttpRequest');
 
     await createApiRepo().add({
-      trackingNumber: '44.00.123456.12345678',
+      trackingNumber: '44.99.999999.99999980',
       label: 'Quickpac parcel',
     });
     expect(fetch).toHaveBeenLastCalledWith('/api/packages', expect.objectContaining({
       body: JSON.stringify({
-        trackingNumber: '440012345612345678',
+        trackingNumber: '449999999999999980',
         label: 'Quickpac parcel',
         carrier: 'quickpac',
       }),
@@ -203,16 +203,16 @@ describe('createApiRepo', () => {
     }));
 
     const trackingUrl =
-      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.03316119?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
+      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.99999987?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
     await createApiRepo().add({
-      trackingNumber: '999.90.03316119',
+      trackingNumber: '999.90.99999987',
       label: 'Plants',
       carrier: 'planzer',
       trackingUrl,
     });
     expect(fetch).toHaveBeenLastCalledWith('/api/packages', expect.objectContaining({
       body: JSON.stringify({
-        trackingNumber: '9999003316119',
+        trackingNumber: '9999099999987',
         label: 'Plants',
         carrier: 'planzer',
         trackingUrl,

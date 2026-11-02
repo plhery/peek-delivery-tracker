@@ -73,7 +73,7 @@ class CarrierCatalogTests {
         val discovery = catalog.discoveryCandidates("000000000103")
         assertEquals(http, discovery.take(http.size))
         assertTrue(discovery.drop(http.size).contains(CarrierId.Fedex))
-        assertTrue(catalog.recognitionCandidates("33870000000000001", browser = true).contains(CarrierId.DhlEcommerce))
+        assertTrue(catalog.recognitionCandidates("33879999999999980", browser = true).contains(CarrierId.DhlEcommerce))
         assertEquals(emptyList<CarrierId>(), catalog.discoveryCandidates("1Z999AA10123456784"))
     }
 
@@ -91,7 +91,7 @@ class CarrierCatalogTests {
     @Test
     fun mondialRelayLabelBarcodeDetectionAndPublicLink() {
         // Published example in Mondial Relay's label specification, not customer data.
-        val barcode = "12123456780101006623123454"
+        val barcode = "12123999999999999999999987"
         assertEquals(CarrierId.MondialRelay, catalog.detect(barcode).carrier)
         assertEquals(CarrierMatch.Confidence.High, catalog.detect(barcode).confidence)
         assertEquals(barcode, catalog.parse("Mon colis: $barcode").trackingNumber)
@@ -101,7 +101,7 @@ class CarrierCatalogTests {
         }
         val parcel = parcel(barcode, "Example", CarrierId.MondialRelay, "2026-09-10T12:00:00Z")
         assertEquals(
-            "https://www.mondialrelay.fr/suivi-de-colis/?numeroExpedition=121234567801",
+            "https://www.mondialrelay.fr/suivi-de-colis/?numeroExpedition=121239999999",
             catalog.trackingLinks(parcel, AppLanguage.Fr).first().url,
         )
     }
@@ -115,7 +115,7 @@ class CarrierCatalogTests {
         for (number in listOf("JJD0002233564270287", "JD0002123456789012", "8YDR098765432", "00ABC0000001A001")) {
             assertEquals("https://inpost.co.uk/tracking/result?parcel_code=$number", link(number))
         }
-        assertTrue(link("640000000000000000000001").startsWith("https://inpost.pl/sledzenie-przesylek"))
+        assertTrue(link("649999999999999999999980").startsWith("https://inpost.pl/sledzenie-przesylek"))
     }
 
     @Test
@@ -204,7 +204,7 @@ class CarrierCatalogTests {
     @Test
     fun linkedGLSParcelKeepsOriginalIdentityAndSwissPostPrimaryLink() {
         val parcel = parcel(
-            "993412345612345678", "Perfume / Surprise", CarrierId.SwissPost, "2026-09-10T07:00:00Z",
+            "993412345699999980", "Perfume / Surprise", CarrierId.SwissPost, "2026-09-10T07:00:00Z",
             carrierData = CarrierData(originalCarrier = CarrierId.GlsDe, originalTrackingNumber = "12345678901"),
         )
         assertEquals(CarrierId.GlsDe, parcel.displayedCarrier)
@@ -212,18 +212,18 @@ class CarrierCatalogTests {
         val links = catalog.trackingLinks(parcel, AppLanguage.Fr)
         assertEquals(listOf(CarrierId.SwissPost, CarrierId.GlsDe), links.map { it.carrier })
         assertEquals(listOf(ParcelTrackingLink.Role.Active, ParcelTrackingLink.Role.History), links.map { it.role })
-        assertTrue(links[0].url.contains("993412345612345678"))
+        assertTrue(links[0].url.contains("993412345699999980"))
         assertTrue(links[1].url.contains("12345678901"))
     }
 
     @Test
     fun dHLHandoffUsesSwissPostURLWhileKeepingDHLHistory() {
         val parcel = parcel(
-            "LF123456785DE", "Garden cable", CarrierId.Dhl, "2026-09-10T07:00:00Z",
-            trackingUrl = "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF123456785DE",
+            "LF999999987DE", "Garden cable", CarrierId.Dhl, "2026-09-10T07:00:00Z",
+            trackingUrl = "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF999999987DE",
             carrierData = CarrierData(
                 activeTrackingCarrier = CarrierId.SwissPost, originalCarrier = CarrierId.Dhl,
-                originalTrackingNumber = "LF123456785DE",
+                originalTrackingNumber = "LF999999987DE",
             ),
         )
         val links = catalog.trackingLinks(parcel, AppLanguage.En)
@@ -237,29 +237,29 @@ class CarrierCatalogTests {
     @Test
     fun handoffUsesDifferentLocalTrackingNumber() {
         val parcel = parcel(
-            "123456789011", "Perfume", CarrierId.GlsDe, "2026-09-10T07:00:00Z",
+            "123459999981", "Perfume", CarrierId.GlsDe, "2026-09-10T07:00:00Z",
             carrierData = CarrierData(
                 activeTrackingCarrier = CarrierId.SwissPost, activeTrackingNumber = "990000000000000001",
-                originalCarrier = CarrierId.GlsDe, originalTrackingNumber = "123456789011",
+                originalCarrier = CarrierId.GlsDe, originalTrackingNumber = "123459999981",
             ),
         )
-        assertEquals(listOf("990000000000000001", "123456789011"), parcel.trackingNumbers.map { it.number })
+        assertEquals(listOf("990000000000000001", "123459999981"), parcel.trackingNumbers.map { it.number })
         assertEquals(listOf(CarrierId.SwissPost, CarrierId.GlsDe), parcel.trackingNumbers.map { it.carrier })
         val links = catalog.trackingLinks(parcel, AppLanguage.En)
         assertEquals(listOf(CarrierId.SwissPost, CarrierId.GlsDe), links.map { it.carrier })
         assertTrue(links[0].url.contains("990000000000000001"))
-        assertFalse(links[0].url.contains("123456789011"))
-        assertTrue(links[1].url.contains("123456789011"))
+        assertFalse(links[0].url.contains("123459999981"))
+        assertTrue(links[1].url.contains("123459999981"))
     }
 
     @Test
     fun eachCarrierPageStandsUnderItsOwnNumber() {
         // Two numbers: the delivering carrier's page under the first, the first carrier's under its own.
         val handed = parcel(
-            "123456789011", "Perfume", CarrierId.GlsDe, "2026-09-10T07:00:00Z",
+            "123459999981", "Perfume", CarrierId.GlsDe, "2026-09-10T07:00:00Z",
             carrierData = CarrierData(
                 activeTrackingCarrier = CarrierId.SwissPost, activeTrackingNumber = "990000000000000001",
-                originalCarrier = CarrierId.GlsDe, originalTrackingNumber = "123456789011",
+                originalCarrier = CarrierId.GlsDe, originalTrackingNumber = "123459999981",
             ),
         )
         val pages = ParcelTrackingLink.byNumber(catalog.trackingLinks(handed, AppLanguage.En), numbers = handed.trackingNumbers)
@@ -268,10 +268,10 @@ class CarrierCatalogTests {
 
         // One number followed on two carriers' pages: the earlier carrier's has no number of its own.
         val sameNumber = parcel(
-            "LF123456785DE", "Garden cable", CarrierId.Dhl, "2026-09-10T07:00:00Z",
+            "LF999999987DE", "Garden cable", CarrierId.Dhl, "2026-09-10T07:00:00Z",
             carrierData = CarrierData(
                 activeTrackingCarrier = CarrierId.SwissPost, originalCarrier = CarrierId.Dhl,
-                originalTrackingNumber = "LF123456785DE",
+                originalTrackingNumber = "LF999999987DE",
             ),
         )
         val shared = ParcelTrackingLink.byNumber(catalog.trackingLinks(sameNumber, AppLanguage.En), numbers = sameNumber.trackingNumbers)
@@ -372,14 +372,14 @@ class CarrierCatalogTests {
 
     @Test
     fun dHLEcommerceDetection() {
-        assertEquals(CarrierMatch.Confidence.Low, catalog.detect("33870000000000001").confidence)
-        assertEquals("dhl-ecommerce", catalog.detect("GM1234567890123456").carrier.rawValue)
+        assertEquals(CarrierMatch.Confidence.Low, catalog.detect("33879999999999980").confidence)
+        assertEquals("dhl-ecommerce", catalog.detect("GM9999999999999980").carrier.rawValue)
         assertEquals(
             "dhl-ecommerce",
-            catalog.parse("https://www.dhl.com/ch-en/home/tracking.html?tracking-id=33870000000000001").carrier.rawValue,
+            catalog.parse("https://www.dhl.com/ch-en/home/tracking.html?tracking-id=33879999999999980").carrier.rawValue,
         )
         assertEquals("dhl-ecommerce", catalog.parse("https://ecommerceportal.dhl.com/track/?tracking-id=ABC123456").carrier.rawValue)
-        assertEquals(CarrierId.Dhl, catalog.parse("https://www.dhl.com/ch-en/home/tracking.html?tracking-id=LF123456785DE").carrier)
+        assertEquals(CarrierId.Dhl, catalog.parse("https://www.dhl.com/ch-en/home/tracking.html?tracking-id=LF999999987DE").carrier)
         assertTrue(catalog.tracksAutomatically(CarrierId("dhl-ecommerce")))
     }
 
@@ -392,7 +392,7 @@ class CarrierCatalogTests {
         assertTrue(catalog.tracksAutomatically(CarrierId.Unknown))
         assertEquals(
             "hermes-de",
-            catalog.parse("https://www.myhermes.de/empfangen/sendungsverfolgung/sendungsinformation#H1234567890123456789").carrier.rawValue,
+            catalog.parse("https://www.myhermes.de/empfangen/sendungsverfolgung/sendungsinformation#H9999999999999999980").carrier.rawValue,
         )
         for ((country, carrier) in listOf("DE" to "gls-de", "FR" to "gls-fr", "CH" to "gls-ch")) {
             assertEquals(carrier, catalog.parse("https://gls-group.eu/$country/en/parcel-tracking?match=12345678901").carrier.rawValue)
@@ -411,11 +411,11 @@ class CarrierCatalogTests {
     fun detectsHighConfidenceCarriers() {
         assertEquals(CarrierId.Ups, catalog.detect("1Z999AA10123456784").carrier)
         assertEquals(CarrierId.Quickpac, catalog.detect("443412345678901234").carrier)
-        assertEquals(CarrierId.SwissPost, catalog.detect("RA123456785CH").carrier)
-        assertEquals(CarrierId.DpdFr, catalog.detect("250123456789012").carrier)
-        assertEquals(CarrierId.RelaisColis, catalog.detect("CC200000000401").carrier)
-        assertEquals(CarrierId.Asendia, catalog.detect("ASE12345678").carrier)
-        assertEquals(CarrierId.AmazonLogistics, catalog.detect("FR1234567890").carrier)
+        assertEquals(CarrierId.SwissPost, catalog.detect("RA999999987CH").carrier)
+        assertEquals(CarrierId.DpdFr, catalog.detect("250999999999980").carrier)
+        assertEquals(CarrierId.RelaisColis, catalog.detect("CC299999999980").carrier)
+        assertEquals(CarrierId.Asendia, catalog.detect("ASE99999980").carrier)
+        assertEquals(CarrierId.AmazonLogistics, catalog.detect("FR9999999981").carrier)
         assertEquals("nacex", catalog.detect("2103/11207088").carrier.rawValue)
         assertEquals("nacex", catalog.parse("2103/11207088").carrier.rawValue)
         assertEquals("2103/11207088", catalog.parse("Tracking: 2103/11207088").trackingNumber)
@@ -423,7 +423,7 @@ class CarrierCatalogTests {
 
     @Test
     fun keepsAmbiguousCarrierForConfirmation() {
-        val result = catalog.detect("12345678901234")
+        val result = catalog.detect("19999999999980")
         assertEquals(CarrierId.Unknown, result.carrier)
         assertEquals(CarrierMatch.Confidence.Low, result.confidence)
         assertTrue(result.candidates.contains(CarrierId.Dpd))
@@ -739,11 +739,11 @@ class CarrierCatalogTests {
 
     @Test
     fun recognisesDutchPostAndExplainsGenericPostalTracking() {
-        val detected = catalog.detect("LX123456785NL")
+        val detected = catalog.detect("LX999999987NL")
         assertEquals(CarrierId.SpringGDS, detected.carrier)
         assertEquals(CarrierMatch.Confidence.High, detected.confidence)
         assertEquals(listOf(CarrierId.SpringGDS), detected.candidates)
-        assertEquals(CarrierId.SpringGDS, catalog.detect("lx 123.456-785 nl").carrier)
+        assertEquals(CarrierId.SpringGDS, catalog.detect("lx 999.999-987 nl").carrier)
         assertEquals(CarrierId.Unknown, catalog.detect("LX123456789NL").carrier)
         assertEquals(CarrierId.InternationalPost, catalog.detect("RA123456785IR").carrier)
         assertTrue(catalog.tracksAutomatically(CarrierId.SpringGDS))
@@ -752,50 +752,50 @@ class CarrierCatalogTests {
         assertEquals("add.autoSync", catalog.trackingHintKey(CarrierId.Unknown))
         assertEquals("add.autoSync", catalog.trackingHintKey(CarrierId.Dhl))
         for (input in listOf(
-            "https://postnl.post/track?barcodes=LX123456785NL",
-            "https://mailingtechnology.com/tracking/?tn=LX123456785NL",
-            "https://postnl.post/details/LX123456785NL",
-            "https://postnl.post/tracktrace?B=LX123456785NL",
-            "Your Myprotein shipment: LX123456785NL",
+            "https://postnl.post/track?barcodes=LX999999987NL",
+            "https://mailingtechnology.com/tracking/?tn=LX999999987NL",
+            "https://postnl.post/details/LX999999987NL",
+            "https://postnl.post/tracktrace?B=LX999999987NL",
+            "Your Myprotein shipment: LX999999987NL",
         )) {
             assertEquals(CarrierId.SpringGDS, catalog.parse(input).carrier)
-            assertEquals("LX123456785NL", catalog.parse(input).trackingNumber)
+            assertEquals("LX999999987NL", catalog.parse(input).trackingNumber)
         }
     }
 
     @Test
     fun postNLTrackingLinkRepairsObsoleteSavedRoute() {
-        var parcel = parcel("LX123456785NL", "Postal shipment", CarrierId.SpringGDS, "2026-09-07T13:00:00Z")
-        for (savedUrl in listOf(null, "https://postnl.post/details/LX123456785NL")) {
+        var parcel = parcel("LX999999987NL", "Postal shipment", CarrierId.SpringGDS, "2026-09-07T13:00:00Z")
+        for (savedUrl in listOf(null, "https://postnl.post/details/LX999999987NL")) {
             parcel = parcel.copy(trackingUrl = savedUrl)
             val link = catalog.trackingLinks(parcel, AppLanguage.En).first()
             assertEquals("PostNL", link.name)
-            assertEquals("https://postnl.post/track?barcodes=LX123456785NL", link.url)
+            assertEquals("https://postnl.post/track?barcodes=LX999999987NL", link.url)
         }
-        parcel = parcel.copy(trackingUrl = "https://mailingtechnology.com/tracking/?tn=LX123456785NL")
+        parcel = parcel.copy(trackingUrl = "https://mailingtechnology.com/tracking/?tn=LX999999987NL")
         assertEquals(parcel.trackingUrl, catalog.trackingLinks(parcel, AppLanguage.En).first().url)
     }
 
     @Test
     fun recognisesDHLGermanPostalNumbersAndLinks() {
-        for (number in listOf("LF123456785DE", "LX123456785DE", "CY123456785DE")) {
+        for (number in listOf("LF999999987DE", "LX999999987DE", "CY999999987DE")) {
             val result = catalog.detect(number)
             assertEquals(CarrierId.Dhl, result.carrier)
             assertEquals(CarrierMatch.Confidence.High, result.confidence)
             assertEquals(listOf(CarrierId.Dhl), result.candidates)
         }
-        assertEquals(CarrierId.Dhl, catalog.detect("lf 123.456-785 de").carrier)
+        assertEquals(CarrierId.Dhl, catalog.detect("lf 999.999-987 de").carrier)
         assertEquals(CarrierId.Unknown, catalog.detect("LF123456789DE").carrier)
-        assertNotEquals(CarrierId.Dhl, catalog.detect("LF123456785US").carrier)
+        assertNotEquals(CarrierId.Dhl, catalog.detect("LF999999987US").carrier)
         assertTrue(catalog.tracksAutomatically(CarrierId.Dhl))
         for (input in listOf(
-            "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF123456785DE",
-            "https://nolp.dhl.de/nextt-online-public/en/search?piececode=LF123456785DE",
-            "https://www.deutschepost.de/de/s/sendungsverfolgung.html?piececode=LF123456785DE",
-            "Your shipment: LF123456785DE",
+            "https://www.dhl.de/en/privatkunden/dhl-sendungsverfolgung.html?piececode=LF999999987DE",
+            "https://nolp.dhl.de/nextt-online-public/en/search?piececode=LF999999987DE",
+            "https://www.deutschepost.de/de/s/sendungsverfolgung.html?piececode=LF999999987DE",
+            "Your shipment: LF999999987DE",
         )) {
             assertEquals(CarrierId.Dhl, catalog.parse(input).carrier)
-            assertEquals("LF123456785DE", catalog.parse(input).trackingNumber)
+            assertEquals("LF999999987DE", catalog.parse(input).trackingNumber)
         }
         val numeric = catalog.parse("https://www.dhl.de/int-verfolgen/?piececode=1234567890")
         assertEquals(CarrierId.Dhl, numeric.carrier)
@@ -827,16 +827,16 @@ class CarrierCatalogTests {
 
     @Test
     fun amazonOrdersOpenTheBuyersStore() {
-        assertEquals("www.amazon.de", host(CarrierCatalog.amazonOrdersUrl("CH0000000001")))
-        assertEquals("www.amazon.de", host(CarrierCatalog.amazonOrdersUrl("ch 000-0000001", country = "CA")))
+        assertEquals("www.amazon.de", host(CarrierCatalog.amazonOrdersUrl("CH9999999980")))
+        assertEquals("www.amazon.de", host(CarrierCatalog.amazonOrdersUrl("ch 999-9999980", country = "CA")))
         assertEquals("www.amazon.co.uk", host(CarrierCatalog.amazonOrdersUrl("IS0000000001")))
         assertEquals("www.amazon.com", host(CarrierCatalog.amazonOrdersUrl("SK0000000001")))
-        assertEquals("www.amazon.ca", host(CarrierCatalog.amazonOrdersUrl("TBA000000000001", country = " ca ")))
-        assertEquals("www.amazon.com", host(CarrierCatalog.amazonOrdersUrl("TBA000000000001", country = "FR")))
+        assertEquals("www.amazon.ca", host(CarrierCatalog.amazonOrdersUrl("TBA999999999980", country = " ca ")))
+        assertEquals("www.amazon.com", host(CarrierCatalog.amazonOrdersUrl("TBA999999999980", country = "FR")))
         assertEquals("www.amazon.com.mx", host(CarrierCatalog.amazonOrdersUrl("TBM000000000001", country = "CA")))
         assertEquals("www.amazon.de", host(CarrierCatalog.amazonOrdersUrl("", country = "CH")))
         assertEquals("www.amazon.ca", host(CarrierCatalog.amazonOrdersUrl("", country = "CA")))
-        var parcel = parcel("TBA000000000001", "Example", CarrierId.AmazonLogistics, "2026-09-10T12:00:00Z")
+        var parcel = parcel("TBA999999999980", "Example", CarrierId.AmazonLogistics, "2026-09-10T12:00:00Z")
         parcel = parcel.copy(carrierData = CarrierData(destinationCountry = "CA"))
         val link = catalog.trackingLinks(parcel, AppLanguage.En).first()
         assertEquals("www.amazon.ca", host(link.url))
@@ -851,19 +851,19 @@ class CarrierCatalogTests {
             assertTrue(catalog.requiresAmazonAccount(CarrierId.Unknown, trackingNumber = number))
             assertFalse(catalog.requiresAmazonAccount(CarrierId.AmazonShipping, trackingNumber = number))
         }
-        assertEquals(CarrierId.AmazonLogistics, catalog.parse("TBA000000000001").carrier)
-        assertFalse(catalog.isAmazonTrackingNumber("ZZ0000000001"))
+        assertEquals(CarrierId.AmazonLogistics, catalog.parse("TBA999999999980").carrier)
+        assertFalse(catalog.isAmazonTrackingNumber("ZZ9999999980"))
         assertFalse(catalog.isAmazonTrackingNumber("TBA00000000001"))
         assertTrue(catalog.tracksAutomatically(CarrierId.AmazonShipping))
-        assertEquals("www.amazon.com.be", host(CarrierCatalog.amazonOrdersUrl("BE0000000001")))
-        assertEquals("www.amazon.co.uk", host(CarrierCatalog.amazonOrdersUrl("UK0000000001")))
-        assertEquals("track.amazon.it", host(CarrierCatalog.amazonShippingUrl("IT0000000001")))
-        assertEquals("track.amazon.com", host(CarrierCatalog.amazonShippingUrl("TBA000000000001")))
-        assertEquals("www.amazon.com", host(CarrierCatalog.amazonOrdersUrl("TBA000000000001")))
+        assertEquals("www.amazon.com.be", host(CarrierCatalog.amazonOrdersUrl("BE9999999980")))
+        assertEquals("www.amazon.co.uk", host(CarrierCatalog.amazonOrdersUrl("UK9999999980")))
+        assertEquals("track.amazon.it", host(CarrierCatalog.amazonShippingUrl("IT9999999980")))
+        assertEquals("track.amazon.com", host(CarrierCatalog.amazonShippingUrl("TBA999999999980")))
+        assertEquals("www.amazon.com", host(CarrierCatalog.amazonOrdersUrl("TBA999999999980")))
         assertEquals("www.amazon.ca", host(CarrierCatalog.amazonOrdersUrl("tbc 000000000001")))
         assertEquals("www.amazon.com.mx", host(CarrierCatalog.amazonOrdersUrl("TBM000000000001")))
         assertEquals("track.amazon.com", host(CarrierCatalog.amazonShippingUrl("TBC000000000001")))
-        val parcel = parcel("UK0000000001", "Example", CarrierId.AmazonShipping, "2026-09-10T12:00:00Z")
+        val parcel = parcel("UK9999999980", "Example", CarrierId.AmazonShipping, "2026-09-10T12:00:00Z")
         assertEquals(CarrierId.AmazonShipping, parcel.activeTrackingCarrier)
         assertEquals("track.amazon.co.uk", host(catalog.trackingLinks(parcel, AppLanguage.En).firstOrNull()?.url))
     }
@@ -1025,7 +1025,7 @@ class CarrierCatalogTests {
         assertFalse(glsGermany.isSatisfied(""))
         assertEquals("Unknown carrier", catalog.info(CarrierId.Unknown, language = AppLanguage.En).displayName)
         assertEquals("Transporteur inconnu", catalog.info(CarrierId.Unknown, language = AppLanguage.Fr).displayName)
-        val dpd = postcodeRequirement(CarrierId.Dpd, "12345678901234")
+        val dpd = postcodeRequirement(CarrierId.Dpd, "19999999999980")
         // DPD delivers abroad too: any country's postcode, as that country writes it.
         assertNull(dpd.placeholder)
         assertEquals(12, dpd.maxLength)
@@ -1059,7 +1059,7 @@ class CarrierCatalogTests {
         }
 
         // A national network keeps its own shape and example wherever the device is.
-        val dpdGermany = postcodeRequirement(CarrierId.DpdDe, "12345678901234")
+        val dpdGermany = postcodeRequirement(CarrierId.DpdDe, "19999999999980")
         assertEquals("10115", catalog.postcodeExample(CarrierId.DpdDe, requirement = dpdGermany, region = "FR"))
         assertEquals("10115", dpdGermany.typedValue("10 115 "))
         assertFalse(dpdGermany.accepts("8000"))
@@ -1077,13 +1077,13 @@ class CarrierCatalogTests {
         assertFalse(mondialRelay.isSatisfied(""))
         assertTrue(catalog.requirements(CarrierId.MondialRelay, trackingNumber = "1234567890").isEmpty())
 
-        val gls = postcodeRequirement(CarrierId.GlsCh, "993990103198")
+        val gls = postcodeRequirement(CarrierId.GlsCh, "999999999916")
         assertTrue(gls.accepts("8000"))
         assertFalse(gls.accepts("75001"))
         assertFalse(gls.isOptional)
         assertFalse(gls.isSatisfied(""))
 
-        val heppner = postcodeRequirement(CarrierId.Heppner, "23456789")
+        val heppner = postcodeRequirement(CarrierId.Heppner, "99999980")
         assertTrue(heppner.accepts("1201"))
         assertTrue(heppner.accepts("75001"))
         assertFalse(heppner.isOptional)
@@ -1118,11 +1118,11 @@ class CarrierCatalogTests {
         fun given(parcels: List<Parcel>, remembered: List<GivenPostcode> = emptyList()) =
             GivenPostcode.candidates(parcels = parcels, remembered = remembered)
         // Mondial Relay and DPD take any country's postcode; GLS Switzerland, Heppner and DPD Germany their countries'.
-        val dpd = postcodeRequirement(CarrierId.Dpd, "12345678901234")
+        val dpd = postcodeRequirement(CarrierId.Dpd, "19999999999980")
         val mondialRelay = postcodeRequirement(CarrierId.MondialRelay, "76434219")
-        val gls = postcodeRequirement(CarrierId.GlsCh, "993990103198")
-        val heppner = postcodeRequirement(CarrierId.Heppner, "23456789")
-        val dpdGermany = postcodeRequirement(CarrierId.DpdDe, "12345678901234")
+        val gls = postcodeRequirement(CarrierId.GlsCh, "999999999916")
+        val heppner = postcodeRequirement(CarrierId.Heppner, "99999980")
+        val dpdGermany = postcodeRequirement(CarrierId.DpdDe, "19999999999980")
 
         // The carrier's own postcode wins over a newer one given to another carrier.
         val parcels = given(listOf(parcel(CarrierId.MondialRelay, "75002", 1), parcel(CarrierId.GlsCh, "8000", 2), parcel(CarrierId.Dpd, "75001", 3)))
@@ -1167,8 +1167,8 @@ class CarrierCatalogTests {
         // PostNL's 3S labels take any country's postcode, Heppner its four countries' shapes, DPD Germany Germany's.
         // DPD takes any country's too, but reads the postcode alone, as Heppner does.
         val postNL = postcodeRequirement(CarrierId.SpringGDS, "3SABCD1234567")
-        val heppner = postcodeRequirement(CarrierId.Heppner, "23456789")
-        val dpdGermany = postcodeRequirement(CarrierId.DpdDe, "12345678901234")
+        val heppner = postcodeRequirement(CarrierId.Heppner, "99999980")
+        val dpdGermany = postcodeRequirement(CarrierId.DpdDe, "19999999999980")
         val dpd = postcodeRequirement(CarrierId.Dpd, "06080000000001")
         assertEquals("NL", catalog.homeCountry(CarrierId.SpringGDS))
 
@@ -1256,7 +1256,7 @@ class CarrierCatalogTests {
 
     @Test
     fun externalTrackingSitesUseSupportedLanguages() {
-        var parcel = parcel("993412345612345678", "Parcel", CarrierId.SwissPost, "2026-09-07T13:00:00Z", syncStatus = SyncStatus.Unsupported)
+        var parcel = parcel("993412345699999980", "Parcel", CarrierId.SwissPost, "2026-09-07T13:00:00Z", syncStatus = SyncStatus.Unsupported)
         for (language in listOf(AppLanguage.Es, AppLanguage.Pt, AppLanguage.PtBr, AppLanguage.Pl, AppLanguage.Ru, AppLanguage.Zh)) {
             val url = catalog.trackingLinks(parcel, language).first().url
             assertEquals("en", query(url, "lang"))
@@ -1305,15 +1305,15 @@ class CarrierCatalogTests {
         assertEquals("Unknown postal carrier", catalog.info(CarrierId.InternationalPost).displayName)
         assertTrue(catalog.tracksAutomatically(CarrierId.InternationalPost))
 
-        parcel = parcel.copy(carrier = CarrierId.SwissPost, trackingNumber = "RA123456785CH", trackingUrl = null)
+        parcel = parcel.copy(carrier = CarrierId.SwissPost, trackingNumber = "RA999999987CH", trackingUrl = null)
         val swissPost = catalog.trackingLinks(parcel, AppLanguage.Fr).first()
         assertEquals("Swiss Post", swissPost.name)
-        assertEquals("https://service.post.ch/ekp-web/ui/entry/search/RA123456785CH?lang=fr", swissPost.url)
+        assertEquals("https://service.post.ch/ekp-web/ui/entry/search/RA999999987CH?lang=fr", swissPost.url)
 
         parcel = parcel.copy(
             carrier = CarrierId.Dhl,
-            trackingNumber = "LF123456785DE",
-            trackingUrl = "https://www.dhl.de/int-verfolgen/?piececode=LF123456785DE",
+            trackingNumber = "LF999999987DE",
+            trackingUrl = "https://www.dhl.de/int-verfolgen/?piececode=LF999999987DE",
         )
         val dhl = catalog.trackingLinks(parcel, AppLanguage.Fr).first()
         assertEquals("DHL", dhl.name)
@@ -1330,7 +1330,7 @@ class CarrierCatalogTests {
     @Test
     fun formattingAndS10Checksum() {
         assertEquals("99.34.123456.78901234", CarrierCatalog.format("993412345678901234"))
-        assertTrue(CarrierCatalog.isValidS10("RA123456785CH"))
+        assertTrue(CarrierCatalog.isValidS10("RA999999987CH"))
         assertFalse(CarrierCatalog.isValidS10("RA123456789CH"))
     }
 
@@ -1360,12 +1360,12 @@ class CarrierCatalogTests {
         for (number in listOf("PL00ZZ000000001A", "PL00ZZ0000000010100000Z", "PL00ZZ000000002Z", "Z", "")) {
             assertFalse(CarrierCatalog.isValidCorreosSpainCheckLetter(number))
         }
-        for (number in listOf("12345678901234E", "00000000000000U", "99999999999999Z", "012345678901233")) {
+        for (number in listOf("99999999999984E", "00000000000000U", "99999999999999Z", "012345678901233")) {
             assertTrue(CarrierCatalog.isValidDpdParcelNumber(number))
         }
         for (number in listOf(
-            "12345678901234F", "123456789012343", "12345678901234", "1234567890123E", "12345678901234EE", "12345678901234e",
-            "12345678901234E\n",
+            "12345678901234F", "123456789012343", "19999999999980", "1234567890123E", "12345678901234EE", "99999999999984e",
+            "99999999999984E\n",
         )) {
             assertFalse(CarrierCatalog.isValidDpdParcelNumber(number))
         }
@@ -1388,7 +1388,7 @@ class CarrierCatalogTests {
     /** Constructed eleven-digit numbers: DHL eCommerce Poland weighs ten digits 4 and 9 from the left. */
     @Test
     fun dhlEcommercePolandNumbersCheckTheirLastDigit() {
-        for (number in listOf("12345678900", "99999999995", "00000000000")) {
+        for (number in listOf("12345678900", "99999999984", "00000000000")) {
             assertTrue(number, CarrierCatalog.isValidDhlEcommercePolandNumber(number))
             assertEquals(number, true, CarrierCatalog.checksumPasses("dhl-ecommerce-pl", number))
         }
@@ -1427,7 +1427,7 @@ class CarrierCatalogTests {
     fun recognitionAsksACarrierWhoseCheckDigitPassesFirst() {
         // Synthetic twelve digits; only the first passes Purolator's Luhn check.
         assertEquals(CarrierId.Purolator, catalog.recognitionCandidates("300000000004").firstOrNull())
-        assertFalse(catalog.recognitionCandidates("300000000005").contains(CarrierId.Purolator))
+        assertFalse(catalog.recognitionCandidates("399999999980").contains(CarrierId.Purolator))
         // Hermes's check digit passes; DPD's networks are only more popular.
         val fourteen = catalog.recognitionCandidates("12345678901231")
         assertEquals(CarrierId.HermesDe, fourteen.firstOrNull())
@@ -1443,7 +1443,7 @@ class CarrierCatalogTests {
         val routed = listOf("42000000$pic", "420000000000$pic")
         // A 26-digit PIC stays a suggestion, bare or routed, and so does a routed 22-digit PIC whose
         // Mailer ID does not fit its channel or whose family DHL eCommerce also tracks.
-        val suggested = listOf(longPic, "42000000$longPic", "42000000" + "9205510000000012345670", "42000000" + "9261290000000012345677")
+        val suggested = listOf(longPic, "42000000$longPic", "42000000" + "9205519999999999999984", "42000000" + "9261290000000012345677")
         for (number in suggested) {
             assertTrue(number, CarrierCatalog.isValidUspsPackageBarcode(number))
             val match = catalog.detect(number)
@@ -1647,15 +1647,15 @@ class CarrierCatalogTests {
      */
     @Test
     fun frankierIdsCheckTheirCrc4() {
-        for (number in listOf("A0123456789ABCDEF01F", "A000000000000000000A", "RA51251496FC301A6903")) {
+        for (number in listOf("A0999999986ABCDEF01F", "A000000000000000000A", "RA51251496FC301A6903")) {
             assertTrue(number, CarrierCatalog.isValidFrankierId(number))
             assertEquals(number, true, CarrierCatalog.checksumPasses("frankier-id", number))
         }
         for (number in listOf(
             "A0123456789ABCDEF010", "A000000000000000000F", "RA51251496FC301A6902",
             // A check past F, lower case, a character short or over, a separator and a trailing newline.
-            "A0123456789ABCDEF01G", "a0123456789abcdef01f", "A0123456789ABCDEF01", "A0123456789ABCDEF01F0",
-            "A012-3456789ABCDEF01F", "A0123456789ABCDEF01F\n",
+            "A0123456789ABCDEF01G", "a0999999986abcdef01f", "A0123456789ABCDEF01", "A0123456789ABCDEF01F0",
+            "A099-9999986ABCDEF01F", "A0999999986ABCDEF01F\n",
         )) {
             assertFalse(number, CarrierCatalog.isValidFrankierId(number))
             assertEquals(number, false, CarrierCatalog.checksumPasses("frankier-id", number))
@@ -1664,8 +1664,8 @@ class CarrierCatalogTests {
 
     @Test
     fun postlogisticsPrintedReferenceAndTrackingLink() {
-        val printed = "12345678-001"
-        val compact = "12345678001"
+        val printed = "19999980-001"
+        val compact = "19999980001"
         assertEquals(CarrierId.Postlogistics, catalog.parse(printed).carrier)
         assertEquals(CarrierId.Unknown, catalog.detect(compact).carrier)
         // A link from the former PostLogistics site still names the carrier.
@@ -1682,14 +1682,14 @@ class CarrierCatalogTests {
     @Test
     fun hermesCheckDigitAndDepotPreferenceMatchTheWebEngine() {
         assertTrue(CarrierCatalog.isValidHermesParcelNumber("12345678901231"))
-        assertFalse(CarrierCatalog.isValidHermesParcelNumber("12345678901234"))
+        assertFalse(CarrierCatalog.isValidHermesParcelNumber("19999999999980"))
         assertTrue(catalog.detect("12345678901231").candidates.contains(CarrierId.HermesDe))
-        assertFalse(catalog.detect("12345678901234").candidates.contains(CarrierId.HermesDe))
-        assertFalse(catalog.detect("12345678901234").candidates.contains(CarrierId.GlsCh))
+        assertFalse(catalog.detect("19999999999980").candidates.contains(CarrierId.HermesDe))
+        assertFalse(catalog.detect("19999999999980").candidates.contains(CarrierId.GlsCh))
 
-        assertTrue(CarrierCatalog.isValidGlsParcelNumber("123456789011"))
+        assertTrue(CarrierCatalog.isValidGlsParcelNumber("123459999981"))
         assertFalse(CarrierCatalog.isValidGlsParcelNumber("123456789012"))
-        assertTrue(catalog.detect("123456789011").candidates.contains(CarrierId.GlsDe))
+        assertTrue(catalog.detect("123459999981").candidates.contains(CarrierId.GlsDe))
         assertFalse(catalog.detect("123456789012").candidates.contains(CarrierId.GlsDe))
         assertTrue(catalog.detect("12345678901").candidates.contains(CarrierId.GlsDe))
 
@@ -1699,7 +1699,7 @@ class CarrierCatalogTests {
         assertEquals(CarrierMatch.Confidence.Low, swissDepot.confidence)
         assertEquals(listOf(CarrierId.Dpd), swissDepot.preferred)
         assertEquals(CarrierId.Dpd, swissDepot.candidates.firstOrNull())
-        assertEquals(CarrierId.DpdFr, catalog.detect("10000000000001").candidates.firstOrNull())
+        assertEquals(CarrierId.DpdFr, catalog.detect("10009999999980").candidates.firstOrNull())
         assertFalse(catalog.detect("06460000000002").preferred.contains(CarrierId.Dpd))
     }
 
@@ -1734,10 +1734,10 @@ class CarrierCatalogTests {
         assertEquals(listOf(futureExpress), dynamic.recognitionCandidates("FX12375678"))
 
         // A check this build knows still selects a carrier and rejects a mistyped number.
-        assertEquals(true, CarrierCatalog.checksumPasses("s10", "RA123456785CH"))
+        assertEquals(true, CarrierCatalog.checksumPasses("s10", "RA999999987CH"))
         assertEquals(false, CarrierCatalog.checksumPasses("s10", "RA123456789CH"))
-        assertEquals(CarrierId.InternationalPost, dynamic.detect("RA123456785CH").carrier)
-        assertEquals(CarrierMatch.Confidence.High, dynamic.detect("RA123456785CH").confidence)
+        assertEquals(CarrierId.InternationalPost, dynamic.detect("RA999999987CH").carrier)
+        assertEquals(CarrierMatch.Confidence.High, dynamic.detect("RA999999987CH").confidence)
         assertFalse(dynamic.detect("RA123456789CH").candidates.contains(CarrierId.InternationalPost))
     }
 
@@ -1762,8 +1762,8 @@ class CarrierCatalogTests {
         assertEquals(listOf(plain, future), dynamic.recognitionCandidates("1234567890"))
 
         // A postal number recovers the rules S10 vouches for, not one behind another check.
-        assertEquals(CarrierId.InternationalPost, dynamic.detect("RA123456785CH").carrier)
-        assertEquals(listOf(plain), dynamic.recognitionCandidates("RA123456785CH"))
+        assertEquals(CarrierId.InternationalPost, dynamic.detect("RA999999987CH").carrier)
+        assertEquals(listOf(plain), dynamic.recognitionCandidates("RA999999987CH"))
     }
 
     @Test
@@ -2103,7 +2103,7 @@ class CarrierCatalogTests {
     fun suggestionMarksTheCharactersItChanges() {
         data class Case(val typed: String, val suggestion: String, val marked: List<String>)
         val cases = listOf(
-            Case(typed = "LX1234567B5DE", suggestion = "LX123456785DE", marked = listOf("8")),
+            Case(typed = "LX9999999B7DE", suggestion = "LX999999987DE", marked = listOf("8")),
             Case(typed = "1X123456785DE", suggestion = "IX123456785DE", marked = listOf("I")),
             Case(typed = "RR12345678SCH", suggestion = "RR123456785CH", marked = listOf("5")),
             Case(typed = "LXZ234567B5DE", suggestion = "LX223456785DE", marked = listOf("2", "8")),

@@ -14,7 +14,7 @@ SEUR's numbers are usually 14 or 21 digits, and a 7-digit code works too:
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `12345678901234` | 14 digits |
+| `19999999999980` | 14 digits |
 | `123456789012345678901` | 21 digits |
 | `1234567` | 7 digits |
 

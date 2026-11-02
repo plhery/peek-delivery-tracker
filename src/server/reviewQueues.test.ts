@@ -294,15 +294,15 @@ describe('review queue replay', () => {
       supportCase('31415926535897', 'hermes-de', 'hermes-de'),
       // A barcode Hermes's shape does not fit, and no barcode at all.
       supportCase('27182818284590', 'hermes-de', 'hermes-de'),
-      supportCase('10000000000001', 'hermes-de', 'hermes-de'),
+      supportCase('10009999999980', 'hermes-de', 'hermes-de'),
       // Filed under another carrier than its parcel.
-      supportCase('12345678901234', 'dpd-de', 'dpd-de'),
+      supportCase('19999999999980', 'dpd-de', 'dpd-de'),
     ]);
     client.trackingNumberParcels.mockResolvedValue(new Map([
       ['31415926535897', [parcel('31415926535897', '90000000001000')]],
-      ['27182818284590', [parcel('27182818284590', '12345678901234')]],
-      ['10000000000001', [parcel('10000000000001', null)]],
-      ['12345678901234', [parcel('12345678901234', '90000000001000')]],
+      ['27182818284590', [parcel('27182818284590', '19999999999980')]],
+      ['10009999999980', [parcel('10009999999980', null)]],
+      ['19999999999980', [parcel('19999999999980', '90000000001000')]],
     ]));
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
       .resolves.toMatchObject({ cases_replayed: 4, cases_ignored: 1 });

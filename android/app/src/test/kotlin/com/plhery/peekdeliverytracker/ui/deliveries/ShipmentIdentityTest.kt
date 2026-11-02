@@ -174,15 +174,15 @@ class ShipmentIdentityTest {
 
     @Test
     fun aSingleNumberIsTheTrackingNumberAndSwissPostLogisticsWritesItsWithADash() {
-        show(demo { it.copy(carrier = CarrierId.Postlogistics, trackingNumber = "12345678001") })
+        show(demo { it.copy(carrier = CarrierId.Postlogistics, trackingNumber = "19999980001") })
         open()
-        assertEquals(listOf("12345678-001"), numbers())
+        assertEquals(listOf("19999980-001"), numbers())
         assertEquals(listOf("Copy tracking number"), copies())
         assertTrue(words().contains("Tracking number"))
         // Its site takes it as it is written.
         compose.onNodeWithTag(PAGE_COPY_NUMBER).performClick()
         compose.waitForIdle()
-        assertEquals("12345678-001", clipboard())
+        assertEquals("19999980-001", clipboard())
     }
 
     @Test

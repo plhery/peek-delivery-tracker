@@ -41,7 +41,7 @@ internal object ParcelLogicTestFixtures {
         id = UUID.randomUUID(),
         label = label,
         carrier = "Swiss Post",
-        trackingNumber = "99.34.123456.12345678",
+        trackingNumber = "99.34.123456.99999980",
         detail = "Today",
         isOutForDelivery = outForDelivery,
     )

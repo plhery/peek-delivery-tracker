@@ -6,14 +6,14 @@ set local role authenticated;
 do $$
 declare parcel public.packages;
 begin
-  parcel := test_support.add_parcel('EB000000005CN', 'EMS fixture', 'ems');
+  parcel := test_support.add_parcel('EB999999987CN', 'EMS fixture', 'ems');
   if parcel.carrier <> 'ems' then raise exception 'EMS carrier was lost'; end if;
   perform public.change_owned_package_carrier(parcel.id, 'china-post');
   perform public.change_owned_package_carrier(parcel.id, 'ems');
   if (select carrier from public.packages where id = parcel.id) <> 'ems' then
     raise exception 'EMS carrier change failed';
   end if;
-  if (select tracking_number from public.packages where id = parcel.id) <> 'EB000000005CN' then
+  if (select tracking_number from public.packages where id = parcel.id) <> 'EB999999987CN' then
     raise exception 'EMS carrier change rewrote the postal identifier';
   end if;
   begin

@@ -498,7 +498,7 @@ class ParcelLogicListTests {
     fun aCopiedTrackingNumberIsTheOneItsCarriersSiteTakes() {
         assertEquals("1Z999AA10123456784", TrackingNumberCopy.text("1Z999AA10123456784", carrier = CarrierId.Ups))
         // PostLogistics prints its references with a dash, and its site searches for them so.
-        assertEquals("12345678-001", TrackingNumberCopy.text("12345678001", carrier = CarrierId.Postlogistics))
+        assertEquals("19999980-001", TrackingNumberCopy.text("19999980001", carrier = CarrierId.Postlogistics))
     }
 
     @Test

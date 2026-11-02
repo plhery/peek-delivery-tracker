@@ -58,15 +58,15 @@
   },
   "checkDigits": [
     {
-      "number": "LX1234567B5DE",
+      "number": "LX9999999B7DE",
       "trouble": true,
-      "suggestion": "LX123456785DE",
+      "suggestion": "LX999999987DE",
       "why": "A letter read where the label prints a digit: the one reading that adds up is offered."
     },
     {
-      "number": "lx 1234567b5 de",
+      "number": "lx 9999999b7 de",
       "trouble": true,
-      "suggestion": "LX123456785DE"
+      "suggestion": "LX999999987DE"
     },
     {
       "number": "RR12345678SCH",
@@ -93,7 +93,7 @@
       "trouble": true
     },
     {
-      "number": "LX123456785DE",
+      "number": "LX999999987DE",
       "trouble": false,
       "why": "What adds up, and what is not a postal number, is left alone."
     },
@@ -163,14 +163,14 @@
       "why": "The text's order, whichever shape the parser tries first."
     },
     {
-      "text": "RR123456785CH\nLX123456785DE",
+      "text": "RR123456785CH\nLX999999987DE",
       "numbers": [
         {
           "number": "RR123456785CH",
           "carrier": "swiss-post"
         },
         {
-          "number": "LX123456785DE",
+          "number": "LX999999987DE",
           "carrier": "dhl"
         }
       ],
@@ -203,14 +203,14 @@
       ]
     },
     {
-      "text": "LX1234567B5DE\nRR123456785CH\nLX123456785DE",
+      "text": "LX9999999B7DE\nRR123456785CH\nLX999999987DE",
       "numbers": [
         {
           "number": "RR123456785CH",
           "carrier": "swiss-post"
         },
         {
-          "number": "LX123456785DE",
+          "number": "LX999999987DE",
           "carrier": "dhl"
         }
       ],

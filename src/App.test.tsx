@@ -328,7 +328,7 @@ describe('App', () => {
     window.history.replaceState({}, '', '/?share-target=1');
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({
       label: 'Coffee delivery',
-      trackingInput: 'Track 993412345612345678',
+      trackingInput: 'Track 993412345699999980',
     }), { status: 200, headers: { 'Content-Type': 'application/json' } })));
 
     renderApp();
@@ -336,7 +336,7 @@ describe('App', () => {
     const sheet = await screen.findByRole('dialog', { name: 'Add a parcel' });
     expect(within(sheet).getByLabelText(/^name/i)).toHaveValue('Coffee delivery');
     expect(within(sheet).getByLabelText(/tracking number or link/i)).toHaveValue(
-      'Track 993412345612345678',
+      'Track 993412345699999980',
     );
     expect(window.location.search).toBe('');
   });
@@ -598,7 +598,7 @@ describe('App', () => {
     const expectedDelivery = `${tomorrow.getFullYear()}-${pad(tomorrow.getMonth() + 1)}-${pad(tomorrow.getDate())}`;
     const parcel: ParcelWithEvents = {
       id: 'parcel-with-eta',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Tomorrow parcel',
       carrier: 'swiss-post',
       createdAt: new Date().toISOString(),
@@ -632,7 +632,7 @@ describe('App', () => {
     const expectedDelivery = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}${window}`;
     const parcel: ParcelWithEvents = {
       id: 'parcel-today',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Today parcel',
       carrier: 'swiss-post',
       createdAt: new Date().toISOString(),
@@ -687,7 +687,7 @@ describe('App', () => {
     const user = userEvent.setup();
     const writeText = vi.spyOn(window.navigator.clipboard, 'writeText');
     const parcel: ParcelWithEvents = {
-      id: 'linked-parcel', trackingNumber: '993412345612345678', label: 'Perfume / Surprise',
+      id: 'linked-parcel', trackingNumber: '993412345699999980', label: 'Perfume / Surprise',
       carrier: 'swiss-post', originalCarrier: 'gls-de', originalTrackingNumber: '12345478901',
       createdAt: new Date().toISOString(), syncStatus: 'ok', events: [],
     };
@@ -966,7 +966,7 @@ describe('App', () => {
     };
     let parcel: ParcelWithEvents = {
       id: 'parcel-syncing',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Fresh parcel',
       carrier: 'swiss-post',
       createdAt: '2026-07-16T10:00:00Z',
@@ -1045,7 +1045,7 @@ describe('App', () => {
     const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
     await user.type(
       within(sheet).getByLabelText(/tracking number/i),
-      '91346097123456789012',
+      '91346097999999999980',
     );
 
     expect(
@@ -1054,7 +1054,7 @@ describe('App', () => {
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
 
     expect(add).toHaveBeenCalledWith({
-      trackingNumber: '91346097123456789012',
+      trackingNumber: '91346097999999999980',
       label: '',
       carrier: 'planzer',
     });
@@ -1104,7 +1104,7 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: /add a parcel/i }));
     const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
     const trackingUrl =
-      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.03316119?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
+      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.99999987?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
     await user.type(within(sheet).getByLabelText(/tracking number or link/i), trackingUrl);
 
     expect(within(sheet).queryByLabelText(/planzer tracking url/i)).not.toBeInTheDocument();
@@ -1112,7 +1112,7 @@ describe('App', () => {
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
 
     expect(add).toHaveBeenCalledWith({
-      trackingNumber: '999.90.03316119',
+      trackingNumber: '999.90.99999987',
       label: '',
       carrier: 'planzer',
       trackingUrl,
@@ -1129,7 +1129,7 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: /add a parcel/i }));
     const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
     const trackingUrl =
-      'https://customeriberia.dachser.com/customerarea/utilidades/seguimiento-publico/detalle?cliente=generico&numeroUnico=9010000001234&fecha=20260513&clave=TESTKEY9';
+      'https://customeriberia.dachser.com/customerarea/utilidades/seguimiento-publico/detalle?cliente=generico&numeroUnico=9019999999986&fecha=20260513&clave=TESTKEY9';
     await user.type(within(sheet).getByLabelText(/tracking number or link/i), trackingUrl);
 
     expect(within(sheet).queryByLabelText(/dachser tracking url/i)).not.toBeInTheDocument();
@@ -1138,7 +1138,7 @@ describe('App', () => {
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
 
     expect(add).toHaveBeenCalledWith({
-      trackingNumber: '9010000001234',
+      trackingNumber: '9019999999986',
       label: '',
       carrier: 'dachser',
       trackingUrl,
@@ -1156,7 +1156,7 @@ describe('App', () => {
     const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
     await user.type(
       within(sheet).getByLabelText(/tracking number/i),
-      '999.90.03316119',
+      '999.90.99999987',
     );
 
     const urlField = within(sheet).getByLabelText(/planzer tracking url/i);
@@ -1164,12 +1164,12 @@ describe('App', () => {
     expect(within(sheet).getByRole('button', { name: /add parcel/i })).toBeDisabled();
 
     const trackingUrl =
-      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.03316119?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
+      'https://trackandtrace.planzergroup.com/shared/sendungen/999.90.99999987?accessKey=abcdefghijklmnopqrstuvwxyzABCDEFGH';
     await user.type(urlField, trackingUrl);
     await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
 
     expect(add).toHaveBeenCalledWith({
-      trackingNumber: '999.90.03316119',
+      trackingNumber: '999.90.99999987',
       label: '',
       carrier: 'planzer',
       trackingUrl,
@@ -1403,7 +1403,7 @@ describe('App', () => {
   it('opens notification deep links and clears the parcel query on back', async () => {
     const parcel: ParcelWithEvents = {
       id: 'parcel-from-push',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'From notification',
       carrier: 'swiss-post',
       createdAt: '2026-07-15T08:00:00Z',
@@ -1515,7 +1515,7 @@ describe('App', () => {
   it('restores a parcel from the collapsed archive', async () => {
     const archived: ParcelWithEvents = {
       id: 'parcel-archived',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Old delivery',
       carrier: 'swiss-post',
       createdAt: '2026-05-01T10:00:00Z',
@@ -1558,7 +1558,7 @@ describe('App', () => {
   it('permanently deletes an archived parcel after confirmation', async () => {
     const archived: ParcelWithEvents = {
       id: 'parcel-archived',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Old delivery',
       carrier: 'swiss-post',
       createdAt: '2026-05-01T10:00:00Z',
@@ -1600,7 +1600,7 @@ describe('App', () => {
   it('changes a parcel carrier and replaces stale tracking history', async () => {
     const parcel: ParcelWithEvents = {
       id: 'parcel-wrong-carrier',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Wrong carrier',
       carrier: 'swiss-post',
       createdAt: '2026-08-10T10:00:00Z',
@@ -1657,7 +1657,7 @@ describe('App', () => {
   it('carefully deletes an active parcel directly from its detail screen', async () => {
     const active: ParcelWithEvents = {
       id: 'parcel-active-delete',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Duplicate delivery',
       carrier: 'swiss-post',
       createdAt: '2026-08-10T10:00:00Z',
@@ -1751,7 +1751,7 @@ describe('App', () => {
   it('shows the last saved parcels when the API is temporarily unavailable', async () => {
     const cached: ParcelWithEvents = {
       id: 'cached-parcel',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Saved coffee',
       carrier: 'swiss-post',
       createdAt: '2026-07-15T00:00:00Z',
@@ -1779,7 +1779,7 @@ describe('App', () => {
   it('opens on the saved parcels while the first request is still running', () => {
     const cached: ParcelWithEvents = {
       id: 'cached-parcel',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Saved coffee',
       carrier: 'swiss-post',
       createdAt: '2026-07-15T00:00:00Z',
@@ -1841,7 +1841,7 @@ describe('App', () => {
   it('shows a newly unannounced parcel as neutral while automatic checks continue', async () => {
     const parcel: ParcelWithEvents = {
       id: 'pkg-unannounced',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: 'Early shipping label',
       carrier: 'swiss-post',
       createdAt: new Date().toISOString(),
@@ -1949,7 +1949,7 @@ describe('App', () => {
   it('explains unavailable tracking without exposing carrier diagnostics', async () => {
     const parcel: ParcelWithEvents = {
       id: 'pkg-error',
-      trackingNumber: '993412345612345678',
+      trackingNumber: '993412345699999980',
       label: '',
       carrier: 'swiss-post',
       createdAt: '2026-07-14T10:00:00Z',

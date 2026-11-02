@@ -8,7 +8,7 @@ declare
   parcel public.packages;
 begin
   -- Postmedia Parcel Services shows a parcel only with its delivery postal code.
-  parcel := test_support.add_parcel('BNI000000001', 'Postmedia fixture', 'postmedia-parcel-services', null, ' x0x  0x0 ');
+  parcel := test_support.add_parcel('BNI999999980', 'Postmedia fixture', 'postmedia-parcel-services', null, ' x0x  0x0 ');
   if parcel.carrier <> 'postmedia-parcel-services' or parcel.dpd_postcode <> 'X0X 0X0' then
     raise exception 'Postmedia lost its postal code on creation';
   end if;

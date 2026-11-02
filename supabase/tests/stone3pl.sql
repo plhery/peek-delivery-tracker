@@ -10,7 +10,7 @@ do $$
 declare parcel public.packages;
 begin
   parcel := public.create_account_package('19000000-0000-0000-0000-000000000031',
-    'S900000000000000001', 'Synthetic Stone3PL parcel', 'stone3pl');
+    'S999999999999999980', 'Synthetic Stone3PL parcel', 'stone3pl');
   if parcel.carrier <> 'stone3pl' then raise exception 'Stone3PL was lost on account creation'; end if;
   perform set_config('test.stone3pl.parcel_id', parcel.id::text, true);
 end;

@@ -679,6 +679,20 @@ describe('carrier brand', () => {
       'svuum',
       'value-logistics',
       'xpect-same-day',
+      'alil-post',
+      'kargoturk',
+      'spark-kz',
+      'tinypack',
+      'flecha-amarilla',
+      'porlor',
+      'motorex',
+      'garantpost',
+      'korexgarant',
+      'emu-express',
+      'dimex',
+      'express-ru',
+      'topdelivery',
+      'dnipro-llc',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

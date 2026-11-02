@@ -603,7 +603,21 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'stop-start'
   | 'svuum'
   | 'value-logistics'
-  | 'xpect-same-day';
+  | 'xpect-same-day'
+  | 'alil-post'
+  | 'kargoturk'
+  | 'spark-kz'
+  | 'tinypack'
+  | 'flecha-amarilla'
+  | 'porlor'
+  | 'motorex'
+  | 'garantpost'
+  | 'korexgarant'
+  | 'emu-express'
+  | 'dimex'
+  | 'express-ru'
+  | 'topdelivery'
+  | 'dnipro-llc';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

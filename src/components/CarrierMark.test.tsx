@@ -615,6 +615,20 @@ describe('carrier mark', () => {
     'svuum',
     'value-logistics',
     'xpect-same-day',
+    'alil-post',
+    'kargoturk',
+    'spark-kz',
+    'tinypack',
+    'flecha-amarilla',
+    'porlor',
+    'motorex',
+    'garantpost',
+    'korexgarant',
+    'emu-express',
+    'dimex',
+    'express-ru',
+    'topdelivery',
+    'dnipro-llc',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

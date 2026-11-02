@@ -5034,6 +5034,21 @@ describe('TrackingSyncService', () => {
     expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T11:00:00Z'))).toBe(true);
   });
 
+  it('checks DHL Poland hourly, out for delivery in a browser too, and waits two hours after a failure', () => {
+    const parcel = { carrier: 'dhl-ecommerce-pl', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok' };
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:59:59.999Z'))).toBe(false);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T11:00:00Z'))).toBe(true);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:59:59Z'))).toBe(false);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T12:00:00Z'))).toBe(true);
+    // Each check solves its history page's reCAPTCHA: none every 5 minutes out for delivery.
+    const delivering = { id: 'dhl-pl', carrier: 'dhl-ecommerce-pl', tracking_number: 'TEST1234', current_stage: 'out_for_delivery',
+      created_at: '2026-09-09T00:00:00Z', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok',
+      carrier_data: { last_update: '2026-09-09T09:58:00+02:00', routing: { version: 1, configured_carrier: 'dhl-ecommerce-pl', browser_check: true } } };
+    expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T10:05:00Z'))).toBe(false);
+    expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T10:59:00Z'))).toBe(false);
+    expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T11:00:00Z'))).toBe(true);
+  });
+
   it.each(['ok', 'error'])('checks PostNL every thirty minutes after %s checks', async (syncStatus) => {
     const parcel = {
       id: 'postnl', carrier: 'spring-gds', tracking_number: 'LX999999987NL',

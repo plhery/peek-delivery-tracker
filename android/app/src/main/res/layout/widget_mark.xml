@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A card's carrier mark, as tall as it is given and as wide as its picture then is, light and dark (DayNightPicture),
+     which names the carrier as it shows it (setContentDescription). -->
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_picture"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:adjustViewBounds="true"
+    android:scaleType="fitStart"
+    tools:ignore="ContentDescription" />

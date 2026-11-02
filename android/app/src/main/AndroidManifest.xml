@@ -115,6 +115,19 @@
             </intent-filter>
         </activity>
 
+        <!-- The home screen widget (NextDeliveryWidget), and the refresh its alarm sends it (DeliveryWidgetUpdates). -->
+        <receiver
+            android:name=".widget.NextDeliveryWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_gallery_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/next_delivery_widget" />
+        </receiver>
+
         <!-- The app a parcel's link went to through the share sheet (ShareTargetChosen): the share sheet alone sends to
              it, through the PendingIntent the app gave it. -->
         <receiver

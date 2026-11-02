@@ -13,7 +13,6 @@ import com.plhery.peekdeliverytracker.core.DeviceAttestation
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.PushNotifications
 import com.plhery.peekdeliverytracker.core.WebAuthenticating
-import com.plhery.peekdeliverytracker.core.WidgetCenter
 
 // What the app does not do yet, each in the way its interface allows for a phone that cannot: a refusal, a false or
 // nothing at all. Each names the milestone that replaces it.
@@ -47,11 +46,6 @@ class NoPushNotifications(private val context: Context) : PushNotifications {
     override val currentDeviceToken: String? get() = null
 
     override fun clearDeviceToken() {}
-}
-
-/** No widget to draw again until M6 adds the home screen widget. */
-object NoWidgets : WidgetCenter {
-    override fun reloadTimelines(ofKind: String) {}
 }
 
 /** No attestation the server accepts (DeviceAttestation): unsupported until it takes Play Integrity, after M6. */

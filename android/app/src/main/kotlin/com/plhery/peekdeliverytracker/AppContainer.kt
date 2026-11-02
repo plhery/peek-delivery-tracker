@@ -57,7 +57,6 @@ import com.plhery.peekdeliverytracker.platform.NoAppleSignIn
 import com.plhery.peekdeliverytracker.platform.NoDeviceAttestation
 import com.plhery.peekdeliverytracker.platform.NoPushNotifications
 import com.plhery.peekdeliverytracker.platform.NoWebAuthentication
-import com.plhery.peekdeliverytracker.platform.NoWidgets
 import com.plhery.peekdeliverytracker.platform.OkHttpTransport
 import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
@@ -71,6 +70,8 @@ import com.plhery.peekdeliverytracker.ui.TurnstileSheet
 import com.plhery.peekdeliverytracker.ui.arrival.ArrivalMotionSource
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetState
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
+import com.plhery.peekdeliverytracker.widget.GlanceWidgetCenter
+import com.plhery.peekdeliverytracker.widget.WidgetCardPictures
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -100,8 +101,8 @@ import okhttp3.OkHttpClient
  * saves it and then takes it in, with no suspension between, so a sign-out can never land in between and see a late
  * write bring the account back, and a save that failed is the sign-in's or refresh's failure.
  *
- * What the app cannot do yet is a stand-in (platform/StandIns.kt): notifications, the widget, sign-in and device
- * attestation.
+ * What the app cannot do yet is a stand-in (platform/StandIns.kt): notifications, sign-in and device attestation.
+ * The home screen widget reads what the store publishes for it, and the cards' pictures it draws (widget/).
  */
 class AppContainer(
     private val context: Context,
@@ -239,11 +240,12 @@ class AppContainer(
             deliveryWidgetStore = DeliveryWidgetSharedStore(groupDefaults),
             cacheFiles = ParcelCacheFolder.of(context),
             notifications = notifications,
-            widgetCenter = NoWidgets,
+            widgetCenter = GlanceWidgetCenter(context),
             exportFiles = CacheExportFiles.of(context),
             region = region,
             scope = scope,
             liveActivities = liveActivities,
+            widgetPictures = WidgetCardPictures(context),
             analytics = analytics::action,
             importCharges = importCharges,
         )

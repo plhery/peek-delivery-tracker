@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The widget's words stand on its own yellow (WidgetPalette): accentBright at the top leading corner to accent at the
+     bottom trailing one, the same light and dark. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="315"
+        android:endColor="#FFF5BA21"
+        android:startColor="#FFFFD657" />
+</shape>

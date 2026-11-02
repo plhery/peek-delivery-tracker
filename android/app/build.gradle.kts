@@ -318,6 +318,9 @@ dependencies {
     // WKWebView's script message handler for the browser check: WebViewCompat's message listener and document-start
     // script (ui/TurnstileSheet.kt, platform/WebViewTurnstilePages.kt).
     implementation(libs.webkit)
+    // ASWebAuthenticationSession's stand-in: web sign-in in a Custom Tab, which comes back through the app's own
+    // address (platform/CustomTabSignIn.kt).
+    implementation(libs.browser)
     // DataScannerViewController's stand-in for the label scanner: CameraX's preview, analysis and zoom, and ML Kit's
     // barcode model bundled in the app, read on the device with no account, key or download (platform/CameraLabelScanner.kt).
     implementation(libs.camera.camera2)

@@ -18,8 +18,10 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -108,7 +110,8 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * it at once, but for a change made with an animation ([RootTransaction]): the arrival's back fades the arrival out
  * under the tabs fading in. The tab
  * chosen is kept with the window and through process death, as `@SceneStorage("tab")` keeps it, whatever the state
- * shows in between. A parcel waiting in [inbox] chooses the deliveries. The tabs show [browserCheck]'s sheet over
+ * shows in between. A parcel waiting in [inbox] chooses the deliveries, as Add with a link's text does while the tabs
+ * show; the arrival lets that go. The tabs show [browserCheck]'s sheet over
  * whatever is in front while it asks for a token, and scan labels with [scanner]. The sign-in's sends and checks run
  * in [work], the app's scope, which outlives the screen as a Swift `Task` outlives its view.
  *
@@ -159,6 +162,21 @@ internal fun PeekRoot(
     val presentation = invitation?.presentationIdFlow?.collectAsState()?.value
     LaunchedEffect(invitation) {
         invitation?.completedFlow?.drop(1)?.collect { tab = PeekTab.Friends.ordinal }
+    }
+    // `handleURL`'s `.add` (A-L14): Add with a link's text opens on the deliveries, which come forward for it once the
+    // session is read. Where the window shows no list, the arrival or an invitation over everything, the iPhone's list
+    // isn't there to hear the link, and it goes.
+    val addScreen by rememberUpdatedState(if (presenting && state != AuthenticationState.Loading) RootScreen.Arrival else state.rootScreen)
+    LaunchedEffect(inbox) {
+        val inbox = inbox ?: return@LaunchedEffect
+        combine(inbox.add, snapshotFlow { addScreen }) { add, screen -> add to screen }.collect { (add, screen) ->
+            if (add == null) return@collect
+            when (screen) {
+                RootScreen.Launch -> Unit
+                RootScreen.Arrival -> inbox.consume(add)
+                RootScreen.Tabs -> tab = PeekTab.Deliveries.ordinal
+            }
+        }
     }
     if (source != null) {
         FriendsActivityEffects(source, state, inbox) { tab = PeekTab.Friends.ordinal }

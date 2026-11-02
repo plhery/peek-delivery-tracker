@@ -1652,16 +1652,20 @@ internal fun Modifier.parcelDrop(state: DeliveriesState): Modifier {
             }
         }
     }
-    return dragAndDropTarget(
-        shouldStartDragAndDrop = { event -> event.mimeTypes().any { it.startsWith("text/") || it == ClipDescription.MIMETYPE_TEXT_URILIST } },
-        target = target,
-    )
+    return dragAndDropTarget(shouldStartDragAndDrop = { event -> takesDrop(event.mimeTypes()) }, target = target)
 }
 
-/** What a drop holds (`DroppedText`): each item's text, or a link as its whole address whatever its scheme (`url.absoluteString`). */
+/** Whether a drag of `mimeTypes` can drop here (`DroppedText`'s representations): text of any kind, or links. */
+internal fun takesDrop(mimeTypes: Set<String>): Boolean =
+    mimeTypes.any { it.startsWith("text/") || it == ClipDescription.MIMETYPE_TEXT_URILIST }
+
+/**
+ * What a drop holds (`DroppedText`), in the order its representations are tried: each item's link as its whole
+ * address whatever its scheme (`url.absoluteString`), else its text.
+ */
 internal fun droppedTexts(clip: ClipData): List<String> = (0 until clip.itemCount).mapNotNull { index ->
     val item = clip.getItemAt(index)
-    item.text?.toString() ?: item.uri?.toString()
+    item.uri?.toString() ?: item.text?.toString()
 }
 
 internal fun numberRowTag(normalized: String) = "$ADD_NUMBER.$normalized"

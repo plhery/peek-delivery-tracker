@@ -5,15 +5,18 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.FriendInvitationLink
+import com.plhery.peekdeliverytracker.core.LinkDeliveries
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.BuildSettings
+import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
 import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.io.FileNotFoundException
+import java.time.Instant
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -46,6 +49,13 @@ class PeekApplication : Application() {
     /** A friend's invitation that came before the stores were made, which shows once they are. */
     private var waitingInvitation: String? = null
 
+    /** The last link the app followed and when, so the same one again within a second is followed once ([isRepeat]). */
+    private val deliveries = LinkDeliveries()
+
+    /** The clock [isRepeat] reads: the phone's, or a test's. */
+    @VisibleForTesting
+    internal var now: () -> Instant = Instant::now
+
     /** The links the app was opened with before the stores were made, counted once they are ([linkOpened]). */
     private var waitingOpens = 0
 
@@ -57,6 +67,12 @@ class PeekApplication : Application() {
 
     /** POST_NOTIFICATIONS' question, which each window registers with as it is made ([MainActivity]). */
     internal val notificationPermission by lazy { NotificationPermission(this) }
+
+    /**
+     * Web sign-in (ASWebAuthenticationSession), opened over the window in front, which each window registers with as
+     * it is made ([MainActivity]), and which its callback hands the address back to ([CustomTabSignIn]).
+     */
+    internal val signInTab by lazy { CustomTabSignIn() }
 
     /**
      * The notifications posted from a push ([AppNotifications]), on whatever thread it comes: whether the app is on
@@ -135,13 +151,26 @@ class PeekApplication : Application() {
         return true
     }
 
-    /** A link [ParcelLinkActivity] was handed: a parcel's ([openParcelLink]) or else a friend's invitation ([openInvitation]). */
-    fun openLink(url: String): Boolean = openParcelLink(url) || openInvitation(url)
+    /**
+     * A link [ParcelLinkActivity] was handed: a parcel's ([openParcelLink]) or else a friend's invitation
+     * ([openInvitation]), unless the app has just followed it ([isRepeat]).
+     */
+    fun openLink(url: String): Boolean = !isRepeat(url) && (openParcelLink(url) || openInvitation(url))
+
+    /**
+     * `open(_:)`'s `deliveries.isRepeat(url)` (A-L01): whether this is the address the app followed last, less than a
+     * second ago, which it doesn't follow again; a tapped link can reach the app twice. The iPhone's one window keeps
+     * one `LinkDeliveries`; the app keeps one for [ParcelLinkActivity] and every window's links alike, and a
+     * notification opened is no link to it. On the main thread.
+     */
+    fun isRepeat(url: String): Boolean = deliveries.isRepeat(url, now())
 
     /**
      * `.onOpenURL`'s count (`deep-link-open`, [AppContainer.linkOpened]): once for each link the app is opened with,
-     * whatever it leads to, by [ParcelLinkActivity] or to the window itself; one that comes before the stores are made
-     * is counted once they are. Sign-in comes back to the app by no link. On the main thread.
+     * whatever it leads to, by [ParcelLinkActivity] or to the window itself, the same one again within a second too, as
+     * the iPhone's analytics hear each before `open(_:)` drops a repeat; one that comes before the stores are made is
+     * counted once they are. Sign-in's way back (`peekdeliverytracker://auth-callback`, [CustomTabSignIn]) is no link
+     * the app opens, and isn't counted. On the main thread.
      */
     fun linkOpened() {
         val container = container.value

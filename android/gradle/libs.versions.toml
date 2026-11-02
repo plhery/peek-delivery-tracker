@@ -20,6 +20,7 @@ navigation3 = "1.2.0"
 window = "1.5.1"
 play-review = "2.0.2"
 webkit = "1.17.1"
+browser = "1.10.0"
 camerax = "1.6.2"
 mlkit-barcode = "17.3.0"
 glance = "1.2.0"
@@ -44,6 +45,7 @@ window = { module = "androidx.window:window", version.ref = "window" }
 window-testing = { module = "androidx.window:window-testing", version.ref = "window" }
 play-review-ktx = { module = "com.google.android.play:review-ktx", version.ref = "play-review" }
 webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
+browser = { module = "androidx.browser:browser", version.ref = "browser" }
 camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
 camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
 camera-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }

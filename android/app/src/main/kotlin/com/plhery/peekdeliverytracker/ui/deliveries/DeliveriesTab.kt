@@ -80,6 +80,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesKey
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
+import com.plhery.peekdeliverytracker.core.SharedParcelDraft
 import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -484,7 +485,8 @@ private val LOCAL_SCHEMES = setOf(ContentResolver.SCHEME_CONTENT, ContentResolve
 /**
  * What waits for the list in this window (A-D26, A-L14, C-W15): a parcel a link or a notification asked for, at once
  * and whenever another comes, one opened before the list was there as it appears; a parcel a parcel's link added,
- * likewise; and what another app shared, as it appears and each time the app comes back to the front.
+ * likewise; Add with a link's text (`handleURL`'s `.add`), opened or filled as what another app shared is, likewise;
+ * and what another app shared, as it appears and each time the app comes back to the front.
  */
 @Composable
 private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
@@ -500,6 +502,13 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
         inbox.linkAdded.filterNotNull().collect { added ->
             state.linkAdded(added.parcelId)
             inbox.consume(added)
+        }
+    }
+    // `sharedDraft = SharedParcelDraft(trackingInput:); showingAdd = true`, uncounted.
+    LaunchedEffect(inbox) {
+        inbox.add.filterNotNull().collect { add ->
+            state.addSharedDraft(SharedParcelDraft(trackingInput = add.trackingInput))
+            inbox.consume(add)
         }
     }
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {

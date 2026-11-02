@@ -1,10 +1,12 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.ClipData
+import android.content.ClipDescription
 import android.content.ClipboardManager
 import android.content.Context
 import android.net.Uri
 import android.text.InputType
+import android.view.DragEvent
 import android.view.KeyEvent
 import android.view.View
 import android.view.accessibility.AccessibilityManager
@@ -98,6 +100,7 @@ import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.DragEventBuilder
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -853,15 +856,71 @@ class AddParcelTest {
         assertEquals("UPS 1Z999AA10123456784", fieldText(ADD_TRACKING))
     }
 
+    /** `DroppedText` tries a URL first, then a string: an item's link before its text, whatever the link's scheme. */
     @Test
-    fun aDropTakesEachItemsTextOrItsLinkWhateverItsScheme() {
+    fun aDropTakesEachItemsLinkBeforeItsTextWhateverItsScheme() {
         val clip = ClipData.newPlainText("", "UPS 1Z999AA10123456784")
         clip.addItem(ClipData.Item(Uri.parse("ftp://example.com/1Z999AA10123456793")))
-        clip.addItem(ClipData.Item(Uri.parse("https://example.com/track/1Z999AA10123456784")))
+        clip.addItem(ClipData.Item("Track your parcel", null, Uri.parse("https://example.com/track/1Z999AA10123456784")))
         assertEquals(
             listOf("UPS 1Z999AA10123456784", "ftp://example.com/1Z999AA10123456793", "https://example.com/track/1Z999AA10123456784"),
             droppedTexts(clip),
         )
+    }
+
+    /** What `DroppedText` imports: text of any kind, and links; an image or a document isn't taken. */
+    @Test
+    fun onlyTextAndLinksAreTakenWhereADragStarts() {
+        assertTrue(takesDrop(setOf(ClipDescription.MIMETYPE_TEXT_PLAIN)))
+        assertTrue(takesDrop(setOf(ClipDescription.MIMETYPE_TEXT_HTML)))
+        assertTrue(takesDrop(setOf(ClipDescription.MIMETYPE_TEXT_URILIST)))
+        assertTrue(takesDrop(setOf("image/png", ClipDescription.MIMETYPE_TEXT_PLAIN)))
+        assertFalse(takesDrop(setOf("image/png")))
+        assertFalse(takesDrop(setOf("application/pdf")))
+        assertFalse(takesDrop(emptySet()))
+    }
+
+    /**
+     * A drag from another app dropped on the node tagged `tag`, as the window's drag events bring it: it starts, moves
+     * over the node's middle, drops there and ends.
+     */
+    private fun drop(tag: String, clip: ClipData) {
+        val center = node(tag).fetchSemanticsNode().boundsInRoot.center
+        val root = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        fun event(action: Int) = DragEventBuilder.newBuilder().setAction(action).setX(center.x).setY(center.y)
+            .setClipDescription(clip.description).setClipData(if (action == DragEvent.ACTION_DROP) clip else null).build()
+        compose.runOnUiThread {
+            for (action in listOf(DragEvent.ACTION_DRAG_STARTED, DragEvent.ACTION_DRAG_LOCATION, DragEvent.ACTION_DROP, DragEvent.ACTION_DRAG_ENDED)) {
+                root.dispatchDragEvent(event(action))
+            }
+        }
+        settle()
+    }
+
+    /**
+     * The two `.dropDestination`s, the list (its empty state included) and the + button: a link dropped on either opens
+     * Add with its address; an image never starts there.
+     */
+    @Test
+    fun aLinkDroppedOnTheEmptyListOrOnThePlusOpensAddWithItsAddress() {
+        show(list = emptyList())
+        val link = ClipData(
+            "", arrayOf(ClipDescription.MIMETYPE_TEXT_URILIST, ClipDescription.MIMETYPE_TEXT_PLAIN),
+            ClipData.Item("Track your parcel", null, Uri.parse("https://example.com/track/1Z999AA10123456784")),
+        )
+        drop(EMPTY_ADD, link)
+        assertEquals("https://example.com/track/1Z999AA10123456784", fieldText(ADD_TRACKING))
+        node(ADD_CLOSE).performClick()
+        settle()
+        assertNull(deliveries.addition)
+
+        drop(ADD_BUTTON, link)
+        assertEquals("https://example.com/track/1Z999AA10123456784", fieldText(ADD_TRACKING))
+        node(ADD_CLOSE).performClick()
+        settle()
+
+        drop(ADD_BUTTON, ClipData("", arrayOf("image/png"), ClipData.Item(Uri.parse("content://example.provider/1Z999AA10123456784"))))
+        assertNull(deliveries.addition)
     }
 
     @Test

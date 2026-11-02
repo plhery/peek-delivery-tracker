@@ -390,6 +390,46 @@ class AppRoutingTests {
         assertEquals(NativeRoute.Add(trackingInput = "1Z999 AA"), NativeRoute(url))
     }
 
+    /**
+     * `URLComponents.queryItems`' first `tracking`: empty or missing opens Add empty, its value comes percent-decoded
+     * with a `+` kept as it is, and only the first counts.
+     */
+    @Test
+    fun anAddLinksTextIsItsFirstTrackingItemDecodedOrNothing() {
+        assertEquals(NativeRoute.Add(trackingInput = ""), NativeRoute(parsed("peekdeliverytracker://add?tracking=")))
+        assertEquals(NativeRoute.Add(trackingInput = ""), NativeRoute(parsed("peekdeliverytracker://add")))
+        assertEquals(NativeRoute.Add(trackingInput = ""), NativeRoute(parsed("peekdeliverytracker://add?label=Shoes")))
+        assertEquals(NativeRoute.Add(trackingInput = ""), NativeRoute(parsed("peekdeliverytracker://add?Tracking=TEST0001")))
+        assertEquals(
+            NativeRoute.Add(trackingInput = "TEST+0001 & é=?"),
+            NativeRoute(parsed("peekdeliverytracker://add?tracking=TEST+0001%20%26%20%C3%A9%3D%3F")),
+        )
+        assertEquals(
+            NativeRoute.Add(trackingInput = "TEST0001"),
+            NativeRoute(parsed("peekdeliverytracker://ADD/?tracking=TEST0001&tracking=TEST0002")),
+        )
+    }
+
+    /**
+     * An invitation's `preview=` must be its code's hash; and `URL.path` drops the trailing slash, so `/invite/#<code>`
+     * is an invitation as `/invite#<code>` is.
+     */
+    @Test
+    fun anInvitationsPreviewMustMatchItsCodeAndATrailingSlashIsTheSameLink() {
+        val code = "a".repeat(32)
+        val base = "https://peektracker.com"
+        val wrong = "$base/invite?preview=${"0".repeat(64)}#$code"
+        assertNull(inviteCode(from = parsed(wrong), baseUrl = base))
+        assertTrue(isInvitation(wrong, baseUrl = base))
+        val other = FriendInvitationLink.url(code = "b".repeat(32), baseUrl = base).substringBefore('#')
+        assertNull(inviteCode(from = parsed("$other#$code"), baseUrl = base))
+        assertEquals(code, inviteCode(from = "$base/invite/#$code", baseUrl = base))
+        assertTrue(isInvitation("$base/invite/#$code", baseUrl = base))
+        val slashed = FriendInvitationLink.url(code = code, baseUrl = base).replace("/invite?", "/invite/?")
+        assertEquals(code, inviteCode(from = slashed, baseUrl = base))
+        assertNull(inviteCode(from = parsed("$base/invite/extra#$code"), baseUrl = base))
+    }
+
     @Test
     fun rejectsMalformedOrUnrelatedDeepLinks() {
         assertNull(NativeRoute(parsed("https://parcel/not-ours")))

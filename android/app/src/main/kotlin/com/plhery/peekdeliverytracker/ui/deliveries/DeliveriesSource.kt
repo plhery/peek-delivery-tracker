@@ -739,7 +739,8 @@ class PageWork {
  * What reaches a window's deliveries from outside the list: a parcel a link asked for (`.onOpenURL`'s
  * `parcel/<uuid>`), which the list shows and then takes. Each window has its own ([of]), as each iPhone scene follows
  * its own links, so the window the link came to opens it. The tabs bring the deliveries forward while one waits.
- * A friend a link asked for (`friend/<uuid>`) waits here too, for the window's root to take ([friend]).
+ * A friend a link asked for (`friend/<uuid>`) waits here too, for the window's root to take ([friend]), and Add with
+ * the text a link gave (`add?tracking=<text>`), for the deliveries ([add]).
  */
 class DeliveriesInbox(
     parcel: UUID? = null,
@@ -751,8 +752,11 @@ class DeliveriesInbox(
     notifiedFriend: UUID? = null,
     notifiedLink: String? = null,
     private val notificationOpened: (NativeRoute) -> Unit = {},
+    add: String? = null,
+    private val repeated: (String) -> Boolean = { false },
 ) {
     private val parcelState = MutableStateFlow(parcel)
+    private val addState = MutableStateFlow(add?.let(::AddLink))
     private val friendState = MutableStateFlow(friend)
     private val notifiedFriendState = MutableStateFlow(notifiedFriend)
     private val notifiedLinkState = MutableStateFlow(notifiedLink)
@@ -801,6 +805,18 @@ class DeliveriesInbox(
         notifiedLinkState.compareAndSet(linkId, null)
     }
 
+    /**
+     * `handleURL`'s `.add(trackingInput:)`: Add, filled with the text a link gave, which the deliveries open (or fill,
+     * when Add is up already) and then take. The tabs bring the deliveries forward while one waits. A window that shows
+     * no list (nobody signed in, or an invitation over everything) lets it go, as the iPhone's has no list to hear it.
+     */
+    val add: StateFlow<AddLink?> = addState.asStateFlow()
+
+    /** The deliveries have opened Add with the link's text, or the window had no list to open it on. */
+    fun consume(add: AddLink) {
+        addState.compareAndSet(add, null)
+    }
+
     /** A parcel kept or followed from its link, which the list receives as one just added (`Arrival.added`). */
     val linkAdded: StateFlow<LinkAdded?> = linkAddedState.asStateFlow()
 
@@ -817,10 +833,12 @@ class DeliveriesInbox(
     /**
      * `.onOpenURL` (A-L02, A-L14), in `open(_:)`'s order: a parcel's link first, which [parcelLink] opens in its sheet,
      * then `peekdeliverytracker://parcel/<uuid>`, which opens the parcel on the deliveries, then
-     * `peekdeliverytracker://friend/<uuid>`, the friend to reveal ([friend]), and last a friend's invitation, which
-     * [invitationLink] shows over everything. The app's parcel and invitation links come by ParcelLinkActivity, which
-     * keeps them out of the window's intent; one sent to the window itself comes here. Each is counted ([opened],
-     * `deep-link-open`), whatever it leads to. A notification the app posted, opened, comes before them all
+     * `peekdeliverytracker://friend/<uuid>`, the friend to reveal ([friend]), then `peekdeliverytracker://add`, Add with
+     * the link's text ([add]), and last a friend's invitation, which [invitationLink] shows over everything. The app's
+     * parcel and invitation links come by ParcelLinkActivity, which keeps them out of the window's intent; one sent to
+     * the window itself comes here. Each is counted ([opened], `deep-link-open`), whatever it leads to, as the iPhone's
+     * analytics hear every `.onOpenURL`; the same address again within a second is followed once ([repeated],
+     * `LinkDeliveries.isRepeat`). A notification the app posted, opened, comes before them all
      * ([AppNotifications.payload], which reads the app's own alone).
      */
     fun follow(intent: Intent?) {
@@ -831,11 +849,13 @@ class DeliveriesInbox(
         if (intent?.action != Intent.ACTION_VIEW) return
         val url = intent.dataString ?: return
         opened()
+        if (repeated(url)) return
         if (parcelLink(url)) return
         when (val route = NativeRoute(url)) {
             is NativeRoute.Parcel -> open(route.id)
             is NativeRoute.Friend -> friendState.value = route.id
-            // Add and the links' notifications come with their screens.
+            is NativeRoute.Add -> addState.value = AddLink(route.trackingInput)
+            // The links' notifications come with their screens.
             else -> invitationLink(url)
         }
     }
@@ -866,6 +886,7 @@ class DeliveriesInbox(
         private const val FRIEND = "friend"
         private const val NOTIFIED_FRIEND = "notifiedFriend"
         private const val NOTIFIED_LINK = "notifiedLink"
+        private const val ADD = "add"
 
         /**
          * The window's inbox, after its `super.onCreate`: it follows the link that started the window, and each link
@@ -877,7 +898,8 @@ class DeliveriesInbox(
          * been read, and with it any owner key it carried. What another app shared comes from [sharedDrafts], which
          * takes it away. Each link followed is counted once ([opened]), and not again as the window is made again.
          * A notification opened is followed the same way, the window's own or one that comes after, its push's data
-         * forgotten once read, and counted once ([notificationOpened]).
+         * forgotten once read, and counted once ([notificationOpened]). Add's text waits as the parcel does. A link
+         * the app had just followed, in this window or another, is not followed again ([repeated]).
          */
         fun of(
             activity: ComponentActivity,
@@ -886,13 +908,14 @@ class DeliveriesInbox(
             invitationLink: (String) -> Boolean = { false },
             opened: () -> Unit = {},
             notificationOpened: (NativeRoute) -> Unit = {},
+            repeated: (String) -> Boolean = { false },
         ): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
             val inbox = DeliveriesInbox(
                 saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts, saved?.getString(FRIEND)?.let(UUID::fromString),
                 invitationLink, opened, saved?.getString(NOTIFIED_FRIEND)?.let(UUID::fromString), saved?.getString(NOTIFIED_LINK),
-                notificationOpened,
+                notificationOpened, saved?.getString(ADD), repeated,
             )
             registry.registerSavedStateProvider(SAVED) {
                 Bundle().apply {
@@ -900,6 +923,7 @@ class DeliveriesInbox(
                     putString(FRIEND, inbox.friend.value?.toString())
                     putString(NOTIFIED_FRIEND, inbox.notifiedFriend.value?.toString())
                     putString(NOTIFIED_LINK, inbox.notifiedLink.value)
+                    putString(ADD, inbox.add.value?.trackingInput)
                 }
             }
             val intent = activity.intent
@@ -914,3 +938,9 @@ class DeliveriesInbox(
 
 /** One parcel a link added, told to the list once ([DeliveriesInbox.added]); a new one for each, even of the same parcel. */
 class LinkAdded(val parcelId: UUID?)
+
+/**
+ * Add with the text of one `peekdeliverytracker://add` link, opened once ([DeliveriesInbox.add]); a new one for each,
+ * even with the same text, as each link makes the iPhone a new `SharedParcelDraft`.
+ */
+class AddLink(val trackingInput: String)

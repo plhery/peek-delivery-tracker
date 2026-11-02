@@ -4,7 +4,6 @@ import com.plhery.peekdeliverytracker.core.AppleSignInAuthorizing
 import com.plhery.peekdeliverytracker.core.AppleSignInCredential
 import com.plhery.peekdeliverytracker.core.AuthenticationError
 import com.plhery.peekdeliverytracker.core.DeviceAttestation
-import com.plhery.peekdeliverytracker.core.WebAuthenticating
 
 // What the app does not do yet, each in the way its interface allows for a phone that cannot: a refusal, a false or
 // nothing at all. Each names the milestone that replaces it.
@@ -18,11 +17,6 @@ object NoDeviceAttestation : DeviceAttestation {
     override suspend fun attest(keyId: String, clientDataHash: ByteArray): ByteArray = throw DeviceAttestation.InvalidKey()
 
     override suspend fun assert(keyId: String, clientDataHash: ByteArray): ByteArray = throw DeviceAttestation.InvalidKey()
-}
-
-/** No browser to sign in with, as when none can open the page, until M5 opens a Custom Tab. */
-object NoWebAuthentication : WebAuthenticating {
-    override suspend fun authenticate(url: String, callbackScheme: String): String = throw AuthenticationError.InvalidResponse()
 }
 
 /** Sign in with Apple cannot start, until M5 opens Apple's web sign-in. */

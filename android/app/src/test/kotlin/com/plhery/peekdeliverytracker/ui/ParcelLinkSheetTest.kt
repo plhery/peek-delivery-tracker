@@ -30,6 +30,7 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
@@ -103,6 +104,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
+import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.io.IOException
@@ -188,6 +190,12 @@ class ParcelLinkSheetTest {
     /** One heading reads `text`. */
     private fun assertHeading(text: String) =
         assertEquals(text, 1, compose.onAllNodes(isHeading() and hasText(text), useUnmergedTree = true).fetchSemanticsNodes().size)
+
+    /** The tab named `name` chosen in the tab bar. */
+    private fun choose(name: String) {
+        compose.onNodeWithContentDescription(name).performClick()
+        settle()
+    }
 
     private fun back() {
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
@@ -353,6 +361,36 @@ class ParcelLinkSheetTest {
         assertEquals(listOf(ParcelLinkRoute(id = viewerId)), links.followed)
         assertTrue(links.actions.contains("parcel-link-alerts"))
         assertNull(links.links.route)
+        assertTrue(shows(text("link.added")))
+    }
+
+    /**
+     * `.onChange(of: links.arrival) { selectedTab = 0 }` (A-L11): the sheet gone on a parcel to open, over another tab,
+     * brings the deliveries forward with it.
+     */
+    @Test
+    fun aParcelToOpenFromAnotherTabBringsTheDeliveriesForward() {
+        val kind = DemoCards.parcel("Kind of Blue").id
+        show(FakeParcelLinks(answer = LinkFixtures.keepable()).apply { here = kind })
+        choose("Passport")
+        assertTrue(exists(PeekTab.Passport.screen))
+        open()
+        compose.onNodeWithTag(LINK_OPEN_EXISTING).performClick()
+        settle()
+        assertFalse(exists(PeekTab.Passport.screen))
+        assertEquals("parcel", views.last())
+    }
+
+    /** Followed over the friends, the deliveries come forward and say it was added (`Arrival.added`). */
+    @Test
+    fun aParcelFollowedFromAnotherTabBringsTheDeliveriesForwardSayingSo() {
+        show(FakeParcelLinks(answer = LinkFixtures.keepable()))
+        choose("Friends")
+        assertTrue(exists(PeekTab.Friends.screen))
+        open()
+        compose.onNodeWithTag(LINK_FOLLOW).performClick()
+        settle()
+        assertFalse(exists(PeekTab.Friends.screen))
         assertTrue(shows(text("link.added")))
     }
 

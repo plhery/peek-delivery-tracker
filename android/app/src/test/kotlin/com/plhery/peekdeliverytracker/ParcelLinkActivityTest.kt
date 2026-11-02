@@ -7,7 +7,10 @@ import android.net.Uri
 import android.os.Looper
 import android.provider.Settings
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
@@ -17,9 +20,12 @@ import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.PeekHttp
+import com.plhery.peekdeliverytracker.platform.SignInCallbackActivity
 import com.plhery.peekdeliverytracker.platform.notificationTap
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.arrival.INVITATION_WELCOME
+import com.plhery.peekdeliverytracker.ui.deliveries.ADD_PARCEL
+import com.plhery.peekdeliverytracker.ui.deliveries.ADD_TRACKING
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_GIFT_CARD
@@ -27,6 +33,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SHEET
 import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
 import java.io.IOException
 import java.security.Security
+import java.time.Instant
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -61,8 +68,11 @@ import org.robolectric.annotation.GraphicsMode
  * in the window brought forward. A friend's invitation (`/i/<id>`, `/invite#<code>`, the scheme's `invite`) comes in
  * the same way and stands over the window. Each link the app is opened with is counted once (`deep-link-open`), by
  * the trampoline or by the window, cold or running, and not again as the window turns; a notification opened as the
- * iPhone counts one (`notification-open`), and an intent from elsewhere with a notification's data not at all. On the
- * app's own stores, made offline with links read from memory, the analytics answered on the client itself.
+ * iPhone counts one (`notification-open`), and an intent from elsewhere with a notification's data not at all. The
+ * same link again within a second is followed once (A-L01), by the trampoline or the window alike, and counted each
+ * time. Add's link (`add?tracking=`) goes to the window, which opens Add with its text, counted even where no list
+ * hears it; sign-in's callback is never counted. On the app's own stores, made offline with links read from memory,
+ * the analytics answered on the client itself.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -203,6 +213,16 @@ class ParcelLinkActivityTest {
 
     private fun exists(tag: String): Boolean = compose.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
 
+    /** The clock the app's repeat rule reads ([PeekApplication.now]), moved by a test. */
+    private var now = Instant.parse("2026-03-02T09:00:00Z")
+
+    private fun clock() {
+        app.now = { now }
+    }
+
+    /** `link` sent to the window itself, as another app may. */
+    private fun toWindow(url: String) = link(url).setClass(app, MainActivity::class.java)
+
     @Test
     fun theSitesHostsAndTheAppsSchemeGoToTheTrampolineAndTheAppsOtherAddressesToItsWindow() {
         val trampoline = listOf(ParcelLinkActivity::class.java.name)
@@ -212,6 +232,12 @@ class ParcelLinkActivityTest {
         assertEquals(listOf(MainActivity::class.java.name), takers("peekdeliverytracker://friend/11000000-0000-4000-8000-000000000001"))
         assertEquals(emptyList<String>(), takers("https://$site/privacy.html"))
         assertEquals(emptyList<String>(), takers("https://elsewhere.example/p/$id"))
+        assertEquals(listOf(MainActivity::class.java.name), takers("peekdeliverytracker://add?tracking=TEST0001"))
+        assertEquals(listOf(SignInCallbackActivity::class.java.name), takers("peekdeliverytracker://auth-callback?code=synthetic"))
+        // Android matches the scheme as written, where the iPhone takes it in any case; a host in any case matches.
+        assertEquals(emptyList<String>(), takers("PeekDeliveryTracker://parcel/${DemoCards.parcel("Kind of Blue").id}"))
+        assertEquals(emptyList<String>(), takers("PEEKDELIVERYTRACKER://p/$id"))
+        assertEquals(trampoline, takers("peekdeliverytracker://P/$id"))
     }
 
     @Test
@@ -379,6 +405,104 @@ class ParcelLinkActivityTest {
         window.newIntent(Intent(notification(mapOf("title" to "Books", "body" to "Delivered", "link_id" to id))).setClass(app, MainActivity::class.java))
         assertOpens(0, NOTIFICATION_OPEN)
         assertNull(stores.links.route)
+        assertOpens(0)
+    }
+
+    /**
+     * `LinkDeliveries.isRepeat` (A-L01): the same address again within a second isn't followed again, whether it comes
+     * by the trampoline or to the window, the app keeping one rule for both; a second on, it is; another address at
+     * once is too. Each is counted, as the iPhone's analytics hear every `.onOpenURL`.
+     */
+    @Test
+    fun theSameLinkWithinASecondIsFollowedOnceAndCountedEachTime() {
+        counting()
+        clock()
+        val window = Robolectric.buildActivity(MainActivity::class.java, Intent.makeMainActivity(ComponentName(app, MainActivity::class.java))).setup()
+        val links = awaitStores().links
+        window.newIntent(send("https://$site/p/$id"))
+        assertEquals(id, links.route?.id)
+        val first = links.presentationId
+
+        now = now.plusMillis(400)
+        window.newIntent(send("https://$site/p/$id"))
+        assertEquals("Not opened again", first, links.presentationId)
+        now = now.plusMillis(400)
+        window.newIntent(toWindow("https://$site/p/$id"))
+        assertEquals("Nor sent to the window", first, links.presentationId)
+
+        now = now.plusSeconds(1)
+        window.newIntent(send("https://$site/p/$id"))
+        assertNotEquals("A second on, opened again", first, links.presentationId)
+        val again = links.presentationId
+        window.newIntent(send("https://$site/p/$gift"))
+        assertEquals(gift, links.route?.id)
+        assertNotEquals(again, links.presentationId)
+        window.newIntent(send("https://$site/p/$id"))
+        assertEquals("Another address in between", id, links.route?.id)
+        assertOpens(6)
+    }
+
+    /** The window's own links follow the same rule: Add's link twice within a second opens Add once. */
+    @Test
+    fun theWindowsOwnLinkWithinASecondIsFollowedOnce() {
+        clock()
+        val window = Robolectric.buildActivity(MainActivity::class.java, toWindow("peekdeliverytracker://add?tracking=TEST0001")).setup()
+        val stores = awaitStores()
+        awaitSession(stores)
+        settle()
+        assertTrue(exists(ADD_PARCEL))
+        compose.runOnIdle { window.get().onBackPressedDispatcher.onBackPressed() }
+        settle()
+        assertFalse(exists(ADD_PARCEL))
+
+        now = now.plusMillis(999)
+        window.newIntent(toWindow("peekdeliverytracker://add?tracking=TEST0001"))
+        settle()
+        assertFalse(exists(ADD_PARCEL))
+        now = now.plusSeconds(1)
+        window.newIntent(toWindow("peekdeliverytracker://add?tracking=TEST0001"))
+        settle()
+        assertTrue(exists(ADD_PARCEL))
+    }
+
+    /** Add's link starts the window, which opens Add with its text over the first open of a guest following nothing. */
+    @Test
+    fun anAddLinkOpensTheWindowWithAddAndItsText() {
+        val window = Robolectric.buildActivity(MainActivity::class.java, toWindow("peekdeliverytracker://add?tracking=TEST%200001")).setup()
+        val stores = awaitStores()
+        awaitSession(stores)
+        assertEquals(AuthenticationState.Welcome, stores.session.state)
+        settle()
+        val field = compose.onNodeWithTag(ADD_TRACKING).fetchSemanticsNode().config.getOrNull(SemanticsProperties.EditableText)?.text
+        assertEquals("TEST 0001", field)
+        assertNull(window.get().intent.data)
+    }
+
+    /** Counted once as it comes, as the iPhone's analytics hear it, and not again as the window turns. */
+    @Test
+    fun anAddLinkIsCountedOnce() {
+        counting()
+        val window = Robolectric.buildActivity(MainActivity::class.java, toWindow("peekdeliverytracker://add?tracking=TEST0001")).setup()
+        awaitSession(awaitStores())
+        settle()
+        assertTrue(exists(ADD_PARCEL))
+        assertOpens(1)
+        window.recreate()
+        assertOpens(1)
+    }
+
+    /** Sign-in's way back is no link: never counted, never followed, whether a sign-in waits for it or not. */
+    @Test
+    fun theSignInCallbackIsNeitherCountedNorFollowed() {
+        counting()
+        Robolectric.buildActivity(MainActivity::class.java, Intent.makeMainActivity(ComponentName(app, MainActivity::class.java))).setup()
+        val stores = awaitStores()
+        awaitSession(stores)
+        val callback = Robolectric.buildActivity(SignInCallbackActivity::class.java, link("peekdeliverytracker://auth-callback?code=synthetic")).create()
+        assertTrue(callback.get().isFinishing)
+        assertNull(shadowOf(callback.get()).nextStartedActivity)
+        assertNull(stores.links.route)
+        assertFalse(stores.invitation.isPresenting)
         assertOpens(0)
     }
 

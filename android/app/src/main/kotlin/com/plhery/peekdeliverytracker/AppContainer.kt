@@ -45,12 +45,14 @@ import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.core.TextMeasurer
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.UserDefaults
+import com.plhery.peekdeliverytracker.core.WebAuthenticating
 import com.plhery.peekdeliverytracker.core.identifying
 import com.plhery.peekdeliverytracker.platform.AndroidPushNotifications
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.CacheExportFiles
 import com.plhery.peekdeliverytracker.platform.CarrierCatalogLoader
+import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.DeviceParcelsFile
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
@@ -58,7 +60,6 @@ import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.NoAppleSignIn
 import com.plhery.peekdeliverytracker.platform.NoDeviceAttestation
-import com.plhery.peekdeliverytracker.platform.NoWebAuthentication
 import com.plhery.peekdeliverytracker.platform.OkHttpTransport
 import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
@@ -103,8 +104,9 @@ import okhttp3.OkHttpClient
  * saves it and then takes it in, with no suspension between, so a sign-out can never land in between and see a late
  * write bring the account back, and a save that failed is the sign-in's or refresh's failure.
  *
- * What the app cannot do yet is a stand-in (platform/StandIns.kt): sign-in and device attestation. Notifications have
- * no token until Firebase is set up (platform/Notifications.kt).
+ * What the app cannot do yet is a stand-in (platform/StandIns.kt): Sign in with Apple and device attestation. Web
+ * sign-in opens a Custom Tab (platform/CustomTabSignIn.kt). Notifications have no token until Firebase is set up
+ * (platform/Notifications.kt).
  * The home screen widget reads what the store publishes for it, and the cards' pictures it draws (widget/).
  */
 class AppContainer(
@@ -119,6 +121,8 @@ class AppContainer(
     notificationPermission: NotificationPermission = (context as? PeekApplication)?.notificationPermission ?: NotificationPermission(context),
     /** The notifications the app posts and takes away: the process's. */
     val posted: AppNotifications = (context as? PeekApplication)?.posted ?: AppNotifications(context),
+    /** Web sign-in in a Custom Tab over the window in front: the process's, which each window registers with. */
+    webAuthentication: WebAuthenticating = (context as? PeekApplication)?.signInTab ?: CustomTabSignIn(),
 ) {
     /** `UserDefaults.standard`. */
     val defaults: UserDefaults = PreferencesDefaults.standard(context)
@@ -170,7 +174,7 @@ class AppContainer(
         persistence = ReadAheadSecretStore(KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.auth")),
         transport = transport,
         appleSignIn = NoAppleSignIn,
-        webAuthentication = NoWebAuthentication,
+        webAuthentication = webAuthentication,
         scope = scope,
         analytics = analytics::action,
     )

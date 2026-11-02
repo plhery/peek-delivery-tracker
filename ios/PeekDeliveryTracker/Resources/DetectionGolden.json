@@ -15529,6 +15529,12 @@
     ]
   },
   {
+    "input": "123456-123",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "12345678",
     "carrier": "unknown",
     "confidence": "low",

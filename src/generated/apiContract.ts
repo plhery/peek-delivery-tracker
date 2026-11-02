@@ -47945,7 +47945,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Berlin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "logistics-solution"
     },
     "linkRules": [],
     "detectionRules": [],

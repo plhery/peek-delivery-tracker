@@ -51,14 +51,15 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
-import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.addOutline
+import androidx.compose.ui.graphics.drawOutline
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.LayoutCoordinates
@@ -92,9 +93,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -882,28 +881,30 @@ private fun DemoLink(enabled: Boolean, modifier: Modifier, onClick: () -> Unit) 
 
 /**
  * `SignInFormSurface`: a form on the page of an invitation's sign-in ([invited]) stands [padding] in on a card of its
- * own (`parcelCardSurface()`: paper with corners of 16, the accent's 2-point band along its top and a hairline of the
- * separator at 62 %); in the card of the sign-in without one, it stands as it is.
+ * own (`parcelCardSurface()`, all behind the form: paper with continuous corners of 16, the accent's 2-point band
+ * along its top clipped to them, and over both a 0.7 hairline of the separator at 62 % centred on the edge, as
+ * `.stroke` draws it); in the card of the sign-in without one, it stands as it is.
  */
 @Composable
 private fun Modifier.formSurface(invited: Boolean, padding: Dp): Modifier {
     if (!invited) return this
     val colors = PeekTheme.colors
-    val shape = ContinuousRoundedShape(16.dp)
+    val paper = colors.paper
     val band = colors.accent
+    val hairline = colors.separator.copy(alpha = colors.separator.alpha * 0.62f)
     return this
-        .background(colors.paper, shape)
-        .drawWithContent {
-            drawContent()
-            clipPath(shape.outlinePath(size, layoutDirection, this)) { drawRect(band, size = Size(size.width, 2.dp.toPx())) }
+        .drawWithCache {
+            val outline = ContinuousRoundedShape(16.dp).createOutline(size, layoutDirection, this)
+            val edge = Path().apply { addOutline(outline) }
+            val line = Stroke(0.7.dp.toPx())
+            onDrawBehind {
+                drawOutline(outline, paper)
+                clipPath(edge) { drawRect(band, size = Size(size.width, 2.dp.toPx())) }
+                drawOutline(outline, hairline, style = line)
+            }
         }
-        .border(0.7.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.62f), shape)
         .padding(padding)
 }
-
-/** The outline of [this] shape in a box of [size], as a path to clip to. */
-private fun Shape.outlinePath(size: Size, direction: LayoutDirection, density: Density): Path =
-    Path().apply { addOutline(createOutline(size, direction, density)) }
 
 /**
  * `privacyNotice`: under a divider, 18 down, the lock (semibold caption, 20 × 20) 10 from "auth.privacy" over the

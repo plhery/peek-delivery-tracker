@@ -1,16 +1,16 @@
 ---
 title: Ukrposhta tracking: Ukraine Post numbers and statuses
-description: Track a Ukrposhta parcel in English: the 13-digit and UA numbers, what the statuses mean, branch pickup, storage times, claims and contacts.
+description: Track a Ukrposhta parcel in English: the 13-digit and UA numbers, what each status means, branch pickup, and lost or damaged items from abroad.
 slug: ukrposhta-tracking
 published: 2026-10-13
 updated: 2026-10-27
 ---
 
-Ukrposhta (Укрпошта) is Ukraine's state-owned national post. Track a parcel on [track.ukrposhta.ua/en](https://track.ukrposhta.ua/en/), in the Ukrposhta 2.0 app or by pasting the number in the box above. The number comes from the sender: 13 digits within Ukraine, or two letters, nine digits and two letters to or from abroad.
+Ukrposhta (Укрпошта) is Ukraine's national post. Track a parcel on its tracker, track.ukrposhta.ua, in the Ukrposhta app or by pasting the number in the box above. The number comes from the sender: 13 digits within Ukraine, or two letters, nine digits and two letters to or from abroad.
 
 ## Ukrposhta tracking number
 
-Ukrposhta's numbers come in two shapes, and its tracking page takes up to 30 at once.
+Ukrposhta's numbers come in two shapes, and a 13-digit one ends in a check digit.
 
 | Shape (invented) | What it is |
 | --- | --- |
@@ -18,26 +18,18 @@ Ukrposhta's numbers come in two shapes, and its tracking page takes up to 30 at 
 | `RR000000005UA` | An international item posted in Ukraine: two letters, nine digits, `UA`. |
 | `RR000000005US` | An item coming into Ukraine keeps the sending post's number, ending in that country's code. |
 
-For items coming into Ukraine, the first letter shows which service the sender chose:
+No number? Ask the sender, or see [how to find a tracking number](guide:find-tracking-number).
 
-- `R`: tracked, up to 5 kg;
-- `E` or `C`: tracked, up to 30 kg;
-- `V`: tracked and insured;
-- `S`: partially tracked, with only the arrival at the post office;
-- `U`: untracked; ask the post office serving your address.
-
-The sender gets the number on the receipt at the counter. When the item reaches your branch, the SMS or Viber message from "Ukrposhta" gives the item number, the branch number and any payment due. No number? Ask the sender, or see [how to find a tracking number](guide:find-tracking-number).
-
-[Not to be confused](guide:tracking-number-formats): [Nova Poshta](carrier:nova-poshta) waybills have 14 digits, and [Meest](carrier:meest) numbers end in `G`.
+[Not to be confused](guide:tracking-number-formats): [Nova Poshta](carrier:nova-poshta) waybills within Ukraine have 14 digits, and many [Meest](carrier:meest) numbers end in `G`.
 
 ## What Ukrposhta tracking statuses mean
 
-Ukrposhta's site shows each step in Ukrainian or English. Its English lines, in order:
+Peek asks Ukrposhta for its English lines. The usual ones, roughly in order:
 
 | Ukrposhta's status | What it means for you |
 | --- | --- |
 | `Created online. Waiting acceptance` | The sender [made the label online](guide:tracking-statuses). Ukrposhta doesn't have the item yet. |
-| `Registered` | Accepted at a branch. |
+| `Registered` | Accepted by Ukrposhta. |
 | `Departed from the Branch` | Left the branch where it was posted. |
 | `Arrived to the Logistics Center` | Being sorted on its way across Ukraine. |
 | `Arrival at inward office of exchange` | An item from abroad has reached Ukraine. |
@@ -47,90 +39,55 @@ Ukrposhta's site shows each step in Ukrainian or English. Its English lines, in 
 | `Departure from inward office of exchange` | Through customs and on its way to your region. |
 | `Item out for physical delivery` | Out for delivery. |
 | `Arrived to the Branch` | At your branch, ready to pick up. |
-| `Delivered to Recipient` | Handed over to you. |
-| `Final delivery` | Delivered: the line an item from abroad shows. |
+| `Final delivery` | Delivered: handed over to you. |
 | `Returned to Sender (Due to Recipient's Refusal)` | Refused by the recipient and going back. |
 | `Return: Delivered to Sender` | Back with the sender: returned, not delivered to you. |
 
-Steps on the way back start with `Return:`. Above the history, the tracking site also shows a coloured label. `Archive` is the confusing one: it means the journey is finished (delivered, or back with the sender), not that the item was stored away. `In transit to recipient` covers every step without a label of its own, customs holds and returns included, so read the line below it. `At post office` means it waits at the branch, and `Lost` comes with a link for the sender to claim compensation.
+Steps on the way back start with `Return:`. Once a line shows the item is going back, Peek shows a later delivery as "Returned to sender", not "Delivered".
 
-## Ukrposhta branches, parcel lockers and storage times
+## Ukrposhta branch pickup and delivery
 
-You can pick up a parcel at a Ukrposhta branch, a parcel locker or a pickup point, or have a courier bring it in regional centres.
-
-When a registered item reaches the branch, Ukrposhta sends an SMS or Viber message to the mobile number on the label; without one, a paper notice goes in your letterbox. If you haven't collected it after 3 working days, a reminder gives the date paid storage starts.
-
-To collect, bring an ID, such as a passport, or show it in the Diia app. Individuals whose phone number is on the item can use the code from the SMS instead (for an international item, if declared at up to UAH 20,000), unless the item says "Hand over personally". Customs charges or cash on receipt (COD) must be paid before you get the item, and such items aren't handed over at lockers or pickup points.
-
-How long items wait:
-
-- **From abroad:** about a month at a branch; 7 days at a locker or pickup point, then at the branch serving it. The first 5 working days are free, then a daily fee applies.
-- **EMS:** 14 calendar days at a branch.
-- **Within Ukraine:** 7 calendar days at a city branch, 14 at a village or mobile branch, 7 at a locker. You can extend a branch item to 28 days in the app or your personal account.
-
-Ask Ukrposhta before the end if you need longer for an item from abroad. An uncollected item from abroad goes back, unless the sender marked "Do not return". Only the sender can change its address, through the post where it was sent.
+The lines tell you whether the item comes to you (`Item out for physical delivery`) or waits at your branch (`Arrived to the Branch`, which Peek shows as "Ready for pickup"). The Ukrposhta app finds branches on a map, with their postcodes, addresses and opening hours. Ask your branch how long it keeps an item and which ID to bring.
 
 ## Ukrposhta parcel delayed, lost or damaged
 
-Ukraine's airspace is closed, so Ukrposhta sends international mail by land through Latvia, Poland and Slovakia, and transit takes longer. If nothing moves for days, see [tracking that isn't updating](guide:tracking-not-updating); for a hold at customs, see [parcels held at customs](guide:customs). Ukrposhta says to contact the customs unit holding it.
+If nothing moves for days, see [tracking that isn't updating](guide:tracking-not-updating); for a hold at customs, see [parcels held at customs](guide:customs).
 
-**Lost or late from abroad.** The item belongs to the sender until it's handed to you, so the sender asks their own post for a search, within six months of posting. Ukrposhta gives a first reply within 30 days and a final one within 2 months. Compensation goes to the sender, or to you if the sender waives it in writing. Items posted in Ukraine are claimed with Ukrposhta's online forms, in Ukrainian only. For goods bought online that never came, Ukrposhta says to contact the seller.
+**Lost or late, to or from abroad.** Under the Universal Postal Union's rules, a national post must accept an inquiry about a parcel or a registered or insured item, from the sender or from you, within six months of the day after it was posted. Inquiries are free under these rules, but Ukraine reserves the right to charge for them. Compensation for a lost or damaged item goes to the sender, or to you if the sender waives it in writing. For goods bought online that never came, contact the seller first.
 
-**Damaged on arrival.** Ask the branch staff to draw up a report before you leave. The sender then asks their own post to investigate.
+**Damaged on arrival.** Point out the damage before you take the item. Under the same rules, the posts stay liable for damage to such an item found before or at delivery, and the one delivering it draws up a report for you to countersign, with a copy for you.
 
-## Ukrposhta contact number and customer service
+## Ukrposhta customer service
 
-Ukrposhta's channels, as ukrposhta.ua listed them in October 2026:
-
-- **Contact centre:** 0 800 300 545, daily 08:00 to 22:00. No number for callers outside Ukraine is listed.
-- **Facebook Messenger:** daily 08:00 to 22:00.
-- **Email:** ukrposhta@ukrposhta.ua.
-- **Chatbot:** "UKRPOSHTA" on Viber and "@UKRPOSHTA.CHATBOT" on Telegram, to track items and find a branch.
-
-> Ukrposhta warns of fake SMS asking you to confirm your address or follow a link. Real notices come by SMS or Viber only from "Ukrposhta", with no links to other sites. If you entered card details, contact your bank at once.
+For problems with the app, Ukrposhta's Google Play listing gives mobile-app@ukrposhta.ua. For a parcel to or from abroad that's lost or late, make an inquiry as described above: under the UPU's rules, Ukrposhta must accept it from you as well as from the sender.
 
 ## Tracking Ukrposhta with Peek
 
-For 13 digits with Ukrposhta's check digit, [Peek](/) asks Ukrposhta, [La Poste](carrier:la-poste) and Delhivery at once and shows "Ukrposhta has this parcel." when only Ukrposhta knows it; if another carrier knows it too, pick with "Change". A 13-digit number with a wrong check digit isn't offered to Ukrposhta: pick it with "Change". A number starting C, E, L or R and ending `UA` is named as Ukrposhta's straight away when its check digit is valid. For other numbers ending `UA`, it asks Ukrposhta and [Chronopost](carrier:chronopost); if Ukrposhta doesn't know it yet, you see "Not found at … yet. Peek will keep checking after you add it." A track.ukrposhta.ua link with the number in it always names Ukrposhta.
+For 13 digits with Ukrposhta's check digit, [Peek](/) asks Ukrposhta, along with Delhivery for a number that also fits Delhivery's shape (first digit 1 to 9, last 0 to 6), and shows Ukrposhta, marked "has this parcel", when only Ukrposhta knows it; if Delhivery knows it too, you choose between them. A 13-digit number with a wrong check digit isn't offered to Ukrposhta: pick Ukrposhta with "Change". A number starting C, E, L or R and ending `UA` is named as Ukrposhta's straight away when its check digit is valid; for a valid one starting with another letter, Peek asks Ukrposhta and [Chronopost](carrier:chronopost), and if neither knows it yet, keeps checking after you add it. A track.ukrposhta.ua link with the number in it always names Ukrposhta.
 
 A number from another country's post isn't offered to Ukrposhta. When the item is heading to Ukraine, Peek can follow it to Ukrposhta, or you can pick "Ukrposhta" with "Change".
 
-It reads the service behind Ukrposhta's app, checks every 10 minutes (every 2 once the item is out for delivery) and can notify you when the status changes. It shows each step on a map with its place and country, the customs steps and the time it was delivered. Times in Ukraine are read on Kyiv time and shown in your device's time zone; steps abroad don't appear, and while the latest step is abroad it shows a dated history from [tracking services](guide:universal-tracker) when one has it. Peek shows no expected arrival day and leaves out Ukrposhta's planned date and postcodes; the only pickup point named is the branch on `Arrived to the Branch`. Statuses keep Ukrposhta's English wording, `Final delivery` included.
+It reads the service behind Ukrposhta's app; when that service fails or doesn't know an item to or from abroad, Peek opens Ukrposhta's tracking page in a browser on its server. It shows each step on a map with its place and country, the customs steps and the time it was delivered. Ukrposhta gives its times without a time zone: Peek reads a step in Ukraine on Kyiv time and works out the zone of a step abroad from its place or the steps around it, so that time can be off; it shows each in your device's time zone. Peek shows no expected arrival day and leaves out Ukrposhta's planned date and postcodes; the only pickup point named is the branch on `Arrived to the Branch`. Statuses keep Ukrposhta's English wording, `Final delivery` included.
+
+Peek checks every 10 minutes. Once the item is out for delivery, it checks every 2 minutes, or every 5 when its last check had to open that browser. After two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you when the status changes.
 
 ## Questions about Ukrposhta tracking
 
-### How long does Ukrposhta take to the USA, UK or Canada?
+### How do I track a Ukrposhta parcel in the UK?
 
-Under martial law, Ukrposhta says EMS takes 10 to 14 days to most countries, by land to the nearest European hubs. Its pages give no transit time for items coming into Ukraine.
-
-### Who delivers Ukrposhta parcels in the UK?
-
-[Royal Mail](carrier:royal-mail), which Ukrposhta works with.
+When you add a Ukrposhta item in the UK, Peek also asks [Royal Mail](carrier:royal-mail) under the same number, or [Parcelforce](carrier:parcelforce) for a number starting with E (EMS). Once that post has a scan as recent as Ukrposhta's last, Peek follows the parcel there, keeping Ukrposhta's steps.
 
 ### Why is my Ukrposhta tracking number not working?
 
-Ukrposhta lists four reasons: it was registered too recently, an item from abroad hasn't reached Ukraine yet, it was accepted more than six months ago, or the number was mistyped.
+Check it against the one the sender gave you, character by character. A 13-digit number ends in a check digit, and Peek doesn't offer Ukrposhta one whose check digit is wrong. If the number is right, Ukrposhta may not know it yet: a parcel filed under Ukrposhta then shows "Waiting for the carrier" while Peek keeps checking. If nothing changes for several days, ask the sender.
 
-### Is Ukrposhta still operating?
+### How do I track a parcel sent to Ukraine from abroad?
 
-Yes. Its network covers all of Ukraine except the temporarily occupied areas.
+Paste the number the sender gave you. Peek follows the parcel at the sending post. When that post says the parcel is going to Ukraine, or you add it in Ukraine, Peek also asks Ukrposhta and, once Ukrposhta has a scan as recent as that post's last, carries on there, keeping the earlier steps. To follow it at Ukrposhta from the start, pick "Ukrposhta" with "Change". A DHL parcel from Germany whose number starts with C is followed at [Meest](carrier:meest) instead.
 
 :::sources
-- [Ukrposhta: Tracking](https://track.ukrposhta.ua/en/) – number shapes, 30 at once, not-found reasons, labels, Lost message, claim prompt, barcode links
-- [Ukrposhta: Трекінг відправлень](https://track.ukrposhta.ua/) – Ukrainian version of the tracking page
-- [Ukrposhta: Shipping to Ukraine](https://www.ukrposhta.ua/en/dostavka-v-ukrainu) – service letters, handover at the post office, ID, postcode
-- [Ukrposhta: Receiving an item](https://www.ukrposhta.ua/en/yak-otrymaty-vidpravlenya) – ways to collect, ID, SMS code, customs charges
-- [Ukrposhta: FAQ for international shipments](https://www.ukrposhta.ua/en/faq-mizhnarodni-vidpravlennia) – searches, deadlines, damage, storage, customs holds, returns, Royal Mail, EMS times
-- [Ukrposhta: Терміни зберігання поштових відправлень та переказів](https://www.ukrposhta.ua/doc/kutochok-spozhyvacha/terminy_zberihannia_poshtovykh_vidpravlen_ta_perekaziv.pdf) – storage periods, lockers, extension
-- [Ukrposhta: Регламент надання послуг з пересилання відправлень](https://www.ukrposhta.ua/doc/regulatory-framework/rehlament_z_nadannia_posluh_z_peresylannia_vidpravlen.pdf) – SMS and Viber notices, 3-day reminder, 5 free working days
-- [Ukrposhta: Contact center work schedule](https://www.ukrposhta.ua/en/hrafik-roboti-kontakt-tsentr) – phone, hours, Messenger, email
-- [Ukrposhta: Онлайн-рекламація (international)](https://www.ukrposhta.ua/ua/rozshuk-mrpv) – claim form, six months, land routes
-- [Ukrposhta: Онлайн-рекламація (domestic)](https://www.ukrposhta.ua/ua/rozshuk-vrpv) – domestic claim form, domestic number format
-- [Ukrposhta: Часті питання «Відповідальність Укрпошти»](https://www.ukrposhta.ua/ua/faq-vidpovidalnist-ukrposhti) – contact the seller, six months
-- [Ukrposhta: Укрпошта закликає громадян не реагувати на шахрайські схеми](https://www.ukrposhta.ua/ua/news/58390-ukrposhta-zaklika-gromadjan-ne-reaguvati-na-shahrajski-shemi) – fake SMS, what real notices contain
-- [Ukrposhta: Не дайте себе ошукати!](https://www.ukrposhta.ua/ua/news/58100-ne-dajte-sebe-oshukati) – scam example, bank advice
-- [Ukrposhta: Поштомати](https://www.ukrposhta.ua/ua/poshtomaty) – 7 days in a locker, then the branch
-- [Ukrposhta: Онлайн-сервіси](https://www.ukrposhta.ua/ua/onlain-servisy) – app and Viber and Telegram chatbot
-- [Ukrposhta: About Ukrposhta](https://www.ukrposhta.ua/en/pro-ukrposhtu) – national operator, state ownership, coverage
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper: Ukrposhta](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ukrposhta) – number shapes and check digits, track.ukrposhta.ua links, the app's service and the tracker Peek reads, the English lines and their statuses, return lines, Kyiv time and steps abroad, what Peek leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – carriers Peek asks by number, Ukraine's national post, hand-offs to Ukrposhta (to Meest for DHL's C numbers) and from it to Royal Mail or Parcelforce, Nova Poshta and Meest numbers
+- [Universal Postal Union: Convention Manual](https://www.upu.int/UPU/media/upu/files/aboutUpu/acts/06-manualsInThreeVolumes/actInThreeVolumesConventionManual202609En.pdf) – inquiries within six months, Ukraine's right to charge for them, compensation to the sender or, by written waiver, to you, damage found at delivery and its report
+- [Google Play: Ukrposhta](https://play.google.com/store/apps/details?id=ua.ukrposhta.android.app) – the app tracks parcels and finds branches with their postcodes, addresses and opening hours; email for app problems
 :::

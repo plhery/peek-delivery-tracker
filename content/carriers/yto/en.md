@@ -16,6 +16,7 @@ YTO calls it the waybill number (`运单号`). With invented digits:
 | --- | --- |
 | `YT0000000000000` | YT and 13 digits: a YTO Express waybill. |
 | `D00000000000` | D and 11 digits: a YTO shape, but [Colis Privé](carrier:colis-prive) numbers can look the same. |
+| `G00000000000` | G and 11 digits: another YTO shape, which Colis Privé numbers can share too. |
 | `YT0000000000000000` | YT and 16 digits: not YTO but [YunExpress](carrier:yunexpress). |
 
 Lower case and spaces don't matter in Peek. YTO's own tracker takes up to 10 numbers at once, separated by commas, slashes or spaces.
@@ -31,9 +32,11 @@ Each scan in YTO's tracking data has a short Chinese name, a time on China's clo
 | YTO's scan | In Peek | What happened |
 | --- | --- | --- |
 | `揽收扫描` | Picked up | Collected from the sender. |
+| `业务员收件` | Picked up | Collected from the sender by a YTO courier in person. |
 | `装件入车扫描` | Loaded for transport | Loaded onto a vehicle for the next stop. |
 | `下车扫描` | Unloaded at a sorting centre | Unloaded at a hub or branch. |
 | `快件城市信息` | In transit | A city update on the way. |
+| `冬运会安检` | Security check | A security check of the parcel in YTO's network for a winter sports event; then it moves on. |
 | `派件扫描` | Out for delivery | Handed to the courier for delivery. |
 | `入柜\|入库` | In a parcel locker or pickup station | Put in a locker or booked in at a station. |
 | `小件员取出` | Taken out of the locker by the courier | The courier took it back out of the locker or station. |
@@ -86,13 +89,13 @@ YTO gives no hours or languages for them. Its site also has an online customer s
 
 ## Track a YTO Express parcel with Peek
 
-[Peek](/) names YTO Express at once from `YT` and 13 digits. A `D` number with 11 digits fits Colis Privé too, so Peek can't tell which it is. Paste it all the same: Peek follows more than 3,500 carriers. If YTO Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. Peek's YTO lookup takes YTO waybills in other shapes too: for those, pick YTO Express under "All carriers". A yto.net.cn link with `mailNo=` or `waybillNo=` and the number names YTO too.
+[Peek](/) names YTO Express at once from `YT` and 13 digits. A `D` or `G` number with 11 digits fits Colis Privé too, so Peek can't tell which it is. Paste it all the same: Peek follows more than 3,500 carriers. If YTO Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. Peek's YTO lookup takes YTO waybills in other shapes too: for those, pick YTO Express under "All carriers". A yto.net.cn link with `mailNo=` or `waybillNo=` and the number names YTO too.
 
-Peek reads YTO's own tracking in China, not YTO International's. It shows the status, the scans YTO returns with the branch or station that made each, and the delivery time, with times read on China's clock and shown in your device's time zone. Scans in the table above appear in Peek's English, others in YTO's Chinese, and repeated scans once. After `退回件扫描`, Peek shows the trip back as "Out for delivery back to the sender" and "Returned to the sender".
+Peek reads YTO's own tracking in China, not YTO International's. It shows the status, the scans YTO returns with the branch or station that made each, and the delivery time, with times read on China's clock and shown in your device's time zone. Scans in the table above appear in Peek's English, others in YTO's Chinese, and repeated scans once. After `退回件扫描`, Peek shows the trip back as "Out for delivery back to the sender" and "In a parcel locker or station on its way back", and the sender's signature as "Returned to the sender".
 
 YTO gives no expected delivery date. Peek leaves out couriers' names and phone numbers, the recipient's details and collection addresses: YTO's own tracker has those. YTO answers any number in a valid shape, so no scans yet doesn't prove a mistake: Peek keeps checking.
 
-It checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact YTO or the seller for you.
+It checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact YTO or the seller for you.
 
 ## Questions about YTO Express tracking
 

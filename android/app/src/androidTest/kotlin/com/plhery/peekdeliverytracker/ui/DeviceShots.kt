@@ -42,6 +42,24 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
         }
     }
 
+    private fun capture(): Bitmap {
+        val taken = checkNotNull(instrumentation.uiAutomation.takeScreenshot()) { "No screenshot" }
+        return if (taken.config == Bitmap.Config.HARDWARE) taken.copy(Bitmap.Config.ARGB_8888, false) else taken
+    }
+
+    /**
+     * Whether the screen between a tenth of its height from its top and from its bottom is one colour, every 16th
+     * pixel each way: no screen these tests photograph is, while Android 12's emulator now and then captures the app's
+     * window as a blank white one though it has drawn its frames.
+     */
+    private fun blank(screen: Bitmap): Boolean {
+        val first = screen.getPixel(screen.width / 2, screen.height / 2)
+        for (y in screen.height / 10 until screen.height * 9 / 10 step 16) {
+            for (x in 0 until screen.width step 16) if (screen.getPixel(x, y) != first) return false
+        }
+        return true
+    }
+
     /** `command`'s output, run by the shell through UiAutomation, once it has ended. */
     private fun shell(command: String): String =
         ParcelFileDescriptor.AutoCloseInputStream(instrumentation.uiAutomation.executeShellCommand(command)).use { it.readBytes().decodeToString() }
@@ -50,15 +68,21 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
      * The whole screen as [folder]/<name>.png, which it returns. Written by the shell: the app's process, where the test
      * runs, may neither make nor write another package's external files (scoped storage), and adb reads them. Where
      * another app's window stands over the app's ([ownWindow] false), such as the system's share sheet, it doesn't wait
-     * for the app's frames, which a covered window may not draw.
+     * for the app's frames, which a covered window may not draw. A capture of the app's window that comes out [blank]
+     * is taken again, twice at most, 300 ms and two frames later: one still blank is saved as it is.
      */
     fun take(name: String, ownWindow: Boolean = true): Bitmap {
         if (ownWindow) {
             compose.waitForIdle()
             awaitFrames()
         }
-        val taken = checkNotNull(instrumentation.uiAutomation.takeScreenshot()) { "No screenshot" }
-        val screen = if (taken.config == Bitmap.Config.HARDWARE) taken.copy(Bitmap.Config.ARGB_8888, false) else taken
+        var screen = capture()
+        repeat(2) {
+            if (!ownWindow || !blank(screen)) return@repeat
+            Thread.sleep(300)
+            awaitFrames()
+            screen = capture()
+        }
         val png = ByteArrayOutputStream().use { out ->
             check(screen.compress(Bitmap.CompressFormat.PNG, 100, out))
             out.toByteArray()

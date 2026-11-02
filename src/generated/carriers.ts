@@ -1880,6 +1880,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "J&T Express UK tracking: JTUK numbers and statuses",
       "name": "J&T Express UK",
       "color": "#e60000"
+    },
+    {
+      "id": "m-one",
+      "catalog": "m-one",
+      "slug": "m-one-tracking",
+      "title": "M-ONE tracking (Milšped ONE): statuses, delivery and help",
+      "name": "M-ONE",
+      "color": "#024da0"
     }
   ],
   "de": [

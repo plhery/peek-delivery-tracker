@@ -4,7 +4,6 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -106,6 +105,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.rememberForLaunch
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.stroke
 import com.plhery.peekdeliverytracker.ui.settings.AccountHost
 import com.plhery.peekdeliverytracker.ui.settings.AccountSheetHost
 import com.plhery.peekdeliverytracker.ui.settings.DELIVERY_UPDATES_PAGE
@@ -1076,7 +1076,7 @@ internal fun FriendAcceptedNotice(update: FriendUpdate, open: () -> Unit, dismis
             .testTag(FRIENDS_NOTICE)
             .dropShadow(shape, NOTICE_SHADOW)
             .background(colors.paper, shape)
-            .border(1.dp, colors.ink.copy(alpha = 0.08f), shape)
+            .stroke(1.dp, colors.ink.copy(alpha = 0.08f), shape)
             .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,

@@ -2,13 +2,17 @@ package com.plhery.peekdeliverytracker.ui.draw
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.node.DrawModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.node.invalidateDraw
+import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
@@ -63,14 +67,48 @@ data object CapsuleShape : Shape {
 
 /**
  * `.overlay(shape.stroke(color, lineWidth: width))`: the outline stroked over the content, centred on the edge, half of
- * the line outside the shape, where `Modifier.border` draws `strokeBorder`'s, inside it.
+ * the line outside the shape, where `Modifier.border` draws `strokeBorder`'s, inside it. The outline is made once for
+ * each size, so a caller drawn anew each frame (a card as it opens, a tilt) makes none.
  */
-fun Modifier.stroke(width: Dp, color: Color, shape: Shape): Modifier = drawWithCache {
-    val outline = shape.createOutline(size, layoutDirection, this)
-    val line = Stroke(width.toPx())
-    onDrawWithContent {
+fun Modifier.stroke(width: Dp, color: Color, shape: Shape): Modifier = this then StrokeElement(width, color, shape)
+
+private data class StrokeElement(val width: Dp, val color: Color, val shape: Shape) : ModifierNodeElement<StrokeNode>() {
+    override fun create() = StrokeNode(width, color, shape)
+
+    override fun update(node: StrokeNode) {
+        node.width = width
+        node.color = color
+        if (node.shape != shape) {
+            node.shape = shape
+            node.outline = null
+        }
+        node.invalidateDraw()
+    }
+
+    override fun InspectorInfo.inspectableProperties() {
+        name = "stroke"
+        properties["width"] = width
+        properties["color"] = color
+        properties["shape"] = shape
+    }
+}
+
+private class StrokeNode(var width: Dp, var color: Color, var shape: Shape) : Modifier.Node(), DrawModifierNode {
+    var outline: Outline? = null
+    private var outlineSize = Size.Unspecified
+    private var outlineDirection = LayoutDirection.Ltr
+    private var outlineDensity = 0f
+
+    override fun ContentDrawScope.draw() {
         drawContent()
-        drawOutline(outline, color, style = line)
+        val outline = outline?.takeIf { outlineSize == size && outlineDirection == layoutDirection && outlineDensity == density }
+            ?: shape.createOutline(size, layoutDirection, this).also {
+                outline = it
+                outlineSize = size
+                outlineDirection = layoutDirection
+                outlineDensity = density
+            }
+        drawOutline(outline, color, style = Stroke(width.toPx()))
     }
 }
 

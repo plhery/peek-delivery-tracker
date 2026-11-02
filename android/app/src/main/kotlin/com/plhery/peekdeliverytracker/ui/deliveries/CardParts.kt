@@ -3,7 +3,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -11,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -157,16 +158,17 @@ fun SelectedCardRing(shown: Boolean, cornerRadius: Dp, modifier: Modifier = Modi
     val reduceMotion = PeekTheme.reduceMotion
     val ink = PeekTheme.colors.ink
     val opacity by animateFloatAsState(if (shown) 1f else 0f, if (reduceMotion) snap() else Motion.snappy(0.2), label = "ring")
-    Canvas(modifier.clearAndSetSemantics {}) {
-        if (opacity <= 0f) return@Canvas
-        // `strokeBorder`: the ring inside the shape, on the shape inset by half its width.
-        val line = 2.dp.toPx()
-        val inset = cornerRadius - 1.dp
-        translate(line / 2, line / 2) {
-            val outline = ContinuousRoundedShape(inset).createOutline(Size(size.width - line, size.height - line), layoutDirection, this)
-            drawOutline(outline, ink, alpha = opacity, style = Stroke(line))
-        }
-    }
+    Spacer(
+        modifier.clearAndSetSemantics {}.drawWithCache {
+            // `strokeBorder`: the ring inside the shape, on the shape inset by half its width; made once for each size.
+            val line = 2.dp.toPx()
+            val outline = ContinuousRoundedShape(cornerRadius - 1.dp).createOutline(Size(size.width - line, size.height - line), layoutDirection, this)
+            val stroke = Stroke(line)
+            onDrawBehind {
+                if (opacity > 0f) translate(line / 2, line / 2) { drawOutline(outline, ink, alpha = opacity, style = stroke) }
+            }
+        },
+    )
 }
 
 /**

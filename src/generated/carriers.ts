@@ -4234,6 +4234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Praćenje pošiljke Hrvatske pošte: statusi, rokovi i kontakt",
       "name": "Hrvatska pošta",
       "color": "#ffd100"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-njemacka-pracenje-posiljke",
+      "title": "Praćenje J&T pošiljke u Njemačkoj: JTDE broj i statusi",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
     }
   ],
   "sl": [

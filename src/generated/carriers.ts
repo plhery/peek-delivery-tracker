@@ -4006,6 +4006,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra Matkahuolto-paket: statusar, hämtning och kundtjänst",
       "name": "Matkahuolto",
       "color": "#001e60"
+    },
+    {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-spara-paket",
+      "title": "Spåra paket med TopYou: TYZR-nummer, statusar och leverans",
+      "name": "TopYou",
+      "color": "#045cd7"
     }
   ],
   "da": [

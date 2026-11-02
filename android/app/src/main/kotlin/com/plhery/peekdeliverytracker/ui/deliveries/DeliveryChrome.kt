@@ -146,6 +146,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
 import com.plhery.peekdeliverytracker.ui.zoom.fadingUnderZoom
 import com.plhery.peekdeliverytracker.ui.zoom.givingWayToPageBar
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
@@ -288,7 +289,8 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
  * A tab's bar with only its inline title and `AccountToolbarItem`, placed as the list's bar places them
  * ([ListToolbar]): the passport's, whose account button, tagged [accountTag], opens its own Settings. Where a fold
  * stands half open [titleWidth] from the window's leading edge (in a window too narrow or too short for the tab bar at
- * the top, where [TabRowAccount] stands instead), the title centres over that first half, clear of it.
+ * the top, where [TabRowAccount] stands instead), the title centres over that first half, clear of it. Under a page
+ * that zooms over the tab ([zoom]), the title fades as the list's does and the account gives way to the page's bar.
  */
 @Composable
 internal fun AccountBar(
@@ -302,6 +304,7 @@ internal fun AccountBar(
     accountTag: String,
     modifier: Modifier = Modifier,
     titleWidth: Dp? = null,
+    zoom: ZoomTransition? = null,
 ) {
     Box(modifier.fillMaxWidth().padding(top = rowTop).height(ROW_HEIGHT)) {
         val place = if (titleWidth != null) {
@@ -312,7 +315,7 @@ internal fun AccountBar(
         ProvideDynamicTypeSize(DynamicTypeSize.Large) {
             Text(
                 title,
-                place.semantics { heading() },
+                place.then(if (zoom != null) Modifier.fadingUnderZoom(zoom) else Modifier).semantics { heading() },
                 color = PeekTheme.colors.label,
                 style = PeekTheme.type.headline,
                 textAlign = TextAlign.Center,
@@ -322,7 +325,11 @@ internal fun AccountBar(
         }
         GlassSurface(
             CapsuleShape,
-            Modifier.align(Alignment.CenterEnd).offset(x = -(end + ACCOUNT_MARGIN)).size(ACCOUNT_GLASS_WIDTH, ROW_HEIGHT),
+            Modifier
+                .align(Alignment.CenterEnd)
+                .offset(x = -(end + ACCOUNT_MARGIN))
+                .then(if (zoom != null) Modifier.givingWayToPageBar(zoom) else Modifier)
+                .size(ACCOUNT_GLASS_WIDTH, ROW_HEIGHT),
             backdrop,
         ) {
             AccountButton(session, onAccount, accountTag, Modifier.align(Alignment.Center))
@@ -337,6 +344,7 @@ private val FOLD_TITLE_MARGIN = 16.dp
  * Where the tab bar stands at the top, a tab's `AccountToolbarItem` as the iPad places it with no title: the account's
  * glass in the tab bar's row, centred on it, 10 in from the window's trailing edge and [end], clear of the system's
  * bars and cutout there (ipad-07). It opens the tab's own Settings ([onAccount]); its button is tagged [accountTag].
+ * Under a page that zooms over the tab ([zoom]), it gives way to the page's bar.
  */
 @Composable
 internal fun TabRowAccount(
@@ -346,12 +354,17 @@ internal fun TabRowAccount(
     onAccount: () -> Unit,
     accountTag: String,
     modifier: Modifier = Modifier,
+    zoom: ZoomTransition? = null,
 ) {
     val rowTop = LocalTabBarPadding.current.calculateTopPadding() - TOP_BAR_HEIGHT
     Box(modifier.fillMaxWidth().padding(top = rowTop).height(TOP_BAR_HEIGHT)) {
         GlassSurface(
             CapsuleShape,
-            Modifier.align(Alignment.CenterEnd).offset(x = -(end + TAB_ROW_ACCOUNT_MARGIN)).size(TAB_ROW_ACCOUNT_WIDTH, ROW_HEIGHT),
+            Modifier
+                .align(Alignment.CenterEnd)
+                .offset(x = -(end + TAB_ROW_ACCOUNT_MARGIN))
+                .then(if (zoom != null) Modifier.givingWayToPageBar(zoom) else Modifier)
+                .size(TAB_ROW_ACCOUNT_WIDTH, ROW_HEIGHT),
             backdrop,
         ) {
             AccountButton(session, onAccount, accountTag, Modifier.align(Alignment.Center))

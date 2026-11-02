@@ -23,6 +23,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.api.FriendStamp
+import com.plhery.peekdeliverytracker.core.api.FriendUpdate
+import com.plhery.peekdeliverytracker.core.api.FriendsActivity
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.deliveries.CARD_PHONE
@@ -42,9 +45,10 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The friends tab on the iPhone the captures were taken on (440 × 956 points at three pixels to the point), with its
  * safe area as a phone's bars, in light and dark: signed out, the demo's circle, its profile and invitation panels, an
- * account's invitation with its link, an empty circle, the intro without a profile and a circle that failed; the
- * xxLarge and largest text sizes; on a tablet both ways (ipad-01, ipad-09) with a panel as a form (ipad-07), and an
- * unfolded foldable.
+ * account's invitation with its link, an empty circle, the intro without a profile and a circle that failed; a
+ * friend's page, a stamp's popover and the removal asked, and the accepted notice; the xxLarge and largest text sizes,
+ * the circle and a friend's page; on a tablet both ways (ipad-01, ipad-09, ipad-02) with a panel as a form (ipad-07),
+ * and an unfolded foldable.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -254,6 +258,115 @@ class FriendsScreenshotTest {
         show(bars = Bars(top = 24, bottom = 24))
         tap(FRIENDS_INVITE)
         compose.screenshot("friends_tablet_panel")
+    }
+
+    private val mila = UUID.fromString("11000000-0000-4000-8000-000000000001")
+    private val noe = UUID.fromString("22000000-0000-4000-8000-000000000002")
+
+    /** The demo friend's page, out of their card. */
+    private fun page(friend: UUID) = tap(friendCardTag(friend))
+
+    /** Mila's page (ipad-02): the postcard with this week's arrival, the metrics, five stamps and All stamps. */
+    @Test
+    fun aFriendsPage() {
+        show()
+        page(mila)
+        compose.screenshot("friends_page_light")
+    }
+
+    /** Noé's page (ipad-11). */
+    @Test
+    fun aFriendsPageInDark() {
+        show(dark = true)
+        page(noe)
+        compose.screenshot("friends_page_dark")
+    }
+
+    /** An unearned stamp's popover over it, how far along (ipad-04, "12 / 25"). */
+    @Test
+    fun aStampsPopover() {
+        show()
+        page(mila)
+        tap(friendStampTag(FriendStamp.TheRegular))
+        compose.screenshot("friends_popover_light")
+    }
+
+    /** An earned stamp's popover (ipad-03). */
+    @Test
+    fun aStampsPopoverInDark() {
+        show(dark = true)
+        page(mila)
+        tap(friendStampTag(FriendStamp.First))
+        compose.screenshot("friends_popover_dark")
+    }
+
+    /** Manage friendship open and the removal asked (ipad-06). */
+    @Test
+    fun theRemovalAsked() {
+        show()
+        page(noe)
+        tap(FRIENDS_MANAGE_FRIENDSHIP)
+        tap(FRIENDS_REMOVE)
+        compose.onNodeWithTag(FRIENDS_CANCEL_REMOVE).performScrollTo()
+        settle()
+        compose.screenshot("friends_remove_light")
+    }
+
+    @Test
+    fun theRemovalAskedInDark() {
+        show(dark = true)
+        page(noe)
+        tap(FRIENDS_MANAGE_FRIENDSHIP)
+        tap(FRIENDS_REMOVE)
+        compose.onNodeWithTag(FRIENDS_CANCEL_REMOVE).performScrollTo()
+        settle()
+        compose.screenshot("friends_remove_dark")
+    }
+
+    /** A friend's page at xxLarge: three stamps to a row. */
+    @Test
+    fun aFriendsPageAtExtraExtraLargeText() {
+        show(fontScale = 1.3f)
+        page(mila)
+        compose.screenshot("friends_page_text_xxlarge")
+    }
+
+    /** At the largest text (ipad-13): two stamps to a row, the postcard's name staying small. */
+    @Test
+    fun aFriendsPageAtTheLargestText() {
+        show(dark = true, fontScale = 2f)
+        page(mila)
+        compose.screenshot("friends_page_text_largest")
+    }
+
+    /** Mila's page on a tablet held upright (ipad-02): ‹ 10 in, the column 680 wide in the middle. */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun aFriendsPageOnATablet() {
+        show(bars = Bars(top = 24, bottom = 24))
+        page(mila)
+        compose.screenshot("friends_page_tablet_portrait")
+    }
+
+    @Test
+    @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
+    fun aFriendsPageOnATabletSideways() {
+        show(bars = Bars(top = 24, bottom = 24))
+        page(mila)
+        compose.screenshot("friends_page_tablet_landscape")
+    }
+
+    /** Someone accepted the account's invitation: the notice over the window's top. */
+    @Test
+    fun theAcceptedNotice() {
+        show(reader) { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
+        compose.screenshot("friends_notice_light")
+    }
+
+    @Test
+    fun theAcceptedNoticeInDark() {
+        show(reader, dark = true) { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
+        compose.screenshot("friends_notice_dark")
     }
 
     /** An unfolded foldable: the circle 680 wide at most in the middle. */

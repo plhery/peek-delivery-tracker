@@ -403,8 +403,10 @@ class FriendsTest {
         compose.runOnUiThread { inbox.follow(friendLink(FriendFixtures.cy.id)) }
         settle()
         assertTrue(exists(PeekTab.Friends.screen))
-        assertEquals(FriendFixtures.cy.id, source.friendsActivity.focusId)
         assertEquals(listOf("Cy", "Ada", "Bo", "Di"), cards())
+        // Landed, Cy is acknowledged and the focus let go.
+        assertEquals(listOf(FriendFixtures.cy.id), requests(FriendsAction.AcknowledgeFriend).map { it.friendId })
+        assertNull(source.friendsActivity.focusId)
         assertNull(inbox.friend.value)
     }
 
@@ -414,8 +416,8 @@ class FriendsTest {
         inbox.follow(friendLink(FriendFixtures.bo.id))
         show(choose = false, inbox = inbox)
         assertTrue(exists(PeekTab.Friends.screen))
-        assertEquals(FriendFixtures.bo.id, source.friendsActivity.focusId)
         assertEquals(listOf("Bo", "Ada", "Cy", "Di"), cards())
+        assertEquals(listOf(FriendFixtures.bo.id), requests(FriendsAction.AcknowledgeFriend).map { it.friendId })
     }
 
     @Test
@@ -490,13 +492,11 @@ class FriendsTest {
     }
 
     @Test
-    fun anotherTabClearsTheCircleAndClosesItsPageAndComingBackLoadsItAfresh() {
+    fun anotherTabClearsTheCircleAndComingBackLoadsItAfresh() {
         show()
-        tap(friendCardTag(FriendFixtures.ada.id))
         choose("Passport")
         assertNull(source.friends.snapshotFlow.value)
         choose("Friends")
-        assertFalse(exists(FRIENDS_PAGE))
         assertEquals(2, client.loads)
         assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
     }
@@ -596,17 +596,17 @@ class FriendsTest {
         assertTrue(client.requests.isEmpty())
     }
 
-    /** In the demo: the stats no longer shared, from the profile's panel, and Sam removed, as their page will (part B). */
+    /** In the demo: the stats no longer shared, from the profile's panel, and Sam removed from their page. */
     private fun changeTheDemo() {
         tap(FRIENDS_SHARING)
         flip(FRIENDS_SHARE_STATS)
         tap(FRIENDS_SAVE)
         assertNull(panel())
-        val sam = UUID.fromString("33000000-0000-4000-8000-000000000003")
-        compose.runOnUiThread {
-            source.scope.launch { source.friends.act(FriendsActionRequest(FriendsAction.RemoveFriend, friendId = sam), source.parcels.value) }
-        }
-        settle()
+        tap(friendCardTag(UUID.fromString("33000000-0000-4000-8000-000000000003")))
+        tap(FRIENDS_MANAGE_FRIENDSHIP)
+        tap(FRIENDS_REMOVE)
+        tap(FRIENDS_CONFIRM_REMOVE)
+        assertFalse(exists(FRIENDS_PAGE))
         assertEquals(listOf("Mila", "Noé"), cards())
         assertEquals(FriendProfile("Alex", shareStats = false, shareArrival = false), source.friends.snapshotFlow.value?.profile)
     }

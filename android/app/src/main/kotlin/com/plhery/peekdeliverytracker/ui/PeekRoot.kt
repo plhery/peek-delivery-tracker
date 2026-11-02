@@ -54,6 +54,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.rememberFirstOpen
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
 import com.plhery.peekdeliverytracker.ui.friends.FriendLinkEffects
+import com.plhery.peekdeliverytracker.ui.friends.FriendNoticeHost
 import com.plhery.peekdeliverytracker.ui.friends.FriendsActivityEffects
 import com.plhery.peekdeliverytracker.ui.friends.FriendsDemoEffects
 import com.plhery.peekdeliverytracker.ui.friends.FriendsTab
@@ -202,6 +203,8 @@ internal fun PeekRoot(
                             }
                         }
                     }
+                    // The notice of an invitation accepted, over the tabs and under what stands over the window.
+                    if (source != null) FriendNoticeHost(source, state, covered = window.covered)
                     if (links != null) CompositionLocalProvider(LocalTabOverlay provides front) { ParcelLinkSheetHost(links) }
                     // What the link's sheet presents in turn comes over it there.
                     CompositionLocalProvider(LocalWindowOverlay provides front, LocalTabOverlay provides front) { front.Content() }

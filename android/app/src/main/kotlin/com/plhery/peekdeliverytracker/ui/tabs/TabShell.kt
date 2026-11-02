@@ -205,6 +205,9 @@ class WindowLayers private constructor(restored: List<String>) {
 
     constructor() : this(emptyList())
 
+    /** Whether anything stands over the window: a sheet, a popover or a menu, which TalkBack keeps to. */
+    val covered: Boolean get() = layers.isNotEmpty()
+
     internal fun show(host: TabOverlay, key: Any, content: (@Composable () -> Unit)?) {
         val index = layers.indexOfFirst { it.host === host && it.key == key }
         when {

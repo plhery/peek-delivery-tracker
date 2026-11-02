@@ -1,8 +1,10 @@
 package com.plhery.peekdeliverytracker.ui.friends
 
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,14 +13,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
@@ -41,9 +48,14 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -66,6 +78,7 @@ import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.PullToRefreshModel
 import com.plhery.peekdeliverytracker.core.api.FriendCard
+import com.plhery.peekdeliverytracker.core.api.FriendUpdate
 import com.plhery.peekdeliverytracker.core.api.FriendsAction
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsSnapshot
@@ -86,6 +99,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.SoftTopEdge
 import com.plhery.peekdeliverytracker.ui.deliveries.TabRowAccount
 import com.plhery.peekdeliverytracker.ui.deliveries.barRowTop
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
+import com.plhery.peekdeliverytracker.ui.deliveries.plainDisabled
 import com.plhery.peekdeliverytracker.ui.deliveries.rememberForLaunch
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
@@ -115,14 +129,21 @@ import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
+import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomStack
+import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
+import com.plhery.peekdeliverytracker.ui.zoom.recedingUnderZoom
+import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
 import java.text.NumberFormat
 import java.util.UUID
+import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.filterNotNull
@@ -156,6 +177,8 @@ internal class FriendsState(
     private val panelForm: MutableState<Boolean>,
     private val friend: MutableState<UUID?>,
     private val invitationValue: MutableState<InvitationValue>,
+    landedValue: MutableState<Boolean>,
+    presentedValue: MutableState<UUID?>,
 ) : AccountHost {
     override val showingAccount: Boolean get() = showing.value
     override val sheetsAsForms: Boolean get() = forms.value
@@ -175,6 +198,24 @@ internal class FriendsState(
     val invitation = InvitationState(invitationValue)
 
     var checkedPresentation: UUID? by mutableStateOf(null)
+
+    /** `friendTransition`: a friend's page opens out of their card and goes back into it, as a parcel's does. */
+    val zoom = ZoomTransition()
+
+    /** `arrivingID`: the friend a reveal lands, first in the circle while the tab shows. */
+    var arriving: UUID? by mutableStateOf(null)
+
+    /** `cardLanded`: whether the friend revealed has landed, kept with the window as the iPhone's `@State` is. */
+    var landed: Boolean by landedValue
+
+    /** `presented`: the presentation whose friend has landed, kept with the window. */
+    var presented: UUID? by presentedValue
+
+    /** How far the friend revealed has landed, from 0 (out of sight) to 1 ([landed]). */
+    val landing = Animatable(if (landedValue.value) 1f else 0f)
+
+    /** Where the circle's scrolled content and its cards stand, for the reveal to scroll to a card. */
+    val places = CardPlaces()
 
     /**
      * The invitation's link handed to the share sheet: the app the reader picks there stops the window, which keeps the
@@ -247,7 +288,15 @@ internal fun rememberFriendsState(source: DeliveriesSource): FriendsState {
     val panelForm = rememberForLaunch(launch, false)
     val friend = rememberForLaunch<UUID?>(launch, null)
     val invitation = rememberForLaunch(launch, InvitationValue())
-    return remember(source) { FriendsState(source, showing, forms, panel, panelForm, friend, invitation) }
+    val landed = rememberForLaunch(launch, false)
+    val presented = rememberForLaunch<UUID?>(launch, null)
+    return remember(source) { FriendsState(source, showing, forms, panel, panelForm, friend, invitation, landed, presented) }
+}
+
+/** The circle's scrolled content and its cards as last placed. */
+internal class CardPlaces {
+    var content: LayoutCoordinates? = null
+    val cards = HashMap<UUID, LayoutCoordinates>()
 }
 
 /**
@@ -276,6 +325,7 @@ internal fun FriendsTab(source: DeliveriesSource) {
     val hinge = LocalWindowHinge.current
     val backdrop = rememberMaterialBackdrop()
     val windowArrangement = LocalWindowArrangement.current
+    val working by source.friends.workingFlow.collectAsState()
     BoxWithConstraints(Modifier.fillMaxSize().background(colors.background).testTag(PeekTab.Friends.screen)) {
         val regularWidth = maxWidth >= REGULAR_WIDTH
         val regularHeight = maxHeight >= REGULAR_HEIGHT
@@ -288,37 +338,37 @@ internal fun FriendsTab(source: DeliveriesSource) {
             )
         }
         val asForm = deliveries == DeliveriesArrangement.SideBySide
-        SubcomposeLayout(Modifier.fillMaxSize().materialBackdrop(backdrop)) { constraints ->
-            val loose = constraints.copy(minWidth = 0, minHeight = 0)
-            val bar = subcompose(Slot.DemoBar) {
-                if (demo) DemoModeBar(onExit = source::showWelcome, sides = PaddingValues(start = start, end = end))
-            }.map { it.measure(loose) }
-            val chromeBottom = barBottom + (bar.maxOfOrNull { it.height } ?: 0).toDp()
-            val content = subcompose(Slot.Content) {
-                if (guest) {
-                    FriendsSignedOut(source, chromeBottom, bottom, start, end)
-                } else {
-                    FriendsCircleView(source, state, chromeBottom, bottom, start, end, asForm)
+        val zoom = state.zoom
+        val shown = if (guest) null else state.openFriend
+        // `top ?: covered`: the page going back into its card stays drawn until it lands.
+        val pageId = shown ?: zoom.covered as? UUID
+        ZoomStack(
+            transition = zoom,
+            top = shown,
+            onBack = state::closeFriend,
+            root = {
+                Box(Modifier.fillMaxSize()) {
+                    FriendsChrome(source, demo, barBottom, start, end, Modifier.fillMaxSize().materialBackdrop(backdrop)) { top ->
+                        if (guest) {
+                            FriendsSignedOut(source, top, bottom, start, end)
+                        } else {
+                            FriendsCircleView(source, state, top, bottom, start, end, asForm)
+                        }
+                    }
+                    if (tabBarAtTop) {
+                        TabRowAccount(end, backdrop, source.session, onAccount = { state.account(asForm) }, accountTag = FRIENDS_ACCOUNT_BUTTON, zoom = zoom)
+                    } else {
+                        AccountBar(
+                            localized("friends.title"), rowTop, start, end, backdrop, source.session,
+                            onAccount = { state.account(asForm) }, accountTag = FRIENDS_ACCOUNT_BUTTON, zoom = zoom,
+                        )
+                    }
                 }
-            }.map { it.measure(constraints) }
-            val band = subcompose(Slot.Band) {
-                if (demo) Box(Modifier.fillMaxWidth().height(barBottom).background(colors.cream)) else SoftTopEdge(barBottom)
-            }.map { it.measure(loose) }
-            layout(constraints.maxWidth, constraints.maxHeight) {
-                content.forEach { it.place(0, 0) }
-                band.forEach { it.place(0, 0) }
-                bar.forEach { it.place(0, barBottom.roundToPx()) }
-            }
-        }
-        if (tabBarAtTop) {
-            TabRowAccount(end, backdrop, source.session, onAccount = { state.account(asForm) }, accountTag = FRIENDS_ACCOUNT_BUTTON)
-        } else {
-            AccountBar(
-                localized("friends.title"), rowTop, start, end, backdrop, source.session,
-                onAccount = { state.account(asForm) }, accountTag = FRIENDS_ACCOUNT_BUTTON,
-            )
-        }
-        if (!guest && state.openFriend != null) FriendPagePlaceholder(state)
+            },
+            page = if (pageId != null) { { FriendPage(state, pageId) } } else null,
+            bar = { FriendPageBar(state, roomy = tabBarAtTop) },
+            backEnabled = !working,
+        )
         Announcements(state.announcement, FRIENDS_ANNOUNCEMENT, state::announced)
     }
     if (!guest) FriendsPanelHost(state)
@@ -326,6 +376,40 @@ internal fun FriendsTab(source: DeliveriesSource) {
 }
 
 private enum class Slot { DemoBar, Content, Band }
+
+/**
+ * The tab's chrome, the circle's and a friend's page's (`.safeAreaInset(edge: .top) { DemoModeBar() }` under the inline
+ * bar): what [content] shows from the window's top, given where it starts clear of the bar's foot [barBottom] and, in
+ * the demo, of the demo's bar under it; behind the bar, the cream in the demo, else the soft edge the scroll fades under.
+ */
+@Composable
+internal fun FriendsChrome(
+    source: DeliveriesSource,
+    demo: Boolean,
+    barBottom: Dp,
+    start: Dp,
+    end: Dp,
+    modifier: Modifier,
+    content: @Composable (top: Dp) -> Unit,
+) {
+    val colors = PeekTheme.colors
+    SubcomposeLayout(modifier) { constraints ->
+        val loose = constraints.copy(minWidth = 0, minHeight = 0)
+        val bar = subcompose(Slot.DemoBar) {
+            if (demo) DemoModeBar(onExit = source::showWelcome, sides = PaddingValues(start = start, end = end))
+        }.map { it.measure(loose) }
+        val chromeBottom = barBottom + (bar.maxOfOrNull { it.height } ?: 0).toDp()
+        val shown = subcompose(Slot.Content) { content(chromeBottom) }.map { it.measure(constraints) }
+        val band = subcompose(Slot.Band) {
+            if (demo) Box(Modifier.fillMaxWidth().height(barBottom).background(colors.cream)) else SoftTopEdge(barBottom)
+        }.map { it.measure(loose) }
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            shown.forEach { it.place(0, 0) }
+            band.forEach { it.place(0, 0) }
+            bar.forEach { it.place(0, barBottom.roundToPx()) }
+        }
+    }
+}
 
 /**
  * `FriendsSignedOutView` (A-S20): the postage pair (12 over the rest), "friends.title" in semibold 26 (growing with the
@@ -366,7 +450,12 @@ private fun Intro(title: String, tag: String, action: () -> Unit) {
  * a circle, Retry where it failed, else the spinner. In by 20, 18 apart. A pull from its top loads it again, its
  * spinner in the gap the pull opens (`.refreshable`). It loads as it shows, then every 60 s while it shows and the app
  * is in front, and is cleared, its panel and page closed, as it goes or the app leaves the foreground, but for the app
- * the invitation's Share hands its link to.
+ * the invitation's Share hands its link to. It recedes under a friend's page as the page zooms over it.
+ *
+ * A friend revealed lands once the circle that shows holds them, once for each presentation (the focus task): first in
+ * the circle, out of sight, then 60 ms later their card is scrolled to the middle and 60 ms after that it springs in
+ * from 100 to its right (response 0.55 s, damping 0.78), or fades in over 0.15 s easing out under Reduce Motion; the
+ * friend is acknowledged as it lands, and the focus let go once that is done.
  */
 @Composable
 private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top: Dp, bottom: Dp, start: Dp, end: Dp, asForm: Boolean) {
@@ -383,6 +472,9 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
     val lifecycle = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value
     val active = lifecycle.isAtLeast(Lifecycle.State.STARTED)
     val window = LocalActivity.current
+    val reduceMotion = PeekTheme.reduceMotion
+    val density = LocalDensity.current
+    val scroll = rememberScrollState()
     // `onAppear`: the demo's circle or the account's, and the circle an accepted invitation answered with at once.
     LaunchedEffect(demo) {
         store.configure(demo)
@@ -393,6 +485,7 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
         onDispose {
             if (window?.isChangingConfigurations != true) {
                 state.hide()
+                state.arriving = null
                 store.clear()
             }
         }
@@ -438,14 +531,36 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
     val pull = remember(pullModel) { ListPull(pullModel, pullScope, { refresh() }) }
     val pullPhase by pullModel.phaseFlow.collectAsState()
     PullEffects(pull, pullModel)
-    val held = with(LocalDensity.current) { pull.held.value.toDp() }
+    // `.task(id: focusReady ? presentationID : "waiting")`: the friend revealed lands once the circle holds them.
+    val focusReady = active && focusId != null && snapshot?.friends?.any { it.id == focusId } == true
+    val landingTop by rememberUpdatedState(top)
+    val landingBottom by rememberUpdatedState(bottom)
     val scope = rememberCoroutineScope()
+    LaunchedEffect(if (focusReady) presentation else null) {
+        val friendId = activity.focusId
+        if (!focusReady || state.presented == presentation || friendId == null) return@LaunchedEffect
+        state.arriving = friendId
+        state.landed = false
+        state.landing.snapTo(0f)
+        activity.consumeArrival()
+        if (store.snapshot?.friends?.any { it.id == friendId } != true) return@LaunchedEffect
+        delay(LANDING_STEP_MILLIS)
+        with(density) { scrollToMiddle(state.places, friendId, scroll, pull.height, landingTop.roundToPx(), landingBottom.roundToPx()) }
+        delay(LANDING_STEP_MILLIS)
+        state.presented = presentation
+        state.landed = true
+        // `withAnimation`: the landing goes on once the focus let go below ends this task.
+        scope.launch { state.landing.animateTo(1f, if (reduceMotion) Motion.easeOut(0.15) else Motion.springWithResponse(0.55, 0.78)) }
+        activity.acknowledge(friendId)
+        activity.consumeFocus(friendId)
+    }
+    val held = with(density) { pull.held.value.toDp() }
     Box(
         Modifier
             .fillMaxSize()
+            .recedingUnderZoom(state.zoom)
             .nestedScroll(pull)
-            .onSizeChanged { pull.height = it.height }
-            .then(if (state.openFriend != null) Modifier.clearAndSetSemantics {} else Modifier),
+            .onSizeChanged { pull.height = it.height },
     ) {
         // The iPhone's refresh control: its spinner in the middle of the gap the pull opens, under the bar.
         Box(
@@ -467,7 +582,8 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
             Modifier
                 .fillMaxSize()
                 .graphicsLayer { translationY = pull.past }
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scroll)
+                .onPlaced { state.places.content = it }
                 .testTag(FRIENDS_SCROLL)
                 .padding(start = start, top = top + held, end = end, bottom = bottom),
             contentAlignment = Alignment.TopCenter,
@@ -512,15 +628,16 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
 
 /**
  * `.buttonStyle(.bordered)` in the tab's ink: its title in body, in ink on a capsule of ink at 12 %, in by 14 and 7;
- * it fades as it is pressed.
+ * it fades as it is pressed, and is greyed while off.
  */
 @Composable
-private fun BorderedButton(title: String, tag: String, action: () -> Unit) {
+internal fun BorderedButton(title: String, tag: String, enabled: Boolean = true, action: () -> Unit) {
     val colors = PeekTheme.colors
     Box(
         Modifier
             .testTag(tag)
-            .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = action)
+            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
+            .plainDisabled(enabled)
             .background(colors.ink.copy(alpha = 0.12f), CapsuleShape)
             .padding(horizontal = 14.dp, vertical = 7.dp),
     ) {
@@ -615,36 +732,60 @@ private fun Circle(state: FriendsState, data: FriendsSnapshot, focus: UUID?, asF
             pill(Modifier)
         }
     }
-    val featured = data.friends.firstOrNull { it.id == focus }
+    // The friend landing, or else the one revealed.
+    val featuredId = state.arriving ?: focus
+    val featured = data.friends.firstOrNull { it.id == featuredId }
     val remaining = data.friends.filter { it.id != featured?.id }
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(9.dp)) {
-        featured?.let { FriendButton(state, it) }
-        remaining.forEach { key(it.id) { FriendButton(state, it) } }
-    }
-}
-
-/** `friendButton(_:)`: the friend's card (`TactileButtonStyle(scale: 0.98)`), which opens their page, counted. */
-@Composable
-private fun FriendButton(state: FriendsState, friend: FriendCard) {
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .testTag(friendCardTag(friend.id))
-            .clickable(interactionSource = null, indication = PressStyle.tactile(0.98f), role = Role.Button) { state.openFriend(friend.id) },
-    ) {
-        FriendCardView(friend)
+        featured?.let { key(it.id) { FriendButton(state, it, landing = true) } }
+        remaining.forEach { key(it.id) { FriendButton(state, it, landing = false) } }
     }
 }
 
 /**
- * The friend's page, which the next part brings (C-S22, C-S29): for now the page's ground over the tab, which the back
- * closes, as the page's back does but while an action runs.
+ * `friendButton(_:)`: the friend's card (`TactileButtonStyle(scale: 0.98)`), which opens their page out of it,
+ * counted. The friend [landing] stays out of sight until they have landed, 100 to the right of their place but under
+ * Reduce Motion.
  */
 @Composable
-private fun FriendPagePlaceholder(state: FriendsState) {
-    val working by state.source.friends.workingFlow.collectAsState()
-    BackHandler(enabled = !working) { state.closeFriend() }
-    Box(Modifier.fillMaxSize().background(PeekTheme.colors.background).testTag(FRIENDS_PAGE))
+private fun FriendButton(state: FriendsState, friend: FriendCard, landing: Boolean) {
+    val reduceMotion = PeekTheme.reduceMotion
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .onPlaced { state.places.cards[friend.id] = it }
+            .then(
+                if (landing) {
+                    Modifier.graphicsLayer {
+                        val landed = state.landing.value
+                        if (!reduceMotion) translationX = (1f - landed) * LANDING_OFFSET.toPx()
+                        alpha = landed.coerceIn(0f, 1f)
+                    }
+                } else {
+                    Modifier
+                },
+            )
+            .testTag(friendCardTag(friend.id))
+            .zoomSource(friend.id, state.zoom, CARD_RADIUS)
+            .clickable(interactionSource = null, indication = PressStyle.tactile(0.98f), role = Role.Button) { state.openFriend(friend.id) },
+    ) {
+        FriendCardView(friend)
+    }
+    DisposableEffect(friend.id) {
+        onDispose { state.places.cards.remove(friend.id) }
+    }
+}
+
+/**
+ * `scroll.scrollTo(friendID, anchor: .center)`: the scroll moves at once so that the friend's card stands in the middle
+ * of what shows of it between [top] and [bottom], as far as it can go.
+ */
+private suspend fun scrollToMiddle(places: CardPlaces, friendId: UUID, scroll: ScrollState, viewport: Int, top: Int, bottom: Int) {
+    val content = places.content?.takeIf { it.isAttached } ?: return
+    val card = places.cards[friendId]?.takeIf { it.isAttached } ?: return
+    val y = content.localPositionOf(card, Offset.Zero).y + card.size.height / 2f
+    val middle = top + (viewport - top - bottom) / 2f
+    scroll.scrollTo((y - middle).roundToInt().coerceIn(0, scroll.maxValue))
 }
 
 /**
@@ -831,8 +972,119 @@ internal fun FriendsDemoEffects(source: DeliveriesSource, session: Authenticatio
     }
 }
 
+/** How far right of their place a friend revealed comes in from, and the cards' corners, as their page zooms. */
+private val LANDING_OFFSET = 100.dp
+private val CARD_RADIUS = 18.dp
+private const val LANDING_STEP_MILLIS = 60L
 private val MAX_WIDTH = 680.dp
 private val REGULAR_WIDTH = 600.dp
 private val REGULAR_HEIGHT = 480.dp
 private const val RELOAD_MILLIS = 60_000L
 private const val ACTIVITY_MILLIS = 30_000L
+
+/**
+ * RootView's `.overlay(alignment: .top)`: the first notice of an invitation accepted ([FriendAcceptedNotice]) over the
+ * window while someone is signed in, 16 in from its sides and 6 under the status bar, under what stands over the window
+ * ([covered]), which TalkBack then keeps to. Open reveals the friend, which chooses the friends tab where their card
+ * lands, and acknowledges them; ✕ acknowledges them. None over an invitation being presented ([invitationShown],
+ * `!invitation.isPresenting`), which comes with the invitations received. The iPhone's declares a move from the top with
+ * a fade, but no change of the notices animates, so it comes and goes at once, as here.
+ */
+@Composable
+internal fun FriendNoticeHost(source: DeliveriesSource, session: AuthenticationState, covered: Boolean, invitationShown: Boolean = false) {
+    val activity = source.friendsActivity
+    val updates by activity.updatesFlow.collectAsState()
+    val update = updates.firstOrNull()
+    if (invitationShown || session !is AuthenticationState.SignedIn || update == null) return
+    val safe = WindowInsets.systemBars.union(WindowInsets.displayCutout).asPaddingValues()
+    val direction = LocalLayoutDirection.current
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(
+                start = safe.calculateStartPadding(direction) + NOTICE_SIDE,
+                top = safe.calculateTopPadding() + NOTICE_TOP,
+                end = safe.calculateEndPadding(direction) + NOTICE_SIDE,
+            )
+            .then(if (covered) Modifier.clearAndSetSemantics {} else Modifier),
+        contentAlignment = Alignment.TopCenter,
+    ) {
+        key(update.friendId) {
+            FriendAcceptedNotice(
+                update,
+                open = {
+                    activity.reveal(update.friendId)
+                    source.scope.launch { activity.acknowledge(update.friendId) }
+                },
+                dismiss = { source.scope.launch { activity.acknowledge(update.friendId) } },
+            )
+        }
+    }
+}
+
+/**
+ * `FriendAcceptedNotice`: on the paper with 22-point corners, a line of the ink at 8 % round it and a shadow (black at
+ * 12 %, radius 18, 6 down), at most 520 wide, in by 16 and 8: the friends' symbol in title3 in delivered, "Name
+ * accepted your invitation" in subheadline medium and → in caption semibold, 12 apart and 44 tall at least, which opens
+ * the friend; then, 8 after it, ✕ on 32 × 44, read as "friends.dismissUpdate", which dismisses the notice.
+ */
+@Composable
+internal fun FriendAcceptedNotice(update: FriendUpdate, open: () -> Unit, dismiss: () -> Unit, modifier: Modifier = Modifier) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val localizer = LocalLocalizer.current
+    val shape = ContinuousRoundedShape(NOTICE_RADIUS)
+    val dismissal = localized("friends.dismissUpdate")
+    Row(
+        modifier
+            .widthIn(max = NOTICE_WIDTH)
+            .fillMaxWidth()
+            .testTag(FRIENDS_NOTICE)
+            .dropShadow(shape, NOTICE_SHADOW)
+            .background(colors.paper, shape)
+            .border(1.dp, colors.ink.copy(alpha = 0.08f), shape)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Row(
+            Modifier
+                .weight(1f)
+                .heightIn(min = 44.dp)
+                .testTag(FRIENDS_NOTICE_OPEN)
+                .clickable(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = open),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            PeekSymbol("person.2.fill", font = type.title3, tint = colors.resolve(ExperimentalPalette.delivered))
+            Text(
+                localizer.text("friends.invitationAccepted", mapOf("name" to update.nickname)),
+                Modifier.weight(1f),
+                color = colors.ink,
+                style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines(),
+            )
+            // `Spacer(minLength: 4)`, with the stack's 12 either side of it.
+            Spacer(Modifier.width(4.dp))
+            PeekSymbol("arrow.right", font = type.style(IosTextStyle.Caption, FontWeight.SemiBold), tint = colors.ink)
+        }
+        Box(
+            Modifier
+                .size(32.dp, 44.dp)
+                .testTag(FRIENDS_NOTICE_DISMISS)
+                .clickable(interactionSource = null, indication = PlainPress, onClick = dismiss)
+                .semantics {
+                    contentDescription = dismissal
+                    role = Role.Button
+                },
+            contentAlignment = Alignment.Center,
+        ) {
+            PeekSymbol("xmark", font = type.body, tint = colors.ink)
+        }
+    }
+}
+
+private val NOTICE_SIDE = 16.dp
+private val NOTICE_TOP = 6.dp
+private val NOTICE_WIDTH = 520.dp
+private val NOTICE_RADIUS = 22.dp
+private val NOTICE_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 18.dp, y = 6.dp)

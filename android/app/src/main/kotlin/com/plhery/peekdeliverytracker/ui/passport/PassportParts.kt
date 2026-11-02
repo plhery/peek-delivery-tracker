@@ -170,7 +170,7 @@ private fun Modifier.passportButton(label: String, value: String, hint: String, 
         }
 
 /** Where a view stands in the window, unclipped by the scroll, for the popover's arrow to point at. */
-private fun Modifier.anchor(onAnchor: (Rect) -> Unit): Modifier = onGloballyPositioned { coordinates ->
+internal fun Modifier.popoverAnchor(onAnchor: (Rect) -> Unit): Modifier = onGloballyPositioned { coordinates ->
     val position = coordinates.positionInWindow()
     onAnchor(Rect(position, Size(coordinates.size.width.toFloat(), coordinates.size.height.toFloat())))
 }
@@ -181,18 +181,27 @@ private fun Modifier.anchor(onAnchor: (Rect) -> Unit): Modifier = onGloballyPosi
  * back closes it without the impact.
  */
 @Composable
-private fun ExplanationPopover(state: PassportState, id: String, anchor: Rect, title: String, explanation: String) {
+private fun ExplanationPopover(state: PassportState, id: String, anchor: Rect, title: String, explanation: String) =
+    ExplanationPopover(state.expanded == id, anchor, { state.dismiss(id) }, title, explanation, PASSPORT_POPOVER)
+
+/**
+ * The passport's popover for whoever explains with it, a friend's stamps too: [title] and [explanation] on the paper,
+ * over [anchor] with the arrow down at its middle, while [visible]; [onDismiss] as a tap outside it or the back closes
+ * it. What it holds is tagged [tag].
+ */
+@Composable
+internal fun ExplanationPopover(visible: Boolean, anchor: Rect, onDismiss: () -> Unit, title: String, explanation: String, tag: String) {
     Popover(
-        visible = state.expanded == id,
+        visible = visible,
         anchor = anchor,
-        onDismiss = { state.dismiss(id) },
+        onDismiss = onDismiss,
         paneTitle = title,
         size = BUBBLE_SIZE,
         above = true,
         radius = BUBBLE_RADIUS,
         ground = PeekTheme.colors.paper,
     ) {
-        ExplanationBubble(title, explanation)
+        ExplanationBubble(title, explanation, tag)
     }
 }
 
@@ -201,10 +210,10 @@ private fun ExplanationPopover(state: PassportState, id: String, anchor: Rect, t
  * 260 wide and as tall as they are, in by 20.
  */
 @Composable
-private fun ExplanationBubble(title: String, explanation: String) {
+private fun ExplanationBubble(title: String, explanation: String, tag: String) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    Column(Modifier.testTag(PASSPORT_POPOVER).fillMaxWidth().padding(BUBBLE_PADDING), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(Modifier.testTag(tag).fillMaxWidth().padding(BUBBLE_PADDING), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(title, Modifier.semantics { heading() }, color = colors.ink, style = type.headline.sfLines())
         Text(explanation, color = colors.ink.copy(alpha = SECONDARY), style = type.subheadline.sfLines())
     }
@@ -236,7 +245,7 @@ internal fun PassportCover(state: PassportState, stats: PassportStatistics) {
             Modifier
                 .fillMaxWidth()
                 .heightIn(min = 118.dp)
-                .anchor { anchor = it }
+                .popoverAnchor { anchor = it }
                 .testTag(PASSPORT_COVER)
                 .passportButton(
                     "$count $delivered", expansionValue(expanded, explanation, localizer), expansionHint(expanded, localizer), toggle,
@@ -351,7 +360,7 @@ private fun Stamp(state: PassportState, milestone: PassportMilestone) {
         Modifier
             .fillMaxWidth()
             .heightIn(min = 96.dp)
-            .anchor { anchor = it }
+            .popoverAnchor { anchor = it }
             .testTag("$PASSPORT_STAMP.${milestone.id}")
             .passportButton(label, expansionValue(expanded, milestone.explanation, localizer), expansionHint(expanded, localizer)) { state.toggle(id) },
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -377,7 +386,7 @@ private fun Stamp(state: PassportState, milestone: PassportMilestone) {
  * wide as the others.
  */
 @Composable
-private fun StampGrid(columns: Int, content: @Composable () -> Unit) {
+internal fun StampGrid(columns: Int, content: @Composable () -> Unit) {
     Layout(content) { measurables, constraints ->
         val gap = 8.dp.roundToPx()
         val rowGap = 16.dp.roundToPx()
@@ -462,7 +471,7 @@ private fun TimeCard(state: PassportState, id: String, tag: String, title: Strin
     Box(
         modifier
             .heightIn(min = 48.dp)
-            .anchor { anchor = it }
+            .popoverAnchor { anchor = it }
             .testTag(tag)
             .passportButton(
                 "$title, ${passportDuration(duration, localizer, full = true)}", expansionValue(expanded, explanation, localizer),
@@ -507,7 +516,7 @@ internal fun PassportCountries(state: PassportState, stats: PassportStatistics) 
         Text(
             title,
             Modifier
-                .anchor { anchor = it }
+                .popoverAnchor { anchor = it }
                 .outset(10.dp)
                 .testTag(PASSPORT_COUNTRIES)
                 .clickable(interactionSource = null, indication = PressStyle.Passport, onClick = toggle)

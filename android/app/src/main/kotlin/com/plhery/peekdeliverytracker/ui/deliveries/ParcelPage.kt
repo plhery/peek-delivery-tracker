@@ -529,7 +529,7 @@ internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
                     else -> "native.deliveries"
                 },
             )
-            BarButton("chevron.left", back, PAGE_BACK, Modifier.align(Alignment.Center)) {
+            PageBarButton("chevron.left", back, PAGE_BACK, Modifier.align(Alignment.Center)) {
                 if (stack != null) stack.back() else navigator.pop(navigator.navigation.path.dropLast(1))
             }
         }
@@ -552,11 +552,11 @@ internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
 @Composable
 internal fun PageMenuButton(state: DeliveriesState, pageId: UUID, modifier: Modifier = Modifier) {
     val focus = remember { AccessibilityFocus() }
-    BarButton(
+    PageBarButton(
         "ellipsis", localized("detail.parcelActions"), PAGE_MENU_BUTTON,
         modifier.onGloballyPositioned { state.pageMenuButton = it.boundsInWindow() }.accessibilityFocus(focus),
     ) {
-        if (state.modal) return@BarButton
+        if (state.modal) return@PageBarButton
         state.pageMenu = PageMenuRequest(pageId)
         state.returnFocus = focus
     }
@@ -578,7 +578,7 @@ internal fun DeliveriesState.liveMenuParcel(parcelId: UUID?): Parcel? {
  * theirs.
  */
 @Composable
-private fun BarButton(symbol: String, label: String, tag: String, modifier: Modifier, action: () -> Unit) {
+internal fun PageBarButton(symbol: String, label: String, tag: String, modifier: Modifier, action: () -> Unit) {
     Box(
         modifier
             .size(BAR_BUTTON)

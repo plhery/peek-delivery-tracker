@@ -21,23 +21,36 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.api.FriendStamp
+import com.plhery.peekdeliverytracker.core.api.FriendUpdate
+import com.plhery.peekdeliverytracker.core.api.FriendsActivity
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_ACCOUNT_BUTTON
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_CANCEL_REMOVE
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_CONFIRM_REMOVE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_COPY
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_DEMO_SIGN_IN
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_INVITATION_URL
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_INVITE
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_MANAGE_FRIENDSHIP
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_MANAGE_LINKS
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_NOTICE
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_NOTICE_OPEN
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PAGE
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PAGE_BACK
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PANEL
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_POPOVER
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_REMOVE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_REVOKE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_SHARING
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_SIGN_IN
 import com.plhery.peekdeliverytracker.ui.friends.FakeFriendsClient
+import com.plhery.peekdeliverytracker.ui.friends.FriendFixtures
 import com.plhery.peekdeliverytracker.ui.friends.friendCardTag
+import com.plhery.peekdeliverytracker.ui.friends.friendStampTag
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
@@ -53,9 +66,10 @@ import org.junit.rules.TestName
 import org.junit.runner.RunWith
 
 /**
- * The friends tab (A-S20, C-S19 to C-S28) on this device's own window, its bars and density the device's, on fake
+ * The friends tab (A-S20, C-S19 to C-S31) on this device's own window, its bars and density the device's, on fake
  * deliveries and made-up friends, which reach no server: the demo's circle; signed out; a friend's card opening their
- * page and the system's back closing it; the profile's panel; the demo's invitation; an account's invitation with its
+ * page and the system's back closing it, and the page's ‹; a stamp's popover; manage friendship and the removal; the
+ * accepted notice opening the friend; the profile's panel; the demo's invitation; an account's invitation with its
  * link copied and its manage links open; the account button opening Settings. Each saved as friends/<test>.png in the
  * test package's external files, which adb pulls. Under Reduce Motion, as the other device tests are; each test puts
  * back the appearance it found, and the copy the clipboard held.
@@ -144,18 +158,76 @@ class FriendsDeviceTest {
         shot()
     }
 
-    /** A card opens the friend's page (for now the page's ground alone), and the system's back closes it. */
+    private val mila = UUID.fromString("11000000-0000-4000-8000-000000000001")
+    private val noe = UUID.fromString("22000000-0000-4000-8000-000000000002")
+
+    /** The demo friend's page, out of their card. */
+    private fun page(friend: UUID) {
+        press(friendCardTag(friend))
+        compose.waitUntil(5_000) { exists(FRIENDS_PAGE_BACK) }
+        compose.waitForIdle()
+    }
+
+    /** A card opens the friend's page, and the system's back closes it; then the page's ‹ does. */
     @Test
     fun aCardOpensThePageAndTheSystemBackClosesIt() {
         show()
-        press(friendCardTag(UUID.fromString("22000000-0000-4000-8000-000000000002")))
-        compose.waitUntil(5_000) { exists(FRIENDS_PAGE) }
+        page(noe)
         shots.take("${name.methodName}-open")
         instrumentation.uiAutomation.performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
         compose.waitUntil(5_000) { !exists(FRIENDS_PAGE) }
         compose.waitForIdle()
         assertFalse(compose.activity.isFinishing)
         assertTrue(exists(FRIENDS_SHARING))
+        shot()
+        page(noe)
+        press(FRIENDS_PAGE_BACK)
+        compose.waitUntil(5_000) { !exists(FRIENDS_PAGE) }
+        assertTrue(exists(FRIENDS_SHARING))
+    }
+
+    /** Mila's page with The regular's popover over its stamp: how it is earned, and 12 / 25. */
+    @Test
+    fun aStampsPopover() {
+        show()
+        page(mila)
+        tap(friendStampTag(FriendStamp.TheRegular))
+        compose.waitUntil(5_000) { exists(FRIENDS_POPOVER) }
+        compose.waitForIdle()
+        shot()
+    }
+
+    /** Noé's manage friendship opened, the removal asked, and Noé removed: the page closed, the circle without them. */
+    @Test
+    fun manageFriendshipAndTheRemoval() {
+        show()
+        page(noe)
+        tap(FRIENDS_MANAGE_FRIENDSHIP)
+        compose.waitUntil(5_000) { exists(FRIENDS_REMOVE) }
+        compose.waitForIdle()
+        shots.take("${name.methodName}-manage")
+        tap(FRIENDS_REMOVE)
+        compose.waitUntil(5_000) { exists(FRIENDS_CONFIRM_REMOVE) }
+        compose.onNodeWithTag(FRIENDS_CANCEL_REMOVE).performScrollTo()
+        compose.waitForIdle()
+        shots.take("${name.methodName}-confirm")
+        tap(FRIENDS_CONFIRM_REMOVE)
+        compose.waitUntil(5_000) { !exists(FRIENDS_PAGE) }
+        compose.waitForIdle()
+        assertFalse(exists(friendCardTag(noe)))
+        shot()
+    }
+
+    /** Someone accepted the account's invitation: the notice over the window, which opens them, landed first. */
+    @Test
+    fun theAcceptedNoticeOpensTheFriend() {
+        show(reader) { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
+        compose.waitUntil(5_000) { exists(FRIENDS_NOTICE) }
+        compose.waitForIdle()
+        shots.take("${name.methodName}-notice")
+        press(FRIENDS_NOTICE_OPEN)
+        compose.waitUntil(5_000) { !exists(FRIENDS_NOTICE) }
+        compose.waitForIdle()
         shot()
     }
 

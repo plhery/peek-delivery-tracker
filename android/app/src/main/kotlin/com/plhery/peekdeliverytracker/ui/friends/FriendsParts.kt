@@ -96,6 +96,7 @@ import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.PipGeometry
 import com.plhery.peekdeliverytracker.core.api.FriendCard
 import com.plhery.peekdeliverytracker.core.api.FriendProfile
+import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendsAction
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
@@ -215,6 +216,41 @@ internal fun FriendCardView(friend: FriendCard) {
             )
             if (friend.arrivedThisWeek == true) ArrivalLine(tint, type.caption2, Modifier.padding(top = 1.dp))
         }
+    }
+}
+
+/**
+ * `FriendPostcardView`: the name in a fixed semibold 28 drawn 1 tighter, whatever the text size, and under it, 12 apart,
+ * this week's arrival behind its dot in caption where they share it; the stamp 61 × 74 at the trailing side, 16 clear;
+ * in by 22 on the surface with 21-point corners, 135 tall at least. In the friend's colours, lilac by default.
+ */
+@Composable
+internal fun FriendPostcard(
+    nickname: String,
+    arrivedThisWeek: Boolean?,
+    modifier: Modifier = Modifier,
+    tint: AdaptiveColor = ExperimentalPalette.lilac,
+    surface: AdaptiveColor = ExperimentalPalette.lilacSurface,
+) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val density = LocalDensity.current
+    Row(
+        modifier
+            .fillMaxWidth()
+            .heightIn(min = 135.dp)
+            .background(colors.resolve(surface), ContinuousRoundedShape(21.dp))
+            .padding(22.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            // `.tracking(-1)`: a point less between the letters, in the text's own unit.
+            val tracking = with(density) { (-1).dp.toSp() }
+            Text(nickname, color = colors.label, style = type.fixed(28f, FontWeight.SemiBold).copy(letterSpacing = tracking).sfLines())
+            if (arrivedThisWeek == true) ArrivalLine(colors.resolve(tint), type.caption)
+        }
+        FriendAvatar(nickname, Modifier.size(61.dp, 74.dp), tint, surface)
     }
 }
 
@@ -664,10 +700,19 @@ private fun LinkAction(title: String, tag: String, enabled: Boolean, action: () 
 
 /**
  * `DisclosureGroup`: its label, and at the trailing side the chevron in the tab's ink, which turns down as it opens;
- * a tap opens or closes what it holds under it, which comes and goes with it.
+ * a tap opens or closes what it holds under it, which comes and goes with it. Its label's row, tagged [tag], is
+ * [minHeight] tall at least: 30 in the invitation's panel, 23 on a friend's page, as each measures.
  */
 @Composable
-private fun Disclosure(label: String, expanded: Boolean, onExpand: (Boolean) -> Unit, enabled: Boolean, content: @Composable () -> Unit) {
+internal fun Disclosure(
+    label: String,
+    expanded: Boolean,
+    onExpand: (Boolean) -> Unit,
+    enabled: Boolean,
+    tag: String = FRIENDS_MANAGE_LINKS,
+    minHeight: Dp = 30.dp,
+    content: @Composable () -> Unit,
+) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val turn by animateFloatAsState(if (expanded) 90f else 0f, Motion.smooth(0.35), label = "disclosure")
@@ -675,8 +720,8 @@ private fun Disclosure(label: String, expanded: Boolean, onExpand: (Boolean) -> 
         Row(
             Modifier
                 .fillMaxWidth()
-                .heightIn(min = 30.dp)
-                .testTag(FRIENDS_MANAGE_LINKS)
+                .heightIn(min = minHeight)
+                .testTag(tag)
                 .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) { onExpand(!expanded) }
                 // Its state in TalkBack's own words, as the system's disclosure says it.
                 .semantics {
@@ -854,5 +899,24 @@ const val FRIENDS_REPLAY = "$FRIENDS.replayParcel"
 const val FRIENDS_ACCOUNT_BUTTON = "$FRIENDS.accountButton"
 const val FRIENDS_ANNOUNCEMENT = "$FRIENDS.announcement"
 
+const val FRIENDS_PAGE_BAR = "$FRIENDS.pageBar"
+const val FRIENDS_PAGE_BACK = "$FRIENDS.pageBack"
+const val FRIENDS_PAGE_SCROLL = "$FRIENDS.pageScroll"
+const val FRIENDS_POSTCARD = "$FRIENDS.postcard"
+const val FRIENDS_METRICS = "$FRIENDS.metrics"
+const val FRIENDS_PRIVATE_STATS = "$FRIENDS.privateStats"
+const val FRIENDS_SHOW_ALL = "$FRIENDS.showAllStamps"
+const val FRIENDS_POPOVER = "$FRIENDS.stampPopover"
+const val FRIENDS_MANAGE_FRIENDSHIP = "$FRIENDS.manageFriendship"
+const val FRIENDS_REMOVE = "$FRIENDS.remove"
+const val FRIENDS_CONFIRM_REMOVE = "$FRIENDS.confirmRemove"
+const val FRIENDS_CANCEL_REMOVE = "$FRIENDS.cancelRemove"
+const val FRIENDS_NOTICE = "$FRIENDS.notice"
+const val FRIENDS_NOTICE_OPEN = "$FRIENDS.noticeOpen"
+const val FRIENDS_NOTICE_DISMISS = "$FRIENDS.noticeDismiss"
+
 /** A friend's card, by their id. */
 fun friendCardTag(id: UUID) = "$FRIENDS.card.$id"
+
+/** A stamp on a friend's page. */
+fun friendStampTag(stamp: FriendStamp) = "$FRIENDS.stamp.${stamp.rawValue}"

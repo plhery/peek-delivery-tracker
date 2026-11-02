@@ -129,6 +129,8 @@ import kotlinx.coroutines.withContext
  *   from the edge it was swiped from, and up or down with the finger. Let go, it goes back into its source from there,
  *   and a cancel springs it back, which the next gesture takes over. A back press closes it.
  * - Under Reduce Motion, the page and the root crossfade over 0.35 s, and nothing moves or shrinks.
+ * - While [backEnabled] is false (`navigationBarBackButtonHidden(true)`), neither a drag nor the back gesture moves the
+ *   page, and the back is taken without closing it, as the iPhone's page without its back button stays.
  *
  * While a page is over the root or on its way, the root takes no touch, TalkBack doesn't reach it and the root's own
  * back handlers wait. The keyboard's focus leaves the root as a page comes over it, and goes back in only once the page
@@ -147,6 +149,7 @@ fun ZoomStack(
     page: (@Composable () -> Unit)?,
     modifier: Modifier = Modifier,
     bar: (@Composable () -> Unit)? = null,
+    backEnabled: Boolean = true,
 ) {
     val reduceMotion = PeekTheme.reduceMotion
     val density = LocalDensity.current
@@ -158,6 +161,7 @@ fun ZoomStack(
     val scope = rememberCoroutineScope()
     val back by rememberUpdatedState(onBack)
     flight.reduceMotion = reduceMotion
+    flight.backEnabled = backEnabled
     flight.follow(top) {
         // Read as a flight sets off, and only then.
         val bounds = flight.bounds
@@ -205,8 +209,8 @@ fun ZoomStack(
         }
     }
     PredictiveBackHandler(enabled = flight.id != null) { events ->
-        // A page on its way back takes no other back.
-        if (flight.phase == Phase.Closing) {
+        // A page on its way back takes no other back, and a page without its back takes none.
+        if (flight.phase == Phase.Closing || !backEnabled) {
             events.collect {}
             return@PredictiveBackHandler
         }
@@ -339,6 +343,9 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     var barHeld: Boolean by mutableStateOf(false)
     var reduceMotion = false
 
+    /** Whether the page may be taken back now ([ZoomStack]'s `backEnabled`). */
+    var backEnabled = true
+
     /** The bars' items as the flight set off, and its progress then: they go on from there ([bar]). */
     private var setOffBar: ZoomBar by mutableStateOf(ZoomBar.Root)
     private var setOffProgress = 0f
@@ -391,7 +398,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     val hidesRoot: Boolean get() = id != null && atRest && progress >= 1f
 
     /** Whether a drag may take the page now. */
-    fun canDrag(): Boolean = id != null && atRest && !crossfade && !reduceMotion
+    fun canDrag(): Boolean = id != null && atRest && !crossfade && !reduceMotion && backEnabled
 
     /** Whether the predictive back gesture moves the page: not under Reduce Motion, and only from rest. */
     fun canFollowBack(): Boolean = id != null && !crossfade && !reduceMotion && (backing || atRest)

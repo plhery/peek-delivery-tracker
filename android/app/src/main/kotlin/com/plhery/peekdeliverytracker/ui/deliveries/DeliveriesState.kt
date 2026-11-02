@@ -518,7 +518,7 @@ internal class DeliveriesState(
         val held = hold.receive(shown = parcels, next = next, watching = watching)
         // Holding nothing as before is no change: the list isn't arranged again for it.
         if (!held.isEmpty || !hold.isEmpty) hold = held
-        if (listed(next) != listed(parcels)) listChange = ListChange(releasing = false)
+        if (listed(next) != listed(parcels)) move(ListChange(releasing = false))
         parcels = next
         // The parcel open when the system closed the app opens again as it was, without its zoom.
         if (navigator.restore(next) && arrangement == DeliveriesArrangement.Stacked) {
@@ -555,9 +555,6 @@ internal class DeliveriesState(
     private var flightRound = 0
     private var flightJob: Job? = null
 
-    /** Each letting go counts one, so that the list's release ends with the last one. */
-    private var releases = 0
-
     /** Each postmark that lands taps success (`.sensoryFeedback(.success, trigger: postmarks)`). */
     var postmarks by mutableIntStateOf(0)
         private set
@@ -573,10 +570,12 @@ internal class DeliveriesState(
     var reviewDue: Boolean by reviewDueState
 
     /**
-     * The held parcels are being let go: the list's items take their places with the release's spring, until the list
-     * has been laid out anew ([ListMotion]).
+     * The list's change its items take their places with ([ListMotion]), from the moment it is made until the list has
+     * been laid out anew: the release's spring as the held parcels are let go, or the list's snappy motion as its parcels
+     * change. Between changes there is none, and the items take their places at once, as a search, a filter, the sort or
+     * a chip moves the iPhone's cards (their transaction has no animation).
      */
-    var releasing = false
+    var moving: ListChange? = null
         private set
 
     /**
@@ -587,6 +586,18 @@ internal class DeliveriesState(
      */
     var listChange: ListChange? by mutableStateOf(null)
         private set
+
+    /** The list changes: its counts roll with it, and its items move with it until the list has been laid out anew. */
+    private fun move(change: ListChange) {
+        listChange = change
+        moving = change
+        scope.launch {
+            // The list is laid out anew in the next frame, and its items start moving with the change's motion.
+            withFrameNanos {}
+            withFrameNanos {}
+            if (moving === change) moving = null
+        }
+    }
 
     /** What the list draws with, as it was last drawn: the carriers' liveries, the language and the window's graphics. */
     var identities: CarrierIdentities? = null
@@ -662,16 +673,8 @@ internal class DeliveriesState(
         val progress = Animatable(0f)
         flightProgress = progress
         flights = taking
-        val release = ++releases
-        releasing = true
-        listChange = ListChange(releasing = true)
+        move(ListChange(releasing = true))
         hold = hold.release()
-        scope.launch {
-            // The list is laid out anew in the next frame, and its items start moving with the release's spring.
-            withFrameNanos {}
-            withFrameNanos {}
-            if (release == releases) releasing = false
-        }
         if (taking.isEmpty()) return
         flightJob = scope.launch {
             // The list lays its new cards out; one that stays unplaced is beyond the screen, and its picture flies out.

@@ -5,6 +5,7 @@ import androidx.compose.animation.core.AnimationVector
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.TwoWayConverter
 import androidx.compose.animation.core.VectorizedFiniteAnimationSpec
+import androidx.compose.animation.core.snap
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -281,16 +282,23 @@ private class CardInListNode(private var id: UUID, private var places: DeliveryC
 }
 
 /**
- * The list's motion for its items: SwiftUI's `.snappy(duration: 0.32)` as its parcels change, or the
- * `.spring(duration: 0.42)` the held parcels are let go with while they are ([DeliveriesState.releasing]), chosen as
- * each item's animation starts.
+ * The list's motion for its items, chosen as each item's animation starts from the change under way
+ * ([DeliveriesState.moving]): SwiftUI's `.snappy(duration: 0.32)` as its parcels change (`.animation(_:value:)` on
+ * `store.parcels.filter { !$0.isArchived }.map(\.id)`), the `.spring(duration: 0.42)` the held parcels are let go with,
+ * or none, at once, for anything else: a search, a filter, the sort or a chip. The search's opening and closing moves the
+ * items on its own snappy 0.3 s as the overview grows and shrinks with it, which they follow at once.
  */
-internal class ListMotion<T>(private val releasing: () -> Boolean) : FiniteAnimationSpec<T> {
+internal class ListMotion<T>(private val moving: () -> ListChange?) : FiniteAnimationSpec<T> {
     private val changing = Motion.snappy<T>(LIST_MOTION)
     private val release = Motion.spring<T>(RELEASE_MOTION)
+    private val still = snap<T>()
 
     override fun <V : AnimationVector> vectorize(converter: TwoWayConverter<T, V>): VectorizedFiniteAnimationSpec<V> =
-        (if (releasing()) release else changing).vectorize(converter)
+        when (moving()?.releasing) {
+            true -> release
+            false -> changing
+            null -> still
+        }.vectorize(converter)
 }
 
 /**

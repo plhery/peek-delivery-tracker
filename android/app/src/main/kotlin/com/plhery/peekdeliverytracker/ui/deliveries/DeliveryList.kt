@@ -322,14 +322,14 @@ internal fun SoftTopEdge(bottom: Dp, modifier: Modifier = Modifier) {
  * The list's scrolling column, `padding` clear of the bars at its top and bottom and `start` and `end` of the sides,
  * which pulls down to refresh ([ListPull], the tab's): the pull's seal behind its content, at the top of what the list
  * scrolls, and the cards in flight over it. Its items move as its parcels change, with the release's spring as the
- * held parcels are let go ([ListMotion]). The flights end as the list goes or takes another size, as the iPhone's end
- * as it disappears.
+ * held parcels are let go, and take their places at once otherwise ([ListMotion]). The flights end as the list goes or
+ * takes another size, as the iPhone's end as it disappears.
  */
 @Composable
 private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding: PaddingValues, start: Dp, end: Dp) {
     val reduceMotion = PeekTheme.reduceMotion
-    val fade = remember(state, reduceMotion) { if (reduceMotion) null else ListMotion<Float> { state.releasing } }
-    val move = remember(state, reduceMotion) { if (reduceMotion) null else ListMotion<IntOffset> { state.releasing } }
+    val fade = remember(state, reduceMotion) { if (reduceMotion) null else ListMotion<Float> { state.moving } }
+    val move = remember(state, reduceMotion) { if (reduceMotion) null else ListMotion<IntOffset> { state.moving } }
     val pull = state.listPull
     val density = LocalDensity.current
     state.places.density = density.density

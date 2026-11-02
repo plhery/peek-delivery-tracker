@@ -1036,6 +1036,11 @@ describe('scans a carrier and a universal provider both report', () => {
     const late = sharedScans([{ ...scan('unknown:arrived', '2026-01-13T12:27:00Z', 'Arrived at FedEx location', 'in_transit'), location: 'Fort Worth, TX, US' }],
       [row('fedex:arrived', '2026-01-13T12:27:03+00:00', 'At local FedEx facility', 'in_transit')]);
     expect(pairs(late.skipped)).toEqual([['unknown:arrived', 'fedex:arrived']]);
+    // FedEx's scan a universal lookup gave in FedEx's codes names no provider: the carrier's row. Another provider's row is a copy.
+    const viaLookup = row('unknown:facility', '2026-01-13T12:27:03+00:00', 'At local FedEx facility', 'in_transit');
+    const lateCopy = { ...scan('unknown:arrived', '2026-01-13T12:27:00Z', 'Arrived at FedEx location', 'in_transit'), location: 'Fort Worth, TX, US' };
+    expect(pairs(sharedScans([lateCopy], [viaLookup]).skipped)).toEqual([['unknown:arrived', 'unknown:facility']]);
+    expect(sharedScans([lateCopy], [{ ...viaLookup, universal_provider: 'Track123' }]).skipped.size).toBe(0);
     const matched = (events: (ReturnType<typeof scan> & { location?: string })[], rows: ReturnType<typeof row>[] = [copy]) => {
       const shared = sharedScans(events, rows);
       return shared.reused.size + shared.skipped.size;

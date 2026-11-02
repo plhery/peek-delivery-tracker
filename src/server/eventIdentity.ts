@@ -858,7 +858,9 @@ export function rewordedScans(
  * to the second, or both in one second, one of them to the whole second, in
  * any stage and from no conflicting place (FedEx's own wording of a scan a
  * provider copied, 17TRACK's seconds on Shiprocket's minutes, ParcelsApp's
- * whole second of CTT Express's milliseconds). The `relaying` carrier, the one
+ * whole second of CTT Express's milliseconds); a universal row that names no
+ * provider is a carrier's there for a provider's copy (FedEx's scans a
+ * universal lookup gave in FedEx's codes). The `relaying` carrier, the one
  * a parcel was handed over from, retells the next one's scans to the minute,
  * as India Post does La Poste's, or in the same second, so neither its scan to
  * the minute nor one in the copy's second meets a copy to the second. A scan
@@ -997,15 +999,16 @@ export function sharedScans(
   /**
    * The rows another source wrote in a scan's minute that may hold it in other wording, and any stage: a
    * provider's copy and a carrier's scan, one of them to the minute, or both in one second (ParcelsApp's whole
-   * second of CTT Express's milliseconds), with no row at the scan's own instant. An earlier carrier's relay
-   * of a delivery scan (India Post's to the minute, Nova Poshta's) is no such pair.
+   * second of CTT Express's milliseconds), with no row at the scan's own instant. A universal row that names
+   * no provider is a carrier's for a provider's copy (FedEx's scans a universal lookup gave in FedEx's codes). An
+   * earlier carrier's relay of a delivery scan (India Post's to the minute, Nova Poshta's) is no such pair.
    */
   const restagedOf = (event: JsonObject): JsonObject[] => {
     const universal = sourceOf(identity(event)) === UNIVERSAL;
     const at = instantOf(event);
     if (stageOf(event) === '' || occupied.has(at) || dayAlone(event)) return [];
     return rows.filter((row) => {
-      if ((sourceOf(identity(row)) === UNIVERSAL) === universal || dayAlone(row) || !sameTruncated(at, instantOf(row))
+      if ((universal ? !heldByCarrier(row) : sourceOf(identity(row)) !== UNIVERSAL) || dayAlone(row) || !sameTruncated(at, instantOf(row))
         || shown.has(instantOf(row)) || placesApart(event, row)) return false;
       const [copy, own] = universal ? [event, row] : [row, event];
       const second = (at: number) => Math.floor(at / 1_000);

@@ -2488,4 +2488,4 @@ $$;
 notify pgrst, 'reload schema';
 
 
-insert into public.applied_migrations (name) values ('20261101230000_aftership_round_g3') on conflict do nothing;
+insert into public.applied_migrations (name) values ('20261102060000_pkge_round_a') on conflict do nothing;

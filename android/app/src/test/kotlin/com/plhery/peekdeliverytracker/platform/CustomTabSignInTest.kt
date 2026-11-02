@@ -17,6 +17,8 @@ import com.plhery.peekdeliverytracker.ParcelLinkActivity
 import com.plhery.peekdeliverytracker.PeekApplication
 import com.plhery.peekdeliverytracker.core.AuthenticationError
 import com.plhery.peekdeliverytracker.core.OAuthFlow
+import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
+import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -462,6 +464,43 @@ class CustomTabSignInTest {
             assertTrue("See-through", theme.getBoolean(0, false))
         } finally {
             theme.recycle()
+        }
+    }
+
+    /**
+     * The tab in the app's appearance, as the iPhone's session takes its window's style: light or dark as picked, the
+     * phone's for System, in a Custom Tab and in the Auth Tab alike.
+     */
+    @Test
+    fun theTabsTakeTheAppsAppearance() {
+        val store = AppearanceStore.of(app)
+        val schemes = listOf(
+            AppAppearance.Light to CustomTabsIntent.COLOR_SCHEME_LIGHT,
+            AppAppearance.Dark to CustomTabsIntent.COLOR_SCHEME_DARK,
+            AppAppearance.System to CustomTabsIntent.COLOR_SCHEME_SYSTEM,
+        )
+        try {
+            for ((appearance, scheme) in schemes) {
+                store.set(appearance)
+                val call = call()
+                val tab = tabsWindow()
+                val page = checkNotNull(shadowOf(tab.get()).nextStartedActivity) { "The page wasn't opened" }
+                assertTrue("A Custom Tab", page.hasExtra(CustomTabsIntent.EXTRA_SESSION))
+                assertEquals("$appearance", scheme, page.getIntExtra(CustomTabsIntent.EXTRA_COLOR_SCHEME, -1))
+                tab.backOnTop()
+                assertTrue(call.outcome().exceptionOrNull() is AuthenticationError.OauthCancelled)
+            }
+            browser(authTab = true)
+            for ((appearance, scheme) in schemes) {
+                store.set(appearance)
+                val call = call()
+                val (tab, page) = authTab()
+                assertEquals("$appearance", scheme, page.intent.getIntExtra(CustomTabsIntent.EXTRA_COLOR_SCHEME, -1))
+                tab.answered(page, AuthTabIntent.RESULT_CANCELED)
+                assertTrue(call.outcome().exceptionOrNull() is AuthenticationError.OauthCancelled)
+            }
+        } finally {
+            store.set(AppAppearance.DEFAULT)
         }
     }
 

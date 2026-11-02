@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- The window behind the app: iOS's LaunchBackground, whatever the appearance. -->
+    <!-- The window behind the app: iOS's LaunchBackground, whatever the appearance. The platform's own pieces (the
+         text selection's toolbar, its menus and dialogs) take the theme's light or dark, which follows the app's
+         appearance as the app's night mode does (values-night), as iOS's follow the window's override. -->
     <style name="Theme.Peek" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/launch_background</item>
     </style>
 
     <!-- The share card's window (ShareActivity): see-through, over the app that shared, with no motion of its own, as
-         the card's sheet comes up and goes down itself. -->
-    <style name="Theme.Peek.Share" parent="Theme.Peek">
+         the card's sheet comes up and goes down itself; light in either appearance, as the card is. -->
+    <style name="Theme.Peek.Share" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">false</item>

@@ -68,6 +68,16 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * The night mode changed (the app's appearance, or the phone's under System): the window takes it as it is, as the
+     * iPhone's does, without starting again (`configChanges="uiMode"`), the composition from its configuration and the
+     * platform's own pieces from the theme, its light or dark resolved again for it (values-night) over the one before.
+     */
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        theme.applyStyle(R.style.Theme_Peek, true)
+    }
+
     /** Web sign-in opens over the window a tap last reached, the top resumed one where two of the app's share the screen. */
     override fun onTopResumedActivityChanged(isTopResumedActivity: Boolean) {
         super.onTopResumedActivityChanged(isTopResumedActivity)

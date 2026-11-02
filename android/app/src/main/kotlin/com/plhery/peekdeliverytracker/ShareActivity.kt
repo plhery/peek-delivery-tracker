@@ -7,7 +7,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.isSystemInDarkTheme
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.ShareInbox
@@ -15,6 +14,8 @@ import com.plhery.peekdeliverytracker.core.SharedContent
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.ShareSheet
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.isPhoneInDarkTheme
+import com.plhery.peekdeliverytracker.ui.theme.phoneIsDark
 
 /**
  * "Add to Peek" in the share sheet (B-S70, A-L08): the iPhone's share extension (`ShareViewController`). Text another
@@ -33,8 +34,9 @@ class ShareActivity : ComponentActivity() {
     private val app: PeekApplication get() = application as PeekApplication
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // The bars' icons over the dimmed app, for the phone's appearance, which the app that shared most likely has.
-        val bars = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        // The bars' icons over the dimmed app, for the phone's appearance, which the app that shared most likely has,
+        // rather than for Peek's own, which its night mode follows.
+        val bars = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { phoneIsDark(this) }
         enableEdgeToEdge(statusBarStyle = bars, navigationBarStyle = bars)
         super.onCreate(savedInstanceState)
         val defaults = app.shareDefaults()
@@ -43,7 +45,7 @@ class ShareActivity : ComponentActivity() {
         title = copy.text("shareExtension.title")
         setContent {
             // The sheet dims what it stands over as the phone's appearance would have it; the card is its own.
-            PeekTheme(dark = isSystemInDarkTheme(), carrierIdentities = null) {
+            PeekTheme(dark = isPhoneInDarkTheme(), carrierIdentities = null) {
                 ShareSheet(
                     copy = copy,
                     read = { sharedContent(intent) },

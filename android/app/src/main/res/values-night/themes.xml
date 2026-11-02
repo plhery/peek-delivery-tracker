@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The app dark (values/themes.xml): the platform's own pieces dark, the window behind the app as light as ever. -->
+    <style name="Theme.Peek" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/launch_background</item>
+    </style>
+</resources>

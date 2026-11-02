@@ -48,9 +48,11 @@
         android:theme="@style/Theme.Peek">
         <!-- The keyboard never pans the window: the screens make room for it from its insets, and the tab bar stays
              where it is, behind it, as the iPhone's does. A parcel's link brings the window forward already open
-             (singleTop), through ParcelLinkActivity. -->
+             (singleTop), through ParcelLinkActivity. The night mode, which follows the app's appearance, changes
+             without making the window again (MainActivity.onConfigurationChanged). -->
         <activity
             android:name=".MainActivity"
+            android:configChanges="uiMode"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.Peek.Starting"

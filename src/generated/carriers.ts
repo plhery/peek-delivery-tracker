@@ -3770,6 +3770,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-otslezhivanie",
+      "title": "Отслеживание посылки GZYL: трек-номер YL…YQ и статусы",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
       "id": "russian-post",
       "catalog": "russian-post",
       "slug": "pochta-rossii-otslezhivanie",

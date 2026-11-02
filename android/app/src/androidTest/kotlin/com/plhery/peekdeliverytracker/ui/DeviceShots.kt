@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.ParcelFileDescriptor
+import android.os.SystemClock
 import android.os.storage.StorageManager
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -60,6 +61,23 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
         return true
     }
 
+    /**
+     * Waits, up to 5 s, while a window the system shows as an activity starts (a blank or splash starting window, or a
+     * snapshot of the task) still stands over the app's, fading out included: a screenshot then shows it over what the
+     * app drew, a light wash over a dark test's window on Android 12's emulator.
+     */
+    private fun awaitNoStartingWindow() {
+        val app = instrumentation.targetContext.packageName
+        val deadline = SystemClock.uptimeMillis() + 5_000
+        while (SystemClock.uptimeMillis() < deadline) {
+            val starting = shell("dumpsys window windows").lineSequence().any { line ->
+                "Window{" in line && ("SnapshotStartingWindow" in line || "Splash Screen $app" in line || "Starting $app" in line)
+            }
+            if (!starting) return
+            Thread.sleep(50)
+        }
+    }
+
     /** `command`'s output, run by the shell through UiAutomation, once it has ended. */
     private fun shell(command: String): String =
         ParcelFileDescriptor.AutoCloseInputStream(instrumentation.uiAutomation.executeShellCommand(command)).use { it.readBytes().decodeToString() }
@@ -68,12 +86,14 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
      * The whole screen as [folder]/<name>.png, which it returns. Written by the shell: the app's process, where the test
      * runs, may neither make nor write another package's external files (scoped storage), and adb reads them. Where
      * another app's window stands over the app's ([ownWindow] false), such as the system's share sheet, it doesn't wait
-     * for the app's frames, which a covered window may not draw. A capture of the app's window that comes out [blank]
+     * for the app's frames, which a covered window may not draw; otherwise it waits for any starting window over the
+     * app's to go first ([awaitNoStartingWindow]). A capture of the app's window that comes out [blank]
      * is taken again, twice at most, 300 ms and two frames later: one still blank is saved as it is.
      */
     fun take(name: String, ownWindow: Boolean = true): Bitmap {
         if (ownWindow) {
             compose.waitForIdle()
+            awaitNoStartingWindow()
             awaitFrames()
         }
         var screen = capture()

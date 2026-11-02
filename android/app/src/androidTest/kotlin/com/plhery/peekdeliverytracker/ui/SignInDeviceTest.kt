@@ -144,10 +144,10 @@ class SignInDeviceTest {
 
     private fun exists(tag: String) = compose.onAllNodesWithTag(tag).fetchSemanticsNodes().isNotEmpty()
 
-    private fun onUi(read: () -> Boolean): Boolean {
-        var value = false
-        compose.runOnUiThread { value = read() }
-        return value
+    private fun <T> onUi(read: () -> T): T {
+        var value: Result<T>? = null
+        compose.runOnUiThread { value = runCatching(read) }
+        return checkNotNull(value).getOrThrow()
     }
 
     private fun acceptingText() = onUi { compose.activity.getSystemService(InputMethodManager::class.java).isAcceptingText }
@@ -159,6 +159,11 @@ class SignInDeviceTest {
     private fun keyboardShown() = onUi {
         val insets = ViewCompat.getRootWindowInsets(compose.activity.window.decorView)
         insets?.isVisible(WindowInsetsCompat.Type.ime()) == true && insets.getInsets(WindowInsetsCompat.Type.ime()).bottom > 0
+    }
+
+    /** Whether the window has no keyboard standing or coming up. */
+    private fun keyboardDown() = onUi {
+        ViewCompat.getRootWindowInsets(compose.activity.window.decorView)?.isVisible(WindowInsetsCompat.Type.ime()) != true
     }
 
     /** The keyboard's height where the window knows it will stand, in pixels: none where none shows. */
@@ -197,33 +202,59 @@ class SignInDeviceTest {
      * too), and the UI idle.
      */
     private fun awaitStill() {
-        compose.waitUntil(5_000) { onUi { keyboardSlides.playing == 0 } && appKeyboard == windowKeyboard() }
+        compose.waitUntil(5_000) { still() }
         compose.waitForIdle()
     }
+
+    /** No keyboard slide playing, and the app's layout with the keyboard where the window has it. */
+    private fun still() = onUi { keyboardSlides.playing == 0 } && appKeyboard == windowKeyboard()
 
     /**
      * The field with [tag] has the focus and asked for the keyboard; then the keyboard has come up and finished its
      * slide, where the device shows one ([showsAKeyboard]), and the field stands above it, the page scrolled to keep
-     * it in view.
+     * it in view. The page's last step of that scroll can come a frame after the slide has ended, so the field is
+     * awaited there before it is checked.
      */
     private fun assertTypingIn(tag: String) {
         compose.onNodeWithTag(tag).assertIsFocused()
         compose.waitUntil(5_000) { acceptingText() }
-        if (showsAKeyboard()) compose.waitUntil(KEYBOARD_MILLIS) { keyboardShown() }
+        val keyboard = showsAKeyboard()
+        runCatching {
+            compose.waitUntil(KEYBOARD_MILLIS) { (!keyboard || keyboardShown()) && still() && fieldBottom(tag) <= roomAboveTheKeyboard() }
+        }
         awaitStill()
-        val field = compose.onNodeWithTag(tag).fetchSemanticsNode().boundsInWindow
-        assertTrue("Above the keyboard: ${field.bottom} in ${roomAboveTheKeyboard()}", field.bottom <= roomAboveTheKeyboard())
+        if (keyboard) assertTrue("A keyboard shown: ${layoutNow()}", keyboardShown())
+        val bottom = fieldBottom(tag)
+        val room = roomAboveTheKeyboard()
+        assertTrue("Above the keyboard: $bottom in $room; ${layoutNow()}", bottom <= room)
+    }
+
+    private fun fieldBottom(tag: String) = compose.onNodeWithTag(tag).fetchSemanticsNode().boundsInWindow.bottom
+
+    /** The page's scroll, its viewport and the window's and app's keyboard, for a failure's message. */
+    private fun layoutNow(): String {
+        val page = compose.onNodeWithTag(SIGN_IN).fetchSemanticsNode()
+        val range = page.config.getOrNull(SemanticsProperties.VerticalScrollAxisRange)
+        val root = onUi { compose.activity.findViewById<android.view.View>(android.R.id.content).height }
+        return "scroll ${range?.value?.invoke()} of ${range?.maxValue?.invoke()}, page ${page.boundsInWindow}, " +
+            "keyboard ${windowKeyboard()} (app $appKeyboard), window ${onUi { compose.activity.window.decorView.height }}, content $root"
     }
 
     private fun typed(tag: String): String? =
         compose.onNodeWithTag(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.EditableText)?.text
 
-    /** The address typed and sent, which the service takes: the code step. */
+    /**
+     * The address typed and sent, which the service takes: the code step, once the keyboard that went down with the
+     * address's field is down and still. Tapped while it is still up, the code's field would see it go down and come
+     * back up after the test had found it standing.
+     */
     private fun sendCode() {
         tap(EMAIL_FIELD)
         compose.onNodeWithTag(EMAIL_FIELD).performTextInput(READER_EMAIL)
         tap(EMAIL_SEND)
         compose.waitUntil(5_000) { exists(CODE_FIELD) }
+        compose.waitUntil(KEYBOARD_MILLIS) { keyboardDown() }
+        awaitStill()
     }
 
     /**

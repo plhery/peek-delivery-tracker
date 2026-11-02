@@ -1299,6 +1299,8 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertFalse(delivered.scheduledDelivery)
         delivered.carrier = .gzyl
         XCTAssertTrue(delivered.scheduledDelivery)
+        delivered.carrier = .xingheFreight
+        XCTAssertTrue(delivered.scheduledDelivery)
         // A carrier it was handed to delivers for real.
         delivered.carrierData = CarrierData(deliveryCarrier: .dpdDe, deliveryTrackingNumber: "01234567890123")
         XCTAssertFalse(delivered.scheduledDelivery)

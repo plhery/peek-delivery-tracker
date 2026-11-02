@@ -386,8 +386,8 @@ extension Parcel {
     }
 
     /// Carriers whose tracker writes the delivered step on a fixed schedule, with no signature or delivering carrier
-    /// behind it.
-    private static let scheduledDeliveries: Set<CarrierID> = [.gzyl]
+    /// behind it: GZYL, and Xinghe Freight, whose parcels GZYL's tracker writes in its own words.
+    private static let scheduledDeliveries: Set<CarrierID> = [.gzyl, .xingheFreight]
 
     /// Whether the parcel's delivered status is such a scheduled step: the reader is told so, and to ask the seller if
     /// nothing came. A carrier it was handed to delivers for real.

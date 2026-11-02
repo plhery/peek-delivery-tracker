@@ -203,8 +203,11 @@ export function deliveringCarrierId(parcel: Parameters<typeof namedDelivery>[0])
   return active !== displayedCarrierId(parcel) ? active : namedDelivery(parcel)?.carrier ?? null;
 }
 
-/** Carriers whose tracker writes the delivered step on a fixed schedule, with no signature or delivering carrier behind it. */
-const SCHEDULED_DELIVERIES: ReadonlySet<CarrierId> = new Set<CarrierId>(['gzyl']);
+/**
+ * Carriers whose tracker writes the delivered step on a fixed schedule, with no signature or delivering carrier behind
+ * it: GZYL, and Xinghe Freight, whose parcels GZYL's tracker writes in its own words.
+ */
+const SCHEDULED_DELIVERIES: ReadonlySet<CarrierId> = new Set<CarrierId>(['gzyl', 'xinghe-freight']);
 
 /**
  * Whether the parcel's delivered status is such a scheduled step: the reader is told so, and to ask the seller if

@@ -1218,6 +1218,7 @@ class ParcelLogicTests {
         val delivered = makeParcel(id, events = listOf(event(id, TrackingStage.Delivered, "2026-08-08T12:00:00Z")))
         assertFalse(delivered.scheduledDelivery)
         assertTrue(delivered.copy(carrier = CarrierId.Gzyl).scheduledDelivery)
+        assertTrue(delivered.copy(carrier = CarrierId.XingheFreight).scheduledDelivery)
         // A carrier it was handed to delivers for real.
         val handed = delivered.copy(
             carrier = CarrierId.Gzyl,

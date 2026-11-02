@@ -2173,6 +2173,9 @@ describe('scheduledDelivery', () => {
     expect(scheduledDelivery(scheduled, 'in_transit')).toBe(false);
     expect(scheduledDelivery({ carrier: 'chronopost', trackingNumber: 'XY123456789FR' }, 'delivered')).toBe(false);
   });
+  it('marks Xinghe Freight, which GZYL\'s tracker writes', () => {
+    expect(scheduledDelivery({ carrier: 'xinghe-freight', trackingNumber: 'GZXH0000000017YQ' }, 'delivered')).toBe(true);
+  });
   it('leaves a delivery by a carrier it was handed to alone', () => {
     expect(scheduledDelivery({ ...scheduled, deliveryCarrier: 'dpd-de' }, 'delivered')).toBe(false);
   });

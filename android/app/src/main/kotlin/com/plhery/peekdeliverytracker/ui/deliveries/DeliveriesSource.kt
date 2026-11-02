@@ -35,6 +35,7 @@ import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
+import com.plhery.peekdeliverytracker.platform.AppNotifications
 import java.io.File
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -241,8 +242,17 @@ interface DeliveriesSource {
      */
     val notificationStatus: StateFlow<NotificationAuthorizationStatus>
 
-    /** `store.notificationsEnabledOnDevice`: pushes registered for this phone. None before M6 brings the push token. */
+    /** `store.notificationsEnabledOnDevice`: pushes registered for this phone. None until Firebase brings a token. */
     val notificationsEnabledOnDevice: StateFlow<Boolean>
+
+    /** `store.shouldInviteNotifications`, as the store changes: the invitation to turn notifications on is due. */
+    val shouldInviteNotifications: StateFlow<Boolean>
+
+    /** `store.notificationEnableInProgress`: notifications are being turned on, the phone's question included. */
+    val notificationEnableInProgress: StateFlow<Boolean>
+
+    /** `store.dismissNotificationInvitation()`: the invitation stays away for this account. */
+    fun dismissNotificationInvitation()
 
     /** `store.notificationError`: why the account's preferences failed to load or save. */
     val notificationError: StateFlow<String?>
@@ -434,6 +444,10 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val version: String get() = BuildConfig.VERSION_NAME
 
     override val notificationStatus get() = container.parcels.notificationStatusFlow
+    override val shouldInviteNotifications get() = container.notificationInvitation
+    override val notificationEnableInProgress get() = container.parcels.notificationEnableInProgressFlow
+
+    override fun dismissNotificationInvitation() = container.parcels.dismissNotificationInvitation()
 
     override val notificationsEnabledOnDevice get() = container.parcels.notificationsEnabledOnDeviceFlow
 
@@ -734,9 +748,14 @@ class DeliveriesInbox(
     friend: UUID? = null,
     private val invitationLink: (String) -> Boolean = { false },
     private val opened: () -> Unit = {},
+    notifiedFriend: UUID? = null,
+    notifiedLink: String? = null,
+    private val notificationOpened: (NativeRoute) -> Unit = {},
 ) {
     private val parcelState = MutableStateFlow(parcel)
     private val friendState = MutableStateFlow(friend)
+    private val notifiedFriendState = MutableStateFlow(notifiedFriend)
+    private val notifiedLinkState = MutableStateFlow(notifiedLink)
     private val linkAddedState = MutableStateFlow<LinkAdded?>(null)
 
     /** The parcel waiting to be shown. */
@@ -758,6 +777,28 @@ class DeliveriesInbox(
     /** The window's root has taken the friend. */
     fun consumeFriend(friendId: UUID) {
         friendState.compareAndSet(friendId, null)
+    }
+
+    /**
+     * AppDelegate's `pendingFriendID`: the friend whose notification was opened, which the window's root reveals once
+     * someone is signed in, and then takes.
+     */
+    val notifiedFriend: StateFlow<UUID?> = notifiedFriendState.asStateFlow()
+
+    /** `consumePendingFriendID()`. */
+    fun consumeNotifiedFriend(friendId: UUID) {
+        notifiedFriendState.compareAndSet(friendId, null)
+    }
+
+    /**
+     * AppDelegate's `pendingLinkID`: the link of a parcel followed without an account whose notification was opened,
+     * which the window's root opens once the session is read, and then takes.
+     */
+    val notifiedLink: StateFlow<String?> = notifiedLinkState.asStateFlow()
+
+    /** `consumePendingLinkID()`. */
+    fun consumeNotifiedLink(linkId: String) {
+        notifiedLinkState.compareAndSet(linkId, null)
     }
 
     /** A parcel kept or followed from its link, which the list receives as one just added (`Arrival.added`). */
@@ -782,6 +823,10 @@ class DeliveriesInbox(
      * `deep-link-open`), whatever it leads to.
      */
     fun follow(intent: Intent?) {
+        AppNotifications.payload(intent)?.let {
+            notificationTapped(it)
+            return
+        }
         if (intent?.action != Intent.ACTION_VIEW) return
         val url = intent.dataString ?: return
         opened()
@@ -794,19 +839,32 @@ class DeliveriesInbox(
         }
     }
 
+    /**
+     * `userNotificationCenter(_:didReceive:)` (C-W15): the route of the notification opened (`NativeRoute
+     * (remoteNotification:)`), held until it is taken, as it is when the window starts with it: a parcel opens on the
+     * deliveries as a link's does ([parcel], `openParcel`), a friend waits to be revealed ([notifiedFriend]) and a link
+     * to be opened ([notifiedLink]). Each is counted as the iPhone counts it ([notificationOpened]).
+     */
+    private fun notificationTapped(payload: Map<String, String>) {
+        val route = NativeRoute(remoteNotification = payload) ?: return
+        notificationOpened(route)
+        when (route) {
+            is NativeRoute.Parcel -> open(route.id)
+            is NativeRoute.Friend -> notifiedFriendState.value = route.id
+            is NativeRoute.Link -> notifiedLinkState.value = route.id
+            is NativeRoute.Add -> Unit
+        }
+    }
+
     /** `ShareInbox.consume()`: what another app shared with this one through the share card, for Add, once ([sharedDrafts]). */
     fun consumeSharedDraft(): SharedParcelDraft? = sharedDrafts()
-
-    /**
-     * `AppDelegate.consumePendingParcelID()`: the parcel of a notification opened before the list was there. The
-     * notifications aren't ported yet, so none is ever waiting.
-     */
-    fun consumePendingParcelNotification(): UUID? = null
 
     companion object {
         private const val SAVED = "deliveries.inbox"
         private const val PARCEL = "parcel"
         private const val FRIEND = "friend"
+        private const val NOTIFIED_FRIEND = "notifiedFriend"
+        private const val NOTIFIED_LINK = "notifiedLink"
 
         /**
          * The window's inbox, after its `super.onCreate`: it follows the link that started the window, and each link
@@ -817,6 +875,8 @@ class DeliveriesInbox(
          * hands it over again (`FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY`). The window's intent forgets the link once it has
          * been read, and with it any owner key it carried. What another app shared comes from [sharedDrafts], which
          * takes it away. Each link followed is counted once ([opened]), and not again as the window is made again.
+         * A notification opened is followed the same way, the window's own or one that comes after, its push's data
+         * forgotten once read, and counted once ([notificationOpened]).
          */
         fun of(
             activity: ComponentActivity,
@@ -824,22 +884,27 @@ class DeliveriesInbox(
             parcelLink: (String) -> Boolean = { false },
             invitationLink: (String) -> Boolean = { false },
             opened: () -> Unit = {},
+            notificationOpened: (NativeRoute) -> Unit = {},
         ): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
             val inbox = DeliveriesInbox(
                 saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts, saved?.getString(FRIEND)?.let(UUID::fromString),
-                invitationLink, opened,
+                invitationLink, opened, saved?.getString(NOTIFIED_FRIEND)?.let(UUID::fromString), saved?.getString(NOTIFIED_LINK),
+                notificationOpened,
             )
             registry.registerSavedStateProvider(SAVED) {
                 Bundle().apply {
                     putString(PARCEL, inbox.parcel.value?.toString())
                     putString(FRIEND, inbox.friend.value?.toString())
+                    putString(NOTIFIED_FRIEND, inbox.notifiedFriend.value?.toString())
+                    putString(NOTIFIED_LINK, inbox.notifiedLink.value)
                 }
             }
             val intent = activity.intent
             if (saved == null && intent != null && intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY == 0) inbox.follow(intent)
             if (intent?.data != null) activity.intent = Intent(intent).setData(null)
+            if (AppNotifications.payload(intent) != null) activity.intent = Intent(intent).setAction(Intent.ACTION_MAIN).replaceExtras(Bundle())
             activity.addOnNewIntentListener { inbox.follow(it) }
             return inbox
         }

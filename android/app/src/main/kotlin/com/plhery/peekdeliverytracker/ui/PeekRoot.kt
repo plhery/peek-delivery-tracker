@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
@@ -74,6 +75,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
@@ -159,7 +161,7 @@ internal fun PeekRoot(
         invitation?.completedFlow?.drop(1)?.collect { tab = PeekTab.Friends.ordinal }
     }
     if (source != null) {
-        FriendsActivityEffects(source, state) { tab = PeekTab.Friends.ordinal }
+        FriendsActivityEffects(source, state, inbox) { tab = PeekTab.Friends.ordinal }
         FriendLinkEffects(source, inbox)
         FriendsDemoEffects(source, state)
     }
@@ -175,6 +177,7 @@ internal fun PeekRoot(
             }
         }
     }
+    NotificationLinkEffects(links, inbox)
     // Over everything the state shows, as `FrontmostSheet` presents from the frontmost controller, and under what the
     // tabs present after it: the window's front draws every layer in the order they came.
     val window = rememberSaveable(saver = WindowLayers.Saver) { WindowLayers() }
@@ -229,6 +232,32 @@ internal fun PeekRoot(
                     // Each overlay's layers, the link's sheet's and the tabs', over all of it.
                     window.Content()
                 }
+            }
+        }
+    }
+}
+
+/**
+ * RootView's `openLinkNotification()` (A-L10): the notification of a parcel followed through its link
+ * ([DeliveriesInbox.notifiedLink]), taken once the session is read. Nobody signed in and the parcel followed on this
+ * phone, it opens among this phone's parcels (`showDeviceParcels()`, `openParcel`), counted `notification-open` where
+ * the deliveries were there to hear it; otherwise the link's sheet opens, counted `notification-open`.
+ */
+@Composable
+internal fun NotificationLinkEffects(links: ParcelLinkSource?, inbox: DeliveriesInbox?) {
+    LaunchedEffect(links, inbox) {
+        if (links == null || inbox == null) return@LaunchedEffect
+        combine(inbox.notifiedLink, links.session) { link, state -> link to state }.collect { (link, state) ->
+            if (link == null || state == AuthenticationState.Loading) return@collect
+            inbox.consumeNotifiedLink(link)
+            val parcelId = if (state is AuthenticationState.SignedIn) null else links.followedHere(link)
+            if (parcelId != null) {
+                if (state == AuthenticationState.Welcome || state == AuthenticationState.Demo) links.action("notification-open")
+                links.showDeviceParcels()
+                inbox.open(parcelId)
+            } else {
+                links.action("notification-open")
+                links.links.open(ParcelLinkRoute(link))
             }
         }
     }

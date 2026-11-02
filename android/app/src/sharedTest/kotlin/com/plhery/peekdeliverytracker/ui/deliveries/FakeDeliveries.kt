@@ -540,6 +540,19 @@ class FakeDeliveries(
     override val notificationStatus = MutableStateFlow(NotificationAuthorizationStatus.NotDetermined)
     override val notificationsEnabledOnDevice = MutableStateFlow(false)
     override val notificationError = MutableStateFlow<String?>(null)
+    override val shouldInviteNotifications = MutableStateFlow(false)
+    override val notificationEnableInProgress = MutableStateFlow(false)
+
+    /** What turning notifications on throws, as the store's does once the phone refuses or no token comes. */
+    var enableFailure: Exception? = null
+
+    /** What turning notifications on asks the phone, where a device test asks the real question. */
+    var askPhone: suspend () -> Unit = {}
+
+    override fun dismissNotificationInvitation() {
+        accountCalls += "dismissNotificationInvitation"
+        shouldInviteNotifications.value = false
+    }
 
     /** Holds each of the account's actions (an export, a reset, a forget, a deletion, a sign-out, a save) until the test lets it go. */
     var accountWork: CompletableDeferred<Unit>? = null
@@ -574,9 +587,18 @@ class FakeDeliveries(
         accountCalls += "loadNotificationPreferences"
     }
 
+    /** As the store's: in progress while the phone asks and the token is awaited, and the invitation gone once on. */
     override suspend fun enableNotifications(): Boolean {
-        accountCall("enableNotifications")
+        notificationEnableInProgress.value = true
+        try {
+            accountCall("enableNotifications")
+            askPhone()
+            enableFailure?.let { throw it }
+        } finally {
+            notificationEnableInProgress.value = false
+        }
         notificationsEnabledOnDevice.value = true
+        shouldInviteNotifications.value = false
         return welcomeSent
     }
 

@@ -44,6 +44,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.referentialEqualityPolicy
 import androidx.compose.runtime.remember
@@ -145,9 +146,12 @@ val LocalColumnEdges = compositionLocalOf { ColumnEdges(start = true, end = true
  * A parcel's page zooms out of its card and back into it ([zoomSource]): the list recedes under the page and the bar's
  * items fade, the bar staying where it is.
  *
- * Out of the iPhone's list: the invitation to turn notifications on (and the device account's row, which a custom view
- * hides), what a card's menu asks (a new name, sharing, another carrier), the sheets (Add, the account) and dropping
- * text on the list. The buttons that would open them call [DeliveriesState]'s hooks, which do nothing yet.
+ * The invitation to turn notifications on ([NotificationPrompt]) shows under the list while it is due
+ * ([DeliveriesState.invitationShown]), and among its cards at the accessibility sizes, where it would cover them.
+ *
+ * Out of the iPhone's list: what a card's menu asks (a new name, sharing, another carrier), the sheets (Add, the
+ * account) and dropping text on the list. The buttons that would open them call [DeliveriesState]'s hooks, which do
+ * nothing yet.
  */
 @Composable
 internal fun DeliveryList(state: DeliveriesState) {
@@ -176,7 +180,8 @@ internal fun DeliveryList(state: DeliveriesState) {
     val raised = if (controls > 0) with(density) { controls.toDp() } + CONTROLS_SPACING else 0.dp
     val bottom = padding.calculateBottomPadding() + BOTTOM_SPACING + BOTTOM_PADDING + raised
 
-    val entries = listEntries(state, sideBySide, guest, loading, errorMessage, firstLoad)
+    val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
+    val entries = listEntries(state, sideBySide, guest, loading, errorMessage, firstLoad, invitation = state.invitationShown && largeText)
     state.itemKeys = entries.map { it.key }
     state.itemTops = entries.map { with(density) { it.top.toPx() } }
     val keptCard = state.navigator.keptCard
@@ -222,7 +227,7 @@ internal fun DeliveryList(state: DeliveriesState) {
             ListToolbar(state, sideBySide, rowTop, start, end, backdrop)
             if (firstLoad) FirstLoad(Modifier.align(Alignment.Center))
             BottomControls(
-                state, backdrop,
+                state, backdrop, invitation = state.invitationShown && !largeText,
                 Modifier
                     .align(Alignment.BottomCenter)
                     .padding(start = start + 16.dp, end = end + 16.dp, bottom = padding.calculateBottomPadding() + CONTROLS_BOTTOM)
@@ -237,11 +242,11 @@ internal fun DeliveryList(state: DeliveriesState) {
 
 /**
  * `bottomControls`: the toast of the parcel archived last, whose Undo brings it back, or else the latest message, for
- * four seconds from when it came, which the tab counts ([DeliveriesTab]). The invitation to turn notifications on comes
- * with the notifications.
+ * four seconds from when it came, which the tab counts ([DeliveriesTab]), or else the invitation to turn notifications
+ * on ([invitation]), at most 380 wide in the middle and 8 over the bar rather than the toasts' 5.
  */
 @Composable
-private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, modifier: Modifier) {
+private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, invitation: Boolean, modifier: Modifier) {
     val undo by state.source.undoParcel.collectAsState()
     val toast = state.toast
     val localizer = LocalLocalizer.current
@@ -258,6 +263,12 @@ private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, m
             tint = if (toast.warning) colors.warning else colors.resolve(ExperimentalPalette.delivered),
             action = null, backdrop = backdrop, modifier = modifier,
         )
+        invitation -> Box(modifier.padding(bottom = INVITATION_BOTTOM - CONTROLS_BOTTOM), contentAlignment = Alignment.Center) {
+            val user by state.source.session.collectAsState()
+            key((user as? AuthenticationState.SignedIn)?.user?.id) {
+                NotificationPrompt(state, Modifier.widthIn(max = INVITATION_WIDTH).fillMaxWidth())
+            }
+        }
         // Nothing shows: the list comes back down.
         else -> Box(modifier)
     }
@@ -422,6 +433,10 @@ private sealed interface ListItem {
     /** The offer of an account to someone following parcels without one ([DeviceAccountRow]). */
     @Immutable
     data object DeviceAccount : ListItem
+
+    /** The invitation to turn notifications on, at the accessibility sizes ([NotificationPrompt]). */
+    @Immutable
+    data object Invitation : ListItem
 }
 
 /**
@@ -436,6 +451,7 @@ private fun listEntries(
     loading: Boolean,
     errorMessage: String?,
     firstLoad: Boolean,
+    invitation: Boolean,
 ): List<ListEntry> {
     val layout = state.layout
     val parcels = state.parcels
@@ -462,6 +478,8 @@ private fun listEntries(
             first("allArrived", "allArrived", ListItem.AllArrived)
         }
     }
+    // At the largest text sizes the invitation would cover the list: it scrolls with it instead.
+    if (invitation) first("invitation", "invitation", ListItem.Invitation)
     layout.next?.let { first(cardKey("next", it.id), "next", ListItem.Next(it)) }
     for (parcel in layout.attention) first(cardKey("attention", parcel.id), "card", ListItem.OnTheWay(parcel, attention = true))
     for (parcel in layout.remaining) first(cardKey("remaining", parcel.id), "card", ListItem.OnTheWay(parcel, attention = false))
@@ -495,6 +513,10 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
     when (item) {
         is ListItem.Overview -> Overview(state, item.active, item.sideBySide)
         ListItem.Empty -> DeliveriesEmptyState(state)
+        ListItem.Invitation -> {
+            val user by state.source.session.collectAsState()
+            key((user as? AuthenticationState.SignedIn)?.user?.id) { NotificationPrompt(state, Modifier.fillMaxWidth()) }
+        }
         ListItem.AllArrived -> AllArrived(state)
         ListItem.Chips -> FilterChips(state)
         ListItem.NoResults -> NoResults(state)
@@ -846,6 +868,8 @@ private val DELIVERED_SPACING = 10.dp
 private val CARD_SPACING = 12.dp
 /** Over the toast, the room it keeps under itself and the list's spacing above it (`safeAreaInset(spacing: 8)`). */
 private val CONTROLS_BOTTOM = 5.dp
+private val INVITATION_BOTTOM = 8.dp
+private val INVITATION_WIDTH = 380.dp
 private val CONTROLS_SPACING = CONTROLS_BOTTOM + 8.dp
 private val ARCHIVE_RADIUS = 18.dp
 /** How long TalkBack's news stays said before it is emptied. */

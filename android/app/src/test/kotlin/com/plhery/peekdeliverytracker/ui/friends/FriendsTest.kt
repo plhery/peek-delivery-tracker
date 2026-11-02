@@ -48,11 +48,13 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.api.FriendsAction
 import com.plhery.peekdeliverytracker.core.api.FriendProfile
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
@@ -80,7 +82,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The friends tab (A-S20, C-S19 to C-S21, C-S23 to C-S28, C-S32) on made-up friends: signed out; loading, failing and
- * retried, without a profile, with no friend, one and four, a revealed friend first or gone; a friend's link; the pull,
+ * retried, without a profile, with no friend, one and four, a revealed friend first or gone; a friend's link and a
+ * friend's notification opened; the pull,
  * the reload each 60 s and the clear as the tab or the app goes, but for the app the invitation is shared to; the
  * colour from the id; the demo's changes, kept across tabs and forgotten once it is left; the profile's form, the
  * panels' titles, Close, detents and no dismissal while working; the account's invitation (made once, retried, shared,
@@ -151,6 +154,13 @@ class FriendsTest {
 
     /** A link to the app's window, `peekdeliverytracker://friend/<id>`. */
     private fun friendLink(id: UUID) = Intent(Intent.ACTION_VIEW, Uri.parse("peekdeliverytracker://friend/$id"))
+
+    /** The window opened from the notification of friend `id` who accepted the invitation, as the app posts it. */
+    private fun friendNotification(id: UUID) = Intent(AppNotifications.ACTION_OPEN)
+        .putExtra("title", "Peek")
+        .putExtra("body", "A friend accepted your invitation")
+        .putExtra("kind", "friend_accepted")
+        .putExtra("friend_id", "$id")
 
     private fun choose(label: String) {
         compose.onNode(hasContentDescription(label) and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)).performClick()
@@ -418,6 +428,39 @@ class FriendsTest {
         assertTrue(exists(PeekTab.Friends.screen))
         assertEquals(listOf("Bo", "Ada", "Cy", "Di"), cards())
         assertEquals(listOf(FriendFixtures.bo.id), requests(FriendsAction.AcknowledgeFriend).map { it.friendId })
+    }
+
+    /** A friend's notification opened (C-W15): revealed while someone is signed in and the window is in front, counted. */
+    @Test
+    fun aFriendsNotificationRevealsThemCounted() {
+        val opened = mutableListOf<NativeRoute>()
+        val inbox = DeliveriesInbox(notificationOpened = { opened += it })
+        show(choose = false, inbox = inbox)
+        compose.runOnUiThread { inbox.follow(friendNotification(FriendFixtures.cy.id)) }
+        settle()
+        assertTrue(exists(PeekTab.Friends.screen))
+        assertEquals(listOf("Cy", "Ada", "Bo", "Di"), cards())
+        assertEquals(listOf<NativeRoute>(NativeRoute.Friend(FriendFixtures.cy.id)), opened)
+        assertNull(inbox.notifiedFriend.value)
+    }
+
+    /** `pendingFriendID`: held while nobody is signed in or the window is away, and revealed once both are so. */
+    @Test
+    fun aFriendsNotificationWaitsForSomeoneSignedInAndTheWindowInFront() {
+        val inbox = DeliveriesInbox()
+        show(AuthenticationState.Welcome, choose = false, inbox = inbox)
+        compose.runOnUiThread { inbox.follow(friendNotification(FriendFixtures.bo.id)) }
+        settle()
+        assertEquals(FriendFixtures.bo.id, inbox.notifiedFriend.value)
+        assertFalse(exists(PeekTab.Friends.screen))
+
+        lifecycle(Lifecycle.State.CREATED)
+        switch(reader)
+        assertEquals(FriendFixtures.bo.id, inbox.notifiedFriend.value)
+        lifecycle(Lifecycle.State.RESUMED)
+        assertTrue(exists(PeekTab.Friends.screen))
+        assertEquals(listOf("Bo", "Ada", "Cy", "Di"), cards())
+        assertNull(inbox.notifiedFriend.value)
     }
 
     @Test

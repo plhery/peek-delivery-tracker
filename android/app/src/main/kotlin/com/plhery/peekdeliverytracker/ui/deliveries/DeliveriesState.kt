@@ -1059,6 +1059,24 @@ internal class DeliveriesState(
     var actionError: String? by mutableStateOf(null)
 
     /**
+     * `shouldShowNotificationInvitation` (A-W07, C-ST19), as the tab last worked it out ([inviting]): under the list,
+     * or among its cards at the accessibility sizes ([NotificationPrompt]).
+     */
+    var invitationShown: Boolean by mutableStateOf(false)
+
+    /**
+     * `shouldShowNotificationInvitation`: the store invites ([invited]), the window is in front or the phone's question
+     * stands over it while notifications are being turned on ([active]), and the list is looked at with nothing over it
+     * or under way on it: no Add, account, filters, share sheet or carrier editor (`prompts.covers`), no search or its
+     * field, no refresh ([refreshing]), no alert, and no card just added still arriving. The tab is the one chosen, as
+     * Android draws no other.
+     */
+    fun inviting(active: Boolean, refreshing: Boolean, invited: Boolean): Boolean =
+        invited && active && listShown && addition == null && !showingAccount && !showingFilters && sharing == null &&
+            carrierEditor == null && !showingSearch && !searchFocused && !refreshing && actionError == null && addedParcel == null &&
+            revealParcel == null && parcelBurst == null
+
+    /**
      * Why the change the page shown asked for failed, said in an alert over it (ParcelDetailView's `errorMessage`): only
      * that page's, and only while it shows ([PageWork]).
      */

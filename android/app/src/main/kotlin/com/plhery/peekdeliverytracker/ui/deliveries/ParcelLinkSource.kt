@@ -53,6 +53,9 @@ interface ParcelLinkSource {
     /** `parcels.followedHere(_:)`: the parcel this phone follows itself behind the link, if any. */
     fun followedHere(response: PublicParcelResponse): UUID?
 
+    /** `parcels.followedHere(linkID:)`: the parcel this phone follows through link `linkId`, for a notification about it. */
+    fun followedHere(linkId: String): UUID?
+
     /** `parcels.showDeviceParcels()`: the parcels this phone follows itself come forward. */
     fun showDeviceParcels()
 
@@ -87,6 +90,8 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
     override fun follow(link: ParcelLinkRoute, response: PublicParcelResponse) = container.parcels.follow(link, response)
 
     override fun followedHere(response: PublicParcelResponse) = container.parcels.followedHere(response)
+
+    override fun followedHere(linkId: String) = container.parcels.followedHere(linkId)
 
     override fun showDeviceParcels() = container.parcels.showDeviceParcels()
 

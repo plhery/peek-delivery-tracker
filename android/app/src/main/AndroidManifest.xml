@@ -9,6 +9,9 @@
     <!-- The label scanner, asked for as it first opens, as the iPhone's camera is (platform/CameraLabelScanner.kt).
          A device without a camera on its back still takes the app, without the scanner. -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Notifications, asked for from Android 13 by the invitation, Delivery updates' switch or a parcel followed
+         without an account, never at launch (platform/Notifications.kt). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />

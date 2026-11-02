@@ -23,7 +23,8 @@ class DeviceWordsTest {
     // skips `.accessibilityIdentifier` for the same reason.
     private val identifiers = setOf(
         "welcome.field", "welcome.paste", "welcome.signIn", "welcome.openParcel", "auth.card", "auth.demo", "friends.signIn", "friends.demoSignIn",
-        "friends.invitationURL",
+        "friends.invitationURL", "notifications.prompt", "notifications.prompt.error", "notifications.prompt.enable",
+        "notifications.prompt.dismiss",
     )
 
     /** The keys the Kotlin sources of the app and its core name, found as the iOS generator finds them in Swift. */

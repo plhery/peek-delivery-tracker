@@ -46,6 +46,8 @@ import com.plhery.peekdeliverytracker.core.TextMeasurer
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.core.identifying
+import com.plhery.peekdeliverytracker.platform.AndroidPushNotifications
+import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.CacheExportFiles
 import com.plhery.peekdeliverytracker.platform.CarrierCatalogLoader
@@ -53,9 +55,9 @@ import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.DeviceParcelsFile
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
+import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.NoAppleSignIn
 import com.plhery.peekdeliverytracker.platform.NoDeviceAttestation
-import com.plhery.peekdeliverytracker.platform.NoPushNotifications
 import com.plhery.peekdeliverytracker.platform.NoWebAuthentication
 import com.plhery.peekdeliverytracker.platform.OkHttpTransport
 import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
@@ -101,7 +103,8 @@ import okhttp3.OkHttpClient
  * saves it and then takes it in, with no suspension between, so a sign-out can never land in between and see a late
  * write bring the account back, and a save that failed is the sign-in's or refresh's failure.
  *
- * What the app cannot do yet is a stand-in (platform/StandIns.kt): notifications, sign-in and device attestation.
+ * What the app cannot do yet is a stand-in (platform/StandIns.kt): sign-in and device attestation. Notifications have
+ * no token until Firebase is set up (platform/Notifications.kt).
  * The home screen widget reads what the store publishes for it, and the cards' pictures it draws (widget/).
  */
 class AppContainer(
@@ -112,6 +115,10 @@ class AppContainer(
     private val debug: Boolean = BuildConfig.DEBUG,
     /** What a parcel's link reads: the API's, unless a test gives its own. */
     linkReader: ParcelLinkReader? = null,
+    /** POST_NOTIFICATIONS' question from the window on screen: the process's, which each window registers with. */
+    notificationPermission: NotificationPermission = (context as? PeekApplication)?.notificationPermission ?: NotificationPermission(context),
+    /** The notifications the app posts and takes away: the process's. */
+    val posted: AppNotifications = (context as? PeekApplication)?.posted ?: AppNotifications(context),
 ) {
     /** `UserDefaults.standard`. */
     val defaults: UserDefaults = PreferencesDefaults.standard(context)
@@ -185,7 +192,7 @@ class AppContainer(
     /** `DeliveryLiveActivities`: none on Android. */
     val liveActivities: DeliveryLiveActivities = DeliveryLiveActivities.None
 
-    val notifications: PushNotifications = NoPushNotifications(context)
+    val notifications: PushNotifications = AndroidPushNotifications(context, notificationPermission)
 
     /**
      * When the app asks for a rating (ReviewPrompt), in this version. A debug build's `sdt.debug.reviewDue` asks at
@@ -258,7 +265,7 @@ class AppContainer(
     val friends = FriendsStore(friendsClient)
 
     /** The app's `FriendsActivityStore()`: who accepted an invitation, while someone is signed in. */
-    val friendsActivity = FriendsActivityStore(friendsClient, signedIn = { session.user != null })
+    val friendsActivity = FriendsActivityStore(friendsClient, signedIn = { session.user != null }, removeNotifications = posted::removeFriend)
 
     /**
      * The app's `FriendInvitationStore()`: the invitation a link brought, its code waiting in the app's defaults, its
@@ -302,6 +309,15 @@ class AppContainer(
         asksInDemo = reviewForced(),
     )
 
+    /** `parcels.shouldInviteNotifications` as the session, the parcels and what the phone allows change. */
+    val notificationInvitation: StateFlow<Boolean> = combine(
+        listOf(
+            session.stateFlow, parcels.parcelsFlow, parcels.loadingFlow, parcels.errorMessageFlow, parcels.authenticationRequiredFlow,
+            parcels.notificationStateLoadedFlow, parcels.notificationStatusFlow, parcels.notificationsEnabledOnDeviceFlow,
+            parcels.notificationInvitationDismissedFlow,
+        ),
+    ) { parcels.shouldInviteNotifications }.stateIn(scope, SharingStarted.Eagerly, parcels.shouldInviteNotifications)
+
     /** `parcels.deliveryEmail` as the account's preferences and the session change. */
     val deliveryEmail: StateFlow<DeliveryEmail?> = combine(session.stateFlow, parcels.notificationPreferencesFlow) { _, _ ->
         parcels.deliveryEmail
@@ -336,6 +352,8 @@ class AppContainer(
         check(!started) { "The app's stores start once." }
         started = true
         if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) sceneActive(false)
+        // The notifications' channels, named in the app's language, before anything is posted in them.
+        posted.updateChannels(localizer)
         lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStart(owner: LifecycleOwner) = sceneActive(true)
             override fun onStop(owner: LifecycleOwner) = sceneActive(false)
@@ -420,6 +438,18 @@ class AppContainer(
         if (rootShown) analyticsObserver.urlOpened() else linksBeforeRoot++
     }
 
+    /**
+     * `.didReceiveFriendActivity`: a friend accepted while the app is on screen, so the notices are read again at once
+     * while someone is signed in, rather than at the next of their 30 s. On the main thread.
+     */
+    fun friendActivity() {
+        if (session.user == null || !active) return
+        scope.launch { friendsActivity.refresh() }
+    }
+
+    /** `notification-open`: a notification was opened, counted as the iPhone counts it ([PeekApplication.notificationOpened]). */
+    fun notificationOpened() = analytics.action("notification-open")
+
     private fun analyticsMode(): DeliveryAnalytics.Mode = when {
         session.isDemo -> DeliveryAnalytics.Mode.Demo
         session.user == null -> DeliveryAnalytics.Mode.Anonymous
@@ -452,6 +482,7 @@ class AppContainer(
         if (chosen) analytics.action("language-change")
         parcels.demoLanguageChanged()
         parcels.refreshDeliverySurfaces()
+        posted.updateChannels(localizer)
         val token = notifications.currentDeviceToken ?: return
         scope.launch {
             parcels.forwardNativePushToken(token, language)

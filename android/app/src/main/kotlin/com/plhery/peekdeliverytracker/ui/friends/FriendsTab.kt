@@ -922,9 +922,18 @@ internal fun PanelPage(title: String, closeEnabled: Boolean, close: () -> Unit, 
  * RootView's friends' activity (`friendsActivity`): cleared as the session changes; while someone is signed in and the
  * app is in front, read every 30 s, and hidden as it leaves the foreground. A friend revealed chooses the friends tab
  * ([chooseFriends]), as `selectedTab = 2` does once the presentation changes with a friend to focus.
+ *
+ * The friend of a notification opened ([DeliveriesInbox.notifiedFriend], `pendingFriendID`) is revealed then too, the
+ * one waiting since before the sign-in or the app's return as the reading starts, and one opened meanwhile at once
+ * (`.didOpenFriendNotification`).
  */
 @Composable
-internal fun FriendsActivityEffects(source: DeliveriesSource, session: AuthenticationState, chooseFriends: () -> Unit) {
+internal fun FriendsActivityEffects(
+    source: DeliveriesSource,
+    session: AuthenticationState,
+    inbox: DeliveriesInbox? = null,
+    chooseFriends: () -> Unit,
+) {
     val activity = source.friendsActivity
     val identity = when (session) {
         is AuthenticationState.SignedIn -> session.user.id.toString()
@@ -944,6 +953,14 @@ internal fun FriendsActivityEffects(source: DeliveriesSource, session: Authentic
         if (!active) {
             activity.hidePrivateContent()
             return@LaunchedEffect
+        }
+        if (inbox != null) {
+            launch {
+                inbox.notifiedFriend.filterNotNull().collect { friendId ->
+                    inbox.consumeNotifiedFriend(friendId)
+                    activity.reveal(friendId)
+                }
+            }
         }
         while (true) {
             activity.refresh()

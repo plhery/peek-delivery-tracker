@@ -57,6 +57,14 @@ interface PushNotifications {
     suspend fun requestAuthorization(): Boolean
 
     /**
+     * Whether the phone asked before and was answered. iOS's status leaves `notDetermined` with the first answer, so the
+     * question after a parcel comes to this phone without an account is asked once; Android 13 may ask a second time,
+     * which `fromAndroid` leaves to the account's invitation and switch, and the guest's question skips it. False where
+     * nothing is asked.
+     */
+    val answeredBefore: Boolean get() = false
+
+    /**
      * `registerForRemoteNotifications()`: asks for this launch's token (`FirebaseMessaging.getInstance().token`) and
      * returns at once. When the token arrives, and on each `FirebaseMessagingService.onNewToken`, the app keeps it as
      * `currentDeviceToken` and then, on the main thread, calls `forwardNativePushToken` and `registerDeviceAlerts`
@@ -123,10 +131,13 @@ class DeviceNotificationAccess(
     val token: () -> String?,
 ) {
     companion object {
-        /** `DeviceNotificationAccess.system`: the phone's own, whose question never fails the caller. */
+        /**
+         * `DeviceNotificationAccess.system`: the phone's own, whose question never fails the caller and is asked only
+         * while it never was answered ([PushNotifications.answeredBefore]).
+         */
         fun system(notifications: PushNotifications): DeviceNotificationAccess = DeviceNotificationAccess(
             status = { notifications.authorizationStatus() },
-            request = { tryQuietly { notifications.requestAuthorization() } },
+            request = { if (!notifications.answeredBefore) tryQuietly { notifications.requestAuthorization() } },
             register = { notifications.registerForRemoteNotifications() },
             token = { notifications.currentDeviceToken },
         )

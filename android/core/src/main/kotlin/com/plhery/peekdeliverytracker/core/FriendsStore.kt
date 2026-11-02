@@ -307,7 +307,7 @@ val FriendStamp.symbol: String
  * `FriendsActivityStore`: memory-only news of friendships, the notices of invitations accepted ([updates]) and the friend
  * to reveal ([focusId]), each reveal a new [presentationId]. [client] asks for the account's; [signedIn] says whether
  * there is an account (`session.user != nil`); [removeNotifications] takes a friend's notifications off the device as
- * one is acknowledged, which comes with notifications (M6).
+ * one is acknowledged (`removeDeliveredNotifications`).
  */
 class FriendsActivityStore(
     private val client: FriendsClient,

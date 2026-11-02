@@ -95,6 +95,11 @@ class FakeParcelLinks(
 
     override fun followedHere(response: PublicParcelResponse): UUID? = here
 
+    /** The parcel this phone follows through each link, for its notification. */
+    val followedLinks = mutableMapOf<String, UUID>()
+
+    override fun followedHere(linkId: String): UUID? = followedLinks[linkId]
+
     override fun showDeviceParcels() {
         deviceParcelsShown += 1
     }

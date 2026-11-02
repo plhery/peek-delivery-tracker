@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The notifications' small icon, which the status bar and the shade tint: the themed icon's eyes alone, as the web's
+     push badge shows them, 20 wide in the middle of Android's 24 (ic_launcher_monochrome.xml's path, 512 across). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group
+        android:scaleX="0.0735294"
+        android:scaleY="0.0735294"
+        android:translateX="-6.8235"
+        android:translateY="-7.2647">
+        <path
+            android:fillColor="@android:color/white"
+            android:fillType="evenOdd"
+            android:pathData="M256,236.344A70,77 0,1 1,256 287.656A70,77 0,1 1,256 236.344zM184.4,269a35,35 0,1 0,70 0a35,35 0,1 0,-70 0zM316.4,269a35,35 0,1 0,70 0a35,35 0,1 0,-70 0zM197,255a10.5,10.5 0,1 0,21 0a10.5,10.5 0,1 0,-21 0zM329,255a10.5,10.5 0,1 0,21 0a10.5,10.5 0,1 0,-21 0z" />
+    </group>
+</vector>

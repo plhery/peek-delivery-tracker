@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker
 
+import android.Manifest
+import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -13,6 +15,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.NativeRoute
+import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
@@ -59,7 +63,8 @@ import org.robolectric.annotation.GraphicsMode
  * it: cold, the window opens the sheet once its stores are made; with the app running, the sheet opens over what is up
  * in the window brought forward. A friend's invitation (`/i/<id>`, `/invite#<code>`, the scheme's `invite`) comes in
  * the same way and stands over the window. Each link the app is opened with is counted once (`deep-link-open`), by
- * the trampoline or by the window, cold or running, and not again as the window turns. On the app's own stores, made
+ * the trampoline or by the window, cold or running, and not again as the window turns; a notification opened as the
+ * iPhone counts one (`notification-open`). On the app's own stores, made
  * offline with links read from memory, the analytics answered on the client itself.
  */
 @RunWith(AndroidJUnit4::class)
@@ -136,13 +141,13 @@ class ParcelLinkActivityTest {
         }
     }
 
-    /** How many times the app was counted opened with a link. */
-    private fun opens(): Int = synchronized(sent) { sent.count { it.optString("name") == "deep-link-open" } }
+    /** How many times the app was counted opened with a link, or as [event] says. */
+    private fun opens(event: String = DEEP_LINK_OPEN): Int = synchronized(sent) { sent.count { it.optString("name") == event } }
 
-    /** The app counted opened with a link [count] times, and no more once what it had to send has gone. */
-    private fun assertOpens(count: Int) {
+    /** The app counted opened with a link (or as [event] says) [count] times, and no more once what it had to send has gone. */
+    private fun assertOpens(count: Int, event: String = DEEP_LINK_OPEN) {
         val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
-        while (opens() < count && System.nanoTime() < deadline) {
+        while (opens(event) < count && System.nanoTime() < deadline) {
             shadowOf(Looper.getMainLooper()).idle()
             Thread.sleep(10)
         }
@@ -150,10 +155,19 @@ class ParcelLinkActivityTest {
             shadowOf(Looper.getMainLooper()).idle()
             Thread.sleep(10)
         }
-        assertEquals(count, opens())
+        assertEquals(count, opens(event))
     }
 
     private fun link(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url)).addCategory(Intent.CATEGORY_BROWSABLE)
+
+    /** What opening the notification of the push with data `data` starts, as the app posts it. */
+    private fun notification(data: Map<String, String>): Intent {
+        shadowOf(app).grantPermissions(Manifest.permission.POST_NOTIFICATIONS)
+        AppNotifications(app).post(data)
+        val tag = AppNotifications.tag(NativeRoute(remoteNotification = data))
+        val shade = shadowOf(app.getSystemService(NotificationManager::class.java))
+        return shadowOf(requireNotNull(shade.getNotification(tag, AppNotifications.ID)).contentIntent).savedIntent
+    }
 
     /** The activities of this package a link to `url` aimed at it opens, as a browser sends one. */
     private fun takers(url: String): List<String> =
@@ -330,9 +344,45 @@ class ParcelLinkActivityTest {
         assertOpens(1)
     }
 
+    /**
+     * A notification opened is counted as the iPhone counts it (`notification-open`), and as no link: a friend's once
+     * the stores are made, even as it starts the app, and not again as the window turns; a parcel's while the
+     * deliveries are there to hear it.
+     */
+    @Test
+    fun aNotificationOpenedIsCountedAsTheIPhoneCountsIt() {
+        counting()
+        val friend = mapOf("title" to "Peek", "body" to "A friend accepted your invitation", "kind" to "friend_accepted", "friend_id" to FRIEND)
+        val window = Robolectric.buildActivity(MainActivity::class.java, notification(friend)).setup()
+        val stores = awaitStores()
+        awaitSession(stores)
+        assertEquals(AuthenticationState.Welcome, stores.session.state)
+        assertOpens(1, NOTIFICATION_OPEN)
+        window.recreate()
+        assertOpens(1, NOTIFICATION_OPEN)
+        window.newIntent(notification(mapOf("title" to "Books", "body" to "Out for delivery", "parcel_id" to PARCEL)))
+        assertOpens(2, NOTIFICATION_OPEN)
+        assertOpens(0)
+    }
+
+    /** ParcelListView's `.onAppear` takes the parcel of a notification that starts the app without counting it. */
+    @Test
+    fun aParcelsNotificationThatStartsTheAppIsNotCounted() {
+        counting()
+        Robolectric.buildActivity(MainActivity::class.java, notification(mapOf("title" to "Books", "body" to "Out for delivery", "parcel_id" to PARCEL))).setup()
+        awaitSession(awaitStores())
+        assertOpens(0, NOTIFICATION_OPEN)
+    }
+
     private companion object {
         /** A made-up friend's id. */
         const val FRIEND = "11000000-0000-4000-8000-000000000001"
+
+        /** A made-up parcel's id. */
+        const val PARCEL = "12000000-0000-4000-8000-000000000002"
+
+        const val DEEP_LINK_OPEN = "deep-link-open"
+        const val NOTIFICATION_OPEN = "notification-open"
 
         /** Made-up invitation codes, in the 16-character form the service gives. */
         const val INVITATION = "Qa3vT8nL5wZ1pR7k"

@@ -190,6 +190,11 @@ fun DeliveriesTab(
         val lifecycle = LocalLifecycleOwner.current.lifecycle
         val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
         state.inFront = resumed
+        val invited by source.shouldInviteNotifications.collectAsState()
+        val enabling by source.notificationEnableInProgress.collectAsState()
+        val refreshing by source.refreshing.collectAsState()
+        // The phone's question pauses the window: the invitation stays while it asks.
+        state.invitationShown = state.inviting(resumed || enabling, refreshing, invited)
         // `watching`: the list is looked at, and may show a card moving.
         val watching = resumed && state.listShown && !state.showingFilters && !state.showingAccount && !state.hasCustomView && !reduceMotion
         HoldingDelivered(state, resumed, watching)
@@ -402,8 +407,9 @@ private fun HoldingDelivered(state: DeliveriesState, resumed: Boolean, watching:
  * first ask; a failure shown on it keeps any ask away for the day. Play's prompt is shown over the window's activity.
  * A card's open menu stands over the list too, as the questions it asks do on the iPhone.
  *
- * Out of the iPhone's: the Add and account sheets, a page of the site, the notifications' invitation and what a card's
- * menu asks, which don't stand over the list on Android yet, nor anything over the parcel beside it.
+ * Out of the iPhone's: the Add and account sheets, a page of the site and what a card's menu asks, which don't stand
+ * over the list on Android yet, nor anything over the parcel beside it. The notifications' invitation keeps it away
+ * while it shows.
  */
 @Composable
 private fun Reviewing(state: DeliveriesState, resumed: Boolean, watching: Boolean, now: () -> Instant) {
@@ -425,7 +431,7 @@ private fun Reviewing(state: DeliveriesState, resumed: Boolean, watching: Boolea
     }
     val covered = state.showingFilters || state.modal
     val ready = watching && !covered && state.hold.isEmpty && state.flights.isEmpty() && state.toast == null && undo == null &&
-        !refreshing && !state.showingSearch && settled
+        !state.invitationShown && !refreshing && !state.showingSearch && settled
     val activity = LocalActivity.current
     val requester = remember(source, activity) { activity?.let(source::reviews) }
     LaunchedEffect(state.reviewDue, ready, requester) {
@@ -476,16 +482,15 @@ private const val TOAST_DURATION = 4_000L
 private val LOCAL_SCHEMES = setOf(ContentResolver.SCHEME_CONTENT, ContentResolver.SCHEME_FILE, ContentResolver.SCHEME_ANDROID_RESOURCE)
 
 /**
- * What waits for the list in this window (A-D26, A-L14): a parcel a link asked for, at once and whenever another comes;
- * a parcel a parcel's link added, likewise; a parcel's notification opened before the list was there, as it appears;
- * and what another app shared, as it appears and each time the app comes back to the front.
+ * What waits for the list in this window (A-D26, A-L14, C-W15): a parcel a link or a notification asked for, at once
+ * and whenever another comes, one opened before the list was there as it appears; a parcel a parcel's link added,
+ * likewise; and what another app shared, as it appears and each time the app comes back to the front.
  */
 @Composable
 private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
     if (inbox == null) return
     // With nothing left over the deliveries (`show(_:)`).
     LaunchedEffect(inbox) {
-        inbox.consumePendingParcelNotification()?.let(state::show)
         inbox.parcel.filterNotNull().collect { parcelId ->
             state.show(parcelId)
             inbox.consume(parcelId)

@@ -32,13 +32,16 @@ class MainActivity : ComponentActivity() {
         val systemDark = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
         systemBars(dark = AppearanceStore.of(this).appearance.value.isDark(systemDark))
         super.onCreate(savedInstanceState)
+        // Notifications are asked for from the window on screen, a window made again included.
+        app.notificationPermission.attach(this)
         // The stores are made with the first window, as the iPhone's are with its app.
         app.makeContainer()
         // The links that come to this window. A parcel's link comes by ParcelLinkActivity, in memory; one aimed at the
         // window itself still goes first, to the app's stores. What another app shared waits where ShareActivity saved it.
+        // A notification opened brings its push's data, counted as the iPhone counts it.
         val inbox = DeliveriesInbox.of(
             this, parcelLink = app::openParcelLink, sharedDrafts = { ShareInbox.consume(app.shareDefaults()) }, invitationLink = app::openInvitation,
-            opened = app::linkOpened,
+            opened = app::linkOpened, notificationOpened = app::notificationOpened,
         )
         splash.setKeepOnScreenCondition { app.container.value == null }
         setContent {

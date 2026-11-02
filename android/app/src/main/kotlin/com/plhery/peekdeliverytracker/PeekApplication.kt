@@ -2,11 +2,16 @@ package com.plhery.peekdeliverytracker
 
 import android.app.Application
 import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.Lifecycle
+import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.FriendInvitationLink
+import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.UserDefaults
+import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.BuildSettings
+import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.io.FileNotFoundException
 import kotlinx.coroutines.MainScope
@@ -44,8 +49,26 @@ class PeekApplication : Application() {
     /** The links the app was opened with before the stores were made, counted once they are ([linkOpened]). */
     private var waitingOpens = 0
 
+    /** The friends' notifications opened before the stores were made, counted once they are ([notificationOpened]). */
+    private var waitingNotificationOpens = 0
+
     /** The app in front or left, as the stores follow it: its windows', the share card's aside ([AppForeground]). */
     internal val foreground = AppForeground()
+
+    /** POST_NOTIFICATIONS' question, which each window registers with as it is made ([MainActivity]). */
+    internal val notificationPermission by lazy { NotificationPermission(this) }
+
+    /**
+     * The notifications posted from a push ([AppNotifications]): whether the app is on screen is its windows', and a
+     * friend's that comes then refreshes the stores' notices, once there are stores.
+     */
+    internal val posted by lazy {
+        AppNotifications(
+            this,
+            onScreen = { foreground.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED) },
+            friendActivity = { container.value?.friendActivity() },
+        )
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -76,6 +99,8 @@ class PeekApplication : Application() {
             waitingInvitation = null
             repeat(waitingOpens) { container.linkOpened() }
             waitingOpens = 0
+            repeat(waitingNotificationOpens) { container.notificationOpened() }
+            waitingNotificationOpens = 0
             containerState.value = container
         }
     }
@@ -121,4 +146,24 @@ class PeekApplication : Application() {
         val container = container.value
         if (container != null) container.linkOpened() else waitingOpens++
     }
+
+    /**
+     * `notification-open` for a notification opened, as the iPhone counts it: a friend's always (`.didOpenFriendNotification`),
+     * once the stores are made if it comes before; a parcel's only when the deliveries are there to hear it, signed in, in
+     * the demo or following parcels on this phone (ParcelListView's `.onReceive`), so not at a cold start, whose list
+     * takes it as it appears; a link's as it opens ([com.plhery.peekdeliverytracker.ui.NotificationLinkEffects]). On
+     * the main thread.
+     */
+    fun notificationOpened(route: NativeRoute) {
+        val container = container.value
+        when (route) {
+            is NativeRoute.Friend -> if (container != null) container.notificationOpened() else waitingNotificationOpens++
+            is NativeRoute.Parcel -> if (container != null && container.session.state.listShown) container.notificationOpened()
+            else -> Unit
+        }
+    }
 }
+
+/** Whether the deliveries are what the session shows (ParcelListView): signed in, the demo, or this phone's own parcels. */
+private val AuthenticationState.listShown: Boolean
+    get() = this is AuthenticationState.SignedIn || this == AuthenticationState.Demo || this == AuthenticationState.Welcome

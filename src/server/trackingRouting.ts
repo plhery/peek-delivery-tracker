@@ -1037,6 +1037,9 @@ export class TrackingRouter {
           report('foreign_history_rejected', carrier);
           throw new NoHistoryError(carrier, `${carrier} returned an older parcel for this number`);
         }
+        // An answer names the rows it holds back as written ahead beside the scans it keeps, as a
+        // failure does: a provider asked after it shows its copies of them as scans.
+        writtenAhead.push(...(value.result.written_ahead ?? []));
         // An empty summary archive binds the fallback to this parcel without
         // creating a scan; earlier real scans survive when it is merged.
         const capturedHistory = hasUnresolvedDirectHistory(value.sourceCarrierId, value.result)

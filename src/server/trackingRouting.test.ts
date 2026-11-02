@@ -724,6 +724,17 @@ describe('persistent tracking routing', () => {
     const result = await router.fetch(parcel({ carrier }), false);
     expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', last_update: earlier.time, events: [earlier] });
   });
+  it('sets aside a provider\'s copies of the rows a carrier answering on local clocks names as written ahead', async () => {
+    fixedPlan('Ship24');
+    const { router, direct, universal } = setup();
+    // The carrier answers with a scan on its wall clock and names its row at 11:00 UTC, written days before, beside it.
+    direct.mockResolvedValue({ ...yearlessYamato(), result: { ...yearlessYamato().result, written_ahead: ['2026-09-10T19:00:00+08:00'] } });
+    const earlier = { time: '2026-09-10T09:00:00Z', description: 'Accepted', stage: 'accepted' };
+    universal.mockResolvedValue({ ...history(), events: [...history().events!, earlier] });
+    const result = await router.fetch(parcel({ carrier: 'yamato', tracking_number: '123456789012' }), false);
+    expect(result.result).toMatchObject({ tracking_provider: 'Ship24', last_update: earlier.time });
+    expect(result.result.events?.map((event) => event.time)).not.toContain('2026-09-10T11:00:00Z');
+  });
   it.each(['saved', 'discovered'])('shows a %s earlier leg handing the parcel to its carrier without swapping', async (hint) => {
     const number = 'CNPRT90000000000000000017';
     const { router, direct, universal } = setup();

@@ -36,7 +36,9 @@ class MainActivity : ComponentActivity() {
         app.makeContainer()
         // The links that come to this window. A parcel's link comes by ParcelLinkActivity, in memory; one aimed at the
         // window itself still goes first, to the app's stores. What another app shared waits where ShareActivity saved it.
-        val inbox = DeliveriesInbox.of(this, parcelLink = app::openParcelLink, sharedDrafts = { ShareInbox.consume(app.shareDefaults()) })
+        val inbox = DeliveriesInbox.of(
+            this, parcelLink = app::openParcelLink, sharedDrafts = { ShareInbox.consume(app.shareDefaults()) }, invitationLink = app::openInvitation,
+        )
         splash.setKeepOnScreenCondition { app.container.value == null }
         setContent {
             val appearance = appearanceSetting()

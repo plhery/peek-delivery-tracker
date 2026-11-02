@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker
 
 import android.app.Application
 import androidx.annotation.VisibleForTesting
+import com.plhery.peekdeliverytracker.core.FriendInvitationLink
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.SharedResources
 import com.plhery.peekdeliverytracker.core.UserDefaults
@@ -37,6 +38,9 @@ class PeekApplication : Application() {
     /** A parcel's link that came before the stores were made, which opens once they are. */
     private var waitingLink: ParcelLinkRoute? = null
 
+    /** A friend's invitation that came before the stores were made, which shows once they are. */
+    private var waitingInvitation: String? = null
+
     /** The app in front or left, as the stores follow it: its windows', the share card's aside ([AppForeground]). */
     internal val foreground = AppForeground()
 
@@ -65,6 +69,8 @@ class PeekApplication : Application() {
             container.start(foreground.lifecycle)
             waitingLink?.let(container.links::open)
             waitingLink = null
+            waitingInvitation?.let(container.invitation::open)
+            waitingInvitation = null
             containerState.value = container
         }
     }
@@ -83,4 +89,21 @@ class PeekApplication : Application() {
         if (container != null) container.links.open(route) else waitingLink = route
         return true
     }
+
+    /**
+     * `open(_:)`'s last route (C-S02): a friend's invitation, on the site (`https://<the site>/i/<id>` or
+     * `/invite#<code>`, or a host it answered on before) or in the app's scheme (`peekdeliverytracker://invite#<code>`),
+     * shown over everything (`FriendInvitationStore.open(_:)`), which keeps its code for a week in the app's defaults;
+     * false for any other address. One that comes before the stores are made waits for them. On the main thread.
+     */
+    fun openInvitation(url: String): Boolean {
+        val configuration = BuildSettings.configuration
+        if (!FriendInvitationLink.isInvitation(url, configuration.apiBaseUrl, configuration.linkHosts)) return false
+        val container = container.value
+        if (container != null) container.invitation.open(url) else waitingInvitation = url
+        return true
+    }
+
+    /** A link [ParcelLinkActivity] was handed: a parcel's ([openParcelLink]) or else a friend's invitation ([openInvitation]). */
+    fun openLink(url: String): Boolean = openParcelLink(url) || openInvitation(url)
 }

@@ -13,6 +13,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +35,7 @@ import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
 import com.plhery.peekdeliverytracker.ui.arrival.ArrivalView
+import com.plhery.peekdeliverytracker.ui.arrival.InvitationArrival
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
@@ -72,6 +74,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -110,7 +113,9 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * back closes what is on top. Once it closes on a parcel to open, or on one just added or followed, the deliveries
  * come forward and take it ([inbox]).
  * A link kept for after sign-in opens again once someone is signed in (B-L03). A friend's link in [inbox] reveals them
- * on the friends tab while someone is signed in.
+ * on the friends tab while someone is signed in. A friend's invitation ([InvitationArrival]) stands in place of all the
+ * state shows while it is presented, once the session is read, without the notice of an invitation accepted, and
+ * chooses the friends tab once it is accepted.
  *
  * With the deliveries' [source], the first open stands over the tabs and their bar, whichever is chosen, for a guest
  * with nothing followed (TabsView's `showsFirstOpen`), from the first frame: the tab chosen stays as it was until the
@@ -142,6 +147,14 @@ internal fun PeekRoot(
             if (user != null) source.links.resume()
         }
     }
+    // `invitation.isPresenting`: a friend's invitation stands over everything but the launch screen, made again for
+    // each invitation (`.id(invitation.presentationID)`); finished, it chooses the friends tab.
+    val invitation = source?.invitation
+    val presenting = invitation?.presentingFlow?.collectAsState()?.value == true
+    val presentation = invitation?.presentationIdFlow?.collectAsState()?.value
+    LaunchedEffect(invitation) {
+        invitation?.completedFlow?.drop(1)?.collect { tab = PeekTab.Friends.ordinal }
+    }
     if (source != null) {
         FriendsActivityEffects(source, state) { tab = PeekTab.Friends.ordinal }
         FriendLinkEffects(source, inbox)
@@ -171,7 +184,9 @@ internal fun PeekRoot(
             ProvideLinks {
                 CompositionLocalProvider(LocalWindowLayers provides window) {
                     Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
-                        RootSwitch(state, transaction) { screen, shownState ->
+                        if (source != null && presenting && state != AuthenticationState.Loading) {
+                            key(presentation) { InvitationArrival(source, state, session, work) }
+                        } else RootSwitch(state, transaction) { screen, shownState ->
                             when (screen) {
                                 RootScreen.Launch -> LaunchView(remember(language) { localizer.text("auth.loading") })
                                 RootScreen.Arrival -> ArrivalView(shownState, session, transaction, work)
@@ -204,7 +219,7 @@ internal fun PeekRoot(
                         }
                     }
                     // The notice of an invitation accepted, over the tabs and under what stands over the window.
-                    if (source != null) FriendNoticeHost(source, state, covered = window.covered)
+                    if (source != null) FriendNoticeHost(source, state, covered = window.covered, invitationShown = presenting)
                     if (links != null) CompositionLocalProvider(LocalTabOverlay provides front) { ParcelLinkSheetHost(links) }
                     // What the link's sheet presents in turn comes over it there.
                     CompositionLocalProvider(LocalWindowOverlay provides front, LocalTabOverlay provides front) { front.Content() }

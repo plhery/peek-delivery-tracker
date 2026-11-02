@@ -13,6 +13,7 @@ import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
+import com.plhery.peekdeliverytracker.core.FriendInvitationStore
 import com.plhery.peekdeliverytracker.core.FriendsActivityStore
 import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
@@ -76,6 +77,8 @@ class FakeDeliveries(
     private val shareDefaults: UserDefaults = PreferencesDefaults(
         ApplicationProvider.getApplicationContext<Context>().getSharedPreferences("share-${UUID.randomUUID()}", Context.MODE_PRIVATE),
     ),
+    /** Where a friend's invitation waits, in memory: it outlasts a process ([newProcess]), as the app's defaults do. */
+    val invitationDefaults: UserDefaults = MemoryDefaults(),
 ) : DeliveriesSource {
     override val parcels = MutableStateFlow(parcels)
     override val loading = MutableStateFlow(false)
@@ -509,8 +512,29 @@ class FakeDeliveries(
     override val version = "1.0"
 
     /** The account's friends, which the friends' stores ask ([FakeFriendsClient]). */
-    val friendsClient = FakeFriendsClient()
+    override val friendsClient = FakeFriendsClient()
     override val friends by lazy { FriendsStore(friendsClient) }
+
+    /** Who sent an invitation, as the public preview answers: [inviter], or [inviterFailure], once [previewing] lets it go. */
+    var inviter = "Sasha"
+    var inviterFailure: Exception? = null
+    var previewing: CompletableDeferred<Unit>? = null
+
+    /** The codes the public preview was asked about, in order. */
+    val previews = mutableListOf<String>()
+
+    override val invitation by lazy {
+        FriendInvitationStore(
+            invitationDefaults, INVITATION_BASE, listOf(INVITATION_HOST),
+            preview = { code ->
+                previews += code
+                previewing?.await()
+                inviterFailure?.let { throw it }
+                inviter
+            },
+            friends = friendsClient,
+        )
+    }
     override val friendsActivity by lazy { FriendsActivityStore(friendsClient, signedIn = { this.session.value is AuthenticationState.SignedIn }) }
 
     override val notificationStatus = MutableStateFlow(NotificationAuthorizationStatus.NotDetermined)
@@ -587,7 +611,8 @@ class FakeDeliveries(
     override suspend fun signOut() = accountCall("signOut")
 
     /** The same stores in a process started again, after the system closed the app. */
-    fun newProcess(): FakeDeliveries = FakeDeliveries(parcels.value, session.value, shareLinks = shareLinks, shareDefaults = shareDefaults)
+    fun newProcess(): FakeDeliveries =
+        FakeDeliveries(parcels.value, session.value, shareLinks = shareLinks, shareDefaults = shareDefaults, invitationDefaults = invitationDefaults)
 
     /** What a carrier change sent: the parcel's id, the carrier, the link, the postcode and its country, and a provider's postcode. */
     data class CarrierChangeRequest(
@@ -620,3 +645,7 @@ class FakeDeliveries(
 
 /** The browser check's page an addition asks for, on a made-up service. */
 const val VERIFICATION_PAGE = "https://peek.example/api/public/native/turnstile?language=en"
+
+/** The made-up site a test's invitations are on, and the host it answered on before. */
+const val INVITATION_BASE = "https://peek.example"
+const val INVITATION_HOST = "go.peek.example"

@@ -14,6 +14,7 @@ import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.arrival.INVITATION_WELCOME
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_GIFT_CARD
@@ -45,7 +46,8 @@ import org.robolectric.annotation.GraphicsMode
  * [ParcelLinkActivity], which shows nothing in a task Recents neither shows nor keeps, and the app's other addresses to
  * its window. The link reaches the app's stores in memory, owner key and all, and the window it opens carries none of
  * it: cold, the window opens the sheet once its stores are made; with the app running, the sheet opens over what is up
- * in the window brought forward. On the app's own stores, made offline with links read from memory.
+ * in the window brought forward. A friend's invitation (`/i/<id>`, `/invite#<code>`, the scheme's `invite`) comes in
+ * the same way and stands over the window. On the app's own stores, made offline with links read from memory.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -173,5 +175,58 @@ class ParcelLinkActivityTest {
         assertEquals(gift, links.route?.id)
         assertTrue(exists(LINK_GIFT_CARD))
         assertFalse(exists(LINK_CARD))
+    }
+
+    @Test
+    fun aFriendsInvitationOnTheSitesHostsAndTheAppsSchemeGoesToTheTrampolineToo() {
+        val trampoline = listOf(ParcelLinkActivity::class.java.name)
+        for (host in setOf(site) + configuration.linkHosts) {
+            assertEquals(host, trampoline, takers("https://$host/i/$INVITATION"))
+            assertEquals(host, trampoline, takers("https://$host/invite#$INVITATION"))
+        }
+        assertEquals(trampoline, takers("peekdeliverytracker://invite#$INVITATION"))
+        assertEquals(emptyList<String>(), takers("https://elsewhere.example/invite#$INVITATION"))
+    }
+
+    @Test
+    fun anInvitationThatStartsTheAppWaitsForItsStoresAndStandsOverTheWindow() {
+        val started = send("https://$site/invite#$INVITATION")
+        assertFalse(started.toUri(0).contains(INVITATION))
+        assertNull("Nothing made yet: the invitation waits in the process", app.container.value)
+
+        Robolectric.buildActivity(MainActivity::class.java, started).setup()
+        val invitation = awaitStores().invitation
+        assertTrue(invitation.isPresenting)
+        assertEquals(INVITATION, invitation.code)
+        // Over everything but the launch screen, which stays while the session is read on the IO threads.
+        compose.waitUntil(10_000) {
+            shadowOf(Looper.getMainLooper()).idle()
+            exists(INVITATION_WELCOME)
+        }
+    }
+
+    @Test
+    fun anInvitationWhileTheAppRunsStandsOverTheWindowBroughtForward() {
+        val window = Robolectric.buildActivity(MainActivity::class.java, Intent.makeMainActivity(ComponentName(app, MainActivity::class.java))).setup()
+        val invitation = awaitStores().invitation
+        settle()
+        assertFalse(exists(INVITATION_WELCOME))
+
+        window.newIntent(send("peekdeliverytracker://invite#$INVITATION"))
+        settle()
+        assertTrue(invitation.isPresenting)
+        assertEquals(INVITATION, invitation.code)
+        assertTrue(exists(INVITATION_WELCOME))
+
+        window.newIntent(send("https://$site/i/$OTHER_INVITATION"))
+        settle()
+        assertEquals(OTHER_INVITATION, invitation.code)
+        assertTrue(exists(INVITATION_WELCOME))
+    }
+
+    private companion object {
+        /** Made-up invitation codes, in the 16-character form the service gives. */
+        const val INVITATION = "Qa3vT8nL5wZ1pR7k"
+        const val OTHER_INVITATION = "Zx4cV9bN2mL6kJ8h"
     }
 }

@@ -13,7 +13,9 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
+import com.plhery.peekdeliverytracker.core.FriendInvitationStore
 import com.plhery.peekdeliverytracker.core.FriendsActivityStore
+import com.plhery.peekdeliverytracker.core.FriendsClient
 import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.NativeRoute
@@ -283,6 +285,12 @@ interface DeliveriesSource {
 
     /** The app's `FriendsActivityStore()`: the friends who accepted an invitation, and the friend to reveal. */
     val friendsActivity: FriendsActivityStore
+
+    /** The account's friends, which the acceptance's own `FriendsStore()` asks. */
+    val friendsClient: FriendsClient
+
+    /** The app's `FriendInvitationStore()`: the invitation a link brought, shown over everything until it goes. */
+    val invitation: FriendInvitationStore
 }
 
 /** The deliveries from the app's container. */
@@ -432,6 +440,10 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val friends: FriendsStore get() = container.friends
 
     override val friendsActivity: FriendsActivityStore get() = container.friendsActivity
+
+    override val friendsClient: FriendsClient get() = container.friendsClient
+
+    override val invitation: FriendInvitationStore get() = container.invitation
 
     override val notificationError get() = container.parcels.notificationErrorFlow
 
@@ -720,6 +732,7 @@ class DeliveriesInbox(
     private val parcelLink: (String) -> Boolean = { false },
     private val sharedDrafts: () -> SharedParcelDraft? = { null },
     friend: UUID? = null,
+    private val invitationLink: (String) -> Boolean = { false },
 ) {
     private val parcelState = MutableStateFlow(parcel)
     private val friendState = MutableStateFlow(friend)
@@ -762,8 +775,9 @@ class DeliveriesInbox(
     /**
      * `.onOpenURL` (A-L02, A-L14), in `open(_:)`'s order: a parcel's link first, which [parcelLink] opens in its sheet,
      * then `peekdeliverytracker://parcel/<uuid>`, which opens the parcel on the deliveries, then
-     * `peekdeliverytracker://friend/<uuid>`, the friend to reveal ([friend]). The app's parcel links come by
-     * ParcelLinkActivity, which keeps them out of the window's intent; one sent to the window itself comes here.
+     * `peekdeliverytracker://friend/<uuid>`, the friend to reveal ([friend]), and last a friend's invitation, which
+     * [invitationLink] shows over everything. The app's parcel and invitation links come by ParcelLinkActivity, which
+     * keeps them out of the window's intent; one sent to the window itself comes here.
      */
     fun follow(intent: Intent?) {
         if (intent?.action != Intent.ACTION_VIEW) return
@@ -773,7 +787,7 @@ class DeliveriesInbox(
             is NativeRoute.Parcel -> open(route.id)
             is NativeRoute.Friend -> friendState.value = route.id
             // Add and the links' notifications come with their screens.
-            else -> Unit
+            else -> invitationLink(url)
         }
     }
 
@@ -805,11 +819,13 @@ class DeliveriesInbox(
             activity: ComponentActivity,
             sharedDrafts: () -> SharedParcelDraft? = { null },
             parcelLink: (String) -> Boolean = { false },
+            invitationLink: (String) -> Boolean = { false },
         ): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
             val inbox = DeliveriesInbox(
                 saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts, saved?.getString(FRIEND)?.let(UUID::fromString),
+                invitationLink,
             )
             registry.registerSavedStateProvider(SAVED) {
                 Bundle().apply {

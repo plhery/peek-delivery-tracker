@@ -22,7 +22,8 @@ class DeviceWordsTest {
     // iOS's accessibility identifiers, which the app's test tags carry: hooks for tests, not copy. The iOS generator
     // skips `.accessibilityIdentifier` for the same reason.
     private val identifiers = setOf(
-        "welcome.field", "welcome.paste", "welcome.signIn", "auth.card", "auth.demo", "friends.signIn", "friends.demoSignIn", "friends.invitationURL",
+        "welcome.field", "welcome.paste", "welcome.signIn", "welcome.openParcel", "auth.card", "auth.demo", "friends.signIn", "friends.demoSignIn",
+        "friends.invitationURL",
     )
 
     /** The keys the Kotlin sources of the app and its core name, found as the iOS generator finds them in Swift. */

@@ -93,7 +93,8 @@ import kotlin.math.sin
  * share sheet's sticker is cut to its box, it has none. `pressed` is how far a press has gone, 0 to 1, as SwiftUI's
  * animation carries `pressed` from one look to the other: the box squashes to 0.956 toward the ground and sinks 5, and
  * its shadow widens to 188, flattens to 13 and darkens to 14 %. A friend's invitation names its `sender` on the card
- * (`senderName`).
+ * (`senderName`). The welcome's greeting `lift`s the closed box (negative is up) and `sway`s it by degrees about its
+ * middle, less as it opens; its shadow narrows by 3 and lightens by 0.4 % a point of lift.
  */
 @Composable
 internal fun UnwrappingParcel(
@@ -104,6 +105,8 @@ internal fun UnwrappingParcel(
     pressed: Float = 0f,
     grounded: Boolean = true,
     sender: String? = null,
+    lift: Float = 0f,
+    sway: Float = 0f,
 ) {
     val frame = Modifier.size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)
     val palette = PipPalette.kraft
@@ -119,13 +122,13 @@ internal fun UnwrappingParcel(
     val wrapping = max(0.0, 1 - open * 4)
     Box(frame) {
         if (grounded) {
-            val shadowWidth = 180f + 8f * pressed
+            val shadowWidth = 180f + lift * 3 + (188f - 180f - lift * 3) * pressed
             val shadowHeight = 20f - 7f * pressed
             Box(
                 Modifier
                     .offset((151f - shadowWidth / 2).dp, (286f - shadowHeight / 2).dp)
                     .size(shadowWidth.dp, shadowHeight.dp)
-                    .dropShadow(OvalShape, swiftUiShadow(Color.Black.copy(alpha = 0.08f + 0.06f * pressed), radius = 9.dp)),
+                    .dropShadow(OvalShape, swiftUiShadow(Color.Black.copy(alpha = (0.08f + lift * 0.004f).coerceAtLeast(0f) * (1 - pressed) + 0.14f * pressed), radius = 9.dp)),
             )
         }
         Box(
@@ -135,8 +138,8 @@ internal fun UnwrappingParcel(
                 scaleX = scale
                 scaleY = scale
                 transformOrigin = TransformOrigin(0.5f, 1f)
-                translationY = ((anticipation * 4 - breath * 8).toFloat() * (1 - pressed) + 5f * pressed).dp.toPx()
-            },
+                translationY = (lift * (1 - open).toFloat() + (anticipation * 4 - breath * 8).toFloat() * (1 - pressed) + 5f * pressed).dp.toPx()
+            }.graphicsLayer { rotationZ = sway * (1 - open).toFloat() },
         ) {
             PipCanvas(frame) {
                 it.fill(PipGeometry.polygon(PipGeometry.inside), palette.inside)

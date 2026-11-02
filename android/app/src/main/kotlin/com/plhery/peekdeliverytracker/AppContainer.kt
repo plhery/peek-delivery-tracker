@@ -19,6 +19,8 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalogRefreshResult
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
 import com.plhery.peekdeliverytracker.core.FriendsActivityStore
+import com.plhery.peekdeliverytracker.core.FriendInvitationStore
+import com.plhery.peekdeliverytracker.core.FriendsClient
 import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.friends
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
@@ -238,11 +240,24 @@ class AppContainer(
         )
     }
 
+    /** The account's friends (`DeliveryAPIClient`'s), which the friends' stores ask. */
+    val friendsClient: FriendsClient = api.friends()
+
     /** FriendsView's `FriendsStore()`, kept for the process as the tab's `@StateObject` is kept for the window. */
-    val friends = FriendsStore(api.friends())
+    val friends = FriendsStore(friendsClient)
 
     /** The app's `FriendsActivityStore()`: who accepted an invitation, while someone is signed in. */
-    val friendsActivity = FriendsActivityStore(api.friends(), signedIn = { session.user != null })
+    val friendsActivity = FriendsActivityStore(friendsClient, signedIn = { session.user != null })
+
+    /**
+     * The app's `FriendInvitationStore()`: the invitation a link brought, its code waiting in the app's defaults, its
+     * sender's name asked of the service without signing in (`invitationPreview(code:)`).
+     */
+    val invitation = FriendInvitationStore(
+        defaults, configuration.apiBaseUrl, configuration.linkHosts,
+        preview = { DeliveryApiClient.invitationPreview(it, configuration, transport) },
+        friends = friendsClient,
+    )
 
     /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for; a test's reads before both. */
     val links: ParcelLinkStore = linkReader?.let { ParcelLinkStore(defaults, read = it) }
@@ -254,12 +269,12 @@ class AppContainer(
 
     /**
      * `ReviewPrompt.settled(session:store:links:invitation:)` as the stores change: someone's own parcels, loaded and
-     * current, with nothing over them. Android shows no friend's invitation yet.
+     * current, with nothing over them.
      */
     val reviewSettled: StateFlow<Boolean> = combine(
         listOf(
             session.stateFlow, parcels.parcelsFlow, parcels.loadingFlow, parcels.errorMessageFlow, parcels.authenticationRequiredFlow,
-            parcels.usingCachedDataFlow, parcels.notificationEnableInProgressFlow, links.routeFlow,
+            parcels.usingCachedDataFlow, parcels.notificationEnableInProgressFlow, links.routeFlow, invitation.presentingFlow,
         ),
     ) { reviewSettledNow() }.stateIn(scope, SharingStarted.Eagerly, reviewSettledNow())
 
@@ -272,7 +287,7 @@ class AppContainer(
         usingCachedData = parcels.usingCachedDataFlow.value,
         notificationEnableInProgress = parcels.notificationEnableInProgressFlow.value,
         linkOpen = links.routeFlow.value != null,
-        invitationShown = false,
+        invitationShown = invitation.isPresenting,
         asksInDemo = reviewForced(),
     )
 
@@ -335,8 +350,11 @@ class AppContainer(
         scope.launch { if (session.state == AuthenticationState.Loading) session.bootstrap() }
         scope.launch { refreshCatalog() }
         val identity = session.stateFlow.map { it.rootIdentity }.distinctUntilChanged()
+        // `.task(id: sessionIdentity + (invitation.isPresenting ? "-invitation" : ""))`: an invitation coming or going
+        // starts the parcels again.
+        val parcelsIdentity = combine(identity, invitation.presentingFlow) { id, presenting -> if (presenting) "$id-invitation" else id }
         scope.launch {
-            identity.collectLatest {
+            parcelsIdentity.distinctUntilChanged().collectLatest {
                 if (session.isAuthenticated || session.isGuest) {
                     parcels.start()
                 } else if (session.state != AuthenticationState.Loading) {
@@ -360,22 +378,19 @@ class AppContainer(
         analytics()
     }
 
-    /** AnalyticsLifecycleObserver's view: the screen the session shows, in its mode, and whether a link covers it. */
+    /**
+     * AnalyticsLifecycleObserver's view: the screen the session shows (`invitation` while one is presented), in its mode,
+     * and whether a link covers it.
+     */
     private fun analytics() {
         analyticsObserver.appeared()
         scope.launch {
-            combine(session.stateFlow, parcels.parcelsFlow.map { it.isEmpty() }.distinctUntilChanged(), links.routeFlow) { state, empty, route ->
-                Triple(screen(state, empty), analyticsMode(), route != null)
+            combine(
+                session.stateFlow, parcels.parcelsFlow.map { it.isEmpty() }.distinctUntilChanged(), links.routeFlow, invitation.presentingFlow,
+            ) { state, empty, route, presenting ->
+                Triple(AnalyticsLifecycleObserver.screen(presenting, state, hasParcels = !empty), analyticsMode(), route != null)
             }.distinctUntilChanged().collect { (screen, mode, linkOpen) -> analyticsObserver.update(screen, mode, linkOpen) }
         }
-    }
-
-    private fun screen(state: AuthenticationState, noParcels: Boolean): String = when (state) {
-        AuthenticationState.Loading -> "welcome"
-        // Nobody is signed in: the first screen, then the deliveries this phone follows itself.
-        AuthenticationState.Welcome -> if (noParcels) "front-door" else "deliveries"
-        AuthenticationState.SignedOut, AuthenticationState.Unconfigured -> "sign-in"
-        AuthenticationState.Demo, is AuthenticationState.SignedIn -> "deliveries"
     }
 
     private fun analyticsMode(): DeliveryAnalytics.Mode = when {
@@ -423,13 +438,15 @@ class AppContainer(
     }
 
     /**
-     * The app came to the front or left it (`scenePhase`): the parcels poll only while it is in front, and coming back
-     * counts a foreground and asks for a newer catalog.
+     * The app came to the front or left it (`scenePhase`): the parcels poll only while it is in front, an invitation's
+     * sender is forgotten as it leaves, and coming back counts a foreground and asks for a newer catalog.
      */
     private fun sceneActive(active: Boolean) {
         if (active == this.active) return
         this.active = active
         parcels.setActive(active)
+        // RootView's `onChange(of: scenePhase)`: who sent an invitation is asked afresh on the way back.
+        if (!active) invitation.clearPreview()
         if (!active) return
         analyticsObserver.foreground()
         scope.launch { refreshCatalog() }

@@ -26,10 +26,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.isActive
+import kotlinx.serialization.Serializable
 
-// FriendsStore.swift's `FriendsStore`, `FriendStamp`'s keys and symbols and `FriendsActivityStore`. The invitation
-// received (`FriendInvitationStore`) comes with its step. A Swift `Task` cancelled is a coroutine cancelled here: what
-// it was waiting for then changes nothing.
+// FriendsStore.swift's `FriendInvitationStore`, `FriendsStore`, `FriendStamp`'s keys and symbols and
+// `FriendsActivityStore`. A Swift `Task` cancelled is a coroutine cancelled here: what it was waiting for then changes
+// nothing.
 
 /** The friends' requests of `DeliveryAPIClient`, for the account signed in: the app's client, or a test's fake. */
 interface FriendsClient {
@@ -392,5 +393,204 @@ class FriendsActivityStore(
         dismissed.clear()
         focusIdState.value = null
         presentationIdState.value = UUID.randomUUID()
+    }
+}
+
+/**
+ * `FriendInvitationStore`: the invitation a link brought ([open]), shown over the app until it is accepted ([finish])
+ * or dismissed ([dismiss]). Its code and whether the parcel was opened wait in [defaults] for a week, so a sign-in
+ * that leaves the app, or the process gone meanwhile, finds it again; the sender's name is asked afresh each time
+ * ([loadPreview]), publicly or, for a link already used, as the account signed in through [friends]. [preview] is
+ * `DeliveryAPIClient.invitationPreview(code:)`; [baseUrl] and [linkHosts] say which addresses are the site's. Each
+ * [open] is a new [presentationId]; each [finish] counts one more [completed]. Used from the main thread, as the
+ * iPhone's is (`@MainActor`).
+ */
+class FriendInvitationStore(
+    private val defaults: UserDefaults,
+    private val baseUrl: String,
+    private val linkHosts: List<String>,
+    private val preview: suspend (String) -> String,
+    private val friends: FriendsClient,
+    private val now: () -> Instant = Instant::now,
+) {
+    private val presentingState = MutableStateFlow(false)
+    private val presentationIdState = MutableStateFlow(UUID.randomUUID())
+    private val codeState = MutableStateFlow<String?>(null)
+    private val nicknameState = MutableStateFlow<String?>(null)
+    private val errorKeyState = MutableStateFlow<String?>(null)
+    private val loadingState = MutableStateFlow(false)
+    private val completedState = MutableStateFlow(0)
+    private val receiptState = MutableStateFlow<FriendsActionResponse?>(null)
+    private val openedState = MutableStateFlow(false)
+    val presentingFlow: StateFlow<Boolean> = presentingState.asStateFlow()
+    val presentationIdFlow: StateFlow<UUID> = presentationIdState.asStateFlow()
+    val codeFlow: StateFlow<String?> = codeState.asStateFlow()
+    val nicknameFlow: StateFlow<String?> = nicknameState.asStateFlow()
+    val errorKeyFlow: StateFlow<String?> = errorKeyState.asStateFlow()
+    val loadingFlow: StateFlow<Boolean> = loadingState.asStateFlow()
+    val completedFlow: StateFlow<Int> = completedState.asStateFlow()
+    val receiptFlow: StateFlow<FriendsActionResponse?> = receiptState.asStateFlow()
+    val openedFlow: StateFlow<Boolean> = openedState.asStateFlow()
+
+    val isPresenting: Boolean get() = presentingState.value
+    val presentationId: UUID get() = presentationIdState.value
+    val code: String? get() = codeState.value
+    val nickname: String? get() = nicknameState.value
+    val errorKey: String? get() = errorKeyState.value
+    val loading: Boolean get() = loadingState.value
+    val completed: Int get() = completedState.value
+    val receipt: FriendsActionResponse? get() = receiptState.value
+
+    /** Whether the parcel was opened, past the welcome to the sign-in or the acceptance; kept with the code (`didSet`). */
+    var opened: Boolean
+        get() = openedState.value
+        set(value) {
+            openedState.value = value
+            persist()
+        }
+
+    private var receivedAt = now()
+    private var generation = 0
+
+    /** `Pending`, as the iPhone's JSONEncoder writes it: the date as seconds since 2001. */
+    @Serializable
+    private class Pending(
+        val code: String,
+        val opened: Boolean,
+        @Serializable(with = ReferenceDateSerializer::class) val receivedAt: Instant,
+    )
+
+    init {
+        val pending = defaults.data(forKey = STORAGE_KEY)?.let { data ->
+            try {
+                decodeJson(Pending.serializer(), data)
+            } catch (_: Exception) {
+                null
+            }
+        }
+        val age = pending?.let { now().timeIntervalSinceReferenceDate - it.receivedAt.timeIntervalSinceReferenceDate }
+        // A clock gone back before the link came, as one older than a week, forgets it.
+        if (pending != null && age != null && FriendInvitationLink.validCode(pending.code) && age >= 0 && age < LIFETIME) {
+            codeState.value = pending.code
+            openedState.value = pending.opened
+            receivedAt = pending.receivedAt
+            presentingState.value = true
+        } else {
+            defaults.removeObject(forKey = STORAGE_KEY)
+        }
+    }
+
+    /**
+     * `open(_:)`: an invitation's link, on the site or in the app's scheme, shown afresh at its welcome; one whose code
+     * can't be read shows `friends.inviteUnavailable` and waits nowhere. False for any other address.
+     */
+    fun open(url: String): Boolean {
+        if (!FriendInvitationLink.isInvitation(url, baseUrl, linkHosts)) return false
+        clearPreview()
+        receiptState.value = null
+        codeState.value = FriendInvitationLink.code(url, baseUrl, linkHosts)
+        presentationIdState.value = UUID.randomUUID()
+        receivedAt = now()
+        presentingState.value = true
+        opened = false
+        if (code == null) {
+            errorKeyState.value = "friends.inviteUnavailable"
+            defaults.removeObject(forKey = STORAGE_KEY)
+        }
+        persist()
+        return true
+    }
+
+    /**
+     * `loadPreview(session:)`: the sender's name for the code shown. A link already used has no public preview; only
+     * the account signed in ([signedIn]) asks for its name then, without learning yet whether it was used. A failure
+     * shows no name and `friends.inviteUnavailable` for a link that leads nowhere, `friends.unavailable` otherwise. An
+     * answer overtaken by a newer call or [clearPreview], or called off, changes nothing.
+     */
+    suspend fun loadPreview(signedIn: Boolean = false) {
+        if (!isPresenting || receipt != null) return
+        val code = code ?: run {
+            errorKeyState.value = "friends.inviteUnavailable"
+            return
+        }
+        generation += 1
+        val current = generation
+        loadingState.value = true
+        errorKeyState.value = null
+        try {
+            val name = try {
+                preview(code)
+            } catch (error: DeliveryApiError.Service) {
+                if (error.serviceMessage != UNAVAILABLE || !signedIn) throw error
+                val answer = friends.action(FriendsActionRequest(FriendsAction.PreviewInvite, code = code))
+                val nickname = answer.previewNickname
+                if (nickname.isNullOrEmpty()) throw DeliveryApiError.InvalidResponse()
+                nickname
+            }
+            if (current != generation || !currentCoroutineContext().isActive) return
+            nicknameState.value = name
+        } catch (error: Exception) {
+            currentCoroutineContext().ensureActive()
+            if (current != generation) return
+            nicknameState.value = null
+            errorKeyState.value = if ((error as? DeliveryApiError.Service)?.serviceMessage == UNAVAILABLE) {
+                "friends.inviteUnavailable"
+            } else {
+                "friends.unavailable"
+            }
+        } finally {
+            if (current == generation) loadingState.value = false
+        }
+    }
+
+    /** `clearPreview()`: no name, error or spinner, and what was asked forgotten, as the app leaves the front. */
+    fun clearPreview() {
+        generation += 1
+        nicknameState.value = null
+        errorKeyState.value = null
+        loadingState.value = false
+    }
+
+    /** `receive(_:)`: the acceptance's answer. The invitation was used on the server, so it no longer waits. */
+    fun receive(result: FriendsActionResponse) {
+        receiptState.value = result
+        defaults.removeObject(forKey = STORAGE_KEY)
+    }
+
+    /** `dismiss()`: nothing shown, and nothing waiting. */
+    fun dismiss() {
+        presentingState.value = false
+        codeState.value = null
+        openedState.value = false
+        receiptState.value = null
+        clearPreview()
+        defaults.removeObject(forKey = STORAGE_KEY)
+    }
+
+    /** `finish()`: the acceptance is over; the app goes to its friends ([completed]). */
+    fun finish() {
+        completedState.value += 1
+        dismiss()
+    }
+
+    /** Only the waiting code survives a sign-in; who sent it is asked afresh. */
+    private fun persist() {
+        val code = code
+        if (!isPresenting || receipt != null || code == null) return
+        val data = try {
+            JsonEncoder().encode(Pending.serializer(), Pending(code, opened, receivedAt))
+        } catch (_: Exception) {
+            return
+        }
+        defaults.set(data, forKey = STORAGE_KEY)
+    }
+
+    companion object {
+        const val STORAGE_KEY = "sdt.pendingFriendInvitation.v1"
+
+        /** A week, in seconds. */
+        private const val LIFETIME = 604_800.0
+
+        private const val UNAVAILABLE = "Invitation unavailable"
     }
 }

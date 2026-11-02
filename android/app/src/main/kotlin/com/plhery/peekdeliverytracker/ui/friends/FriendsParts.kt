@@ -318,14 +318,20 @@ internal fun String.cutToScalars(limit: Int = NICKNAME_SCALARS): String =
  * `FriendsProfileForm`: "friends.nickname" over its field (on paper with 14-point corners, in by 14, the nickname's
  * keyboard, Done taking the keyboard down, at most 24 scalars), the preview of the reader's card as friends will see
  * it, the two shares as switches in delivered between dividers (each 10 above and below, its detail read as its hint),
- * the privacy line and Save, or "friends.join" for a new profile: off while [busy] or without a name. All of it is off
- * while [busy]. Each switch flipped plays a light impact at half strength. The name is saved trimmed.
+ * the privacy line and Save, or "friends.join" for a new profile, or [submitKey]'s words where it is given: off while
+ * [busy] or without a name. All of it is off while [busy]. Each switch flipped plays a light impact at half strength. The name is saved trimmed.
  *
  * The iPhone's form keeps a settled name 900 ms after typing stops, for an attention cue it no longer shows: nothing
  * here needs it.
  */
 @Composable
-internal fun FriendsProfileForm(source: DeliveriesSource, profile: FriendProfile?, busy: Boolean, save: (FriendProfile) -> Unit) {
+internal fun FriendsProfileForm(
+    source: DeliveriesSource,
+    profile: FriendProfile?,
+    busy: Boolean,
+    submitKey: String? = null,
+    save: (FriendProfile) -> Unit,
+) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val localizer = LocalLocalizer.current
@@ -366,7 +372,7 @@ internal fun FriendsProfileForm(source: DeliveriesSource, profile: FriendProfile
         }
         SymbolLabel(localized("friends.privacy"), "lock", type.caption, colors.secondaryLabel)
         ProminentButton(
-            localized(if (profile == null) "friends.join" else "friends.save"), enabled = enabled && trimmed.isNotEmpty(), tag = FRIENDS_SAVE,
+            localized(submitKey ?: if (profile == null) "friends.join" else "friends.save"), enabled = enabled && trimmed.isNotEmpty(), tag = FRIENDS_SAVE,
         ) { save(FriendProfile(trimmed, stats, arrival)) }
     }
 }
@@ -465,8 +471,8 @@ internal fun SymbolLabel(text: String, symbol: String, style: TextStyle, tint: C
 
 /**
  * `.buttonStyle(.borderedProminent)` with its label `.frame(maxWidth: .infinity, minHeight:)`: the words in body,
- * after a symbol where there is one, on a capsule of [fill] across the column, the label [minHeight] tall and 7 more
- * above and below; it fades as it is pressed, and is greyed while off.
+ * after a symbol where there is one, or a spinner 8 before them while [working], on a capsule of [fill] across the
+ * column, the label [minHeight] tall and 7 more above and below; it fades as it is pressed, and is greyed while off.
  */
 @Composable
 internal fun ProminentButton(
@@ -479,6 +485,7 @@ internal fun ProminentButton(
     wide: Boolean = true,
     fill: Color = PeekTheme.colors.accent,
     content: Color = PeekTheme.colors.onAccent,
+    working: Boolean = false,
     action: () -> Unit,
 ) {
     Box(
@@ -495,6 +502,11 @@ internal fun ProminentButton(
         val style = PeekTheme.type.body
         if (symbol != null) {
             SymbolLabel(title, symbol, style, content)
+        } else if (working) {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                ActivityIndicator(Modifier.clearAndSetSemantics {}, size = 20.dp, tint = content)
+                Text(title, color = content, style = style.sfLines(), textAlign = TextAlign.Center)
+            }
         } else {
             Text(title, color = content, style = style.sfLines(), textAlign = TextAlign.Center)
         }

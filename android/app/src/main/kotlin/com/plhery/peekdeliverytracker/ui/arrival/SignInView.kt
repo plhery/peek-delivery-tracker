@@ -50,14 +50,21 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.addOutline
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
@@ -71,9 +78,10 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -83,7 +91,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -97,6 +107,7 @@ import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.REGULAR_SPINNER
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
+import com.plhery.peekdeliverytracker.ui.deliveries.plainDisabled
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.NoticeBanner
@@ -157,6 +168,9 @@ internal fun signInCode(typed: String): String =
 
 private val NUMBERS = setOf(CharCategory.DECIMAL_DIGIT_NUMBER, CharCategory.LETTER_NUMBER, CharCategory.OTHER_NUMBER)
 
+/** What the sign-in shows of a friend's invitation: who sent it (null until known), what went wrong asking, and Retry. */
+internal class SignInInvitation(val nickname: String?, val errorKey: String?, val retry: () -> Unit)
+
 /**
  * `SignInView` (C-S04), without an invitation: the header (the back's glass circle and the language menu), 12 over the
  * parcel's anchor (160 × 165), which [onAnchor] is told of; the card (paper, corners of 24, a hairline of the separator
@@ -173,6 +187,13 @@ private val NUMBERS = setOf(CharCategory.DECIMAL_DIGIT_NUMBER, CharCategory.LETT
  * A cancelled run says nothing; any other failure says `Localizer.errorMessage`'s words, an OIDC one with only the
  * generic message its own. The system's back does what the back does ([onBack]), so it never closes the app from
  * here.
+ *
+ * With an [invitation] (C-S02's sign-in), the anchor is 180 × 186, and the title and the ways in stand on the page
+ * across the column, without the card: the invitation's heading ([InvitationHeading]) 8 down over "friends.signInToAccept",
+ * then 28 down what went wrong asking who sent it, with Retry 28 under it, or a spinner while nobody is known yet;
+ * "auth.configTitle" alone where sign-in isn't set up; or the code step or the ways in, 12 apart, the email option
+ * without its cream, the email's longer intro, and each form on a card of its own. No short privacy line or demo:
+ * the privacy notice stands 12 under it all ([PrivacyNotice]).
  */
 @Composable
 internal fun SignInView(
@@ -182,6 +203,7 @@ internal fun SignInView(
     work: CoroutineScope,
     onBack: () -> Unit,
     onAnchor: (LayoutCoordinates) -> Unit,
+    invitation: SignInInvitation? = null,
 ) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -239,41 +261,79 @@ internal fun SignInView(
                 Spacer(Modifier.weight(1f))
                 LanguageMenu(menus)
             }
-            Box(Modifier.size(160.dp, 165.dp).onGloballyPositioned(onAnchor))
+            Box(Modifier.size(if (invitation == null) 160.dp else 180.dp, if (invitation == null) 165.dp else 186.dp).onGloballyPositioned(onAnchor))
             val card = ContinuousRoundedShape(24.dp)
             Column(
-                Modifier
-                    .widthIn(max = CARD_WIDTH)
-                    .fillMaxWidth()
-                    .testTag(AUTH_CARD)
-                    .background(colors.paper, card)
-                    .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.35f), card)
-                    .padding(22.dp),
+                if (invitation != null) {
+                    Modifier.fillMaxWidth()
+                } else {
+                    Modifier
+                        .widthIn(max = CARD_WIDTH)
+                        .fillMaxWidth()
+                        .testTag(AUTH_CARD)
+                        .background(colors.paper, card)
+                        .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.35f), card)
+                        .padding(22.dp)
+                },
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        localized("arrival.signInTitle"), color = colors.label, textAlign = TextAlign.Center,
-                        style = type.tracking(type.style(IosTextStyle.Title, FontWeight.SemiBold), -0.6f).sfLines(),
-                    )
-                    Text(localized("arrival.signInSubtitle"), color = colors.secondaryLabel, textAlign = TextAlign.Center, style = type.footnote.sfLines())
-                }
-                Box(Modifier.padding(top = 23.dp)) {
-                    when {
-                        !configuration.authenticationConfigured -> NoticeBanner(
-                            symbol = "wrench.and.screwdriver.fill",
-                            title = localized("auth.configTitle"),
-                            message = localized("native.configurationHelp"),
-                            tint = colors.orange,
+                Column(
+                    Modifier.fillMaxWidth().padding(top = if (invitation == null) 0.dp else 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    if (invitation != null) {
+                        InvitationHeading(invitation.nickname)
+                    } else {
+                        Text(
+                            localized("arrival.signInTitle"), color = colors.label, textAlign = TextAlign.Center,
+                            style = type.tracking(type.style(IosTextStyle.Title, FontWeight.SemiBold), -0.6f).sfLines(),
                         )
-                        form.step == SignInStep.Code -> CodeForm(form, onVerify = {
-                            run { session.verifyCode(email = form.email.cleanedEmail, code = form.code) }
-                        })
-                        else -> Methods(session, form, ::run)
+                    }
+                    Text(
+                        localized(if (invitation == null) "arrival.signInSubtitle" else "friends.signInToAccept"), color = colors.secondaryLabel,
+                        textAlign = TextAlign.Center, style = type.footnote.sfLines(),
+                    )
+                }
+                val top = if (invitation == null) 23.dp else 28.dp
+                when {
+                    invitation != null && invitation.nickname == null -> {
+                        val error = invitation.errorKey
+                        if (error != null) {
+                            Text(
+                                localized(error), Modifier.padding(top = top).testTag(SIGN_IN_INVITATION_ERROR), color = colors.secondaryLabel,
+                                textAlign = TextAlign.Center, style = type.footnote.sfLines(),
+                            )
+                            PlainTextButton(localized("common.retry"), SIGN_IN_INVITATION_RETRY, Modifier.padding(top = top), onClick = invitation.retry)
+                        } else {
+                            ActivityIndicator(Modifier.padding(top = top).testTag(SIGN_IN_INVITATION_LOADING), size = 20.dp, tint = colors.secondaryLabel)
+                        }
+                    }
+                    else -> Box(Modifier.padding(top = top)) {
+                        when {
+                            !configuration.authenticationConfigured -> if (invitation == null) {
+                                NoticeBanner(
+                                    symbol = "wrench.and.screwdriver.fill",
+                                    title = localized("auth.configTitle"),
+                                    message = localized("native.configurationHelp"),
+                                    tint = colors.orange,
+                                )
+                            } else {
+                                Text(localized("auth.configTitle"), color = colors.secondaryLabel, style = type.subheadline.sfLines())
+                            }
+                            form.step == SignInStep.Code -> CodeForm(form, invitation != null, onVerify = {
+                                run { session.verifyCode(email = form.email.cleanedEmail, code = form.code) }
+                            })
+                            else -> Methods(session, form, invitation != null, ::run)
+                        }
                     }
                 }
-                PrivacyLine(configuration.privacyUrl, Modifier.padding(top = 18.dp))
+                if (invitation == null) PrivacyLine(configuration.privacyUrl, Modifier.padding(top = 18.dp))
             }
-            DemoLink(enabled = !form.working, Modifier.padding(top = 12.dp)) { session.enterDemo() }
+            if (invitation == null) {
+                DemoLink(enabled = !form.working, Modifier.padding(top = 12.dp)) { session.enterDemo() }
+            } else {
+                PrivacyNotice(configuration.privacyUrl, Modifier.padding(top = 12.dp))
+            }
         }
     }
 }
@@ -308,7 +368,7 @@ private fun SignInBack(onBack: () -> Unit) {
  * which the app saves and passes on.
  */
 @Composable
-private fun LanguageMenu(menus: SheetMenus) {
+internal fun LanguageMenu(menus: SheetMenus) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val localizer = LocalLocalizer.current
@@ -367,14 +427,15 @@ private fun LanguageMenu(menus: SheetMenus) {
  * moves up; the error under them while the form is shut.
  */
 @Composable
-private fun Methods(session: SessionStore, form: SignInForm, run: (String?, suspend () -> Unit) -> Unit) {
+private fun Methods(session: SessionStore, form: SignInForm, invited: Boolean, run: (String?, suspend () -> Unit) -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
     val configuration = session.configuration
     val social = configuration.googleAuthEnabled || configuration.oidcAuthEnabled
     val formVisible = configuration.emailOtpEnabled && (!social || form.emailExpanded)
-    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+    val spacing = if (invited) 12.dp else 9.dp
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(spacing)) {
         if (configuration.googleAuthEnabled) {
             val active = form.activeProvider == GOOGLE
             MethodButton(GOOGLE_TAG, enabled = !form.working, onClick = { run(GOOGLE) { session.signInWithGoogle() } }) {
@@ -422,7 +483,7 @@ private fun Methods(session: SessionStore, form: SignInForm, run: (String?, susp
                             form.emailExpanded = true
                         }
                         .heightIn(min = 48.dp)
-                        .background(colors.cream, RoundedCornerShape(13.dp)),
+                        .background(if (invited) Color.Transparent else colors.cream, RoundedCornerShape(13.dp)),
                     horizontalArrangement = Arrangement.spacedBy(LABEL_SPACING, Alignment.CenterHorizontally),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -431,13 +492,13 @@ private fun Methods(session: SessionStore, form: SignInForm, run: (String?, susp
                     Text(localized("auth.emailOption"), color = colors.ink, style = style.sfLines())
                 }
             }
-            Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(9.dp)) {
+            Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(spacing)) {
                 AnimatedVisibility(social && formVisible, enter = if (reduceMotion) EnterTransition.None else fadeIn(Motion.easeOut(0.2)), exit = ExitTransition.None) {
                     OrRule()
                 }
                 AnimatedVisibility(formVisible, enter = expanding, exit = ExitTransition.None) {
                     val localizer = LocalLocalizer.current
-                    EmailForm(form, onSend = {
+                    EmailForm(form, invited, onSend = {
                         run(null) {
                             session.sendCode(to = form.email.cleanedEmail, language = localizer.language)
                             form.step = SignInStep.Code
@@ -451,16 +512,16 @@ private fun Methods(session: SessionStore, form: SignInForm, run: (String?, susp
 }
 
 /**
- * `emailForm`: what happens (`auth.emailIntroShort`, secondary footnote), the address's field, the error, and "Email me
+ * `emailForm`: what happens (`auth.emailIntroShort`, or `auth.emailIntro` [invited], secondary footnote), the address's field, the error, and "Email me
  * a code", which sends the code to the address as it is cleaned and turns to the code step once it is sent; it waits
  * for an address with an "@" in it. The keyboard's action ends the typing, as the iPhone's return does.
  */
 @Composable
-private fun EmailForm(form: SignInForm, onSend: () -> Unit) {
+private fun EmailForm(form: SignInForm, invited: Boolean, onSend: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(localized("auth.emailIntroShort"), color = colors.secondaryLabel, style = type.footnote.sfLines())
+    Column(Modifier.fillMaxWidth().formSurface(invited, 18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text(localized(if (invited) "auth.emailIntro" else "auth.emailIntroShort"), color = colors.secondaryLabel, style = type.footnote.sfLines())
         val label = localized("auth.email")
         SignInField(label) { modifier ->
             NoSuggestions {
@@ -491,14 +552,14 @@ private fun EmailForm(form: SignInForm, onSend: () -> Unit) {
  * address kept and the code and the error cleared.
  */
 @Composable
-private fun CodeForm(form: SignInForm, onVerify: () -> Unit) {
+private fun CodeForm(form: SignInForm, invited: Boolean, onVerify: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val email = form.email.cleanedEmail
     val intro = remember(email, language) { localizer.text("auth.codeIntro", mapOf("email" to email)) }
-    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    Column(Modifier.fillMaxWidth().formSurface(invited, 20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(intro, color = colors.secondaryLabel, style = type.footnote.sfLines())
         val label = localized("auth.code")
         SignInField(label) { modifier ->
@@ -742,6 +803,77 @@ private fun DemoLink(enabled: Boolean, modifier: Modifier, onClick: () -> Unit) 
     }
 }
 
+/**
+ * `SignInFormSurface`: a form on the page of an invitation's sign-in ([invited]) stands [padding] in on a card of its
+ * own (`parcelCardSurface()`: paper with corners of 16, the accent's 2-point band along its top and a hairline of the
+ * separator at 62 %); in the card of the sign-in without one, it stands as it is.
+ */
+@Composable
+private fun Modifier.formSurface(invited: Boolean, padding: Dp): Modifier {
+    if (!invited) return this
+    val colors = PeekTheme.colors
+    val shape = ContinuousRoundedShape(16.dp)
+    val band = colors.accent
+    return this
+        .background(colors.paper, shape)
+        .drawWithContent {
+            drawContent()
+            clipPath(shape.outlinePath(size, layoutDirection, this)) { drawRect(band, size = Size(size.width, 2.dp.toPx())) }
+        }
+        .border(0.7.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.62f), shape)
+        .padding(padding)
+}
+
+/** The outline of [this] shape in a box of [size], as a path to clip to. */
+private fun Shape.outlinePath(size: Size, direction: LayoutDirection, density: Density): Path =
+    Path().apply { addOutline(createOutline(size, direction, density)) }
+
+/**
+ * `privacyNotice`: under a divider, 18 down, the lock (semibold caption, 20 × 20) 10 from "auth.privacy" over the
+ * underlined link "auth.readPrivacy" 4 under it, which opens the privacy page in the browser; all in the secondary
+ * grey caption, the link's line in the tertiary grey.
+ */
+@Composable
+private fun PrivacyNotice(privacyUrl: String, modifier: Modifier) {
+    val colors = PeekTheme.colors
+    val style = PeekTheme.type.caption
+    val read = localized("auth.readPrivacy")
+    val uri = LocalUriHandler.current
+    Column(modifier.fillMaxWidth().testTag(PRIVACY_NOTICE)) {
+        Box(Modifier.fillMaxWidth().height(1.dp / LocalDensity.current.density).background(colors.separator))
+        Row(Modifier.fillMaxWidth().padding(top = 18.dp), horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.Top) {
+            Box(Modifier.size(20.dp), contentAlignment = Alignment.Center) {
+                PeekSymbol("lock.fill", font = style.copy(fontWeight = FontWeight.SemiBold), tint = colors.secondaryLabel)
+            }
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(localized("auth.privacy"), color = colors.secondaryLabel, style = style.sfLines())
+                Text(
+                    read,
+                    Modifier.clickable(interactionSource = null, indication = PlainPress, role = Role.Button) { uri.openUri(privacyUrl) },
+                    color = colors.secondaryLabel,
+                    style = style.sfLines().copy(textDecoration = TextDecoration.Underline),
+                )
+            }
+        }
+    }
+}
+
+/** A plain `Button` of SwiftUI's: its title in the accent's body, dimmed as it is pressed. */
+@Composable
+internal fun PlainTextButton(title: String, tag: String, modifier: Modifier = Modifier, enabled: Boolean = true, style: TextStyle? = null, onClick: () -> Unit) {
+    val colors = PeekTheme.colors
+    Text(
+        title,
+        modifier
+            .testTag(tag)
+            .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
+            .plainDisabled(enabled),
+        color = colors.accent,
+        textAlign = TextAlign.Center,
+        style = (style ?: PeekTheme.type.body).sfLines(),
+    )
+}
+
 /** Told how the email's placeholder is laid out: the tests check it keeps to one line, whole. */
 internal val LocalSignInPlaceholder = staticCompositionLocalOf<((TextLayoutResult) -> Unit)?> { null }
 
@@ -779,4 +911,8 @@ internal const val CODE_VERIFY = "signInVerify"
 internal const val DIFFERENT_EMAIL = "signInDifferentEmail"
 internal const val SIGN_IN_ERROR = "signInError"
 internal const val PRIVACY_LINE = "signInPrivacy"
+internal const val PRIVACY_NOTICE = "signInPrivacyNotice"
+internal const val SIGN_IN_INVITATION_ERROR = "signInInvitationError"
+internal const val SIGN_IN_INVITATION_RETRY = "signInInvitationRetry"
+internal const val SIGN_IN_INVITATION_LOADING = "signInInvitationLoading"
 internal const val LANGUAGE_MENU = "languageMenu"

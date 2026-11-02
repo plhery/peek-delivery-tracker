@@ -892,7 +892,7 @@ private fun PanelContent(state: FriendsState, panel: FriendsPanel, snapshot: Fri
  * on glass at its trailing end, semibold as the confirmation, and the scroll edge once it has scrolled.
  */
 @Composable
-private fun PanelPage(title: String, closeEnabled: Boolean, close: () -> Unit, content: @Composable () -> Unit) {
+internal fun PanelPage(title: String, closeEnabled: Boolean, close: () -> Unit, content: @Composable () -> Unit) {
     val backdrop = rememberMaterialBackdrop()
     val insets = LocalSheetInsets.current
     val barTop = insets.barTop + NAV_BAR_DROP

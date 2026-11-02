@@ -47732,6 +47732,64 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://tracking.link/tracking"
+  },
+  "magic-trans": {
+    "displayName": "Magic Trans",
+    "aliases": [
+      "Мейджик Транс",
+      "ТК Мейджик Транс",
+      "MagicTrans",
+      "ООО «МТ ЛОГИСТИКА»"
+    ],
+    "countries": [
+      "RU"
+    ],
+    "color": "#008dcc",
+    "selectable": true,
+    "timezone": "Europe/Moscow",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://magic-trans.ru/otsledit-gruz/?id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "magic-trans.ru"
+        ],
+        "pathPattern": "^/otsledit-gruz/?$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://magic-trans.ru/otsledit-gruz/"
+  },
+  "red-express": {
+    "displayName": "Red Express",
+    "aliases": [
+      "RedExpress",
+      "Red Express Cargo",
+      "Рэд Экспресс",
+      "Ред Экспресс",
+      "РЭД Экспресс",
+      "ОсОО «РЭД Экспресс»"
+    ],
+    "countries": [
+      "KG",
+      "RU"
+    ],
+    "color": "#f93a3a",
+    "selectable": true,
+    "timezone": "Asia/Bishkek",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://redexpress.kg/"
   }
 } as const;
 
@@ -49094,7 +49152,9 @@ export const CARRIER_IDS = [
   "ltl-kr",
   "okay-parcel",
   "tnt-au",
-  "znlogic"
+  "znlogic",
+  "magic-trans",
+  "red-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

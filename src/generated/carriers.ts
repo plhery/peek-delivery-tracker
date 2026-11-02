@@ -1896,6 +1896,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Early Bird tracking: statuses, morning delivery and lockers",
       "name": "Early Bird",
       "color": "#dd7f4a"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-tracking",
+      "title": "Xinghe Freight tracking: GZXH…YQ numbers and scans",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "de": [

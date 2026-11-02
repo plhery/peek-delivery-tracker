@@ -21,10 +21,12 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.isUnspecified
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.math.max
 
 /**
  * SwiftUI's font designs. SF Pro Rounded, New York and SF Mono can't ship outside Apple's platforms (X-AD38): the
@@ -44,8 +46,9 @@ private val roundedFamily: FontFamily get() = FontFamily.Default
 /**
  * The iPhone app's fonts at one content size category. Sizes are points, drawn as that many dp whatever Android's
  * own font scaling would make of them: the category already carries the reader's text size, as Dynamic Type does.
- * Line heights are the system font's own; letter spacing gives Roboto SF's widths at each size and weight
- * ([SfWidths]), so lines wrap and truncate where the iPhone's do. In Chinese there is none: the copy is mostly Han
+ * A line is the system font's own, and a paragraph in a text style has its lines the style's leading apart
+ * ([IosTextStyle.leading]); letter spacing gives Roboto SF's widths at each size and weight ([SfWidths]), so lines
+ * wrap and truncate where the iPhone's do. In Chinese there is none: the copy is mostly Han
  * characters, which Noto Sans CJK sets as far apart as the iPhone's PingFang does. Text is in the app's language, and
  * a word too long for a line by itself breaks at a hyphen or a syllable with a hyphen, as the iPhone's does at the
  * accessibility sizes ("Geburtstags-geschenk"), where Android would cut it between any two letters; a word that fits
@@ -55,9 +58,46 @@ private val roundedFamily: FontFamily get() = FontFamily.Default
 class PeekTypography(val size: DynamicTypeSize, private val density: Density, val language: AppLanguage = AppLanguage.En) {
     private val locales = LocaleList(language.locale.toLanguageTag())
 
-    /** `.font(.body)`, `.font(.title2.weight(.bold))`, `.font(.system(.title, design: .rounded))`. */
-    fun style(style: IosTextStyle, weight: FontWeight = style.weight, design: FontDesign = FontDesign.Default): TextStyle =
-        fixed(style.pointSize(size), weight, design)
+    /**
+     * `.font(.body)`, `.font(.title2.weight(.bold))`, `.font(.system(.title, design: .rounded))`: a paragraph's lines
+     * the style's leading apart ([IosTextStyle.leading]), as the iPhone's are, or SF's line where that is more; its
+     * first line stands as high, and its last reaches as low, as a line of the style without it, so a single line is
+     * as tall as one in `.system(size:)` ([sfLines] keeps the leading too). `lineSpacing` is `.lineSpacing(_:)`: that
+     * many points more between the lines and, with [sfLines], above the first.
+     */
+    fun style(
+        style: IosTextStyle,
+        weight: FontWeight = style.weight,
+        design: FontDesign = FontDesign.Default,
+        lineSpacing: Float = 0f,
+    ): TextStyle {
+        val pointSize = style.pointSize(size)
+        val text = fixed(pointSize, weight, design)
+        val leading = max(style.leading(size), pointSize * SF_LINE_HEIGHT)
+        return if (leading == pointSize * SF_LINE_HEIGHT && lineSpacing == 0f) text else text.withLeading(pointSize, leading, lineSpacing)
+    }
+
+    /**
+     * Lines `leading` and `lineSpacing` points apart, as Compose rounds them up to whole pixels, with no space above
+     * the first line or below the last. [sfLines] gives the first line its space above back, and the alignment makes
+     * that space and the line SF's line and `lineSpacing` tall, as a line of `.system(size:)` with [sfLines] is, in
+     * whole pixels as Compose rounds them (Roboto's ascent and descent rounded, the line and the space under it rounded
+     * up), and still so where a line's emoji or other fallback font stands a pixel or so taller than Roboto. With both
+     * ends trimmed it changes nothing. The leading is in em, as Android 14's nonlinear font scaling leaves it, half a
+     * pixel under the line it rounds up to.
+     */
+    private fun TextStyle.withLeading(pointSize: Float, leading: Float, lineSpacing: Float): TextStyle {
+        val px = with(density) { points(pointSize).toPx() }
+        val spacing = with(density) { lineSpacing.dp.toPx() }
+        val line = ceil(with(density) { leading.dp.toPx() } + spacing)
+        val below = line - ceil(px * SF_LINE_HEIGHT + spacing)
+        val spare = line - (floor(px * ROBOTO_ASCENT + 0.5f) + floor(px * ROBOTO_DESCENT + 0.5f))
+        val topRatio = if (below <= 0f || spare <= 0f) 1f else (1f - (below - 0.01f) / spare).coerceIn(0f, 1f)
+        return copy(
+            lineHeight = ((line - 0.5f) / px).em,
+            lineHeightStyle = LineHeightStyle(LineHeightStyle.Alignment(topRatio), LineHeightStyle.Trim.Both),
+        )
+    }
 
     /** `.system(size:weight:design:)`: the same size in every category. */
     fun fixed(size: Float, weight: FontWeight = FontWeight.Normal, design: FontDesign = FontDesign.Default): TextStyle =
@@ -110,15 +150,30 @@ fun TextStyle.monospacedDigit(): TextStyle =
 
 /**
  * A line as tall as SwiftUI's: SF's ascender and descender, 1.193 em, where Roboto's make 1.172, with the baseline
- * where SF's stands, so a stack of text is as tall as the iPhone's and each line sits where its line does there.
+ * where SF's stands, so a stack of text is as tall as the iPhone's and each line sits where its line does there. A
+ * text style's paragraph ([PeekTypography.style]) keeps its lines the leading apart: its first line has SF's line
+ * above the baseline, and its last line Roboto's descent below it, as a line of the style without the leading does.
  */
-fun TextStyle.sfLines(): TextStyle = copy(
-    lineHeight = SF_LINE_HEIGHT.em,
-    lineHeightStyle = LineHeightStyle(alignment = LineHeightStyle.Alignment.Bottom, trim = LineHeightStyle.Trim.None),
-)
+fun TextStyle.sfLines(): TextStyle {
+    val leading = lineHeightStyle?.takeIf {
+        lineHeight.isSpecified && (it.trim == LineHeightStyle.Trim.Both || it.trim == LineHeightStyle.Trim.LastLineBottom)
+    }
+    return if (leading != null) {
+        copy(lineHeightStyle = LineHeightStyle(leading.alignment, LineHeightStyle.Trim.LastLineBottom))
+    } else {
+        copy(
+            lineHeight = SF_LINE_HEIGHT.em,
+            lineHeightStyle = LineHeightStyle(alignment = LineHeightStyle.Alignment.Bottom, trim = LineHeightStyle.Trim.None),
+        )
+    }
+}
 
 /** SF Pro's ascender and descender (1950 and 494 of its 2048 units), the height of a line of SwiftUI's text. */
-private const val SF_LINE_HEIGHT = (1950f + 494f) / 2048f
+internal const val SF_LINE_HEIGHT = (1950f + 494f) / 2048f
+
+/** Roboto's ascender and descender, 1900 and 500 of its 2048 units. */
+private const val ROBOTO_ASCENT = 1900f / 2048f
+private const val ROBOTO_DESCENT = 500f / 2048f
 
 /** A text as it was last laid out, which it gives as it is measured ([widestLine]). */
 internal class TextLines {

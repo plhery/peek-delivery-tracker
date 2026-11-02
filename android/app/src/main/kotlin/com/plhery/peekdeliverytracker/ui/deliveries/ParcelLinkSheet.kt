@@ -87,7 +87,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Brand
@@ -1321,8 +1320,8 @@ private fun GiftNote(note: String?, from: String?, inside: String?) {
             .semantics(mergeDescendants = true) {},
     ) {
         if (note != null) {
-            val style = type.style(IosTextStyle.Title3, FontWeight.SemiBold, FontDesign.Serif).copy(fontStyle = FontStyle.Italic)
-            Text(note, color = ink, style = style.sfLines().copy(lineHeight = (style.fontSize.value * SF_LINE + 4f).sp))
+            val style = type.style(IosTextStyle.Title3, FontWeight.SemiBold, FontDesign.Serif, lineSpacing = 4f).copy(fontStyle = FontStyle.Italic)
+            Text(note, color = ink, style = style.sfLines())
         }
         if (from != null) {
             Text(
@@ -1442,9 +1441,6 @@ private fun SharedParcelNumber(
 }
 
 private val CARD_RADIUS = 24.dp
-
-/** SF Pro's line height for its size ([sfLines]). */
-private const val SF_LINE = (1950f + 494f) / 2048f
 
 /** How long a number's row says it was copied. */
 private const val COPIED_MILLIS = 2_000L

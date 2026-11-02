@@ -1395,7 +1395,8 @@ private fun AddTextField(
     val focused = focus.focused == field
     val ochre = colors.resolve(ExperimentalPalette.ochre)
     val shape = RoundedCornerShape(14.dp)
-    val leading = with(LocalDensity.current) { FIELD_LEADING.roundToPx().let { (it / 2).toDp() to (it - it / 2).toDp() } }
+    val extra = if (maxLines == 1) FIELD_LEADING else 0.dp
+    val leading = with(LocalDensity.current) { extra.roundToPx().let { (it / 2).toDp() to (it - it / 2).toDp() } }
     val submit by rememberUpdatedState(onSubmit)
     // The cursor where the reader left it; at the end of what came otherwise (a paste, a suggestion, the window made again).
     var edited by remember { mutableStateOf(TextFieldValue(value, TextRange(value.length))) }
@@ -1733,8 +1734,9 @@ private val CONTENT_WIDTH = 560.dp
 /** The number's label and its field, two lines tall, which the title gives way to in a window too low for both. */
 private val FIELD_ROOM = 96.dp
 /**
- * What UIKit's field adds to its lines, half above and half below in whole pixels: the name's line of body is 22 tall
- * there and the number's two are 42.33, where SF's lines make 20.29 and 40.57.
+ * What UIKit's one-line field adds to its line, half above and half below in whole pixels: the name's line of body is
+ * 22 tall there, where SF's line makes 20.29. The number's field, two to four lines, adds none: its lines stand the
+ * body's leading apart, two 42.33 tall (20.29 and 22).
  */
 private val FIELD_LEADING = 1.72.dp
 private val MARK_WIDTH = 27.dp

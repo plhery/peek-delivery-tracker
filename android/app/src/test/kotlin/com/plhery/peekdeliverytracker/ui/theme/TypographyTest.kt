@@ -29,6 +29,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.GraphicsMode
+import kotlin.math.ceil
+import kotlin.math.max
 
 // Text measured as Android lays it out, for where lines break.
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -206,6 +208,102 @@ class TypographyTest {
         assertEquals(FontStyle.Italic, italic.fontStyle)
         assertEquals(body.letterSpacing, italic.letterSpacing)
         assertEquals(body.fontWeight, italic.fontWeight)
+    }
+
+    @Test
+    fun eachStyleCarriesTheTablesLeading() {
+        // Apple's table at Large, and at accessibility5 where only footnote, caption and caption 2 stay over SF's line.
+        val large = listOf(41f, 34f, 28f, 25f, 22f, 22f, 21f, 20f, 18f, 16f, 13f)
+        assertEquals(large, IosTextStyle.entries.map { it.leading(DynamicTypeSize.Large) })
+        val ax5 = listOf(70f, 68f, 66f, 65f, 62f, 62f, 60f, 58f, 52f, 51f, 48f)
+        assertEquals(ax5, IosTextStyle.entries.map { it.leading(DynamicTypeSize.Accessibility5) })
+        assertEquals(29f, IosTextStyle.Footnote.leading(DynamicTypeSize.Accessibility1))
+        assertEquals(51f, IosTextStyle.Headline.leading(DynamicTypeSize.Accessibility4))
+        assertEquals(56f, IosTextStyle.Body.leading(DynamicTypeSize.Accessibility4))
+        // A style whose leading is SF's line or less is `.system(size:)`'s: caption 2 at Large (13 against 13.1).
+        for (size in DynamicTypeSize.entries) {
+            val type = PeekTypography(size, Density(3f))
+            for (style in IosTextStyle.entries) {
+                val plain = type.fixed(style.pointSize(size), style.weight)
+                val sfLine = style.leading(size) <= style.pointSize(size) * SF_LINE_HEIGHT
+                assertEquals("$style at $size", sfLine, type.style(style) == plain)
+            }
+        }
+    }
+
+    @Test
+    fun aStylesLinesStandItsLeadingApartAndASingleLineIsAsTallAsBefore() {
+        lateinit var measurer: TextMeasurer
+        themed(1f) { measurer = rememberTextMeasurer() }
+        for (density in listOf(2f, 2.625f, 3f)) {
+            val at = Density(density)
+            fun lines(text: String, style: TextStyle) = measurer.measure(text, style, density = at)
+            for (size in DynamicTypeSize.entries) {
+                val type = PeekTypography(size, at)
+                for (style in IosTextStyle.entries) {
+                    val leading = style.leading(size)
+                    val pointSize = style.pointSize(size)
+                    if (leading <= pointSize * SF_LINE_HEIGHT) continue
+                    val where = "$style at $size, ${density}x"
+                    for (sf in listOf(false, true)) {
+                        val styled = if (sf) type.style(style).sfLines() else type.style(style)
+                        val plain = if (sf) type.fixed(pointSize, style.weight).sfLines() else type.fixed(pointSize, style.weight)
+                        val one = lines("Peek", styled)
+                        assertEquals("$where, one line's height, sfLines $sf", lines("Peek", plain).size.height, one.size.height)
+                        assertEquals("$where, its baseline, sfLines $sf", lines("Peek", plain).firstBaseline, one.firstBaseline)
+                        val two = lines("Peek\nPeek", styled)
+                        val apart = two.getLineBaseline(1) - two.getLineBaseline(0)
+                        assertEquals("$where, between lines, sfLines $sf", ceil(leading * density), apart, 0.01f)
+                        assertEquals("$where, its first baseline, sfLines $sf", one.firstBaseline, two.firstBaseline)
+                        assertEquals("$where, two lines' height, sfLines $sf", one.size.height + apart, two.size.height.toFloat(), 0.01f)
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun lineSpacingAddsToTheLeading() {
+        // GiftNote's `.lineSpacing(4)`: 4 more between lines and, with SF's lines, over a single one as before.
+        lateinit var measurer: TextMeasurer
+        themed(1f) { measurer = rememberTextMeasurer() }
+        for (density in listOf(2f, 2.625f, 3f)) {
+            val at = Density(density)
+            fun lines(text: String, style: TextStyle) = measurer.measure(text, style, density = at)
+            for (size in DynamicTypeSize.entries) {
+                val type = PeekTypography(size, at)
+                val pointSize = IosTextStyle.Title3.pointSize(size)
+                val where = "title 3 at $size, ${density}x"
+                val styled = type.style(IosTextStyle.Title3, FontWeight.SemiBold, lineSpacing = 4f).sfLines()
+                val before = type.fixed(pointSize, FontWeight.SemiBold).sfLines().copy(lineHeight = (pointSize * SF_LINE_HEIGHT + 4f).sp)
+                val one = lines("Peek", styled)
+                assertEquals("$where, one line's height", lines("Peek", before).size.height, one.size.height)
+                assertEquals("$where, its baseline", lines("Peek", before).firstBaseline, one.firstBaseline)
+                val two = lines("Peek\nPeek", styled)
+                val leading = max(IosTextStyle.Title3.leading(size), pointSize * SF_LINE_HEIGHT)
+                assertEquals(where, ceil(leading * density + 4 * density), two.getLineBaseline(1) - two.getLineBaseline(0), 0.01f)
+            }
+        }
+    }
+
+    // At 1.3 and 2.0 Android 14 scales sp by its own curve; the leading, in em, is the same points whatever.
+    @Test
+    fun theLeadingHoldsUnderAndroidsNonlinearFontScalingAt1_3() = assertFootnoteLeading(1.3f)
+
+    @Test
+    fun theLeadingHoldsUnderAndroidsNonlinearFontScalingAt2() = assertFootnoteLeading(2f)
+
+    private fun assertFootnoteLeading(scale: Float) {
+        var apart = 0f
+        var expected = 0f
+        themed(scale) {
+            val density = LocalDensity.current
+            val type = PeekTheme.type
+            val two = rememberTextMeasurer().measure("Peek\nPeek", type.footnote.sfLines())
+            apart = two.getLineBaseline(1) - two.getLineBaseline(0)
+            expected = ceil(IosTextStyle.Footnote.leading(type.size) * density.density)
+        }
+        assertEquals(expected, apart, 0.01f)
     }
 
     @Test

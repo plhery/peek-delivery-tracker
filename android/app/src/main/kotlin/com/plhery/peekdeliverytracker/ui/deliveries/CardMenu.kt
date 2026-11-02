@@ -120,6 +120,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.SheetMemory
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
@@ -585,10 +586,11 @@ private fun MenuItemRow(
         Spacer(Modifier.width(12.dp))
         // UIKit writes the keys as glyphs (⇧⌘C) at the row's end, beside any title. Android writes them out
         // (Shift+Ctrl+C), which beside a title in a menu this narrow would squeeze it into broken words: they stand
-        // under it.
+        // under it. UIKit sets a title's lines SF's line apart (20 at Large), not the body's leading (22).
+        val font = type.fixed(IosTextStyle.Body.pointSize(type.size)).sfLines()
         Column(Modifier.weight(1f)) {
-            Text(title, color = ink, style = type.body.sfLines())
-            if (key != null) Text(key, color = colors.secondaryLabel, style = type.body.sfLines())
+            Text(title, color = ink, style = font)
+            if (key != null) Text(key, color = colors.secondaryLabel, style = font)
         }
     }
 }
@@ -836,8 +838,8 @@ internal fun AlertWords(title: String, message: String?, focus: AccessibilityFoc
             .accessibilityFocus(focus),
         verticalArrangement = Arrangement.spacedBy(MESSAGE_GAP),
     ) {
-        Text(title, color = colors.label, style = type.headline.uiKitLines(IosTextStyle.Headline))
-        if (message != null) Text(message, color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline))
+        Text(title, color = colors.label, style = type.headline.uiKitLines(IosTextStyle.Headline, type.size))
+        if (message != null) Text(message, color = colors.secondaryLabel, style = type.subheadline.uiKitLines(IosTextStyle.Subheadline, type.size))
     }
 }
 
@@ -889,7 +891,7 @@ private fun RenameAlert(state: DeliveriesState, request: RenameRequest) {
         ) {
             Text(
                 title, Modifier.padding(horizontal = ALERT_BUTTON_SIDE - ALERT_SIDE).accessibilityFocus(heading), color = colors.label,
-                style = type.body.uiKitLines(IosTextStyle.Body), textAlign = TextAlign.Center,
+                style = type.body.uiKitLines(IosTextStyle.Body, type.size), textAlign = TextAlign.Center,
             )
             Spacer(Modifier.height(ALERT_FIELD_GAP))
             val placeholder = localizer.text("common.parcel")
@@ -1053,14 +1055,11 @@ internal fun alertButtonFont(): TextStyle = PeekTheme.type.style(IosTextStyle.Bo
 internal fun alertFill(dark: Boolean): Color = if (dark) ALERT_FILL_DARK else ALERT_FILL_LIGHT
 
 /**
- * Lines as UIKit sets an alert's words: each as tall as the text style's leading at Large (22 for the body's 17
- * points, 20 for the subheadline's 15), the words in the middle of it.
+ * Lines as UIKit sets an alert's words: each as tall as the text style's leading at the category `size` (22 for the
+ * body's 17 points at Large, 20 for the subheadline's 15; [IosTextStyle.leading]), the words in the middle of it.
  */
-internal fun TextStyle.uiKitLines(style: IosTextStyle): TextStyle = copy(
-    lineHeight = when (style) {
-        IosTextStyle.Subheadline -> 20f / 15f
-        else -> 22f / 17f
-    }.em,
+internal fun TextStyle.uiKitLines(style: IosTextStyle, size: DynamicTypeSize): TextStyle = copy(
+    lineHeight = (style.leading(size) / style.pointSize(size)).em,
     lineHeightStyle = LineHeightStyle(alignment = LineHeightStyle.Alignment.Center, trim = LineHeightStyle.Trim.None),
 )
 

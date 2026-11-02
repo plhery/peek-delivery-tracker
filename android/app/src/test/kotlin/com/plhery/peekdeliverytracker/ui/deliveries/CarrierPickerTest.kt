@@ -687,7 +687,8 @@ class CarrierPickerTest {
         show(selection = null)
         val tag = compose.onNode(hasText("Recommended"), useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
         val description = compose.onNode(hasText("Peek finds the carrier for you."), useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
-        assertTrue(tag.right <= description.left && abs(tag.center.y - description.center.y) < px(8f))
+        // Beside the description's first line, whose baseline it shares, on however many lines the description runs.
+        assertTrue(tag.right <= description.left && tag.center.y - description.top in 0f..px(14f))
         assertEquals(height(plain), height(tagged))
     }
 

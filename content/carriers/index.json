@@ -70,7 +70,7 @@
   { "id": "c-chez-vous", "catalog": "c-chez-vous", "name": "C chez vous", "languages": ["en", "fr"] },
   { "id": "geodis", "catalog": "geodis", "name": "GEODIS", "languages": ["en", "fr"] },
   { "id": "delivengo", "catalog": "delivengo", "name": "Delivengo", "languages": ["en", "fr"] },
-  { "id": "ecoscooting", "catalog": "ecoscooting", "name": "Ecoscooting", "languages": ["en", "es", "pt"] },
+  { "id": "ecoscooting", "catalog": "ecoscooting", "name": "Ecoscooting", "languages": ["en", "es", "pt", "fr"] },
   { "id": "swiss-post-cargo", "catalog": "swiss-post-cargo", "name": "Swiss Post Cargo", "languages": ["en", "de", "fr", "it"] },
   { "id": "dachser", "catalog": "dachser", "name": "Dachser", "languages": ["en", "es", "pt"] },
   { "id": "meest", "catalog": "meest", "name": "Meest", "languages": ["en", "pl", "uk"] },

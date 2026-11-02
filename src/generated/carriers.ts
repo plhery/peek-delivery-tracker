@@ -2494,6 +2494,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcf00"
     },
     {
+      "id": "ecoscooting",
+      "catalog": "ecoscooting",
+      "slug": "ecoscooting-suivi",
+      "title": "Ecoscooting suivi colis\u00a0: statuts, point relais et contact",
+      "name": "Ecoscooting",
+      "color": "#3fa7ff"
+    },
+    {
       "id": "swiss-post-cargo",
       "catalog": "swiss-post-cargo",
       "slug": "swiss-post-cargo-suivi",

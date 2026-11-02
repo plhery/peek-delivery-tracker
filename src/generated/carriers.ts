@@ -4140,6 +4140,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet FAN Courier: AWB, statusuri și FANbox",
       "name": "FAN Courier",
       "color": "#0f2345"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-germania-urmarire-colet",
+      "title": "Urmărire colet J&T Germania: numărul JTDE și statusurile",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
     }
   ],
   "bg": [

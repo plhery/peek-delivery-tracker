@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-10-30
 ---
 
-JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS in the United States and Straightship in Canada.
+JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS or GOFO in the United States, Straightship in Canada and Yodel in the UK.
 
 ## JS Express tracking number: what it looks like
 
@@ -31,6 +31,7 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | JS Express says | What it means for you | Peek shows |
 | --- | --- | --- |
 | `Electronic notification of order creation received.` | The shop has sent JS Express the order's details. JS Express doesn't have the parcel yet. | "Label created" |
+| `PRE-ADVICE` | A partner has the parcel's details, before JS Express's warehouse has the parcel. | "Label created" |
 | `Item has been collected` | JS Express's warehouse in China has the parcel: its first real scan. | "Received by carrier" |
 | `Item inbound in sorting center.`, `Item outbound in sorting center.` | Sorted at JS Express in China. | "In transit" |
 | `Domestic allocation has begun`, `Under domestic allocation` | Still at JS Express's warehouse in China, after sorting and before it leaves. | "In transit" |
@@ -49,17 +50,17 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 
 **The courier's scans.** After `Delivery to local courier`, the history goes on in the courier's words. In the US, USPS's: `Accepted at USPS Origin Facility` (its first scan, not a new shipment), `Out for Delivery`, `Delivered, Front Door/Porch`. In Canada, Straightship's `Package is received at a Straightship station`, then `Package will be delivered before 9:00pm`, the driver's round that day ("Out for delivery": a delivery or an attempt follows), and `Delivered` with the town in brackets.
 
-**Lines that aren't scans.** `SHIPPING INFORMATION RECEIVED`, `SHIPMENT CREATED`, `Data Received`, USPS's `Shipping Label Created, USPS Awaiting Item` and `Package information is created in the system` are a partner's record of the parcel's details, sometimes days before it has the parcel.
+**Lines that aren't scans.** `SHIPPING INFORMATION RECEIVED`, `SHIPMENT CREATED`, `Data Received`, USPS's `Shipping Label Created, USPS Awaiting Item`, `Package information is created in the system` and, at a European hub, `Shipment Data Uploaded` then `Processed` are a partner's record of the parcel's details, sometimes days before it has the parcel.
 
 **Times out of order.** The times carry no time zone and mix clocks: Beijing time in China, local time at airports and most couriers, and UTC for Straightship, hours ahead of Canada's clocks. Go by the order of the rows, not the times.
 
 ## Who delivers JS Express parcels
 
-**United States.** JS Express's history shows [USPS](carrier:usps) delivering, with USPS's scans up to the delivery. Once USPS has the parcel, USPS takes a Missing Mail search from the sender or the recipient, starting 7 days from mailing.
+**United States.** JS Express's history shows [USPS](carrier:usps) delivering, with USPS's scans up to the delivery, or [GOFO](carrier:gofo), with GOFO's scans from its sorting centre to the delivery round. Once USPS has the parcel, USPS takes a Missing Mail search from the sender or the recipient, starting 7 days from mailing.
 
 **Canada.** [Straightship](carrier:straightship), a Canadian courier, delivers some JS Express parcels; its scans show in JS Express's history.
 
-**UK, Ireland, Australia and elsewhere.** JS Express's record can hold the local courier's number, but not its name, and JS Express's page shows neither. Peek names the courier when that number fits one carrier in your country, and asks your country's post about a [postal number](guide:tracking-number-formats) (two letters, nine digits, two letters); more below. If Peek names no courier, ask the seller who delivers.
+**UK, Ireland, Australia and elsewhere.** In the UK, JS Express's history shows Yodel's scans; two of them, `DESPATCHED AND ON ROUTE TO YODEL` and `PARCEL PICKED UP`, come while the parcel is still at JS Express's warehouse in China. JS Express's record can hold the local courier's number, but not its name, and JS Express's page shows neither. Peek names the courier when that number fits one carrier in your country, and asks your country's post about a [postal number](guide:tracking-number-formats) (two letters, nine digits, two letters); more below. If Peek names no courier, ask the seller who delivers.
 
 Delivery attempts, notice cards and pickup points follow the local courier's rules: JS Express publishes none. A `到达待取` row names only the country, so check the courier's tracking or ask the seller where the parcel waits.
 
@@ -116,7 +117,7 @@ In the box above, or on JS Express's English "Express Query" page at js-exp.com.
 
 ### Who delivers JS Express parcels in my country?
 
-A courier in your country. JS Express's history shows USPS delivering in the United States and Straightship in Canada. Elsewhere, ask the seller which company delivers.
+A courier in your country. JS Express's history shows USPS or GOFO delivering in the United States, Straightship in Canada and Yodel in the UK. Elsewhere, ask the seller which company delivers.
 
 ### Who do I contact about a missing JS Express parcel?
 
@@ -134,5 +135,5 @@ The seller you ordered from: it booked the parcel with JS Express and makes the 
 - [JS Express: Contact Us](https://www.js-exp.com/EN/index.php?page=35) – hotline, QQ, WeChat, older numbers and addresses
 - [JS Express: 联系我们 (contact us)](https://www.js-exp.com/index.php?page=35) – hotline for international queries, QQ, WeChat, offices
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, scan wordings and stages, clocks, USPS and Straightship scans, the courier's number, what Peek shows and how it hands a parcel over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, scan wordings and stages, clocks, USPS, GOFO, Straightship and Yodel scans, the courier's number, what Peek shows and how it hands a parcel over
 :::

@@ -42,6 +42,7 @@ Sledenje pošiljk korake privzeto izpiše v slovenščini, s preklopom na EN pa 
 | `The item is ready for pickup at the post office` | Pošiljka vas čaka na pošti, ki jo navaja korak. |
 | `Unsuccessful delivery` | Paketa niste pravočasno prevzeli iz PS Paketomata, zato gre na pošto. |
 | `The item was delivered to the mailbox / P.O. box` | Dostavljeno v hišni predalčnik ali poštni predal. Če sledi `The item was delivered to the doorstep`, je bil paket izročen na vašem naslovu. |
+| `The item has been picked up` | Pošiljka je bila prevzeta (podrobnost: `The item was picked up at the post office`), torej je dostavljena. Ne pomeni, da jo je prevzel kurir. |
 | `Unsuccessful delivery attempt. Item is being returned to the sender` | Pošiljke niste prevzeli v roku, zato se vrača pošiljatelju. |
 
 Korak o dostavi po vračilu pomeni, da je paket spet pri pošiljatelju. Če se stanje več dni ne spremeni, preberite, [kaj storiti, ko se sledenje ne posodablja](guide:tracking-not-updating) (v angleščini).

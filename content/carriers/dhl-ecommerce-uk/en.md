@@ -31,6 +31,7 @@ The tracker is in English and lists the newest message first. These are the mess
 | `Your shipment has been collected` | DHL has picked the parcel up from the sender. |
 | `Your shipment is at the delivery depot` | It's at the depot that will deliver it. |
 | `We're sorry but the delivery of your shipment has been delayed. We expect to deliver on the next working day` | Running late: DHL expects to deliver the next working day. |
+| `We're sorry but we haven't been able to locate the delivery address from the information provided by the sender.` | DHL can't find your address from what the sender gave, so the parcel waits for a better one: check your address with the sender. |
 | `Your shipment is out for delivery` | With the driver today. |
 | `Your shipment is delivered` | Delivered. The tracker may also show who signed. |
 | `Delivery Attempted` | The driver called but couldn't deliver. |

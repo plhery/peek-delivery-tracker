@@ -36,7 +36,7 @@ DPD's English wordings, in order. Its German pages word steps differently (`Auft
 | `Delivered.`, `Parcel has been left in: mail box` | Delivered; the second says where. |
 | `At parcel delivery centre. (Return to sender)` | Going back to the sender. |
 
-"Consignor" is the sender and "consignee" you: `Parcel handed to Pickup parcelshop by consignor.` is the sender's drop-off. `Pickup ordered for: …` is DPD collecting from the sender, not you. If the first status doesn't change, ask the sender. Stuck at the depot? DPD's FAQ on `At the parcel distribution center` says to check again the next business day, then ask the sender if several business days pass unchanged.
+"Consignor" is the sender and "consignee" you: `Parcel handed to Pickup parcelshop by consignor.` is the sender's drop-off. `Pickup ordered for: …` is DPD collecting from the sender, not you. `Goods issue at sender.` means the sender's warehouse has booked the parcel out; DPD doesn't have it yet. If the first status doesn't change, ask the sender. Stuck at the depot? DPD's FAQ on `At the parcel distribution center` says to check again the next business day, then ask the sender if several business days pass unchanged.
 
 ## DPD delivery times, Pickup parcelshops and missed deliveries
 

@@ -40,7 +40,7 @@ DPDs deutsche Hilfeseiten beschreiben die Schritte auf Deutsch. Peek fragt DPD a
 | `Delivered.`, `Parcel has been left in: mail box` | Zugestellt; die zweite Meldung nennt den Ablageort. |
 | `At parcel delivery centre. (Return to sender)` | Es geht zurück an den Versender. |
 
-„Consignor“ ist der Versender, „consignee“ bist du. `Pickup ordered for: …` betrifft die Abholung beim Versender, nicht dich: DPD hat das Paket noch nicht. `We're sorry but your parcel couldn't be delivered as arranged.` klingt nach „delivered“, ist aber keine Zustellung. `Delivered. (Return to sender)` heißt, dass die Rücksendung beim Versender angekommen ist.
+„Consignor“ ist der Versender, „consignee“ bist du. `Pickup ordered for: …` betrifft die Abholung beim Versender, nicht dich: DPD hat das Paket noch nicht. `Goods issue at sender.` ist der Warenausgang beim Versender: Sein Lager hat das Paket ausgebucht, bei DPD ist es noch nicht. `We're sorry but your parcel couldn't be delivered as arranged.` klingt nach „delivered“, ist aber keine Zustellung. `Delivered. (Return to sender)` heißt, dass die Rücksendung beim Versender angekommen ist.
 
 DPDs deutsche FAQ erklärt einige Schritte: Bei `Auftragsdaten übermittelt` hat der Versender ein Label erstellt, das Paket aber noch nicht übergeben, und DPD schickt dich zum Versender. Bei `Paket an DPD übergeben` und `Das Paket ist unterwegs` musst du nichts tun. Steht `Im Paketzustellzentrum`, prüf am nächsten Werktag erneut. Bleibt der Status mehrere Werktage gleich oder fehlt ein voraussichtlicher Zustelltermin, frag den Versender: Er kann eine offizielle Nachforschung beauftragen. Ohne Postleitzahl zeigt DPDs Seite nur einen groben Status wie `Im Zustellfahrzeug`.
 

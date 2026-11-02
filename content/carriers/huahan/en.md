@@ -48,6 +48,7 @@ HuaHan's tracker lists each scan with a time, a wording and a place, newest firs
 | --- | --- | --- |
 | `Ready to Ship, Parcel received and processed` | The local carrier has the parcel. | "In transit" |
 | `The parcel is in the central warehouse waiting to be processed.`, `In Transit, Shipment arrived to sorting centre / Shipment in the sorting centre`, `In Transit, Shipment remained at sorting hub` | At the local carrier's warehouse or a sorting centre, or still there. | "In transit" |
+| `In Transit, Arrived to HU HUB`, `In Transit, Parcel has entered the Linehaul network.` | At the local carrier's hub in Hungary, then moving between its hubs. | "In transit" |
 | `Out for Delivery, Parcel is at courier, delivery expected soon.` | On the delivery run. | "Out for delivery" |
 | `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY app, email or SMS.` | On the delivery run, in the words of [Sameday](carrier:sameday), a courier in Romania and Bulgaria. | "Out for delivery" |
 | `The parcel has been successfully delivered.` | Delivered. | "Delivered" |

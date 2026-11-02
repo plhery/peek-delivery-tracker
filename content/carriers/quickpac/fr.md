@@ -90,7 +90,7 @@ Impossible d'appeler le livreur directement. Aucune page ne dit si le 0848 fonct
 
 ## Suivre un colis Quickpac avec Peek
 
-[Peek](/) reconnaît un numéro de 18 chiffres commençant par 44 comme Quickpac et le lit sur le site de suivi de Planzer ; un lien de suivi de quickpac.ch ou de tracking.app.planzer.ch se colle aussi. Il vérifie le suivi toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications pour toutes les mises à jour, les étapes importantes uniquement ou le jour de livraison uniquement. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+[Peek](/) reconnaît un numéro de 18 chiffres commençant par 44 comme Quickpac et le lit sur le site de suivi de Planzer ; un lien de suivi de quickpac.ch ou de tracking.app.planzer.ch se colle aussi. Il vérifie le suivi toutes les 10 minutes, toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison, et peut t'envoyer des notifications pour toutes les mises à jour, les étapes importantes uniquement ou le jour de livraison uniquement. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 Il affiche le statut, l'historique, la livraison prévue, le poids, les dimensions, l'heure de livraison et le pays de destination, mais pas l'adresse du destinataire. `Shipped` y apparaît comme livré. Peek ne peut ni contacter Quickpac à ta place, ni accélérer le colis.
 

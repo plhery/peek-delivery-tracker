@@ -1,12 +1,12 @@
 ---
 title: Yilong Logistics tracking: YIL numbers and statuses
-description: Track a Yilong Logistics (一龙物流) parcel from China: what a YIL…WL number looks like, what its few scans mean and why its tracking ends at the airline.
+description: Track a Yilong Logistics (一龙物流) parcel from China: what a YIL…WL number looks like, what its scans mean from the warehouse to delivery, and who delivers.
 slug: yilong-logistics-tracking
 published: 2026-10-28
 updated: 2026-10-28
 ---
 
-Yilong Logistics (一龙物流) is a freight forwarder in Putian, in China's Fujian province, and its waybill numbers start with YIL and end with WL. Type yours in the 包裹追踪 (parcel tracking) box on yxhlexpress.com or in the box above, and expect a short history: Yilong's scans stop once the parcel is handed to an airline.
+Yilong Logistics (一龙物流) is a freight forwarder in Putian, in China's Fujian province, and its waybill numbers start with YIL and end with WL. Type yours in the 包裹追踪 (parcel tracking) box on yxhlexpress.com or in the box above. Yilong's history runs from its warehouse to the airline, and can go on through your country's customs to the delivering company's own lines.
 
 ## Yilong Logistics tracking number: what it looks like
 
@@ -32,17 +32,24 @@ Yilong's scans are in English, apart from one Chinese line that its tracking pla
 | `Package received and scanned at warehouse` | Yilong's warehouse has the parcel and the line names the place: the first scan in Yilong's hands. |
 | `Package departed from the warehouse` | The parcel has left the warehouse; this line names the place too. |
 | `Customs export clearance completed` | China's export customs have released it. Not your country's import customs. |
-| `Package handed over to airline` | An airline has it for the flight. Normally the last line Yilong writes. |
+| `Package handed over to airline` | An airline has it for the flight. |
+| `Package in transit to destination country` | The flight is on its way to your country. |
+| `Package arrived at destination country` | It has reached your country. |
+| `Flight arrived at destination country port` | The flight has landed in your country. |
+| `Customs import clearance completed, awaiting pickup by local carrier` | Your country's import customs have released it; the delivering company hasn't collected it yet. |
+| `Package picked up by last-mile carrier` | The delivering company has it. The lines after this one are that company's, in its own words. |
 
 The customs and airline lines carry no place. No line carries a time zone either: the times are Beijing's, so a scan at 09:00 there happened the evening before by New York's clock.
 
+On US parcels, the delivering company's lines can be SwiftX's: `Arrived at Origin Hub` (its first hub in the US), `Departed Destination Hub`, `Arrived At Warehouse` (the warehouse its delivery rounds leave from), `Out for Delivery`, and `Delivery failed` followed by the driver's note and SwiftX's help line. SwiftX's `Shipping Label Created`, its label for the last leg, comes with those lines but is dated just after the warehouse scan in China.
+
 ## Who delivers Yilong Logistics parcels
 
-Yilong doesn't name anyone. Its tracking record holds no delivery company and no second tracking number, and nothing on its site says who delivers in your country. The company that does sets the rules for delivery attempts, pickup points and how long a parcel is held, and Yilong publishes none of its own. Ask the seller who has your parcel after the flight and under which number. Asked to pay import charges? See [parcels held at customs](guide:customs).
+Yilong's tracking record holds no delivery company and no second tracking number, and nothing on its site says who delivers in your country. Its history can still go on with the delivering company's own lines after `Package picked up by last-mile carrier`, SwiftX's on some US parcels (see above). The company that delivers sets the rules for delivery attempts, pickup points and how long a parcel is held, and Yilong publishes none of its own. Ask the seller who has your parcel after the flight and under which number. Asked to pay import charges? See [parcels held at customs](guide:customs).
 
 ## Yilong Logistics parcel not arriving or tracking stuck
 
-**Stuck on `Package handed over to airline`.** That's where Yilong's history normally ends, so silence after it doesn't mean the parcel has stopped. Wait for the delivery estimate the shop gave you, and contact the seller once it has passed. Why histories go quiet after a flight: [tracking a parcel from China](guide:tracking-from-china) and [why tracking stops updating](guide:tracking-not-updating).
+**Stuck on `Package handed over to airline`.** The flight and your country's import customs come next, so silence after it doesn't mean the parcel has stopped. Wait for the delivery estimate the shop gave you, and contact the seller once it has passed. Why histories go quiet after a flight: [tracking a parcel from China](guide:tracking-from-china) and [why tracking stops updating](guide:tracking-not-updating).
 
 **Only the Chinese line.** The seller has created the order, but Yilong hasn't received the parcel. No warehouse scan after a few days? Check with the seller that the parcel was really sent.
 
@@ -64,11 +71,11 @@ There's no email address, no street address and nothing addressed to recipients:
 
 Paste a YIL…WL number into [Peek](/) and it goes straight to Yilong Logistics: no other carrier Peek knows issues that layout. Peek follows more than 3,500 carriers, but a seller's order reference has no shape to go by. Add it anyway, press "Change" and choose Yilong Logistics (searching 一龙物流 or YXHL finds it too), or pick "Change carrier" on a parcel already in your list. If Yilong's tracker knows the reference, Peek also shows the order's YIL number. Peek drops dashes, though, so look up a reference with dashes in Yilong's own box.
 
-Peek reads Yilong's tracker directly. It shows each line in Yilong's words, the Chinese one included, the place on the two warehouse lines, and the destination country when the record holds it. The warehouse receipt counts as received by the carrier; the departure, export clearance and airline lines count as in transit. Yilong's Beijing times appear in your device's time zone. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery on the record stay out of Peek, and there's no expected delivery date, as Yilong gives none.
+Peek reads Yilong's tracker directly. It shows each line in Yilong's words, the Chinese one included, the place on the two warehouse lines, and the destination country when the record holds it. The warehouse receipt counts as received by the carrier; the lines from the departure to the delivering company's warehouse count as in transit, `Shipping Label Created` as label created, `Out for Delivery` as out for delivery and `Delivery failed` as a delivery attempt. Yilong's Beijing times appear in your device's time zone. Names, address, postcodes, weight, fees, the seller's reference, signature and proof of delivery on the record stay out of Peek, and there's no expected delivery date, as Yilong gives none.
 
-A line dated later than the moment Peek checks, on Beijing time, is held back until that time. Since Yilong's record names no delivery company, Peek follows the parcel only as far as Yilong's history goes, which is normally the airline. When the seller gives you the delivering company's number, add it as a separate parcel.
+A line dated later than the moment Peek checks, on Beijing time, is held back until that time. Since Yilong's record names no delivery company, Peek follows the parcel only as far as Yilong's history goes. When the seller gives you the delivering company's number, add it as a separate parcel.
 
-While the parcel moves, Peek checks Yilong every 10 minutes; after two days with nothing new (12 hours while the parcel still shows "Label created" or "Received by carrier"), as usually happens after the airline line, it checks hourly. All of Yilong's lines are early steps, so only the setting that alerts you to every scan reports them: the important-steps and delivery-day settings wait for customs, delivery and the like, which Yilong's tracker doesn't show. Peek can't chase Yilong or the seller for you.
+While the parcel moves, Peek checks Yilong every 10 minutes, and every 2 minutes once it's out for delivery; after two days with nothing new (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Yilong's own lines, import customs included, are steps on the way, so only the setting that alerts you to every scan reports them: the important-steps and delivery-day settings start with the delivering company's `Out for Delivery`. Peek can't chase Yilong or the seller for you.
 
 ## Questions about Yilong Logistics tracking
 
@@ -78,7 +85,7 @@ It is 莆田市城厢区一龙物流有限公司, a freight forwarder in Chengxi
 
 ### Why has my Yilong tracking stopped at "Package handed over to airline"?
 
-Because that's normally Yilong's last scan. The flight, import customs and delivery come after it, and Yilong's record doesn't name the company that handles them. The seller can tell you which one does, and give you its number.
+Because the flight comes next, and Yilong's next line, `Package in transit to destination country`, comes with it. The arrival in your country, import customs and the delivering company's own lines follow. Yilong's record doesn't name that company; the seller can tell you which one it is, and give you its number.
 
 ### How long does Yilong Logistics take to deliver?
 
@@ -90,5 +97,5 @@ Yilong publishes no delivery times. The list under its tracking box, one masked 
 - [Yilong Logistics: 公司介绍 (company profile)](http://www.yxhlexpress.com/about.html) – the page has no content
 - [Yilong Logistics: 联系我们 (contact)](http://www.yxhlexpress.com/contact.html) – the page has no content
 - [Yilong Logistics: 客服中心 (customer service)](http://www.yxhlexpress.com/kfzx.html) – the page has no content
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, Hualei platform, YIL number shape, scan wordings and places, the platform's line for an order without scans, Beijing clock, the tracker's answer for an unknown number, search by order reference, no delivery company named, what Peek shows, holds back and leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, Hualei platform, YIL number shape, scan wordings and places, the lines from the flight to the last mile and SwiftX's among them, the platform's line for an order without scans, Beijing clock, the tracker's answer for an unknown number, search by order reference, no delivery company named, what Peek shows, holds back and leaves out
 :::

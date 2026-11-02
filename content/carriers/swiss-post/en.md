@@ -84,7 +84,7 @@ Peek reads Swiss Post's English texts, whatever your language. It shows the stat
 
 `Delivered` shows as Peek's own "Delivered". `Registered for collection` and `Deposited in the MyPost24 machine` show as ready for pickup.
 
-Peek checks every 10 minutes, or every 2 once out for delivery, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. [GLS Switzerland](carrier:gls-ch) parcels and foreign postal numbers heading to Switzerland can be followed to Swiss Post; a `CH` number going abroad, to the destination's national post when Peek knows it (Germany, France or Italy, for example) once it shows newer progress.
+Peek checks every 10 minutes, or every 2 once out for delivery from 6 am Swiss time, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. [GLS Switzerland](carrier:gls-ch) parcels and foreign postal numbers heading to Switzerland can be followed to Swiss Post; a `CH` number going abroad, to the destination's national post when Peek knows it (Germany, France or Italy, for example) once it shows newer progress.
 
 ## Questions about Swiss Post tracking
 

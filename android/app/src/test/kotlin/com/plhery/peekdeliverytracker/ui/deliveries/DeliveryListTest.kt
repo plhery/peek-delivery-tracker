@@ -26,6 +26,7 @@ import androidx.compose.ui.semantics.SemanticsNode
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.getBoundsInRoot
@@ -51,8 +52,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.api.CarrierData
+import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
@@ -83,6 +87,9 @@ class DeliveryListTest {
     private lateinit var source: FakeDeliveries
     private val views = mutableListOf<String>()
 
+    /** "On the way" as last laid out. */
+    private var heading: TextLayoutResult? = null
+
     /**
      * The deliveries in a window `width` wide, the demo's parcels in `session` unless a test gives its own, at
      * `fontScale`, each card drawn told to `cardComposed`.
@@ -101,7 +108,10 @@ class DeliveryListTest {
             view = LocalView.current
             back = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
             val density = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalCardComposed provides cardComposed) {
+            CompositionLocalProvider(
+                LocalDensity provides Density(density.density, fontScale), LocalCardComposed provides cardComposed,
+                LocalOnTheWayHeading provides { heading = it },
+            ) {
                 Box(Modifier.width(this.width).fillMaxHeight()) {
                     RootHost(state = session, onView = { views += it }, source = source, inbox = inbox)
                 }
@@ -331,6 +341,27 @@ class DeliveryListTest {
         assertPageShows("New trainers")
     }
 
+    /**
+     * A-AX04: at the accessibility sizes "On the way" keeps to its one line, whole, a little smaller where it must
+     * (`.lineLimit(1).minimumScaleFactor(0.75)`).
+     */
+    @Test
+    @Config(qualifiers = "w320dp-h640dp-xhdpi")
+    fun atTheAccessibilitySizesOnTheWayShrinksRatherThanBeCutOff() {
+        show(width = 320.dp, fontScale = 2f)
+        // Where it fits, at its size.
+        val full = PeekTypography(DynamicTypeSize.of(2f), Density(compose.density.density, 2f)).headline.fontSize.value
+        assertEquals(full, checkNotNull(heading).layoutInput.style.fontSize.value, 0.001f)
+        // Narrower, as a window beside another: too narrow for the heading at its size, wide enough at 0.75 of it.
+        resize(250.dp)
+        val layout = checkNotNull(heading)
+        assertEquals("Whole", layout.layoutInput.text.length, layout.getLineEnd(0))
+        assertFalse(layout.isLineEllipsized(0))
+        assertFalse("Clipped: ${layout.multiParagraph.width} in ${layout.size.width}", layout.hasVisualOverflow)
+        val size = layout.layoutInput.style.fontSize.value
+        assertTrue("$size of $full", size < full && size >= full * 0.75f - 0.01f)
+    }
+
     @Test
     fun atTheLargestTextTheBarsTitleStaysAtTheDefaultSize() {
         show(width = 600.dp, fontScale = 2f)
@@ -515,6 +546,26 @@ class DeliveryListTest {
         compose.waitForIdle()
         assertEquals(1, source.refreshes)
         resize(600.dp)
+        compose.onNodeWithTag(REFRESH_BUTTON).assertDoesNotExist()
+    }
+
+    /**
+     * A-AX10: on a phone, the button shows as TalkBack is turned on, as the iPhone's does for VoiceOver, labelled
+     * "Refresh tracking", and goes as it is turned off.
+     */
+    @Test
+    @Config(qualifiers = PHONE)
+    fun onAPhoneTheRefreshButtonShowsForTalkBack() {
+        show(width = 390.dp)
+        compose.onNodeWithTag(REFRESH_BUTTON).assertDoesNotExist()
+        val manager = shadowOf(view.context.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread { manager.setTouchExplorationEnabled(true) }
+        compose.waitForIdle()
+        compose.onNodeWithTag(REFRESH_BUTTON).assertContentDescriptionEquals("Refresh tracking").performClick()
+        compose.waitForIdle()
+        assertEquals(1, source.refreshes)
+        compose.runOnUiThread { manager.setTouchExplorationEnabled(false) }
+        compose.waitForIdle()
         compose.onNodeWithTag(REFRESH_BUTTON).assertDoesNotExist()
     }
 

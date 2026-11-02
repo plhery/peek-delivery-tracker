@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
+import androidx.compose.foundation.text.TextAutoSize
+import androidx.compose.foundation.text.modifiers.TextAutoSizeLayoutScope
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -9,6 +11,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -17,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.LocaleList
 import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -196,6 +200,27 @@ internal fun Modifier.widestLine(lines: TextLines): Modifier = layout { measurab
 
 /** `.italic()`: the font's italic, keeping the upright's letter spacing. */
 fun TextStyle.italic(): TextStyle = copy(fontStyle = FontStyle.Italic)
+
+/**
+ * `.minimumScaleFactor(scale)` of a text of `fontSize`: at its size where it fits whole, else at the largest size down
+ * to `scale` of it, in quarter points, that does. Compose's step-based size alone counts its steps up from the smallest
+ * size, so a text that fits would stand a little smaller than its size.
+ */
+@Immutable
+internal class MinimumScale(private val fontSize: TextUnit, private val scale: Float) : TextAutoSize {
+    private val steps = TextAutoSize.StepBased(minFontSize = fontSize * scale, maxFontSize = fontSize)
+
+    override fun TextAutoSizeLayoutScope.getFontSize(constraints: Constraints, text: AnnotatedString): TextUnit {
+        val scope = this
+        val whole = performLayout(constraints, text, fontSize)
+        val cut = whole.didOverflowWidth || whole.didOverflowHeight || (whole.lineCount > 0 && whole.isLineEllipsized(whole.lineCount - 1))
+        return if (cut) with(steps) { scope.getFontSize(constraints, text) } else fontSize
+    }
+
+    override fun equals(other: Any?): Boolean = other is MinimumScale && other.fontSize == fontSize && other.scale == scale
+
+    override fun hashCode(): Int = 31 * fontSize.hashCode() + scale.hashCode()
+}
 
 /**
  * The letter spacing, in em, that makes Roboto as wide as SF Pro (or SF Pro Rounded) at a point size and weight, so

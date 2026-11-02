@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.TextAutoSize
 import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
@@ -141,6 +142,7 @@ import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
@@ -483,13 +485,18 @@ internal fun OverviewRow(state: DeliveriesState, active: Int, change: ListChange
         // The words and the count take what the buttons leave, the words giving way first.
         Row(Modifier.weight(1f), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
             if (active > 0) {
+                // At the accessibility sizes the heading gets a little smaller rather than break in two.
+                val style = PeekTheme.type.headline
+                val probe = LocalOnTheWayHeading.current
                 Text(
                     localized("app.onTheWaySection"),
                     Modifier.weight(1f, fill = false).semantics { heading() },
                     color = colors.ink,
-                    style = PeekTheme.type.headline,
+                    style = style,
                     maxLines = if (largeText) 1 else Int.MAX_VALUE,
                     overflow = TextOverflow.Ellipsis,
+                    autoSize = if (largeText) MinimumScale(style.fontSize, HEADING_MINIMUM_SCALE) else null,
+                    onTextLayout = { probe?.invoke(it) },
                 )
                 CountPill(active, horizontalPadding = 6.dp, change, Modifier.testTag(ACTIVE_COUNT))
             }
@@ -1181,6 +1188,13 @@ internal fun touchExplorationEnabled(): Boolean {
 }
 
 private val ROW_HEIGHT = 44.dp
+
+/** `minimumScaleFactor(0.75)` of "On the way" at the accessibility sizes. */
+private const val HEADING_MINIMUM_SCALE = 0.75f
+
+/** Told how "On the way" is laid out: the tests check it keeps to one line, whole. */
+internal val LocalOnTheWayHeading = staticCompositionLocalOf<((TextLayoutResult) -> Unit)?> { null }
+
 private val BUTTON_SIDE = 44.dp
 private val CHIP_HEIGHT = 34.dp
 private val ADD_X = 75.5.dp

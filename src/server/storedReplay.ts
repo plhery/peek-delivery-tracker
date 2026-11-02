@@ -11,7 +11,8 @@
  * now gives otherwise, a notice the map says keeps the stage it had, which takes the stage its
  * adapter gave the source's scan before it and is stored as the sync stores it (`scanStages`:
  * pending after the delivery round), and, where the map knows neither, the wording rules for a
- * scan its adapter gave no stage. A notice stored as one
+ * scan its adapter gave no stage. A scan its adapter gave the stage of the scan before it, with no
+ * source of its own, keeps it whatever the map says of its code. A notice stored as one
  * keeps its stage, as do differences that come only from the order of the scans around a row:
  * the next check of the parcel settles those. Peek's own rows and the stage changes it saw without
  * a scan time are left out. It is a dry run: it lists the rows that would change, the open parcels
@@ -181,7 +182,11 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
     let given: JsonObject = { ...(declared ? { stage: declared } : {}), stage_source: scan.raw.stage_source ?? null };
     let reason: StageChange['reason'] | null = null;
     if (answer.kind === 'mapped') {
-      if (answer.stage !== declared) [given, reason] = [{ stage: answer.stage, stage_source: 'carrier_map' }, 'mapped'];
+      // A scan its adapter staged from the scans around it keeps the stage of the scan before it with no source of
+      // its own, as Chronopost's RB keeps a delivery round's or a pickup point's: the map's stage is not its. Pending
+      // is no stage kept: a scan an earlier release could not read, which the map now reads.
+      const kept = scan.raw.stage_source === 'none' && declared !== null && declared !== 'pending' && declared === previous;
+      if (answer.stage !== declared && !kept) [given, reason] = [{ stage: answer.stage, stage_source: 'carrier_map' }, 'mapped'];
     } else if (answer.kind === 'intentional_gap' && KEEPS_STAGE.test(answer.note)) {
       // A notice stored as one kept the stage its adapter saw before it, which the stored rows may not show.
       if (!(declared && scan.raw.stage_source === 'none')) [given, reason] = [{ stage: previous ?? 'registered', stage_source: 'none' }, 'notice'];

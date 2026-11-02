@@ -18,6 +18,22 @@ describe('stored scan replay', () => {
     expect(changes).toEqual([expect.objectContaining({ kind: 'stage', row: 'origin', from: 'in_transit', to: 'accepted', reason: 'mapped', stageSource: 'carrier_map' })]);
   });
 
+  it('leaves a scan its adapter gave the stage of the scan before it, and stages one an earlier release left pending', () => {
+    const kept = replayParcel(parcel(
+      scan('round', 'chronopost', '2026-10-19T08:00:00Z', 'out_for_delivery', 'Colis en cours de livraison', { provider_code: 'TA', stage: 'out_for_delivery' }),
+      scan('drop-off', 'chronopost', '2026-10-19T09:00:00Z', 'out_for_delivery', 'Colis en cours de livraison au point de retrait',
+        { provider_code: 'RB', stage: 'out_for_delivery', stage_source: 'none' }),
+    ));
+    const unread = replayParcel(parcel(
+      scan('label', 'chronopost', '2026-10-18T08:00:00Z', 'pending', 'Unread scan', { stage: 'pending', stage_source: 'none' }),
+      scan('drop-off', 'chronopost', '2026-10-19T09:00:00Z', 'pending', 'Colis en cours de livraison au point de retrait',
+        { provider_code: 'RB', stage: 'pending', stage_source: 'none' }),
+    ));
+
+    expect(kept).toEqual([]);
+    expect(unread).toEqual([expect.objectContaining({ row: 'drop-off', from: 'pending', to: 'in_transit', reason: 'mapped' })]);
+  });
+
   it("gives a notice stored as a scan the stage of its source's scan before it, and leaves one stored as a notice", () => {
     const changes = replayParcel(parcel(
       scan('data', 'dpd-de', '2026-10-18T10:00:00Z', 'registered', 'Order data received', { provider_code: 'DATA', stage: 'registered' }),

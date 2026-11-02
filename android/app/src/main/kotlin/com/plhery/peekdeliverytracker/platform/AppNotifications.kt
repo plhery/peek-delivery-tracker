@@ -113,12 +113,14 @@ class AppNotifications(
 
     /**
      * `removeDeliveredNotifications` for a friend acknowledged (`FriendsStore.acknowledge`): their notification goes,
-     * and the friends' summary with the last of them.
+     * and the friends' summary with the last of them. The system cancels in its own time, so the shade read straight
+     * after may still hold the one just cancelled: it doesn't count.
      */
     fun removeFriend(friendId: UUID) {
-        manager.cancel(friendTag(friendId), ID)
+        val tag = friendTag(friendId)
+        manager.cancel(tag, ID)
         val shown = context.getSystemService(NotificationManager::class.java).activeNotifications
-        if (shown.none { it.tag != FRIENDS_SUMMARY && it.notification.group == FRIENDS_GROUP }) manager.cancel(FRIENDS_SUMMARY, ID)
+        if (shown.none { it.tag != FRIENDS_SUMMARY && it.tag != tag && it.notification.group == FRIENDS_GROUP }) manager.cancel(FRIENDS_SUMMARY, ID)
     }
 
     /**

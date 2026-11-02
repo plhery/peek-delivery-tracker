@@ -132,6 +132,11 @@ class NotificationsDeviceTest {
     /** The app's notifications in the shade, by tag. */
     private fun shade(): Map<String?, StatusBarNotification> = manager.activeNotifications.associateBy { it.tag }
 
+    /** Waits, five seconds at most, for the shade to pass `check`; the assertions after it say what was wrong. */
+    private fun settled(check: (Map<String?, StatusBarNotification>) -> Boolean) {
+        runCatching { compose.waitUntil(5_000) { check(shade()) } }
+    }
+
     private fun text(notification: Notification): String = notification.extras.getCharSequence(Notification.EXTRA_TEXT).toString()
 
     private fun parcelPush(body: String) = mapOf("title" to "Books", "body" to body, "parcel_id" to "$parcel")
@@ -199,6 +204,8 @@ class NotificationsDeviceTest {
         away.post(linkPush())
         away.post(friendPush())
 
+        // The system posts and cancels in its own time: each read waits for the shade to show what was done.
+        settled { it.keys.containsAll(listOf("$parcel", "link-$LINK", "friend-$friend", AppNotifications.FRIENDS_SUMMARY)) }
         val posted = shade()
         val first = posted.getValue("$parcel")
         assertEquals(AppNotifications.ID, first.id)
@@ -221,17 +228,21 @@ class NotificationsDeviceTest {
 
         // A later one for the same parcel takes the first's place.
         away.post(parcelPush("Delivered"))
+        settled { shade -> shade["$parcel"]?.let { text(it.notification) } == "Delivered" }
         assertEquals("Delivered", text(shade().getValue("$parcel").notification))
         assertEquals(3, shade().keys.count { it == "$parcel" || it == "link-$LINK" || it == "friend-$friend" })
 
         // A friend's while the app is on screen: in the shade, without a sound or a banner.
         var refreshed = 0
         AppNotifications(context, onScreen = { true }, friendActivity = { refreshed += 1 }).post(friendPush())
+        settled { it["friend-$friend"]?.notification?.groupAlertBehavior == Notification.GROUP_ALERT_SUMMARY }
+        instrumentation.waitForIdleSync()
         assertEquals(Notification.GROUP_ALERT_SUMMARY, shade().getValue("friend-$friend").notification.groupAlertBehavior)
         assertEquals(1, refreshed)
 
         // Acknowledged, the friend's goes, and only theirs, the summary with the last friend's.
         away.removeFriend(friend)
+        settled { !it.containsKey("friend-$friend") && !it.containsKey(AppNotifications.FRIENDS_SUMMARY) }
         assertFalse(shade().containsKey("friend-$friend"))
         assertFalse(shade().containsKey(AppNotifications.FRIENDS_SUMMARY))
         assertTrue(shade().containsKey("$parcel"))

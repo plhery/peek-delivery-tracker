@@ -316,7 +316,7 @@ and providers scan parcels across every time zone.
 | Other stages (direct adapter) | every 10 min |
 | Served by a universal provider, out for delivery too | every 15 min |
 | PostNL | every 30 min, also after a failure and out for delivery |
-| GLS (DE, CH, FR) | at most hourly, 4 h after a failure, manual refresh included |
+| A carrier whose catalog entry sets a refresh limit (`tracking.refresh`) | no more often than its interval, out for delivery too; when it also sets a wait after a failure, that wait follows a failed check and the limit holds for a manual refresh too |
 | Morning Global | at most hourly, 2 h after a failure, manual refresh included: its lookup refuses a parcel checked every 10 min after about 10 h. Peek sets this until the catalog does ([`trackingSync.ts`](../src/server/trackingSync.ts)) |
 | Registered or accepted, no new event for 12 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | No new event for 48 h (from when it was added) | hourly around the clock; manual refresh still allowed |

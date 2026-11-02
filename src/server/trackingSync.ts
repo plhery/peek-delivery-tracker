@@ -273,15 +273,12 @@ export function isTrackingSyncDue(parcel: JsonObject, now: Date): boolean {
  * nothing holds it back, infinity when it is never checked.
  */
 /**
- * Refresh limits Peek keeps for carriers whose catalog entry sets none: Morning Global's lookup
- * answers 429 for about 1.5 h once a parcel checked every 10 minutes has made some 60 lookups
- * in 10 h. Each DHL Poland lookup solves its history page's reCAPTCHA in the browser service,
- * and frequent solves get its audio challenges blocked, which holds up every carrier there, so
- * it is not checked every 5 minutes out for delivery either. The catalog's own limit, once it
- * sets one, takes over.
+ * Refresh limits Peek keeps for carriers whose catalog entry sets none: each DHL Poland lookup
+ * solves its history page's reCAPTCHA in the browser service, and frequent solves get its audio
+ * challenges blocked, which holds up every carrier there, so it is not checked every 5 minutes
+ * out for delivery either. The catalog's own limit, once it sets one, takes over.
  */
 const REFRESH_LIMITS: Readonly<Record<string, { minMinutes: number; afterFailureMinutes?: number }>> = {
-  'morning-global': { minMinutes: 60, afterFailureMinutes: 120 },
   'dhl-ecommerce-pl': { minMinutes: 60, afterFailureMinutes: 120 },
 };
 

@@ -9,6 +9,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
+import android.os.Process
 import android.util.SizeF
 import android.view.View
 import android.view.ViewGroup
@@ -176,7 +177,7 @@ class WidgetDeviceTest {
     /**
      * At the sizes a launcher gives the widget (C-W10): a phone's two-by-two upright and its three-by-two, then its
      * two-by-two on its side and a tablet's; the demo's cards and words, at the device's text size and at the largest,
-     * WidgetKit's xxxLarge, where the names and status lines shrink before they end.
+     * WidgetKit's xxLarge, where the names and status lines shrink before they end.
      */
     @Test
     fun widgetsAtALaunchersSizes() {
@@ -209,7 +210,7 @@ class WidgetDeviceTest {
         val provider = ComponentName(context, NextDeliveryWidgetReceiver::class.java)
         val preferences = context.getSharedPreferences(BuildSettings.configuration.appGroupIdentifier, Context.MODE_PRIVATE)
         val kept = preferences.all.toMap()
-        shell("appwidget grantbind --package ${context.packageName} --user current")
+        shell("appwidget grantbind --package ${context.packageName} --user $user")
         val host = AppWidgetHost(context, HOST)
         val id = host.allocateAppWidgetId()
         try {
@@ -234,7 +235,7 @@ class WidgetDeviceTest {
             shots.take("bound_small")
 
             val next = ExtensionLocalizer("en").text("app.nextParcel")
-            compose.runOnUiThread { checkNotNull(view.described(next)) { "No next button" }.performClick() }
+            compose.runOnUiThread { checkNotNull(view.described(next)?.tapped(view)) { "No next button" }.performClick() }
             awaitText(view, "Second parcel")
             shots.take("bound_next")
             assertEquals(published[1].id, store.turn(size = "small")?.parcel)
@@ -243,7 +244,7 @@ class WidgetDeviceTest {
             compose.runOnUiThread { host.stopListening() }
             preferences.edit().clear().also { editor -> kept.forEach { (key, value) -> editor.put(key, value) } }.commit()
             DeliveryWidgetUpdates.reload(context)
-            shell("appwidget revokebind --package ${context.packageName} --user current")
+            shell("appwidget revokebind --package ${context.packageName} --user $user")
         }
     }
 
@@ -254,10 +255,20 @@ class WidgetDeviceTest {
         (this is TextView && this.text?.toString() == text) || (this is ViewGroup && (0 until childCount).any { getChildAt(it).shows(text) })
 
     private fun View.described(description: String): View? {
-        if (contentDescription?.toString() == description && isClickable) return this
+        if (contentDescription?.toString() == description) return this
         if (this !is ViewGroup) return null
         return (0 until childCount).firstNotNullOfOrNull { getChildAt(it).described(description) }
     }
+
+    /** What a tap on this view reaches: itself, or the view round it that Glance gives the click to, within `host`. */
+    private fun View.tapped(host: View): View? =
+        generateSequence(this) { (it.parent as? View)?.takeIf { _ -> it !== host } }.firstOrNull { it.isClickable }
+
+    /**
+     * This test's user, as a number: `appwidget`'s `--user current` fails on Android 12 ("User -2 must be unlocked"),
+     * which left the widget unbound there and the test skipped. A uid is its user's id times 100 000 plus the app's.
+     */
+    private val user get() = Process.myUid() / 100_000
 
     @Suppress("UNCHECKED_CAST")
     private fun SharedPreferences.Editor.put(key: String, value: Any?) {

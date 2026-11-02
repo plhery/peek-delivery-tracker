@@ -193,7 +193,7 @@ class WidgetScreenshotTest {
     fun statesDark() = states(dark = true)
 
     /**
-     * At the phone's largest font scale, which is WidgetKit's largest text size for a widget (xxxLarge): the names and
+     * At the phone's largest font scale, which is WidgetKit's largest text size for a widget (xxLarge): the names and
      * status lines shrink to fit, as `minimumScaleFactor` shrinks them, and the last row's long names are shrunk as far
      * as they go and end in an ellipsis.
      */

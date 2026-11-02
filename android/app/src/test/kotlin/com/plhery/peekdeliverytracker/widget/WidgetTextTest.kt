@@ -39,16 +39,21 @@ class WidgetTextTest {
         assertEquals(17f * 2, pixels(type, 17f), 0.01f)
     }
 
-    /** Android's largest text is WidgetKit's largest, xxxLarge, in dp, not Android's own scaling of sp. */
+    /** Android's largest text is WidgetKit's largest, xxLarge, in dp, not Android's own scaling of sp. */
     @Test
     @Config(fontScale = 2.0f)
     fun largestTextStopsAtWidgetKitsLargest() {
         val type = WidgetText(app)
-        assertEquals(DynamicTypeSize.XXXLarge, type.category)
-        assertEquals(23f, type.points(IosTextStyle.Headline))
-        assertEquals(26f, type.points(IosTextStyle.Title3))
-        assertEquals(23f * 2, pixels(type, 23f), 0.01f)
+        assertEquals(DynamicTypeSize.XXLarge, type.category)
+        assertEquals(21f, type.points(IosTextStyle.Headline))
+        assertEquals(24f, type.points(IosTextStyle.Title3))
+        assertEquals(21f * 2, pixels(type, 21f), 0.01f)
     }
+
+    /** xxxLarge (a Pixel's 1.3) is drawn as xxLarge, as WidgetKit draws it. */
+    @Test
+    @Config(fontScale = 1.3f)
+    fun xxxLargeIsDrawnAsXXLarge() = assertEquals(DynamicTypeSize.XXLarge, WidgetText(app).category)
 
     @Test
     @Config(fontScale = 1.15f)
@@ -58,10 +63,15 @@ class WidgetTextTest {
         assertEquals(19f * 2, pixels(type, type.points(IosTextStyle.Headline)), 0.01f)
     }
 
-    /** Smaller text than the default is the default, as a widget's is. */
+    /** Android's smallest text (xSmall) is drawn as Medium, WidgetKit's smallest. */
     @Test
     @Config(fontScale = 0.85f)
-    fun smallerTextIsTheDefault() = assertEquals(DynamicTypeSize.Large, WidgetText(app).category)
+    fun smallerTextStopsAtWidgetKitsSmallest() {
+        val type = WidgetText(app)
+        assertEquals(DynamicTypeSize.Medium, type.category)
+        assertEquals(16f, type.points(IosTextStyle.Headline))
+        assertEquals(14f, type.points(IosTextStyle.Subheadline))
+    }
 
     /**
      * `minimumScaleFactor`: a line that fits is left as it is; one that doesn't shrinks in steps until it fits, as

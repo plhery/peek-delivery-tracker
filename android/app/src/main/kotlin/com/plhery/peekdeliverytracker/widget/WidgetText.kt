@@ -96,11 +96,11 @@ internal class WidgetText(context: Context) {
 
     companion object {
         /**
-         * The categories WidgetKit draws a Home Screen widget's text at. Apple's guidelines give Large to
-         * accessibility5; iOS 27's simulator drew its widgets no larger than xxxLarge, which holds until the iPad
-         * simulator's measurement says otherwise. The one place to change.
+         * The categories WidgetKit draws a Home Screen widget's text at, as iOS 27 draws Peek's widgets: the same at
+         * xSmall, Small and Medium, and the same at xxLarge, xxxLarge and every accessibility size, so held within
+         * Medium to xxLarge. The one place to change.
          */
-        val sizes: ClosedRange<DynamicTypeSize> = DynamicTypeSize.Large..DynamicTypeSize.XXXLarge
+        val sizes: ClosedRange<DynamicTypeSize> = DynamicTypeSize.Medium..DynamicTypeSize.XXLarge
 
         private const val STEP = 0.02f
         private val weights = mapOf(FontWeight.Normal to 400, FontWeight.Medium to 500, FontWeight.Bold to 700)

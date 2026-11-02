@@ -713,13 +713,16 @@ class PageWork {
  * What reaches a window's deliveries from outside the list: a parcel a link asked for (`.onOpenURL`'s
  * `parcel/<uuid>`), which the list shows and then takes. Each window has its own ([of]), as each iPhone scene follows
  * its own links, so the window the link came to opens it. The tabs bring the deliveries forward while one waits.
+ * A friend a link asked for (`friend/<uuid>`) waits here too, for the window's root to take ([friend]).
  */
 class DeliveriesInbox(
     parcel: UUID? = null,
     private val parcelLink: (String) -> Boolean = { false },
     private val sharedDrafts: () -> SharedParcelDraft? = { null },
+    friend: UUID? = null,
 ) {
     private val parcelState = MutableStateFlow(parcel)
+    private val friendState = MutableStateFlow(friend)
     private val linkAddedState = MutableStateFlow<LinkAdded?>(null)
 
     /** The parcel waiting to be shown. */
@@ -733,6 +736,14 @@ class DeliveriesInbox(
     /** The list has shown the parcel. */
     fun consume(parcelId: UUID) {
         parcelState.compareAndSet(parcelId, null)
+    }
+
+    /** The friend a link asked to reveal, which the window's root reveals while someone is signed in, and then takes. */
+    val friend: StateFlow<UUID?> = friendState.asStateFlow()
+
+    /** The window's root has taken the friend. */
+    fun consumeFriend(friendId: UUID) {
+        friendState.compareAndSet(friendId, null)
     }
 
     /** A parcel kept or followed from its link, which the list receives as one just added (`Arrival.added`). */
@@ -750,8 +761,9 @@ class DeliveriesInbox(
 
     /**
      * `.onOpenURL` (A-L02, A-L14), in `open(_:)`'s order: a parcel's link first, which [parcelLink] opens in its sheet,
-     * then `peekdeliverytracker://parcel/<uuid>`, which opens the parcel on the deliveries. The app's parcel links come
-     * by ParcelLinkActivity, which keeps them out of the window's intent; one sent to the window itself comes here.
+     * then `peekdeliverytracker://parcel/<uuid>`, which opens the parcel on the deliveries, then
+     * `peekdeliverytracker://friend/<uuid>`, the friend to reveal ([friend]). The app's parcel links come by
+     * ParcelLinkActivity, which keeps them out of the window's intent; one sent to the window itself comes here.
      */
     fun follow(intent: Intent?) {
         if (intent?.action != Intent.ACTION_VIEW) return
@@ -759,7 +771,8 @@ class DeliveriesInbox(
         if (parcelLink(url)) return
         when (val route = NativeRoute(url)) {
             is NativeRoute.Parcel -> open(route.id)
-            // The friends, Add and the links' notifications come with their screens.
+            is NativeRoute.Friend -> friendState.value = route.id
+            // Add and the links' notifications come with their screens.
             else -> Unit
         }
     }
@@ -776,15 +789,17 @@ class DeliveriesInbox(
     companion object {
         private const val SAVED = "deliveries.inbox"
         private const val PARCEL = "parcel"
+        private const val FRIEND = "friend"
 
         /**
          * The window's inbox, after its `super.onCreate`: it follows the link that started the window, and each link
          * that comes to it after, a parcel's link through [parcelLink], once each, as the iPhone hears a link once.
-         * Made again, the window finds the parcel still waiting, and doesn't follow the link that started it again once
-         * its list has shown it. Nor does a window that Recents starts again with the link that began its task, after
-         * the process or the phone restarted: the system keeps that link as the task's own and hands it over again
-         * (`FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY`). The window's intent forgets the link once it has been read, and with
-         * it any owner key it carried. What another app shared comes from [sharedDrafts], which takes it away.
+         * Made again, the window finds the parcel (or the friend) still waiting, and doesn't follow the link that
+         * started it again once its list has shown it. Nor does a window that Recents starts again with the link that
+         * began its task, after the process or the phone restarted: the system keeps that link as the task's own and
+         * hands it over again (`FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY`). The window's intent forgets the link once it has
+         * been read, and with it any owner key it carried. What another app shared comes from [sharedDrafts], which
+         * takes it away.
          */
         fun of(
             activity: ComponentActivity,
@@ -793,8 +808,15 @@ class DeliveriesInbox(
         ): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
-            val inbox = DeliveriesInbox(saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts)
-            registry.registerSavedStateProvider(SAVED) { Bundle().apply { putString(PARCEL, inbox.parcel.value?.toString()) } }
+            val inbox = DeliveriesInbox(
+                saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts, saved?.getString(FRIEND)?.let(UUID::fromString),
+            )
+            registry.registerSavedStateProvider(SAVED) {
+                Bundle().apply {
+                    putString(PARCEL, inbox.parcel.value?.toString())
+                    putString(FRIEND, inbox.friend.value?.toString())
+                }
+            }
             val intent = activity.intent
             if (saved == null && intent != null && intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY == 0) inbox.follow(intent)
             if (intent?.data != null) activity.intent = Intent(intent).setData(null)

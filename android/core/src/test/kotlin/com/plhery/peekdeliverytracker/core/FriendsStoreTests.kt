@@ -187,13 +187,31 @@ class FriendsStoreTests {
         assertTrue(store.snapshot!!.friends.isEmpty())
         assertNull(store.snapshot?.ownCard)
         assertFalse(store.working)
-        // The demo keeps its changes until it is left; back in it, it starts again.
-        store.load(emptyList())
-        assertTrue(store.snapshot!!.friends.isEmpty())
-        store.configure(demo = false)
+        // Shown again (the tab chosen again, which configures it again), the demo keeps its changes.
+        store.clear()
         store.configure(demo = true)
         store.load(emptyList())
-        assertEquals(3, store.snapshot?.friends?.size)
+        assertTrue(store.snapshot!!.friends.isEmpty())
+        assertTrue(client.actions.isEmpty())
+    }
+
+    @Test
+    fun leavingTheDemoForgetsWhatItsActionsChanged() = runTest {
+        val client = FakeClient()
+        val store = FriendsStore(client)
+        store.configure(demo = true)
+        store.load(emptyList())
+        val samId = store.snapshot!!.friends.last().id
+        store.act(FriendsActionRequest(FriendsAction.RemoveFriend, friendId = samId), emptyList())
+        store.act(FriendsActionRequest(FriendsAction.SaveProfile, nickname = "Robin", shareStats = false, shareArrival = true), emptyList())
+        assertEquals(listOf("Mila", "Noé"), store.snapshot?.friends?.map { it.nickname })
+        // Out of the demo to the first screen, and back into it: FriendsDemo.json as it was.
+        store.clear()
+        store.leaveDemo()
+        store.configure(demo = true)
+        store.load(emptyList())
+        assertEquals(listOf("Mila", "Noé", "Sam"), store.snapshot?.friends?.map { it.nickname })
+        assertEquals(FriendProfile("Alex", shareStats = true, shareArrival = false), store.snapshot?.profile)
         assertTrue(client.actions.isEmpty())
     }
 

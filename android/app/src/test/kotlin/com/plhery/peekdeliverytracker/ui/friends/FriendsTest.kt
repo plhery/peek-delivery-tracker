@@ -2,8 +2,12 @@ package com.plhery.peekdeliverytracker.ui.friends
 
 import android.content.ClipboardManager
 import android.content.Intent
+import android.net.Uri
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
@@ -51,6 +55,8 @@ import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
@@ -74,10 +80,12 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The friends tab (A-S20, C-S19 to C-S21, C-S23 to C-S28, C-S32) on made-up friends: signed out; loading, failing and
- * retried, without a profile, with no friend, one and four, a revealed friend first or gone; the pull, the reload each
- * 60 s and the clear as the tab or the app goes; the colour from the id; the profile's form, the panels' titles, Close,
- * detents and no dismissal while working; the account's invitation (made once, retried, shared, copied, cancelled, the
- * previous ones cancelled) and the demo's; the layouts by text size and window; what TalkBack reads; the analytics.
+ * retried, without a profile, with no friend, one and four, a revealed friend first or gone; a friend's link; the pull,
+ * the reload each 60 s and the clear as the tab or the app goes, but for the app the invitation is shared to; the
+ * colour from the id; the demo's changes, kept across tabs and forgotten once it is left; the profile's form, the
+ * panels' titles, Close, detents and no dismissal while working; the account's invitation (made once, retried, shared,
+ * copied, cancelled, the previous ones cancelled) and the demo's; the layouts by text size and window; what TalkBack
+ * reads; the analytics.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -100,26 +108,49 @@ class FriendsTest {
         override val lifecycle: Lifecycle get() = registry
     }
 
-    /** The friends tab of [session], its friends as [friends] sets them, chosen from the tab bar unless [choose] is false. */
+    /** The session shown, which a test changes as the app's would ([switch]). */
+    private var shownSession by mutableStateOf<AuthenticationState>(reader)
+
+    /**
+     * The friends tab of [session], its friends as [friends] sets them, chosen from the tab bar unless [choose] is false;
+     * the window's links come through [inbox].
+     */
     private fun show(
         session: AuthenticationState = reader,
         parcels: List<Parcel> = DemoCards.parcels(),
         fontScale: Float = 1f,
         choose: Boolean = true,
+        inbox: DeliveriesInbox? = null,
         friends: FakeFriendsClient.() -> Unit = {},
     ) {
+        shownSession = session
         source = FakeDeliveries(parcels, session)
         client.friends()
         compose.waitsForMaps()
         compose.setContent {
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalLifecycleOwner provides owner) {
-                RootHost(state = session, dark = false, onView = { views += it }, source = source)
+                RootHost(state = shownSession, dark = false, onView = { views += it }, source = source, inbox = inbox)
             }
         }
         settle()
         if (choose) choose("Friends")
     }
+
+    /** The session changed to [state], as the app's store changes it. */
+    private fun switch(state: AuthenticationState) {
+        compose.runOnUiThread { shownSession = state }
+        settle()
+    }
+
+    /** The window's lifecycle moved to [state]: stopped (CREATED), paused (STARTED) or in front again (RESUMED). */
+    private fun lifecycle(state: Lifecycle.State) {
+        compose.runOnUiThread { owner.registry.currentState = state }
+        settle()
+    }
+
+    /** A link to the app's window, `peekdeliverytracker://friend/<id>`. */
+    private fun friendLink(id: UUID) = Intent(Intent.ACTION_VIEW, Uri.parse("peekdeliverytracker://friend/$id"))
 
     private fun choose(label: String) {
         compose.onNode(hasContentDescription(label) and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)).performClick()
@@ -205,6 +236,9 @@ class FriendsTest {
     private fun actions(name: String): List<DeliveryAnalytics.Outcome?> = source.actions.indices.filter { source.actions[it] == name }.map { source.outcomes[it] }
 
     private fun requests(action: FriendsAction): List<FriendsActionRequest> = client.requests.filter { it.action == action }
+
+    /** Someone just accepted an invitation: in no circle the service has answered yet. */
+    private val newcomer = UUID.fromString("99000000-0000-4000-8000-000000000099")
 
     private fun panelTop(): Float = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot().top.value
 
@@ -338,6 +372,76 @@ class FriendsTest {
     }
 
     @Test
+    fun aLoadCalledOffAsItAnswersChecksNoNewerPresentation() {
+        show()
+        val late = CompletableDeferred<Unit>()
+        client.answersWhenCalledOff = true
+        client.loading = late
+        compose.mainClock.advanceTimeBy(60_000)
+        compose.waitForIdle()
+        assertEquals(2, client.loads)
+        // A newcomer revealed while the minute's load waits: it is called off, and the new presentation's load waits.
+        client.loading = CompletableDeferred()
+        compose.runOnUiThread { source.friendsActivity.reveal(newcomer) }
+        settle()
+        assertEquals(3, client.loads)
+        assertFalse(exists(FRIENDS_UNAVAILABLE_FRIEND))
+        // The answer for the presentation before says nothing of the newcomer, who isn't in that circle yet.
+        late.complete(Unit)
+        settle()
+        assertFalse(exists(FRIENDS_UNAVAILABLE_FRIEND))
+        assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
+    }
+
+    // A friend's link (`open(_:)`'s `.friend` route).
+
+    @Test
+    fun aFriendsLinkSignedInRevealsThemOnTheFriendsTab() {
+        val inbox = DeliveriesInbox()
+        show(choose = false, inbox = inbox)
+        assertFalse(exists(PeekTab.Friends.screen))
+        compose.runOnUiThread { inbox.follow(friendLink(FriendFixtures.cy.id)) }
+        settle()
+        assertTrue(exists(PeekTab.Friends.screen))
+        assertEquals(FriendFixtures.cy.id, source.friendsActivity.focusId)
+        assertEquals(listOf("Cy", "Ada", "Bo", "Di"), cards())
+        assertNull(inbox.friend.value)
+    }
+
+    @Test
+    fun aFriendsLinkThatStartsTheWindowRevealsThemToo() {
+        val inbox = DeliveriesInbox()
+        inbox.follow(friendLink(FriendFixtures.bo.id))
+        show(choose = false, inbox = inbox)
+        assertTrue(exists(PeekTab.Friends.screen))
+        assertEquals(FriendFixtures.bo.id, source.friendsActivity.focusId)
+        assertEquals(listOf("Bo", "Ada", "Cy", "Di"), cards())
+    }
+
+    @Test
+    fun aFriendsLinkDoesNothingForAGuest() {
+        followsNothing(AuthenticationState.Welcome)
+    }
+
+    @Test
+    fun aFriendsLinkDoesNothingInTheDemo() {
+        followsNothing(AuthenticationState.Demo)
+    }
+
+    /** A friend's link to the window of [state] is taken and does nothing: no friend revealed, no tab chosen. */
+    private fun followsNothing(state: AuthenticationState) {
+        val inbox = DeliveriesInbox()
+        show(state, choose = false, inbox = inbox)
+        val presentation = source.friendsActivity.presentationId
+        compose.runOnUiThread { inbox.follow(friendLink(FriendFixtures.cy.id)) }
+        settle()
+        assertNull(inbox.friend.value)
+        assertFalse(exists(PeekTab.Friends.screen))
+        assertNull(source.friendsActivity.focusId)
+        assertEquals(presentation, source.friendsActivity.presentationId)
+    }
+
+    @Test
     fun aCardOpensTheFriendsPageCountedAndTheBackClosesIt() {
         show()
         tap(friendCardTag(FriendFixtures.bo.id))
@@ -465,6 +569,46 @@ class FriendsTest {
         assertNull(panel())
         assertEquals(FriendProfile("Alexa", shareStats = true, shareArrival = true), source.friends.snapshotFlow.value?.profile)
         assertTrue(client.requests.isEmpty())
+    }
+
+    @Test
+    fun theDemosChangesOutlastATripToThePassport() {
+        show(AuthenticationState.Demo)
+        changeTheDemo()
+        choose("Passport")
+        choose("Friends")
+        assertEquals(listOf("Mila", "Noé"), cards())
+        assertEquals(FriendProfile("Alex", shareStats = false, shareArrival = false), source.friends.snapshotFlow.value?.profile)
+    }
+
+    @Test
+    fun leavingTheDemoForgetsItsChangesAndItsCircleComesBackAfresh() {
+        show(AuthenticationState.Demo)
+        changeTheDemo()
+        press(DEMO_EXIT)
+        assertEquals(1, source.welcomes)
+        switch(AuthenticationState.Welcome)
+        assertFalse(exists(FRIENDS_SHARING))
+        switch(AuthenticationState.Demo)
+        assertEquals(listOf("Mila", "Noé", "Sam"), cards())
+        assertEquals(FriendProfile("Alex", shareStats = true, shareArrival = false), source.friends.snapshotFlow.value?.profile)
+        assertEquals(0, client.loads)
+        assertTrue(client.requests.isEmpty())
+    }
+
+    /** In the demo: the stats no longer shared, from the profile's panel, and Sam removed, as their page will (part B). */
+    private fun changeTheDemo() {
+        tap(FRIENDS_SHARING)
+        flip(FRIENDS_SHARE_STATS)
+        tap(FRIENDS_SAVE)
+        assertNull(panel())
+        val sam = UUID.fromString("33000000-0000-4000-8000-000000000003")
+        compose.runOnUiThread {
+            source.scope.launch { source.friends.act(FriendsActionRequest(FriendsAction.RemoveFriend, friendId = sam), source.parcels.value) }
+        }
+        settle()
+        assertEquals(listOf("Mila", "Noé"), cards())
+        assertEquals(FriendProfile("Alex", shareStats = false, shareArrival = false), source.friends.snapshotFlow.value?.profile)
     }
 
     // The profile's form (C-S23, C-S24).
@@ -633,6 +777,47 @@ class FriendsTest {
         compose.mainClock.advanceTimeBy(5_000)
         compose.waitForIdle()
         assertEquals(listOf(text("friends.copied")), words(FRIENDS_COPY))
+    }
+
+    @Test
+    fun theAppTheLinkIsSharedToKeepsThePanelItsLinkAndTheCircle() {
+        show()
+        tap(FRIENDS_INVITE)
+        tap(FRIENDS_SHARE)
+        assertEquals(Intent.ACTION_CHOOSER, shadowOf(compose.activity).nextStartedActivity?.action)
+        // The share sheet pauses the window; the app picked there stops it.
+        lifecycle(Lifecycle.State.STARTED)
+        lifecycle(Lifecycle.State.CREATED)
+        assertEquals(text("friends.inviteTitle"), panel())
+        assertEquals(link, words(FRIENDS_INVITATION_URL).single())
+        assertEquals(4, source.friends.snapshotFlow.value?.friends?.size)
+        // Back from it: the same link, and the circle loaded again as the window starts.
+        lifecycle(Lifecycle.State.RESUMED)
+        assertEquals(text("friends.inviteTitle"), panel())
+        assertEquals(link, words(FRIENDS_INVITATION_URL).single())
+        assertEquals(1, requests(FriendsAction.CreateInvite).size)
+        assertEquals(2, client.loads)
+        // Any other stop, with no Share before it, closes the panel and clears the circle.
+        lifecycle(Lifecycle.State.CREATED)
+        assertNull(panel())
+        assertNull(source.friends.snapshotFlow.value)
+        lifecycle(Lifecycle.State.RESUMED)
+        assertNull(panel())
+        assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
+    }
+
+    @Test
+    fun aShareSheetLeftWithoutSharingLeavesTheNextStopAsAnyOther() {
+        show()
+        tap(FRIENDS_INVITE)
+        tap(FRIENDS_SHARE)
+        // The sheet closed with nothing picked: the window comes back without having stopped.
+        lifecycle(Lifecycle.State.STARTED)
+        lifecycle(Lifecycle.State.RESUMED)
+        assertEquals(text("friends.inviteTitle"), panel())
+        lifecycle(Lifecycle.State.CREATED)
+        assertNull(panel())
+        assertNull(source.friends.snapshotFlow.value)
     }
 
     @Test

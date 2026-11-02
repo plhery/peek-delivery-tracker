@@ -86,16 +86,23 @@ class FriendsStore(private val client: FriendsClient) {
     }
 
     /**
-     * `configure(session:)`: the demo's circle is FriendsDemo.json, read once. Leaving the demo forgets what its actions
-     * changed, as the iPhone's tab makes its store anew on the way back through the first screen.
+     * `configure(session:)`: the demo's circle or the account's. The demo's is FriendsDemo.json, read as it first shows
+     * and kept, with what its actions change, until the session leaves the demo ([leaveDemo]).
      */
     fun configure(demo: Boolean) {
         this.demo = demo
-        if (!demo) {
-            local = null
-        } else if (local == null) {
+        if (demo && local == null) {
             local = runCatching { ApiJson.decodeFromString(FriendsSnapshot.serializer(), SharedResources.text(DEMO_RESOURCE)) }.getOrNull()
         }
+    }
+
+    /**
+     * The session has left the demo: what the demo's actions changed is forgotten, and its circle is FriendsDemo.json
+     * afresh once it comes back, as the iPhone's tab makes its store (`@StateObject`) anew on the way back through the
+     * first screen. The app's root calls it, not the tab, which Android disposes as another tab is chosen.
+     */
+    fun leaveDemo() {
+        local = null
     }
 
     /** `load(parcels:)`: the circle afresh, the demo's with its own card from [parcels]; none and an error if it fails. */

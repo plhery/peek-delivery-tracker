@@ -53,7 +53,9 @@ import com.plhery.peekdeliverytracker.ui.deliveries.covers
 import com.plhery.peekdeliverytracker.ui.deliveries.rememberFirstOpen
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
+import com.plhery.peekdeliverytracker.ui.friends.FriendLinkEffects
 import com.plhery.peekdeliverytracker.ui.friends.FriendsActivityEffects
+import com.plhery.peekdeliverytracker.ui.friends.FriendsDemoEffects
 import com.plhery.peekdeliverytracker.ui.friends.FriendsTab
 import com.plhery.peekdeliverytracker.ui.passport.PassportTab
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
@@ -106,7 +108,8 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * What the tabs present after it, an alert or the browser check, comes over it there, in the order they came, so the
  * back closes what is on top. Once it closes on a parcel to open, or on one just added or followed, the deliveries
  * come forward and take it ([inbox]).
- * A link kept for after sign-in opens again once someone is signed in (B-L03).
+ * A link kept for after sign-in opens again once someone is signed in (B-L03). A friend's link in [inbox] reveals them
+ * on the friends tab while someone is signed in.
  *
  * With the deliveries' [source], the first open stands over the tabs and their bar, whichever is chosen, for a guest
  * with nothing followed (TabsView's `showsFirstOpen`), from the first frame: the tab chosen stays as it was until the
@@ -138,7 +141,11 @@ internal fun PeekRoot(
             if (user != null) source.links.resume()
         }
     }
-    if (source != null) FriendsActivityEffects(source, state) { tab = PeekTab.Friends.ordinal }
+    if (source != null) {
+        FriendsActivityEffects(source, state) { tab = PeekTab.Friends.ordinal }
+        FriendLinkEffects(source, inbox)
+        FriendsDemoEffects(source, state)
+    }
     // `.onChange(of: links.arrival)`: the sheet has gone on a parcel the list now shows.
     LaunchedEffect(links) {
         val store = links?.links ?: return@LaunchedEffect

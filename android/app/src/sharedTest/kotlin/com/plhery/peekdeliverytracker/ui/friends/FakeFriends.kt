@@ -12,18 +12,21 @@ import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
 import com.plhery.peekdeliverytracker.core.api.FriendsActivity
 import com.plhery.peekdeliverytracker.core.api.FriendsSnapshot
 import java.util.UUID
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CompletableDeferred
 
 /**
  * The account's friends as a test sets them: the circle each load answers ([snapshot], or [failure]), held until
- * [loading] lets it go when a test holds it; each action answered by [answer] (by default a new invitation, or the
- * circle as it was), held by [acting], or failing with [actionFailure]; and what was asked, in order ([requests]).
- * Nothing leaves the test.
+ * [loading] lets it go when a test holds it (and then answered even once the load is called off, where
+ * [answersWhenCalledOff]); each action answered by [answer] (by default a new invitation, or the circle as it was),
+ * held by [acting], or failing with [actionFailure]; and what was asked, in order ([requests]). Nothing leaves the test.
  */
 class FakeFriendsClient : FriendsClient {
     var snapshot: FriendsSnapshot = FriendFixtures.circle()
     var failure: Exception? = null
     var loading: CompletableDeferred<Unit>? = null
+    var answersWhenCalledOff = false
     var loads = 0
         private set
 
@@ -47,7 +50,13 @@ class FakeFriendsClient : FriendsClient {
 
     override suspend fun snapshot(): FriendsSnapshot {
         loads++
-        loading?.await()
+        val held = loading
+        if (held != null && answersWhenCalledOff) {
+            // As an answer already on its way: the load called off still receives it.
+            suspendCoroutine { answered -> held.invokeOnCompletion { answered.resume(Unit) } }
+        } else {
+            held?.await()
+        }
         failure?.let { throw it }
         return snapshot
     }

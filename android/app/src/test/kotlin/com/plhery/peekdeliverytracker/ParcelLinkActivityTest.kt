@@ -126,6 +126,7 @@ class ParcelLinkActivityTest {
         for (host in setOf(site) + configuration.linkHosts) assertEquals(host, trampoline, takers("https://$host/p/$id"))
         assertEquals(trampoline, takers("peekdeliverytracker://p/$id"))
         assertEquals(listOf(MainActivity::class.java.name), takers("peekdeliverytracker://parcel/${DemoCards.parcel("Kind of Blue").id}"))
+        assertEquals(listOf(MainActivity::class.java.name), takers("peekdeliverytracker://friend/11000000-0000-4000-8000-000000000001"))
         assertEquals(emptyList<String>(), takers("https://$site/privacy.html"))
         assertEquals(emptyList<String>(), takers("https://elsewhere.example/p/$id"))
     }

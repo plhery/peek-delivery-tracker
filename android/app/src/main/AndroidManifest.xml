@@ -44,13 +44,15 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- The app's own link to one of the deliveries: peekdeliverytracker://parcel/<uuid>. -->
+            <!-- The app's own links to one of the deliveries, peekdeliverytracker://parcel/<uuid>, and to a friend,
+                 peekdeliverytracker://friend/<uuid>. -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="peekdeliverytracker" />
                 <data android:host="parcel" />
+                <data android:host="friend" />
             </intent-filter>
         </activity>
 

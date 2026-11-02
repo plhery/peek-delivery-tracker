@@ -472,6 +472,7 @@ internal fun ProminentButton(
  * counted, "friends.copied" with a check from then on), the previous links cancelled where they were, a divider and
  * "friends.manageLinks", which opens on cancelling this link (closing the panel once done, [completed]) and the
  * previous ones with their count. It asks for one invitation as it first shows ([act]); all of it is off while [busy].
+ * [sharing] hears the link go to the share sheet.
  */
 @Composable
 internal fun FriendsInvitationView(
@@ -481,6 +482,7 @@ internal fun FriendsInvitationView(
     invitation: InvitationState,
     act: suspend (FriendsActionRequest) -> FriendsActionResponse?,
     completed: () -> Unit,
+    sharing: () -> Unit,
 ) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -538,6 +540,7 @@ internal fun FriendsInvitationView(
                 val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, link)
                 try {
                     context.startActivity(Intent.createChooser(send, null))
+                    sharing()
                 } catch (_: ActivityNotFoundException) {
                 }
             }

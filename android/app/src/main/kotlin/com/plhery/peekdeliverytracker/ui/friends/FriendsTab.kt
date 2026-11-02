@@ -75,6 +75,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.AccountBar
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcement
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcements
 import com.plhery.peekdeliverytracker.ui.deliveries.BAR_HEIGHT
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesSource
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoModeBar
 import com.plhery.peekdeliverytracker.ui.deliveries.ListPull
@@ -123,7 +124,8 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.text.NumberFormat
 import java.util.UUID
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 
 // FriendsView.swift's `FriendsView` (C-S19 to C-S28) and FirstOpenView.swift's `FriendsSignedOutView` (A-S20): the
@@ -173,6 +175,13 @@ internal class FriendsState(
     val invitation = InvitationState(invitationValue)
 
     var checkedPresentation: UUID? by mutableStateOf(null)
+
+    /**
+     * The invitation's link handed to the share sheet: the app the reader picks there stops the window, which keeps the
+     * panel, its link and the circle through that stop, as the iPhone's share sheet stands over a scene that stays
+     * active. Forgotten as the window is next resumed, whether the reader shared or left the sheet.
+     */
+    var sharing = false
 
     var announcement: Announcement? by mutableStateOf(null)
         private set
@@ -356,7 +365,8 @@ private fun Intro(title: String, tag: String, action: () -> Unit) {
  * longer in the circle, the circle ([Circle]) or the intro without a profile, which opens the profile's panel; without
  * a circle, Retry where it failed, else the spinner. In by 20, 18 apart. A pull from its top loads it again, its
  * spinner in the gap the pull opens (`.refreshable`). It loads as it shows, then every 60 s while it shows and the app
- * is in front, and is cleared, its panel and page closed, as it goes or the app leaves the foreground.
+ * is in front, and is cleared, its panel and page closed, as it goes or the app leaves the foreground, but for the app
+ * the invitation's Share hands its link to.
  */
 @Composable
 private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top: Dp, bottom: Dp, start: Dp, end: Dp, asForm: Boolean) {
@@ -370,7 +380,8 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
     val presentation by activity.presentationIdFlow.collectAsState()
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.STARTED)
+    val lifecycle = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value
+    val active = lifecycle.isAtLeast(Lifecycle.State.STARTED)
     val window = LocalActivity.current
     // `onAppear`: the demo's circle or the account's, and the circle an accepted invitation answered with at once.
     LaunchedEffect(demo) {
@@ -386,18 +397,27 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
             }
         }
     }
-    // `.task(id: active ? presentationID : "hidden")`.
-    LaunchedEffect(active, if (active) presentation else null) {
+    // `.task(id: active ? presentationID : "hidden")`, but for the stop the invitation's Share brings
+    // ([FriendsState.sharing]).
+    val shown = if (active) presentation else null
+    LaunchedEffect(active, shown) {
         if (!active) {
+            if (state.sharing) return@LaunchedEffect
             state.hide()
             store.clear()
             return@LaunchedEffect
         }
         while (true) {
             store.load(source.parcels.value)
-            state.checkedPresentation = activity.presentationId
+            // `guard !Task.isCancelled`: a load called off as it answered checks nothing, nor for a newer presentation.
+            ensureActive()
+            state.checkedPresentation = shown
             delay(RELOAD_MILLIS)
         }
+    }
+    val resumed = lifecycle.isAtLeast(Lifecycle.State.RESUMED)
+    LaunchedEffect(resumed) {
+        if (resumed) state.sharing = false
     }
     // `.onChange(of: model.snapshot)`: a friend no longer in the circle closes their page.
     LaunchedEffect(snapshot) {
@@ -702,6 +722,7 @@ private fun PanelContent(state: FriendsState, panel: FriendsPanel, snapshot: Fri
                 source, nickname, working, state.invitation,
                 act = { store.act(it, source.parcels.value) },
                 completed = state::closePanel,
+                sharing = { state.sharing = true },
             )
         }
     }
@@ -772,8 +793,41 @@ internal fun FriendsActivityEffects(source: DeliveriesSource, session: Authentic
         }
     }
     val choose by rememberUpdatedState(chooseFriends)
+    // `.onChange(of: friendsActivity.presentationID)`: a presentation other than the one the window first showed,
+    // whichever effect revealed it first.
+    val shown = remember(activity) { activity.presentationId }
     LaunchedEffect(activity) {
-        activity.presentationIdFlow.drop(1).collect { if (activity.focusId != null) choose() }
+        activity.presentationIdFlow.collect { if (it != shown && activity.focusId != null) choose() }
+    }
+}
+
+/**
+ * `open(_:)`'s `.friend` route: a friend a link to this window asked for ([DeliveriesInbox.friend]) is revealed while
+ * someone is signed in (`session.user != nil`), which chooses the friends tab ([FriendsActivityEffects]); a guest, the
+ * demo or the sign-in, as the launch screen while the session is read, take it and do nothing with it.
+ */
+@Composable
+internal fun FriendLinkEffects(source: DeliveriesSource, inbox: DeliveriesInbox?) {
+    LaunchedEffect(source, inbox) {
+        inbox?.friend?.filterNotNull()?.collect { friendId ->
+            inbox.consumeFriend(friendId)
+            if (source.session.value is AuthenticationState.SignedIn) source.friendsActivity.reveal(friendId)
+        }
+    }
+}
+
+/**
+ * The demo's circle as the iPhone makes it: ParcelListView makes FriendsView, and its store (`@StateObject`), anew as
+ * the tab comes back out of the first screen, so the session leaving the demo forgets what the demo's actions changed
+ * and the demo shows FriendsDemo.json afresh once it comes back. Watched from the window's root rather than the tab,
+ * which Android disposes as another tab is chosen while the iPhone's lives on: a change made in the demo outlasts a trip
+ * to the passport and back.
+ */
+@Composable
+internal fun FriendsDemoEffects(source: DeliveriesSource, session: AuthenticationState) {
+    val demo = session == AuthenticationState.Demo
+    LaunchedEffect(source, demo) {
+        if (!demo) source.friends.leaveDemo()
     }
 }
 

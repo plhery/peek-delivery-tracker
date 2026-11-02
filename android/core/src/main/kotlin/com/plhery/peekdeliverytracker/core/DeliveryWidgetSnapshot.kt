@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
+import java.io.File
 import java.time.Instant
 import java.util.UUID
 import kotlinx.serialization.KSerializer
@@ -13,8 +14,8 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-// From DeliveryWidgetSnapshot.swift: what the store publishes for the widget, and what the parcel logic and its tests
-// use. The card's pictures and the deep link are the widget's, and come with its port.
+// From DeliveryWidgetSnapshot.swift: what the store publishes for the widget, the pictures of its cards, the sample its
+// gallery shows, and which parcels a widget shows (with DeliveryWidget.swift's provider: its entry and its timeline).
 
 @Serializable
 data class DeliveryWidgetParcel(
@@ -26,7 +27,72 @@ data class DeliveryWidgetParcel(
     val isOutForDelivery: Boolean,
     /** When a delivered parcel arrived: the widget keeps it for a day after. */
     @Serializable(with = ReferenceDateSerializer::class) val deliveredAt: Instant? = null,
+    /** The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone. */
+    val card: DeliveryWidgetCard? = null,
+) {
+    /** `deepLink`: the parcel on the deliveries, as the app's routing opens it (NativeRoute). */
+    val deepLink: String get() = "peekdeliverytracker://parcel/${id.uuidString}"
+}
+
+/**
+ * A parcel's card as the widget shows it. A widget has too little memory to draw the map, so the app draws the card's
+ * pictures into the widget's folder and the widget writes the words over them.
+ */
+@Serializable
+data class DeliveryWidgetCard(
+    /** The card's colour and its words', light then dark, as hex. */
+    val surface: List<String>,
+    val ink: List<String>,
+    /** The parcel's status, which the card writes before its date. */
+    val status: String,
+    /** What the pictures' file names start with. It changes whenever they do. */
+    val pictures: String,
+    /** The pictures' pixels per point (dp). */
+    val scale: Double,
 )
+
+/**
+ * The pictures of a card: its carrier's mark, and its route as a small widget, half a medium one or a whole medium one
+ * shows it, across the top of the card.
+ */
+enum class DeliveryWidgetPicture(val rawValue: String) {
+    Mark("mark"),
+    Small("small"),
+    Half("half"),
+    Wide("wide"),
+    ;
+
+    fun file(of: DeliveryWidgetCard, dark: Boolean, folder: File): File =
+        File(folder, "${of.pictures}-$rawValue-${if (dark) "dark" else "light"}.png")
+
+    companion object {
+        val routes: List<DeliveryWidgetPicture> = listOf(Small, Half, Wide)
+    }
+}
+
+/**
+ * What the widget gallery shows until the app has drawn the reader's own cards: the demo's next deliveries as the app
+ * publishes them in each language, with the pictures the iPhone app draws for them. Both apps read them from the
+ * iPhone widget's folder (ios/DeliveryWidgetExtension/WidgetSample), which its tests redraw.
+ */
+object DeliveryWidgetSample {
+    const val folderName = "WidgetSample"
+    const val snapshotsFile = "snapshots.json"
+
+    /** The picture of each shape a sample card shows in: the first card alone in a small widget, both in a medium one. */
+    fun pictures(of: Int): List<DeliveryWidgetPicture> =
+        if (of == 0) listOf(DeliveryWidgetPicture.Small, DeliveryWidgetPicture.Half) else listOf(DeliveryWidgetPicture.Half)
+
+    /** The sample in `languageCode`, else in English, from the bytes of [snapshotsFile]; null when they can't be read. */
+    fun snapshot(languageCode: String, snapshots: ByteArray): DeliveryWidgetSnapshot? {
+        val all = try {
+            decodeJson(MapSerializer(String.serializer(), StoredSnapshot.serializer()), snapshots)
+        } catch (_: Exception) {
+            return null
+        }
+        return (all[languageCode] ?: all["en"])?.snapshot
+    }
+}
 
 enum class DeliveryActivityPhase(val rawValue: String) {
     OutForDelivery("out_for_delivery"),
@@ -122,7 +188,7 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
         get() {
             val data = defaults.data(forKey = snapshotKey) ?: return null
             return try {
-                decodeJson(Stored.serializer(), data).let { DeliveryWidgetSnapshot(referenceDate(it.generatedAt), it.languageCode, it.parcels) }
+                decodeJson(StoredSnapshot.serializer(), data).snapshot
             } catch (_: Exception) {
                 null
             }
@@ -142,9 +208,9 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
     }
 
     fun save(snapshot: DeliveryWidgetSnapshot): Boolean {
-        val stored = Stored(snapshot.generatedAt.timeIntervalSinceReferenceDate, snapshot.languageCode, snapshot.parcels)
+        val stored = StoredSnapshot(snapshot.generatedAt.timeIntervalSinceReferenceDate, snapshot.languageCode, snapshot.parcels)
         val data = try {
-            JsonEncoder().encode(Stored.serializer(), stored)
+            JsonEncoder().encode(StoredSnapshot.serializer(), stored)
         } catch (_: Exception) {
             return false
         }
@@ -180,10 +246,6 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
             }
         }
 
-    /** As the iPhone's JSONEncoder writes the snapshot: the date as seconds since 2001. */
-    @Serializable
-    private class Stored(val generatedAt: Double, val languageCode: String, val parcels: List<DeliveryWidgetParcel>)
-
     companion object {
         const val kind = "NextDeliveryWidget"
 
@@ -195,6 +257,12 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
 
         private val turnsSerializer = MapSerializer(String.serializer(), DeliveryWidgetTurn.serializer())
     }
+}
+
+/** As the iPhone's JSONEncoder writes a snapshot: the date as seconds since 2001. */
+@Serializable
+internal class StoredSnapshot(val generatedAt: Double, val languageCode: String, val parcels: List<DeliveryWidgetParcel>) {
+    val snapshot: DeliveryWidgetSnapshot get() = DeliveryWidgetSnapshot(referenceDate(generatedAt), languageCode, parcels)
 }
 
 /**

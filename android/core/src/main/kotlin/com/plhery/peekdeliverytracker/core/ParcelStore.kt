@@ -77,7 +77,7 @@ interface PushNotifications {
 
 /**
  * WidgetKit's `WidgetCenter`: told that what the widget shows changed (DeliveryWidgetSharedStore holds it), so it
- * draws again. On Android an update of the widget's AppWidgetProvider, or nothing while the app has no widget.
+ * draws again. On Android an update of the app's Glance widgets.
  */
 fun interface WidgetCenter {
     fun reloadTimelines(ofKind: String)
@@ -154,7 +154,9 @@ class DeviceNotificationAccess(
  * `cacheFiles` the offline lists. `region` is the device's region, whose country an added parcel's lookup is hinted
  * with (`Resources.getSystem().configuration.locales[0]`, never `Locale.getDefault()`, which follows the app's
  * language); `analytics` counts the catalog's actions (`DeliveryAnalytics.shared.action`); `importCharges` is the
- * debug build's import charges setting for the demo (`ImportChargesPreview`), nil in a release build.
+ * debug build's import charges setting for the demo (`ImportChargesPreview`), nil in a release build. `widgetPictures`
+ * draws the widget's cards, as the iPhone's store does into its App Group; without it (the iPhone without an App Group,
+ * and the tests) the widget shows words alone.
  */
 class ParcelStore(
     val configuration: AppConfiguration,
@@ -174,6 +176,7 @@ class ParcelStore(
     private val scope: CoroutineScope,
     private val deviceNotifications: DeviceNotificationAccess = DeviceNotificationAccess.system(notifications),
     private val liveActivities: DeliveryLiveActivities = DeliveryLiveActivities.None,
+    private val widgetPictures: DeliveryWidgetArtist? = null,
     private val analytics: (event: String, outcome: DeliveryAnalytics.Outcome?) -> Unit = { _, _ -> },
     private val now: () -> Instant = Instant::now,
     importCharges: () -> String? = { null },
@@ -374,6 +377,10 @@ class ParcelStore(
     private var showingSavedParcels = false
     private var cacheCurrent = false
     private var publishedWidgetState: DeliveryWidgetState? = null
+
+    /** The cards whose pictures could not be drawn, by the name of their pictures, and the drawing under way. */
+    private val widgetPicturesFailed = mutableSetOf<String>()
+    private var widgetPicturesTask: Job? = null
     private var deliveryActivityTask: Job? = null
 
     // A Set in Swift, whose order is its own each launch; here the order the jobs were queued in.
@@ -530,6 +537,7 @@ class ParcelStore(
         deliveryWidgetStore.setLanguageCode(localizer.language.rawValue)
         deliveryWidgetStore.clearSnapshot()
         publishedWidgetState = null
+        widgetPictures?.let { DeliveryWidgetPictures.sweep(keeping = emptyList(), it.folder) }
         widgetCenter.reloadTimelines(DeliveryWidgetSharedStore.kind)
         scheduleDeliveryLiveActivities(forceEnd = true)
     }
@@ -1350,12 +1358,13 @@ class ParcelStore(
             DeliveryWidgetSnapshot(
                 generatedAt = now(),
                 languageCode = localizer.language.rawValue,
-                parcels = widgetDeliveries(parcels, localizer, now()),
+                parcels = carded(widgetDeliveries(parcels, localizer, now())),
             )
         } else {
             null
         }
-        // The widget's cards come with its port, and with them the wait for their pictures.
+        // Cards still being drawn come with the next publication, so that the widget reloads once for them.
+        if (snapshot != null && widgetPicturesTask != null) return
 
         // Reloads spend the widget's system budget; skip them when nothing it shows changed.
         val state = DeliveryWidgetState(enabled = deliveryWidgetEnabled, languageCode = localizer.language.rawValue, parcels = snapshot?.parcels)
@@ -1368,7 +1377,37 @@ class ParcelStore(
         } else {
             deliveryWidgetStore.clearSnapshot()
         }
+        widgetPictures?.let { DeliveryWidgetPictures.sweep(keeping = snapshot?.parcels.orEmpty().mapNotNull { it.card }, it.folder) }
         widgetCenter.reloadTimelines(DeliveryWidgetSharedStore.kind)
+    }
+
+    /**
+     * Gives each parcel its card once the card's pictures are drawn, and starts drawing those that aren't, once each:
+     * a card that could not be drawn is not drawn again while the app runs.
+     */
+    private fun carded(shown: List<DeliveryWidgetParcel>): List<DeliveryWidgetParcel> {
+        val artist = widgetPictures ?: return shown
+        val missing = mutableListOf<Pair<Parcel, DeliveryWidgetCard>>()
+        val carded = shown.map { item ->
+            val parcel = parcels.firstOrNull { it.id == item.id } ?: return@map item
+            val card = DeliveryWidgetPictures.card(parcel, localizer, artist.scale)
+            if (!DeliveryWidgetPictures.isDrawn(card, artist.folder)) {
+                if (card.pictures !in widgetPicturesFailed) missing += parcel to card
+                return@map item
+            }
+            item.copy(card = card)
+        }
+        if (missing.isNotEmpty() && widgetPicturesTask == null) {
+            val language = localizer.language
+            widgetPicturesTask = scope.launch {
+                for ((parcel, card) in missing) {
+                    if (!artist.draw(parcel, card, language)) widgetPicturesFailed += card.pictures
+                }
+                widgetPicturesTask = null
+                publishDeliveryWidget()
+            }
+        }
+        return carded
     }
 
     // Live Activities. Android has none to start, update or end: what is left is their setting, the message when the

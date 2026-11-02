@@ -48,6 +48,11 @@ val syncSharedTestResources by tasks.registering(Sync::class) {
     from(iosResources) {
         include("ChecksumVectors.json", "DetectionGolden.json")
     }
+    // The widget gallery's sample, which the iPhone's tests draw: the words in it are the demo's as this app writes them.
+    from(rootDir.resolve("../ios/DeliveryWidgetExtension/WidgetSample")) {
+        include("snapshots.json")
+        into("WidgetSample")
+    }
     into(layout.buildDirectory.dir("generated/sharedResources/test/peek"))
 }
 

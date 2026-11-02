@@ -2188,6 +2188,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-sendungsverfolgung",
+      "title": "Meiteshun (MTSCN) Sendungsverfolgung: AMTS-Nummer, Status",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sendungsverfolgung",

@@ -3199,9 +3199,13 @@ describe('TrackingSyncService', () => {
     const browsing = { ...delivering, carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post', browser_check: true } } };
     expect(isOpenedParcelSyncDue(browsing, at('10:04:59'))).toBe(false);
     expect(isOpenedParcelSyncDue(browsing, at('10:05:00'))).toBe(true);
-    // Overnight too.
+    // In the evening too, and from 06:00 on the carrier's clock (Zurich's, 04:00 UTC); before, the regular cadence.
     expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T20:00:15Z' }, at('20:01:59'))).toBe(false);
     expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T20:00:15Z' }, at('20:02:00'))).toBe(true);
+    expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T01:00:15Z' }, at('01:02:00'))).toBe(false);
+    expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T01:00:15Z' }, at('01:10:00'))).toBe(true);
+    expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T03:50:15Z' }, at('03:58:00'))).toBe(false);
+    expect(isOpenedParcelSyncDue({ ...delivering, last_synced_at: '2026-09-09T04:00:15Z' }, at('04:02:00'))).toBe(true);
     // A provider's cooldown holds a link's reader back as it holds the schedule.
     expect(isOpenedParcelSyncDue({ ...parcel, carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post', next_check_at: '2026-09-09T13:00:00Z' } } }, at('12:00:00'))).toBe(false);
   });
@@ -3221,14 +3225,21 @@ describe('TrackingSyncService', () => {
     { scan: 'from the evening before at -05:00', carrier: 'ups', lastEvent: '2026-09-09T01:00:00Z', lastUpdate: '2026-09-08T20:00:00-05:00', every2Minutes: false },
     // A zero offset is a UTC instant, not the scan's own clock.
     { scan: 'from 01:00 at +00:00', carrier: 'ups', lastEvent: '2026-09-09T01:00:00Z', lastUpdate: '2026-09-09T01:00:00+00:00', every2Minutes: true },
-  ])('checks a parcel out for delivery with its scan $scan every 2 minutes: $every2Minutes', ({ carrier = 'swiss-post', lastEvent, lastUpdate, localDay, every2Minutes }) => {
-    const parcel = { carrier, current_stage: 'out_for_delivery', tracking_number: 'TEST1234', created_at: '2026-09-09T07:00:00Z',
-      last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'ok', archived_at: null,
+    // Rounds leave from 06:00 on the carrier's clock: a scan sorted overnight waits for it.
+    { scan: 'from 03:00 in Zurich, before 06:00', lastEvent: '2026-09-09T01:00:00Z', time: '03:52:00', every2Minutes: false },
+    { scan: 'from 03:00 in Zurich, at 06:00', lastEvent: '2026-09-09T01:00:00Z', time: '04:02:00', every2Minutes: true },
+    { scan: 'from 05:00 in Sydney, before 06:00', carrier: 'j-and-t-au', lastEvent: '2026-09-09T19:00:00Z', time: '19:52:00', every2Minutes: false },
+    { scan: 'from 05:00 in Sydney, at 06:00', carrier: 'j-and-t-au', lastEvent: '2026-09-09T19:00:00Z', time: '20:02:00', every2Minutes: true },
+    { scan: 'from 05:00 at +10:00, before 06:00', carrier: 'australia-post', lastEvent: '2026-09-09T19:00:00Z', lastUpdate: '2026-09-10T05:00:00+10:00', time: '19:52:00', every2Minutes: false },
+  ])('checks a parcel out for delivery with its scan $scan every 2 minutes: $every2Minutes', ({ carrier = 'swiss-post', lastEvent, lastUpdate, localDay, time = '10:02:00', every2Minutes }) => {
+    const at = (time: string) => new Date(`2026-09-09T${time}Z`);
+    const checked = new Date(at(time).getTime() - 2 * 60_000 + 15_000).toISOString();
+    const parcel = { carrier, current_stage: 'out_for_delivery', tracking_number: 'TEST1234', created_at: '2026-09-09T00:00:00Z',
+      last_synced_at: checked, sync_status: 'ok', archived_at: null,
       carrier_data: { ...(lastUpdate ? { last_update: lastUpdate } : {}), ...(localDay ? { last_update_local: localDay } : {}),
         routing: { version: 1, configured_carrier: carrier, last_event_at: lastEvent } } };
-    const at = (time: string) => new Date(`2026-09-09T${time}Z`);
-    expect(isOpenedParcelSyncDue(parcel, at('10:02:00'))).toBe(every2Minutes);
-    expect(isOpenedParcelSyncDue(parcel, at('10:10:00'))).toBe(true);
+    expect(isOpenedParcelSyncDue(parcel, at(time))).toBe(every2Minutes);
+    expect(isOpenedParcelSyncDue(parcel, new Date(at(time).getTime() + 8 * 60_000))).toBe(true);
   });
 
   it.each([
@@ -3550,7 +3561,7 @@ describe('TrackingSyncService', () => {
     expect(isOpenedParcelSyncDue(eightDays, new Date('2026-09-09T10:00:00Z'))).toBe(true);
   });
 
-  it('checks out-for-delivery parcels every 2 minutes overnight too and allows manual refreshes', async () => {
+  it('checks out-for-delivery parcels every 2 minutes in the evening too and allows manual refreshes', async () => {
     const parcel = {
       id: 'overnight', carrier: 'swiss-post', current_stage: 'out_for_delivery', tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T20:00:15Z', sync_status: 'ok',

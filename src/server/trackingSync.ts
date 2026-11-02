@@ -118,6 +118,12 @@ const NAMED_CARRIER_DUE_MS = 15 * 60_000;
  * until this long before the window opens.
  */
 const BEFORE_WINDOW_MS = 30 * 60 * 1_000;
+/**
+ * Rounds leave in the morning: before this hour on the carrier's clock, a parcel out for delivery
+ * keeps the regular cadence. Carriers that sort the day's rounds overnight (Planzer, Quickpac,
+ * Swiss Post) scan them out for delivery hours before they leave.
+ */
+const LAST_MILE_FROM_HOUR = 6;
 /** Scheduled checks fall back to hourly this long after a parcel's newest carrier event, or after it was added. */
 const IDLE_AFTER_MS = 48 * 60 * 60 * 1_000;
 /**
@@ -326,17 +332,24 @@ function deliveryWindowOpens(parcel: JsonObject): number | null {
 }
 
 /**
+ * The carrier's clock: the offset its newest scan states ("…T07:00:00+10:00"), else the
+ * carrier's zone in the catalog. A zero offset is a UTC instant, not the scan's own clock.
+ */
+function carrierClock(parcel: JsonObject): DateTime['zone'] | string {
+  const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+  const stated = /T[\d:.]+[+-](?!00:?00$)\d{2}:?\d{2}$/.test(String(data.last_update ?? ''))
+    ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;
+  return stated?.isValid ? stated.zone : resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+}
+
+/**
  * Whether the carrier's newest scan is from today on its clock: an out-for-delivery scan from an
  * earlier day announced a round that is over, and the regular cadence catches the next one. A
  * parcel without a dated scan counts as today's.
  */
 function deliveringToday(parcel: JsonObject, now: Date): boolean {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  // A scan that states its own offset ("…T07:00:00+10:00") was read on that clock; a zero
-  // offset is a UTC instant, and the catalog's zone stays the clock.
-  const stated = /T[\d:.]+[+-](?!00:?00$)\d{2}:?\d{2}$/.test(String(data.last_update ?? ''))
-    ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;
-  const zone = stated?.isValid ? stated.zone : resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+  const zone = carrierClock(parcel);
   const days = [routingState(parcel).last_event_at, data.last_update]
     .map((value) => Date.parse(String(value ?? ''))).filter(Number.isFinite)
     .map((time) => DateTime.fromMillis(time, { zone }).toISODate()!);
@@ -441,12 +454,14 @@ function isScheduledTrackingSyncDue(
   // the carrier, so it is asked every 2 minutes, every 5 while its lookups open a browser, unless
   // the carrier sets a longer interval of its own. A universal provider has quotas and publishes
   // scans late, so it keeps the regular cadence. Until shortly before a delivery window opens, the
-  // regular cadence still catches a changed slot, as it does a round from an earlier day.
+  // regular cadence still catches a changed slot, as it does a round from an earlier day, and
+  // until 06:00 on the carrier's clock, a round sorted overnight.
   const minimum = CARRIER_DEFINITIONS[String(parcel.carrier) as CarrierId]?.tracking.refresh?.minMinutes;
   const delivering = parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now);
   const opens = delivering ? deliveryWindowOpens(parcel) : null;
   const lastMile = delivering && !minimum && answeredByCarrier(parcel)
-    && (opens === null || now.getTime() >= opens - BEFORE_WINDOW_MS);
+    && (opens === null || now.getTime() >= opens - BEFORE_WINDOW_MS)
+    && DateTime.fromJSDate(now, { zone: carrierClock(parcel) }).hour >= LAST_MILE_FROM_HOUR;
   const intervalMinutes = !lastMile ? Math.max(10, minimum ?? 0)
     : checkedInBrowser(parcel) ? BROWSER_LAST_MILE_MINUTES : LAST_MILE_MINUTES;
   const activity = lastActivity(parcel);

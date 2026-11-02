@@ -302,12 +302,12 @@ hour's parcels spread over it. It counts no failure, takes no health sample and 
 
 ## Refresh cadence
 
-The cadence is the same around the clock: carriers and providers scan parcels across every
-time zone.
+The cadence is the same around the clock, but for a round sorted overnight (below): carriers
+and providers scan parcels across every time zone.
 
 | Parcels | Cadence |
 | --- | --- |
-| Out for delivery (direct adapter) | every 2 min; every 5 min while its lookups open a browser; 15 min after a failed check |
+| Out for delivery (direct adapter), from 06:00 on the carrier's clock | every 2 min; every 5 min while its lookups open a browser; 15 min after a failed check |
 | Out for delivery, until 30 min before its delivery window opens | every 10 min |
 | Out for delivery since an earlier day | every 10 min |
 | Other stages (direct adapter) | every 10 min |
@@ -365,6 +365,10 @@ alone (`last_update_local`), is from an earlier day on its clock, the parcel kee
 regular cadence until the carrier scans it again. Its clock is the offset the newest scan
 states, else the zone the delivery window below is read in (a zero offset is a UTC instant,
 not a stated clock); a parcel without a dated scan counts as today's.
+
+**A round sorted overnight** has not left yet: before 06:00 on the carrier's clock, the same
+clock, a parcel out for delivery keeps the regular cadence. Planzer, Quickpac and Swiss Post
+scan the day's rounds out for delivery hours before they leave.
 
 **A failed check** out for delivery, whose carrier lookup met a bot check, failed or
 answered without the parcel's progress, holds the next one back for 15 minutes: the carrier

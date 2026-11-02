@@ -272,13 +272,28 @@ export function isTrackingSyncDue(parcel: JsonObject, now: Date): boolean {
  * milliseconds: a routing deferral or the carrier's refresh interval. Zero when
  * nothing holds it back, infinity when it is never checked.
  */
+/**
+ * Refresh limits Peek keeps for carriers whose catalog entry sets none: Morning Global's lookup
+ * answers 429 for about 1.5 h once a parcel checked every 10 minutes has made some 60 lookups
+ * in 10 h. The catalog's own limit, once it sets one, takes over.
+ */
+const REFRESH_LIMITS: Readonly<Record<string, { minMinutes: number; afterFailureMinutes?: number }>> = {
+  'morning-global': { minMinutes: 60, afterFailureMinutes: 120 },
+};
+
+/** The least interval between two checks of a carrier, and after a failed one, when it sets any. */
+function refreshLimit(carrier: unknown): { minMinutes: number; afterFailureMinutes?: number } | undefined {
+  const id = String(carrier);
+  return CARRIER_DEFINITIONS[id as CarrierId]?.tracking.refresh ?? (Object.hasOwn(REFRESH_LIMITS, id) ? REFRESH_LIMITS[id] : undefined);
+}
+
 export function trackingSyncDueAt(parcel: JsonObject): number {
   if (parcel.sync_status === 'unsupported' && parcel.carrier === 'amazon-shipping' && parcel.sync_error === AMAZON_HISTORY_EXPIRED) return Infinity;
   if (parcel.sync_status === 'unsupported' && requiresAmazonAccount(String(parcel.carrier), String(parcel.tracking_number ?? ''))) return Infinity;
   const deferred = Date.parse(String(routingState(parcel).next_check_at ?? ''));
   const after = Number.isFinite(deferred) ? deferred : 0;
   const activeCarrier = isRecord(parcel.carrier_data) ? parcel.carrier_data.active_tracking_carrier : undefined;
-  const refresh = CARRIER_DEFINITIONS[String(activeCarrier ?? parcel.carrier) as CarrierId]?.tracking.refresh;
+  const refresh = refreshLimit(activeCarrier ?? parcel.carrier);
   if (!refresh?.afterFailureMinutes) return after;
   const lastChecked = Date.parse(String(parcel.last_synced_at ?? ''));
   if (!Number.isFinite(lastChecked)) return after;
@@ -456,7 +471,7 @@ function isScheduledTrackingSyncDue(
   // scans late, so it keeps the regular cadence. Until shortly before a delivery window opens, the
   // regular cadence still catches a changed slot, as it does a round from an earlier day, and
   // until 06:00 on the carrier's clock, a round sorted overnight.
-  const minimum = CARRIER_DEFINITIONS[String(parcel.carrier) as CarrierId]?.tracking.refresh?.minMinutes;
+  const minimum = refreshLimit(parcel.carrier)?.minMinutes;
   const delivering = parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now);
   const opens = delivering ? deliveryWindowOpens(parcel) : null;
   const lastMile = delivering && !minimum && answeredByCarrier(parcel)

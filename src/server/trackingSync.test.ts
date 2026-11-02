@@ -5020,6 +5020,20 @@ describe('TrackingSyncService', () => {
     },
   );
 
+  it('checks Morning Global hourly, out for delivery too, and waits two hours after a failure', () => {
+    const parcel = { carrier: 'morning-global', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok' };
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T10:59:59.999Z'))).toBe(false);
+    expect(isTrackingSyncDue(parcel, new Date('2026-09-09T11:00:00Z'))).toBe(true);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T11:59:59Z'))).toBe(false);
+    expect(isTrackingSyncDue({ ...parcel, sync_status: 'error' }, new Date('2026-09-09T12:00:00Z'))).toBe(true);
+    // No 2-minute last mile: its lookups count against the same limit.
+    const delivering = { id: 'morning', carrier: 'morning-global', tracking_number: 'TEST1234', current_stage: 'out_for_delivery',
+      created_at: '2026-09-09T00:00:00Z', last_synced_at: '2026-09-09T10:00:00Z', sync_status: 'ok',
+      carrier_data: { last_update: '2026-09-09T09:58:00+08:00' } };
+    expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T10:30:00Z'))).toBe(false);
+    expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T11:00:00Z'))).toBe(true);
+  });
+
   it.each(['ok', 'error'])('checks PostNL every thirty minutes after %s checks', async (syncStatus) => {
     const parcel = {
       id: 'postnl', carrier: 'spring-gds', tracking_number: 'LX999999987NL',

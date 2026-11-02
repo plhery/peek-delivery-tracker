@@ -124,7 +124,7 @@ Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos 
 - [El Corte Inglés: Gastos de envío](https://www.elcorteingles.es/ayuda/es/envio-y-recogida/gastos-de-envio/) – 5,90 €, voluminosos y muebles, Ceuta y Melilla, cinco países de la Unión Europea, Portugal
 - [El Corte Inglés: Ayuda](https://www.elcorteingles.es/ayuda/es/) – pregunta sobre productos que no llegan a la vez, «Estado del pedido»
 - [El Corte Inglés: Servicios técnicos y garantías](https://www.elcorteingles.es/ayuda/es/devolucion-y-reembolso/servicios-tecnicos-y-garantias/) – correos «Documento de venta»
-- [El Corte Inglés: Entrega en el día](https://www.elcorteingles.es/entrega-2h/) – 300.000 productos, 54 ciudades, precios, 10:00 a 22:00, 15 productos, día y hora, seguimiento por correo
+- [El Corte Inglés: Entrega en el día](https://www.elcorteingles.es/entrega-2h/) – 300 000 productos, 54 ciudades, precios, 10:00 a 22:00, 15 productos, día y hora, seguimiento por correo
 - [El Corte Inglés: Recogida en tienda](https://www.elcorteingles.es/click-collect/) – recogida gratis, 3 € en Supercor, Correos y Celeritas, aviso por correo, dónde recoger, número de pedido o QR, otra persona
 - [El Corte Inglés: Ventajas y servicios](https://www.elcorteingles.es/ventajas-y-servicios/) – envío gratis desde 99 €, libros, cine y música, Click&Car gratis
 - [El Corte Inglés: Click&Car](https://www.elcorteingles.es/supermercado/info/click-and-car/) – zona reservada del aparcamiento, maletero, gratis
@@ -136,7 +136,7 @@ Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos 
 - [El Corte Inglés: Información general de devolución](https://www.elcorteingles.es/ayuda/es/devolucion-y-reembolso/informacion-general-devolucion/) – formas de devolver, plazos, gastos, paquete dañado, Marketplace, Portugal
 - [El Corte Inglés: Cómo solicitar una devolución en Mi Cuenta](https://www.elcorteingles.es/ayuda/es/devolucion-y-reembolso/como-solicitar-una-devolucion-en-mi-cuenta/) – «Mis compras», etiqueta de devolución
 - [El Corte Inglés: Abono de una devolución](https://www.elcorteingles.es/ayuda/es/devolucion-y-reembolso/abono-de-una-devolucion/) – reembolso en tienda y en 14 días desde la recogida
-- [Celeritas: Inicio](https://celeritastransporte.com/) – casi 9.000 puntos de recogida, seguimiento
+- [Celeritas: Inicio](https://celeritastransporte.com/) – casi 9000 puntos de recogida, seguimiento
 - [El Corte Inglés: Términos legales](https://www.elcorteingles.es/ayuda/es/otros/terminos-legales/) – reclamación en clientes@elcorteingles.es, hojas de reclamaciones en los centros, Confianza Online después de reclamar a El Corte Inglés
 - [Confianza Online: El Corte Inglés](https://www.confianzaonline.es/empresas/elcorteingles.htm) – adhesión de El Corte Inglés
 - [Confianza Online: Cómo reclamar](https://www.confianzaonline.es/como-reclamar/) – gratis, compras en línea, un año, reclamar antes a la empresa

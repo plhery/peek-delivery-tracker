@@ -53,7 +53,7 @@ Si no, verás «Las entregas de Amazon Logistics suelen seguirse desde Mis pedid
 
 ### ¿Qué es Amazon Logistics?
 
-Es la red que lleva los pedidos de Amazon en el último tramo, desde sus estaciones logísticas hasta los clientes. En España, Amazon tiene más de 20 estaciones logísticas, donde clasifica los paquetes que llegan de otros centros; desde allí, empresas externas de reparto los entregan. En la estación de Málaga, por ejemplo, Amazon colabora con cuatro empresas locales de reparto. Con el programa Hub Delivery, 2.500 pequeños negocios y tiendas de barrio de más de 900 localidades también entregan pedidos de Amazon a sus vecinos.
+Es la red que lleva los pedidos de Amazon en el último tramo, desde sus estaciones logísticas hasta los clientes. En España, Amazon tiene más de 20 estaciones logísticas, donde clasifica los paquetes que llegan de otros centros; desde allí, empresas externas de reparto los entregan. En la estación de Málaga, por ejemplo, Amazon colabora con cuatro empresas locales de reparto. Con el programa Hub Delivery, 2500 pequeños negocios y tiendas de barrio de más de 900 localidades también entregan pedidos de Amazon a sus vecinos.
 
 ### ¿Cuál es el teléfono de Amazon Logistics en España?
 

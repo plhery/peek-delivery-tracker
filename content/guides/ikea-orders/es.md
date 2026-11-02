@@ -22,7 +22,7 @@ Depende del peso y del tamaño del pedido. IKEA (ikea.com/es) envía a la Penín
 
 Los pedidos pequeños salen del almacén central y pueden dividirse en varios paquetes. Quedan fuera de la paquetería la comida, las plantas, los electrodomésticos y lo que no aguanta el calor.
 
-También puedes recogerlo tú. Un pedido pequeño puede ir a más de 14.000 puntos: más de 12.000 lockers y oficinas de InPost y más de 2.300 oficinas de Correos. Un pedido mediano o voluminoso, a más de 70 puntos de recogida de IKEA. Y cualquier pedido, a una tienda IKEA, preparado a partir de 3 horas.
+También puedes recogerlo tú. Un pedido pequeño puede ir a más de 14 000 puntos: más de 12 000 lockers y oficinas de InPost y más de 2300 oficinas de Correos. Un pedido mediano o voluminoso, a más de 70 puntos de recogida de IKEA. Y cualquier pedido, a una tienda IKEA, preparado a partir de 3 horas.
 
 :::journey
 - warehouse | Almacén o tienda IKEA | Te llega la confirmación por correo
@@ -147,7 +147,7 @@ Sigue las entregas en camión en «Sigue y gestiona tu pedido» de IKEA y con el
 
 :::sources
 - [IKEA España: Envío a domicilio](https://www.ikea.com/es/es/customer-service/services/delivery/) – pedido pequeño, mediano y voluminoso, medidas, precios, express, mínimo de 10 €, enlace a IKEA islas
-- [IKEA España: Click & collect](https://www.ikea.com/es/es/customer-service/services/puntos-de-recogida-pube2fb8d8a/) – más de 14.000 puntos, InPost, Correos, tiendas, taquillas, puntos IKEA, precios, autorización y copia del documento
+- [IKEA España: Click & collect](https://www.ikea.com/es/es/customer-service/services/puntos-de-recogida-pube2fb8d8a/) – más de 14 000 puntos, InPost, Correos, tiendas, taquillas, puntos IKEA, precios, autorización y copia del documento
 - [IKEA España: Tu pedido](https://www.ikea.com/es/es/customer-service/track-manage-order/) – Sigue y gestiona tu pedido, reprogramar, productos dañados, cancelar
 - [IKEA España: Envíos y entregas en domicilio](https://www.ikea.com/es/es/customer-service/faq/envios-y-entregas-en-domicilio-pub53745fe1/) – Península sin islas, Ceuta ni Melilla, plazos (paquetería de 3 a 6 días laborables), exclusiones de paquetería, enlace de SEUR, 48 horas y 1 hora, faltas en 7 días, albarán
 - [IKEA España: Click and collect, preguntas frecuentes](https://www.ikea.com/es/es/customer-service/faq/click-and-collect-pub244d1681/) – plazos de recogida, documento de identidad

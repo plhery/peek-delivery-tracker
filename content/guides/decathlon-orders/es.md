@@ -16,7 +16,7 @@ Depende de cómo lo recibas y de cuánto pese. Antes de pagar, en el paso 3 de l
 | Entrega | Quién la lleva | Plazo |
 | --- | --- | --- |
 | Recogida en tienda | Decathlon, a la tienda que elijas | 1 hora si hay stock en la tienda; 24 horas solo en Sevilla, Málaga, Valencia, Zaragoza, Madrid y Barcelona; si no, de 48 a 72 horas |
-| Punto de recogida, hasta 20 kg | Más de 22.000 puntos de [SEUR](carrier:seur), InPost, [Paack](carrier:paack) y [GLS](carrier:gls-es) | 48 horas hasta 12,5 kg; de 48 a 72 horas de 13 a 20 kg |
+| Punto de recogida, hasta 20 kg | Más de 22 000 puntos de [SEUR](carrier:seur), InPost, [Paack](carrier:paack) y [GLS](carrier:gls-es) | 48 horas hasta 12,5 kg; de 48 a 72 horas de 13 a 20 kg |
 | A domicilio, estándar | Una empresa de transporte que Decathlon no nombra | 24/48 horas, de lunes a sábado, en la puerta |
 | A domicilio, voluminoso de 12,5 a 65 kg | Una empresa de transporte que Decathlon no nombra | 48/72 horas, de lunes a viernes, en la puerta |
 | Dentro de casa, de 25 a 65 kg | Un transportista con dos personas, con cita | De 72 horas a 7 días |
@@ -132,7 +132,7 @@ Sí, con el número del transportista: pégalo en [Peek](/). Peek reconoce solo 
 Si te lo entrega otra empresa, o un vendedor de Marketplace con su propio transportista, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el pedido llega en varios paquetes, añade cada número.
 
 :::sources
-- [Decathlon España: Métodos y gastos de envío](https://www.decathlon.es/es/c/legal/metodos-y-gastos-de-envio-decathlon_f7874964-bf4b-47d6-9f35-c0be39139626) – varios paquetes, recogida en tienda, 15 días, QR, otra persona, más de 22.000 puntos de SEUR, InPost, Paack y GLS, 20 kg y 150 cm, entrega a domicilio, paso 3, voluminosos, dentro de casa y cita, mismo día y SMS, montaje, 7 días laborables, correo de seguimiento y 24 horas, espacio personal, Marketplace sin tienda ni punto
+- [Decathlon España: Métodos y gastos de envío](https://www.decathlon.es/es/c/legal/metodos-y-gastos-de-envio-decathlon_f7874964-bf4b-47d6-9f35-c0be39139626) – varios paquetes, recogida en tienda, 15 días, QR, otra persona, más de 22 000 puntos de SEUR, InPost, Paack y GLS, 20 kg y 150 cm, entrega a domicilio, paso 3, voluminosos, dentro de casa y cita, mismo día y SMS, montaje, 7 días laborables, correo de seguimiento y 24 horas, espacio personal, Marketplace sin tienda ni punto
 - [Decathlon España: Ayuda y atención al cliente](https://www.decathlon.es/es/ayuda-atencion-cliente-decathlon_lp-4WILOD) – formulario, 91 623 31 22 y su horario, WhatsApp y su horario
 - [Decathlon España: Contacto](https://www.decathlon.es/es/contact-us) – «Mi pedido Decathlon», «Mi pedido Marketplace», «Mi pedido está incompleto/dañado», «Seguimiento de mi pedido online»
 - [Decathlon España: ¿Cómo puedo hacer seguimiento de mi pedido?](https://kb-esdecathlon.sprinklr.com/es/articles/mi-pedido-online/cmo-puedo-hacer-seguimiento-de-mi-pedido/6a43e4cefae48c61a1d4a493) – correo con el número de seguimiento del transportista

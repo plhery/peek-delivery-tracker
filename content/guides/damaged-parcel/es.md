@@ -44,7 +44,7 @@ Casi todos los transportistas tratan solo con el remitente, así que tu reclamac
 
 | Transportista | Quién reclama | Plazo para daños | Indemnización |
 | --- | --- | --- | --- |
-| [Correos](carrier:correos-spain) | Cobra siempre el remitente; tú, solo si él firma una autorización | Paquete Azul y carta certificada: al recibirlo; después no admite reclamaciones por daños. Paq Estándar y Paq Premium: Correos solo publica plazos para extravío (hasta 1 año desde la admisión) | En los envíos que regula la Ley 15/2009, lo menor entre el valor declarado, la reposición y la reparación. Con valor declarado o seguro, hasta 6.000 € |
+| [Correos](carrier:correos-spain) | Cobra siempre el remitente; tú, solo si él firma una autorización | Paquete Azul y carta certificada: al recibirlo; después no admite reclamaciones por daños. Paq Estándar y Paq Premium: Correos solo publica plazos para extravío (hasta 1 año desde la admisión) | En los envíos que regula la Ley 15/2009, lo menor entre el valor declarado, la reposición y la reparación. Con valor declarado o seguro, hasta 6000 € |
 | [GLS](carrier:gls-es) | El remitente: si el contenido está dañado, GLS te manda a él | – | – |
 | InPost | Tú avisas a la tienda; los particulares reclaman con los formularios de InPost | Para avisar a la tienda: 1 día desde la entrega si el daño se ve, 7 días si no se ve | – |
 
@@ -118,7 +118,7 @@ Si el vendedor no lo soluciona, te quedan tu banco o PayPal, y las vías de cons
 :::sources
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 2, 66 ter, 117, 118, 120 y 121
 - [BOE: Ley 15/2009 del contrato de transporte terrestre de mercancías](https://www.boe.es/eli/es/l/2009/11/11/15/con) – reservas, 7 días naturales, un año (arts. 60 y 79)
-- [Correos: Coberturas y garantías, extravío envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – remitente, autorización firmada, deterioro al recibirlo, fotos, embalaje, valor declarado, reposición o reparación, 6.000 €, 1 año
+- [Correos: Coberturas y garantías, extravío envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – remitente, autorización firmada, deterioro al recibirlo, fotos, embalaje, valor declarado, reposición o reparación, 6000 €, 1 año
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – respuesta en 1 mes
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – envoltorio dañado, remitente
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – Punto Pack, Locker, 1 y 7 días, particulares

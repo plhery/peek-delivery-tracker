@@ -68,11 +68,11 @@ Poco. La indemnización incluida tiene tope, a menudo por kilo, y suele sumar la
 
 | Transportista | Indemnización incluida | Para cubrir más |
 | --- | --- | --- |
-| Correos, Paq Estándar y Paq Premium | 6,67 € por kilo facturado más la tarifa. Mínimo 40 €, solo en el Paq Premium y para clientes sin contrato | Valor Declarado o Seguro a todo riesgo, hasta 6.000 € |
+| Correos, Paq Estándar y Paq Premium | 6,67 € por kilo facturado más la tarifa. Mínimo 40 €, solo en el Paq Premium y para clientes sin contrato | Valor Declarado o Seguro a todo riesgo, hasta 6000 € |
 | Correos, Paquete Azul | 4 veces la tarifa pagada | Valor declarado |
 | Correos, Paq Ligero | Nada: Correos no indemniza por pérdida ni robo | – |
-| Correos, Paquete Internacional Premium | Tarifa más 52,98 € | Seguro o valor declarado, hasta 3.000 € |
-| Correos, Paquete Internacional Standard y Económico | Tarifa más 40 DEG y 4,50 DEG por kilo (la escala de la UPU) | Seguro o valor declarado, hasta 3.000 € |
+| Correos, Paquete Internacional Premium | Tarifa más 52,98 € | Seguro o valor declarado, hasta 3000 € |
+| Correos, Paquete Internacional Standard y Económico | Tarifa más 40 DEG y 4,50 DEG por kilo (la escala de la UPU) | Seguro o valor declarado, hasta 3000 € |
 | InPost | Seguro fijo de 25 € (IVA incluido) en el precio del envío | Un nivel de indemnización más alto, al pagar |
 
 Correos da el cambio de la Unión Postal Universal para 2026: 1 DEG = 1,2119 €. Un Paquete Internacional Standard de 2 kg perdido cobra como mucho 49 DEG (unos 59 €) más la tarifa, y un Paq Estándar de 2 kg, 13,34 € más la tarifa. Por eso, si compraste a una empresa, te sale mejor la tienda: te debe el producto o todo el dinero.
@@ -106,8 +106,8 @@ La ley de consumo no cubre las ventas entre particulares: el Ministerio de Consu
 Sí, como último recurso. En PayPal tienes que abrir la disputa por artículo no recibido en 30 días desde la fecha de entrega prevista o en 180 días desde que pagaste, lo que ocurra primero. Con la tarjeta, tu banco tramita la reclamación, pero no está obligado a devolverte el cargo: el Banco de España recuerda que los pagos con tarjeta son «mandatos de pago irrevocables». Si la tienda no contesta o no lo soluciona, te quedan las vías de consumo: la OMIC, tu comunidad autónoma o el Centro Europeo del Consumidor si la empresa es de otro país. Los pasos y los plazos de cada vía están en [paquete entregado pero no recibido](guide:delivered-not-received).
 
 :::sources
-- [Correos: Extravío, envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – 3, 4 y 6 días, 1 año y 6 meses, remitente, 6,67 € por kilo, 40 €, 6.000 €, justificante del valor
-- [Correos: Extravío, envíos internacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/extravio-internacional) – 7, 15 y 25 días, 4 y 6 meses, 40 DEG y 4,5 DEG por kilo, 52,98 €, 3.000 €, 1 DEG = 1,2119 €
+- [Correos: Extravío, envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – 3, 4 y 6 días, 1 año y 6 meses, remitente, 6,67 € por kilo, 40 €, 6000 €, justificante del valor
+- [Correos: Extravío, envíos internacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/internacionales/extravio-internacional) – 7, 15 y 25 días, 4 y 6 meses, 40 DEG y 4,5 DEG por kilo, 52,98 €, 3000 €, 1 DEG = 1,2119 €
 - [Correos: Paq Ligero](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paq-ligero) – sin indemnización por pérdida ni robo
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – 1 y 2 meses, canales
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 5, 21 y 30 días, remitente en 7 días, seguro de 25 €

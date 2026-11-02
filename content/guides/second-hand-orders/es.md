@@ -35,7 +35,7 @@ En Wallapop eliges la empresa al comprar, entre las que ofrece el envío:
 | [SEUR](carrier:seur) | A tu dirección o a un punto SEUR | En un punto SEUR o con recogida en su casa, que paga él |
 | InPost | A un punto o una taquilla InPost | Solo en un punto InPost |
 
-Wallapop Envíos funciona en toda España salvo Ceuta, Melilla y Canarias (dentro de Canarias sí se puede), y también con Italia y Portugal. El artículo debe costar entre 1 € y 2.500 €.
+Wallapop Envíos funciona en toda España salvo Ceuta, Melilla y Canarias (dentro de Canarias sí se puede), y también con Italia y Portugal. El artículo debe costar entre 1 € y 2500 €.
 
 En Milanuncios Express siempre es [Correos](carrier:correos-spain), en la península (sin Portugal) y Baleares. No llega a Canarias.
 
@@ -143,7 +143,7 @@ Sí. Copia el código de seguimiento de la compra y pégalo en [Peek](/). Recono
 - [Wallapop: Realizar un envío](https://ayuda.wallapop.com/hc/es-es/articles/360004524458-Realizar-un-env%C3%ADo) – recogida en casa, punto SEUR u oficina de Correos, código de envío sin dirección
 - [Wallapop: Cómo usar el servicio de recogida a domicilio](https://ayuda.wallapop.com/hc/es-es/articles/360013503338-C%C3%B3mo-usar-el-servicio-de-recogida-a-domicilio) – recogida con SEUR, coste descontado de la venta
 - [Wallapop: Envíos con InPost](https://ayuda.wallapop.com/hc/es-es/articles/24856657121937-Env%C3%ADos-con-InPost) – solo puntos InPost, punto o taquilla, 8 días, QR o PIN, Italia y Portugal
-- [Wallapop: Condiciones de servicio Wallapop Envíos](https://ayuda.wallapop.com/hc/es-es/articles/360001796598-Condiciones-de-servicio-Wallapop-Env%C3%ADos) – zonas, Italia y Portugal, 1 € a 2.500 €, sin Citypaq, Protección Wallapop obligatoria
+- [Wallapop: Condiciones de servicio Wallapop Envíos](https://ayuda.wallapop.com/hc/es-es/articles/360001796598-Condiciones-de-servicio-Wallapop-Env%C3%ADos) – zonas, Italia y Portugal, 1 € a 2500 €, sin Citypaq, Protección Wallapop obligatoria
 - [Wallapop: Cancelar la transacción](https://ayuda.wallapop.com/hc/es-es/articles/360004524478-Cancelar-la-transacci%C3%B3n) – solo el vendedor, cancelación a los 5 días, 3 a 10 días hábiles
 - [Wallapop: Reembolsos](https://ayuda.wallapop.com/hc/es-es/articles/360004532077-Reembolsos) – 24 horas sin respuesta, casos de reembolso
 - [Wallapop: El estado del envío no se actualiza](https://ayuda.wallapop.com/hc/es-es/articles/360015264778-El-estado-del-env%C3%ADo-no-se-actualiza) – retraso de horas, entregado sin recibir, código en Tú > Compras

@@ -22,7 +22,7 @@ Depende del método que elijas y de quién vende el producto. En la ficha ves «
 | Qué eliges | Quién lo entrega | Cuándo |
 | --- | --- | --- |
 | «Recogida en tienda» | La tienda que elijas | Listo en 2 horas si hay stock en la tienda |
-| «Envío en puntos de recogida» | Uno de más de 15.000 puntos o taquillas | 24/48 horas; hasta 20 kg y 120 cm |
+| «Envío en puntos de recogida» | Uno de más de 15 000 puntos o taquillas | 24/48 horas; hasta 20 kg y 120 cm |
 | «Envío estándar», paquetería | Una agencia que Leroy Merlin no nombra | 24 a 48 horas |
 | «Envío estándar», voluminoso | El transportista, a pie de vehículo | 1 a 4 días |
 | «Envío exprés» | Desde una tienda a menos de 25 km | 24 horas, solo en las tiendas de la lista |
@@ -131,7 +131,7 @@ Si un paquete cambia de transportista por el camino y el primero nombra al que l
 - [ADEO: Home](https://www.adeo.com/en/) – Leroy Merlin, marca de ADEO
 - [ADEO: 2026 presentation](https://www.adeo.com/en/press/2026-adeo-presentation/) – el Marketplace en las webs de Leroy Merlin y Tecnomat de siete países
 - [Leroy Merlin España: Métodos de entrega](https://www.leroymerlin.es/servicios/metodos-de-entrega.html) – recogida en tienda, puntos de recogida, envío estándar y exprés, plazos, precios, acarreo, paquetería y voluminosos, temporada alta, 100 días
-- [Leroy Merlin España: Entrega en puntos de recogida](https://www.leroymerlin.es/puntos-de-recogida/) – más de 15.000 puntos y taquillas, 48 horas, 8 días, aviso
+- [Leroy Merlin España: Entrega en puntos de recogida](https://www.leroymerlin.es/puntos-de-recogida/) – más de 15 000 puntos y taquillas, 48 horas, 8 días, aviso
 - [Leroy Merlin España: Aviso legal](https://www.leroymerlin.es/aviso-legal.html) – zona de entrega, email del pedido, «Mi pedido», retrasos, a pie de calle y de camión, transportista, parte de ausencia, 7 días, albarán, recogida en tienda, cancelación, 100 días, devoluciones, reembolsos, garantía de 3 años
 - [Leroy Merlin España: Preguntas frecuentes, área personal](https://www.leroymerlin.es/preguntas-frecuentes/area-personal/) – «Pedidos y devoluciones», comunicar una incidencia
 - [Leroy Merlin España: Preguntas frecuentes, devoluciones y reembolsos](https://www.leroymerlin.es/preguntas-frecuentes/devoluciones-y-reembolsos/) – plazos, productos excluidos, tienda, recogida a domicilio, reembolsos, número de pedido del Marketplace, cancelación

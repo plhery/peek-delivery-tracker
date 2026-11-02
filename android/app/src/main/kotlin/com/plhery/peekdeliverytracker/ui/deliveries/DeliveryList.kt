@@ -801,7 +801,7 @@ private fun SectionHeader(kind: ParcelSectionKind, count: Int, change: ListChang
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(title, color = PeekTheme.colors.label, style = PeekTheme.type.headline)
-        CountPill(count, horizontalPadding = 8.dp, change)
+        CountPill(count, horizontalPadding = 8.dp, change, Modifier.testTag(sectionCount(kind)))
     }
 }
 

@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -20,8 +21,16 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.width
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DemoRepository
+import com.plhery.peekdeliverytracker.core.ParcelSectionKind
+import com.plhery.peekdeliverytracker.core.isArchived
+import com.plhery.peekdeliverytracker.core.isDelivered
+import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
@@ -43,9 +52,10 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The counts' roll (A-S66, `.contentTransition(.numericText())`): a count that changes with a change of the list SwiftUI
  * animates rolls its changed figures up, the new one from under the old, whichever way the number goes, and the others
- * stay; under Reduce Motion it just changes, but the release cross-fades; a count that changes otherwise just changes.
- * The list makes a new change as its parcels change (added here), none for a search, and the release's as the held
- * parcels are let go (DeliveredCelebrationScreenshotTest). Paused mid-roll, and a shot of it.
+ * stay; a figure a longer or shorter count adds or drops rolls in or out of its place, the capsule's width following;
+ * under Reduce Motion, or without a change of the list, the count just changes. The list makes a new change as its
+ * parcels change (added here), none for a search, and the release's as the held parcels are let go, which rolls the
+ * overview's and the past deliveries' counts. Paused mid-roll, and a shot of it.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -62,7 +72,7 @@ class CountRollTest {
         compose.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = reduceMotion, carrierIdentities = null) {
                 Box(Modifier.testTag(SHOT).background(PeekTheme.colors.background).padding(12.dp)) {
-                    CountPill(count, horizontalPadding = 6.dp, change)
+                    CountPill(count, horizontalPadding = 6.dp, change, Modifier.testTag(PILL))
                 }
             }
         }
@@ -98,6 +108,12 @@ class CountRollTest {
     }
 
     private fun top(figures: List<Pair<String, Float>>, text: String): Float = figures.single { it.first == text }.second
+
+    /** The figures shown in the node tagged [tag], as one number once at rest. */
+    private fun number(tag: String): String = figures(tag).joinToString("") { it.first }
+
+    /** The capsule's width. */
+    private fun width(): Float = compose.onNodeWithTag(PILL).getUnclippedBoundsInRoot().width.value
 
     @Test
     fun aChangeOfTheListRollsTheFiguresThatChangeUpAndTheOthersStay() {
@@ -161,17 +177,54 @@ class CountRollTest {
         assertEquals(listOf("1" to rest, "8" to rest), figures())
     }
 
+    /**
+     * 9 to 10: the 1 comes up from under an empty place that opens as it comes, beside the 9 rolling to 0, and the
+     * capsule widens in the same motion; 10 to 9 the other way, the 1 going up as its place closes.
+     */
     @Test
-    fun underReduceMotionTheReleaseCrossFades() {
-        pill(reduceMotion = true)
-        val rest = top(figures(), "7")
-        set(15, ListChange(releasing = true))
+    fun aFigureALongerCountAddsRollsInAsTheCapsuleWidens() {
+        count = 9
+        pill()
+        val rest = top(figures(), "9")
+        val narrow = width()
+        set(10, ListChange(releasing = false))
         advance(96)
         val mid = figures()
-        assertEquals(listOf("1", "5", "7"), mid.map { it.first }.sorted())
-        assertTrue("nothing moves", mid.all { (_, top) -> abs(top - rest) < 0.01f })
-        advance(1500)
-        assertEquals(listOf("1" to rest, "5" to rest), figures())
+        val midWidth = width()
+        assertEquals(listOf("0", "1", "9"), mid.map { it.first }.sorted())
+        assertTrue("the 9 goes up", top(mid, "9") < rest - 1)
+        assertTrue("the 0 comes up from under it", top(mid, "0") > rest + 1)
+        assertTrue("the 1 comes up from under its empty place", top(mid, "1") > rest + 1)
+        advance(1000)
+        assertEquals(listOf("1" to rest, "0" to rest), figures())
+        val wide = width()
+        assertTrue("the capsule widens with the roll: $narrow < $midWidth < $wide", midWidth > narrow + 1 && midWidth < wide - 1)
+    }
+
+    @Test
+    fun aFigureAShorterCountDropsRollsOutAsTheCapsuleNarrows() {
+        count = 10
+        pill()
+        val rest = top(figures(), "0")
+        val wide = width()
+        set(9, ListChange(releasing = false))
+        advance(96)
+        val mid = figures()
+        val midWidth = width()
+        assertEquals(listOf("0", "1", "9"), mid.map { it.first }.sorted())
+        assertTrue("the 1 goes up out of its place", top(mid, "1") < rest - 1)
+        assertTrue("the 0 goes up", top(mid, "0") < rest - 1)
+        assertTrue("the 9 comes up from under it", top(mid, "9") > rest + 1)
+        advance(1000)
+        assertEquals(listOf("9" to rest), figures())
+        val narrow = width()
+        assertTrue("the capsule narrows with the roll: $wide > $midWidth > $narrow", midWidth < wide - 1 && midWidth > narrow + 1)
+        // Its place gone, the figure that comes back rolls in again.
+        set(10, ListChange(releasing = false))
+        advance(96)
+        assertTrue(top(figures(), "1") > rest + 1)
+        advance(1000)
+        assertEquals(wide, width(), 0.01f)
     }
 
     @Test
@@ -234,8 +287,66 @@ class CountRollTest {
         assertEquals(listOf("1"), figures(ACTIVE_COUNT).map { it.first })
     }
 
+    /**
+     * New trainers delivered as the list is looked at, with Moon lamp on its way and the past deliveries under them: held,
+     * the counts stay; let go, the overview's goes down and the past deliveries' up, both rolling with the release's
+     * spring.
+     */
+    @Test
+    fun theReleaseRollsTheOverviewsAndThePastDeliveriesCounts() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val repository = DemoRepository(
+            PreferencesDefaults(context.getSharedPreferences("count-roll-${UUID.randomUUID()}", Context.MODE_PRIVATE)), { AppLanguage.En }, { CAPTURED },
+        )
+        val before = repository.list().filter { (it.label.startsWith("New trainers") || it.label.startsWith("Moon lamp") || it.isDelivered) && !it.isArchived }
+        val checked = repository.refreshAll()
+        val after = before.map { parcel -> checked.first { it.id == parcel.id } }
+        assertTrue(after.first { it.label.startsWith("New trainers") }.isDelivered)
+        val source = FakeDeliveries(before, AuthenticationState.Demo)
+        var deliveries: DeliveriesState? = null
+        compose.setContent {
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false)
+            }
+        }
+        compose.waitForIdle()
+        val state = checkNotNull(deliveries)
+        val past = sectionCount(ParcelSectionKind.Delivered)
+        val active = number(ACTIVE_COUNT).toInt()
+        val delivered = number(past).toInt()
+        // The section moves up as the list takes its new places: each figure is measured from its own capsule.
+        fun inPill(tag: String) = compose.onNodeWithTag(tag).getUnclippedBoundsInRoot().top.value.let { pill -> figures(tag).map { (text, top) -> text to top - pill } }
+        val activeRest = inPill(ACTIVE_COUNT).last().second
+        val pastRest = inPill(past).last().second
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread {
+            source.parcels.value = after
+            Snapshot.sendApplyNotifications()
+        }
+        advance(800)
+        assertEquals("held, the counts stay", "$active" to "$delivered", number(ACTIVE_COUNT) to number(past))
+        var frames = 0
+        while (state.listChange?.releasing != true) {
+            check(frames++ < 30) { "Not let go" }
+            advance(FRAME)
+        }
+        advance(96)
+        fun rolling(tag: String, rest: Float, from: Int, to: Int) {
+            val units = inPill(tag).filter { (_, top) -> abs(top - rest) > 1 }
+            assertEquals("$tag rolls from $from to $to", setOf("${from % 10}", "${to % 10}"), units.map { it.first }.toSet())
+            assertTrue("$tag: the old figure goes up", top(units, "${from % 10}") < rest)
+            assertTrue("$tag: the new one comes up from under it", top(units, "${to % 10}") > rest)
+        }
+        rolling(ACTIVE_COUNT, activeRest, active, active - 1)
+        rolling(past, pastRest, delivered, delivered + 1)
+        advance(1500)
+        assertEquals("${active - 1}" to "${delivered + 1}", number(ACTIVE_COUNT) to number(past))
+    }
+
     private companion object {
         /** The test clock's frame, in milliseconds. */
         const val FRAME = 16L
+
+        const val PILL = "pill"
     }
 }

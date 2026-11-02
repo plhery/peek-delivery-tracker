@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application>
         <!-- The debug build's way to post a push's notification without a server (DebugNotifications.kt): only a
@@ -12,5 +13,14 @@
                 <action android:name="com.plhery.peekdeliverytracker.debug.POST_NOTIFICATION" />
             </intent-filter>
         </receiver>
+
+        <!-- The tests' window (compose-ui-test-manifest's) takes a change of the night mode itself, as each of the
+             app's windows does (configChanges="uiMode", main manifest): the appearance store sets the app's night as
+             it is made and as a test sets the appearance, which would otherwise start the window again under the test
+             and lose what it shows. -->
+        <activity
+            android:name="androidx.activity.ComponentActivity"
+            android:configChanges="uiMode"
+            tools:node="merge" />
     </application>
 </manifest>

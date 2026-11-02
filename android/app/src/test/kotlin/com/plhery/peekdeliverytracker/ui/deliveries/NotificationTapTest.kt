@@ -144,6 +144,17 @@ class NotificationTapTest {
         assertEquals(emptyList<NativeRoute>(), again.get().opened)
     }
 
+    /**
+     * Recents starting the window again after the phone restarted, with nothing saved: Android hands over the intent
+     * that began the task, the push's data still in it, marked as launched from history. It isn't followed again.
+     */
+    @Test
+    fun recentsAfterARestartDoesNotFollowItAgain() {
+        val again = window(tapped(parcelPush()).addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY))
+        assertEquals(emptyList<String>(), again.get().views)
+        assertEquals(emptyList<NativeRoute>(), again.get().opened)
+    }
+
     /** `pendingFriendID` while nobody is signed in: kept through a turn and after Android ended the process, counted once. */
     @Test
     fun aFriendWaitingIsKeptThroughATurnAndAfterTheProcessEnded() {

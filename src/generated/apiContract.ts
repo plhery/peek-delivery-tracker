@@ -2535,7 +2535,7 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "s10"
       },
       {
-        "pattern": "^00(?!373)\\d(?:57|73)\\d{15}$",
+        "pattern": "^00(?!373|\\d73402216)\\d(?:57|73)\\d{15}$",
         "confidence": "low",
         "checksum": "sscc",
         "preferred": true
@@ -3355,7 +3355,7 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^(?!(?:BNI|BYS|CLC|CUB|GWD|LTN|MPX|NZC|QSP|QSS|RMP|RWM|XLT))[A-Z]{3}\\d{9}$",
-        "confidence": "high"
+        "confidence": "low"
       }
     ],
     "trackingUrlTemplate": "https://www.purolator.com/en/shipping/tracker?pins={trackingNumber}",
@@ -4938,7 +4938,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^0037[03]\\d{15}$",
+        "pattern": "^0037(?:0|3(?!402216))\\d{15}$",
         "confidence": "low",
         "checksum": "sscc",
         "preferred": true
@@ -5040,6 +5040,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^\\d{16}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^(?!(?:BNI|BYS|CLC|CUB|GWD|LTN|MPX|NZC|QSP|QSS|RMP|RWM|XLT))[A-Z]{3}\\d{9}$",
         "confidence": "low"
       }
     ],
@@ -23468,7 +23472,7 @@ export const CARRIER_CAPABILITIES = {
           "www.m-one.rs"
         ],
         "pathPattern": "^/(?:en)?/?$",
-        "query": "^([A-Za-z0-9]+)$"
+        "query": "^([A-Z]{2}\\d{9}RS|RS\\d{12})$"
       }
     ],
     "detectionRules": [
@@ -31267,7 +31271,8 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/tracking/?$",
         "params": [
           "q"
-        ]
+        ],
+        "ownNumbersOnly": true
       }
     ],
     "detectionRules": [
@@ -31455,7 +31460,8 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/tracking/?$",
         "params": [
           "q"
-        ]
+        ],
+        "ownNumbersOnly": true
       }
     ],
     "detectionRules": [
@@ -32995,7 +33001,8 @@ export const CARRIER_CAPABILITIES = {
         "pathPattern": "^/tracking/?$",
         "params": [
           "q"
-        ]
+        ],
+        "ownNumbersOnly": true
       }
     ],
     "detectionRules": [
@@ -36428,7 +36435,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kuala_Lumpur",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "lex-my"
     },
     "trackingUrlTemplate": "https://lex.com.my/tracking?references={trackingNumber}",
     "linkRules": [
@@ -45964,7 +45971,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Sydney",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "anc-delivers"
     },
     "trackingUrlTemplate": "https://ancdelivers.com.au/track/{trackingNumber}",
     "linkRules": [
@@ -45998,7 +46005,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "bestfulfill"
     },
     "trackingUrlTemplate": "https://www.bestfulfillpacket.com/track?number={trackingNumber}",
     "linkRules": [
@@ -46328,7 +46335,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jakarta",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "lex-id"
     },
     "linkRules": [],
     "detectionRules": [
@@ -46988,6 +46995,419 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://xpectsameday.com/"
+  },
+  "alil-post": {
+    "displayName": "Alil Post",
+    "aliases": [
+      "AlilPost"
+    ],
+    "countries": [
+      "IL"
+    ],
+    "color": "#f68c1e",
+    "selectable": true,
+    "timezone": "Asia/Jerusalem",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://alilpost.com/en/tracking/"
+  },
+  "dimex": {
+    "displayName": "DIMEX",
+    "aliases": [
+      "Даймэкс",
+      "ДАЙМЭКС",
+      "Даймекс",
+      "Daimeks",
+      "DIMEX Express",
+      "Daily International Messenger Express"
+    ],
+    "countries": [
+      "RU",
+      "KZ",
+      "BY",
+      "AM",
+      "KG",
+      "EE"
+    ],
+    "color": "#0e4097",
+    "selectable": true,
+    "timezone": "Europe/Moscow",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.dimex.ws/otslezhivanie-nakladnyh/?nomer={trackingNumber}&lng=rus",
+    "linkRules": [
+      {
+        "domains": [
+          "www.dimex.ws",
+          "dimex.ws"
+        ],
+        "pathPattern": "^/otslezhivanie-nakladnyh/?$",
+        "params": [
+          "nomer"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dimex.ws/otslezhivanie-nakladnyh/"
+  },
+  "dnipro-llc": {
+    "displayName": "Dnipro LLC",
+    "aliases": [
+      "DNIPRO LLC",
+      "DniproLLC",
+      "Днипро ЛЛС",
+      "Дніпро ЛЛС"
+    ],
+    "countries": [
+      "US",
+      "UA"
+    ],
+    "color": "#1c7bd3",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://dniprollc.com/en/packages-tracking/?tracking={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "dniprollc.com",
+          "www.dniprollc.com"
+        ],
+        "pathPattern": "^/(?:en/)?packages-tracking/?$",
+        "params": [
+          "tracking"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://dniprollc.com/en/packages-tracking/"
+  },
+  "emu-express": {
+    "displayName": "EMU Express",
+    "aliases": [
+      "Express Mail Universal",
+      "Express Mail Universal LLC",
+      "EMU Post"
+    ],
+    "countries": [
+      "UZ",
+      "KZ"
+    ],
+    "color": "#8e2b84",
+    "selectable": true,
+    "timezone": "Asia/Tashkent",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://emu.uz/en/tracking?id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "emu.uz",
+          "www.emu.uz"
+        ],
+        "pathPattern": "^/(?:uz|ru|en)/tracking$",
+        "params": [
+          "id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://emu.uz/en/tracking"
+  },
+  "express-ru": {
+    "displayName": "Express.Ru",
+    "aliases": [
+      "ExpressRu",
+      "Экспресс Точка Ру",
+      "Express Tochka Ru",
+      "Экспресс.Ру"
+    ],
+    "countries": [
+      "RU"
+    ],
+    "color": "#e31e24",
+    "selectable": true,
+    "timezone": "Europe/Moscow",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^WEB(?:N\\d{7,10}|\\d{10})$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.express.ru/office/tracking"
+  },
+  "flecha-amarilla": {
+    "displayName": "Paquetería Flecha Amarilla",
+    "aliases": [
+      "Flecha Amarilla",
+      "Paquetería GFA",
+      "Paquetería y Mensajería Flecha Amarilla",
+      "Servicios de Paquetería y Envíos Flecha Amarilla"
+    ],
+    "countries": [
+      "MX"
+    ],
+    "color": "#fcca30",
+    "selectable": true,
+    "timezone": "America/Mexico_City",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^(?:CB\\d{6}|[CP]\\d{6,7})$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.paqueteria-flechaamarilla.com.mx/inicio"
+  },
+  "garantpost": {
+    "displayName": "Garantpost",
+    "aliases": [
+      "Гарантпост",
+      "EMS Garantpost",
+      "ЕМС Гарантпост",
+      "ООО «ЕМС Гарантпост»",
+      "Garant Post"
+    ],
+    "countries": [
+      "RU"
+    ],
+    "color": "#094fa3",
+    "selectable": true,
+    "timezone": "Europe/Moscow",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://garantpost.ru/tracking/"
+  },
+  "kargoturk": {
+    "displayName": "KargoTurk",
+    "aliases": [
+      "Kargo Türk",
+      "Kargo Turk",
+      "KargoTürk",
+      "KargoTurk Teslimat Hizmetleri Limited Şirketi"
+    ],
+    "countries": [
+      "TR"
+    ],
+    "color": "#4d148c",
+    "selectable": true,
+    "timezone": "Europe/Istanbul",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://online.kargoturk.com.tr/tracking?har_kod={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "online.kargoturk.com.tr"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "har_kod"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.kargoturk.com.tr/kargo-takip"
+  },
+  "korexgarant": {
+    "displayName": "Korexgarant",
+    "aliases": [
+      "Корэксгарант",
+      "КОРЭКСГАРАНТ",
+      "ООО «КОРЭКСГАРАНТ»",
+      "Корэкс"
+    ],
+    "countries": [
+      "BY"
+    ],
+    "color": "#013550",
+    "selectable": true,
+    "timezone": "Europe/Minsk",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://korex.by/"
+  },
+  "motorex": {
+    "displayName": "Motorex",
+    "aliases": [
+      "MOTOREX",
+      "Motor Express Delivery Sdn Bhd",
+      "Motorex Same Day Delivery"
+    ],
+    "countries": [
+      "MY"
+    ],
+    "color": "#fc0203",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.motorex.com.my/en/getTrackingList/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.motorex.com.my",
+          "motorex.com.my"
+        ],
+        "path": "^/en/getTrackingList/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.motorex.com.my/en/tracking-motorex"
+  },
+  "porlor": {
+    "displayName": "PorLor Express",
+    "aliases": [
+      "Por Lor Express",
+      "PORLOR",
+      "PORLOR EXPRESS COMPANY LIMITED",
+      "บริษัท ปอลอ เอ็กซ์เพรส จำกัด",
+      "ปอลอ เอ็กซ์เพรส"
+    ],
+    "countries": [
+      "TH"
+    ],
+    "color": "#e09920",
+    "selectable": true,
+    "timezone": "Asia/Bangkok",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.porlor.co.th/Tracking?search={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "porlor.co.th",
+          "www.porlor.co.th"
+        ],
+        "pathPattern": "^/Tracking$",
+        "params": [
+          "search"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.porlor.co.th/Tracking"
+  },
+  "spark-kz": {
+    "displayName": "Spark",
+    "aliases": [
+      "Spark Logistics",
+      "Spark Логистика",
+      "ТОО Spark Логистика"
+    ],
+    "countries": [
+      "KZ"
+    ],
+    "color": "#a3dd2c",
+    "selectable": true,
+    "timezone": "Asia/Almaty",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://spark.kz/"
+  },
+  "tinypack": {
+    "displayName": "TinyPack",
+    "aliases": [
+      "Tiny Pack",
+      "Distribuidora y Transportadora del Pacífico"
+    ],
+    "countries": [
+      "MX"
+    ],
+    "color": "#3dae2b",
+    "selectable": true,
+    "timezone": "America/Mexico_City",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tinypack.mx/rastreo?codigo={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tinypack.mx"
+        ],
+        "pathPattern": "^/rastreo/?$",
+        "params": [
+          "codigo"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tinypack.mx/rastreo/"
+  },
+  "topdelivery": {
+    "displayName": "TopDelivery",
+    "aliases": [
+      "Top Delivery",
+      "ТопДеливери",
+      "ТопДоставка",
+      "Internet Logistika",
+      "ООО «Интернет Логистика»"
+    ],
+    "countries": [
+      "RU"
+    ],
+    "color": "#feaa00",
+    "selectable": true,
+    "timezone": "Europe/Moscow",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.topdelivery.ru/tracking/?order={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.topdelivery.ru",
+          "topdelivery.ru"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "order"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.topdelivery.ru/tracking/"
   }
 } as const;
 
@@ -48324,7 +48744,21 @@ export const CARRIER_IDS = [
   "uparcel",
   "value-logistics",
   "welivery",
-  "xpect-same-day"
+  "xpect-same-day",
+  "alil-post",
+  "dimex",
+  "dnipro-llc",
+  "emu-express",
+  "express-ru",
+  "flecha-amarilla",
+  "garantpost",
+  "kargoturk",
+  "korexgarant",
+  "motorex",
+  "porlor",
+  "spark-kz",
+  "tinypack",
+  "topdelivery"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

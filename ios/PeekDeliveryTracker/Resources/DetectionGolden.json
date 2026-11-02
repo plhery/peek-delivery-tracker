@@ -1973,7 +1973,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -1982,15 +1981,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -1998,7 +1996,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2007,15 +2004,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2023,7 +2019,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2032,15 +2027,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2048,7 +2042,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2057,15 +2050,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2073,7 +2065,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2082,15 +2073,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2098,7 +2088,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2107,15 +2096,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2123,7 +2111,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2132,15 +2119,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2148,7 +2134,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2157,15 +2142,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2173,7 +2157,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2182,15 +2165,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2198,7 +2180,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2207,15 +2188,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2223,7 +2203,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2232,15 +2211,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -2248,7 +2226,6 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "bring-posten",
       "early-bird",
       "swiss-post-cargo",
       "postnord",
@@ -2257,15 +2234,14 @@
       "matkahuolto"
     ],
     "preferred": [
-      "bring-posten",
       "early-bird"
     ],
     "asked": [
       "early-bird",
-      "bring-posten",
       "matkahuolto",
       "swiss-post-cargo",
-      "postnord"
+      "postnord",
+      "nz-post"
     ]
   },
   {
@@ -3212,22 +3188,21 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "postnord",
       "early-bird",
       "swiss-post-cargo",
+      "postnord",
       "usps",
       "nz-post",
       "matkahuolto"
     ],
     "preferred": [
-      "postnord",
       "early-bird"
     ],
     "asked": [
-      "postnord",
       "early-bird",
       "matkahuolto",
       "swiss-post-cargo",
+      "postnord",
       "nz-post"
     ]
   },
@@ -14526,6 +14501,23 @@
       "geniki-taxydromiki",
       "packeta",
       "dhl-ecommerce-es"
+    ]
+  },
+  {
+    "input": "1130000048942",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "la-poste",
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "korea-post"
+    ],
+    "asked": [
+      "la-poste",
+      "delhivery"
     ]
   },
   {
@@ -31230,6 +31222,30 @@
     ]
   },
   {
+    "input": "265000571784",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive",
+      "j-and-t",
+      "metropolitan-warehouse"
+    ]
+  },
+  {
     "input": "265370347094",
     "carrier": "unknown",
     "confidence": "low",
@@ -37380,6 +37396,16 @@
     ]
   },
   {
+    "input": "35407484",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "355950602499",
     "carrier": "unknown",
     "confidence": "low",
@@ -42456,6 +42482,16 @@
     ],
     "asked": [
       "brt"
+    ]
+  },
+  {
+    "input": "44925154",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
     ]
   },
   {
@@ -55299,6 +55335,30 @@
     ]
   },
   {
+    "input": "700000883570",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colis-prive",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sending"
+    ],
+    "asked": [
+      "brt",
+      "colis-prive",
+      "j-and-t",
+      "metropolitan-warehouse"
+    ]
+  },
+  {
     "input": "700000947978",
     "carrier": "unknown",
     "confidence": "low",
@@ -61980,6 +62040,14 @@
     ]
   },
   {
+    "input": "8302175",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ]
+  },
+  {
     "input": "830373130626",
     "carrier": "unknown",
     "confidence": "low",
@@ -62614,6 +62682,12 @@
     ]
   },
   {
+    "input": "845692",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "8467721233",
     "carrier": "unknown",
     "confidence": "low",
@@ -63042,6 +63116,12 @@
     "candidates": [
       "la-poste"
     ]
+  },
+  {
+    "input": "864111",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "86450255720686Q",
@@ -65561,6 +65641,12 @@
     ]
   },
   {
+    "input": "925678",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "925897112",
     "carrier": "unknown",
     "confidence": "none",
@@ -67965,6 +68051,36 @@
     "confidence": "high",
     "candidates": [
       "swiss-post"
+    ]
+  },
+  {
+    "input": "984931500084",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "mondial-relay",
+      "gls-fr",
+      "colis-prive",
+      "gls-de",
+      "mrw",
+      "brt",
+      "sf-express",
+      "sto",
+      "zto",
+      "j-and-t",
+      "gls-at",
+      "gls-pl",
+      "lbc-express",
+      "metropolitan-warehouse",
+      "sending"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "brt",
+      "colis-prive"
     ]
   },
   {
@@ -71095,9 +71211,16 @@
   },
   {
     "input": "AVO145588001",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -72707,6 +72830,42 @@
     ]
   },
   {
+    "input": "C1503475",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "dx",
+      "flecha-amarilla",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "C1503571",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "dx",
+      "flecha-amarilla",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
     "input": "C1867094M",
     "carrier": "unknown",
     "confidence": "low",
@@ -72785,6 +72944,7 @@
       "gls-fr",
       "gls-de",
       "dx",
+      "flecha-amarilla",
       "loggi"
     ],
     "asked": [
@@ -72805,6 +72965,14 @@
     "confidence": "low",
     "candidates": [
       "dtdc"
+    ]
+  },
+  {
+    "input": "C619269",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "flecha-amarilla"
     ]
   },
   {
@@ -72972,9 +73140,16 @@
   },
   {
     "input": "CAM000011312",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -73025,6 +73200,23 @@
     "confidence": "high",
     "candidates": [
       "la-poste"
+    ]
+  },
+  {
+    "input": "CB699509",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "flecha-amarilla",
+      "loggi"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
     ]
   },
   {
@@ -73734,9 +73926,16 @@
   },
   {
     "input": "CGK002986959",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -76822,9 +77021,16 @@
   },
   {
     "input": "DNK914817619",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -79493,9 +79699,16 @@
   },
   {
     "input": "EWN001815469",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -81227,6 +81440,21 @@
     ]
   },
   {
+    "input": "GPO002066019",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
+      "purolator"
+    ]
+  },
+  {
     "input": "GPPISP0000103523GB",
     "carrier": "globalpost",
     "confidence": "high",
@@ -82454,9 +82682,16 @@
   },
   {
     "input": "HEZ000654921",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -82975,9 +83210,16 @@
   },
   {
     "input": "IHB465913510",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -82986,6 +83228,21 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "IHN000001852",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
+      "purolator"
+    ]
   },
   {
     "input": "IM06010000714050",
@@ -83618,9 +83875,16 @@
   },
   {
     "input": "JFV247545960",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -85040,9 +85304,16 @@
   },
   {
     "input": "KGZ000453699",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -85110,9 +85381,16 @@
   },
   {
     "input": "KNP507956665",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -85311,9 +85589,16 @@
   },
   {
     "input": "KYV009956937",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -87254,9 +87539,16 @@
   },
   {
     "input": "LWI000282061",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -87867,9 +88159,16 @@
   },
   {
     "input": "MAA574899288",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -89755,9 +90054,16 @@
   },
   {
     "input": "ODO000466768",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -90156,6 +90462,25 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "flecha-amarilla",
+      "loggi",
+      "polaris-transport"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch"
+    ]
+  },
+  {
+    "input": "P1001545",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "flecha-amarilla",
       "loggi",
       "polaris-transport"
     ],
@@ -90224,6 +90549,7 @@
       "gls-ch",
       "gls-fr",
       "gls-de",
+      "flecha-amarilla",
       "loggi",
       "polaris-transport"
     ],
@@ -90264,6 +90590,22 @@
     ],
     "asked": [
       "pos-indonesia"
+    ]
+  },
+  {
+    "input": "P286153",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "flecha-amarilla"
+    ]
+  },
+  {
+    "input": "P286186",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "flecha-amarilla"
     ]
   },
   {
@@ -91178,9 +91520,16 @@
   },
   {
     "input": "PHU001209901",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -97317,9 +97666,16 @@
   },
   {
     "input": "STR059449783",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -98588,9 +98944,16 @@
   },
   {
     "input": "TLR000083964",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -99060,9 +99423,16 @@
   },
   {
     "input": "UBG000623916",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -99531,6 +99901,21 @@
     "confidence": "high",
     "candidates": [
       "china-post"
+    ]
+  },
+  {
+    "input": "UNY000004143",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
+      "purolator"
     ]
   },
   {
@@ -100408,9 +100793,16 @@
   },
   {
     "input": "VPL517210037",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -100480,9 +100872,16 @@
   },
   {
     "input": "VVD002126656",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -100755,6 +101154,14 @@
       "colis-prive",
       "aramex-au",
       "aramex-nz"
+    ]
+  },
+  {
+    "input": "WEBN1234567",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "express-ru"
     ]
   },
   {
@@ -101078,6 +101485,14 @@
     "candidates": []
   },
   {
+    "input": "Web-0002405927",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "express-ru"
+    ]
+  },
+  {
     "input": "X003413103",
     "carrier": "unknown",
     "confidence": "low",
@@ -101170,9 +101585,16 @@
   },
   {
     "input": "XAO050055268",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },
@@ -102931,9 +103353,16 @@
   },
   {
     "input": "dft207954743",
-    "carrier": "purolator",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "colis-prive",
+      "purolator",
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "colis-prive",
       "purolator"
     ]
   },

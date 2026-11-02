@@ -1335,6 +1335,20 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let valueLogistics = CarrierID(rawValue: "value-logistics")
     static let welivery = CarrierID(rawValue: "welivery")
     static let xpectSameDay = CarrierID(rawValue: "xpect-same-day")
+    static let alilPost = CarrierID(rawValue: "alil-post")
+    static let dimex = CarrierID(rawValue: "dimex")
+    static let dniproLlc = CarrierID(rawValue: "dnipro-llc")
+    static let emuExpress = CarrierID(rawValue: "emu-express")
+    static let expressRu = CarrierID(rawValue: "express-ru")
+    static let flechaAmarilla = CarrierID(rawValue: "flecha-amarilla")
+    static let garantpost = CarrierID(rawValue: "garantpost")
+    static let kargoturk = CarrierID(rawValue: "kargoturk")
+    static let korexgarant = CarrierID(rawValue: "korexgarant")
+    static let motorex = CarrierID(rawValue: "motorex")
+    static let porlor = CarrierID(rawValue: "porlor")
+    static let sparkKz = CarrierID(rawValue: "spark-kz")
+    static let tinypack = CarrierID(rawValue: "tinypack")
+    static let topdelivery = CarrierID(rawValue: "topdelivery")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2622,6 +2636,20 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .valueLogistics,
         .welivery,
         .xpectSameDay,
+        .alilPost,
+        .dimex,
+        .dniproLlc,
+        .emuExpress,
+        .expressRu,
+        .flechaAmarilla,
+        .garantpost,
+        .kargoturk,
+        .korexgarant,
+        .motorex,
+        .porlor,
+        .sparkKz,
+        .tinypack,
+        .topdelivery,
     ]
 
     init(from decoder: Decoder) throws {

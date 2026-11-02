@@ -121,7 +121,7 @@ class AppContainer(
     notificationPermission: NotificationPermission = (context as? PeekApplication)?.notificationPermission ?: NotificationPermission(context),
     /** The notifications the app posts and takes away: the process's. */
     val posted: AppNotifications = (context as? PeekApplication)?.posted ?: AppNotifications(context),
-    /** Web sign-in in a Custom Tab over the window in front: the process's, which each window registers with. */
+    /** Web sign-in in an Auth Tab or a Custom Tab over the window in front: the process's, which each window registers with. */
     webAuthentication: WebAuthenticating = (context as? PeekApplication)?.signInTab ?: CustomTabSignIn(),
 ) {
     /** `UserDefaults.standard`. */

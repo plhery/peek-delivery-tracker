@@ -2,7 +2,7 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.Context
 import androidx.compose.ui.test.IdlingResource
-import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
@@ -92,7 +92,7 @@ class ZurichTime : ExternalResource() {
  * The maps' pictures are made on other threads, and an opened map's detail tiles read on them: the test waits until
  * each is drawn, and each tile a map asked for is in.
  */
-fun ComposeContentTestRule.waitsForMaps() {
+fun ComposeTestRule.waitsForMaps() {
     runBlocking { WorldAtlases.load().await() }
     registerIdlingResource(object : IdlingResource {
         override val isIdleNow: Boolean get() = MapScenes.isIdle && WorldAtlases.isIdle && WorldDetails.isIdle

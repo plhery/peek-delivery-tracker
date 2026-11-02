@@ -25,6 +25,7 @@ import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import java.time.Instant
 import kotlin.coroutines.ContinuationInterceptor
+import kotlinx.coroutines.CoroutineScope
 
 /**
  * The root as the app shows it, in the app's copy for `language`, at the captures' moment ([CAPTURED]) unless [now]
@@ -34,9 +35,9 @@ import kotlin.coroutines.ContinuationInterceptor
  * unless [reduceTransparency]. The tabs show [browserCheck]'s sheet, where a test gives one, and scan labels with
  * [scanner] (none unless a test gives one). A parcel's link opens over it from [links], where a test gives them. The
  * first open stands over the tabs for a guest with nothing followed, unless a test draws its own [deliveries]. The
- * arrival signs in with [session], whose state then is the root's in place of [state], its runs going on in the
- * host's scope as the app's do in its own; without one it has the debug build's, where sign-in is unavailable, which
- * never changes the state.
+ * arrival signs in with [session], whose state then is the root's in place of [state], its runs going on in [work]
+ * where a test gives a scope that outlives the window, as the app's does, else in the host's; without one it has the
+ * debug build's, where sign-in is unavailable, which never changes the state.
  */
 @Composable
 fun RootHost(
@@ -54,6 +55,7 @@ fun RootHost(
     links: ParcelLinkSource? = null,
     now: () -> Instant = { CAPTURED },
     session: SessionStore? = null,
+    work: CoroutineScope? = null,
     deliveries: (@Composable () -> Unit)? = null,
 ) {
     val effects = rememberCoroutineScope()
@@ -73,7 +75,7 @@ fun RootHost(
             carrierIdentities = identities,
         ) {
             // The first open over the tabs is the deliveries' own: none over a page a test draws in their place.
-            PeekRoot(shownState, localizer, signIn, onView, inbox, browserCheck, scanner, links, source = shown.takeIf { deliveries == null }, work = effects) {
+            PeekRoot(shownState, localizer, signIn, onView, inbox, browserCheck, scanner, links, source = shown.takeIf { deliveries == null }, work = work ?: effects) {
                 if (deliveries != null) {
                     deliveries()
                 } else {

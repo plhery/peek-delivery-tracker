@@ -68,6 +68,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /** Web sign-in opens over the window a tap last reached, the top resumed one where two of the app's share the screen. */
+    override fun onTopResumedActivityChanged(isTopResumedActivity: Boolean) {
+        super.onTopResumedActivityChanged(isTopResumedActivity)
+        if (isTopResumedActivity) app.signInTab.cameToTop(this)
+    }
+
     /** Edge to edge with the bars' icons for the app's appearance, not the phone's, and no scrim, as on the iPhone. */
     private fun systemBars(dark: Boolean) {
         val style = if (dark) SystemBarStyle.dark(Color.TRANSPARENT) else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)

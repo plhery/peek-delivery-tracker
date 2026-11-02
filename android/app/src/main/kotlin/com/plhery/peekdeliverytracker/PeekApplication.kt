@@ -49,7 +49,7 @@ class PeekApplication : Application() {
     /** A friend's invitation that came before the stores were made, which shows once they are. */
     private var waitingInvitation: String? = null
 
-    /** The last link the app followed and when, so the same one again within a second is followed once ([isRepeat]). */
+    /** The last link the app saw and when, so the same one again within a second is followed once ([isRepeat]). */
     private val deliveries = LinkDeliveries()
 
     /** The clock [isRepeat] reads: the phone's, or a test's. */
@@ -158,10 +158,12 @@ class PeekApplication : Application() {
     fun openLink(url: String): Boolean = !isRepeat(url) && (openParcelLink(url) || openInvitation(url))
 
     /**
-     * `open(_:)`'s `deliveries.isRepeat(url)` (A-L01): whether this is the address the app followed last, less than a
-     * second ago, which it doesn't follow again; a tapped link can reach the app twice. The iPhone's one window keeps
-     * one `LinkDeliveries`; the app keeps one for [ParcelLinkActivity] and every window's links alike, and a
-     * notification opened is no link to it. On the main thread.
+     * `open(_:)`'s `deliveries.isRepeat(url)` (A-L01): whether this is the address the app saw last, less than a
+     * second ago, which it doesn't follow again where `open(_:)` would drop it; a tapped link can reach the app twice.
+     * Each address asked about becomes the last seen, the list's own routes too, which open again all the same
+     * (`DeliveriesInbox.follow`). The iPhone's one window keeps one `LinkDeliveries`; the app keeps one for
+     * [ParcelLinkActivity] and every window's links alike, and a notification opened is no link to it. On the main
+     * thread.
      */
     fun isRepeat(url: String): Boolean = deliveries.isRepeat(url, now())
 

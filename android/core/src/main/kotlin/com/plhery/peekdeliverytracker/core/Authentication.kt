@@ -37,7 +37,7 @@ import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonObject
 
 // Authentication.swift. The platform's parts are the app's: the Keychain is a `SessionPersistence`,
-// ASWebAuthenticationSession a `WebAuthenticating` (Custom Tabs) and ASAuthorizationController an
+// ASWebAuthenticationSession a `WebAuthenticating` (Auth Tabs, Custom Tabs) and ASAuthorizationController an
 // `AppleSignInAuthorizing` (Apple's web sign-in); URLSession is the `HttpTransport` every client shares.
 
 @Serializable
@@ -190,8 +190,10 @@ class PassthroughSignal {
  * with the app's sign-in, as the iPhone's does (`prefersEphemeralWebBrowserSession = false`): someone signed in to
  * Google there is not asked again.
  *
- * On Android a Custom Tab (androidx.browser's `CustomTabsIntent`), or the browser itself when no browser offers Custom
- * Tabs. The address comes back as an intent: an activity whose intent filter takes `callbackScheme` with the host
+ * On Android the default browser's Auth Tab (androidx.browser's `AuthTabIntent`), which catches the address itself and
+ * returns it as the result of the activity that opened it, where the browser has one; elsewhere a Custom Tab
+ * (`CustomTabsIntent`), or the browser itself when no browser offers Custom Tabs, from which the address comes back
+ * as an intent: an activity whose intent filter takes `callbackScheme` with the host
  * `OAuthFlow.callbackHost` (BROWSABLE and DEFAULT, `singleTop` or a transparent one that finishes at once) hands its
  * `intent.data` to the call under way, which returns it as a string. That host is this call's alone: NativeRoute and
  * the invitation links leave it alone, and the app's other `peekdeliverytracker://` intent filters each name their

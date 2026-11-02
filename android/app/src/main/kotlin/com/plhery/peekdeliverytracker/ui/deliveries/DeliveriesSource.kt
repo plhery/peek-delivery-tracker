@@ -837,8 +837,10 @@ class DeliveriesInbox(
      * the link's text ([add]), and last a friend's invitation, which [invitationLink] shows over everything. The app's
      * parcel and invitation links come by ParcelLinkActivity, which keeps them out of the window's intent; one sent to
      * the window itself comes here. Each is counted ([opened], `deep-link-open`), whatever it leads to, as the iPhone's
-     * analytics hear every `.onOpenURL`; the same address again within a second is followed once ([repeated],
-     * `LinkDeliveries.isRepeat`). A notification the app posted, opened, comes before them all
+     * analytics hear every `.onOpenURL`. Each is noted as the address seen last ([repeated], `LinkDeliveries.isRepeat`),
+     * and the same again within a second isn't followed again where RootView's `open(_:)` would drop it: a parcel's link,
+     * a friend, an invitation. The list's own routes, `parcel/<uuid>` and `add`, which ParcelListView's `handleURL`
+     * follows unguarded, open again. A notification the app posted, opened, comes before them all
      * ([AppNotifications.payload], which reads the app's own alone).
      */
     fun follow(intent: Intent?) {
@@ -849,14 +851,13 @@ class DeliveriesInbox(
         if (intent?.action != Intent.ACTION_VIEW) return
         val url = intent.dataString ?: return
         opened()
-        if (repeated(url)) return
-        if (parcelLink(url)) return
+        val repeat = repeated(url)
         when (val route = NativeRoute(url)) {
             is NativeRoute.Parcel -> open(route.id)
-            is NativeRoute.Friend -> friendState.value = route.id
             is NativeRoute.Add -> addState.value = AddLink(route.trackingInput)
-            // The links' notifications come with their screens.
-            else -> invitationLink(url)
+            else -> if (!repeat && !parcelLink(url)) {
+                if (route is NativeRoute.Friend) friendState.value = route.id else invitationLink(url)
+            }
         }
     }
 

@@ -41,7 +41,7 @@ fun signInConfiguration(configured: Boolean = true, google: Boolean = false, oid
 /**
  * The auth service as the tests answer it, on no network: each request kept in [requests]; a code sent (`otp`) once
  * [held] lets it through, then [otp]'s answer; a code checked (`verify`) [verify]'s, a session for
- * [READER_EMAIL] with made-up tokens by default.
+ * [READER_EMAIL] with made-up tokens by default, as is a browser's code exchanged (`token?grant_type=pkce`).
  */
 class FakeAuthService : HttpTransport {
     /** What the service answers. */
@@ -70,6 +70,7 @@ class FakeAuthService : HttpTransport {
         val answer = when {
             request.url.endsWith("/auth/v1/otp") -> otp
             request.url.endsWith("/auth/v1/verify") -> verify
+            request.url.endsWith("/auth/v1/token?grant_type=pkce") -> Answer.Session
             else -> Answer.Refused("not_found", "Not found")
         }
         return when (answer) {

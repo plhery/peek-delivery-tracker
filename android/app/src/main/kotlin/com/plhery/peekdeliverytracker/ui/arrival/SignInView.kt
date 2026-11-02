@@ -39,10 +39,12 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.retain.retain
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -137,24 +139,71 @@ internal enum class SignInStep { Methods, Code }
 
 /**
  * SignInView's state: the step, what is typed, whether the email form is open among other ways in, the run under way
- * (`working`, with the provider it opened) and the error the last one ended on. What is typed, the step and the error
- * live on through the window being made again, as the iPhone's view lives on through a rotation; a run doesn't.
+ * (`working`, with the provider it opened, [SignInRun]) and the error the last one ended on. What is typed, the step and
+ * the error live on through the window being made again and after the process ended; the run lives on through the
+ * window being made again, as the iPhone's view lives on through a rotation.
  */
 @Stable
-private class SignInForm(step: SignInStep, email: String, code: String, expanded: Boolean, error: String?) {
+private class SignInForm(private val run: SignInRun, step: SignInStep, email: String, code: String, expanded: Boolean, error: String?) {
     var step by mutableStateOf(step)
     var email by mutableStateOf(email)
     var code by mutableStateOf(code)
     var emailExpanded by mutableStateOf(expanded)
     var errorMessage by mutableStateOf(error)
-    var working by mutableStateOf(false)
-    var activeProvider: String? by mutableStateOf(null)
+    val working: Boolean get() = run.working
+    val activeProvider: String? get() = run.activeProvider
 
     companion object {
-        val Saver = listSaver<SignInForm, Any?>(
+        /** The form saved without its run, and made again around `run`, the window's. */
+        fun saver(run: SignInRun) = listSaver<SignInForm, Any?>(
             save = { listOf(it.step.name, it.email, it.code, it.emailExpanded, it.errorMessage) },
-            restore = { SignInForm(SignInStep.valueOf(it[0] as String), it[1] as String, it[2] as String, it[3] as Boolean, it[4] as String?) },
+            restore = { SignInForm(run, SignInStep.valueOf(it[0] as String), it[1] as String, it[2] as String, it[3] as Boolean, it[4] as String?) },
         )
+    }
+}
+
+/**
+ * `run(provider:_:)`'s run under way, with the provider it opened. It goes on in the app's scope and outlives the window
+ * (`retain`): the window made again during a rotation or a fold shows it still under way, its buttons held back, and
+ * then how it ended, its error or its next step, which go to the form on screen, or to the next one shown when it ends
+ * while none is. The process ending ends it.
+ */
+@Stable
+private class SignInRun {
+    var working by mutableStateOf(false)
+        private set
+    var activeProvider: String? by mutableStateOf(null)
+        private set
+
+    /** The form on screen, which the run's end goes to. */
+    private var form: SignInForm? = null
+
+    /** How a run ended while no form was on screen, for the next one shown. */
+    private var ended: (SignInForm.() -> Unit)? = null
+
+    fun start(provider: String?) {
+        working = true
+        activeProvider = provider
+    }
+
+    /** `form` is on screen, and takes how a run ended meanwhile. */
+    fun show(form: SignInForm) {
+        this.form = form
+        ended?.let { form.it() }
+        ended = null
+    }
+
+    /** `form` has left the screen. */
+    fun hide(form: SignInForm) {
+        if (this.form === form) this.form = null
+    }
+
+    /** The run is over: `outcome` goes to the form on screen, or to the next one. */
+    fun end(outcome: SignInForm.() -> Unit) {
+        working = false
+        activeProvider = null
+        val form = form
+        if (form != null) form.outcome() else ended = outcome
     }
 }
 
@@ -186,6 +235,7 @@ internal class SignInInvitation(val nickname: String?, val errorKey: String?, va
  * email" and the demo are disabled, as the iPhone's are; the back and the language menu are not. A run goes on in
  * [work] once the screen has gone, as the iPhone's `Task` outlives its view: the email still goes and its outcome is
  * counted, and a code checked after the back is dropped by the session, whose account changed (`checkGeneration`).
+ * The window made again while one runs shows it under way, and then how it ended ([SignInRun]).
  * A cancelled run says nothing; any other failure says `Localizer.errorMessage`'s words, an OIDC one with only the
  * generic message its own. The system's back does what the back does ([onBack]), so it never closes the app from
  * here.
@@ -212,31 +262,39 @@ internal fun SignInView(
     val localizer = LocalLocalizer.current
     val density = LocalDensity.current
     val configuration = session.configuration
-    val form = rememberSaveable(saver = SignInForm.Saver) { SignInForm(SignInStep.Methods, "", "", false, null) }
+    val underWay = retain { SignInRun() }
+    val form = rememberSaveable(saver = remember(underWay) { SignInForm.saver(underWay) }) {
+        SignInForm(underWay, SignInStep.Methods, "", "", false, null)
+    }
+    DisposableEffect(underWay, form) {
+        underWay.show(form)
+        onDispose { underWay.hide(form) }
+    }
 
-    /** `run(provider:_:)`. */
-    fun run(provider: String? = null, operation: suspend () -> Unit) {
-        if (form.working) return
-        form.working = true
-        form.activeProvider = provider
+    /** `run(provider:_:)`, which on success does to the form on screen what [succeeded] says. */
+    fun run(provider: String? = null, succeeded: SignInForm.() -> Unit = {}, operation: suspend () -> Unit) {
+        if (underWay.working) return
+        underWay.start(provider)
         form.errorMessage = null
         work.launch {
+            var ended: SignInForm.() -> Unit = {}
             try {
                 operation()
+                ended = succeeded
             } catch (_: AuthenticationError.OauthCancelled) {
             } catch (cancelled: CancellationException) {
                 // A change of account under way (`checkGeneration`) says nothing.
                 currentCoroutineContext().ensureActive()
             } catch (error: Exception) {
                 val message = localizer.errorMessage(error)
-                form.errorMessage = if (provider == OIDC && message == localizer.text("error.generic")) {
+                val shown = if (provider == OIDC && message == localizer.text("error.generic")) {
                     localizer.text("auth.oidcFailed", mapOf("provider" to configuration.oidcName))
                 } else {
                     message
                 }
+                ended = { errorMessage = shown }
             }
-            form.working = false
-            form.activeProvider = null
+            underWay.end(ended)
         }
     }
 
@@ -320,7 +378,9 @@ internal fun SignInView(
                                 Text(localized("auth.configTitle"), color = colors.secondaryLabel, style = type.subheadline.sfLines())
                             }
                             form.step == SignInStep.Code -> CodeForm(form, invitation != null, onVerify = {
-                                run { session.verifyCode(email = form.email.cleanedEmail, code = form.code) }
+                                val email = form.email.cleanedEmail
+                                val code = form.code
+                                run { session.verifyCode(email = email, code = code) }
                             })
                             else -> Methods(session, form, invitation != null, ::run)
                         }
@@ -426,7 +486,12 @@ internal fun LanguageMenu(menus: SheetMenus) {
  * moves up; the error under them while the form is shut.
  */
 @Composable
-private fun Methods(session: SessionStore, form: SignInForm, invited: Boolean, run: (String?, suspend () -> Unit) -> Unit) {
+private fun Methods(
+    session: SessionStore,
+    form: SignInForm,
+    invited: Boolean,
+    run: (provider: String?, succeeded: SignInForm.() -> Unit, operation: suspend () -> Unit) -> Unit,
+) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
@@ -437,7 +502,7 @@ private fun Methods(session: SessionStore, form: SignInForm, invited: Boolean, r
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(spacing)) {
         if (configuration.googleAuthEnabled) {
             val active = form.activeProvider == GOOGLE
-            MethodButton(GOOGLE_TAG, enabled = !form.working, onClick = { run(GOOGLE) { session.signInWithGoogle() } }) {
+            MethodButton(GOOGLE_TAG, enabled = !form.working, onClick = { run(GOOGLE, {}) { session.signInWithGoogle() } }) {
                 Image(painterResource(R.drawable.google_g), contentDescription = null, Modifier.size(20.dp))
                 val style = type.fixed(18f, FontWeight.Medium).sfLines()
                 Text(
@@ -454,7 +519,7 @@ private fun Methods(session: SessionStore, form: SignInForm, invited: Boolean, r
             val title = remember(active, language, configuration.oidcName) {
                 localizer.text(if (active) "auth.oidcOpening" else "auth.oidc", mapOf("provider" to configuration.oidcName))
             }
-            MethodButton(OIDC_TAG, enabled = !form.working, onClick = { run(OIDC) { session.signInWithOidc() } }) {
+            MethodButton(OIDC_TAG, enabled = !form.working, onClick = { run(OIDC, {}) { session.signInWithOidc() } }) {
                 PeekSymbol("person.badge.key.fill", Modifier.clearAndSetSemantics {}, font = type.style(IosTextStyle.Subheadline, FontWeight.Medium), tint = colors.ink)
                 Text(title, color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
                 if (active) ActivityIndicator(Modifier.clearAndSetSemantics {}, size = SMALL_SPINNER)
@@ -498,10 +563,9 @@ private fun Methods(session: SessionStore, form: SignInForm, invited: Boolean, r
                 AnimatedVisibility(formVisible, enter = expanding, exit = ExitTransition.None) {
                     val localizer = LocalLocalizer.current
                     EmailForm(form, invited, onSend = {
-                        run(null) {
-                            session.sendCode(to = form.email.cleanedEmail, language = localizer.language)
-                            form.step = SignInStep.Code
-                        }
+                        val email = form.email.cleanedEmail
+                        val language = localizer.language
+                        run(null, { step = SignInStep.Code }) { session.sendCode(to = email, language = language) }
                     })
                 }
             }

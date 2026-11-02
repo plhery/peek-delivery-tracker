@@ -21,11 +21,13 @@ import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.SignInCallbackActivity
+import com.plhery.peekdeliverytracker.platform.SignInTabActivity
 import com.plhery.peekdeliverytracker.platform.notificationTap
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.arrival.INVITATION_WELCOME
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_PARCEL
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_TRACKING
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_GIFT_CARD
@@ -34,6 +36,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
 import java.io.IOException
 import java.security.Security
 import java.time.Instant
+import java.util.UUID
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -49,7 +52,9 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNotSame
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -70,8 +75,9 @@ import org.robolectric.annotation.GraphicsMode
  * the trampoline or by the window, cold or running, and not again as the window turns; a notification opened as the
  * iPhone counts one (`notification-open`), and an intent from elsewhere with a notification's data not at all. The
  * same link again within a second is followed once (A-L01), by the trampoline or the window alike, and counted each
- * time. Add's link (`add?tracking=`) goes to the window, which opens Add with its text, counted even where no list
- * hears it; sign-in's callback is never counted. On the app's own stores, made offline with links read from memory,
+ * time, but for the list's own routes, which open again. Add's link (`add?tracking=`) goes to the window, which opens
+ * Add with its text, counted even where no list hears it; sign-in's callback is never counted. Web sign-in opens over
+ * the window that came to the top last. On the app's own stores, made offline with links read from memory,
  * the analytics answered on the client itself.
  */
 @RunWith(AndroidJUnit4::class)
@@ -442,9 +448,12 @@ class ParcelLinkActivityTest {
         assertOpens(6)
     }
 
-    /** The window's own links follow the same rule: Add's link twice within a second opens Add once. */
+    /**
+     * Add's link is the list's own (ParcelListView's `handleURL`, which RootView's repeat rule doesn't guard): twice
+     * within a second, it opens Add twice.
+     */
     @Test
-    fun theWindowsOwnLinkWithinASecondIsFollowedOnce() {
+    fun theWindowsAddLinkWithinASecondOpensAddAgain() {
         clock()
         val window = Robolectric.buildActivity(MainActivity::class.java, toWindow("peekdeliverytracker://add?tracking=TEST0001")).setup()
         val stores = awaitStores()
@@ -458,11 +467,50 @@ class ParcelLinkActivityTest {
         now = now.plusMillis(999)
         window.newIntent(toWindow("peekdeliverytracker://add?tracking=TEST0001"))
         settle()
-        assertFalse(exists(ADD_PARCEL))
-        now = now.plusSeconds(1)
-        window.newIntent(toWindow("peekdeliverytracker://add?tracking=TEST0001"))
-        settle()
-        assertTrue(exists(ADD_PARCEL))
+        assertTrue("Opened again", exists(ADD_PARCEL))
+    }
+
+    /**
+     * `open(_:)` checks every address it hears (`deliveries.isRepeat(url)` first), and drops the same one again within
+     * a second where it would take it: a friend (a parcel's link and an invitation alike, above). ParcelListView's
+     * `handleURL` follows `parcel/<uuid>` and `add` all the same, so those open again; and each is the address last
+     * seen, so the friend after one is followed again. On the app's one rule, as the window keeps it.
+     */
+    @Test
+    fun theListsOwnRoutesOpenAgainWithinASecondWhereOpensRoutesDoNot() {
+        clock()
+        val inbox = DeliveriesInbox(repeated = app::isRepeat)
+        val friend = UUID.fromString(FRIEND)
+        val parcel = UUID.fromString(PARCEL)
+        inbox.follow(link("peekdeliverytracker://friend/$FRIEND"))
+        assertEquals(friend, inbox.friend.value)
+        inbox.consumeFriend(friend)
+        now = now.plusMillis(200)
+        inbox.follow(link("peekdeliverytracker://friend/$FRIEND"))
+        assertNull("The friend not revealed again", inbox.friend.value)
+
+        now = now.plusMillis(200)
+        inbox.follow(link("peekdeliverytracker://parcel/$PARCEL"))
+        assertEquals(parcel, inbox.parcel.value)
+        inbox.consume(parcel)
+        now = now.plusMillis(200)
+        inbox.follow(link("peekdeliverytracker://parcel/$PARCEL"))
+        assertEquals("The parcel shown again", parcel, inbox.parcel.value)
+        inbox.consume(parcel)
+
+        now = now.plusMillis(100)
+        inbox.follow(link("peekdeliverytracker://add?tracking=TEST0001"))
+        val add = checkNotNull(inbox.add.value)
+        inbox.consume(add)
+        now = now.plusMillis(100)
+        inbox.follow(link("peekdeliverytracker://add?tracking=TEST0001"))
+        val again = checkNotNull(inbox.add.value) { "Add opened again" }
+        assertNotSame(add, again)
+        assertEquals("TEST0001", again.trackingInput)
+
+        now = now.plusMillis(100)
+        inbox.follow(link("peekdeliverytracker://friend/$FRIEND"))
+        assertEquals("Another address seen since", friend, inbox.friend.value)
     }
 
     /** Add's link starts the window, which opens Add with its text over the first open of a guest following nothing. */
@@ -491,7 +539,10 @@ class ParcelLinkActivityTest {
         assertOpens(1)
     }
 
-    /** Sign-in's way back is no link: never counted, never followed, whether a sign-in waits for it or not. */
+    /**
+     * Sign-in's way back is no link: never counted, never followed, whether a sign-in waits for it or not. With none
+     * waiting, it brings the sign-in's own window alone forward, which ends nothing and goes.
+     */
     @Test
     fun theSignInCallbackIsNeitherCountedNorFollowed() {
         counting()
@@ -500,10 +551,30 @@ class ParcelLinkActivityTest {
         awaitSession(stores)
         val callback = Robolectric.buildActivity(SignInCallbackActivity::class.java, link("peekdeliverytracker://auth-callback?code=synthetic")).create()
         assertTrue(callback.get().isFinishing)
-        assertNull(shadowOf(callback.get()).nextStartedActivity)
+        val started = checkNotNull(shadowOf(callback.get()).nextStartedActivity)
+        assertEquals(ComponentName(app, SignInTabActivity::class.java), started.component)
+        assertTrue("Gone at once", Robolectric.buildActivity(SignInTabActivity::class.java, started).create().get().isFinishing)
         assertNull(stores.links.route)
         assertFalse(stores.invitation.isPresenting)
         assertOpens(0)
+    }
+
+    /**
+     * Two of the app's windows on screen (a link started a second in another task, split screen): web sign-in opens
+     * over the one a tap last reached, the top resumed one (`onTopResumedActivityChanged`).
+     */
+    @Test
+    fun webSignInOpensOverTheWindowThatCameToTheTopLast() {
+        val first = Robolectric.buildActivity(MainActivity::class.java, Intent.makeMainActivity(ComponentName(app, MainActivity::class.java))).setup()
+        awaitStores()
+        val second = Robolectric.buildActivity(MainActivity::class.java, Intent.makeMainActivity(ComponentName(app, MainActivity::class.java))).setup()
+        settle()
+        first.topActivityResumed(true)
+        assertSame(first.get(), app.signInTab.front)
+        second.topActivityResumed(true)
+        assertSame(second.get(), app.signInTab.front)
+        first.topActivityResumed(false)
+        assertSame("Losing the top changes nothing", second.get(), app.signInTab.front)
     }
 
     private companion object {

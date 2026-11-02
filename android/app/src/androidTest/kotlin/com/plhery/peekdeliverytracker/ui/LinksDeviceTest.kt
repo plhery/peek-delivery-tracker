@@ -4,8 +4,10 @@ import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.net.Uri
 import android.os.SystemClock
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.browser.customtabs.CustomTabsClient
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -29,6 +31,8 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.core.WebAuthenticating
 import com.plhery.peekdeliverytracker.platform.BuildSettings
+import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
+import com.plhery.peekdeliverytracker.platform.SignInTabActivity
 import com.plhery.peekdeliverytracker.ui.arrival.GOOGLE_TAG
 import com.plhery.peekdeliverytracker.ui.arrival.SIGN_IN_ERROR
 import com.plhery.peekdeliverytracker.ui.arrival.signInConfiguration
@@ -36,6 +40,7 @@ import com.plhery.peekdeliverytracker.ui.arrival.signInSession
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_TRACKING
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import java.io.IOException
+import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -51,11 +56,14 @@ import org.junit.runner.RunWith
 /**
  * The app's own links on this device (A-L06, A-L07), which the JVM tests stand in for with Robolectric's windows:
  * `peekdeliverytracker://add?tracking=<text>`, sent as a browser sends it, starts the app's window with Add open on the
- * text; web sign-in opens its page in a Custom Tab over the window, and Back closes the tab and ends the sign-in as
- * cancelled, which the sign-in shows as no error. The page is a made-up address that resolves nowhere
- * (`https://auth.example.test`), so the tab shows the browser's offline page; the test is skipped on a device without a
- * browser. On the app's own stores, made offline in demo mode: nothing goes to the network. The stores are made once a
- * process, so run the class on its own (`-e class`), before any other test makes them.
+ * text; web sign-in opens its page over the window, in the default browser's Auth Tab where it has one and in a Custom
+ * Tab otherwise, and Back closes the tab and ends the sign-in as cancelled, which the sign-in shows as no error. The
+ * page is a made-up address that resolves nowhere (`https://auth.example.test`), so the tab shows the browser's offline
+ * page, or the browser's first-run screen where it has never been opened; Back closes either. Which tab the sign-in
+ * took goes to the log (`LinksDeviceTest`: "Web sign-in opened its page in an Auth Tab" or "in a Custom Tab") and into
+ * each failure's message; the Auth Tab's own test is skipped where the default browser has none, and both on a device
+ * without a browser. On the app's own stores, made offline in demo mode: nothing goes to the network. The stores are
+ * made once a process, so run the class on its own (`-e class`), before any other test makes them.
  */
 @RunWith(AndroidJUnit4::class)
 class LinksDeviceTest {
@@ -109,11 +117,25 @@ class LinksDeviceTest {
         compose.waitUntil(20_000) { fieldText(ADD_TRACKING) == "TEST 0001" }
     }
 
-    @Test
-    fun theSignInTabOpensOverTheWindowAndBackEndsTheSignInWithNoError() {
-        var outcome: Result<String>? = null
+    /** Which tab web sign-in opened its page in, as its window says: [AUTH_TAB], [CUSTOM_TAB], or null with no window. */
+    private fun signInTab(): String? {
+        var tab: String? = null
+        instrumentation.runOnMainSync {
+            val monitor = ActivityLifecycleMonitorRegistry.getInstance()
+            tab = Stage.entries.flatMap { monitor.getActivitiesInStage(it) }.filterIsInstance<SignInTabActivity>().firstOrNull()
+                ?.let { if (it.inAuthTab) AUTH_TAB else CUSTOM_TAB }
+        }
+        return tab
+    }
+
+    /**
+     * Web sign-in from a window of its own, Back once its tab is up, and the sign-in ended as cancelled with no error:
+     * which tab it took, logged. Skipped where no browser could open the page.
+     */
+    private fun signInThenBack(): String? {
+        val outcome = AtomicReference<Result<String>?>()
         val web = WebAuthenticating { url, scheme ->
-            runCatching { app.signInTab.authenticate(url, scheme) }.also { outcome = it }.getOrThrow()
+            runCatching { app.signInTab.authenticate(url, scheme) }.also { outcome.set(it) }.getOrThrow()
         }
         lateinit var session: SessionStore
         val scenario = ActivityScenario.launch(ComponentActivity::class.java)
@@ -130,18 +152,43 @@ class LinksDeviceTest {
         compose.waitUntil(10_000) { exists(GOOGLE_TAG) }
         compose.onNodeWithTag(GOOGLE_TAG).performClick()
 
-        // The tab over the window, or no browser to open it in, which the sign-in says.
-        assertTrue(waitFor(10_000) { !window.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED) || outcome != null })
-        assumeTrue("No browser on this device", outcome == null)
-        // The browser's page for an address that resolves nowhere, then Back.
+        // The tab over the window, or no browser to open it in, which the sign-in says. The sign-in's run goes on in
+        // the composition's scope, which the rule's clock drives: the rule waits.
+        compose.waitUntil(10_000) { !window.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED) || outcome.get() != null }
+        assumeTrue("No browser on this device", outcome.get() == null)
+        val tab = signInTab()
+        Log.i(TAG, "Web sign-in opened its page in ${tab ?: "no tab of its window's"} (default browser: ${CustomTabsClient.getPackageName(context, null)})")
+        // The browser's page for an address that resolves nowhere, or its first-run screen, then Back.
         SystemClock.sleep(1_500)
         instrumentation.uiAutomation.performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
 
-        assertTrue(waitFor(10_000) { window.lifecycle.currentState == Lifecycle.State.RESUMED && outcome != null })
-        assertTrue(outcome?.exceptionOrNull().toString(), outcome?.exceptionOrNull() is AuthenticationError.OauthCancelled)
+        assertTrue("The window back from the $tab", waitFor(10_000) { window.lifecycle.currentState == Lifecycle.State.RESUMED })
+        compose.waitUntil(10_000) { outcome.get() != null }
+        val error = outcome.get()?.exceptionOrNull()
+        assertTrue("From the $tab: $error", error is AuthenticationError.OauthCancelled)
         compose.waitForIdle()
-        assertFalse("No error", exists(SIGN_IN_ERROR))
+        assertFalse("No error, from the $tab", exists(SIGN_IN_ERROR))
         assertEquals(null, app.signInTab.waiting)
         scenario.close()
+        return tab
+    }
+
+    @Test
+    fun theSignInTabOpensOverTheWindowAndBackEndsTheSignInWithNoError() {
+        val expected = if (CustomTabSignIn.authTabBrowser(context) != null) AUTH_TAB else CUSTOM_TAB
+        assertEquals(expected, signInThenBack())
+    }
+
+    @Test
+    fun whereTheDefaultBrowserHasAnAuthTabTheSignInOpensThere() {
+        val browser = CustomTabsClient.getPackageName(context, null)
+        assumeTrue("The default browser ($browser) has no Auth Tab", CustomTabSignIn.authTabBrowser(context) != null)
+        assertEquals(AUTH_TAB, signInThenBack())
+    }
+
+    private companion object {
+        const val TAG = "LinksDeviceTest"
+        const val AUTH_TAB = "an Auth Tab"
+        const val CUSTOM_TAB = "a Custom Tab"
     }
 }

@@ -15,6 +15,18 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+    <!-- Which browser web sign-in opens in, and whether it has an Auth Tab (platform/CustomTabSignIn.kt): the browsers,
+         and those offering Custom Tabs, which Android shows an app only when it asks for them. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
 
     <!-- Backups carry the preferences and the parcels this phone follows, never the secrets or the caches
          (res/xml/data_extraction_rules.xml).
@@ -62,18 +74,20 @@
             </intent-filter>
         </activity>
 
-        <!-- Web sign-in's window, over the app's: it opens the provider's page in a Custom Tab above itself, in the
-             app's task, and ends the sign-in as it comes back to the top, with the address SignInCallbackActivity
-             brought it or, without one, as cancelled (platform/CustomTabSignIn.kt). It shows nothing of its own. -->
+        <!-- Web sign-in's window, over the app's: it opens the provider's page above itself, in the app's task, in the
+             browser's Auth Tab, which answers it, or else in a Custom Tab, and then ends the sign-in as it comes back
+             to the top, with the address SignInCallbackActivity brought it or, without one, as cancelled
+             (platform/CustomTabSignIn.kt). It shows nothing of its own. -->
         <activity
             android:name=".platform.SignInTabActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!-- Where the sign-in page sends the browser back, peekdeliverytracker://auth-callback, the iPhone's
-             ASWebAuthenticationSession's callback: it hands the address to SignInTabActivity and closes, showing
-             nothing and leaving nothing in Recents. A link to it while no sign-in waits does nothing, and it is never
-             a link the app opens or counts. -->
+        <!-- Where the sign-in page sends a Custom Tab back, peekdeliverytracker://auth-callback, the iPhone's
+             ASWebAuthenticationSession's callback (an Auth Tab takes it itself): it hands the address to
+             SignInTabActivity, which closes the tab, and closes, showing nothing and leaving nothing in Recents. A link
+             to it while no sign-in waits ends nothing but still closes the tab, and it is never a link the app opens or
+             counts. -->
         <activity
             android:name=".platform.SignInCallbackActivity"
             android:excludeFromRecents="true"

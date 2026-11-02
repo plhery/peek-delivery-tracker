@@ -28,7 +28,7 @@ Passport collectibles are postage stamps (sellos, selos, znaczki, марки, �
   a carrier a *transportadora*, written with no article before its name (*de {{carrier}}*).
   The postcode stays *código postal*, as the field takes any country's. *Ajustes* is Apple's
   Settings app, *Configurações* Peek's and Android's.
-- **Russian** says *ты* and avoids past tenses addressed to the reader, which mark gender. A
+- **Russian** says *вы*, lowercase mid-sentence; its past tense is plural and marks no gender. A
   посылка has a трек-номер and is picked up at a пункт выдачи or a постамат; a scan is an
   отметка, a carrier a служба доставки, and Pip is Пип.
 - **Chinese** is Simplified, says 你 and uses full-width punctuation, with a space between

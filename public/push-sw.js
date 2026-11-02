@@ -29,7 +29,7 @@ self.addEventListener('push', (event) => {
     pt: ['Atualização da encomenda', 'Toca para ver as novidades'],
     'pt-br': ['Atualização da encomenda', 'Toque para ver as novidades'],
     pl: ['Nowe wieści o przesyłce', 'Stuknij, aby zobaczyć szczegóły'],
-    ru: ['Новости о посылке', 'Нажми, чтобы узнать, что нового'],
+    ru: ['Новости о посылке', 'Нажмите, чтобы узнать, что нового'],
     zh: ['包裹动态', '轻点查看最新动态'],
   };
   // The language as tagLocale in src/lib/locale.ts reads it: Brazil's Portuguese apart, and no Traditional Chinese.

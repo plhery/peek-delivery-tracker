@@ -5041,10 +5041,6 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^\\d{16}$",
         "confidence": "low"
-      },
-      {
-        "pattern": "^(?!(?:BNI|BYS|CLC|CUB|GWD|LTN|MPX|NZC|QSP|QSS|RMP|RWM|XLT))[A-Z]{3}\\d{9}$",
-        "confidence": "low"
       }
     ],
     "trackingUrlTemplate": "https://www.tnt.com/express/en_gb/site/shipping-tools/tracking.html?searchType=con&cons={trackingNumber}",

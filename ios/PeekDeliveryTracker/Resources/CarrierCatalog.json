@@ -47407,6 +47407,175 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.topdelivery.ru/tracking/"
+    },
+    "agt-kurye": {
+      "displayName": "AGT Kurye",
+      "aliases": [
+        "AGT Kurye Hizmetleri A.Ş.",
+        "AGT Hızlı Kurye Hizmetleri A.Ş.",
+        "AGT Kargo"
+      ],
+      "countries": [
+        "TR"
+      ],
+      "color": "#2e2d2d",
+      "selectable": true,
+      "timezone": "Europe/Istanbul",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://takip.agtkurye.com/"
+    },
+    "aqx-logistics": {
+      "displayName": "AQX Logistics",
+      "aliases": [
+        "AQX Logistics LLC",
+        "إيه كيو إكس للشحن"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#1d253d",
+      "selectable": true,
+      "timezone": "America/Los_Angeles",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://aqxlogistics.com/track?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "aqxlogistics.com",
+            "www.aqxlogistics.com"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://aqxlogistics.com/track"
+    },
+    "domesa": {
+      "displayName": "Domesa",
+      "aliases": [
+        "DOMESA",
+        "Documentos Mercantiles",
+        "Documentos Mercantiles S.A."
+      ],
+      "countries": [
+        "VE"
+      ],
+      "color": "#003ca6",
+      "selectable": true,
+      "timezone": "America/Caracas",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.portal.domesa.com.ve/"
+    },
+    "herona-express": {
+      "displayName": "Herona Express",
+      "aliases": [
+        "PT Herona Express"
+      ],
+      "countries": [
+        "ID"
+      ],
+      "color": "#fe0000",
+      "selectable": true,
+      "timezone": "Asia/Jakarta",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.heronaexpress.co.id/lacak.php"
+    },
+    "hub-group-final-mile": {
+      "displayName": "Hub Group Final Mile",
+      "aliases": [
+        "NSD",
+        "NonstopDelivery",
+        "NonStopDelivery",
+        "NonstopDelivery LLC",
+        "ShipNSD",
+        "Hub Group NSD"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#d24f40",
+      "selectable": true,
+      "timezone": "America/New_York",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [
+        {
+          "domains": [
+            "tracking.shipnsd.com"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "t"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.hubgroup.com/logistics-management/final-mile/"
+    },
+    "jetizz": {
+      "displayName": "Jetizz",
+      "aliases": [
+        "Jetizz Kargo",
+        "Jetizz Hızlı Taşımacılık A.Ş."
+      ],
+      "countries": [
+        "TR"
+      ],
+      "color": "#ff0000",
+      "selectable": true,
+      "timezone": "Europe/Istanbul",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://app.jetizz.com/gonderi-takip"
+    },
+    "mailex": {
+      "displayName": "Mailex",
+      "aliases": [
+        "매일택배",
+        "Mailex Canada",
+        "Mailex Global"
+      ],
+      "countries": [
+        "CA",
+        "KR"
+      ],
+      "color": "#ed2127",
+      "selectable": true,
+      "timezone": "America/Toronto",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.mailexglobal.com/"
     }
   }
 }

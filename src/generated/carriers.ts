@@ -2212,6 +2212,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#00a2e9"
     },
     {
+      "id": "js-express",
+      "catalog": "js-express",
+      "slug": "js-express-sendungsverfolgung",
+      "title": "JS Express Sendungsverfolgung: JSE-Nummer, Status, Zusteller",
+      "name": "JS Express",
+      "color": "#fe9b00"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-sendungsverfolgung",

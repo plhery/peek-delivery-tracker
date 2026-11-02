@@ -41074,6 +41074,14 @@
     ]
   },
   {
+    "input": "420331419200190300900200035641",
+    "carrier": "usps",
+    "confidence": "high",
+    "candidates": [
+      "usps"
+    ]
+  },
+  {
     "input": "4203717220229214490374015200485460",
     "carrier": "usps",
     "confidence": "high",
@@ -91947,6 +91955,14 @@
     ],
     "asked": [
       "chit-chats"
+    ]
+  },
+  {
+    "input": "QFT900000000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "quick-fort"
     ]
   },
   {

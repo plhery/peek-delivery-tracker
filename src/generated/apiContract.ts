@@ -47848,6 +47848,177 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.qatarpost.qa/TrackAndTrace"
+  },
+  "dpd-gr": {
+    "displayName": "DPD Greece",
+    "aliases": [
+      "DPD Greece",
+      "DPD (GR)",
+      "DPD GR"
+    ],
+    "countries": [
+      "GR"
+    ],
+    "color": "#dc0032",
+    "selectable": true,
+    "timezone": "Europe/Athens",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://services.dpd.gr/tracking/?shipmentNumber={trackingNumber}&language=en",
+    "linkRules": [
+      {
+        "domains": [
+          "services.dpd.gr"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "shipmentNumber"
+        ]
+      },
+      {
+        "domains": [
+          "dpd.gr"
+        ],
+        "pathPattern": "^/(?:en/)?track-shipment/?$",
+        "params": [
+          "shipmentNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dpd.gr/en/"
+  },
+  "global-parcel-service": {
+    "displayName": "Global Parcel Service",
+    "aliases": [
+      "GPS",
+      "Global Parcel Service Inc."
+    ],
+    "countries": [
+      "US",
+      "CN"
+    ],
+    "color": "#556aa1",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.goforgps.com/tracking?search={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "goforgps.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "search"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.goforgps.com/tracking"
+  },
+  "logistics-solution": {
+    "displayName": "Logistics Solution",
+    "aliases": [
+      "LOGISTICS Solution",
+      "Logistics-Solution",
+      "LS Logistics-Solution GmbH"
+    ],
+    "countries": [
+      "DE",
+      "AM",
+      "BY",
+      "KZ",
+      "GE",
+      "TM",
+      "UZ",
+      "KG",
+      "RU"
+    ],
+    "color": "#6366f1",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://logistics-solution.eu/de/"
+  },
+  "quick-fort": {
+    "displayName": "Quick Fort",
+    "aliases": [
+      "Quick Fort",
+      "QuickFort",
+      "速丰捷运",
+      "速丰捷运国际物流有限公司"
+    ],
+    "countries": [
+      "HK",
+      "CN"
+    ],
+    "color": "#ff6600",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.quick-fort.com/search_kuai_di/search/orderid/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "quick-fort.com"
+        ],
+        "path": "^/search_kuai_di/search/orderid/([^/?#]+)/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^QFT\\d{12}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.quick-fort.com/cms/c/orders"
+  },
+  "wp-ground": {
+    "displayName": "WP Ground",
+    "aliases": [
+      "WPG",
+      "WP Ground"
+    ],
+    "countries": [
+      "US",
+      "CA"
+    ],
+    "color": "#f7c24e",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.wpglogis.com/tracking/?ext_trackingNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "wpglogis.com"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "ext_trackingNumber",
+          "trackingId"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.wpglogis.com/tracking/"
   }
 } as const;
 
@@ -49213,7 +49384,12 @@ export const CARRIER_IDS = [
   "znlogic",
   "magic-trans",
   "red-express",
-  "qatar-post"
+  "qatar-post",
+  "dpd-gr",
+  "global-parcel-service",
+  "logistics-solution",
+  "quick-fort",
+  "wp-ground"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

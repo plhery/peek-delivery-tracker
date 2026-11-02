@@ -16,7 +16,7 @@ J&T Express Australia's waybill is `JTAU` followed by 12 digits, 16 characters i
 | --- | --- |
 | `JTAU000000000000` | `JTAU` and 12 digits: a J&T Express Australia parcel. Peek names J&T Express Australia at once. |
 | `JTAU00000000000` | One digit short. Not J&T Express Australia's shape, and Peek recognises no carrier: check for a missing digit. |
-| `JTUK000000000000` | `JTUK` and 12 digits: J&T Express UK, not the Australian network. |
+| `JTUK000000000000` | `JTUK` and 12 digits: [J&T Express UK](carrier:j-and-t-uk), not the Australian network. |
 | `JTDE000000000000` | `JTDE` and 12 digits: [J&T Express Germany](carrier:j-and-t-de). |
 | `JTE000000000000` | `JTE` and 12 digits: [J&T Express Middle East](carrier:j-and-t-middle-east), in Saudi Arabia, the UAE and Kuwait. |
 | `JT0000000000000` | `JT` and 13 digits: J&T's networks in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). |

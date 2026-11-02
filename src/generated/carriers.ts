@@ -1760,150 +1760,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DayOne tracking: DOT numbers, statuses and who delivers",
       "name": "DayOne",
       "color": "#e86d1c"
-    },
-    {
-      "id": "dpd-be",
-      "catalog": "dpd-be",
-      "slug": "dpd-belgium-tracking",
-      "title": "DPD Belgium tracking: statuses, delivery and contact",
-      "name": "DPD Belgium",
-      "color": "#dc0032"
-    },
-    {
-      "id": "packlink",
-      "catalog": "packlink",
-      "slug": "packlink-tracking",
-      "title": "Packlink tracking: reference, statuses and who to contact",
-      "name": "Packlink",
-      "color": "#ff4f00"
-    },
-    {
-      "id": "sto",
-      "catalog": "sto",
-      "slug": "sto-express-tracking",
-      "title": "STO Express tracking: 申通快递 numbers, statuses, contact",
-      "name": "STO Express",
-      "color": "#ff6700"
-    },
-    {
-      "id": "j-and-t-cn",
-      "catalog": "j-and-t-cn",
-      "slug": "jt-express-china-tracking",
-      "title": "J&T Express China tracking: 极兔速递 numbers, statuses, contact",
-      "name": "J&T Express China",
-      "color": "#e62019"
-    },
-    {
-      "id": "tforce-freight",
-      "catalog": "tforce-freight",
-      "slug": "tforce-freight-tracking",
-      "title": "TForce Freight tracking: PRO numbers, statuses and claims",
-      "name": "TForce Freight",
-      "color": "#0053a1"
-    },
-    {
-      "id": "andreani",
-      "catalog": "andreani",
-      "slug": "andreani-tracking",
-      "title": "Andreani tracking: Argentina parcel numbers and statuses",
-      "name": "Andreani",
-      "color": "#d71920"
-    },
-    {
-      "id": "mainfreight",
-      "catalog": "mainfreight",
-      "slug": "mainfreight-tracking",
-      "title": "Mainfreight tracking: consignment numbers and statuses",
-      "name": "Mainfreight",
-      "color": "#005eb8"
-    },
-    {
-      "id": "spx-sg",
-      "catalog": "spx-sg",
-      "slug": "spx-express-singapore-tracking",
-      "title": "SPX Express Singapore tracking: Shopee parcels and statuses",
-      "name": "SPX Express Singapore",
-      "color": "#ee4d2d"
-    },
-    {
-      "id": "dai-post",
-      "catalog": "dai-post",
-      "slug": "dai-post-tracking",
-      "title": "DAI Post tracking: numbers, statuses and delivery help",
-      "name": "DAI Post",
-      "color": "#008faf"
-    },
-    {
-      "id": "eurodis",
-      "catalog": "eurodis",
-      "slug": "eurodis-tracking",
-      "title": "EURODIS tracking: shipment numbers and delivery partners",
-      "name": "EURODIS",
-      "color": "#0b418b"
-    },
-    {
-      "id": "chronodiali",
-      "catalog": "chronodiali",
-      "slug": "chronodiali-tracking",
-      "title": "Chronodiali tracking: CHPU numbers, statuses and contact",
-      "name": "Chronodiali",
-      "color": "#009adf"
-    },
-    {
-      "id": "17feia",
-      "catalog": "17feia",
-      "slug": "17feia-tracking",
-      "title": "17FEIA tracking: FEI…YQ numbers, statuses and delivery",
-      "name": "17FEIA",
-      "color": "#00a9e4"
-    },
-    {
-      "id": "tsjy",
-      "catalog": "tsjy",
-      "slug": "tsjy-tracking",
-      "title": "TSJY tracking (通世集运): order numbers and statuses",
-      "name": "TSJY",
-      "color": "#4042e2"
-    },
-    {
-      "id": "stone3pl",
-      "catalog": "stone3pl",
-      "slug": "stone3pl-tracking",
-      "title": "Stone3PL tracking: numbers, statuses and contact",
-      "name": "Stone3PL",
-      "color": "#0066b3"
-    },
-    {
-      "id": "j-and-t-uk",
-      "catalog": "j-and-t-uk",
-      "slug": "jt-express-uk-tracking",
-      "title": "J&T Express UK tracking: JTUK numbers and statuses",
-      "name": "J&T Express UK",
-      "color": "#e60000"
-    },
-    {
-      "id": "m-one",
-      "catalog": "m-one",
-      "slug": "m-one-tracking",
-      "title": "M-ONE tracking (Milšped ONE): statuses, delivery and help",
-      "name": "M-ONE",
-      "color": "#024da0"
-    },
-    {
-      "id": "early-bird",
-      "catalog": "early-bird",
-      "slug": "early-bird-tracking",
-      "title": "Early Bird tracking: statuses, morning delivery and lockers",
-      "name": "Early Bird",
-      "color": "#dd7f4a"
-    },
-    {
-      "id": "xinghe-freight",
-      "catalog": "xinghe-freight",
-      "slug": "xinghe-freight-tracking",
-      "title": "Xinghe Freight tracking: GZXH…YQ numbers and scans",
-      "name": "Xinghe Freight",
-      "color": "#0e3a6b"
     }
   ],
   "de": [
@@ -2180,22 +2036,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
-      "id": "sf-express",
-      "catalog": "sf-express",
-      "slug": "sf-express-sendungsverfolgung",
-      "title": "SF Express Sendungsverfolgung: Nummer, Status, Zustellung",
-      "name": "SF Express",
-      "color": "#dc1e32"
-    },
-    {
-      "id": "mtscn",
-      "catalog": "mtscn",
-      "slug": "meiteshun-sendungsverfolgung",
-      "title": "Meiteshun (MTSCN) Sendungsverfolgung: AMTS-Nummer, Status",
-      "name": "Meiteshun Logistics",
-      "color": "#f89f3b"
-    },
-    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sendungsverfolgung",
@@ -2210,14 +2050,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tianhui Hengyuan (THHY) Sendungsverfolgung: AT…TH-Nummer",
       "name": "Tianhui Hengyuan",
       "color": "#00a2e9"
-    },
-    {
-      "id": "js-express",
-      "catalog": "js-express",
-      "slug": "js-express-sendungsverfolgung",
-      "title": "JS Express Sendungsverfolgung: JSE-Nummer, Status, Zusteller",
-      "name": "JS Express",
-      "color": "#fe9b00"
     },
     {
       "id": "gzyl",
@@ -2638,14 +2470,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
-      "id": "gzyl",
-      "catalog": "gzyl",
-      "slug": "gzyl-suivi-colis",
-      "title": "Suivi colis GZYL\u00a0: numéro YL…YQ, statuts et qui contacter",
-      "name": "GZYL",
-      "color": "#4e79e1"
-    },
-    {
       "id": "shouwu",
       "catalog": "shouwu",
       "slug": "shouwu-suivi",
@@ -2846,14 +2670,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket tracking: numero, stati e consegna in Italia",
       "name": "DHL Paket",
       "color": "#ffcc00"
-    },
-    {
-      "id": "j-and-t-de",
-      "catalog": "j-and-t-de",
-      "slug": "jt-express-germania-tracking",
-      "title": "Tracking J&T Express in Germania: numero JTDE e stati",
-      "name": "J&T Express Germany",
-      "color": "#e60000"
     },
     {
       "id": "china-post",
@@ -3218,14 +3034,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#55207a"
     },
     {
-      "id": "lingdong",
-      "catalog": "lingdong",
-      "slug": "lingdong-seguimiento",
-      "title": "Lingdong International seguimiento: número SZLD y estados",
-      "name": "Lingdong International",
-      "color": "#0171bb"
-    },
-    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-seguimiento",
@@ -3282,28 +3090,12 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f6851f"
     },
     {
-      "id": "topyou",
-      "catalog": "topyou",
-      "slug": "topyou-seguimiento",
-      "title": "TopYou seguimiento: número TYZR, estados y entrega en España",
-      "name": "TopYou",
-      "color": "#045cd7"
-    },
-    {
       "id": "jrt",
       "catalog": "jrt",
       "slug": "jrt-seguimiento",
       "title": "JRT seguimiento: número JRT…MM, vuelos, DHL y UPS",
       "name": "JRT",
       "color": "#023053"
-    },
-    {
-      "id": "gzyl",
-      "catalog": "gzyl",
-      "slug": "gzyl-seguimiento",
-      "title": "Rastreo y seguimiento GZYL: número YL…YQ y estados",
-      "name": "GZYL",
-      "color": "#4e79e1"
     },
     {
       "id": "sending",
@@ -3598,14 +3390,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pt-br": [
     {
-      "id": "yto",
-      "catalog": "yto",
-      "slug": "rastreio-yto-express",
-      "title": "Rastreio YTO Express: código YT, status e contato",
-      "name": "YTO Express",
-      "color": "#4d148c"
-    },
-    {
       "id": "spx-br",
       "catalog": "spx-br",
       "slug": "rastreio-spx-express",
@@ -3842,14 +3626,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
-      "id": "ukrposhta",
-      "catalog": "ukrposhta",
-      "slug": "ukrposhta-otslezhivanie-posylki",
-      "title": "Укрпошта (Укрпошта): отслеживание по трек-номеру и статусы",
-      "name": "Ukrposhta",
-      "color": "#ffbe0c"
-    },
-    {
       "id": "dhl",
       "catalog": "dhl",
       "slug": "dhl-paket-otslezhivanie",
@@ -3872,22 +3648,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Отслеживание YTO Express: трек-номер, статусы и телефон",
       "name": "YTO Express",
       "color": "#4d148c"
-    },
-    {
-      "id": "topyou",
-      "catalog": "topyou",
-      "slug": "topyou-otslezhivanie-posylki",
-      "title": "Отслеживание посылки TopYou: трек-номер TYZR и статусы",
-      "name": "TopYou",
-      "color": "#045cd7"
-    },
-    {
-      "id": "gzyl",
-      "catalog": "gzyl",
-      "slug": "gzyl-otslezhivanie",
-      "title": "Отслеживание посылки GZYL: трек-номер YL…YQ и статусы",
-      "name": "GZYL",
-      "color": "#4e79e1"
     },
     {
       "id": "russian-post",
@@ -4030,14 +3790,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Spåra Matkahuolto-paket: statusar, hämtning och kundtjänst",
       "name": "Matkahuolto",
       "color": "#001e60"
-    },
-    {
-      "id": "topyou",
-      "catalog": "topyou",
-      "slug": "topyou-spara-paket",
-      "title": "Spåra paket med TopYou: TYZR-nummer, statusar och leverans",
-      "name": "TopYou",
-      "color": "#045cd7"
     }
   ],
   "da": [
@@ -4220,14 +3972,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Urmărire colet FAN Courier: AWB, statusuri și FANbox",
       "name": "FAN Courier",
       "color": "#0f2345"
-    },
-    {
-      "id": "j-and-t-de",
-      "catalog": "j-and-t-de",
-      "slug": "jt-express-germania-urmarire-colet",
-      "title": "Urmărire colet J&T Germania: numărul JTDE și statusurile",
-      "name": "J&T Express Germany",
-      "color": "#e60000"
     }
   ],
   "bg": [
@@ -4306,14 +4050,6 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Praćenje pošiljke Hrvatske pošte: statusi, rokovi i kontakt",
       "name": "Hrvatska pošta",
       "color": "#ffd100"
-    },
-    {
-      "id": "j-and-t-de",
-      "catalog": "j-and-t-de",
-      "slug": "jt-express-njemacka-pracenje-posiljke",
-      "title": "Praćenje J&T pošiljke u Njemačkoj: JTDE broj i statusi",
-      "name": "J&T Express Germany",
-      "color": "#e60000"
     }
   ],
   "sl": [

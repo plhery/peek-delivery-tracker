@@ -47963,7 +47963,7 @@ export const CARRIER_CAPABILITIES = {
       "HK",
       "CN"
     ],
-    "color": "#ff6600",
+    "color": "#0a275f",
     "selectable": true,
     "timezone": "Asia/Hong_Kong",
     "tracking": {
@@ -48002,7 +48002,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "wp-ground"
     },
     "trackingUrlTemplate": "https://www.wpglogis.com/tracking/?ext_trackingNumber={trackingNumber}",
     "linkRules": [

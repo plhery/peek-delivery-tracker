@@ -693,6 +693,13 @@ describe('carrier brand', () => {
       'express-ru',
       'topdelivery',
       'dnipro-llc',
+      'agt-kurye',
+      'aqx-logistics',
+      'domesa',
+      'herona-express',
+      'hub-group-final-mile',
+      'jetizz',
+      'mailex',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

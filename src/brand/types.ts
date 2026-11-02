@@ -617,7 +617,14 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'dimex'
   | 'express-ru'
   | 'topdelivery'
-  | 'dnipro-llc';
+  | 'dnipro-llc'
+  | 'agt-kurye'
+  | 'aqx-logistics'
+  | 'domesa'
+  | 'herona-express'
+  | 'hub-group-final-mile'
+  | 'jetizz'
+  | 'mailex';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -92,6 +92,9 @@
   "afghan-post": {
     "decal": "afghan-post"
   },
+  "agt-kurye": {
+    "decal": "agt-kurye"
+  },
   "ahamove": {
     "decal": "ahamove"
   },
@@ -254,6 +257,9 @@
   },
   "aquiline": {
     "decal": "aquiline"
+  },
+  "aqx-logistics": {
+    "decal": "aqx-logistics"
   },
   "aramex": {
     "decal": "aramex"
@@ -1022,6 +1028,9 @@
   "domain-logistics": {
     "decal": "domain-logistics"
   },
+  "domesa": {
+    "decal": "domesa"
+  },
   "domex": {
     "decal": "domex"
   },
@@ -1715,6 +1724,9 @@
   "hermes-de": {
     "decal": "hermes"
   },
+  "herona-express": {
+    "decal": "herona-express"
+  },
   "hey-couriers": {
     "decal": "hey-couriers"
   },
@@ -1798,6 +1810,9 @@
   },
   "huaya-express": {
     "decal": "huaya-express"
+  },
+  "hub-group-final-mile": {
+    "decal": "hub-group-final-mile"
   },
   "hunter-express": {
     "decal": "hunter-express"
@@ -1986,6 +2001,9 @@
   },
   "jet-logistic": {
     "decal": "jet-logistic"
+  },
+  "jetizz": {
+    "decal": "jetizz"
   },
   "jetline-couriers": {
     "decal": "jetline-couriers"
@@ -2287,6 +2305,9 @@
   },
   "magyar-posta": {
     "decal": "magyar-posta"
+  },
+  "mailex": {
+    "decal": "mailex"
   },
   "mailplus-au": {
     "decal": "mailplus-au"

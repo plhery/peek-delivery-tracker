@@ -820,7 +820,8 @@ class DeliveriesInbox(
      * `peekdeliverytracker://friend/<uuid>`, the friend to reveal ([friend]), and last a friend's invitation, which
      * [invitationLink] shows over everything. The app's parcel and invitation links come by ParcelLinkActivity, which
      * keeps them out of the window's intent; one sent to the window itself comes here. Each is counted ([opened],
-     * `deep-link-open`), whatever it leads to.
+     * `deep-link-open`), whatever it leads to. A notification the app posted, opened, comes before them all
+     * ([AppNotifications.payload], which reads the app's own alone).
      */
     fun follow(intent: Intent?) {
         AppNotifications.payload(intent)?.let {

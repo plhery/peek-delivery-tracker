@@ -7,6 +7,7 @@ import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Looper
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
@@ -18,6 +19,7 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import java.util.UUID
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
@@ -28,10 +30,33 @@ import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 
 /**
+ * What tapping the notification the app posts for the push with data `data` starts: its own content intent, as posted,
+ * which only the app can send.
+ */
+internal fun notificationTap(data: Map<String, String>): Intent {
+    val context = ApplicationProvider.getApplicationContext<Context>()
+    shadowOf(context as Application).grantPermissions(Manifest.permission.POST_NOTIFICATIONS)
+    AppNotifications(context).post(data)
+    val tag = AppNotifications.tag(NativeRoute(remoteNotification = data))
+    val shade = shadowOf(context.getSystemService(NotificationManager::class.java))
+    return shadowOf(requireNotNull(shade.getNotification(tag, AppNotifications.ID)) { "Nothing posted as $tag" }.contentIntent).savedIntent
+}
+
+/**
+ * Whether Android keeps `notification` from sounding and showing a banner for its group's sake, as the system and the
+ * shade both ask it (`Notification.suppressAlertingDueToGrouping`, hidden from apps): a child that leaves the alerts to
+ * its summary, or a summary that leaves them to its children.
+ */
+private fun mutedByItsGroup(notification: Notification): Boolean =
+    Notification::class.java.getMethod("suppressAlertingDueToGrouping").invoke(notification) as Boolean
+
+/**
  * The notifications posted from a push's data (C-W12, C-W13, C-W14, C-W18, C-W20): the channel, the tag and the group as
- * the service's collapse id and thread, the mark's eyes in the accent, the window opened with the push's data, a
- * later one for the same parcel in place of the first, and a friend who accepted while the app is on screen posted
- * without a sound or a banner, the friends' notices refreshed. Synthetic ids only.
+ * the service's collapse id and thread, the mark's eyes in the accent, the window opened with the push's data through
+ * an alias no other app can start, a later one for the same parcel in place of the first, one without a parcel or a
+ * friend beside those before, the friends' stacked under a summary that never alerts, and a friend who accepted while
+ * the app is on screen posted without a sound or a banner, the friends' notices refreshed on the main thread.
+ * Synthetic ids only.
  */
 @RunWith(AndroidJUnit4::class)
 class AppNotificationsTest {
@@ -53,7 +78,7 @@ class AppNotificationsTest {
 
     private fun parcelPush(body: String = "Out for delivery") = mapOf("title" to "Books", "body" to body, "parcel_id" to "$parcel")
 
-    private fun friendPush() = mapOf("title" to "Sam", "body" to "Sam accepted your invitation", "kind" to "friend_accepted", "friend_id" to "$friend")
+    private fun friendPush(id: UUID = friend) = mapOf("title" to "Sam", "body" to "Sam accepted your invitation", "kind" to "friend_accepted", "friend_id" to "$id")
 
     private fun posted(tag: String): Notification = requireNotNull(shade.getNotification(tag, AppNotifications.ID)) { "Nothing posted as $tag" }
 
@@ -75,7 +100,7 @@ class AppNotificationsTest {
         assertEquals(NotificationCompat.GROUP_ALERT_ALL, NotificationCompat.getGroupAlertBehavior(notification))
 
         val intent = opened(notification)
-        assertEquals(ComponentName(context, MainActivity::class.java), intent.component)
+        assertEquals(ComponentName(context, AppNotifications.OPENING), intent.component)
         assertEquals(mapOf("title" to "Books", "body" to "Out for delivery", "parcel_id" to "$parcel"), AppNotifications.payload(intent))
         assertEquals(NativeRoute.Parcel(parcel), NativeRoute(remoteNotification = AppNotifications.payload(intent)!!))
     }
@@ -104,6 +129,7 @@ class AppNotificationsTest {
         assertEquals(AppNotifications.FRIENDS, notification.channelId)
         assertEquals("friends", notification.group)
         assertEquals(NotificationCompat.GROUP_ALERT_ALL, NotificationCompat.getGroupAlertBehavior(notification))
+        assertFalse("A sound and a banner", mutedByItsGroup(notification))
         assertEquals(0, friendActivity)
         assertEquals(NativeRoute.Friend(friend), NativeRoute(remoteNotification = AppNotifications.payload(opened(notification))!!))
     }
@@ -114,9 +140,27 @@ class AppNotificationsTest {
         onScreen = true
         notifications.post(friendPush())
         val notification = posted("friend-$friend")
-        assertEquals("No heads-up, no sound", NotificationCompat.GROUP_ALERT_SUMMARY, NotificationCompat.getGroupAlertBehavior(notification))
-        assertNull(notification.sound)
+        // A child of the friends' group that leaves its alerts to the summary, which leaves them to its children.
+        assertEquals("friends", notification.group)
+        assertEquals(NotificationCompat.GROUP_ALERT_SUMMARY, NotificationCompat.getGroupAlertBehavior(notification))
+        assertTrue("No heads-up, no sound", mutedByItsGroup(notification))
+        assertTrue("Nor from its summary", manager.activeNotifications.filter { it.notification.group == "friends" }.all { mutedByItsGroup(it.notification) })
+        shadowOf(Looper.getMainLooper()).idle()
         assertEquals(1, friendActivity)
+    }
+
+    /** Firebase hands a push over on a worker thread: the friends' notices are refreshed on the main thread. */
+    @Test
+    fun aPushHandedOverOnAWorkerThreadRefreshesTheNoticesOnTheMainThread() {
+        var refreshedOn: Thread? = null
+        val handed = AppNotifications(context, onScreen = { true }, friendActivity = { refreshedOn = Thread.currentThread() })
+        Thread { handed.post(friendPush()) }.apply {
+            start()
+            join()
+        }
+        assertNotNull("Posted where it came", shade.getNotification("friend-$friend", AppNotifications.ID))
+        shadowOf(Looper.getMainLooper()).idle()
+        assertEquals(Looper.getMainLooper().thread, refreshedOn)
     }
 
     /** `willPresent`: `[.banner, .list, .sound]` for every other one. */
@@ -125,7 +169,73 @@ class AppNotificationsTest {
         onScreen = true
         notifications.post(parcelPush())
         assertEquals(NotificationCompat.GROUP_ALERT_ALL, NotificationCompat.getGroupAlertBehavior(posted("$parcel")))
+        assertFalse(mutedByItsGroup(posted("$parcel")))
+        shadowOf(Looper.getMainLooper()).idle()
         assertEquals(0, friendActivity)
+    }
+
+    /**
+     * Only the app opens a notification's window: its content intent names an alias of MainActivity that no other app
+     * can start and that takes no implicit intent, and an intent any app could send the window, with the same action
+     * and data, is no notification's.
+     */
+    @Test
+    fun aNotificationOpensTheWindowThroughAnAliasNoOtherAppCanStart() {
+        notifications.post(parcelPush())
+        val intent = opened(posted("$parcel"))
+        assertEquals(ComponentName(context, AppNotifications.OPENING), intent.component)
+        val alias = context.packageManager.getActivityInfo(ComponentName(context, AppNotifications.OPENING), 0)
+        assertEquals(MainActivity::class.java.name, alias.targetActivity)
+        assertFalse("Not exported", alias.exported)
+        assertTrue(context.packageManager.queryIntentActivities(Intent(AppNotifications.ACTION_OPEN).setPackage(context.packageName), 0).isEmpty())
+        assertEquals(NativeRoute.Parcel(parcel), NativeRoute(remoteNotification = AppNotifications.payload(intent)!!))
+
+        val forged = Intent(AppNotifications.ACTION_OPEN).putExtras(requireNotNull(intent.extras))
+        assertNull("To the window", AppNotifications.payload(Intent(forged).setClass(context, MainActivity::class.java)))
+        assertNull("To no window in particular", AppNotifications.payload(forged))
+    }
+
+    /**
+     * The service's welcome has neither a parcel nor a link nor a friend, so no collapse id: each such one stays beside
+     * those before, an earlier process's included. A process counts from its start again, so nothing it counts can
+     * tell them apart: each has a tag of its own.
+     */
+    @Test
+    fun oneWithoutAParcelStaysBesideThoseOfAnEarlierProcess() {
+        val welcome = mapOf("title" to "Peek", "body" to "Welcome to Peek")
+        notifications.post(welcome)
+        // Another process: the notifications made again, the shade as the earlier one left it.
+        AppNotifications(context).post(welcome)
+        val posted = manager.activeNotifications.toList()
+        assertEquals(2, posted.size)
+        assertEquals("A tag of its own each", 2, posted.mapNotNull { it.tag }.distinct().size)
+        posted.forEach { assertEquals(AppNotifications.PARCELS, it.notification.channelId) }
+    }
+
+    /**
+     * iOS stacks the friends' thread: on Android their notifications are bundled under a summary of their own in the
+     * friends' channel, which never sounds or shows a banner itself, and goes with the last of them.
+     */
+    @Test
+    fun twoFriendsStackUnderASilentSummaryThatGoesWithTheLast() {
+        val other = UUID(0, 203)
+        notifications.post(parcelPush())
+        notifications.post(friendPush())
+        notifications.post(friendPush(other))
+        val friends = manager.activeNotifications.filter { it.notification.group == "friends" }
+        val (summaries, children) = friends.partition { it.notification.flags and Notification.FLAG_GROUP_SUMMARY != 0 }
+        assertEquals(setOf("friend-$friend", "friend-$other"), children.map { it.tag }.toSet())
+        val summary = summaries.single().notification
+        assertEquals(AppNotifications.FRIENDS, summary.channelId)
+        assertEquals(NotificationCompat.GROUP_ALERT_CHILDREN, NotificationCompat.getGroupAlertBehavior(summary))
+        assertTrue("No sound or banner of its own", mutedByItsGroup(summary))
+        children.forEach { assertFalse("Each friend's own sound and banner", mutedByItsGroup(it.notification)) }
+        assertEquals(4, shade.size())
+
+        notifications.removeFriend(friend)
+        assertEquals("The other friend's and the summary stay", 3, shade.size())
+        notifications.removeFriend(other)
+        assertEquals(listOf("$parcel"), manager.activeNotifications.map { it.tag })
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
@@ -30,6 +31,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
@@ -45,8 +47,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The invitation to turn notifications on (C-S34, A-W07, C-ST19, C-ST20, C-SE09, C-AX07): under the list while the
  * store invites and nothing stands over the list or is under way on it, after the toasts, among the cards at the
- * accessibility sizes; the title a heading; Turn on once at a time with its spinner and both buttons still, its failure
- * said in the card; Not now counted and the invitation sent away.
+ * accessibility sizes without the bell; the title a heading; Turn on once at a time with its spinner and both buttons
+ * still, its failure said in the card, through a turn, until the card goes; Not now counted and the invitation sent away.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -67,11 +69,11 @@ class NotificationPromptTest {
         override val lifecycle: Lifecycle get() = registry
     }
 
-    /** The demo's parcels in an account the store invites, unless `invited` is false. */
-    private fun show(invited: Boolean = true, fontScale: Float = 1f) {
+    /** The demo's parcels in an account the store invites, unless `invited` is false, made again by `recreation`. */
+    private fun show(invited: Boolean = true, fontScale: Float = 1f, recreation: Recreation? = null) {
         source = FakeDeliveries(DemoCards.parcels(), reader).apply { shouldInviteNotifications.value = invited }
         compose.waitsForMaps()
-        compose.setContent {
+        val content: @Composable () -> Unit = {
             val density = LocalDensity.current
             CompositionLocalProvider(
                 LocalDensity provides Density(density.density, fontScale),
@@ -81,6 +83,7 @@ class NotificationPromptTest {
                 RootHost(state = reader, source = source)
             }
         }
+        if (recreation != null) recreation.setContent(content) else compose.setContent(content)
         settle()
     }
 
@@ -123,6 +126,7 @@ class NotificationPromptTest {
         assertTrue(shows(localizer.text("notifications.prompt.description")))
         val title = compose.onNode(hasText(localizer.text("notifications.prompt.title")), useUnmergedTree = true).fetchSemanticsNode()
         assertTrue(SemanticsProperties.Heading in title.config)
+        assertTrue("The bell", exists(NOTIFICATIONS_PROMPT_BELL))
         assertFalse(exists(NOTIFICATIONS_PROMPT_ERROR))
         // Under the list, 16 in from each side of the phone.
         val root = compose.onRoot().getUnclippedBoundsInRoot()
@@ -238,6 +242,29 @@ class NotificationPromptTest {
         assertFalse(exists(NOTIFICATIONS_PROMPT))
     }
 
+    /** The failure is the card's (`@State`): it stays through a turn, as the iPhone's does, and goes with the card. */
+    @Test
+    fun turnOnsFailureStaysThroughATurnAndGoesWithTheCard() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        source.enableFailure = DeliveryApiError.PushTokenUnavailable()
+        tap(NOTIFICATIONS_PROMPT_ENABLE)
+        assertTrue(exists(NOTIFICATIONS_PROMPT_ERROR))
+
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue("Through a turn", exists(NOTIFICATIONS_PROMPT_ERROR))
+
+        compose.runOnUiThread { source.shouldInviteNotifications.value = false }
+        settle()
+        assertFalse(exists(NOTIFICATIONS_PROMPT))
+        compose.runOnUiThread { source.shouldInviteNotifications.value = true }
+        settle()
+        assertTrue(exists(NOTIFICATIONS_PROMPT))
+        assertFalse("Gone with the card", exists(NOTIFICATIONS_PROMPT_ERROR))
+    }
+
     /** At the accessibility sizes the card comes first among the cards, without the bell, its buttons stacked. */
     @Test
     fun atTheLargestTextItSitsAmongTheCards() {
@@ -246,6 +273,7 @@ class NotificationPromptTest {
         val root = compose.onRoot().getUnclippedBoundsInRoot()
         val card = bounds(NOTIFICATIONS_PROMPT)
         assertTrue("$card in $root", card.top < root.bottom / 2)
+        assertFalse("No bell", exists(NOTIFICATIONS_PROMPT_BELL))
         val enable = bounds(NOTIFICATIONS_PROMPT_ENABLE)
         val dismiss = bounds(NOTIFICATIONS_PROMPT_DISMISS)
         assertTrue("Stacked: $enable over $dismiss", dismiss.top >= enable.bottom)

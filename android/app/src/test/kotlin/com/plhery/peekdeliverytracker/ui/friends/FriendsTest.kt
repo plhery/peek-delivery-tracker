@@ -54,7 +54,7 @@ import com.plhery.peekdeliverytracker.core.api.FriendProfile
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
 import com.plhery.peekdeliverytracker.core.api.Parcel
-import com.plhery.peekdeliverytracker.platform.AppNotifications
+import com.plhery.peekdeliverytracker.platform.notificationTap
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
@@ -155,12 +155,9 @@ class FriendsTest {
     /** A link to the app's window, `peekdeliverytracker://friend/<id>`. */
     private fun friendLink(id: UUID) = Intent(Intent.ACTION_VIEW, Uri.parse("peekdeliverytracker://friend/$id"))
 
-    /** The window opened from the notification of friend `id` who accepted the invitation, as the app posts it. */
-    private fun friendNotification(id: UUID) = Intent(AppNotifications.ACTION_OPEN)
-        .putExtra("title", "Peek")
-        .putExtra("body", "A friend accepted your invitation")
-        .putExtra("kind", "friend_accepted")
-        .putExtra("friend_id", "$id")
+    /** What opening the notification of friend `id` who accepted the invitation starts, as the app posts it. */
+    private fun friendNotification(id: UUID) =
+        notificationTap(mapOf("title" to "Peek", "body" to "A friend accepted your invitation", "kind" to "friend_accepted", "friend_id" to "$id"))
 
     private fun choose(label: String) {
         compose.onNode(hasContentDescription(label) and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)).performClick()

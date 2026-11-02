@@ -1,7 +1,5 @@
 package com.plhery.peekdeliverytracker
 
-import android.Manifest
-import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -15,12 +13,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
-import com.plhery.peekdeliverytracker.core.NativeRoute
-import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.PeekHttp
+import com.plhery.peekdeliverytracker.platform.notificationTap
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.arrival.INVITATION_WELCOME
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
@@ -64,8 +61,8 @@ import org.robolectric.annotation.GraphicsMode
  * in the window brought forward. A friend's invitation (`/i/<id>`, `/invite#<code>`, the scheme's `invite`) comes in
  * the same way and stands over the window. Each link the app is opened with is counted once (`deep-link-open`), by
  * the trampoline or by the window, cold or running, and not again as the window turns; a notification opened as the
- * iPhone counts one (`notification-open`). On the app's own stores, made
- * offline with links read from memory, the analytics answered on the client itself.
+ * iPhone counts one (`notification-open`), and an intent from elsewhere with a notification's data not at all. On the
+ * app's own stores, made offline with links read from memory, the analytics answered on the client itself.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -161,13 +158,7 @@ class ParcelLinkActivityTest {
     private fun link(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url)).addCategory(Intent.CATEGORY_BROWSABLE)
 
     /** What opening the notification of the push with data `data` starts, as the app posts it. */
-    private fun notification(data: Map<String, String>): Intent {
-        shadowOf(app).grantPermissions(Manifest.permission.POST_NOTIFICATIONS)
-        AppNotifications(app).post(data)
-        val tag = AppNotifications.tag(NativeRoute(remoteNotification = data))
-        val shade = shadowOf(app.getSystemService(NotificationManager::class.java))
-        return shadowOf(requireNotNull(shade.getNotification(tag, AppNotifications.ID)).contentIntent).savedIntent
-    }
+    private fun notification(data: Map<String, String>): Intent = notificationTap(data)
 
     /** The activities of this package a link to `url` aimed at it opens, as a browser sends one. */
     private fun takers(url: String): List<String> =
@@ -372,6 +363,23 @@ class ParcelLinkActivityTest {
         Robolectric.buildActivity(MainActivity::class.java, notification(mapOf("title" to "Books", "body" to "Out for delivery", "parcel_id" to PARCEL))).setup()
         awaitSession(awaitStores())
         assertOpens(0, NOTIFICATION_OPEN)
+    }
+
+    /**
+     * An intent any app can send the window, with a notification's action and data, starting it or coming to it: it
+     * opens nothing and counts nothing.
+     */
+    @Test
+    fun aNotificationsIntentFromAnotherAppIsNotFollowed() {
+        counting()
+        val friend = notification(mapOf("title" to "Peek", "body" to "A friend accepted your invitation", "kind" to "friend_accepted", "friend_id" to FRIEND))
+        val window = Robolectric.buildActivity(MainActivity::class.java, Intent(friend).setClass(app, MainActivity::class.java)).setup()
+        val stores = awaitStores()
+        awaitSession(stores)
+        window.newIntent(Intent(notification(mapOf("title" to "Books", "body" to "Delivered", "link_id" to id))).setClass(app, MainActivity::class.java))
+        assertOpens(0, NOTIFICATION_OPEN)
+        assertNull(stores.links.route)
+        assertOpens(0)
     }
 
     private companion object {

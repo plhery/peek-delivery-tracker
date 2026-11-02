@@ -78,8 +78,10 @@ import org.junit.runner.RunWith
  * read as the store reads it, and the card's Turn on answered by it without a question; each kind posted from a push's
  * data, as Firebase's `onMessageReceived` will hand it, and read back from `activeNotifications` (channel, tag, group,
  * the mark's eyes, a later one for the same parcel in place of the first, a friend's quiet while the app is on screen
- * and taken away once acknowledged), the shade saved; the channels named in the app's language; a notification's own
- * content intent sent, which opens the app's window on its route, on the app's stores made offline. Each saved as
+ * and taken away once acknowledged, the friends' under a silent summary that goes with the last), the shade saved; the
+ * channels named in the app's language; a notification's own content intent sent, which opens the app's window on its
+ * route through the app's alias, and a second one's, which reaches that same window (`onNewIntent`), on the app's
+ * stores made offline. Each saved as
  * notifications/<name>.png in the test package's external files, which adb pulls. Nothing reaches a server. Run the
  * class on its own (`-e class`), as the stores are made once a process.
  *
@@ -136,7 +138,19 @@ class NotificationsDeviceTest {
 
     private fun friendPush() = mapOf("title" to "Peek", "body" to "Sam accepted your invitation", "kind" to "friend_accepted", "friend_id" to "$friend")
 
-    private fun linkPush() = mapOf("title" to "Parcel", "body" to "Delivered", "link_id" to LINK)
+    private fun linkPush(id: String = LINK) = mapOf("title" to "Parcel", "body" to "Delivered", "link_id" to id)
+
+    /** Sends the content intent of the notification tagged `tag`, as the shade does when it is opened. */
+    private fun open(tag: String) {
+        val opening = checkNotNull(shade()[tag]).notification.contentIntent
+        val options = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            @Suppress("DEPRECATION")
+            ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED).toBundle()
+        } else {
+            null
+        }
+        opening.send(context, 0, null, null, null, null, options)
+    }
 
     /** The shade pulled down and saved as `name`, then put away. */
     private fun shadeShot(name: String) {
@@ -199,6 +213,10 @@ class NotificationsDeviceTest {
         val accepted = posted.getValue("friend-$friend")
         assertEquals(AppNotifications.FRIENDS, accepted.notification.channelId)
         assertEquals("friends", accepted.notification.group)
+        val summary = posted.getValue(AppNotifications.FRIENDS_SUMMARY).notification
+        assertTrue(summary.flags and Notification.FLAG_GROUP_SUMMARY != 0)
+        assertEquals("friends", summary.group)
+        assertEquals(Notification.GROUP_ALERT_CHILDREN, summary.groupAlertBehavior)
         shadeShot("shade")
 
         // A later one for the same parcel takes the first's place.
@@ -212,9 +230,10 @@ class NotificationsDeviceTest {
         assertEquals(Notification.GROUP_ALERT_SUMMARY, shade().getValue("friend-$friend").notification.groupAlertBehavior)
         assertEquals(1, refreshed)
 
-        // Acknowledged, the friend's goes, and only theirs.
+        // Acknowledged, the friend's goes, and only theirs, the summary with the last friend's.
         away.removeFriend(friend)
         assertFalse(shade().containsKey("friend-$friend"))
+        assertFalse(shade().containsKey(AppNotifications.FRIENDS_SUMMARY))
         assertTrue(shade().containsKey("$parcel"))
     }
 
@@ -230,7 +249,10 @@ class NotificationsDeviceTest {
         assertEquals(NotificationManager.IMPORTANCE_HIGH, manager.getNotificationChannel(AppNotifications.PARCELS).importance)
     }
 
-    /** A link's notification opened: the app's window starts on the link's sheet, and its intent forgets the push. */
+    /**
+     * A link's notification opened: the app's window starts on the link's sheet, and its intent forgets the push; a
+     * second one's opens its own sheet in that same window, which the alias's intent reaches already open.
+     */
     @Test
     fun aNotificationsContentIntentOpensTheWindowOnItsRoute() {
         assumeTrue("The app's stores were made before this test, on the network: run the class on its own", app.container.value == null)
@@ -246,25 +268,28 @@ class NotificationsDeviceTest {
         }
         allow()
         AppNotifications(context).post(linkPush())
-        val opening = checkNotNull(shade()["link-$LINK"]).notification.contentIntent
-        val options = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            @Suppress("DEPRECATION")
-            ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED).toBundle()
-        } else {
-            null
-        }
-        opening.send(context, 0, null, null, null, null, options)
+        open("link-$LINK")
         compose.waitUntil(20_000) { exists(LINK_CARD) }
         assertEquals(LINK, checkNotNull(app.container.value).links.route?.id)
-        assertNull("The push's data forgotten", AppNotifications.payload(windows().single().intent))
+        val window = windows().single()
+        assertEquals(AppNotifications.OPENING, window.intent.component?.className)
+        assertNull("The push's data forgotten", AppNotifications.payload(window.intent))
         compose.waitForIdle()
         Thread.sleep(500)
         shots.take("opened", ownWindow = false)
+
+        AppNotifications(context).post(linkPush(OTHER_LINK))
+        open("link-$OTHER_LINK")
+        compose.waitUntil(20_000) { app.container.value?.links?.route?.id == OTHER_LINK }
+        assertTrue("The window already open", windows().single() === window)
     }
 }
 
 /** A synthetic parcel link's id. */
 private const val LINK = "n4Tp7wKc2HzQ"
+
+/** Another synthetic parcel link's id. */
+private const val OTHER_LINK = "r8Wm3xQf6JtV"
 
 private fun ago(minutes: Long): String = DateParser.isoString(Instant.now().minus(Duration.ofMinutes(minutes)))
 

@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -48,9 +49,10 @@ import java.util.UUID
  * Turn on (C-ST20) asks the store (`enableNotifications`, which counts `notifications-enable` and asks the phone),
  * once at a time: the spinner and "Turning on…" while the store works, both buttons at half and still meanwhile, and
  * `notifications.error.enable` once it failed, for whatever reason, the phone's refusal included, which also sends the
- * invitation away. The work runs in the app's scope ([PageWork]), so the window made again finds it, and its failure,
- * as they were; the failure goes with the card. Not now counts `notifications-defer` and sends the invitation away for
- * this account (C-SE09). A card of its own for each account (`.id(session.user?.id)`).
+ * invitation away. The work runs in the app's scope ([PageWork]), so the window made again (a turn, a fold, dark mode,
+ * a resize) finds it, and its failure, as they were; the failure goes with the card otherwise. Not now counts
+ * `notifications-defer` and sends the invitation away for this account (C-SE09). A card of its own for each account
+ * (`.id(session.user?.id)`).
  */
 @Composable
 internal fun NotificationPrompt(state: DeliveriesState, modifier: Modifier = Modifier) {
@@ -61,7 +63,11 @@ internal fun NotificationPrompt(state: DeliveriesState, modifier: Modifier = Mod
     val enabling by source.notificationEnableInProgress.collectAsState()
     val work = source.pageWork
     val error = work.failure(PROMPT_WORK)
-    DisposableEffect(work) { onDispose { work.dismiss(PROMPT_WORK) } }
+    val window = LocalActivity.current
+    // The failure goes with the card, but not as the window is made again, which the iPhone's `@State` lives through.
+    DisposableEffect(work) {
+        onDispose { if (window?.isChangingConfigurations != true) work.dismiss(PROMPT_WORK) }
+    }
     val shape = ContinuousRoundedShape(PROMPT_RADIUS)
     Column(
         modifier
@@ -74,7 +80,10 @@ internal fun NotificationPrompt(state: DeliveriesState, modifier: Modifier = Mod
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) {
-                Box(Modifier.size(44.dp).background(colors.accent, ContinuousRoundedShape(TILE_RADIUS)), contentAlignment = Alignment.Center) {
+                Box(
+                    Modifier.testTag(NOTIFICATIONS_PROMPT_BELL).size(44.dp).background(colors.accent, ContinuousRoundedShape(TILE_RADIUS)),
+                    contentAlignment = Alignment.Center,
+                ) {
                     PeekSymbol("bell.badge.fill", font = type.fixed(20f, FontWeight.SemiBold), tint = colors.onAccent)
                 }
             }
@@ -164,6 +173,8 @@ private val PROMPT_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.1f), radius
 private const val SECONDARY = 0.5f
 
 internal const val NOTIFICATIONS_PROMPT = "notifications.prompt"
+/** The bell's tile, which iOS gives no identifier: a hook for the tests alone, named as no copy key is. */
+internal const val NOTIFICATIONS_PROMPT_BELL = "notificationsPromptBell"
 internal const val NOTIFICATIONS_PROMPT_ERROR = "notifications.prompt.error"
 internal const val NOTIFICATIONS_PROMPT_ENABLE = "notifications.prompt.enable"
 internal const val NOTIFICATIONS_PROMPT_DISMISS = "notifications.prompt.dismiss"

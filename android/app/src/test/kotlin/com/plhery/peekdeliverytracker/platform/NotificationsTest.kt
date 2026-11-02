@@ -4,12 +4,14 @@ import android.Manifest
 import android.app.Activity
 import android.app.Application
 import android.app.NotificationManager
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
 import androidx.activity.ComponentActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -65,8 +67,8 @@ class AskingWindow : ComponentActivity() {
 /**
  * The phone's notifications (C-P01, C-P03, C-ST21): POST_NOTIFICATIONS' states as the store reads them (not asked, may
  * ask again, denied once the system no longer asks, Android 12's setting alone), the question asked from the window on
- * screen, and through the app's own stores the token that never comes until Firebase, the demo, the channels and a
- * friend's notification taken away. The server is answered on the client itself (synthetic hosts), so nothing leaves
+ * screen and ended unanswered when that window closes for good or the question can't be shown, and through the app's
+ * own stores the token that never comes until Firebase, the demo, the channels and a friend's notification taken away. The server is answered on the client itself (synthetic hosts), so nothing leaves
  * the machine.
  */
 @RunWith(AndroidJUnit4::class)
@@ -232,6 +234,47 @@ class NotificationsTest {
         assertEquals(true, answer?.getOrNull())
     }
 
+    /** The window that asked closed for good before the answer: the question ends unanswered, and the next is asked. */
+    @Test
+    @Config(sdk = [QUESTION_SDK])
+    fun aWindowClosedBeforeTheAnswerEndsTheQuestionUnanswered() {
+        val first = window()
+        var answer: Result<Boolean>? = null
+        MainScope().launch { answer = runCatching { notifications.requestAuthorization() } }
+        shadowOf(Looper.getMainLooper()).idle()
+        assertNotNull(shadowOf(first.get()).lastRequestedPermission)
+        first.get().finish()
+        first.pause().stop().destroy()
+        shadowOf(Looper.getMainLooper()).idle()
+        assertEquals(false, answer?.getOrNull())
+        assertFalse("No answer to count", notifications.answeredBefore)
+        assertTrue(ask(window(), granted = true))
+    }
+
+    /** The question that couldn't be shown fails, and leaves the next one to be asked. */
+    @Test
+    @Config(sdk = [QUESTION_SDK])
+    fun aQuestionThatCouldNotBeShownLeavesTheNextToBeAsked() {
+        val window = window()
+        var failed: Result<Boolean>? = null
+        ActivityCompat.setPermissionCompatDelegate(
+            object : ActivityCompat.PermissionCompatDelegate {
+                override fun requestPermissions(activity: Activity, permissions: Array<String>, requestCode: Int): Boolean =
+                    throw ActivityNotFoundException("No screen to ask on")
+
+                override fun onActivityResult(activity: Activity, requestCode: Int, resultCode: Int, data: Intent?): Boolean = false
+            },
+        )
+        try {
+            MainScope().launch { failed = runCatching { notifications.requestAuthorization() } }
+            shadowOf(Looper.getMainLooper()).idle()
+        } finally {
+            ActivityCompat.setPermissionCompatDelegate(null)
+        }
+        assertTrue("$failed", failed?.exceptionOrNull() is ActivityNotFoundException)
+        assertTrue(ask(window, granted = true))
+    }
+
     @Test
     @Config(sdk = [QUESTION_SDK])
     fun withoutAWindowOnScreenNothingCanBeAsked() {
@@ -336,7 +379,7 @@ class NotificationsTest {
         app.posted.post(mapOf("title" to "Sam", "body" to "Sam accepted your invitation", "kind" to "friend_accepted", "friend_id" to "$friend"))
         app.posted.post(mapOf("title" to "Books", "body" to "Out for delivery", "parcel_id" to "$parcel"))
         val shade = shadowOf(context.getSystemService(NotificationManager::class.java))
-        assertEquals(2, shade.size())
+        assertEquals("The friend's, its group's summary and the parcel's", 3, shade.size())
 
         var done = false
         app.scope.launch {
@@ -346,6 +389,7 @@ class NotificationsTest {
         idleUntil("the acknowledgement") { done }
         assertNull(shade.getNotification("friend-$friend", AppNotifications.ID))
         assertNotNull(shade.getNotification("$parcel", AppNotifications.ID))
+        assertEquals("The summary gone with the last friend's", 1, shade.size())
     }
 }
 

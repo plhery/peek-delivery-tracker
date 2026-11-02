@@ -21,10 +21,12 @@ import kotlinx.coroutines.CompletableDeferred
 /**
  * POST_NOTIFICATIONS' question (Android 13 and later), asked from the window on screen as iOS's
  * `requestAuthorization` shows its alert over the app: each window registers its launcher as it is made ([attach]),
- * and [request] waits for the answer, which comes to the window made again after a turn as well. The answer counts
- * once given ([answered]), kept in the app's files that no backup carries, so a phone set up from another asks again;
- * a question dismissed without an answer, which Android 13 asks again, doesn't count. Whether Android would still ask
- * after a refusal ([rationale]) is read from the window on screen, or as last read while none is. On the main thread.
+ * and [request] waits for the answer, which comes to the window made again after a turn as well. A window that asked
+ * and closes for good before the answer, or a question that couldn't be shown, ends it unanswered, so the next can be
+ * asked. The answer counts once given ([answered]), kept in the app's files that no backup carries, so a phone set up
+ * from another asks again; a question dismissed without an answer, which Android 13 asks again, doesn't count. Whether
+ * Android would still ask after a refusal ([rationale]) is read from the window on screen, or as last read while none
+ * is. On the main thread.
  */
 class NotificationPermission(context: Context) {
     private class Window(val activity: ComponentActivity, val launcher: ActivityResultLauncher<String>)
@@ -32,6 +34,9 @@ class NotificationPermission(context: Context) {
     private val windows = mutableListOf<Window>()
     private val marker = File(context.noBackupFilesDir, MARKER)
     private var answer: CompletableDeferred<Boolean>? = null
+
+    /** The window that asked, or the next one made after it while it is made again; null while none waits for it. */
+    private var asker: ComponentActivity? = null
     private var rationaleBefore = false
     private var lastRationale = false
 
@@ -43,9 +48,15 @@ class NotificationPermission(context: Context) {
         }
         val window = Window(activity, launcher)
         windows += window
+        // The window that asked made again (a turn): the answer comes to this one.
+        if (answer != null && asker == null) asker = activity
         activity.lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onDestroy(owner: LifecycleOwner) {
                 windows -= window
+                if (asker !== activity) return
+                asker = null
+                // Closed for good, the window will hear no answer.
+                if (!activity.isChangingConfigurations) end(false)
             }
         })
     }
@@ -62,7 +73,7 @@ class NotificationPermission(context: Context) {
 
     /**
      * Asks, and says whether it was granted: one question at a time, each caller waiting for the same answer. Throws
-     * when no window is on screen to ask from.
+     * when no window is on screen to ask from, or the question can't be shown.
      */
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     suspend fun request(): Boolean {
@@ -71,7 +82,14 @@ class NotificationPermission(context: Context) {
             rationaleBefore = rationale()
             CompletableDeferred<Boolean>().also {
                 answer = it
-                window.launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                asker = window.activity
+                try {
+                    window.launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                } catch (error: RuntimeException) {
+                    answer = null
+                    asker = null
+                    throw error
+                }
             }
         }
         return pending.await()
@@ -85,8 +103,14 @@ class NotificationPermission(context: Context) {
         lastRationale = rationale
         // A first refusal asks for a rationale, a second ends it; a dismissal leaves it as it was, unanswered.
         if (granted || rationale || rationaleBefore) runCatching { marker.createNewFile() }
+        end(granted)
+    }
+
+    /** The question over, `granted` or not, for everyone waiting for it. */
+    private fun end(granted: Boolean) {
         val pending = answer
         answer = null
+        asker = null
         pending?.complete(granted)
     }
 

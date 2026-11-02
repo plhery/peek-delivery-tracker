@@ -59,13 +59,14 @@ class PeekApplication : Application() {
     internal val notificationPermission by lazy { NotificationPermission(this) }
 
     /**
-     * The notifications posted from a push ([AppNotifications]): whether the app is on screen is its windows', and a
-     * friend's that comes then refreshes the stores' notices, once there are stores.
+     * The notifications posted from a push ([AppNotifications]), on whatever thread it comes: whether the app is on
+     * screen is its windows', read from the state they publish to any thread, and a friend's that comes then refreshes
+     * the stores' notices on the main thread, once there are stores.
      */
     internal val posted by lazy {
         AppNotifications(
             this,
-            onScreen = { foreground.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED) },
+            onScreen = { foreground.lifecycle.currentStateFlow.value.isAtLeast(Lifecycle.State.STARTED) },
             friendActivity = { container.value?.friendActivity() },
         )
     }

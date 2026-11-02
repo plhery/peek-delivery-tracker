@@ -39,7 +39,9 @@ import com.plhery.peekdeliverytracker.ui.deliveries.Announcements
 import com.plhery.peekdeliverytracker.ui.deliveries.BAR_HEIGHT
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesSource
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoModeBar
+import com.plhery.peekdeliverytracker.ui.deliveries.LocalWindowArrangement
 import com.plhery.peekdeliverytracker.ui.deliveries.SoftTopEdge
+import com.plhery.peekdeliverytracker.ui.deliveries.TabRowAccount
 import com.plhery.peekdeliverytracker.ui.deliveries.barRowTop
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.deliveries.rememberForLaunch
@@ -47,6 +49,7 @@ import com.plhery.peekdeliverytracker.ui.settings.AccountHost
 import com.plhery.peekdeliverytracker.ui.settings.AccountSheetHost
 import com.plhery.peekdeliverytracker.ui.settings.DELIVERY_UPDATES_PAGE
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_PAGE
+import com.plhery.peekdeliverytracker.ui.tabs.LocalTabBarPadding
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
@@ -177,7 +180,9 @@ internal fun passportLayout(
 /**
  * `PassportView`: the passport's pages in a scroll without indicators on the page's ground, under the bar with the
  * inline title and the account button ([AccountBar]) and, in the demo, the demo's bar ([DemoModeBar]); Settings over it
- * from the account button ([AccountSheetHost]). The pages are laid out by window ([passportLayout]); a change of window
+ * from the account button ([AccountSheetHost]), a form where the deliveries would stand side by side. Where the tab bar
+ * stands at the top, as the iPad's, there is no title and the account button stands in the tab bar's row
+ * ([TabRowAccount]). The pages are laid out by window ([passportLayout]); a change of window
  * keeps the popover open and all the stamps shown, as its `@State` does. Each toggle plays a light impact.
  */
 @Composable
@@ -194,21 +199,31 @@ internal fun PassportTab(source: DeliveriesSource) {
     val direction = LocalLayoutDirection.current
     val start = padding.calculateStartPadding(direction)
     val end = padding.calculateEndPadding(direction)
+    // Where the tab bar stands at the top, the iPad's: no title, the account in the tab bar's row and what is under the
+    // bar 10 under the tab bar ([barRowTop]). Else the inline title's bar, under the status bar.
+    val tabBarAtTop = LocalTabBarPadding.current.calculateTopPadding() > 0.dp
     val rowTop = barRowTop()
-    val barBottom = rowTop + BAR_HEIGHT
+    val barBottom = if (tabBarAtTop) rowTop else rowTop + BAR_HEIGHT
     val bottom = padding.calculateBottomPadding() + BOTTOM_SPACING + PAGE_BOTTOM
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val anyHinge = LocalWindowHinge.current
     val hinge = anyHinge?.takeIf { it.halfOpen }
     val backdrop = rememberMaterialBackdrop()
+    val windowArrangement = LocalWindowArrangement.current
     SensoryFeedbackEffect(SensoryFeedback.Impact(SensoryFeedback.Impact.Weight.Light, 0.65), state.touchCount)
     BoxWithConstraints(Modifier.fillMaxSize().background(colors.background).testTag(PeekTab.Passport.screen)) {
         val regularWidth = maxWidth >= REGULAR_WIDTH
         val regularHeight = maxHeight >= REGULAR_HEIGHT
-        // Settings as the deliveries show it in this window: a form where they would stand side by side, else the page.
-        val settingsAsForm = (anyHinge != null && regularWidth && regularHeight) || DeliveriesArrangement.resolve(
-            maxWidth.value.toDouble(), regularWidth, regularHeight, largeText, DeliveriesArrangement.Stacked,
-        ) == DeliveriesArrangement.SideBySide
+        // Settings as the deliveries would show it in this window now: a form where they would stand side by side, else
+        // the page. They would turn from the arrangement they last had, slack included, which only they change.
+        val deliveries = if (anyHinge != null && regularWidth && regularHeight) {
+            DeliveriesArrangement.SideBySide
+        } else {
+            DeliveriesArrangement.resolve(
+                maxWidth.value.toDouble(), regularWidth, regularHeight, largeText, windowArrangement?.last ?: DeliveriesArrangement.Stacked,
+            )
+        }
+        val settingsAsForm = deliveries == DeliveriesArrangement.SideBySide
         val startPx = with(density) { start.roundToPx() }
         val contentPx = constraints.maxWidth - startPx - with(density) { end.roundToPx() }
         val arrangement = passportLayout(
@@ -244,12 +259,17 @@ internal fun PassportTab(source: DeliveriesSource) {
                 bar.forEach { it.place(0, barBottom.roundToPx()) }
             }
         }
-        AccountBar(
-            localized("passport.title"), rowTop, start, end, backdrop, source.session,
-            onAccount = { state.account(settingsAsForm) }, accountTag = PASSPORT_ACCOUNT_BUTTON,
-            // Nothing across a fold standing half open: the title over the first page, as the tab bar keeps clear of it.
-            titleWidth = hinge?.let { with(density) { it.start.toDp() } },
-        )
+        if (tabBarAtTop) {
+            TabRowAccount(end, backdrop, source.session, onAccount = { state.account(settingsAsForm) }, accountTag = PASSPORT_ACCOUNT_BUTTON)
+        } else {
+            AccountBar(
+                localized("passport.title"), rowTop, start, end, backdrop, source.session,
+                onAccount = { state.account(settingsAsForm) }, accountTag = PASSPORT_ACCOUNT_BUTTON,
+                // Nothing across a fold standing half open (a window too short or narrow for the tab bar at the top):
+                // the title over the first page, as the tab bar keeps clear of it.
+                titleWidth = hinge?.let { with(density) { it.start.toDp() } },
+            )
+        }
         Announcements(state.announcement, PASSPORT_ANNOUNCEMENT, state::announced)
     }
     AccountSheetHost(state)

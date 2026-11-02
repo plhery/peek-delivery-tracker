@@ -44,9 +44,11 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalFirstOpen
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalParcelLinkOpen
+import com.plhery.peekdeliverytracker.ui.deliveries.LocalWindowArrangement
 import com.plhery.peekdeliverytracker.ui.deliveries.NoLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetHost
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSource
+import com.plhery.peekdeliverytracker.ui.deliveries.WindowArrangement
 import com.plhery.peekdeliverytracker.ui.deliveries.covers
 import com.plhery.peekdeliverytracker.ui.deliveries.rememberFirstOpen
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
@@ -166,10 +168,12 @@ internal fun PeekRoot(
                                     val labels = remember(language) { PeekTab.entries.map { localizer.text(it.copyKey) } }
                                     val linkOpen = links?.links?.routeFlow?.collectAsState()?.value != null
                                     val firstOpen = source?.let { rememberFirstOpen(it.launch) }
+                                    val arrangement = source?.let { rememberSaveable(it.launch, saver = WindowArrangement.saver(it.launch)) { WindowArrangement() } }
                                     firstOpen?.chooseDeliveries = { tab = PeekTab.Deliveries.ordinal }
                                     val covered = if (source != null && firstOpen != null) firstOpen.covers(source, shownState) else false
                                     CompositionLocalProvider(
                                         LocalLabelScanner provides scanner, LocalParcelLinkOpen provides linkOpen, LocalFirstOpen provides firstOpen,
+                                        LocalWindowArrangement provides arrangement,
                                     ) {
                                         TabShell(
                                             selection = tab, onSelect = { tab = it }, labels = labels, onView = onView,

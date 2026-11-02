@@ -302,9 +302,20 @@ func fetch(_ name: String, fill: Bool, weight: Int, opticalSize: Int) throws -> 
 
 func decimal(_ value: Double) -> String { String(format: "%.2f", value) + "f" }
 
-/// The outline `spec` names at a weight and optical size, as SVG path data: an icon, `name#n` its nth subpath alone, or
-/// `a + b` and `a - b`, b drawn over a or cut out of it where SF draws its inner glyph (`glyph`) within its ink (`ink`).
+/// The outline `spec` names at a weight and optical size, as SVG path data: an icon, `name#n` its nth subpath alone,
+/// `name~` its shapes hollowed to their edges, or `a + b` and `a - b`, b drawn over a or cut out of it where SF draws its
+/// inner glyph (`glyph`) within its ink (`ink`).
 func outline(_ spec: String, fill: Bool, weight: Int, opticalSize: Int, ink: CGRect, glyph: CGRect) throws -> String {
+    if spec.hasSuffix("~") {
+        // Each shape keeps only a band inside its edges as wide as the icons' lines at this weight: `circle`'s ring.
+        let shape = parse(try outline(String(spec.dropLast()), fill: fill, weight: weight, opticalSize: opticalSize, ink: ink, glyph: glyph))
+        let ring = try fetch("circle", fill: false, weight: weight, opticalSize: opticalSize)
+        let line = (parse(ring).bounds.width - parse(subpath(2, of: ring)).bounds.width) / 2
+        let edges = shape.path.copy(strokingWithWidth: 2 * line, lineCap: .round, lineJoin: .round, miterLimit: 10)
+        let hollow = shape.path.intersection(edges)
+        precondition(hollow.boundingBoxOfPath.insetBy(dx: -0.01, dy: -0.01).contains(shape.bounds) && shape.bounds.insetBy(dx: -0.01, dy: -0.01).contains(hollow.boundingBoxOfPath), "\(spec): the edges leave the shape")
+        return pathData(hollow)
+    }
     let terms = spec.components(separatedBy: " ")
     if terms.count == 3 {
         precondition(terms[1] == "+" || terms[1] == "-", "\(spec): a + b or a - b")

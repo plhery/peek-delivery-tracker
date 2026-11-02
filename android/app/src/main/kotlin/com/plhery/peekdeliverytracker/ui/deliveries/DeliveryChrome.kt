@@ -133,6 +133,7 @@ import com.plhery.peekdeliverytracker.ui.draw.PeekMark
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabBarPadding
+import com.plhery.peekdeliverytracker.ui.tabs.TOP_BAR_HEIGHT
 import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
@@ -286,7 +287,8 @@ private fun AddButton(state: DeliveriesState, modifier: Modifier) {
 /**
  * A tab's bar with only its inline title and `AccountToolbarItem`, placed as the list's bar places them
  * ([ListToolbar]): the passport's, whose account button, tagged [accountTag], opens its own Settings. Where a fold
- * stands half open [titleWidth] from the window's leading edge, the title centres over that first half, clear of it.
+ * stands half open [titleWidth] from the window's leading edge (in a window too narrow or too short for the tab bar at
+ * the top, where [TabRowAccount] stands instead), the title centres over that first half, clear of it.
  */
 @Composable
 internal fun AccountBar(
@@ -330,6 +332,36 @@ internal fun AccountBar(
 
 /** How far an [AccountBar]'s title keeps from the edges of the half before a fold. */
 private val FOLD_TITLE_MARGIN = 16.dp
+
+/**
+ * Where the tab bar stands at the top, a tab's `AccountToolbarItem` as the iPad places it with no title: the account's
+ * glass in the tab bar's row, centred on it, 10 in from the window's trailing edge and [end], clear of the system's
+ * bars and cutout there (ipad-07). It opens the tab's own Settings ([onAccount]); its button is tagged [accountTag].
+ */
+@Composable
+internal fun TabRowAccount(
+    end: Dp,
+    backdrop: MaterialBackdrop,
+    session: StateFlow<AuthenticationState>,
+    onAccount: () -> Unit,
+    accountTag: String,
+    modifier: Modifier = Modifier,
+) {
+    val rowTop = LocalTabBarPadding.current.calculateTopPadding() - TOP_BAR_HEIGHT
+    Box(modifier.fillMaxWidth().padding(top = rowTop).height(TOP_BAR_HEIGHT)) {
+        GlassSurface(
+            CapsuleShape,
+            Modifier.align(Alignment.CenterEnd).offset(x = -(end + TAB_ROW_ACCOUNT_MARGIN)).size(TAB_ROW_ACCOUNT_WIDTH, ROW_HEIGHT),
+            backdrop,
+        ) {
+            AccountButton(session, onAccount, accountTag, Modifier.align(Alignment.Center))
+        }
+    }
+}
+
+/** The iPad's account glass beside its tab bar: 52 wide, 10 from the window's edge. */
+private val TAB_ROW_ACCOUNT_WIDTH = 52.dp
+private val TAB_ROW_ACCOUNT_MARGIN = 10.dp
 
 /** The list's account button, which opens Settings over the deliveries ([DeliveriesState.account]). */
 @Composable

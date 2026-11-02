@@ -1,11 +1,18 @@
 package com.plhery.peekdeliverytracker.ui.passport
 
 import android.app.Activity
+import android.content.Context
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.Role
@@ -28,6 +35,7 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.DpRect
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.window.layout.FoldingFeature.Orientation
@@ -38,6 +46,7 @@ import androidx.window.testing.layout.WindowLayoutInfoPublisherRule
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.PassportStatistics
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -45,8 +54,11 @@ import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
+import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_CLOSE
@@ -57,13 +69,11 @@ import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -92,12 +102,19 @@ class PassportTest {
     /** The screens counted, the tabs' and the deliveries'. */
     private val views = mutableListOf<String>()
 
-    /** The passport tab of [session] on [parcels], chosen from the tab bar, as large as [fontScale] makes its text. */
+    /** The app's language, which a test may change as it runs. */
+    private var language by mutableStateOf(AppLanguage.En)
+
+    /**
+     * The passport tab of [session] on [parcels], chosen from the tab bar, as large as [fontScale] makes its text, the
+     * haptics played on [feeling] where a test gives it.
+     */
     private fun show(
         parcels: List<Parcel> = DemoCards.parcels(),
         session: AuthenticationState = reader,
         fontScale: Float = 1f,
         recreation: Recreation? = null,
+        feeling: View? = null,
     ) {
         source = FakeDeliveries(parcels, session)
         compose.waitsForMaps()
@@ -105,13 +122,21 @@ class PassportTest {
             view = LocalView.current
             activity = LocalActivity.current
             val density = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
-                RootHost(state = session, dark = false, onView = { views += it }, source = source)
+            val root: @Composable () -> Unit = {
+                CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
+                    RootHost(state = session, language = language, dark = false, onView = { views += it }, source = source)
+                }
             }
+            if (feeling != null) CompositionLocalProvider(LocalView provides feeling, content = root) else root()
         }
         if (recreation != null) recreation.setContent(content) else compose.setContent(content)
         settle()
-        compose.onNode(hasContentDescription("Passport") and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)).performClick()
+        choose("Passport")
+    }
+
+    /** The tab labelled [label] chosen from the tab bar. */
+    private fun choose(label: String) {
+        compose.onNode(hasContentDescription(label) and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab)).performClick()
         settle()
     }
 
@@ -365,14 +390,41 @@ class PassportTest {
         assertEquals(6, stamps().size)
     }
 
+    /**
+     * `toggle` plays the light impact (`touchCount`); a popover closed by a tap anywhere, its item's too, or by the back
+     * goes through the binding's setter and plays nothing.
+     */
     @Test
     fun eachToggleAndNoDismissalPlaysTheLightImpact() {
-        show(session = AuthenticationState.Demo)
+        val feeling = FeelingView(compose.activity)
+        show(session = AuthenticationState.Demo, feeling = feeling)
         val impact = hapticFeedbackConstant(SensoryFeedback.Impact(SensoryFeedback.Impact.Weight.Light, 0.65))
-        // The tab's selection played last, a tick of its own.
-        assertNotEquals(impact, shadowOf(view).lastHapticFeedbackPerformed())
+        // The tab's selection played a tick of its own.
+        assertTrue(feeling.played.isNotEmpty())
+        fun impacts() = feeling.played.count { it == impact }
+        assertEquals(0, impacts())
+
         tap(PASSPORT_COVER)
-        assertEquals(impact, shadowOf(view).lastHapticFeedbackPerformed())
+        assertTrue(popover()!!.startsWith("Delivered"))
+        assertEquals(1, impacts())
+        // A tap on the cover while its popover is open only closes it.
+        tapWhereItShows(PASSPORT_COVER)
+        assertEquals(null, popover())
+        assertEquals(1, impacts())
+
+        tap(stamp("carriers"))
+        assertTrue(popover()!!.startsWith("Well connected"))
+        assertEquals(2, impacts())
+        back()
+        assertEquals(null, popover())
+        assertEquals(2, impacts())
+
+        tap(PASSPORT_AVERAGE)
+        assertTrue(popover()!!.startsWith("Average delivery time"))
+        assertEquals(3, impacts())
+        tapWhereItShows(stamp("first"))
+        assertEquals(null, popover())
+        assertEquals(3, impacts())
     }
 
     @Test
@@ -488,11 +540,205 @@ class PassportTest {
         val middle = 673.dp / 2
         assertTrue("${bounds(PASSPORT_COVER)}", bounds(PASSPORT_COVER).right <= middle)
         assertTrue("${bounds(PASSPORT_AVERAGE)}", bounds(PASSPORT_AVERAGE).left >= middle)
-        // The bar's title over the first page, clear of the fold.
-        val title = compose.onNode(hasText("Passport") and isHeading(), useUnmergedTree = true).getBoundsInRoot()
-        assertTrue("$title", title.right <= middle)
         assertTrue(popover()!!.startsWith("First arrival"))
         assertEquals(12, stamps().size)
+        // With the popover closed, the tab bar over the first page, clear of the fold, the account still at the window's
+        // trailing edge.
+        back()
+        assertTrue("${bounds(TAB_BAR)}", bounds(TAB_BAR).right <= middle)
+        assertTheAccountStandsInTheTabBarsRow()
+    }
+
+    /**
+     * Where the tab bar stands at the top, the iPad's (ipad-07): no title, the account's glass in the tab bar's row,
+     * centred on it, 10 from the window's trailing edge, clear of the tab bar.
+     */
+    private fun assertTheAccountStandsInTheTabBarsRow() {
+        assertTrue(compose.onAllNodes(hasText("Passport") and isHeading(), useUnmergedTree = true).fetchSemanticsNodes().isEmpty())
+        val bar = bounds(TAB_BAR)
+        val account = bounds(PASSPORT_ACCOUNT_BUTTON)
+        val window = compose.onRoot().getBoundsInRoot()
+        assertEquals(((bar.top + bar.bottom) / 2).value, ((account.top + account.bottom) / 2).value, 0.5f)
+        // The 44-point button in the middle of the 52-point glass.
+        assertEquals((window.right - 10.dp - 26.dp).value, ((account.left + account.right) / 2).value, 0.5f)
+        assertTrue("$bar $account", account.left - 4.dp > bar.right)
+    }
+
+    /**
+     * The demo's bar, or with none the pages, 18 into theirs (the cover's contents 26 into its card), from 10 under the
+     * tab bar's foot.
+     */
+    private fun assertWhatIsUnderTheBarStartsTenUnderTheTabBar(demo: Boolean) {
+        val foot = bounds(TAB_BAR).bottom
+        if (demo) {
+            assertEquals((foot + 10.dp).value, bounds(DEMO_EXIT).top.value, 0.5f)
+        } else {
+            assertEquals((foot + 10.dp + 18.dp + 26.dp).value, bounds(PASSPORT_COVER).top.value, 0.5f)
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun onATabletTheAccountStandsInTheTabBarsRowWithNoTitle() {
+        show(session = AuthenticationState.Demo)
+        assertTheAccountStandsInTheTabBarsRow()
+        assertWhatIsUnderTheBarStartsTenUnderTheTabBar(demo = true)
+    }
+
+    @Test
+    @Config(qualifiers = "w673dp-h841dp-xxhdpi")
+    fun onAnUnfoldedFoldableTheAccountStandsInTheTabBarsRowWithNoTitle() {
+        show(session = AuthenticationState.Demo)
+        assertTheAccountStandsInTheTabBarsRow()
+        assertWhatIsUnderTheBarStartsTenUnderTheTabBar(demo = true)
+        compose.onNodeWithTag(PASSPORT_ACCOUNT_BUTTON).performClick()
+        settle()
+        assertTrue(exists(SETTINGS_SHEET))
+    }
+
+    @Test
+    @Config(qualifiers = "w1376dp-h1032dp-land-xhdpi")
+    fun onATabletSidewaysWithNoDemoThePagesStartTenUnderTheTabBar() {
+        show()
+        assertTheAccountStandsInTheTabBarsRow()
+        assertWhatIsUnderTheBarStartsTenUnderTheTabBar(demo = false)
+    }
+
+    /**
+     * The narrowest window with the tab bar at the top, in every language: the account's glass clear of the tab bar, the
+     * window flat and with a fold standing half open in its middle, where the tab bar keeps to the first half when it
+     * fits there.
+     */
+    @Test
+    @Config(qualifiers = "w600dp-h800dp-xhdpi")
+    fun inTheNarrowestWindowTheAccountKeepsClearOfTheTabBarInEveryLanguage() {
+        show(session = AuthenticationState.Demo)
+        fun everyLanguage() {
+            for (each in AppLanguage.entries) {
+                language = each
+                settle()
+                assertTheAccountStandsInTheTabBarsRow()
+            }
+        }
+        everyLanguage()
+        val hinge = FoldingFeature(requireNotNull(activity), center = view.width / 2, size = 0, state = State.HALF_OPENED, orientation = Orientation.VERTICAL)
+        fold.overrideWindowLayoutInfo(TestWindowLayoutInfo(listOf(hinge)))
+        settle()
+        everyLanguage()
+    }
+
+    /** On a phone, the tab bar at the foot: the inline title, the account beside it on the bar's row (checks-m4/04). */
+    @Test
+    fun onAPhoneTheBarKeepsItsInlineTitle() {
+        show()
+        val title = compose.onNode(hasText("Passport") and isHeading(), useUnmergedTree = true).getBoundsInRoot()
+        val account = bounds(PASSPORT_ACCOUNT_BUTTON)
+        assertEquals(((title.top + title.bottom) / 2).value, ((account.top + account.bottom) / 2).value, 0.5f)
+        assertTrue(bounds(TAB_BAR).top > bounds(PASSPORT_COVER).bottom)
+    }
+
+    /**
+     * A window too short for the tab bar at the top, across a fold standing half open: the inline title stays, over the
+     * first page, clear of the fold.
+     */
+    @Test
+    @Config(qualifiers = "w673dp-h460dp-xxhdpi")
+    fun aShortWindowAcrossAFoldStandingHalfOpenKeepsTheTitleOverTheFirstPage() {
+        show()
+        val hinge = FoldingFeature(requireNotNull(activity), center = view.width / 2, size = 0, state = State.HALF_OPENED, orientation = Orientation.VERTICAL)
+        fold.overrideWindowLayoutInfo(TestWindowLayoutInfo(listOf(hinge)))
+        settle()
+        val title = compose.onNode(hasText("Passport") and isHeading(), useUnmergedTree = true).getBoundsInRoot()
+        assertTrue("$title", title.right <= 673.dp / 2)
+    }
+
+    /**
+     * A flat fold isn't `proxy.fold`: on the unfolded foldable with a flat hinge splitting it (a dual screen's, which
+     * has width), one page, nothing split at the hinge, though the tab bar keeps to the first half.
+     */
+    @Test
+    @Config(qualifiers = "w673dp-h841dp-xxhdpi")
+    fun aFlatFoldKeepsOnePage() {
+        show(PassportFixtures.delivered(3))
+        val hingeWidth = with(compose.density) { 20.dp.roundToPx() }
+        val hinge = FoldingFeature(requireNotNull(activity), center = view.width / 2, size = hingeWidth, state = State.FLAT, orientation = Orientation.VERTICAL)
+        fold.overrideWindowLayoutInfo(TestWindowLayoutInfo(listOf(hinge)))
+        settle()
+        val middle = 673.dp / 2
+        // The hinge reached the window: the tab bar centres in the first half.
+        assertEquals((middle - 10.dp).value / 2, ((bounds(TAB_BAR).left + bounds(TAB_BAR).right) / 2).value, 1f)
+        val cover = bounds(PASSPORT_COVER)
+        val average = bounds(PASSPORT_AVERAGE)
+        assertTrue("$cover $average", average.top > cover.bottom)
+        assertTrue("$cover", cover.left < middle && cover.right > middle)
+        // The cover's contents 24 into its card, which starts where the times do.
+        assertEquals((cover.left - 24.dp).value, average.left.value, 0.5f)
+    }
+
+    /** Settings from one tab's account button, where it stands, closed again. */
+    private fun settingsFrom(button: String): DpRect {
+        compose.onNodeWithTag(button).performClick()
+        settle()
+        val sheet = bounds(SETTINGS_SHEET)
+        compose.onNodeWithTag(SETTINGS_CLOSE).performClick()
+        settle()
+        return sheet
+    }
+
+    /**
+     * Settings from the passport as the deliveries would show it in the window now, slack included: a window shrunk
+     * from wide into the slack keeps them side by side, so a form; below it, the page sheet. They turn only as they are
+     * shown, so a window that went below the slack and back while the passport showed finds them side by side still.
+     */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun settingsFromThePassportIsAFormWhereTheDeliveriesWouldStandSideBySide() {
+        var deliveries: DeliveriesState? = null
+        var size by mutableStateOf(DpSize(1032.dp, 1376.dp))
+        source = FakeDeliveries(DemoCards.parcels(), reader)
+        compose.waitsForMaps()
+        compose.setContent {
+            Box(Modifier.requiredSize(size)) {
+                CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                    RootHost(state = reader, source = source)
+                }
+            }
+        }
+        settle()
+        fun arrangement() = requireNotNull(deliveries).arrangement
+        fun width(sheet: DpRect) = (sheet.right - sheet.left).value
+        assertEquals(DeliveriesArrangement.SideBySide, arrangement())
+        // Into the slack: 700 is under the 730 a stacked window turns at, over the 690 a side by side one does.
+        size = DpSize(700.dp, 1376.dp)
+        settle()
+        assertEquals(DeliveriesArrangement.SideBySide, arrangement())
+        val form = settingsFrom(ACCOUNT_BUTTON)
+        assertEquals(580f, width(form), 0.5f)
+        choose("Passport")
+        assertEquals(form, settingsFrom(PASSPORT_ACCOUNT_BUTTON))
+
+        // Below the slack with the passport shown: the page sheet, the window's width less 52 either side.
+        size = DpSize(680.dp, 1376.dp)
+        settle()
+        assertEquals(576f, width(settingsFrom(PASSPORT_ACCOUNT_BUTTON)), 0.5f)
+        // Back into the slack: the deliveries, which haven't turned, would stand side by side.
+        size = DpSize(700.dp, 1376.dp)
+        settle()
+        assertEquals(form, settingsFrom(PASSPORT_ACCOUNT_BUTTON))
+        choose("Deliveries")
+        assertEquals(DeliveriesArrangement.SideBySide, arrangement())
+
+        // Turned stacked below the slack, they stay so back in it, and Settings from the passport is the page.
+        size = DpSize(680.dp, 1376.dp)
+        settle()
+        assertEquals(DeliveriesArrangement.Stacked, arrangement())
+        size = DpSize(700.dp, 1376.dp)
+        settle()
+        assertEquals(DeliveriesArrangement.Stacked, arrangement())
+        val page = settingsFrom(ACCOUNT_BUTTON)
+        assertEquals(596f, width(page), 0.5f)
+        choose("Passport")
+        assertEquals(page, settingsFrom(PASSPORT_ACCOUNT_BUTTON))
     }
 
     /** The window made again (a rotation): the popover and all the stamps as they were. */
@@ -507,5 +753,15 @@ class PassportTest {
         settle()
         assertEquals(12, stamps().size)
         assertTrue(popover()!!.startsWith("Double digits"))
+    }
+}
+
+/** A window's view that keeps the haptics it is asked to play. */
+private class FeelingView(context: Context) : View(context) {
+    val played = mutableListOf<Int>()
+
+    override fun performHapticFeedback(feedbackConstant: Int): Boolean {
+        played += feedbackConstant
+        return true
     }
 }

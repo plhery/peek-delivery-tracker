@@ -1,6 +1,7 @@
 # Every SF Symbol name in ios/ and the Material Symbols Rounded icon Android draws for it (X-AD38).
-# Columns: SF Symbol, Material Symbols name ("-" where Android draws none; `name#n` the icon's nth outline alone; `a + b`
-# and `a - b` b drawn over a or cut out of it, placed and sized as SF's inner glyph), fill (1 for SF's .fill variants),
+# Columns: SF Symbol, Material Symbols name ("-" where Android draws none; `name#n` the icon's nth outline alone; `name~`
+# its shapes hollowed to a band inside their edges as wide as the icons' lines at that weight; `a + b` and `a - b` b
+# drawn over a or cut out of it, placed and sized as SF's inner glyph), fill (1 for SF's .fill variants),
 # where iOS draws it, and how close the match is. A use is `File:line size weight`: the
 # symbol's point size (text styles at the default size: caption2 11, caption 12, footnote 13, subheadline 15, callout
 # 16, body and headline 17, title3 20, title2 22, title 28) and SF weight; `inherited` takes the surrounding font (body,
@@ -59,10 +60,10 @@ gear	settings	0	SettingsViews:132 inherited	close
 gearshape	settings	0	SettingsViews:941 mac	close
 gift	featured_seasonal_and_gifts	0	ParcelShareSheet:184 16 regular; PassportView:284 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLinkSheet:502 12 semibold; ParcelLinkSheet:778 inherited; ParcelLinkSheet:827 inherited; SignInView:1141 12 medium	close
 globe	language	0	ParcelLinkSheet:475 17 regular; SignInView:1054 inherited; ParcelDetailView:307 17 regular; ParcelMapView:198 12 medium; PassportView:265 22 ultraLight; FriendsStore:219 22 ultraLight	close
-globe.europe.africa	public	0	PassportView:270 22 ultraLight; FriendsStore:219 22 ultraLight	close: a globe with land, though not Europe and Africa facing
+globe.europe.africa	globe_uk~	0	PassportView:270 22 ultraLight; FriendsStore:219 22 ultraLight	close: Material's globes draw their land solid; globe_uk, which faces Europe and Africa, hollowed to its coasts as SF outlines its land
 hand.raised	front_hand	0	SettingsViews:653 15 light	close
-hourglass	hourglass	0	PassportView:278 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelDetailView:1777 17 regular	close
-house	home	0	PassportView:276 22 ultraLight; FriendsStore:219 22 ultraLight	close
+hourglass	hourglass_full	0	PassportView:278 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelDetailView:1777 17 regular	close: solid, as SF's hourglass is
+house	cottage	0	PassportView:276 22 ultraLight; FriendsStore:219 22 ultraLight	close: the cottage's filled door, as SF's house has; its smoke where SF draws a chimney
 info.circle	info	0	ParcelShareSheet:144 13 regular; ParcelShareSheet:195 13 regular; ParcelShareSheet:196 13 regular; ParcelDetailView:577 17 regular	close
 keyboard	keyboard	0	FirstOpenView:749 15 regular	close
 largecircle.fill.circle	radio_button_checked	0	SettingsViews:166 16 regular	close
@@ -90,7 +91,7 @@ slider.horizontal.3	tune	0	FriendsView:136 13 regular	close
 sparkle	auto_awesome#3	1	SignInView:1324 13 medium; SignInView:1324 16 medium; SignInView:1324 18 medium; SignInView:1324 23 medium; SignInView:1324 24 medium; SignInView:1324 25 medium	close: the large star of auto_awesome alone, as SF draws one
 square	check_box_outline_blank	0	FriendsView:397 17 regular	close
 square.and.arrow.up	ios_share	0	FriendsView:430 inherited; ParcelDetailView:319 16 regular; ParcelDetailView:329 16 regular; ParcelShareSheet:147 17 semibold; ParcelLogic:919 menu; SettingsViews:650 15 light	close
-storefront	storefront	0	PassportView:282 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLogic:63 15 regular; ParcelDetailView:598 17 regular	close
+storefront	storefront	0	PassportView:282 22 ultraLight; FriendsStore:219 22 ultraLight; ParcelLogic:63 15 regular; ParcelDetailView:598 17 regular	close: the awning's scallops, though Material's has no door or window
 storefront.fill	storefront	1	DeliveryWidget:469 phase	close
 tray.and.arrow.down	move_to_inbox	0	ShareViewController:102 inherited; ShareViewController:248 17 semibold	close
 trash	delete	0	ParcelLogic:924 menu	close

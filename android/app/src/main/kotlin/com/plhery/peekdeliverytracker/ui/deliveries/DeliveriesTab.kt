@@ -44,9 +44,12 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.Snapshot
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -153,6 +156,7 @@ fun DeliveriesTab(
     val reduceMotion = PeekTheme.reduceMotion
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val hinge = LocalWindowHinge.current
+    val windowArrangement = LocalWindowArrangement.current
 
     BoxWithConstraints(modifier.fillMaxSize()) {
         val regularWidth = maxWidth >= REGULAR_WIDTH
@@ -165,8 +169,9 @@ fun DeliveriesTab(
                 maxWidth.value.toDouble(), regularWidth, regularHeight, largeText, navigator.arrangement ?: DeliveriesArrangement.Stacked,
             )
         }
-        // Read by the list as it is drawn, after this.
+        // Read by the list as it is drawn, after this, and by the passport's Settings while it shows instead.
         state.arrangement = arrangement
+        windowArrangement?.last = arrangement
         state.settleSheets()
         val rows = state.rows
         // Here rather than once drawn, so that the page beside the list shows from the window's first frame. The card
@@ -344,6 +349,26 @@ internal fun rememberDeliveriesState(source: DeliveriesSource, firstOpen: FirstO
  * has gone back into its card.
  */
 private val DeliveriesState.pageOverList: UUID? get() = navigator.navigation.chosen ?: zoom.covered as UUID?
+
+/**
+ * The arrangement the deliveries last had in the window, kept over the tabs while another shows: the deliveries write
+ * it as they lay out, and the passport, whose Settings is a form where the deliveries would stand side by side, turns
+ * from it as they would, slack included. Only the deliveries change it, so it is what they turn from once shown again.
+ * Taken as the window lays out, so nothing is drawn again for it; kept with the window in the same launch, as theirs is.
+ */
+internal class WindowArrangement(var last: DeliveriesArrangement? = null) {
+    companion object {
+        fun saver(launch: UUID): Saver<WindowArrangement, Any> = listSaver(
+            save = { listOf(launch.toString(), it.last?.name) },
+            restore = { saved ->
+                WindowArrangement((saved[1] as String?)?.takeIf { saved[0] == launch.toString() }?.let(DeliveriesArrangement::valueOf))
+            },
+        )
+    }
+}
+
+/** The window's [WindowArrangement], under the tabs; null without them. */
+internal val LocalWindowArrangement = staticCompositionLocalOf<WindowArrangement?> { null }
 
 /** A window this wide and this tall in dp counts as regular, as the iPhone's size classes would. */
 private val REGULAR_WIDTH = 600.dp

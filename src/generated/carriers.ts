@@ -1053,7 +1053,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-germany-tracking",
-      "title": "J&T Express Germany tracking: statuses, neighbours, contact",
+      "title": "J&T Express Germany tracking: JTDE numbers and statuses",
       "name": "J&T Express Germany",
       "color": "#e60000"
     },
@@ -1783,7 +1783,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-sendungsverfolgung",
-      "title": "J&T Express Sendungsverfolgung: Status, Nachbar, Kontakt",
+      "title": "J&T Express Sendungsverfolgung: JTDE-Nummer und Status",
       "name": "J&T Express Germany",
       "color": "#e60000"
     },
@@ -3405,7 +3405,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-germaniya-otslezhivanie",
-      "title": "Отслеживание J&T Express в Германии: статусы и телефон",
+      "title": "Отслеживание J&T Express в Германии: трек-номер и статусы",
       "name": "J&T Express Germany",
       "color": "#e60000"
     },

@@ -6,7 +6,7 @@ published: 2026-10-23
 updated: 2026-10-27
 ---
 
-SF Express (顺丰, SF) is a Chinese logistics company founded in 1993 and based in Shenzhen. Its cross-border arm, SF International, ships abroad for businesses, online sellers and private customers. Each of SF's regional sites has a tracker: [sf-express.com](https://www.sf-express.com/chn/en) for mainland China, [hk.sf-express.com](https://hk.sf-express.com/hk/en) for Hong Kong and [htm.sf-express.com](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) for Taiwan. Or paste the number in the box above.
+SF Express (顺丰, SF) is a Chinese logistics company founded in 1993 and based in Shenzhen. Its cross-border arm, SF International, ships abroad for businesses, online sellers and private customers. Each of SF's regional sites has a tracker: www.sf-express.com for mainland China, hk.sf-express.com for Hong Kong and htm.sf-express.com for Taiwan. Or paste the number in the box above.
 
 ## SF Express tracking number: what it looks like
 
@@ -21,7 +21,7 @@ Lower case and spaces don't matter in Peek.
 
 **Where to find it.** It is printed on the waybill, the label on the parcel. If a shop sent it, the number is in the shipping email or on the order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
 
-**Tracking on SF's sites.** The Taiwan site makes you solve a picture puzzle first, and asks for the sender's or recipient's phone number before it opens a waybill's details. A waybill "under privacy protection" shows its tracking lines but no map. In Australia, SF's FAQ says to use "Track and Trace" on [sf-international.com/au/en](https://www.sf-international.com/au/en); for mainland China waybills, SF International sends you to the SF Express site.
+**Tracking on SF's sites.** The Taiwan site makes you solve a picture puzzle first, and asks for the sender's or recipient's phone number before it opens a waybill's details. A waybill "under privacy protection" shows its tracking lines but no map. In Australia, SF's FAQ says to use "Track and Trace" on sf-international.com/au/en; for mainland China waybills, SF International sends you to the SF Express site.
 
 ## SF Express tracking statuses explained
 
@@ -84,15 +84,18 @@ As read on 23 October 2026, SF International lists these lines, with hours in lo
 - **Canada**: 1 289 203 2630, Monday to Friday 09:00 to 17:30 Eastern time.
 - **Australia**: 1300 148 168, Monday to Friday 09:00 to 17:00.
 - **UK**: SF lists no phone line; its UK site gives the email uk_csd@sf-express.com. There's no Irish line either.
+- **Europe**: SF International's Europe site, as read on 2 November 2026, gives a WhatsApp line, +31 6 43249528, Monday to Friday 9:00 to 17:00 (it names no time zone), closed at weekends and on public holidays.
 - **Mainland China**: 95338, or +86 755 95338 from abroad, every day 08:00 to 21:00.
 - **Hong Kong**: 273 00 273, or +852 2730 0273, Monday to Friday 08:00 to 20:30, weekends and public holidays 08:00 to 20:00.
 - **Taiwan**: 412 8830 (dial 02 first from a mobile), Monday to Friday 08:00 to 20:00, Saturday 08:00 to 17:30.
 
 Have the waybill number ready. For the order itself, ask the seller.
 
+SF's pages cited here: on www.sf-express.com, the English home page, "About SF" and "Track & Trace"; on htm.sf-express.com, Taiwan's waybill tracking and its FAQ; on www.sf-international.com, "Company Profile", "Waybill Tracking", "Contact Us", the UK and Europe home pages, the Australian and general FAQs, "E-Parcel", "E-Commerce Express", "Address Correction Service" and the "Terms and Conditions of Waybill (Chinese Mainland to Overseas Countries)" under "Terms of Use".
+
 ## Track an SF Express parcel with Peek
 
-[Peek](/) names SF Express at once from an `SF` number whose check digit fits. A 12-digit number fits many carriers. Paste it all the same: Peek follows more than 3,500 carriers. Peek can't ask SF whether it knows a number, so if SF Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. An sf-express.com `waybill-detail/` link or the Taiwan site's `#search/bill-number/` link names SF Express too.
+[Peek](/) names SF Express at once from an `SF` number whose check digit fits. A 12-digit number fits many carriers. Paste it all the same: Peek follows more than 3,500 carriers. Peek can't ask SF whether it knows a number, so if SF Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. An sf-express.com `waybill-detail/` link, the Taiwan site's `#search/bill-number/` link or an SF International tracking link with the number after `No=` names SF Express too.
 
 Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
 
@@ -102,7 +105,7 @@ It checks every 10 minutes, or every 5 once the parcel is out for delivery, and 
 
 ### Is SF Express legit?
 
-Yes. SF was founded in 1993 and is listed on the Shenzhen and Hong Kong stock exchanges. It calls itself the largest integrated logistics provider in China and Asia, citing a Frost & Sullivan report.
+Yes. SF was founded in 1993 and is listed on the Shenzhen and Hong Kong stock exchanges. It calls itself the largest comprehensive logistics service provider in China and Asia, citing a Frost & Sullivan report.
 
 ### What does "Accepted" mean on SF Express tracking?
 
@@ -117,22 +120,6 @@ SF gives reference times only: it "does not make any transit time commitment". F
 No. SF's terms for shipments from mainland China say it doesn't deliver to an address that is only a PO box or a postcode. Give a street address, or a pickup point where the seller offers one.
 
 :::sources
-- [SF Express: Chinese mainland, English (home)](https://www.sf-express.com/chn/en) – tracking box, link to SF International
-- [SF Express: About SF](https://www.sf-express.com/chn/en/about) – founded 1993 in Shunde, Shenzhen head office, listings, Frost & Sullivan ranking
-- [SF Express: Track & Trace](https://www.sf-express.com/chn/en/waybill/list) – mainland China tracking
-- [SF Express Hong Kong: Track](https://hk.sf-express.com/hk/en/waybill/list) – Hong Kong tracking
-- [SF Express Taiwan: Waybill tracking](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) – number shapes, picture check, phone number for details, privacy protection, summary labels
-- [SF Express Taiwan: FAQ](https://htm.sf-express.com/tw/en/Customer_Zone/download_center/FAQ/) – tracking by hotline or online, Taiwan hotline
-- [SF International: Company Profile](https://www.sf-international.com/cn/en/about/intro/detail/about) – what SF International is, its services and network
-- [SF International: Waybill Tracking](https://www.sf-international.com/us/en/support/querySupport/waybill) – mainland China waybills tracked on the SF Express site
-- [SF International: Contact Us](https://www.sf-international.com/us/en/about/contact) – hotlines and hours by country
-- [SF International UK](https://www.sf-international.com/gb/en) – UK email, SF Express (Europe)
-- [SF International Australia: FAQ](https://www.sf-international.com/au/en/support/faq) – Track and Trace, redelivery, Delivery Absence Notice, appointments, Australian hotline
-- [SF International: FAQ](https://www.sf-international.com/cn/en/support/faq) – US couriers can't phone, delivery at the door
-- [SF International: Terms and Conditions of Waybill (Chinese Mainland to Overseas Countries)](https://www.sf-international.com/cn/en/support/termsOfUse) – delivery to the address, PO boxes, no contact on the last mile, proof of delivery, returns, customs, damage claims
-- [SF International: E-Parcel](https://www.sf-international.com/cn/en/product/parcel?isProduct=product) – under 2 kg, service partner, reference times, query and claim deadlines, claim documents
-- [SF International: E-Commerce Express](https://www.sf-international.com/cn/en/product/delivery?isProduct=product) – local delivery resources, reference times, no return or address change, query and claim deadlines
-- [SF International: Address Correction Service](https://www.sf-international.com/cn/en/product/addrchange?isProduct=increment) – products, who can ask, destinations, RMB 70
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
 - [European Commission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – per item type
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings, China clock

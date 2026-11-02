@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
 import androidx.compose.foundation.background
@@ -18,8 +19,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -230,7 +233,8 @@ private fun stillAhead(parcel: Parcel, time: Instant): Boolean {
 /**
  * `ExperimentalJourneyRail` (A-S74): the six steps of a journey as capsules 3 tall, 4 apart when `compact` and 5
  * otherwise, those up to `stage`'s in `tint` and the rest in the secondary grey at 15 %, eased over 0.24 s as the
- * parcel moves on (at once under Reduce Motion). TalkBack reads it as one element: "Delivery progress", and the step.
+ * parcel moves on (at once under Reduce Motion). Only a new step eases (`.animation(_:value: current)`): a new tint
+ * alone, or the appearance changing, shows at once. TalkBack reads it as one element: "Delivery progress", and the step.
  */
 @Composable
 fun JourneyRail(stage: TrackingStage?, tint: Color, modifier: Modifier = Modifier, compact: Boolean = false) {
@@ -245,6 +249,9 @@ fun JourneyRail(stage: TrackingStage?, tint: Color, modifier: Modifier = Modifie
         mapOf("step" to current + 1, "total" to steps, "stage" to localizer.text(stage?.localizationKey ?: "status.pending")),
     )
     val rest = colors.secondaryLabel.copy(alpha = colors.secondaryLabel.alpha * 0.15f)
+    val drawn = remember { RailStep(current) }
+    val fills: AnimationSpec<Color> = if (reduceMotion || drawn.current == current) snap() else Motion.easeOut(0.24)
+    SideEffect { drawn.current = current }
     Row(
         modifier
             .fillMaxWidth()
@@ -256,15 +263,14 @@ fun JourneyRail(stage: TrackingStage?, tint: Color, modifier: Modifier = Modifie
         horizontalArrangement = Arrangement.spacedBy(if (compact) 4.dp else 5.dp),
     ) {
         repeat(steps) { index ->
-            val fill by animateColorAsState(
-                if (index <= current) tint else rest,
-                if (reduceMotion) snap() else Motion.easeOut(0.24),
-                label = "journey step",
-            )
+            val fill by animateColorAsState(if (index <= current) tint else rest, fills, label = "journey step")
             Box(Modifier.weight(1f).fillMaxHeight().background(fill, CapsuleShape))
         }
     }
 }
+
+/** The step a [JourneyRail] was last drawn at. */
+private class RailStep(var current: Int)
 
 /**
  * `ParcelQuietNote` (B-S75): what a parcel that stopped moving is told, on the secondary grey at 8 % in 16-point

@@ -1680,7 +1680,11 @@ export class TrackingRouter {
       // stays first on every check, so its first scan serves the parcel without waiting 6 h
       // behind the provider's pending summary.
       const unmoved = localDirectFallback && !hasRoutingProgress(localDirectFallback.value.result) && !hasRoutingProgress(value.result);
-      if (partialDirect || (copied && !again) || unmoved) state.direct_retry_at = undefined;
+      // A carrier whose lookup opens a browser gives its status alone, without scans, when the
+      // browser step fails (DHL Poland's history page): it stays first on every check, as for a
+      // partial answer, so the next check that gets its history serves it. One failure costs 6 h otherwise.
+      const summary = localDirectFallback?.value.result.summary_only === true && opensBrowser(localDirectFallback.carrier);
+      if (partialDirect || summary || (copied && !again) || unmoved) state.direct_retry_at = undefined;
       else if (localDirectFallback || !state.direct_retry_at) state.direct_retry_at = iso(now().getTime() + 6 * HOUR);
       delete state.partial_checked_at;
       delete state.label_rounds;

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { UpstreamHttpError } from 'universal-parcel-scraper/node';
-import { earlierParcelRows, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
+import { earlierParcelRows, opensBrowser, recheckSources, recognizers, RoutingDeferred, routingState, suggestedInput, TrackingRouter, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { refusesNumber } from './numberRefusal';
 import { STORED_EVENT_IDENTITIES } from './supabase';
 import type { JsonObject } from './types';
@@ -2451,6 +2451,25 @@ describe('persistent tracking routing', () => {
     await later.router.fetch(filed(first.result.routing as JsonObject), true);
     expect(later.direct).not.toHaveBeenCalled();
     expect(later.universal).toHaveBeenCalledOnce();
+  });
+
+  it('asks a local-clock carrier whose browser step failed again on the next check', async () => {
+    fixedPlan('Ship24', '17TRACK');
+    expect(opensBrowser('dhl-ecommerce-pl')).toBe(true);
+    // Its status alone, which the lookup gives when the history page fails.
+    const summary = (): RoutedResult => ({ sourceCarrierId: 'dhl-ecommerce-pl', swissPostReady: null, handoffFallbackErrorType: null,
+      result: { status: 'in_transit', current_stage: 'in_transit', last_update: null, summary_only: true, events: [] } });
+    const { router, direct } = setup();
+    direct.mockResolvedValue(summary());
+    const filed = (routing: JsonObject) => parcel({ carrier: 'dhl-ecommerce-pl', tracking_number: 'TEST12345678', carrier_data: { routing } });
+    const first = await router.fetch(filed(state({ configured_carrier: 'dhl-ecommerce-pl' })), true);
+    expect(direct).toHaveBeenCalledOnce();
+    expect(first.result).toMatchObject({ tracking_provider: 'Ship24', routing: { preferred_provider: 'Ship24' } });
+    expect((first.result.routing as JsonObject).direct_retry_at).toBeUndefined();
+    const later = setup(new Date('2026-09-10T12:30:00Z'));
+    later.direct.mockResolvedValue(summary());
+    await later.router.fetch(filed(first.result.routing as JsonObject), true);
+    expect(later.direct).toHaveBeenCalledOnce();
   });
 
   it('asks the filed carrier again on the first check under another scraper release', async () => {

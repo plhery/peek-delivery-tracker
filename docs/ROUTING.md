@@ -236,7 +236,10 @@ lists ahead of it: the carrier's answer serves the parcel, its scans in the carr
 (`kept` in `provider_copy`). While that answer keeps its number of scans and stage, scheduled
 checks take it alone, at the carrier's cadence, for up to 6 h. A provider that
 adds scans or a different stage stays the source, as does one whose copy the parcel didn't
-keep, and the carrier is asked again 6 h later, not on every check. While no provider has
+keep, and the carrier is asked again 6 h later, not on every check. A carrier whose lookup
+opens a browser and gave its status alone, without scans, is still asked first on every check,
+as for a partial answer (below): that is its answer when the browser step fails (DHL Poland's
+history page). While no provider has
 progress for the parcel, the carrier's answer serves it if it moved, and the carrier is asked
 first on the next check; so it is while its answer hasn't moved either, so that its first scan
 serves a new parcel without waiting 6 h behind a provider's pending summary. When detection names that carrier for an unknown parcel's number and

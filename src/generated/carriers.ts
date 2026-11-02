@@ -2180,6 +2180,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "sf-express",
+      "catalog": "sf-express",
+      "slug": "sf-express-sendungsverfolgung",
+      "title": "SF Express Sendungsverfolgung: Nummer, Status, Zustellung",
+      "name": "SF Express",
+      "color": "#dc1e32"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sendungsverfolgung",

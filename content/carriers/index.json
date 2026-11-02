@@ -145,7 +145,7 @@
   { "id": "dpd-pt", "catalog": "dpd-pt", "name": "DPD Portugal", "languages": ["en", "pt"] },
   { "id": "tnt-it", "catalog": "tnt-it", "name": "TNT Italy", "languages": ["en", "it"] },
   { "id": "tnt", "catalog": "tnt", "name": "TNT", "languages": ["en", "pt", "fr", "de", "es", "pl"] },
-  { "id": "sf-express", "catalog": "sf-express", "name": "SF Express", "languages": ["en"] },
+  { "id": "sf-express", "catalog": "sf-express", "name": "SF Express", "languages": ["en", "de"] },
   { "id": "straightship", "catalog": "straightship", "name": "Straightship", "languages": ["en", "zh"] },
   { "id": "correios-br", "catalog": "correios-br", "name": "Correios Brazil", "languages": ["en", "es"] },
   { "id": "yto", "catalog": "yto", "name": "YTO Express", "languages": ["en", "ru", "zh", "pt-br"] },

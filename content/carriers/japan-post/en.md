@@ -92,7 +92,7 @@ Peek shows each scan in Japan Post's English wording, with the office and place,
 
 From many countries, Peek also asks your national post with the same `JP` number: USPS from the US, [Royal Mail](carrier:royal-mail) from the UK (Parcelforce, which Japan Post names for EMS, for a number starting with E), An Post from Ireland, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France and every other EU country's post. It switches to that post once it has fresh scans and keeps Japan Post's history. From Korea, China, Hong Kong or Singapore it asks no other post. The other way round, when another post's tracking names Japan as the destination, or names none and you track from Japan, Peek asks Japan Post with that post's number, unless it starts with U.
 
-Peek checks every 10 minutes, every 2 minutes once out for delivery, and hourly after two days without news. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Japan Post, your post or the shop for you.
+Peek checks every 10 minutes, every 2 minutes once out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Japan Post, your post or the shop for you.
 
 ## Questions about Japan Post tracking
 

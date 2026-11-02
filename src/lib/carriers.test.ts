@@ -1083,10 +1083,11 @@ describe('carrier detection', () => {
   });
 
   it('purolator — Purolator', () => {
-    // OSS EXAMPLE letter families (BYS excluded so Yanwen keeps its distinctive prefix).
+    // OSS EXAMPLE letter families (BYS excluded so Yanwen keeps its distinctive prefix). TNT Australia's
+    // domestic consignments share the shape, so Purolator is a candidate, not necessarily the only one.
     // Source: https://github.com/jkeen/tracking_number_data/blob/main/couriers/purolator.json
     for (const number of ['KYV009956937', 'CGK002986959', 'JFV247545960', 'TLR000083964']) {
-      expect(detectCarrier(number)).toBe('purolator');
+      expect(detectCarrierMatch(number).candidates, number).toContain('purolator');
     }
     // OSS numeric family (upstream Luhn-validates; stays ambiguous here).
     // Source: https://github.com/jkeen/tracking_number_data/blob/main/couriers/purolator.json

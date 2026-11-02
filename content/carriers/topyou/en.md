@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-10-28
 ---
 
-TopYou (通邮, also 通邮集团) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZR and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
+TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZR and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
 
 ## TopYou tracking number: what it looks like
 
@@ -50,7 +50,22 @@ TopYou writes its scans in English. In the order a parcel gets them:
 | `Shipment completed the customs clearance process at destination` | Cleared, and on its way to the delivering carrier. | "In transit" |
 | `Shipment is out for delivery` | Not out for delivery yet, whatever the words say: in France and Italy, it marks the hand-over to GOFO at its first sorting centre, days before GOFO's driver sets out. | "In transit" |
 
-**The delivering carrier's scans.** After the hand-over, TopYou's tracker can go on with the delivering carrier's own scans, each with its place: USPS's on a parcel to the United States, GOFO's in France and Italy.
+**Lines a post delivers.** On a line your country's post delivers, TopYou words its scans yet another way, up to your country's customs:
+
+| TopYou says | What it means for you | Peek shows |
+| --- | --- | --- |
+| `Accepted by carrier` | TopYou has the parcel in China: its first scan. | "Received by carrier" |
+| `Inbound in sorting center` | Booked in at TopYou's first warehouse, minutes later. It isn't moving yet. | "Received by carrier" |
+| `Outbound in sorting center` | It has left that warehouse. TopYou adds `, Lastmile Number:` and the number the post delivers it under, and Peek shows the line with that number. | "In transit" |
+| `Received by line-haul`, `Hand over to airline` | Taken on for transport, then handed to the airline. | "In transit" |
+| `Airline arrived at transit country or district.`, `Airline departed from transit or district country.` | A stop on the way to your country. | "In transit" |
+| `Airline arrived at destination country`, `Arrive at destination country` | It has reached your country. | "In transit" |
+| `Export clearance success` | China's export customs have cleared it. It isn't held. | "In transit" |
+| `Import clearance success` | Your country's customs have cleared it for the post. The post can still show customs scans of its own. | "In transit" |
+
+**The delivering carrier's scans.** After the hand-over, TopYou's tracker can go on with the delivering carrier's own scans: USPS's on a parcel to the United States, GOFO's in France and Italy, such as `Arrived at sorting center`, `The package left sorting center` and `Package departed from sorting center` (at or leaving one of GOFO's sorting centres: "In transit"), `Arrived at GOFO Regional Destination Facility` (at GOFO's regional depot: "In transit") and `The driver is out for delivery` (GOFO's driver is bringing it: "Out for delivery").
+
+In Germany, iMile's scans come as iMile's name for the step, a comma and iMile's sentence: `In Transit, Your order has been shipped from 【iMile Köln DC Center】.` (sent on from an iMile centre: "In transit"), `Delivery, Your order has arrived at 【Dortmund01】` (at the iMile station it is delivered from: "In transit"), `Delivery, Your order has assigned delivery drvier.` (a driver is named but hasn't set out; the misspelling is iMile's: "In transit") and `Delivery, Our delivery associate is out for delivery.` (iMile's driver is bringing it: "Out for delivery"). So a line that opens with `Delivery` doesn't mean the driver has set out. An iMile line that moves nothing, such as a stock count, leaves the status as it was.
 
 ## Who delivers TopYou parcels
 
@@ -58,13 +73,15 @@ TopYou writes its scans in English. In the order a parcel gets them:
 
 **France and Italy.** GOFO can deliver: [GOFO France](carrier:gofo-fr) or [GOFO Italy](carrier:gofo-it). TopYou's tracker shows the hand-over as `Shipment is out for delivery`, then GOFO's scans.
 
-**Elsewhere.** TopYou's record can give the delivering carrier's number, but not its name, and the name of the TopYou line your parcel travels on doesn't tell you either: a line can bear another carrier's name. So ask the seller which company delivers your order.
+**Germany.** [iMile](carrier:imile) can deliver, and TopYou's tracker then goes on with iMile's scans.
+
+**Elsewhere.** TopYou's record can give the delivering carrier's number, but not its name, and the name of the TopYou line your parcel travels on doesn't tell you either: a line can bear another carrier's name. On a line a post delivers, the post's number also ends the `Outbound in sorting center` line, after `Lastmile Number:`. So ask the seller which company delivers your order.
 
 ## TopYou parcel not arriving or tracking stuck
 
 **Stuck on `Shipment started the customs clearance process at destination`.** Your country's customs have the parcel. If you're asked for import charges, see [parcels held at customs](guide:customs); if it stays there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
 
-**Nothing after `Departed from customs of`.** The delivering carrier should have the parcel. Look for its number on TopYou's tracker, or ask the seller which carrier delivers and under which number. Background in [tracking a parcel from China](guide:tracking-from-china).
+**Nothing after `Departed from customs` or `Import clearance success`.** The delivering carrier should have the parcel. Look for its number on TopYou's tracker, or ask the seller which carrier delivers and under which number. Background in [tracking a parcel from China](guide:tracking-from-china).
 
 **Not found or no scans yet.** TopYou's tracker answers 查询不到 (not found) for a number it doesn't know, and can answer 暂无轨迹信息 (no tracking information yet) for one it knows but hasn't scanned. Peek shows "Waiting for the carrier" for both and keeps checking. Check the number against the seller's message, character by character; if nothing comes after a few days, ask the seller whether the parcel was really sent.
 
@@ -82,15 +99,15 @@ As of 28 October 2026, Peek couldn't check TopYou's website, so it lists no cont
 
 Peek reads TopYou's own tracker and shows the status, each scan in the words of TopYou or of the carrier it relays, the destination country and the weight on TopYou's record. A place that is only a country is left off TopYou's own scans, so the airport scan in China doesn't look like it's in your country. When TopYou's record marks the parcel delivered or returned, Peek shows "Delivered" or "Returned to sender", even if the last scan's words don't. TopYou's own scans are on Beijing time. For the delivering carrier's scans it relays, TopYou's tracker doesn't always give the right time zone, so Peek works out their time; it shows them all in your device's time zone. There's no expected delivery date: TopYou gives none.
 
-Until a hand-over, Peek shows the TopYou number only. When TopYou's record holds the delivering carrier's number, Peek tries it with your country's post if it is an international postal number (two letters, nine digits, two letters), or else with the one carrier its layout surely belongs to, as long as Peek reads that carrier's own tracker. Once that carrier shows a scan at least as recent as TopYou's latest, Peek follows the parcel there and shows both numbers, with TopYou's scans kept in the history. A number Peek can't pin to one carrier, such as 20 digits alone, which USPS and others use, isn't tried: Peek stays with TopYou's tracker, which can show the delivering carrier's scans too.
+Until a hand-over, Peek shows the TopYou number only. When TopYou's record holds the delivering carrier's number, Peek tries it with your country's post if it is a valid international postal number (two letters, nine digits with a correct check digit, two letters), or else with the one carrier its layout surely belongs to, as long as Peek reads that carrier's own tracker. Once that carrier shows a scan at least as recent as TopYou's latest, Peek follows the parcel there and shows both numbers, with TopYou's scans kept in the history. A number Peek can't pin to one carrier, such as 20 digits alone, which USPS and others use, isn't tried: Peek stays with TopYou's tracker, which can show the delivering carrier's scans too.
 
-Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to the customs lines (`Shipment started the customs clearance process at origin` and `Shipment started the customs clearance process at destination`) and the delivery, not to the flight or the customs release. Peek can't contact TopYou or the seller for you.
+Peek checks every 10 minutes, or hourly once TopYou has gone quiet: after 12 hours without a new scan while the parcel is still "Label created" or "Received by carrier", or after two days at any other step. Once the parcel is out for delivery, it checks every 2 minutes. It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to the customs lines (`Shipment started the customs clearance process at origin` and `Shipment started the customs clearance process at destination`), to GOFO's `The driver is out for delivery` and iMile's `Delivery, Our delivery associate is out for delivery.`, and to the delivery, not to the flight, the customs release or `Shipment is out for delivery`. Peek can't contact TopYou or the seller for you.
 
 ## Questions about TopYou tracking
 
 ### What is TopYou (通邮)?
 
-It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, a cross-border forwarder in Shenzhen, China, with international lines. Its waybills are TYZR, a letter, ten digits and YQ.
+It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China, with international lines. Its waybills are TYZR, a letter, ten digits and YQ.
 
 ### Why does TopYou show my country before my parcel has left China?
 
@@ -98,12 +115,12 @@ Because TopYou's tracker writes the destination country next to its own scans, e
 
 ### Who delivers TopYou parcels in my country?
 
-In the United States, USPS, which takes the parcel over from TopYou's line after the flight. In France and Italy, it can be GOFO. Elsewhere TopYou's record can give the delivering carrier's number but not its name: ask the seller which company delivers.
+In the United States, USPS, which takes the parcel over from TopYou's line after the flight. In France and Italy, it can be GOFO, and in Germany iMile. Elsewhere TopYou's record can give the delivering carrier's number but not its name: ask the seller which company delivers.
 
 ### Who do I contact about a missing TopYou parcel?
 
 The seller you ordered from: it booked the parcel with TopYou. Peek couldn't check TopYou's website for contact details.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name, TYZR number shape, capitals on TopYou's tracker, no link Peek reads, scan wordings and their stages, the destination country beside TopYou's own scans, Beijing time and the relayed scans' clocks, USPS taking over in the US and GOFO in France and Italy, the delivering carrier's relayed scans, the second number and the line name, unknown numbers and numbers without scans, what Peek shows and how it hands a parcel over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name and other names, TYZR number shape, capitals on TopYou's tracker, no link Peek reads, scan wordings and their stages, the destination country beside TopYou's own scans, Beijing time and the relayed scans' clocks, USPS taking over in the US, GOFO in France and Italy and iMile in Germany, the delivering carrier's relayed scans, the second number, the Lastmile number on a post's line and the line name, unknown numbers and numbers without scans, what Peek shows and how it hands a parcel over
 :::

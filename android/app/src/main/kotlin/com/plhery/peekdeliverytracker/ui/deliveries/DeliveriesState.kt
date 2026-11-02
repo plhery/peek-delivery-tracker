@@ -1056,10 +1056,13 @@ internal class DeliveriesState(
 
     private var toasts = 0
 
-    /** Shows a message under the list, and tells TalkBack. */
-    fun show(text: String, warning: Boolean = false) {
+    /**
+     * Shows a message under the list, and tells TalkBack where the iPhone posts it too (`announce`): not the failed
+     * pull's message, whose result TalkBack has already heard.
+     */
+    fun show(text: String, warning: Boolean = false, announce: Boolean = true) {
         toast = ListToast(++toasts, text, warning)
-        announce(text)
+        if (announce) announce(text)
     }
 
     /** The message `id` has had its four seconds, unless a newer one took its place. */
@@ -1582,7 +1585,7 @@ internal class DeliveriesState(
                 is ParcelStore.RefreshResult.Failed -> {
                     finishPull(succeeded = false, label = text("detail.checkFailed"))
                     delay(PULL_RESULT)
-                    show(result.message, warning = true)
+                    show(result.message, warning = true, announce = false)
                 }
                 ParcelStore.RefreshResult.StillChecking -> {
                     // The checks keep running, so the arrow keeps turning under the message.
@@ -1639,11 +1642,13 @@ internal class DeliveriesState(
         true
     }
 
-    /** `store.archive(_:)`, then the seven seconds of its Undo ([archive]), from a card or from its page. */
+    /**
+     * `store.archive(_:)`, then the seven seconds of its Undo ([archive]), from a card or from its page. TalkBack isn't
+     * told, as VoiceOver isn't: the toast and its Undo are there to find.
+     */
     private suspend fun saveArchive(parcel: Parcel) {
         source.archive(parcel)
         source.undoParcel.value?.let { undo ->
-            announce(archivedText(undo))
             source.scope.launch {
                 delay(UNDO_DURATION)
                 source.forgetUndo(undo)

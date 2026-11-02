@@ -171,12 +171,12 @@ class ListFeedbackTest {
         assertEquals(null, announced())
         // Then the cross shows, said.
         advanceUntil { announced() == "Couldn’t check. Try again." }
-        // 1.1 s later, the message comes under the list, and TalkBack hears it.
+        // 1.1 s later, the message comes under the list; TalkBack isn't told it, as VoiceOver isn't: it heard the result.
         advance(1050)
         toast("The service is down").assertDoesNotExist()
         advance(100)
         toast("The service is down").assertExists()
-        assertEquals("The service is down", announced())
+        assertEquals(null, announced())
         advance(3850)
         toast("The service is down").assertExists()
         advance(150)
@@ -202,7 +202,8 @@ class ListFeedbackTest {
         archive("Birthday gift")
         advance(1000)
         toast("Birthday gift").assertExists()
-        assertEquals("Birthday gift 🎁 archived", announced())
+        // Nothing is said, as on the iPhone: the toast and its Undo are there to find.
+        assertEquals(null, announced())
         advance(5000)
         // Another archive takes the toast, for seven seconds of its own.
         archive("Belgian chocolate")

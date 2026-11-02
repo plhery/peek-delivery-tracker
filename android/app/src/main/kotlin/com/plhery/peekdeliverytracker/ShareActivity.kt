@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -34,10 +35,7 @@ class ShareActivity : ComponentActivity() {
     private val app: PeekApplication get() = application as PeekApplication
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // The bars' icons over the dimmed app, for the phone's appearance, which the app that shared most likely has,
-        // rather than for Peek's own, which its night mode follows.
-        val bars = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { phoneIsDark(this) }
-        enableEdgeToEdge(statusBarStyle = bars, navigationBarStyle = bars)
+        systemBars()
         super.onCreate(savedInstanceState)
         val defaults = app.shareDefaults()
         val copy = ExtensionLocalizer(defaults.string(AppLanguage.storageKey), Device.preferredLanguages())
@@ -54,6 +52,26 @@ class ShareActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    /**
+     * The night mode changed: the phone's appearance, or Peek's own night set as its appearance store is made, which may
+     * be here, before the app's window ever was. The card takes it as it is, without starting again
+     * (`configChanges="uiMode"`), as its window's theme is light whatever the night and the sheet reads the configuration:
+     * its dim follows, and the bars are set again.
+     */
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        systemBars()
+    }
+
+    /**
+     * The bars' icons over the dimmed app, for the phone's appearance, which the app that shared most likely has, rather
+     * than for Peek's own, which its night mode follows.
+     */
+    private fun systemBars() {
+        val bars = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { phoneIsDark(this) }
+        enableEdgeToEdge(statusBarStyle = bars, navigationBarStyle = bars)
     }
 
     private fun close(saved: Boolean) {

@@ -42,8 +42,9 @@ object WebViewTurnstilePages : TurnstilePages {
         feature(WebViewFeature.WEB_MESSAGE_LISTENER)
     }.getOrDefault(false)
 
-    // A WebView takes light or dark for the page from its context's theme (`isLightTheme`), which the app's says light;
-    // one from before Android 13's model from force dark (turnstilePage).
+    // A WebView takes light or dark for the page from its context's theme (`isLightTheme`): the one for the check's
+    // `dark` here, whatever the night of the context it is made in; one from before Android 13's model from force dark
+    // (turnstilePage).
     override fun page(context: Context, url: String, dark: Boolean, background: Int, events: TurnstileEvents): TurnstilePage {
         val theme = if (dark) android.R.style.Theme_Material_NoActionBar else android.R.style.Theme_Material_Light_NoActionBar
         return turnstilePage(WebView(ContextThemeWrapper(context, theme)), url, dark, background, events, WebViewTurnstileBridge)

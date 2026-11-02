@@ -104,8 +104,9 @@ fun appearanceSetting(): AppAppearance {
 /**
  * Whether the phone itself is dark, for what follows it whatever the app's appearance (the share sheet over the app that
  * shared). [configured] is the configuration's night, the phone's while the app's appearance is [AppAppearance.System];
- * with a light or dark of the app's own, it is the app's, and the phone's dark theme set on or off says it instead. A
- * schedule (sunset to sunrise, set hours, bedtime) can't be read then, and the configuration stands in for it.
+ * with a light or dark of the app's own, it is the app's, and the phone's dark theme set on or off says it instead.
+ * A phone whose dark theme follows a schedule (sunset to sunrise, set hours, bedtime) can't be read then: under Light or
+ * Dark the share sheet's dim and bars follow Peek's appearance on such a phone, not the phone's.
  */
 fun phoneIsDark(context: Context, configured: Boolean = context.resources.configuration.isNightModeActive): Boolean {
     if (AppearanceStore.of(context).appearance.value == AppAppearance.System) return configured

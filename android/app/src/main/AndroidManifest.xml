@@ -35,7 +35,11 @@
          text selection's toolbar, dialogs' frames) agree with the screens, which PeekTheme lays out left to right.
          Settings offers the app's languages for it (res/xml/locales_config.xml).
          The app's icon, the iPhone's (res/mipmap-anydpi/ic_launcher.xml), is round launchers' too, and the share
-         sheet's beside "Add to Peek". -->
+         sheet's beside "Add to Peek".
+         Each window takes a change of the night mode itself (configChanges="uiMode"), the notifications' alias as the
+         window it stands for: the app's own night follows its appearance and is set as the appearance store is made,
+         which can be in any of them the first time after an update, a data clear or a restore, and the phone's can
+         change while one is up. None starts again for it, flashes or loses its intent. -->
     <application
         android:name=".PeekApplication"
         android:allowBackup="true"
@@ -82,6 +86,7 @@
              (platform/CustomTabSignIn.kt). It shows nothing of its own. -->
         <activity
             android:name=".platform.SignInTabActivity"
+            android:configChanges="uiMode"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
@@ -92,6 +97,7 @@
              counts. -->
         <activity
             android:name=".platform.SignInCallbackActivity"
+            android:configChanges="uiMode"
             android:excludeFromRecents="true"
             android:exported="true"
             android:noHistory="true"
@@ -120,6 +126,7 @@
              (ParcelLinkActivity). -->
         <activity
             android:name=".ParcelLinkActivity"
+            android:configChanges="uiMode"
             android:excludeFromRecents="true"
             android:exported="true"
             android:noHistory="true"
@@ -161,6 +168,7 @@
              app's (ShareActivity). -->
         <activity
             android:name=".ShareActivity"
+            android:configChanges="uiMode"
             android:excludeFromRecents="true"
             android:exported="true"
             android:label="@string/share_title"

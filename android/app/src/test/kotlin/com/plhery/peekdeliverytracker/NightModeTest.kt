@@ -5,6 +5,8 @@ import android.app.UiModeManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Looper
 import android.provider.Settings
@@ -16,6 +18,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.platform.BuildSettings
+import com.plhery.peekdeliverytracker.platform.SignInCallbackActivity
+import com.plhery.peekdeliverytracker.platform.SignInTabActivity
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
@@ -45,9 +49,10 @@ import org.robolectric.annotation.GraphicsMode
  * The app's appearance in what the platform draws (A-S71), as the iPhone's window override reaches its edit menu: the
  * app's night mode follows the appearance (System the phone's, Light, Dark), set as the store is made and each time it
  * is picked; the app's theme takes it, the platform's own pieces with it, while the launch's window and the share
- * card's stay light. The window takes a change of it, or of the phone's under System, as it is, without starting
- * again. The share sheet keeps to the phone's appearance where the phone says it. On the app's own stores, at a made-up
- * address, every request turned away before it leaves.
+ * card's stay light, the launch's bars dark over it. Every window survives a uiMode change, the night mode's or the
+ * phone's under System, without starting again: the configuration changes here are built by hand, and a device shows
+ * the real ones. The share sheet keeps to the phone's appearance where the phone says it. On the app's own stores, at a
+ * made-up address, every request turned away before it leaves.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -90,8 +95,13 @@ class NightModeTest {
         uiMode = (uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or if (dark) Configuration.UI_MODE_NIGHT_YES else Configuration.UI_MODE_NIGHT_NO
     }
 
-    private fun isLightTheme(context: Context): Boolean =
-        context.theme.obtainStyledAttributes(intArrayOf(android.R.attr.isLightTheme)).run { getBoolean(0, true).also { recycle() } }
+    private fun isLightTheme(context: Context): Boolean = flag(context, android.R.attr.isLightTheme)
+
+    private fun flag(context: Context, attribute: Int): Boolean =
+        context.theme.obtainStyledAttributes(intArrayOf(attribute)).run { getBoolean(0, false).also { recycle() } }
+
+    /** Whether the window's configuration says night: what its theme, and the platform's pieces, take. */
+    private fun configuredNight(window: Activity): Boolean = window.resources.configuration.isNightModeActive
 
     /** Whether the window's bars have dark icons, for a light app. */
     private fun lightBars(window: Activity): Boolean {
@@ -128,6 +138,20 @@ class NightModeTest {
         assertEquals(listOf(AppAppearance.Dark, AppAppearance.System), heard)
     }
 
+    /**
+     * The launch window's bars have dark icons over its light background in either night: the next cold start's takes
+     * the app's night, which may be dark on a light phone, as iOS's launch screen stays light.
+     */
+    @Test
+    fun theLaunchWindowsBarsStayDarkOverItsLightBackground() {
+        for (dark in listOf(false, true)) {
+            RuntimeEnvironment.setQualifiers(if (dark) "+night" else "+notnight")
+            val starting = ContextThemeWrapper(app, R.style.Theme_Peek_Starting)
+            assertTrue("The status bar's icons dark, night: $dark", flag(starting, android.R.attr.windowLightStatusBar))
+            assertTrue("The navigation bar's icons dark, night: $dark", flag(starting, android.R.attr.windowLightNavigationBar))
+        }
+    }
+
     @Test
     fun theAppsThemeTakesTheNightModeAndTheLaunchAndShareWindowsStayLight() {
         val launch = ContextCompat.getColor(app, R.color.launch_background)
@@ -143,29 +167,26 @@ class NightModeTest {
     }
 
     /**
-     * Dark picked, then Light: the night mode's change comes to the window, which takes it as it is, its theme (the
-     * platform's pieces) and its bars with it.
+     * Dark picked, then Light: the window survives the uiMode change the night mode's brings, its theme (the platform's
+     * pieces) and its bars as its configuration says.
      */
     @Test
-    fun theWindowTakesTheAppsNightModeWithoutStartingAgain() {
+    fun theWindowSurvivesAUiModeChange() {
         val window = main()
         val shown = window.get()
+        assertFalse(configuredNight(shown))
         assertTrue(isLightTheme(shown))
         assertTrue(lightBars(shown))
 
-        store.set(AppAppearance.Dark)
-        window.configurationChange(night(shown, dark = true))
-        idle()
-        assertSame("Not made again", shown, window.get())
-        assertFalse(isLightTheme(shown))
-        assertFalse(lightBars(shown))
-
-        store.set(AppAppearance.Light)
-        window.configurationChange(night(shown, dark = false))
-        idle()
-        assertSame(shown, window.get())
-        assertTrue(isLightTheme(shown))
-        assertTrue(lightBars(shown))
+        for ((appearance, dark) in listOf(AppAppearance.Dark to true, AppAppearance.Light to false)) {
+            store.set(appearance)
+            window.configurationChange(night(shown, dark))
+            idle()
+            assertSame("Not made again", shown, window.get())
+            assertEquals("$appearance", dark, configuredNight(shown))
+            assertEquals("$appearance: the theme as configured", !configuredNight(shown), isLightTheme(shown))
+            assertEquals("$appearance: the bars as configured", !configuredNight(shown), lightBars(shown))
+        }
     }
 
     /** System picked: the night mode is the phone's, and the window follows the phone as it goes dark and light. */
@@ -215,5 +236,44 @@ class NightModeTest {
         idle()
         assertTrue(lightBars(card.get()))
         assertTrue(isLightTheme(card.get()))
+    }
+
+    /**
+     * The share card survives a uiMode change, as when making the appearance store there sets Peek's night before the
+     * app's window ever did, or the phone goes dark under System: the same card on the same share, its bars set again
+     * for the phone.
+     */
+    @Test
+    fun theShareCardSurvivesAUiModeChange() {
+        store.set(AppAppearance.System)
+        val share = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, "TESTLAMP0001")
+        val card = Robolectric.buildActivity(ShareActivity::class.java, share).also { windows += it }.setup()
+        idle()
+        val shown = card.get()
+        assertTrue(lightBars(shown))
+        card.configurationChange(night(shown, dark = true))
+        idle()
+        assertSame("Not made again", shown, card.get())
+        assertSame(share, shown.intent)
+        assertFalse("The bars for the phone gone dark", lightBars(shown))
+        assertTrue("Its window light whatever the night", isLightTheme(shown))
+    }
+
+    /**
+     * Every window of the app's, the notifications' alias as the window it stands for, takes a uiMode change itself:
+     * none starts again, flashes or loses its intent when the night mode is first set or changes while it is up.
+     */
+    @Test
+    fun everyWindowTakesAUiModeChangeItself() {
+        val activities = app.packageManager.getPackageInfo(app.packageName, PackageManager.GET_ACTIVITIES).activities.orEmpty()
+            .filter { it.name.startsWith("${app.packageName}.") }
+        val names = activities.map { it.name }
+        for (window in listOf(MainActivity::class, ShareActivity::class, ParcelLinkActivity::class, SignInTabActivity::class, SignInCallbackActivity::class)) {
+            assertTrue("${window.java.name} listed", window.java.name in names)
+        }
+        val alias = app.packageManager.getActivityInfo(ComponentName(app, "${app.packageName}.NotificationOpening"), 0)
+        for (info in activities + alias) {
+            assertTrue("${info.name} takes it itself", info.configChanges and ActivityInfo.CONFIG_UI_MODE != 0)
+        }
     }
 }

@@ -3566,6 +3566,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pt-br": [
     {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "rastreio-yto-express",
+      "title": "Rastreio YTO Express: código YT, status e contato",
+      "name": "YTO Express",
+      "color": "#4d148c"
+    },
+    {
       "id": "spx-br",
       "catalog": "spx-br",
       "slug": "rastreio-spx-express",

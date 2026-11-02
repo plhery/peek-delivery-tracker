@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -174,7 +173,7 @@ private fun DrawScope.drawThrough(lens: Rect, track: Color, behind: Color) {
     drawRect(behind.lighter(), lens.topLeft, lens.size)
     val trackStart = lens.center.x * (1 - NARROWER)
     val trackEnd = lens.center.x + (size.width - lens.center.x) * NARROWER
-    drawRoundRect(seen, Offset(trackStart, lens.center.y - half), Size(trackEnd - trackStart, half * 2), CornerRadius(half))
+    drawPath(capsule(Rect(Offset(trackStart, lens.center.y - half), Size(trackEnd - trackStart, half * 2))), seen)
     val reach = FLARE_REACH.toPx()
     for ((side, inward) in listOf(lens.left to 1f, lens.right to -1f)) {
         val strength = ((if (inward > 0) lens.left else size.width - lens.right) / reach).coerceIn(0f, 1f)

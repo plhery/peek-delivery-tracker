@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -50,6 +49,7 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
+import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
@@ -104,14 +104,14 @@ internal fun PickupPointCard(
     Column(
         modifier
             .fillMaxWidth()
-            .border(1.dp, ink.copy(alpha = ink.alpha * 0.18f), RoundedCornerShape(CARD_RADIUS))
+            .border(1.dp, ink.copy(alpha = ink.alpha * 0.18f), ContinuousRoundedShape(CARD_RADIUS))
             .padding(16.dp)
             .semantics { isTraversalGroup = true },
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.Top) {
             if (!large) {
-                Box(Modifier.size(40.dp).background(surface, RoundedCornerShape(BUTTON_RADIUS)), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(40.dp).background(surface, ContinuousRoundedShape(BUTTON_RADIUS)), contentAlignment = Alignment.Center) {
                     PeekSymbol("storefront", font = type.fixed(17f), tint = ink)
                 }
             }
@@ -137,7 +137,7 @@ internal fun PickupPointCard(
                             // Where nothing opens it, as Compose's handler says: nothing, as with the iPhone's openURL.
                         }
                     }
-                    .background(ink, RoundedCornerShape(BUTTON_RADIUS))
+                    .background(ink, ContinuousRoundedShape(BUTTON_RADIUS))
                     .heightIn(min = BUTTON_HEIGHT)
                     .padding(horizontal = 10.dp),
                 horizontalArrangement = Arrangement.spacedBy(LABEL_SPACING, Alignment.CenterHorizontally),
@@ -171,7 +171,7 @@ internal fun PickupPointCard(
                             }
                         }
                         .clickable(interactionSource = null, indication = PressStyle.Tactile, onClick = copy)
-                        .border(1.dp, secondary.copy(alpha = secondary.alpha * 0.3f), RoundedCornerShape(BUTTON_RADIUS))
+                        .border(1.dp, secondary.copy(alpha = secondary.alpha * 0.3f), ContinuousRoundedShape(BUTTON_RADIUS))
                         .heightIn(min = BUTTON_HEIGHT)
                         .padding(horizontal = 10.dp),
                     contentAlignment = Alignment.Center,
@@ -265,7 +265,7 @@ internal fun CarrierSaysNote(words: String, carrier: String, modifier: Modifier 
     Row(
         modifier
             .fillMaxWidth()
-            .border(1.dp, secondary.copy(alpha = secondary.alpha * 0.3f), RoundedCornerShape(CARD_RADIUS))
+            .border(1.dp, secondary.copy(alpha = secondary.alpha * 0.3f), ContinuousRoundedShape(CARD_RADIUS))
             .padding(horizontal = 16.dp, vertical = 14.dp)
             .semantics(mergeDescendants = true) {},
         horizontalArrangement = Arrangement.spacedBy(12.dp),

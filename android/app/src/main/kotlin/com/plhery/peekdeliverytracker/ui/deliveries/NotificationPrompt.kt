@@ -2,7 +2,6 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.stroke
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -74,7 +74,7 @@ internal fun NotificationPrompt(state: DeliveriesState, modifier: Modifier = Mod
             .testTag(NOTIFICATIONS_PROMPT)
             .dropShadow(shape, PROMPT_SHADOW)
             .background(colors.paper, shape)
-            .border(1.dp, colors.ink.copy(alpha = 0.1f), shape)
+            .stroke(1.dp, colors.ink.copy(alpha = 0.1f), shape)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {

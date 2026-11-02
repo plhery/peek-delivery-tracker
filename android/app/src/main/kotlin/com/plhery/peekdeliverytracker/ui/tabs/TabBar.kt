@@ -18,10 +18,10 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layout
@@ -180,9 +180,9 @@ private fun TabBar(
 }
 
 /**
- * The pill behind the chosen item. It takes `shade` off each channel of the glass under it, as the iPhone's does in
- * light and dark alike: a grey of that shade drawn as a difference, straight onto the glass with no layer between.
- * It is as large as it is drawn and offset from the capsule's start, as the items are laid from it.
+ * The pill behind the chosen item, a capsule as the bar is. It takes `shade` off each channel of the glass under it, as
+ * the iPhone's does in light and dark alike: a grey of that shade drawn as a difference, straight onto the glass with no
+ * layer between. It is as large as it is drawn and offset from the capsule's start, as the items are laid from it.
  */
 @Composable
 private fun TabPill(geometry: TabBarGeometry, selection: Int, shade: Float) {
@@ -216,7 +216,10 @@ private fun TabPill(geometry: TabBarGeometry, selection: Int, shade: Float) {
                 layout(placeable.width, placeable.height) { placeable.place(0, 0) }
             }
             .testTag(TAB_PILL)
-            .drawBehind { drawRoundRect(grey, cornerRadius = CornerRadius(size.height / 2), blendMode = BlendMode.Difference) },
+            .drawWithCache {
+                val pill = CapsuleShape.createOutline(size, layoutDirection, this)
+                onDrawBehind { drawOutline(pill, grey, blendMode = BlendMode.Difference) }
+            },
     )
 }
 

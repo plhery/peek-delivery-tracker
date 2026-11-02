@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -60,6 +59,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.Toggle
+import com.plhery.peekdeliverytracker.ui.draw.stroke
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetMenus
 import com.plhery.peekdeliverytracker.ui.sheet.MenuOption
 import com.plhery.peekdeliverytracker.ui.sheet.SheetMenu
@@ -106,7 +106,7 @@ internal fun SettingsGroup(
                     Text(
                         badge.uppercase(locale),
                         Modifier
-                            .background(colors.resolve(ExperimentalPalette.ochreSurface), RoundedCornerShape(7.dp))
+                            .background(colors.resolve(ExperimentalPalette.ochreSurface), ContinuousRoundedShape(7.dp))
                             .padding(horizontal = 7.dp, vertical = 3.dp),
                         color = colors.resolve(ExperimentalPalette.ochre),
                         style = type.tracking(type.style(IosTextStyle.Caption2, FontWeight.Bold), 0.4f).sfLines(),
@@ -114,12 +114,12 @@ internal fun SettingsGroup(
                 }
             }
         }
-        val shape = RoundedCornerShape(16.dp)
+        val shape = ContinuousRoundedShape(16.dp)
         Column(
             Modifier
                 .fillMaxWidth()
                 .background(colors.paper, shape)
-                .border(0.5.dp, colors.separator.quarter(), shape),
+                .stroke(0.5.dp, colors.separator.quarter(), shape),
             content = content,
         )
     }
@@ -343,7 +343,7 @@ internal fun SettingsAppearancePicker(appearance: AppAppearance, onChoose: (AppA
             for (option in AppAppearance.entries) {
                 val chosen = option == appearance
                 val name = localized("native.appearance.${option.rawValue}")
-                val shape = RoundedCornerShape(12.dp)
+                val shape = ContinuousRoundedShape(12.dp)
                 Column(
                     tile
                         .testTag(appearanceTag(option))
@@ -358,7 +358,7 @@ internal fun SettingsAppearancePicker(appearance: AppAppearance, onChoose: (AppA
                             }
                         }
                         .background(colors.background, shape)
-                        .border(
+                        .stroke(
                             if (chosen) 1.5.dp else 0.5.dp,
                             if (chosen) colors.resolve(settingsGreen) else colors.separator.quarter(),
                             shape,
@@ -386,19 +386,19 @@ internal fun SettingsAppearancePicker(appearance: AppAppearance, onChoose: (AppA
  */
 @Composable
 private fun AppearanceMiniature(option: AppAppearance) {
-    val shape = RoundedCornerShape(5.dp)
+    val shape = ContinuousRoundedShape(5.dp)
     val leading = if (option == AppAppearance.Dark) MINI_DARK else MINI_LIGHT
     val trailing = if (option == AppAppearance.Light) MINI_LIGHT else MINI_DARK
     val leadingLine = if (option == AppAppearance.Dark) MINI_DARK_LINE else MINI_LIGHT_LINE
     val trailingLine = if (option == AppAppearance.Light) MINI_LIGHT_LINE else MINI_DARK_LINE
-    Box(Modifier.size(60.dp, 43.dp).clip(shape).border(0.5.dp, MINI_DARK_LINE.copy(alpha = 0.35f), shape)) {
+    Box(Modifier.size(60.dp, 43.dp).stroke(0.5.dp, MINI_DARK_LINE.copy(alpha = 0.35f), shape).clip(shape)) {
         Row(Modifier.fillMaxWidth().fillMaxHeight()) {
             Box(Modifier.weight(1f).fillMaxHeight().background(leading))
             Box(Modifier.weight(1f).fillMaxHeight().background(trailing))
         }
         Column(Modifier.fillMaxWidth().padding(7.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             repeat(2) {
-                Row(Modifier.fillMaxWidth().height(6.dp).clip(RoundedCornerShape(2.dp))) {
+                Row(Modifier.fillMaxWidth().height(6.dp).clip(ContinuousRoundedShape(2.dp))) {
                     Box(Modifier.weight(1f).fillMaxHeight().background(leadingLine))
                     Box(Modifier.weight(1f).fillMaxHeight().background(trailingLine))
                 }
@@ -422,7 +422,7 @@ internal fun AccountRow(email: String?, demo: Boolean) {
         horizontalArrangement = Arrangement.spacedBy(11.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(Modifier.size(37.dp).background(colors.resolve(TILE), RoundedCornerShape(12.dp)), contentAlignment = Alignment.Center) {
+        Box(Modifier.size(37.dp).background(colors.resolve(TILE), ContinuousRoundedShape(12.dp)), contentAlignment = Alignment.Center) {
             ProvideDynamicTypeSize(PeekTheme.dynamicTypeSize.capped(DynamicTypeSize.Accessibility1)) {
                 Text(initial, color = colors.resolve(TILE_LETTER), style = PeekTheme.type.style(IosTextStyle.Caption, FontWeight.SemiBold).sfLines())
             }

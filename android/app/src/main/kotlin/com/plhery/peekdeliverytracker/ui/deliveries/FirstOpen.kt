@@ -38,7 +38,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -676,7 +675,7 @@ private fun FirstOpenMasthead(scene: FirstOpenScene, modifier: Modifier = Modifi
         Box(
             Modifier
                 .heightIn(min = 44.dp)
-                .background(colors.paper.copy(alpha = colors.paper.alpha * 0.55f), RoundedCornerShape(Radii.mastheadButton))
+                .background(colors.paper.copy(alpha = colors.paper.alpha * 0.55f), ContinuousRoundedShape(Radii.mastheadButton))
                 .testTag(FIRST_OPEN_SIGN_IN)
                 .clickable(interactionSource = null, indication = SystemPress, role = Role.Button) { source.showSignIn() }
                 .padding(horizontal = 14.dp),

@@ -201,7 +201,7 @@ fun NextDeliveryPass(
             }
             if (flag != null) ParcelFlag(flag, "arrow.clockwise", Modifier.padding(top = 8.dp))
         }
-        SelectedCardRing(selected, Radii.nextUp, continuous = true, Modifier.matchParentSize())
+        SelectedCardRing(selected, Radii.nextUp, Modifier.matchParentSize())
     }
 }
 

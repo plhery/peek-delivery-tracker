@@ -44,9 +44,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.dropShadow
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -81,6 +82,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.deliveries.plainDisabled
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
+import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.DieCutStampShape
 import com.plhery.peekdeliverytracker.ui.draw.PeekLockup
 import com.plhery.peekdeliverytracker.ui.friends.FriendPostcard
@@ -323,21 +325,18 @@ internal fun FriendshipReceiptStamp(modifier: Modifier = Modifier) {
 
 /**
  * The stamp's dashed frame: drawn around what the column holds plus its 12, [inset] in from that, so [inset] out from
- * the column's own content.
+ * the column's own content. `strokeBorder` strokes the frame's continuous outline inset by half the line, its corners
+ * as much smaller, and the dashes start where SwiftUI's path does, halfway down its right side.
  */
 private fun Modifier.drawBehindDashed(color: androidx.compose.ui.graphics.Color, inset: Dp): Modifier = this.then(
     Modifier.drawWithCache {
         val grow = 12.dp.toPx() - inset.toPx()
         val line = 1.dp.toPx()
         val stroke = Stroke(width = line, pathEffect = PathEffect.dashPathEffect(floatArrayOf(2.dp.toPx(), 2.dp.toPx())))
+        val frame = ContinuousRoundedShape(2.dp - 0.5.dp)
+            .createOutline(androidx.compose.ui.geometry.Size(size.width + 2 * grow - line, size.height + 2 * grow - line), layoutDirection, this)
         onDrawBehind {
-            drawRoundRect(
-                color,
-                topLeft = androidx.compose.ui.geometry.Offset(-grow + line / 2, -grow + line / 2),
-                size = androidx.compose.ui.geometry.Size(size.width + 2 * grow - line, size.height + 2 * grow - line),
-                cornerRadius = CornerRadius(2.dp.toPx()),
-                style = stroke,
-            )
+            translate(-grow + line / 2, -grow + line / 2) { drawOutline(frame, color, style = stroke) }
         }
     },
 )

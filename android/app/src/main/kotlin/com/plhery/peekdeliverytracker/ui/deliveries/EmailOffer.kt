@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -217,14 +216,14 @@ private fun OfferCard(address: String, phase: EmailOfferPhase, turnOn: () -> Uni
         Modifier
             .fillMaxWidth()
             .testTag(PAGE_EMAIL_OFFER)
-            .border(1.dp, colors.ink.copy(alpha = colors.ink.alpha * 0.12f), RoundedCornerShape(16.dp))
+            .border(1.dp, colors.ink.copy(alpha = colors.ink.alpha * 0.12f), ContinuousRoundedShape(16.dp))
             .padding(16.dp)
             .semantics { isTraversalGroup = true },
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) {
             Box(
-                Modifier.size(40.dp).background(colors.resolve(ExperimentalPalette.ochreSurface), RoundedCornerShape(12.dp)),
+                Modifier.size(40.dp).background(colors.resolve(ExperimentalPalette.ochreSurface), ContinuousRoundedShape(12.dp)),
                 contentAlignment = Alignment.Center,
             ) {
                 PeekSymbol("envelope", font = type.fixed(17f), tint = colors.resolve(ExperimentalPalette.ochre))
@@ -291,7 +290,7 @@ private fun OfferButton(
     ground: Color?,
     action: () -> Unit,
 ) {
-    val shape = RoundedCornerShape(12.dp)
+    val shape = ContinuousRoundedShape(12.dp)
     Box(
         Modifier
             .testTag(tag)

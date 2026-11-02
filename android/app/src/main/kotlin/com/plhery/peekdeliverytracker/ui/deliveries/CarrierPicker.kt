@@ -42,7 +42,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -823,7 +822,7 @@ private fun RailLetters(letters: List<String>, current: String?, rowHeight: Dp) 
             for (letter in letters) {
                 val chosen = letter == current
                 Box(
-                    if (chosen) Modifier.background(ochre, RoundedCornerShape(5.dp)) else Modifier,
+                    if (chosen) Modifier.background(ochre, ContinuousRoundedShape(5.dp)) else Modifier,
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(letter, color = if (chosen) colors.background else ochre, style = font, maxLines = 1, softWrap = false)

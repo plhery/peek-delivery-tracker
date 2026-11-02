@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,7 +29,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
@@ -81,6 +79,7 @@ import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.Radii
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import java.time.Instant
 import java.util.UUID
@@ -150,12 +149,11 @@ internal fun Modifier.cardTouches(
 internal fun cardLabel(vararg parts: String?): String = parts.filterNot { it.isNullOrEmpty() }.joinToString(", ")
 
 /**
- * `SelectedCardRing` (A-S36): a 2-point ring in the ink inside the edge of a card of `cornerRadius` (continuous, or
- * circular as `RoundedRectangle`'s default), shown with a snappy 0.2 s fade while the parcel is shown beside the list.
- * Decorative.
+ * `SelectedCardRing` (A-S36): a 2-point ring in the ink inside the continuous edge of a card of `cornerRadius`, shown
+ * with a snappy 0.2 s fade while the parcel is shown beside the list. Decorative.
  */
 @Composable
-fun SelectedCardRing(shown: Boolean, cornerRadius: Dp, continuous: Boolean, modifier: Modifier = Modifier) {
+fun SelectedCardRing(shown: Boolean, cornerRadius: Dp, modifier: Modifier = Modifier) {
     val reduceMotion = PeekTheme.reduceMotion
     val ink = PeekTheme.colors.ink
     val opacity by animateFloatAsState(if (shown) 1f else 0f, if (reduceMotion) snap() else Motion.snappy(0.2), label = "ring")
@@ -164,9 +162,8 @@ fun SelectedCardRing(shown: Boolean, cornerRadius: Dp, continuous: Boolean, modi
         // `strokeBorder`: the ring inside the shape, on the shape inset by half its width.
         val line = 2.dp.toPx()
         val inset = cornerRadius - 1.dp
-        val shape: Shape = if (continuous) ContinuousRoundedShape(inset) else RoundedCornerShape(inset)
         translate(line / 2, line / 2) {
-            val outline = shape.createOutline(Size(size.width - line, size.height - line), layoutDirection, this)
+            val outline = ContinuousRoundedShape(inset).createOutline(Size(size.width - line, size.height - line), layoutDirection, this)
             drawOutline(outline, ink, alpha = opacity, style = Stroke(line))
         }
     }
@@ -182,7 +179,7 @@ fun ParcelFlag(text: String, symbol: String, modifier: Modifier = Modifier) {
     val type = PeekTheme.type
     Row(
         modifier
-            .background(colors.paper.copy(alpha = colors.paper.alpha * 0.72f), RoundedCornerShape(12.dp))
+            .background(colors.paper.copy(alpha = colors.paper.alpha * 0.72f), ContinuousRoundedShape(Radii.parcelFlag))
             .padding(start = 8.dp, top = 4.dp, end = 10.dp, bottom = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -293,7 +290,7 @@ fun ParcelQuietNote(parcel: Parcel, tint: Color, onHelp: () -> Unit, modifier: M
     Row(
         modifier
             .fillMaxWidth()
-            .background(secondary.copy(alpha = secondary.alpha * 0.08f), RoundedCornerShape(16.dp))
+            .background(secondary.copy(alpha = secondary.alpha * 0.08f), ContinuousRoundedShape(16.dp))
             // The link's own height leaves room below it.
             .padding(start = 16.dp, top = 14.dp, end = 16.dp, bottom = if (help == null) 14.dp else 4.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),

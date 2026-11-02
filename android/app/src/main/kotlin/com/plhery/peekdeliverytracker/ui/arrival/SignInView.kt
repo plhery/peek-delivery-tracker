@@ -33,7 +33,6 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.TextAutoSize
@@ -113,6 +112,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.plainDisabled
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.NoticeBanner
+import com.plhery.peekdeliverytracker.ui.draw.stroke
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.MenuOption
 import com.plhery.peekdeliverytracker.ui.sheet.SheetMenu
@@ -547,7 +547,7 @@ private fun Methods(
                             form.emailExpanded = true
                         }
                         .heightIn(min = 48.dp)
-                        .background(if (invited) Color.Transparent else colors.cream, RoundedCornerShape(13.dp)),
+                        .background(if (invited) Color.Transparent else colors.cream, ContinuousRoundedShape(13.dp)),
                     horizontalArrangement = Arrangement.spacedBy(LABEL_SPACING, Alignment.CenterHorizontally),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -675,7 +675,7 @@ private fun SignInField(label: String, field: @Composable (Modifier) -> Unit) {
             Modifier
                 .fillMaxWidth()
                 .background(if (colors.dark) Color.Black else Color.White, shape)
-                .border(1.dp, colors.divider.copy(alpha = colors.divider.alpha * 0.7f), shape)
+                .stroke(1.dp, colors.divider.copy(alpha = colors.divider.alpha * 0.7f), shape)
                 .padding(horizontal = 15.dp),
         )
     }
@@ -776,7 +776,7 @@ private fun MethodButton(tag: String, enabled: Boolean, onClick: () -> Unit, con
             .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = onClick)
             .heightIn(min = 48.dp)
             .background(colors.paper, shape)
-            .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.35f), shape)
+            .stroke(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.35f), shape)
             .padding(horizontal = 14.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,

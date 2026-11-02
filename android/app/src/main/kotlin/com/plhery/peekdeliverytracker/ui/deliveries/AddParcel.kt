@@ -52,7 +52,6 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -1314,7 +1313,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
 private fun RequirementField(title: String, help: String, optional: Boolean = false, field: @Composable androidx.compose.foundation.layout.RowScope.() -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val shape = RoundedCornerShape(12.dp)
+    val shape = ContinuousRoundedShape(12.dp)
     Column(verticalArrangement = Arrangement.spacedBy(7.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(title, Modifier.alignByBaseline(), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
@@ -1394,7 +1393,7 @@ private fun AddTextField(
     val enabled = LocalFormEnabled.current
     val focused = focus.focused == field
     val ochre = colors.resolve(ExperimentalPalette.ochre)
-    val shape = RoundedCornerShape(14.dp)
+    val shape = ContinuousRoundedShape(14.dp)
     val extra = if (maxLines == 1) FIELD_LEADING else 0.dp
     val leading = with(LocalDensity.current) { extra.roundToPx().let { (it / 2).toDp() to (it - it / 2).toDp() } }
     val submit by rememberUpdatedState(onSubmit)
@@ -1540,7 +1539,7 @@ private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean,
                 .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = canSave && !saving, role = Role.Button, onClick = save)
                 .semantics { contentDescription = if (saving) adding else words }
                 .heightIn(min = 50.dp)
-                .background(colors.accent, RoundedCornerShape(14.dp))
+                .background(colors.accent, ContinuousRoundedShape(14.dp))
                 .padding(horizontal = 16.dp),
             contentAlignment = Alignment.Center,
         ) {

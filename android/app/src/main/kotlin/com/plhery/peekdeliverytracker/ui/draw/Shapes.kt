@@ -1,9 +1,14 @@
 package com.plhery.peekdeliverytracker.ui.draw
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.drawOutline
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
@@ -54,6 +59,19 @@ data class UnevenContinuousRoundedShape(
 data object CapsuleShape : Shape {
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline =
         continuousOutline(size, minOf(size.width, size.height) / 2.0)
+}
+
+/**
+ * `.overlay(shape.stroke(color, lineWidth: width))`: the outline stroked over the content, centred on the edge, half of
+ * the line outside the shape, where `Modifier.border` draws `strokeBorder`'s, inside it.
+ */
+fun Modifier.stroke(width: Dp, color: Color, shape: Shape): Modifier = drawWithCache {
+    val outline = shape.createOutline(size, layoutDirection, this)
+    val line = Stroke(width.toPx())
+    onDrawWithContent {
+        drawContent()
+        drawOutline(outline, color, style = line)
+    }
 }
 
 private fun continuousOutline(size: Size, radius: Double): Outline =

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,6 +40,7 @@ import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
+import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.map.CardRoute
 import com.plhery.peekdeliverytracker.ui.map.CardRouteMetrics
 import com.plhery.peekdeliverytracker.ui.map.rememberParcelRoute
@@ -122,7 +122,7 @@ fun ParcelPassCard(
     }
     val press by keyframeAnimator(1.0, arrived) { PeekKeyframes.deliveredCompact }
     val atlas = rememberWorldAtlas(wanted = drawsRoute)
-    val shape = RoundedCornerShape(Radii.card)
+    val shape = ContinuousRoundedShape(Radii.card)
 
     Box(
         modifier
@@ -144,7 +144,7 @@ fun ParcelPassCard(
                 scaleX = scale
                 scaleY = scale
             }
-            // `RoundedRectangle(cornerRadius: 16)`: circular corners, which the swipe's continuous ones cut a little.
+            // `.clipShape(RoundedRectangle(cornerRadius: 16))`, continuous as the card button's cut.
             .clip(shape)
             .background(colors.paper, shape)
             .background(surface.copy(alpha = surface.alpha * if (past) 0.35f else 1f), shape)
@@ -193,7 +193,7 @@ fun ParcelPassCard(
                 if (flag != null) ParcelFlag(flag, flagSymbol, Modifier.padding(top = 4.dp))
             }
         }
-        SelectedCardRing(selected, Radii.card, continuous = false, Modifier.matchParentSize())
+        SelectedCardRing(selected, Radii.card, Modifier.matchParentSize())
     }
 }
 

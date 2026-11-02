@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -87,6 +86,7 @@ import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
+import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.DeliveryPostageStamp
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.map.RouteEngraving
@@ -195,7 +195,7 @@ internal fun LivePassCard(
     Box(
         modifier
             .fillMaxWidth()
-            .background(colors.resolve(branding.surface), RoundedCornerShape(CARD_RADIUS))
+            .background(colors.resolve(branding.surface), ContinuousRoundedShape(CARD_RADIUS))
             .onGloballyPositioned {
                 frames.card = it
                 frames.measure(density)

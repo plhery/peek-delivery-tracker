@@ -7,7 +7,10 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
+import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
+import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.DieCutStampShape
+import com.plhery.peekdeliverytracker.ui.draw.stroke
 import java.text.BreakIterator
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -22,7 +25,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -32,10 +34,8 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -337,7 +337,7 @@ private fun framePath(points: List<Point>) = Path().apply {
  */
 @Composable
 private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double, sender: String? = null, shift: Float = 0f) {
-    val shape = RoundedCornerShape(7.dp)
+    val shape = ContinuousRoundedShape(7.dp)
     Box(
         Modifier
             .offset { IntOffset((152f + shift - 83f / 2).dp.roundToPx(), (174f - 69f * rise.toFloat() - 111f / 2).dp.roundToPx()) }
@@ -347,11 +347,7 @@ private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double, sender: S
                 alpha = min(1.0, rise * 3).toFloat()
             }
             .background(if (sender == null) Color(0xFFFCFAF4) else Color(0xFFE7DCF4), shape)
-            .drawWithContent {
-                drawContent()
-                // On the card's edge, half of it outside, as SwiftUI strokes a shape.
-                drawRoundRect(Color.White.copy(alpha = 0.6f), cornerRadius = CornerRadius(7.dp.toPx()), style = Stroke(0.8.dp.toPx()))
-            }
+            .stroke(0.8.dp, Color.White.copy(alpha = 0.6f), shape)
             .padding(14.dp),
         contentAlignment = Alignment.Center,
     ) {
@@ -362,8 +358,8 @@ private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double, sender: S
                 Box(Modifier.size(24.dp).background(Color(0xFFEFE3F1), CircleShape), contentAlignment = Alignment.Center) {
                     PeekSymbol("gift", font = PeekTheme.type.fixed(12f, FontWeight.Medium), tint = Color(0xFF7C6787))
                 }
-                Box(Modifier.size(47.dp, 4.dp).background(Color(0xFFDAD7CE), CircleShape))
-                Box(Modifier.size(29.dp, 4.dp).background(Color(0xFFE7E4DC), CircleShape))
+                Box(Modifier.size(47.dp, 4.dp).background(Color(0xFFDAD7CE), CapsuleShape))
+                Box(Modifier.size(29.dp, 4.dp).background(Color(0xFFE7E4DC), CapsuleShape))
             }
         } else {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -381,8 +377,8 @@ private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double, sender: S
                     }
                     if (check > 0) drawPath(drawn, Color(0xFF587260), style = Stroke(2.5f * unit, cap = StrokeCap.Round, join = StrokeJoin.Round))
                 }
-                Box(Modifier.size(45.dp, 4.dp).background(Color(0xFFDAD7CE), CircleShape))
-                Box(Modifier.size(29.dp, 4.dp).background(Color(0xFFE7E4DC), CircleShape))
+                Box(Modifier.size(45.dp, 4.dp).background(Color(0xFFDAD7CE), CapsuleShape))
+                Box(Modifier.size(29.dp, 4.dp).background(Color(0xFFE7E4DC), CapsuleShape))
             }
         }
     }
@@ -401,7 +397,7 @@ private fun SenderCard(sender: String) {
         }
         Text(localized("friends.from"), color = plum, style = PeekTheme.type.fixed(8f), maxLines = 1)
         ShrinkingLine(sender, PeekTheme.type.fixed(17f, FontWeight.SemiBold).copy(color = plum), MIN_SENDER_SCALE)
-        Box(Modifier.size(29.dp, 1.dp).background(Color(0xFFB39BC7), CircleShape))
+        Box(Modifier.size(29.dp, 1.dp).background(Color(0xFFB39BC7), CapsuleShape))
     }
 }
 

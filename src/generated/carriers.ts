@@ -2614,6 +2614,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-suivi-colis",
+      "title": "Suivi colis GZYL\u00a0: numéro YL…YQ, statuts et qui contacter",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
       "id": "shouwu",
       "catalog": "shouwu",
       "slug": "shouwu-suivi",

@@ -706,15 +706,15 @@ private const val PUSH_PARALLAX = 0.3f
  * A NavigationStack's bar in a sheet stands a point lower than a sheet's own bar row (`SheetInsets.barTop`), and what
  * scrolls under it starts 10 under the bar, as UIKit's navigation bar insets its scroll view.
  */
-private val NAV_BAR_DROP = 1.dp
-private val NAV_BAR_FOOT = 10.dp
+internal val NAV_BAR_DROP = 1.dp
+internal val NAV_BAR_FOOT = 10.dp
 /**
  * The iPad's form holds the stack's bar nearer its corner than a page sheet does (ipad-01): its row 10 from the top, its
  * items 10 from the side, the large title 16 in, and so what scrolls under it 10 higher.
  */
-private val FORM_BAR_TOP = 9.dp
-private val FORM_BAR_SIDE = 10.dp
-private val FORM_TITLE_SIDE = 16.dp
+internal val FORM_BAR_TOP = 9.dp
+internal val FORM_BAR_SIDE = 10.dp
+internal val FORM_TITLE_SIDE = 16.dp
 /** UIKit's large title's room under the bar, its words 8 over its foot. */
 private val LARGE_TITLE = 52.dp
 /** How far the scroll goes, once the large title is under the bar, while the inline title fades in. */

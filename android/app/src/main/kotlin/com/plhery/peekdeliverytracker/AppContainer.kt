@@ -18,6 +18,9 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierCatalogRefreshResult
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
+import com.plhery.peekdeliverytracker.core.FriendsActivityStore
+import com.plhery.peekdeliverytracker.core.FriendsStore
+import com.plhery.peekdeliverytracker.core.friends
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.DeliveryLiveActivities
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
@@ -190,6 +193,12 @@ class AppContainer(
     /** The iPhone's `-sdt.debug.importCharges`: a debug build's import charges preview (ImportChargesPreview), from the defaults. */
     private val importCharges: () -> String? = { if (debug) defaults.string(DEBUG_IMPORT_CHARGES) else null }
 
+    /** The account's service, which the parcels and the friends ask (`DeliveryAPIClient`). */
+    private val api = DeliveryApiClient(
+        configuration, session, transport, verification, deviceName = Device.name, region = Device::region, debug = debug,
+        analytics = analytics::action,
+    )
+
     val parcels: ParcelStore = run {
         val region = Device::region
         val deviceParcels = DeviceParcels(
@@ -210,10 +219,7 @@ class AppContainer(
             configuration = configuration,
             session = session,
             localizer = localizer,
-            api = DeliveryApiClient(
-                configuration, session, transport, verification, deviceName = Device.name, region = region, debug = debug,
-                analytics = analytics::action,
-            ),
+            api = api,
             device = deviceParcels,
             liveActivityRevocations = LiveActivityRevocations(
                 configuration, transport, KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.liveActivityRevocations"),
@@ -231,6 +237,12 @@ class AppContainer(
             importCharges = importCharges,
         )
     }
+
+    /** FriendsView's `FriendsStore()`, kept for the process as the tab's `@StateObject` is kept for the window. */
+    val friends = FriendsStore(api.friends())
+
+    /** The app's `FriendsActivityStore()`: who accepted an invitation, while someone is signed in. */
+    val friendsActivity = FriendsActivityStore(api.friends(), signedIn = { session.user != null })
 
     /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for; a test's reads before both. */
     val links: ParcelLinkStore = linkReader?.let { ParcelLinkStore(defaults, read = it) }

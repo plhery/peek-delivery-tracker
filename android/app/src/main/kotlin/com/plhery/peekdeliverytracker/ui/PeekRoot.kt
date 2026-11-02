@@ -53,6 +53,8 @@ import com.plhery.peekdeliverytracker.ui.deliveries.covers
 import com.plhery.peekdeliverytracker.ui.deliveries.rememberFirstOpen
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
+import com.plhery.peekdeliverytracker.ui.friends.FriendsActivityEffects
+import com.plhery.peekdeliverytracker.ui.friends.FriendsTab
 import com.plhery.peekdeliverytracker.ui.passport.PassportTab
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLayers
@@ -136,6 +138,7 @@ internal fun PeekRoot(
             if (user != null) source.links.resume()
         }
     }
+    if (source != null) FriendsActivityEffects(source, state) { tab = PeekTab.Friends.ordinal }
     // `.onChange(of: links.arrival)`: the sheet has gone on a parcel the list now shows.
     LaunchedEffect(links) {
         val store = links?.links ?: return@LaunchedEffect
@@ -184,7 +187,7 @@ internal fun PeekRoot(
                                             when (shown) {
                                                 PeekTab.Deliveries -> deliveries()
                                                 PeekTab.Passport -> if (source != null) PassportTab(source) else TabPlaceholder(shown)
-                                                PeekTab.Friends -> TabPlaceholder(shown)
+                                                PeekTab.Friends -> if (source != null) FriendsTab(source) else TabPlaceholder(shown)
                                             }
                                         }
                                     }
@@ -235,7 +238,7 @@ internal fun LaunchView(loading: String) {
     }
 }
 
-/** Friends until they are ported, and the passport without the deliveries' source: the page's background. */
+/** The passport and the friends without the deliveries' source: the page's background. */
 @Composable
 private fun TabPlaceholder(tab: PeekTab) {
     Box(Modifier.fillMaxSize().background(PeekTheme.colors.background).testTag(tab.screen))

@@ -13,6 +13,8 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
+import com.plhery.peekdeliverytracker.core.FriendsActivityStore
+import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
@@ -272,6 +274,15 @@ interface DeliveriesSource {
 
     /** `store.signOut()`. */
     suspend fun signOut()
+
+    /**
+     * FriendsView's `FriendsStore()`, for as long as this process lasts, as the tab's `@StateObject` outlives a change of
+     * tab: the circle, what its panels ask and what went wrong, the account's or the demo's.
+     */
+    val friends: FriendsStore
+
+    /** The app's `FriendsActivityStore()`: the friends who accepted an invitation, and the friend to reveal. */
+    val friendsActivity: FriendsActivityStore
 }
 
 /** The deliveries from the app's container. */
@@ -417,6 +428,10 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val notificationStatus get() = container.parcels.notificationStatusFlow
 
     override val notificationsEnabledOnDevice get() = container.parcels.notificationsEnabledOnDeviceFlow
+
+    override val friends: FriendsStore get() = container.friends
+
+    override val friendsActivity: FriendsActivityStore get() = container.friendsActivity
 
     override val notificationError get() = container.parcels.notificationErrorFlow
 

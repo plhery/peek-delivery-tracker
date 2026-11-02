@@ -13,6 +13,8 @@ import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
+import com.plhery.peekdeliverytracker.core.FriendsActivityStore
+import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
@@ -35,6 +37,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.ui.friends.FakeFriendsClient
 import java.io.File
 import java.time.Instant
 import java.time.ZoneOffset
@@ -504,6 +507,11 @@ class FakeDeliveries(
     }
 
     override val version = "1.0"
+
+    /** The account's friends, which the friends' stores ask ([FakeFriendsClient]). */
+    val friendsClient = FakeFriendsClient()
+    override val friends by lazy { FriendsStore(friendsClient) }
+    override val friendsActivity by lazy { FriendsActivityStore(friendsClient, signedIn = { this.session.value is AuthenticationState.SignedIn }) }
 
     override val notificationStatus = MutableStateFlow(NotificationAuthorizationStatus.NotDetermined)
     override val notificationsEnabledOnDevice = MutableStateFlow(false)

@@ -1,6 +1,14 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextOverflow
+import com.plhery.peekdeliverytracker.ui.draw.DieCutStampShape
+import java.text.BreakIterator
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -84,7 +92,8 @@ import kotlin.math.sin
  * `grounded`, it stands on a soft shadow, an ellipse 180 × 20 at (151, 286) in black at 8 %, blurred 9; off, as the
  * share sheet's sticker is cut to its box, it has none. `pressed` is how far a press has gone, 0 to 1, as SwiftUI's
  * animation carries `pressed` from one look to the other: the box squashes to 0.956 toward the ground and sinks 5, and
- * its shadow widens to 188, flattens to 13 and darkens to 14 %.
+ * its shadow widens to 188, flattens to 13 and darkens to 14 %. A friend's invitation names its `sender` on the card
+ * (`senderName`).
  */
 @Composable
 internal fun UnwrappingParcel(
@@ -94,6 +103,7 @@ internal fun UnwrappingParcel(
     celebrating: Boolean = false,
     pressed: Float = 0f,
     grounded: Boolean = true,
+    sender: String? = null,
 ) {
     val frame = Modifier.size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)
     val palette = PipPalette.kraft
@@ -143,7 +153,7 @@ internal fun UnwrappingParcel(
                         .dropShadow(OvalShape, swiftUiShadow(Color(0xFFFFE8AE).copy(alpha = glow.toFloat()), radius = 10.dp)),
                 )
             }
-            if (card > 0) DeliveryCard(ribbon, card, check = phase(0.48, 0.3))
+            if (card > 0) DeliveryCard(ribbon, card, check = phase(0.48, 0.3), sender)
             UnwrappingSides(frame)
             if (label != null) PipCanvas(frame) { PipArtwork.label(it, label) }
             if (label == null) ParcelSideMarks()
@@ -303,10 +313,12 @@ private fun framePath(points: List<Point>) = Path().apply {
  * 60 %: centred at (152, 174) of Pip's frame and turned -11° as it sets off, at (152, 105) and -5° once risen, coming in
  * over its first third. 14 in: a gift's symbol in lilac on its pale circle over two grey lines, centred at its top, for a
  * gift; else a green check in its pale circle, drawn `check` of the way, over two lines, lined up at their leading side,
- * the three in the card's middle.
+ * the three in the card's middle. From a friend ([sender]), on lilac in place of cream, lined up at their leading side
+ * in plum: the sender's initial in medium 13 on a die-cut stamp 21 × 26 at the trailing side, "friends.from" in 8, the
+ * name in semibold 17 on one line, made as small as 45 % to fit, and a hairline 29 wide under it, 8 apart.
  */
 @Composable
-private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double) {
+private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double, sender: String? = null) {
     val shape = RoundedCornerShape(7.dp)
     Box(
         Modifier
@@ -316,7 +328,7 @@ private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double) {
                 rotationZ = (-11 + rise * 6).toFloat()
                 alpha = min(1.0, rise * 3).toFloat()
             }
-            .background(Color(0xFFFCFAF4), shape)
+            .background(if (sender == null) Color(0xFFFCFAF4) else Color(0xFFE7DCF4), shape)
             .drawWithContent {
                 drawContent()
                 // On the card's edge, half of it outside, as SwiftUI strokes a shape.
@@ -325,7 +337,9 @@ private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double) {
             .padding(14.dp),
         contentAlignment = Alignment.Center,
     ) {
-        if (ribbon) {
+        if (sender != null) {
+            SenderCard(sender)
+        } else if (ribbon) {
             Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.spacedBy(9.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                 Box(Modifier.size(24.dp).background(Color(0xFFEFE3F1), CircleShape), contentAlignment = Alignment.Center) {
                     PeekSymbol("gift", font = PeekTheme.type.fixed(12f, FontWeight.Medium), tint = Color(0xFF7C6787))
@@ -354,6 +368,45 @@ private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double) {
             }
         }
     }
+}
+
+/** The card's words from a friend ([DeliveryCard]), in plum, `.minimumScaleFactor(0.45)` on the name. */
+@Composable
+private fun SenderCard(sender: String) {
+    val plum = Color(0xFF69517F)
+    val initial = sender.firstCharacter()
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
+            Box(Modifier.size(21.dp, 26.dp).background(Color(0xFFD1BEDF), DieCutStampShape()), contentAlignment = Alignment.Center) {
+                Text(initial, color = plum, style = PeekTheme.type.fixed(13f, FontWeight.Medium), maxLines = 1)
+            }
+        }
+        Text(localized("friends.from"), color = plum, style = PeekTheme.type.fixed(8f), maxLines = 1)
+        ShrinkingLine(sender, PeekTheme.type.fixed(17f, FontWeight.SemiBold).copy(color = plum), MIN_SENDER_SCALE)
+        Box(Modifier.size(29.dp, 1.dp).background(Color(0xFFB39BC7), CircleShape))
+    }
+}
+
+/** One line of [text] in [style], made smaller down to [minimum] of its size where the room is too little for it. */
+@Composable
+private fun ShrinkingLine(text: String, style: TextStyle, minimum: Float) {
+    val measurer = rememberTextMeasurer()
+    BoxWithConstraints(Modifier.fillMaxWidth()) {
+        val room = constraints.maxWidth
+        val width = remember(text, style, room) { measurer.measure(text, style, maxLines = 1, softWrap = false).size.width }
+        val scale = if (width <= room || width == 0) 1f else max(minimum, room.toFloat() / width)
+        Text(text, style = style.copy(fontSize = style.fontSize * scale), maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis)
+    }
+}
+
+private const val MIN_SENDER_SCALE = 0.45f
+
+/** `String(name.prefix(1))`: the first character as the reader sees it, an emoji whole; nothing for no name. */
+internal fun String.firstCharacter(): String {
+    if (isEmpty()) return ""
+    val characters = BreakIterator.getCharacterInstance()
+    characters.setText(this)
+    return substring(0, characters.next())
 }
 
 /**

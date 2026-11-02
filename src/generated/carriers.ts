@@ -3762,6 +3762,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "topyou",
+      "catalog": "topyou",
+      "slug": "topyou-otslezhivanie-posylki",
+      "title": "Отслеживание посылки TopYou: трек-номер TYZR и статусы",
+      "name": "TopYou",
+      "color": "#045cd7"
+    },
+    {
       "id": "russian-post",
       "catalog": "russian-post",
       "slug": "pochta-rossii-otslezhivanie",

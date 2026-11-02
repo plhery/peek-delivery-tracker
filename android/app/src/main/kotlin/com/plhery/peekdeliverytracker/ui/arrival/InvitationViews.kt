@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.arrival
 
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,12 +29,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -99,7 +102,9 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
+import java.util.UUID
 import kotlin.math.max
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /**
@@ -338,51 +343,48 @@ private fun Modifier.drawBehindDashed(color: androidx.compose.ui.graphics.Color,
 )
 
 /**
- * `FriendInvitationAcceptanceView` (C-S13), for the account signed in: in a scroll, 18 apart, 24 in, 520 wide at most,
- * the back (‹, 44 across, read as `welcome.back`, off while joining) and the language menu; once accepted, the
- * parcel's anchor (180 × 186, [onAnchor]) over "friends.friendshipDelivered"; where the invitation can't be accepted,
- * why (already accepted, already friends, your own) as a heading with Close; otherwise the sender's postcard. What went
- * wrong (secondary footnote) with Retry (but where the link leads nowhere), which asks who sent it and checks it again;
- * with a profile, the reader's sharing ("friends.yourSharing", Edit sharing, their card, the privacy line); then Accept
- * (or "friends.enableToAccept" without a profile, which opens the profile's sheet), its spinner while joining, or a
- * spinner while it is checked.
- *
- * Its own `FriendsStore()` ([FriendsStore], the account's) loads the circle and checks the invitation while the app is
- * in front, and forgets them as it leaves. Accepting saves the profile first where the sheet gave one; the answer,
- * heard even once stale, closes the sheet and either says why it can't be accepted or is the receipt
- * ([FriendInvitationStore.receive]). The sheet ([ProfileSheet]) is a page sheet, a form where the passport's rule says
- * ([asForm]). The system's back does what ‹ does, but while joining.
+ * What `FriendInvitationAcceptanceView` keeps in its `@StateObject` and `@State`: its own [FriendsStore] (the
+ * account's), whether the profile's sheet is open ([creatingProfile]) and for an edit ([editingProfile]), whether it
+ * joins or checks, and how the invitation stands. Its requests run in the app's scope ([launch]), as the iPhone's
+ * unstructured `Task`s outlive the view, and land here: the acceptance drawn again as the window is made again (a
+ * rotation, a fold) finds this very holder ([rememberAcceptance]) and hears how they went.
  */
-@Composable
-internal fun FriendInvitationAcceptance(
-    source: DeliveriesSource,
-    scroll: ScrollState,
-    menus: SheetMenus,
-    active: Boolean,
-    asForm: Boolean,
-    onBack: () -> Unit,
-    onAnchor: (LayoutCoordinates) -> Unit,
+@Stable
+internal class InvitationAcceptance(
+    val source: DeliveriesSource,
+    val id: String = UUID.randomUUID().toString(),
+    creatingProfile: Boolean = false,
+    editingProfile: Boolean = false,
 ) {
-    val colors = PeekTheme.colors
-    val type = PeekTheme.type
-    val invitation = source.invitation
-    val model = remember { FriendsStore(source.friendsClient) }
-    val snapshot by model.snapshotFlow.collectAsState()
-    val modelError by model.errorKeyFlow.collectAsState()
-    val nickname by invitation.nicknameFlow.collectAsState()
-    val invitationError by invitation.errorKeyFlow.collectAsState()
-    val receipt by invitation.receiptFlow.collectAsState()
-    val parcels by source.parcels.collectAsState()
-    var creatingProfile by rememberSaveable { mutableStateOf(false) }
-    var editingProfile by rememberSaveable { mutableStateOf(false) }
-    var joining by remember { mutableStateOf(false) }
-    var checking by remember { mutableStateOf(true) }
-    var invitationState by remember { mutableStateOf<FriendsActionResponseInvitationState?>(null) }
-    val scope = rememberCoroutineScope()
-    val outcome = when (invitationState) {
-        FriendsActionResponseInvitationState.AlreadyAccepted -> "friends.inviteAlreadyAccepted"
-        FriendsActionResponseInvitationState.AlreadyFriends -> "friends.alreadyFriends"
-        null -> if (modelError == "friends.selfInvitation") "friends.selfInvitation" else null
+    val model = FriendsStore(source.friendsClient)
+    var creatingProfile by mutableStateOf(creatingProfile)
+    var editingProfile by mutableStateOf(editingProfile)
+    var joining by mutableStateOf(false)
+    var checking by mutableStateOf(true)
+    var invitationState by mutableStateOf<FriendsActionResponseInvitationState?>(null)
+    private val invitation: FriendInvitationStore get() = source.invitation
+
+    /** The check of this time in front ([check]); none before it, or once the app has left the front. */
+    private var currentCheck: Job? = null
+
+    /** `Task { … }`: [work] in the app's scope, which the window being made again doesn't call off. */
+    fun launch(work: suspend InvitationAcceptance.() -> Unit) {
+        source.scope.launch { work() }
+    }
+
+    /**
+     * `.task(id: scenePhase)` in front: the check, once each time the app comes to the front, in the app's scope; the
+     * window made again finds it under way or done.
+     */
+    fun check() {
+        if (currentCheck == null) currentCheck = source.scope.launch { checkInvitation() }
+    }
+
+    /** Out of the front, or gone (`model.clear()`): the check called off and the circle forgotten. */
+    fun leave() {
+        currentCheck?.cancel()
+        currentCheck = null
+        model.clear()
     }
 
     /** `checkInvitation()`: the circle, then whether this invitation can still be accepted. */
@@ -438,19 +440,98 @@ internal fun FriendInvitationAcceptance(
             joining = false
         }
     }
+}
 
-    // `.task(id: scenePhase)` and `.onDisappear`: the account's circle while the app is in front, forgotten as it leaves.
+/**
+ * The acceptance's [InvitationAcceptance] for as long as it shows: the same one through the window being made again,
+ * as the iPhone's `@StateObject` lasts through a rotation, and forgotten, its circle with it, once the acceptance goes
+ * (`.onDisappear`). After the process died it comes back afresh, its sheet as it was.
+ */
+@Composable
+private fun rememberAcceptance(source: DeliveriesSource): InvitationAcceptance {
+    val window = LocalActivity.current
+    val acceptance = rememberSaveable(
+        saver = listSaver<InvitationAcceptance, Any>(
+            save = { listOf(it.id, it.creatingProfile, it.editingProfile) },
+            restore = { saved ->
+                val id = saved[0] as String
+                KEPT_ACCEPTANCES[id]?.takeIf { it.source === source } ?: InvitationAcceptance(source, id, saved[1] as Boolean, saved[2] as Boolean)
+            },
+        ),
+    ) { InvitationAcceptance(source) }
+    DisposableEffect(acceptance) {
+        KEPT_ACCEPTANCES[acceptance.id] = acceptance
+        onDispose {
+            if (window?.isChangingConfigurations != true) {
+                KEPT_ACCEPTANCES -= acceptance.id
+                acceptance.leave()
+            }
+        }
+    }
+    return acceptance
+}
+
+/** The acceptances showing, by id, which the window made again takes up as they were. On the main thread. */
+private val KEPT_ACCEPTANCES = HashMap<String, InvitationAcceptance>()
+
+/**
+ * `FriendInvitationAcceptanceView` (C-S13), for the account signed in: in a scroll of its own, 18 apart, 24 in, 520
+ * wide at most, the back (‹, 44 across, read as `welcome.back`, off while joining) and the language menu; once
+ * accepted, the parcel's anchor (180 × 186, [onAnchor]) over "friends.friendshipDelivered"; where the invitation can't
+ * be accepted, why (already accepted, already friends, your own) as a heading with Close; otherwise the sender's
+ * postcard. What went wrong (secondary footnote) with Retry (but where the link leads nowhere), which asks who sent it
+ * and checks it again; with a profile, the reader's sharing ("friends.yourSharing", Edit sharing, their card, the
+ * privacy line); then Accept (or "friends.enableToAccept" without a profile, which opens the profile's sheet), its
+ * spinner while joining, or a spinner while it is checked.
+ *
+ * Its own `FriendsStore()` ([InvitationAcceptance], the account's) loads the circle and checks the invitation while the
+ * app is in front, and forgets them as it leaves. Accepting saves the profile first where the sheet gave one; the
+ * answer, heard even once stale, closes the sheet and either says why it can't be accepted or is the receipt
+ * ([FriendInvitationStore.receive]). Accept, the sheet's save and Retry go on through a rotation. The sheet
+ * ([ProfileSheet]) is a page sheet, a form where the passport's rule says ([asForm]). The system's back does what ‹
+ * does, but while joining.
+ */
+@Composable
+internal fun FriendInvitationAcceptance(
+    source: DeliveriesSource,
+    scroll: ScrollState,
+    menus: SheetMenus,
+    active: Boolean,
+    asForm: Boolean,
+    onBack: () -> Unit,
+    onAnchor: (LayoutCoordinates) -> Unit,
+) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val invitation = source.invitation
+    val acceptance = rememberAcceptance(source)
+    val model = acceptance.model
+    val window = LocalActivity.current
+    val snapshot by model.snapshotFlow.collectAsState()
+    val modelError by model.errorKeyFlow.collectAsState()
+    val nickname by invitation.nicknameFlow.collectAsState()
+    val invitationError by invitation.errorKeyFlow.collectAsState()
+    val receipt by invitation.receiptFlow.collectAsState()
+    val parcels by source.parcels.collectAsState()
+    val joining = acceptance.joining
+    val outcome = when (acceptance.invitationState) {
+        FriendsActionResponseInvitationState.AlreadyAccepted -> "friends.inviteAlreadyAccepted"
+        FriendsActionResponseInvitationState.AlreadyFriends -> "friends.alreadyFriends"
+        null -> if (modelError == "friends.selfInvitation") "friends.selfInvitation" else null
+    }
+
+    // `.task(id: scenePhase)`: the account's circle while the app is in front, forgotten as it leaves, but not as the
+    // window is made again, which the iPhone's view lives on through.
     LaunchedEffect(active) {
         if (!active) {
-            model.clear()
+            if (window?.isChangingConfigurations != true) acceptance.leave()
             return@LaunchedEffect
         }
         model.configure(demo = false)
-        checkInvitation()
+        acceptance.check()
     }
-    androidx.compose.runtime.DisposableEffect(model) { onDispose { model.clear() } }
     // The back is off while joining: the system's back then does nothing rather than leave the app.
-    BackHandler { if (!joining) onBack() }
+    BackHandler { if (!acceptance.joining) onBack() }
 
     val safe = WindowInsets.systemBars.union(WindowInsets.displayCutout)
     Box(Modifier.fillMaxSize().windowInsetsPadding(safe).testTag(INVITATION_ACCEPTANCE)) {
@@ -491,11 +572,11 @@ internal fun FriendInvitationAcceptance(
                 nickname?.let { FriendPostcard(it, arrivedThisWeek = null) }
             }
             val error = invitationError ?: modelError
-            if (error != null && !creatingProfile && outcome == null && receipt == null) {
-                Text(localized(error), Modifier.testTag(INVITATION_ERROR), color = colors.secondaryLabel, style = type.footnote.sfLines())
+            if (error != null && !acceptance.creatingProfile && outcome == null && receipt == null) {
+                LeadingFootnote(localized(error), Modifier.testTag(INVITATION_ERROR))
                 if (error != UNAVAILABLE) {
                     PlainTextButton(localized("common.retry"), INVITATION_RETRY) {
-                        scope.launch {
+                        acceptance.launch {
                             invitation.loadPreview(signedIn = true)
                             checkInvitation()
                         }
@@ -509,8 +590,8 @@ internal fun FriendInvitationAcceptance(
                         Text(localized("friends.yourSharing"), color = colors.label, style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).sfLines())
                         Spacer(Modifier.weight(1f))
                         PlainTextButton(localized("friends.editSharing"), INVITATION_EDIT_SHARING, enabled = !joining, style = type.caption) {
-                            editingProfile = true
-                            creatingProfile = true
+                            acceptance.editingProfile = true
+                            acceptance.creatingProfile = true
                             model.errorKey = null
                         }
                     }
@@ -520,17 +601,17 @@ internal fun FriendInvitationAcceptance(
             }
             if (outcome != null) {
                 ProminentButton(localized("common.close"), tag = INVITATION_OUTCOME_CLOSE) { invitation.dismiss() }
-            } else if (!checking && receipt == null && nickname != null && snapshot != null) {
+            } else if (!acceptance.checking && receipt == null && nickname != null && snapshot != null) {
                 ProminentButton(
                     localized(if (profile == null) "friends.enableToAccept" else "friends.accept"),
                     enabled = !joining && modelError != UNAVAILABLE, tag = INVITATION_ACCEPT, working = joining,
                 ) {
                     if (model.snapshot?.profile == null) {
                         model.errorKey = null
-                        editingProfile = false
-                        creatingProfile = true
+                        acceptance.editingProfile = false
+                        acceptance.creatingProfile = true
                     } else {
-                        scope.launch { accept() }
+                        acceptance.launch { accept() }
                     }
                 }
             } else if (receipt == null && invitationError == null && modelError == null) {
@@ -539,17 +620,17 @@ internal fun FriendInvitationAcceptance(
         }
     }
     ProfileSheet(
-        visible = creatingProfile,
-        editing = editingProfile,
+        visible = acceptance.creatingProfile,
+        editing = acceptance.editingProfile,
         source = source,
         model = model,
         joining = joining,
         asForm = asForm,
         close = {
-            creatingProfile = false
+            acceptance.creatingProfile = false
             model.errorKey = null
         },
-        save = { profile -> scope.launch { if (editingProfile) saveSharing(profile) else accept(profile) } },
+        save = { profile -> acceptance.launch { if (editingProfile) saveSharing(profile) else accept(profile) } },
     )
 }
 

@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -57,6 +58,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.currentStateAsState
+import com.plhery.peekdeliverytracker.core.ArrivalTilt
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.SessionStore
@@ -111,10 +113,11 @@ internal enum class ArrivalScreen { Welcome, SignIn }
  * Without an invitation the root shows the arrival only for the sign-in: the welcome is the tabs' first open, and the
  * arrival is on it only while the root fades it out after the sign-in's back ([goBack], a SwiftUI transaction through
  * [transaction]). Then the sign-in has gone at once, and the parcel springs toward where WelcomeView would put its
- * anchor ([rememberWelcomeAnchor]), shutting, as it fades with the arrival. The welcome itself, its greeting, tilt,
- * press and unwrap, and the invitations come with WelcomeView. The sign-in fades in where it replaces the welcome in an
- * arrival already showing (`.opacity.animation(.easeOut(duration: 0.35).delay(0.25))`, 0.15 s without the delay under
- * Reduce Motion), not when the arrival itself comes in. Its sends and checks run in [work], which outlives it.
+ * anchor ([rememberWelcomeAnchor]), shutting, as it fades with the arrival, tilting with the device meanwhile
+ * ([rememberArrivalTilt]). The welcome itself, its greeting, press and unwrap, and the invitations come with
+ * WelcomeView. The sign-in fades in where it replaces the welcome in an arrival already showing
+ * (`.opacity.animation(.easeOut(duration: 0.35).delay(0.25))`, 0.15 s without the delay under Reduce Motion), not when
+ * the arrival itself comes in. Its sends and checks run in [work], which outlives it.
  *
  * Everything the arrival draws is the backdrop of the language menu's glass, as the iPhone's menu shows the parcel and
  * the card through it.
@@ -128,6 +131,9 @@ internal fun ArrivalView(state: AuthenticationState, session: SessionStore, tran
     val menus = remember { SheetMenus() }
     val backdrop = rememberMaterialBackdrop()
     val firstScreen = remember { screen }
+    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.STARTED)
+    // `greetingActive`: the welcome, which shows here only as the arrival fades out after the sign-in's back.
+    val tilt = rememberArrivalTilt(screen == ArrivalScreen.Welcome && !reduceMotion && active, opening = false)
     // `goBack`: the welcome, the arrival fading out with the root's switch.
     val goBack = {
         transaction.withAnimation(Motion.easeInOut(if (reduceMotion) 0.15 else 0.45)) {
@@ -157,7 +163,7 @@ internal fun ArrivalView(state: AuthenticationState, session: SessionStore, tran
                     }
                 }
             }
-            ArrivalParcel(screen, frames, { if (it == ArrivalScreen.Welcome) welcome else frames.anchor(it, scroll.value) })
+            ArrivalParcel(screen, frames, { if (it == ArrivalScreen.Welcome) welcome else frames.anchor(it) }, tilt = tilt)
         }
         CompositionLocalProvider(LocalMaterialBackdrop provides backdrop) { menus.content?.invoke() }
     }
@@ -199,7 +205,8 @@ private class PageChange(val from: InvitationPage?, val to: InvitationPage, val 
  * or 30 ms and `.easeOut(duration: 0.12)` under Reduce Motion) with a soft tap 210 ms (80) after, and 450 ms (180)
  * later the friend is revealed with the circle the acceptance answered while in front (`finishReceipt()`) and the
  * invitation finishes, which brings the friends tab forward; out of the front it finishes at once. The profile sheet
- * comes over the window ([TabOverlay]), a form where the passport's rule says. Device-motion tilt isn't drawn.
+ * comes over the window ([TabOverlay]), a form where the passport's rule says. While it greets, the parcel tilts with
+ * the device ([rememberArrivalTilt]), and comes level as it opens.
  */
 @Composable
 internal fun InvitationArrival(source: DeliveriesSource, state: AuthenticationState, session: SessionStore, work: CoroutineScope) {
@@ -261,7 +268,7 @@ internal fun InvitationArrival(source: DeliveriesSource, state: AuthenticationSt
     }
 
     fun retry() {
-        scope.launch { invitation.loadPreview(signedIn = stateNow is AuthenticationState.SignedIn) }
+        source.scope.launch { invitation.loadPreview(signedIn = stateNow is AuthenticationState.SignedIn) }
     }
 
     LaunchedEffect(active) {
@@ -273,7 +280,9 @@ internal fun InvitationArrival(source: DeliveriesSource, state: AuthenticationSt
         pending[0] = switch
         invitation.opened = true
     }
-    LaunchedEffect(receipt != null, active) {
+    // `.task(id: invitation.receipt != nil && scenePhase == .active)`: a receipt that comes while the app is away waits
+    // for it to come back; one whose stamp the app leaves finishes at once.
+    LaunchedEffect(receipt != null && active) {
         if (invitation.receipt == null) return@LaunchedEffect
         if (!active) return@LaunchedEffect finishReceipt()
         delay(if (reduceMotion) 30L else 250L)
@@ -285,6 +294,7 @@ internal fun InvitationArrival(source: DeliveriesSource, state: AuthenticationSt
         finishReceipt()
     }
     val greetingActive = screen == ArrivalScreen.Welcome && !opening && !reduceMotion && active
+    val tilt = rememberArrivalTilt(greetingActive, opening)
     LaunchedEffect(greetingActive) {
         if (!greetingActive) return@LaunchedEffect
         delay(250)
@@ -382,10 +392,14 @@ internal fun InvitationArrival(source: DeliveriesSource, state: AuthenticationSt
                                         onAnchor = { frames.place(ArrivalScreen.SignIn, it, signInScroll) },
                                         invitation = SignInInvitation(nickname, errorKey, retry = ::retry),
                                     )
-                                    InvitationPage.Acceptance -> FriendInvitationAcceptance(
-                                        source, signInScroll, menus, active, asForm, onBack = ::goBack,
-                                        onAnchor = { frames.place(ArrivalScreen.SignIn, it, signInScroll) },
-                                    )
+                                    InvitationPage.Acceptance -> {
+                                        // Its own ScrollView: it opens at its top, however far the sign-in went.
+                                        val acceptanceScroll = rememberScrollState()
+                                        FriendInvitationAcceptance(
+                                            source, acceptanceScroll, menus, active, asForm, onBack = ::goBack,
+                                            onAnchor = { frames.place(ArrivalScreen.SignIn, it, acceptanceScroll) },
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -393,8 +407,8 @@ internal fun InvitationArrival(source: DeliveriesSource, state: AuthenticationSt
                 }
             }
             ArrivalParcel(
-                screen, frames, { frames.anchor(it, if (it == ArrivalScreen.Welcome) welcomeScroll.value else signInScroll.value) },
-                opening = opening, pressed = press, celebrating = opening, pose = if (reduceMotion) PeekKeyframes.Greeting() else pose,
+                screen, frames, frames::anchor, opening = opening, pressed = press, celebrating = opening,
+                pose = if (reduceMotion) PeekKeyframes.Greeting() else pose, tilt = tilt,
                 sender = nickname,
                 stamp = if (receipt == null) null else { { ReceiptStampLanding({ landing.value }, reduceMotion) } },
             )
@@ -429,22 +443,24 @@ private fun BoxScope.ReceiptStampLanding(landing: () -> Float, reduceMotion: Boo
 
 /**
  * Where the parcel stands: the arrival's own coordinates, each screen's anchor as it stands with its page scrolled to
- * its top (so that a scroll moves it without a pass of layout), and where it was last drawn.
+ * its top (so that a scroll moves it without a pass of layout) and the scroll of the page that put it there, and where
+ * it was last drawn.
  */
 @Stable
 private class ArrivalParcelFrames {
     var arrival: LayoutCoordinates? = null
-    var signIn: Rect? by mutableStateOf(null)
-    var welcome: Rect? by mutableStateOf(null)
+    private var signIn: PlacedAnchor? by mutableStateOf(null)
+    private var welcome: PlacedAnchor? by mutableStateOf(null)
 
     /** Where the parcel was drawn last, which it springs from as the screen changes; null where it wasn't drawn. */
     var placed: Rect? = null
 
-    /** [screen]'s page put its anchor at [anchor], scrolled [scroll] down (`anchorPreference`). */
+    /** [screen]'s page put its anchor at [anchor], in its scroll [scroll] (`anchorPreference`). */
     fun place(screen: ArrivalScreen, anchor: LayoutCoordinates, scroll: ScrollState) {
         val arrival = arrival?.takeIf { it.isAttached && anchor.isAttached } ?: return
         val rect = arrival.localBoundingBoxOf(anchor, clipBounds = false).translate(Offset(0f, scroll.value.toFloat()))
-        if (screen == ArrivalScreen.SignIn) signIn = rect else welcome = rect
+        val placed = PlacedAnchor(rect, scroll)
+        if (screen == ArrivalScreen.SignIn) signIn = placed else welcome = placed
     }
 
     /** [screen]'s page has gone, and its anchor with it. */
@@ -452,10 +468,13 @@ private class ArrivalParcelFrames {
         if (screen == ArrivalScreen.SignIn) signIn = null else welcome = null
     }
 
-    /** The anchor of [screen] with its page scrolled [scroll] down. */
-    fun anchor(screen: ArrivalScreen, scroll: Int): Rect? =
-        (if (screen == ArrivalScreen.SignIn) signIn else welcome)?.translate(Offset(0f, -scroll.toFloat()))
+    /** The anchor of [screen] where its page's scroll now has it. */
+    fun anchor(screen: ArrivalScreen): Rect? =
+        (if (screen == ArrivalScreen.SignIn) signIn else welcome)?.let { it.top.translate(Offset(0f, -it.scroll.value.toFloat())) }
 }
+
+/** An anchor as it stands with its page scrolled to its [top], in the page's [scroll]. */
+private class PlacedAnchor(val top: Rect, val scroll: ScrollState)
 
 /** A spring of the parcel [from] where it stood toward the anchor of the screen shown; none from nowhere. */
 private class ParcelMove(val from: Rect?) {
@@ -473,8 +492,9 @@ private class ParcelMove(val from: Rect?) {
  *
  * With an invitation it opens on the welcome too as the parcel is unwrapped ([opening], `.easeInOut(duration: 0.95)`,
  * at once under Reduce Motion), and carries the welcome's press ([pressed]), its greeting ([pose]), its sender and the
- * receipt's [stamp] over it. Where the screen shown leaves no anchor (the acceptance before its receipt) it isn't drawn,
- * and comes in where the anchor next stands without a spring.
+ * receipt's [stamp] over it. It leans with the device's [tilt] (`currentTilt`), level unless the welcome greets. Where
+ * the screen shown leaves no anchor (the acceptance before its receipt) it isn't drawn, and comes in where the anchor
+ * next stands without a spring.
  */
 @Composable
 private fun ArrivalParcel(
@@ -487,8 +507,10 @@ private fun ArrivalParcel(
     pose: PeekKeyframes.Greeting = PeekKeyframes.Greeting(),
     sender: String? = null,
     stamp: (@Composable BoxScope.() -> Unit)? = null,
+    tilt: ArrivalTilt = ArrivalTilt(),
 ) {
     val reduceMotion = PeekTheme.reduceMotion
+    LocalArrivalParcelTilt.current?.let { SideEffect { it(tilt) } }
     // The spring starts in the frame the screen changes in, from where the parcel was last drawn: made as the new
     // screen is composed, so that frame draws it where it was rather than at the new anchor.
     val shown = remember { arrayOf(screen) }
@@ -550,7 +572,7 @@ private fun ArrivalParcel(
         Box(Modifier.testTag(ARRIVAL_PARCEL).clearAndSetSemantics {}) {
             UnwrappingParcel(
                 open = open.value.coerceIn(0f, 1f).toDouble(), label = null, ribbon = false, celebrating = celebrating, pressed = pressed,
-                sender = sender, lift = pose.lift.toFloat(), sway = pose.angle.toFloat(),
+                sender = sender, lift = pose.lift.toFloat(), sway = pose.angle.toFloat(), tilt = tilt,
             )
             stamp?.invoke(this)
         }
@@ -562,6 +584,9 @@ private fun ArrivalParcel(
  * follow its move.
  */
 internal val LocalArrivalParcel = staticCompositionLocalOf<((Rect, Float) -> Unit)?> { null }
+
+/** Told the tilt the parcel is drawn at each time it is composed: the tests follow it. */
+internal val LocalArrivalParcelTilt = staticCompositionLocalOf<((ArrivalTilt) -> Unit)?> { null }
 
 internal const val ARRIVAL_PARCEL = "arrivalParcel"
 

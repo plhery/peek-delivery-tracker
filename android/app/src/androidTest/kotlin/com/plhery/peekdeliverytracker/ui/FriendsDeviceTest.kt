@@ -8,15 +8,20 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.captureToImage
+import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.AuthUser
@@ -105,13 +110,15 @@ class FriendsDeviceTest {
         }
     }
 
+    private lateinit var source: FakeDeliveries
+
     /**
      * The friends tab of [session], its friends as [friends] sets them, edge to edge as the app's window; the deliveries
      * unless [choose].
      */
     private fun show(session: AuthenticationState = AuthenticationState.Demo, choose: Boolean = true, friends: FakeFriendsClient.() -> Unit = {}) {
         store.set(AppAppearance.Light)
-        val source = FakeDeliveries(DemoCards.parcels(), session)
+        source = FakeDeliveries(DemoCards.parcels(), session)
         source.friendsClient.friends()
         compose.waitsForMaps()
         compose.setContent {
@@ -130,6 +137,20 @@ class FriendsDeviceTest {
     }
 
     private fun exists(tag: String) = compose.onAllNodes(hasTestTag(tag), useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+
+    /**
+     * Whether the card of [friend] is drawn: just inside its top edge the window shows its fill, not the page beside
+     * it, which shows through the card while it waits to land at alpha 0.
+     */
+    private fun drawn(friend: UUID): Boolean {
+        val card = compose.onNodeWithTag(friendCardTag(friend), useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val window = compose.onRoot().captureToImage().asAndroidBitmap()
+        val scale = compose.density.density
+        val y = ((card.top + 4.dp).value * scale).toInt()
+        val inside = window.getPixel(((card.left + card.right).value / 2 * scale).toInt(), y)
+        val beside = window.getPixel(((card.left - 6.dp).value * scale).toInt(), y)
+        return inside != beside
+    }
 
     /** Whether the part tagged [tag], or something in it, says [text]. */
     private fun says(tag: String, text: String) =
@@ -236,7 +257,10 @@ class FriendsDeviceTest {
         press(FRIENDS_NOTICE_OPEN)
         compose.waitUntil(5_000) { !exists(FRIENDS_NOTICE) && exists(PeekTab.Friends.screen) }
         compose.waitUntil(5_000) { exists(friendCardTag(FriendFixtures.bo.id)) }
+        // Revealed, Bo lands once the circle has scrolled to them, and the focus is let go as the landing goes on.
+        compose.waitUntil(5_000) { source.friendsActivity.focusId == null }
         compose.waitForIdle()
+        assertTrue("Bo's card drawn", drawn(FriendFixtures.bo.id))
         shot()
     }
 

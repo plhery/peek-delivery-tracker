@@ -49,12 +49,14 @@ import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.currentStateAsState
 import com.plhery.peekdeliverytracker.core.AdaptiveColor
+import com.plhery.peekdeliverytracker.core.ArrivalTilt
 import com.plhery.peekdeliverytracker.core.MapDrawingContext
 import com.plhery.peekdeliverytracker.core.MapPath
 import com.plhery.peekdeliverytracker.core.PipArtwork
@@ -94,7 +96,12 @@ import kotlin.math.sin
  * animation carries `pressed` from one look to the other: the box squashes to 0.956 toward the ground and sinks 5, and
  * its shadow widens to 188, flattens to 13 and darkens to 14 %. A friend's invitation names its `sender` on the card
  * (`senderName`). The welcome's greeting `lift`s the closed box (negative is up) and `sway`s it by degrees about its
- * middle, less as it opens; its shadow narrows by 3 and lightens by 0.4 % a point of lift.
+ * middle, less as it opens; its shadow narrows by 3 and lightens by 0.4 % a point of lift. The welcome's `tilt` (level
+ * by default, ±1 at most) leans the box with the device: turned 6° a unit about its horizontal axis (its top coming
+ * forward as `tilt.y` grows) and 7° about its vertical one (its right side going back as `tilt.x` grows), each with
+ * SwiftUI's perspective of 0.35, moved 11 right and 6 down a unit, its card 2 right, its shadow 7 left and 3 up; the
+ * light on its left side (from 2.5 % to 11.5 %) and on its edges (22 % to 58 %) grows with `tilt.x`, and the ring of
+ * its seal (20 % to 76 %) with `tilt.y`.
  */
 @Composable
 internal fun UnwrappingParcel(
@@ -107,8 +114,11 @@ internal fun UnwrappingParcel(
     sender: String? = null,
     lift: Float = 0f,
     sway: Float = 0f,
+    tilt: ArrivalTilt = ArrivalTilt(),
 ) {
     val frame = Modifier.size(FRAME_WIDTH.dp, FRAME_HEIGHT.dp)
+    val tiltX = tilt.x.toFloat()
+    val tiltY = tilt.y.toFloat()
     val palette = PipPalette.kraft
     val reduceMotion = PeekTheme.reduceMotion
     fun phase(start: Double, duration: Double) = min(1.0, max(0.0, (open - start) / duration))
@@ -126,7 +136,7 @@ internal fun UnwrappingParcel(
             val shadowHeight = 20f - 7f * pressed
             Box(
                 Modifier
-                    .offset((151f - shadowWidth / 2).dp, (286f - shadowHeight / 2).dp)
+                    .offset((151f - tiltX * 7 - shadowWidth / 2).dp, (286f - tiltY * 3 - shadowHeight / 2).dp)
                     .size(shadowWidth.dp, shadowHeight.dp)
                     .dropShadow(OvalShape, swiftUiShadow(Color.Black.copy(alpha = (0.08f + lift * 0.004f).coerceAtLeast(0f) * (1 - pressed) + 0.14f * pressed), radius = 9.dp)),
             )
@@ -138,8 +148,11 @@ internal fun UnwrappingParcel(
                 scaleX = scale
                 scaleY = scale
                 transformOrigin = TransformOrigin(0.5f, 1f)
-                translationY = (lift * (1 - open).toFloat() + (anticipation * 4 - breath * 8).toFloat() * (1 - pressed) + 5f * pressed).dp.toPx()
-            }.graphicsLayer { rotationZ = sway * (1 - open).toFloat() },
+                translationX = (tiltX * 11).dp.toPx()
+                translationY = (lift * (1 - open).toFloat() + tiltY * 6 + (anticipation * 4 - breath * 8).toFloat() * (1 - pressed) + 5f * pressed).dp.toPx()
+            }.graphicsLayer { rotationZ = sway * (1 - open).toFloat() }
+                .rotation3DEffect(tiltX * 7, aboutY = true, perspective = 0.35f, longerSide = FRAME_HEIGHT.dp)
+                .rotation3DEffect(tiltY * -6, aboutY = false, perspective = 0.35f, longerSide = FRAME_HEIGHT.dp),
         ) {
             PipCanvas(frame) {
                 it.fill(PipGeometry.polygon(PipGeometry.inside), palette.inside)
@@ -156,10 +169,10 @@ internal fun UnwrappingParcel(
                         .dropShadow(OvalShape, swiftUiShadow(Color(0xFFFFE8AE).copy(alpha = glow.toFloat()), radius = 10.dp)),
                 )
             }
-            if (card > 0) DeliveryCard(ribbon, card, check = phase(0.48, 0.3), sender)
-            UnwrappingSides(frame)
+            if (card > 0) DeliveryCard(ribbon, card, check = phase(0.48, 0.3), sender, shift = tiltX * 2)
+            UnwrappingSides(frame, tiltX)
             if (label != null) PipCanvas(frame) { PipArtwork.label(it, label) }
-            if (label == null) ParcelSideMarks()
+            if (label == null) ParcelSideMarks(ringAlpha = 0.2f + (tiltY + 1) * 0.28f)
             // A ribbon runs where Pip smiles: until the box opens, the eyes say it all.
             KraftPipFace(happy = happy, smile = if (ribbon) happy else 1.0)
             PipCanvas(frame) {
@@ -280,17 +293,18 @@ private fun ParcelStars(progress: Double) {
 
 /**
  * The box's two sides as `UnwrappingParcel` shades them, each from its lighter kraft at the frame's top leading corner
- * to its darker at the bottom trailing one, the left side lit a little, and their light edges, without hairlines.
+ * to its darker at the bottom trailing one, the left side lit a little, and their light edges, without hairlines: the
+ * light and the edges brighter as the box leans with [tiltX].
  */
 @Composable
-private fun UnwrappingSides(modifier: Modifier) {
+private fun UnwrappingSides(modifier: Modifier, tiltX: Float) {
     Canvas(modifier) {
         scale(density, density, pivot = Offset.Zero) {
             val corner = Offset(FRAME_WIDTH, FRAME_HEIGHT)
             val left = framePath(PipGeometry.leftSide)
             drawPath(left, Brush.linearGradient(listOf(Color(0xFFDDBC95), Color(0xFFC49A6E)), Offset.Zero, corner))
             drawPath(framePath(PipGeometry.rightSide), Brush.linearGradient(listOf(Color(0xFFBB946A), Color(0xFFA77E55)), Offset.Zero, corner))
-            drawPath(left, Color(0xFFFFF4D6).copy(alpha = 0.07f))
+            drawPath(left, Color(0xFFFFF4D6).copy(alpha = 0.025f + (tiltX + 1) * 0.045f))
             val edges = Path().apply {
                 moveTo(55f, 142f)
                 lineTo(150f, 190f)
@@ -298,7 +312,7 @@ private fun UnwrappingSides(modifier: Modifier) {
                 moveTo(150f, 190f)
                 lineTo(150f, 277f)
             }
-            drawPath(edges, Color(0xFFFFF2CF).copy(alpha = 0.4f), style = Stroke(1f, miter = 10f))
+            drawPath(edges, Color(0xFFFFF2CF).copy(alpha = 0.22f + (tiltX + 1) * 0.18f), style = Stroke(1f, miter = 10f))
         }
     }
 }
@@ -318,14 +332,15 @@ private fun framePath(points: List<Point>) = Path().apply {
  * gift; else a green check in its pale circle, drawn `check` of the way, over two lines, lined up at their leading side,
  * the three in the card's middle. From a friend ([sender]), on lilac in place of cream, lined up at their leading side
  * in plum: the sender's initial in medium 13 on a die-cut stamp 21 × 26 at the trailing side, "friends.from" in 8, the
- * name in semibold 17 on one line, made as small as 45 % to fit, and a hairline 29 wide under it, 8 apart.
+ * name in semibold 17 on one line, made as small as 45 % to fit, and a hairline 29 wide under it, 8 apart. The tilt
+ * moves it [shift] right.
  */
 @Composable
-private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double, sender: String? = null) {
+private fun DeliveryCard(ribbon: Boolean, rise: Double, check: Double, sender: String? = null, shift: Float = 0f) {
     val shape = RoundedCornerShape(7.dp)
     Box(
         Modifier
-            .offset { IntOffset((152f - 83f / 2).dp.roundToPx(), (174f - 69f * rise.toFloat() - 111f / 2).dp.roundToPx()) }
+            .offset { IntOffset((152f + shift - 83f / 2).dp.roundToPx(), (174f - 69f * rise.toFloat() - 111f / 2).dp.roundToPx()) }
             .size(83.dp, 111.dp)
             .graphicsLayer {
                 rotationZ = (-11 + rise * 6).toFloat()
@@ -414,11 +429,11 @@ internal fun String.firstCharacter(): String {
 
 /**
  * The arrow and the seal on the parcel's right side, where it carries no carrier's label (`UnwrappingParcel`): an
- * arrow.up of 18 medium in brown and an asterisk of 14 bold in lilac on its lilac circle, 28 across, both turned -27°.
- * Drawn in Pip's 300 × 310 frame.
+ * arrow.up of 18 medium in brown and an asterisk of 14 bold in lilac on its lilac circle, 28 across, ringed 2.5 in at
+ * [ringAlpha] (which the tilt brightens), both turned -27°. Drawn in Pip's 300 × 310 frame.
  */
 @Composable
-private fun ParcelSideMarks() {
+private fun ParcelSideMarks(ringAlpha: Float) {
     Decoration(218f, 214f) {
         PeekSymbol(
             "arrow.up",
@@ -436,7 +451,7 @@ private fun ParcelSideMarks() {
                 .drawBehind {
                     val ring = 1.2.dp.toPx()
                     drawCircle(
-                        Color(0xFFFFF6FF).copy(alpha = 0.48f),
+                        Color(0xFFFFF6FF).copy(alpha = ringAlpha),
                         radius = size.minDimension / 2 - 2.5.dp.toPx(),
                         style = Stroke(ring),
                     )
@@ -457,6 +472,17 @@ private fun Decoration(x: Float, y: Float, content: @Composable () -> Unit) {
 /** Pip's frame. */
 private val FRAME_WIDTH = PipGeometry.frame.width.toFloat()
 private val FRAME_HEIGHT = PipGeometry.frame.height.toFloat()
+
+/**
+ * `rotation3DEffect(.degrees(degrees), axis: (x: 1, y: 0, z: 0), perspective:)`, or about the y axis where [aboutY], on
+ * content whose longer side is [longerSide], turning about its middle: the eye stands that side over [perspective]
+ * away, which a layer counts in inches of 72 pixels. Turned by a positive angle, its top (about x) or its right side
+ * (about y) goes back, as SwiftUI's does.
+ */
+internal fun Modifier.rotation3DEffect(degrees: Float, aboutY: Boolean, perspective: Float, longerSide: Dp): Modifier = graphicsLayer {
+    cameraDistance = longerSide.toPx() / perspective / 72f
+    if (aboutY) rotationY = degrees else rotationX = degrees
+}
 
 /** `UnwrappingParcel`'s rear right flap folded open, its far corner at (175, 41) where Pip's is at (174.24, 41.32). */
 private val BACK_RIGHT_OPENED = listOf(Point(150.0, 95.0), Point(245.0, 142.0), Point(270.0, 88.0), Point(175.0, 41.0))

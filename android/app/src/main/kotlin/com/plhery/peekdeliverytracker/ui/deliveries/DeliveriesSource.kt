@@ -733,6 +733,7 @@ class DeliveriesInbox(
     private val sharedDrafts: () -> SharedParcelDraft? = { null },
     friend: UUID? = null,
     private val invitationLink: (String) -> Boolean = { false },
+    private val opened: () -> Unit = {},
 ) {
     private val parcelState = MutableStateFlow(parcel)
     private val friendState = MutableStateFlow(friend)
@@ -777,11 +778,13 @@ class DeliveriesInbox(
      * then `peekdeliverytracker://parcel/<uuid>`, which opens the parcel on the deliveries, then
      * `peekdeliverytracker://friend/<uuid>`, the friend to reveal ([friend]), and last a friend's invitation, which
      * [invitationLink] shows over everything. The app's parcel and invitation links come by ParcelLinkActivity, which
-     * keeps them out of the window's intent; one sent to the window itself comes here.
+     * keeps them out of the window's intent; one sent to the window itself comes here. Each is counted ([opened],
+     * `deep-link-open`), whatever it leads to.
      */
     fun follow(intent: Intent?) {
         if (intent?.action != Intent.ACTION_VIEW) return
         val url = intent.dataString ?: return
+        opened()
         if (parcelLink(url)) return
         when (val route = NativeRoute(url)) {
             is NativeRoute.Parcel -> open(route.id)
@@ -813,19 +816,20 @@ class DeliveriesInbox(
          * began its task, after the process or the phone restarted: the system keeps that link as the task's own and
          * hands it over again (`FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY`). The window's intent forgets the link once it has
          * been read, and with it any owner key it carried. What another app shared comes from [sharedDrafts], which
-         * takes it away.
+         * takes it away. Each link followed is counted once ([opened]), and not again as the window is made again.
          */
         fun of(
             activity: ComponentActivity,
             sharedDrafts: () -> SharedParcelDraft? = { null },
             parcelLink: (String) -> Boolean = { false },
             invitationLink: (String) -> Boolean = { false },
+            opened: () -> Unit = {},
         ): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
             val inbox = DeliveriesInbox(
                 saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts, saved?.getString(FRIEND)?.let(UUID::fromString),
-                invitationLink,
+                invitationLink, opened,
             )
             registry.registerSavedStateProvider(SAVED) {
                 Bundle().apply {

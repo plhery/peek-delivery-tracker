@@ -50,12 +50,15 @@ class ParcelLinkWindow : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inbox = DeliveriesInbox.of(this) { url ->
-            val configuration = BuildSettings.configuration
-            val route = ParcelLinkRoute(url, configuration.apiBaseUrl, configuration.linkHosts)
-            route?.let(links.links::open)
-            route != null
-        }
+        inbox = DeliveriesInbox.of(
+            this,
+            parcelLink = { url ->
+                val configuration = BuildSettings.configuration
+                val route = ParcelLinkRoute(url, configuration.apiBaseUrl, configuration.linkHosts)
+                route?.let(links.links::open)
+                route != null
+            },
+        )
         setContent { RootHost(state = AuthenticationState.Demo, onView = { views += it }, inbox = inbox, links = links) }
     }
 

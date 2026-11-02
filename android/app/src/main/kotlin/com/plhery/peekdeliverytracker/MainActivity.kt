@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
         // window itself still goes first, to the app's stores. What another app shared waits where ShareActivity saved it.
         val inbox = DeliveriesInbox.of(
             this, parcelLink = app::openParcelLink, sharedDrafts = { ShareInbox.consume(app.shareDefaults()) }, invitationLink = app::openInvitation,
+            opened = app::linkOpened,
         )
         splash.setKeepOnScreenCondition { app.container.value == null }
         setContent {

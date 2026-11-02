@@ -65,8 +65,10 @@ import com.plhery.peekdeliverytracker.platform.PlayReviews
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
 import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
+import com.plhery.peekdeliverytracker.platform.SensorArrivalMotion
 import com.plhery.peekdeliverytracker.platform.WebViewTurnstilePages
 import com.plhery.peekdeliverytracker.ui.TurnstileSheet
+import com.plhery.peekdeliverytracker.ui.arrival.ArrivalMotionSource
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetState
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import kotlinx.coroutines.CoroutineScope
@@ -146,6 +148,13 @@ class AppContainer(
     )
 
     private val analyticsObserver = AnalyticsLifecycleObserver(analytics, scope)
+
+    /** Whether the root has shown, its first screen counted ([analytics]); the links opened before then wait for it. */
+    private var rootShown = false
+    private var linksBeforeRoot = 0
+
+    /** `ArrivalMotion`'s device motion, which the welcome's parcel tilts with: the phone's sensors. */
+    val motion: ArrivalMotionSource = SensorArrivalMotion(context)
 
     val session = SessionStore(
         configuration = configuration,
@@ -389,8 +398,24 @@ class AppContainer(
                 session.stateFlow, parcels.parcelsFlow.map { it.isEmpty() }.distinctUntilChanged(), links.routeFlow, invitation.presentingFlow,
             ) { state, empty, route, presenting ->
                 Triple(AnalyticsLifecycleObserver.screen(presenting, state, hasParcels = !empty), analyticsMode(), route != null)
-            }.distinctUntilChanged().collect { (screen, mode, linkOpen) -> analyticsObserver.update(screen, mode, linkOpen) }
+            }.distinctUntilChanged().collect { (screen, mode, linkOpen) ->
+                analyticsObserver.update(screen, mode, linkOpen)
+                if (!rootShown) {
+                    rootShown = true
+                    repeat(linksBeforeRoot) { analyticsObserver.urlOpened() }
+                    linksBeforeRoot = 0
+                }
+            }
         }
+    }
+
+    /**
+     * `.onOpenURL`'s `deep-link-open`: the app was opened with a link, whatever it leads to. One that comes with the
+     * app's start is counted once the root has shown and counted its first screen, as `.onOpenURL` comes to a root
+     * already shown. On the main thread.
+     */
+    fun linkOpened() {
+        if (rootShown) analyticsObserver.urlOpened() else linksBeforeRoot++
     }
 
     private fun analyticsMode(): DeliveryAnalytics.Mode = when {

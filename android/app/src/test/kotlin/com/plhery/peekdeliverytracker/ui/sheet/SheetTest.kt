@@ -11,10 +11,13 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
@@ -42,10 +45,11 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The sheet on its own, a field in what it holds: what takes it to its large height, a keyboard up for that field and
- * a window as low as a phone on its side; a drag that moves it without composing what it holds again; the sheet
- * opened again on its way out after the back gesture; the detent asked for; nothing but its own content sending it
- * away while it isn't dismissible; taps on the status bar, which leave it up; and the page sheet in regular windows,
- * the iPad's, an Android tablet's and an unfolded foldable's, beside the form there.
+ * a window as low as a phone on its side; a drag that moves it without composing what it holds again; the field's
+ * focus let go as it starts to go; the sheet opened again on its way out after the back gesture; the detent asked
+ * for; nothing but its own content sending it away while it isn't dismissible; taps on the status bar, which leave it
+ * up; and the page sheet in regular windows, the iPad's, an Android tablet's and an unfolded foldable's, beside the
+ * form there.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -159,6 +163,24 @@ class SheetTest {
         keyboard(336)
         compose.waitForIdle()
         assertEquals(10f, top(), 1f)
+    }
+
+    @Test
+    fun itLetsGoOfTheFieldsFocusAsItStartsToGo() {
+        show()
+        compose.onNodeWithTag(FIELD).performClick()
+        compose.onNodeWithTag(FIELD).assertIsFocused()
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread {
+            visible = false
+            Snapshot.sendApplyNotifications()
+        }
+        compose.mainClock.advanceTimeByFrame()
+        compose.mainClock.advanceTimeByFrame()
+        assertTrue("Still on its way down: ${top()}", top() < windowHeight() * 0.6f)
+        compose.onNodeWithTag(FIELD).assertIsNotFocused()
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
     }
 
     @Test

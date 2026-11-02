@@ -11,8 +11,12 @@ import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
+import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.platform.BuildSettings
+import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
+import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
+import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.arrival.INVITATION_WELCOME
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
@@ -21,11 +25,18 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LINK_GIFT_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SHEET
 import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
 import java.io.IOException
+import java.security.Security
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.withContext
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
+import okio.Buffer
+import org.json.JSONObject
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -47,7 +58,9 @@ import org.robolectric.annotation.GraphicsMode
  * its window. The link reaches the app's stores in memory, owner key and all, and the window it opens carries none of
  * it: cold, the window opens the sheet once its stores are made; with the app running, the sheet opens over what is up
  * in the window brought forward. A friend's invitation (`/i/<id>`, `/invite#<code>`, the scheme's `invite`) comes in
- * the same way and stands over the window. On the app's own stores, made offline with links read from memory.
+ * the same way and stands over the window. Each link the app is opened with is counted once (`deep-link-open`), by
+ * the trampoline or by the window, cold or running, and not again as the window turns. On the app's own stores, made
+ * offline with links read from memory, the analytics answered on the client itself.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -85,6 +98,59 @@ class ParcelLinkActivityTest {
         made?.scope?.cancel()
         CarrierCatalog.install(catalog)
         Settings.Global.putFloat(app.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
+        Security.removeProvider("AndroidKeyStore")
+    }
+
+    /** What Umami's collector received, answered on the client itself. */
+    private val sent = mutableListOf<JSONObject>()
+
+    /**
+     * The stores made against the API instead, signed out, so that the analytics count: the server and Umami's
+     * collector are answered on the client itself (synthetic hosts), so nothing leaves the machine.
+     */
+    private fun counting() {
+        Security.addProvider(FakeAndroidKeyStore())
+        val answers = Interceptor { chain ->
+            val request = chain.request()
+            val (code, body) = when {
+                request.url.encodedPath == "/api/analytics/config" -> 200 to
+                    """{"endpoint":"https://collector.example.test/api/send","hostname":"peek.example.test","androidWebsite":"00000000-0000-4000-8000-0000000000a1"}"""
+                request.url.host == "collector.example.test" -> {
+                    val event = JSONObject(Buffer().also { request.body!!.writeTo(it) }.readUtf8()).getJSONObject("payload")
+                    synchronized(sent) { sent += event }
+                    200 to "{}"
+                }
+                else -> 404 to "{}"
+            }
+            Response.Builder().request(request).protocol(Protocol.HTTP_1_1).code(code).message("").body(body.toResponseBody()).build()
+        }
+        val server = "https://peek.example.test"
+        val api = AppConfiguration(
+            mode = AppConfiguration.Mode.Api, apiBaseUrl = server, supabaseUrl = server, supabasePublishableKey = "synthetic-publishable-key",
+            googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true, appGroupIdentifier = "group.test.peek",
+        )
+        app.makeStores = { application ->
+            withContext(Dispatchers.IO) {
+                AppContainer(application, api, http = PeekHttp.client(MemoryCookieJar()).newBuilder().addInterceptor(answers).build())
+            }.also { made = it }
+        }
+    }
+
+    /** How many times the app was counted opened with a link. */
+    private fun opens(): Int = synchronized(sent) { sent.count { it.optString("name") == "deep-link-open" } }
+
+    /** The app counted opened with a link [count] times, and no more once what it had to send has gone. */
+    private fun assertOpens(count: Int) {
+        val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
+        while (opens() < count && System.nanoTime() < deadline) {
+            shadowOf(Looper.getMainLooper()).idle()
+            Thread.sleep(10)
+        }
+        repeat(20) {
+            shadowOf(Looper.getMainLooper()).idle()
+            Thread.sleep(10)
+        }
+        assertEquals(count, opens())
     }
 
     private fun link(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url)).addCategory(Intent.CATEGORY_BROWSABLE)
@@ -113,6 +179,16 @@ class ParcelLinkActivityTest {
             Thread.sleep(10)
         }
         return checkNotNull(app.container.value)
+    }
+
+    /** The session read, on the IO threads, and the launch screen gone. */
+    private fun awaitSession(stores: AppContainer) {
+        val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
+        while (stores.session.state == AuthenticationState.Loading && System.nanoTime() < deadline) {
+            shadowOf(Looper.getMainLooper()).idle()
+            Thread.sleep(10)
+        }
+        assertNotEquals(AuthenticationState.Loading, stores.session.state)
     }
 
     private fun settle() {
@@ -183,6 +259,7 @@ class ParcelLinkActivityTest {
         for (host in setOf(site) + configuration.linkHosts) {
             assertEquals(host, trampoline, takers("https://$host/i/$INVITATION"))
             assertEquals(host, trampoline, takers("https://$host/invite#$INVITATION"))
+            assertEquals(host, trampoline, takers("https://$host/invite/#$INVITATION"))
         }
         assertEquals(trampoline, takers("peekdeliverytracker://invite#$INVITATION"))
         assertEquals(emptyList<String>(), takers("https://elsewhere.example/invite#$INVITATION"))
@@ -195,14 +272,13 @@ class ParcelLinkActivityTest {
         assertNull("Nothing made yet: the invitation waits in the process", app.container.value)
 
         Robolectric.buildActivity(MainActivity::class.java, started).setup()
-        val invitation = awaitStores().invitation
-        assertTrue(invitation.isPresenting)
-        assertEquals(INVITATION, invitation.code)
+        val stores = awaitStores()
+        assertTrue(stores.invitation.isPresenting)
+        assertEquals(INVITATION, stores.invitation.code)
         // Over everything but the launch screen, which stays while the session is read on the IO threads.
-        compose.waitUntil(10_000) {
-            shadowOf(Looper.getMainLooper()).idle()
-            exists(INVITATION_WELCOME)
-        }
+        awaitSession(stores)
+        settle()
+        assertTrue(exists(INVITATION_WELCOME))
     }
 
     @Test
@@ -224,7 +300,40 @@ class ParcelLinkActivityTest {
         assertTrue(exists(INVITATION_WELCOME))
     }
 
+    @Test
+    fun eachLinkThatComesByTheTrampolineOrToTheRunningWindowIsCountedOnce() {
+        counting()
+        // Cold: counted once the stores are made and the first screen counted.
+        val window = Robolectric.buildActivity(MainActivity::class.java, send("https://$site/invite#$INVITATION")).setup()
+        awaitStores()
+        assertOpens(1)
+
+        window.newIntent(send("https://$site/p/$id"))
+        assertOpens(2)
+        // Sent to the window itself: a friend to reveal.
+        window.newIntent(link("peekdeliverytracker://friend/$FRIEND").setClass(app, MainActivity::class.java))
+        assertOpens(3)
+        window.recreate()
+        assertOpens(3)
+    }
+
+    @Test
+    fun aLinkThatStartsTheWindowItselfIsCountedOnceAndNotAgainAsItTurns() {
+        counting()
+        val window = Robolectric.buildActivity(MainActivity::class.java, link("peekdeliverytracker://friend/$FRIEND").setClass(app, MainActivity::class.java)).setup()
+        awaitStores()
+        assertOpens(1)
+        window.recreate()
+        assertOpens(1)
+        // The launcher's own start is no link.
+        window.newIntent(Intent.makeMainActivity(ComponentName(app, MainActivity::class.java)))
+        assertOpens(1)
+    }
+
     private companion object {
+        /** A made-up friend's id. */
+        const val FRIEND = "11000000-0000-4000-8000-000000000001"
+
         /** Made-up invitation codes, in the 16-character form the service gives. */
         const val INVITATION = "Qa3vT8nL5wZ1pR7k"
         const val OTHER_INVITATION = "Zx4cV9bN2mL6kJ8h"

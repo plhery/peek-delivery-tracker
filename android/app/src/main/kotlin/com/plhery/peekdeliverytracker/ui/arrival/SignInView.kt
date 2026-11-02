@@ -123,7 +123,9 @@ import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
+import com.plhery.peekdeliverytracker.ui.theme.TextLines
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
+import com.plhery.peekdeliverytracker.ui.theme.widestLine
 import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.currentCoroutineContext
@@ -299,10 +301,7 @@ internal fun SignInView(
                     invitation != null && invitation.nickname == null -> {
                         val error = invitation.errorKey
                         if (error != null) {
-                            Text(
-                                localized(error), Modifier.padding(top = top).testTag(SIGN_IN_INVITATION_ERROR), color = colors.secondaryLabel,
-                                textAlign = TextAlign.Center, style = type.footnote.sfLines(),
-                            )
+                            LeadingFootnote(localized(error), Modifier.padding(top = top).testTag(SIGN_IN_INVITATION_ERROR))
                             PlainTextButton(localized("common.retry"), SIGN_IN_INVITATION_RETRY, Modifier.padding(top = top), onClick = invitation.retry)
                         } else {
                             ActivityIndicator(Modifier.padding(top = top).testTag(SIGN_IN_INVITATION_LOADING), size = 20.dp, tint = colors.secondaryLabel)
@@ -730,6 +729,20 @@ private fun OrRule() {
         Text(localized("auth.or"), color = colors.secondaryLabel, style = PeekTheme.type.caption.sfLines())
         Box(Modifier.weight(1f).height(0.5.dp).background(line))
     }
+}
+
+/**
+ * What went wrong with the invitation, a secondary footnote with no `multilineTextAlignment`, as SwiftUI lays out such
+ * a `Text` in a centred stack: as wide as its widest line ([widestLine]), its lines at its leading side. One line
+ * stands in the middle; a wrapped one doesn't centre its lines.
+ */
+@Composable
+internal fun LeadingFootnote(text: String, modifier: Modifier = Modifier) {
+    val lines = remember { TextLines() }
+    Text(
+        text, modifier.widestLine(lines), color = PeekTheme.colors.secondaryLabel, style = PeekTheme.type.footnote.sfLines(),
+        onTextLayout = { lines.result = it },
+    )
 }
 
 /** `errorView`: `exclamationmark.triangle.fill` and the error, in red caption. */

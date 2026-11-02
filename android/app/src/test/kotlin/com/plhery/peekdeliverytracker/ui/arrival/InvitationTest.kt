@@ -19,6 +19,7 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
@@ -27,14 +28,18 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeUp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.ArrivalTilt
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
@@ -72,6 +77,9 @@ import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import java.io.IOException
 import java.util.UUID
+import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.sin
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -91,9 +99,10 @@ import org.robolectric.annotation.GraphicsMode
  * over the tabs and in the demo; the welcome while its sender is asked, failing and retried, or leading nowhere; the
  * parcel opened into the sign-in, signing in keeping the invitation and landing on the acceptance; the acceptance's
  * check, its outcomes, the profile's sheet (join and accept, edit sharing, no closing while joining), the receipt and
- * its stamp, then the friends tab with the circle the acceptance answered and the friend revealed; ✕, back and Close;
- * the notice of an invitation accepted kept away meanwhile; the code waiting through a rotation and process death;
- * what TalkBack reads. Nothing leaves the test.
+ * its stamp, then the friends tab with the circle the acceptance answered and the friend revealed, in front or on
+ * return; Accept and the sharing saved through a rotation; the acceptance's own scroll; ✕, back and Close; the notice
+ * of an invitation accepted kept away meanwhile; the code waiting through a rotation and process death; the welcome's
+ * parcel leaning with the device; what TalkBack reads. Nothing leaves the test.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -112,9 +121,10 @@ class InvitationTest {
     private var session: SessionStore? = null
     private val recreation = Recreation(compose)
 
-    /** Where the parcel was drawn each time, and how far open. */
+    /** Where the parcel was drawn each time, and how far open; and how it leant. */
     private val placed = mutableListOf<Rect>()
     private val opens = mutableListOf<Float>()
+    private val tilts = mutableListOf<ArrivalTilt>()
 
     /** The window's lifecycle as the arrival sees it, which a test sends to the background and back. */
     private val owner = object : LifecycleOwner {
@@ -127,8 +137,8 @@ class InvitationTest {
 
     /**
      * The root for [state] with the invitation [link] opened first (none where null), the friends as [friends] sets
-     * them; with [signIn] the real session store on a fake auth service signs in, from the first open. A test made
-     * again ([Recreation]) reads [source] afresh, as a new process has new stores.
+     * them, the device moving as [motion] says; with [signIn] the real session store on a fake auth service signs in,
+     * from the first open. A test made again ([Recreation]) reads [source] afresh, as a new process has new stores.
      */
     private fun show(
         state: AuthenticationState = AuthenticationState.Welcome,
@@ -136,6 +146,7 @@ class InvitationTest {
         reduceMotion: Boolean = true,
         signIn: Boolean = false,
         deliveries: FakeDeliveries = FakeDeliveries(DemoCards.parcels(), state),
+        motion: ArrivalMotionSource = NoArrivalMotion,
         friends: FakeFriendsClient.() -> Unit = {},
     ) {
         shownSession = state
@@ -156,6 +167,8 @@ class InvitationTest {
                     placed += rect
                     opens += open
                 },
+                LocalArrivalParcelTilt provides { tilts += it },
+                LocalArrivalMotion provides motion,
             ) {
                 RootHost(state = shownSession, source = remember { source }, reduceMotion = reduceMotion, session = store)
             }
@@ -199,6 +212,33 @@ class InvitationTest {
     private fun lifecycle(state: Lifecycle.State) {
         compose.runOnUiThread { owner.registry.currentState = state }
         settle()
+    }
+
+    /** The window's lifecycle at [state], the clock moved on [millis] by hand. */
+    private fun lifecycle(state: Lifecycle.State, millis: Long) {
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { owner.registry.currentState = state }
+        compose.mainClock.advanceTimeBy(millis)
+    }
+
+    /** The clock moved on a frame at a time until [done], for a second at most, as by hand. */
+    private fun advanceUntil(done: () -> Boolean) {
+        compose.mainClock.autoAdvance = false
+        repeat(60) {
+            if (done()) return
+            compose.mainClock.advanceTimeByFrame()
+        }
+        assertTrue(done())
+    }
+
+    /** How far down the page tagged [tag] is scrolled, and how far it could be. */
+    private fun scroll(tag: String): Pair<Float, Float> {
+        val node = compose.onAllNodes(
+            SemanticsMatcher.keyIsDefined(SemanticsProperties.VerticalScrollAxisRange) and (hasTestTag(tag) or hasAnyAncestor(hasTestTag(tag))),
+            useUnmergedTree = true,
+        ).fetchSemanticsNodes().first()
+        val range = node.config[SemanticsProperties.VerticalScrollAxisRange]
+        return range.value() to range.maxValue()
     }
 
     /** The parcel tapped open: it opens, and the invitation's next page follows. */
@@ -358,6 +398,26 @@ class InvitationTest {
         assertTrue(exists(INVITATION_ACCEPT))
     }
 
+    @Test
+    @Config(qualifiers = LANDSCAPE_PHONE)
+    fun theAcceptanceOpensAtItsTopHoweverFarTheSignInWasScrolled() {
+        show(signIn = true) { accepting() }
+        openParcel()
+        compose.onNodeWithTag(EMAIL_FIELD).performTextInput(READER_EMAIL)
+        tap(EMAIL_SEND)
+        compose.onNodeWithTag(CODE_FIELD).performTextInput(READER_CODE)
+        compose.onNodeWithTag(SIGN_IN).performTouchInput { swipeUp() }
+        settle()
+        val (signIn, _) = scroll(SIGN_IN)
+        assertTrue("The sign-in scrolled: $signIn", signIn > 0f)
+        compose.onNodeWithTag(CODE_VERIFY).performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertTrue(exists(INVITATION_ACCEPTANCE))
+        val (acceptance, room) = scroll(INVITATION_ACCEPTANCE)
+        assertTrue("The acceptance scrolls: $room", room > 0f)
+        assertEquals(0f, acceptance)
+    }
+
     // The acceptance.
 
     @Test
@@ -369,24 +429,54 @@ class InvitationTest {
         assertEquals(listOf(CODE), requests(FriendsAction.PreviewInvite).map { it.code })
         assertTrue(exists(INVITATION_SHARING))
         compose.onNodeWithTag(INVITATION_ACCEPT).assert(hasText(text("friends.accept"))).assertIsEnabled()
+        // The friends tab's own load never answers: only the circle the acceptance answered can show Sasha.
+        client.loading = CompletableDeferred()
 
         compose.mainClock.autoAdvance = false
         compose.onNodeWithTag(INVITATION_ACCEPT).performScrollTo().performClick()
         compose.mainClock.advanceTimeBy(100)
         assertEquals(listOf(CODE), requests(FriendsAction.AcceptInvite).map { it.code })
-        assertNotNull(invitation.receipt)
+        val answered = invitation.receipt?.snapshot
+        assertNotNull(answered)
         assertTrue(exists(INVITATION_STAMP))
         assertTrue(shows(text("friends.friendshipDelivered")))
         assertFalse(exists(INVITATION_ACCEPT))
-        compose.mainClock.advanceTimeBy(1_000)
+        advanceUntil { !invitation.isPresenting }
+        assertEquals(sasha.id, source.friendsActivity.focusId)
+        assertEquals(answered, source.friendsActivity.arrivalSnapshot)
         compose.mainClock.autoAdvance = true
         settle()
 
-        assertFalse(invitation.isPresenting)
         assertEquals(1, invitation.completed)
         assertFalse(exists(INVITATION_ACCEPTANCE))
         assertTrue(tabShown(PeekTab.Friends))
         assertNotEquals(presented, source.friendsActivity.presentationId)
+        assertTrue(exists(friendCardTag(sasha.id)))
+    }
+
+    @Test
+    fun anAcceptanceUnderWayOutlastsARotationAndItsReceiptLands() {
+        show(reader) { accepting() }
+        openParcel()
+        val held = CompletableDeferred<Unit>()
+        client.acting = held
+        tap(INVITATION_ACCEPT)
+        assertEquals(listOf(CODE), requests(FriendsAction.AcceptInvite).map { it.code })
+        val loads = client.loads
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(exists(INVITATION_ACCEPTANCE))
+        assertNull(invitation.receipt)
+        // The acceptance made again neither checks again nor accepts again: the one under way answers.
+        assertEquals(loads, client.loads)
+        held.complete(Unit)
+        settle()
+        settle()
+        assertEquals(1, requests(FriendsAction.AcceptInvite).size)
+        assertFalse(invitation.isPresenting)
+        assertEquals(1, invitation.completed)
+        assertTrue(tabShown(PeekTab.Friends))
         assertTrue(exists(friendCardTag(sasha.id)))
     }
 
@@ -527,6 +617,28 @@ class InvitationTest {
         assertTrue(exists(INVITATION_ACCEPTANCE))
     }
 
+    @Test
+    fun savingTheSharingOutlastsARotationAndTheSheetCloses() {
+        show(reader) { accepting() }
+        openParcel()
+        tap(INVITATION_EDIT_SHARING)
+        compose.onNodeWithTag(FRIENDS_NICKNAME).performTextReplacement("Robin B")
+        val held = CompletableDeferred<Unit>()
+        client.acting = held
+        tap(FRIENDS_SAVE)
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(exists(INVITATION_SHEET))
+        assertEquals(text("friends.settings"), paneTitle())
+        held.complete(Unit)
+        settle()
+        assertEquals(listOf("Robin B"), requests(FriendsAction.SaveProfile).map { it.nickname })
+        assertFalse(exists(INVITATION_SHEET))
+        assertTrue(requests(FriendsAction.AcceptInvite).isEmpty())
+        assertTrue(exists(INVITATION_ACCEPT))
+    }
+
     // Dismissal.
 
     @Test
@@ -622,18 +734,50 @@ class InvitationTest {
     }
 
     @Test
-    fun aReceiptOutOfTheFrontFinishesAtOnceWithoutItsCircle() {
+    fun aReceiptThatLandsOutOfTheFrontWaitsThenPlaysItsStampAndRevealsTheFriendOnReturn() {
         show(reader) { accepting() }
         openParcel()
         val held = CompletableDeferred<Unit>()
         client.acting = held
         tap(INVITATION_ACCEPT)
         lifecycle(Lifecycle.State.CREATED)
+        // The friends tab's own load never answers: only the circle the acceptance answered can show Sasha.
+        client.loading = CompletableDeferred()
         held.complete(Unit)
         settle()
+        val answered = invitation.receipt?.snapshot
+        assertNotNull(answered)
+        assertTrue(invitation.isPresenting)
+        assertTrue(exists(INVITATION_STAMP))
+        assertNull(source.friendsActivity.focusId)
+
+        // Back in front, the stamp lands over 30 + 80 + 180 ms, then the friend is revealed with the circle.
+        lifecycle(Lifecycle.State.RESUMED, millis = 150)
+        assertTrue(invitation.isPresenting)
+        advanceUntil { !invitation.isPresenting }
+        assertEquals(sasha.id, source.friendsActivity.focusId)
+        assertEquals(answered, source.friendsActivity.arrivalSnapshot)
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(tabShown(PeekTab.Friends))
+        assertTrue(exists(friendCardTag(sasha.id)))
+    }
+
+    @Test
+    fun aReceiptLeftDuringItsStampFinishesAtOnceWithoutItsCircle() {
+        show(reader) { accepting() }
+        openParcel()
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(INVITATION_ACCEPT).performScrollTo().performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertNotNull(invitation.receipt)
+        assertTrue(invitation.isPresenting)
+        lifecycle(Lifecycle.State.CREATED, millis = 50)
         assertFalse(invitation.isPresenting)
         assertEquals(sasha.id, source.friendsActivity.focusId)
         assertNull(source.friendsActivity.arrivalSnapshot)
+        compose.mainClock.autoAdvance = true
+        settle()
     }
 
     // TalkBack and motion.
@@ -664,6 +808,78 @@ class InvitationTest {
     }
 
     @Test
+    fun theWelcomesParcelLeansWithTheDeviceFromHowItWasHeldOnArrival() {
+        val motion = FakeMotion()
+        show(reduceMotion = false, motion = motion)
+        assertTrue(motion.following)
+        motion.reading = held(roll = 0.2, pitch = -0.1)
+        compose.mainClock.advanceTimeBy(500)
+        assertEquals(ArrivalTilt(), tilts.last())
+        // Turned to its right side 0.36 rad further: all the way right, level up and down.
+        motion.reading = held(roll = 0.56, pitch = -0.1)
+        compose.mainClock.advanceTimeBy(1_000)
+        val leaning = tilts.last()
+        assertTrue("Leaning right: $leaning", leaning.x > 0.95 && abs(leaning.y) < 0.01)
+        // And its top tipped 0.18 rad up: half up as well.
+        motion.reading = held(roll = 0.56, pitch = 0.08)
+        compose.mainClock.advanceTimeBy(1_000)
+        val tipped = tilts.last()
+        assertTrue("Leaning up too: $tipped", tipped.x > 0.95 && abs(tipped.y - 0.5) < 0.02)
+    }
+
+    @Test
+    fun underReduceMotionTheParcelStaysLevelAndTheMotionIsntRead() {
+        val motion = FakeMotion()
+        motion.reading = held(roll = 0.4, pitch = 0.2)
+        show(reduceMotion = true, motion = motion)
+        assertEquals(0, motion.starts)
+        assertTrue(tilts.isNotEmpty())
+        assertTrue(tilts.all { it == ArrivalTilt() })
+    }
+
+    @Test
+    fun theMotionIsReadOnlyWhileTheWelcomeGreetsInFront() {
+        val motion = FakeMotion()
+        show(reduceMotion = false, motion = motion)
+        assertEquals(1, motion.starts)
+        motion.reading = held(roll = 0.0, pitch = 0.0)
+        compose.mainClock.advanceTimeBy(100)
+        motion.reading = held(roll = 0.36, pitch = 0.0)
+        compose.mainClock.advanceTimeBy(500)
+        assertTrue(tilts.last().x > 0.5)
+
+        // Paused, then stopped: the readings stop and the parcel comes level.
+        lifecycle(Lifecycle.State.STARTED, millis = 200)
+        assertFalse(motion.following)
+        assertEquals(ArrivalTilt(), tilts.last())
+        lifecycle(Lifecycle.State.CREATED, millis = 200)
+        assertFalse(motion.following)
+        // Back in front: read again, from how the device is held now.
+        lifecycle(Lifecycle.State.RESUMED, millis = 500)
+        assertTrue(motion.following)
+        assertEquals(2, motion.starts)
+        assertEquals(ArrivalTilt(), tilts.last())
+
+        // Opening the parcel ends the greeting.
+        compose.onNodeWithTag(WELCOME_OPEN_PARCEL).performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertFalse(motion.following)
+        compose.mainClock.advanceTimeBy(500)
+        assertEquals(ArrivalTilt(), tilts.last())
+        compose.mainClock.advanceTimeBy(1_000)
+        assertTrue(invitation.opened)
+        assertFalse(motion.following)
+        // Back from the sign-in on the welcome, it greets again, and ✕ takes it away with its readings.
+        back()
+        compose.mainClock.advanceTimeBy(500)
+        assertTrue(motion.following)
+        compose.onNodeWithTag(INVITATION_CLOSE).performClick()
+        compose.mainClock.advanceTimeBy(500)
+        assertFalse(motion.following)
+        assertEquals(motion.starts, motion.stops)
+    }
+
+    @Test
     fun theParcelOpensOverASecondThenMovesToTheSignInAsTheWelcomeFades() {
         show(reduceMotion = false)
         val welcome = placed.last()
@@ -679,7 +895,39 @@ class InvitationTest {
         assertEquals(1f, opens.last(), 0.01f)
     }
 
+    /** The device's motion as a test moves it: the [reading] it gives, how often it was started and stopped. */
+    private class FakeMotion : ArrivalMotionSource {
+        var reading: ArrivalMotionReading? = null
+        var starts = 0
+        var stops = 0
+        val following get() = starts > stops
+
+        override fun start(): ArrivalMotionReadings {
+            starts++
+            return object : ArrivalMotionReadings {
+                override val latest get() = reading
+                override fun stop() {
+                    stops++
+                }
+            }
+        }
+    }
+
     private companion object {
+        const val LANDSCAPE_PHONE = "w844dp-h390dp-land-xhdpi"
+
+        /**
+         * The device held turned [roll] about its long axis (its right side going down) after [pitch] about its short
+         * one (its top coming up), as its attitude reads, unmoved by the hand.
+         */
+        fun held(roll: Double, pitch: Double): ArrivalMotionReading {
+            val (cr, sr) = cos(roll) to sin(roll)
+            val (cp, sp) = cos(pitch) to sin(pitch)
+            // Rx(pitch) · Ry(roll), the device's axes to the world's, row by row.
+            val rotation = doubleArrayOf(cr, 0.0, sr, sp * sr, cp, -sp * cr, -cp * sr, sp, cp * cr)
+            return ArrivalMotionReading(FloatArray(9) { rotation[it].toFloat() }, 0.0, 0.0)
+        }
+
         /** A made-up invitation code, in the 16-character form the service gives. */
         const val CODE = "Qa3vT8nL5wZ1pR7k"
         const val LINK = "$INVITATION_BASE/invite#$CODE"

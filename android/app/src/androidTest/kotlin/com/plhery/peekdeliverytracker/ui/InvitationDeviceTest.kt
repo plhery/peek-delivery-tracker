@@ -8,12 +8,17 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.test.captureToImage
+import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextReplacement
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.AuthUser
@@ -161,7 +166,10 @@ class InvitationDeviceTest {
         compose.waitForIdle()
     }
 
-    /** Accepted: the receipt's stamp landed, taken before the arrival goes on to the friends; then the friends. */
+    /**
+     * Accepted: the receipt's stamp landed, taken before the arrival goes on to the friends; then the friends, once the
+     * friend revealed has landed.
+     */
     private fun acceptedThenTheFriends(button: String) {
         compose.mainClock.autoAdvance = false
         compose.onNodeWithTag(button).performScrollTo().performClick()
@@ -171,8 +179,25 @@ class InvitationDeviceTest {
         shots.take("${name.methodName}-receipt")
         compose.mainClock.autoAdvance = true
         compose.waitUntil(5_000) { exists(PeekTab.Friends.screen) && exists(friendCardTag(sasha.id)) }
+        // Revealed, Sasha lands once the circle has scrolled to them, and the focus is let go as the landing goes on.
+        compose.waitUntil(5_000) { source.friendsActivity.focusId == null }
         compose.waitForIdle()
         assertFalse(source.invitation.isPresenting)
+        assertTrue("Sasha's card drawn", drawn(sasha.id))
+    }
+
+    /**
+     * Whether the card of [friend] is drawn: just inside its top edge the window shows its fill, not the page beside
+     * it, which shows through the card while it waits to land at alpha 0.
+     */
+    private fun drawn(friend: UUID): Boolean {
+        val card = compose.onNodeWithTag(friendCardTag(friend), useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val window = compose.onRoot().captureToImage().asAndroidBitmap()
+        val scale = compose.density.density
+        val y = ((card.top + 4.dp).value * scale).toInt()
+        val inside = window.getPixel(((card.left + card.right).value / 2 * scale).toInt(), y)
+        val beside = window.getPixel(((card.left - 6.dp).value * scale).toInt(), y)
+        return inside != beside
     }
 
     @Test

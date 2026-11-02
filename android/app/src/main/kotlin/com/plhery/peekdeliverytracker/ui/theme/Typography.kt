@@ -6,7 +6,10 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -20,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.isUnspecified
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import kotlin.math.ceil
+import kotlin.math.floor
 
 /**
  * SwiftUI's font designs. SF Pro Rounded, New York and SF Mono can't ship outside Apple's platforms (X-AD38): the
@@ -114,6 +119,25 @@ fun TextStyle.sfLines(): TextStyle = copy(
 
 /** SF Pro's ascender and descender (1950 and 494 of its 2048 units), the height of a line of SwiftUI's text. */
 private const val SF_LINE_HEIGHT = (1950f + 494f) / 2048f
+
+/** A text as it was last laid out, which it gives as it is measured ([widestLine]). */
+internal class TextLines {
+    var result: TextLayoutResult? = null
+}
+
+/**
+ * A text that wraps, as wide as its widest line, as SwiftUI and UIKit size wrapped text to its longest line, where
+ * Compose's would be as wide as all the room it is given: a button then centres its symbol and its title together, and
+ * a centred stack centres the lines as a block, each at the block's leading side unless they are centred themselves.
+ */
+internal fun Modifier.widestLine(lines: TextLines): Modifier = layout { measurable, constraints ->
+    val placeable = measurable.measure(constraints)
+    val text = lines.result
+    if (text == null || text.lineCount < 2) return@layout layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+    val left = floor((0 until text.lineCount).minOf(text::getLineLeft)).toInt()
+    val right = ceil((0 until text.lineCount).maxOf(text::getLineRight)).toInt()
+    layout(right - left, placeable.height) { placeable.place(-left, 0) }
+}
 
 /** `.italic()`: the font's italic, keeping the upright's letter spacing. */
 fun TextStyle.italic(): TextStyle = copy(fontStyle = FontStyle.Italic)

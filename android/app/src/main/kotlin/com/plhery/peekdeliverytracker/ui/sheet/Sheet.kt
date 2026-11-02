@@ -59,6 +59,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -152,7 +154,8 @@ internal class SheetMenus {
  * too, the sheet following the gesture down. While it isn't [dismissible]
  * (`interactiveDismissDisabled`), none of them does: the back is kept from what is under it, and a drag down past its
  * lowest detent stretches less and less and comes back. It comes and goes on a critically damped spring, and moves
- * between its detents on a snappy one. [detent] is the detent asked for (`presentationDetents(_:selection:)`): the
+ * between its detents on a snappy one; as it starts to go, what it holds lets go of the focus, and the keyboard goes
+ * with it. [detent] is the detent asked for (`presentationDetents(_:selection:)`): the
  * sheet comes up at it and moves to it each time it changes; where a drag, or a keyboard, leaves it at another,
  * [onDetentChange] hears which. TalkBack reaches only the sheet, named [paneTitle], and only its menu while one is open
  * ([FormMenuRow]). Once it has come up, [onShown] runs (`present(_:animated:completion:)`'s completion); once it has
@@ -453,8 +456,11 @@ private fun SheetLayer(
         }
         val settling by rememberUpdatedState<(Float) -> Unit> { settle(it) }
 
-        // Comes up to its detent once laid out, and goes down past the window's bottom once dismissed. Made again with
-        // the window already up, it stays where it is.
+        val focus = LocalFocusManager.current
+        val keyboardController = LocalSoftwareKeyboardController.current
+        // Comes up to its detent once laid out, and goes down past the window's bottom once dismissed, letting go of
+        // the focus as it starts to (the keyboard goes with it, as UIKit ends editing as a sheet starts to go). Made
+        // again with the window already up, it stays where it is.
         LaunchedEffect(visible) {
             if (visible) {
                 if (motion.restoring) {
@@ -474,6 +480,10 @@ private fun SheetLayer(
                 animateTo(motion.rest(memory.detent), 0f, Motion.smooth(PRESENT_DURATION)) { arrive() }
                 motion.shown = true
             } else {
+                if (focused) {
+                    focus.clearFocus(force = true)
+                    keyboardController?.hide()
+                }
                 memory.forget()
                 motion.arrived = false
                 val velocity = motion.releaseVelocity

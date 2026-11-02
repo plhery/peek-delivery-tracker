@@ -33,10 +33,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -59,9 +57,9 @@ import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.pressEffect
 import com.plhery.peekdeliverytracker.ui.theme.SystemColors
+import com.plhery.peekdeliverytracker.ui.theme.TextLines
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
-import kotlin.math.ceil
-import kotlin.math.floor
+import com.plhery.peekdeliverytracker.ui.theme.widestLine
 
 /** What the share card says (`statusLabel`), which says whether Save is there and on. */
 enum class SharePhase { Reading, Ready, NotFound, Saved, SaveFailed }
@@ -222,7 +220,7 @@ private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             val font = PeekTheme.type.body.sfLines()
-            val lines = remember { TitleLines() }
+            val lines = remember { TextLines() }
             PeekSymbol("tray.and.arrow.down", font = font, tint = content)
             Spacer(Modifier.width(IMAGE_PADDING))
             // Taller than the button at the largest sizes, it stands out of it above and below, as UIKit lays it out;
@@ -233,24 +231,6 @@ private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
             )
         }
     }
-}
-
-/** A title's text as it was last laid out, which it gives as it is measured. */
-private class TitleLines {
-    var result: TextLayoutResult? = null
-}
-
-/**
- * A title that wraps, as wide as its widest line, as UIKit sizes a button's title to its longest line: the button then
- * centres its symbol and the title together, 8 apart, where the text's own width would be all the button leaves it.
- */
-private fun Modifier.widestLine(lines: TitleLines): Modifier = layout { measurable, constraints ->
-    val placeable = measurable.measure(constraints)
-    val text = lines.result
-    if (text == null || text.lineCount < 2) return@layout layout(placeable.width, placeable.height) { placeable.place(0, 0) }
-    val left = floor((0 until text.lineCount).minOf(text::getLineLeft)).toInt()
-    val right = ceil((0 until text.lineCount).maxOf(text::getLineRight)).toInt()
-    layout(right - left, placeable.height) { placeable.place(-left, 0) }
 }
 
 private val SharePhase.statusKey: String

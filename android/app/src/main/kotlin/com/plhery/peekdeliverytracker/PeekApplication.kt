@@ -41,6 +41,9 @@ class PeekApplication : Application() {
     /** A friend's invitation that came before the stores were made, which shows once they are. */
     private var waitingInvitation: String? = null
 
+    /** The links the app was opened with before the stores were made, counted once they are ([linkOpened]). */
+    private var waitingOpens = 0
+
     /** The app in front or left, as the stores follow it: its windows', the share card's aside ([AppForeground]). */
     internal val foreground = AppForeground()
 
@@ -71,6 +74,8 @@ class PeekApplication : Application() {
             waitingLink = null
             waitingInvitation?.let(container.invitation::open)
             waitingInvitation = null
+            repeat(waitingOpens) { container.linkOpened() }
+            waitingOpens = 0
             containerState.value = container
         }
     }
@@ -106,4 +111,14 @@ class PeekApplication : Application() {
 
     /** A link [ParcelLinkActivity] was handed: a parcel's ([openParcelLink]) or else a friend's invitation ([openInvitation]). */
     fun openLink(url: String): Boolean = openParcelLink(url) || openInvitation(url)
+
+    /**
+     * `.onOpenURL`'s count (`deep-link-open`, [AppContainer.linkOpened]): once for each link the app is opened with,
+     * whatever it leads to, by [ParcelLinkActivity] or to the window itself; one that comes before the stores are made
+     * is counted once they are. Sign-in comes back to the app by no link. On the main thread.
+     */
+    fun linkOpened() {
+        val container = container.value
+        if (container != null) container.linkOpened() else waitingOpens++
+    }
 }

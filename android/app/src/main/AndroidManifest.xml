@@ -76,11 +76,12 @@
                 <data android:host="p" />
                 <data android:host="invite" />
             </intent-filter>
-            <!-- On the site, https://<the site>/p/<id>, /i/<id> and /invite#<code>, and on the host it answered on
-                 before (the iPhone's associated domains, SDT_ASSOCIATED_DOMAIN and SDT_ASSOCIATED_DOMAIN_LEGACY): an
-                 App Link. Android verifies each host against its /.well-known/assetlinks.json, which names this package
-                 and the SHA-256 fingerprint of the key the app is signed with (the user's signing key, or Play's if Play
-                 signs the app). Until a host serves that file, Android opens that host's addresses in the browser. -->
+            <!-- On the site, https://<the site>/p/<id>, /i/<id> and /invite#<code> (or /invite/#<code>), and on the
+                 host it answered on before (the iPhone's associated domains, SDT_ASSOCIATED_DOMAIN and
+                 SDT_ASSOCIATED_DOMAIN_LEGACY): an App Link. Android verifies each host against its
+                 /.well-known/assetlinks.json, which names this package and the SHA-256 fingerprint of the key the app
+                 is signed with (the user's signing key, or Play's if Play signs the app). Until a host serves that
+                 file, Android opens that host's addresses in the browser. -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -91,6 +92,7 @@
                 <data android:pathPrefix="/p/" />
                 <data android:pathPrefix="/i/" />
                 <data android:path="/invite" />
+                <data android:path="/invite/" />
             </intent-filter>
         </activity>
 

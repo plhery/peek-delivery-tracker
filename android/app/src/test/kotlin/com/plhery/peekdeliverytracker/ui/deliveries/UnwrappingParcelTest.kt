@@ -1,6 +1,9 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -8,14 +11,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.PipLabel
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.SHOT
+import com.plhery.peekdeliverytracker.ui.awaitFrame
 import com.plhery.peekdeliverytracker.ui.screenshot
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -31,7 +40,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * `UnwrappingParcel` on its way open (B-AN20): a gift and a labelled parcel at a few points of the opening, the stars
  * at a few moments of their burst, and the sheet's timing of it: a quarter of a second, then the spring, which goes a
- * hair past open and settles, or open at once under Reduce Motion.
+ * hair past open and settles, or open at once under Reduce Motion. The welcome's lean turns the box as SwiftUI's
+ * `rotation3DEffect` does, the same way and with the same perspective.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -56,6 +66,47 @@ class UnwrappingParcelTest {
                 for (open in OPENING) UnwrappingParcel(open, label, ribbon, grounded = false)
             }
         }
+    }
+
+    /**
+     * Pip's 300 × 310 frame filled black, turned [degrees] about its x axis, or its y axis where [aboutY], with the
+     * parcel's perspective, as the window draws it on white: how long its two opposite edges are drawn, the leading
+     * then the trailing one (about y), or the top then the bottom one (about x), each a little in.
+     */
+    private fun turnedEdges(degrees: Float, aboutY: Boolean): Pair<Int, Int> {
+        compose.setContent {
+            Box(Modifier.testTag(SHOT).background(Color.White).padding(40.dp)) {
+                Box(Modifier.size(300.dp, 310.dp).rotation3DEffect(degrees, aboutY, perspective = 0.35f, longerSide = 310.dp).background(Color.Black))
+            }
+        }
+        compose.waitForIdle()
+        compose.awaitFrame()
+        val image = compose.onNodeWithTag(SHOT).captureToImage().asAndroidBitmap()
+        fun dark(x: Int, y: Int) = Color(image.getPixel(x, y)).red < 0.5f
+        val columns = (0 until image.width).filter { x -> (0 until image.height).any { dark(x, it) } }
+        val rows = (0 until image.height).filter { y -> (0 until image.width).any { dark(it, y) } }
+        return if (aboutY) {
+            (0 until image.height).count { dark(columns.first() + 3, it) } to (0 until image.height).count { dark(columns.last() - 3, it) }
+        } else {
+            (0 until image.width).count { dark(it, rows.first() + 3) } to (0 until image.width).count { dark(it, rows.last() - 3) }
+        }
+    }
+
+    // The eye 310 / 0.35 = 886 away: turned 20°, the frame's far edge goes 51 back (53 about x) and its near edge as
+    // far forward, so the far one is drawn (886 - 51) / (886 + 51) times as long as the near one.
+
+    @Test
+    @Config(qualifiers = PHONE)
+    fun turnedAboutItsUprightAxisTheRightSideGoesBackAsInSwiftUI() {
+        val (leading, trailing) = turnedEdges(20f, aboutY = true)
+        assertEquals("$trailing over $leading", 0.8905f, trailing.toFloat() / leading, 0.005f)
+    }
+
+    @Test
+    @Config(qualifiers = PHONE)
+    fun turnedAboutItsLevelAxisTheTopGoesBackAsInSwiftUI() {
+        val (top, bottom) = turnedEdges(20f, aboutY = false)
+        assertEquals("$top over $bottom", 0.8871f, top.toFloat() / bottom, 0.005f)
     }
 
     @Test

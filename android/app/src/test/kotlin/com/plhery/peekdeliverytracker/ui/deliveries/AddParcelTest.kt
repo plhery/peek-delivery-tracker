@@ -1210,7 +1210,7 @@ class AddParcelTest {
         }
         open()
         type(number)
-        pick(CarrierId.Dpd, "DPD")
+        pick(CarrierId.Dpd, "DPD Switzerland")
         assertEquals(listOf(first), source.refusalQuestions)
         pick(CarrierId.Dhl, "DHL")
         val refused = description(ADD_CARRIER)

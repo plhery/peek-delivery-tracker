@@ -5,9 +5,15 @@ import android.provider.Settings
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.ime
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -79,6 +85,12 @@ class SignInDeviceTest {
     private lateinit var session: SessionStore
     private var dark = false
 
+    /**
+     * The keyboard's height as the app's layout last read it (`WindowInsets.ime`), which reaches the window's once the
+     * keyboard's slide has ended there.
+     */
+    @Volatile private var appKeyboard = 0
+
     /** The keyboard's slides in or out still playing, as the window hears of them. */
     private val keyboardSlides = object : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_CONTINUE_ON_SUBTREE) {
         var playing = 0
@@ -113,8 +125,18 @@ class SignInDeviceTest {
             val scope = rememberCoroutineScope()
             session = remember { signInSession(scope, signInConfiguration(), service).also { it.showSignIn() } }
             val density = LocalDensity.current
+            val ime = WindowInsets.ime
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
-                RootHost(dark = dark, reduceMotion = true, source = guest, session = session)
+                Box(
+                    Modifier.fillMaxSize().layout { measurable, constraints ->
+                        appKeyboard = ime.getBottom(this)
+                        val placeable = measurable.measure(constraints)
+                        layout(placeable.width, placeable.height) { placeable.place(0, 0) }
+                    },
+                    propagateMinConstraints = true,
+                ) {
+                    RootHost(dark = dark, reduceMotion = true, source = guest, session = session)
+                }
             }
         }
         compose.waitForIdle()
@@ -130,18 +152,29 @@ class SignInDeviceTest {
 
     private fun acceptingText() = onUi { compose.activity.getSystemService(InputMethodManager::class.java).isAcceptingText }
 
-    private fun keyboardShown() =
-        onUi { ViewCompat.getRootWindowInsets(compose.activity.window.decorView)?.isVisible(WindowInsetsCompat.Type.ime()) == true }
+    /**
+     * Whether the window has a keyboard standing up, with its height: the window can call the keyboard visible a moment
+     * before it knows how tall it is, as when it comes back up just after going down (the code step after the address).
+     */
+    private fun keyboardShown() = onUi {
+        val insets = ViewCompat.getRootWindowInsets(compose.activity.window.decorView)
+        insets?.isVisible(WindowInsetsCompat.Type.ime()) == true && insets.getInsets(WindowInsetsCompat.Type.ime()).bottom > 0
+    }
+
+    /** The keyboard's height where the window knows it will stand, in pixels: none where none shows. */
+    private fun windowKeyboard(): Int {
+        var height = 0
+        compose.runOnUiThread {
+            height = ViewCompat.getRootWindowInsets(compose.activity.window.decorView)?.getInsets(WindowInsetsCompat.Type.ime())?.bottom ?: 0
+        }
+        return height
+    }
 
     /** The window's height above the keyboard, in pixels: all of it where none shows. */
     private fun roomAboveTheKeyboard(): Int {
-        var room = 0
-        compose.runOnUiThread {
-            val view = compose.activity.window.decorView
-            val ime = ViewCompat.getRootWindowInsets(view)?.getInsets(WindowInsetsCompat.Type.ime())?.bottom ?: 0
-            room = view.height - ime
-        }
-        return room
+        var height = 0
+        compose.runOnUiThread { height = compose.activity.window.decorView.height }
+        return height - windowKeyboard()
     }
 
     /** A finger on what has [tag], scrolled into the window first, as the page scrolls at the largest text. */
@@ -159,9 +192,12 @@ class SignInDeviceTest {
         return !hardware || Settings.Secure.getInt(context.contentResolver, "show_ime_with_hard_keyboard", 0) != 0
     }
 
-    /** No keyboard slide playing, and the UI idle. */
+    /**
+     * No keyboard slide playing, the app's layout with the keyboard where the window has it (the slide has ended there
+     * too), and the UI idle.
+     */
     private fun awaitStill() {
-        compose.waitUntil(5_000) { onUi { keyboardSlides.playing == 0 } }
+        compose.waitUntil(5_000) { onUi { keyboardSlides.playing == 0 } && appKeyboard == windowKeyboard() }
         compose.waitForIdle()
     }
 

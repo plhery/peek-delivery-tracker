@@ -4,6 +4,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
+import androidx.compose.foundation.Indication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -95,7 +96,9 @@ import kotlinx.coroutines.delay
  * says nothing and takes no touches.
  *
  * The swipe to archive and the zoom into the parcel's page belong to the list, which puts them on the card through its
- * `modifier` and its `actions` for TalkBack; its menu comes up on `onLongClick`.
+ * `modifier` and its `actions` for TalkBack; its menu comes up on `onLongClick`. A finger's tap calls `onTap` (the
+ * swipe's, which closes the card while it is open), TalkBack's `onOpen`. The card gives under the finger in the swipe's
+ * row, its shadow with it ([SwipeToArchive]); one that doesn't swipe doesn't give, as the iPhone's plain tap.
  */
 internal fun Modifier.cardButton(
     decorative: Boolean,
@@ -107,18 +110,20 @@ internal fun Modifier.cardButton(
     cornerRadius: Dp,
     shadow: Boolean,
     actions: List<CustomAccessibilityAction> = emptyList(),
+    onTap: () -> Unit = onOpen,
 ): Modifier {
     if (decorative) return clearAndSetSemantics {}
     val shape = ContinuousRoundedShape(cornerRadius)
-    return cardTouches(label, hint, selected, onOpen, onLongClick, actions)
+    return cardTouches(label, hint, selected, onOpen, onLongClick, actions, onTap, indication = null)
         .then(if (shadow) Modifier.dropShadow(shape, ExperimentalSurfaceShadow) else Modifier)
         .clip(shape)
 }
 
 /**
  * A card or an archived row as one element: read as `label`, a button whose action opens the parcel (`hint` its name
- * where the iPhone gives one), selected while the parcel is shown beside the list, and giving under the finger as
- * ExperimentalSwipeToArchive's card does (the lift). A long press calls `onLongClick`, the list's card menu as the
+ * where the iPhone gives one), selected while the parcel is shown beside the list, and giving under the finger with
+ * `indication`, ExperimentalLiftButtonStyle's lift on an archived row. A finger's tap calls `onTap`, TalkBack's double
+ * tap `onOpen` (`.accessibilityAction { onOpen() }`). A long press calls `onLongClick`, the list's card menu as the
  * iPhone's `.contextMenu` opens it, with the phone's long-press feel as the iPhone's menu comes with its own; the
  * finger lifting then opens nothing. TalkBack offers it as the element's long-press action, and `actions` (the swipe's
  * Archive) beside it.
@@ -130,6 +135,8 @@ internal fun Modifier.cardTouches(
     onOpen: () -> Unit,
     onLongClick: (() -> Unit)?,
     actions: List<CustomAccessibilityAction> = emptyList(),
+    onTap: () -> Unit = onOpen,
+    indication: Indication? = PressStyle.ExperimentalLift,
 ): Modifier = this
     .clearAndSetSemantics {
         contentDescription = label
@@ -147,7 +154,7 @@ internal fun Modifier.cardTouches(
         }
         if (actions.isNotEmpty()) customActions = actions
     }
-    .combinedClickable(interactionSource = null, indication = PressStyle.ExperimentalLift, onLongClick = onLongClick, onClick = onOpen)
+    .combinedClickable(interactionSource = null, indication = indication, onLongClick = onLongClick, onClick = onTap)
 
 /** The texts a card writes, in the order VoiceOver reads them once combined, as one label. */
 internal fun cardLabel(vararg parts: String?): String = parts.filterNot { it.isNullOrEmpty() }.joinToString(", ")

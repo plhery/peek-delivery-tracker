@@ -209,6 +209,17 @@ class ArchiveSwipeTest {
         compose.onNodeWithTag(PARCEL_PAGE).assertExists()
     }
 
+    /** A-AX08: TalkBack's double tap on an open card opens the parcel (`.accessibilityAction { onOpen() }`). */
+    @Test
+    fun talkBacksDoubleTapOnAnOpenCardOpensTheParcel() {
+        show()
+        drag("Birthday gift", distance = -60f)
+        assertEquals(1, openActions())
+        compose.card("Birthday gift").performSemanticsAction(SemanticsActions.OnClick)
+        compose.waitForIdle()
+        compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+    }
+
     @Test
     fun theOpenActionArchivesTheParcelWhenPressed() {
         show()

@@ -2,9 +2,12 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.snap
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,7 +56,9 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
@@ -71,9 +77,11 @@ import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.Haptics
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.MinimumScale
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekKeyframes
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.keyframeAnimator
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
@@ -87,6 +95,7 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /** What [archivePanDecision] makes of a drag so far. */
@@ -146,6 +155,33 @@ internal class ArchiveSwipe(
     var archiveFeedback by mutableIntStateOf(0)
         private set
 
+    /** The finger resting on the row, which gives under it ([SwipeToArchive]). */
+    val presses = MutableInteractionSource()
+    private var press: PressInteraction.Press? = null
+    private var pressWait: Job? = null
+
+    /**
+     * A finger went down on the row: it is pressed [PRESS_DELAY] later, unless the finger lifted or moved off first, so
+     * that a quick tap or the start of a scroll shows no press (ArchivePanGestureRecognizer's `pendingPress`).
+     */
+    fun touched() {
+        endPress()
+        pressWait = scope.launch {
+            delay(PRESS_DELAY)
+            val pressed = PressInteraction.Press(Offset.Zero)
+            press = pressed
+            presses.emit(pressed)
+        }
+    }
+
+    /** The finger lifted, moved more than [PRESS_SLOP] or went to the swipe or the list: the press ends (`endPress()`). */
+    fun endPress() {
+        pressWait?.cancel()
+        pressWait = null
+        press?.let { presses.tryEmit(PressInteraction.Release(it)) }
+        press = null
+    }
+
     /** The card rests open on its action, or is on its way there. */
     var open by mutableStateOf(false)
         private set
@@ -203,6 +239,7 @@ internal class ArchiveSwipe(
 
     fun began() {
         gestureActive = true
+        endPress()
         // Catch the card wherever it is on screen.
         swipe = swipe.settle(at = shown().reveal)
     }
@@ -369,7 +406,9 @@ internal fun rememberArchiveSwipe(state: DeliveriesState, parcelId: UUID, action
  * The swipe on a card (ExperimentalSwipeToArchiveModifier): the card in a row cut to `cornerRadius`, with `shadow` under
  * the row rather than the card, which moves left over the action drawn behind it. `card` draws the card with the
  * modifier given, which moves it; the card itself takes its taps through [ArchiveSwipe.tap] and offers the swipe's
- * action to TalkBack ([archiveAction]).
+ * action to TalkBack ([archiveAction]). The whole row gives under a resting finger, its shadow with it, as the archived
+ * rows' ExperimentalLiftButtonStyle does (scale 0.975, 1.5 lower, a little darker on a snappy 0.22 s; only darker under
+ * Reduce Motion), told by the row's own drag ([archivePan]).
  *
  * While `excluded`, the action's strip is kept from the system's back gesture ([keptFromBack]).
  */
@@ -390,6 +429,7 @@ internal fun SwipeToArchive(
     Box(
         modifier
             .then(if (excluded) Modifier.keptFromBack(density, direction) else Modifier)
+            .indication(swipe.presses, PressStyle.ExperimentalLift)
             .then(if (shadow) Modifier.dropShadow(shape, ExperimentalSurfaceShadow) else Modifier)
             .clip(shape)
             .onSizeChanged { swipe.width = with(density) { it.width.toDp().value.toDouble() } }
@@ -432,60 +472,74 @@ internal fun archiveAction(swipe: ArchiveSwipe, title: String): CustomAccessibil
  * The drag on the row: undecided until it has gone [ARCHIVE_DECISION_DISTANCE] in the window, then the card's if it
  * goes across ([archivePanDecision]), which stops the list's scroll by taking every move after; the list's otherwise. One
  * finger only. Translations are measured from where the drag was decided, as iOS 27 reports a recognized pan from zero.
+ *
+ * It also tells the row's press, as ArchivePanGestureRecognizer does: [PRESS_DELAY] after the finger goes down, ended
+ * once it has moved more than [PRESS_SLOP] on the row, as it lifts, or as the drag goes to the swipe or the list.
  */
 private suspend fun androidx.compose.ui.input.pointer.PointerInputScope.archivePan(swipe: ArchiveSwipe, origin: () -> Offset) {
     val decision = ARCHIVE_DECISION_DISTANCE.toPx()
+    val slop = PRESS_SLOP.toPx()
     awaitEachGesture {
         val down = awaitFirstDown(requireUnconsumed = false)
         if (swipe.committing) return@awaitEachGesture
-        val startInWindow = down.position + origin()
-        val tracker = VelocityTracker()
-        tracker.addPointerInputChange(down)
-        var decided = false
-        var from = Offset.Zero
-        while (!decided) {
-            val event = awaitPointerEvent()
-            if (event.changes.count { it.pressed } > 1) return@awaitEachGesture
-            val change = event.changes.firstOrNull { it.id == down.id } ?: return@awaitEachGesture
-            if (!change.pressed) return@awaitEachGesture
-            tracker.addPointerInputChange(change)
-            val travel = change.position + origin() - startInWindow
-            when (archivePanDecision(travel.x, travel.y, decision)) {
-                ArchivePan.Undecided -> Unit
-                ArchivePan.Failed -> return@awaitEachGesture
-                ArchivePan.Began -> {
-                    decided = true
-                    from = change.position
-                    change.consume()
+        swipe.touched()
+        try {
+            val startInWindow = down.position + origin()
+            val tracker = VelocityTracker()
+            tracker.addPointerInputChange(down)
+            var decided = false
+            var from = Offset.Zero
+            while (!decided) {
+                val event = awaitPointerEvent()
+                if (event.changes.count { it.pressed } > 1) return@awaitEachGesture
+                val change = event.changes.firstOrNull { it.id == down.id } ?: return@awaitEachGesture
+                if (!change.pressed) return@awaitEachGesture
+                tracker.addPointerInputChange(change)
+                if ((change.position - down.position).getDistance() > slop) swipe.endPress()
+                val travel = change.position + origin() - startInWindow
+                when (archivePanDecision(travel.x, travel.y, decision)) {
+                    ArchivePan.Undecided -> Unit
+                    ArchivePan.Failed -> return@awaitEachGesture
+                    ArchivePan.Began -> {
+                        decided = true
+                        from = change.position
+                        change.consume()
+                    }
                 }
             }
-        }
-        swipe.began()
-        swipe.changed(SwipeSize(0.0, 0.0))
-        var finished = false
-        try {
-            while (true) {
-                val event = awaitPointerEvent()
-                val change = event.changes.firstOrNull { it.id == down.id } ?: break
-                // The lift too: a finger that stopped before it lifted throws nothing.
-                tracker.addPointerInputChange(change)
-                if (!change.pressed) {
+            swipe.began()
+            swipe.changed(SwipeSize(0.0, 0.0))
+            var finished = false
+            try {
+                while (true) {
+                    val event = awaitPointerEvent()
+                    val change = event.changes.firstOrNull { it.id == down.id } ?: break
+                    // The lift too: a finger that stopped before it lifted throws nothing.
+                    tracker.addPointerInputChange(change)
+                    if (!change.pressed) {
+                        change.consume()
+                        finished = true
+                        swipe.ended(tracker.calculateVelocity().x / density.toDouble())
+                        return@awaitEachGesture
+                    }
+                    if (change.positionChange() != Offset.Zero) {
+                        val translation = (change.position - from) / density
+                        swipe.changed(SwipeSize(translation.x.toDouble(), translation.y.toDouble()))
+                    }
                     change.consume()
-                    finished = true
-                    swipe.ended(tracker.calculateVelocity().x / density.toDouble())
-                    return@awaitEachGesture
                 }
-                if (change.positionChange() != Offset.Zero) {
-                    val translation = (change.position - from) / density
-                    swipe.changed(SwipeSize(translation.x.toDouble(), translation.y.toDouble()))
-                }
-                change.consume()
+            } finally {
+                if (!finished) swipe.cancel()
             }
         } finally {
-            if (!finished) swipe.cancel()
+            swipe.endPress()
         }
     }
 }
+
+/** How long a finger rests on a card before it gives under it, and how far it may move before it no longer does. */
+internal const val PRESS_DELAY = 50L
+internal val PRESS_SLOP = 6.dp
 
 /**
  * A soft tray behind the card, and the action that rides on the card's edge until it is fully shown, then leaps to
@@ -563,7 +617,10 @@ private fun ActionButton(swipe: ArchiveSwipe, title: String) {
                             role = Role.Button
                             onClick { swipe.trigger(provideFeedback = true); true }
                         }
-                        .pointerInput(swipe) { detectTapGestures { if (swipe.visible() >= 8) swipe.trigger(provideFeedback = true) } }
+                        // `.buttonStyle(.plain)`: it dims while pressed.
+                        .clickable(interactionSource = null, indication = PlainPress) {
+                            if (swipe.visible() >= 8) swipe.trigger(provideFeedback = true)
+                        }
                 } else {
                     Modifier.clearAndSetSemantics {}
                 },
@@ -571,7 +628,8 @@ private fun ActionButton(swipe: ArchiveSwipe, title: String) {
         verticalArrangement = Arrangement.spacedBy(5.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        // The action keeps its width: its word stops growing before it outgrows it.
+        // The action keeps its width: its word stops growing before it outgrows it, and shrinks to 70 % rather than be
+        // cut off.
         CappedDynamicTypeSize(DynamicTypeSize.Accessibility1) {
             PeekSymbol(
                 "archivebox.fill",
@@ -583,12 +641,24 @@ private fun ActionButton(swipe: ArchiveSwipe, title: String) {
                 font = type.fixed(18f, FontWeight.Bold),
                 tint = ink,
             )
-            Text(title, color = ink, style = PeekTheme.type.style(IosTextStyle.Caption2, FontWeight.SemiBold).sfLines(), maxLines = 1)
+            val style = PeekTheme.type.style(IosTextStyle.Caption2, FontWeight.SemiBold).sfLines()
+            val probe = LocalArchiveWord.current
+            Text(
+                title, color = ink, style = style, maxLines = 1, overflow = TextOverflow.Ellipsis,
+                autoSize = MinimumScale(style.fontSize, ACTION_MINIMUM_SCALE),
+                onTextLayout = { probe?.invoke(it) },
+            )
         }
     }
 }
 
 /** While the action touches the card, it also fills under the card's round corners. */
 private const val REACH = 24.0
+
+/** `minimumScaleFactor(0.7)` of the action's word. */
+private const val ACTION_MINIMUM_SCALE = 0.7f
+
+/** Told how the action's word is laid out: the tests check it keeps to one line, whole. */
+internal val LocalArchiveWord = staticCompositionLocalOf<((TextLayoutResult) -> Unit)?> { null }
 
 const val ARCHIVE_ACTION = "deliveries.archiveAction"

@@ -74,6 +74,7 @@ import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
  * - `selected`: the parcel shown beside the list, ringed.
  * - `onLongClick`: a long press, the list's card menu; the press then doesn't open the parcel ([cardButton]).
  * - `swipeAction`: the list's swipe to archive, offered to TalkBack; the swipe's row then draws the card's shadow.
+ * - `onTap`: what a finger's tap does, `onOpen` unless the swipe closes the card first; TalkBack's double tap opens it.
  *
  * It fades in as it first shows, and its map once drawn, neither under Reduce Motion. Nothing is drawn until the
  * carriers' liveries are read.
@@ -89,6 +90,7 @@ fun NextDeliveryPass(
     selected: Boolean = false,
     onLongClick: (() -> Unit)? = null,
     swipeAction: CustomAccessibilityAction? = null,
+    onTap: () -> Unit = onOpen,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -140,6 +142,7 @@ fun NextDeliveryPass(
                 cornerRadius = Radii.nextUp,
                 shadow = swipeAction == null,
                 actions = listOfNotNull(swipeAction),
+                onTap = onTap,
             )
             .graphicsLayer {
                 val scale = if (reduceMotion) 1f else press.toFloat()

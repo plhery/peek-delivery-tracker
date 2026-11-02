@@ -64,8 +64,8 @@ import kotlin.math.roundToInt
  * attention for the parcel), with a small route at its end when its scans have places and the text is not one of the
  * accessibility sizes. A past delivery's card is paler.
  *
- * `arrived`, `decorative`, `onName`, `selected`, `onLongClick` and `swipeAction` are as on [NextDeliveryPass]; an arrived card swells a
- * little as the news lands. Nothing is drawn until the carriers' liveries are read.
+ * `arrived`, `decorative`, `onName`, `selected`, `onLongClick`, `swipeAction` and `onTap` are as on [NextDeliveryPass];
+ * an arrived card swells a little as the news lands. Nothing is drawn until the carriers' liveries are read.
  */
 @Composable
 fun ParcelPassCard(
@@ -79,6 +79,7 @@ fun ParcelPassCard(
     selected: Boolean = false,
     onLongClick: (() -> Unit)? = null,
     swipeAction: CustomAccessibilityAction? = null,
+    onTap: () -> Unit = onOpen,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -138,6 +139,7 @@ fun ParcelPassCard(
                 cornerRadius = Radii.card,
                 shadow = false,
                 actions = listOfNotNull(swipeAction),
+                onTap = onTap,
             )
             .graphicsLayer {
                 val scale = if (reduceMotion) 1f else press.toFloat()
@@ -253,9 +255,10 @@ fun DeliveredParcelCard(
     selected: Boolean = false,
     onLongClick: (() -> Unit)? = null,
     swipeAction: CustomAccessibilityAction? = null,
+    onTap: () -> Unit = onOpen,
 ) {
     ParcelPassCard(
         parcel, notice = null, onOpen = onOpen, modifier = modifier, onName = onName, selected = selected, onLongClick = onLongClick,
-        swipeAction = swipeAction,
+        swipeAction = swipeAction, onTap = onTap,
     )
 }

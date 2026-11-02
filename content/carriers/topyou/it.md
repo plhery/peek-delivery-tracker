@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-TopYou (通邮, anche 通邮集团) è 深圳市通邮物流科技（集团）股份有限公司, uno spedizioniere internazionale di Shenzhen, in Cina, che gestisce linee verso l'estero. Se un negozio online cinese ha spedito il tuo ordine con TopYou, il codice che ti ha dato inizia con TYZR e finisce con YQ: incollalo nel box qui sopra. Il tracking di TopYou segue il pacco dal suo magazzino in Cina fino in Italia, volo e dogana compresi. Poi il pacco passa al corriere che lo consegna.
+TopYou (通邮, Tongyou, anche 通邮集团 o SZTY56) è 深圳市通邮物流科技（集团）股份有限公司, uno spedizioniere internazionale di Shenzhen, in Cina, che gestisce linee verso l'estero. Se un negozio online cinese ha spedito il tuo ordine con TopYou, il codice che ti ha dato inizia con TYZR e finisce con YQ: incollalo nel box qui sopra. Il tracking di TopYou segue il pacco dal suo magazzino in Cina fino in Italia, volo e dogana compresi. Poi il pacco passa al corriere che lo consegna.
 
 ## Codice di tracking TopYou: com'è fatto
 
@@ -49,13 +49,26 @@ TopYou scrive le scansioni in inglese, e Peek le mostra così come sono. Nell'or
 | `Shipment completed the customs clearance process at destination` | Sdoganato: ora va al corriere che lo consegna. Non è più fermo in dogana. | «In transito» |
 | `Shipment is out for delivery` | Non è ancora in consegna, anche se la frase lo dice: in Italia e in Francia segna il passaggio a GOFO e arriva con la prima scansione di GOFO in un centro di smistamento, qualche giorno prima che il corriere di GOFO parta per il giro di consegna. | «In transito» |
 
-**Dopo il passaggio.** Il sito di TopYou può continuare con le scansioni del corriere che consegna, nelle sue parole e con il suo luogo: in Italia, per esempio, quelle di GOFO.
+**Linee consegnate da una posta.** Sulle linee che consegna la posta del Paese di destinazione, TopYou usa altre parole ancora, fino alla dogana di quel Paese:
+
+| TopYou scrive | Cosa vuol dire per te | Stato in Peek |
+| --- | --- | --- |
+| `Accepted by carrier` | TopYou ha il pacco in Cina: è la prima scansione. | «Preso in carico» |
+| `Inbound in sorting center` | Registrato nel primo magazzino di TopYou, pochi minuti dopo. Non si muove ancora. | «Preso in carico» |
+| `Outbound in sorting center` | Ha lasciato quel magazzino. TopYou aggiunge `, Lastmile Number:` e il codice con cui la posta lo consegna, e Peek mostra la riga con quel codice. | «In transito» |
+| `Received by line-haul`, `Hand over to airline` | Affidato al trasporto, poi passato alla compagnia aerea. | «In transito» |
+| `Airline arrived at transit country or district.`, `Airline departed from transit or district country.` | Uno scalo lungo la strada verso il Paese di destinazione. | «In transito» |
+| `Airline arrived at destination country`, `Arrive at destination country` | È arrivato nel Paese di destinazione. | «In transito» |
+| `Export clearance success` | La dogana cinese l'ha lasciato partire: non è fermo. | «In transito» |
+| `Import clearance success` | La dogana del Paese di destinazione l'ha sdoganato per la posta. La posta può ancora mostrare scansioni doganali sue. | «In transito» |
+
+**Dopo il passaggio.** Il sito di TopYou può continuare con le scansioni del corriere che consegna, nelle sue parole. In Italia, per esempio, quelle di GOFO: `Arrived at sorting center`, `The package left sorting center` e `Package departed from sorting center` (il pacco è in un centro di smistamento di GOFO o lo lascia: «In transito»), `Arrived at GOFO Regional Destination Facility` (il pacco è arrivato alla struttura regionale di GOFO: «In transito») e `The driver is out for delivery` (il corriere di GOFO è partito per il giro di consegna: «In consegna»).
 
 ## Chi consegna i pacchi TopYou in Italia
 
-Dopo la dogana, TopYou passa il pacco al corriere che lo consegna. In Italia può essere [GOFO](carrier:gofo-it): sul sito di TopYou il passaggio compare come `Shipment is out for delivery`, e poi arrivano le scansioni di GOFO. Per il resto, la scheda di TopYou può dare il codice del corriere, ma non il suo nome. Neanche il nome della linea TopYou su cui viaggia il pacco ti aiuta: una linea può portare il nome di un altro corriere, e un pacco consegnato dalla posta americana viaggiava su una linea chiamata "DHL Paket". Se non è chiaro, chiedi al negozio chi consegna il tuo ordine e con quale codice.
+Dopo la dogana, TopYou passa il pacco al corriere che lo consegna. In Italia può essere [GOFO](carrier:gofo-it): sul sito di TopYou il passaggio compare come `Shipment is out for delivery`, e poi arrivano le scansioni di GOFO. Per il resto, la scheda di TopYou può dare il codice del corriere, ma non il suo nome. Su una linea consegnata da una posta, il codice della posta chiude anche la riga `Outbound in sorting center`, dopo `Lastmile Number:`. Neanche il nome della linea TopYou su cui viaggia il pacco ti aiuta: una linea può portare il nome di un altro corriere, e un pacco consegnato dalla posta americana viaggiava su una linea chiamata "DHL Paket". Se non è chiaro, chiedi al negozio chi consegna il tuo ordine e con quale codice.
 
-Se il secondo codice inizia con GFIT o CIIT, Peek lo chiede a GOFO Italy. Se è un codice postale internazionale valido (due lettere, nove cifre, due lettere) e il pacco va in Italia, Peek lo chiede a [Poste Italiane](carrier:poste-italiane), anche se non è detto che consegni Poste.
+Se il secondo codice inizia con GFIT o CIIT, Peek lo chiede a GOFO Italy. Se è un codice postale internazionale valido (due lettere, nove cifre con una cifra di controllo corretta, due lettere) e il pacco va in Italia, Peek lo chiede a [Poste Italiane](carrier:poste-italiane), anche se non è detto che consegni Poste.
 
 **Se consegna Poste.** Cerca il secondo codice nel Cerca Spedizioni di poste.it o nell'App Poste Italiane. Per i pacchi dall'estero, Poste dice che il tracciamento parte dalla presa in carico in Italia: prima, poste.it non mostra niente. Se la consegna a casa non riesce, dal Cerca Spedizioni, con «Prenota», puoi fissare un appuntamento all'ufficio postale per ritirarlo, entro i termini di giacenza. Vedi [consegna mancata](guide:missed-delivery) e [pacco non ritirato](guide:uncollected-parcel).
 
@@ -65,7 +78,7 @@ Se il secondo codice inizia con GFIT o CIIT, Peek lo chiede a GOFO Italy. Se è 
 
 **Fermo su `Shipment started the customs clearance process at destination`.** Il pacco è alla dogana del Paese di destinazione. Se ti chiedono spese di importazione, vedi [pacco fermo in dogana](guide:customs); se resta lì per giorni, avvisa il negozio. Approfondisci in [tracking che non si aggiorna](guide:tracking-not-updating).
 
-**Niente dopo la dogana.** Dopo `Departed from customs` o `Shipment completed the customs clearance process at destination` il pacco dovrebbe averlo il corriere che consegna. Cerca il suo codice sul sito di TopYou, oppure chiedi al negozio quale corriere consegna e con quale codice. Dopo `Shipment is out for delivery` il pacco è al primo centro di smistamento di GOFO: il giro di consegna arriva qualche giorno dopo. Vedi anche [tracking di un pacco dalla Cina](guide:tracking-from-china).
+**Niente dopo la dogana.** Dopo `Departed from customs`, `Shipment completed the customs clearance process at destination` o `Import clearance success` il pacco dovrebbe averlo il corriere che consegna. Cerca il suo codice sul sito di TopYou, oppure chiedi al negozio quale corriere consegna e con quale codice. Dopo `Shipment is out for delivery` il pacco è al primo centro di smistamento di GOFO: il giro di consegna arriva qualche giorno dopo. Vedi anche [tracking di un pacco dalla Cina](guide:tracking-from-china).
 
 **Codice non trovato o ancora nessuna scansione.** Il sito di TopYou risponde 查询不到 (non trovato) per un codice che non conosce, e può rispondere 暂无轨迹信息 (ancora nessuna informazione di tracking) per un codice che conosce ma non ha ancora scansionato. In tutti e due i casi Peek mostra «In attesa del corriere» e continua a controllare. Confronta il codice con il messaggio del negozio, carattere per carattere; se dopo qualche giorno non arriva niente, chiedi al negozio se il pacco è partito davvero.
 
@@ -85,13 +98,13 @@ Peek legge il sito di tracking di TopYou e mostra lo stato, ogni scansione nelle
 
 Fino al passaggio, Peek mostra solo il codice TopYou. Quando la scheda di TopYou contiene il codice del corriere che consegna, Peek lo prova: con la posta del Paese di destinazione se è un codice postale internazionale valido, cioè Poste Italiane per l'Italia; altrimenti con l'unico corriere a cui quella forma di codice appartiene di sicuro, purché Peek legga il suo tracking, per esempio GOFO Italy per un codice GFIT o CIIT. Appena quel corriere mostra una scansione recente almeno quanto l'ultima di TopYou, Peek segue il pacco lì, mostra tutti e due i codici e tiene le scansioni di TopYou nella cronologia. Un codice che non appartiene di sicuro a un solo corriere, come 20 cifre da sole, non lo prova: Peek resta sul tracking di TopYou, che può mostrare anche le scansioni del corriere.
 
-Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». «Passaggi importanti» ti avvisa per le due righe di dogana, `Shipment started the customs clearance process at origin` e `Shipment started the customs clearance process at destination`, e per la consegna, ma non per il volo, per lo svincolo dalla dogana o per `Shipment is out for delivery`. Peek non può contattare TopYou, il corriere o il negozio al posto tuo.
+Peek controlla ogni 10 minuti. Se TopYou non aggiunge scansioni nuove, passa a un controllo all'ora: dopo 12 ore se il pacco è ancora «Etichetta creata» o «Preso in carico», dopo due giorni negli altri casi. Lo stesso succede, o i controlli si diradano ancora, se nessuna notifica può raggiungerti e non guardi il pacco da un'ora. Quando il pacco è «In consegna», Peek controlla ogni 2 minuti. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». «Passaggi importanti» ti avvisa per le righe di dogana, come `Shipment started the customs clearance process at origin` e `Shipment started the customs clearance process at destination`, per `The driver is out for delivery` di GOFO e per la consegna, ma non per il volo, per lo svincolo dalla dogana o per `Shipment is out for delivery`. Peek non può contattare TopYou, il corriere o il negozio al posto tuo.
 
 ## Domande sul tracking TopYou
 
 ### Cos'è TopYou (通邮)?
 
-È 深圳市通邮物流科技（集团）股份有限公司, detto anche 通邮集团, uno spedizioniere di Shenzhen, in Cina, con linee internazionali. I suoi codici sono TYZR, una lettera, dieci cifre e YQ.
+È 深圳市通邮物流科技（集团）股份有限公司, detto anche 通邮集团, Tongyou o SZTY56, uno spedizioniere di Shenzhen, in Cina, con linee internazionali. I suoi codici sono TYZR, una lettera, dieci cifre e YQ.
 
 ### Perché TopYou mostra l'Italia quando il pacco è ancora in Cina?
 
@@ -110,5 +123,5 @@ Il negozio dove hai ordinato: è lui che ha prenotato la spedizione con TopYou. 
 - [Poste Italiane: Ricevere spedizioni dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – Dazio, Tassa di Gestione dell'Unione, sdoganamento solo per i flussi UPU, Diritti Postali
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – dazio di 3 € per articolo sugli ordini fino a 150 €, riscosso dal venditore o dal vettore, cos'è un articolo
 - [Commissione europea: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € per articolo dal 1° novembre 2026
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – TopYou: società, forma dei codici, maiuscole, nessun link letto, scansioni e loro fasi, passaggio a GOFO in Italia e in Francia, Paese accanto alle scansioni di TopYou, ora di Pechino e ore di GOFO, secondo codice e nome della linea, codici sconosciuti o senza scansioni; cosa mostra Peek e il passaggio a un altro corriere
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – TopYou: società e altri nomi, forma dei codici, maiuscole, nessun link letto, scansioni e loro fasi, passaggio a GOFO in Italia e in Francia e scansioni di GOFO riportate, Paese accanto alle scansioni di TopYou, ora di Pechino e ore di GOFO, secondo codice, codice Lastmile su una linea della posta e nome della linea, codici sconosciuti o senza scansioni; cosa mostra Peek e il passaggio a un altro corriere
 :::

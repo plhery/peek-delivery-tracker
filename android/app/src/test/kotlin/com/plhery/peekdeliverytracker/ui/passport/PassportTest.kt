@@ -2,6 +2,8 @@ package com.plhery.peekdeliverytracker.ui.passport
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
@@ -12,9 +14,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsConfiguration
@@ -107,7 +111,7 @@ class PassportTest {
 
     /**
      * The passport tab of [session] on [parcels], chosen from the tab bar, as large as [fontScale] makes its text, the
-     * haptics played on [feeling] where a test gives it.
+     * haptics played on [feeling] where a test gives it, with motion unless [reduceMotion].
      */
     private fun show(
         parcels: List<Parcel> = DemoCards.parcels(),
@@ -115,6 +119,7 @@ class PassportTest {
         fontScale: Float = 1f,
         recreation: Recreation? = null,
         feeling: View? = null,
+        reduceMotion: Boolean = true,
     ) {
         source = FakeDeliveries(parcels, session)
         compose.waitsForMaps()
@@ -124,7 +129,9 @@ class PassportTest {
             val density = LocalDensity.current
             val root: @Composable () -> Unit = {
                 CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
-                    RootHost(state = session, language = language, dark = false, onView = { views += it }, source = source)
+                    RootHost(
+                        state = session, language = language, dark = false, reduceMotion = reduceMotion, onView = { views += it }, source = source,
+                    )
                 }
             }
             if (feeling != null) CompositionLocalProvider(LocalView provides feeling, content = root) else root()
@@ -248,6 +255,39 @@ class PassportTest {
         assertEquals("5d 5h", passportDuration(requireNotNull(stats.averageDeliveryDuration), localizer))
         assertEquals("18h", passportDuration(requireNotNull(stats.fastestDelivery).duration, localizer))
         assertEquals(listOf("France, 4 parcels", "Switzerland, 3 parcels", "Germany, 3 parcels"), rows())
+    }
+
+    /** The cover's words, drawn now in software, as Robolectric's hardware capture may return a frame before. */
+    private fun coverDrawing(): Bitmap {
+        val root = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
+        compose.waitForIdle()
+        val whole = Bitmap.createBitmap(root.width, root.height, Bitmap.Config.ARGB_8888)
+        compose.runOnUiThread { root.draw(Canvas(whole)) }
+        val cover = compose.onNodeWithTag(PASSPORT_COVER, useUnmergedTree = true).fetchSemanticsNode().boundsInRoot
+        return Bitmap.createBitmap(whole, cover.left.toInt(), cover.top.toInt(), (cover.width * 0.6f).toInt(), cover.height.toInt())
+    }
+
+    /**
+     * A-AN15: a new count shows at once, as `.contentTransition(.numericText())` does outside an animated change, which
+     * is how the count always changes.
+     */
+    @Test
+    fun aNewCountShowsAtOnce() {
+        show(PassportFixtures.delivered(11), reduceMotion = false)
+        assertEquals("11 Delivered", label(PASSPORT_COVER))
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread {
+            source.parcels.value = PassportFixtures.delivered(12)
+            Snapshot.sendApplyNotifications()
+        }
+        repeat(3) {
+            compose.mainClock.advanceTimeByFrame()
+            compose.waitForIdle()
+        }
+        assertEquals("12 Delivered", label(PASSPORT_COVER))
+        val next = coverDrawing()
+        compose.mainClock.advanceTimeBy(1_000)
+        assertTrue("The count is drawn as it rests", next.sameAs(coverDrawing()))
     }
 
     @Test

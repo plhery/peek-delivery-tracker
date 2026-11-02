@@ -1,15 +1,5 @@
 package com.plhery.peekdeliverytracker.ui.passport
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ContentTransform
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -34,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -220,7 +209,7 @@ private fun ExplanationBubble(title: String, explanation: String, tag: String) {
 }
 
 /**
- * `passport(_:)`, the cover: the parcels delivered, large, rolling to a new count, over "Delivered", and the parcel
+ * `passport(_:)`, the cover: the parcels delivered, large, a new count shown at once, over "Delivered", and the parcel
  * seal tilted at its side (none at the accessibility sizes), on the accent; one button whose popover says what counts.
  */
 @Composable
@@ -254,7 +243,9 @@ internal fun PassportCover(state: PassportState, stats: PassportStatistics) {
         ) {
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(9.dp)) {
                 val size = type.scaled(COUNT_SIZE, IosTextStyle.LargeTitle)
-                RollingCount(number(count, localizer), type.tracking(type.fixed(size, FontWeight.SemiBold), -2f).sfLines(), colors.onAccent)
+                // `.contentTransition(.numericText())` rolls only in an animated change, and the count never comes in one.
+                val style = type.tracking(type.fixed(size, FontWeight.SemiBold), -2f).sfLines()
+                Text(number(count, localizer), color = colors.onAccent, style = style)
                 Text(delivered, color = colors.onAccent.copy(alpha = 0.7f), style = type.subheadline.sfLines())
             }
             if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) {
@@ -267,38 +258,6 @@ internal fun PassportCover(state: PassportState, stats: PassportStatistics) {
         }
     }
     ExplanationPopover(state, PassportSelection.COVER, anchor, delivered, explanation)
-}
-
-/**
- * `.contentTransition(.numericText())`: as the count changes, each figure that changes rolls, the new one up from under
- * the old as it goes up and fades; the others stay. None under Reduce Motion. Figures are matched from the right, as
- * the units, tens and hundreds stand.
- */
-@Composable
-private fun RollingCount(text: String, style: androidx.compose.ui.text.TextStyle, color: Color) {
-    val reduceMotion = PeekTheme.reduceMotion
-    Row(Modifier.clipToBounds()) {
-        // From the left: the figures a longer count adds come in at its left.
-        for (fromRight in text.length - 1 downTo 0) {
-            val character = text[text.length - 1 - fromRight]
-            androidx.compose.runtime.key(fromRight) {
-                AnimatedContent(
-                    targetState = character,
-                    transitionSpec = {
-                        if (reduceMotion) {
-                            ContentTransform(EnterTransition.None, ExitTransition.None, sizeTransform = null)
-                        } else {
-                            (slideInVertically(tween(ROLL_MILLIS)) { it } + fadeIn(tween(ROLL_MILLIS)))
-                                .togetherWith(slideOutVertically(tween(ROLL_MILLIS)) { -it } + fadeOut(tween(ROLL_MILLIS)))
-                        }
-                    },
-                    label = "figure",
-                ) { figure ->
-                    Text(figure.toString(), color = color, style = style, maxLines = 1, softWrap = false)
-                }
-            }
-        }
-    }
 }
 
 /**
@@ -632,7 +591,6 @@ private fun Color.grey(): Color {
 private val COVER_SEAL_TINT = Color(0xFF745300)
 private val COVER_RADIUS = 20.dp
 private const val COUNT_SIZE = 54f
-private const val ROLL_MILLIS = 350
 /** `.secondary` over the ink: the ink at half. */
 private const val SECONDARY = 0.5f
 private const val UNEARNED_OPACITY = 0.3f

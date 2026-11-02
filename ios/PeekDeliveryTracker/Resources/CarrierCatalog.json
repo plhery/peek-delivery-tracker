@@ -474,7 +474,8 @@
         "Spring GDS",
         "Mailing Technology",
         "PostNL - Netherlands Post",
-        "Spring Global Mail"
+        "Spring Global Mail",
+        "PostNL International Mail"
       ],
       "countries": [
         "NL"
@@ -39128,7 +39129,8 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "sptexp",
+        "recognitionRank": 154
       },
       "linkRules": [],
       "detectionRules": [

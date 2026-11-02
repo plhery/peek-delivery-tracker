@@ -96785,10 +96785,13 @@
     ]
   },
   {
-    "input": "SPT000000000001YQ",
+    "input": "SPT999999999901YQ",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "sptexp"
+    ],
+    "asked": [
       "sptexp"
     ]
   },

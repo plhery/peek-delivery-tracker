@@ -475,7 +475,8 @@ export const CARRIER_CAPABILITIES = {
       "Spring GDS",
       "Mailing Technology",
       "PostNL - Netherlands Post",
-      "Spring Global Mail"
+      "Spring Global Mail",
+      "PostNL International Mail"
     ],
     "countries": [
       "NL"
@@ -39129,7 +39130,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "sptexp",
+      "recognitionRank": 154
     },
     "linkRules": [],
     "detectionRules": [

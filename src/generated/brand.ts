@@ -1509,6 +1509,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "purolator": "purolator",
   "pushpak-courier": "pushpak-courier",
   "pxc-pacific": "pxc-pacific",
+  "qatar-post": "qatar-post",
   "qls-quince": "qls-quince",
   "quality-post": "quality-post",
   "quantium-solutions": "quantium-solutions",
@@ -30907,6 +30908,28 @@ export const CARRIER_TRUCK: TruckGeometry = {
       {
         "type": "polygon",
         "d": "M17.09 7.73L17.31 8.24L17.38 8.8L17.31 9.36L17.09 9.87L16.75 10.32L16.3 10.66L15.79 10.88L15.19 10.95L14.93 10.95L14.93 6.65L15.19 6.65L15.79 6.72L16.3 6.94L16.75 7.28Z",
+        "fill": "truck"
+      }
+    ],
+    "qatar-post": [
+      {
+        "type": "polygon",
+        "d": "M7.38 5.79L6.54 6.35L5.98 7.17L5.79 8.11L5.79 9.49L5.98 10.41L6.54 11.25L7.38 11.81L8.37 12.01L9.35 11.81L9.47 11.73L9.93 12.33L10.82 11.67L10.34 11.03L10.74 10.41L10.93 9.49L10.93 8.11L10.74 7.17L10.18 6.35L9.35 5.79L8.37 5.59Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.21 9.52L8.31 10.19L8.77 10.8L8.37 10.88L7.81 10.77L7.34 10.45L7.03 9.99L6.9 9.37L6.9 8.21L7.03 7.61L7.34 7.15L7.81 6.83L8.37 6.72L8.91 6.83L9.38 7.15L9.7 7.61L9.82 8.21L9.82 9.37L9.7 9.99L9.63 10.08Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M15 9.32L15.63 8.91L16.06 8.28L16.21 7.53L16.06 6.79L15.63 6.16L15 5.73L14.31 5.6L12.01 5.6L12.01 12L13.13 12L13.13 9.46L14.31 9.46Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.57 6.78L14.83 6.96L15.01 7.22L15.07 7.53L15.01 7.84L14.83 8.1L14.57 8.28L14.21 8.35L13.13 8.35L13.13 6.71L14.21 6.71Z",
         "fill": "truck"
       }
     ]

@@ -706,6 +706,7 @@ describe('carrier brand', () => {
       'okay-parcel',
       'magic-trans',
       'red-express',
+      'qatar-post',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

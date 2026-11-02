@@ -630,7 +630,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'jiaying-express'
   | 'okay-parcel'
   | 'magic-trans'
-  | 'red-express';
+  | 'red-express'
+  | 'qatar-post';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

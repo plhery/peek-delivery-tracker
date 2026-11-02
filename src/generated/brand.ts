@@ -21,6 +21,7 @@ export const CARRIER_FAMILIES: Record<string, string> = {
   "dpd-be": "dpd",
   "dpd-de": "dpd",
   "dpd-fr": "dpd",
+  "dpd-gr": "dpd",
   "dpd-hu": "dpd",
   "dpd-ie": "dpd",
   "dpd-nl": "dpd",
@@ -909,6 +910,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "dpd-be": "dpd",
   "dpd-de": "dpd",
   "dpd-fr": "dpd",
+  "dpd-gr": "dpd",
   "dpd-hu": "dpd",
   "dpd-ie": "dpd",
   "dpd-nl": "dpd",
@@ -1069,6 +1071,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "gle-colombia": "gle-colombia",
   "global-business-tw": "global-business-tw",
   "global-delivery-network": "global-delivery-network",
+  "global-parcel-service": "global-parcel-service",
   "globalpost": "globalpost",
   "gls-at": "gls",
   "gls-ch": "gls",
@@ -1287,6 +1290,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "loggi": "loggi",
   "logisimple": "logisimple",
   "logista-parcel": "logista-parcel",
+  "logistics-solution": "logistics-solution",
   "logistiq": "logistiq",
   "logoix": "logoix",
   "longcps": "longcps",
@@ -1513,6 +1517,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "qls-quince": "qls-quince",
   "quality-post": "quality-post",
   "quantium-solutions": "quantium-solutions",
+  "quick-fort": "quick-fort",
   "quick-rabbit": "quick-rabbit",
   "quickpac": "quickpac",
   "quicksilver-sa": "quicksilver-sa",
@@ -1828,6 +1833,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "wizmo": "wizmo",
   "wld-express": "wld-express",
   "world-package": "world-package",
+  "wp-ground": "wp-ground",
   "x-express-ba": "x-express-ba",
   "x-trac": "x-trac",
   "xcargo": "xcargo",
@@ -30930,6 +30936,79 @@ export const CARRIER_TRUCK: TruckGeometry = {
       {
         "type": "polygon",
         "d": "M14.57 6.78L14.83 6.96L15.01 7.22L15.07 7.53L15.01 7.84L14.83 8.1L14.57 8.28L14.21 8.35L13.13 8.35L13.13 6.71L14.21 6.71Z",
+        "fill": "truck"
+      }
+    ],
+    "wp-ground": [
+      {
+        "type": "polygon",
+        "d": "M5.57 9.41L5.83 11.67L7.17 11.67L9.5 6.23L8.58 5.83L6.68 10.29L6.4 7.82L5.27 7.82L4.01 10.26L3.9 6.02L2.9 6.04L3.05 11.67L4.42 11.67Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M16.4 10.66L16 10.58L15.72 10.36L15.57 10.03L15.57 9.56L15.84 8.22L15.99 7.8L16.24 7.44L16.59 7.16L16.98 6.98L17.36 6.92L17.69 6.98L17.95 7.13L18.18 7.43L18.97 6.82L18.62 6.37L18.04 6.03L17.38 5.91L16.69 6.01L16.05 6.3L15.51 6.75L15.1 7.33L14.87 7.95L14.57 9.46L14.57 10.25L14.92 11L15.58 11.51L16.4 11.68L17.24 11.52L18 11.07L18.57 10.41L18.88 9.65L19.1 8.53L16.83 8.53L16.83 9.53L17.85 9.53L17.71 9.88L17.35 10.29L16.88 10.57Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.69 8.39L13.94 7.75L13.95 7.07L13.66 6.46L13.13 6.05L12.51 5.92L10.53 5.92L9.4 11.57L10.38 11.77L10.85 9.39L12.01 9.39L12.63 9.27L13.23 8.92Z",
+        "fill": "#000000"
+      },
+      {
+        "type": "polygon",
+        "d": "M12.86 7.1L12.95 7.29L12.95 7.56L12.82 7.86L12.59 8.14L12.28 8.32L11.92 8.39L11.05 8.39L11.35 6.92L12.41 6.92L12.7 6.98Z",
+        "fill": "truck"
+      }
+    ],
+    "global-parcel-service": [
+      {
+        "type": "polygon",
+        "d": "M12.06 9.29L12.65 8.89L13.05 8.31L13.18 7.61L13.05 6.92L12.65 6.33L12.06 5.93L11.42 5.81L9.27 5.81L9.27 11.79L10.31 11.79L10.31 9.42L11.42 9.42Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M11.66 6.91L11.9 7.08L12.07 7.32L12.13 7.61L12.07 7.9L11.9 8.15L11.66 8.31L11.32 8.38L10.31 8.38L10.31 6.84L11.32 6.84Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.89 8.94L16.81 9.54L17.11 9.96L17.02 10.4L16.52 10.75L15.8 10.75L15.13 10.28L14.53 11.13L15.47 11.79L16.85 11.79L17.95 11.01L18.22 9.74L17.45 8.66L15.54 8.06L15.25 7.64L15.35 7.19L15.82 6.84L16.49 6.84L17.12 7.31L17.74 6.48L16.84 5.81L15.48 5.81L14.42 6.59L14.14 7.86Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M6.03 10.74L5.57 10.65L5.18 10.39L4.92 10L4.82 9.49L4.82 8.1L4.88 7.68L5.06 7.34L5.33 7.08L5.67 6.91L6.04 6.85L6.42 6.92L6.75 7.09L7.07 7.42L7.82 6.7L7.38 6.25L6.75 5.92L6.05 5.8L5.35 5.9L4.71 6.22L4.21 6.72L3.88 7.35L3.78 8.02L3.78 9.59L3.94 10.4L4.43 11.14L5.16 11.63L6.03 11.8L6.89 11.63L7.63 11.14L8.12 10.4L8.28 9.59L8.28 8.53L6.03 8.53L6.03 9.56L7.22 9.56L7.14 10L6.88 10.39L6.49 10.65Z",
+        "fill": "accent"
+      }
+    ],
+    "logistics-solution": [
+      {
+        "type": "polygon",
+        "d": "M13.36 13.85L12.73 12.46L8.23 12.46L11.73 5.52L10.88 3.85L5.9 13.85Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M14.5 13.84L16.1 13.84L13.02 7.65L12.23 9.22Z",
+        "fill": "accent"
+      }
+    ],
+    "quick-fort": [
+      {
+        "type": "polygon",
+        "d": "M14.1 6.34L16.65 6.34L16.65 5.11L13.1 5.11L11.7 12.08L12.91 12.32L13.52 9.27L15.6 9.27L15.6 8.04L13.76 8.04Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M10 5.32L8.93 5.1L7.82 5.31L6.82 5.9L6.06 6.78L5.66 7.78L5.35 9.3L5.35 10.35L5.81 11.33L6.67 11.99L7.75 12.22L8.86 12L9 11.92L9.32 12.5L10.39 11.91L10.02 11.23L10.62 10.54L11.02 9.54L11.32 8.02L11.32 6.97L10.86 5.98Z",
+        "fill": "accent"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.39 10.08L9.09 9.53L8.01 10.13L8.4 10.84L7.76 10.96L7.2 10.84L6.8 10.54L6.58 10.08L6.58 9.42L6.84 8.13L7.12 7.43L7.62 6.86L8.26 6.48L8.92 6.35L9.48 6.47L9.87 6.78L10.09 7.24L10.09 7.89L9.83 9.19L9.55 9.89Z",
         "fill": "truck"
       }
     ]

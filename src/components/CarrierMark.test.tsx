@@ -643,6 +643,10 @@ describe('carrier mark', () => {
     'magic-trans',
     'red-express',
     'qatar-post',
+    'wp-ground',
+    'global-parcel-service',
+    'logistics-solution',
+    'quick-fort',
   ] as const)(
     'renders the declared decoration for %s', (id) => {
       const { container } = render(<CarrierMark carrier={carrierInfo(id)} />);

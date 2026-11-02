@@ -707,6 +707,10 @@ describe('carrier brand', () => {
       'magic-trans',
       'red-express',
       'qatar-post',
+      'wp-ground',
+      'global-parcel-service',
+      'logistics-solution',
+      'quick-fort',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

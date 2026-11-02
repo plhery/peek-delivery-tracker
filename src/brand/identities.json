@@ -1049,6 +1049,9 @@
   "dpd-fr": {
     "family": "dpd"
   },
+  "dpd-gr": {
+    "family": "dpd"
+  },
   "dpd-hu": {
     "family": "dpd"
   },
@@ -1556,6 +1559,9 @@
   },
   "global-delivery-network": {
     "decal": "global-delivery-network"
+  },
+  "global-parcel-service": {
+    "decal": "global-parcel-service"
   },
   "globalpost": {
     "decal": "globalpost"
@@ -2266,6 +2272,9 @@
   },
   "logista-parcel": {
     "decal": "logista-parcel"
+  },
+  "logistics-solution": {
+    "decal": "logistics-solution"
   },
   "logistiq": {
     "decal": "logistiq"
@@ -3011,6 +3020,9 @@
   },
   "quantium-solutions": {
     "decal": "quantium-solutions"
+  },
+  "quick-fort": {
+    "decal": "quick-fort"
   },
   "quick-rabbit": {
     "decal": "quick-rabbit"
@@ -4030,6 +4042,9 @@
   },
   "world-package": {
     "decal": "world-package"
+  },
+  "wp-ground": {
+    "decal": "wp-ground"
   },
   "x-express-ba": {
     "decal": "x-express-ba"

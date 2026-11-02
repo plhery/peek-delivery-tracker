@@ -2769,7 +2769,7 @@
       "type": "stat",
       "id": 69,
       "title": "Browser retries by network route",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Existing eligible browser retries by selected route. Successful dated history requires identity binding and route proof when configured; compare repeated parcel cohorts with care.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -2809,8 +2809,7 @@
               }
             ]
           },
-          "min": 0,
-          "max": 1
+          "min": 0
         },
         "overrides": []
       },
@@ -2833,7 +2832,7 @@
       "type": "stat",
       "id": 70,
       "title": "Browser dated-history recovery by route",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Existing eligible browser retries by selected route. Successful dated history requires identity binding and route proof when configured; compare repeated parcel cohorts with care.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -2897,7 +2896,7 @@
       "type": "stat",
       "id": 71,
       "title": "Browser retry outcomes by route",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Existing eligible browser retries by selected route. Successful dated history requires identity binding and route proof when configured; compare repeated parcel cohorts with care.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -2912,7 +2911,7 @@
         {
           "refId": "A",
           "expr": "sum by (carrier,route,outcome) (increase(browser_network_attempt_total{attempt=\"retry\"}[$__range]))",
-          "legendFormat": "{{carrier}} {{route}} \u00b7 {{outcome}}",
+          "legendFormat": "{{carrier}} {{route}} · {{outcome}}",
           "instant": true,
           "datasource": {
             "type": "prometheus",
@@ -2937,8 +2936,7 @@
               }
             ]
           },
-          "min": 0,
-          "max": 1
+          "min": 0
         },
         "overrides": []
       },
@@ -2961,7 +2959,7 @@
       "type": "stat",
       "id": 72,
       "title": "Browser retry latency p95",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Existing eligible browser retries by selected route. Successful dated history requires identity binding and route proof when configured; compare repeated parcel cohorts with care.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -3025,7 +3023,7 @@
       "type": "stat",
       "id": 73,
       "title": "Browser recovered histories by completeness",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Existing eligible browser retries by selected route. Successful dated history requires identity binding and route proof when configured; compare repeated parcel cohorts with care.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -3060,8 +3058,70 @@
               }
             ]
           },
-          "min": 0,
-          "max": 1
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "wideLayout": true
+      }
+    },
+    {
+      "type": "stat",
+      "id": 74,
+      "title": "Browser retry proxy payload bytes",
+      "description": "Encrypted tunnel payload observed during attempts, including dependencies. Missing transport replies and idle traffic are excluded; this is not billing usage.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 139,
+        "w": 24,
+        "h": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum by (carrier,route) (increase(browser_network_bytes_total{attempt=\"retry\"}[$__range]))",
+          "legendFormat": "{{carrier}} {{route}}",
+          "instant": true,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "decimals": 1,
+          "noValue": "No byte observations",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "min": 0
         },
         "overrides": []
       },

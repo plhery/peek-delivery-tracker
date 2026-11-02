@@ -31,3 +31,10 @@ describe('browser route configuration', () => {
     expect(fetcher).toHaveBeenCalled();
   });
 });
+
+it('constructs an independent host-owned residential route', () => {
+  const env = hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test', FEDEX_RESIDENTIAL_TRAWL_URL: 'http://residential.test:8192' });
+  expect(env.trawlRoutes?.['fedex-residential']).toBeInstanceOf(HostTrawlClient);
+  expect(env.trawlRoutes?.['fedex-residential']?.scrapeUrl().hostname).toBe('residential.test');
+  expect(env.trawlRoutes?.['fedex-residential']).not.toBe(env.trawl);
+});

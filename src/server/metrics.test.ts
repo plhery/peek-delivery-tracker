@@ -174,6 +174,18 @@ describe('prometheus carrier metrics', () => {
     expect(scraping.registry).toBe(recording.registry);
   });
 
+  it('records residential retry bandwidth and keeps its route distinct from default', async () => {
+    const base = { carrier: 'fedex', step: 'trawl', outcome: 'ok' as const, errorType: null,
+      durationMs: 1200, attempt: 2, fallbackFrom: 'trawl', fallbackReason: 'challenge' as const, fallbackErrorType: 'ChallengeError', networkRoute: 'residential' as const,
+      networkAttempt: 'retry' as const, networkFamily: 'unknown' as const, historyAvailable: true };
+    const observed = { ...base, networkBytes: 12345 }, invalid = { ...base, networkBytes: -1 };
+    metrics.prometheusStepRecorder.step(observed);
+    metrics.prometheusStepRecorder.step(invalid);
+    const text = await scraped();
+    expect(text).toContain('browser_network_bytes_total{carrier="fedex",attempt="retry",route="residential"} 12345');
+    expect(text).toContain('fedex_network_attempt_total{attempt="retry",route="residential",outcome="ok",family="unknown",history="yes"} 2');
+  });
+
   it('counts who served each refresh, so provider use on a carrier with its own adapter is visible', async () => {
     expect(metrics.refreshSource('la-poste', 'la-poste')).toBe('adapter');
     expect(metrics.refreshSource('la-poste', 'unknown')).toBe('provider');

@@ -49,7 +49,7 @@ function failure(outcome: string, error: unknown) {
 }
 
 export const sentryStepRecorder: StepRecorder = {
-  step(record: StepRecord) {
+  step(record: StepRecord & { networkBytes?: number }) {
     const attributes = {
       carrier: record.carrier, phase: record.step, outcome: outcomeLabel(record), error_type: record.errorType ?? 'none',
     };
@@ -73,7 +73,7 @@ export const sentryStepRecorder: StepRecorder = {
         attempt: record.attempt, fallback_from: record.fallbackFrom ?? undefined,
         fallback_reason: record.fallbackReason ? stepOutcome(record.fallbackReason, record.fallbackError) : undefined,
         ...(record.networkRoute ? { network_route: record.networkRoute,
-          network_attempt: record.networkAttempt, network_family: record.networkFamily ?? 'unknown', history_available: record.historyAvailable === true, history_partial: record.historyPartial === true } : {}),
+          network_attempt: record.networkAttempt, network_bytes: record.networkBytes, network_family: record.networkFamily ?? 'unknown', history_available: record.historyAvailable === true, history_partial: record.historyPartial === true } : {}),
         ...failure(attributes.outcome, record.error),
       });
     } catch { /* Preserve the result even if logging fails. */ }
@@ -101,7 +101,7 @@ export const sentryStepRecorder: StepRecorder = {
 
 /** Tells the running check which tiers its lookups went through, such as a browser's, and whom they asked. */
 const attemptStepRecorder: StepRecorder = {
-  step(record: StepRecord) { reportTrackingStep(record.step); },
+  step(record: StepRecord & { networkBytes?: number }) { reportTrackingStep(record.step); },
   lookup(record: LookupRecord) { reportTrackingLookup(record.carrier, outcomeLabel(record)); },
 };
 

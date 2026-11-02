@@ -1165,3 +1165,5 @@ observed connection family, outcome and whether dated history was returned. Comp
 window, together with counts and `fedex_network_attempt_duration_seconds`. Unknown
 family means no verified connection, never IPv6 success. First browser attempts,
 including those after optional API credentials fail, remain `attempt="initial"`.
+
+`browser_network_bytes_total` counts observed encrypted proxy payload during attempts, including page dependencies. Missing transport replies and idle-session traffic are excluded; the private retry worker's `/metrics` byte counter also includes that traffic. These counters are diagnostic usage estimates, not proxy invoices. Residential routes retain unknown IP family unless the actual carrier connection is independently observed.

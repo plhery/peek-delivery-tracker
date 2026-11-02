@@ -45,6 +45,7 @@ interface PrometheusRuntime {
   lookupTotal: Counter<'carrier' | 'final_step' | 'outcome' | 'attempts' | 'reason'>;
   fallbackTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason'>;
   recoveryTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason' | 'outcome'>;
+  browserNetworkBytes: Counter<'carrier' | 'attempt' | 'route'>;
   browserNetworkTotal: Counter<'carrier' | 'attempt' | 'route' | 'family' | 'outcome' | 'history' | 'partial'>;
   browserNetworkDuration: Histogram<'carrier' | 'attempt' | 'route' | 'outcome'>;
   fedexNetworkTotal: Counter<'attempt' | 'route' | 'family' | 'outcome' | 'history'>;
@@ -127,6 +128,11 @@ function createRuntime(): PrometheusRuntime {
       help: 'Completed recovery steps by their triggering failure and resulting outcome.',
       labelNames: ['carrier', 'from_step', 'to_step', 'reason', 'outcome'] as const,
       registers: [registry],
+    }),
+    browserNetworkBytes: new Counter({
+      name: 'browser_network_bytes_total',
+      help: 'Observed encrypted proxy payload bytes during browser attempts; excludes missing transport replies and is not billing usage.',
+      labelNames: ['carrier', 'attempt', 'route'], registers: [registry],
     }),
     browserNetworkTotal: new Counter({
       name: 'browser_network_attempt_total',
@@ -343,8 +349,8 @@ function afterFirstScrape(key: string, create: () => void, update: () => void): 
   }
 }
 
-function count<L extends string>(counter: Counter<L>, name: string, labels: LabelValues<L>): void {
-  afterFirstScrape(name + JSON.stringify(labels), () => counter.inc(labels, 0), () => counter.inc(labels));
+function count<L extends string>(counter: Counter<L>, name: string, labels: LabelValues<L>, value = 1): void {
+  afterFirstScrape(name + JSON.stringify(labels), () => counter.inc(labels, 0), () => counter.inc(labels, value));
 }
 
 /**
@@ -368,7 +374,7 @@ export function stepOutcome(outcome: StepOutcome, error: unknown): string {
 }
 
 export const prometheusStepRecorder: StepRecorder = {
-  step(record: StepRecord) {
+  step(record: StepRecord & { networkBytes?: number }) {
     const timing = { carrier: record.carrier, step: record.step, outcome: stepOutcome(record.outcome, record.error) };
     afterFirstScrape(METRICS.stepDuration + JSON.stringify(timing), () => runtime.stepDuration.zero(timing),
       () => runtime.stepDuration.observe(timing, record.durationMs / 1000));
@@ -378,6 +384,9 @@ export const prometheusStepRecorder: StepRecorder = {
       const labels = { carrier: record.carrier, attempt: record.networkAttempt,
         route: record.networkRoute === 'ipv6' || record.networkRoute === 'residential' ? record.networkRoute : 'default',
         outcome: timing.outcome };
+      if (typeof record.networkBytes === 'number' && Number.isSafeInteger(record.networkBytes) && record.networkBytes >= 0) {
+        count(runtime.browserNetworkBytes, 'browser_network_bytes_total', { carrier: record.carrier, attempt: record.networkAttempt, route: labels.route }, record.networkBytes);
+      }
       const family = record.networkFamily === 'IPv6' ? 'ipv6' : record.networkFamily === 'IPv4' ? 'ipv4' : 'unknown';
       count(runtime.browserNetworkTotal, 'browser_network_attempt_total', { ...labels, family, partial: timing.outcome === 'ok' && record.historyPartial === true ? 'yes' : 'no',
         history: timing.outcome === 'ok' && record.historyAvailable === true ? 'yes' : 'no' });
@@ -387,7 +396,7 @@ export const prometheusStepRecorder: StepRecorder = {
     if (record.carrier === 'fedex' && record.step === 'trawl' && record.networkRoute) {
       const labels = {
         attempt: record.fallbackFrom === 'trawl' ? 'retry' : 'initial',
-        route: record.networkRoute === 'ipv6' ? 'ipv6' : 'default',
+        route: record.networkRoute === 'ipv6' || record.networkRoute === 'residential' ? record.networkRoute : 'default',
         outcome: timing.outcome,
       };
       const family = record.networkFamily === 'IPv6' ? 'ipv6' : record.networkFamily === 'IPv4' ? 'ipv4' : 'unknown';

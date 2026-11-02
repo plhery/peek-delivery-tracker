@@ -40,6 +40,17 @@ export function hostAdapterEnvironment(env: Record<string, string | undefined> =
   };
 }
 
-export function createAdapterRegistry(environment: AdapterEnvironment = hostAdapterEnvironment()): AdapterRegistry {
-  return new AdapterRegistry(REGISTRY, environment);
+/**
+ * Adapters that send through a transport of their own unless the environment names a fetcher, which the proxy
+ * routes do: Mondial Relay's app client asks over HTTP/1.1, which its backend's bot screen lets through, and is
+ * refused through the fetcher, so every lookup fell to the browser. No route names their hosts.
+ */
+const OWN_TRANSPORT = new Set(['mondial-relay']);
+
+export function createAdapterRegistry(environment: AdapterEnvironment = hostAdapterEnvironment(), definition: typeof REGISTRY = REGISTRY): AdapterRegistry {
+  if (!environment.fetcher) return new AdapterRegistry(definition, environment);
+  const own: AdapterEnvironment = { ...environment, fetcher: undefined };
+  const factories = Object.fromEntries(Object.entries(definition.factories)
+    .map(([id, factory]) => [id, OWN_TRANSPORT.has(id) ? () => factory(own) : factory]));
+  return new AdapterRegistry({ ...definition, factories }, environment);
 }

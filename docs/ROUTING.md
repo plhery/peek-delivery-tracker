@@ -57,7 +57,9 @@ The server can route each tracking hostname through its country's egress using
 `TRACKING_PROXY_ROUTES`, a private JSON object mapping exact hostnames to proxy URLs.
 `TRACKING_US_PROXY_URL` with `TRACKING_US_PROXY_HOSTS` remains supported; the two settings must
 name separate hosts. Configured destinations require HTTPS. Credentials stay in runtime
-settings; requests to other carriers and the browser service stay direct.
+settings; requests to other carriers and the browser service stay direct. Mondial Relay's
+adapter keeps its own HTTP/1.1 transport, which its app backend needs, so no route can name
+its hosts (`adapterRegistry.ts`).
 
 1. **The carrier's own adapter**, when it has one. Cainiao (`aliexpress`) is an aggregator
    too, but it is only queried for AliExpress-style numbers (also beside another carrier's

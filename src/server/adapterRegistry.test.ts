@@ -1,6 +1,29 @@
 import { describe, expect, it, vi } from 'vitest';
-import { HostTrawlClient, hostAdapterEnvironment } from './adapterRegistry';
+import { REGISTRY, type AdapterEnvironment } from 'universal-parcel-scraper/node';
+import { HostTrawlClient, createAdapterRegistry, hostAdapterEnvironment } from './adapterRegistry';
 import { withTrackingAttempt } from './observability';
+
+describe('proxy routes and adapter transports', () => {
+  it('keeps Mondial Relay on its own transport under the proxy routes, and hands the others the routed fetcher', () => {
+    const environment = hostAdapterEnvironment({ TRACKING_PROXY_ROUTES: JSON.stringify({ 'tracking.example': 'http://fixture:example@proxy.example:8080' }) });
+    expect(environment.fetcher).toBeTypeOf('function');
+    const received = new Map<string, AdapterEnvironment>();
+    const factories = Object.fromEntries(Object.entries(REGISTRY.factories).map(([id, factory]) =>
+      [id, (env: AdapterEnvironment) => { received.set(id, env); return factory(env); }]));
+    const definition = { ...REGISTRY, factories };
+    const registry = createAdapterRegistry(environment, definition);
+    const other = Object.entries(REGISTRY.carriers).find(([, id]) => id && id !== 'universal' && id !== 'mondial-relay')!;
+    registry.for('mondial-relay');
+    registry.for(other[0]);
+    expect(received.get('mondial-relay')?.fetcher).toBeUndefined();
+    expect(received.get('mondial-relay')?.trawl).toBe(environment.trawl);
+    expect(received.get(other[1]!)?.fetcher).toBe(environment.fetcher);
+
+    received.clear();
+    createAdapterRegistry(hostAdapterEnvironment({}), definition).for('mondial-relay');
+    expect(received.get('mondial-relay')?.fetcher).toBeUndefined();
+  });
+});
 
 describe('browser route configuration', () => {
   it('keeps the optional IPv6 worker independent of the primary browser client', () => {

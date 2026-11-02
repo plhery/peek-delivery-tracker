@@ -233,5 +233,6 @@
   { "id": "tsjy", "catalog": "tsjy", "name": "TSJY", "languages": ["en"] },
   { "id": "stone3pl", "catalog": "stone3pl", "name": "Stone3PL", "languages": ["en"] },
   { "id": "j-and-t-uk", "catalog": "j-and-t-uk", "name": "J&T Express UK", "languages": ["en"] },
-  { "id": "m-one", "catalog": "m-one", "name": "M-ONE", "languages": ["en"] }
+  { "id": "m-one", "catalog": "m-one", "name": "M-ONE", "languages": ["en"] },
+  { "id": "early-bird", "catalog": "early-bird", "name": "Early Bird", "languages": ["en"] }
 ]

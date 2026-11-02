@@ -95,7 +95,7 @@ Slik står det på PostNords sider 23. oktober 2026:
 
 ## Spor PostNord-pakker med Peek
 
-[Peek](/) ser med en gang at et nummer med to bokstaver, ni siffer og `SE` eller `DK`, eller 11 siffer og `SE`, er PostNords. Et nummer på 20 siffer som begynner på `00`, deler PostNord med andre transportører, også med Bring. Har det `70`, `73`, `57` eller `64` etter de tre første sifrene og riktig kontrollsiffer, spør Peek PostNord og de andre transportørene nummeret kan høre til. Kjenner bare PostNord pakken, står det "PostNord has this parcel." Kjenner flere den, velger Peek transportøren som nummerets form peker på (PostNord for `73` og `57`, Posti for `64`); ellers velger du selv. Har ingen funnet den ennå, sier Peek det og fortsetter å sjekke etter at du har lagt den til.
+[Peek](/) ser med en gang at et nummer med to bokstaver, ni siffer og `SE` eller `DK`, eller 11 siffer og `SE`, er PostNords. Et nummer på 20 siffer som begynner på `00`, deler PostNord med andre transportører, også med Bring. Har det `70`, `73`, `57` eller `64` etter de tre første sifrene og riktig kontrollsiffer, spør Peek PostNord og de andre transportørene nummeret kan høre til. Kjenner bare PostNord pakken, står det "PostNord has this parcel." Kjenner flere den, velger Peek transportøren som nummerets form peker på (PostNord for `73` og `57`, men svenske Early Bird når `73402216` følger etter de tre første sifrene, Posti for `64`); ellers velger du selv. Har ingen funnet den ennå, sier Peek det og fortsetter å sjekke etter at du har lagt den til.
 
 Andre nummer på 10 til 20 siffer: lim dem inn likevel, Peek følger mer enn 3 500 transportører. Trykk på "Change" og velg PostNord. En lenke fra tracking.postnord.com eller postnord.no peker ut PostNord uansett nummer.
 

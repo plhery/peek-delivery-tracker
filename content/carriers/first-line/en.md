@@ -35,6 +35,8 @@ FIRST LINE's tracker is in Chinese, but the scans are in English. FIRST LINE's o
 | `Export customs declaration completed` | China's export declaration, made in Shenzhen before the flight. The parcel isn't held at customs. |
 | `Depart from facility to service provider` | On its way from FIRST LINE to the company that takes it on. |
 | `Hand over to airline` | Handed to the airline at Hong Kong's airport, after the export declaration. |
+| `Next stop destination airport` | On the flight to the destination airport. The place still reads Hong Kong's airport. |
+| `The package is being submitted for customs clearance` | Import clearance on arrival, after the flight. Peek shows "At customs". |
 | `Order received` | The delivering company, such as UniUni, has the order's details but not the parcel yet. |
 
 In the US, the delivering company's scans follow in its own words, up to delivery: USPS's or [UniUni](carrier:uniuni)'s in the histories seen, whose pages explain them. FIRST LINE's tracker never names the company, so that wording is the clue.
@@ -78,7 +80,7 @@ These channels serve the sellers, FIRST LINE's customers; it publishes no help f
 
 Peek reads FIRST LINE's tracker and shows the status, the history (up to 100 scans), the place of each scan without its postcode, and each scan's time, read on that place's clock. Lines show as FIRST LINE writes them, relayed USPS or UniUni scans included, except an exact `Delivered`, which appears in Peek's own words. The tracker gives no expected delivery date, destination country, delivering company, last-mile number or proof of delivery, so Peek shows none. It doesn't switch to USPS or UniUni: if the seller gives you the last-mile number, add it as a parcel of its own.
 
-Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of every scan, important steps only or "Delivery only". It can't contact FIRST LINE or the seller for you.
+Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact FIRST LINE or the seller for you.
 
 ## Questions about FIRST LINE tracking
 

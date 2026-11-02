@@ -131,7 +131,7 @@ Canada takes opened items back within 90 days, and Australia unopened ones withi
 
 ## Can I track an IKEA parcel in Peek?
 
-Yes, for parcels: paste the DPD, FedEx or Purolator number into [Peek](/). DPD UK numbers of 14 digits and FedEx numbers of 12 digits share their shape with other carriers, so Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. Peek recognises a Purolator number of 3 letters and 9 digits by its shape alone. For DPD Ireland, paste the number, press "Change" and pick DPD Ireland. In Australia, where IKEA doesn't name its parcel carrier, paste the number all the same: Peek follows more than 3,500 carriers.
+Yes, for parcels: paste the DPD, FedEx or Purolator number into [Peek](/). DPD UK numbers of 14 digits, FedEx numbers of 12 digits and Purolator numbers of 3 letters and 9 digits share their shape with other carriers, so Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For DPD Ireland, paste the number, press "Change" and pick DPD Ireland. In Australia, where IKEA doesn't name its parcel carrier, paste the number all the same: Peek follows more than 3,500 carriers.
 
 Follow truck deliveries in IKEA's Track my order, and with the driver's call or text.
 

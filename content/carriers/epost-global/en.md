@@ -6,7 +6,7 @@ published: 2026-11-04
 updated: 2026-11-04
 ---
 
-ePost Global is a US shipping company whose tracking numbers start with EPG. In the histories Peek's code holds, one of its processing centres in the United States scans the parcel in, then ePost Global hands it to a partner, a post or a courier, that takes it on. The shop or the sender gives you the number: paste it in the box above. ePost Global's own tracker is at epgtrack.com. Peek's catalog also knows ePost Global as PPX Track.
+ePost Global is a US shipping company whose tracking numbers start with EPG. In the histories Peek's code holds, one of its processing centres in the United States scans the parcel in, then ePost Global hands it to a partner, a post or a courier, that takes it on. The shop or the sender gives you the number: paste it in the box above. ePost Global's own tracker is at epgtrack.com. Peek's catalog also knows ePost Global as PPX Track, and as RR Donnelley, RRD Donnelley or RRD International Logistics: searching any of these names when you pick a carrier in Peek finds ePost Global.
 
 ## ePost Global tracking number: what it looks like
 
@@ -16,7 +16,7 @@ Peek knows one shape for ePost Global: EPG and 10 to 15 digits. With invented di
 | --- | --- |
 | `EPG000000000000000` | EPG and 15 digits: an ePost Global number. |
 | `EPG0000000000` | EPG and 10 digits: also ePost Global's, the shortest Peek takes. |
-| `EPG000000000` | Only nine digits: not ePost Global's shape. Peek names [Purolator](carrier:purolator), whose numbers can be three letters and nine digits. If you choose ePost Global for it, Peek says it "doesn’t issue numbers like this one". Check for a missing digit. |
+| `EPG000000000` | Only nine digits: not ePost Global's shape. Three letters and nine digits fit [Purolator](carrier:purolator) and other carriers, TNT Australia among them, so Peek asks Purolator, [Colis Privé](carrier:colis-prive) and TNT Australia which one knows the number. If you choose ePost Global for it, Peek says it "doesn’t issue numbers like this one". Check for a missing digit. |
 | `EPG0000000000000000` | 16 digits, one too many: Peek recognises no carrier. Check for an extra digit. |
 | `LZ000000005US` | Two letters, nine digits and US: a US postal number. Peek names [USPS](carrier:usps) for most starting with C, E, L or R. To see ePost Global's own lines as well, add the EPG number. |
 
@@ -51,7 +51,7 @@ ePost Global's tracker lists each line with a time, a wording and, mostly, a pla
 | `The item is tied to a MAWB and ready for shipment` | PostNL, through Spring, has added it to an air shipment. | "In transit" |
 | `Your item has been dropped off by the sender with our postal partner in the country of origin.`, `Your item is ready to be forwarded from its foreign territory. It will be given to the carrier for forwarding.` | La Poste's notices for a parcel PostNL brings to France: it is still on its way there. | "In transit" |
 
-A partner's receipt after `Parcel Shipped` counts as in transit, not as a new start. Peek reads other partner lines, such as a delivery, by their wording, with the rules it uses for every carrier. A line it doesn't know shows as written, and the status stays as it was.
+A partner's receipt after `Parcel Shipped` counts as in transit, not as a new start. Peek reads other partner lines, such as a delivery, by their wording, with the rules it uses for every carrier. A line it doesn't know shows as written and counts as "In transit", unless the parcel is already out for delivery or past that point: then the status stays as it was.
 
 ## Who delivers ePost Global parcels
 
@@ -89,7 +89,7 @@ The tracker prints times without a time zone. Peek reads `Parcel Received and Pr
 
 When ePost Global names a partner Peek knows, the parcel card says so ("Delivery with PostNL", for example) and lists the partner's number after the EPG number, if ePost Global gives one. Peek then asks that partner too: under its number, or under the EPG number if ePost Global gives none. With no partner named, Peek asks the destination country's post for a postal number, as above, and for another number the one carrier its shape points to. Peek asks only carriers whose own tracking it reads. Once that carrier shows a scan at least as recent as ePost Global's newest, Peek follows the parcel there and keeps ePost Global's history. Otherwise, Peek stays with ePost Global's tracker and its copies of the partner's lines.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact ePost Global or the shop for you.
+Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact ePost Global or the shop for you.
 
 ## Questions about ePost Global tracking
 

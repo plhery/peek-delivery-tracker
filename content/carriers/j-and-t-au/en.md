@@ -74,7 +74,7 @@ J&T Express Australia publishes no scam warning. It does send a proof-of-deliver
 
 ## Tracking J&T Express Australia parcels with Peek
 
-[Peek](/) names J&T Express Australia at once for a `JTAU` number, in upper or lower case, with or without spaces. A jtexpress.au/tracking link with `?q=` and the number works too. No account or phone number needed.
+[Peek](/) names J&T Express Australia at once for a `JTAU` number, in upper or lower case, with or without spaces. A jtexpress.au/tracking link with `?q=` and the number works too; with another kind of number in it, Peek reads that number as if you had pasted it alone. No account or phone number needed.
 
 Peek reads J&T Express Australia's own tracker and shows the status, each scan at the exact time J&T recorded it, and the delivery time. J&T's scans name no place, so there's no map, and Peek shows no expected delivery date, weight or proof of delivery: open J&T's text for the photo. Scans show in J&T's English wording, without the customer service number or any name or phone number a scan holds. For a long history, Peek keeps the newest 100 scans.
 

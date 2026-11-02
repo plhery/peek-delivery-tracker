@@ -30,30 +30,32 @@ Lingdong publishes no list of its statuses. It writes its scans in English, or i
 
 | Lingdong says | What it means for you |
 | --- | --- |
-| `货物电子信息已经收到` | "Electronic shipment information received": the seller has created the order. Lingdong doesn't have the parcel yet. |
+| `货物电子信息已经收到` | Chinese for electronic shipment information received: the seller has created the order. Lingdong doesn't have the parcel yet. |
 | `Shipment arrived at facility` | The parcel reached Lingdong's warehouse in Shenzhen. It's the first scan in Lingdong's hands. |
 | `Shipment departed from facility` | It left that warehouse on its way abroad. |
 | `预计…航班/Flight scheduled for …`, `预计…号航班【Expect flight ….】` | Booked on a flight: the flight's day stands where the dots are. |
 | `送往航司途中【On the way to the airline company】` | On its way to the airline. |
 | `航班已起飞【The flight has taken off.】`, `航班已启运/Package in transit to destination country` | The flight has left. |
 | `航班抵达【Flight arrival】`, `航班已落地，拆板中/Package arrived at destination country` | The flight has landed; with the second wording, its pallets are being broken down. |
-| `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete` | Your country's customs have cleared it, after the landing and before the delivery. "Domestic" here means your country's, not China's. |
+| `拆板作业中，等待取货通知【Under destuffing, waiting for pickup instructions.】` | After the landing, the flight's pallets are being broken down while the cargo waits to be collected for customs clearance: you don't have to collect anything. |
+| `货物在清关【Customs clearance in progress】` | In your country's customs, after the landing. |
+| `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete`, `货物已完成清关【The goods have completed customs clearance】` | Your country's customs have cleared it, after the landing and before the delivery. "Domestic" here means your country's, not China's. |
 
 The Chinese line isn't a scan of the parcel. Lingdong's tracking system writes it by itself for an order that has no scans yet, dated when the order was created.
 
-Lingdong's record names no carrier that delivers in your country and no second number. After the departure scan, some parcels get the flight and customs lines; for others, `Shipment departed from facility` stays the latest line while the parcel flies, clears customs and is delivered by another company. Either way, Lingdong's history stops before the delivery.
+None of the Lingdong lines Peek knows is a delivery line: the last is customs clearance in your country. Another company delivers the parcel there, and its tracking has the rest.
 
 ## Who delivers Lingdong parcels
 
 Lingdong's site lists what it sells to sellers: small-parcel lines (专线小包) to the US, the UK, the EU, Australia, Mexico, Canada and Japan; China Post's ePacket (E邮宝) and large-parcel services; PostNL (荷兰邮政); lines for light, bulky goods; and UPS, DHL and FedEx express, for which it is an agent. It also describes itself as an international freight forwarder handling air freight, and offers sellers single-order dispatch and warehousing.
 
-It doesn't say which company delivers on each line, and its tracker doesn't name one either. For China Post's parcel service, Lingdong's page says it reaches more than 200 countries and territories, by air, by surface or by a mix of the two, with tracking all the way.
+It doesn't say which company delivers on each line. For China Post's parcel service, Lingdong's page says it reaches more than 200 countries and territories, by air, by surface or by a mix of the two, with tracking all the way.
 
-Lingdong publishes no delivery times and no rules for delivery attempts, notice cards, pickup points or how long a parcel is held. Once a local carrier has the parcel, its rules apply. Import VAT and duties follow your country's rules: see [parcels held at customs](guide:customs). Lingdong's own pages on customs rules by country are written for sellers and out of date; they still give the EU's former €22 threshold.
+Lingdong publishes no delivery times and no rules for delivery attempts, notice cards, pickup points or how long a parcel is held. Once a local carrier has the parcel, its rules apply. Import VAT and duties follow your country's rules: see [parcels held at customs](guide:customs). In the EU, since 1 July 2026, an online order from outside the EU worth up to €150 is charged a temporary customs duty of €3 per item; since 1 November 2026, goods sold at a distance from outside the EU are also charged a €2 Union handling fee per item, whatever their value.
 
 ## Lingdong parcel not arriving or tracking stuck
 
-**Stuck on `Shipment departed from facility`.** Lingdong's tracking can end there, and at most it goes on to your country's customs, so a quiet history doesn't mean the parcel has stopped. Ask the seller which carrier delivers it in your country and for that carrier's number; its tracking has the rest. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck on `Shipment departed from facility`.** That's the parcel leaving Lingdong's warehouse in Shenzhen. Flight and customs lines can follow, but none of the lines Peek knows is a delivery line, so Lingdong's history can stay still while the parcel moves on. Ask the seller which carrier delivers it in your country and for that carrier's number; its tracking has the rest. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Only the Chinese line.** `货物电子信息已经收到` on its own means the seller has booked the parcel but it hasn't reached Lingdong's warehouse. If nothing follows for several days, ask the seller whether it has been sent.
 
@@ -65,8 +67,8 @@ Lingdong publishes no delivery times and no rules for delivery attempts, notice 
 
 As listed on lingdong56.com on 27 October 2026, in Chinese only:
 
-- **Phone**: 173 3900 3327 and 189 0502 5944, two Chinese mobile numbers (+86 from abroad). No hours or languages are given.
-- **QQ**: the site's chat buttons for quotes, bulk business and problem parcels, claims and complaints all open a QQ chat with 596154560.
+- **Phone**: two Chinese mobile numbers, in the site's header and on its contact page (联系我们). No hours or languages are given.
+- **QQ**: the site's chat buttons for quotes, bulk business and problem parcels, claims and complaints all open a chat on QQ, a Chinese messaging app.
 - **Address**: 深圳市宝安区福海街道展城社区福园二路10号濠和智创B栋625, in Bao'an District, Shenzhen.
 
 Lingdong lists no email and no office outside China. For anything about your order, the seller is the one to ask.
@@ -75,11 +77,11 @@ Lingdong lists no email and no office outside China. For anything about your ord
 
 [Peek](/) names Lingdong International at once for an SZLD number, a shape no other carrier in its catalog uses. A link to Lingdong's tracker with `documentCode=` and the number in it can be pasted too.
 
-Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country when Lingdong's record gives it. Every wording shows as Lingdong writes it, Chinese included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
+Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country when Lingdong's record gives it. Every wording shows as Lingdong writes it, Chinese included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek never shows a line written more than 12 hours before the time it gives, or one from the tracking system's custom-track feature (轨迹定制), which can place a parcel abroad before it reaches the airport: both are forecasts, not scans. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
 
 Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
-Peek checks every 10 minutes and can notify you of every scan, important steps only or "Delivery only". It can't contact Lingdong or the seller for you.
+Peek checks every 10 minutes. After 12 hours without a new scan while the parcel shows "Label created" or "Received by carrier", or two days otherwise, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Lingdong or the seller for you.
 
 ## Questions about Lingdong tracking
 
@@ -89,7 +91,7 @@ It is Shenzhen Lingdong International Freight Forwarding Co., Ltd. (深圳市领
 
 ### Why is my Lingdong tracking stuck on "Shipment departed from facility"?
 
-Because Lingdong's tracking can end there: the scan marks the parcel leaving the Shenzhen warehouse, and for some parcels no flight or customs line follows. Lingdong's record names no carrier that delivers it afterwards. Ask the seller for the local carrier's number to follow the rest.
+That scan marks the parcel leaving Lingdong's warehouse in Shenzhen, and Lingdong's history can stay on it while the parcel travels on. Flight and customs lines can follow, but none of the Lingdong lines Peek knows is a delivery line: another company delivers the parcel in your country. Ask the seller which company it is and for your tracking number with it.
 
 ### How long does Lingdong take to deliver?
 
@@ -110,6 +112,7 @@ The seller you ordered from: it booked the parcel with Lingdong and holds the co
 - [Lingdong: 快递业务 (express)](http://www.lingdong56.com/kdyw.html) – UPS, DHL and FedEx agent
 - [Lingdong: 联系我们 (contact)](http://www.lingdong56.com/lxwm.html) – address, phones
 - [Lingdong: 运输条款 (terms of carriage)](http://www.lingdong56.com/ystk.html) – the page holds no terms
-- [Lingdong: 各国海关政策 (customs policies)](http://www.lingdong56.com/hgzc.html) – customs notes for sellers, EU €22 threshold
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – SZLD number shape, scan wordings, the tracker's answers, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – SZLD number shape, scan wordings, the tracker's answers, what Peek shows and leaves out
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 customs duty per item on consignments up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: The temporary EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 fee per item on distance sales, whatever the items' value
 :::

@@ -136,7 +136,7 @@ To track the return parcel: [tracking a return](guide:returns-tracking).
 
 Yes, with the carrier's tracking number: paste it into [Peek](/). Peek recognises the Royal Mail, An Post and Canada Post numbers ending in `GB`, `IE` and `CA` and the UPS numbers starting with `1Z` by their shape alone.
 
-Numbers made only of digits, such as Canada Post's 16-digit ones, share their shape with other carriers. Peek then asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. Decathlon UK and the US don't name their home carriers, so paste the number all the same: Peek follows more than 3,500 carriers. Do the same with a TNT Australia or Xpect number. For a Nationex number in Canada, paste it, press "Change" and pick Nationex. If the order comes in several parcels, add each number.
+Numbers made only of digits, such as Canada Post's 16-digit ones, share their shape with other carriers. Peek then asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. Decathlon UK and the US don't name their home carriers, so paste the number all the same: Peek follows more than 3,500 carriers. Do the same with an Xpect number. For a TNT Australia number, or a Nationex number in Canada, paste it, press "Change" and pick TNT Australia or Nationex. If the order comes in several parcels, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Reports, refunds and returns go through Decathlon.
 

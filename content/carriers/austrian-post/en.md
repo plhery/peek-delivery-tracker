@@ -44,6 +44,8 @@ post.at shows its tracking in German and, through the EN switch, in English. Eac
 
 The help pages use summary statuses such as `Item in distribution`, while history lines read like `Shipment being processed at the logistics center`, so you won't see every row. `Electronic order information was provided by the sender` means only a label exists, and a shop's "on its way" email does not mean the parcel was handed over. If it doesn't change within a few working days, ask the sender. For a parcel from abroad, `Item received` means the carrier in the sending country has it.
 
+**Customs scans.** A parcel from abroad can get customs scans after it arrives in Austria. Peek shows them in German, as Austrian Post's tracking gives them, and as "At customs": `Sendung im Zollanmeldungsprozess. Weitere Info folgt.` (the customs declaration is under way), `Lagereingang - Zollanmeldungshindernis` (the parcel is stored while something stands in the way of its customs declaration; Austrian Post's tracking page asks you for the missing documents), `Sendung ist im Zollprozess verzögert. Grund: unplausibler Warenwert.` (a delay in customs, here over an implausible declared value; the reason after "Grund:" varies) and `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt` (your answer has arrived; the parcel stays in customs until it is cleared).
+
 ## Austrian Post parcel pickup, lockers and missed deliveries
 
 **Delivery times.** Austrian Post says parcels within Austria are usually delivered within two business days, and Post Express usually by 13:00 the next working day.
@@ -89,7 +91,7 @@ As listed on Austrian Post's pages on 11 October 2026:
 
 Peek shows the status, the history with each facility on a map, the weight, the dimensions, the delivery time and an expected delivery (a day, a span of days or a time window) while the parcel is accepted, in distribution or out for delivery. It shows a parcel as ready for pickup, but not where, and no sender. Austrian Post's wordings appear in German, as its tracking gives them, so a delivered parcel shows `Sendung wurde zugestellt`.
 
-Peek checks every 10 minutes, or every 2 once out for delivery, and can notify you of every scan, important steps only or on delivery day only. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
+Peek checks every 10 minutes, or every 2 once out for delivery, and can notify you of every scan, important steps only (customs scans among them) or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
 
 ## Questions about Austrian Post tracking
 
@@ -104,6 +106,10 @@ The parcel may only be announced: until the sender hands it over, there's little
 ### Does Austrian Post have a customer service email?
 
 Not for recipients. Use the contact form, the chat on the tracking page or the hotline.
+
+### What does Zollanmeldungshindernis mean?
+
+Something stands in the way of your parcel's customs declaration. Austrian Post stores the parcel with `Lagereingang - Zollanmeldungshindernis`, and its tracking page asks you for the missing documents. Once you have answered, it shows `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt`, and the parcel stays in customs until it is cleared.
 
 :::sources
 - [Austrian Post: FAQ](https://www.post.at/en/p/c/faq) – number examples, delivery times, 14 days, customs
@@ -123,5 +129,5 @@ Not for recipients. Use the contact form, the chat on the tracking page or the h
 - [Österreichische Post: Postempfangsbox](https://www.post.at/p/c/empfangsbox) – parcel box
 - [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – CRN code, customs
 - [Österreichische Post: Jahresfinanzbericht 2023](https://assets.post.at/-/media/Dokumente/De/Investor-Relations/Geschaefts--und-Nachhaltigkeitsberichte/Jahresfinanzbericht-Oesterreichische-Post-AG-2023.pdf) – legal name, seat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, the customs scans and their meaning
 :::

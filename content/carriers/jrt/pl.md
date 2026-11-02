@@ -33,6 +33,7 @@ Wiele linii JRT to tekst po chińsku, a za nim angielskie tłumaczenie samego JR
 | `Shipment information received` | Dane przesyłki dotarły do JRT, ale nikt jeszcze nie zeskanował paczki. | „Zarejestrowana” |
 | `到达收货点` | Paczka dotarła do punktu przyjęć JRT: to pierwszy skan, gdy JRT ma ją już u siebie. | „Przyjęta przez przewoźnika” |
 | `货物离开操作中心` | Paczka wyjechała z centrum operacyjnego JRT. | „W transporcie” |
+| `深圳集散中心 已收货` | Centrum dystrybucyjne JRT w Shenzhen przyjęło paczkę, po wyjeździe z centrum operacyjnego, a przed lotem. Peek pokazuje ją po angielsku: „Received at the Shenzhen distribution center”. | „W transporcie” |
 | `货物打包完成，已发往航司` | Paczka jest spakowana i jedzie do linii lotniczej, przed lotem. Peek pokazuje ją po angielsku: „Goods packed and sent to the airline”. | „W transporcie” |
 | `抵达航司已起飞` | Paczka jest już w linii lotniczej, a samolot wyleciał z lotniska podanego w linii. Peek pokazuje „Arrived at the airline, flight departed”. | „W transporcie” |
 | `货物已交机场,等待航班安排中 Cargo delivered to airport, pending flight arrangement` | Przekazana na lotnisko, czeka na lot. „Delivered” znaczy tu: dostarczona na lotnisko, nie do Ciebie. | „W transporcie” |

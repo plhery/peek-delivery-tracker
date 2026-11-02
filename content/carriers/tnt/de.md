@@ -17,6 +17,7 @@ TNT nennt sie mal Sendungsnummer, mal Frachtbriefnummer oder Auftragsnummer. Gem
 | 9 Ziffern | Die TNT-Sendungsnummer. Damit suchen tnt.com und Peek | Keines: TNT vergibt diese Nummern immer wieder neu |
 | 8 Ziffern | Laut TNTs Hilfe zur Sendungsverfolgung ebenfalls eine TNT-Nummer. Abfragen kannst du sie nur auf tnt.com, nicht in Peek | – |
 | Eine Referenz des Versenders | Die Nummer, die der Versender als Kunde von TNT selbst vergeben hat. Nur tnt.com sucht damit | – |
+| Drei Buchstaben und 9 Ziffern | Eine Inlandssendung in Australien. Verfolgt wird sie auf der eigenen Tracking-Seite von TNT Australia, nicht auf tnt.com | `XYZ000000000` |
 
 TNT verarbeitet mehr als zwei Millionen Sendungen im Monat, deshalb kommen die acht- und neunstelligen Nummern alle drei bis vier Wochen wieder. Zeigt tnt.com unter deiner Nummer mehrere Sendungen, erkennst du deine an Datum, Ursprungs- und Zielort.
 
@@ -86,11 +87,11 @@ Halte Sendungsnummer und Lieferadresse bereit.
 
 ## TNT-Sendung mit Peek verfolgen
 
-Füg die 9-stellige Sendungsnummer ein. Stimmt ihre Prüfziffer, fragt [Peek](/) bei TNT nach, und bei XPO, wenn die Nummer auch dessen Prüfung besteht. Kennt TNT sie, siehst du „TNT hat dieses Paket.“ Passt die Prüfziffer nicht, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Taucht TNT nicht auf, wählst du es mit „Ändern“ oder am Paket mit „Paketdienst ändern“. Eine Nummer aus GE, neun Ziffern und WW ordnet Peek sofort TNT zu, wenn ihre Prüfziffer stimmt. Links von tnt.com mit `tracking.html?cons=` und der Nummer, auch von der deutschen Seite, kannst du ebenfalls einfügen. 8-stellige TNT-Nummern kann Peek bei TNT nicht abfragen: Verfolge sie auf tnt.com.
+Füg die 9-stellige Sendungsnummer ein. Stimmt ihre Prüfziffer, fragt [Peek](/) bei TNT nach, und bei XPO, wenn die Nummer auch dessen Prüfung besteht. Kennt TNT sie, siehst du „TNT hat dieses Paket.“ Passt die Prüfziffer nicht, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Taucht TNT nicht auf, wählst du es mit „Ändern“ oder am Paket mit „Paketdienst ändern“. Eine Nummer aus GE, neun Ziffern und WW ordnet Peek sofort TNT zu, wenn ihre Prüfziffer stimmt. Links von tnt.com mit `tracking.html?cons=` und der Nummer, auch von der deutschen Seite, kannst du ebenfalls einfügen. 8-stellige TNT-Nummern kann Peek bei TNT nicht abfragen: Verfolge sie auf tnt.com. Inlandssendungen von TNT in Australien, drei Buchstaben und 9 Ziffern, verfolgt Peek als eigenen Paketdienst, TNT Australia, auf dessen Tracking-Seite: den Status, jeden Scan mit seinem Depot und den voraussichtlichen Liefertag. Andere Paketdienste nutzen dieselbe Form, deshalb ordnet Peek sie TNT Australia nicht allein nach der Form zu: Peek fragt TNT Australia zusammen mit diesen Paketdiensten, und kennt TNT Australia die Nummer, siehst du „TNT Australia hat dieses Paket.“ Sonst wähl TNT Australia mit „Ändern“ oder am Paket mit „Paketdienst ändern“. Einen Link von der Tracking-Seite von TNT Australia mit `con=` und der Nummer ordnet Peek dagegen sofort TNT Australia zu.
 
 Peek zeigt den Status, den Verlauf mit Stadt und Land jedes Scans, das Zielland und den voraussichtlichen Liefertag, solange TNT einen nennt. Die Uhrzeiten zeigt Peek in der Zeitzone deines Geräts. Die Referenz des Versenders und die Unterschrift bleiben auf tnt.com. Weil TNT Nummern neu vergibt, folgt Peek der Sendung mit dem neuesten Scan: Prüf, ob die Strecke zu deiner passt.
 
-Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald die Sendung in Zustellung ist. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. TNT oder den Absender für dich kontaktieren, Zoll bezahlen oder die Zustellung ändern kann Peek nicht.
+Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald die Sendung in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange die Sendung noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. TNT oder den Absender für dich kontaktieren, Zoll bezahlen oder die Zustellung ändern kann Peek nicht.
 
 ## Fragen zur TNT Sendungsverfolgung
 
@@ -127,5 +128,5 @@ Laut TNTs FAQ die Person, die die Sendung angemeldet hat, bei einer Bestellung a
 - [TNT Deutschland: Internet Betrug](https://www.tnt.com/express/de_de/site/support/fraud.html) – Betrugsmaschen, Sendungsnummer kein Beweis, e-crime@fedex.com, Polizei
 - [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – keine Zollfreigrenze seit 1. Juli 2026, 3 € je Warenkategorie bei bestimmten Sendungen, Abfertigungspauschale ab 1. November 2026, Einfuhrumsatzsteuer 19 und 7 %, Kurierdienst zahlt vorab, Servicepauschale, IOSS
 - [EU-Kommission: Guidance and legal text on temporary flat fee on low-value imports](https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en) – 3 € je Warenkategorie bis 1. Juli 2028, alle Online-Käufe bis 150 €, mit oder ohne IOSS (Englisch)
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek von TNT liest
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek von TNT liest, Inlandssendungen von TNT Australia und deren Tracking-Seite
 :::

@@ -32,6 +32,10 @@ Die Sendungsverfolgung auf post.at zeigt deutsche Texte, über den Umschalter EN
 | `Versender*in bereitet die Sendung für den Versand vor` | Der Shop hat das Paket angemeldet. Die Post hat es noch nicht. |
 | `Zum Transport erhalten` | Die Post hat das Paket übernommen. |
 | `Sendung im Logistikzentrum in Bearbeitung` | Es wird in einem Logistikzentrum sortiert. |
+| `Sendung im Zollanmeldungsprozess. Weitere Info folgt.` | Ein Paket aus dem Ausland ist in Österreich angekommen, und die Zollanmeldung läuft. |
+| `Lagereingang - Zollanmeldungshindernis` | Der Zollanmeldung steht etwas im Weg, und das Paket lagert so lange. In der Sendungsverfolgung der Post wirst du um die fehlenden Unterlagen gebeten. |
+| `Sendung ist im Zollprozess verzögert. Grund: unplausibler Warenwert.` | Eine Verzögerung beim Zoll, hier wegen eines unplausiblen angegebenen Warenwerts. Der Grund nach „Grund:“ wechselt. |
+| `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt` | Deine Antwort zum Hindernis ist da. Das Paket bleibt beim Zoll, bis es verzollt ist. |
 | `Sendung in Verteilung` | Es ist in Österreich angekommen und kommt in den nächsten Werktagen. |
 | `Verzögerung wegen Fehlverteilung` | Es wurde falsch sortiert: eine kleine Verzögerung, du musst nichts tun. |
 | `Sendung in Zustellung` | Es kommt voraussichtlich heute. |
@@ -89,9 +93,9 @@ So nennt die Post ihre Kanäle für Privatkunden (gelesen am 11. Oktober 2026):
 
 [Peek](/) erkennt eine internationale Nummer auf AT mit gültiger Prüfziffer sofort als Austrian Post. 22 Ziffern teilen sich mehrere Paketdienste, darunter USPS und Estafeta: Peek fragt bei Austrian Post nach und meldet „Austrian Post hat dieses Paket.“, wenn die Post die Nummer kennt. Sonst wählst du den Paketdienst mit „Ändern“. Ein Link von post.at funktioniert nur, wenn eine AT-Nummer darin steht.
 
-Peek zeigt den Status, den Verlauf mit jedem Logistikzentrum auf einer Karte, Gewicht, Maße, die Zustellzeit und eine voraussichtliche Zustellung (ein Tag, ein paar Tage oder ein Zeitfenster), solange das Paket übernommen, in Verteilung oder in Zustellung ist. Ein abholbereites Paket zeigt Peek als abholbereit, aber nicht, wo es liegt. Der Versender fehlt ebenfalls. Die Texte der Post erscheinen auf Deutsch, so wie die Post sie liefert: Ein zugestelltes Paket zeigt `Sendung wurde zugestellt`.
+Peek zeigt den Status, den Verlauf mit jedem Logistikzentrum auf einer Karte, Gewicht, Maße, die Zustellzeit und eine voraussichtliche Zustellung (ein Tag, ein paar Tage oder ein Zeitfenster), solange das Paket übernommen, in Verteilung oder in Zustellung ist. Ein abholbereites Paket zeigt Peek als abholbereit, aber nicht, wo es liegt. Der Versender fehlt ebenfalls. Die Texte der Post erscheinen auf Deutsch, so wie die Post sie liefert: Ein zugestelltes Paket zeigt `Sendung wurde zugestellt`. Die Zollscans der Post, etwa `Lagereingang - Zollanmeldungshindernis`, zeigt Peek als „Beim Zoll“.
 
-Peek prüft das Paket alle 10 Minuten, in Zustellung alle 2 Minuten, und kann dir Mitteilungen schicken: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
+Peek prüft das Paket alle 10 Minuten, in Zustellung alle 2 Minuten, und kann dir Mitteilungen schicken: bei jedem Scan, nur bei wichtigen Schritten (dazu zählen die Zollscans) oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
 
 ## Fragen zur Sendungsverfolgung der Post
 
@@ -111,6 +115,10 @@ In der Regel mindestens 14 Kalendertage: Die Abholfrist beginnt am Tag nach dem 
 
 Ja, mit deinem gelben Zettel. Oder du leitest ihm die e-Benachrichtigung weiter.
 
+### Was heißt Zollanmeldungshindernis?
+
+Der Zollanmeldung deines Pakets steht etwas im Weg. Die Post lagert das Paket mit `Lagereingang - Zollanmeldungshindernis`, und in ihrer Sendungsverfolgung wirst du um die fehlenden Unterlagen gebeten. Hast du geantwortet, steht dort `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt`, und das Paket bleibt beim Zoll, bis es verzollt ist.
+
 :::sources
 - [Österreichische Post: Hilfe zu Ihrem Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Bedeutung der Status, Abholfrist, Abholung, Schaden, Nachforschung
 - [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – Nummernformen, Laufzeiten, 14 Tage, Poststation, CRN-Code, Zoll
@@ -127,5 +135,5 @@ Ja, mit deinem gelben Zettel. Oder du leitest ihm die e-Benachrichtigung weiter.
 - [Österreichische Post: Postempfangsbox](https://www.post.at/p/c/empfangsbox) – Empfangsbox
 - [Österreichische Post: Gefahren im Internet](https://www.post.at/i/c/gefahren-im-internet) – gefälschte SMS und Zettel
 - [Österreichische Post: Jahresfinanzbericht 2023](https://assets.post.at/-/media/Dokumente/De/Investor-Relations/Geschaefts--und-Nachhaltigkeitsberichte/Jahresfinanzbericht-Oesterreichische-Post-AG-2023.pdf) – Firmenname, Sitz
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest, Zollscans und ihre Bedeutung
 :::

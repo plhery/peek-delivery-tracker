@@ -33,6 +33,7 @@ Molte righe di JRT sono in cinese con accanto la traduzione inglese di JRT, e Pe
 | `Shipment information received` | I dati della spedizione sono arrivati a JRT; nessuno ha ancora scansionato il pacco. | «Etichetta creata» |
 | `到达收货点` | Arrivato al punto di raccolta: la prima scansione di JRT. | «Preso in carico» |
 | `货物离开操作中心` | Il pacco ha lasciato il centro operativo di JRT. | «In transito» |
+| `深圳集散中心 已收货` | Il centro di smistamento di JRT a Shenzhen ha ricevuto il pacco, dopo l'uscita dal centro operativo e prima del volo. Peek lo mostra in inglese: «Received at the Shenzhen distribution center». | «In transito» |
 | `货物打包完成，已发往航司` | Imballato e in viaggio verso la compagnia aerea, prima del volo. Peek lo mostra in inglese: «Goods packed and sent to the airline». | «In transito» |
 | `抵达航司已起飞` | Affidato alla compagnia aerea, e il volo è partito dall'aeroporto indicato nella riga. Peek mostra «Arrived at the airline, flight departed». | «In transito» |
 | `货物已交机场,等待航班安排中 Cargo delivered to airport, pending flight arrangement` | Consegnato in aeroporto, aspetta un volo. «Delivered» qui vuol dire all'aeroporto, non a te. | «In transito» |

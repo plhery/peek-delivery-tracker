@@ -33,6 +33,7 @@ Many of JRT's lines are Chinese followed by JRT's own English, and Peek quotes t
 | `Shipment information received` | The shipment's data has reached JRT; nobody has scanned the parcel yet. | "Label created" |
 | `到达收货点` | Arrived at JRT's receiving point: the first scan in JRT's hands. | "Received by carrier" |
 | `货物离开操作中心` | The parcel has left JRT's operations centre. | "In transit" |
+| `深圳集散中心 已收货` | JRT's hub in Shenzhen has received the parcel, after it left the operations centre and before its flight. Peek shows it in English: "Received at the Shenzhen distribution center". | "In transit" |
 | `货物打包完成，已发往航司` | Packed and on its way to the airline, before the flight. Peek shows it in English: "Goods packed and sent to the airline". | "In transit" |
 | `抵达航司已起飞` | With the airline, and the flight has left the airport the line names. Peek shows "Arrived at the airline, flight departed". | "In transit" |
 | `货物已交机场,等待航班安排中 Cargo delivered to airport, pending flight arrangement` | Handed over at the airport, waiting for a flight. "Delivered" means to the airport, not to you. | "In transit" |

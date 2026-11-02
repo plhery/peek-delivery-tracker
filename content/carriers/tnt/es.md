@@ -17,6 +17,7 @@ TNT lo llama número de envío, número de albarán o número de pedido, pero es
 | 9 cifras | El número de envío de TNT. Lo buscan tnt.com y Peek. | Ninguno: TNT reutiliza estos números |
 | 8 cifras | Según la página de seguimiento de TNT, también un número suyo. Solo lo busca tnt.com, no Peek. | – |
 | Una referencia del remitente | La «Referencia del Cliente», de hasta 24 caracteres, que pone quien envía. Solo la busca tnt.com. | – |
+| Tres letras y 9 cifras | Un envío nacional dentro de Australia. Se sigue en la web de seguimiento de TNT Australia, no en tnt.com. | `XYZ000000000` |
 
 Según TNT, el número está en el correo de confirmación o en el manifiesto de recogida, debajo del código de barras. Quien envía lo tiene también en la factura de TNT, a la izquierda, unos 3 cm por debajo del número de cliente. Si eres el destinatario, pídeselo a la tienda o a quien te lo envía. En tnt.com puedes buscar varios números a la vez, separados por comas. Más ideas en [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
@@ -87,11 +88,11 @@ Para escribir, la página de contacto de tnt.com enlaza dos formularios en fedex
 
 ## Seguimiento de TNT con Peek
 
-Pega el número de 9 cifras. Si su dígito de control es correcto, [Peek](/) pregunta a TNT, y también a XPO cuando el número pasa además el control de XPO, y muestra «TNT tiene este paquete.» cuando TNT lo conoce. Si no lo es, pégalo igualmente: Peek sigue más de 3.500 transportistas. Si no sale TNT, elígelo con «Cambiar» o, en el paquete, con «Cambiar transportista». Un número con `GE`, 9 cifras y `WW` se reconoce al momento como de TNT si su dígito de control es correcto. También valen los enlaces de tnt.com con `shipping-tools/tracking.html?cons=` y el número, pero no los de la web española (`herramientas-envio/seguimiento.html`): pega el número. Los números de 8 cifras y la referencia del remitente, síguelos en tnt.com.
+Pega el número de 9 cifras. Si su dígito de control es correcto, [Peek](/) pregunta a TNT, y también a XPO cuando el número pasa además el control de XPO, y muestra «TNT tiene este paquete.» cuando TNT lo conoce. Si no lo es, pégalo igualmente: Peek sigue más de 3500 transportistas. Si no sale TNT, elígelo con «Cambiar» o, en el paquete, con «Cambiar transportista». Un número con `GE`, 9 cifras y `WW` se reconoce al momento como de TNT si su dígito de control es correcto. También valen los enlaces de tnt.com con `shipping-tools/tracking.html?cons=` y el número, pero no los de la web española (`herramientas-envio/seguimiento.html`): pega el número. Los números de 8 cifras y la referencia del remitente, síguelos en tnt.com. Los envíos nacionales de TNT en Australia, con tres letras y 9 cifras, Peek los sigue como un transportista aparte, TNT Australia, en su propia web de seguimiento: el estado, cada escaneo con su depósito y la fecha prevista de entrega. Otros transportistas usan el mismo formato, así que Peek no lo asigna a TNT Australia solo por su forma: pregunta a TNT Australia junto con esos transportistas y muestra «TNT Australia tiene este paquete.» si TNT Australia conoce el número. Si no, elígelo con «Cambiar» o, en el paquete, con «Cambiar transportista». Un enlace de la web de seguimiento de TNT Australia con `con=` y el número, en cambio, se reconoce al momento como de TNT Australia.
 
 Peek muestra el estado, el historial con la ciudad y el país de cada escaneo, el país de destino y la fecha prevista mientras TNT la da, con las horas en la zona horaria de tu dispositivo. La referencia y la firma se quedan en tnt.com. Como los números se repiten, Peek se queda con el envío del escaneo más reciente: comprueba que el recorrido es el tuyo.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede llamar a TNT ni al remitente, pagar la aduana ni cambiar una entrega.
+Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede llamar a TNT ni al remitente, pagar la aduana ni cambiar una entrega.
 
 ## Preguntas sobre el seguimiento de TNT
 
@@ -128,5 +129,5 @@ Por norma general, de lunes a viernes. La «Entrega en fin de semana y días fes
 - [Agencia Tributaria: Envíos de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – IVA, arancel de 3 €, tasa de 2 €
 - [Agencia Tributaria: Envíos de más de 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-150-euros.html) – Ceuta y Melilla, IVA o IGIC
 - [Agencia Tributaria: Envíos de escaso valor en Canarias](https://sede.agenciatributaria.gob.es/Sede/aduanas/islas-canarias-ciudades-ceuta-melilla/presentacion-declaraciones-envios-escaso-valor.html) – sin IOSS, envíos desde la Península y Baleares
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – qué muestra Peek, textos de tnt.com en inglés
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – qué muestra Peek, textos de tnt.com en inglés, envíos nacionales de TNT Australia y su web de seguimiento
 :::

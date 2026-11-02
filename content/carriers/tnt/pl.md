@@ -15,6 +15,7 @@ TNT przewozi paczki, dokumenty i palety za granicę, a w Polsce także przesyłk
 | 9 cyfr | Numer przesyłki TNT, czyli numer listu przewozowego. Śledzisz go na tnt.com i w Peek. | Brak: TNT używa tych numerów ponownie |
 | 8 cyfr | Strona śledzenia TNT wspomina też o takich numerach. Sprawdzisz je tylko na tnt.com, nie w Peek. | – |
 | Numer referencyjny | Dodatkowy numer nadany przy zamawianiu wysyłki. Sprawdzisz go tylko na tnt.com. | – |
+| 3 litery i 9 cyfr | Przesyłka krajowa w Australii. Śledzi się ją na stronie śledzenia TNT Australia, nie na tnt.com. | `XYZ000000000` |
 
 TNT podaje, że numer przesyłki jest w e-mailu potwierdzającym wysyłkę i w manifeście, pod kodem kreskowym, a na fakturze TNT po lewej stronie, około 3 cm pod numerem klienta. Jeśli to Ty czekasz na paczkę, poproś o numer sklep albo nadawcę. Na tnt.com sprawdzisz kilka przesyłek naraz: oddziel numery przecinkami. Więcej w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
@@ -88,11 +89,11 @@ Według polskich stron TNT, stan na 27 października 2026:
 
 ## Śledzenie przesyłki TNT w Peek
 
-Wklej 9-cyfrowy numer. Jeśli jego cyfra kontrolna się zgadza, [Peek](/) pyta o niego TNT, a gdy numer przechodzi też kontrolę XPO, również XPO. Jeśli TNT zna przesyłkę, zobaczysz komunikat „TNT ma tę przesyłkę.” Gdy cyfra kontrolna się nie zgadza, wklej numer mimo to: Peek śledzi ponad 3500 przewoźników. Jeśli TNT się nie pojawi, wybierz go przyciskiem „Zmień”, a przy dodanej już przesyłce przez „Zmień przewoźnika”. Numer z `GE` na początku, 9 cyframi i `WW` na końcu Peek od razu przypisuje TNT, jeśli cyfra kontrolna się zgadza. Możesz też wkleić link do śledzenia z tnt.com, także z polskiej strony (z `shipping-tools/tracking.html?cons=` i numerem): Peek odczyta z niego numer. Numery 8-cyfrowe i numer referencyjny sprawdzisz tylko na tnt.com.
+Wklej 9-cyfrowy numer. Jeśli jego cyfra kontrolna się zgadza, [Peek](/) pyta o niego TNT, a gdy numer przechodzi też kontrolę XPO, również XPO. Jeśli TNT zna przesyłkę, zobaczysz komunikat „TNT ma tę przesyłkę.” Gdy cyfra kontrolna się nie zgadza, wklej numer mimo to: Peek śledzi ponad 3500 przewoźników. Jeśli TNT się nie pojawi, wybierz go przyciskiem „Zmień”, a przy dodanej już przesyłce przez „Zmień przewoźnika”. Numer z `GE` na początku, 9 cyframi i `WW` na końcu Peek od razu przypisuje TNT, jeśli cyfra kontrolna się zgadza. Możesz też wkleić link do śledzenia z tnt.com, także z polskiej strony (z `shipping-tools/tracking.html?cons=` i numerem): Peek odczyta z niego numer. Numery 8-cyfrowe i numer referencyjny sprawdzisz tylko na tnt.com. Przesyłki krajowe TNT w Australii, z 3 literami i 9 cyframi, Peek śledzi jako osobnego przewoźnika, TNT Australia, na jego własnej stronie śledzenia: status, każdy skan z jego oddziałem i przewidywaną datę doręczenia. Ten sam format mają numery innych przewoźników, więc Peek nie przypisuje go TNT Australia po samym formacie: pyta TNT Australia razem z tymi przewoźnikami i gdy TNT Australia zna numer, pokazuje „TNT Australia ma tę przesyłkę.” Jeśli nie, wybierz go przyciskiem „Zmień”, a przy dodanej już przesyłce przez „Zmień przewoźnika”. Link ze strony śledzenia TNT Australia z `con=` i numerem Peek przypisuje za to TNT Australia od razu.
 
 Peek pokazuje status, historię z miastem i krajem każdego skanu, kraj docelowy i przewidywaną datę doręczenia, dopóki TNT ją podaje. Godziny skanów widzisz w strefie czasowej Twojego urządzenia. Numer referencyjny i podpis zostają na tnt.com. Ponieważ TNT używa numerów ponownie, Peek wybiera przesyłkę z najnowszym skanem: sprawdź, czy trasa się zgadza.
 
-Peek sprawdza przesyłkę co 10 minut, a gdy jest w doręczeniu, co 2 minuty. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Peek nie zadzwoni za Ciebie do TNT ani do nadawcy, nie zapłaci cła i nie zmieni doręczenia.
+Peek sprawdza przesyłkę co 10 minut, a gdy jest w doręczeniu, co 2 minuty. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Peek nie zadzwoni za Ciebie do TNT ani do nadawcy, nie zapłaci cła i nie zmieni doręczenia.
 
 ## Pytania o śledzenie przesyłki TNT
 
@@ -130,5 +131,5 @@ Ponownie TNT doręcza tylko od poniedziałku do piątku. Przy przesyłkach krajo
 - [TNT Polska: Usługi krajowe na terenie Polski](https://www.tnt.com/campaign/pl_pl/site/domestic-services-pl.html) – przesyłki krajowe w całej Polsce
 - [podatki.gov.pl: Zwolnienia celne](https://podatki.gov.pl/informacje-o-cle/pozostale-informacje/zwolnienia-celne) – 3 euro za pozycję od 1 lipca 2026 r. przy IOSS lub przesyłce pocztowej (stan z 15 grudnia 2025 r.), koniec zwolnienia do 150 euro, prezenty do 45 euro
 - [Komisja Europejska: Guidance and legal text on temporary flat fee on low-value imports](https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en) – 3 euro za pozycję do 1 lipca 2028 r., sprzedaż na odległość, bez względu na system VAT (po angielsku)
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek pokazuje, angielskie wpisy TNT
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek pokazuje, angielskie wpisy TNT, przesyłki krajowe TNT Australia i jego strona śledzenia
 :::

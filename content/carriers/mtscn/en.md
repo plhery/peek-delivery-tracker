@@ -51,7 +51,7 @@ A step's place comes before a comma at its start, and steps in your country add 
 
 ## Who delivers Meiteshun parcels
 
-Meiteshun's steps in your country don't name the company that delivers there. The service name on its records is MTS全球小包 ("MTS global small parcel").
+Meiteshun's steps in your country don't name the company that delivers there. The service name on its records is MTS全球小包, MTS global small parcel.
 
 Peek found no delivery times from Meiteshun, and no rules for delivery attempts, pickup points or how long a parcel is held. Ask the seller which company delivers your order and for its number: that company's tracking and rules are the ones that count. If you're asked for import charges, see [parcels held at customs](guide:customs).
 
@@ -77,7 +77,7 @@ As of 28 October 2026, Peek found no contact details for Meiteshun on a page it 
 
 Peek reads Meiteshun's own tracker and shows the status, each scan with its place, and the destination country. Scans show as Meiteshun writes them: `Customs clearanceisin progress` counts as customs, and `package is on the way` as in transit, not out for delivery. Peek keeps your town from the steps in your country and leaves out the postcode. Scan times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, weight, fees, signature and proof of delivery Meiteshun's record can hold, and shows no expected delivery date: Meiteshun gives none.
 
-Peek holds back a step written more than twelve hours before the time it carries, and any step dated after the moment it checks, on Beijing time. It goes by the steps it keeps, not by the record's summary status. When an order's whole script was written at its creation, Peek keeps only the steps dated before that moment or up to twelve hours after it, so the `Delivered` written then is held back. An order whose steps are all held back has no tracking history in Peek yet and shows "Waiting for the carrier"; Peek then sets aside the copies tracking services make of those steps too.
+Peek holds back a step written more than twelve hours before the time it carries, and any step dated after the moment it checks, on Beijing time. It goes by the steps it keeps, not by the record's summary status. When an order's whole script was written at its creation, Peek keeps only the steps dated before that moment or up to twelve hours after it, so the `Delivered` written then is held back. An order whose steps are all held back has no tracking history in Peek yet and shows "Waiting for the carrier". Whether Peek holds back some steps or all of them, it also sets aside the copies tracking services make of those steps.
 
 Peek follows the parcel on Meiteshun's tracker. The one hand-over Peek can take from Meiteshun's record is to [Swiss Post](carrier:swiss-post), when the record names a Swiss Post line and number for a parcel to Switzerland or Liechtenstein. With any other delivering number from the seller, add it as a parcel of its own.
 

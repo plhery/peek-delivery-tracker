@@ -3274,6 +3274,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-seguimiento",
+      "title": "Rastreo y seguimiento GZYL: número YL…YQ y estados",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
       "id": "sending",
       "catalog": "sending",
       "slug": "sending-seguimiento",

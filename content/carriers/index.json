@@ -94,7 +94,7 @@
   { "id": "dao", "catalog": "dao", "name": "DAO", "languages": ["en", "da"] },
   { "id": "helthjem", "catalog": "helthjem", "name": "Helthjem", "languages": ["en", "ru"] },
   { "id": "matkahuolto", "catalog": "matkahuolto", "name": "Matkahuolto", "languages": ["en", "fi", "sv"] },
-  { "id": "ukrposhta", "catalog": "ukrposhta", "name": "Ukrposhta", "languages": ["en"] },
+  { "id": "ukrposhta", "catalog": "ukrposhta", "name": "Ukrposhta", "languages": ["en", "ru"] },
   { "id": "acs-courier", "catalog": "acs-courier", "name": "ACS Courier", "languages": ["en", "el"] },
   { "id": "elta", "catalog": "elta", "name": "ELTA Hellenic Post", "languages": ["en", "el"] },
   { "id": "geniki-taxydromiki", "catalog": "geniki-taxydromiki", "name": "Geniki Taxydromiki", "languages": ["en", "el"] },

@@ -3794,6 +3794,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffb202"
     },
     {
+      "id": "ukrposhta",
+      "catalog": "ukrposhta",
+      "slug": "ukrposhta-otslezhivanie-posylki",
+      "title": "Укрпошта (Укрпошта): отслеживание по трек-номеру и статусы",
+      "name": "Ukrposhta",
+      "color": "#ffbe0c"
+    },
+    {
       "id": "dhl",
       "catalog": "dhl",
       "slug": "dhl-paket-otslezhivanie",

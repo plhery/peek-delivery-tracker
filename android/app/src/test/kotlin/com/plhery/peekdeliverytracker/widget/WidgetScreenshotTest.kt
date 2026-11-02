@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
@@ -184,6 +185,25 @@ class WidgetScreenshotTest {
             listOf(widget(IPHONE_SMALL, wordsEntry(parcels, medium = false, enabled = false)), widget(IPHONE_MEDIUM, wordsEntry(parcels, medium = true, enabled = false))),
         ),
     )
+
+    /**
+     * The gallery's preview before Android 15, and a widget's first look until it has drawn (widget_preview), applied as
+     * a launcher applies it, which inflates only the views RemoteViews allows: at the iPhone's small size, a phone's
+     * two-by-two and a tablet's.
+     */
+    private fun staticPreview(dark: Boolean) = shoot(
+        if (dark) "static_preview_dark" else "static_preview_light", dark,
+        listOf(listOf(IPHONE_SMALL, DpSize(179.dp, 208.dp)), listOf(DpSize(304.dp, 233.dp))).map { row ->
+            row.map { Shown(RemoteViews(app.packageName, R.layout.widget_preview), it) }
+        },
+    )
+
+    @Test
+    fun staticPreviewLight() = staticPreview(dark = false)
+
+    @Test
+    @Config(qualifiers = "+night")
+    fun staticPreviewDark() = staticPreview(dark = true)
 
     @Test
     fun statesLight() = states(dark = false)

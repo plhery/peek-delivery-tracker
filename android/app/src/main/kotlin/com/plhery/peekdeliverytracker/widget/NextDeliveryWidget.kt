@@ -68,7 +68,7 @@ import kotlinx.coroutines.launch
 class NextDeliveryWidget : GlanceAppWidget() {
     override val sizeMode = SizeMode.Exact
 
-    /** The gallery's pictures take declared sizes only: a two-by-two widget's, upright and on its side. */
+    /** The gallery's pictures take declared sizes only: a two-by-two widget's on a phone, upright and on its side, and on a tablet. */
     override val previewSizeMode = SizeMode.Responsive(PREVIEW_SIZES)
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -93,10 +93,13 @@ class NextDeliveryWidget : GlanceAppWidget() {
 
     companion object {
         /**
-         * A two-by-two widget on a phone, upright and on its side: Launcher3's cells on its reference phone grid, which
-         * the gallery's pictures are drawn at.
+         * The sizes the gallery's pictures are drawn at, of which the launcher shows the one closest to its two-by-two
+         * frame among those that fit in it, else the smallest. A phone's, upright and on its side: Launcher3's cells on
+         * its reference phone grid. A tablet's: square, inside a tablet's frame either way up (220 × 309 and 304 × 233
+         * on the reference tablet) and wider than a phone's (179 × 208 on the reference phone), so a tablet's picture
+         * shows the one parcel its widget is placed with rather than a phone's on its side.
          */
-        val PREVIEW_SIZES = setOf(DpSize(130.dp, 220.dp), DpSize(269.dp, 117.dp))
+        val PREVIEW_SIZES = setOf(DpSize(130.dp, 220.dp), DpSize(269.dp, 117.dp), DpSize(210.dp, 210.dp))
 
         /** The narrowest widget that shows two parcels side by side, two cards on their side on a phone. */
         private val MEDIUM_WIDTH = 250.dp

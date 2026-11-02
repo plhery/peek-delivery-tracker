@@ -505,6 +505,22 @@ class NextDeliveryWidgetTest {
     }
 
     /**
+     * The gallery's picture has the layout the widget is placed with: of the declared sizes, the launcher shows the one
+     * closest to its two-by-two frame that fits in it, else the smallest (RemoteViews' best fit). The frames are the
+     * reference phone's, upright and on its side, and the reference tablet's either way up.
+     */
+    @Test
+    fun galleryPictureHasThePlacedLayout() {
+        val frames = listOf(DpSize(179.dp, 208.dp), DpSize(269.dp, 117.dp), DpSize(220.dp, 309.dp), DpSize(304.dp, 233.dp))
+        for (frame in frames) {
+            val fitting = NextDeliveryWidget.PREVIEW_SIZES.filter { it.width.value <= frame.width.value + 1 && it.height.value <= frame.height.value + 1 }
+            val shown = fitting.minByOrNull { (it.width.value - frame.width.value).let { w -> w * w } + (it.height.value - frame.height.value).let { h -> h * h } }
+                ?: NextDeliveryWidget.PREVIEW_SIZES.minBy { it.width.value * it.height.value }
+            assertEquals("$frame shows $shown", NextDeliveryWidget.isMedium(frame), NextDeliveryWidget.isMedium(shown))
+        }
+    }
+
+    /**
      * `DeliveryWidgetPictures.draw` (C-W04, C-W24, A-W09): every picture of a card at the screen's scale, the mark last;
      * a parcel with no places has Pip alone where its route would be.
      */

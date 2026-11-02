@@ -17,24 +17,23 @@
         android:scaleType="fitCenter"
         android:src="@drawable/widget_sample_route" />
 
+    <!-- Only the views RemoteViews inflates: the mark held at the top and the words at the bottom, no Space. -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:layout_gravity="top|start"
+        android:layout_margin="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/widget_sample_carrier"
+        android:scaleType="fitStart"
+        android:src="@drawable/widget_sample_mark" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/widget_sample_carrier"
-            android:scaleType="fitStart"
-            android:src="@drawable/widget_sample_mark" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"

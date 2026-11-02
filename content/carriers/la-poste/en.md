@@ -16,7 +16,7 @@ Colissimo is the parcel service of La Poste, France's national post. Paste a Col
 | `LA000000005FR` | 2 letters, 9 digits and FR: an international postal number from France, used for Colissimo parcels and for tracked and registered letters. The digit before FR is a check digit. |
 | `87000000000000P` | 15 characters starting 863 to 866, 870, 875, 880 or 885: a Smart Data number, which La Poste uses for tracked and registered letters. The last character is a check character; La Poste's tracking also finds the number without it. |
 
-Postal numbers starting XU, XR, XT, XW, XY or PZ and ending FR belong to [Chronopost](carrier:chronopost). Twelve characters suggest [Colis Privé](carrier:colis-prive). Plain 13- or 14-digit numbers also fit DPD and others, so check the shop's email. Lost the number? See [where to find a tracking number](guide:find-tracking-number).
+Postal numbers starting XU, XR, XT, XW, XY or PZ and ending FR belong to [Chronopost](carrier:chronopost). Twelve characters suggest [Colis Privé](carrier:colis-prive). Plain 14-digit numbers also fit DPD and others, so check the shop's email. Lost the number? See [where to find a tracking number](guide:find-tracking-number).
 
 ## What Colissimo tracking statuses mean
 
@@ -66,9 +66,9 @@ La Poste's channels, as listed by ARCEP and France's official public-service dir
 
 ## Tracking Colissimo parcels with Peek
 
-[Peek](/) names La Poste / Colissimo at once for 13-character Colissimo numbers with a valid key, 14-digit `870` numbers, and 15-character Smart Data numbers and postal numbers ending FR, each with a valid check character. Other codes or a failed key: it asks La Poste alone; 14 digits shared with DPD and others: it asks the likely carriers. laposte.fr links with `code=` or `idShip=` work; colissimo.fr links only when the number inside is one Peek names at once.
+[Peek](/) names La Poste / Colissimo at once for 13-character Colissimo numbers with a valid key, 14-digit `870` numbers, and 15-character Smart Data numbers and postal numbers ending FR, each with a valid check character. Other codes or a failed key: it asks La Poste alone; 14 digits shared with DPD and others: it asks the likely carriers. Pick La Poste for a number it rejects, such as one with a failed key, and Peek says at the first check: "This carrier doesn’t issue tracking numbers like this one. Check the number, or choose another carrier." laposte.fr links with `code=` or `idShip=` work; colissimo.fr links only when the number inside is one Peek names at once.
 
-Peek reads La Poste in French, so statuses stay French in every language. It shows each scan on a map with its exact time, the expected delivery, the shop's name, the delivered time and, while the parcel waits, the post office, relay or locker with its address. It drops your name and address. It checks every 10 minutes (every 2 once out for delivery) and can notify you at every scan, at important steps only or on delivery day only.
+Peek reads La Poste in French, so statuses stay French in every language. It shows each scan on a map with its exact time, the expected delivery, the shop's name, the delivered time and, while the parcel waits, the post office, relay or locker with its address. It drops your name and address. It checks every 10 minutes (every 2 once out for delivery) and can notify you at every scan, at important steps only or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 Chronopost services are followed on Chronopost, a partner La Poste names is followed there, and a postal number bound abroad can be followed to that country's post, such as [Royal Mail](carrier:royal-mail), once it shows progress. Peek can't change a delivery or pay customs.
 

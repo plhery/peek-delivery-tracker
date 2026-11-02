@@ -83,7 +83,7 @@ The contact page's "Info About My Order" route is for clients, the businesses th
 
 Peek reads MWD's own tracker: the status, the history in MWD's words, each line's town and state on a map, and the weight. It shows each time in your device's time zone. Peek leaves out your town and zip code, the order and client references, the partner carrier's PRO number, the item count and volume, and the progress steps MWD draws above the history. It shows no expected delivery date, no proof of delivery and no live crew tracking, and it doesn't follow a partner carrier.
 
-Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. It can notify you of every scan, important steps only or "Delivery only", which with MWD starts at `Arrived at Delivery Location`. Peek can't book or change the appointment, file a claim, or contact MWD or the shop for you.
+Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only", which with MWD starts at `Arrived at Delivery Location`. Peek can't book or change the appointment, file a claim, or contact MWD or the shop for you.
 
 ## Questions about Metropolitan Warehouse tracking
 

@@ -72,7 +72,7 @@ For a claim or a complaint, go through Parcelforce's own website.
 
 Peek reads Parcelforce on Royal Mail's tracking site by opening it in a real browser on its server, so a check takes longer and can fail when the site blocks automated visits. Peek then tries universal tracking services, which hold little for Parcelforce.
 
-Peek shows the status, each scan with its place (no postcodes), the expected delivery day, the delivery time and the destination country. It checks every 10 minutes (every 5 minutes once the parcel is out for delivery), puts each scan on a map and can notify you when the status changes. Statuses keep Royal Mail's English wording, and every delivered line shows as "Delivered", without the name of who signed. A scan from abroad that comes without a time zone isn't dated. For some destinations, an export with an `EA000000005GB`-style number can be followed to that country's national post once it shows progress there.
+Peek shows the status, each scan with its place (no postcodes), the expected delivery day, the delivery time and the destination country. It checks every 10 minutes (every 5 minutes once the parcel is out for delivery), puts each scan on a map and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Statuses keep Royal Mail's English wording, and every delivered line shows as "Delivered", without the name of who signed. A scan from abroad that comes without a time zone isn't dated. For some destinations, an export with an `EA000000005GB`-style number can be followed to that country's national post once it shows progress there.
 
 ## Questions about Parcelforce tracking
 

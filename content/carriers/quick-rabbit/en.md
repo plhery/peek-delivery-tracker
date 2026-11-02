@@ -84,7 +84,7 @@ The contact page's form is for businesses asking for a quote.
 
 Peek reads Quick Rabbit's own tracker: the status, the history in the English lines above and the delivery time, read on Madrid time and shown in your device's time zone. Quick Rabbit names no places, so there's no map. Peek leaves out the estimated delivery date, the destination city, the shipper's reference and the courier's coordinates, which can be your door. There's no proof of delivery and no locker code, and Peek doesn't hand the parcel on to Citibox: the locker steps are Quick Rabbit's own lines.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. It can notify you of every scan, important steps only or "Delivery only". It can't change the delivery, open a claim, or contact Quick Rabbit or the shop for you.
+Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". It can't change the delivery, open a claim, or contact Quick Rabbit or the shop for you.
 
 ## Questions about Quick Rabbit tracking
 

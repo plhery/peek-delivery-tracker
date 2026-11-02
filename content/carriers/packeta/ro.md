@@ -99,7 +99,7 @@ Pe packeta.ro, la 26 octombrie 2026:
 
 Peek îți arată cei mai noi 20 de pași, magazinul care a trimis coletul, ora livrării și adresa punctului pick-up sau a Z-BOX-ului spre care merge coletul (nu și la livrarea la adresă sau la retur). Depozitul sau punctul numit într-un pas apare ca loc. Peek ia orele Packeta drept ora Pragăi, așa că scanările din depozitele din România pot ieși decalate cu o oră. Packeta nu dă o dată estimată de livrare, deci nici Peek. Numele, adresa și semnătura ta nu le păstrează.
 
-Dacă un pas trimite la urmărirea unui transportator partener pe care Peek îl cunoaște, Peek arată cine livrează coletul și, dacă îl poate urmări direct, trece la el de îndată ce partenerul arată pași noi. Peek verifică coletul la fiecare 10 minute și te poate anunța când se schimbă ceva. Nu poate însă contacta Packeta sau magazinul în locul tău.
+Dacă un pas trimite la urmărirea unui transportator partener pe care Peek îl cunoaște, Peek arată cine livrează coletul și, dacă îl poate urmări direct, trece la el de îndată ce partenerul arată pași noi. Peek verifică coletul la fiecare 10 minute și te poate anunța când se schimbă ceva. Dacă trec două zile fără noutăți (sau 12 ore, cât timp coletul e doar înregistrat ori preluat de curier), Peek îl verifică o dată pe oră. Nu poate însă contacta Packeta sau magazinul în locul tău.
 
 ## Întrebări despre urmărirea Packeta
 

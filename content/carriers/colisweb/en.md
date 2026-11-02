@@ -85,7 +85,7 @@ An 8-digit number fits Colisweb, Mondial Relay and Heppner, and none of them can
 
 Colisweb sends only step codes, so Peek shows every step in its own words in your language. It shows the status, three milestones (delivery confirmed, collected by the crew, delivered) with their times but without places, the retailer's name and the delivery time. While the delivery is booked, collected or out for delivery and not being rescheduled, it shows your slot: a day and hours, in Paris time. A cancelled delivery shows as returned to the sender. It leaves out your name and address.
 
-Peek checks every 10 minutes, or every 2 once it's out for delivery, and can notify you of every scan, important steps only or delivery day only. A number Colisweb doesn't know isn't reported as not found, so check the digits against your SMS. Peek can't change your slot or address, use Colisweb's chat or contact the shop for you.
+Peek checks every 10 minutes, or every 2 once it's out for delivery, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the delivery still shows "Label created" or "Received by carrier"), Peek checks hourly. A number Colisweb doesn't know isn't reported as not found, so check the digits against your SMS. Peek can't change your slot or address, use Colisweb's chat or contact the shop for you.
 
 ## Questions about Colisweb tracking
 

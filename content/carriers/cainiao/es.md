@@ -52,7 +52,7 @@ Cainiao dice que hace reparto local en nueve países y regiones, sin nombrarlos;
 
 **Cambiar la entrega.** Con el correo «Revisa la información de entrega de tu paquete» puedes elegir un punto de recogida o una taquilla con un clic y, en el correo de entrega, autorizar a otra persona para que lo firme. Una vez en el punto, ya no se puede cambiar a otro punto ni a domicilio.
 
-**En el punto de recogida o la taquilla.** Ecoscooting te manda por correo o SMS el PIN, la dirección y el horario. Tienes 14 días para recogerlo; si no, vuelve al remitente y el reembolso se pide al vendedor. Cainiao España habla de 11.000 puntos de recogida y 500 taquillas; Ecoscooting, de más de 8.000 puntos.
+**En el punto de recogida o la taquilla.** Ecoscooting te manda por correo o SMS el PIN, la dirección y el horario. Tienes 14 días para recogerlo; si no, vuelve al remitente y el reembolso se pide al vendedor. Cainiao España habla de 11 000 puntos de recogida y 500 taquillas; Ecoscooting, de más de 8000 puntos.
 
 Cainiao, por su parte, no da un número de días. Su estado `Undelivered` cubre que no hubiera nadie, una dirección que el repartidor no encontró o una entrega aplazada, y aconseja pedir otra entrega o recoger el paquete cuanto antes, porque, si no, puede volver al remitente.
 
@@ -87,7 +87,7 @@ La página de contacto de Cainiao en inglés no da teléfono: solo el correo cai
 
 A veces AliExpress te da ya el número del transportista que lo entregará, por ejemplo uno de SDA para un paquete a Italia, cuando Cainiao todavía tiene el paquete. Con algunos de esos formatos, Peek pregunta a Cainiao además de a ese transportista. Si los dos conocen el número, Peek guarda el paquete como «AliExpress / Cainiao», que tiene los escaneos de antes de la frontera, y pregunta también al transportista que lo entrega para el último tramo: sus escaneos se suman al historial en cuanto da noticias del paquete.
 
-Consulta el seguimiento cada 10 minutos, cada 2 minutos cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Muestra el estado y el historial, en inglés, porque consulta Cainiao en ese idioma. Cuando Cainiao los da, muestra también el lugar de un escaneo, en un mapa; la entrega prevista, como un margen de días, y el número de la empresa local. Una vez entregado, añade la hora de entrega. No puede contactar con Cainiao ni reclamar por ti.
+Consulta el seguimiento cada 10 minutos, cada 2 minutos cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Muestra el estado y el historial, en inglés, porque consulta Cainiao en ese idioma. Cuando Cainiao los da, muestra también el lugar de un escaneo, en un mapa; la entrega prevista, como un margen de días, y el número de la empresa local. Una vez entregado, añade la hora de entrega. No puede contactar con Cainiao ni reclamar por ti.
 
 ## Preguntas sobre el seguimiento de Cainiao
 

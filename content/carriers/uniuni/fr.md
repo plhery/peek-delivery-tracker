@@ -102,7 +102,7 @@ Peek lit le suivi d'UniUni et affiche le statut, chaque scan avec sa ville et sa
 
 Quand UniUni passe le colis à un autre transporteur, les scans de celui-ci s'affichent dans l'historique d'UniUni, mais Peek ne suit pas le numéro de l'autre transporteur. À l'inverse, un colis [SpeedPAK](carrier:speedpak) peut nommer UniUni pour la dernière étape : Peek peut alors le suivre chez UniUni.
 
-Peek vérifie le suivi toutes les 10 minutes. Un colis en livraison est vérifié toutes les 2 minutes ; si UniUni annonce une plage horaire, à partir d'une demi-heure avant son début.
+Peek vérifie le suivi toutes les 10 minutes. Un colis en livraison est vérifié toutes les 2 minutes ; si UniUni annonce une plage horaire, à partir d'une demi-heure avant son début. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi UniUni
 

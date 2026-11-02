@@ -81,9 +81,9 @@ FAN's channels, as listed on its site on 12 October 2026:
 
 ## Tracking FAN Courier parcels with Peek
 
-[Peek](/) asks FAN Courier itself about a 13-digit number starting with `2`, `4` or `7000`, along with [La Poste](carrier:la-poste) and Delhivery, whose numbers can look the same. If only FAN knows it, you'll see "FAN Courier has this parcel."; if another carrier knows it too, you choose. An AWB of any other shape isn't recognised: paste it all the same (Peek follows more than 3,500 carriers), then press "Change" and pick "FAN Courier". A link from FAN's tracking page, Romanian (`/awb-tracking/`) or English (`/en/awb-track/`), with `tracking=` or `awb=`, goes straight to FAN Courier.
+[Peek](/) asks FAN Courier itself about a 13-digit number starting with `2`, `4` or `7000`, along with Delhivery, whose numbers can look the same. If only FAN knows it, you'll see "FAN Courier has this parcel."; if another carrier knows it too, you choose. An AWB of any other shape isn't recognised: paste it all the same (Peek follows more than 3,500 carriers), then press "Change" and pick "FAN Courier". A link from FAN's tracking page, Romanian (`/awb-tracking/`) or English (`/en/awb-track/`), with `tracking=` or `awb=`, goes straight to FAN Courier.
 
-Peek shows each of FAN's scans with its town and time. FAN's times carry no time zone, so Peek reads them as Romanian time. Scans keep FAN's English wording, except `Shipment picked up`, which shows as "Shipment collected". Peek checks every 10 minutes, or every 2 while the parcel is out for delivery, and can notify you when the status changes.
+Peek shows each of FAN's scans with its town and time. FAN's times carry no time zone, so Peek reads them as Romanian time. Scans keep FAN's English wording, except `Shipment picked up`, which shows as "Shipment collected". Peek checks every 10 minutes, or every 2 while the parcel is out for delivery, and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 It shows no expected delivery day and no FANbox name, and leaves out the recipient's name, contents, weight and payment details. A return travels under its own AWB, so this one never shows as returned.
 

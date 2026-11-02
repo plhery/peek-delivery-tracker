@@ -83,7 +83,7 @@ These cover parcels in DPD France's network; DPD France gives no separate number
 
 Peek shows the status, the history with each scan's depot, the expected day, the weight and the delivery time, and maps the delivering depot. Statuses stay in French; times are read on Paris time and shown in your device's time zone. It drops your name and address, the signature and the customer reference, and shows no relay's name or address, only "Ready for pickup". If DPD shows an outbound and a return trip, Peek keeps the one for your number. It follows no other carrier.
 
-Peek checks every 10 minutes, or every 2 once the parcel is out for delivery, and can notify you when the status changes.
+Peek checks every 10 minutes, or every 2 once the parcel is out for delivery, and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about DPD France tracking
 

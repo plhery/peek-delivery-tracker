@@ -77,7 +77,7 @@ Das Feld „Feedback“ auf Yuntrack betrifft die Website, nicht dein Paket. Fan
 
 ## YunExpress-Paket mit Peek verfolgen
 
-[Peek](/) erkennt YT mit 16 Ziffern als YunExpress und nimmt auch Links von yuntrack.com an. Es schaut alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist, zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen, wenn sich der Status ändert. Du siehst Status, Verlauf, den Ort jedes Scans und die Zustellzeit.
+[Peek](/) erkennt YT mit 16 Ziffern als YunExpress und nimmt auch Links von yuntrack.com an. Es schaut alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist, zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen, wenn sich der Status ändert. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Du siehst Status, Verlauf, den Ort jedes Scans und die Zustellzeit.
 
 Nennt YunExpress die Nummer des Paketdiensts vor Ort in einer Form, die Peek kennt, verfolgt Peek das Paket dort weiter, allerdings nicht bei jedem Paket. Ein voraussichtliches Lieferdatum oder eine Abholstelle zeigt es bei YunExpress-Paketen nicht, die Bestellnummern des Händlers lässt es weg, und YunExpress kontaktieren oder etwas reklamieren kann es nicht für dich.
 

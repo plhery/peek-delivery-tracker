@@ -69,11 +69,11 @@ For an Allegro Delivery parcel, contact Allegro, which handles customer service 
 
 ## Tracking ORLEN Paczka parcels with Peek
 
-[Peek](/) recognises 13-digit numbers starting 210 with a valid check digit. Other carriers share that shape, so it asks ORLEN Paczka and several of them, such as [La Poste](carrier:la-poste) and FAN Courier, at once and says "ORLEN Paczka has this parcel." when only ORLEN Paczka knows it. For other 13-digit numbers starting 2 or 3, pick ORLEN Paczka with "Change" or paste the orlenpaczka.pl tracking link that carries the 13-digit number. The 7- and 10-digit sending codes can't be tracked in Peek, and `AD` numbers aren't ORLEN Paczka's.
+[Peek](/) recognises 13-digit numbers starting 210 with a valid check digit. Other carriers share that shape, so it asks ORLEN Paczka and several of them, such as Delhivery and [FAN Courier](carrier:fan-courier), at once and says "ORLEN Paczka has this parcel." when only ORLEN Paczka knows it. For other 13-digit numbers starting 2 or 3, pick ORLEN Paczka with "Change" or paste the orlenpaczka.pl tracking link that carries the 13-digit number. The 7- and 10-digit sending codes can't be tracked in Peek, and `AD` numbers aren't ORLEN Paczka's.
 
 It shows the Polish wordings as written, the sorting-centre town on a map where named, and the delivery time, with times read on Warsaw time and shown in your device's time zone. There is no pickup point, expected delivery, weight or sender, and the return parcel's number is dropped. A Vinted parcel handed to another country's carrier isn't followed and stays in transit. Parcels already picked up drop out of ORLEN Paczka's tracking after some months.
 
-It checks every 10 minutes and can notify you when the status changes.
+It checks every 10 minutes and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about ORLEN Paczka tracking
 

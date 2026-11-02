@@ -101,7 +101,7 @@ Kontakty podľa packeta.sk k 26. októbru 2026:
 
 Peek ukáže súhrnný stav a 20 najnovších krokov v angličtine, ako ich píše Packeta, ďalej e-shop, ktorý zásielku poslal, kedy bola doručená, a adresu výdajného miesta alebo Z-BOXu, kam zásielka ide (pri doručení na adresu a pri vratke nie). Ak krok uvádza depo alebo výdajné miesto, Peek ho ukáže ako miesto kroku. Časy Peek číta podľa pražského času, ktorý je rovnaký ako slovenský, a ukazuje ich v časovom pásme vášho zariadenia. Predpokladaný čas doručenia zo SMS Peek nevidí. Vaše meno, adresu ani podpis si neukladá.
 
-Ak Packeta odovzdá zásielku inému prepravcovi a v kroku odkáže na jeho sledovanie, Peek ukáže, kto ju doručuje. Ak tohto prepravcu Peek pozná a ten hlási nové kroky, sleduje zásielku ďalej u neho. Peek ju kontroluje každých 10 minút a pri zmene vás môže upozorniť. Packetu za vás ale nekontaktuje a reklamáciu za vás nepodá.
+Ak Packeta odovzdá zásielku inému prepravcovi a v kroku odkáže na jeho sledovanie, Peek ukáže, kto ju doručuje. Ak tohto prepravcu Peek pozná a ten hlási nové kroky, sleduje zásielku ďalej u neho. Peek ju kontroluje každých 10 minút a pri zmene vás môže upozorniť. Ak dva dni nepribudne nič nové (alebo 12 hodín, kým je zásielka len zaregistrovaná či prevzatá prepravcom), Peek ju kontroluje už len raz za hodinu. Packetu za vás ale nekontaktuje a reklamáciu za vás nepodá.
 
 ## Časté otázky o sledovaní zásielok Packety
 

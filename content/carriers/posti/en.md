@@ -89,7 +89,7 @@ For a postal number ending `FI`, Peek asks Posti first, with Chronopost, and nam
 
 In Estonia, Latvia and Lithuania, Posti goes by SmartPosti: Peek's carrier search finds Posti under that name ("Also called SmartPosti"), and tracking links from smartposti.ee or itella.ee (or their .lv and .lt sites) name Posti for any code. Peek keeps Posti's answer only when exactly one shipment carries the exact code you typed, so for a SmartPosti code it may find nothing; then look the parcel up on smartposti.ee.
 
-Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. It checks every 10 minutes (every 2 once out for delivery), draws each scan on a map and can notify you of changes. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
+Peek reads Posti in English and shows each status with Posti's explanation line, the town of each scan, the weight, the dimensions and the pickup point's name and address. It checks every 10 minutes (every 2 once out for delivery), draws each scan on a map and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops the pickup code and your address, and shows no expected delivery or sender. A number covering several parcels isn't tracked, and old parcels read as not found.
 
 ## Questions about Posti tracking
 

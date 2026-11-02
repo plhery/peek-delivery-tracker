@@ -72,7 +72,7 @@ Si envías con Correos, Correios lo entrega en Brasil con el mismo código, y la
 - **ICMS**, el impuesto de cada estado: del 17 % al 20 %.
 - **La tarifa de Correios** por su trabajo de aduana (Despacho Postal) puede sumarse. No es un impuesto.
 
-Por encima de 3.000 dólares, o si la aduana no libera el paquete por otro motivo, el destinatario tiene que contratar a un agente de aduanas (despachante aduaneiro).
+Por encima de 3000 dólares, o si la aduana no libera el paquete por otro motivo, el destinatario tiene que contratar a un agente de aduanas (despachante aduaneiro).
 
 **Pago.** Se paga con boleto o Pix, en Minhas Importações o en la app, en los 20 días naturales siguientes a que aparezca el cobro; si no, el paquete vuelve al extranjero. Si el importe le parece mal, el destinatario puede pedir una «Revisão de Tributos» antes de generar el boleto o el Pix. Los documentos solo se pueden enviar una vez.
 
@@ -111,7 +111,7 @@ Peek trae el historial de Correios y muestra el estado, cada lectura con su ciud
 
 Correios no le dice a Peek adónde va el paquete. Si lo añades desde España (por la región de tu iPhone o, en la web, por el país de tu conexión), Peek pregunta también a Correos con el mismo código y pasa a seguirlo allí en cuanto Correos muestra lecturas nuevas, sin perder el historial de Correios; la tarjeta dice entonces «Entrega con Correos». Un paquete que mandas tú con un código acabado en `ES` se sigue en Correos, que tampoco indica el destino, así que Peek solo pregunta a Correios si quien lo sigue está en Brasil.
 
-Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede hablar con Correios ni con Correos por ti, pagar impuestos ni reclamar.
+Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Correios ni con Correos por ti, pagar impuestos ni reclamar.
 
 ## Preguntas sobre el seguimiento de Correios Brasil
 

@@ -86,7 +86,7 @@ O [Peek](/) reconhece logo a Chronopost num número de 13 caracteres começado p
 
 O Peek lê a Chronopost em francês, por isso os estados ficam em francês. Mostra no mapa o depósito de cada evento, o país de destino, a hora de entrega, o número do parceiro no estrangeiro e, enquanto a encomenda espera, o relais ou o cacifo com a morada. Não guarda a tua morada.
 
-Numa encomenda para Portugal, quando o rastreio da Chronopost dá o número da DPD e Portugal como país de entrega, o Peek indica a DPD Portugal como quem entrega, com esse número, e pergunta-lhe pela encomenda. Passa a segui-la na DPD Portugal assim que esta mostrar um evento tão recente como o último da Chronopost; até lá, continua na Chronopost. Consulta a cada 10 minutos, a cada 2 quando a encomenda está em distribuição, e avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega». Não consegue mudar uma entrega nem reclamar por ti.
+Numa encomenda para Portugal, quando o rastreio da Chronopost dá o número da DPD e Portugal como país de entrega, o Peek indica a DPD Portugal como quem entrega, com esse número, e pergunta-lhe pela encomenda. Passa a segui-la na DPD Portugal assim que esta mostrar um evento tão recente como o último da Chronopost; até lá, continua na Chronopost. Consulta a cada 10 minutos, a cada 2 quando a encomenda está em distribuição, e avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue mudar uma entrega nem reclamar por ti.
 
 ## Perguntas sobre o rastreio Chronopost
 

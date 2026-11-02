@@ -92,7 +92,7 @@ Linie SunYou pojawiają się po angielsku, poza dokładnymi dopasowaniami, takim
 
 Gdy SunYou podaje numer lokalnego przewoźnika, aplikacja może zapytać tego przewoźnika i przełączyć się na niego, gdy pokaże nowsze postępy. Gdy tym numerem jest numer pocztowy (dwie litery, 9 cyfr, dwie litery) paczki do Polski, pyta [Pocztę Polską](carrier:poczta-polska). Paczka zachowuje numer SunYou, a jej strona pokazuje „Doręcza:” z nazwą przewoźnika oraz jego numer z linkiem. Nie dzieje się tak przy każdej paczce.
 
-Śledzenie jest sprawdzane co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z SunYou ani ze sklepem.
+Śledzenie jest sprawdzane co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z SunYou ani ze sklepem.
 
 ## Pytania o SunYou tracking
 

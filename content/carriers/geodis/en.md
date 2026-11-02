@@ -85,7 +85,7 @@ Paste a `1G` number and [Peek](/) names GEODIS at once; no other carrier uses th
 
 Peek reads GEODIS's tracking in French and shows the steps in GEODIS's French wording (the first column above; `Livraison effectuée` shows as Delivered), with the GEODIS site of each scan on a map; times are read on Paris time and shown in your device's time zone. It also shows the expected delivery day, the sender and the weight. A missed delivery, a problem, a return or a parcel held for pickup takes priority over the timeline step. When GEODIS gives steps without dated scans, Peek dates the status when it first saw it.
 
-It leaves out the parcel count, your name and address, delivery instructions and delivery documents. Shipments older than 12 months read as not found. Peek checks every 10 minutes, or every 2 once the parcel is out for delivery, and can notify you of every scan, important steps or delivery day only. It can't change your delivery: do that in GEODIS's recipient space.
+It leaves out the parcel count, your name and address, delivery instructions and delivery documents. Shipments older than 12 months read as not found. Peek checks every 10 minutes, or every 2 once the parcel is out for delivery, and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't change your delivery: do that in GEODIS's recipient space.
 
 ## Questions about GEODIS tracking
 

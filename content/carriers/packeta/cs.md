@@ -96,7 +96,7 @@ Kontakty, jak je Zásilkovna uváděla na svém webu 25. října 2026:
 
 Peek ukáže souhrnný stav a 20 nejnovějších kroků v angličtině, jak je Packeta píše, dále e-shop, který zásilku poslal, čas doručení a adresu výdejního místa nebo Z-BOXu, kam zásilka míří (u doručení domů a u vratky ne). Depo nebo výdejní místo z kroku uvede jako místo, a když je v názvu město, ukáže ho na mapě. Časy Peek čte podle pražského času a ukazuje je v časovém pásmu vašeho zařízení. Vaše jméno, adresu ani podpis si neukládá. Odhad doručení Zásilkovna nedává, takže ho Peek nemá.
 
-Když Zásilkovna předá zásilku dopravci, kterého Peek zná, a odkáže na něj, Peek ukáže, kdo ji doručuje. Jakmile má ten dopravce čerstvé kroky, sleduje ji Peek dál u něj. Zásilku kontroluje každých 10 minut a při změně vám může poslat upozornění. Zásilkovnu za vás ale nekontaktuje a nic za vás nereklamuje.
+Když Zásilkovna předá zásilku dopravci, kterého Peek zná, a odkáže na něj, Peek ukáže, kdo ji doručuje. Jakmile má ten dopravce čerstvé kroky, sleduje ji Peek dál u něj. Zásilku kontroluje každých 10 minut a při změně vám může poslat upozornění. Když dva dny nepřibude nic nového (nebo 12 hodin, dokud je zásilka jen zaregistrovaná či převzatá dopravcem), Peek ji kontroluje už jen jednou za hodinu. Zásilkovnu za vás ale nekontaktuje a nic za vás nereklamuje.
 
 ## Časté otázky ke sledování Zásilkovny
 

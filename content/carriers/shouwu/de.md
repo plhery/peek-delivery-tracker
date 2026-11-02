@@ -111,7 +111,7 @@ Peek übernimmt die Phase des Pakets aus Shouwus Status, wie in den Tabellen obe
 
 Shouwu nennt den Paketdienst nicht eigens, deshalb zeigt Peek keine Zeile „Zustellung durch“ und verfolgt das Paket nicht beim Paketdienst weiter. Hast du dessen Nummer, füg sie in Peek als eigenes Paket hinzu.
 
-Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist. Mitteilungen bekommst du für „Jeden Scan“, für „Wichtige Schritte“ (Zustellung, Abholung, Zoll, fehlgeschlagene Zustellversuche und Rücksendungen) oder für „Nur die Zustellung“. Shouwu oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen bekommst du für „Jeden Scan“, für „Wichtige Schritte“ (Zustellung, Abholung, Zoll, fehlgeschlagene Zustellversuche und Rücksendungen) oder für „Nur die Zustellung“. Shouwu oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur Shouwu Sendungsverfolgung
 

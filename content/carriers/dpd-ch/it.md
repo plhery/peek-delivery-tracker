@@ -83,7 +83,7 @@ Il campo «Codice postale di consegna» è facoltativo e accetta il formato di q
 
 Quando il pacco è `Ready for collection`, il negozio viene nominato se DPD lo indica, con l'indirizzo di solito solo se hai dato l'NPA. Gli stati restano nell'inglese di DPD, tranne il semplice `Delivered`, che compare come «Consegnato». Il tuo nome, il tuo indirizzo e il link alla prova di consegna non vengono conservati.
 
-Peek controlla il pacco ogni 10 minuti, ogni 2 quando è in consegna, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Non segue il pacco presso un altro corriere e non può contattare DPD al posto tuo.
+Peek controlla il pacco ogni 10 minuti, ogni 2 quando è in consegna, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Non segue il pacco presso un altro corriere e non può contattare DPD al posto tuo.
 
 ## Domande sul tracking DPD Svizzera
 

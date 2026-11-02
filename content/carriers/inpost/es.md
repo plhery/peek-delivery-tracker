@@ -108,7 +108,7 @@ En [Peek](/), InPost España está en la ficha de Mondial Relay: si buscas «InP
 - **FV y 8 cifras:** pégalo tal cual. Peek pregunta a DHL eCommerce Iberia, Mondial Relay y TNT Italy y, si es de InPost España, verás «Mondial Relay tiene este paquete.». Lo lee en inpost.es; si esa página pide el código postal, Peek no puede leerlo: síguelo allí.
 - **8, 10 o 12 cifras:** Peek no puede preguntar a Mondial Relay por estos números. Pégalo igualmente: Peek sigue más de 3500 transportistas. Pulsa «Cambiar», busca «InPost» y elige Mondial Relay; con 8 cifras, añade el «Código postal de entrega». Peek lo buscará entonces en Mondial Relay (con textos en francés), no en inpost.es, y no está comprobado que así encuentre los envíos de InPost España.
 
-Peek no lee los enlaces de inpost.es: copia solo el número. Con un número FV verás el estado, hasta 100 movimientos con su hora y la hora de entrega, pero no el lugar de cada movimiento, la fecha prevista ni tu PIN. Consulta cada 10 minutos y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede hablar con InPost ni con la tienda por ti.
+Peek no lee los enlaces de inpost.es: copia solo el número. Con un número FV verás el estado, hasta 100 movimientos con su hora y la hora de entrega, pero no el lugar de cada movimiento, la fecha prevista ni tu PIN. Consulta cada 10 minutos y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con InPost ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de InPost
 

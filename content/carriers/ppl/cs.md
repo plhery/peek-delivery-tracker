@@ -94,7 +94,7 @@ Kontakty uvedené na ppl.cz 25. října 2026:
 
 PPL můžete vybrat i sami přes „Change“, třeba u čísla, které začíná 0 nebo 1: takové číslo Peek u PPL sám neověřuje. U čísla, které nemá přesně 11 číslic, Peek napíše, že PPL „doesn’t issue numbers like this one“. Vložit můžete i odkaz ze sledování na ppl.cz se `shipmentId=`.
 
-Kromě stavů Peek ukáže očekávaný den doručení, dokud ho PPL uvádí, hmotnost, čas doručení a název PPL shopu nebo boxu, kde zásilka čeká. Místa jednotlivých kroků PPL neuvádí. Časové okno doručení, odesílatele, referenční číslo, adresu výdejního místa, údaje o dobírce ani doklad o doručení Peek neukazuje. Když PPL zásilku předá partnerovi v zahraničí a odkáže na jeho sledování, Peek ukáže partnera i číslo zásilky u něj. Peek kontroluje zásilku u PPL každých 10 minut, na rozvozu každé 2 minuty, a při změně stavu vám může poslat upozornění.
+Kromě stavů Peek ukáže očekávaný den doručení, dokud ho PPL uvádí, hmotnost, čas doručení a název PPL shopu nebo boxu, kde zásilka čeká. Místa jednotlivých kroků PPL neuvádí. Časové okno doručení, odesílatele, referenční číslo, adresu výdejního místa, údaje o dobírce ani doklad o doručení Peek neukazuje. Když PPL zásilku předá partnerovi v zahraničí a odkáže na jeho sledování, Peek ukáže partnera i číslo zásilky u něj. Peek kontroluje zásilku u PPL každých 10 minut, na rozvozu každé 2 minuty, a při změně stavu vám může poslat upozornění. Když dva dny nepřibude nic nového (nebo 12 hodin, dokud je zásilka jen zaregistrovaná či převzatá dopravcem), Peek ji kontroluje už jen jednou za hodinu.
 
 ## Časté otázky ke sledování PPL
 

@@ -58,7 +58,7 @@ No confundas `Solución de entrega concertada` con la «Entrega concertada», un
 
 **Cambiar la dirección.** Se puede si lo autoriza el cliente que paga el servicio, normalmente la tienda. Es gratis dentro de la zona de la misma franquicia; si afecta a otras, ese cliente tiene que aceptar gastos adicionales.
 
-**Puntos NACEX.shop y lockers.** La red NACEX.shop reúne más de 4.000 comercios y lockers en España y Portugal, muchos abiertos sábados y domingos. Un envío dirigido a un punto está disponible al día siguiente a partir de las 9:00, o como máximo a las 12:00 si el punto abre más tarde, y NACEX te avisa cuando puedes recogerlo. El [localizador de puntos](https://www.nacex.es/irCerca.do) muestra puntos y franquicias en España, Portugal y Andorra. NACEX no publica cuánto tiempo guardan el paquete los puntos ni los lockers.
+**Puntos NACEX.shop y lockers.** La red NACEX.shop reúne más de 4000 comercios y lockers en España y Portugal, muchos abiertos sábados y domingos. Un envío dirigido a un punto está disponible al día siguiente a partir de las 9:00, o como máximo a las 12:00 si el punto abre más tarde, y NACEX te avisa cuando puedes recogerlo. El [localizador de puntos](https://www.nacex.es/irCerca.do) muestra puntos y franquicias en España, Portugal y Andorra. NACEX no publica cuánto tiempo guardan el paquete los puntos ni los lockers.
 
 **En una agencia NACEX.** El envío se queda allí un máximo de 15 días; si nadie lo retira, vuelve al remitente. Avisa a la agencia y recógelo de lunes a viernes, en su horario, que cambia de una agencia a otra. Otra persona puede recogerlo con una autorización firmada por ti y una fotocopia de tu DNI.
 
@@ -94,7 +94,7 @@ Para Andorra, NACEX no da canales propios: usa los de España. En Portugal, su n
 
 [Peek](/) reconoce un número de NACEX por su forma: exactamente cuatro cifras, una barra y ocho cifras, con o sin espacios alrededor de la barra. También puedes pegar un enlace de seguimiento de nacex.es que lleve `intcli=`, o el correo de envío entero. Con otras longitudes, usa el formulario de NACEX.
 
-Peek consulta el seguimiento de NACEX cada 10 minutos, cada 2 minutos cuando el paquete está en reparto, y puede enviarte una notificación en cada escaneo, solo en los pasos importantes o solo el día de entrega. Muestra el estado y el historial con las palabras de NACEX, los lugares donde se escaneó el paquete en un mapa y el día de cada paso, sin hora, porque NACEX no la publica. No muestra fecha prevista de entrega. Deja fuera el nombre del destinatario, la prueba de entrega, los comentarios de entrega, los datos de contacto y la referencia de la tienda, y no puede acelerar el paquete ni hablar con NACEX por ti.
+Peek consulta el seguimiento de NACEX cada 10 minutos, cada 2 minutos cuando el paquete está en reparto, y puede enviarte una notificación en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Muestra el estado y el historial con las palabras de NACEX, los lugares donde se escaneó el paquete en un mapa y el día de cada paso, sin hora, porque NACEX no la publica. No muestra fecha prevista de entrega. Deja fuera el nombre del destinatario, la prueba de entrega, los comentarios de entrega, los datos de contacto y la referencia de la tienda, y no puede acelerar el paquete ni hablar con NACEX por ti.
 
 ## Preguntas sobre el seguimiento de NACEX
 

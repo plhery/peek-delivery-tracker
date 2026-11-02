@@ -17,7 +17,7 @@ iMile veröffentlicht keine Beispielnummer. Diese Formen tragen seine Pakete, mi
 | `IM06010000000000` | IM, 0601 und zehn Ziffern: iMile. |
 | `IM00000000000000` | IM und 14 Ziffern: ebenfalls iMile. |
 | `6010125000000` | 13 Ziffern, beginnend mit 6, die nächsten sechs wie ein Datum (Monat, Tag, Jahr): iMiles eigene Sendungsnummer. |
-| `3000000000000` | Andere 13-stellige Nummern: keine von iMiles Formen. Solche Nummern nutzen La Poste, Delhivery, Yunda und Korea Post. |
+| `3000000000000` | Andere 13-stellige Nummern: keine von iMiles Formen. Solche Nummern nutzen Delhivery, Yunda und Korea Post. |
 | `LP00000000000000` | Nicht iMile, sondern [Cainiao](carrier:cainiao), die Logistiknummer von AliExpress. |
 
 Auf iMiles Tracking-Seite gibst du die Nummer unter „TYPE YOUR ORDER NUMBER“ ein, den Verlauf zeigt sie unter „ORDER STATUS“. Kennt iMile die Nummer nicht, bleibt das Feld leer, ohne Fehlermeldung. Findest du keine Nummer, hilft [Sendungsnummer finden](guide:find-tracking-number); sonst frag den Shop.
@@ -103,7 +103,7 @@ Bei Fragen zur Bestellung ist der Shop meist schneller: Er hat iMile beauftragt 
 
 Peek fragt iMile auf Englisch ab. Es zeigt den Status, den Verlauf mit dem Zentrum oder Ort jedes Scans auf einer Karte und das Zielland, mit Uhrzeiten, die es nach der Uhr dieses Landes liest und in der Zeitzone deines Geräts zeigt. Bringt Cainiao das Paket für iMile aus China, setzt Peek Cainiaos frühere Scans davor: Abholung, Sortierung, Export, Flug und Import.
 
-Peek zeigt kein voraussichtliches Lieferdatum, keinen geplanten Flug, keinen Zustellnachweis, keine Unterschrift, keine Kontakte und keine Zahlungsdaten von iMile und entfernt die Telefonnummer des Fahrers aus den Scans. Status wie „In Zustellung“ oder „Zustellversuch“ sind Peeks eigene; die Zeilen im Verlauf bleiben so, wie iMile sie schreibt. Peek prüft alle 10 Minuten, alle 2 Minuten, sobald das Paket in Zustellung ist, und benachrichtigt dich mit der Einstellung „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. iMile oder den Shop kann Peek nicht für dich kontaktieren.
+Peek zeigt kein voraussichtliches Lieferdatum, keinen geplanten Flug, keinen Zustellnachweis, keine Unterschrift, keine Kontakte und keine Zahlungsdaten von iMile und entfernt die Telefonnummer des Fahrers aus den Scans. Status wie „In Zustellung“ oder „Zustellversuch“ sind Peeks eigene; die Zeilen im Verlauf bleiben so, wie iMile sie schreibt. Peek prüft alle 10 Minuten, alle 2 Minuten, sobald das Paket in Zustellung ist, und benachrichtigt dich mit der Einstellung „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. iMile oder den Shop kann Peek nicht für dich kontaktieren.
 
 ## Fragen zur iMile Sendungsverfolgung
 

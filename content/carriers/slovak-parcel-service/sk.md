@@ -111,7 +111,7 @@ Kontakty podľa sps-sro.sk k 26. októbru 2026:
 
 Peek ukáže kroky po slovensky, ako ich píše SPS, pri krokoch stredisko SPS a hmotnosť balíka; `Doručenie` berie ako doručené. Predpokladaný dátum doručenia od SPS nedostáva. Mená, PSČ ani referenčné čísla si zo SPS neukladá.
 
-Peek zásielku kontroluje každých 10 minút a v deň, keď je na doručovacom hárku (`Doručovací hárok`), každé 2 minúty. Pri zmene stavu vás môže upozorniť. SPS ani e-shop za vás nekontaktuje: úložnú dobu nepredĺži, PIN znova nepošle, dobierku nezaplatí a reklamáciu nepodá.
+Peek zásielku kontroluje každých 10 minút a v deň, keď je na doručovacom hárku (`Doručovací hárok`), každé 2 minúty. Ak dva dni nepribudne nič nové (alebo 12 hodín, kým je zásielka len zaregistrovaná či prevzatá prepravcom), Peek ju kontroluje už len raz za hodinu. Pri zmene stavu vás môže upozorniť. SPS ani e-shop za vás nekontaktuje: úložnú dobu nepredĺži, PIN znova nepošle, dobierku nezaplatí a reklamáciu nepodá.
 
 ## Časté otázky o sledovaní zásielok SPS
 

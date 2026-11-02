@@ -82,7 +82,7 @@ Its FAQ, written for shops, says it offers their customers phone, email and live
 
 Peek reads euShipments' tracker. It shows the status, the history, and for warehouse and hub lines the place, with the country for hubs. It keeps euShipments' English status and leaves out the courier's wording from "Tracking Information". When the "Tracking Link:" goes to the tracker of a courier Peek can follow, such as [Econt](carrier:econt), Sameday, FAN Courier, [Packeta](carrier:packeta), Slovenská pošta or Geniki Taxydromiki, with the courier's number in the link, Peek shows "Delivery with" that courier, and the courier's number when it differs from yours. It asks the courier, and follows the parcel there once the courier's tracker shows dated progress at least as recent as euShipments' latest line, keeping euShipments' lines. Otherwise it stays on euShipments' history.
 
-euShipments' result shows no expected delivery date and no proof of delivery, so Peek has neither from euShipments. Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of every update, important steps only or on delivery day only. It can't contact euShipments, the shop or the courier for you.
+euShipments' result shows no expected delivery date and no proof of delivery, so Peek has neither from euShipments. Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of every update, important steps only or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact euShipments, the shop or the courier for you.
 
 ## Questions about euShipments tracking
 

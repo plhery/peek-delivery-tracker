@@ -86,7 +86,7 @@ As listed on Nova Poshta's and Nova Post Poland's sites on 22 October 2026:
 
 Other carriers share these shapes, so [Peek](/) never names Nova Poshta from the number alone. Instead it asks the carriers that use them, Nova Poshta among them: first if you search from Ukraine or the number starts with 595000, otherwise once the first carriers don't know it. If Nova Poshta knows it, Peek shows "Nova Poshta (Ukraine) has this parcel." If not, press "Change" and pick "Nova Poshta (Ukraine)". A tracking link from novaposhta.ua or novapost.com works too. It covers Ukrainian waybills, including those booked at Nova Post branches abroad, and Nova Post's international SH and TN numbers, not Nova Poshta Global references.
 
-It shows Nova Poshta's English wordings, each scan's town on a map, the expected arrival, weight, the branch or locker holding it and the delivery time, and drops names, addresses and payment. When an export names its partner abroad, [UPS](carrier:ups) or GoFo Express, Peek can follow the parcel there. It checks every 10 minutes, or every 2 once out for delivery, and can notify you when the status changes.
+It shows Nova Poshta's English wordings, each scan's town on a map, the expected arrival, weight, the branch or locker holding it and the delivery time, and drops names, addresses and payment. When an export names its partner abroad, [UPS](carrier:ups) or GoFo Express, Peek can follow the parcel there. It checks every 10 minutes, or every 2 once out for delivery, and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Nova Poshta tracking
 

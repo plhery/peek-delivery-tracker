@@ -93,7 +93,7 @@ A [Peek](/) felülete angol nyelvű. A `Z` betűből és 10 számjegyből álló
 
 A Peek a 20 legfrissebb lépést mutatja, angolul, ahogy a Packeta írja őket. Látja a feladót (többnyire a webáruházat), a kézbesítés idejét, és annak az átvételi pontnak vagy automatának a címét, ahová a csomag tart (házhoz szállításnál és visszaküldésnél nem). Ha egy lépés depót vagy átvevőhelyet nevez meg, a Peek azt mutatja helyszínként. Az időpontokat a Packeta prágai idő szerint adja meg, ami megegyezik a magyar idővel. Várható kézbesítési időt a Packeta nem ad. Az Ön nevét, címét és aláírását a Peek nem tárolja.
 
-Ha egy lépés olyan partner szállító nyomkövetésére hivatkozik, amelyet a Peek ismer, a Peek megmutatja, ki kézbesíti a csomagot; ha azt a szállítót közvetlenül is követni tudja, a friss lépések megjelenése után onnan követi tovább. A Peek 10 percenként ellenőrzi a csomagot, és változáskor értesítést küldhet. A Packetával vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot, és reklamációt sem nyújt be.
+Ha egy lépés olyan partner szállító nyomkövetésére hivatkozik, amelyet a Peek ismer, a Peek megmutatja, ki kézbesíti a csomagot; ha azt a szállítót közvetlenül is követni tudja, a friss lépések megjelenése után onnan követi tovább. A Peek 10 percenként ellenőrzi a csomagot, és változáskor értesítést küldhet. Ha két napig nincs újdonság (vagy 12 óráig, amíg a csomagot még csak regisztrálták, illetve épp csak átvette a szállító), a Peek már csak óránként ellenőrzi. A Packetával vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot, és reklamációt sem nyújt be.
 
 ## Gyakori kérdések a Packeta-csomagkövetésről
 

@@ -87,7 +87,7 @@ Les agents ont accès aux mêmes informations que toi : garde ton numéro de sui
 
 Peek lit directement le suivi de Dragonfly et affiche les statuts dans leur version anglaise, tels qu'écrits, même pour un colis du Québec : `Nous approchons!` y devient `On our way to you!`, et `Hourra! Votre colis a été livré!` devient `Hooray! Your package is here`. Chaque étape a son heure exacte, mais Dragonfly ne donne pas de lieu. Peek montre la livraison prévue (une plage horaire une fois le colis chez le livreur, un jour avant cela) et, pour les gros marchands comme Amazon, Walmart ou Canadian Tire, le nom de l'expéditeur. Il laisse de côté le nom du livreur, tes coordonnées et la preuve de livraison, et n'affiche ni point de retrait ni poids. Il ne peut pas modifier la livraison ni montrer la photo.
 
-Peek vérifie le suivi toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, livraisons du soir comprises, et peut t'envoyer une notification quand le statut change.
+Peek vérifie le suivi toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, livraisons du soir comprises, et peut t'envoyer une notification quand le statut change. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi Intelcom
 

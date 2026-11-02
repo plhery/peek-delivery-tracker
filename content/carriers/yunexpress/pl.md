@@ -77,7 +77,7 @@ Pole „Feedback” na yuntrack dotyczy strony, a nie Twojej paczki. Zacznij wi�
 
 ## Śledzenie paczki YunExpress w Peek
 
-[Peek](/) rozpoznaje YT i 16 cyfr jako YunExpress i przyjmuje też linki z yuntrack.com. Sprawdza śledzenie co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu, pokazuje każdy skan na mapie i może Cię powiadomić, gdy zmieni się status. Widzisz status, historię, miejsce każdego skanu i godzinę doręczenia.
+[Peek](/) rozpoznaje YT i 16 cyfr jako YunExpress i przyjmuje też linki z yuntrack.com. Sprawdza śledzenie co 10 minut, a co 5 minut, gdy paczka jest w doręczeniu, pokazuje każdy skan na mapie i może Cię powiadomić, gdy zmieni się status. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Widzisz status, historię, miejsce każdego skanu i godzinę doręczenia.
 
 Gdy YunExpress podaje lokalnego przewoźnika i jego numer, Peek może śledzić paczkę dalej u tego przewoźnika, choć nie przy każdej paczce. Przy paczkach YunExpress nie pokazuje przewidywanej daty doręczenia ani punktu odbioru, pomija numery zamówienia i nie skontaktuje się za Ciebie z YunExpressem ani nie złoży reklamacji.
 

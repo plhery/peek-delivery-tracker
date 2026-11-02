@@ -15,7 +15,7 @@ InPost Italia lo chiama codice di spedizione: «si trova nelle mail di conferma 
 | Forma (cifre inventate) | Che cos'è |
 | --- | --- |
 | `012345678901234567890123` | 24 cifre: il codice di spedizione InPost in Italia, e anche in Polonia. La stessa forma la usano anche bpost e Ciblex. |
-| `0000000000`, `0000000000000` | 10 o 13 cifre: inpost.it le accetta, ma sono anche forme di DHL, La Poste e altri corrieri. |
+| `0000000000`, `0000000000000` | 10 o 13 cifre: inpost.it le accetta, ma sono anche forme di DHL, DPD France e altri corrieri. |
 | `LM000000000IT` | LM, 9 cifre e IT: inpost.it lo accetta, ma è anche una forma di Chronopost. |
 | `JD0000000000000000`, `JJD0000000000000000`, `8YDR000000000` | JD o JJD con 16 cifre, oppure 8YDR con 9 cifre: numeri di InPost nel Regno Unito. JJD con 16 cifre è anche una forma di DHL. |
 
@@ -88,7 +88,7 @@ Peek legge il servizio di tracking di InPost su inposteasy.com, lo stesso per Po
 
 Gli stati arrivano come li manda quel servizio, non con i titoli di inpost.it. Per i pacchi polacchi sono in polacco, come `Odebrana przez Kuriera` (ritirato dal corriere) o `Wydana do doręczenia` (in consegna); per quelli italiani non si sa in che lingua arrivino, e potrebbero essere in polacco. Un passaggio senza titolo può comparire con il codice interno di InPost, del tipo `LMD.1002`. Alcuni passaggi finiscono in una fase diversa: quello che inpost.it chiama `Arrivato al punto di consegna` può comparire come «In transito» o senza fase, non come «Pronto per il ritiro», `Tempo scaduto per il ritiro` come «Tentativo di consegna», e un pacco consegnato al vicino può non risultare «Consegnato». Il nome e l'indirizzo del punto compaiono solo quando li conferma il tracking polacco di InPost, quindi con ogni probabilità solo per i pacchi polacchi, e mai con il codice di ritiro o gli orari: per un pacco italiano guarda la notifica di InPost.
 
-Peek non segue il pacco se passa a un altro corriere. Lo controlla ogni 10 minuti, ogni 2 quando è in consegna, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna.
+Peek non segue il pacco se passa a un altro corriere. Lo controlla ogni 10 minuti, ogni 2 quando è in consegna, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora.
 
 ## Domande sul tracking InPost
 

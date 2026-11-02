@@ -86,7 +86,7 @@ Ces canaux couvrent les colis du réseau DPD France ; DPD France ne donne pas de
 
 Peek affiche le statut, l'historique avec l'agence de chaque scan, le jour de livraison prévu, le poids et l'heure de livraison, et place l'agence qui livre sur la carte. Les statuts restent en français, tels que DPD les écrit, et les heures sont lues à l'heure de Paris. Peek ne garde ni ton nom ni ton adresse, ni la signature ni la référence client, et n'affiche pas le relais : seulement « Prêt à être retiré ». Si DPD montre un aller et un retour, Peek garde le trajet de ton numéro. Il ne suit pas le colis chez un autre transporteur.
 
-Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications quand le statut change : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications quand le statut change : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi DPD
 

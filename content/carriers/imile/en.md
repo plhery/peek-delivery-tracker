@@ -17,7 +17,7 @@ iMile publishes no example number. The shapes iMile's parcels carry, with invent
 | `IM06010000000000` | IM, 0601 and ten digits: iMile. |
 | `IM00000000000000` | IM and 14 digits: iMile too. |
 | `6010125000000` | 13 digits starting with 6, the next six shaped like a date (month, day, year): iMile's own waybill number. |
-| `3000000000000` | Other 13-digit numbers: not one of iMile's shapes. La Poste, Delhivery, Yunda and Korea Post use 13 digits. |
+| `3000000000000` | Other 13-digit numbers: not one of iMile's shapes. Delhivery, Yunda and Korea Post use 13 digits. |
 | `LP00000000000000` | Not iMile but [Cainiao](carrier:cainiao), AliExpress's logistics reference. |
 
 On iMile's tracking page, type it under "TYPE YOUR ORDER NUMBER"; the history shows under "ORDER STATUS". A number iMile doesn't know leaves that box empty, with no error. If you can't find any number, see [where to find a tracking number](guide:find-tracking-number), then ask the shop.
@@ -98,7 +98,7 @@ For the order itself, the shop is quicker. It booked iMile and can open a case w
 
 Peek reads iMile's tracker in English. It shows the status, the history with the centre or town of each scan on a map, and the destination country, with scan times read on that country's clock and shown in your device's time zone. For a parcel Cainiao carries out of China for iMile, Peek adds Cainiao's earlier scans (pickup, sorting, export, flight, import) in front of iMile's history.
 
-Peek leaves out iMile's expected delivery date, scheduled flight, proof of delivery, who signed, contacts and payment details, and drops the driver's phone from scans. Labels such as "Out for delivery" and "Delivery attempted" are Peek's own; the scan lines appear as iMile wrote them. Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact iMile or the shop for you.
+Peek leaves out iMile's expected delivery date, scheduled flight, proof of delivery, who signed, contacts and payment details, and drops the driver's phone from scans. Labels such as "Out for delivery" and "Delivery attempted" are Peek's own; the scan lines appear as iMile wrote them. Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact iMile or the shop for you.
 
 ## Questions about iMile tracking
 

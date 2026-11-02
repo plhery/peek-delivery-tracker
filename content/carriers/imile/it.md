@@ -17,7 +17,7 @@ iMile non pubblica esempi di codice. Queste sono le forme che hanno i suoi pacch
 | `IM06010000000000` | IM, 0601 e dieci cifre: iMile. |
 | `IM00000000000000` | IM e 14 cifre: anche questo è iMile. |
 | `6010125000000` | 13 cifre che iniziano con 6, e le sei successive hanno la forma di una data (mese, giorno, anno): il numero di spedizione di iMile. |
-| `3000000000000` | Altri codici di 13 cifre: non corrispondono a nessuna forma di iMile. Li usano La Poste, Delhivery, Yunda e Korea Post. |
+| `3000000000000` | Altri codici di 13 cifre: non corrispondono a nessuna forma di iMile. Li usano Delhivery, Yunda e Korea Post. |
 | `LP00000000000000` | Non è iMile ma [Cainiao](carrier:cainiao), il riferimento logistico di AliExpress. |
 
 Sulla pagina di tracciamento di iMile scrivi il codice sotto «TYPE YOUR ORDER NUMBER»; la cronologia compare sotto «ORDER STATUS». Se iMile non conosce il codice, il riquadro resta vuoto, senza messaggi di errore. Se il codice non lo trovi, leggi [dove trovare il codice di tracking](guide:find-tracking-number) e poi chiedilo al negozio.
@@ -100,7 +100,7 @@ La Carta dice che iMile aiuta gli utenti fragili ad accedere alle informazioni e
 
 Peek legge il tracking di iMile in inglese. Mostra lo stato, la cronologia con il centro o la città di ogni scansione su una mappa e il paese di destinazione, con gli orari letti sull'ora di quel paese e mostrati nel fuso orario del tuo dispositivo. Se il pacco lascia la Cina con Cainiao per conto di iMile, Peek aggiunge in testa le scansioni precedenti di Cainiao: ritiro, smistamento, esportazione, volo e importazione.
 
-Peek non mostra la data prevista di iMile, il volo programmato, la prova di consegna, chi ha firmato, i contatti né i dati di pagamento, e toglie dalle scansioni il telefono del corriere. Stati come «In consegna» o «Tentativo di consegna» sono di Peek; le righe della cronologia restano come le scrive iMile. Peek controlla ogni 10 minuti, ogni 2 quando il pacco è in consegna, e ti avvisa con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare iMile o il negozio al posto tuo.
+Peek non mostra la data prevista di iMile, il volo programmato, la prova di consegna, chi ha firmato, i contatti né i dati di pagamento, e toglie dalle scansioni il telefono del corriere. Stati come «In consegna» o «Tentativo di consegna» sono di Peek; le righe della cronologia restano come le scrive iMile. Peek controlla ogni 10 minuti, ogni 2 quando il pacco è in consegna, e ti avvisa con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Non può contattare iMile o il negozio al posto tuo.
 
 ## Domande sul tracking iMile
 

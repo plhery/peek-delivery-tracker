@@ -119,7 +119,7 @@ Schickt eine Post im Ausland das Paket mit ihrer eigenen Nummer (zwei Buchstaben
 
 Peek fragt bpost direkt, ohne Postleitzahl, und zeigt die Scans auf Englisch, mit Ort, Gewicht und Maßen. Scans in Belgien liest Peek in belgischer Zeit und zeigt sie in der Zeitzone deines Geräts. Wartet das Paket an einer Abholstelle oder in einem bbox-Automaten, siehst du deren Namen und Adresse, auch nach dem Abholen. `The postman's delivery round for your item has started` setzt das Paket auf „In Zustellung“, `Item available at …` auf „Abholbereit“, `Item delivered` auf „Zugestellt“, ein Paket, das wieder beim Absender ist, auf „Zurück an Absender“.
 
-Peek prüft alle 10 Minuten, in Zustellung alle 2 Minuten. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Ein voraussichtliches Lieferdatum, Absender, Empfänger, Lieferadresse, Zustelloptionen und Zustellnachweis zeigt Peek nicht. Zoll zahlen und Optionen ändern kannst du nur bei bpost, und kontaktieren musst du bpost selbst.
+Peek prüft alle 10 Minuten, in Zustellung alle 2 Minuten. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Ein voraussichtliches Lieferdatum, Absender, Empfänger, Lieferadresse, Zustelloptionen und Zustellnachweis zeigt Peek nicht. Zoll zahlen und Optionen ändern kannst du nur bei bpost, und kontaktieren musst du bpost selbst.
 
 ## Fragen zur Sendungsverfolgung von bpost
 

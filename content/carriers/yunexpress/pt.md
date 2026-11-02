@@ -79,7 +79,7 @@ A caixa «Feedback» do yuntrack serve para comentar o site, não a tua encomend
 
 ## Seguir encomenda YunExpress com o Peek
 
-O [Peek](/) reconhece YT e 16 algarismos como YunExpress e aceita ligações do yuntrack.com. Verifica o seguimento de 10 em 10 minutos (de 5 em 5 minutos quando a encomenda sai para entrega), põe cada leitura num mapa e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Mostra o estado, o histórico, o local de cada leitura e, depois da entrega, a hora a que foi entregue.
+O [Peek](/) reconhece YT e 16 algarismos como YunExpress e aceita ligações do yuntrack.com. Verifica o seguimento de 10 em 10 minutos (de 5 em 5 minutos quando a encomenda sai para entrega), põe cada leitura num mapa e pode enviar-te notificações de cada leitura, só dos passos importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Mostra o estado, o histórico, o local de cada leitura e, depois da entrega, a hora a que foi entregue.
 
 Quando a YunExpress indica a transportadora local e o número dela, pode seguir a encomenda nessa transportadora, mas não acontece com todas. Não mostra data prevista de entrega nem ponto de levantamento para as encomendas YunExpress, deixa de fora as referências de encomenda da loja e não pode contactar a YunExpress nem reclamar por ti.
 

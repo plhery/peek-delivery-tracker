@@ -97,7 +97,7 @@ Peek shows the status, each step with its place, and the destination country whe
 
 When HYWL's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words. Peek doesn't hold back steps dated ahead in their copies, so check each step's time.
 
-Peek stays with HYWL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers `Dispatching` and `Delivered`, not HYWL's export customs or sorting. Peek can't contact HYWL or the seller for you.
+Peek stays with HYWL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers `Dispatching` and `Delivered`, not HYWL's export customs or sorting. Peek can't contact HYWL or the seller for you.
 
 ## Questions about HYWL tracking
 

@@ -99,7 +99,7 @@ Peek shows the order's current step in its own words: Order registered, Scheduli
 
 Some limits. Peek shows `En livraison` as Out for delivery, though C Chez Vous's own text says the order is still heading to the regional depot. And for a pickup-point order, Peek may show Delivered when the parcel is only waiting at the point; trust the SMS and the 15-day deadline. Peek doesn't read `Annulée`: a cancelled order simply stops moving.
 
-It leaves out the time slot, the shop, your name, address and contacts, and the items ordered. Peek checks every 10 minutes, or every 2 minutes once the order is out for delivery, and can notify you of every scan, important steps only or delivery day only. It can't move your appointment.
+It leaves out the time slot, the shop, your name, address and contacts, and the items ordered. Peek checks every 10 minutes, or every 2 minutes once the order is out for delivery, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't move your appointment.
 
 ## Questions about C Chez Vous tracking
 

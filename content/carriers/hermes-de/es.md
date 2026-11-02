@@ -91,13 +91,13 @@ Según myhermes.de, consultado en octubre de 2026:
 
 ## Seguir un paquete Hermes con Peek
 
-[Peek](/) reconoce al momento un número `H` con 16 a 19 cifras. Con `H` y 15 cifras pregunta a Hermes Germany y, si el número cuadra también con el dígito de control de Evri, a Evri. Si tu número tiene 14 cifras, pégalo igualmente: Peek sigue a más de 3.500 transportistas. Con esa forma pregunta a varios, entre ellos SEUR, y a Hermes solo si la última cifra cuadra con su dígito de control; si no sale Hermes, pulsa «Cambiar» y elige Hermes Germany. Si tu número de 14 cifras lleva un cero de más delante, quítalo: con 15 cifras Peek no lo reconoce como de Hermes. También puedes pegar un enlace de myhermes.de. No hace falta código postal.
+[Peek](/) reconoce al momento un número `H` con 16 a 19 cifras. Con `H` y 15 cifras pregunta a Hermes Germany y, si el número cuadra también con el dígito de control de Evri, a Evri. Si tu número tiene 14 cifras, pégalo igualmente: Peek sigue a más de 3500 transportistas. Con esa forma pregunta a varios, entre ellos SEUR, y a Hermes solo si la última cifra cuadra con su dígito de control; si no sale Hermes, pulsa «Cambiar» y elige Hermes Germany. Si tu número de 14 cifras lleva un cero de más delante, quítalo: con 15 cifras Peek no lo reconoce como de Hermes. También puedes pegar un enlace de myhermes.de. No hace falta código postal.
 
 Peek muestra el estado, el historial, el día previsto de entrega, el remitente (la tienda) y la hora de entrega. Hermes no da el lugar de los escaneos, así que el mapa queda vacío. Peek no guarda tu nombre ni tu dirección.
 
 Los pasos en España aparecen como los demás: «En reparto», «Listo para recoger» o «Entregado». Si el paquete no se recogió y después aparece `Die Sendung wurde erfolgreich zugestellt.`, Peek lo marca como «Devuelto al remitente», no como entregado.
 
-Peek no sigue el paquete en la web de la empresa que reparte en España. Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y te avisa según elijas: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
+Peek no sigue el paquete en la web de la empresa que reparte en España. Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y te avisa según elijas: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
 
 ## Preguntas sobre el seguimiento de Hermes
 

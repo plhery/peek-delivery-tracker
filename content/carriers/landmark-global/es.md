@@ -46,7 +46,7 @@ Peek consulta la versión inglesa de la web de Landmark, así que en Peek verás
 
 ## Entrega de Landmark Global en España: quién lo trae
 
-Landmark no suele repartir por su cuenta: trabaja con socios locales para la última milla en cada país. Sus páginas en español no dicen quién reparte en España, y su página en inglés para tiendas que envían a España habla de varios transportistas locales, sin nombrarlos, y de más de 7.000 puntos de recogida. La que cuenta es la empresa que nombra el seguimiento de tu paquete: los avisos, los puntos de recogida, los días que te guardan el paquete y los nuevos intentos siguen sus normas, no las de Landmark.
+Landmark no suele repartir por su cuenta: trabaja con socios locales para la última milla en cada país. Sus páginas en español no dicen quién reparte en España, y su página en inglés para tiendas que envían a España habla de varios transportistas locales, sin nombrarlos, y de más de 7000 puntos de recogida. La que cuenta es la empresa que nombra el seguimiento de tu paquete: los avisos, los puntos de recogida, los días que te guardan el paquete y los nuevos intentos siguen sus normas, no las de Landmark.
 
 **Si no estabas en casa.** Landmark te pide que sigas las instrucciones que te haya dejado el repartidor o que escribas a su atención al cliente para reprogramar la entrega o acordar la recogida. Advierte de que no todos los servicios permiten una nueva entrega ni la recogida.
 
@@ -90,13 +90,13 @@ La página de [contacto](https://landmarkglobal.com/eu/es/contact/) es para cons
 
 ## Seguir un paquete de Landmark Global con Peek
 
-[Peek](/) reconoce al momento un LTN como de Landmark Global. También sirve un enlace de track.landmarkglobal.com o de landmarkglobal.com con `search=` o `trck=`, aunque lleve dentro una referencia de la tienda. Una referencia de pedido o de paquete escrita sola no basta para que Peek sepa que es de Landmark: pégala igualmente, porque Peek sigue más de 3.500 transportistas, y elige Landmark Global con «Cambiar».
+[Peek](/) reconoce al momento un LTN como de Landmark Global. También sirve un enlace de track.landmarkglobal.com o de landmarkglobal.com con `search=` o `trck=`, aunque lleve dentro una referencia de la tienda. Una referencia de pedido o de paquete escrita sola no basta para que Peek sepa que es de Landmark: pégala igualmente, porque Peek sigue más de 3500 transportistas, y elige Landmark Global con «Cambiar».
 
 Peek muestra el estado, el lugar de cada paso en un mapa, el país de destino y la empresa que reparte con su número. No da fecha de entrega prevista y deja fuera las referencias de pedido y de paquete y los avisos de pago. Landmark da la hora de cada escaneo en la hora central de Estados Unidos; Peek te la muestra en tu zona horaria. Si el paquete vuelve a la tienda, lo verás como «Devuelto al remitente».
 
 Cuando Landmark nombra una empresa de reparto que Peek conoce, la ficha del paquete dice «Entrega con» esa empresa y muestra su número. Si es una que Peek sigue directamente, como [Correos](carrier:correos-spain) o [SEUR](carrier:seur), pasa a seguir el paquete con ella en cuanto esa empresa tenga escaneos recientes, sin perder el historial de Landmark. No ocurre con todos los paquetes.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede hablar con Landmark ni con la tienda por ti.
+Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Landmark ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Landmark Global
 
@@ -127,7 +127,7 @@ No publica ninguno. Puedes escribir a ClientservicesEU@landmarkglobal-group.com,
 - [Landmark Global: Inicio](https://landmarkglobal.com/eu/es/) – Bnode, socios postales y de reparto, más de 220 destinos
 - [Landmark Global: Nuestra empresa](https://landmarkglobal.com/eu/es/about-us/) – California en 2004, Bnode y bpost desde 2016, DDP y DDU/DAP
 - [Landmark Global: Principales destinos de envío](https://landmarkglobal.com/eu/es/destinations/) – socios locales para la última milla
-- [Landmark Global: Parcel delivery to Spain, en inglés](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-spain/) – transportistas locales sin nombre, 4-5 días, más de 7.000 puntos, prueba de entrega
+- [Landmark Global: Parcel delivery to Spain, en inglés](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-spain/) – transportistas locales sin nombre, 4-5 días, más de 7000 puntos, prueba de entrega
 - [Agencia Tributaria Canaria: Formulario simplificado de importación para personas físicas](https://www3.gobiernodecanarias.org/tributos/atc/w/formulario-simplificado-de-importacion-para-personas-fisicas) – IGIC solo por encima de 150 €; AIEM a partir de cualquier importe
 - [BOE: Ley 20/1991, del Régimen Económico Fiscal de Canarias](https://www.boe.es/buscar/act.php?id=BOE-A-1991-14463) – artículo 14.11: sin IGIC hasta 150 €, salvo alcohol, perfumes y tabaco; artículos 67 y 73: AIEM solo para su anexo
 - [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – arancel y tasa también en Canarias

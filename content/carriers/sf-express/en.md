@@ -60,7 +60,7 @@ SF's terms for shipments from mainland China abroad say:
 
 ## SF Express customs: duties on parcels from China
 
-Duties and taxes depend on the country you live in: see [the customs guide](guide:customs). In Ireland, as everywhere in the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to parcels worth up to €150 bought from outside the EU. From 1 November 2026, a €2 EU handling fee will apply too.
+Duties and taxes depend on the country you live in: see [the customs guide](guide:customs). In Ireland, as everywhere in the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to parcels worth up to €150 bought from outside the EU. Since 1 November 2026, a €2 EU handling fee per item applies too.
 
 If you refuse the parcel or won't pay the duties, SF's terms let it send the parcel back to the sender, at the sender's cost. If customs holds the parcel and the sender doesn't sort it out within 30 calendar days of SF's written notice, the parcel counts as abandoned and SF may destroy or sell it.
 
@@ -96,7 +96,7 @@ Have the waybill number ready. For the order itself, ask the seller.
 
 Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
 
-It checks every 10 minutes, or every 5 once the parcel is out for delivery, and can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact SF or the seller for you.
+It checks every 10 minutes, or every 5 once the parcel is out for delivery, and can notify you with "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SF or the seller for you.
 
 ## Questions about SF Express tracking
 

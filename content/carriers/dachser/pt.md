@@ -25,7 +25,7 @@ Escrito sozinho, um número Dachser parece-se com os de muitas outras transporta
 | `1234567890` | 10 algarismos: [DHL](carrier:dhl-express), Mondial Relay, TIPSA e outras. |
 | `12345678901` | 11 algarismos: GLS e outras. |
 | `123456789012` | 12 algarismos: [FedEx](carrier:fedex), MRW, BRT e outras. |
-| `1234567890123` | 13 algarismos: La Poste, DPD France e outras. |
+| `1234567890123` | 13 algarismos: DPD France, Delhivery e outras. |
 | `19999999999980` | 14 algarismos: SEUR, DPD e outras. |
 
 Se a mensagem fala da Dachser, confia nela e não no comprimento do número.
@@ -96,7 +96,7 @@ O [Peek](/) não reconhece um número Dachser pelos algarismos nem o consegue pr
 
 O Peek só lê a página Customer Iberia, por isso cobre as entregas da Dachser em Portugal e Espanha. Mostra o estado, o histórico e o dia de entrega previsto até à entrega. Cada passo aparece com as palavras do próprio Peek, como «Dados da encomenda recebidos», «Encomenda recolhida», «Encomenda chegou a um centro Dachser», «Em distribuição», «Agendamento de entrega atualizado» ou «Entregue»; o texto da Dachser não é guardado. As horas são lidas no fuso horário que trazem ou, quando não o têm, como hora de Madrid, e mostradas no fuso horário do teu dispositivo. A Dachser não indica locais, por isso os passos não aparecem no mapa. O remetente, o teu nome, a morada, os contactos e a assinatura ficam de fora.
 
-O Peek verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda sai para entrega, e pode enviar-te notificações em «Todas as leituras», «Passos importantes» ou «Só a entrega». Uma remessa desconhecida ou uma ligação estragada pode aparecer como não encontrada ou como uma verificação falhada.
+O Peek verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda sai para entrega, e pode enviar-te notificações em «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Uma remessa desconhecida ou uma ligação estragada pode aparecer como não encontrada ou como uma verificação falhada.
 
 ## Perguntas sobre o Dachser tracking
 

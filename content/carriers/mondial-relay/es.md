@@ -45,7 +45,7 @@ En una entrega en punto, espera a `Disponible dans votre Point Relais` antes de 
 
 ## Mondial Relay en España: Punto Pack, Locker y recoger el paquete
 
-En España, los puntos de Mondial Relay son ahora de InPost: Punto Pack y taquillas InPost Lockers, más de 13.000 entre España y Portugal, según InPost. Cuando llega tu paquete, InPost te manda por correo o SMS un PIN de 6 cifras y la dirección del punto, que también ves en su app.
+En España, los puntos de Mondial Relay son ahora de InPost: Punto Pack y taquillas InPost Lockers, más de 13 000 entre España y Portugal, según InPost. Cuando llega tu paquete, InPost te manda por correo o SMS un PIN de 6 cifras y la dirección del punto, que también ves en su app.
 
 **Recogerlo.** En un Locker basta con el PIN o el código QR, sin DNI. En un Punto Pack das el PIN, enseñas tu DNI o NIE y firmas electrónicamente; si el embalaje está dañado, recházalo antes de dar el PIN.
 
@@ -82,7 +82,7 @@ Datos consultados el 10 de octubre de 2026:
 
 Un número de 8 cifras pide además el «Código postal de entrega»: escribe el número solo y luego el código postal en su campo (el de un enlace no se usa). Admite códigos de cualquier país, pero solo se han probado los franceses y los portugueses, y uno portugués necesita sus siete cifras (1234-567, con o sin guion). Uno equivocado hace que el paquete no aparezca. Se envía a Mondial Relay y, si hace falta, a servicios de seguimiento. Con un número de 8 cifras de InPost España, Peek propone Mondial Relay, no InPost, y lo busca en Mondial Relay, no en inpost.es: no se ha comprobado que así encuentre esos envíos, así que síguelos también en inpost.es. Los números FV (FV y 8 cifras) sí los lee en inpost.es, con sus textos en español: pégalo tal cual y verás «Mondial Relay tiene este paquete.»; si inpost.es pide el código postal, Peek no puede leerlo.
 
-Muestra los textos franceses de Mondial Relay tal cual, el centro logístico de cada escaneo en un mapa y, cuando la web de Mondial Relay los da, el día de entrega previsto, la hora de entrega y el país de destino. Mientras el paquete espera, enseña el nombre y la dirección del punto o la taquilla, nunca su horario ni tu código. Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Mondial Relay reutiliza números, así que uno antiguo puede mostrar un paquete posterior. No sigue el paquete si pasa a otra empresa, y no puede reclamar ni hablar con Mondial Relay por ti.
+Muestra los textos franceses de Mondial Relay tal cual, el centro logístico de cada escaneo en un mapa y, cuando la web de Mondial Relay los da, el día de entrega previsto, la hora de entrega y el país de destino. Mientras el paquete espera, enseña el nombre y la dirección del punto o la taquilla, nunca su horario ni tu código. Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Mondial Relay reutiliza números, así que uno antiguo puede mostrar un paquete posterior. No sigue el paquete si pasa a otra empresa, y no puede reclamar ni hablar con Mondial Relay por ti.
 
 ## Preguntas sobre el seguimiento de Mondial Relay
 

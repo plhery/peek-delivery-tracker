@@ -84,7 +84,7 @@ Nenhuma forma de número é da CACESA, por isso o [Peek](/) nunca a reconhece pe
 
 O Peek mostra os estados da CACESA em inglês, tal como ela os escreve, e lê as horas como hora de Madrid. Uma linha de entrega aparece como «Entregue». `Start Custom clearance Process` aparece como «Na alfândega» e a libertação pelo canal verde como «Em trânsito», mas o Peek não mostra o valor a pagar nem o pode pagar. A CACESA não dá locais, por isso não há nada para pôr no mapa, nem entrega prevista, peso, remetente ou destinatário.
 
-A CACESA não nomeia a empresa que entrega, e a encomenda segue com o mesmo número. O Peek só a acompanha quando esse número é claramente de outra transportadora: a Ecoscooting com CNPRT e CNESP, os CTT com um número postal terminado em PT, os Correos com um terminado em ES ou a [CTT Express](carrier:ctt-express) com os números dela. Os números CNES e LP não são acompanhados. O Peek verifica de 10 em 10 minutos e pode enviar-te notificações quando o estado muda.
+A CACESA não nomeia a empresa que entrega, e a encomenda segue com o mesmo número. O Peek só a acompanha quando esse número é claramente de outra transportadora: a Ecoscooting com CNPRT e CNESP, os CTT com um número postal terminado em PT, os Correos com um terminado em ES ou a [CTT Express](carrier:ctt-express) com os números dela. Os números CNES e LP não são acompanhados. O Peek verifica de 10 em 10 minutos e pode enviar-te notificações quando o estado muda. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora.
 
 ## Perguntas sobre o rastreio CACESA
 

@@ -56,7 +56,7 @@ Bajo una incidencia, el motivo te dice qué pasó: `No pudimos contactar contigo
 
 **Cambiar la entrega.** También puedes cambiarla tú en el localizador, con el número de envío completo, el código postal de destino y el teléfono o el correo que dio el remitente. Puedes elegir otra dirección, otra fecha, un punto Collectt, mañana o tarde, o un vecino. Solo se puede mientras el envío no esté `En reparto`, y el cambio puede retrasar la entrega 24 horas. Cambiar a otra dirección de la misma zona de reparto no cuesta nada, y pasarlo a un punto Collectt es gratis. Si la incidencia no es una ausencia ni una dirección incompleta, contacta con CTT Express.
 
-**Puntos Collectt Express.** CTT Express tiene más de 20.000 puntos y taquillas Locky en España y Portugal. Un punto guarda el paquete 10 días y una taquilla, 5. Recogerlo es gratis con el PIN que te llega por correo o SMS, y CTT Express te manda recordatorios. Si nadie lo recoge a tiempo, se gestiona según las condiciones del envío. Si una taquilla no se abre, llama al número que aparece en ella o en el correo de seguimiento.
+**Puntos Collectt Express.** CTT Express tiene más de 20 000 puntos y taquillas Locky en España y Portugal. Un punto guarda el paquete 10 días y una taquilla, 5. Recogerlo es gratis con el PIN que te llega por correo o SMS, y CTT Express te manda recordatorios. Si nadie lo recoge a tiempo, se gestiona según las condiciones del envío. Si una taquilla no se abre, llama al número que aparece en ella o en el correo de seguimiento.
 
 ## Paquete CTT Express retrasado, perdido o dañado: reclamación
 
@@ -67,7 +67,7 @@ Si quieres el reembolso o un nuevo envío, habla con la tienda que te lo vendió
 - **Dañado:** haz fotos antes de desembalarlo, guarda la caja y las etiquetas, y avisa por el formulario en un plazo de 7 días naturales desde que lo recibes, diciendo si está dañada la caja, el contenido o ambos. CTT Express abre un expediente y te dice quién lo lleva.
 - **Anulado:** si el seguimiento dice que el envío se ha anulado, CTT Express te pide que contactes con la tienda para reactivarlo.
 
-Las páginas de CTT Express no dan un plazo para reclamar una pérdida o un retraso, ni dicen si reclama el destinatario o el remitente. Para la pérdida o el robo, el remitente puede contratar una cobertura adicional de hasta 2.000 €.
+Las páginas de CTT Express no dan un plazo para reclamar una pérdida o un retraso, ni dicen si reclama el destinatario o el remitente. Para la pérdida o el robo, el remitente puede contratar una cobertura adicional de hasta 2000 €.
 
 ## CTT Express teléfono, correo electrónico y atención al cliente
 
@@ -86,7 +86,7 @@ La atención al cliente está centralizada en Madrid, solo por teléfono o corre
 
 Pega un número de 22 o 25 cifras de las dos primeras formas de arriba y [Peek](/) lo asigna a CTT Express al momento, incluida la forma de 25 cifras de un número que empieza por `00001000`. Con 22 cifras que empiezan por `00001000`, verás «preguntando a» TIPSA, Austrian Post y CTT Express; si no queda claro cuál lo tiene, elige con «Cambiar». También sirve un enlace de la página de seguimiento de CTT Express.
 
-Peek consulta el seguimiento de CTT Express cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. Verás el estado, el historial (sin lugares), el día de entrega previsto mientras el paquete avanza, el peso, la hora de entrega y, si otro operador postal le pasó el paquete, su número internacional. Los textos de los escaneos salen tal como los escribe CTT Express, como `Entregado`. En un punto Collectt, Peek muestra `Disponible en Punto Collectt Express`, pero no el nombre ni la dirección del punto. A partir de `En devolución`, Peek marca el paquete como un problema. Los envíos de varios bultos se siguen a través de servicios universales de seguimiento.
+Peek consulta el seguimiento de CTT Express cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Verás el estado, el historial (sin lugares), el día de entrega previsto mientras el paquete avanza, el peso, la hora de entrega y, si otro operador postal le pasó el paquete, su número internacional. Los textos de los escaneos salen tal como los escribe CTT Express, como `Entregado`. En un punto Collectt, Peek muestra `Disponible en Punto Collectt Express`, pero no el nombre ni la dirección del punto. A partir de `En devolución`, Peek marca el paquete como un problema. Los envíos de varios bultos se siguen a través de servicios universales de seguimiento.
 
 ## Preguntas sobre el seguimiento de CTT Express
 
@@ -126,7 +126,7 @@ Así llaman las preguntas frecuentes de CTT Express a un envío que sigue en `Pe
 - [CTT Express: Preguntas frecuentes de incidencias](https://www.cttexpress.com/preguntas-frecuentes/incidencias) – dos intentos, retrasos, expedientes
 - [CTT Express: Horarios de reparto](https://www.cttexpress.com/preguntas-frecuentes/horarios) – horario, sábados en Navidad, llamadas del repartidor
 - [CTT Express: Cambiar dirección de entrega](https://www.cttexpress.com/cambiar-direccion-entrega/) – dónde está el número, condiciones del cambio
-- [CTT Express: Servicios incluidos y adicionales](https://www.cttexpress.com/servicios/incluidos-y-adicionales) – opciones del destinatario, cobertura de hasta 2.000 €
+- [CTT Express: Servicios incluidos y adicionales](https://www.cttexpress.com/servicios/incluidos-y-adicionales) – opciones del destinatario, cobertura de hasta 2000 €
 - [CTT Express: Recoge y devuelve tus paquetes en nuestros puntos](https://www.cttexpress.com/red-collectt-express/envio-y-recogida) – puntos Collectt, 10 y 5 días, PIN
 - [CTT Express: Preguntas frecuentes Puntos Collectt Express](https://www.cttexpress.com/preguntas-frecuentes/puntos-collectt-express) – PIN, cambio gratuito a un punto
 - [CTT Express: Qué significa «aceptado por la última milla»](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – significado de los estados

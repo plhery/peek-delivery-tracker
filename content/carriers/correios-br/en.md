@@ -104,7 +104,7 @@ Peek fetches Correios' history and shows the status, each scan with its town and
 
 Correios doesn't tell Peek where a parcel is going, so outside Brazil Peek also asks your national post (USPS, Royal Mail, Canada Post, An Post or Australia Post, for example) with the same code and switches once it shows newer scans, keeping Correios' history. A parcel coming into Brazil under another post's code is followed on that post; Peek also asks Correios once that post names Brazil as the destination (or, if it names none, when you're in Brazil).
 
-Peek checks every 10 minutes, or every 2 once the parcel is out for delivery. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Correios, pay taxes or file a claim for you.
+Peek checks every 10 minutes, or every 2 once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Correios, pay taxes or file a claim for you.
 
 ## Questions about Correios Brazil tracking
 

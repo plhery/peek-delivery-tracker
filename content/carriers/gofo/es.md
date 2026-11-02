@@ -77,7 +77,7 @@ Mientras GOFO no conozca el número, Peek sigue comprobando. Con un número `GF`
 
 Peek muestra el estado, cada escaneo con la ciudad y el estado que indica GOFO, esos lugares en un mapa, la hora de entrega y el país de destino. Los escaneos salen en inglés, como los escribe GOFO, salvo la entrega, que aparece como «Entregado», sin el detalle que GOFO añade a veces tras la coma. GOFO calcula una fecha estimada de entrega, pero Peek no la muestra, y deja fuera las fotos de entrega, las coordenadas y el peso.
 
-Peek consulta a GOFO cada 10 minutos y cada 2 minutos cuando el paquete va en reparto ese día. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede comunicarse con GOFO ni con la tienda por ti.
+Peek consulta a GOFO cada 10 minutos y cada 2 minutos cuando el paquete va en reparto ese día. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede comunicarse con GOFO ni con la tienda por ti.
 
 ## Preguntas sobre el rastreo de GOFO Express
 

@@ -99,7 +99,7 @@ Peek tire l'étape du colis du statut de Shouwu, comme dans les tableaux ci-dess
 
 Shouwu ne nomme pas à part le transporteur qui livre : Peek n'affiche donc pas de ligne « Livraison par » et ne suit pas le colis chez ce transporteur, même quand un scan nomme Colis Privé. Si tu as le numéro du transporteur, ajoute-le dans Peek comme un colis à part.
 
-Peek vérifie toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison. Pour les notifications, tu choisis entre « Chaque scan », « Étapes importantes » (livraison, retrait, douane, tentatives de livraison échouées et retours) et « Livraison seulement ». Peek ne peut contacter ni Shouwu ni le vendeur à ta place.
+Peek vérifie toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Pour les notifications, tu choisis entre « Chaque scan », « Étapes importantes » (livraison, retrait, douane, tentatives de livraison échouées et retours) et « Livraison seulement ». Peek ne peut contacter ni Shouwu ni le vendeur à ta place.
 
 ## Questions sur le suivi Shouwu
 

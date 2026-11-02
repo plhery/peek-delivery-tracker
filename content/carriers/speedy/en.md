@@ -92,7 +92,7 @@ Speedy publishes no opening hours and no chat. These are Bulgarian numbers; Spee
 
 Peek then shows the status, the history with the town (and country) of each scan on a map, the expected delivery day while the parcel is on its way, and the delivery time. When the parcel waits at an office or locker, you see its name, not its address. When [ACS Courier](carrier:acs-courier) delivers the leg in Greece or Cyprus, Speedy names ACS and its number, and Peek can follow the parcel there. It leaves out the recipient, proof of delivery and return number.
 
-Speedy's wordings appear in English as Speedy writes them; `Delivered` shows in Peek's own words. It checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and its notifications cover every scan, important steps only or delivery day only. It can't extend a pickup period or resend your PIN.
+Speedy's wordings appear in English as Speedy writes them; `Delivered` shows in Peek's own words. It checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and its notifications cover every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't extend a pickup period or resend your PIN.
 
 ## Questions about Speedy tracking
 

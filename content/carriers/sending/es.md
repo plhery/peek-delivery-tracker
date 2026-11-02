@@ -67,13 +67,13 @@ Así lo indicaba la web de Sending el 30 de octubre de 2026:
 
 ## Seguir un envío de Sending con Peek
 
-[Peek](/) no puede saber por la forma del número que es de Sending: 12 cifras encajan con muchos transportistas. Pégalo igualmente: Peek sigue más de 3.500 transportistas. Si lo añades desde España, Peek pregunta por él a varios transportistas que usan 12 cifras, con Sending en primer lugar: verás «Comprobando servicios de seguimiento…» y, si solo Sending lo conoce, «Sending tiene este paquete». Desde fuera de España, esa comprobación no incluye a Sending. Si no sale Sending, pulsa «Cambiar» y elígelo: aparece en «Encaja con este número» o escribiendo su nombre en el buscador. En un paquete ya añadido, usa «Cambiar transportista».
+[Peek](/) no puede saber por la forma del número que es de Sending: 12 cifras encajan con muchos transportistas. Pégalo igualmente: Peek sigue más de 3500 transportistas. Si lo añades desde España, Peek pregunta por él a varios transportistas que usan 12 cifras, con Sending en primer lugar: verás «Comprobando servicios de seguimiento…» y, si solo Sending lo conoce, «Sending tiene este paquete». Desde fuera de España, esa comprobación no incluye a Sending. Si no sale Sending, pulsa «Cambiar» y elígelo: aparece en «Encaja con este número» o escribiendo su nombre en el buscador. En un paquete ya añadido, usa «Cambiar transportista».
 
 Peek solo acepta las 12 cifras del número de envío: si eliges Sending con otro número, junto a su nombre verás «no emite números como este». Con una referencia, usa el buscador de sending.es. También puedes pegar un enlace del buscador de Sending en info.sending.es que lleve `localizador=` y el número.
 
 Verás el estado y el historial con las palabras de Sending, cada escaneo con la población de su delegación; si un escaneo solo tiene fecha, aparece solo el día. Cuando la barra termina en `Entregada`, Peek da el paquete por entregado aunque los escaneos se queden antes, y con `FALTA DEFINITIVA` lo marca como «Incidencia». Peek deja fuera la referencia del remitente, la franja de entrega, los códigos postales y poblaciones de remitente y destinatario, la delegación de reparto, las opciones de entrega y el nombre de quien firmó, y no muestra peso ni fecha prevista de entrega: la franja, mírala en sending.es.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede hablar con Sending ni con la tienda por ti, ni cambiar la dirección.
+Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Sending ni con la tienda por ti, ni cambiar la dirección.
 
 ## Preguntas sobre el seguimiento de Sending
 

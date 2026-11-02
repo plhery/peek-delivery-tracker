@@ -53,7 +53,7 @@ Tienes dos intentos de entrega a domicilio. Tras uno fallido, Ecoscooting te esc
 
 ¿No vas a estar? Puedes autorizar a otra persona para que lo firme. El correo «Revisa la información de entrega de tu paquete» trae un enlace para mandarlo a un punto de recogida o a una taquilla (locker) cerca de ti.
 
-Ecoscooting habla de más de 8.000 puntos de recogida, además de taquillas. Cuando el paquete llega al punto, recibes un correo o un SMS con el PIN, la dirección y el horario. Tienes 14 días para recogerlo; si no, vuelve al remitente y puedes pedir el reembolso al vendedor. Según las preguntas frecuentes de Ecoscooting, un paquete que ya está en un punto no se puede cambiar a otro punto ni a domicilio.
+Ecoscooting habla de más de 8000 puntos de recogida, además de taquillas. Cuando el paquete llega al punto, recibes un correo o un SMS con el PIN, la dirección y el horario. Tienes 14 días para recogerlo; si no, vuelve al remitente y puedes pedir el reembolso al vendedor. Según las preguntas frecuentes de Ecoscooting, un paquete que ya está en un punto no se puede cambiar a otro punto ni a domicilio.
 
 ## Paquete de Ecoscooting que no llega, perdido o robado
 
@@ -89,7 +89,7 @@ Cuando Cainiao o CACESA dan un número CNESP o CNPRT, Peek puede seguir el paque
 
 Peek muestra el estado, el historial con las horas exactas de Ecoscooting pero sin lugares, el peso, la hora de entrega y, cuando el paquete llega a un punto de recogida, su nombre y dirección, que se quedan después de recogerlo. No hay fecha de entrega prevista. Deja fuera el PIN, el teléfono y el horario del punto, los códigos postales y las referencias del pedido. Las líneas salen en el inglés de Ecoscooting, porque Peek lo consulta en ese idioma, salvo un `Out for delivery` a secas, que aparece como «En reparto». Ecoscooting responde igual con un número desconocido que con uno que no puede consultar, así que un número equivocado simplemente se queda sin novedades.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega.
+Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
 
 ## Preguntas sobre el seguimiento de Ecoscooting
 
@@ -118,7 +118,7 @@ El +34 800 00 03 69, que Ecoscooting marca como «Línea gratuita». También at
 - [Ecoscooting: Localiza tu envío](https://www.ecoscooting.com/tracking/) – casilla de seguimiento, titulares, mensaje de número no encontrado, idiomas
 - [Ecoscooting: Inicio](https://www.ecoscooting.com/) – España y Portugal, días de reparto, dos intentos, punto de recogida en España, 24/48 horas
 - [Ecoscooting: Entrega a domicilio](https://www.ecoscooting.com/toDoor) – dos intentos, tercero en un punto de recogida en España
-- [Ecoscooting: Red de puntos de recogida y lockers](https://www.ecoscooting.com/pickUpPoint) – más de 8.000 puntos, taquillas
+- [Ecoscooting: Red de puntos de recogida y lockers](https://www.ecoscooting.com/pickUpPoint) – más de 8000 puntos, taquillas
 - [Ecoscooting: Aviso legal](https://www.ecoscooting.com/aviso-legal) – empresa, sede, teléfono de reclamaciones, hojas de reclamaciones
 - [Ecoscooting: textos de la web](https://www.ecoscooting.com/static/js/main.0cb02ae4.js) – textos de las páginas en tres idiomas
 - [Air Cargo Week: Cainiao expands delivery network in Spain](https://aircargoweek.com/cainiao-expands-delivery-network-in-spain) – compra de Ecoscooting por Cainiao

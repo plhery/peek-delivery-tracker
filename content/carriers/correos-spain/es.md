@@ -88,7 +88,7 @@ Canales de Correos según su web, consultada el 13 de octubre de 2026:
 
 Peek lee el seguimiento de Correos en español y muestra los estados tal como los escribe Correos: los 20 últimos escaneos (sin lugar), el peso y las medidas, la hora de entrega y, mientras te espera, el nombre y la dirección de la oficina. No guarda tu nombre, tu dirección ni la firma. No muestra fecha de entrega prevista, y lee todas las horas en hora de Madrid: un escaneo en Canarias puede salir una hora antes.
 
-Un envío postal que viene de otro país hacia España puede pasar a seguirse en Correos («Entrega con Correos») en cuanto Correos muestra avances. Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y te manda notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. No puede pagar la aduana ni cambiar la entrega.
+Un envío postal que viene de otro país hacia España puede pasar a seguirse en Correos («Entrega con Correos») en cuanto Correos muestra avances. Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y te manda notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede pagar la aduana ni cambiar la entrega.
 
 ## Preguntas sobre el seguimiento de Correos
 

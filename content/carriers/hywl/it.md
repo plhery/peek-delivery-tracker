@@ -97,7 +97,7 @@ Peek mostra lo stato, ogni passaggio con il suo luogo e, quando i dati di HYWL l
 
 Quando il tracking di HYWL non risponde, Peek si rivolge ai servizi di tracciamento e mostra la cronologia che hanno, con le loro parole. Nelle loro copie Peek non tiene da parte i passaggi con una data futura, quindi guarda l'ora di ogni passaggio.
 
-Peek resta sul tracking di HYWL: se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco separato. Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: «Passaggi importanti» comprende `Dispatching` e `Delivered`, non la dogana d'esportazione né lo smistamento di HYWL. Peek non può contattare HYWL o il venditore al posto tuo.
+Peek resta sul tracking di HYWL: se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco separato. Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: «Passaggi importanti» comprende `Dispatching` e `Delivered`, non la dogana d'esportazione né lo smistamento di HYWL. Peek non può contattare HYWL o il venditore al posto tuo.
 
 ## Domande sul tracking HYWL
 

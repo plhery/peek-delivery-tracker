@@ -83,7 +83,7 @@ Helthjem's own site, helthjem.no, has a help and contact page. When four days pa
 
 Peek shows the status, each scan's place (including sorter scans Helthjem's page hides), the time it was delivered, the shop that sent it and the pickup point's name while it waits or once collected. When Helthjem relabels a parcel for a pickup point, Peek also shows the new label's number. Statuses stay in Helthjem's Norwegian, and scan times match Helthjem's. When Helthjem books the night round, Peek shows the date in `Planlagt levering natt til …` as the expected day. It leaves out the expected day Helthjem's page shows, the point's address, the photo and postcodes.
 
-When Helthjem marks a parcel as one PostNord delivers, the card says "Delivery with PostNord" and Peek can follow it to PostNord under its shipment number. Peek checks every 10 minutes, or every 2 on the last mile, and can notify you when the status changes. It can't contact Helthjem for you.
+When Helthjem marks a parcel as one PostNord delivers, the card says "Delivery with PostNord" and Peek can follow it to PostNord under its shipment number. Peek checks every 10 minutes, or every 2 on the last mile, and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Helthjem for you.
 
 ## Questions about Helthjem tracking
 

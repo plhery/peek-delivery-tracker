@@ -79,7 +79,7 @@ El cuadro «Feedback» de Yuntrack es para opinar sobre la web, no sobre tu paqu
 
 ## Seguir un paquete de YunExpress con Peek
 
-[Peek](/) reconoce YT y 16 cifras como YunExpress, y también acepta enlaces de yuntrack.com. Consulta el seguimiento cada 10 minutos (cada 5 minutos cuando el paquete está en reparto), pone cada escaneo en un mapa y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Verás el estado, el historial, el lugar de cada escaneo y la hora de entrega.
+[Peek](/) reconoce YT y 16 cifras como YunExpress, y también acepta enlaces de yuntrack.com. Consulta el seguimiento cada 10 minutos (cada 5 minutos cuando el paquete está en reparto), pone cada escaneo en un mapa y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Verás el estado, el historial, el lugar de cada escaneo y la hora de entrega.
 
 Si el registro de YunExpress da el número del transportista local y Peek reconoce su formato, puede seguir el paquete con esa empresa, aunque no pasa con todos. No muestra fecha prevista de entrega ni punto de recogida para los paquetes de YunExpress, deja fuera las referencias de pedido y no puede contactar con YunExpress ni reclamar por ti.
 

@@ -98,7 +98,7 @@ When HuaHan names a local carrier Peek knows, with a number of that carrier's sh
 
 When HuaHan's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the delivery run, a pickup point and the delivery, not HuaHan's export customs or flights. Peek can't contact HuaHan or the seller for you.
+Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the delivery run, a pickup point and the delivery, not HuaHan's export customs or flights. Peek can't contact HuaHan or the seller for you.
 
 ## Questions about HuaHan tracking
 

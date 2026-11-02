@@ -113,7 +113,7 @@ Um albarán de 10 algarismos não dá para seguir na TIPSA, nem com «Alterar» 
 
 O Peek mostra o estado, o histórico com a localidade de cada leitura no mapa, o remetente quando a TIPSA não o esconde com asteriscos e o «Peso». Lê todas as horas como hora de Madrid, também as das agências portuguesas. Não mostra o destinatário, a morada, a referência, o número de volumes, o comprovativo de entrega nem a data prevista de entrega, e não segue a encomenda se ela passar para outra transportadora.
 
-Consulta a TIPSA de 10 em 10 minutos, de 2 em 2 quando a encomenda está em `REPARTO` («Em distribuição»), e pode avisar-te de todas as atualizações, só das importantes ou só no dia da entrega. Com `DISPONIBLE` ou `Pendiente de recoger en Tipsa`, mostra «Pronta para levantamento». Não muda a entrega nem reclama por ti.
+Consulta a TIPSA de 10 em 10 minutos, de 2 em 2 quando a encomenda está em `REPARTO` («Em distribuição»), e pode avisar-te de todas as atualizações, só das importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Com `DISPONIBLE` ou `Pendiente de recoger en Tipsa`, mostra «Pronta para levantamento». Não muda a entrega nem reclama por ti.
 
 ## Perguntas sobre o rastreio TIPSA
 

@@ -73,7 +73,7 @@ Peek affiche ce que La Poste affiche : le statut, l'historique avec le pays de c
 
 Quand La Poste nomme un partenaire ou donne le pays de destination, Peek interroge aussi la poste qu'il suit dans ce pays et passe sur elle dès qu'elle montre une étape plus récente. Il le fait pour la Belgique, le Luxembourg, la Suisse et le Canada, comme pour tous les pays de l'UE, le Royaume-Uni ou les États-Unis. L'historique de La Poste peut toutefois rester muet après l'export : la dernière étape n'apparaît donc pas toujours.
 
-Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi Delivengo
 

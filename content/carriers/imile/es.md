@@ -17,7 +17,7 @@ iMile no publica ningún número de ejemplo. Estas son las formas que llevan sus
 | `IM06010000000000` | IM, 0601 y diez cifras: iMile. |
 | `IM00000000000000` | IM y 14 cifras: también iMile. |
 | `6010125000000` | 13 cifras que empiezan por 6, y las seis siguientes tienen forma de fecha (mes, día, año): el número de envío propio de iMile. |
-| `3000000000000` | Otros números de 13 cifras: no son ninguna de las formas de iMile. Los usan La Poste, Delhivery, Yunda y Korea Post. |
+| `3000000000000` | Otros números de 13 cifras: no son ninguna de las formas de iMile. Los usan Delhivery, Yunda y Korea Post. |
 | `LP00000000000000` | No es de iMile, sino de [Cainiao](carrier:cainiao), la referencia logística de AliExpress. |
 
 En la página de seguimiento de iMile, escribe el número bajo «TYPE YOUR ORDER NUMBER»; el historial sale bajo «ORDER STATUS». Si iMile no conoce el número, ese recuadro se queda vacío, sin ningún aviso. Si no encuentras el número, mira [dónde encontrar el número de seguimiento](guide:find-tracking-number) y, si no aparece, pídeselo a la tienda.
@@ -88,11 +88,11 @@ Para el pedido en sí, la tienda suele ser más rápida: contrató a iMile y pue
 
 ## Seguir un paquete de iMile con Peek
 
-[Peek](/) reconoce al momento los números `IM0601…` como iMile. Con los demás números IM de 14 cifras y con los de 13 cifras, que también usan otros transportistas, la forma no basta: pégalo igualmente, Peek sigue más de 3.500 transportistas. Al añadirlo, Peek pregunta a los transportistas que usan números así, iMile entre los primeros para los que empiezan por 6 con forma de fecha, y muestra «iMile tiene este paquete.» cuando iMile lo conoce. Si nadie responde aún o sale otro transportista, elige iMile con «Cambiar». También valen los enlaces de la página de seguimiento de imile.com (`/track?waybillNo=`).
+[Peek](/) reconoce al momento los números `IM0601…` como iMile. Con los demás números IM de 14 cifras y con los de 13 cifras, que también usan otros transportistas, la forma no basta: pégalo igualmente, Peek sigue más de 3500 transportistas. Al añadirlo, Peek pregunta a los transportistas que usan números así, iMile entre los primeros para los que empiezan por 6 con forma de fecha, y muestra «iMile tiene este paquete.» cuando iMile lo conoce. Si nadie responde aún o sale otro transportista, elige iMile con «Cambiar». También valen los enlaces de la página de seguimiento de imile.com (`/track?waybillNo=`).
 
 Peek consulta a iMile en inglés. Muestra el estado, el historial con el centro o la ciudad de cada escaneo en un mapa y el país de destino, con las horas leídas según el reloj de ese país y mostradas en la zona horaria de tu dispositivo. Si Cainiao saca el paquete de China para iMile, Peek añade delante los escaneos anteriores de Cainiao: recogida, clasificación, exportación, vuelo e importación.
 
-Peek no muestra la fecha prevista de iMile, el vuelo programado, la prueba de entrega, quién firmó, los contactos ni los datos de pago, y quita de los escaneos el teléfono del repartidor. Estados como «En reparto» o «Intento de entrega» son de Peek; las líneas del historial salen tal como las escribe iMile. Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con iMile ni con la tienda por ti.
+Peek no muestra la fecha prevista de iMile, el vuelo programado, la prueba de entrega, quién firmó, los contactos ni los datos de pago, y quita de los escaneos el teléfono del repartidor. Estados como «En reparto» o «Intento de entrega» son de Peek; las líneas del historial salen tal como las escribe iMile. Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con iMile ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de iMile
 

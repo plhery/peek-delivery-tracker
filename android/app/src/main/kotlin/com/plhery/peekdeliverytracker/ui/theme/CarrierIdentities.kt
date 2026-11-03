@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -14,6 +15,7 @@ import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -43,6 +45,10 @@ class CarrierIdentities internal constructor(val catalog: CarrierCatalog) {
 
         private class Made(val definitions: Map<CarrierId, CarrierDefinition>, val identities: CarrierIdentities)
 
+        /** Where the brand data is decoded: the IO dispatcher, or a test's, which may take as long as a slow phone. */
+        @VisibleForTesting
+        internal var decoding: CoroutineContext = Dispatchers.IO
+
         /**
          * The identities made already for `catalog` as it stands, or null. A window made again (a rotation, a change of
          * theme) draws them from its first frame, as the iPhone's views live on through those, rather than without the
@@ -52,11 +58,11 @@ class CarrierIdentities internal constructor(val catalog: CarrierCatalog) {
             last?.takeIf { it.identities.catalog === catalog && it.definitions === definitions }?.identities
 
         /**
-         * Decodes the brand data on the IO dispatcher, or finds it decoded already, for the liveries of `catalog` as it
-         * stands (`definitions`); the same identities while those haven't changed.
+         * Decodes the brand data on the IO dispatcher ([decoding]), or finds it decoded already, for the liveries of
+         * `catalog` as it stands (`definitions`); the same identities while those haven't changed.
          */
         suspend fun load(catalog: CarrierCatalog, definitions: Map<CarrierId, CarrierDefinition> = catalog.definitions): CarrierIdentities =
-            loaded(catalog, definitions) ?: withContext(Dispatchers.IO) {
+            loaded(catalog, definitions) ?: withContext(decoding) {
                 CarrierBrandAssets.shared
                 CarrierIdentities(catalog)
             }.also { last = Made(definitions, it) }

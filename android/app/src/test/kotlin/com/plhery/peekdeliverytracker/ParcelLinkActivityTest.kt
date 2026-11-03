@@ -33,6 +33,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LINK_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_GIFT_CARD
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SHEET
 import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
+import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import java.io.IOException
 import java.security.Security
 import java.time.Instant
@@ -212,7 +213,15 @@ class ParcelLinkActivityTest {
         assertNotEquals(AuthenticationState.Loading, stores.session.state)
     }
 
+    /** The window's screen as it stays: once the stores are made, after the carriers, decoded on the IO dispatcher. */
     private fun settle() {
+        val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
+        while (app.container.value.let { it != null && it.catalog.value?.let { catalog -> CarrierIdentities.loaded(catalog) } == null } &&
+            System.nanoTime() < deadline
+        ) {
+            compose.waitForIdle()
+            Thread.sleep(10)
+        }
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
     }

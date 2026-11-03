@@ -296,7 +296,7 @@ internal fun LaunchView(loading: String) {
     val opacity = remember { Animatable(if (slow) 1f else 0f) }
     LaunchedEffect(Unit) {
         if (slow) return@LaunchedEffect
-        delay(SLOW_MILLIS)
+        delay(LAUNCH_SLOW_MILLIS)
         slow = true
         withContext(KeepMotion) { opacity.animateTo(1f, Motion.easeOut(0.2)) }
     }
@@ -322,7 +322,8 @@ private fun TabPlaceholder(tab: PeekTab) {
     Box(Modifier.fillMaxSize().background(PeekTheme.colors.background).testTag(tab.screen))
 }
 
-private const val SLOW_MILLIS = 600L
+/** How long the launch screen stays blank before it says the app is loading, in milliseconds. */
+internal const val LAUNCH_SLOW_MILLIS = 600L
 
 /** The test tags of the launch screen and the arrival. */
 const val LAUNCH = "launch"

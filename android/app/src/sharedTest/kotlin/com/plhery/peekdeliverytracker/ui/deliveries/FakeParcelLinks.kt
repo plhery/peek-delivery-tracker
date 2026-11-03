@@ -135,7 +135,7 @@ class FakeParcelLinks(
             outcomes[actions.size] = outcome
             actions += name
         },
-        review = ReviewPrompt(feedbackDefaults, version = "1.0", timeZone = { ZoneOffset.UTC }), app = ParcelFeedbackRequestApp.Ios,
+        review = ReviewPrompt(feedbackDefaults, version = "1.0", timeZone = { ZoneOffset.UTC }), app = ParcelFeedbackRequestApp.Android,
     )
 
     override fun feedbackClient(linkId: String): ParcelFeedbackClient = ParcelFeedbackClient { feedbackRequests += linkId to it }

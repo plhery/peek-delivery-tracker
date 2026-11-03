@@ -490,7 +490,7 @@ class FakeDeliveries(
 
     override fun feedbackModel(): ParcelFeedbackModel = ParcelFeedbackModel(
         scope = scope, memory = ParcelFeedbackMemory(feedbackDefaults) { now }, now = { now }, report = { name, outcome -> action(name, outcome) },
-        review = reviewPrompt, app = ParcelFeedbackRequestApp.Ios,
+        review = reviewPrompt, app = ParcelFeedbackRequestApp.Android,
     )
 
     override fun feedbackClient(parcel: Parcel): ParcelFeedbackClient = ParcelFeedbackClient { feedback ->

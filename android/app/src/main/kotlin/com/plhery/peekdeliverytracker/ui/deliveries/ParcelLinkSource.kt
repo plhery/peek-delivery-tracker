@@ -114,15 +114,15 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
     override fun feedbackModel() = ParcelFeedbackModel(
         scope = container.scope, memory = ParcelFeedbackMemory(container.defaults),
         report = { name, outcome -> container.analytics.action(name, outcome) }, review = container.reviewPrompt,
-        // What the answers would say they come from, as a page's: never sent ([feedbackClient]).
-        app = ParcelFeedbackRequestApp.Ios,
+        // What the answers say they come from, as a page's.
+        app = ParcelFeedbackRequestApp.Android,
     )
 
     /**
-     * Nowhere yet, and taken as sent, as a page's answers are ([ContainerDeliveries.feedbackClient]): the service takes
-     * `ios` and `web` only, and Android's answers will say `android` once it takes that.
+     * Through the link, with its owner key when this phone holds it, signed in or not; nowhere in a build without a
+     * server, whose links are made up.
      */
-    override fun feedbackClient(linkId: String) = ParcelFeedbackClient { }
+    override fun feedbackClient(linkId: String) = container.parcels.feedbackClient(linkId)
 
     override val feedbackPreview get() = container.launchPreviews.feedback
 }

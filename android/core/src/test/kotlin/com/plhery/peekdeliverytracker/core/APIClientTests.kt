@@ -2,6 +2,9 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
+import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.security.MessageDigest
@@ -136,6 +139,51 @@ class APIClientTests {
             read.headers,
         )
         assertNull(read.body)
+    }
+
+    /**
+     * `sendFeedback(id:_:)`, as APIClient.swift makes it (not from the harness): the answer posted as the iPhone encodes
+     * it, with the account's token, through `rawRequest`, which reads nothing of what comes back. The route counts
+     * nothing; the page counts the answer where it is given. Its errors are the account's other requests'.
+     */
+    @Test
+    fun aParcelsAnswerIsPostedAndWhatComesBackIsLeftUnread() = runTest {
+        val answer = ParcelFeedbackRequest.right(
+            id = UUID.fromString("41000000-0000-0000-0000-000000000002"), asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.En,
+            app = ParcelFeedbackRequestApp.Android,
+        )
+        for (answered in listOf(jsonResponse(204), jsonResponse(200, "<html>Thanks</html>"))) {
+            val transport = serving(answered)
+            val session = TestSession()
+            client(transport, session).sendFeedback(parcelId, answer)
+            val request = transport.requests.single()
+            assertEquals("POST https://peek.example/api/packages/40000000-0000-0000-0000-000000000001/feedback", "${request.method} ${request.url}")
+            assertEquals(
+                mapOf(
+                    "Accept" to "application/json", "Authorization" to "Bearer synthetic-access", "Content-Type" to "application/json",
+                    "X-Requested-With" to "XMLHttpRequest",
+                ),
+                request.headers,
+            )
+            assertEquals(
+                """{"answer":"right","app":"android","asked":"page","id":"41000000-0000-0000-0000-000000000002","locale":"en"}""",
+                request.body?.decodeToString(),
+            )
+            assertEquals(listOf("token"), session.log)
+        }
+        assertEquals(emptyList<String>(), analytics)
+
+        val cases = listOf(
+            jsonResponse(400, """{"error":"Invalid feedback"}""") to "service(Invalid feedback)",
+            jsonResponse(404, """{"error":"Package not found"}""") to "service(Package not found)",
+            jsonResponse(429, headers = mapOf("Retry-After" to "30")) to "rateLimited(30.0)",
+            jsonResponse(500) to "serviceFailed(500)",
+            IOException("offline") to "network",
+        )
+        for ((answered, expected) in cases) {
+            assertEquals(expected, outcome { client(serving(answered), TestSession()).sendFeedback(parcelId, answer) })
+        }
+        assertEquals(emptyList<String>(), analytics)
     }
 
     @Test

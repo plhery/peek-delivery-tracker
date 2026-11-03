@@ -17,7 +17,13 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.JsonEncoder
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackQuestion
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackSubject
 import com.plhery.peekdeliverytracker.core.ParcelSharePreview
+import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
@@ -272,6 +278,126 @@ class AppContainerTest {
             KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.auth").delete()
             Security.removeProvider("AndroidKeyStore")
         }
+    }
+
+    /** The question a page asks about `subject`, as the page shows it, in the model's state to say "Yes". */
+    private fun asked(subject: ParcelFeedbackSubject) =
+        ParcelFeedbackModel.Page(subject, ParcelFeedbackQuestion.Found, scan = "1:2026-10-02T08:00:00Z", carrier = "DHL", language = AppLanguage.En)
+
+    /** Runs the page's "Yes" in the app's scope, as its button does, until the model has the service's answer. */
+    private fun sayRight(app: AppContainer, model: ParcelFeedbackModel) {
+        val answer = app.scope.launch { model.right() }
+        idleUntil("the answer") { answer.isCompleted }
+    }
+
+    /**
+     * A page's answer goes to the service through the store (`store.feedbackClient(for:)` and `(forLink:)`), and says
+     * it comes from `android`: a parcel's through the account, with its token, a link's through the link, without the
+     * token or a key this phone does not hold. One the service refuses is taken back, as the iPhone's is.
+     */
+    @Test
+    fun aPagesAnswerReachesTheServiceThroughTheStore() {
+        Security.addProvider(FakeAndroidKeyStore())
+        class Sent(val route: String, val authorization: String?, val key: String?, val body: JSONObject)
+        val sent = mutableListOf<Sent>()
+        val gone = "33333333333B"
+        val user = AuthUser(UUID(0, 9), email = "reader@example.com", isAnonymous = false)
+        val answers = Interceptor { chain ->
+            val request = chain.request()
+            val path = request.url.encodedPath
+            val (code, body) = when {
+                path == "/auth/v1/verify" -> 200 to JsonEncoder.deliveryTracker.encode(
+                    AuthSession.serializer(),
+                    AuthSession(
+                        accessToken = "synthetic-access", tokenType = "bearer", expiresIn = 3600,
+                        expiresAt = Instant.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
+                    ),
+                ).decodeToString()
+                path.endsWith("/feedback") -> {
+                    val answer = JSONObject(Buffer().also { request.body!!.writeTo(it) }.readUtf8())
+                    synchronized(sent) { sent += Sent("${request.method} $path", request.header("Authorization"), request.header("X-Parcel-Key"), answer) }
+                    if (gone in path) 404 to """{"error":"Parcel unavailable"}""" else 204 to ""
+                }
+                else -> 404 to "{}"
+            }
+            Response.Builder().request(request).protocol(Protocol.HTTP_1_1).code(code).message("").body(body.toResponseBody()).build()
+        }
+        fun last(): Sent = synchronized(sent) { sent.lastOrNull() } ?: throw AssertionError("No answer reached the service")
+        try {
+            val server = "https://peek.example.test"
+            val configuration = AppConfiguration(
+                mode = AppConfiguration.Mode.Api, apiBaseUrl = server, supabaseUrl = server,
+                supabasePublishableKey = "synthetic-publishable-key", googleAuthEnabled = false, appleAuthEnabled = false,
+                emailOtpEnabled = true, appGroupIdentifier = "group.test.peek",
+            )
+            val http = PeekHttp.client(MemoryCookieJar()).newBuilder().addInterceptor(answers).build()
+            val app = AppContainer(context, configuration, http, scope = MainScope()).also { container = it }
+            app.start(process.lifecycle)
+            idleUntil("the session") { app.session.state != AuthenticationState.Loading }
+            app.scope.launch { app.session.verifyCode(email = "reader@example.com", code = "123456") }
+            idleUntil("the sign-in") { app.session.state is AuthenticationState.SignedIn }
+
+            // A parcel's page, with the model and the client ParcelPage takes from the deliveries' source.
+            val deliveries = ContainerDeliveries(app)
+            val parcel = Parcel(
+                id = UUID(0, 21), trackingNumber = "TESTPARCEL000021", label = "", carrier = CarrierId.Dhl,
+                createdAt = "2026-10-01T08:00:00Z", syncStatus = SyncStatus.Ok, notificationsMuted = false,
+            )
+            val page = deliveries.feedbackModel().apply { show(asked(ParcelFeedbackSubject.Parcel(parcel.id)), deliveries.feedbackClient(parcel)) }
+            sayRight(app, page)
+            val answer = last()
+            assertEquals("POST /api/packages/00000000-0000-0000-0000-000000000015/feedback", answer.route)
+            assertEquals("Bearer synthetic-access", answer.authorization)
+            assertNull(answer.key)
+            assertEquals(listOf("right", "android", "page", "en"), listOf("answer", "app", "asked", "locale").map(answer.body::getString))
+            assertEquals(ParcelFeedbackModel.Moment.Right, page.moment)
+            assertNull(page.word)
+
+            // A link's sheet, with those ParcelLinkSheet takes from the links' source.
+            val links = ContainerParcelLinks(app)
+            val link = links.feedbackModel().apply { show(asked(ParcelFeedbackSubject.Link("22222222222A")), links.feedbackClient("22222222222A")) }
+            sayRight(app, link)
+            val linked = last()
+            assertEquals("POST /api/public/parcels/22222222222A/feedback", linked.route)
+            assertNull(linked.authorization)
+            assertNull(linked.key)
+            assertEquals(listOf("right", "android"), listOf("answer", "app").map(linked.body::getString))
+            assertEquals(ParcelFeedbackModel.Moment.Right, link.moment)
+
+            // The service refuses it: the "Yes" is taken back, and the page says it could not be sent.
+            val refused = links.feedbackModel().apply { show(asked(ParcelFeedbackSubject.Link(gone)), links.feedbackClient(gone)) }
+            sayRight(app, refused)
+            assertEquals("POST /api/public/parcels/$gone/feedback", last().route)
+            assertEquals(ParcelFeedbackModel.Moment.Ask, refused.moment)
+            assertEquals(ParcelFeedbackModel.Word.Failed, refused.word)
+            assertEquals(3, synchronized(sent) { sent.size })
+        } finally {
+            KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.auth").delete()
+            Security.removeProvider("AndroidKeyStore")
+        }
+    }
+
+    /**
+     * The demo's parcels are made up: a page's answer about one goes nowhere and is taken as sent, under a debug build's
+     * look at the question too (`sdt.debug.parcelFeedback`, which asks it on the demo's pages), as on the iPhone.
+     */
+    @Test
+    fun theDemosAnswersGoNowhereEvenUnderADebugBuildsLook() {
+        val defaults = PreferencesDefaults.standard(context)
+        defaults.set("demo", forKey = "sdt.native.experience.v1")
+        defaults.set("ask", forKey = "sdt.debug.parcelFeedback")
+        val app = AppContainer(context, configuration(), scope = MainScope(), debug = true).also { container = it }
+        app.start(process.lifecycle)
+        idleUntil("the demo's parcels") { app.session.state == AuthenticationState.Demo && app.parcels.parcelsFlow.value.isNotEmpty() }
+        val deliveries = ContainerDeliveries(app)
+        val parcel = deliveries.launchPreviews.parcel(app.parcels.parcelsFlow.value)!!
+
+        val page = deliveries.feedbackModel().apply { show(asked(ParcelFeedbackSubject.Parcel(parcel.id)), deliveries.feedbackClient(parcel)) }
+        sayRight(app, page)
+        settle()
+        assertEquals(ParcelFeedbackModel.Moment.Right, page.moment)
+        assertNull(page.word)
+        assertFalse(synchronized(paths) { paths.toList() }.toString(), synchronized(paths) { paths.any { it.endsWith("/feedback") } })
     }
 
     /**

@@ -42,7 +42,8 @@ import org.junit.Test
 
 /**
  * ParcelFeedbackTests.swift: the question a parcel's page asks its reader, which one, what the device remembers of it,
- * what an answer carries, and where it is sent. Answers say they come from `ios`, as the iPhone's do.
+ * what an answer carries, and where it is sent. The model's answers say they come from `ios`, as the iPhone's do; those
+ * sent to the service say `android`, as this app's do.
  */
 class ParcelFeedbackTests {
     private class Clock {
@@ -68,6 +69,7 @@ class ParcelFeedbackTests {
     private val linkId = "22222222222A"
     private val scan = "3:2026-10-02T08:00:00Z"
     private val ios = ParcelFeedbackRequestApp.Ios
+    private val android = ParcelFeedbackRequestApp.Android
 
     /** `AppConfiguration.version` in the iPhone's tests. */
     private val appVersion = "1.1.3"
@@ -885,35 +887,59 @@ class ParcelFeedbackTests {
 
     // The service
 
+    private val serviceConfiguration = AppConfiguration(
+        mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://feedback.test", supabaseUrl = "https://feedback.test",
+        supabasePublishableKey = "public", googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true,
+        appGroupIdentifier = "feedback.test",
+    )
+
+    /** The parcels this phone follows, `parcels` with their `keys`, reaching the service through `transport`, or none. */
+    private fun CoroutineScope.deviceParcels(
+        transport: HttpTransport?,
+        parcels: List<DeviceParcel> = emptyList(),
+        keys: Map<String, String> = emptyMap(),
+    ): DeviceParcels {
+        val storage = object : DeviceParcelStorage {
+            override fun load() = DeviceParcelStorage.Contents(parcels, keys)
+
+            override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {}
+        }
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val client = transport?.let { DeviceParcelClient.api(serviceConfiguration, it, verification, region = { Locale.UK }) }
+        return DeviceParcels(client, storage, PostcodeMemory(MemoryDefaults()), this, region = { Locale.UK }, language = { AppLanguage.En })
+    }
+
+    /** What an answer's send came to, as the iPhone's errors name it. */
+    private suspend fun outcome(send: suspend () -> Unit): String = try {
+        send()
+        "sent"
+    } catch (error: Exception) {
+        when (error) {
+            is DeliveryApiError.ParcelMissing -> "parcelMissing"
+            is DeliveryApiError.Service -> "service(${error.serviceMessage})"
+            is DeliveryApiError.ServiceFailed -> "serviceFailed(${error.status})"
+            is DeliveryApiError.RateLimited -> "rateLimited(${error.retryAfter})"
+            is DeviceLookupsSpent -> "lookupsSpent"
+            else -> "other ${error::class.simpleName}"
+        }
+    }
+
     @Test
     fun anAnswerThroughALinkCarriesTheOwnerKeyOnlyWhenThisIPhoneHoldsIt() = runTest {
         var status = 204
         val transport = RecordingTransport { HttpResponse(status, body = if (status == 204) ByteArray(0) else """{"error":"Parcel unavailable"}""".toByteArray()) }
         val followed = UUID.randomUUID()
         val key = "k".repeat(43)
-        val storage = object : DeviceParcelStorage {
-            override fun load() = DeviceParcelStorage.Contents(
-                listOf(DeviceParcel(linkId = linkId, label = "", archivedAt = null, parcel = parcel().copy(id = followed), checkedAt = Instant.now().timeIntervalSinceReferenceDate)),
-                mapOf(linkId to key),
-            )
-
-            override fun save(parcels: List<DeviceParcel>, keys: Map<String, String>) {}
-        }
-        val configuration = AppConfiguration(
-            mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://feedback.test", supabaseUrl = "https://feedback.test",
-            supabasePublishableKey = "public", googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true,
-            appGroupIdentifier = "feedback.test",
-        )
-        val verification = NativeVerification(
-            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
-            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
-        )
-        val device = DeviceParcels(
-            DeviceParcelClient.api(configuration, transport, verification, region = { Locale.UK }), storage, PostcodeMemory(MemoryDefaults()), this,
-            region = { Locale.UK }, language = { AppLanguage.En },
+        val device = deviceParcels(
+            transport,
+            listOf(DeviceParcel(linkId = linkId, label = "", archivedAt = null, parcel = parcel().copy(id = followed), checkedAt = Instant.now().timeIntervalSinceReferenceDate)),
+            mapOf(linkId to key),
         )
         val answer = ParcelFeedbackRequest.wrong(
-            reasons = setOf(ParcelFeedbackReason.Status), asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.It, app = ios,
+            reasons = setOf(ParcelFeedbackReason.Status), asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.It, app = android,
         )
 
         device.sendFeedback(answer, id = followed)
@@ -924,51 +950,71 @@ class ParcelFeedbackTests {
         assertEquals("/api/public/parcels/$linkId/feedback", request.path)
         assertEquals(key, request.header("X-Parcel-Key"))
         assertNull(request.header("Authorization"))
+        assertEquals("application/json", request.header("Content-Type"))
         val sent = Json.parseToJsonElement(request.body?.decodeToString() ?: "").jsonObject
         assertEquals(answer.id.uuidString, sent["id"]?.jsonPrimitive?.content)
         assertEquals("wrong", sent["answer"]?.jsonPrimitive?.content)
         assertEquals(listOf("status"), sent["reasons"]?.jsonArray?.map { it.jsonPrimitive.content })
-        assertEquals("ios", sent["app"]?.jsonPrimitive?.content)
+        assertEquals("android", sent["app"]?.jsonPrimitive?.content)
         assertEquals("it", sent["locale"]?.jsonPrimitive?.content)
         // The bytes the iPhone sends: its keys sorted.
         assertEquals(
-            """{"answer":"wrong","app":"ios","asked":"page","id":"${answer.id.uuidString}","locale":"it","reasons":["status"]}""",
+            """{"answer":"wrong","app":"android","asked":"page","id":"${answer.id.uuidString}","locale":"it","reasons":["status"]}""",
             request.body?.decodeToString(),
         )
 
         // Someone else's link: no key to send.
-        val right = ParcelFeedbackRequest.right(asked = ParcelFeedbackRequestAsked.Back, language = AppLanguage.En, app = ios)
+        val right = ParcelFeedbackRequest.right(asked = ParcelFeedbackRequestAsked.Back, language = AppLanguage.En, app = android)
         device.sendFeedback(right, linkId = "33333333333B")
         assertEquals("/api/public/parcels/33333333333B/feedback", transport.requests.last().path)
         assertNull(transport.requests.last().header("X-Parcel-Key"))
-        assertEquals("""{"answer":"right","app":"ios","asked":"back","id":"${right.id.uuidString}","locale":"en"}""", transport.requests.last().body?.decodeToString())
+        assertEquals("""{"answer":"right","app":"android","asked":"back","id":"${right.id.uuidString}","locale":"en"}""", transport.requests.last().body?.decodeToString())
 
         // A parcel this phone does not follow has no link to answer through.
-        try {
-            device.sendFeedback(answer, id = UUID.randomUUID())
-            fail("An unknown parcel was answered for")
-        } catch (_: Exception) {
-            assertEquals(2, transport.requests.size)
-        }
+        assertEquals("parcelMissing", outcome { device.sendFeedback(answer, id = UUID.randomUUID()) })
+        assertEquals(2, transport.requests.size)
 
         // A link that is gone is a failure like any other.
         for (gone in listOf(404, 410)) {
             status = gone
-            try {
-                device.sendFeedback(answer, linkId = linkId)
-                fail("$gone was taken for sent")
-            } catch (_: Exception) {
-            }
+            assertEquals("serviceFailed($gone)", outcome { device.sendFeedback(answer, linkId = linkId) })
         }
+    }
+
+    /**
+     * An answer through a link that the service refuses fails as the link's other requests do (`failure`): only its
+     * 204 is taken for sent. A build without a server has no client, and sends nothing.
+     */
+    @Test
+    fun anAnswerTheServiceRefusesFailsAsTheLinksOtherRequestsDo() = runTest {
+        var answer = jsonResponse(204)
+        val transport = RecordingTransport { answer }
+        val device = deviceParcels(transport)
+        val right = ParcelFeedbackRequest.right(asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.En, app = android)
+        val cases = listOf(
+            jsonResponse(204) to "sent",
+            jsonResponse(200, """{"ok":true}""") to "serviceFailed(200)",
+            jsonResponse(400, """{"error":"Invalid feedback"}""") to "service(Invalid feedback)",
+            jsonResponse(400) to "serviceFailed(400)",
+            jsonResponse(429, headers = mapOf("Retry-After" to "30")) to "rateLimited(30.0)",
+            jsonResponse(429) to "rateLimited(60.0)",
+            jsonResponse(429, """{"scope":"daily"}""") to "lookupsSpent",
+            jsonResponse(500) to "serviceFailed(500)",
+        )
+        for ((given, expected) in cases) {
+            answer = given
+            assertEquals(expected, outcome { device.sendFeedback(right, linkId = linkId) })
+        }
+        assertEquals(cases.size, transport.requests.size)
+
+        val offline = deviceParcels(transport = null)
+        assertEquals("serviceFailed(503)", outcome { offline.sendFeedback(right, linkId = linkId) })
+        assertEquals(cases.size, transport.requests.size)
     }
 
     @Test
     fun theStoreSendsThroughTheAccountAndNothingInABuildWithoutAServer() = runTest {
-        val configuration = AppConfiguration(
-            mode = AppConfiguration.Mode.Api, apiBaseUrl = "https://feedback.test", supabaseUrl = "https://feedback.test",
-            supabasePublishableKey = "public", googleAuthEnabled = false, appleAuthEnabled = false, emailOtpEnabled = true,
-            appGroupIdentifier = "feedback.test",
-        )
+        val configuration = serviceConfiguration
         val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
         val signedIn = JsonEncoder.deliveryTracker.encode(
             AuthSession.serializer(),
@@ -990,7 +1036,8 @@ class ParcelFeedbackTests {
         store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         session.verifyCode(email = "test@example.com", code = "123456")
-        val answer = ParcelFeedbackRequest.right(asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.En, app = ios)
+        val answer = ParcelFeedbackRequest.right(asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.En, app = android)
+        val bytes = """{"answer":"right","app":"android","asked":"page","id":"${answer.id.uuidString}","locale":"en"}"""
 
         store.feedbackClient(parcel).send(answer)
 
@@ -998,14 +1045,18 @@ class ParcelFeedbackTests {
         assertEquals("POST", sent.method)
         assertEquals("/api/packages/${parcel.id.uuidString}/feedback", sent.path)
         assertEquals("Bearer access", sent.header("Authorization"))
+        assertEquals("application/json", sent.header("Content-Type"))
         val json = Json.parseToJsonElement(sent.body?.decodeToString() ?: "").jsonObject
         assertEquals(answer.id.uuidString, json["id"]?.jsonPrimitive?.content)
         assertEquals("right", json["answer"]?.jsonPrimitive?.content)
+        assertEquals(bytes, sent.body?.decodeToString())
 
         // A link's parcel is answered for through the link, signed in or not.
         store.feedbackClient(linkId).send(answer)
         assertEquals("/api/public/parcels/$linkId/feedback", requests.last().path)
         assertNull(requests.last().header("Authorization"))
+        assertNull(requests.last().header("X-Parcel-Key"))
+        assertEquals(bytes, requests.last().body?.decodeToString())
 
         // The demo's parcels are made up: their answers go nowhere, and succeed.
         val count = requests.size
@@ -1032,6 +1083,34 @@ class ParcelFeedbackTests {
         assertNull(page(ParcelFeedbackSubject.Link(linkId), madeUp = !demoStore.tracksWithoutAccount))
         assertNotNull(page(ParcelFeedbackSubject.Parcel(parcel.id), madeUp = store.isDemo))
         assertNotNull(page(ParcelFeedbackSubject.Link(linkId), madeUp = !store.tracksWithoutAccount))
+    }
+
+    /** A guest's parcel is answered for through the link this phone follows it by, with its key; the account's route goes unasked. */
+    @Test
+    fun aGuestsParcelIsAnsweredForThroughItsLink() = runTest {
+        val parcel = parcel()
+        val key = "k".repeat(43)
+        val transport = RecordingTransport { jsonResponse(204) }
+        val session = testSessionStore(serviceConfiguration, backgroundScope, transport = transport)
+        val device = backgroundScope.deviceParcels(
+            transport,
+            listOf(DeviceParcel(linkId = linkId, label = "", archivedAt = null, parcel = parcel, checkedAt = Instant.now().timeIntervalSinceReferenceDate)),
+            mapOf(linkId to key),
+        )
+        val store = testParcelStore(serviceConfiguration, session, transport, backgroundScope, device = device)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        session.bootstrap()
+        assertTrue(store.isGuest)
+        val answer = ParcelFeedbackRequest.right(asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.En, app = android)
+
+        store.feedbackClient(parcel).send(answer)
+
+        val sent = transport.requests.single { it.path?.endsWith("/feedback") == true }
+        assertEquals("POST /api/public/parcels/$linkId/feedback", "${sent.method} ${sent.path}")
+        assertEquals(key, sent.header("X-Parcel-Key"))
+        assertNull(sent.header("Authorization"))
+        assertEquals("""{"answer":"right","app":"android","asked":"page","id":"${answer.id.uuidString}","locale":"en"}""", sent.body?.decodeToString())
     }
 
     @Test

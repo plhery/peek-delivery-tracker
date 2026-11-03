@@ -496,12 +496,10 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     )
 
     /**
-     * Nowhere yet, and taken as sent, as the demo's answers are. The service counts an answer under the app it names,
-     * and takes `ios` and `web` only (ParcelFeedbackRequest's `app`): Android's must say `android`, and will once the
-     * service takes it; until then none leaves the phone, rather than say it came from another app. The page thanks its
-     * reader, counts the answer and remembers it as the iPhone does once the service has it (`store.feedbackClient`).
+     * Through the account, or this phone's link to the parcel without one; the demo's answers go nowhere and are taken
+     * as sent, as on the iPhone.
      */
-    override fun feedbackClient(parcel: Parcel): ParcelFeedbackClient = ParcelFeedbackClient { }
+    override fun feedbackClient(parcel: Parcel): ParcelFeedbackClient = container.parcels.feedbackClient(parcel)
 
     override fun errorMessage(error: Throwable): String = container.localizer.errorMessage(error)
 
@@ -576,11 +574,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         /** This process's pages' questions, for every window it makes, as its pages' work is. */
         val FEEDBACKS = ParcelFeedbacks()
 
-        /**
-         * What a page's answers would say they come from, which [feedbackClient] never sends: the model needs one, and
-         * the service has no `android` to name yet.
-         */
-        val FEEDBACK_APP = ParcelFeedbackRequestApp.Ios
+        /** What a page's answers say they come from, which the service counts them under. */
+        val FEEDBACK_APP = ParcelFeedbackRequestApp.Android
     }
 }
 

@@ -1,18 +1,19 @@
 # Peek privacy notice
 
-Effective: 23 October 2026
+Effective: 3 November 2026
 
-Peek follows parcels, on the web and in its iPhone app. This notice says what
-the official service at peektracker.com processes to do that. Peek does not
-sell personal data, serve advertising, or use advertising analytics.
+Peek follows parcels, on the web and in its iPhone and Android apps. This
+notice says what the official service at peektracker.com processes to do that.
+Peek does not sell personal data, serve advertising, or use advertising
+analytics.
 
 ## Data the service processes
 
 - Your email address, account ID, session metadata, authentication security
   events, the language your apps use, basic Google profile data when you
   choose Google sign-in, and Apple's identifier for you when you choose Sign in
-  with Apple. Apple shares only an email address, which can be a private relay
-  address that forwards to yours.
+  with Apple, which the Android app does not offer. Apple shares only an email
+  address, which can be a private relay address that forwards to yours.
 - Parcel labels, tracking numbers, carrier selection, tracking history, status,
   timestamps, the operational location a carrier attaches to each scan — the
   city, region, country, and the postcode or name of the depot, parcel shop or
@@ -25,7 +26,8 @@ sell personal data, serve advertising, or use advertising analytics.
   iPhone APNs device token, optional device name and locale, a random local
   installation identifier, ActivityKit push-to-start and per-activity update
   tokens, delivery acknowledgements, and delivery errors when you enable the
-  corresponding notification or Live Activity setting.
+  corresponding notification or Live Activity setting. The Android app
+  registers no device token and sends no device name.
 - Whether you asked for an email when a parcel arrives and when you
   turned it on, the parcels you muted for it, and a record of each of these
   emails: the parcel, whether it told a delivery or a parcel ready for pickup,
@@ -98,7 +100,9 @@ their usage counters. New verified requests clear daily counters older than
 seven days and expired challenges. The app signs signed-in requests with the same
 key; checking one updates its counter and last-use time and records nothing
 about the account. Keys are not linked to accounts or parcel inputs. Turnstile
-remains available when App Attest cannot be used.
+remains available when App Attest cannot be used. The Android app has no App
+Attest: it shows the Turnstile check in a web view each time it needs a new
+proof, and Cloudflare processes the same signals there as on the website.
 
 To get a parcel's history, the service sends its tracking number to the
 carrier. When needed, it also asks other carriers the number could belong to, a
@@ -113,12 +117,18 @@ service discards its sender, recipient, address, contact and document fields.
 Browser push services receive encrypted Web Push messages; Apple processes
 native notification and Live Activity payloads through APNs. Those Apple
 payloads can contain a parcel label, carrier, status, location, and expected
-delivery text, but Peek does not put the tracking number in them.
+delivery text, but Peek does not put the tracking number in them. The Android
+app receives no push notifications.
 
 Error reports go to Sentry (Functional Software, Inc.), which stores them in
 the United States for up to 90 days. Sentry is certified under the EU–US and
 Swiss–US Data Privacy Frameworks, and its data processing addendum includes
 standard contractual clauses.
+
+The Android app sends no error reports of its own. Google Play passes on its
+crash and app-not-responding reports (Android vitals) to Peek, under Google's
+terms. The app may also show Google Play's in-app review prompt, which runs
+through Google Play.
 
 Outside Switzerland and the European Union, data therefore goes to the United
 States (Cloudflare, Google, Apple, Sentry, Resend and your browser's push
@@ -129,9 +139,15 @@ The service places scan locations on its map itself, with
 [GeoNames](https://www.geonames.org) place data (CC BY 4.0) and sorting-centre
 locations from [OpenStreetMap](https://www.openstreetmap.org/copyright)
 contributors (ODbL), kept on its own servers; no mapping service receives them.
-When you tap Directions or Show on map for a pickup point, in the app or in an
-email, Apple Maps or Google Maps receives that pickup point's name and address,
-and nothing else about the parcel.
+The Android app draws its map from data built into the app and fetches nothing
+for it. When you tap Directions or Show on map for a pickup point, in an app or
+in an email, Apple Maps or Google Maps receives that pickup point's name and
+address, and nothing else about the parcel.
+
+The Android app's barcode scanner uses the camera only while it is open.
+Google's ML Kit model, built into the app, reads the frames on the phone; no
+image or barcode leaves the phone, and ML Kit's usage logging to Google is
+switched off.
 
 ## Emails
 
@@ -163,10 +179,10 @@ at [resend.com/legal/subprocessors](https://resend.com/legal/subprocessors).
 
 ## Usage analytics
 
-The official public web service and connected iPhone app send screen views and
-named feature actions (including success/failure) to our self-hosted Umami at
-`u.plhery.com`. This helps us understand which features work and where actions
-fail. Events include the platform, demo/account/anonymous mode, language, and
+The official public web service and connected iPhone and Android apps send
+screen views and named feature actions (including success/failure) to our
+self-hosted Umami at `u.plhery.com`. This helps us understand which features
+work and where actions fail. Events include the platform, demo/account/anonymous mode, language, and
 basic browser/device information. When you come to the website from another
 site or app, its first screen view also names the page that sent you, without
 the part of its address after a question mark or `#`, and the source, medium
@@ -180,18 +196,19 @@ your Peek account.
 
 The website sends nothing when your browser asks not to be tracked (Do Not
 Track or Global Privacy Control) or when Umami's local opt-out is set. The
-iPhone app has no setting for it. Historical analytics remain until operational
-cleanup and cannot be selected by account when you export or delete it because
-we do not send an account identifier. Local demo builds, simulators, and
-unconfigured self-hosted deployments do not collect.
+iPhone and Android apps have no setting for it. Historical analytics remain
+until operational cleanup and cannot be selected by account when you export or
+delete it because we do not send an account identifier. Local demo builds,
+simulators, emulators, and unconfigured self-hosted deployments do not collect.
 
 ## Following a parcel without an account
 
 You can follow a parcel without signing in. The service then stores its
 tracking number, the carrier, a postcode or tracking link if the carrier needs
 one, the tracking history, and a link to the parcel. No account, email address
-or name is stored. A name you give the parcel stays in your browser or in the iPhone
-app, and in the part of a link after `#`, which is not sent to the service.
+or name is stored. A name you give the parcel stays in your browser or in the
+iPhone or Android app, and in the part of a link after `#`, which is not sent
+to the service.
 
 Your device keeps a key that shows it made the lookup; the service stores only
 a hash of that key. Anyone who has the link can see the parcel's status and
@@ -200,10 +217,11 @@ Only the device holding the key sees the full number, can forget the parcel,
 and can keep it after signing in. The postcode or tracking link you entered is
 never shown through a link.
 
-Your browser, or the iPhone app, keeps a list of the parcels you followed or opened this way: each
-link, its key if this device made the lookup, the name you gave it and the last
-tracking history it showed, so the parcel is still there offline. The list
-stays on the device until the parcel is forgotten or kept in an account.
+Your browser, or the iPhone or Android app, keeps a list of the parcels you
+followed or opened this way: each link, its key if this device made the
+lookup, the name you gave it and the last tracking history it showed, so the
+parcel is still there offline. The list stays on the device until the parcel
+is forgotten or kept in an account.
 
 Apart from that list, it keeps the last five postcodes you entered for these
 lookups, each with the carrier it was for, so the next parcel's postcode field
@@ -263,8 +281,10 @@ number or name; a gift's do not say where it is before it arrives.
 Your browser is asked for notifications, and creates its push subscription,
 only when you choose "Turn on". The iPhone app asks when a parcel first comes to
 it without an account, and keeps the device token beside the parcels it follows
-that way so that forgetting one turns its notifications off. Adding a delivery
-to your calendar makes a calendar file in the browser; nothing is sent for it.
+that way so that forgetting one turns its notifications off. The Android app
+may ask for Android's notification permission, but it registers no device
+token, so nothing is sent to the service for it. Adding a delivery to your
+calendar makes a calendar file in the browser; nothing is sent for it.
 
 ## Answering whether a parcel is right
 
@@ -281,9 +301,9 @@ an export, and is not removed when the parcel or the account is deleted. Please
 leave personal details out of a note. Every answer is deleted 90 days after it
 was given. A gift's recipient is not asked.
 
-Your browser, or the iPhone app, remembers that you answered, so coming back
-from the carrier's site does not ask again about the same update. That stays on
-the device.
+Your browser, or the iPhone or Android app, remembers that you answered, so
+coming back from the carrier's site does not ask again about the same update.
+That stays on the device.
 
 ## Friends is optional
 
@@ -334,9 +354,10 @@ shared links, browser subscriptions, native device registrations, delivery
 acknowledgements, delivery email records, and your Friends profile, connections
 and invitations. If you use Sign in with Apple, the iPhone app asks you to
 sign in with Apple once more, and the service asks Apple to revoke Peek's
-access to your Apple ID before deleting your account. Deletion cannot remove
-data already sent to a carrier or data a processor must retain for security or
-legal obligations.
+access to your Apple ID before deleting your account; the Android app, which
+has no Sign in with Apple, deletes the account without that step. Deletion
+cannot remove data already sent to a carrier or data a processor must retain
+for security or legal obligations.
 
 The browser stores the Supabase session, application preferences, an offline
 application shell, and an account-scoped offline parcel snapshot. A language
@@ -352,7 +373,9 @@ current APNs token from Apple instead of persisting that token locally. It
 stores a random installation identifier and the independent Home Screen widget
 and Live Activity preferences on the device. Either snapshot can include
 tracking history, a private tracking link, a supplied delivery postcode, and a
-reference that contains the delivery postcode. Signing out clears
+reference that contains the delivery postcode. The Android app keeps its
+session in the app's private storage; its home-screen widget and its place in
+Android's share menu read only what is already on the phone. Signing out clears
 account-scoped local state and ends Live Activities. Browser or
 operating-system controls can clear app data, Live Activities, and notification
 permissions.

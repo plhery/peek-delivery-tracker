@@ -50,7 +50,7 @@ Ninguna es la mejor para todo el mundo: depende de tus transportistas y de lo qu
 | Tu correo | «Conectar Gmail u Outlook» frente a «reenviar un correo» | Shop revisa los correos de los últimos 30 días y sigue mirando |
 | Tus datos | En el App Store, «Datos usados para rastrearte» y «Datos vinculados contigo»; en Google Play, «Seguridad de los datos»; y la política de privacidad | Apple avisa de que esa información «no ha sido verificada por Apple». Todos los localizadores tienen que pasar tu número a otros |
 | Cuánto tiempo guarda tus datos | La política de privacidad | Deliveries guarda los correos reenviados hasta diez días; en Google Play, Parcels dice que «los datos no se pueden eliminar» |
-| Tus transportistas | Su lista de transportistas | Busca Correos, SEUR, GLS, [MRW](carrier:mrw) o InPost en vez de fiarte del total: 17TRACK habla de más de 2500 en el App Store y de más de 2800 en su página de USPS |
+| Tus transportistas | Su lista de transportistas | Busca Correos, SEUR, GLS, [MRW](carrier:mrw) o InPost en vez de fiarte del total: 17TRACK habla de más de 2500 en el App Store |
 | Idioma | Los idiomas de la ficha, y luego la propia app | Deliveries no está en español. La ficha de 17TRACK solo indica inglés, aunque su descripción promete una «interfaz con múltiples idiomas» |
 
 ## Gratis o de pago: los principales localizadores, comparados
@@ -115,15 +115,15 @@ Nada que el transportista no haya publicado. ParcelsApp lo dice claro: no puede 
 - [Correos Express](carrier:correos-express) avisa de que, si un envío se acaba de registrar, «puede tardar unas horas en aparecer información», y de que cada actualización también puede tardar unas horas, sobre todo cuando el paquete va de un centro logístico a otro.
 - Parcel dice que su app va hasta 90 minutos por detrás de la web del transportista, 45 de media.
 
-**Los transportistas también ponen límites.** Desde el 1 de abril de 2026, el servicio postal de Estados Unidos (USPS) liga el acceso a sus datos de seguimiento al identificador del remitente que va en el código de barras, y los servicios de terceros tienen que pagar una cuota mensual. 17TRACK avisa de que las consultas de USPS sin verificar se frenarán, se cobrarán o se bloquearán. Si un número enseña poco en un localizador, mira la web del transportista.
+**Los transportistas también ponen límites.** Desde el 1 de abril de 2026, el servicio postal de Estados Unidos (USPS) liga el acceso a sus datos de seguimiento al identificador del remitente que va en el código de barras, y los servicios de terceros tienen que pagar una cuota mensual. Si un número enseña poco en un localizador, mira la web del transportista.
 
 Un localizador tampoco puede actuar por ti: para cambiar una entrega, pagar un cargo o avisar de una pérdida, ParcelsApp te manda a la web del transportista. Si el seguimiento lleva días sin moverse, lee [por qué el seguimiento no se actualiza](guide:tracking-not-updating). Si pone entregado y no tienes nada, mira [paquete entregado pero no recibido](guide:delivered-not-received).
 
-## ¿Es fiable 17TRACK? ¿Y ParcelsApp o AfterShip?
+## ¿Cómo saber si 17TRACK es fiable? ¿Y ParcelsApp o AfterShip?
 
-Sus propios documentos dicen quién está detrás y adónde van tus datos.
+Empieza por lo que declaran ellos mismos.
 
-- **17TRACK.** Su política de privacidad nombra a VASTAR SINGAPORE TECHNOLOGY PTE. LTD. como responsable para los usuarios registrados fuera de China continental y Hong Kong. Guarda los datos de las cuentas en servidores de Tencent Cloud en Cantón (China) y en Estados Unidos, y para los datos que salen del Espacio Económico Europeo se apoya en cláusulas contractuales tipo. Su ficha del App Store declara publicidad.
+- **17TRACK.** Su ficha del App Store declara publicidad. Para saber qué datos recoge y quién los trata, mira el apartado de privacidad de esa misma ficha y su política de privacidad.
 - **ParcelsApp.** Su app para iPhone dice que se financia con anuncios, y su web usa cookies publicitarias de Google AdSense y de Yandex. Su política de privacidad nombra un representante en la Unión Europea, con sede en Irlanda.
 - **AfterShip.** Declara publicidad en el App Store, y en Google Play indica que puede compartir con terceros «Actividad en la aplicación» e «Información y rendimiento de la aplicación».
 
@@ -155,9 +155,7 @@ Sí, y suele traer un enlace. Correos cuenta que pedir un pago o completar la di
 - [Parcel: Real-time notifications (en inglés)](https://parcel.app/help/real-time-notifications.html) – avisos pagados
 - [App Store: Parcel](https://apps.apple.com/es/app/id375589283) – versión gratis, precio
 - [Parcel: Privacy policy (en inglés)](https://parcelapp.net/privacy.html) – sin datos personales
-- [App Store: 17TRACK](https://apps.apple.com/es/app/id1004956012) – publicidad, suscripciones, idiomas
-- [17TRACK: USPS tracking (en inglés)](https://www.17track.net/en/uspsTracking) – límites de USPS
-- [17TRACK: Privacy Policy (en inglés)](https://www.17track.net/privacy-en.html) – responsable, servidores
+- [App Store: 17TRACK](https://apps.apple.com/es/app/id1004956012) – publicidad, suscripciones, idiomas, número de transportistas
 - [App Store: AfterShip](https://apps.apple.com/es/app/id507014023) – publicidad, notificaciones gratis
 - [Google Play: AfterShip](https://play.google.com/store/apps/details?id=com.aftership.AfterShip&hl=es&gl=ES) – datos compartidos
 - [AfterShip: Guest mode (en inglés)](https://support.aftership.com/en/tracking/articles/15441925-track-shipments-in-guest-mode) – tres envíos

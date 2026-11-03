@@ -52,7 +52,7 @@ Keine ist für alle die beste: Es hängt von deinen Paketdiensten ab und davon, 
 | Deine Daten | „App-Datenschutz“ im App Store, „Datensicherheit“ bei Google Play, die Datenschutzerklärung | Im App Store steht dazu: „Diese Informationen wurden von Apple nicht verifiziert.“ Jeder Tracker gibt deine Nummer weiter |
 | Wie lange Daten gespeichert bleiben | Die Datenschutzerklärung, bei Google Play „Datensicherheit“ | Lieferungen hebt weitergeleitete E-Mails bis zu zehn Tage auf. Bei Google Play steht für die Android-App von ParcelsApp „Daten können nicht gelöscht werden“ |
 | Händlerstatus | App Store in Deutschland und Österreich, unter „Anbieter“ | Hat sich der Entwickler nicht als Händler ausgewiesen, gelten laut App Store für Verbraucher im EWR die Verbraucherrechte nicht für Verträge mit ihm |
-| Deine Paketdienste | Die Liste der Paketdienste des Trackers | Die Zahlen nennen die Anbieter selbst: 17TRACK spricht im App Store von 2500+, auf seiner USPS-Seite von 2800+ |
+| Deine Paketdienste | Die Liste der Paketdienste des Trackers | Die Zahlen nennen die Anbieter selbst: 17TRACK spricht im App Store von 2500+ |
 
 ## Kostenlos oder mit Abo: Tracker im Vergleich
 
@@ -130,9 +130,9 @@ Alles, was der Paketdienst nicht veröffentlicht hat. ParcelsApp schreibt es off
 
 Handeln kann ein Tracker auch nicht für dich: Um eine Zustellung zu ändern, eine Gebühr zu bezahlen oder einen Verlust zu melden, schickt dich ParcelsApp auf die Website des Paketdienstes. Bewegt sich die Sendungsverfolgung seit Tagen nicht, lies nach, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating). Steht dort „Zugestellt“, aber bei dir ist nichts angekommen, hilft [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-## Ist 17TRACK oder ParcelsApp seriös?
+## Woran erkennst du, ob 17TRACK oder ParcelsApp seriös ist?
 
-Die Unterlagen der Anbieter verraten selbst, wer dahintersteht und wohin deine Daten gehen. Die Datenschutzerklärung von 17TRACK nennt für registrierte Nutzer außerhalb von Festlandchina und Hongkong die VASTAR SINGAPORE TECHNOLOGY PTE. LTD. als Verantwortliche. Kontodaten liegen auf Servern von Tencent Cloud in Guangzhou, China, und in den USA. Für Nutzer in der EU verweist 17TRACK auf die DSGVO: Verlassen ihre Daten den Europäischen Wirtschaftsraum, nutzt 17TRACK dafür Standardvertragsklauseln der EU-Kommission, oder das Zielland hat ein angemessenes Datenschutzniveau. Im deutschen App Store steht „Enthält Werbung“, und unter „Anbieter“ hat sich der Entwickler als Händler ausgewiesen.
+Erste Anhaltspunkte liefern die Angaben der Anbieter selbst. Bei 17TRACK steht im deutschen App Store „Enthält Werbung“, und unter „Anbieter“ hat sich der Entwickler als Händler ausgewiesen. Was die App erfasst und wer mit deinen Daten umgeht, prüfst du im „App-Datenschutz“ und in der Datenschutzerklärung.
 
 ParcelsApp hat laut Datenschutzerklärung einen EU-Vertreter nach Artikel 27 DSGVO mit Sitz in Irland bestellt. Auf der Website setzen Google und Yandex Cookies für Werbung, und die Android-App „wird durch Werbung unterstützt“. Auch der Anbieter von ParcelsApp hat sich im deutschen App Store als Händler ausgewiesen. Für jeden anderen Tracker hilft die Prüfliste oben.
 
@@ -166,8 +166,6 @@ Ja, und die Sendungsnummer darin beweist nichts. Die Schweizerische Post warnt: 
 - [Parcel: FAQ](https://parcelapp.net/help/faq/) – Verzögerung gegenüber den Paketdiensten
 - [Parcel: Real-time notifications](https://parcel.app/help/real-time-notifications.html) – bezahlte Echtzeit-Meldungen, GLS Deutschland
 - [App Store: 17TRACK](https://apps.apple.com/de/app/id1004956012) – Konto, Werbung, Mitgliedschaften, 2500+, Händler
-- [17TRACK: USPS tracking](https://www.17track.net/en/uspsTracking) – 2800+ Paketdienste
-- [17TRACK: Privacy Policy](https://www.17track.net/privacy-en.html) – Verantwortliche, Tencent Cloud, DSGVO, Standardvertragsklauseln
 - [App Store: Lieferungen (Deliveries)](https://apps.apple.com/de/app/id290986013) – Preise
 - [Junecloud: Subscriptions](https://junecloud.com/support/deliveries-ios/subscriptions.html) – Abo zum Start
 - [Junecloud: Privacy overview](https://junecloud.com/support/deliveries-ios/deliveries-privacy-overview.html) – freiwilliges Konto, E-Mails bis zu zehn Tage

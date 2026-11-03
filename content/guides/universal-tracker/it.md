@@ -51,7 +51,7 @@ Nessuna è la migliore per tutti: dipende dai tuoi corrieri e da cosa sei dispos
 | La tua casella di posta | «Collega Gmail o Outlook» oppure «inoltra un'e-mail» | Shop analizza le e-mail degli ultimi 30 giorni e poi continua a controllare |
 | I tuoi dati | La «Privacy dell'app» sull'App Store, la «Sicurezza dei dati» su Google Play, l'informativa privacy | Sull'App Store, Apple avverte che queste informazioni «non sono state verificate da Apple». E ogni tracker deve comunque passare il tuo codice al corriere |
 | Per quanto tiene i dati | L'informativa privacy | Deliveries conserva le e-mail inoltrate fino a dieci giorni; la scheda Android di ParcelsApp dice «I dati non possono essere eliminati» |
-| I tuoi corrieri | L'elenco dei corrieri | I numeri li dichiarano i tracker stessi: 17TRACK scrive «più di 2500 servizi» nella scheda italiana dell'App Store e «2800+» sulla sua pagina USPS |
+| I tuoi corrieri | L'elenco dei corrieri | I numeri li dichiarano i tracker stessi: 17TRACK scrive «più di 2500 servizi» nella scheda italiana dell'App Store |
 
 ## Gratis o a pagamento: i principali tracker a confronto
 
@@ -123,13 +123,13 @@ Tutto ciò che il corriere non ha pubblicato. ParcelsApp lo dice chiaramente: «
 - [DHL Paket](carrier:dhl), in Germania, scrive che una nuova spedizione può metterci fino a 24 ore per comparire anche nel suo tracking.
 - Parcel dice che la sua app arriva fino a 90 minuti dopo il sito del corriere, 45 in media.
 
-**I corrieri decidono chi può leggere i loro dati.** Negli Stati Uniti, dal 1° aprile 2026 USPS lega l'accesso ai dati di tracking al Mailer ID contenuto nel codice a barre, e gli altri servizi possono ottenerlo a pagamento; 17TRACK avverte che le ricerche USPS non verificate saranno rallentate, rese a pagamento o bloccate del tutto. In Svizzera, Deliveries mostra gli invii della Posta solo in una vista web, secondo la sua pagina dei servizi aggiornata a maggio 2023. Se un pacco USPS o della Posta svizzera mostra poco in un tracker, controlla sul sito del corriere.
+**I corrieri decidono chi può leggere i loro dati.** Negli Stati Uniti, dal 1° aprile 2026 USPS lega l'accesso ai dati di tracking al Mailer ID contenuto nel codice a barre, e gli altri servizi possono ottenerlo a pagamento. In Svizzera, Deliveries mostra gli invii della Posta solo in una vista web, secondo la sua pagina dei servizi aggiornata a maggio 2023. Se un pacco USPS o della Posta svizzera mostra poco in un tracker, controlla sul sito del corriere.
 
 Un tracker non può nemmeno agire al posto tuo: per cambiare la consegna, pagare un importo o segnalare un pacco mancante, ParcelsApp ti rimanda al sito ufficiale del corriere. Se il tracking è fermo da giorni, leggi [perché il tracking non si aggiorna](guide:tracking-not-updating). Se risulta consegnato e non trovi niente, vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
-## 17TRACK è affidabile?
+## Come capire se 17TRACK è affidabile?
 
-Per giudicarlo, parti dai suoi documenti: dicono chi lo gestisce e dove finiscono i tuoi dati. L'informativa privacy di 17TRACK indica VASTAR SINGAPORE TECHNOLOGY PTE. LTD. come responsabile del trattamento per gli utenti registrati fuori dalla Cina e da Hong Kong. I dati degli account sono conservati su server Tencent Cloud a Guangzhou, in Cina, e negli Stati Uniti; per i dati che lasciano lo Spazio economico europeo l'informativa cita le clausole contrattuali standard. Nella scheda italiana dell'App Store, alla voce «Età», 17TRACK dichiara che l'app contiene pubblicità.
+Parti da quello che dice di sé. Nella scheda italiana dell'App Store, alla voce «Età», 17TRACK dichiara che l'app contiene pubblicità. Per sapere quali dati raccoglie e chi li tratta, guarda la sezione «Privacy dell'app» e la sua informativa privacy.
 
 Lo stesso controllo vale per ParcelsApp o per qualsiasi altro tracker. L'informativa privacy di ParcelsApp nomina un rappresentante nell'UE con sede in Irlanda, e la sua app per iPhone dichiara di reggersi sulla pubblicità.
 
@@ -153,8 +153,6 @@ Sì, e [il punto pericoloso è proprio il link](guide:delivery-scam-texts). Post
 - [App Store Italia: Parcel](https://apps.apple.com/it/app/id375589283) – pubblicità, tre spedizioni, prezzo
 - [Parcel: informativa sulla privacy (in inglese)](https://parcelapp.net/privacy.html) – nessun dato personale richiesto
 - [App Store Italia: 17TRACK](https://apps.apple.com/it/app/id1004956012) – pubblicità, abbonamenti, numero di servizi
-- [17TRACK: tracking USPS (in inglese)](https://www.17track.net/en/uspsTracking) – limiti USPS, numero di corrieri
-- [17TRACK: informativa sulla privacy (in inglese)](https://www.17track.net/privacy-en.html) – responsabile del trattamento, server, clausole contrattuali standard
 - [App Store Italia: AfterShip](https://apps.apple.com/it/app/id507014023) – pubblicità, «Nessuna pubblicità» nella descrizione, notifiche
 - [AfterShip: modalità ospite (in inglese)](https://support.aftership.com/en/tracking/articles/15441925-track-shipments-in-guest-mode) – tre spedizioni
 - [App Store Italia: Deliveries](https://apps.apple.com/it/app/id290986013) – prezzi

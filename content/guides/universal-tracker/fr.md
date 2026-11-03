@@ -51,8 +51,8 @@ Aucune n'est la meilleure pour tout le monde : tout dépend de tes transporteurs
 | Ta boîte mail | « Connecter Gmail ou Outlook » ou « transférer un e-mail » | Shop parcourt tes e-mails des 30 derniers jours, puis continue de vérifier les nouveaux |
 | Tes données | « Confidentialité de l'app » sur l'App Store, « Sécurité des données » sur Google Play, la politique de confidentialité | Sur l'App Store, ces informations « n'ont pas été vérifiées par Apple ». Tout service de suivi transmet ton numéro à d'autres |
 | Durée de conservation | La politique de confidentialité | Deliveries garde les e-mails transférés jusqu'à dix jours ; Parcels affiche sur Google Play « Impossible de supprimer les données » |
-| Tes transporteurs | Sa liste de transporteurs | Cherche Colissimo, [Mondial Relay](carrier:mondial-relay), [Colis Privé](carrier:colis-prive), bpost ou La Poste suisse plutôt que le total : 17TRACK annonce plus de 2 500 transporteurs sur l'App Store, plus de 2 800 sur sa page USPS |
-| Langue | Les « Langues » de la fiche, puis l'app | La fiche de Route n'indique que l'anglais. Celle de 17TRACK aussi, mais sa description promet une « interface multilingue » et son site existe en français |
+| Tes transporteurs | Sa liste de transporteurs | Cherche Colissimo, [Mondial Relay](carrier:mondial-relay), [Colis Privé](carrier:colis-prive), bpost ou La Poste suisse plutôt que le total : 17TRACK annonce plus de 2 500 transporteurs sur l'App Store |
+| Langue | Les « Langues » de la fiche, puis l'app | La fiche de Route n'indique que l'anglais. Celle de 17TRACK aussi, mais sa description promet une « interface multilingue » |
 
 ## Gratuit ou payant : les principaux services comparés
 
@@ -126,13 +126,13 @@ Tout ce que le transporteur n'a pas publié. ParcelsApp le dit sans détour : il
 
 Le vrai « temps réel » vient du transporteur : dans de plus en plus de régions, La Poste suisse donne aux clients de « Mes envois » une plage horaire de 40 à 90 minutes, puis le trajet du colis en direct pendant les dernières minutes. Le cadre de suivi de [Quickpac](carrier:quickpac) propose parfois une « Livraison en direct de l'envoi ».
 
-**Les transporteurs peuvent aussi fermer la porte.** Depuis le 1er avril 2026, la poste américaine (USPS) fait payer l'accès à ses données de suivi aux services qui n'expédient pas le colis, et 17TRACK prévient que les recherches USPS non vérifiées seront ralenties, facturées ou bloquées. L'app Deliveries, elle, n'affiche plus La Poste suisse que dans une vue web. Si un numéro n'affiche presque rien, va voir directement sur le site du transporteur.
+**Les transporteurs peuvent aussi fermer la porte.** Depuis le 1er avril 2026, la poste américaine (USPS) fait payer l'accès à ses données de suivi aux services qui n'expédient pas le colis. L'app Deliveries, elle, n'affiche plus La Poste suisse que dans une vue web. Si un numéro n'affiche presque rien, va voir directement sur le site du transporteur.
 
 Un service de suivi n'agit pas non plus à ta place : pour modifier une livraison, payer une somme ou signaler un colis manquant, ParcelsApp te renvoie vers le site officiel du transporteur. Si rien n'a bougé depuis des jours, lis [pourquoi le suivi ne bouge plus](guide:tracking-not-updating). S'il indique « livré » et que tu n'as rien, regarde [colis livré mais pas reçu](guide:delivered-not-received).
 
-## 17TRACK et ParcelsApp sont-ils fiables ?
+## Comment savoir si 17TRACK ou ParcelsApp est fiable ?
 
-Leurs propres documents disent qui les gère et où vont tes données. La politique de confidentialité de 17TRACK désigne VASTAR SINGAPORE TECHNOLOGY PTE. LTD. comme responsable du traitement pour les utilisateurs inscrits hors de Chine continentale et de Hong Kong. Les données de compte sont stockées chez Tencent Cloud à Canton (Guangzhou), en Chine, et aux États-Unis ; pour les utilisateurs de l'Union européenne, la politique prévoit des clauses contractuelles types approuvées par la Commission européenne. Sur l'App Store, sa fiche indique que l'app contient de la publicité.
+Regarde d'abord ce que disent leurs fiches et leurs propres documents. Sur l'App Store, la fiche de 17TRACK indique que l'app contient de la publicité. Pour savoir ce que l'app collecte et qui traite tes données, lis sa rubrique « Confidentialité de l'app » et sa politique de confidentialité.
 
 ParcelsApp affiche aussi de la pub : son app iPhone se dit financée par la publicité, et Google et Yandex placent des cookies publicitaires sur son site. Sa politique de confidentialité nomme un représentant dans l'Union européenne, en Irlande.
 
@@ -168,11 +168,8 @@ Pour signaler un faux message en France, transfère le SMS au 33700. En Belgique
 - [Parcel : Real-time notifications (en anglais)](https://parcel.app/help/real-time-notifications.html) – mises à jour payées
 - [App Store : Parcel](https://apps.apple.com/fr/app/id375589283) – publicité, 3 colis, prix
 - [Parcel : Privacy policy (en anglais)](https://parcelapp.net/privacy.html) – aucune donnée personnelle exigée
-- [App Store : 17TRACK](https://apps.apple.com/fr/app/id1004956012) – compte, publicité, abonnements, langue
-- [17TRACK : site en français](https://www.17track.net/fr) – langue
+- [App Store : 17TRACK](https://apps.apple.com/fr/app/id1004956012) – compte, publicité, abonnements, langue, nombre de transporteurs
 - [App Store : Route](https://apps.apple.com/fr/app/id1449803898) – anglais seulement
-- [17TRACK : USPS (en anglais)](https://www.17track.net/en/uspsTracking) – limites, transporteurs
-- [17TRACK : Privacy Policy (en anglais)](https://www.17track.net/privacy-en.html) – responsable, stockage
 - [App Store : AfterShip](https://apps.apple.com/fr/app/id507014023) – publicité déclarée, description, push
 - [AfterShip : Guest mode (en anglais)](https://support.aftership.com/en/tracking/articles/15441925-track-shipments-in-guest-mode) – trois envois
 - [App Store : Livraisons (Deliveries)](https://apps.apple.com/fr/app/id290986013) – prix

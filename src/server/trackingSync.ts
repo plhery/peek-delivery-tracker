@@ -133,6 +133,8 @@ const IDLE_AFTER_MS = 48 * 60 * 60 * 1_000;
  */
 const EARLY_IDLE_AFTER_MS = 12 * 60 * 60 * 1_000;
 const NOT_YET_MOVING = new Set(['registered', 'accepted']);
+/** The stages a delivery date is shown at: a parcel on its way, not one held, at a pickup point or done. */
+const ON_THE_WAY: ReadonlySet<string> = new Set(['registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery']);
 /** A lookup without an account that nobody watches is checked this often. */
 const UNWATCHED_ONE_OFF_HOURS = 3;
 /**
@@ -2346,6 +2348,18 @@ export class TrackingSyncService {
           if (values.current_stage !== selectedStage && cameAfter
             && !partnerStartsLeg(parcel, carrierData, sourceCarrierId, selectedStage, String(values.current_stage), rows)) {
             anomalies = [...anomalies, 'early_stage_regression'];
+          }
+        }
+        // A provider's answer without a date, given while the parcel's own carrier did not answer, says nothing of the
+        // date the carrier gave: it stays, as the scraper keeps the carrier's date beside a provider's scans in one
+        // check. It goes with a changed or handed-over carrier, and once the parcel is no longer on its way.
+        if (!result.expected_delivery && typeof result.tracking_provider === 'string' && result.carrier_answered !== true
+          && !ownAnswer && directCarrier(filed) && !fetched.correction && !result.original_carrier && !previousData.original_carrier
+          && typeof parcel.expected_delivery === 'string' && parcel.expected_delivery
+          && ON_THE_WAY.has(String(values.current_stage ?? previousStage))) {
+          values.expected_delivery = parcel.expected_delivery;
+          if (typeof previousData.expected_delivery_from === 'string' && carrierData.expected_delivery_from == null) {
+            carrierData.expected_delivery_from = previousData.expected_delivery_from;
           }
         }
         // A delivery only a provider reported, which the parcel's own carrier did not show, is

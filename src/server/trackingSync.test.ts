@@ -1512,6 +1512,62 @@ describe('TrackingSyncService', () => {
     });
   });
 
+  describe('a carrier\'s delivery date', () => {
+    // A DHL parcel whose carrier goes down while a provider keeps answering; the number, wording and clocks are invented.
+    const scans = [
+      { time: '2026-10-26T18:00:00Z', description: 'Departed facility', stage: 'in_transit' },
+      { time: '2026-10-26T10:00:00Z', description: 'Picked up', stage: 'accepted' }];
+    const answer = (status: CarrierResult['status'], dates: { expected_delivery?: string; expected_delivery_from?: string },
+      ...newer: Array<{ time: string; description: string; stage: string }>): CarrierResult => {
+      const events = [...newer, ...scans];
+      return { status, current_stage: events[0]!.stage, last_status_text: events[0]!.description, last_update: events[0]!.time, events, ...dates };
+    };
+    const parcel = () => {
+      vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: ['ParcelsApp'], carrier: null, tier: () => 'unknown', rank: () => 0 });
+      const store = eventStore();
+      const client = Object.assign(store.client, {
+        acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+        finishTrackingProvider: vi.fn().mockResolvedValue(undefined) });
+      let saved: JsonObject = { id: 'dated-by-carrier', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'pending',
+        created_at: '2026-10-26T09:00:00Z' };
+      return async (at: string, carrier: CarrierResult | Error, provider?: CarrierResult) => {
+        const adapter = { fetch: carrier instanceof Error ? vi.fn().mockRejectedValue(carrier) : vi.fn().mockResolvedValue(carrier),
+          fetchUniversal: provider ? vi.fn().mockResolvedValue(provider) : vi.fn().mockRejectedValue(new Error('not asked')) };
+        await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
+          .syncPackage({ ...saved, [STORED_EVENT_IDENTITIES]: store.identities() });
+        saved = { ...saved, ...client.applyTrackingSync.mock.calls.at(-1)![1] };
+        return saved;
+      };
+    };
+    const dated = { expected_delivery: '2026-10-29', expected_delivery_from: '2026-10-28' };
+    const hub = { time: '2026-10-27T05:37:00Z', description: 'Arrived at facility', stage: 'in_transit' };
+    const onVehicle = { time: '2026-10-27T11:52:00Z', description: 'With delivery courier', stage: 'out_for_delivery' };
+
+    it('stays while a provider without one answers for the carrier, and goes when the carrier gives none', async () => {
+      const check = parcel();
+      expect(await check('2026-10-26T20:00:00Z', answer('in_transit', dated))).toMatchObject({ expected_delivery: '2026-10-29' });
+      const relayed = await check('2026-10-27T07:00:00Z', new Error('down'), answer('in_transit', {}, hub));
+      expect(relayed).toMatchObject({ current_stage: 'in_transit', expected_delivery: '2026-10-29',
+        carrier_data: { tracking_provider: 'ParcelsApp', expected_delivery_from: '2026-10-28' } });
+      const again = await check('2026-10-27T13:00:00Z', new Error('down'), answer('out_for_delivery', {}, onVehicle, hub));
+      expect(again).toMatchObject({ current_stage: 'out_for_delivery', expected_delivery: '2026-10-29',
+        carrier_data: { expected_delivery_from: '2026-10-28' } });
+      const own = await check('2026-10-27T16:00:00Z', answer('out_for_delivery', {}, onVehicle, hub));
+      expect(own.expected_delivery).toBeNull();
+      expect(own.carrier_data).not.toHaveProperty('expected_delivery_from');
+    });
+
+    it('goes once a provider shows the parcel delivered or held', async () => {
+      for (const [status, stage, description] of [['delivered', 'delivered', 'Delivered'], ['exception', 'exception', 'Delivery exception']] as const) {
+        const check = parcel();
+        await check('2026-10-26T20:00:00Z', answer('in_transit', dated));
+        const done = await check('2026-10-27T15:00:00Z', new Error('down'),
+          answer(status, {}, { time: '2026-10-27T14:00:00Z', description, stage }, hub));
+        expect(done).toMatchObject({ current_stage: stage, expected_delivery: null });
+      }
+    });
+  });
+
   describe('a return after the delivery', () => {
     // A Poste Italiane parcel left at a pickup point and sent back; the number, wording and clocks are invented.
     const delivery = [

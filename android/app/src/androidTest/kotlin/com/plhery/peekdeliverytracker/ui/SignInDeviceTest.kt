@@ -97,10 +97,10 @@ class SignInDeviceTest {
     /** The keyboard's slides and the app's readings of it, in the order they came, for a failure's message. */
     private val events = ConcurrentLinkedQueue<String>()
 
-    /** When the keyboard last slid or the app last read a new height for it, in uptime milliseconds. */
+    /** When the keyboard last slid, the app last read a new height for it or a field began to type, in uptime milliseconds. */
     @Volatile private var lastChange = 0L
 
-    /** A slide or a new reading, which [still] waits to settle. */
+    /** A slide, a new reading or a field that began to type, which [still] waits to settle. */
     private fun note(what: String) {
         lastChange = SystemClock.uptimeMillis()
         mark(what)
@@ -238,6 +238,8 @@ class SignInDeviceTest {
      * No keyboard slide playing, the app's layout with the keyboard where the window has it, and neither changed for
      * [QUIET_MILLIS]: the system can hand the app the keyboard's whole height at once and start its slide from nothing
      * a moment later (the code step's keyboard, on a large window), which a check in between would take for the end.
+     * A field that begins to type counts as a change too: its keyboard's slide starts a few frames later, which a check
+     * at once would miss, as where a hardware keyboard is open and the on-screen one comes anyway.
      */
     private fun still() = onUi { keyboardSlides.playing == 0 } && appKeyboard == windowKeyboard() &&
         SystemClock.uptimeMillis() - lastChange >= QUIET_MILLIS
@@ -252,7 +254,7 @@ class SignInDeviceTest {
     private fun assertTypingIn(tag: String) {
         compose.onNodeWithTag(tag).assertIsFocused()
         compose.waitUntil(5_000) { acceptingText() }
-        mark("typing")
+        note("typing")
         val keyboard = showsAKeyboard()
         if (keyboard) runCatching { compose.waitUntil(KEYBOARD_COMES_MILLIS) { keyboardShown() } }.onSuccess { mark("shown") }
         runCatching {

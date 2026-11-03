@@ -27,7 +27,7 @@ Yanwens Seite nimmt bis zu 100 Nummern auf einmal. Selbst abfragen lassen sich a
 
 ## Yanwen Sendungsverfolgung: was die Status bedeuten
 
-Eine deutsche Version hat Yanwens Tracking-Seite nicht: Es gibt sie nur auf Englisch und Chinesisch, und die Scans sind in beiden Fassungen englisch. Die Zeilen, die du am häufigsten siehst, in der Reihenfolge, in der ein Paket sie erreicht:
+Eine deutsche Version hat Yanwens Tracking-Seite nicht: Es gibt sie nur auf Englisch und Chinesisch, und Yanwens eigene Scans sind in beiden Fassungen englisch. Die Zeilen, die du am häufigsten siehst, in der Reihenfolge, in der ein Paket sie erreicht:
 
 | Yanwen schreibt | Was es für dich heißt |
 | --- | --- |
@@ -46,6 +46,8 @@ Eine deutsche Version hat Yanwens Tracking-Seite nicht: Es gibt sie nur auf Engl
 | `Delivered.` | Zugestellt, ebenfalls in den Worten eines Paketdiensts vor Ort. |
 
 `Order Submited.` (so geschrieben), `Waybill Generated` und `Shipping Order Created.` heißen dasselbe wie die erste Zeile: Es gibt nur das Etikett, das Paket ist vielleicht noch beim Händler. `Pick up by local carrier at destination port` heißt dasselbe wie `Batch delivery to carrier`. Danach stammen die Zeilen vom Paketdienst vor Ort, manchmal mit einem Länderkürzel davor oder einem Depotnamen in Klammern. `<wrong address>` ist ebenfalls ein gescheiterter Zustellversuch, diesmal wegen der Adresse.
+
+Manche Pakete übergibt Yanwen nach `Yanwen facility - Outbound` an China Post. Dann zeigt Yanwen die Scans von China Post auf Chinesisch, erklärt auf der Seite zu [China Post](carrier:china-post); `中国邮政已收取邮件` ist diese Übergabe. `【…】退回，备注:安检退回` heißt, dass ein Sortierzentrum das Paket bei seiner Sicherheitskontrolle zurückgeschickt hat und sich darum kümmert, bevor es weitergeht: Es geht nicht an den Händler zurück. Peek zeigt dafür „Problem gemeldet“.
 
 Über den Scans ordnet Yanwen jedes Paket einer Kategorie zu. `Info_Received` ist die Etikettphase. `In_Transportation` umfasst alles vom Flug über den Zoll bis zur Strecke vor Ort. `End_of_Tracking` heißt, dass Yanwen das Paket nicht mehr verfolgt: Über seinen Verbleib sagt das nichts, es ist weder eine Zustellung noch ein Verlust. `Not_Found` mit der Zeile `No information was found` heißt, dass Yanwen zu dieser Nummer nichts hat. Bei zugestellten Paketen steht die Dauer dabei, etwa „Delivered（7d）“.
 
@@ -105,7 +107,7 @@ Yanwen nennt Empfängern keine Lieferzeiten, also halte dich an die Schätzung, 
 
 ### Gibt es die Yanwen Sendungsverfolgung auf Deutsch?
 
-Nein. Yanwens Tracking-Seite gibt es nur auf Englisch und Chinesisch, und die Scans sind immer englisch; die Tabelle oben übersetzt die häufigsten.
+Nein. Yanwens Tracking-Seite gibt es nur auf Englisch und Chinesisch, und Yanwens eigene Scans sind immer englisch; die Tabelle oben übersetzt die häufigsten.
 
 :::sources
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – Tracking-Seite, Sprachen, Spalten, Kategorien, Hinweiskasten, Zustellnachweis, Zeitzonen, Hotline

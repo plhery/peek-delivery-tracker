@@ -48,7 +48,7 @@ ECMS's tracker first asks you to pass a picture check ("Security verification").
 
 **In Chinese.** Some histories give these steps in Chinese, and Peek gives them the same stage as their English twins: `发货预报已收到，正在等待货物到达我们的始发站仓库` (details received, waiting for the parcel), `干线航班起飞` and `干线航班已到达` (flight left, landed), `货物已进入清关流程` (in customs), `货物已清关放行` (cleared), `货物已到达目的站仓库` (at the destination warehouse) and `货物出库前往配送中心安排最终派送` (on its way to the local carrier).
 
-**Times.** ECMS gives its own scans the clock and UTC offset of the station that made them, and Peek reads them that way. The local carrier's scans, as ECMS relays them, carry an offset of zero: their times are in UTC, and Peek reads them so. See also [tracking a parcel from China](guide:tracking-from-china).
+**Times.** ECMS gives its own scans the clock and UTC offset of the station that made them, and Peek reads them that way. The local carrier's scans, as ECMS relays them, carry an offset of zero: their times are in UTC, and Peek reads them so. A line stamped at midnight sharp, as a flight line giving only the flight's day can be, shows in Peek as that day, without a time. See also [tracking a parcel from China](guide:tracking-from-china).
 
 ## Who delivers ECMS Express parcels
 

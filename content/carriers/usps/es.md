@@ -38,7 +38,7 @@ Aquí van los estados en inglés, tal como los escribe USPS en usps.com: primero
 | `Arrived at Post Office` | Ya está en tu oficina de correos, preparándose para el reparto: llega hoy o el siguiente día hábil postal. |
 | `Out for Delivery` | Te lo llevan hoy. Puede traerlo otro cartero, no el de siempre, y a otra hora que tu correo. |
 | `Delivered` | Entregado, con fecha, hora y lugar registrados. |
-| `Delivery Status Not Updated` | A las 9 de la noche (hora local) del día de reparto no constaba la entrega. USPS lo espera para el siguiente día hábil. |
+| `Delivery Status Not Updated`, `Awaiting Delivery` | A las 9 de la noche (hora local) del día de reparto no constaba la entrega. USPS lo espera para el siguiente día hábil. |
 | `No Access to Delivery Location` | El cartero no pudo llegar a tu buzón o tu puerta (un vehículo delante, un perro suelto, un portal cerrado). USPS vuelve a intentarlo automáticamente el siguiente día hábil. |
 | `Notice Left (No Authorized Recipient Available)` | Hacía falta una firma y no había nadie. Te dejaron un aviso PS Form 3849 y no habrá segundo intento automático. |
 | `Notice Left (No Secure Location Available)` | El cartero no vio un sitio seguro y se lo llevó a la oficina. Tampoco hay segundo intento automático. |

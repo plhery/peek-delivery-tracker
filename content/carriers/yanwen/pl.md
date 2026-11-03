@@ -28,7 +28,7 @@ Strona Yanwen przyjmuje do 100 numerów naraz, ale samodzielnie sprawdzisz tylko
 
 ## Yanwen śledzenie: co znaczą statusy
 
-Strona śledzenia Yanwen ma tylko wersję angielską i chińską, a linie skanów są po angielsku w obu. Polskiej wersji nie ma. Najczęstsze linie, w kolejności, w jakiej spotyka je paczka do Polski:
+Strona śledzenia Yanwen ma tylko wersję angielską i chińską, a własne linie skanów Yanwen są po angielsku w obu. Polskiej wersji nie ma. Najczęstsze linie, w kolejności, w jakiej spotyka je paczka do Polski:
 
 | Yanwen pisze | Co to znaczy dla Ciebie |
 | --- | --- |
@@ -46,6 +46,8 @@ Strona śledzenia Yanwen ma tylko wersję angielską i chińską, a linie skanó
 | `Parcel delivered` | Linia od DPD: paczka doręczona. |
 
 `Order Submited.` (pisownia Yanwen), `Waybill Generated` i `Shipping Order Created.` znaczą to samo co pierwszy wiersz: istnieje tylko etykieta, a paczka mogła jeszcze nie opuścić sprzedawcy. `Pick up by local carrier at destination port` znaczy to samo co `Batch delivery to carrier`. Mylić może `Registered parcel data, parcel not dispatched yet`: to linia od DPD Polska: DPD ma już dane paczki, ale jeszcze nie samą paczkę. Nie znaczy to, że utknęła w Polsce. Później przychodzą linie DPD, na przykład `SMS notification` albo `Mail notification`, gdy DPD wysyła Ci wiadomość.
+
+Niektóre paczki Yanwen przekazuje po `Yanwen facility - Outbound` do China Post. Pokazuje wtedy skany China Post po chińsku, objaśnione na stronie [China Post](carrier:china-post); `中国邮政已收取邮件` to właśnie to przekazanie. `【…】退回，备注:安检退回` znaczy, że kontrola bezpieczeństwa centrum sortowania odrzuciła paczkę, a centrum załatwia sprawę przed dalszą wysyłką: paczka nie wraca do sprzedawcy. Peek pokazuje to jako „Zgłoszono problem”.
 
 Nad skanami Yanwen przypisuje paczkę do kategorii. `Info_Received` to etap etykiety. `In_Transportation` obejmuje wszystko od lotu przez cło po odcinek lokalny. `End_of_Tracking` znaczy, że Yanwen przestał śledzić paczkę: nic nie mówi o tym, gdzie ona jest, i nie oznacza ani doręczenia, ani zgubienia. `Not_Found` z linią `No information was found` znaczy, że Yanwen nie ma nic pod tym numerem. Przy doręczonej paczce wiersz pokazuje liczbę dni w drodze, na przykład „Delivered（7d）”. Ogólne etapy drogi paczki opisuje [poradnik o śledzeniu paczki z Chin](guide:tracking-from-china).
 

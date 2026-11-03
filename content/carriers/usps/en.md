@@ -38,7 +38,7 @@ USPS writes its tracking in English. These are the steps a parcel usually shows,
 | `Arrived at Post Office` | At your Post Office, being prepared for delivery: today or the next postal business day. |
 | `Out for Delivery` | A carrier will bring it today, maybe not your usual one and maybe later than your mail. |
 | `Delivered` | Delivered, with a recorded date, time and place. |
-| `Delivery Status Not Updated` | No delivery scan by 9 p.m. local time on the out-for-delivery day; USPS now expects it the next business day. |
+| `Delivery Status Not Updated`, `Awaiting Delivery` | No delivery scan by 9 p.m. local time on the out-for-delivery day; USPS now expects it the next business day. |
 | `No Access to Delivery Location` | The carrier couldn't reach your mailbox or door. USPS tries again automatically the next business day. |
 | `Notice Left (No Authorized Recipient Available)` | A signature was needed and no one was in. A notice was left; there's no automatic second attempt. |
 | `Available for Pickup` | It can't be delivered: pick it up at your Post Office from the next business day. |

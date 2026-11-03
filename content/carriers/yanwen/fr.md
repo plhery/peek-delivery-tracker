@@ -27,7 +27,7 @@ Le site de Yanwen accepte jusqu'à 100 numéros à la fois, mais son suivi en li
 
 ## Suivi colis Yanwen : ce que veulent dire les statuts
 
-Le site de suivi de Yanwen n'existe qu'en anglais et en chinois, et les lignes de suivi sont en anglais dans les deux versions. Pas de version française : voici les lignes qu'on voit le plus, dans l'ordre où un colis les rencontre.
+Le site de suivi de Yanwen n'existe qu'en anglais et en chinois, et les lignes de suivi propres à Yanwen sont en anglais dans les deux versions. Pas de version française : voici les lignes qu'on voit le plus, dans l'ordre où un colis les rencontre.
 
 | Ce qu'affiche Yanwen | Ce que ça veut dire pour toi |
 | --- | --- |
@@ -44,6 +44,8 @@ Le site de suivi de Yanwen n'existe qu'en anglais et en chinois, et les lignes d
 | `Delivered` | Le colis est livré ; Yanwen ajoute le nombre de jours de trajet. |
 
 `Order Submited.`, `Waybill Generated` et `Shipping Order Created.` veulent dire la même chose que la première ligne : seule l'étiquette existe, et le colis n'a peut-être pas quitté le vendeur. `Pick up by local carrier at destination port` équivaut à `Batch delivery to carrier`. Ensuite, les lignes sont celles du transporteur local, parfois précédées d'un code pays ou du nom d'un dépôt entre crochets.
+
+Certains colis passent à China Post après `Yanwen facility - Outbound`. Yanwen affiche alors les lignes de China Post en chinois, expliquées sur la page [China Post](carrier:china-post) ; `中国邮政已收取邮件` est cette remise. `【…】退回，备注:安检退回` veut dire que le contrôle de sécurité d'un centre de tri a refusé le colis, et que le centre règle le problème avant de le réexpédier : il ne repart pas chez le vendeur. Peek l'affiche comme « Problème signalé ».
 
 Au-dessus des scans, Yanwen range chaque colis dans une catégorie. `Info_Received`, c'est l'étape de l'étiquette. `In_Transportation` couvre tout, du vol à la douane et à la livraison locale. `End_of_Tracking` veut dire que Yanwen a arrêté de suivre le colis : ça ne dit rien de l'endroit où il est, ce n'est ni une livraison ni une perte. `Not_Found`, avec la ligne `No information was found`, veut dire que Yanwen n'a rien sous ce numéro. Un colis livré affiche la durée du trajet, par exemple « Delivered（7d） ».
 
@@ -85,7 +87,7 @@ Yanwen ne publie aucun contact pour la France, la Belgique ou la Suisse. Pour la
 
 Il affiche le statut, l'historique avec la ville ou la région de chaque scan sur une carte, l'heure de livraison, le pays de destination et le transporteur local avec son numéro (« Livraison par » ce transporteur). Quand Yanwen nomme un transporteur local que Peek connaît et que le numéro lui correspond, il l'interroge et bascule sur lui dès qu'il montre une étape plus récente ; pour un numéro YP, il peut aussi suivre la poste du pays de destination. Yanwen ne donne pas de date de livraison prévue ni de point de retrait, et Peek écarte références de commande, contacts, codes postaux, codes PIN de livraison et numéros de porte.
 
-Les heures sont lues avec le décalage GMT de Yanwen et affichées dans le fuseau horaire de ton appareil ; les scans répétés sont supprimés. Peek affiche `Delivered` et `Out for delivery` avec ses propres mots, en français ; les autres lignes restent en anglais, telles qu'écrites. Il vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni Yanwen ni la boutique à ta place.
+Les heures sont lues avec le décalage GMT de Yanwen et affichées dans le fuseau horaire de ton appareil ; les scans répétés sont supprimés. Peek affiche `Delivered` et `Out for delivery` avec ses propres mots, en français ; les autres lignes restent telles qu'écrites. Il vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni Yanwen ni la boutique à ta place.
 
 ## Questions sur le suivi Yanwen
 

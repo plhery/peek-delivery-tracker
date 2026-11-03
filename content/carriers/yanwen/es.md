@@ -27,7 +27,7 @@ La web acepta hasta 100 números a la vez, pero el seguimiento por tu cuenta sol
 
 ## Estados de Yanwen: qué significa cada uno
 
-La web de seguimiento de Yanwen solo está en inglés y en chino, y los escaneos salen en inglés en las dos versiones: no hay versión en español. Los que más se ven, en el orden en que los encuentra un paquete:
+La web de seguimiento de Yanwen solo está en inglés y en chino, y los escaneos propios de Yanwen salen en inglés en las dos versiones: no hay versión en español. Los que más se ven, en el orden en que los encuentra un paquete:
 
 | Yanwen escribe | Qué significa para ti |
 | --- | --- |
@@ -44,6 +44,8 @@ La web de seguimiento de Yanwen solo está en inglés y en chino, y los escaneos
 | `Delivery to last mile operator` | Lo mismo: ahora lo tiene la empresa del último tramo. |
 
 `Order Submited.` (la errata es de Yanwen), `Waybill Generated` y `Shipping Order Created.` significan lo mismo que la primera fila: solo existe la etiqueta y puede que el paquete no haya salido del vendedor. `Pick up by local carrier at destination port` equivale a `Batch delivery to carrier`. Ojo con la palabra «delivery» en estas líneas: es la entrega al transportista local, no a ti. A partir de ahí, las líneas son las de la empresa local, a veces con un prefijo de país o el nombre de un almacén entre corchetes.
+
+Algunos paquetes pasan a China Post después de `Yanwen facility - Outbound`. Yanwen muestra entonces los escaneos de China Post en chino, explicados en la página de [China Post](carrier:china-post); `中国邮政已收取邮件` es ese traspaso. `【…】退回，备注:安检退回` significa que el control de seguridad de un centro de clasificación lo rechazó, y el centro lo resuelve antes de volver a enviarlo: no vuelve al vendedor. Peek lo muestra como «Incidencia».
 
 Encima de los escaneos, Yanwen clasifica cada paquete en una categoría. `Info_Received` es la fase de etiqueta. `In_Transportation` lo abarca todo, del vuelo a la aduana y al tramo local. `Out_For_Delivery` es que va en reparto y `Delivered`, entregado; en ese caso la fila muestra los días que tardó, por ejemplo «Delivered（7d）». `End_of_Tracking` quiere decir que Yanwen dejó de seguir el paquete: no dice dónde está y no es ni una entrega ni una pérdida. `Not_Found`, con la línea `No information was found`, significa que Yanwen no tiene nada con ese número.
 

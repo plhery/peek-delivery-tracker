@@ -24,11 +24,13 @@ Spaces and lower case don't matter when you paste a number into Peek. Can't find
 
 J&T's tracker lists a parcel's scans newest first. Each scan has a short heading with a sentence under it, a time, and the town and province of the J&T branch that scanned it. The tracker can also name the courier, give contact details and show proof of delivery.
 
-`Order creation` means the sender, often the shop, has created the order, and J&T hasn't collected the parcel yet. Peek's code knows that heading by name. It reads J&T's other headings by their words to place the parcel in one of its own steps:
+`Order creation` means the sender, often the shop, has created the order, and J&T hasn't collected the parcel yet. Peek's code knows that heading by name, as it does `Picked-up`, `Customs Declaration`, `Customs Clearance` and `In transit`. It reads J&T's other headings by their words to place the parcel in one of its own steps:
 
 | Peek shows | What it means for a J&T parcel |
 | --- | --- |
 | "Label created" | J&T's `Order creation`: the order exists, but J&T doesn't have the parcel yet. |
+| "At customs" | J&T's `Customs Declaration`, then `Customs Clearance`: a parcel from abroad is being cleared at the J&T branch it came in by. |
+| "Received by carrier" | J&T's `Picked-up`: J&T has collected the parcel. For a parcel from abroad, this comes after customs. |
 | "In transit" | J&T has the parcel and is moving it between its branches. Scans name the branch's town and province. |
 | "Out for delivery" | A J&T driver has it for delivery. Keep your phone on: J&T tries to reach recipients by phone, email or SMS. |
 | "Delivery attempted" | The driver couldn't deliver. J&T makes up to three attempts. |
@@ -92,7 +94,7 @@ Paste the `JTE` number in [Peek](/): it names J&T Express Middle East at once ("
 
 Peek asks J&T's own tracker, through the same lookup its tracking page makes, in English. It shows each scan's heading, its exact time and the branch's town and province, and on a very long history it keeps the newest 100 scans. It leaves out the sentence under each heading, the courier's name and contact details and the proof of delivery. J&T gives no expected delivery day or weight, so Peek shows none. Until J&T lists a scan, the parcel reads "Waiting for the carrier" and Peek keeps asking. When J&T's tracker asks for a captcha, Peek doesn't solve it: it tries J&T again later and asks other tracking services in the meantime.
 
-Peek checks J&T about every 10 minutes while you follow the parcel, or every 2 minutes once it's out for delivery. After two days without a new scan (12 hours while it shows "Label created"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact J&T or the shop for you.
+Peek checks J&T about every 10 minutes while you follow the parcel, or every 2 minutes once it's out for delivery. After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact J&T or the shop for you.
 
 ## Questions about J&T Express tracking in the Middle East
 

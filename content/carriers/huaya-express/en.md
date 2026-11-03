@@ -26,12 +26,12 @@ Peek reads the number with or without spaces, in capitals or not.
 
 ## Huaya Express tracking statuses explained
 
-Huaya's tracker has a Chinese and an English version, and the scan lines Peek knows from it are in English. In the order a parcel gets them:
+Huaya's tracker has a Chinese and an English version. The scan lines Peek knows from it are in English, except the warehouse receipt, which can come in Chinese. In the order a parcel gets them:
 
 | Huaya says | What it means for you |
 | --- | --- |
 | `Shipping Label Created` | The label of the carrier that will deliver it in your country exists: order data only, Huaya doesn't have the parcel yet. |
-| `Package received & scanned at warehouse` | Huaya has the parcel at its Guangzhou warehouse: the first scan in its hands. |
+| `Package received & scanned at warehouse`, `到达收货点` | Huaya has the parcel at its Guangzhou warehouse: the first scan in its hands. The Chinese line says it arrived at the receiving point. |
 | `Package departed from the warehouse` | It has left that warehouse. |
 | `Customs export clearance completed` | China has cleared it for export. Your country's import check comes later. |
 | `Package handed over to airline` | Handed to the airline for the international leg. |

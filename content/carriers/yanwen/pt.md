@@ -28,7 +28,7 @@ O site da Yanwen aceita até 100 números de uma vez, mas a pesquisa por conta p
 
 ## Estados Yanwen: o que quer dizer cada um
 
-O site de seguimento da Yanwen só existe em inglês e em chinês, e as linhas de cada leitura aparecem em inglês nas duas versões: não há versão em português. As que vês mais, pela ordem em que a encomenda as encontra:
+O site de seguimento da Yanwen só existe em inglês e em chinês, e as linhas das leituras da própria Yanwen aparecem em inglês nas duas versões: não há versão em português. As que vês mais, pela ordem em que a encomenda as encontra:
 
 | A Yanwen escreve | O que quer dizer para ti |
 | --- | --- |
@@ -46,6 +46,8 @@ O site de seguimento da Yanwen só existe em inglês e em chinês, e as linhas d
 | `Your shipment has been delivered successfully` | Entregue. |
 
 `Order Submited.` (com o erro de ortografia da Yanwen), `Waybill Generated` e `Shipping Order Created.` querem dizer o mesmo que a primeira linha: só existe a etiqueta, e a encomenda pode ainda nem ter saído do vendedor. `Pick up by local carrier at destination port` quer dizer o mesmo que `Batch delivery to carrier`. Daí em diante, as linhas são da transportadora local, também em inglês: nas encomendas para Portugal, `Shipment order created` é o registo dela, e `Your shipment has been accepted by delivery carrier` quer dizer que já recebeu a encomenda, ainda não que a entregou.
+
+Algumas encomendas passam para os Correios da China depois de `Yanwen facility - Outbound`. A Yanwen mostra então as leituras dos Correios da China em chinês, explicadas na página dos [Correios da China](carrier:china-post); `中国邮政已收取邮件` é essa passagem. `【…】退回，备注:安检退回` quer dizer que o controlo de segurança de um centro de triagem recusou a encomenda, e o centro resolve o problema antes de a reenviar: não volta para o vendedor. O Peek mostra-a como «Problema reportado».
 
 Por cima das leituras, a Yanwen arruma cada encomenda numa categoria. `Info_Received` é a fase da etiqueta. `In_Transportation` cobre tudo, do voo à alfândega e ao troço local. `End_of_Tracking` quer dizer que a Yanwen deixou de seguir a encomenda: não diz onde ela está, e não é nem uma entrega nem uma perda. `Not_Found`, com a linha `No information was found`, quer dizer que a Yanwen não tem nada com esse número. Uma encomenda entregue mostra os dias que demorou, por exemplo «Delivered（7d）».
 
@@ -87,7 +89,7 @@ O [Peek](/) reconhece logo os números BYS, os números YP e os números YW dos 
 
 Mostra o estado, o histórico com a cidade ou região de cada leitura num mapa, a hora da entrega, o país de destino e a transportadora local com o número dela («Entrega:» seguido do nome). Quando a Yanwen nomeia uma transportadora local que o Peek conhece e o número lhe corresponde, ou quando o número local tem uma forma que o Peek reconhece com certeza, o Peek pergunta a essa transportadora e passa para ela assim que ela mostra novidades mais recentes. Um número YP para Portugal nunca passa para os CTT só por ter forma postal. A Yanwen não dá data prevista de entrega; o Peek não mostra ponto de levantamento e deixa de fora as referências de encomenda, os contactos, os códigos postais, os PIN de entrega e os números de porta.
 
-As horas são lidas no fuso GMT da Yanwen e mostradas no fuso horário do teu dispositivo; as leituras repetidas desaparecem. As linhas aparecem como a Yanwen as escreve, em inglês, salvo umas poucas que o Peek conhece tal e qual, como «Delivered», que mostra em português. Qualquer leitura com o código de entrega da Yanwen conta como entregue. O Peek verifica de 10 em 10 minutos, de 2 em 2 minutos quando a encomenda sai para entrega, e pode enviar-te notificações de todas as atualizações, só das importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a Yanwen nem a loja por ti.
+As horas são lidas no fuso GMT da Yanwen e mostradas no fuso horário do teu dispositivo; as leituras repetidas desaparecem. As linhas aparecem como a Yanwen as escreve, salvo umas poucas que o Peek conhece tal e qual, como «Delivered», que mostra em português. Qualquer leitura com o código de entrega da Yanwen conta como entregue. O Peek verifica de 10 em 10 minutos, de 2 em 2 minutos quando a encomenda sai para entrega, e pode enviar-te notificações de todas as atualizações, só das importantes ou só no dia da entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a Yanwen nem a loja por ti.
 
 ## Perguntas sobre o tracking Yanwen
 

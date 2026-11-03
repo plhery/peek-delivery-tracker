@@ -27,7 +27,7 @@ Il sito di Yanwen accetta fino a 100 numeri alla volta, ma la ricerca in autonom
 
 ## Yanwen tracking: cosa significano gli stati
 
-Il sito di tracciamento di Yanwen esiste solo in inglese e in cinese, e le righe delle scansioni restano in inglese in tutte e due le versioni: una versione italiana non c'è. Ecco le righe che vedi più spesso, nell'ordine in cui le incontra un pacco diretto in Italia:
+Il sito di tracciamento di Yanwen esiste solo in inglese e in cinese, e le righe delle scansioni di Yanwen restano in inglese in tutte e due le versioni: una versione italiana non c'è. Ecco le righe che vedi più spesso, nell'ordine in cui le incontra un pacco diretto in Italia:
 
 | Riga del tracking | Cosa vuol dire per te |
 | --- | --- |
@@ -48,6 +48,8 @@ Il sito di tracciamento di Yanwen esiste solo in inglese e in cinese, e le righe
 `Order Submited.` (scritto così, con l'errore), `Waybill Generated` e `Shipping Order Created.` valgono come la prima riga: esiste solo l'etichetta, e il pacco può essere ancora dal venditore. `Pick up by local carrier at destination port` vuol dire lo stesso di `Batch delivery to carrier`.
 
 Dopo il passaggio, le righe sono quelle del corriere locale. Nei pacchi arrivati in Italia erano in inglese, con davanti il deposito tra parentesi quadre larghe, per esempio «【Milan center】Received.» o «【dalla sede operativa di TORINO (TO)】Delivered.». Oltre a quelle della tabella si vedono `Arrived.`, `Shipment dispatched.`, `<wrong address>` (l'indirizzo non va bene) e `Back To DS.`, cioè il pacco è tornato al deposito di consegna dopo un tentativo fallito.
+
+Alcuni pacchi passano a China Post dopo `Yanwen facility - Outbound`. Yanwen mostra allora le scansioni di China Post in cinese, spiegate nella pagina di [China Post](carrier:china-post); `中国邮政已收取邮件` è questo passaggio. `【…】退回，备注:安检退回` vuol dire che il controllo di sicurezza di un centro di smistamento ha respinto il pacco, e il centro risolve il problema prima di rispedirlo: non torna al venditore. Peek lo mostra come «Problema segnalato».
 
 Sopra le scansioni Yanwen mette ogni pacco in una categoria. `Info_Received` è la fase dell'etichetta. `In_Transportation` copre tutto, dal volo alla dogana fino al corriere locale. `End_of_Tracking` vuol dire che Yanwen ha smesso di seguire il pacco: non dice dove si trova, e non è né una consegna né una perdita. `Not_Found`, con la riga `No information was found`, vuol dire che Yanwen non ha niente con quel numero. Nella riga di un pacco consegnato compaiono i giorni impiegati, per esempio «Delivered（7d）».
 

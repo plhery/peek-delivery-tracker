@@ -27,7 +27,7 @@ Yanwen's site takes up to 100 numbers at once, but self-service tracking only co
 
 ## Yanwen tracking statuses explained
 
-Yanwen's tracking site comes in English and Chinese only, and the scan lines are English in both. The lines people see, in the order a parcel meets them:
+Yanwen's tracking site comes in English and Chinese only, and Yanwen's own scan lines are English in both. The lines people see, in the order a parcel meets them:
 
 | Yanwen says | What it means for you |
 | --- | --- |
@@ -45,6 +45,8 @@ Yanwen's tracking site comes in English and Chinese only, and the scan lines are
 | `Delivered.` | Delivered, in the words of one local carrier. |
 
 `Order Submited.`, `Waybill Generated` and `Shipping Order Created.` mean the same as the first row: only the label exists, and the parcel may not have left the seller. `Pick up by local carrier at destination port` means the same as `Batch delivery to carrier`. After that, the lines are the local carrier's own, sometimes with a country prefix or a depot name in brackets: USPS's `Out for Delivery` or `Delivered, In/At Mailbox`, for example.
+
+Some parcels are handed to China Post after `Yanwen facility - Outbound`. Yanwen then relays China Post's scans in Chinese, explained on the [China Post](carrier:china-post) page; `中国邮政已收取邮件` is that hand-over. `【…】退回，备注:安检退回` means a sorting centre sent the parcel back at its security check and deals with it before sending it on: it isn't a return to the seller. Peek shows it as "Needs attention".
 
 Above the scans, Yanwen files each parcel under a category. `Info_Received` is the label stage. `In_Transportation` covers everything from the flight to customs and the local leg. `End_of_Tracking` means Yanwen stopped following the parcel: it says nothing about where the parcel is, and is neither a delivery nor a loss. `Not_Found`, with the line `No information was found`, means Yanwen has nothing under that number. A delivered parcel's row shows the days it took, such as "Delivered（7d）".
 

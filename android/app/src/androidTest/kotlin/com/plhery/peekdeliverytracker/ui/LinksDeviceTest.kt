@@ -103,18 +103,21 @@ class LinksDeviceTest {
     fun anAddLinkStartsTheAppsWindowWithAddOpenOnItsText() {
         assumeTrue("The app's stores were made before this test, on the network: run the class on its own", app.container.value == null)
         app.makeStores = { application ->
-            withContext(Dispatchers.IO) {
+            val made = withContext(Dispatchers.IO) {
                 // Offline, in demo mode, which prepares no browser check: nothing leaves the device.
                 AppContainer(
                     application, BuildSettings.configuration.copy(mode = AppConfiguration.Mode.Demo),
                     http = OkHttpClient.Builder().addInterceptor { throw IOException("No network in this test") }.build(),
                 )
             }
+            // In the demo, as its button enters it: whatever the phone kept from before (an account's sign-in opened,
+            // the welcome) would show the arrival instead of the deliveries.
+            made.also { it.session.enterDemo() }
         }
         val link = Intent(Intent.ACTION_VIEW, Uri.parse("peekdeliverytracker://add?tracking=TEST%200001"))
             .addCategory(Intent.CATEGORY_BROWSABLE).setPackage(context.packageName).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(link)
-        compose.waitUntil(20_000) { fieldText(ADD_TRACKING) == "TEST 0001" }
+        compose.waitUntilOrLogTree("LinksDeviceTest", 20_000) { fieldText(ADD_TRACKING) == "TEST 0001" }
     }
 
     /** Which tab web sign-in opened its page in, as its window says: [AUTH_TAB], [CUSTOM_TAB], or null with no window. */

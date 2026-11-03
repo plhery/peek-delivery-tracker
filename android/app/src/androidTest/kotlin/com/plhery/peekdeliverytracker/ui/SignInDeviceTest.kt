@@ -213,12 +213,14 @@ class SignInDeviceTest {
      * The field with [tag] has the focus and asked for the keyboard; then the keyboard has come up and finished its
      * slide, where the device shows one ([showsAKeyboard]), and the field stands above it, the page scrolled to keep
      * it in view. The page's last step of that scroll can come a frame after the slide has ended, so the field is
-     * awaited there before it is checked.
+     * awaited there before it is checked. The keyboard itself can take a few seconds to come the first time a layout
+     * of it is drawn (the email one, turned, on a tablet just booted), so its coming is awaited on its own first.
      */
     private fun assertTypingIn(tag: String) {
         compose.onNodeWithTag(tag).assertIsFocused()
         compose.waitUntil(5_000) { acceptingText() }
         val keyboard = showsAKeyboard()
+        if (keyboard) runCatching { compose.waitUntil(KEYBOARD_COMES_MILLIS) { keyboardShown() } }
         runCatching {
             compose.waitUntil(KEYBOARD_MILLIS) { (!keyboard || keyboardShown()) && still() && fieldBottom(tag) <= roomAboveTheKeyboard() }
         }
@@ -382,5 +384,6 @@ class SignInDeviceTest {
     private companion object {
         /** How long a keyboard takes to start coming up, where the device shows one. */
         const val KEYBOARD_MILLIS = 3_000L
+        const val KEYBOARD_COMES_MILLIS = 15_000L
     }
 }

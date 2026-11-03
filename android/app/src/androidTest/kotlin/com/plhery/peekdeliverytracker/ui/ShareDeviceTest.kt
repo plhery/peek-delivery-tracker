@@ -129,14 +129,19 @@ class ShareDeviceTest {
             http = OkHttpClient.Builder().addInterceptor { throw IOException("No network in this test") }.build(),
         )
         container = made
-        compose.runOnUiThread { made.start(compose.activity.lifecycle) }
+        // In the demo, as its button enters it: whatever the phone kept from before (an account's sign-in opened, the
+        // welcome) would show the arrival instead of the deliveries.
+        compose.runOnUiThread {
+            made.session.enterDemo()
+            made.start(compose.activity.lifecycle)
+        }
         val inbox = DeliveriesInbox(sharedDrafts = { ShareInbox.consume(app.shareDefaults()) })
         compose.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
                 PeekRoot(made, inbox)
             }
         }
-        compose.waitUntil(20_000) { exists(ADD_PARCEL) }
+        compose.waitUntilOrLogTree("ShareDeviceTest", 20_000) { exists(ADD_PARCEL) }
         compose.waitForIdle()
         assertEquals("Your parcel 1Z999AA10123456784 is on its way", fieldText(ADD_TRACKING))
         assertEquals("Running shoes", fieldText(ADD_NAME))

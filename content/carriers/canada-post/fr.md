@@ -6,7 +6,7 @@ published: 2026-10-15
 updated: 2026-10-27
 ---
 
-Postes Canada, c'est la Société canadienne des postes, créée par une loi fédérale pour exploiter le service postal au Canada et entre le Canada et l'étranger. Pour suivre ton colis, entre son numéro de repérage sur le site de Postes Canada, canadapost-postescanada.ca, ou colle-le dans le champ ci-dessus. Ce numéro vient de l'expéditeur, en général dans le courriel d'expédition de la boutique. S'il finit par `CA` et que tu suis le colis depuis l'étranger, Peek peut aussi interroger la poste de ton pays avec le même numéro.
+Postes Canada, c'est la Société canadienne des postes, la société d'État fédérale qui exploite le service postal du Canada. Pour suivre ton colis, entre son numéro de repérage dans l'outil Repérage sur [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/fr), dans l'appli gratuite de Postes Canada ou dans le champ ci-dessus. Ce numéro vient de l'expéditeur, en général dans le courriel d'expédition de la boutique ; Postes Canada ne peut pas retrouver un colis à partir de ton nom ou de ton adresse. S'il finit par `CA` et que tu suis le colis depuis l'étranger, Peek peut aussi interroger la poste de ton pays avec le même numéro.
 
 ## Numéro de repérage Postes Canada : à quoi il ressemble
 
@@ -59,11 +59,17 @@ Dans l'historique, les scans de livraison s'affichent « Livré » ; les autres 
 
 ## Livraison manquée, ramassage et douane au Canada
 
-**Livraison manquée.** À partir du scan de dernier avis, tu as 10 jours pour aller chercher le colis avant qu'il reparte chez l'expéditeur. Plus de détails dans [livraison manquée](guide:missed-delivery) et [colis non retiré](guide:uncollected-parcel).
+**Livraison manquée.** Si un colis exige une signature, ou s'il est trop gros pour ta boîte aux lettres ou ton compartiment à colis, Postes Canada tente de le livrer à ta porte. Si personne ne répond, elle laisse une carte Avis de livraison ou, quand aucune signature n'est requise, peut laisser le colis en lieu sûr. Après `Delivery Attempt Made / Rescheduled for delivery next business day` (« Tentative de livraison effectuée / livraison reportée au jour ouvrable suivant » dans l'aide de Postes Canada), elle essaie normalement de nouveau le jour ouvrable suivant.
 
-**La douane sur les colis venus de l'étranger.** À l'arrivée, Postes Canada confie tout le courrier international à l'Agence des services frontaliers du Canada (ASFC), qui le traite dans ses centres de Vancouver, Toronto et Montréal. La plupart des envois passent après un premier contrôle, parfois en moins d'une journée. Un envoi qui pourrait être interdit au Canada, qui est mal étiqueté ou qui pourrait cacher de la contrebande est examiné de plus près, parfois par Santé Canada ou l'Agence canadienne d'inspection des aliments, et peut prendre du retard.
+**Avis de livraison.** Quand une carte est laissée, Repérage indique « Avis laissé », puis le bureau de poste proche et une date « Ramasser avant » dès qu'il les connaît. Le statut devient ensuite « Disponible pour ramassage » (« Prêt à être ramassé » dans l'aide). Une carte Avis final suit après cinq jours civils ; après 15 jours civils en tout, le colis repart chez l'expéditeur. Plus de détails dans [livraison manquée](guide:missed-delivery) et [colis non retiré](guide:uncollected-parcel).
 
-**Droits et taxes.** Une marchandise reçue par la poste d'une valeur de 20 $ CA ou moins ne paie ni droits ni taxes, et un cadeau de parents ou d'amis à l'étranger ne paie pas de TPS jusqu'à 60 $ CA. Au-delà, compte la TPS de 5 %, à moins que la marchandise en soit exemptée. Si ta province applique la TVH, tu paies la TVH au lieu de la TPS ; en Colombie-Britannique, au Manitoba, au Québec et en Saskatchewan, la taxe de vente provinciale s'ajoute. Les droits dépendent de la marchandise et du pays d'où elle vient ou où elle a été fabriquée. Ce que tu dois figure sur le formulaire E14 de l'ASFC, joint au colis à la livraison, et Postes Canada facture des frais de manutention quand des droits ou des taxes sont dus.
+**Le ramassage.** Apporte une pièce d'identité avec photo émise par le gouvernement (Repérage en demande une qui porte l'adresse inscrite sur le colis) et la carte, le courriel d'avis ou le code à barres de ramassage dans l'appli. Quelqu'un d'autre peut y aller à ta place avec sa propre pièce d'identité avec photo et ta carte, que tu as signée en y inscrivant son nom, ou une lettre d'autorisation.
+
+**Casiers à colis.** Postes Canada laisse la clé du casier à colis dans ta boîte aux lettres. Après cinq jours au casier, le colis part au bureau de poste et tu reçois une carte.
+
+**La douane sur les colis venus de l'étranger.** À l'arrivée, Postes Canada confie tout le courrier international à l'Agence des services frontaliers du Canada (ASFC). Pendant que la douane examine un colis, Postes Canada dit ne pouvoir ni intervenir ni se renseigner.
+
+**Droits et taxes.** Une marchandise reçue par la poste d'une valeur de 20 $ CA ou moins ne paie ni droits ni taxes, et un cadeau de parents ou d'amis à l'étranger ne paie pas de TPS jusqu'à 60 $ CA. Au-delà, compte la TPS de 5 %, ou la TVH si ta province l'applique ; en Colombie-Britannique, au Manitoba, au Québec et en Saskatchewan, la taxe de vente provinciale s'ajoute, et les droits dépendent de la marchandise. Le montant figure sur le formulaire E14 de l'ASFC, joint au colis. Postes Canada le perçoit, frais de manutention de 9,95 $ inclus. Paie avec le bouton « Payer » dans Repérage ou dans l'appli avant que le colis soit sorti pour livraison ; ensuite, paie par carte de crédit à la porte, ou au bureau de poste en argent comptant, par carte, par chèque ou par mandat-poste de Postes Canada.
 
 **Pas d'accord avec le montant ?** Refuse le colis et demande une nouvelle cotisation, ou paie et demande un rajustement avec le formulaire B2G, au verso du E14. Voir aussi [colis bloqué en douane](guide:customs).
 
@@ -77,15 +83,20 @@ Postes Canada ne donne à Peek aucun pays de destination, alors c'est ton pays q
 
 **Plus de nouveaux scans.** Après quatre jours sans nouveau scan à « Étiquette créée », « Pris en charge » ou « En transit », Peek affiche : « Un colis reste souvent silencieux pendant un long vol, à la douane ou le week-end. Peek continue d’interroger Canada Post et affichera le prochain scan ici. » Il ajoute un lien vers l'aide du transporteur qui a le colis, comme « Demande de l’aide à Canada Post ». Selon l'ASFC, le courrier à la douane au Canada ne peut pas être suivi avec précision. Voir [suivi qui ne bouge plus](guide:tracking-not-updating).
 
-**Perdu.** Si tu as acheté en ligne, commence par la boutique. Voir [colis perdu](guide:lost-parcel).
+**En retard ou perdu.** Selon Postes Canada, la plupart des colis en retard arrivent dans les cinq jours ouvrables suivant la date prévue. Passé ce délai, vérifie l'adresse et regarde autour de chez toi, puis demande une enquête en ouvrant un billet de service sur la page [Colis manquants](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/reclamations/colis-manquants.page) de Postes Canada (ouvre d'abord une session pour pouvoir le suivre), dans les 90 jours suivant l'expédition, ou dans les six mois pour un colis envoyé aux États-Unis ou à l'étranger. L'expéditeur peut aussi la demander, et lui seul peut être indemnisé : si le colis n'arrive pas au bout de quelques jours, Postes Canada ferme ta demande et c'est à toi de demander à l'expéditeur de faire une réclamation. Si tu as acheté en ligne, commence par la boutique. Voir [colis perdu](guide:lost-parcel).
 
-**Indiqué livré, mais pas là.** Selon la Loi sur la Société canadienne des postes, un envoi compte comme livré quand il est laissé chez toi ou à ton travail, mis dans ta boîte aux lettres ou confié à quelqu'un qui semble autorisé à le prendre pour toi, de la façon dont ton courrier est d'habitude distribué. Peek affiche « Livré », mais le suivi de Postes Canada précise l'endroit, par exemple `Delivered to mailroom` (livré à la salle du courrier) : regarde là d'abord. Si c'est la poste de ton pays qui l'a livré, regarde son suivi. Voir [colis livré mais non reçu](guide:delivered-not-received).
+**Indiqué livré, mais pas là.** Selon la Loi sur la Société canadienne des postes, un envoi compte comme livré quand il est laissé chez toi ou à ton travail, mis dans ta boîte aux lettres ou confié à quelqu'un qui semble autorisé à le prendre pour toi, de la façon dont ton courrier est d'habitude distribué. Peek affiche « Livré », mais le suivi de Postes Canada précise l'endroit, par exemple `Delivered to mailroom` (livré à la salle du courrier) : regarde là d'abord. Vérifie ensuite le casier à colis, le comptoir de sécurité ou le concierge, demande aux personnes qui vivent avec toi et regarde dans Repérage si quelqu'un a signé, avant de demander une enquête. Si c'est la poste de ton pays qui l'a livré, regarde son suivi. Voir [colis livré mais non reçu](guide:delivered-not-received).
 
 **Retourné.** Une fois le colis revenu chez l'expéditeur, Peek affiche « Retourné à l’expéditeur ». Voir [colis retourné à l'expéditeur](guide:returned-to-sender).
 
 ## Service à la clientèle de Postes Canada et contact
 
-La façon de joindre Postes Canada est sur canadapost-postescanada.ca. Une fois qu'un colis parti du Canada est entre les mains de la poste de ton pays, c'est à elle qu'il faut s'adresser pour la livraison et le retrait ; les pages sur [La Poste](carrier:la-poste), [bpost](carrier:bpost), [La Poste suisse](carrier:swiss-post) et [POST Luxembourg](carrier:post-luxembourg) disent comment la joindre. Peek ne peut pas contacter Postes Canada ni la boutique à ta place.
+- **Téléphone** : 1 866 607-6301 au Canada, 1 416 979-3033 de l'extérieur du Canada, ATS 1 800 267-2797. Du lundi au vendredi de 7 h à 23 h HE, la fin de semaine de 9 h à 21 h HE.
+- **En ligne** : clavardage, ou signalement d'un problème par billet de service, sur la page [Aide](https://www.canadapost-postescanada.ca/scp/fr/soutien.page) de Postes Canada.
+
+Une fois qu'un colis parti du Canada est entre les mains de la poste de ton pays, c'est à elle qu'il faut s'adresser pour la livraison et le retrait ; les pages sur [La Poste](carrier:la-poste), [bpost](carrier:bpost), [La Poste suisse](carrier:swiss-post) et [POST Luxembourg](carrier:post-luxembourg) disent comment la joindre. Peek ne peut pas contacter Postes Canada ni la boutique à ta place.
+
+> Les textos qui annoncent un colis retenu pour des frais impayés, avec un lien pour payer, ne viennent pas de Postes Canada. Ses propres textos viennent du 272727 ou du 55555 si tu t'es inscrit, ou du 613 734-1002 et du 613 734-1004, avec des liens vers canadapost-postescanada.ca. Vérifie les frais dans Repérage ; transfère les textos indésirables au 7726.
 
 ## Suivre un colis Postes Canada avec Peek
 
@@ -101,11 +112,11 @@ Peek vérifie toutes les 10 minutes, et toutes les 2 minutes dès que Postes Can
 
 ### Pourquoi mon suivi Postes Canada ne bouge plus ?
 
-Les longs vols, la douane et les fins de semaine laissent souvent un trou entre deux scans. Peek continue de vérifier, toutes les heures une fois passés deux jours sans nouvelles. Voir [suivi qui ne bouge plus](guide:tracking-not-updating).
+Les longs vols, la douane et les fins de semaine laissent souvent un trou entre deux scans. Peek continue de vérifier, toutes les heures une fois passés deux jours sans nouvelles. Si la date de livraison prévue est dépassée de plus de cinq jours ouvrables, demande une enquête à Postes Canada. Voir [suivi qui ne bouge plus](guide:tracking-not-updating).
 
 ### Pourquoi Peek ne trouve pas mon numéro de repérage Postes Canada ?
 
-Postes Canada donne la même réponse qu'un numéro soit inconnu, pas encore scanné ou expiré : pour un colis Postes Canada, Peek affiche donc « En attente du transporteur » jusqu'au premier scan. Vérifie chaque chiffre : dans un numéro de 16 chiffres, le dernier est un chiffre de contrôle, et dans un numéro postal, c'est le dernier chiffre avant `CA`.
+Postes Canada donne la même réponse qu'un numéro soit inconnu, pas encore scanné ou expiré : pour un colis Postes Canada, Peek affiche donc « En attente du transporteur » jusqu'au premier scan. Raisons habituelles selon Repérage : le colis n'est pas encore chez Postes Canada ou encore à l'étranger, il a été expédié il y a plus d'un an, ou le service ne comprend pas le repérage. Vérifie chaque chiffre : dans un numéro de 16 chiffres, le dernier est un chiffre de contrôle, et dans un numéro postal, c'est le dernier chiffre avant `CA`.
 
 ### Puis-je suivre un colis avec le numéro de l'avis de livraison ?
 
@@ -116,6 +127,16 @@ Oui. Colle le numéro à 15 chiffres de l'avis, touche « Changer » et choisis 
 La poste de ton pays, si le numéro finit par `CA` : La Poste en France, bpost en Belgique, La Poste suisse en Suisse. Peek l'interroge avec le même numéro. Un numéro de 16 chiffres reste suivi chez Postes Canada.
 
 :::sources
+- [Postes Canada : Repérer un colis au moyen du numéro de repérage](https://www.canadapost-postescanada.ca/track-reperage/fr) – appli gratuite, « Avis laissé », « Disponible pour ramassage », date et pièce d'identité pour le ramassage, raisons d'un numéro introuvable
+- [Postes Canada : Repérage – Comment utiliser l’outil Repérage](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/reperage/comment-utiliser-loutil-reperage.page) – seul l'expéditeur a le numéro, pas de recherche par nom ou adresse, numéro de carte
+- [Postes Canada : Repérage – Statuts de suivi](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/reperage/statuts-de-suivi.page) – « Avis laissé », « Prêt à être ramassé », pièce d'identité, procuration, nouvel essai, douane
+- [Postes Canada : Expédition de colis, Canada – Options de livraison](https://www.canadapost-postescanada.ca/scp/fr/soutien/sujet/services-expedition-colis-canada/options-livraison.page) – essais à la porte, lieu sûr, carte Avis final après cinq jours, 15 jours
+- [Postes Canada : Pourquoi mon colis n’a pas été livré à mon casier à colis?](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/recevoir/casier-a-colis/pourquoi-mon-colis-na-pas-ete-livre.page) – cinq jours au casier
+- [Soutien Postes Canada : Comment payer vos droits de douane et taxes](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/recevoir/faq-livraison/comment-payer-vos-droits-et-taxes-en-ligne-postes-canada.page) – frais de 9,95 $, quand et comment payer
+- [Postes Canada : Réclamations – Colis manquants](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/reclamations/colis-manquants.page) – cinq jours ouvrables, où chercher, clé du casier, enquêtes, délais
+- [Aide Postes Canada : Poser une question ou signaler un problème](https://www.canadapost-postescanada.ca/scp/fr/soutien.page) – téléphone, heures, clavardage, billets
+- [Soutien Postes Canada : Reconnaître les courriels et messages textes frauduleux](https://www.canadapost-postescanada.ca/scp/fr/soutien/bc/politiques-entreprise/confidentialite-securite/que-faire-si-vous-recevez-un-courriel-suspect.page) – faux textos de frais, vrais expéditeurs, 7726
+- [Canada Post: Responsible business practices](https://www.canadapost-postescanada.ca/cpc/en/our-company/corporate-sustainability/responsible-business-practices.page) – société d'État fédérale
 - [ASFC : Importation par la poste](https://www.cbsa-asfc.gc.ca/import/personal-personnel/postal-postale-fra.html) – douane sur le courrier, exemption de 20 $, formulaire E14, frais de manutention, pas de suivi précis
 - [ASFC : Importation par la poste ou par messagerie - Paiement des droits et des taxes sur les biens importés](https://www.cbsa-asfc.gc.ca/import/postal-postale/dtytx-drttx-fra.html) – TPS, TVH et TVP, limites de 20 $ CA et de 60 $ CA, droits
 - [ASFC : Importation par la poste ou par messagerie - Contestation des droits et des taxes](https://www.cbsa-asfc.gc.ca/import/postal-postale/dispute-contestation-fra.html) – nouvelle cotisation, formulaire B2G

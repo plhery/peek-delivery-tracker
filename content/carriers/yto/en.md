@@ -70,7 +70,7 @@ If you're out, its FAQ says to follow the "Redelivery Notification" to arrange a
 
 **No update.** YTO's service agreement with senders counts a parcel as lost if, after its first line, it gets no update for 4 days, or isn't signed for 7 days after it was due. Ask the seller, who booked the parcel and can ask YTO. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 
-**Lost or damaged.** For a shop order, the seller paid for the shipment: ask the seller first. Under the same agreement, a lost parcel sent without declared value (`保价`) is compensated up to 300 yuan, or 100 yuan for documents; insured parcels get the actual loss, up to the declared value. Complaints go by phone to the YTO outlet that took the parcel or to YTO's customer service, and YTO's site has complaint (`投诉反馈`) and insured-claim (`保价理赔`) pages behind a login. If YTO's answer to a complaint doesn't satisfy you, or doesn't come in time, China's rules let you appeal to the postal authorities. See also [lost parcels](guide:lost-parcel).
+**Lost or damaged.** For a shop order, the seller paid for the shipment: ask the seller first. Under the same agreement, a lost parcel sent without declared value (`保价`) is compensated up to 300 yuan, or 100 yuan for documents; insured parcels get the actual loss, up to the declared value. Complaints go by phone to the YTO outlet that took the parcel or to YTO's customer service, and YTO's site has complaint (`投诉反馈`) and insured-claim (`保价理赔`) pages behind a login. If YTO's answer to a complaint doesn't satisfy you, or doesn't come in time, China's rules let you appeal to the postal regulator, the State Post Bureau (`消费者申诉` on its site). See also [lost parcels](guide:lost-parcel).
 
 **Returned.** After `退回件扫描`, the parcel is going back, and later delivery scans are the trip back to the sender. Ask the seller; see [returned to sender](guide:returned-to-sender).
 
@@ -134,5 +134,7 @@ YTO International does, with its own tracker on ytoglobal.com. Its pages don't s
 - [YTO International: FAQ](https://www.ytoglobal.com/rich/question) – hotline 400 60 95554, redelivery, delivery appointments, parcels opened for inspection
 - [YTO International: Contact Us](https://www.ytoglobal.com/about-us/contact) – contact form
 - [Ministry of Transport of China: 快递市场管理办法 (Express Market Administration Measures)](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – in force 1 March 2024, inspection on delivery, no locker or station without consent, appeals to the postal authorities
+- [State Post Bureau of China: 国家邮政局主要职责 (main duties)](https://www.spb.gov.cn/gjyzj/c100001/c100006/201306/2722edab189242549b320d06e0dbd382.shtml) – postal regulator, express market included
+- [State Post Bureau of China: 中华人民共和国国家邮政局 (home page)](https://www.spb.gov.cn/) – consumer appeal section (消费者申诉)
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, YTO's scan names, China clock, return trip
 :::

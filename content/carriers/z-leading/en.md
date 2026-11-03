@@ -6,7 +6,7 @@ published: 2026-10-22
 updated: 2026-10-27
 ---
 
-Z-Leading (Shenzhen Z-leading International Logistics) is a Shenzhen freight forwarder that ships goods from China by express, air, sea, rail and road. It has no tracking page of its own: it gives its customers the carrier's number and that carrier's website. Paste the number in the box above, or track it on the carrier's site.
+Z-Leading (Shenzhen Z-leading International Logistics, which the tracking service 17TRACK lists as ZHONGLING) is a Shenzhen freight forwarder that ships goods from China by express, air, sea, rail and road. It has no tracking page of its own: it gives its customers the carrier's number and that carrier's website. Paste the number in the box above, or track it on the carrier's site.
 
 ## Z-Leading tracking number: what it looks like
 
@@ -71,7 +71,7 @@ Peek checks every 15 minutes, out for delivery too; a service that didn't know t
 
 ### What is Z-Leading?
 
-Shenzhen Z-leading International Logistics Co., Ltd., a Shenzhen freight forwarder founded in 2013. It ships goods from China by express and by air, sea, rail and road freight, including duties-paid (DDP) lines, and runs warehouses in China, the US and Europe. In Peek's carrier list, typing "Zhongling" or "中领国际" finds it too.
+Shenzhen Z-leading International Logistics Co., Ltd., a Shenzhen freight forwarder founded in 2013. It ships goods from China by express and by air, sea, rail and road freight, including duties-paid (DDP) lines, and runs warehouses in China, the US and Europe. 17TRACK lists it as ZHONGLING, and in Peek's carrier list, typing "Zhongling" or "中领国际" finds it too.
 
 ### Does Z-Leading have a tracking page?
 
@@ -96,6 +96,7 @@ Its contact page gives support@forestshipping.com for after-sales service, a Chi
 - [Z-Leading: Sea Freight DDP](https://www.z-leading.com/services/sea-freight-ddp/) – pickup to final delivery, duties included
 - [Z-Leading: Contact Us](https://www.z-leading.com/contact-us/) – after-sales address, form, phone and WhatsApp, office address
 - [Z-Leading: Why Global Businesses Choose Z-Leading for International Logistics](https://www.z-leading.com/why-global-businesses-choose-z-leading-for-international-logistics/) – blog for Amazon, eBay and DTC brands, DHL, UPS and FedEx agent
+- [17TRACK: ZHONGLING Tracking](https://www.17track.net/en/carriers/zhongling) – how 17TRACK names Z-Leading, with links to z-leading.com
 - [Forest Shipping: Freight Forwarder, FBA, Air & Sea Freight](https://www.forestshipping.com/) – forestshipping.com is Forest Shipping's site, a Shenzhen forwarder
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – the ZL number shape (a weak match, from a parcel filed under Zhongling), no Z-Leading tracker, Zhongling and 中领国际 as names for Z-Leading, how Peek follows Z-Leading parcels through tracking services, UPS, DHL Express and FedEx shapes
 :::

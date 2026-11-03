@@ -6,7 +6,7 @@ published: 2026-10-21
 updated: 2026-10-27
 ---
 
-Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) is a Shanghai forwarder that ships parcels abroad for online sellers in China, on its own lines and through the post. It has no tracking page of its own: paste the number in the box above. The seller who booked Juxi has the number and gives it with your order's shipping details.
+Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) is a Shanghai forwarder that ships parcels abroad for online sellers in China, on its own lines and through the post. It has no tracking page of its own: paste the number in the box above, or look it up on a tracking service such as 17TRACK, which lists Juxi as SHJX. The seller who booked Juxi has the number and gives it with your order's shipping details.
 
 ## Juxi Express tracking number: what it looks like
 
@@ -92,7 +92,7 @@ A Shanghai forwarder, Shanghai Juxi International Freight Forwarding Co., Ltd., 
 
 ### Where can I track a Juxi Express parcel?
 
-In the box above, since Juxi has no tracker of its own any more. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
+In the box above, since Juxi has no tracker of its own any more. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK, which lists it as SHJX. 17TRACK only shows tracking: it says it can't change a delivery, refund you or approve a claim. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
 
 ### Who delivers Juxi Express parcels?
 
@@ -115,5 +115,6 @@ It depends on the line the seller chose. Juxi quotes 5 to 8 days on its UK line,
 - [Juxi Express: 国际E邮宝 (ePacket)](https://www.juxiex.com/product_show.php?id=58) – 7 to 15 working days, no tracing once the post has the parcel
 - [Juxi Express: 中欧班列专线陆运小包 (China–Europe rail small parcel)](https://www.juxiex.com/product_show.php?id=69) – European destinations
 - [Juxi Express: 关于美国关税政策调整的重要公告 (US duty notice)](https://www.juxiex.com/news_show.php?id=43) – duty deposit from the sender for US parcels
+- [17TRACK: SHJX Tracking](https://www.17track.net/en/carriers/shjx) – Juxi listed as SHJX, 17TRACK's role
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC number shape, no Juxi tracker left, how Peek follows Juxi parcels through tracking services
 :::

@@ -6,11 +6,13 @@ published: 2026-10-22
 updated: 2026-10-27
 ---
 
-Z-Leading (Shenzhen Z-leading International Logistics, which the tracking service 17TRACK lists as ZHONGLING) is a Shenzhen freight forwarder that ships goods from China by express, air, sea, rail and road. It has no tracking page of its own: it gives its customers the carrier's number and that carrier's website. Paste the number in the box above, or track it on the carrier's site.
+Z-Leading (Shenzhen Z-leading International Logistics) is a Shenzhen freight forwarder that ships goods from China by express, air, sea, rail and road. It has no tracking page of its own: it gives its customers the carrier's number and that carrier's website. Paste the number in the box above, or track it on the carrier's site.
 
 ## Z-Leading tracking number: what it looks like
 
 Z-Leading publishes no number format, and no public page shows a whole Z-Leading number. Its FAQ says that once a shipment is dispatched, it gives the customer a tracking number and the official website of the carrier: an express company, an airline or a shipping line.
+
+Peek's catalog links one shape to Z-Leading, taken from a parcel that tracking services filed under Zhongling: `ZL`, two more letters and nine digits, like the invented `ZLAB000000000`. It's only a weak match: the shape alone doesn't prove the number is Z-Leading's.
 
 Z-Leading says it is a first-class agent of DHL, UPS and FedEx and prints their waybills itself, so an express shipment can carry one of their numbers. Their shapes, with invented digits:
 
@@ -57,7 +59,7 @@ Z-Leading lists no office or contact for recipients outside China. If you booked
 
 ## Track a Z-Leading shipment with Peek
 
-[Peek](/) can't tell a Z-Leading shipment by its number: its catalog has no Z-Leading number shape. Paste it all the same: Peek follows more than 3,500 carriers. Peek recognises a valid UPS number at once; for ten or twelve digits, it asks the carriers whose numbers look like that, DHL Express and FedEx among them, and follows the one that has the parcel with its own tracking.
+[Peek](/) can't tell a Z-Leading shipment by its number alone: the `ZL` shape above is only a weak match, so Peek doesn't name Z-Leading from it, though "Change" lists Z-Leading under "Fits this number". Paste it all the same: Peek follows more than 3,500 carriers. Peek recognises a valid UPS number at once; for ten or twelve digits, it asks the carriers whose numbers look like that, DHL Express and FedEx among them, and follows the one that has the parcel with its own tracking.
 
 For any other number, Peek asks tracking services while you add it ("Checking tracking services…"). When they name Zhongling or Z-Leading as the carrier and show the parcel moving, Peek names Z-Leading. Otherwise pick Z-Leading with "Change": typing "Zhongling" or "中领国际" finds it too. If no service knows the number yet, the carrier list says "Not found by tracking services yet. Peek will keep checking after you add it."
 
@@ -69,7 +71,7 @@ Peek checks every 15 minutes, out for delivery too; a service that didn't know t
 
 ### What is Z-Leading?
 
-Shenzhen Z-leading International Logistics Co., Ltd., a Shenzhen freight forwarder founded in 2013. It ships goods from China by express and by air, sea, rail and road freight, including duties-paid (DDP) lines, and runs warehouses in China, the US and Europe. 17TRACK lists it as ZHONGLING, and typing "Zhongling" or "中领国际" in Peek's carrier list finds it.
+Shenzhen Z-leading International Logistics Co., Ltd., a Shenzhen freight forwarder founded in 2013. It ships goods from China by express and by air, sea, rail and road freight, including duties-paid (DDP) lines, and runs warehouses in China, the US and Europe. In Peek's carrier list, typing "Zhongling" or "中领国际" finds it too.
 
 ### Does Z-Leading have a tracking page?
 
@@ -94,7 +96,6 @@ Its contact page gives support@forestshipping.com for after-sales service, a Chi
 - [Z-Leading: Sea Freight DDP](https://www.z-leading.com/services/sea-freight-ddp/) – pickup to final delivery, duties included
 - [Z-Leading: Contact Us](https://www.z-leading.com/contact-us/) – after-sales address, form, phone and WhatsApp, office address
 - [Z-Leading: Why Global Businesses Choose Z-Leading for International Logistics](https://www.z-leading.com/why-global-businesses-choose-z-leading-for-international-logistics/) – blog for Amazon, eBay and DTC brands, DHL, UPS and FedEx agent
-- [17TRACK: ZHONGLING Tracking](https://www.17track.net/en/carriers/zhongling) – how 17TRACK names Z-Leading, with links to z-leading.com
 - [Forest Shipping: Freight Forwarder, FBA, Air & Sea Freight](https://www.forestshipping.com/) – forestshipping.com is Forest Shipping's site, a Shenzhen forwarder
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – no Z-Leading number shape or tracker, Zhongling and 中领国际 as names for Z-Leading, how Peek follows Z-Leading parcels through tracking services, UPS, DHL Express and FedEx shapes
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – the ZL number shape (a weak match, from a parcel filed under Zhongling), no Z-Leading tracker, Zhongling and 中领国际 as names for Z-Leading, how Peek follows Z-Leading parcels through tracking services, UPS, DHL Express and FedEx shapes
 :::

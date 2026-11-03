@@ -3866,6 +3866,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "ru": [
     {
+      "id": "econt",
+      "catalog": "econt",
+      "slug": "econt-otslezhivanie",
+      "title": "Эконт (Econt): отслеживание посылки, статусы и офисы",
+      "name": "Econt",
+      "color": "#234182"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "pochta-litvy-otslezhivanie",

@@ -79,7 +79,7 @@
   { "id": "speedy", "catalog": "speedy", "name": "Speedy", "languages": ["en"] },
   { "id": "cargus", "catalog": "cargus", "name": "Cargus", "languages": ["en", "ro"] },
   { "id": "fan-courier", "catalog": "fan-courier", "name": "FAN Courier", "languages": ["en", "ro"] },
-  { "id": "econt", "catalog": "econt", "name": "Econt", "languages": ["en"] },
+  { "id": "econt", "catalog": "econt", "name": "Econt", "languages": ["en", "ru"] },
   { "id": "ceska-posta", "catalog": "ceska-posta", "name": "Česká pošta", "languages": ["en", "cs"] },
   { "id": "express-one", "catalog": "express-one", "name": "Express One", "languages": ["en", "hu"] },
   { "id": "foxpost", "catalog": "foxpost", "name": "Foxpost", "languages": ["en", "hu"] },

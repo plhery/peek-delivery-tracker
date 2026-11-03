@@ -1432,6 +1432,9 @@
   "flickpost": {
     "decal": "flickpost"
   },
+  "flight-logistics": {
+    "decal": "flight-logistics"
+  },
   "flippost": {
     "decal": "flippost"
   },
@@ -2797,6 +2800,9 @@
   "peqasus-az": {
     "decal": "peqasus-az"
   },
+  "peregrine-ship": {
+    "decal": "peregrine-ship"
+  },
   "performance-freight": {
     "decal": "performance-freight"
   },
@@ -3381,6 +3387,9 @@
   },
   "southeastern-freight-lines": {
     "decal": "southeastern-freight-lines"
+  },
+  "southwestern-motor-transport": {
+    "decal": "southwestern-motor-transport"
   },
   "sp-express": {
     "decal": "sp-express"

@@ -711,6 +711,9 @@ describe('carrier brand', () => {
       'global-parcel-service',
       'logistics-solution',
       'quick-fort',
+      'flight-logistics',
+      'peregrine-ship',
+      'southwestern-motor-transport',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

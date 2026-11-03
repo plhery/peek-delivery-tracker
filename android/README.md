@@ -39,6 +39,16 @@ or from `android/`:
 The app uses Play App Signing: Google holds the key that signs the app phones install, and ours is only the upload
 key, which Google can replace if it is lost.
 
+Before a bundle goes to Google Play, open the APK built with it on an emulator or phone:
+
+```sh
+scripts/release-smoke.sh app/build/outputs/apk/release/app-release.apk [serial]
+```
+
+It installs the release in place of any build there, opens it and fails unless it is still up 15 seconds later: what R8
+removes shows only when the shrunk app runs. CI's "Release build opens" job does the same on each change, with a key
+and settings made up for the run.
+
 ## Core tests on a device
 
 `./gradlew :core:test` runs the core's JUnit tests on the JVM, with ICU4J standing in for the phone's ICU.

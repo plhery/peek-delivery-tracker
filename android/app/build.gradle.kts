@@ -82,9 +82,9 @@ android {
         applicationId = "com.plhery.peekdeliverytracker"
         minSdk = 31
         targetSdk = 37
-        versionCode = 1
+        versionCode = 2
         // The iPhone's MARKETING_VERSION (ios/PeekDeliveryTracker.xcodeproj).
-        versionName = "1.1.6"
+        versionName = "1.1.7"
         // What only a device can show (src/androidTest): the WebView's own engine behind the browser check.
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // The iPhone build's settings, under the names its Info.plist gives them (AppConfiguration.from).
@@ -420,6 +420,9 @@ dependencies {
     implementation(libs.mlkit.barcode.scanning)
     // WidgetKit's stand-in: the home screen widget, its RemoteViews written from Compose-like code (widget/).
     implementation(libs.glance.appwidget)
+    // Glance runs its widget sessions on WorkManager. Its own minimum (2.7.1) brings Room 2.2.5, whose keep rule leaves
+    // R8 free to drop WorkDatabase_Impl's constructor, which Room makes by reflection: a release then fails at launch.
+    implementation(libs.work.runtime)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 

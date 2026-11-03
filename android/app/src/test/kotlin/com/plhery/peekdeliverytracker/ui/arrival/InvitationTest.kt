@@ -3,6 +3,9 @@ package com.plhery.peekdeliverytracker.ui.arrival
 import android.content.Intent
 import android.os.Looper
 import android.net.Uri
+import android.os.VibrationEffect.Composition
+import android.os.Vibrator
+import android.os.VibratorManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -102,6 +105,8 @@ import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
+import org.robolectric.shadows.ShadowVibrator
+import org.robolectric.shadows.ShadowVibrator.PrimitiveEffect
 
 /**
  * A friend's invitation received (C-S02, C-S12, C-S13, C-S18) on made-up codes and names: each way a link comes in,
@@ -189,6 +194,22 @@ class InvitationTest {
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
     }
+
+    private val vibrator: Vibrator get() = compose.activity.getSystemService(VibratorManager::class.java).defaultVibrator
+
+    /** What the phone played since it was last asked, the haptics the test has just set off; the vibrator ready again. */
+    private fun felt(): List<PrimitiveEffect> {
+        val played = shadowOf(vibrator).primitiveSegmentsInPrimitiveEffects.toList()
+        ShadowVibrator.reset()
+        shadowOf(vibrator).setSupportedPrimitives(listOf(Composition.PRIMITIVE_TICK, Composition.PRIMITIVE_LOW_TICK))
+        return played
+    }
+
+    /** A light impact at [intensity], as the phone plays it. */
+    private fun light(intensity: Float) = listOf(PrimitiveEffect(Composition.PRIMITIVE_TICK, intensity, 0))
+
+    /** A soft impact at [intensity], as the phone plays it. */
+    private fun soft(intensity: Float) = listOf(PrimitiveEffect(Composition.PRIMITIVE_LOW_TICK, intensity, 0))
 
     private fun text(key: String, variables: Map<String, Any> = emptyMap()) = localizer.text(key, variables)
 
@@ -1009,6 +1030,46 @@ class InvitationTest {
                 }
             }
         }
+    }
+
+    // The welcome's haptics (C-H01, C-H02, C-H03).
+
+    /**
+     * Tapping the parcel plays a soft impact at 0.65 as it starts to open; the move to the sign-in 980 ms later a light
+     * one at 0.35; going back to the welcome nothing.
+     */
+    @Test
+    fun theParcelOpeningPlaysASoftImpactAndTheSignInALightOne() {
+        show(reduceMotion = false)
+        felt()
+        compose.onNodeWithTag(WELCOME_OPEN_PARCEL).performClick()
+        compose.mainClock.advanceTimeByFrame()
+        assertEquals(soft(0.65f), felt())
+        compose.mainClock.advanceTimeBy(900)
+        assertEquals(emptyList<PrimitiveEffect>(), felt())
+        compose.mainClock.advanceTimeBy(200)
+        assertTrue(invitation.opened)
+        assertEquals(light(0.35f), felt())
+        // The sign-in moves on its own: the clock goes on by hand.
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.mainClock.advanceTimeBy(2_000)
+        assertFalse(invitation.opened)
+        assertEquals(emptyList<PrimitiveEffect>(), felt())
+    }
+
+    /** The receipt's stamp lands with a soft impact at 0.45, 460 ms after the receipt came. */
+    @Test
+    fun theReceiptsStampLandsWithASoftImpact() {
+        show(reader, reduceMotion = false) { accepting() }
+        openParcel()
+        felt()
+        compose.onNodeWithTag(INVITATION_ACCEPT).performScrollTo().performClick()
+        compose.mainClock.advanceTimeBy(400)
+        assertNotNull(invitation.receipt)
+        assertEquals(emptyList<PrimitiveEffect>(), felt())
+        compose.mainClock.advanceTimeBy(100)
+        assertEquals(soft(0.45f), felt())
     }
 
     private companion object {

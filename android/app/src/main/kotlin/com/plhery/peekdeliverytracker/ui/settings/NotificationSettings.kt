@@ -298,7 +298,7 @@ private fun SaveButton(saving: Boolean, onSave: () -> Unit) {
  * one under the other where they don't fit.
  */
 @Composable
-private fun DeliveryEmailSettings(
+internal fun DeliveryEmailSettings(
     address: String,
     isOn: Boolean,
     onChange: (Boolean) -> Unit,

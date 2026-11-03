@@ -21,6 +21,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.SerializationStrategy
@@ -1068,5 +1069,49 @@ class SessionIsolationTests {
         runCurrent()
         assertNull(store.errorMessage)
         assertEquals(2, transport.requests.count { it.method == "GET" && it.path == "/api/sync/jobs" })
+    }
+
+    /**
+     * C-D14, `beginPolling`: an account's parcels are asked for again every 30 s while the app is in front; behind it
+     * the rounds pass without a request, and coming back asks at once.
+     */
+    @Test
+    fun anAccountsParcelsAreAskedForAgainEveryThirtySecondsWhileTheAppIsInFront() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        authorize(session, transport)
+        val store = store(session, transport)
+        val loads = mutableListOf<Long>()
+        transport.handler = { request ->
+            when {
+                request.path == "/api/push/preferences" -> jsonResponse(200, json(NotificationPreferences.serializer(), emailPreferences))
+                request.method == "GET" && request.path == "/api/packages" -> {
+                    loads += testScheduler.currentTime
+                    // Each answer names its round, so the test sees when the store has taken it in.
+                    jsonResponse(200, packageList(parcel().copy(label = "Round ${loads.size}")))
+                }
+                else -> jsonResponse(200, "{}")
+            }
+        }
+        suspend fun taken(round: Int) = store.parcelsFlow.first { it.singleOrNull()?.label == "Round $round" }
+        store.start()
+        taken(1)
+        for (round in 2..4) {
+            advanceTimeBy(30_000)
+            runCurrent()
+            taken(round)
+        }
+        store.setActive(false)
+        advanceTimeBy(60_000)
+        runCurrent()
+        assertEquals(4, loads.size)
+        advanceTimeBy(10_000)
+        store.setActive(true)
+        runCurrent()
+        taken(5)
+        advanceTimeBy(20_000)
+        runCurrent()
+        taken(6)
+        assertEquals(listOf(0L, 30_000L, 60_000L, 90_000L, 160_000L, 180_000L), loads.map { it - loads.first() })
     }
 }

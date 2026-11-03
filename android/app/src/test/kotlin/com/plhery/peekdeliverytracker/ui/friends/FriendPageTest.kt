@@ -1,5 +1,8 @@
 package com.plhery.peekdeliverytracker.ui.friends
 
+import android.os.VibrationEffect.Composition
+import android.os.Vibrator
+import android.os.VibratorManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -65,8 +68,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
+import org.robolectric.shadows.ShadowVibrator
+import org.robolectric.shadows.ShadowVibrator.PrimitiveEffect
 
 /**
  * A friend's page (C-S22, C-S29, C-S30, C-AN17) and the reveal's landing and notice (C-S31) on made-up friends: the
@@ -129,6 +135,19 @@ class FriendPageTest {
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
     }
+
+    private val vibrator: Vibrator get() = compose.activity.getSystemService(VibratorManager::class.java).defaultVibrator
+
+    /** What the phone played since it was last asked, the haptics the test has just set off; the vibrator ready again. */
+    private fun felt(): List<PrimitiveEffect> {
+        val played = shadowOf(vibrator).primitiveSegmentsInPrimitiveEffects.toList()
+        ShadowVibrator.reset()
+        shadowOf(vibrator).setSupportedPrimitives(listOf(Composition.PRIMITIVE_TICK, Composition.PRIMITIVE_LOW_TICK))
+        return played
+    }
+
+    /** A light impact at [intensity], as the phone plays it. */
+    private fun light(intensity: Float) = listOf(PrimitiveEffect(Composition.PRIMITIVE_TICK, intensity, 0))
 
     private fun text(key: String, variables: Map<String, Any> = emptyMap()) = localizer.text(key, variables)
 
@@ -602,5 +621,17 @@ class FriendPageTest {
     fun theDemoShowsNoNotice() {
         show(AuthenticationState.Demo, choose = false) { activity = accepted }
         assertFalse(exists(FRIENDS_NOTICE))
+    }
+
+    /** A stamp's popover opening plays a light impact at 0.6, and closing it another (C-H06). */
+    @Test
+    fun aStampsPopoverOpeningAndClosingPlaysALightImpactEachTime() {
+        show()
+        open(FriendFixtures.ada)
+        felt()
+        tap(friendStampTag(FriendStamp.Ten))
+        assertEquals(light(0.6f), felt())
+        back()
+        assertEquals(light(0.6f), felt())
     }
 }

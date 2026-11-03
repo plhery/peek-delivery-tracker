@@ -52,6 +52,7 @@ import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
+import com.plhery.peekdeliverytracker.ui.deliveries.ANNOUNCEMENT
 import com.plhery.peekdeliverytracker.ui.deliveries.DEVICE_ACCOUNT_ROW
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
@@ -134,6 +135,10 @@ class SettingsTest {
     private fun text(key: String, variables: Map<String, Any> = emptyMap()) = localizer.text(key, variables)
 
     private fun node(tag: String): SemanticsNodeInteraction = compose.onNodeWithTag(tag)
+
+    /** What TalkBack was last told, while it is news. */
+    private fun announced(): String? = compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).fetchSemanticsNode()
+        .config.getOrNull(SemanticsProperties.ContentDescription)?.firstOrNull()?.ifEmpty { null }
 
     private fun exists(tag: String) = compose.onAllNodes(hasTestTag(tag)).fetchSemanticsNodes().isNotEmpty()
 
@@ -620,7 +625,13 @@ class SettingsTest {
         }
         open()
         tap(SETTINGS_DELIVERY_UPDATES)
-        flip(SETTINGS_DELIVERY_EMAIL)
+        // TalkBack is told too (C-AX09), for the second the words are held.
+        compose.mainClock.autoAdvance = false
+        node(SETTINGS_DELIVERY_EMAIL).performScrollTo().performTouchInput { click(Offset(width - 40.dp.toPx(), height / 2f)) }
+        compose.mainClock.advanceTimeBy(500)
+        assertEquals(text("email.setting.failed"), announced())
+        compose.mainClock.autoAdvance = true
+        settle()
         assertTrue(exists(SETTINGS_DELIVERY_EMAIL_ERROR))
         assertEquals(DeliveryAnalytics.Outcome.Error, source.outcomes.last())
     }

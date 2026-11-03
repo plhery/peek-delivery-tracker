@@ -177,7 +177,7 @@ internal fun ParcelAlertsHost(state: DeliveriesState) {
  * closes once it is saved (`closing`), so a failure is never missed.
  */
 @Composable
-private fun ParcelAlertSwitches(
+internal fun ParcelAlertSwitches(
     parcel: Parcel,
     email: DeliveryEmail,
     preset: NotificationPreset,

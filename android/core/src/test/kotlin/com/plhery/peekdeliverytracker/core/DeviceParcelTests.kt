@@ -30,6 +30,7 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
@@ -1305,6 +1306,46 @@ class DeviceParcelTests {
         val entry = parcel("22222222222A", "", UUID.randomUUID()).copy(alertToken = "token1")
         val written = "$entry ${DeviceParcelStorage.Contents(listOf(entry), mapOf("22222222222A" to key))}"
         assertFalse(written, written.contains(key) || written.contains("token1") || written.contains("22222222222A"))
+    }
+
+    /**
+     * C-D14, `beginDevicePolling`: while a parcel on this phone waits for its carrier's first answer, its link is read
+     * again soon, 2·1.5^n s apart for six rounds, then after the list's 30 s, and the soon rounds start again; behind
+     * the app the rounds pass without a read.
+     */
+    @Test
+    fun aParcelWaitingForItsCarrierIsReadAgainSoonThenAfterThirtySeconds() = runTest {
+        val start = Instant.parse("2026-10-02T08:00:00Z")
+        val clock = { start.plusMillis(testScheduler.currentTime) }
+        val id = UUID.randomUUID()
+        val waiting = pkg(id, stage = null, sync = SyncStatus.Pending)
+        val reads = mutableListOf<Long>()
+        val storage = Memory().apply {
+            parcels = listOf(parcel("22222222222A", "Desk lamp", id, at = date(start), pkg = waiting))
+            keys = mapOf("22222222222A" to key)
+        }
+        val client = client(Calls(), read = {
+            reads += testScheduler.currentTime
+            PublicParcelResponse(link = link("22222222222A"), parcel = waiting)
+        })
+        val device = device(client, storage, backgroundScope, now = clock)
+        val transport = RecordingTransport()
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        assertTrue(store.isGuest)
+        store.start()
+        runCurrent()
+        assertEquals(emptyList<Long>(), reads)
+        advanceTimeBy(73_563)
+        runCurrent()
+        assertEquals(listOf(2_000L, 5_000L, 9_500L, 16_250L, 26_375L, 41_563L, 71_563L, 73_563L), reads)
+        store.setActive(false)
+        advanceTimeBy(60_000)
+        runCurrent()
+        assertEquals(8, reads.size)
     }
 
     /** A DeviceParcelFile in memory. */

@@ -3,6 +3,9 @@ package com.plhery.peekdeliverytracker.ui.friends
 import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
+import android.os.VibrationEffect.Composition
+import android.os.Vibrator
+import android.os.VibratorManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -81,6 +84,8 @@ import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
+import org.robolectric.shadows.ShadowVibrator
+import org.robolectric.shadows.ShadowVibrator.PrimitiveEffect
 
 /**
  * The friends tab (A-S20, C-S19 to C-S21, C-S23 to C-S28, C-S32) on made-up friends: signed out; loading, failing and
@@ -170,6 +175,19 @@ class FriendsTest {
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
     }
+
+    private val vibrator: Vibrator get() = compose.activity.getSystemService(VibratorManager::class.java).defaultVibrator
+
+    /** What the phone played since it was last asked, the haptics the test has just set off; the vibrator ready again. */
+    private fun felt(): List<PrimitiveEffect> {
+        val played = shadowOf(vibrator).primitiveSegmentsInPrimitiveEffects.toList()
+        ShadowVibrator.reset()
+        shadowOf(vibrator).setSupportedPrimitives(listOf(Composition.PRIMITIVE_TICK, Composition.PRIMITIVE_LOW_TICK))
+        return played
+    }
+
+    /** A light impact at [intensity], as the phone plays it. */
+    private fun light(intensity: Float) = listOf(PrimitiveEffect(Composition.PRIMITIVE_TICK, intensity, 0))
 
     private fun text(key: String, variables: Map<String, Any> = emptyMap()) = localizer.text(key, variables)
 
@@ -975,5 +993,19 @@ class FriendsTest {
         assertTrue(shows(FriendFixtures.profile.nickname))
         tap(FRIENDS_REPLAY)
         assertEquals(text("friends.replayParcel"), label(FRIENDS_REPLAY))
+    }
+
+    /** Each flip of a sharing switch plays a light impact at 0.5 (C-H05). */
+    @Test
+    fun eachSharingSwitchFlippedPlaysALightImpact() {
+        show()
+        tap(FRIENDS_SHARING)
+        felt()
+        flip(FRIENDS_SHARE_STATS)
+        assertEquals(light(0.5f), felt())
+        flip(FRIENDS_SHARE_ARRIVAL)
+        assertEquals(light(0.5f), felt())
+        flip(FRIENDS_SHARE_STATS)
+        assertEquals(light(0.5f), felt())
     }
 }

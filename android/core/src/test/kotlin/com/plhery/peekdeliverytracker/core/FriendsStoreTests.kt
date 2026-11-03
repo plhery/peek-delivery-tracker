@@ -404,4 +404,52 @@ class FriendsStoreTests {
         store.refresh()
         assertEquals(listOf(mila.id), store.updates.map { it.friendId })
     }
+
+
+    /**
+     * iOS's testFriendsPreviewSharesOnlyChosenRoundedSummary (C-T073): the card as it goes out holds the rounded summary
+     * the profile shares and nothing of the parcel's own; a parcel returned after its delivery hasn't arrived.
+     */
+    @Test
+    fun theCardSharesOnlyTheChosenRoundedSummary() {
+        val id = UUID.randomUUID()
+        val parcel = makeParcel(
+            id, events = listOf(event(id, TrackingStage.Accepted, "2026-09-06T10:00:00Z"), event(id, TrackingStage.Delivered, "2026-09-07T11:00:00Z")),
+        )
+        val now = Instant.parse("2026-09-08T12:00:00Z")
+        val profile = FriendProfile("My nickname", shareStats = true, shareArrival = false)
+        val card = FriendsStore.ownCard(listOf(parcel), profile, now)
+        assertEquals(1, card.stats?.deliveredCount)
+        assertEquals(2, card.stats?.averageDays)
+        assertEquals(listOf(FriendStamp.First, FriendStamp.Express), card.stats?.stamps)
+        assertNull(card.arrivedThisWeek)
+        val encoded = JsonEncoder().encode(FriendCard.serializer(), card).decodeToString()
+        val secrets = listOf(parcel.trackingNumber, parcel.label, id.uuidString, id.toString(), "occurredAt", "occurred_at", "trackingEvents", "tracking_events", "carrier")
+        for (secret in secrets) assertFalse("$secret in $encoded", encoded.contains(secret))
+        val unshared = profile.copy(shareStats = false, shareArrival = true)
+        val privateCard = FriendsStore.ownCard(listOf(parcel), unshared, now)
+        assertNull(privateCard.stats)
+        assertEquals(true, privateCard.arrivedThisWeek)
+        val returned = parcel.copy(trackingEvents = parcel.trackingEvents + event(id, TrackingStage.Returned, "2026-09-08T10:00:00Z"))
+        assertEquals(false, FriendsStore.ownCard(listOf(returned), unshared, now).arrivedThisWeek)
+    }
+
+    /**
+     * iOS's testFriendsWeekUsesFirstDeliveryAndUTCBoundary (C-T074): of two delivered scans the first counts, here last
+     * Sunday's at 23:59 UTC, before this week, though the second came on Monday.
+     */
+    @Test
+    fun theWeekCountsTheFirstDeliveredScanInUtc() {
+        val id = UUID.randomUUID()
+        val parcel = makeParcel(
+            id,
+            events = listOf(
+                event(id, TrackingStage.Accepted, "2026-09-04T10:00:00Z"),
+                event(id, TrackingStage.Delivered, "2026-09-06T23:59:00Z"),
+                event(id, TrackingStage.Delivered, "2026-09-07T11:00:00Z"),
+            ),
+        )
+        val profile = FriendProfile("Test", shareStats = false, shareArrival = true)
+        assertEquals(false, FriendsStore.ownCard(listOf(parcel), profile, Instant.parse("2026-09-08T12:00:00Z")).arrivedThisWeek)
+    }
 }

@@ -32517,6 +32517,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^TYZR[A-Z]\\d{10}YQ$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^TYZ(?!R)[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://track.szty56.com/"

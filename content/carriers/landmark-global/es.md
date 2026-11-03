@@ -34,7 +34,7 @@ Peek consulta la versión inglesa de la web de Landmark, así que en Peek verás
 | `Shipment Data Uploaded` | La tienda ha mandado a Landmark los datos del envío, pero Landmark todavía no tiene el paquete. |
 | `Processed` | Landmark ha procesado el paquete. |
 | `Scanned at Landmark crossdock facility` | Pasa por un centro de tránsito de Landmark. |
-| `Grouped when pallet scanned to crossing (DDU #…)` | Landmark lo ha agrupado en un palé para cruzar al país de destino; el número es el del palé. |
+| `Grouped when pallet scanned to crossing (… #…)` | Landmark lo ha agrupado en un palé para cruzar al país de destino; entre paréntesis van el cruce, como DDU o SLC INTERPOST, y el número del palé. |
 | `Transmitted customs information` | Se han enviado los datos del paquete para la aduana. |
 | `Customs cleared` | La aduana lo ha despachado. |
 | `Departure to country of destination` | Sale hacia el país de destino. |

@@ -33,7 +33,7 @@ Landmark's tracking site has a language menu, but Peek reads its English page, s
 | `Shipment Data Uploaded` | The shop has sent Landmark the parcel's details. Landmark doesn't have it yet. |
 | `Processed` | Landmark has processed the parcel. |
 | `Scanned at Landmark crossdock facility` | It's passing through a Landmark hub. |
-| `Grouped when pallet scanned to crossing (DDU #…)` | Landmark has put it on a pallet for the crossing to your country; the number is the pallet's. |
+| `Grouped when pallet scanned to crossing (… #…)` | Landmark has put it on a pallet for the crossing to your country; the brackets give the crossing, such as DDU or SLC INTERPOST, and the pallet's number. |
 | `Transmitted customs information` | The customs data has been sent ahead. |
 | `Customs cleared` | Customs has let it through. |
 | `Departure to country of destination` | It's on the international leg. |

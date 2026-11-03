@@ -81,7 +81,7 @@ Read on usps.com on 13 October 2026:
 
 ## Tracking USPS parcels with Peek
 
-[Peek](/) names USPS at once for 22-digit labels that pass USPS's check, most 26-digit `92` numbers and scanned `420` barcodes, whose ZIP it removes. For shared shapes (`9261` and `9361` numbers, 20 digits, postal numbers ending `US`) Peek first asks the other likely carriers and tracking services and opens USPS's page last, so the answer can take a moment. Links from usps.com work too.
+[Peek](/) names USPS at once for most 22-digit labels that pass USPS's check, most 26-digit `92` numbers and scanned `420` barcodes, whose ZIP it removes. For shared shapes (`9261` and `9361` numbers, 20 digits) Peek first asks the other likely carriers and tracking services and opens USPS's page last, so the answer can take a moment. Links from usps.com work too.
 
 Peek opens USPS's tracking page in a browser on its own server. That is slower, and USPS can refuse it; tracking services then fill in, though they don't always hold USPS's history. Peek shows the status, each scan on a map, its time read in the state where it happened and shown in your device's time zone, and the expected delivery day, and can notify you at every scan, at important steps or on delivery day only. It drops the signatory and delivery instructions.
 

@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-10-27
 ---
 
-Ecoscooting is a delivery company for online orders from cross-border platforms in Spain and Portugal, part of Cainiao, Alibaba's logistics arm. It only does the last leg: the local delivery to your door or to a pickup point. Track the parcel on ecoscooting.com with the number from Ecoscooting's emails, or paste it in the box above.
+Ecoscooting is a delivery company for online orders from cross-border platforms in Spain and Portugal. It only does the last leg: the local delivery to your door or to a pickup point. Track the parcel on ecoscooting.com with the number from Ecoscooting's emails, or paste it in the box above.
 
 ## Ecoscooting tracking number
 
@@ -18,15 +18,15 @@ Ecoscooting publishes no number format. Its numbers come in these shapes (digits
 | --- | --- |
 | `CNESP12345678901234567890` | `CNESP` and 20 digits, a parcel for Spain. |
 | `CNPRT00000000000000000000` | `CNPRT` and 20 digits, a parcel for Portugal. |
-| `123456789012345678` | 18 digits. |
+| `280010000123456789` | 18 digits, Ecoscooting's label in Spain: the postcode, `0000`, then 9 digits. |
 
-Numbers that look close belong elsewhere. On an AliExpress order you usually see an `LP` number with 14 digits: that's AliExpress's logistics reference, tracked with [Cainiao](carrier:cainiao). `CNES` with 11 digits is a reference you may meet on the tracker of [CACESA](carrier:cacesa), the customs agent that clears many of these parcels. If ecoscooting.com doesn't know your number, track the one on the order page. More in [tracking a parcel from China](guide:tracking-from-china).
+Numbers that look close belong elsewhere. On an AliExpress order you usually see an `LP` number with 14 digits: that's AliExpress's logistics reference, tracked with [Cainiao](carrier:cainiao). A parcel from China clears customs before the local delivery, for example with [CACESA](carrier:cacesa), a customs agent. If ecoscooting.com doesn't know your number, track the one on the order page. More in [tracking a parcel from China](guide:tracking-from-china).
 
 An unknown number gets `No data found` and a message asking you to check the order number.
 
 ## What Ecoscooting's tracking statuses mean
 
-ecoscooting.com shows its tracking in English, Spanish or Portuguese, following your browser, with a language menu. Each scan has a bold title and a line below it; these are the lines, in English. Cainiao's first steps stay in English in every language.
+ecoscooting.com shows its tracking in English, Spanish or Portuguese, following your browser, with a language menu. Each scan has a bold title and a line below it; these are the lines, in English.
 
 | Ecoscooting's status | What it means for you |
 | --- | --- |
@@ -76,15 +76,15 @@ As listed on ecoscooting.com on 12 October 2026:
 - **Spain:** +34 912 15 93 69, or the free line +34 800 00 03 69; customersupport@ecoscooting.com.
 - **Portugal:** +351 300 609 006; suportecliente@ecoscooting.com.
 - **Hours:** Monday to Friday 9:00 to 18:00, Saturday and Sunday 9:00 to 13:00.
-- **Chat** (in Spanish or Portuguese) **and a contact form** on the customer service page.
+- **Chat and a contact form** on the customer service page, which also says where to download Spain's official complaint sheet ("Hoja de reclamaciones").
 
-Its legal notice gives another number, 931 222 879, for queries and complaints, and official complaint sheets where the law requires them. The company is Ecoscooting Delivery, S.L., based in San Fernando de Henares, near Madrid.
+Ecoscooting pages cited here, in Spanish, English and Portuguese: on www.ecoscooting.com, the home page, "Entrega a domicilio", "Red de puntos de recogida y lockers", "Atención al cliente" with its "Preguntas frecuentes", and the tracking page "Localiza tu envío".
 
 ## Tracking Ecoscooting parcels with Peek
 
-[Peek](/) recognises a `CNESP` or `CNPRT` number with 20 digits as Ecoscooting's straight away. An 18-digit number could also be [bpost](carrier:bpost)'s, and Peek can't ask Ecoscooting whether it knows a number, so it asks bpost only: press "Change" and pick Ecoscooting, or paste the ecoscooting.com tracking link, which names Ecoscooting.
+[Peek](/) recognises a `CNESP` or `CNPRT` number with 20 digits as Ecoscooting's straight away, and most 18-digit Spanish labels that start with the postcode and then `0000`. For a SHEIN parcel number (`C` or `E`, a six-digit date, then 8 digits), which [Paack](carrier:paack) also delivers in Spain, Peek asks Ecoscooting whether it knows it. Another 18-digit number could also be [bpost](carrier:bpost)'s. If Ecoscooting isn't offered, press "Change" and pick it, or paste the ecoscooting.com tracking link, which names Ecoscooting.
 
-When Cainiao or CACESA gives a `CNESP` or `CNPRT` number, Peek follows the parcel on to Ecoscooting; an 18-digit number isn't followed. Ecoscooting no longer answers some older Spanish `CNESP` references, so these may stay empty.
+When Cainiao or CACESA gives a `CNESP` or `CNPRT` number, or a label Peek recognises as Ecoscooting's, Peek follows the parcel on to Ecoscooting; another 18-digit number isn't followed.
 
 Peek shows the status, the history with Ecoscooting's exact times but no places, the weight, the delivery time and, once the parcel reaches a parcelshop, its name and address, kept after you pick it up. There's no expected delivery date. It leaves out the PIN, the shop's phone and hours, postcodes and order references. Lines appear in Ecoscooting's English, except a plain `Out for delivery`, which shows in Peek's own words. Ecoscooting never says a number doesn't exist, so a wrong number simply stays without updates.
 
@@ -94,7 +94,7 @@ Peek checks every 10 minutes, or every 2 once the parcel is out for delivery, an
 
 ### Is Ecoscooting legit?
 
-Yes. Ecoscooting Delivery, S.L. is a registered Spanish company near Madrid, owned by Cainiao, Alibaba's logistics arm, since 2022.
+Yes. Ecoscooting Delivery S.L. delivers parcels in Spain and Portugal and says it has more than 8 years' experience in logistics in both countries, for cross-border online platforms and local sellers.
 
 ### What is Ecoscooting delivery?
 
@@ -109,14 +109,5 @@ In Spain, yes: every day, Saturdays and Sundays included. In Portugal it deliver
 Ecoscooting advertises 24 to 48 hours for its national delivery, in its pitch to shops. That's no promise for your whole order, and its tracking shows no expected day.
 
 :::sources
-- [Ecoscooting: Customer Service / Frequent Questions](https://www.ecoscooting.com/atencionCliente) – contacts, hours, failed attempts, 3 business days, 14 days, delivered not received, lost or stolen, returns, scam advice (English, Spanish and Portuguese versions)
-- [Ecoscooting: Track your shipment](https://www.ecoscooting.com/tracking/) – tracking box, headlines, not-found message, languages
-- [Ecoscooting: Home](https://www.ecoscooting.com/) – Spain and Portugal, delivery days, two attempts, pickup-point redirect in Spain, 24/48 hours
-- [Ecoscooting: Entrega a domicilio](https://www.ecoscooting.com/toDoor) – two attempts, third at a pickup point in Spain
-- [Ecoscooting: Red de puntos de recogida y lockers](https://www.ecoscooting.com/pickUpPoint) – 8,000+ pickup points, lockers
-- [Ecoscooting: Aviso legal](https://www.ecoscooting.com/aviso-legal) – company name, address, complaints phone
-- [Ecoscooting: site texts](https://www.ecoscooting.com/static/js/main.0cb02ae4.js) – page wording in three languages
-- [Air Cargo Week: Cainiao expands delivery network in Spain](https://aircargoweek.com/cainiao-expands-delivery-network-in-spain) – Cainiao's purchase of Ecoscooting
-- [Alimarket: El operador logístico chino Cainiao avanza en España](https://www.alimarket.es/logistica/noticia_amp/373965/el-operador-logistico-chino-cainiao-avanza-en-espana) – purchase in August 2022
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

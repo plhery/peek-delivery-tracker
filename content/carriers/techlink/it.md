@@ -37,6 +37,7 @@ Techlink non pubblica un elenco delle sue scansioni. Le registra in inglese e in
 | `Parcel has been packed and is ready for outbound shipping` (包裹装箱) | È imballato per la linea verso l'estero, pronto a partire. |
 | `Departed from the original facility` | Ha lasciato il magazzino di Techlink in Cina. |
 | `Export customs declaration completed` | La dichiarazione di esportazione dalla Cina, registrata dopo l'uscita dal magazzino. Il pacco non è fermo in dogana. |
+| `Parcel is in transit to origin airport` | In viaggio su strada in Cina, dal magazzino all'aeroporto di partenza. |
 | `Depart from the original airport` | Il volo è partito dall'aeroporto in Cina. |
 | `Arrive at the destination airport` | Il volo è atterrato nel Paese di destinazione. La dogana d'importazione viene dopo. |
 | `Your shipment has arrived at sorting center` | Il pacco è in un centro di smistamento nel Paese di destinazione, dopo il volo. |

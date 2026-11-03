@@ -61,6 +61,8 @@ Più avanti nel viaggio verso l'Europa arrivano altre tre righe solo in cinese, 
 
 Nelle date con il punto viene prima il mese: 11.12 è il 12 novembre, non l'11 dicembre.
 
+**Righe con la barra.** Su alcune spedizioni JRT unisce cinese e inglese con una barra, e in Peek sono tutte «In transito»: `预计…航班/Flight scheduled for …` (il volo è prenotato, con il giorno in tutte e due le parti al posto dei puntini), `航班已启运/Package in transit to destination country` (è in volo) e `航班已落地，拆板中/Package arrived at destination country` (atterrato, prima della dogana). Prima arriva `国内清关完成`: è lo sdoganamento all'esportazione in Cina, non la dogana del tuo Paese («In transito»).
+
 **Le righe di DHL e di FedEx.** Verso l'Europa il tracking di JRT prosegue con le scansioni di DHL, quasi sempre in minuscolo:
 
 | DHL scrive | Cosa vuol dire per te | Peek mostra |

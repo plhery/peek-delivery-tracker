@@ -37,6 +37,7 @@ Techlink publishes no list of its scans. It records each one in English and Chin
 | `Parcel has been packed and is ready for outbound shipping` (包裹装箱) | It's packed for the line abroad and about to leave China. |
 | `Departed from the original facility` | It has left Techlink's warehouse in China. |
 | `Export customs declaration completed` | China's export declaration, written after the parcel left the warehouse. The parcel isn't held in customs. |
+| `Parcel is in transit to origin airport` | On the road in China, from the warehouse to the airport of departure. |
 | `Depart from the original airport` | The flight has left the airport in China. |
 | `Arrive at the destination airport` | The flight has landed in the destination country. Import clearance comes next. |
 | `Your shipment has arrived at sorting center` | It's at a sorting centre in the destination country, after the flight. |

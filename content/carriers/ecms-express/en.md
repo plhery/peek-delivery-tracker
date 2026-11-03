@@ -42,13 +42,13 @@ ECMS's tracker first asks you to pass a picture check ("Security verification").
 | `Shipment arrived at destination facility`, `Parcel at destination facility, ready for next step`, `Parcel Weight` | At the facility in the destination country, where it's weighed and waits for the local carrier. | "In transit" |
 | `Shipment is tendering to third party carrier for final delivery.` | ECMS is handing the parcel to the local carrier that delivers it. Its number may show from now on. | "In transit" |
 | `Local carrier has accepted package for final delivery` | The local carrier has the parcel. | "In transit" |
-| `Shipment is in Transit within the carrier‘s network` | Moving through the local carrier's network, as ECMS passes it on. | "In transit" |
+| `Shipment is in Transit within the carrier‘s network`, `Parcel in transit during last mile delivery` | Moving through the local carrier's network, as ECMS passes it on. The second can come back on later days. | "In transit" |
 | `Shipment is out for delivery.` | On the delivery run. | "Out for delivery" |
 | `Shipment delivered to customer` | Delivered. | "Delivered" |
 
 **In Chinese.** Some histories give these steps in Chinese, and Peek gives them the same stage as their English twins: `发货预报已收到，正在等待货物到达我们的始发站仓库` (details received, waiting for the parcel), `干线航班起飞` and `干线航班已到达` (flight left, landed), `货物已进入清关流程` (in customs), `货物已清关放行` (cleared), `货物已到达目的站仓库` (at the destination warehouse) and `货物出库前往配送中心安排最终派送` (on its way to the local carrier).
 
-**Times.** ECMS gives its own scans the clock and UTC offset of the station that made them, and Peek reads them that way. The local carrier's scans come without an offset, so Peek works out their clock from their place, a scan beside them or your country. See also [tracking a parcel from China](guide:tracking-from-china).
+**Times.** ECMS gives its own scans the clock and UTC offset of the station that made them, and Peek reads them that way. The local carrier's scans, as ECMS relays them, carry an offset of zero: their times are in UTC, and Peek reads them so. See also [tracking a parcel from China](guide:tracking-from-china).
 
 ## Who delivers ECMS Express parcels
 

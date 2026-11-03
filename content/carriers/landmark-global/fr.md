@@ -33,7 +33,7 @@ Le site de suivi a un menu de langues, dont le français. Mais Peek lit la page 
 | `Shipment Data Uploaded` | La boutique a envoyé les données du colis. Landmark ne l'a pas encore. |
 | `Processed` | Landmark a traité le colis. |
 | `Scanned at Landmark crossdock facility` | Il passe par un centre de tri de Landmark. |
-| `Grouped when pallet scanned to crossing (DDU #…)` | Landmark l'a regroupé sur une palette pour le passage vers ton pays ; le numéro est celui de la palette. |
+| `Grouped when pallet scanned to crossing (… #…)` | Landmark l'a regroupé sur une palette pour le passage vers ton pays ; entre parenthèses figurent le passage, comme DDU ou SLC INTERPOST, et le numéro de la palette. |
 | `Transmitted customs information` | Les données pour la douane sont parties en avance. |
 | `Customs cleared` | La douane l'a laissé passer. |
 | `Departure to country of destination` | Il part vers ton pays. |

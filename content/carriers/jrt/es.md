@@ -68,6 +68,8 @@ Ya al final del trayecto a Europa, JRT escribe solo en chino otros tres pasos, q
 
 En `The flight is expected to depart on … and land on …` y `The flight has departed and is expected to … land`, las fechas llevan primero el mes: 11.12 es el 12 de noviembre, no el 11 de diciembre.
 
+**Pasos con barra.** En algunos envíos, JRT une el chino y el inglés con una barra, y en Peek todos son «En tránsito»: `预计…航班/Flight scheduled for …` (el vuelo está reservado, con su día en las dos partes en lugar de los puntos), `航班已启运/Package in transit to destination country` (en el aire) y `航班已落地，拆板中/Package arrived at destination country` (ha aterrizado y aún no ha pasado la aduana). Antes llega `国内清关完成`: es el despacho de exportación en China, no la aduana de tu país («En tránsito»).
+
 **Pasos de DHL y de FedEx.** En los envíos a Europa, la web de JRT sigue con los escaneos de DHL, casi siempre en minúsculas:
 
 | DHL escribe | Qué significa para ti | Peek muestra |

@@ -317,7 +317,6 @@ and providers scan parcels across every time zone.
 | Served by a universal provider, out for delivery too | every 15 min |
 | PostNL | every 30 min, also after a failure and out for delivery |
 | A carrier whose catalog entry sets a refresh limit (`tracking.refresh`) | no more often than its interval, out for delivery too; when it also sets a wait after a failure, that wait follows a failed check and the limit holds for a manual refresh too |
-| DHL eCommerce Poland | at most hourly, 2 h after a failure, out for delivery and manual refresh included: each lookup solves its history page's reCAPTCHA in the browser service, and frequent solves get its audio challenges blocked for every carrier there. Peek sets this until the catalog does ([`trackingSync.ts`](../src/server/trackingSync.ts)) |
 | Registered or accepted, no new event for 12 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | No new event for 48 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | Nobody waiting for it | hourly around the clock; manual refresh still allowed |

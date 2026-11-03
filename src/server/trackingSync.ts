@@ -267,27 +267,16 @@ export function isTrackingSyncDue(parcel: JsonObject, now: Date): boolean {
   return now.getTime() >= trackingSyncDueAt(parcel);
 }
 
+/** The least interval between two checks of a carrier, and after a failed one, when its catalog entry sets any. */
+function refreshLimit(carrier: unknown): { minMinutes: number; afterFailureMinutes?: number } | undefined {
+  return CARRIER_DEFINITIONS[String(carrier) as CarrierId]?.tracking.refresh;
+}
+
 /**
  * When the persisted cooldown lets the parcel be checked again, as epoch
  * milliseconds: a routing deferral or the carrier's refresh interval. Zero when
  * nothing holds it back, infinity when it is never checked.
  */
-/**
- * Refresh limits Peek keeps for carriers whose catalog entry sets none: each DHL Poland lookup
- * solves its history page's reCAPTCHA in the browser service, and frequent solves get its audio
- * challenges blocked, which holds up every carrier there, so it is not checked every 5 minutes
- * out for delivery either. The catalog's own limit, once it sets one, takes over.
- */
-const REFRESH_LIMITS: Readonly<Record<string, { minMinutes: number; afterFailureMinutes?: number }>> = {
-  'dhl-ecommerce-pl': { minMinutes: 60, afterFailureMinutes: 120 },
-};
-
-/** The least interval between two checks of a carrier, and after a failed one, when it sets any. */
-function refreshLimit(carrier: unknown): { minMinutes: number; afterFailureMinutes?: number } | undefined {
-  const id = String(carrier);
-  return CARRIER_DEFINITIONS[id as CarrierId]?.tracking.refresh ?? (Object.hasOwn(REFRESH_LIMITS, id) ? REFRESH_LIMITS[id] : undefined);
-}
-
 export function trackingSyncDueAt(parcel: JsonObject): number {
   if (parcel.sync_status === 'unsupported' && parcel.carrier === 'amazon-shipping' && parcel.sync_error === AMAZON_HISTORY_EXPIRED) return Infinity;
   if (parcel.sync_status === 'unsupported' && requiresAmazonAccount(String(parcel.carrier), String(parcel.tracking_number ?? ''))) return Infinity;

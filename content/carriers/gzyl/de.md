@@ -45,6 +45,8 @@ GZYL schreibt seine eigenen Schritte auf Englisch, samt Tippfehlern. In der Reih
 | `Package is on the way` | Weiter unterwegs in deinem Land, mit einem Ort. Dass es in der Zustellung ist, heißt das nicht. | „Unterwegs“ |
 | `Delivered` | Die Zustellung, mit dem Ort. Das kann ein Plan sein und kein Scan: siehe unten. | „Zugestellt“, mit einem Hinweis auf den festen Zeitplan, sofern Peek den Schritt nicht zurückhält (siehe unten) |
 
+**Über die USA.** Ein Paket kann auch `Los Angeles Processing Center has received it` zeigen, mit einer Stadt in Klammern dahinter: Ein Bearbeitungszentrum in den USA hat es auf dem Weg in sein Zielland übernommen. Peek zeigt „Unterwegs“.
+
 **Eine Zeile auf Chinesisch.** Bei einer Bestellung ohne Scans schreibt die Plattform, auf der die Tracking-Seite von GZYL läuft, von selbst `货物电子信息已经收到` (die elektronischen Warendaten sind eingegangen). Der Shop hat die Bestellung angelegt, aber niemand hat das Paket gescannt. Peek zeigt die Zeile auf Chinesisch, unter „Etikett erstellt“.
 
 **Über China Post.** Ein Paket kann auch `广州处理中心已收寄` zeigen, mit der Stadt in Klammern dahinter: die Annahme durch China Post in ihrem Bearbeitungszentrum in Guangzhou, die GZYL auf Chinesisch weitergibt. Peek zeigt die Zeile auf Chinesisch, unter „Beim Paketdienst eingegangen“.
@@ -85,7 +87,7 @@ Peek liest die eigene Tracking-Seite von GZYL und zeigt den Status, jeden Schrit
 
 Peek hält jeden Schritt zurück, der mehr als zwölf Stunden vor seiner eigenen Uhrzeit geschrieben wurde, und jeden, dessen Uhrzeit nach dem Moment der Abfrage liegt, gemessen in Pekinger Zeit. Hat eine Bestellung vorab geschriebene Schritte, hält Peek auch `Delivered` zurück, selbst eines, das erst an seinem eigenen Tag geschrieben wurde. Peek richtet sich nach den Schritten, die es behält, nicht nach dem Gesamtstatus des Datensatzes. Hält Peek alle Schritte einer Bestellung zurück, hat sie in Peek noch keinen Sendungsverlauf. Kopien der Schritte, die Peek als Plan von GZYL zurückhält, `Delivered` eingeschlossen, lässt Peek auch bei Tracking-Diensten weg, selbst wenn es andere Schritte der Bestellung behält. Ist GZYLs Tracking-Seite aber nicht erreichbar, fragt Peek Tracking-Dienste, und deren Kopien können vorab geschriebene Schritte enthalten.
 
-Ohne Übergabe an die Schweizerische Post bleibt Peek bei der Tracking-Seite von GZYL: Gibt dir der Shop die Nummer des Paketdiensts, der zustellt, füg sie als eigenes Paket hinzu.
+Ohne Übergabe an die Schweizerische Post bleibt Peek bei GZYL: Gibt dir der Shop die Nummer des Paketdiensts, der zustellt, füg sie als eigenes Paket hinzu.
 
 Peek schaut alle 10 Minuten nach. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Als Benachrichtigung wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“: „Wichtige Schritte“ umfasst die beiden Zollschritte von GZYL und die Zustellung, nicht die Flüge oder die Sortierung. GZYL oder den Shop kontaktieren kann Peek nicht für dich.
 

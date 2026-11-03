@@ -131,7 +131,7 @@
   { "id": "first-line", "catalog": "first-line", "name": "FIRST LINE", "languages": ["en", "es"] },
   { "id": "j-and-t-de", "catalog": "j-and-t-de", "name": "J&T Express Germany", "languages": ["en", "de", "ru", "ro", "hr", "it"] },
   { "id": "kun-express", "catalog": "kun-express", "name": "Kun Express", "languages": ["en"] },
-  { "id": "juxi-express", "catalog": "juxi-express", "name": "Juxi Express", "languages": ["en", "fr"] },
+  { "id": "juxi-express", "catalog": "juxi-express", "name": "Juxi Express", "languages": ["en", "fr", "de"] },
   { "id": "jcex", "catalog": "jcex", "name": "JCEX", "languages": ["en", "pl", "zh"] },
   { "id": "lingdong", "catalog": "lingdong", "name": "Lingdong International", "languages": ["en", "es"] },
   { "id": "j-and-t-au", "catalog": "j-and-t-au", "name": "J&T Express Australia", "languages": ["en"] },

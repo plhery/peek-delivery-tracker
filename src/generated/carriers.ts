@@ -2180,6 +2180,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "juxi-express-sendungsverfolgung",
+      "title": "Juxi Express Sendungsverfolgung: JXC-Nummer, Zusteller, Zoll",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-sendungsverfolgung",

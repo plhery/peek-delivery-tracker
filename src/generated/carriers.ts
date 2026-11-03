@@ -1924,6 +1924,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e30613"
     },
     {
+      "id": "brt",
+      "catalog": "brt",
+      "slug": "brt-sendungsverfolgung",
+      "title": "BRT Sendungsverfolgung: Paket aus Italien, Status",
+      "name": "BRT",
+      "color": "#dc0032"
+    },
+    {
       "id": "yunexpress",
       "catalog": "yunexpress",
       "slug": "yunexpress-sendungsverfolgung",

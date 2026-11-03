@@ -41,6 +41,9 @@ Techlink non pubblica un elenco delle sue scansioni. Le registra in inglese e in
 | `Depart from the original airport` | Il volo è partito dall'aeroporto in Cina. |
 | `Arrive at the destination airport` | Il volo è atterrato nel Paese di destinazione. La dogana d'importazione viene dopo. |
 | `Your shipment has arrived at sorting center` | Il pacco è in un centro di smistamento nel Paese di destinazione, dopo il volo. |
+| `Your shipment has been processed at sorting center and ready for shipping` | Quel centro ha smistato il pacco per la tappa successiva. |
+| `Your shipment has departed from the transit origin` | Ha lasciato quel centro di smistamento per la tappa successiva. |
+| `In transit, it is currently in transit to the next facility` | È in viaggio tra due strutture nel Paese di destinazione. |
 
 Per un numero che non conosce, la pagina mostra `查询不到轨迹` (nessun tracciamento trovato), `未知 → 未知` (Paesi sconosciuti) e `暂无最新轨迹` (ancora nessuna scansione recente).
 
@@ -56,7 +59,7 @@ Il servizio espresso porta a porta di Techlink è DDP (dazi pagati) o DDU (dazi 
 
 **Solo `Parcel electronic information received`.** Il venditore ha prenotato la spedizione, ma il pacco non è ancora arrivato al magazzino di Techlink. Se per qualche giorno non succede niente, chiedi al venditore se l'ha spedito davvero.
 
-**Fermo a metà strada.** Dopo l'imballaggio vengono l'uscita dal magazzino, l'esportazione e il volo, e tra un passo e l'altro possono passare giorni senza scansioni. Dopo `Arrive at the destination airport` restano la dogana d'importazione e il corriere locale, e finora l'unica riga successiva vista sul tracking di Techlink è `Your shipment has arrived at sorting center`. Se non si muove più niente, chiedi al venditore quale corriere consegna in Italia e con che numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Fermo a metà strada.** Dopo l'imballaggio vengono l'uscita dal magazzino, l'esportazione e il volo, e tra un passo e l'altro possono passare giorni senza scansioni. Dopo `Arrive at the destination airport` restano la dogana d'importazione e il corriere locale. Le righe viste finora dopo questa sul tracking di Techlink riguardano solo il Paese di destinazione: un centro di smistamento e il tragitto da lì, le ultime quattro righe della tabella. Se non si muove più niente, chiedi al venditore quale corriere consegna in Italia e con che numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Nessun risultato.** Controlla il numero con il venditore: un numero ZHPHD ha esattamente 19 caratteri. Anche un pacco appena prenotato potrebbe non mostrare ancora niente. Peek mostra «In attesa del corriere» e continua a controllare.
 
@@ -94,7 +97,7 @@ Un corriere che Techlink non nomina. Il suo tracking può avere il numero di que
 
 ### Perché il tracking Techlink non si aggiorna più?
 
-Le righe viste finora sul tracking di Techlink si fermano all'atterraggio nel Paese di destinazione o, un passo dopo, a un centro di smistamento in quel Paese (`Your shipment has arrived at sorting center`). La consegna si segue sul tracking del corriere locale: chiedi al venditore quale corriere è e con che numero, e se il pacco tarda scrivi a lui.
+Le righe viste finora sul tracking di Techlink si fermano all'atterraggio nel Paese di destinazione o, qualche passo dopo, in un centro di smistamento in quel Paese o in viaggio tra due strutture (`In transit, it is currently in transit to the next facility`). La consegna si segue sul tracking del corriere locale: chiedi al venditore quale corriere è e con che numero, e se il pacco tarda scrivi a lui.
 
 :::sources
 - [Techlink: 智禾官网 (home page)](http://www.techlinksz.cn/) – nome dell'azienda, linee per piccoli pacchi verso Europa e America, Amazon, Walmart, TK e negozi indipendenti, porta a porta DDU e DDP, sdoganamento all'estero e società del 2023, account di consegna a destinazione, link ai contatti che non porta da nessuna parte

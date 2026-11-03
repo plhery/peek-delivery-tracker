@@ -3858,6 +3858,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "ru": [
     {
+      "id": "lietuvos-pastas",
+      "catalog": "lietuvos-pastas",
+      "slug": "pochta-litvy-otslezhivanie",
+      "title": "Почта Литвы (Lietuvos paštas): отслеживание посылок",
+      "name": "Lietuvos paštas",
+      "color": "#fedd00"
+    },
+    {
       "id": "latvijas-pasts",
       "catalog": "latvijas-pasts",
       "slug": "latvijskaya-pochta-otslezhivanie",

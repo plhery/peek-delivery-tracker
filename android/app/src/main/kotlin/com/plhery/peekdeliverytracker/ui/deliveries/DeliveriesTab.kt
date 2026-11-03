@@ -204,10 +204,14 @@ fun DeliveriesTab(
         val refreshing by source.refreshing.collectAsState()
         // The phone's question pauses the window: the invitation stays while it asks.
         state.invitationShown = state.inviting(resumed || enabling, refreshing, invited)
+        // `looking`: the list is looked at, whole and in its own order, with nothing over it. Another tab chosen leaves
+        // the composition, and the list is drawn anew as it is chosen again.
+        val looking = resumed && state.listShown && state.addition == null && !state.showingAccount && !state.showingFilters &&
+            !state.promptsCover && !state.hasCustomView
         // `watching`: the list is looked at, and may show a card moving.
-        val watching = resumed && state.listShown && !state.showingFilters && !state.showingAccount && !state.hasCustomView && !reduceMotion
-        HoldingDelivered(state, resumed, watching)
-        Reviewing(state, resumed, watching, now)
+        val watching = looking && !reduceMotion
+        HoldingDelivered(state, resumed, looking, watching)
+        Reviewing(state, resumed, looking, now)
         Consuming(state, inbox)
         LaunchPreviewing(state)
         // The first open's field, scan and paste (`firstParcel`), which chose this tab first: Add opens here for them.
@@ -396,17 +400,24 @@ private val REGULAR_HEIGHT = 480.dp
  * tap of success and paper out of Pip's open box ([DeliveriesState.postmark]), the card is read, then it flies to its
  * new place ([DeliveriesState.letGo]). Nobody looking, or under Reduce Motion, they take their new places at once,
  * unseen, as nothing is held then. The window's frames stop while it is away: the cards in flight are at their places
- * as it comes back, as the iPhone's flights have landed meanwhile.
+ * as it comes back, as the iPhone's flights have landed meanwhile. As the list comes into view (back from a page, the
+ * app back in front, the tab chosen again), the parcels delivered while it was out of it arrive on it
+ * ([DeliveriesState.see]), the postmark landing once its cards have come to rest.
  */
 @Composable
-private fun HoldingDelivered(state: DeliveriesState, resumed: Boolean, watching: Boolean) {
+private fun HoldingDelivered(state: DeliveriesState, resumed: Boolean, looking: Boolean, watching: Boolean) {
+    val cameIntoView = looking && !state.looking
+    state.looking = looking
     state.watching = watching
+    // `.onChange(of: looking, initial: true)`, here rather than in an effect, so that the list's first frame in view
+    // already holds what arrived meanwhile, before its cards are laid out where they have gone since.
+    if (cameIntoView) Snapshot.withoutReadObservation { state.see(state.parcels) }
     SensoryFeedbackEffect(SensoryFeedback.Success, state.postmarks)
     LaunchedEffect(watching) { if (!watching) state.release() }
     LaunchedEffect(resumed) { if (!resumed) state.dropFlights() }
     LaunchedEffect(state.hold.ids) {
         if (state.hold.isEmpty) return@LaunchedEffect
-        delay(POSTMARK_MILLIS)
+        delay(if (state.hold.late) LATE_POSTMARK_MILLIS else POSTMARK_MILLIS)
         state.postmark()
         delay(READ_MILLIS)
         state.letGo()
@@ -424,7 +435,7 @@ private fun HoldingDelivered(state: DeliveriesState, resumed: Boolean, watching:
  * while it shows.
  */
 @Composable
-private fun Reviewing(state: DeliveriesState, resumed: Boolean, watching: Boolean, now: () -> Instant) {
+private fun Reviewing(state: DeliveriesState, resumed: Boolean, looking: Boolean, now: () -> Instant) {
     val source = state.source
     val prompt = source.reviewPrompt
     val settled by source.reviewSettled.collectAsState()
@@ -442,7 +453,7 @@ private fun Reviewing(state: DeliveriesState, resumed: Boolean, watching: Boolea
         snapshotFlow { failure }.drop(1).collect { shown -> if (shown) prompt.noteBadMoment(now()) }
     }
     val covered = state.showingFilters || state.modal
-    val ready = watching && !covered && state.hold.isEmpty && state.flights.isEmpty() && state.toast == null && undo == null &&
+    val ready = looking && !covered && state.hold.isEmpty && state.flights.isEmpty() && state.toast == null && undo == null &&
         !state.invitationShown && !refreshing && !state.showingSearch && settled
     val activity = LocalActivity.current
     val requester = remember(source, activity) { activity?.let(source::reviews) }
@@ -488,6 +499,10 @@ private const val SEARCH_SETTLE_MILLIS = 800L
 private const val LINK_REVEAL_WAIT = 500L
 
 private const val POSTMARK_MILLIS = 300L
+
+/** How long a hold that began as the list came into view waits for its postmark (`delivered.late`). */
+private const val LATE_POSTMARK_MILLIS = 700L
+
 private const val READ_MILLIS = 650L
 
 /** How long a message under the list stays, in milliseconds. */

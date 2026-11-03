@@ -5,6 +5,7 @@ import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.makeParcel
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.Duration
 import java.time.Instant
 import java.util.UUID
 import org.junit.Assert.assertEquals
@@ -71,6 +72,126 @@ class ParcelLogicListTests {
         unseen = unseen.release()
         assertTrue(unseen.isEmpty)
         assertEquals(DeliveredHold(), unseen)
+    }
+
+    @Test
+    fun aDeliveryTheListDidNotSeeArrivesOnItTheNextTimeItIsInView() {
+        val record = OnTheWayRecord(MemoryDefaults())
+        val tea = UUID.randomUUID()
+        val lamp = UUID.randomUUID()
+        val mug = UUID.randomUUID()
+        val vase = UUID.randomUUID()
+        val pen = UUID.randomUUID()
+        val book = UUID.randomUUID()
+        fun ago(hours: Double): String = DateParser.isoString(Instant.now().minusMillis((hours * 3_600_000).toLong()))
+        fun layout(parcels: List<Parcel>): DeliveryListLayout =
+            DeliveryListLayout(parcels, query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Priority, featuresNext = true)
+        val shown = listOf(
+            makeParcel(id = tea, events = listOf(event(tea, TrackingStage.OutForDelivery, ago(2.0)))),
+            makeParcel(id = lamp, events = listOf(event(lamp, TrackingStage.InTransit, ago(2.0)))),
+            makeParcel(id = mug, events = listOf(event(mug, TrackingStage.InTransit, ago(2.0)))),
+            makeParcel(id = vase, events = listOf(event(vase, TrackingStage.InTransit, ago(240.0)))),
+            makeParcel(id = pen, events = listOf(event(pen, TrackingStage.InTransit, ago(3.0)))),
+            makeParcel(id = book, events = listOf(event(book, TrackingStage.Delivered, ago(30.0)))),
+        )
+        // A list still loading says nothing; one in view keeps which parcels it shows on their way.
+        record.seen(emptyList())
+        assertTrue(record.ids.isEmpty())
+        record.seen(shown)
+        assertEquals(setOf(tea, lamp, mug, vase, pen), record.ids)
+
+        // Out of view, the tea arrives; the lamp arrives and is deleted, the mug arrives and is archived, and the vase
+        // arrived eight days ago. Only the tea is news when the list is next in view.
+        val now = shown.toMutableList()
+        now[0] = now[0].copy(trackingEvents = now[0].trackingEvents + event(tea, TrackingStage.Delivered, ago(1.0)))
+        now[2] = now[2].copy(trackingEvents = now[2].trackingEvents + event(mug, TrackingStage.Delivered, ago(1.0)), archivedAt = ago(0.5))
+        now[3] = now[3].copy(trackingEvents = now[3].trackingEvents + event(vase, TrackingStage.Delivered, ago(192.0)))
+        now.removeAt(1)
+        assertEquals(listOf(tea), record.arrivals(now, at = Instant.now()).map { it.id })
+
+        // It arrives where it stood on its way, Next up, and only it: the other cards are as they are.
+        var hold = DeliveredHold().catchUp(record.arrivals(now, at = Instant.now()))
+        assertEquals(setOf(tea), hold.ids)
+        assertTrue(hold.late)
+        assertEquals(TrackingStage.OutForDelivery, now[0].onItsWay.currentStage)
+        val held = layout(hold.arranged(now))
+        assertEquals(tea, held.next?.id)
+        assertEquals(DeliveryCardKind.OnTheWay, held.kind(of = pen))
+        assertEquals(DeliveryCardKind.Past, held.changing(into = layout(now))[tea]?.becomes)
+        // Until its postmark lands it still counts as on its way: a list that goes out of view before then, as one
+        // opening a parcel's page at launch does, catches up again.
+        record.seen(now, holding = hold.unstamped)
+        assertEquals(setOf(tea, pen), record.ids)
+
+        // Once stamped, never again, even should the list go out of view before the card leaves.
+        hold = hold.stamp()
+        record.forget(hold.ids)
+        record.seen(now, holding = hold.unstamped)
+        assertEquals(setOf(pen), record.ids)
+        assertTrue(record.arrivals(now, at = Instant.now()).isEmpty())
+
+        // News that lands meanwhile brings another arrival, held where the list showed it, and stamped in turn.
+        val later = now.toMutableList()
+        later[3] = later[3].copy(trackingEvents = later[3].trackingEvents + event(pen, TrackingStage.Delivered, ago(0.0)))
+        hold = hold.receive(shown = now, next = later, watching = true)
+        assertEquals(setOf(tea, pen), hold.ids)
+        assertEquals(setOf(pen), hold.unstamped)
+        assertEquals(DeliveryCardKind.OnTheWay, layout(hold.arranged(later)).kind(of = pen))
+        hold = hold.stamp()
+        record.forget(hold.ids)
+        hold = hold.release()
+        assertFalse(hold.late)
+        assertTrue(hold.stamped.isEmpty())
+        assertTrue(record.ids.isEmpty())
+
+        // A list that showed it delivered, as one beside the parcel's page does, has nothing to catch up with.
+        record.seen(shown)
+        record.seen(now)
+        assertTrue(record.arrivals(now, at = Instant.now()).isEmpty())
+        // And a hold takes no parcel that isn't a delivery to show.
+        hold = hold.catchUp(listOf(shown[0], now[1]))
+        assertTrue(hold.isEmpty)
+    }
+
+    /**
+     * Not one of ParcelLogicTests.swift's: OnTheWayRecord's week to the second on its own clock, and its ids, kept as the
+     * iPhone's sorted strings, read by the record a later launch makes on the same defaults.
+     */
+    @Test
+    fun aDeliveryIsNewsForAWeekAndTheRecordOutlivesTheLaunch() {
+        val defaults = MemoryDefaults()
+        val clock = Instant.parse("2026-10-29T05:11:00Z")
+        val fresh = UUID(0, 0xB)
+        val old = UUID(0, 0xA)
+        fun onItsWay(id: UUID) = makeParcel(id = id, events = listOf(event(id, TrackingStage.InTransit, "2026-10-20T08:00:00Z")))
+        fun delivered(parcel: Parcel, at: Instant) =
+            parcel.copy(trackingEvents = parcel.trackingEvents + event(parcel.id, TrackingStage.Delivered, DateParser.isoString(at)))
+        OnTheWayRecord(defaults) { clock }.seen(listOf(onItsWay(fresh), onItsWay(old)))
+        assertEquals(
+            "[\"00000000-0000-0000-0000-00000000000A\",\"00000000-0000-0000-0000-00000000000B\"]",
+            (defaults.values["sdt.deliveries.onTheWay.v1"] as ByteArray).decodeToString(),
+        )
+
+        // The next launch's record reads them; a delivery a week old to the second is no news, one a second younger is.
+        val record = OnTheWayRecord(defaults) { clock }
+        assertEquals(setOf(fresh, old), record.ids)
+        val now = listOf(
+            delivered(onItsWay(fresh), clock.minus(Duration.ofDays(7)).plusSeconds(1)),
+            delivered(onItsWay(old), clock.minus(Duration.ofDays(7))),
+        )
+        assertEquals(listOf(fresh), record.arrivals(now).map { it.id })
+        assertTrue(record.arrivals(now, at = clock.plusSeconds(1)).isEmpty())
+
+        // Forgetting what it doesn't keep writes nothing; what it keeps goes, and an unreadable record keeps nothing.
+        defaults.values.remove("sdt.deliveries.onTheWay.v1")
+        record.forget(setOf(fresh))
+        assertFalse(defaults.hasObject("sdt.deliveries.onTheWay.v1"))
+        record.seen(listOf(onItsWay(fresh), onItsWay(old)))
+        record.forget(setOf(fresh, UUID(0, 0xC)))
+        assertEquals(setOf(old), record.ids)
+        defaults.set("not a list".toByteArray(), forKey = "sdt.deliveries.onTheWay.v1")
+        assertTrue(record.ids.isEmpty())
+        assertTrue(record.arrivals(now).isEmpty())
     }
 
     @Test

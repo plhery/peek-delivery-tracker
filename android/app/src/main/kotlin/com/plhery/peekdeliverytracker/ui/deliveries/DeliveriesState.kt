@@ -476,8 +476,18 @@ internal class DeliveriesState(
         showingFilters = true
     }
 
-    /** The list is looked at, and may show a card moving (`watching`). */
+    /** The list is looked at, whole and in its own order, with nothing over it (`looking`), as it was last drawn. */
+    var looking: Boolean = false
+
+    /** The list is looked at, and may show a card moving (`watching`): [looking], with animations on. */
     var watching: Boolean = false
+
+    /**
+     * A card's share sheet or carrier editor stands over the list (`prompts.covers`); a page's stands over its page, and
+     * leaves the list beside it in view.
+     */
+    val promptsCover: Boolean
+        get() = sharing.let { it != null && it.pageId == null } || carrierEditor.let { it != null && it.pageId == null }
 
     /** Filtering, sorting and grouping, once for each change of the parcels or of the search and filters. */
     val layout: DeliveryListLayout by derivedStateOf { arrange(hold.arranged(parcels)) }
@@ -525,12 +535,28 @@ internal class DeliveriesState(
         val held = hold.receive(shown = parcels, next = next, watching = watching)
         // Holding nothing as before is no change: the list isn't arranged again for it.
         if (!held.isEmpty || !hold.isEmpty) hold = held
+        see(next)
         if (listed(next) != listed(parcels)) move(ListChange(releasing = false))
         parcels = next
         // The parcel open when the system closed the app opens again as it was, without its zoom.
         if (navigator.restore(next) && arrangement == DeliveriesArrangement.Stacked) {
             navigator.navigation.chosen?.let(zoom::showStill)
         }
+    }
+
+    /**
+     * `see(_:)`: the list is in view, showing `parcels`. Those it last showed on their way that have arrived since it was
+     * out of view ([DeliveriesSource.onTheWay]) arrive on it now, as one seen arriving would; under Remove animations
+     * they take their places at once, and the moment counts for a rating all the same. The demo's parcels are left out.
+     */
+    fun see(parcels: List<Parcel>) {
+        if (!looking || source.isDemo) return
+        val record = source.onTheWay
+        val missed = record.arrivals(parcels, at = now()).filter { !hold.holds(it.id) }
+        if (missed.isNotEmpty()) {
+            if (watching) hold = hold.catchUp(missed) else sawArrival()
+        }
+        record.seen(parcels, holding = hold.unstamped)
     }
 
     /** `store.parcels.filter { !$0.isArchived }.map(\.id)`: the value the list's animation follows. */
@@ -616,10 +642,16 @@ internal class DeliveriesState(
     /** Where each burst of paper is thrown from: random, but in the tests ([LocalPaperSeeds]). */
     var seeds: () -> ULong = { Random.nextLong().toULong() }
 
-    /** The postmark landed: a tap, and paper for the parcels that have just arrived (`postmarks += 1`, `throwPaper()`). */
+    /**
+     * The postmark landed: a tap, and paper for the parcels that have just arrived (`postmarks += 1`, `throwPaper()`).
+     * They have been shown delivered: not again, even should the list go out of view before their cards leave
+     * (`delivered.stamp()`, `OnTheWayRecord().forget(delivered.ids)`).
+     */
     fun postmark() {
         postmarks++
         throwPaper()
+        hold = hold.stamp()
+        source.onTheWay.forget(hold.ids)
     }
 
     /**
@@ -650,12 +682,12 @@ internal class DeliveriesState(
      * `letGo()`: the held parcels take their new places. Each card that becomes another and shows whole is pictured
      * where it stands and flown to where the list now has it, and the other cards make room; a card already in flight
      * simply takes its place, as its picture would be of nothing. The moment a parcel was seen arriving may be the one
-     * to ask for a rating, once its card has landed.
+     * to ask for a rating, once its card has landed ([sawArrival]).
      */
     fun letGo() {
         val ids = hold.ids
         if (ids.isEmpty()) return
-        if (source.reviewPrompt.isDue(now(), calm = source.reviewSettled.value)) reviewDue = true
+        sawArrival()
         val changes = layout.changing(into = arrange(parcels))
         val visible = places.visible
         val graphics = graphics
@@ -703,6 +735,11 @@ internal class DeliveriesState(
             progress.animateTo(1f, Motion.spring(FLIGHT_DURATION, FLIGHT_BOUNCE))
             if (round == flightRound) endFlights()
         }
+    }
+
+    /** `sawArrival()`: the reader saw a parcel arrive, the moment to ask for a rating once its card has landed. */
+    private fun sawArrival() {
+        if (source.reviewPrompt.isDue(now(), calm = source.reviewSettled.value)) reviewDue = true
     }
 
     /** The flights end, and the pictures they drew go. */

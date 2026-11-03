@@ -18,6 +18,7 @@ import com.plhery.peekdeliverytracker.core.FriendsActivityStore
 import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreset
+import com.plhery.peekdeliverytracker.core.OnTheWayRecord
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
@@ -65,9 +66,10 @@ import kotlinx.coroutines.withContext
  * of `refusals`, once `refusing` lets its answer go (or, for one question, `refusingRegardless`). The demo is the
  * demo's session. The rating prompt keeps its days in a store of its own, in UTC, and the system's prompt is a fake
  * that notes each step ([reviewCalls]). The parcels' links are the service's (`shareLinks`), and the words kept for
- * them this device's (`shareDefaults`): both outlast a process, as the service and the device's store do. The pages'
- * answers go to [feedbackRequests], or fail with `feedbackFailure`, once `feedbackSending` lets them go; their model
- * keeps the time of [now], which a test moves on, and remembers them in a store of its own.
+ * them this device's (`shareDefaults`): both outlast a process, as the service and the device's store do, and so does
+ * the record of the parcels the list last showed on their way (`onTheWayDefaults`). The pages' answers go to
+ * [feedbackRequests], or fail with `feedbackFailure`, once `feedbackSending` lets them go; their model keeps the time
+ * of [now], which a test moves on, and remembers them in a store of its own.
  */
 class FakeDeliveries(
     parcels: List<Parcel> = emptyList(),
@@ -79,6 +81,8 @@ class FakeDeliveries(
     ),
     /** Where a friend's invitation waits, in memory: it outlasts a process ([newProcess]), as the app's defaults do. */
     val invitationDefaults: UserDefaults = MemoryDefaults(),
+    /** Where the list keeps the parcels it last showed on their way, in memory: it outlasts a process too. */
+    val onTheWayDefaults: UserDefaults = MemoryDefaults(),
 ) : DeliveriesSource {
     override val parcels = MutableStateFlow(parcels)
     override val loading = MutableStateFlow(false)
@@ -196,6 +200,9 @@ class FakeDeliveries(
     )
 
     override var reviewPrompt = ReviewPrompt(reviewDefaults, version = "1.0", timeZone = { ZoneOffset.UTC })
+
+    /** The parcels the list last showed on their way ([onTheWayDefaults]); its clock is the list's, which the tests set. */
+    override val onTheWay = OnTheWayRecord(onTheWayDefaults)
 
     /** Nothing stands in the way of an ask, unless a test says otherwise. */
     override val reviewSettled = MutableStateFlow(true)
@@ -658,7 +665,10 @@ class FakeDeliveries(
 
     /** The same stores in a process started again, after the system closed the app. */
     fun newProcess(): FakeDeliveries =
-        FakeDeliveries(parcels.value, session.value, shareLinks = shareLinks, shareDefaults = shareDefaults, invitationDefaults = invitationDefaults)
+        FakeDeliveries(
+            parcels.value, session.value, shareLinks = shareLinks, shareDefaults = shareDefaults, invitationDefaults = invitationDefaults,
+            onTheWayDefaults = onTheWayDefaults,
+        )
 
     /** What a carrier change sent: the parcel's id, the carrier, the link, the postcode and its country, and a provider's postcode. */
     data class CarrierChangeRequest(

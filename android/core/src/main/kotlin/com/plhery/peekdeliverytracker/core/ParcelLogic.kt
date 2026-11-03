@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
@@ -9,6 +10,7 @@ import com.plhery.peekdeliverytracker.core.api.RecipientAction
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
+import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.util.Locale
@@ -17,6 +19,8 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.regex.Pattern
 import kotlin.math.abs
 import kotlin.math.roundToLong
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.builtins.serializer
 
 // ParcelLogic.swift. A tone's colour (`ParcelTone.color`) and a menu item's keyboard shortcut
 // (`ParcelMenuItem.shortcut`) are SwiftUI's, and the app's.
@@ -829,11 +833,24 @@ class DeliveredHold private constructor(
     val ids: Set<UUID>,
     /** Every parcel as the list showed it before they did. */
     private val shown: Map<UUID, Parcel>,
+    /**
+     * The hold began as the list came into view, its parcels having arrived while it was out of it: the list may still
+     * be on its way in.
+     */
+    val late: Boolean,
+    /** The held parcels whose postmark has landed: the list has shown them delivered. */
+    val stamped: Set<UUID>,
 ) {
-    constructor() : this(emptySet(), emptyMap())
+    constructor() : this(emptySet(), emptyMap(), late = false, stamped = emptySet())
 
     val isEmpty: Boolean get() = ids.isEmpty()
     fun holds(id: UUID): Boolean = id in ids
+
+    /** The held parcels the list has yet to show delivered: a hold cut short before then still has them to show. */
+    val unstamped: Set<UUID> get() = ids - stamped
+
+    /** The postmark lands on every held card. */
+    fun stamp(): DeliveredHold = if (stamped == ids) this else DeliveredHold(ids, shown, late, ids)
 
     /** The list is about to show `next` where it showed `shown`. A list that nobody is looking at holds nothing, and changes at once. */
     fun receive(shown: List<Parcel>, next: List<Parcel>, watching: Boolean): DeliveredHold {
@@ -842,9 +859,25 @@ class DeliveredHold private constructor(
         // A held parcel stays in its place for as long as it is still a delivery to show.
         val holding = ids.filterTo(LinkedHashSet()) { id -> current[id]?.let { !it.isArchived && it.isDelivered } ?: false }
         val arrivals = ParcelOrganizer.justDelivered(shown, next)
-        val before = if (holding.isEmpty() && arrivals.isNotEmpty()) shown.firstById { it.id } else this.shown
+        val before = if (holding.isEmpty() && arrivals.isNotEmpty()) {
+            shown.firstById { it.id }
+        } else {
+            // One caught up with holds only itself where it stood: the others need theirs.
+            val unplaced = arrivals.filter { it.id !in this.shown }
+            if (unplaced.isEmpty()) this.shown else unplaced.firstById { it.id } + this.shown
+        }
         holding.addAll(arrivals.map { it.id })
-        return if (holding.isEmpty()) release() else DeliveredHold(holding, before)
+        return if (holding.isEmpty()) release() else DeliveredHold(holding, before, late, stamped)
+    }
+
+    /**
+     * Parcels the list last showed on their way arrived while it was out of view, and arrive on it now that it is in
+     * view: each is held where its journey before the delivery places it ([onItsWay]), the other cards as they are.
+     */
+    fun catchUp(arrivals: List<Parcel>): DeliveredHold {
+        val missed = arrivals.filter { it.id !in ids && !it.isArchived && it.isDelivered }
+        if (missed.isEmpty()) return this
+        return DeliveredHold(ids + missed.map { it.id }, shown + missed.associate { it.id to it.onItsWay }, late || ids.isEmpty(), stamped)
     }
 
     fun release(): DeliveredHold = DeliveredHold()
@@ -858,9 +891,77 @@ class DeliveredHold private constructor(
         }
     }
 
-    override fun equals(other: Any?): Boolean = other is DeliveredHold && ids == other.ids && shown == other.shown
-    override fun hashCode(): Int = 31 * ids.hashCode() + shown.hashCode()
-    override fun toString(): String = "DeliveredHold(ids=$ids)"
+    override fun equals(other: Any?): Boolean =
+        other is DeliveredHold && ids == other.ids && shown == other.shown && late == other.late && stamped == other.stamped
+
+    override fun hashCode(): Int = ((31 * ids.hashCode() + shown.hashCode()) * 31 + late.hashCode()) * 31 + stamped.hashCode()
+    override fun toString(): String = "DeliveredHold(ids=$ids, late=$late, stamped=$stamped)"
+}
+
+/** The parcel as it stood on its way, before its delivery: its journal without the final scans. */
+val Parcel.onItsWay: Parcel get() = copy(trackingEvents = trackingEvents.filter { !it.stage.isFinal })
+
+/**
+ * The parcels the deliveries list last showed on their way, kept on this device across launches and never sent. One
+ * that arrives while the list is out of view (its page open, another tab, the app in the background or closed) arrives
+ * on the list the next time it is in view, if its delivery is at most a week old: once, as the list then counts it
+ * delivered. An archived or deleted parcel never does. `defaults` is the app's standard UserDefaults stand-in, which
+ * has no `stringArray`: the ids are kept there as a JSON array of the iPhone's sorted strings. `now` is the clock a
+ * delivery's age is told by.
+ */
+class OnTheWayRecord(private val defaults: UserDefaults, private val now: () -> Instant = Instant::now) {
+    /** The parcels the list showed on their way when it was last in view. */
+    val ids: Set<UUID> get() = stored().orEmpty().mapNotNullTo(LinkedHashSet(), ::uuid)
+
+    /**
+     * Of `parcels`, those the list last showed on their way that have been delivered since, at most a week before
+     * `at`, and aren't archived.
+     */
+    fun arrivals(parcels: List<Parcel>, at: Instant = now()): List<Parcel> {
+        val ids = ids
+        if (ids.isEmpty()) return emptyList()
+        return parcels.filter { parcel ->
+            if (parcel.id !in ids || parcel.isArchived || !parcel.isDelivered) return@filter false
+            val delivered = parcel.currentEvent?.let { DateParser.date(it.occurredAt) } ?: return@filter false
+            Duration.between(delivered, at) < recent
+        }
+    }
+
+    /**
+     * The list is in view, showing `parcels`: those on their way are the ones it last showed so, with the ones in
+     * `holding`, delivered and held where they stood but not yet stamped. A list with no parcel, as one still loading
+     * is, changes nothing.
+     */
+    fun seen(parcels: List<Parcel>, holding: Set<UUID> = emptySet()) {
+        if (parcels.isEmpty()) return
+        store(parcels.filter { it.isActive }.mapTo(HashSet()) { it.id } + holding)
+    }
+
+    /** These parcels have been shown delivered: the list counts them so. */
+    fun forget(arrived: Set<UUID>) {
+        val ids = ids
+        if (ids.none { it in arrived }) return
+        store(ids - arrived)
+    }
+
+    /** `stringArray(forKey:)`: the strings kept, nil when nothing, or something else, is. */
+    private fun stored(): List<String>? {
+        val data = defaults.data(forKey = key) ?: return null
+        return runCatching { ApiJson.decodeFromString(format, data.decodeToString()) }.getOrNull()
+    }
+
+    private fun store(ids: Set<UUID>) {
+        val next = ids.map { it.uuidString }.sorted()
+        if (stored() != next) defaults.set(JsonEncoder().encode(format, next), forKey = key)
+    }
+
+    companion object {
+        /** A delivery older than this is no news by the time the list is seen again. */
+        val recent: Duration = Duration.ofDays(7)
+
+        private const val key = "sdt.deliveries.onTheWay.v1"
+        private val format = ListSerializer(String.serializer())
+    }
 }
 
 /**

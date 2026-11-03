@@ -21,6 +21,7 @@ import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.ImportChargesPreview
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
+import com.plhery.peekdeliverytracker.core.OnTheWayRecord
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
@@ -260,6 +261,12 @@ interface DeliveriesSource {
 
     /** Nothing in the app stands in the way of asking for a rating (`ReviewPrompt.settled`). */
     val reviewSettled: StateFlow<Boolean>
+
+    /**
+     * `OnTheWayRecord()`: the parcels the list last showed on their way, kept in the app's preferences across launches
+     * and never sent, so that one delivered while the list was out of view arrives on it once it is back.
+     */
+    val onTheWay: OnTheWayRecord
 
     /** The system's prompt for a rating, over the window's `activity` (`requestReview`). */
     fun reviews(activity: Activity): ReviewRequester
@@ -516,6 +523,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val reviewPrompt get() = container.reviewPrompt
 
     override val reviewSettled get() = container.reviewSettled
+
+    override val onTheWay = OnTheWayRecord(container.defaults)
 
     override fun reviews(activity: Activity): ReviewRequester = container.reviews(activity)
 

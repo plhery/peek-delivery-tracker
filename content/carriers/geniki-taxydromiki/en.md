@@ -35,6 +35,8 @@ Geniki's tracking page is in Greek on the Greek site and in English on the Engli
 | `Arrival at Service Point` | At the service point that delivers it, or sends it on. |
 | `Routing to other service point` | Sent on to another service point. |
 | `Out for Delivery` | With the courier who delivers it. |
+| `Attempted Delivery - Absent recipient` | The courier tried to deliver it while you were out. |
+| `Attempted Delivery - Delivery Rescheduled` | Back at the service point after a failed attempt, with the delivery put off to another day. |
 | `Shipment Delivered` | Delivered. |
 | `Registration of delivery details` | The service point recorded the delivery: also means delivered. |
 

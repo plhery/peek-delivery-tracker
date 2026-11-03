@@ -348,7 +348,8 @@ transit. A universal provider's copy of a direct carrier's scan is that carrier'
 instead, filed under it and read by its map: a copy the sync matched to a row the carrier
 holds, with that row's code and stage, when it keeps the row's words or the map knows the
 copy's, and an unmatched copy whose words the map of a carrier of the parcel stages as the
-provider did. A copy the carrier's map reads as accepted, filed in transit as the carrier's row
+provider did. A row no provider names, a carrier's scan that took a copy over, is held by the
+parcel's carrier whose map knows its code and wording, else by the one tracking it. A copy the carrier's map reads as accepted, filed in transit as the carrier's row
 is (USPS's acceptance at a distribution centre the parcel reached), counts as mapped too. A
 third carrier's scan a provider relays stays under `unknown`.
 There is one row per carrier, provider code and normalized

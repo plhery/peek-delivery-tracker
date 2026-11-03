@@ -59,7 +59,7 @@
  */
 import { createHash } from 'node:crypto';
 import { DateTime, FixedOffsetZone } from 'luxon';
-import { eventTimestamp, sameInstantIdentityPolicy, trackingPlace, type SameInstantIdentityPolicy, type SameInstantScan } from 'universal-parcel-scraper/app';
+import { eventTimestamp, sameInstantIdentityPolicy, statusMapAnswer, trackingPlace, type SameInstantIdentityPolicy, type SameInstantScan } from 'universal-parcel-scraper/app';
 import { locatePlace } from 'universal-parcel-scraper/places';
 import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { isRecord, type JsonObject } from './types';
@@ -72,6 +72,18 @@ import { isRecord, type JsonObject } from './types';
  * the key existed have none.
  */
 export const UNIVERSAL_PROVIDER = 'universal_provider';
+
+/**
+ * Which of a parcel's carriers wrote an `unknown` row that names no provider, a carrier's scan that took
+ * over a provider's copy: the parcel's one carrier, or the one of a handed-over parcel's carriers whose
+ * status map knows the row's code and wording (Ukrposhta's code on a parcel Chunghwa Post tracks since).
+ * Null when none or several do.
+ */
+export function unnamedRowCarrier(carriers: readonly string[], providerCode: string | null, description: string): string | null {
+  const known = carriers.length === 1 ? carriers
+    : carriers.filter((carrier) => statusMapAnswer({ carrier, providerCode, description }).kind !== 'unknown');
+  return known.length === 1 ? known[0]! : null;
+}
 
 /**
  * The `raw_data` key that keeps the time a row was first stored with, as its

@@ -25,7 +25,7 @@ import { statusMapAnswer } from 'universal-parcel-scraper/app';
 import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/places';
 import { STAGES } from '../generated/apiContract';
 import { scanStages } from './disputedDelivery';
-import { providerEventId, scanDay, UNIVERSAL_PROVIDER } from './eventIdentity';
+import { providerEventId, scanDay, UNIVERSAL_PROVIDER, unnamedRowCarrier } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
 
 export interface StoredScan {
@@ -110,11 +110,7 @@ function writerOf(parcel: StoredParcel, scan: StoredScan): string {
   if (source !== 'unknown' || text(scan.raw[UNIVERSAL_PROVIDER]) !== null) return source;
   const times = [scan.raw.time, scan.raw.local_time, scanDay(scan.raw)];
   if (times.some((time) => providerEventId(source, time, scan.location ?? '', scan.description) === scan.providerEventId)) return source;
-  const carriers = parcel.carriers ?? [];
-  const known = carriers.length === 1 ? carriers : carriers.filter((carrier) => (
-    statusMapAnswer({ carrier, providerCode: text(scan.raw.provider_code), description: scan.description }).kind !== 'unknown'
-  ));
-  return known.length === 1 ? known[0]! : source;
+  return unnamedRowCarrier(parcel.carriers ?? [], text(scan.raw.provider_code), scan.description) ?? source;
 }
 
 /** Every stored row of the parcel the installed release would write otherwise. */

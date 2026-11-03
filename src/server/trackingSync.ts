@@ -39,7 +39,7 @@ import {
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
 import { REDETECTION_PAGE, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
-import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, UNWORDED_STEP, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
   askedForCheck,
@@ -894,8 +894,9 @@ export interface CarrierCopy {
 /**
  * The universal provider's scans of a check that copy a direct carrier's scan, by identity,
  * each with how it is observed (`CarrierCopy`). A copy the sync matched to a row a carrier
- * holds (its prefix, or a universal row naming no provider, which the carrier tracking the
- * parcel took over) copies that carrier's scan: in the row's words, or in words that carrier's
+ * holds (its prefix, or a universal row naming no provider, which one of the parcel's carriers
+ * took over: the one whose map knows the row's code and wording, `unnamedRowCarrier`, else the
+ * one tracking it) copies that carrier's scan: in the row's words, or in words that carrier's
  * map knows with the row's code, it is observed with the row's code and stage. An unmatched
  * copy is the scan of one of the parcel's own carriers (the one tracking it, the one it is
  * filed under, the one that handed it over) whose map gives its words the stage it was seen
@@ -923,7 +924,8 @@ export function carrierCopies(
     if (!id.startsWith('unknown:') || !stage || !description) continue;
     const row = rows.get(matched.get(id) ?? '');
     const source = String(row?.provider_event_id ?? '').split(':')[0]!;
-    const holder = !row || source === 'app' ? '' : source !== 'unknown' ? source : code(row.universal_provider) ? '' : tracking;
+    const holder = !row || source === 'app' ? '' : source !== 'unknown' ? source : code(row.universal_provider) ? ''
+      : unnamedRowCarrier(own, code(row.provider_code), String(row.description ?? '')) ?? tracking;
     if (row && directCarrier(holder)) {
       const copy = { carrier: holder, providerCode: code(row.provider_code), stage: String(row.stage ?? '') };
       if (copy.stage && (normalizeObservedDescription(String(row.description ?? '')) === description

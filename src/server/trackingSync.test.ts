@@ -871,6 +871,18 @@ describe('status observation collection', () => {
     ]));
   });
 
+  it('files a copy of a row no provider names under the handed-over parcel\'s carrier whose map knows its code', () => {
+    // Ukrposhta's scan took this universal row over; Chunghwa Post has tracked the parcel since.
+    const parcel = { id: 'package-1', carrier: 'ukrposhta', carrier_data: { original_carrier: 'ukrposhta', active_tracking_carrier: 'chunghwa-post' } };
+    const stored = [{ provider_event_id: 'unknown:outward', stage: 'in_transit', description: 'Arrival at outward office of exchange', provider_code: '21600' }];
+    const events = [{ package_id: 'package-1', provider_event_id: 'unknown:outward-copy', description: 'Arrival at outward office of exchange',
+      stage: 'in_transit', raw_data: { stage_source: 'wording:language' } }];
+    const copies = carrierCopies(parcel, events, stored, new Map([['unknown:outward-copy', 'unknown:outward']]));
+    expect(copies).toEqual(new Map([['unknown:outward-copy', { carrier: 'ukrposhta', providerCode: '21600', stage: 'in_transit' }]]));
+    // Ukrposhta's map gives it its stage: nothing to review under Chunghwa Post.
+    expect(collectStatusObservations(events, 'unknown', copies)).toEqual([]);
+  });
+
   it('skips events whose stage came from the carrier map', () => {
     expect(collectStatusObservations([{
       package_id: 'package-1', stage: 'delivered', description: 'Objeto entregue',

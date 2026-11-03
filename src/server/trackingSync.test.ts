@@ -678,6 +678,20 @@ describe('status observation collection', () => {
     expect(collectMappedStatusKeys(rows.slice(1, 2), 'unknown')).toEqual([universalKey(rows[1]!)]);
   });
 
+  it('maps a copy of a carrier acceptance its map reads as accepted and the carrier\'s row files in transit', () => {
+    const copy = (description: string): JsonObject => ({
+      package_id: 'package-1', stage: 'in_transit', description, provider_event_id: `unknown:${description}`,
+      raw_data: { stage_source: 'wording:provider' },
+    });
+    const rows = [copy('Accepted at USPS Facility, LOS ANGELES CA DISTRIBUTION CENTER'),
+      copy('USPS in possession of item, COLUMBUS OH DISTRIBUTION CENTER'), copy('Delivered, In/At Mailbox')];
+    const copies = new Map(rows.map((row) => [String(row.provider_event_id), { carrier: 'usps', providerCode: null, stage: 'in_transit' }]));
+    // USPS's map reads the first two as accepted, and the delivery as no step in transit.
+    expect(collectStatusObservations(rows, 'usps', copies).map((observation) => observation.description_normalized))
+      .toEqual(['delivered, in/at mailbox']);
+    expect(collectMappedStatusKeys(rows, 'usps', copies)).toHaveLength(2);
+  });
+
   it('keeps wording that names a shop and postcode as one template, without the place', () => {
     const scan = (description: string, id: string) => ({
       package_id: 'package-1', stage: 'pending', description, provider_event_id: `unknown:${id}`, raw_data: { stage_source: 'none' },

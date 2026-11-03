@@ -198,6 +198,14 @@ function observedAnswer(observation: JsonObject) {
 }
 
 /**
+ * Whether a map's stage for a wording is the stage it was seen with: the same, or accepted
+ * for a scan filed in transit, a hand-over or a later acceptance once the parcel moves.
+ */
+function sameReading(mapped: string, seen: unknown): boolean {
+  return mapped === seen || (mapped === 'accepted' && seen === 'in_transit');
+}
+
+/**
  * Whether a universal provider's scan counts as mapped. No carrier map stands
  * behind those scans: the scraper's universal map, the reading the providers
  * give a scan, is theirs. A scan it gives the stage the sync chose is mapped,
@@ -209,17 +217,18 @@ function observedAnswer(observation: JsonObject) {
 export function universalMapAgrees(observation: JsonObject): boolean {
   if (observation.carrier !== UNIVERSAL_CARRIER) return false;
   const answer = observedAnswer(observation);
-  return answer.kind === 'mapped' && (answer.stage === observation.chosen_stage
-    || (answer.stage === 'accepted' && observation.chosen_stage === 'in_transit'));
+  return answer.kind === 'mapped' && sameReading(answer.stage, observation.chosen_stage);
 }
 
 /**
  * Whether the observed carrier's own map gives the observed wording the stage it was seen
  * with: how a universal provider's copy of that carrier's scan counts as mapped (trackingSync.ts).
+ * A copy of a scan the carrier's map reads as accepted, filed in transit as the carrier's row
+ * is, counts too (USPS's "Accepted at USPS Facility" at a distribution centre the parcel reached).
  */
 export function carrierMapAgrees(observation: JsonObject): boolean {
   const answer = observedAnswer(observation);
-  return answer.kind === 'mapped' && answer.stage === observation.chosen_stage;
+  return answer.kind === 'mapped' && sameReading(answer.stage, observation.chosen_stage);
 }
 
 /**
@@ -235,7 +244,7 @@ export function statusMapClosing(observation: JsonObject): Omit<StatusObservatio
   const seen = typeof observation.chosen_stage === 'string' ? observation.chosen_stage : '';
   return {
     resolution: 'mapped',
-    note: seen && seen !== answer.stage && !universalMapAgrees(observation)
+    note: seen && !sameReading(answer.stage, seen)
       ? `The carrier status map gives it ${answer.stage}; it was last seen as ${seen}.`
       : `The carrier status map gives it ${answer.stage}.`,
   };

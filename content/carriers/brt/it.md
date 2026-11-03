@@ -52,13 +52,13 @@ Il tracciamento su vas.brt.it si apre in italiano e si può passare a English, F
 
 Se non ci sei, BRT ti avvisa per e-mail, SMS o con un avviso cartaceo. Se il mittente le ha dato i tuoi contatti, ricevi anche le indicazioni della nuova consegna, che di solito viene riprogrammata per il giorno lavorativo successivo. Secondo la Carta dei servizi segue un secondo tentativo e, se va a vuoto anche quello, la filiale ti telefona.
 
-Con il link del messaggio di BRT, oppure nell'app myBRT o su mybrt.it con il BRTcode e il CAP e/o il PIN, puoi scegliere un altro giorno o un'altra fascia oraria, un BRT-fermopoint o il ritiro in filiale, sbloccare una giacenza o cambiare indirizzo, se il mittente lo autorizza. Alcune funzioni potrebbero mancare per la tua spedizione.
+Con il link del messaggio di BRT, oppure nell'app myBRT o su [mybrt.it](https://www.mybrt.it/it/mybrt/) con il BRTcode e il CAP e/o il PIN, puoi scegliere un altro giorno o un'altra fascia oraria, un BRT-fermopoint o il ritiro in filiale, sbloccare una giacenza o cambiare indirizzo, se il mittente lo autorizza. Alcune funzioni potrebbero mancare per la tua spedizione.
 
 **In giacenza.** Succede se il destinatario è assente, sconosciuto o trasferito, se l'indirizzo è errato o incompleto, o se la merce è stata rifiutata. Sblocca la giacenza dal link nell'e-mail o nell'SMS di BRT, o dal tracciamento con il BRTcode. Intanto BRT chiede istruzioni al mittente (consegna, dirottamento o rientro): secondo la Carta, se non arrivano per iscritto, la merce torna indietro 10 giorni dopo la comunicazione di giacenza; le condizioni di contratto di BRT parlano invece dei giorni concordati con il mittente.
 
 **In filiale (fermo deposito).** Puoi ritirare tu o un tuo delegato. Il delegato porta il suo documento d'identità, il tuo (anche in fotocopia) e la delega per privati della pagina [Download](https://www.brt.it/it/download/) di BRT; per chi ritira di persona BRT non indica quale documento serva. Se il mittente ha dato i tuoi contatti, BRT ti manda indirizzo e orari della filiale e l'importo dell'eventuale contrassegno.
 
-**BRT-fermopoint.** Sono edicole, tabaccherie, cartolerie e altre attività convenzionate, alcune aperte anche nel weekend. Ti avvisano per e-mail e/o SMS e tengono il pacco 10 giorni. Il più vicino lo trovi con la ricerca BRT-fermopoint, a cui porta il sito brt.it.
+**BRT-fermopoint.** Sono edicole, tabaccherie, cartolerie e altre attività convenzionate, alcune aperte anche nel weekend. Ti avvisano per e-mail e/o SMS e tengono il pacco 10 giorni. Il più vicino lo trovi con la [ricerca BRT-fermopoint](https://www.mybrt.it/it/mybrt/parcel-shops/search).
 
 **Locker BRT.** Stanno in negozi, centri commerciali e distributori di carburante, e quelli all'aperto sono accessibili 24 ore su 24. Scansiona il QR Code ricevuto per e-mail o SMS, o digita il PIN Code di 8 cifre. Per uno schermo guasto o un cassetto vuoto c'è il modulo in fondo all'e-mail di ritiro.
 

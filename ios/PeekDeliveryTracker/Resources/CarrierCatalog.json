@@ -48106,6 +48106,74 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://profoundui.smtl.com/profoundui/start?pgm=profoundui/mwp705c&p1=0&l1=1&p2=none&l2=4&p3=none&l3=4"
+    },
+    "crane-worldwide": {
+      "displayName": "Crane Worldwide",
+      "aliases": [
+        "Crane Worldwide Logistics",
+        "Crane Worldwide (E-commerce)"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#273572",
+      "selectable": true,
+      "timezone": "America/Chicago",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://webtracker.craneww.com/"
+    },
+    "magnum-transportation": {
+      "displayName": "Magnum Transportation",
+      "aliases": [
+        "Magnum",
+        "Magnum LTL"
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#022d74",
+      "selectable": true,
+      "timezone": "America/Chicago",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://magnumlog.com/track-shipment"
+    },
+    "topnic": {
+      "displayName": "Topnic",
+      "aliases": [
+        "Topnic Logistics",
+        "Topnic Logistics Limited"
+      ],
+      "countries": [
+        "HK"
+      ],
+      "color": "#2e0b6a",
+      "selectable": true,
+      "timezone": "Asia/Hong_Kong",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://topnic.com.hk/order-tracking/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "topnic.com.hk"
+          ],
+          "path": "^/order-tracking/([^/?#,;|]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://topnic.com.hk/order-tracking"
     }
   }
 }

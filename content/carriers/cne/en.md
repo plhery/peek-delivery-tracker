@@ -2,8 +2,8 @@
 title: CNE Express tracking: 3A5V numbers, statuses and contact
 description: Track a CNE Express (递一物流) parcel from China: what a 3A5V number looks like, what CNE's statuses mean, who delivers it near you and who to ask.
 slug: cne-express-tracking
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 CNE Express (递一物流, CNE EXPRESS CO LTD) is a cross-border logistics company in Shanghai, China, founded in 2003. It ships parcels abroad for online sellers, including sellers on eBay, Walmart, TikTok, Temu and SHEIN, flies them out of China and hands them to a partner in your country for the last stretch. Track the number on [CNE's tracker](https://www.cne.com/en/track), in English, or paste it in the box above. The seller booked CNE and gives you the number with your order's shipping details.

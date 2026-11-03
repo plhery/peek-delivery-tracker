@@ -2,8 +2,8 @@
 title: R+L Carriers tracking: PRO numbers, statuses and claims
 description: Track an R+L Carriers freight shipment in the US: what a PRO number looks like, what each tracing line means and what to do if freight is late or damaged.
 slug: rl-carriers-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 R+L Carriers is a freight carrier in the United States. In Peek's code, it picks the freight up from the shipper, moves it from terminal to terminal and delivers it from the destination terminal. If a large order or other freight is coming to you with R+L, you track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. R+L's own tracer is the shipment tracing page on rlcarriers.com.

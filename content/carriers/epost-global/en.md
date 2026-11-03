@@ -2,8 +2,8 @@
 title: ePost Global tracking: EPG numbers and who delivers
 description: Track an ePost Global parcel: what an EPG number looks like, what the lines on its tracker mean and how Peek follows the partner that delivers it.
 slug: epost-global-tracking
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 ePost Global is a US shipping company whose tracking numbers start with EPG. In the histories Peek's code holds, one of its processing centres in the United States scans the parcel in, then ePost Global hands it to a partner, a post or a courier, that takes it on. The shop or the sender gives you the number: paste it in the box above. ePost Global's own tracker is at epgtrack.com. Peek's catalog also knows ePost Global as PPX Track, and as RR Donnelley, RRD Donnelley or RRD International Logistics: searching any of these names when you pick a carrier in Peek finds ePost Global.

@@ -2,8 +2,8 @@
 title: DPD Austria tracking: statuses, Pickup shops and contact
 description: Track a DPD parcel in Austria: the 14-digit parcel number and PIN, what myDPD's German and English statuses mean, Pickup deadlines and how to reach DPD.
 slug: dpd-austria-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 DPD Austria is a private parcel company based in Leopoldsdorf. Within Austria, it usually delivers within one working day of getting the parcel from the shop. Track a parcel on [myDPD](https://www.mydpd.at/), DPD Austria's tracking site and app, with the 14-digit parcel number from the shop's shipping email, or paste the number in the box above.

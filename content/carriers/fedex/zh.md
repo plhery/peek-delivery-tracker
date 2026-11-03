@@ -2,8 +2,8 @@
 title: FedEx 联邦快递物流查询：单号格式、状态含义与派送失败
 description: FedEx（联邦快递）包裹跟踪：12 位快递单号长什么样，Delivery exception 等物流状态是什么意思，清关要交哪些费用，丢件或显示已签收却没收到怎么办。
 slug: fedex-wuliu-chaxun
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 把 FedEx（联邦快递）的快递单号或 FedEx 查询链接粘贴到上方的查询框，就能跟踪包裹。FedEx 自己的物流查询在 fedex.com 官网上。

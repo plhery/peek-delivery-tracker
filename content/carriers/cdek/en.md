@@ -2,8 +2,8 @@
 title: CDEK tracking (СДЭК): order numbers and statuses in English
 description: Track a CDEK (СДЭК) parcel: what its order number looks like, what its Russian statuses mean in English, courier and pickup point steps, and how Peek follows it.
 slug: cdek-tracking
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 CDEK (СДЭК, also written SDEK) is a courier company. Peek's catalog lists it in Russia, Kazakhstan and Belarus. It brings parcels to your door by courier, or to a pickup point or parcel locker where you collect them. The shop or the sender gives you the number: paste it in the box above. CDEK's own tracker is on my.cdek.ru. CDEK writes its steps in Russian, and the table below gives them in English.

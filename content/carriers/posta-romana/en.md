@@ -2,8 +2,8 @@
 title: Poșta Română tracking: numbers, statuses and customs
 description: Track a Poșta Română item: what an RO number looks like, what each Romanian status means, parcels from abroad, customs fees, complaints and who to call.
 slug: posta-romana-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Poșta Română (Compania Națională Poșta Română, CNPR) provides Romania's universal postal service and delivers to every town and village in the country. Track an item on its [Track & Trace page](https://www.posta-romana.ro/en/track-trace.html), or paste the number in the box above. Each post gives information only for its own part of the journey, so Poșta Română's tracker covers Romania only: a parcel from a shop abroad shows on the sending post's tracker first, and on Poșta Română's once it reaches Romania. Can't find your number? See [how to find a tracking number](guide:find-tracking-number).

@@ -2,8 +2,8 @@
 title: DPD Romania tracking: statuses, Smart Control and contact
 description: Track a DPD Romania parcel in English: the 11-digit waybill, what DPD's English and Romanian statuses mean, Smart Control, lockers, offices and who to call.
 slug: dpd-romania-tracking
-published: 2026-11-05
-updated: 2026-11-05
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 DPD Romania (Dynamic Parcel Distribution S.A.) is the Geopost group's courier in Romania, active there since 2008, with its head office in Mogoșoaia, Ilfov. Each parcel gets its own waybill number: track it on DPD's tracker, tracking.dpd.ro, which has an English version, through the Smart Control link in DPD's delivery SMS, or in the box above.

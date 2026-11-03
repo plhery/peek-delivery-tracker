@@ -2,8 +2,8 @@
 title: India Post tracking: Speed Post numbers and statuses
 description: Track an India Post or Speed Post item: what an IN number looks like, what each status means, delivery times, parcels abroad, complaints and who to call.
 slug: india-post-tracking
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 India Post is the Department of Posts, India's national postal service, with 164,999 post offices: the largest postal network in the world, it says. Within India it runs Speed Post, registered mail and India Post Parcel; abroad, EMS (International Speed Post), tracked packets and air parcels. Track an item in the box on [indiapost.gov.in](https://www.indiapost.gov.in/), which asks for a CAPTCHA, or paste the number in the box above. India Post calls it the article barcode number; for an online order, ask the seller for it.

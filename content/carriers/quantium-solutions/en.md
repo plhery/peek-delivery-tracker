@@ -2,8 +2,8 @@
 title: Quantium Solutions tracking: numbers, statuses and help
 description: Track a Quantium Solutions parcel: the numbers its tracker takes, what each status means, who delivers it, customs and how to reach Quantium's support.
 slug: quantium-solutions-tracking
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Quantium Solutions is an eCommerce logistics company with a presence in 10 countries in Asia Pacific. It carries online orders into, within and out of the region. Track a parcel on Quantium's [Track Your Shipments](https://track.quantiumworldwide.com/) page, or paste the number in the box above. The shop gives you the number, in its shipping email or on your order page.

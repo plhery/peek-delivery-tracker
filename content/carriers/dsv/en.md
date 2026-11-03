@@ -2,8 +2,8 @@
 title: DSV tracking: shipment numbers, statuses and DB Schenker
 description: Track a DSV road, air or sea shipment, or a former DB Schenker one: which number to use, what each status means, delivery, claims and who to contact.
 slug: dsv-tracking
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 DSV is a Danish transport and logistics group that moves freight by road, air and sea, and in 2025 it bought Schenker (DB Schenker) from Deutsche Bahn. On dsv.com, the "Track your shipment" box has two fields: "Track DSV shipment" opens DSV's tracker, myDSV, and "Track Schenker shipment" the former DB Schenker one. You need no account. The number comes from whoever booked the transport, usually the sender or the shop; paste it in the box above.

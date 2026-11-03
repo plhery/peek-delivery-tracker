@@ -2,8 +2,8 @@
 title: Jifan tracking: JFGJ numbers, scans and Beijing time
 description: Track a Jifan (吉凡国际物流) parcel from China to the US: what a JFGJ…CN number looks like, what the tracker's lines mean, and why every time on it is Beijing time.
 slug: jifan-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Jifan is Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流 for short), a logistics company in Shenzhen, China, founded in 2017. It ships parcels from businesses in China to buyers in the United States, by air and by sea. Its tracking numbers are JFGJ, nine digits and CN. Look yours up on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track), or paste it in the box above. The seller gives you the number with your order's shipping details.

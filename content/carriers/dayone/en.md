@@ -2,8 +2,8 @@
 title: DayOne tracking: DOT numbers, statuses and who delivers
 description: Track a DayOne parcel from China: what a DOT number looks like, what the statuses on DayOne's tracker mean, who delivers it and who to ask when it's late.
 slug: dayone-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 DayOne is the warehouse that sends out a shop's online orders from China. It is not a courier: it says it is "the order fulfillment warehouse, not a courier delivery service provider". Other companies carry the parcel, and DayOne's tracker, [DayOneTrack](https://www.dayonetrack.com/), in English and Chinese, shows their scans. Look up your DOT number there, or paste it in the box above. The shop gives you the number with your order's shipping details.

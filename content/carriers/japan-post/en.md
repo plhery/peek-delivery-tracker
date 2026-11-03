@@ -2,8 +2,8 @@
 title: Japan Post tracking: EMS numbers and statuses explained
 description: Track a Japan Post parcel or EMS from Japan: what a JP number looks like, what each status means, who delivers it in your country, customs, and who to ask.
 slug: japan-post-tracking
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Japan Post (日本郵便, Japan Post Co., Ltd.) is Japan's postal company, owned by Japan Post Holdings, with 24,115 post offices as of 31 March 2026. It sends EMS, International Air Packets and parcels abroad, and Yu-Pack parcels within Japan. Track on Japan Post's [Track & Trace Service](https://trackings.post.japanpost.jp/services/srv/search/input?locale=en), up to ten numbers at once, or paste the number in the box above. Bought from a Japanese shop? Ask the seller for the number.

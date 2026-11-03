@@ -2,8 +2,8 @@
 title: Ozon tracking: order numbers and statuses in English
 description: Track an Ozon order: what its numbers look like, what the Russian steps on Ozon's tracker mean in English, and how Peek follows it.
 slug: ozon-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Ozon's delivery service carries the orders that sellers hand over to it, to your door or to a pickup point. Peek's catalog lists it in Russia, Belarus and Kazakhstan, also under the names Ozon Rocket and Ozon Доставка. Paste your number in the box above, with its dashes. Ozon's own tracker is tracking.ozon.ru, and Peek reads it for you, as explained below.

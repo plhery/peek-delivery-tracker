@@ -2,8 +2,8 @@
 title: nox NachtExpress tracking: statuses, drop-off and contact
 description: Track a nox NachtExpress shipment: what its barcode looks like, what nox's German scans mean, night delivery to your drop-off place, deadlines and contact.
 slug: nox-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 nox (nox NachtExpress) is a German night express company, nox Germany GmbH, based in Langenfeld. It carries spare parts and other urgent goods for businesses. It collects them in the afternoon and delivers them during the night, usually before 8:00, to a place agreed with the recipient: a safe, a garage, a workshop or the boot of a service van. Track a shipment with its barcode on [nox's tracker](https://trackandtrace.app.nox.express/scannungen), or paste the number in the box above. The tracker is in German: the tables below explain it.

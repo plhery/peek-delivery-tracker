@@ -2,8 +2,8 @@
 title: Russian Post tracking (Почта России): numbers and steps
 description: Track a Russian Post (Почта России) parcel: its RU and 14-digit numbers, what its steps in Russian mean, and how Peek follows it.
 slug: russian-post-tracking
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Russian Post (Почта России, Pochta Rossii) is the postal service of Russia. It carries parcels sent from Russia and parcels sent to Russia. The sender or the shop gives you the tracking number: paste it in the box above. Russian Post's own website is pochta.ru, and Peek reads its tracker for you, as explained below.

@@ -2,8 +2,8 @@
 title: J&T Express tracking in Saudi Arabia, UAE and Kuwait
 description: Track a J&T Express parcel in Saudi Arabia, the UAE or Kuwait: what a JTE number looks like, what the tracker shows, delivery attempts and J&T's contacts.
 slug: jt-express-middle-east-tracking
-published: 2026-11-05
-updated: 2026-11-05
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 J&T Express delivers parcels in Saudi Arabia, the United Arab Emirates and Kuwait. In Saudi Arabia it offers online shops same-day, basic and economy delivery, and brings parcels door to door from China. The three countries share one J&T website, jtexpress.me, and one kind of tracking number, which Peek files under J&T Express Middle East. Track a parcel on [J&T's tracking page](https://www.jtexpress.me/KSA/trackOrder) or paste its number in the box above. The number starts with `JTE`, and the shop that sent your order has it: look in your order details or the shop's shipping message.

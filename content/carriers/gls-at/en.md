@@ -2,8 +2,8 @@
 title: GLS Austria tracking: statuses, Parcel Shops and contact
 description: Track a GLS parcel in Austria: where the parcel number and Track ID are, what GLS's German statuses mean, Parcel Shop deadlines and how to reach GLS Austria.
 slug: gls-austria-tracking
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 GLS Austria (GLS Österreich) has its head office in Ansfelden and 11 depots. It delivers Monday to Friday, and parcels sent within Austria usually arrive within 24 hours. Track one on [GLS Austria's tracking page](https://gls-group.com/AT/en/parcel-tracking/) with the parcel number or the Track ID from GLS's notification card, or paste the number in the box above. The number comes from the sender, so start with the shop's shipping email. On GLS's German tracking page, the statuses are in German: the table below translates them.

@@ -2,8 +2,8 @@
 title: GOFO France seguimiento: número GFFR, estados y ayuda
 description: Sigue tu paquete de GOFO en Francia: cómo es un número GFFR o CIFR, qué significan los estados de GOFO en francés y a quién acudir si se retrasa o se pierde.
 slug: gofo-france-seguimiento
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 GOFO France es la red francesa de GOFO, una empresa de paquetería con redes en varios países, y reparte paquetes dentro de Francia. En la lista de transportistas de Peek también la encuentras como CIRRO Parcel France. Sus números de seguimiento empiezan por `GFFR` o `CIFR`: puedes rastrear el paquete en la página de seguimiento francesa de GOFO, en gofo.com, o pegar el número en la casilla de arriba. ¿Aún no tienes número? Mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).

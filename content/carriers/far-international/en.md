@@ -2,8 +2,8 @@
 title: FAR International tracking: numbers, statuses and contact
 description: Track a FAR International (泛远国际) parcel from China: what a FAR…YQ number looks like, what each status means, who delivers it and who to ask for help.
 slug: far-international-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 FAR International (泛远国际, FAR International Logistics) is a cross-border logistics company in Hangzhou, China, set up in 2004. Online shops and marketplaces book it to send parcels abroad. FAR collects and checks the parcels in China, and its partners carry them abroad, clear customs and give them to a carrier in your country for delivery. Track the number on [FAR's Track and Trace page](https://www.far800.com/en/logistics), in English, or paste it in the box above. The number comes from the shop, with your order's shipping details.

@@ -2,8 +2,8 @@
 title: 圆通速递（YTO）物流查询：YT 单号、物流记录与客服电话
 description: 圆通速递（YTO Express）快递单号查询：YT 单号长什么样，揽收扫描、派件扫描等物流记录是什么意思，查不到或丢件怎么办，圆通和圆通国际的客服电话。
 slug: yto-yuantong-wuliu-chaxun
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 圆通速递（YTO Express）2000 年在上海创立，在国内有 5000 多家分公司。很多圆通单号对应的是国内包裹，比如淘宝、拼多多、抖音上的订单，寄往集运仓库或亲友家。可以在圆通官网的 [我要查件](https://www.yto.net.cn/ytoExpress/waybill/search/) 页面查，也可以把单号粘贴到上方的查询框。寄往海外的包裹归圆通国际，它在 [ytoglobal.com](https://www.ytoglobal.com/service/?lang=zh-cn) 有自己的查询页面。

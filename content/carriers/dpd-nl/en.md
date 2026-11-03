@@ -2,8 +2,8 @@
 title: DPD Netherlands tracking: statuses, delivery and contact
 description: Track a DPD parcel in the Netherlands: the 14-digit number, what DPD's statuses mean, delivery days, Parcel Points, missing parcels and who to call.
 slug: dpd-netherlands-tracking
-published: 2026-11-07
-updated: 2026-11-07
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 DPD Netherlands is DPD (Nederland) B.V., the DPD company that delivers parcels in the Netherlands. Track a parcel with the 14-digit parcel number from DPD's email: on DPD's Track & Trace at dpd.nl, in the myDPD app, or in the box above.

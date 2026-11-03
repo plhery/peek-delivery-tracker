@@ -2,8 +2,8 @@
 title: Pitney Bowes tracking: UPAA, UPBE and PBX numbers explained
 description: Track a Pitney Bowes parcel, such as an eBay order sent abroad: what UPAA, UPBE and PBX numbers look like, what its tracker's lines mean and who delivers it.
 slug: pitney-bowes-tracking
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Pitney Bowes ships parcels to other countries: in Peek's code, its numbers belong to eBay parcels from the United States and the United Kingdom, and to its other parcels going abroad. In the histories Peek's code holds, the parcel goes through a Pitney Bowes shipping centre, then on to the buyer's country, where a partner, such as that country's post, delivers it. The number starts with UPAA, UPBE or PBX and comes from the seller or the marketplace: paste it in the box above. Pitney Bowes's own tracker is at trackpb.shipment.co.

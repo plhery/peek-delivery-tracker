@@ -2,8 +2,8 @@
 title: Forza Delivery rastreo: número de guía, estados y teléfono
 description: Rastrea tu paquete de Forza Delivery Express en Guatemala, El Salvador u Honduras: cómo es la guía FD, qué significa cada estado y a qué número llamar.
 slug: forza-delivery-rastreo
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Forza Delivery Express es una empresa de paquetería que trabaja en Guatemala, El Salvador y Honduras. Nació en Guatemala en 2020 y es parte de Grupo Forza Logistics. Hace envíos para tiendas en línea y emprendedores, entrega a domicilio o en una agencia Express Center y puede cobrarte el pedido contra entrega. Rastrea tu paquete en la [página de rastreo de Forza](https://rastreo.forzadelivery.com/) con el número de guía que te dio la tienda, o pégalo en la casilla de arriba.

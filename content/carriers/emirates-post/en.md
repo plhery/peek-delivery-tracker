@@ -2,8 +2,8 @@
 title: Emirates Post tracking: AE numbers and statuses explained
 description: Track an Emirates Post item sent from or within the UAE: what an AE number looks like, what each status means and how Peek follows it to your country's post.
 slug: emirates-post-tracking
-published: 2026-11-05
-updated: 2026-11-05
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Emirates Post (بريد الإمارات) is the post of the United Arab Emirates; Peek's catalog also knows it as Emirates Post Group. Its postal numbers end in `AE`, and its tracker names the place of most steps: in the UAE and, for an item sent abroad, in the destination country too. Paste the number in the box above, or look it up on Emirates Post's own tracker at emiratespost.ae. Peek couldn't check Emirates Post's website for this page, so what follows is what Peek's code knows about its tracker.

@@ -2,8 +2,8 @@
 title: Delhivery tracking: AWB numbers, statuses and support
 description: Track a Delhivery parcel in India or abroad: what an AWB number looks like, what statuses such as RTO mean, missed deliveries, claims and how to reach support.
 slug: delhivery-tracking
-published: 2026-11-05
-updated: 2026-11-05
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Delhivery is an Indian logistics company that calls itself India's largest fully integrated logistics provider. It delivers online orders for marketplaces and shops to more than 18,850 pin codes, and ships from India to over 220 countries and territories. Track a parcel on [Delhivery's tracking page](https://www.delhivery.com/tracking) with its AWB number, the order ID, an LRN or your mobile number, or paste the AWB in the box above. The AWB comes from the sender: for an online order, look in the shop's shipping SMS or email, or ask the shop.

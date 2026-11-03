@@ -2,8 +2,8 @@
 title: Forza Delivery tracking: guía numbers, statuses, contact
 description: Track a Forza Delivery Express parcel in Guatemala, El Salvador or Honduras: what an FD guía looks like, what each Spanish status means and who to call.
 slug: forza-delivery-tracking
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Forza Delivery Express is a parcel courier in Guatemala, El Salvador and Honduras. It started in Guatemala in 2020 and is part of Grupo Forza Logistics. It ships for online shops and sellers, delivers to your door or to an Express Center agency, and can collect the price of the order on delivery. Track your parcel on [Forza's tracker](https://rastreo.forzadelivery.com/) with the guía number the shop gave you, or paste the number in the box above.

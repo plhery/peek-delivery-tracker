@@ -2,8 +2,8 @@
 title: PIN AG tracking: registered letters, parcels and pickup
 description: Track a PIN AG letter or parcel in Germany: which items PIN tracks, what its German statuses mean, depot pickup, missing mail and how to contact PIN.
 slug: pin-ag-tracking
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 PIN AG is a postal company in Berlin, separate from Deutsche Post, with about 1,300 staff. It delivers letters, registered letters (Einschreiben), parcels and orders from Amazon, medimops and rebuy. Only some of these items can be tracked. Track one on [PIN AG's tracking page](https://sendungsverfolgung.pin-ag.de/) (Sendungsverfolgung) or paste the number in the box above. The number comes from the sender: a shop puts it in its shipping email, and for a registered letter you ask whoever sent it.

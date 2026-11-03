@@ -2,8 +2,8 @@
 title: HuaHan Logistics tracking: HHW…YQ numbers and who delivers
 description: Track a HuaHan Logistics (华翰物流) parcel from China: what an HHW…YQ number looks like, what its scans mean and how to find who delivers it in your country.
 slug: huahan-logistics-tracking
-published: 2026-11-04
-updated: 2026-11-04
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 HuaHan Logistics (华翰物流, also HuaHan Express or 华翰速递) is a Chinese carrier that flies parcels out of China and hands them to a local carrier in the destination country, which delivers them. If a shop sent your order with HuaHan, look for a number that starts with HHW and ends with YQ, and paste it in the box above. HuaHan's own tracker is on its website, hh-exp.cn, and can name the carrier that delivers near you, with that carrier's number for your parcel.

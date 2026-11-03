@@ -2,8 +2,8 @@
 title: Aras Kargo tracking: numbers and statuses in English
 description: Track an Aras Kargo parcel: what its 13-digit number looks like, what Turkish statuses such as TESLİMAT ŞUBESİNDE mean in English, and how Peek follows it.
 slug: aras-kargo-tracking
-published: 2026-11-05
-updated: 2026-11-05
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Aras Kargo (also written Aras Cargo) is a courier in Turkey. Aras's tracker, as Peek reads it, writes every step in Turkish. The shop or the sender gives you the tracking number: paste it in the box above. Aras Kargo's own tracker is at kargotakip.araskargo.com.tr. The tables below explain its Turkish statuses in English.

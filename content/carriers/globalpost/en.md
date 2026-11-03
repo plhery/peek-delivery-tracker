@@ -2,8 +2,8 @@
 title: GlobalPost tracking: GP numbers and who delivers
 description: Track a GlobalPost parcel: what a GP number looks like, what GlobalPost's tracking lines mean and who delivers it in your country.
 slug: globalpost-tracking
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 GlobalPost, part of Auctane, is an international shipping service that online sellers buy through platforms such as ShipStation and Stamps.com. The parcel first goes to one of GlobalPost's shipping centres, where GlobalPost puts on the international label and customs form. GlobalPost's partners, postal and commercial carriers, take it on from there, and a post or courier in your country delivers it. The seller gives you the number, which usually starts with GP: paste it in the box above. GlobalPost's own tracker is at goglobalpost.com/tracking.

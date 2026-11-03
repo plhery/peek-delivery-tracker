@@ -2,8 +2,8 @@
 title: Morning Global tracking: BR…MG numbers, statuses, contact
 description: Track a Morning Global parcel from Hong Kong or China: what its numbers look like, what each status means, who delivers it near you and who to contact.
 slug: morning-global-tracking
-published: 2026-11-05
-updated: 2026-11-05
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Morning Global (MG), founded in 1987, is the international arm of Morning Express Group, a Hong Kong courier group. It ships parcels abroad for online shops and marketplaces, has offices in Hong Kong and across mainland China, and usually hands your parcel to a partner in your country for the delivery. Track the number the shop gives you on Morning Global's [Trace & Track page](https://www.morninglobal.com/trace-track/), in English, or paste it in the box above.

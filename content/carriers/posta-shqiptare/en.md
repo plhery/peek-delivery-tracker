@@ -2,8 +2,8 @@
 title: Posta Shqiptare tracking: Albanian Post numbers and statuses
 description: Track a Posta Shqiptare (Albanian Post) parcel or EMS: what an AL number looks like, what each Albanian status means, customs in Albania and who to call.
 slug: posta-shqiptare-tracking
-published: 2026-11-06
-updated: 2026-11-06
+published: 2026-11-02
+updated: 2026-11-02
 ---
 
 Posta Shqiptare (Albanian Post) is Albania's national post, with 533 post offices across the country. It handles mail and parcels within Albania, from abroad and to other countries, EMS included. Track an item in the "Gjurmo objektin" (track an item) box on [postashqiptare.al](https://www.postashqiptare.al/) or in its e-Posta app, or paste the number in the box above. For an online order, ask the seller for the number.

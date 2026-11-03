@@ -218,6 +218,13 @@ object TrackingLocation {
         "korea" to "KR", "republic of korea" to "KR",
     )
 
+    // DHL Express's own country names, after the article and any bracket are dropped.
+    private val dhlSpellings: Map<String, String> = mapOf(
+        "hong kong sar, china" to "HK", "macau sar, china" to "MO", "macao sar, china" to "MO", "china mainland" to "CN",
+        "china, peoples republic" to "CN", "people's republic of china" to "CN", "korea, republic of" to "KR",
+        "ireland, republic of" to "IE",
+    )
+
     // "Mexico City" is a city, not Mexico followed by one.
     private val settlementWords: Set<String> = setOf("city", "town", "ville", "stadt", "ciudad", "cidade", "citta")
 
@@ -287,12 +294,37 @@ object TrackingLocation {
         return fieldCountry(field, location.trimmingWhitespacesAndNewlines(), display = false)
     }
 
+    /** The country DHL Express ends its locations with: "UK", "NETHERLANDS, THE", "HONG KONG SAR, CHINA". */
+    private fun dashCountry(part: String): String? {
+        val bare = CatalogExpressions.foundationReplacing(normalized(part), "\\s*\\(.*\\)$", "")
+        val name = CatalogExpressions.foundationReplacing(bare, "^the |, the$", "")
+        // Also a US state: "ATLANTA - GEORGIA" is not in the Caucasus.
+        if (name.equalsCanonically("georgia")) return null
+        return dhlSpellings[name.nfc()] ?: namedCountry(name, display = true)
+    }
+
     /**
-     * For display, takes an explicit country off a location: the final field ("Zürich, CH",
+     * For display, takes an explicit country off a location: the name after the last dash ("SCARBOROUGH - ON -
+     * CANADA"), a country's code before a dot ("CN.CNE East China Sort Facility"), the final field ("Zürich, CH",
      * repeated in "Hebron, KY, US, US") or a leading name ("Switzerland Haerkingen").
      */
     fun place(location: String): Place {
         val text = location.trimmingWhitespacesAndNewlines()
+        val dashed = CatalogExpressions.expression("^(.*\\S)\\s+-\\s+(.+)$")?.matcher(text)
+        if (dashed != null && dashed.find()) {
+            dashCountry(text.substring(dashed.start(2), dashed.end(2)))?.let {
+                return Place(country = it, name = text.substring(dashed.start(1), dashed.end(1)))
+            }
+        }
+        // A country's code before a dot, as CNE writes its facilities: "CN.CNE East China Sort Facility" is in
+        // China, not in East China, Michigan. "ST.LOUIS" and "PT.ELIZABETH" abbreviate Saint and Port.
+        val prefixed = CatalogExpressions.expression("^([A-Z]{2})\\.(\\p{L}.*)$")?.matcher(text)
+        if (prefixed != null && prefixed.find()) {
+            val code = text.substring(prefixed.start(1), prefixed.end(1))
+            if (code.nfc() in regionCodes && code.nfc() !in ambiguousAddressCodes && code != "ST" && code != "PT") {
+                return Place(country = code, name = text.substring(prefixed.start(2), prefixed.end(2)).trimmingWhitespacesAndNewlines())
+            }
+        }
         val fields = mutableListOf<IntRange>()
         val matcher = fieldPattern.matcher(text)
         while (matcher.find()) {

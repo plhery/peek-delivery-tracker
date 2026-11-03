@@ -499,6 +499,30 @@ class LocalizationTests {
         )) {
             assertEquals(location, TrackingLocation.Place(country = null, name = location), TrackingLocation.place(location))
         }
+        // The country after the last dash, as DHL Express ends its locations, and a country's code before a dot, as
+        // CNE names its facilities; Georgia after a dash is the state, and ST. and PT. are Saint and Port.
+        val written = mapOf(
+            "BENIN CITY - NIGERIA" to TrackingLocation.Place(country = "NG", name = "BENIN CITY"),
+            "AMSTERDAM - NETHERLANDS, THE" to TrackingLocation.Place(country = "NL", name = "AMSTERDAM"),
+            "HONG KONG - HONG KONG SAR, CHINA" to TrackingLocation.Place(country = "HK", name = "HONG KONG"),
+            "STERLING - Virginia - USA" to TrackingLocation.Place(country = "US", name = "STERLING - Virginia"),
+            "ATLANTA - GEORGIA - USA" to TrackingLocation.Place(country = "US", name = "ATLANTA - GEORGIA"),
+            "SCARBOROUGH - ON - CANADA" to TrackingLocation.Place(country = "CA", name = "SCARBOROUGH - ON"),
+            "EXAMPLE CITY - KOREA, REPUBLIC OF (SOUTH K.)" to TrackingLocation.Place(country = "KR", name = "EXAMPLE CITY"),
+            "EXAMPLE CITY - THE PEOPLE'S REPUBLIC OF CHINA" to TrackingLocation.Place(country = "CN", name = "EXAMPLE CITY"),
+            "EXAMPLE CITY - IRELAND, REPUBLIC OF" to TrackingLocation.Place(country = "IE", name = "EXAMPLE CITY"),
+            "CN.CNE East China Sort Facility" to TrackingLocation.Place(country = "CN", name = "CNE East China Sort Facility"),
+            "CN.Shenzhen" to TrackingLocation.Place(country = "CN", name = "Shenzhen"),
+        )
+        for ((location, place) in written) {
+            assertEquals(location, place, TrackingLocation.place(location))
+        }
+        for (location in listOf("TBILISI - GEORGIA", "CURITIBA - PR", "ST.LOUIS", "PT.ELIZABETH", "CA.TORONTO", "Shenzhen - Futian")) {
+            assertEquals(location, TrackingLocation.Place(country = null, name = location), TrackingLocation.place(location))
+        }
+        // Display only: Passport evidence stays a final field that names a region.
+        assertNull(TrackingLocation.countryCode("CN.CNE East China Sort Facility"))
+        assertNull(TrackingLocation.countryCode("SCARBOROUGH - ON - CANADA"))
         // A code that is also a state or canton names the country the scan was placed in, and only that one.
         assertEquals(TrackingLocation.Place(country = "DE", name = "Haiger"), TrackingLocation.place("Haiger, DE", placedIn = "DE"))
         assertEquals(TrackingLocation.Place(country = "DE", name = "Haiger"), TrackingLocation.place("Haiger (DE)", placedIn = "DE"))

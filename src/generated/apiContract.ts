@@ -24912,7 +24912,6 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "eurodis"
     },
-    "trackingUrlTemplate": "https://eurodis.com/track-trace?track_and_trace_hidden_field=trackCollo&trackCollo-input-of={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -24925,7 +24924,8 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://eurodis.com/"
+    "trackingSearchUrl": "https://eurodis.com/",
+    "helpUrl": "https://eurodis.com/"
   },
   "fedex-pl": {
     "displayName": "FedEx Poland",

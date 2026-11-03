@@ -2968,6 +2968,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#023053"
     },
     {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-tracking",
+      "title": "GZYL tracking: numero YL…YQ, stati e pacco non arrivato",
+      "name": "GZYL",
+      "color": "#4e79e1"
+    },
+    {
       "id": "shouwu",
       "catalog": "shouwu",
       "slug": "shouwu-tracking",

@@ -6,7 +6,7 @@ published: 2026-10-23
 updated: 2026-10-27
 ---
 
-Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) est un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en ligne chinois, sur ses propres lignes ou par la poste. Il n'a pas de page de suivi à lui : colle le numéro dans le champ ci-dessus, ou cherche-le sur un service de suivi comme 17TRACK, où Juxi s'appelle SHJX. C'est le vendeur qui a choisi Juxi : il te donne le numéro avec les informations d'expédition de ta commande.
+Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) est un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en ligne chinois, sur ses propres lignes ou par la poste. Il n'a pas de page de suivi à lui : colle le numéro dans le champ ci-dessus. C'est le vendeur qui a choisi Juxi : il te donne le numéro avec les informations d'expédition de ta commande.
 
 ## Numéro de suivi Juxi Express : à quoi il ressemble
 
@@ -77,7 +77,7 @@ Si le suivi nomme [bpost](carrier:bpost) ou [La Poste](carrier:la-poste), ou don
 
 **En France.** Selon la douane, la TVA est due dès le premier euro (20 % au taux normal), sauf si tu l'as payée à l'achat chez un vendeur inscrit à l'IOSS, et un droit forfaitaire de 3 € a remplacé la « taxe petits colis » le 1er juillet 2026. Le transporteur peut te facturer des frais de dossier. Pour un colis « bloqué en douane », c'est lui qu'il faut contacter, pas la douane, qui ne te demandera jamais de payer par SMS ou par e-mail.
 
-**Dans toute l'UE**, des frais de traitement de 2 € s'ajouteront à partir du 1er novembre 2026, selon la Commission européenne. Le détail, pays par pays, est dans [colis bloqué en douane](guide:customs).
+**Dans toute l'UE**, des frais de traitement de 2 € par article s'ajoutent depuis le 1er novembre 2026, selon la Commission européenne. Le détail, pays par pays, est dans [colis bloqué en douane](guide:customs).
 
 ## Juxi Express contact : téléphone et adresse
 
@@ -93,9 +93,11 @@ Juxi ne donne aucun contact, formulaire ou bureau pour les destinataires en Belg
 
 [Peek](/) reconnaît tout de suite un numéro Juxi Express de forme JXC. Il n'y a pas de lien de suivi Juxi à coller, et il ne faut ni compte, ni code postal, ni numéro de téléphone. Si ton numéro n'a pas cette forme, colle-le quand même : Peek suit plus de 3 500 transporteurs, et tu peux choisir Juxi Express avec « Changer ».
 
-Juxi n'a plus de page de suivi que Peek pourrait lire : le bouton « 在线追踪 » (suivi en ligne) de son site n'ouvre plus rien. Peek suit donc les colis Juxi via des services de suivi et affiche le statut et l'historique qu'ils ont, dans leur formulation ; les libellés exacts qu'il connaît, comme `Delivered`, s'affichent avec ses propres mots en français. Cet historique peut être en retard sur celui du transporteur local, et pour certains colis il n'y a encore rien. S'il donne le numéro du transporteur local, ajoute aussi ce numéro dans Peek.
+Juxi n'a plus de page de suivi que Peek pourrait lire : le bouton « 在线追踪 » (suivi en ligne) de son site n'ouvre plus rien. Peek suit donc les colis Juxi via des services de suivi et affiche le statut et l'historique qu'ils ont, dans leur formulation ; les libellés exacts qu'il connaît, comme `Delivered`, s'affichent avec ses propres mots en français. Cet historique peut être en retard sur celui du transporteur local, et pour certains colis il n'y a encore rien.
 
-Peek vérifie toutes les 15 minutes (même quand le colis est en livraison) et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
+Si un service de suivi nomme le transporteur qui a pris le relais, avec son propre numéro, Peek affiche « Livraison par » suivi du nom de ce transporteur, et son numéro. Quand Peek sait lire le suivi de ce transporteur, il l'interroge aussi ; dès qu'un scan y est au moins aussi récent que le dernier de l'historique, Peek suit le colis chez lui et garde les scans d'avant.
+
+Tant que Peek suit le colis via des services de suivi, il vérifie toutes les 15 minutes, même quand le colis est en livraison. Après deux jours sans nouveau scan (12 heures tant que le colis affiche « Étiquette créée » ou « Pris en charge »), il ne vérifie plus qu'une fois par heure. Peek peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
 
 ## Questions sur le suivi Juxi Express
 
@@ -105,7 +107,7 @@ Un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en 
 
 ### Où suivre un colis Juxi Express ?
 
-Dans le champ ci-dessus, ou sur 17TRACK, que les pages de Juxi indiquent et où Juxi s'appelle SHJX. 17TRACK ne fait qu'afficher le suivi : il dit ne pouvoir ni modifier une livraison, ni rembourser, ni accepter une réclamation.
+Dans le champ ci-dessus, car Juxi n'a plus de suivi à lui. Pour sa ligne de petits colis vers le Royaume-Uni et l'Allemagne, Juxi renvoie au service de suivi 17TRACK. Une fois le colis chez le transporteur local, tu peux aussi le suivre chez lui avec son propre numéro.
 
 ### Qui livre les colis Juxi Express en Belgique et en France ?
 
@@ -124,13 +126,12 @@ Un transporteur de ton pays, mais Juxi ne dit pas lequel. Pour ses produits post
 - [Juxi Express : JX全球可追踪小包 (petit paquet suivi mondial)](https://www.juxiex.com/product_show.php?id=70) – PostNL, 10 à 30 jours ouvrables, droits et TVA payés par le destinataire, seuil de 22 €, recherche sous 3 mois, plafond de 1 yuan
 - [Juxi Express : 国际E邮宝 (ePacket)](https://www.juxiex.com/product_show.php?id=58) – 7 à 15 jours ouvrables, pas de recherche une fois le colis à la poste
 - [Juxi Express : 国际E特快 (e-EMS)](https://www.juxiex.com/product_show.php?id=62) – France en 5 à 7 jours ouvrables, sans engagement de délai
-- [Juxi Express : JX英德小包 (petit colis Royaume-Uni–Allemagne)](https://www.juxiex.com/product_show.php?id=65) – colis non livrés détruits, 17TRACK pour le suivi
+- [Juxi Express : JX英德小包 (petit colis vers le Royaume-Uni et l'Allemagne)](https://www.juxiex.com/product_show.php?id=65) – colis non livrés détruits, 17TRACK pour le suivi
 - [SPF Finances : Des frais supplémentaires sont liés à votre colis](https://fin.belgium.be/fr/particuliers/international/achats-etrangers-en-ligne/problemes-colis/frais-supplementaires) – TVA à 21 %, droit forfaitaire de 3 € par article jusqu'à 150 €, frais de dédouanement
 - [SPF Finances : Où se trouve votre colis ?](https://fin.belgium.be/fr/particuliers/international/achats-etrangers-en-ligne/problemes-colis/ou-se-trouve-votre-colis) – colis chez le service de courrier, numéro de suivi belge, dédouanement par le courrier
 - [Douane : Mon colis est bloqué](https://www.douane.gouv.fr/fiche/mon-colis-est-bloque) – contacter le transporteur, pas la douane, faux SMS
 - [Douane : Nos conseils avant d'acheter sur internet](https://www.douane.gouv.fr/fiche/nos-conseils-avant-dacheter-sur-internet) – TVA dès le premier euro, seuil de 22 € supprimé le 1er juillet 2021, taux normal de 20 %, IOSS, frais de dossier du transporteur
 - [Douane : IMPORT-EXPORT : quels changements sont à attendre dans les prochaines semaines ?](https://www.douane.gouv.fr/actualites/import-export-quels-changements-sont-attendre-dans-les-prochaines-semaines) – taxe « petits colis » remplacée par le droit forfaitaire de 3 € le 1er juillet 2026
-- [Commission européenne : EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – frais de traitement de 2 € à partir du 1er novembre 2026
-- [17TRACK : suivi SHJX](https://www.17track.net/fr/carriers/shjx) – Juxi listé sous SHJX, rôle de 17TRACK
+- [Commission européenne : EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – frais de traitement de 2 € par article depuis le 1er novembre 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme JXC, plus de suivi Juxi, suivi via des services de suivi, ce que Peek affiche
 :::

@@ -139,6 +139,9 @@ class FakeParcelLinks(
 
     override fun feedbackClient(linkId: String): ParcelFeedbackClient = ParcelFeedbackClient { feedbackRequests += linkId to it }
 
+    /** A debug build's `sdt.debug.parcelFeedback`, as the test sets it. */
+    override var feedbackPreview: String? = null
+
     companion object {
         val KEPT: UUID = UUID.fromString("00000000-0000-4000-8000-000000000a01")
         val FOLLOWED: UUID = UUID.fromString("00000000-0000-4000-8000-000000000a02")

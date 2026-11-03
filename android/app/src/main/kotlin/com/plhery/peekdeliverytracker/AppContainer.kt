@@ -36,6 +36,7 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeVerification
 import com.plhery.peekdeliverytracker.core.ParcelLinkReader
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
+import com.plhery.peekdeliverytracker.core.ParcelSharePreview
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.PostcodeMemory
 import com.plhery.peekdeliverytracker.core.PushNotifications
@@ -71,6 +72,7 @@ import com.plhery.peekdeliverytracker.platform.SensorArrivalMotion
 import com.plhery.peekdeliverytracker.platform.WebViewTurnstilePages
 import com.plhery.peekdeliverytracker.ui.TurnstileSheet
 import com.plhery.peekdeliverytracker.ui.arrival.ArrivalMotionSource
+import com.plhery.peekdeliverytracker.ui.deliveries.LaunchPreviews
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetState
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
 import com.plhery.peekdeliverytracker.widget.GlanceWidgetCenter
@@ -221,6 +223,19 @@ class AppContainer(
 
     /** The iPhone's `-sdt.debug.importCharges`: a debug build's import charges preview (ImportChargesPreview), from the defaults. */
     private val importCharges: () -> String? = { if (debug) defaults.string(DEBUG_IMPORT_CHARGES) else null }
+
+    /**
+     * What a debug build opens at launch ([LaunchPreviews]), as the iPhone's `#if DEBUG` launch arguments: the share
+     * sheet in `sdt.debug.parcelShare`'s state, the question in `sdt.debug.parcelFeedback`'s (on the parcel
+     * `sdt.debug.parcelFeedback.parcel` names) and the import charges; read at each use. A release build opens none.
+     */
+    val launchPreviews: LaunchPreviews get() = if (!debug) LaunchPreviews() else LaunchPreviews(
+        feedback = defaults.string(DEBUG_PARCEL_FEEDBACK),
+        feedbackParcel = defaults.string(DEBUG_PARCEL_FEEDBACK_PARCEL),
+        share = defaults.string(DEBUG_PARCEL_SHARE),
+        importCharges = importCharges(),
+        prepare = { parcelId, variant -> ParcelSharePreview.prepare(parcelId, variant, defaults) },
+    )
 
     /** The account's service, which the parcels and the friends ask (`DeliveryAPIClient`). */
     private val api = DeliveryApiClient(
@@ -530,6 +545,9 @@ class AppContainer(
 
     companion object {
         private const val DEBUG_IMPORT_CHARGES = "sdt.debug.importCharges"
+        private const val DEBUG_PARCEL_FEEDBACK = "sdt.debug.parcelFeedback"
+        private const val DEBUG_PARCEL_FEEDBACK_PARCEL = "sdt.debug.parcelFeedback.parcel"
+        private const val DEBUG_PARCEL_SHARE = "sdt.debug.parcelShare"
         private const val DEBUG_REVIEW_DUE = "sdt.debug.reviewDue"
         private const val DEBUG_STORE_SCREENSHOTS = "sdt.debug.storeScreenshots"
 

@@ -64,6 +64,8 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.JsonEncoder
 import com.plhery.peekdeliverytracker.core.ParcelMenuItem
+import com.plhery.peekdeliverytracker.core.ParcelSharePreview
+import com.plhery.peekdeliverytracker.core.ParcelShareWords
 import com.plhery.peekdeliverytracker.core.api.GiftWords
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.ShareParcelRequest
@@ -231,6 +233,43 @@ class ParcelShareTest {
         assertFalse(exists(PARCEL_SHARE))
         assertNull(deliveries.sharing)
         assertFalse(deliveries.modal)
+    }
+
+    /**
+     * B-L10: a debug build's `sdt.debug.parcelShare` opens, at launch, the page of the demo's DHL parcel on its way and
+     * its share sheet, the link and this phone's words put in the value's state before the sheet reads them.
+     */
+    @Test
+    fun aDebugSharePreviewOpensTheSheetOnItsParcelInThatState() {
+        val parcel = ParcelSharePreview.parcel(DemoCards.parcels(), variant = "gift")!!
+        val prepared = mutableListOf<Pair<UUID, String>>()
+        show(session = AuthenticationState.Demo) {
+            launchPreviews = LaunchPreviews(share = "gift") { id, variant ->
+                prepared += id to variant
+                shareLinks[id] = giftLink.copy(gift = true)
+                shareNotes.remember(ParcelShareWords(name = true, note = "Happy birthday", from = "Sam"), id)
+            }
+        }
+        settle()
+        assertEquals(parcel.id, deliveries.navigator.navigation.shown)
+        assertEquals(parcel.id, deliveries.sharing?.parcelId)
+        assertEquals(parcel.id, deliveries.sharing?.pageId)
+        assertEquals(listOf(parcel.id to "gift"), prepared)
+        assertTrue(exists(PARCEL_SHARE))
+        assertEquals(ToggleableState.On, state(PARCEL_SHARE_GIFT))
+        assertEquals("Happy birthday", editable(PARCEL_SHARE_NOTE))
+    }
+
+    /** B-L10: under `stopped` the sheet stops the link once it has read it, and says so. */
+    @Test
+    fun aDebugSharePreviewStoppedStopsTheLinkOnceItIsRead() {
+        val parcel = ParcelSharePreview.parcel(DemoCards.parcels(), variant = "stopped")!!
+        show(session = AuthenticationState.Demo) {
+            launchPreviews = LaunchPreviews(share = "stopped") { id, _ -> shareLinks[id] = giftLink.copy(showNumber = true) }
+        }
+        settle()
+        assertEquals(listOf(parcel.id), source.shareStops)
+        assertTrue(shows(PARCEL_SHARE_STOPPED, "Sharing is stopped. Sharing again makes a new link."))
     }
 
     @Test

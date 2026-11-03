@@ -400,8 +400,10 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
     val feedback = (if (route != null) state.feedback(source) else null) ?: held[0]
     held[0] = feedback
     val language = LocalLanguage.current
-    val feedbackPage = remember(shown, route, language) { feedbackPage(shown?.response, route, !source.tracksWithoutAccount, language) }
-    LaunchedEffect(feedback, feedbackPage) { feedback?.show(feedbackPage, route?.let { source.feedbackClient(it.id) }) }
+    // A build without a server reads no link: what it shows is made up, but under a debug build's question preview.
+    val madeUp = !source.tracksWithoutAccount && source.feedbackPreview == null
+    val feedbackPage = remember(shown, route, language, madeUp) { feedbackPage(shown?.response, route, madeUp, language) }
+    LaunchedEffect(feedback, feedbackPage) { feedback?.show(feedbackPage, route?.let { source.feedbackClient(it.id) }, source.feedbackPreview) }
     var covered by remember { mutableStateOf(false) }
     var announcement by remember { mutableStateOf<Announcement?>(null) }
 

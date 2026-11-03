@@ -44,6 +44,7 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -109,6 +110,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 /** What the deliveries' stack holds: the list at its root and, over it or beside it, a parcel's page. */
@@ -206,6 +208,7 @@ fun DeliveriesTab(
         HoldingDelivered(state, resumed, watching)
         Reviewing(state, resumed, watching, now)
         Consuming(state, inbox)
+        LaunchPreviewing(state)
         // The first open's field, scan and paste (`firstParcel`), which chose this tab first: Add opens here for them.
         LaunchedEffect(state) {
             snapshotFlow { firstOpen.asked }.filterNotNull().collect { firstOpen.take()?.let { state.add(it.request, it.focus) } }
@@ -524,6 +527,23 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
             state.source.action("parcel-share-received")
             state.addSharedDraft(draft)
         }
+    }
+}
+
+/**
+ * A debug build's launch preview (ParcelListView's `#if DEBUG` `.task`): once a launch, with the first parcels, the page
+ * of the parcel [LaunchPreviews.parcel] chooses opens. A release build opens none.
+ */
+@Composable
+private fun LaunchPreviewing(state: DeliveriesState) {
+    val previews = state.source.launchPreviews
+    if (!previews.opensPage) return
+    var opened by rememberForLaunch(state.source.launch, false)
+    if (opened) return
+    LaunchedEffect(state) {
+        val parcels = state.source.parcels.first { it.isNotEmpty() }
+        opened = true
+        previews.parcel(parcels)?.let { state.show(it.id) }
     }
 }
 

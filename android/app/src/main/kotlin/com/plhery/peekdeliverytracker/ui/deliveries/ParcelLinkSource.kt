@@ -73,6 +73,9 @@ interface ParcelLinkSource {
 
     /** `parcels.feedbackClient(forLink:)`: where an answer about the parcel behind link `linkId` goes. */
     fun feedbackClient(linkId: String): ParcelFeedbackClient
+
+    /** A debug build's `sdt.debug.parcelFeedback`: the question's state shown under the history ([LaunchPreviews]). */
+    val feedbackPreview: String? get() = null
 }
 
 /** The sheet's stores: the app's container. */
@@ -113,4 +116,6 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
      * `ios` and `web` only, and Android's answers will say `android` once it takes that.
      */
     override fun feedbackClient(linkId: String) = ParcelFeedbackClient { }
+
+    override val feedbackPreview get() = container.launchPreviews.feedback
 }

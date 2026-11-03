@@ -1428,7 +1428,9 @@ internal class DeliveriesState(
         sharing?.let { source.shares.forget(it.id) }
         sharingClosing = false
         val model = ParcelShareModel(parcel.id, parcel.label, source.shareClient(parcel), source.shareNotes, source.linkBaseUrl)
-        val work = ParcelShareSheetWork(model, demo = source.isDemo, scope = source.scope, parcel = parcel.takeIf { request.pageId == null })
+        val work = ParcelShareSheetWork(
+            model, demo = source.isDemo, scope = source.scope, parcel = parcel.takeIf { request.pageId == null }, preview = source.launchPreviews,
+        )
         source.shares.open(request.id, work)
         sharing = request
     }

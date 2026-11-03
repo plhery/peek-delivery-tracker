@@ -781,6 +781,21 @@ class ParcelLinkSheetTest {
         assertFalse(exists(FEEDBACK_QUESTION) || exists(FEEDBACK_ROW))
     }
 
+    /**
+     * B-L10: under a debug build's `sdt.debug.parcelFeedback` what a build without a server shows is asked about all the
+     * same, the question in the value's state.
+     */
+    @Test
+    fun underADebugQuestionPreviewWhatABuildWithoutAServerShowsAsksInThatState() {
+        show(FakeParcelLinks(tracksWithoutAccount = false).apply { feedbackPreview = "right" })
+        open()
+        check(exists(LINK_CARD))
+        compose.onNodeWithTag(FEEDBACK_QUESTION).performScrollTo()
+        settle()
+        assertTrue(says(FEEDBACK_BUBBLE, "Good to know, thanks!"))
+        assertEquals(emptyList<Any>(), links.feedbackRequests)
+    }
+
     @Test
     fun backFromTheCarriersPageTheQuestionAsksAtTheSheetsFootAndYesIsSentAsAskedThere() {
         show(FakeParcelLinks())

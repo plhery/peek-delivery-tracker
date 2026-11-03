@@ -111,6 +111,7 @@ import com.plhery.peekdeliverytracker.ui.zoom.pageBarItem
 import java.util.UUID
 import kotlin.math.max
 import kotlin.math.roundToInt
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withTimeoutOrNull
 
@@ -195,6 +196,8 @@ internal fun ParcelPage(state: DeliveriesState, parcelId: UUID) {
         }
     }
     if (feedback != null) PageReviewing(state, feedback, parcel, parcelId)
+    // A debug build's `sdt.debug.parcelShare` opens the share sheet as the page comes (`.task { showingShare = true }`).
+    if (state.source.launchPreviews.share != null) LaunchedEffect(parcelId) { state.shareOnPage(parcelId, null) }
 }
 
 /**
@@ -210,20 +213,20 @@ private fun rememberFeedback(state: DeliveriesState, pageId: UUID, parcel: Parce
     val held = remember { arrayOfNulls<ParcelFeedbackWork>(1) }
     val work = source.feedbacks.work(pageId, source.scope) { source.feedbackModel().apply { show(page, client) } } ?: held[0]
     held[0] = work
-    LaunchedEffect(work, page) { work?.show(page, client) }
+    LaunchedEffect(work, page) { work?.show(page, client, source.launchPreviews.feedback) }
     return work
 }
 
 /**
  * `feedbackPage(_:)`: what the question at the end of the page is asked about, or null while it asks nothing. The demo's
- * stories and the sample are made up: nothing is asked of them.
+ * stories and the sample are made up: nothing is asked of them, but under a debug build's `sdt.debug.parcelFeedback`.
  */
 @Composable
 private fun feedbackPage(state: DeliveriesState, pageId: UUID, parcel: Parcel?): ParcelFeedbackModel.Page? {
     val language = LocalLanguage.current
     parcel ?: return null
     return ParcelFeedbackModel.Page(
-        parcel, ParcelFeedbackSubject.Parcel(parcel.id), showsHistory(parcel), madeUp = state.source.isDemo || state.sample(pageId) != null,
+        parcel, ParcelFeedbackSubject.Parcel(parcel.id), showsHistory(parcel), madeUp = (state.source.isDemo || state.sample(pageId) != null) && state.source.launchPreviews.feedback == null,
         carrier = CarrierCatalog.shared.info(parcel.displayedCarrier, language).displayName, language = language,
     )
 }
@@ -235,12 +238,25 @@ private class PageMargins(val start: Dp, val top: Dp, val end: Dp, val bottom: D
  * The page's place, kept with the window. A window made again (a rotation, a change of theme) lays the page out once
  * before the window's insets reach it, as Compose reads them a frame late: the page stands taller and its foot is
  * shorter, which takes a place near the foot back by as much. The place comes back once the page has its room, as the
- * iPhone's page keeps it, unless the reader has scrolled meanwhile.
+ * iPhone's page keeps it, unless the reader has scrolled meanwhile. Under a debug build's `sdt.debug.parcelFeedback`
+ * the page starts at its foot, where the question stands, and stays there as it grows until the reader scrolls
+ * (`.defaultScrollAnchor(.bottom)`).
  */
 @Composable
-private fun rememberPageScroll(): ScrollState {
+private fun rememberPageScroll(atFoot: Boolean): ScrollState {
     val scroll = rememberScrollState()
     val restored = remember(scroll) { Snapshot.withoutReadObservation { scroll.value } }
+    if (atFoot) {
+        LaunchedEffect(scroll) {
+            // Where the foot was: a page still standing there follows it.
+            var standing = 0
+            snapshotFlow { scroll.maxValue }.filter { it != Int.MAX_VALUE }.collect { foot ->
+                if (scroll.value >= standing) scroll.scrollTo(foot)
+                standing = foot
+            }
+        }
+        return scroll
+    }
     LaunchedEffect(scroll) {
         if (restored == 0) return@LaunchedEffect
         withTimeoutOrNull(ROOM_MILLIS) { snapshotFlow { scroll.maxValue }.first { it in restored..<Int.MAX_VALUE } }
@@ -265,7 +281,7 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, fee
         Column(
             Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberPageScroll())
+                .verticalScroll(rememberPageScroll(atFoot = state.source.launchPreviews.feedback != null))
                 .padding(start = margins.start, top = margins.top + PAGE_TOP, end = margins.end, bottom = margins.bottom + PAGE_BOTTOM)
                 .fillMaxWidth()
                 .wrapContentWidth()

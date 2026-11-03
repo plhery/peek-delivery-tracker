@@ -18,13 +18,16 @@ import com.plhery.peekdeliverytracker.core.FriendsActivityStore
 import com.plhery.peekdeliverytracker.core.FriendsClient
 import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.GivenPostcode
+import com.plhery.peekdeliverytracker.core.ImportChargesPreview
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackClient
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackMemory
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackPreview
 import com.plhery.peekdeliverytracker.core.ParcelShareModel
 import com.plhery.peekdeliverytracker.core.ParcelShareNotes
+import com.plhery.peekdeliverytracker.core.ParcelSharePreview
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.ReviewRequester
@@ -86,6 +89,9 @@ interface DeliveriesSource {
 
     /** A debug build's `sdt.debug.storeScreenshots`: the demo shows without its bar ([DemoModeBar]), for the store. */
     val storeScreenshots: Boolean
+
+    /** What a debug build opens at launch, to look at it (`sdt.debug.parcelShare`, `sdt.debug.parcelFeedback`); none in a release. */
+    val launchPreviews: LaunchPreviews
 
     /** The site's landing page and its privacy notice, the foot's links. */
     val homePageUrl: String
@@ -328,6 +334,38 @@ interface DeliveriesSource {
     val invitation: FriendInvitationStore
 }
 
+/**
+ * What a debug build opens at launch, to look at it: the iPhone's `#if DEBUG` launch arguments, read from the app's
+ * defaults under the same names. The question's state on a page (`sdt.debug.parcelFeedback`, on the parcel
+ * `sdt.debug.parcelFeedback.parcel` names, [ParcelFeedbackPreview]), the share sheet's (`sdt.debug.parcelShare`,
+ * [ParcelSharePreview]) and the page with import charges (`sdt.debug.importCharges`, [ImportChargesPreview]). A release
+ * build has none.
+ */
+class LaunchPreviews(
+    val feedback: String? = null,
+    private val feedbackParcel: String? = null,
+    val share: String? = null,
+    private val importCharges: String? = null,
+    /** `ParcelSharePreview.prepare`: the demo's link to a parcel and this phone's words for it, in the share's state. */
+    private val prepare: (parcelId: UUID, variant: String) -> Unit = { _, _ -> },
+) {
+    /** ParcelListView's `#if DEBUG` `.task`: the page that opens at launch, the share's, else the question's, else the charges'. */
+    fun parcel(parcels: List<Parcel>): Parcel? = ParcelSharePreview.parcel(parcels, share)
+        ?: ParcelFeedbackPreview.parcel(parcels, feedback, feedbackParcel)
+        ?: ImportChargesPreview.parcel(parcels, importCharges)
+
+    /** Some page opens at launch: a share's, a question's or the charges'. */
+    val opensPage: Boolean get() = share != null || feedback != null || ImportChargesPreview.charges(importCharges) != null
+
+    /** The share sheet's `ParcelSharePreview.prepare(parcel)`, before it reads the link. */
+    fun prepareShare(parcelId: UUID) {
+        share?.let { prepare(parcelId, it) }
+    }
+
+    /** The sheet stops the link once it has read it (`if ParcelSharePreview.variant == "stopped" { await model.stop() }`). */
+    val stopsShare: Boolean get() = share == "stopped"
+}
+
 /** The deliveries from the app's container. */
 class ContainerDeliveries(private val container: AppContainer) : DeliveriesSource {
     override val launch: UUID get() = LAUNCH
@@ -344,6 +382,7 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override val session get() = container.session.stateFlow
     override val storeScreenshots get() = container.storeScreenshots
+    override val launchPreviews get() = container.launchPreviews
     override val homePageUrl get() = container.configuration.homePageUrl
     override val privacyUrl get() = container.configuration.privacyUrl
 

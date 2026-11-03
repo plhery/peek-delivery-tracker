@@ -120,6 +120,7 @@ import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel.Moment
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel.Word
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackQuestion
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackSubject
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackWordsSheet
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -332,9 +333,20 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
         cover(covered)
     }
 
-    /** `feedback.show(_:through:)`: what the page shows now. */
-    fun show(page: ParcelFeedbackModel.Page?, through: ParcelFeedbackClient?) {
+    /** The question the debug build's preview was last put on (`onChange(of: model.page?.subject, initial: true)`). */
+    private var previewed: ParcelFeedbackSubject? = null
+
+    /**
+     * `feedback.show(_:through:)`: what the page shows now. A debug build's `preview` (`sdt.debug.parcelFeedback`) puts
+     * the question in its state each time it is about another parcel or link ([ParcelFeedbackModel.preview]).
+     */
+    fun show(page: ParcelFeedbackModel.Page?, through: ParcelFeedbackClient?, preview: String? = null) {
         model.show(page, through)
+        val subject = model.page?.subject
+        if (subject != previewed) {
+            previewed = subject
+            if (subject != null && preview != null) model.preview(preview)
+        }
         pull()
     }
 

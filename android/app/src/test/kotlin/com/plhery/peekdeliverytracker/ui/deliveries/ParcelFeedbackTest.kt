@@ -49,6 +49,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackPreview
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
@@ -256,6 +257,40 @@ class ParcelFeedbackTest {
         open(gift)
         assertTrue(exists(PAGE_CONTENT))
         assertFalse(exists(FEEDBACK_QUESTION))
+    }
+
+    /**
+     * B-L10: a debug build's `sdt.debug.parcelFeedback` opens, at launch, the page of the demo's parcel on its way with
+     * the shortest history, its question asked though the demo is made up, in the state the value names.
+     */
+    @Test
+    fun aDebugQuestionPreviewOpensTheShortestHistoryOnItsWayWithItsQuestionInThatState() {
+        val parcels = DemoCards.parcels()
+        val shortest = ParcelFeedbackPreview.parcel(parcels, variant = "right", named = null)!!
+        show(parcels, session = AuthenticationState.Demo) { launchPreviews = LaunchPreviews(feedback = "right") }
+        settle()
+        assertEquals(shortest.id, deliveries.navigator.navigation.shown)
+        assertEquals(ParcelFeedbackModel.Moment.Right, work(shortest).moment)
+        assertTrue(exists(FEEDBACK_QUESTION))
+    }
+
+    /**
+     * B-L10: the parcel `sdt.debug.parcelFeedback.parcel` names opens instead, its page standing at its foot where the
+     * question is (`.defaultScrollAnchor(.bottom)`), here asking for reasons.
+     */
+    @Test
+    fun aDebugQuestionPreviewOpensTheNamedParcelAtTheFootOfItsPage() {
+        show(DemoCards.parcels(), session = AuthenticationState.Demo) {
+            launchPreviews = LaunchPreviews(feedback = "reasons", feedbackParcel = gift.id.toString())
+        }
+        settle()
+        assertEquals(gift.id, deliveries.navigator.navigation.shown)
+        assertEquals(ParcelFeedbackModel.Moment.Reasons, work().moment)
+        val question = node(FEEDBACK_QUESTION).getUnclippedBoundsInRoot()
+        assertTrue("$question in ${windowHeight()}", question.top.value >= 0f && question.bottom.value <= windowHeight())
+        // The page has scrolled to its foot to get there: at its top the question stands under the fold.
+        val scroll = node(PAGE_CONTENT).fetchSemanticsNode().config[SemanticsProperties.VerticalScrollAxisRange]
+        assertTrue("${scroll.value()} of ${scroll.maxValue()}", scroll.maxValue() > 0f && scroll.value() == scroll.maxValue())
     }
 
     @Test

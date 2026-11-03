@@ -1,9 +1,12 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.GiftWords
+import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.ShareParcelRequest
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.IOException
 import java.security.SecureRandom
 import java.time.Instant
@@ -469,3 +472,37 @@ class ParcelShareModel(
  * here so.
  */
 internal val typesEncodingNil: Set<String> = setOf(GiftWords.serializer().descriptor.serialName)
+
+/**
+ * The share sheet of a demo parcel opened at launch, to look at it in a debug build: the iPhone's `ParcelSharePreview`,
+ * under `-sdt.debug.parcelShare` (`#if DEBUG`): `new` (no link yet), `link` (shared, number shown), `gift` (a gift with
+ * its note), `stopped` (the sheet stops the link once it has read it) or `delivered` (a parcel that has arrived, its
+ * name shown). Debug builds only.
+ */
+object ParcelSharePreview {
+    /** The demo parcel the sheet opens for. */
+    fun parcel(parcels: List<Parcel>, variant: String?): Parcel? {
+        if (variant == null) return null
+        if (variant == "delivered") parcels.firstOrNull { it.currentStage == TrackingStage.Delivered }?.let { return it }
+        return parcels.firstOrNull { it.carrier == CarrierId.Dhl && it.isActive } ?: parcels.firstOrNull()
+    }
+
+    /** Puts the demo's link to `parcelId` and this phone's words for it, both kept in `defaults`, in the state `variant` names. */
+    fun prepare(parcelId: UUID, variant: String, defaults: UserDefaults) {
+        val shares = DemoParcelShares(defaults)
+        val notes = ParcelShareNotes(defaults)
+        shares.stop(parcelId)
+        notes.forget(parcelId)
+        when (variant) {
+            "link", "stopped" -> shares.share(parcelId, showNumber = true, gift = false)
+            "gift" -> {
+                shares.share(parcelId, showNumber = false, gift = true)
+                notes.remember(ParcelShareWords(name = true, note = "Happy birthday, Alex! I hope these keep up with you on the trails.", from = "Sam"), parcelId)
+            }
+            "delivered" -> {
+                shares.share(parcelId, showNumber = false, gift = false)
+                notes.remember(ParcelShareWords(name = true), parcelId)
+            }
+        }
+    }
+}

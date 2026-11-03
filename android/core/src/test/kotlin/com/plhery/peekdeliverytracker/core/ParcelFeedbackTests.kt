@@ -1094,4 +1094,27 @@ class ParcelFeedbackTests {
             assertTrue(back, back.contains("Swiss Post") && !back.contains("{{"))
         }
     }
+
+    /**
+     * B-L10, `ParcelFeedbackPreview.parcel(in:)`: a debug build's question preview opens the parcel the launch names,
+     * else the one on its way with a carrier's update and the shortest history; none without a variant.
+     */
+    @Test
+    fun theQuestionPreviewOpensTheNamedParcelElseTheShortestHistoryOnItsWay() {
+        fun longer(parcel: Parcel, events: Int): Parcel = parcel.copy(
+            trackingEvents = List(events) { parcel.trackingEvents.first().copy(id = UUID.randomUUID()) },
+        )
+        val delivered = parcel(stage = TrackingStage.Delivered)
+        val archived = parcel(archived = true)
+        val waiting = parcel(stage = null)
+        val three = longer(parcel(), 3)
+        val two = longer(parcel(), 2)
+        val alsoTwo = longer(parcel(), 2)
+        val parcels = listOf(delivered, archived, waiting, three, two, alsoTwo)
+        assertNull(ParcelFeedbackPreview.parcel(parcels, variant = null, named = null))
+        assertEquals(two, ParcelFeedbackPreview.parcel(parcels, variant = "ask", named = null))
+        assertEquals(delivered, ParcelFeedbackPreview.parcel(parcels, variant = "reasons", named = delivered.id.toString()))
+        assertNull(ParcelFeedbackPreview.parcel(parcels, variant = "ask", named = UUID.randomUUID().toString()))
+        assertNull(ParcelFeedbackPreview.parcel(listOf(delivered, archived, waiting), variant = "ask", named = null))
+    }
 }

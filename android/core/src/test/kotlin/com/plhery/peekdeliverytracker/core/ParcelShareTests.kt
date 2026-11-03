@@ -925,4 +925,59 @@ class ParcelShareTests {
             assertFalse("$action is counted where it happens", catalog.operations.any { it.event == action })
         }
     }
+
+    /**
+     * B-L10, `ParcelSharePreview.parcel(in:)`: a debug build's share preview opens on the demo's DHL parcel on its way,
+     * else the first; `delivered` on one that has arrived; none without a variant.
+     */
+    @Test
+    fun theSharePreviewOpensOnTheDemosDhlParcelOrOneThatHasArrived() {
+        val parcels = DemoRepository(MemoryDefaults(), language = { AppLanguage.En }).list()
+        val dhl = parcels.first { it.carrier == CarrierId.Dhl && it.isActive }
+        val arrived = parcels.first { it.currentStage == TrackingStage.Delivered }
+        assertNull(ParcelSharePreview.parcel(parcels, variant = null))
+        assertEquals(dhl, ParcelSharePreview.parcel(parcels, variant = "gift"))
+        assertEquals(arrived, ParcelSharePreview.parcel(parcels, variant = "delivered"))
+        val others = parcels.filterNot { it.carrier == CarrierId.Dhl || it.currentStage == TrackingStage.Delivered }
+        assertEquals(others.first(), ParcelSharePreview.parcel(others, variant = "delivered"))
+        assertNull(ParcelSharePreview.parcel(emptyList(), variant = "new"))
+    }
+
+    /**
+     * B-L10, `ParcelSharePreview.prepare(_:)`: before the sheet reads it, the demo's link and this phone's words are put
+     * in the state the variant names, whatever they were.
+     */
+    @Test
+    fun theSharePreviewPutsTheDemosLinkAndWordsInTheirState() = runTest {
+        val defaults = MemoryDefaults()
+        val shares = DemoParcelShares(defaults)
+        val parcelId = UUID.randomUUID()
+        val client = ParcelShareModel.Client(
+            current = { shares.link(parcelId) },
+            share = { shares.share(parcelId, showNumber = it.showNumber, gift = it.gift, giftWords = it.giftWords) },
+            stop = { shares.stop(parcelId) },
+        )
+        suspend fun opened(variant: String): ParcelShareModel {
+            ParcelSharePreview.prepare(parcelId, variant, defaults)
+            return ParcelShareModel(parcelId = parcelId, name = "Trail shoes", client = client, notes = ParcelShareNotes(defaults), baseUrl = base)
+                .also { it.load() }
+        }
+        val gift = opened("gift")
+        assertEquals(ParcelShareModel.Settings(showNumber = false, gift = true), gift.shown)
+        assertEquals(
+            ParcelShareWords(name = true, note = "Happy birthday, Alex! I hope these keep up with you on the trails.", from = "Sam"), gift.words,
+        )
+        val link = opened("link")
+        assertEquals(ParcelShareModel.Settings(showNumber = true, gift = false), link.shown)
+        assertNotNull(link.link)
+        assertEquals(ParcelShareWords(), link.words)
+        assertEquals(ParcelShareModel.Settings(showNumber = true, gift = false), opened("stopped").shown)
+        val delivered = opened("delivered")
+        assertEquals(ParcelShareModel.Settings(showNumber = false, gift = false), delivered.shown)
+        assertNotNull(delivered.link)
+        assertEquals(ParcelShareWords(name = true), delivered.words)
+        val new = opened("new")
+        assertNull(new.link)
+        assertEquals(ParcelShareWords(), new.words)
+    }
 }

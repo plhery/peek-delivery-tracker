@@ -167,7 +167,8 @@ internal class ShareNews(val address: String, val copy: Boolean)
  * the fields show them, the large detent, "Copied" for its two seconds, the address made ready, until the window
  * shown by then has handed it out or copied it ([heard]), and the system's share sheet on its way ([choosing]). `demo`
  * says the demo's links are made up on this phone. A card's sheet keeps the parcel as the menu found it ([parcel]),
- * through the window made again, even once it has left the list.
+ * through the window made again, even once it has left the list. A debug build's `sdt.debug.parcelShare` ([preview])
+ * puts the demo's link in its state before the sheet reads it, and stops it once read for `stopped`.
  */
 @Stable
 internal class ParcelShareSheetWork(
@@ -175,6 +176,7 @@ internal class ParcelShareSheetWork(
     val demo: Boolean,
     private val scope: CoroutineScope,
     val parcel: Parcel? = null,
+    private val preview: LaunchPreviews = LaunchPreviews(),
 ) {
     /** `model.words`, as typed: set with each keystroke, so the fields never show a frame behind it. */
     var words: ParcelShareWords by mutableStateOf(model.words)
@@ -206,7 +208,11 @@ internal class ParcelShareSheetWork(
 
     fun start() {
         jobs += scope.launch { model.wordsFlow.collect { words = it } }
-        jobs += scope.launch { model.load() }
+        jobs += scope.launch {
+            preview.prepareShare(model.parcelId)
+            model.load()
+            if (preview.stopsShare) model.stop()
+        }
     }
 
     fun close() {

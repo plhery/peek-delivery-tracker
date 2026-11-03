@@ -679,3 +679,20 @@ class ParcelFeedbackModel(
         const val away: Double = 1.5
     }
 }
+
+/**
+ * The demo parcel whose page opens at launch with its question in the state `variant` names
+ * ([ParcelFeedbackModel.preview]), to look at it in a debug build: the iPhone's `ParcelFeedbackPreview`, under
+ * `-sdt.debug.parcelFeedback` (`#if DEBUG`). Debug builds only.
+ */
+object ParcelFeedbackPreview {
+    /**
+     * The parcel named by `named` (`-sdt.debug.parcelFeedback.parcel`), else the one on its way with a carrier's update
+     * and the shortest history, whose question shows without a scroll; none without a variant.
+     */
+    fun parcel(parcels: List<Parcel>, variant: String?, named: String?): Parcel? {
+        if (variant == null) return null
+        named?.let(::uuid)?.let { id -> return parcels.firstOrNull { it.id == id } }
+        return parcels.filter { it.isActive && it.hasCarrierUpdate }.minByOrNull { it.trackingEvents.size }
+    }
+}

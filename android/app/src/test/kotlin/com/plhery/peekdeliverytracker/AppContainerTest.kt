@@ -17,12 +17,14 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.JsonEncoder
+import com.plhery.peekdeliverytracker.core.ParcelSharePreview
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import java.security.Security
 import java.time.Instant
 import java.util.UUID
@@ -30,6 +32,7 @@ import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import mockwebserver3.Dispatcher
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
@@ -286,6 +289,45 @@ class AppContainerTest {
         debug.scope.cancel()
         val release = AppContainer(context, configuration(), scope = MainScope(), debug = false).also { container = it }
         assertFalse(release.storeScreenshots)
+    }
+
+    /**
+     * B-L10: a debug build reads the iPhone's launch previews, `sdt.debug.parcelShare` and `sdt.debug.parcelFeedback`
+     * (on the parcel `.parcel` names), at each use, and the share's puts the demo's link and words in its state; a
+     * release reads none, whatever the defaults say.
+     */
+    @Test
+    fun aDebugBuildReadsTheLaunchPreviewsAndAReleaseNone() {
+        val defaults = PreferencesDefaults.standard(context)
+        defaults.set("demo", forKey = "sdt.native.experience.v1")
+        val debug = AppContainer(context, configuration(), scope = MainScope(), debug = true).also { container = it }
+        assertFalse(debug.launchPreviews.opensPage)
+        debug.start(process.lifecycle)
+        idleUntil("the demo's parcels") { debug.session.state == AuthenticationState.Demo && debug.parcels.parcelsFlow.value.isNotEmpty() }
+        val parcels = debug.parcels.parcelsFlow.value
+        val named = parcels.last()
+        defaults.set("gift", forKey = "sdt.debug.parcelShare")
+        defaults.set("ask", forKey = "sdt.debug.parcelFeedback")
+        defaults.set(named.id.toString(), forKey = "sdt.debug.parcelFeedback.parcel")
+        val deliveries = ContainerDeliveries(debug)
+        assertEquals("gift", deliveries.launchPreviews.share)
+        assertEquals("ask", deliveries.launchPreviews.feedback)
+        assertEquals("ask", ContainerParcelLinks(debug).feedbackPreview)
+        val shared = ParcelSharePreview.parcel(parcels, variant = "gift")!!
+        assertEquals(shared, deliveries.launchPreviews.parcel(parcels))
+        // The share sheet's `prepare`: the demo's link to the parcel, a gift, with its words on this phone.
+        deliveries.launchPreviews.prepareShare(shared.id)
+        assertEquals(true, runBlocking { deliveries.shareClient(shared).current() }?.gift)
+        assertEquals("Sam", deliveries.shareNotes.words(shared.id)?.from)
+        defaults.removeObject(forKey = "sdt.debug.parcelShare")
+        assertEquals(named, deliveries.launchPreviews.parcel(parcels))
+        debug.scope.cancel()
+        defaults.set("gift", forKey = "sdt.debug.parcelShare")
+        val release = AppContainer(context, configuration(), scope = MainScope(), debug = false).also { container = it }
+        assertFalse(release.launchPreviews.opensPage)
+        assertNull(release.launchPreviews.share)
+        assertNull(release.launchPreviews.feedback)
+        assertNull(ContainerParcelLinks(release).feedbackPreview)
     }
 
     @Test

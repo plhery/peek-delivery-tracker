@@ -71,6 +71,8 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Nowe języki w Peek: brazylijski portugalski, rosyjski i chiński uproszczony. Aplikacja używa języka urządzenia, a inny możesz wybrać w jej Ustawieniach, w pozycji Język.
-• Polskie teksty w aplikacji i w powiadomieniach zostały poprawione i ujednolicone.
+• Czerwona kropka na ikonie Peeka znika teraz za każdym razem, gdy otwierasz aplikację.
+• Numery śledzenia drukowane z myślnikami lub spacjami, np. przez Packetę i Ozon, są teraz przypisywane do właściwego przewoźnika tak, jak je wpisano.
+• Gdy przewoźnik przyjmuje opcjonalny kod pocztowy odbiorcy, Peek wyjaśnia teraz, co daje ten kod u danego przewoźnika: na przykład GLS w Austrii i w Polsce bez niego nie pokazuje żadnych skanów.
+• Przesyłka GZYL lub Xinghe Freight oznaczona jako dostarczona informuje teraz, że jej statusy pojawiają się według stałego harmonogramu i nie pokazują podpisu, więc jeśli nic nie dotarło, wiesz, że warto zapytać sprzedawcę.
 ```

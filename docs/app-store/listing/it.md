@@ -71,6 +71,8 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Peek ora parla portoghese brasiliano, russo e cinese semplificato. Segue la lingua del tuo dispositivo; puoi sceglierne un’altra nelle Impostazioni di Peek, alla voce Lingua.
-• I testi italiani dell’app e delle notifiche sono stati corretti e resi più coerenti.
+• Il pallino rosso sull’icona di Peek ora sparisce ogni volta che apri l’app.
+• I numeri di tracciamento stampati con trattini o spazi, come quelli di Packeta e Ozon, ora vengono associati al loro corriere così come li hai scritti.
+• Quando un corriere accetta un codice postale di consegna facoltativo, Peek ora spiega a cosa gli serve il codice: GLS in Austria e in Polonia, per esempio, senza codice non mostra nessuna scansione.
+• Quando un pacco di GZYL o Xinghe Freight risulta consegnato, ora dice che il suo tracciamento segue un calendario fisso e non mostra nessuna firma: se non è arrivato nulla, sai che conviene contattare il venditore.
 ```

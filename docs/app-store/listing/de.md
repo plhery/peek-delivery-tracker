@@ -71,6 +71,8 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Peek spricht jetzt brasilianisches Portugiesisch, Russisch und vereinfachtes Chinesisch. Die App folgt der Sprache deines Geräts; eine andere wählst du in den Einstellungen von Peek unter „Sprache“.
-• Die deutschen Texte der App und der Mitteilungen sind korrigiert und verwenden jetzt einheitliche Begriffe.
+• Die rote Zahl auf dem Peek-Symbol verschwindet jetzt jedes Mal, wenn du die App öffnest.
+• Sendungsnummern mit Bindestrichen oder Leerzeichen, wie sie etwa Packeta und Ozon drucken, werden jetzt so, wie du sie eingegeben hast, ihrem Paketdienst zugeordnet.
+• Kannst du bei einem Paketdienst optional die Postleitzahl der Lieferadresse angeben, sagt Peek jetzt, was sie dort bringt: GLS in Österreich und Polen etwa zeigt ohne sie keine Scans.
+• Ein als zugestellt gemeldetes Paket von GZYL oder Xinghe Freight weist jetzt darauf hin, dass seine Sendungsverfolgung einem festen Zeitplan folgt und keine Unterschrift zeigt. So weißt du, dass du beim Verkäufer nachfragen solltest, falls nichts angekommen ist.
 ```

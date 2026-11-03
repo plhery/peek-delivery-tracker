@@ -71,5 +71,8 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• O Peek agora fala português do Brasil, além de russo e chinês simplificado. Ele usa o idioma do seu dispositivo, e você pode escolher outro nas Configurações do Peek, em Idioma.
+• A bolinha vermelha no ícone do Peek agora some toda vez que você abre o app.
+• Códigos de rastreamento impressos com hífens ou espaços, como os de Packeta e Ozon, agora são associados à transportadora certa do jeito que você digitou.
+• Quando uma transportadora aceita um código postal de entrega opcional, o Peek agora explica para que esse código serve em cada uma: sem ele, GLS na Áustria e na Polônia, por exemplo, não mostra nenhuma movimentação.
+• Uma encomenda de GZYL ou Xinghe Freight marcada como entregue agora avisa que as atualizações seguem um cronograma fixo e não mostram assinatura, para você saber que deve falar com o vendedor se nada chegou.
 ```

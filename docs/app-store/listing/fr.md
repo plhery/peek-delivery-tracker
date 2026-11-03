@@ -73,6 +73,8 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Peek parle désormais portugais du Brésil, russe et chinois simplifié. Il suit la langue de ton appareil ; tu peux en choisir une autre dans les Réglages de Peek, rubrique Langue.
-• Les textes français de l’app et des notifications ont été corrigés et harmonisés.
+• La pastille rouge sur l’icône de Peek disparaît désormais chaque fois que tu ouvres l’app.
+• Les numéros de suivi imprimés avec des tirets ou des espaces, comme ceux de Packeta et d’Ozon, sont désormais associés à leur transporteur tels que tu les as saisis.
+• Quand un transporteur accepte un code postal de livraison facultatif, Peek explique désormais à quoi ce code lui sert : sans lui, GLS en Autriche et en Pologne, par exemple, n’affiche aucun scan.
+• Un colis GZYL ou Xinghe Freight marqué comme livré précise désormais que son suivi avance selon un calendrier fixe et n’indique aucune signature : si rien n’est arrivé, tu sais qu’il faut contacter le vendeur.
 ```

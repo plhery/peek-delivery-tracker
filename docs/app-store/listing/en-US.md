@@ -73,5 +73,8 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• Peek now speaks Brazilian Portuguese, Russian, and Simplified Chinese. It follows your device’s language; you can choose another in Peek’s Settings, under Language.
+• The red badge on Peek’s icon now clears each time you open the app.
+• Tracking numbers printed with dashes or spaces, such as Packeta’s and Ozon’s, are now matched to their carrier as you typed them.
+• Where a carrier takes an optional delivery postal code, Peek now says what it adds for that carrier: GLS in Austria and Poland, for example, shows no scans without it.
+• A delivered GZYL or Xinghe Freight package now says that its tracking follows a fixed schedule and shows no signature, so you know to ask the seller if nothing arrived.
 ```

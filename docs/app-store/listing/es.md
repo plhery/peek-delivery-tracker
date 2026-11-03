@@ -71,6 +71,8 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Peek ya habla portugués de Brasil, ruso y chino simplificado. Sigue el idioma de tu dispositivo; puedes elegir otro en los Ajustes de Peek, en Idioma.
-• Los textos en español de la app y de las notificaciones se han corregido y unificado.
+• El número rojo sobre el icono de Peek ahora desaparece cada vez que abres la app.
+• Los números de seguimiento impresos con guiones o espacios, como los de Packeta y Ozon, ahora se asocian a su transportista tal como los has escrito.
+• Cuando un transportista admite un código postal de entrega opcional, Peek ahora indica para qué le sirve ese código: sin él, GLS en Austria y Polonia, por ejemplo, no muestra ningún escaneo.
+• Cuando un paquete de GZYL o Xinghe Freight figura como entregado, ahora indica que su seguimiento sigue un calendario fijo y no muestra ninguna firma: si no ha llegado nada, ya sabes que conviene contactar con el vendedor.
 ```

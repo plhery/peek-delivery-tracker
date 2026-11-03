@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import {
-  infoPlistStrings, keysNamingOnlyTheIPhone, keysWithoutAMacVariant, nativeLocalizationReferences, nativeSwiftSources,
+  infoPlistStrings, intentStrings, keysNamingOnlyTheIPhone, keysWithoutAMacVariant, nativeLocalizationReferences, nativeSwiftSources,
 } from './native-localization.mjs';
 import { appleLanguage, locales, validateLocalizationCatalogs } from './localization-catalog.mjs';
 
@@ -192,7 +192,9 @@ describe('Localized Info.plist strings', () => {
     for (const folder of locales.map(appleLanguage)) {
       assert.ok(regions.includes(named(folder)), folder);
       assert.equal(project.split(`path = ${named(`${folder}.lproj/InfoPlist.strings`)};`).length - 1, 2, folder);
-      assert.equal(project.split(`path = ${named(`${folder}.lproj/ServicesMenu.strings`)};`).length - 1, 1, folder);
+      for (const table of ['ServicesMenu.strings', 'Localizable.strings', 'AppShortcuts.strings']) {
+        assert.equal(project.split(`path = ${named(`${folder}.lproj/${table}`)};`).length - 1, 1, `${folder} ${table}`);
+      }
     }
     const plist = fs.readFileSync(new URL('../ios/PeekDeliveryTracker/Info.plist', import.meta.url), 'utf8');
     const listed = plist.match(/<key>CFBundleLocalizations<\/key>\s*<array>([\s\S]*?)<\/array>/)[1].match(/<string>[^<]+<\/string>/g).map((entry) => entry.slice(8, -9));
@@ -210,5 +212,32 @@ describe('Localized Info.plist strings', () => {
     const value = catalogs();
     delete value.pl['native.cameraUsage'];
     assert.throws(() => infoPlistStrings(value), /pl\.native\.cameraUsage/);
+  });
+});
+
+describe('Localized intent strings', () => {
+  const catalogs = () => Object.fromEntries(locales.map((locale) => [locale, {
+    'appIntents.nextDelivery': locale === 'en' ? 'Next delivery' : `Next delivery ${locale}`,
+    'appShortcuts.nextDelivery': locale === 'en' ? 'Next delivery in {{applicationName}}' : `{{applicationName}} ${locale}`,
+    'siri.openPeek': 'Open Peek',
+  }]));
+  const swift = 'static let title: LocalizedStringResource = "Next delivery"\nphrases: ["Next delivery in \\(.applicationName)"]';
+
+  it('keys titles and phrases by their English text, with Apple\'s ${applicationName}', () => {
+    const files = intentStrings(catalogs(), swift);
+    const folders = locales.map(appleLanguage);
+    assert.deepEqual(files.map(([file]) => file), [
+      ...folders.map((folder) => `PeekDeliveryTracker/Resources/${folder}.lproj/Localizable.strings`),
+      ...folders.map((folder) => `PeekDeliveryTracker/Resources/${folder}.lproj/AppShortcuts.strings`),
+    ]);
+    assert.match(files[1][1], /^"Next delivery" = "Next delivery de";$/m);
+    assert.doesNotMatch(files[1][1], /Open Peek/);
+    assert.match(files.at(-1)[1], new RegExp(`^"Next delivery in \\$\\{applicationName\\}" = "\\$\\{applicationName\\} ${locales.at(-1)}";$`, 'm'));
+  });
+
+  it('fails when the Swift source no longer writes an English text', () => {
+    const value = catalogs();
+    value.en['appIntents.nextDelivery'] = 'Your next delivery';
+    assert.throws(() => intentStrings(value, swift), /appIntents\.nextDelivery/);
   });
 });

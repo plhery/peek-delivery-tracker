@@ -74,3 +74,24 @@ export function infoPlistStrings(catalogs) {
     ];
   }));
 }
+
+// Siri, Spotlight and Shortcuts read the app's intents from string tables keyed by the English text the Swift source
+// writes: titles and parameters from Localizable.strings, and the phrases that run them from AppShortcuts.strings,
+// which name the app as ${applicationName} where the catalogs write {{applicationName}}.
+const intentTables = [['appIntents.', 'Localizable.strings'], ['appShortcuts.', 'AppShortcuts.strings']];
+
+/** The app's intent string tables in every language, as [path under ios/, contents], once the Swift source writes each English text. */
+export function intentStrings(catalogs, swiftSource) {
+  const apple = (text) => text.replaceAll('{{applicationName}}', '${applicationName}');
+  return intentTables.flatMap(([prefix, file]) => {
+    const keys = Object.keys(catalogs.en).filter((key) => key.startsWith(prefix));
+    const unused = keys.filter((key) => !swiftSource.includes(`"${catalogs.en[key].replaceAll('{{applicationName}}', '\\(.applicationName)')}"`));
+    if (unused.length) throw new Error(`The app's intents don't write the English text of ${unused.join(', ')}`);
+    return Object.entries(catalogs).map(([language, catalog]) => [
+      `PeekDeliveryTracker/Resources/${appleLanguage(language)}.lproj/${file}`,
+      `/* Generated from shared/locales by npm run ios:resources. */\n${keys.map((key) => (
+        `${stringsLiteral(apple(catalogs.en[key]))} = ${stringsLiteral(apple(catalog[key]))};\n`
+      )).join('')}`,
+    ]);
+  });
+}

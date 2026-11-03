@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "Peek 不认识打开此链接的 App，或者该 App 要求把结果发到它从未注册过的地址。请在你的助手中重新开始连接。",
   "assistants.consent.closed": "Peek 暂时还不能为此账号连接助手。",
   "assistants.consent.full": "此账号连接的助手太多。请先在设置中断开一个。",
-  "assistants.consent.failed": "无法回复助手，请重试。"
+  "assistants.consent.failed": "无法回复助手，请重试。",
+  "appIntents.nextDelivery": "下一个包裹",
+  "appIntents.nextDeliveryDescription": "无需打开 Peek，就能知道下一个到达的包裹。",
+  "appIntents.addParcel": "添加包裹",
+  "appIntents.addParcelDescription": "打开 Peek 并填好运单号，你确认后才会添加。",
+  "appIntents.trackingNumber": "运单号",
+  "appIntents.trackingNumberQuestion": "运单号是多少？",
+  "appIntents.name": "名称",
+  "appShortcuts.nextDelivery": "在 {{applicationName}} 查看下一个包裹",
+  "appShortcuts.nextDeliveryQuestion": "{{applicationName}} 里我的下一个包裹什么时候到",
+  "appShortcuts.addParcel": "在 {{applicationName}} 添加包裹",
+  "appShortcuts.trackParcel": "用 {{applicationName}} 跟踪包裹",
+  "siri.nextDelivery": "下一个包裹是“{{name}}”，由 {{carrier}} 配送：{{detail}}。",
+  "siri.nextDeliveryAndMore.one": "下一个包裹是“{{name}}”，由 {{carrier}} 配送：{{detail}}。还有 1 个包裹在路上。",
+  "siri.nextDeliveryAndMore.few": "下一个包裹是“{{name}}”，由 {{carrier}} 配送：{{detail}}。还有 {{count}} 个包裹在路上。",
+  "siri.nextDeliveryAndMore.many": "下一个包裹是“{{name}}”，由 {{carrier}} 配送：{{detail}}。还有 {{count}} 个包裹在路上。",
+  "siri.openPeek": "打开 Peek，查看下一个包裹。",
+  "siri.addFailed": "无法把运单号交给 Peek。请打开 Peek，直接粘贴运单号。"
 }

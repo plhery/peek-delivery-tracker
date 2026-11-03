@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "Peek non riconosce l’app che l’ha aperto, oppure l’app ha chiesto una risposta a un indirizzo che non ha mai registrato. Ricomincia il collegamento dal tuo assistente.",
   "assistants.consent.closed": "Peek non può ancora collegare assistenti a questo account.",
   "assistants.consent.full": "Questo account ha troppi assistenti collegati. Prima scollegane uno in Impostazioni.",
-  "assistants.consent.failed": "Impossibile rispondere all’assistente. Riprova."
+  "assistants.consent.failed": "Impossibile rispondere all’assistente. Riprova.",
+  "appIntents.nextDelivery": "Prossima consegna",
+  "appIntents.nextDeliveryDescription": "Ti dice qual è il prossimo pacco in arrivo, senza aprire Peek.",
+  "appIntents.addParcel": "Aggiungi un pacco",
+  "appIntents.addParcelDescription": "Apre Peek con il numero di tracciamento pronto da aggiungere. Non viene aggiunto nulla finché non confermi.",
+  "appIntents.trackingNumber": "Numero di tracciamento",
+  "appIntents.trackingNumberQuestion": "Qual è il numero di tracciamento?",
+  "appIntents.name": "Nome",
+  "appShortcuts.nextDelivery": "Prossima consegna su {{applicationName}}",
+  "appShortcuts.nextDeliveryQuestion": "Quando arriva il mio prossimo pacco su {{applicationName}}",
+  "appShortcuts.addParcel": "Aggiungi un pacco su {{applicationName}}",
+  "appShortcuts.trackParcel": "Traccia un pacco con {{applicationName}}",
+  "siri.nextDelivery": "Il prossimo pacco è «{{name}}» con {{carrier}}: {{detail}}.",
+  "siri.nextDeliveryAndMore.one": "Il prossimo pacco è «{{name}}» con {{carrier}}: {{detail}}. 1 altro pacco è in arrivo.",
+  "siri.nextDeliveryAndMore.few": "Il prossimo pacco è «{{name}}» con {{carrier}}: {{detail}}. Altri {{count}} pacchi sono in arrivo.",
+  "siri.nextDeliveryAndMore.many": "Il prossimo pacco è «{{name}}» con {{carrier}}: {{detail}}. Altri {{count}} pacchi sono in arrivo.",
+  "siri.openPeek": "Apri Peek per vedere la prossima consegna.",
+  "siri.addFailed": "Impossibile passare il numero di tracciamento a Peek. Apri Peek e incollalo lì."
 }

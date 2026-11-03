@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "Peek no reconoce la app que lo abrió, o la app pidió una respuesta en una dirección que nunca registró. Vuelve a empezar la conexión desde tu asistente.",
   "assistants.consent.closed": "Peek aún no puede conectar asistentes a esta cuenta.",
   "assistants.consent.full": "Esta cuenta tiene demasiados asistentes conectados. Primero desconecta uno en Ajustes.",
-  "assistants.consent.failed": "No se ha podido responder al asistente. Inténtalo de nuevo."
+  "assistants.consent.failed": "No se ha podido responder al asistente. Inténtalo de nuevo.",
+  "appIntents.nextDelivery": "Próxima entrega",
+  "appIntents.nextDeliveryDescription": "Te dice cuál es tu próximo paquete, sin abrir Peek.",
+  "appIntents.addParcel": "Añadir un paquete",
+  "appIntents.addParcelDescription": "Abre Peek con el número de seguimiento listo para añadir. No se añade nada hasta que lo confirmes.",
+  "appIntents.trackingNumber": "Número de seguimiento",
+  "appIntents.trackingNumberQuestion": "¿Cuál es el número de seguimiento?",
+  "appIntents.name": "Nombre",
+  "appShortcuts.nextDelivery": "Próxima entrega en {{applicationName}}",
+  "appShortcuts.nextDeliveryQuestion": "Cuándo llega mi próximo paquete en {{applicationName}}",
+  "appShortcuts.addParcel": "Añadir un paquete a {{applicationName}}",
+  "appShortcuts.trackParcel": "Seguir un paquete con {{applicationName}}",
+  "siri.nextDelivery": "Tu próxima entrega es «{{name}}» con {{carrier}}: {{detail}}.",
+  "siri.nextDeliveryAndMore.one": "Tu próxima entrega es «{{name}}» con {{carrier}}: {{detail}}. Hay 1 paquete más en camino.",
+  "siri.nextDeliveryAndMore.few": "Tu próxima entrega es «{{name}}» con {{carrier}}: {{detail}}. Hay {{count}} paquetes más en camino.",
+  "siri.nextDeliveryAndMore.many": "Tu próxima entrega es «{{name}}» con {{carrier}}: {{detail}}. Hay {{count}} paquetes más en camino.",
+  "siri.openPeek": "Abre Peek para ver tu próxima entrega.",
+  "siri.addFailed": "No se ha podido pasar el número de seguimiento a Peek. Abre Peek y pégalo allí."
 }

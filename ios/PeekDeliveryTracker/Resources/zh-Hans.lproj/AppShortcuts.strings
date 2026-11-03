@@ -1,0 +1,5 @@
+/* Generated from shared/locales by npm run ios:resources. */
+"Add a parcel to ${applicationName}" = "在 ${applicationName} 添加包裹";
+"Next delivery in ${applicationName}" = "在 ${applicationName} 查看下一个包裹";
+"When is my next delivery in ${applicationName}" = "${applicationName} 里我的下一个包裹什么时候到";
+"Track a parcel with ${applicationName}" = "用 ${applicationName} 跟踪包裹";

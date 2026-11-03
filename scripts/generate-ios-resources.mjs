@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { TRACKING_CANDIDATE_PATTERNS } from 'universal-parcel-scraper';
 import { readBrandData, renderBrandJson } from './generate-brand.mjs';
 import {
-  infoPlistStrings, keysNamingOnlyTheIPhone, keysWithoutAMacVariant, nativeLocalizationReferences, nativeSwiftSources,
+  infoPlistStrings, intentStrings, keysNamingOnlyTheIPhone, keysWithoutAMacVariant, nativeLocalizationReferences, nativeSwiftSources,
 } from './native-localization.mjs';
 import { readLocalizationCatalogs } from './localization-catalog.mjs';
 
@@ -24,7 +24,8 @@ for (const key of Object.values(trackingMessages.failures)) {
   if (!languages.en[key]) throw new Error(`Missing tracking failure translation: ${key}`);
 }
 
-const referencedKeys = nativeLocalizationReferences(nativeSwiftSources(path.join(root, 'ios')), Object.keys(languages.en));
+const swiftSource = nativeSwiftSources(path.join(root, 'ios'));
+const referencedKeys = nativeLocalizationReferences(swiftSource, Object.keys(languages.en));
 const missingNativeReferences = [...referencedKeys].filter((key) => !(key in languages.en));
 if (missingNativeReferences.length) {
   throw new Error(
@@ -101,7 +102,8 @@ const outputs = new Map([
 ]);
 const files = new Map([
   ...[...outputs].map(([name, contents]) => [path.join(resources, name), contents]),
-  ...infoPlistStrings(languages).map(([name, contents]) => [path.join(root, 'ios', name), contents]),
+  ...[...infoPlistStrings(languages), ...intentStrings(languages, swiftSource)]
+    .map(([name, contents]) => [path.join(root, 'ios', name), contents]),
 ]);
 // --brand handles Brand.json alone, for a truck or palette change: the catalog, detection and checksum files follow
 // the scraper installed here, which can be a release main does not pin.

@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "Peek nie zna aplikacji, która go otworzyła, albo aplikacja poprosiła o odpowiedź pod adresem, którego nigdy nie zarejestrowała. Zacznij łączenie od nowa w swoim asystencie.",
   "assistants.consent.closed": "Peek nie może jeszcze łączyć asystentów z tym kontem.",
   "assistants.consent.full": "Z tym kontem połączono zbyt wielu asystentów. Najpierw odłącz jednego w Ustawieniach.",
-  "assistants.consent.failed": "Nie udało się odpowiedzieć asystentowi. Spróbuj ponownie."
+  "assistants.consent.failed": "Nie udało się odpowiedzieć asystentowi. Spróbuj ponownie.",
+  "appIntents.nextDelivery": "Najbliższa dostawa",
+  "appIntents.nextDeliveryDescription": "Mówi, która przesyłka dotrze jako następna, bez otwierania aplikacji Peek.",
+  "appIntents.addParcel": "Dodaj przesyłkę",
+  "appIntents.addParcelDescription": "Otwiera aplikację Peek z numerem śledzenia gotowym do dodania. Nic nie zostanie dodane, dopóki nie potwierdzisz.",
+  "appIntents.trackingNumber": "Numer śledzenia",
+  "appIntents.trackingNumberQuestion": "Jaki jest numer śledzenia?",
+  "appIntents.name": "Nazwa",
+  "appShortcuts.nextDelivery": "Najbliższa dostawa w aplikacji {{applicationName}}",
+  "appShortcuts.nextDeliveryQuestion": "Kiedy dotrze moja następna przesyłka w aplikacji {{applicationName}}",
+  "appShortcuts.addParcel": "Dodaj przesyłkę w aplikacji {{applicationName}}",
+  "appShortcuts.trackParcel": "Śledź przesyłkę w aplikacji {{applicationName}}",
+  "siri.nextDelivery": "Następna przesyłka to „{{name}}” od przewoźnika {{carrier}}: {{detail}}.",
+  "siri.nextDeliveryAndMore.one": "Następna przesyłka to „{{name}}” od przewoźnika {{carrier}}: {{detail}}. W drodze jest jeszcze 1 przesyłka.",
+  "siri.nextDeliveryAndMore.few": "Następna przesyłka to „{{name}}” od przewoźnika {{carrier}}: {{detail}}. W drodze są jeszcze {{count}} przesyłki.",
+  "siri.nextDeliveryAndMore.many": "Następna przesyłka to „{{name}}” od przewoźnika {{carrier}}: {{detail}}. W drodze jest jeszcze {{count}} przesyłek.",
+  "siri.openPeek": "Otwórz aplikację Peek, aby zobaczyć najbliższą dostawę.",
+  "siri.addFailed": "Nie udało się przekazać numeru śledzenia do aplikacji Peek. Otwórz ją i wklej numer bezpośrednio."
 }

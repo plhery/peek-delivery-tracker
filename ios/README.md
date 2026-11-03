@@ -90,6 +90,23 @@ Return opens the one shown by itself; Esc goes back from a parcel over the list.
 on the screen in front, with no sheet, alert or popover over it, and the search field keeps the
 keys it edits with.
 
+## Siri and Shortcuts
+
+The app gives Siri, Spotlight and Shortcuts two App Intents, each with its phrases, on the iPhone, iPad and Mac
+(`ShortcutIntents.swift`):
+
+- **Next delivery** answers from the widget's snapshot in the App Group, in the app's language. It names the first
+  parcel on its way in the widget's order, its carrier, when it is expected or else its status, and how many more
+  are on the way. It opens nothing and asks no server. Without a snapshot, or with the widget's switch off, it asks
+  to open Peek.
+- **Add a parcel** takes a tracking number and an optional name and leaves them for Add as the Share extension
+  does. Peek comes forward with Add filled in, and nothing is added until it is confirmed there.
+
+Intent titles, parameters and phrases follow the device's language rather than the app's. They come from the
+`appIntents.` and `appShortcuts.` keys in `shared/locales`, which `npm run ios:resources` writes into each language's
+`Localizable.strings` and `AppShortcuts.strings`. Those tables are keyed by the English text in Swift, so change an
+English text in both places at once; the generator fails when they differ.
+
 ## Signing for a device
 
 1. Select your team for the app, `ShareExtension` and `DeliveryWidget` targets.

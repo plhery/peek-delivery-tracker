@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "Peek doesn’t know the app that opened it, or the app asked for an answer somewhere it never registered. Start connecting again from your assistant.",
   "assistants.consent.closed": "Peek can’t connect assistants to this account yet.",
   "assistants.consent.full": "This account has too many connected assistants. Disconnect one in Settings first.",
-  "assistants.consent.failed": "Couldn’t answer the assistant. Try again."
+  "assistants.consent.failed": "Couldn’t answer the assistant. Try again.",
+  "appIntents.nextDelivery": "Next delivery",
+  "appIntents.nextDeliveryDescription": "Tells you which parcel comes next, without opening Peek.",
+  "appIntents.addParcel": "Add a parcel",
+  "appIntents.addParcelDescription": "Opens Peek with the tracking number ready to add. Nothing is added until you confirm.",
+  "appIntents.trackingNumber": "Tracking number",
+  "appIntents.trackingNumberQuestion": "What’s the tracking number?",
+  "appIntents.name": "Name",
+  "appShortcuts.nextDelivery": "Next delivery in {{applicationName}}",
+  "appShortcuts.nextDeliveryQuestion": "When is my next delivery in {{applicationName}}",
+  "appShortcuts.addParcel": "Add a parcel to {{applicationName}}",
+  "appShortcuts.trackParcel": "Track a parcel with {{applicationName}}",
+  "siri.nextDelivery": "Your next delivery is “{{name}}” with {{carrier}}: {{detail}}.",
+  "siri.nextDeliveryAndMore.one": "Your next delivery is “{{name}}” with {{carrier}}: {{detail}}. 1 more parcel is on the way.",
+  "siri.nextDeliveryAndMore.few": "Your next delivery is “{{name}}” with {{carrier}}: {{detail}}. {{count}} more parcels are on the way.",
+  "siri.nextDeliveryAndMore.many": "Your next delivery is “{{name}}” with {{carrier}}: {{detail}}. {{count}} more parcels are on the way.",
+  "siri.openPeek": "Open Peek to see your next delivery.",
+  "siri.addFailed": "Couldn’t pass the tracking number to Peek. Open Peek and paste it there."
 }

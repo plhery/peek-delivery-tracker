@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "O Peek não conhece a app que a abriu, ou a app pediu uma resposta num endereço que nunca registou. Volta a ligar a partir do teu assistente.",
   "assistants.consent.closed": "O Peek ainda não pode ligar assistentes a esta conta.",
   "assistants.consent.full": "Esta conta tem demasiados assistentes ligados. Desliga primeiro um nas Definições.",
-  "assistants.consent.failed": "Não foi possível responder ao assistente. Tenta novamente."
+  "assistants.consent.failed": "Não foi possível responder ao assistente. Tenta novamente.",
+  "appIntents.nextDelivery": "Próxima entrega",
+  "appIntents.nextDeliveryDescription": "Diz-te qual é a próxima encomenda a chegar, sem abrir o Peek.",
+  "appIntents.addParcel": "Adicionar uma encomenda",
+  "appIntents.addParcelDescription": "Abre o Peek com o número de seguimento pronto a adicionar. Nada é adicionado até confirmares.",
+  "appIntents.trackingNumber": "Número de seguimento",
+  "appIntents.trackingNumberQuestion": "Qual é o número de seguimento?",
+  "appIntents.name": "Nome",
+  "appShortcuts.nextDelivery": "Próxima entrega no {{applicationName}}",
+  "appShortcuts.nextDeliveryQuestion": "Quando chega a minha próxima encomenda no {{applicationName}}",
+  "appShortcuts.addParcel": "Adicionar uma encomenda ao {{applicationName}}",
+  "appShortcuts.trackParcel": "Seguir uma encomenda com o {{applicationName}}",
+  "siri.nextDelivery": "A tua próxima encomenda é «{{name}}», de {{carrier}}: {{detail}}.",
+  "siri.nextDeliveryAndMore.one": "A tua próxima encomenda é «{{name}}», de {{carrier}}: {{detail}}. Há mais 1 encomenda a caminho.",
+  "siri.nextDeliveryAndMore.few": "A tua próxima encomenda é «{{name}}», de {{carrier}}: {{detail}}. Há mais {{count}} encomendas a caminho.",
+  "siri.nextDeliveryAndMore.many": "A tua próxima encomenda é «{{name}}», de {{carrier}}: {{detail}}. Há mais {{count}} encomendas a caminho.",
+  "siri.openPeek": "Abre o Peek para veres a próxima entrega.",
+  "siri.addFailed": "Não foi possível passar o número de seguimento ao Peek. Abre o Peek e cola-o lá."
 }

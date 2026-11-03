@@ -1,0 +1,8 @@
+/* Generated from shared/locales by npm run ios:resources. */
+"Add a parcel" = "Adicionar encomenda";
+"Opens Peek with the tracking number ready to add. Nothing is added until you confirm." = "Abre o Peek com o código de rastreamento pronto para adicionar. Nada é adicionado até você confirmar.";
+"Name" = "Nome";
+"Next delivery" = "Próxima entrega";
+"Tells you which parcel comes next, without opening Peek." = "Mostra qual é a próxima encomenda a chegar, sem abrir o Peek.";
+"Tracking number" = "Código de rastreamento";
+"What’s the tracking number?" = "Qual é o código de rastreamento?";

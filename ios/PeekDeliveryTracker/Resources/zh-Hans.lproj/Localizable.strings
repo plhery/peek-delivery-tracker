@@ -1,0 +1,8 @@
+/* Generated from shared/locales by npm run ios:resources. */
+"Add a parcel" = "添加包裹";
+"Opens Peek with the tracking number ready to add. Nothing is added until you confirm." = "打开 Peek 并填好运单号，你确认后才会添加。";
+"Name" = "名称";
+"Next delivery" = "下一个包裹";
+"Tells you which parcel comes next, without opening Peek." = "无需打开 Peek，就能知道下一个到达的包裹。";
+"Tracking number" = "运单号";
+"What’s the tracking number?" = "运单号是多少？";

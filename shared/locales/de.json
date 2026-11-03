@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "Peek kennt die App nicht, die ihn geöffnet hat, oder die App wollte eine Antwort an eine Adresse, die sie nie registriert hat. Starte die Verbindung in deinem Assistenten noch einmal.",
   "assistants.consent.closed": "Peek kann mit diesem Konto noch keine Assistenten verbinden.",
   "assistants.consent.full": "Mit diesem Konto sind zu viele Assistenten verbunden. Trenne zuerst einen in den Einstellungen.",
-  "assistants.consent.failed": "Die Antwort an den Assistenten konnte nicht gesendet werden. Versuche es erneut."
+  "assistants.consent.failed": "Die Antwort an den Assistenten konnte nicht gesendet werden. Versuche es erneut.",
+  "appIntents.nextDelivery": "Nächste Lieferung",
+  "appIntents.nextDeliveryDescription": "Sagt dir, welches Paket als Nächstes kommt, ohne Peek zu öffnen.",
+  "appIntents.addParcel": "Paket hinzufügen",
+  "appIntents.addParcelDescription": "Öffnet Peek mit der Sendungsnummer, bereit zum Hinzufügen. Hinzugefügt wird erst, wenn du bestätigst.",
+  "appIntents.trackingNumber": "Sendungsnummer",
+  "appIntents.trackingNumberQuestion": "Wie lautet die Sendungsnummer?",
+  "appIntents.name": "Name",
+  "appShortcuts.nextDelivery": "Nächste Lieferung in {{applicationName}}",
+  "appShortcuts.nextDeliveryQuestion": "Wann kommt meine nächste Lieferung in {{applicationName}}",
+  "appShortcuts.addParcel": "Paket zu {{applicationName}} hinzufügen",
+  "appShortcuts.trackParcel": "Paket mit {{applicationName}} verfolgen",
+  "siri.nextDelivery": "Als Nächstes kommt „{{name}}“ mit {{carrier}}: {{detail}}.",
+  "siri.nextDeliveryAndMore.one": "Als Nächstes kommt „{{name}}“ mit {{carrier}}: {{detail}}. 1 weiteres Paket ist unterwegs.",
+  "siri.nextDeliveryAndMore.few": "Als Nächstes kommt „{{name}}“ mit {{carrier}}: {{detail}}. {{count}} weitere Pakete sind unterwegs.",
+  "siri.nextDeliveryAndMore.many": "Als Nächstes kommt „{{name}}“ mit {{carrier}}: {{detail}}. {{count}} weitere Pakete sind unterwegs.",
+  "siri.openPeek": "Öffne Peek, um deine nächste Lieferung zu sehen.",
+  "siri.addFailed": "Die Sendungsnummer konnte nicht an Peek übergeben werden. Öffne Peek und füge sie dort ein."
 }

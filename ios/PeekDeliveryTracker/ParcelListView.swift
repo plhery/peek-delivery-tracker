@@ -493,6 +493,7 @@ private struct DeliveryListView: View {
         .onReceive(NotificationCenter.default.publisher(for: PlatformApplication.didBecomeActiveNotification)) { _ in
             consumeSharedDraft()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .didSaveSharedParcelDraft)) { _ in consumeSharedDraft() }
         .onReceive(NotificationCenter.default.publisher(for: .didOpenParcelNotification)) { notification in
             DeliveryAnalytics.shared.action("notification-open")
             openParcelNotification(AppDelegate.consumePendingParcelID() ?? (notification.object as? UUID))

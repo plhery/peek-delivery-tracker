@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "Peek не знает приложение, которое открыло эту ссылку, или приложение запросило ответ на адрес, который никогда не регистрировало. Начните подключение заново в своём ассистенте.",
   "assistants.consent.closed": "Peek пока не может подключать ассистентов к этому аккаунту.",
   "assistants.consent.full": "К этому аккаунту подключено слишком много ассистентов. Сначала отключите одного из них в настройках.",
-  "assistants.consent.failed": "Не удалось ответить ассистенту. Попробуйте ещё раз."
+  "assistants.consent.failed": "Не удалось ответить ассистенту. Попробуйте ещё раз.",
+  "appIntents.nextDelivery": "Ближайшая доставка",
+  "appIntents.nextDeliveryDescription": "Сообщает, какая посылка придёт следующей. Открывать Peek не нужно.",
+  "appIntents.addParcel": "Добавить посылку",
+  "appIntents.addParcelDescription": "Открывает Peek с уже введённым трек-номером. Посылка добавится, только когда вы подтвердите.",
+  "appIntents.trackingNumber": "Трек-номер",
+  "appIntents.trackingNumberQuestion": "Какой трек-номер?",
+  "appIntents.name": "Название",
+  "appShortcuts.nextDelivery": "Ближайшая доставка в {{applicationName}}",
+  "appShortcuts.nextDeliveryQuestion": "Когда придёт моя следующая посылка в {{applicationName}}",
+  "appShortcuts.addParcel": "Добавить посылку в {{applicationName}}",
+  "appShortcuts.trackParcel": "Отследить посылку в {{applicationName}}",
+  "siri.nextDelivery": "Следующая посылка — «{{name}}» от {{carrier}}: {{detail}}.",
+  "siri.nextDeliveryAndMore.one": "Следующая посылка — «{{name}}» от {{carrier}}: {{detail}}. Ещё {{count}} посылка в пути.",
+  "siri.nextDeliveryAndMore.few": "Следующая посылка — «{{name}}» от {{carrier}}: {{detail}}. Ещё {{count}} посылки в пути.",
+  "siri.nextDeliveryAndMore.many": "Следующая посылка — «{{name}}» от {{carrier}}: {{detail}}. Ещё {{count}} посылок в пути.",
+  "siri.openPeek": "Откройте Peek, чтобы увидеть ближайшую доставку.",
+  "siri.addFailed": "Не удалось передать трек-номер в Peek. Откройте Peek и вставьте его там."
 }

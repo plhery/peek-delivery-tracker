@@ -1254,5 +1254,22 @@
   "assistants.consent.invalidBody": "Peek ne connaît pas l’app qui l’a ouvert, ou l’app a demandé une réponse à une adresse qu’elle n’a jamais enregistrée. Recommence la connexion depuis ton assistant.",
   "assistants.consent.closed": "Peek ne peut pas encore connecter d’assistants à ce compte.",
   "assistants.consent.full": "Ce compte a trop d’assistants connectés. Déconnecte-en d’abord un dans Réglages.",
-  "assistants.consent.failed": "Impossible de répondre à l’assistant. Réessaie."
+  "assistants.consent.failed": "Impossible de répondre à l’assistant. Réessaie.",
+  "appIntents.nextDelivery": "Prochaine livraison",
+  "appIntents.nextDeliveryDescription": "Te dit quel colis arrive ensuite, sans ouvrir Peek.",
+  "appIntents.addParcel": "Ajouter un colis",
+  "appIntents.addParcelDescription": "Ouvre Peek avec le numéro de suivi prêt à ajouter. Rien n’est ajouté avant que tu confirmes.",
+  "appIntents.trackingNumber": "Numéro de suivi",
+  "appIntents.trackingNumberQuestion": "Quel est le numéro de suivi ?",
+  "appIntents.name": "Nom",
+  "appShortcuts.nextDelivery": "Prochaine livraison dans {{applicationName}}",
+  "appShortcuts.nextDeliveryQuestion": "Quand arrive mon prochain colis dans {{applicationName}}",
+  "appShortcuts.addParcel": "Ajouter un colis dans {{applicationName}}",
+  "appShortcuts.trackParcel": "Suivre un colis avec {{applicationName}}",
+  "siri.nextDelivery": "Ton prochain colis est « {{name}} », chez {{carrier}} : {{detail}}.",
+  "siri.nextDeliveryAndMore.one": "Ton prochain colis est « {{name}} », chez {{carrier}} : {{detail}}. 1 autre colis est en route.",
+  "siri.nextDeliveryAndMore.few": "Ton prochain colis est « {{name}} », chez {{carrier}} : {{detail}}. {{count}} autres colis sont en route.",
+  "siri.nextDeliveryAndMore.many": "Ton prochain colis est « {{name}} », chez {{carrier}} : {{detail}}. {{count}} autres colis sont en route.",
+  "siri.openPeek": "Ouvre Peek pour voir ta prochaine livraison.",
+  "siri.addFailed": "Impossible de transmettre le numéro de suivi à Peek. Ouvre Peek et colle-le directement."
 }

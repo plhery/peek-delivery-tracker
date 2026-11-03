@@ -1,0 +1,8 @@
+/* Generated from shared/locales by npm run ios:resources. */
+"Add a parcel" = "Добавить посылку";
+"Opens Peek with the tracking number ready to add. Nothing is added until you confirm." = "Открывает Peek с уже введённым трек-номером. Посылка добавится, только когда вы подтвердите.";
+"Name" = "Название";
+"Next delivery" = "Ближайшая доставка";
+"Tells you which parcel comes next, without opening Peek." = "Сообщает, какая посылка придёт следующей. Открывать Peek не нужно.";
+"Tracking number" = "Трек-номер";
+"What’s the tracking number?" = "Какой трек-номер?";

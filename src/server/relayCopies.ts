@@ -42,7 +42,13 @@
  *
  * The earlier carrier also publishes some of its own scans late, after the
  * new carrier's later ones are stored (trackingSync.ts asks it again for a day
- * after the handoff). Those announce nothing either.
+ * after the handoff). Those announce nothing either. *
+ * A parcel that records no handoff may hold another carrier's rows too: the
+ * carrier it was filed under before a correction, or one asked beside it, told
+ * the same scans (BRT Chronopost's, SwiftX DHLink's). Such a row at the same
+ * second and in the same stage as a row of the carrier tracking the parcel now,
+ * from places that do not conflict once their words are read ("UTRECHT NL" and
+ * "Utrecht, UT, NL"), goes under that row.
  */
 import { CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 import { trackingPlace } from 'universal-parcel-scraper/app';
@@ -105,6 +111,9 @@ function source(event: JsonObject): string {
   return typeof event.provider_event_id === 'string' ? event.provider_event_id.split(':')[0]! : '';
 }
 
+/** A universal provider's rows: their copies of a carrier's scans are providerCopies.ts's. */
+const UNIVERSAL_SOURCE = 'unknown';
+
 /** Steps that tell a problem, and the routine steps beside which such a step is the news. */
 const PROBLEM_STAGES = new Set(['exception', 'failed_attempt']);
 const ROUTINE_STAGES = new Set(['pending', 'registered', 'accepted', 'in_transit']);
@@ -136,7 +145,7 @@ function sameSecond(copy: { at: number; words: string[] }, scan: { at: number; w
 export function relayCopies(row: JsonObject): Map<string, string> {
   const earlier = earlierCarrier(row);
   const pairs = new Map<string, string>();
-  if (!earlier || !Array.isArray(row.tracking_events)) return pairs;
+  if (!Array.isArray(row.tracking_events)) return pairs;
   const scans = row.tracking_events.filter(isRecord)
     .map((event) => ({
       id: String(event.id), stage: event.stage, source: source(event), at: Date.parse(String(event.occurred_at)),
@@ -144,6 +153,7 @@ export function relayCopies(row: JsonObject): Map<string, string> {
       placed: typeof event.location === 'string' && event.location.trim() !== '',
     }))
     .filter((scan) => Number.isFinite(scan.at) && scan.source !== '' && scan.source !== 'app');
+  if (!earlier) return otherCarrierCopies(scans, currentCarrier(row));
   const candidates = scans.filter((copy) => copy.source === earlier).flatMap((copy) => scans
     .filter((scan) => scan.source !== earlier
       && ((scan.stage === copy.stage && Math.abs(scan.at - copy.at) <= RELAY_WINDOW_MS) || sameSecond(copy, scan)))
@@ -174,6 +184,31 @@ export function relayCopies(row: JsonObject): Map<string, string> {
       paired.add(copy.id);
       paired.add(scan.id);
     }
+  }
+  return pairs;
+}
+
+/**
+ * On a parcel that records no handoff, the rows of another carrier that tell a scan of the carrier tracking the parcel
+ * now, each with that scan's id: the same second, the same stage, places that do not conflict. A scan is in one pair
+ * at most; a universal provider's row is in none.
+ */
+function otherCarrierCopies(
+  scans: readonly { id: string; stage: unknown; source: string; at: number; words: string[] }[], current: string,
+): Map<string, string> {
+  const second = (at: number) => Math.floor(at / SECOND_MS);
+  const own = scans.filter((scan) => scan.source === current);
+  const pairs = new Map<string, string>();
+  const paired = new Set<string>();
+  const copies = scans.filter((scan) => scan.source !== current && scan.source !== UNIVERSAL_SOURCE)
+    .sort((a, b) => a.at - b.at || a.id.localeCompare(b.id));
+  for (const copy of copies) {
+    const scan = own.filter((other) => !paired.has(other.id) && second(other.at) === second(copy.at)
+      && other.stage === copy.stage && !placesConflict(copy.words, other.words))
+      .sort((a, b) => a.id.localeCompare(b.id))[0];
+    if (!scan) continue;
+    pairs.set(copy.id, scan.id);
+    paired.add(scan.id);
   }
   return pairs;
 }

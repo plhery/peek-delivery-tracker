@@ -752,6 +752,11 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the copy alone tells a problem: then the other row is the one left out. The delivered email quotes the row
   without `relay_of` ([`relayCopies.ts`](../src/server/relayCopies.ts),
   [`eventPlaces.ts`](../src/server/eventPlaces.ts)).
+- A parcel that records no handoff may hold another carrier's rows too: the carrier it was
+  filed under before a correction, or one asked beside it, told the same scans. Such a row at
+  the same second and in the same stage as a row of the carrier tracking the parcel now, from
+  places that do not conflict once their words are read (case, accents and countries left
+  out), is served with `relay_of` that row's id and announces as a relay pair's row does.
 - Compatibility: AliExpress `L…CH` numbers keep a Swiss Post confirmation probe, and
   selected Swiss postal routes keep their Cainiao fallback. On such a route Swiss Post is
   asked first; once it has missed the item, Cainiao answers first. Cainiao's news asks Swiss

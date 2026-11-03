@@ -221,6 +221,52 @@ describe('relayCopies', () => {
     expect(relayCopies(indiaPost({ original_carrier: 'india-post', active_tracking_carrier: 'india-post' }))).toEqual(new Map());
     expect(relayCopies({ carrier_data: { original_carrier: 'india-post' } })).toEqual(new Map());
   });
+
+  it('pairs a handed-over parcel\'s copy whose place the earlier carrier writes otherwise', () => {
+    const placed = (id: string, source: string, stage: string, at: string, location: string) => ({ ...scan(id, source, stage, at), location });
+    // JRT tells each of FedEx's scans at its minute, the place written with its region.
+    expect(relayCopies({ carrier: 'jrt', carrier_data: { original_carrier: 'jrt', active_tracking_carrier: 'fedex' }, tracking_events: [
+      placed('departed', 'fedex', 'in_transit', '2026-10-31T05:36:00Z', 'UTRECHT NL'),
+      placed('departed-copy', 'jrt', 'in_transit', '2026-10-31T05:36:00Z', 'UTRECHT, UT, NL'),
+      placed('picked-up', 'fedex', 'accepted', '2026-10-30T13:54:00Z', 'UTRECHT NL'),
+      placed('picked-up-copy', 'jrt', 'in_transit', '2026-10-30T13:54:00Z', 'UTRECHT, UT, NL'),
+    ] })).toEqual(new Map([['departed-copy', 'departed'], ['picked-up-copy', 'picked-up']]));
+  });
+
+  it('pairs another carrier\'s row of the parcel\'s scan when no handoff is recorded: same second, stage and place', () => {
+    const placed = (id: string, source: string, stage: string, at: string, location?: string) => ({ ...scan(id, source, stage, at), location });
+    // BRT's rows stayed when the parcel was corrected to Chronopost, which tells the same scans.
+    const corrected = (tracking_events: object[]) => ({
+      carrier: 'chronopost', carrier_data: { auto_changed_from: 'brt', active_tracking_carrier: 'chronopost' }, tracking_events,
+    });
+    expect(relayCopies(corrected([
+      placed('sorted', 'chronopost', 'in_transit', '2026-10-15T16:11:42Z', 'UTRECHT NL'),
+      placed('sorted-copy', 'brt', 'in_transit', '2026-10-15T16:11:42Z', 'Utrecht, UT, NL'),
+      placed('label', 'chronopost', 'registered', '2026-10-15T05:45:00Z'),
+      placed('label-copy', 'brt', 'registered', '2026-10-15T05:45:00Z'),
+      // Another stage, another second, a place that conflicts or a universal provider's row stays its own.
+      placed('accepted', 'chronopost', 'accepted', '2026-10-16T08:00:00Z', 'UTRECHT NL'),
+      placed('accepted-other', 'brt', 'in_transit', '2026-10-16T08:00:00Z', 'UTRECHT NL'),
+      placed('hub', 'chronopost', 'in_transit', '2026-10-16T13:58:15Z', 'ROTTERDAM NL'),
+      placed('hub-later', 'brt', 'in_transit', '2026-10-16T13:58:16Z', 'ROTTERDAM NL'),
+      placed('depot', 'chronopost', 'in_transit', '2026-10-17T09:00:12Z', 'ROTTERDAM NL'),
+      placed('depot-elsewhere', 'brt', 'in_transit', '2026-10-17T09:00:12Z', 'AMSTERDAM NL'),
+      placed('round', 'chronopost', 'out_for_delivery', '2026-10-18T07:10:00Z', 'UTRECHT NL'),
+      placed('round-provider', 'unknown', 'out_for_delivery', '2026-10-18T07:10:00Z', 'UTRECHT NL'),
+    ]))).toEqual(new Map([['label-copy', 'label'], ['sorted-copy', 'sorted']]));
+    // Two rows of the carrier tracking the parcel are no pair, nor two of the other carrier's.
+    expect(relayCopies(corrected([
+      placed('first', 'chronopost', 'in_transit', '2026-10-15T16:11:42Z', 'UTRECHT NL'),
+      placed('again', 'chronopost', 'in_transit', '2026-10-15T16:11:42Z', 'UTRECHT NL'),
+      placed('old', 'brt', 'in_transit', '2026-10-14T16:11:42Z', 'UTRECHT NL'),
+      placed('old-again', 'brt', 'in_transit', '2026-10-14T16:11:42Z', 'UTRECHT NL'),
+    ]))).toEqual(new Map());
+    // The row stored second announces nothing: Chronopost's, which came after the correction.
+    expect(relayRepeats(corrected([
+      { ...placed('sorted', 'chronopost', 'in_transit', '2026-10-15T16:11:42Z', 'UTRECHT NL'), created_at: '2026-10-21T01:01:43Z' },
+      { ...placed('sorted-copy', 'brt', 'in_transit', '2026-10-15T16:11:42Z', 'Utrecht, UT, NL'), created_at: '2026-10-20T07:44:49Z' },
+    ]))).toEqual(new Set(['sorted']));
+  });
 });
 
 describe('relayRepeats', () => {

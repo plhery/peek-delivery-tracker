@@ -131,7 +131,7 @@ internal fun ArrivalView(state: AuthenticationState, session: SessionStore, tran
     val menus = remember { SheetMenus() }
     val backdrop = rememberMaterialBackdrop()
     val firstScreen = remember { screen }
-    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.STARTED)
+    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
     // `greetingActive`: the welcome, which shows here only as the arrival fades out after the sign-in's back.
     val tilt = rememberArrivalTilt(screen == ArrivalScreen.Welcome && !reduceMotion && active, opening = false)
     // `goBack`: the welcome, the arrival fading out with the root's switch.
@@ -216,7 +216,9 @@ internal fun InvitationArrival(source: DeliveriesSource, state: AuthenticationSt
     val nickname by invitation.nicknameFlow.collectAsState()
     val errorKey by invitation.errorKeyFlow.collectAsState()
     val receipt by invitation.receiptFlow.collectAsState()
-    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.STARTED)
+    // `scenePhase == .active`: resumed. Paused, as under Recents, another activity or a system prompt, is `.inactive`,
+    // which stops the greeting and holds the sender's load and the receipt; split screen resumes both windows.
+    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
     val stateNow by rememberUpdatedState(state)
     val activeNow by rememberUpdatedState(active)
     val screen = if (opened) ArrivalScreen.SignIn else ArrivalScreen.Welcome

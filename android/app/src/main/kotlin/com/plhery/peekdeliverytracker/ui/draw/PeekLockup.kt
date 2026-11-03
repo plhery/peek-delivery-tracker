@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
@@ -21,7 +22,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 /**
  * `PeekLockup` (SignInView.swift): the mark, 28 wide, 9 from the app's name in bold 16 points over the tagline in 10,
  * both growing with the text size as subheadline and caption 2 do (`@ScaledMetric`) up to accessibility 1's, the name
- * in the ink, tightened 0.4, and the tagline in the soft ink, each on one line and shrinking to 70 % rather than be cut.
+ * in the ink, tightened 0.4, and the tagline in the soft ink, each on one line, shrinking to 70 % before it ends in "…".
  * TalkBack reads it as one element, the name then the tagline.
  */
 @Composable
@@ -45,11 +46,14 @@ fun PeekLockup(modifier: Modifier = Modifier) {
     }
 }
 
-/** One line of the lockup, shrinking to 70 % rather than be cut (`.lineLimit(1).minimumScaleFactor(0.7)`). */
+/**
+ * One line of the lockup, shrinking to 70 % and then ending in "…" (`.lineLimit(1).minimumScaleFactor(0.7)`, which
+ * truncates the tail of what still doesn't fit).
+ */
 @Composable
 private fun LockupLine(text: String, style: TextStyle) {
     Text(
-        text, style = style, maxLines = 1, softWrap = false,
+        text, style = style, maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis,
         autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * LOCKUP_MINIMUM_SCALE, maxFontSize = style.fontSize),
     )
 }

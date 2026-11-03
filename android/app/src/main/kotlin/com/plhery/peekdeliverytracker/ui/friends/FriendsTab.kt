@@ -131,6 +131,7 @@ import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
@@ -170,9 +171,20 @@ internal enum class FriendsPanel(val titleKey: String) {
  * the circle was last loaded for (`checkedPresentation`). Kept with the window and while another tab shows, not past
  * the launch; the tab's own disappearance closes the panel and the page, as `onDisappear` does.
  */
+/**
+ * The invitation's link handed to the share sheet: the share sheet pauses the window and the app the reader picks there
+ * stops it, through which the friends tab keeps the panel, its link and the circle, and the window its notices, as the
+ * iPhone's share sheet stands over a scene that stays active. Forgotten as the window is next resumed, whether the
+ * reader shared or left the sheet ([FriendsActivityEffects]).
+ */
+internal class InvitationShare {
+    var out = false
+}
+
 @Stable
 internal class FriendsState(
     override val source: DeliveriesSource,
+    private val share: InvitationShare,
     private val showing: MutableState<Boolean>,
     private val forms: MutableState<Boolean>,
     private val shownPanel: MutableState<FriendsPanel?>,
@@ -220,12 +232,12 @@ internal class FriendsState(
     /** Where the circle's scrolled content and its cards stand, for the reveal to scroll to a card. */
     val places = CardPlaces()
 
-    /**
-     * The invitation's link handed to the share sheet: the app the reader picks there stops the window, which keeps the
-     * panel, its link and the circle through that stop, as the iPhone's share sheet stands over a scene that stays
-     * active. Forgotten as the window is next resumed, whether the reader shared or left the sheet.
-     */
-    var sharing = false
+    /** The invitation's link is out in the share sheet ([InvitationShare]). */
+    var sharing: Boolean
+        get() = share.out
+        set(value) {
+            share.out = value
+        }
 
     var announcement: Announcement? by mutableStateOf(null)
         private set
@@ -283,7 +295,7 @@ internal class FriendsState(
 }
 
 @Composable
-internal fun rememberFriendsState(source: DeliveriesSource): FriendsState {
+internal fun rememberFriendsState(source: DeliveriesSource, share: InvitationShare): FriendsState {
     val launch = source.launch
     val showing = rememberForLaunch(launch, false)
     val forms = rememberForLaunch(launch, false)
@@ -303,7 +315,7 @@ internal fun rememberFriendsState(source: DeliveriesSource): FriendsState {
     ) { mutableStateOf<UUID?>(null) }
     val landed = rememberForLaunch(launch, false)
     val presented = rememberForLaunch<UUID?>(launch, null)
-    return remember(source) { FriendsState(source, showing, forms, panel, panelForm, friend, invitation, arriving, landed, presented) }
+    return remember(source, share) { FriendsState(source, share, showing, forms, panel, panelForm, friend, invitation, arriving, landed, presented) }
 }
 
 /** The circle's scrolled content and its cards as last placed. */
@@ -320,8 +332,8 @@ internal class CardPlaces {
  * title and the account button stands in the tab bar's row ([TabRowAccount]), as the passport's.
  */
 @Composable
-internal fun FriendsTab(source: DeliveriesSource) {
-    val state = rememberFriendsState(source)
+internal fun FriendsTab(source: DeliveriesSource, share: InvitationShare) {
+    val state = rememberFriendsState(source, share)
     val session by source.session.collectAsState()
     val guest = session == AuthenticationState.Welcome
     // The demo's bar, and the cream behind the bar that goes with it, unless left out for the store's screenshots.
@@ -483,8 +495,9 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
     val presentation by activity.presentationIdFlow.collectAsState()
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val lifecycle = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value
-    val active = lifecycle.isAtLeast(Lifecycle.State.STARTED)
+    // `scenePhase == .active`: resumed. Paused, as under Recents or a system prompt, is `.inactive`; split screen
+    // resumes both windows.
+    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
     val window = LocalActivity.current
     val reduceMotion = PeekTheme.reduceMotion
     val density = LocalDensity.current
@@ -504,7 +517,7 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
             }
         }
     }
-    // `.task(id: active ? presentationID : "hidden")`, but for the stop the invitation's Share brings
+    // `.task(id: active ? presentationID : "hidden")`, but for the pause and stop the invitation's Share brings
     // ([FriendsState.sharing]).
     val shown = if (active) presentation else null
     LaunchedEffect(active, shown) {
@@ -521,10 +534,6 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
             state.checkedPresentation = shown
             delay(RELOAD_MILLIS)
         }
-    }
-    val resumed = lifecycle.isAtLeast(Lifecycle.State.RESUMED)
-    LaunchedEffect(resumed) {
-        if (resumed) state.sharing = false
     }
     // `.onChange(of: model.snapshot)`: a friend no longer in the circle closes their page.
     LaunchedEffect(snapshot) {
@@ -563,8 +572,9 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
         delay(LANDING_STEP_MILLIS)
         state.presented = presentation
         state.landed = true
-        // `withAnimation`: the landing goes on once the focus let go below ends this task.
-        scope.launch { state.landing.animateTo(1f, if (reduceMotion) Motion.easeOut(0.15) else Motion.springWithResponse(0.55, 0.78)) }
+        // `withAnimation`: the landing goes on once the focus let go below ends this task. Kept: iOS keeps the 0.15 s
+        // fade under Reduce Motion, which Remove animations would otherwise jump.
+        scope.launch(KeepMotion) { state.landing.animateTo(1f, if (reduceMotion) Motion.easeOut(0.15) else Motion.springWithResponse(0.55, 0.78)) }
         // `try? await acknowledge`, then `consumeFocus`: the focus is let go even if the tab goes during the acknowledge.
         try {
             activity.acknowledge(friendId)
@@ -890,10 +900,18 @@ private fun PanelContent(state: FriendsState, panel: FriendsPanel, snapshot: Fri
 /**
  * The panel's `NavigationStack` and `ScrollView`: the page's ground, what it holds in by 24 and 20 apart, 10 under the
  * inline bar, which stands a point lower than the sheet's own bar row; its [title] in the middle as a heading and Close
- * on glass at its trailing end, semibold as the confirmation, and the scroll edge once it has scrolled.
+ * on glass at its trailing end, semibold as the confirmation, and the scroll edge once it has scrolled. With
+ * [dismissesKeyboard], a drag of it down takes the keyboard down (`.scrollDismissesKeyboard(.interactively)`), which
+ * the invitation's profile sheet has and the friends tab's panel doesn't.
  */
 @Composable
-internal fun PanelPage(title: String, closeEnabled: Boolean, close: () -> Unit, content: @Composable () -> Unit) {
+internal fun PanelPage(
+    title: String,
+    closeEnabled: Boolean,
+    close: () -> Unit,
+    dismissesKeyboard: Boolean = false,
+    content: @Composable () -> Unit,
+) {
     val backdrop = rememberMaterialBackdrop()
     val insets = LocalSheetInsets.current
     val barTop = insets.barTop + NAV_BAR_DROP
@@ -903,7 +921,7 @@ internal fun PanelPage(title: String, closeEnabled: Boolean, close: () -> Unit, 
     Box(Modifier.fillMaxSize().testTag(FRIENDS_PANEL)) {
         Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
             KeyboardScrollColumn(
-                Modifier.fillMaxSize(), scroll, top = barHeight, bottom = bottom,
+                Modifier.fillMaxSize(), scroll, top = barHeight, bottom = bottom, dismissesKeyboard = dismissesKeyboard,
                 contentModifier = Modifier.padding(top = barHeight + NAV_BAR_FOOT, bottom = bottom).padding(24.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) { content() }
@@ -921,8 +939,9 @@ internal fun PanelPage(title: String, closeEnabled: Boolean, close: () -> Unit, 
 
 /**
  * RootView's friends' activity (`friendsActivity`): cleared as the session changes; while someone is signed in and the
- * app is in front, read every 30 s, and hidden as it leaves the foreground. A friend revealed chooses the friends tab
- * ([chooseFriends]), as `selectedTab = 2` does once the presentation changes with a friend to focus.
+ * window is resumed (`scenePhase == .active`), read every 30 s, and hidden as it is paused, but for the pause and stop
+ * the invitation's Share brings ([InvitationShare], forgotten here as the window is resumed). A friend revealed chooses
+ * the friends tab ([chooseFriends]), as `selectedTab = 2` does once the presentation changes with a friend to focus.
  *
  * The friend of a notification opened ([DeliveriesInbox.notifiedFriend], `pendingFriendID`) is revealed then too, the
  * one waiting since before the sign-in or the app's return as the reading starts, and one opened meanwhile at once
@@ -932,6 +951,7 @@ internal fun PanelPage(title: String, closeEnabled: Boolean, close: () -> Unit, 
 internal fun FriendsActivityEffects(
     source: DeliveriesSource,
     session: AuthenticationState,
+    share: InvitationShare,
     inbox: DeliveriesInbox? = null,
     chooseFriends: () -> Unit,
 ) {
@@ -940,8 +960,11 @@ internal fun FriendsActivityEffects(
         is AuthenticationState.SignedIn -> session.user.id.toString()
         else -> session::class.simpleName ?: ""
     }
-    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.STARTED)
+    val active = LocalLifecycleOwner.current.lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
     val seen = remember { arrayOf(identity) }
+    LaunchedEffect(active) {
+        if (active) share.out = false
+    }
     LaunchedEffect(identity, active) {
         if (seen[0] != identity) {
             seen[0] = identity
@@ -952,7 +975,7 @@ internal fun FriendsActivityEffects(
             return@LaunchedEffect
         }
         if (!active) {
-            activity.hidePrivateContent()
+            if (!share.out) activity.hidePrivateContent()
             return@LaunchedEffect
         }
         if (inbox != null) {

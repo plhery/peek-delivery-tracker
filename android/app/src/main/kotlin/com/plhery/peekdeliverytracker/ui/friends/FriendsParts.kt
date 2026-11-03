@@ -15,6 +15,7 @@ import androidx.compose.ui.text.TextStyle
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
@@ -113,6 +114,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.DieCutStampShape
 import com.plhery.peekdeliverytracker.ui.draw.Toggle
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.theme.KeepMotion
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
@@ -780,7 +782,8 @@ internal fun FriendsInvitationParcel(nickname: String) {
         celebrating = false
         delay(80)
         celebrating = true
-        open.animateTo(1f, if (reduceMotion) Motion.linear(0.1) else Motion.easeOut(1.5))
+        // Kept: iOS keeps the 0.1 s linear under Reduce Motion, which Remove animations would otherwise jump.
+        withContext(KeepMotion) { open.animateTo(1f, if (reduceMotion) Motion.linear(0.1) else Motion.easeOut(1.5)) }
     }
     val delivered = colors.resolve(ExperimentalPalette.delivered)
     val sender = @Composable {

@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui.arrival
 
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
+import androidx.compose.animation.core.snap
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -41,10 +42,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
@@ -102,7 +103,9 @@ import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.animateKeptFloatAsState
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import java.util.UUID
@@ -205,6 +208,17 @@ private fun OpenParcelButton(opening: Boolean, onOpen: () -> Unit, onPress: (Boo
     val title = localized("arrival.tapToOpen")
     val hint = localized("arrival.openHint")
     val enabled = !opening
+    val reduceMotion = PeekTheme.reduceMotion
+    // The caption goes inside the unwrap (`.opacity(opening ? 0 : 1)` under its `.easeInOut(duration: 0.95)`, at once
+    // under Reduce Motion) and comes back with the parcel shut, on `goBack`'s 0.45 s or the 0.15 s it keeps.
+    val fade = remember(opening, reduceMotion) {
+        when {
+            opening && reduceMotion -> snap<Float>()
+            opening -> Motion.easeInOut<Float>(0.95)
+            else -> Motion.easeInOut<Float>(if (reduceMotion) 0.15 else 0.45)
+        }
+    }
+    val captionAlpha by animateKeptFloatAsState(if (opening) 0f else 1f, fade)
     Column(
         Modifier
             .padding(top = 12.dp)
@@ -226,7 +240,7 @@ private fun OpenParcelButton(opening: Boolean, onOpen: () -> Unit, onPress: (Boo
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         anchor()
-        Box(Modifier.heightIn(min = 44.dp).alpha(if (opening) 0f else 1f), contentAlignment = Alignment.Center) {
+        Box(Modifier.heightIn(min = 44.dp).graphicsLayer { alpha = captionAlpha }, contentAlignment = Alignment.Center) {
             Text(title, color = colors.secondaryLabel, textAlign = TextAlign.Center, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
         }
     }
@@ -666,7 +680,7 @@ private fun ProfileSheet(
         val insets = LocalSheetInsets.current
         val form = if (!asForm) insets else insets.copy(barTop = FORM_BAR_TOP, barSide = FORM_BAR_SIDE, formSide = FORM_TITLE_SIDE)
         CompositionLocalProvider(LocalSheetInsets provides form) {
-            PanelPage(title, closeEnabled = !joining, close = close) {
+            PanelPage(title, closeEnabled = !joining, close = close, dismissesKeyboard = true) {
                 Column(
                     Modifier.fillMaxWidth().wrapContentWidth().widthIn(max = WELCOME_WIDTH).testTag(INVITATION_SHEET),
                     verticalArrangement = Arrangement.spacedBy(16.dp),

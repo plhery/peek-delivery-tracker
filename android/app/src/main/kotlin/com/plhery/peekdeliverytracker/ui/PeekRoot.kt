@@ -64,6 +64,7 @@ import com.plhery.peekdeliverytracker.ui.friends.FriendNoticeHost
 import com.plhery.peekdeliverytracker.ui.friends.FriendsActivityEffects
 import com.plhery.peekdeliverytracker.ui.friends.FriendsDemoEffects
 import com.plhery.peekdeliverytracker.ui.friends.FriendsTab
+import com.plhery.peekdeliverytracker.ui.friends.InvitationShare
 import com.plhery.peekdeliverytracker.ui.passport.PassportTab
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLayers
@@ -178,8 +179,10 @@ internal fun PeekRoot(
             }
         }
     }
+    // The invitation's link out in the share sheet, which the friends tab and the window's notices are kept through.
+    val share = remember(source) { InvitationShare() }
     if (source != null) {
-        FriendsActivityEffects(source, state, inbox) { tab = PeekTab.Friends.ordinal }
+        FriendsActivityEffects(source, state, share, inbox) { tab = PeekTab.Friends.ordinal }
         FriendLinkEffects(source, inbox)
         FriendsDemoEffects(source, state)
     }
@@ -234,7 +237,7 @@ internal fun PeekRoot(
                                             when (shown) {
                                                 PeekTab.Deliveries -> deliveries()
                                                 PeekTab.Passport -> if (source != null) PassportTab(source) else TabPlaceholder(shown)
-                                                PeekTab.Friends -> if (source != null) FriendsTab(source) else TabPlaceholder(shown)
+                                                PeekTab.Friends -> if (source != null) FriendsTab(source, share) else TabPlaceholder(shown)
                                             }
                                         }
                                     }

@@ -49,7 +49,9 @@ import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeRoute
+import com.plhery.peekdeliverytracker.core.api.FriendUpdate
 import com.plhery.peekdeliverytracker.core.api.FriendsAction
+import com.plhery.peekdeliverytracker.core.api.FriendsActivity
 import com.plhery.peekdeliverytracker.core.api.FriendProfile
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsActionResponse
@@ -576,6 +578,22 @@ class FriendsTest {
         assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
     }
 
+    @Test
+    fun pausedTheCircleAndTheNoticeAreHiddenAndComeBackInFront() {
+        show { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
+        assertTrue(exists(FRIENDS_NOTICE))
+        tap(FRIENDS_SHARING)
+        // Paused, as under Recents or a system prompt (iOS's `.inactive`): nothing private is left on show.
+        lifecycle(Lifecycle.State.STARTED)
+        assertNull(source.friends.snapshotFlow.value)
+        assertNull(panel())
+        assertFalse(exists(FRIENDS_NOTICE))
+        lifecycle(Lifecycle.State.RESUMED)
+        assertEquals(2, client.loads)
+        assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
+        assertTrue(exists(FRIENDS_NOTICE))
+    }
+
     // The cards' colours (C-S21).
 
     @Test
@@ -841,26 +859,31 @@ class FriendsTest {
 
     @Test
     fun theAppTheLinkIsSharedToKeepsThePanelItsLinkAndTheCircle() {
-        show()
+        show { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
         tap(FRIENDS_INVITE)
         tap(FRIENDS_SHARE)
         assertEquals(Intent.ACTION_CHOOSER, shadowOf(compose.activity).nextStartedActivity?.action)
         // The share sheet pauses the window; the app picked there stops it.
         lifecycle(Lifecycle.State.STARTED)
+        assertEquals(text("friends.inviteTitle"), panel())
+        assertEquals(4, source.friends.snapshotFlow.value?.friends?.size)
+        assertEquals(1, source.friendsActivity.updatesFlow.value.size)
         lifecycle(Lifecycle.State.CREATED)
         assertEquals(text("friends.inviteTitle"), panel())
         assertEquals(link, words(FRIENDS_INVITATION_URL).single())
         assertEquals(4, source.friends.snapshotFlow.value?.friends?.size)
+        assertEquals(1, source.friendsActivity.updatesFlow.value.size)
         // Back from it: the same link, and the circle loaded again as the window starts.
         lifecycle(Lifecycle.State.RESUMED)
         assertEquals(text("friends.inviteTitle"), panel())
         assertEquals(link, words(FRIENDS_INVITATION_URL).single())
         assertEquals(1, requests(FriendsAction.CreateInvite).size)
         assertEquals(2, client.loads)
-        // Any other stop, with no Share before it, closes the panel and clears the circle.
+        // Any other stop, with no Share before it, closes the panel and clears the circle and the notice.
         lifecycle(Lifecycle.State.CREATED)
         assertNull(panel())
         assertNull(source.friends.snapshotFlow.value)
+        assertTrue(source.friendsActivity.updatesFlow.value.isEmpty())
         lifecycle(Lifecycle.State.RESUMED)
         assertNull(panel())
         assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())

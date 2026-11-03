@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.arrival
 
 import android.content.Intent
+import android.os.Looper
 import android.net.Uri
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
@@ -10,6 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.platform.InspectableValue
+import androidx.compose.ui.graphics.PixelMap
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsConfiguration
@@ -19,6 +24,7 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
@@ -33,6 +39,7 @@ import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeUp
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -76,6 +83,7 @@ import com.plhery.peekdeliverytracker.ui.friends.friendCardTag
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import java.io.IOException
+import java.time.Duration
 import java.util.UUID
 import kotlin.math.abs
 import kotlin.math.cos
@@ -91,6 +99,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -575,6 +584,25 @@ class InvitationTest {
     }
 
     @Test
+    fun aDragOfTheProfileSheetTakesTheKeyboardDown() {
+        show(reader) {
+            snapshot = FriendFixtures.circle(profile = null)
+            accepting()
+        }
+        openParcel()
+        tap(INVITATION_ACCEPT)
+        // `.scrollDismissesKeyboard(.interactively)`: the sheet's scroll hands its drags to the keyboard's own nested
+        // scroll (`imeNestedScroll`), which takes it down with the finger. Robolectric has no keyboard to move; the
+        // drag itself is for the device.
+        val scroll = compose.onAllNodes(
+            SemanticsMatcher.keyIsDefined(SemanticsProperties.VerticalScrollAxisRange) and hasAnyAncestor(hasTestTag(FRIENDS_PANEL)),
+            useUnmergedTree = true,
+        ).fetchSemanticsNodes().first()
+        val names = scroll.layoutInfo.getModifierInfo().mapNotNull { (it.modifier as? InspectableValue)?.nameFallback }
+        assertTrue("$names", "nestedScroll" in names)
+    }
+
+    @Test
     fun theSheetNeitherClosesNorGoesBackWhileJoining() {
         val held = CompletableDeferred<Unit>()
         show(reader) {
@@ -893,6 +921,76 @@ class InvitationTest {
         compose.mainClock.advanceTimeBy(3_000)
         assertTrue("At the sign-in's anchor: ${placed.last()} from $welcome", placed.last().width < welcome.width)
         assertEquals(1f, opens.last(), 0.01f)
+    }
+
+    @Test
+    fun tapToOpenFadesInsideTheUnwrap() {
+        show(reduceMotion = false)
+        val shown = captionInk()
+        compose.onNodeWithTag(WELCOME_OPEN_PARCEL).performClick()
+        compose.mainClock.advanceTimeBy(475)
+        val half = captionInk()
+        assertTrue("Fading over 0.95 s: $half of $shown", shown > 0.15f && half > shown * 0.2f && half < shown * 0.8f)
+        compose.mainClock.advanceTimeBy(450)
+        assertTrue("Gone with the parcel open: ${captionInk()}", captionInk() < shown * 0.1f)
+    }
+
+    @Test
+    fun underReduceMotionTapToOpenGoesAtOnce() {
+        show()
+        val shown = captionInk()
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(WELCOME_OPEN_PARCEL).performClick()
+        compose.mainClock.advanceTimeByFrame()
+        compose.mainClock.advanceTimeByFrame()
+        assertTrue("At once, as iOS's `withAnimation(nil)`: ${captionInk()} of $shown", captionInk() < shown * 0.1f)
+    }
+
+    /**
+     * How far the welcome's "tap to open" stands out from the paper: the most a pixel of the button's last 44 points
+     * differs in luminance from the row's first, on the window as it draws the last frame.
+     */
+    private fun captionInk(): Float {
+        val image = image(WELCOME_OPEN_PARCEL)
+        val strip = with(compose.density) { 44.dp.roundToPx() }
+        var most = 0f
+        for (y in image.height - strip until image.height) {
+            val paper = image[0, y].luminance()
+            for (x in 0 until image.width) most = maxOf(most, abs(image[x, y].luminance() - paper))
+        }
+        return most
+    }
+
+    /** What the node tagged [tag] shows as the window draws the last frame. */
+    private fun image(tag: String): PixelMap {
+        compose.waitForIdle()
+        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+        return compose.onNodeWithTag(tag, useUnmergedTree = true).captureToImage().toPixelMap()
+    }
+
+    /** How many pixels two captures of one node differ in. */
+    private fun changed(a: PixelMap, b: PixelMap): Int {
+        assertEquals(a.width to a.height, b.width to b.height)
+        var count = 0
+        for (y in 0 until a.height) for (x in 0 until a.width) if (a[x, y] != b[x, y]) count++
+        return count
+    }
+
+    @Test
+    fun pausedTheGreetingStopsAndTheSenderIsAskedAgainInFront() {
+        show(reduceMotion = false)
+        assertEquals(listOf(CODE), source.previews)
+        // Paused, as under Recents, another activity or a system prompt (`.inactive`): the greeting under way ends, and
+        // none follows it 4.6 s after.
+        lifecycle(Lifecycle.State.STARTED, millis = 5_000)
+        val still = image(ARRIVAL_PARCEL)
+        compose.mainClock.advanceTimeBy(2_300)
+        assertEquals(0, changed(still, image(ARRIVAL_PARCEL)))
+        assertEquals(listOf(CODE), source.previews)
+        // In front again: the sender asked afresh, and the parcel greets 250 ms later, lifted 9 at its height 2.3 s on.
+        lifecycle(Lifecycle.State.RESUMED, millis = 250 + 2_300)
+        assertEquals(listOf(CODE, CODE), source.previews)
+        assertTrue(changed(still, image(ARRIVAL_PARCEL)) > 0)
     }
 
     /** The device's motion as a test moves it: the [reading] it gives, how often it was started and stopped. */

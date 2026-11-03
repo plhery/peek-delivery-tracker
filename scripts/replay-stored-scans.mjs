@@ -6,7 +6,7 @@
 // which the replay imports; an older one fails on that import. The report names rows by their ids'
 // first eight characters and shows no number, place or wording. `--sql <file>` writes the guarded
 // transaction that would apply the changes and step back the open parcels no row then shows past
-// the label, `--source <a,b>` keeps the rows of those sources only.
+// the label, and needs `--from`. `--source <a,b>` keeps the rows of those sources only.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -52,6 +52,12 @@ async function earlierRelease(version) {
 
 const sources = option('--source')?.split(',') ?? null;
 const from = option('--from');
+// Rows are read one at a time, so a row a check wrote from the parcel's other rows (a USPS return
+// leg) reads otherwise than stored with every release: only `--from` leaves those out.
+if (args.includes('--sql') && !from) {
+  console.error('--sql needs --from <previous version>: without it the transaction would undo rows a check wrote from the parcel\'s other rows.');
+  process.exit(1);
+}
 const lines = readFileSync(0, 'utf8').split('\n').map((line) => line.trim()).filter((line) => line.startsWith('{'));
 const parcels = lines.map((line) => JSON.parse(line)).map((parcel) => ({ ...parcel, events: parcel.events ?? [] }));
 const key = (change) => `${change.kind} ${change.row} ${change.to}`;

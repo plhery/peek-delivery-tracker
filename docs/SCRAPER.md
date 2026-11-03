@@ -224,7 +224,10 @@ node scripts/replay-stored-scans.mjs --from <previous version> --sql replay.sql 
 ```
 
 `--from` replays the rows with the release the app had before too and keeps the rows it reads as
-they are stored or otherwise than this release: the ones this release changes. The report names
+they are stored or otherwise than this release: the ones this release changes. `--sql` needs it:
+the replay reads each row alone, so a row a check wrote from the parcel's other rows, such as a
+USPS return leg, reads otherwise than stored with every release, and only `--from` leaves it out.
+The report names
 rows by their ids' first eight characters and shows no number, place or wording. `replay.sql`
 updates those rows, each guarded on its stored values, in one transaction left open to roll back
 or commit. A row a fixed bug wrote is changed as any named-row fix is: a backup first, then a

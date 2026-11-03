@@ -57,11 +57,15 @@ final class AppDelegate: NSObject, PlatformApplicationDelegate, UNUserNotificati
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().setBadgeCount(0)
+        // The app runs in scenes, so UIKit never calls applicationDidBecomeActive: the badge goes each time a window
+        // comes to the front, a return from the background included.
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(sceneDidActivate), name: UIScene.didActivateNotification, object: nil
+        )
         return true
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
+    @objc private func sceneDidActivate(_ notification: Notification) {
         UNUserNotificationCenter.current().setBadgeCount(0)
     }
     #else

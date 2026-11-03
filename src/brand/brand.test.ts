@@ -717,6 +717,9 @@ describe('carrier brand', () => {
       'topnic',
       'magnum-transportation',
       'crane-worldwide',
+      'rohlig',
+      'jb-hunt',
+      'dhx',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

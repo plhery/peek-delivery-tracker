@@ -995,6 +995,9 @@
   "dhlink": {
     "decal": "dhlink"
   },
+  "dhx": {
+    "decal": "dhx"
+  },
   "diakinisis": {
     "decal": "diakinisis"
   },
@@ -1989,6 +1992,12 @@
   },
   "jaskipin": {
     "decal": "jaskipin"
+  },
+  "jb-hunt": {
+    "decal": "jb-hunt",
+    "palette": {
+      "accent": "#000000"
+    }
   },
   "jcex": {
     "decal": "jcex"
@@ -3107,6 +3116,9 @@
   },
   "rodonaves": {
     "decal": "rodonaves"
+  },
+  "rohlig": {
+    "decal": "rohlig"
   },
   "ross-express": {
     "decal": "ross-express"

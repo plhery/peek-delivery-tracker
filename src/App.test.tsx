@@ -497,6 +497,8 @@ describe('App', () => {
     expect(viewToggle).toHaveAccessibleDescription('Custom view');
     expect(screen.getByRole('button', { name: 'Sort & filter' })).not.toHaveAccessibleDescription('Custom view');
     expect(screen.queryByText('Coffee beans ☕')).not.toBeInTheDocument();
+    // As on the iPhone, the search stays in sight as a chip once its field is closed.
+    expect(screen.getByRole('button', { name: /“birthday”/ })).toBeInTheDocument();
     await user.click(viewToggle);
     expect(screen.getByRole('searchbox')).toHaveValue('birthday');
 
@@ -543,6 +545,11 @@ describe('App', () => {
     expect(screen.queryByRole('searchbox', { name: 'Search parcels' })).not.toBeInTheDocument();
     expect(filtersToggle).toHaveAccessibleDescription('Custom view');
     expect(screen.getByRole('button', { name: 'Search parcels' })).not.toHaveAccessibleDescription('Custom view');
+    // Both closed, the carrier's chip stays, and clears the filter.
+    await user.click(screen.getByRole('button', { name: /chronopost/i }));
+    expect(await screen.findByText('Coffee beans ☕')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Clear all' })).not.toBeInTheDocument();
+    expect(filtersToggle).not.toHaveAccessibleDescription('Custom view');
   });
 
   it('shows one concise status line on each card', async () => {

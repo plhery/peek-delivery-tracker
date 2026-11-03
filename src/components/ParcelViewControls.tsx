@@ -78,6 +78,11 @@ export function ParcelViewControls({
       <div className={`parcel-view__meta${hasCustomView ? '' : ' parcel-view__meta--quiet'}`}>
         {hasCustomView && (
           <div className="parcel-view__chips" aria-label={t('view.customized')}>
+            {query.trim() && (
+              <button type="button" onClick={() => onQueryChange('')}>
+                <span>“{query.trim()}”</span><b aria-hidden="true">×</b>
+              </button>
+            )}
             {status !== 'all' && (
               <button type="button" onClick={() => onStatusChange('all')}>
                 <span>{t(STATUS_LABELS[status])}</span><b aria-hidden="true">×</b>

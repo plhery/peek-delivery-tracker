@@ -157,11 +157,11 @@ export default function App({
   const searchToggle = useRef<HTMLButtonElement>(null);
   const filtersToggle = useRef<HTMLButtonElement>(null);
   const searchShell = useRef<HTMLDivElement>(null);
-  // Search and the filters fold shut before they go, and the list rises with them.
+  // Search and the filters fold shut before they go, and the list rises with them. A narrowed list keeps its chips.
   function closeViewControls() {
     const closed = () => { setViewControlsOpen(false); setAdvancedFiltersOpen(false); };
     const shell = searchShell.current;
-    if (!shell?.animate || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { closed(); return; }
+    if (!shell?.animate || hasCustomView || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { closed(); return; }
     if (shell.dataset.leaving) return;
     shell.dataset.leaving = 'true';
     const { height, marginBottom } = getComputedStyle(shell);
@@ -591,9 +591,10 @@ export default function App({
             <button type="button" className="icon-button delivery-refresh" aria-label={refreshing ? t('app.refreshing') : t('app.refresh')} aria-busy={refreshing || refreshAnimating} disabled={refreshing || refreshAnimating} data-refreshing={refreshAnimating || undefined} onClick={() => void refreshWithButton()}><span ref={refreshIcon} className="refresh-glyph"><Icon name="refresh" /></span></button>
           </div>
         </div>
-        {!loading && parcels.length > 0 && (viewControlsOpen || advancedFiltersOpen) && (
+        {/* As on the iPhone, what narrows the list stays in sight as chips once its controls are closed. */}
+        {!loading && parcels.length > 0 && (viewControlsOpen || advancedFiltersOpen || hasCustomView) && (
           <div ref={searchShell} className="parcel-view-shell" onKeyDown={(event) => {
-            if (event.key !== 'Escape' || event.nativeEvent.isComposing) return;
+            if (event.key !== 'Escape' || event.nativeEvent.isComposing || !(viewControlsOpen || advancedFiltersOpen)) return;
             event.preventDefault();
             closeViewControls();
             (viewControlsOpen ? searchToggle : filtersToggle).current?.focus({ preventScroll: true });

@@ -175,12 +175,10 @@ jobs:
           target: google_apis
           arch: x86_64
           disable-animations: true
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
-          # The emulator has stopped about half a minute after the app opened: first a minute and a half without it.
-          script: |
-            sleep 90 && adb shell echo "The emulator is still up 90 s after booting, without the app."
-            android/scripts/release-smoke.sh android/app/build/outputs/apk/release/app-release.apk
-      - name: Say whether the system stopped the emulator
+          # SwiftShader through ANGLE: the older swiftshader_indirect, unmaintained, stops the emulator as the app draws.
+          emulator-options: -no-window -gpu swangle_indirect -noaudio -no-boot-anim -no-snapshot
+          script: android/scripts/release-smoke.sh android/app/build/outputs/apk/release/app-release.apk
+      - name: Show the memory and the end of the device's log
         if: failure()
         run: |
           free -m

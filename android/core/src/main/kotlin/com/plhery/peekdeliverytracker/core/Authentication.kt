@@ -256,6 +256,13 @@ class AppleSignInCredential(
  */
 fun interface AppleSignInAuthorizing {
     suspend fun credential(nonce: String): AppleSignInCredential
+
+    /**
+     * Whether this phone can sign in with Apple at all: not with the app's stand-in, until Apple's web sign-in lands.
+     * Without it, an account that uses Apple is deleted without Apple's code, whose revocation the server then skips,
+     * rather than not at all.
+     */
+    val available: Boolean get() = true
 }
 
 /**
@@ -507,11 +514,12 @@ class SessionStore(
     /**
      * Before an account that signs in with Apple is deleted, Apple asks for its tokens to be revoked. Signing in with
      * Apple again gives the server a code to revoke them with, and counts as the recent sign-in the deletion needs.
-     * Returns nil for an account without Apple.
+     * Returns nil for an account without Apple, and on a phone that cannot sign in with Apple
+     * ([AppleSignInAuthorizing.available]), which deletes the account without the code, as the server allows.
      */
     suspend fun reauthenticateWithAppleBeforeDeletion(): String? {
         val current = user
-        if (configuration.mode != AppConfiguration.Mode.Api || !configuration.appleAuthEnabled || current == null) return null
+        if (configuration.mode != AppConfiguration.Mode.Api || !configuration.appleAuthEnabled || !appleSignIn.available || current == null) return null
         if (current.identities == null) accessToken(forceRefresh = true)
         val subjects = user?.appleSubjects
         if (subjects == null || subjects.isEmpty() || user?.id != current.id) return null

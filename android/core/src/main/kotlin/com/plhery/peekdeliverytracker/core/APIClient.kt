@@ -180,12 +180,15 @@ object ParcelLookupCountry {
 }
 
 /**
- * The number as typed, sent beside the normalized one when it differs (src/lib/carrierDetection.ts `typedNumber`): its
- * dashes and spaces tell some carriers' numbers apart (a detection rule's `rawPattern`, an R+L PRO number's dash). The
- * service reads it only when it normalizes to the number asked about, and takes 80 characters at most.
+ * The number as typed, sent beside the normalized one when it spells it differently (`CarrierDetectionRequest.typedNumber`,
+ * src/lib/carrierDetection.ts `typedNumber`): its dashes and spaces tell some carriers' numbers apart (a detection
+ * rule's `rawPattern`, an R+L PRO number's dash). Kept only when it normalizes to the number asked about and is 80
+ * characters at most, as the service reads no other.
  */
 fun typedTrackingNumber(typed: String?, trackingNumber: String): String? =
-    typed?.trimmingWhitespacesAndNewlines()?.takeIf { it != trackingNumber && it.length <= 80 }
+    typed?.trimmingWhitespacesAndNewlines()?.takeIf {
+        it != trackingNumber && it.length <= 80 && CarrierCatalog.normalize(it) == trackingNumber
+    }
 
 sealed class DeliveryApiError(message: String) : Exception(message) {
     class AuthenticationExpired : DeliveryApiError("Your sign-in expired. Please sign in again.")

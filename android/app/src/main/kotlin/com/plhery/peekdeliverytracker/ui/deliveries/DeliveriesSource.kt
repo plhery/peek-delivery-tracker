@@ -193,6 +193,15 @@ interface DeliveriesSource {
      */
     suspend fun setEmailOnDelivery(enabled: Boolean): Boolean
 
+    /** `store.deliveryWidgetEnabled`: whether the Home Screen widget shows the parcels, on until turned off. */
+    val deliveryWidgetEnabled: StateFlow<Boolean>
+
+    /**
+     * `store.setDeliveryWidgetEnabled(_:)`: counts `widget-change`, then turns the widget on or off for this phone; off,
+     * it forgets the parcels it showed and says it is turned off.
+     */
+    fun setDeliveryWidgetEnabled(enabled: Boolean)
+
     /** `store.viewerLink(for:)`: the link someone else's parcel is followed through, which its menu reads. */
     fun viewerLink(parcel: Parcel): String?
 
@@ -419,6 +428,10 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override suspend fun setEmailOnDelivery(enabled: Boolean): Boolean =
         saveEmailOnDelivery(container.deliveryEmail, { container.parcels.deliveryEmail }) { container.parcels.setEmailOnDelivery(enabled) }
+
+    override val deliveryWidgetEnabled get() = container.parcels.deliveryWidgetEnabledFlow
+
+    override fun setDeliveryWidgetEnabled(enabled: Boolean) = container.parcels.setDeliveryWidgetEnabled(enabled)
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
 

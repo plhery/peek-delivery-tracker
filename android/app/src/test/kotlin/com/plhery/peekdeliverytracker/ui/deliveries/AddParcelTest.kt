@@ -485,6 +485,19 @@ class AddParcelTest {
         assertEquals(listOf<String?>("31415926-5"), source.detectedAsTyped)
     }
 
+    /** B-ST17: as the iPhone's, the carriers are asked once per number: a new spacing while they answer asks nothing again. */
+    @Test
+    fun aNewSpacingWhileTheCarriersAnswerAsksNothingAgain() {
+        show { detecting = CompletableDeferred() }
+        open()
+        type("31415926-5")
+        leave()
+        type("3141 5926-5")
+        settle()
+        assertEquals(listOf("314159265"), source.detected)
+        assertEquals(listOf<String?>("31415926-5"), source.detectedAsTyped)
+    }
+
     @Test
     fun anOptionalPostcodeSaysWhatItGivesThatCarrier() {
         val number = "12345478901"
@@ -498,6 +511,33 @@ class AddParcelTest {
         node(ADD_SAVE).assertIsEnabled()
         val name = CarrierCatalog.shared.info(carrier, AppLanguage.En).displayName
         compose.onNode(hasText(text("add.requirement.glsPostcodeOptionalHelp", mapOf("carrier" to name)))).assertExists()
+    }
+
+    /** B-ST22: an optional postcode is offered from those given before, filled at a tap, and sent with the parcel. */
+    @Test
+    fun anOptionalPostcodeOfferedIsFilledAtATapAndSent() {
+        val number = "12345478901"
+        val carrier = CarrierId("gls-at")
+        show {
+            isGuest = true
+            detections[number] = CarrierDetectionResponse(number, carrier = carrier, asked = listOf(carrier))
+            givenPostcodes = listOf(GivenPostcode(carrier = carrier, postcode = "1010"))
+        }
+        open()
+        type(number)
+        leave()
+        // Offered, never filled in for the reader.
+        assertEquals("", fieldText(ADD_POSTCODE))
+        assertFalse(exists(ADD_FORGET_POSTCODE))
+        node(ADD_USE_POSTCODE).assert(hasText(text("add.usePostcode", mapOf("postcode" to "1010")))).performClick()
+        settle()
+        assertEquals("1010", fieldText(ADD_POSTCODE))
+        assertFalse(exists(ADD_USE_POSTCODE))
+        // This phone's own suggestion, which a guest may forget.
+        assertTrue(exists(ADD_FORGET_POSTCODE))
+        node(ADD_SAVE).assertIsEnabled().performClick()
+        settle()
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(number, "", carrier, null, "1010", null)), source.additions)
     }
 
     @Test
@@ -666,6 +706,21 @@ class AddParcelTest {
         assertFalse(exists(ADD_AMAZON_UNAVAILABLE))
         node(ADD_HINT).assertTextEquals(text("add.amazonShippingConfirmed"))
         node(ADD_SAVE).assertIsEnabled()
+    }
+
+    /** B-ST20: Amazon's check gives the number as typed too, as the carriers' question does. */
+    @Test
+    fun anAmazonNumberIsCheckedAsTypedToo() {
+        val number = "FR4829173650"
+        show {
+            detections[number] = CarrierDetectionResponse(number, CarrierDetectionResponseAmazonShippingStatus.Available, carrier = CarrierId.AmazonShipping)
+        }
+        open()
+        type("FR 4829 173650")
+        settle()
+        assertEquals(number, source.detected.first())
+        assertEquals("FR 4829 173650", source.detectedAsTyped.first())
+        node(ADD_HINT).assertTextEquals(text("add.amazonShippingConfirmed"))
     }
 
     @Test

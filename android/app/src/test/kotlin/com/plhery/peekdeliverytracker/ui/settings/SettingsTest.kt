@@ -10,6 +10,8 @@ import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.state.ToggleableState
@@ -25,6 +27,7 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.performScrollToKey
@@ -310,6 +313,52 @@ class SettingsTest {
         tap(SETTINGS_EXIT_DEMO)
         assertEquals(1, source.welcomes)
         assertFalse(deliveries.showingAccount)
+    }
+
+    /** The switch's state, as TalkBack reads it. */
+    private fun toggled(tag: String): ToggleableState? =
+        node(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ToggleableState)
+
+    @Test
+    fun theWidgetsSwitchTurnsTheWidgetOffAndOnAgainCountedEachTime() {
+        show(AuthenticationState.Demo)
+        open()
+        assertTrue(shows(text("native.deliveries").uppercase()))
+        assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
+        node(SETTINGS_WIDGETS).assert(hasText(text("widget.settingTitle"))).assert(hasText(text("widget.settingDescription")))
+        assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
+        assertEquals(Role.Switch, node(SETTINGS_WIDGETS).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Role))
+        flip(SETTINGS_WIDGETS)
+        assertFalse(source.deliveryWidgetEnabled.value)
+        assertEquals("widget-change", source.actions.last())
+        assertEquals(ToggleableState.Off, toggled(SETTINGS_WIDGETS))
+        // TalkBack's double tap reaches the row as one switch.
+        node(SETTINGS_WIDGETS).performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertTrue(source.deliveryWidgetEnabled.value)
+        assertEquals(listOf("widget-change", "widget-change"), source.actions.filter { it == "widget-change" })
+        assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
+    }
+
+    @Test
+    fun aGuestsDeliveriesHaveTheWidgetsSwitchAlone() {
+        show(AuthenticationState.Welcome) { isGuest = true }
+        open()
+        assertTrue(shows(text("native.deliveries").uppercase()))
+        assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
+        assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
+        flip(SETTINGS_WIDGETS)
+        assertFalse(source.deliveryWidgetEnabled.value)
+    }
+
+    @Test
+    fun anAccountsWidgetsSwitchStandsUnderTheUpdates() {
+        show()
+        open()
+        val updates = node(SETTINGS_DELIVERY_UPDATES).getUnclippedBoundsInRoot()
+        val widgets = node(SETTINGS_WIDGETS).getUnclippedBoundsInRoot()
+        assertTrue(widgets.top >= updates.bottom)
+        assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
     }
 
     @Test

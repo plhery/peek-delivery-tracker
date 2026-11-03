@@ -245,6 +245,42 @@ class SessionIsolationTests {
     }
 
     /**
+     * Android's own (C-D05): a phone without Apple's sign-in (the app's stand-in) deletes an account that uses Apple
+     * without asking Apple, and so without the code, whose revocation the server then skips.
+     */
+    @Test
+    fun aPhoneWithoutAppleSignInDeletesAnAppleAccountWithoutItsCode() = runTest {
+        val apple = object : AppleSignInAuthorizing {
+            var asked = 0
+
+            override suspend fun credential(nonce: String): AppleSignInCredential {
+                asked++
+                throw AuthenticationError.InvalidResponse()
+            }
+
+            override val available: Boolean get() = false
+        }
+        val transport = RecordingTransport()
+        val session = sessionStore(transport, apple = apple)
+        val user = AuthUser(
+            id = UUID.randomUUID(), email = "relay@example.com", isAnonymous = false,
+            identities = listOf(AuthUser.Identity(provider = "apple", identityData = AuthUser.IdentityData(sub = "apple-user"))),
+        )
+        transport.respond(sessionJson(user))
+        session.verifyCode(email = "relay@example.com", code = "123456")
+        assertEquals(listOf("apple-user"), session.user?.appleSubjects)
+        val store = store(session, transport)
+        transport.handler = { request ->
+            if (request.method == "DELETE" && request.path == "/api/account") jsonResponse(200, """{"ok":true}""") else jsonResponse(200, "{}")
+        }
+        store.deleteAccount(confirmation = "relay@example.com")
+        assertEquals(0, apple.asked)
+        val deletion = transport.requests.single { it.method == "DELETE" && it.path == "/api/account" }
+        assertEquals("""{"confirmation":"relay@example.com"}""", deletion.body?.decodeToString())
+        assertNull(session.user)
+    }
+
+    /**
      * Adapted: the JVM's collector frees reference cycles and nothing here holds a weak reference, so the Swift test's
      * checks that the store outlives its last strong reference and is freed with the client have nothing to check. What
      * stays: the client keeps the store it was given and reads its session, the list under it and, once it signs out,

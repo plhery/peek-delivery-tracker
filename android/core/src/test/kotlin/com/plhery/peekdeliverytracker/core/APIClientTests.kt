@@ -195,6 +195,8 @@ class APIClientTests {
         assertEquals("0608 0000 0000 02", typedTrackingNumber("0608 0000 0000 02", "06080000000002"))
         assertNull(typedTrackingNumber(" 314159265\n", "314159265"))
         assertNull(typedTrackingNumber(null, "314159265"))
+        // Another number is not this one as typed.
+        assertNull(typedTrackingNumber("31415926-6", "314159265"))
         val long = "1-" + "2".repeat(78)
         assertEquals(long, typedTrackingNumber(long, "1" + "2".repeat(78)))
         assertNull(typedTrackingNumber("$long-", "1" + "2".repeat(78)))

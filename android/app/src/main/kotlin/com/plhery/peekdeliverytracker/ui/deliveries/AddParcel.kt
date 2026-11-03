@@ -395,8 +395,8 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         prepareRequiredDetails(form, current(), source.givenPostcodes)
     }
     SensoryFeedbackEffect(SensoryFeedback.Selection, resolved) { old, new -> old != new && new != CarrierId.Unknown }
-    // Amazon numbers are verified before they can be added, a moment after the number stops changing; once, through a
-    // window made again.
+    // Amazon numbers are verified before they can be added, a moment after the number stops changing, given as typed
+    // when it is asked, as the carriers' question is; once, through a window made again.
     val lookup = addition.lookupTrackingNumber
     LaunchedEffect(lookup, form.lookupAttempt) {
         val key = lookup?.let { "$it:${form.lookupAttempt}" }
@@ -405,7 +405,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         val number = lookup ?: return@LaunchedEffect
         try {
             delay(LOOKUP_DELAY)
-            val result = source.detectCarrier(number)
+            val result = source.detectCarrier(number, current().parsed.trackingNumber)
             ensureActive()
             if (result.trackingNumber != number) throw DeliveryApiError.InvalidResponse()
             form.verifiedCarrier = result
@@ -419,15 +419,14 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         }
         form.lookedUp = key
     }
-    // The carriers asked about the settled number, given as typed too: its dashes and spaces tell some carriers' numbers
-    // apart, so a question still unanswered goes again when only they change.
+    // The carriers asked about the settled number, given as typed too, as it reads when asked: its dashes and spaces
+    // tell some carriers' numbers apart. Asked once per number, as the iPhone's `.task(id: recognitionRequest)`.
     val recognitionRequest = addition.recognitionRequest
-    val typed = addition.parsed.trackingNumber
-    LaunchedEffect(recognitionRequest, typed) {
+    LaunchedEffect(recognitionRequest) {
         val number = recognitionRequest ?: return@LaunchedEffect
         form.recognition = form.recognition.copy(failedNumber = null, answer = null)
         try {
-            val result = source.detectCarrier(number, typed)
+            val result = source.detectCarrier(number, current().parsed.trackingNumber)
             ensureActive()
             if (result.trackingNumber != number) throw DeliveryApiError.InvalidResponse()
             form.recognition = form.recognition.copy(answer = result)

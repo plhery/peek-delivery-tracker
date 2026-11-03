@@ -11,8 +11,12 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.AuthSession
+import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
+import com.plhery.peekdeliverytracker.core.JsonEncoder
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
@@ -21,6 +25,7 @@ import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import java.security.Security
 import java.time.Instant
+import java.util.UUID
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -183,6 +188,87 @@ class AppContainerTest {
         idleUntil("the demo") { app.session.state == AuthenticationState.Demo }
         idleUntil("the demo's parcels") { app.parcels.parcelsFlow.value.isNotEmpty() }
         assertTrue(app.session.isDemo)
+    }
+
+    /**
+     * C-SE04: Settings' widget switch, through the deliveries' source, turns the widget off for this phone, which then
+     * has no parcels to show and says so, and on again, when the demo's parcels come back.
+     */
+    @Test
+    fun theWidgetsSwitchEmptiesTheWidgetAndFillsItAgain() {
+        PreferencesDefaults.standard(context).set("demo", forKey = "sdt.native.experience.v1")
+        val app = container()
+        val widget = DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(context, "group.test.peek"))
+        val source = ContainerDeliveries(app)
+        app.start(process.lifecycle)
+        idleUntil("the demo's widget") { widget.snapshot?.parcels?.isNotEmpty() == true }
+        assertTrue(source.deliveryWidgetEnabled.value)
+
+        source.setDeliveryWidgetEnabled(false)
+        idleUntil("the widget turned off") { !widget.isEnabled }
+        assertNull(widget.snapshot)
+        assertFalse(source.deliveryWidgetEnabled.value)
+
+        source.setDeliveryWidgetEnabled(true)
+        idleUntil("the demo's widget again") { widget.snapshot?.parcels?.isNotEmpty() == true }
+        assertTrue(widget.isEnabled)
+        assertTrue(source.deliveryWidgetEnabled.value)
+    }
+
+    /**
+     * C-D05 / C-D20: with Apple's sign-in on in the build's configuration, an account that uses Apple is still deleted
+     * on Android, whose stand-in can't sign in with Apple again: DELETE /api/account goes without Apple's code.
+     */
+    @Test
+    fun anAppleAccountIsDeletedWithoutSigningInWithAppleAgain() {
+        Security.addProvider(FakeAndroidKeyStore())
+        val deletions = mutableListOf<String>()
+        val user = AuthUser(
+            UUID(0, 7), email = "relay@example.com", isAnonymous = false,
+            identities = listOf(AuthUser.Identity(provider = "apple", identityData = AuthUser.IdentityData(sub = "synthetic-apple-user"))),
+        )
+        val answers = Interceptor { chain ->
+            val request = chain.request()
+            val (code, body) = when (request.method to request.url.encodedPath) {
+                "POST" to "/auth/v1/verify" -> 200 to JsonEncoder.deliveryTracker.encode(
+                    AuthSession.serializer(),
+                    AuthSession(
+                        accessToken = "synthetic-access", tokenType = "bearer", expiresIn = 3600,
+                        expiresAt = Instant.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
+                    ),
+                ).decodeToString()
+                "DELETE" to "/api/account" -> {
+                    synchronized(deletions) { deletions += Buffer().also { request.body!!.writeTo(it) }.readUtf8() }
+                    200 to """{"ok":true}"""
+                }
+                else -> 404 to "{}"
+            }
+            Response.Builder().request(request).protocol(Protocol.HTTP_1_1).code(code).message("").body(body.toResponseBody()).build()
+        }
+        try {
+            val server = "https://peek.example.test"
+            val configuration = AppConfiguration(
+                mode = AppConfiguration.Mode.Api, apiBaseUrl = server, supabaseUrl = server,
+                supabasePublishableKey = "synthetic-publishable-key", googleAuthEnabled = false, appleAuthEnabled = true,
+                emailOtpEnabled = true, appGroupIdentifier = "group.test.peek",
+            )
+            val http = PeekHttp.client(MemoryCookieJar()).newBuilder().addInterceptor(answers).build()
+            val app = AppContainer(context, configuration, http, scope = MainScope()).also { container = it }
+            app.start(process.lifecycle)
+            idleUntil("the session") { app.session.state != AuthenticationState.Loading }
+            app.scope.launch { app.session.verifyCode(email = "relay@example.com", code = "123456") }
+            idleUntil("the sign-in") { app.session.state is AuthenticationState.SignedIn }
+
+            var deleted: Result<Unit>? = null
+            app.scope.launch { deleted = runCatching { app.parcels.deleteAccount(confirmation = "relay@example.com") } }
+            idleUntil("the deletion") { deleted != null }
+            deleted!!.getOrThrow()
+            assertEquals(listOf("""{"confirmation":"relay@example.com"}"""), synchronized(deletions) { deletions.toList() })
+            assertTrue(app.session.state !is AuthenticationState.SignedIn)
+        } finally {
+            KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.auth").delete()
+            Security.removeProvider("AndroidKeyStore")
+        }
     }
 
     /**

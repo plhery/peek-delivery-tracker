@@ -388,6 +388,34 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun detectionSendsTheNumberAsTypedWhenItSpellsTheNumberDifferently() = runTest {
+        assertEquals("test-1234-5", typedTrackingNumber(" test-1234-5 ", "TEST12345"))
+        assertEquals("TEST 1234 5", typedTrackingNumber("TEST 1234 5", "TEST12345"))
+        assertNull(typedTrackingNumber("TEST12345", "TEST12345"))
+        assertNull("Another number is not this one as typed", typedTrackingNumber("TEST-1234-6", "TEST12345"))
+        assertNull(typedTrackingNumber(null, "TEST12345"))
+        assertNull(typedTrackingNumber("1-".repeat(41), "1".repeat(41)))
+
+        val body = Json.parseToJsonElement(
+            JsonEncoder.deliveryTracker.encode(
+                CarrierDetectionRequest.serializer(), CarrierDetectionRequest(trackingNumber = "TEST12345", typedNumber = "TEST-1234-5"),
+            ).decodeToString(),
+        ).jsonObject
+        assertEquals("TEST12345", body["trackingNumber"]?.jsonPrimitive?.content)
+        assertEquals("TEST-1234-5", body["typedNumber"]?.jsonPrimitive?.content)
+        val bare = Json.parseToJsonElement(
+            JsonEncoder.deliveryTracker.encode(CarrierDetectionRequest.serializer(), CarrierDetectionRequest(trackingNumber = "TEST12345")).decodeToString(),
+        ).jsonObject
+        assertNull(bare["typedNumber"])
+
+        val calls = Calls()
+        val device = device(client(calls), Memory(), this)
+        runCatching { device.detect(trackingNumber = "TEST12345", typed = "TEST-1234-5") }
+        runCatching { device.detect(trackingNumber = "TEST12345") }
+        assertEquals(listOf("detect TEST12345 as TEST-1234-5", "detect TEST12345"), calls.all)
+    }
+
+    @Test
     fun aDetectionGivesTheNumberAsTypedWhenItDiffers() = runTest {
         val calls = Calls()
         val device = device(client(calls), Memory(), this)

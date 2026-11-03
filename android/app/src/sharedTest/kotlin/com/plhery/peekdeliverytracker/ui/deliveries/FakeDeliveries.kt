@@ -315,6 +315,14 @@ class FakeDeliveries(
         }
     }
 
+    override val deliveryWidgetEnabled = MutableStateFlow(true)
+
+    /** As the store's: counted first, even when nothing changes. */
+    override fun setDeliveryWidgetEnabled(enabled: Boolean) {
+        action("widget-change")
+        deliveryWidgetEnabled.value = enabled
+    }
+
     override suspend fun changeCarrier(
         parcel: Parcel,
         carrier: CarrierId,

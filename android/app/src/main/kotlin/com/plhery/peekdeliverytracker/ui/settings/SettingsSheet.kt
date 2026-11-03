@@ -306,9 +306,9 @@ private fun Modifier.edgeSwipeBack(enabled: Boolean, push: Animatable<Float, *>,
 /**
  * AccountView's `page`: "settings.title" as a large title under the bar, which goes under it as the page scrolls and
  * comes back as the bar's inline title, Close at the bar's leading end, off while the data page waits; then the
- * profile (the account, or the way to one), the deliveries' updates for an account, the appearance and the language,
- * and the data's row over the site's, 24 apart and 24 in, 520 wide at most, on the app's ground. It loads the
- * notifications' state as it opens (`.task`).
+ * profile (the account, or the way to one), the deliveries' updates for an account and the widget's switch, the
+ * appearance and the language, and the data's row over the site's, 24 apart and 24 in, 520 wide at most, on the app's
+ * ground. It loads the notifications' state as it opens (`.task`).
  */
 @Composable
 private fun SettingsRootPage(
@@ -329,6 +329,7 @@ private fun SettingsRootPage(
     val session by source.session.collectAsState()
     val enabledOnDevice by source.notificationsEnabledOnDevice.collectAsState()
     val preferences by source.notificationPreferences.collectAsState()
+    val widgetEnabled by source.deliveryWidgetEnabled.collectAsState()
     val appearance = appearanceSetting()
     val demo = source.isDemo
     val guest = source.isGuest
@@ -361,15 +362,20 @@ private fun SettingsRootPage(
                             state.closeAccount()
                         }
                     }
-                    // Alerts are kept up to date by pushes, which need an account. The widget's switch, the group's
-                    // other row, comes with the widget, so a guest's group has nothing in it yet.
-                    if (!guest) {
-                        SettingsGroup(localized("native.deliveries")) {
+                    SettingsGroup(localized("native.deliveries")) {
+                        // Alerts are kept up to date by pushes, which need an account; the widget's switch is for every
+                        // mode. Android has no Live Activities, the iPhone's row after it.
+                        if (!guest) {
                             SettingsButtonRow(
                                 localized("settings.deliveryUpdates"), SETTINGS_DELIVERY_UPDATES, { onPush(PAGE_UPDATES) },
                                 symbol = "bell", value = summary, chevron = true,
                             )
+                            SettingsDivider()
                         }
+                        SettingsToggleRow(
+                            widgetEnabled, source::setDeliveryWidgetEnabled, localized("widget.settingTitle"), SETTINGS_WIDGETS,
+                            symbol = "rectangle.3.group", detail = localized("widget.settingDescription"),
+                        )
                     }
                     SettingsGroup(localized("settings.preferences")) {
                         SettingsAppearancePicker(appearance) { option ->
@@ -732,6 +738,7 @@ internal const val SETTINGS_CLOSE = "$SETTINGS_SHEET.close"
 internal const val SETTINGS_BACK = "$SETTINGS_SHEET.back"
 internal const val SETTINGS_WORKING = "$SETTINGS_SHEET.working"
 internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
+internal const val SETTINGS_WIDGETS = "$SETTINGS_SHEET.widgets"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"
 internal const val SETTINGS_HOME_PAGE = "$SETTINGS_SHEET.homePage"
 internal const val SETTINGS_FEEDBACK = "$SETTINGS_SHEET.feedback"

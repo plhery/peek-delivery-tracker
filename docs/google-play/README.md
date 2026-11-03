@@ -34,4 +34,11 @@ emphasis, rankings, prices or other companies' names. Play has no keywords.
 
 Take them in the demo, whose parcels are made up, in a debug build with the store-screenshot launch
 value `sdt.debug.storeScreenshots` set, which leaves out the demo's bar: phone, 7" tablet and 10"
-tablet.
+tablet. On Android that value is the boolean `sdt.debug.storeScreenshots` in the app's
+`shared_prefs/user_defaults.xml`, written through `adb shell run-as`; SystemUI's demo mode tidies
+the status bar.
+
+Play takes only 9:16 and 16:9 screenshots, so size the emulator's screen to them with `adb shell wm
+size` and `wm density`: the phone at 1080 × 1920, the 7" tablet at 1440 × 2560 (density 384) and
+the 10" tablet at 2560 × 1440 (density 320). The translations show the default language's
+screenshots unless they have their own.

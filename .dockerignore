@@ -11,6 +11,8 @@ supabase
 docs
 e2e
 ops
+# Except the email Worker, which the route tests run against the server.
+!ops/cloudflare/inbound-email-worker.js
 node_modules
 playwright-report
 test-results

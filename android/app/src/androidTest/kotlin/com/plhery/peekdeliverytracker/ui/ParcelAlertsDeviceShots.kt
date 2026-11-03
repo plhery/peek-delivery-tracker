@@ -182,13 +182,14 @@ class ParcelAlertsDeviceShots {
         compose.waitUntil(LONG_MILLIS) { walk.exists(ACTION_ERROR) }
         walk.awaitStill()
         assertTrue(walk.shows(ACTION_ERROR, walk.text("error.connection")))
+        // The sheet stays under the alert, drawn but left out of what TalkBack reaches.
         assertTrue(walk.exists(SHEET_PANEL))
-        assertFalse(walk.exists(PARCEL_ALERTS))
+        assertFalse(walk.reaches(PARCEL_ALERTS))
         walk.shot("B-S67-failed")
 
         walk.tap(ACTION_ERROR_CLOSE)
         walk.settle()
-        compose.waitUntil(LONG_MILLIS) { !walk.exists(ACTION_ERROR) && walk.exists(PARCEL_ALERTS) }
+        compose.waitUntil(LONG_MILLIS) { !walk.exists(ACTION_ERROR) && walk.reaches(PARCEL_ALERTS) }
         assertEquals(ToggleableState.On, walk.toggle(PARCEL_ALERTS_NOTIFICATIONS))
         walk.node(PARCEL_ALERTS_NOTIFICATIONS).assertIsEnabled()
         assertTrue(mutes().isEmpty())

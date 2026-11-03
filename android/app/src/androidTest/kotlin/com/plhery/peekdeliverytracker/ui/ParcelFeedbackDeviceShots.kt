@@ -422,6 +422,9 @@ class ParcelFeedbackDeviceShots {
         show()
         walk.open(gift)
         visitCarrier()
+        // The clock stands still from the way back: the word with its No is drawn once it moves.
+        walk.advanceTo(walk.now() + 100)
+        assertEquals(ParcelFeedbackModel.Word.Back("Chronopost"), word())
         walk.tap(FEEDBACK_BACK_NO)
         walk.settle()
         assertTrue(walk.exists(FEEDBACK_WORDS_SHEET))

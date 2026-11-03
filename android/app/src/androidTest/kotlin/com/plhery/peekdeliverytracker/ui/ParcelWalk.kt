@@ -65,6 +65,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_NAME
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
+import com.plhery.peekdeliverytracker.ui.deliveries.cardId
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import java.time.Instant
@@ -225,11 +226,16 @@ internal class ParcelWalk(
 
     /**
      * The page of `parcel`, opened from its card as a reader does: in a window that stacks them, from the list, back to
-     * it first; beside the list in one that lays them out side by side.
+     * it first; beside the list in one that lays them out side by side. The list is scrolled to the card's item, which
+     * puts it below the top bar (or at the list's foot, above the tab bar), as a scroll to the card itself doesn't: that
+     * stops as soon as the card is in the list's bounds, which run under both bars, and a tap there is the bar's (the
+     * tab's tapped again scrolls the list to its top). A parcel with no card of its own is on the archive's shelf.
      */
     fun open(parcel: Parcel) {
         if (stacked() && shown() != null) home()
-        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(card(parcel.label))
+        val list = compose.onNodeWithTag(PARCEL_LIST)
+        val item = onUi { deliveries.itemKeys.firstOrNull { cardId(it) == parcel.id } }
+        if (item != null) list.performScrollToKey(item) else list.performScrollToNode(card(parcel.label))
         compose.onAllNodes(card(parcel.label)).onFirst().performClick()
         compose.waitUntil(LONG_MILLIS) { shown() == parcel.id }
         compose.waitUntil(LONG_MILLIS) {
@@ -293,6 +299,9 @@ internal class ParcelWalk(
     fun count(tag: String): Int = compose.onAllNodes(hasTestTag(tag), useUnmergedTree = true).fetchSemanticsNodes().size
 
     fun exists(tag: String): Boolean = count(tag) > 0
+
+    /** Whether TalkBack reaches what is tagged `tag`: in the merged tree, which leaves out a sheet under an alert. */
+    fun reaches(tag: String): Boolean = compose.onAllNodes(hasTestTag(tag)).fetchSemanticsNodes().isNotEmpty()
 
     fun node(tag: String): SemanticsNodeInteraction = compose.onNodeWithTag(tag)
 

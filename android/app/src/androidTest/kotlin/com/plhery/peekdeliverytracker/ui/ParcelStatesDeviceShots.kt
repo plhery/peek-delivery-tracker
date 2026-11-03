@@ -692,12 +692,17 @@ class ParcelStatesDeviceShots {
         walk.shot("B-ST38-pickup")
     }
 
-    /** The share sheet's link address as laid out. */
-    private fun addressLayout(): TextLayoutResult = walk.onUi {
-        val laid = mutableListOf<TextLayoutResult>()
+    /**
+     * The share sheet's link address as laid out: the node found first (a search that waits for the app to be idle,
+     * which it can't be from the main thread), then its layout read on the main thread.
+     */
+    private fun addressLayout(): TextLayoutResult {
         val node = compose.onNode(hasTestTag(PARCEL_SHARE_ADDRESS), useUnmergedTree = true).fetchSemanticsNode()
-        node.config[SemanticsActions.GetTextLayoutResult].action?.invoke(laid)
-        laid.single()
+        return walk.onUi {
+            val laid = mutableListOf<TextLayoutResult>()
+            node.config[SemanticsActions.GetTextLayoutResult].action?.invoke(laid)
+            laid.single()
+        }
     }
 
     /** B-ST38: a long link address takes one line, cut short, and three at the largest text. */

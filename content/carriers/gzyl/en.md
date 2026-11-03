@@ -103,6 +103,10 @@ Not for sure. YL, ten digits and YQ is GZYL's layout, and no other carrier in Pe
 
 It may be part of GZYL's plan. GZYL writes much of a parcel's timeline ahead and ends it in a `Delivered`, and such steps are a plan, not scans. Peek holds such steps back from GZYL's tracker, `Delivered` included, and under a "Delivered" it does show, it adds that GZYL's tracking follows a fixed schedule. Tell the seller the parcel hasn't arrived and ask which company delivers it.
 
+### Who delivers GZYL parcels in my country?
+
+Peek doesn't know: GZYL's steps in your country name no company. Ask the seller which company delivers your order and for its tracking number, and add that number to Peek as a separate parcel. Only in Switzerland and Liechtenstein can Peek hand a GZYL parcel over to Swiss Post itself.
+
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company and other names, the tracker on a bare address, YL…YQ number shape and its weak match, Xinghe Freight on GZYL's tracker, search by number or reference with its dashes, step wordings and their stages, the platform's Chinese line, towns after wordings, Beijing clock, timeline written in advance, the answer for an unknown number, Swiss Post as the only hand-over, what Peek shows, holds back and leaves out
 :::

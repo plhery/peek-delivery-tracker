@@ -6,6 +6,12 @@ import android.os.Looper
 import android.provider.Settings
 import android.view.KeyEvent
 import android.view.KeyboardShortcutGroup
+import android.view.View
+import android.view.ViewGroup
+import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.semantics.SemanticsNode
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
@@ -65,15 +71,41 @@ class KeyboardShortcutsTest {
         Settings.Global.putFloat(app.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
     }
 
-    /** Runs the main thread's work, and lets the background threads answer, until `done`. */
-    private fun idleUntil(what: String, done: () -> Boolean) {
+    /** Runs the main thread's work, and lets the background threads answer, until `done`; [state] tells a timeout's why. */
+    private fun idleUntil(what: String, state: () -> String = { "" }, done: () -> Boolean) {
         val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
         while (true) {
             shadowOf(Looper.getMainLooper()).idle()
             if (done()) return
-            if (System.nanoTime() > deadline) fail("Timed out waiting for $what")
+            if (System.nanoTime() > deadline) fail("Timed out waiting for $what\n${state()}")
             Thread.sleep(10)
         }
+    }
+
+    /** The session, the window's lifecycle, the parcels and what the window shows, for a timeout's message. */
+    private fun MainActivity.described(): String {
+        val container = app.container.value
+        val out = StringBuilder("session ${container?.session?.state}, window ${lifecycle.currentState}, parcels ${container?.parcels?.parcelsFlow?.value?.size}\n")
+        val budget = intArrayOf(80)
+        fun describe(node: SemanticsNode, depth: Int) {
+            if (budget[0]-- <= 0) return
+            val config = node.config
+            val said = listOfNotNull(
+                config.getOrNull(SemanticsProperties.TestTag)?.let { "tag $it" },
+                config.getOrNull(SemanticsProperties.Text)?.joinToString("|")?.let { "text $it" },
+                config.getOrNull(SemanticsProperties.ContentDescription)?.joinToString("|")?.let { "said $it" },
+                config.getOrNull(SemanticsProperties.PaneTitle)?.let { "pane $it" },
+            )
+            if (said.isNotEmpty()) out.append("  ".repeat(depth.coerceAtMost(10))).append(said.joinToString(", ")).append('\n')
+            node.children.forEach { describe(it, depth + 1) }
+        }
+        fun roots(view: View): List<ViewRootForTest> = when (view) {
+            is ViewRootForTest -> listOf(view)
+            is ViewGroup -> (0 until view.childCount).flatMap { roots(view.getChildAt(it)) }
+            else -> emptyList()
+        }
+        roots(window.decorView.rootView).forEach { describe(it.semanticsOwner.unmergedRootSemanticsNode, 0) }
+        return out.toString()
     }
 
     private fun MainActivity.shortcuts(): List<KeyboardShortcutGroup> =
@@ -87,7 +119,7 @@ class KeyboardShortcutsTest {
         idleUntil("the stores") { app.container.value != null }
         val activity = controller.get()
         app.container.value!!.session.enterDemo()
-        idleUntil("the demo's tabs") { activity.shortcuts().isNotEmpty() }
+        idleUntil("the demo's tabs", { activity.described() }) { activity.shortcuts().isNotEmpty() }
 
         val group = activity.shortcuts().first()
         assertEquals("Peek", group.label.toString())

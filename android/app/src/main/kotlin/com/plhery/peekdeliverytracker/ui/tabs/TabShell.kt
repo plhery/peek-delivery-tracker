@@ -63,6 +63,8 @@ import androidx.compose.ui.unit.max
 import androidx.core.view.ViewCompat
 import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowInfoTracker
+import com.plhery.peekdeliverytracker.ui.WindowKey
+import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
@@ -264,6 +266,13 @@ val LocalWindowLayers = staticCompositionLocalOf<WindowLayers?> { null }
 val LocalTabOverlay = staticCompositionLocalOf<TabOverlay?> { null }
 
 /**
+ * Whether the tab's window keys wait, read as a key comes: the first open stands over the tabs, or anything stands over
+ * the window (`windowCovered`), a sheet, Add, a card's menu, an alert, a popover or a parcel's link's sheet, under which
+ * the iPhone's tab keys and ⌘, do nothing. Never outside a shell.
+ */
+val LocalTabsCovered = staticCompositionLocalOf<() -> Boolean> { { false } }
+
+/**
  * The overlay a layer is drawn in, for what the layer presents over the whole window in turn, as a full-screen cover
  * presented from a sheet covers all of the iPad's screen. Null outside a layer.
  */
@@ -317,7 +326,8 @@ fun TabReselectionEffect(onReselect: suspend () -> Unit) {
  * ParcelListView's TabView (A-S21): the chosen tab's content under iOS 26's floating glass tab bar, at the bottom on a
  * phone and at the top in a window at least 600 wide and 480 tall, as iPadOS puts it. Each tab keeps its saved state
  * while another is shown. A change of tab plays the selection haptic and counts the tab's screen. On a hardware
- * keyboard, Ctrl or Meta with 1, 2 or 3 chooses a tab, as ⌘1–3 do on the iPhone, while this window has the keys.
+ * keyboard, Ctrl or Meta with 1, 2 or 3 chooses a tab, as ⌘1–3 do on the iPhone, while nothing stands over the tabs
+ * ([LocalTabsCovered]).
  * [overlays] draws over whichever tab is chosen and whatever it presented, outside every tab's saved state, through
  * an overlay host of its own above the tab's: what the app presents over the window whatever is in front, as the
  * browser check comes up over Add's cover. While it shows, TalkBack reaches nothing under it. Under a window's front
@@ -351,7 +361,6 @@ fun TabShell(
             onView(tabs[selection].screen)
         }
     }
-    TabKeys(onSelect, enabled = !covered)
     val tap = { tab: Int -> if (tab == selection) reselections[tab].reselect() else onSelect(tab) }
     val holder = rememberSaveableStateHolder()
     val backdrop = rememberMaterialBackdrop()
@@ -362,9 +371,15 @@ fun TabShell(
     val front = remember(backdrop, window) { TabOverlay(backdrop, window, "tab.front") }
     val visibility = remember { TabBarVisibility() }
     val density = LocalDensity.current
+    val coveredNow by rememberUpdatedState(covered)
+    // The tabs' keys and the account's wait under the cover and under whatever stands over the window.
+    val keysWait: () -> Boolean = remember(overlay, front, window) {
+        { coveredNow || overlay.covered || front.covered || window?.covered == true }
+    }
+    TabKeys(onSelect, keysWait)
+    WindowShortcutsEffect { if (keysWait()) emptyList() else WindowKey.tabs }
     // Under the cover the tab and the bar take no focus: what would go into them goes into the cover instead, as a
     // modal's focus wraps round it, Tab at its top and Shift-Tab at its foot, and what had it lets go.
-    val coveredNow by rememberUpdatedState(covered)
     val coverFocus = remember { FocusRequester() }
     val shut = Modifier
         .focusProperties {
@@ -414,6 +429,7 @@ fun TabShell(
                 LocalWindowLevelHinge provides levelHinge,
                 LocalTabOverlay provides overlay,
                 LocalTabBarVisibility provides visibility,
+                LocalTabsCovered provides keysWait,
             ) {
                 holder.SaveableStateProvider(tabs[selection].name) { content(tabs[selection]) }
                 CompositionLocalProvider(LocalTabOverlay provides front, content = overlays)
@@ -494,17 +510,18 @@ internal fun shortcutTab(event: KeyEvent): Int? {
 }
 
 /**
- * The shortcuts, taken once nothing in the window has used the key, whether or not anything has focus. A dialog or
- * a sheet is a window of its own and keeps its keys, so they don't reach the tabs under it.
+ * The shortcuts, taken once nothing in the window has used the key, whether or not anything has focus. While [waits],
+ * they do nothing: the sheets, Add, the menus, the alerts and the popovers are drawn in this window, over the tabs, and
+ * the iPhone's `choose` does nothing under them (`windowCovered`), nor do its tab keys under the first open.
  */
 @Composable
-private fun TabKeys(choose: (Int) -> Unit, enabled: Boolean) {
+private fun TabKeys(choose: (Int) -> Unit, waits: () -> Boolean) {
     val view = LocalView.current
     val current by rememberUpdatedState(choose)
-    val on by rememberUpdatedState(enabled)
+    val covered by rememberUpdatedState(waits)
     DisposableEffect(view) {
         val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event ->
-            if (!on) return@OnUnhandledKeyEventListenerCompat false
+            if (covered()) return@OnUnhandledKeyEventListenerCompat false
             val tab = shortcutTab(event) ?: return@OnUnhandledKeyEventListenerCompat false
             if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) current(tab)
             true

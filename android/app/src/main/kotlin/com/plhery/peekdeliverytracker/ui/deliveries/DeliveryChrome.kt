@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.Context
+import android.view.KeyEvent
 import android.view.accessibility.AccessibilityManager
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
@@ -78,6 +79,7 @@ import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -104,6 +106,7 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -121,6 +124,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.view.ViewCompat
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.MotionCurve
@@ -128,12 +132,15 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
+import com.plhery.peekdeliverytracker.ui.WindowKey
+import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.PeekMark
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabBarPadding
+import com.plhery.peekdeliverytracker.ui.tabs.LocalTabsCovered
 import com.plhery.peekdeliverytracker.ui.tabs.TOP_BAR_HEIGHT
 import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
@@ -377,13 +384,28 @@ internal fun TabRowAccount(
 private val TAB_ROW_ACCOUNT_WIDTH = 52.dp
 private val TAB_ROW_ACCOUNT_MARGIN = 10.dp
 
-/** The list's account button, which opens Settings over the deliveries ([DeliveriesState.account]). */
+/**
+ * The list's account button, which opens Settings over the deliveries ([DeliveriesState.account]); its key reaches it
+ * while the deliveries' keys do (`.environment(\.keyboardInFront, keyboardFree)`).
+ */
 @Composable
-private fun AccountButton(state: DeliveriesState, modifier: Modifier) = AccountButton(state.source.session, state::account, ACCOUNT_BUTTON, modifier)
+private fun AccountButton(state: DeliveriesState, modifier: Modifier) =
+    AccountButton(state.source.session, state::account, ACCOUNT_BUTTON, modifier, inFront = { state.keyboardFree })
 
-/** `AccountToolbarButton`: the account's initial, or a figure, on a 34-point yellow disc, which opens Settings. */
+/**
+ * `AccountToolbarButton`: the account's initial, or a figure, on a 34-point yellow disc, which opens Settings. Ctrl or
+ * Meta with a comma presses it, as ⌘, does, while its screen has the keys ([inFront]), and does nothing while anything
+ * stands over the tabs ([LocalTabsCovered]), as the iPhone's `open()` waits while `windowCovered`.
+ */
 @Composable
-private fun AccountButton(session: StateFlow<AuthenticationState>, onClick: () -> Unit, tag: String, modifier: Modifier) {
+private fun AccountButton(
+    session: StateFlow<AuthenticationState>,
+    onClick: () -> Unit,
+    tag: String,
+    modifier: Modifier,
+    inFront: () -> Boolean = { true },
+) {
+    AccountKey(onClick, inFront)
     val state by session.collectAsState()
     val initial = (state as? AuthenticationState.SignedIn)?.user?.email?.firstOrNull()?.uppercase()
     val label = localized("native.account")
@@ -407,6 +429,26 @@ private fun AccountButton(session: StateFlow<AuthenticationState>, onClick: () -
             }
         }
     }
+}
+
+/** The account's key, Ctrl or Meta with a comma (`MenuKey.account`), taken once nothing in the window has used it. */
+@Composable
+private fun AccountKey(open: () -> Unit, inFront: () -> Boolean) {
+    val view = LocalView.current
+    val action by rememberUpdatedState(open)
+    val front by rememberUpdatedState(inFront)
+    val covered by rememberUpdatedState(LocalTabsCovered.current)
+    DisposableEffect(view) {
+        val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event ->
+            val command = event.hasModifiers(KeyEvent.META_CTRL_ON) || event.hasModifiers(KeyEvent.META_META_ON)
+            if (!command || event.keyCode != KeyEvent.KEYCODE_COMMA || !front()) return@OnUnhandledKeyEventListenerCompat false
+            if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0 && !covered()) action()
+            true
+        }
+        ViewCompat.addOnUnhandledKeyEventListener(view, listener)
+        onDispose { ViewCompat.removeOnUnhandledKeyEventListener(view, listener) }
+    }
+    WindowShortcutsEffect { if (front() && !covered()) listOf(WindowKey.Account) else emptyList() }
 }
 
 /**

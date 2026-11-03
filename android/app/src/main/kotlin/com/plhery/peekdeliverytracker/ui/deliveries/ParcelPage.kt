@@ -89,6 +89,8 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.WindowKey
+import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -596,8 +598,10 @@ internal fun PageBarButton(symbol: String, label: String, tag: String, modifier:
 
 /**
  * The page's keys (ParcelDetailView's `keys`), while the keyboard reaches the page, nothing stands over it, a parcel's
- * link's sheet included, and the search field doesn't have it: Esc back to the list from a page over it, and the keys of the ••• menu's items on its
- * parcel, Delete waiting while another change is saved. A page on its way back into its card takes none.
+ * link's sheet included, and the search field doesn't have it: Esc back to the list from a page over it, and the keys
+ * of the ••• menu's items on its parcel, Delete waiting while another change is saved. A page on its way back into its
+ * card takes none. The window lists them while they answer, Delete only while it would act, as the iPad's Parcel menu
+ * dims it (`busy`).
  */
 @Composable
 private fun PageKeys(state: DeliveriesState, pageId: UUID, parcel: Parcel?) {
@@ -609,24 +613,37 @@ private fun PageKeys(state: DeliveriesState, pageId: UUID, parcel: Parcel?) {
         ViewCompat.addOnUnhandledKeyEventListener(view, listener)
         onDispose { ViewCompat.removeOnUnhandledKeyEventListener(view, listener) }
     }
+    WindowShortcutsEffect { state.pageKeys(parcel, stack).filterNot { it == WindowKey.Delete && state.pageWorking(pageId) } }
+}
+
+/**
+ * The keys the page answers now: none while something stands over it, Esc alone on the first open's sample page, Esc
+ * back to the list from a page over it, and its parcel's items'.
+ */
+private fun DeliveriesState.pageKeys(parcel: Parcel?, stack: PageStack?): List<WindowKey> {
+    if (modal || showingFilters || searchFocused || linkShown) return emptyList()
+    // The first open's sample page, over the first open: Esc goes back to it.
+    if (stack != null) return listOf(WindowKey.Back)
+    if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen == null) return emptyList()
+    val back = if (arrangement == DeliveriesArrangement.Stacked) listOf(WindowKey.Back) else emptyList()
+    val items = parcel?.let { ParcelMenuItem.menu(it, onCard = false, reader = source.viewerLink(it) != null).flatten() }.orEmpty()
+    return back + items.mapNotNull(WindowKey::of)
 }
 
 private fun DeliveriesState.pageKey(event: KeyEvent, pageId: UUID, parcel: Parcel?, stack: PageStack?): Boolean {
-    if (modal || showingFilters || searchFocused || linkShown) return false
+    val keys = pageKeys(parcel, stack)
     val act = event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0
-    // The first open's sample page, over the first open: Esc goes back to it.
-    if (stack != null) {
-        if (!event.hasNoModifiers() || event.keyCode != KeyEvent.KEYCODE_ESCAPE) return false
-        if (act) stack.back()
-        return true
-    }
-    if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen == null) return false
-    if (arrangement == DeliveriesArrangement.Stacked && event.hasNoModifiers() && event.keyCode == KeyEvent.KEYCODE_ESCAPE) {
-        if (act) navigator.pop(navigator.navigation.path.dropLast(1))
+    if (WindowKey.Back in keys && event.hasNoModifiers() && event.keyCode == KeyEvent.KEYCODE_ESCAPE) {
+        when {
+            !act -> Unit
+            stack != null -> stack.back()
+            else -> navigator.pop(navigator.navigation.path.dropLast(1))
+        }
         return true
     }
     if (parcel == null) return false
     val items = ParcelMenuItem.menu(parcel, onCard = false, reader = source.viewerLink(parcel) != null).flatten()
+        .filter { item -> WindowKey.of(item)?.let { it in keys } == true }
     val item = ParcelMenuItem.forShortcut(event, items) ?: return false
     if (act && !(item == ParcelMenuItem.Delete && pageWorking(pageId))) choseOnPage(pageId, item, parcel)
     return true

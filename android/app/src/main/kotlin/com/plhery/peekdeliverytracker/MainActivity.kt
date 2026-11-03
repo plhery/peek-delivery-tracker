@@ -3,6 +3,8 @@ package com.plhery.peekdeliverytracker
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
+import android.view.KeyboardShortcutGroup
+import android.view.Menu
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -11,12 +13,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.plhery.peekdeliverytracker.core.ShareInbox
+import com.plhery.peekdeliverytracker.ui.LocalWindowShortcuts
 import com.plhery.peekdeliverytracker.ui.PeekRoot
+import com.plhery.peekdeliverytracker.ui.WindowShortcuts
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -25,6 +30,9 @@ import com.plhery.peekdeliverytracker.ui.theme.rememberCarrierIdentities
 
 class MainActivity : ComponentActivity() {
     private val app: PeekApplication get() = application as PeekApplication
+
+    /** The keys the window answers now, which its screens say as they are composed. */
+    private val shortcuts = WindowShortcuts()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // The launch window: iOS's blank LaunchBackground, no icon (themes.xml), kept while the stores are made.
@@ -59,7 +67,7 @@ class MainActivity : ComponentActivity() {
             val catalog = container?.catalog?.collectAsState()?.value
             PeekTheme(appearance = appearance, dark = dark, carrierIdentities = rememberCarrierIdentities(catalog)) {
                 if (container != null) {
-                    PeekRoot(container, inbox)
+                    CompositionLocalProvider(LocalWindowShortcuts provides shortcuts) { PeekRoot(container, inbox) }
                 } else {
                     // Under the launch window, which stays until the container is made.
                     Box(Modifier.fillMaxSize().background(PeekTheme.colors.background))
@@ -76,6 +84,16 @@ class MainActivity : ComponentActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         theme.applyStyle(R.style.Theme_Peek, true)
+    }
+
+    /**
+     * The app's keys the system lists over the window when asked (Meta+/), as an iPad lists them holding ⌘ or in its
+     * menu bar: those the screens answer now, titled as the iPhone titles them, in the app's language.
+     */
+    override fun onProvideKeyboardShortcuts(data: MutableList<KeyboardShortcutGroup>, menu: Menu?, deviceId: Int) {
+        super.onProvideKeyboardShortcuts(data, menu, deviceId)
+        val localizer = app.container.value?.localizer ?: return
+        data += shortcuts.groups({ localizer.text(it) }, getString(R.string.app_name))
     }
 
     /** Web sign-in opens over the window a tap last reached, the top resumed one where two of the app's share the screen. */

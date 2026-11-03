@@ -108,6 +108,8 @@ import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.WindowKey
+import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -369,9 +371,8 @@ private val LocalLayerPass = staticCompositionLocalOf<LayerPass?> { null }
 /**
  * The card's menu (A-S41, A-G04): the screen dims, the card lifts in its shape, and the parcel's items stand beside it on
  * glass in their groups, the dimmed screen showing through it, each with its symbol, and the keys that press them on
- * the parcel the keyboard acts on, while the keyboard reaches the deliveries. A tap
- * outside, the back gesture or a choice closes it; a choice acts once it has closed. TalkBack reaches only the menu,
- * from its first item.
+ * the parcel the keyboard acts on, while the keyboard reaches the deliveries. A tap outside, the back gesture or a
+ * choice closes it; a choice acts once it has closed. TalkBack reaches only the menu, from its first item.
  */
 @Composable
 private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
@@ -628,7 +629,7 @@ internal fun ParcelMenuItem.Companion.forShortcut(event: KeyEvent, items: List<P
     return items.firstOrNull { it in wanted }
 }
 
-/** While the menu shows its keys, they press its items, as a menu's key equivalents do. */
+/** While the menu shows its keys, they press its items, as a menu's key equivalents do, and the window lists them. */
 @Composable
 internal fun MenuKeys(shortcuts: Boolean, items: List<List<ParcelMenuItem>>, choose: (ParcelMenuItem) -> Unit) {
     if (!shortcuts) return
@@ -643,6 +644,7 @@ internal fun MenuKeys(shortcuts: Boolean, items: List<List<ParcelMenuItem>>, cho
         ViewCompat.addOnUnhandledKeyEventListener(view, listener)
         onDispose { ViewCompat.removeOnUnhandledKeyEventListener(view, listener) }
     }
+    WindowShortcutsEffect { items.flatten().mapNotNull(WindowKey::of) }
 }
 
 /** A hardware keyboard is connected and in use (`ConnectedKeyboard.shared.isConnected`). */

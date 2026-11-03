@@ -8649,6 +8649,7 @@
 <url>
 <loc>https://peektracker.com/carriers/jrt-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jrt-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jrt-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jrt-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />
@@ -8656,8 +8657,19 @@
 <lastmod>2026-10-30</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/de/carriers/jrt-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jrt-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jrt-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/jrt-tracking" />
+<lastmod>2026-11-03</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/it/carriers/jrt-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jrt-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jrt-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jrt-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />
@@ -8667,6 +8679,7 @@
 <url>
 <loc>https://peektracker.com/es/carriers/jrt-seguimiento</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jrt-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jrt-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jrt-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />
@@ -8676,6 +8689,7 @@
 <url>
 <loc>https://peektracker.com/pl/carriers/jrt-sledzenie</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/jrt-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/jrt-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/jrt-tracking" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/jrt-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/jrt-sledzenie" />

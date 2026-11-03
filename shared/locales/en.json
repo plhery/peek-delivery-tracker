@@ -827,6 +827,7 @@
   "settings.menuBarDescription": "Your next deliveries, one click away. Peek keeps running when you close its window.",
   "settings.openAtLogin": "Open at login",
   "settings.openAtLoginApproval": "To have Peek open at login, allow it in System Settings.",
+  "settings.rate": "Rate Peek",
   "menuBar.paste": "Paste tracking number",
   "menuBar.trackWithPeek": "Track with Peek",
   "menuBar.open": "Open Peek",

@@ -377,6 +377,7 @@ struct AccountView: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openWindow) private var openWindow
+    @Environment(\.openURL) private var openURL
     @AppStorage(AppAppearance.storageKey) private var appearance = AppAppearance.defaultValue
     @State private var working = false
     @State private var exportURL: URL?
@@ -532,14 +533,25 @@ struct AccountView: View {
     }
     #endif
 
-    /// The site's landing, which the app itself never shows, and a mail to Peek, open at any time, under the version
-    /// it would be about.
+    /// The site's landing, which the app itself never shows, the store's page for a review, and a mail to Peek, open at
+    /// any time, under the version it would be about.
     @ViewBuilder private var siteRows: some View {
         Button { showingHomePage = true } label: {
             SettingsRow(title: localizer.text("app.homePage"), value: session.configuration.homePageURL.host(), chevron: true)
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("settings.homePage")
+        settingsDivider
+        // The store's own page: StoreKit's prompt may show nothing after a tap, so ReviewPrompt never asks from one.
+        Button {
+            DeliveryAnalytics.shared.action("review-link-open")
+            openURL(AppConfiguration.reviewURL)
+        } label: {
+            SettingsRow(title: localizer.text("settings.rate"), chevron: true)
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(.isLink)
+        .accessibilityIdentifier("settings.rate")
         settingsDivider
         Link(destination: AppConfiguration.feedbackURL()) {
             SettingsRow(title: localizer.text("settings.sendFeedback"),

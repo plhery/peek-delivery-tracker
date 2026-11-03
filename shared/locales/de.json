@@ -827,6 +827,7 @@
   "settings.menuBarDescription": "Deine nächsten Lieferungen, nur einen Klick entfernt. Peek läuft weiter, wenn du das Fenster schließt.",
   "settings.openAtLogin": "Beim Anmelden öffnen",
   "settings.openAtLoginApproval": "Damit Peek beim Anmelden öffnet, erlaube es in den Systemeinstellungen.",
+  "settings.rate": "Peek bewerten",
   "menuBar.paste": "Sendungsnummer einfügen",
   "menuBar.trackWithPeek": "Mit Peek verfolgen",
   "menuBar.open": "Peek öffnen",

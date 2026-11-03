@@ -827,6 +827,7 @@
   "settings.menuBarDescription": "Najbliższe dostawy na jedno kliknięcie. Peek działa dalej po zamknięciu okna.",
   "settings.openAtLogin": "Otwieraj po zalogowaniu",
   "settings.openAtLoginApproval": "Aby Peek otwierał się po zalogowaniu, zezwól na to w Ustawieniach systemowych.",
+  "settings.rate": "Oceń Peek",
   "menuBar.paste": "Wklej numer śledzenia",
   "menuBar.trackWithPeek": "Śledź w Peeku",
   "menuBar.open": "Otwórz Peek",

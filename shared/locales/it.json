@@ -827,6 +827,7 @@
   "settings.menuBarDescription": "Le tue prossime consegne, a un clic. Peek resta aperto quando chiudi la finestra.",
   "settings.openAtLogin": "Apri al login",
   "settings.openAtLoginApproval": "Perché Peek si apra al login, consentilo in Impostazioni di Sistema.",
+  "settings.rate": "Valuta Peek",
   "menuBar.paste": "Incolla numero di tracciamento",
   "menuBar.trackWithPeek": "Traccia con Peek",
   "menuBar.open": "Apri Peek",

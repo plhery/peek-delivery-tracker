@@ -70,7 +70,8 @@ are virtual names, never real URLs.
   carrier of a parcel none was found for. Never the reasons, the words or the parcel.
 - **Rating** (iPhone): each time the app asks for an App Store rating with the system's
   prompt, on the screen it asks from: `parcel` after a "Yes" there, `deliveries` after a
-  parcel seen arriving. Apple doesn't say whether the prompt showed, so these are asks.
+  parcel seen arriving. Apple doesn't say whether the prompt showed, so these are asks. A tap
+  on Settings' "Rate Peek", which opens the store's page for a review, is `review-link-open`.
 - **Discovery**: search used (never the query), filters, sorting.
 - **Friends**: profile save, invitation create/revoke/accept/share/copy, a friend's
   card opened, remove, disable.

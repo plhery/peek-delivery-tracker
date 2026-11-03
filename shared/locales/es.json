@@ -827,6 +827,7 @@
   "settings.menuBarDescription": "Tus próximas entregas, a un clic. Peek sigue abierto cuando cierras su ventana.",
   "settings.openAtLogin": "Abrir al iniciar sesión",
   "settings.openAtLoginApproval": "Para que Peek se abra al iniciar sesión, permítelo en Ajustes del Sistema.",
+  "settings.rate": "Valorar Peek",
   "menuBar.paste": "Pegar número de seguimiento",
   "menuBar.trackWithPeek": "Seguir con Peek",
   "menuBar.open": "Abrir Peek",

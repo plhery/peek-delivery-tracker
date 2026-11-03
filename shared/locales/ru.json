@@ -827,6 +827,7 @@
   "settings.menuBarDescription": "Ближайшие доставки — в один клик. Peek продолжает работать, когда вы закрываете его окно.",
   "settings.openAtLogin": "Открывать при входе в систему",
   "settings.openAtLoginApproval": "Чтобы Peek открывался при входе в систему, разрешите это в Системных настройках.",
+  "settings.rate": "Оценить Peek",
   "menuBar.paste": "Вставить трек-номер",
   "menuBar.trackWithPeek": "Отследить в Peek",
   "menuBar.open": "Открыть Peek",

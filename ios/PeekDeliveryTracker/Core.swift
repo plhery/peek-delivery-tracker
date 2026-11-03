@@ -132,6 +132,15 @@ struct AppConfiguration: Sendable {
     /// Where Peek's code is published.
     static let sourceURL = URL(string: "https://github.com/plhery/peek-delivery-tracker")!
 
+    /// The App Store's page for writing a review of Peek; a Mac opens the Mac App Store's, which sells the same app.
+    static let reviewURL: URL = {
+        #if os(macOS)
+        URL(string: "macappstore://apps.apple.com/app/id6823615370?action=write-review")!
+        #else
+        URL(string: "https://apps.apple.com/app/id6823615370?action=write-review")!
+        #endif
+    }()
+
     /// The app's version, as the App Store shows it.
     static let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
 

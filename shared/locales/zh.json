@@ -827,6 +827,7 @@
   "settings.menuBarDescription": "接下来的包裹，点一下就能看到。关闭窗口后，Peek 会继续运行。",
   "settings.openAtLogin": "登录时打开",
   "settings.openAtLoginApproval": "要让 Peek 在登录时打开，请在系统设置中允许。",
+  "settings.rate": "给 Peek 评分",
   "menuBar.paste": "粘贴运单号",
   "menuBar.trackWithPeek": "用 Peek 跟踪",
   "menuBar.open": "打开 Peek",

@@ -648,7 +648,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'wooliiporter'
   | 'matson'
   | 'schneider'
-  | 'alliance-air-freight';
+  | 'alliance-air-freight'
+  | 'mountain-movers';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

@@ -1358,6 +1358,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "moovin": "moovin",
   "morning-global": "morning-global",
   "motorex": "motorex",
+  "mountain-movers": "mountain-movers",
   "movin": "movin",
   "mrl-global": "mrl-global",
   "mrw": "mrw",
@@ -31670,6 +31671,23 @@ export const CARRIER_TRUCK: TruckGeometry = {
         "type": "polygon",
         "d": "M18.75 8.52L18.03 8.52L18.12 7.97L19.1 7.97L19.1 7.41L17.64 7.41L17.22 10.19L18.76 10.19L18.76 9.63L17.86 9.63L17.95 9.08L18.75 9.08Z",
         "fill": "accent"
+      }
+    ],
+    "mountain-movers": [
+      {
+        "type": "polygon",
+        "d": "M2.8 13.4L19.2 13.4L19.2 12.99L16.17 8.4L15.43 9.29L13.73 5.64L12.44 7.1L10.68 3.6L7.75 8.55L6.73 7.25L5.52 9.6L4.96 8.98L2.8 11.69Z",
+        "fill": "#e6e7e8"
+      },
+      {
+        "type": "polygon",
+        "d": "M9.45 12.32L8.34 12.32L7.83 11.16L7.83 12.95L7.1 12.95L7.1 9.05L7.7 9.05L8.81 11.59L8.97 11.59L10.08 9.05L10.68 9.05L10.68 12.95L9.95 12.95L9.95 11.16Z",
+        "fill": "truck"
+      },
+      {
+        "type": "polygon",
+        "d": "M13.66 12.32L12.55 12.32L12.05 11.16L12.05 12.95L11.32 12.95L11.32 9.05L11.92 9.05L13.03 11.59L13.19 11.59L14.3 9.05L14.9 9.05L14.9 12.95L14.17 12.95L14.17 11.16Z",
+        "fill": "truck"
       }
     ]
   }

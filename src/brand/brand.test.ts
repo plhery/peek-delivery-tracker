@@ -724,6 +724,7 @@ describe('carrier brand', () => {
       'matson',
       'schneider',
       'alliance-air-freight',
+      'mountain-movers',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

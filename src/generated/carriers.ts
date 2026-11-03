@@ -2244,6 +2244,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-sendungsverfolgung",
+      "title": "JRT Sendungsverfolgung: JRT…MM-Nummer, Flüge und DHL",
+      "name": "JRT",
+      "color": "#023053"
+    },
+    {
       "id": "thhy",
       "catalog": "thhy",
       "slug": "tianhui-hengyuan-sendungsverfolgung",

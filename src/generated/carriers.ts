@@ -4256,6 +4256,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Slovenská pošta sledovanie zásielok: podacie číslo a stavy",
       "name": "Slovenská pošta",
       "color": "#f9bb00"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-sledovanie-zasielky",
+      "title": "Sledovanie zásielky GZYL z Číny: číslo YL…YQ a stavy",
+      "name": "GZYL",
+      "color": "#4e79e1"
     }
   ],
   "hu": [

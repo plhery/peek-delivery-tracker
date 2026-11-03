@@ -4298,6 +4298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Magyar Posta nyomkövetés: státuszok, PostaPont, vám",
       "name": "Magyar Posta",
       "color": "#346631"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-csomagkovetes",
+      "title": "GZYL csomagkövetés Kínából: YL…YQ szám, státuszok",
+      "name": "GZYL",
+      "color": "#4e79e1"
     }
   ],
   "ro": [

@@ -6,7 +6,9 @@ import { healthStepRecorder } from './trackingHealth';
 import { SupabaseServiceClient } from './supabase';
 import { trackingSupportEvidence } from './trackingSupport';
 import type { JsonObject } from './types';
-import { captureOperationalError, captureTrackingHealth, logOperationalEvent, reportRoutingEvent, reportTrackingLookup } from './observability';
+import {
+  captureOperationalError, captureTrackingHealth, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingStep,
+} from './observability';
 import { recordHealthIncident, recordRefresh, recordRoutingSignal, recordSyncAnomaly } from './metrics';
 
 // Routing reports and the attempt they belong to stay real: signals travel through them.
@@ -248,6 +250,36 @@ describe('the lookups of a check', () => {
     await interrupted.interrupt();
     expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(interrupted.attemptId,
       expect.objectContaining({ outcome: 'interrupted', lookups: { nacex: 'transport' } }), expect.any(Array), { timeoutMs: 3_000 });
+  });
+
+  it('say on the fetch step which path they took, step by step', async () => {
+    const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true) };
+    const audit = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'poste-italiane', 'in_transit', { trigger: 'package' });
+    await audit.observeFetch(async () => {
+      reportTrackingStep('direct', 'poste-italiane', 'challenge');
+      reportTrackingStep('browser', 'poste-italiane', 'transport');
+      reportTrackingStep('api', '17track', 'ok');
+    });
+    audit.record('fetch', 'succeeded', 1, { source_carrier: 'unknown' });
+    audit.record('normalize', 'succeeded', 1);
+    await audit.finish({ outcome: 'unchanged', sourceCarrier: 'unknown', evaluateHealth: false });
+    const steps = client.completeSyncAttempt.mock.lastCall![2] as { step: string; details: JsonObject }[];
+    expect(steps.find((step) => step.step === 'fetch')!.details).toEqual({
+      source_carrier: 'unknown', lookup_trail: 'poste-italiane direct:challenge>browser:transport; 17track api:ok',
+    });
+    expect(steps.find((step) => step.step === 'normalize')!.details).toEqual({});
+    // A check that ran no lookup step, as one reusing an answer of the run, has no trail; a long one is bounded.
+    const reused = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'poste-italiane', 'in_transit', { trigger: 'package' });
+    reused.record('fetch', 'succeeded', 1, { source_carrier: 'poste-italiane' });
+    expect(reused.lookupTrail).toBeNull();
+    const long = new TrackingSyncAudit(client as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'poste-italiane', 'in_transit', { trigger: 'package' });
+    await long.observeFetch(async () => {
+      for (let index = 0; index < 40; index += 1) reportTrackingStep('direct', 'poste-italiane', 'transport');
+    });
+    expect(long.lookupTrail).toBe(`poste-italiane ${Array(24).fill('direct:transport').join('>')}`);
   });
 
   it('keep at most 32 carriers and providers, each name bounded', async () => {

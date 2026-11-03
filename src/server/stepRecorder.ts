@@ -99,9 +99,14 @@ export const sentryStepRecorder: StepRecorder = {
   },
 };
 
-/** Tells the running check which tiers its lookups went through, such as a browser's, and whom they asked. */
+/**
+ * Tells the running check which tiers its lookups went through, such as a browser's, how each ended (a challenge,
+ * a transport failure, an answer) and whom they asked.
+ */
 const attemptStepRecorder: StepRecorder = {
-  step(record: StepRecord & { networkBytes?: number }) { reportTrackingStep(record.step); },
+  step(record: StepRecord & { networkBytes?: number }) {
+    reportTrackingStep(record.step, record.carrier, stepOutcome(record.outcome, record.error));
+  },
   lookup(record: LookupRecord) { reportTrackingLookup(record.carrier, outcomeLabel(record)); },
 };
 

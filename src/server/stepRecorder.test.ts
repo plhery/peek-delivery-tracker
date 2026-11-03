@@ -132,10 +132,13 @@ describe('sentryStepRecorder', () => {
     expect(await metricsText()).toContain('carrier_lookup_total{carrier="gls-de",final_step="direct",outcome="ok",attempts="1",reason="none"} 1');
   });
 
-  it('tells the running check which tier its lookup went through', () => {
+  it('tells the running check which tier its lookup went through, for whom, and how it ended', () => {
     hostStepRecorder().step({ carrier: 'ups', step: 'trawl', attempt: 1, outcome: 'ok', errorType: null, durationMs: 1,
       fallbackFrom: null, fallbackReason: null, fallbackErrorType: null });
-    expect(observability.reportTrackingStep).toHaveBeenCalledExactlyOnceWith('trawl');
+    expect(observability.reportTrackingStep).toHaveBeenCalledExactlyOnceWith('trawl', 'ups', 'ok');
+    hostStepRecorder().step({ carrier: 'poste-italiane', step: 'direct', attempt: 1, outcome: 'challenge', errorType: 'ChallengeError',
+      durationMs: 1, fallbackFrom: null, fallbackReason: null, fallbackErrorType: null });
+    expect(observability.reportTrackingStep).toHaveBeenLastCalledWith('direct', 'poste-italiane', 'challenge');
   });
 
   it('tells the running check whom its lookup asked and how it ended', () => {

@@ -28,7 +28,7 @@ export interface RoutingSignal {
 interface TrackingAttempt {
   id: string;
   signal?: (signal: RoutingSignal) => void;
-  step?: (step: string) => void;
+  step?: (step: string, carrier?: string, outcome?: string) => void;
   lookup?: (carrier: string, outcome: string) => void;
   browser?: () => void;
 }
@@ -38,12 +38,13 @@ const trackingAttempts = new AsyncLocalStorage<TrackingAttempt>();
 
 /**
  * `signal` receives the routing signals reported while the operation runs, `step`
- * each lookup tier that runs (`direct`, `trawl` and the like), `lookup` each
+ * each lookup tier that runs (`direct`, `trawl` and the like) with its carrier and outcome, `lookup` each
  * carrier or provider asked, with how its lookup ended, and `browser` each call
  * to the browser service that can open a browser.
  */
 export function withTrackingAttempt<T>(
-  attemptId: string, operation: () => T, signal?: (signal: RoutingSignal) => void, step?: (step: string) => void,
+  attemptId: string, operation: () => T, signal?: (signal: RoutingSignal) => void,
+  step?: (step: string, carrier?: string, outcome?: string) => void,
   lookup?: (carrier: string, outcome: string) => void, browser?: () => void,
 ): T {
   return trackingAttempts.run({ id: attemptId, signal, step, lookup, browser }, operation);
@@ -53,9 +54,9 @@ export function trackingAttemptId(): string | undefined {
   return trackingAttempts.getStore()?.id;
 }
 
-/** Tells the running check which lookup tier ran. */
-export function reportTrackingStep(step: string): void {
-  trackingAttempts.getStore()?.step?.(step);
+/** Tells the running check which lookup tier ran, for which carrier or provider, and how it ended. */
+export function reportTrackingStep(step: string, carrier?: string, outcome?: string): void {
+  trackingAttempts.getStore()?.step?.(step, carrier, outcome);
 }
 
 /** Tells the running check that a lookup asked the browser service for a page it can open a browser for. */

@@ -129,7 +129,11 @@ All tables and views here are service-role only.
   `not_asked` when the check ran none, as while it waits out an earlier failure, reuses an
   answer of the run or has no adapter. A `fetch` that reused answers another copy of
   its number got earlier in the same scheduled run counts them in `shared_answers`, as it
-  does the failure of a carrier whose own browser already failed in the run.
+  does the failure of a carrier whose own browser already failed in the run. A `fetch` whose
+  lookups ran a step has `lookup_trail`, the path they took: each carrier or provider asked, in
+  order, with its steps and how each ended, such as `poste-italiane direct:challenge>browser:ok;
+  17track api:ok` for a challenged lookup the browser answered, at most 24 steps. It holds ids
+  and outcome kinds, never a number.
 
 Completed rows are kept for 90 days. A check cut off at shutdown ends `interrupted`, with
 its `tracking_sync_completed` line; one whose worker died is marked `abandoned` when its

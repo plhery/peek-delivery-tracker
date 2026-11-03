@@ -195,6 +195,9 @@ function noteHealthIncident(incident: JsonObject): void {
  * (adapterRegistry.ts): a `trawl` step that only sends a plain HTTP request through the service opens none.
  */
 const LOCAL_BROWSER_STEP = 'browser';
+/** A lookup trail keeps this many steps, and its text this many characters. */
+const TRAIL_STEPS = 24;
+const TRAIL_CHARS = 500;
 
 export class TrackingSyncAudit {
   readonly attemptId = randomUUID();
@@ -214,7 +217,18 @@ export class TrackingSyncAudit {
   };
   /** Whether the check's lookups went through a browser; null while no lookup tier ran. */
   #browser: boolean | null = null;
-  readonly #step = (step: string): void => { this.#browser = this.#browser === true || step === LOCAL_BROWSER_STEP; };
+  /** The steps the check's lookups ran, in order, each carrier's run of them together. */
+  readonly #trail: { carrier: string; steps: string[] }[] = [];
+  #trailSteps = 0;
+  readonly #step = (step: string, carrier?: string, outcome?: string): void => {
+    this.#browser = this.#browser === true || step === LOCAL_BROWSER_STEP;
+    if (!carrier || !outcome || this.#trailSteps >= TRAIL_STEPS) return;
+    const name = carrier.slice(0, 40), last = this.#trail.at(-1);
+    const entry = `${step.slice(0, 20)}:${outcome.slice(0, 20)}`;
+    if (last?.carrier === name) last.steps.push(entry);
+    else this.#trail.push({ carrier: name, steps: [entry] });
+    this.#trailSteps += 1;
+  };
   readonly #browserCall = (): void => { this.#browser = true; };
   /** The carriers and providers the check's lookups asked, with how each ended; a success stays. */
   readonly #lookups = new Map<string, string>();
@@ -253,6 +267,16 @@ export class TrackingSyncAudit {
   }
 
   /**
+   * Which path the check's lookups took: each carrier or provider asked, in order, with its steps and how each ended,
+   * such as `poste-italiane direct:challenge>browser:ok; 17track api:ok`. Ids and kinds only, never a number. Null
+   * when no lookup step ran.
+   */
+  get lookupTrail(): string | null {
+    return this.#trail.length
+      ? this.#trail.map(({ carrier, steps }) => `${carrier} ${steps.join('>')}`).join('; ').slice(0, TRAIL_CHARS) : null;
+  }
+
+  /**
    * Whether a lookup of the check opened a browser. Null when none ran, as when the check
    * took an answer another copy of the number got in the same run.
    */
@@ -287,13 +311,15 @@ export class TrackingSyncAudit {
     details: JsonObject = {},
     error?: unknown,
   ): void {
+    // A fetch says which path its lookups took.
+    const trail = step === 'fetch' ? this.lookupTrail : null;
     const stored: StoredStep = {
       sequence: this.#steps.length + 1,
       step,
       status,
       occurred_at: new Date().toISOString(),
       duration_ms: durationMs == null ? null : Math.max(0, Math.round(durationMs)),
-      details: safeDetails(details),
+      details: safeDetails(trail ? { ...details, lookup_trail: trail } : details),
       error_type: error === undefined ? null : errorType(error),
     };
     this.#steps.push(stored);

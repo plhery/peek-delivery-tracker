@@ -431,6 +431,31 @@ class ParcelSearchTest {
         assertEquals(listOf("search"), searches())
     }
 
+    /**
+     * X-AD24: the list keeps clear of the keyboard, as the iPhone's keeps to the keyboard's safe area: typing a search,
+     * the list scrolls to its end, past its last result, above the keyboard, which is taller than the tab bar; once the
+     * keyboard has gone, to its end over the tab bar again.
+     */
+    @Test
+    fun withTheKeyboardUpTheListScrollsToItsEndAboveIt() {
+        show()
+        openSearch()
+        type("e")
+        assertTrue(focused(SEARCH_FIELD))
+        val height = windowHeight()
+        keyboard(336)
+        compose.waitForIdle()
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
+        val foot = compose.onNodeWithTag(FOOT).getUnclippedBoundsInRoot().bottom.value
+        assertTrue("The list's end at $foot, the keyboard's top at ${height - 336}", foot <= height - 336)
+
+        keyboard(0)
+        compose.waitForIdle()
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
+        val over = compose.onNodeWithTag(FOOT).getUnclippedBoundsInRoot().bottom.value
+        assertTrue("The list's end at $over, under where the keyboard's top was", over > height - 336)
+    }
+
     @Test
     fun theSheetComesUpToItsMediumHeightAndADragTakesItBetweenItsHeights() {
         show()

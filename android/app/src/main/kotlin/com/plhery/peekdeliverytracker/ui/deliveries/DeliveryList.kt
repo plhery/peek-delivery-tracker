@@ -20,12 +20,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -79,6 +81,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
@@ -180,11 +183,13 @@ internal fun DeliveryList(state: DeliveriesState) {
     val rowTop = barRowTop()
     val barBottom = rowTop + BAR_HEIGHT
     // The content's own 28 under the 8 the iPhone keeps above its tab bar, and over the toast while one shows, as its
-    // `safeAreaInset` raises the list.
+    // `safeAreaInset` raises the list. Above the keyboard where it stands higher than the tab bar, as the iPhone's list
+    // keeps to the keyboard's safe area: with the search typed into, its last result scrolls above the keyboard.
     var controls by remember { mutableIntStateOf(0) }
     val density = LocalDensity.current
     val raised = if (controls > 0) with(density) { controls.toDp() } + CONTROLS_SPACING else 0.dp
-    val bottom = padding.calculateBottomPadding() + BOTTOM_SPACING + BOTTOM_PADDING + raised
+    val keyboard = with(density) { WindowInsets.ime.getBottom(this).toDp() }
+    val bottom = max(padding.calculateBottomPadding(), keyboard) + BOTTOM_SPACING + BOTTOM_PADDING + raised
 
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val notice = errorMessage?.let { ListItem.Notice(it, authenticationRequired, cached) }

@@ -60,6 +60,7 @@ import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.platform.CacheExportFiles
+import com.plhery.peekdeliverytracker.platform.SitePage
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
@@ -397,10 +398,10 @@ private fun SettingsRootPage(
                             SettingsButtonRow(accountTitle(source.isDemo, source.isGuest), SETTINGS_ACCOUNT_DATA, { onPush(PAGE_DATA) }, chevron = true)
                         }
                         SettingsDivider()
-                        // The site's landing, which the app itself never shows, and a mail to Peek under the version
-                        // it would be about. The landing opens in the phone's browser: the app has no in-app one.
+                        // The site's landing, which the app itself never shows, inside the app as the iPhone's
+                        // SafariPage sheet ([SitePage]), and a mail to Peek under the version it would be about.
                         SettingsButtonRow(
-                            localized("app.homePage"), SETTINGS_HOME_PAGE, { uriHandler.openUri(source.homePageUrl) },
+                            localized("app.homePage"), SETTINGS_HOME_PAGE, { SitePage.open(context, source.homePageUrl, uriHandler) },
                             value = hostOf(source.homePageUrl), chevron = true,
                         )
                         SettingsDivider()

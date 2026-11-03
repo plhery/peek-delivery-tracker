@@ -1,12 +1,16 @@
 package com.plhery.peekdeliverytracker.ui.settings
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.provider.Settings
 import android.view.KeyEvent
 import android.view.View
 import androidx.activity.ComponentActivity
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsService
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalView
@@ -192,6 +196,31 @@ class SettingsTest {
     }
 
     private fun started(): Intent? = shadowOf(compose.activity).nextStartedActivity
+
+    /**
+     * A browser installed and the phone's default, as `CustomTabsClient.getPackageName` finds one: it opens web
+     * addresses and offers Custom Tabs.
+     */
+    private fun browser() {
+        val packages = shadowOf(compose.activity.packageManager)
+        val page = ComponentName(BROWSER, "$BROWSER.Page")
+        packages.addActivityIfNotPresent(page)
+        packages.addIntentFilterForActivity(
+            page,
+            IntentFilter(Intent.ACTION_VIEW).apply {
+                addCategory(Intent.CATEGORY_DEFAULT)
+                addCategory(Intent.CATEGORY_BROWSABLE)
+                addDataScheme("http")
+                addDataScheme("https")
+            },
+        )
+        val tabs = ComponentName(BROWSER, "$BROWSER.Tabs")
+        packages.addServiceIfNotPresent(tabs)
+        packages.addIntentFilterForService(tabs, IntentFilter(CustomTabsService.ACTION_CUSTOM_TABS_CONNECTION))
+    }
+
+    /** Whether `intent` opens a Custom Tab of the made-up browser rather than leaving for a browser. */
+    private fun customTab(intent: Intent): Boolean = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION) && intent.`package` == BROWSER
 
     /** A key pressed and let go on a hardware keyboard, with `meta` held, through the window as the system sends it. */
     private fun press(key: Int, meta: Int) {
@@ -591,6 +620,26 @@ class SettingsTest {
         assertEquals(source.privacyUrl, started()?.dataString)
     }
 
+    /**
+     * X-AD27: the example email opens inside the app, as the iPhone's SafariPage sheet, in a Custom Tab of the phone's
+     * browser; the privacy notice beside it leaves for the browser, as its `Link`.
+     */
+    @Test
+    fun theDeliveryEmailsExampleOpensInACustomTabAndItsPrivacyNoticeInTheBrowser() {
+        browser()
+        show { signedInWithEmail(choice = false) }
+        open()
+        tap(SETTINGS_DELIVERY_UPDATES)
+        tap(SETTINGS_DELIVERY_EMAIL_EXAMPLE)
+        val example = started()!!
+        assertEquals("https://example.com/email/example?lang=en", example.dataString)
+        assertTrue("A Custom Tab", customTab(example))
+        tap(SETTINGS_DELIVERY_EMAIL_PRIVACY)
+        val privacy = started()!!
+        assertEquals(source.privacyUrl, privacy.dataString)
+        assertFalse("No Custom Tab", privacy.hasExtra(CustomTabsIntent.EXTRA_SESSION))
+    }
+
     @Test
     fun aWindowMadeAgainWhileTheEmailSavesStillHearsItsAnswer() {
         val recreation = Recreation(compose)
@@ -699,7 +748,30 @@ class SettingsTest {
         tap(SETTINGS_PRIVACY)
         assertEquals(source.privacyUrl, started()?.dataString)
     }
+
+    /**
+     * X-AD27: the home page opens inside the app, as the iPhone's SafariPage sheet, in a Custom Tab of the phone's
+     * browser; the privacy notice leaves for the browser, as its `Link`.
+     */
+    @Test
+    fun theHomePageOpensInACustomTabAndThePrivacyNoticeInTheBrowser() {
+        browser()
+        show()
+        open()
+        tap(SETTINGS_HOME_PAGE)
+        val home = started()!!
+        assertEquals(source.homePageUrl, home.dataString)
+        assertTrue("A Custom Tab", customTab(home))
+        tap(SETTINGS_ACCOUNT_DATA)
+        tap(SETTINGS_PRIVACY)
+        val privacy = started()!!
+        assertEquals(source.privacyUrl, privacy.dataString)
+        assertFalse("No Custom Tab", privacy.hasExtra(CustomTabsIntent.EXTRA_SESSION))
+    }
 }
+
+/** A made-up browser's package. */
+private const val BROWSER = "com.example.browser"
 
 /** A window's view that keeps the ticks it is asked to play. */
 private class FeelingView(context: Context) : View(context) {

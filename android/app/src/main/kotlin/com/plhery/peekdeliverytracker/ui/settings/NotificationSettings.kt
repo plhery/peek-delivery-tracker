@@ -49,6 +49,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreferencesDraft
 import com.plhery.peekdeliverytracker.core.NotificationPreset
+import com.plhery.peekdeliverytracker.platform.SitePage
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
@@ -193,11 +194,13 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
                 onChange = setEmail,
                 saving = emailChoice != null,
                 failed = emailFailed,
+                // The privacy notice in the browser, as the iPhone's `Link`; the example inside the app, as its
+                // SafariPage sheet ([SitePage]).
                 onPrivacy = { uriHandler.openUri(source.privacyUrl) },
                 onExample = example?.let {
                     {
                         source.action("email-example-open")
-                        uriHandler.openUri(it)
+                        SitePage.open(context, it, uriHandler)
                     }
                 },
             )

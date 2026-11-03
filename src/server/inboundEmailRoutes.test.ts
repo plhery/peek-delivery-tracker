@@ -13,7 +13,7 @@ import { SupabaseError, SupabaseServiceClient, SupabaseUserClient, type InboundM
 const userId = '5b000000-0000-4000-a000-000000000001';
 const UPS = '1Z999AA10123456784';
 const DHL = 'JJD000390000000001';
-const SECRET = 'synthetic-inbound-secret-0123456789abcdef';
+const SECRET = 'synthetic-inbound-secret-0123456789abcdef'; // gitleaks:allow -- made-up signing secret, used only in tests
 const token = 'abcdefghijklmnop';
 const recipient = `add+${token}@in.example.com`;
 const none = { params: Promise.resolve({}) };

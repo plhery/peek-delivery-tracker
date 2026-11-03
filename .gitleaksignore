@@ -34,3 +34,8 @@ e2859c6ff881a16dc29553f07f06e190aa127a90:src/server/supabase.test.ts:generic-api
 # The IndexNow key, public by design: public/<key>.txt serves it to every engine.
 # The current declaration carries an inline annotation; this covers its original commit.
 a3e648c740d12fc7b33813d0a6386654ce59f146:scripts/indexnow.mjs:generic-api-key:20
+
+# Made-up signing secrets in the tests of adding parcels by email, never used by a server.
+# The current lines carry inline annotations; these cover their original commit.
+41bc6a58cdc5c7faccdbd2d3e7e4d6d462fb60a2:src/server/inboundEmail/settings.test.ts:generic-api-key:12
+41bc6a58cdc5c7faccdbd2d3e7e4d6d462fb60a2:src/server/inboundEmailRoutes.test.ts:generic-api-key:16

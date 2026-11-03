@@ -9,7 +9,7 @@ import {
   verifyInboundSignature,
 } from './settings';
 
-const SECRET = 'synthetic-inbound-secret-0123456789abcdef';
+const SECRET = 'synthetic-inbound-secret-0123456789abcdef'; // gitleaks:allow -- made-up signing secret, used only in tests
 const env = (values: Record<string, string>) => ({ INBOUND_EMAIL_SECRET: SECRET, ...values }) as unknown as NodeJS.ProcessEnv;
 
 describe('the settings', () => {

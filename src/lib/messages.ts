@@ -149,9 +149,16 @@ export function trackingFailureMessage(error: string | undefined, t: Translate):
   return t((Object.hasOwn(messages, kind) ? messages[kind] : 'detail.trackingUnavailable') as MessageKey);
 }
 
+/** A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". */
 export function localizedDeliveryWindow(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now()): string {
   const end = localizedExpectedDelivery(to, t, languageTag, now);
   if (!from || !Number.isFinite(Date.parse(from)) || !Number.isFinite(Date.parse(to)) || Date.parse(from) >= Date.parse(to)) return end;
+  const timed = (value: string) => /T\d{2}:\d{2}/.test(value);
+  const [first, last] = [new Date(from), new Date(to)];
+  if (timed(from) && timed(to) && first.toDateString() === last.toDateString()) {
+    const clock = new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+    return dayAndTime(localizedDeliveryDate(first, t, languageTag, now), `${clock.format(first)}–${clock.format(last)}`, languageTag);
+  }
   const start = localizedExpectedDelivery(from, t, languageTag, now);
   return `${start} – ${end}`;
 }

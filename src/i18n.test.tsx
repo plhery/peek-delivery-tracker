@@ -94,6 +94,18 @@ describe('localization', () => {
       expect(localizedDeliveryWindow(from, '2026-09-11', t, 'en-CH', now)).toBe('Fri 11 Sep');
     }
   });
+
+  it('names the day of a window within one day once', () => {
+    const now = new Date(2026, 8, 9, 12).getTime();
+    const at = (day: number, hour: number) => new Date(2026, 8, day, hour).toISOString();
+    const t: Translate = (key, variables) => translate('en', key, variables);
+    expect(localizedDeliveryWindow(at(11, 10), at(11, 14), t, 'en-CH', now)).toBe('Fri 11 Sep, 10:00–14:00');
+    expect(localizedDeliveryWindow(at(10, 8), at(10, 18), t, 'en-CH', now)).toBe('tomorrow, 08:00–18:00');
+    expect(localizedDeliveryWindow(at(11, 10), at(11, 14), (key) => translate('zh', key), 'zh-CN', now)).toBe('9月11日周五 10:00–14:00');
+    // Across midnight, or from a day to a time, both ends keep their day.
+    expect(localizedDeliveryWindow(at(10, 22), at(11, 2), t, 'en-CH', now)).toBe('tomorrow, 22:00 – Fri 11 Sep, 02:00');
+    expect(localizedDeliveryWindow('2026-09-11', at(11, 14), t, 'en-CH', now)).toBe('Fri 11 Sep – Fri 11 Sep, 14:00');
+  });
   it('detects all supported Swiss languages and falls back to English', () => {
     expect(detectLocale(['de-CH'])).toBe('de');
     expect(detectLocale(['rm-CH', 'it-CH'])).toBe('it');

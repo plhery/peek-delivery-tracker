@@ -55,6 +55,18 @@ class LocalizationTests {
         }
     }
 
+    @Test
+    fun deliveryWindowNamesTheDayOfAWindowWithinOneDayOnce() {
+        val localizer = Localizer(AppLanguage.En)
+        val now = assertNotNull(DateParser.deliveryDate("2026-09-09"))
+        fun at(day: String, hour: Int) = DateParser.isoString(settingTime(assertNotNull(DateParser.deliveryDate(day)), hour = hour, minute = 0))
+        assertEquals("Fri 11 Sep, 10:00–14:00", localizer.deliveryWindow(at("2026-09-11", 10), at("2026-09-11", 14), now = now))
+        assertEquals("tomorrow, 08:00–18:00", localizer.deliveryWindow(at("2026-09-10", 8), at("2026-09-10", 18), now = now))
+        // Across midnight, or from a day to a time, both ends keep their day.
+        assertEquals("tomorrow, 22:00 – Fri 11 Sep, 02:00", localizer.deliveryWindow(at("2026-09-10", 22), at("2026-09-11", 2), now = now))
+        assertEquals("Fri 11 Sep – Fri 11 Sep, 14:00", localizer.deliveryWindow("2026-09-11", at("2026-09-11", 14), now = now))
+    }
+
     /** The iPad's variant, as `Localizer(onPad: true)` reads it. */
     @Test
     fun anIPadReadsItsOwnNameWhereTheCopyNamesTheIPhone() {

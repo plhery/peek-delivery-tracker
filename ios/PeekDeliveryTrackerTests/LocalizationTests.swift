@@ -41,6 +41,20 @@ final class LocalizationTests: XCTestCase {
         }
     }
 
+    func testDeliveryWindowNamesTheDayOfAWindowWithinOneDayOnce() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let now = try XCTUnwrap(DateParser.deliveryDate("2026-09-09"))
+        func at(_ day: Int, _ hour: Int) throws -> String {
+            DateParser.isoString(try XCTUnwrap(Calendar.current.date(from: DateComponents(year: 2026, month: 9, day: day, hour: hour))))
+        }
+        XCTAssertEqual(localizer.deliveryWindow(from: try at(11, 10), to: try at(11, 14), now: now), "Fri 11 Sep, 10:00–14:00")
+        XCTAssertEqual(localizer.deliveryWindow(from: try at(10, 8), to: try at(10, 18), now: now), "tomorrow, 08:00–18:00")
+        // Across midnight, or from a day to a time, both ends keep their day.
+        XCTAssertEqual(localizer.deliveryWindow(from: try at(10, 22), to: try at(11, 2), now: now), "tomorrow, 22:00 – Fri 11 Sep, 02:00")
+        XCTAssertEqual(localizer.deliveryWindow(from: "2026-09-11", to: try at(11, 14), now: now), "Fri 11 Sep – Fri 11 Sep, 14:00")
+    }
+
     func testAnIPadReadsItsOwnNameWhereTheCopyNamesTheIPhone() throws {
         let dictionaries = try localizationDictionaries()
         let variants = try XCTUnwrap(dictionaries["en"]).keys.filter { $0.hasSuffix(".ipad") }

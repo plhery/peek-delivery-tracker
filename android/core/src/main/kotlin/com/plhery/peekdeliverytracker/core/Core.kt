@@ -289,12 +289,20 @@ class Localizer(
         return text(trackingMessages.failures[canonical(kind)] ?: "detail.trackingUnavailable")
     }
 
+    /** A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". */
     fun deliveryWindow(from: String?, to: String, now: Instant = Instant.now()): String {
         val end = expectedDelivery(to, now)
         if (from == null) return end
         val startDate = DateParser.deliveryDate(from) ?: return end
         val endDate = DateParser.deliveryDate(to) ?: return end
         if (startDate >= endDate) return end
+        if (from.contains("T") && to.contains("T")) {
+            val start = DateParser.date(from)
+            val finish = DateParser.date(to)
+            if (start != null && finish != null && localDay(start) == localDay(finish)) {
+                return dayAndTime(expectedDelivery(localDay(start), now), "${clockTime(start)}–${clockTime(finish)}")
+            }
+        }
         return "${expectedDelivery(from, now)} – $end"
     }
 
@@ -330,6 +338,10 @@ class Localizer(
         return "${twoDigits(fields.hour)}:${twoDigits(fields.minute)}"
     }
 
+    /** A timestamp's day here, as "yyyy-MM-dd" in en_US_POSIX writes it: the year of the era, of four digits at least. */
+    private fun localDay(timestamp: Instant): String =
+        fields(timestamp).let { "${it.yearOfEra.toString().padStart(4, '0')}-${twoDigits(it.month)}-${twoDigits(it.dayOfMonth)}" }
+
     fun expectedDelivery(value: String, now: Instant = Instant.now()): String {
         val match = deliveryWindowPattern?.matcher(value)
         if (match != null && match.find()) {
@@ -342,9 +354,7 @@ class Localizer(
         val date = DateParser.deliveryDate(value) ?: return value
         if (value.contains("T")) {
             DateParser.date(value)?.let { timestamp ->
-                // "yyyy-MM-dd" in en_US_POSIX: the year of the era, of four digits at least.
-                val day = fields(timestamp).let { "${it.yearOfEra.toString().padStart(4, '0')}-${twoDigits(it.month)}-${twoDigits(it.dayOfMonth)}" }
-                return dayAndTime(expectedDelivery(day, now), clockTime(timestamp))
+                return dayAndTime(expectedDelivery(localDay(timestamp), now), clockTime(timestamp))
             }
         }
         return deliveryDate(date, now)

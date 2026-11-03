@@ -380,10 +380,16 @@ final class Localizer: ObservableObject {
         return text(trackingMessages.failures[kind] ?? "detail.trackingUnavailable")
     }
 
+    /// A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00".
     func deliveryWindow(from: String?, to: String, now: Date = Date()) -> String {
         let end = expectedDelivery(to, now: now)
         guard let from, let startDate = DateParser.deliveryDate(from),
               let endDate = DateParser.deliveryDate(to), startDate < endDate else { return end }
+        if from.contains("T"), to.contains("T"), let start = DateParser.date(from), let finish = DateParser.date(to),
+           Calendar.current.isDate(start, inSameDayAs: finish) {
+            let day = formatter("yyyy-MM-dd", posix: true, gregorian: true).string(from: start)
+            return "\(expectedDelivery(day, now: now)), \(clockTime(start))–\(clockTime(finish))"
+        }
         return "\(expectedDelivery(from, now: now)) – \(end)"
     }
 

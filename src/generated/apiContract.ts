@@ -17178,6 +17178,7 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Kerry Express Hong Kong",
       "Kerry Express (Hong Kong)",
+      "Kerry Express (HK)",
       "KEX Express (Hong Kong)",
       "嘉里快遞"
     ],
@@ -48428,7 +48429,7 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "DE"
     ],
-    "color": "#3c5879",
+    "color": "#eb5e50",
     "selectable": true,
     "timezone": "Europe/Berlin",
     "tracking": {
@@ -48495,6 +48496,38 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/fmd.pol/facts.htm"
+  },
+  "jas-worldwide": {
+    "displayName": "JAS Worldwide",
+    "aliases": [
+      "JAS Worldwide Logistics",
+      "JAS Forwarding Worldwide",
+      "JAS Forwarding (USA)"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#0085ca",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://myjas.com/public/shipments?shipmentNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "myjas.com"
+        ],
+        "pathPattern": "^/public/shipments$",
+        "params": [
+          "shipmentNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.jas.com/"
   }
 } as const;
 
@@ -49882,7 +49915,8 @@ export const CARRIER_IDS = [
   "mountain-movers",
   "cargo-trans-logistik",
   "edi-express",
-  "fmd-distribution"
+  "fmd-distribution",
+  "jas-worldwide"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

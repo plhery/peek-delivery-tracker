@@ -6,11 +6,11 @@ published: 2026-10-28
 updated: 2026-10-28
 ---
 
-TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZR and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
+TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZ and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
 
 ## TopYou tracking number: what it looks like
 
-TopYou's waybills are TYZR, one letter, ten digits and YQ, 17 characters in all. With invented digits:
+TopYou's waybills are TYZR, one letter, ten digits and YQ, 17 characters in all; some have another letter in place of the R. With invented digits:
 
 | Number | What it is |
 | --- | --- |
@@ -95,7 +95,7 @@ As of 28 October 2026, Peek couldn't check TopYou's website, so it lists no cont
 
 ## Track a TopYou parcel with Peek
 
-[Peek](/) recognises a TopYou number by its shape: TYZR, a letter, ten digits and YQ, which no other carrier in its catalog uses, and asks TopYou's tracker by that number only. If all you have is the delivering carrier's number, paste that instead: Peek follows more than 3,500 carriers.
+[Peek](/) recognises a TopYou number by its shape: TYZR, a letter, ten digits and YQ, which no other carrier in its catalog uses. With another letter in place of the R, the shape is only a weak match: Peek shows "Checking tracking services…" and asks TopYou's tracker whether it knows the number. Peek asks TopYou's tracker about numbers of these two shapes only. If all you have is the delivering carrier's number, paste that instead: Peek follows more than 3,500 carriers.
 
 Peek reads TopYou's own tracker and shows the status, each scan in the words of TopYou or of the carrier it relays, the destination country and the weight on TopYou's record. A place that is only a country is left off TopYou's own scans, so the airport scan in China doesn't look like it's in your country. When TopYou's record marks the parcel delivered or returned, Peek shows "Delivered" or "Returned to sender", even if the last scan's words don't. TopYou's own scans are on Beijing time. For the delivering carrier's scans it relays, TopYou's tracker doesn't always give the right time zone, so Peek works out their time; it shows them all in your device's time zone. There's no expected delivery date: TopYou gives none.
 
@@ -107,7 +107,7 @@ Peek checks every 10 minutes, or hourly once TopYou has gone quiet: after 12 hou
 
 ### What is TopYou (通邮)?
 
-It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China, with international lines. Its waybills are TYZR, a letter, ten digits and YQ.
+It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China, with international lines. Its waybills are TYZR, a letter, ten digits and YQ, some with another letter in place of the R.
 
 ### Why does TopYou show my country before my parcel has left China?
 

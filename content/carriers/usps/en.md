@@ -85,7 +85,7 @@ Read on usps.com on 13 October 2026:
 
 Peek opens USPS's tracking page in a browser on its own server. That is slower, and USPS can refuse it; tracking services then fill in, though they don't always hold USPS's history. Peek shows the status, each scan on a map, its time read in the state where it happened and shown in your device's time zone, and the expected delivery day, and can notify you at every scan, at important steps or on delivery day only. It drops the signatory and delivery instructions.
 
-Statuses stay in USPS's English; delivered scans read "Delivered". When [UPS](carrier:ups) or [FedEx](carrier:fedex) hand a parcel to USPS, or a parcel from abroad reaches the US, Peek can follow it on USPS once USPS shows progress. Redelivery and Informed Delivery stay on usps.com.
+Statuses stay in USPS's English; delivered scans read "Delivered", except a returned parcel's delivery back to its sender, which reads "Returned to the sender". When [UPS](carrier:ups) or [FedEx](carrier:fedex) hand a parcel to USPS, or a parcel from abroad reaches the US, Peek can follow it on USPS once USPS shows progress. Redelivery and Informed Delivery stay on usps.com.
 
 ## Questions about USPS tracking
 

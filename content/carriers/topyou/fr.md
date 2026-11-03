@@ -6,11 +6,11 @@ published: 2026-10-30
 updated: 2026-10-30
 ---
 
-TopYou (通邮, Tongyou, aussi 通邮集团 ou SZTY56) est 深圳市通邮物流科技（集团）股份有限公司, un transitaire de Shenzhen, en Chine, qui fait voyager des colis sur ses propres lignes internationales. Si une boutique chinoise a confié ta commande à TopYou, ton numéro commence par TYZR et finit par YQ : colle-le dans le champ ci-dessus. Le suivi de TopYou va de son entrepôt en Chine jusqu'à ton pays, vol et douane compris ; un transporteur local prend ensuite le relais.
+TopYou (通邮, Tongyou, aussi 通邮集团 ou SZTY56) est 深圳市通邮物流科技（集团）股份有限公司, un transitaire de Shenzhen, en Chine, qui fait voyager des colis sur ses propres lignes internationales. Si une boutique chinoise a confié ta commande à TopYou, ton numéro commence par TYZ et finit par YQ : colle-le dans le champ ci-dessus. Le suivi de TopYou va de son entrepôt en Chine jusqu'à ton pays, vol et douane compris ; un transporteur local prend ensuite le relais.
 
 ## Numéro de suivi TopYou : à quoi il ressemble
 
-Un numéro TopYou, c'est TYZR, une lettre, dix chiffres et YQ : 17 caractères en tout. Avec des chiffres inventés :
+Un numéro TopYou, c'est TYZR, une lettre, dix chiffres et YQ : 17 caractères en tout ; certains ont une autre lettre à la place du R. Avec des chiffres inventés :
 
 | Numéro | Ce que c'est |
 | --- | --- |
@@ -98,7 +98,7 @@ Au 30 octobre 2026, Peek n'a pas pu vérifier le site de TopYou : pas de contact
 
 ## Suivre un colis TopYou avec Peek
 
-[Peek](/) reconnaît un numéro TopYou à sa forme, qu'aucun autre transporteur de son catalogue n'utilise, et n'interroge TopYou qu'avec ces numéros-là. Si tu n'as que le numéro du transporteur local, colle-le quand même : Peek suit plus de 3 500 transporteurs. Si Peek ne reconnaît pas le transporteur, choisis-le avec « Changer ».
+[Peek](/) reconnaît un numéro TopYou à sa forme (TYZR, une lettre, dix chiffres et YQ), qu'aucun autre transporteur de son catalogue n'utilise. Si une autre lettre remplace le R, la forme n'est qu'un indice faible : Peek affiche « Vérification des services de suivi… » et demande à TopYou s'il connaît le numéro. Peek n'interroge TopYou qu'avec des numéros de ces deux formes. Si tu n'as que le numéro du transporteur local, colle-le quand même : Peek suit plus de 3 500 transporteurs. Si Peek ne reconnaît pas le transporteur, choisis-le avec « Changer ».
 
 Peek lit le site de TopYou et affiche le statut, chaque scan dans les mots de TopYou ou du transporteur dont il reprend les scans, le pays de destination et le poids enregistré par TopYou. Quand la fiche TopYou marque le colis livré ou renvoyé, Peek affiche « Livré » ou « Retourné à l’expéditeur », même si la dernière ligne dit autre chose. Les scans de TopYou sont à l'heure de Pékin. Pour ceux du transporteur local qu'il reprend, le site de TopYou n'indique pas toujours le bon fuseau horaire : Peek en retrouve l'heure, et affiche tous les scans dans le fuseau de ton appareil. Pas de date de livraison prévue : TopYou n'en donne pas.
 
@@ -110,7 +110,7 @@ Peek vérifie toutes les 10 minutes, puis toutes les heures quand TopYou ne donn
 
 ### C'est quoi, TopYou (通邮) ?
 
-深圳市通邮物流科技（集团）股份有限公司, dit 通邮 ou 通邮集团, aussi Tongyou ou SZTY56, est un transitaire de Shenzhen, en Chine, avec ses propres lignes internationales. Ses numéros : TYZR, une lettre, dix chiffres et YQ.
+深圳市通邮物流科技（集团）股份有限公司, dit 通邮 ou 通邮集团, aussi Tongyou ou SZTY56, est un transitaire de Shenzhen, en Chine, avec ses propres lignes internationales. Ses numéros : TYZR, une lettre, dix chiffres et YQ, parfois avec une autre lettre à la place du R.
 
 ### Qui livre les colis TopYou en France, en Belgique et en Suisse ?
 

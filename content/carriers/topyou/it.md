@@ -6,11 +6,11 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-TopYou (通邮, Tongyou, anche 通邮集团 o SZTY56) è 深圳市通邮物流科技（集团）股份有限公司, uno spedizioniere internazionale di Shenzhen, in Cina, che gestisce linee verso l'estero. Se un negozio online cinese ha spedito il tuo ordine con TopYou, il codice che ti ha dato inizia con TYZR e finisce con YQ: incollalo nel box qui sopra. Il tracking di TopYou segue il pacco dal suo magazzino in Cina fino in Italia, volo e dogana compresi. Poi il pacco passa al corriere che lo consegna.
+TopYou (通邮, Tongyou, anche 通邮集团 o SZTY56) è 深圳市通邮物流科技（集团）股份有限公司, uno spedizioniere internazionale di Shenzhen, in Cina, che gestisce linee verso l'estero. Se un negozio online cinese ha spedito il tuo ordine con TopYou, il codice che ti ha dato inizia con TYZ e finisce con YQ: incollalo nel box qui sopra. Il tracking di TopYou segue il pacco dal suo magazzino in Cina fino in Italia, volo e dogana compresi. Poi il pacco passa al corriere che lo consegna.
 
 ## Codice di tracking TopYou: com'è fatto
 
-Un codice TopYou è fatto di TYZR, una lettera, dieci cifre e YQ: 17 caratteri in tutto. Con cifre inventate:
+Un codice TopYou è fatto di TYZR, una lettera, dieci cifre e YQ: 17 caratteri in tutto. In alcuni, al posto della R c'è un'altra lettera. Con cifre inventate:
 
 | Codice | Cos'è |
 | --- | --- |
@@ -92,7 +92,7 @@ Al 31 ottobre 2026 Peek non ha potuto verificare il sito di TopYou, quindi qui n
 
 ## Tracking TopYou con Peek
 
-[Peek](/) riconosce un codice TopYou dalla forma, TYZR, una lettera, dieci cifre e YQ, che nessun altro corriere del suo catalogo usa, e chiede a TopYou solo con codici così. Se hai soltanto il codice del corriere che consegna, incolla quello: Peek segue più di 3.500 corrieri. Se Peek sceglie il corriere sbagliato, scegli quello giusto con «Cambia».
+[Peek](/) riconosce un codice TopYou dalla forma, TYZR, una lettera, dieci cifre e YQ, che nessun altro corriere del suo catalogo usa. Se al posto della R c'è un'altra lettera, la forma è solo un indizio: Peek mostra «Verifica dei servizi di tracciamento…» e chiede a TopYou se conosce il codice. Peek cerca su TopYou solo i codici di queste due forme. Se hai soltanto il codice del corriere che consegna, incolla quello: Peek segue più di 3.500 corrieri. Se Peek sceglie il corriere sbagliato, scegli quello giusto con «Cambia».
 
 Peek legge il sito di tracking di TopYou e mostra lo stato, ogni scansione nelle parole di TopYou o del corriere di cui riporta le scansioni, il Paese di destinazione e il peso registrato da TopYou. Sulle scansioni di TopYou un luogo che è solo un Paese viene tolto: così la scansione all'aeroporto in Cina non sembra fatta in Italia. Quando la scheda di TopYou segna il pacco come consegnato o rispedito, Peek mostra «Consegnato» o «Restituito al mittente», anche se l'ultima scansione non lo dice. Le scansioni di TopYou sono in ora di Pechino. Quelle di GOFO che TopYou riporta portano il fuso orario dell'Italia o della Francia, ma l'ora è in realtà quella UTC: Peek le legge come UTC. Peek mostra tutte le ore nel fuso orario del tuo dispositivo. Non c'è una data di consegna prevista: TopYou non la dà.
 
@@ -104,7 +104,7 @@ Peek controlla ogni 10 minuti. Se TopYou non aggiunge scansioni nuove, passa a u
 
 ### Cos'è TopYou (通邮)?
 
-È 深圳市通邮物流科技（集团）股份有限公司, detto anche 通邮集团, Tongyou o SZTY56, uno spedizioniere di Shenzhen, in Cina, con linee internazionali. I suoi codici sono TYZR, una lettera, dieci cifre e YQ.
+È 深圳市通邮物流科技（集团）股份有限公司, detto anche 通邮集团, Tongyou o SZTY56, uno spedizioniere di Shenzhen, in Cina, con linee internazionali. I suoi codici sono TYZR, una lettera, dieci cifre e YQ, alcuni con un'altra lettera al posto della R.
 
 ### Perché TopYou mostra l'Italia quando il pacco è ancora in Cina?
 

@@ -6,11 +6,11 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-TopYou (通邮, Tongyou, även 通邮集团 eller SZTY56) är 深圳市通邮物流科技（集团）股份有限公司, en speditör i Shenzhen i Kina som kör internationella fraktlinjer och skickar beställningar från kinesiska webbutiker till kunder utomlands. Skickar butiken din beställning med TopYou får du ett spårningsnummer som börjar med TYZR och slutar på YQ: klistra in det i fältet ovanför. TopYous spårning följer paketet från lagret i Kina, genom flyget och tullen, och kan sedan fortsätta med skanningar från bolaget som delar ut det.
+TopYou (通邮, Tongyou, även 通邮集团 eller SZTY56) är 深圳市通邮物流科技（集团）股份有限公司, en speditör i Shenzhen i Kina som kör internationella fraktlinjer och skickar beställningar från kinesiska webbutiker till kunder utomlands. Skickar butiken din beställning med TopYou får du ett spårningsnummer som börjar med TYZ och slutar på YQ: klistra in det i fältet ovanför. TopYous spårning följer paketet från lagret i Kina, genom flyget och tullen, och kan sedan fortsätta med skanningar från bolaget som delar ut det.
 
 ## TopYous spårningsnummer
 
-TopYous fraktsedelsnummer består av TYZR, en bokstav, tio siffror och YQ, sammanlagt 17 tecken. Med påhittade siffror:
+TopYous fraktsedelsnummer består av TYZR, en bokstav, tio siffror och YQ, sammanlagt 17 tecken. I en del nummer står en annan bokstav i stället för R. Med påhittade siffror:
 
 | Nummer (påhittat) | Vad det är |
 | --- | --- |
@@ -88,7 +88,7 @@ Peek har inte kunnat kontrollera TopYous webbplats, så här finns inga kontaktu
 
 ## Spåra TopYou-paket med Peek
 
-[Peek](/) känner igen ett TopYou-nummer på formen: TYZR, en bokstav, tio siffror och YQ. Ingen annan transportör i Peeks katalog använder den formen, och Peek slår bara upp sådana nummer hos TopYou. Har du bara leveransbolagets nummer klistrar du in det i stället: Peek följer fler än 3 500 transportörer.
+[Peek](/) känner igen ett TopYou-nummer på formen: TYZR, en bokstav, tio siffror och YQ. Ingen annan transportör i Peeks katalog använder den formen. Står en annan bokstav i stället för R är formen bara en svag ledtråd: Peek visar "Checking tracking services…" (kontrollerar spårningstjänster) och frågar TopYous spårning om den känner till numret. Peek slår bara upp nummer av de här två formerna hos TopYou. Har du bara leveransbolagets nummer klistrar du in det i stället: Peek följer fler än 3 500 transportörer.
 
 Peek läser TopYous egen spårning och visar statusen, varje skanning med TopYous ord (eller leveransbolagets, när TopYou för vidare dess skanningar), destinationslandet och vikten som TopYou anger. Från TopYous egna skanningar tar Peek bort en ort som bara är ett land, så att skanningen på flygplatsen i Kina inte ser ut att vara gjord i Sverige. När TopYous uppgifter säger att paketet är levererat eller returnerat visar Peek "Delivered" (levererat) eller "Returned to sender" (returnerat till avsändaren), även om den sista skanningen säger något annat. TopYous egna skanningar har Pekingtid (UTC+8). För leveransbolagets skanningar anger TopYous spårning inte alltid rätt tidszon, så där räknar Peek ut tiden själv. Alla tider visas i din enhets tidszon. Något beräknat leveransdatum visar Peek inte, eftersom TopYou inte anger något.
 
@@ -100,7 +100,7 @@ Peek kollar paketet var tionde minut och varannan minut när det är ute för le
 
 ### Vad är TopYou (通邮)?
 
-Det är 深圳市通邮物流科技（集团）股份有限公司, även kallat 通邮集团, Tongyou eller SZTY56, en speditör i Shenzhen i Kina med internationella fraktlinjer. TopYous nummer består av TYZR, en bokstav, tio siffror och YQ.
+Det är 深圳市通邮物流科技（集团）股份有限公司, även kallat 通邮集团, Tongyou eller SZTY56, en speditör i Shenzhen i Kina med internationella fraktlinjer. TopYous nummer består av TYZR, en bokstav, tio siffror och YQ, ibland med en annan bokstav i stället för R.
 
 ### Hur spårar jag ett paket från Kina med ett TYZR-nummer?
 

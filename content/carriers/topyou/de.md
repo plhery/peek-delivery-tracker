@@ -6,11 +6,11 @@ published: 2026-10-30
 updated: 2026-10-30
 ---
 
-TopYou (通邮, Tongyou, auch 通邮集团 oder SZTY56) ist 深圳市通邮物流科技（集团）股份有限公司, ein Spediteur aus Shenzhen in China, der Sendungen über eigene internationale Linien ins Ausland bringt. Hat ein chinesischer Shop deine Bestellung mit TopYou verschickt, bekommst du eine Nummer, die mit TYZR beginnt und auf YQ endet: Füg sie oben ins Feld ein. TopYous Verlauf reicht vom Lager in China über Flug und Zoll bis in dein Land, wo ein Paketdienst vor Ort das Paket übernimmt.
+TopYou (通邮, Tongyou, auch 通邮集团 oder SZTY56) ist 深圳市通邮物流科技（集团）股份有限公司, ein Spediteur aus Shenzhen in China, der Sendungen über eigene internationale Linien ins Ausland bringt. Hat ein chinesischer Shop deine Bestellung mit TopYou verschickt, bekommst du eine Nummer, die mit TYZ beginnt und auf YQ endet: Füg sie oben ins Feld ein. TopYous Verlauf reicht vom Lager in China über Flug und Zoll bis in dein Land, wo ein Paketdienst vor Ort das Paket übernimmt.
 
 ## TopYou Sendungsnummer: so sieht sie aus
 
-Eine TopYou-Nummer besteht aus TYZR, einem Buchstaben, zehn Ziffern und YQ, zusammen 17 Zeichen. Mit erfundenen Ziffern:
+Eine TopYou-Nummer besteht aus TYZR, einem Buchstaben, zehn Ziffern und YQ, zusammen 17 Zeichen; bei manchen steht statt des R ein anderer Buchstabe. Mit erfundenen Ziffern:
 
 | Nummer | Was sie ist |
 | --- | --- |
@@ -100,7 +100,7 @@ Stand 30. Oktober 2026 konnte Peek TopYous Website nicht prüfen, deshalb stehen
 
 ## TopYou Paket verfolgen mit Peek
 
-[Peek](/) erkennt eine TopYou-Nummer an ihrer Form: TYZR, ein Buchstabe, zehn Ziffern und YQ. Kein anderer Paketdienst in Peeks Katalog nutzt sie, und Peek fragt TopYou nur mit solchen Nummern. Hast du nur die Nummer des Zustellers, füg sie ein: Peek verfolgt mehr als 3.500 Paketdienste. Erkennt Peek den Paketdienst nicht an der Nummer, wähl ihn mit „Ändern“ aus.
+[Peek](/) erkennt eine TopYou-Nummer an ihrer Form: TYZR, ein Buchstabe, zehn Ziffern und YQ. Kein anderer Paketdienst in Peeks Katalog nutzt sie. Steht statt des R ein anderer Buchstabe, ist die Form nur ein schwacher Hinweis: Peek zeigt „Tracking-Dienste werden geprüft…“ und fragt TopYou, ob es die Nummer kennt. Andere Nummern fragt Peek bei TopYou nicht ab. Hast du nur die Nummer des Zustellers, füg sie ein: Peek verfolgt mehr als 3.500 Paketdienste. Erkennt Peek den Paketdienst nicht an der Nummer, wähl ihn mit „Ändern“ aus.
 
 Peek liest TopYous eigene Tracking-Seite und zeigt den Status, jeden Scan in den Worten von TopYou oder des Zustellers, dessen Scans TopYou weitergibt, das Zielland und das Gewicht aus TopYous Datensatz. Bei TopYous eigenen Scans lässt Peek einen Ort weg, der nur ein Land ist, damit der Scan am Flughafen in China nicht so aussieht, als wäre das Paket schon bei dir. Meldet TopYous Datensatz das Paket als zugestellt oder zurückgeschickt, zeigt Peek „Zugestellt“ oder „Zurück an Absender“, auch wenn die letzte Zeile anders lautet. TopYous eigene Scans laufen auf Pekinger Zeit. Bei den weitergegebenen Scans des Zustellers gibt TopYous Seite nicht immer die richtige Zeitzone an; Peek ermittelt ihre Uhrzeit und zeigt alle Scans in der Zeitzone deines Geräts. Einen voraussichtlichen Liefertermin gibt es nicht, weil TopYou keinen nennt.
 
@@ -112,7 +112,7 @@ Peek schaut alle 10 Minuten nach. Wird es bei TopYou still, nur noch stündlich:
 
 ### Was ist TopYou (通邮)?
 
-深圳市通邮物流科技（集团）股份有限公司, kurz 通邮 oder 通邮集团, auch Tongyou oder SZTY56, ist ein Spediteur aus Shenzhen in China mit internationalen Linien. Seine Nummern bestehen aus TYZR, einem Buchstaben, zehn Ziffern und YQ.
+深圳市通邮物流科技（集团）股份有限公司, kurz 通邮 oder 通邮集团, auch Tongyou oder SZTY56, ist ein Spediteur aus Shenzhen in China mit internationalen Linien. Seine Nummern bestehen aus TYZR, einem Buchstaben, zehn Ziffern und YQ, manche mit einem anderen Buchstaben statt des R.
 
 ### Welcher Paketdienst stellt TopYou-Pakete in Deutschland zu?
 

@@ -6,11 +6,11 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-TopYou (通邮, Tongyou, también 通邮集团 o SZTY56) es 深圳市通邮物流科技（集团）股份有限公司, una empresa de transporte internacional de Shenzhen, en China, con líneas a otros países. Si una tienda online china te ha enviado el pedido con TopYou, te habrá dado un número de seguimiento que empieza por TYZR y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. El historial de TopYou va desde su almacén en China hasta el vuelo y la aduana, y a veces sigue con los escaneos de la empresa que hace la entrega.
+TopYou (通邮, Tongyou, también 通邮集团 o SZTY56) es 深圳市通邮物流科技（集团）股份有限公司, una empresa de transporte internacional de Shenzhen, en China, con líneas a otros países. Si una tienda online china te ha enviado el pedido con TopYou, te habrá dado un número de seguimiento que empieza por TYZ y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. El historial de TopYou va desde su almacén en China hasta el vuelo y la aduana, y a veces sigue con los escaneos de la empresa que hace la entrega.
 
 ## Número de seguimiento de TopYou: cómo es
 
-Los números de envío de TopYou llevan TYZR, una letra, diez cifras y YQ: 17 caracteres en total. Con cifras inventadas:
+Los números de envío de TopYou llevan TYZR, una letra, diez cifras y YQ: 17 caracteres en total. Algunos llevan otra letra en lugar de la R. Con cifras inventadas:
 
 | Número | Qué es |
 | --- | --- |
@@ -90,7 +90,7 @@ Peek no ha podido consultar la web de TopYou, así que aquí no da datos de cont
 
 ## Seguir un paquete de TopYou con Peek
 
-[Peek](/) reconoce un número de TopYou por su forma: TYZR, una letra, diez cifras y YQ, que no usa ningún otro transportista de su catálogo, y solo consulta a TopYou con números de esa forma. Si lo único que tienes es el número de la empresa que entrega el paquete, pega ese: Peek sigue más de 3500 transportistas.
+[Peek](/) reconoce un número de TopYou por su forma: TYZR, una letra, diez cifras y YQ, que no usa ningún otro transportista de su catálogo. Si el número lleva otra letra en lugar de la R, la forma es solo un indicio: Peek muestra «Comprobando servicios de seguimiento…» y le pregunta a TopYou si conoce el número. Peek solo consulta a TopYou con números de estas dos formas. Si lo único que tienes es el número de la empresa que entrega el paquete, pega ese: Peek sigue más de 3500 transportistas.
 
 Peek lee la web de seguimiento de TopYou y muestra el estado, cada escaneo con las palabras de TopYou o de la empresa cuyos escaneos copia, el país de destino y, en «Peso», el peso que figura en los datos de TopYou. En los escaneos de TopYou, Peek quita el lugar cuando es solo un país: así, el escaneo del aeropuerto chino no parece hecho en España. Cuando los datos de TopYou marcan el paquete como entregado o devuelto, Peek muestra «Entregado» o «Devuelto al remitente», aunque el último escaneo no lo diga. Los escaneos de TopYou van en hora de Pekín (UTC+8). En los escaneos que copia de la empresa que entrega, la web de TopYou no siempre da bien la zona horaria, así que Peek calcula la hora por su cuenta. Todas las horas te las muestra en la zona horaria de tu dispositivo. No hay fecha prevista de entrega: TopYou no da ninguna.
 
@@ -102,7 +102,7 @@ Peek consulta cada 10 minutos, y cada hora cuando TopYou deja de dar noticias: t
 
 ### ¿Qué es TopYou (通邮)?
 
-Es 深圳市通邮物流科技（集团）股份有限公司, también llamada 通邮集团, Tongyou o SZTY56, una empresa de transporte internacional de Shenzhen, en China, con líneas a otros países. Sus números de envío son TYZR, una letra, diez cifras y YQ.
+Es 深圳市通邮物流科技（集团）股份有限公司, también llamada 通邮集团, Tongyou o SZTY56, una empresa de transporte internacional de Shenzhen, en China, con líneas a otros países. Sus números de envío son TYZR, una letra, diez cifras y YQ, algunos con otra letra en lugar de la R.
 
 ### ¿Por qué TopYou pone España si mi paquete sigue en China?
 

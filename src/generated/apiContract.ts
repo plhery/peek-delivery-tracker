@@ -7291,6 +7291,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^1\\d{9}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^\\d{18}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://gls-group.com/ES/es/recibir-paquetes/seguimiento-envio/"
@@ -36802,7 +36806,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "liuchen"
+      "adapter": "liuchen",
+      "recognitionRank": 748,
+      "recognitionPattern": "^LCWL\\d{8}YQ$"
     },
     "trackingUrlTemplate": "https://www.liuchenwl.com/index/tracknumber/track?nos={trackingNumber}",
     "linkRules": [
@@ -36817,7 +36823,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^LCWL\\d{8}YQ$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.liuchenwl.com/"
   },
   "noerpel": {
@@ -48354,7 +48365,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "wooliiporter",
+      "recognitionRank": 6,
+      "recognitionPattern": "^WP\\d{13}$"
     },
     "trackingUrlTemplate": "https://woolii.com/track/{trackingNumber}",
     "linkRules": [

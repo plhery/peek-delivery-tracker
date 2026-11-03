@@ -577,8 +577,10 @@ const OVERALL_ALLOWANCES = {
     subject: { lookup: 'Lookups without an account', detection: 'Carrier detection without an account' },
     setting: { lookup: 'PUBLIC_LOOKUPS_GLOBAL_PER_DAY', detection: 'PUBLIC_DETECTIONS_GLOBAL_PER_DAY' },
     period: "today's",
+    length: 86_400_000,
     usedUp: 'Every visitor without an account is refused until midnight UTC. Signed-in accounts are not affected.',
-    runningOut: 'At this rate visitors without an account will be refused before midnight UTC.',
+    refused: 'every visitor without an account is refused from then until midnight UTC',
+    lasts: 'it lasts until midnight UTC',
     check: "Compare yesterday's per-client gauges with the allowance (docs/OBSERVABILITY.md): a few clients at their limit point to abuse",
   },
   account: {
@@ -587,32 +589,58 @@ const OVERALL_ALLOWANCES = {
     subject: { lookup: 'Parcels added by accounts', detection: 'Carrier detection for accounts' },
     setting: { lookup: 'ACCOUNT_LOOKUPS_PER_HOUR', detection: 'ACCOUNT_DETECTIONS_PER_HOUR' },
     period: "this hour's",
+    length: 3_600_000,
     usedUp: 'Every account is refused until the next hour (UTC). Visitors without an account are not affected.',
-    runningOut: 'At this rate every account will be refused before the hour (UTC) is over.',
+    refused: 'every account is refused from then until the next hour (UTC)',
+    lasts: 'it lasts the hour',
     check: "List today's busiest accounts in private.account_tracking_usage and when they were made (auth.users): many new accounts at their daily limit point to abuse",
   },
 } as const;
 
 /**
+ * Where an allowance's use is headed at the pace of its day or hour so far:
+ * the use by the period's end, and the time it is used up if that comes first.
+ */
+export function allowanceForecast(used: number, limit: number, length: number, now: Date): {
+  forecast: number;
+  used_up_at: string | null;
+} {
+  const elapsed = Math.max(1, now.getTime() % length);
+  const forecast = Math.round(used * length / elapsed);
+  return {
+    forecast,
+    used_up_at: used > 0 && forecast >= limit
+      ? new Date(now.getTime() - elapsed + Math.ceil(elapsed * limit / used)).toISOString()
+      : null,
+  };
+}
+
+/**
  * An overall allowance is running out or used up. Used up, everyone who
- * shares it is refused until its day or hour is over. One issue per holder,
- * allowance and state; the event title states the impact.
+ * shares it is refused until its day or hour is over. Running out, the report
+ * says when it is used up at the pace so far, or that it lasts. One issue per
+ * holder, allowance and state; the event title states the impact.
  */
 export function captureOverallAllowance(
   holder: AllowanceHolder,
   kind: 'lookup' | 'detection',
   state: 'running_out' | 'used_up',
   usage: { used: number; limit: number },
+  now = new Date(),
 ): string | null {
   if (!initObservability()) return null;
   const allowance = OVERALL_ALLOWANCES[holder];
+  const forecast = state === 'running_out' ? allowanceForecast(usage.used, usage.limit, allowance.length, now) : null;
+  const pace = holder === 'public' ? "At the day's pace so far" : "At the hour's pace so far";
+  const impact = forecast === null ? allowance.usedUp
+    : forecast.used_up_at === null ? `${pace} ${allowance.lasts} (about ${forecast.forecast} of ${usage.limit}); refusals come only if the pace picks up.`
+    : `${pace} it is used up around ${forecast.used_up_at.slice(11, 16)} UTC, and ${allowance.refused}.`;
   let id: string | null = null;
   Sentry.withScope(scope => {
     scope.setTag('component', allowance.component);
     scope.setTag('allowance', kind);
     scope.setTag('allowance_state', state);
-    scope.setContext(allowance.context, { ...usage,
-      impact: state === 'used_up' ? allowance.usedUp : allowance.runningOut,
+    scope.setContext(allowance.context, { ...usage, ...forecast, impact,
       next_steps: `${allowance.check}; if the use is ordinary, raise ${allowance.setting[kind]}.` });
     scope.setFingerprint(['delivery-tracker', allowance.component, kind, state]);
     scope.setLevel(state === 'used_up' ? 'error' : 'warning');

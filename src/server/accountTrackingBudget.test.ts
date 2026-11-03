@@ -44,7 +44,7 @@ it('says once an hour that every account’s allowance is running out, and that 
   claim.mockResolvedValue({ allowed: true, scope: null, overallUsed: 25 });
   await claimAccountTracking(client, userId, 'lookup');
   await claimAccountTracking(client, userId, 'lookup');
-  expect(report.mock.calls).toEqual([['account', 'lookup', 'running_out', { used: 25, limit: 50 }]]);
+  expect(report.mock.calls).toEqual([['account', 'lookup', 'running_out', { used: 25, limit: 50 }, new Date('2026-11-05T10:00:00Z')]]);
   // An account at its own daily limit is not every account's allowance running out.
   claim.mockResolvedValue({ allowed: false, scope: 'account', overallUsed: 30 });
   await expect(claimAccountTracking(client, userId, 'lookup')).rejects.toMatchObject({ status: 429 });
@@ -52,7 +52,7 @@ it('says once an hour that every account’s allowance is running out, and that 
   claim.mockResolvedValue({ allowed: false, scope: 'overall', overallUsed: 50 });
   await expect(claimAccountTracking(client, userId, 'lookup')).rejects.toMatchObject({ status: 429 });
   await expect(claimAccountTracking(client, userId, 'lookup')).rejects.toMatchObject({ status: 429 });
-  expect(report.mock.calls.at(-1)).toEqual(['account', 'lookup', 'used_up', { used: 50, limit: 50 }]);
+  expect(report.mock.calls.at(-1)).toEqual(['account', 'lookup', 'used_up', { used: 50, limit: 50 }, new Date('2026-11-05T10:00:00Z')]);
   expect(report).toHaveBeenCalledTimes(2);
   // The next hour it is said again.
   vi.setSystemTime(new Date('2026-11-05T11:00:01Z'));

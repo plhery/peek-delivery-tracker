@@ -389,11 +389,11 @@ describe('looking up a parcel without an account', () => {
     claim.mockResolvedValue({ allowed: true, scope: null, overallUsed: 240 });
     await lookup({ trackingNumber });
     await lookup({ trackingNumber });
-    expect(report.mock.calls).toEqual([['public', 'lookup', 'running_out', { used: 240, limit: 300 }]]);
+    expect(report.mock.calls).toEqual([['public', 'lookup', 'running_out', { used: 240, limit: 300 }, new Date('2026-11-05T10:00:00Z')]]);
     claim.mockResolvedValue({ allowed: false, scope: 'global', overallUsed: 300 });
     await lookup({ trackingNumber });
     await lookup({ trackingNumber });
-    expect(report.mock.calls.at(-1)).toEqual(['public', 'lookup', 'used_up', { used: 300, limit: 300 }]);
+    expect(report.mock.calls.at(-1)).toEqual(['public', 'lookup', 'used_up', { used: 300, limit: 300 }, new Date('2026-11-05T10:00:00Z')]);
     expect(report).toHaveBeenCalledTimes(2);
     // The next day it is said again.
     vi.setSystemTime(new Date('2026-11-06T00:00:01Z'));

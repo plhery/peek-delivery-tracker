@@ -241,7 +241,9 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   expect(storeAfter.breadcrumbs?.some((crumb) => crumb.category === 'tracking-routing' && crumb.message === 'provider_recovered')).toBe(true);
 
   // An overall allowance without an account is one issue per allowance and state.
-  const low = captureOverallAllowance('public', 'lookup', 'running_out', { used: 2_400, limit: 3_000 });
+  // Running out, it says when the allowance is used up at the day's pace so far, or that it lasts.
+  const low = captureOverallAllowance('public', 'lookup', 'running_out', { used: 2_400, limit: 3_000 }, new Date('2026-11-05T12:00:00Z'));
+  const late = captureOverallAllowance('public', 'lookup', 'running_out', { used: 240, limit: 300 }, new Date('2026-11-05T21:45:00Z'));
   const gone = captureOverallAllowance('public', 'detection', 'used_up', { used: 10_000, limit: 10_000 });
   await flushObservability();
   const runningOut = captured.events.find((event) => event.event_id === low)!;
@@ -249,14 +251,25 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   expect(runningOut.level).toBe('warning');
   expect(runningOut.exception).toBeUndefined();
   expect(runningOut.fingerprint).toEqual(['delivery-tracker', 'public-allowance', 'lookup', 'running_out']);
-  expect(runningOut.contexts?.public_allowance).toMatchObject({ used: 2_400, limit: 3_000 });
+  expect(runningOut.contexts?.public_allowance).toMatchObject({
+    used: 2_400, limit: 3_000, forecast: 4_800, used_up_at: '2026-11-05T15:00:00.000Z',
+    impact: "At the day's pace so far it is used up around 15:00 UTC, and every visitor without an account is refused from then until midnight UTC.",
+  });
   expect(runningOut.contexts?.public_allowance?.next_steps).toContain('PUBLIC_LOOKUPS_GLOBAL_PER_DAY');
   expect(runningOut.contexts?.upstream_http).toBeUndefined();
+  expect(captured.events.find((event) => event.event_id === late)!.contexts?.public_allowance).toMatchObject({
+    used: 240, limit: 300, forecast: 265, used_up_at: null,
+    impact: "At the day's pace so far it lasts until midnight UTC (about 265 of 300); refusals come only if the pace picks up.",
+  });
   const usedUp = captured.events.find((event) => event.event_id === gone)!;
   expect(usedUp.message).toBe("Carrier detection without an account: today's allowance is used up");
   expect(usedUp.level).toBe('error');
   expect(usedUp.tags).toMatchObject({ component: 'public-allowance', allowance: 'detection', allowance_state: 'used_up' });
   expect(usedUp.contexts?.public_allowance?.next_steps).toContain('PUBLIC_DETECTIONS_GLOBAL_PER_DAY');
+  expect(usedUp.contexts?.public_allowance).toMatchObject({
+    impact: 'Every visitor without an account is refused until midnight UTC. Signed-in accounts are not affected.',
+  });
+  expect(usedUp.contexts?.public_allowance).not.toHaveProperty('forecast');
 
   // Every account shares an hourly allowance, reported apart from the one without an account.
   const accounts = captureOverallAllowance('account', 'lookup', 'used_up', { used: 50, limit: 50 });
@@ -265,6 +278,13 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   expect(accountsUsedUp.message).toBe("Parcels added by accounts: this hour's allowance is used up");
   expect(accountsUsedUp.fingerprint).toEqual(['delivery-tracker', 'account-allowance', 'lookup', 'used_up']);
   expect(accountsUsedUp.contexts?.account_allowance?.next_steps).toContain('ACCOUNT_LOOKUPS_PER_HOUR');
+  // An hour's pace counts from the start of the hour.
+  const accountsLow = captureOverallAllowance('account', 'lookup', 'running_out', { used: 25, limit: 50 }, new Date('2026-11-05T10:15:00Z'));
+  await flushObservability();
+  expect(captured.events.find((event) => event.event_id === accountsLow)!.contexts?.account_allowance).toMatchObject({
+    forecast: 100, used_up_at: '2026-11-05T10:30:00.000Z',
+    impact: "At the hour's pace so far it is used up around 10:30 UTC, and every account is refused from then until the next hour (UTC).",
+  });
 });
 
 it('names a parcel by the shape of its number and cuts addresses down in reports and breadcrumbs', async () => {

@@ -803,11 +803,13 @@ provider failure in an `AggregateError` so every cause is visible.
 - **Allowances without an account**: `component:public-allowance` warns once a day when
   an overall allowance is 80% used, and reports an error when it is used up: every visitor
   without an account is then refused until midnight UTC. One issue per allowance and
-  state.
+  state. The warning's `forecast` is the use by midnight at the day's pace so far, and
+  `used_up_at` when it runs out first; `impact` says the same.
 - **Allowances for accounts**: `component:account-allowance` warns once an hour when the
   allowance every account shares is half used, and reports an error when it is used up:
-  every account is then refused until the next hour (UTC). Many new accounts at their
-  daily limit in `private.account_tracking_usage` point to accounts made for scraping.
+  every account is then refused until the next hour (UTC). Its warning forecasts the same
+  way, by the end of the hour. Many new accounts at their daily limit in
+  `private.account_tracking_usage` point to accounts made for scraping.
 - **Routing decisions**: see [ROUTING.md](ROUTING.md).
 
 ### Upstream HTTP diagnostics

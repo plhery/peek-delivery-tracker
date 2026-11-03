@@ -161,7 +161,7 @@ export function reportOverallAllowance(allowance: OverallAllowance, used: number
   reported.set(`${holder}:${kind}:${state}`, period);
   logOperationalEvent(holder === 'public' ? 'public_allowance' : 'account_allowance', { kind, state, used, limit },
     state === 'used_up' ? 'error' : 'warning');
-  captureOverallAllowance(holder, kind, state, { used, limit });
+  captureOverallAllowance(holder, kind, state, { used, limit }, now);
 }
 
 /** Counts one lookup against today's allowances: the client's, its IPv6 /48's and everyone's. */

@@ -1163,6 +1163,9 @@
   "ecparcel": {
     "decal": "ecparcel"
   },
+  "edi-express": {
+    "decal": "edi-express"
+  },
   "ees-logistics": {
     "decal": "ees-logistics"
   },
@@ -1461,6 +1464,9 @@
   },
   "fm-transportes": {
     "decal": "fm-transportes"
+  },
+  "fmd-distribution": {
+    "decal": "fmd-distribution"
   },
   "fmx": {
     "decal": "fmx"

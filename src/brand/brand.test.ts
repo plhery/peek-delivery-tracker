@@ -725,6 +725,8 @@ describe('carrier brand', () => {
       'schneider',
       'alliance-air-freight',
       'mountain-movers',
+      'fmd-distribution',
+      'edi-express',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

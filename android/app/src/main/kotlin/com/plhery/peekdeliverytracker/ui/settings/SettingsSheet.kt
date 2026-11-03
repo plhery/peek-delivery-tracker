@@ -60,6 +60,7 @@ import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.NotificationPreset
 import com.plhery.peekdeliverytracker.platform.CacheExportFiles
+import com.plhery.peekdeliverytracker.platform.PlayListing
 import com.plhery.peekdeliverytracker.platform.SitePage
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -399,12 +400,24 @@ private fun SettingsRootPage(
                         }
                         SettingsDivider()
                         // The site's landing, which the app itself never shows, inside the app as the iPhone's
-                        // SafariPage sheet ([SitePage]), and a mail to Peek under the version it would be about.
+                        // SafariPage sheet ([SitePage]), the store's page for a review once Peek is listed there
+                        // ([PlayListing]), and a mail to Peek under the version it would be about.
                         SettingsButtonRow(
                             localized("app.homePage"), SETTINGS_HOME_PAGE, { SitePage.open(context, source.homePageUrl, uriHandler) },
                             value = hostOf(source.homePageUrl), chevron = true,
                         )
                         SettingsDivider()
+                        if (PlayListing.listed) {
+                            SettingsButtonRow(
+                                localized("settings.rate"), SETTINGS_RATE,
+                                {
+                                    source.action("review-link-open")
+                                    PlayListing.open(context, uriHandler)
+                                },
+                                chevron = true,
+                            )
+                            SettingsDivider()
+                        }
                         SettingsButtonRow(
                             localized("settings.sendFeedback"), SETTINGS_FEEDBACK,
                             { uriHandler.openUri(AppConfiguration.feedbackUrl(source.version)) },
@@ -746,6 +759,7 @@ internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
 internal const val SETTINGS_WIDGETS = "$SETTINGS_SHEET.widgets"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"
 internal const val SETTINGS_HOME_PAGE = "$SETTINGS_SHEET.homePage"
+internal const val SETTINGS_RATE = "$SETTINGS_SHEET.rate"
 internal const val SETTINGS_FEEDBACK = "$SETTINGS_SHEET.feedback"
 internal const val SETTINGS_EXPORT = "$SETTINGS_SHEET.export"
 internal const val SETTINGS_PRIVACY = "$SETTINGS_SHEET.privacy"

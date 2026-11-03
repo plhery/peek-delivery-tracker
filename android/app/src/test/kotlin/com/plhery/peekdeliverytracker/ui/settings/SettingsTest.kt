@@ -52,6 +52,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreset
+import com.plhery.peekdeliverytracker.platform.PlayListing
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.Recreation
@@ -107,6 +108,8 @@ class SettingsTest {
     @After
     fun forgetAppearance() {
         AppearanceStore.of(compose.activity).set(AppAppearance.DEFAULT)
+        PlayListing.listed = false
+        shadowOf(compose.activity.application).checkActivities(false)
     }
 
     private fun show(
@@ -220,6 +223,20 @@ class SettingsTest {
     }
 
     /** Whether `intent` opens a Custom Tab of the made-up browser rather than leaving for a browser. */
+    /** The Play Store app installed: it opens `market://` addresses. */
+    private fun store() {
+        val packages = shadowOf(compose.activity.packageManager)
+        val page = ComponentName(PlayListing.STORE_PACKAGE, "${PlayListing.STORE_PACKAGE}.Page")
+        packages.addActivityIfNotPresent(page)
+        packages.addIntentFilterForActivity(
+            page,
+            IntentFilter(Intent.ACTION_VIEW).apply {
+                addCategory(Intent.CATEGORY_DEFAULT)
+                addDataScheme("market")
+            },
+        )
+    }
+
     private fun customTab(intent: Intent): Boolean = intent.hasExtra(CustomTabsIntent.EXTRA_SESSION) && intent.`package` == BROWSER
 
     /** A key pressed and let go on a hardware keyboard, with `meta` held, through the window as the system sends it. */
@@ -747,6 +764,55 @@ class SettingsTest {
         tap(SETTINGS_ACCOUNT_DATA)
         tap(SETTINGS_PRIVACY)
         assertEquals(source.privacyUrl, started()?.dataString)
+    }
+
+    /** Until Peek's page on Google Play is public, only its testers could open it: no "Rate Peek". */
+    @Test
+    fun theRateRowWaitsForThePlayListing() {
+        show()
+        open()
+        assertTrue(exists(SETTINGS_HOME_PAGE))
+        assertFalse(exists(SETTINGS_RATE))
+        assertFalse(shows(text("settings.rate")))
+    }
+
+    /**
+     * Once listed, "Rate Peek" sits between the home page and the mail, as the iPhone's, and opens Peek's page in the
+     * Play Store app, counted as the iPhone's tap is.
+     */
+    @Test
+    fun theRateRowOpensPeeksPageInThePlayStore() {
+        PlayListing.listed = true
+        store()
+        show()
+        open()
+        assertTrue(shows(text("settings.rate")))
+        val home = node(SETTINGS_HOME_PAGE).getUnclippedBoundsInRoot()
+        val rate = node(SETTINGS_RATE).getUnclippedBoundsInRoot()
+        val mail = node(SETTINGS_FEEDBACK).getUnclippedBoundsInRoot()
+        assertTrue("Under the home page", rate.top >= home.bottom)
+        assertTrue("Over the mail", rate.bottom <= mail.top)
+        assertEquals(Role.Button, node(SETTINGS_RATE).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Role))
+        tap(SETTINGS_RATE)
+        val page = started()!!
+        assertEquals(Intent.ACTION_VIEW, page.action)
+        assertEquals("market://details?id=${compose.activity.packageName}", page.dataString)
+        assertEquals(PlayListing.STORE_PACKAGE, page.`package`)
+        assertEquals("review-link-open", source.actions.last())
+    }
+
+    /** A phone without the Play Store opens the same page on the web, as the app's other links open. */
+    @Test
+    fun withoutThePlayStoreTheRateRowOpensTheWebPage() {
+        PlayListing.listed = true
+        browser()
+        shadowOf(compose.activity.application).checkActivities(true)
+        show()
+        open()
+        tap(SETTINGS_RATE)
+        val page = started()!!
+        assertEquals("https://play.google.com/store/apps/details?id=${compose.activity.packageName}", page.dataString)
+        assertEquals("review-link-open", source.actions.last())
     }
 
     /**

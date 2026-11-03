@@ -68,10 +68,11 @@ are virtual names, never real URLs.
   page is still in sight a moment later) and copying the link for Safari.
 - **Parcel feedback**: an answer that a parcel's page is right or wrong, or naming the
   carrier of a parcel none was found for. Never the reasons, the words or the parcel.
-- **Rating** (iPhone): each time the app asks for an App Store rating with the system's
-  prompt, on the screen it asks from: `parcel` after a "Yes" there, `deliveries` after a
-  parcel seen arriving. Apple doesn't say whether the prompt showed, so these are asks. A tap
-  on Settings' "Rate Peek", which opens the store's page for a review, is `review-link-open`.
+- **Rating** (iPhone and Android): each time the app asks for a rating with the system's
+  prompt (StoreKit's, Play In-App Review), on the screen it asks from: `parcel` after a "Yes"
+  there, `deliveries` after a parcel seen arriving. Neither store says whether the prompt
+  showed, so these are asks. A tap on Settings' "Rate Peek", which opens the store's page for a
+  review, is `review-link-open`; Android shows that row once Peek is listed on Google Play.
 - **Discovery**: search used (never the query), filters, sorting.
 - **Friends**: profile save, invitation create/revoke/accept/share/copy, a friend's
   card opened, remove, disable.

@@ -88576,6 +88576,17 @@
     ]
   },
   {
+    "input": "MYYF99000017CN",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mayiyinfu"
+    ],
+    "asked": [
+      "mayiyinfu"
+    ]
+  },
+  {
     "input": "MZ465962009GB",
     "carrier": "royal-mail",
     "confidence": "high",
@@ -93986,6 +93997,7 @@
       "rozetka-delivery"
     ],
     "asked": [
+      "rozetka-delivery",
       "colis-prive"
     ]
   },
@@ -93998,6 +94010,7 @@
       "rozetka-delivery"
     ],
     "asked": [
+      "rozetka-delivery",
       "colis-prive"
     ]
   },

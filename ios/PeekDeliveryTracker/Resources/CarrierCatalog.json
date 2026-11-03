@@ -15985,8 +15985,7 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "mtscn",
-        "recognitionRank": 986
+        "adapter": "mtscn"
       },
       "linkRules": [
         {
@@ -19885,6 +19884,15 @@
       "linkRules": [
         {
           "domains": [
+            "track.pargo.co.za"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "code"
+          ]
+        },
+        {
+          "domains": [
             "pargo.co.za"
           ],
           "pathPattern": "^/track-trace/?$",
@@ -19917,7 +19925,9 @@
           "pattern": "^PAR\\d{10}$",
           "confidence": "high"
         }
-      ]
+      ],
+      "trackingUrlTemplate": "https://track.pargo.co.za/?code={trackingNumber}",
+      "trackingSearchUrl": "https://track.pargo.co.za/"
     },
     "pbt": {
       "displayName": "PBT",
@@ -21358,7 +21368,9 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "mayiyinfu"
+        "adapter": "mayiyinfu",
+        "recognitionRank": 751,
+        "recognitionPattern": "^MYYF\\d{8}CN$"
       },
       "linkRules": [
         {
@@ -21376,6 +21388,10 @@
         {
           "pattern": "^MY\\d{10}US$",
           "confidence": "high"
+        },
+        {
+          "pattern": "^MYYF\\d{8}CN$",
+          "confidence": "low"
         }
       ]
     },
@@ -35307,16 +35323,18 @@
       "timezone": "Europe/Kyiv",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "rozetka-delivery",
+        "recognitionRank": 744,
+        "recognitionPattern": "^RMP\\d{9}$"
       },
-      "trackingUrlTemplate": "https://rozetka.delivery/tracking?parcel_id={trackingNumber}",
+      "trackingUrlTemplate": "https://rozetka.delivery/tracking/parcel?parcel_id={trackingNumber}",
       "linkRules": [
         {
           "domains": [
             "rozetka.delivery",
             "www.rozetka.delivery"
           ],
-          "pathPattern": "^/tracking/?$",
+          "pathPattern": "^/tracking(?:/parcel)?/?$",
           "params": [
             "parcel_id"
           ]
@@ -35328,7 +35346,7 @@
           "confidence": "low"
         }
       ],
-      "trackingSearchUrl": "https://rozetka.delivery/tracking"
+      "trackingSearchUrl": "https://rozetka.delivery/tracking/parcel"
     },
     "savar-express": {
       "displayName": "SAVAR Express",
@@ -36274,7 +36292,7 @@
       "timezone": "Asia/Karachi",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "dex-pk"
       },
       "linkRules": [
         {
@@ -36294,7 +36312,8 @@
           "confidence": "high"
         }
       ],
-      "trackingSearchUrl": "https://www.dex.com.pk/tracking"
+      "trackingSearchUrl": "https://www.dex.com.pk/tracking",
+      "trackingUrlTemplate": "https://www.dex.com.pk/tracking?references={trackingNumber}"
     },
     "efs-asia": {
       "displayName": "EFS Asia",
@@ -47967,7 +47986,7 @@
       "timezone": "Asia/Hong_Kong",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "quick-fort"
       },
       "trackingUrlTemplate": "https://www.quick-fort.com/search_kuai_di/search/orderid/{trackingNumber}",
       "linkRules": [
@@ -48018,6 +48037,75 @@
       ],
       "detectionRules": [],
       "trackingSearchUrl": "https://www.wpglogis.com/tracking/"
+    },
+    "flight-logistics": {
+      "displayName": "Flight Logistics",
+      "aliases": [
+        "Flight Logistics Group",
+        "Flight Logistics Group Ltd"
+      ],
+      "countries": [
+        "GB"
+      ],
+      "color": "#007ac3",
+      "selectable": true,
+      "timezone": "Europe/London",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.flightlg.com/myflight-shipment-tracking/?method=tracking"
+    },
+    "peregrine-ship": {
+      "displayName": "Peregrine Ship",
+      "aliases": [
+        "Peregrine Group Limited",
+        "Peregrine Ship Solutions"
+      ],
+      "countries": [
+        "HK",
+        "CN"
+      ],
+      "color": "#174cff",
+      "selectable": true,
+      "timezone": "Asia/Hong_Kong",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.peregrineship.com/track/f/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.peregrineship.com"
+          ],
+          "path": "^/track/[fl]/([^/?#,;|]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.peregrineship.com/track/f"
+    },
+    "southwestern-motor-transport": {
+      "displayName": "Southwestern Motor Transport",
+      "aliases": [
+        "SMT Lines",
+        "Southwestern Motor Transport, Inc."
+      ],
+      "countries": [
+        "US"
+      ],
+      "color": "#ff0045",
+      "selectable": true,
+      "timezone": "America/Chicago",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://profoundui.smtl.com/profoundui/start?pgm=profoundui/mwp705c&p1=0&l1=1&p2=none&l2=4&p3=none&l3=4"
     }
   }
 }

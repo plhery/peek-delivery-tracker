@@ -50,8 +50,9 @@ Shouwu prévient que ses statuts sont « auto-judged by the system », attribué
 | `Shipment started the customs clearance process at destination` | Dédouanement en cours dans ton pays. | « À la douane » |
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | La douane de ton pays l'a libéré. | « En transit » |
 | `Delivery to local courier` | Remis au transporteur qui livre chez toi, pas à toi. | « En transit » |
+| `Your consignment has been picked up` | Le transporteur l'a récupéré à l'entrepôt de Shouwu à l'étranger, après la douane : ce n'est ni un enlèvement chez le vendeur, ni un retrait par toi. | « En transit » |
 | `Out for delivery` | La tournée de livraison du transporteur local. | « En livraison » |
-| `Delivered by post man` | La poste locale l'a livré. | « Livré », une fois que le statut de Shouwu dit aussi `Delivered` |
+| `Delivered by post man`, `This parcel has been delivered` | La poste ou le transporteur local l'a livré. | « Livré », une fois que le statut de Shouwu dit aussi `Delivered` |
 
 Deux autres lignes sont à connaître. `Shipment started the customs clearance process at origin`, c'est le dédouanement à l'export en Chine, pas la douane française, même si Peek affiche « À la douane ». Et `Abnormal delivery`, suivi d'une raison comme `<Incorrect address.>` (adresse erronée), signale une tournée sans livraison : Peek affiche « Tentative de livraison ».
 
@@ -62,6 +63,8 @@ Pour certains colis, l'historique reprend aussi des lignes de Colis Privé, en a
 | `Your parcel has been prepared by your web merchant. It will soon be delivered to Colis Privé.` | Colis Privé a les données du colis ; rien n'a bougé. | « Étiquette créée » |
 | `Your parcel arrived at the shipping partner. It will be sent to Colis Privé.` | Chez le partenaire qui l'amène en France. | « En transit » |
 | `Your package is in transit to Colis Privé` | En route vers Colis Privé, qui ne l'a pas encore. | « En transit » |
+
+**Des lignes en chinois.** Certains colis ont aussi des lignes que Shouwu écrit en chinois, et Peek les affiche telles quelles. `货物电子信息已经收到` (les données électroniques des marchandises sont reçues) accompagne les données de commande : « Étiquette créée ». Viennent ensuite, toutes affichées « En transit » : `申报过港中` après le code d'un lot (le lot est déclaré pour la route vers Hong Kong), `已到港，安排航班中` (arrivé au point de départ, en attente d'un vol), `预计23号的航班` (le vol réservé, ici le 23 ; avec `二程` devant, pour le second tronçon), `航班已飞` (le vol est parti), `二程航班已飞` (le vol du second tronçon est parti) et `已落地` (atterri). Peek affiche `已落地，清关提货中` (atterri, en cours de dédouanement et de retrait auprès de la compagnie aérienne) comme « À la douane », puis `清关完成` (dédouané) et `已交仓扫描` (scanné à l'entrepôt du transporteur qui livre) de nouveau comme « En transit ».
 
 **Des heures décalées.** Shouwu enregistre l'heure locale de chaque scan, même à l'étranger, comme si c'était l'heure de Pékin (UTC+8), et son site l'affiche dans ton fuseau horaire. Un scan fait en France à 10 h s'affiche donc à 3 h en hiver (UTC+1) et à 4 h en été (UTC+2), et un vol vers la France semble durer sept heures de moins, six en été. Fie-toi à l'ordre des lignes. Peek déduit l'heure de chaque scan de son lieu, ou de l'étape où se trouvait le colis, et l'affiche à l'heure de ton appareil.
 
@@ -77,7 +80,7 @@ Shouwu dit travailler directement avec USPS, Royal Mail, La Poste, DHL, DPD et H
 
 **Bloqué sur `Preparing`, `Shipment information received` ou `Carrier received the shipment`.** Shouwu n'a pas encore le colis, ou ne l'a pas encore expédié de son entrepôt. Demande au vendeur quand il le lui a remis.
 
-**Bloqué en douane.** Après `Shipment started the customs clearance process at destination`, le colis attend la douane de ton pays. Si on te demande de payer des frais d'importation, lis [colis bloqué en douane](guide:customs).
+**Bloqué en douane.** Après `Shipment started the customs clearance process at destination` ou `已落地，清关提货中`, le colis attend la douane de ton pays. Si on te demande de payer des frais d'importation, lis [colis bloqué en douane](guide:customs).
 
 **Plus rien après `Delivery to local courier`.** Le transporteur a le colis, mais le suivi de Shouwu ne donne pas son numéro. Demande ce numéro au vendeur et colle-le dans Peek. Voir aussi [pourquoi un suivi ne bouge plus](guide:tracking-not-updating) et [le suivi d'un colis venant de Chine](guide:tracking-from-china).
 

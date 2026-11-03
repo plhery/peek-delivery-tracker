@@ -73,6 +73,7 @@ En `The flight is expected to depart on … and land on …` y `The flight has d
 | DHL escribe | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
 | `the instruction data for this shipment have been provided by the sender to dhl electronically` | DHL tiene los datos de la etiqueta. | «Etiqueta creada» |
+| `shipment in transit to dhl` | El paquete va camino de DHL, antes del vuelo. | «En tránsito» |
 | `The shipment has been posted by the sender at the retail outlet` | JRT ha entregado el paquete en una oficina de Deutsche Post. | «En tránsito» |
 | `pick-up was successful.` | DHL ha recogido el paquete que dejó JRT. No es una recogida tuya. | «En tránsito» |
 | `the shipment has been processed in the parcel center of origin`, `loaded to movement / tour vehicle` | Clasificado en el centro de paquetes de origen de DHL y cargado en un vehículo. | «En tránsito» |

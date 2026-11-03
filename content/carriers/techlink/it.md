@@ -39,6 +39,7 @@ Techlink non pubblica un elenco delle sue scansioni. Le registra in inglese e in
 | `Export customs declaration completed` | La dichiarazione di esportazione dalla Cina, registrata dopo l'uscita dal magazzino. Il pacco non è fermo in dogana. |
 | `Depart from the original airport` | Il volo è partito dall'aeroporto in Cina. |
 | `Arrive at the destination airport` | Il volo è atterrato nel Paese di destinazione. La dogana d'importazione viene dopo. |
+| `Your shipment has arrived at sorting center` | Il pacco è in un centro di smistamento nel Paese di destinazione, dopo il volo. |
 
 Per un numero che non conosce, la pagina mostra `查询不到轨迹` (nessun tracciamento trovato), `未知 → 未知` (Paesi sconosciuti) e `暂无最新轨迹` (ancora nessuna scansione recente).
 
@@ -54,7 +55,7 @@ Il servizio espresso porta a porta di Techlink è DDP (dazi pagati) o DDU (dazi 
 
 **Solo `Parcel electronic information received`.** Il venditore ha prenotato la spedizione, ma il pacco non è ancora arrivato al magazzino di Techlink. Se per qualche giorno non succede niente, chiedi al venditore se l'ha spedito davvero.
 
-**Fermo a metà strada.** Dopo l'imballaggio vengono l'uscita dal magazzino, l'esportazione e il volo, e tra un passo e l'altro possono passare giorni senza scansioni. Dopo `Arrive at the destination airport` restano la dogana d'importazione e il corriere locale, ma finora il tracking di Techlink non ha mostrato righe successive. Se non si muove più niente, chiedi al venditore quale corriere consegna in Italia e con che numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Fermo a metà strada.** Dopo l'imballaggio vengono l'uscita dal magazzino, l'esportazione e il volo, e tra un passo e l'altro possono passare giorni senza scansioni. Dopo `Arrive at the destination airport` restano la dogana d'importazione e il corriere locale, e finora l'unica riga successiva vista sul tracking di Techlink è `Your shipment has arrived at sorting center`. Se non si muove più niente, chiedi al venditore quale corriere consegna in Italia e con che numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Nessun risultato.** Controlla il numero con il venditore: un numero ZHPHD ha esattamente 19 caratteri. Anche un pacco appena prenotato potrebbe non mostrare ancora niente. Peek mostra «In attesa del corriere» e continua a controllare.
 
@@ -72,7 +73,7 @@ Per l'ordine, chiedi al venditore. Per un problema di consegna in Italia, chiedi
 
 Peek legge lo stesso tracking che usa la pagina di Techlink e mostra lo stato, ogni scansione con il suo Paese e il Paese di destinazione. Le righe in inglese compaiono come le scrive Techlink. Per le scansioni in Cina Peek usa l'ora di Pechino, per le altre quella del loro Paese, e le mostra nel fuso orario del tuo dispositivo: in Italia, una scansione delle 17:00 di Pechino compare alle 10:00 con l'ora solare e alle 11:00 con l'ora legale. Techlink non dà una data di consegna prevista, il peso o il nome del servizio, quindi Peek non li mostra.
 
-Quando i dati di Techlink contengono il numero del corriere che consegna, Peek ne guarda la forma. Un numero postale internazionale (due lettere, nove cifre e due lettere) rimanda alla posta del Paese di destinazione: per un pacco diretto in Italia, Peek interroga [Poste Italiane](carrier:poste-italiane). Un altro numero rimanda al corriere che, nel catalogo di Peek, è l'unico a usare quella forma, e Peek lo interroga se ne legge il tracking. Appena il corriere mostra novità recenti quanto quelle di Techlink, Peek passa a lui: il pacco tiene il numero ZHPHD e mostra l'altro accanto. Altrimenti Peek resta sul tracking di Techlink: aspettati che la cronologia si fermi all'arrivo all'aeroporto di destinazione.
+Quando i dati di Techlink contengono il numero del corriere che consegna, Peek ne guarda la forma. Un numero postale internazionale (due lettere, nove cifre e due lettere) rimanda alla posta del Paese di destinazione: per un pacco diretto in Italia, Peek interroga [Poste Italiane](carrier:poste-italiane). Un altro numero rimanda al corriere che, nel catalogo di Peek, è l'unico a usare quella forma, e Peek lo interroga se ne legge il tracking. Appena il corriere mostra novità recenti quanto quelle di Techlink, Peek passa a lui: il pacco tiene il numero ZHPHD e mostra l'altro accanto. Altrimenti Peek resta sul tracking di Techlink: aspettati che la cronologia si fermi all'arrivo all'aeroporto di destinazione o, un passo dopo, al centro di smistamento.
 
 Peek controlla ogni 10 minuti. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna». Peek non può contattare Techlink o il venditore al posto tuo.
 
@@ -92,7 +93,7 @@ Un corriere che Techlink non nomina. Il suo tracking può avere il numero di que
 
 ### Perché il tracking Techlink non si aggiorna più?
 
-Le righe viste finora sul tracking di Techlink si fermano all'atterraggio nel Paese di destinazione, prima della dogana d'importazione. La consegna si segue sul tracking del corriere locale: chiedi al venditore quale corriere è e con che numero, e se il pacco tarda scrivi a lui.
+Le righe viste finora sul tracking di Techlink si fermano all'atterraggio nel Paese di destinazione o, un passo dopo, a un centro di smistamento in quel Paese (`Your shipment has arrived at sorting center`). La consegna si segue sul tracking del corriere locale: chiedi al venditore quale corriere è e con che numero, e se il pacco tarda scrivi a lui.
 
 :::sources
 - [Techlink: 智禾官网 (home page)](http://www.techlinksz.cn/) – nome dell'azienda, linee per piccoli pacchi verso Europa e America, Amazon, Walmart, TK e negozi indipendenti, porta a porta DDU e DDP, sdoganamento all'estero e società del 2023, account di consegna a destinazione, link ai contatti che non porta da nessuna parte

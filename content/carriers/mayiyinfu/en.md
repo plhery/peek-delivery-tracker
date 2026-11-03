@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-10-28
 ---
 
-Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, China, that ships express and small parcels abroad. Its tracking numbers are MY, ten digits and US: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on mayiyinfu.com.cn, which opens Mayi Yinfu's tracker. Mayi Yinfu flies parcels to your region and hands them to a company that delivers there: into Europe, Deutsche Post DHL.
+Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, China, that ships express and small parcels abroad. Its tracking numbers are MY, ten digits and US, and its tracker also knows numbers made of MYYF, eight digits and CN: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on mayiyinfu.com.cn, which opens Mayi Yinfu's tracker. Mayi Yinfu flies parcels to your region and hands them to a company that delivers there: into Europe, Deutsche Post DHL.
 
 ## Mayi Yinfu tracking number: what it looks like
 
@@ -15,6 +15,7 @@ MY stands for 蚂蚁 (mayi, "ant"). With invented digits:
 | Number | What it is |
 | --- | --- |
 | `MY0000000017US` | MY, ten digits and US: a Mayi Yinfu number. |
+| `MYYF00000042CN` | MYYF (蚂蚁银服's initials), eight digits and CN: a number Mayi Yinfu's tracker also knows. |
 | `MY000000017US` | Only nine digits: not Mayi Yinfu's layout. Check for a missing digit. |
 | `RR000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number. |
 
@@ -72,7 +73,7 @@ As of 28 October 2026, Mayi Yinfu's site, in Chinese only, gives one phone numbe
 
 ## Track a Mayi Yinfu parcel with Peek
 
-Paste a Mayi Yinfu number into [Peek](/) and it goes straight to Mayi Yinfu: no other carrier in Peek's catalog uses that layout. So does a link to Mayi Yinfu's tracker with `documentCode=` and the number or the seller's reference in it. A reference you type has no shape to go by, but Peek follows more than 3,500 carriers: add it anyway, press "Change" and pick Mayi Yinfu (typing 蚂蚁银服 or MYYF finds it too), or use "Change carrier" on a parcel you already added. Peek then shows the MY number under "Mayi Yinfu tracks this as". Peek drops dashes, though, so look up a reference with dashes in Mayi Yinfu's own box.
+Paste an MY…US number into [Peek](/) and it goes straight to Mayi Yinfu: no other carrier in Peek's catalog uses that layout. For an MYYF…CN number, Peek asks Mayi Yinfu whether it knows it, and follows it there when it does. A link to Mayi Yinfu's tracker with `documentCode=` and the number or the seller's reference in it goes straight to Mayi Yinfu too. A reference you type has no shape to go by, but Peek follows more than 3,500 carriers: add it anyway, press "Change" and pick Mayi Yinfu (typing 蚂蚁银服 or MYYF finds it too), or use "Change carrier" on a parcel you already added. Peek then shows the MY number under "Mayi Yinfu tracks this as". Peek drops dashes, though, so look up a reference with dashes in Mayi Yinfu's own box.
 
 Peek shows each line in Mayi Yinfu's words with its place, and the destination country when given; a flight line with the day it expects shows as its step alone, in English, such as "The first leg has departed". The first lines show as "Label created", `已入库,到达收货点` as "Received by carrier", `航班落地，拆板清关…` as "At customs", the delivery-vehicle and delivered lines as "Out for delivery" and "Delivered", and the other known lines as "In transit". The lines that run ahead stay out, and so does a line Mayi Yinfu's record shows was written more than twelve hours before the time it carries: a forecast, not a scan. A line dated after Peek's check waits until then. Lines in China, and DHL's copied lines placed in a country once DHL's number is in the record, are read on Beijing time; the others on the clock of where the parcel was, as best Peek can tell. Names, address, postcodes, weight, fees, signature and proof of delivery stay out, and there's no expected delivery date.
 
@@ -84,7 +85,7 @@ Peek checks Mayi Yinfu every 10 minutes, and hourly after two days without news 
 
 ### Why does my Mayi Yinfu number end in US?
 
-Every Mayi Yinfu number does. The ending doesn't say where the parcel is going, and it isn't a US postal number.
+Every MY number of Mayi Yinfu's does; the MYYF numbers its tracker also knows end in CN. The ending doesn't say where the parcel is going, and it isn't a US postal number.
 
 ### Does "delivered to the airport" mean my parcel has arrived?
 

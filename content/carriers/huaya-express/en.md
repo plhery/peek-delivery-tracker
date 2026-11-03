@@ -30,7 +30,8 @@ Huaya's tracker has a Chinese and an English version, and the scan lines Peek kn
 
 | Huaya says | What it means for you |
 | --- | --- |
-| `Package received & scanned at warehouse` | Huaya has the parcel at its Guangzhou warehouse: its first scan. |
+| `Shipping Label Created` | The label of the carrier that will deliver it in your country exists: order data only, Huaya doesn't have the parcel yet. |
+| `Package received & scanned at warehouse` | Huaya has the parcel at its Guangzhou warehouse: the first scan in its hands. |
 | `Package departed from the warehouse` | It has left that warehouse. |
 | `Customs export clearance completed` | China has cleared it for export. Your country's import check comes later. |
 | `Package handed over to airline` | Handed to the airline for the international leg. |
@@ -71,7 +72,7 @@ The 关于我们 (about us) and 服务网点 (branches) pages hold nothing but a
 
 Paste an HYYT…GZ number, or a link to Huaya's tracker with it after `documentCode=`, and [Peek](/) files it under Huaya Express straight away: in Peek's catalog that layout belongs to Huaya alone. A shop's order reference looks like nothing in particular, but Peek follows more than 3,500 carriers: enter the reference, then pick Huaya Express under "Change" (华亚运通 or GZHY bring it up too). For a parcel you've added already, use "Change carrier". Peek then also shows the number Huaya tracks the order under. Peek drops dashes, though, so look up a reference with dashes on Huaya's own tracker.
 
-Peek gets its updates from Huaya's own tracker: each line in Huaya's own words with its place when it has one, plus the destination country. The warehouse scan shows as "Received by carrier", the later lines above as "In transit". Times are converted from Beijing to your device's time zone, and if Huaya's tracker shows a line whose time hasn't come yet in Beijing, Peek leaves it out until then. Huaya gives no delivery date, so Peek shows none.
+Peek gets its updates from Huaya's own tracker: each line in Huaya's own words with its place when it has one, plus the destination country. The label line shows as "Label created", the warehouse scan as "Received by carrier", the later lines above as "In transit". Times are converted from Beijing to your device's time zone, and if Huaya's tracker shows a line whose time hasn't come yet in Beijing, Peek leaves it out until then. Huaya gives no delivery date, so Peek shows none.
 
 Nothing in Huaya's record names the company that delivers, so Peek stays with Huaya's tracker and the history ends at the hand-over line. To follow the rest, add the local carrier's number from the seller as a second parcel.
 

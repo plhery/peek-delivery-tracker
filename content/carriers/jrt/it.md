@@ -66,6 +66,7 @@ Nelle date con il punto viene prima il mese: 11.12 è il 12 novembre, non l'11 d
 | DHL scrive | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- |
 | `the instruction data for this shipment have been provided by the sender to dhl electronically` | DHL ha ricevuto i dati dell'etichetta. | «Etichetta creata» |
+| `shipment in transit to dhl` | Il pacco sta andando a DHL, prima del volo. | «In transito» |
 | `The shipment has been posted by the sender at the retail outlet` | JRT ha lasciato il pacco in una filiale Deutsche Post. | «In transito» |
 | `pick-up was successful.` | DHL ha ritirato il pacco lasciato da JRT. | «In transito» |
 | `the shipment has been processed in the parcel center of origin` | Smistato nel centro pacchi DHL di partenza. | «In transito» |

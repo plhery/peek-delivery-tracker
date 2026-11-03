@@ -51,8 +51,9 @@ Shouwu nennt seine Status „auto-judged by the system“, also automatisch verg
 | `Shipment started the customs clearance process at destination` | Der Zoll in deinem Land fertigt es ab. | „Beim Zoll“ |
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | Der Zoll in deinem Land hat es freigegeben. | „Unterwegs“ |
 | `Delivery to local courier` | An den Paketdienst übergeben, der bei dir zustellt, nicht an dich. | „Unterwegs“ |
+| `Your consignment has been picked up` | Der Paketdienst hat es nach dem Zoll in Shouwus Lager im Ausland abgeholt: keine Abholung beim Händler und keine durch dich. | „Unterwegs“ |
 | `Out for delivery` | Die Zustelltour des Paketdiensts vor Ort. | „In Zustellung“ |
-| `Delivered by post man` | Die Post vor Ort hat es zugestellt. | „Zugestellt“, sobald auch Shouwus Status `Delivered` lautet |
+| `Delivered by post man`, `This parcel has been delivered` | Die Post oder der Paketdienst vor Ort hat es zugestellt. | „Zugestellt“, sobald auch Shouwus Status `Delivered` lautet |
 
 Manche Verläufe zeigen andere englische Zeilen. Die wichtigsten:
 
@@ -69,6 +70,8 @@ Manche Verläufe zeigen andere englische Zeilen. Die wichtigsten:
 | `<Incorrect address.>` | So nennt der Paketdienst vor Ort den Grund, in spitzen Klammern: Die Adresse stimmt nicht. | „Zustellversuch“ |
 
 Zeilen wie `Shipment departed from facility`, `Depart from the sorting center` oder `Shipment arrived at an air hub` sind Zwischenstationen: Peek zeigt „Unterwegs“.
+
+**Zeilen auf Chinesisch.** Manche Pakete bekommen auch Zeilen, die Shouwu auf Chinesisch schreibt; Peek zeigt sie so, wie sie dastehen. `货物电子信息已经收到` (die elektronischen Warendaten sind eingegangen) kommt mit den Bestelldaten: „Etikett erstellt“. Danach, alle „Unterwegs“: `申报过港中` nach dem Code einer Charge (die Charge ist für den Landweg nach Hongkong angemeldet), `已到港，安排航班中` (am Abflugort angekommen, wartet auf einen Flug), `预计23号的航班` (der gebuchte Flug, hier am 23.; mit `二程` davor für die zweite Etappe), `航班已飞` (der Flug ist gestartet), `二程航班已飞` (der Flug der zweiten Etappe ist gestartet) und `已落地` (gelandet). `已落地，清关提货中` (gelandet, wird verzollt und bei der Fluggesellschaft abgeholt) zeigt Peek als „Beim Zoll“, `清关完成` (verzollt) und `已交仓扫描` (im Lager des zustellenden Paketdiensts eingescannt) wieder als „Unterwegs“.
 
 **Uhrzeiten um Stunden verschoben.** Shouwus System speichert die Ortszeit jedes Scans, als wäre sie Pekinger Zeit (UTC+8), auch bei Scans im Ausland, und seine Sendungsverfolgung rechnet sie in deine Zeitzone um. Ein Scan um 10:00 Uhr in Deutschland, Österreich oder der Schweiz erscheint bei Shouwu deshalb um 3:00 Uhr (Winterzeit, MEZ, UTC+1) oder um 4:00 Uhr (Sommerzeit, MESZ, UTC+2), und ein Flug nach Mitteleuropa wirkt sieben Stunden kürzer, im Sommer sechs. Verlass dich auf die Reihenfolge der Zeilen. Peek bestimmt die Uhrzeit jedes Scans nach seinem Ort oder nach der Etappe, auf der das Paket gerade war, und zeigt sie in der Zeitzone deines Geräts.
 
@@ -89,7 +92,7 @@ Shouwus Sendungsverfolgung nennt weder Namen noch Nummer des Paketdiensts, auße
 
 **Hängt bei `Preparing`, `Shipment information received` oder `Carrier received the shipment`.** Shouwu hat das Paket noch nicht oder hat es noch nicht aus seinem Lager losgeschickt. Frag den Shop, wann er es übergeben hat.
 
-**Hängt beim Zoll.** Nach `Shipment started the customs clearance process at destination` wartet es auf den Zoll in deinem Land. Sollst du Einfuhrabgaben zahlen, lies [Paket beim Zoll](guide:customs).
+**Hängt beim Zoll.** Nach `Shipment started the customs clearance process at destination` oder `已落地，清关提货中` wartet es auf den Zoll in deinem Land. Sollst du Einfuhrabgaben zahlen, lies [Paket beim Zoll](guide:customs).
 
 **Nichts mehr nach `Delivery to local courier`.** Der Paketdienst hat das Paket, aber Shouwus Sendungsverfolgung nennt seine Nummer nicht. Frag den Shop nach der Nummer des Paketdiensts und füg sie in Peek ein. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 

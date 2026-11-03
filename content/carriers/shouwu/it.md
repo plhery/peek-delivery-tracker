@@ -51,10 +51,13 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Shipment started the customs clearance process at destination` | Sdoganamento in corso nel Paese di arrivo. | «In dogana» |
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | La dogana di arrivo l'ha lasciato passare. | «In transito» |
 | `Delivery to local courier` | Passato al corriere che consegna nel tuo Paese, non a te. | «In transito» |
+| `Your consignment has been picked up` | Il corriere l'ha ritirato dal magazzino di Shouwu all'estero, dopo la dogana: non è un ritiro dal venditore, né da parte tua. | «In transito» |
 | `First parcel scan along Poste Italiane’s logistic network` | Poste Italiane ha ricevuto il pacco: è la sua prima scansione. | «In transito» |
 | `In transit along Poste Italiane’s logistic network` | In viaggio nella rete di Poste Italiane. | «In transito» |
 | `Out for delivery` | Il giro di consegna del corriere locale. | «In consegna» |
-| `Delivered by post man` | La posta locale l'ha consegnato. | «Consegnato», quando anche lo stato di Shouwu è `Delivered` |
+| `Delivered by post man`, `This parcel has been delivered` | La posta o il corriere locale l'ha consegnato. | «Consegnato», quando anche lo stato di Shouwu è `Delivered` |
+
+**Righe in cinese.** Alcuni pacchi hanno anche righe che Shouwu scrive in cinese, e Peek le mostra così come sono. `货物电子信息已经收到` (i dati elettronici della merce sono arrivati) accompagna i dati dell'ordine: «Etichetta creata». Poi, tutte «In transito»: `申报过港中` dopo il codice di un lotto (il lotto è dichiarato per la strada verso Hong Kong), `已到港，安排航班中` (arrivato al punto di partenza, in attesa di un volo), `预计23号的航班` (il volo prenotato, qui il 23; con `二程` davanti, per la seconda tratta), `航班已飞` (il volo è partito), `二程航班已飞` (è partito il volo della seconda tratta) e `已落地` (atterrato). `已落地，清关提货中` (atterrato, in sdoganamento e ritiro dalla compagnia aerea) compare come «In dogana», mentre `清关完成` (sdoganato) e `已交仓扫描` (scansionato al magazzino del corriere che consegna) tornano «In transito».
 
 **Orari sballati di qualche ora.** Il sistema di Shouwu registra l'ora locale di ogni scansione come se fosse ora di Pechino, anche per le scansioni all'estero, e il suo tracking la mostra nel tuo fuso orario. Così una scansione fatta in Italia alle 10:00 compare alle 3:00 con l'ora solare e alle 4:00 con l'ora legale, e il volo sembra durare ore in meno. Fidati dell'ordine delle righe. Peek ricava l'ora di ogni scansione dal suo luogo, o dalla tratta in cui si trovava il pacco, e la mostra nel fuso orario del tuo dispositivo.
 
@@ -75,7 +78,7 @@ Il tracking di Shouwu non indica né il nome né il numero del corriere, oltre a
 
 **Fermo su `Preparing`, `Shipment information received` o `Carrier received the shipment`.** Shouwu non ha ancora il pacco, oppure non l'ha ancora fatto partire dal magazzino. Chiedi al venditore quando l'ha affidato a Shouwu.
 
-**Fermo in dogana.** Dopo `Shipment started the customs clearance process at destination` il pacco aspetta la dogana di arrivo. Se ti chiedono di pagare qualcosa, leggi [pacco fermo in dogana](guide:customs).
+**Fermo in dogana.** Dopo `Shipment started the customs clearance process at destination` o `已落地，清关提货中` il pacco aspetta la dogana di arrivo. Se ti chiedono di pagare qualcosa, leggi [pacco fermo in dogana](guide:customs).
 
 **Niente dopo `Delivery to local courier`.** Il pacco ce l'ha il corriere, ma il tracking di Shouwu non dà il suo numero. Chiedi al venditore il numero del corriere e incollalo in Peek. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 

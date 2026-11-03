@@ -31,6 +31,7 @@ SpeedX's tracking page is in English only. These are the lines a parcel usually 
 | --- | --- |
 | `Shipping Label Created` | The shop made a label. SpeedX doesn't have the parcel yet. |
 | `Pickup Requested` | The shop booked SpeedX to collect the parcel. SpeedX doesn't have it yet. |
+| `Parcel Picked Up` | SpeedX's driver has collected the parcel from the shop. |
 | `Processing at Origin Facility` | SpeedX has it and is sorting it at the first facility. |
 | `In transit to destination facility` | On its way between SpeedX facilities. |
 | `Processing at Transit Facility` | Sorted at a facility along the way. |

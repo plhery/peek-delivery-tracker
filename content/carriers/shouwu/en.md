@@ -51,8 +51,11 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Shipment started the customs clearance process at destination` | Your country's customs are clearing it. | "At customs" |
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | Your country's customs have let it through. | "In transit" |
 | `Delivery to local courier` | Handed to the courier that delivers in your country, not to you. | "In transit" |
+| `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: no pickup from the seller, nor by you. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
-| `Delivered by post man` | The local post has delivered it. | "Delivered", once Shouwu's status says `Delivered` |
+| `Delivered by post man`, `This parcel has been delivered` | The local post or courier has delivered it. | "Delivered", once Shouwu's status says `Delivered` |
+
+**Lines in Chinese.** Some parcels also get lines Shouwu writes in Chinese, which Peek shows as written. `货物电子信息已经收到` (the goods' electronic data received) comes with the order data: "Label created". Then, all "In transit": `申报过港中` after a batch's code (the batch is declared for the road to Hong Kong), `已到港，安排航班中` (at the port of departure, waiting for a flight), `预计23号的航班` (the flight booked, here for the 23rd; with `二程` in front, for the second leg), `航班已飞` and `二程航班已飞` (the flight, or the second leg's, has left) and `已落地` (landed). `已落地，清关提货中` (landed, being cleared and collected from the airline) is "At customs"; `清关完成` (cleared) and `已交仓扫描` (scanned in at the delivering courier's depot) are "In transit" again.
 
 **Times out by hours.** Shouwu's system records every scan's local time as if it were Beijing time, scans abroad too, and its tracker shows that in your time zone. So a scan in the UK or the US shows hours early, and the flight looks hours shorter. Go by the order of the rows. Peek works out each scan's clock from its place, or from the leg the parcel was on, and shows them in your device's time zone.
 
@@ -74,7 +77,7 @@ Shouwu's tracker gives no courier's name or number, beyond what a scan's wording
 
 **Stuck on `Preparing`, `Shipment information received` or `Carrier received the shipment`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
 
-**Stuck at customs.** After `Shipment started the customs clearance process at destination`, it waits for your country's customs. If you're asked for import charges, see [parcels held at customs](guide:customs).
+**Stuck at customs.** After `Shipment started the customs clearance process at destination` or `已落地，清关提货中`, it waits for your country's customs. If you're asked for import charges, see [parcels held at customs](guide:customs).
 
 **Nothing after `Delivery to local courier`.** The courier has it, but Shouwu's tracker doesn't give the courier's number. Ask the seller for the courier's number and paste it into Peek. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 

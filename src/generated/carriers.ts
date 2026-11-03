@@ -3874,6 +3874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#234182"
     },
     {
+      "id": "posta-srbije",
+      "catalog": "posta-srbije",
+      "slug": "pochta-serbii-otslezhivanie",
+      "title": "Почта Сербии (Pošta Srbije): отслеживание посылок",
+      "name": "Pošta Srbije",
+      "color": "#fbba00"
+    },
+    {
       "id": "lietuvos-pastas",
       "catalog": "lietuvos-pastas",
       "slug": "pochta-litvy-otslezhivanie",

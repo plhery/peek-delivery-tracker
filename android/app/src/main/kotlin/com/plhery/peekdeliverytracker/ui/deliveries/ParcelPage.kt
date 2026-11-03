@@ -595,8 +595,8 @@ internal fun PageBarButton(symbol: String, label: String, tag: String, modifier:
 }
 
 /**
- * The page's keys (ParcelDetailView's `keys`), while the keyboard reaches the page, nothing stands over it and the
- * search field doesn't have it: Esc back to the list from a page over it, and the keys of the ••• menu's items on its
+ * The page's keys (ParcelDetailView's `keys`), while the keyboard reaches the page, nothing stands over it, a parcel's
+ * link's sheet included, and the search field doesn't have it: Esc back to the list from a page over it, and the keys of the ••• menu's items on its
  * parcel, Delete waiting while another change is saved. A page on its way back into its card takes none.
  */
 @Composable
@@ -612,7 +612,7 @@ private fun PageKeys(state: DeliveriesState, pageId: UUID, parcel: Parcel?) {
 }
 
 private fun DeliveriesState.pageKey(event: KeyEvent, pageId: UUID, parcel: Parcel?, stack: PageStack?): Boolean {
-    if (modal || showingFilters || searchFocused) return false
+    if (modal || showingFilters || searchFocused || linkShown) return false
     val act = event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0
     // The first open's sample page, over the first open: Esc goes back to it.
     if (stack != null) {

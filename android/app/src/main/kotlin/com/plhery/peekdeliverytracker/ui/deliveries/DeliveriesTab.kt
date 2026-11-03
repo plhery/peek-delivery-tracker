@@ -191,6 +191,7 @@ fun DeliveriesTab(
         val lifecycle = LocalLifecycleOwner.current.lifecycle
         val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
         state.inFront = resumed
+        state.linkShown = LocalParcelLinkOpen.current
         val invited by source.shouldInviteNotifications.collectAsState()
         val enabling by source.notificationEnableInProgress.collectAsState()
         val refreshing by source.refreshing.collectAsState()
@@ -550,8 +551,8 @@ private fun Revealing(state: DeliveriesState, reduceMotion: Boolean, resumed: Bo
  * The deliveries' keys, which do what their buttons do (A-S99, A-G10): ↑ and ↓ show the card before or after the
  * parcel beside the list and bring it into view, Return opens the one shown by itself, Ctrl or Meta with F opens the
  * search and focuses its field and Escape closes it, Ctrl or Meta with N adds. The parcel's own are on its page. None
- * while the filters, a card's menu, the delete it asks about or an alert are open (`keyboardFree`); while the search
- * field has the focus, only adding, finding and closing the search.
+ * while the filters, a card's menu, the delete it asks about, an alert or a parcel's link's sheet are open
+ * ([DeliveriesState.keyboardFree]); while the search field has the focus, only adding, finding and closing the search.
  *
  * As the iPhone's, they are the window's: once nothing in it has used a key, the window gives it over here. Beside a
  * parcel the list's column also takes them, and the focus, so that ↑ and ↓ step through the cards rather than move
@@ -584,7 +585,7 @@ private fun Modifier.listKeys(state: DeliveriesState): Modifier {
 /** Acts on a key the deliveries answer, as [DeliveriesKey.available] has them; true once it has used it. */
 private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMotion: Boolean): Boolean {
     val keys = DeliveriesKey.available(
-        free = !showingFilters && !modal && !firstOpenShown, searching = showingSearch, typing = searchFocused, arrangement = arrangement,
+        free = keyboardFree, searching = showingSearch, typing = searchFocused, arrangement = arrangement,
         navigation = navigator.navigation,
         cards = rows, hasParcels = parcels.isNotEmpty(), canUndo = source.undoParcel.value != null,
     )

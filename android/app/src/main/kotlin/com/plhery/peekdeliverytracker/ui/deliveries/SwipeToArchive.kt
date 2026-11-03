@@ -40,6 +40,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.isSecondaryPressed
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.util.VelocityTracker
@@ -472,6 +473,7 @@ internal fun archiveAction(swipe: ArchiveSwipe, title: String): CustomAccessibil
  * The drag on the row: undecided until it has gone [ARCHIVE_DECISION_DISTANCE] in the window, then the card's if it
  * goes across ([archivePanDecision]), which stops the list's scroll by taking every move after; the list's otherwise. One
  * finger only. Translations are measured from where the drag was decided, as iOS 27 reports a recognized pan from zero.
+ * A secondary click is the card's menu's ([secondaryClick]), not a drag.
  *
  * It also tells the row's press, as ArchivePanGestureRecognizer does: [PRESS_DELAY] after the finger goes down, ended
  * once it has moved more than [PRESS_SLOP] on the row, as it lifts, or as the drag goes to the swipe or the list.
@@ -481,7 +483,7 @@ private suspend fun androidx.compose.ui.input.pointer.PointerInputScope.archiveP
     val slop = PRESS_SLOP.toPx()
     awaitEachGesture {
         val down = awaitFirstDown(requireUnconsumed = false)
-        if (swipe.committing) return@awaitEachGesture
+        if (swipe.committing || currentEvent.buttons.isSecondaryPressed) return@awaitEachGesture
         swipe.touched()
         try {
             val startInWindow = down.position + origin()

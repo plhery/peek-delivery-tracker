@@ -37,6 +37,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.isSecondaryPressed
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
@@ -125,8 +129,9 @@ internal fun Modifier.cardButton(
  * `indication`, ExperimentalLiftButtonStyle's lift on an archived row. A finger's tap calls `onTap`, TalkBack's double
  * tap `onOpen` (`.accessibilityAction { onOpen() }`). A long press calls `onLongClick`, the list's card menu as the
  * iPhone's `.contextMenu` opens it, with the phone's long-press feel as the iPhone's menu comes with its own; the
- * finger lifting then opens nothing. TalkBack offers it as the element's long-press action, and `actions` (the swipe's
- * Archive) beside it.
+ * finger lifting then opens nothing. A secondary click calls it too, at once and without the feel, as `.contextMenu`
+ * opens under a pointer ([secondaryClick]). TalkBack offers it as the element's long-press action, and `actions` (the
+ * swipe's Archive) beside it.
  */
 internal fun Modifier.cardTouches(
     label: String,
@@ -154,7 +159,24 @@ internal fun Modifier.cardTouches(
         }
         if (actions.isNotEmpty()) customActions = actions
     }
+    .then(if (onLongClick != null) Modifier.secondaryClick(onLongClick) else Modifier)
     .combinedClickable(interactionSource = null, indication = indication, onLongClick = onLongClick, onClick = onTap)
+
+/**
+ * A secondary click, a mouse's right button or a touchpad's two-finger click, calls `action` as it goes down, as a
+ * context menu opens on the iPad. The press is taken before what it is on hears it, so it neither clicks nor long
+ * presses nor gives under the pointer.
+ */
+internal fun Modifier.secondaryClick(action: () -> Unit): Modifier = pointerInput(action) {
+    awaitPointerEventScope {
+        while (true) {
+            val event = awaitPointerEvent(PointerEventPass.Initial)
+            if (event.type != PointerEventType.Press || !event.buttons.isSecondaryPressed) continue
+            event.changes.forEach { it.consume() }
+            action()
+        }
+    }
+}
 
 /** The texts a card writes, in the order VoiceOver reads them once combined, as one label. */
 internal fun cardLabel(vararg parts: String?): String = parts.filterNot { it.isNullOrEmpty() }.joinToString(", ")

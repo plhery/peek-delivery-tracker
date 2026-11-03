@@ -369,7 +369,7 @@ private val LocalLayerPass = staticCompositionLocalOf<LayerPass?> { null }
 /**
  * The card's menu (A-S41, A-G04): the screen dims, the card lifts in its shape, and the parcel's items stand beside it on
  * glass in their groups, the dimmed screen showing through it, each with its symbol, and the keys that press them on
- * the parcel the keyboard acts on. A tap
+ * the parcel the keyboard acts on, while the keyboard reaches the deliveries. A tap
  * outside, the back gesture or a choice closes it; a choice acts once it has closed. TalkBack reaches only the menu,
  * from its first item.
  */
@@ -379,7 +379,9 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
     val density = LocalDensity.current
     val parcel = request.parcel
     val items = remember(parcel) { ParcelMenuItem.menu(parcel, onCard = true, reader = state.source.viewerLink(parcel) != null) }
-    val shortcuts = parcel.id == state.selectedCard && keyboardConnected()
+    // The keys act on the parcel shown beside the list while the deliveries have the keyboard, and the search field
+    // doesn't (`parcel.id == selectedCard && keyboardFree && !searchFocused`).
+    val shortcuts = parcel.id == state.selectedCard && keyboardConnected() && state.keyboardFreeUnderMenu && !state.searchFocused
     val menu = rememberMenuPresence(request) { state.menu = null }
     val shown = menu.shown
     val choose = { item: ParcelMenuItem -> menu.close { state.chose(item, parcel) } }

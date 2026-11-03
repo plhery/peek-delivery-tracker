@@ -1185,11 +1185,32 @@ internal class DeliveriesState(
      * A menu, the question it asks, an alert, the page's map or one of its sheets, or Settings, shows over the list, and
      * TalkBack reaches nothing else; nor do the keys, nor the rating's question (`listCovered`, `keyboardFree`).
      */
-    val modal: Boolean
-        get() = menu != null || pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
+    val modal: Boolean get() = menu != null || coveredBesidesMenu
+
+    /** What [modal] counts but a card's menu. */
+    private val coveredBesidesMenu: Boolean
+        get() = pageMenu != null || deleting != null || renaming != null || actionError != null || pageError != null ||
             mapCover != null || carrierEditor != null || carrierEditorClosing || deleteGoing || alerts != null || alertsClosing ||
             sharing != null || sharingClosing || source.feedbacks.covering || feedbackSheetShown || addition != null || additionClosing ||
             showingAccount
+
+    /**
+     * A parcel's link's sheet is up over the window (`links.route != nil`), the root's: the deliveries' keys rest under
+     * it ([keyboardFree]).
+     */
+    var linkShown: Boolean by mutableStateOf(false)
+
+    /**
+     * Whether the keyboard reaches the deliveries (`keyboardFree`): nothing stands over the list or its parcel, neither
+     * what [modal] counts nor the filters, the first open or a parcel's link's sheet over the window.
+     */
+    val keyboardFree: Boolean get() = menu == null && keyboardFreeUnderMenu
+
+    /**
+     * [keyboardFree] as a card's open menu reads it to show its items' keys (`shortcuts`): the iPhone's context menu
+     * isn't one of what `keyboardFree` counts.
+     */
+    val keyboardFreeUnderMenu: Boolean get() = !coveredBesidesMenu && !showingFilters && !firstOpenShown && !linkShown
 
     /**
      * Opens the map of the page with `pageId` over the window (`openMap()`), from its globe or its route; TalkBack goes

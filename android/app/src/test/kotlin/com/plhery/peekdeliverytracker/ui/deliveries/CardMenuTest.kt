@@ -13,6 +13,7 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -27,11 +28,13 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performMouseInput
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.rightClick
 import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
@@ -67,9 +70,10 @@ class CardMenuTest {
 
     private lateinit var source: FakeDeliveries
 
-    private fun show() {
+    /** The demo's deliveries, with a hardware keyboard connected where `keyboard`. */
+    private fun show(keyboard: Boolean = false) {
         source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
-        compose.setContent { RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false) }
+        compose.setContent { WithKeyboard(keyboard) { RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false) } }
         compose.waitForIdle()
     }
 
@@ -113,6 +117,52 @@ class CardMenuTest {
         choose(ParcelMenuItem.Open)
         compose.onNodeWithTag(CARD_MENU).assertDoesNotExist()
         compose.onNode(hasText("Birthday gift", substring = true) and hasAnyAncestor(hasTestTag(PARCEL_PAGE))).assertExists()
+    }
+
+    /**
+     * A secondary click opens the menu as `.contextMenu` does under a pointer, at once, on a card and on an archived
+     * row, and neither opens the parcel nor gives under the pointer.
+     */
+    @Test
+    fun aSecondaryClickOpensTheMenuOnACardAndAnArchivedRowAndOpensNothing() {
+        show()
+        compose.card("Birthday gift").performMouseInput { rightClick() }
+        compose.waitForIdle()
+        compose.onNodeWithTag(CARD_MENU).assertExists()
+        assertTrue(ParcelMenuItem.Archive in shownItems())
+        back()
+        compose.onNodeWithTag(CARD_MENU).assertDoesNotExist()
+        compose.onNodeWithTag(PARCEL_PAGE).assertDoesNotExist()
+
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
+        compose.onNode(hasContentDescription("Archived", substring = true) and hasClickAction()).performClick()
+        compose.waitForIdle()
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToNode(cardNamed("Linen weekend bag"))
+        compose.card("Linen weekend bag").performMouseInput { rightClick() }
+        compose.waitForIdle()
+        assertTrue(ParcelMenuItem.Restore in shownItems())
+        back()
+        compose.onNodeWithTag(PARCEL_PAGE).assertDoesNotExist()
+    }
+
+    /**
+     * The menu of the card shown beside the list shows its items' keys while a keyboard is connected, only while the
+     * deliveries have the keyboard and the search field doesn't (`keyboardFree && !searchFocused`).
+     */
+    @Test
+    @Config(qualifiers = TABLET)
+    fun theMenusKeysShowOnlyWhileTheSearchFieldDoesntHaveTheKeyboard() {
+        show(keyboard = true)
+        longPress("New trainers")
+        item(ParcelMenuItem.Archive).assertContentDescriptionEquals("Archive parcel, Meta+Ctrl+A")
+        back()
+
+        compose.onNodeWithTag(SEARCH_BUTTON).performClick()
+        compose.waitForIdle()
+        compose.onNodeWithTag(SEARCH_FIELD).assertIsFocused()
+        longPress("New trainers")
+        item(ParcelMenuItem.Archive).assertContentDescriptionEquals("Archive parcel")
+        item(ParcelMenuItem.Delete).assertContentDescriptionEquals("Delete permanently")
     }
 
     @Test

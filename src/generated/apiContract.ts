@@ -48417,6 +48417,84 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://work.mymmtl.com/track"
+  },
+  "cargo-trans-logistik": {
+    "displayName": "CTL Cargo Trans Logistik",
+    "aliases": [
+      "Cargo Trans Logistik",
+      "Cargo Trans Logistik AG",
+      "CTL Cargo Trans Logistik AG"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#3c5879",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://ctl-partner.net/CTL-Onlineplattform/Tracking/Default.aspx"
+  },
+  "edi-express": {
+    "displayName": "EDI Express",
+    "aliases": [
+      "EDI Express Inc",
+      "EDI Express Inc.",
+      "EDI Express, Inc."
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#bf1e2d",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://my.ediexpressinc.com/pro_pu_trace.asp"
+  },
+  "fmd-distribution": {
+    "displayName": "FMD Distribution",
+    "countries": [
+      "US"
+    ],
+    "color": "#b72027",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://tracking.carrierlogistics.com/scripts/fmd.pol/boldetail.htm?wbtn=PRO&wpro1={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "tracking.carrierlogistics.com"
+        ],
+        "pathPattern": "^/scripts/fmd\\.pol/boldetail\\.htm$",
+        "params": [
+          "wpro1"
+        ]
+      },
+      {
+        "domains": [
+          "tracking.carrierlogistics.com"
+        ],
+        "pathPattern": "^/scripts/fmd\\.pol/facts\\.htm$",
+        "params": [
+          "pronum"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.carrierlogistics.com/scripts/fmd.pol/facts.htm"
   }
 } as const;
 
@@ -49801,7 +49879,10 @@ export const CARRIER_IDS = [
   "matson",
   "schneider",
   "wooliiporter",
-  "mountain-movers"
+  "mountain-movers",
+  "cargo-trans-logistik",
+  "edi-express",
+  "fmd-distribution"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

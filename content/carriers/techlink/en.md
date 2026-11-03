@@ -40,6 +40,7 @@ Techlink publishes no list of its scans. It records each one in English and Chin
 | `Parcel is in transit to origin airport` | On the road in China, from the warehouse to the airport of departure. |
 | `Depart from the original airport` | The flight has left the airport in China. |
 | `Arrive at the destination airport` | The flight has landed in the destination country. Import clearance comes next. |
+| `Shipment Received at Facility` | It has reached a hub in the destination country, after the flight. |
 | `Your shipment has arrived at sorting center` | It's at a sorting centre in the destination country, after the flight. |
 | `Your shipment has been processed at sorting center and ready for shipping` | That sorting centre has sorted it for its next leg. |
 | `Your shipment has departed from the transit origin` | It has left that sorting centre for its next leg. |
@@ -61,7 +62,7 @@ Techlink's door-to-door express service comes duties paid (DDP) or duties unpaid
 
 **Only `Parcel electronic information received`.** The seller has booked the parcel, but it hasn't reached Techlink's warehouse. If nothing follows for several days, ask the seller whether it has been sent.
 
-**Stuck after `Arrive at the destination airport`.** The flight has landed in your country. Import customs and the handover to the local carrier come next and can bring days without a scan. After this line, Techlink's tracker has so far shown only moves inside the destination country: a sorting centre and the way on from it, the last four lines in the table above. If it stays quiet, ask the seller which carrier delivers in your country and for that carrier's number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck after `Arrive at the destination airport`.** The flight has landed in your country. Import customs and the handover to the local carrier come next and can bring days without a scan. After this line, Techlink's tracker has so far shown only moves inside the destination country: a hub, a sorting centre and the way on from it, the last five lines in the table above. If it stays quiet, ask the seller which carrier delivers in your country and for that carrier's number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Nothing found.** Check the number with the seller: a ZHPHD number has exactly 19 characters. A parcel the seller has only just booked may not show anything yet either.
 
@@ -79,7 +80,7 @@ For anything about your order, the seller is the one to ask. For a delivery prob
 
 Peek reads Techlink's own tracker, the same one its tracking page uses, and shows the status, each scan with its country, and the destination country. Techlink's English lines show as it writes them. Its own scans, in China, are read on China's clock, any other scan on the clock of its country, and Peek shows each in your device's time zone. Techlink gives no expected delivery date, weight or service name, so Peek shows none.
 
-When Techlink's record holds the delivering carrier's number, Peek looks at its shape. An international postal number (two letters, nine digits, two letters) points to the post of the destination country; a number only one carrier in Peek's catalog uses points to that carrier. When Peek reads that carrier's own tracking, it asks it and switches to it once it shows progress as recent as Techlink's. The parcel keeps its ZHPHD number and shows the other one with it. Otherwise Peek stays on Techlink's tracker, whose lines seen so far end at `Arrive at the destination airport` or, a step later, `Your shipment has arrived at sorting center`: expect its history to end there.
+When Techlink's record holds the delivering carrier's number, Peek looks at its shape. An international postal number (two letters, nine digits, two letters) points to the post of the destination country; a number only one carrier in Peek's catalog uses points to that carrier. When Peek reads that carrier's own tracking, it asks it and switches to it once it shows progress as recent as Techlink's. The parcel keeps its ZHPHD number and shows the other one with it. Otherwise Peek stays on Techlink's tracker, whose lines seen so far end at `Arrive at the destination airport` or a few steps later, in the destination country: expect its history to end there.
 
 Peek checks every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Techlink or the seller for you.
 
@@ -99,7 +100,7 @@ A carrier in your country that Techlink doesn't name. Its tracker can hold that 
 
 ### Why has my Techlink tracking stopped?
 
-The scans seen on Techlink's tracker so far end when the flight lands in your country (`Arrive at the destination airport`) or a few steps later, at a sorting centre there or on the way between two facilities (`In transit, it is currently in transit to the next facility`). What happens after the handover shows on the local carrier's tracking, so ask the seller for that carrier and its number, and contact the seller if the parcel is late.
+The scans seen on Techlink's tracker so far end when the flight lands in your country (`Arrive at the destination airport`) or a few steps later, at a hub or sorting centre there or on the way between two facilities (`In transit, it is currently in transit to the next facility`). What happens after the handover shows on the local carrier's tracking, so ask the seller for that carrier and its number, and contact the seller if the parcel is late.
 
 :::sources
 - [Techlink: 智禾官网 (home)](http://www.techlinksz.cn/) – company name, small-parcel lines to Europe and America, Amazon, Walmart, TK and independent shops, DDU and DDP door-to-door, customs clearance abroad and the 2023 company, delivery accounts at destination, contact link with no target

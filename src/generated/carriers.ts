@@ -4384,6 +4384,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Κυπριακά Ταχυδρομεία: εντοπισμός δέματος, κωδικός, τελωνείο",
       "name": "Cyprus Post",
       "color": "#e4a50e"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-entopismos-dematos",
+      "title": "Εντοπισμός δέματος GZYL: αριθμός YL…YQ και καταστάσεις",
+      "name": "GZYL",
+      "color": "#4e79e1"
     }
   ],
   "hr": [

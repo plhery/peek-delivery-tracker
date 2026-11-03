@@ -2188,6 +2188,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e2393c"
     },
     {
+      "id": "lingdong",
+      "catalog": "lingdong",
+      "slug": "lingdong-sendungsverfolgung",
+      "title": "Lingdong Sendungsverfolgung: SZLD-Nummer, Status und Zoll",
+      "name": "Lingdong International",
+      "color": "#0171bb"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-sendungsverfolgung",

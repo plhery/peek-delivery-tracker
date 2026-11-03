@@ -613,8 +613,8 @@ class InvitationTest {
         openParcel()
         tap(INVITATION_ACCEPT)
         // `.scrollDismissesKeyboard(.interactively)`: the sheet's scroll hands its drags to the keyboard's own nested
-        // scroll (`imeNestedScroll`), which takes it down with the finger. Robolectric has no keyboard to move; the
-        // drag itself is for the device.
+        // scroll (`rememberKeyboardDrag`), which takes it down with the finger. Robolectric has no keyboard to move;
+        // KeyboardDragTest drives the connection, and the drag itself is for the device.
         val scroll = compose.onAllNodes(
             SemanticsMatcher.keyIsDefined(SemanticsProperties.VerticalScrollAxisRange) and hasAnyAncestor(hasTestTag(FRIENDS_PANEL)),
             useUnmergedTree = true,

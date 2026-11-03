@@ -6,10 +6,8 @@ import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.ime
-import androidx.compose.foundation.layout.imeNestedScroll
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.onFocusedBoundsChanged
 import androidx.compose.foundation.rememberScrollState
@@ -26,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.LayoutCoordinates
@@ -54,10 +53,9 @@ import kotlinx.coroutines.flow.first
  * from the viewport's top (under a bar) and the keyboard, as the focus moves, as the keyboard comes and as the viewport
  * grows or shrinks (a button over the keyboard under it, a turn). The scroll's own, not the reader's: the sheet stays.
  * With [dismissesKeyboard], a drag of the content down takes the keyboard down with the finger
- * (`.scrollDismissesKeyboard(.interactively)`). [modifier] is the viewport's, [contentModifier] is what scrolls in it
- * (its padding). The room isn't counted in what a fitted sheet measures it for.
+ * (`.scrollDismissesKeyboard(.interactively)`), through [rememberKeyboardDrag]. [modifier] is the viewport's,
+ * [contentModifier] is what scrolls in it (its padding). The room isn't counted in what a fitted sheet measures it for.
  */
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun KeyboardScrollColumn(
     modifier: Modifier = Modifier,
@@ -73,6 +71,7 @@ internal fun KeyboardScrollColumn(
     val keyboard = remember { SheetKeyboard() }
     val ime = WindowInsets.ime
     val reduceMotion = PeekTheme.reduceMotion
+    val drag = if (dismissesKeyboard) rememberKeyboardDrag() else null
     LaunchedEffect(keyboard, top, reduceMotion, scroll) {
         val clearance = with(density) { top.toPx() }
         snapshotFlow { Triple(keyboard.focused, keyboard.covered(ime.getBottom(density)), keyboard.height) }.collectLatest { (_, covered, _) ->
@@ -86,7 +85,7 @@ internal fun KeyboardScrollColumn(
     Column(
         modifier
             .onGloballyPositioned { keyboard.place(it) }
-            .then(if (dismissesKeyboard) Modifier.imeNestedScroll() else Modifier)
+            .then(if (drag != null) Modifier.nestedScroll(drag) else Modifier)
             .verticalScroll(scroll)
             .onFocusedBoundsChanged { keyboard.focused = it }
             .then(KeyboardRoom(keyboard, ime, bottom))

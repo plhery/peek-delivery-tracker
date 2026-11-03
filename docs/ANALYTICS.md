@@ -77,6 +77,12 @@ are virtual names, never real URLs.
 - **Friends**: profile save, invitation create/revoke/accept/share/copy, a friend's
   card opened, remove, disable.
 - **Passport** (web): a stamp opened for its explanation.
+- **Android test** (web): the invitation to test the Android app shown (once per page load
+  and place), opened, hidden for a week with ×, or never again; on its steps page
+  (`android-test`), each step's link followed: the testers' group, Google Play's opt-in and the
+  install. The parcel page holds it twice, so its events say where: `spot` is `parcel` for the
+  page's row, `alerts` for "Notify me" and `home` for the home page's banner. Google Play
+  counts the testers ([Google Play](google-play/README.md)).
 - **Settings**: language, appearance, notifications and the App Store link beside them,
   widgets, export, account deletion, app opens.
 - **Delivery email**: switched on or off in Settings, the one-time offer accepted or
@@ -142,7 +148,8 @@ postcodes, invitation codes, errors, search
 terms, or any query string but the campaign below. A parcel page is the `parcel-link` screen, whatever its address; the sample parcel's is in `demo` mode. Umami still
 sees the IP, user agent, basic device data and language.
 
-On the web, every event carries the app's language (`locale`) when the page declares one.
+On the web, every event carries the app's language (`locale`) when the page declares one, and the
+Android test's events the place they come from (`spot`).
 A page load's first page view also says where the visitor came from, since Umami counts
 sources from page views only: the `referrer`, as origin and path without query or fragment,
 when it is another site (or an Android app), and the landing address's `utm_source`,

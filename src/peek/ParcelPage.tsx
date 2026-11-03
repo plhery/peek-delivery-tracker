@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { AndroidTestRow } from '../components/AndroidTest';
 import { Icon, ParcelIllustration } from '../components/Icon';
 import { ParcelMapSheet, useParcelRoute } from '../components/ParcelMap';
 import type { Rect } from '../components/map/WorldMap';
@@ -516,6 +517,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
           onCalendar={!owner && slot ? addToCalendar : undefined}
           onShare={owner ? () => void share() : undefined}
           onRename={present ? undefined : sample ? (next) => setRenamed({ name: next }) : (next) => renameParcel(linkId, next)} compactName={!owner} />}
+        <AndroidTestRow />
         {carrierKnown && <Notes view={view} stage={stage} flag={flag} trouble={failing} carrier={displayed} />}
         {waitingAt && <PickupPointCard point={waitingAt} />}
         {!beside && teaser}

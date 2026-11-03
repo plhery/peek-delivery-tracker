@@ -1,0 +1,38 @@
+/* The invitation to test Peek for Android: a row on the parcel page, a banner on the home page, and their thanks. */
+.android-test__words { display: grid; gap: 3px; flex: 1; min-width: 0; }
+.android-test__words strong { font-size: 14px; font-weight: 600; letter-spacing: -.1px; }
+.android-test__words small { color: var(--ink-soft); font-size: 12.5px; line-height: 1.4; }
+.android-test__close { display: inline-grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; color: var(--ink-soft); background: transparent; transition: scale .18s var(--spring); }
+.android-test__close:active { scale: .92; }
+.android-test__close svg { width: 16px; height: 16px; stroke-width: 2.2; }
+.android-test__done { display: grid; place-items: center; width: 46px; height: 46px; flex: 0 0 46px; border-radius: 12px; color: var(--green); background: var(--green-soft); }
+.android-test__done svg { width: 22px; height: 22px; stroke-width: 2.6; }
+
+/* In "Notify me", below what the sheet asks first. */
+.android-test-offer { margin-top: 14px; }
+
+.android-test-row { display: flex; align-items: center; gap: 8px; padding: 12px 6px 12px 14px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); color: var(--ink); }
+.android-test-row--thanks { gap: 14px; }
+.android-test-row__link { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; color: inherit; text-decoration: none; }
+.android-test-row__link:active { scale: .988; }
+.android-test-row__mark { position: relative; flex: 0 0 46px; width: 46px; height: 46px; }
+.android-test-row__mark > svg { display: block; }
+.android-test-row__mark > span { position: absolute; right: -5px; bottom: -5px; display: grid; place-items: center; width: 20px; height: 20px; border: 2px solid var(--paper); border-radius: 50%; color: var(--green); background: var(--green-soft); }
+.android-test-row__mark > span svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.android-test-row__action { display: inline-flex; align-items: center; gap: 3px; color: var(--green); font-size: 13px; font-weight: 600; }
+.android-test-row__action svg { width: 13px; height: 13px; flex: 0 0 13px; stroke-width: 2.6; }
+
+.android-test-banner { display: flex; align-items: center; gap: 10px; width: min(100%, 1044px); min-height: 48px; margin: 0 auto 14px; padding: 0 4px 0 12px; border-radius: 14px; color: var(--ink); background: var(--yellow-soft); }
+.android-test-banner .android-test__close { width: 40px; flex-basis: 40px; color: var(--ochre); }
+.android-test-banner .android-test__close svg { width: 15px; height: 15px; }
+.android-test-banner__glyph { display: flex; color: var(--ochre); }
+.android-test-banner__glyph svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.android-test-banner__link { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: 1; min-width: 0; min-height: 44px; color: inherit; text-decoration: none; }
+.android-test-banner__link strong { font-size: 13.5px; font-weight: 600; }
+.android-test-banner__link > span { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 2px; color: var(--ochre); font-size: 13px; font-weight: 650; }
+.android-test-banner__link > span svg { width: 13px; height: 13px; stroke-width: 2.6; }
+.android-test-banner--thanks { background: var(--green-soft); }
+.android-test-banner--thanks .android-test__done { width: auto; height: auto; flex: 0 0 auto; background: none; }
+.android-test-banner--thanks .android-test__done svg { width: 18px; height: 18px; }
+.android-test-banner--thanks .android-test__words strong { font-size: 13.5px; }
+.android-test-banner--thanks .android-test__close { color: var(--green); }

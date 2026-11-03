@@ -3,7 +3,9 @@ import { pageLocale, SUPPORTED_LOCALES } from './locale';
 
 export type AnalyticsOutcome = 'success' | 'error' | 'started' | 'accepted';
 type Configuration = { endpoint: string; hostname: string; webWebsite: string; iosWebsite: string; androidWebsite?: string };
-type Event = { screen: string; name?: string; outcome?: AnalyticsOutcome; mode: 'demo' | 'account' | 'anonymous' };
+/** Where on a screen an invitation stands, when one screen holds it in more than one place. */
+export type AnalyticsSpot = 'parcel' | 'alerts' | 'home';
+type Event = { screen: string; name?: string; outcome?: AnalyticsOutcome; spot?: AnalyticsSpot; mode: 'demo' | 'account' | 'anonymous' };
 let config: Configuration | null = null;
 let startup: Promise<void> | undefined;
 let screen = 'welcome';
@@ -145,7 +147,8 @@ async function flush() {
             language: navigator.language, screen: `${window.screen.width}x${window.screen.height}`,
             ...(event.name ? { name: event.name } : {}),
             data: { platform: window.matchMedia?.('(display-mode: standalone)').matches ? 'pwa' : 'web',
-              mode: event.mode, ...(locale ? { locale } : {}), ...(event.outcome ? { outcome: event.outcome } : {}) },
+              mode: event.mode, ...(locale ? { locale } : {}), ...(event.outcome ? { outcome: event.outcome } : {}),
+              ...(event.spot ? { spot: event.spot } : {}) },
           } }),
         });
         if (response.ok) {
@@ -172,9 +175,9 @@ export function trackScreen(next: string, nextMode: Event['mode'] = mode) {
   enqueue({ screen, mode });
 }
 
-export function trackAction(name: string, outcome?: AnalyticsOutcome) {
+export function trackAction(name: string, outcome?: AnalyticsOutcome, spot?: AnalyticsSpot) {
   if (!catalog.actions.includes(name)) return;
-  enqueue({ screen, mode, name, outcome });
+  enqueue({ screen, mode, name, outcome, ...(spot ? { spot } : {}) });
 }
 
 /** Only fixed event names leave this mapper. Paths, IDs and request bodies never do. */

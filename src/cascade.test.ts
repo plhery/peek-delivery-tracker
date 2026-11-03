@@ -3,8 +3,8 @@ import { join, relative } from 'node:path';
 import { expect, it } from 'vitest';
 
 const source = join(__dirname);
-/** The email's own page and an assistant's consent page are no screens of the application: they load their stylesheets themselves. */
-const ELSEWHERE = ['components/EmailOff.css', 'components/AssistantConsent.css'];
+/** The email's own page, an assistant's consent page and Android's steps are no screens of the application: they load their stylesheets themselves. */
+const ELSEWHERE = ['components/EmailOff.css', 'components/AssistantConsent.css', 'components/AndroidTestScreen.css'];
 
 function stylesheets(directory: string): string[] {
   return readdirSync(join(source, directory), { withFileTypes: true }).flatMap((entry) => entry.isDirectory()

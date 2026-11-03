@@ -1,0 +1,24 @@
+/* Peek for Android's three steps, at /android: a page of its own, which loads this stylesheet itself. */
+.android-steps { min-height: 100dvh; padding: env(safe-area-inset-top) 16px max(28px, env(safe-area-inset-bottom)); background: var(--canvas); color: var(--ink); }
+.android-steps__header { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: min(100%, 520px); min-height: 56px; margin: 0 auto; }
+.android-steps__header > a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding-inline: 4px; color: inherit; font-size: 13px; font-weight: 600; text-decoration: none; }
+.android-steps__header > a svg { width: 14px; height: 14px; stroke-width: 2.4; }
+.android-steps__header .language-control select { min-height: 40px; }
+.android-steps__main { display: grid; gap: 16px; width: min(100%, 520px); margin: 0 auto; }
+.android-steps__intro { display: grid; justify-items: center; gap: 8px; padding: 4px 8px; text-align: center; }
+.android-steps__intro h1 { margin: 6px 0 0; font-size: 28px; font-weight: 650; letter-spacing: -1px; line-height: 1.1; text-wrap: balance; }
+.android-steps__intro p { max-width: 30ch; margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.45; text-wrap: balance; }
+.android-steps__list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.android-steps__list > li { display: flex; gap: 12px; padding: 14px 16px; border-radius: 20px; background: var(--paper); }
+.android-steps__list > li > div { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.android-steps__list strong { font-size: 14px; font-weight: 600; }
+.android-steps__list p { margin: 0 0 6px; color: var(--ink-soft); font-size: 12.5px; line-height: 1.4; }
+.android-steps__list .button { min-height: 44px; padding: 10px 16px; border-radius: 14px; font-size: 14px; }
+.android-steps__list .button svg { width: 13px; height: 13px; stroke-width: 2.4; }
+.android-steps__number { display: grid; place-items: center; width: 26px; height: 26px; flex: 0 0 26px; border-radius: 50%; background: var(--control); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.android-steps__list > li[data-next] .android-steps__number { color: var(--on-yellow); background: var(--yellow); }
+.android-steps__list > li[data-done] .android-steps__number { color: var(--green); background: var(--green-soft); }
+.android-steps__number svg { width: 15px; height: 15px; stroke-width: 2.6; }
+.android-steps__note { margin: 0 6px; color: var(--ink-soft); font-size: 12px; line-height: 1.45; }
+.android-steps__never { justify-self: center; min-height: 44px; padding: 8px; background: none; color: var(--ink-soft); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+p.android-steps__never { margin: 0; text-decoration: none; outline: none; }

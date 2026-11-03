@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type FormEvent, type KeyboardEvent } from 'react';
+import { AndroidTestBanner } from '../components/AndroidTest';
 import { CarrierPickerSheet } from '../components/CarrierPickerSheet';
 import { Icon } from '../components/Icon';
 import { PeekLockup } from '../components/PeekMark';
@@ -249,6 +250,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
           : <button type="button" className="door-signin" disabled={!ready} onClick={onSignIn}>{t('arrival.signInTitle')}</button>}
       </div>
     </header>
+    <AndroidTestBanner />
     <main>
       <section ref={hero} className="door-hero" aria-labelledby="door-title" data-resting={(ready && !live) || undefined}>
         {opening && named && <div className="door-wash" aria-hidden="true" />}

@@ -42,3 +42,21 @@ Play takes only 9:16 and 16:9 screenshots, so size the emulator's screen to them
 size` and `wm density`: the phone at 1080 × 1920, the 7" tablet at 1440 × 2560 (density 384) and
 the 10" tablet at 2560 × 1440 (density 320). The translations show the default language's
 screenshots unless they have their own.
+
+## Closed test
+
+Play opens an app from a personal developer account to everyone only after a closed test with at
+least 12 testers opted in for 14 days in a row. Peek's closed track takes its testers from the
+Google Group `peek-android-testers`, which anyone can join: a tester joins it, becomes a tester on
+Play's opt-in page with the same Google account, and installs the app from Play.
+
+The site invites Android visitors to it while the switch in
+[`src/lib/androidTest.ts`](../../src/lib/androidTest.ts) is on, with the group's and Play's links
+beside it. It invites a browser on Android 12 or later (the version Chrome's client hints give;
+without them, any Android but a version below 12 the user agent states), not an app's WebView, where
+Google allows no sign-in. It stands on the parcel page under its actions, in its "Notify me" and as
+a banner on the home page, and leads to the steps at `/android`, which are not found while the
+switch is off. × hides it for a week and offers "Never show"; the steps page has "Don't ask me
+again". Once the install link was followed, the parcel page or the home page thanks the visitor on
+that page load, and nothing shows after. A browser that opened a page from the app is not invited.
+What the browser did stays in its storage; the events are in [ANALYTICS.md](../ANALYTICS.md).

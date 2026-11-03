@@ -67,6 +67,19 @@ describe('safe analytics collection', () => {
     expect(sent.map((payload) => [payload.url, payload.name, payload.data.mode])).toEqual([['/guides/fr', undefined, 'account']]);
   });
 
+  it('names the spot of an invitation that a screen holds in more than one place, and only for those who say it', async () => {
+    const a = await import('./analytics');
+    a.trackScreen('parcel-link', 'anonymous');
+    await a.startAnalytics({ open: false });
+    a.trackAction('android-test-view', undefined, 'alerts');
+    a.trackAction('android-test-open');
+    await settle();
+    const sent = requests.filter((r) => r.url === config.endpoint).map((r) => JSON.parse(r.init!.body as string).payload);
+    expect(sent.map((payload) => [payload.url, payload.name, payload.data.spot])).toEqual([
+      ['/parcel-link', undefined, undefined], ['/parcel-link', 'android-test-view', 'alerts'], ['/parcel-link', 'android-test-open', undefined],
+    ]);
+  });
+
   it('counts a carrier’s page the same way, under its language and the carrier', async () => {
     const [{ id }] = CARRIER_LINKS.en;
     const a = await import('./analytics');

@@ -10,15 +10,18 @@ import './AppOffer.css';
  * Home Screen: Peek's mark, what comes along into the app, and its link, "Get"
  * to the App Store or "Open" in the app.
  */
-export function AppOffer({ body, children }: {
+export function AppOffer({ title, body, className = '', children }: {
+  /** Notifications in the Peek app, unless the row offers something else. */
+  title?: string;
+  className?: string;
   body: string;
   /** The link. */
   children: ReactNode;
 }) {
   const { t } = useI18n();
-  return <div className="app-offer">
+  return <div className={`app-offer ${className}`.trim()}>
     <span aria-hidden="true"><PeekMark size={30} /></span>
-    <span><strong>{t('alerts.app.title')}</strong><small>{body}</small></span>
+    <span><strong>{title ?? t('alerts.app.title')}</strong><small>{body}</small></span>
     {children}
   </div>;
 }

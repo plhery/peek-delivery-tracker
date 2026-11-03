@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { AndroidTestOffer } from '../../components/AndroidTest';
 import { AppOffer, HomeScreenInstead } from '../../components/AppOffer';
 import { HomeScreenSteps } from '../../components/HomeScreenSteps';
 import { Icon } from '../../components/Icon';
@@ -193,6 +194,7 @@ export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPres
         <button type="button" className="peeks__quiet" disabled={busy} onClick={() => void turnOff()}>{t('alerts.turnOff')}</button>
       </div>
       {account(dismiss)}
+      <AndroidTestOffer />
     </>}</Sheet>;
   }
 
@@ -221,5 +223,6 @@ export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPres
         ? <button type="button" className="button button--primary" disabled={busy} aria-busy={busy} onClick={() => void turnOn(preset, false)}>{t(busy ? 'notifications.enabling' : 'alerts.turnOn')}</button>
         : <button type="button" className="button button--primary" onClick={addToCalendar}>{t('alerts.calendar.action')}</button>}
     </div>}
+    <AndroidTestOffer />
   </>}</Sheet>;
 }

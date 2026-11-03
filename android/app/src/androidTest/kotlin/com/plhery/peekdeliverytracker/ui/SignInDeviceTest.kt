@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui
 
 import android.content.res.Configuration
+import android.os.SystemClock
 import android.provider.Settings
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -56,11 +57,13 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.rules.TestName
 import org.junit.runner.RunWith
+import java.util.concurrent.ConcurrentLinkedQueue
 
 /**
  * The sign-in a build with a server shows (C-S04 to C-S08), on this device's own window, its bars, density and keyboard
@@ -91,18 +94,31 @@ class SignInDeviceTest {
      */
     @Volatile private var appKeyboard = 0
 
+    /** The keyboard's slides and the app's readings of it, in the order they came, for a failure's message. */
+    private val events = ConcurrentLinkedQueue<String>()
+
+    private fun note(what: String) {
+        events.add("${SystemClock.uptimeMillis() % 100_000} $what")
+    }
+
     /** The keyboard's slides in or out still playing, as the window hears of them. */
     private val keyboardSlides = object : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_CONTINUE_ON_SUBTREE) {
         var playing = 0
 
         override fun onPrepare(animation: WindowInsetsAnimationCompat) {
-            if (animation.typeMask and WindowInsetsCompat.Type.ime() != 0) playing++
+            if (animation.typeMask and WindowInsetsCompat.Type.ime() != 0) {
+                playing++
+                note("slide")
+            }
         }
 
         override fun onProgress(insets: WindowInsetsCompat, runningAnimations: List<WindowInsetsAnimationCompat>) = insets
 
         override fun onEnd(animation: WindowInsetsAnimationCompat) {
-            if (animation.typeMask and WindowInsetsCompat.Type.ime() != 0) playing--
+            if (animation.typeMask and WindowInsetsCompat.Type.ime() != 0) {
+                playing--
+                note("slid")
+            }
         }
     }
 
@@ -129,7 +145,9 @@ class SignInDeviceTest {
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
                 Box(
                     Modifier.fillMaxSize().layout { measurable, constraints ->
-                        appKeyboard = ime.getBottom(this)
+                        val read = ime.getBottom(this)
+                        if (read != appKeyboard) note("app $read")
+                        appKeyboard = read
                         val placeable = measurable.measure(constraints)
                         layout(placeable.width, placeable.height) { placeable.place(0, 0) }
                     },
@@ -219,16 +237,23 @@ class SignInDeviceTest {
     private fun assertTypingIn(tag: String) {
         compose.onNodeWithTag(tag).assertIsFocused()
         compose.waitUntil(5_000) { acceptingText() }
+        note("typing")
         val keyboard = showsAKeyboard()
-        if (keyboard) runCatching { compose.waitUntil(KEYBOARD_COMES_MILLIS) { keyboardShown() } }
+        if (keyboard) runCatching { compose.waitUntil(KEYBOARD_COMES_MILLIS) { keyboardShown() } }.onSuccess { note("shown") }
         runCatching {
             compose.waitUntil(KEYBOARD_MILLIS) { (!keyboard || keyboardShown()) && still() && fieldBottom(tag) <= roomAboveTheKeyboard() }
-        }
+        }.onSuccess { note("above") }
         awaitStill()
+        note("still")
         if (keyboard) assertTrue("A keyboard shown: ${layoutNow()}", keyboardShown())
         val bottom = fieldBottom(tag)
         val room = roomAboveTheKeyboard()
-        assertTrue("Above the keyboard: $bottom in $room; ${layoutNow()}", bottom <= room)
+        if (bottom <= room) return
+        // What stood there, then 2 s later, and the keyboard's events: a page that got there late, or one that stays.
+        val then = "Above the keyboard: $bottom in $room; ${layoutNow()}"
+        Thread.sleep(2_000)
+        compose.waitForIdle()
+        fail("$then. 2 s later: ${fieldBottom(tag)} in ${roomAboveTheKeyboard()}; ${layoutNow()}. Events: ${events.joinToString()}")
     }
 
     private fun fieldBottom(tag: String) = compose.onNodeWithTag(tag).fetchSemanticsNode().boundsInWindow.bottom
@@ -239,7 +264,7 @@ class SignInDeviceTest {
         val range = page.config.getOrNull(SemanticsProperties.VerticalScrollAxisRange)
         val root = onUi { compose.activity.findViewById<android.view.View>(android.R.id.content).height }
         return "scroll ${range?.value?.invoke()} of ${range?.maxValue?.invoke()}, page ${page.boundsInWindow}, " +
-            "keyboard ${windowKeyboard()} (app $appKeyboard), window ${onUi { compose.activity.window.decorView.height }}, content $root"
+            "keyboard ${windowKeyboard()} (app $appKeyboard, slides ${onUi { keyboardSlides.playing }}), window ${onUi { compose.activity.window.decorView.height }}, content $root"
     }
 
     private fun typed(tag: String): String? =

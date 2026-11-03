@@ -88,7 +88,7 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
      * another app's window stands over the app's ([ownWindow] false), such as the system's share sheet, it doesn't wait
      * for the app's frames, which a covered window may not draw; otherwise it waits for any starting window over the
      * app's to go first ([awaitNoStartingWindow]). A capture of the app's window that comes out [blank]
-     * is taken again, twice at most, 300 ms and two frames later: one still blank is saved as it is.
+     * is taken again, five times at most, each 300 ms and two frames later: one still blank is saved as it is.
      */
     fun take(name: String, ownWindow: Boolean = true): Bitmap {
         if (ownWindow) {
@@ -97,7 +97,7 @@ internal class DeviceShots(private val compose: AndroidComposeTestRule<*, *>, na
             awaitFrames()
         }
         var screen = capture()
-        repeat(2) {
+        repeat(5) {
             if (!ownWindow || !blank(screen)) return@repeat
             Thread.sleep(300)
             awaitFrames()

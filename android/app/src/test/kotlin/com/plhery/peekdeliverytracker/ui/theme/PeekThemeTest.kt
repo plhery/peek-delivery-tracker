@@ -112,7 +112,7 @@ class PeekThemeTest {
         val colors = PeekColors(dark = true)
         assertEquals(colors.label, content)
         assertEquals(TextSelectionColors(handleColor = colors.ink, backgroundColor = colors.ink.copy(alpha = 0.2f)), selection)
-        assertSame(NoIndication, indication)
+        assertSame(ControlHighlight.Default, indication)
         assertNull(ripple)
         assertSame(RubberBandOverscrollFactory, overscroll)
         assertEquals(colors.paper, scheme!!.surface)

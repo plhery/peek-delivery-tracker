@@ -99,6 +99,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
 import com.plhery.peekdeliverytracker.ui.sheet.SheetMenus
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -208,7 +209,7 @@ private fun OpenParcelButton(opening: Boolean, onOpen: () -> Unit, onPress: (Boo
         Modifier
             .padding(top = 12.dp)
             .testTag(WELCOME_OPEN_PARCEL)
-            .clickable(interaction, indication = null, enabled = enabled, role = Role.Button, onClick = onOpen)
+            .clickable(interaction, indication = ControlHighlight.Default, enabled = enabled, role = Role.Button, onClick = onOpen)
             .clearAndSetSemantics {
                 contentDescription = title
                 role = Role.Button

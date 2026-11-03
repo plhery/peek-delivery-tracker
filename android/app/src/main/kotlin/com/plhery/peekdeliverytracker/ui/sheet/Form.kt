@@ -56,6 +56,7 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
 import androidx.compose.ui.node.DelegatableNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.platform.testTag
@@ -80,6 +81,8 @@ import com.plhery.peekdeliverytracker.ui.deliveries.localized
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
+import com.plhery.peekdeliverytracker.ui.theme.ControlMarks
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
@@ -89,6 +92,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.drawMarks
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -653,7 +657,7 @@ internal fun FormRowFrame(modifier: Modifier, content: @Composable RowScope.() -
 
 /**
  * A cell's highlight under the finger: the system's grey over the row, (209, 209, 214) on white, gone as it lifts. On
- * the bar's capsule, a lighter one.
+ * the bar's capsule, a lighter one. With the keyboard's focus, the ring round it ([ControlHighlight]).
  */
 internal class RowHighlight private constructor(private val amount: Float) : IndicationNodeFactory {
     override fun create(interactionSource: InteractionSource): DelegatableNode = HighlightNode(interactionSource, amount)
@@ -668,8 +672,10 @@ internal class RowHighlight private constructor(private val amount: Float) : Ind
     }
 }
 
-private class HighlightNode(private val interactionSource: InteractionSource, private val amount: Float) : Modifier.Node(), DrawModifierNode {
+private class HighlightNode(private val interactionSource: InteractionSource, private val amount: Float) :
+    Modifier.Node(), DrawModifierNode, CompositionLocalConsumerModifierNode {
     private var pressed by mutableStateOf(false)
+    private val marks = ControlMarks(shape = null, ring = true, hover = false)
 
     override fun onAttach() {
         coroutineScope.launch {
@@ -679,15 +685,19 @@ private class HighlightNode(private val interactionSource: InteractionSource, pr
                     is PressInteraction.Press -> presses += interaction
                     is PressInteraction.Release -> presses -= interaction.press
                     is PressInteraction.Cancel -> presses -= interaction.press
+                    else -> marks.take(interaction)
                 }
                 pressed = presses.isNotEmpty()
             }
         }
     }
 
+    override fun onDetach() = marks.reset()
+
     override fun ContentDrawScope.draw() {
         drawContent()
         if (pressed) drawRect(Color.Black.copy(alpha = amount))
+        drawMarks(marks, this@HighlightNode)
     }
 }
 

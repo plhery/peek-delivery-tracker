@@ -143,6 +143,7 @@ fun NextDeliveryPass(
                 shadow = swipeAction == null,
                 actions = listOfNotNull(swipeAction),
                 onTap = onTap,
+                interactionSource = LocalCardInteractions.current,
             )
             .graphicsLayer {
                 val scale = if (reduceMotion) 1f else press.toFloat()

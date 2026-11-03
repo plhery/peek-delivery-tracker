@@ -8,6 +8,7 @@ import androidx.compose.foundation.Indication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -83,6 +84,7 @@ import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.ExperimentalSurfaceShadow
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import com.plhery.peekdeliverytracker.ui.theme.Motion
@@ -103,6 +105,11 @@ import kotlinx.coroutines.delay
  * `modifier` and its `actions` for TalkBack; its menu comes up on `onLongClick`. A finger's tap calls `onTap` (the
  * swipe's, which closes the card while it is open), TalkBack's `onOpen`. The card gives under the finger in the swipe's
  * row, its shadow with it ([SwipeToArchive]); one that doesn't swipe doesn't give, as the iPhone's plain tap.
+ *
+ * A pointer over it lights it up in its shape (`.hoverEffect(.highlight)` in `contentShape(.hoverEffect, shape)`), and
+ * the keyboard's focus rings it ([ControlHighlight]): the swipe's row does both where the card tells it its
+ * `interactionSource` ([LocalCardInteractions]), as the iPhone's highlight is the row's and the ring would be lost
+ * outside the row's cut; a card outside a row does them itself.
  */
 internal fun Modifier.cardButton(
     decorative: Boolean,
@@ -115,10 +122,12 @@ internal fun Modifier.cardButton(
     shadow: Boolean,
     actions: List<CustomAccessibilityAction> = emptyList(),
     onTap: () -> Unit = onOpen,
+    interactionSource: MutableInteractionSource? = null,
 ): Modifier {
     if (decorative) return clearAndSetSemantics {}
     val shape = ContinuousRoundedShape(cornerRadius)
-    return cardTouches(label, hint, selected, onOpen, onLongClick, actions, onTap, indication = null)
+    val highlight = if (interactionSource == null) ControlHighlight(shape, hover = true) else null
+    return cardTouches(label, hint, selected, onOpen, onLongClick, actions, onTap, indication = highlight, interactionSource = interactionSource)
         .then(if (shadow) Modifier.dropShadow(shape, ExperimentalSurfaceShadow) else Modifier)
         .clip(shape)
 }
@@ -142,6 +151,7 @@ internal fun Modifier.cardTouches(
     actions: List<CustomAccessibilityAction> = emptyList(),
     onTap: () -> Unit = onOpen,
     indication: Indication? = PressStyle.ExperimentalLift,
+    interactionSource: MutableInteractionSource? = null,
 ): Modifier = this
     .clearAndSetSemantics {
         contentDescription = label
@@ -160,7 +170,7 @@ internal fun Modifier.cardTouches(
         if (actions.isNotEmpty()) customActions = actions
     }
     .then(if (onLongClick != null) Modifier.secondaryClick(onLongClick) else Modifier)
-    .combinedClickable(interactionSource = null, indication = indication, onLongClick = onLongClick, onClick = onTap)
+    .combinedClickable(interactionSource = interactionSource, indication = indication, onLongClick = onLongClick, onClick = onTap)
 
 /**
  * A secondary click, a mouse's right button or a touchpad's two-finger click, calls `action` as it goes down, as a

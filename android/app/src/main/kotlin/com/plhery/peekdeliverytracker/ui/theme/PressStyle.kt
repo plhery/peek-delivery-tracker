@@ -9,6 +9,7 @@ import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.graphics.nativeCanvas
@@ -36,6 +37,9 @@ import kotlin.math.roundToInt
  * `Modifier.clickable(onClick = …, interactionSource = null, indication = PressStyle.Tactile)`, placed before what it
  * presses (`background`, `clip`), as `.buttonStyle` takes the whole label. A press told some other way (a card whose
  * gesture is its own) uses `Modifier.pressEffect(style, pressed)`.
+ *
+ * As an indication it also rings the button while the keyboard has the focus there, just outside `shape`, and, where
+ * `hover`, lights it up under a pointer in `shape` ([ControlHighlight], which rounds the bounds where `shape` is null).
  */
 @Immutable
 data class PressStyle(
@@ -45,6 +49,8 @@ data class PressStyle(
     /** SwiftUI's `.brightness(_:)`: added to each of red, green and blue as the colour is written, -1 to 1. */
     val brightness: Float = 0f,
     val animation: MotionCurve,
+    val shape: Shape? = null,
+    val hover: Boolean = false,
 ) : IndicationNodeFactory {
     /** How a press `progress` of the way in (0 at rest, 1 pressed, past 1 while a spring overshoots) shows. */
     fun appearance(progress: Double, reduceMotion: Boolean): PressAppearance {
@@ -127,6 +133,7 @@ private class PressEffectNode(
     private var pending: Double? = null
     private var clock: Job? = null
     private val paint = Paint()
+    private val marks = ControlMarks(style.shape, ring = interactionSource != null, hover = style.hover)
 
     /** The layer's colour filter and what it adds to each channel, made again only when that changes. */
     private var filter: ColorMatrixColorFilter? = null
@@ -143,6 +150,7 @@ private class PressEffectNode(
                     is PressInteraction.Press -> presses += interaction
                     is PressInteraction.Release -> presses -= interaction.press
                     is PressInteraction.Cancel -> presses -= interaction.press
+                    else -> marks.take(interaction)
                 }
                 press(presses.isNotEmpty())
             }
@@ -156,6 +164,7 @@ private class PressEffectNode(
             pending = null
             progress.animate(0.0, null, 0.0)
             shown = 0.0
+            marks.reset()
         }
     }
 
@@ -191,6 +200,7 @@ private class PressEffectNode(
         val layer = paint.of(look)
         if (layer == null && look.scale == 1f && offset == 0f) {
             drawContent()
+            drawMarks(marks, this@PressEffectNode)
             return
         }
         withTransform({
@@ -205,6 +215,7 @@ private class PressEffectNode(
             val saved = layer?.let { canvas.saveLayer(-reach, -reach, size.width + reach, size.height + reach, it) }
             this@draw.drawContent()
             saved?.let { canvas.restoreToCount(it) }
+            drawMarks(marks, this@PressEffectNode)
         }
     }
 

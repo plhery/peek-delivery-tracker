@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
@@ -166,7 +167,7 @@ private fun TabBar(
                     Modifier
                         .width(geometry.itemWidths[index].dp)
                         .fillMaxHeight()
-                        .selectable(selected, interactionSource = null, indication = null, role = Role.Tab) { onTap(index) }
+                        .selectable(selected, interactionSource = null, indication = ControlHighlight(CapsuleShape), role = Role.Tab) { onTap(index) }
                         .semantics {
                             contentDescription = labels[index]
                             collectionItemInfo = CollectionItemInfo(rowIndex = 0, rowSpan = 1, columnIndex = index, columnSpan = 1)

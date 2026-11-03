@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.app.Activity
+import android.view.KeyEvent
 import android.view.View
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -223,6 +226,58 @@ class DeliveryListScreenshotTest {
         compose.onNodeWithTag(SEARCH_BUTTON).performClick()
         compose.waitForIdle()
         compose.screenshot("list_search_light")
+    }
+
+    /** A key pressed and let go on a hardware keyboard, through the window as the system sends it. */
+    private fun press(key: Int) {
+        val window = view.rootView.parent
+        val deliver = window.javaClass.getMethod("dispatchKeyFromIme", KeyEvent::class.java)
+        compose.runOnUiThread {
+            deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_DOWN, key, 0, 0))
+            deliver.invoke(window, KeyEvent(0, 0, KeyEvent.ACTION_UP, key, 0, 0))
+        }
+        compose.waitForIdle()
+    }
+
+    /** Tab pressed until the control tagged `tag` has the keyboard's focus. */
+    private fun tabTo(tag: String) {
+        repeat(8) {
+            if (compose.onNodeWithTag(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Focused) == true) return
+            press(KeyEvent.KEYCODE_TAB)
+        }
+        error("Tab never reached $tag")
+    }
+
+    /** Full Keyboard Access's ring round Add, the first control Tab reaches. */
+    @Test
+    fun theKeyboardsFocusOnAButton() {
+        show()
+        tabTo(ADD_BUTTON)
+        compose.screenshot("list_focus_button_light")
+    }
+
+    @Test
+    fun theKeyboardsFocusOnAButtonInDark() {
+        show(dark = true)
+        tabTo(ADD_BUTTON)
+        compose.screenshot("list_focus_button_dark")
+    }
+
+    /** The ring round the first card, the next control Tab reaches past the search button. */
+    @Test
+    fun theKeyboardsFocusOnACard() {
+        show()
+        tabTo(SEARCH_BUTTON)
+        press(KeyEvent.KEYCODE_TAB)
+        compose.screenshot("list_focus_card_light")
+    }
+
+    @Test
+    fun theKeyboardsFocusOnACardInDark() {
+        show(dark = true)
+        tabTo(SEARCH_BUTTON)
+        press(KeyEvent.KEYCODE_TAB)
+        compose.screenshot("list_focus_card_dark")
     }
 
     /** Signed in with nothing followed: a guest sees the first open instead. */

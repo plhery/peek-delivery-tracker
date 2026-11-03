@@ -1,9 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
-import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.LocalOverscrollFactory
-import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
@@ -17,9 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.node.DelegatableNode
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
@@ -32,7 +28,8 @@ import androidx.compose.ui.unit.LayoutDirection
  *
  * The appearance is the one picked in Settings, light unless the reader picks another; the phone's dark theme counts
  * only for System. Text and icons take the label colour, text selection the tint, a press shows no ripple (buttons
- * take a `PressStyle`), and scrolling containers bounce at their ends ([RubberBandOverscroll]).
+ * take a `PressStyle`) while the keyboard's focus shows Full Keyboard Access's ring ([ControlHighlight]), and scrolling
+ * containers bounce at their ends ([RubberBandOverscroll]).
  *
  * Everything lays out left to right, whatever the phone's language. The app has no right-to-left copy and falls back
  * to English on a phone set to Arabic, Hebrew or Persian, and the iPhone app, which iOS lays out in the app's own
@@ -66,7 +63,7 @@ fun PeekTheme(
             CompositionLocalProvider(
                 LocalContentColor provides colors.label,
                 LocalTextSelectionColors provides remember(colors) { selectionColors(colors) },
-                LocalIndication provides NoIndication,
+                LocalIndication provides ControlHighlight.Default,
                 LocalRippleConfiguration provides null,
                 LocalOverscrollFactory provides RubberBandOverscrollFactory,
             ) {
@@ -160,15 +157,6 @@ internal val SCRIM = Color.Black.copy(alpha = 0.4f)
  */
 internal fun selectionColors(colors: PeekColors) =
     TextSelectionColors(handleColor = colors.ink, backgroundColor = colors.ink.copy(alpha = 0.2f))
-
-/** No ripple, or anything else, where a press has no style of its own. */
-internal object NoIndication : IndicationNodeFactory {
-    override fun create(interactionSource: InteractionSource): DelegatableNode = object : Modifier.Node() {}
-
-    override fun equals(other: Any?): Boolean = other === this
-
-    override fun hashCode(): Int = javaClass.hashCode()
-}
 
 private fun materialType(type: PeekTypography): Typography = Typography(
     displayLarge = type.largeTitle,

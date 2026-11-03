@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.withContext
@@ -1122,7 +1123,7 @@ private fun ClosedParcel(onOpen: () -> Unit, label: String, modifier: Modifier =
             .size(PARCEL_WIDTH.dp, (PARCEL_WIDTH * 31f / 30f).dp)
             .then(modifier)
             .testTag(EMPTY_SAMPLE)
-            .clickable(interaction, indication = null, role = Role.Button, onClick = onOpen)
+            .clickable(interaction, indication = ControlHighlight.Default, role = Role.Button, onClick = onOpen)
             .semantics { contentDescription = label },
     ) {
         // Pip's 300 × 310 frame, drawn at the parcel's width.

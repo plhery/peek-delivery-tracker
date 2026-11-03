@@ -51,6 +51,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetInsets
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
@@ -211,7 +212,7 @@ private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
             .fillMaxWidth()
             .height(SAVE_HEIGHT)
             .testTag(SHARE_SAVE)
-            .clickable(interactionSource = presses, indication = null, enabled = enabled, role = Role.Button, onClick = onClick),
+            .clickable(interactionSource = presses, indication = ControlHighlight(shape), enabled = enabled, role = Role.Button, onClick = onClick),
     ) {
         Box(Modifier.matchParentSize().pressEffect(PlainPress, pressed).background(if (enabled) YELLOW else DISABLED_FILL, shape))
         Row(

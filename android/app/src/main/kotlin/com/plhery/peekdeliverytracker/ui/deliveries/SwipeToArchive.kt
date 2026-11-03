@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -75,6 +76,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.ExperimentalSurfaceShadow
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.Haptics
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
@@ -409,7 +411,9 @@ internal fun rememberArchiveSwipe(state: DeliveriesState, parcelId: UUID, action
  * modifier given, which moves it; the card itself takes its taps through [ArchiveSwipe.tap] and offers the swipe's
  * action to TalkBack ([archiveAction]). The whole row gives under a resting finger, its shadow with it, as the archived
  * rows' ExperimentalLiftButtonStyle does (scale 0.975, 1.5 lower, a little darker on a snappy 0.22 s; only darker under
- * Reduce Motion), told by the row's own drag ([archivePan]).
+ * Reduce Motion), told by the row's own drag ([archivePan]). The row lights up in its shape under a pointer over the
+ * card, as `cardMenu`'s `.hoverEffect(.highlight)` goes round the swipe, and rings the card while the keyboard has its
+ * focus, outside the row's cut, which would hide a ring drawn by the card ([LocalCardInteractions]).
  *
  * While `excluded`, the action's strip is kept from the system's back gesture ([keptFromBack]).
  */
@@ -427,10 +431,12 @@ internal fun SwipeToArchive(
     val density = LocalDensity.current
     val direction = LocalLayoutDirection.current
     var origin by remember { mutableStateOf(Offset.Zero) }
+    val interactions = remember { MutableInteractionSource() }
     Box(
         modifier
             .then(if (excluded) Modifier.keptFromBack(density, direction) else Modifier)
             .indication(swipe.presses, PressStyle.ExperimentalLift)
+            .indication(interactions, ControlHighlight(shape, hover = true))
             .then(if (shadow) Modifier.dropShadow(shape, ExperimentalSurfaceShadow) else Modifier)
             .clip(shape)
             .onSizeChanged { swipe.width = with(density) { it.width.toDp().value.toDouble() } }
@@ -438,9 +444,17 @@ internal fun SwipeToArchive(
             .pointerInput(swipe) { archivePan(swipe) { origin } },
     ) {
         ActionLayers(swipe, title, Modifier.matchParentSize())
-        card(Modifier.offset { IntOffset(-(swipe.cardOffset() * density.density).toInt(), 0) })
+        CompositionLocalProvider(LocalCardInteractions provides interactions) {
+            card(Modifier.offset { IntOffset(-(swipe.cardOffset() * density.density).toInt(), 0) })
+        }
     }
 }
+
+/**
+ * The interactions of the card in a swipe's row ([SwipeToArchive]), which the row hears to light up under a pointer and
+ * ring the card where the keyboard's focus is; null outside a row, where the card does both itself ([cardButton]).
+ */
+internal val LocalCardInteractions = staticCompositionLocalOf<MutableInteractionSource?> { null }
 
 /**
  * An open card's action, kept from the system's back gesture where it reaches into the screen's edge, so that a drag

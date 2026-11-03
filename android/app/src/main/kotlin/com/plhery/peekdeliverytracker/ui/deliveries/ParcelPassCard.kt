@@ -140,6 +140,7 @@ fun ParcelPassCard(
                 shadow = false,
                 actions = listOfNotNull(swipeAction),
                 onTap = onTap,
+                interactionSource = LocalCardInteractions.current,
             )
             .graphicsLayer {
                 val scale = if (reduceMotion) 1f else press.toFloat()

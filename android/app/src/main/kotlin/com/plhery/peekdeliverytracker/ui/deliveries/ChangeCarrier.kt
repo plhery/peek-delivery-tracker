@@ -79,6 +79,7 @@ import com.plhery.peekdeliverytracker.ui.sheet.SheetMenu
 import com.plhery.peekdeliverytracker.ui.sheet.SheetPage
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
@@ -572,7 +573,7 @@ internal fun PostcodeCountryMenu(
             .testTag(tag)
             .onGloballyPositioned { bounds = it.boundsInWindow() }
             .accessibilityFocus(returnFocus)
-            .clickable(interactionSource = null, indication = null, enabled = enabled, role = Role.Button, onClick = open)
+            .clickable(interactionSource = null, indication = ControlHighlight.Default, enabled = enabled, role = Role.Button, onClick = open)
             .clearAndSetSemantics {
                 contentDescription = label
                 stateDescription = name

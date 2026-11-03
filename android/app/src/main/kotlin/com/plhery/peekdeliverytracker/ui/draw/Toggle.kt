@@ -47,6 +47,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.gaussianBlurRadius
@@ -116,7 +117,7 @@ fun Toggle(
         modifier
             .size(TRACK_WIDTH, TRACK_HEIGHT)
             .alpha(if (enabled) 1f else DISABLED_ALPHA)
-            .toggleable(on, interactionSource = null, indication = null, enabled = enabled, role = Role.Switch, onValueChange = onChange)
+            .toggleable(on, interactionSource = null, indication = ControlHighlight(CapsuleShape), enabled = enabled, role = Role.Switch, onValueChange = onChange)
             .pointerInput(enabled) {
                 if (enabled) knobGestures(press = { pressed = it }, drag = { dragged = it }) { side -> if (side != currentOn) currentChange(side) }
             }

@@ -52,6 +52,7 @@ import com.plhery.peekdeliverytracker.core.isFinal
 import com.plhery.peekdeliverytracker.core.metadata
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.experimentalSurface
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
@@ -204,7 +205,8 @@ fun ArchivedParcelGroup(
  * `ExperimentalArchivedParcelRow` (A-S40): an archived parcel's stage symbol in its tint, its name, its carrier and status,
  * and the day it was delivered or archived, on one line each; at the accessibility sizes the symbol goes and the words
  * wrap, with the day under them. One button, its texts read together, selected while the parcel is shown beside the
- * list; tinted with the ink then. A lift under the finger; a long press calls `onLongClick` ([cardTouches]).
+ * list; tinted with the ink then. A lift under the finger; a long press calls `onLongClick` ([cardTouches]). A pointer
+ * over it lights it up, and the keyboard's focus rings it, in its 18-point continuous shape (`cardMenu(menu, shape:)`).
  */
 @Composable
 fun ArchivedParcelRow(
@@ -228,7 +230,7 @@ fun ArchivedParcelRow(
 
     Row(
         modifier
-            .cardTouches(cardLabel(name, detail, date), hint = null, selected = selected, onOpen = onOpen, onLongClick = onLongClick)
+            .cardTouches(cardLabel(name, detail, date), hint = null, selected = selected, onOpen = onOpen, onLongClick = onLongClick, indication = ArchivedRowPress)
             .then(if (selected) Modifier.background(colors.ink.copy(alpha = colors.ink.alpha * 0.08f)) else Modifier)
             .fillMaxWidth()
             .heightIn(min = 58.dp)
@@ -273,3 +275,6 @@ private fun ArchivedDate(date: String) {
 /** The day an archived parcel was delivered or returned, else the day it was archived. */
 private val Parcel.archivedDisplayDate: Instant?
     get() = currentEvent?.takeIf { it.stage.isFinal }?.displayDate ?: archivedAt?.let(DateParser::date)
+
+/** ExperimentalLiftButtonStyle on an archived row, lit up under a pointer and ringed in the row's shape. */
+private val ArchivedRowPress = PressStyle.ExperimentalLift.copy(shape = ContinuousRoundedShape(18.dp), hover = true)

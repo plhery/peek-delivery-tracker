@@ -36802,7 +36802,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "liuchen"
     },
     "trackingUrlTemplate": "https://www.liuchenwl.com/index/tracknumber/track?nos={trackingNumber}",
     "linkRules": [

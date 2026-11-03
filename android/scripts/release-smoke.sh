@@ -12,8 +12,13 @@ serial=${2:-${ANDROID_SERIAL:-}}
 package=com.plhery.peekdeliverytracker
 seconds=${SMOKE_SECONDS:-15}
 
+# adb waits for as long as it's let on a device that has gone (logcat does), so each call gets two minutes where
+# `timeout` is installed (Linux, Homebrew's coreutils).
+limit=$(command -v timeout || command -v gtimeout || true)
+
 device() {
-  if [ -n "$serial" ]; then adb -s "$serial" "$@"; else adb "$@"; fi
+  if [ -n "$serial" ]; then set -- -s "$serial" "$@"; fi
+  if [ -n "$limit" ]; then "$limit" 120 adb "$@"; else adb "$@"; fi
 }
 
 device wait-for-device
@@ -29,6 +34,12 @@ echo "$started"
 # Then the stores are made and the first screen drawn: whatever fails there fails within these seconds.
 sleep "$seconds"
 pid=$(device shell pidof "$package" | tr -d '\r' || true)
+# A device adb no longer has stopped by itself (an emulator the system killed, a phone unplugged): that says nothing of
+# the app, and every call after this would wait for it.
+if [ "$(device get-state 2>/dev/null | tr -d '\r')" != device ]; then
+  echo "adb lost the device while the app was open, so the check couldn't finish. See why the device stopped, then run it again."
+  exit 1
+fi
 crash=$(device logcat -d -b crash | grep -A 40 "Process: $package" || true)
 if [ -z "$crash" ]; then
   crash=$(device logcat -d | grep -A 40 "FATAL EXCEPTION" | grep -A 39 "Process: $package" || true)

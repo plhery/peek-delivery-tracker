@@ -151,18 +151,22 @@ jobs:
           SDT_SUPABASE_PUBLISHABLE_KEY = synthetic-publishable-key
           SDT_GOOGLE_AUTH_ENABLED = NO
           XCCONFIG
+      # Without Gradle and Kotlin daemons left from the build, their heaps grown by R8, to share the memory with the emulator.
       - name: Build the release APK
         working-directory: android
         run: >-
-          ./gradlew :app:assembleRelease
-          -Ppeek.uploadProperties=$RUNNER_TEMP/release/upload.properties
-          -Ppeek.releaseXcconfig=$RUNNER_TEMP/release/release.xcconfig
+          ./gradlew :app:assembleRelease --no-daemon
+          -Pkotlin.compiler.execution.strategy=in-process
+          "-Ppeek.uploadProperties=$RUNNER_TEMP/release/upload.properties"
+          "-Ppeek.releaseXcconfig=$RUNNER_TEMP/release/release.xcconfig"
       - name: Enable KVM
         run: |
+          free -m
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
       - name: Open it on an emulator
+        timeout-minutes: 15
         uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
         with:
           api-level: 35
@@ -171,3 +175,8 @@ jobs:
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
           script: android/scripts/release-smoke.sh android/app/build/outputs/apk/release/app-release.apk
+      - name: Say whether the system stopped the emulator
+        if: failure()
+        run: |
+          free -m
+          sudo dmesg | grep -i -E 'out of memory|killed process' || echo "The system stopped nothing for memory."

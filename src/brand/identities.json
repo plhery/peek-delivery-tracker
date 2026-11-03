@@ -163,6 +163,9 @@
       "accent": "#7edf00"
     }
   },
+  "alliance-air-freight": {
+    "decal": "alliance-air-freight"
+  },
   "alljoy": {
     "decal": "alljoy"
   },
@@ -2381,6 +2384,9 @@
   "matkahuolto": {
     "decal": "matkahuolto"
   },
+  "matson": {
+    "decal": "matson"
+  },
   "mauritius-post": {
     "decal": "mauritius-post"
   },
@@ -3218,6 +3224,9 @@
   },
   "scg-express": {
     "decal": "scg-express"
+  },
+  "schneider": {
+    "decal": "schneider"
   },
   "seabourne-logistics": {
     "decal": "seabourne-logistics"
@@ -4069,6 +4078,9 @@
   },
   "wld-express": {
     "decal": "wld-express"
+  },
+  "wooliiporter": {
+    "decal": "wooliiporter"
   },
   "world-package": {
     "decal": "world-package"

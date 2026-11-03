@@ -720,6 +720,10 @@ describe('carrier brand', () => {
       'rohlig',
       'jb-hunt',
       'dhx',
+      'wooliiporter',
+      'matson',
+      'schneider',
+      'alliance-air-freight',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

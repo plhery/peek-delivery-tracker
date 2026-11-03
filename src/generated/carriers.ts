@@ -2700,6 +2700,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi colis Shouwu\u00a0: numéro SWECN…YQ, statuts et livraison",
       "name": "Shouwu International",
       "color": "#be2c33"
+    },
+    {
+      "id": "hywl",
+      "catalog": "hywl",
+      "slug": "hywl-suivi-colis",
+      "title": "Suivi colis HYWL (Huiyi Logistics)\u00a0: numéro TRK et statuts",
+      "name": "Huiyi Logistics",
+      "color": "#0b8f91"
     }
   ],
   "it": [

@@ -52,7 +52,7 @@ Nenhuma é a melhor para toda a gente: depende das tuas transportadoras e do que
 | O teu e-mail | Ligar o Gmail ou o Outlook, ou só reencaminhar um e-mail | Se ligares a conta, a Shop procura nos e-mails dos últimos 30 dias e continua a verificar |
 | Os teus dados | A «Privacidade da app» na App Store, a «Segurança dos dados» no Google Play, a política de privacidade | Na App Store, essa informação «não foi confirmada pela Apple». Todos os serviços têm de passar o teu número à transportadora |
 | Quanto tempo guarda os dados | A política de privacidade | A Deliveries guarda os e-mails reencaminhados até dez dias; no Google Play, a ficha da ParcelsApp diz «Não é possível eliminar os dados» |
-| As tuas transportadoras | A lista de transportadoras | Procura CTT, DPD, GLS, [InPost](carrier:inpost) ou [Paack](carrier:paack) em vez de olhares para o total: o 17TRACK diz 2500+ na App Store |
+| As tuas transportadoras | A lista de transportadoras | Procura CTT, DPD, GLS, [InPost](carrier:inpost) ou [Paack](carrier:paack) em vez de olhares para o total: o 17TRACK diz 2500+ na App Store e 2800+ na sua página sobre a USPS |
 
 ## Grátis ou pagas: as principais apps comparadas
 
@@ -119,13 +119,13 @@ Nada que a transportadora não tenha publicado. A ParcelsApp di-lo sem rodeios: 
 - A [DHL Paket](carrier:dhl), na Alemanha, diz que um envio novo pode demorar até 24 horas a aparecer no seu próprio seguimento.
 - A Parcel diz que a sua app fica até 90 minutos atrás do site da transportadora (45, em média).
 
-**As transportadoras também põem limites.** Desde 1 de abril de 2026, os correios dos EUA (USPS) ligam o acesso aos seus dados de seguimento ao Mailer ID do código de barras, e os outros serviços passam a pagar por esse acesso. Se um número mostra pouco num serviço de seguimento, vê o site da transportadora.
+**As transportadoras também põem limites.** Desde 1 de abril de 2026, os correios dos EUA (USPS) ligam o acesso aos seus dados de seguimento ao Mailer ID do código de barras, e os outros serviços passam a pagar por esse acesso. O 17TRACK avisa que as consultas à USPS que não se possam verificar vão ser abrandadas, cobradas ou bloqueadas. Se um número mostra pouco num serviço de seguimento, vê o site da transportadora.
 
 Um serviço de seguimento também não age por ti: para mudar uma entrega, pagar uma taxa ou comunicar uma perda, a ParcelsApp manda-te para o site da transportadora. A App CTT, por exemplo, tem uma opção para alterar a hora, o local ou outros dados da entrega. Se o seguimento não mexe há dias, lê [porque é que o tracking não atualiza](guide:tracking-not-updating). Se diz entregue e não tens nada, vê [encomenda entregue mas não recebida](guide:delivered-not-received).
 
 ## Como saber se é seguro usar o 17TRACK ou outro site que não é da transportadora?
 
-Qualquer serviço de seguimento tem de enviar o teu número à transportadora, e às vezes a outros serviços. O que muda é quem o gere e o que faz com os teus dados, e é isso que deves procurar na ficha da app e na política de privacidade de cada um. A ficha do 17TRACK na App Store portuguesa declara publicidade.
+Qualquer serviço de seguimento tem de enviar o teu número à transportadora, e às vezes a outros serviços. O que muda é quem o gere e o que faz com os teus dados, e é isso que deves procurar na ficha da app e na política de privacidade de cada um. A política de privacidade do 17TRACK nomeia a VASTAR SINGAPORE TECHNOLOGY PTE. LTD. como responsável pelo tratamento dos dados dos utilizadores registados fora da China continental e de Hong Kong. O 17TRACK guarda os dados das contas em servidores da Tencent Cloud em Cantão, na China, e nos Estados Unidos e, quando os dados saem do Espaço Económico Europeu, diz usar cláusulas contratuais-tipo ou transferi-los para países com um nível de proteção adequado. A ficha do 17TRACK na App Store portuguesa declara publicidade.
 
 A ParcelsApp também vive de anúncios: a ficha da app di-lo, e o site usa cookies publicitários do Google AdSense e da Yandex. A política de privacidade nomeia um representante na União Europeia, na Irlanda.
 
@@ -158,6 +158,8 @@ Pode, e costuma trazer uma ligação. Os CTT mantêm uma página de alertas de p
 - [Parcel: Privacy policy (em inglês)](https://parcelapp.net/privacy.html) – sem dados pessoais
 - [App Store: 17TRACK](https://apps.apple.com/pt/app/id1004956012) – publicidade, assinaturas, número de transportadoras
 - [App Store (EUA): 17TRACK](https://apps.apple.com/us/app/17track-package-tracker/id1004956012) – conta para guardar números
+- [17TRACK: USPS Tracking (em inglês)](https://www.17track.net/en/uspsTracking) – limites da USPS, número de transportadoras
+- [17TRACK: Product Privacy Policy (em inglês)](https://www.17track.net/privacy-en.html) – responsável, armazenamento, transferências
 - [App Store: AfterShip](https://apps.apple.com/pt/app/id507014023) – publicidade, notificações grátis, transportadoras portuguesas
 - [AfterShip: Guest mode (em inglês)](https://support.aftership.com/en/tracking/articles/15441925-track-shipments-in-guest-mode) – três envios
 - [App Store: Deliveries](https://apps.apple.com/pt/app/id290986013) – preços

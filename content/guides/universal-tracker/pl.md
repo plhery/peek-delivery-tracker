@@ -49,9 +49,9 @@ Nie ma jednej najlepszej dla wszystkich: to zależy od firm kurierskich, z któr
 | Twoja skrzynka | „Połącz Gmaila lub Outlooka” albo „prześlij maila dalej” | Shop przegląda e-maile z ostatnich 30 dni, a potem na bieżąco sprawdza nowe |
 | Twoje dane | „Prywatność w aplikacji” w App Store, „Bezpieczeństwo danych” w Google Play, polityka prywatności | App Store dopisuje: „Informacje te nie zostały zweryfikowane przez Apple”. Każdy tracker przekazuje Twój numer dalej |
 | Jak długo przechowuje dane | Polityka prywatności | Deliveries trzyma przesłane e-maile do dziesięciu dni. Przy ParcelsApp na Androida Google Play podaje: „Nie można usunąć danych” |
-| Język | Pole „Języki” w App Store | Polski podają Parcel, Packages i Shop, a AfterShip i Deliveries nie. 17TRACK podaje tam tylko angielski, ale w opisie obiecuje ponad 30 języków |
+| Język | Pole „Języki” w App Store | Polski podają Parcel, Packages i Shop, a AfterShip i Deliveries nie. 17TRACK podaje tam tylko angielski, ale w opisie obiecuje ponad 30 języków, a jego strona ma wersję polską |
 | Dostawca | Sekcja „Dostawca” w polskim App Store | Czy twórca deklaruje, że jest przedsiębiorcą. AfterShip tego nie robi, więc App Store uprzedza, że do umów z nim nie mają zastosowania prawa konsumenta obowiązujące w EOG |
-| Twoi przewoźnicy | Lista przewoźników | Liczby podają same firmy: 17TRACK pisze w App Store o ponad 2500. Sprawdź raczej, czy na liście są [InPost](carrier:inpost), Poczta Polska, DPD i [ORLEN Paczka](carrier:orlen-paczka) |
+| Twoi przewoźnicy | Lista przewoźników | Liczby podają same firmy: 17TRACK pisze o ponad 2500 w App Store i o ponad 2800 na swojej stronie o USPS. Sprawdź raczej, czy na liście są [InPost](carrier:inpost), Poczta Polska, DPD i [ORLEN Paczka](carrier:orlen-paczka) |
 
 ## Darmowe czy płatne: porównanie trackerów
 
@@ -121,7 +121,7 @@ Tracker nie załatwi też niczego za Ciebie: żeby zmienić dostawę, zapłacić
 
 ## Jak sprawdzić, czy 17TRACK i ParcelsApp są bezpieczne?
 
-Zacznij od tego, co mówią o sobie same. W App Store 17TRACK ma oznaczenie „Zawiera: Reklamy”. Jakie dane zbiera aplikacja i kto je przetwarza, sprawdzisz w sekcji „Prywatność w aplikacji” i w polityce prywatności 17TRACK.
+Zacznij od tego, co mówią o sobie same. Polityka prywatności 17TRACK wskazuje VASTAR SINGAPORE TECHNOLOGY PTE. LTD. jako administratora danych zarejestrowanych użytkowników spoza Chin kontynentalnych i Hongkongu. Dane konta trafiają na serwery Tencent Cloud w Kantonie (Guangzhou) i w Stanach Zjednoczonych. Gdy dane użytkowników z UE opuszczają Europejski Obszar Gospodarczy, 17TRACK przekazuje je na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską albo do kraju, który zapewnia odpowiedni poziom ochrony danych. W App Store 17TRACK ma oznaczenie „Zawiera: Reklamy”. Jakie dane zbiera aplikacja, sprawdzisz w sekcji „Prywatność w aplikacji”.
 
 ParcelsApp ma przedstawiciela w UE na podstawie art. 27 RODO: firmę EU Rep z Irlandii. Na stronie ParcelsApp Google i Yandex używają plików cookie do wyświetlania reklam, a aplikacja na Androida ma oznaczenie „Zawiera reklamy”. Każdy inny tracker, także AliPaczkę, sprawdzisz tak samo, według tabeli wyżej.
 
@@ -150,6 +150,9 @@ Tak. W kwietniu 2026 roku CERT Polska ostrzegał przed [SMS-ami podszywającymi 
 - [AfterShip: Guest mode](https://support.aftership.com/en/tracking/articles/15441925-track-shipments-in-guest-mode) – trzy przesyłki bez konta
 - [App Store: AfterShip](https://apps.apple.com/pl/app/id507014023) – reklamy, darmowe powiadomienia, języki, brak statusu przedsiębiorcy
 - [App Store: 17TRACK](https://apps.apple.com/pl/app/id1004956012) – konto, reklamy, abonamenty i ceny, 2500+, języki
+- [17TRACK: Wszystko-w-Jednym Śledzenie przesyłek](https://www.17track.net/pl) – polska wersja strony
+- [17TRACK: USPS Tracking](https://www.17track.net/en/uspsTracking) – 2800+ przewoźników
+- [17TRACK: Product Privacy Policy](https://www.17track.net/privacy-en.html) – administrator, Tencent Cloud, standardowe klauzule umowne
 - [App Store: Deliveries](https://apps.apple.com/pl/app/id290986013) – ceny, języki, brak reklam
 - [Junecloud: Subscriptions](https://junecloud.com/support/deliveries-ios/subscriptions.html) – abonament na start
 - [Junecloud: Privacy overview](https://junecloud.com/support/deliveries-ios/deliveries-privacy-overview.html) – opcjonalne konto, e-maile przez dziesięć dni

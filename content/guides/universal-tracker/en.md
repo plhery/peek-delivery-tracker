@@ -18,7 +18,7 @@ Yes, and you may already have one: besides universal trackers, several national 
 | You paste a number or link | That number | Every tracker |
 | You forward one email | That email | ParcelsApp, Shop, Deliveries |
 | You connect your inbox | Your mailbox, filtered by its own rules | Shop, AfterShip, PayPal |
-| The carrier or shop matches you | Your name, address, email or phone | [USPS](carrier:usps), [Australia Post](carrier:australia-post); Shopify orders in Shop |
+| The carrier or shop matches you | Your name, address, email or phone | [USPS](carrier:usps), [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post); Shopify orders in Shop |
 
 ## How do I see all the parcels coming to my house?
 
@@ -29,6 +29,7 @@ Start with the carriers' own free options:
 | US | USPS Informed Delivery | After an identity and address check, a Daily Digest email previews incoming mail and parcels |
 | UK | DPD app | Lists [DPD](carrier:dpd-uk) and DPD Local parcels matched to your phone or email and your address. [Royal Mail](carrier:royal-mail)'s app only follows a tracking ID you enter or scan |
 | Ireland | None found | The [An Post](carrier:an-post) app saves tracking numbers you enter and lets you pay customs charges, but lists nothing on its own |
+| Canada | Canada Post automatic tracking | Adds Canada Post parcels coming to you to your track list. Needs a personal account verified with the name and address on your photo ID; business and PO box addresses aren't eligible |
 | Australia | Australia Post app | Shows parcels automatically when the sender's data matches your MyPost details |
 
 Carrier by carrier, with the catches: [track a parcel without a number](guide:find-tracking-number).
@@ -52,7 +53,7 @@ None is best for everyone: it depends on your carriers and what you'll trade for
 | Your inbox | "Connect Gmail or Outlook" versus "forward an email" | Shop scans "the last 30 days" and keeps checking |
 | Your data | The privacy label, Google Play's "Data safety", the privacy policy | The App Store label "has not been verified by Apple". Every tracker passes your number on |
 | How long it keeps data | The privacy policy | Deliveries keeps forwarded emails "up to ten days"; ParcelsApp's Android listing says "Data can't be deleted" |
-| Your carriers | Its carrier list | Counts are self-reported: 17TRACK says 2500+ on the App Store |
+| Your carriers | Its carrier list | Counts are self-reported: 17TRACK says 2500+ on the App Store, 2800+ on its USPS page |
 
 ## Free or paid: the main trackers compared
 
@@ -124,13 +125,13 @@ Anything the carrier hasn't published. ParcelsApp puts it plainly: it "cannot cr
 - [DHL](carrier:dhl) in Germany says a new shipment can take up to 24 hours to show in its own tracking.
 - Parcel says its app trails the carrier's website by "up to 90 minutes (on average it is 45 minutes)".
 
-**USPS changed the rules.** Since 1 April 2026, access to USPS's tracking data feeds is tied to the Mailer ID in the barcode, and "Service Providers and Others" can get paid access. If a USPS number shows little in a tracker, check usps.com.
+**USPS changed the rules.** Since 1 April 2026, access to USPS's tracking data feeds is tied to the Mailer ID in the barcode, and "Service Providers and Others" can get paid access. 17TRACK warns that USPS lookups that can't be verified will be slowed, charged for or blocked. If a USPS number shows little in a tracker, check usps.com.
 
 Nor can a tracker act for you: to change a delivery, pay a charge or report a loss, ParcelsApp sends you to the carrier's website. If the tracking hasn't moved for days, read [why tracking stops updating](guide:tracking-not-updating). If it says delivered and nothing is there, see [delivered but not received](guide:delivered-not-received).
 
 ## How can I tell if 17TRACK is safe?
 
-Start with the checklist above. 17TRACK's App Store listing declares "Contains Advertising". For what it collects and who handles your data, read its privacy label and its privacy policy. The same checks work for ParcelsApp or any other tracker.
+Start with the checklist above. 17TRACK's privacy policy names VASTAR SINGAPORE TECHNOLOGY PTE. LTD. as the data controller for registered users outside mainland China and Hong Kong, and says account data is stored on Tencent Cloud servers in Guangzhou, China, and in the United States. Its App Store listing declares "Contains Advertising". For what the app collects, read its privacy label. The same checks work for ParcelsApp or any other tracker.
 
 ## Can a scammer send a fake tracking number?
 
@@ -151,6 +152,8 @@ Yes, [usually by text, with a link](guide:delivery-scam-texts). The US Postal In
 - [App Store: Parcel](https://apps.apple.com/us/app/parcel-delivery-tracking/id375589283) – ads, free tier, price
 - [Parcel: Privacy policy](https://parcelapp.net/privacy.html) – no personal details required
 - [App Store: 17TRACK](https://apps.apple.com/us/app/17track-package-tracker/id1004956012) – account, ads, memberships, carrier count
+- [17TRACK: USPS Tracking](https://www.17track.net/en/uspsTracking) – USPS limits, carrier count
+- [17TRACK: Product Privacy Policy](https://www.17track.net/privacy-en.html) – controller, storage
 - [App Store: AfterShip](https://apps.apple.com/us/app/aftership-package-tracker/id507014023) – ads, free notifications
 - [AfterShip: Guest mode](https://support.aftership.com/en/tracking/articles/15441925-track-shipments-in-guest-mode) – three shipments
 - [App Store: Deliveries](https://apps.apple.com/us/app/deliveries-a-package-tracker/id290986013) – prices
@@ -160,6 +163,7 @@ Yes, [usually by text, with a link](guide:delivery-scam-texts). The US Postal In
 - [USPS: Tracking API access changes](https://www.usps.com/business/api-access.htm) – Mailer ID access
 - [USPIS: Smishing text scams](https://www.uspis.gov/news/scam-article/smishing-package-tracking-text-scams) – no links
 - [USPS: Informed Delivery](https://www.usps.com/manage/informed-delivery.htm) – Daily Digest
+- [Canada Post: Automatic tracking](https://www.canadapost-postescanada.ca/cpc/en/personal/manage-mail/automatic-tracking.page) – track list, eligibility
 - [Australia Post: App](https://auspost.com.au/personal/receiving/australia-post-app) – parcel matching
 - [App Store UK: Royal Mail](https://apps.apple.com/gb/app/id1435168829) – tracking by ID or barcode
 - [DPD UK: The DPD app](https://www.dpd.co.uk/lp/app/index.html) – parcels matched to your phone or email

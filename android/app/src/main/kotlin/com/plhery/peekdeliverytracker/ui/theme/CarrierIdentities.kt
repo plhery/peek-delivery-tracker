@@ -16,7 +16,9 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -56,6 +58,15 @@ class CarrierIdentities internal constructor(val catalog: CarrierCatalog) {
          */
         fun loaded(catalog: CarrierCatalog, definitions: Map<CarrierId, CarrierDefinition> = catalog.definitions): CarrierIdentities? =
             last?.takeIf { it.identities.catalog === catalog && it.definitions === definitions }?.identities
+
+        /**
+         * Starts decoding the brand data on [decoding], in `scope`, for the first window: the stores are made meanwhile
+         * ([com.plhery.peekdeliverytracker.PeekApplication.makeContainer]), which don't need it, and the identities of
+         * their catalog then come at once rather than after the decode, which the launch window would wait for.
+         */
+        fun prefetch(scope: CoroutineScope) {
+            scope.launch(decoding) { CarrierBrandAssets.shared }
+        }
 
         /**
          * Decodes the brand data on the IO dispatcher ([decoding]), or finds it decoded already, for the liveries of

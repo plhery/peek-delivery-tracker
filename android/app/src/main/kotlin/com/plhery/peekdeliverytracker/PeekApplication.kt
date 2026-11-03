@@ -15,6 +15,7 @@ import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
 import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
 import java.io.FileNotFoundException
 import java.time.Instant
 import kotlinx.coroutines.MainScope
@@ -108,6 +109,8 @@ class PeekApplication : Application() {
         if (making) return
         making = true
         MainScope().launch {
+            // The carriers' brand data is decoded beside the stores rather than after them: the first window waits for both.
+            CarrierIdentities.prefetch(this)
             val container = makeStores(this@PeekApplication)
             container.start(foreground.lifecycle)
             waitingLink?.let(container.links::open)

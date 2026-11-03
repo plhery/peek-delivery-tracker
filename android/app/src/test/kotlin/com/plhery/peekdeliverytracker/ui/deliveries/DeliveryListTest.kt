@@ -26,6 +26,7 @@ import androidx.compose.ui.semantics.SemanticsNode
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
@@ -49,7 +50,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -85,7 +89,10 @@ class DeliveryListTest {
     private lateinit var view: View
     private lateinit var back: OnBackPressedDispatcher
     private lateinit var source: FakeDeliveries
+    private lateinit var deliveries: DeliveriesState
     private val views = mutableListOf<String>()
+    private val localizer = Localizer(AppLanguage.En, variant = "android")
+    private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 11)))
 
     /** "On the way" as last laid out. */
     private var heading: TextLayoutResult? = null
@@ -110,7 +117,7 @@ class DeliveryListTest {
             val density = LocalDensity.current
             CompositionLocalProvider(
                 LocalDensity provides Density(density.density, fontScale), LocalCardComposed provides cardComposed,
-                LocalOnTheWayHeading provides { heading = it },
+                LocalOnTheWayHeading provides { heading = it }, LocalDeliveriesState provides { deliveries = it },
             ) {
                 Box(Modifier.width(this.width).fillMaxHeight()) {
                     RootHost(state = session, onView = { views += it }, source = source, inbox = inbox)
@@ -590,6 +597,77 @@ class DeliveryListTest {
         val started = shadowOf(ApplicationProvider.getApplicationContext<Application>()).nextStartedActivity
         assertEquals(Intent.ACTION_VIEW, started.action)
         assertEquals("https://example.com/privacy", started.dataString)
+    }
+
+    /** Whether the list's notice ([LIST_NOTICE]) says `text`. */
+    private fun noticeSays(text: String): Boolean =
+        compose.onAllNodes(hasText(text) and hasAnyAncestor(hasTestTag(LIST_NOTICE))).fetchSemanticsNodes().isNotEmpty()
+
+    /**
+     * A-ST11: the store's error shows under the list's chips (ParcelListView's `NoticeBanner`): the service out of reach,
+     * why, and that the parcels kept on the phone still show; Try again asks for the parcels again. An expired sign-in
+     * asks to sign in again, which loads again too. It goes with the error.
+     */
+    @Test
+    fun theStoresErrorSaysWhatWentWrongAndItsButtonLoadsAgain() {
+        show(width = 600.dp, session = reader)
+        compose.onNodeWithTag(LIST_NOTICE).assertDoesNotExist()
+        val offline = localizer.text("error.connection")
+        compose.runOnUiThread {
+            source.errorMessage.value = offline
+            source.usingCachedData.value = true
+        }
+        compose.waitForIdle()
+        assertTrue(noticeSays(localizer.text("app.trackingBreak")))
+        assertTrue(noticeSays("$offline ${localizer.text("app.cachedData")}"))
+        // Over the cards.
+        val next = checkNotNull(deliveries.layout.next)
+        assertTrue(compose.onNodeWithTag(LIST_NOTICE).getBoundsInRoot().bottom < compose.card(next.label).getBoundsInRoot().top)
+        compose.onNode(hasText(localizer.text("app.tryAgain")) and hasAnyAncestor(hasTestTag(LIST_NOTICE))).assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button)).performClick()
+        compose.waitForIdle()
+        assertEquals(1, source.reloads)
+
+        val expired = localizer.text("native.error.authenticationExpired")
+        compose.runOnUiThread {
+            source.errorMessage.value = expired
+            source.authenticationRequired.value = true
+            source.usingCachedData.value = false
+        }
+        compose.waitForIdle()
+        assertTrue(noticeSays(localizer.text("app.signInNeeded")))
+        assertTrue(noticeSays(expired))
+        assertFalse(noticeSays(localizer.text("app.trackingBreak")))
+        compose.onNode(hasText(localizer.text("app.signInAgain")) and hasAnyAncestor(hasTestTag(LIST_NOTICE))).performClick()
+        compose.waitForIdle()
+        assertEquals(2, source.reloads)
+
+        compose.runOnUiThread { source.errorMessage.value = null }
+        compose.waitForIdle()
+        compose.onNodeWithTag(LIST_NOTICE).assertDoesNotExist()
+    }
+
+    /**
+     * A-ST15: a guest's offer of an account stands 24 under the last card on its way, outside the first group, and its
+     * button at least 32 from its words (`HStack(spacing: 12)` round a `Spacer(minLength: 8)`), here where they wrap.
+     */
+    @Test
+    @Config(qualifiers = "w320dp-h640dp-xhdpi")
+    fun aGuestsOfferOfAnAccountStands24UnderTheCardsAndItsButton32FromItsWords() {
+        show(width = 320.dp, session = AuthenticationState.Welcome)
+        val list = compose.onNodeWithTag(PARCEL_LIST)
+        list.performScrollToNode(hasTestTag(DEVICE_ACCOUNT_ROW))
+        compose.waitForIdle()
+        val last = deliveries.layout.remaining.last()
+        val row = compose.onNodeWithTag(DEVICE_ACCOUNT_ROW).getBoundsInRoot()
+        assertEquals(24f, (row.top - compose.card(last.label).getBoundsInRoot().bottom).value, 0.5f)
+
+        fun bounds(key: String) = compose.onNode(hasText(localizer.text(key)), useUnmergedTree = true).getBoundsInRoot()
+        val words = maxOf(bounds("link.account.title").right, bounds("native.guest.kept").right)
+        // The capsule's left, 12 before its word.
+        val capsule = bounds("arrival.signInTitle").left - 12.dp
+        assertTrue("${capsule - words}", capsule - words >= 31.5.dp)
+        // The words wrap, filling what the row leaves them.
+        assertTrue(bounds("link.account.title").let { it.bottom - it.top } > 25.dp)
     }
 
     // A turn draws the list anew (`key(arrangement)`): what it keeps, and what goes with it.

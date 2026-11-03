@@ -84,6 +84,17 @@ class FakeDeliveries(
     override val loading = MutableStateFlow(false)
     override val refreshing = MutableStateFlow(false)
     override val errorMessage = MutableStateFlow<String?>(null)
+    override val authenticationRequired = MutableStateFlow(false)
+    override val usingCachedData = MutableStateFlow(false)
+
+    /** How many times the list asked for the parcels again (`store.load(showSpinner: true)`). */
+    var reloads = 0
+        private set
+
+    override suspend fun reload() {
+        reloads++
+    }
+
     override val session = MutableStateFlow(session)
     override val undoParcel = MutableStateFlow<Parcel?>(null)
     override val deliveryEmail = MutableStateFlow<DeliveryEmail?>(null)

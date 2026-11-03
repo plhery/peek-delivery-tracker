@@ -36,6 +36,7 @@ import androidx.window.testing.layout.WindowLayoutInfoPublisherRule
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.isDelivered
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -70,7 +71,7 @@ class DeliveryListScreenshotTest {
     /** The window's bars in points: the status bar at the top, the gesture bar at the bottom, a cutout at the start. */
     private class Bars(val top: Int = 62, val bottom: Int = 24, val cutout: Int = 0)
 
-    /** The demo's list as the captures show it, or `parcels` in `session`. */
+    /** The demo's list as the captures show it, or `parcels` in `session`, its stores as `prepare` leaves them. */
     private fun show(
         language: AppLanguage = AppLanguage.En,
         dark: Boolean = false,
@@ -78,8 +79,9 @@ class DeliveryListScreenshotTest {
         parcels: List<Parcel> = DemoCards.parcels(language),
         session: AuthenticationState = AuthenticationState.Demo,
         bars: Bars = Bars(),
+        prepare: FakeDeliveries.() -> Unit = {},
     ) {
-        val source = FakeDeliveries(parcels, session)
+        val source = FakeDeliveries(parcels, session).apply(prepare)
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
@@ -291,6 +293,54 @@ class DeliveryListScreenshotTest {
     fun everyParcelArrived() {
         show(parcels = DemoCards.parcels().filter { it.isDelivered })
         compose.screenshot("list_all_arrived_light")
+    }
+
+    private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 11)))
+
+    /** The store's error over the list, `cached` with the parcels this phone kept, or the sign-in run out (A-ST11). */
+    private fun showError(
+        cached: Boolean = false,
+        expired: Boolean = false,
+        dark: Boolean = false,
+        fontScale: Float = 1f,
+    ) {
+        val localizer = Localizer(AppLanguage.En, variant = "android")
+        show(dark = dark, fontScale = fontScale, session = reader) {
+            errorMessage.value = localizer.text(if (expired) "native.error.authenticationExpired" else "error.connection")
+            authenticationRequired.value = expired
+            usingCachedData.value = cached
+        }
+    }
+
+    @Test
+    fun theServiceOutOfReach() {
+        showError()
+        compose.screenshot("list_error_light")
+    }
+
+    @Test
+    fun theServiceOutOfReachWithTheParcelsKept() {
+        showError(cached = true)
+        compose.screenshot("list_error_cached_light")
+    }
+
+    @Test
+    fun theSignInRunOut() {
+        showError(expired = true, cached = true)
+        compose.screenshot("list_sign_in_needed_light")
+    }
+
+    @Test
+    fun theServiceOutOfReachInDark() {
+        showError(cached = true, dark = true)
+        compose.screenshot("list_error_cached_dark")
+    }
+
+    /** At the largest text size, Accessibility 5. */
+    @Test
+    fun theServiceOutOfReachAtTheLargestText() {
+        showError(cached = true, fontScale = 3f)
+        compose.screenshot("list_error_cached_text5")
     }
 
     /** An iPad's 1032 × 1376: the list beside the first card's parcel, its card ringed. */

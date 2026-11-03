@@ -69,6 +69,19 @@ interface DeliveriesSource {
     val loading: StateFlow<Boolean>
     val refreshing: StateFlow<Boolean>
     val errorMessage: StateFlow<String?>
+
+    /** `store.authenticationRequired`: the last load failed as the account's sign-in had expired. */
+    val authenticationRequired: StateFlow<Boolean>
+
+    /** `store.usingCachedData`: the parcels shown are those this phone kept from the account's last load. */
+    val usingCachedData: StateFlow<Boolean>
+
+    /**
+     * `store.load(showSpinner: true)`: the account's parcels (or this phone's, for a guest) asked for again, the first
+     * load's spinner showing while there are none to show.
+     */
+    suspend fun reload()
+
     val session: StateFlow<AuthenticationState>
 
     /** The site's landing page and its privacy notice, the foot's links. */
@@ -312,6 +325,11 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val loading get() = container.parcels.loadingFlow
     override val refreshing get() = container.parcels.refreshingFlow
     override val errorMessage get() = container.parcels.errorMessageFlow
+    override val authenticationRequired get() = container.parcels.authenticationRequiredFlow
+    override val usingCachedData get() = container.parcels.usingCachedDataFlow
+
+    override suspend fun reload() = container.parcels.load(showSpinner = true)
+
     override val session get() = container.session.stateFlow
     override val homePageUrl get() = container.configuration.homePageUrl
     override val privacyUrl get() = container.configuration.privacyUrl

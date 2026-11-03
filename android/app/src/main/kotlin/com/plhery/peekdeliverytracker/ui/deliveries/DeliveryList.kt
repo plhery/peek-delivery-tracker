@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -94,6 +95,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.LocalPipSight
+import com.plhery.peekdeliverytracker.ui.draw.NoticeBanner
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
@@ -108,6 +110,7 @@ import com.plhery.peekdeliverytracker.ui.zoom.recedingUnderZoom
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
 import java.util.UUID
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /** Which of the window's sides a column of the deliveries reaches, whose bars and cutout it keeps clear of. */
 @Immutable
@@ -159,6 +162,8 @@ internal fun DeliveryList(state: DeliveriesState) {
     val session by source.session.collectAsState()
     val loading by source.loading.collectAsState()
     val errorMessage by source.errorMessage.collectAsState()
+    val authenticationRequired by source.authenticationRequired.collectAsState()
+    val cached by source.usingCachedData.collectAsState()
     val colors = PeekTheme.colors
     val edges = LocalColumnEdges.current
     val sideBySide = state.arrangement == DeliveriesArrangement.SideBySide
@@ -181,7 +186,8 @@ internal fun DeliveryList(state: DeliveriesState) {
     val bottom = padding.calculateBottomPadding() + BOTTOM_SPACING + BOTTOM_PADDING + raised
 
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
-    val entries = listEntries(state, sideBySide, guest, loading, errorMessage, firstLoad, invitation = state.invitationShown && largeText)
+    val notice = errorMessage?.let { ListItem.Notice(it, authenticationRequired, cached) }
+    val entries = listEntries(state, sideBySide, guest, loading, notice, firstLoad, invitation = state.invitationShown && largeText)
     state.itemKeys = entries.map { it.key }
     state.itemTops = entries.map { with(density) { it.top.toPx() } }
     val keptCard = state.navigator.keptCard
@@ -404,6 +410,10 @@ private sealed interface ListItem {
     @Immutable
     data object Chips : ListItem
 
+    /** What went wrong as the parcels last loaded ([ListNotice]). */
+    @Immutable
+    data class Notice(val message: String, val authenticationRequired: Boolean, val cached: Boolean) : ListItem
+
     /** Nothing in the parcels matches the custom view. */
     @Immutable
     data object NoResults : ListItem
@@ -449,7 +459,7 @@ private fun listEntries(
     sideBySide: Boolean,
     guest: Boolean,
     loading: Boolean,
-    errorMessage: String?,
+    notice: ListItem.Notice?,
     firstLoad: Boolean,
     invitation: Boolean,
 ): List<ListEntry> {
@@ -469,14 +479,13 @@ private fun listEntries(
     val custom = state.hasCustomView
     if (parcels.isNotEmpty()) first("overview", "overview", ListItem.Overview(layout.active.size, sideBySide, change))
     if (custom) first("chips", "chips", ListItem.Chips)
-    // The error's notice and an invitation to turn notifications on come with the store's errors and the
-    // notifications.
+    notice?.let { first("notice", "notice", it) }
     if (!loading) {
         if (parcels.isEmpty()) {
             first("empty", "empty", ListItem.Empty)
         } else if (layout.visible.isEmpty()) {
             first("noResults", "noResults", ListItem.NoResults)
-        } else if (!guest && !custom && errorMessage == null && parcels.all { it.isDelivered }) {
+        } else if (!guest && !custom && notice == null && parcels.all { it.isDelivered }) {
             first("allArrived", "allArrived", ListItem.AllArrived)
         }
     }
@@ -485,8 +494,9 @@ private fun listEntries(
     layout.next?.let { first(cardKey("next", it.id), "next", ListItem.Next(it)) }
     for (parcel in layout.attention) first(cardKey("attention", parcel.id), "card", ListItem.OnTheWay(parcel, attention = true))
     for (parcel in layout.remaining) first(cardKey("remaining", parcel.id), "card", ListItem.OnTheWay(parcel, attention = false))
-    // Someone following parcels without an account is offered one under them, once and quietly, outside a custom view.
-    if (guest && parcels.isNotEmpty() && !custom) first("deviceAccount", "deviceAccount", ListItem.DeviceAccount)
+    // Someone following parcels without an account is offered one under them, once and quietly, outside a custom view:
+    // outside the first group too, 24 under it.
+    if (guest && parcels.isNotEmpty() && !custom) section("deviceAccount", "deviceAccount", SECTION_SPACING, ListItem.DeviceAccount)
     for (section in layout.sections) {
         if (section.kind == ParcelSectionKind.Archived) {
             // A custom view shows the archived parcels it finds under their header, rather than on the shelf.
@@ -521,6 +531,7 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
         }
         ListItem.AllArrived -> AllArrived(state)
         ListItem.Chips -> FilterChips(state)
+        is ListItem.Notice -> ListNotice(state, item)
         ListItem.NoResults -> NoResults(state)
         is ListItem.Next -> NextCard(state, item)
         is ListItem.OnTheWay -> OnTheWayCard(state, item)
@@ -533,11 +544,32 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
 }
 
 /**
+ * The store's error under the chips (`NoticeBanner`): Wi-Fi with its mark in the warning tint, "app.signInNeeded" where
+ * the account's sign-in expired, else "app.trackingBreak", over why, with "app.cachedData" after it while the parcels
+ * shown are those this phone kept; "app.signInAgain" or "app.tryAgain" asks for the parcels again, the first load's
+ * spinner showing while there are none (`store.load(showSpinner: true)`), in the app's scope as the iPhone's `Task`.
+ */
+@Composable
+private fun ListNotice(state: DeliveriesState, notice: ListItem.Notice) {
+    val source = state.source
+    NoticeBanner(
+        symbol = "wifi.exclamationmark",
+        title = localized(if (notice.authenticationRequired) "app.signInNeeded" else "app.trackingBreak"),
+        message = if (notice.cached) "${notice.message} ${localized("app.cachedData")}" else notice.message,
+        modifier = Modifier.testTag(LIST_NOTICE),
+        tint = PeekTheme.colors.warning,
+        actionTitle = localized(if (notice.authenticationRequired) "app.signInAgain" else "app.tryAgain"),
+        action = { source.scope.launch { source.reload() } },
+    )
+}
+
+/**
  * FirstOpenView's `DeviceAccountRow` (A-S19): "link.account.title" in subheadline medium in the ink over
- * "native.guest.kept" in caption secondary, 2 apart, and 8 at least from "arrival.signInTitle" in footnote medium on a
- * cream capsule 34 tall, 12 in; or the capsule 10 under the words at the accessibility sizes. The row is 15 in, 10 above
- * and below, 66 tall at least, on the paper with 16-point continuous corners and a hairline of 0.75 in the separator at
- * 0.3, and gives under the finger; a tap asks to sign in (`session.showSignIn()`).
+ * "native.guest.kept" in caption secondary, 2 apart, and 32 at least from "arrival.signInTitle" in footnote medium on a
+ * cream capsule 34 tall, 12 in (`HStack(spacing: 12)` round a `Spacer(minLength: 8)`); or the capsule 10 under the
+ * words at the accessibility sizes. The row is 15 in, 10 above and below, 66 tall at least, on the paper with 16-point
+ * continuous corners and a hairline of 0.75 in the separator at 0.3, and gives under the finger; a tap asks to sign in
+ * (`session.showSignIn()`).
  */
 @Composable
 private fun DeviceAccountRow(onSignIn: () -> Unit) {
@@ -574,8 +606,9 @@ private fun DeviceAccountRow(onSignIn: () -> Unit) {
             capsule()
         }
     } else {
-        Row(frame, verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.weight(1f).padding(end = 8.dp)) { words() }
+        Row(frame, horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.weight(1f)) { words() }
+            Spacer(Modifier.width(8.dp))
             capsule()
         }
     }
@@ -892,6 +925,9 @@ private const val SEARCH_MOTION = 0.3
 private val SEARCH_DROP = 10.dp
 
 const val ANNOUNCEMENT = "deliveries.announcement"
+
+/** The store's error over the list ([ListNotice]); iOS gives it no id. */
+const val LIST_NOTICE = "deliveries.notice"
 
 /** iOS's id for the guest's offer of an account (`DeviceAccountRow`); the account button has its own. */
 const val DEVICE_ACCOUNT_ROW = "deliveries.account"

@@ -50608,3 +50608,32 @@ export interface ApiAssistantConsentRequest {
 export interface ApiAssistantConsentResponse {
   "redirect": string;
 }
+
+export type ApiTokenParcelStatus = "active" | "attention" | "today" | "delivered" | "archived" | "all";
+
+export interface ApiTokenParcelUpdate {
+  "time": string;
+  "description": string;
+  "location": string | null;
+}
+
+export interface ApiTokenParcel {
+  "id": string;
+  "name": string | null;
+  "carrier": string;
+  "trackingNumber": string;
+  "status": ApiStage;
+  "statusText": string | null;
+  "needsAttention": string | null;
+  "expectedDelivery": string | null;
+  "lastUpdate": ApiTokenParcelUpdate | null;
+  "pickupPoint": string | null;
+  "sender": string | null;
+  "archived": boolean;
+  "addedAt": string;
+}
+
+export interface ApiTokenParcelsResponse {
+  "total": number;
+  "parcels": Array<ApiTokenParcel>;
+}

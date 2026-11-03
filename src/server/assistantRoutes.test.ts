@@ -7,6 +7,7 @@ import { GET as protectedResource } from '../../app/.well-known/oauth-protected-
 import { DELETE as disconnect } from '../../app/api/account/assistants/[id]/route';
 import { POST as consent } from '../../app/api/account/assistants/consent/route';
 import { GET as readAssistants, POST as createToken } from '../../app/api/account/assistants/route';
+import { GET as tokenParcels } from '../../app/api/parcels/route';
 import { DELETE as mcpDelete, GET as mcpGet, POST as mcpPost } from '../../app/mcp/route';
 import { POST as register } from '../../app/oauth/register/route';
 import { POST as revoke } from '../../app/oauth/revoke/route';
@@ -377,6 +378,59 @@ describe('the OAuth endpoints', () => {
     vi.stubEnv('ASSISTANT_ACCOUNTS', '*');
     vi.stubEnv('CANONICAL_ORIGIN', '');
     expect(protectedResource().status).toBe(404);
+  });
+});
+
+describe('the parcels a token reads as JSON', () => {
+  function read(secret: string | null, query = '') {
+    const headers: Record<string, string> = secret ? { authorization: `Bearer ${secret}` } : {};
+    return tokenParcels(new NextRequest(`https://peek.example/api/parcels${query}`, { headers }), none);
+  }
+
+  it('gives a read token what list_parcels gives, without the receiver\'s name or postcode', async () => {
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([
+      stored(1, 'in_transit'), stored(2, 'delivered'), stored(3, 'in_transit', { archived: true }),
+    ]);
+    const secret = connect(['parcels:read']);
+    const response = await read(secret);
+    expect(response.status).toBe(200);
+    expect(response.headers.get('cache-control')).toBe('no-store');
+    const body = await response.json();
+    expect(body).toEqual((await call(secret, 'list_parcels')).result!.structuredContent);
+    expect(body).toMatchObject({ total: 1, parcels: [{ name: 'Synthetic parcel 1', carrier: 'UPS', status: 'in_transit' }] });
+    const all = await (await read(secret, '?status=all&limit=2')).json();
+    expect(all.total).toBe(3);
+    expect(all.parcels).toHaveLength(2);
+    for (const text of [JSON.stringify(body), JSON.stringify(all)]) {
+      expect(text).not.toContain(RECEIVER);
+      expect(text).not.toContain(POSTCODE);
+    }
+  });
+
+  it('refuses a bad query, a missing or unknown token, and a token that may only write', async () => {
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
+    const reader = connect(['parcels:read']);
+    for (const query of ['?status=lost', '?limit=0', '?limit=51', '?limit=2.5']) expect((await read(reader, query)).status, query).toBe(400);
+    const anonymous = await read(null);
+    expect(anonymous.status).toBe(401);
+    expect(anonymous.headers.get('www-authenticate')).toContain('Bearer resource_metadata=');
+    expect((await read(newSecret('access'))).status).toBe(401);
+    const writer = await read(connect(['parcels:write']));
+    expect(writer.status).toBe(403);
+    expect(writer.headers.get('www-authenticate')).toBe('Bearer error="insufficient_scope", scope="parcels:read"');
+    expect(service.listAccountPackages).not.toHaveBeenCalled();
+  });
+
+  it('shares each grant\'s 120 requests a minute with the MCP endpoint', async () => {
+    // An account the setting is closed to answers fastest, and still counts.
+    const secret = connect(['parcels:read'], otherUser);
+    for (let index = 0; index < 120; index += 1) expect((await read(secret)).status).toBe(403);
+    expect((await mcp(secret, 'tools/list')).status).toBe(429);
+  });
+
+  it('is not there when no account may connect', async () => {
+    vi.stubEnv('ASSISTANT_ACCOUNTS', '');
+    expect((await read(connect(['parcels:read']))).status).toBe(404);
   });
 });
 

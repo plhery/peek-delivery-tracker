@@ -1229,6 +1229,7 @@
   "assistants.copyToken": "Copia token",
   "assistants.tokenCopied": "Copiato",
   "assistants.tokensNote": "Per i tuoi script e strumenti che non possono accedere: inviano il token all’indirizzo qui sopra. Chi lo ha vede i tuoi pacchi, quindi elimina quelli che non usi più.",
+  "assistants.feed": "Home Assistant, o qualsiasi strumento che legge JSON, può leggere i tuoi pacchi da {{url}} con uno di questi token.",
   "assistants.failed": "Impossibile modificare i tuoi collegamenti. Riprova.",
   "assistants.consent.tab": "Collega un assistente",
   "assistants.consent.title": "Collegare {{name}} a Peek?",

@@ -3667,6 +3667,44 @@ struct AssistantConsentResponse: Codable, Equatable, Hashable, Sendable {
     var redirect: String
 }
 
+enum TokenParcelStatus: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case active
+    case attention
+    case today
+    case delivered
+    case archived
+    case all
+
+    var id: String { rawValue }
+}
+
+struct TokenParcelUpdate: Codable, Equatable, Hashable, Sendable {
+    var time: String
+    var description: String
+    var location: String? = nil
+}
+
+struct TokenParcel: Codable, Equatable, Hashable, Sendable, Identifiable {
+    var id: UUID
+    var name: String? = nil
+    var carrier: String
+    var trackingNumber: String
+    var status: TrackingStage
+    var statusText: String? = nil
+    var needsAttention: String? = nil
+    var expectedDelivery: String? = nil
+    var lastUpdate: TokenParcelUpdate? = nil
+    var pickupPoint: String? = nil
+    var sender: String? = nil
+    var archived: Bool
+    var addedAt: String
+}
+
+struct TokenParcelsResponse: Codable, Equatable, Hashable, Sendable {
+    var total: Int
+    var parcels: [TokenParcel]
+}
+
 enum CarrierDetectionResponseAmazonShippingStatus: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case available
     case expired

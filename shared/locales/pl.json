@@ -1229,6 +1229,7 @@
   "assistants.copyToken": "Kopiuj token",
   "assistants.tokenCopied": "Skopiowano",
   "assistants.tokensNote": "Dla Twoich własnych skryptów i narzędzi, które nie mogą się zalogować: wysyłają token na adres powyżej. Każdy, kto go ma, widzi Twoje przesyłki, więc usuwaj tokeny, których już nie używasz.",
+  "assistants.feed": "Home Assistant lub inne narzędzie, które czyta JSON, może pobrać Twoje przesyłki z {{url}}, używając jednego z tych tokenów.",
   "assistants.failed": "Nie udało się zmienić połączeń. Spróbuj ponownie.",
   "assistants.consent.tab": "Połącz asystenta",
   "assistants.consent.title": "Połączyć {{name}} z Peek?",

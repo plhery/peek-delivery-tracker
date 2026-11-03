@@ -3612,6 +3612,51 @@ data class AssistantConsentResponse(
 )
 
 @Serializable
+enum class TokenParcelStatus(val rawValue: String) {
+    @SerialName("active") Active("active"),
+    @SerialName("attention") Attention("attention"),
+    @SerialName("today") Today("today"),
+    @SerialName("delivered") Delivered("delivered"),
+    @SerialName("archived") Archived("archived"),
+    @SerialName("all") All("all"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): TokenParcelStatus? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+data class TokenParcelUpdate(
+    val time: String,
+    val description: String,
+    val location: String? = null,
+)
+
+@Serializable
+data class TokenParcel(
+    val id: UUID,
+    val name: String? = null,
+    val carrier: String,
+    val trackingNumber: String,
+    val status: TrackingStage,
+    val statusText: String? = null,
+    val needsAttention: String? = null,
+    val expectedDelivery: String? = null,
+    val lastUpdate: TokenParcelUpdate? = null,
+    val pickupPoint: String? = null,
+    val sender: String? = null,
+    val archived: Boolean,
+    val addedAt: String,
+)
+
+@Serializable
+data class TokenParcelsResponse(
+    val total: Int,
+    val parcels: List<TokenParcel>,
+)
+
+@Serializable
 enum class CarrierDetectionResponseAmazonShippingStatus(val rawValue: String) {
     @SerialName("available") Available("available"),
     @SerialName("expired") Expired("expired"),

@@ -1229,6 +1229,7 @@
   "assistants.copyToken": "Copy token",
   "assistants.tokenCopied": "Copied",
   "assistants.tokensNote": "For your own scripts and tools that can’t sign in: they send the token to the address above. Anyone who has it sees your parcels, so delete one you no longer use.",
+  "assistants.feed": "Home Assistant, or any tool that reads JSON, can get your parcels from {{url}} with one of these tokens.",
   "assistants.failed": "Couldn’t change your connections. Try again.",
   "assistants.consent.tab": "Connect an assistant",
   "assistants.consent.title": "Connect {{name}} to Peek?",

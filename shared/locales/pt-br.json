@@ -1229,6 +1229,7 @@
   "assistants.copyToken": "Copiar token",
   "assistants.tokenCopied": "Copiado",
   "assistants.tokensNote": "Para seus próprios scripts e ferramentas que não conseguem fazer login: eles enviam o token para o endereço acima. Quem tiver o token vê suas encomendas, então exclua os que você não usa mais.",
+  "assistants.feed": "O Home Assistant, ou qualquer ferramenta que leia JSON, pode buscar suas encomendas em {{url}} com um desses tokens.",
   "assistants.failed": "Não foi possível alterar suas conexões. Tente de novo.",
   "assistants.consent.tab": "Conectar um assistente",
   "assistants.consent.title": "Conectar {{name}} ao Peek?",

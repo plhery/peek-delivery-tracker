@@ -92,6 +92,7 @@ and passes them to the service. An assistant you connect, such as Claude or
 ChatGPT, receives what you allowed it: your parcels' names, senders, carriers,
 tracking numbers, statuses, expected days, pickup points and scans, never the
 recipient's name or postcode. Its provider's own privacy terms then apply to what it receives.
+A tool you give a personal token, such as Home Assistant, receives the same.
 
 Cloudflare Turnstile checks the browser or an in-app verification sheet when you start a new parcel lookup to
 prevent automated abuse. It processes browser and network signals; Peek sends

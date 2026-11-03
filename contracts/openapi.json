@@ -48778,6 +48778,83 @@
         }
       }
     },
+    "/api/parcels": {
+      "get": {
+        "operationId": "listTokenParcels",
+        "description": "The account's parcels with a status, most urgent first, for a token that may read them: a personal token from Settings in a script or a Home Assistant rest sensor, or an assistant's access token. Each request counts against the token's grant, 120 a minute. 404 when assistants may connect to no account.",
+        "security": [
+          {
+            "peekToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/TokenParcelStatus"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "How many parcels at most.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The parcels",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenParcelsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "description": "No token, or one that is unknown, expired or revoked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "A token without parcels:read, or an account assistants may not connect to",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "429": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
     "/api/packages/{packageId}": {
       "parameters": [
         {
@@ -51320,6 +51397,12 @@
         "scheme": "bearer",
         "bearerFormat": "Supabase access token",
         "description": "Access token from the signed-in Supabase Auth session."
+      },
+      "peekToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Peek token",
+        "description": "A personal token from Settings › Assistants and tokens, or an assistant's access token."
       }
     },
     "parameters": {
@@ -55915,6 +55998,159 @@
           "redirect": {
             "type": "string",
             "description": "Where the browser goes next: the assistant's redirect address with a code or an error."
+          }
+        }
+      },
+      "TokenParcelStatus": {
+        "type": "string",
+        "enum": [
+          "active",
+          "attention",
+          "today",
+          "delivered",
+          "archived",
+          "all"
+        ],
+        "default": "active",
+        "description": "Which parcels: those on their way, those that need the user, those expected today, delivered, archived, or all of them."
+      },
+      "TokenParcelUpdate": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The carrier's latest scan.",
+        "required": [
+          "time",
+          "description",
+          "location"
+        ],
+        "properties": {
+          "time": {
+            "type": "string",
+            "description": "The scan's time, or its day (YYYY-MM-DD) when the carrier gave only the day."
+          },
+          "description": {
+            "type": "string"
+          },
+          "location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "TokenParcel": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "A parcel as a token reads it: without the recipient's name or postcode.",
+        "required": [
+          "id",
+          "name",
+          "carrier",
+          "trackingNumber",
+          "status",
+          "statusText",
+          "needsAttention",
+          "expectedDelivery",
+          "lastUpdate",
+          "pickupPoint",
+          "sender",
+          "archived",
+          "addedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The name the user gave it."
+          },
+          "carrier": {
+            "type": "string",
+            "description": "The carrier's name."
+          },
+          "trackingNumber": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Stage"
+          },
+          "statusText": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The carrier's latest status, in its words."
+          },
+          "needsAttention": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Why the parcel needs the user, such as failed_attempt or ready_for_pickup; null when it doesn't."
+          },
+          "expectedDelivery": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The day the carrier expects to deliver it (YYYY-MM-DD)."
+          },
+          "lastUpdate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TokenParcelUpdate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pickupPoint": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Where to collect it, when it waits at a pickup point."
+          },
+          "sender": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "archived": {
+            "type": "boolean"
+          },
+          "addedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TokenParcelsResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "total",
+          "parcels"
+        ],
+        "properties": {
+          "total": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "How many parcels have the status; the list holds the first of them."
+          },
+          "parcels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TokenParcel"
+            }
           }
         }
       }

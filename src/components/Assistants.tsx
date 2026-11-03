@@ -135,6 +135,7 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
         </form>
       </div>
       <p className="add-by-email__note">{t('assistants.tokensNote')}</p>
+      <p className="add-by-email__note">{t('assistants.feed', { url: new URL('/api/parcels', offer.mcpUrl).href })}</p>
     </section>
   </>;
 }

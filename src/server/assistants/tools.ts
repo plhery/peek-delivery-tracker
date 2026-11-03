@@ -2,7 +2,7 @@ import 'server-only';
 
 import { McpServer } from '@modelcontextprotocol/server';
 import { z } from 'zod';
-import type { ApiPackageRow } from '../../generated/apiContract';
+import type { ApiPackageRow, ApiTokenParcel, ApiTokenParcelStatus, ApiTokenParcelsResponse } from '../../generated/apiContract';
 import { carrierInfo, normalizeTrackingNumber } from '../../lib/carriers';
 import { parcelAttention } from '../../lib/parcelPriority';
 import { viewParcels } from '../../lib/parcelView';
@@ -15,9 +15,11 @@ import type { SupabaseServiceClient } from '../supabase';
 import type { Scope } from './settings';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const MOST_LISTED = 50;
 const MOST_EVENTS = 40;
-const STATUSES = ['active', 'attention', 'today', 'delivered', 'archived', 'all'] as const;
+/** Which parcels a list holds: those on their way (the default), those that need the user, those expected today… */
+export const PARCEL_STATUSES = ['active', 'attention', 'today', 'delivered', 'archived', 'all'] as const satisfies readonly ApiTokenParcelStatus[];
+export type ParcelStatus = typeof PARCEL_STATUSES[number];
+export const MOST_LISTED = 50;
 
 /** Who a call is for: the account behind the token, and what the token may do. */
 export interface AssistantCaller {
@@ -26,7 +28,7 @@ export interface AssistantCaller {
 }
 
 /** A parcel as a tool describes it: what an assistant needs to answer, without the recipient's name or postcode. */
-function parcelSummary(parcel: ParcelWithEvents, now = Date.now()) {
+function parcelSummary(parcel: ParcelWithEvents, now = Date.now()): ApiTokenParcel {
   const latest = currentEvent(parcel.events);
   return {
     id: parcel.id,
@@ -43,6 +45,15 @@ function parcelSummary(parcel: ParcelWithEvents, now = Date.now()) {
     archived: Boolean(parcel.archivedAt),
     addedAt: parcel.createdAt,
   };
+}
+
+/** The account's parcels with a status, most urgent first, as `list_parcels` and `GET /api/parcels` give them. */
+export async function listParcels(
+  service: SupabaseServiceClient, userId: string, status: ParcelStatus = 'active', limit = 20,
+): Promise<ApiTokenParcelsResponse> {
+  const now = Date.now();
+  const parcels = viewParcels((await service.listAccountPackages(userId)).map(asParcel), { query: '', status, sort: 'priority', now });
+  return { total: parcels.length, parcels: parcels.slice(0, limit).map((parcel) => parcelSummary(parcel, now)) };
 }
 
 function asParcel(row: Parameters<typeof withEventPlaces>[0]): ParcelWithEvents {
@@ -146,18 +157,11 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         + 'latest scan. "active" (the default) is every parcel still on its way; "attention" the ones that need the user; '
         + '"today" the ones expected today.',
       inputSchema: z.object({
-        status: z.enum(STATUSES).optional().describe('Which parcels: active (default), attention, today, delivered, archived or all'),
+        status: z.enum(PARCEL_STATUSES).optional().describe('Which parcels: active (default), attention, today, delivered, archived or all'),
         limit: z.number().int().min(1).max(MOST_LISTED).optional().describe('How many at most; 20 unless given'),
       }),
       annotations: { readOnlyHint: true, openWorldHint: false },
-    }, async ({ status, limit }) => {
-      const now = Date.now();
-      const parcels = viewParcels((await service.listAccountPackages(caller.userId)).map(asParcel), {
-        query: '', status: status ?? 'active', sort: 'priority', now,
-      });
-      const shown = parcels.slice(0, limit ?? 20).map((parcel) => parcelSummary(parcel, now));
-      return answer({ total: parcels.length, parcels: shown });
-    });
+    }, async ({ status, limit }) => answer(await listParcels(service, caller.userId, status, limit)));
 
     server.registerTool('get_parcel', {
       title: 'Get a parcel',

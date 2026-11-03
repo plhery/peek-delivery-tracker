@@ -1229,6 +1229,7 @@
   "assistants.copyToken": "复制令牌",
   "assistants.tokenCopied": "已复制",
   "assistants.tokensNote": "供你自己那些无法登录的脚本和工具使用：它们会把令牌发送到上面的地址。拿到令牌的人都能看到你的包裹，所以请删除不再使用的令牌。",
+  "assistants.feed": "Home Assistant 或任何能读取 JSON 的工具，都可以用其中一个令牌从 {{url}} 获取你的包裹。",
   "assistants.failed": "无法更改你的连接，请重试。",
   "assistants.consent.tab": "连接助手",
   "assistants.consent.title": "要将 {{name}} 连接到 Peek 吗？",

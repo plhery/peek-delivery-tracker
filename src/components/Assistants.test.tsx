@@ -46,6 +46,7 @@ describe('assistants in Settings', () => {
     await user.click(await screen.findByRole('button', { name: 'Assistants and tokens' }));
     expect(screen.getByRole('heading', { name: 'Assistants and tokens' })).toBeInTheDocument();
     expect(screen.getByText('https://peek.example/mcp')).toBeInTheDocument();
+    expect(screen.getByText(/can get your parcels from https:\/\/peek\.example\/api\/parcels with one of these tokens/)).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Copy address' }));
     expect(copy).toHaveBeenCalledWith('https://peek.example/mcp');
     expect(screen.getByText('claude.example · Sees, adds and archives parcels · not used yet')).toBeInTheDocument();

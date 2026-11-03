@@ -4,7 +4,7 @@ import { createMcpHandler, type McpHttpHandler } from '@modelcontextprotocol/ser
 import { clientIp, clientNetwork } from '../api';
 import { captureOperationalError } from '../observability';
 import { RateLimiter } from '../rateLimit';
-import type { SupabaseServiceClient } from '../supabase';
+import type { AssistantTokenOwner, SupabaseServiceClient } from '../supabase';
 import { assistantsOpenToAccount } from './access';
 import { SCOPES, secretDigest, type AssistantSettings } from './settings';
 import { assistantServer, type AssistantCaller } from './tools';
@@ -62,16 +62,17 @@ function unauthorized(settings: AssistantSettings, error?: 'invalid_token'): Res
 }
 
 /**
- * Serves `POST /mcp`: the bearer token must be an access or personal token of a live grant, whose account the
- * setting is open to. The tools then work on that account alone.
+ * The grant behind a bearer token, or the answer that refuses it: none (401), unknown, expired or revoked (401), too
+ * many requests from its grant or its network (429), or an account the setting is not open to (403). `/mcp` and
+ * `GET /api/parcels` share it, and so share each grant's allowance.
  */
-export async function serveMcp(
+export async function tokenOwner(
   settings: AssistantSettings,
   service: SupabaseServiceClient,
   request: Request,
   token: string | null,
   now = Date.now(),
-): Promise<Response> {
+): Promise<AssistantTokenOwner | Response> {
   if (!token) return unauthorized(settings);
   const network = clientNetwork(clientIp(request));
   const refusedUntil = refusedNetworks.get(network) ?? 0;
@@ -90,6 +91,23 @@ export async function serveMcp(
   if (!(await assistantsOpenToAccount(settings, service, owner.userId, now))) {
     return Response.json({ error: 'Peek does not connect assistants to this account' }, { status: 403 });
   }
+  return owner;
+}
+
+/**
+ * Serves `POST /mcp`: the bearer token must be an access or personal token of a live grant, whose account the
+ * setting is open to. The tools then work on that account alone.
+ */
+export async function serveMcp(
+  settings: AssistantSettings,
+  service: SupabaseServiceClient,
+  request: Request,
+  token: string | null,
+  now = Date.now(),
+): Promise<Response> {
+  if (!token) return unauthorized(settings);
+  const owner = await tokenOwner(settings, service, request, token, now);
+  if (owner instanceof Response) return owner;
   const peek: McpRequestData = { service, caller: { userId: owner.userId, scopes: owner.scopes } };
   return mcpHandler().fetch(request, {
     authInfo: {

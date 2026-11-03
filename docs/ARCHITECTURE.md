@@ -275,6 +275,8 @@ Key server modules:
   - The tools work on the token's account alone, through the owner-checked functions the
     app uses. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
     its allowances. Their answers leave out the receiver's name and postcode.
+  - `GET /api/parcels` gives a token that may read the list `list_parcels` gives, as JSON,
+    for a Home Assistant rest sensor or a script. It counts against the grant's allowance.
 - **Private data**: tracking numbers, labels, carrier history, push endpoints and capability
   URLs (the tracking links a carrier keeps, such as Planzer's or a Freightways network's) never
   go into analytics. They do appear in operator logs and Sentry; see

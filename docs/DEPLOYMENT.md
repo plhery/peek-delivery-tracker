@@ -273,12 +273,27 @@ app mentions it. [ARCHITECTURE.md](ARCHITECTURE.md) has what is kept and checked
   for everyone. It needs `CANONICAL_ORIGIN`, which is the OAuth issuer; `<origin>/mcp` is
   the address assistants connect to. A malformed list stops the server at startup.
 - **Cloudflare**: assistants call `/mcp`, `/oauth/token`, `/oauth/register`,
-  `/oauth/revoke` and `/.well-known/oauth-*` from their own servers. A challenge there
+  `/oauth/revoke` and `/.well-known/oauth-*` from their own servers, and tools read
+  `/api/parcels`. A challenge there
   (Bot Fight Mode, a managed challenge, a WAF rule for non-browsers) breaks the connection,
   so skip them for these paths with a custom rule; keep rate limiting.
 - **Connecting**: give an assistant `<origin>/mcp` as a custom connector, such as Claude's
   Settings › Connectors. It opens `/oauth/authorize` to sign in and ask. A script sends a
-  personal token from Settings as `Authorization: Bearer <token>`.
+  personal token from Settings as `Authorization: Bearer <token>`, to `/mcp` or to
+  `GET /api/parcels`. A Home Assistant rest sensor, with `peek_token: "Bearer <token>"` in
+  its `secrets.yaml`:
+
+  ```yaml
+  rest:
+    - resource: <origin>/api/parcels
+      headers:
+        Authorization: !secret peek_token
+      scan_interval: 900
+      sensor:
+        - name: Parcels on the way
+          value_template: "{{ value_json.total }}"
+          json_attributes: [parcels]
+  ```
 
 ## Moving to another host
 

@@ -1229,6 +1229,7 @@
   "assistants.copyToken": "Copier le jeton",
   "assistants.tokenCopied": "Copié",
   "assistants.tokensNote": "Pour tes propres scripts et outils qui ne peuvent pas se connecter : ils envoient le jeton à l’adresse ci-dessus. Toute personne qui l’a voit tes colis, alors supprime ceux que tu n’utilises plus.",
+  "assistants.feed": "Home Assistant, ou tout outil qui lit du JSON, peut récupérer tes colis sur {{url}} avec l’un de ces jetons.",
   "assistants.failed": "Impossible de modifier tes connexions. Réessaie.",
   "assistants.consent.tab": "Connecter un assistant",
   "assistants.consent.title": "Connecter {{name}} à Peek ?",

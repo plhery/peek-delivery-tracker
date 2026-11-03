@@ -3621,8 +3621,8 @@ enum AddByEmailResult: String, Codable, CaseIterable, Hashable, Sendable, Identi
 }
 
 enum AssistantScope: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
-    case parcels:read
-    case parcels:write
+    case parcelsRead = "parcels:read"
+    case parcelsWrite = "parcels:write"
 
     var id: String { rawValue }
 }

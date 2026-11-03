@@ -347,7 +347,8 @@ function upperFirst(value) {
 }
 
 function lowerCamelIdentifier(value) {
-  const words = value.split(/[-_]/).filter(Boolean);
+  // Any character a Swift or Kotlin name can't hold separates words: parcels:read is parcelsRead.
+  const words = value.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
   if (words.length === 0 || /^[0-9]/.test(words[0])) {
     throw new Error(`Cannot make a Swift or Kotlin identifier of ${value}: its first word must start with a letter. `
       + 'Name an enum value in swiftEnumCaseNames, or give a property another name in contracts/openapi.json');

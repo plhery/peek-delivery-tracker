@@ -3561,8 +3561,8 @@ enum class AddByEmailResult(val rawValue: String) {
 
 @Serializable
 enum class AssistantScope(val rawValue: String) {
-    @SerialName("parcels:read") Parcels:read("parcels:read"),
-    @SerialName("parcels:write") Parcels:write("parcels:write"),
+    @SerialName("parcels:read") ParcelsRead("parcels:read"),
+    @SerialName("parcels:write") ParcelsWrite("parcels:write"),
     ;
 
     companion object {

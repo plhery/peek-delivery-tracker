@@ -69,6 +69,16 @@ test('names a carrier that starts with a digit for Swift and Kotlin without an e
   assert.match(kotlin, /val ZeroZeroSevenCargo = CarrierId\("007-cargo"\)/);
 });
 
+test('names a value holding a character other than - and _ as separate words', (t) => {
+  const { root, run } = generateWith(t, []);
+  assert.equal(run.status, 0, run.stderr);
+  const swift = readFileSync(path.join(root, 'ios', 'PeekDeliveryTracker', 'GeneratedAPIContract.swift'), 'utf8');
+  const kotlin = readFileSync(path.join(root, 'android', 'core', 'src', 'main', 'kotlin', 'com', 'plhery', 'peekdeliverytracker',
+    'core', 'api', 'GeneratedApiContract.kt'), 'utf8');
+  assert.match(swift, /case parcelsRead = "parcels:read"/);
+  assert.match(kotlin, /@SerialName\("parcels:read"\) ParcelsRead\("parcels:read"\)/);
+});
+
 test('stops on two carriers given one Swift and Kotlin name, naming both, and writes nothing', (t) => {
   const { run } = generateWith(t, ['2go', 'two-go']);
   assert.notEqual(run.status, 0);

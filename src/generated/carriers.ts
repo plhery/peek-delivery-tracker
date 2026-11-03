@@ -2156,6 +2156,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "canada-post",
+      "catalog": "canada-post",
+      "slug": "canada-post-sendungsverfolgung",
+      "title": "Canada Post Sendungsverfolgung: Paket aus Kanada, Status",
+      "name": "Canada Post",
+      "color": "#e4002b"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-sendungsverfolgung",

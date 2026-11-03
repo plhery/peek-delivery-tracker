@@ -1,20 +1,63 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.roborazzi)
 }
 
+/** The settings of the xcconfig at `path` (from android/, or absolute), by name; null where it can't be read. */
+fun xcconfigSettings(path: String): Map<String, String>? =
+    providers.fileContents(rootProject.layout.projectDirectory.file(path)).asText.orNull?.lines()
+        ?.map { it.trim() }
+        ?.filter { '=' in it && !it.startsWith("//") && !it.startsWith("#") }
+        // `$()` is empty, which keeps `//` in a URL from starting a comment.
+        ?.associate { it.substringBefore('=').trim() to it.substringAfter('=').substringBefore("//").trim().replace("$()", "") }
+
+/** `value` as a Java string literal, for a BuildConfig field. */
+fun javaString(value: String): String = "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+
 // The iPhone build's configuration: ios/Configuration/Shared.xcconfig, then a developer's own Local.xcconfig (git
 // ignores it), so both apps talk to the same server with the same switches. Only public client settings live there.
 val xcconfig: Map<String, String> = listOf("Shared.xcconfig", "Local.xcconfig")
-    .flatMap { name ->
-        val file = rootProject.layout.projectDirectory.file("../ios/Configuration/$name")
-        providers.fileContents(file).asText.orNull.orEmpty().lines()
-    }
-    .map { it.trim() }
-    .filter { '=' in it && !it.startsWith("//") && !it.startsWith("#") }
-    // `$()` is empty, which keeps `//` in a URL from starting a comment.
-    .associate { it.substringBefore('=').trim() to it.substringAfter('=').substringBefore("//").trim().replace("$()", "") }
+    .map { xcconfigSettings("../ios/Configuration/$it").orEmpty() }
+    .reduce { shared, local -> shared + local }
+
+// A release's server settings, from the xcconfig the Gradle property `peek.releaseXcconfig` names, kept outside the
+// repository: they override the release build type's alone, over the iPhone build's. A fresh checkout has no
+// Local.xcconfig, and a release built from it would ship the demo.
+val releaseXcconfig: String? = providers.gradleProperty("peek.releaseXcconfig").orNull
+val releaseRead: Map<String, String>? = releaseXcconfig?.let { xcconfigSettings(it) }
+val releaseOverrides: Map<String, String> = releaseRead.orEmpty()
+val releaseSettings: Map<String, String> = xcconfig + releaseOverrides
+
+/**
+ * Why a release would not reach the server, as scripts/upload-ios-app.sh refuses an iPhone build: its settings need
+ * `SDT_USE_API = YES` and a Supabase URL. Empty when they have both.
+ */
+val releaseRefusal: String = when {
+    releaseXcconfig != null && releaseRead == null -> "peek.releaseXcconfig names $releaseXcconfig, which can't be read"
+    releaseSettings["SDT_USE_API"] != "YES" || releaseSettings["SDT_SUPABASE_URL"].isNullOrEmpty() ->
+        "A release must connect the app to the server: name an xcconfig with SDT_USE_API = YES and SDT_SUPABASE_URL " +
+            "in -Ppeek.releaseXcconfig=<path> (android/README.md)"
+    else -> ""
+}
+
+/**
+ * Google Play's upload key, from the properties file the Gradle property `peek.uploadProperties` names, outside the
+ * repository: `storeFile` (absolute, or from the properties file's folder), `storePassword`, `keyAlias` and
+ * `keyPassword`. Null without it, and the release stays unsigned. Its values are never shown.
+ */
+class UploadKey(val storeFile: File, val storePassword: String, val keyAlias: String, val keyPassword: String)
+
+val uploadKey: UploadKey? = providers.gradleProperty("peek.uploadProperties").orNull?.let { path ->
+    val file = rootProject.layout.projectDirectory.file(path)
+    val text = providers.fileContents(file).asText.orNull ?: throw GradleException("peek.uploadProperties names $path, which can't be read")
+    val properties = Properties().apply { load(text.reader()) }
+    fun value(key: String): String =
+        properties.getProperty(key)?.takeIf { it.isNotEmpty() } ?: throw GradleException("peek.uploadProperties' file has no $key")
+    UploadKey(file.asFile.parentFile.resolve(value("storeFile")), value("storePassword"), value("keyAlias"), value("keyPassword"))
+}
 
 /** The settings AppConfiguration reads, by their Info.plist keys (ios/PeekDeliveryTracker/Info.plist). */
 val iosSettings = mapOf(
@@ -40,17 +83,42 @@ android {
         minSdk = 31
         targetSdk = 37
         versionCode = 1
-        versionName = "0.1.0"
+        // The iPhone's MARKETING_VERSION (ios/PeekDeliveryTracker.xcodeproj).
+        versionName = "1.1.6"
         // What only a device can show (src/androidTest): the WebView's own engine behind the browser check.
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // The iPhone build's settings, under the names its Info.plist gives them (AppConfiguration.from).
         for ((key, setting) in iosSettings) {
-            val value = xcconfig[setting].orEmpty().replace("\\", "\\\\").replace("\"", "\\\"")
-            buildConfigField("String", key, "\"$value\"")
+            buildConfigField("String", key, javaString(xcconfig[setting].orEmpty()))
         }
         // The hosts whose /p/ links open the parcel's sheet, as the iPhone's associated domains name them.
         manifestPlaceholders["linkHost"] = xcconfig["SDT_ASSOCIATED_DOMAIN"].orEmpty().removePrefix("applinks:")
         manifestPlaceholders["linkHostLegacy"] = xcconfig["SDT_ASSOCIATED_DOMAIN_LEGACY"].orEmpty().removePrefix("applinks:")
+    }
+
+    signingConfigs {
+        uploadKey?.let { key ->
+            create("upload") {
+                storeFile = key.storeFile
+                storePassword = key.storePassword
+                keyAlias = key.keyAlias
+                keyPassword = key.keyPassword
+            }
+        }
+    }
+
+    buildTypes {
+        // What goes on Google Play: shrunk, signed with the upload key where one is named (Play App Signing signs it
+        // again with the app's own key, which Google holds), and talking to the server the release settings name.
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.findByName("upload")
+            for ((key, setting) in iosSettings) {
+                releaseOverrides[setting]?.let { buildConfigField("String", key, javaString(it)) }
+            }
+        }
     }
 
     buildFeatures {
@@ -277,6 +345,28 @@ val widgetSampleAssets = tasks.register<Sync>("widgetSampleAssets") {
         into("WidgetSample")
     }
 }
+
+/**
+ * Stops a bundle or APK for Google Play that would ship the demo ([releaseRefusal]) before any of it is built. The
+ * release variant's other tasks, such as its lint, don't wait for it.
+ */
+open class ReleaseSettingsCheck @Inject constructor(objects: ObjectFactory) : DefaultTask() {
+    /** Why the release settings would not reach the server; empty when they would. */
+    @get:Input
+    val refusal: Property<String> = objects.property(String::class.java)
+
+    @TaskAction
+    fun check() {
+        refusal.get().takeIf { it.isNotEmpty() }?.let { throw GradleException(it) }
+    }
+}
+
+val releaseSettingsCheck = tasks.register<ReleaseSettingsCheck>("checkReleaseSettings") {
+    refusal.set(releaseRefusal)
+}
+tasks.named { it == "bundleRelease" || it == "assembleRelease" }.configureEach { dependsOn(releaseSettingsCheck) }
+// The release variant's first task, which all its building waits for.
+tasks.named { it == "preReleaseBuild" }.configureEach { mustRunAfter(releaseSettingsCheck) }
 
 androidComponents {
     onVariants { variant ->

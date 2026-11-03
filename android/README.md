@@ -20,6 +20,25 @@ builds the app and `:coredevice`. The app's tests and `:app:verifyRoborazziDebug
 screenshots are recorded: Robolectric draws text edges and blurs a little differently on Linux x86-64. A failed run
 keeps the reports, and each differing screenshot's `_actual` and `_compare` images, as artifacts.
 
+## Release bundle
+
+```sh
+./gradlew :app:bundleRelease -Ppeek.releaseXcconfig=<path> -Ppeek.uploadProperties=<path>
+```
+
+makes the bundle for Google Play, shrunk by R8 with its mapping inside, at
+`app/build/outputs/bundle/release/app-release.aab`. Both files stay outside the repository; their paths are absolute
+or from `android/`:
+
+- `peek.releaseXcconfig` names an xcconfig with the release's server settings, the ones `ios/Configuration/Local.xcconfig`
+  holds. They replace the release build type's alone: debug builds and tests keep the iPhone build's. The bundle and
+  the APK refuse to build without `SDT_USE_API = YES` and an `SDT_SUPABASE_URL`, as `scripts/upload-ios-app.sh` does.
+- `peek.uploadProperties` names a properties file with `storeFile` (absolute, or from the file's folder),
+  `storePassword`, `keyAlias` and `keyPassword`. Without it the release is unsigned, as on CI.
+
+The app uses Play App Signing: Google holds the key that signs the app phones install, and ours is only the upload
+key, which Google can replace if it is lost.
+
 ## Core tests on a device
 
 `./gradlew :core:test` runs the core's JUnit tests on the JVM, with ICU4J standing in for the phone's ICU.

@@ -32,8 +32,10 @@ import androidx.compose.ui.test.click
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.MouseButton
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performMouseInput
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
@@ -220,6 +222,26 @@ class SwipeRowTest {
         assertNear(122, centre())
         assertNear(122, edge())
         lift()
+    }
+
+    /**
+     * A right click opens the card's menu (`.contextMenu` with a pointer), and the row doesn't give under it: held past
+     * [PRESS_DELAY], the secondary button tells no press, nor does its release.
+     */
+    @Test
+    fun aRightClickPressesNothing() {
+        row()
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(FRAME).performMouseInput {
+            moveTo(center)
+            press(MouseButton.Secondary)
+        }
+        compose.mainClock.advanceTimeBy(PRESS_DELAY * 2)
+        assertFalse(pressed())
+        compose.onNodeWithTag(FRAME).performMouseInput { release(MouseButton.Secondary) }
+        compose.mainClock.advanceTimeBy(500)
+        assertEquals(emptyList<Interaction>(), interactions.filterIsInstance<PressInteraction>())
+        assertNear(128, centre())
     }
 
     /** Opens the card on its action with a slow drag. */

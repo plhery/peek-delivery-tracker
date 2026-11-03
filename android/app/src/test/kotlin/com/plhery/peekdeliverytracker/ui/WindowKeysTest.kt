@@ -32,6 +32,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.cardNamed
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
+import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -167,6 +168,26 @@ class WindowKeysTest {
 
         press(KeyEvent.KEYCODE_2, CTRL)
         assertTrue(passportShown())
+    }
+
+    /**
+     * The page's keys wait for a parcel's link's sheet too (the page's `keyboardInFront` is the list's `keyboardFree`,
+     * `links.route == nil` in it): under it, Ctrl+Backspace asks nothing and Ctrl+Meta+A archives nothing of the parcel
+     * beside the list; once it has gone, Ctrl+Backspace asks about deleting that parcel.
+     */
+    @Test
+    fun thePagesKeysRestUnderALinksSheet() {
+        show()
+        val parcel = shown()
+        assertNotNull(parcel)
+        openLink()
+        press(KeyEvent.KEYCODE_DEL, CTRL)
+        assertNull(deliveries.deleting)
+        press(KeyEvent.KEYCODE_A, CTRL or KeyEvent.META_META_ON)
+        assertEquals(emptyList<UUID>(), source.archived)
+        closeLink()
+        press(KeyEvent.KEYCODE_DEL, CTRL)
+        assertEquals(parcel, deliveries.deleting?.parcelId)
     }
 
     /**

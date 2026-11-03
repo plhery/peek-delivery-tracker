@@ -72,7 +72,8 @@ import kotlinx.coroutines.launch
  * switch; the stage presets, once the account's preferences are loaded, with Save; what was saved or failed; the
  * delivery email; and when updates come. Nothing on it takes a tap while it saves, or while the email switch waits for
  * its answer. It loads the notifications' state as it opens (`.task`), and again as the app comes back from Android's
- * settings.
+ * settings. On a phone without pushes (`DeliveriesSource.pushAvailable`) neither the switch nor the presets show,
+ * which leaves the delivery email.
  */
 @Composable
 internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack: () -> Unit) {
@@ -134,7 +135,7 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
         }
     }
     PushedPage(localized("settings.deliveryUpdates"), scroll, backEnabled = true, onBack = onBack, enabled = !working && emailChoice == null) {
-        SettingsGroup {
+        if (source.pushAvailable) SettingsGroup {
             Column(Modifier.padding(15.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text(systemStatusText(status, enabledOnDevice), color = colors.secondaryLabel, style = type.subheadline.sfLines())
                 if (status == NotificationAuthorizationStatus.Denied && !source.isDemo) {
@@ -164,7 +165,7 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
                 }
             }
         }
-        if (preferences != null) {
+        if (preferences != null && source.pushAvailable) {
             SettingsGroup(localized("notifications.preferencesTitle")) {
                 NotificationPreset.entries.forEachIndexed { index, option ->
                     if (index > 0) SettingsDivider()

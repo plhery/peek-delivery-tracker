@@ -329,6 +329,7 @@ private fun SettingsRootPage(
     val session by source.session.collectAsState()
     val enabledOnDevice by source.notificationsEnabledOnDevice.collectAsState()
     val preferences by source.notificationPreferences.collectAsState()
+    val deliveryEmail by source.deliveryEmail.collectAsState()
     val widgetEnabled by source.deliveryWidgetEnabled.collectAsState()
     val appearance = appearanceSetting()
     val demo = source.isDemo
@@ -341,6 +342,8 @@ private fun SettingsRootPage(
     val fade = with(density) { TITLE_FADE.toPx() }
     val title = localized("settings.title")
     val summary = when {
+        // What the summary says is the pushes' preset, which a phone without them has none of.
+        !source.pushAvailable -> null
         !enabledOnDevice -> localized("settings.off")
         else -> preferences?.let { localized(NotificationPreset.matching(it.enabledStages).titleKey) } ?: ""
     }
@@ -364,8 +367,9 @@ private fun SettingsRootPage(
                     }
                     SettingsGroup(localized("native.deliveries")) {
                         // Alerts are kept up to date by pushes, which need an account; the widget's switch is for every
-                        // mode. Android has no Live Activities, the iPhone's row after it.
-                        if (!guest) {
+                        // mode. Android has no Live Activities, the iPhone's row after it. A phone without pushes keeps
+                        // the row for the delivery email alone, where the account has one.
+                        if (!guest && (source.pushAvailable || deliveryEmail != null)) {
                             SettingsButtonRow(
                                 localized("settings.deliveryUpdates"), SETTINGS_DELIVERY_UPDATES, { onPush(PAGE_UPDATES) },
                                 symbol = "bell", value = summary, chevron = true,

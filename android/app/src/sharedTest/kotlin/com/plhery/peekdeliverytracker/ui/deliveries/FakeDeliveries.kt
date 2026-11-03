@@ -560,6 +560,9 @@ class FakeDeliveries(
 
     override val notificationStatus = MutableStateFlow(NotificationAuthorizationStatus.NotDetermined)
     override val notificationsEnabledOnDevice = MutableStateFlow(false)
+
+    /** Whether the phone can receive pushes: as the iPhone can, unless a test takes them away as Android's app has none yet. */
+    override var pushAvailable = true
     override val notificationError = MutableStateFlow<String?>(null)
     override val shouldInviteNotifications = MutableStateFlow(false)
     override val notificationEnableInProgress = MutableStateFlow(false)

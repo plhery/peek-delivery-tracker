@@ -75,6 +75,7 @@ import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.inputNeededPrompt
 import com.plhery.peekdeliverytracker.core.inputSuggestedPrompt
 import com.plhery.peekdeliverytracker.core.isArchived
+import com.plhery.peekdeliverytracker.core.isEmailMuted
 import com.plhery.peekdeliverytracker.core.likelyCarrierPrompt
 import com.plhery.peekdeliverytracker.core.nonTrackingShape
 import com.plhery.peekdeliverytracker.core.refusedPostcode
@@ -108,11 +109,12 @@ import kotlin.math.max
 /**
  * The page's bell, where the parcel has one: it opens the parcel's alerts while the account's email is on
  * (`opensAlerts`, `bellOpensAlerts`, `open`, TalkBack coming back to the bell), and otherwise switches the parcel's
- * notifications (`mute`), then calls `saved`.
+ * notifications (`mute`), then calls `saved`. Without `pushes`, the email is all its alerts are.
  */
 @Stable
 internal class PassBell(
     val opensAlerts: Boolean,
+    val pushes: Boolean = true,
     val open: (AccessibilityFocus) -> Unit = {},
     val mute: (muted: Boolean, saved: () -> Unit) -> Unit,
 )
@@ -481,7 +483,7 @@ internal fun HeaderButton(
 /**
  * The bell (B-S03, B-W01): it switches the parcel's notifications off or back on, then rings and gives the selection
  * tick (B-H01), and waits while a change is saved. While the account's email is on it opens the parcel's alerts
- * instead, struck out while every alert of the parcel is.
+ * instead, struck out while every alert of the parcel is: its email, on a phone without pushes.
  */
 @Composable
 private fun BellButton(parcel: Parcel, bell: PassBell, working: Boolean, tint: Color, localizer: Localizer) {
@@ -501,7 +503,12 @@ private fun BellButton(parcel: Parcel, bell: PassBell, working: Boolean, tint: C
             haptics.selection()
         }
     }) {
-        ParcelNotificationBell(if (bell.opensAlerts) parcel.allAlertsMuted else parcel.notificationsMuted, rings, tint)
+        val struck = when {
+            !bell.opensAlerts -> parcel.notificationsMuted
+            bell.pushes -> parcel.allAlertsMuted
+            else -> parcel.isEmailMuted
+        }
+        ParcelNotificationBell(struck, rings, tint)
     }
 }
 

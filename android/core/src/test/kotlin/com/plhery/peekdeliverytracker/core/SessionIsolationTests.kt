@@ -246,6 +246,29 @@ class SessionIsolationTests {
     }
 
     /**
+     * Android's own, until Firebase Cloud Messaging: an account with parcels on a phone without pushes is never invited
+     * to turn them on, where the same account on a phone with them is.
+     */
+    @Test
+    fun aPhoneWithoutPushNeverInvitesTheAccountToTurnThemOn() = runTest {
+        for (available in listOf(true, false)) {
+            val transport = RecordingTransport()
+            val session = sessionStore(transport)
+            authorize(session, transport)
+            val store = testParcelStore(
+                configuration, session, transport, backgroundScope, MemoryDefaults(), now = { now },
+                notifications = StubPushNotifications(available = available),
+            )
+            store.setDeliveryWidgetEnabled(false)
+            store.setDeliveryLiveActivitiesEnabled(false)
+            transport.respond(packageList(parcel()))
+            store.load()
+            store.refreshNotificationState()
+            assertEquals("Pushes available: $available", available, store.shouldInviteNotifications)
+        }
+    }
+
+    /**
      * Android's own (C-D05): a phone without Apple's sign-in (the app's stand-in) deletes an account that uses Apple
      * without asking Apple, and so without the code, whose revocation the server then skips.
      */

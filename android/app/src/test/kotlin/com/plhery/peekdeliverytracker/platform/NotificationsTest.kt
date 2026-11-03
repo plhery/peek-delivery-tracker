@@ -300,6 +300,16 @@ class NotificationsTest {
         assertNull(shadowOf(window.get()).lastRequestedPermission)
     }
 
+    /**
+     * Until Firebase Cloud Messaging is set up the app's pushes aren't available, the app's own stores included: nothing
+     * offers them, asks for the permission for them or tunes them ([AndroidPushNotifications.available]).
+     */
+    @Test
+    fun theAppsPushesAreNotAvailableUntilFirebase() {
+        assertFalse(notifications.available)
+        assertFalse(container().notifications.available)
+    }
+
     @Test
     fun anAccountOnAPhoneThatAllowsThemWaitsForTheTokenAndKeepsTheInvitation() {
         val app = container()

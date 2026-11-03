@@ -653,6 +653,38 @@ class SettingsTest {
         assertEquals(compose.activity.packageName, opened.getStringExtra(Settings.EXTRA_APP_PACKAGE))
     }
 
+    /**
+     * Android's own, until Firebase Cloud Messaging: on a phone without pushes Delivery updates keeps the delivery
+     * email, and neither the device's switch nor the presets that only tune pushes; the row names no preset.
+     */
+    @Test
+    fun aPhoneWithoutPushKeepsTheDeliveryEmailAlone() {
+        show {
+            signedInWithEmail(choice = false)
+            pushAvailable = false
+        }
+        open()
+        assertFalse(shows(text("settings.off")))
+        tap(SETTINGS_DELIVERY_UPDATES)
+        assertFalse(exists(SETTINGS_DEVICE_SWITCH))
+        assertFalse(shows(text("notifications.state.prompt")))
+        assertFalse(shows(text("notifications.preferencesTitle").uppercase()))
+        for (preset in NotificationPreset.entries) assertFalse(exists(presetTag(preset)))
+        assertFalse(exists(SETTINGS_SAVE))
+        assertTrue(shows(text("notifications.schedule")))
+        flip(SETTINGS_DELIVERY_EMAIL)
+        assertEquals(listOf(true), source.emailChoices)
+    }
+
+    /** Without pushes or a delivery email, as in the demo, Delivery updates would hold nothing to set: no row. */
+    @Test
+    fun aPhoneWithoutPushOrADeliveryEmailHasNoDeliveryUpdatesRow() {
+        show(AuthenticationState.Demo) { pushAvailable = false }
+        open()
+        assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
+        assertTrue(exists(SETTINGS_WIDGETS))
+    }
+
     @Test
     fun theSiteRowsOpenTheHomePageTheMailAndThePrivacyNotice() {
         show()

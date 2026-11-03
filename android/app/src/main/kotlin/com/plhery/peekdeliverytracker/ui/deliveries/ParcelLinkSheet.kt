@@ -665,7 +665,8 @@ private fun Keeping(
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             state.errorMessage?.let { LinkNote(it) }
             LinkPrimaryButton(localizer.text("native.follow.action"), "bell", LINK_FOLLOW, busy = state.adding) { state.follow(source, response) }
-            LinkHint(localizer.text("native.follow.hint"))
+            // The hint promises this phone's notifications.
+            if (source.pushAvailable) LinkHint(localizer.text("native.follow.hint"))
             if (keepable && context.canSignIn) {
                 val enabled = !state.adding
                 Box(

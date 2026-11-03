@@ -127,15 +127,17 @@ class NotificationPermission(context: Context) {
  * system no longer asks; on Android 12 the setting alone. The question ([requestAuthorization]) is asked from the
  * window on screen ([NotificationPermission]), only where the permission isn't granted yet.
  *
- * The token is absent until Firebase Cloud Messaging is set up: [registerForRemoteNotifications] gets none, so turning
- * notifications on ends as the iPhone's does when APNs never answers (`native.apnsTokenError`), and a guest's parcels
- * are signed up for none. Firebase plugs in here: [registerForRemoteNotifications] asks
- * `FirebaseMessaging.getInstance().token` and keeps the answer as [currentDeviceToken], then hands it to
- * `ParcelStore.forwardNativePushToken` and `registerDeviceAlerts` on the main thread, as `FirebaseMessagingService
- * .onNewToken` does with each new one; [unregisterForRemoteNotifications] calls `FirebaseMessaging.deleteToken()`. Its
- * `onMessageReceived` hands each push's data to [AppNotifications.post].
+ * The token is absent until Firebase Cloud Messaging is set up: [registerForRemoteNotifications] gets none, so pushes
+ * are not [available] and nothing offers them (turning them on would end as the iPhone's does when APNs never
+ * answers, `native.apnsTokenError`). Firebase plugs in here, and [available] turns true:
+ * [registerForRemoteNotifications] asks `FirebaseMessaging.getInstance().token` and keeps the answer as
+ * [currentDeviceToken], then hands it to `ParcelStore.forwardNativePushToken` and `registerDeviceAlerts` on the main
+ * thread, as `FirebaseMessagingService.onNewToken` does with each new one; [unregisterForRemoteNotifications] calls
+ * `FirebaseMessaging.deleteToken()`. Its `onMessageReceived` hands each push's data to [AppNotifications.post].
  */
 class AndroidPushNotifications(private val context: Context, private val permission: NotificationPermission) : PushNotifications {
+    override val available: Boolean get() = false
+
     override suspend fun authorizationStatus(): NotificationAuthorizationStatus = NotificationAuthorizationStatus.fromAndroid(
         sdkInt = Build.VERSION.SDK_INT,
         granted = granted(),

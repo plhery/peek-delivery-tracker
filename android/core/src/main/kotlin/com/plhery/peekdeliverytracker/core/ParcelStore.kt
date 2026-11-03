@@ -46,6 +46,12 @@ import kotlinx.serialization.Serializable
  * tokens need it to send through FCM first.
  */
 interface PushNotifications {
+    /**
+     * Whether this phone can receive pushes at all: not on Android until Firebase Cloud Messaging is set up. Without
+     * them nothing offers notifications, asks for the permission or tunes them, and a parcel's alerts are its email.
+     */
+    val available: Boolean get() = true
+
     /** `notificationSettings().authorizationStatus`: `NotificationAuthorizationStatus.fromAndroid` reads it. */
     suspend fun authorizationStatus(): NotificationAuthorizationStatus
 
@@ -762,10 +768,10 @@ class ParcelStore(
 
     /**
      * Asks for notifications once a parcel comes to this phone without an account: the phone asks for permission the
-     * first time, and the device's parcels are signed up once the token is known.
+     * first time, and the device's parcels are signed up once the token is known. Nothing on a phone without pushes.
      */
     suspend fun askForDeviceAlerts(language: AppLanguage) {
-        if (!tracksWithoutAccount || isDemo || !device.hasParcelsOnTheirWay) return
+        if (!notifications.available || !tracksWithoutAccount || isDemo || !device.hasParcelsOnTheirWay) return
         var status = deviceNotifications.status()
         if (status == NotificationAuthorizationStatus.NotDetermined) {
             deviceNotifications.request()
@@ -778,7 +784,7 @@ class ParcelStore(
 
     /** At launch, with permission given already, the phone hands the token over again and the parcels are signed up on it. Nothing is asked. */
     private suspend fun resumeDeviceAlerts() {
-        if (!tracksWithoutAccount || isDemo || !device.hasParcelsOnTheirWay ||
+        if (!notifications.available || !tracksWithoutAccount || isDemo || !device.hasParcelsOnTheirWay ||
             !NotificationDevicePolicy.isAuthorized(deviceNotifications.status())
         ) {
             return
@@ -1243,8 +1249,9 @@ class ParcelStore(
         analytics("notifications-disable", DeliveryAnalytics.Outcome.Success)
     }
 
+    /** Whether the list invites the account to turn notifications on; never on a phone without pushes. */
     val shouldInviteNotifications: Boolean
-        get() = !loading && errorMessage == null && !authenticationRequired &&
+        get() = notifications.available && !loading && errorMessage == null && !authenticationRequired &&
             NotificationInvitationPolicy.shouldPresent(
                 isAuthenticated = session.isAuthenticated,
                 isDemo = isDemo,

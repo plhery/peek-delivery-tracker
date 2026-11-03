@@ -43,6 +43,7 @@ internal class StubPushNotifications(
     var granted: Boolean = false,
     override var currentDeviceToken: String? = null,
     override var answeredBefore: Boolean = false,
+    override val available: Boolean = true,
 ) : PushNotifications {
     val calls = mutableListOf<String>()
 

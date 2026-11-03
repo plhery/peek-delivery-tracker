@@ -349,6 +349,18 @@ class ParcelLinkSheetTest {
 
     // Signed out
 
+    /** Android's own, until Firebase Cloud Messaging: a phone without pushes follows the parcel without promising them. */
+    @Test
+    fun aPhoneWithoutPushFollowsTheParcelWithoutPromisingNotifications() {
+        show(FakeParcelLinks(answer = LinkFixtures.keepable(), pushAvailable = false))
+        open()
+        assertTrue(exists(LINK_FOLLOW))
+        assertFalse(shows(text("native.follow.hint")))
+        compose.onNodeWithTag(LINK_FOLLOW).performClick()
+        settle()
+        assertEquals(listOf(ParcelLinkRoute(id = viewerId)), links.followed)
+    }
+
     @Test
     fun someoneSignedOutFollowsTheParcelOnThisPhoneOrSignsInToKeepIt() {
         show(FakeParcelLinks(answer = LinkFixtures.keepable()))

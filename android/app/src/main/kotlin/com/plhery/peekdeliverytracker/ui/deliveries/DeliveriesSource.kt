@@ -276,6 +276,12 @@ interface DeliveriesSource {
     /** `store.notificationsEnabledOnDevice`: pushes registered for this phone. None until Firebase brings a token. */
     val notificationsEnabledOnDevice: StateFlow<Boolean>
 
+    /**
+     * `PushNotifications.available`: whether this phone can receive pushes, which it can't until Firebase brings a
+     * token. Without them Settings, the bell and the parcel's alerts offer the delivery email alone.
+     */
+    val pushAvailable: Boolean
+
     /** `store.shouldInviteNotifications`, as the store changes: the invitation to turn notifications on is due. */
     val shouldInviteNotifications: StateFlow<Boolean>
 
@@ -524,6 +530,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override fun dismissNotificationInvitation() = container.parcels.dismissNotificationInvitation()
 
     override val notificationsEnabledOnDevice get() = container.parcels.notificationsEnabledOnDeviceFlow
+
+    override val pushAvailable: Boolean get() = container.notifications.available
 
     override val friends: FriendsStore get() = container.friends
 

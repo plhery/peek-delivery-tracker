@@ -1165,6 +1165,38 @@ class DeviceParcelTests {
         assertEquals(setOf("CN", "DE", "CH"), delivered.trackingEvents.mapNotNull { it.location }.mapNotNull { TrackingLocation.place(it).country }.toSet())
     }
 
+    /**
+     * Android's own, until Firebase Cloud Messaging: a phone without pushes never asks a guest for notifications, at
+     * launch, on adding a parcel or on following a link, and so never reads the permission or registers.
+     */
+    @Test
+    fun aPhoneWithoutPushNeverAsksAGuestForNotifications() = runTest {
+        val storage = Memory().apply {
+            parcels = listOf(parcel("22222222222A", "Desk lamp", UUID.randomUUID()))
+            keys = mapOf("22222222222A" to key)
+        }
+        val added = UUID.randomUUID()
+        val found = PublicLookupResponse(link = link("22222222222B"), key = key, parcel = pkg(added, number = "TESTPARCEL456"))
+        val followed = UUID.randomUUID()
+        val shown = PublicParcelResponse(link = reader("33333333333A"), parcel = pkg(followed, stage = TrackingStage.Registered))
+        val device = device(client(Calls(), lookup = found, read = { shown }), storage, backgroundScope)
+        val notifications = StubPushNotifications(granted = true, currentDeviceToken = "token1", available = false)
+        val transport = RecordingTransport { jsonResponse(404) }
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, notifications = notifications)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        store.start()
+        store.add(trackingNumber = "TESTPARCEL456", label = "", carrier = CarrierId.Dhl, trackingUrl = null, dpdPostcode = null)
+        store.follow(ParcelLinkRoute(id = "33333333333A", name = "Books"), shown)
+        runCurrent()
+
+        assertEquals(3, store.parcels.size)
+        assertEquals(emptyList<String>(), notifications.calls)
+    }
+
     // Android alone: the stores the app gives DeviceParcelFiles, which the iPhone's tests can't reach (its Keychain is
     // real) and which can fail where the iPhone's `try?` reads nothing; and a cancellation ends the caller rather than
     // being let go.

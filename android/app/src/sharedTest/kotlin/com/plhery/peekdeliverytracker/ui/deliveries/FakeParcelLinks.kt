@@ -50,6 +50,7 @@ class FakeParcelLinks(
     session: AuthenticationState = AuthenticationState.Welcome,
     override val tracksWithoutAccount: Boolean = true,
     override val authenticationConfigured: Boolean = true,
+    override val pushAvailable: Boolean = true,
 ) : ParcelLinkSource {
     val defaults = MemoryDefaults()
 

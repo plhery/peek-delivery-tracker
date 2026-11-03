@@ -338,8 +338,9 @@ private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID,
 
 /**
  * The pass at the page's top ([LivePassCard]): the bell where alerts can be had, which needs an account and a parcel
- * of the deliveries, and opens the parcel's alerts while the account's email is on; the share and the carrier where
- * the parcel is the reader's own, rather than followed through someone else's link; and the map once the atlas is read.
+ * of the deliveries, and opens the parcel's alerts while the account's email is on, the one way it has on a phone
+ * without pushes ([DeliveriesSource.pushAvailable]); the share and the carrier where the parcel is the reader's own,
+ * rather than followed through someone else's link; and the map once the atlas is read.
  */
 @Composable
 private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
@@ -349,10 +350,11 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     // A scan has a place, so the card shows the route once the map data has loaded.
     val atlas = rememberWorldAtlas(wanted = parcel.trackingEvents.any { it.place != null })
     val opensAlerts = email?.bellOpensAlerts(parcel) == true
-    val bell = if (session != AuthenticationState.Welcome && !sample) {
+    val pushes = state.source.pushAvailable
+    val bell = if (session != AuthenticationState.Welcome && !sample && (pushes || opensAlerts)) {
         // The same bell while nothing it acts on changes, so the card isn't composed again for a new one.
-        remember(state, pageId, parcel, opensAlerts) {
-            PassBell(opensAlerts, open = { state.openAlerts(pageId, it) }) { muted, saved -> state.muteOnPage(pageId, parcel, muted, saved) }
+        remember(state, pageId, parcel, opensAlerts, pushes) {
+            PassBell(opensAlerts, pushes, open = { state.openAlerts(pageId, it) }) { muted, saved -> state.muteOnPage(pageId, parcel, muted, saved) }
         }
     } else {
         null

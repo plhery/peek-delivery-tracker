@@ -161,6 +161,7 @@ internal fun ParcelAlertsHost(state: DeliveriesState) {
             }
             ParcelAlertSwitches(
                 shown.parcel, shown.email, shown.preset, shown.request.saving, closing = shown.request.closing,
+                pushes = state.source.pushAvailable,
                 flip = { alert, on -> state.flipAlert(alert, on, shown.parcel) }, close = { state.doneWithAlerts() },
             )
         }
@@ -174,7 +175,8 @@ internal fun ParcelAlertsHost(state: DeliveriesState) {
  * and the email with its address; the note saying where the defaults are, in caption secondary; and Done. A switch
  * shows the position it was flipped to while it saves (`saving`), and all are disabled meanwhile, one save at a time.
  * Done, and the close button, end the sheet (`close`); while a switch still saves, Done shows a spinner and the sheet
- * closes once it is saved (`closing`), so a failure is never missed.
+ * closes once it is saved (`closing`), so a failure is never missed. Without `pushes` the email's switch is the only
+ * one.
  */
 @Composable
 internal fun ParcelAlertSwitches(
@@ -183,6 +185,7 @@ internal fun ParcelAlertSwitches(
     preset: NotificationPreset,
     saving: AlertSave?,
     closing: Boolean,
+    pushes: Boolean = true,
     flip: (ParcelAlert, Boolean) -> Unit,
     close: () -> Unit,
 ) {
@@ -203,11 +206,13 @@ internal fun ParcelAlertSwitches(
             AlertsHeader(parcel, close)
             Column(verticalArrangement = Arrangement.spacedBy(7.dp)) {
                 fun shownOn(alert: ParcelAlert, saved: Boolean) = if (saving?.alert == alert) saving.on else saved
-                SwitchRow(
-                    PARCEL_ALERTS_NOTIFICATIONS, "bell", localizer.text("email.parcel.notifications"),
-                    localizer.text("email.parcel.notificationsBody", mapOf("preset" to localizer.text(preset.titleKey))),
-                    on = shownOn(ParcelAlert.Notifications, !parcel.notificationsMuted), enabled = saving == null,
-                ) { flip(ParcelAlert.Notifications, it) }
+                if (pushes) {
+                    SwitchRow(
+                        PARCEL_ALERTS_NOTIFICATIONS, "bell", localizer.text("email.parcel.notifications"),
+                        localizer.text("email.parcel.notificationsBody", mapOf("preset" to localizer.text(preset.titleKey))),
+                        on = shownOn(ParcelAlert.Notifications, !parcel.notificationsMuted), enabled = saving == null,
+                    ) { flip(ParcelAlert.Notifications, it) }
+                }
                 SwitchRow(
                     PARCEL_ALERTS_EMAIL, "envelope", localizer.text("email.parcel.email"),
                     localizer.text("email.parcel.emailBody", mapOf("email" to email.address)),

@@ -270,6 +270,32 @@ class ParcelAlertsTest {
         assertEquals(listOf(gift to true), source.mutes)
     }
 
+    /**
+     * Android's own, until Firebase Cloud Messaging: on a phone without pushes the bell is there only to open the
+     * parcel's alerts, which keep the email's switch alone; once it would mute the notifications instead, it is gone.
+     */
+    @Test
+    fun aPhoneWithoutPushHasTheBellForTheEmailAlone() {
+        show {
+            signedInWithEmail(true)
+            pushAvailable = false
+        }
+        openAlerts()
+        assertTrue(exists(PARCEL_ALERTS))
+        assertFalse(exists(PARCEL_ALERTS_NOTIFICATIONS))
+        assertEquals(ToggleableState.On, state(PARCEL_ALERTS_EMAIL))
+        assertTrue(exists(PARCEL_ALERTS_DONE))
+        flip(PARCEL_ALERTS_EMAIL)
+        settle()
+        assertEquals(listOf(gift to true), source.emailMutes)
+        // The email switched off elsewhere: the sheet closes, and the bell with it.
+        source.signedInWithEmail(false)
+        settle()
+        assertFalse(exists(PARCEL_ALERTS))
+        assertFalse(exists(PAGE_BELL))
+        assertEquals(emptyList<Any>(), source.mutes)
+    }
+
     /** The gift delivered, as the store would have it once its carrier says so. */
     private fun deliverTheGift() {
         compose.runOnUiThread {

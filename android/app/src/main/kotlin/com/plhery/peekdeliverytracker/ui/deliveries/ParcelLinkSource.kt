@@ -44,6 +44,12 @@ interface ParcelLinkSource {
     /** `parcels.tracksWithoutAccount`: the build has a server, so this phone may follow a parcel without an account. */
     val tracksWithoutAccount: Boolean
 
+    /**
+     * `PushNotifications.available`: whether this phone can receive pushes, which it can't until Firebase brings a
+     * token; without them, following a parcel here promises no notifications.
+     */
+    val pushAvailable: Boolean get() = true
+
     /** `parcels.keep(_:)`: the parcel kept in the account. */
     suspend fun keep(link: ParcelLinkRoute): ParcelLinkClaim
 
@@ -87,6 +93,7 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
     override val sheet get() = container.linkSheet
     override val authenticationConfigured get() = container.configuration.authenticationConfigured
     override val tracksWithoutAccount get() = container.parcels.tracksWithoutAccount
+    override val pushAvailable get() = container.notifications.available
 
     override suspend fun keep(link: ParcelLinkRoute) = container.parcels.keep(link)
 

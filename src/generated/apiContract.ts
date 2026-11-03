@@ -48279,6 +48279,99 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.rohlig.com/"
+  },
+  "alliance-air-freight": {
+    "displayName": "Alliance Air Freight",
+    "aliases": [
+      "Alliance Air Freight Inc."
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#007fdc",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://worldtrak.shipalliance.com/cvportal/shipinquiry/quicktrack.aspx"
+  },
+  "matson": {
+    "displayName": "Matson",
+    "aliases": [
+      "Matson Group",
+      "Matson Navigation",
+      "Matson Logistics"
+    ],
+    "countries": [
+      "US",
+      "GU"
+    ],
+    "color": "#215ea1",
+    "selectable": true,
+    "timezone": "Pacific/Honolulu",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.matson.com/shipment-tracking.html"
+  },
+  "schneider": {
+    "displayName": "Schneider",
+    "aliases": [
+      "Schneider National"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#f26523",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://schneider.com/track"
+  },
+  "wooliiporter": {
+    "displayName": "WooliiPorter",
+    "aliases": [
+      "Woolii",
+      "Woolii Porter"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#1668e3",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://woolii.com/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "woolii.com"
+        ],
+        "path": "^/track/([^/?#,;|]+)/?$"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^WP\\d{13}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://woolii.com/track"
   }
 } as const;
 
@@ -49658,7 +49751,11 @@ export const CARRIER_IDS = [
   "topnic",
   "dhx",
   "jb-hunt",
-  "rohlig"
+  "rohlig",
+  "alliance-air-freight",
+  "matson",
+  "schneider",
+  "wooliiporter"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

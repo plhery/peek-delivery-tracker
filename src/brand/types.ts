@@ -638,7 +638,10 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'quick-fort'
   | 'flight-logistics'
   | 'peregrine-ship'
-  | 'southwestern-motor-transport';
+  | 'southwestern-motor-transport'
+  | 'topnic'
+  | 'magnum-transportation'
+  | 'crane-worldwide';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

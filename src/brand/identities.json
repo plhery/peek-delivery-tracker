@@ -802,6 +802,9 @@
   "cpszy": {
     "decal": "cpszy"
   },
+  "crane-worldwide": {
+    "decal": "crane-worldwide"
+  },
   "credifin": {
     "decal": "credifin"
   },
@@ -2324,6 +2327,9 @@
   "magic-trans": {
     "decal": "magic-trans"
   },
+  "magnum-transportation": {
+    "decal": "magnum-transportation"
+  },
   "magyar-posta": {
     "decal": "magyar-posta"
   },
@@ -3719,6 +3725,9 @@
   },
   "topex-logistics": {
     "decal": "topex-logistics"
+  },
+  "topnic": {
+    "decal": "topnic"
   },
   "toptrans": {
     "decal": "toptrans"

@@ -372,12 +372,15 @@ final class LocalizationTests: XCTestCase {
             "France": .init(country: "FR", name: ""), "DE": .init(country: "DE", name: ""), "CH ": .init(country: "CH", name: ""),
             "THE NETHERLANDS": .init(country: "NL", name: ""), "Czech Republic": .init(country: "CZ", name: ""),
             "Hong Kong": .init(country: "HK", name: ""),
+            // A code before a dot, as CNE names its facilities.
+            "CN.CNE East China Sort Facility": .init(country: "CN", name: "CNE East China Sort Facility"),
+            "CN.Shenzhen": .init(country: "CN", name: "Shenzhen"),
         ]
         for (location, place) in places {
             XCTAssertEqual(TrackingLocation.place(location), place, location)
         }
         for location in ["", "Warehouse", "Paris", "Buchs AG", "Basel, BS", "Wilmington, DE", "France distribution center",
-                         "Zürich Briefzentrum", "Mexico City", "Andorra la Vella"] {
+                         "Zürich Briefzentrum", "Mexico City", "Andorra la Vella", "ST.LOUIS", "PT.ELIZABETH", "CA.Toronto"] {
             XCTAssertEqual(TrackingLocation.place(location), .init(country: nil, name: location), location)
         }
         // A code that is also a state or canton names the country the scan was placed in, and only that one.

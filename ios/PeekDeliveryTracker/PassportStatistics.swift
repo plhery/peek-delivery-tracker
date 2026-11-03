@@ -251,6 +251,7 @@ enum TrackingLocation {
     /// repeated in "Hebron, KY, US, US") or a leading name ("Switzerland Haerkingen").
     static func place(_ location: String) -> Place {
         let text = location.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let prefixed = prefixedPlace(text) { return prefixed }
         let fields = fieldPattern.matches(in: text, range: NSRange(text.startIndex..., in: text))
             .compactMap { Range($0.range, in: text) }
             .filter { !text[$0].trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
@@ -277,6 +278,18 @@ enum TrackingLocation {
             }
         }
         return Place(country: nil, name: text)
+    }
+
+    private static let prefixedCode = try! NSRegularExpression(pattern: "^([A-Z]{2})\\.(\\p{L}.*)$")
+
+    /// A country's code before a dot, as CNE writes its facilities ("CN.CNE East China Sort
+    /// Facility"), as the web reads it. "ST.LOUIS" and "PT.ELIZABETH" abbreviate Saint and Port.
+    private static func prefixedPlace(_ text: String) -> Place? {
+        guard let match = prefixedCode.firstMatch(in: text, range: NSRange(text.startIndex..., in: text)),
+              let code = Range(match.range(at: 1), in: text).map({ String(text[$0]) }),
+              let name = Range(match.range(at: 2), in: text),
+              regionCodes.contains(code), !ambiguousAddressCodes.contains(code), code != "ST", code != "PT" else { return nil }
+        return Place(country: code, name: text[name].trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     private static let finalCode = try! NSRegularExpression(pattern: "^(.*\\S)\\s*[,;|(]\\s*([A-Z]{2})\\)?$")

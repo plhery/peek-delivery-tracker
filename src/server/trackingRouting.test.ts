@@ -735,6 +735,17 @@ describe('persistent tracking routing', () => {
     expect(result.result).toMatchObject({ tracking_provider: 'Ship24', last_update: earlier.time });
     expect(result.result.events?.map((event) => event.time)).not.toContain('2026-09-10T11:00:00Z');
   });
+  it.each([[true, 'holds back'], [false, 'keeps']])('%s: %s a provider\'s copy of a scan the delivery carrier entered ahead of its time', async (planned) => {
+    const { router, direct, universal } = setup(time, { plannedScans: (carrier) => planned && carrier === 'usps' });
+    direct.mockRejectedValue(new ChallengeError('Spring GDS', 'Tracking challenged'));
+    // USPS entered the scan at 12:46 UTC in advance; a clock a few minutes fast is no plan.
+    const ahead = { time: '2026-09-10T05:46:00-07:00', description: 'Inbound Out of Customs', stage: 'in_transit' as const };
+    const fast = { time: '2026-09-10T12:04:00Z', description: 'Departed USPS Facility', stage: 'in_transit' as const };
+    universal.mockResolvedValue({ ...history(), last_update: ahead.time, last_status_text: ahead.description, events: [ahead, fast, ...history().events!] });
+    const result = await router.fetch(parcel({ carrier: 'spring-gds', carrier_data: { original_carrier: 'spring-gds', active_tracking_carrier: 'usps' } }), false);
+    expect(result.result.events?.map((event) => event.time)).toEqual([...(planned ? [] : [ahead.time]), fast.time, '2026-09-10T11:00:00Z']);
+    expect(result.result).toMatchObject(planned ? { last_update: fast.time, last_status_text: fast.description } : { last_update: ahead.time });
+  });
   it.each(['saved', 'discovered'])('shows a %s earlier leg handing the parcel to its carrier without swapping', async (hint) => {
     const number = 'CNPRT90000000000000000017';
     const { router, direct, universal } = setup();

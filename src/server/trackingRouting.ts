@@ -18,6 +18,7 @@ import { recordChecksumRejection, recordProviderInput } from './metrics';
 import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
+import { plannedClocks } from './futureScans';
 import { eventTimestamp, latestResultTime, resultTimezone } from 'universal-parcel-scraper/app';
 import type { Recognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
@@ -672,6 +673,8 @@ export class TrackingRouter {
     recognizeBrowser?: (carrier: string, number: string, context?: TrackingContext, previousError?: unknown) => Promise<Recognition>;
     /** Whether a carrier's adapter refuses the number as one it does not issue, without a request. */
     refuses?: (carrier: string, number: string) => Promise<boolean>;
+    /** Whether a carrier enters some scans at their planned time, which its own lookup holds back until due (its adapter's `plannedScans`). */
+    plannedScans?: (carrier: string) => boolean;
     /**
      * The watermark without what a universal provider's copies of this
      * answer's own scans, read in the wrong zone, add to it: the parcel's
@@ -1423,6 +1426,13 @@ export class TrackingRouter {
     // named: a hint must not echo a provider's answer.
     const askedCarrier = (state.confirmed_carrier && state.confirmed_number === universalNumber ? state.confirmed_carrier : null)
       ?? (universalCarrier === 'unknown' ? null : universalCarrier);
+    // A provider's answer without the rows a carrier holds back: those it wrote ahead, and, for a parcel
+    // of a carrier that enters scans at their planned time, those not due yet (`plannedClocks`).
+    const dueOnly = (result: CarrierResult) => {
+      const planned = [declared, universalCarrier, metadata.active_tracking_carrier, askedCarrier, state.discovered_carrier]
+        .some((carrier) => typeof carrier === 'string' && carrier !== 'unknown' && this.options.plannedScans?.(carrier) === true);
+      return withoutWrittenAhead(result, planned ? [...writtenAhead, ...plannedClocks(result, now())] : writtenAhead);
+    };
     const attemptedUniversal = new Set<UniversalSource>();
     // Providers that answered without history for this number in this check.
     const answeredEmpty: UniversalSource[] = [];
@@ -1435,7 +1445,7 @@ export class TrackingRouter {
       attemptedUniversal.add(source);
       const prefetched = prefetchedUniversal.get(source) ?? this.options.takePrefetchedUniversal?.(source, universalNumber, providerPostcode);
       if (prefetched) {
-        const result = withoutWrittenAhead(normalizeCarrierResult(prefetched), writtenAhead);
+        const result = dueOnly(normalizeCarrierResult(prefetched));
         if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           delete state.failures[source];
           return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
@@ -1475,9 +1485,9 @@ export class TrackingRouter {
       let kind: RoutingFailureKind | null = null;
       let retryAfterMs = 0;
       try {
-        const result = withoutWrittenAhead(normalizeCarrierResult(await (reused ?? this.options.universal(source, universalNumber,
-          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier))), writtenAhead);
-        if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier wrote ahead`);
+        const result = dueOnly(normalizeCarrierResult(await (reused ?? this.options.universal(source, universalNumber,
+          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier))));
+        if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier holds back`);
         if (!usable(result)) throw new TypeError('No usable universal progress');
         if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           report('foreign_history_rejected', source);
@@ -1625,8 +1635,8 @@ export class TrackingRouter {
         });
         state.last_event_at = watermark;
         if (direct) return persistResult(direct, state.discovered_carrier);
-        // The provider's copies of rows the carrier holds back as written ahead are no scans.
-        const scans = withoutWrittenAhead(value.result, writtenAhead);
+        // The provider's copies of rows the carrier holds back are no scans.
+        const scans = dueOnly(value.result);
         if (!scans) return defer();
         value = { ...value, result: scans };
       }

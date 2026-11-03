@@ -15,6 +15,21 @@ export function datedAfterCheck(time: unknown, timezone: string, now: Date): boo
   return Number.isFinite(at) && at > now.getTime() + FUTURE_SCAN_MS;
 }
 
+/** A clock a few minutes fast is no plan. */
+const PLANNED_SCAN_SKEW_MS = 5 * 60_000;
+
+/**
+ * The clocks of `result`'s scans dated, with their offset, more than a few minutes after `now`. A
+ * carrier that enters some scans at their planned time (USPS, UPS, FedEx) holds them back from its
+ * own lookup until they are due; a provider relaying one early waits for it too.
+ */
+export function plannedClocks(result: CarrierResult, now: Date): string[] {
+  return (result.events ?? []).flatMap((event) => {
+    const time = typeof event.time === 'string' ? event.time.trim() : '';
+    return /(?:Z|[+-]\d{2}:?\d{2})$/i.test(time) && Date.parse(time) > now.getTime() + PLANNED_SCAN_SKEW_MS ? [time] : [];
+  });
+}
+
 /**
  * A result whose summary a scan dated over an hour after its check gave (a
  * sender's notice on its own clock under the carrier's offset): its status

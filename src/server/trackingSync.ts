@@ -546,6 +546,8 @@ export interface TrackingAdapter {
   recognizeBrowser?(carrierId: string, trackingNumber: string, context?: TrackingContext, previousError?: unknown): Promise<Recognition>;
   /** Whether the carrier is tracked only through its own browser, which fails every parcel alike when it is down. */
   browserOnly?(carrierId: string): boolean;
+  /** Whether the carrier enters some scans at their planned time, which its own lookup holds back until due. */
+  plannedScans?(carrierId: string): boolean;
   /**
    * `language`: the parcel owner's app language, in which a carrier that words its scans in several answers.
    * `postcodeCountry`: the country of a postcode from outside the carrier's home country.
@@ -584,6 +586,10 @@ export class CarrierTrackingAdapter implements TrackingAdapter {
     const steps = this.registry.for(carrierId)?.steps ?? [];
     // A retry after the browser asks it again in a fresh context, within the same deadline.
     return steps[0] === 'browser' && steps.every((step) => step === 'browser' || step === 'retry');
+  }
+
+  plannedScans(carrierId: string): boolean {
+    return this.registry.has(carrierId) && this.registry.for(carrierId)?.plannedScans === true;
   }
 
   async fetch(
@@ -1844,6 +1850,7 @@ export class TrackingSyncService {
             health: this.client, now: this.now,
             ...(unseen !== null ? { hourlyUntil: now.getTime() - unseen + UNSEEN_HOURLY_MS } : {}),
             takePrefetchedUniversal: takePreflightHistory, preflightInputNeeded, refuses: refusesNumber,
+            ...(this.adapter.plannedScans ? { plannedScans: (carrier: string) => this.adapter.plannedScans!(carrier) } : {}),
             withoutCopies: (watermark: number, value: RoutedResult, provider?: CarrierResult) => watermarkWithoutCopies(parcel, watermark, value, provider, now.getTime()),
             newScans: (value: RoutedResult) => scansMissing(parcel, value),
             ...(this.adapter.recognize ? { recognize: (carrier: string, number: string, context?: TrackingContext) =>

@@ -6,8 +6,10 @@
         <ignore regexp="com\.ibm\.icu:icu4j" />
     </issue>
     <!-- Settings offers the app's languages from Android 13 (res/xml/locales_config.xml); older versions have no such
-         list and ignore it. -->
+         list and ignore it. The back goes through the windows' callbacks from Android 13, predictive from 14
+         (AndroidManifest.xml); older versions send the old back, which the same back handlers take, and ignore it. -->
     <issue id="UnusedAttribute">
         <ignore regexp="localeConfig" />
+        <ignore regexp="enableOnBackInvokedCallback" />
     </issue>
 </lint>

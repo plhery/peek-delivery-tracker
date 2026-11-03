@@ -1583,11 +1583,8 @@ internal class DeliveriesState(
         if (this.announcement == announcement) this.announcement = announcement.copy(text = "")
     }
 
-    /**
-     * Copies a tracking number to the clipboard, the composition's; true when the app says so itself, where the system
-     * doesn't.
-     */
-    var copy: (text: String) -> Boolean = { false }
+    /** Copies a tracking number to the clipboard, the composition's. */
+    var copy: (text: String) -> Unit = {}
 
     /** The number a parcel's page last copied, which its row says it copied (`copiedNumber`): null once its time is up. */
     var copiedNumber: CopiedNumber? by mutableStateOf(null)
@@ -1853,18 +1850,12 @@ internal class DeliveriesState(
     }
 
     /**
-     * Puts the parcel's first number on the clipboard ([copyNumber]): whether the app says so itself, where the system
-     * doesn't; null with no number.
-     */
-    private fun copyTrackingNumber(parcel: Parcel): Boolean? = parcel.trackingNumbers.firstOrNull()?.let(::copyNumber)
-
-    /**
      * `TrackingNumberCopy.copy`: counts the copy and puts the number on the clipboard as its carrier's site takes it,
-     * with the success tap ([copy]); whether the app says so itself, where the system doesn't.
+     * with the success tap ([copy]).
      */
-    private fun copyNumber(entry: ParcelTrackingNumber): Boolean {
+    private fun copyNumber(entry: ParcelTrackingNumber) {
         source.action("parcel-copy-tracking")
-        return copy(TrackingNumberCopy.text(entry.number, entry.carrier))
+        copy(TrackingNumberCopy.text(entry.number, entry.carrier))
     }
 
     /**
@@ -1883,10 +1874,9 @@ internal class DeliveriesState(
             ParcelMenuItem.ChangeCarrier ->
                 openCarrierEditor(CarrierEditorRequest(UUID.randomUUID(), parcel.id, pageId = null, initialCarrier = null), parcel)
             ParcelMenuItem.CopyTrackingNumber -> {
-                val says = copyTrackingNumber(parcel) ?: return
-                val copied = text("detail.copied")
-                // Where the system shows the copy itself, TalkBack still hears of it.
-                if (says) show(copied) else announce(copied)
+                copyNumber(parcel.trackingNumbers.firstOrNull() ?: return)
+                // The toast and its announcement on every version, as the iPhone's, beside Android 13's own preview.
+                show(text("detail.copied"))
             }
             ParcelMenuItem.Archive -> archive(parcel)
             ParcelMenuItem.Restore -> restore(parcel)

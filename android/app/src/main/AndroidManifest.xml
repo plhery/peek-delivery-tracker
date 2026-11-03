@@ -39,11 +39,16 @@
          Each window takes a change of the night mode itself (configChanges="uiMode"), the notifications' alias as the
          window it stands for: the app's own night follows its appearance and is set as the appearance store is made,
          which can be in any of them the first time after an update, a data clear or a restore, and the phone's can
-         change while one is up. None starts again for it, flashes or loses its intent. -->
+         change while one is up. None starts again for it, flashes or loses its intent.
+         The back is predictive on every version that has it, as it is by default from Android 16: the system's
+         gesture drives the windows' OnBackPressedDispatcher (Compose's BackHandler and PredictiveBackHandler), so a
+         page, a sheet or a pushed settings page follows the finger from Android 14, and leaving the app shows the
+         home screen behind it. No window takes the back any other way. -->
     <application
         android:name=".PeekApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"

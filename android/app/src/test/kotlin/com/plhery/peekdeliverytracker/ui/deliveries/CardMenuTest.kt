@@ -260,7 +260,7 @@ class CardMenuTest {
     }
 
     @Test
-    fun copyPutsTheNumberOnTheClipboardWhichTheSystemConfirms() {
+    fun copyPutsTheNumberOnTheClipboardAndSaysSoInTheAppsToast() {
         show()
         longPress("Birthday gift")
         choose(ParcelMenuItem.CopyTrackingNumber)
@@ -269,18 +269,19 @@ class CardMenuTest {
         val clipboard = compose.activity.getSystemService(ClipboardManager::class.java)
         assertEquals(TrackingNumberCopy.text(entry.number, entry.carrier), clipboard.primaryClip?.getItemAt(0)?.text?.toString())
         assertEquals(listOf("parcel-copy-tracking"), source.actions.filter { it == "parcel-copy-tracking" })
-        // Android 13 and later show the copy themselves: no toast of the app's, but TalkBack hears of it.
-        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+        // The iPhone's toast and announcement, beside the preview Android 13 and later show of a copy themselves.
+        compose.onNode(hasTestTag(INLINE_TOAST) and hasContentDescription("Copied")).assertExists()
         compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("Copied")
     }
 
     @Test
     @Config(sdk = [31])
-    fun beforeAndroid13TheAppSaysTheNumberWasCopied() {
+    fun beforeAndroid13TheAppSaysTheNumberWasCopiedTheSameWay() {
         show()
         longPress("Birthday gift")
         choose(ParcelMenuItem.CopyTrackingNumber)
         compose.onNode(hasTestTag(INLINE_TOAST) and hasContentDescription("Copied")).assertExists()
+        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("Copied")
     }
 
     @Test

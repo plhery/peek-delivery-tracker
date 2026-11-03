@@ -323,6 +323,48 @@ class ParcelSearchTest {
         assertTrue(exists(SEARCH_ROW))
     }
 
+    /**
+     * Android's back at the list's root closes the search, as the toggle and Esc do, keeping what it holds; then there
+     * is nothing to go back to, and the system leaves the app. Over a parcel's page, the page takes the back first.
+     */
+    @Test
+    fun backClosesTheSearchKeepingItsQueryAndThenLeavesTheApp() {
+        show()
+        val dispatcher = compose.activity.onBackPressedDispatcher
+        assertFalse(dispatcher.hasEnabledCallbacks())
+        openSearch()
+        type("gift")
+        inList("Birthday gift").performClick()
+        compose.waitForIdle()
+        back()
+        assertFalse(exists(PARCEL_PAGE))
+        assertTrue(exists(SEARCH_ROW))
+
+        assertTrue(dispatcher.hasEnabledCallbacks())
+        back()
+        assertFalse(exists(SEARCH_ROW))
+        compose.onNodeWithTag(PARCEL_LIST).assertExists()
+        assertFalse(dispatcher.hasEnabledCallbacks())
+        tap(SEARCH_BUTTON)
+        compose.onNodeWithTag(SEARCH_FIELD).assertTextEquals("gift")
+    }
+
+    /** Beside a parcel, which takes no back, the list is at its root: back closes the search there too. */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun besideAParcelBackClosesTheSearch() {
+        show()
+        val dispatcher = compose.activity.onBackPressedDispatcher
+        openSearch()
+        inList("Birthday gift").performClick()
+        compose.waitForIdle()
+        assertTrue(exists(PARCEL_PAGE))
+        back()
+        assertFalse(exists(SEARCH_ROW))
+        assertTrue(exists(PARCEL_PAGE))
+        assertFalse(dispatcher.hasEnabledCallbacks())
+    }
+
     @Test
     fun theFieldKeepsItsFocusThroughTheWindowMadeAgain() {
         val recreation = Recreation(compose)

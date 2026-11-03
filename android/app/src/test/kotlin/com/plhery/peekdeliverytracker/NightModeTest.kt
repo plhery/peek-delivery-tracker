@@ -8,6 +8,9 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Looper
 import android.provider.Settings
 import android.view.ContextThemeWrapper
@@ -149,6 +152,35 @@ class NightModeTest {
             val starting = ContextThemeWrapper(app, R.style.Theme_Peek_Starting)
             assertTrue("The status bar's icons dark, night: $dark", flag(starting, android.R.attr.windowLightStatusBar))
             assertTrue("The navigation bar's icons dark, night: $dark", flag(starting, android.R.attr.windowLightNavigationBar))
+        }
+    }
+
+    /**
+     * X-AD15: the splash is iOS's blank launch (UILaunchScreen's LaunchBackground alone, one colour in either
+     * appearance): the system's splash attributes, which Theme.SplashScreen hands its own to, flat #F4F5F1 in either
+     * night, with an icon that draws nothing and no branding image.
+     */
+    @Test
+    fun theSplashIsTheLaunchBackgroundAloneWithNoIconInEitherNight() {
+        for (dark in listOf(false, true)) {
+            RuntimeEnvironment.setQualifiers(if (dark) "+night" else "+notnight")
+            val starting = ContextThemeWrapper(app, R.style.Theme_Peek_Starting)
+            val splash = intArrayOf(
+                android.R.attr.windowSplashScreenBackground,
+                android.R.attr.windowSplashScreenAnimatedIcon,
+                android.R.attr.windowSplashScreenBrandingImage,
+            )
+            starting.theme.obtainStyledAttributes(splash).run {
+                assertEquals("The splash's background, night: $dark", 0xFFF4F5F1.toInt(), getColor(0, 0))
+                val icon = getDrawable(1)!!
+                val drawn = Bitmap.createBitmap(288, 288, Bitmap.Config.ARGB_8888)
+                icon.setBounds(0, 0, drawn.width, drawn.height)
+                icon.draw(Canvas(drawn))
+                val pixels = IntArray(drawn.width * drawn.height).also { drawn.getPixels(it, 0, drawn.width, 0, 0, drawn.width, drawn.height) }
+                assertTrue("The splash's icon draws nothing, night: $dark", pixels.all { Color.alpha(it) == 0 })
+                assertEquals("No branding image, night: $dark", null, getDrawable(2))
+                recycle()
+            }
         }
     }
 

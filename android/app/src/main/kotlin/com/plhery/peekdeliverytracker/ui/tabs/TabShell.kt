@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.view.KeyEvent
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.Box
@@ -327,7 +328,8 @@ fun TabReselectionEffect(onReselect: suspend () -> Unit) {
  * phone and at the top in a window at least 600 wide and 480 tall, as iPadOS puts it. Each tab keeps its saved state
  * while another is shown. A change of tab plays the selection haptic and counts the tab's screen. On a hardware
  * keyboard, Ctrl or Meta with 1, 2 or 3 chooses a tab, as ⌘1–3 do on the iPhone, while nothing stands over the tabs
- * ([LocalTabsCovered]).
+ * ([LocalTabsCovered]). Android's back on Passport or Friends, at their root, chooses Deliveries (iOS's tabs have no
+ * back).
  * [overlays] draws over whichever tab is chosen and whatever it presented, outside every tab's saved state, through
  * an overlay host of its own above the tab's: what the app presents over the window whatever is in front, as the
  * browser check comes up over Add's cover. While it shows, TalkBack reaches nothing under it. Under a window's front
@@ -378,6 +380,10 @@ fun TabShell(
     }
     TabKeys(onSelect, keysWait)
     WindowShortcutsEffect { if (keysWait()) emptyList() else WindowKey.tabs }
+    // Android's back at the root of Passport or Friends, with nothing over the tabs, goes to the deliveries, at whose
+    // root it leaves the app. Composed before the tab's content, so that a friend's page there, whose back handler
+    // comes after this one, takes the back first.
+    BackHandler(enabled = selection != PeekTab.Deliveries.ordinal && !keysWait()) { onSelect(PeekTab.Deliveries.ordinal) }
     // Under the cover the tab and the bar take no focus: what would go into them goes into the cover instead, as a
     // modal's focus wraps round it, Tab at its top and Shift-Tab at its foot, and what had it lets go.
     val coverFocus = remember { FocusRequester() }

@@ -61,6 +61,7 @@ import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -122,6 +123,27 @@ class TabShellTest {
         tab("Deliveries").performClick()
         compose.waitForIdle()
         assertEquals(listOf("passport", "friends", "deliveries"), views)
+    }
+
+    /**
+     * Android's back at the root of Passport or Friends chooses Deliveries, counted as a tap on it would be; at the root
+     * of Deliveries nothing takes it, and the system leaves the app.
+     */
+    @Test
+    fun backOnPassportOrFriendsGoesToTheDeliveriesWhereItLeavesTheApp() {
+        show()
+        assertFalse(back.hasEnabledCallbacks())
+        for (label in listOf("Passport", "Friends")) {
+            tab(label).performClick()
+            compose.waitForIdle()
+            assertTrue(back.hasEnabledCallbacks())
+            compose.runOnUiThread { back.onBackPressed() }
+            compose.waitForIdle()
+            tab("Deliveries").assertIsSelected()
+            compose.onNodeWithTag(PARCEL_LIST).assertExists()
+            assertFalse(back.hasEnabledCallbacks())
+        }
+        assertEquals(listOf("passport", "deliveries", "friends", "deliveries"), views)
     }
 
     @Test

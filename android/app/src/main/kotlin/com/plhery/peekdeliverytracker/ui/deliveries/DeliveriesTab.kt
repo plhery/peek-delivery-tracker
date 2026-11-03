@@ -5,8 +5,8 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.ContentResolver
 import android.content.Intent
-import android.os.Build
 import android.view.KeyEvent
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.EnterTransition
@@ -134,7 +134,8 @@ sealed interface DeliveriesEntry : NavKey {
  * The stack is drawn from the navigation, as the iPhone's NavigationStack is, and the navigation is kept with the
  * window: the parcel open comes back after a rotation, a fold or a resize, and after the system closed the app, once
  * the parcels are back. Tapping the tab again scrolls the list to its top: over a parcel's page the tab bar has gone.
- * A parcel a link asks for ([inbox]) opens on the list.
+ * A parcel a link asks for ([inbox]) opens on the list. Android's back at the list's root closes the search if it is
+ * open, and otherwise leaves the app.
  */
 @Composable
 fun DeliveriesTab(
@@ -214,6 +215,10 @@ fun DeliveriesTab(
             snapshotFlow { firstOpen.asked }.filterNotNull().collect { firstOpen.take()?.let { state.add(it.request, it.focus) } }
         }
         DeliveriesKeys(state, scope, reduceMotion)
+        // Android's back with the search open closes it, as the toggle and Esc do, where Esc does: the list in view (no
+        // page over it, or beside a parcel, which takes no back) with nothing over it. Before the stack, whose page's
+        // back handler comes after.
+        BackHandler(enabled = state.showingSearch && state.listShown && state.keyboardFree) { state.closeSearch() }
         // Over a parcel's page the tab bar has gone, so the tab is tapped again only with the list in view.
         TabReselectionEffect { state.scrollToTop(reduceMotion) }
 
@@ -331,8 +336,6 @@ internal fun rememberDeliveriesState(source: DeliveriesSource, firstOpen: FirstO
     state.copy = { text ->
         context.getSystemService(ClipboardManager::class.java)?.setPrimaryClip(ClipData.newPlainText(text, text))
         haptics.success()
-        // From Android 13 the system confirms a copy itself, and the app says nothing more.
-        Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
     }
     // What the clipboard holds as text, read once the reader asks for it (`Clipboard.string`): its first item's text, or
     // a link's address; nothing for an image or a file.

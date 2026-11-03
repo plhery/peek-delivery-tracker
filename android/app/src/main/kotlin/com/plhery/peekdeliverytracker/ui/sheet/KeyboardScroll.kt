@@ -45,6 +45,7 @@ import kotlin.math.abs
 import kotlin.math.min
 import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 
 /**
  * What scrolls in a sheet that has fields, as a SwiftUI `ScrollView` or `Form` keeps clear of the keyboard: room at its
@@ -75,9 +76,16 @@ internal fun KeyboardScrollColumn(
     LaunchedEffect(keyboard, top, reduceMotion, scroll) {
         val clearance = with(density) { top.toPx() }
         snapshotFlow { Triple(keyboard.focused, keyboard.covered(ime.getBottom(density)), keyboard.height) }.collectLatest { (_, covered, _) ->
-            val offset = keyboard.focusedOffset(clearance, covered)
-            if (abs(offset) < 0.5f) return@collectLatest
-            if (reduceMotion) scroll.scrollBy(offset) else scroll.animateScrollBy(offset)
+            while (true) {
+                val offset = keyboard.focusedOffset(clearance, covered)
+                if (abs(offset) < 0.5f) break
+                val moved = if (reduceMotion) scroll.scrollBy(offset) else scroll.animateScrollBy(offset)
+                if (abs(offset - moved) < 0.5f) break
+                // Stopped at the scroll's end: the keyboard's room under the content is laid out after the keyboard
+                // is known, so the field goes the rest of the way once the end has moved.
+                val end = scroll.maxValue
+                snapshotFlow { scroll.maxValue }.first { it != end }
+            }
         }
     }
     Column(

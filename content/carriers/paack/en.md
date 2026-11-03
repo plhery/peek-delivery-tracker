@@ -36,7 +36,7 @@ Paack's page sums up the journey in four steps (order details received, at Paack
 | `Courier assigned` | A courier has been assigned to deliver it. It comes back before each new attempt. |
 | `Out for delivery` | With the courier, in the slot shown. |
 | `Delivery attempt failed`, `Delivery issue` | Not delivered this time: the courier couldn't deliver, or your PaackGo Point was closed, full or refused the parcel. |
-| `New delivery attempt scheduled` | Paack tries again, in the new slot shown. |
+| `New delivery attempt scheduled` | Paack tries again, in the new slot shown. When Paack books it at the very moment of the failed attempt, it's part of that step and Peek doesn't show it. |
 | `Ready for pickup` | Waiting at the PaackGo Point; Paack's page gives your last day to collect it. |
 | `Delivered` | Delivered, or collected at the PaackGo Point. |
 | `Returning to sender`, `Returned to sender` | Going back to the shop, or back there: for instance not collected in time, refused or left unpaid at the PaackGo Point. |
@@ -77,7 +77,7 @@ Paack shows an order only to someone who has both its number and its delivery po
 
 ### What does it mean when Paack reschedules?
 
-Paack will try again. After a failed attempt, Peek shows `New delivery attempt scheduled` and Paack's page gives the new day and slot. A delivery to a PaackGo Point is rescheduled when the point was closed, full or refused the parcel; Peek shows that as `Delivery issue`.
+Paack will try again. After a failed attempt, Peek shows `Delivery attempt failed` and Paack's page gives the new day and slot. A new attempt Paack books at that same moment is part of the failed one, so Peek doesn't list it; one booked later shows as `New delivery attempt scheduled`. A delivery to a PaackGo Point is rescheduled when the point was closed, full or refused the parcel; Peek shows that as `Delivery issue`.
 
 ### How long does Paack take to deliver?
 

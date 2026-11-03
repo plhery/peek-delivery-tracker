@@ -37,7 +37,7 @@ La página de Paack resume el recorrido en cuatro pasos (datos del pedido recibi
 | `Courier assigned` | Ya hay un repartidor asignado a tu entrega. Vuelve a aparecer antes de cada nuevo intento. |
 | `En reparto` | Va con el repartidor, en la franja indicada. |
 | `Delivery attempt failed`, `Problema de entrega` | Esta vez no se ha entregado: el repartidor no ha podido, o tu PaackGo Point estaba cerrado, lleno o rechazó el paquete. |
-| `New delivery attempt scheduled` | Paack lo vuelve a intentar, en la nueva franja. |
+| `New delivery attempt scheduled` | Paack lo vuelve a intentar, en la nueva franja. Si Paack lo programa en el mismo momento del intento fallido, forma parte de ese paso y Peek no lo muestra. |
 | `Listo para recoger` | Te espera en el PaackGo Point; la página de Paack da tu último día para recogerlo. |
 | `Entregado` | Entregado, o recogido en el PaackGo Point. |
 | `De vuelta al remitente`, `Devuelto al remitente` | Vuelve a la tienda, o ya ha vuelto: por ejemplo, no lo recogiste a tiempo, o se rechazó o no se pagó en el PaackGo Point. |
@@ -78,7 +78,7 @@ Una empresa de reparto de última milla que trabaja para tiendas online. Paack y
 
 ### ¿Qué significa que Paack ha reprogramado mi paquete?
 
-Que lo intentará de nuevo. Tras un intento fallido, Peek muestra `New delivery attempt scheduled` y la página de Paack da el nuevo día y la nueva franja. Una entrega en un PaackGo Point se reprograma cuando el punto estaba cerrado, lleno o rechazó el paquete; Peek lo muestra como `Problema de entrega`.
+Que lo intentará de nuevo. Tras un intento fallido, Peek muestra `Delivery attempt failed` y la página de Paack da el nuevo día y la nueva franja. Un nuevo intento que Paack programa en ese mismo momento forma parte del fallido, así que Peek no lo muestra aparte; uno programado más tarde aparece como `New delivery attempt scheduled`. Una entrega en un PaackGo Point se reprograma cuando el punto estaba cerrado, lleno o rechazó el paquete; Peek lo muestra como `Problema de entrega`.
 
 ### ¿Por qué Paack me pide el código postal?
 

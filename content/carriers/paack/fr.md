@@ -41,7 +41,7 @@ Peek, lui, affiche chaque étape avec ses propres mots, presque tous en françai
 | `Courier assigned` | Un livreur est affecté à ta livraison. La ligne revient avant chaque nouvelle tentative. |
 | `En livraison` | Le livreur l'a : il passe dans le créneau affiché. |
 | `Delivery attempt failed`, `Problème de livraison` | Pas livré cette fois : le livreur n'a pas pu, ou ton PaackGo Point était fermé, plein ou a refusé le colis. |
-| `New delivery attempt scheduled` | Paack repasse, dans le nouveau créneau affiché. |
+| `New delivery attempt scheduled` | Paack repasse, dans le nouveau créneau affiché. Quand Paack la programme au moment même du passage raté, elle fait partie de cette étape et Peek ne l'affiche pas. |
 | `Prêt à être retiré` | Il t'attend au PaackGo Point ; la page de Paack donne ta date limite. |
 | `Livré` | Livré, ou retiré au PaackGo Point. Pas chez toi ? Lis plus bas. |
 | `Retour vers l’expéditeur en cours`, `Retourné à l’expéditeur` | Il repart chez la boutique, ou y est déjà : pas retiré à temps, refusé ou non payé au PaackGo Point, par exemple. |

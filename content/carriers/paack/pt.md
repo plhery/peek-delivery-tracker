@@ -34,7 +34,7 @@ A página da Paack resume o percurso em quatro passos (dados do pedido recebidos
 | `Courier assigned` | Já há um estafeta atribuído à tua entrega. Volta a aparecer antes de cada nova tentativa. |
 | `Em distribuição` | Está com o estafeta, que passa na janela indicada. |
 | `Delivery attempt failed`, `Problema de entrega` | Desta vez não foi entregue: o estafeta não conseguiu, ou o Ponto PaackGo estava fechado ou cheio, ou recusou a encomenda. |
-| `New delivery attempt scheduled` | A Paack volta a tentar, na nova janela indicada. |
+| `New delivery attempt scheduled` | A Paack volta a tentar, na nova janela indicada. Quando a Paack a agenda no próprio momento da tentativa falhada, faz parte desse passo e o Peek não a mostra. |
 | `Pronta para levantamento` | Está à tua espera no Ponto PaackGo; a página da Paack mostra o último dia para a levantares. |
 | `Entregue` | Entregue, ou levantada no Ponto PaackGo. Não a tens? Vê mais abaixo. |
 | `Em devolução ao remetente`, `Devolvida ao remetente` | Vai voltar para a loja, ou já voltou: por exemplo, não foi levantada a tempo, ou foi recusada ou não paga no Ponto PaackGo. |

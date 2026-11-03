@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui
 
 import android.view.KeyEvent
 import android.view.View
+import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalView
@@ -17,6 +18,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelStore
+import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_PARCEL
 import com.plhery.peekdeliverytracker.ui.deliveries.CARD_MENU
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
@@ -39,6 +41,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -59,9 +62,9 @@ class WindowKeysTest {
     private val links = FakeParcelLinks(answer = LinkFixtures.viewer(), session = AuthenticationState.Demo)
     private val shortcuts = WindowShortcuts()
 
-    /** The demo's deliveries beside a parcel, a parcel's link able to open over them. */
-    private fun show() {
-        source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+    /** The demo's deliveries, or `parcels`, beside a parcel, a parcel's link able to open over them. */
+    private fun show(parcels: List<Parcel> = DemoCards.parcels()) {
+        source = FakeDeliveries(parcels, AuthenticationState.Demo)
         compose.setContent {
             view = LocalView.current
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalWindowShortcuts provides shortcuts) {
@@ -201,12 +204,16 @@ class WindowKeysTest {
         show()
         val checking = CompletableDeferred<ParcelStore.RefreshResult?>()
         source.checking = checking
+        assertTrue(WindowKey.Refresh in shortcuts.available())
         press(KeyEvent.KEYCODE_R, CTRL)
         assertEquals(1, source.refreshes)
+        // While the check runs the menu's Refresh is dimmed: the window leaves the key out, and it does nothing.
+        assertFalse(WindowKey.Refresh in shortcuts.available())
         press(KeyEvent.KEYCODE_R, CTRL)
         assertEquals(1, source.refreshes)
         compose.runOnUiThread { checking.complete(ParcelStore.RefreshResult.Unchanged) }
         settle()
+        assertTrue(WindowKey.Refresh in shortcuts.available())
 
         openLink()
         press(KeyEvent.KEYCODE_R, CTRL)
@@ -214,6 +221,45 @@ class WindowKeysTest {
         closeLink()
         press(KeyEvent.KEYCODE_R, CTRL)
         assertEquals(2, source.refreshes)
+    }
+
+    /** With no parcels the menu's Refresh is dimmed, while Add answers: Ctrl+R does nothing and isn't listed. */
+    @Test
+    fun ctrlRRestsWithNoParcels() {
+        show(parcels = emptyList())
+        val keys = shortcuts.available()
+        assertTrue(WindowKey.Add in keys)
+        assertFalse(WindowKey.Refresh in keys)
+        press(KeyEvent.KEYCODE_R, CTRL)
+        assertEquals(0, source.refreshes)
+    }
+
+    /**
+     * A phone has no menu bar (`MenuBar.shown` is the iPad's): ⌘R is the list's refresh button's alone, which the list
+     * has for TalkBack. With TalkBack off, Ctrl+R does nothing on the list or with a parcel opened over it, and the
+     * window doesn't list it; with TalkBack on it refreshes, under the parcel too, as SwiftUI keeps the button's key.
+     */
+    @Test
+    @Config(qualifiers = PHONE)
+    fun onAPhoneCtrlRIsTheRefreshButtonsAlone() {
+        show()
+        assertFalse(WindowKey.Refresh in shortcuts.available())
+        press(KeyEvent.KEYCODE_R, CTRL)
+        assertEquals(0, source.refreshes)
+
+        compose.runOnUiThread { deliveries.navigator.open(DemoCards.parcel("Birthday gift").id) }
+        settle()
+        assertFalse(deliveries.listShown)
+        assertFalse(WindowKey.Refresh in shortcuts.available())
+        press(KeyEvent.KEYCODE_R, CTRL)
+        assertEquals(0, source.refreshes)
+
+        val manager = shadowOf(view.context.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread { manager.setTouchExplorationEnabled(true) }
+        compose.waitForIdle()
+        assertTrue(WindowKey.Refresh in shortcuts.available())
+        press(KeyEvent.KEYCODE_R, CTRL)
+        assertEquals(1, source.refreshes)
     }
 
     /**

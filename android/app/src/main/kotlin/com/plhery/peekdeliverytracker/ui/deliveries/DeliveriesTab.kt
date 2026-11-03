@@ -55,6 +55,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalGraphicsContext
 import androidx.compose.ui.platform.LocalDensity
@@ -81,6 +82,7 @@ import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesKey
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
 import com.plhery.peekdeliverytracker.core.SharedParcelDraft
+import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -555,8 +557,8 @@ private fun Revealing(state: DeliveriesState, reduceMotion: Boolean, resumed: Bo
  * search and focuses its field and Escape closes it, Ctrl or Meta with N adds. The parcel's own are on its page. None
  * while the filters, a card's menu, the delete it asks about, an alert or a parcel's link's sheet are open
  * ([DeliveriesState.keyboardFree]); while the search field has the focus, only adding, finding and closing the search.
- * Ctrl or Meta with R refreshes, as the iPad's View menu's Refresh does, while the list shows with parcels in it and
- * no refresh is running (`DeliveriesMenu.refresh`). The window lists them while they answer ([WindowShortcutsEffect]).
+ * Ctrl or Meta with R refreshes where ⌘R does ([refreshable]). The window lists them while they answer
+ * ([WindowShortcutsEffect]).
  *
  * As the iPhone's, they are the window's: once nothing in it has used a key, the window gives it over here. Beside a
  * parcel the list's column also takes them, and the focus, so that ↑ and ↓ step through the cards rather than move
@@ -564,7 +566,8 @@ private fun Revealing(state: DeliveriesState, reduceMotion: Boolean, resumed: Bo
  */
 @Composable
 private fun DeliveriesKeys(state: DeliveriesState, scope: CoroutineScope, reduceMotion: Boolean) {
-    val handle by rememberUpdatedState { event: KeyEvent -> state.key(event, scope, reduceMotion) }
+    val refreshable = state.refreshKey()
+    val handle by rememberUpdatedState { event: KeyEvent -> state.key(event, scope, reduceMotion, refreshable()) }
     val view = LocalView.current
     DisposableEffect(view) {
         val listener = ViewCompat.OnUnhandledKeyEventListenerCompat { _, event -> handle(event) }
@@ -572,7 +575,7 @@ private fun DeliveriesKeys(state: DeliveriesState, scope: CoroutineScope, reduce
         onDispose { ViewCompat.removeOnUnhandledKeyEventListener(view, listener) }
     }
     WindowShortcutsEffect {
-        state.keys().map(WindowKey::of) + if (state.refreshable) listOf(WindowKey.Refresh) else emptyList()
+        state.keys().map(WindowKey::of) + if (refreshable()) listOf(WindowKey.Refresh) else emptyList()
     }
 }
 
@@ -586,7 +589,8 @@ private fun Modifier.listKeys(state: DeliveriesState): Modifier {
     val reduceMotion = PeekTheme.reduceMotion
     val focus = remember { FocusRequester() }
     LaunchedEffect(focus) { focus.requestFocus() }
-    return focusRequester(focus).onKeyEvent { state.key(it.nativeKeyEvent, scope, reduceMotion) }.focusable()
+    val refreshable = state.refreshKey()
+    return focusRequester(focus).onKeyEvent { state.key(it.nativeKeyEvent, scope, reduceMotion, refreshable()) }.focusable()
 }
 
 /** The keys the deliveries answer now ([DeliveriesKey.available]). */
@@ -596,12 +600,30 @@ private fun DeliveriesState.keys(): Set<DeliveriesKey> = DeliveriesKey.available
     cards = rows, hasParcels = parcels.isNotEmpty(), canUndo = source.undoParcel.value != null,
 )
 
-/** Whether Ctrl or Meta with R refreshes now (`DeliveriesMenu.refresh`). */
-private val DeliveriesState.refreshable: Boolean
-    get() = keyboardFree && listShown && parcels.isNotEmpty() && !source.refreshing.value
+/**
+ * Whether Ctrl or Meta with R refreshes now, as ⌘R does on the iPad and the iPhone: through the View menu's Refresh,
+ * which only the iPad's menu bar has (`MenuBar.shown`: [pad], a tablet or a Chromebook), while the list shows
+ * (`DeliveriesMenu.refresh`); through the refresh button, wherever the list has it ([button], [refreshButtonShown]),
+ * a parcel opened over the list too, as SwiftUI keeps the key of a button under the page. Either only while the
+ * deliveries have the keys, with parcels in the list, and no refresh running. On a phone with the parcel opened over
+ * the list and TalkBack off, neither: the key does nothing and the window doesn't list it.
+ */
+private fun DeliveriesState.refreshable(pad: Boolean, button: Boolean): Boolean =
+    keyboardFree && parcels.isNotEmpty() && !source.refreshing.value && (pad && listShown || button)
 
-/** Acts on a key the deliveries answer, as [DeliveriesKey.available] has them; true once it has used it. */
-private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMotion: Boolean): Boolean {
+/** [refreshable] on this device and with the list as it is now, read as a key comes. */
+@Composable
+private fun DeliveriesState.refreshKey(): () -> Boolean {
+    val pad = Device.isPad(LocalContext.current, LocalConfiguration.current)
+    val button = refreshButtonShown(arrangement == DeliveriesArrangement.SideBySide)
+    return { refreshable(pad, button) }
+}
+
+/**
+ * Acts on a key the deliveries answer, as [DeliveriesKey.available] has them, and Ctrl or Meta with R where
+ * `refreshable`; true once it has used it.
+ */
+private fun DeliveriesState.key(event: KeyEvent, scope: CoroutineScope, reduceMotion: Boolean, refreshable: Boolean): Boolean {
     val command = event.hasModifiers(KeyEvent.META_CTRL_ON) || event.hasModifiers(KeyEvent.META_META_ON)
     if (command && event.keyCode == KeyEvent.KEYCODE_R) {
         if (!refreshable) return false

@@ -834,7 +834,7 @@ private fun sectionTitleKey(kind: ParcelSectionKind): String = when (kind) {
 private fun Overview(state: DeliveriesState, active: Int, sideBySide: Boolean, change: ListChange?) {
     val reduceMotion = PeekTheme.reduceMotion
     Column {
-        OverviewRow(state, active, change, refreshes = sideBySide || touchExplorationEnabled())
+        OverviewRow(state, active, change, refreshes = refreshButtonShown(sideBySide))
         val fade = Motion.snappy<Float>(SEARCH_MOTION)
         val size = Motion.snappy<IntSize>(SEARCH_MOTION)
         val offset = Motion.snappy<IntOffset>(SEARCH_MOTION)

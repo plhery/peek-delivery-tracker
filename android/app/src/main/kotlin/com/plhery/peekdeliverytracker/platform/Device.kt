@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.platform
 
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.os.LocaleList
@@ -32,11 +33,18 @@ object Device {
     val name: String get() = Build.MODEL.orEmpty().ifEmpty { "Android" }
 
     /** A Chromebook, then a tablet by its smallest width, else a phone, as DeliveryAnalytics.Platform says. */
-    fun analyticsPlatform(context: Context): DeliveryAnalytics.Platform = when {
+    fun analyticsPlatform(context: Context, configuration: Configuration = context.resources.configuration): DeliveryAnalytics.Platform = when {
         context.packageManager.hasSystemFeature("org.chromium.arc") -> DeliveryAnalytics.Platform.Chromebook
-        context.resources.configuration.smallestScreenWidthDp >= 600 -> DeliveryAnalytics.Platform.AndroidTablet
+        configuration.smallestScreenWidthDp >= 600 -> DeliveryAnalytics.Platform.AndroidTablet
         else -> DeliveryAnalytics.Platform.Android
     }
+
+    /**
+     * `DeviceIdiom.isPad`: a Chromebook or a tablet, told from a phone as [analyticsPlatform] tells them, where the
+     * iPhone app's iPad build has a menu bar (`MenuBar.shown`).
+     */
+    fun isPad(context: Context, configuration: Configuration = context.resources.configuration): Boolean =
+        analyticsPlatform(context, configuration) != DeliveryAnalytics.Platform.Android
 
     /** An emulator, which stays out of the counts as the iPhone's simulator does. */
     val isEmulator: Boolean

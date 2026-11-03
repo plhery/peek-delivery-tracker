@@ -1216,6 +1216,13 @@ internal val PlainPress = PressStyle(opacity = 0.7f, animation = MotionCurve.Eas
  */
 internal fun Modifier.plainDisabled(enabled: Boolean): Modifier = if (enabled) this else alpha(0.5f)
 
+/**
+ * Whether the list's overview has the refresh button (`voiceOverEnabled || windowArrangement == .sideBySide`): beside a
+ * parcel, where there may be nothing to pull with, or for TalkBack ([touchExplorationEnabled]).
+ */
+@Composable
+internal fun refreshButtonShown(sideBySide: Boolean): Boolean = sideBySide || touchExplorationEnabled()
+
 /** Whether TalkBack, or another service that explores by touch, is on: the list adds a refresh button for it. */
 @Composable
 internal fun touchExplorationEnabled(): Boolean {

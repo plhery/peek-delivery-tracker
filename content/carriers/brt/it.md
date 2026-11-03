@@ -23,7 +23,7 @@ Le pagine di BRT indicano lunghezze diverse e il riquadro di brt.it accetta «12
 
 Non sono numeri di tracciamento il codice di sicurezza di 3 cifre, che serve a modificare la consegna, e il numero di giacenza del dettaglio spedizione (3 caratteri della filiale più 7 progressivi).
 
-Nessun risultato? Per myBRT, dove porta il riquadro di brt.it, il numero può essere sbagliato, archiviato perché risale a oltre 30 giorni fa, oppure la spedizione «non è ancora entrata nel network BRT». La [Ricerca Avanzata](https://vas.brt.it/vas/sped_numspe_par.htm) di vas.brt.it copre 12 mesi, o 2 con l'ID collo cliente.
+Nessun risultato? Il numero può essere sbagliato, oppure la spedizione non è ancora nel sistema di BRT. La [Ricerca Avanzata](https://vas.brt.it/vas/sped_numspe_par.htm) di vas.brt.it copre 12 mesi, o 2 con l'ID collo cliente.
 
 Le stesse forme le usano altri corrieri: 14 cifre anche DPD in Svizzera, Germania e Regno Unito, 12 anche Mondial Relay, Colis Privé e altri. Controlla che il messaggio di spedizione nomini BRT, o leggi [come capire il corriere dal numero](guide:tracking-number-formats).
 
@@ -52,13 +52,13 @@ Il tracciamento su vas.brt.it si apre in italiano e si può passare a English, F
 
 Se non ci sei, BRT ti avvisa per e-mail, SMS o con un avviso cartaceo. Se il mittente le ha dato i tuoi contatti, ricevi anche le indicazioni della nuova consegna, che di solito viene riprogrammata per il giorno lavorativo successivo. Secondo la Carta dei servizi segue un secondo tentativo e, se va a vuoto anche quello, la filiale ti telefona.
 
-Con il link del messaggio di BRT, oppure nell'app myBRT o su [mybrt.it](https://www.mybrt.it) con il BRTcode e il CAP e/o il PIN, puoi scegliere un altro giorno o un'altra fascia oraria, un BRT-fermopoint o il ritiro in filiale, sbloccare una giacenza o cambiare indirizzo, se il mittente lo autorizza. Alcune funzioni potrebbero mancare per la tua spedizione.
+Con il link del messaggio di BRT, oppure nell'app myBRT o su mybrt.it con il BRTcode e il CAP e/o il PIN, puoi scegliere un altro giorno o un'altra fascia oraria, un BRT-fermopoint o il ritiro in filiale, sbloccare una giacenza o cambiare indirizzo, se il mittente lo autorizza. Alcune funzioni potrebbero mancare per la tua spedizione.
 
 **In giacenza.** Succede se il destinatario è assente, sconosciuto o trasferito, se l'indirizzo è errato o incompleto, o se la merce è stata rifiutata. Sblocca la giacenza dal link nell'e-mail o nell'SMS di BRT, o dal tracciamento con il BRTcode. Intanto BRT chiede istruzioni al mittente (consegna, dirottamento o rientro): secondo la Carta, se non arrivano per iscritto, la merce torna indietro 10 giorni dopo la comunicazione di giacenza; le condizioni di contratto di BRT parlano invece dei giorni concordati con il mittente.
 
 **In filiale (fermo deposito).** Puoi ritirare tu o un tuo delegato. Il delegato porta il suo documento d'identità, il tuo (anche in fotocopia) e la delega per privati della pagina [Download](https://www.brt.it/it/download/) di BRT; per chi ritira di persona BRT non indica quale documento serva. Se il mittente ha dato i tuoi contatti, BRT ti manda indirizzo e orari della filiale e l'importo dell'eventuale contrassegno.
 
-**BRT-fermopoint.** Sono edicole, tabaccherie, cartolerie e altre attività convenzionate, alcune aperte anche nel weekend. Ti avvisano per e-mail e/o SMS e tengono il pacco 10 giorni. Il più vicino lo trovi con la [ricerca BRT-fermopoint](https://www.mybrt.it/it/mybrt/parcel-shops/search).
+**BRT-fermopoint.** Sono edicole, tabaccherie, cartolerie e altre attività convenzionate, alcune aperte anche nel weekend. Ti avvisano per e-mail e/o SMS e tengono il pacco 10 giorni. Il più vicino lo trovi con la ricerca BRT-fermopoint, a cui porta il sito brt.it.
 
 **Locker BRT.** Stanno in negozi, centri commerciali e distributori di carburante, e quelli all'aperto sono accessibili 24 ore su 24. Scansiona il QR Code ricevuto per e-mail o SMS, o digita il PIN Code di 8 cifre. Per uno schermo guasto o un cassetto vuoto c'è il modulo in fondo all'e-mail di ritiro.
 
@@ -120,7 +120,6 @@ Chiedi al negozio di controllare la lettera di vettura firmata, che il mittente 
 - [BRT: Home](https://www.brt.it/it/) – riquadro di ricerca, chat
 - [BRT: Rintraccia spedizione](https://vas.brt.it/vas/sped_numspe_par.htm) – 12 e 19 cifre, 12 e 2 mesi, lingue
 - [BRT: Aiuto, Dettaglio della spedizione](https://vas.brt.it/vas/aiuto/aiuto.hsm?urlaiuto=sped_det_show.htm&lang=it) – filiale, giacenza, spese, DPD
-- [myBRT: Le mie spedizioni](https://www.mybrt.it/it/mybrt/my-parcels/search?lang=it) – numero non trovato
 - [BRT: Cos'è il codice di sicurezza?](https://www.brt.it/it/faq/cose-il-codice-di-sicurezza/) – 3 cifre
 - [BRT: Privati](https://www.brt.it/it/privati/) – myBRT, ricerca fermopoint
 - [BRT: BRT-fermopoint](https://www.brt.it/it/brt-fermopoint/) – negozi, weekend, 10 giorni

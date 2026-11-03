@@ -23,7 +23,7 @@ BRT's own pages disagree on the length, so go by the shape:
 
 BRT's 3-digit security code, used to change a delivery, isn't a tracking number.
 
-Nothing found on brt.it? The number may be mistyped, archived after 30 days or not yet in BRT's network. BRT's [Advanced Search](https://vas.brt.it/vas/sped_numspe_par.htm) covers 12 months, or 2 for parcel IDs.
+Nothing found on brt.it? The number may be mistyped or not yet in BRT's network. BRT's [Advanced Search](https://vas.brt.it/vas/sped_numspe_par.htm) covers 12 months, or 2 for parcel IDs.
 
 Fourteen digits also fit DPD in Germany, Switzerland and the UK, and twelve fit Mondial Relay, [Colis Privé](carrier:colis-prive) and others, so check which carrier the shop's email or the SMS names. More in [tracking number formats](guide:tracking-number-formats).
 
@@ -52,7 +52,7 @@ BRT's tracking at vas.brt.it opens in Italian, with a switch to English; these a
 
 If you're out, BRT leaves a notice by email, SMS or on paper, and the new attempt is usually the next working day. BRT's service charter adds a second attempt and, if that fails, a call from the branch.
 
-With the link in BRT's message, or in the myBRT app or on [mybrt.it](https://www.mybrt.it) with your BRTcode and postcode or PIN, you may be able to pick another day or time slot, choose a BRT-fermopoint or the branch, release a parcel on hold or change the address if the sender allows it.
+With the link in BRT's message, or in the myBRT app or on mybrt.it with your BRTcode and postcode or PIN, you may be able to pick another day or time slot, choose a BRT-fermopoint or the branch, release a parcel on hold or change the address if the sender allows it.
 
 **On hold ("in giacenza").** Reasons include an absent or unknown recipient, a wrong or incomplete address and refused goods; the tracking detail shows which. Release it from BRT's message or the tracking. BRT asks the sender for instructions; without written ones, its charter says the parcel goes back 10 days after the sender was told, unless the shop's contract sets other days. Once the sender has given instructions, the tracking detail shows whether storage costs are charged, to the sender or to you; BRT publishes no amount.
 
@@ -105,7 +105,7 @@ Generally 24 to 48 hours in Italy, says BRT, plus 12 to 24 hours for Calabria, S
 
 ### Where is the nearest BRT parcel shop?
 
-BRT's [fermopoint finder](https://www.mybrt.it/it/mybrt/parcel-shops/search) lists the BRT-fermopoint shops near you. Parcels over 20 kg can't go to one.
+BRT's fermopoint finder, linked from brt.it, lists the BRT-fermopoint shops near you. Parcels over 20 kg can't go to one.
 
 :::sources
 - [BRT: FAQ](https://www.brt.it/en/customer-service/faq/) – BRTcode, deliveries, holds, times, damage
@@ -113,7 +113,6 @@ BRT's [fermopoint finder](https://www.mybrt.it/it/mybrt/parcel-shops/search) lis
 - [BRT: Home](https://www.brt.it/en/) – "Where is my shipment?"
 - [BRT: Rintraccia spedizione](https://vas.brt.it/vas/sped_numspe_par.htm) – lengths, search windows
 - [BRT: Shipment detail help](https://vas.brt.it/vas/aiuto/aiuto.hsm?urlaiuto=sped_det_show.htm&lang=en) – holds, charges, branches, DPD
-- [myBRT: Le mie spedizioni](https://www.mybrt.it/it/mybrt/my-parcels/search?lang=it) – not-found reasons
 - [BRT: Privati](https://www.brt.it/it/privati/) – myBRT, fermopoint finder
 - [BRT: BRT-fermopoint](https://www.brt.it/en/brt-fermopoint/) – shops, weekends, 10 days
 - [BRT: Locker](https://www.brt.it/en/network/locker/) – QR code, PIN, limits

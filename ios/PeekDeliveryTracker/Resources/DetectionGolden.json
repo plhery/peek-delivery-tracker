@@ -86334,6 +86334,22 @@
     ]
   },
   {
+    "input": "LO999999987GO",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "aliexpress",
+      "chronopost"
+    ],
+    "preferred": [
+      "aliexpress"
+    ],
+    "asked": [
+      "aliexpress",
+      "chronopost"
+    ]
+  },
+  {
     "input": "LP00061214526423",
     "carrier": "unknown",
     "confidence": "low",

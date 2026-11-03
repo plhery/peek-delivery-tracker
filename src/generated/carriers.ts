@@ -4434,6 +4434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Praćenje J&T pošiljke u Njemačkoj: JTDE broj i statusi",
       "name": "J&T Express Germany",
       "color": "#e60000"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-pracenje-posiljke",
+      "title": "Praćenje GZYL pošiljke iz Kine: broj YL…YQ i statusi",
+      "name": "GZYL",
+      "color": "#4e79e1"
     }
   ],
   "sl": [

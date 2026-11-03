@@ -1,12 +1,16 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.app.Application
+import android.content.ComponentName
 import android.content.Intent
+import android.content.IntentFilter
 import android.view.KeyEvent
 import android.view.View
 import android.view.accessibility.AccessibilityManager
 import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsService
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.width
@@ -50,6 +54,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -59,6 +64,8 @@ import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
+import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
 import java.util.UUID
@@ -588,6 +595,7 @@ class DeliveryListTest {
         compose.onNodeWithTag(SEARCH_ROW).assertDoesNotExist()
     }
 
+    /** Where no browser offers Custom Tabs (none here), the foot's links open as the app's other links do. */
     @Test
     fun theFootsLinksOpenInTheBrowser() {
         show(width = 600.dp)
@@ -597,6 +605,49 @@ class DeliveryListTest {
         val started = shadowOf(ApplicationProvider.getApplicationContext<Application>()).nextStartedActivity
         assertEquals(Intent.ACTION_VIEW, started.action)
         assertEquals("https://example.com/privacy", started.dataString)
+        assertFalse("No Custom Tab", started.hasExtra(CustomTabsIntent.EXTRA_SESSION))
+    }
+
+    /**
+     * A-S23: the foot's links open inside the app, as the list's `SafariPage` sheet: a Custom Tab of the phone's
+     * default browser (a made-up one the package manager lists), in the app's appearance.
+     */
+    @Test
+    fun theFootsLinksOpenInACustomTabInTheAppsAppearance() {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        val packages = shadowOf(app.packageManager)
+        val page = ComponentName(BROWSER, "$BROWSER.Page")
+        packages.addActivityIfNotPresent(page)
+        packages.addIntentFilterForActivity(
+            page,
+            IntentFilter(Intent.ACTION_VIEW).apply {
+                addCategory(Intent.CATEGORY_DEFAULT)
+                addCategory(Intent.CATEGORY_BROWSABLE)
+                addDataScheme("http")
+                addDataScheme("https")
+            },
+        )
+        val tabs = ComponentName(BROWSER, "$BROWSER.Tabs")
+        packages.addServiceIfNotPresent(tabs)
+        packages.addIntentFilterForService(tabs, IntentFilter(CustomTabsService.ACTION_CUSTOM_TABS_CONNECTION))
+        val appearance = AppearanceStore.of(app)
+        try {
+            appearance.set(AppAppearance.Dark)
+            show(width = 600.dp)
+            compose.onNodeWithTag(PARCEL_LIST).performScrollToKey("foot")
+            for ((id, url) in listOf("privacy" to "https://example.com/privacy", "source" to AppConfiguration.sourceUrl)) {
+                compose.onNodeWithTag("$FOOT.$id").performClick()
+                compose.waitForIdle()
+                val started = shadowOf(app).nextStartedActivity
+                assertEquals(Intent.ACTION_VIEW, started.action)
+                assertEquals(url, started.dataString)
+                assertTrue("A Custom Tab", started.hasExtra(CustomTabsIntent.EXTRA_SESSION))
+                assertEquals(BROWSER, started.`package`)
+                assertEquals(CustomTabsIntent.COLOR_SCHEME_DARK, started.getIntExtra(CustomTabsIntent.EXTRA_COLOR_SCHEME, -1))
+            }
+        } finally {
+            appearance.set(AppAppearance.DEFAULT)
+        }
     }
 
     /** Whether the list's notice ([LIST_NOTICE]) says `text`. */
@@ -736,3 +787,6 @@ class DeliveryListTest {
         assertFalse(toastShown("No new updates"))
     }
 }
+
+/** A made-up browser's package. */
+private const val BROWSER = "com.example.browser"

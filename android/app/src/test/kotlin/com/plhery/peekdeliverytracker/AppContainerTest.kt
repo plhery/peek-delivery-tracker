@@ -18,6 +18,7 @@ import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import java.security.Security
 import java.time.Instant
 import java.util.concurrent.TimeUnit
@@ -182,6 +183,23 @@ class AppContainerTest {
         idleUntil("the demo") { app.session.state == AuthenticationState.Demo }
         idleUntil("the demo's parcels") { app.parcels.parcelsFlow.value.isNotEmpty() }
         assertTrue(app.session.isDemo)
+    }
+
+    /**
+     * A-SE07: a debug build's `sdt.debug.storeScreenshots` leaves the demo's bar out (`DemoModeBar.hidden`), read at
+     * each use as the iPhone reads it; never in a release.
+     */
+    @Test
+    fun aDebugBuildsStoreScreenshotsKeyLeavesTheDemosBarOut() {
+        val defaults = PreferencesDefaults.standard(context)
+        val debug = AppContainer(context, configuration(), scope = MainScope(), debug = true).also { container = it }
+        assertFalse(debug.storeScreenshots)
+        defaults.set(true, forKey = "sdt.debug.storeScreenshots")
+        assertTrue(debug.storeScreenshots)
+        assertTrue(ContainerDeliveries(debug).storeScreenshots)
+        debug.scope.cancel()
+        val release = AppContainer(context, configuration(), scope = MainScope(), debug = false).also { container = it }
+        assertFalse(release.storeScreenshots)
     }
 
     @Test

@@ -96,6 +96,7 @@ class FakeDeliveries(
     }
 
     override val session = MutableStateFlow(session)
+    override var storeScreenshots = false
     override val undoParcel = MutableStateFlow<Parcel?>(null)
     override val deliveryEmail = MutableStateFlow<DeliveryEmail?>(null)
     override val notificationPreferences = MutableStateFlow<NotificationPreferences?>(null)

@@ -207,6 +207,12 @@ class AppContainer(
     /** `ReviewPrompt.forced`: a debug build's `sdt.debug.reviewDue`, read at each use as the iPhone reads it. */
     private fun reviewForced(): Boolean = debug && defaults.bool(DEBUG_REVIEW_DUE)
 
+    /**
+     * `DemoModeBar.hidden`: a debug build's `sdt.debug.storeScreenshots` leaves the demo's bar out, for the store's
+     * screenshots, as the iPhone's `-sdt.debug.storeScreenshots YES`; read at each use as the iPhone reads it.
+     */
+    val storeScreenshots: Boolean get() = debug && defaults.bool(DEBUG_STORE_SCREENSHOTS)
+
     /** The system's prompt for a rating over `activity`: Play In-App Review, where the iPhone asks StoreKit. */
     fun reviews(activity: Activity): ReviewRequester = PlayReviews(activity)
 
@@ -525,6 +531,7 @@ class AppContainer(
     companion object {
         private const val DEBUG_IMPORT_CHARGES = "sdt.debug.importCharges"
         private const val DEBUG_REVIEW_DUE = "sdt.debug.reviewDue"
+        private const val DEBUG_STORE_SCREENSHOTS = "sdt.debug.storeScreenshots"
 
         /** A container made on the IO dispatcher, where its stores first read the Keystore and the disk. */
         suspend fun make(context: Context, configuration: AppConfiguration = BuildSettings.configuration): AppContainer =

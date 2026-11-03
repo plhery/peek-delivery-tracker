@@ -478,6 +478,9 @@ private fun SearchCounted(state: DeliveriesState) {
 
 private const val SEARCH_SETTLE_MILLIS = 800L
 
+/** How long a parcel kept from its link waits to be revealed where the list was covered (`.milliseconds(500)`). */
+private const val LINK_REVEAL_WAIT = 500L
+
 private const val POSTMARK_MILLIS = 300L
 private const val READ_MILLIS = 650L
 
@@ -526,10 +529,11 @@ private fun Consuming(state: DeliveriesState, inbox: DeliveriesInbox?) {
 
 /**
  * The card Add added, brought to the list's middle once Add has gone (`revealParcelID`): a frame later, once the list
- * holds it, on the smooth spring, at once under Reduce Motion. Then its arrival plays (`parcelBurstID`), even where the
- * card needed no scroll, with one tap of success, none as it ends. A drag of the list ends both, the reveal's scroll
- * on the way (`.onScrollPhaseChange`, `.interacting`), as the window leaving the front does, which also forgets the
- * card Add added while it goes down.
+ * holds it, or 500 ms later for a parcel kept from its link while something stood over the list
+ * ([DeliveriesState.revealWaits]), on the smooth spring, at once under Reduce Motion. Then its arrival plays
+ * (`parcelBurstID`), even where the card needed no scroll, with one tap of success, none as it ends. A drag of the list
+ * ends both, the reveal's scroll on the way (`.onScrollPhaseChange`, `.interacting`), as the window leaving the front
+ * does, which also forgets the card Add added while it goes down.
  */
 @Composable
 private fun Revealing(state: DeliveriesState, reduceMotion: Boolean, resumed: Boolean) {
@@ -537,6 +541,10 @@ private fun Revealing(state: DeliveriesState, reduceMotion: Boolean, resumed: Bo
     LaunchedEffect(parcelId) {
         if (parcelId == null) return@LaunchedEffect
         try {
+            if (state.revealWaits) {
+                state.revealWaits = false
+                delay(LINK_REVEAL_WAIT)
+            }
             withFrameNanos {}
             state.reveal(parcelId, reduceMotion)
             state.revealed(parcelId)
@@ -743,13 +751,14 @@ private fun SideBySideColumns(
 /**
  * A parcel's page over the list in the demo, under the demo's bar as the list is (`safeAreaInset(edge: .top)`), which
  * stands under the page's own bar, on the cream from the window's top: the page keeps clear of the bar as it would of
- * the window's. Beside the list the bar stays over the list alone.
+ * the window's. Beside the list the bar stays over the list alone. None where the store's screenshots leave it out
+ * ([DeliveriesSource.storeScreenshots]).
  */
 @Composable
 private fun DemoPage(state: DeliveriesState, content: @Composable () -> Unit) {
     val source = state.source
     val session by source.session.collectAsState()
-    val bar = state.arrangement == DeliveriesArrangement.Stacked && session == AuthenticationState.Demo
+    val bar = state.arrangement == DeliveriesArrangement.Stacked && session == AuthenticationState.Demo && !source.storeScreenshots
     Column(Modifier.fillMaxSize()) {
         if (bar) {
             val padding = tabContentPadding()

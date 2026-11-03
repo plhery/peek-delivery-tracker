@@ -324,7 +324,8 @@ internal fun FriendsTab(source: DeliveriesSource) {
     val state = rememberFriendsState(source)
     val session by source.session.collectAsState()
     val guest = session == AuthenticationState.Welcome
-    val demo = session == AuthenticationState.Demo
+    // The demo's bar, and the cream behind the bar that goes with it, unless left out for the store's screenshots.
+    val demo = session == AuthenticationState.Demo && !source.storeScreenshots
     val colors = PeekTheme.colors
     val padding = tabContentPadding()
     val direction = LocalLayoutDirection.current

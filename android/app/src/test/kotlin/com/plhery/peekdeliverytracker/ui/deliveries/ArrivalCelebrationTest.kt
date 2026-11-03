@@ -31,6 +31,7 @@ import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.ParcelArrival
+import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
@@ -289,6 +290,50 @@ class ArrivalCelebrationTest {
         assertFalse(shows(PARCEL_BURST))
         assertStill("Running shoes")
         assertEquals(1, taps())
+    }
+
+    /**
+     * A-ST35: a parcel kept from its link while Add stood over the list (`receive(.added)`, `elsewhere`) is revealed 500
+     * ms later, once Add has gone, rather than under it; as it is where a card's rename stood over the list, which
+     * closes (`prompts = CardPrompts()`). With nothing over the list, it is revealed a frame later.
+     */
+    @Test
+    fun aParcelKeptFromItsLinkWhileTheListWasCoveredIsRevealedHalfASecondLater() {
+        show()
+        compose.onNodeWithTag(ADD_BUTTON).performClick()
+        settle()
+        compose.mainClock.autoAdvance = false
+        val stood = standing()
+        compose.runOnUiThread { deliveries.linkAdded(lamp(14).id) }
+        frame()
+        assertNull("Add closes", deliveries.addition)
+        // Not at 400 ms: the list hasn't moved, and nothing arrives.
+        repeat(23) { frame() }
+        assertEquals(lamp(14).id, deliveries.revealParcel)
+        assertNull(deliveries.parcelBurst)
+        assertEquals(stood, standing())
+        // Under way by 600 ms.
+        repeat(12) { frame() }
+        assertNotEquals(stood, standing())
+        framesUntil { deliveries.parcelBurst != null }
+        assertEquals(lamp(14).id, deliveries.parcelBurst)
+        assertEquals(0f, offCentre("Lamp 14"), 1f)
+        framesUntil { deliveries.parcelBurst == null }
+
+        compose.runOnUiThread { deliveries.chose(ParcelMenuItem.Rename, lamp(14)) }
+        frame()
+        compose.runOnUiThread { deliveries.linkAdded(lamp(14).id) }
+        frame()
+        assertNull("The rename closes", deliveries.renaming)
+        repeat(23) { frame() }
+        assertNull(deliveries.parcelBurst)
+        framesUntil(seconds = 0.2) { deliveries.parcelBurst != null }
+        framesUntil { deliveries.parcelBurst == null }
+
+        compose.runOnUiThread { deliveries.linkAdded(lamp(14).id) }
+        frame()
+        frame()
+        assertEquals("At once, with nothing over the list", lamp(14).id, deliveries.parcelBurst)
     }
 
     @Test

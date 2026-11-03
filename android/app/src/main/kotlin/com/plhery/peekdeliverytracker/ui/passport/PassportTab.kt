@@ -194,7 +194,8 @@ internal fun PassportTab(source: DeliveriesSource) {
     val carrierCount = remember(parcels) { parcels.map { it.carrier }.toSet().size }
     val colors = PeekTheme.colors
     val density = LocalDensity.current
-    val demo = session == AuthenticationState.Demo
+    // The demo's bar, and the cream behind the bar that goes with it, unless left out for the store's screenshots.
+    val demo = session == AuthenticationState.Demo && !source.storeScreenshots
     val padding = tabContentPadding()
     val direction = LocalLayoutDirection.current
     val start = padding.calculateStartPadding(direction)

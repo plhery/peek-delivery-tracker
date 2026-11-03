@@ -18,7 +18,6 @@ import com.plhery.peekdeliverytracker.PeekApplication
 import com.plhery.peekdeliverytracker.core.AuthenticationError
 import com.plhery.peekdeliverytracker.core.OAuthFlow
 import com.plhery.peekdeliverytracker.core.WebAuthenticating
-import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
@@ -196,7 +195,7 @@ class SignInTabActivity : ComponentActivity() {
     private fun open(url: String): Boolean = try {
         val page = url.toUri()
         val browser = CustomTabSignIn.authTabBrowser(this)
-        val colors = AppearanceStore.of(this).appearance.value.colorScheme
+        val colors = AppearanceStore.of(this).appearance.value.customTabColorScheme
         if (browser != null) {
             val tab = AuthTabIntent.Builder().setColorScheme(colors).build()
             tab.intent.setPackage(browser)
@@ -213,14 +212,6 @@ class SignInTabActivity : ComponentActivity() {
     } catch (_: ActivityNotFoundException) {
         false
     }
-
-    /** The browser's colours for an appearance (the Auth Tab takes the Custom Tabs' schemes). */
-    private val AppAppearance.colorScheme: Int
-        get() = when (this) {
-            AppAppearance.System -> CustomTabsIntent.COLOR_SCHEME_SYSTEM
-            AppAppearance.Light -> CustomTabsIntent.COLOR_SCHEME_LIGHT
-            AppAppearance.Dark -> CustomTabsIntent.COLOR_SCHEME_DARK
-        }
 
     /** The scheme the call's page sends the browser back in. */
     private val scheme: String get() = intent.getStringExtra(SCHEME) ?: OAuthFlow.callbackScheme

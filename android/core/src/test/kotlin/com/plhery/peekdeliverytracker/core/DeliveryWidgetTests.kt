@@ -11,6 +11,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.File
 import java.nio.file.Files
 import java.time.Instant
+import java.util.Locale
 import java.util.UUID
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runCurrent
@@ -160,6 +161,34 @@ class DeliveryWidgetTests {
             assertEquals(0, folder.listFiles().orEmpty().size)
         } finally {
             folder.deleteRecursively()
+        }
+    }
+
+    /**
+     * `testTheWidgetsCardsAreDrawnOnceForTheWidgetToRead`, its last mile: a widget's map is too short for the chip
+     * pointing to where the parcel came from, which would cover the parcel's dot. In each frame the demo's parcel out for
+     * delivery shows no chip, only its town's name, and Pip.
+     */
+    @Test
+    fun aWidgetsLastMileHasNoChipOnlyItsTownAndPip() {
+        val parcels = DemoRepository(MemoryDefaults(), language = { AppLanguage.En }).list()
+        val chocolate = parcels.first { it.currentStage == TrackingStage.OutForDelivery }
+        val world = ParcelRouteTests.atlas
+        val lastMile = ParcelRoute(chocolate, world, AppLanguage.En)
+        for (shape in DeliveryWidgetPicture.routes) {
+            val frame = DeliveryWidgetPictures.frame(shape)
+            val mode = lastMile.defaultMode(chocolate.currentStage)
+            val draw = { camera: GlobeCamera ->
+                MapOverlay(
+                    route = lastMile, camera = camera, size = frame.size, insets = frame.insets, labels = MapLabels.Ends, mode = mode,
+                    context = false, atlas = world, locale = Locale.forLanguageTag("en"), countryName = { it },
+                    pip = PipRequest(PipMood.Eager, ceiling = frame.ceiling, floor = frame.floor), measurer = RecordedTextMeasurer.recorded,
+                )
+            }
+            val overlay = draw(GlobeCamera.framing(lastMile, mode, frame.size, frame.insets, shown = { camera, _ -> draw(camera).shown }, pip = true))
+            assertEquals("$shape", emptyList<String>(), overlay.pointers.map { it.name })
+            assertEquals("$shape", listOf("Zürich"), overlay.labels.map { it.text })
+            assertNotNull("$shape", overlay.pip)
         }
     }
 

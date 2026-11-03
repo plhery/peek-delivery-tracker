@@ -167,7 +167,8 @@ internal fun DeliveryList(state: DeliveriesState) {
     val colors = PeekTheme.colors
     val edges = LocalColumnEdges.current
     val sideBySide = state.arrangement == DeliveriesArrangement.SideBySide
-    val demo = session == AuthenticationState.Demo
+    // The demo's bar, and the cream behind the bar that goes with it, unless left out for the store's screenshots.
+    val demo = session == AuthenticationState.Demo && !source.storeScreenshots
     val guest = session == AuthenticationState.Welcome
     val firstLoad = loading && state.parcels.isEmpty()
 

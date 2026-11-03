@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.core.FirstOpenJourney
 import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
+import com.plhery.peekdeliverytracker.platform.SitePage
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 import androidx.compose.animation.core.Animatable
@@ -455,7 +456,8 @@ private fun AccountKey(open: () -> Unit, inFront: () -> Boolean) {
 /**
  * `DemoModeBar`: under the bar in the demo, what this is and how to leave it, on the cream with a faint rule under it.
  * It keeps to one line as the system's bars do: at the largest sizes it says only how to leave. `sides` keeps its words
- * clear of the window's bars and cutout.
+ * clear of the window's bars and cutout. Its callers leave it out, and the cream behind the bar with it, where a debug
+ * build takes the store's screenshots ([DeliveriesSource.storeScreenshots], `hidden`).
  */
 @Composable
 internal fun DemoModeBar(onExit: () -> Unit, modifier: Modifier = Modifier, sides: PaddingValues = PaddingValues()) {
@@ -864,13 +866,16 @@ internal fun NoResults(state: DeliveriesState) {
 
 /**
  * `DeliveriesFoot`: Peek's mark and name, then the site's landing, its privacy notice and the code, side by side where
- * they fit and one under the other otherwise. Each opens in the browser.
+ * they fit and one under the other otherwise. Each opens inside the app, as the list's `SafariPage` sheet
+ * ([SitePage]).
  */
 @Composable
 internal fun DeliveriesFoot(homePageUrl: String, privacyUrl: String) {
     val colors = PeekTheme.colors
     val font = PeekTheme.type.caption
-    val uriHandler = LocalUriHandler.current
+    val context = LocalContext.current
+    val elsewhere = LocalUriHandler.current
+    val open = { url: String -> SitePage.open(context, url, elsewhere) }
     val title = localized("app.title")
     val tagline = localized("native.tagline")
     val home = localized("app.homePage")
@@ -885,9 +890,9 @@ internal fun DeliveriesFoot(homePageUrl: String, privacyUrl: String) {
             Text("$title · $tagline", Modifier.weight(1f, fill = false), color = colors.secondaryLabel, style = font, textAlign = TextAlign.Center)
         }
         val links = @Composable {
-            FootLink(home, "home") { uriHandler.openUri(homePageUrl) }
-            FootLink(privacy, "privacy") { uriHandler.openUri(privacyUrl) }
-            FootLink("GitHub", "source") { uriHandler.openUri(AppConfiguration.sourceUrl) }
+            FootLink(home, "home") { open(homePageUrl) }
+            FootLink(privacy, "privacy") { open(privacyUrl) }
+            FootLink("GitHub", "source") { open(AppConfiguration.sourceUrl) }
         }
         FirstThatFits(
             Modifier,

@@ -16,12 +16,15 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.SemanticsPropertiesAndroid
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.StateRestorationTester
@@ -43,6 +46,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
 import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.card
 import com.plhery.peekdeliverytracker.ui.deliveries.openCard
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import java.util.UUID
 import kotlin.math.abs
@@ -114,6 +118,33 @@ class PeekRootTest {
         state = AuthenticationState.Demo
         compose.waitForIdle()
         for (tag in listOf(DEMO_EXIT, SEARCH_BUTTON, PARCEL_LIST, TAB_BAR)) compose.onNodeWithTag(tag).assert(exposed)
+    }
+
+    /**
+     * A-SE07 / A-ST14: where a debug build takes the store's screenshots (`sdt.debug.storeScreenshots`), the demo shows
+     * without its bar (`DemoModeBar.hidden`): over the deliveries, a parcel's page, the passport and the friends.
+     */
+    @Test
+    fun theStoresScreenshotsShowTheDemoWithoutItsBar() {
+        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo).apply { storeScreenshots = true }
+        compose.setContent { RootHost(state = AuthenticationState.Demo, source = source) }
+        compose.waitForIdle()
+        compose.onNodeWithTag(PARCEL_LIST).assertExists()
+        compose.onNodeWithTag(DEMO_EXIT).assertDoesNotExist()
+        compose.openCard("New trainers")
+        compose.onNodeWithTag(PARCEL_PAGE).assertExists()
+        compose.onNodeWithTag(DEMO_EXIT).assertDoesNotExist()
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.waitForIdle()
+        compose.onNodeWithTag(PARCEL_LIST).assertExists()
+        for (label in listOf("Passport", "Friends")) {
+            val tab = compose.onNode(hasContentDescription(label) and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab))
+            tab.performClick()
+            compose.waitForIdle()
+            tab.assertIsSelected()
+            if (label == "Passport") compose.onNodeWithTag(PASSPORT_COVER).assertExists()
+            compose.onNodeWithTag(DEMO_EXIT).assertDoesNotExist()
+        }
     }
 
     @Test

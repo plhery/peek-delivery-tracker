@@ -84,6 +84,9 @@ interface DeliveriesSource {
 
     val session: StateFlow<AuthenticationState>
 
+    /** A debug build's `sdt.debug.storeScreenshots`: the demo shows without its bar ([DemoModeBar]), for the store. */
+    val storeScreenshots: Boolean
+
     /** The site's landing page and its privacy notice, the foot's links. */
     val homePageUrl: String
     val privacyUrl: String
@@ -331,6 +334,7 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override suspend fun reload() = container.parcels.load(showSpinner = true)
 
     override val session get() = container.session.stateFlow
+    override val storeScreenshots get() = container.storeScreenshots
     override val homePageUrl get() = container.configuration.homePageUrl
     override val privacyUrl get() = container.configuration.privacyUrl
 

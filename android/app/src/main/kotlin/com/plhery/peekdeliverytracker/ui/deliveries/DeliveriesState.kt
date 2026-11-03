@@ -756,6 +756,12 @@ internal class DeliveriesState(
     var revealParcel: UUID? by mutableStateOf(null)
 
     /**
+     * The reveal of [revealParcel] waits 500 ms first (`Task.sleep(for: .milliseconds(500))`): a parcel kept from its
+     * link while something stood over the list, which the list comes back from first. Read once as the reveal starts.
+     */
+    var revealWaits: Boolean = false
+
+    /**
      * The card whose arrival plays once the list has brought it to its middle (`parcelBurstID`): it wobbles and little
      * parcels fly out of its stamp ([ArrivalCelebration]), with a tap of success as it starts.
      */
@@ -785,6 +791,7 @@ internal class DeliveriesState(
      */
     fun endArrival() {
         revealParcel = null
+        revealWaits = false
         parcelBurst = null
     }
 
@@ -924,19 +931,19 @@ internal class DeliveriesState(
 
     /**
      * `receive(.added)`: a parcel kept or followed from its link's sheet arrives as one just added. Add, the account, the
-     * filters and a card's menu close, a parcel open over the list goes back to it, the list says "link.added" and tells
-     * TalkBack, and, while the window is in front, brings the card to its middle, clearing a search or filters that would
-     * hide it.
+     * filters, a card's menu and what it opened close (`prompts = CardPrompts()`), a parcel open over the list goes back
+     * to it, the list says "link.added" and tells TalkBack, and, while the window is in front, brings the card to its
+     * middle, clearing a search or filters that would hide it: 500 ms later where any of those stood over the list
+     * (`elsewhere`), once it is back rather than under what closes ([revealWaits]).
      */
     fun linkAdded(parcelId: UUID?) {
-        closeAdd()
-        closeAccount()
-        showingFilters = false
-        menu = null
+        val elsewhere = !listShown || showingFilters || modal
+        closeListCovers()
         if (!listShown) navigator.pop(emptyList())
         show(text("link.added"))
         if (parcelId == null || !inFront) return
         if (layout.visible.none { it.id == parcelId }) clearFilters()
+        revealWaits = elsewhere
         revealParcel = parcelId
     }
 
@@ -949,6 +956,13 @@ internal class DeliveriesState(
      * close first. TalkBack goes on to the page.
      */
     fun show(parcelId: UUID) {
+        closeListCovers()
+        returnFocus = null
+        navigator.open(parcelId)
+    }
+
+    /** Add, the account, the filters, and a card's menu and what it opened close. */
+    private fun closeListCovers() {
         closeAdd()
         closeAccount()
         showingFilters = false
@@ -957,8 +971,6 @@ internal class DeliveriesState(
         if (renaming?.pageId == null) cancelRename()
         if (sharing?.pageId == null) closeShare()
         if (carrierEditor?.pageId == null) closeCarrierEditor()
-        returnFocus = null
-        navigator.open(parcelId)
     }
 
     /**
@@ -973,6 +985,7 @@ internal class DeliveriesState(
         addedParcel = null
         if (!inFront) return
         if (layout.visible.none { it.id == parcelId }) clearFilters()
+        revealWaits = false
         revealParcel = parcelId
     }
 

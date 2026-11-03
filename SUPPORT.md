@@ -1,7 +1,8 @@
 # Help with Peek
 
 Peek follows parcels, on the web at [peektracker.com](https://peektracker.com)
-and in its iPhone app. It shows what carriers publish about a parcel.
+and in its iPhone and Android apps. It shows what carriers publish about a
+parcel.
 
 Peek is not a carrier. It cannot redirect, hold or find a parcel. For that, ask
 the seller or the carrier. [Peek's guides](https://peektracker.com/guides) say
@@ -49,6 +50,8 @@ Peek has no passwords. It emails a six-digit code to the address you enter.
   turn notifications on there.
 - In the iPhone app, notifications need an account. Sign in, then open
   Settings › Notifications.
+- The Android app sends no notifications yet. Signed in, it can email you
+  when a parcel arrives.
 - Nothing arrives? Check that Peek may send notifications: in the browser's
   site settings, or in iPhone Settings.
 - Peek announces only the updates you chose: every scan, the important steps
@@ -67,8 +70,8 @@ Peek has no passwords. It emails a six-digit code to the address you enter.
   account's email address to confirm, and for a new sign-in when the last one
   is more than ten minutes old.
 - Without an account, the browser a parcel was tracked from can forget it:
-  **Forget it now**, at the foot of the parcel's page. In the iPhone app,
-  Settings › On this device has **Forget all**. Peek forgets such a parcel by
+  **Forget it now**, at the foot of the parcel's page. In the iPhone and
+  Android apps, Settings › On this device has **Forget all**. Peek forgets such a parcel by
   itself 30 days after delivery.
 
 The [privacy notice](https://peektracker.com/privacy.html) says what Peek
@@ -78,7 +81,7 @@ keeps, where and for how long.
 
 Peek is a personal, non-commercial project run by Paul-Louis Hery, in
 Switzerland. Write to [hello@peektracker.com](mailto:hello@peektracker.com),
-and say whether it is about the website or the iPhone app.
+and say whether it is about the website, the iPhone app or the Android app.
 
 - Bugs and ideas go to
   [Peek's issues on GitHub](https://github.com/plhery/peek-delivery-tracker/issues).

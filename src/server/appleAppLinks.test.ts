@@ -63,7 +63,7 @@ describe('the app site association', () => {
     const pages = new RegExp(`^${config.matcher[0].source}$`);
     expect(pages.test('/.well-known/apple-app-site-association')).toBe(false);
     // Anything else under .well-known is a page that does not exist.
-    expect(pages.test('/.well-known/assetlinks.json')).toBe(true);
+    expect(pages.test('/.well-known/security.txt')).toBe(true);
     expect(pages.test('/p/k7Qm2xW9bTfR')).toBe(true);
     expect(pages.test('/demo')).toBe(true);
   });

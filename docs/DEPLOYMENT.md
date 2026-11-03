@@ -103,6 +103,12 @@ credentials and don't follow redirects, so keep it reachable through any edge pr
 iPhone Safari opens the app only from a link to another site, so the web's way into the
 app goes through the first of `LEGACY_HOSTS`, or the app's own scheme without one.
 
+**Links that open in the Android app.** `/.well-known/assetlinks.json` vouches for Peek's
+app on Google Play: its package and the SHA-256 fingerprint of the key Google signs it
+with. `ANDROID_APP_PACKAGE` with `ANDROID_APP_CERT_SHA256` (comma-separated) names another
+app. Which links open is the app's manifest's to say. Google's servers fetch it like
+Apple's, so the same rule about edge protection applies.
+
 - Expose port `3000` behind HTTPS.
 - `GET /health` returns `{"ok": true}` when the database answers within 2.5 s and the
   worker has polled or renewed a job in the last 120 s. Otherwise it returns 503, with

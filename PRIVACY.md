@@ -282,8 +282,9 @@ Your browser is asked for notifications, and creates its push subscription,
 only when you choose "Turn on". The iPhone app asks when a parcel first comes to
 it without an account, and keeps the device token beside the parcels it follows
 that way so that forgetting one turns its notifications off. The Android app
-may ask for Android's notification permission, but it registers no device
-token, so nothing is sent to the service for it. Adding a delivery to your
+offers no notifications: it never asks for Android's notification permission
+and registers no device token, so nothing is sent to the service for it. It
+can still ask for an email when a parcel arrives. Adding a delivery to your
 calendar makes a calendar file in the browser; nothing is sent for it.
 
 ## Answering whether a parcel is right

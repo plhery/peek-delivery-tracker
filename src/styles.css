@@ -83,9 +83,9 @@ fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
 .deliveries-page, .passport-page { animation: page-arrive .25s var(--ease-out) both; }
 .delivery-overview { display: flex; align-items: center; justify-content: flex-end; margin: -4px 0 10px; }
 .delivery-overview__actions { display: flex; align-items: center; gap: 2px; }
-.delivery-search { position: relative; }
-.delivery-search[aria-expanded="true"] { background: var(--control); }
-.delivery-search__dot { position: absolute; top: 8px; right: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 2px var(--canvas); }
+.delivery-search, .delivery-filters { position: relative; }
+.delivery-search[aria-expanded="true"], .delivery-filters[aria-expanded="true"] { background: var(--control); }
+.delivery-overview__dot { position: absolute; top: 8px; right: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 2px var(--canvas); }
 .delivery-next { margin-bottom: 20px; }
 .delivery-on-the-way { margin-bottom: 20px; }
 .delivery-on-the-way > .delivery-next:last-child { margin-bottom: 0; }
@@ -187,7 +187,6 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 /* Search is one quiet field under the heading, as a phone's own search fields are; it eases open and shut. */
 .parcel-view-shell { display: grid; grid-template-rows: 1fr; margin-bottom: 16px; animation: search-open .34s var(--spring) both; }
 .parcel-view { min-height: 0; overflow: clip; }
-.parcel-view__top { display: flex; align-items: center; gap: 4px; }
 .parcel-view__search { display: flex; align-items: center; flex: 1; min-width: 0; padding: 0 6px 0 14px; background: var(--control); border-radius: 22px; transition: box-shadow .18s; }
 .parcel-view__search > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .parcel-view__search svg { flex-shrink: 0; width: 17px; height: 17px; stroke: var(--ink-soft); fill: none; stroke-width: 1.6; stroke-linecap: round; }
@@ -195,13 +194,6 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .parcel-view__search input::placeholder { color: var(--ink-soft); opacity: .8; }
 .parcel-view__search:focus-within { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 24%, transparent); }
 .parcel-view__search input:focus { outline: none; }
-.parcel-view__filter-button { position: relative; display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: transparent; color: var(--ink); transition: background .18s, scale .18s; }
-.parcel-view__filter-button:active { scale: .92; }
-.parcel-view__filter-button[aria-expanded="true"] { background: var(--control); }
-.parcel-view__filter-button svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; }
-.parcel-view__filter-button > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.parcel-view__filter-button--active { color: var(--blue); }
-.parcel-view__filter-button strong { position: absolute; top: 3px; right: 1px; display: grid; place-items: center; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: var(--blue); color: var(--canvas); font-size: 10px; font-weight: 600; line-height: 1; }
 .parcel-view__meta { display: flex; align-items: center; gap: 10px; margin-top: 10px; animation: search-part .22s ease-out both; }
 .parcel-view__chips { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; min-width: 0; }
 .parcel-view__chips button { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; border-radius: 17px; padding: 6px 12px; background: var(--control); color: var(--ink); font-size: 12px; font-weight: 550; }
@@ -216,7 +208,6 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .parcel-view__meta--quiet { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip-path: inset(50%); }
 @keyframes search-open { from { grid-template-rows: 0fr; margin-bottom: 0; opacity: 0; } }
 @keyframes search-part { from { opacity: 0; translate: 0 -4px; } }
-@media (hover: hover) { .parcel-view__filter-button:hover { background: var(--control); } }
 @media (forced-colors: active) { .parcel-view__search:focus-within { outline: 2px solid Highlight; } }
 
 /* Sheets use paper and clear hierarchy, with the same controls everywhere. */

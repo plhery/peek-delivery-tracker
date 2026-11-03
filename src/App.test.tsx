@@ -474,7 +474,7 @@ describe('App', () => {
     renderApp();
     await screen.findByText('Coffee beans ☕');
 
-    const viewToggle = screen.getByRole('button', { name: 'Search & filters' });
+    const viewToggle = screen.getByRole('button', { name: 'Search parcels' });
     expect(viewToggle).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryByRole('searchbox', { name: 'Search parcels' })).not.toBeInTheDocument();
     await user.click(viewToggle);
@@ -495,6 +495,7 @@ describe('App', () => {
     expect(screen.queryByRole('searchbox')).not.toBeInTheDocument();
     expect(viewToggle).toHaveFocus();
     expect(viewToggle).toHaveAccessibleDescription('Custom view');
+    expect(screen.getByRole('button', { name: 'Sort & filter' })).not.toHaveAccessibleDescription('Custom view');
     expect(screen.queryByText('Coffee beans ☕')).not.toBeInTheDocument();
     await user.click(viewToggle);
     expect(screen.getByRole('searchbox')).toHaveValue('birthday');
@@ -513,9 +514,12 @@ describe('App', () => {
     renderApp();
     await screen.findByText('Coffee beans ☕');
 
-    const viewToggle = screen.getByRole('button', { name: 'Search & filters' });
-    await user.click(viewToggle);
-    await user.click(screen.getByRole('button', { name: 'Filters' }));
+    // Sorting and the filters open from their own button, without the search or its keyboard.
+    const filtersToggle = screen.getByRole('button', { name: 'Sort & filter' });
+    expect(filtersToggle).toHaveAttribute('aria-expanded', 'false');
+    await user.click(filtersToggle);
+    expect(filtersToggle).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.queryByRole('searchbox')).not.toBeInTheDocument();
 
     await user.selectOptions(screen.getByLabelText('Status'), 'delivered');
     expect(screen.getByText('Coffee beans ☕')).toBeInTheDocument();
@@ -529,12 +533,16 @@ describe('App', () => {
     expect(within(parcelSections as HTMLElement).getByText('Birthday gift 🎁'))
       .toBeInTheDocument();
     expect(screen.queryByText('Coffee beans ☕')).not.toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: /hide filters/i }));
+    // With the search open too, closing the filters leaves the search and the chips.
+    await user.click(screen.getByRole('button', { name: 'Search parcels' }));
+    await user.click(filtersToggle);
     expect(screen.queryByLabelText('Status')).not.toBeInTheDocument();
+    expect(screen.getByRole('searchbox', { name: 'Search parcels' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /chronopost/i })).toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: /hide search & filters/i }));
+    await user.click(screen.getByRole('button', { name: 'Hide search' }));
     expect(screen.queryByRole('searchbox', { name: 'Search parcels' })).not.toBeInTheDocument();
-    expect(viewToggle).toHaveTextContent('Custom view');
+    expect(filtersToggle).toHaveAccessibleDescription('Custom view');
+    expect(screen.getByRole('button', { name: 'Search parcels' })).not.toHaveAccessibleDescription('Custom view');
   });
 
   it('shows one concise status line on each card', async () => {

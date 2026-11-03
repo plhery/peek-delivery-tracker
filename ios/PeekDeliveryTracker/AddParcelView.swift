@@ -1483,7 +1483,7 @@ struct ParcelFilterView: View {
                     }
                 }
             }
-            .navigationTitle(localizer.text("view.showControls"))
+            .navigationTitle(localizer.text("view.sortFilter"))
             .navigationBarTitleDisplayMode(.inline)
             #if os(macOS)
             // Sections as iOS draws them, rather than a label beside each picker, on the app's paper rather than the

@@ -28,13 +28,13 @@ export function ParcelViewControls({
   sort,
   carriers,
   count,
+  searchOpen,
   advancedOpen,
   hasCustomView,
   onQueryChange,
   onStatusChange,
   onCarrierChange,
   onSortChange,
-  onToggleAdvanced,
   onClearAll,
 }: {
   id: string;
@@ -44,24 +44,21 @@ export function ParcelViewControls({
   sort: ParcelSort;
   carriers: CarrierId[];
   count: number;
+  searchOpen: boolean;
   advancedOpen: boolean;
   hasCustomView: boolean;
   onQueryChange: (query: string) => void;
   onStatusChange: (status: ParcelStatusFilter) => void;
   onCarrierChange: (carrier: CarrierId | '') => void;
   onSortChange: (sort: ParcelSort) => void;
-  onToggleAdvanced: () => void;
   onClearAll: () => void;
 }) {
   const { locale, t } = useI18n();
-  const activeFilterCount = Number(query.trim().length > 0)
-    + Number(status !== 'all')
-    + Number(carrier !== '')
-    + Number(sort !== 'priority');
 
+  // The search and the sort and filters each have their button beside the list's heading, and open here together.
   return (
     <div id={id} className="parcel-view" role="search" aria-label={t('view.search')}>
-      <div className="parcel-view__top">
+      {searchOpen && (
         <label className="parcel-view__search">
           <span>{t('view.search')}</span>
           <svg aria-hidden="true" viewBox="0 0 20 20">
@@ -76,21 +73,7 @@ export function ParcelViewControls({
             onChange={(event) => onQueryChange(event.target.value)}
           />
         </label>
-        <button
-          type="button"
-          className={`parcel-view__filter-button${activeFilterCount ? ' parcel-view__filter-button--active' : ''}`}
-          aria-label={advancedOpen ? t('view.hideFilters') : t('view.filters')}
-          aria-expanded={advancedOpen}
-          aria-controls={`${id}-advanced`}
-          onClick={onToggleAdvanced}
-        >
-          <svg aria-hidden="true" viewBox="0 0 20 20">
-            <path d="M3 5h14M6 10h8M8 15h4" />
-          </svg>
-          <span>{advancedOpen ? t('view.hideFilters') : t('view.filters')}</span>
-          {activeFilterCount > 0 && <strong>{activeFilterCount}</strong>}
-        </button>
-      </div>
+      )}
 
       <div className={`parcel-view__meta${hasCustomView ? '' : ' parcel-view__meta--quiet'}`}>
         {hasCustomView && (

@@ -46,7 +46,7 @@ test('keeps the next arrival, flagged issue card, and search tools in one compac
   const region = page.getByRole('region', { name: 'On the way' });
   await expect(region.locator('.parcel-section__heading > span')).toHaveText('7');
   const row = await page.locator('.delivery-overview').boundingBox();
-  const searchButton = page.getByRole('button', { name: 'Search & filters' });
+  const searchButton = page.getByRole('button', { name: 'Search parcels' });
   const searchBounds = await searchButton.boundingBox();
   expect(searchBounds!.y).toBeGreaterThanOrEqual(row!.y);
   expect(searchBounds!.y + searchBounds!.height).toBeLessThanOrEqual(row!.y + row!.height + 1);

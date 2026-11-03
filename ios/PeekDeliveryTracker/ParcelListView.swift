@@ -645,7 +645,7 @@ private struct DeliveryListView: View {
                     Button(localizer.text("view.search")) { find() }.keyboardShortcut(MenuKey.find)
                 }
                 if keys.contains(.closeSearch) {
-                    Button(localizer.text("view.hideControls")) { closeSearch() }
+                    Button(localizer.text("view.hideSearch")) { closeSearch() }
                         .keyboardShortcut(.escape, modifiers: [])
                 }
                 if keys.contains(.undo), let parcel = store.undoParcel {
@@ -930,6 +930,30 @@ private struct DeliveryListView: View {
                     .fixedSize()
             }
             Spacer(minLength: 0)
+            // Sorting stands beside the search rather than inside it, as on the web; a dot says the list isn't in its
+            // usual order or shows only some parcels.
+            Button { searchFocused = false; showingFilters = true } label: {
+                Image(systemName: "line.3.horizontal.decrease")
+                    .font(.body.weight(.regular))
+                    .overlay(alignment: .topTrailing) {
+                        if filtered {
+                            Circle().fill(ExperimentalPalette.transit).frame(width: 6, height: 6)
+                                .background(Circle().fill(Brand.background).padding(-2))
+                                .offset(x: 4, y: -4)
+                                .transition(.scale.combined(with: .opacity))
+                        }
+                    }
+                    .frame(width: 44, height: 44)
+                    .contentShape(Rectangle())
+            }
+            .animation(reduceMotion ? nil : .snappy(duration: 0.2), value: filtered)
+            .accessibilityLabel(localizer.text("view.sortFilter"))
+            .accessibilityValue(filtered ? localizer.text("view.customized") : "")
+            .accessibilityIdentifier("deliveries.filters")
+            // Beside a parcel, a popover off the button, over the list it sorts.
+            .popover(isPresented: filtersShown(asPopover: true)) {
+                filters.frame(minWidth: 340, idealWidth: 380, minHeight: 440, idealHeight: 620)
+            }
             Button {
                 withAnimation(reduceMotion ? nil : .snappy(duration: 0.3)) { showingSearch.toggle() }
                 searchFocused = showingSearch
@@ -937,9 +961,9 @@ private struct DeliveryListView: View {
                 Image(systemName: "magnifyingglass")
                     .font(.body.weight(.regular))
                     .frame(width: 44, height: 44)
-                    .background(showingSearch || hasCustomView ? Brand.ink.opacity(0.06) : .clear, in: Circle())
+                    .background(showingSearch || searched ? Brand.ink.opacity(0.06) : .clear, in: Circle())
             }
-            .accessibilityLabel(localizer.text(showingSearch ? "view.hideControls" : "view.showControls"))
+            .accessibilityLabel(localizer.text(showingSearch ? "view.hideSearch" : "view.search"))
             .accessibilityIdentifier("deliveries.search")
             // Pulling refreshes the list. VoiceOver users also get a button, and so does a list beside a parcel,
             // where a pointer may be all there is to pull with, as on the web. ⌘R presses it.
@@ -965,39 +989,29 @@ private struct DeliveryListView: View {
         .buttonStyle(.plain)
     }
 
-    /// One quiet field, as the system's own search fields are: no box around it, its tools inside and beside it.
+    /// One quiet field, as the system's own search fields are: no box around it, its tools inside it.
     private var searchControls: some View {
-        HStack(spacing: 4) {
-            HStack(spacing: 7) {
-                Image(systemName: "magnifyingglass").foregroundStyle(.secondary).accessibilityHidden(true)
-                TextField(localizer.text("view.searchPlaceholder"), text: $query)
-                    .drawnField()
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .submitLabel(.search)
-                    .focused($searchFocused)
-                    .onAppear { searchFocused = true }
-                    .accessibilityLabel(localizer.text("view.search"))
-                if !query.isEmpty {
-                    Button { query = "" } label: {
-                        Image(systemName: "xmark.circle.fill").foregroundStyle(.tertiary).frame(width: 30, height: 44).contentShape(Rectangle())
-                    }
-                    .accessibilityLabel(localizer.text("view.clear"))
-                    .transition(.opacity.combined(with: .scale(scale: 0.7)))
+        HStack(spacing: 7) {
+            Image(systemName: "magnifyingglass").foregroundStyle(.secondary).accessibilityHidden(true)
+            TextField(localizer.text("view.searchPlaceholder"), text: $query)
+                .drawnField()
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .submitLabel(.search)
+                .focused($searchFocused)
+                .onAppear { searchFocused = true }
+                .accessibilityLabel(localizer.text("view.search"))
+            if !query.isEmpty {
+                Button { query = "" } label: {
+                    Image(systemName: "xmark.circle.fill").foregroundStyle(.tertiary).frame(width: 30, height: 44).contentShape(Rectangle())
                 }
-            }
-            .padding(.leading, 13).padding(.trailing, query.isEmpty ? 13 : 5).frame(minHeight: 44)
-            .background(Brand.ink.opacity(0.06), in: Capsule())
-            .animation(reduceMotion ? nil : .snappy(duration: 0.2), value: query.isEmpty)
-            Button { searchFocused = false; showingFilters = true } label: {
-                Image(systemName: "line.3.horizontal.decrease").frame(width: 44, height: 44).contentShape(Rectangle())
-            }
-            .accessibilityLabel(localizer.text("view.showControls"))
-            // Beside a parcel, a popover off the button, over the list it filters.
-            .popover(isPresented: filtersShown(asPopover: true)) {
-                filters.frame(minWidth: 340, idealWidth: 380, minHeight: 440, idealHeight: 620)
+                .accessibilityLabel(localizer.text("view.clear"))
+                .transition(.opacity.combined(with: .scale(scale: 0.7)))
             }
         }
+        .padding(.leading, 13).padding(.trailing, query.isEmpty ? 13 : 5).frame(minHeight: 44)
+        .background(Brand.ink.opacity(0.06), in: Capsule())
+        .animation(reduceMotion ? nil : .snappy(duration: 0.2), value: query.isEmpty)
         .font(.subheadline)
         .buttonStyle(.plain)
         .transition(.opacity.combined(with: .scale(scale: 0.94, anchor: .top)).combined(with: .offset(y: -10)))
@@ -1165,15 +1179,17 @@ private struct DeliveryListView: View {
         }
     }
 
-    private var hasCustomView: Bool {
-        !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-            || statusFilter != .all || carrierFilter != nil || sort != .priority
-    }
+    private var searched: Bool { !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+
+    /// A status, a carrier or an order other than the usual one, which the filters' button marks.
+    private var filtered: Bool { statusFilter != .all || carrierFilter != nil || sort != .priority }
+
+    private var hasCustomView: Bool { searched || filtered }
 
     private var filterChips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                if !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                if searched {
                     filterChip("“\(query)”") { query = "" }
                 }
                 if statusFilter != .all {

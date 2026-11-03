@@ -152,20 +152,33 @@ export default function App({
   const [carrierFilter, setCarrierFilter] = useState<CarrierId | ''>('');
   const [sort, setSort] = useState<ParcelSort>('priority');
   const [viewControlsOpen, setViewControlsOpen] = useState(false);
+  const [advancedFiltersOpen, setAdvancedFiltersOpen] = useState(false);
   const searchToggle = useRef<HTMLButtonElement>(null);
+  const filtersToggle = useRef<HTMLButtonElement>(null);
   const searchShell = useRef<HTMLDivElement>(null);
-  // Search folds shut before it goes, and the list rises with it.
+  // Search and the filters fold shut before they go, and the list rises with them.
   function closeViewControls() {
+    const closed = () => { setViewControlsOpen(false); setAdvancedFiltersOpen(false); };
     const shell = searchShell.current;
-    if (!shell?.animate || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { setViewControlsOpen(false); return; }
+    if (!shell?.animate || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { closed(); return; }
     if (shell.dataset.leaving) return;
     shell.dataset.leaving = 'true';
     const { height, marginBottom } = getComputedStyle(shell);
     void shell.animate([{ height, marginBottom, opacity: 1 }, { height: '0px', marginBottom: '0px', opacity: 0 }],
-      { duration: 220, easing: 'cubic-bezier(.3,0,.2,1)', fill: 'forwards' }).finished.catch(() => undefined).then(() => setViewControlsOpen(false));
+      { duration: 220, easing: 'cubic-bezier(.3,0,.2,1)', fill: 'forwards' }).finished.catch(() => undefined).then(closed);
+  }
+  // Each button opens its part; the last one closed folds the whole panel.
+  function toggleSearch() {
+    if (!viewControlsOpen) setViewControlsOpen(true);
+    else if (advancedFiltersOpen) setViewControlsOpen(false);
+    else closeViewControls();
+  }
+  function toggleFilters() {
+    if (!advancedFiltersOpen) { trackAction('filters-open'); setAdvancedFiltersOpen(true); }
+    else if (viewControlsOpen) setAdvancedFiltersOpen(false);
+    else closeViewControls();
   }
   const deliveriesPage = useRef<HTMLDivElement>(null);
-  const [advancedFiltersOpen, setAdvancedFiltersOpen] = useState(false);
   const [viewNow, setViewNow] = useState(() => Date.now());
   const [openParcelId, setOpenParcelId] = useState<string | null>(null);
   const [detailOrigin, setDetailOrigin] = useState<CardOrigin | null>(null);
@@ -326,10 +339,9 @@ export default function App({
     }
   }, [loading, parcelOpen]);
 
-  const hasCustomView = query.trim().length > 0
-    || statusFilter !== 'all'
-    || carrierFilter !== ''
-    || sort !== 'priority';
+  const searched = query.trim().length > 0;
+  const filtered = statusFilter !== 'all' || carrierFilter !== '' || sort !== 'priority';
+  const hasCustomView = searched || filtered;
   // A parcel delivered since the list was last shown keeps its place until its card leaves for the past deliveries.
   const delivered = useDeliveredHold(parcels, tab === 'deliveries' && !loading && !openParcelId && !adding && !hasCustomView, deliveriesPage);
   const listed = delivered.arranged;
@@ -542,29 +554,46 @@ export default function App({
         <div className="delivery-overview">
           {activeParcels.length > 0 && <div className="parcel-section__heading"><h2 id="active-parcels-title">{t('app.onTheWaySection')}</h2><span>{activeParcels.length}</span></div>}
           <div className="delivery-overview__actions">
-            {!loading && parcels.length > 0 && <button
-              ref={searchToggle}
-              type="button"
-              className="icon-button delivery-search"
-              aria-label={viewControlsOpen ? t('view.hideControls') : t('view.showControls')}
-              title={viewControlsOpen ? t('view.hideControls') : t('view.showControls')}
-              aria-expanded={viewControlsOpen}
-              aria-controls={PARCEL_VIEW_CONTROLS_ID}
-              aria-describedby={hasCustomView ? 'parcel-view-active' : undefined}
-              onClick={() => { if (viewControlsOpen) closeViewControls(); else { trackAction('filters-open'); setViewControlsOpen(true); } }}
-            >
-              <Icon name="search" />
-              {hasCustomView && <><i className="delivery-search__dot" aria-hidden="true" /><span className="sr-only" id="parcel-view-active">{t('view.customized')}</span></>}
-            </button>}
+            {!loading && parcels.length > 0 && <>
+              {/* Sorting stands beside the search, never behind it: a dot says the list isn't in its usual order. */}
+              <button
+                ref={filtersToggle}
+                type="button"
+                className="icon-button delivery-filters"
+                aria-label={t('view.sortFilter')}
+                title={t('view.sortFilter')}
+                aria-expanded={advancedFiltersOpen}
+                aria-controls={PARCEL_VIEW_CONTROLS_ID}
+                aria-describedby={filtered ? 'parcel-view-filtered' : undefined}
+                onClick={toggleFilters}
+              >
+                <Icon name="filter" />
+                {filtered && <><i className="delivery-overview__dot" aria-hidden="true" /><span className="sr-only" id="parcel-view-filtered">{t('view.customized')}</span></>}
+              </button>
+              <button
+                ref={searchToggle}
+                type="button"
+                className="icon-button delivery-search"
+                aria-label={viewControlsOpen ? t('view.hideSearch') : t('view.search')}
+                title={viewControlsOpen ? t('view.hideSearch') : t('view.search')}
+                aria-expanded={viewControlsOpen}
+                aria-controls={PARCEL_VIEW_CONTROLS_ID}
+                aria-describedby={searched ? 'parcel-view-searched' : undefined}
+                onClick={toggleSearch}
+              >
+                <Icon name="search" />
+                {searched && <><i className="delivery-overview__dot" aria-hidden="true" /><span className="sr-only" id="parcel-view-searched">{t('view.customized')}</span></>}
+              </button>
+            </>}
             <button type="button" className="icon-button delivery-refresh" aria-label={refreshing ? t('app.refreshing') : t('app.refresh')} aria-busy={refreshing || refreshAnimating} disabled={refreshing || refreshAnimating} data-refreshing={refreshAnimating || undefined} onClick={() => void refreshWithButton()}><span ref={refreshIcon} className="refresh-glyph"><Icon name="refresh" /></span></button>
           </div>
         </div>
-        {!loading && parcels.length > 0 && viewControlsOpen && (
+        {!loading && parcels.length > 0 && (viewControlsOpen || advancedFiltersOpen) && (
           <div ref={searchShell} className="parcel-view-shell" onKeyDown={(event) => {
             if (event.key !== 'Escape' || event.nativeEvent.isComposing) return;
             event.preventDefault();
             closeViewControls();
-            searchToggle.current?.focus({ preventScroll: true });
+            (viewControlsOpen ? searchToggle : filtersToggle).current?.focus({ preventScroll: true });
           }}>
             <ParcelViewControls
               id={PARCEL_VIEW_CONTROLS_ID}
@@ -574,13 +603,13 @@ export default function App({
               sort={sort}
               carriers={availableCarriers}
               count={visibleParcels.length}
+              searchOpen={viewControlsOpen}
               advancedOpen={advancedFiltersOpen}
               hasCustomView={hasCustomView}
               onQueryChange={setQuery}
               onStatusChange={(value) => { setStatusFilter(value); trackAction('filter-status'); }}
               onCarrierChange={(value) => { setCarrierFilter(value); trackAction('filter-carrier'); }}
               onSortChange={(value) => { setSort(value); trackAction('sort-change'); }}
-              onToggleAdvanced={() => setAdvancedFiltersOpen((open) => !open)}
               onClearAll={clearView}
             />
           </div>

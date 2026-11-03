@@ -17,7 +17,7 @@ test.beforeEach(async ({ page }) => {
   await expect(page).toHaveTitle('Peek — Universal Parcel Tracker');
   // This control is rendered only after the client repository has loaded, so
   // it is also a stable signal that hydration and the first effect completed.
-  await expect(page.getByRole('button', { name: 'Search & filters' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Search parcels' })).toBeVisible();
 });
 
 test.afterEach(async ({ page }) => {
@@ -27,17 +27,21 @@ test.afterEach(async ({ page }) => {
 test('finds, filters, and opens a parcel', async ({ page }) => {
   const search = page.getByRole('searchbox', { name: 'Search parcels' });
   await expect(search).toBeHidden();
-  await page.getByRole('button', { name: 'Search & filters' }).click();
+  await page.getByRole('button', { name: 'Search parcels' }).click();
   await expect(search).toBeFocused();
   await search.fill('birthday');
   await page.keyboard.press('Escape');
   await expect(search).toBeHidden();
-  const toggle = page.getByRole('button', { name: 'Search & filters' });
+  const toggle = page.getByRole('button', { name: 'Search parcels' });
   await expect(toggle).toBeFocused();
   await expect(toggle).toHaveAccessibleDescription('Custom view');
   await toggle.click();
   await expect(search).toHaveValue('birthday');
-  await page.getByRole('button', { name: 'Filters', exact: true }).click();
+  // Sorting and the filters have their own button beside the search, marked once they change the list.
+  const filters = page.getByRole('button', { name: 'Sort & filter' });
+  await expect(filters).not.toHaveAccessibleDescription('Custom view');
+  await filters.click();
+  await expect(filters).toHaveAttribute('aria-expanded', 'true');
   await search.fill('birthday');
   await expect(
     page.getByRole('region', { name: 'Needs attention' }).getByText('Birthday gift 🎁'),
@@ -47,6 +51,7 @@ test('finds, filters, and opens a parcel', async ({ page }) => {
 
   await search.fill('');
   await page.getByLabel('Status').selectOption('delivered');
+  await expect(filters).toHaveAccessibleDescription('Custom view');
   await expect(page.getByText('Coffee beans ☕')).toBeVisible();
   await page.getByText('Coffee beans ☕').click();
   await expect(page.getByRole('dialog', { name: 'Coffee beans ☕' })).toBeVisible();
@@ -206,7 +211,7 @@ test('parcel celebration respects reduced motion and clears before the next inte
   const now = Date.now();
   await page.clock.install({ time: now });
   await page.reload();
-  await expect(page.getByRole('button', { name: 'Search & filters' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Search parcels' })).toBeVisible();
   await page.clock.pauseAt(now + 60_000);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.getByRole('button', { name: 'Add a parcel' }).click();
@@ -237,7 +242,7 @@ test('parcel celebration respects reduced motion and clears before the next inte
 });
 
 test('reveals the added card from another tab even when delivery filters hide it', async ({ page }) => {
-  await page.getByRole('button', { name: 'Search & filters' }).click();
+  await page.getByRole('button', { name: 'Search parcels' }).click();
   await page.getByRole('searchbox', { name: 'Search parcels' }).fill('birthday');
   await page.locator('.app__navigation').getByRole('button', { name: 'Passport' }).click();
   await page.getByRole('button', { name: 'Add a parcel' }).click();

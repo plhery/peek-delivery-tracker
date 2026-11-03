@@ -4334,6 +4334,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Проследяване на пратка Sameday: AWB, easybox и статуси",
       "name": "Sameday",
       "color": "#e92427"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-prosledyavane-na-pratka",
+      "title": "Проследяване на пратка GZYL: номер YL…YQ и статуси",
+      "name": "GZYL",
+      "color": "#4e79e1"
     }
   ],
   "el": [

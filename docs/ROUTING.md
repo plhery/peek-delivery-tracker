@@ -715,7 +715,12 @@ A parcel often changes carrier at the border. The origin history is always kept.
   some scans late, so for a day it is still asked alongside the partner, at most every 55 min
   (`earlier_checked_at`). Its scans join the history; its failures and its clock do not touch
   the parcel's summary or freshness watermark, and a stage it reports without a time adds no
-  row stamped at observation time. A scan of the origin's that reaches the parcel
+  row stamped at observation time. One exception: when its newest dated scan in a stage is more
+  than 26 h newer than everything the partner's answer shows, further than any zone can put it,
+  the partner is not where the parcel is (Chunghwa Post, asked from Taiwan while Ukrposhta was
+  down, retold Ukrposhta's export, while Ukrposhta's later scans followed the parcel to Dutch
+  customs). That scan then sets the stage, the status line and the watermark, so the partner's
+  next answer without it is older and leaves them. A partner's delivery or return stands. A scan of the origin's that reaches the parcel
   after a later one announces no push or link alert
   ([`relayCopies.ts`](../src/server/relayCopies.ts)); one newer than everything stored does.
 - After the handoff the origin often goes on telling the partner's scans in its own

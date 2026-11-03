@@ -199,6 +199,31 @@ function asksEarlierCarrier(metadata: JsonObject, now: Date): boolean {
   return time >= handedOver && time - handedOver < EARLIER_FOLLOW_UP_MS && time - asked >= DELIVERY_PROBE_INTERVAL_MS;
 }
 
+/** Further than any clock read a zone away (UTC−12 to UTC+14) can put one scan from another. */
+const EARLIER_LEAD_MS = 26 * 60 * 60 * 1_000;
+
+/**
+ * The earlier carrier's scan that tells a handed-over parcel's summary when it is asked again: its newest dated scan
+ * in a stage, when that is newer than everything the partner's answer shows by more than any zone can explain. The
+ * partner adopted is then not where the parcel is: Chunghwa Post, asked from Taiwan while Ukrposhta was down, retold
+ * Ukrposhta's export and nothing more, while Ukrposhta's later scans followed the parcel to Dutch customs. A partner's
+ * delivery or return stands, and so does a partner whose answer shows no time.
+ */
+export function earlierLead(
+  earlier: readonly JsonObject[], partnerAt: number, partnerStage: string | null, now: Date, storedAhead: ReadonlySet<string>,
+): JsonObject | null {
+  if (!Number.isFinite(partnerAt) || ['delivered', 'returned'].includes(partnerStage ?? '')) return null;
+  const at = (event: JsonObject) => Date.parse(String(event.occurred_at ?? ''));
+  const scans = earlier.filter((event) => event.stage !== 'pending' && Number.isFinite(at(event))
+    && !(isRecord(event.raw_data) && event.raw_data.observed_without_provider_timestamp === true)
+    && !datedAfterCheck(event.occurred_at, 'UTC', now)
+    && !storedAhead.has(scanKey(isRecord(event.raw_data) ? event.raw_data.time : undefined, event.description)));
+  const tie = (event: JsonObject) => tieOrder(isRecord(event.raw_data) ? event.raw_data.tie_order : undefined);
+  const [newest] = [...scans].sort((left, right) => at(right) - at(left)
+    || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage)) || tie(right) - tie(left));
+  return newest && at(newest) - partnerAt > EARLIER_LEAD_MS ? newest : null;
+}
+
 function previousDeliveryProbe(parcel: JsonObject, carrier: string, number: string): DeliveryProbe | null {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
   const stored = data.delivery_probe ?? (carrier === 'swiss-post' ? data.swiss_post_probe : undefined);
@@ -1952,12 +1977,18 @@ export class TrackingSyncService {
         // carrier's stage, seen without a time of its own, dates no row.
         const earlierEvents = fetched.earlierResult && fetched.earlierCarrierId
           ? buildEvents(parcel, fetched.earlierResult, fetched.earlierCarrierId) : [];
+        // Unless the earlier carrier, asked again, has followed the parcel far past everything the partner shows.
+        const partnerAt = Math.max(...[newestEvents[0]?.occurred_at,
+          eventTimestamp(result!.last_update, resultTimezone(sourceCarrierId!, result!))]
+          .map((time) => Date.parse(String(time ?? ''))).filter(Number.isFinite));
+        const lead = fetched.earlierFollowUp ? earlierLead(earlierEvents, partnerAt, normalizedSelectedStage, now, storedAhead) : null;
         return {
           events: [...earlierEvents, ...normalizedEvents],
           relays: relayedScans(earlierEvents, normalizedEvents),
           reportedStage: normalizedReportedStage,
-          selectedStage: normalizedSelectedStage,
-          scanText,
+          selectedStage: lead ? String(lead.stage) : normalizedSelectedStage,
+          scanText: lead ? String(lead.description ?? '').trim() || null : scanText,
+          leadAt: lead ? Date.parse(String(lead.occurred_at)) : Number.NaN,
         };
       }, (value) => ({
         events_received: result?.events?.length ?? 0,
@@ -2098,9 +2129,13 @@ export class TrackingSyncService {
         Date.parse(previousRouting.last_event_at ?? ''), events, stored, matches, { ...providerWatermark(previousData, stored), misdated },
       ), events, stored, now);
       // Read as routing wrote the watermark: a naive local clock in its source's zone.
-      const returnedEventTime = withoutCopyDrift(
+      const answerTime = withoutCopyDrift(
         Date.parse(eventTimestamp(result.last_update, resultTimezone(sourceCarrierId, result)) ?? ''), events, stored, matches, { misdated },
       );
+      // The earlier carrier's scan that tells the summary (`earlierLead`) dates the answer, and the watermark, too: the
+      // partner's next answer without it is older and leaves that summary.
+      const leadAt = normalized.leadAt;
+      const returnedEventTime = Number.isFinite(leadAt) && !(answerTime >= leadAt) ? leadAt : answerTime;
       // Rows past the answer's newest scan that only its own provider wrote, and that its answer
       // no longer shows, are no scans: a notice the provider dated at the lookup, which a scraper
       // fix now leaves out. Over a summary without movement, an answer that moved is then not
@@ -2174,11 +2209,12 @@ export class TrackingSyncService {
       if (routing) {
         // A fallback's scan that is kept out must not make the carrier's next reply look older.
         const keepWatermark = olderSnapshot || keepSaved || unprovenProviderSummary || noticesPast;
-        const watermark = keepWatermark ? previousEventTime : withoutAheadWatermark(withoutCopyDrift(
+        const answerMark = keepWatermark ? previousEventTime : withoutAheadWatermark(withoutCopyDrift(
           Date.parse(String(routing.last_event_at ?? '')), events, stored, matches, { also: [returnedEventTime,
             fetched.earlierResult && !fetched.earlierFollowUp
               ? latestResultTime(fetched.earlierResult, fetched.earlierCarrierId ?? sourceCarrierId) : Number.NaN], misdated },
         ), events, stored, now);
+        const watermark = !keepWatermark && Number.isFinite(leadAt) && !(answerMark >= leadAt) ? leadAt : answerMark;
         const saved = keepWatermark ? previousRouting.last_event_at : routing.last_event_at;
         if (Number.isFinite(watermark) && Date.parse(String(saved ?? '')) !== watermark) routing.last_event_at = new Date(watermark).toISOString();
         else if (saved !== undefined || keepWatermark) routing.last_event_at = saved;

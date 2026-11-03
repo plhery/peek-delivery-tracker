@@ -19,6 +19,7 @@ import {
   collectMappedStatusKeys,
   collectStatusObservations,
   detectSyncAnomalies,
+  earlierLead,
   fairSyncPackages,
   heldStage,
   inferStage,
@@ -3917,6 +3918,58 @@ describe('TrackingSyncService', () => {
     expect(await sync('2026-01-12T13:00:00Z')).toEqual(['posti']);
     expect(await sync('2026-01-13T10:30:00Z')).toEqual(['posti']);
     expect(adapter.fetchUniversal).not.toHaveBeenCalled();
+  });
+
+  it('takes the summary from the earlier carrier asked again when it has followed the parcel days past the partner', async () => {
+    const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
+    let now = new Date('2026-01-12T10:30:00Z');
+    let origin: CarrierResult = { status: 'in_transit', destination_country: 'FI', delivery_carrier: 'posti',
+      last_update: '2026-01-11T10:00:00Z', events: [{ time: '2026-01-11T10:00:00Z', description: 'In transport', stage: 'in_transit' }] };
+    // The partner only retells the origin's export.
+    let delivery: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', last_status_text: 'Exported',
+      last_update: '2026-01-11T12:00:00Z', events: [{ time: '2026-01-11T12:00:00Z', description: 'Exported', stage: 'in_transit' }] };
+    const adapter = { fetch: vi.fn(async (carrier: string) => carrier === 'posti' ? delivery : origin), fetchUniversal: vi.fn() };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'origin-ahead', carrier: 'la-poste', tracking_number: 'CW123456785FR' };
+    const sync = async (at: string) => {
+      now = new Date(at);
+      adapter.fetch.mockClear();
+      await service.syncPackage(parcel);
+      parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+      return adapter.fetch.mock.calls.map((call) => call[0]);
+    };
+    expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+    expect(parcel).toMatchObject({ current_stage: 'in_transit', last_status_text: 'Exported',
+      carrier_data: { active_tracking_carrier: 'posti' } });
+    origin = { ...origin, last_update: '2026-01-13T08:00:00Z', events: [...origin.events!,
+      { time: '2026-01-12T20:00:00Z', description: 'Arrival at inward office of exchange', stage: 'in_transit' },
+      { time: '2026-01-13T08:00:00Z', description: 'Item presented to customs', stage: 'customs' }] };
+    expect(await sync('2026-01-13T09:30:00Z')).toEqual(['posti', 'la-poste']);
+    expect(parcel).toMatchObject({ current_stage: 'customs', last_status_text: 'Item presented to customs',
+      carrier_data: { routing: { last_event_at: '2026-01-13T08:00:00.000Z' } } });
+    // The partner's next answer without the origin is older, and leaves that summary.
+    expect(await sync('2026-01-13T10:00:00Z')).toEqual(['posti']);
+    expect(parcel).toMatchObject({ current_stage: 'customs', last_status_text: 'Item presented to customs',
+      carrier_data: { routing: { last_event_at: '2026-01-13T08:00:00.000Z' } } });
+    // A partner's scan newer than the origin's takes the summary back, once the day of follow-ups is over too.
+    delivery = { status: 'delivered', current_stage: 'delivered', last_status_text: 'Delivered', last_update: '2026-01-13T10:45:00Z',
+      events: [...delivery.events!, { time: '2026-01-13T10:45:00Z', description: 'Delivered', stage: 'delivered' }] };
+    expect(await sync('2026-01-13T11:00:00Z')).toEqual(['posti']);
+    expect(parcel).toMatchObject({ current_stage: 'delivered', last_status_text: 'Delivered' });
+  });
+
+  it('keeps the partner’s summary over an earlier carrier asked again that is no further than a zone could put it', () => {
+    const scan = (time: string, stage = 'in_transit'): JsonObject => ({ occurred_at: time, stage, description: stage, raw_data: { time } });
+    const partnerAt = Date.parse('2026-01-12T10:00:00Z');
+    const now = new Date('2026-01-14T12:00:00Z');
+    expect(earlierLead([scan('2026-01-13T12:00:00Z')], partnerAt, 'in_transit', now, new Set())).toBeNull();
+    expect(earlierLead([scan('2026-01-13T12:00:01Z', 'customs'), scan('2026-01-12T09:00:00Z')], partnerAt, 'in_transit', now, new Set()))
+      .toMatchObject({ stage: 'customs' });
+    // Nor over the partner's delivery, a scan in no stage, or one dated after the check.
+    expect(earlierLead([scan('2026-01-14T09:00:00Z')], partnerAt, 'delivered', now, new Set())).toBeNull();
+    expect(earlierLead([scan('2026-01-14T09:00:00Z', 'pending')], partnerAt, 'in_transit', now, new Set())).toBeNull();
+    expect(earlierLead([scan('2026-01-14T15:00:00Z')], partnerAt, 'in_transit', now, new Set())).toBeNull();
+    expect(earlierLead([scan('2026-01-14T09:00:00Z')], Number.NaN, 'in_transit', now, new Set())).toBeNull();
   });
 
   it('dates no row from the earlier carrier’s stage it reports without a time', async () => {

@@ -136,6 +136,17 @@ begin
       or not exists (select 1 from public.parcel_feedback where id = 'f4000000-0000-4000-8000-000000000002') then
     raise exception 'The wrong answers were deleted';
   end if;
+
+  -- The web, the iPhone app and the Android app answer; no other app.
+  if pg_temp.answer('f4000000-0000-4000-8000-000000000301', 'FEEDBACKTEST0005', 'right', '{"app": "android"}') <> 'stored'
+      or (select app from public.parcel_feedback where id = 'f4000000-0000-4000-8000-000000000301') <> 'android' then
+    raise exception 'An answer from the Android app must be kept under its name';
+  end if;
+  begin
+    perform pg_temp.answer('f4000000-0000-4000-8000-000000000302', 'FEEDBACKTEST0005', 'right', '{"app": "watch"}');
+    raise exception 'An answer from an unknown app must be refused';
+  exception when check_violation then null;
+  end;
 end;
 $$;
 

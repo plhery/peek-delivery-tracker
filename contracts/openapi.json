@@ -55088,7 +55088,8 @@
             "type": "string",
             "enum": [
               "web",
-              "ios"
+              "ios",
+              "android"
             ]
           },
           "locale": {

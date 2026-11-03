@@ -222,7 +222,7 @@ describe('an answer through a link', () => {
     ['a tracking page past its limit', { answer: 'found_elsewhere', reasons: [], trackingPage: 'x'.repeat(501) }],
     ['a note that is not text', { note: 4 }],
     ['no place the question was asked', { asked: 'email' }],
-    ['an unknown app', { app: 'android' }],
+    ['an unknown app', { app: 'watch' }],
     ['an unsupported locale', { locale: 'xx' }],
   ])('refuses %s before it reads the link', async (_, overrides) => {
     const read = found();
@@ -263,6 +263,15 @@ describe('an answer from an account', () => {
     const text = JSON.stringify(stored);
     for (const secret of [userId, packageId, 'SECRET', '9999', 'A name that stays']) expect(text).not.toContain(secret);
     expect(counted).toHaveBeenCalledExactlyOnceWith('right', 'account', 'web', 'stored');
+  });
+
+  it('is kept from the Android app under its own name', async () => {
+    vi.spyOn(SupabaseUserClient.prototype, 'getPackage').mockResolvedValue(storedPackage());
+    const counted = vi.spyOn(metrics, 'recordParcelFeedback');
+    const response = await viaAccount(answer({ answer: 'right', reasons: [], app: 'android' }));
+    expect(response.status).toBe(204);
+    expect(record.mock.calls[0][0]).toMatchObject({ via: 'account', app: 'android' });
+    expect(counted).toHaveBeenCalledExactlyOnceWith('right', 'account', 'android', 'stored');
   });
 
   it('answers another account\'s parcel like one that does not exist', async () => {

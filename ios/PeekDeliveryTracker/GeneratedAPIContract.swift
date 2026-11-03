@@ -3745,6 +3745,7 @@ enum ParcelFeedbackRequestAsked: String, Codable, CaseIterable, Hashable, Sendab
 enum ParcelFeedbackRequestApp: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case web
     case ios
+    case android
 
     var id: String { rawValue }
 }

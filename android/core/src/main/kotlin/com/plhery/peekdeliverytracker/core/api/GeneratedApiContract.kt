@@ -3690,6 +3690,7 @@ enum class ParcelFeedbackRequestAsked(val rawValue: String) {
 enum class ParcelFeedbackRequestApp(val rawValue: String) {
     @SerialName("web") Web("web"),
     @SerialName("ios") Ios("ios"),
+    @SerialName("android") Android("android"),
     ;
 
     companion object {

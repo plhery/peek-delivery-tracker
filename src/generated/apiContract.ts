@@ -50374,7 +50374,7 @@ export interface ApiParcelFeedbackRequest {
   "carrierName"?: string;
   "trackingPage"?: string;
   "asked": "page" | "back";
-  "app": "web" | "ios";
+  "app": "web" | "ios" | "android";
   "locale": ApiNativePushLocale;
 }
 

@@ -529,7 +529,7 @@ export interface ParcelFeedbackValues {
   carrierName: string | null;
   trackingPage: string | null;
   asked: 'page' | 'back';
-  app: 'web' | 'ios';
+  app: 'web' | 'ios' | 'android';
   locale: NativePushLocale;
 }
 
@@ -563,7 +563,7 @@ export function parcelFeedbackValues(payload: JsonObject): ParcelFeedbackValues 
   const carrierName = feedbackWords(payload.carrierName, 120, 'A carrier name');
   const trackingPage = feedbackWords(payload.trackingPage, 500, 'A tracking page');
   if (payload.asked !== 'page' && payload.asked !== 'back') throw new HttpError(400, 'Say where the question was asked');
-  if (payload.app !== 'web' && payload.app !== 'ios') throw new HttpError(400, 'Say which app is asking');
+  if (payload.app !== 'web' && payload.app !== 'ios' && payload.app !== 'android') throw new HttpError(400, 'Say which app is asking');
   const said = reasons.length > 0 || note !== null;
   const found = carrierName !== null || trackingPage !== null;
   if (answer === 'right' ? said || found : answer === 'wrong' ? !said || found : said || !found) {

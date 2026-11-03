@@ -236,7 +236,7 @@ function createRuntime(): PrometheusRuntime {
     }),
     parcelFeedbackTotal: new Counter({
       name: 'parcel_feedback_total',
-      help: 'What readers said of a parcel by answer (right, wrong, found_elsewhere), way in (account, link), app (web, ios) and outcome (stored, replaced, full, closed).',
+      help: 'What readers said of a parcel by answer (right, wrong, found_elsewhere), way in (account, link), app (web, ios, android) and outcome (stored, replaced, full, closed).',
       labelNames: ['answer', 'via', 'app', 'outcome'] as const,
       registers: [registry],
     }),
@@ -519,7 +519,7 @@ export function recordParcelAlertSet(outcome: ParcelAlertOutcome, app: ParcelAle
 export function recordParcelFeedback(
   answer: 'right' | 'wrong' | 'found_elsewhere',
   via: 'account' | 'link',
-  app: 'web' | 'ios',
+  app: 'web' | 'ios' | 'android',
   outcome: 'stored' | 'replaced' | 'full' | 'closed',
 ): void {
   count(runtime.parcelFeedbackTotal, 'parcel_feedback_total', { answer, via, app, outcome });

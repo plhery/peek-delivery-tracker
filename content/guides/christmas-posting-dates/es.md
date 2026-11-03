@@ -38,7 +38,7 @@ Sin fecha límite, cuenta hacia atrás con el plazo normal que publica cada una:
 
 Dos cosas alargan la cuenta:
 
-- **Días que no cuentan.** NACEX no cuenta los sábados ni los festivos. Este año, Navidad cae en viernes y el 26 en sábado.
+- **Días que no cuentan.** Correos no cuenta los sábados ni el 24 y el 31 de diciembre (en 2026, jueves los dos) en el plazo de sus paquetes, y NACEX no cuenta los sábados ni los festivos. Este año, Navidad cae en viernes y el 26 en sábado.
 - **La hora a la que lo dejas.** En Correos, los plazos de Paq Estándar están «sujetos a la hora de admisión del envío», y su página no dice cuál es la hora límite: pregúntala en la oficina.
 
 ## Baleares, Canarias, Ceuta y Melilla: cuenta más días
@@ -54,6 +54,8 @@ No hemos encontrado ninguna fecha de Navidad para las islas, Ceuta o Melilla. Su
 | NACEX | Canarias, Ceuta y Melilla, aéreo | De 24 a 48 horas |
 | GLS | Islas, Ceuta y Melilla | De 24 a 72 horas |
 
+Para Paq Estándar, las condiciones de paquetería que Correos enlaza desde la página del producto dan otras cifras: 6 días más a Canarias y 48 horas más a Ceuta y Melilla. Para no quedarte corto, cuenta con el plazo más largo.
+
 Además está la aduana: los envíos a Canarias, Ceuta y Melilla tienen trámite aduanero, y Correos no cuenta ese tiempo en sus plazos. NACEX avisa de que la entrega «puede demorarse sobre el plazo previsto por cuestiones aduaneras». Con MRW, los envíos a Canarias, Ceuta y Melilla se contratan en una oficina, no online. Qué se paga lo explica [la guía de aduanas](guide:customs).
 
 ## ¿Y para Reyes?
@@ -66,7 +68,7 @@ Si el regalo es para Reyes, el miércoles 6 de enero de 2027, tampoco hay fechas
 | Correos | Cartas a Papá Noel y a los Reyes Magos, en los buzones mágicos de más de 600 oficinas | Sin anunciar todavía (2025: hasta el lunes 5 de enero de 2026) |
 | Correos | Cartas por internet al Departamento de Envíos Extraordinarios | Sin anunciar todavía (2025: del viernes 5 de diciembre al lunes 5 de enero) |
 
-Con GLS, lo enviado el viernes 2 de enero de 2026 tenía entrega estimada el miércoles 7, ya pasado Reyes, y el jueves 1 y el martes 6 de enero eran días no operativos.
+Con GLS, lo enviado el viernes 2 de enero de 2026 tenía entrega estimada el miércoles 7, ya pasado Reyes, y el jueves 1 y el martes 6 de enero eran días no operativos. Y Correos no cuenta el 31 de diciembre en el plazo de sus paquetes: en 2026 es jueves, y el viernes 1 de enero de 2027 es festivo.
 
 ## Enviar un paquete al extranjero por Navidad
 
@@ -76,6 +78,7 @@ Ni Correos ni GLS publican una fecha de Navidad por país. Correos aconseja envi
 | --- | --- | --- |
 | Correos | Paquete Internacional Light, hasta 2 kg | Europa: de 3 a 6 días. América: de 5 a 8. Asia: de 8 a 10 |
 | Correos | Paquete Internacional Económico | Europa: de 8 a 10 días |
+| Correos | Paquete Internacional Premium, según la tabla de 2018 que sigue enlazando | Alemania, Francia y Reino Unido: de 3 a 10 días laborables. Estados Unidos: de 3 a 11. Argentina: de 3 a 8 |
 | GLS | Envíos de particulares | Europa: de 24 a 96 horas, según el país |
 
 - **Lo que no cuenta:** con Paq Internacional Premium, Correos cuenta solo días laborables, del país de origen y del de destino, y no cuenta los días que el paquete pasa en la aduana.
@@ -97,7 +100,7 @@ Para Correos, el Black Friday es «el pistoletazo de salida de la temporada más
 
 | Empresa | Festivos y días que no cuentan, Navidad 2026 |
 | --- | --- |
-| Correos | Sin anunciar |
+| Correos | Sin anunciar. En sus paquetes no cuenta los sábados ni el jueves 24 y el jueves 31 de diciembre |
 | GLS | Sin anunciar todavía (2025: jueves 25 de diciembre, jueves 1 y martes 6 de enero; viernes 26 de diciembre en Cataluña) |
 | MRW | Su buscador marca oficinas cerradas el viernes 25 de diciembre y, en Cataluña, el sábado 26 |
 | NACEX | Sin anunciar. No cuenta los sábados ni los festivos en sus plazos |
@@ -119,12 +122,14 @@ Para Correos, el Black Friday es «el pistoletazo de salida de la temporada más
 - [Correos: Actualidad](https://www.correos.es/es/es/actualidad) – sin fechas de 2026
 - [Correos: Paq Estándar](https://www.correos.es/es/es/particulares/enviar/envios-nacionales/envios-economicos/paquete-estandar) – plazos, hora de admisión, islas, aduana
 - [Correos: Paq Premium](https://www.correos.es/es/es/particulares/enviar/envios-nacionales/envio-rapido/paq-premium) – 24 a 48 horas
+- [Correos: Condiciones de los servicios de paquetería nacional](https://www.correos.es/content/dam/correos/documentos/productos/condicionados/Condicionado_Paqueteria_Nacional_202002.pdf) – sábados y 24 y 31 de diciembre fuera del plazo; Paq Estándar: 6 días más a Canarias, 48 horas más a Ceuta y Melilla
 - [Correos: Carta ordinaria](https://www.correos.es/es/es/particulares/enviar/envios-nacionales/burofax-cartas/carta/carta-ordinaria) – 3 días
 - [Correos: Que ningún regalo se quede por el camino](https://www.correos.es/es/es/actualidad/2026/que-ningun-regalo-se-quede-por-el-camino-con-correos) – regalos al extranjero
 - [Correos: Prepárate para el Black Friday](https://www.correos.es/es/es/actualidad/2025/preparate-para-el-black-friday--como-optimizar-tus-envios-con-co) – temporada alta
 - [Correos: Paquete Internacional Light](https://www.correos.es/es/es/particulares/enviar/enviar-al-extranjero/paquetes-al-extranjero/paquete-internacional-light) – plazos
 - [Correos: Paquete Internacional Económico](https://www.correos.es/es/es/particulares/enviar/enviar-al-extranjero/paquetes-al-extranjero/paquete-internacional-economico) – plazos
 - [Correos: Paquete Internacional Premium](https://www.correos.es/es/es/particulares/enviar/enviar-al-extranjero/paquetes-al-extranjero/paquete-internacional-premium) – días laborables, aduanas, hora de admisión
+- [Correos: Plazos de Entrega del Paquete Internacional Premium](https://www.correos.es/content/dam/correos/documentos/productos/condicionados/PAQ_PREMIUM_INTERNACIONAL_PLAZOS_DE_ENTREGA_COMPROMETIDOS_02-07-2018.pdf) – tabla de 2018: Alemania, Francia, Reino Unido, Estados Unidos y Argentina
 - [Correos: Situaciones especiales](https://www.correos.es/es/es/atencion-al-cliente/situaciones-especiales-distribucion) – Venezuela, Oriente Medio
 - [Correos: Estados Unidos](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/nueva-situacion-aduanera-eeuu) – envíos y aranceles
 - [Correos: Buzones mágicos](https://www.correos.com/sala-prensa/correos-instala-buzones-magicos-en-mas-de-600-oficinas-para-enviar-las-cartas-a-papa-noel-y-los-reyes-magos/) – cartas hasta el 5 de enero

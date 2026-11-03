@@ -13,7 +13,7 @@ Un paquete puede llegarte desde primera hora de la mañana hasta bien entrada la
 
 | Empresa | De lunes a viernes | Sábado | Domingo |
 | --- | --- | --- | --- |
-| [Correos](carrier:correos-spain) | No publica horario. Con Paq Premium, quien envía puede elegir franja, la última de 18:00 a 21:00 | Paq Premium y Paq Estándar no lo ofrecen | No lo ofrece |
+| [Correos](carrier:correos-spain) | No publica horario. Con Paq Premium, quien envía puede elegir franja, la última de 18:00 a 21:00 | No: según sus condiciones de paquetería, reparte de lunes a viernes | No lo ofrece |
 | [Correos Express](carrier:correos-express) | No publica horario; el seguimiento te da una hora estimada | Opción «Entrega en sábados» de Paq 24, en la Península, si la elige quien envía | No lo ofrece |
 | [GLS](carrier:gls-es) | «De 9 a 20h aproximadamente» | Antes de mediodía, solo con Express Saturday | No lo menciona |
 | [MRW](carrier:mrw) | Envíos contratados en su web, en la Península: antes de las 19:00 del día laborable siguiente | Sus páginas no lo dicen | Sus páginas no lo dicen |
@@ -29,7 +29,7 @@ Dos cosas que la tabla no cuenta:
 
 ## ¿Reparten paquetes los sábados y los domingos?
 
-**Los sábados**, casi siempre solo si quien envía lo ha pagado. La Ley 43/2010 obliga a Correos, como operador del servicio postal universal, a entregar «al menos, todos los días laborables, de lunes a viernes», y sus páginas de Paq Premium y Paq Estándar no ofrecen entrega en sábado. GLS, NACEX y Correos Express reparten en sábado solo como un servicio añadido que contrata el remitente, y CTT Express solo en Navidad.
+**Los sábados**, casi siempre solo si quien envía lo ha pagado. La Ley 43/2010 obliga a Correos, como operador del servicio postal universal, a entregar «al menos, todos los días laborables, de lunes a viernes», y sus condiciones de paquetería describen un servicio de lunes a viernes. GLS, NACEX y Correos Express reparten en sábado solo como un servicio añadido que contrata el remitente, y CTT Express solo en Navidad.
 
 **Los domingos**, solo Amazon dice que reparte: sus envíos Prime en un día incluyen «entregas en fin de semana en determinados códigos postales». Ninguna otra empresa de la tabla lo ofrece en sus páginas.
 
@@ -43,6 +43,7 @@ La franja es el intervalo en el que la empresa calcula que llegará a tu casa, s
 | --- | --- | --- |
 | GLS | Una franja estimada, «orientativa» | Con el estado `En reparto`; el seguimiento en tiempo real empieza cuando quedan menos de 10 paradas |
 | Correos Express | Una hora estimada | En el seguimiento |
+| Correos | Día y hora aproximados | Por notificación en la app de Correos, si estás registrado y aceptas sus notificaciones |
 
 Las demás no describen una franja en sus páginas de ayuda: cuenta con un día, no con una hora.
 
@@ -83,9 +84,9 @@ Peek consulta el seguimiento hasta una vez cada 2 minutos cuando el paquete est�
 
 ## ¿Reparten paquetes los festivos?
 
-Normalmente no. La ley solo obliga a Correos a repartir los días laborables, e InPost no lleva paquetes a sus Punto Pack y Lockers los festivos. Muchos festivos en España son autonómicos o locales, así que un paquete puede pararse en tu ciudad un día que en otra se reparte con normalidad.
+Normalmente no. Correos presta su servicio de paquetería «de lunes a viernes, excluidos días festivos», e InPost no lleva paquetes a sus Punto Pack y Lockers los festivos. Muchos festivos en España son autonómicos o locales, así que un paquete puede pararse en tu ciudad un día que en otra se reparte con normalidad.
 
-Los festivos tampoco cuentan en los plazos: una entrega en «24/48 horas laborables» se los salta. En la temporada navideña, CTT Express reparte también los sábados. Para las fechas límite de Navidad, mira [hasta cuándo enviar un paquete para que llegue en Navidad](guide:christmas-posting-dates).
+Los festivos tampoco cuentan en los plazos: una entrega en «24/48 horas laborables» se los salta. Correos, además, no cuenta los sábados ni el 24 y el 31 de diciembre en el plazo de sus paquetes. En la temporada navideña, CTT Express reparte también los sábados. Para las fechas límite de Navidad, mira [hasta cuándo enviar un paquete para que llegue en Navidad](guide:christmas-posting-dates).
 
 ## ¿Puedo recoger el paquete fuera del horario de reparto?
 
@@ -99,9 +100,9 @@ Sí, si va a un locker o a una tienda:
 Eso sí: un locker que abres a cualquier hora solo se llena los días de reparto. InPost no lleva paquetes a sus Punto Pack y Lockers ni sábados, ni domingos, ni festivos. Para que un paquete ya enviado vaya a otro sitio, mira [cómo cambiar la dirección de entrega](guide:change-delivery-address).
 
 :::sources
+- [Correos: Condiciones de los servicios de paquetería nacional](https://www.correos.es/content/dam/correos/documentos/productos/condicionados/Condicionado_Paqueteria_Nacional_202002.pdf) – de lunes a viernes sin festivos, sábados y 24 y 31 de diciembre fuera del plazo, día y hora aproximados en la app
 - [BOE: Ley 43/2010 del servicio postal universal](https://www.boe.es/buscar/act.php?id=BOE-A-2010-20139) – entregas al menos todos los días laborables, de lunes a viernes
-- [Correos: Paq Premium](https://www.correos.es/es/es/particulares/enviar/envios-nacionales/envio-rapido/paq-premium) – cuatro franjas, de 18:00 a 21:00, capitales y reparto de tarde; sin entrega en sábado entre sus opciones
-- [Correos: Paq Estándar](https://www.correos.es/es/es/particulares/enviar/envios-nacionales/envios-economicos/paquete-estandar) – sin entrega en sábado entre sus opciones
+- [Correos: Paq Premium](https://www.correos.es/es/es/particulares/enviar/envios-nacionales/envio-rapido/paq-premium) – cuatro franjas, de 18:00 a 21:00, capitales y reparto de tarde
 - [Correos: Aviso de llegada y SMS](https://www.correos.es/es/es/atencion-al-cliente/recibir/aviso-de-llegada) – 24 a 72 horas, segundo intento en 24 horas
 - [Correos: Citypaq](https://www.correos.es/es/es/particulares/recibir/nuestros-puntos-de-entrega-y-recogida/citypaq) – sin horarios
 - [Correos Express: Seguimiento de envíos](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio) – hora estimada, 24-48 horas sin cambios

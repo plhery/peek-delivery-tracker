@@ -4068,6 +4068,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "PostNL pakket volgen: track & trace, statussen, bezorging",
       "name": "PostNL",
       "color": "#ef7d00"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-pakket-volgen",
+      "title": "GZYL track & trace: pakket volgen met een YL…YQ-nummer",
+      "name": "GZYL",
+      "color": "#4e79e1"
     }
   ],
   "sv": [

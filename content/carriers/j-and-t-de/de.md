@@ -6,24 +6,26 @@ published: 2026-10-21
 updated: 2026-10-27
 ---
 
-J&T Express Germany ist das deutsche Netz von J&T Express und stellt Pakete in Deutschland zu. Hat ein Shop deine Bestellung mit J&T verschickt, beginnt die Sendungsnummer mit `JTDE`: Füg sie oben ins Feld ein oder schau in der Sendungsverfolgung von J&T unter www.jtexpress.de/tracking nach. Der Shop, der deine Bestellung verschickt hat, kennt die Nummer: Sie steht in seiner Versand-E-Mail oder in deinen Bestelldetails. Diese Seite stützt sich nicht auf die Website von J&T Express Germany, sondern auf das, was Peeks Code über die Sendungsverfolgung von J&T weiß, und auf deutsches Recht.
+J&T Express Germany (J&T Express Germany GmbH aus Frankfurt am Main) ist das deutsche Netz der Paketgruppe J&T Express und stellt Pakete in Deutschland zu. Hat ein Shop deine Bestellung mit J&T verschickt, beginnt die Sendungsnummer mit `JTDE`: Füg sie oben ins Feld ein oder schau in der [Sendungsverfolgung auf jtexpress.de](https://www.jtexpress.de/tracking) nach. Der Shop, der deine Bestellung verschickt hat, kennt die Nummer: Sie steht in seiner Versand-E-Mail oder in deinen Bestelldetails.
 
 ## J&T Sendungsnummer: wie sie aussieht und wo du sie findest
 
-Die Sendungsnummer von J&T Express Germany besteht aus `JTDE` und 12 Ziffern, 16 Zeichen insgesamt. Eine andere Form kennt Peek für sie nicht. Mit erfundenen Ziffern:
+Laut FAQ von J&T beginnt die Sendungsnummer mit JTDE. Peek kennt dafür nur eine Form: `JTDE` und 12 Ziffern, 16 Zeichen insgesamt. Mit erfundenen Ziffern:
 
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
 | `JTDE000000000000` | `JTDE` und 12 Ziffern: ein Paket von J&T Express Germany. Peek erkennt J&T Express Germany sofort. |
 | `JTDE00000000000` | Eine Ziffer zu wenig: keine Nummer von J&T Express Germany, und Peek erkennt keinen Paketdienst. Prüf, ob eine Ziffer fehlt. |
 
-**Wo sie steht.** In der Versand-E-Mail des Shops, auf der Bestellseite des Shops oder Marktplatzes oder in jeder Nachricht zur Zustellung. Findest du sie nicht, lies nach, [wie du die Sendungsnummer findest](guide:find-tracking-number), oder frag den Shop.
+**Wo sie steht.** Laut J&T bekommst du sie vom Absender, und sie steht auf der Bestellseite des Online-Shops, in der Bestellbestätigung, in der Versandbenachrichtigung per E-Mail oder SMS, in E-Mails vor oder nach der Zustellung und auf dem Paketschein. Findest du sie nicht, schickt dich J&T zum Absender oder zum Kundenservice der Einkaufsplattform. Lies auch nach, [wie du die Sendungsnummer findest](guide:find-tracking-number).
 
-**Ähnliche Nummern.** Die J&T-Netze anderer Länder haben eigene Sendungsverfolgungen und Nummern: `JTUK` mit 12 Ziffern gehört zu J&T Express UK, `JTAU` mit 12 Ziffern zu J&T Express Australia, `JTE` mit 12 Ziffern zu J&T Express Middle East, und `JT` mit 13 Ziffern nutzt J&T in Südostasien und in China. Nur `JTDE` gehört zum deutschen Netz. Zeigt Peek weiter „Warten auf den Paketdienst“, vergleich die Nummer mit der E-Mail des Shops oder frag den Shop.
+Die Sendungsverfolgung von J&T nimmt bis zu 10 Nummern pro Abfrage an, getrennt durch Leerzeichen oder Kommas.
+
+**Ähnliche Nummern.** Die J&T-Netze anderer Länder haben eigene Sendungsverfolgungen und Nummern: `JTUK` mit 12 Ziffern gehört zu J&T Express UK, `JTAU` mit 12 Ziffern zu J&T Express Australia, `JTE` mit 12 Ziffern zu J&T Express Middle East, und `JT` mit 13 Ziffern nutzt J&T in Südostasien und in China. Nur `JTDE` gehört zum deutschen Netz. Meldet die Sendungsverfolgung von J&T `Keine Abfrageergebnisse` oder zeigt Peek weiter „Warten auf den Paketdienst“, vergleich die Nummer mit der E-Mail des Shops oder frag den Shop.
 
 ## J&T Sendungsverfolgung: was die Status bedeuten
 
-In der Sendungsverfolgung von J&T besteht jeder Scan aus einer Uhrzeit und einem Satz, ohne Ort. Peek fragt die Sätze auf Englisch ab und übersetzt sie nicht, auch nicht in der deutschen App. Diese Sätze zeigt Peek, in der Reihenfolge, in der ein Paket sie durchläuft:
+In der Sendungsverfolgung von J&T besteht jeder Scan aus einer Uhrzeit und einem Satz, ohne Ort. Die Seite ist zunächst auf Deutsch; stellst du sie im Sprachmenü auf Englisch oder Chinesisch um, lädt sie die Scans in dieser Sprache neu. Peek fragt die Sätze auf Englisch ab und übersetzt sie nicht, auch nicht in der deutschen App. Diese Sätze zeigt Peek, in der Reihenfolge, in der ein Paket sie durchläuft:
 
 | J&T schreibt | Was es für dich heißt | Peek zeigt |
 | --- | --- | --- |
@@ -50,35 +52,45 @@ Den Satz zum Verladen kann es mehrmals geben: J&T schreibt ihn bei jeder Zustell
 
 Ein beim Nachbarn abgegebenes Paket steht in Peek also als `Your package has been successfully delivered. The delivery type is Left with neighbor.`
 
-**Welcher Nachbar?** Peek zeigt nur, dass das Paket bei einem Nachbarn liegt: keinen Namen und keine Adresse. Namen und Telefonnummern in einer Zeile von J&T lässt Peek weg.
+**Welcher Nachbar?** In der Sendungsverfolgung von J&T steht unter diesem Scan `Zustelldetails anzeigen`. Klick darauf und gib die Postleitzahl der Empfängeradresse ein, dann siehst du Namen und Hausnummer des Nachbarn. Nach fünf falschen Postleitzahlen musst du eine Weile warten, bevor du es erneut versuchst. Peek fragt ohne Postleitzahl ab und zeigt nur, dass das Paket bei einem Nachbarn liegt: keinen Namen und keine Adresse. Namen und Telefonnummern in einer Zeile von J&T lässt Peek weg.
 
-## J&T Zustellung: was die Sendungsverfolgung verrät
+## J&T Zustellung: Nachbar, Ablageort und Zustellfoto
 
 In den Verläufen, die Peeks Code kennt, lädt der Zusteller von J&T das Paket für eine Zustelltour ein und stellt es dann zu oder meldet, warum die Zustellung gescheitert ist. Eine Übergabe an einen anderen Paketdienst zeigt Peeks Code nicht: Die Sendungsverfolgung von J&T begleitet das Paket bis zu deiner Tür.
 
 **In Zustellung.** `Your package has been loaded and is on its way to you` heißt: Dein Paket ist auf einer Zustelltour. In diesen Verläufen kommt die Zeile Stunden vor der Zustellung, am selben Morgen. Ein Zeitfenster oder einen erwarteten Zustelltag gibt die Sendungsverfolgung von J&T nicht an, also kann Peek auch keinen zeigen.
 
-**Verweigert oder Adresse nicht gefunden.** Nach `Delivery failed, customer refused to accept` hat der Zusteller das Paket in den Verläufen, die Peeks Code kennt, am nächsten Morgen für eine neue Tour verladen. Nach `Delivery failed because the address could not be found` prüf die Adresse in deiner Bestellung. Fehlt etwas, etwa der Name am Klingelschild oder die Wohnungsnummer, sag dem Shop sofort Bescheid: Er hat die Zustellung mit der Adresse gebucht, die du ihm gegeben hast. Auf eine gescheiterte Zustellung kann `Returns have begun` folgen. Mehr in [Lieferadresse ändern](guide:change-delivery-address) und [Zustellung verpasst](guide:missed-delivery).
+**Zustellpräferenzen.** In deiner Versandbenachrichtigung steckt ein Link zur Seite [„Zustellpräferenzen festlegen“](https://www.jtexpress.de/delivery-preference). Dort bestätigst du deine Postleitzahl und wählst aus den Zustellarten, die J&T dir anbietet: mit Unterschrift „Vom Empfänger unterschrieben“, „Beim Nachbarn abgegeben“ (mit dem Namen des Nachbarn und ob er nebenan oder auf derselben Etage wohnt) oder „Empfang/Reception“; ohne Unterschrift Haustür oder Veranda, Garten oder Hof, Briefkasten oder Garage. Laut J&T hält sich der Zusteller an deine Wahl. Wählst du einen Ort ohne Unterschrift, weist die Seite darauf hin, dass du das Verlustrisiko trägst, sobald das Paket dort liegt. Lässt der Stand der Sendung keine Wahl mehr zu, sagt sie dir das.
 
-**Zustellversuche, Ablageort, Abholung.** Die Website von J&T dient dieser Seite nicht als Quelle. Wie oft J&T eine Zustellung versucht, ob du einen Ablageort wählen kannst und wie lange J&T ein nicht zugestelltes Paket aufbewahrt, steht deshalb hier nicht. Keine Zeile von J&T Express Germany, die Peeks Code kennt, schickt ein Paket zum Abholen in einen Paketshop oder an einen Paketautomaten. Frag den Shop oder schau in deine Nachrichten zur Zustellung.
+**Zustellfoto.** Laut dem Datenschutzhinweis zum fotografischen Zustellnachweis macht der Zusteller ein Foto vom Paket, wenn er es dir gibt oder am vereinbarten Ort abstellt. Auf dem Bild sollen nur das Paket und so viel vom Ablageort wie nötig zu sehen sein; wer versehentlich mit draufkommt, wird automatisch unkenntlich gemacht. J&T löscht das Foto in der Regel 6 Monate nach der Zustellung; geht in dieser Zeit eine Reklamation ein, kann es bis zu deren Abschluss gespeichert bleiben. Um eine Reklamation zu klären, kann J&T es dem Absender zeigen.
+
+**Verweigert oder Adresse nicht gefunden.** Nach `Delivery failed, customer refused to accept` hat der Zusteller das Paket in den Verläufen, die Peeks Code kennt, am nächsten Morgen für eine neue Tour verladen. Nach `Delivery failed because the address could not be found` prüf die Adresse in deiner Bestellung. Fehlt etwas, etwa der Name am Klingelschild oder die Wohnungsnummer, sag dem Shop sofort Bescheid: Er hat die Zustellung mit der Adresse gebucht, die du ihm gegeben hast. Auch die FAQ von J&T schickt dich bei einer falschen Adresse gleich zum Absender oder zur Einkaufsplattform: Ob sich die Adresse nach dem Versand noch ändern lässt, hängt davon ab, wo das Paket gerade ist und was der Absender zulässt. Auf eine gescheiterte Zustellung kann `Returns have begun` folgen. Mehr in [Lieferadresse ändern](guide:change-delivery-address) und [Zustellung verpasst](guide:missed-delivery).
+
+**Zustellversuche und Abholung.** Wie oft J&T eine Zustellung versucht, wie lange es ein Paket lagert und zu welchen Uhrzeiten es zustellt, nennt die Website von J&T nicht. Paketshops, Paketautomaten oder Depots zum Abholen nennt sie auch keine, und keine Zeile von J&T Express Germany, die Peeks Code kennt, schickt ein Paket dorthin. Frag den Shop oder schau in deine Nachrichten zur Zustellung.
 
 ## J&T-Paket kommt nicht an, ist weg oder geht zurück
 
 Den Auftrag an J&T hat der Shop erteilt, bei einem Online-Kauf ist er also deine erste Adresse. Kaufst du als Verbraucher, trägt der Händler das Transportrisiko, außer du hast den Paketdienst selbst beauftragt und der Händler hatte ihn dir nicht vorher genannt (§ 475 BGB).
 
-**Keine Bewegung.** Zeigt ein Paket „Beim Paketdienst eingegangen“ oder „Unterwegs“ und kommt vier Tage lang keine neue Zeile, markiert Peek es („Seit vier Tagen keine Aktualisierung“) und zeigt den Link „Hol dir Hilfe bei J&T Express Germany“. Tut sich danach nichts, frag den Shop. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Keine Bewegung.** Laufzeiten für Empfänger nennt J&T nicht. Zeigt ein Paket „Beim Paketdienst eingegangen“ oder „Unterwegs“ und kommt vier Tage lang keine neue Zeile, markiert Peek es („Seit vier Tagen keine Aktualisierung“) und zeigt den Link „Hol dir Hilfe bei J&T Express Germany“. Tut sich danach nichts, frag den Shop oder ruf mit deiner Sendungsnummer bei der Hotline von J&T an. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Noch keine Sendungsverfolgung.** Kennt die Sendungsverfolgung von J&T die Nummer noch nicht, zeigt Peek „Warten auf den Paketdienst“. Shops legen die Nummer oft an, bevor sie das Paket übergeben. Bleibt es mehrere Tage dabei, lass dir die Nummer vom Shop bestätigen und frag, ob das Paket wirklich verschickt wurde.
 
-**Zugestellt, aber nicht da.** Lies den Zustellsatz in Peek: Nennt er einen Ort, etwa `Mailbox` oder `Garage`, schau dort nach. Steht dort `Left with neighbor`, frag deine Nachbarn. Immer noch nichts? Melde es dem Shop mit deiner Sendungsnummer und bitte um Erstattung oder ein neues Paket. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
+**Zugestellt, aber nicht da.** Lies den Zustellsatz in Peek: Nennt er einen Ort, etwa `Mailbox` oder `Garage`, schau dort nach. Steht dort `Left with neighbor`, frag deine Nachbarn oder lass dir in der Sendungsverfolgung von J&T zeigen, welcher es ist (siehe oben). Die FAQ von J&T rät außerdem nachzufragen, ob Familie, Nachbarn, die Hausverwaltung oder andere Berechtigte das Paket angenommen haben. Immer noch nichts? Melde es der Hotline von J&T und bitte den Shop mit deiner Sendungsnummer um Erstattung oder ein neues Paket. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-**Verloren, beschädigt oder zurück.** Bitte den Shop mit deiner Sendungsnummer um Erstattung oder Ersatz. Regeln von J&T für Reklamationen nennt diese Seite nicht. Mehr in [Paket verloren](guide:lost-parcel), [Paket beschädigt](guide:damaged-parcel) und [Paket zurück an den Absender](guide:returned-to-sender).
+**Verloren, beschädigt oder zurück.** Bitte den Shop mit deiner Sendungsnummer um Erstattung oder Ersatz. Ein Schadensformular, Fristen oder eine Entschädigung für Empfänger nennt die FAQ von J&T nicht. Mehr in [Paket verloren](guide:lost-parcel), [Paket beschädigt](guide:damaged-parcel) und [Paket zurück an den Absender](guide:returned-to-sender).
 
 ## J&T Kontakt und Kundenservice
 
-Stand 2. November 2026 nennt diese Seite keine Telefonnummer, keine E-Mail-Adresse und keinen Chat von J&T Express Germany: Peek gibt nur Kontakte an, die auf den eigenen Seiten eines Paketdienstes stehen, und die Website von J&T dient dieser Seite nicht als Quelle.
+So stand es am 3. November 2026 auf der [Kontaktseite von J&T](https://www.jtexpress.de/contact):
 
-Wende dich zuerst an den Shop: Er hat die Zustellung bei J&T gebucht. Bei einer Bestellung auf einem Marktplatz nutzt du die Hilfe auf der Bestellseite. Die Sendungsverfolgung von J&T findest du unter www.jtexpress.de/tracking. Bei einem Paket, das sich nicht mehr bewegt, öffnet der Link „Hol dir Hilfe bei J&T Express Germany“ in Peek die Kontaktseite von J&T.
+- **Hotline:** +49 6931090650, Mo. – Fr. 8:00 bis 20:00 Uhr, an Feiertagen geschlossen.
+- **Live-Chat:** „Chat starten“ auf der Kontakt- und der FAQ-Seite.
+- **E-Mail:** de-jtservice@jtexpress.de.
+- **Büro:** J&T Express Germany GmbH, Am Giener 2, 55268 Nieder-Olm. Das Impressum nennt als Anschrift Wiesenhüttenstraße 11, 60329 Frankfurt am Main.
+- **Zustellfotos und Datenschutz:** de-dpo@jtexpress.de (aus dem Datenschutzhinweis zum Zustellfoto).
+
+Bei einer Online-Bestellung ist trotzdem der Shop deine erste Adresse: Er hat die Zustellung bei J&T gebucht. Bei einer Bestellung auf einem Marktplatz nutzt du die Hilfe auf der Bestellseite. Bei einem Paket, das sich nicht mehr bewegt, öffnet der Link „Hol dir Hilfe bei J&T Express Germany“ in Peek die Kontaktseite von J&T.
 
 ## J&T-Paket mit Peek verfolgen
 
@@ -94,25 +106,33 @@ Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung
 
 ### Ist J&T Express Germany seriös?
 
-Es ist ein echter Paketdienst: das deutsche Netz von J&T Express, das Peeks Katalog auch als J&T Express Germany GmbH führt. Seine Sendungsverfolgung kennt `JTDE`-Nummern, und jeder Satz in der Statustabelle oben stammt aus der Sendungsverfolgung echter Pakete von J&T Express Germany. Angaben zum Unternehmen macht diese Seite nicht, weil die Website von J&T ihr nicht als Quelle dient.
+Ja. Die J&T Express Germany GmbH mit Sitz in Frankfurt am Main ist die deutsche Gesellschaft von J&T Express, einer 2015 in Indonesien gegründeten und in Hongkong börsennotierten Paketgruppe. J&T wirbt bundesweit um Franchise-Partner, die auf der letzten Meile Pakete zustellen und abholen. Jeder Satz in der Statustabelle oben stammt aus der Sendungsverfolgung echter Pakete von J&T Express Germany.
 
 ### Welcher Nachbar hat mein J&T-Paket?
 
-Das kann Peek dir nicht sagen. Steht im Zustellsatz `Left with neighbor`, zeigt Peek genau das, ohne Namen und Adresse. Frag deine Nachbarn. Hat es keiner, wende dich an den Shop.
+Das zeigt die Sendungsverfolgung von J&T: Klick unter dem Zustellscan auf `Zustelldetails anzeigen` und gib die Postleitzahl der Empfängeradresse ein, dann siehst du Namen und Hausnummer des Nachbarn. Peek zeigt nur `Left with neighbor`, ohne Namen und Adresse.
 
 ### Hat J&T Express Paketshops in Deutschland?
 
-Peeks Code kennt keine. Im Zustellsatz zeigt Peek nur diese Zustellarten: beim Nachbarn, an der Haustür, am Empfang, im Garten, im Briefkasten oder in der Garage. Keine Zeile von J&T Express Germany, die Peek kennt, schickt ein Paket in einen Paketshop oder an einen Paketautomaten.
+Die deutsche Website von J&T nennt keine, und keine Zeile von J&T Express Germany, die Peek kennt, schickt ein Paket in einen Paketshop oder an einen Paketautomaten. Über die Zustellpräferenzen kannst du dir die Zustellung an dich, an einen Nachbarn, am Empfang oder an einen Ablageort an deiner Adresse wünschen.
 
 ### Warum findet die J&T Sendungsverfolgung meine Nummer nicht?
 
-Prüf, ob sie mit `JTDE` beginnt und danach 12 Ziffern hat: Nummern aus anderen J&T-Netzen, etwa `JTUK` aus Großbritannien, sind keine deutschen. Stimmt die Nummer, hat J&T das Paket vielleicht noch nicht. Peek zeigt bis zum ersten Scan „Warten auf den Paketdienst“. Dauert das mehrere Tage, frag den Shop.
+Prüf, ob sie mit `JTDE` beginnt und danach 12 Ziffern hat: Nummern aus anderen J&T-Netzen, etwa `JTUK` aus Großbritannien, sind keine deutschen. Stimmt die Nummer, hat J&T das Paket vielleicht noch nicht: Die Sendungsverfolgung von J&T meldet dann `Keine Abfrageergebnisse`, Peek zeigt bis zum ersten Scan „Warten auf den Paketdienst“. Dauert das mehrere Tage, frag den Shop.
 
 ### Wie erreiche ich J&T Express in Deutschland?
 
-Frag zuerst den Shop: Er hat die Zustellung gebucht. Eine Telefonnummer oder E-Mail-Adresse nennt diese Seite nicht. Bei einem Paket, das sich nicht mehr bewegt, öffnet der Link „Hol dir Hilfe bei J&T Express Germany“ in Peek die Kontaktseite von J&T.
+Ruf +49 6931090650 an (Mo. – Fr. 8:00 bis 20:00 Uhr), nutze den Live-Chat auf jtexpress.de oder schreib an de-jtservice@jtexpress.de. Bei einer Online-Bestellung frag aber zuerst den Shop: Er hat die Zustellung gebucht.
 
 :::sources
+- [J&T Express: Sendungsverfolgung](https://www.jtexpress.de/tracking) – Abfrage, bis zu 10 Nummern, Sprachen, Scans neu laden, Meldung ohne Ergebnis, Nachbardetails mit Postleitzahl, fünf Versuche
+- [J&T Express: Häufig gestellte Fragen](https://www.jtexpress.de/faq) – JTDE-Nummern und wo sie stehen, zugestellt aber nicht erhalten, falsche Adresse, Live-Chat; keine Laufzeiten, Zustellversuche oder Schadensregeln
+- [J&T Express: Zustellpräferenzen festlegen](https://www.jtexpress.de/delivery-preference) – Link in der Versandbenachrichtigung, Postleitzahl, Zustellarten mit und ohne Unterschrift, Verlustrisiko
+- [J&T Express: Kontaktieren Sie uns](https://www.jtexpress.de/contact) – Hotline, Servicezeiten, Chat, E-Mail, Büroadresse
+- [J&T Express: Impressum](https://www.jtexpress.de/legal-statement) – J&T Express Germany GmbH, Frankfurt am Main
+- [J&T Express: POD Datenschutzerklärung](https://www.jtexpress.de/pod-policy) – Zustellfoto, 6 Monate, Reklamation, Datenschutzkontakt
+- [J&T Express: Werden Sie unser Partner](https://www.jtexpress.de/career) – Franchise-Partner für Zustellung und Abholung auf der letzten Meile
+- [J&T Express: Über uns](https://www.jtexpress.de/about) – Gründung 2015 in Indonesien, Börsennotierung in Hongkong
 - [Universal Parcel Scraper: J&T Express Germany](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-de) – Namen, JTDE-Nummern, Tracking-Links, Sätze der Sendungsverfolgung von echten Paketen und ihre Status, Zustelltouren, Zustellarten, was Peek weglässt, Hilfeseite
 - [Universal Parcel Scraper: gemeinsame Abfrage der J&T-Netze](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – englische Sätze, genaue Scanzeiten, kein Ort, kein Zustelltag, kein Gewicht, Namen und Telefonnummern weggelassen, neueste 100 Scans
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummern anderer J&T-Netze, keine Übergabe an einen anderen Paketdienst, Tracking-Dienste als Rückfall

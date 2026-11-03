@@ -1403,9 +1403,10 @@ export class TrackingRouter {
     const priority = sources.find((source) => source === priorityUniversalSource(universalNumber));
     // Providers with fuller history for this carrier come before the one the parcel stays with.
     const fuller = preferred ? richerSources.filter((source) => plan.rank(source) < plan.rank(preferred)) : [];
-    // The discovery cursor rotates which aggregator a check starts with.
-    // Postal Ninja and UPU keep their place after the others.
-    const rotation: UniversalSource[] = richerSources.filter((source) => source !== 'Postal Ninja');
+    // The discovery cursor rotates which aggregator a check starts with. Postal Ninja, Track718
+    // (last in Juxi's plan: a browser read that rarely holds a parcel the others lack) and UPU
+    // keep their place after the others.
+    const rotation: UniversalSource[] = richerSources.filter((source) => source !== 'Postal Ninja' && source !== 'Track718');
     const offset = state.discovery_cursor % Math.max(1, rotation.length);
     const everyProvider = [...new Set<UniversalSource>([...(sources.includes('Track123') ? ['Track123' as const] : []), ...(priority ? [priority] : []), ...fuller, ...(preferred ? [preferred] : []), ...rotation.slice(offset), ...rotation.slice(0, offset),
       ...sources])];

@@ -1618,6 +1618,24 @@ describe('persistent tracking routing', () => {
     }
     expect(starts).toEqual(['ParcelsApp', 'Ship24', '17TRACK', 'ParcelsApp']);
   });
+  it('never starts a Juxi check with Track718, which its plan keeps last', async () => {
+    let elapsed = 0;
+    vi.spyOn(performance, 'now').mockImplementation(() => elapsed);
+    const { direct, universal, health } = setup();
+    universal.mockImplementation(async () => { elapsed += 200_000; throw new Error('overrun'); });
+    const router = new TrackingRouter({ direct, universal, health, now: () => time });
+    let routing: JsonObject = state({ discovery_cursor: 3 });
+    const starts: string[] = [];
+    for (let check = 0; check < 4; check++) {
+      universal.mockClear();
+      const deferred = await router.fetch(parcel({ tracking_number: 'JXCAB0123456789YQ', carrier_data: { routing } }), false)
+        .catch((error: unknown) => error);
+      expect(deferred).toBeInstanceOf(RoutingDeferred);
+      starts.push(universal.mock.calls[0][0]);
+      routing = { ...(deferred as RoutingDeferred).routing, failures: {} };
+    }
+    expect(starts).toEqual(['ParcelsApp', 'Ship24', '17TRACK', 'ParcelsApp']);
+  });
   it('counts contacted providers so a check that reached nobody is not health evidence', async () => {
     const { router, direct, universal } = setup();
     direct.mockRejectedValue(new Error('carrier down'));

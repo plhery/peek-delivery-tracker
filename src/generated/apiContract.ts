@@ -8754,7 +8754,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "econt",
-      "recognitionRank": 290
+      "recognitionRank": 290,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://www.econt.com/services/track-shipment/{trackingNumber}",
     "linkRules": [
@@ -8780,7 +8781,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{13}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.econt.com/services/track-shipment"
   },
   "elta": {

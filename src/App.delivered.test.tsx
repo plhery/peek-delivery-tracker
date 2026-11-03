@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { throwConfetti } from './lib/deliveredConfetti';
@@ -113,5 +113,136 @@ describe('a parcel delivered since the list was last shown', () => {
     // The list under the page is out of reach, so it is read from the page itself.
     await waitFor(() => expect(document.querySelector('.parcel-section--past [data-parcel-id="tea"]')).toBeInTheDocument());
     expect(document.querySelector('[data-arrived]')).toBeNull();
+  });
+});
+
+describe('a parcel delivered while the list was out of view', () => {
+  beforeEach(() => {
+    window.history.replaceState({}, '', '/');
+    Element.prototype.animate = (() => ({ finished: new Promise(() => undefined), addEventListener() {}, cancel() {}, finish() {} })) as unknown as typeof Element.prototype.animate;
+  });
+
+  afterEach(() => {
+    delete (Element.prototype as Partial<Element>).animate;
+    delete (document as Partial<Document> & { hidden?: boolean }).hidden;
+    vi.mocked(throwConfetti).mockClear();
+  });
+
+  /** The page opened again: the saved list it starts from, and the service's answer. */
+  function visit(cached: ParcelWithEvents[], answer: ParcelWithEvents[] | Promise<ParcelWithEvents[]> = cached, mode: ParcelRepo['mode'] = 'api') {
+    const service: ParcelRepo = { ...repo(), mode, cachedList: () => cached, list: vi.fn().mockReturnValue(Promise.resolve(answer)) };
+    return render(<ParcelsProvider repo={service}><App /></ParcelsProvider>);
+  }
+  const rests = () => new Promise((resolve) => setTimeout(resolve, 1200));
+  /** The tea, its whole journey `hours` earlier. */
+  const teaDelivered = (hours: number) => {
+    const tea = parcel('tea', 'Tea', [...onItsWay, 'delivered']);
+    return { ...tea, events: tea.events.map((event) => ({ ...event, occurredAt: new Date(Date.parse(event.occurredAt) - hours * HOUR).toISOString() })) };
+  };
+
+  it('arrives on the list once its page has gone back, and stays what it is under a finger', async () => {
+    let answer!: (parcels: ParcelWithEvents[]) => void;
+    visit(saved, new Promise((resolve) => { answer = resolve; }));
+    fireEvent.click(tea(active())!);
+    expect(await screen.findByRole('dialog', { name: 'Tea' })).toBeInTheDocument();
+    // The news lands under its page: the list there takes it at once, unseen.
+    await act(async () => answer(fresh));
+    await waitFor(() => expect(document.querySelector('.parcel-section--past [data-parcel-id="tea"]')).toBeInTheDocument());
+    expect(document.querySelector('[data-arrived]')).toBeNull();
+
+    act(() => window.history.back());
+    await waitFor(() => expect(tea(active())).toHaveAccessibleName(/^Tea — Delivered/));
+    expect(tea(active())!.closest('.parcel-card-swipe')).toHaveAttribute('data-arrived');
+    fireEvent.pointerDown(window);
+    await waitFor(() => expect(throwConfetti).toHaveBeenCalledWith(document.querySelector('.deliveries-page'), ['tea'], expect.anything()));
+    await rests();
+    expect(tea(active())).toBeInTheDocument();
+    fireEvent.pointerUp(window);
+    await waitFor(() => expect(tea(past())).toBeInTheDocument());
+    expect(tea(active())).toBeNull();
+    expect(throwConfetti).toHaveBeenCalledTimes(1);
+  });
+
+  it('arrives after a reload, once', async () => {
+    visit(saved).unmount();
+    visit(fresh);
+    await waitFor(() => expect(tea(active())).toHaveAccessibleName(/^Tea — Delivered/));
+    await waitFor(() => expect(throwConfetti).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(tea(past())).toBeInTheDocument());
+    cleanup();
+
+    visit(fresh);
+    expect(tea(past())).toBeInTheDocument();
+    await rests();
+    expect(document.querySelector('[data-arrived]')).toBeNull();
+    expect(throwConfetti).toHaveBeenCalledTimes(1);
+  });
+
+  it('waits in a hidden tab until the tab is shown', async () => {
+    visit(saved).unmount();
+    Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
+    visit(fresh);
+    await waitFor(() => expect(tea(active())).toHaveAccessibleName(/^Tea — Delivered/));
+    await rests();
+    expect(tea(active())).toBeInTheDocument();
+    expect(throwConfetti).not.toHaveBeenCalled();
+
+    Object.defineProperty(document, 'hidden', { configurable: true, get: () => false });
+    act(() => { document.dispatchEvent(new Event('visibilitychange')); });
+    await waitFor(() => expect(throwConfetti).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(tea(past())).toBeInTheDocument());
+  });
+
+  it('comes back after a page that opened before its paper, but not once its paper was thrown', async () => {
+    visit(saved).unmount();
+    visit(fresh);
+    // Opened at once, before its paper: the moment is still to come.
+    fireEvent.click(await waitFor(() => {
+      const card = tea(active());
+      expect(card).toHaveAccessibleName(/^Tea — Delivered/);
+      return card!;
+    }));
+    expect(await screen.findByRole('dialog', { name: 'Tea' })).toBeInTheDocument();
+    expect(throwConfetti).not.toHaveBeenCalled();
+    act(() => window.history.back());
+    await waitFor(() => expect(tea(active())).toHaveAccessibleName(/^Tea — Delivered/));
+    await waitFor(() => expect(throwConfetti).toHaveBeenCalledTimes(1));
+    // Opened once the paper has flown, it is not shown arriving again.
+    fireEvent.click(tea(active())!);
+    expect(await screen.findByRole('dialog', { name: 'Tea' })).toBeInTheDocument();
+    act(() => window.history.back());
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Tea' })).toBeNull());
+    await rests();
+    expect(tea(past())).toBeInTheDocument();
+    expect(document.querySelector('[data-arrived]')).toBeNull();
+    expect(throwConfetti).toHaveBeenCalledTimes(1);
+  });
+
+  it('leaves a delivery older than a week, an archived parcel and the demo where they are', async () => {
+    visit(saved).unmount();
+    const archived = { ...parcel('lamp', 'Lamp', [...onItsWay, 'delivered']), archivedAt: new Date().toISOString() };
+    visit([teaDelivered(8 * 24), archived, saved[2]]);
+    await rests();
+    expect(document.querySelector('[data-arrived]')).toBeNull();
+    expect(screen.getByRole('heading', { name: 'Everything has arrived.' })).toBeInTheDocument();
+    cleanup();
+
+    visit(saved, saved, 'demo').unmount();
+    visit(fresh, fresh, 'demo');
+    await rests();
+    expect(document.querySelector('[data-arrived]')).toBeNull();
+    expect(throwConfetti).not.toHaveBeenCalled();
+  });
+
+  it('takes its place at once where nothing can be shown moving, and does not come back', async () => {
+    visit(saved).unmount();
+    delete (Element.prototype as Partial<Element>).animate;
+    visit(fresh).unmount();
+    Element.prototype.animate = (() => ({ finished: new Promise(() => undefined), addEventListener() {}, cancel() {}, finish() {} })) as unknown as typeof Element.prototype.animate;
+    visit(fresh);
+    await rests();
+    expect(tea(past())).toBeInTheDocument();
+    expect(document.querySelector('[data-arrived]')).toBeNull();
+    expect(throwConfetti).not.toHaveBeenCalled();
   });
 });

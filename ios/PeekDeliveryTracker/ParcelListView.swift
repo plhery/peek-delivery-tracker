@@ -363,20 +363,44 @@ private struct DeliveryListView: View {
             // The store announces its next list before it shows it: what was shown is still at hand.
             .onReceive(store.$parcels) { next in
                 delivered.receive(shown: store.parcels, next: next, watching: watching)
+                see(next)
             }
+            .onChange(of: looking, initial: true) { _, looking in if looking { see(store.parcels) } }
             .onChange(of: watching) { _, watching in if !watching { delivered.release() } }
             .task(id: delivered.ids) {
                 guard !delivered.isEmpty else { return }
                 do {
-                    // The postmark lands, then the card has a moment to be read before it leaves.
-                    try await Task.sleep(for: .milliseconds(300))
+                    // The postmark lands, then the card has a moment to be read before it leaves. A list coming
+                    // into view has its cards come to rest first.
+                    try await Task.sleep(for: .milliseconds(delivered.late ? 700 : 300))
                     postmarks += 1
                     throwPaper()
+                    // Shown delivered: not again, even should the list go out of view before the card leaves.
+                    delivered.stamp()
+                    OnTheWayRecord().forget(delivered.ids)
                     try await Task.sleep(for: .milliseconds(650))
                 } catch { return }
                 letGo()
             }
             .overlay { DeliveredPaper(burst: paper) }
+    }
+
+    /// The list is in view, showing `parcels`. Those it last showed on their way that have arrived since it was out of
+    /// view arrive on it now, as one seen arriving would; under Reduce Motion they take their places at once, and the
+    /// moment counts for a rating all the same. The demo's parcels are left out.
+    private func see(_ parcels: [Parcel]) {
+        guard looking, !store.isDemo else { return }
+        let record = OnTheWayRecord()
+        let missed = record.arrivals(in: parcels, at: Date()).filter { !delivered.holds($0.id) }
+        if !missed.isEmpty {
+            if watching { delivered.catchUp(missed) } else { sawArrival() }
+        }
+        record.seen(parcels, holding: delivered.unstamped)
+    }
+
+    /// The reader saw a parcel arrive: the moment to ask for a rating, once its card has landed.
+    private func sawArrival() {
+        if ReviewPrompt().isDue(at: Date(), calm: settled) { reviewDue = true }
     }
 
     /// Paper for the parcels that have just arrived: one burst however many they are, out of Pip's open box
@@ -1357,11 +1381,14 @@ private struct DeliveryListView: View {
         )
     }
 
-    /// Whether the list is looked at, and may show a card moving.
-    private var watching: Bool {
+    /// Whether the list is looked at, whole and in its own order, with nothing over it.
+    private var looking: Bool {
         isSelected && scenePhase == .active && listShown && !showingAdd && !showingAccount && !showingFilters
-            && sitePage == nil && !prompts.covers && !hasCustomView && !reduceMotion
+            && sitePage == nil && !prompts.covers && !hasCustomView
     }
+
+    /// Whether the list is looked at, and may show a card moving.
+    private var watching: Bool { looking && !reduceMotion }
 
     /// Nothing in the app stands in the way of asking for a rating (`ReviewPrompt.settled`).
     private var settled: Bool {
@@ -1371,7 +1398,7 @@ private struct DeliveryListView: View {
     /// The list could ask for a rating now: it is looked at with its cards at rest, and nothing is said at its foot or
     /// over it, nor over the parcel beside it.
     private var reviewReady: Bool {
-        watching && !listCovered && !pageCovered && delivered.isEmpty && flights.isEmpty && toast == nil
+        looking && !listCovered && !pageCovered && delivered.isEmpty && flights.isEmpty && toast == nil
             && store.undoParcel == nil && !shouldShowNotificationInvitation && !store.refreshing && !showingSearch && settled
     }
 
@@ -1400,8 +1427,7 @@ private struct DeliveryListView: View {
     private func letGo() {
         let ids = delivered.ids
         guard !ids.isEmpty else { return }
-        // The reader saw a parcel arrive: the moment to ask for a rating, once its card has landed.
-        if ReviewPrompt().isDue(at: Date(), calm: settled) { reviewDue = true }
+        sawArrival()
         let now = arrangement(of: store.parcels)
         let changes = arrangement(of: delivered.arranged(store.parcels)).changing(into: now)
         let visible = places.visible

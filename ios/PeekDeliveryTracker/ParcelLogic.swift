@@ -739,11 +739,23 @@ enum ParcelOrganizer {
 struct DeliveredHold: Equatable {
     /// The parcels that have just arrived.
     private(set) var ids: Set<UUID> = []
+    /// The hold began as the list came into view, its parcels having arrived while it was out of it: the list may
+    /// still be on its way in.
+    private(set) var late = false
+    /// The held parcels whose postmark has landed: the list has shown them delivered.
+    private(set) var stamped: Set<UUID> = []
     /// Every parcel as the list showed it before they did.
     private var shown: [UUID: Parcel] = [:]
 
     var isEmpty: Bool { ids.isEmpty }
     func holds(_ id: UUID) -> Bool { ids.contains(id) }
+    /// The held parcels the list has yet to show delivered: a hold cut short before then still has them to show.
+    var unstamped: Set<UUID> { ids.subtracting(stamped) }
+
+    /// The postmark lands on every held card.
+    mutating func stamp() {
+        if stamped != ids { stamped = ids }
+    }
 
     /// The list is about to show `next` where it showed `before`. A list that nobody is
     /// looking at holds nothing, and changes at once.
@@ -758,6 +770,9 @@ struct DeliveredHold: Equatable {
         let arrivals = ParcelOrganizer.justDelivered(shown: before, now: next)
         if holding.isEmpty, !arrivals.isEmpty {
             shown = Dictionary(before.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        } else {
+            // One caught up with holds only itself where it stood: the others need theirs.
+            for was in arrivals where shown[was.id] == nil { shown[was.id] = was }
         }
         holding.formUnion(arrivals.map(\.id))
         if holding.isEmpty {
@@ -767,9 +782,21 @@ struct DeliveredHold: Equatable {
         }
     }
 
+    /// Parcels the list last showed on their way arrived while it was out of view, and arrive on it now that it is in
+    /// view: each is held where its journey before the delivery places it, the other cards as they are.
+    mutating func catchUp(_ arrivals: [Parcel]) {
+        let missed = arrivals.filter { !ids.contains($0.id) && !$0.isArchived && $0.isDelivered }
+        guard !missed.isEmpty else { return }
+        if ids.isEmpty { late = true }
+        for parcel in missed { shown[parcel.id] = parcel.onItsWay }
+        ids.formUnion(missed.map(\.id))
+    }
+
     mutating func release() {
         if !ids.isEmpty { ids = [] }
         if !shown.isEmpty { shown = [:] }
+        if late { late = false }
+        if !stamped.isEmpty { stamped = [] }
     }
 
     /// The parcels as the list arranges them: as they were shown, but for one archived or brought back since.
@@ -779,6 +806,69 @@ struct DeliveredHold: Equatable {
             guard let was = shown[parcel.id], was.isArchived == parcel.isArchived else { return parcel }
             return was
         }
+    }
+}
+
+extension Parcel {
+    /// The parcel as it stood on its way, before its delivery: its journal without the final scans.
+    var onItsWay: Parcel {
+        var parcel = self
+        parcel.trackingEvents.removeAll { $0.stage.isFinal }
+        return parcel
+    }
+}
+
+/// The parcels the deliveries list last showed on their way, kept on this device across launches and never sent. One
+/// that arrives while the list is out of view (its page open, another tab, the app in the background or closed)
+/// arrives on the list the next time it is in view, if its delivery is at most a week old: once, as the list then
+/// counts it delivered. An archived or deleted parcel never does.
+struct OnTheWayRecord {
+    /// A delivery older than this is no news by the time the list is seen again.
+    static let recent: TimeInterval = 7 * 24 * 60 * 60
+    private static let key = "sdt.deliveries.onTheWay.v1"
+
+    private let defaults: UserDefaults
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+    }
+
+    /// The parcels the list showed on their way when it was last in view.
+    var ids: Set<UUID> {
+        Set((defaults.stringArray(forKey: Self.key) ?? []).compactMap(UUID.init(uuidString:)))
+    }
+
+    /// Of `parcels`, those the list last showed on their way that have been delivered since, at most a week before
+    /// `now`, and aren't archived.
+    func arrivals(in parcels: [Parcel], at now: Date) -> [Parcel] {
+        let ids = ids
+        guard !ids.isEmpty else { return [] }
+        return parcels.filter { parcel in
+            guard ids.contains(parcel.id), !parcel.isArchived, parcel.isDelivered,
+                  let delivered = parcel.currentEvent.flatMap({ DateParser.date($0.occurredAt) }) else { return false }
+            return now.timeIntervalSince(delivered) < Self.recent
+        }
+    }
+
+    /// The list is in view, showing `parcels`: those on their way are the ones it last showed so, with the ones in
+    /// `holding`, delivered and held where they stood but not yet stamped. A list with no parcel, as one still loading
+    /// is, changes nothing.
+    func seen(_ parcels: [Parcel], holding: Set<UUID> = []) {
+        guard !parcels.isEmpty else { return }
+        let onTheWay = Set(parcels.lazy.filter(\.isActive).map(\.id)).union(holding)
+        store(onTheWay)
+    }
+
+    /// These parcels have been shown delivered: the list counts them so.
+    func forget(_ arrived: Set<UUID>) {
+        let ids = ids
+        guard !ids.isDisjoint(with: arrived) else { return }
+        store(ids.subtracting(arrived))
+    }
+
+    private func store(_ ids: Set<UUID>) {
+        let next = ids.map(\.uuidString).sorted()
+        if defaults.stringArray(forKey: Self.key) != next { defaults.set(next, forKey: Self.key) }
     }
 }
 

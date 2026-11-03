@@ -2,7 +2,8 @@ import './components/Deliveries.css';
 import { trackAction, trackScreen } from './lib/analytics';
 import { focusClickedButton } from './lib/modal';
 import { glideNextListChange } from './lib/listGlide';
-import { useDeliveredHold } from './lib/deliveredHold';
+import { ON_THE_WAY, useDeliveredHold } from './lib/deliveredHold';
+import { DELIVERY_CARDS } from './lib/deliveredMove';
 import { takeResumedScreen, type ResumedScreen } from './lib/pwaUpdates';
 import { REFRESH_MESSAGES, refreshOutcome, userErrorMessage } from './lib/userMessages';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -342,8 +343,10 @@ export default function App({
   const searched = query.trim().length > 0;
   const filtered = statusFilter !== 'all' || carrierFilter !== '' || sort !== 'priority';
   const hasCustomView = searched || filtered;
-  // A parcel delivered since the list was last shown keeps its place until its card leaves for the past deliveries.
-  const delivered = useDeliveredHold(parcels, tab === 'deliveries' && !loading && !openParcelId && !adding && !hasCustomView, deliveriesPage);
+  // A parcel delivered since the list was last shown keeps its place until its card leaves for the past deliveries,
+  // even one delivered while the list was out of view, but for the demo's.
+  const delivered = useDeliveredHold(parcels, tab === 'deliveries' && !loading && !openParcelId && !adding && !hasCustomView, deliveriesPage,
+    DELIVERY_CARDS, mode === 'demo' ? undefined : ON_THE_WAY.deliveries);
   const listed = delivered.arranged;
   const visibleParcels = useMemo(
     () => viewParcels(listed, {

@@ -7,7 +7,7 @@ import { CardRoute, useParcelRoute } from '../../components/ParcelMap';
 import { ProgressTrack } from '../../components/ProgressTrack';
 import { localizedExpectedDelivery, useI18n } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
-import { useDeliveredHold } from '../../lib/deliveredHold';
+import { ON_THE_WAY, useDeliveredHold } from '../../lib/deliveredHold';
 import type { CardList } from '../../lib/deliveredMove';
 import { carrierInfo, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber } from '../../lib/carriers';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
@@ -144,7 +144,7 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   // A parcel delivered since the list was last shown says so where its card stands, before the list is led by another.
   const cards = useRef<HTMLUListElement>(null);
   const parcels = useMemo(() => recents.map((recent) => ({ ...recent.snapshot.parcel, id: recent.id })), [recents]);
-  const delivered = useDeliveredHold(parcels, watching && !asking, cards, DOOR_CARDS);
+  const delivered = useDeliveredHold(parcels, watching && !asking, cards, DOOR_CARDS, ON_THE_WAY.device);
 
   async function forget() {
     setForgetting(true);

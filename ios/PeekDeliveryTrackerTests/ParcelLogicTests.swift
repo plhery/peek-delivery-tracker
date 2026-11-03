@@ -1927,6 +1927,85 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(unseen, DeliveredHold())
     }
 
+    func testADeliveryTheListDidNotSeeArrivesOnItTheNextTimeItIsInView() throws {
+        let suite = "ParcelLogicTests.onTheWay.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let record = OnTheWayRecord(defaults: defaults)
+        let tea = UUID(), lamp = UUID(), mug = UUID(), vase = UUID(), pen = UUID(), book = UUID()
+        func ago(_ hours: Double) -> String { DateParser.isoString(Date().addingTimeInterval(-hours * 3_600)) }
+        func layout(_ parcels: [Parcel]) -> DeliveryListLayout {
+            DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .priority, featuresNext: true)
+        }
+        let shown = [
+            makeParcel(id: tea, events: [event(tea, .outForDelivery, ago(2))]),
+            makeParcel(id: lamp, events: [event(lamp, .inTransit, ago(2))]),
+            makeParcel(id: mug, events: [event(mug, .inTransit, ago(2))]),
+            makeParcel(id: vase, events: [event(vase, .inTransit, ago(240))]),
+            makeParcel(id: pen, events: [event(pen, .inTransit, ago(3))]),
+            makeParcel(id: book, events: [event(book, .delivered, ago(30))]),
+        ]
+        // A list still loading says nothing; one in view keeps which parcels it shows on their way.
+        record.seen([])
+        XCTAssertTrue(record.ids.isEmpty)
+        record.seen(shown)
+        XCTAssertEqual(record.ids, [tea, lamp, mug, vase, pen])
+
+        // Out of view, the tea arrives; the lamp arrives and is deleted, the mug arrives and is archived, and the vase
+        // arrived eight days ago. Only the tea is news when the list is next in view.
+        var now = shown
+        now[0].trackingEvents.append(event(tea, .delivered, ago(1)))
+        now[2].trackingEvents.append(event(mug, .delivered, ago(1)))
+        now[2].archivedAt = ago(0.5)
+        now[3].trackingEvents.append(event(vase, .delivered, ago(192)))
+        now.remove(at: 1)
+        XCTAssertEqual(record.arrivals(in: now, at: Date()).map(\.id), [tea])
+
+        // It arrives where it stood on its way, Next up, and only it: the other cards are as they are.
+        var hold = DeliveredHold()
+        hold.catchUp(record.arrivals(in: now, at: Date()))
+        XCTAssertEqual(hold.ids, [tea])
+        XCTAssertTrue(hold.late)
+        XCTAssertEqual(now[0].onItsWay.currentStage, .outForDelivery)
+        let held = layout(hold.arranged(now))
+        XCTAssertEqual(held.next?.id, tea)
+        XCTAssertEqual(held.kind(of: pen), .onTheWay)
+        XCTAssertEqual(held.changing(into: layout(now))[tea]?.becomes, .past)
+        // Until its postmark lands it still counts as on its way: a list that goes out of view before then, as one
+        // opening a parcel's page at launch does, catches up again.
+        record.seen(now, holding: hold.unstamped)
+        XCTAssertEqual(record.ids, [tea, pen])
+
+        // Once stamped, never again, even should the list go out of view before the card leaves.
+        hold.stamp()
+        record.forget(hold.ids)
+        record.seen(now, holding: hold.unstamped)
+        XCTAssertEqual(record.ids, [pen])
+        XCTAssertTrue(record.arrivals(in: now, at: Date()).isEmpty)
+
+        // News that lands meanwhile brings another arrival, held where the list showed it, and stamped in turn.
+        var later = now
+        later[3].trackingEvents.append(event(pen, .delivered, ago(0)))
+        hold.receive(shown: now, next: later, watching: true)
+        XCTAssertEqual(hold.ids, [tea, pen])
+        XCTAssertEqual(hold.unstamped, [pen])
+        XCTAssertEqual(layout(hold.arranged(later)).kind(of: pen), .onTheWay)
+        hold.stamp()
+        record.forget(hold.ids)
+        hold.release()
+        XCTAssertFalse(hold.late)
+        XCTAssertTrue(hold.stamped.isEmpty)
+        XCTAssertTrue(record.ids.isEmpty)
+
+        // A list that showed it delivered, as one beside the parcel's page does, has nothing to catch up with.
+        record.seen(shown)
+        record.seen(now)
+        XCTAssertTrue(record.arrivals(in: now, at: Date()).isEmpty)
+        // And a hold takes no parcel that isn't a delivery to show.
+        hold.catchUp([shown[0], now[1]])
+        XCTAssertTrue(hold.isEmpty)
+    }
+
     func testDeliveredConfettiPopsOutOfItsOriginAndFallsAway() throws {
         let origin = CGPoint(x: 200, y: 300)
         let burst = DeliveredConfetti(origin: origin, count: DeliveredConfetti.next, seed: 7)

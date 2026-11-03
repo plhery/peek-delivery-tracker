@@ -91,6 +91,23 @@ class KeyboardScrollTest {
     }
 
     @Test
+    fun andWhenTheKeyboardSlidesUpFrameByFrame() {
+        show(reduceMotion = false)
+        compose.onNodeWithTag(FIELD).performClick()
+        compose.waitForIdle()
+        compose.mainClock.autoAdvance = false
+        // The keyboard's slide as a device plays it: its inset grows a little each frame, the page scrolling as it goes.
+        for (step in 1..20) {
+            keyboard(300 * step / 20)
+            compose.mainClock.advanceTimeByFrame()
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertTheFieldAboveTheKeyboard(300)
+    }
+
+    @Test
     fun underReduceMotionToo() {
         show(reduceMotion = true)
         compose.onNodeWithTag(FIELD).performClick()

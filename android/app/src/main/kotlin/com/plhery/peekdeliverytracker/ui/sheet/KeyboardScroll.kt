@@ -76,16 +76,11 @@ internal fun KeyboardScrollColumn(
     LaunchedEffect(keyboard, top, reduceMotion, scroll) {
         val clearance = with(density) { top.toPx() }
         snapshotFlow { Triple(keyboard.focused, keyboard.covered(ime.getBottom(density)), keyboard.height) }.collectLatest { (_, covered, _) ->
-            while (true) {
-                val offset = keyboard.focusedOffset(clearance, covered)
-                if (abs(offset) < 0.5f) break
-                val moved = if (reduceMotion) scroll.scrollBy(offset) else scroll.animateScrollBy(offset)
-                if (abs(offset - moved) < 0.5f) break
-                // Stopped at the scroll's end: the keyboard's room under the content is laid out after the keyboard
-                // is known, so the field goes the rest of the way once the end has moved.
-                val end = scroll.maxValue
-                snapshotFlow { scroll.maxValue }.first { it != end }
-            }
+            reachTheFocusedField(
+                offset = { keyboard.focusedOffset(clearance, covered) },
+                scrollBy = { if (reduceMotion) scroll.scrollBy(it) else scroll.animateScrollBy(it) },
+                roomAhead = { scroll.value < scroll.maxValue },
+            )
         }
     }
     Column(
@@ -99,6 +94,22 @@ internal fun KeyboardScrollColumn(
         verticalArrangement = verticalArrangement,
         content = content,
     )
+}
+
+/**
+ * Scrolls by the [offset] that puts the focused field in its place until there is none left. A scroll down that stops
+ * short has met the scroll's end before the keyboard's room under the content was laid out (the room comes in a layout
+ * after the keyboard is known, before or after the scroll's last frame hands back), so it goes on once there is
+ * [roomAhead]; one up that stops short has met the top, and stays.
+ */
+internal suspend fun reachTheFocusedField(offset: () -> Float, scrollBy: suspend (Float) -> Float, roomAhead: () -> Boolean) {
+    while (true) {
+        val wanted = offset()
+        if (abs(wanted) < 0.5f) return
+        val moved = scrollBy(wanted)
+        if (wanted < 0f || abs(wanted - moved) < 0.5f) return
+        snapshotFlow(roomAhead).first { it }
+    }
 }
 
 /**

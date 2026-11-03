@@ -59,6 +59,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.parcelName
+import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.settings.AccountHost
 import com.plhery.peekdeliverytracker.ui.settings.DELIVERY_UPDATES_PAGE
@@ -306,8 +307,9 @@ internal fun rememberPromptStates(launch: UUID, adding: MutableState<String?>): 
 )
 
 /**
- * A message under the list (`ListToast`): what a check of the parcels found, or that a number was copied. Each one
- * shown is another ([id]), even with the same words, and has its own four seconds.
+ * A message under the list (`ListToast`): what a check of the parcels found, or, up to Android 12L, that a number was
+ * copied ([Device.confirmsCopies]). Each one shown is another ([id]), even with the same words, and has its own four
+ * seconds.
  */
 @Immutable
 internal data class ListToast(val id: Int, val text: String, val warning: Boolean = false)
@@ -1875,8 +1877,9 @@ internal class DeliveriesState(
                 openCarrierEditor(CarrierEditorRequest(UUID.randomUUID(), parcel.id, pageId = null, initialCarrier = null), parcel)
             ParcelMenuItem.CopyTrackingNumber -> {
                 copyNumber(parcel.trackingNumbers.firstOrNull() ?: return)
-                // The toast and its announcement on every version, as the iPhone's, beside Android 13's own preview.
-                show(text("detail.copied"))
+                // The iPhone's toast and its announcement up to Android 12L; from 13 the system's overlay shows the copy
+                // and TalkBack hears it, so the app adds no second one.
+                if (!Device.confirmsCopies) show(text("detail.copied"))
             }
             ParcelMenuItem.Archive -> archive(parcel)
             ParcelMenuItem.Restore -> restore(parcel)

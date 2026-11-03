@@ -259,8 +259,13 @@ class CardMenuTest {
         assertEquals(emptyList<Any>(), source.deleted)
     }
 
+    /**
+     * From Android 13 the system's overlay shows the copy and TalkBack hears it ("Text copied"): the app shows no toast
+     * and says nothing of its own beside it.
+     */
     @Test
-    fun copyPutsTheNumberOnTheClipboardAndSaysSoInTheAppsToast() {
+    @Config(sdk = [33, 37])
+    fun copyPutsTheNumberOnTheClipboardAndLeavesTheConfirmationToTheSystem() {
         show()
         longPress("Birthday gift")
         choose(ParcelMenuItem.CopyTrackingNumber)
@@ -269,17 +274,20 @@ class CardMenuTest {
         val clipboard = compose.activity.getSystemService(ClipboardManager::class.java)
         assertEquals(TrackingNumberCopy.text(entry.number, entry.carrier), clipboard.primaryClip?.getItemAt(0)?.text?.toString())
         assertEquals(listOf("parcel-copy-tracking"), source.actions.filter { it == "parcel-copy-tracking" })
-        // The iPhone's toast and announcement, beside the preview Android 13 and later show of a copy themselves.
-        compose.onNode(hasTestTag(INLINE_TOAST) and hasContentDescription("Copied")).assertExists()
-        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("Copied")
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("")
     }
 
+    /** Up to Android 12L nothing of the system's says so: the iPhone's toast and its announcement. */
     @Test
     @Config(sdk = [31])
-    fun beforeAndroid13TheAppSaysTheNumberWasCopiedTheSameWay() {
+    fun beforeAndroid13TheAppSaysTheNumberWasCopiedInItsToast() {
         show()
         longPress("Birthday gift")
         choose(ParcelMenuItem.CopyTrackingNumber)
+        val entry = DemoCards.parcel("Birthday gift").trackingNumbers.first()
+        val clipboard = compose.activity.getSystemService(ClipboardManager::class.java)
+        assertEquals(TrackingNumberCopy.text(entry.number, entry.carrier), clipboard.primaryClip?.getItemAt(0)?.text?.toString())
         compose.onNode(hasTestTag(INLINE_TOAST) and hasContentDescription("Copied")).assertExists()
         compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("Copied")
     }

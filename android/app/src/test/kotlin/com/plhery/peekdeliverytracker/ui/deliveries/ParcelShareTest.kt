@@ -645,7 +645,8 @@ class ParcelShareTest {
         val view = (compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view
         assertEquals(hapticFeedbackConstant(SensoryFeedback.Success), shadowOf(view).lastHapticFeedbackPerformed())
         assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))
-        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("Link copied")
+        // From Android 13 TalkBack hears the system's overlay, and nothing of the app's beside it.
+        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("")
         assertEquals(listOf(DeliveryAnalytics.Outcome.Success), shareActions())
         compose.mainClock.advanceTimeBy(1_800)
         assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))
@@ -662,6 +663,21 @@ class ParcelShareTest {
         assertFalse(shows(PARCEL_SHARE_COPY, "Copied"))
         // Nothing went to the system's share sheet.
         assertNull(handedOut())
+    }
+
+    /** Up to Android 12L nothing of the system's says so: TalkBack hears the iPhone's announcement, and the button too. */
+    @Test
+    @Config(sdk = [31])
+    fun beforeAndroid13TheCopyIsAnnounced() {
+        show { shareLinks[gift] = giftLink }
+        openShare()
+        compose.mainClock.autoAdvance = false
+        node(PARCEL_SHARE_COPY).performClick()
+        compose.mainClock.advanceTimeBy(100)
+        val clipboard = compose.activity.getSystemService(ClipboardManager::class.java)
+        assertEquals("https://example.com/p/TestLink2345", clipboard.primaryClip?.getItemAt(0)?.text?.toString())
+        assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))
+        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("Link copied")
     }
 
     // The sheet.

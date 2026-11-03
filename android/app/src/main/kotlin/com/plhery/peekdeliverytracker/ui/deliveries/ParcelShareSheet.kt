@@ -85,6 +85,7 @@ import com.plhery.peekdeliverytracker.core.giftDetail
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
 import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
+import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.ShareTargetChosen
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -306,11 +307,12 @@ private data class SharingShown(val request: ShareRequest, val work: ParcelShare
  * draws nothing once its parcel has gone, as the iPhone's `if let parcel` does; a card's shows the parcel as the menu
  * found it ([ParcelShareSheetWork.parcel]). While sharing, copying or stopping is under way nothing sends it away
  * (`interactiveDismissDisabled(model.working)`). The address made ready goes to the clipboard, with the success tap,
- * "parcel-link-share" counted a success and TalkBack told ([DeliveriesState.copy]); or to the system's share sheet
- * (`LinkActivitySheet`), counted a success once the reader chooses an app for it, even after the sheet has closed,
- * and nothing where they back out; Android tells the app chosen, not whether it went on to send, as the iPhone's
- * completion does ([ShareTargetChosen]). A share sheet that couldn't be shown counts an error and says so. Until the
- * window has gone to the system's share sheet and come back, or [CHOOSER_GUARD] without it going, Share does nothing.
+ * "parcel-link-share" counted a success and, up to Android 12L, TalkBack told ([DeliveriesState.copy],
+ * [Device.confirmsCopies]); or to the system's share sheet (`LinkActivitySheet`), counted a success once the reader
+ * chooses an app for it, even after the sheet has closed, and nothing where they back out; Android tells the app
+ * chosen, not whether it went on to send, as the iPhone's completion does ([ShareTargetChosen]). A share sheet that
+ * couldn't be shown counts an error and says so. Until the window has gone to the system's share sheet and come back,
+ * or [CHOOSER_GUARD] without it going, Share does nothing.
  */
 @Composable
 internal fun ParcelShareHost(state: DeliveriesState) {
@@ -338,9 +340,10 @@ internal fun ParcelShareHost(state: DeliveriesState) {
         val ready = news ?: return@LaunchedEffect
         val work = work ?: return@LaunchedEffect
         if (ready.copy) {
-            // The button says so for the eyes, as the system's own confirmation may; TalkBack hears of it either way.
+            // The button says so for the eyes on every version. TalkBack hears the iPhone's announcement up to Android
+            // 12L; from 13 it hears the system's overlay, and nothing of the app's beside it.
             state.copy(ready.address)
-            state.announce(localizer.text("link.copied"))
+            if (!Device.confirmsCopies) state.announce(localizer.text("link.copied"))
             state.source.action("parcel-link-share", DeliveryAnalytics.Outcome.Success)
             work.showCopied()
         } else {

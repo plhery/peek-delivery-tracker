@@ -46,6 +46,15 @@ object Device {
     fun isPad(context: Context, configuration: Configuration = context.resources.configuration): Boolean =
         analyticsPlatform(context, configuration) != DeliveryAnalytics.Platform.Android
 
+    /**
+     * Whether the system confirms a copy itself: from Android 13 its clipboard overlay shows what was copied at the
+     * screen's bottom-start and TalkBack hears "Text copied" (`ClipboardOverlayController`), so the app says nothing of
+     * its own, no toast and no announcement, as Android's guidance has it. Up to Android 12L nothing does, and the app
+     * says so as the iPhone does. A button that turns to "Copied" says it on every version: it is the button's own
+     * state, which TalkBack reads when it comes to the button.
+     */
+    val confirmsCopies: Boolean get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+
     /** An emulator, which stays out of the counts as the iPhone's simulator does. */
     val isEmulator: Boolean
         get() = Build.HARDWARE in setOf("goldfish", "ranchu") || Build.FINGERPRINT.orEmpty().startsWith("generic") ||

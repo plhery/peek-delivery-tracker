@@ -331,7 +331,8 @@ class ParcelFeedbackTest {
         settle()
         assertTrue(exists(FEEDBACK_WORDS_SHEET))
         assertEquals(true, node(FEEDBACK_CHIP + ParcelFeedbackReason.Steps.name).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
-        assertEquals(false, node(FEEDBACK_CHIP + ParcelFeedbackReason.Status.name).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
+        // An unchosen chip says nothing of a choice, as iOS adds `.isSelected` only to the chosen (B-AX17).
+        assertNull(node(FEEDBACK_CHIP + ParcelFeedbackReason.Status.name).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
         assertTrue(shows(FEEDBACK_PROMISE, "what Chronopost answered"))
         node(FEEDBACK_NOTE).performTextReplacement("Two scans are missing")
         tap(FEEDBACK_SEND)
@@ -473,7 +474,7 @@ class ParcelFeedbackTest {
         val chip = FEEDBACK_CHIP + ParcelFeedbackReason.Other.name
         tap(chip)
         assertEquals(hapticFeedbackConstant(SensoryFeedback.Selection), lastHaptic())
-        assertEquals(false, node(chip).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
+        assertNull(node(chip).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
         node(FEEDBACK_SEND).assertIsNotEnabled()
         node(FEEDBACK_NOTE).performTextReplacement("  ")
         node(FEEDBACK_SEND).assertIsNotEnabled()
@@ -639,7 +640,7 @@ class ParcelFeedbackTest {
         assertNull(work().word)
         assertTrue(exists(FEEDBACK_WORDS_SHEET))
         ParcelFeedbackReason.entries.forEach {
-            assertEquals(false, node(FEEDBACK_CHIP + it.name).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
+            assertNull(node(FEEDBACK_CHIP + it.name).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
         }
         node(FEEDBACK_SEND).assertIsNotEnabled()
         tap(FEEDBACK_CHIP + ParcelFeedbackReason.Status.name)

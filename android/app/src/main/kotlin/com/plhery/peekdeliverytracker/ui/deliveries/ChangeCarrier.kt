@@ -523,9 +523,9 @@ internal fun postcodeKeyboard(keys: CarrierChange.PostcodeKeys): KeyboardType = 
 /**
  * `PostcodeCountryMenu`: the postcode's country beside its field, its flag, its code and the up and down chevrons in
  * the ink, which opens the menu of the countries the field takes, the carrier's own first and the others after a
- * hairline, each with its flag and name. TalkBack reads "Delivery country" and the country's name. [modifier] is its
- * room around what it shows, which a tap anywhere in opens it too (`inset`). Off while not [enabled], looking the same,
- * as a menu in its own colours does.
+ * hairline, each with its flag and name. TalkBack reads "Delivery country", the country's name and a drop-down list,
+ * as the iPhone's pop-up button. [modifier] is its room around what it shows, which a tap anywhere in opens it too
+ * (`inset`). Off while not [enabled], looking the same, as a menu in its own colours does.
  */
 @Composable
 internal fun PostcodeCountryMenu(
@@ -573,11 +573,11 @@ internal fun PostcodeCountryMenu(
             .testTag(tag)
             .onGloballyPositioned { bounds = it.boundsInWindow() }
             .accessibilityFocus(returnFocus)
-            .clickable(interactionSource = null, indication = ControlHighlight.Default, enabled = enabled, role = Role.Button, onClick = open)
+            .clickable(interactionSource = null, indication = ControlHighlight.Default, enabled = enabled, role = Role.DropdownList, onClick = open)
             .clearAndSetSemantics {
                 contentDescription = label
                 stateDescription = name
-                role = Role.Button
+                role = Role.DropdownList
                 if (enabled) {
                     onClick {
                         open()

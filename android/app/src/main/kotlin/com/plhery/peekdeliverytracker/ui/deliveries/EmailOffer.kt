@@ -370,8 +370,9 @@ private const val OFFER_MOTION = 0.2
 /** `leaving`'s removal: `.opacity.animation(.easeOut(duration: 0.1))`. */
 private const val LEAVING_FADE = 0.1
 
-const val PAGE_EMAIL_OFFER = "parcelPage.emailOffer"
-const val PAGE_EMAIL_OFFER_ON = "parcelPage.emailOffer.on"
-const val PAGE_EMAIL_OFFER_ERROR = "parcelPage.emailOffer.error"
-const val PAGE_EMAIL_OFFER_TURN_ON = "parcelPage.emailOffer.turnOn"
-const val PAGE_EMAIL_OFFER_NOT_NOW = "parcelPage.emailOffer.notNow"
+/** iOS's identifiers for the offer, its answer turned on, its error, and its two buttons (ParcelAlerts.swift). */
+const val PAGE_EMAIL_OFFER = "detail.emailOffer"
+const val PAGE_EMAIL_OFFER_ON = "detail.emailOffer.on"
+const val PAGE_EMAIL_OFFER_ERROR = "detail.emailOffer.error"
+const val PAGE_EMAIL_OFFER_TURN_ON = "detail.emailOffer.turnOn"
+const val PAGE_EMAIL_OFFER_NOT_NOW = "detail.emailOffer.notNow"

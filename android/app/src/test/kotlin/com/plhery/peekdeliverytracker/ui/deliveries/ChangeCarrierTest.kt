@@ -72,6 +72,7 @@ import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.sheet.SHEET_GRABBER
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import java.time.Duration
 import java.util.UUID
@@ -299,8 +300,11 @@ class ChangeCarrierTest {
         assertEquals("Mondial Relay", carrierRowValue())
         val country = node(CHANGE_CARRIER_COUNTRY).fetchSemanticsNode().config
         assertEquals(listOf("Delivery country"), country.getOrNull(SemanticsProperties.ContentDescription))
-        // The phone's country, where the carrier delivers.
+        // The phone's country, where the carrier delivers, in a drop-down list as the iPhone's pop-up button (B-AX10).
         assertEquals("Switzerland", country.getOrNull(SemanticsProperties.StateDescription))
+        assertEquals(Role.DropdownList, country.getOrNull(SemanticsProperties.Role))
+        // The sheet shows its drag indicator, as `.presentationDragIndicator(.visible)`.
+        assertEquals(1, compose.onAllNodesWithTag(SHEET_GRABBER, useUnmergedTree = true).fetchSemanticsNodes().size)
         assertEquals(ContentType.PostalCode, node(CHANGE_CARRIER_POSTCODE).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ContentType))
         node(CHANGE_CARRIER_SAVE).assertIsNotEnabled()
 

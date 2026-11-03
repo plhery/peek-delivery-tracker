@@ -6,12 +6,14 @@ import android.view.KeyEvent
 import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.Crossfade
 import androidx.compose.animation.EnterExitState
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -102,7 +104,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -160,8 +161,6 @@ import com.plhery.peekdeliverytracker.ui.sheet.BarCancel
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetGround
-import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_HEIGHT
-import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_WIDTH
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
@@ -200,15 +199,14 @@ internal fun AddParcelHost(state: DeliveriesState) {
     val catalog = LocalCarrierIdentities.current?.catalog ?: CarrierCatalog.shared
     val form = rememberSaveable(adding?.id, saver = AddForm.Saver) { AddForm.start(adding?.draft, catalog, adding?.label.orEmpty()) }
     val work = state.source.pageWork
-    // Saved, it says so until it has gone, as `save()` leaves `saving` on.
-    val saving = adding != null && (work.working(adding.id) || work.added(adding.id) != null)
+    val saving = adding != null && work.saving(adding.id)
     val title = localized("add.title")
     val cover = !state.sheetsAsForms
     val content: @Composable () -> Unit = {
         if (adding != null) {
             // Under the picker or the scanner, TalkBack reaches only them.
             val hidden = if (form.showingPicker || form.showingScanner) Modifier.clearAndSetSemantics {} else Modifier
-            AddParcelView(state, adding, form, saving, cover, hidden.testTag(ADD_PARCEL))
+            AddParcelView(state, adding, form, cover, hidden.testTag(ADD_PARCEL))
         }
     }
     if (cover) {
@@ -352,7 +350,7 @@ private class AddFocus {
  * tick (B-H05).
  */
 @Composable
-private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: AddForm, saving: Boolean, cover: Boolean, modifier: Modifier) {
+private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: AddForm, cover: Boolean, modifier: Modifier) {
     val source = state.source
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
@@ -364,6 +362,9 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     val addition = form.addition(demo, catalog, region)
     val current by rememberUpdatedState { form.addition(demo, catalog, region) }
     val work = source.pageWork
+    // Read here rather than handed down through the overlay that hosts Add, a frame late: the save's end and its failure
+    // come in the same update, as `saving = false` and `errorMessage` do.
+    val saving = work.saving(request.id)
     val focusManager = LocalFocusManager.current
     val focus = remember { AddFocus() }
     val motion = remember { AddMotion() }
@@ -532,13 +533,16 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                 }
             }
         }
-        AddButton(addition, saving, cover, actions::save, Modifier.onSizeChanged { buttonHeight = it.height })
+        AddButton(addition, saving, error, cover, actions::save, Modifier.onSizeChanged { buttonHeight = it.height })
     }
     AddPicker(state, addition, form, actions)
     // The scanner goes down with Add, closed under it (a notification, a link), as the iPhone's goes with its presenter.
     val open = state.addition?.id == request.id
     TrackingScannerCover(form.showingScanner && open, onScan = actions::scanned, onCancel = { form.showingScanner = false })
 }
+
+/** Whether Add with `id` saves, or has saved and says so until it has gone, as `save()` leaves `saving` on. */
+private fun PageWork.saving(id: java.util.UUID): Boolean = working(id) || added(id) != null
 
 /** Whether the form's controls are on (`.disabled(saving)`'s `isEnabled`). */
 private val LocalFormEnabled = compositionLocalOf { true }
@@ -1140,7 +1144,8 @@ private fun NumberChoice(state: DeliveriesState, addition: ParcelAddition, actio
 
 /**
  * `numberRow`: the carrier's truck, its name over the number as printed, and a ring, filled in ochre on the ochre
- * surface for the number chosen; read by its carrier, the number as its value, and selected.
+ * surface for the number chosen; read by its carrier and the number, and selected where chosen (`.isSelected`), as the
+ * picker's rows are: a state description would keep TalkBack from saying "selected". The others say nothing of it.
  */
 @Composable
 private fun NumberRow(addition: ParcelAddition, number: NumberInText, chosen: Boolean, choose: () -> Unit) {
@@ -1160,9 +1165,8 @@ private fun NumberRow(addition: ParcelAddition, number: NumberInText, chosen: Bo
             .testTag(numberRowTag(number.normalized))
             .clickable(interactionSource = null, indication = PressStyle.tactile(0.98f), enabled = enabled, role = Role.Button, onClick = choose)
             .clearAndSetSemantics {
-                contentDescription = name
-                stateDescription = printed
-                selected = chosen
+                contentDescription = "$name, $printed"
+                if (chosen) selected = true
                 role = Role.Button
                 if (enabled) {
                     onClick {
@@ -1498,11 +1502,21 @@ private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.
  * a cover above the keyboard and the navigation bar, in the form sheet above the part of the keyboard over its foot,
  * as the sheet stays where it is. "Add parcel", or "Track this one" among several, in headline on the accent, 50 tall
  * at least with 14-point corners, at 45 % while it can't add (easing out over 0.2 s); while it saves, a spinner 10
- * before "Adding…", faded in. At the accessibility sizes its words keep to one line, shrinking to 70 %, and grow no
- * further than accessibility2.
+ * before "Adding…". The words swap at once on the tap, as `saving = true` rides no animation (`.animation` is on
+ * `canSave` alone); they cross over the form's snappy 0.3 s only where [error] appears or clears in the same update (a
+ * try again after a failure, a failure coming back), as the form animates on `errorMessage` (`.contentTransition
+ * (.opacity)`); at once under Reduce Motion. At the accessibility sizes its words keep to one line, shrinking to 70 %,
+ * and grow no further than accessibility2.
  */
 @Composable
-private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean, save: () -> Unit, modifier: Modifier = Modifier) {
+private fun AddButton(
+    addition: ParcelAddition,
+    saving: Boolean,
+    error: String?,
+    cover: Boolean,
+    save: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     val colors = PeekTheme.colors
     val reduceMotion = PeekTheme.reduceMotion
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
@@ -1511,6 +1525,13 @@ private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean,
     val words = localized(if (addition.several.isEmpty()) "app.addParcel" else "door.several.track")
     val adding = localized("add.adding")
     val density = LocalDensity.current
+    // What the last frame showed, and the words crossing from it where the error changed with them.
+    val shown = remember { Kept(saving to error) }
+    val crossing = remember(saving) {
+        val (before, errorBefore) = shown.value
+        if (reduceMotion || before == saving || errorBefore == error) null else MutableTransitionState(before).apply { targetState = saving }
+    }
+    SideEffect { shown.value = saving to error }
     // The window's pixels under the sheet's foot, which a keyboard covers first.
     var below by remember { mutableIntStateOf(0) }
     val keyboard = if (cover) Modifier.windowInsetsPadding(WindowInsets.ime.union(WindowInsets.navigationBars).only(WindowInsetsSides.Bottom)) else {
@@ -1545,10 +1566,20 @@ private fun AddButton(addition: ParcelAddition, saving: Boolean, cover: Boolean,
         ) {
             CappedDynamicTypeSize(DynamicTypeSize.Accessibility2) {
                 val style = PeekTheme.type.headline.sfLines()
-                Crossfade(saving, Modifier.clearAndSetSemantics {}, if (reduceMotion) snap() else Motion.easeOut(BUTTON_MOTION), label = "add label") { busy ->
+                val label = @Composable { busy: Boolean ->
                     Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
                         if (busy) ActivityIndicator(size = REGULAR_SPINNER, tint = colors.onAccent)
                         ShrinkingText(if (busy) adding else words, style, colors.onAccent, oneLine = large)
+                    }
+                }
+                if (crossing == null) {
+                    Box(Modifier.clearAndSetSemantics {}) { label(saving) }
+                } else {
+                    val transition = rememberTransition(crossing, label = "add label")
+                    val now by transition.animateFloat({ Motion.snappy(STATE_MOTION) }, label = "add words") { if (it == saving) 1f else 0f }
+                    Box(Modifier.clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
+                        if (transition.currentState != transition.targetState) Box(Modifier.graphicsLayer { alpha = 1f - now }) { label(!saving) }
+                        Box(Modifier.graphicsLayer { alpha = now }) { label(saving) }
                     }
                 }
             }
@@ -1581,15 +1612,13 @@ private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: Ad
     val localizer = LocalLocalizer.current
     val parcels = state.parcels
     val close = { form.showingPicker = false }
-    val window = LocalWindowInfo.current.containerSize
-    val regular = with(LocalDensity.current) { window.width.toDp() >= REGULAR_WIDTH && window.height.toDp() >= REGULAR_HEIGHT }
     Sheet(
         visible = form.showingPicker,
         onDismiss = close,
         paneTitle = localized("add.carrier"),
         detents = listOf(SheetDetent.Large),
-        // The iPad's form shows no drag indicator: `.formOnPad()` alone.
-        grabber = !regular,
+        // A plain `.sheet` with `.formOnPad()`: one detent, so no drag indicator, on the iPhone as on the iPad.
+        grabber = false,
     ) {
         // The sections it opened with stay as they were (CarrierPicker keeps them); the tags and the automatic row
         // follow the check.

@@ -762,9 +762,13 @@ private fun Grabber(modifier: Modifier) {
             .padding(top = GRABBER_TOP)
             .size(GRABBER_WIDTH, GRABBER_HEIGHT)
             .background(PeekTheme.colors.grabber, ContinuousRoundedShape(GRABBER_HEIGHT / 2))
+            .testTag(SHEET_GRABBER)
             .clearAndSetSemantics {},
     )
 }
+
+/** The sheet's drag indicator ([Grabber]), which TalkBack doesn't reach. */
+const val SHEET_GRABBER = "sheet.grabber"
 
 /** The window is regular this wide and this tall, as the iPhone's size classes would have it. */
 internal val REGULAR_WIDTH = 600.dp

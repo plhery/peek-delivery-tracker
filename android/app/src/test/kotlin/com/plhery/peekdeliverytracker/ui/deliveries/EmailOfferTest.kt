@@ -129,6 +129,12 @@ class EmailOfferTest {
     fun itIsOfferedOnADeliveredParcelWhileTheAccountHasNeverChosen() {
         show()
         assertTrue(exists(PAGE_EMAIL_OFFER))
+        // Under iOS's identifiers, which UI Automator reads as resource ids (B-AX20).
+        assertTrue(exists("detail.emailOffer"))
+        assertEquals(
+            listOf("detail.emailOffer.on", "detail.emailOffer.error", "detail.emailOffer.turnOn", "detail.emailOffer.notNow"),
+            listOf(PAGE_EMAIL_OFFER_ON, PAGE_EMAIL_OFFER_ERROR, PAGE_EMAIL_OFFER_TURN_ON, PAGE_EMAIL_OFFER_NOT_NOW),
+        )
         compose.onNode(hasText("An email when the next one arrives?") and hasAnyAncestor(hasTestTag(PAGE_EMAIL_OFFER)), useUnmergedTree = true).assertExists()
         compose.onNode(hasText("A short email to reader@example.com", substring = true), useUnmergedTree = true).assertExists()
         val title = compose.onNode(hasText("An email when the next one arrives?"), useUnmergedTree = true).fetchSemanticsNode()

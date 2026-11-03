@@ -1249,7 +1249,8 @@ private fun FeedbackSheet(title: String, tag: String, busy: Boolean, close: () -
 /**
  * `chip(_:)`: a reason in footnote medium, 14 and 10 in, 44 tall at least, with 14-point continuous corners: on paper
  * with a hairline of the separator at 60 %, or chosen on ochre's surface with a stroke of ochre 1.5 wide. It gives
- * under the finger at 0.97, and TalkBack hears it selected once chosen.
+ * under the finger at 0.97, and TalkBack hears it selected once chosen, and nothing of a choice otherwise
+ * (`.accessibilityAddTraits(on ? .isSelected : [])`).
  */
 @Composable
 private fun ReasonChip(title: String, tag: String, on: Boolean, enabled: Boolean, toggle: () -> Unit) {
@@ -1259,7 +1260,7 @@ private fun ReasonChip(title: String, tag: String, on: Boolean, enabled: Boolean
         Modifier
             .testTag(tag)
             .clickable(interactionSource = null, indication = PressStyle.tactile(0.97f), enabled = enabled, role = Role.Button, onClick = toggle)
-            .semantics { selected = on }
+            .semantics { if (on) selected = true }
             .heightIn(min = 44.dp)
             .background(if (on) colors.resolve(ExperimentalPalette.ochreSurface) else colors.paper, shape)
             .border(

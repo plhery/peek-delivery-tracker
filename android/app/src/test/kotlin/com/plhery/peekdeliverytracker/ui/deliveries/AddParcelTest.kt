@@ -33,7 +33,6 @@ import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.assertIsNotEnabled
-import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.captureToImage
@@ -81,6 +80,7 @@ import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.sheet.COVER_PANEL
+import com.plhery.peekdeliverytracker.ui.sheet.SHEET_GRABBER
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
@@ -569,14 +569,20 @@ class AddParcelTest {
         open()
         type("UPS 1Z999AA10123456784\nUPS 1Z999AA10123456793")
         node(ADD_SEVERAL).assertTextEquals(text("door.several.title.many", mapOf("count" to 2)))
-        node(numberRowTag("1Z999AA10123456784")).assertIsSelected()
-        node(numberRowTag("1Z999AA10123456793")).assertIsNotSelected()
+        // Read by carrier and number; "selected" on the chosen alone, which no state description hides (B-AX08).
+        val chosen = node(numberRowTag("1Z999AA10123456784")).assertIsSelected().fetchSemanticsNode().config
+        assertEquals("UPS, ${CarrierCatalog.format("1Z999AA10123456784", CarrierId.Ups)}", description(numberRowTag("1Z999AA10123456784")))
+        assertNull(chosen.getOrNull(SemanticsProperties.StateDescription))
+        val other = node(numberRowTag("1Z999AA10123456793")).fetchSemanticsNode().config
+        assertNull(other.getOrNull(SemanticsProperties.Selected))
+        assertNull(other.getOrNull(SemanticsProperties.StateDescription))
         assertEquals(text("door.several.track"), description(ADD_SAVE))
         // Signed in, they are kept together already.
         assertFalse(exists(ADD_SIGN_IN))
         node(numberRowTag("1Z999AA10123456793")).performClick()
         settle()
         node(numberRowTag("1Z999AA10123456793")).assertIsSelected()
+        assertNull(node(numberRowTag("1Z999AA10123456784")).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
         node(ADD_SAVE).performClick()
         settle()
         assertEquals("1Z999AA10123456793", source.additions.single().trackingNumber)
@@ -720,11 +726,15 @@ class AddParcelTest {
         type("76434219")
         node(ADD_CARRIER).performClick()
         settle()
+        // A plain sheet with one detent, with no drag indicator on a phone either (B-G13).
+        assertTrue(compose.onAllNodesWithTag(SHEET_GRABBER, useUnmergedTree = true).fetchSemanticsNodes().isEmpty())
         node(CARRIER_PICKER_SEARCH).performTextInput("Mondial")
         compose.waitForIdle()
         compose.onAllNodesWithTag(carrierPickerRowTag(CarrierId.MondialRelay)).onFirst().performClick()
         settle()
         assertEquals("Switzerland", value(ADD_COUNTRY))
+        // A drop-down list, as the iPhone's pop-up button (B-AX10).
+        assertEquals(Role.DropdownList, node(ADD_COUNTRY).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Role))
         node(ADD_COUNTRY).performClick()
         settle()
         node(postcodeCountryTag("BE")).performClick()
@@ -788,6 +798,45 @@ class AddParcelTest {
         type("1Z999AA1012345678")
         settle()
         assertFalse(exists(ADD_ERROR))
+    }
+
+    @Test
+    fun theButtonsWordsSwapAtOnceOnTheTapAndCrossOnlyWhereAnErrorComesOrGoesWithThem() {
+        show(reduceMotion = false) {
+            adding = CompletableDeferred()
+            failure = IllegalStateException("No connection")
+        }
+        open()
+        type("1Z999AA10123456784")
+        val words = text("app.addParcel")
+        val adding = text("add.adding")
+        fun shows(text: String) = compose.onAllNodes(hasText(text) and hasAnyAncestor(hasTestTag(ADD_SAVE)), useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+
+        // The tap, with no error before: "Adding…" in the next frame, nothing of "Add parcel" left fading.
+        compose.mainClock.autoAdvance = false
+        node(ADD_SAVE).performClick()
+        compose.mainClock.advanceTimeBy(32)
+        assertTrue(shows(adding))
+        assertFalse(shows(words))
+
+        // The failure comes with the words back: they cross over the snappy 0.3 s.
+        source.adding?.complete(Unit)
+        compose.mainClock.advanceTimeBy(100)
+        assertTrue(exists(ADD_ERROR))
+        assertTrue(shows(words))
+        assertTrue(shows(adding))
+        compose.mainClock.advanceTimeBy(1_000)
+        assertFalse(shows(adding))
+
+        // Trying again clears the error with them: they cross again.
+        source.adding = CompletableDeferred()
+        node(ADD_SAVE).performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertTrue(shows(words))
+        assertTrue(shows(adding))
+        compose.mainClock.advanceTimeBy(1_000)
+        assertFalse(shows(words))
+        compose.mainClock.autoAdvance = true
     }
 
     @Test

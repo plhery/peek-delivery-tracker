@@ -36,6 +36,7 @@ China Post scrive le scansioni in cinese. I luoghi sono tra parentesi, qui come 
 | `已揽收` | Accettato: China Post ha il pacco. |
 | `邮件到达【…】` | È arrivato in un ufficio o centro di smistamento di China Post. |
 | `邮件离开【…】，正在发往下一站` | È partito da lì verso la tappa successiva. |
+| `【…】退回，备注:安检退回` | Il controllo di sicurezza di un centro di smistamento l'ha respinto, e il centro risolve il problema prima di rispedirlo; non torna al mittente. Peek mostra «Problema segnalato». |
 | `送交出口海关` | Consegnato alla dogana cinese per l'esportazione. |
 | `出口海关/留存待验` | La dogana d'esportazione lo trattiene per un controllo. |
 | `出口海关/放行` | La dogana d'esportazione l'ha svincolato. |

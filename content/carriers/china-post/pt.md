@@ -37,6 +37,7 @@ A China Post escreve as leituras em chinês. Os lugares aparecem entre parêntes
 | `已揽收` | Aceite: a China Post já tem a encomenda. |
 | `邮件到达【…】` | Chegou a uma estação ou a um centro de triagem da China Post. |
 | `邮件离开【…】，正在发往下一站` | Saiu dessa estação a caminho da seguinte. |
+| `【…】退回，备注:安检退回` | O controlo de segurança de um centro de triagem recusou-a, e o centro resolve o problema antes de a reenviar; não volta para o remetente. O Peek mostra «Problema reportado». |
 | `送交出口海关` | Foi apresentada à alfândega de exportação chinesa. |
 | `出口海关/留存待验` | A alfândega de exportação reteve-a para verificação. |
 | `出口海关/放行` | A alfândega de exportação libertou-a. |

@@ -37,6 +37,7 @@ China Post écrit ses scans en chinois. Les lieux sont entre crochets, ici `【�
 | `已揽收` | Pris en charge : China Post a le colis. |
 | `邮件到达【…】` | Arrivé dans un bureau ou un centre de tri de China Post. |
 | `邮件离开【…】，正在发往下一站` | Il a quitté ce centre pour l'étape suivante. |
+| `【…】退回，备注:安检退回` | Le contrôle de sécurité d'un centre de tri l'a refusé, et le centre règle le problème avant de le réexpédier : il ne repart pas chez l'expéditeur. Peek affiche « Problème signalé ». |
 | `送交出口海关` | Présenté à la douane chinoise à l'export. |
 | `出口海关/留存待验` | La douane à l'export le retient pour contrôle. |
 | `出口海关/放行` | La douane à l'export l'a libéré. |

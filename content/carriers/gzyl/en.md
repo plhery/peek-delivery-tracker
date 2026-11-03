@@ -25,7 +25,7 @@ Spaces and lower case don't matter when you paste the number into Peek.
 
 ## GZYL tracking statuses explained
 
-GZYL writes its steps in English, typos included. In the order a parcel gets them:
+GZYL writes its own steps in English, typos included. In the order a parcel gets them:
 
 | GZYL says | What it means for you | Peek shows |
 | --- | --- | --- |
@@ -48,6 +48,8 @@ GZYL writes its steps in English, typos included. In the order a parcel gets the
 **Through the United States.** A parcel can also show `Los Angeles Processing Center has received it`, with a city in brackets after it: a processing centre in the United States has taken it on its way to its destination. Peek shows "In transit".
 
 **A line in Chinese.** For an order with no scans yet, the platform GZYL's tracker runs on writes `货物电子信息已经收到` by itself: "the goods' electronic information has been received". The seller has created the order, but nobody has scanned the parcel. Peek shows the line in Chinese, under "Label created".
+
+**Through China Post.** A parcel can also show `广州处理中心已收寄`, with the city in brackets after it: China Post's acceptance at its Guangzhou processing centre, which GZYL relays in Chinese. Peek shows the line in Chinese, under "Received by carrier".
 
 **Times.** Every time on GZYL's tracker is on Beijing's clock, steps in your country included, with no time zone shown. In winter, a step at 20:00 there is noon in London and 7am in New York.
 

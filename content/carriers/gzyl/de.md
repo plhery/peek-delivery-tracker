@@ -25,7 +25,7 @@ Leerzeichen und Kleinbuchstaben stören Peek beim Einfügen nicht.
 
 ## GZYL Sendungsverfolgung: was die Status bedeuten
 
-GZYL schreibt seine Schritte auf Englisch, samt Tippfehlern. In der Reihenfolge, in der ein Paket sie bekommt:
+GZYL schreibt seine eigenen Schritte auf Englisch, samt Tippfehlern. In der Reihenfolge, in der ein Paket sie bekommt:
 
 | GZYL schreibt | Was es für dich heißt | Peek zeigt |
 | --- | --- | --- |
@@ -46,6 +46,8 @@ GZYL schreibt seine Schritte auf Englisch, samt Tippfehlern. In der Reihenfolge,
 | `Delivered` | Die Zustellung, mit dem Ort. Das kann ein Plan sein und kein Scan: siehe unten. | „Zugestellt“, mit einem Hinweis auf den festen Zeitplan, sofern Peek den Schritt nicht zurückhält (siehe unten) |
 
 **Eine Zeile auf Chinesisch.** Bei einer Bestellung ohne Scans schreibt die Plattform, auf der die Tracking-Seite von GZYL läuft, von selbst `货物电子信息已经收到` (die elektronischen Warendaten sind eingegangen). Der Shop hat die Bestellung angelegt, aber niemand hat das Paket gescannt. Peek zeigt die Zeile auf Chinesisch, unter „Etikett erstellt“.
+
+**Über China Post.** Ein Paket kann auch `广州处理中心已收寄` zeigen, mit der Stadt in Klammern dahinter: die Annahme durch China Post in ihrem Bearbeitungszentrum in Guangzhou, die GZYL auf Chinesisch weitergibt. Peek zeigt die Zeile auf Chinesisch, unter „Beim Paketdienst eingegangen“.
 
 **Uhrzeiten.** Alle Zeiten auf GZYLs Tracking-Seite stehen in Pekinger Zeit (UTC+8), auch bei Schritten in deinem Land, ohne Angabe der Zeitzone. Steht dort 20:00 Uhr, ist es in Deutschland, Österreich und der Schweiz 13:00 Uhr (MEZ), während der Sommerzeit 14:00 Uhr (MESZ).
 
@@ -79,7 +81,7 @@ Stand 30. Oktober 2026 hat Peek keine Kontaktdaten von GZYL gefunden: keine Webs
 
 [Peek](/) kann eine GZYL-Nummer an ihrer Form allein nicht sicher zuordnen: YL, zehn Ziffern und YQ ist nur ein schwacher Hinweis. Füg sie trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Beim Hinzufügen fragt Peek bei der Tracking-Seite von GZYL nach („Tracking-Dienste werden geprüft…“) und zeigt „GZYL hat dieses Paket.“, wenn sie die Nummer kennt. Sonst tipp auf „Ändern“ und wähl GZYL unter „Passt zu dieser Nummer“ (auch über 广州云链 findest du GZYL), oder nimm „Paketdienst ändern“ bei einem Paket, das du schon hinzugefügt hast. Genauso gehst du bei einer Referenz des Shops vor: Peek zeigt dann die eigene Nummer der Bestellung mit der Beschriftung „GZYL führt die Sendung unter“. Peek entfernt allerdings Bindestriche, deshalb findet es eine Referenz mit Bindestrichen nicht: Frag den Shop nach der YL…YQ-Nummer.
 
-Peek liest die eigene Tracking-Seite von GZYL und zeigt den Status, jeden Schritt mit seinem Ort und, wenn der Datensatz es nennt, das Zielland. Die Schritte zeigt Peek so, wie GZYL sie schreibt, auf Englisch und die eine Zeile auf Chinesisch; nur `Delivered` steht im Verlauf auf Deutsch, als „Zugestellt“. Die Uhrzeiten liest Peek in Pekinger Zeit und zeigt sie in der Zeitzone deines Geräts. Namen, Adresse, Postleitzahlen, Gewicht, Gebühren, Unterschrift und Zustellnachweis, die der Datensatz enthalten kann, lässt Peek weg. Einen voraussichtlichen Liefertermin zeigt es nicht, weil GZYL keinen nennt.
+Peek liest die eigene Tracking-Seite von GZYL und zeigt den Status, jeden Schritt mit seinem Ort und, wenn der Datensatz es nennt, das Zielland. Die Schritte zeigt Peek so, wie GZYL sie schreibt, auf Englisch und die beiden Zeilen auf Chinesisch; nur `Delivered` steht im Verlauf auf Deutsch, als „Zugestellt“. Die Uhrzeiten liest Peek in Pekinger Zeit und zeigt sie in der Zeitzone deines Geräts. Namen, Adresse, Postleitzahlen, Gewicht, Gebühren, Unterschrift und Zustellnachweis, die der Datensatz enthalten kann, lässt Peek weg. Einen voraussichtlichen Liefertermin zeigt es nicht, weil GZYL keinen nennt.
 
 Peek hält jeden Schritt zurück, der mehr als zwölf Stunden vor seiner eigenen Uhrzeit geschrieben wurde, und jeden, dessen Uhrzeit nach dem Moment der Abfrage liegt, gemessen in Pekinger Zeit. Hat eine Bestellung vorab geschriebene Schritte, hält Peek auch `Delivered` zurück, selbst eines, das erst an seinem eigenen Tag geschrieben wurde. Peek richtet sich nach den Schritten, die es behält, nicht nach dem Gesamtstatus des Datensatzes. Hält Peek alle Schritte einer Bestellung zurück, hat sie in Peek noch keinen Sendungsverlauf. Kopien der Schritte, die Peek als Plan von GZYL zurückhält, `Delivered` eingeschlossen, lässt Peek auch bei Tracking-Diensten weg, selbst wenn es andere Schritte der Bestellung behält. Ist GZYLs Tracking-Seite aber nicht erreichbar, fragt Peek Tracking-Dienste, und deren Kopien können vorab geschriebene Schritte enthalten.
 

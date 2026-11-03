@@ -25,7 +25,7 @@ W Peek spacje i wielkość liter nie mają znaczenia.
 
 ## Statusy GZYL: co znaczą
 
-GZYL zapisuje etapy po angielsku, z literówkami włącznie. W kolejności, w jakiej spotyka je paczka:
+GZYL zapisuje własne etapy po angielsku, z literówkami włącznie. W kolejności, w jakiej spotyka je paczka:
 
 | GZYL pisze | Co to znaczy dla Ciebie | W Peek |
 | --- | --- | --- |
@@ -50,6 +50,8 @@ Miejscowość, którą GZYL dopisuje po słowach etapu, Peek pokazuje jako miejs
 **Przez Stany Zjednoczone.** W historii może się też pojawić etap `Los Angeles Processing Center has received it`, a po nim nazwa miasta w nawiasie kwadratowym: paczkę przejęło centrum logistyczne w Stanach Zjednoczonych, przez które jedzie do kraju docelowego. Peek pokazuje „W transporcie”.
 
 **Linia po chińsku.** Gdy zamówienie nie ma jeszcze skanów, platforma, na której działa strona śledzenia GZYL, sama zapisuje `货物电子信息已经收到`, czyli: otrzymano elektroniczne dane towaru. Sprzedawca założył zamówienie, ale nikt jeszcze nie zeskanował paczki. Peek pokazuje tę linię po chińsku, ze statusem „Zarejestrowana”.
+
+**Przez China Post.** W historii może się też pojawić `广州处理中心已收寄`, a po nim nazwa miasta w nawiasie: to przyjęcie paczki przez China Post w jej centrum przetwarzania w Kantonie, które GZYL przekazuje po chińsku. Peek pokazuje tę linię po chińsku, ze statusem „Przyjęta przez przewoźnika”.
 
 **Godziny.** Wszystkie godziny na stronie śledzenia GZYL są w czasie pekińskim (UTC+8), także przy etapach w kraju docelowym, choć strona nie wskazuje strefy czasowej. Godzina 20:00 w Pekinie to w Polsce 13:00 zimą i 14:00 w czasie letnim, który trwa od ostatniej niedzieli marca do ostatniej niedzieli października.
 

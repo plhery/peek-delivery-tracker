@@ -37,6 +37,7 @@ China Post escribe sus lecturas en chino. Los lugares van entre corchetes, aquí
 | `已揽收` | Admitido: China Post ya tiene el paquete. |
 | `邮件到达【…】` | Ha llegado a una oficina o a un centro de clasificación de China Post. |
 | `邮件离开【…】，正在发往下一站` | Ha salido de ese centro hacia la siguiente parada. |
+| `【…】退回，备注:安检退回` | El control de seguridad de un centro de clasificación lo rechazó y el centro lo resuelve antes de volver a enviarlo; no vuelve al remitente. Peek muestra «Incidencia». |
 | `送交出口海关` | Se ha presentado en la aduana china de exportación. |
 | `出口海关/留存待验` | La aduana de exportación lo retiene para revisarlo. |
 | `出口海关/放行` | La aduana de exportación lo ha liberado. |

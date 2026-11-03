@@ -36,6 +36,7 @@ China Post writes its scans in Chinese. Place names go in brackets, here shown a
 | `已揽收` | Accepted: China Post has the parcel. |
 | `邮件到达【…】` | It reached a China Post office or sorting centre. |
 | `邮件离开【…】，正在发往下一站` | It left that office for the next stop. |
+| `【…】退回，备注:安检退回` | A sorting centre sent it back at its security check and deals with it before sending it on; it isn't going back to the sender. Peek shows "Needs attention". |
 | `送交出口海关` | Presented to Chinese export customs. |
 | `出口海关/留存待验` | Held by export customs for inspection. |
 | `出口海关/放行` | Export customs released it. |

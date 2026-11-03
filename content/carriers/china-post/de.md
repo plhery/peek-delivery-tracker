@@ -36,6 +36,7 @@ China Post schreibt ihre Scans auf Chinesisch. Orte stehen in Klammern, hier als
 | `已揽收` | Angenommen: China Post hat das Paket. |
 | `邮件到达【…】` | Es ist in einem Postamt oder Sortierzentrum von China Post angekommen. |
 | `邮件离开【…】，正在发往下一站` | Es hat dieses Amt verlassen, auf dem Weg zur nächsten Station. |
+| `【…】退回，备注:安检退回` | Ein Sortierzentrum hat es bei seiner Sicherheitskontrolle zurückgeschickt und kümmert sich darum, bevor es weitergeht; es geht nicht zurück an den Absender. Peek zeigt „Problem gemeldet“. |
 | `送交出口海关` | Dem chinesischen Ausfuhrzoll vorgelegt. |
 | `出口海关/留存待验` | Der Ausfuhrzoll hält es zur Prüfung zurück. |
 | `出口海关/放行` | Der Ausfuhrzoll hat es freigegeben. |

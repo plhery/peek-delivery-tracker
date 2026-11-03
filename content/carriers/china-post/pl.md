@@ -36,6 +36,7 @@ China Post pisze skany po chińsku. Miejsca są w nawiasach, tu jako `【…】`
 | `已揽收` | Przyjęta: China Post ma paczkę. |
 | `邮件到达【…】` | Dotarła do urzędu lub sortowni China Post. |
 | `邮件离开【…】，正在发往下一站` | Wyjechała stamtąd do następnego punktu. |
+| `【…】退回，备注:安检退回` | Kontrola bezpieczeństwa centrum sortowania ją odrzuciła, a centrum załatwia sprawę przed dalszą wysyłką; nie wraca do nadawcy. Peek pokazuje „Zgłoszono problem”. |
 | `送交出口海关` | Przekazana do chińskiej odprawy eksportowej. |
 | `出口海关/留存待验` | Celnicy eksportowi zatrzymali ją do kontroli. |
 | `出口海关/放行` | Celnicy eksportowi ją zwolnili. |

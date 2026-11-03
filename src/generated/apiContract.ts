@@ -6024,7 +6024,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "DHL Parcel Netherlands",
       "DHL Parcel Benelux",
-      "DHL eCommerce Benelux"
+      "DHL eCommerce Benelux",
+      "DHL Parcel (NL)"
     ],
     "countries": [
       "NL",
@@ -7131,7 +7132,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Gebrueder Weiss",
       "Gebruder Weiss",
-      "GW"
+      "GW",
+      "Gebrüder Weiss (GW)"
     ],
     "countries": [
       "AT",
@@ -7217,7 +7219,10 @@ export const CARRIER_CAPABILITIES = {
       "GLS Portugal",
       "General Logistics Systems Portugal",
       "GLOBALTRANS",
-      "GlobalTrans Toledo"
+      "GlobalTrans Toledo",
+      "GLS Spain (National)",
+      "GLS (PT)",
+      "GLS Portugal (National)"
     ],
     "countries": [
       "ES",
@@ -13133,7 +13138,8 @@ export const CARRIER_CAPABILITIES = {
       "Pilot",
       "Pilot - A Maersk Company",
       "Maersk Ground Freight",
-      "Pilot Delivers"
+      "Pilot Delivers",
+      "Pilot Freight Services (Maersk)"
     ],
     "countries": [
       "US"
@@ -30674,7 +30680,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "CrossCountry Freight Solutions",
     "aliases": [
       "CCFS",
-      "Cross Country Freight Solutions"
+      "Cross Country Freight Solutions",
+      "CrossCountry Freight"
     ],
     "countries": [
       "US"
@@ -35039,7 +35046,8 @@ export const CARRIER_CAPABILITIES = {
       "Pallex",
       "Pall-Ex UK",
       "Pall-Ex (UK) Ltd",
-      "Pall-Ex Group"
+      "Pall-Ex Group",
+      "Pallex M-O"
     ],
     "countries": [
       "GB"
@@ -35662,7 +35670,8 @@ export const CARRIER_CAPABILITIES = {
       "Optima Courier",
       "Optima Courier, Inc.",
       "Optima Courier Inc",
-      "ShipOptima"
+      "ShipOptima",
+      "Optima"
     ],
     "countries": [
       "US"
@@ -37034,7 +37043,8 @@ export const CARRIER_CAPABILITIES = {
       "Super Parcel",
       "SP Track",
       "Ant Parcel",
-      "Ant Parcel Track"
+      "Ant Parcel Track",
+      "Ant Parcel Tracking"
     ],
     "countries": [
       "CN"
@@ -41371,7 +41381,8 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Frontline Freight",
       "Frontline Freight, Inc.",
-      "Frontline Freight Inc"
+      "Frontline Freight Inc",
+      "STG"
     ],
     "countries": [
       "US"
@@ -48055,9 +48066,21 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "linkRules": [],
+    "linkRules": [
+      {
+        "domains": [
+          "www.flightlg.com",
+          "flightlg.com"
+        ],
+        "pathPattern": "^/myflight-shipment-tracking/?$",
+        "params": [
+          "consign_note"
+        ]
+      }
+    ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.flightlg.com/myflight-shipment-tracking/?method=tracking"
+    "trackingSearchUrl": "https://www.flightlg.com/myflight-shipment-tracking/?method=tracking",
+    "trackingUrlTemplate": "https://www.flightlg.com/myflight-shipment-tracking/?method=tracking&consign_note={trackingNumber}"
   },
   "peregrine-ship": {
     "displayName": "Peregrine Ship",
@@ -48175,6 +48198,81 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://topnic.com.hk/order-tracking"
+  },
+  "dhx": {
+    "displayName": "DHX",
+    "aliases": [
+      "Dependable Hawaiian Express",
+      "DHX-Dependable Hawaiian Express"
+    ],
+    "countries": [
+      "US",
+      "GU"
+    ],
+    "color": "#492f91",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.dhx.com/quicktrack.aspx"
+  },
+  "jb-hunt": {
+    "displayName": "J.B. Hunt",
+    "aliases": [
+      "JB Hunt",
+      "J.B. Hunt Transport",
+      "J.B. Hunt Transport Services",
+      "J.B. Hunt Final Mile"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#fedb00",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.jbhunt.com/shippers/final-mile-services/track-shipments/?tracking={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "jbhunt.com"
+        ],
+        "pathPattern": "^/shippers/final-mile-services/track-shipments/?$",
+        "params": [
+          "tracking"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.jbhunt.com/shippers/final-mile-services/track-shipments/"
+  },
+  "rohlig": {
+    "displayName": "Röhlig Logistics",
+    "aliases": [
+      "Rohlig",
+      "Röhlig",
+      "Rohlig Logistics"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#002c61",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.rohlig.com/"
   }
 } as const;
 
@@ -49551,7 +49649,10 @@ export const CARRIER_IDS = [
   "southwestern-motor-transport",
   "crane-worldwide",
   "magnum-transportation",
-  "topnic"
+  "topnic",
+  "dhx",
+  "jb-hunt",
+  "rohlig"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

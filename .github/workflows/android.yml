@@ -167,6 +167,8 @@ jobs:
           sudo udevadm trigger --name-match=kvm
       - name: Open it on an emulator
         timeout-minutes: 15
+        env:
+          SMOKE_LOGCAT: ${{ runner.temp }}/smoke-logcat.txt
         uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
         with:
           api-level: 35
@@ -174,9 +176,21 @@ jobs:
           arch: x86_64
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot
-          script: android/scripts/release-smoke.sh android/app/build/outputs/apk/release/app-release.apk
+          # The emulator has stopped about half a minute after the app opened: first a minute and a half without it.
+          script: |
+            sleep 90 && adb shell echo "The emulator is still up 90 s after booting, without the app."
+            android/scripts/release-smoke.sh android/app/build/outputs/apk/release/app-release.apk
       - name: Say whether the system stopped the emulator
         if: failure()
         run: |
           free -m
           sudo dmesg | grep -i -E 'out of memory|killed process' || echo "The system stopped nothing for memory."
+          tail -n 150 "$RUNNER_TEMP/smoke-logcat.txt" || true
+      - name: Keep the device's log
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: android-release-logcat
+          path: ${{ runner.temp }}/smoke-logcat.txt
+          if-no-files-found: ignore
+          retention-days: 7

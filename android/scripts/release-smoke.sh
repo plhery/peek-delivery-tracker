@@ -26,6 +26,11 @@ device uninstall "$package" >/dev/null 2>&1 || true
 device install "$apk" >/dev/null
 device logcat -c
 device logcat -b crash -c 2>/dev/null || true
+# With SMOKE_LOGCAT set to a file, the device's whole log goes there while the app runs: what's left of it when the
+# device itself stops.
+if [ -n "${SMOKE_LOGCAT:-}" ]; then
+  device logcat -v threadtime > "$SMOKE_LOGCAT" 2>&1 &
+fi
 
 # The launcher's own intent, waiting for the first frame: the launch window holds until the first screen is composed.
 started=$(device shell am start -W -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -n "$package/.MainActivity")

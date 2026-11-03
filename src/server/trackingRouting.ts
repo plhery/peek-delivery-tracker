@@ -127,6 +127,12 @@ export interface RoutingState extends JsonObject {
    * the carrier again replaces it, and an answer on local clocks the check then takes leaves nothing.
    */
   set_aside?: Record<string, SetAside>;
+  /**
+   * The clocks of the rows each carrier named as written ahead of them for the number (a scripted
+   * tenant's timeline), kept once it stops naming them: a provider still relays them as scans. The
+   * carrier's own answer showing one at its clock frees it.
+   */
+  written_ahead?: { number: string; carriers: Record<string, string[]> };
   probe_cursor: number;
   discovery_cursor: number;
   failures: Record<string, Failure>;
@@ -566,7 +572,7 @@ export function earlierParcelRows(parcel: JsonObject): string[] | null {
 const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'lookup_language', 'postcode_country', 'account_postcode', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
 /** Routing a reused number's earlier parcel taught: where its answers came from, its watermark and what filed or confirmed it. */
 const EARLIER_PARCEL_ROUTING = ['last_event_at', 'last_success_at', 'discovered_carrier', 'preferred_provider', 'preferred_number',
-  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested', 'likely_carrier'];
+  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested', 'likely_carrier', 'written_ahead'];
 /**
  * The parcel as if it had never stored a reused number's earlier parcel (`earlierParcelRows`):
  * no stage, summary, estimate or rows of that parcel, nor the routing it taught, so the check
@@ -630,6 +636,8 @@ const RECOGNITION_BUDGET_MS = 15_000;
  */
 const PACING_WAIT_MS = 6_000;
 const PACING_ROUNDS = 2;
+/** The most clocks of rows written ahead kept for each carrier of a parcel. */
+const WRITTEN_AHEAD_KEPT = 50;
 
 export class RoutingDeferred extends Error {
   /** `attempted` counts providers actually contacted; zero means every tier was still cooling down. */
@@ -973,6 +981,24 @@ export class TrackingRouter {
     const pacedDirect = new Set<string>();
     // The clocks of rows a carrier holds back as written ahead of them: a provider relaying them shows them as scans.
     const writtenAhead: string[] = [];
+    // Those a carrier named for the number in earlier checks too (`written_ahead`): one answering
+    // without history, or without them, has not made them scans.
+    const heldBackBy = (): Record<string, string[]> => {
+      const kept = state.written_ahead;
+      return isRecord(kept) && kept.number === number && isRecord(kept.carriers) ? Object.fromEntries(Object.entries(kept.carriers)
+        .map(([carrier, clocks]) => [carrier, Array.isArray(clocks) ? clocks.filter((clock): clock is string => typeof clock === 'string') : []])) : {};
+    };
+    const heldBack = () => [...new Set([...writtenAhead, ...Object.values(heldBackBy()).flat()])];
+    const holdBack = (carrier: string, named: readonly string[], answer?: CarrierResult) => {
+      writtenAhead.push(...named);
+      const shown = new Set((answer?.events ?? []).flatMap((event) => [event.time, event.local_time]));
+      const carriers = heldBackBy();
+      const clocks = [...new Set([...carriers[carrier] ?? [], ...named])].filter((clock) => !shown.has(clock)).slice(-WRITTEN_AHEAD_KEPT);
+      if (clocks.length) carriers[carrier] = clocks;
+      else delete carriers[carrier];
+      if (Object.keys(carriers).length) state.written_ahead = { number, carriers };
+      else delete state.written_ahead;
+    };
     let attempts = 0;
     // Probes are this parcel's own guesses: they are no evidence of provider health.
     let probeContacts = 0;
@@ -1042,7 +1068,7 @@ export class TrackingRouter {
         }
         // An answer names the rows it holds back as written ahead beside the scans it keeps, as a
         // failure does: a provider asked after it shows its copies of them as scans.
-        writtenAhead.push(...(value.result.written_ahead ?? []));
+        holdBack(carrier, value.result.written_ahead ?? [], value.result);
         // An empty summary archive binds the fallback to this parcel without
         // creating a scan; earlier real scans survive when it is merged.
         const capturedHistory = hasUnresolvedDirectHistory(value.sourceCarrierId, value.result)
@@ -1155,7 +1181,7 @@ export class TrackingRouter {
         }
         const failure = fail(carrier, error);
         if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
-        writtenAhead.push(...writtenAheadClocks(error));
+        holdBack(carrier, writtenAheadClocks(error));
         // A probe asks only a carrier that knows the number: wanting an input, it holds the parcel behind it.
         if (probe && failure.kind === 'input_required') heldDirect.add(carrier);
         if (probe && ['rate_limited', 'verification', 'schema', 'transport'].includes(failure.kind)) unsettledDirect.add(carrier);
@@ -1431,7 +1457,7 @@ export class TrackingRouter {
     const dueOnly = (result: CarrierResult) => {
       const planned = [declared, universalCarrier, metadata.active_tracking_carrier, askedCarrier, state.discovered_carrier]
         .some((carrier) => typeof carrier === 'string' && carrier !== 'unknown' && this.options.plannedScans?.(carrier) === true);
-      return withoutWrittenAhead(result, planned ? [...writtenAhead, ...plannedClocks(result, now())] : writtenAhead);
+      return withoutWrittenAhead(result, planned ? [...heldBack(), ...plannedClocks(result, now())] : heldBack());
     };
     const attemptedUniversal = new Set<UniversalSource>();
     // Providers that answered without history for this number in this check.

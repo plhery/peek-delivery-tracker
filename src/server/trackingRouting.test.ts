@@ -724,6 +724,35 @@ describe('persistent tracking routing', () => {
     const result = await router.fetch(parcel({ carrier }), false);
     expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', last_update: earlier.time, events: [earlier] });
   });
+  it('keeps setting aside a provider\'s copies of the rows a carrier named as written ahead once it answers without them', async () => {
+    const { router, direct, universal } = setup();
+    const clock = '2026-09-10T19:00:00+08:00';
+    // The carrier's scripted delivery at 11:00 UTC, which it wrote days before, and a provider relaying it.
+    direct.mockRejectedValue(new NoHistoryError('UPS', 'UPS has no scans for the shipment yet', { reason: 'written_ahead', writtenAhead: [clock] }));
+    const script: CarrierResult = { status: 'delivered', current_stage: 'delivered', last_update: '2026-09-10T11:00:00Z', discovered_carrier: 'ups',
+      events: [{ time: '2026-09-10T11:00:00Z', description: 'Delivered', stage: 'delivered' }] };
+    universal.mockResolvedValue(script);
+    const first = await router.fetch(parcel({ carrier: 'ups' }), false).catch((error: unknown) => error);
+    expect(first).toBeInstanceOf(RoutingDeferred);
+    const writtenAhead = (first as RoutingDeferred).routing.written_ahead;
+    expect(writtenAhead).toEqual({ number: 'TEST1234', carriers: { ups: [clock] } });
+    // The next check, its cooldowns over.
+    const routing = state({ configured_carrier: 'ups', written_ahead: writtenAhead });
+    // The carrier's lookup then has no scans and names none: the provider's copy is still its script.
+    direct.mockRejectedValue(new NoHistoryError('UPS', 'UPS has no scans for the shipment yet'));
+    universal.mockClear();
+    const again = await router.fetch(parcel({ carrier: 'ups', carrier_data: { routing } }), false).catch((error: unknown) => error);
+    expect(universal).toHaveBeenCalled();
+    expect(again).toBeInstanceOf(RoutingDeferred);
+    expect((again as RoutingDeferred).routing.written_ahead).toEqual(writtenAhead);
+    // Another number is another parcel's.
+    await expect(router.fetch(parcel({ carrier: 'ups', tracking_number: 'TEST5678', carrier_data: { routing } }), false))
+      .resolves.toMatchObject({ result: { current_stage: 'delivered' } });
+    // The carrier's own answer showing the row at its clock frees it.
+    direct.mockResolvedValue({ ...directValue(), result: { ...script, events: [{ ...script.events![0]!, time: clock }] } });
+    const shown = await router.fetch(parcel({ carrier: 'ups', carrier_data: { routing } }), false);
+    expect(shown.result.routing).not.toHaveProperty('written_ahead');
+  });
   it('sets aside a provider\'s copies of the rows a carrier answering on local clocks names as written ahead', async () => {
     fixedPlan('Ship24');
     const { router, direct, universal } = setup();

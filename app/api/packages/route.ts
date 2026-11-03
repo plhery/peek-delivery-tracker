@@ -12,9 +12,9 @@ import {
 import { withEventPlaces } from '../../../src/server/eventPlaces';
 import { captureOperationalError } from '../../../src/server/observability';
 import { SupabaseError } from '../../../src/server/supabase';
-import { wakeSyncWorker } from '../../../src/server/background';
 import { lookupCountry, rememberLookupCountry } from '../../../src/server/lookupCountry';
 import { checkAccountRequest } from '../../../src/server/nativeVerification';
+import { queueFirstCheck } from '../../../src/server/parcelsFromText';
 import { settleTypedSupportCases } from '../../../src/server/reviewQueues';
 import { newPackageValues } from '../../../src/server/validation';
 
@@ -73,21 +73,7 @@ export const POST = apiRoute(async (context) => {
 
   await rememberLookupCountry(service, parcel, context.request, body.lookupCountryHint, values.dpdPostcodeCountry);
   await settleTypedSupportCases(service, values.trackingNumber);
-  const jobIds: string[] = [];
-  try {
-    const job = await service.enqueueSyncJob({
-      userId: requireUser(context).id,
-      packageId: String(parcel.id),
-      reason: 'added',
-    });
-    wakeSyncWorker();
-    if (typeof job.row.id === 'string') jobIds.push(job.row.id);
-  } catch (error) {
-    if (!(error instanceof SupabaseError)) throw error;
-    await service.updatePackage(String(parcel.id), {
-      sync_status: 'error',
-      sync_error: 'The first tracking check could not be queued. Try again shortly.',
-    });
-  }
+  const jobId = await queueFirstCheck(service, requireUser(context).id, String(parcel.id));
+  const jobIds = jobId ? [jobId] : [];
   return json({ package: withEventPlaces(parcel), jobIds }, 201);
 }, { serviceRequired: true });

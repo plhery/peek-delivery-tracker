@@ -84,3 +84,14 @@
 .settings-switch::after { content: ''; position: absolute; width: 16px; height: 16px; top: 2px; left: 2px; border-radius: 50%; background: white; box-shadow: 0 1px 2px #0001; }
 [aria-checked=true] > .settings-switch { background: var(--green); }
 [aria-checked=true] > .settings-switch::after { left: 15px; }
+
+/* Adding parcels by email: the address to copy, Gmail's steps and confirmation, and the last email's outcome. */
+.add-by-email__start { display: inline-flex; align-items: center; gap: 8px; }
+.add-by-email__address { margin: 0; padding: 14px; font: 500 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; user-select: all; border-bottom: 1px solid var(--line); }
+.add-by-email__note { margin: 9px 2px 0; color: var(--ink-soft); font-size: 11px; line-height: 1.5; }
+.add-by-email__code { margin: 0; padding: 14px; font-size: 13px; overflow-wrap: anywhere; }
+.add-by-email__code + .settings-row { border-top: 1px solid var(--line); }
+.refined-settings .add-by-email__last { margin: 0; }
+.add-by-email__renew { padding: 14px; font-size: 12px; color: var(--ink-soft); }
+.add-by-email__renew + .settings-row { border-top: 1px solid var(--line); }
+.add-by-email__renew .sheet__actions { margin-top: 12px; }

@@ -113,6 +113,26 @@ function rows(value: unknown): JsonObject[] {
   return Array.isArray(value) ? value.filter(isRecord) : [];
 }
 
+const INBOUND_MAIL_RESULTS = new Set(['added', 'known', 'none', 'limited', 'full', 'confirmation']);
+
+function inboundMailbox(value: unknown): InboundMailbox | null {
+  const row = Array.isArray(value) ? value[0] : value;
+  if (!isRecord(row) || typeof row.token !== 'string' || typeof row.created_at !== 'string') return null;
+  const text = (field: unknown) => (typeof field === 'string' ? field : null);
+  const confirmedAt = text(row.confirmation_at);
+  return {
+    token: row.token,
+    createdAt: row.created_at,
+    usedToday: Number(row.used_today ?? 0),
+    lastMailAt: text(row.last_mail_at),
+    lastResult: INBOUND_MAIL_RESULTS.has(String(row.last_result)) ? row.last_result as InboundMailResult : null,
+    lastAdded: typeof row.last_added === 'number' ? row.last_added : null,
+    confirmation: confirmedAt
+      ? { code: text(row.confirmation_code), link: text(row.confirmation_link), receivedAt: confirmedAt }
+      : null,
+  };
+}
+
 function forgotten(value: unknown): { links: number; packages: number } {
   const counts = isRecord(value) ? value : {};
   return { links: Number(counts.links ?? 0), packages: Number(counts.packages ?? 0) };
@@ -192,6 +212,27 @@ export type DeliveryEmailOutcome = 'sent' | 'failed' | 'skipped';
 
 /** One of a package's newest scans, with its words and its source (`scanSource`). */
 export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string };
+
+/** An account's forwarding address for adding parcels by email, and what its last email did. */
+export interface InboundMailbox {
+  token: string;
+  createdAt: string;
+  /** Emails counted today (UTC), against the daily allowance. */
+  usedToday: number;
+  lastMailAt: string | null;
+  lastResult: InboundMailResult | null;
+  lastAdded: number | null;
+  /** What Gmail sent to confirm forwarding, for the owner to finish its setup. */
+  confirmation: { code: string | null; link: string | null; receivedAt: string } | null;
+}
+
+export type InboundMailResult = 'added' | 'known' | 'none' | 'limited' | 'full' | 'confirmation';
+
+/** Whom an email's address names, and whether its allowances let it through. */
+export interface InboundMailClaim {
+  allowed: boolean;
+  scope: 'overall' | 'account' | null;
+}
 
 /** What the Auth server knows of an account that an email to it needs. */
 export interface AuthAccount {
@@ -1104,6 +1145,91 @@ export class SupabaseServiceClient extends SupabaseClient {
     const params = query({ select: 'last_opened_at', user_id: `eq.${userId}`, limit: '1' });
     const [activity] = rows(await this.request(`/rest/v1/account_activity?${params}`));
     return typeof activity?.last_opened_at === 'string' ? activity.last_opened_at : null;
+  }
+
+  /**
+   * Which of these numbers an account already follows, by the number each was saved under or the one a merged leg
+   * kept, with the parcel's id.
+   */
+  async accountTrackingNumbers(userId: string, numbers: string[]): Promise<Map<string, string>> {
+    const known = new Map<string, string>();
+    if (!numbers.length) return known;
+    const list = `in.(${numbers.map((number) => `"${number}"`).join(',')})`;
+    const [saved, merged] = await Promise.all([
+      this.request(`/rest/v1/packages?${query({ select: 'id,tracking_number', user_id: `eq.${userId}`, tracking_number: list })}`),
+      this.request(`/rest/v1/packages?${query({
+        select: 'id,tracking_number:carrier_data->>original_tracking_number',
+        user_id: `eq.${userId}`,
+        'carrier_data->>original_tracking_number': list,
+      })}`),
+    ]);
+    for (const row of [...rows(saved), ...rows(merged)]) {
+      if (typeof row.tracking_number === 'string' && typeof row.id === 'string') known.set(row.tracking_number, row.id);
+    }
+    return known;
+  }
+
+  /** The account's forwarding address, or null when it has none. */
+  async inboundMailbox(userId: string): Promise<InboundMailbox | null> {
+    return inboundMailbox(await this.request('/rest/v1/rpc/inbound_mailbox', { method: 'POST', body: { p_user_id: userId } }));
+  }
+
+  /** Gives the account a forwarding address with this token, in place of the one it had. */
+  async openInboundMailbox(userId: string, token: string): Promise<InboundMailbox> {
+    const mailbox = inboundMailbox(await this.request('/rest/v1/rpc/open_inbound_mailbox', {
+      method: 'POST',
+      body: { p_user_id: userId, p_token: token },
+    }));
+    if (!mailbox) throw new SupabaseError('Supabase did not return the forwarding address');
+    return mailbox;
+  }
+
+  /** Takes the account's forwarding address away: emails to it are dropped from then on. */
+  async closeInboundMailbox(userId: string): Promise<void> {
+    await this.request('/rest/v1/rpc/close_inbound_mailbox', { method: 'POST', body: { p_user_id: userId } });
+  }
+
+  /** The account a forwarding address's token names, or null. Counts nothing. */
+  async inboundMailboxOwner(token: string): Promise<string | null> {
+    const result = await this.request('/rest/v1/rpc/inbound_mailbox_owner', { method: 'POST', body: { p_token: token } });
+    if (result === null || result === undefined) return null;
+    if (typeof result !== 'string') throw new SupabaseError('Supabase did not return the forwarding address\'s account');
+    return result;
+  }
+
+  /**
+   * Counts one email to the account against the hour's allowance for every address and the account's own for today
+   * (UTC), unless one is used up.
+   */
+  async claimInboundMail(userId: string, limits: { perAccount: number; overall: number }): Promise<InboundMailClaim> {
+    const result = await this.request('/rest/v1/rpc/claim_inbound_mail', {
+      method: 'POST',
+      body: { p_user_id: userId, p_limit: limits.perAccount, p_overall_limit: limits.overall },
+    });
+    if (!isRecord(result) || typeof result.allowed !== 'boolean') throw new SupabaseError('Supabase did not return the email allowance');
+    return {
+      allowed: result.allowed,
+      scope: result.scope === 'overall' || result.scope === 'account' ? result.scope : null,
+    };
+  }
+
+  /** Notes what an email to the account's address did, and what Gmail sent to confirm forwarding when it was that. */
+  async recordInboundMail(
+    userId: string,
+    result: InboundMailResult,
+    added: number,
+    confirmation: { code: string | null; link: string | null } | null = null,
+  ): Promise<void> {
+    await this.request('/rest/v1/rpc/record_inbound_mail', {
+      method: 'POST',
+      body: {
+        p_user_id: userId,
+        p_result: result,
+        p_added: added,
+        p_confirmation_code: confirmation?.code ?? null,
+        p_confirmation_link: confirmation?.link ?? null,
+      },
+    });
   }
 
   /**

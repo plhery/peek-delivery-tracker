@@ -15,6 +15,8 @@ Next.js route handlers --- user token ---> PostgREST + Postgres RLS
           +--------------------> universal-parcel-scraper
           +--------------------> Web Push + APNs
           +--------------------> SMTP (delivery email)
+          ^
+          +--- signed POST <--- Cloudflare Email Worker <--- forwarded shipping email
 ```
 
 ## Where things live
@@ -110,8 +112,9 @@ Key server modules:
   functions that re-validate, enforce quotas and can't target another account.
 - **Service role**: used only for scheduled carrier work, adding a parcel to an account
   once its daily allowance is charged, the record of when an account's apps last read its
-  parcels, push delivery, the delivery email, account deletion, parcels
-  followed without an account and what a parcel link shows. It never reaches the browser.
+  parcels, push delivery, the delivery email, adding parcels by email, account deletion,
+  parcels followed without an account and what a parcel link shows. It never reaches the
+  browser.
 - **Parcel links**: a parcel followed without an account has no owner and is reached
   through `/p/<id>`. The id (12 symbols, about 70 bits) is the capability to read it.
   - The device that made the lookup also gets an owner key, once; the database keeps its
@@ -222,6 +225,26 @@ Key server modules:
     "Unsubscribe" posts straight to the route. Both addresses name the email's language
     (`lang`), which the page speaks over the browser's own choice.
   - Tokens stay out of request logs and error reports.
+- **Adding parcels by email**: an account the server opens it to (`INBOUND_EMAIL_ACCOUNTS`)
+  gets a forwarding address whose random token (16 base32 characters, 80 bits) names it.
+  Every other account gets 404 from `/api/account/inbox`, so Settings shows no row.
+  - A Cloudflare Email Worker (`ops/cloudflare/inbound-email-worker.js`) posts each email to
+    `POST /api/inbound/email`, signed with a secret it shares with the server: an HMAC over
+    the time, the recipient and the raw mail, valid for five minutes. An unsigned or stale
+    post gets 401. An unknown token, a closed account and a used-up allowance all get the
+    same 202. An account the setting isn't open to has its emails dropped before they are
+    counted.
+  - The server reads the subject, the text part (else the HTML's text) and the HTML's links,
+    never an attachment, and takes the tracking numbers the Add sheet would, without order
+    numbers. It reads at most 16,000 characters, with patterns that stay linear on any
+    input, so no email holds the server up. Each is added as the Add sheet adds it, with the same daily allowance and
+    parcel limit, labelled with the sender's name; one the account follows already costs
+    nothing. `src/server/parcelsFromText.ts` is that step.
+  - Gmail's request to confirm forwarding is kept for the owner to finish in Gmail, never
+    followed by the server: its code and a link only to Google's own hosts.
+  - Each address takes `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
+    them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` is service-role
+    only.
 - **Private data**: tracking numbers, labels, carrier history, push endpoints and capability
   URLs (the tracking links a carrier keeps, such as Planzer's or a Freightways network's) never
   go into analytics. They do appear in operator logs and Sentry; see
@@ -401,9 +424,14 @@ and nothing typed is sent.
 - **A delivery email** leaves one row per parcel and stage in `delivery_emails`: sent,
   failed or skipped, with a reason code and none of its content. The row outlives its
   parcel, so nothing is told twice.
+- **An email to a forwarding address** is read in memory and dropped. Its mailbox keeps
+  when the last email came and what it did (the result and how many parcels it added), and
+  a Gmail confirmation until the next email. A new address replaces the old one; turning
+  the setting off deletes the mailbox. Each day's count of emails is kept apart for seven
+  days, so neither gives a new allowance.
 - **Deleting an account** removes the Auth user. Foreign-key cascades remove parcels,
-  jobs, events, push registrations, Live Activity tokens, delivery email rows and audit
-  rows. Other audit rows expire after 90 days.
+  jobs, events, push registrations, Live Activity tokens, delivery email rows, the
+  forwarding address and audit rows. Other audit rows expire after 90 days.
 - **Share target**: the PWA receives shared text via `POST`. The service worker keeps it
   in a one-time cache entry, so tracking text never appears in a URL or HTTP log. It then
   opens the app's add sheet, with the text or with why none came (too long, empty,

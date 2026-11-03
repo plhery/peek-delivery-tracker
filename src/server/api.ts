@@ -473,6 +473,35 @@ export async function readJsonObject(request: Request): Promise<JsonObject> {
   return (await readJsonBody(request)).value;
 }
 
+/** Reads a body of any type, at most `limit` bytes of it; a longer one is refused with 413 and cancelled. */
+export async function readBodyBytes(request: Request, limit: number): Promise<Uint8Array> {
+  const declaredLength = request.headers.get('content-length');
+  if (declaredLength !== null && Number(declaredLength) > limit) {
+    void request.body?.cancel().catch(() => undefined);
+    throw new HttpError(413, 'The request is too large');
+  }
+  const reader = request.body?.getReader();
+  if (!reader) throw new HttpError(400, 'Invalid request size');
+  const chunks: Uint8Array[] = [];
+  let receivedBytes = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      receivedBytes += value.byteLength;
+      if (receivedBytes > limit) {
+        void reader.cancel().catch(() => undefined);
+        throw new HttpError(413, 'The request is too large');
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  if (!receivedBytes) throw new HttpError(400, 'Invalid request size');
+  return Buffer.concat(chunks, receivedBytes);
+}
+
 export function requireUser(context: ApiContext): SupabaseUser {
   if (!context.user) throw new HttpError(401, 'Authentication is required');
   return context.user;

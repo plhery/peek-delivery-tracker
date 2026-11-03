@@ -47,6 +47,7 @@ data class AccountExportResponse(
     val packages: List<Parcel>,
     val friends: FriendsExport? = null,
     val deliveryEmails: DeliveryEmailsExport? = null,
+    val addByEmail: AddByEmail? = null,
 )
 
 @Serializable
@@ -3517,6 +3518,45 @@ data class TrackingProviderCheck(
     val provider: String,
     val outcome: TrackingProviderCheckOutcome,
 )
+
+@Serializable
+data class AddByEmail(
+    val address: String,
+    val createdAt: String,
+    val usedToday: Int,
+    val lastMailAt: String? = null,
+    val lastResult: AddByEmailResult? = null,
+    val lastAdded: Int? = null,
+    val confirmation: ForwardingConfirmation? = null,
+)
+
+@Serializable
+data class ForwardingConfirmation(
+    val code: String? = null,
+    val link: String? = null,
+    val receivedAt: String,
+)
+
+@Serializable
+data class AddByEmailResponse(
+    val inbox: AddByEmail? = null,
+    val dailyLimit: Int,
+)
+
+@Serializable
+enum class AddByEmailResult(val rawValue: String) {
+    @SerialName("added") Added("added"),
+    @SerialName("known") Known("known"),
+    @SerialName("none") None("none"),
+    @SerialName("limited") Limited("limited"),
+    @SerialName("full") Full("full"),
+    @SerialName("confirmation") Confirmation("confirmation"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): AddByEmailResult? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
 
 @Serializable
 enum class CarrierDetectionResponseAmazonShippingStatus(val rawValue: String) {

@@ -32,6 +32,11 @@ analytics.
   turned it on, the parcels you muted for it, and a record of each of these
   emails: the parcel, whether it told a delivery or a parcel ready for pickup,
   when it was sent and whether sending worked.
+- When you turn on adding parcels by email: your forwarding address, how many
+  emails reached it today, when the last one came and what it added, and the
+  code and link of a Gmail forwarding confirmation until the next email. Of an
+  email, the service keeps only the tracking numbers it adds and the sender's
+  name as their label, never the email itself.
 - The links you make to share a parcel or to follow one without an account, and
   what each link shows.
 - What you answer when a parcel's page asks whether it is right: the answer,
@@ -76,6 +81,8 @@ analytics run on a server rented from netcup GmbH, in Germany. Requests reach
 it through Cloudflare, which relays them and sees network metadata such as your
 IP address. Google provides Google sign-in and Apple Sign in with Apple.
 Resend delivers the service's emails, as described under "Emails".
+Cloudflare Email Routing receives the emails you forward to your Peek address
+and passes them to the service.
 
 Cloudflare Turnstile checks the browser or an in-app verification sheet when you start a new parcel lookup to
 prevent automated abuse. It processes browser and network signals; Peek sends
@@ -347,13 +354,16 @@ account was deleted or you checked the number without saving it, then deleted.
 A new check of the number restarts the 10 days. What a check learnt about a
 number's carrier also goes after 90 days without a new check. The record of a
 delivery email goes with the account; Resend deletes its own copy after 30 days.
+Turning off adding parcels by email deletes the forwarding address and what it
+recorded; a new address replaces the old one, which then takes no more email.
+The count of emails an account forwarded each day is kept for seven days.
 
 Use **Download my data** in the account menu for a machine-readable export,
 including your Friends profile and connections. Use **Delete account** to
 permanently delete the Auth user and, with it, your parcels, tracking events,
 shared links, browser subscriptions, native device registrations, delivery
-acknowledgements, delivery email records, and your Friends profile, connections
-and invitations. If you use Sign in with Apple, the iPhone app asks you to
+acknowledgements, delivery email records, forwarding address, and your Friends
+profile, connections and invitations. If you use Sign in with Apple, the iPhone app asks you to
 sign in with Apple once more, and the service asks Apple to revoke Peek's
 access to your Apple ID before deleting your account; the Android app, which
 has no Sign in with Apple, deletes the account without that step. Deletion

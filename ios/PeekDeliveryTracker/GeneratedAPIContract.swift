@@ -36,6 +36,7 @@ struct AccountExportResponse: Codable, Equatable, Hashable, Sendable {
     var packages: [Parcel]
     var friends: FriendsExport? = nil
     var deliveryEmails: DeliveryEmailsExport? = nil
+    var addByEmail: AddByEmail? = nil
 }
 
 struct DeleteAccountRequest: Codable, Equatable, Hashable, Sendable {
@@ -3584,6 +3585,38 @@ enum TrackingProviderCheckOutcome: String, Codable, CaseIterable, Hashable, Send
 struct TrackingProviderCheck: Codable, Equatable, Hashable, Sendable {
     var provider: String
     var outcome: TrackingProviderCheckOutcome
+}
+
+struct AddByEmail: Codable, Equatable, Hashable, Sendable {
+    var address: String
+    var createdAt: String
+    var usedToday: Int
+    var lastMailAt: String? = nil
+    var lastResult: AddByEmailResult? = nil
+    var lastAdded: Int? = nil
+    var confirmation: ForwardingConfirmation? = nil
+}
+
+struct ForwardingConfirmation: Codable, Equatable, Hashable, Sendable {
+    var code: String? = nil
+    var link: String? = nil
+    var receivedAt: String
+}
+
+struct AddByEmailResponse: Codable, Equatable, Hashable, Sendable {
+    var inbox: AddByEmail? = nil
+    var dailyLimit: Int
+}
+
+enum AddByEmailResult: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case added
+    case known
+    case none
+    case limited
+    case full
+    case confirmation
+
+    var id: String { rawValue }
 }
 
 enum CarrierDetectionResponseAmazonShippingStatus: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {

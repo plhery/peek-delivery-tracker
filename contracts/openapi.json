@@ -51058,6 +51058,105 @@
           }
         ]
       }
+    },
+    "/api/account/inbox": {
+      "get": {
+        "operationId": "getAddByEmail",
+        "description": "Adding parcels by email: the account's forwarding address. 404 when this server takes no email or the account may not use it.",
+        "responses": {
+          "200": {
+            "description": "The address, or null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddByEmailResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      },
+      "post": {
+        "operationId": "openAddByEmail",
+        "description": "Gives the account a forwarding address. With renew, a new one replaces the old, whose emails are dropped from then on.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "renew": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The address the account already had, or its new one",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddByEmailResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The account's first address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddByEmailResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "closeAddByEmail",
+        "description": "Turns adding by email off; emails to the address are dropped.",
+        "responses": {
+          "204": {
+            "description": "Turned off"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -51301,6 +51400,16 @@
           },
           "deliveryEmails": {
             "$ref": "#/components/schemas/DeliveryEmailsExport"
+          },
+          "addByEmail": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AddByEmail"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         }
       },
@@ -55352,6 +55461,138 @@
             "$ref": "#/components/schemas/TrackingProviderCheckOutcome"
           }
         }
+      },
+      "AddByEmail": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "An account's forwarding address for adding parcels by email, and what its last email did. No email is kept.",
+        "required": [
+          "address",
+          "createdAt",
+          "usedToday",
+          "lastMailAt",
+          "lastResult",
+          "lastAdded",
+          "confirmation"
+        ],
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "The address to forward shipping emails to. Its token names the account."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usedToday": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Emails counted today (UTC) against the daily allowance."
+          },
+          "lastMailAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "lastResult": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AddByEmailResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lastAdded": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "confirmation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ForwardingConfirmation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "ForwardingConfirmation": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "What Gmail sent to confirm forwarding to the address, for the owner to finish Gmail's setup. Shown for three days, or until the next email.",
+        "required": [
+          "code",
+          "link",
+          "receivedAt"
+        ],
+        "properties": {
+          "code": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9]{6,12}$"
+          },
+          "link": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "description": "Always on a google.com host."
+          },
+          "receivedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AddByEmailResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "inbox",
+          "dailyLimit"
+        ],
+        "properties": {
+          "inbox": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AddByEmail"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "null until the account turns adding by email on."
+          },
+          "dailyLimit": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Emails the address takes per UTC day."
+          }
+        }
+      },
+      "AddByEmailResult": {
+        "type": "string",
+        "enum": [
+          "added",
+          "known",
+          "none",
+          "limited",
+          "full",
+          "confirmation"
+        ],
+        "description": "added: it added a parcel; known: its parcels were already followed; none: it named no tracking number; limited: an allowance was used up; full: the account follows as many parcels as it may; confirmation: Gmail asked to confirm forwarding."
       }
     }
   }

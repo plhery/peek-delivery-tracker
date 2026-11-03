@@ -239,6 +239,30 @@ set stops the server at startup.
   matches with the DKIM signature, and the provider's bounce domain (Resend's `send.<domain>`), which it
   matches with SPF.
 
+## Adding parcels by email
+
+Optional. An account it is open to gets a forwarding address under Settings; the parcels
+of each shipping email sent there are added to the account. Without the settings, nothing
+in the app mentions it. [ARCHITECTURE.md](ARCHITECTURE.md) has what is kept and checked.
+
+- **App**: `INBOUND_EMAIL_ADDRESS` is the address with `{token}` where each account's token
+  goes, such as `add+{token}@in.example.com`. `INBOUND_EMAIL_SECRET` (32 characters or more,
+  such as `openssl rand -base64 48`) signs what the Worker posts. `INBOUND_EMAIL_ACCOUNTS`
+  lists the accounts that see the setting, by id or email, or `*` for everyone; with none
+  listed, nobody does. A partial or malformed set stops the server at startup.
+- **Allowances**: `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` (default 30) and
+  `INBOUND_EMAILS_PER_HOUR` (default 200, every address together). Parcels an email adds
+  also count against the account's daily lookups, as the Add sheet's do.
+- **Receiving**: Cloudflare Email Routing on the address's domain. A subdomain keeps the
+  main domain's mail apart: add it under Email Routing › Settings › Subdomains, which adds
+  its MX and SPF records, and turn on Subaddressing, so `add+<token>@` reaches the rule for
+  `add@`. Deploy [`ops/cloudflare/inbound-email-worker.js`](../ops/cloudflare/inbound-email-worker.js)
+  as a Worker with the variable `PEEK_INBOUND_URL` (`<origin>/api/inbound/email`) and the
+  secret `PEEK_INBOUND_SECRET` (the app's `INBOUND_EMAIL_SECRET`), then route `add@` to it.
+- **Failures**: the Worker refuses an email over 1 MiB with a permanent error. When the app
+  answers any other error, such as during a deploy, the Worker throws, and Email Routing's
+  activity log shows the delivery as failed.
+
 ## Moving to another host
 
 One container can answer on several hosts. To move the site, serve the new host next to

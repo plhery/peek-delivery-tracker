@@ -48572,6 +48572,7 @@ export interface ApiAccountExportResponse {
   "packages": Array<ApiPackageRow>;
   "friends"?: ApiFriendsExport;
   "deliveryEmails"?: ApiDeliveryEmailsExport;
+  "addByEmail"?: ApiAddByEmail | null;
 }
 
 export interface ApiDeleteAccountRequest {
@@ -50540,3 +50541,26 @@ export interface ApiTrackingProviderCheck {
   "provider": string;
   "outcome": ApiTrackingProviderCheckOutcome;
 }
+
+export interface ApiAddByEmail {
+  "address": string;
+  "createdAt": string;
+  "usedToday": number;
+  "lastMailAt": string | null;
+  "lastResult": ApiAddByEmailResult | null;
+  "lastAdded": number | null;
+  "confirmation": ApiForwardingConfirmation | null;
+}
+
+export interface ApiForwardingConfirmation {
+  "code": string | null;
+  "link": string | null;
+  "receivedAt": string;
+}
+
+export interface ApiAddByEmailResponse {
+  "inbox": ApiAddByEmail | null;
+  "dailyLimit": number;
+}
+
+export type ApiAddByEmailResult = "added" | "known" | "none" | "limited" | "full" | "confirmation";

@@ -41,9 +41,10 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The deliveries' search and filters on the iPhone the captures were taken on, as the captures show them: the search
- * open, a query typed and its chip, a query nothing matches, the chips of a carrier and an order, and the filters'
- * sheet at its medium and large heights, light and dark, its carriers' menu, and at large text and the largest Android
- * has. Then on an iPad side by side, the filters in a popover.
+ * open, a query typed and its chip, a query nothing matches, the chips of a carrier and an order, the list in an order
+ * of its own with the dot on the filters' button, light and dark, and the filters' sheet at its medium and large
+ * heights, light and dark, its carriers' menu, and at large text and the largest Android has. Then on an iPad side by
+ * side, the filters in a popover.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -93,8 +94,8 @@ class ParcelSearchScreenshotTest {
         compose.waitForIdle()
     }
 
+    /** Sort & filter, beside the search's button, with the search closed. */
     private fun openFilters() {
-        openSearch()
         compose.onNodeWithTag(FILTERS_BUTTON).performClick()
         compose.waitForIdle()
     }
@@ -144,6 +145,22 @@ class ParcelSearchScreenshotTest {
         compose.onNodeWithTag(FILTERS_DONE).performClick()
         compose.waitForIdle()
         compose.screenshot("search_chips_light")
+    }
+
+    /** The list by delivery date, the filters closed: the dot on their button, as the web's capture has it. */
+    @Test
+    fun theDotOnTheFiltersButton() = sortedByDeliveryDate("search_sorted_light")
+
+    @Test
+    fun theDotOnTheFiltersButtonInDark() = sortedByDeliveryDate("search_sorted_dark", dark = true)
+
+    private fun sortedByDeliveryDate(name: String, dark: Boolean = false) {
+        show(dark = dark)
+        openFilters()
+        choose("$FILTERS_SORT.${ParcelSort.Eta.rawValue}")
+        compose.onNodeWithTag(FILTERS_DONE).performClick()
+        compose.waitForIdle()
+        compose.screenshot(name)
     }
 
     @Test

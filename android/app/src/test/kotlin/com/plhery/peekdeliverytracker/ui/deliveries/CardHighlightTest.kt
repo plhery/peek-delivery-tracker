@@ -116,9 +116,12 @@ class CardHighlightTest {
     private fun focused(tag: String): Boolean =
         compose.onNodeWithTag(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Focused) == true
 
-    /** The list's cards from the top, by what they are read as: its buttons but the search button over them. */
+    /** The list's cards from the top, by what they are read as: its buttons but the filters' and search's over them. */
     private fun cards(): List<Pair<String, Rect>> =
-        compose.onAllNodes(hasClickAction() and hasContentDescription("", substring = true) and hasAnyAncestor(hasTestTag(PARCEL_LIST)) and !hasTestTag(SEARCH_BUTTON))
+        compose.onAllNodes(
+            hasClickAction() and hasContentDescription("", substring = true) and hasAnyAncestor(hasTestTag(PARCEL_LIST)) and
+                !hasTestTag(FILTERS_BUTTON) and !hasTestTag(SEARCH_BUTTON),
+        )
             .fetchSemanticsNodes()
             .map { it.config[SemanticsProperties.ContentDescription].first() to it.boundsInRoot }
             .sortedBy { it.second.top }

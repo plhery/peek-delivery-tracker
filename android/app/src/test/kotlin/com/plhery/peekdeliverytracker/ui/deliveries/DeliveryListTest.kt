@@ -360,14 +360,14 @@ class DeliveryListTest {
      * (`.lineLimit(1).minimumScaleFactor(0.75)`).
      */
     @Test
-    @Config(qualifiers = "w320dp-h640dp-xhdpi")
+    @Config(qualifiers = "w360dp-h640dp-xhdpi")
     fun atTheAccessibilitySizesOnTheWayShrinksRatherThanBeCutOff() {
-        show(width = 320.dp, fontScale = 2f)
+        show(width = 360.dp, fontScale = 2f)
         // Where it fits, at its size.
         val full = PeekTypography(DynamicTypeSize.of(2f), Density(compose.density.density, 2f)).headline.fontSize.value
         assertEquals(full, checkNotNull(heading).layoutInput.style.fontSize.value, 0.001f)
         // Narrower, as a window beside another: too narrow for the heading at its size, wide enough at 0.75 of it.
-        resize(250.dp)
+        resize(300.dp)
         val layout = checkNotNull(heading)
         assertEquals("Whole", layout.layoutInput.text.length, layout.getLineEnd(0))
         assertFalse(layout.isLineEllipsized(0))
@@ -433,7 +433,10 @@ class DeliveryListTest {
     fun returnPressesTheButtonOrOpensTheCardThatHasTheFocus() {
         show(session = AuthenticationState.Welcome)
         assertPageShows("New trainers")
-        tabTo(SEARCH_BUTTON)
+        // Sort & filter, then the search's button, in the order they stand.
+        tabTo(FILTERS_BUTTON)
+        press(KeyEvent.KEYCODE_TAB)
+        assertTrue(focused(SEARCH_BUTTON))
         press(KeyEvent.KEYCODE_ENTER)
         compose.onNodeWithTag(SEARCH_ROW).assertExists()
         // The field takes the focus, and Return there ends the typing, as Escape closes the search.

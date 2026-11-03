@@ -14,17 +14,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.WindowInfo
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -55,9 +61,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ParcelSort
 import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
+import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.awaitFrame
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -72,9 +80,10 @@ import kotlin.math.abs
 
 /**
  * The deliveries' search and filters (A-S27, A-S28, A-S98, B-S36): what a query, a status, a carrier and a sort show,
- * their chips and what clears them, the list with nothing to show, what is counted and when, the field's focus and the
- * keys, the filters' sheet at its heights and what dismisses it, the keyboard going as it comes up, their popover side
- * by side and in short windows, TalkBack and their menu, and what a window made again or resized keeps.
+ * the filters' button beside the search's and its dot, the search's button's mark, their chips and what clears them,
+ * the list with nothing to show, what is counted and when, the field's focus and the keys, the filters' sheet at its
+ * heights and what dismisses it, the keyboard going as it comes up, their popover side by side and in short windows,
+ * TalkBack and their menu, and what a window made again or resized keeps.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -85,6 +94,7 @@ class ParcelSearchTest {
 
     private lateinit var source: FakeDeliveries
     private lateinit var view: View
+    private lateinit var deliveries: DeliveriesState
     private var width: Dp? by mutableStateOf(null)
     private var windowWidth: Int? by mutableStateOf(null)
 
@@ -96,7 +106,7 @@ class ParcelSearchTest {
             val shown = this.width
             val window = LocalWindowInfo.current
             val resized = remember(window) { ResizedWindow(window) { windowWidth } }
-            CompositionLocalProvider(LocalWindowInfo provides resized) {
+            CompositionLocalProvider(LocalWindowInfo provides resized, LocalDeliveriesState provides { deliveries = it }) {
                 if (shown == null) {
                     RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = reduceMotion)
                 } else {
@@ -122,10 +132,7 @@ class ParcelSearchTest {
         compose.waitForIdle()
     }
 
-    private fun openFilters() {
-        if (compose.onAllNodes(hasTestTag(SEARCH_ROW)).fetchSemanticsNodes().isEmpty()) openSearch()
-        tap(FILTERS_BUTTON)
-    }
+    private fun openFilters() = tap(FILTERS_BUTTON)
 
     private fun done() {
         compose.onNodeWithTag(FILTERS_DONE).performClick()
@@ -292,6 +299,7 @@ class ParcelSearchTest {
         tap(FILTERS_BUTTON)
         assertTrue(exists(FILTERS_SHEET))
         assertFalse(focused(SEARCH_FIELD))
+        assertTrue(exists(SEARCH_ROW))
         done()
         assertFalse(exists(FILTERS_SHEET))
         // Hidden, the search keeps its query, and drops the focus.
@@ -300,6 +308,154 @@ class ParcelSearchTest {
         assertFalse(exists(SEARCH_ROW))
         tap(SEARCH_BUTTON)
         compose.onNodeWithTag(SEARCH_FIELD).assertTextEquals("gift")
+    }
+
+    /**
+     * `listOverview`: sort & filter stands 8 before the search's button, 44 across, rather than in the search's row,
+     * whose capsule takes the whole row; it opens the filters with the search closed, which stays so.
+     */
+    @Test
+    fun theFiltersButtonBesideTheSearchOpensThemWithTheSearchClosed() {
+        show()
+        assertFalse(exists(SEARCH_ROW))
+        val button = compose.onNodeWithTag(FILTERS_BUTTON)
+        button.assertContentDescriptionEquals("Sort & filter")
+        button.assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Button))
+        val filters = button.getUnclippedBoundsInRoot()
+        val search = compose.onNodeWithTag(SEARCH_BUTTON).getUnclippedBoundsInRoot()
+        assertEquals(search.top.value, filters.top.value, 0.5f)
+        assertEquals(search.left.value - 8f, filters.right.value, 0.5f)
+        assertEquals(44f, (filters.right - filters.left).value, 0.5f)
+        tap(FILTERS_BUTTON)
+        assertTrue(exists(FILTERS_SHEET))
+        done()
+        assertFalse(exists(SEARCH_ROW))
+
+        openSearch()
+        compose.onNode(hasTestTag(FILTERS_BUTTON) and hasAnyAncestor(hasTestTag(SEARCH_ROW))).assertDoesNotExist()
+        assertEquals(search.right.value, compose.onNodeWithTag(SEARCH_ROW).getUnclippedBoundsInRoot().right.value, 0.5f)
+    }
+
+    /**
+     * The filters' dot and "Custom view" (`filtered`): for a status, a carrier and an order other than the usual one,
+     * each on its own, and not for a query alone.
+     */
+    @Test
+    fun theDotSaysTheViewIsCustomForAStatusACarrierOrASortButNotForAQuery() {
+        show()
+        assertFiltered(false)
+        openSearch()
+        type("gift")
+        assertFiltered(false)
+        compose.onNodeWithTag(SEARCH_FIELD).performTextClearance()
+        compose.waitForIdle()
+
+        openFilters()
+        tap("$FILTERS_STATUS.${ParcelStatusFilter.Active.rawValue}")
+        done()
+        assertFiltered(true)
+        tap("$FILTER_CHIPS.status")
+        assertFiltered(false)
+
+        openFilters()
+        tap(FILTERS_CARRIER)
+        tap("$FILTERS_CARRIER.dhl")
+        done()
+        assertFiltered(true)
+        tap("$FILTER_CHIPS.carrier")
+        assertFiltered(false)
+
+        openFilters()
+        tap("$FILTERS_SORT.${ParcelSort.Newest.rawValue}")
+        done()
+        assertFiltered(true)
+        tap("$FILTER_CHIPS.sort")
+        assertFiltered(false)
+    }
+
+    /** Whether the filters' button has its dot and says "Custom view" to TalkBack; it has both or neither. */
+    private fun assertFiltered(filtered: Boolean) {
+        assertEquals(filtered, exists(FILTERS_DOT))
+        val value = compose.onNodeWithTag(FILTERS_BUTTON).fetchSemanticsNode().config.getOrNull(SemanticsProperties.StateDescription)
+        assertEquals(if (filtered) "Custom view" else null, value)
+    }
+
+    /** The dot grows and fades in on a snappy 0.2 s, and out again. */
+    @Test
+    fun theDotGrowsInAndShrinksAway() {
+        show()
+        val full = 6 * view.resources.displayMetrics.density
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { deliveries.sort = ParcelSort.Newest; Snapshot.sendApplyNotifications() }
+        repeat(2) { compose.mainClock.advanceTimeByFrame() }
+        compose.mainClock.advanceTimeBy(48)
+        assertTrue("At ${dotWidth()} of $full", dotWidth() in 0.5f..full - 0.5f)
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(full, dotWidth(), 0.5f)
+
+        compose.runOnUiThread { deliveries.sort = ParcelSort.Priority; Snapshot.sendApplyNotifications() }
+        repeat(2) { compose.mainClock.advanceTimeByFrame() }
+        compose.mainClock.advanceTimeBy(48)
+        assertTrue("At ${dotWidth()} of $full", dotWidth() in 0.5f..full - 0.5f)
+        compose.mainClock.advanceTimeBy(1_000)
+        assertFalse(exists(FILTERS_DOT))
+    }
+
+    /** Under Reduce Motion, the dot is there at once, and gone at once. */
+    @Test
+    fun underReduceMotionTheDotComesAndGoesAtOnce() {
+        show(reduceMotion = true)
+        val full = 6 * view.resources.displayMetrics.density
+        compose.mainClock.autoAdvance = false
+        compose.runOnUiThread { deliveries.carrierFilter = CarrierId("dhl"); Snapshot.sendApplyNotifications() }
+        repeat(2) { compose.mainClock.advanceTimeByFrame() }
+        assertEquals(full, dotWidth(), 0.5f)
+        compose.runOnUiThread { deliveries.carrierFilter = null; Snapshot.sendApplyNotifications() }
+        repeat(2) { compose.mainClock.advanceTimeByFrame() }
+        assertFalse(exists(FILTERS_DOT))
+    }
+
+    /** The dot's width in the window's pixels, as drawn, its scale included. */
+    private fun dotWidth(): Float = compose.onNodeWithTag(FILTERS_DOT, useUnmergedTree = true).fetchSemanticsNode().boundsInWindow.width
+
+    /**
+     * The search's button is marked while the search shows or holds a search, not for the filters, and says whether
+     * it shows the search or hides it.
+     */
+    @Test
+    fun theSearchButtonIsMarkedForASearchAloneAndSaysWhatItDoes() {
+        show()
+        assertSearchButton(marked = false, label = "Search parcels")
+        openSearch()
+        assertSearchButton(marked = true, label = "Hide search")
+        type("gift")
+        tap(SEARCH_BUTTON)
+        assertSearchButton(marked = true, label = "Search parcels")
+        // Blank, the field holds no search.
+        openSearch()
+        compose.onNodeWithTag(SEARCH_FIELD).performTextClearance()
+        type("  ")
+        tap(SEARCH_BUTTON)
+        assertSearchButton(marked = false, label = "Search parcels")
+
+        openFilters()
+        tap("$FILTERS_SORT.${ParcelSort.Newest.rawValue}")
+        done()
+        assertTrue(exists(FILTER_CHIPS))
+        assertSearchButton(marked = false, label = "Search parcels")
+    }
+
+    /**
+     * The search's button says `label`, and has its faint circle or not: a point inside the circle, clear of the glass,
+     * unlike the button's corner, outside it.
+     */
+    private fun assertSearchButton(marked: Boolean, label: String) {
+        val button = compose.onNodeWithTag(SEARCH_BUTTON)
+        button.assertContentDescriptionEquals(label)
+        compose.awaitFrame()
+        val image = button.captureToImage().asAndroidBitmap()
+        val inside = image.getPixel(image.width / 2, (4 * view.resources.displayMetrics.density).toInt())
+        assertEquals("Marked", marked, inside != image.getPixel(1, 1))
     }
 
     @Test
@@ -557,6 +713,7 @@ class ParcelSearchTest {
     @Test
     fun backOrATapOnTheDimDismissesTheSheet() {
         show()
+        openSearch()
         openFilters()
         back()
         assertFalse(exists(SHEET_PANEL))
@@ -571,6 +728,7 @@ class ParcelSearchTest {
     @Test
     fun thePredictiveBackGestureTakesTheSheetDownWithItAndLetGoDismissesIt() {
         show()
+        openSearch()
         openFilters()
         val medium = sheetTop()
         val back = compose.activity.onBackPressedDispatcher
@@ -602,7 +760,7 @@ class ParcelSearchTest {
         openFilters()
         compose.onNodeWithTag(PARCEL_LIST).assertDoesNotExist()
         compose.onNodeWithTag(FILTERS_BUTTON).assertDoesNotExist()
-        val title = compose.onNode(hasText("Search & filters") and isHeading())
+        val title = compose.onNode(hasText("Sort & filter") and isHeading())
         assertTrue(title.hasTalkBackFocus(talkBack))
         compose.onNodeWithTag("$FILTERS_STATUS.${ParcelStatusFilter.All.rawValue}").assertIsSelected()
         done()
@@ -626,6 +784,30 @@ class ParcelSearchTest {
         openFilters()
         back()
         assertFalse(exists(FILTERS_POPOVER))
+    }
+
+    /**
+     * Beside a parcel, with the search closed, the filters come in a popover titled Sort & filter off their button
+     * beside the search's: its body 13 under it, across from it.
+     */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun besideAParcelThePopoverComesOffTheButtonBesideTheSearch() {
+        show()
+        inList("Birthday gift").performClick()
+        compose.waitForIdle()
+        assertTrue(exists(PARCEL_PAGE))
+        assertFalse(exists(SEARCH_ROW))
+        openFilters()
+        assertTrue(exists(FILTERS_POPOVER))
+        assertFalse(exists(SHEET_PANEL))
+        compose.onNode(hasText("Sort & filter") and isHeading()).assertExists()
+        val button = compose.onNodeWithTag(FILTERS_BUTTON, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val search = compose.onNodeWithTag(SEARCH_BUTTON, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val body = compose.onNodeWithTag(FILTERS_POPOVER).getUnclippedBoundsInRoot()
+        assertEquals(search.top.value, button.top.value, 0.5f)
+        assertEquals(button.bottom.value + 13f, body.top.value, 1f)
+        assertTrue("$button over $body", (button.left + button.right) / 2 in body.left..body.right)
     }
 
     @Test

@@ -622,8 +622,6 @@ class ArrivalCelebrationTest {
         compose.runOnUiThread { deliveries.closeAccount() }
         repeat(60) { frame() }
 
-        compose.onNodeWithTag(SEARCH_BUTTON).performClick()
-        repeat(30) { frame() }
         celebrate(lamp(2).id)
         compose.onNodeWithTag(FILTERS_BUTTON).performClick()
         frame()

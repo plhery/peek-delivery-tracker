@@ -10,6 +10,7 @@ import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performMouseInput
 import androidx.compose.ui.test.rightClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -29,6 +30,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LinkFixtures
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SHEET
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
+import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.cardNamed
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
@@ -308,6 +310,20 @@ class WindowKeysTest {
 
         openCardMenu()
         assertEquals(emptyList<WindowKey>(), shortcuts.available())
+    }
+
+    /** While the search shows, Escape closes it, listed under Deliveries as Hide search, as the iPad's key button is. */
+    @Test
+    fun escapeIsListedAsHideSearch() {
+        show()
+        compose.onNodeWithTag(SEARCH_BUTTON).performClick()
+        settle()
+        assertTrue(WindowKey.CloseSearch in shortcuts.available())
+        val localizer = Localizer(AppLanguage.En, variant = "android")
+        val group = shortcuts.groups({ localizer.text(it) }, "Peek").single { it.label.toString() == "Deliveries" }
+        val escape = group.items.single { it.keycode == KeyEvent.KEYCODE_ESCAPE }
+        assertEquals("Hide search", escape.label.toString())
+        assertEquals(0, escape.modifiers)
     }
 }
 

@@ -39,7 +39,7 @@ enum class WindowKey(val group: WindowKeyGroup, val titleKey: String, val keyCod
     Archive(WindowKeyGroup.Parcel, "detail.archive", KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON or KeyEvent.META_META_ON),
     Restore(WindowKeyGroup.Parcel, "detail.restore", KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON or KeyEvent.META_META_ON),
     Delete(WindowKeyGroup.Parcel, "detail.delete", KeyEvent.KEYCODE_DEL, KeyEvent.META_CTRL_ON),
-    CloseSearch(WindowKeyGroup.Deliveries, "view.hideControls", KeyEvent.KEYCODE_ESCAPE),
+    CloseSearch(WindowKeyGroup.Deliveries, "view.hideSearch", KeyEvent.KEYCODE_ESCAPE),
     Undo(WindowKeyGroup.Deliveries, "app.undo", KeyEvent.KEYCODE_Z, KeyEvent.META_CTRL_ON),
     Previous(WindowKeyGroup.Deliveries, "app.previousParcel", KeyEvent.KEYCODE_DPAD_UP),
     Next(WindowKeyGroup.Deliveries, "app.nextParcel", KeyEvent.KEYCODE_DPAD_DOWN),

@@ -31,9 +31,9 @@ import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
 
 /**
  * The filters (A-S98, B-S36): a sheet at the medium and large detents over the list, or, while sheets show as forms
- * (side by side, settled while none is open), a popover off their button, 380 × 620 where the window has room and
- * 340 × 440 at least. A popover in a window turned compact is a sheet again, as a popover adapts on the iPhone. Once
- * they have closed, TalkBack goes back to their button.
+ * (side by side, settled while none is open), a popover off their button beside the search's ([OverviewRow]), 380 ×
+ * 620 where the window has room and 340 × 440 at least. A popover in a window turned compact is a sheet again, as a
+ * popover adapts on the iPhone. Once they have closed, TalkBack goes back to their button.
  */
 @Composable
 internal fun FiltersHost(state: DeliveriesState) {
@@ -41,7 +41,7 @@ internal fun FiltersHost(state: DeliveriesState) {
     val density = LocalDensity.current
     val regular = with(density) { window.width.toDp() >= REGULAR_WIDTH && window.height.toDp() >= REGULAR_HEIGHT }
     val popover = state.sheetsAsForms && regular
-    val title = localized("view.showControls")
+    val title = localized("view.sortFilter")
     val close = { state.showingFilters = false }
     val closed = { state.filtersButton.request() }
     Sheet(
@@ -68,7 +68,7 @@ internal fun FiltersHost(state: DeliveriesState) {
 /**
  * `ParcelFilterView`: the status, an inline picker of every status; the carrier, a menu of all carriers and those of
  * the parcels, the one chosen among them though its parcels have gone; the sort, an inline picker of every order; and
- * Clear filters, in red, which puts the three back and leaves the query. "Search & filters" in the bar, and Done, which
+ * Clear filters, in red, which puts the three back and leaves the query. "Sort & filter" in the bar, and Done, which
  * closes it. TalkBack starts at the title.
  */
 @Composable
@@ -82,7 +82,7 @@ private fun ParcelFilterView(state: DeliveriesState, close: () -> Unit, modifier
     val titleFocus = remember { AccessibilityFocus() }
     LaunchedEffect(Unit) { titleFocus.request() }
     SheetPage(
-        title = localized("view.showControls"),
+        title = localized("view.sortFilter"),
         confirmation = localized("native.done"),
         onConfirm = close,
         modifier = modifier,

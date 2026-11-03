@@ -436,9 +436,14 @@ internal class DeliveriesState(
         }
     }
 
+    /** Something to search for in the field (`searched`), which the search's button marks. */
+    val searched: Boolean get() = query.isNotBlank()
+
+    /** A status, a carrier or an order other than the usual one (`filtered`), which the filters' button marks. */
+    val filtered: Boolean get() = statusFilter != ParcelStatusFilter.All || carrierFilter != null || sort != ParcelSort.Priority
+
     /** A search, a status, a carrier or a sort other than the list's own (`hasCustomView`). */
-    val hasCustomView: Boolean
-        get() = query.isNotBlank() || statusFilter != ParcelStatusFilter.All || carrierFilter != null || sort != ParcelSort.Priority
+    val hasCustomView: Boolean get() = searched || filtered
 
     /** `clearFilters()`: the list as it was, its query emptied too. */
     fun clearFilters() {

@@ -137,10 +137,10 @@ val LocalColumnEdges = compositionLocalOf { ColumnEdges(start = true, end = true
  * of a parcel just archived offers Undo for seven seconds, and a message says for four what a check found
  * ([BottomControls]).
  *
- * The search's button shows the search field and the filters' button ([SearchControls]); a search, a filter or a sort
- * other than the list's own makes it a custom view, which shows their chips ([FilterChips]), no Next up, the archive
- * as a group under its header and, when nothing matches, a word on it ([NoResults]). The filters open in a sheet, or
- * side by side in a popover off their button ([FiltersHost]).
+ * The search's button shows the search field ([SearchControls]), and the filters' button beside it opens the filters,
+ * in a sheet or, side by side, a popover off it ([FiltersHost]); a search, a filter or a sort other than the list's own
+ * makes it a custom view, which shows their chips ([FilterChips]), no Next up, the archive as a group under its header
+ * and, when nothing matches, a word on it ([NoResults]).
  *
  * A parcel delivered as the list is looked at keeps its card a moment, postmarked, and paper comes out of Pip's box
  * ([DeliveriesState.postmark]); then the card flies to its new place over the list ([DeliveredFlights]) as the other
@@ -865,9 +865,9 @@ private fun sectionTitleKey(kind: ParcelSectionKind): String = when (kind) {
 }
 
 /**
- * The parcels on their way and their count, the search's button and, beside a parcel or for TalkBack, the refresh
- * button; under them, the search while it shows, with a snappy 0.3 s fade, shrink to 94 % from the top and drop of 10,
- * and none under reduce motion.
+ * The parcels on their way and their count, the filters' and the search's buttons and, beside a parcel or for TalkBack,
+ * the refresh button; under them, the search while it shows, with a snappy 0.3 s fade, shrink to 94 % from the top and
+ * drop of 10, and none under reduce motion.
  */
 @Composable
 private fun Overview(state: DeliveriesState, active: Int, sideBySide: Boolean, change: ListChange?) {

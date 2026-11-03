@@ -97,7 +97,17 @@ class SignInDeviceTest {
     /** The keyboard's slides and the app's readings of it, in the order they came, for a failure's message. */
     private val events = ConcurrentLinkedQueue<String>()
 
+    /** When the keyboard last slid or the app last read a new height for it, in uptime milliseconds. */
+    @Volatile private var lastChange = 0L
+
+    /** A slide or a new reading, which [still] waits to settle. */
     private fun note(what: String) {
+        lastChange = SystemClock.uptimeMillis()
+        mark(what)
+    }
+
+    /** A step of the test, in [events] alone. */
+    private fun mark(what: String) {
         events.add("${SystemClock.uptimeMillis() % 100_000} $what")
     }
 
@@ -224,8 +234,13 @@ class SignInDeviceTest {
         compose.waitForIdle()
     }
 
-    /** No keyboard slide playing, and the app's layout with the keyboard where the window has it. */
-    private fun still() = onUi { keyboardSlides.playing == 0 } && appKeyboard == windowKeyboard()
+    /**
+     * No keyboard slide playing, the app's layout with the keyboard where the window has it, and neither changed for
+     * [QUIET_MILLIS]: the system can hand the app the keyboard's whole height at once and start its slide from nothing
+     * a moment later (the code step's keyboard, on a large window), which a check in between would take for the end.
+     */
+    private fun still() = onUi { keyboardSlides.playing == 0 } && appKeyboard == windowKeyboard() &&
+        SystemClock.uptimeMillis() - lastChange >= QUIET_MILLIS
 
     /**
      * The field with [tag] has the focus and asked for the keyboard; then the keyboard has come up and finished its
@@ -237,14 +252,14 @@ class SignInDeviceTest {
     private fun assertTypingIn(tag: String) {
         compose.onNodeWithTag(tag).assertIsFocused()
         compose.waitUntil(5_000) { acceptingText() }
-        note("typing")
+        mark("typing")
         val keyboard = showsAKeyboard()
-        if (keyboard) runCatching { compose.waitUntil(KEYBOARD_COMES_MILLIS) { keyboardShown() } }.onSuccess { note("shown") }
+        if (keyboard) runCatching { compose.waitUntil(KEYBOARD_COMES_MILLIS) { keyboardShown() } }.onSuccess { mark("shown") }
         runCatching {
             compose.waitUntil(KEYBOARD_MILLIS) { (!keyboard || keyboardShown()) && still() && fieldBottom(tag) <= roomAboveTheKeyboard() }
-        }.onSuccess { note("above") }
+        }.onSuccess { mark("above") }
         awaitStill()
-        note("still")
+        mark("still")
         if (keyboard) assertTrue("A keyboard shown: ${layoutNow()}", keyboardShown())
         val bottom = fieldBottom(tag)
         val room = roomAboveTheKeyboard()
@@ -409,6 +424,9 @@ class SignInDeviceTest {
     private companion object {
         /** How long a keyboard takes to start coming up, where the device shows one. */
         const val KEYBOARD_MILLIS = 3_000L
+
+        /** How long the keyboard stays as it is before it counts as still. */
+        const val QUIET_MILLIS = 500L
         const val KEYBOARD_COMES_MILLIS = 15_000L
     }
 }

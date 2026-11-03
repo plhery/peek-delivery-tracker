@@ -9,12 +9,13 @@ import { useSheetDialog } from '../lib/modal';
 import type { ApiAuth } from '../lib/apiClient';
 import { followInPlace } from '../peek/landing/links';
 import { AddByEmailPage, useAddByEmail } from './AddByEmail';
+import { AssistantsPage, useAssistants } from './Assistants';
 import { Icon } from './Icon';
 import { NotificationControl } from './NotificationControl';
 import './Settings.css';
 
 type AccountAction = 'export' | 'delete' | 'sign-out' | 'reset-demo';
-type Page = 'home' | 'account' | 'inbox';
+type Page = 'home' | 'account' | 'inbox' | 'assistants';
 
 export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, onResetDemo, onOpenLanding, apiAuth }: {
   email?: string;
@@ -34,6 +35,8 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   const [page, setPage] = useState<Page>('home');
   const [addByEmail, setAddByEmail] = useAddByEmail(apiAuth, open);
   const [inboxBusy, setInboxBusy] = useState(false);
+  const [assistants, setAssistants] = useAssistants(apiAuth, open);
+  const [assistantsBusy, setAssistantsBusy] = useState(false);
   useEffect(() => { if (open) return trackOverlay('account'); }, [open]);
   const [working, setWorking] = useState<AccountAction | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
@@ -44,7 +47,8 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   const heading = useRef<HTMLHeadingElement>(null);
   const accountButton = useRef<HTMLButtonElement>(null);
   const inboxButton = useRef<HTMLButtonElement>(null);
-  const busy = Boolean(working) || inboxBusy;
+  const assistantsButton = useRef<HTMLButtonElement>(null);
+  const busy = Boolean(working) || inboxBusy || assistantsBusy;
   const [dialog, close] = useSheetDialog<HTMLDivElement>(open, () => {
     setOpen(false); setPage('home'); setConfirmingReset(false); setConfirmingDelete(false); setError(null);
   }, closeButton, busy);
@@ -53,7 +57,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   function navigate(next: Page) {
     const from = page;
     setPage(next); setConfirmingReset(false); setConfirmingDelete(false); setError(null);
-    requestAnimationFrame(() => (next !== 'home' ? heading.current : from === 'inbox' ? inboxButton.current : accountButton.current)?.focus());
+    requestAnimationFrame(() => (next !== 'home' ? heading.current : from === 'inbox' ? inboxButton.current : from === 'assistants' ? assistantsButton.current : accountButton.current)?.focus());
   }
 
   async function run(action: AccountAction, operation: () => Promise<void>) {
@@ -70,13 +74,14 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
       <div ref={dialog} className="sheet settings-sheet account-menu refined-settings" role="dialog" aria-modal="true" aria-labelledby="settings-title" tabIndex={-1} onClick={(event) => event.stopPropagation()}>
         <div className="sheet__grabber" aria-hidden="true" />
         {page !== 'home' && <button type="button" className="settings-back" disabled={busy} onClick={() => navigate('home')}><span aria-hidden="true">‹</span>{t('settings.title')}</button>}
-        <div className="sheet__heading"><h2 ref={heading} tabIndex={-1} className="sheet__title" id="settings-title">{page === 'home' ? t('settings.title') : page === 'inbox' ? t('inbox.row') : accountTitle}</h2>
+        <div className="sheet__heading"><h2 ref={heading} tabIndex={-1} className="sheet__title" id="settings-title">{page === 'home' ? t('settings.title') : page === 'inbox' ? t('inbox.row') : page === 'assistants' ? t('assistants.row') : accountTitle}</h2>
           <button ref={closeButton} className="sheet__close" type="button" disabled={busy} onClick={close} aria-label={t('common.close')}><Icon name="close" /></button></div>
         <div hidden={page !== 'home'}>
           <div className="settings-profile"><span className="settings-profile__avatar">{initial || 'D'}</span>
             <div><strong>{email || t('app.demo')}</strong>{email && <span>{t('account.signedIn')}</span>}</div></div>
           {apiAuth && <section className="settings-group" aria-labelledby="settings-deliveries"><h3 id="settings-deliveries" className="settings-group__title">{t('native.deliveries')}</h3><div className="settings-box"><NotificationControl apiAuth={apiAuth} email={email} variant="row" />
-            {addByEmail && <button ref={inboxButton} className="settings-row" type="button" onClick={() => navigate('inbox')}><Icon name="mail" /><span>{t('inbox.row')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}</div></section>}
+            {addByEmail && <button ref={inboxButton} className="settings-row" type="button" onClick={() => navigate('inbox')}><Icon name="mail" /><span>{t('inbox.row')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}
+            {assistants && <button ref={assistantsButton} className="settings-row" type="button" onClick={() => navigate('assistants')}><Icon name="globe" /><span>{t('assistants.row')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}</div></section>}
           <section className="settings-group" aria-labelledby="settings-preferences"><h3 className="settings-group__title" id="settings-preferences">{t('settings.preferences')}</h3>
             <div className="settings-box"><fieldset className="settings-appearance"><legend>{t('native.appearance.title')}</legend>
               <div>{(['system', 'light', 'dark'] as Appearance[]).map((option) => <button type="button" key={option} aria-pressed={appearance === option} onClick={() => { setAppearance(option); trackAction('appearance-change'); }}><span className={`settings-mini-screen settings-mini-screen--${option}`} aria-hidden="true"><i /><i /></span>{t(`native.appearance.${option}`)}</button>)}</div>
@@ -86,6 +91,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
             {onOpenLanding && <a className="settings-row" href={LANDING_PATH} onClick={(event) => followInPlace(event, onOpenLanding)}>{t('app.homePage')}<span className="settings-value">{window.location.host}</span><span className="settings-chevron" aria-hidden="true">›</span></a>}</div>
         </div>
         {page === 'inbox' && apiAuth && addByEmail && <AddByEmailPage apiAuth={apiAuth} offer={addByEmail} onChange={setAddByEmail} onBusy={setInboxBusy} />}
+        {page === 'assistants' && apiAuth && assistants && <AssistantsPage apiAuth={apiAuth} offer={assistants} onChange={setAssistants} onBusy={setAssistantsBusy} />}
         {page === 'account' && <>
           <p className="settings-description">{email || t('app.demo')}</p>
           {error && <p className="sheet__error" role="alert">{error}</p>}

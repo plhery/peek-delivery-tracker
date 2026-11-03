@@ -263,6 +263,23 @@ in the app mentions it. [ARCHITECTURE.md](ARCHITECTURE.md) has what is kept and 
   answers any other error, such as during a deploy, the Worker throws, and Email Routing's
   activity log shows the delivery as failed.
 
+## Assistants
+
+Optional. An account it is open to can connect Claude, ChatGPT or another MCP client to
+Peek, and make personal tokens for its own scripts. Without the setting, nothing in the
+app mentions it. [ARCHITECTURE.md](ARCHITECTURE.md) has what is kept and checked.
+
+- **App**: `ASSISTANT_ACCOUNTS` lists the accounts that may connect, by id or email, or `*`
+  for everyone. It needs `CANONICAL_ORIGIN`, which is the OAuth issuer; `<origin>/mcp` is
+  the address assistants connect to. A malformed list stops the server at startup.
+- **Cloudflare**: assistants call `/mcp`, `/oauth/token`, `/oauth/register`,
+  `/oauth/revoke` and `/.well-known/oauth-*` from their own servers. A challenge there
+  (Bot Fight Mode, a managed challenge, a WAF rule for non-browsers) breaks the connection,
+  so skip them for these paths with a custom rule; keep rate limiting.
+- **Connecting**: give an assistant `<origin>/mcp` as a custom connector, such as Claude's
+  Settings › Connectors. It opens `/oauth/authorize` to sign in and ask. A script sends a
+  personal token from Settings as `Authorization: Bearer <token>`.
+
 ## Moving to another host
 
 One container can answer on several hosts. To move the site, serve the new host next to

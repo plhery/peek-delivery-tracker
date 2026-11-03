@@ -48,6 +48,7 @@ data class AccountExportResponse(
     val friends: FriendsExport? = null,
     val deliveryEmails: DeliveryEmailsExport? = null,
     val addByEmail: AddByEmail? = null,
+    val assistants: List<AssistantConnection>? = null,
 )
 
 @Serializable
@@ -3559,6 +3560,58 @@ enum class AddByEmailResult(val rawValue: String) {
 }
 
 @Serializable
+enum class AssistantScope(val rawValue: String) {
+    @SerialName("parcels:read") Parcels:read("parcels:read"),
+    @SerialName("parcels:write") Parcels:write("parcels:write"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): AssistantScope? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+data class AssistantConnection(
+    val id: UUID,
+    val kind: AssistantConnectionKind,
+    val name: String,
+    val redirectHost: String? = null,
+    val scopes: List<AssistantScope>,
+    val createdAt: String,
+    val lastUsedAt: String? = null,
+)
+
+@Serializable
+data class AssistantsResponse(
+    val connections: List<AssistantConnection>,
+    val mcpUrl: String,
+)
+
+@Serializable
+data class CreatePersonalTokenRequest(
+    val name: String,
+    val scopes: List<AssistantScope>,
+)
+
+@Serializable
+data class PersonalTokenResponse(
+    val connection: AssistantConnection,
+    val token: String,
+)
+
+@Serializable
+data class AssistantConsentRequest(
+    val query: String,
+    val approve: Boolean,
+    val scopes: List<AssistantScope>? = null,
+)
+
+@Serializable
+data class AssistantConsentResponse(
+    val redirect: String,
+)
+
+@Serializable
 enum class CarrierDetectionResponseAmazonShippingStatus(val rawValue: String) {
     @SerialName("available") Available("available"),
     @SerialName("expired") Expired("expired"),
@@ -3743,6 +3796,17 @@ enum class ParcelFeedbackRequestApp(val rawValue: String) {
 
     companion object {
         fun fromRawValue(rawValue: String): ParcelFeedbackRequestApp? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class AssistantConnectionKind(val rawValue: String) {
+    @SerialName("oauth") Oauth("oauth"),
+    @SerialName("personal") Personal("personal"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): AssistantConnectionKind? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 

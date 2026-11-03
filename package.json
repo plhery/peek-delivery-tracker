@@ -60,6 +60,7 @@
     "validate:production-config": "node scripts/validate-production-config.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
     "@prometheus-io/client": "^0.16.1",
     "@sentry/browser": "^11.5.0",
     "@sentry/node": "^11.5.0",

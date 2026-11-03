@@ -1,0 +1,13 @@
+/* Where an assistant asks to connect: who asks, what it may do, where the answer goes, then Allow or not. */
+.assistant-consent .auth-card { text-align: left; justify-items: stretch; }
+.assistant-consent .auth-card__eyebrow, .assistant-consent .auth-card h1, .assistant-consent .auth-card__intro { text-align: center; }
+.assistant-consent__scopes { display: grid; gap: 10px; margin: 0 0 18px; padding: 0; border: 0; }
+.assistant-consent__scopes legend { margin-bottom: 10px; padding: 0; font-size: 14px; font-weight: 600; }
+.assistant-consent__scope { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.4; cursor: pointer; }
+.assistant-consent__scope input { flex: none; width: 20px; height: 20px; margin: 0; accent-color: var(--ink); }
+.assistant-consent__who, .assistant-consent__where, .assistant-consent__later { margin: 0 0 12px; font-size: 13px; color: var(--ink-soft); overflow-wrap: anywhere; }
+.assistant-consent__where--local { padding: 12px 14px; border-radius: 14px; background: var(--orange-soft); color: var(--orange-text); }
+.assistant-consent .sheet__error { margin: 4px 0 12px; }
+.assistant-consent__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+.assistant-consent__actions .button { min-width: 0; }
+.assistant-consent__switch { justify-self: center; color: var(--ink-soft); }

@@ -11,12 +11,14 @@ import { turnstileSettings } from './src/server/lookupVerification';
 import { nativeAttestSettings } from './src/server/nativeVerification';
 import { appleSignInConfiguration } from './src/server/appleSignIn';
 import { inboundEmailSettings } from './src/server/inboundEmail/settings';
+import { assistantSettings } from './src/server/assistants/settings';
 
 // A malformed host setting must stop the deployment, not send visitors elsewhere.
 siteHosts();
 // Nor may incomplete mail settings promise emails the server cannot send.
 emailSettings();
 inboundEmailSettings();
+assistantSettings();
 turnstileSettings();
 nativeAttestSettings();
 appleSignInConfiguration();

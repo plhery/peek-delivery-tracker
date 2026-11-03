@@ -5,6 +5,8 @@ import type { ApiGiftWords } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import type { TrackingEvent } from '../types';
 import { EMAIL_STAGES, type DeliveredTime, type EmailStage } from './email/types';
+import type { AssistantClient } from './assistants/clients';
+import { SCOPES, type Scope } from './assistants/settings';
 import { scanSource } from './scanRepeats';
 import type { SyncReason } from './trackingAudit';
 import { isRecord, type JsonObject } from './types';
@@ -212,6 +214,63 @@ export type DeliveryEmailOutcome = 'sent' | 'failed' | 'skipped';
 
 /** One of a package's newest scans, with its words and its source (`scanSource`). */
 export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string };
+
+/** A connected assistant or personal token of an account, as its owner sees it in Settings. */
+export interface AssistantGrant {
+  id: string;
+  kind: 'oauth' | 'personal';
+  name: string;
+  /** Where the assistant's sign-in returned: the site that holds its tokens. */
+  redirectHost: string | null;
+  scopes: Scope[];
+  createdAt: string;
+  lastUsedAt: string | null;
+}
+
+/** What a redeemed code or refresh token issued, and for whom. */
+export interface AssistantIssue {
+  userId: string;
+  grantId: string;
+  scopes: Scope[];
+}
+
+/** Whose an access or personal token is, and what it may do. */
+export interface AssistantTokenOwner extends AssistantIssue {
+  kind: 'access' | 'personal';
+  /** The OAuth client, or null for a personal token. */
+  clientId: string | null;
+  /** Seconds since the epoch; null for a personal token, which lasts until revoked. */
+  expiresAt: number | null;
+}
+
+function grantedScopes(value: unknown): Scope[] {
+  return Array.isArray(value) ? SCOPES.filter((scope) => value.includes(scope)) : [];
+}
+
+function isoTime(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  const time = new Date(value);
+  return Number.isFinite(time.getTime()) ? time.toISOString() : null;
+}
+
+function assistantGrant(value: unknown): AssistantGrant | null {
+  if (!isRecord(value) || typeof value.id !== 'string' || typeof value.name !== 'string') return null;
+  if (value.kind !== 'oauth' && value.kind !== 'personal') return null;
+  return {
+    id: value.id,
+    kind: value.kind,
+    name: value.name,
+    redirectHost: typeof value.redirect_host === 'string' ? value.redirect_host : null,
+    scopes: grantedScopes(value.scopes),
+    createdAt: isoTime(value.created_at) ?? new Date(0).toISOString(),
+    lastUsedAt: isoTime(value.last_used_at),
+  };
+}
+
+function assistantIssue(value: unknown): AssistantIssue | null {
+  if (!isRecord(value) || typeof value.user_id !== 'string' || typeof value.grant_id !== 'string') return null;
+  return { userId: value.user_id, grantId: value.grant_id, scopes: grantedScopes(value.scopes) };
+}
 
 /** An account's forwarding address for adding parcels by email, and what its last email did. */
 export interface InboundMailbox {
@@ -1230,6 +1289,116 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_confirmation_link: confirmation?.link ?? null,
       },
     });
+  }
+
+  /** Stores a client that registered itself. */
+  async registerAssistantClient(client: AssistantClient): Promise<void> {
+    await this.request('/rest/v1/rpc/register_assistant_client', {
+      method: 'POST',
+      body: { p_id: client.id, p_name: client.name, p_uri: client.uri, p_redirect_uris: client.redirectUris },
+    });
+  }
+
+  /** A client that registered itself, or null. */
+  async assistantClient(id: string): Promise<AssistantClient | null> {
+    const row = await this.request('/rest/v1/rpc/assistant_client', { method: 'POST', body: { p_id: id } });
+    if (!isRecord(row) || typeof row.id !== 'string' || typeof row.name !== 'string' || !Array.isArray(row.redirect_uris)) return null;
+    return {
+      id: row.id,
+      name: row.name,
+      uri: typeof row.uri === 'string' ? row.uri : null,
+      redirectUris: row.redirect_uris.filter((uri): uri is string => typeof uri === 'string'),
+    };
+  }
+
+  /** The owner allowed a client: a grant, and the code (as its digest) the client redeems within ten minutes. */
+  async openAssistantCode(input: {
+    userId: string; clientId: string; name: string; redirectHost: string; rotate: boolean; scopes: Scope[];
+    codeDigest: string; redirectUri: string; challenge: string;
+  }): Promise<void> {
+    await this.request('/rest/v1/rpc/open_assistant_code', {
+      method: 'POST',
+      body: {
+        p_user_id: input.userId, p_client_id: input.clientId, p_name: input.name, p_redirect_host: input.redirectHost,
+        p_rotate: input.rotate, p_scopes: input.scopes, p_hash: input.codeDigest, p_redirect_uri: input.redirectUri,
+        p_challenge: input.challenge,
+      },
+    });
+  }
+
+  /** Redeems a code for the tokens whose digests are given; null when the code, client, address or challenge is wrong. */
+  async redeemAssistantCode(input: {
+    codeDigest: string; clientId: string; redirectUri: string; challenge: string;
+    accessDigest: string; accessExpires: Date; refreshDigest: string; refreshExpires: Date;
+  }): Promise<AssistantIssue | null> {
+    return assistantIssue(await this.request('/rest/v1/rpc/redeem_assistant_code', {
+      method: 'POST',
+      body: {
+        p_hash: input.codeDigest, p_client_id: input.clientId, p_redirect_uri: input.redirectUri, p_challenge: input.challenge,
+        p_access: input.accessDigest, p_access_expires: input.accessExpires.toISOString(),
+        p_refresh: input.refreshDigest, p_refresh_expires: input.refreshExpires.toISOString(),
+      },
+    }));
+  }
+
+  /** Trades a refresh token for a new access token, and a new refresh token unless the grant keeps its own. */
+  async refreshAssistantTokens(input: {
+    refreshDigest: string; clientId: string; accessDigest: string; accessExpires: Date; newRefreshDigest: string; refreshExpires: Date;
+  }): Promise<(AssistantIssue & { rotated: boolean }) | null> {
+    const result = await this.request('/rest/v1/rpc/refresh_assistant_tokens', {
+      method: 'POST',
+      body: {
+        p_refresh: input.refreshDigest, p_client_id: input.clientId, p_access: input.accessDigest,
+        p_access_expires: input.accessExpires.toISOString(), p_new_refresh: input.newRefreshDigest,
+        p_refresh_expires: input.refreshExpires.toISOString(),
+      },
+    });
+    const issue = assistantIssue(result);
+    return issue && isRecord(result) ? { ...issue, rotated: result.rotated === true } : null;
+  }
+
+  /** Whose an access or personal token is; null when it is unknown, expired or revoked. */
+  async assistantToken(digest: string): Promise<AssistantTokenOwner | null> {
+    const result = await this.request('/rest/v1/rpc/assistant_token', { method: 'POST', body: { p_hash: digest } });
+    const issue = assistantIssue(result);
+    if (!issue || !isRecord(result) || (result.kind !== 'access' && result.kind !== 'personal')) return null;
+    const expires = isoTime(result.expires_at);
+    return {
+      ...issue,
+      kind: result.kind,
+      clientId: typeof result.client_id === 'string' ? result.client_id : null,
+      expiresAt: expires ? Math.floor(Date.parse(expires) / 1_000) : null,
+    };
+  }
+
+  /** An account's connected assistants and personal tokens, newest first. */
+  async assistantGrants(userId: string): Promise<AssistantGrant[]> {
+    const result = await this.request('/rest/v1/rpc/assistant_grants', { method: 'POST', body: { p_user_id: userId } });
+    return Array.isArray(result) ? result.map(assistantGrant).filter((grant): grant is AssistantGrant => grant !== null) : [];
+  }
+
+  /** Ends one of the account's grants and its tokens at once; false when it has no such grant. */
+  async revokeAssistantGrant(userId: string, grantId: string): Promise<boolean> {
+    const result = await this.request('/rest/v1/rpc/revoke_assistant_grant', {
+      method: 'POST',
+      body: { p_user_id: userId, p_grant_id: grantId },
+    });
+    return result === true;
+  }
+
+  /** Makes a personal token, given as its digest. Throws P0001 past ten. */
+  async createPersonalToken(userId: string, name: string, scopes: Scope[], digest: string): Promise<AssistantGrant> {
+    const grant = assistantGrant(await this.request('/rest/v1/rpc/create_personal_token', {
+      method: 'POST',
+      body: { p_user_id: userId, p_name: name, p_scopes: scopes, p_hash: digest },
+    }));
+    if (!grant) throw new SupabaseError('Supabase did not return the personal token');
+    return grant;
+  }
+
+  /** A client giving a token back: an access token ends alone, a refresh token with its grant. */
+  async revokeAssistantToken(digest: string, clientId: string | null): Promise<void> {
+    await this.request('/rest/v1/rpc/revoke_assistant_token', { method: 'POST', body: { p_hash: digest, p_client_id: clientId } });
   }
 
   /**

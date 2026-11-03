@@ -19,6 +19,7 @@ export const GET = apiRoute(async (context) => {
   const snapshot = friendsSnapshot(await friendsRPC(client));
   const preferences = await client.getNotificationPreferences();
   const mailbox = await requireService(context).inboundMailbox(user.id);
+  const assistants = await requireService(context).assistantGrants(user.id);
   const inboundEmail = inboundEmailConfigured();
   return json({
     exportedAt: new Date().toISOString(),
@@ -32,6 +33,8 @@ export const GET = apiRoute(async (context) => {
     },
     // The address for adding parcels by email, and what its last email did; no email is kept.
     addByEmail: mailbox && (({ token, ...rest }) => ({ address: inboundEmail ? inboxAddress(inboundEmail, token) : token, ...rest }))(mailbox),
+    // The assistants connected to the account and its personal tokens; their tokens are kept only as digests.
+    assistants,
     packages: (await client.listPackages(true)).map(withoutEventSources),
   }, 200, {
     'Content-Disposition': 'attachment; filename="peek-export.json"',

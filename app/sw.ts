@@ -143,11 +143,12 @@ const serwist: Serwist = new Serwist({
     {
       // Account data and authentication traffic must never enter CacheStorage,
       // nor may a page whose address is a capability: an invitation or a
-      // parcel link. Keep this route ahead of Serwist's defaults, which cache
-      // GET APIs and cross-origin responses for applications with public data.
+      // parcel link, or an assistant's request to connect. Keep this route ahead
+      // of Serwist's defaults, which cache GET APIs and cross-origin responses
+      // for applications with public data.
       matcher: ({ sameOrigin, url }) => (
         !sameOrigin || url.pathname.startsWith('/api/') || url.pathname === '/health' || url.pathname === '/invite'
-          || url.pathname.startsWith('/i/') || url.pathname.startsWith('/p/')
+          || url.pathname.startsWith('/i/') || url.pathname.startsWith('/p/') || url.pathname.startsWith('/oauth/')
       ),
       handler: new NetworkOnly(),
     },

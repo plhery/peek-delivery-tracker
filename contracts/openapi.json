@@ -51157,6 +51157,154 @@
           }
         }
       }
+    },
+    "/api/account/assistants": {
+      "get": {
+        "operationId": "getAssistants",
+        "description": "The assistants connected to the account and its personal tokens. 404 when assistants may not connect to this account.",
+        "responses": {
+          "200": {
+            "description": "The connections",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistantsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createPersonalToken",
+        "description": "Makes a personal token for a script, at most ten an account.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePersonalTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The token, shown this once",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "409": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
+    "/api/account/assistants/consent": {
+      "post": {
+        "operationId": "answerAssistantConsent",
+        "description": "The owner's answer to an assistant asking to connect, from the consent page at /oauth/authorize.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistantConsentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Where to go next",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistantConsentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "409": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
+    "/api/account/assistants/{connectionId}": {
+      "parameters": [
+        {
+          "name": "connectionId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "delete": {
+        "operationId": "revokeAssistant",
+        "description": "Disconnects an assistant or revokes a personal token; its tokens stop working at once.",
+        "responses": {
+          "204": {
+            "description": "Revoked"
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -51410,6 +51558,13 @@
                 "type": "null"
               }
             ]
+          },
+          "assistants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantConnection"
+            },
+            "description": "Connected assistants and personal tokens, without their tokens."
           }
         }
       },
@@ -55593,6 +55748,169 @@
           "confirmation"
         ],
         "description": "added: it added a parcel; known: its parcels were already followed; none: it named no tracking number; limited: an allowance was used up; full: the account follows as many parcels as it may; confirmation: Gmail asked to confirm forwarding."
+      },
+      "AssistantScope": {
+        "type": "string",
+        "enum": [
+          "parcels:read",
+          "parcels:write"
+        ],
+        "description": "parcels:read lists parcels and reads their tracking; parcels:write adds and archives parcels."
+      },
+      "AssistantConnection": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "An assistant connected to the account through OAuth, or a personal token. Its tokens are never shown again.",
+        "required": [
+          "id",
+          "kind",
+          "name",
+          "redirectHost",
+          "scopes",
+          "createdAt",
+          "lastUsedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "oauth",
+              "personal"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "The assistant's own name for itself, or the token's name."
+          },
+          "redirectHost": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Where the assistant's sign-in returned; null for a personal token."
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantScope"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUsedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "AssistantsResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "connections",
+          "mcpUrl"
+        ],
+        "properties": {
+          "connections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantConnection"
+            }
+          },
+          "mcpUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "The MCP server address assistants connect to."
+          }
+        }
+      },
+      "CreatePersonalTokenRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "scopes"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "scopes": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/AssistantScope"
+            }
+          }
+        }
+      },
+      "PersonalTokenResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "connection",
+          "token"
+        ],
+        "properties": {
+          "connection": {
+            "$ref": "#/components/schemas/AssistantConnection"
+          },
+          "token": {
+            "type": "string",
+            "description": "The token, shown this once: Peek keeps only its digest."
+          }
+        }
+      },
+      "AssistantConsentRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "query",
+          "approve"
+        ],
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxLength": 8000,
+            "description": "The authorization request's query string, as the consent page received it."
+          },
+          "approve": {
+            "type": "boolean"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantScope"
+            },
+            "description": "What the owner allows, of what was asked. All of it when left out."
+          }
+        }
+      },
+      "AssistantConsentResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "redirect"
+        ],
+        "properties": {
+          "redirect": {
+            "type": "string",
+            "description": "Where the browser goes next: the assistant's redirect address with a code or an error."
+          }
+        }
       }
     }
   }

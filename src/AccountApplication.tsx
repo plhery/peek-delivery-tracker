@@ -16,6 +16,7 @@ import { ParcelsProvider } from './store/ParcelsContext';
 import { useI18n, type Locale } from './i18n';
 import type { PendingInvitationState } from './lib/friendInvites';
 import { createFriendsClient } from './lib/friends';
+import { takePendingConsent } from './lib/pendingConsent';
 import { restoreRequestedParcel } from './lib/requestedParcel';
 import { FriendInvitation } from './components/FriendInvitation';
 import { useParcels } from './store/ParcelsContext';
@@ -111,10 +112,16 @@ export function ApiAccount({ auth, experience, invitation, demoAddress, linkId, 
     [apiAuth, storage],
   );
   const friendsClient = useMemo(() => createFriendsClient(false, apiAuth), [apiAuth]);
-  // Signed in after a round trip to a sign-in provider: the parcel the address asked for before it opens now.
+  // Signed in after a round trip to a sign-in provider: the assistant that asked to connect, or the parcel the address
+  // asked for, opens now.
   useEffect(() => {
     if (!userId) return;
     endSignInStep();
+    const consent = takePendingConsent();
+    if (consent) {
+      window.location.replace(consent);
+      return;
+    }
     restoreRequestedParcel();
   }, [userId]);
   const invitationProps: ComponentProps<typeof FriendInvitation> = {

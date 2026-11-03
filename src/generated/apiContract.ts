@@ -48573,6 +48573,7 @@ export interface ApiAccountExportResponse {
   "friends"?: ApiFriendsExport;
   "deliveryEmails"?: ApiDeliveryEmailsExport;
   "addByEmail"?: ApiAddByEmail | null;
+  "assistants"?: Array<ApiAssistantConnection>;
 }
 
 export interface ApiDeleteAccountRequest {
@@ -50564,3 +50565,40 @@ export interface ApiAddByEmailResponse {
 }
 
 export type ApiAddByEmailResult = "added" | "known" | "none" | "limited" | "full" | "confirmation";
+
+export type ApiAssistantScope = "parcels:read" | "parcels:write";
+
+export interface ApiAssistantConnection {
+  "id": string;
+  "kind": "oauth" | "personal";
+  "name": string;
+  "redirectHost": string | null;
+  "scopes": Array<ApiAssistantScope>;
+  "createdAt": string;
+  "lastUsedAt": string | null;
+}
+
+export interface ApiAssistantsResponse {
+  "connections": Array<ApiAssistantConnection>;
+  "mcpUrl": string;
+}
+
+export interface ApiCreatePersonalTokenRequest {
+  "name": string;
+  "scopes": Array<ApiAssistantScope>;
+}
+
+export interface ApiPersonalTokenResponse {
+  "connection": ApiAssistantConnection;
+  "token": string;
+}
+
+export interface ApiAssistantConsentRequest {
+  "query": string;
+  "approve": boolean;
+  "scopes"?: Array<ApiAssistantScope>;
+}
+
+export interface ApiAssistantConsentResponse {
+  "redirect": string;
+}

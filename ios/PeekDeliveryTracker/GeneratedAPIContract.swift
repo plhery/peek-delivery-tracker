@@ -37,6 +37,7 @@ struct AccountExportResponse: Codable, Equatable, Hashable, Sendable {
     var friends: FriendsExport? = nil
     var deliveryEmails: DeliveryEmailsExport? = nil
     var addByEmail: AddByEmail? = nil
+    var assistants: [AssistantConnection]? = nil
 }
 
 struct DeleteAccountRequest: Codable, Equatable, Hashable, Sendable {
@@ -3619,6 +3620,53 @@ enum AddByEmailResult: String, Codable, CaseIterable, Hashable, Sendable, Identi
     var id: String { rawValue }
 }
 
+enum AssistantScope: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case parcels:read
+    case parcels:write
+
+    var id: String { rawValue }
+}
+
+struct AssistantConnection: Codable, Equatable, Hashable, Sendable, Identifiable {
+    var id: UUID
+    var kind: AssistantConnectionKind
+    var name: String
+    var redirectHost: String? = nil
+    var scopes: [AssistantScope]
+    var createdAt: String
+    var lastUsedAt: String? = nil
+}
+
+struct AssistantsResponse: Codable, Equatable, Hashable, Sendable {
+    var connections: [AssistantConnection]
+    var mcpURL: String
+
+    private enum CodingKeys: String, CodingKey {
+        case connections
+        case mcpURL = "mcpUrl"
+    }
+}
+
+struct CreatePersonalTokenRequest: Codable, Equatable, Hashable, Sendable {
+    var name: String
+    var scopes: [AssistantScope]
+}
+
+struct PersonalTokenResponse: Codable, Equatable, Hashable, Sendable {
+    var connection: AssistantConnection
+    var token: String
+}
+
+struct AssistantConsentRequest: Codable, Equatable, Hashable, Sendable {
+    var query: String
+    var approve: Bool
+    var scopes: [AssistantScope]? = nil
+}
+
+struct AssistantConsentResponse: Codable, Equatable, Hashable, Sendable {
+    var redirect: String
+}
+
 enum CarrierDetectionResponseAmazonShippingStatus: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case available
     case expired
@@ -3787,6 +3835,13 @@ enum ParcelFeedbackRequestApp: String, Codable, CaseIterable, Hashable, Sendable
     case web
     case ios
     case android
+
+    var id: String { rawValue }
+}
+
+enum AssistantConnectionKind: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case oauth
+    case personal
 
     var id: String { rawValue }
 }

@@ -77,6 +77,7 @@ describe('the account\'s forwarding address', () => {
   });
 
   it('goes into the account export as the address, without the token alone', async () => {
+    vi.spyOn(SupabaseServiceClient.prototype, 'assistantGrants').mockResolvedValue([]);
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(mailbox);
     vi.spyOn(SupabaseServiceClient.prototype, 'accountLastOpened').mockResolvedValue(null);
     vi.spyOn(SupabaseUserClient.prototype, 'request').mockResolvedValue({ profile: null, ownCard: null, friends: [] });

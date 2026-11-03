@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
+import { accountList, listsAccount, type AccountList } from '../accountList';
 
 /**
  * Adding parcels by email. Each account that turns it on gets a forwarding address whose token names it. A
@@ -13,7 +14,7 @@ export interface InboundEmailSettings {
   /** Signs what the Worker posts. */
   secret: string;
   /** Who sees the setting: everyone, or the accounts named by id or email. */
-  accounts: { everyone: boolean; ids: ReadonlySet<string>; emails: ReadonlySet<string> };
+  accounts: AccountList;
   /** Emails one address takes per UTC day. */
   perAccountPerDay: number;
   /** Emails every address together takes per UTC hour. */
@@ -21,7 +22,6 @@ export interface InboundEmailSettings {
 }
 
 const ADDRESS = /^[a-z0-9.!#$%&'*+/=?^_`|~-]*\{token\}[a-z0-9.!#$%&'*+/=?^_`|~-]*@[a-z0-9-]+(?:\.[a-z0-9-]+)+$/;
-const ACCOUNT_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 /** The largest email taken, as the Worker caps it: a shop's email is far smaller, and attachments are never read. */
 export const MAX_INBOUND_EMAIL_BYTES = 1_048_576;
 /** How long a signature holds: the Worker posts at once, so an older one is a replay. */
@@ -46,17 +46,10 @@ export function inboundEmailSettings(env: NodeJS.ProcessEnv = process.env): Inbo
   }
   const secret = env.INBOUND_EMAIL_SECRET?.trim() ?? '';
   if (secret.length < 32) throw new Error('INBOUND_EMAIL_ADDRESS needs INBOUND_EMAIL_SECRET, 32 characters or more');
-  const listed = (env.INBOUND_EMAIL_ACCOUNTS ?? '').split(',').map((entry) => entry.trim().toLowerCase()).filter(Boolean);
-  const unknown = listed.find((entry) => entry !== '*' && !ACCOUNT_ID.test(entry) && !/^[^\s@]+@[^\s@]+$/.test(entry));
-  if (unknown !== undefined) throw new Error('INBOUND_EMAIL_ACCOUNTS lists account ids, emails, or *');
   return {
     address,
     secret,
-    accounts: {
-      everyone: listed.includes('*'),
-      ids: new Set(listed.filter((entry) => ACCOUNT_ID.test(entry))),
-      emails: new Set(listed.filter((entry) => entry.includes('@'))),
-    },
+    accounts: accountList(env.INBOUND_EMAIL_ACCOUNTS, 'INBOUND_EMAIL_ACCOUNTS'),
     perAccountPerDay: count(env.INBOUND_EMAILS_PER_ACCOUNT_PER_DAY, 30, 'INBOUND_EMAILS_PER_ACCOUNT_PER_DAY'),
     perHour: count(env.INBOUND_EMAILS_PER_HOUR, 200, 'INBOUND_EMAILS_PER_HOUR'),
   };
@@ -73,8 +66,7 @@ export function inboundEmailConfigured(env: NodeJS.ProcessEnv = process.env): In
 
 /** Whether the account may have a forwarding address. */
 export function inboundEmailOpenTo(settings: InboundEmailSettings, account: { id: string; email?: string | null }): boolean {
-  const { everyone, ids, emails } = settings.accounts;
-  return everyone || ids.has(account.id.toLowerCase()) || Boolean(account.email && emails.has(account.email.toLowerCase()));
+  return listsAccount(settings.accounts, account);
 }
 
 const BASE32 = 'abcdefghijklmnopqrstuvwxyz234567';

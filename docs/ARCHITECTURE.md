@@ -17,6 +17,7 @@ Next.js route handlers --- user token ---> PostgREST + Postgres RLS
           +--------------------> SMTP (delivery email)
           ^
           +--- signed POST <--- Cloudflare Email Worker <--- forwarded shipping email
+          +--- MCP + OAuth <--- assistants (Claude, ChatGPT…) and personal tokens
 ```
 
 ## Where things live
@@ -100,6 +101,8 @@ Key server modules:
   when the account asked for it. The database hands each parcel out once per stage (`claim_delivery_emails`),
   `deliveryEmails.ts` writes the email and sends it through any SMTP service, and
   `unsubscribe.ts` signs the link that switches it off.
+- `assistants/` is the OAuth server and the MCP endpoint that connect assistants to an
+  account (see Trust boundaries).
 - `observability.ts` and `trackingAudit.ts` link Sentry and logs to the private audit
   tables ([OBSERVABILITY.md](OBSERVABILITY.md)).
 
@@ -112,7 +115,8 @@ Key server modules:
   functions that re-validate, enforce quotas and can't target another account.
 - **Service role**: used only for scheduled carrier work, adding a parcel to an account
   once its daily allowance is charged, the record of when an account's apps last read its
-  parcels, push delivery, the delivery email, adding parcels by email, account deletion,
+  parcels, push delivery, the delivery email, adding parcels by email, connected
+  assistants, account deletion,
   parcels followed without an account and what a parcel link shows. It never reaches the
   browser.
 - **Parcel links**: a parcel followed without an account has no owner and is reached
@@ -245,6 +249,32 @@ Key server modules:
   - Each address takes `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
     them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` is service-role
     only.
+- **Assistants**: an account the server opens it to (`ASSISTANT_ACCOUNTS`) can connect an
+  assistant (Claude, ChatGPT, any MCP client) or make a personal token for a script. Every
+  other account gets 404 from `/api/account/assistants`, so Settings shows no row; with no
+  list, `/mcp`, `/oauth/*` and their `.well-known` documents are not there.
+  - Peek is the OAuth 2.1 authorization server of its own MCP endpoint, `/mcp`, with the
+    canonical origin as issuer. Clients are public: PKCE with S256 only, the exact redirect
+    address they registered (any port on this computer's loopback), and the issuer in each
+    answer (RFC 9207). A client registers (`/oauth/register`) or names its metadata document
+    by its URL; the server fetches that over HTTPS from public addresses only, at most 10 KB
+    in five seconds, and keeps it an hour.
+  - The consent page, `/oauth/authorize`, names the client, the host its metadata document
+    comes from (or warns that a registered name can't be checked) and where the answer goes,
+    and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`) and
+    `parcels:write` (`add_parcels`, `archive_parcel`). It sends the browser nowhere before
+    the owner answers: a request it can't take is shown as one. The answer is a code valid
+    once for ten minutes; one used twice ends its grant.
+  - Access tokens last an hour. A refresh token lasts 60 days and is replaced at each use;
+    a replaced one used again after two minutes ends the grant. Google's assistants keep
+    theirs, as they require. A personal token lasts until it is deleted. The database keeps
+    tokens and codes as their SHA-256, and only the service role reaches those tables.
+  - A grant makes at most 120 requests a minute. A network may present 600 unknown tokens
+    a minute, open the consent page 30 times a minute and register 20 clients an hour. An
+    account has at most 50 grants and 10 personal tokens; Settings lists them and ends any.
+  - The tools work on the token's account alone, through the owner-checked functions the
+    app uses. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
+    its allowances. Their answers leave out the receiver's name and postcode.
 - **Private data**: tracking numbers, labels, carrier history, push endpoints and capability
   URLs (the tracking links a carrier keeps, such as Planzer's or a Freightways network's) never
   go into analytics. They do appear in operator logs and Sentry; see
@@ -260,7 +290,7 @@ Key server modules:
 - **Push**: browser endpoints must belong to known push services, and delivery never
   follows redirects. APNs tokens are opaque hex values, sent only to Apple's fixed hosts.
 - **Service worker**: caches only the public app shell and static assets. APIs, health,
-  Auth, invitation pages and parcel link pages are network-only.
+  Auth, invitation pages, parcel link pages and the OAuth pages are network-only.
 - **Other sites**: without sign-in a request counts against its sender's address, so a
   write is refused when a browser says a page of another site sent it (`Sec-Fetch-Site`,
   or `Origin` in a browser without it), and its body must be declared as JSON. Apps and
@@ -429,9 +459,14 @@ and nothing typed is sent.
   a Gmail confirmation until the next email. A new address replaces the old one; turning
   the setting off deletes the mailbox. Each day's count of emails is kept apart for seven
   days, so neither gives a new allowance.
+- **A connected assistant** is a grant: its name, where its answers go, the scopes, when it
+  was made and last used, and its tokens' digests. Disconnecting deletes the grant and its
+  tokens. A grant whose tokens have all expired goes the next time the account lists its
+  assistants or connects one, and a registered client no grant uses goes after a day. The
+  text `add_parcels` reads is dropped once its numbers are added.
 - **Deleting an account** removes the Auth user. Foreign-key cascades remove parcels,
   jobs, events, push registrations, Live Activity tokens, delivery email rows, the
-  forwarding address and audit rows. Other audit rows expire after 90 days.
+  forwarding address, connected assistants and audit rows. Other audit rows expire after 90 days.
 - **Share target**: the PWA receives shared text via `POST`. The service worker keeps it
   in a one-time cache entry, so tracking text never appears in a URL or HTTP log. It then
   opens the app's add sheet, with the text or with why none came (too long, empty,

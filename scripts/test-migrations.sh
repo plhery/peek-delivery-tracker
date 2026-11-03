@@ -224,6 +224,9 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/inbound_mailboxes.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
+  -f "$repo_root/supabase/tests/assistant_access.sql"
+
+psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/native_lookup_verification.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \

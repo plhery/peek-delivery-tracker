@@ -48349,7 +48349,7 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "color": "#1668e3",
+    "color": "#2c3053",
     "selectable": true,
     "timezone": "Asia/Shanghai",
     "tracking": {
@@ -48372,6 +48372,34 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://woolii.com/track"
+  },
+  "mountain-movers": {
+    "displayName": "Mountain Movers",
+    "aliases": [
+      "MountainMovers",
+      "Mountain Movers Transportation & Logistics"
+    ],
+    "countries": [
+      "US"
+    ],
+    "color": "#00295b",
+    "selectable": true,
+    "timezone": "America/Chicago",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://work.mymmtl.com/track/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "work.mymmtl.com"
+        ],
+        "path": "^/track/([^/?#,;|]+)/?$"
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://work.mymmtl.com/track"
   }
 } as const;
 
@@ -49755,7 +49783,8 @@ export const CARRIER_IDS = [
   "alliance-air-freight",
   "matson",
   "schneider",
-  "wooliiporter"
+  "wooliiporter",
+  "mountain-movers"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

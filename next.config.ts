@@ -2,6 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  // The day of the build, in UTC: no page or sitemap entry is dated after it (src/server/buildDay.ts).
+  env: { PEEK_BUILD_DAY: new Date().toISOString().slice(0, 10) },
   serverExternalPackages: ['universal-parcel-scraper', 'playwright-core', 'onnxruntime-web', 'node-app-attest', 'cbor'],
   // OCR runs in a file-backed worker outside Next's import graph. Include its
   // model and Node WASM runtime so the standalone server can start it locally.

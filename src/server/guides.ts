@@ -4,6 +4,7 @@ import path from 'node:path';
 import { GUIDE_LINKS, type GuideLink } from '../generated/guides';
 import { parseGuide, typeset, updatedDay, type Guide } from '../guides/markdown';
 import { guidePath } from '../guides/paths';
+import { shownDay, shownDays } from './buildDay';
 import { GUIDE_LANGUAGES, type GuideLanguage } from '../lib/locale';
 
 // The build ships these files beside the server (`outputFileTracingIncludes` in `next.config.ts`).
@@ -21,22 +22,22 @@ export function guideLinkBySlug(locale: GuideLanguage, slug: string): GuideLink 
   return GUIDE_LINKS[locale].find((link) => link.slug === slug);
 }
 
-/** A guide's text, set as its language sets it. Its file is read once; while developing, every time, so an edit shows. */
+/** A guide's text, set as its language sets it, dated no later than the build. Its file is read once; while developing, every time, so an edit shows. */
 export function guide(locale: GuideLanguage, id: string): Guide {
   const key = `${id}/${locale}`;
   const kept = read.get(key);
   if (kept) return kept;
-  const loaded = typeset(parseGuide(readFileSync(path.join(directory, id, `${locale}.md`), 'utf8'), `content/guides/${key}.md`), locale);
+  const loaded = shownDays(typeset(parseGuide(readFileSync(path.join(directory, id, `${locale}.md`), 'utf8'), `content/guides/${key}.md`), locale));
   if (process.env.NODE_ENV === 'production') read.set(key, loaded);
   return loaded;
 }
 
-/** The day a guide's facts were last checked, from its fields alone: the sitemap dates every guide without keeping its text. */
+/** The day a guide's facts were last checked, from its fields alone, no later than the build: the sitemap dates every guide without keeping its text. */
 export function guideUpdated(locale: GuideLanguage, id: string): string {
   const key = `${id}/${locale}`;
   const kept = read.get(key)?.updated ?? days.get(key);
   if (kept) return kept;
-  const day = updatedDay(readFileSync(path.join(directory, id, `${locale}.md`), 'utf8'), `content/guides/${key}.md`);
+  const day = shownDay(updatedDay(readFileSync(path.join(directory, id, `${locale}.md`), 'utf8'), `content/guides/${key}.md`));
   if (process.env.NODE_ENV === 'production') days.set(key, day);
   return day;
 }

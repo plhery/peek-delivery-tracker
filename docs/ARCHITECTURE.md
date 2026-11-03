@@ -300,7 +300,8 @@ For search engines, `/robots.txt` lets everything be fetched and `/sitemap.xml` 
 pages meant to be found: the landing, the guides' list and every guide in each language,
 the carriers' list in each language a carrier's page is written in and every carrier's page in each of its languages,
 the privacy notice and the help page. A guide or a carrier's page is dated by the day its
-facts were last checked. Each
+facts were last checked, and never after the day the site was built: its text, its structured
+data and the sitemap show the build's day instead of a later one ([`buildDay.ts`](../src/server/buildDay.ts)). Each
 landing's HTML carries its title, description and canonical address, the address of every
 other language (`hreflang`, with `/` for a reader of none of them), and a schema.org
 description of who makes Peek, the site and the free app

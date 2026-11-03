@@ -31,6 +31,7 @@ import { GUIDE_LINKS } from './generated/guides';
 import { guidePath } from './guides/paths';
 import { ADDRESS_LANGUAGES, documentLanguage, GUIDE_LANGUAGES, hrefLanguage, hrefLanguages, PAGE_LANGUAGES, SUPPORTED_LOCALES, type GuideLanguage, type PageLanguage } from './lib/locale';
 import { SOURCE_URL } from './lib/source';
+import { shownDay } from './server/buildDay';
 import { messagesFor } from './server/requestLocale';
 
 const TITLE = 'Peek — Universal Parcel Tracker';
@@ -274,8 +275,8 @@ describe('public product metadata', () => {
     for (const entry of landings) expect(entry.alternates?.languages).toEqual(alternates(origin));
     // No date is claimed for a page whose last change nobody recorded.
     for (const entry of [...landings, ...entries.slice(-2)]) expect(entry).not.toHaveProperty('lastModified');
-    // A guide is dated by the day its facts were last checked, and its list by its newest guide.
-    const updated = (id: string, locale: GuideLanguage) => /^updated: (\S+)$/m.exec(readFileSync(`content/guides/${id}/${locale}.md`, 'utf8'))![1];
+    // A guide is dated by the day its facts were last checked, never after the build's, and its list by its newest guide.
+    const updated = (id: string, locale: GuideLanguage) => shownDay(/^updated: (\S+)$/m.exec(readFileSync(`content/guides/${id}/${locale}.md`, 'utf8'))![1]);
     GUIDE_LANGUAGES.forEach((locale, at) => {
       expect(indexes[at].alternates?.languages).toEqual(guides());
       expect(indexes[at].lastModified).toBe(ids.map((id) => updated(id, locale)).sort().at(-1));
@@ -287,7 +288,7 @@ describe('public product metadata', () => {
     }));
     // The carriers' own page names every language with carriers' pages; a carrier's page only those it is written in, each
     // dated as a guide is. Until a carrier's page is written in one of Peek's languages, its empty list is left out.
-    const checked = (id: string, locale: PageLanguage) => /^updated: (\S+)$/m.exec(readFileSync(`content/carriers/${id}/${locale}.md`, 'utf8'))![1];
+    const checked = (id: string, locale: PageLanguage) => shownDay(/^updated: (\S+)$/m.exec(readFileSync(`content/carriers/${id}/${locale}.md`, 'utf8'))![1]);
     expect(carrierPages.length).toBeGreaterThan(carrierIds.length);
     expect(CARRIER_LOCALES).toEqual(SUPPORTED_LOCALES.filter((locale) => CARRIER_LINKS[locale].length > 0));
     CARRIER_LOCALES.forEach((locale, at) => {

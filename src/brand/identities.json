@@ -534,6 +534,9 @@
   "cargo-expreso": {
     "decal": "cargo-expreso"
   },
+  "cargo-trans-logistik": {
+    "decal": "cargo-trans-logistik"
+  },
   "cargobus": {
     "decal": "cargobus"
   },
@@ -1998,6 +2001,9 @@
   },
   "japan-post": {
     "decal": "japan-post"
+  },
+  "jas-worldwide": {
+    "decal": "jas-worldwide"
   },
   "jaskipin": {
     "decal": "jaskipin"

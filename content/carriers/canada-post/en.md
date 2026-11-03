@@ -1,122 +1,124 @@
 ---
 title: Canada Post tracking: numbers, statuses and notice cards
-description: Track a Canada Post parcel: where the tracking number is, what Canada Post's statuses mean, notice cards and pickup deadlines, missing parcels and contacts.
+description: Track a Canada Post parcel: where the tracking number is, what Canada Post's statuses mean, notice cards and pickup deadlines, missing parcels and customs.
 slug: canada-post-tracking
 published: 2026-10-15
 updated: 2026-10-27
 ---
 
-Canada Post is Canada's national postal service, a federal Crown corporation. Track a parcel with Canada Post's Track tool on [canadapost-postescanada.ca](https://www.canadapost-postescanada.ca/track-reperage/en), in Canada Post's app or by pasting the number in the box above. The number comes from the sender: the shop's shipping confirmation email, or the receipt if you posted it yourself.
+Canada Post is the Canada Post Corporation, set up by federal law to run the postal service within Canada and between Canada and other countries. Track a parcel on Canada Post's site, canadapost-postescanada.ca, or paste the number in the box above. The number comes from the sender, usually in the shop's shipping email. If it ends in `CA` and you follow the parcel from outside Canada, Peek can also ask your country's post with the same number.
 
-## Canada Post tracking number: what it looks like and where to find it
+## Canada Post tracking number: what it looks like
 
-Canada Post's numbers come in two main shapes:
+Peek matches these two shapes to Canada Post, here with made-up digits:
 
-| Shape (example) | Where you see it |
+| Number (made up) | What it is |
 | --- | --- |
-| `0000 0000 0000 0000` | 16 digits, Canada Post's own example: labels bought online, printed on the receipt or on the parcel. |
-| `RR000000005CA` | 13 characters ending in `CA`: counter labels, prepaid envelopes, Registered Mail, Xpresspost USA and International, Priority Worldwide. |
+| `1234 5678 9012 3452` | 16 digits; the last one is a check digit. [DHL eCommerce](carrier:dhl-ecommerce), [Correos Express](carrier:correos-express), [TNT](carrier:tnt) and [Evri](carrier:evri) also have 16-digit numbers. |
+| `RR000000005CA` | An international postal number: 2 letters, 9 digits, `CA`. The last digit before `CA` is a check digit. |
 
-From a shop, it's in the shipping confirmation email; if you posted it, on your receipt. Only the sender can give you the number: Canada Post keeps no records by name or address.
+Canada Post can also find a parcel by the 15-digit number of a delivery notice card, or by a reference made only of digits. For those, pick Canada Post yourself, as shown further down.
 
-Track also takes the 15-digit number on a Delivery Notice Card, and a sender's reference number together with the shipping date.
-
-Sixteen digits also fit DHL eCommerce, Correos Express and TNT, so check which carrier the shop's email names. [Purolator](carrier:purolator) numbers have 12 digits, so they can't be mistaken for these. More in [tracking number formats](guide:tracking-number-formats).
+[Purolator](carrier:purolator), another Canadian carrier, has numbers of its own: 12 digits, or 3 letters and 9 digits. Peek doesn't ask Canada Post about those by itself. If Canada Post doesn't know your number, check which carrier the shop's email names. More in [how to find a tracking number](guide:find-tracking-number) and [tracking number formats](guide:tracking-number-formats).
 
 ## What Canada Post's tracking statuses mean
 
-Track shows a summary label above a list of scans. These are the English scans; the French site shows French ones.
+Peek reads Canada Post's scans in English. Below are the ones you'll meet most, word for word and roughly in order, with the step Peek shows.
 
-| Canada Post's status | What it means for you |
-| --- | --- |
-| `Electronic information submitted by shipper` | The label exists; Canada Post doesn't have the parcel yet. |
-| `Item accepted at the Post Office` | Canada Post has it. |
-| `Item processed` | It's moving through Canada Post's network. |
-| `Item has arrived in Canada and will be presented for review` | From abroad: waiting for the Canada Border Services Agency. |
-| `Item was released by Customs and is now with Canada Post for processing` | Customs is done. |
-| `Item out for delivery` | It's on the van today. |
-| `Delivered to your community mailbox, parcel locker or apt./condo mailbox` | Delivered; check the parcel compartment or building mailbox. |
-| `Notice card left indicating where and when to pick up item` | Missed delivery: the card says which post office will hold it. |
-| `Delivery Attempt Made / Rescheduled for delivery next business day` | The attempt failed; Canada Post normally tries again the next business day. |
-| `Item available for pickup at Post Office` | Ready to pick up. |
-| `Final Notice; Item will be returned to sender if not collected within 10 days` | Last reminder before it goes back. |
-| `Recipient not located at address provided. Item being returned to sender.` | Going back to the sender. |
+**In Canada**
 
-The summary label can read `Notice left` while the scan says a card was left: same thing. It happens when the parcel won't fit, no one is home and there's no safe place, or the sender chose "Card for pickup".
+| Canada Post says | What it means for you | In Peek |
+| --- | --- | --- |
+| `Electronic information submitted by shipper` | The sender made a label, but Canada Post doesn't have the parcel yet. | "Label created" |
+| `Item accepted at the Post Office` | It was posted at a post office. | "Received by carrier" |
+| `Item picked up by Canada Post` | Canada Post collected it from the sender. | "Received by carrier" |
+| `Item processed` | It's moving through Canada Post's network. The line can come several times. | "In transit" |
+| `Item out for delivery` | It's on its way to you today. | "Out for delivery" |
+| `Delivered to your community mailbox, parcel locker or apt./condo mailbox` | In your community mailbox, a parcel locker or your building's mailbox. | "Delivered" |
+| `Delivered to recipient's safe drop location` | Left at your safe drop spot. | "Delivered" |
+| `Notice card left indicating where and when to pick up item` | Delivery was attempted; the parcel goes to a post office, and the card says where and when to collect it. | "Delivery attempted" |
+| `Item available for pickup at Post Office` | It's waiting for you at the post office. | "Ready for pickup" |
+| `Final Notice; Item will be returned to sender if not collected within 10 days` | Last reminder: collect it within 10 days or it goes back. | "Ready for pickup" |
+| `Recipient not located at address provided. Item being returned to sender.` | The recipient wasn't found at the address; the parcel is going back. | "Needs attention" |
+| `Item has been returned and is enroute to the Sender` | It's on its way back to the sender. | "In transit" |
 
-`Verifying recipient's address; Possible delay` means an addressing problem. If Canada Post can't verify the address, the parcel goes back, and a return that has started can't be stopped. `Check delivery progress` means delivery was interrupted; a progress bar with an arrow at its end means it's returning to the sender. `Item held by customs` means customs is reviewing it, and neither Canada Post nor the sending post can step in.
+`Delivered to your concierge or building manager` and `Delivered to mailroom` also show as "Delivered". `Item re-routed due to processing error; Possible delay` and `Delivery may be delayed due to transportation delay` warn of a delay: "Needs attention". `Expected delivery date updated` gives a new expected day; the parcel hasn't moved.
 
-## Notice card, pickup and missed deliveries
+**From abroad to Canada**
 
-Signature parcels get an attempt at the door; if no one is there, a Delivery Notice Card. Others go to your mailbox, community mailbox or door; if one is too large and no one is home, Canada Post may safe drop it or leave a card.
+| Canada Post says | What it means for you | In Peek |
+| --- | --- | --- |
+| `International item mailed in originating country` | Posted abroad; Canada Post follows it under the sending post's number. | "Received by carrier" |
+| `International item has left originating country and is en route to Canada` | On its way to Canada. | "In transit" |
+| `Item has arrived in Canada and will be presented for review` | In Canada, waiting for customs. | "At customs" |
+| `Item was released by Customs and is now with Canada Post for processing` | Customs is done; Canada Post takes over. | "In transit" |
 
-A card means the parcel waits at a nearby post office. A Final Notice Card follows after 5 calendar days, and the post office keeps the parcel 15 calendar days in all, then returns it to the sender. That's why the Final Notice scan says 10 days.
+**From Canada to another country**, `International item being forwarded to destination country` and `Item has arrived in foreign country` show as "In transit", and `Item presented to customs` as "At customs".
 
-To pick it up, bring the card if you have it and government-issued photo ID. Someone else can go with their own photo ID plus your signed card with their name printed on it, or a letter of authorization. No card but an attempt in tracking? It may come the next business day with your mail, or Track shows where to go.
+In the history, delivery scans read "Delivered"; the other scans keep Canada Post's English wording.
 
-In community parcel lockers, a key in your mailbox opens the compartment; the parcel waits up to 5 days, then goes to the post office.
+## Missed delivery, pickup and customs in Canada
 
-From abroad, the CBSA assesses duty and taxes and Canada Post collects them, with a $9.95 handling fee included. Pay on Track or in the app before the parcel is out for delivery, otherwise at the door by credit card or at the post office. More in [parcels held at customs](guide:customs).
+**Missed delivery.** From the final notice scan, you have 10 days to collect the parcel before it goes back to the sender. More in [missed delivery](guide:missed-delivery) and [uncollected parcel](guide:uncollected-parcel).
 
-## Canada Post parcel late, missing or damaged
+**Customs on parcels from abroad.** Canada Post hands all international mail to the Canada Border Services Agency (CBSA) on arrival; the CBSA processes it at its mail centres in Vancouver, Toronto and Montreal. Most items clear after a first look, sometimes in under a day. One that may not be allowed in, is wrongly labelled or may hold contraband gets a closer look, sometimes by Health Canada or the Canadian Food Inspection Agency, which can delay it.
 
-No new scan for days in transit is normal: Canada Post typically scans when an item is mailed and when it's out for delivery. Canada Post says most packages arrive no later than 5 business days after the expected delivery date.
+**Duty and taxes.** Goods by mail worth CAN$20 or less owe no duty or tax, and gifts from family or friends abroad owe no GST up to CAN$60. Above that, expect 5% GST unless the goods are exempt. Where your province charges HST, you pay it instead; in British Columbia, Manitoba, Quebec and Saskatchewan, provincial sales tax comes on top. Duty depends on the goods and where they come from or were made. What you owe is on Form E14, the CBSA Postal Import Form, attached to the parcel when it's delivered, and Canada Post charges a handling fee when duty or tax is due.
 
-After that, check the address and around your home, then ask for an investigation with a support ticket. Either you or the sender can open one, but only the sender can claim compensation. The sender has 90 days from the shipping date to claim in Canada, 6 months for US and international items.
+**Disagree with the amount?** Refuse the parcel and ask for a reassessment, or pay and ask for an adjustment on Form B2G, on the back of the E14. More in [parcels held at customs](guide:customs).
 
-Marked delivered but not there? Check the mailbox, parcel locker, concierge, mailroom and household, and look for a signature on Track, then ask for an investigation. Damaged: contact the sender, keep the packaging and take photos right away.
+## Canada Post parcel sent abroad: who delivers it
 
-## Canada Post contact and customer service
+**Who delivers.** With an international postal number ending `CA` and a valid check digit, Peek can also ask the post of the country you follow the parcel from, with the same number: for example [USPS](carrier:usps) in the United States, [Royal Mail](carrier:royal-mail) in the UK ([Parcelforce](carrier:parcelforce) for numbers starting `E`), [An Post](carrier:an-post) in Ireland, [Australia Post](carrier:australia-post), [NZ Post](carrier:nz-post), [La Poste](carrier:la-poste) in France and [DHL](carrier:dhl) in Germany.
 
-Canada Post's channels, as read on 15 October 2026:
+Canada Post gives Peek no destination country, so your country decides: in the iPhone app, the region your iPhone is set to; in a browser, the country you added the parcel from. Once your post shows a scan at least as new as Canada Post's newest, Peek follows the parcel there and keeps Canada Post's history. For one more day it still asks Canada Post too, at most every 55 minutes. Followed from Canada, or with a 16-digit number, the parcel stays with Canada Post. For customs in the destination country, see [parcels held at customs](guide:customs).
 
-- **Phone** 1-866-607-6301 within Canada, 1-416-979-3033 from outside Canada, TTY 1-800-267-2797. Monday to Friday 7am to 11pm ET, weekends 9am to 9pm ET.
-- **Support ticket** on the [support page](https://www.canadapost-postescanada.ca/cpc/en/support.page), with or without signing in, and **chat** there too.
-- Local post offices often can't take phone calls.
+## Canada Post parcel late, lost, returned or not there
 
-> Canada Post warns that texts saying a delivery is on hold for unpaid fees, with a payment link, aren't from Canada Post. Its texts come only from 272727 or 55555 (if you signed up) or its support numbers 613-734-1002 and 613-734-1004, and its links point to canadapost-postescanada.ca. Forward spam to 7726.
+**No new scans.** After four days without a new scan at "Label created", "Received by carrier" or "In transit", Peek says: "Parcels often go quiet on long flights, at customs or over a weekend. Peek keeps asking Canada Post and shows the next scan here." It adds a link to help from the carrier that has the parcel, such as "Get help from Canada Post". Mail at customs in Canada can't be tracked precisely, the CBSA says. More in [tracking that isn't updating](guide:tracking-not-updating).
+
+**Lost.** If you bought online, start with the shop. More in [lost parcel](guide:lost-parcel).
+
+**Delivered but not there.** Under the Canada Post Corporation Act, mail left in the usual way at your home or business, in your mailbox or with someone who may reasonably receive it for you counts as delivered. Peek shows "Delivered", but Canada Post's own tracking names the place, such as `Delivered to mailroom`: look there first. If your country's post delivered it, check its tracking. More in [delivered but not received](guide:delivered-not-received).
+
+**Returned.** Once a returned parcel reaches the sender, Peek shows "Returned to sender". See [returned to sender](guide:returned-to-sender).
+
+## Canada Post customer service and contact
+
+How to reach Canada Post is on canadapost-postescanada.ca. Once a parcel from Canada is with your country's post, ask that post about delivery and pickup; the pages on [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post) and [Australia Post](carrier:australia-post) say how. Peek can't contact Canada Post or the shop for you.
 
 ## Tracking Canada Post parcels with Peek
 
-[Peek](/) names Canada Post at once for postal numbers ending `CA` that pass their check. A 16-digit number with a valid check digit is shared, so Peek asks Canada Post, Correos Express, Evri UK, TNT and DHL eCommerce together (Canada Post leads the list for readers in Canada) and names the one that knows it; a 16-digit number that fails the check is never offered to Canada Post. Links with `searchFor=` work, but not Track's `#/search` links: paste the number. For a notice card number or a reference, pick Canada Post with "Change".
+[Peek](/) names Canada Post at once for international postal numbers ending `CA` with a valid check digit. A 16-digit number with a valid check digit fits several carriers: Peek shows "Checking tracking services…", asks Canada Post, DHL eCommerce, TNT, Correos Express and Evri at the same time, and takes the one that knows the number. For a notice card number or a reference, tap "Change" and pick Canada Post under "All carriers" or through the search. A Canada Post tracking link with `searchFor=` works too; links with `#/search` work only with postal numbers ending `CA`, so paste a 16-digit number yourself.
 
-Peek shows the status, each scan with its town and province on a map, the expected delivery day, a delivery time window while one is given, the delivery time and the sender's business name. Each scan is read on the clock of the place it happened and shown in your device's time zone. Statuses stay in Canada Post's English; delivered scans read "Delivered" and a parcel back with the sender "Returned to sender". Peek drops delivery options, addresses, signatures and delivery photos, and doesn't show the post office's name or the pickup deadline.
+Peek asks Canada Post directly, without a browser. You see the status, the history with the place of each scan (town and province in Canada), the expected delivery day, a time window once the parcel is out for delivery in Canada and Canada Post gives one, the delivery time and, when Canada Post shows it in full, the sender's name. Peek leaves out delivery options, addresses, signatures and delivery photos.
 
-Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. When a parcel posted abroad with a postal number is bound for Canada, Peek can follow it on Canada Post once Canada Post shows progress.
+Peek checks every 10 minutes, and every 2 minutes once Canada Post itself reports the parcel out for delivery that day. After 12 hours without a new scan at "Label created" or "Received by carrier", or 48 hours at any other step, it checks hourly. For notifications, choose "Every scan", "Important steps" or "Delivery only".
+
+**Into Canada.** For a parcel posted abroad with an international postal number, Peek also asks Canada Post with the same number once the sending post names Canada as the destination or, when it names none, if you follow the parcel from Canada. Once Canada Post shows a scan at least as new as the sending post's newest, Peek follows the parcel there and keeps the earlier history. A number starting with `L` and ending `CH` that Peek follows with Swiss Post is never handed to Canada Post.
 
 ## Questions about Canada Post tracking
 
 ### Why is my Canada Post tracking not updating?
 
-Usually because Canada Post scans when an item is mailed and again when it's out for delivery, with little in between. If the expected date is more than 5 business days past, start an investigation. See [tracking that isn't updating](guide:tracking-not-updating).
+Long flights, customs and weekends often leave a gap between scans. Peek keeps asking, hourly once two days pass without news. See [tracking that isn't updating](guide:tracking-not-updating).
 
-### How long does Canada Post keep tracking information?
+### Why can't Peek find my Canada Post tracking number?
 
-Track shows nothing for items shipped more than a year ago. A valid number can also show nothing before the parcel reaches Canada Post.
+Canada Post gives the same answer whether a number is unknown, not scanned yet or expired, so on a Canada Post parcel Peek shows "Waiting for the carrier" until the first scan. Check every digit: in a 16-digit number the last one is a check digit, and in a postal number the last digit before `CA` is.
 
-### Can I track with a Canada Post delivery notice card number?
+### Can I track a Canada Post parcel with the notice card number?
 
-Yes. Enter the 15-digit card number in Track and it shows the parcel and where to pick it up.
+Yes. Paste the 15-digit number from the card, tap "Change" and pick Canada Post under "All carriers". Peek looks the parcel up on Canada Post with it.
 
-### What does "Notice left" mean?
+### Who delivers a Canada Post parcel in the US or the UK?
 
-Canada Post couldn't deliver the parcel and took it to a post office. The card or Track names the office; you have 15 calendar days to pick it up.
+Your country's post, if the number ends in `CA`: USPS in the US, Royal Mail in the UK, or Parcelforce for numbers starting `E`. Peek asks it with the same number. A 16-digit number stays with Canada Post.
 
 :::sources
-- [Canada Post: Where to find your tracking number](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/find-your-tracking-number.page) – shapes, examples, only the sender has it
-- [Canada Post: How to use Track](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/how-to-use-track.page) – card numbers, references
-- [Canada Post: Tracking statuses](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-statuses.page) – status meanings, pickup ID
-- [Canada Post: Track](https://www.canadapost-postescanada.ca/track-reperage/en) – labels, not-found reasons
-- [Canada Post: Delivery options](https://www.canadapost-postescanada.ca/cpc/en/support/articles/parcel-services-shipping-in-canada/delivery-options.page) – attempts, cards, 5 and 15 days
-- [Canada Post: Why wasn't my parcel delivered to my parcel locker?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/parcel-lockers/why-wasnt-my-parcel-delivered.page) – lockers
-- [Canada Post: Delivery was attempted but I didn't get a notice card](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/i-didnt-get-a-missed-delivery-notice.page) – missing cards
-- [Canada Post: Why is my tracking status not updating?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-status-not-updating.page) – scan frequency
-- [Canada Post: How do I pay duty and taxes?](https://www.canadapost-postescanada.ca/cpc/en/support/kb/receiving/delivery-faq/how-to-pay-duty-and-taxes-online-canada-post.page) – $9.95 fee, payment
-- [Canada Post: My package hasn't arrived](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/missing-packages.page) – 5 business days, investigations, deadlines
-- [Canada Post: Find a missing package that shows as Delivered](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/missing-package-showing-as-delivered.page) – checks
-- [Canada Post: My package arrived damaged](https://www.canadapost-postescanada.ca/cpc/en/support/kb/claims/damaged-packages.page) – damage
-- [Canada Post: Support](https://www.canadapost-postescanada.ca/cpc/en/support.page) – phone, hours, tickets, chat
-- [Canada Post: Recognizing spam, fraudulent emails and text messages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/company-policies/privacy-security/what-do-to-if-you-get-suspicious-email.page) – fake texts
-- [Canada Post: Responsible business practices](https://www.canadapost-postescanada.ca/cpc/en/our-company/corporate-sustainability/responsible-business-practices.page) – Crown corporation
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [CBSA: Importing by mail](https://www.cbsa-asfc.gc.ca/import/personal-personnel/postal-postale-eng.html) – customs on mail, $20 exemption, Form E14, handling fee, no precise tracking
+- [CBSA: Importing by mail or courier - Paying duty and/or taxes on imported goods](https://www.cbsa-asfc.gc.ca/import/postal-postale/dtytx-drttx-eng.html) – GST, HST and PST, CAN$20 and CAN$60 limits, duty
+- [CBSA: Importing by mail or courier - Disputing duty and taxes](https://www.cbsa-asfc.gc.ca/import/postal-postale/dispute-contestation-eng.html) – reassessment, Form B2G
+- [Justice Laws Website: Canada Post Corporation Act](https://laws-lois.justice.gc.ca/eng/acts/C-10/page-1.html) – the corporation, when mail counts as delivered
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, wordings and their steps, what Peek shows, hand-offs
 :::

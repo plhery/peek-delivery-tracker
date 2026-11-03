@@ -376,6 +376,15 @@ class DeliveryListTest {
         assertTrue("$size of $full", size < full && size >= full * 0.75f - 0.01f)
     }
 
+    /** X-AD35: "On the way" over the list is plain text to TalkBack, as it is to VoiceOver (`listOverview`). */
+    @Test
+    fun onTheWayOverTheListIsNoHeading() {
+        show()
+        val words = compose.onAllNodes(hasText("On the way")).fetchSemanticsNodes()
+        assertTrue(words.isNotEmpty())
+        words.forEach { assertFalse(SemanticsProperties.Heading in it.config) }
+    }
+
     @Test
     fun atTheLargestTextTheBarsTitleStaysAtTheDefaultSize() {
         show(width = 600.dp, fontScale = 2f)

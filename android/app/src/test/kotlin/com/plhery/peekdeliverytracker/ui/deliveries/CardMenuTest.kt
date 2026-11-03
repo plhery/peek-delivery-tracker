@@ -345,6 +345,12 @@ class CardMenuTest {
         // Plain Ctrl+C copies what is selected, not the parcel's number.
         assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_C, ctrl), items))
         assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl), items))
+        // A-G04: exactly their modifiers, none more (`keyboardShortcut(_:modifiers:)`).
+        assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_DEL, ctrl or KeyEvent.META_SHIFT_ON), items))
+        assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_C, ctrl or KeyEvent.META_SHIFT_ON or KeyEvent.META_ALT_ON), items))
+        assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_META_ON or KeyEvent.META_SHIFT_ON), items))
+        // Caps Lock is no modifier.
+        assertEquals(ParcelMenuItem.Delete, ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_DEL, ctrl or KeyEvent.META_CAPS_LOCK_ON), items))
     }
 
     // Where the menu stands (finding the room on any window), the card it lifts, and TalkBack.

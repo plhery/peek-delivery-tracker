@@ -1,19 +1,22 @@
 package com.plhery.peekdeliverytracker
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.ShareInbox
 import com.plhery.peekdeliverytracker.core.SharedContent
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.ShareSheet
+import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_HEIGHT
+import com.plhery.peekdeliverytracker.ui.sheet.REGULAR_WIDTH
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.isPhoneInDarkTheme
 import com.plhery.peekdeliverytracker.ui.theme.phoneIsDark
@@ -42,6 +45,14 @@ class ShareActivity : ComponentActivity() {
         // The window's name, which TalkBack reads as it comes, in the card's language rather than the label's.
         title = copy.text("shareExtension.title")
         setContent {
+            // The night mode changed (the phone's appearance, or Peek's own night set as its appearance store is made,
+            // which may be here, before the app's window ever was): the card takes it as it is, without starting again
+            // (`configChanges="uiMode"`), its window's theme light whatever the night. Its dim follows the configuration,
+            // and the bars are set again once androidx has set the window's first ones again, as it does on each change.
+            DisposableEffect(LocalConfiguration.current) {
+                systemBars()
+                onDispose {}
+            }
             // The sheet dims what it stands over as the phone's appearance would have it; the card is its own.
             PeekTheme(dark = isPhoneInDarkTheme(), carrierIdentities = null) {
                 ShareSheet(
@@ -55,23 +66,20 @@ class ShareActivity : ComponentActivity() {
     }
 
     /**
-     * The night mode changed: the phone's appearance, or Peek's own night set as its appearance store is made, which may
-     * be here, before the app's window ever was. The card takes it as it is, without starting again
-     * (`configChanges="uiMode"`), as its window's theme is light whatever the night and the sheet reads the configuration:
-     * its dim follows, and the bars are set again.
-     */
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        systemBars()
-    }
-
-    /**
-     * The bars' icons over the dimmed app, for the phone's appearance, which the app that shared most likely has, rather
-     * than for Peek's own, which its night mode follows.
+     * The bars with no scrim, as the iPhone's sheet runs under the home indicator. The status bar's icons are over the
+     * dimmed app, for the phone's appearance, which the app that shared most likely has, rather than for Peek's own,
+     * which its night mode follows. The navigation bar's are over the card where its sheet reaches the window's foot (a
+     * compact window): dark, the card light in either appearance; over the dimmed app beside a regular window's form
+     * sheet, for the phone's appearance too.
      */
     private fun systemBars() {
-        val bars = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { phoneIsDark(this) }
-        enableEdgeToEdge(statusBarStyle = bars, navigationBarStyle = bars)
+        val window = windowManager.currentWindowMetrics.bounds
+        val density = resources.displayMetrics.density
+        val regular = window.width() / density >= REGULAR_WIDTH.value && window.height() / density >= REGULAR_HEIGHT.value
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { phoneIsDark(this) },
+            navigationBarStyle = if (regular && phoneIsDark(this)) SystemBarStyle.dark(Color.TRANSPARENT) else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
+        )
     }
 
     private fun close(saved: Boolean) {

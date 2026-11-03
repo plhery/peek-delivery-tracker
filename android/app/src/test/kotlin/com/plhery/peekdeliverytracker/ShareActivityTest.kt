@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Looper
+import android.view.WindowInsetsController
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -43,6 +44,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
@@ -239,6 +241,45 @@ class ShareActivityTest {
     @Test
     @Config(qualifiers = TABLET)
     fun aTapBesideTheCardGoesBackToTheAppThatSharedAsCancelBeforeSaveAndAsDoneAfter() = goesBackAsCancelOrDone { besideTheCard() }
+
+    /** The window's bar icons, light where its appearance asks dark icons, and whether the system scrims the buttons. */
+    private fun bars(window: Activity): Triple<Boolean, Boolean, Boolean> {
+        val appearance = checkNotNull(window.window.insetsController).systemBarsAppearance
+        return Triple(
+            appearance and WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS != 0,
+            appearance and WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS != 0,
+            window.window.isNavigationBarContrastEnforced,
+        )
+    }
+
+    /**
+     * X-AD04: on a dark phone, the status bar's icons light over the dimmed app; the buttons' dark over the light card
+     * where its sheet reaches the window's foot, with no scrim under them, as the iPhone's sheet has none.
+     */
+    @Test
+    fun onADarkPhoneTheButtonsAreDarkOverTheCardWithNoScrim() {
+        RuntimeEnvironment.setQualifiers("+night")
+        val window = open(share("TESTLAMP0001"))
+        assertEquals(Triple(false, true, false), bars(window.get()))
+    }
+
+    /**
+     * X-AD04: beside a regular window's form sheet the buttons are over the dimmed app, for the phone's appearance, set
+     * again as the phone goes dark under the card.
+     */
+    @Test
+    @Config(qualifiers = TABLET)
+    fun besideTheFormSheetTheButtonsFollowThePhoneWithNoScrim() {
+        val window = open(share("TESTLAMP0001"))
+        val shown = window.get()
+        assertEquals(Triple(true, true, false), bars(shown))
+        val night = Configuration(shown.resources.configuration).apply {
+            uiMode = (uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or Configuration.UI_MODE_NIGHT_YES
+        }
+        window.configurationChange(night)
+        settle()
+        assertEquals(Triple(false, false, false), bars(shown))
+    }
 
     @Test
     fun aTurnAsTheCardGoesDownDoesntBringItBackAndItStillGoesBack() {

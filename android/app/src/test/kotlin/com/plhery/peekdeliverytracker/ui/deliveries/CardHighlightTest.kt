@@ -29,6 +29,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.awaitFrame
+import com.plhery.peekdeliverytracker.ui.theme.PeekColors
 import kotlin.math.abs
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -125,7 +126,7 @@ class CardHighlightTest {
     /** The cards drawn with the accent 1.5 points above the middle of their top edge, the middle of the ring. */
     private fun ringed(): List<String> {
         val map = window()
-        val accent = Color(view.context.getColor(android.R.color.system_accent1_600))
+        val accent = PeekColors(dark = false).accent
         return cards().filter { (_, card) ->
             val pixel = map[card.center.x.toInt(), (card.top - 1.5f * points).toInt()]
             maxOf(abs(pixel.red - accent.red), abs(pixel.green - accent.green), abs(pixel.blue - accent.blue)) < 0.04f

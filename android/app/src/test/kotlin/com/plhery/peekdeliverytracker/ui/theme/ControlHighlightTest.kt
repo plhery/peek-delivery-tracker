@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.input.InputMode
 import androidx.compose.ui.input.InputModeManager
 import androidx.compose.ui.platform.LocalInputModeManager
-import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -71,7 +70,7 @@ class ControlHighlightTest {
         compose.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = false, carrierIdentities = null) {
                 view = LocalView.current
-                accent = Color(LocalResources.current.getColor(android.R.color.system_accent1_600, null))
+                accent = LocalPeekColors.current.accent
                 val window = LocalInputModeManager.current
                 val modes = remember(window) {
                     object : InputModeManager by window {

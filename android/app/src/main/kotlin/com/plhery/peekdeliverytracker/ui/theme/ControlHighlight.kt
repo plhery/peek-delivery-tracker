@@ -25,7 +25,6 @@ import androidx.compose.ui.node.DelegatableNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.node.currentValueOf
 import androidx.compose.ui.platform.LocalInputModeManager
-import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -35,9 +34,9 @@ import kotlin.math.min
 
 /**
  * What a control shows besides its press. While it has the focus from a hardware keyboard or a D-pad, never from a
- * touch, Full Keyboard Access's ring: the system's accent, [RING_WIDTH] wide, just outside [shape] ([ring]). Under a
- * pointer, where [hover], the pointer's highlight over it in [shape], as `.hoverEffect(.highlight)` lights a card up on
- * the iPad: the system's quaternary fill. A [shape] of null is the control's bounds rounded as the app's controls are:
+ * touch, Full Keyboard Access's ring: the app's accent, which the iPad's focus takes from the app's tint, [RING_WIDTH]
+ * wide, just outside [shape] ([ring]). Under a pointer, where [hover], the pointer's highlight over it in [shape], as
+ * `.hoverEffect(.highlight)` lights a card up on the iPad: the system's quaternary fill. A [shape] of null is the control's bounds rounded as the app's controls are:
  * a circle where they are square (the bars' round buttons), else a capsule, at most [MAX_CORNER] at the corners.
  *
  * Every press style draws them ([PressStyle], RowHighlight); this is the indication of a control with no press of its
@@ -122,12 +121,10 @@ internal class ControlMarks(private val shape: Shape?, private val ring: Boolean
 
 /** [marks] over what is drawn: the pointer's highlight, then the ring while the keyboard has the focus here. */
 internal fun DrawScope.drawMarks(marks: ControlMarks, node: CompositionLocalConsumerModifierNode) {
-    val dark = node.currentValueOf(LocalPeekColors).dark
-    if (marks.hovered) with(marks) { drawHover(dark) }
+    val colors = node.currentValueOf(LocalPeekColors)
+    if (marks.hovered) with(marks) { drawHover(colors.dark) }
     if (marks.focused && node.currentValueOf(LocalInputModeManager).inputMode == InputMode.Keyboard) {
-        val resources = node.currentValueOf(LocalResources)
-        val accent = Color(resources.getColor(if (dark) android.R.color.system_accent1_200 else android.R.color.system_accent1_600, null))
-        with(marks) { drawRing(accent) }
+        with(marks) { drawRing(colors.accent) }
     }
 }
 

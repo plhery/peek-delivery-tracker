@@ -155,9 +155,11 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .parcel-stamp__on-paper { display: none; --tone: var(--tone-surface); }
 :root[data-appearance="dark"] .parcel-stamp__on-paper { display: inline; }
 :root[data-appearance="dark"] .parcel-stamp__around { clip-path: var(--stamp-around); }
+:root[data-appearance="dark"] .parcel-stamp__postmark { opacity: .81; }
 @media (prefers-color-scheme: dark) {
   :root[data-appearance="system"] .parcel-stamp__on-paper { display: inline; }
   :root[data-appearance="system"] .parcel-stamp__around { clip-path: var(--stamp-around); }
+  :root[data-appearance="system"] .parcel-stamp__postmark { opacity: .81; }
 }
 /* The other stamps share the parcel stamp's die cut. Their paper is a layer behind the print, so the shadow follows the
    cut and any postmark stays whole. Whatever the stamp's size, the mask bites a whole number of 3.6 by 1.1 waves out of

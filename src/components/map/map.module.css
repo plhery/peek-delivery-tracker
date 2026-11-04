@@ -10,7 +10,7 @@
   --map-route: var(--ink); --map-route-muted: color-mix(in srgb, var(--ink) 38%, transparent);
   --map-accent: var(--tone, var(--ink)); --map-label: var(--ink-soft); --map-label-strong: var(--ink);
   --map-label-bg: light-dark(color-mix(in srgb, var(--paper) 84%, transparent), color-mix(in srgb, #1f1c17 82%, transparent));
-  --map-dot-ring: var(--map-ocean); --map-rim-shade: light-dark(rgb(20 30 20 / 7%), rgb(0 0 0 / 40%));
+  --map-dot-ring: var(--map-ocean); --map-current-ring: light-dark(var(--paper), #060504); --map-rim-shade: light-dark(rgb(20 30 20 / 7%), rgb(0 0 0 / 40%));
   user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
 }
 /* Layout without specificity, so a direction's own class always places the map. */
@@ -45,9 +45,9 @@
 @keyframes pen { from { --map-drawn: 0; } to { --map-drawn: 1; } }
 @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 .dot circle { fill: var(--map-route); stroke: var(--map-dot-ring); stroke-width: 1.5; }
-.dot[data-kind=current] circle { fill: var(--map-accent); stroke: var(--paper); stroke-width: 2; }
+.dot[data-kind=current] circle { fill: var(--map-accent); stroke: var(--map-current-ring); stroke-width: 2; }
 .dot[data-kind=current] .halo { stroke: none; opacity: .3; transform-box: fill-box; transform-origin: center; animation: pulse 2.4s var(--ease-out) infinite; }
-.dot[data-kind=last-known] circle { fill: var(--paper); stroke: var(--map-accent); stroke-width: 2; }
+.dot[data-kind=last-known] circle { fill: var(--map-current-ring); stroke: var(--map-accent); stroke-width: 2; }
 .dot[data-kind=destination] circle { fill: var(--map-dot-ring); stroke: var(--map-route-muted); stroke-width: 1.5; }
 .dot[data-kind=area] circle { fill: none; stroke: var(--map-route); stroke-width: 1.4; stroke-dasharray: 1.6 2.4; }
 /* A quiet route belongs to the picture: a thin line and small dots without the bright ring, there at once. Its card pales the ink. */

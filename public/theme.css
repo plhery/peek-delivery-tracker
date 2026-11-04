@@ -26,7 +26,7 @@
   --lilac: #d1b5ff; --lilac-soft: #272034; --rose: #ffadc8; --rose-soft: #331d27;
   --ochre: #ffd65f; --ochre-soft: #2f220e; --yellow-soft: #413410;
   --shadow: 0 2px 12px rgb(0 0 0 / 45%);
-  --sheet-canvas: #1a1713; --sheet-control: #36322c; --sheet-line: #4a463e; --sheet-border: transparent;
+  --sheet-canvas: #191612; --sheet-control: #36322c; --sheet-line: #4a463e; --sheet-border: transparent;
   --sheet-shadow: inset 0 1px 0 rgb(255 244 220 / 9%), 0 24px 64px rgb(0 0 0 / 55%);
   --sheet-rise-shadow: inset 0 1px 0 rgb(255 244 220 / 9%), 0 -24px 64px rgb(0 0 0 / 55%);
   --scrim: rgb(8 7 4 / 62%); --card-edge: inset 0 1px 0 rgb(255 244 220 / 8%);
@@ -40,7 +40,7 @@
     --lilac: #d1b5ff; --lilac-soft: #272034; --rose: #ffadc8; --rose-soft: #331d27;
     --ochre: #ffd65f; --ochre-soft: #2f220e; --yellow-soft: #413410;
     --shadow: 0 2px 12px rgb(0 0 0 / 45%);
-    --sheet-canvas: #1a1713; --sheet-control: #36322c; --sheet-line: #4a463e; --sheet-border: transparent;
+    --sheet-canvas: #191612; --sheet-control: #36322c; --sheet-line: #4a463e; --sheet-border: transparent;
     --sheet-shadow: inset 0 1px 0 rgb(255 244 220 / 9%), 0 24px 64px rgb(0 0 0 / 55%);
     --sheet-rise-shadow: inset 0 1px 0 rgb(255 244 220 / 9%), 0 -24px 64px rgb(0 0 0 / 55%);
     --scrim: rgb(8 7 4 / 62%); --card-edge: inset 0 1px 0 rgb(255 244 220 / 8%);

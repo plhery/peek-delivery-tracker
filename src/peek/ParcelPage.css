@@ -116,7 +116,7 @@
 .peekp-map .peekp-map__canvas {
   --map-space: transparent; --map-ocean: transparent; --map-land: color-mix(in srgb, var(--tone) 10%, transparent);
   --map-visited: color-mix(in srgb, var(--tone) 17%, transparent); --map-border: color-mix(in srgb, var(--tone-surface) 80%, transparent);
-  --map-night: transparent; --map-grid: transparent; --map-shade: transparent; --map-limb: color-mix(in srgb, var(--tone) 16%, transparent);
+  --map-night: transparent; --map-grid: transparent; --map-shade: transparent; --map-current-ring: var(--paper); --map-limb: color-mix(in srgb, var(--tone) 16%, transparent);
   --map-route: var(--tone); --map-route-muted: color-mix(in srgb, var(--tone) 45%, transparent); --map-accent: var(--tone);
   --map-label: var(--tone); --map-label-strong: var(--tone); --map-label-bg: color-mix(in srgb, var(--tone-surface) 92%, transparent);
   --map-dot-ring: var(--tone-surface);

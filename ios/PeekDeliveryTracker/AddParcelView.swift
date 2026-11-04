@@ -755,10 +755,11 @@ struct AddParcelView: View {
                 }
             }
             .font(.headline)
-            // Pinned above the keyboard, it keeps to one line at the largest text sizes, as the system's bars do.
-            .lineLimit(dynamicTypeSize.isAccessibilitySize ? 1 : nil)
+            // Pinned above the keyboard, it keeps to two lines at the largest text sizes, and only a longer title
+            // than those hold is made smaller.
+            .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
             .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.7 : 1)
-            .dynamicTypeSize(...DynamicTypeSize.accessibility2)
+            .multilineTextAlignment(.center)
             .foregroundStyle(Brand.onAccent)
             .frame(maxWidth: .infinity, minHeight: 50)
             .padding(.horizontal, 16)

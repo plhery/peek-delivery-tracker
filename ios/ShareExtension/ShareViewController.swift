@@ -67,6 +67,7 @@ final class ShareViewController: UIViewController {
     private var saved = false
     private let cancelButton = UIButton(type: .system)
     private let openButton = UIButton(type: .system)
+    private var stackMargin: NSLayoutConstraint?
     private var parcelLabel = ""
     private var trackingInput = ""
     // The app saves its language to the App Group whenever it is set.
@@ -86,13 +87,19 @@ final class ShareViewController: UIViewController {
         })
         mark.translatesAutoresizingMaskIntoConstraints = false
 
+        // The words follow the reader's text size, as it changes too.
         let title = UILabel()
         title.text = copy.text("shareExtension.title")
-        title.font = .preferredFont(forTextStyle: .title2).withWeight(.bold)
+        title.font = UIFontMetrics(forTextStyle: .title2).scaledFont(for: UIFont.preferredFont(
+            forTextStyle: .title2, compatibleWith: UITraitCollection(preferredContentSizeCategory: .large)
+        ).withWeight(.bold))
+        title.adjustsFontForContentSizeCategory = true
+        title.numberOfLines = 0
         title.textAlignment = .center
 
         statusLabel.text = copy.text("shareExtension.reading")
         statusLabel.font = .preferredFont(forTextStyle: .subheadline)
+        statusLabel.adjustsFontForContentSizeCategory = true
         statusLabel.textColor = .secondaryLabel
         statusLabel.numberOfLines = 0
         statusLabel.textAlignment = .center
@@ -109,6 +116,12 @@ final class ShareViewController: UIViewController {
         openButton.addTarget(self, action: #selector(saveShare), for: .touchUpInside)
 
         cancelButton.setTitle(copy.text("common.cancel"), for: .normal)
+        if let label = cancelButton.titleLabel {
+            label.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: label.font)
+            label.adjustsFontForContentSizeCategory = true
+            label.numberOfLines = 0
+            label.textAlignment = .center
+        }
         cancelButton.addTarget(self, action: #selector(cancelShare), for: .touchUpInside)
 
         let stack = UIStackView(arrangedSubviews: [mark, title, statusLabel, openButton, cancelButton])
@@ -117,17 +130,48 @@ final class ShareViewController: UIViewController {
         stack.spacing = 18
         stack.setCustomSpacing(26, after: statusLabel)
         stack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stack)
+
+        // Centred on the sheet while it fits; at the largest text sizes it scrolls instead of running off the sheet.
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.contentInsetAdjustmentBehavior = .never
+        let content = UIView()
+        content.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scroll)
+        scroll.addSubview(content)
+        content.addSubview(stack)
+        let fitsSheet = content.heightAnchor.constraint(equalTo: scroll.frameLayoutGuide.heightAnchor)
+        fitsSheet.priority = .defaultLow
+        let margin = stack.topAnchor.constraint(greaterThanOrEqualTo: content.topAnchor, constant: 16)
+        stackMargin = margin
 
         NSLayoutConstraint.activate([
             mark.widthAnchor.constraint(equalToConstant: markSize),
             mark.heightAnchor.constraint(equalToConstant: markSize),
             openButton.widthAnchor.constraint(equalTo: stack.widthAnchor),
-            openButton.heightAnchor.constraint(equalToConstant: 52),
+            openButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 52),
+            scroll.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scroll.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scroll.topAnchor.constraint(equalTo: view.topAnchor),
+            scroll.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            content.leadingAnchor.constraint(equalTo: scroll.contentLayoutGuide.leadingAnchor),
+            content.trailingAnchor.constraint(equalTo: scroll.contentLayoutGuide.trailingAnchor),
+            content.topAnchor.constraint(equalTo: scroll.contentLayoutGuide.topAnchor),
+            content.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor),
+            content.widthAnchor.constraint(equalTo: scroll.frameLayoutGuide.widthAnchor),
+            content.heightAnchor.constraint(greaterThanOrEqualTo: scroll.frameLayoutGuide.heightAnchor),
+            fitsSheet,
+            margin,
             stack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 8),
             stack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -8),
-            stack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stack.centerYAnchor.constraint(equalTo: content.centerYAnchor),
         ])
+    }
+
+    /// Keeps the stack clear of the sheet's top and of the home indicator once it scrolls.
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        stackMargin?.constant = max(view.safeAreaInsets.top, view.safeAreaInsets.bottom) + 16
     }
 
     private func loadSharedContent() {

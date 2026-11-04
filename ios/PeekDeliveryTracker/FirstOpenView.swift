@@ -154,6 +154,7 @@ struct FirstOpenView: View {
     @EnvironmentObject private var localizer: Localizer
     @EnvironmentObject private var links: ParcelLinkStore
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.scenePhase) private var scenePhase
     @State private var step = FirstOpenJourney.stillStep
     @State private var appeared = false
@@ -219,7 +220,6 @@ struct FirstOpenView: View {
                 }
             }
         }
-        .dynamicTypeSize(...DynamicTypeSize.accessibility1)
         .task {
             let loaded = await WorldAtlas.bundled.value
             // The story starts from its first scan; a still picture shows the parcel a day away.
@@ -455,7 +455,8 @@ struct FirstOpenView: View {
                 .foregroundStyle(Brand.ink)
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.7)
-                .lineLimit(2)
+                // At the largest text sizes the question takes the lines it needs, and the screen scrolls.
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                 .accessibilityAddTraits(.isHeader)
                 .padding(.top, roomy ? 26 : 18)
             Text(localizer.text(store.tracksWithoutAccount ? "native.pasteLead" : "arrival.welcomeSubtitle"))
@@ -484,11 +485,12 @@ struct FirstOpenView: View {
     private func field(large: Bool) -> some View {
         HStack(spacing: 6) {
             Button { onAdd(.type) } label: {
-                // A long placeholder takes a second line rather than being cut off.
+                // A long placeholder takes a second line rather than being cut off, and at the largest text sizes as
+                // many as it needs.
                 Text(localizer.text("add.trackingPlaceholder"))
                     .font(large ? .title3 : .body)
                     .foregroundStyle(.tertiary)
-                    .lineLimit(2)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, minHeight: large ? 64 : 58, alignment: .leading)
                     .contentShape(Rectangle())

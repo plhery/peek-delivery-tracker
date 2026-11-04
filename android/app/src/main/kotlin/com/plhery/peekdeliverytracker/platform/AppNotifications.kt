@@ -20,6 +20,10 @@ import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeRoute
+import java.time.Instant
+import java.time.ZoneId
+import java.util.Date
+import java.util.Locale
 import java.util.UUID
 
 /**
@@ -77,7 +81,7 @@ class AppNotifications(
      */
     fun post(data: Map<String, String>) {
         val title = data["title"].orEmpty()
-        val body = data["body"].orEmpty()
+        val body = deviceClockBody(data) ?: data["body"].orEmpty()
         if (title.isEmpty() && body.isEmpty()) return
         if (!manager.areNotificationsEnabled()) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
@@ -212,5 +216,27 @@ class AppNotifications(
         }
 
         private fun friendTag(friendId: UUID): String = "friend-$friendId"
+
+        /**
+         * A delivery's time on the phone's clock, wherever it is now: the service sends the scan's instant (`scan_at`)
+         * and the sentence with the time left out, for a delivery on the phone's day and on another (`body_same_day`,
+         * `body_other_day`), and the language tag its day is written in (`date_locale`), as `deviceClockFields` in
+         * src/server/push.ts sends them. Null when it sent none, or a scan this clock calls the future: the service's
+         * own body shows. "HH:mm" as the service writes it, and the day as the browser's push worker does.
+         */
+        fun deviceClockBody(data: Map<String, String>, now: Instant = Instant.now(), zone: ZoneId = ZoneId.systemDefault()): String? {
+            val sameDay = data["body_same_day"] ?: return null
+            val otherDay = data["body_other_day"] ?: return null
+            val scanned = data["scan_at"]?.let { runCatching { Instant.parse(it) }.getOrNull() } ?: return null
+            if (scanned.isAfter(now)) return null
+            val local = scanned.atZone(zone)
+            val time = "%02d:%02d".format(Locale.ROOT, local.hour, local.minute)
+            val locale = data["date_locale"]?.let(Locale::forLanguageTag)?.takeIf { it.language.isNotEmpty() } ?: Locale.getDefault()
+            val day = android.icu.text.DateFormat.getInstanceForSkeleton("dMMMM", locale).apply {
+                timeZone = android.icu.util.TimeZone.getTimeZone(zone.id)
+            }.format(Date.from(scanned))
+            val today = local.toLocalDate() == now.atZone(zone).toLocalDate()
+            return (if (today) sameDay else otherDay).replace("{{time}}", time).replace("{{date}}", day)
+        }
     }
 }

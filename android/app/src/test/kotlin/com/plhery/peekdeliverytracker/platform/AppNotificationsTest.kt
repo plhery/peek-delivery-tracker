@@ -17,6 +17,8 @@ import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeRoute
+import java.time.Instant
+import java.time.ZoneId
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -103,6 +105,34 @@ class AppNotificationsTest {
         assertEquals(ComponentName(context, AppNotifications.OPENING), intent.component)
         assertEquals(mapOf("title" to "Books", "body" to "Out for delivery", "parcel_id" to "$parcel"), AppNotifications.payload(intent))
         assertEquals(NativeRoute.Parcel(parcel), NativeRoute(remoteNotification = AppNotifications.payload(intent)!!))
+    }
+
+    /** A delivery as the service sends it, with its time left for the phone to write (`deviceClockFields`). */
+    private fun deliveredPush(scanAt: String, locale: String = "en-CH") = parcelPush("Books · delivered at 14:32") + mapOf(
+        "scan_at" to scanAt,
+        "body_same_day" to if (locale == "de-CH") "Books · um {{time}} Uhr zugestellt" else "Books · delivered at {{time}}",
+        "body_other_day" to if (locale == "de-CH") "Books · am {{date}} um {{time}} Uhr zugestellt" else "Books · delivered on {{date}} at {{time}}",
+        "date_locale" to locale,
+    )
+
+    @Test
+    fun aDeliveryIsToldOnThePhonesClockWhereverItIs() {
+        val now = Instant.parse("2026-09-07T12:40:00Z")
+        val pacific = ZoneId.of("America/Los_Angeles")
+        fun told(data: Map<String, String>, zone: ZoneId = pacific) = AppNotifications.deviceClockBody(data, now, zone)
+        assertEquals("Books · delivered at 05:32", told(deliveredPush("2026-09-07T12:32:00.000Z")))
+        assertEquals("Books · delivered at 14:32", told(deliveredPush("2026-09-07T12:32:00.000Z"), ZoneId.of("Europe/Zurich")))
+        // The evening before, there, though it is the same day in Zurich.
+        assertEquals("Books · delivered on 6 September at 16:51", told(deliveredPush("2026-09-06T23:51:00.000Z")))
+        assertEquals("Books · am 6. September um 16:51 Uhr zugestellt", told(deliveredPush("2026-09-06T23:51:00.000Z", "de-CH")))
+        // A scan this clock calls the future, or a push without the fields, keeps the service's body.
+        assertNull(told(deliveredPush("2026-09-07T12:50:00.000Z")))
+        assertNull(told(deliveredPush("not a time")))
+        assertNull(told(parcelPush()))
+
+        notifications.post(deliveredPush(now.minusSeconds(60).toString()))
+        val written = AppNotifications.deviceClockBody(deliveredPush(now.minusSeconds(60).toString()))
+        assertEquals(written, posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString())
     }
 
     @Test

@@ -24,7 +24,7 @@ Spaces and lower case don't matter when you paste a number into Peek. Can't find
 
 J&T's tracker lists a parcel's scans newest first. Each scan has a short heading with a sentence under it, a time, and the town and province of the J&T branch that scanned it. The tracker can also name the courier, give contact details and show proof of delivery.
 
-`Order creation` means the sender, often the shop, has created the order, and J&T hasn't collected the parcel yet. Peek's code knows that heading by name, as it does `Picked-up`, `Customs Declaration`, `Customs Clearance` and `In transit`. It reads J&T's other headings by their words to place the parcel in one of its own steps:
+`Order creation` means the sender, often the shop, has created the order, and J&T hasn't collected the parcel yet. Peek's code knows that heading by name, as it does `Picked-up`, `Customs Declaration`, `Customs Clearance`, `In transit`, `Delivering` ("Out for delivery") and `Abnormal Parcel` ("Needs attention"). It reads J&T's other headings by their words to place the parcel in one of its own steps:
 
 | Peek shows | What it means for a J&T parcel |
 | --- | --- |

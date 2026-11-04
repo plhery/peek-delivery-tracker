@@ -8,7 +8,6 @@ import androidx.compose.animation.EnterExitState
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FiniteAnimationSpec
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -517,17 +516,16 @@ private fun PipQuestion(work: ParcelFeedbackWork, shown: Boolean, hops: Int, mod
  * accessibility sizes, with no Pip), a hairline of the separator at 60 % and a faint shadow; 14 in at its leading
  * side, and 8 elsewhere, or 12 while it offers the reasons; 52 tall at least, across what Pip leaves it. Asked, it
  * asks whether the page is right, "Yes" and "Not quite" beside or under the question; offering, the reasons; answered,
- * its thanks, with the way to add a note once a reason was given in place.
+ * its thanks, with the way to add a note once a reason was given in place. The 4 more the reasons take are their own,
+ * inside what turns: what turns is laid out once at its size and the bubble grows or shrinks to it on the one
+ * animation, as the iPhone's frame does, rather than its paddings moving on animations of their own, which would move
+ * the reasons sideways and break their lines again as they come.
  */
 @Composable
 private fun Bubble(work: ParcelFeedbackWork, large: Boolean, modifier: Modifier) {
     val colors = PeekTheme.colors
     val localizer = LocalLocalizer.current
-    val reduceMotion = PeekTheme.reduceMotion
     val shape = UnevenContinuousRoundedShape(topLeading = 18.dp, bottomLeading = if (large) 18.dp else 5.dp, bottomTrailing = 18.dp, topTrailing = 18.dp)
-    val offering = work.moment == Moment.Reasons
-    val trailing by animateDpAsState(if (offering) 12.dp else 8.dp, settle(reduceMotion), label = "bubble trailing")
-    val vertical by animateDpAsState(if (offering) 12.dp else 8.dp, settle(reduceMotion), label = "bubble vertical")
     Box(
         modifier
             .testTag(FEEDBACK_BUBBLE)
@@ -536,7 +534,7 @@ private fun Bubble(work: ParcelFeedbackWork, large: Boolean, modifier: Modifier)
             .clip(shape)
             .border(1.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.6f), shape)
             .heightIn(min = 52.dp)
-            .padding(start = 14.dp, end = trailing, top = vertical, bottom = vertical),
+            .padding(start = 14.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
         contentAlignment = Alignment.CenterStart,
     ) {
         Turning(work.moment) { moment ->
@@ -544,7 +542,7 @@ private fun Bubble(work: ParcelFeedbackWork, large: Boolean, modifier: Modifier)
                 Moment.Right -> Said(localizer.text("feedback.pip.right"))
                 Moment.Sent -> Beside({ Said(localizer.text("feedback.pip.sent")) }) { AddNote(work::addNote) }
                 Moment.Noted -> Said(localizer.text("feedback.pip.sent"))
-                Moment.Reasons -> Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Moment.Reasons -> Column(Modifier.padding(end = 4.dp, top = 4.dp, bottom = 4.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Question(localizer.text("feedback.whatsOff"))
                     FeedbackFlow {
                         ParcelFeedbackReason.entries.forEachIndexed { order, reason ->

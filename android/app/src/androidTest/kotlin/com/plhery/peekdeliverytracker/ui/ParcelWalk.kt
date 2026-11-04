@@ -272,11 +272,7 @@ internal class ParcelWalk(
      * tab's tapped again scrolls the list to its top). A parcel with no card of its own is on the archive's shelf.
      */
     fun open(parcel: Parcel) {
-        if (stacked() && shown() != null) home()
-        val list = compose.onNodeWithTag(PARCEL_LIST)
-        val item = onUi { deliveries.itemKeys.firstOrNull { cardId(it) == parcel.id } }
-        if (item != null) list.performScrollToKey(item) else list.performScrollToNode(card(parcel.label))
-        compose.onAllNodes(card(parcel.label)).onFirst().performClick()
+        tapCard(parcel)
         compose.waitUntil(LONG_MILLIS) { shown() == parcel.id }
         compose.waitUntil(LONG_MILLIS) {
             count(PARCEL_PAGE) == 1 &&
@@ -284,6 +280,15 @@ internal class ParcelWalk(
                     .fetchSemanticsNodes().isNotEmpty()
         }
         settle()
+    }
+
+    /** The card of `parcel` tapped as [open] taps it, its page then left to open on whatever clock the test keeps. */
+    fun tapCard(parcel: Parcel) {
+        if (stacked() && shown() != null) home()
+        val list = compose.onNodeWithTag(PARCEL_LIST)
+        val item = onUi { deliveries.itemKeys.firstOrNull { cardId(it) == parcel.id } }
+        if (item != null) list.performScrollToKey(item) else list.performScrollToNode(card(parcel.label))
+        compose.onAllNodes(card(parcel.label)).onFirst().performClick()
     }
 
     /** The archive's shelf at the list's foot, opened from its header. */

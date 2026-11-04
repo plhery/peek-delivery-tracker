@@ -124,6 +124,8 @@ fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
 button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke: none; stroke-width: 0; overflow: visible; }
 .carrier-mark[data-family="dhl"] .carrier-mark__name { font-style: italic; font-weight: 850; }
 .carrier-mark__dot { color: light-dark(#b98a00, #ffcf00); }
+/* Pip's label is light paper in either appearance, so the truck printed on it keeps its light paints. */
+.parcel-illustration__label { color-scheme: light; }
 .parcel-card__error { font-size: 12px; line-height: 1.45; color: var(--orange-text); }
 .parcel-card__notice { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; max-width: 100%; margin-top: 4px; padding: 4px 10px 4px 8px; border-radius: 12px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--orange-text); font-size: 12px; font-weight: 500; line-height: 1.4; }
 .parcel-card__notice > svg { width: 13px; height: 13px; flex-shrink: 0; stroke-width: 1.8; }
@@ -149,6 +151,14 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .parcel-stamp__postmark { stroke: var(--tone); stroke-width: .9; opacity: .8; }
 .parcel-stamp__postmark circle + circle { stroke-width: .55; }
 .parcel-stamp__postmark text { fill: var(--tone); stroke: none; font-size: 5.2px; font-weight: 750; letter-spacing: .2px; text-anchor: middle; font-variant-numeric: tabular-nums; }
+/* In dark the postmark is printed in the card's own colour where it lands on the cream paper, and in its ink elsewhere. */
+.parcel-stamp__on-paper { display: none; --tone: var(--tone-surface); }
+:root[data-appearance="dark"] .parcel-stamp__on-paper { display: inline; }
+:root[data-appearance="dark"] .parcel-stamp__around { clip-path: var(--stamp-around); }
+@media (prefers-color-scheme: dark) {
+  :root[data-appearance="system"] .parcel-stamp__on-paper { display: inline; }
+  :root[data-appearance="system"] .parcel-stamp__around { clip-path: var(--stamp-around); }
+}
 /* The other stamps share the parcel stamp's die cut. Their paper is a layer behind the print, so the shadow follows the
    cut and any postmark stays whole. Whatever the stamp's size, the mask bites a whole number of 3.6 by 1.1 waves out of
    each edge; each tile reaches a pixel past the edge, so rounding leaves no sliver of paper there. */

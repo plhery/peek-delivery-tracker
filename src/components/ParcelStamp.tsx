@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, type CSSProperties } from 'react';
 import { scanDate } from '../lib/format';
 import { currentEvent, sortEventsDesc } from '../lib/stages';
 import type { ParcelWithEvents } from '../types';
@@ -28,6 +28,10 @@ export function dieCutOutline(width: number, height: number, wavelength: number,
 }
 
 const OUTLINE = dieCutOutline(PAPER.width, PAPER.height, 3.6, 1.1);
+/** The paper around the print, filled even-odd. */
+const PAPER_RING = `${OUTLINE}M${PAPER.margin} ${PAPER.margin}h${PRINT.width}v${PRINT.height}h${-PRINT.width}Z`;
+/** Everything but that paper, as far out as a postmark on its way down reaches. */
+const AROUND_PAPER = `M-60 -60H${PAPER.width + 60}V${PAPER.height + 60}H-60Z${PAPER_RING}`;
 
 /** The country code of the first place the parcel was scanned, which is where it was posted. */
 export function stampOrigin(parcel: ParcelWithEvents): string | null {
@@ -62,6 +66,10 @@ export function ParcelStamp({ parcel }: { parcel: ParcelWithEvents }) {
       <filter id={id} x="-20%" y="-20%" width="140%" height="140%">
         <feDropShadow dx="0" dy=".7" stdDeviation=".8" floodColor="#000" floodOpacity=".18" />
       </filter>
+      {delivered && <>
+        <clipPath id={`${id}-paper`}><path d={PAPER_RING} clipRule="evenodd" /></clipPath>
+        <clipPath id={`${id}-around`}><path d={AROUND_PAPER} clipRule="evenodd" /></clipPath>
+      </>}
     </defs>
     <path d={OUTLINE} className="parcel-stamp__paper" filter={`url(#${id})`} />
     <g transform={`translate(${PAPER.margin} ${PAPER.margin})`}>
@@ -74,13 +82,21 @@ export function ParcelStamp({ parcel }: { parcel: ParcelWithEvents }) {
       <rect x="1.7" y="1.7" width={PRINT.width - 3.4} height={PRINT.height - 3.4} className="parcel-stamp__frame" />
       {origin && <text x={cx} y={PRINT.height - 4.7} className="parcel-stamp__code">{origin}</text>}
     </g>
-    {/* The ink is a group of its own, centred on the mark, so that it can come down on the paper. */}
-    {delivered && <g className="parcel-stamp__postmark" transform={`translate(${PAPER.width - 6} 36) rotate(-12)`}>
-      <g className="parcel-stamp__ink">
-        <circle r="11.5" />
-        <circle r="8.7" />
-        <text y="1.8">{delivered}</text>
-      </g>
-    </g>}
+    {/* In dark the card's light ink hardly shows on the cream paper, so there a second postmark prints in the card's colour. */}
+    {delivered && <>
+      <g className="parcel-stamp__around" style={{ '--stamp-around': `url(#${id}-around)` } as CSSProperties}><Postmark date={delivered} /></g>
+      <g className="parcel-stamp__on-paper" clipPath={`url(#${id}-paper)`}><Postmark date={delivered} /></g>
+    </>}
   </svg>;
+}
+
+/** The delivery's postmark. The ink is a group of its own, centred on the mark, so that it can come down on the paper. */
+function Postmark({ date }: { date: string }) {
+  return <g className="parcel-stamp__postmark" transform={`translate(${PAPER.width - 6} 36) rotate(-12)`}>
+    <g className="parcel-stamp__ink">
+      <circle r="11.5" />
+      <circle r="8.7" />
+      <text y="1.8">{date}</text>
+    </g>
+  </g>;
 }

@@ -2014,7 +2014,7 @@
       "d": "M22 9.5h2.5l3 3H22Z",
       "points": [[22, 9.5], [24.5, 9.5], [27.5, 12.5], [22, 12.5]],
       "fill": "#edf1ee",
-      "dark": "#e9dba6"
+      "dark": "#fff0ba"
     },
     "wheels": {
       "centers": [[8, 16.5], [25, 16.5]],
@@ -2023,7 +2023,7 @@
         "fill": "#42483d",
         "dark": "#0e0d0a",
         "rim": "#fff4dc",
-        "rimOpacity": 0.24,
+        "rimOpacity": 0.29,
         "rimWidth": 0.45
       },
       "hub": {

@@ -1928,7 +1928,7 @@ export const CARRIER_TRUCK: TruckGeometry = {
   "windshield": {
     "d": "M22 9.5h2.5l3 3H22Z",
     "fill": "#edf1ee",
-    "dark": "#e9dba6"
+    "dark": "#fff0ba"
   },
   "wheels": {
     "centers": [[8, 16.5], [25, 16.5]],
@@ -1937,7 +1937,7 @@ export const CARRIER_TRUCK: TruckGeometry = {
       "fill": "#42483d",
       "dark": "#0e0d0a",
       "rim": "#fff4dc",
-      "rimOpacity": 0.24,
+      "rimOpacity": 0.29,
       "rimWidth": 0.45
     },
     "hub": {

@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import android.content.Context
+import android.provider.Settings
+import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
@@ -32,17 +34,19 @@ import com.plhery.peekdeliverytracker.ui.RootHost
 import java.util.UUID
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
  * The list's feedback on a phone: the pull to refresh (A-G06) with its thresholds, the check it starts, and how it
  * ends, the list back at its top however it is thrown into it; the message under the list and its four seconds; the
- * Undo of an archive and its seven; and what TalkBack is told of each.
+ * Undo of an archive and its seven, or for as long as TalkBack or Switch Access is on; and what TalkBack is told of each.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -100,7 +104,7 @@ class ListFeedbackTest {
     }
 
     /** What TalkBack was last told, while it is news. */
-    private fun announced(): String? = compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).fetchSemanticsNode()
+    private fun announced(): String? = compose.onNodeWithTag(ANNOUNCEMENT).fetchSemanticsNode()
         .config.getOrNull(SemanticsProperties.ContentDescription)?.firstOrNull()?.ifEmpty { null }
 
     private fun toast(text: String) = compose.onNode(hasTestTag(INLINE_TOAST) and hasContentDescription(text, substring = true))
@@ -199,11 +203,9 @@ class ListFeedbackTest {
     fun theUndoLastsSevenSecondsFromTheLastArchiveAndBringsTheParcelBack() {
         show()
         compose.mainClock.autoAdvance = false
-        archive("Birthday gift")
-        advance(1000)
+        // Read out with its Undo, as on the iPhone.
+        compose.assertAnnounced("${DemoCards.parcel("Birthday gift").label} archived. You can undo it.") { archive("Birthday gift") }
         toast("Birthday gift").assertExists()
-        // Nothing is said, as on the iPhone: the toast and its Undo are there to find.
-        assertEquals(null, announced())
         advance(5000)
         // Another archive takes the toast, for seven seconds of its own.
         archive("Belgian chocolate")
@@ -218,7 +220,9 @@ class ListFeedbackTest {
         // Undo, at the toast's end.
         archive("New trainers")
         advance(1000)
-        compose.onNodeWithTag(INLINE_TOAST).performTouchInput { click(Offset(width - dp(34f), height / 2f)) }
+        compose.assertAnnounced("${DemoCards.parcel("New trainers").label} restored") {
+            compose.onNodeWithTag(INLINE_TOAST).performTouchInput { click(Offset(width - dp(34f), height / 2f)) }
+        }
         advance(500)
         assertEquals(listOf(DemoCards.parcel("New trainers").id), source.restored)
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
@@ -273,6 +277,98 @@ class ListFeedbackTest {
         advance(300)
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
         assertEquals(null, source.undoParcel.value)
+    }
+
+    private fun accessibility() = shadowOf(compose.activity.getSystemService(AccessibilityManager::class.java))
+
+    /** TalkBack, which explores by touch, turned on or off, and the window told, the clock kept where it is. */
+    private fun talkBack(on: Boolean) {
+        val manager = accessibility()
+        compose.runOnUiThread {
+            manager.setEnabled(on)
+            manager.setTouchExplorationEnabled(on)
+        }
+        compose.waitForIdle()
+    }
+
+    private fun toastShown(): Boolean = compose.onAllNodes(hasTestTag(INLINE_TOAST)).fetchSemanticsNodes().isNotEmpty()
+
+    /** As with VoiceOver, which takes longer than seven seconds to reach the Undo. */
+    @Test
+    fun withTalkBackTheUndoStaysUntilAnotherMessageTakesItsPlaceAndHasItsSevenOnceTalkBackIsOff() {
+        show()
+        talkBack(true)
+        assertTrue(source.undoClock.held.value)
+        compose.mainClock.autoAdvance = false
+        archive("Birthday gift")
+        advanceUntil(::toastShown)
+        advance(30_000)
+        toast("Birthday gift").assertExists()
+        // TalkBack off: seven seconds from then.
+        talkBack(false)
+        advance(100)
+        assertFalse(source.undoClock.held.value)
+        advance(6_400)
+        toast("Birthday gift").assertExists()
+        advance(1_000)
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+        assertEquals(null, source.undoParcel.value)
+
+        // On again, the message of a check takes the place of the Undo, which goes.
+        talkBack(true)
+        advance(100)
+        archive("Belgian chocolate")
+        advanceUntil(::toastShown)
+        advance(10_000)
+        toast("Belgian chocolate").assertExists()
+        compose.onNodeWithTag(REFRESH_BUTTON).performClick()
+        advance(100)
+        assertEquals(null, source.undoParcel.value)
+        toast("No new updates").assertExists()
+    }
+
+    /**
+     * The services on, as Settings lists them, and the window told as the system tells it of their change, with
+     * accessibility on, the clock kept where it is.
+     */
+    private fun servicesOn(services: String) {
+        val resolver = compose.activity.contentResolver
+        val manager = accessibility()
+        compose.runOnUiThread {
+            Settings.Secure.putString(resolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES, services)
+            manager.setEnabled(true)
+            resolver.notifyChange(Settings.Secure.getUriFor(Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES), null)
+        }
+        compose.waitForIdle()
+    }
+
+    /** As with Switch Control: turned on or off beside another service too, which Android 12 tells nothing else of. */
+    @Test
+    @Config(sdk = [31, 37])
+    fun withSwitchAccessTheUndoStaysUntilItIsOff() {
+        show()
+        servicesOn("$OTHER_SERVICE:$SWITCH_ACCESS")
+        assertTrue(source.undoClock.held.value)
+        compose.mainClock.autoAdvance = false
+        archive("Birthday gift")
+        advanceUntil(::toastShown)
+        advance(30_000)
+        toast("Birthday gift").assertExists()
+        // Off, the other service still on: seven seconds from then.
+        servicesOn(OTHER_SERVICE)
+        advance(100)
+        assertFalse(source.undoClock.held.value)
+        advance(6_400)
+        toast("Birthday gift").assertExists()
+        advance(1_000)
+        compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+    }
+
+    @Test
+    fun samsungsUniversalSwitchHoldsTheUndoToo() {
+        show()
+        servicesOn("com.samsung.accessibility/com.samsung.accessibility.universalswitch.UniversalSwitchService")
+        assertTrue(source.undoClock.held.value)
     }
 
     @Test
@@ -350,3 +446,9 @@ class ListFeedbackTest {
         assertEquals(rest, top("New trainers"), 0.5f)
     }
 }
+
+/** Switch Access's service, as Settings lists it. */
+private const val SWITCH_ACCESS = "com.google.android.accessibility.switchaccess/com.android.switchaccess.SwitchAccessService"
+
+/** A service of another kind, which stays on. */
+private const val OTHER_SERVICE = "com.example.passwords/com.example.passwords.FillService"

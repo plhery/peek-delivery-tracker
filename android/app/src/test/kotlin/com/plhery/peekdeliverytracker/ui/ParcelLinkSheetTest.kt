@@ -740,7 +740,7 @@ class ParcelLinkSheetTest {
         links.actions.indices.filter { links.actions[it] == action }.map { links.outcomes[it] }
 
     /** What TalkBack is told in the sheet now. */
-    private fun announcement(): String? = compose.onAllNodesWithTag(LINK_ANNOUNCEMENT, useUnmergedTree = true).fetchSemanticsNodes()
+    private fun announcement(): String? = compose.onAllNodesWithTag(LINK_ANNOUNCEMENT).fetchSemanticsNodes()
         .singleOrNull()?.config?.getOrNull(SemanticsProperties.ContentDescription)?.singleOrNull()
 
     /** A tap on the part tagged `tag`, scrolled into view. */

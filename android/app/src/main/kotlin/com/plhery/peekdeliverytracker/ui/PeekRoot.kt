@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.platform.CameraLabelScanner
 import com.plhery.peekdeliverytracker.ui.arrival.ArrivalView
 import com.plhery.peekdeliverytracker.ui.arrival.InvitationArrival
 import com.plhery.peekdeliverytracker.ui.arrival.LocalArrivalMotion
+import com.plhery.peekdeliverytracker.ui.deliveries.AnnouncementHost
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
@@ -47,6 +48,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesSource
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesTab
 import com.plhery.peekdeliverytracker.ui.deliveries.FirstOpenHost
 import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
+import com.plhery.peekdeliverytracker.ui.deliveries.LocalAnnouncementHost
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalFirstOpen
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalLabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalParcelLinkOpen
@@ -204,12 +206,13 @@ internal fun PeekRoot(
     val window = rememberSaveable(saver = WindowLayers.Saver) { WindowLayers() }
     val front = remember(window) { TabOverlay(window = window, name = "window") }
     val transaction = remember { RootTransaction() }
+    val announcements = remember { AnnouncementHost() }
     ProvideLocalizer(localizer) {
         // The tags carry the iPhone's accessibility identifiers (demo.exit, deliveries.search, ...); UI Automator reads
-        // them as resource ids, as XCUITest reads the identifiers. Sized and placed as its one child is.
+        // them as resource ids, as XCUITest reads the identifiers. Sized and placed as its first child is.
         Box(Modifier.semantics { testTagsAsResourceId = true }, propagateMinConstraints = true) {
             ProvideLinks {
-                CompositionLocalProvider(LocalWindowLayers provides window) {
+                CompositionLocalProvider(LocalWindowLayers provides window, LocalAnnouncementHost provides announcements) {
                     Box(if (front.covered) Modifier.clearAndSetSemantics {} else Modifier, propagateMinConstraints = true) {
                         if (source != null && presenting && state != AuthenticationState.Loading) {
                             key(presentation) { InvitationArrival(source, state, session, work) }
@@ -254,6 +257,8 @@ internal fun PeekRoot(
                     window.Content()
                 }
             }
+            // What TalkBack is told, outside all that hides what it covers from TalkBack.
+            announcements.Content()
         }
     }
 }

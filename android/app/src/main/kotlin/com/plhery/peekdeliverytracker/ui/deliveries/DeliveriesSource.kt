@@ -45,11 +45,16 @@ import java.util.UUID
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.transformWhile
 import kotlinx.coroutines.launch
 
 /**
@@ -106,6 +111,9 @@ interface DeliveriesSource {
      * the store gave it), not one archived since, even of the same parcel.
      */
     fun forgetUndo(parcel: Parcel)
+
+    /** What counts the Undo's seven seconds, for every window this process makes ([UndoClock]). */
+    val undoClock: UndoClock
 
     /**
      * `checkAllParcels()`: checks every parcel and says how it went, waiting for a check the service queued. Null when
@@ -405,6 +413,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         if (container.parcels.undoParcel === parcel) container.parcels.undoParcel = null
     }
 
+    override val undoClock: UndoClock get() = UNDO_CLOCK
+
     override suspend fun checkAllParcels(): ParcelStore.RefreshResult? {
         val store = container.parcels
         val previousOutcome = store.refreshOutcomeFlow.value?.id
@@ -583,6 +593,9 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
         /** This process's pages' questions, for every window it makes, as its pages' work is. */
         val FEEDBACKS = ParcelFeedbacks()
 
+        /** What counts this process's Undo, for every window it makes, as its pages' work is. */
+        val UNDO_CLOCK = UndoClock()
+
         /** What a page's answers say they come from, which the service counts them under. */
         val FEEDBACK_APP = ParcelFeedbackRequestApp.Android
     }
@@ -597,6 +610,41 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 internal suspend fun saveEmailOnDelivery(shown: StateFlow<DeliveryEmail?>, stored: () -> DeliveryEmail?, save: suspend () -> Unit): Boolean {
     save()
     return shown.first { it == stored() }?.isOn == true
+}
+
+/**
+ * The seven seconds of an archive's Undo, counted in the app's scope, as the iPhone counts them in a task of its own:
+ * leaving the tab or the window being made again doesn't give it seven more. Each archive counts for its own Undo, so
+ * one after it, even of the same parcel put back in between, keeps its whole seven. While TalkBack, or Switch Access,
+ * is on ([held]), which take longer than seven seconds to reach it, the Undo stays until it is used or another message
+ * takes its place, and has its seven once neither is (`.task(id: "\(undoParcel):\(holdsUndo)")`).
+ */
+@Stable
+class UndoClock {
+    /** Whether TalkBack, another service that explores by touch, or Switch Access is on, as the window last read it. */
+    val held = MutableStateFlow(false)
+
+    /** Counts `undo`'s seven seconds, while it is the Undo `shown` and isn't [held], then has it forgotten. */
+    fun count(undo: Parcel, shown: StateFlow<Parcel?>, scope: CoroutineScope, forget: (Parcel) -> Unit) {
+        scope.launch {
+            combine(shown, held) { now, held -> if (now === undo) !held else null }
+                .distinctUntilChanged()
+                // Over once another Undo, or none, shows: the last null cancels what was counting.
+                .transformWhile { counting ->
+                    emit(counting)
+                    counting != null
+                }
+                .collectLatest { counting ->
+                    if (counting != true) return@collectLatest
+                    delay(UNDO_DURATION)
+                    forget(undo)
+                }
+        }
+    }
+
+    private companion object {
+        const val UNDO_DURATION = 7_000L
+    }
 }
 
 /**

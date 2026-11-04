@@ -1118,10 +1118,12 @@ internal class DeliveriesState(
 
     /**
      * Shows a message under the list, and tells TalkBack where the iPhone posts it too (`announce`): not the failed
-     * pull's message, whose result TalkBack has already heard.
+     * pull's message, whose result TalkBack has already heard. An Undo held for TalkBack or Switch Access gives way to
+     * it (`onChange(of: toast)`, [UndoClock.held]).
      */
     fun show(text: String, warning: Boolean = false, announce: Boolean = true) {
         toast = ListToast(++toasts, text, warning)
+        if (source.undoClock.held.value) source.undoParcel.value?.let(source::forgetUndo)
         if (announce) announce(text)
     }
 
@@ -1131,7 +1133,13 @@ internal class DeliveriesState(
     }
 
     /** What the toast of an archived parcel says (`app.archivedToast`). */
-    fun archivedText(parcel: Parcel): String = text("app.archivedToast", mapOf("name" to parcel.label.ifEmpty { text("common.parcel") }))
+    fun archivedText(parcel: Parcel): String = text("app.archivedToast", mapOf("name" to spokenName(parcel)))
+
+    /** What a message calls a parcel: its name, or "Parcel" (`name(of:)`, `spokenName(_:)`). */
+    private fun spokenName(parcel: Parcel): String = parcel.label.ifEmpty { text("common.parcel") }
+
+    /** What TalkBack is told of a change to `parcel`, `key` saying which, as VoiceOver is. */
+    private fun announce(key: String, parcel: Parcel) = announce(text(key, mapOf("name" to spokenName(parcel))))
 
     /** What went wrong with an action of a card, said in an alert (`actionError`). */
     var actionError: String? by mutableStateOf(null)
@@ -1289,6 +1297,7 @@ internal class DeliveriesState(
         // Once the app posts notifications (B-W01), a mute cancels the parcel's posted one here.
         source.setMuted(parcel, muted)
         saved()
+        announce(text(if (muted) "detail.mutedAnnouncement" else "detail.unmutedAnnouncement"))
     }
 
     /**
@@ -1638,10 +1647,11 @@ internal class DeliveriesState(
      * Copies one of the numbers of the page with `pageId` (the page's `copy(_:carrier:)`): counted, on the clipboard as
      * its carrier's site takes it with the success tap ([copyNumber]), and said on its row for 2 s from the last copy
      * (B-AN09), of that number or another. The iPhone's task ends the word 2 s after an earlier copy of the same
-     * number; this doesn't.
+     * number; this doesn't. TalkBack is told up to Android 12L ([announceCopy]).
      */
     fun copyOnPage(pageId: UUID, entry: ParcelTrackingNumber) {
         copyNumber(entry)
+        announceCopy()
         copiedNumber = CopiedNumber(pageId, entry.number)
         copiedClearing?.cancel()
         copiedClearing = scope.launch {
@@ -1651,6 +1661,14 @@ internal class DeliveriesState(
     }
 
     private var copiedClearing: Job? = null
+
+    /**
+     * A copy on a page is read out (`detail.copied`), as VoiceOver reads it, up to Android 12L: from 13 the system's
+     * overlay shows the copy and TalkBack hears it, so the app adds no second one ([Device.confirmsCopies]).
+     */
+    fun announceCopy() {
+        if (!Device.confirmsCopies) announce(text("detail.copied"))
+    }
 
     /** `refreshFromPull()`: holds the pull open until every parcel has been checked, then shows the result on the seal. */
     fun refreshFromPull() {
@@ -1703,11 +1721,8 @@ internal class DeliveriesState(
 
     /**
      * Archives the parcel once `after` is over (a swiped card's way out, done or cut short), in the app's scope;
-     * whether it left the list, so a swiped card only comes back after a failure.
-     *
-     * Its Undo then lasts seven seconds, counted in the app's scope too, as the iPhone counts them in a task of its
-     * own: leaving the tab or the window turning doesn't give it seven more. Each archive counts for its own Undo, so
-     * one after it, even of the same parcel put back in between, keeps its whole seven.
+     * whether it left the list, so a swiped card only comes back after a failure. Its Undo then has its seven seconds
+     * ([saveArchive]).
      */
     fun archive(parcel: Parcel, after: Job? = null): Deferred<Boolean> = source.scope.async {
         after?.join()
@@ -1723,26 +1738,25 @@ internal class DeliveriesState(
     }
 
     /**
-     * `store.archive(_:)`, then the seven seconds of its Undo ([archive]), from a card or from its page. TalkBack isn't
-     * told, as VoiceOver isn't: the toast and its Undo are there to find.
+     * `store.archive(_:)`, from a card or from its page: TalkBack is told, with the Undo there to find
+     * (`app.archivedAnnouncement`), and the Undo has its seven seconds, or more for TalkBack or Switch Access
+     * ([UndoClock]).
      */
     private suspend fun saveArchive(parcel: Parcel) {
         source.archive(parcel)
-        source.undoParcel.value?.let { undo ->
-            source.scope.launch {
-                delay(UNDO_DURATION)
-                source.forgetUndo(undo)
-            }
-        }
+        val undo = source.undoParcel.value ?: return
+        announce("app.archivedAnnouncement", undo)
+        source.undoClock.count(undo, source.undoParcel, source.scope, source::forgetUndo)
     }
 
     /**
      * Brings a parcel back from the archive, in the app's scope: the card's Restore and the Undo of its toast. Whether
-     * it came back.
+     * it came back, which TalkBack is told (`app.restoredAnnouncement`).
      */
     fun restore(parcel: Parcel): Deferred<Boolean> = source.scope.async {
         try {
             source.restore(parcel)
+            announce("app.restoredAnnouncement", parcel)
             true
         } catch (error: CancellationException) {
             throw error
@@ -1752,13 +1766,17 @@ internal class DeliveriesState(
         }
     }
 
-    /** Deletes the parcel a card's menu asked about, and leaves its page where one shows it ([leave]). */
+    /**
+     * Deletes the parcel a card's menu asked about, leaves its page where one shows it ([leave]), and tells TalkBack
+     * (`app.deletedToast`).
+     */
     fun delete(parcel: Parcel) {
         val cards = rows
         source.scope.launch {
             try {
                 source.permanentlyDelete(parcel)
                 leave(parcel, cards)
+                announce("app.deletedToast", parcel)
             } catch (error: CancellationException) {
                 throw error
             } catch (error: Exception) {
@@ -1778,7 +1796,10 @@ internal class DeliveriesState(
             return
         }
         val parcel = menuParcel(pageId) ?: return
-        leaveOnPage(pageId) { source.permanentlyDelete(parcel) }
+        leaveOnPage(pageId) {
+            source.permanentlyDelete(parcel)
+            announce("app.deletedToast", parcel)
+        }
     }
 
     /**
@@ -1888,7 +1909,10 @@ internal class DeliveriesState(
             ParcelMenuItem.Rename -> rename(parcel, pageId)
             ParcelMenuItem.CopyTrackingNumber -> parcel.trackingNumbers.firstOrNull()?.let { copyOnPage(pageId, it) }
             ParcelMenuItem.Archive -> leaveOnPage(pageId) { saveArchive(parcel) }
-            ParcelMenuItem.Restore -> leaveOnPage(pageId) { source.restore(parcel) }
+            ParcelMenuItem.Restore -> leaveOnPage(pageId) {
+                source.restore(parcel)
+                announce("app.restoredAnnouncement", parcel)
+            }
             ParcelMenuItem.Delete -> deleting = DeleteRequest(parcel.id, pageId)
         }
     }
@@ -2161,9 +2185,6 @@ internal const val ARCHIVE_KEY = "archive"
 
 /** `revealParcelID`'s scroll, `smooth(duration: 0.35)`. */
 private const val REVEAL_DURATION = 0.35
-
-/** How long an archived parcel's Undo stays, in milliseconds. */
-private const val UNDO_DURATION = 7_000L
 
 /** How long a page's number says it was copied, in milliseconds. */
 private const val COPIED_DURATION = 2_000L

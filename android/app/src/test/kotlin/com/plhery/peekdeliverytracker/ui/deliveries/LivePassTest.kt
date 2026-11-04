@@ -189,13 +189,13 @@ class LivePassTest {
         open("Birthday gift")
         val bell = node(PAGE_BELL)
         bell.assertContentDescriptionEquals("Turn off parcel notifications")
-        bell.performClick()
+        compose.assertAnnounced("Parcel notifications off") { bell.performClick() }
         settle()
         assertEquals(listOf(gift to true), source.mutes)
         bell.assertContentDescriptionEquals("Turn on parcel notifications")
         assertEquals(hapticFeedbackConstant(SensoryFeedback.Selection), shadowOf(rootView()).lastHapticFeedbackPerformed())
 
-        bell.performClick()
+        compose.assertAnnounced("Parcel notifications on") { bell.performClick() }
         settle()
         assertEquals(listOf(gift to true, gift to false), source.mutes)
         bell.assertContentDescriptionEquals("Turn off parcel notifications")

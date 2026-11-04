@@ -219,6 +219,8 @@ class ShipmentIdentityTest {
         assertEquals(hapticFeedbackConstant(SensoryFeedback.Success), shadowOf(rootView()).lastHapticFeedbackPerformed())
         assertEquals(listOf("parcel-copy-tracking"), source.actions.filter { it == "parcel-copy-tracking" })
         copy.assertContentDescriptionEquals("Copied")
+        // From Android 13 the system's overlay shows the copy and TalkBack hears it: the app says nothing more.
+        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("")
 
         compose.mainClock.advanceTimeBy(1_800)
         copy.assertContentDescriptionEquals("Copied")
@@ -235,6 +237,15 @@ class ShipmentIdentityTest {
         copy.assertContentDescriptionEquals("Copy tracking number")
         compose.mainClock.autoAdvance = true
         assertEquals(3, source.actions.count { it == "parcel-copy-tracking" })
+    }
+
+    /** Up to Android 12L nothing of the system's says so: TalkBack is told, as VoiceOver is. */
+    @Test
+    @Config(sdk = [31])
+    fun beforeAndroid13TheCopyIsReadOut() {
+        show()
+        open()
+        compose.assertAnnounced("Copied") { compose.onNodeWithTag(PAGE_COPY_NUMBER).performClick() }
     }
 
     @Test

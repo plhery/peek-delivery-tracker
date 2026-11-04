@@ -646,7 +646,7 @@ class ParcelShareTest {
         assertEquals(hapticFeedbackConstant(SensoryFeedback.Success), shadowOf(view).lastHapticFeedbackPerformed())
         assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))
         // From Android 13 TalkBack hears the system's overlay, and nothing of the app's beside it.
-        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("")
+        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("")
         assertEquals(listOf(DeliveryAnalytics.Outcome.Success), shareActions())
         compose.mainClock.advanceTimeBy(1_800)
         assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))
@@ -677,7 +677,7 @@ class ParcelShareTest {
         val clipboard = compose.activity.getSystemService(ClipboardManager::class.java)
         assertEquals("https://example.com/p/TestLink2345", clipboard.primaryClip?.getItemAt(0)?.text?.toString())
         assertTrue(shows(PARCEL_SHARE_COPY, "Copied"))
-        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("Link copied")
+        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("Link copied")
     }
 
     // The sheet.

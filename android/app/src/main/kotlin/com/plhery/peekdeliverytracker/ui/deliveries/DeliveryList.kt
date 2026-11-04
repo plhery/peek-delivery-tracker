@@ -32,6 +32,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -49,6 +50,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.referentialEqualityPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -70,8 +72,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.CustomAccessibilityAction
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
@@ -293,24 +295,71 @@ private fun BottomControls(state: DeliveriesState, backdrop: MaterialBackdrop, i
 @Composable
 private fun Announcements(state: DeliveriesState) = Announcements(state.announcement, ANNOUNCEMENT, state::announced)
 
-/** The same for any screen: [announcement], tagged `tag`, emptied through [announced] once said. */
+/**
+ * The same for any screen: [announcement], tagged `tag`, emptied through [announced] once said. Its node stands in the
+ * window's [AnnouncementHost] where there is one, so that TalkBack hears it whatever covers the screen that says it.
+ */
 @Composable
 internal fun Announcements(announcement: Announcement?, tag: String, announced: (Announcement) -> Unit) {
-    Box(
-        Modifier
-            .size(1.dp)
-            .testTag(tag)
-            .semantics {
-                liveRegion = LiveRegionMode.Polite
-                contentDescription = announcement?.text.orEmpty()
-            },
-    )
+    val node = AnnouncementNode(tag, announcement?.text.orEmpty())
+    val host = LocalAnnouncementHost.current
+    if (host == null) {
+        AnnouncementBox(node)
+    } else {
+        val owner = remember(host) { Any() }
+        SideEffect { host.put(owner, node) }
+        DisposableEffect(host, owner) { onDispose { host.remove(owner) } }
+    }
     val said by rememberUpdatedState(announced)
     LaunchedEffect(announcement) {
         if (announcement == null || announcement.text.isEmpty()) return@LaunchedEffect
         delay(ANNOUNCEMENT_HOLD)
         said(announcement)
     }
+}
+
+/** An announcement's node: its tag, and the words it says. */
+internal data class AnnouncementNode(val tag: String, val text: String)
+
+/**
+ * Where the window's announcements stand: outside all that hides what it covers from TalkBack (a page over the list, a
+ * sheet, the first open), which hides the nodes in it too, so that their news would go unheard. VoiceOver hears an
+ * announcement whatever covers the screen that posts it.
+ */
+internal class AnnouncementHost {
+    private val nodes = mutableStateMapOf<Any, AnnouncementNode>()
+
+    fun put(owner: Any, node: AnnouncementNode) {
+        if (nodes[owner] != node) nodes[owner] = node
+    }
+
+    fun remove(owner: Any) {
+        nodes.remove(owner)
+    }
+
+    /** The nodes, each 1 point at the top start of the window. */
+    @Composable
+    fun Content() {
+        Box(Modifier.wrapContentSize(Alignment.TopStart)) {
+            nodes.forEach { (owner, node) -> key(owner) { AnnouncementBox(node) } }
+        }
+    }
+}
+
+/** The window's [AnnouncementHost]: none in a test that draws a screen on its own, whose announcements stand in it. */
+internal val LocalAnnouncementHost = staticCompositionLocalOf<AnnouncementHost?> { null }
+
+@Composable
+private fun AnnouncementBox(node: AnnouncementNode) {
+    Box(
+        Modifier
+            .size(1.dp)
+            .testTag(node.tag)
+            .semantics {
+                liveRegion = LiveRegionMode.Polite
+                contentDescription = node.text
+            },
+    )
 }
 
 private enum class ChromeSlot { DemoBar, List, Band }

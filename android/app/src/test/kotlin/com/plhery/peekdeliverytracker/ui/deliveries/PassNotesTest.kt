@@ -425,6 +425,17 @@ class PassNotesTest {
         assertTrue(textExists("Paketshop Stadelhofen\nStadelhoferstrasse 8, 8001 Zürich"))
     }
 
+    /** Up to Android 12L nothing of the system's says so: TalkBack is told, as VoiceOver is. */
+    @Test
+    @Config(sdk = [31])
+    fun beforeAndroid13TheCopyOfThePointIsReadOut() {
+        show()
+        open(trainers)
+        val copy = compose.onNodeWithTag(PAGE_PICKUP_COPY)
+        copy.performScrollTo()
+        compose.assertAnnounced("Copied") { copy.performClick() }
+    }
+
     @Test
     fun theCopyPutsThePointOnTheClipboardWithTheSuccessTapAndSaysCopiedForTwoSeconds() {
         show()
@@ -442,6 +453,8 @@ class PassNotesTest {
         assertEquals(DeliveryAnalytics.Outcome.Success, source.outcomes[counted])
         copy.assertContentDescriptionEquals("Copied")
         assertTrue(textExists("Copied"))
+        // From Android 13 the system's overlay shows the copy and TalkBack hears it: the app says nothing more.
+        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("")
 
         compose.mainClock.advanceTimeBy(1_800)
         copy.assertContentDescriptionEquals("Copied")

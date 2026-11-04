@@ -370,7 +370,7 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
 /**
  * [PickupPointCard] while the parcel waits at its pickup point ([waitingAt]); afterwards the point is one of its
  * facts. Its directions and its copy are counted, and the copy puts the point's name and address on the clipboard with
- * the success tap ([DeliveriesState.copy]).
+ * the success tap ([DeliveriesState.copy]), read out up to Android 12L ([DeliveriesState.announceCopy]).
  */
 @Composable
 private fun PickupPoint(state: DeliveriesState, parcel: Parcel) {
@@ -382,6 +382,7 @@ private fun PickupPoint(state: DeliveriesState, parcel: Parcel) {
         onCopy = {
             state.source.action("parcel-pickup-copy", DeliveryAnalytics.Outcome.Success)
             state.copy(point.query)
+            state.announceCopy()
         },
         Modifier.testTag(PAGE_PICKUP),
     )

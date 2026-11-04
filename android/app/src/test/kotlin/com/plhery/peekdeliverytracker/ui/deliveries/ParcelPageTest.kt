@@ -123,6 +123,10 @@ class ParcelPageTest {
 
     private fun choose(item: ParcelMenuItem) {
         item(item).performClick()
+        settle()
+    }
+
+    private fun settle() {
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
     }
@@ -445,7 +449,9 @@ class ParcelPageTest {
         show()
         open("Birthday gift")
         openMenu()
-        choose(ParcelMenuItem.Archive)
+        // Read out with its Undo, as from the list, though the page hides the list from TalkBack while it covers it.
+        compose.assertAnnounced("${DemoCards.parcel("Birthday gift").label} archived. You can undo it.") { item(ParcelMenuItem.Archive).performClick() }
+        settle()
         assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.archived)
         closed()
     }
@@ -460,7 +466,8 @@ class ParcelPageTest {
         openMenu()
         assertTrue(ParcelMenuItem.Restore in shownItems())
         assertTrue(ParcelMenuItem.Archive !in shownItems())
-        choose(ParcelMenuItem.Restore)
+        compose.assertAnnounced("${DemoCards.parcel("Linen weekend bag").label} restored") { item(ParcelMenuItem.Restore).performClick() }
+        settle()
         assertEquals(listOf(DemoCards.parcel("Linen weekend bag").id), source.restored)
         closed()
     }
@@ -502,9 +509,8 @@ class ParcelPageTest {
 
         openMenu()
         choose(ParcelMenuItem.Delete)
-        compose.onNodeWithTag(DELETE_CONFIRM).performClick()
-        compose.mainClock.advanceTimeBy(1_000)
-        compose.waitForIdle()
+        compose.assertAnnounced("${DemoCards.parcel("Birthday gift").label} permanently deleted") { compose.onNodeWithTag(DELETE_CONFIRM).performClick() }
+        settle()
         assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.deleted)
         closed()
     }

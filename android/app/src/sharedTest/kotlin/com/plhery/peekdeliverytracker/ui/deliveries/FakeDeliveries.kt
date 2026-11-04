@@ -246,6 +246,8 @@ class FakeDeliveries(
         if (undoParcel.value === parcel) undoParcel.value = null
     }
 
+    override val undoClock = UndoClock()
+
     override suspend fun archive(parcel: Parcel) {
         archiving?.await()
         failure?.let { throw it }

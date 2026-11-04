@@ -147,7 +147,7 @@ class ListGesturesScreenshotTest {
         checked.complete(ParcelStore.RefreshResult.Updated)
         // The tick, drawn in, once the arrow has turned 0.9 s and the content rests under the gap.
         for (frame in 0 until 120) {
-            val said = compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).fetchSemanticsNode()
+            val said = compose.onNodeWithTag(ANNOUNCEMENT).fetchSemanticsNode()
                 .config.getOrNull(SemanticsProperties.ContentDescription)?.firstOrNull()
             if (said == "Tracking updated") break
             compose.mainClock.advanceTimeByFrame()

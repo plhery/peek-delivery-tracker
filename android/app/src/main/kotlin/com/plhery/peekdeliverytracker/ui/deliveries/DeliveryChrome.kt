@@ -1,6 +1,11 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
+import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
+import android.database.ContentObserver
+import android.os.Handler
+import android.os.Looper
+import android.provider.Settings
 import android.view.KeyEvent
 import android.view.accessibility.AccessibilityManager
 import androidx.compose.animation.AnimatedVisibility
@@ -1290,6 +1295,55 @@ internal fun touchExplorationEnabled(): Boolean {
     }
     return enabled
 }
+
+/**
+ * `voiceOverEnabled || switchControlEnabled`: TalkBack, or another service that explores by touch, or Switch Access is
+ * on, which take longer than seven seconds to reach a toast's Undo, so it stays ([UndoClock.held]).
+ */
+@Composable
+internal fun holdsUndo(): Boolean {
+    val touch = touchExplorationEnabled()
+    val switches = switchAccessEnabled()
+    return touch || switches
+}
+
+/**
+ * Whether Switch Access, or Samsung's Universal Switch, is on, read again as accessibility comes on or goes off and as
+ * the services on change (`Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES`), which the system tells of on every
+ * Android, a service turned on from Settings, its shortcut or Quick Settings, beside another or not.
+ */
+@Composable
+private fun switchAccessEnabled(): Boolean {
+    val context = LocalContext.current
+    val manager = remember(context) { context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager? }
+    var enabled by remember(manager) { mutableStateOf(switchAccessOn(context, manager)) }
+    DisposableEffect(manager) {
+        val state = AccessibilityManager.AccessibilityStateChangeListener { enabled = switchAccessOn(context, manager) }
+        manager?.addAccessibilityStateChangeListener(state)
+        val services = object : ContentObserver(Handler(Looper.getMainLooper())) {
+            override fun onChange(selfChange: Boolean) {
+                enabled = switchAccessOn(context, manager)
+            }
+        }
+        context.contentResolver.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES), false, services)
+        onDispose {
+            manager?.removeAccessibilityStateChangeListener(state)
+            context.contentResolver.unregisterContentObserver(services)
+        }
+    }
+    return enabled
+}
+
+/** Whether a switch service is among the services on: the setting's, which changes first, else the manager's. */
+private fun switchAccessOn(context: Context, manager: AccessibilityManager?): Boolean {
+    if (manager?.isEnabled != true) return false
+    val ids = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)?.split(':')
+        ?: manager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK).orEmpty().map { it.id.orEmpty() }
+    return ids.any { id -> SWITCH_SERVICES.any { id.contains(it, ignoreCase = true) } }
+}
+
+/** What the switch services' names hold: Google's Switch Access and Samsung's Universal Switch. */
+private val SWITCH_SERVICES = listOf("switchaccess", "universalswitch")
 
 private val ROW_HEIGHT = 44.dp
 

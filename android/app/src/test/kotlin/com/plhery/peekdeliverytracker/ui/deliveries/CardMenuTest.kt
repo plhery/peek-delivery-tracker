@@ -169,7 +169,8 @@ class CardMenuTest {
     fun theMenusArchiveArchivesTheParcelWithItsUndo() {
         show()
         longPress("Birthday gift")
-        choose(ParcelMenuItem.Archive)
+        compose.assertAnnounced("${DemoCards.parcel("Birthday gift").label} archived. You can undo it.") { item(ParcelMenuItem.Archive).performClick() }
+        compose.waitForIdle()
         assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.archived)
         compose.onNode(hasTestTag(INLINE_TOAST) and hasContentDescription("Birthday gift", substring = true)).assertExists()
         inList("Birthday gift").assertDoesNotExist()
@@ -213,6 +214,7 @@ class CardMenuTest {
         compose.mainClock.advanceTimeByFrame()
         // Not while the popover goes.
         assertEquals(emptyList<Any>(), source.deleted)
+        compose.assertAnnounced("${DemoCards.parcel("Birthday gift").label} permanently deleted")
         compose.mainClock.autoAdvance = true
         compose.waitForIdle()
         assertEquals(listOf(DemoCards.parcel("Birthday gift").id), source.deleted)
@@ -275,7 +277,7 @@ class CardMenuTest {
         assertEquals(TrackingNumberCopy.text(entry.number, entry.carrier), clipboard.primaryClip?.getItemAt(0)?.text?.toString())
         assertEquals(listOf("parcel-copy-tracking"), source.actions.filter { it == "parcel-copy-tracking" })
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
-        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("")
+        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("")
     }
 
     /** Up to Android 12L nothing of the system's says so: the iPhone's toast and its announcement. */
@@ -289,7 +291,7 @@ class CardMenuTest {
         val clipboard = compose.activity.getSystemService(ClipboardManager::class.java)
         assertEquals(TrackingNumberCopy.text(entry.number, entry.carrier), clipboard.primaryClip?.getItemAt(0)?.text?.toString())
         compose.onNode(hasTestTag(INLINE_TOAST) and hasContentDescription("Copied")).assertExists()
-        compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).assertContentDescriptionEquals("Copied")
+        compose.onNodeWithTag(ANNOUNCEMENT).assertContentDescriptionEquals("Copied")
     }
 
     @Test
@@ -300,7 +302,8 @@ class CardMenuTest {
         compose.waitForIdle()
         longPress("Linen weekend bag")
         assertEquals(ParcelMenuItem.Restore, shownItems().single { it == ParcelMenuItem.Restore || it == ParcelMenuItem.Archive })
-        choose(ParcelMenuItem.Restore)
+        compose.assertAnnounced("${DemoCards.parcel("Linen weekend bag").label} restored") { item(ParcelMenuItem.Restore).performClick() }
+        compose.waitForIdle()
         assertEquals(listOf(DemoCards.parcel("Linen weekend bag").id), source.restored)
     }
 

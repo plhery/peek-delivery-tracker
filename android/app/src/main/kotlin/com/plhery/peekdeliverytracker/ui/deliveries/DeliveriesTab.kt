@@ -37,6 +37,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -152,7 +153,9 @@ fun DeliveriesTab(
     LocalDeliveriesState.current?.invoke(state)
     // A message under the list has four seconds while it shows, from when it came; a newer one, even in the same
     // words, has its own. Counted here rather than by the list, which a turn of the window draws anew. An archive's
-    // Undo counts its seven in the app's scope ([DeliveriesState.archive]).
+    // Undo counts its seven in the app's scope, held while TalkBack or Switch Access is on ([UndoClock]).
+    val holdsUndo = holdsUndo()
+    SideEffect { source.undoClock.held.value = holdsUndo }
     val undo by source.undoParcel.collectAsState()
     val toast = state.toast.takeIf { undo == null }
     LaunchedEffect(toast?.id) {

@@ -120,7 +120,7 @@ class EmailOfferTest {
     ).fetchSemanticsNodes().isNotEmpty()
 
     /** What TalkBack was last told, while it is news. */
-    private fun announced(): String? = compose.onNodeWithTag(ANNOUNCEMENT, useUnmergedTree = true).fetchSemanticsNode()
+    private fun announced(): String? = compose.onNodeWithTag(ANNOUNCEMENT).fetchSemanticsNode()
         .config.getOrNull(SemanticsProperties.ContentDescription)?.firstOrNull()?.ifEmpty { null }
 
     private fun lastHaptic(): Int = shadowOf((compose.onRoot().fetchSemanticsNode().root as ViewRootForTest).view).lastHapticFeedbackPerformed()

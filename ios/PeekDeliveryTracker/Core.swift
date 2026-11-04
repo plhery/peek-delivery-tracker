@@ -388,7 +388,7 @@ final class Localizer: ObservableObject {
         if from.contains("T"), to.contains("T"), let start = DateParser.date(from), let finish = DateParser.date(to),
            Calendar.current.isDate(start, inSameDayAs: finish) {
             let day = formatter("yyyy-MM-dd", posix: true, gregorian: true).string(from: start)
-            return "\(expectedDelivery(day, now: now)), \(clockTime(start))–\(clockTime(finish))"
+            return dayAndTime(expectedDelivery(day, now: now), "\(clockTime(start))–\(clockTime(finish))")
         }
         return "\(expectedDelivery(from, now: now)) – \(end)"
     }
@@ -452,13 +452,13 @@ final class Localizer: ObservableObject {
                let endRange = Range(match.range(at: 3), in: value) {
                 window += "–\(value[endRange])"
             }
-            return "\(day), \(window)"
+            return dayAndTime(day, window)
         }
 
         guard let date = DateParser.deliveryDate(value) else { return value }
         if value.contains("T"), let timestamp = DateParser.date(value) {
             let day = formatter("yyyy-MM-dd", posix: true, gregorian: true).string(from: timestamp)
-            return "\(expectedDelivery(day, now: now)), \(clockTime(timestamp))"
+            return dayAndTime(expectedDelivery(day, now: now), clockTime(timestamp))
         }
         return deliveryDate(date, now: now)
     }
@@ -483,6 +483,8 @@ final class Localizer: ObservableObject {
         let weekday = formatter("EEE", gregorian: true).string(from: date).replacingOccurrences(of: ".", with: "")
         let day = formatter("d", gregorian: true).string(from: date)
         let month = formatter("MMM", gregorian: true).string(from: date).replacingOccurrences(of: ".", with: "")
+        // Chinese puts the month first and the weekday last, as the web and Android write it: "9月12日周六".
+        if language == .zh { return "\(month)\(day)日\(weekday)" }
         return "\(weekday) \(day)\(dayPeriod) \(month)"
     }
 
@@ -503,7 +505,12 @@ final class Localizer: ObservableObject {
 
     func dateTime(_ value: String) -> String {
         guard let date = DateParser.date(value) else { return value }
-        return "\(shortDate(date)), \(clockTime(date))"
+        return dayAndTime(shortDate(date), clockTime(date))
+    }
+
+    /// A day and a time of it, as Chinese writes them without a comma: "9月12日周六 14:05".
+    private func dayAndTime(_ day: String, _ time: String) -> String {
+        language == .zh ? "\(day) \(time)" : "\(day), \(time)"
     }
 
     /// The status line, which names the carrier a parcel probably travels with while it waits for that carrier's first scan.

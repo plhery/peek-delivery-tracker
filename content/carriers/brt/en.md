@@ -38,12 +38,15 @@ BRT's tracking at vas.brt.it opens in Italian, with a switch to English; these a
 | `DEPARTED` | It has left a BRT branch or hub. |
 | `ARRIVED AT DEPOT` | It's at the branch named in the Filiale column. |
 | `FOR DELIVERY` | It's out with the courier. |
+| `NOTICE OF ATTEMPTED DELIVERY` | Not delivered: nobody was in, so the courier left a notice. |
 | `UNKNOWN/INCOMPLETE CONSIGNEE` | Not delivered: the recipient or address wasn't found. |
+| `TURMOIL` | A public demonstration is holding it up for now. |
 | `DELIVERED` | Delivered. |
 | `ARRIVED AT BRT-fermopoint` | Waiting for you at a BRT-fermopoint shop. |
 | `COLLECTED AT BRT-fermopoint` | Picked up at the fermopoint. |
 | `ARRIVED AT BRT LOCKER` | Waiting in a BRT locker. |
 | `COLLECTED AT BRT LOCKER` | Taken out of the locker. |
+| `To collect at the parcel shop` | Abroad: the carrier delivering it has left it at one of its parcel shops. |
 | `RETURNED TO SENDER` | Going back to the sender. |
 
 `COLLECTED` alone is BRT's pickup from the sender, not yours. In `UNKNOWN/INCOMPLETE CONSIGNEE` the consignee is you; BRT lists an unknown recipient or incomplete address among its reasons for a hold (below). A `DELIVERED` after `RETURNED TO SENDER` means the parcel is back with the sender.
@@ -87,7 +90,7 @@ The Bologna number on BRT's documents is its office, not customer service.
 
 [Peek](/) recognises BRT's 12-, 14- and 15-digit numbers. Other carriers share them, so it asks BRT among the likely ones. Links from vas.brt.it with `brtCode=` work too; 19-digit BRTcodes and mybrt.it links don't.
 
-Peek shows BRT's English statuses, except that a locker or fermopoint pickup appears as "Delivered". With Peek set to Italian, you see BRT's Italian wordings instead, and "Consegnata" for a delivery; a parcel with a scan Peek knows only in English, such as a locker's, stays in English. It puts each scan's place on a map, shows the weight and can notify you when the status changes. It drops the sender, recipient, merchant reference, parcel count and volume. It shows no pickup-point details and doesn't follow parcels handed to DPD abroad. BRT gives no expected day, but for a 14-digit number Peek can show the delivery estimate from DPD's tracking, which also reads BRT's numbers, or from Chronopost's if Chronopost brought the parcel to Italy. The estimate disappears once its day has passed, or sooner if BRT delivers or returns the parcel, leaves it at a pickup point, makes a failed delivery attempt or reports a problem. BRT's scan times carry no time zone: Peek reads them on Italian time, or on a depot's local time abroad, and lists BRT's own history in BRT's order.
+Peek shows BRT's English statuses, except that a locker or fermopoint pickup appears as "Delivered". With Peek set to Italian, you see BRT's Italian wordings instead, and "Consegnata" for a delivery; a parcel with a scan Peek knows only in English, such as a locker's, stays in English. It puts each scan's place on a map, shows the weight and can notify you when the status changes. It drops the sender, recipient, merchant reference, parcel count and volume. It shows no pickup-point details. BRT gives no expected day, but for a 14-digit number Peek can show the delivery estimate from DPD's tracking, which also reads BRT's numbers, or from Chronopost's if Chronopost brought the parcel to Italy. The estimate disappears once its day has passed, or sooner if BRT delivers or returns the parcel, leaves it at a pickup point, makes a failed delivery attempt or reports a problem. BRT's scan times carry no time zone: Peek reads them on Italian time, or on a depot's local time abroad, and lists BRT's own history in BRT's order.
 
 ## Questions about BRT tracking
 

@@ -29,7 +29,7 @@ Le stesse forme le usano altri corrieri: 14 cifre anche DPD in Svizzera, Germani
 
 ## Stati del tracciamento BRT: cosa significano
 
-Il tracciamento su vas.brt.it si apre in italiano e si può passare a English, Français o Deutsch. Nessuna pagina di BRT elenca gli stati: qui sotto trovi le diciture della versione italiana e, accanto, quelle della versione inglese (per i locker, Peek conosce solo quelle inglesi); myBRT può usare parole diverse. Anche in inglese le colonne restano Data, Ora, Filiale ed Evento, e la filiale accanto a ogni stato è quella a cui chiedere informazioni. Le fasi che ogni pacco attraversa, con qualsiasi corriere, le trovi in [cosa vogliono dire gli stati della spedizione](guide:tracking-statuses).
+Il tracciamento su vas.brt.it si apre in italiano e si può passare a English, Français o Deutsch. Nessuna pagina di BRT elenca gli stati: qui sotto trovi le diciture della versione italiana e, accanto, quelle della versione inglese (per i locker e per i punti di ritiro all'estero, Peek conosce solo quelle inglesi); myBRT può usare parole diverse. Anche in inglese le colonne restano Data, Ora, Filiale ed Evento, e la filiale accanto a ogni stato è quella a cui chiedere informazioni. Le fasi che ogni pacco attraversa, con qualsiasi corriere, le trovi in [cosa vogliono dire gli stati della spedizione](guide:tracking-statuses).
 
 | Stato BRT | In inglese | Cosa vuol dire per te |
 | --- | --- | --- |
@@ -38,12 +38,15 @@ Il tracciamento su vas.brt.it si apre in italiano e si può passare a English, F
 | `PARTITA` | `DEPARTED` | È partito da una filiale o da un hub BRT. |
 | `ARRIVATA IN FILIALE` | `ARRIVED AT DEPOT` | È arrivato alla filiale indicata nella colonna Filiale. |
 | `IN CONSEGNA` | `FOR DELIVERY` | È con il corriere per la consegna. |
+| `Destin.Assente:LASCIATO AVVISO` | `NOTICE OF ATTEMPTED DELIVERY` | Il corriere non ha trovato nessuno e ha lasciato un avviso. |
 | `DESTINATAR.SCONOSC./INCOMPLETO` | `UNKNOWN/INCOMPLETE CONSIGNEE` | Non consegnato: destinatario o indirizzo non trovati. |
+| `MANIFESTAZIONE PUBBLICA` | `TURMOIL` | Una manifestazione lo blocca temporaneamente. |
 | `CONSEGNATA` | `DELIVERED` | Consegnato. |
 | `ARRIVATA AL BRT-fermopoint` | `ARRIVED AT BRT-fermopoint` | Ti aspetta in un BRT-fermopoint. |
 | `RITIRATA AL BRT-fermopoint` | `COLLECTED AT BRT-fermopoint` | Ritirato al BRT-fermopoint. |
 | – | `ARRIVED AT BRT LOCKER` | Ti aspetta in un locker BRT. |
 | – | `COLLECTED AT BRT LOCKER` | Ritirato dal locker. |
+| – | `To collect at the parcel shop` | All'estero: il corriere che lo consegna l'ha lasciato in un suo punto di ritiro. |
 | `RESO MITTENTE` | `RETURNED TO SENDER` | Sta tornando al mittente. |
 
 `RITIRATA` da sola è il ritiro dal mittente, non il tuo. Destinatario sconosciuto e indirizzo incompleto (in inglese `UNKNOWN/INCOMPLETE CONSIGNEE`: il «consignee» sei tu) sono tra i motivi per cui BRT mette un pacco in giacenza, e per correggere l'indirizzo serve il via libera del mittente. Un `CONSEGNATA` dopo `RESO MITTENTE` è il pacco tornato al mittente. Se la spedizione va all'estero sulla rete DPD, un riquadro DPD nel dettaglio dà accesso a Track e Tracing.
@@ -90,7 +93,7 @@ Il numero di Bologna (051) sui documenti BRT è la sede operativa, non il serviz
 
 [Peek](/) riconosce i numeri BRT di 12, 14 e 15 cifre. Li usano anche altri corrieri, quindi prova BRT tra i più probabili; se ti chiede di scegliere, prendi il corriere nominato nel messaggio di spedizione. Funzionano anche i link di vas.brt.it con `brtCode=`, non i BRTcode di 19 cifre né i link di mybrt.it.
 
-Se usi Peek in italiano, chiede a BRT la versione italiana e ti mostra le sue diciture, ma per una consegna (`CONSEGNATA` o `RITIRATA AL BRT-fermopoint`) scrive solo «Consegnata». Se trova una dicitura italiana che non conosce, come quelle dei locker, richiede tutto in inglese; se usi Peek in un'altra lingua, le diciture sono sempre quelle inglesi. Con queste, per le tre di consegna (`DELIVERED`, `COLLECTED AT BRT-fermopoint` e `COLLECTED AT BRT LOCKER`) Peek scrive solo «Delivered», tradotto nella lingua in cui lo usi («Consegnato» in italiano). Mostra anche il luogo di ogni scansione su una mappa e il peso, e può mandarti notifiche quando lo stato cambia. Lascia fuori mittente, destinatario, riferimento del mittente, numero di colli e volume; non mostra i dati del punto di ritiro e non segue il pacco quando all'estero passa a DPD. BRT non dà un giorno di consegna previsto: per un numero di 14 cifre Peek può mostrare la previsione del tracking di DPD, che riconosce anche i numeri BRT, o quella di Chronopost se il pacco è arrivato in Italia con Chronopost. La previsione scompare quando il giorno previsto è passato, o prima se BRT consegna il pacco o lo rimanda al mittente, lo lascia in un punto di ritiro, tenta invano la consegna o segnala un problema. BRT dà a ogni scansione data e ora senza fuso orario: Peek le legge sull'ora italiana, o sull'ora locale di un deposito all'estero, e mostra la cronologia di BRT nel suo ordine.
+Se usi Peek in italiano, chiede a BRT la versione italiana e ti mostra le sue diciture, ma per una consegna (`CONSEGNATA` o `RITIRATA AL BRT-fermopoint`) scrive solo «Consegnata». Se trova una dicitura italiana che non conosce, come quelle dei locker, richiede tutto in inglese; se usi Peek in un'altra lingua, le diciture sono sempre quelle inglesi. Con queste, per le tre di consegna (`DELIVERED`, `COLLECTED AT BRT-fermopoint` e `COLLECTED AT BRT LOCKER`) Peek scrive solo «Delivered», tradotto nella lingua in cui lo usi («Consegnato» in italiano). Mostra anche il luogo di ogni scansione su una mappa e il peso, e può mandarti notifiche quando lo stato cambia. Lascia fuori mittente, destinatario, riferimento del mittente, numero di colli e volume; non mostra i dati del punto di ritiro. BRT non dà un giorno di consegna previsto: per un numero di 14 cifre Peek può mostrare la previsione del tracking di DPD, che riconosce anche i numeri BRT, o quella di Chronopost se il pacco è arrivato in Italia con Chronopost. La previsione scompare quando il giorno previsto è passato, o prima se BRT consegna il pacco o lo rimanda al mittente, lo lascia in un punto di ritiro, tenta invano la consegna o segnala un problema. BRT dà a ogni scansione data e ora senza fuso orario: Peek le legge sull'ora italiana, o sull'ora locale di un deposito all'estero, e mostra la cronologia di BRT nel suo ordine.
 
 ## Domande sul tracking BRT
 

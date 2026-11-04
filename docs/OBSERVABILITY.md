@@ -1173,9 +1173,11 @@ and `GRAFANA_METRICS_UID`.
 
 FedEx network retries are measured by `fedex_network_attempt_total`: selected route,
 observed connection family, outcome and whether dated history was returned. Compare
-`attempt="retry"` recovery rates for `route="default"` and `route="ipv6"` over the same
-window, together with counts and `fedex_network_attempt_duration_seconds`. Unknown
-family means no verified connection, never IPv6 success. First browser attempts,
+`attempt="retry"` recovery rates for `route="default"` and `route="residential"` over the
+same window, together with counts and `fedex_network_attempt_duration_seconds`. The
+residential route's family stays unknown; on the default route, unknown means no
+connection was observed. Residential retries that end in `outcome="transport"` usually
+mean the proxy's exit is down rather than FedEx refusing it. First browser attempts,
 including those after optional API credentials fail, remain `attempt="initial"`.
 
 `browser_network_bytes_total` counts observed encrypted proxy payload during attempts, including page dependencies. Missing transport replies and idle-session traffic are excluded; the private retry worker's `/metrics` byte counter also includes that traffic. These counters are diagnostic usage estimates, not proxy invoices. Residential routes retain unknown IP family unless the actual carrier connection is independently observed.

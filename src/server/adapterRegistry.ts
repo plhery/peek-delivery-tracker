@@ -29,12 +29,11 @@ export class HostTrawlClient extends TrawlClient {
  * read secrets; the environment carries only what the package documents.
  */
 export function hostAdapterEnvironment(env: Record<string, string | undefined> = process.env): AdapterEnvironment {
-  const ipv6Url = env.FEDEX_IPV6_TRAWL_URL?.trim(), trawlUrl = env.FLARESOLVERR_URL?.trim();
+  const trawlUrl = env.FLARESOLVERR_URL?.trim();
   const residentialUrl = env.FEDEX_RESIDENTIAL_TRAWL_URL?.trim();
   return {
     fetcher: trackingProxyFetcher(env),
-    trawlRoutes: ipv6Url || residentialUrl ? { ...(ipv6Url ? { 'fedex-ipv6': new HostTrawlClient(ipv6Url) } : {}),
-      ...(residentialUrl ? { 'fedex-residential': new HostTrawlClient(residentialUrl) } : {}) } : undefined,
+    trawlRoutes: residentialUrl ? { 'fedex-residential': new HostTrawlClient(residentialUrl) } : undefined,
     trawl: trawlUrl ? new HostTrawlClient(trawlUrl) : null,
     browserExecutablePath: env.TRACKING_CHROMIUM_PATH?.trim() || null,
     recorder: hostStepRecorder(),

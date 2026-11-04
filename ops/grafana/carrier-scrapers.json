@@ -2449,7 +2449,7 @@
       "type": "stat",
       "id": 64,
       "title": "FedEx retries by network route",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; residential history also requires verified page and API tunnels. No retries means no rate.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -2513,7 +2513,7 @@
       "type": "stat",
       "id": 65,
       "title": "FedEx dated-history recovery by route",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; residential history also requires verified page and API tunnels. No retries means no rate.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -2576,8 +2576,8 @@
     {
       "type": "stat",
       "id": 66,
-      "title": "FedEx IPv6 retries without verified family",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "title": "FedEx residential retries lost in transport",
+      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; residential history also requires verified page and API tunnels. No retries means no rate.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -2591,8 +2591,8 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "sum(increase(fedex_network_attempt_total{attempt=\"retry\",route=\"ipv6\",family!=\"ipv6\"}[$__range]))",
-          "legendFormat": "Unverified",
+          "expr": "sum(increase(fedex_network_attempt_total{attempt=\"retry\",route=\"residential\",outcome=\"transport\"}[$__range]))",
+          "legendFormat": "Transport",
           "instant": true,
           "datasource": {
             "type": "prometheus",
@@ -2641,7 +2641,7 @@
       "type": "stat",
       "id": 67,
       "title": "FedEx retry outcomes by route",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; residential history also requires verified page and API tunnels. No retries means no rate.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -2705,7 +2705,7 @@
       "type": "stat",
       "id": 68,
       "title": "FedEx retry latency p95",
-      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; IPv6 history also requires verified page and API sockets. No retries means no rate.",
+      "description": "Same-window comparison of completed FedEx retries. Dated history requires successful parsing; residential history also requires verified page and API tunnels. No retries means no rate.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"

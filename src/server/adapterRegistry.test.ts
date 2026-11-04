@@ -3,15 +3,13 @@ import { HostTrawlClient, hostAdapterEnvironment } from './adapterRegistry';
 import { withTrackingAttempt } from './observability';
 
 describe('browser route configuration', () => {
-  it('keeps the optional IPv6 worker independent of the primary browser client', () => {
-    const env = hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test:8191', FEDEX_IPV6_TRAWL_URL: 'http://ipv6.test:8192' });
+  it('builds the primary browser client, and no retry route without a retry worker', () => {
+    const env = hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test:8191' });
     expect(env.trawl?.scrapeUrl().hostname).toBe('primary.test');
-    expect(env.trawlRoutes?.['fedex-ipv6']?.scrapeUrl().hostname).toBe('ipv6.test');
-    expect(env.trawlRoutes?.['fedex-ipv6']).not.toBe(env.trawl);
+    expect(env.trawl).toBeInstanceOf(HostTrawlClient);
+    expect(env.trawlRoutes).toBeUndefined();
     expect(hostAdapterEnvironment({}).trawlRoutes).toBeUndefined();
     expect(hostAdapterEnvironment({}).trawl).toBeNull();
-    expect(env.trawl).toBeInstanceOf(HostTrawlClient);
-    expect(env.trawlRoutes?.['fedex-ipv6']).toBeInstanceOf(HostTrawlClient);
   });
 
   it('tells the check when a browser service call can open a browser, and not for a plain HTTP request', async () => {

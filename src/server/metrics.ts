@@ -382,7 +382,7 @@ export const prometheusStepRecorder: StepRecorder = {
       reason: carrierErrorReason(record.error) ?? 'none' });
     if (record.networkRoute && (record.networkAttempt === 'initial' || record.networkAttempt === 'retry')) {
       const labels = { carrier: record.carrier, attempt: record.networkAttempt,
-        route: record.networkRoute === 'ipv6' || record.networkRoute === 'residential' ? record.networkRoute : 'default',
+        route: record.networkRoute === 'residential' ? 'residential' : 'default',
         outcome: timing.outcome };
       if (typeof record.networkBytes === 'number' && Number.isSafeInteger(record.networkBytes) && record.networkBytes >= 0) {
         count(runtime.browserNetworkBytes, 'browser_network_bytes_total', { carrier: record.carrier, attempt: record.networkAttempt, route: labels.route }, record.networkBytes);
@@ -396,7 +396,7 @@ export const prometheusStepRecorder: StepRecorder = {
     if (record.carrier === 'fedex' && record.step === 'trawl' && record.networkRoute) {
       const labels = {
         attempt: record.fallbackFrom === 'trawl' ? 'retry' : 'initial',
-        route: record.networkRoute === 'ipv6' || record.networkRoute === 'residential' ? record.networkRoute : 'default',
+        route: record.networkRoute === 'residential' ? 'residential' : 'default',
         outcome: timing.outcome,
       };
       const family = record.networkFamily === 'IPv6' ? 'ipv6' : record.networkFamily === 'IPv4' ? 'ipv4' : 'unknown';

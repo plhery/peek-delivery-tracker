@@ -140,7 +140,7 @@ Yes. In myDPD, up to 30 minutes before delivery, you can choose another day, ano
 - [DPD Netherlands: DPD Parcel Points](https://www.dpd.com/nl/en/dpd-parcel-point/) – Parcel Points, lockers, Business Points, ViaTim, De Buren
 - [DPD Netherlands: Until when can I collect my parcel?](https://www.dpd.com/nl/en/faq/until-when-can-i-collect-my-parcel/) – 5 days in a locker
 - [DPD Netherlands: Terms of use (PDF)](https://www.dpd.com/wp-content/uploads/sites/220/2022/01/Disclaimer-ENG-2022-01.pdf) – DPD (Nederland) B.V.
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, the step wordings Peek shows, the hand-over to other DPD companies
 :::

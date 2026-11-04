@@ -78,7 +78,7 @@ Na adresu to Zásilkovna zkouší jen jednou. Když vás řidič nezastihne, ulo
 
 **Spor.** Když s vyřízením nesouhlasíte, obraťte se na Český telekomunikační úřad (ČTÚ), který spory o poštovní služby řeší mimosoudně. Nejdřív to ale zkuste se Zásilkovnou, jinak může ČTÚ spor odmítnout. Za návrh se platí správní poplatek.
 
-**Clo.** Zásilka z e-shopu mimo EU prochází celním řízením; Zásilkovna přesnou lhůtu negarantuje. Od 1. července 2026 platí na zásilky do 150 EUR z e-shopů a platforem mimo EU clo 3 EUR za každou položku. Od 1. listopadu 2026 bude EU vybírat ještě manipulační poplatek 2 EUR. Víc v návodu [zásilka zadržená na celnici](guide:customs) (v angličtině).
+**Clo.** Zásilka z e-shopu mimo EU prochází celním řízením; Zásilkovna přesnou lhůtu negarantuje. Od 1. července 2026 platí na zásilky do 150 EUR z e-shopů a platforem mimo EU clo 3 EUR za každou položku. Od 1. listopadu 2026 vybírá EU ještě manipulační poplatek 2 EUR. Víc v návodu [zásilka zadržená na celnici](guide:customs) (v angličtině).
 
 ## Kontakt na Zásilkovnu
 

@@ -127,7 +127,7 @@ By email at support@stone3pl.com, or by phone on 86-0755-81466633, a number in S
 - [Stone3PL: About us](https://stone3pl.com/index.php?route=services/about_us) – Stone Group, Shenzhen headquarters, 10+ years of experience, 8,000+ contract customers, global reputable logistics providers
 - [Stone3PL: Contact us](https://stone3pl.com/index.php?route=services/contact_us) – Shenzhen headquarters, email, phone, address
 - [Stone3PL: Privacy Policy](https://stone3pl.com/index.php?route=services/privacy) – support email
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracking wordings and stages, overall status, China time, delivering company, hand-over
 :::

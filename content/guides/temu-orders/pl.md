@@ -24,7 +24,7 @@ Jeśli wkleisz całą wiadomość z oboma numerami, Peek weźmie numer śledzeni
 
 Zwykle zdradza to numer śledzenia: pole powyżej wskazuje przewoźnika, do którego pasuje kształt numeru, albo kilku, do których może należeć. [Poczta Polska](carrier:poczta-polska) ogłosiła w czerwcu 2025 r. dalszą współpracę logistyczną z Temu, która ma zapewnić „szybsze dostawy klientom w całej Polsce realizowane za pośrednictwem Poczty Polskiej”, także do ponad 22 tys. punktów odbioru, między innymi w Żabce. Kogo jeszcze możesz zobaczyć na ostatnim odcinku: tabela w poradniku [śledzenie paczki z Chin](guide:tracking-from-china).
 
-O cle: od 1 lipca 2026 r. paczka spoza UE do 150 euro płaci 3 euro cła za każdy rodzaj produktu, a Komisja Europejska zapowiada, że od 1 listopada 2026 r. dojdzie unijna opłata manipulacyjna: 2 euro za każdą pozycję. Sklep albo przewoźnik będzie mógł ją przerzucić na Ciebie. Jeśli sklep nie pobrał należności przy zakupie, dopłacasz Poczcie Polskiej albo przewoźnikowi. Towar, który w chwili zakupu jest już w UE, nie przechodzi formalności celnych. Kwoty i terminy: [paczka zatrzymana przez urząd celny](guide:customs).
+O cle: od 1 lipca 2026 r. paczka spoza UE do 150 euro płaci 3 euro cła za każdy rodzaj produktu, a według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdą pozycję. Sklep albo przewoźnik może ją przerzucić na Ciebie. Jeśli sklep nie pobrał należności przy zakupie, dopłacasz Poczcie Polskiej albo przewoźnikowi. Towar, który w chwili zakupu jest już w UE, nie przechodzi formalności celnych. Kwoty i terminy: [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Paczka z Temu utknęła, spóźnia się albo nie dotarła
 

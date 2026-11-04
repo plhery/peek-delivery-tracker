@@ -69,7 +69,7 @@ GLS France's contract is with the sender, so compensation, refunds and complaint
 As listed on GLS France's pages on 11 October 2026:
 
 - **Phone:** 09 74 910 910, the recipient line, at standard rate. GLS gives no opening hours and only this French format.
-- **Contact form** for recipients on the [Nous contacter](https://gls-group.com/FR/fr/a-propos-de-gls/nous-contacter/) page, which on 11 October said it was unavailable until 12 October.
+- **Contact form** for recipients on the [Nous contacter](https://gls-group.com/FR/fr/a-propos-de-gls/nous-contacter/) page.
 - **Virtual assistant** on the tracking pages. No email address for recipients.
 
 > GLS France never asks you to pay or enter personal details through a simple SMS or email, and says SMS or WhatsApp messages from 06 or 07 numbers asking you to click a link are fake. Report them to securite-informatique@gls-france.com or the government's 33700 line. A parcel from outside the EU can bring a genuine request for duties and taxes from GLS or an authorised agent.

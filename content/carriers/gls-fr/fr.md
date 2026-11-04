@@ -75,7 +75,7 @@ Le contrat de transport lie GLS France à l'expéditeur : indemnisation, rembour
 Relevé sur les pages de GLS France le 11 octobre 2026 :
 
 - **Téléphone :** 09 74 910 910, le service client destinataire, numéro non surtaxé. GLS n'indique pas d'horaires.
-- **Formulaire** pour les particuliers sur la page [Nous contacter](https://gls-group.com/FR/fr/a-propos-de-gls/nous-contacter/), qui le 11 octobre se disait indisponible jusqu'au lundi 12 octobre 2026.
+- **Formulaire** pour les particuliers sur la page [Nous contacter](https://gls-group.com/FR/fr/a-propos-de-gls/nous-contacter/).
 - **Assistant virtuel** sur les pages de suivi, pour des conseils étape par étape. Pas d'adresse e-mail pour les destinataires.
 
 > GLS ne te demandera jamais de payer ou de saisir tes coordonnées par un simple SMS ou e-mail. Les SMS ou messages WhatsApp venant de numéros en 06 ou 07 avec un lien à cliquer sont faux : signale-les à securite-informatique@gls-france.com ou au 33700. Exception : pour un colis venant de hors de l'UE, GLS ou un agent autorisé peut te contacter par e-mail, SMS ou courrier pour payer les droits et taxes. Si tu as payé, porte plainte au commissariat ou à la gendarmerie.

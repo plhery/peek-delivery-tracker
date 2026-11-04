@@ -65,7 +65,7 @@ Pour un colis adressé à un particulier, TNT envoie d'office un SMS et un e-mai
 
 Un colis venu d'un pays hors de l'Union européenne passe obligatoirement en douane. TNT, commissionnaire agréé en douane, fait le dédouanement, avance les sommes dues puis te les facture. D'après sa FAQ, la TVA est à la charge du destinataire, sauf Incoterm contraire fixé à l'envoi, et la douane rappelle qu'elle est due dès le premier euro.
 
-Depuis le 1er juillet 2026, un achat en ligne de 150 € au plus, expédié d'un pays hors de l'UE, est soumis à un droit de douane forfaitaire de 3 € par ligne d'article de la déclaration ; un envoi de particulier à particulier de 45 € au plus n'est pas concerné. Des frais de traitement européens s'y ajoutent à partir du 1er novembre 2026. Le détail est dans [colis bloqué en douane](guide:customs).
+Depuis le 1er juillet 2026, un achat en ligne de 150 € au plus, expédié d'un pays hors de l'UE, est soumis à un droit de douane forfaitaire de 3 € par ligne d'article de la déclaration ; un envoi de particulier à particulier de 45 € au plus n'est pas concerné. Des frais de traitement européens s'y ajoutent depuis le 1er novembre 2026. Le détail est dans [colis bloqué en douane](guide:customs).
 
 Quand TNT avance les droits et taxes pour toi, il te facture en plus, depuis le 20 juillet 2026, des « Frais pour débours » : 2,5 % de ces sommes, 15,00 € au minimum.
 

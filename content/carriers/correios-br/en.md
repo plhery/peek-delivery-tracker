@@ -50,7 +50,7 @@ Correios' import pages also name `Em fiscalização aduaneira` (under customs in
 
 Correios clears the parcel through Brazilian export customs and hands it to the post of the destination country, which delivers it under the same code (the UPU allows one per item). That post's tracker has the last leg first-hand, for example [Royal Mail](carrier:royal-mail), [USPS](carrier:usps), [Canada Post](carrier:canada-post), [An Post](carrier:an-post), [Australia Post](carrier:australia-post), [La Poste](carrier:la-poste), [CTT](carrier:ctt), [Correos](carrier:correos-spain), [Poste Italiane](carrier:poste-italiane) or [Deutsche Post](carrier:dhl).
 
-If your customs holds the parcel, Correios says you deal with it directly: neither Correios nor your post can step in. In the EU, goods bought online from outside the EU in parcels worth up to €150 have carried a €3 customs duty since 1 July 2026, per item (goods sharing one tariff classification). From 1 November 2026, a €2 handling fee per item will apply to goods bought online, whatever their value. What you pay and how your post collects it: [parcels held at customs](guide:customs).
+If your customs holds the parcel, Correios says you deal with it directly: neither Correios nor your post can step in. In the EU, goods bought online from outside the EU in parcels worth up to €150 have carried a €3 customs duty since 1 July 2026, per item (goods sharing one tariff classification). Since 1 November 2026, a €2 handling fee per item applies to goods bought online, whatever their value. What you pay and how your post collects it: [parcels held at customs](guide:customs).
 
 ## Parcels into Brazil: CPF, taxes and Minhas Importações
 

@@ -80,7 +80,7 @@ Wilt u iets terugsturen, vraag dan de afzender hoe het moet: de webshop, de Mark
 
 **Niet tevreden?** Na een klacht bij Mondial Relay kunt u volgens zijn voorwaarden, in Nederland en in België, gratis terecht bij de Belgische Ombudsdienst voor de postsector in Brussel.
 
-**Douane.** Bij een bestelling van buiten de EU doet de vervoerder de douaneaangifte. Volgens de Douane en de FOD Financiën ligt uw pakket dan bij die vervoerder, niet bij de douane: stel uw vragen aan de vervoerder. Sinds 1 juli 2026 gelden ook voor zendingen tot € 150 invoerrechten: € 3 per productcategorie, die de vervoerder of de webshop aan u kan doorberekenen, plus btw. Vanaf 1 november 2026 komt daar een Europese afhandelingsvergoeding van € 2 per productcategorie bij. Meer in de gids over [douane](guide:customs) (in het Engels).
+**Douane.** Bij een bestelling van buiten de EU doet de vervoerder de douaneaangifte. Volgens de Douane en de FOD Financiën ligt uw pakket dan bij die vervoerder, niet bij de douane: stel uw vragen aan de vervoerder. Sinds 1 juli 2026 gelden ook voor zendingen tot € 150 invoerrechten: € 3 per productcategorie, die de vervoerder of de webshop aan u kan doorberekenen, plus btw. Sinds 1 november 2026 komt daar een Europese afhandelingsvergoeding van € 2 per productcategorie bij. Meer in de gids over [douane](guide:customs) (in het Engels).
 
 > Mondial Relay vraagt u nooit een bestand te downloaden, geld over te maken, een sms te sturen om uw pakket te volgen of een betaalnummer te bellen. Echte e-mails van Mondial Relay komen van noreply@mondialrelay.com of noreply@mondialrelay.fr. Meld verdachte berichten aan abuse@mondialrelay.fr.
 

@@ -82,7 +82,7 @@ Nie ste doma? Dohodnite sa s kuriérom, že zásielku uloží na najbližšom v�
 
 **Spor.** Ak s vybavením reklamácie nesúhlasíte, požiadajte Packetu o nápravu na reklamacie@packeta.sk. Mimosúdne spory o poštové služby nerieši Slovenská obchodná inšpekcia (SOI), ale Úrad pre reguláciu elektronických komunikácií a poštových služieb; uvádzajú to Packeta aj SOI. Spor s e-shopom o samotný tovar môžete po neúspešnej žiadosti o nápravu riešiť bezplatne cez alternatívne riešenie sporov pri SOI.
 
-**Clo.** Zásielka z e-shopu mimo EÚ prechádza colným konaním a Packeta jeho dĺžku negarantuje. Od 1. júla 2026 sa na zásielky s hodnotou do 150 EUR platí clo 3 EUR za každú položku. Bez zaplatenia cla a DPH vám zásielku nedoručia. Od 1. novembra 2026 bude EÚ vyberať aj manipulačný poplatok 2 EUR. Viac v návode [o zásielkach na colnici](guide:customs) (v angličtine).
+**Clo.** Zásielka z e-shopu mimo EÚ prechádza colným konaním a Packeta jeho dĺžku negarantuje. Od 1. júla 2026 sa na zásielky s hodnotou do 150 EUR platí clo 3 EUR za každú položku. Bez zaplatenia cla a DPH vám zásielku nedoručia. Od 1. novembra 2026 vyberá EÚ aj manipulačný poplatok 2 EUR. Viac v návode [o zásielkach na colnici](guide:customs) (v angličtine).
 
 ## Kontakt na Packetu
 

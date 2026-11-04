@@ -75,7 +75,7 @@ A csomag oda érkezik, ahová a webáruházban kérte: Packeta Z-Pont átvevőhe
 
 **Ha nem ért egyet a válasszal.** A Packeta a reklamációra 30 napon belül válaszol, és ezt egyszer további 30 nappal meghosszabbíthatja. Ha a választ nem fogadja el, vagy határidőre nem kap választ, 30 napon belül a Nemzeti Média- és Hírközlési Hatósághoz (NMHH) fordulhat, és felügyeleti eljárást kezdeményezhet; az eljárás díja 6000 forint. Fogyasztóként a lakóhelye szerinti békéltető testülethez is fordulhat, ha előbb közvetlenül a Packetával próbálta rendezni a vitát.
 
-**Csomag az EU-n kívülről.** Az ilyen csomagot vámkezelni kell, és ennek idejét a Packeta nem garantálja. 2026. július 1. óta a távértékesítésben érkező, 150 eurónál kisebb értékű küldeményekre tételenként 3 eurós átalányvámot kell fizetni, 2026. november 1-jétől pedig ehhez tételenként 2 eurós uniós kezelési díj is járul majd. Részletek a [vámról szóló útmutatóban](guide:customs) (angolul).
+**Csomag az EU-n kívülről.** Az ilyen csomagot vámkezelni kell, és ennek idejét a Packeta nem garantálja. 2026. július 1. óta a távértékesítésben érkező, 150 eurónál kisebb értékű küldeményekre tételenként 3 eurós átalányvámot kell fizetni, 2026. november 1-jétől pedig ehhez tételenként 2 eurós uniós kezelési díj is járul. Részletek a [vámról szóló útmutatóban](guide:customs) (angolul).
 
 ## A Packeta elérhetőségei
 

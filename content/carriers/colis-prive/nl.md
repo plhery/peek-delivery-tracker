@@ -75,7 +75,7 @@ Peek leest de tracking in het Frans, één regel per stap, met de dag maar zonde
 
 Wacht je pakket nog op inklaring, dan staat het op “Pakket verwacht door Colis Privé”. De douane kan je volgens de FOD Financiën niet zeggen wanneer je pakket komt: de koerier die het inklaart, berekent wat je betaalt en beantwoordt je vragen.
 
-Op een gekocht pakket betaal je altijd btw. Tot 150 euro komt er sinds 1 juli 2026 een douanerecht van 3 euro per artikel (tariefcode) bij, daarboven de gewone invoerrechten. Vanaf 1 november 2026 zal de EU ook een afhandelingsvergoeding van 2 euro aanrekenen, en de koerier kan inklaringskosten vragen. Meer in de gids over [pakketten bij de douane](guide:customs) (in het Engels).
+Op een gekocht pakket betaal je altijd btw. Tot 150 euro komt er sinds 1 juli 2026 een douanerecht van 3 euro per artikel (tariefcode) bij, daarboven de gewone invoerrechten. Sinds 1 november 2026 rekent de EU ook een afhandelingsvergoeding van 2 euro aan, en de koerier kan inklaringskosten vragen. Meer in de gids over [pakketten bij de douane](guide:customs) (in het Engels).
 
 > Colis Privé vraagt je nooit om te betalen om je pakket te volgen, extra kosten over te schrijven, je bankgegevens via mail of sms door te geven of een betalend nummer te bellen. Officiële mails komen alleen van livraison@notification.colisprive.com. Stuur een verdacht bericht door naar verdacht@safeonweb.be.
 

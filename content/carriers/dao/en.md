@@ -67,7 +67,7 @@ The shop holds the contract with DAO, but DAO's contact page also tells recipien
 
 **Not happy with the answer.** Complain to DAO first; its postal licence gives it a month to answer. If you disagree with its decision, on a delay or compensation for example, turn to Trafikstyrelsen, which licenses DAO. DAO's terms name the Center for Klageløsning at Nævnenes Hus, but Nævnenes Hus sends complaints about licensed postal companies to Trafikstyrelsen.
 
-**From outside the EU.** Since 1 July 2026, online orders worth up to €150 pay €3 duty per item; from 1 November 2026 a €2 EU handling fee per item is added. See [parcels held at customs](guide:customs).
+**From outside the EU.** Since 1 July 2026, online orders worth up to €150 pay €3 duty per item; since 1 November 2026 a €2 EU handling fee per item is added. See [parcels held at customs](guide:customs).
 
 ## DAO customer service and contact number
 

@@ -67,7 +67,7 @@ Kui jälgimine näitab, et pakk on terminalis, palub Venipak oodata SMS-i, mis t
 
 **Kui teilt küsitakse deklaratsiooni.** Kui pakk tuleb ise deklareerida, tehke seda e-MTA-s pärast seda, kui posti- või kullerettevõte on saatnud teile paki saabumise teate. Teatelt läheb vaja transpordidokumendi numbrit ja MRN-numbrit; kui MRN-numbrit teatel pole, küsige seda teate saatnud ettevõttelt. Deklaratsiooni võib teie eest esitada ka teatel nimetatud vedaja või mõni muu tolliagentuur: siis tasute enne paki kättesaamist tollivormistuse teenustasu ja maksud.
 
-**Maksud.** Alates 1. juulist 2026 maksustatakse kuni 150-eurone väljastpoolt ELi tellitud saadetis 3-eurose tollimaksuga iga kaubaartikli kohta: näiteks särgi, teksade ja seeliku eest kokku 9 eurot. Alates 1. novembrist 2026 hakatakse lisaks võtma 2-eurost käitlustasu iga kaubaartikli kohta, olenemata saadetise väärtusest. Eraisikult eraisikule saadetud kingitusele kumbagi ei rakendu. MTA sõnul võib tollikontroll võtta mõnest päevast paari kuuni. Lähemalt räägib [tolli juhend](guide:customs) (inglise keeles).
+**Maksud.** Alates 1. juulist 2026 maksustatakse kuni 150-eurone väljastpoolt ELi tellitud saadetis 3-eurose tollimaksuga iga kaubaartikli kohta: näiteks särgi, teksade ja seeliku eest kokku 9 eurot. Alates 1. novembrist 2026 võetakse lisaks 2-eurost käitlustasu iga kaubaartikli kohta, olenemata saadetise väärtusest. Eraisikult eraisikule saadetud kingitusele kumbagi ei rakendu. MTA sõnul võib tollikontroll võtta mõnest päevast paari kuuni. Lähemalt räägib [tolli juhend](guide:customs) (inglise keeles).
 
 ## Pakk hilineb, on kadunud või kahjustatud
 

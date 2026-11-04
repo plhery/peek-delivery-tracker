@@ -126,7 +126,7 @@ Each scan shows the local time where it was made, with no time zone, and the tra
 
 :::sources
 - [DayOne: Dayone Tracking](https://www.dayonetrack.com/) – warehouse, not a courier; after-sales to the shop; privacy statement; business email; English and Chinese; 10 numbers at a time; DOT0 and DOT1 lookups; statuses; result fields; times
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, links and lookups, scan wordings and codes, clocks, the delivering company's number, hand-over, what Peek reads
 :::

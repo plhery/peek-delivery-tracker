@@ -15,7 +15,7 @@ Laut AliExpress legen die Verkäufer die Versandarten fest, und du wählst beim 
 
 Auf seiner deutschen Seite „AliExpress-Verpflichtung“ nennt AliExpress [DHL](carrier:dhl) und [Hermes](carrier:hermes-de) als Logistikpartner. Wer in Österreich und der Schweiz meist zustellt, steht in der Ländertabelle von [Paket aus China verfolgen](guide:tracking-from-china). Beim Economy-Versand warnt Cainiao: Die Sendungsverfolgung „wird nur bis zur Übergabe an den Spediteur des Ziellandes/der Zielregion aktualisiert“.
 
-Ob du an der Grenze etwas zahlst, steht unter [Zoll](guide:customs). Ab 1. November 2026 wird die EU laut EU-Kommission bei Online-Bestellungen eine Bearbeitungsgebühr von 2 € pro Artikel erheben, in der Schweiz nicht.
+Ob du an der Grenze etwas zahlst, steht unter [Zoll](guide:customs). Seit 1. November 2026 erhebt die EU laut EU-Kommission bei Online-Bestellungen eine Bearbeitungsgebühr von 2 € pro Artikel, in der Schweiz nicht.
 
 :::journey
 - warehouse | Verkäufer | Verschickt innerhalb der Frist in deiner Bestellung, sonst storniert AliExpress und erstattet dir das Geld
@@ -150,7 +150,7 @@ Peek zeigt, was die Paketdienste veröffentlichen. Käuferschutz, Streitfälle u
 - [AliExpress: Wie kann ich ein zurückgesendetes Paket verfolgen?](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=de_DE&m_station=BuyerHelp&questionId=1061425136) – Rücksendung verfolgen
 - [Cainiao: About Cainiao](https://www.cainiao.com/en/about-us-brief-introduction.html) – Teil der Alibaba Group
 - [Cainiao: Sprachdatei der Sendungsverfolgung](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – Hinweis zum Economy-Versand
-- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € ab 1. November 2026
+- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € seit 1. November 2026
 - [EU-Kommission: The temporary EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € pro Artikel bei Fernabsatz
 - [Universal Parcel Scraper: Paketdienst-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – was Peek prüft
 :::

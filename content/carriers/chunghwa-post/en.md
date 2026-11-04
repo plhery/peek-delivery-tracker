@@ -64,7 +64,7 @@ Search that site with the same `TW` number once Chunghwa Post shows `已出口�
 
 **Registered letters.** Chunghwa Post says the US, Canada, Australia, Denmark, South Africa, the Netherlands, Italy, the United Kingdom, Bahrain, Yemen, Romania, Brazil and France no longer provide tracking for international registered mail. So a registered letter from Taiwan to one of these countries can't be followed online; to look for it, the sender files a written inquiry at any post office counter in Taiwan.
 
-**Customs.** Taiwan is outside the EU, so a parcel from there goes through customs in your country. Since 1 July 2026, goods bought online from outside the EU in orders up to €150 carry a €3 EU customs duty per item, on top of VAT. From 1 November 2026, a €2 EU handling fee per item applies too, whatever the order's value. More in [parcels held at customs](guide:customs).
+**Customs.** Taiwan is outside the EU, so a parcel from there goes through customs in your country. Since 1 July 2026, goods bought online from outside the EU in orders up to €150 carry a €3 EU customs duty per item, on top of VAT. Since 1 November 2026, a €2 EU handling fee per item applies too, whatever the order's value. More in [parcels held at customs](guide:customs).
 
 ## Sending a parcel to Taiwan: delivery and customs
 
@@ -145,6 +145,6 @@ Its tracker only shows items posted in the past six months. The sender's written
 - [Taipei Customs: Review import requirements for cross-border online purchases](https://web.customs.gov.tw/etaipei/singlehtml/1373?cntId=1a74ff69fdd0483085a6a8c9eda54b07) – restricted or banned goods
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – €3 customs duty per item on orders up to €150
 - [European Commission: Temporary flat fee on low-value imports](https://taxation-customs.ec.europa.eu/news/guidance-and-legal-text-temporary-flat-fee-low-value-imports-which-will-apply-until-1-july-2028-2026-06-08_en) – €3 duty from 1 July 2026
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 handling fee per item from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 handling fee per item since 1 November 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Chunghwa Post's scan wordings, what Peek reads and which post it asks next
 :::

@@ -62,7 +62,7 @@ Para compras de hasta 150 €, la Agencia Tributaria lo explica así en su pági
 
 - **IVA.** Si la tienda lo cobra por el sistema IOSS, el precio que pagaste ya lo incluye. Si no, es muy posible que el transportista no te entregue el paquete hasta que le pagues el 21 % del precio, y quizá unos gastos de gestión.
 - **Arancel.** Desde el 1 de julio de 2026 son 3 € por cada categoría de artículos. Lo normal es que lo cobre la tienda al comprar; si no, el transportista te lo puede pedir, junto con el IVA, antes de entregarte el paquete.
-- **Tasa de tramitación.** La Comisión Europea la ha aprobado y se aplicará desde el 1 de noviembre de 2026: 2 € por categoría de artículos, que se pagan con el arancel y con las mismas reglas.
+- **Tasa de tramitación.** La Comisión Europea la ha aprobado y se aplica desde el 1 de noviembre de 2026: 2 € por categoría de artículos, que se pagan con el arancel y con las mismas reglas.
 
 En Canarias se paga IGIC en vez de IVA, pero las compras de hasta 150 € están exentas, salvo el alcohol, los perfumes y el tabaco; el arancel y la tasa de tramitación, en cambio, también se aplican allí a lo que llega de fuera de la UE. El AIEM, un arbitrio canario que solo grava los productos de su lista, se paga desde el primer euro, también en esas compras de hasta 150 €, y aunque el pedido salga de la Península o de otro país de la UE. Lo demás, con ejemplos y las reglas de Canarias, está en [paquete retenido en aduanas](guide:customs).
 

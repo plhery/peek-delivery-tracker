@@ -65,7 +65,7 @@ Steht da „zugestellt“, aber nichts ist da? Schau im Feld „Zugestellt an“
 
 Schäden oder fehlenden Inhalt meldest du DHL innerhalb von 7 Tagen nach der Zustellung: Schadensanzeige ausfüllen, dann über 0228 4333112 eine kostenlose Abholung buchen oder das ganze Paket mit allen Teilen in einer Filiale abgeben (nicht im Paketshop oder an der Packstation). DHL meldet sich beim Absender.
 
-**Zoll.** Bei Paketen von außerhalb der EU legt die Deutsche Post die Einfuhrabgaben für dich aus und kassiert sie bei der Zustellung oder in der Filiale, plus 7,50 € Auslagepauschale. Seit dem 1. Juli 2026 fällt für Online-Bestellungen bis 150 € pauschal 3 € Zoll je Warenart an. Ab dem 1. November 2026 erhebt die EU auf Online-Bestellungen zusätzlich eine Bearbeitungsgebühr (Union handling fee) von 2 € je Warenart, egal wie viel die Ware wert ist. Mehr in [Paket beim Zoll](guide:customs).
+**Zoll.** Bei Paketen von außerhalb der EU legt die Deutsche Post die Einfuhrabgaben für dich aus und kassiert sie bei der Zustellung oder in der Filiale, plus 7,50 € Auslagepauschale. Seit dem 1. Juli 2026 fällt für Online-Bestellungen bis 150 € pauschal 3 € Zoll je Warenart an. Seit dem 1. November 2026 erhebt die EU auf Online-Bestellungen zusätzlich eine Bearbeitungsgebühr (Union handling fee) von 2 € je Warenart, egal wie viel die Ware wert ist. Mehr in [Paket beim Zoll](guide:customs).
 
 ## DHL Sendungsverfolgung: Kontakt und Telefonnummer
 
@@ -128,7 +128,7 @@ Nein. DHL Päckchen und DHL Päckchen International haben keine Sendungsverfolgu
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – Kontaktformular und Chat
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – Schadensformular, Abgabe in der Filiale, Absender wird informiert, Postanschrift
 - [DHL: Einfuhrabgaben](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-kosten.html) – Einfuhrabgaben, 7,50 € Auslagepauschale, 3 € Zoll
-- [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll je Warenart bis 150 € seit 1. Juli 2026, 2 € Bearbeitungsgebühr ab 1. November 2026
+- [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll je Warenart bis 150 € seit 1. Juli 2026, 2 € Bearbeitungsgebühr seit 1. November 2026
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – gefälschte SMS und E-Mails, phishing@dhl.com
 - [DHL: Help with problems in shipment tracking](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – Länge der Sendungsnummer, wo sie steht, ungültige Nummern, Päckchen ohne Sendungsverfolgung
 - [DHL: Parcel has arrived, but there is a problem](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/empfangen/zustellung/paket-geliefert.html) – Telefonnummer aus dem Ausland

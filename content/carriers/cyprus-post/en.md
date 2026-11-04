@@ -47,7 +47,7 @@ On the English version of Cyprus Post's tracker, which Peek reads, each scan has
 
 ## Customs charges on goods from outside the EU
 
-Since 1 July 2026, goods bought online from outside the EU, posted items included, no longer come in duty-free when the consignment is worth €150 or less: the EU charges a temporary customs duty of €3 per item. An item is all the goods in the consignment that share a tariff classification, description and, where it's declared, origin, however many pieces there are. From 1 November 2026 the EU will also charge a Union handling fee of €2 per item on goods bought online from outside the EU, whatever their value, and VAT is due on that fee. Paying them falls first and foremost to whoever declares the goods to customs: the platform, seller, carrier or agent. In Cyprus, the Department of Customs and Excise imposes import duty and VAT on goods from outside the EU. More in [parcels held at customs](guide:customs).
+Since 1 July 2026, goods bought online from outside the EU, posted items included, no longer come in duty-free when the consignment is worth €150 or less: the EU charges a temporary customs duty of €3 per item. An item is all the goods in the consignment that share a tariff classification, description and, where it's declared, origin, however many pieces there are. Since 1 November 2026 the EU also charges a Union handling fee of €2 per item on goods bought online from outside the EU, whatever their value, and VAT is due on that fee. Paying them falls first and foremost to whoever declares the goods to customs: the platform, seller, carrier or agent. In Cyprus, the Department of Customs and Excise imposes import duty and VAT on goods from outside the EU. More in [parcels held at customs](guide:customs).
 
 ## Cyprus Post parcel late or not arrived
 
@@ -92,7 +92,7 @@ Write to Cyprus Post first. If it doesn't answer within 15 days, or its answer d
 - [OCECPR: complaints](https://ocecpr.ee.cy/katanalotes/parapona) – provider first, in writing; 15 days; online complaint; complaint form in English (in Greek)
 - [Consumer Protection Service: online purchases](https://consumer.gov.cy/en/consumer-rights/66/59/?ctype=ar) – delivery within 30 days, extra period, ending the contract (in Greek)
 - [Consumer Protection Service: contact us](https://consumer.gov.cy/en/contact-us) – free Consumer Line 1429 (in Greek)
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item from 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: guidance on the EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – what an item is, postal consignments, the fee on any value, who pays, VAT on the fee
 - [Department of Customs and Excise: About us](https://www.mof.gov.cy/mof/customs/customs.nsf/All/289500205CFF33DFC22572AC003A2B02?OpenDocument) – imposes import duty and VAT on imported goods
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads: Cyprus Post's English tracker, its columns and event names

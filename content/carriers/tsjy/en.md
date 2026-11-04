@@ -141,7 +141,7 @@ Through the 客服中心 section of its home page: a phone number, an email addr
 - [TSJY: 通世集运 (home page)](https://www.tsjy56.com/) – company, services, compensation promise, tracking span, order search and its results page on a phone, ordering, contacts, warehouse
 - [TSJY: 轨迹查询 (tracking results)](https://www.tsjy56.com/orderResult.html) – results on a phone: cards with both numbers, card statuses, no-result message
 - [TSJY: 轨迹详情 (track details)](https://www.tsjy56.com/orderDetail.html) – channel (渠道) name and number, tracking lines, times on the device's clock
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is, distance sales and transport the customer arranges
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, link, wordings and stages, clocks, hand-over to the line, what Peek reads
 :::

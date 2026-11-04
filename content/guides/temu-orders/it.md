@@ -24,7 +24,7 @@ Se incolli un intero messaggio con tutti e due i numeri, Peek prende il codice d
 
 Di solito lo dice il codice di tracciamento: il campo qui sopra indica il corriere a cui rimanda la sua forma, o i pochi a cui può appartenere. Chi puoi trovare nell'ultimo tratto, da Poste Italiane per gli invii postali ai corrieri privati, è nella tabella di [come tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, annuncia la Commissione europea, si aggiungerà la tassa di gestione dell'Unione, 2 € per articolo. Se il sito non l'ha già incassato al checkout, paghi a Poste o al corriere. Un pacco che parte da un magazzino nell'UE non passa dalla dogana. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
+Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per articolo. Se il sito non l'ha già incassato al checkout, paghi a Poste o al corriere. Un pacco che parte da un magazzino nell'UE non passa dalla dogana. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
 
 ## Pacco Temu fermo, in ritardo o mai arrivato
 

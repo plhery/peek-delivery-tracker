@@ -13,7 +13,7 @@ Go to **My Orders** on AliExpress, find the order and click **Track Order**, or 
 
 AliExpress says the sellers set up the shipping methods, and you pick one when you order. AliExpress's help also points you to [Cainiao](carrier:cainiao)'s tracking site, global.cainiao.com, for the latest scans. In your country, a local carrier does the last leg: when a parcel shows as delivered but hasn't come, AliExpress tells you to ask "local post offices or the carrier in the destination country".
 
-Who that usually is in the US, the UK, Ireland, Canada and Australia, from [USPS](carrier:usps) to [An Post](carrier:an-post), is in the country table of [tracking a parcel from China](guide:tracking-from-china). On economy shipping, Cainiao warns that its tracking stops once the parcel is handed to that carrier. Whether you owe anything at the border depends on your country: see [customs](guide:customs). In Ireland, Revenue says a €2 EU handling fee per item will be added from 1 November 2026.
+Who that usually is in the US, the UK, Ireland, Canada and Australia, from [USPS](carrier:usps) to [An Post](carrier:an-post), is in the country table of [tracking a parcel from China](guide:tracking-from-china). On economy shipping, Cainiao warns that its tracking stops once the parcel is handed to that carrier. Whether you owe anything at the border depends on your country: see [customs](guide:customs). In Ireland, Revenue says a €2 EU handling fee per item has been added since 1 November 2026.
 
 :::journey
 - warehouse | Seller | Ships within the time on your order page, or AliExpress closes the order and refunds you
@@ -148,6 +148,6 @@ Peek shows what the carriers publish. Buyer Protection, disputes and refunds sta
 - [Cainiao: About Cainiao](https://www.cainiao.com/en/about-us-brief-introduction.html) – part of Alibaba Group
 - [Cainiao: Guidance](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – carrier contact information when there is any
 - [Cainiao: tracking page language file](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – economy notice, View Contact Information
-- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item since 1 November 2026
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – what Peek checks
 :::

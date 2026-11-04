@@ -82,7 +82,7 @@ Zoll kostet meist nichts extra:
 - **Österreich:** Der Zoll kann Pakete zurückhalten, und für Kosten daraus übernimmt Shein laut seiner Versandseite keine Verantwortung.
 - **Schweiz:** Hast du Zollgebühren bezahlt, wende dich mit der Quittung an den Kundenservice.
 
-Was die 3 € Zoll pro Warenart bis 150 € und die 2 € Bearbeitungsgebühr ab 1. November 2026 für dich heißen und woran du eine Fake-Zollnachricht erkennst: [Paket beim Zoll](guide:customs).
+Was die 3 € Zoll pro Warenart bis 150 € und die 2 € Bearbeitungsgebühr seit 1. November 2026 für dich heißen und woran du eine Fake-Zollnachricht erkennst: [Paket beim Zoll](guide:customs).
 
 ## Shein-Paket nicht angekommen oder als zugestellt markiert: Was tun?
 

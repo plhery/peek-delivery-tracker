@@ -91,7 +91,7 @@ Postis uppföljning på svenska visar överst en rubrik för det steg paketet ä
 
 **Tidsfrist.** Paketet väntar i Postis lager medan du förtullar det, i högst 20 dygn från att det kom till Finland. Förtullar du inte inom den tiden skickas det tillbaka till avsändaren, och mer tid kan du inte få.
 
-**Avgifter.** Sedan den 1 juli 2026 betalas tullavgift på alla köp från länder utanför EU: för köp på högst 150 euro är den 3 euro per varupost. Från och med den 1 november 2026 kommer Tullen också att ta ut en behandlingsavgift på 2 euro per varupost. Har du betalat skatt vid förtullningen tar Posti dessutom ut en behandlingsavgift på 3,10 €, som du betalar på Postis webbplats med försändelsekoden, eller 3,30 € på ett serviceställe.
+**Avgifter.** Sedan den 1 juli 2026 betalas tullavgift på alla köp från länder utanför EU: för köp på högst 150 euro är den 3 euro per varupost. Sedan den 1 november 2026 tar Tullen också ut en behandlingsavgift på 2 euro per varupost. Har du betalat skatt vid förtullningen tar Posti dessutom ut en behandlingsavgift på 3,10 €, som du betalar på Postis webbplats med försändelsekoden, eller 3,30 € på ett serviceställe.
 
 > Bluffmeddelanden i Postis namn kan innehålla en äkta försändelsekod och dyka upp i samma meddelandekedja som Postis riktiga ankomstavier. De ber dig boka en leveranstid, bekräfta adressen, förtulla paketet eller betala en transportavgift. Posti skickar inga länkar för förtullning eller betalning av behandlingsavgifter och ber dig aldrig identifiera dig med Apple ID. Ankomstavier för postförskott har däremot en länk för betalningen. Radera meddelandet utan att öppna det eller länken. Har du lämnat ut dina bankuppgifter, kontakta genast banken och gör sedan en polisanmälan.
 

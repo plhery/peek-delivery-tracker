@@ -42,7 +42,7 @@ myDPD also asks for your postcode under "Data protection", or lets you "Continue
 
 **Predict.** If the sender books it, DPD sends you the delivery day by SMS or email, then a one-hour time slot on the day. During delivery you can follow it live and redirect it until 15 minutes before handover.
 
-**Changes.** On myDPD you can pick another day or send the parcel to your workplace, a neighbour or a Pickup Location. You can also let DPD leave it without a signature ("Safe place"); from 12 October 2026 that needs a verified phone number.
+**Changes.** On myDPD you can pick another day or send the parcel to your workplace, a neighbour or a Pickup Location. You can also let DPD leave it without a signature ("Safe place"); since 12 October 2026 that needs a verified phone number.
 
 **Missed delivery.** DPD leaves a notification card. Depending on the sender's service, it may try again (up to three times, a 2022 DPD article says), leave the parcel with a neighbour within 50 metres, take it to a Pickup Location or return it to the sender; the card notes the Pickup Location if one was used. Book a new delivery on [myDPD's redelivery page](https://www.dpdgroup.com/ch/mydpd/fmp/login) with the SMS code or the card's P00 number.
 

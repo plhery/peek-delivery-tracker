@@ -86,7 +86,7 @@ Uw koopovereenkomst hebt u met de webshop, en die boekte het transport bij Heppn
 
 Komt uw bestelling van buiten de EU, dan meldt de tracking `Your order is currently being cleared through customs` en daarna `Customs clearance for your order has been completed`. Volgens de FOD Financiën ligt uw pakje dan niet bij de douane maar bij de vervoerder, die de aangifte doet en berekent hoeveel invoerrechten en btw u betaalt. Met vragen kan u bij hem terecht: "De douane kan u niet helpen."
 
-Op een gekochte zending betaalt u altijd btw. Tot 150 euro komt er sinds 1 juli 2026 een douanerecht van 3 euro per artikel (tariefcode) bij, daarboven gelden de gewone invoerrechten, en vanaf 1 november 2026 rekent de EU ook een afhandelingsvergoeding van 2 euro aan. De vervoerder kan bovendien inklaringskosten vragen; een tarief daarvoor vermelden de Nederlandstalige pagina's van Heppner niet. Meer in de gids over [douane](guide:customs) (in het Engels).
+Op een gekochte zending betaalt u altijd btw. Tot 150 euro komt er sinds 1 juli 2026 een douanerecht van 3 euro per artikel (tariefcode) bij, daarboven gelden de gewone invoerrechten, en sinds 1 november 2026 rekent de EU ook een afhandelingsvergoeding van 2 euro aan. De vervoerder kan bovendien inklaringskosten vragen; een tarief daarvoor vermelden de Nederlandstalige pagina's van Heppner niet. Meer in de gids over [douane](guide:customs) (in het Engels).
 
 ## Heppner contacteren in België
 
@@ -142,7 +142,7 @@ Ja. Kies Heppner met "Change" en vul uw Belgische postcode in: een postcode van 
 - [Heppner: Report a loss or a damage](https://www.heppner-group.com/wp-content/uploads/2024/10/Compensation_Heppner_EN.pdf) – in het Engels: voorbehoud, 60 dagen, CMR, e-mail, Straatsburg
 - [FOD Financiën: Waar blijft uw pakje?](https://fin.belgium.be/nl/particulieren/internationaal/online-aankopen-buitenland/problemen-pakje/waar-blijft-uw-pakje) – de vervoerder klaart in en beantwoordt uw vragen
 - [FOD Financiën: Extra kosten verbonden aan uw pakje](https://fin.belgium.be/nl/particulieren/internationaal/online-aankopen-buitenland/problemen-pakje/extra-kosten) – btw, 3 euro per artikel, inklaringskosten
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 euro sinds 1 juli 2026, 2 euro vanaf 1 november 2026
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 euro sinds 1 juli 2026, 2 euro sinds 1 november 2026
 - [FOD Economie: Levering en risico-overdracht](https://economie.fgov.be/nl/themas/verkoop/contracten/levering-en-risico-overdracht) – 30 dagen, risico bij de webshop
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – wat Peek leest en toont
 :::

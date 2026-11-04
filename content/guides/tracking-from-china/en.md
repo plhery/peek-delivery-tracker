@@ -130,7 +130,7 @@ Mostly not: in the UK (up to £135), Australia (up to AUD 1,000) and Ireland, th
 
 - **US:** the $800 duty-free limit (de minimis) has been suspended for every country since 29 August 2025, so small orders owe duty too.
 - **Canada:** mail worth more than CAD 20 owes duty or tax, plus Canada Post's CAD 9.95 fee.
-- **Ireland:** since 1 July 2026, a €3 EU duty per distinct item on parcels up to €150, and from 1 November 2026 a €2 fee per distinct item, at any value. If the checkout didn't take them, An Post or the courier collects them before delivery.
+- **Ireland:** since 1 July 2026, a €3 EU duty per distinct item on parcels up to €150, and since 1 November 2026 a €2 fee per distinct item, at any value. If the checkout didn't take them, An Post or the courier collects them before delivery.
 
 Thresholds, fees, refunds and how to spot a fake fee message: [parcels held at customs](guide:customs).
 

@@ -22,7 +22,7 @@ Si tu colles un message entier qui contient les deux numéros, Peek prend le num
 
 En général, le numéro de suivi le dit : le champ ci-dessus nomme le transporteur que désigne sa forme, ou les quelques-uns à qui il peut appartenir. Qui tu verras sans doute sur la dernière étape, de La Poste (Colissimo) à bpost et La Poste suisse, est dans le tableau par pays du [suivi d'un colis venant de Chine](guide:tracking-from-china). Faut-il payer quelque chose à la frontière ? Ça dépend de ton pays : [douane](guide:customs).
 
-En France et en Belgique, depuis le 1er juillet 2026, les achats en ligne hors UE de 150 € maximum paient 3 € de droits de douane par article, c'est-à-dire par type de produit, pas par pièce. À partir du 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par article, comme les 3 €, annonce la Commission européenne. Rien de tout cela en Suisse.
+En France et en Belgique, depuis le 1er juillet 2026, les achats en ligne hors UE de 150 € maximum paient 3 € de droits de douane par article, c'est-à-dire par type de produit, pas par pièce. Depuis le 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par article, comme les 3 €, selon la Commission européenne. Rien de tout cela en Suisse.
 
 ## Colis Temu bloqué, en retard ou jamais arrivé ?
 

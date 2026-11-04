@@ -86,11 +86,11 @@ Für eine Bestellung bis 150 €, ohne Versandkosten, nennt bpost diese Beträge
 | Posten | Betrag |
 | --- | --- |
 | Einfuhrzoll, seit 1. Juli 2026 | 3 € pro Artikel |
-| Europäische Bearbeitungsgebühr, ab 1. November 2026 | 2 € pro Artikel |
+| Europäische Bearbeitungsgebühr, seit 1. November 2026 | 2 € pro Artikel |
 | Mehrwertsteuer | meist 21 % |
 | Verwaltungskosten von bpost | 21,50 €, wenn der Webshop Mehrwertsteuer und Zoll nicht schon kassiert hat |
 
-„Pro Artikel“ heißt pro Produkttyp, beim FÖD Finanzen pro Zolltarifnummer: Ab dem 1. November kosten zwei gleiche T-Shirts 5 €, ein T-Shirt und eine Badehose 10 €. Über 150 € fallen Zoll nach Produkttyp, Mehrwertsteuer, 40 € Verwaltungskosten und ab dem 1. November die 2 € der EU an. Den Einfuhrzoll gibt es bei einer Rücksendung nicht zurück.
+„Pro Artikel“ heißt pro Produkttyp, beim FÖD Finanzen pro Zolltarifnummer: Seit dem 1. November kosten zwei gleiche T-Shirts 5 €, ein T-Shirt und eine Badehose 10 €. Über 150 € fallen Zoll nach Produkttyp, Mehrwertsteuer, 40 € Verwaltungskosten und seit dem 1. November die 2 € der EU an. Den Einfuhrzoll gibt es bei einer Rücksendung nicht zurück.
 
 Ein Geschenk von einer Privatperson an eine andere, ohne kommerziellen Charakter und bis 45 €, ist abgabenfrei, außer Alkohol, Parfüm, Eau de Toilette und Tabak.
 

@@ -73,7 +73,7 @@ Superata la prima data stimata, la consegna di solito è ancora regolare fino al
 
 La Garanzia di consegna puntuale ti dà 200 Punti SHEIN se l'ordine non arriva entro la data indicata, salvo ritardi che non dipendono da Shein. È gratuita, e secondo la pagina di aiuto di Shein Italia vale per la Spedizione Express, anche con la spedizione gratuita: la scegli al momento dell'acquisto selezionando "Garanzia di consegna puntuale".
 
-Sulla dogana, Shein dice che di solito non paghi niente, ma che le autorità possono chiedere al destinatario un importo per sdoganare il pacco, e che quello resta a tuo carico. Se non vuoi pagarlo, puoi rifiutare il pacco: Shein ti rimborsa l'ordine quando il pacco le torna indietro. Dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, annuncia la Commissione europea, si aggiungerà la tassa di gestione dell'Unione, 2 € per articolo. Importi, eccezioni e SMS falsi che chiedono di pagare: [pacco fermo in dogana](guide:customs).
+Sulla dogana, Shein dice che di solito non paghi niente, ma che le autorità possono chiedere al destinatario un importo per sdoganare il pacco, e che quello resta a tuo carico. Se non vuoi pagarlo, puoi rifiutare il pacco: Shein ti rimborsa l'ordine quando il pacco le torna indietro. Dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per articolo. Importi, eccezioni e SMS falsi che chiedono di pagare: [pacco fermo in dogana](guide:customs).
 
 ## Pacco Shein non arrivato o segnato come consegnato: cosa fare
 

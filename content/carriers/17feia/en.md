@@ -111,7 +111,7 @@ The full line is `Arrived at delivery hub，Awaiting carrie scan.`: import custo
 The carrier 17FEIA hands it to after import customs. 17FEIA's record can name it, with its own number: when it's DPD Germany, DHL in Germany or FedEx, Peek's parcel card shows it. Otherwise, ask the seller.
 
 :::sources
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, number shape and branches, tracker and link, labels, lines and stages, progress bar, warehouses, clocks, partners, destinations, what Peek reads, the hand-over
 :::

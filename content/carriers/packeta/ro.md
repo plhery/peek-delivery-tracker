@@ -80,7 +80,7 @@ Locul de livrare îl alegi în magazin, când comanzi: un punct pick-up, un Z-BO
 
 **ANCOM.** Dacă Packeta nu-ți rezolvă reclamația în 3 luni, fie că ești expeditor, fie destinatar, trimite o sesizare la [ANCOM](https://infocentru.ancom.ro/sesizeaza-ancom/servicii-postale/), de preferat prin formularul online. La pierdere sau deteriorare, atașează dovada reclamației făcute la Packeta și textul ei. Condițiile Packeta îți dau pentru asta un an de la predarea coletului; poți merge și în instanță. ANCOM nu poate obliga curierul să-ți plătească despăgubiri, dar îl poate sancționa, după caz. Întârzierile, în afara serviciilor express, nu le sancționează: pentru ele te trimite la ANPC.
 
-**Colete din afara UE.** Comisia Europeană spune că, din 1 iulie 2026, coletele de cel mult 150 € cumpărate online din afara UE plătesc o taxă vamală temporară de 3 € pe articol. Din 1 noiembrie 2026, UE va aplica și o taxă de manipulare de 2 €. Mai multe în ghidul despre [colete la vamă](guide:customs) (în engleză).
+**Colete din afara UE.** Comisia Europeană spune că, din 1 iulie 2026, coletele de cel mult 150 € cumpărate online din afara UE plătesc o taxă vamală temporară de 3 € pe articol. Din 1 noiembrie 2026, UE aplică și o taxă de manipulare de 2 €. Mai multe în ghidul despre [colete la vamă](guide:customs) (în engleză).
 
 ## Contact Packeta
 

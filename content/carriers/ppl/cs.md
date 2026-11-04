@@ -73,7 +73,7 @@ PPL nepíše, co dělat, když se stav dlouho nemění. Smlouvu s PPL má odesí
 
 **Námitka u ČTÚ.** Ve sporech o poštovní služby PPL odkazuje na Český telekomunikační úřad, v ostatních na Českou obchodní inspekci. Když PPL reklamaci nevyhoví nebo ji nevyřídí včas, může odesílatel i adresát podat u ČTÚ námitku do 1 měsíce od doručení vyřízení, nebo ode dne, kdy měla být vyřízena. Řízení stojí správní poplatek 100 Kč.
 
-**Zásilka ze země mimo EU.** Od 1. července 2026 platí clo 3 EUR za každou položku zboží v zásilkách do 150 EUR, které posílají hlavně fyzickým osobám e-shopy a platformy mimo EU. Od 1. listopadu 2026 začne EU vybírat i manipulační poplatek 2 EUR. Jak PPL u dovozu postupuje, na svých stránkách pro příjemce nepopisuje. Víc v návodu [zásilka na celnici](guide:customs) (v angličtině).
+**Zásilka ze země mimo EU.** Od 1. července 2026 platí clo 3 EUR za každou položku zboží v zásilkách do 150 EUR, které posílají hlavně fyzickým osobám e-shopy a platformy mimo EU. Od 1. listopadu 2026 vybírá EU i manipulační poplatek 2 EUR. Jak PPL u dovozu postupuje, na svých stránkách pro příjemce nepopisuje. Víc v návodu [zásilka na celnici](guide:customs) (v angličtině).
 
 **Podvodné dobírky.** PPL varuje před dobírkami s bezcenným obsahem, často z méně známých e-shopů, a před balíky, které jste si neobjednali: „Nepřebírejte zásilky, o kterých nevíte nebo si jejich objednání nepamatujete.“ Když už jste zaplatili, hned to oznamte Policii ČR a schovejte si objednávku, platbu, fotky obsahu a komunikaci s prodejcem. PPL dobírku vrátit nemůže; zadržet ji může nařídit jen policie.
 

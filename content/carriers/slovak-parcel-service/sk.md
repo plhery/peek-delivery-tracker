@@ -93,7 +93,7 @@ Pri zásielke z krajiny mimo EÚ môže colné konanie vybaviť SPS. Podľa jej 
 
 SPS si podľa cenníka platného od 1. júla 2026 účtuje pri zásielke z e-shopu (s DPH) 18,45 EUR za colné vyhlásenie do 5 tovarových položiek, 6,15 EUR za každú ďalšiu a 18,45 EUR za ručenie za colný dlh pri prepustení do voľného obehu. Ak zásielku preclíte sami alebo cez iného deklaranta, zaplatíte SPS 12,30 EUR s DPH.
 
-Podľa Finančnej správy sa od 1. júla 2026 na zásielky s hodnotou do 150 EUR platí clo 3 EUR za každú položku, teda za tovar s rovnakým nomenklatúrnym zatriedením a pôvodom. Bez zaplatenia cla a DPH vám zásielku nedoručia. Od 1. novembra 2026 bude EÚ vyberať aj manipulačný poplatok 2 EUR. Viac v návode [o zásielkach na colnici](guide:customs) (v angličtine).
+Podľa Finančnej správy sa od 1. júla 2026 na zásielky s hodnotou do 150 EUR platí clo 3 EUR za každú položku, teda za tovar s rovnakým nomenklatúrnym zatriedením a pôvodom. Bez zaplatenia cla a DPH vám zásielku nedoručia. Od 1. novembra 2026 vyberá EÚ aj manipulačný poplatok 2 EUR. Viac v návode [o zásielkach na colnici](guide:customs) (v angličtine).
 
 ## Kontakt na SPS
 

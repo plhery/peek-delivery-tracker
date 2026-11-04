@@ -53,7 +53,7 @@ A Suíça não é da UE. Desde julho de 2021, tudo o que se importa para a UE pa
 
 - **Compra até 150 €:** IVA, direitos de 3 € mais IVA por tipo de artigo e 7 € mais IVA pelo serviço de desalfandegamento dos CTT. Os 3 € não se aplicam a artigos declarados com origem preferencial, ao abrigo de um acordo comercial da UE.
 - **Compra de 150 € a 1.000 €:** IVA, direitos aduaneiros conforme o artigo e 14 € pelo serviço dos CTT.
-- **A partir de 1 de novembro de 2026:** junta-se a taxa de manuseamento aduaneiro da UE, 2 € mais IVA por tipo de artigo, em qualquer compra de fora da UE. Não é reembolsada, mesmo que a encomenda volte para trás.
+- **Desde 1 de novembro de 2026:** junta-se a taxa de manuseamento aduaneiro da UE, 2 € mais IVA por tipo de artigo, em qualquer compra de fora da UE. Não é reembolsada, mesmo que a encomenda volte para trás.
 - **Oferta entre particulares:** até 45 € não paga. Acima disso, paga direitos aduaneiros, IVA e a taxa de apresentação à alfândega dos CTT (14 € até 1.000 €). Escolhe «Transação Não Comercial» e indica sempre um valor (pergunta-o a quem enviou): a alfândega analisa cada oferta caso a caso.
 
 Algumas lojas pagam os direitos e o IVA por ti com o PDDP da Swiss Post, que para Portugal serve até 1.000 €. Se pagaste o IVA, os direitos e a taxa na compra, não pagas o serviço dos CTT. Mas se a loja só cobrou o IVA, os CTT não te podem pedir os direitos e a encomenda é devolvida: esclarece isso com a loja antes de comprar.

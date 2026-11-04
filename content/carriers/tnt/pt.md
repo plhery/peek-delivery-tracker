@@ -62,7 +62,7 @@ Onde a lei local o permite, a TNT desalfandega ela própria os envios internacio
 
 A mesma tabela inclui, desde 3 de agosto de 2026, uma taxa de processamento de importação de 2,40 € por expedição vinda de um país fora da UE. A página não diz quem a paga: se ta pedirem, pergunta à TNT a que corresponde.
 
-Nas compras feitas fora da UE, as encomendas até 150 € pagam desde 1 de julho de 2026 um direito de 3 € por tipo de artigo. A partir de 1 de novembro de 2026, junta-se a taxa de tratamento da União de 2 €. Quando a alfândega liberta a encomenda, o rastreio mostra `Customs has released the goods`. Vê [encomenda retida na alfândega](guide:customs).
+Nas compras feitas fora da UE, as encomendas até 150 € pagam desde 1 de julho de 2026 um direito de 3 € por tipo de artigo. Desde 1 de novembro de 2026, junta-se a taxa de tratamento da União de 2 €. Quando a alfândega liberta a encomenda, o rastreio mostra `Customs has released the goods`. Vê [encomenda retida na alfândega](guide:customs).
 
 ## Encomenda TNT que não aparece, perdida, danificada ou dada como entregue
 
@@ -128,7 +128,7 @@ Para um envio para outro país, a TNT diz que depende do serviço pedido e dos l
 - [CNIACC: O que é a adesão plena](https://www.cniacc.pt/pt/o-que-e-adesao-plena) – tentativa de mediação, acordo entre as partes
 - [CNIACC: Competências](https://www.cniacc.pt/pt/competencias-cniacc) – conflitos de consumo: bens e serviços para uso não profissional
 - [Livro de Reclamações Eletrónico](https://www.livroreclamacoes.pt/Inicio/) – perfil, fazer e consultar reclamação
-- [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € desde 1 de julho de 2026, 2 € a partir de 1 de novembro de 2026
+- [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € desde 1 de julho de 2026, 2 € desde 1 de novembro de 2026
 - [Comissão Europeia: Guidance on EUR 3 customs duty (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – por tipo de artigo
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra da TNT, envios nacionais da TNT Australia e o seu rastreio
 :::

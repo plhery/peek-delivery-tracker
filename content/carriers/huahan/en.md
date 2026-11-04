@@ -125,7 +125,7 @@ A local carrier, which HuaHan's tracker can name, with its number for the parcel
 The seller you ordered from: it booked the parcel with HuaHan. Peek couldn't check HuaHan's website for contact details.
 
 :::sources
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, HHW number shape, the tracker and its sum check, scan wordings, codes and their stages, the local carrier's relayed scans and duplicate lines, Sameday's wording, the local carrier's name and number with the underscore suffix and USPS barcodes, clocks, destination country, no delivery date or weight, the hand-off
 :::

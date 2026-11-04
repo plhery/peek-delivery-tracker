@@ -23,7 +23,7 @@ Chi trovi linea per linea, dagli invii postali con il codice che finisce in `CN`
 - home | Tu | Conferma la ricezione solo quando hai il pacco in mano
 :::
 
-Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, annuncia la Commissione europea, si aggiungerà la tassa di gestione dell'Unione, 2 € per articolo. AliExpress ricorda che dazi e tasse non li copre mai lei e che di solito li incassa il corriere alla consegna; chi spedisce da un magazzino in Italia non te li fa pagare. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
+Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per articolo. AliExpress ricorda che dazi e tasse non li copre mai lei e che di solito li incassa il corriere alla consegna; chi spedisce da un magazzino in Italia non te li fa pagare. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
 
 ## Dove trovo il codice di tracciamento AliExpress?
 

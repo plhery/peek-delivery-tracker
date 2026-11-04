@@ -140,7 +140,7 @@ At a home address, the driver may leave it with a neighbour. If no neighbour is 
 - [DPD Belgium: Complaint and claim settlement](https://www.dpd.com/be/en/claims/) – lost or damaged parcels, phone hours
 - [DPD Belgium: Import from non-EU countries](https://www.dpd.com/be/en/receiving/import-from-non-eu-countries-2/) – customs checks, IOSS, VAT collection, UK payment requests
 - [DPD Belgium: Legal notice](https://www.dpd.com/be/en/legal-notice/) – terms of use of DPD (Belgium) NV's website
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, the step wordings Peek shows, the hand-over to other DPD companies
 :::

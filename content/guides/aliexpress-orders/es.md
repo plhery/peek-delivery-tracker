@@ -23,7 +23,7 @@ Quién puede aparecer según la línea de envío, de Correos a [Ecoscooting](car
 - home | Tú | Confirma la recepción solo cuando tengas el paquete en la mano
 :::
 
-Sobre la aduana: desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE paga un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 la UE sumará, según la Comisión Europea, una tasa de tramitación de 2 € por tipo de producto. AliExpress recuerda que nunca cubre aranceles ni impuestos y que normalmente los cobra la empresa de transporte en la entrega. Importes, Canarias, Ceuta y Melilla: [paquete retenido en aduanas](guide:customs).
+Sobre la aduana: desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE paga un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 la UE suma, según la Comisión Europea, una tasa de tramitación de 2 € por tipo de producto. AliExpress recuerda que nunca cubre aranceles ni impuestos y que normalmente los cobra la empresa de transporte en la entrega. Importes, Canarias, Ceuta y Melilla: [paquete retenido en aduanas](guide:customs).
 
 ## ¿Dónde está el número de seguimiento de AliExpress?
 

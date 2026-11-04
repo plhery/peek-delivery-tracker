@@ -90,7 +90,7 @@ Customs rarely costs extra:
 - **Canada:** "all orders to Canada will be delivered duty paid (DDP)", says Shein.
 - **Australia:** a package over AUD 1,000 may owe a tariff, and you pay it.
 
-What the EU's €3 per item and the €2 handling fee due from 1 November 2026 mean for Ireland, and how to spot a fake fee text: [parcels held at customs](guide:customs).
+What the EU's €3 per item and the €2 handling fee due since 1 November 2026 mean for Ireland, and how to spot a fake fee text: [parcels held at customs](guide:customs).
 
 ## Shein package not received or marked delivered: what to do
 

@@ -77,7 +77,7 @@ Handlar du på nätet från ett land utanför EU räknas det som privatimport. D
 
 **Moms betalar du alltid,** 25 procent för de flesta varor. Ibland har du redan betalat den i webbutikens kassa.
 
-**Tullavgift och hanteringsavgift.** Sedan 1 juli 2026 tas en tullavgift på 3 euro per vara ut när varorna i paketet är värda högst 150 euro (1 655,30 kronor). Från den 1 november 2026 kommer dessutom en hanteringsavgift på 2 euro per vara att tas ut, oavsett värde. Den kommer du inte att kunna få tillbaka, inte ens om du returnerar varan.
+**Tullavgift och hanteringsavgift.** Sedan 1 juli 2026 tas en tullavgift på 3 euro per vara ut när varorna i paketet är värda högst 150 euro (1 655,30 kronor). Sedan 1 november 2026 tas dessutom en hanteringsavgift på 2 euro per vara ut, oavsett värde. Den kan du inte få tillbaka, inte ens om du returnerar varan.
 
 **Fakturan.** Har webbutiken inte tagit ut avgifterna får du en faktura från företaget som transporterar eller deklarerar paketet, och du betalar innan du kan hämta ut det. Transportföretaget kan dessutom ta ut en egen avgift för att hantera paketet och göra tulldeklarationen.
 

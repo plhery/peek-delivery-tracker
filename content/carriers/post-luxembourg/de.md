@@ -86,11 +86,11 @@ Pakete mit Waren aus einem Land außerhalb der EU durchlaufen die Zollformalitä
 - die Bearbeitungsgebühr von POST, wenn POST die Zollformalitäten erledigt: 6 € für ein Paket im Wert bis 22 €, 18 € über 22 € bis 150 €;
 - Verbrauchsteuern auf bestimmte Waren.
 
-Beispiel von POST: Für ein Paket im Wert von 20 € samt Versand, mit drei Artikeltypen (etwa T-Shirt, Jeans und Schuhe) und ohne vorab bezahlte Mehrwertsteuer zahlst du bei der Zustellung 18,40 €: 3,40 € Mehrwertsteuer, 6 € Bearbeitungsgebühr und 9 € Zollabgabe.
+Beispiel von POST aus der Zeit vor dem 1. November 2026: Für ein Paket im Wert von 20 € samt Versand, mit drei Artikeltypen (etwa T-Shirt, Jeans und Schuhe) und ohne vorab bezahlte Mehrwertsteuer waren bei der Zustellung 18,40 € fällig: 3,40 € Mehrwertsteuer, 6 € Bearbeitungsgebühr und 9 € Zollabgabe.
 
 Bezahlt wird bei der Zustellung oder bei der Abholung in einer POST-Verkaufsstelle. Hat ein beim Import-One-Stop-Shop (IOSS) registrierter Händler die Mehrwertsteuer schon beim Kauf kassiert, fällt sie bei der Einfuhr nicht noch einmal an. Ein Geschenk von privat an privat ohne kommerziellen Charakter bis 45 € ist laut luxemburgischer Zoll- und Verbrauchsteuerverwaltung abgabenfrei, darüber fällt die Mehrwertsteuer auf den ganzen Wert an. Mit der Bearbeitungsgebühr hat der Zoll nichts zu tun: Die Post erhebt sie auf eigene Rechnung, sagt die Zollverwaltung. Dein Paket liegt immer bei der Post, nie beim Zoll.
 
-Ab dem 1. November 2026 wird die EU zusätzlich eine Bearbeitungsgebühr von 2 € erheben, kündigt die Europäische Kommission an. Auf den Seiten von POST steht sie noch nicht. Mehr in [Paket beim Zoll](guide:customs).
+Seit dem 1. November 2026 erhebt die EU zusätzlich eine Bearbeitungsgebühr von 2 € pro Artikeltyp, laut Europäischer Kommission und POST. Mehr in [Paket beim Zoll](guide:customs).
 
 > Andere Wege zu zahlen als bei der Zustellung oder der Abholung nennt POST nicht. Eine SMS oder E-Mail, die dich per Link bezahlen lässt, damit dein Paket weiterkommt, passt nicht dazu. Das Europäische Verbraucherzentrum Luxemburg warnt vor solchen Nachrichten im Namen bekannter Unternehmen: Klick nie auf einen verdächtigen Link und prüf die Sendung selbst bei POST. Mehr unter [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 
@@ -154,7 +154,7 @@ Nach einer Benachrichtigungskarte 15 Tage in der Verkaufsstelle. Mit PackUp 7 Ta
 - [POST Luxembourg: Broschüre Zollformalitäten (PDF)](https://www.post.lu/documents/20125/468363/Flyer_POST_FraisDouanes_DE.pdf/563351bc-384f-42b3-3e83-b6df2d008499) – Rechenbeispiel, T-Shirt, Jeans und Schuhe
 - [POST Luxembourg: Kontaktieren Sie uns](https://www.post.lu/de/particuliers/infos-aide/contactez-nous) – Zeiten, Telekom, Formular
 - [Zoll- und Verbrauchsteuerverwaltung: Colis/Envois (Französisch)](https://douanes.public.lu/fr/commerce-international/colis-envois/Colis_Envois.html) – IOSS, Geschenke bis 45 €, Gebühren der Post, Paket bei der Post
-- [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € ab 1. November 2026
+- [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € seit 1. November 2026
 - [Guichet.lu: Sich an die Schlichtungsstelle des Luxemburgischen Regulierungsinstituts (ILR) wenden](https://guichet.public.lu/de/citoyens/justice/voies-recours-reglement-litiges/resolution-litige-amiable/mediation-ilr.html) – Voraussetzungen, kostenlos, 90 Tage
 - [Europäisches Verbraucherzentrum Luxemburg: E-Commerce](https://www.cecluxembourg.lu/de/themen/einkaeufe/e-commerce/) – 30 Tage, schriftliche Aufforderung
 - [Europäisches Verbraucherzentrum Luxemburg: Betrug](https://www.cecluxembourg.lu/de/themen/betrug-und-faelschungen/betrug/) – Phishing per SMS und E-Mail

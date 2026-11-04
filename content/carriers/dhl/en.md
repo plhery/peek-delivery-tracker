@@ -62,7 +62,7 @@ Marked delivered but nothing at the door? Check the "Delivered to" field for the
 
 Report damage or missing contents within 7 days of delivery: fill in DHL's damage form, then book a free collection on 0228 4333112 or hand the whole parcel in at a post office. DHL contacts the sender.
 
-**Customs.** For parcels from outside the EU, Deutsche Post pays the import charges and collects them from you on delivery or at the branch, plus a €7.50 fee. Since 1 July 2026 online orders up to €150 pay a flat €3 duty per type of goods, and from 1 November 2026 the EU adds a €2 Union handling fee per type of goods on online orders, whatever their value. See [what customs charges](guide:customs).
+**Customs.** For parcels from outside the EU, Deutsche Post pays the import charges and collects them from you on delivery or at the branch, plus a €7.50 fee. Since 1 July 2026 online orders up to €150 pay a flat €3 duty per type of goods, and since 1 November 2026 the EU adds a €2 Union handling fee per type of goods on online orders, whatever their value. See [what customs charges](guide:customs).
 
 ## DHL Paket customer service
 
@@ -120,7 +120,7 @@ No. DHL Päckchen and DHL Päckchen International have no tracking; only parcels
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – contact form and chat
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – damage form, post office hand-in, sender contacted, postal address
 - [DHL: Einfuhrabgaben](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-kosten.html) – import charges, 7.50 EUR fee, 3 EUR duty
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [DHL: Security notices](https://www.dhl.de/en/toolbar/footer/sicherheitshinweise.html) – fake SMS, QR-code cards, phishing@dhl.com
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – never asks for personal data or payment by SMS
 - [Deutsche Post/DHL: Leistungen und Preise](https://www.dhl.de/dam/jcr:c0eb1285-9a22-40b2-8c51-3f70c1a897be/dp-leistungen-und-preise-092026.pdf) – free tracking, Post & DHL app, hotline hours

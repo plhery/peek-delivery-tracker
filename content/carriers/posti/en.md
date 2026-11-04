@@ -67,7 +67,7 @@ Posti's tracking shows its wordings in English, Finnish or Swedish, following th
 
 **Damaged.** Tell the driver at handover, take photos, use Posti's damaged item form and tell the sender.
 
-**Customs.** A parcel from outside the EU may need clearing before delivery, on Finnish Customs' site or in OmaPosti. It waits 20 days in Posti's warehouse, then goes back. When taxes are due at clearance, Posti adds a €3.10 handling fee (€3.30 at an outlet), paid on Posti's own website. From 1 November 2026 Finnish Customs also charges €2 per goods item. Current fees are on [Posti's customs page](https://www.posti.fi/en/receiving/customs-clearance).
+**Customs.** A parcel from outside the EU may need clearing before delivery, on Finnish Customs' site or in OmaPosti. It waits 20 days in Posti's warehouse, then goes back. When taxes are due at clearance, Posti adds a €3.10 handling fee (€3.30 at an outlet), paid on Posti's own website. Since 1 November 2026 Finnish Customs also charges €2 per goods item. Current fees are on [Posti's customs page](https://www.posti.fi/en/receiving/customs-clearance).
 
 > Posti never sends a link to pay customs or a handling fee. A fake message can even contain a genuine tracking code: delete it without opening the link.
 
@@ -114,7 +114,7 @@ Yes, in the OmaPosti app.
 - [Posti: Lähetyksen noutaminen](https://www.posti.fi/vastaanottaminen/lahetyksen-noutaminen) – in Finnish: extension €1.90 a day
 - [Posti: Track item](https://www.posti.fi/en/tracking) – status wordings, explanation lines, ULKOMAILLA, languages
 - [Posti: Home delivery](https://www.posti.fi/en/receiving/home-delivery) – missed delivery, Small parcel, delivery times, delivered not received
-- [Posti: Customs clearance](https://www.posti.fi/en/receiving/customs-clearance) – handling fee, Finnish Customs, €2 fee from 1 November 2026, IOSS
+- [Posti: Customs clearance](https://www.posti.fi/en/receiving/customs-clearance) – handling fee, Finnish Customs, €2 fee since 1 November 2026, IOSS
 - [Posti: Ordering from abroad and customs clearance](https://www.posti.fi/en/receiving/customs-clearance/ordering-from-abroard-and-custom-clearance) – 20 days in the warehouse, OmaPosti
 - [Posti: What does Posti compensate for and to whom](https://www.posti.fi/en/customer-service/damage-situations/what-does-posti-compensate-for-and-to-whom) – clarification request, compensation, damage steps
 - [Posti: Claim for compensation](https://www.posti.fi/en/customer-service/damage-situations/claim-for-compensation) – claim form

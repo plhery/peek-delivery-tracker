@@ -135,7 +135,7 @@ No. SF's terms for shipments from mainland China say it doesn't deliver to an ad
 - [SF International: E-Parcel](https://www.sf-international.com/cn/en/product/parcel?isProduct=product) – under 2 kg, service partner, reference times, query and claim deadlines, claim documents, delivery shown by the partner
 - [SF International: E-Commerce Express](https://www.sf-international.com/cn/en/product/delivery?isProduct=product) – local delivery resources, reference times, no return or address change, query and claim deadlines, delivery shown by the partner
 - [SF International: Address Correction Service](https://www.sf-international.com/cn/en/product/addrchange?isProduct=increment) – products, who can ask, destinations, RMB 70
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 handling fee since 1 November 2026
 - [European Commission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – per item type
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings, China clock
 :::

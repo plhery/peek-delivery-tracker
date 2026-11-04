@@ -62,7 +62,7 @@ If the tracker says `We couldn't locate the consignment number.`, the parcel may
 
 **Lost or damaged.** The shop holds the contract with DPD, so it makes the claim. Under DPD Ireland's terms, the sender must tell DPD in writing within seven days of the expected delivery date for a parcel that never came (or within seven days of delivery for damage), and send the claim form within 21 days. So tell the shop quickly.
 
-**Customs.** Parcels from outside the EU, Great Britain included, can owe duty and VAT. Since 1 July 2026, Revenue charges €3 customs duty per item on parcels up to €150, and from 1 November 2026 a €2 handling fee per item will apply. If you didn't pay at checkout, DPD asks you to pay by SMS and/or email before it delivers, and returns the parcel to the sender if you haven't paid within 5 working days. Parcels from Northern Ireland are not affected. More in [parcels held at customs](guide:customs).
+**Customs.** Parcels from outside the EU, Great Britain included, can owe duty and VAT. Since 1 July 2026, Revenue charges €3 customs duty per item on parcels up to €150, and since 1 November 2026 a €2 handling fee per item applies. If you didn't pay at checkout, DPD asks you to pay by SMS and/or email before it delivers, and returns the parcel to the sender if you haven't paid within 5 working days. Parcels from Northern Ireland are not affected. More in [parcels held at customs](guide:customs).
 
 > DPD Ireland warns about fake messages asking for payment for a delivery. A genuine customs request always comes from a dpd.ie email address, carries DPD Ireland branding and names the sender of the goods.
 
@@ -121,6 +121,6 @@ It depends on the service the sender picked. DPD Ireland offers next-day deliver
 - [DPD Parcel Wizard](https://www.dpdparcelwizard.ie/) – text when ready to pick up
 - [CCPC: Non-delivery of goods](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – shop responsible, new date, refund, 30 days
 - [Revenue: Buying goods online from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 duty per item from 1 July 2026
-- [Revenue: Union Handling Fee](https://www.revenue.ie/en/customs/individuals/union-handling-fee/index.aspx) – €2 per item from 1 November 2026
+- [Revenue: Union Handling Fee](https://www.revenue.ie/en/customs/individuals/union-handling-fee/index.aspx) – €2 per item since 1 November 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

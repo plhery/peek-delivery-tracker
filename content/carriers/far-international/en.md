@@ -121,7 +121,7 @@ By its global hotline, 400-128-5656, or by email at csc@far800.com. About your o
 - [FAR International: Cross-border End-to-end Delivery](https://www.far800.com/en/service/info) – light asset, suppliers for customs, the trip abroad and last mile, platforms and sellers as customers, inspection on collection, delivery times, 24/7 hotline for clients
 - [FAR International: FAQs](https://www.far800.com/en/service/qa) – late flight tracking, RETURN, delivered but not received and 14 days, damaged parcels, customs abroad
 - [FAR International: Privacy Policy](https://www.far800.com/en/support/privacy) – company name, hotline, email, address
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape and link, wordings and stages, last-mile number, time zones, hand-over, what Peek reads
 :::

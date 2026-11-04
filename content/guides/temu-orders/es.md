@@ -24,7 +24,7 @@ Si pegas un mensaje entero con los dos números, Peek toma el de seguimiento y d
 
 Normalmente lo dice el número de seguimiento: el campo de arriba nombra la empresa a la que apunta su forma, o las pocas a las que puede pertenecer. El grupo portugués CTT, dueño de [CTT Express](carrier:ctt-express), se presentó en 2023 como socio estratégico de Temu en España. Quién puede repartir en el último tramo: la tabla de [seguimiento de paquetes de China](guide:tracking-from-china).
 
-Sobre la aduana: desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE paga un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 la UE sumará, según la Comisión Europea, una tasa de tramitación de 2 € por tipo de producto. Si la tienda no lo cobró al pagar, Correos o la empresa de reparto te lo pide antes de entregarte el paquete. Lo que sale de un almacén de la UE no paga arancel. Importes, Canarias, Ceuta y Melilla: [paquete retenido en aduanas](guide:customs).
+Sobre la aduana: desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE paga un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 la UE suma, según la Comisión Europea, una tasa de tramitación de 2 € por tipo de producto. Si la tienda no lo cobró al pagar, Correos o la empresa de reparto te lo pide antes de entregarte el paquete. Lo que sale de un almacén de la UE no paga arancel. Importes, Canarias, Ceuta y Melilla: [paquete retenido en aduanas](guide:customs).
 
 ## Paquete de Temu atascado, con retraso o sin llegar
 

@@ -124,7 +124,7 @@ Pour un cadeau, vois aussi [les dates limites de Noël](guide:christmas-posting-
 
 Le plus souvent, tout se règle à la commande, mais pas toujours :
 
-- **France et Belgique :** depuis le 1er juillet 2026, 3 € de droits de douane par article, c'est-à-dire par type de produit, sur les colis jusqu'à 150 €, et à partir du 1er novembre 2026, 2 € de frais de traitement de l'UE par article, quelle que soit la valeur. Ce que la boutique n'a pas encaissé peut t'être demandé à l'arrivée par La Poste ou bpost, souvent avec leurs propres frais.
+- **France et Belgique :** depuis le 1er juillet 2026, 3 € de droits de douane par article, c'est-à-dire par type de produit, sur les colis jusqu'à 150 €, et depuis le 1er novembre 2026, 2 € de frais de traitement de l'UE par article, quelle que soit la valeur. Ce que la boutique n'a pas encaissé peut t'être demandé à l'arrivée par La Poste ou bpost, souvent avec leurs propres frais.
 - **Suisse :** ni les 3 € ni les 2 €. Depuis 2025, les plateformes qui font au moins CHF 100 000.– de chiffre d'affaires en petits envois doivent appliquer la TVA suisse. Au-delà de CHF 5.– de taxes, La Poste suisse te facture la TVA, les droits et son dédouanement.
 
 Seuils, frais de chaque transporteur, remboursements et faux messages de paiement : tout est dans [colis bloqué en douane](guide:customs).
@@ -180,7 +180,7 @@ Les écrans, statuts, crédits et réclamations propres à chaque boutique : [su
 - [Service-Public.fr : La taxe française sur les petits colis remplacée par un droit de douane européen](https://www.service-public.gouv.fr/particuliers/actualites/A18985) – 3 € par catégorie d'articles
 - [Commission européenne : Questions et réponses sur le droit de douane de 3 euros](https://ec.europa.eu/commission/presscorner/detail/fr/qanda_26_1492) – 3 € par article, colis jusqu'à 150 €
 - [Commission européenne : Buying goods online coming from a non-EU country (en anglais)](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – articles déjà dans l'UE : pas de formalités douanières, TVA comprise
-- [Commission européenne : La réforme douanière de l'UE](https://ec.europa.eu/commission/presscorner/detail/fr/ip_26_1904) – frais de traitement à partir de novembre 2026
+- [Commission européenne : La réforme douanière de l'UE](https://ec.europa.eu/commission/presscorner/detail/fr/ip_26_1904) – frais de traitement depuis novembre 2026
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € au 1er novembre 2026
 - [Conseil de l'UE : règlement délégué C(2026) 6694 (PDF)](https://data.consilium.europa.eu/doc/document/ST-13480-2026-INIT/fr/pdf) – 2 € par article
 - [Commission européenne : Guidance on EUR 3 customs duty (PDF, en anglais)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € par ligne de déclaration, comme les 3 €, quelle que soit la valeur

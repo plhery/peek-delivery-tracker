@@ -81,7 +81,7 @@ La douane coûte rarement plus :
 - **France :** « Habituellement, des droits de douane ne sont pas exigés », écrit Shein, mais un colis contrôlé peut en devoir, et c'est à toi de payer. Shein ne demande jamais de frais pour récupérer un colis, et La Poste non plus : un tel message est une fraude.
 - **Suisse :** si tu as payé des frais de douane, contacte le service client avec le reçu.
 
-Les 3 € par article, les 2 € de frais de traitement de l'UE à partir du 1er novembre 2026 et les faux SMS de frais : [colis bloqué en douane](guide:customs).
+Les 3 € par article, les 2 € de frais de traitement de l'UE depuis le 1er novembre 2026 et les faux SMS de frais : [colis bloqué en douane](guide:customs).
 
 ## Colis Shein non reçu ou indiqué livré : que faire ?
 

@@ -52,7 +52,7 @@ Correios hace el despacho de exportación en Brasil y entrega el paquete a Corre
 **Qué se paga.** La aduana española no es cosa de Correios, sino de la Agencia Tributaria. Todo lo que llega a la Península o Baleares desde fuera de la UE pasa trámites de importación, lo mande quien lo mande, y lo que haya que pagar se paga antes de la entrega:
 
 - **Compra de hasta 150 €.** Correos despacha el envío en aduana por ti. Si la tienda no cobró el IVA con IOSS, pagas el IVA de importación y la tarifa de gestión de Correos. Desde el 1 de julio de 2026, las ventas a distancia (de una empresa a un particular) pagan además un arancel de la UE de 3 € por tipo de producto, también con IOSS, salvo que se pagara en origen (PDDP): lo verás como `Arancel UE`. Paga en la app de Correos o en mioficina.correos.es antes de que salga a reparto, o después al cartero o en la oficina.
-- **Desde el 1 de noviembre de 2026**, esas ventas pagarán también una tasa de tramitación de 2 € por tipo de producto, valga lo que valga el envío.
+- **Desde el 1 de noviembre de 2026**, esas ventas pagan también una tasa de tramitación de 2 € por tipo de producto, valga lo que valga el envío.
 - **Más de 150 €**, o con alcohol, tabaco o productos con controles sanitarios: DUA ordinario. Con el «Aviso de llegada» puedes encargar el trámite a Correos en correosaduanas.es (aviso firmado, DNI, justificante de compra y pago) y pagar allí su presupuesto.
 - **Regalo de un particular** de hasta 45 €, sin transacción comercial: según Correos, se declara pero no paga IVA de importación, si así lo establece la Aduana.
 
@@ -121,7 +121,7 @@ Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y pued
 
 ### ¿Tengo que pagar aduana por un paquete que viene de Brasil?
 
-Todo pasa por la aduana. Si es una compra de hasta 150 € y la tienda no cobró el IVA, Correos te cobra antes de la entrega el IVA, su tarifa de gestión y 3 € por tipo de producto. Un regalo entre particulares de hasta 45 € se declara, pero no paga IVA.
+Todo pasa por la aduana. Si es una compra de hasta 150 € y la tienda no cobró el IVA, Correos te cobra antes de la entrega el IVA, su tarifa de gestión y, por tipo de producto, 3 € de arancel y 2 € de tasa de tramitación. Un regalo entre particulares de hasta 45 € se declara, pero no paga IVA.
 
 ### ¿Por qué mi paquete de Correios dice «Aguardando pagamento»?
 

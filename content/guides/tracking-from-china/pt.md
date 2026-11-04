@@ -121,9 +121,9 @@ Depende da linha que pagaste. A Cainiao conta dias seguidos; a Shein conta dias 
 
 ## Vais pagar alfândega além do preço?
 
-Em princípio não: hoje pagas quase tudo logo na compra, e o resumo da encomenda ou a fatura dizem-to. Numa compra até 150 € enviada de fora da UE, os encargos são o IVA e, desde 1 de julho de 2026, 3 € de direitos aduaneiros por tipo de produto, não por peça. A partir de 1 de novembro de 2026 junta-se uma taxa de tratamento da União de 2 €, contada da mesma maneira, devida pela loja ou pela transportadora, que ta podem cobrar. Há duas exceções:
+Em princípio não: hoje pagas quase tudo logo na compra, e o resumo da encomenda ou a fatura dizem-to. Numa compra até 150 € enviada de fora da UE, os encargos são o IVA e, desde 1 de julho de 2026, 3 € de direitos aduaneiros por tipo de produto, não por peça. Desde 1 de novembro de 2026 junta-se uma taxa de tratamento da União de 2 €, contada da mesma maneira, devida pela loja ou pela transportadora, que ta podem cobrar. Há duas exceções:
 
-- **A loja não cobrou os encargos:** antes da entrega, pagas no Portal de Desalfandegamento dos CTT o IVA, os 3 € por tipo de produto e o Serviço CTT.
+- **A loja não cobrou os encargos:** antes da entrega, pagas no Portal de Desalfandegamento dos CTT o IVA, os 3 € e os 2 € por tipo de produto e o Serviço CTT.
 - **Cobrou só o IVA, sem os direitos:** os CTT não te podem cobrar os direitos à parte e a encomenda é devolvida.
 
 Quanto custa o Serviço CTT, os prazos e como reconhecer um SMS falso a pedir taxas: [encomenda retida na alfândega](guide:customs).
@@ -172,7 +172,7 @@ Ecrãs, estados, créditos e reclamações de cada loja: [rastrear uma encomenda
 - [CTT: Parceiro de distribuição estratégico da Temu](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-sao-o-parceiro-de-distribuicao-estrategico-da-temu-para-a-peninsula-iberica) – parceiro exclusivo em 2023
 - [CTT: Temu alarga entrega em Portugal](https://www.ctt.pt/grupo-ctt/media/noticias/temu-alarga-entrega-em-portugal-atraves-de-parceria-estrategica-com-os-ctt) – Açores, Madeira, Lojas e Pontos CTT, Agentes Payshop, cacifos Locky, vendedores locais, até 80 % das vendas na Europa
 - [Comissão Europeia: Buying goods online coming from a non-EU country (em inglês)](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – artigos já na UE: sem formalidades aduaneiras, IVA no preço
-- [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento a partir de 1 de novembro de 2026
+- [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento desde 1 de novembro de 2026
 - [Conselho da UE: Regulamento delegado C(2026) 6694](https://data.consilium.europa.eu/doc/document/ST-13480-2026-INIT/pt/pdf) – 2 € por artigo
 - [Comissão Europeia: Guidance on EUR 3 customs duty (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo, contado por linha da declaração, qualquer valor
 - [Yanwen: página inicial (em chinês)](https://www.yw56.com.cn/) – linhas Temu e AliExpress

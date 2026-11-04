@@ -79,11 +79,11 @@ Tout colis de marchandises venant d'un pays hors UE fait l'objet de formalités 
 - les frais de traitement POST, quand POST effectue les formalités : 6 € pour un colis de 22 € au plus, 18 € au-delà et jusqu'à 150 € ;
 - des accises sur certains produits.
 
-Exemple de POST : colis de 20 €, port compris, trois types d'articles, TVA non payée à la commande : 3,40 € de TVA, 6 € de frais et 9 € de droits, soit 18,40 €.
+Exemple de POST, avant le 1er novembre 2026 : colis de 20 €, port compris, trois types d'articles, TVA non payée à la commande : 3,40 € de TVA, 6 € de frais et 9 € de droits, soit 18,40 €.
 
 Tu paies à la livraison ou au retrait en point de vente POST, sauf la TVA déjà encaissée à la commande par un vendeur inscrit au guichet unique IOSS. Un cadeau d'un particulier, sans caractère commercial et de 45 € au plus, est en franchise, selon l'Administration des douanes et accises ; au-delà, la TVA porte sur toute la valeur.
 
-À partir du 1er novembre 2026, l'UE appliquera en plus des frais de traitement de l'Union de 2 €, annonce la Commission européenne ; la page de POST n'en parle pas encore. Plus de détails dans [colis bloqué en douane](guide:customs).
+Depuis le 1er novembre 2026, l'UE applique en plus des frais de traitement de l'Union de 2 € par type d'article, selon la Commission européenne et la page de POST. Plus de détails dans [colis bloqué en douane](guide:customs).
 
 > POST encaisse ce qui reste dû à la livraison ou au retrait : un SMS ou un e-mail qui demande de payer par un lien pour débloquer un colis ne correspond pas à ce que décrit POST. Le CEC Luxembourg met en garde contre ces faux messages au nom d'entreprises connues : ne clique pas, vérifie le numéro toi-même sur le Track and Trace. Voir [les SMS de livraison frauduleux](guide:delivery-scam-texts).
 

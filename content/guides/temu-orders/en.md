@@ -22,7 +22,7 @@ Paste a whole message that holds both numbers, and Peek takes the tracking numbe
 
 The tracking number usually tells: the checker above names the carrier its shape points to, or the few it could belong to. Who you're likely to see on the last leg, from USPS and Royal Mail to An Post, Canada Post and Australia Post, is in the country table of [tracking a parcel from China](guide:tracking-from-china). Whether you owe anything at the border depends on your country: see [customs](guide:customs).
 
-In Ireland, since 1 July 2026, online orders from outside the EU worth €150 or less pay €3 duty per item, meaning per kind of product, and from 1 November 2026 Revenue says a €2 EU handling fee per item is added. If the checkout showed VAT and duty, that's the final price; if not, the carrier collects them first.
+In Ireland, since 1 July 2026, online orders from outside the EU worth €150 or less pay €3 duty per item, meaning per kind of product, and since 1 November 2026, Revenue says, a €2 EU handling fee per item is added. If the checkout showed VAT and duty, that's the final price; if not, the carrier collects them first.
 
 ## How long does Temu delivery to Ireland take?
 

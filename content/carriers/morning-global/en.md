@@ -134,10 +134,10 @@ Email cs.mgus@morninglobal.com in the US, cs.mgeu@morninglobal.com in the UK, or
 - [Morning Global: Contact](https://www.morninglobal.com/contact/) – regional teams' mailboxes and phones, worldwide team and WhatsApp, form, global and regional headquarters, offices across mainland China
 - [Morning Global: Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) – customs documents form
 - [Morning Global: Terms and Conditions (Privacy Policy page)](https://www.morninglobal.com/privacy-policy/) – failed deliveries, claim deadlines, US$50 cap
-- [Morning Global: EUR 2 Customs Handling Fee for EU-bound B2C Shipments](https://www.morninglobal.com/morning-global-service-update-introduction-of-eur-2-customs-handling-fee-for-eu-bound-b2c-shipments-from-1-november-2026/) – EUR 2 per declaration line from 1 November 2026, VAT on the fee
+- [Morning Global: EUR 2 Customs Handling Fee for EU-bound B2C Shipments](https://www.morninglobal.com/morning-global-service-update-introduction-of-eur-2-customs-handling-fee-for-eu-bound-b2c-shipments-from-1-november-2026/) – EUR 2 per declaration line since 1 November 2026, VAT on the fee
 - [Morning Global: Extended Transit Times in Australia](https://www.morninglobal.com/morning-global-service-impact-notice-extended-transit-times-in-australia-due-to-industrial-action/) – MGIP delays of about 2 to 3 business days
 - [Morning Global: News](https://www.morninglobal.com/news/) – service notices
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape and links, status wordings and their steps, places and clocks, what Peek reads and leaves out, no delivery partner, no hand-off to a post
 :::

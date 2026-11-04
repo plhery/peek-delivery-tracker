@@ -122,7 +122,7 @@ Od 1 lipca 2026 r. często tak, nawet przy tanich zamówieniach. Za paczkę do 1
 - **Cło:** 3 euro za każdy rodzaj produktu, także przy VAT zapłaconym w kasie. Jeśli sklep nie wliczył go w cenę, Poczta Polska pobierze je przy odbiorze.
 - **Opłatę Poczty Polskiej:** 20,00 zł za zgłoszenie celne, gdy paczkę zgłasza Poczta, nawet przy VAT w cenie.
 
-Komisja Europejska zapowiada, że od 1 listopada 2026 r. dojdzie unijna opłata manipulacyjna: 2 euro za każdą pozycję, bez względu na wartość paczki. Sklep albo przewoźnik może ją przerzucić na Ciebie. Szczegóły, także o fałszywych SMS-ach z żądaniem dopłaty, znajdziesz w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
+Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdą pozycję, bez względu na wartość paczki. Sklep albo przewoźnik może ją przerzucić na Ciebie. Szczegóły, także o fałszywych SMS-ach z żądaniem dopłaty, znajdziesz w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Paczka z Chin nie dotarła: kiedy żądać zwrotu pieniędzy?
 

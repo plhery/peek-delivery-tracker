@@ -22,7 +22,7 @@ Fügst du eine ganze Nachricht mit beiden Nummern ein, nimmt Peek die Sendungsnu
 
 Meist verrät es die Sendungsnummer: Das Feld oben nennt den Paketdienst, auf den ihre Form zeigt, oder die wenigen, zu denen sie passen kann. Wen du auf dem letzten Stück wahrscheinlich siehst, von DHL über die Österreichische Post bis zur Schweizerischen Post, steht in der Ländertabelle unter [Paket aus China verfolgen](guide:tracking-from-china). Ob an der Grenze noch etwas fällig wird, hängt von deinem Land ab: [Zoll](guide:customs).
 
-In Deutschland und Österreich sind Online-Bestellungen von außerhalb der EU bis 150 € seit 1. Juli 2026 nicht mehr zollfrei: Jede Ware kostet 3 € Zoll, wobei „Ware“ eine Warenart meint, nicht ein Stück. Ab 1. November 2026 erhebt die EU laut EU-Kommission außerdem eine Bearbeitungsgebühr von 2 € pro Ware. Für die Schweiz gilt beides nicht.
+In Deutschland und Österreich sind Online-Bestellungen von außerhalb der EU bis 150 € seit 1. Juli 2026 nicht mehr zollfrei: Jede Ware kostet 3 € Zoll, wobei „Ware“ eine Warenart meint, nicht ein Stück. Seit 1. November 2026 erhebt die EU laut EU-Kommission außerdem eine Bearbeitungsgebühr von 2 € pro Ware. Für die Schweiz gilt beides nicht.
 
 ## Temu-Paket hängt fest, kommt zu spät oder gar nicht?
 
@@ -41,7 +41,7 @@ Mehrere Sendungsnummern? Füg jede hinzu: Peek verfolgt jedes Paket für sich. D
 Peek zeigt, was der Paketdienst veröffentlicht. Eine Reklamation oder eine Erstattung bleiben in deinem Temu-Konto. Eine Rücksendung hat ihre eigene Sendungsnummer, nicht die deiner Bestellung. Wo du sie findest und wann das Geld kommt: [Retoure verfolgen](guide:returns-tracking).
 
 :::sources
-- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € ab 1. November 2026
+- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € seit 1. November 2026
 - [EU-Kommission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € pro Ware bis 150 € seit 1. Juli 2026, 2 € pro Ware, pro Position der Zollanmeldung
 - [Universal Parcel Scraper: Carrier-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – was Peek prüft
 :::

@@ -61,7 +61,7 @@ JCEX nie publikuje własnych zasad prób doręczenia, awizo, punktów odbioru an
 
 ## Cło za paczkę JCEX z Chin
 
-Paczka z Chin przychodzi spoza Unii, więc musi przejść odprawę celną. Od 1 lipca 2026 r. do 1 lipca 2028 r. obowiązuje cło 3 euro za pozycję w przesyłce o łącznej wartości do 150 euro, gdy sprzedawca rozlicza VAT w systemie IOSS albo paczka jest przesyłką pocztową, podaje KAS. Od 1 listopada 2026 r. Unia będzie do tego pobierać opłatę manipulacyjną 2 euro za pozycję, zapowiada Komisja Europejska.
+Paczka z Chin przychodzi spoza Unii, więc musi przejść odprawę celną. Od 1 lipca 2026 r. do 1 lipca 2028 r. obowiązuje cło 3 euro za pozycję w przesyłce o łącznej wartości do 150 euro, gdy sprzedawca rozlicza VAT w systemie IOSS albo paczka jest przesyłką pocztową, podaje KAS. Od 1 listopada 2026 r. Unia pobiera do tego opłatę manipulacyjną 2 euro za pozycję, podaje Komisja Europejska.
 
 Czy cło i VAT są już w cenie, czy zapłacisz je przy odbiorze, zależy od sklepu i przewoźnika. Wyjaśnia to poradnik [paczka zatrzymana przez urząd celny](guide:customs). W historii JCEX odprawę widać jako `Customs held（清关中）` albo `under clearance` (na stronie JCEX `进口清关中`).
 

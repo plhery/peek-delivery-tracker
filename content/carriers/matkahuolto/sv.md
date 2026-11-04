@@ -84,7 +84,7 @@ Serviceställena är Matkahuoltos egna ställen och bland annat många K-butiker
 
 ## Tull på paket från länder utanför EU
 
-Allt du köper från länder utanför EU måste förtullas, och du kan behöva betala moms. Också en finländsk webbutik kan skicka från ett lager utanför EU, påminner KKV. Sedan den 1 juli 2026 tar EU ut en tillfällig tull på 3 euro per varupost på försändelser värda högst 150 euro. Enligt Matkahuoltos pressmeddelande på finska tar webbutiken ut och betalar den, separat eller i priset. Från och med den 1 november 2026 kommer EU också att ta ut en hanteringsavgift på 2 euro för små paket. Läs mer om [tull på paket](guide:customs) (på engelska).
+Allt du köper från länder utanför EU måste förtullas, och du kan behöva betala moms. Också en finländsk webbutik kan skicka från ett lager utanför EU, påminner KKV. Sedan den 1 juli 2026 tar EU ut en tillfällig tull på 3 euro per varupost på försändelser värda högst 150 euro. Enligt Matkahuoltos pressmeddelande på finska tar webbutiken ut och betalar den, separat eller i priset. Sedan den 1 november 2026 tar EU också ut en hanteringsavgift på 2 euro för små paket. Läs mer om [tull på paket](guide:customs) (på engelska).
 
 **Åland.** För paket från fastlandet till Åland rekommenderar Matkahuolto att du som mottagare lämnar in tulldeklarationen och betalar skatten på Tullens webbplats.
 

@@ -78,7 +78,7 @@ A Csomagkövetés minden lépésnél egy rövid címet (például „Automatába
 
 **Ha nem értesz egyet a válasszal.** A Foxpost a panaszra 30 napon belül válaszol (ezt egyszer további 30 nappal meghosszabbíthatja). Ha nem fogadod el a választ, vagy határidőre nem kapsz választ, 30 napon belül a Nemzeti Média- és Hírközlési Hatósághoz (NMHH) fordulhatsz felügyeleti eljárásért; az eljárás díja 6000 Ft. Fogyasztóként a lakóhelyed szerinti békéltető testülethez is fordulhatsz, ha előbb a Foxposttal próbáltad rendezni.
 
-**Csomag az EU-n kívülről.** EU-n kívüli webshopnál a webshop szállítási feltételei is számítanak. 2026. július 1. óta a távértékesítésben érkező, 150 eurónál kisebb értékű küldeményekre tételenként 3 eurós átalányvám vonatkozik. 2026. november 1-jétől ehhez tételenként 2 eurós uniós kezelési díj is járul majd. Részletek a [vámról szóló útmutatóban](guide:customs) (angolul).
+**Csomag az EU-n kívülről.** EU-n kívüli webshopnál a webshop szállítási feltételei is számítanak. 2026. július 1. óta a távértékesítésben érkező, 150 eurónál kisebb értékű küldeményekre tételenként 3 eurós átalányvám vonatkozik. 2026. november 1-jétől ehhez tételenként 2 eurós uniós kezelési díj is járul. Részletek a [vámról szóló útmutatóban](guide:customs) (angolul).
 
 ## Foxpost ügyfélszolgálat
 

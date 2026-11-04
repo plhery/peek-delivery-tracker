@@ -84,7 +84,7 @@ InPost no reparte en Canarias ni explica la aduana. Según la Agencia Tributaria
 
 - Desde el 1 de julio de 2026, una compra online de hasta 150 € enviada desde fuera de la UE paga un arancel de 3 € por categoría de artículos, además del IVA. Cuenta el lugar desde donde se envía, no el dominio .es.
 - Lo normal es que la plataforma te lo cobre al comprar. Si no, el transportista puede pedirte el arancel y el 21 % de IVA, y quizá gastos de gestión, antes de entregarte el paquete.
-- Desde el 1 de noviembre de 2026 se sumará una tasa de tramitación de 2 € por categoría de artículos.
+- Desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por categoría de artículos.
 - Si devuelves la compra, el arancel no se devuelve, salvo que el artículo sea defectuoso o no cumpla el contrato; el IVA sí.
 
 Canarias, Ceuta y Melilla quedan fuera del IVA de la UE, así que lo que llega de allí a la Península o Baleares paga IVA de importación, explica la Comisión Europea. Lo que sale de Ceuta o Melilla necesita además una declaración de importación, según la Agencia Tributaria. Más en [la guía de aduanas](guide:customs).

@@ -84,7 +84,7 @@ Suomessa PostNordin yleisin toimitustapa on pakettiautomaatti. PostNordin mukaan
 
 **Lahjat ja palautukset.** PostNordin mukaan alle 45 euron henkilökohtaisista lahjoista ei peritä tullia eikä arvonlisäveroa, kun lähetys on ilmoitettu oikein lahjaksi. Jos palautat tuotteen, tullia ei yleensä makseta takaisin.
 
-**1.11.2026 alkaen 2 euron käsittelymaksu.** Euroopan komission mukaan EU:n tulliviranomaiset alkavat 1.11.2026 periä EU:n ulkopuolelta tilatuista verkko-ostoksista 2 euron käsittelymaksun tuotetyyppiä kohden. Maksu koskee myös yli 150 euron lähetyksiä, eikä sitä palauteta.
+**1.11.2026 alkaen 2 euron käsittelymaksu.** Euroopan komission mukaan EU:n tulliviranomaiset perivät 1.11.2026 alkaen EU:n ulkopuolelta tilatuista verkko-ostoksista 2 euron käsittelymaksun tuotetyyppiä kohden. Maksu koskee myös yli 150 euron lähetyksiä, eikä sitä palauteta.
 
 Huomaa, että suomalainenkin verkkokauppa voi toimittaa tavaran EU:n ulkopuolisesta varastosta. Lue lisää [tulliin jääneistä paketeista](guide:customs) (englanniksi).
 

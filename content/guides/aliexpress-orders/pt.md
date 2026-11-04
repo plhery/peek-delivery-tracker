@@ -23,7 +23,7 @@ Quem pode aparecer, dos [CTT](carrier:ctt) para os objetos postais à [Ecoscooti
 - home | Tu | Confirma a receção só quando tiveres a encomenda na mão
 :::
 
-Sobre a alfândega: desde 1 de julho de 2026, as compras até 150 € vindas de fora da UE pagam 3 € de direitos por tipo de produto, e a Comissão Europeia anuncia que, a partir de 1 de novembro de 2026, se juntará uma taxa de tratamento da União de 2 € por tipo de produto, que quem declara a encomenda te poderá cobrar. O AliExpress lembra que nunca cobre direitos nem impostos e que normalmente é a transportadora que os cobra na entrega. Valores e prazos: [encomenda retida na alfândega](guide:customs).
+Sobre a alfândega: desde 1 de julho de 2026, as compras até 150 € vindas de fora da UE pagam 3 € de direitos por tipo de produto, e a Comissão Europeia indica que, desde 1 de novembro de 2026, se junta uma taxa de tratamento da União de 2 € por tipo de produto, que quem declara a encomenda te pode cobrar. O AliExpress lembra que nunca cobre direitos nem impostos e que normalmente é a transportadora que os cobra na entrega. Valores e prazos: [encomenda retida na alfândega](guide:customs).
 
 ## Onde está o número de seguimento do AliExpress?
 
@@ -152,7 +152,7 @@ O Peek mostra o que as transportadoras publicam. A Proteção ao Comprador, as d
 - [AliExpress: I am not satisfied with dispute result. What can I do? (em inglês)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015096&language=en) – recurso em 7 dias
 - [AliExpress: How do I cancel a dispute? (em inglês)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015101&language=en) – sem reabertura
 - [Cainiao: About Cainiao (em inglês)](https://www.cainiao.com/en/about-us-brief-introduction.html) – grupo Alibaba
-- [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento de 2 € a partir de 1 de novembro de 2026
+- [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento de 2 € desde 1 de novembro de 2026
 - [Comissão Europeia: Customs Guidance on EUR 3 customs duty (em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € por tipo de produto
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formatos dos números, CTT, Ecoscooting, o que o Peek consulta
 :::

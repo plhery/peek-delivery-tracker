@@ -80,7 +80,7 @@ Laut AGB liefert Packeta an eine Abholstelle, die Packeta selbst oder ein Vertra
 
 ## Zoll bei Paketen von außerhalb der EU
 
-Zoll fällt nur an, wenn ein Paket aus einem Land außerhalb der EU kommt. Seit dem 1. Juli 2026 kostet bei Online-Bestellungen bis 150 Euro jede Warenkategorie im Paket pauschal 3 Euro Zoll. Dazu kommt wie bisher die Einfuhrumsatzsteuer von 19 oder 7 Prozent. Ab dem 1. November 2026 soll zusätzlich eine Abfertigungspauschale von 2 Euro je Warenkategorie fällig werden. Die Zollanmeldung übernimmt in der Regel der Paketdienst. Er legt die Abgaben aus und kassiert sie bei der Zustellung, meist mit einer Servicepauschale. Wie lange die Verzollung dauert, kann Packeta nicht garantieren. Mehr unter [Zoll und Einfuhrabgaben](guide:customs).
+Zoll fällt nur an, wenn ein Paket aus einem Land außerhalb der EU kommt. Seit dem 1. Juli 2026 kostet bei Online-Bestellungen bis 150 Euro jede Warenkategorie im Paket pauschal 3 Euro Zoll. Dazu kommt wie bisher die Einfuhrumsatzsteuer von 19 oder 7 Prozent. Seit dem 1. November 2026 ist zusätzlich eine Abfertigungspauschale von 2 Euro je Warenkategorie fällig. Die Zollanmeldung übernimmt in der Regel der Paketdienst. Er legt die Abgaben aus und kassiert sie bei der Zustellung, meist mit einer Servicepauschale. Wie lange die Verzollung dauert, kann Packeta nicht garantieren. Mehr unter [Zoll und Einfuhrabgaben](guide:customs).
 
 ## Gefälschte Paket-SMS
 
@@ -144,6 +144,6 @@ Laut AGB im Regelfall fünf Kalendertage, laut FAQ sieben, verlängerbar auf hö
 - [Verbraucherzentrale: Worauf Sie als Empfänger eines Pakets achten sollten](https://www.verbraucherzentrale.de/wissen/digitale-welt/onlinehandel/worauf-sie-als-empfaenger-eines-pakets-achten-sollten-12322) – beschädigtes Paket vor dem Zusteller öffnen, sieben Tage für versteckte Schäden
 - [Verbraucherzentrale: Paketdienst-SMS: Vorsicht, Abzocke!](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/paketdienstsms-vorsicht-abzocke-58988) – gefälschte SMS, Links, App-Installation, Zollgebühren bei Zustellung
 - [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – 3 Euro je Warenkategorie, Abfertigungspauschale, Einfuhrumsatzsteuer, Zollabwicklung durch den Paketdienst, Servicepauschale
-- [Europäische Kommission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 Euro seit 1. Juli 2026, 2 Euro ab 1. November 2026
+- [Europäische Kommission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 Euro seit 1. Juli 2026, 2 Euro seit 1. November 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest
 :::

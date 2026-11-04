@@ -106,7 +106,7 @@ Ob DPD samstags an die Haustür liefert, sagt keine Seite von DPD Schweiz. Die P
 
 ### Kann DPD ohne Unterschrift zustellen?
 
-Ja, mit einer Abstellgenehmigung, die du in myDPD unter „Sicherer Ort“ einmalig oder dauerhaft erteilst, auf Wunsch mit Türcode für den Fahrer. Ab dem 12. Oktober 2026 braucht sie eine verifizierte Telefonnummer. Verlangt der Versender eine Unterschrift und fehlt die Abstellgenehmigung, darf DPD das Paket nicht einfach abstellen.
+Ja, mit einer Abstellgenehmigung, die du in myDPD unter „Sicherer Ort“ einmalig oder dauerhaft erteilst, auf Wunsch mit Türcode für den Fahrer. Seit dem 12. Oktober 2026 braucht sie eine verifizierte Telefonnummer. Verlangt der Versender eine Unterschrift und fehlt die Abstellgenehmigung, darf DPD das Paket nicht einfach abstellen.
 
 ### Kann ich ein DPD-Paket in der Schweiz zurückschicken?
 

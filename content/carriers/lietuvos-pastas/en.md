@@ -117,7 +117,7 @@ Lietuvos paštas says a locker parcel usually reaches a locker in Lithuania the 
 - [Lietuvos paštas: Kontaktai](https://www.post.lt/lt/kontaktai) – phone numbers, hours, call cost, email, chat
 - [Lietuvos paštas: Rašykite mums](https://www.post.lt/rasykite-mums) – contact form, claim and search tabs
 - [Lietuvos paštas: Būkite atsargūs, Lietuvos paštu apsimetantys sukčiai](https://www.post.lt/lt/apie-mus/naujienos/bukite-atsargus-lietuvos-pastu-apsimetantys-sukciai-gviesiasi-pinigu-ir-duomenu) – fake SMS warning, sender names, prevencija@post.lt
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €3 and €2 per item, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads and shows
 :::

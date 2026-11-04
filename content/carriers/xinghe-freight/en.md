@@ -118,7 +118,7 @@ The tracker may not have the order yet, or only steps written ahead, which can e
 - [Xinghe Freight: 关于我们 (about)](http://xinghe-express.cn/about.html) – founded in 2014, sea, air and land freight, ship agency, customs declaration
 - [Xinghe Freight: 产品服务 (services)](http://xinghe-express.cn/services.html) – services offered, nothing on parcels for online shoppers
 - [Xinghe Freight: 联系我们 (contact)](http://xinghe-express.cn/contact.html) – 24-hour hotline, email for business enquiries and quotes, address given as Guangzhou only, get in touch before visiting, contact form opening an email
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item on parcels up to €150 from 1 July 2026, €2 Union handling fee from 1 November 2026
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item on parcels up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – handling fee per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, GZXH…YQ number shape, Xinghe read on GZYL's tracker, step wordings and stages, Chinese line, Beijing clock, timelines written ahead, tracking services as fallback, Swiss Post hand-over, what Peek shows, holds back and leaves out
 :::

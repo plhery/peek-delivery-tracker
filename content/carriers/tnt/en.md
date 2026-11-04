@@ -59,7 +59,7 @@ TNT delivers to the recipient's address, to you or to someone who appears to be 
 
 Where local law allows, TNT clears international shipments through customs itself. It may pay duties and taxes for whoever owes them and charge a clearance fee for that, which varies by country. It can also ask for payment before it releases the parcel to you. The sender is ultimately responsible: if you refuse to pay, TNT may ask the sender, and if the sender doesn't pay either, the parcel may go back.
 
-For parcels bought from outside the EU and sent into the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to consignments worth up to €150. From 1 November 2026, a €2 EU handling fee applies too. The details, and the rules in other countries, are in [the customs guide](guide:customs).
+For parcels bought from outside the EU and sent into the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to consignments worth up to €150. Since 1 November 2026, a €2 EU handling fee applies too. The details, and the rules in other countries, are in [the customs guide](guide:customs).
 
 ## TNT parcel not showing, late, lost or damaged
 
@@ -121,7 +121,7 @@ Redeliveries happen Monday to Friday only. Saturday delivery, where TNT offers i
 - [TNT Australia: Help Center](https://www.tnt.com/express/en_au/site/support.html) – Australian phone number and hours
 - [TNT United States: TNT is becoming FedEx](https://www.tnt.com/express/en_us/site/home.html) – TNT operates as FedEx, phone
 - [TNT Canada: TNT is now FedEx](https://www.tnt.com/express/en_ca/site/home.html) – TNT operates as FedEx, phone
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty since 1 July 2026, €2 handling fee since 1 November 2026
 - [European Commission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – per item type
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, TNT Australia's domestic consignments and its tracker
 :::

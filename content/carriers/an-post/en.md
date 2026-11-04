@@ -50,7 +50,7 @@ A parcel can also wait for you at a post office. `Your delivery is in …, POST 
 
 **Not moving.** If a parcel from abroad is delayed after reaching Ireland, Revenue, Ireland's customs authority, says to ask the courier, postal operator or seller for an update. If customs selects it for a check, An Post may contact you for the order confirmation or invoice; without enough information to complete the customs declaration, it may return the parcel to the sender. See [why tracking stops updating](guide:tracking-not-updating).
 
-**Customs charges.** Goods bought online from outside the EU, Great Britain included, can owe customs duty and VAT if the shop didn't charge them at checkout. For goods coming by post, An Post contacts you by SMS, email and postcard about the charges, and you pay them before it releases the parcel; refuse, and the parcel is liable to go back to the sender, says Revenue. An Post can add its own administration fee for clearing the parcel: Revenue says these fees vary, so check the amount with An Post. Amounts per item, including the €2 EU handling fee from 1 November 2026, are in Peek's [customs guide](guide:customs).
+**Customs charges.** Goods bought online from outside the EU, Great Britain included, can owe customs duty and VAT if the shop didn't charge them at checkout. For goods coming by post, An Post contacts you by SMS, email and postcard about the charges, and you pay them before it releases the parcel; refuse, and the parcel is liable to go back to the sender, says Revenue. An Post can add its own administration fee for clearing the parcel: Revenue says these fees vary, so check the amount with An Post. Amounts per item, including the €2 EU handling fee due since 1 November 2026, are in Peek's [customs guide](guide:customs).
 
 > Revenue says An Post will never send a link in a text message: a customs text claiming to be from An Post with a clickable payment link is a scam. Revenue itself never emails or texts you to click a link and pay customs duty.
 
@@ -84,7 +84,7 @@ Yes, under its original number: An Post's tracking also follows mail other posts
 
 ### Do I pay customs on a parcel from the UK?
 
-On goods bought online and sent from Great Britain, yes: Revenue says they owe customs duty and VAT, plus the €2 EU handling fee from 1 November 2026. The shop may charge them at checkout; if not, you pay them before delivery. Goods based in Northern Ireland or another EU country when you order them owe no customs duty or handling fee.
+On goods bought online and sent from Great Britain, yes: Revenue says they owe customs duty and VAT, plus the €2 EU handling fee since 1 November 2026. The shop may charge them at checkout; if not, you pay them before delivery. Goods based in Northern Ireland or another EU country when you order them owe no customs duty or handling fee.
 
 ### What does "Your item arrived abroad" mean?
 
@@ -103,7 +103,7 @@ Lodge it with An Post Customer Services through the enquiry form for missing, da
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – administration fees vary
 - [Revenue: How to locate your goods](https://www.revenue.ie/en/customs/individuals/buying-online-personal/locate-your-goods.aspx) – delays, invoice requests, return to sender
 - [Revenue: Fraudulent emails, SMS and phone calls](https://www.revenue.ie/en/customs/individuals/buying-online-personal/fraudulent-requests.aspx) – no links in An Post texts, no Revenue payment links
-- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – Great Britain included, €2 fee from 1 November 2026, checkout or delivery, Northern Ireland and EU
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – Great Britain included, €2 fee since 1 November 2026, checkout or delivery, Northern Ireland and EU
 - [CCPC: Non-delivery of goods](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – the business is responsible, lost in transit
 - [Universal Parcel Scraper: An Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/an-post) – number format and check digit, mail from other posts, status wordings, relayed partner scans, expired numbers, what Peek reads
 :::

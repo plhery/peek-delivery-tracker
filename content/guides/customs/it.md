@@ -43,6 +43,8 @@ Quasi mai la dogana: comincia dal corriere (passo 4). Poste sdogana solo i pacch
 
 Poste non indica tempi. La Posta svizzera parla di tre o quattro giorni lavorativi, se tutte le informazioni sono complete e corrette; se ne mancano, fa degli accertamenti e il pacco può tardare. Nel suo blog per i venditori, [YunExpress](carrier:yunexpress) parla di tempi da qualche giorno lavorativo a oltre un mese, a seconda del controllo.
 
+Poste Italiane avvisa che, per problemi dovuti all'aggiornamento dei sistemi informatici doganali nazionali, le operazioni di sdoganamento delle spedizioni da Paesi extra-UE sono state «fortemente rallentate» e che Poste è stata «costretta a sospendere temporaneamente le operazioni di sdoganamento»: «al momento non è possibile stimarne i tempi di ripristino».
+
 Un pacco resta fermo più a lungo quando:
 
 - **la dichiarazione è incompleta o non conforme:** Poste mette il pacco nel magazzino di custodia temporanea e ti cerca per avere le informazioni che mancano. In quel caso ti chiede i diritti postali pieni, 21 €, anche per un pacco da pochi euro;
@@ -69,7 +71,7 @@ Per non dover ricaricare la pagina ogni ora, incolla il numero di tracciamento s
 
 Di solito perché IVA e dazio sulla merce arrivata dall'estero non sono stati pagati al momento dell'acquisto: allora li incassa il corriere, spesso con un compenso suo. Il conto ha fino a tre voci:
 
-1. **IVA**: in Italia di solito il 22%, calcolato su merce, spedizione e dazio; in Svizzera l'8,1%, o il 2,6% per esempio per libri, integratori, piante e medicinali. Va allo Stato.
+1. **IVA**: in Italia di solito il 22%, calcolato su merce, spedizione, dazio e, se dovuta, tassa di gestione dell'Unione; in Svizzera l'8,1%, o il 2,6% per esempio per libri, integratori, piante e medicinali. Va allo Stato.
 2. **Dazio**: nell'UE, dal 1° luglio 2026, 3 € per articolo fino a 150 €, e sopra quella cifra il dazio ordinario; in Svizzera si calcola sul peso lordo. Anche questo è un tributo pubblico: nell'UE si riscuote per conto dell'Unione.
 3. **Il compenso del corriere** per lo sdoganamento: Poste lo chiama «diritti postali», la Posta svizzera «prezzo base sdoganamento». È un servizio, non una tassa. Poste precisa che il dazio, invece, non è un suo supplemento: lo riscuote per conto delle autorità.
 
@@ -85,7 +87,7 @@ Dove paghi dipende da cosa è successo al checkout:
 
 | Dove | Niente da pagare alla consegna se | Altrimenti paghi |
 | --- | --- | --- |
-| Italia | Hai già pagato tutto all'acquisto (Poste la chiama modalità PDDP), o è un regalo occasionale tra privati fino a 45 € | Dazio e IVA, più i diritti postali di Poste: fino a 150 €, 1 € online, oppure alla consegna 3 € fino a 22 € e 7 € oltre; sopra i 150 €, 18 € online o 21 € alla consegna |
+| Italia | Hai già pagato tutto all'acquisto (Poste la chiama modalità PDDP), o è un regalo occasionale tra privati fino a 45 € | Dazio, tassa di gestione dell'Unione e IVA, più i diritti postali di Poste: fino a 150 €, 1 € online, oppure alla consegna 3 € fino a 22 € e 7 € oltre; sopra i 150 €, 18 € online o 21 € alla consegna |
 | Ticino | Le imposte non superano i 5 franchi (merce, spedizione compresa, fino a CHF 62.–, o CHF 193.– con l'IVA ridotta), o è un regalo tra privati fino a CHF 100.–, senza alcol né tabacco | IVA e dazi, più il prezzo della Posta (IVA esclusa): CHF 13.– dall'UE o 16.– dagli altri Paesi, CHF 1.50 in meno pagando online, più il 3% del valore; massimo CHF 70.– senza IVA né dazi |
 
 Le cifre cambiano: controllale sulle pagine di [Poste](https://www.poste.it/ricevere-spedizioni-da-estero) e della [Posta](https://www.post.ch/it/ricezione/sdoganamento-all-importazione). Con un corriere espresso come [DHL](carrier:dhl-express) o UPS il compenso lo fissa il corriere: anche l'UDSC ricorda che le imprese di trasporto si fanno pagare lo sdoganamento.
@@ -95,7 +97,7 @@ Le cifre cambiano: controllale sulle pagine di [Poste](https://www.poste.it/rice
 Dal 1° luglio 2026 l'UE ha tolto l'esenzione dal dazio per le spedizioni fino a 150 € (regolamento (UE) 2026/382). Ora le spedizioni commerciali pagano un dazio fisso di 3 € per articolo, dove «articolo» vuol dire voce doganale (codice TARIC), non pezzo:
 
 - due magliette uguali: una voce, 3 €;
-- un libro e una sciarpa, 40 € in tutto: due voci, 6 €. Nell'esempio di Poste, con l'IVA al 22% su 46 € (10,12 €) e i diritti postali, il totale è 17,12 € pagando online o 23,12 € alla consegna.
+- un libro e una sciarpa, 40 € in tutto: due voci, 6 €. Nell'esempio di Poste, con la tassa di gestione dell'Unione (4 €), l'IVA al 22% su 50 € (11 €) e i diritti postali, il totale è 22 € pagando online o 28 € alla consegna.
 
 Dal 1° novembre 2026, secondo la Commissione europea, sugli acquisti online da fuori UE si paga anche la «tassa di gestione dell'Unione»: 2 € per articolo, che si sommano ai 3 €, valgono anche sopra i 150 € e non vengono mai rimborsati. Poi c'è il contributo italiano di 2 € a spedizione (legge 199/2025), che Poste elenca tra le spese di importazione: la sua partenza è stata rinviata più volte, l'ultima al 1° dicembre 2026 (decreto-legge 162/2026). In Ticino niente di tutto questo: la Svizzera non è nell'UE.
 
@@ -134,13 +136,14 @@ Per segnalare un falso:
 
 ## Cosa succede se non pago la dogana?
 
-- **Italia:** con Poste le spese di importazione si pagano al più tardi alla consegna, a casa o all'ufficio postale. Se non paghi e non ritiri il pacco, può [tornare al mittente](guide:returned-to-sender): le condizioni di Poste lo prevedono, e il tracking lo segue fino al «re-inoltro al mittente». Se avevi pagato online e la consegna non va a buon fine, Poste ti restituisce l'importo entro 90 giorni: fino alla consegna è solo un deposito cauzionale. Se ha calcolato male e hai pagato troppo, ti rimborsa la differenza; se la dogana accerta di più, paghi l'integrazione.
+- **Italia:** con Poste le spese di importazione si pagano al più tardi alla consegna, a casa o all'ufficio postale. Se non paghi e non ritiri il pacco, può [tornare al mittente](guide:returned-to-sender): le condizioni di Poste lo prevedono, e il tracking lo segue fino al «re-inoltro al mittente». Se avevi pagato online e la consegna non va a buon fine, Poste ti restituisce l'importo entro 80 giorni: fino alla consegna è solo un deposito cauzionale. Se ha calcolato male e hai pagato troppo, ti rimborsa la differenza; se la dogana accerta di più, paghi l'integrazione.
 - **Ticino:** hai 20 giorni per pagare online; dopo ricevi una QR-fattura e online non si può più. Non sei d'accordo con i costi? Contatta il Servizio clienti internazionale della Posta, per telefono o con il modulo di contatto. Per un ricorso valgono i termini dell'UDSC: 60 giorni dalla decisione d'imposizione per correggere i tributi doganali, l'indirizzo o il regime, cinque anni dalla fine dell'anno civile per l'IVA calcolata male, per esempio sul valore o sull'aliquota.
 
 :::sources
-- [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – Convenzione UPU, 3 € per articolo, IVA, diritti postali, PDDP, pagamento, notifiche con link, 21 € per dati mancanti, esempio del libro e della sciarpa, re-inoltro al mittente
+- [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – Convenzione UPU, 3 € per articolo, tassa di gestione dell'Unione, IVA, diritti postali, PDDP, pagamento, notifiche con link, 21 € per dati mancanti, esempio del libro e della sciarpa, re-inoltro al mittente
 - [Poste Italiane: FAQ invii internazionali, dazi e sdoganamento](https://www.poste.it/assistenza/faq-dogana) – Magazzino di Temporanea Custodia, 90 giorni, IVA dal 2021, fine dell'esenzione, regali fino a 45 €, controlli sanitari, sequestro
-- [Poste Italiane: Condizioni generali, gestione delle spese di importazione](https://www.media.poste.it/208f690c-5f5f-4388-bf4a-1bbb847f8d95/file/gestione-spese-importazione-cgs) – contributo della legge 199/2025, deposito cauzionale, rimborsi, ritorno al mittente
+- [Poste Italiane: Condizioni generali, gestione delle spese di importazione](https://www.media.poste.it/208f690c-5f5f-4388-bf4a-1bbb847f8d95/file/gestione-spese-importazione-cgs) – contributo della legge 199/2025, deposito cauzionale restituito entro 80 giorni, rimborsi, ritorno al mittente
+- [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi) – Ritardi sdoganamento
 - [Poste Italiane: Cerca spedizioni, legenda degli stati](https://www.poste.it/cerca/views/risultati-spedizioni.html) – In attesa di sdoganamento
 - [Poste Italiane: Come difendersi dalle truffe](https://www.poste.it/sicurezza-online/guide-per-operare-in-sicurezza/come-difendersi-dalle-truffe/) – cosa Poste non chiede mai, antiphishing@posteitaliane.it
 - [Polizia Postale: Segnala online](https://www.commissariatodips.it/segnalazioni/segnala-online/index.html) – segnalazione di phishing

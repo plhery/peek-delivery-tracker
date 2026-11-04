@@ -111,7 +111,7 @@ Seit 1. November 2026 erhebt die EU laut EU-Kommission bei Online-Bestellungen a
 
 Das hängt von deinem Land und von der Kasse ab:
 
-- **Deutschland:** Die 3 € Zoll bei Online-Bestellungen bis 150 € zahlst du laut DHL „in der Regel nicht bei der Zustellung“, sondern meist schon beim Kauf. Mit IOSS ist auch die Einfuhrumsatzsteuer im Preis.
+- **Deutschland:** Die 3 € Zoll bei Online-Bestellungen bis 150 € zahlst du laut DHL „in der Regel nicht bei der Zustellung“, sondern meist schon beim Kauf. Die 2 € Bearbeitungsgebühr pro Ware wird laut DHL „nicht bei der Zustellung bezahlt“, sondern ebenfalls meist beim Kauf. Mit IOSS ist auch die Einfuhrumsatzsteuer im Preis.
 - **Österreich:** Hat die Kasse die österreichische Umsatzsteuer berechnet (IOSS), fallen laut Post bis 150 € weder Einfuhrumsatzsteuer noch Importtarif an. Die 3 € Zoll gelten laut BMF aber auch für IOSS-Pakete.
 - **Schweiz:** Versandhändler (seit 2019) und Plattformen (seit 2025) mit mindestens CHF 100'000 Umsatz aus Kleinsendungen sind in der Schweiz selbst mehrwertsteuerpflichtig. Laut BAZG unterliegen dann auch ihre Lieferungen aus dem Ausland der Schweizer MWST, selbst kleine. Bei anderen Shops werden Abgaben bis CHF 5.– nicht erhoben.
 
@@ -156,7 +156,7 @@ Löst du ein Paket nicht aus, geht es in Deutschland nach den Fristen oben an de
 - [Zoll: Fragen und Antworten zu Sendungen aus einem Nicht-EU-Staat](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Fragen-Antworten/fragen-antworten.html) – Erstattung, Formular 0223, 3 Jahre
 - [Zoll: Phishing-Mails und gefälschte Bescheide](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Phishing-Mails-und-gefaelschte-Bescheide/phishing-mails-und-gefaelschte-bescheide_node.html) – verauslagte Einfuhrabgaben, nur Briefpost, Bundeskasse, Meldung
 - [DHL: Fragen zu Kosten](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-kosten.html) – 7,50 € Auslagepauschale, Barzahlung, Geschenke bis 45 €, IOSS
-- [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 3 € meist an der Kasse, Widerspruch beim Zollamt
+- [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 3 € Zoll und 2 € Bearbeitungsgebühr meist an der Kasse, Widerspruch beim Zollamt
 - [DHL: Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Zollstatus, einige Werktage, zwei Werktage auf den Brief, Rücksendung
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – keine Zahlung per SMS, phishing@dhl.com
 - [Verbraucherzentrale: Paketdienst-SMS, Vorsicht, Abzocke](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/paketdienstsms-vorsicht-abzocke-58988) – Fake-Beträge, Bank, Karte sperren

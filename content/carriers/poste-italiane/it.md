@@ -70,7 +70,7 @@ Poste prevede 2 tentativi a domicilio, al piano strada. Dopo il primo il portale
 
 **Cambiare la consegna.** Se il mittente ha attivato Scegli Tu, dal link puoi scegliere, una sola volta per spedizione, un altro giorno, un altro indirizzo in Italia, un ufficio postale o un Punto Poste, un vicino o il portiere, un luogo sicuro o il fermo del pacco mentre sei in vacanza. Con PostePlus, gratuito per chi vive in Italia e ha un account poste.it, ricevi notifiche e scegli indirizzo e giorni preferiti per i pacchi che il mittente ha abilitato.
 
-**Pacchi da fuori UE.** Gli oneri d'importazione si pagano alla consegna o in ufficio postale. La tariffa di sdoganamento di Poste per un bene commerciale è di 3,00 € fino a 22 €, 7,00 € fino a 1.000 € e 21,00 € oltre; dal 1° luglio 2026, secondo la Commissione europea, sulle spedizioni fino a 150 € si applica anche un dazio forfettario temporaneo di 3 € per articolo. Vedi [pacco fermo in dogana](guide:customs).
+**Pacchi da fuori UE.** Gli oneri d'importazione si pagano alla consegna o in ufficio postale, oppure prima, online, spendendo meno. La tariffa di sdoganamento di Poste per un bene commerciale è di 3,00 € fino a 22 €, 7,00 € fino a 150 € e 21,00 € oltre (online: 1,00 € fino a 150 €, 18,00 € oltre); dal 1° luglio 2026, secondo la Commissione europea, sulle spedizioni fino a 150 € si applica anche un dazio forfettario temporaneo di 3 € per articolo. Poste Italiane avvisa che, per problemi dovuti all'aggiornamento dei sistemi informatici doganali nazionali, le operazioni di sdoganamento delle spedizioni da Paesi extra-UE sono state «fortemente rallentate» e che Poste è stata «costretta a sospendere temporaneamente le operazioni di sdoganamento»: «al momento non è possibile stimarne i tempi di ripristino». Vedi [pacco fermo in dogana](guide:customs).
 
 ## Pacco Poste Italiane non arriva, smarrito o danneggiato
 
@@ -144,7 +144,8 @@ Chiama l'803 160 da rete fissa o il +39 06 4526 3160 da cellulare, dal lunedì a
 - [Poste Italiane: Carta dei servizi postali universali](https://www.media.poste.it/c919f7cf-8236-428e-82fc-f8b2be8428b8/web/carta-servizi-universali) – termini di reclamo Poste Delivery Standard, Posta4 vecchio nome della Posta Ordinaria, giacenza delle raccomandate
 - [Poste Italiane: Posta Ordinaria](https://www.poste.it/lettera/posta-ordinaria) – esito della consegna, anche per Postamail
 - [Poste Italiane: Nuove condizioni del Servizio Universale](https://www.poste.it/variazione-servizio-postale-universale) – fine di Posta1, Postapriority Internazionale in ufficio postale
-- [Poste Italiane: Receiving from abroad](https://www.poste.it/receiving-from-abroad) – oneri d'importazione, tariffe di sdoganamento
+- [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – oneri d'importazione, tariffe di sdoganamento, pagamento online
+- [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi) – Ritardi sdoganamento
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio temporaneo di 3 € per articolo dal 1° luglio 2026, fino a 150 €
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
 :::

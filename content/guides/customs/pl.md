@@ -105,7 +105,7 @@ Liczy się liczba różnych rodzajów towaru w paczce, a nie liczba sztuk. Przyk
 - koszulka, słuchawki i etui do telefonu: 9 euro;
 - trzy takie same koszulki: 3 euro.
 
-Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi do tego unijna opłata manipulacyjna: 2 euro za każdą pozycję, bez względu na wartość przesyłki. Jeśli sklep albo przewoźnik przerzuci ją na Ciebie, za koszulkę, słuchawki i etui cło i opłata wyniosą razem 15 euro zamiast 9. Na to wszystko nalicza się jeszcze VAT. Powyżej 150 euro obowiązują zwykłe stawki celne, a 2 euro i tak się dolicza.
+Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi do tego unijna opłata manipulacyjna: 2 euro za każdą pozycję, bez względu na wartość przesyłki. Jeśli sklep albo przewoźnik przerzuci ją na Ciebie, za koszulkę, słuchawki i etui cło i opłata wyniosą razem 15 euro zamiast 9. Na to wszystko nalicza się jeszcze VAT. Powyżej 150 euro obowiązują zwykłe stawki celne, a 2 euro i tak się dolicza. Przy paczkach Poczty Polskiej opłatę, tak jak cło i VAT, ponosi adresat: zależnie od rodzaju odprawy Poczta pobiera ją przed doręczeniem albo przy odbiorze i wpłaca do KAS.
 
 ## Czy płacę cło za zamówienia z Temu, Shein i AliExpress?
 
@@ -161,6 +161,7 @@ Gdy odmówisz przyjęcia paczki albo zapłaty, Poczta Polska odsyła ją do nada
 - [Your Europe: Przepisy i stawki VAT](https://europa.eu/youreurope/business/finance-and-tax/vat/vat-rules-rates/index_pl.htm) – 23%, 8% i 5%
 - [Komisja Europejska: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 euro od 1 listopada 2026
 - [Komisja Europejska: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 euro także przy IOSS, 2 euro za pozycję przy każdej wartości
+- [Poczta Polska: Nowe przepisy Unii Europejskiej. Tak działa nowa opłata za przesyłki spoza UE](https://media.poczta-polska.pl/releases/nowe-przepisy-unii-europejskiej-tak-dziala-nowa-oplata-za-przesylki-spoza-ue) – 2 listopada 2026: opłatę manipulacyjną ponosi adresat, pobierana przed doręczeniem lub przy odbiorze, wpłacana do KAS
 - [Poczta Polska: Uwaga na fałszywe wiadomości „Pocztex”](https://www.poczta-polska.pl/news/uwaga-na-falszywe-wiadomosci-pocztex-grozna-kampania-phishingowa/) – brak linków do płatności, oficjalne adresy śledzenia
 - [Poczta Polska: Uwaga! Oszuści podszywają się pod Pocztę Polską](https://www.poczta-polska.pl/news/uwaga-oszusci-podszywaja-sie-pod-poczte-polska-2/) – skrócone linki, 8080
 - [Poczta Polska: Poczta Polska ostrzega przed nowymi próbami oszustw i kampaniami phishingowymi](https://media.poczta-polska.pl/releases/poczta-polska-ostrzega-przed-nowymi-probami-oszustw-i-kampaniami-phishingowymi) – żądania dopłaty w innej walucie

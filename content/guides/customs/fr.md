@@ -94,7 +94,7 @@ Depuis le 1er juillet 2026, les achats en ligne hors UE de 150 € maximum paien
 - deux pantalons identiques : 3 € ; un pantalon et une paire de chaussures : 6 € ;
 - deux t-shirts de matières différentes (coton et soie) : 6 €.
 
-Depuis le 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par ligne de déclaration, comme les 3 €, selon la Commission européenne. La TVA se calcule aussi dessus. Au-delà de 150 €, ce sont les taux de droits normaux, plus ces 2 €. La « taxe petits colis » française, elle, a été abrogée au 1er juillet 2026. Rien de tout cela en Suisse.
+Depuis le 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par ligne de déclaration, comme les 3 €, selon la Commission européenne. La TVA se calcule aussi dessus. Au-delà de 150 €, ce sont les taux de droits normaux, plus ces 2 €. Avec La Poste, droits et frais se paient soit à la commande, sur le site du vendeur, soit à l'arrivée du colis, par toi : en ligne avant la livraison, au facteur ou au bureau de poste. La « taxe petits colis » française, elle, a été abrogée au 1er juillet 2026. Rien de tout cela en Suisse.
 
 ## Temu, Shein, AliExpress : vais-je payer des frais de douane ?
 
@@ -104,7 +104,7 @@ Depuis le 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par li
 - **Belgique :** si la TVA a été payée à l'avance à la boutique, les frais de bpost tombent à 0 €. Sinon, bpost encaisse les frais d'importation avant même de présenter le colis à la douane.
 - **Suisse :** TVA et droits dès que les taxes dépassent CHF 5.–, où que tu commandes. Depuis 2025, les plateformes qui font au moins CHF 100 000.– de chiffre d'affaires en petits envois doivent appliquer la TVA suisse (2019 pour la vente par correspondance). Si la commande entière dépasse le seuil mais pas chacun de ses colis, La Poste suisse dédouane sur la valeur totale quand elle repère un envoi groupé (« colis 1/5 », par exemple).
 
-Dans l'UE, les 3 € s'appliquent même si la boutique a encaissé la TVA (IOSS), précise la [douane française](https://www.douane.gouv.fr/fiche/droit-de-douane-forfaitaire-de-3-euros-sur-les-ventes-distance-de-biens-importes) : s'ils ne figurent pas dans ton total, ils peuvent t'être demandés à l'arrivée. Pour le trajet de ces commandes, lis [suivre un colis venu de Chine](guide:tracking-from-china). Ton colis voyage avec [Cainiao](carrier:cainiao) ou [YunExpress](carrier:yunexpress) ? Leur page explique leurs statuts de douane en anglais.
+Dans l'UE, les 3 € s'appliquent même si la boutique a encaissé la TVA (IOSS), précise la [douane française](https://www.douane.gouv.fr/fiche/mesures-e-commerce-europeennes) : s'ils ne figurent pas dans ton total, ils peuvent t'être demandés à l'arrivée. Pour le trajet de ces commandes, lis [suivre un colis venu de Chine](guide:tracking-from-china). Ton colis voyage avec [Cainiao](carrier:cainiao) ou [YunExpress](carrier:yunexpress) ? Leur page explique leurs statuts de douane en anglais.
 
 ## Comment reconnaître un faux SMS de frais de douane ?
 
@@ -146,9 +146,11 @@ Remboursements et contestations :
 - [Douane : Mon colis est bloqué](https://www.douane.gouv.fr/fiche/mon-colis-est-bloque) – transporteur, causes, livraison contre paiement, arnaques
 - [Douane : Nos conseils avant d'acheter sur internet](https://www.douane.gouv.fr/fiche/nos-conseils-avant-dacheter-sur-internet) – honoraires des transporteurs, TVA à l'achat ou à la livraison, IOSS, réclamation, remboursement
 - [Arcep : Résoudre un litige avec un opérateur postal](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – réclamation à La Poste, 36 31
-- [Douane : Droit de douane forfaitaire de 3 euros](https://www.douane.gouv.fr/fiche/droit-de-douane-forfaitaire-de-3-euros-sur-les-ventes-distance-de-biens-importes) – par ligne, IOSS, particuliers, non remboursable
+- [Douane : Mesures e-commerce européennes](https://www.douane.gouv.fr/fiche/mesures-e-commerce-europeennes) – 3 € et 2 € par article, même avec IOSS
+- [Douane : Principales questions et réponses autour du droit de douane forfaitaire de 3 euros](https://www.douane.gouv.fr/fiche/principales-questions-et-reponses-autour-du-droit-de-douane-forfaitaire-de-3-euros) – par ligne d'article, IOSS, ventes aux particuliers, non remboursable
 - [Douane : Taxe sur les petits colis](https://www.douane.gouv.fr/actualites/taxe-sur-les-petits-colis-point-dinformation-sur-sa-mise-en-oeuvre) – abrogée, franchise de 45 €
 - [Universal Parcel Scraper : La Poste / Colissimo](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – formalités en cours, terminées, suspendues faute de facture
+- [La Poste : Comment payer les frais de douane pour un colis de l'international](https://www.laposte.fr/conseils-pratiques/comment-payer-frais-de-douane-colis-international) – frais de traitement de 2 €, payés à la commande ou à l'arrivée, en ligne, au facteur ou au bureau de poste
 - [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – opposition, preuves, Signal Spam, 33700, phishing@laposte.fr
 - [bpost : Mon colis à la douane](https://www.bpost.be/fr/recevoir-colis/douane) – frais, cadeaux, 14 jours
 - [bpost : Les 3 € et 2 € par type de produit](https://www.bpost.be/fr/faq/quoi-correspondent-les-3-eu-et-2-eu-pour-chaque-type-de-produit-different-pour-les-colis-hors-ue) – exemples, non remboursables

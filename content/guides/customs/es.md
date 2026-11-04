@@ -99,7 +99,7 @@ Desde el 1 de julio de 2026 y hasta el 1 de julio de 2028, las compras online de
 
 Para Correos, dos cosas son el mismo tipo de producto si comparten clasificación arancelaria, descripción y origen. Cuenta la descripción que el remitente declaró al enviar, no la de tu factura: dos artículos que en la factura se llaman igual pueden pagar dos aranceles.
 
-Según la Comisión Europea, desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por tipo de producto, también en envíos de más de 150 €: la camiseta y el reloj pasan a 10 €. La AEAT ya ha convocado a las empresas para explicarles cómo la aplicará. El IVA va aparte y se calcula también sobre el arancel.
+Según la Comisión Europea, desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por tipo de producto, también en envíos de más de 150 €: la camiseta y el reloj pasan a 10 €. Se paga junto con el arancel y con sus mismas reglas, dice la AEAT: lo normal es que la cobre la tienda en la compra; si no, el transportista puede pedírtela con el arancel antes de entregarte el paquete. El IVA va aparte y se calcula también sobre el arancel.
 
 ## ¿Hay que pagar aduanas en AliExpress, Shein o Temu?
 
@@ -157,13 +157,12 @@ Si lo devuelves a la tienda:
 - [Correos: Gestiona tus trámites de aduanas a través de la app](https://www.correos.es/es/es/actualidad/2022/gestiona-facilmente-tus-tramites-de-aduanas-a-traves-de-la-app) – pagos de aduana en la App o la web de aduanas
 - [Correos Aduanas: Preguntas frecuentes](https://www.correosaduanas.es/webauth/correosAduanas/public/faq?lang=es) – declaración jurada, transferencia y devolución a origen
 - [Correos Aduanas](https://www.correosaduanas.es/) – 91 660 24 54
-- [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – arancel de 3 €, quién lo cobra, origen del envío, devoluciones
+- [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – arancel de 3 € y tasa de tramitación, quién los cobra, origen del envío, devoluciones
 - [Agencia Tributaria: Compras por Internet hasta 150 euros, preguntas frecuentes](https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Aduanas/Comerc_electron_PIPE/compras_internet/info_pag/hasta150euros/faq_particulares.pdf) – 21 %, trámite sin consultarte, consulta por número de envío, permisos, Canarias, Ceuta y Melilla, cuatro años, teléfonos
 - [Agencia Tributaria: Medios de información sobre dónde está mi paquete](https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Aduanas/Comerc_electron_PIPE/ayuda/Medios_Info_Paquete.pdf) – consulta, chat y cita telefónica
 - [Agencia Tributaria: Manual de la declaración H7](https://sede.agenciatributaria.gob.es/static_files/Sede/Procedimiento_ayuda/DB20/Modelo_H7.pdf) – regalos de hasta 45 € sin contar el envío
 - [Agencia Tributaria: Folleto Compras por Internet](https://sede.agenciatributaria.gob.es/static_files/Sede/Tema/Aduanas/Comerc_electron_PIPE/compras_internet/foll_compint.pdf) – lo que cobra la AEAT, reexpedición, destrucción, expediente
 - [Agencia Tributaria: Casos de suplantación](https://sede.agenciatributaria.gob.es/Sede/ayuda/consultas-informaticas/informacion-casos-phishing.html) – no pide datos por correo, SMS o Bizum
-- [Agencia Tributaria: Seminario sobre los cambios de noviembre](https://sede.agenciatributaria.gob.es/Sede/aduanas/novedades/2026/septiembre/25/seminario-web-operadores-sobre-cambios-producto_.html) – tasa de tramitación
 - [Agencia Tributaria Canaria: Formulario simplificado de importación para personas físicas](https://www3.gobiernodecanarias.org/tributos/atc/w/formulario-simplificado-de-importacion-para-personas-fisicas) – lo que entra en Canarias desde la Península, la UE o fuera de ella; IGIC solo por encima de 150 €; AIEM a partir de cualquier importe
 - [Agencia Tributaria Canaria: AIEM](https://www3.gobiernodecanarias.org/tributos/atc/w/aiem) – tipos del 5, el 10 y el 15 %
 - [BOE: Ley 20/1991, del Régimen Económico Fiscal de Canarias](https://www.boe.es/buscar/act.php?id=BOE-A-1991-14463) – artículo 14.11: sin IGIC hasta 150 €, salvo alcohol, perfumes y tabaco; artículos 67 y 73: el AIEM, solo para los bienes de su anexo, de cualquier procedencia y sin la exención de 150 €

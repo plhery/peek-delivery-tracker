@@ -98,7 +98,7 @@ Since 1 July 2026, online orders from outside the EU worth €150 or less pay �
 - two identical T-shirts: €3;
 - a notepad, a pen and a keyring: €9.
 
-Since 1 November 2026, Revenue says, a €2 EU handling fee per item is added: €15 for the notepad, pen and keyring. VAT comes on top. Above €150, normal duty rates apply, plus the €2 fee.
+Since 1 November 2026, Revenue says, a €2 EU handling fee per item is added: €15 for the notepad, pen and keyring. VAT comes on top. Above €150, normal duty rates apply, plus the €2 fee. If the shop didn't charge it at checkout, An Post or the courier asks for it, with the duty, before delivering.
 
 ## Do I have to pay customs on Temu or Shein orders?
 
@@ -153,7 +153,7 @@ In the UK, an unpaid parcel [goes back to the sender](guide:returned-to-sender) 
 - [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – £135, £39, the bill, about 3 weeks, refund forms
 - [GOV.UK: Report suspicious emails, websites and text messages](https://www.gov.uk/report-suspicious-emails-websites-phishing) – 7726
 - [Revenue: Removal of the de minimis relief](https://www.revenue.ie/en/customs/individuals/relief-low-value-consignments/index.aspx) – €3 per item
-- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 fee, checkout price, refunds
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 fee, paid at checkout or before delivery, refunds
 - [Revenue: Rules for duty relief on gift consignments](https://www.revenue.ie/en/customs/individuals/relief-gifts-low-value/rules-gifts.aspx) – €45 gifts
 - [Revenue: How to locate your goods](https://www.revenue.ie/en/customs/individuals/buying-online-personal/locate-your-goods.aspx) – who to contact, seizures
 - [Revenue: Fraudulent emails, SMS and phone calls](https://www.revenue.ie/en/customs/individuals/buying-online-personal/fraudulent-requests.aspx) – no payment links, never a link in An Post's texts

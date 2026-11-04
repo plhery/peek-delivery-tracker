@@ -29,16 +29,13 @@ GLS's English wordings, in the order a parcel meets them:
 
 | GLS says | What it means for you |
 | --- | --- |
-| `Preadvice` | GLS has the sender's data, not yet the parcel. |
+| `The parcel has not been handed over to GLS.` | GLS has the sender's data, not yet the parcel. |
 | `The parcel was handed over to GLS.` | GLS has it. |
-| `In transit` | Moving between GLS parcel centres. |
-| `Final parcel center` | At the centre that delivers it: delivery is next. |
-| `In delivery`, `The parcel is in delivery.` | In the GLS van, expected today. |
-| `Not delivered` | A delivery attempt failed, for example because nobody was home. |
+| `The parcel is in delivery.` | In the GLS van, expected today. |
 | `The parcel is ready for collection at the ParcelShop.` | Waiting for you at a ParcelShop or Parcelstation. |
-| `The parcel has been delivered.`, `Delivered` | Delivered to you or to someone who took it in for you, such as a neighbour. |
+| `The parcel has been delivered.` | Delivered to you or to someone who took it in for you, such as a neighbour. |
 
-GLS counts a ParcelShop arrival as delivered, though the parcel is still waiting for you there. `Preadvice` lasts until the sender hands the parcel over, so ask the sender.
+In between, scans say when the parcel reaches or leaves a GLS parcel centre or depot: it's on its way. If the driver missed you, Peek shows "Delivery attempted". GLS counts a ParcelShop arrival as delivered, though the parcel is still waiting for you there. `The parcel has not been handed over to GLS.` stays the latest step until the sender hands the parcel over, so ask the sender.
 
 ## GLS delivery times, ParcelShops and parcel lockers
 
@@ -82,7 +79,7 @@ You then see the status, each scan's town and country on a map, the expected day
 
 ### Where is my GLS package?
 
-GLS's tracking shows it once you enter the number and the recipient's postcode: `In delivery` means it's in the van today.
+GLS's tracking shows it once you enter the number and the recipient's postcode: `The parcel is in delivery.` means it's in the van today.
 
 ### What is the GLS Track-ID?
 

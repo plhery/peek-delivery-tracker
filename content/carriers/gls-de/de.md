@@ -31,15 +31,13 @@ In der englischen Sendungsverfolgung der GLS-Gruppe, aus der auch Peek liest, he
 
 | GLS schreibt | Was es für dich heißt |
 | --- | --- |
-| `Preadvice`, `The parcel has not been handed over to GLS.` | Der Versender hat GLS die Paketdaten übermittelt, GLS hat das Paket aber noch nicht. |
-| `In transit`, `The parcel was handed over to GLS.` | GLS hat das Paket und schickt es über seine Paketzentren. |
-| `Final parcel center` | Im Paketzentrum, von dem aus es zugestellt wird. Als Nächstes kommt die Zustellung. |
-| `In delivery`, `The parcel is in delivery.` | Im GLS-Fahrzeug, voraussichtlich im Laufe des Tages bei dir. |
-| `Not delivered` | Der Zustellversuch hat nicht geklappt, etwa weil niemand da war. |
+| `The parcel has not been handed over to GLS.` | Der Versender hat GLS die Paketdaten übermittelt, GLS hat das Paket aber noch nicht. |
+| `The parcel was handed over to GLS.` | GLS hat das Paket und schickt es über seine Paketzentren. |
+| `The parcel is in delivery.` | Im GLS-Fahrzeug, voraussichtlich im Laufe des Tages bei dir. |
 | `The parcel is ready for collection at the ParcelShop.` | Es wartet im Paketshop oder in der Paketstation, mit Frist. |
-| `Delivered`, `The parcel has been delivered.` | Zugestellt, an dich oder an jemanden, der es für dich angenommen hat, etwa einen Nachbarn. |
+| `The parcel has been delivered.` | Zugestellt, an dich oder an jemanden, der es für dich angenommen hat, etwa einen Nachbarn. |
 
-Verwirrend: GLS zählt die Lieferung in den Paketshop als zugestellt, das Paket wartet dort aber noch auf dich, und Peek zeigt diesen Schritt als „Abholbereit“. Adresse und Öffnungszeiten des Shops stehen in der Sendungsverfolgung von GLS. Bleibt `Preadvice` stehen, hat der Versender das Paket noch nicht übergeben: Frag ihn.
+Dazwischen melden die Scans, wenn das Paket ein Paketzentrum oder Depot von GLS erreicht oder verlässt: Es ist unterwegs. Hat der Fahrer dich nicht angetroffen, zeigt Peek „Zustellversuch“. Verwirrend: GLS zählt die Lieferung in den Paketshop als zugestellt, das Paket wartet dort aber noch auf dich, und Peek zeigt diesen Schritt als „Abholbereit“. Adresse und Öffnungszeiten des Shops stehen in der Sendungsverfolgung von GLS. Bleibt `The parcel has not been handed over to GLS.` stehen, hat der Versender das Paket noch nicht übergeben: Frag ihn.
 
 ## GLS Zustellung: Nachbar, Paketshop und Paketstation
 

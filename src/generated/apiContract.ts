@@ -7126,7 +7126,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^(?:[24]\\d{12}|7000\\d{9})$",
+        "pattern": "^(?:[2-5]\\d{12}|7000\\d{9})$",
         "confidence": "low"
       }
     ],
@@ -9657,7 +9657,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Slovenská pošta",
     "aliases": [
       "Slovak Post",
-      "Slovenska posta"
+      "Slovenska posta",
+      "Slovakia Post"
     ],
     "countries": [
       "SK"
@@ -10920,7 +10921,8 @@ export const CARRIER_CAPABILITIES = {
       "中華郵政",
       "Taiwan Post",
       "郵局",
-      "Chunghwa Post Co."
+      "Chunghwa Post Co.",
+      "Taiwan Post - Chunghwa Post"
     ],
     "countries": [
       "TW"
@@ -11612,7 +11614,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Sydney",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "direct-freight-express"
     },
     "trackingUrlTemplate": "https://www.directfreight.com.au/ConsignmentStatus.aspx?lookuptype=0&consignment_no={trackingNumber}",
     "linkRules": [
@@ -14641,6 +14643,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^(?:TX[A-Z]{2}|AMZB)\\d{9}TX$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^[A-Z]{4}\\d{9}TX$",
+        "confidence": "low"
       }
     ],
     "trackingUrlTemplate": "https://totalconecta.totalexpress.com.br/rastreamento?codigo={trackingNumber}",
@@ -18691,7 +18697,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jakarta",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "wahana"
     },
     "trackingUrlTemplate": "https://www.wahana.com/lacak-kiriman?noresi={trackingNumber}",
     "linkRules": [
@@ -47896,7 +47902,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Qatar",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "qatar-post"
     },
     "trackingUrlTemplate": "https://www.qatarpost.qa/TrackAndTrace?trackingNumber={trackingNumber}",
     "linkRules": [

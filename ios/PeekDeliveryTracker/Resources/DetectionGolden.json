@@ -33576,7 +33576,11 @@
       "correos-chile",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
+    ],
+    "asked": [
+      "fan-courier"
     ]
   },
   {
@@ -34351,10 +34355,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -34985,10 +34991,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -35028,10 +35036,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -35372,7 +35382,11 @@
       "correos-chile",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
+    ],
+    "asked": [
+      "fan-courier"
     ]
   },
   {
@@ -35478,10 +35492,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -35950,10 +35966,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -36011,6 +36029,21 @@
       "dpd-nl",
       "dpd-de",
       "chronopost"
+    ]
+  },
+  {
+    "input": "3282421860027",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "yunda",
+      "korea-post",
+      "econt",
+      "fan-courier"
+    ],
+    "asked": [
+      "fan-courier"
     ]
   },
   {
@@ -36644,10 +36677,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -36753,10 +36788,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -36768,10 +36805,12 @@
       "correos-chile",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "ukrposhta"
+      "ukrposhta",
+      "fan-courier"
     ]
   },
   {
@@ -36810,10 +36849,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -36850,11 +36891,13 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
       "ukrposhta",
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -37007,11 +37050,13 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
       "ukrposhta",
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -38124,10 +38169,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -38326,10 +38373,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -38924,7 +38973,11 @@
       "correos-chile",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
+    ],
+    "asked": [
+      "fan-courier"
     ]
   },
   {
@@ -38936,10 +38989,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -39524,10 +39579,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -45874,10 +45931,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -45928,11 +45987,13 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
       "ukrposhta",
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -46948,6 +47009,23 @@
       "inpost",
       "austrian-post",
       "ciblex"
+    ]
+  },
+  {
+    "input": "5300000000012",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "korea-post",
+      "econt",
+      "fan-courier"
+    ],
+    "asked": [
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -48231,10 +48309,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -48530,10 +48610,12 @@
       "delhivery",
       "yunda",
       "korea-post",
-      "econt"
+      "econt",
+      "fan-courier"
     ],
     "asked": [
-      "delhivery"
+      "delhivery",
+      "fan-courier"
     ]
   },
   {
@@ -86675,6 +86757,17 @@
     ]
   },
   {
+    "input": "LOJA000000018TX",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "total-express"
+    ],
+    "asked": [
+      "total-express"
+    ]
+  },
+  {
     "input": "LP00061214526423",
     "carrier": "unknown",
     "confidence": "low",
@@ -93883,6 +93976,14 @@
     "confidence": "high",
     "candidates": [
       "hrvatska-posta"
+    ]
+  },
+  {
+    "input": "RH082902857GB",
+    "carrier": "royal-mail",
+    "confidence": "high",
+    "candidates": [
+      "royal-mail"
     ]
   },
   {

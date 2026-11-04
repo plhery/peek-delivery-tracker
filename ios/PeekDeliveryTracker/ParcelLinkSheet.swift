@@ -975,6 +975,7 @@ private struct SharedParcelNumber: View {
     private func copy(_ value: String, carrier: CarrierID) {
         TrackingNumberCopy.copy(value, carrier: carrier)
         copiedNumber = value
+        AccessibilityNotification.Announcement(localizer.text("detail.copied")).post()
         Task {
             try? await Task.sleep(for: .seconds(2))
             if copiedNumber == value { copiedNumber = nil }

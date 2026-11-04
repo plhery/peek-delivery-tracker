@@ -46,7 +46,7 @@ Ecco cosa dicono i corrieri, e lo standard postale, sui codici che incontri più
 | [YunExpress](carrier:yunexpress) | `YT` + 16 cifre |
 | [4PX](carrier:4px) | `4PX` + 13 cifre + `CN`; 4PX non pubblica numeri di esempio, e il suo sito accetta da 5 a 50 lettere e cifre. Anche `LP` + 13 cifre + `CN` è probabilmente 4PX |
 | [Yanwen](carrier:yanwen) | Yanwen non pubblica numeri di esempio; i suoi pacchi hanno `BYS` + 9 cifre, oppure due lettere, 9 cifre e `YP` (spesso inizia con `UL` o `UK`). `YW`, tre lettere e 12 cifre è il suo servizio di consegna negli Stati Uniti |
-| [Cainiao](carrier:cainiao) (AliExpress) | Cainiao non descrive i suoi formati e come esempio mostra un numero postale che finisce con `HK`. Nei dati dei corrieri che usa Peek, `LP` o `CNG` + 14 cifre sono probabilmente Cainiao; `DOFR` o `CNFR` + 13 cifre + `HD` sono Cainiao |
+| [Cainiao](carrier:cainiao) (AliExpress) | Cainiao non descrive i suoi formati e come esempio mostra un numero postale che finisce con `HK`. Nei dati dei corrieri che usa Peek, `LP` + 14 cifre è probabilmente Cainiao; `CNG` + 14 cifre e `DOFR` o `CNFR` + 13 cifre + `HD` sono Cainiao |
 | [China Post](carrier:china-post), EMS | il formato postale che finisce con `CN`; i numeri EMS internazionali iniziano con `E` |
 
 ### Codice che inizia con YT, LP, 5P o 1Z: di chi è?

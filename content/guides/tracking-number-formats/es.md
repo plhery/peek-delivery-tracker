@@ -1,13 +1,13 @@
 ---
 title: ¿De qué empresa es este número de seguimiento?
-description: Cómo saber de qué empresa es un número de seguimiento por sus letras y su longitud: Correos, MRW, NACEX, TIPSA, InPost, UPS, DHL, Amazon o AliExpress.
+description: Pega tu número de seguimiento y mira de qué empresa es tu paquete, o reconócela por el formato: Correos, SEUR, GLS, NACEX, InPost, UPS o Amazon.
 slug: que-empresa-es-numero-de-seguimiento
 picture: Tres etiquetas con números de seguimiento divididos en colores, una lupa sobre el código de país CH y Pip, curioso.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
-Las letras y la longitud de un número de seguimiento suelen decirte qué empresa tiene tu paquete. `1Z` seguido de 16 letras y cifras es UPS, y un código de 13 caracteres como `RR000000005CH` (dos letras, nueve cifras, dos letras) suele ser de Correos o de otro operador postal: las dos últimas letras dicen qué país lo emitió, y `ES` es España. Los números que solo llevan cifras son el caso difícil: 12, 14 o 22 cifras encajan con varias empresas, así que la última palabra la tiene el correo de envío de la tienda, o una web de seguimiento que pruebe con todas las candidatas.
+Pega tu número de seguimiento en la casilla de abajo y verás de qué empresa es: Peek reconoce al transportista por la forma del número, y con «Seguir tu paquete» ves dónde está. Si sale «Podría ser», esa forma la usan varias empresas, y la buena es la que nombra el correo de envío de la tienda; si pegas un número de pedido de Amazon, Shein o Temu, te dice dónde está el de seguimiento. A ojo, las letras y la longitud suelen bastar: `1Z` y 16 letras o cifras es UPS, `0000/00000000` es NACEX, y 13 caracteres como `RR000000005ES` (dos letras, nueve cifras, dos letras) son casi siempre un número postal, de Correos si acaba en `ES`. Los números que solo llevan cifras son el caso difícil: 12, 14 o 22 cifras encajan con varias empresas.
 
 :::checker
 :::
@@ -23,7 +23,7 @@ Cuatro comprobaciones, en este orden:
 - Prueba con los candidatos | Introduce el número en la web de cada transportista posible. El que muestre movimientos de ese número tiene tu paquete.
 :::
 
-Si prefieres ahorrarte el trabajo de detective, pega el número, un enlace del transportista o el correo de envío entero en [Peek](/): encuentra el número y detecta el transportista entre más de 3500. Es lo que hace un [localizador universal de paquetes](guide:universal-tracker).
+La casilla de arriba hace por ti las dos primeras comprobaciones, y también lee un enlace del transportista o el correo de envío entero. Cuando sigues el paquete, [Peek](/) hace la cuarta: pregunta por turnos a los transportistas más probables, entre más de 3500. Es lo que hace un [localizador universal de paquetes](guide:universal-tracker).
 
 ## El formato del número de seguimiento en cada empresa
 
@@ -33,32 +33,36 @@ Esto es lo que dicen las empresas y la norma postal sobre los números que más 
 
 | Empresa | Cómo es el número |
 | --- | --- |
-| [Correos](carrier:correos-spain) | «código de envío». Su ayuda no da formato; según esos datos, es el formato postal acabado en `ES`, o 16 o 23 caracteres que empiezan por `P` o `D` más otra letra (como `PQ`) y acaban en letra. Te llega por correo electrónico, por SMS o por ambos, y en el aviso de llegada |
-| [Correos Express](carrier:correos-express) | su ayuda no da formato; según esos datos, 16 o 23 cifras |
-| [SEUR](carrier:seur) | según esos datos, suelen ser 14 o 21 cifras, y un código de 7 cifras también sirve; las de 14 también encajan con DPD, BRT y otros |
-| GLS | su página de seguimiento no da longitud y pide también el código postal de destino |
+| [Correos](carrier:correos-spain) | «código de envío»; te llega por correo electrónico, por SMS o por ambos, y en el aviso de llegada. Su ayuda no da formato; según esos datos, el de un paquete tiene 23 caracteres y acaba en una letra de control (más abajo), el de una expedición entera tiene 16, y también hay `PR`, 15 cifras y `C`, o el formato postal acabado en `ES` |
+| [Correos Express](carrier:correos-express) | su ayuda no da formato; según esos datos, 16 o 23 cifras, la última de control |
+| [SEUR](carrier:seur) | según esos datos, suelen ser 14 o 21 cifras, y su número corto de expedición, de 7 cifras, también sirve; las de 14 también encajan con DPD, BRT y otros. Algunas tiendas dan una referencia de 22 cifras que empieza por la fecha (el año con sus cuatro cifras, el día y el mes), y `REC` y 12 cifras es la referencia de una recogida |
+| GLS | su página de seguimiento no da longitud y pide también el código postal de destino; según esos datos, suelen ser 10 cifras que empiezan por `1`, o 18 cifras, longitudes que comparten otras empresas |
 | MRW | «número de envío», en el justificante si enviaste desde una oficina MRW. En la etiqueta de ejemplo de MRW sale con 12 cifras bajo el código de barras y, junto a «N.º Etiqueta», partido en 5 cifras, una barra y 7 cifras: quita la barra antes de buscarlo. En paquetes de MRW se ha visto también la forma de 5 cifras, una letra y 6 cifras, que las páginas de MRW no muestran |
 | [NACEX](carrier:nacex) | el localizador pide la expedición en dos casillas, «Agencia» y «Albarán»; su portada pone de ejemplo `0000/00000000` y esos datos reconocen 4 cifras, una barra y 8 cifras, aunque NACEX no publica una longitud fija |
 | TIPSA | «número de envío compuesto por 22 dígitos», junto con el código postal de destino. Son dos códigos de agencia y el albarán de 10 cifras; el albarán suelto no sirve |
 | [CTT Express](carrier:ctt-express) | «código de envío»; según esos datos, 22 cifras: `00`, cuatro cifras, `00` y 14 cifras más, o 25 cifras con un contador de bultos al final. Si empieza por `00001000`, puede ser también de TIPSA |
 | [Mondial Relay](carrier:mondial-relay) | número de envío de 8 cifras, que se busca junto con el código postal del destinatario; su web belga acepta también 10 y 12 cifras, que según esos datos son un código de marca y ese número, más el número de bulto en las de 12. Esos datos reconocen también el código de barras de 26 cifras de la etiqueta por sus dos dígitos de control |
-| InPost (Punto Pack, Locker) | «número de expedición»; el ejemplo de su localizador tiene 8 caracteres. La web de Mondial Relay en España ya lleva a la de InPost |
-| Ecoscooting | según esos datos, `CNESP` y 20 cifras |
+| [InPost](carrier:inpost) (Punto Pack, Locker) | «número de expedición»; el ejemplo de su localizador tiene 8 caracteres, y según esos datos hay también números con `FV` y 8 cifras. La web de Mondial Relay en España ya lleva a la de InPost |
+| [Ecoscooting](carrier:ecoscooting) | según esos datos, `CNESP` y 20 cifras; uno de 18 cifras también puede ser suyo |
 | [Paack](carrier:paack) | su seguimiento pide el número de pedido o el del código de barras de la etiqueta, junto con el código postal de entrega. Según esos datos, casi siempre es el número de pedido de la tienda o el código de barras, sin formato fijo, así que puede parecerse al número de otra empresa. Hay tres excepciones: `PK` y 18 cifras es de Paack (paquetes que entrega para Evri International), `5340` y 14 cifras apunta primero a Paack, y un número de paquete de SHEIN (`C` o `E`, una fecha de seis cifras y 8 cifras más) puede ser de Paack |
+| Amazon | en los datos de transportistas de Peek, `ES` seguido de 10 cifras o `TBA` seguido de 12; se explican más abajo |
+| [Vinted Go](carrier:vinted-go) | no publica formato; según esos datos, `VGS` y 13 o 14 cifras, o 16 cifras que empiezan por `17` o `18`, la última de control. Si tu paquete de Vinted va con otra empresa, lleva el número de esa empresa: mira el [seguimiento de envío Vinted](guide:vinted-orders) |
+| [Sending](carrier:sending) | su buscador pide «el código de tu envío»; según esos datos, 12 cifras, la misma longitud que MRW, FedEx y otras |
+| [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (DHL Parcel) | según esos datos, 10 cifras, como DHL Express, GLS o TIPSA, o dos letras, 7 cifras y un `0` |
 | [UPS](carrier:ups) | `1Z` y 16 letras o cifras, 18 caracteres en total, como `1Z999AA10123456784`, un ejemplo con un dígito de control de UPS válido |
+| [FedEx](carrier:fedex) | según esos datos, 12 cifras, o 15, la última de control; las de 12 encajan también con MRW, Mondial Relay y Sending |
 | [DHL Express](carrier:dhl-express) | 10 cifras, nunca letras, según DHL Express en los Países Bajos |
 | [4PX](carrier:4px) | `4PX`, 13 cifras y `CN`; 4PX no publica ningún número de ejemplo, y su web acepta de 5 a 50 letras y cifras. `LP`, 13 cifras y `CN` es probablemente de 4PX |
 | [Yanwen](carrier:yanwen) | Yanwen no publica ningún número de ejemplo; sus paquetes llevan `BYS` y 9 cifras, o dos letras, 9 cifras y `YP` (suele empezar por `UL` o `UK`). `YW`, tres letras y 12 cifras es su reparto propio en Estados Unidos |
-| AliExpress, [Cainiao](carrier:cainiao) | Cainiao no describe sus números; según esos datos, `DOFR` o `CNFR`, 13 cifras y `HD` es de Cainiao, y `LP` y `CNG` se explican justo abajo |
+| AliExpress, [Cainiao](carrier:cainiao) | Cainiao no describe sus números; según esos datos, son de Cainiao `DOFR` o `CNFR`, 13 cifras y `HD`, y `CNG` o `AP` y 14 cifras. `LP` se explica justo abajo |
 | [YunExpress](carrier:yunexpress) | Yuntrack pide el número que empieza por `YT`, sin decir cuántas cifras lleva; según esos datos, `YT` y 16 cifras. `YT` y 13 cifras es YTO Express; `YT`, 9 cifras y `GB` es un envío postal de Royal Mail |
 | [China Post](carrier:china-post), EMS | el formato postal acabado en `CN`; los números EMS internacionales empiezan por `E` |
-| Amazon | en los datos de transportistas de Peek, `ES` seguido de 10 cifras o `TBA` seguido de 12; se explican más abajo |
 
 ### Número de seguimiento que empieza por PQ, PK, LP o CNG
 
-Según los datos de transportistas citados arriba, un código de 16 o 23 caracteres que empieza por `P` o `D` seguida de otra letra (como `PQ` o `PK`) y acaba en letra es de Correos. La ayuda de Correos no describe estos códigos, pero el único ejemplo que enseña encaja: en su página sobre el envío de equipaje para viajeros de Renfe, el código de la columna «PK» empieza por esas dos letras y tiene 23 caracteres.
+Según los datos de transportistas citados arriba, el código de un paquete de Correos tiene 23 caracteres: dos de producto (como `PQ`, `PK` o `PH` en los paquetes; en las devoluciones, el primero es una `D`), cuatro más de la etiqueta, 16 cifras y una letra de control, como el inventado `PQ0A1B1234567891234567B`. El de una expedición entera tiene 16: los 15 primeros del código del paquete y otra letra de control. La ayuda de Correos no describe estos códigos, pero el único ejemplo que enseña encaja: en su página sobre el envío de equipaje para viajeros de Renfe, el código de la columna «PK» empieza por esas dos letras y tiene 23 caracteres.
 
-En esos mismos datos, `LP` o `CNG` seguidos de 14 cifras apuntan a AliExpress y Cainiao, pero solo como posibilidad: Cainiao no describe sus números en su centro de ayuda.
+En esos mismos datos, `CNG` y 14 cifras es de AliExpress y Cainiao, y `LP` y 14 cifras apunta a ellos solo como posibilidad: Cainiao no describe sus números en su centro de ayuda.
 
 ## ¿Cuántas cifras tiene un número de seguimiento?
 
@@ -67,13 +71,13 @@ No hay una longitud única. Estas son las que dan las propias empresas en sus p�
 | Longitud | Quién la usa |
 | --- | --- |
 | 8 caracteres | InPost, en el ejemplo de su localizador; Mondial Relay (8, 10 o 12 cifras, según su web belga) |
-| 10 cifras | DHL Express; [DHL eCommerce Iberia](carrier:dhl-ecommerce-es); Mondial Relay |
+| 10 cifras | DHL Express; DHL eCommerce Iberia; Mondial Relay |
 | 12 cifras | MRW, en su etiqueta de ejemplo; Mondial Relay |
 | 13 caracteres | el formato postal (`…ES`, `…CN`, `…PT`) |
 | 18 caracteres | UPS (`1Z` y 16 letras o cifras) |
 | 22 cifras | TIPSA; CTT Express y CTT en Portugal, que también usan 25 |
 
-Correos, Correos Express y GLS no dan ninguna longitud en sus páginas de ayuda sobre el seguimiento, y MRW solo la enseña en su etiqueta de ejemplo. Para los números que solo llevan cifras, los datos de transportistas ofrecen candidatas, no certezas: 12 cifras encajan con MRW y Mondial Relay, entre otras; 14, con SEUR y varias redes de DPD; 16 o 23, con Correos Express.
+Correos, Correos Express y GLS no dan ninguna longitud en sus páginas de ayuda sobre el seguimiento, y MRW solo la enseña en su etiqueta de ejemplo. Para los números que solo llevan cifras, los datos de transportistas ofrecen candidatas, no certezas: 12 cifras encajan con MRW, Mondial Relay, Sending y FedEx, entre otras; 14, con SEUR y varias redes de DPD; 16, con Correos Express y Vinted Go; 23, con Correos Express.
 
 A veces el número no basta. GLS, TIPSA y Paack piden también el código postal de destino, y GLS lo dice tal cual: «introduce el número de seguimiento de GLS y el código postal de destino».
 
@@ -123,6 +127,8 @@ Si tiene 13 caracteres y acaba en dos letras, como `CN`, es un número postal de
 
 El número de pedido es la referencia de la tienda, no la del transportista: DHL recuerda que un número de seguimiento no es un número de pedido. Algunas referencias sí llevan al paquete, como la referencia alternativa de NACEX (hasta 10 cifras, en la etiqueta) o la «Referencia» de TIPSA, pero solo en su localizador y junto con los códigos de agencia y de cliente. Dónde está el número bueno, y qué hacer si no lo tienes: [dónde encontrar el número de seguimiento](guide:find-tracking-number).
 
+La casilla de arriba reconoce tres números de pedido que a menudo se confunden con el de seguimiento, y te dice dónde está este: Amazon (`000-0000000-0000000`, tres, siete y siete cifras), Shein (`GSH` y 12 letras o cifras) y Temu (`PO-000-` y 17 cifras). En Temu, toca «Rastrear» junto al pedido en «Tus pedidos»; más en [seguimiento de pedidos de Temu](guide:temu-orders).
+
 ## Por qué el número de seguimiento puede cambiar por el camino
 
 Un paquete que cruza una frontera suele cambiar de manos, y cada empresa puede imprimir su propia etiqueta. La UPU permite que el operador postal de destino añada su propio código de barras junto al original, siempre que no tenga el formato postal de 13 caracteres.
@@ -139,12 +145,17 @@ Un paquete que cruza una frontera suele cambiar de manos, y cada empresa puede i
 - **Amazon:** reparte la última milla desde sus estaciones logísticas con ayuda de sus proveedores de transporte.
 - **Paack:** a los paquetes que le pasa Evri International les da un número propio, `PK` y 18 cifras, que Evri International también conoce. Su propio seguimiento pide el número y el código postal de entrega.
 - **AliExpress con envío económico:** Cainiao dice que el seguimiento termina al entregar el paquete al transportista local, y que el vendedor puede decirte cómo contactar con ese transportista. Más en [seguir un paquete que viene de China](guide:tracking-from-china).
+- **Aduana:** desde el 1 de noviembre de 2026, los pedidos de fuera de la UE pagan una tasa de tramitación de 2 € por tipo de producto. Lo normal es que la cobre la tienda al comprar; si no, el transportista puede pedírtela antes de entregar. Más en [paquete retenido en aduanas](guide:customs).
+
+## El número de seguimiento no aparece o no funciona
 
 Un número que no devuelve nada no siempre está mal escrito. Correos Express avisa de que un envío recién registrado puede tardar unas horas en mostrar información, y te pide comprobar que el número «corresponde a Correos Express». CTT, en Portugal, da otros dos motivos: el código solo existe para la [aduana](guide:customs), u otra empresa entrega el envío. Si un número válido simplemente no se mueve todavía, lee [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
 :::sources
 - [UPU: norma S10, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – el formato postal, sus letras, el dígito de control, el código de país y el código de barras añadido en destino
 - [Correos: Código de envío](https://www.correos.es/es/es/atencion-al-cliente/recibir/codigo-de-envio) – correo electrónico, SMS y aviso de llegada; el ejemplo de 23 caracteres que empieza por PK
+- [Universal Parcel Scraper: Correos](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/correos-spain) – código de paquete de 23 caracteres, prefijos de producto, código de expedición de 16 y letra de control
+- [Universal Parcel Scraper: SEUR](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/seur) – número corto de expedición de 7 cifras, referencia de 22 cifras que empieza por la fecha, `REC` y 12 cifras de una recogida
 - [Correos Express: Seguimiento y entrega de tu envío](https://www.correosexpress.es/es/atencion-al-cliente/seguimiento-envio) – número que no funciona, envíos recién registrados
 - [GLS España: Seguimiento de envío](https://gls-group.com/ES/es/recibir-paquetes/seguimiento-envio/) – número de seguimiento y código postal de destino
 - [MRW: Seguimiento de envíos](https://www.mrw.es/seguimiento/) – el número de envío en el justificante
@@ -152,7 +163,7 @@ Un número que no devuelve nada no siempre está mal escrito. Correos Express av
 - [NACEX: Inicio](https://www.nacex.es/) – el ejemplo 0000/00000000 de la casilla de seguimiento
 - [NACEX: Seguimiento de envíos](https://www.nacex.es/irSeguimiento.do) – expedición en Agencia y Albarán, referencia alternativa de hasta 10 dígitos
 - [TIPSA: Localización de envíos](https://www.tip-sa.com/es/localizacion-envios) – 22 dígitos, código postal de destino, referencia e identificador
-- [InPost: Seguimiento del envío](https://www.inpost.es/seguimiento-del-envio/) – número de expedición, ejemplo de 8 caracteres
+- [InPost: Seguimiento del envío](https://www.inpost.es/seguimiento-del-envio) – número de expedición, ejemplo de 8 caracteres
 - [Mondial Relay España](https://www.mondialrelay.es/) – la dirección lleva a la web de InPost
 - [Universal Parcel Scraper: Mondial Relay](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/mondial-relay) – número de envío de 8 cifras con el código postal del destinatario, código de marca y número de bulto en las de 10 y 12, código de barras de 26 cifras y sus dos dígitos de control
 - [Mondial Relay Bélgica: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 o 12 cifras
@@ -168,5 +179,8 @@ Un número que no devuelve nada no siempre está mal escrito. Correos Express av
 - [Cainiao: centro de ayuda](https://global.cainiao.com/helpDoc.htm) – sin seguimiento tras la entrega al transportista local en el envío económico
 - [bpost: Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – los códigos que empiezan por U no se pueden seguir
 - [CTT: Encontrar o código de envio](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/encontrar-o-codigo-de-envio) – 22 o 25 cifras, códigos PT de envíos salidos de España, códigos que no devuelven nada
-- [Universal Parcel Scraper: catálogo de transportistas](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – las formas de Correos, Correos Express, SEUR, MRW, NACEX, CTT Express, Ecoscooting, Amazon, AliExpress, 4PX, Yanwen, YunExpress, YTO Express y Royal Mail en los datos de Peek
+- [Sending: Localiza tu envío](https://www.sending.es/localiza-tu-envio/) – «Introduce el código de tu envío», o tu referencia
+- [Comisión Europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de tramitación de 2 € desde el 1 de noviembre de 2026
+- [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – tasa de 2 € por categoría de artículos, que suele cobrar la plataforma al comprar o, si no, el transportista antes de entregar
+- [Universal Parcel Scraper: catálogo de transportistas](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – las formas de Correos (`PR` y 15 cifras y `C`), Correos Express, SEUR, GLS, MRW, NACEX, CTT Express, InPost (`FV`), Ecoscooting, Vinted Go, Sending, DHL eCommerce Iberia, FedEx, Amazon, AliExpress y Cainiao (`CNG`, `AP`, `LP`), 4PX, Yanwen, YunExpress, YTO Express y Royal Mail en los datos de Peek
 :::

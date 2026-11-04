@@ -4,10 +4,10 @@ description: An Anfang, Länge und Endung der Sendungsnummer erkennst du oft den
 slug: sendungsnummer-welcher-paketdienst
 picture: Drei Etiketten mit Sendungsnummern, in farbige Teile zerlegt, eine Lupe auf dem Ländercode CH, und Pip schaut neugierig zu.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
-Buchstaben und Länge einer Sendungsnummer verraten oft, welcher Paketdienst dein Paket hat. Beginnt sie mit `1Z` und hat 18 Zeichen, ist es UPS. 18 Ziffern ab `99`, gedruckt wie `99.34.123456.99999980`, kommen von der [Schweizerischen Post](carrier:swiss-post), und 13 Zeichen wie `RR000000005CH` (zwei Buchstaben, neun Ziffern, zwei Buchstaben) stammen meist von einer nationalen Post, deren Land in den letzten zwei Buchstaben steht. Schwierig wird es bei reinen Ziffern: 10, 14 oder 22 Stellen passen jeweils zu mehreren Paketdiensten. Dann entscheidet die Versandmail oder ein Tracker, der die infrage kommenden Paketdienste durchprobiert.
+Füge deine Sendungsnummer unten ins Feld ein: Peek erkennt an ihrer Form, welcher Paketdienst dein Paket hat, und mit „Dein Paket verfolgen“ siehst du, wo es gerade ist. Steht dort „Könnte sein“, nutzen mehrere Paketdienste diese Form, und der richtige ist der aus der Versandmail. Fügst du eine Bestellnummer von Amazon, Shein oder Temu ein, sagt dir das Feld, wo die Sendungsnummer steht. Oft reicht auch ein Blick: Beginnt die Nummer mit `1Z` und hat 18 Zeichen, ist es UPS; `H` plus 16 bis 19 Ziffern ist Hermes. 18 Ziffern ab `99`, gedruckt wie `99.34.123456.99999980`, kommen von der [Schweizerischen Post](carrier:swiss-post), und 13 Zeichen wie `RR000000005DE` (zwei Buchstaben, neun Ziffern, zwei Buchstaben) stammen meist von einer nationalen Post, deren Land in den letzten zwei Buchstaben steht, hier Deutschland. Schwierig wird es bei reinen Ziffern: 10, 12, 14 oder 22 Stellen passen jeweils zu mehreren Paketdiensten.
 
 :::checker
 :::
@@ -23,7 +23,7 @@ Vier Schritte, in dieser Reihenfolge:
 - Probier es aus | Gib die Nummer bei jedem Paketdienst ein, der infrage kommt. Der Paketdienst, der dazu Scans anzeigt, hat dein Paket.
 :::
 
-Keine Lust auf Detektivarbeit? Füge die Nummer, einen Link vom Paketdienst oder gleich die ganze Versandmail in [Peek](/) ein: Die Nummer wird herausgefischt und der Paketdienst unter mehr als 3.500 automatisch erkannt. Wie solche Tracker eine Nummer zuordnen, erklärt [Paketverfolgung aller Anbieter](guide:universal-tracker).
+Die ersten beiden Schritte nimmt dir das Feld oben ab, und es liest auch einen Link vom Paketdienst oder gleich die ganze Versandmail. Verfolgst du das Paket, macht [Peek](/) den vierten: Es fragt nacheinander die wahrscheinlichsten unter mehr als 3.500 Paketdiensten. Wie solche Tracker eine Nummer zuordnen, erklärt [Paketverfolgung aller Anbieter](guide:universal-tracker).
 
 ## Wie sieht eine Sendungsnummer von DHL, Hermes, DPD oder UPS aus?
 
@@ -41,7 +41,8 @@ Das schreiben die Paketdienste selbst und der internationale Poststandard über 
 | [GLS Deutschland](carrier:gls-de) | In Peeks Paketdienst-Daten 11 Ziffern, 12 Ziffern mit einer Prüfziffer am Ende oder 8 Zeichen aus Buchstaben und Ziffern, dazu die sechsstellige Track-ID von der Karte, wenn sie nur aus Buchstaben besteht |
 | [GLS Schweiz](carrier:gls-ch) | kein Format veröffentlicht, auch nicht von der Schweizerischen Post, die GLS-Pakete dort zustellt. In Peeks Paketdienst-Daten dieselben Formen wie bei GLS Deutschland |
 | [UPS](carrier:ups) | `1Z` plus 16 Buchstaben und Ziffern, 18 Zeichen insgesamt, etwa `1Z999AA10123456784`, ein Beispiel mit gültiger UPS-Prüfziffer |
-| [Österreichische Post](carrier:austrian-post) | 22 Ziffern ab `10` oder das Postformat aus zwei Buchstaben, neun Ziffern und `AT` |
+| [FedEx](carrier:fedex) | in Peeks Paketdienst-Daten 12 oder 15 Ziffern, jeweils mit einer Prüfziffer am Ende. 12 Ziffern passen auch zu DHL und GLS, 15 auch zu DPD |
+| [Österreichische Post](carrier:austrian-post) | ihre Hilfe zeigt als Beispiele 22 Ziffern ab `10` und eine Postnummer aus Deutschland, mit `DE` am Ende. In Peeks Paketdienst-Daten gehört das Postformat aus zwei Buchstaben, neun Ziffern und `AT` sicher zur Österreichischen Post, 22 oder 24 Ziffern nur vielleicht |
 | Schweizerische Post | 18 Ziffern ab `98` oder `99`, mit oder ohne Punkte und Leerzeichen: die Barcode-Nummer für Sendungen innerhalb der Schweiz, auf Paketen von Geschäftskunden gedruckt wie `99.34.123456.99999980`; oder das Postformat mit `CH` am Ende |
 | [Quickpac](carrier:quickpac) | 18 Ziffern, sagt Quickpac, aber nicht, wie sie beginnen. In Peeks Paketdienst-Daten: ab `44` |
 | [Planzer](carrier:planzer) | kein Format veröffentlicht. In Peeks Paketdienst-Daten 20 Ziffern ab `91346097`, eine geteilte Planzer-Sendung 13 Ziffern ab `99990` |
@@ -49,14 +50,14 @@ Das schreiben die Paketdienste selbst und der internationale Poststandard über 
 | [YunExpress](carrier:yunexpress) | `YT` + 16 Ziffern; `YT` + 13 Ziffern ist YTO Express |
 | [4PX](carrier:4px) | `4PX` + 13 Ziffern + `CN`. Ein Beispiel veröffentlicht 4PX nicht, seine Tracking-Seite nimmt 5 bis 50 Buchstaben und Ziffern an. `LP` + 13 Ziffern + `CN` ist wahrscheinlich auch 4PX |
 | [Yanwen](carrier:yanwen) | `BYS` + 9 Ziffern, oder zwei Buchstaben, 9 Ziffern und `YP`, oft ab `UL` oder `UK`. Ein Beispiel veröffentlicht Yanwen nicht. `YW`, drei Buchstaben und 12 Ziffern ist Yanwens eigener Zustelldienst in den USA |
-| [Cainiao](carrier:cainiao) (AliExpress) | `DOFR` oder `CNFR` plus 13 Ziffern und `HD`; `LP` oder `CNG` plus 14 Ziffern sind wahrscheinlich Cainiao, aber nicht sicher. So steht es in Peeks Paketdienst-Daten, Cainiao selbst beschreibt diese Formen nicht |
+| [Cainiao](carrier:cainiao) (AliExpress) | `DOFR` oder `CNFR` plus 13 Ziffern und `HD` sowie `CNG` oder `AP` plus 14 Ziffern sind Cainiao; `LP` plus 14 Ziffern ist wahrscheinlich Cainiao, aber nicht sicher. So steht es in Peeks Paketdienst-Daten, Cainiao selbst beschreibt diese Formen nicht |
 | [China Post](carrier:china-post), EMS | das Postformat mit `CN` am Ende. Internationale EMS-Nummern beginnen mit `E` |
 
 Bei Hermes merkst du sofort, wenn die Länge nicht stimmt. Die Sendungsverfolgung meldet dann `Sendungsnummer muss aus 14-20 Zeichen bestehen (Buchstaben, Zahlen).`
 
 ### Sendungsnummer beginnt mit JJD, 0034 oder H?
 
-Auf seinen Hilfeseiten nennt DHL nur die Länge, kein Format. In den Paketdienst-Daten, die Peek nutzt, gehören aber zu DHL: Nummern ab `JJD` (folgen genau 16 Ziffern, kommt auch InPost infrage), `JD` plus 18 Ziffern und 20 Ziffern ab `00340433`, `00340434` oder `00340435`. `H` plus 16 bis 19 Ziffern ist dort Hermes. Beginnt die Nummer mit `DE`, lies den Abschnitt zu Amazon.
+Auf seinen Hilfeseiten nennt DHL nur die Länge, kein Format. In den Paketdienst-Daten, die Peek nutzt, gehören aber zu DHL: Nummern ab `JJD` (folgen genau 16 Ziffern, kommt auch InPost infrage), `JD` plus 18 Ziffern und 20 Ziffern ab `00340433`, `00340434` oder `00340435`, dazu Postnummern ab `C`, `L` oder `R` mit `DE` am Ende, etwa `RR000000005DE`. `JD01` plus 16 Ziffern und `JJD0146` plus 14 Ziffern sind DHL Express. `H` plus 16 bis 19 Ziffern ist dort Hermes. Beginnt die Nummer mit `DE`, lies den Abschnitt zu Amazon.
 
 ## Wie viele Stellen hat eine Sendungsnummer?
 
@@ -65,8 +66,10 @@ Eine feste Länge gibt es nicht. Hier die Längen, die die Paketdienste selbst n
 | Länge | Wer sie nutzt |
 | --- | --- |
 | 10 Ziffern | DHL Express; bei DHL die kürzeste mögliche Länge |
+| 12 Ziffern | in Peeks Paketdienst-Daten FedEx, DHL und GLS, jeweils mit Prüfziffer |
 | 13 Zeichen | jede Post im Postformat, etwa `RR000000005CH` |
 | 14 Stellen | DPD; auch bei Hermes möglich |
+| 15 Ziffern | in Peeks Paketdienst-Daten FedEx; DPD, wenn hinter den 14 Ziffern eine Prüfziffer steht |
 | 18 Ziffern | Schweizerische Post, ab `98` oder `99`; Quickpac |
 | 20 Ziffern | DHL, in Peeks Paketdienst-Daten ab `00340433`, `00340434` oder `00340435` |
 | 22 Ziffern | Österreichische Post, ab `10`; USPS bei Paketen aus den USA |
@@ -117,6 +120,8 @@ Hat sie 13 Zeichen, also zwei Buchstaben, neun Ziffern und zwei Buchstaben, ist 
 
 Die Bestellnummer stammt vom Shop, und DHL erinnert daran, dass sie keine Sendungsnummer ist. Hast du nur eine Bestellnummer oder einen Code von der Benachrichtigungskarte, lies nach, [wo du die Sendungsnummer findest](guide:find-tracking-number).
 
+Drei Bestellnummern, die oft statt der Sendungsnummer eingefügt werden, erkennt das Feld oben und sagt dir, wo die Sendungsnummer steht: Amazon (`000-0000000-0000000`, drei, sieben und sieben Ziffern), Shein (`GSH` plus 12 Buchstaben oder Ziffern) und Temu (`PO-000-` plus 17 Ziffern). Bei Temu tippst du unter „Deine Bestellungen“ neben der Bestellung auf „Verfolgen“; mehr dazu unter [Temu-Sendungsverfolgung](guide:temu-orders).
+
 ## Warum sich die Sendungsnummer unterwegs ändern kann
 
 Ein Paket, das eine Grenze überquert, wechselt oft den Paketdienst, und jeder kann sein eigenes Etikett aufkleben. Die UPU erlaubt der Post im Zielland, neben die ursprüngliche Nummer einen eigenen Strichcode zu setzen, solange er nicht das 13-stellige Postformat hat.
@@ -132,6 +137,7 @@ Ein Paket, das eine Grenze überquert, wechselt oft den Paketdienst, und jeder k
 - **Postsendungen** sind der einfache Fall: Die UPU erlaubt nur eine S10-Nummer pro Sendung, deshalb funktioniert sie meist bei der Post im Absender- und im Empfängerland.
 - **Eine zweite Nummer der Post im Zielland** zeigt der UPU-Standard als Beispiel: Eine Importsendung bekommt dort zusätzlich `98.00.802077.23271453`, mit Punkten wie bei der Schweizerischen Post, und die Post verknüpft beide Nummern.
 - **AliExpress mit Economy-Versand:** Laut Cainiao endet die Sendungsverfolgung bei der Übergabe an den Paketdienst im Zielland, und der Verkäufer kann dir sagen, wie du diesen erreichst. Mehr dazu unter [Paket aus China verfolgen](guide:tracking-from-china).
+- **Zoll:** Seit dem 1. November 2026 kommt bei Online-Bestellungen von außerhalb der EU eine Bearbeitungsgebühr von 2 € pro Warenart dazu, bei jedem Warenwert. Laut DHL zahlst du sie nicht bei der Zustellung, sondern meist schon beim Kauf. In der Schweiz gilt sie nicht. Mehr dazu unter [Paket beim Zoll](guide:customs).
 
 ### Sendungsnummer ungültig oder nicht gefunden?
 
@@ -148,12 +154,14 @@ Findet die Sendungsverfolgung nichts, ist die Nummer nicht unbedingt falsch abge
 - [DPD Schweiz: Haftung für Versender](https://www.dpd.com/ch/de/supportcenter/alles-ueber-haftung/haftung-versender/) – Paketnummer mit 060
 - [GLS Österreich: Sendungsverfolgung](https://gls-group.com/AT/de/paket-verfolgen/) – Paketnummer und Track-ID auf der Benachrichtigungskarte
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – 1Z-Nummern und ihre Prüfziffer
-- [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – 22 Ziffern ab 10 oder Postformat mit AT
+- [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – Beispiele: 22 Ziffern ab 10 und eine Postnummer mit DE am Ende
 - [Schweizerische Post: Anleitung Barcode für Geschäftskunden](https://www.post.ch/-/media/post/gk/dokumente/1864-anleitung-barcodes-gk.pdf?sc_lang=de) – 18 Ziffern ab 99, die Punkte im Klartext
 - [Quickpac: FAQ (auf Englisch)](https://quickpac.ch/en/faq) – jedes Paket hat eine 18-stellige Nummer
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 Ziffern
 - [About Amazon Deutschland: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – Sendungsverfolgung unter „Meine Bestellungen“ mit „Lieferung verfolgen“
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – JJD, JD, 00340433 bis 00340435, H, TBA und Ländercode plus 10 Ziffern in Peeks Paketdienst-Daten, dazu YT + 16 Ziffern (YunExpress), YT + 13 Ziffern (YTO Express), 44 (Quickpac), 91346097 und 99990 (Planzer), DOFR, CNFR, LP und CNG (Cainiao), 4PX und LP + 13 Ziffern + CN (4PX), 98 und 99 (Schweizerische Post), BYS, YP und YW (Yanwen), die Formen von GLS Deutschland und GLS Schweiz sowie das Prüfzeichen hinter DPD-Nummern
+- [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 2 € Bearbeitungsgebühr je Warenart ab 1. November 2026, nicht bei der Zustellung bezahlt
+- [EU-Kommission: EU customs reform (auf Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € ab 1. November 2026
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – JJD, JD, 00340433 bis 00340435, Postnummern mit DE (DHL), JD01 und JJD0146 (DHL Express), AT am Ende sowie 22 und 24 Ziffern (Österreichische Post), 12 und 15 Ziffern (FedEx), H, TBA und Ländercode plus 10 Ziffern in Peeks Paketdienst-Daten, dazu YT + 16 Ziffern (YunExpress), YT + 13 Ziffern (YTO Express), 44 (Quickpac), 91346097 und 99990 (Planzer), DOFR, CNFR, AP, LP und CNG (Cainiao), 4PX und LP + 13 Ziffern + CN (4PX), 98 und 99 (Schweizerische Post), BYS, YP und YW (Yanwen), die Formen von GLS Deutschland und GLS Schweiz sowie das Prüfzeichen hinter DPD-Nummern
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – Nummern ab YT
 - [4PX: Global Order Tracking](https://track.4px.com/) – 5 bis 50 Buchstaben und Ziffern
 - [Yanwen: YW Tracking (auf Englisch)](https://track.yw56.com.cn/en/index) – Yanwens Tracking-Seite, kein Beispiel veröffentlicht

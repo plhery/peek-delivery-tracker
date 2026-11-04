@@ -47,7 +47,7 @@ Here's what the carriers and the postal standard say about the numbers you're mo
 | [YunExpress](carrier:yunexpress) | `YT` + 16 digits (`YT` + 13 digits is YTO Express) |
 | [Yanwen](carrier:yanwen) | `BYS` + 9 digits, or two letters, nine digits and `YP` (often starting `UL` or `UK`); Yanwen publishes no example number. `YW`, three letters and 12 digits is Yanwen's own US delivery service |
 | [4PX](carrier:4px) | `4PX` + 13 digits + `CN`; 4PX publishes no example number, and its site takes 5 to 50 letters and digits. `LP` + 13 digits + `CN` is likely 4PX too |
-| [Cainiao](carrier:cainiao), for AliExpress | no published format; its site takes letters and digits only, and its own example is a postal number ending `HK`. `LP` + 14 digits is likely Cainiao, though not certain, and so is `CNG` + 14 digits |
+| [Cainiao](carrier:cainiao), for AliExpress | no published format; its site takes letters and digits only, and its own example is a postal number ending `HK`. `LP` + 14 digits is likely Cainiao, though not certain, while `CNG` + 14 digits is Cainiao |
 | [China Post](carrier:china-post), EMS | the postal format ending `CN`; international EMS numbers start with `E` |
 | Amazon | `TBA`, `TBC` or `TBM` + 12 digits in Peek's carrier data, covered below |
 

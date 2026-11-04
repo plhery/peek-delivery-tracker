@@ -6,12 +6,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -75,6 +81,22 @@ class DeliveriesLinkTest {
         assertEquals(listOf("parcel"), front.get().views)
         assertEquals(emptyList<String>(), behind.get().views)
     }
+
+    @Test
+    fun aLinkThatComesWhileThePassportShowsBringsTheDeliveriesForwardWithItsParcel() {
+        val window = window()
+        compose.onNodeWithContentDescription("Passport").performClick()
+        settle()
+        assertTrue(exists(PeekTab.Passport.screen))
+
+        window.newIntent(link)
+        settle()
+        assertFalse(exists(PeekTab.Passport.screen))
+        assertEquals("parcel", window.get().views.last())
+        assertNull(window.get().inbox.parcel.value)
+    }
+
+    private fun exists(tag: String): Boolean = compose.onAllNodesWithTag(tag, useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
 
     @Test
     fun theWindowMadeAgainDoesNotOpenItsLinkAgain() {

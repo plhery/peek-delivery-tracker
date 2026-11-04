@@ -148,7 +148,8 @@ class HapticsDeviceTest {
 
         val lamp = DemoCards.parcel("Moon lamp")
         walk.onUi { inbox.follow(Intent(Intent.ACTION_VIEW, Uri.parse("${OAuthFlow.callbackScheme}://parcel/${lamp.id}"))) }
-        compose.waitUntil(LONG_MILLIS) { selected(PeekTab.Deliveries) && walk.shown() == lamp.id }
+        // Opened over the list, the parcel hides the bar, which TalkBack then doesn't reach: what shows says the tab.
+        compose.waitUntil(LONG_MILLIS) { walk.shown() == lamp.id && !walk.exists(PeekTab.Passport.screen) }
         compose.waitForIdle()
         assertOne("A-H01-link", selection())
     }

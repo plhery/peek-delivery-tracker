@@ -85,6 +85,11 @@ const SCHEDULED_RUN_BUDGET_MS = 4 * 60_000;
  * someone waits for first.
  */
 const MAX_ONE_OFF_PACKAGES_PER_SYNC = 10;
+/**
+ * And this many more of the ones nobody waits for, when the ones someone waits for fill the ten:
+ * their checks every 3 hours would otherwise wait as long as those keep coming due.
+ */
+const UNWATCHED_ONE_OFF_SHARE = 3;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */
 const MAX_UNSEEN_RECHECKS_PER_SYNC = 3;
 /** A one-off parcel stays on the schedule this long after one of its links was last opened. */
@@ -1450,7 +1455,8 @@ export class TrackingSyncService {
    * one owner, the followed ones first, each the least recently checked first,
    * so lookups cannot starve accounts. Nor can they stop them: when a list
    * cannot be read, the others are still checked. The ones someone waits for
-   * (`watched`: an alert on, or a link read in the last hour) go first.
+   * (`watched`: an alert on, or a link read in the last hour) go first, up to
+   * `limit`; the others take what is left, and `UNWATCHED_ONE_OFF_SHARE` at least.
    */
   private async oneOffPackages(
     followedDue: (parcel: JsonObject) => boolean,
@@ -1474,7 +1480,9 @@ export class TrackingSyncService {
     const unfiled = await list('list_unfiled_one_off_packages',
       () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS));
     const due = [...followed.filter(followedDue), ...unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel))];
-    return [...due.filter(watched), ...due.filter((parcel) => !watched(parcel))].slice(0, limit);
+    const waited = due.filter(watched).slice(0, limit);
+    const others = due.filter((parcel) => !watched(parcel));
+    return [...waited, ...others.slice(0, Math.max(limit - waited.length, UNWATCHED_ONE_OFF_SHARE))];
   }
 
   /**

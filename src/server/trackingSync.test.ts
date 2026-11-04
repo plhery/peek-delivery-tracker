@@ -2749,6 +2749,26 @@ describe('TrackingSyncService', () => {
     }
   });
 
+  it('checks three one-off parcels nobody waits for in a run that the ones someone waits for fill', async () => {
+    const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
+      sync_status: 'ok', user_id: null, one_off: true };
+    // In the order the database returns them: the least recently checked first. Nobody has
+    // read the first four for hours, so they are due every 3 hours, and long overdue.
+    const unread = Array.from({ length: 4 }, (_, index) => `unread-${index + 1}`);
+    const waited = Array.from({ length: 12 }, (_, index) => `alerted-${index + 1}`);
+    const client = fakeClient([]);
+    client.listFollowedOneOffPackages.mockResolvedValue([
+      ...unread.map((id) => ({ ...due, id, last_synced_at: '2026-09-10T03:00:00Z' })),
+      ...waited.map((id) => ({ ...due, id, last_synced_at: '2026-09-10T09:40:00Z' })),
+    ]);
+    client.listUnwatchedPackageIds.mockResolvedValue(unread);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-10T10:00:00Z'));
+    await service.sync();
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
+      .toEqual([...waited.slice(0, 10), ...unread.slice(0, 3)]);
+  });
+
   it('asks once for the copies of a number in a run and keeps them on one route', async () => {
     const routing = (preferred: string) => ({ version: 1, configured_carrier: 'unknown', failures: {}, probe_cursor: 0, discovery_cursor: 0,
       preferred_provider: preferred, preferred_number: 'TEST1234', last_success_at: '2026-09-10T11:00:00Z', last_probe_at: '2026-09-10T11:00:00Z' });

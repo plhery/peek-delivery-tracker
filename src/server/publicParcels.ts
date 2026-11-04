@@ -133,7 +133,7 @@ export function detectionLimits(env: Environment = process.env): { perClient: nu
   };
 }
 
-/** What was last reported about each overall allowance, and for which day or hour: once per period and process. */
+/** What this process last claimed to report about each overall allowance, and for which day or hour. */
 const reported = new Map<string, string>();
 
 /** An allowance shared by everyone without an account, or by every account. */
@@ -149,16 +149,22 @@ export interface OverallAllowance {
 
 /**
  * Says when an overall allowance is running out or used up: used up, everyone
- * who shares it is refused until its day or hour is over. An allowance of 0
- * was turned off on purpose and reports nothing.
+ * who shares it is refused until its day or hour is over. Each state is said
+ * once per day or hour by the first server to claim it, so a restart or
+ * another instance does not say it again; if the database cannot say, this
+ * server says it. An allowance of 0 was turned off on purpose and reports nothing.
  */
-export function reportOverallAllowance(allowance: OverallAllowance, used: number, usedUp: boolean, now: Date): void {
+export async function reportOverallAllowance(
+  service: SupabaseServiceClient, allowance: OverallAllowance, used: number, usedUp: boolean, now: Date,
+): Promise<void> {
   const { holder, kind, limit } = allowance;
   const state = usedUp ? 'used_up' : used >= limit * allowance.runningOut ? 'running_out' : null;
   if (state === null || limit === 0) return;
   const period = now.toISOString().slice(0, allowance.period === 'day' ? 10 : 13);
-  if (reported.get(`${holder}:${kind}:${state}`) === period) return;
-  reported.set(`${holder}:${kind}:${state}`, period);
+  const report = `${holder}:${kind}:${state}`;
+  if (reported.get(report) === period) return;
+  reported.set(report, period);
+  if (!await service.claimAllowanceReport(report, period).catch(() => true)) return;
   logOperationalEvent(holder === 'public' ? 'public_allowance' : 'account_allowance', { kind, state, used, limit },
     state === 'used_up' ? 'error' : 'warning');
   captureOverallAllowance(holder, kind, state, { used, limit }, now);
@@ -174,7 +180,7 @@ export async function claimLookup(service: SupabaseServiceClient, ip: string, no
     overall: { bucket: 'global', limit: limits.overall },
     network: network === null ? null : { bucket: network, limit: limits.perNetwork },
   });
-  reportOverallAllowance({ holder: 'public', kind: 'lookup', period: 'day', limit: limits.overall, runningOut: RUNNING_OUT },
+  await reportOverallAllowance(service, { holder: 'public', kind: 'lookup', period: 'day', limit: limits.overall, runningOut: RUNNING_OUT },
     claimed.overallUsed, !claimed.allowed && claimed.scope === 'global', now);
   return claimed;
 }
@@ -187,7 +193,7 @@ export async function claimDetection(service: SupabaseServiceClient, ip: string,
     limit: limits.perClient,
     overall: { bucket: 'detection', limit: limits.overall },
   });
-  reportOverallAllowance({ holder: 'public', kind: 'detection', period: 'day', limit: limits.overall, runningOut: RUNNING_OUT },
+  await reportOverallAllowance(service, { holder: 'public', kind: 'detection', period: 'day', limit: limits.overall, runningOut: RUNNING_OUT },
     claimed.overallUsed, !claimed.allowed && claimed.scope === 'global', now);
   return claimed;
 }

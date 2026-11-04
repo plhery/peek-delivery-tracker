@@ -729,6 +729,8 @@ Key JSON events:
 - `public_allowance`: an overall daily allowance without an account (`kind`: `lookup` or
   `detection`) is `running_out` at 80% or `used_up`, with `used` and `limit`.
   `account_allowance` says the same of the hourly allowance every account shares, at 50%.
+  Each state is logged and sent to Sentry once per day or hour, by the first server to
+  claim it in `private.allowance_reports`; if the database cannot say, a server reports it.
 - `delivery_email` (by `package_id`): how one delivery email ended, with its `stage`, `outcome` and
   `reason`; a refusal by the mail server adds `error_code` and `smtp_status`.
   `delivery_emails_capped` when emails were skipped for a daily allowance, and

@@ -164,6 +164,7 @@ beforeEach(() => {
   vi.spyOn(SupabaseServiceClient.prototype, 'updatePackage').mockResolvedValue(undefined);
   enqueue = vi.spyOn(SupabaseServiceClient.prototype, 'enqueueSyncJob').mockResolvedValue({ row: { id: 'job' }, queued: true });
   vi.spyOn(SupabaseServiceClient.prototype, 'ignoreTypedTrackingSupportCases').mockResolvedValue(0);
+  vi.spyOn(SupabaseServiceClient.prototype, 'claimAllowanceReport').mockResolvedValue(true);
 });
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 
@@ -395,6 +396,8 @@ describe('looking up a parcel without an account', () => {
     await lookup({ trackingNumber });
     expect(report.mock.calls.at(-1)).toEqual(['public', 'lookup', 'used_up', { used: 300, limit: 300 }, new Date('2026-11-05T10:00:00Z')]);
     expect(report).toHaveBeenCalledTimes(2);
+    expect(SupabaseServiceClient.prototype.claimAllowanceReport).toHaveBeenCalledTimes(2);
+    expect(SupabaseServiceClient.prototype.claimAllowanceReport).toHaveBeenLastCalledWith('public:lookup:used_up', '2026-11-05');
     // The next day it is said again.
     vi.setSystemTime(new Date('2026-11-06T00:00:01Z'));
     await lookup({ trackingNumber });
@@ -405,6 +408,22 @@ describe('looking up a parcel without an account', () => {
     claim.mockResolvedValue({ allowed: false, scope: 'global', overallUsed: 0 });
     await lookup({ trackingNumber });
     expect(report).toHaveBeenCalledTimes(3);
+  });
+
+  it('leaves a day’s allowance report to the server that claimed it first, and reports when the database cannot say', async () => {
+    const report = vi.spyOn(observability, 'captureOverallAllowance').mockReturnValue(null);
+    const claimReport = vi.mocked(SupabaseServiceClient.prototype.claimAllowanceReport).mockResolvedValue(false);
+    store();
+    vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-11-08T09:00:00Z') });
+    allow(250);
+    await lookup({ trackingNumber });
+    await lookup({ trackingNumber });
+    expect(report).not.toHaveBeenCalled();
+    expect(claimReport).toHaveBeenCalledExactlyOnceWith('public:lookup:running_out', '2026-11-08');
+    claimReport.mockRejectedValue(new Error('database unavailable'));
+    vi.setSystemTime(new Date('2026-11-09T09:00:00Z'));
+    await lookup({ trackingNumber });
+    expect(report.mock.calls).toEqual([['public', 'lookup', 'running_out', { used: 250, limit: 300 }, new Date('2026-11-09T09:00:00Z')]]);
   });
 
   it.each([

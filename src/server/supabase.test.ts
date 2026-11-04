@@ -376,6 +376,17 @@ describe('one-off parcels and their links', () => {
     });
   });
 
+  it('claims an allowance report for its period, and fails on an answer that is not a yes or no', async () => {
+    const client = service();
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce(true).mockResolvedValueOnce(false).mockResolvedValueOnce(null);
+    await expect(client.claimAllowanceReport('public:lookup:running_out', '2026-11-05')).resolves.toBe(true);
+    await expect(client.claimAllowanceReport('account:detection:used_up', '2026-11-05T10')).resolves.toBe(false);
+    await expect(client.claimAllowanceReport('public:lookup:used_up', '2026-11-05')).rejects.toThrow('whether to report');
+    expect(request.mock.calls[0]).toEqual(['/rest/v1/rpc/claim_allowance_report', {
+      method: 'POST', body: { p_report: 'public:lookup:running_out', p_period: '2026-11-05' },
+    }]);
+  });
+
   it('tells a stopped link from an unknown one, and counts what the maintenance pass ended', async () => {
     const client = service();
     const request = vi.spyOn(client, 'request')

@@ -43,7 +43,7 @@ export async function claimAccountTracking(service: SupabaseServiceClient, userI
   const limits = accountTrackingLimits(kind);
   const claimed = await service.claimAccountTracking(userId, kind, limits);
   const overallUsedUp = !claimed.allowed && claimed.scope === 'overall';
-  reportOverallAllowance({ holder: 'account', kind, period: 'hour', limit: limits.overall, runningOut: RUNNING_OUT },
+  await reportOverallAllowance(service, { holder: 'account', kind, period: 'hour', limit: limits.overall, runningOut: RUNNING_OUT },
     claimed.overallUsed, overallUsedUp, now);
   if (claimed.allowed) return;
   if (overallUsedUp) {

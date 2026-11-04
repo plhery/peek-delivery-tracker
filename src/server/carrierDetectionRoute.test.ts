@@ -39,6 +39,7 @@ beforeEach(() => {
   vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
   vi.stubEnv('TRUST_PROXY_HEADERS', 'true');
   vi.spyOn(SupabaseServiceClient.prototype, 'claimAccountTracking').mockResolvedValue({ allowed: true, scope: null, overallUsed: 0 });
+  vi.spyOn(SupabaseServiceClient.prototype, 'claimAllowanceReport').mockResolvedValue(true);
   vi.spyOn(SupabaseServiceClient.prototype, 'recordTrackingSupportObservation').mockResolvedValue(undefined);
   vi.spyOn(SupabaseServiceClient.prototype, 'savedLongerTrackingNumber').mockResolvedValue(false);
   vi.spyOn(console, 'log').mockImplementation(() => undefined);

@@ -15,6 +15,7 @@ beforeEach(() => {
   vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
   vi.spyOn(SupabaseAuthenticator.prototype, 'validate').mockResolvedValue({ id: userId, email: null, authenticatedAt: null, sessionId: null });
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
+  vi.spyOn(SupabaseServiceClient.prototype, 'claimAllowanceReport').mockResolvedValue(true);
 });
 afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 

@@ -2015,6 +2015,19 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
+   * Whether this server is the first to report an overall allowance's state for its UTC day
+   * (`2026-11-05`) or hour (`2026-11-05T10`); `report` is `holder:kind:state`.
+   */
+  async claimAllowanceReport(report: string, period: string): Promise<boolean> {
+    const result = await this.request('/rest/v1/rpc/claim_allowance_report', {
+      method: 'POST',
+      body: { p_report: report, p_period: period },
+    });
+    if (typeof result !== 'boolean') throw new SupabaseError('Supabase did not say whether to report the allowance');
+    return result;
+  }
+
+  /**
    * Counts one use by an account against this hour's allowance for every
    * account and the account's own for today (UTC). `scope` says which ran out,
    * and `overallUsed` how much of the hour's is used.

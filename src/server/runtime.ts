@@ -36,6 +36,13 @@ export function publicSupabaseOrigin(): string | null {
   return validHttpOrigin(value);
 }
 
+/** The Supabase origins a page may connect to: the one built into its scripts, and the configured public one. */
+export function pageSupabaseOrigins(): string[] {
+  const built = validHttpOrigin(process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() ?? '');
+  const configured = publicSupabaseOrigin();
+  return [...new Set([built, configured].filter((origin): origin is string => origin !== null))];
+}
+
 export function authConfiguration(): { url: string; publishableKey: string } | null {
   const url = process.env.SUPABASE_URL?.trim() ?? '';
   const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY?.trim()

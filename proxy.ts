@@ -7,7 +7,7 @@ import { APPEARANCE_BOOTSTRAP } from './src/lib/appearanceConfig';
 import { ENTRY_HINT_BOOTSTRAP } from './src/lib/entryHintConfig';
 import { isPageOnlyLanguage, LOCALE_COOKIE, PAGE_LANGUAGE_HEADER, pathLanguage } from './src/lib/locale';
 import { MAIL_LINK_BOOTSTRAP } from './src/lib/mailLinkConfig';
-import { publicSupabaseOrigin } from './src/server/runtime';
+import { pageSupabaseOrigins } from './src/server/runtime';
 import { legacyHostRedirect } from './src/server/siteHosts';
 
 // The app and the static documents (the privacy notice, the help page and the accessibility page) use this exact, fixed prepaint script.
@@ -30,9 +30,8 @@ export function proxy(request: NextRequest) {
 
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   const isDevelopment = process.env.NODE_ENV === 'development';
-  const supabaseOrigin = publicSupabaseOrigin();
   const analyticsOrigin = analyticsConfiguration()?.endpoint;
-  const connectSources = [...(analyticsOrigin ? [new URL(analyticsOrigin).origin] : []), "'self'", ...(supabaseOrigin ? [supabaseOrigin] : [])].join(' ');
+  const connectSources = [...(analyticsOrigin ? [new URL(analyticsOrigin).origin] : []), "'self'", ...pageSupabaseOrigins()].join(' ');
   const contentSecurityPolicy = `
     default-src 'self';
     base-uri 'none';

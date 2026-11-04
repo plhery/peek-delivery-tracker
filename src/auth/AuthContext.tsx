@@ -17,7 +17,7 @@ import { whenIdle } from '../lib/idle';
 import { rememberRequestedParcel } from '../lib/requestedParcel';
 import { browserStorage, clearApiCache } from '../store/apiRepo';
 import { holdsSignIn } from './savedSignIn';
-import { SessionStorage } from './sessionStorage';
+import { SessionStorage, sessionStorageKey } from './sessionStorage';
 import type { OidcConfig } from './authConfig';
 
 export interface AuthConfig {
@@ -137,7 +137,7 @@ export function AuthProvider({
   children: ReactNode;
 }) {
   const storage = useMemo(() => config?.url && !suppliedClient
-    ? new SessionStorage(`sb-${new URL(config.url).hostname.split('.')[0]}-auth-token`) : null,
+    ? new SessionStorage(sessionStorageKey(config.url)) : null,
   [config, suppliedClient]);
   const configured = Boolean(suppliedClient || (config?.url && config.publishableKey));
   // The client, once its SDK is here. Whatever needs it sooner asks for it, and waits.

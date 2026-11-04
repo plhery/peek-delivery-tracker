@@ -229,6 +229,18 @@ don't expire by default, so users stay signed in until they sign out or delete t
 account. Keep the access-token lifetime short (about an hour); refresh tokens carry the
 long session. If you enable time-box or inactivity limits, use at least 30 days.
 
+The browser saves the session under `sb-<first label of the Supabase host>-auth-token`, or under
+the key a saved sign-in already uses. So Supabase can move to another host without signing
+anyone out:
+
+1. Serve the new host next to the old one. Installed apps keep calling the address they were
+   built with, so the old host keeps answering.
+2. Add `https://<new host>/auth/v1/callback` to each provider's redirect URIs, then point the
+   provider redirect values in GoTrue (`GOTRUE_EXTERNAL_*_REDIRECT_URI`) at it. A provider
+   can keep the old callback, which works as long as the old host answers.
+3. Build the web and the apps with the new URL. Pages accept both the URL built into them and
+   `SUPABASE_PUBLIC_URL`.
+
 ## Checklist
 
 1. Request a code for a non-team address; the branded email arrives once.

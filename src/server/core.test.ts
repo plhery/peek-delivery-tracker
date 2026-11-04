@@ -27,6 +27,7 @@ import {
 import {
   authConfiguration,
   deliveryServiceConfigured,
+  pageSupabaseOrigins,
   publicSupabaseOrigin,
   serviceClient,
 } from './runtime';
@@ -51,6 +52,7 @@ import {
 const originalEnvironment = {
   SUPABASE_URL: process.env.SUPABASE_URL,
   SUPABASE_PUBLIC_URL: process.env.SUPABASE_PUBLIC_URL,
+  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY: process.env.SUPABASE_PUBLISHABLE_KEY,
   SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
@@ -89,6 +91,21 @@ describe('server runtime configuration', () => {
     expect(() => authConfiguration()).toThrow('required');
     expect(() => serviceClient()).toThrow('required');
     expect(deliveryServiceConfigured()).toBe(false);
+  });
+
+  it('lets pages reach the Supabase built into them and the configured public one', () => {
+    process.env.SUPABASE_URL = 'http://supabase.internal:8000/';
+    process.env.SUPABASE_PUBLIC_URL = 'https://supabase-old.example.com/';
+    process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://auth.example.com';
+    expect(pageSupabaseOrigins()).toEqual(['https://auth.example.com', 'https://supabase-old.example.com']);
+
+    process.env.SUPABASE_PUBLIC_URL = 'https://auth.example.com/';
+    expect(pageSupabaseOrigins()).toEqual(['https://auth.example.com']);
+
+    delete process.env.NEXT_PUBLIC_SUPABASE_URL;
+    delete process.env.SUPABASE_PUBLIC_URL;
+    delete process.env.SUPABASE_URL;
+    expect(pageSupabaseOrigins()).toEqual([]);
   });
 
   it('normalizes valid origins, prefers the public URL, and reuses the service client', () => {

@@ -34,7 +34,7 @@ enum Brand {
     // A sheet stands one step up from the page in dark: a ground of its own under raised rows, with its own controls
     // and lines (the web's `--sheet-*`). The ground is no brighter than the old dark page, so its words keep their
     // contrast. In light each is the page's own colour.
-    static let sheet = color(light: "#F4F5F1", dark: "#1A1713")
+    static let sheet = color(light: "#F4F5F1", dark: "#191612")
     /// A control in a sheet, where the page has the cream.
     static let sheetControl = color(light: "#F0F0E9", dark: "#36322C")
     /// A sheet's round buttons and its copy button: the ink at 7% in light, as on the page, and the control in dark.

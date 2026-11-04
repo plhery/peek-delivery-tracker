@@ -180,7 +180,8 @@ struct DeliveryPostageStamp: View {
             }
             .frame(width: 23 * unit, height: 23 * unit)
             .rotationEffect(.degrees(-12))
-            .opacity(0.8)
+            // A shade more ink in the dark keeps it as clear on every carrier's dark card as it was before.
+            .opacity(colorScheme == .dark ? 0.81 : 0.8)
             .position(x: 38 * unit, y: 36 * unit)
             .allowsHitTesting(false)
             // On a stamp that is being looked at, the postmark comes down: large and askew above the paper, then pressed home.

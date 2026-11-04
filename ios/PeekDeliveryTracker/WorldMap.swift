@@ -508,7 +508,8 @@ struct MapPalette {
             labelStrong: Brand.ink,
             labelBackground: adaptive(light: rgb(255, 255, 255, 0.84), dark: rgb(31, 28, 23, 0.82)),
             dotRing: ocean,
-            currentRing: Brand.paper,
+            // In the dark a paper ring would hardly part from the ocean, so the dot is cut out of the map instead.
+            currentRing: Brand.color(light: "#FFFFFF", dark: "#060504"),
             card: (Brand.color(light: "#55654B", dark: "#CFBFA3"), ocean)
         )
     }

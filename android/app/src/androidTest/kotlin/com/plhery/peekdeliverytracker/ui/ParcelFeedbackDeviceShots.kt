@@ -438,11 +438,12 @@ class ParcelFeedbackDeviceShots {
         val sent = walk.now()
         walk.advanceTo(sent + 100)
         assertEquals(ParcelFeedbackModel.Word.BackSent, word())
-        assertTrue(says("Thanks, noted. It helps Peek get this right."))
+        // The thanks are drawn under the words' sheet as it goes, and read once it has gone.
         walk.advanceTo(sent + 1_100)
         compose.waitForIdle()
         assertFalse(walk.exists(FEEDBACK_WORDS_SHEET))
         assertEquals(ParcelFeedbackModel.Word.BackSent, word())
+        assertTrue(says("Thanks, noted. It helps Peek get this right."))
         walk.shot("B-ST34-back-sent")
         assertEquals(ParcelFeedbackModel.Moment.Noted, moment())
         val request = requests().single().second

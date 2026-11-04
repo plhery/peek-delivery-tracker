@@ -156,9 +156,13 @@ class TurnstileSheetDeviceTest {
         val y = (top + from).toFloat()
         val down = SystemClock.uptimeMillis()
         var time = down
+        // A finger's, as a screen's touches are: WebView 91 (Android 12's image) didn't scroll under the default, no tool.
+        val finger = MotionEvent.PointerProperties().apply { id = 0; toolType = MotionEvent.TOOL_TYPE_FINGER }
         fun send(action: Int, at: Float) {
-            val event = MotionEvent.obtain(down, time, action, x, at, 0)
-            event.source = InputDevice.SOURCE_TOUCHSCREEN
+            val where = MotionEvent.PointerCoords().apply { this.x = x; this.y = at; pressure = 1f; size = 1f }
+            val event = MotionEvent.obtain(
+                down, time, action, 1, arrayOf(finger), arrayOf(where), 0, 0, 1f, 1f, 0, 0, InputDevice.SOURCE_TOUCHSCREEN, 0,
+            )
             instrumentation.sendPointerSync(event)
             event.recycle()
         }

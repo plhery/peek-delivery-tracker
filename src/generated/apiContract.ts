@@ -43095,7 +43095,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Seoul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "etomars",
+      "recognitionRank": 99,
+      "recognitionPattern": "^SN\\d{9}JP$"
     },
     "trackingUrlTemplate": "https://cbt.shipnergy.com/Track/Result?mode=0&ids={trackingNumber}",
     "linkRules": [
@@ -43996,7 +43998,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kuala_Lumpur",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "flickpost"
     },
     "trackingUrlTemplate": "https://flickpost.com/tracking/?trackingNumber={trackingNumber}",
     "linkRules": [

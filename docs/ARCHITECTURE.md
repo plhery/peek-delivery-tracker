@@ -244,8 +244,8 @@ Key server modules:
     input, so no email holds the server up. Each is added as the Add sheet adds it, with the same daily allowance and
     parcel limit, labelled with the sender's name; one the account follows already costs
     nothing. `src/server/parcelsFromText.ts` is that step.
-  - Gmail's request to confirm forwarding is kept for the owner to finish in Gmail, never
-    followed by the server: its code and a link only to Google's own hosts.
+  - Gmail's request to confirm forwarding is kept for three days for the owner to finish in
+    Gmail, never followed by the server: its code and a link only to Google's own hosts.
   - Each address takes `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
     them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` is service-role
     only.
@@ -458,7 +458,7 @@ and nothing typed is sent.
   parcel, so nothing is told twice.
 - **An email to a forwarding address** is read in memory and dropped. Its mailbox keeps
   when the last email came and what it did (the result and how many parcels it added), and
-  a Gmail confirmation until the next email. A new address replaces the old one; turning
+  a Gmail confirmation for three days. A new address replaces the old one; turning
   the setting off deletes the mailbox. Each day's count of emails is kept apart for seven
   days, so neither gives a new allowance.
 - **A connected assistant** is a grant: its name, where its answers go, the scopes, when it

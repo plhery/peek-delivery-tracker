@@ -69,8 +69,8 @@ begin
   end if;
   perform public.record_inbound_mail(one, 'added', 2);
   mailbox := public.inbound_mailbox(one);
-  if mailbox->>'confirmation_code' is not null or (mailbox->>'last_added')::int <> 2 then
-    raise exception 'A later email must clear the confirmation: %', mailbox;
+  if mailbox->>'confirmation_code' is distinct from '123456789' or (mailbox->>'last_added')::int <> 2 then
+    raise exception 'A later email must keep a recent confirmation: %', mailbox;
   end if;
   begin
     perform public.record_inbound_mail(one, 'confirmation', 0, null, 'https://example.test/phish');
@@ -113,6 +113,21 @@ begin
 end;
 $$;
 reset role;
+
+-- A later email drops a confirmation older than the three days it is shown.
+do $$
+declare
+  one constant uuid := 'e9000000-0000-4000-8000-000000000001';
+begin
+  perform public.record_inbound_mail(one, 'confirmation', 0, '123456789', 'https://mail-settings.google.com/mail/vf-example');
+  update private.inbound_mailboxes set confirmation_at = now() - interval '4 days' where user_id = one;
+  perform public.record_inbound_mail(one, 'none', 0);
+  if exists (select 1 from private.inbound_mailboxes where user_id = one
+      and (confirmation_code is not null or confirmation_link is not null or confirmation_at is not null)) then
+    raise exception 'A later email must clear a confirmation older than three days';
+  end if;
+end;
+$$;
 
 -- A new day gives a new allowance, and the first email of an hour forgets counts of over a week ago.
 update private.inbound_mail_days set day = day - 1;

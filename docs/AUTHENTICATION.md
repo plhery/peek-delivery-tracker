@@ -238,8 +238,10 @@ anyone out:
 2. Add `https://<new host>/auth/v1/callback` to each provider's redirect URIs, then point the
    provider redirect values in GoTrue (`GOTRUE_EXTERNAL_*_REDIRECT_URI`) at it. A provider
    can keep the old callback, which works as long as the old host answers.
-3. Build the web and the apps with the new URL. Pages accept both the URL built into them and
-   `SUPABASE_PUBLIC_URL`.
+3. Build the web and the apps with the new URL, and keep `SUPABASE_PUBLIC_URL` on the old host
+   for a while: pages accept both the URL built into them and `SUPABASE_PUBLIC_URL`, so tabs and
+   home-screen apps still running the previous build keep working.
+4. Once those have reloaded, set `SUPABASE_PUBLIC_URL` to the new host too.
 
 ## Checklist
 

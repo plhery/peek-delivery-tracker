@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-A GZYL (广州云链, Guangzhou Yunlian) teljes neve 广州云链货运代理有限公司: szállítmányozó cég a kínai Kantonban (Guangzhou). Ha egy kínai webáruház a GZYL-lel küldte el a rendelését, a nyomkövetési szám YL-lel kezdődik, ezt 10 számjegy követi, a végén pedig YQ áll: illessze be a fenti mezőbe. A Peek nem ismer GZYL-weboldalt, a GZYL nyomkövetője pedig csak egy IP-címen érhető el, domainnév nélkül. Amit ott lát, azt fenntartással kezelje: a GZYL a csomag útjának nagy részét előre rögzíti, így egy ott látható lépés, akár a `Delivered` is, nem mindig valódi beolvasás.
+A GZYL (广州云链, Guangzhou Yunlian) teljes neve 广州云链货运代理有限公司: szállítmányozó cég a kínai Kantonban (Guangzhou). Ha egy kínai webáruház a GZYL-lel küldte el a rendelését, a nyomkövetési szám YL-lel kezdődik, ezt 10 számjegy követi, a végén pedig YQ áll: illessze be a fenti mezőbe. A GZYL weboldala, a yunlianhouyun.com, kínai nyelvű, és csomagkeresője (小包查询) a GZYL nyomkövetőjét nyitja meg, amely csak egy IP-címen érhető el, domainnév nélkül. Amit ott lát, azt fenntartással kezelje: a GZYL a csomag útjának nagy részét előre rögzíti, így egy ott látható lépés, akár a `Delivered` is, nem mindig valódi beolvasás.
 
 ## A GZYL nyomkövetési száma
 
@@ -79,7 +79,7 @@ A GZYL-től a Peek nem talált sem szállítási időket, sem a kézbesítési k
 
 ## A GZYL elérhetőségei
 
-2026. október 30-án a Peek semmilyen elérhetőséget nem talált a GZYL-hez: sem weboldalt (a nyomkövetőn kívül), sem telefonszámot vagy e-mail-címet a címzettek számára. A szállítást az eladó rendelte meg, ezért a rendeléssel kapcsolatban őt kérdezze, ha pedig nem válaszol, azt a piacteret, ahol vásárolt.
+A 2026. november 4-i állapot szerint a GZYL kínai nyelvű weboldalának kapcsolati oldala (联系我们) egy éjjel-nappal hívható forródrótot, egy WeChat-fiókot és egy értékesítés utáni QQ-fiókot ad meg, de a címzetteknek semmit: ezek a csatornák a GZYL ügyfeleinek, vagyis az eladóknak szólnak. A szállítást az eladó rendelte meg, ezért a rendeléssel kapcsolatban őt kérdezze, ha pedig nem válaszol, azt a piacteret, ahol vásárolt.
 
 ## GZYL-csomagok követése a Peekkel
 
@@ -110,5 +110,7 @@ Lehet, hogy ez a GZYL tervének része. A GZYL a csomag útjának nagy részét 
 A Peek nem tudja: a GZYL lépései az Ön országában nem neveznek meg céget. Kérdezze meg az eladót, melyik cég kézbesíti a rendelését és milyen számon, majd adja hozzá ezt a számot a Peekhez külön csomagként. A Peek csak Svájcban és Liechtensteinben tudja egy GZYL-csomag követését maga átadni egy kézbesítő cégnek, a Swiss Postnak.
 
 :::sources
+- [广州云链货运代理有限公司 (GZYL): főoldal (kínaiul)](http://yunlianhouyun.com/) – a cég neve, kínai nyelvű weboldal, csomagkereső (小包查询) a GZYL nyomkövetőjéhez
+- [广州云链货运代理有限公司 (GZYL): 联系我们 (kapcsolat, kínaiul)](http://yunlianhouyun.com/contact.html) – éjjel-nappal hívható forródrót, WeChat és értékesítés utáni QQ
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – a cég neve és más nevei, a domainnév nélküli nyomkövető, az YL…YQ számforma mint gyenge támpont, a Xinghe Freight a GZYL nyomkövetőjén, keresés számra vagy hivatkozási számra és a kötőjelek, a lépések szövegei és állapotaik, a kínai nyelvű sorok, a települések a szövegek után, pekingi idő, az előre rögzített terv és az azt lezáró `Delivered`, a válasz ismeretlen számra, a Swiss Post mint egyetlen átadás, mit mutat, mit tart vissza és mit nem vesz át a Peek
 :::

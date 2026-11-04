@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, een expediteur in Guangzhou, China. Heeft een Chinese webshop je bestelling met GZYL verstuurd, dan bestaat je trackingnummer uit YL, tien cijfers en YQ: plak het in het vak hierboven. Peek kent geen website van GZYL, en de trackingpagina van GZYL draait op een IP-adres zonder domeinnaam. Neem die tracking met een korreltje zout: GZYL schrijft een groot deel van de reis van een pakket vooraf, dus een stap daar is niet altijd een scan, ook `Delivered` niet.
+GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, een expediteur in Guangzhou, China. Heeft een Chinese webshop je bestelling met GZYL verstuurd, dan bestaat je trackingnummer uit YL, tien cijfers en YQ: plak het in het vak hierboven. De website van GZYL, yunlianhouyun.com, is in het Chinees, en de pakketzoeker (小包查询) daar opent de trackingpagina van GZYL, die op een IP-adres zonder domeinnaam draait. Neem die tracking met een korreltje zout: GZYL schrijft een groot deel van de reis van een pakket vooraf, dus een stap daar is niet altijd een scan, ook `Delivered` niet.
 
 ## Trackingnummer van GZYL: hoe ziet het eruit?
 
@@ -79,7 +79,7 @@ Peek vond bij GZYL geen levertijden en geen regels over bezorgpogingen, afhaalpu
 
 ## GZYL: contact en klantenservice
 
-Toen Peek het op 30 oktober 2026 naging, vond het geen contactgegevens van GZYL: geen website naast de trackingpagina, en geen telefoonnummer of e-mailadres voor ontvangers. De verkoper heeft het pakket geboekt en is je aanspreekpunt voor de bestelling; antwoordt de verkoper niet, ga dan naar het platform waar je kocht.
+Toen Peek het op 4 november 2026 naging, noemde de contactpagina (联系我们) van GZYL's Chinese website een 24-uurs hotline, een WeChat-account en een QQ-account voor aftersales, maar niets voor ontvangers: die kanalen zijn voor de klanten van GZYL, de verkopers. De verkoper heeft het pakket geboekt en is je aanspreekpunt voor de bestelling; antwoordt de verkoper niet, ga dan naar het platform waar je kocht.
 
 ## Een GZYL-pakket volgen met Peek
 
@@ -110,5 +110,7 @@ Die stap kan deel uitmaken van de planning van GZYL. GZYL schrijft een groot dee
 Peek weet het niet: de stappen van GZYL in je land noemen geen bedrijf. Vraag de verkoper welk bedrijf je bestelling bezorgt en wat het trackingnummer daarvan is, en voeg dat nummer in Peek toe als apart pakket. Alleen in Zwitserland en Liechtenstein kan Peek een GZYL-pakket zelf aan Swiss Post doorgeven.
 
 :::sources
+- [广州云链货运代理有限公司 (GZYL): home (in het Chinees)](http://yunlianhouyun.com/) – bedrijfsnaam, Chinese website, pakketzoeker (小包查询) naar de trackingpagina van GZYL
+- [广州云链货运代理有限公司 (GZYL): 联系我们 (contact, in het Chinees)](http://yunlianhouyun.com/contact.html) – 24-uurs hotline, WeChat en QQ voor aftersales
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – bedrijfsnaam en andere namen, trackingpagina op een IP-adres, de YL…YQ-vorm en zijn zwakke herkenning, Xinghe Freight op de trackingpagina van GZYL, zoeken op nummer of referentie met streepjes, de woorden van de stappen en hun status, de Chinese regels, plaatsnamen na de woorden, Pekingse tijd, de vooraf geschreven planning en de `Delivered` die ze afsluit, het antwoord voor een onbekend nummer, Swiss Post als enige overdracht, wat Peek toont, tegenhoudt en weglaat
 :::

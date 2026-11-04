@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, špedičná firma z mesta Guangzhou (Kanton) v Číne. Ak vám čínsky e-shop poslal objednávku cez GZYL, číslo zásielky má tvar YL, desať číslic a YQ: vložte ho do poľa vyššie. Peek nepozná žiadnu webovú stránku GZYL a jej sledovanie zásielok beží na IP adrese bez doménového mena. Údaje v ňom berte s rezervou: GZYL zapisuje veľkú časť cesty balíka vopred, takže krok, ktorý tam uvidíte, nemusí byť skutočný sken, a to ani `Delivered`.
+GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, špedičná firma z mesta Guangzhou (Kanton) v Číne. Ak vám čínsky e-shop poslal objednávku cez GZYL, číslo zásielky má tvar YL, desať číslic a YQ: vložte ho do poľa vyššie. Webová stránka GZYL, yunlianhouyun.com, je po čínsky a jej vyhľadávanie zásielok (小包查询) otvára sledovanie, ktoré beží na IP adrese bez doménového mena. Údaje v ňom berte s rezervou: GZYL zapisuje veľkú časť cesty balíka vopred, takže krok, ktorý tam uvidíte, nemusí byť skutočný sken, a to ani `Delivered`.
 
 ## Číslo zásielky GZYL: ako vyzerá
 
@@ -79,7 +79,7 @@ Peek u GZYL nenašiel lehoty doručenia ani pravidlá pre pokusy o doručenie, v
 
 ## Kontakt na GZYL
 
-K 30. októbru 2026 Peek nenašiel žiadne kontakty na GZYL: ani webovú stránku (okrem stránky sledovania), ani telefón či e-mail pre príjemcov. Prepravu objednal predajca, preto sa s otázkami o objednávke obráťte naňho, a ak neodpovedá, na platformu, kde ste nakupovali.
+K 4. novembru 2026 uvádza kontaktná stránka (联系我们) webu GZYL, po čínsky, nonstop linku, účet WeChat a účet QQ popredajného servisu, no nič pre príjemcov: tieto kanály slúžia zákazníkom GZYL, teda predajcom. Prepravu objednal predajca, preto sa s otázkami o objednávke obráťte naňho, a ak neodpovedá, na platformu, kde ste nakupovali.
 
 ## Sledovanie zásielok GZYL v Peeku
 
@@ -110,5 +110,7 @@ Môže to byť súčasť plánu GZYL. GZYL zapisuje veľkú časť cesty balíka
 Peek to nevie: kroky GZYL vo vašej krajine neuvádzajú žiadnu firmu. Opýtajte sa predajcu, ktorá firma vám objednávku doručí a pod akým číslom, a toto číslo pridajte do Peeku ako samostatnú zásielku. Sám odovzdať zásielku GZYL inej firme vie Peek len vo Švajčiarsku a v Lichtenštajnsku, a to Swiss Post.
 
 :::sources
+- [广州云链货运代理有限公司 (GZYL): úvodná stránka (po čínsky)](http://yunlianhouyun.com/) – názov firmy, web po čínsky, vyhľadávanie zásielok (小包查询) v sledovaní GZYL
+- [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, po čínsky)](http://yunlianhouyun.com/contact.html) – nonstop linka, WeChat a QQ popredajného servisu
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – názov firmy a ďalšie mená, sledovanie na IP adrese, tvar YL…YQ ako slabý náznak, Xinghe Freight v sledovaní GZYL, vyhľadávanie podľa čísla alebo referenčného čísla s pomlčkami, texty krokov a ich stavy, riadky po čínsky, mestá za textami, pekinský čas, plán zapísaný vopred a `Delivered`, ktorým sa končí, odpoveď pri neznámom čísle, Swiss Post ako jediné odovzdanie, čo Peek ukazuje, zadrží a vynechá
 :::

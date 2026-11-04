@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) es 广州云链货运代理有限公司, un transitario (agente de carga) de Guangzhou, en China, que envía paquetes al extranjero. Si una tienda china te ha enviado el pedido con GZYL, tu número de seguimiento empieza por YL, lleva diez cifras y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. Peek no conoce ningún sitio web de GZYL, y su página de seguimiento está en una simple dirección IP, sin nombre de dominio. Lee ese seguimiento con cautela: GZYL escribe de antemano buena parte del recorrido de un paquete, así que un paso, incluso `Delivered`, no siempre es un escaneo.
+GZYL (广州云链, Guangzhou Yunlian) es 广州云链货运代理有限公司, un transitario (agente de carga) de Guangzhou, en China, que envía paquetes al extranjero. Si una tienda china te ha enviado el pedido con GZYL, tu número de seguimiento empieza por YL, lleva diez cifras y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. El sitio web de GZYL, yunlianhouyun.com, está en chino, y su búsqueda de paquetes (小包查询) abre una página de seguimiento que está en una simple dirección IP, sin nombre de dominio. Lee ese seguimiento con cautela: GZYL escribe de antemano buena parte del recorrido de un paquete, así que un paso, incluso `Delivered`, no siempre es un escaneo.
 
 ## Número de seguimiento de GZYL: cómo es
 
@@ -79,7 +79,7 @@ Peek no ha encontrado plazos de entrega de GZYL, ni reglas sobre intentos de ent
 
 ## GZYL: teléfono y atención al cliente
 
-Cuando Peek lo comprobó, el 30 de octubre de 2026, no encontró ningún dato de contacto de GZYL: ni un sitio web aparte de su página de seguimiento, ni un teléfono o correo electrónico para destinatarios. Quien contrató el envío es la tienda: pregúntale a ella por tu pedido, y a la plataforma donde compraste si no te responde.
+Cuando Peek lo comprobó, el 4 de noviembre de 2026, la página de contacto (联系我们) del sitio web de GZYL, en chino, daba una línea de atención 24 horas, una cuenta de WeChat y una cuenta QQ de posventa, pero nada para destinatarios: esos canales son para los clientes de GZYL, las tiendas. Quien contrató el envío es la tienda: pregúntale a ella por tu pedido, y a la plataforma donde compraste si no te responde.
 
 ## Seguir un paquete de GZYL con Peek
 
@@ -110,5 +110,7 @@ Puede ser parte de la previsión de GZYL. GZYL escribe de antemano buena parte d
 Peek no lo sabe: los pasos de GZYL en el país de destino no nombran ninguna empresa. Pregúntale a la tienda qué empresa entrega tu pedido y con qué número de seguimiento, y añade ese número en Peek como un paquete aparte.
 
 :::sources
+- [广州云链货运代理有限公司 (GZYL): inicio (en chino)](http://yunlianhouyun.com/) – nombre de la empresa, sitio en chino, búsqueda de paquetes (小包查询) en la página de seguimiento de GZYL
+- [广州云链货运代理有限公司 (GZYL): 联系我们 (contacto, en chino)](http://yunlianhouyun.com/contact.html) – línea 24 horas, WeChat y QQ de posventa
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y otros nombres, página de seguimiento en una dirección IP, formato YL…YQ y su coincidencia débil, Xinghe Freight en la página de seguimiento de GZYL, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, la línea en chino de la plataforma, ciudades después de los textos, hora de Pekín, recorrido escrito de antemano y la entrega que lo cierra, respuesta a un número desconocido, Swiss Post como único traspaso, lo que Peek muestra, deja fuera y descarta
 :::

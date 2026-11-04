@@ -3,10 +3,10 @@ title: GZYL tracking: YL…YQ numbers, scans and who to ask
 description: Track a GZYL (广州云链) parcel from Guangzhou: what a YL…YQ number looks like, what its scans mean and why its Delivered step can be written in advance.
 slug: gzyl-tracking
 published: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-04
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, a freight forwarder in Guangzhou, China. If a Chinese shop sent your order with GZYL, your number is YL, ten digits and YQ: paste it in the box above. Peek knows of no website for GZYL, and its tracker runs on a bare server address. Read that tracker with care: GZYL writes much of a parcel's journey in advance, so a step there, even `Delivered`, isn't always a scan.
+GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, a freight forwarder in Guangzhou, China. If a Chinese shop sent your order with GZYL, your number is YL, ten digits and YQ: paste it in the box above. GZYL's website, yunlianhouyun.com, is in Chinese, and its parcel search (小包查询) opens a tracker that runs on a bare server address. Read that tracker with care: GZYL writes much of a parcel's journey in advance, so a step there, even `Delivered`, isn't always a scan.
 
 ## GZYL tracking number: what it looks like
 
@@ -49,7 +49,7 @@ GZYL writes its own steps in English, typos included. In the order a parcel gets
 
 **A line in Chinese.** For an order with no scans yet, the platform GZYL's tracker runs on writes `货物电子信息已经收到` by itself: "the goods' electronic information has been received". The seller has created the order, but nobody has scanned the parcel. Peek shows the line in Chinese, under "Label created".
 
-**Through China Post.** A parcel can also show `广州处理中心已收寄`, with the city in brackets after it: China Post's acceptance at its Guangzhou processing centre, which GZYL relays in Chinese. Peek shows the line in Chinese, under "Received by carrier".
+**Through China Post.** A parcel can also show `广州处理中心已收寄`, with the city in brackets after it: China Post's acceptance at its Guangzhou processing centre, which GZYL relays in Chinese. On Xinghe Freight's numbers, `香港处理中心已收寄` is the same acceptance at the Hong Kong processing centre. Peek shows either line in Chinese, under "Received by carrier".
 
 **Times.** Every time on GZYL's tracker is on Beijing's clock, steps in your country included, with no time zone shown. In winter, a step at 20:00 there is noon in London and 7am in New York.
 
@@ -65,7 +65,7 @@ Peek found no delivery times from GZYL, and no rules for delivery attempts, pick
 
 **Only `Order information received` or `货物电子信息已经收到`.** The seller has created the order, but GZYL hasn't scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**Stuck at customs.** If you're asked for import charges, see [parcels held at customs](guide:customs). If the parcel stays there for days, tell the seller.
+**Stuck at customs.** If you're asked for import charges, see [parcels held at customs](guide:customs). In Ireland, since 1 November 2026, an EU handling fee of €2 per item comes on top of the duty; if the shop didn't charge both at checkout, the delivery company can ask you for them before it delivers. If the parcel stays there for days, tell the seller.
 
 **GZYL's tracker or a tracking service shows more than Peek.** Peek holds back steps written ahead of the time they show, the `Delivered` that ends GZYL's plan, and steps dated after its last check (below), so the extra steps may be GZYL's plan, not scans. Go by the delivery estimate the shop gave, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
@@ -77,7 +77,7 @@ Peek found no delivery times from GZYL, and no rules for delivery attempts, pick
 
 ## GZYL contact number and customer service
 
-As of 30 October 2026, Peek found no contact details for GZYL: no website besides its tracker, and no phone number or email for recipients. The seller booked the parcel and is the one to ask about your order, and the marketplace if the seller doesn't answer.
+As read on 4 November 2026, the contact page (联系我们) of GZYL's website, in Chinese, lists a 24-hour hotline (全国24小时服务热线), a WeChat account and an after-sales QQ account (售后QQ), but nothing for recipients: these channels serve GZYL's customers, the sellers. The seller booked the parcel and is the one to ask about your order, and the marketplace if the seller doesn't answer.
 
 ## Track a GZYL parcel with Peek
 
@@ -93,7 +93,7 @@ Apart from a hand-over to Swiss Post, Peek stays with GZYL: if the seller gives 
 
 ### What is GZYL (广州云链)?
 
-广州云链货运代理有限公司 (Guangzhou Yunlian), a freight forwarder in Guangzhou, China. Its waybills are YL, ten digits and YQ.
+广州云链货运代理有限公司 (Guangzhou Yunlian), a freight forwarder in Guangzhou, China, with a website in Chinese, yunlianhouyun.com. Its waybills are YL, ten digits and YQ.
 
 ### Is every YL…YQ number a GZYL number?
 
@@ -108,5 +108,8 @@ It may be part of GZYL's plan. GZYL writes much of a parcel's timeline ahead and
 Peek doesn't know: GZYL's steps in your country name no company. Ask the seller which company delivers your order and for its tracking number, and add that number to Peek as a separate parcel. Only in Switzerland and Liechtenstein can Peek hand a GZYL parcel over to Swiss Post itself.
 
 :::sources
+- [广州云链货运代理有限公司 (GZYL): Home](http://yunlianhouyun.com/) – company name, Chinese site, parcel search (小包查询) on GZYL's tracker
+- [广州云链货运代理有限公司 (GZYL): 联系我们 (contact)](http://yunlianhouyun.com/contact.html) – hotline, WeChat and after-sales QQ
+- [Revenue: Union Handling Fee](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item in Ireland from 1 November 2026, at checkout or before delivery
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company and other names, the tracker on a bare address, YL…YQ number shape and its weak match, Xinghe Freight on GZYL's tracker, search by number or reference with its dashes, step wordings and their stages, the platform's Chinese line, towns after wordings, Beijing clock, timeline written in advance, the answer for an unknown number, Swiss Post as the only hand-over, what Peek shows, holds back and leaves out
 :::

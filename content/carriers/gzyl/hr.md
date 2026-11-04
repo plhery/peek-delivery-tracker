@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, špeditersko poduzeće iz Guangzhoua (Kantona) u Kini. Ako ti je kineska web-trgovina narudžbu poslala preko GZYL-a, broj za praćenje ima oblik YL, deset znamenki i YQ: zalijepi ga u polje iznad. Peek ne zna ni za kakvu GZYL-ovu web-stranicu, a GZYL-ov sustav za praćenje radi na IP adresi, bez imena domene. Podatke u njemu uzmi s rezervom: GZYL velik dio puta paketa upisuje unaprijed, pa korak koji ondje vidiš nije uvijek stvarno skeniranje, čak ni kad piše `Delivered`.
+GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, špeditersko poduzeće iz Guangzhoua (Kantona) u Kini. Ako ti je kineska web-trgovina narudžbu poslala preko GZYL-a, broj za praćenje ima oblik YL, deset znamenki i YQ: zalijepi ga u polje iznad. GZYL-ova web-stranica, yunlianhouyun.com, na kineskom je, a njezina tražilica pošiljaka (小包查询) otvara GZYL-ov sustav za praćenje, koji radi na IP adresi, bez imena domene. Podatke u njemu uzmi s rezervom: GZYL velik dio puta paketa upisuje unaprijed, pa korak koji ondje vidiš nije uvijek stvarno skeniranje, čak ni kad piše `Delivered`.
 
 ## GZYL broj za praćenje: kako izgleda
 
@@ -79,7 +79,7 @@ Peek kod GZYL-a nije našao rokove dostave ni pravila o pokušajima dostave, mje
 
 ## GZYL kontakt i služba za korisnike
 
-Na dan 30. listopada 2026. Peek nije našao nikakve kontakte za GZYL: ni web-stranicu (osim sustava za praćenje), ni broj telefona ni e-adresu za primatelje. Prijevoz je naručio prodavač, pa se s pitanjima o narudžbi obrati njemu, a ako ne odgovara, platformi na kojoj si kupio.
+Na dan 4. studenoga 2026. stranica za kontakt (联系我们) GZYL-ove web-stranice na kineskom navodi telefonsku liniju dostupnu 0–24, račun na WeChatu i račun na QQ-u za postprodajnu podršku, ali ništa za primatelje: ti su kanali namijenjeni GZYL-ovim klijentima, prodavačima. Prijevoz je naručio prodavač, pa se s pitanjima o narudžbi obrati njemu, a ako ne odgovara, platformi na kojoj si kupio.
 
 ## Praćenje GZYL pošiljaka s Peekom
 
@@ -110,5 +110,7 @@ Korak `Delivered` može biti dio GZYL-ova plana. GZYL velik dio puta paketa upis
 Peek to ne zna: GZYL-ovi koraci u tvojoj zemlji ne navode nijednu tvrtku. Pitaj prodavača koja će ti tvrtka dostaviti narudžbu i pod kojim brojem, pa taj broj dodaj u Peek kao zasebnu pošiljku. Praćenje GZYL-ove pošiljke Peek sam može prebaciti na drugu tvrtku samo u Švicarskoj i Lihtenštajnu, i to na Swiss Post.
 
 :::sources
+- [广州云链货运代理有限公司 (GZYL): početna stranica (na kineskom)](http://yunlianhouyun.com/) – ime tvrtke, web-stranica na kineskom, tražilica pošiljaka (小包查询) prema GZYL-ovu sustavu za praćenje
+- [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, na kineskom)](http://yunlianhouyun.com/contact.html) – linija 0–24, WeChat i QQ za postprodajnu podršku
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ime tvrtke i drugi nazivi, sustav za praćenje na IP adresi, oblik YL…YQ kao slab znak, Xinghe Freight u GZYL-ovu sustavu za praćenje, traženje po broju ili referentnom broju s crticama, tekstovi koraka i njihovi statusi, redci na kineskom, gradovi iza tekstova, pekinško vrijeme, plan upisan unaprijed i `Delivered` kojim završava, odgovor za nepoznat broj, Swiss Post kao jedini prijevoznik na kojeg Peek prebacuje praćenje, što Peek prikazuje, ne prikazuje i izostavlja
 :::

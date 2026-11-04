@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) est 广州云链货运代理有限公司, un transitaire de Guangzhou (Canton), en Chine. Si une boutique chinoise a confié ta commande à GZYL, ton numéro de suivi commence par YL et finit par YQ, avec dix chiffres entre les deux : colle-le dans le champ ci-dessus. GZYL n'a pas de site web connu de Peek, et son site de suivi tourne sur une simple adresse IP, sans nom de domaine. Prends ce suivi avec des pincettes : GZYL écrit d'avance une bonne partie du trajet d'un colis, si bien qu'une étape, même `Delivered`, n'y correspond pas toujours à un scan.
+GZYL (广州云链, Guangzhou Yunlian) est 广州云链货运代理有限公司, un transitaire de Guangzhou (Canton), en Chine. Si une boutique chinoise a confié ta commande à GZYL, ton numéro de suivi commence par YL et finit par YQ, avec dix chiffres entre les deux : colle-le dans le champ ci-dessus. Le site web de GZYL, yunlianhouyun.com, est en chinois, et sa recherche de colis (小包查询) ouvre un site de suivi qui tourne sur une simple adresse IP, sans nom de domaine. Prends ce suivi avec des pincettes : GZYL écrit d'avance une bonne partie du trajet d'un colis, si bien qu'une étape, même `Delivered`, n'y correspond pas toujours à un scan.
 
 ## Numéro de suivi GZYL : à quoi il ressemble
 
@@ -79,7 +79,7 @@ Peek n'a trouvé aucun délai de livraison chez GZYL. Tentatives de livraison, p
 
 ## GZYL contact : téléphone et service client
 
-Au 30 octobre 2026, Peek n'a trouvé aucun contact de GZYL : pas de site web à part son site de suivi, ni téléphone ni e-mail pour les destinataires. Pour ta commande, adresse-toi à la boutique, qui a réservé l'envoi, puis à la plateforme si elle ne répond pas.
+Au 4 novembre 2026, la page contact (联系我们) du site de GZYL, en chinois, donne une ligne joignable 24 h/24, un compte WeChat et un compte QQ de service après-vente, mais rien pour les destinataires : ces canaux servent les clients de GZYL, c'est-à-dire les boutiques. Pour ta commande, adresse-toi à la boutique, qui a réservé l'envoi, puis à la plateforme si elle ne répond pas.
 
 ## Suivre un colis GZYL avec Peek
 
@@ -110,6 +110,8 @@ C'est peut-être une prévision de GZYL : GZYL écrit d'avance une bonne partie 
 Peek ne le sait pas : dans le pays de destination, les étapes de GZYL ne nomment aucune société. Demande à la boutique quel transporteur livre ta commande et sous quel numéro, puis ajoute ce numéro dans Peek comme un colis à part.
 
 :::sources
+- [广州云链货运代理有限公司 (GZYL) : accueil (en chinois)](http://yunlianhouyun.com/) – nom de la société, site en chinois, recherche de colis (小包查询) vers le site de suivi de GZYL
+- [广州云链货运代理有限公司 (GZYL) : 联系我们 (contact, en chinois)](http://yunlianhouyun.com/contact.html) – ligne 24 h/24, WeChat et QQ après-vente
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GZYL : nom de la société et autres noms, site de suivi sur une adresse IP, forme YL…YQ et sa correspondance faible, Xinghe Freight sur le site de suivi de GZYL, recherche par numéro ou par référence avec ses tirets, étapes et leurs statuts, ligne en chinois de la plateforme, villes après les étapes, heure de Pékin, trajet écrit à l'avance, réponse à un numéro inconnu, relais vers La Poste suisse seulement, ce que Peek affiche, écarte et laisse de côté
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € de droits de douane par article sur les achats en ligne hors UE de 150 € maximum depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
 - [Commission européenne : The temporary EUR 3 customs duty and the Union handling fee (PDF, en anglais)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € par article quelle que soit la valeur, et ce qu'est un article (une ligne de la déclaration)

@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) to 广州云链货运代理有限公司, firma spedycyjna z Kantonu (Guangzhou) w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez GZYL, dostajesz numer, który zaczyna się od YL i kończy na YQ: wklej go w pole powyżej. Peek nie zna strony internetowej GZYL, a strona śledzenia firmy działa pod samym adresem IP serwera. Czytaj ją z rezerwą: GZYL zapisuje dużą część drogi paczki z góry, więc nie każdy etap na tej stronie, nawet `Delivered`, jest skanem.
+GZYL (广州云链, Guangzhou Yunlian) to 广州云链货运代理有限公司, firma spedycyjna z Kantonu (Guangzhou) w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez GZYL, dostajesz numer, który zaczyna się od YL i kończy na YQ: wklej go w pole powyżej. Strona internetowa GZYL, yunlianhouyun.com, jest po chińsku, a jej wyszukiwarka paczek (小包查询) prowadzi do strony śledzenia, która działa pod samym adresem IP serwera. Czytaj ją z rezerwą: GZYL zapisuje dużą część drogi paczki z góry, więc nie każdy etap na tej stronie, nawet `Delivered`, jest skanem.
 
 ## Numer przesyłki GZYL: jak wygląda
 
@@ -79,7 +79,7 @@ Peek nie znalazł podawanych przez GZYL czasów dostawy ani zasad dotyczących p
 
 ## GZYL kontakt: telefon i obsługa klienta
 
-Stan na 31 października 2026: Peek nie znalazł danych kontaktowych GZYL. Poza stroną śledzenia nie zna żadnej strony firmy ani numeru telefonu czy adresu e-mail dla odbiorców. Paczkę u GZYL zamówił sprzedawca i to jego pytaj o zamówienie, a gdy nie odpowiada, platformę, na której kupowałeś.
+Stan na 4 listopada 2026: strona kontaktowa (联系我们) chińskiej witryny GZYL podaje całodobową infolinię, konto WeChat i konto QQ obsługi posprzedażowej, ale nic dla odbiorców. To kanały dla klientów GZYL, czyli sprzedawców. Paczkę u GZYL zamówił sprzedawca i to jego pytaj o zamówienie, a gdy nie odpowiada, platformę, na której kupowałeś.
 
 ## Śledzenie paczki GZYL w Peek
 
@@ -110,6 +110,8 @@ Może to być część planu GZYL. GZYL zapisuje dużą część drogi paczki z 
 Peek tego nie wie: etapy GZYL w kraju docelowym nie wymieniają żadnej firmy, a Peek nie przenosi śledzenia paczek GZYL do polskiego przewoźnika. Zapytaj sprzedawcę, która firma doręcza Twoje zamówienie i pod jakim numerem, i dodaj ten numer w Peek jako osobną przesyłkę.
 
 :::sources
+- [广州云链货运代理有限公司 (GZYL): strona główna (po chińsku)](http://yunlianhouyun.com/) – nazwa firmy, strona po chińsku, wyszukiwarka paczek (小包查询) prowadząca do strony śledzenia GZYL
+- [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, po chińsku)](http://yunlianhouyun.com/contact.html) – całodobowa infolinia, WeChat i QQ obsługi posprzedażowej
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inne nazwy, strona śledzenia pod adresem IP, kształt numeru YL…YQ i jego słabe dopasowanie, Xinghe Freight na stronie śledzenia GZYL, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie etapów i ich statusy, chińska linia platformy, miejscowości po etapach, zegar pekiński, etapy zapisane z góry, odpowiedź na nieznany numer, przekazanie śledzenia tylko Poczcie Szwajcarskiej, co Peek pokazuje i pomija
 - [Komisja Europejska: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – cło 3 euro za pozycję przy przesyłkach do 150 euro od 1 lipca 2026, unijna opłata manipulacyjna 2 euro od 1 listopada 2026
 - [Komisja Europejska: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – opłata 2 euro za każdą pozycję bez względu na wartość, czym jest pozycja

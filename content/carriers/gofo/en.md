@@ -3,7 +3,7 @@ title: GOFO Express tracking: statuses, photos and support
 description: Track a GOFO Express parcel in the US: what a GOFO tracking number looks like, what the statuses mean, missed deliveries, delivery photos and how to reach support.
 slug: gofo-express-tracking
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
 GOFO Express is a US parcel carrier: it collects parcels from the sender's warehouse and moves them through its hubs to the delivery station that serves your area. Paste the number in the box above to track yours; GOFO's own site has a tracker too. The number comes from the shop that shipped your order, usually in its shipping email or on your order page. Nothing there? See [how to find a tracking number](guide:find-tracking-number).
@@ -26,61 +26,67 @@ Some parcels carry both a GFUS waybill number and a CR tracking number, and eith
 
 GOFO's scans are in English. These are the ones a parcel may meet, roughly in order; not every parcel meets them all:
 
-| GOFO's status | What it means for you |
-| --- | --- |
-| `Shipping Label Created` | The sender made the label. GOFO doesn't have the parcel yet. |
-| `Pick Up Start` | GOFO has set out to collect the parcel from the sender; it doesn't have it yet. |
-| `Pickup Exception, GOFO has not Received the Package from the Warehouse yet.` | GOFO hasn't received the parcel from the sender's warehouse yet. |
-| `Pick Up Success` | GOFO collected the parcel from the sender. |
-| `Arrived at GOFO Regional Origin Hub` | It reached GOFO's first hub. |
-| `Arrived at Sorting Center` | It reached a sorting center, before the regional hub. |
-| `Arrived at GOFO Regional Hub` | It reached a hub on the way to you. |
-| `Processing at GOFO Facility` | Being sorted at a GOFO building. |
-| `Departed GOFO Regional Hub` | It left that hub. |
-| `Loaded on Vehicle` | Loaded onto a vehicle for the next leg. |
-| `In Transit to Next Facility` | Moving between GOFO buildings. |
-| `Arrived at GOFO Delivery Station` | At the local station that delivers your area. |
-| `Departed GOFO Delivery Station` | It left the station. |
-| `Out for Delivery` | With the driver today. |
-| `Delivered` | The driver delivered the parcel. |
-| `Delivery Exception, Business Closed` | The driver couldn't deliver because the business was closed. |
-| `Label Cancelled` | The label was cancelled: no parcel is coming under this number. |
+| GOFO's status | What it means for you | Peek shows |
+| --- | --- | --- |
+| `Shipping Label Created` | The sender made the label. GOFO doesn't have the parcel yet. | "Label created" |
+| `Pick Up Start` | GOFO has set out to collect the parcel from the sender; it doesn't have it yet. | "Label created" |
+| `Pickup Exception, GOFO has not Received the Package from the Warehouse yet.` | GOFO hasn't received the parcel from the sender's warehouse yet. | "Label created" |
+| `Pick Up Success` | GOFO collected the parcel from the sender. | "Received by carrier" |
+| `Arrived at GOFO Regional Origin Hub` | It reached GOFO's first hub. | "Received by carrier" |
+| `Arrived at Sorting Center` | It reached a sorting center, before the regional hub. | "In transit" |
+| `Arrived at GOFO Regional Hub` | It reached a hub on the way to you. | "In transit" |
+| `Processing at GOFO Facility` | Being sorted at a GOFO building. | "In transit" |
+| `Departed GOFO Regional Hub` | It left that hub. | "In transit" |
+| `Loaded on Vehicle` | Loaded onto a vehicle for the next leg. | "In transit" |
+| `In Transit to Next Facility` | Moving between GOFO buildings. | "In transit" |
+| `Arrived at GOFO Delivery Station` | At the local station that delivers your area. GOFO says delivery usually follows within 1–2 calendar days. | "In transit" |
+| `Departed GOFO Delivery Station` | It left the station. | "In transit" |
+| `Out for Delivery` | With the driver today. | "Out for delivery" |
+| `Delivered` | The driver delivered the parcel. | "Delivered" |
+| `Delivery Exception, Business Closed` | The driver couldn't deliver because the business was closed. | "Delivery attempted" |
+| `Label Cancelled` | The label was cancelled: no parcel is coming under this number. | "Needs attention" |
 
 GOFO's delivered scan can add a detail after the comma, and its tracking page also shows an estimated delivery date.
 
 ## GOFO delivery: photos and missed deliveries
 
-**Delivery photos.** GOFO's tracking page can show photos of the delivery. Peek leaves them out, so open GOFO's page to see them.
+**Delivery photos.** Once you enter the recipient name used on the order, GOFO's tracking page shows the proof of delivery, in most cases with a photo of where the parcel was left. Peek leaves the photos out.
 
-**Missed delivery.** `Delivery Exception` means the driver tried and couldn't deliver. The reason follows the comma and varies; `Business Closed` is one of them. Peek then shows the parcel as "Delivery attempted" and quotes GOFO's line under "What GOFO Express says". If the address was wrong, tell the shop that shipped it.
+**Missed delivery.** `Delivery Exception` means the driver tried and couldn't deliver. The reason follows the comma and varies; `Business Closed` is one of them. Peek then shows the parcel as "Delivery attempted" and quotes GOFO's line under "What GOFO Express says". GOFO says it usually tries again within 24 hours. An address problem, such as a missing apartment number, can send the parcel back to the local warehouse: tell the shop that shipped it. You can't collect a parcel from GOFO yourself.
 
 ## GOFO package delayed, not received or not ordered
 
-**Not moving.** If only `Shipping Label Created`, `Pick Up Start` or `Pickup Exception…` shows, GOFO doesn't have the parcel yet: ask the shop whether it has shipped. If four days pass without a new scan before the parcel is out for delivery, Peek shows a note with a "Get help from GOFO Express" link to GOFO's customer service page. More on [tracking that isn't updating](guide:tracking-not-updating).
+**Not moving.** If only `Shipping Label Created`, `Pick Up Start` or `Pickup Exception…` shows, GOFO doesn't have the parcel yet: ask the shop whether it has shipped. After a day of this, Peek says the sender hasn't handed the parcel over yet. If four days pass without a new scan before the parcel is out for delivery, Peek shows a note with a "Get help from GOFO Express" link to GOFO's customer service page. More on [tracking that isn't updating](guide:tracking-not-updating).
 
 **Your rights when an order is late.** Under the FTC's Mail, Internet, or Telephone Order Merchandise Rule, a seller has to ship within the time it states, or within 30 days of your order if it states none. If shipping is delayed, the seller has to tell you and let you choose between agreeing to the delay and cancelling for a full refund. If it doesn't ship, it owes you a full refund, not just a gift card or store credit. The FTC's first step: contact the seller.
 
-**Delivered but not received.** Look at the delivery photos on GOFO's tracking page, then contact the shop, and see [delivered but not received](guide:delivered-not-received). If you never got the order and the company won't reverse the charge, the FTC says to dispute it with your card issuer. For a credit card, the dispute has to be in writing, within 60 days after the first statement with the charge was sent to you.
+**Delivered but not received.** Check the delivery photo on GOFO's tracking page, look around your mailbox, and ask neighbors or your building's concierge. Then report it to GOFO, tell the shop, and see [delivered but not received](guide:delivered-not-received). If you never got the order and the company won't reverse the charge, the FTC says to dispute it with your card issuer. For a credit card, the dispute has to be in writing, within 60 days after the first statement with the charge was sent to you.
 
 **A parcel sent to you that you didn't order.** By US law you don't have to pay for merchandise you didn't order, or send it back: the FTC says you can keep it as a free gift.
 
-**Lost.** Ask the shop for a refund or a new shipment; more in [lost parcel](guide:lost-parcel).
+**Lost.** Contact the shop: GOFO says the sender can open an inquiry with GOFO for you. Ask the shop for a refund or a new shipment too; more in [lost parcel](guide:lost-parcel).
+
+**Returned.** GOFO returns a parcel damaged in transit, or one with a wrong or incomplete address or an address it can't serve, such as a military address. Once on its way back, it can't be stopped: ask the shop for a new shipment. More in [returned to sender](guide:returned-to-sender).
 
 ## GOFO Express customer service
 
-For anything about the order itself, start with the shop that shipped it. GOFO's own site has a customer service page, the one Peek's "Get help from GOFO Express" link opens.
+For anything about the order itself, start with the shop that shipped it. For the delivery, GOFO's customer service page, the one Peek's "Get help from GOFO Express" link opens, listed these on 4 November 2026 (times are Eastern):
+
+- **Phone, recipients' hotline:** +1 (949) 688-6032, 9 am to 9 pm Monday to Friday, 11 am to 7 pm Saturday and Sunday.
+- **WhatsApp:** +1 (787) 469-5811, 9 am to 9 pm Monday to Friday, 11 am to 8 pm Saturday and Sunday.
+- **Email:** cs@mail.gofo.com, or the inquiry form and chat on the same page. The form asks for the waybill number, so have your GOFO number ready.
 
 ## Tracking GOFO Express parcels with Peek
 
 For a `GFUS`, `GF` or `CR` number, typed with or without spaces, [Peek](/) asks GOFO whether it has the parcel and names GOFO Express when it does. `GFUS` numbers also go to AliExpress / Cainiao, which tracks some AliExpress parcels under GOFO's number: if Cainiao has the parcel, Peek follows it with Cainiao first and, when Cainiao gives the US as its destination, moves to GOFO once GOFO scans it. Until GOFO knows the number, Peek keeps checking. You can also pick GOFO Express with "Change", or paste a GOFO US tracking link with `searchID=` and the number in it.
 
-Peek reads GOFO's US tracking every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, each scan with the town and state GOFO gives for it, those places on a map, the exact time of each scan, the delivery time and the destination. Peek removes GOFO's support line from every scan; a delivery shows as "Delivered", without the detail after the comma, and other scans show as GOFO writes them. Peek shows GOFO's expected delivery day until the parcel is delivered, returned or at a pickup point, and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
+Peek reads GOFO's US tracking every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, each scan with the town and state GOFO gives for it, those places on a map, the exact time of each scan, the delivery time and the destination. Peek removes GOFO's support line from every scan; a delivery shows as "Delivered", without the detail after the comma, and other scans show as GOFO writes them. Peek shows GOFO's expected delivery day until the parcel is delivered or returned, and leaves out the delivery photos, coordinates and weight, so open GOFO's page for the photos. Peek can notify you of every scan, important steps only or delivery day only. It can't contact GOFO or the shop for you.
 
 ## Questions about GOFO tracking
 
 ### Is GOFO Express legit?
 
-Yes. GOFO Express is a US parcel carrier with its own tracking, which follows parcels from the sender's warehouse through GOFO's hubs to its delivery stations. GOFO also runs networks in Canada, France, Italy, Spain and the Netherlands, each with its own numbers.
+Yes. GOFO Express is a US parcel carrier with its own tracking, which follows parcels from the sender's warehouse through GOFO's hubs to its delivery stations. GOFO says its US network covers more than 12,000 ZIP codes, reaching 75% of the population. GOFO also runs networks in Canada, France, Italy, Spain and the Netherlands, each with its own numbers.
 
 ### What does Shipping Label Created mean on GOFO?
 
@@ -95,6 +101,8 @@ Check that it's a US GOFO number: GFUS, GF or CR. `GFCA`, `GFFR`, `GFIT`, `GFES`
 Cainiao, which tracks AliExpress orders, follows some of them under GOFO's GFUS number when GOFO delivers them in the US. For a GFUS number, Peek asks both GOFO and Cainiao. More in [AliExpress orders](guide:aliexpress-orders).
 
 :::sources
+- [GOFO: Customer Service](https://www.gofo.com/us/customer-service) – phone, WhatsApp, email and hours, form and chat, no self-pickup; FAQ: proof of delivery, redelivery, address problems, 1–2 days from the station, the sender's inquiry, returns
+- [GOFO: Home](https://www.gofo.com/us/) – more than 12,000 ZIP codes, 75% of the population
 - [FTC: What To Do if You're Billed for Things You Never Got, or You Get Unordered Products](https://consumer.ftc.gov/articles/what-do-if-youre-billed-things-you-never-got-or-you-get-unordered-products) – shipping deadlines, delays and refunds, card disputes, unordered merchandise
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GOFO's number shapes and its networks in other countries, GFUS and CR numbers, YunExpress numbers, GOFO's tracker and help page, scan wordings and their meanings, what GOFO's page shows and what Peek reads, Cainiao
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GOFO's number shapes and its networks in other countries, GFUS and CR numbers, YunExpress numbers, GOFO's tracker and help page, scan wordings, their meanings and what Peek shows for each, what GOFO's page shows and what Peek reads, Cainiao
 :::

@@ -1,8 +1,8 @@
 /* The parcel page. The card and everything that speaks for the parcel take the carrier's colours. */
 .peekp {
-  --tone: light-dark(var(--carrier-ink-light, #657060), var(--carrier-ink-dark, #afb9a9));
-  --tone-surface: light-dark(var(--carrier-surface-light, #eceee7), var(--carrier-surface-dark, #2e342d));
-  --carrier-brand: light-dark(var(--carrier-brand-light, #20251e), var(--carrier-brand-dark, #f5f6f2));
+  --tone: light-dark(var(--carrier-ink-light, #657060), var(--carrier-ink-dark, #c2baaa));
+  --tone-surface: light-dark(var(--carrier-surface-light, #eceee7), var(--carrier-surface-dark, #322f28));
+  --carrier-brand: light-dark(var(--carrier-brand-light, #20251e), var(--carrier-brand-dark, #faf6eb));
   min-height: 100dvh; padding-bottom: max(28px, env(safe-area-inset-bottom));
 }
 /* A page opened from the front door lies over it and scrolls on its own; it moves and scales from its top left corner

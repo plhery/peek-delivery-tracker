@@ -660,6 +660,21 @@ export interface BrandDerivationStep {
   property: BrandProperty;
   base: string;
   amount: number;
+  /** Then settles the mix at one OKLCH lightness, as the dark cards do. */
+  tone?: BrandTone;
+}
+
+/**
+ * Brings a mixed colour to one OKLCH lightness, its hue kept and its chroma
+ * scaled and capped; hues between `amber.from` and `amber.to` (the yellows,
+ * which turn khaki when dark) move towards `amber.hue`. A colour already darker
+ * than the result, by WCAG luminance, stays as it is, so text on it never loses contrast.
+ */
+export interface BrandTone {
+  lightness: number;
+  chroma: number;
+  maxChroma: number;
+  amber: { from: number; to: number; hue: number; slope: number };
 }
 
 /** `[x, y]` in the truck's own 32x21 coordinate space. */

@@ -21,7 +21,18 @@
     {
       "property": "surface-dark",
       "base": "#20261f",
-      "amount": 0.8
+      "amount": 0.8,
+      "tone": {
+        "lightness": 0.262,
+        "chroma": 0.85,
+        "maxChroma": 0.042,
+        "amber": {
+          "from": 80,
+          "to": 115,
+          "hue": 72,
+          "slope": 0.25
+        }
+      }
     },
     {
       "property": "ink-light",
@@ -58,6 +69,15 @@
       "base": "#ffffff",
       "amount": 1
     }
+  ],
+  "toneExamples": [
+    ["#4d4719", "#30220b"],
+    ["#292235", "#272131"],
+    ["#1a303a", "#15272f"],
+    ["#461e23", "#361c1e"],
+    ["#1a402e", "#0f2b1e"],
+    ["#363b36", "#222622"],
+    ["#1a1f28", "#1a1f28"]
   ],
   "families": {
     "ait-home-delivery": "ait-worldwide",
@@ -204,7 +224,7 @@
     },
     "dhl": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -215,7 +235,7 @@
     },
     "dhl-ecommerce": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -226,7 +246,7 @@
     },
     "dhl-ecommerce-es": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -237,7 +257,7 @@
     },
     "dhl-ecommerce-nl": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -248,7 +268,7 @@
     },
     "dhl-ecommerce-pl": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -259,7 +279,7 @@
     },
     "dhl-ecommerce-uk": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -270,7 +290,7 @@
     },
     "dhl-express": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -281,7 +301,7 @@
     },
     "dhl-freight": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -335,7 +355,7 @@
     },
     "gls-at": {
       "surface-light": "#dfebfa",
-      "surface-dark": "#293e57",
+      "surface-dark": "#152538",
       "ink-light": "#355e8a",
       "ink-dark": "#b7d1ee",
       "brand-light": "#1634a7",
@@ -346,7 +366,7 @@
     },
     "gls-ch": {
       "surface-light": "#dfebfa",
-      "surface-dark": "#293e57",
+      "surface-dark": "#152538",
       "ink-light": "#355e8a",
       "ink-dark": "#b7d1ee",
       "brand-light": "#1634a7",
@@ -357,7 +377,7 @@
     },
     "gls-de": {
       "surface-light": "#dfebfa",
-      "surface-dark": "#293e57",
+      "surface-dark": "#152538",
       "ink-light": "#355e8a",
       "ink-dark": "#b7d1ee",
       "brand-light": "#1634a7",
@@ -368,7 +388,7 @@
     },
     "gls-es": {
       "surface-light": "#dfebfa",
-      "surface-dark": "#293e57",
+      "surface-dark": "#152538",
       "ink-light": "#355e8a",
       "ink-dark": "#b7d1ee",
       "brand-light": "#1634a7",
@@ -379,7 +399,7 @@
     },
     "gls-fr": {
       "surface-light": "#dfebfa",
-      "surface-dark": "#293e57",
+      "surface-dark": "#152538",
       "ink-light": "#355e8a",
       "ink-dark": "#b7d1ee",
       "brand-light": "#1634a7",
@@ -390,7 +410,7 @@
     },
     "gls-it": {
       "surface-light": "#dfebfa",
-      "surface-dark": "#293e57",
+      "surface-dark": "#152538",
       "ink-light": "#355e8a",
       "ink-dark": "#b7d1ee",
       "brand-light": "#1634a7",
@@ -401,7 +421,7 @@
     },
     "gls-pl": {
       "surface-light": "#dfebfa",
-      "surface-dark": "#293e57",
+      "surface-dark": "#152538",
       "ink-light": "#355e8a",
       "ink-dark": "#b7d1ee",
       "brand-light": "#1634a7",
@@ -458,7 +478,7 @@
     },
     "mng-kargo": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -593,7 +613,7 @@
     },
     "ups": {
       "surface-light": "#ede3d5",
-      "surface-dark": "#463a2c",
+      "surface-dark": "#2c2317",
       "ink-light": "#78573e",
       "ink-dark": "#dbc2a4",
       "brand-light": "#573626",

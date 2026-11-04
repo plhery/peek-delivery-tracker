@@ -8,12 +8,12 @@ enum ExperimentalPalette {
     static let rose = Brand.color(light: "#9A3D5C", dark: "#FFADC8")
     static let ochre = Brand.color(light: "#745300", dark: "#FFD65F")
 
-    static let transitSurface = Brand.color(light: "#DAEAFE", dark: "#213A51")
-    static let pickupSurface = Brand.color(light: "#FFDDC7", dark: "#4C3123")
-    static let deliveredSurface = Brand.color(light: "#DCF0D7", dark: "#243D2E")
-    static let lilacSurface = Brand.color(light: "#E9DEFF", dark: "#382D4C")
-    static let roseSurface = Brand.color(light: "#FADDE7", dark: "#482C39")
-    static let ochreSurface = Brand.color(light: "#FFEBAB", dark: "#443918")
+    static let transitSurface = Brand.color(light: "#DAEAFE", dark: "#152636")
+    static let pickupSurface = Brand.color(light: "#FFDDC7", dark: "#341F14")
+    static let deliveredSurface = Brand.color(light: "#DCF0D7", dark: "#142A1D")
+    static let lilacSurface = Brand.color(light: "#E9DEFF", dark: "#272034")
+    static let roseSurface = Brand.color(light: "#FADDE7", dark: "#331D27")
+    static let ochreSurface = Brand.color(light: "#FFEBAB", dark: "#2F220E")
 
     static func surface(for parcel: Parcel) -> Color {
         switch parcel.currentStage {
@@ -306,9 +306,28 @@ extension Parcel {
 /// Load once so a palette or family added to carrier.json also reaches iPhone.
 struct CarrierBrandAssets: Decodable {
     struct Step: Decodable {
+        /// Brings a mix to one OKLCH lightness, its hue kept and its chroma scaled and capped; the yellows between
+        /// `amber.from` and `amber.to`, which turn khaki when dark, move towards `amber.hue`. A colour already
+        /// darker than the result, by WCAG luminance, stays as it is, so text on it never loses contrast.
+        struct Tone: Decodable {
+            struct Amber: Decodable {
+                let from: Double
+                let to: Double
+                let hue: Double
+                let slope: Double
+            }
+
+            let lightness: Double
+            let chroma: Double
+            let maxChroma: Double
+            let amber: Amber
+        }
+
         let property: String
         let base: String
         let amount: Double
+        /// Then settles the mix at one lightness, as the dark cards do.
+        let tone: Tone?
     }
 
     struct DecalShape: Decodable {
@@ -405,7 +424,7 @@ struct CarrierVisualIdentity {
         name = ["dhl": "DHL", "gls": "GLS", "ups": "ups"][family] ?? carrier.displayName
         decal = assets.decals[id] ?? "default"
         colors = assets.derivation.map { step in
-            assets.palettes[id]?[step.property] ?? Self.mix(carrier.color, step.base, step.amount)
+            assets.palettes[id]?[step.property] ?? Self.derived(carrier.color, step)
         }
     }
 
@@ -431,6 +450,70 @@ struct CarrierVisualIdentity {
             Int((Double((value >> shift) & 255) * (1 - amount) + Double((background >> shift) & 255) * amount).rounded())
         }
         return String(format: "#%02x%02x%02x", channels[0], channels[1], channels[2])
+    }
+
+    /// One property for a carrier color that declares none: the mix, then the tone if the step has one.
+    static func derived(_ color: String, _ step: CarrierBrandAssets.Step) -> String {
+        let mixed = mix(color, step.base, step.amount)
+        return step.tone.map { tone(mixed, $0) } ?? mixed
+    }
+
+    /// `color` at the tone's lightness, unless that would make it brighter (see `CarrierBrandAssets.Step.Tone`).
+    static func tone(_ color: String, _ tone: CarrierBrandAssets.Step.Tone) -> String {
+        let (_, sourceChroma, sourceHue) = oklch(color)
+        let amber = tone.amber
+        let hue = sourceHue > amber.from && sourceHue < amber.to
+            ? amber.hue + (sourceHue - amber.from) * amber.slope
+            : sourceHue
+        let toned = fromOklch(tone.lightness, min(tone.maxChroma, sourceChroma * tone.chroma), hue)
+        return luminance(toned) > luminance(color) ? color : toned
+    }
+
+    /// WCAG 2 relative luminance of a `#rrggbb` colour.
+    static func luminance(_ hex: String) -> Double {
+        let rgb = channels(hex).map(linear)
+        return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
+    }
+
+    /// A `#rrggbb` colour as OKLCH: lightness, chroma, hue in degrees.
+    static func oklch(_ hex: String) -> (lightness: Double, chroma: Double, hue: Double) {
+        let rgb = channels(hex).map(linear)
+        let l = cbrt(0.4122214708 * rgb[0] + 0.5363325363 * rgb[1] + 0.0514459929 * rgb[2])
+        let m = cbrt(0.2119034982 * rgb[0] + 0.6806995451 * rgb[1] + 0.1073969566 * rgb[2])
+        let s = cbrt(0.0883024619 * rgb[0] + 0.2817188376 * rgb[1] + 0.6299787005 * rgb[2])
+        let a = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s
+        let b = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s
+        return (0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s, hypot(a, b),
+                (atan2(b, a) * 180 / .pi + 360).truncatingRemainder(dividingBy: 360))
+    }
+
+    /// An OKLCH colour as `#rrggbb`, each channel clamped into sRGB.
+    static func fromOklch(_ lightness: Double, _ chroma: Double, _ hue: Double) -> String {
+        let a = chroma * cos(hue * .pi / 180)
+        let b = chroma * sin(hue * .pi / 180)
+        let l = pow(lightness + 0.3963377774 * a + 0.2158037573 * b, 3)
+        let m = pow(lightness - 0.1055613458 * a - 0.0638541728 * b, 3)
+        let s = pow(lightness - 0.0894841775 * a - 1.291485548 * b, 3)
+        let channels = [
+            4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+            -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+            -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
+        ].map { Int((encoded($0) * 255).rounded()) }
+        return String(format: "#%02x%02x%02x", channels[0], channels[1], channels[2])
+    }
+
+    private static func channels(_ hex: String) -> [Double] {
+        let value = UInt32(hex.dropFirst(), radix: 16) ?? 0
+        return [16, 8, 0].map { Double((value >> $0) & 255) / 255 }
+    }
+
+    private static func linear(_ channel: Double) -> Double {
+        channel <= 0.04045 ? channel / 12.92 : pow((channel + 0.055) / 1.055, 2.4)
+    }
+
+    private static func encoded(_ channel: Double) -> Double {
+        let clamped = min(1, max(0, channel))
+        return clamped <= 0.0031308 ? 12.92 * clamped : 1.055 * pow(clamped, 1 / 2.4) - 0.055
     }
 }
 

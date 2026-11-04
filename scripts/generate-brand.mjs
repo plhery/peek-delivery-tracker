@@ -60,6 +60,7 @@ export function readBrandData() {
     fallbackColor: palette.fallbackColor,
     properties: palette.properties,
     derivation: palette.derivation,
+    toneExamples: palette.toneExamples,
     families: sortedByKey(families),
     palettes: sortedByKey(palettes),
     decals: sortedByKey(decals),

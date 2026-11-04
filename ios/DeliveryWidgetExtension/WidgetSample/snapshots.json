@@ -14,7 +14,7 @@
           "status" : "In Zustellung",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -35,7 +35,7 @@
           "status" : "Beim Paketdienst eingegangen",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -62,7 +62,7 @@
           "status" : "Out for delivery",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -83,7 +83,7 @@
           "status" : "Received by carrier",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -110,7 +110,7 @@
           "status" : "En reparto",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -131,7 +131,7 @@
           "status" : "Admitido por el transportista",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -158,7 +158,7 @@
           "status" : "En livraison",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -179,7 +179,7 @@
           "status" : "Pris en charge",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -206,7 +206,7 @@
           "status" : "In consegna",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -227,7 +227,7 @@
           "status" : "Preso in carico",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -254,7 +254,7 @@
           "status" : "W doręczeniu",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -275,7 +275,7 @@
           "status" : "Przyjęta przez przewoźnika",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -302,7 +302,7 @@
           "status" : "Em distribuição",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -323,7 +323,7 @@
           "status" : "Aceite pela transportadora",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -350,7 +350,7 @@
           "status" : "Saiu para entrega",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -371,7 +371,7 @@
           "status" : "Recebida pela transportadora",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -398,7 +398,7 @@
           "status" : "Передана курьеру",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -419,7 +419,7 @@
           "status" : "Принята службой доставки",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",
@@ -446,7 +446,7 @@
           "status" : "派送中",
           "surface" : [
             "#e6deef",
-            "#292235"
+            "#272131"
           ]
         },
         "carrier" : "FedEx",
@@ -467,7 +467,7 @@
           "status" : "已揽收",
           "surface" : [
             "#fadbe2",
-            "#461e23"
+            "#361c1e"
           ]
         },
         "carrier" : "DPD Switzerland",

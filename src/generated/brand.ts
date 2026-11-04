@@ -150,7 +150,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "dhl": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -161,7 +161,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "dhl-ecommerce": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -172,7 +172,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "dhl-ecommerce-es": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -183,7 +183,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "dhl-ecommerce-nl": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -194,7 +194,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "dhl-ecommerce-pl": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -205,7 +205,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "dhl-ecommerce-uk": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -216,7 +216,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "dhl-express": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -227,7 +227,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "dhl-freight": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -281,7 +281,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "gls-at": {
     "surface-light": "#dfebfa",
-    "surface-dark": "#293e57",
+    "surface-dark": "#152538",
     "ink-light": "#355e8a",
     "ink-dark": "#b7d1ee",
     "brand-light": "#1634a7",
@@ -292,7 +292,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "gls-ch": {
     "surface-light": "#dfebfa",
-    "surface-dark": "#293e57",
+    "surface-dark": "#152538",
     "ink-light": "#355e8a",
     "ink-dark": "#b7d1ee",
     "brand-light": "#1634a7",
@@ -303,7 +303,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "gls-de": {
     "surface-light": "#dfebfa",
-    "surface-dark": "#293e57",
+    "surface-dark": "#152538",
     "ink-light": "#355e8a",
     "ink-dark": "#b7d1ee",
     "brand-light": "#1634a7",
@@ -314,7 +314,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "gls-es": {
     "surface-light": "#dfebfa",
-    "surface-dark": "#293e57",
+    "surface-dark": "#152538",
     "ink-light": "#355e8a",
     "ink-dark": "#b7d1ee",
     "brand-light": "#1634a7",
@@ -325,7 +325,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "gls-fr": {
     "surface-light": "#dfebfa",
-    "surface-dark": "#293e57",
+    "surface-dark": "#152538",
     "ink-light": "#355e8a",
     "ink-dark": "#b7d1ee",
     "brand-light": "#1634a7",
@@ -336,7 +336,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "gls-it": {
     "surface-light": "#dfebfa",
-    "surface-dark": "#293e57",
+    "surface-dark": "#152538",
     "ink-light": "#355e8a",
     "ink-dark": "#b7d1ee",
     "brand-light": "#1634a7",
@@ -347,7 +347,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "gls-pl": {
     "surface-light": "#dfebfa",
-    "surface-dark": "#293e57",
+    "surface-dark": "#152538",
     "ink-light": "#355e8a",
     "ink-dark": "#b7d1ee",
     "brand-light": "#1634a7",
@@ -404,7 +404,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "mng-kargo": {
     "surface-light": "#f7e8aa",
-    "surface-dark": "#514727",
+    "surface-dark": "#30210b",
     "ink-light": "#6c5419",
     "ink-dark": "#ead695",
     "brand-light": "#d40511",
@@ -539,7 +539,7 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
   },
   "ups": {
     "surface-light": "#ede3d5",
-    "surface-dark": "#463a2c",
+    "surface-dark": "#2c2317",
     "ink-light": "#78573e",
     "ink-dark": "#dbc2a4",
     "brand-light": "#573626",

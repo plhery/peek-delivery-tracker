@@ -16,17 +16,19 @@ enum Brand {
     static let accent = Color(hex: "#F3CF48")
     static let accentBright = accent
     static let onAccent = Color(hex: "#20251E")
-    static let ink = color(light: "#20251E", dark: "#F5F6F2")
-    static let inkSoft = color(light: "#657060", dark: "#AFB9A9")
+    static let ink = color(light: "#20251E", dark: "#FAF6EB")
+    static let inkSoft = color(light: "#657060", dark: "#C2BAAA")
     /// The system's secondary grey, a little darker in light and lighter in dark: it reads at 4.5:1 or more on the page,
     /// the paper, the cream and every carrier's card (`ContrastTests`).
     static let secondaryText = color(light: "#606065", dark: "#BCBCC2")
-    static let cream = color(light: "#F0F0E9", dark: "#292C28")
-    static let paper = color(light: "#FFFFFF", dark: "#242824")
+    static let cream = color(light: "#F0F0E9", dark: "#292620")
+    static let paper = color(light: "#FFFFFF", dark: "#1F1C17")
+    /// The level above the paper: rows inside a sheet, menus and toasts (the web's `--raised`).
+    static let raised = color(light: "#FFFFFF", dark: "#292620")
     static let warning = color(light: "#963E19", dark: "#FFB184")
     /// The tray behind a swiped card, like the web's soft orange.
-    static let warningSoft = color(light: "#FFDDC7", dark: "#4C3123")
-    static let background = color(light: "#F4F5F1", dark: "#151915")
+    static let warningSoft = color(light: "#FFDDC7", dark: "#341F14")
+    static let background = color(light: "#F4F5F1", dark: "#13110E")
     static let separator = Color(uiColor: .separator)
 
     /// Cards ask for carrier colors on every render. Returning the same dynamic

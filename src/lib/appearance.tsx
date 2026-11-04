@@ -29,7 +29,7 @@ function subscribe(notify: () => void) {
 export function applyAppearance(value: Appearance) {
   document.documentElement.dataset.appearance = value;
   const dark = value === 'dark' || (value === 'system' && window.matchMedia?.('(prefers-color-scheme: dark)').matches);
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#151915' : '#F4F5F1');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#13110E' : '#F4F5F1');
 }
 
 export function useAppearance() {

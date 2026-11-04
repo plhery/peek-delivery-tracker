@@ -34,7 +34,7 @@ describe('appearance', () => {
     expect(document.documentElement.dataset.appearance).toBe(choice);
     render(<AppearanceProvider><Controls /></AppearanceProvider>);
     expect(screen.getByRole('status')).toHaveTextContent(choice);
-    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', choice === 'light' ? '#F4F5F1' : '#151915');
+    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', choice === 'light' ? '#F4F5F1' : '#13110E');
   });
   it('defaults to light when a stored value is invalid or storage cannot be read', () => {
     window.localStorage.setItem(APPEARANCE_STORAGE_KEY, 'invalid');
@@ -52,7 +52,7 @@ describe('appearance', () => {
     render(<AppearanceProvider><Controls /></AppearanceProvider>);
     fireEvent.click(screen.getByRole('button', { name: 'dark' }));
     expect(document.documentElement.dataset.appearance).toBe('dark');
-    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#151915');
+    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#13110E');
     fireEvent.click(screen.getByRole('button', { name: 'system' }));
     expect(document.documentElement.dataset.appearance).toBe('system');
     expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#F4F5F1');
@@ -62,7 +62,7 @@ describe('appearance', () => {
     render(<AppearanceProvider><Controls /></AppearanceProvider>);
     fireEvent.click(screen.getByRole('button', { name: 'system' }));
     act(() => { dark = true; changes.forEach((listener) => listener()); });
-    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#151915');
+    expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#13110E');
     fireEvent.click(screen.getByRole('button', { name: 'light' }));
     act(() => { changes.forEach((listener) => listener()); });
     expect(document.querySelector('meta[name="theme-color"]')).toHaveAttribute('content', '#F4F5F1');

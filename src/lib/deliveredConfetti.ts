@@ -9,7 +9,7 @@ const TONES = ['--tone', '--tone-surface', '--carrier-brand', '--yellow'];
 /** The card's ink, its carrier's colour and the app's yellow, with a lighter and a deeper mix, and white. */
 const PAPER = [
   'var(--tone)', 'var(--carrier-brand)', 'var(--yellow)', 'var(--yellow)',
-  'color-mix(in srgb, var(--tone) 55%, var(--tone-surface))', 'light-dark(#fff, #f5f6f2)',
+  'color-mix(in srgb, var(--tone) 55%, var(--tone-surface))', 'light-dark(#fff, #faf6eb)',
   'color-mix(in srgb, var(--yellow) 30%, var(--tone))',
 ];
 

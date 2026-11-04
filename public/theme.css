@@ -1,8 +1,9 @@
-/* Postal paper, ink, and the same restrained colors as the iOS app. */
+/* Postal paper, ink, and the same restrained colors as the iOS app. Dark is kraft and lamplight:
+   canvas, paper, raised and control step up in OKLCH lightness at one warm hue. */
 :root {
   color-scheme: light;
   --yellow: #f3cf48; --on-yellow: #20251e; --yellow-soft: #ffebab;
-  --ink: #20251e; --ink-soft: #657060; --canvas: #f4f5f1; --paper: #fff;
+  --ink: #20251e; --ink-soft: #657060; --canvas: #f4f5f1; --paper: #fff; --raised: #fff;
   --control: #eceee7; --line: #dce0d5; --green: #24613e; --green-soft: #dcf0d7;
   --blue: #22588a; --blue-soft: #daeafe; --orange: #963e19; --orange-text: #963e19; --orange-soft: #ffddc7;
   --lilac: #654299; --lilac-soft: #e9deff; --rose: #9a3d5c; --rose-soft: #fadde7;
@@ -13,21 +14,21 @@
 }
 :root[data-appearance="dark"] {
   color-scheme: dark;
-  --ink: #f5f6f2; --ink-soft: #afb9a9; --canvas: #151915; --paper: #242824;
-  --control: #2e342d; --line: #3e463b; --green: #9be0b5; --green-soft: #243d2e;
-  --blue: #9bcbff; --blue-soft: #213a51; --orange: #ffb184; --orange-text: #ffb184; --orange-soft: #4c3123;
-  --lilac: #d1b5ff; --lilac-soft: #382d4c; --rose: #ffadc8; --rose-soft: #482c39;
-  --ochre: #ffd65f; --ochre-soft: #443918; --yellow-soft: #443918;
+  --ink: #faf6eb; --ink-soft: #c2baaa; --canvas: #13110e; --paper: #1f1c17; --raised: #292620;
+  --control: #322f28; --line: #433f38; --green: #9be0b5; --green-soft: #142a1d;
+  --blue: #9bcbff; --blue-soft: #152636; --orange: #ffb184; --orange-text: #ffb184; --orange-soft: #341f14;
+  --lilac: #d1b5ff; --lilac-soft: #272034; --rose: #ffadc8; --rose-soft: #331d27;
+  --ochre: #ffd65f; --ochre-soft: #2f220e; --yellow-soft: #413410;
   --shadow: 0 3px 16px rgb(0 0 0 / 10%);
 }
 @media (prefers-color-scheme: dark) {
   :root[data-appearance="system"] {
     color-scheme: dark;
-    --ink: #f5f6f2; --ink-soft: #afb9a9; --canvas: #151915; --paper: #242824;
-    --control: #2e342d; --line: #3e463b; --green: #9be0b5; --green-soft: #243d2e;
-    --blue: #9bcbff; --blue-soft: #213a51; --orange: #ffb184; --orange-text: #ffb184; --orange-soft: #4c3123;
-    --lilac: #d1b5ff; --lilac-soft: #382d4c; --rose: #ffadc8; --rose-soft: #482c39;
-    --ochre: #ffd65f; --ochre-soft: #443918; --yellow-soft: #443918;
+    --ink: #faf6eb; --ink-soft: #c2baaa; --canvas: #13110e; --paper: #1f1c17; --raised: #292620;
+    --control: #322f28; --line: #433f38; --green: #9be0b5; --green-soft: #142a1d;
+    --blue: #9bcbff; --blue-soft: #152636; --orange: #ffb184; --orange-text: #ffb184; --orange-soft: #341f14;
+    --lilac: #d1b5ff; --lilac-soft: #272034; --rose: #ffadc8; --rose-soft: #331d27;
+    --ochre: #ffd65f; --ochre-soft: #2f220e; --yellow-soft: #413410;
     --shadow: 0 3px 16px rgb(0 0 0 / 10%);
   }
 }

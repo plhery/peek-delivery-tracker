@@ -34,9 +34,9 @@
 /* What the link shows, as a small card: the switches under it change it. */
 .peeks-preview__caption { margin: 0 2px 8px; color: var(--ink-soft); font-size: 12px; }
 .peeks-preview {
-  --tone: light-dark(var(--carrier-ink-light, #657060), var(--carrier-ink-dark, #afb9a9));
-  --tone-surface: light-dark(var(--carrier-surface-light, #eceee7), var(--carrier-surface-dark, #2e342d));
-  --carrier-brand: light-dark(var(--carrier-brand-light, #20251e), var(--carrier-brand-dark, #f5f6f2));
+  --tone: light-dark(var(--carrier-ink-light, #657060), var(--carrier-ink-dark, #c2baaa));
+  --tone-surface: light-dark(var(--carrier-surface-light, #eceee7), var(--carrier-surface-dark, #322f28));
+  --carrier-brand: light-dark(var(--carrier-brand-light, #20251e), var(--carrier-brand-dark, #faf6eb));
   display: flex; align-items: center; gap: 12px; overflow: hidden; padding: 14px 16px; border-radius: 18px; background: var(--tone-surface);
 }
 /* A gift is lilac for whoever gets it, whatever carries it. */

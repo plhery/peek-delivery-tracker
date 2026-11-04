@@ -126,7 +126,7 @@ final class PullToRefreshModel {
 }
 
 enum PullToRefreshPalette {
-    static let inkSoft = Brand.color(light: "#657060", dark: "#AFB9A9")
+    static let inkSoft = Brand.color(light: "#657060", dark: "#C2BAAA")
 }
 
 // The Mac has no pull-to-refresh: it refreshes from the menu and ⌘R.

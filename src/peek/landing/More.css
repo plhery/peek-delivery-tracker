@@ -6,7 +6,7 @@
 .landing-more__rest { grid-column: 2; grid-row: 2; align-self: start; display: grid; gap: 22px; margin-top: 22px; }
 
 /* A picture of the app, drawn at phone size and set in a phone. */
-.landing-phone { position: relative; width: 309px; height: 645px; padding: 10px; border-radius: 50px; background: #20251e; box-shadow: 0 0 0 1px light-dark(transparent, #3e463b), 0 30px 70px rgb(32 37 30 / 20%); }
+.landing-phone { position: relative; width: 309px; height: 645px; padding: 10px; border-radius: 50px; background: #20251e; box-shadow: 0 0 0 1px light-dark(transparent, #433f38), 0 30px 70px rgb(32 37 30 / 20%); }
 .landing-phone[data-rise=wait] { opacity: 0; }
 .landing-phone[data-rise=go] { animation: door-rise .7s var(--spring) both; }
 .landing-phone__screen { position: relative; width: 289px; height: 625px; overflow: hidden; border-radius: 40px; background: var(--canvas); }

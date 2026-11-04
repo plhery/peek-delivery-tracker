@@ -966,7 +966,7 @@
   "dhl": {
     "palette": {
       "surface-light": "#f7e8aa",
-      "surface-dark": "#514727",
+      "surface-dark": "#30210b",
       "ink-light": "#6c5419",
       "ink-dark": "#ead695",
       "brand-light": "#d40511",
@@ -1594,7 +1594,7 @@
     "family": "gls",
     "palette": {
       "surface-light": "#dfebfa",
-      "surface-dark": "#293e57",
+      "surface-dark": "#152538",
       "ink-light": "#355e8a",
       "ink-dark": "#b7d1ee",
       "brand-light": "#1634a7",
@@ -3905,7 +3905,7 @@
   "ups": {
     "palette": {
       "surface-light": "#ede3d5",
-      "surface-dark": "#463a2c",
+      "surface-dark": "#2c2317",
       "ink-light": "#78573e",
       "ink-dark": "#dbc2a4",
       "brand-light": "#573626",

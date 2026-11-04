@@ -349,7 +349,7 @@ struct DeliveredPaperBurst: Equatable {
     /// The card's ink, its carrier's colour and the app's yellow, with a lighter and a deeper mix, and white.
     static func colors(ink: Color, surface: Color, brand: Color) -> [Color] {
         [ink, brand, Brand.accent, Brand.accent, ink.mix(with: surface, by: 0.45, in: .device),
-         Brand.color(light: "#FFFFFF", dark: "#F5F6F2"), ink.mix(with: Brand.accent, by: 0.3, in: .device)]
+         Brand.color(light: "#FFFFFF", dark: "#FAF6EB"), ink.mix(with: Brand.accent, by: 0.3, in: .device)]
     }
 
     func draw(_ context: GraphicsContext, at seconds: Double) {

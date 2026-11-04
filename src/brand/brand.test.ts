@@ -11,13 +11,16 @@ import {
   carrierBrand,
   carrierBrandFamily,
   carrierDecal,
+  luminance,
   mix,
+  tone,
   type CarrierDecal,
   type TruckDecalCircle,
   type TruckDecalLine,
   type TruckDecalPolygon,
   type TruckPoint,
 } from './index';
+import paletteSource from './palette.json';
 import truckSource from './truck.json';
 
 const HEX = /^#[\da-f]{6}$/i;
@@ -48,6 +51,28 @@ describe('carrier brand', () => {
 
   it('falls back when the catalog color is not a hex literal', () => {
     expect(carrierBrand('not-a-color').truck).toBe(FALLBACK_BRAND_COLOR);
+  });
+
+  it('settles dark cards at one lightness, as the examples the native apps also check', () => {
+    const step = BRAND_DERIVATION.find((candidate) => candidate.property === 'surface-dark');
+    expect(step?.tone).toBeDefined();
+    for (const [input, expected] of paletteSource.toneExamples) expect(tone(input, step!.tone!)).toBe(expected);
+    expect(carrierBrand('#ffcc00')['surface-dark']).toBe(tone(mix('#ffcc00', step!.base, step!.amount), step!.tone!));
+  });
+
+  it('never makes a carrier card brighter in dark, so its words keep their contrast', () => {
+    const step = BRAND_DERIVATION.find((candidate) => candidate.property === 'surface-dark')!;
+    const ids = Object.keys(CARRIER_DEFINITIONS);
+    expect(ids.length).toBeGreaterThan(1000);
+    for (const id of ids) {
+      const color = CARRIER_DEFINITIONS[id as keyof typeof CARRIER_DEFINITIONS].color;
+      const palette = carrierBrand(color, CARRIER_PALETTES[id]);
+      const mixed = mix(color, step.base, step.amount);
+      expect(luminance(palette['surface-dark']), id).toBeLessThanOrEqual(luminance(CARRIER_PALETTES[id]?.['surface-dark'] ?? mixed));
+      // The words on the card are lighter than the card, so a darker card only adds contrast.
+      expect(luminance(palette['ink-dark']), id).toBeGreaterThan(luminance(palette['surface-dark']));
+      expect(luminance(palette['brand-dark']), id).toBeGreaterThan(luminance(palette['surface-dark']));
+    }
   });
 
   it('gives the GLS countries one family, one palette and one livery', () => {

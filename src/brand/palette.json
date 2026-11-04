@@ -14,7 +14,10 @@
   ],
   "derivation": [
     { "property": "surface-light", "base": "#ffffff", "amount": 0.86 },
-    { "property": "surface-dark", "base": "#20261f", "amount": 0.8 },
+    {
+      "property": "surface-dark", "base": "#20261f", "amount": 0.8,
+      "tone": { "lightness": 0.262, "chroma": 0.85, "maxChroma": 0.042, "amber": { "from": 80, "to": 115, "hue": 72, "slope": 0.25 } }
+    },
     { "property": "ink-light", "base": "#000000", "amount": 0.55 },
     { "property": "ink-dark", "base": "#ffffff", "amount": 0.65 },
     { "property": "brand-light", "base": "#000000", "amount": 0.3 },
@@ -22,5 +25,9 @@
     { "property": "truck", "base": "#000000", "amount": 0 },
     { "property": "edge", "base": "#000000", "amount": 0.2 },
     { "property": "accent", "base": "#ffffff", "amount": 1 }
+  ],
+  "toneExamples": [
+    ["#4d4719", "#30220b"], ["#292235", "#272131"], ["#1a303a", "#15272f"], ["#461e23", "#361c1e"],
+    ["#1a402e", "#0f2b1e"], ["#363b36", "#222622"], ["#1a1f28", "#1a1f28"]
   ]
 }

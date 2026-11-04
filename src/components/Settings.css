@@ -27,6 +27,17 @@
 .settings-mini-screen--dark i { background: #69755c; }
 .settings-mini-screen--system { background: linear-gradient(90deg,#f2f4eb 50%,#30392d 50%); }
 .settings-mini-screen--system i { background: linear-gradient(90deg,#dce2d1 50%,#69755c 50%); }
+/* In dark, the Dark and System tiles preview the kraft palette; Light keeps its tiles as they are. */
+:root[data-appearance="dark"] .settings-mini-screen--dark { background: #1f1c17; border-color: #57524a; }
+:root[data-appearance="dark"] .settings-mini-screen--dark i { background: #433f38; }
+:root[data-appearance="dark"] .settings-mini-screen--system { background: linear-gradient(90deg,#f2f4eb 50%,#1f1c17 50%); }
+:root[data-appearance="dark"] .settings-mini-screen--system i { background: linear-gradient(90deg,#dce2d1 50%,#433f38 50%); }
+@media (prefers-color-scheme: dark) {
+  :root[data-appearance="system"] .settings-mini-screen--dark { background: #1f1c17; border-color: #57524a; }
+  :root[data-appearance="system"] .settings-mini-screen--dark i { background: #433f38; }
+  :root[data-appearance="system"] .settings-mini-screen--system { background: linear-gradient(90deg,#f2f4eb 50%,#1f1c17 50%); }
+  :root[data-appearance="system"] .settings-mini-screen--system i { background: linear-gradient(90deg,#dce2d1 50%,#433f38 50%); }
+}
 .refined-settings .language-control--account { padding: 5px 13px; min-height: 54px; border-top: 1px solid var(--line); }
 .refined-settings .language-control--account > span { font-weight: 400; }
 .refined-settings .language-control--account select { background: transparent; color: var(--ink-soft); padding-right: 0; font-size: 12px; max-width: 60%; }

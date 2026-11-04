@@ -22,7 +22,10 @@ parcel with a face, is a separate drawing.
 
 `identities.json` owns the app's carrier families, explicit palettes and decals.
 Catalog colours come from Universal Parcel Scraper. `palette.json` defines fallback
-colours and palette mixing; `truck.json` defines the shared truck geometry.
+colours and palette mixing; `truck.json` defines the shared truck geometry. The dark card's
+mix then takes its `tone`: one lightness for every carrier, a softer chroma and amber for
+yellows, unless that comes out brighter than the mix, so card text never loses contrast.
+`toneExamples` holds pairs the web, iPhone and Android tests all check.
 
 `truck.json` spells every outline twice: `d` for the web's SVG, and `points` or `segments`,
 the same outline in straight lines, for the iPhone app's canvas.

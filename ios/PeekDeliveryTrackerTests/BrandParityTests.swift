@@ -9,9 +9,24 @@ import XCTest
 final class BrandParityTests: XCTestCase {
     private struct BrandDefinition: Decodable {
         struct Step: Decodable {
+            struct Tone: Decodable {
+                struct Amber: Decodable {
+                    let from: Double
+                    let to: Double
+                    let hue: Double
+                    let slope: Double
+                }
+
+                let lightness: Double
+                let chroma: Double
+                let maxChroma: Double
+                let amber: Amber
+            }
+
             let property: String
             let base: String
             let amount: Double
+            let tone: Tone?
         }
 
         struct Truck: Decodable {
@@ -74,6 +89,8 @@ final class BrandParityTests: XCTestCase {
         let fallbackColor: String
         let properties: [String]
         let derivation: [Step]
+        /// `[input, expected]` pairs for the dark cards' tone, which the web checks too.
+        let toneExamples: [[String]]
         let families: [String: String]
         let palettes: [String: [String: String]]
         let decals: [String: String]
@@ -91,6 +108,16 @@ final class BrandParityTests: XCTestCase {
     private func identity(_ id: String) throws -> CarrierVisualIdentity {
         let definition = try XCTUnwrap(catalog.definitions[CarrierID(rawValue: id)], "\(id) is not in the catalog")
         return CarrierVisualIdentity(id: id, carrier: definition)
+    }
+
+    /// The app's tone for a step, once it matches the shared definition value for value.
+    private func tone(of step: BrandDefinition.Step) throws -> CarrierBrandAssets.Step.Tone {
+        let definition = try XCTUnwrap(step.tone, step.property)
+        let tone = try XCTUnwrap(CarrierBrandAssets.shared.derivation.first { $0.property == step.property }?.tone, step.property)
+        XCTAssertEqual([tone.lightness, tone.chroma, tone.maxChroma], [definition.lightness, definition.chroma, definition.maxChroma])
+        XCTAssertEqual([tone.amber.from, tone.amber.to, tone.amber.hue, tone.amber.slope],
+                       [definition.amber.from, definition.amber.to, definition.amber.hue, definition.amber.slope])
+        return tone
     }
 
     private func point(_ pair: [Double]) -> CGPoint {
@@ -133,9 +160,23 @@ final class BrandParityTests: XCTestCase {
             let colors = try identity(id).colors
             XCTAssertEqual(colors.count, brand.derivation.count)
             for (index, step) in brand.derivation.enumerated() {
-                XCTAssertEqual(colors[index], CarrierVisualIdentity.mix(color, step.base, step.amount), "\(id) \(step.property)")
+                let mixed = CarrierVisualIdentity.mix(color, step.base, step.amount)
+                // A step with a tone settles the mix at the tone's lightness, as the dark card does.
+                let expected = try step.tone == nil ? mixed : CarrierVisualIdentity.tone(mixed, tone(of: step))
+                XCTAssertEqual(colors[index], expected, "\(id) \(step.property)")
                 XCTAssertEqual(step.property, brand.properties[index])
             }
+        }
+    }
+
+    func testDarkCardsSettleAtOneLightnessAsTheSharedExamples() throws {
+        let brand = try brand()
+        let step = try XCTUnwrap(brand.derivation.first { $0.property == "surface-dark" })
+        let shared = try tone(of: step)
+        XCTAssertFalse(brand.toneExamples.isEmpty)
+        for example in brand.toneExamples {
+            XCTAssertEqual(example.count, 2)
+            XCTAssertEqual(CarrierVisualIdentity.tone(example[0], shared), example[1], example[0])
         }
     }
 

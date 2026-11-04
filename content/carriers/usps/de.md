@@ -107,7 +107,7 @@ Nur Priority Mail Express und Amazon-Pakete, schreibt USPS. Alles andere kommt m
 
 ### Zeigt USPS eine genaue Lieferzeit?
 
-Nein. USPS kann ein Zeitfenster von 2 Stunden nennen (Expected Delivery Window), das aber nicht garantiert ist, und weiß nach eigenen Worten nicht, wann ein Zusteller an einer Adresse ankommt. Peek zeigt nur den voraussichtlichen Tag.
+Nein. USPS kann ein Zeitfenster von 2 Stunden nennen (Expected Delivery Window), das aber nicht garantiert ist, und weiß nach eigenen Worten nicht, wann ein Zusteller an einer Adresse ankommt. Peek zeigt den voraussichtlichen Tag und, wenn USPS eines nennt, auch das Zeitfenster.
 
 :::sources
 - [Europäische Kommission: EU customs reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € Zoll je Warenkategorie bis 150 € seit 1. Juli 2026, 2 € Union handling fee seit 1. November 2026

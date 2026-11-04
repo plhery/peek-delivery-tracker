@@ -87,7 +87,7 @@ The Bologna number on BRT's documents is its office, not customer service.
 
 [Peek](/) recognises BRT's 12-, 14- and 15-digit numbers. Other carriers share them, so it asks BRT among the likely ones. Links from vas.brt.it with `brtCode=` work too; 19-digit BRTcodes and mybrt.it links don't.
 
-Peek shows BRT's English statuses, except that a locker or fermopoint pickup appears as "Delivered". It puts each scan's place on a map, shows the weight and can notify you when the status changes. It drops the sender, recipient, merchant reference, parcel count and volume. It shows no expected day or pickup-point details and doesn't follow parcels handed to DPD abroad. BRT's scan times carry no time zone: Peek reads them on Italian time, or on a depot's local time abroad, and lists BRT's own history in BRT's order.
+Peek shows BRT's English statuses, except that a locker or fermopoint pickup appears as "Delivered". It puts each scan's place on a map, shows the weight and can notify you when the status changes. It drops the sender, recipient, merchant reference, parcel count and volume. It shows no pickup-point details and doesn't follow parcels handed to DPD abroad. BRT gives no expected day, but when Chronopost or DPD brought the parcel to Italy under a 14-digit number, Peek shows their delivery estimate until BRT delivers or returns it, leaves it at a pickup point or scans it after the estimated day. BRT's scan times carry no time zone: Peek reads them on Italian time, or on a depot's local time abroad, and lists BRT's own history in BRT's order.
 
 ## Questions about BRT tracking
 

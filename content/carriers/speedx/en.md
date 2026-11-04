@@ -84,7 +84,7 @@ SpeedX's channels for recipients in the US, as listed on its [support page](http
 
 [Peek](/) names SpeedX at once from an SPX number of either shape, or from a tracking.speedx.io link with the number in it.
 
-It reads SpeedX's own tracking page and shows the status and each scan with its town on a map, at the time SpeedX recorded it, plus the delivery time and the destination country. It leaves out your address and the delivery photo, so look at the photo on SpeedX's page. Peek shows no expected delivery date for SpeedX. `Delivered` appears in Peek's own words; other lines show as SpeedX writes them, `Out for Delivery` included. There's no handoff to another carrier to follow.
+It reads SpeedX's own tracking page and shows the status and each scan with its town on a map, at the time SpeedX recorded it, plus the delivery time and the destination country. It leaves out your address and the delivery photo, so look at the photo on SpeedX's page. Peek shows the estimated delivery day from SpeedX's page. `Delivered` appears in Peek's own words; other lines show as SpeedX writes them, `Out for Delivery` included. There's no handoff to another carrier to follow.
 
 Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. If SpeedX's page doesn't answer, other tracking sources rarely hold SpeedX parcels, so there may be nothing new until it does.
 

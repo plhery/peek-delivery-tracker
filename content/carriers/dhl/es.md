@@ -92,7 +92,7 @@ DHL avisa de SMS falsos con enlaces acortados o prefijos de país raros, y de ta
 
 Peek lee el seguimiento de dhl.de en inglés (en alemán solo si usas Peek en alemán), así que los estados salen con el texto inglés de DHL, y si DHL rechaza la consulta recurre a un navegador en su servidor. Cuando varios envíos comparten un número de 12 cifras, DHL pide el código postal de entrega: el paquete te lo pide entonces con «Añadir código postal», y hasta que lo añadas completan los servicios de seguimiento universales. También completan si DHL dice que el número es de otro servicio de DHL. Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto, y te avisa con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
 
-Muestra el estado, cada evento con su lugar en el mapa, el día previsto de entrega (sin franja horaria) y el país de destino. No guarda tu nombre, tu dirección ni la firma. Si un evento en España enlaza el seguimiento de Correos o de DHL eCommerce Iberia, Peek puede seguir el paquete allí. Peek no puede desviar un paquete, pedir un Liefertag ni reclamar por ti.
+Muestra el estado, cada evento con su lugar en el mapa, el día previsto de entrega (con la franja horaria de DHL cuando la da) y el país de destino. No guarda tu nombre, tu dirección ni la firma. Si un evento en España enlaza el seguimiento de Correos o de DHL eCommerce Iberia, Peek puede seguir el paquete allí. Peek no puede desviar un paquete, pedir un Liefertag ni reclamar por ti.
 
 ## Preguntas sobre el seguimiento de DHL Paket
 

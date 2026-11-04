@@ -75,7 +75,7 @@ Have the airbill number ready. LSO's holidays page gives another number, 866.215
 
 [Peek](/) names LSO straight away for a number of the `ZY0` shape. A tracking link from lso.com/tracking (with `airbillnos=`) or app.lso.com/tracking (with `barcodes=`) works too. No account, postcode or phone number needed.
 
-Peek can't read LSO's own tracking. It follows LSO parcels through tracking services instead and shows the status and history those services hold, in their wording. That history is often hours behind LSO's page, and for some parcels there's nothing yet. Peek shows no expected delivery, proof of delivery or pickup point for LSO.
+Peek can't read LSO's own tracking. It follows LSO parcels through tracking services instead and shows the status and history those services hold, in their wording. That history is often hours behind LSO's page, and for some parcels there's nothing yet. Peek shows no proof of delivery or pickup point for LSO, and an expected delivery only when 17TRACK, one of those services, passes on LSO's own estimate.
 
 Peek checks every 15 minutes, out for delivery too, and can notify you when the status changes. For the signature, a claim or a delivery problem, go to LSO or the shop.
 

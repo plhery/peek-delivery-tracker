@@ -25,7 +25,8 @@ enum class WindowKeyGroup {
 
 /**
  * A key the window answers, under the title the iPad's menu bar or key button gives it, in the order they list them:
- * Ctrl stands for ⌘ and Meta for ⌃, as the keys take them. Add's Esc has no title on the iPhone, and isn't listed.
+ * Ctrl stands for ⌘ and Alt for ⌃ (Android keeps every combination with Meta for the system, so no app sees one). Add's
+ * Esc has no title on the iPhone, and isn't listed.
  */
 enum class WindowKey(val group: WindowKeyGroup, val titleKey: String, val keyCode: Int, val modifiers: Int = 0) {
     Account(WindowKeyGroup.App, "native.account", KeyEvent.KEYCODE_COMMA, KeyEvent.META_CTRL_ON),
@@ -36,8 +37,8 @@ enum class WindowKey(val group: WindowKeyGroup, val titleKey: String, val keyCod
     Friends(WindowKeyGroup.App, "friends.title", KeyEvent.KEYCODE_3, KeyEvent.META_CTRL_ON),
     Refresh(WindowKeyGroup.App, "app.refresh", KeyEvent.KEYCODE_R, KeyEvent.META_CTRL_ON),
     CopyTrackingNumber(WindowKeyGroup.Parcel, "detail.copyTracking", KeyEvent.KEYCODE_C, KeyEvent.META_CTRL_ON or KeyEvent.META_SHIFT_ON),
-    Archive(WindowKeyGroup.Parcel, "detail.archive", KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON or KeyEvent.META_META_ON),
-    Restore(WindowKeyGroup.Parcel, "detail.restore", KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON or KeyEvent.META_META_ON),
+    Archive(WindowKeyGroup.Parcel, "detail.archive", KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON or KeyEvent.META_ALT_ON),
+    Restore(WindowKeyGroup.Parcel, "detail.restore", KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON or KeyEvent.META_ALT_ON),
     Delete(WindowKeyGroup.Parcel, "detail.delete", KeyEvent.KEYCODE_DEL, KeyEvent.META_CTRL_ON),
     CloseSearch(WindowKeyGroup.Deliveries, "view.hideSearch", KeyEvent.KEYCODE_ESCAPE),
     Undo(WindowKeyGroup.Deliveries, "app.undo", KeyEvent.KEYCODE_Z, KeyEvent.META_CTRL_ON),

@@ -366,7 +366,7 @@ class KeyboardDeviceTest {
 
     /**
      * A-G04: the menu of the card shown beside the list, with a keyboard connected, writes out under its items the keys
-     * that press them (Shift+Ctrl+C, Meta+Ctrl+A, Ctrl+Backspace), which the window lists alone; Ctrl+Shift+Backspace
+     * that press them (Shift+Ctrl+C, Alt+Ctrl+A, Ctrl+Backspace), which the window lists alone; Ctrl+Shift+Backspace
      * presses nothing, and Ctrl+Shift+C copies the parcel's number and closes the menu. Another card's menu, a card's
      * menu where the window stacks the page over the list, and any without a keyboard show no keys, and Ctrl+Shift+C
      * does nothing there.
@@ -459,6 +459,21 @@ class KeyboardDeviceTest {
             press(KeyEvent.KEYCODE_ESCAPE)
             compose.waitUntil(LONG_MILLIS) { walk.shown() == null }
         }
+    }
+
+    /**
+     * B-G06, X-AD22: Ctrl+Alt+A, the key for ⌃⌘A (the system keeps every combination with Meta, which no app sees), comes
+     * through the window and archives the open page's parcel.
+     */
+    @Test
+    fun ctrlAltAArchivesTheOpenPagesParcel() {
+        show()
+        walk.open(gift)
+        walk.settle()
+        press(KeyEvent.KEYCODE_A, CTRL or ALT)
+        compose.waitUntil(LONG_MILLIS) { walk.onUi { walk.source.archived.toList() } == listOf(gift.id) }
+        walk.settle()
+        walk.shot("X-AD22-archive-by-key")
     }
 
     /**
@@ -571,7 +586,7 @@ class KeyboardDeviceTest {
             val title = walk.text(item.titleKey)
             val key = when (item) {
                 ParcelMenuItem.CopyTrackingNumber -> "Shift+Ctrl+C"
-                ParcelMenuItem.Archive, ParcelMenuItem.Restore -> "Meta+Ctrl+A"
+                ParcelMenuItem.Archive, ParcelMenuItem.Restore -> "Alt+Ctrl+A"
                 ParcelMenuItem.Delete -> "Ctrl+Backspace"
                 else -> null
             }
@@ -594,5 +609,6 @@ class KeyboardDeviceTest {
         const val FOLDER = "keyswalk"
         const val CTRL = KeyEvent.META_CTRL_ON or KeyEvent.META_CTRL_LEFT_ON
         const val SHIFT = KeyEvent.META_SHIFT_ON or KeyEvent.META_SHIFT_LEFT_ON
+        const val ALT = KeyEvent.META_ALT_ON or KeyEvent.META_ALT_LEFT_ON
     }
 }

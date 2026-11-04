@@ -433,7 +433,7 @@ class ParcelPageTest {
         open("Birthday gift")
         openMenu()
         item(ParcelMenuItem.Rename).assertContentDescriptionEquals("Edit parcel name")
-        item(ParcelMenuItem.Archive).assertContentDescriptionEquals("Archive parcel, Meta+Ctrl+A")
+        item(ParcelMenuItem.Archive).assertContentDescriptionEquals("Archive parcel, Alt+Ctrl+A")
         item(ParcelMenuItem.Delete).assertContentDescriptionEquals("Delete permanently, Ctrl+Backspace")
         fun height(item: ParcelMenuItem) = bounds(item(item)).let { (it.bottom - it.top).value }
         // A line for the title, one for its keys, and the row's padding: 62 tall, as the iPhone's two-line rows.
@@ -653,7 +653,7 @@ class ParcelPageTest {
         closed()
 
         open("Birthday gift")
-        press(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_META_ON)
+        press(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_ALT_ON)
         compose.mainClock.advanceTimeBy(1_000)
         assertEquals(listOf(gift), source.archived)
         closed()

@@ -154,7 +154,7 @@ class CardMenuTest {
     fun theMenusKeysShowOnlyWhileTheSearchFieldDoesntHaveTheKeyboard() {
         show(keyboard = true)
         longPress("New trainers")
-        item(ParcelMenuItem.Archive).assertContentDescriptionEquals("Archive parcel, Meta+Ctrl+A")
+        item(ParcelMenuItem.Archive).assertContentDescriptionEquals("Archive parcel, Alt+Ctrl+A")
         back()
 
         compose.onNodeWithTag(SEARCH_BUTTON).performClick()
@@ -339,11 +339,11 @@ class CardMenuTest {
         val ctrl = KeyEvent.META_CTRL_ON or KeyEvent.META_CTRL_LEFT_ON
         val items = ParcelMenuItem.menu(active, onCard = true).flatten()
         assertEquals(ParcelMenuItem.CopyTrackingNumber, ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_C, ctrl or KeyEvent.META_SHIFT_ON), items))
-        assertEquals(ParcelMenuItem.Archive, ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_META_ON), items))
+        assertEquals(ParcelMenuItem.Archive, ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_ALT_ON), items))
         assertEquals(ParcelMenuItem.Delete, ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_DEL, ctrl), items))
         assertEquals(
             ParcelMenuItem.Restore,
-            ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_META_ON), ParcelMenuItem.menu(archived, onCard = true).flatten()),
+            ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_ALT_ON), ParcelMenuItem.menu(archived, onCard = true).flatten()),
         )
         // Plain Ctrl+C copies what is selected, not the parcel's number.
         assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_C, ctrl), items))
@@ -351,7 +351,7 @@ class CardMenuTest {
         // A-G04: exactly their modifiers, none more (`keyboardShortcut(_:modifiers:)`).
         assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_DEL, ctrl or KeyEvent.META_SHIFT_ON), items))
         assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_C, ctrl or KeyEvent.META_SHIFT_ON or KeyEvent.META_ALT_ON), items))
-        assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_META_ON or KeyEvent.META_SHIFT_ON), items))
+        assertNull(ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_A, ctrl or KeyEvent.META_ALT_ON or KeyEvent.META_SHIFT_ON), items))
         // Caps Lock is no modifier.
         assertEquals(ParcelMenuItem.Delete, ParcelMenuItem.forShortcut(key(KeyEvent.KEYCODE_DEL, ctrl or KeyEvent.META_CAPS_LOCK_ON), items))
     }

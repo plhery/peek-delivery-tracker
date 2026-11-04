@@ -606,13 +606,13 @@ private fun MenuSeparator() {
 }
 
 /**
- * `ParcelMenuItem.shortcut`, as the keys read on Android, where Ctrl stands for ⌘ as the deliveries' keys take it:
- * ⇧⌘C, ⌃⌘A and ⌘⌫.
+ * `ParcelMenuItem.shortcut`, as the keys read on Android, where Ctrl stands for ⌘ and Alt for ⌃ as the window's keys
+ * take them, in iOS's order: ⇧⌘C, ⌃⌘A and ⌘⌫.
  */
 internal val ParcelMenuItem.shortcutLabel: String?
     get() = when (this) {
         ParcelMenuItem.CopyTrackingNumber -> "Shift+Ctrl+C"
-        ParcelMenuItem.Archive, ParcelMenuItem.Restore -> "Meta+Ctrl+A"
+        ParcelMenuItem.Archive, ParcelMenuItem.Restore -> "Alt+Ctrl+A"
         ParcelMenuItem.Delete -> "Ctrl+Backspace"
         else -> null
     }
@@ -624,7 +624,7 @@ internal val ParcelMenuItem.shortcutLabel: String?
 internal fun ParcelMenuItem.Companion.forShortcut(event: KeyEvent, items: List<ParcelMenuItem>): ParcelMenuItem? {
     val wanted = when {
         event.keyCode == KeyEvent.KEYCODE_C && event.hasModifiers(KeyEvent.META_CTRL_ON or KeyEvent.META_SHIFT_ON) -> listOf(ParcelMenuItem.CopyTrackingNumber)
-        event.keyCode == KeyEvent.KEYCODE_A && event.hasModifiers(KeyEvent.META_CTRL_ON or KeyEvent.META_META_ON) ->
+        event.keyCode == KeyEvent.KEYCODE_A && event.hasModifiers(KeyEvent.META_CTRL_ON or KeyEvent.META_ALT_ON) ->
             listOf(ParcelMenuItem.Archive, ParcelMenuItem.Restore)
         event.keyCode == KeyEvent.KEYCODE_DEL && event.hasModifiers(KeyEvent.META_CTRL_ON) -> listOf(ParcelMenuItem.Delete)
         else -> return null

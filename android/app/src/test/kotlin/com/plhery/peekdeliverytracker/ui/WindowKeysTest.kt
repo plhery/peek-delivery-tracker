@@ -174,7 +174,7 @@ class WindowKeysTest {
 
     /**
      * The page's keys wait for a parcel's link's sheet too (the page's `keyboardInFront` is the list's `keyboardFree`,
-     * `links.route == nil` in it): under it, Ctrl+Backspace asks nothing and Ctrl+Meta+A archives nothing of the parcel
+     * `links.route == nil` in it): under it, Ctrl+Backspace asks nothing and Ctrl+Alt+A archives nothing of the parcel
      * beside the list; once it has gone, Ctrl+Backspace asks about deleting that parcel.
      */
     @Test
@@ -185,7 +185,7 @@ class WindowKeysTest {
         openLink()
         press(KeyEvent.KEYCODE_DEL, CTRL)
         assertNull(deliveries.deleting)
-        press(KeyEvent.KEYCODE_A, CTRL or KeyEvent.META_META_ON)
+        press(KeyEvent.KEYCODE_A, CTRL or KeyEvent.META_ALT_ON)
         assertEquals(emptyList<UUID>(), source.archived)
         closeLink()
         press(KeyEvent.KEYCODE_DEL, CTRL)

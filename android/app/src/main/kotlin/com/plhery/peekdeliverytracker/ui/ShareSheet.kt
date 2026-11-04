@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,12 +15,14 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,7 +40,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
@@ -50,6 +52,7 @@ import com.plhery.peekdeliverytracker.ui.draw.PeekMarkArtworkImage
 import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetInsets
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
+import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
@@ -137,7 +140,8 @@ fun ShareSheet(
 
 /**
  * The card (`configureInterface()`): Peek's mark, its name, what it found and Save over Cancel, a column in the middle
- * of the sheet, as wide as the sheet's margins leave it less 8 on each side. The iPhone's has a beige ground of its own
+ * of the sheet, as wide as the sheet's margins leave it less 8 on each side; where it doesn't fit, at the largest text
+ * sizes, it scrolls, 16 clear of the sheet's top and of the navigation bar. The iPhone's has a beige ground of its own
  * under the system's adaptive label colours, which in dark mode puts light text on it; this one is the iPhone's light
  * card, in either appearance.
  */
@@ -157,18 +161,26 @@ private fun ShareCardView(card: ShareCard, copy: ExtensionLocalizer, onSave: () 
             val colors = PeekTheme.colors
             val type = PeekTheme.type
             val phase = card.phase
-            Box(Modifier.fillMaxSize().background(PAPER).testTag(SHARE_CARD), contentAlignment = Alignment.Center) {
+            // Clear of the sheet's top and of the navigation bar once it scrolls (`viewSafeAreaInsetsDidChange`).
+            val margin = sheetBottomInset() + STACK_MARGIN
+            BoxWithConstraints(Modifier.fillMaxSize().background(PAPER).testTag(SHARE_CARD)) {
+                // Centred on the sheet while it fits; at the largest text sizes it scrolls instead of running off it.
                 Column(
-                    Modifier.fillMaxWidth().wrapContentHeight(unbounded = true).then(side),
+                    Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .heightIn(min = maxHeight)
+                        .padding(vertical = margin)
+                        .then(side),
+                    verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     PeekMarkArtworkImage(MARK)
                     Spacer(Modifier.height(SPACING))
-                    // One line, as a UILabel has unless asked for more.
                     Text(
                         copy.text("shareExtension.title"), Modifier.testTag(SHARE_TITLE),
                         style = type.style(IosTextStyle.Title2, FontWeight.Bold).sfLines(), color = colors.label,
-                        textAlign = TextAlign.Center, maxLines = 1, overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Center,
                     )
                     Spacer(Modifier.height(SPACING))
                     Text(
@@ -187,7 +199,8 @@ private fun ShareCardView(card: ShareCard, copy: ExtensionLocalizer, onSave: () 
                             .testTag(SHARE_CLOSE)
                             .clickable(interactionSource = null, indication = SystemPress, role = Role.Button, onClick = onClose)
                             .padding(vertical = CLOSE_PADDING),
-                        style = type.fixed(CLOSE_SIZE).sfLines(), color = colors.resolve(SystemColors.blue), maxLines = 1,
+                        style = type.fixed(type.scaled(CLOSE_SIZE)).sfLines(), color = colors.resolve(SystemColors.blue),
+                        textAlign = TextAlign.Center,
                     )
                 }
             }
@@ -196,9 +209,10 @@ private fun ShareCardView(card: ShareCard, copy: ExtensionLocalizer, onSave: () 
 }
 
 /**
- * Save (`UIButton.Configuration.filled()`): the tray and its title on Peek's yellow, 52 tall across the column whatever
- * the text size, its large corners; off, the grey UIKit gives a filled button turned off. Pressed, the yellow fades,
- * and the tray and title fade over it on their own, so that they take on the yellow beneath rather than the card's.
+ * Save (`UIButton.Configuration.filled()`): the tray and its title on Peek's yellow across the column, 52 tall and
+ * growing with its title from there, its large corners; off, the grey UIKit gives a filled button turned off. Pressed,
+ * the yellow fades, and the tray and title fade over it on their own, so that they take on the yellow beneath rather
+ * than the card's.
  */
 @Composable
 private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
@@ -210,13 +224,16 @@ private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
     Box(
         Modifier
             .fillMaxWidth()
-            .height(SAVE_HEIGHT)
             .testTag(SHARE_SAVE)
             .clickable(interactionSource = presses, indication = ControlHighlight(shape), enabled = enabled, role = Role.Button, onClick = onClick),
     ) {
         Box(Modifier.matchParentSize().pressEffect(PlainPress, pressed).background(if (enabled) YELLOW else DISABLED_FILL, shape))
         Row(
-            Modifier.fillMaxSize().pressEffect(PlainPress, pressed).padding(horizontal = SAVE_PADDING),
+            Modifier
+                .fillMaxWidth()
+                .heightIn(min = SAVE_HEIGHT)
+                .pressEffect(PlainPress, pressed)
+                .padding(horizontal = SAVE_PADDING, vertical = SAVE_VERTICAL_PADDING),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -224,10 +241,9 @@ private fun SaveButton(title: String, enabled: Boolean, onClick: () -> Unit) {
             val lines = remember { TextLines() }
             PeekSymbol("tray.and.arrow.down", font = font, tint = content)
             Spacer(Modifier.width(IMAGE_PADDING))
-            // Taller than the button at the largest sizes, it stands out of it above and below, as UIKit lays it out;
-            // as wide as its widest line, so that the symbol stays beside it.
+            // As wide as its widest line, so that the symbol stays beside it.
             Text(
-                title, Modifier.weight(1f, fill = false).wrapContentHeight(unbounded = true).widestLine(lines),
+                title, Modifier.weight(1f, fill = false).widestLine(lines),
                 style = font, color = content, textAlign = TextAlign.Center, onTextLayout = { lines.result = it },
             )
         }
@@ -264,12 +280,18 @@ private val STATUS_SPACING = 26.dp
 private val STACK_INSET = 8.dp
 private val SAVE_HEIGHT = 52.dp
 
+/** Clear of the sheet's ends, past the navigation bar, once the column scrolls. */
+private val STACK_MARGIN = 16.dp
+
 /** `cornerStyle = .large`. */
 private val SAVE_RADIUS = 12.dp
 private val SAVE_PADDING = 12.dp
+
+/** Save's title 7 from its top and bottom, the filled configuration's insets, once it grows past 52. */
+private val SAVE_VERTICAL_PADDING = 7.dp
 private val IMAGE_PADDING = 8.dp
 
-/** A system button's title, 15 points whatever the text size, and the 6 above and below it that make it 30 tall. */
+/** A system button's title, 15 points grown as the body grows (`UIFontMetrics`), and the 6 above and below it. */
 private const val CLOSE_SIZE = 15f
 private val CLOSE_PADDING = 6.dp
 

@@ -293,13 +293,23 @@ class ParcelFeedbackModel(
         val language: AppLanguage,
         /** Nothing about the parcel is wrong (`Parcel.untroubled`): a "Yes" may be the moment to ask for a rating. */
         val untroubled: Boolean = false,
+        /**
+         * The carrier has scanned the parcel (`Parcel.hasCarrierUpdate`). Before that the page's only row is the app's
+         * own, with no time or place of the carrier's to be wrong.
+         */
+        val scanned: Boolean = true,
     ) {
+        /** What a reader may say is off. */
+        val reasons: List<ParcelFeedbackReason>
+            get() = ParcelFeedbackReason.entries.filter { scanned || it != ParcelFeedbackReason.TimePlace }
+
         override fun equals(other: Any?): Boolean =
             other is Page && subject == other.subject && question == other.question && scan.equalsCanonically(other.scan) &&
-                carrier.equalsCanonically(other.carrier) && language == other.language && untroubled == other.untroubled
+                carrier.equalsCanonically(other.carrier) && language == other.language && untroubled == other.untroubled &&
+                scanned == other.scanned
 
         override fun hashCode(): Int =
-            listOf(subject, question, scan.canonicalHashCode(), carrier.canonicalHashCode(), language, untroubled).hashCode()
+            listOf(subject, question, scan.canonicalHashCode(), carrier.canonicalHashCode(), language, untroubled, scanned).hashCode()
 
         companion object {
             /**
@@ -317,7 +327,10 @@ class ParcelFeedbackModel(
             ): Page? {
                 if (madeUp) return null
                 val question = ParcelFeedbackQuestion(parcel, showsHistory) ?: return null
-                return Page(subject, question, parcel.feedbackScan, carrier, language, untroubled = parcel.untroubled())
+                return Page(
+                    subject, question, parcel.feedbackScan, carrier, language,
+                    untroubled = parcel.untroubled(), scanned = parcel.hasCarrierUpdate,
+                )
             }
         }
     }

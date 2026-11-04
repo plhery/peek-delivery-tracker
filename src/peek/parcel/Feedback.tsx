@@ -5,7 +5,7 @@ import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
 import {
   asksOnReturn,
-  FEEDBACK_REASONS,
+  feedbackReasons,
   type FeedbackNotes,
   type ParcelFeedback,
   type SendParcelFeedback,
@@ -30,6 +30,8 @@ export interface FeedbackSubject {
   scan: string;
   /** The carrier's name, for the line that says what an answer carries. */
   carrier: string;
+  /** The carrier has scanned the parcel; until then the reasons leave out a wrong time or place. */
+  scanned?: boolean;
   /** Something else is said or asked over the page: the question on the way back waits for another visit. */
   busy?: boolean;
   /** This browser's memory of the question; the same object for as long as the parcel is the same. */
@@ -66,6 +68,8 @@ const PAGE_LIMIT = 500;
 export interface ParcelFeedbackState {
   kind: 'found' | 'unknown' | null;
   carrier: string;
+  /** What a reader may say is off. */
+  reasons: readonly ApiParcelFeedbackReason[];
   moment: Moment;
   open: Open | null;
   word: Word | null;
@@ -85,7 +89,7 @@ export interface ParcelFeedbackState {
   close(): void;
 }
 
-export function useParcelFeedback({ kind, scan, carrier, busy = false, notes, send }: FeedbackSubject): ParcelFeedbackState {
+export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = false, notes, send }: FeedbackSubject): ParcelFeedbackState {
   const { locale } = useI18n();
   const [flow, setFlow] = useState<{ notes: FeedbackNotes; kind: FeedbackSubject['kind']; moment: Moment }>({ notes, kind, moment: 'ask' });
   // Another parcel, or a carrier found while the page was open, starts over.
@@ -144,6 +148,7 @@ export function useParcelFeedback({ kind, scan, carrier, busy = false, notes, se
   return {
     kind,
     carrier,
+    reasons: feedbackReasons(scanned),
     moment,
     open,
     word,
@@ -334,7 +339,7 @@ export function FeedbackQuestion({ feedback }: { feedback: ParcelFeedbackState }
             </> : moment === 'reasons' ? <>
               <p className="peekfb-question">{t('feedback.whatsOff')}</p>
               <span className="peekfb-chips">
-                {FEEDBACK_REASONS.map((reason, index) => <button key={reason} type="button" className="peekfb-pill" style={{ '--i': index } as CSSProperties}
+                {feedback.reasons.map((reason, index) => <button key={reason} type="button" className="peekfb-pill" style={{ '--i': index } as CSSProperties}
                   onClick={() => feedback.pick(reason)}>{t(REASON_KEYS[reason])}</button>)}
               </span>
             </> : <>
@@ -367,7 +372,7 @@ function WrongSheet({ feedback, initial, dismiss }: { feedback: ParcelFeedbackSt
   }
   return <>
     <div className="peekfb-chips">
-      {FEEDBACK_REASONS.map((reason) => <button key={reason} type="button" className="peekfb-chip" aria-pressed={picked.includes(reason)} onClick={() => toggle(reason)}>{t(REASON_KEYS[reason])}</button>)}
+      {feedback.reasons.map((reason) => <button key={reason} type="button" className="peekfb-chip" aria-pressed={picked.includes(reason)} onClick={() => toggle(reason)}>{t(REASON_KEYS[reason])}</button>)}
     </div>
     <div className="peekfb-field">
       <label htmlFor={field}>{t('feedback.note')}</label>

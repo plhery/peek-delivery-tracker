@@ -104,6 +104,18 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     expect(mocks.track).toHaveBeenCalledTimes(1);
   });
 
+  it('leaves out a wrong time or place before the carrier’s first scan, when the only row is the app’s own', async () => {
+    const user = userEvent.setup();
+    open({ scanned: false });
+    await user.click(within(bubble()).getByRole('button', { name: 'Not quite' }));
+    expect(within(bubble()).getAllByRole('button').map((button) => button.textContent))
+      .toEqual(['It has arrived', 'Wrong status', 'Missing steps', 'Wrong carrier', 'Something else']);
+    await user.click(within(bubble()).getByRole('button', { name: 'Missing steps' }));
+    await user.click(await within(bubble()).findByRole('button', { name: 'Add a note' }));
+    const sheet = screen.getByRole('dialog', { name: 'What’s off?' });
+    expect(within(sheet).queryByRole('button', { name: 'Wrong time or place' })).toBeNull();
+  });
+
   it('puts the question back and says so when an answer given in place could not be sent', async () => {
     const user = userEvent.setup();
     const { send, notes } = open({ send: vi.fn(async () => { throw new Error('offline'); }) });

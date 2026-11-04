@@ -545,7 +545,7 @@ private fun Bubble(work: ParcelFeedbackWork, large: Boolean, modifier: Modifier)
                 Moment.Reasons -> Column(Modifier.padding(end = 4.dp, top = 4.dp, bottom = 4.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Question(localizer.text("feedback.whatsOff"))
                     FeedbackFlow {
-                        ParcelFeedbackReason.entries.forEachIndexed { order, reason ->
+                        (work.page?.reasons ?: ParcelFeedbackReason.entries).forEachIndexed { order, reason ->
                             FeedbackPill(localizer.text(reason.labelKey), FEEDBACK_REASON + reason.name, Modifier.comesIn(order)) { work.pick(reason) }
                         }
                     }
@@ -1118,7 +1118,7 @@ private fun WordsSheet(work: ParcelFeedbackWork, writing: () -> Unit) {
     val haptics = rememberHaptics()
     FeedbackSheet(localizer.text("feedback.whatsOff"), FEEDBACK_WORDS_SHEET, work.sending, work::dismissWords) {
         FeedbackFlow {
-            for (reason in ParcelFeedbackReason.entries) {
+            for (reason in work.page?.reasons ?: ParcelFeedbackReason.entries) {
                 ReasonChip(localizer.text(reason.labelKey), FEEDBACK_CHIP + reason.name, on = reason in work.reasons, enabled = !work.sending) {
                     work.toggle(reason)
                     haptics.selection()

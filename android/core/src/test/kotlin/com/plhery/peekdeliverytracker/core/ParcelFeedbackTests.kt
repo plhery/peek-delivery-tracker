@@ -1148,6 +1148,24 @@ class ParcelFeedbackTests {
     }
 
     @Test
+    fun aParcelTheCarrierHasNotScannedOffersNoWrongTimeOrPlace() {
+        fun reasons(parcel: Parcel): List<ParcelFeedbackReason>? =
+            ParcelFeedbackModel.Page(
+                parcel, subject = ParcelFeedbackSubject.Parcel(parcel.id), showsHistory = true, madeUp = false, carrier = "DHL",
+                language = AppLanguage.En,
+            )?.reasons
+        assertEquals(ParcelFeedbackReason.entries, reasons(parcel()))
+        // The only row is the app's own "Tracking added".
+        assertEquals(
+            listOf(
+                ParcelFeedbackReason.Arrived, ParcelFeedbackReason.Status, ParcelFeedbackReason.Steps, ParcelFeedbackReason.Carrier,
+                ParcelFeedbackReason.Other,
+            ),
+            reasons(parcel(stage = TrackingStage.Pending)),
+        )
+    }
+
+    @Test
     fun answersAreCountedWhereTheyAreGiven() {
         val catalog = AnalyticsCatalog.bundled!!
         for (action in listOf("parcel-feedback-right", "parcel-feedback-wrong", "parcel-feedback-carrier")) {

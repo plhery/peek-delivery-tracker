@@ -229,6 +229,7 @@ export function ParcelDetail({
     kind: !sendFeedback || parcel.archivedAt || !parcel.lastSyncedAt ? null
       : parcel.carrier === 'unknown' && !moving ? 'unknown' : automaticTracking || moving ? 'found' : null,
     scan: scanIdentity(parcel),
+    scanned: moving,
     carrier: displayedCarrier.name,
     busy: sharing || alertsOpen || editingCarrier || confirmingDelete || mapOpen,
     notes: feedbackNotes,

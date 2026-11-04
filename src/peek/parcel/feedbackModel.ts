@@ -16,6 +16,11 @@ export type SendParcelFeedback = (feedback: ApiParcelFeedbackRequest) => Promise
 
 export const FEEDBACK_REASONS: readonly ApiParcelFeedbackReason[] = ['arrived', 'status', 'steps', 'time_place', 'carrier', 'other'];
 
+/** The reasons offered: before the carrier's first scan, the page's only row is the app's own, with no time or place of the carrier's to be wrong. */
+export function feedbackReasons(scanned: boolean): readonly ApiParcelFeedbackReason[] {
+  return scanned ? FEEDBACK_REASONS : FEEDBACK_REASONS.filter((reason) => reason !== 'time_place');
+}
+
 /** What this browser remembers of the question, for one parcel. Nothing of it leaves the browser. */
 export interface FeedbackMemory {
   /** When the reader last answered. */

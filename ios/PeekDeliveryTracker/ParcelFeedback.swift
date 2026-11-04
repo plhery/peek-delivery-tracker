@@ -172,7 +172,7 @@ extension ParcelFeedbackModel.Page {
     init?(parcel: Parcel, subject: ParcelFeedbackSubject, showsHistory: Bool, madeUp: Bool, carrier: String, language: AppLanguage) {
         guard !madeUp, let question = ParcelFeedbackQuestion(parcel: parcel, showsHistory: showsHistory) else { return nil }
         self.init(subject: subject, question: question, scan: parcel.feedbackScan, carrier: carrier, language: language,
-                  untroubled: parcel.untroubled())
+                  untroubled: parcel.untroubled(), scanned: parcel.hasCarrierUpdate)
     }
 }
 
@@ -215,6 +215,14 @@ final class ParcelFeedbackModel: ObservableObject {
         var language: AppLanguage
         /// Nothing about the parcel is wrong (`Parcel.untroubled`): a "Yes" may be the moment to ask for a rating.
         var untroubled = false
+        /// The carrier has scanned the parcel (`Parcel.hasCarrierUpdate`). Before that the page's only row is the
+        /// app's own, with no time or place of the carrier's to be wrong.
+        var scanned = true
+
+        /// What a reader may say is off.
+        var reasons: [ParcelFeedbackReason] {
+            ParcelFeedbackReason.allCases.filter { scanned || $0 != .timePlace }
+        }
     }
 
     /// The sheet that takes what is off.

@@ -109,7 +109,7 @@ struct ParcelFeedbackQuestionView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     question("feedback.whatsOff")
                     FeedbackFlow(spacing: 6) {
-                        ForEach(Array(ParcelFeedbackReason.allCases.enumerated()), id: \.element) { order, reason in
+                        ForEach(Array((model.page?.reasons ?? ParcelFeedbackReason.allCases).enumerated()), id: \.element) { order, reason in
                             FeedbackPill(title: localizer.text(reason.labelKey)) { Task { await model.pick(reason) } }
                                 .modifier(ComesIn(order: order))
                         }
@@ -492,7 +492,7 @@ private struct ParcelFeedbackWordsSheet: View {
     var body: some View {
         FeedbackSheet(title: localizer.text("feedback.whatsOff"), busy: model.sending, writing: writing) {
             FeedbackFlow(spacing: 6) {
-                ForEach(ParcelFeedbackReason.allCases) { reason in chip(reason) }
+                ForEach(model.page?.reasons ?? ParcelFeedbackReason.allCases) { reason in chip(reason) }
             }
             FeedbackField(label: localizer.text("feedback.note"), focused: writing) { writing = true } input: {
                 TextField(text: $note, prompt: Text(verbatim: ""), axis: .vertical) { Text(localizer.text("feedback.note")) }

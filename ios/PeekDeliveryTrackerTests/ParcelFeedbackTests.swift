@@ -778,6 +778,16 @@ final class ParcelFeedbackTests: XCTestCase {
         XCTAssertNil(model.word)
     }
 
+    func testAParcelTheCarrierHasNotScannedOffersNoWrongTimeOrPlace() throws {
+        func reasons(_ parcel: Parcel) throws -> [ParcelFeedbackReason] {
+            try XCTUnwrap(ParcelFeedbackModel.Page(parcel: parcel, subject: .parcel(parcel.id), showsHistory: true, madeUp: false,
+                                                   carrier: "DHL", language: .en)).reasons
+        }
+        XCTAssertEqual(try reasons(parcel()), ParcelFeedbackReason.allCases)
+        // The only row is the app's own "Tracking added".
+        XCTAssertEqual(try reasons(parcel(stage: .pending)), [.arrived, .status, .steps, .carrier, .other])
+    }
+
     func testAnswersAreCountedWhereTheyAreGiven() throws {
         let catalog = try XCTUnwrap(AnalyticsCatalog.bundled)
         for action in ["parcel-feedback-right", "parcel-feedback-wrong", "parcel-feedback-carrier"] {

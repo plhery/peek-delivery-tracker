@@ -458,6 +458,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     kind: sample || present || checking || offline || afterwards || placeholder ? null
       : !carrierKnown ? 'unknown' : automatic || moving ? 'found' : null,
     scan: scanIdentity(parcel),
+    scanned: moving,
     carrier: displayed.name,
     busy: !!word || sharing || alerting || !!keepSheet || !!forgetting || mapOpen || addingPostcode,
     notes: feedbackNotes,

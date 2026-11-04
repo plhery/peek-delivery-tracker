@@ -653,7 +653,7 @@ describe('a scan its source rewords', () => {
   });
 });
 
-describe('a scan its carrier moves a little later', () => {
+describe('a scan its carrier moves a little', () => {
   // A carrier moved a departure an hour later and lists only the later time (synthetic place and times).
   const place = 'EXAMPLE CITY DISTRIBUTION CENTER';
   const at = (time: string, id: string, description = 'Departed Facility', extra: JsonObject = {}) => ({
@@ -683,8 +683,19 @@ describe('a scan its carrier moves a little later', () => {
     // TNT scans a parcel held at its depot each working day and lists only the latest scan.
     expect(retimedScans([label, arrived, at('2026-10-23T04:56:00-07:00', 'usps:over-three-hours')], stored, 'usps').size).toBe(0);
     expect(retimedScans([label, arrived, at('2026-10-24T00:21:00-07:00', 'usps:next-day')], stored, 'usps').size).toBe(0);
-    // Nor does a carrier move a scan earlier.
-    expect(retimedScans([label, arrived, at('2026-10-23T01:00:00-07:00', 'usps:earlier')], stored, 'usps').size).toBe(0);
+  });
+
+  it('takes over the row the answer no longer lists, up to an hour earlier', () => {
+    // USPS moved a facility arrival a minute earlier and listed only the earlier time.
+    const minute = at('2026-10-23T01:54:00-07:00', 'usps:minute-earlier');
+    expect(pairs(retimedScans([label, arrived, minute], stored, 'usps'))).toEqual([['usps:minute-earlier', 'usps:departed']]);
+    const hour = at('2026-10-23T00:55:00-07:00', 'usps:hour-earlier');
+    expect(pairs(retimedScans([label, arrived, hour], stored, 'usps'))).toEqual([['usps:hour-earlier', 'usps:departed']]);
+    expect(retimedScans([label, arrived, at('2026-10-23T00:54:00-07:00', 'usps:over-an-hour-earlier')], stored, 'usps').size).toBe(0);
+    // Nor past a scan of the carrier, nor with no older scan of the carrier in the answer.
+    const sorted = at('2026-10-23T01:30:00-07:00', 'usps:sorted', 'Processed at Facility');
+    expect(retimedScans([label, arrived, sorted, at('2026-10-23T01:20:00-07:00', 'usps:before-sorting')], [...stored, sorted], 'usps').size).toBe(0);
+    expect(retimedScans([minute], stored, 'usps').size).toBe(0);
   });
 
   it('needs the same wording, place and stage, and codes that agree', () => {

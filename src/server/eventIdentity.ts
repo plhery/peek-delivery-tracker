@@ -24,9 +24,9 @@
  *   and global portal). A scan its source restates with or without its
  *   milliseconds takes over the row of that second (Royal Mail's locker drop-off).
  * - Whatever the policy, a scan the carrier's own answer moved up to three
- *   hours later takes over the row of the earlier time that the answer no
- *   longer lists (`retimedScans`). The row keeps that earlier time as the one
- *   it was first stored with (`RETIMED_FROM`).
+ *   hours later, or up to an hour earlier, takes over the row of the old time
+ *   that the answer no longer lists (`retimedScans`). The row keeps that old
+ *   time as the one it was first stored with (`RETIMED_FROM`).
  * - A row taken over keeps its old identity while its strings follow the
  *   scan. When a later check meets the scan again, a policy that matched the
  *   old strings (AliExpress's town in brackets) no longer matches, so a scan
@@ -87,7 +87,7 @@ export function unnamedRowCarrier(carriers: readonly string[], providerCode: str
 
 /**
  * The `raw_data` key that keeps the time a row was first stored with, as its
- * source gave it, once its carrier moved the scan later (`retimedScans`). The
+ * source gave it, once its carrier moved the scan (`retimedScans`). The
  * row keeps its identity and creation time, so without it a moved scan reads
  * like one stored ahead of its time. Later checks carry it over while the row
  * shows another time (`withIdentities`).
@@ -768,15 +768,17 @@ function copies(scan: JsonObject, row: JsonObject): boolean {
 
 /** How much later a source may restate one of its scans: a correction of the scan's time, not the next round of scans. */
 const RETIMED_WITHIN_MS = 3 * HOUR_MS;
+/** How much earlier a carrier's answer may move a scan: USPS moved a facility arrival a minute earlier. */
+const RETIMED_EARLIER_WITHIN_MS = HOUR_MS;
 
 /**
  * Maps the computed identity of each new scan of `source`, the carrier that answered, to the
  * stored row of that source the answer moved to it: USPS moved a departure from 01:55 to 03:00,
- * and then listed only the later one. The scan is no more than three hours after the row, with
- * the same wording, place and stage, and codes that agree when both carry one. The answer no
- * longer lists the row but still lists an older scan of the source, so it is no shorter window
- * of the history, and neither the answer nor the stored rows hold a scan of the source between
- * the two. Scans and rows another rule matched, observations, scans dated by their day alone and
+ * and then listed only the later one, and a facility arrival from 20:53 to 20:52. The scan is no
+ * more than three hours after the row or an hour before it, with the same wording, place and
+ * stage, and codes that agree when both carry one. The answer no longer lists the row but still
+ * lists a scan of the source older than both, so it is no shorter window of the history, and
+ * neither the answer nor the stored rows hold a scan of the source between the two. Scans and rows another rule matched, observations, scans dated by their day alone and
  * universal or app rows are left out, and the match is one to one. A carrier that lists only the
  * latest of a run of the same scan (TNT's daily scan of a parcel held at its depot) moves it to
  * the next day: those are scans of their own, and stay.
@@ -800,7 +802,8 @@ export function retimedScans(
   const earliest = Math.min(...answer.map(instantOf));
   const alike = (scan: JsonObject, row: JsonObject) => {
     const [from, to] = [instantOf(row), instantOf(scan)];
-    return to > from && to - from <= RETIMED_WITHIN_MS && earliest < from
+    return to !== from && to - from <= RETIMED_WITHIN_MS && from - to <= RETIMED_EARLIER_WITHIN_MS
+      && earliest < Math.min(from, to)
       && wordingOf(scan) !== '' && wordingOf(scan) === wordingOf(row) && placeOf(scan) === placeOf(row)
       && stageOf(scan) !== '' && stageOf(scan) === stageOf(row) && codesAgree(scan, row);
   };
@@ -809,7 +812,8 @@ export function retimedScans(
     if (matching.length !== 1) continue;
     const row = matching[0]!;
     if (scans.filter((other) => alike(other, row)).length !== 1) continue;
-    if (held.some((other) => instantOf(other) > instantOf(row) && instantOf(other) < instantOf(scan))) continue;
+    const [first, last] = [Math.min(instantOf(row), instantOf(scan)), Math.max(instantOf(row), instantOf(scan))];
+    if (held.some((other) => instantOf(other) > first && instantOf(other) < last)) continue;
     retimed.set(identity(scan), identity(row));
   }
   return retimed;

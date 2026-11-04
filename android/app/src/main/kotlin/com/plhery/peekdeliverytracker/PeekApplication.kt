@@ -2,6 +2,10 @@ package com.plhery.peekdeliverytracker
 
 import android.app.Application
 import androidx.annotation.VisibleForTesting
+import androidx.compose.ui.text.TextMeasurer
+import androidx.compose.ui.text.font.createFontFamilyResolver
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.lifecycle.Lifecycle
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.FriendInvitationLink
@@ -90,6 +94,10 @@ class PeekApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // Compose keeps whether the emoji font has loaded in a state it makes the first time any text is measured. Made
+        // here, before anything else measures text, every snapshot can read it; made by a map's names or the widget's,
+        // measured off the main thread while a composition was open, that composition couldn't, and the app stopped.
+        TextMeasurer(createFontFamilyResolver(this), Density(1f), LayoutDirection.Ltr).measure(" ")
         registerActivityLifecycleCallbacks(foreground)
         val assets = assets
         SharedResources.install { name ->

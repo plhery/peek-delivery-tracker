@@ -1,12 +1,12 @@
 ---
 title: MRW seguimiento: número de envío, estados y teléfono
-description: Sigue tu envío MRW: dónde está el número de 12 cifras, qué significa cada estado, cómo recoger en un MRW Point, cómo reclamar y los teléfonos de MRW.
+description: Pega tu número de MRW, de 12 cifras, y mira dónde está tu paquete: qué significa cada estado, cómo recoger en un MRW Point, cómo reclamar y los teléfonos.
 slug: mrw-seguimiento
 published: 2026-10-11
-updated: 2026-10-26
+updated: 2026-11-04
 ---
 
-MRW es una red de franquicias de mensajería urgente con más de 550 oficinas en España, Portugal, Andorra y Gibraltar. Para seguir tu envío, escribe el número en la casilla «No abonados» del [seguimiento de MRW](https://www.mrw.es/seguimiento/), sin ser cliente, o pégalo en la casilla de arriba. El número está en el correo de envío de la tienda, en el SMS de MRW o, si enviaste tú el paquete, en el justificante de la oficina.
+Pega tu número de MRW en la casilla de arriba para ver dónde está tu paquete, o escríbelo en la casilla «No abonados» del [seguimiento de MRW](https://www.mrw.es/seguimiento/), sin ser cliente. Suele tener 12 cifras, como `135792468024`. Está en el correo de envío de la tienda, en el SMS de MRW o, si enviaste tú el paquete, en el justificante de la oficina. MRW es una red de franquicias de mensajería urgente con más de 550 oficinas en España, Portugal, Andorra y Gibraltar.
 
 ## Número de envío MRW: dónde encontrarlo
 
@@ -30,7 +30,7 @@ Si MRW responde «Envío no encontrado», revisa las cifras. Si son correctas, e
 
 ## Estados del seguimiento MRW: qué significa cada uno
 
-Estos son los estados que más se ven, en el orden en que suele encontrarlos un paquete. Los significados vienen del blog de MRW cuando los explica:
+Estos son los estados que más se ven, en el orden en que suele encontrarlos un paquete. Los significados vienen del blog de MRW cuando los explica; los demás, de cómo aparecen en el seguimiento:
 
 | Estado | Qué significa para ti |
 | --- | --- |
@@ -38,20 +38,27 @@ Estos son los estados que más se ven, en el orden en que suele encontrarlos un 
 | `Envío recogido en origen` | MRW ya tiene el paquete. |
 | `En tránsito` | Viaja en un trayecto largo, nacional o internacional. |
 | `Pendiente de recibir en destino` | Ha salido de la oficina de origen, pero aún no ha llegado a la de destino. |
+| `Recibido en Franquicia de destino` | Ya está en la oficina MRW que lo reparte. |
 | `Retenido en aduana` | La aduana está tramitando el envío. |
 | `Entrega concertada` | Se ha acordado una entrega contigo; el paquete vuelve a ponerse en camino. |
 | `Envío en reparto` | Lo tiene el mensajero que lo entrega, listo para la ruta del día. |
 | `Destinatario ausente o cerrado` | El mensajero lo intentó, pero no había nadie en casa o el negocio estaba cerrado. |
+| `Dirección entrega incorrecta` | No se pudo entregar en esa dirección: habla con la tienda o con la oficina. |
+| `Entrega aplazada pendiente de cobro o cita previa` | La entrega espera a que pagues lo pendiente o pidas cita: llama a la oficina. |
+| `Pendiente de recibir datos de entrega` | A la oficina le faltan datos para entregarlo: habla con ella o con la tienda. |
 | `Pendiente de recoger en Franquicia destino` | Se ha acordado que lo recojas en una oficina MRW. |
 | `Depositado en punto MRW` | Te espera en un MRW Point. |
 | `Depositado en PointCorner destino` | Te espera en un comercio MRW PointCorner. |
 | `Envío entregado` | Entregado. |
+| `Devuelto al remitente` | Vuelve a la tienda: pregúntale por el reembolso o un nuevo envío. |
 
-`Pendiente de recoger` confunde a mucha gente: no significa que el paquete te espere, sino que MRW todavía no lo tiene. Su versión larga, `Pendiente de recoger en origen`, dice lo mismo. En cambio, `Pendiente de recoger en Franquicia destino` sí es para ti: tienes que ir a buscarlo a la oficina. MRW presenta estos estados como «algunos ejemplos», así que puedes ver otros. Para las etapas comunes a todos los transportistas, mira [qué significa cada estado](guide:tracking-statuses).
+`Pendiente de recoger` confunde a mucha gente: no significa que el paquete te espere, sino que MRW todavía no lo tiene. Su versión larga, `Pendiente de recoger en origen`, dice lo mismo. En cambio, `Pendiente de recoger en Franquicia destino` sí es para ti: tienes que ir a buscarlo a la oficina. MRW presenta los estados de su blog como «algunos ejemplos», así que puedes ver otros. Para las etapas comunes a todos los transportistas, mira [qué significa cada estado](guide:tracking-statuses).
+
+Lo que entra en Canarias, Ceuta o Melilla, o llega de fuera de la UE, pasa por aduana. La [guía de aduanas](guide:customs) explica qué puedes tener que pagar, incluida la tasa de 2 € por tipo de producto que se cobra desde el 1 de noviembre de 2026.
 
 ## Paquete MRW: si no estabas en casa, MRW Point y oficinas
 
-**Entrega en casa.** Según las condiciones de MRW, la entrega vale cuando la acepta y firma una persona capaz que está en la dirección, sea o no el destinatario; la firma puede ser en papel o en un terminal móvil. No se entrega mercancía a menores de 18 años. MRW solo deja paquetes en taquillas con tu autorización previa y expresa, o si la tienda le pasó esa elección.
+**Entrega en casa.** Según las condiciones de MRW, la entrega vale cuando la acepta y firma una persona capaz que está en la dirección, sea o no el destinatario; la firma puede ser en papel o en un terminal móvil. No se entrega mercancía a menores de 18 años. MRW solo deja paquetes en taquillas con tu autorización previa y expresa, o si la tienda le pasó esa elección. Si el envío va contra reembolso, lo pagas en efectivo al recibirlo.
 
 **Cambiar el día.** Los SMS de MRW traen un enlace o un número para cambiar la entrega. Su página «Concertar entrega» solo funciona con el código del SMS. Si el remitente lo contrató, MRW puede avisarte por SMS del momento de la entrega para que no estés ausente.
 
@@ -87,7 +94,7 @@ En las páginas de MRW no aparece chat ni dirección de correo para destinatario
 
 [Peek](/) reconoce al momento como MRW la forma de cinco cifras, una letra y seis cifras. Un número de 12 cifras encaja con muchos transportistas y no hay forma de preguntar a MRW si lo conoce, así que nunca se asigna a MRW por sí solo: tienes que elegir MRW con «Cambiar». Escribe las 12 cifras sin la barra. Un enlace de seguimiento de mrw.es solo sirve si lleva dentro la forma con letra; los enlaces de los SMS de MRW no sirven.
 
-Verás el estado, el historial y cada oficina (código postal y población, «(Plataforma)» si es un centro logístico) en un mapa, y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. Los estados salen en español, con las palabras de MRW; los desconocidos aparecen como «Actualización del seguimiento». No muestra la dirección del punto de recogida ni fecha prevista de entrega.
+Verás el estado, el historial y cada oficina (código postal y población, «(Plataforma)» si es un centro logístico) en un mapa, y puede enviarte una notificación con todas las novedades, solo las importantes o solo el día de entrega. En el historial, los estados salen en español, con las palabras de MRW, y los desconocidos como «Actualización de seguimiento»; arriba, Peek resume el paso con las suyas, como «Etiqueta creada» para `Pendiente de recoger` o «Incidencia» para `Entrega aplazada pendiente de cobro o cita previa`. No muestra la dirección del punto de recogida ni fecha prevista de entrega.
 
 Las horas de MRW no llevan zona horaria: Peek las lee con la hora del lugar de cada oficina y muestra el historial propio de MRW. Si MRW da solo un resumen, el historial viene de servicios universales de seguimiento; si ninguno lo tiene, solo ves el estado actual de MRW. Peek no puede acelerar el paquete ni hablar con MRW por ti.
 
@@ -103,11 +110,11 @@ Que el paquete ha salido de la oficina de origen pero aún no ha llegado a su de
 
 ### ¿Cuánto tarda MRW en entregar un pedido?
 
-MRW no da un plazo para los pedidos de tiendas: depende del servicio que contrató el remitente. Para los envíos contratados en su web dentro de la España peninsular, promete entregar antes de las 19:00 del día laborable siguiente a la recogida.
+MRW no da un plazo para los pedidos de tiendas: depende del servicio que contrató el remitente. Para los envíos contratados en su web dentro de la España peninsular, promete entregar antes de las 19:00 del día laborable siguiente a la recogida. Según el servicio, entrega el mismo día o «de hoy para mañana» antes de las 8:30, las 10:00, las 12:00, las 14:00 o las 19:00; a Portugal, Urgente 19 Portugal tarda de 24 a 48 horas, y a Baleares, Canarias y Melilla, el servicio Económico entrega «de hoy para pasado mañana».
 
 ### ¿MRW entrega los sábados?
 
-Las páginas de MRW no lo dicen para los destinatarios. Pregunta a la oficina MRW que aparece en tu seguimiento.
+Solo si el remitente contrata la «Entrega en sábado», una prestación complementaria: de 9:00 a 13:00 con Urgente 10, Urgente 12 y Documentos 14, y de 9:00 a 12:00 en Portugal peninsular y Madeira. No la hay en Ceuta, Melilla ni Gibraltar. Con esa prestación también puedes recoger el envío el sábado en la oficina MRW, sin recargo; consulta antes su horario.
 
 ### ¿Cuál es el teléfono gratuito de MRW?
 
@@ -124,7 +131,9 @@ En sus páginas, MRW no presenta ninguno de sus números como gratuito. Su pági
 - [MRW: Contacte con nosotros](https://www.mrw.es/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp) – formularios por temas
 - [MRW: Preguntas frecuentes de envíos nacionales](https://www.mrw.es/enviar/nacional/faqs/index.asp) – teléfonos, horario, X, día laborable siguiente
 - [MRW: Nuestras oficinas](https://www.mrw.es/oficina_transporte_urgente/MRW_franquicia.asp) – 550 oficinas, buscador, horarios en festivos
+- [MRW: Servicios nacionales](https://www.mrw.es/servicios_transporte_urgente/MRW_transporte_nacional.asp) – plazos de cada servicio, Urgente 19 Portugal, Económico
+- [MRW: Prestaciones complementarias](https://www.mrw.es/servicios_transporte_urgente/MRW_prestaciones_complementarias.asp) – entrega en sábado, recogida en oficina sin recargo, reembolso en efectivo
 - [MRW: Alertas en el seguimiento de envíos](https://www.mrw.es/seguimiento_envios/MRW_alertas.asp) – aviso por SMS del momento de la entrega
 - [MRW: Concertar entrega](https://www.mrw.es/concertarmrw.asp?clave=&id=ES) – cambio de entrega con el código del SMS
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee Peek, estados que el blog no explica
 :::

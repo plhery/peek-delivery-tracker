@@ -1,12 +1,12 @@
 ---
 title: NACEX seguimiento: número de envío, estados y teléfono
-description: Sigue tu envío NACEX con su número 0000/00000000: qué significa cada estado, los puntos NACEX.shop, qué hacer si no llega y el teléfono gratuito.
+description: Pega tu número de NACEX (0000/00000000) y mira dónde está tu paquete: qué significa cada estado, qué hacer si no llega y el teléfono gratuito.
 slug: seguimiento-nacex
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
-NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal y Andorra con más de 300 franquicias. Para seguir tu envío, escribe su número (la agencia, una barra y el albarán) en la casilla «Seguimiento de envío» de la [web de NACEX](https://www.nacex.es/), o pégalo en la casilla de arriba. El número es el del envío que contrató el remitente, normalmente la tienda: si no lo tienes, pídeselo, porque NACEX no busca por número de pedido ni por código postal.
+Pega tu número de NACEX en la casilla de arriba para ver dónde está tu paquete, o escríbelo en «Seguimiento de envío», en la [web de NACEX](https://www.nacex.es/). Suele tener la forma `0123/45678901`: la agencia, una barra y el albarán. Búscalo en el correo de envío de la tienda o en la página de tu pedido; si no lo tienes, pídeselo a la tienda, porque NACEX no busca por número de pedido ni por código postal. NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal y Andorra con más de 300 franquicias.
 
 ## Número de envío NACEX: cómo es y dónde encontrarlo
 
@@ -29,12 +29,12 @@ NACEX no dice dónde aparece el número ni con qué nombre firma sus SMS. Busca 
 
 ## Estados del seguimiento NACEX: qué significa cada uno
 
-NACEX no publica una lista de sus estados ni los explica. Su seguimiento agrupa los pasos por días, sin hora. Estas son las palabras que muestra, en el [orden en que suele verlas un paquete](guide:tracking-statuses):
+NACEX no publica una lista de sus estados ni los explica. Su historial agrupa los pasos por días, sin hora. Estas son las palabras que muestra, en el [orden en que suele verlas un paquete](guide:tracking-statuses):
 
 | Estado | Qué significa para ti |
 | --- | --- |
 | `Notificado` | Una nota en torno a la recogida, no un escaneo. |
-| `Aceptada` | NACEX ya tiene el paquete en su red. |
+| `Aceptada` | NACEX ya tiene el paquete en su red. Si detrás aparece «WEB», el envío solo se ha registrado por internet y NACEX aún no lo tiene: Peek muestra «Etiqueta creada». |
 | `En tránsito` | Viaja entre agencias y plataformas de NACEX. Ya no se puede anular. |
 | `En reparto` | Lo lleva el mensajero. |
 | `Ausente` | El mensajero no encontró a nadie. |
@@ -71,7 +71,7 @@ La página de Reclamaciones de NACEX se dirige a su cliente, quien contrató el 
 - **No llega o no se mueve:** la FAQ de NACEX dice que escribas a atencion.cliente@nacex.com o llames al 900 100 000, sin dar un plazo de espera. Sus condiciones avisan de que en [Black Friday y Navidad](guide:christmas-posting-dates) la entrega a particulares puede verse afectada. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 - **Con retraso:** el cliente de NACEX puede reclamar en un máximo de 31 días naturales si la entrega quedó fuera del servicio contratado sin causa justificada.
 - **Perdido o robado:** plazo máximo de 7 días naturales, con la factura del contenido.
-- **Dañado o con falta de contenido:** NACEX aconseja avisar al recibirlo; se puede reclamar en 7 días naturales desde la entrega, y para los daños NACEX pide fotos. La Ley 15/2009 (art. 60) pide al destinatario reservas por escrito en la entrega, o en los siete días naturales siguientes si el daño no se veía.
+- **Dañado o con falta de contenido:** NACEX aconseja avisar al recibirlo; se puede reclamar en 7 días naturales desde la entrega, y NACEX pide fotos. La Ley 15/2009 (art. 60) pide al destinatario reservas por escrito en la entrega, o en los siete días naturales siguientes si el daño no se veía.
 - **Devuelto:** NACEX no explica qué hace el destinatario tras una devolución, así que pregunta a la tienda.
 
 ¿El seguimiento dice `Entregado` y no tienes nada? Mira [paquete entregado pero no recibido](guide:delivered-not-received).
@@ -94,13 +94,13 @@ Para Andorra, NACEX no da canales propios: usa los de España. En Portugal, su n
 
 [Peek](/) reconoce un número de NACEX por su forma: exactamente cuatro cifras, una barra y ocho cifras, con o sin espacios alrededor de la barra. También puedes pegar un enlace de seguimiento de nacex.es que lleve `intcli=`, o el correo de envío entero. Con otras longitudes, usa el formulario de NACEX.
 
-Peek consulta el seguimiento de NACEX cada 10 minutos, cada 2 minutos cuando el paquete está en reparto, y puede enviarte una notificación en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Muestra el estado y el historial con las palabras de NACEX, los lugares donde se escaneó el paquete en un mapa y el día de cada paso, sin hora, porque NACEX no la publica. No muestra fecha prevista de entrega. Deja fuera el nombre del destinatario, la prueba de entrega, los comentarios de entrega, los datos de contacto y la referencia de la tienda, y no puede acelerar el paquete ni hablar con NACEX por ti.
+Peek consulta el seguimiento de NACEX cada 10 minutos, cada 2 minutos cuando el paquete está en reparto, y puede enviarte una notificación en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Muestra el historial con las palabras de NACEX, los lugares donde se escaneó el paquete en un mapa, el día de cada paso (NACEX solo da la hora de la entrega) y la fecha estimada de entrega si NACEX la da. Arriba, el estado va en palabras de Peek, como «Incidencia» para `Contacta con agencia` o `Solucionado sin OK`. Deja fuera el nombre del destinatario, la prueba de entrega, los comentarios de entrega, los datos de contacto y la referencia de la tienda, y no puede acelerar el paquete ni hablar con NACEX por ti.
 
 ## Preguntas sobre el seguimiento de NACEX
 
 ### ¿Cuánto tarda NACEX en entregar un paquete?
 
-Depende del servicio que contrató el remitente: con NACEX 19:00 H, antes de las 19:00 del siguiente día laborable en la Península (España, Andorra y Portugal) y Baleares, o antes de las 13:00 del segundo día laborable a más de 50 km de la franquicia de reparto. A Canarias, Ceuta y Melilla hay un servicio aéreo de 24 a 48 horas, y a Azores y Madeira tarda de 2 a 5 días. Sábados, domingos y festivos no cuentan como laborables.
+Depende del servicio que contrató el remitente: con NACEX 19:00 H, antes de las 19:00 del siguiente día laborable en la Península (España, Andorra y Portugal) y Baleares, o antes de las 13:00 del segundo día laborable a más de 50 km de la franquicia de reparto. A Canarias, Ceuta y Melilla hay un servicio aéreo de 24 a 48 horas, y a Azores y Madeira tarda de 2 a 5 días. Sábados, domingos y festivos no cuentan como laborables. Los envíos de mercancía a Canarias, Ceuta, Melilla, Andorra y Gibraltar pasan por aduana; para los tres primeros destinos, mira la [guía de aduanas](guide:customs).
 
 ### ¿NACEX entrega los sábados?
 
@@ -127,7 +127,8 @@ Según lo que diga la tienda: NACEX pide consultar las condiciones de devolució
 - [NACEX: FAQ sobre servicios](https://www.nacex.es/visualizarfaq.do?category=901) – prealerta, sábados
 - [NACEX: Contacto](https://www.nacex.es/irContactenosContacto.do) – teléfono, correo, chat
 - [NACEX: Solicitar Recogida](https://www.nacex.es/irRecogida.do) – formulario, franjas, pago en la recogida
-- [NACEX: Reclamaciones](https://www.nacex.es/irReclamaciones.do) – quién reclama, plazos
+- [NACEX: Reclamaciones](https://www.nacex.es/irReclamaciones.do) – quién reclama, plazos, fotos
+- [NACEX: Tramitaciones aduaneras](https://www.nacex.es/irTramitacionesAduaneras.do?seccion=tramaduan) – aduana a Canarias, Ceuta, Melilla, Andorra y Gibraltar
 - [NACEX: NACEX.shop](https://www.nacex.es/irEnvioSostenible.do) – al día siguiente desde las 9:00, envíos desde un punto
 - [NACEX: Localizador de Puntos NACEX](https://www.nacex.es/irCerca.do) – puntos y franquicias
 - [NACEX: Mi Entrega Preferida](https://www.nacex.es/irServicioNacional.do?seccion=mep) – cambios con la prealerta

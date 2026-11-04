@@ -74,6 +74,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.INVITATION_BASE
 import com.plhery.peekdeliverytracker.ui.deliveries.INVITATION_HOST
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.deliveries.assertAnnounced
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_CLOSE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_NICKNAME
@@ -573,6 +574,18 @@ class InvitationTest {
         tap(INVITATION_ACCEPT)
         settle()
         assertFalse(invitation.isPresenting)
+    }
+
+    /** As the acceptance's `onChange(of: invitation.errorKey ?? model.errorKey)`: what went wrong is read out as it comes. */
+    @Test
+    fun whatWentWrongWithTheAcceptanceIsReadOut() {
+        show(reader) { accepting() }
+        openParcel()
+        client.actionFailure = IOException("offline")
+        compose.assertAnnounced(text("friends.actionFailed"), INVITATION_ANNOUNCEMENT) {
+            compose.onNodeWithTag(INVITATION_ACCEPT).performScrollTo().performClick()
+        }
+        compose.onNodeWithTag(INVITATION_ERROR).assert(hasText(text("friends.actionFailed")))
     }
 
     // The profile's sheet.

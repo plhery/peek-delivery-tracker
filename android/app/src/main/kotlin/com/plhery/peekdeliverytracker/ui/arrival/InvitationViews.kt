@@ -37,9 +37,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -78,6 +80,9 @@ import com.plhery.peekdeliverytracker.core.api.FriendProfile
 import com.plhery.peekdeliverytracker.core.api.FriendsAction
 import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsActionResponseInvitationState
+import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.deliveries.Announcement
+import com.plhery.peekdeliverytracker.ui.deliveries.Announcements
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesSource
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
@@ -111,6 +116,7 @@ import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import java.util.UUID
 import kotlin.math.max
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 
 /**
@@ -546,6 +552,16 @@ internal fun FriendInvitationAcceptance(
     }
     // The back is off while joining: the system's back then does nothing rather than leave the app.
     BackHandler { if (!acceptance.joining) onBack() }
+    // What went wrong is read out as it comes, shown or not (`onChange(of: invitation.errorKey ?? model.errorKey)`).
+    var announcement by remember { mutableStateOf<Announcement?>(null) }
+    val errorKey by rememberUpdatedState(invitationError ?: modelError)
+    val localizer by rememberUpdatedState(LocalLocalizer.current)
+    LaunchedEffect(Unit) {
+        snapshotFlow { errorKey }.drop(1).collect { key ->
+            if (key != null) announcement = Announcement(localizer.text(key), (announcement?.count ?: 0) + 1)
+        }
+    }
+    Announcements(announcement, INVITATION_ANNOUNCEMENT) { if (announcement == it) announcement = it.copy(text = "") }
 
     val safe = WindowInsets.systemBars.union(WindowInsets.displayCutout)
     Box(Modifier.fillMaxSize().windowInsetsPadding(safe).testTag(INVITATION_ACCEPTANCE)) {
@@ -711,6 +727,7 @@ const val INVITATION_CLOSE = "invitation.close"
 const val INVITATION_HEADING = "invitation.heading"
 const val INVITATION_LOADING = "invitation.loading"
 const val INVITATION_ERROR = "invitation.error"
+const val INVITATION_ANNOUNCEMENT = "invitation.announcement"
 const val INVITATION_RETRY = "invitation.retry"
 const val INVITATION_ACCEPTANCE = "invitation.acceptance"
 const val INVITATION_BACK = "invitation.back"

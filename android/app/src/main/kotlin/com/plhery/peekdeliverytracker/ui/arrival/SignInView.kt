@@ -39,6 +39,7 @@ import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,6 +48,7 @@ import androidx.compose.runtime.retain.retain
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -74,6 +76,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.contentType
 import androidx.compose.ui.semantics.disabled
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
@@ -104,6 +107,8 @@ import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
+import com.plhery.peekdeliverytracker.ui.deliveries.Announcement
+import com.plhery.peekdeliverytracker.ui.deliveries.Announcements
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.REGULAR_SPINNER
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
@@ -130,7 +135,9 @@ import com.plhery.peekdeliverytracker.ui.theme.widestLine
 import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 
 /** `SignInView.Step`: the ways in, then the code sent. */
@@ -269,6 +276,21 @@ internal fun SignInView(
         underWay.show(form)
         onDispose { underWay.hide(form) }
     }
+    // What went wrong is read out as it appears (`onChange(of: errorMessage)`), and TalkBack goes to the code's field
+    // once the code is sent, as the form it replaces goes (`.task(id: step)`).
+    var announcement by remember { mutableStateOf<Announcement?>(null) }
+    LaunchedEffect(form) {
+        snapshotFlow { form.errorMessage }.drop(1).collect { message ->
+            if (message != null) announcement = Announcement(message, (announcement?.count ?: 0) + 1)
+        }
+    }
+    Announcements(announcement, SIGN_IN_ANNOUNCEMENT) { if (announcement == it) announcement = it.copy(text = "") }
+    val codeFocus = remember { AccessibilityFocus() }
+    LaunchedEffect(form.step) {
+        if (form.step != SignInStep.Code) return@LaunchedEffect
+        delay(CODE_FOCUS_DELAY)
+        codeFocus.request()
+    }
 
     /** `run(provider:_:)`, which on success does to the form on screen what [succeeded] says. */
     fun run(provider: String? = null, succeeded: SignInForm.() -> Unit = {}, operation: suspend () -> Unit) {
@@ -327,7 +349,8 @@ internal fun SignInView(
                     Modifier.fillMaxWidth()
                 } else {
                     Modifier
-                        .widthIn(max = CARD_WIDTH)
+                        // At the accessibility sizes the card takes the width a word needs not to break.
+                        .widthIn(max = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) COLUMN_WIDTH else CARD_WIDTH)
                         .fillMaxWidth()
                         .testTag(AUTH_CARD)
                         .background(colors.paper, card)
@@ -344,7 +367,7 @@ internal fun SignInView(
                         InvitationHeading(invitation.nickname)
                     } else {
                         Text(
-                            localized("arrival.signInTitle"), color = colors.label, textAlign = TextAlign.Center,
+                            localized("arrival.signInTitle"), Modifier.semantics { heading() }, color = colors.label, textAlign = TextAlign.Center,
                             style = type.tracking(type.style(IosTextStyle.Title, FontWeight.SemiBold), -0.6f).sfLines(),
                         )
                     }
@@ -376,7 +399,7 @@ internal fun SignInView(
                             } else {
                                 Text(localized("auth.configTitle"), color = colors.secondaryLabel, style = type.subheadline.sfLines())
                             }
-                            form.step == SignInStep.Code -> CodeForm(form, invitation != null, onVerify = {
+                            form.step == SignInStep.Code -> CodeForm(form, invitation != null, codeFocus, onVerify = {
                                 val email = form.email.cleanedEmail
                                 val code = form.code
                                 run { session.verifyCode(email = email, code = code) }
@@ -614,7 +637,7 @@ private fun EmailForm(form: SignInForm, invited: Boolean, onSend: () -> Unit) {
  * address kept and the code and the error cleared.
  */
 @Composable
-private fun CodeForm(form: SignInForm, invited: Boolean, onVerify: () -> Unit) {
+private fun CodeForm(form: SignInForm, invited: Boolean, focus: AccessibilityFocus, onVerify: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val localizer = LocalLocalizer.current
@@ -626,7 +649,7 @@ private fun CodeForm(form: SignInForm, invited: Boolean, onVerify: () -> Unit) {
         val label = localized("auth.code")
         SignInField(label) { modifier ->
             SignInTextField(
-                form.code, { form.code = signInCode(it) }, label, CODE_FIELD, modifier,
+                form.code, { form.code = signInCode(it) }, label, CODE_FIELD, modifier.accessibilityFocus(focus),
                 placeholder = "",
                 // `.numberPad`'s digits alone: the number keyboard's password variation, with no password semantics or
                 // transformation, so TalkBack reads each digit typed.
@@ -965,6 +988,9 @@ private const val GOOGLE = "google"
 private const val OIDC = "oidc"
 private val COLUMN_WIDTH: Dp = 520.dp
 private val CARD_WIDTH: Dp = 365.dp
+
+/** How long after the code is sent TalkBack goes to its field, in milliseconds. */
+private const val CODE_FOCUS_DELAY = 300L
 private val BACK_SIZE: Dp = 42.dp
 private val SMALL_SPINNER: Dp = 16.dp
 
@@ -988,6 +1014,7 @@ internal const val CODE_FIELD = "signInCode"
 internal const val CODE_VERIFY = "signInVerify"
 internal const val DIFFERENT_EMAIL = "signInDifferentEmail"
 internal const val SIGN_IN_ERROR = "signInError"
+internal const val SIGN_IN_ANNOUNCEMENT = "signInAnnouncement"
 internal const val PRIVACY_LINE = "signInPrivacy"
 internal const val PRIVACY_NOTICE = "signInPrivacyNotice"
 internal const val SIGN_IN_INVITATION_ERROR = "signInInvitationError"

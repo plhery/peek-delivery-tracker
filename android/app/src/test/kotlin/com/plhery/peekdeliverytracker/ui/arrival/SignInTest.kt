@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui.arrival
 import android.os.Looper
 import android.text.InputType
 import android.view.View
+import android.view.accessibility.AccessibilityManager
 import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
@@ -16,10 +17,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.UriHandler
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
@@ -27,6 +30,7 @@ import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.filterToOne
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
@@ -43,6 +47,7 @@ import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.width
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -59,6 +64,7 @@ import com.plhery.peekdeliverytracker.platform.NoWebAuthentication
 import com.plhery.peekdeliverytracker.ui.LocalRootFade
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.RootScreen
+import com.plhery.peekdeliverytracker.ui.deliveries.assertAnnounced
 import com.plhery.peekdeliverytracker.ui.deliveries.editorInfo
 import com.plhery.peekdeliverytracker.ui.deliveries.CARD_PHONE
 import com.plhery.peekdeliverytracker.ui.deliveries.FIRST_OPEN
@@ -523,6 +529,73 @@ class SignInTest {
         assertEquals(0, compose.onAllNodes(hasAnyAncestor(hasTestTag(ARRIVAL_PARCEL))).fetchSemanticsNodes().size)
     }
 
+    /** As the title's `.isHeader`: TalkBack's headings reach it. */
+    @Test
+    fun theTitleIsAHeading() {
+        show()
+        val title = compose.onNode(hasText(text("arrival.signInTitle"))).fetchSemanticsNode().config
+        assertTrue(SemanticsProperties.Heading in title)
+    }
+
+    /** As `onChange(of: errorMessage)`: what went wrong is read out as it appears, where it shows under the form. */
+    @Test
+    fun whatWentWrongIsReadOut() {
+        service.otp = FakeAuthService.Answer.Offline
+        show()
+        typeEmail()
+        compose.assertAnnounced(text("error.connection"), SIGN_IN_ANNOUNCEMENT) {
+            compose.onNodeWithTag(EMAIL_SEND).performClick()
+        }
+        assertEquals(text("error.connection"), errorShown())
+    }
+
+    /** As `.task(id: step)`: once the code is sent, TalkBack goes from the address's form to the code's field. */
+    @Test
+    fun talkBackGoesToTheCodesFieldOnceTheCodeIsSent() {
+        show()
+        val view = talkBack()
+        sendCode()
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        assertTrue(compose.onNodeWithTag(CODE_FIELD).hasTalkBackFocus(view))
+    }
+
+    private fun talkBack(): View {
+        val root = compose.onRoot().fetchSemanticsNode().root as ViewRootForTest
+        val manager = shadowOf(compose.activity.getSystemService(AccessibilityManager::class.java))
+        compose.runOnUiThread {
+            manager.setEnabled(true)
+            manager.setTouchExplorationEnabled(true)
+            root.forceAccessibilityForTesting(true)
+        }
+        return root.view
+    }
+
+    private fun SemanticsNodeInteraction.hasTalkBackFocus(view: View): Boolean {
+        val id = fetchSemanticsNode().id
+        var focused = false
+        compose.runOnUiThread { focused = view.accessibilityNodeProvider.createAccessibilityNodeInfo(id)?.isAccessibilityFocused == true }
+        return focused
+    }
+
+    /** The card's width on a tablet: 365, or at the accessibility sizes the column's (520 less its margins). */
+    private fun cardWidth(): Float = compose.onNodeWithTag(AUTH_CARD).getBoundsInRoot().width.value
+
+    @Test
+    @Config(qualifiers = TABLET)
+    fun theCardIsItsOwnWidth() {
+        show()
+        assertEquals(365f, cardWidth(), 0.5f)
+    }
+
+    /** As iOS's since its largest text broke a word on the card: the width a word needs not to break. */
+    @Test
+    @Config(qualifiers = TABLET)
+    fun atTheAccessibilitySizesTheCardTakesTheColumnsWidth() {
+        show(fontScale = 2f)
+        assertEquals(472f, cardWidth(), 0.5f)
+    }
+
     /** C-L08: the privacy page in the browser. */
     @Test
     fun thePrivacyLinkOpensThePrivacyPage() {
@@ -705,6 +778,10 @@ class SignInTest {
     private fun pixel(x: Float, y: Float): Color {
         shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
         return compose.onRoot().captureToImage().toPixelMap()[x.toInt(), y.toInt()]
+    }
+
+    private companion object {
+        const val TABLET = "w800dp-h1100dp-xhdpi"
     }
 
     /** The largest difference between two colours in any channel. */

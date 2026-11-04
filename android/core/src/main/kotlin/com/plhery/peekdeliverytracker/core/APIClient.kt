@@ -47,6 +47,7 @@ import java.util.Locale
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
@@ -212,7 +213,8 @@ sealed class DeliveryApiError(message: String) : Exception(message) {
  * off it. `deviceName` is the name the account's device list shows for this one (`UIDevice.current.name`); `region`
  * the device's region at the moment, whose country a detection sends (`ParcelLookupCountry.hint` says which locale);
  * `debug` says the build's push tokens are development ones (`#if DEBUG`); `analytics` counts the catalog's
- * operations (`DeliveryAnalytics.shared.action`). `verification` is the app's one NativeVerification.
+ * operations (`DeliveryAnalytics.shared.action`). `verification` is the app's one NativeVerification. A large answer is
+ * read on `decoding`.
  */
 class DeliveryApiClient(
     private val configuration: AppConfiguration,
@@ -224,6 +226,7 @@ class DeliveryApiClient(
     private val debug: Boolean = false,
     private val analytics: (event: String, outcome: DeliveryAnalytics.Outcome) -> Unit = { _, _ -> },
     private val now: () -> Instant = Instant::now,
+    private val decoding: CoroutineDispatcher = Dispatchers.Default,
 ) {
     /** What the client needs of SessionStore, which answers on its own thread whichever thread asks. */
     interface Session {
@@ -469,7 +472,7 @@ class DeliveryApiClient(
         val data = rawRequest(path, method, body).body
         return try {
             // A full parcel list with its histories is large; decode it off the main thread.
-            withContext(Dispatchers.Default) { decodeSwiftKeys(response, data) }
+            withContext(decoding) { decodeSwiftKeys(response, data) }
         } catch (error: CancellationException) {
             throw error
         } catch (error: Exception) {

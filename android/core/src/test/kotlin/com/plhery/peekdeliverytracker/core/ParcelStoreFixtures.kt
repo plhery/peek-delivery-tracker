@@ -4,7 +4,10 @@ import java.time.Instant
 import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.coroutines.ContinuationInterceptor
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 /** The offline lists in memory: a relaunched store given the same instance finds what the first one saved. */
 internal class MemoryParcelCacheFiles : ParcelCacheFiles {
@@ -108,7 +111,12 @@ internal fun testParcelStore(
     configuration = configuration,
     session = session,
     localizer = localizer,
-    api = DeliveryApiClient(configuration, session, transport, verificationWithoutAppAttest(), deviceName = "Synthetic phone", region = region),
+    // The answers read on the test's own dispatcher: read on another thread, they'd let the test's clock run on to the
+    // next round meanwhile.
+    api = DeliveryApiClient(
+        configuration, session, transport, verificationWithoutAppAttest(), deviceName = "Synthetic phone", region = region,
+        decoding = scope.coroutineContext[ContinuationInterceptor] as? CoroutineDispatcher ?: Dispatchers.Default,
+    ),
     device = device,
     liveActivityRevocations = LiveActivityRevocations(configuration, transport, revocations),
     defaults = defaults,

@@ -1112,8 +1112,8 @@ private fun GiftMarker() {
 /**
  * LinkRefreshButton (B-S48, B-AN21, B-AX15): when the carrier was last asked, "parcel.updated" kept current each
  * minute, and the arrow, or a spinner while the link is read, 16 square, in caption, in `tint` at 75 %, 44 at least.
- * Where the words don't fit beside the marks (`ViewThatFits`), the arrow alone. TalkBack hears "detail.checkNow" and,
- * as its value, when it was updated.
+ * Where the words don't fit beside the marks (`ViewThatFits`), the arrow alone. TalkBack hears the age where it shows,
+ * then "detail.checkNow", so that Voice Access answers to either; where the arrow stands alone, the age as its value.
  */
 @Composable
 private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, tint: Color, action: () -> Unit) {
@@ -1132,6 +1132,9 @@ private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, tint: Color, 
     val color = tint.copy(alpha = tint.alpha * 0.75f)
     val enabled = !refreshing
     val label = localizer.text("detail.checkNow")
+    // Whether the age shows beside the arrow, as the last layout found.
+    var ageFits by remember { mutableStateOf(true) }
+    val shownAge = updated?.takeIf { ageFits }
     val indicator = @Composable {
         Box(Modifier.size(16.dp), contentAlignment = Alignment.Center) {
             if (refreshing) {
@@ -1147,8 +1150,8 @@ private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, tint: Color, 
             .testTag(LINK_REFRESH)
             .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .clearAndSetSemantics {
-                contentDescription = label
-                stateDescription = updated ?: ""
+                contentDescription = if (shownAge != null) "$shownAge, $label" else label
+                stateDescription = if (shownAge != null) "" else updated ?: ""
                 role = Role.Button
                 if (!enabled) disabled()
                 onClick {
@@ -1169,7 +1172,9 @@ private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, tint: Color, 
         ) { measurables, constraints ->
             val minimum = 44.dp.roundToPx()
             val dated = measurables[0].measure(Constraints())
-            val shown = if (dated.width <= constraints.maxWidth) dated else measurables[1].measure(Constraints())
+            val fits = dated.width <= constraints.maxWidth
+            if (ageFits != fits) ageFits = fits
+            val shown = if (fits) dated else measurables[1].measure(Constraints())
             val width = max(minimum, shown.width).coerceAtMost(max(minimum, constraints.maxWidth))
             val height = max(minimum, shown.height)
             layout(width, height) { shown.place((width - shown.width) / 2, (height - shown.height) / 2) }

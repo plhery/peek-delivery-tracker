@@ -347,7 +347,7 @@ class FriendsTest {
     @Test
     fun theCircleShowsTheSharingRowTheCountAndEachFriendsCard() {
         show()
-        assertEquals(text("friends.settings"), label(FRIENDS_SHARING))
+        assertEquals("${text("friends.yourSharing")}, ${text("friends.settings")}", label(FRIENDS_SHARING))
         assertEquals(Role.Button, semantics(FRIENDS_SHARING)[SemanticsProperties.Role])
         assertEquals(listOf(text("friends.circle"), "4"), words(FRIENDS_HEADER).take(2))
         assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())

@@ -1064,7 +1064,8 @@ private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, fo
  * `carrierLine`: one quiet line under the number, which opens the picker: the carrier's truck once one is known, a
  * spinner while the carriers are asked, else the wand; its name and what the check found, beside each other where they
  * fit, else one over the other, and "Change" or "Choose" underlined at its end, or under them at the accessibility
- * sizes. TalkBack reads the name and the finding, and what a tap does. An Amazon number keeps its carrier.
+ * sizes. TalkBack reads the name, the finding and the action word, and what a tap does. An Amazon number keeps its
+ * carrier.
  */
 @Composable
 private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
@@ -1080,7 +1081,8 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
     val actionKey = if (addition.choosingCarrier) "add.line.choose" else "add.line.change"
     val action = localized(actionKey)
     val enabled = !addition.amazonNumber && LocalFormEnabled.current
-    val description = listOfNotNull(name, detail).joinToString(", ")
+    // Voice Access answers to the words on the line, "Change" or "Choose" with them.
+    val description = listOfNotNull(name, detail, action.takeUnless { addition.amazonNumber }).joinToString(", ")
     val nameStyle = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines()
     val detailColor = if (addition.choosingCarrier || addition.refused) ochre else colors.secondaryLabel
     val lineAction = @Composable {

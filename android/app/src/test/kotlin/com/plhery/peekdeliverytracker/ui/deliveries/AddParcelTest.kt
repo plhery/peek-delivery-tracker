@@ -395,7 +395,7 @@ class AddParcelTest {
         settle()
         open()
         type("1Z999AA10123456784")
-        assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
+        assertEquals("UPS, ${text("add.detectedCarrier")}, ${text("add.line.change")}", description(ADD_CARRIER))
         // The way to change it, said once.
         assertEquals(text("add.line.change"), clickLabel(ADD_CARRIER))
         assertNull(value(ADD_CARRIER))
@@ -452,18 +452,18 @@ class AddParcelTest {
         type(number)
         // Not while it is typed.
         assertEquals(emptyList<String>(), source.detected)
-        assertEquals(text("add.detect"), description(ADD_CARRIER))
+        assertEquals("${text("add.detect")}, ${text("add.line.change")}", description(ADD_CARRIER))
         leave()
         assertEquals(listOf(number), source.detected)
         assertTrue(exists(ADD_CHECKING))
-        assertEquals("${text("add.detect")}, ${text("add.checkingServices")}", description(ADD_CARRIER))
+        assertEquals("${text("add.detect")}, ${text("add.checkingServices")}, ${text("add.line.change")}", description(ADD_CARRIER))
         // The check never holds Add.
         node(ADD_SAVE).assertIsEnabled()
         assertEquals(emptyList<Int>(), ticking.played)
 
         source.detecting?.complete(Unit)
         settle()
-        assertEquals("GLS Switzerland, ${text("add.line.found")}", description(ADD_CARRIER))
+        assertEquals("GLS Switzerland, ${text("add.line.found")}, ${text("add.line.change")}", description(ADD_CARRIER))
         assertEquals(listOf(hapticFeedbackConstant(SensoryFeedback.Selection)), ticking.played)
         // GLS needs the delivery postcode: Add waits for it.
         assertTrue(exists(ADD_POSTCODE))
@@ -548,7 +548,7 @@ class AddParcelTest {
         open()
         type(number)
         leave()
-        assertEquals("${text("add.detect")}, ${text("add.line.failed")}", description(ADD_CARRIER))
+        assertEquals("${text("add.detect")}, ${text("add.line.failed")}, ${text("add.line.change")}", description(ADD_CARRIER))
         assertEquals(text("add.line.change"), clickLabel(ADD_CARRIER))
         node(ADD_SAVE).assertIsEnabled()
         type("$number ")
@@ -577,7 +577,7 @@ class AddParcelTest {
         compose.onAllNodesWithTag(carrierPickerRowTag(CarrierId.GlsDe)).onFirst().performClick()
         settle()
         assertFalse(exists(ADD_PICKER))
-        assertEquals("GLS Germany, ${text("add.line.chosen")}", description(ADD_CARRIER))
+        assertEquals("GLS Germany, ${text("add.line.chosen")}, ${text("add.line.change")}", description(ADD_CARRIER))
     }
 
     @Test
@@ -598,7 +598,7 @@ class AddParcelTest {
         settle()
         assertFalse(exists(ADD_PICKER))
         assertTrue(exists(ADD_TITLE))
-        assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
+        assertEquals("UPS, ${text("add.detectedCarrier")}, ${text("add.line.change")}", description(ADD_CARRIER))
         // Escape closes Add once the picker has gone.
         press(KeyEvent.KEYCODE_ESCAPE)
         assertClosed()
@@ -970,7 +970,7 @@ class AddParcelTest {
         node(EMPTY_PASTE).performClick()
         settle()
         assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
-        assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
+        assertEquals("UPS, ${text("add.detectedCarrier")}, ${text("add.line.change")}", description(ADD_CARRIER))
         // Only Add's own Paste and the welcome's count.
         assertEquals(emptyList<String>(), source.actions.filter { it == "parcel-paste" })
         node(ADD_CLOSE).performClick()
@@ -1112,7 +1112,7 @@ class AddParcelTest {
         node(ADD_PICKER_CANCEL).performClick()
         settle()
         assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
-        assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
+        assertEquals("UPS, ${text("add.detectedCarrier")}, ${text("add.line.change")}", description(ADD_CARRIER))
     }
 
     @Test
@@ -1128,7 +1128,7 @@ class AddParcelTest {
         open()
         type(number)
         leave()
-        assertEquals("GLS Switzerland, ${text("add.line.found")}", description(ADD_CARRIER))
+        assertEquals("GLS Switzerland, ${text("add.line.found")}, ${text("add.line.change")}", description(ADD_CARRIER))
         node(ADD_FORGET_POSTCODE).performClick()
         settle()
         assertEquals(listOf(hapticFeedbackConstant(SensoryFeedback.Selection)), ticking.played)
@@ -1137,7 +1137,7 @@ class AddParcelTest {
         compose.mainClock.autoAdvance = true
         settle()
         assertEquals(listOf(number), source.detected)
-        assertEquals("GLS Switzerland, ${text("add.line.found")}", description(ADD_CARRIER))
+        assertEquals("GLS Switzerland, ${text("add.line.found")}, ${text("add.line.change")}", description(ADD_CARRIER))
         // The suggestion forgotten stays so: not filled in again.
         assertEquals("", fieldText(ADD_POSTCODE))
         assertFalse(exists(ADD_FORGET_POSTCODE))
@@ -1311,7 +1311,7 @@ class AddParcelTest {
         // The field left to save settles nothing: no check, no "Checking…".
         assertEquals(emptyList<String>(), source.detected)
         assertFalse(exists(ADD_CHECKING))
-        assertEquals(text("add.detect"), description(ADD_CARRIER))
+        assertEquals("${text("add.detect")}, ${text("add.line.change")}", description(ADD_CARRIER))
     }
 
     @Test
@@ -1325,7 +1325,7 @@ class AddParcelTest {
         node(ADD_NAME).assertIsNotEnabled()
         node(ADD_PASTE).assertIsNotEnabled()
         node(ADD_CARRIER).assertIsNotEnabled()
-        assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
+        assertEquals("UPS, ${text("add.detectedCarrier")}, ${text("add.line.change")}", description(ADD_CARRIER))
         assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
     }
 
@@ -1430,7 +1430,7 @@ class AddParcelTest {
         assertEquals(listOf(first), source.refusalQuestions)
         pick(CarrierId.Dhl, "DHL")
         val refused = description(ADD_CARRIER)
-        assertTrue("$refused", refused!!.endsWith(text("add.line.refused")))
+        assertTrue("$refused", refused!!.endsWith("${text("add.line.refused")}, ${text("add.line.change")}"))
         // DPD's answer, come after DHL was chosen.
         held.complete(Unit)
         settle()
@@ -1586,7 +1586,7 @@ class AddParcelTest {
         node(ADD_TRACKING).assertIsNotFocused()
         // Settled at once (`settledNumber`), as a field left: its carriers asked about, the one found said.
         assertEquals(listOf(number), source.detected)
-        assertEquals("GLS Switzerland, ${text("add.line.found")}", description(ADD_CARRIER))
+        assertEquals("GLS Switzerland, ${text("add.line.found")}, ${text("add.line.change")}", description(ADD_CARRIER))
         assertEquals(listOf("parcel-scan"), source.actions.filter { it == "parcel-scan" })
     }
 
@@ -1641,7 +1641,7 @@ class AddParcelTest {
         settle()
         assertFalse(exists(SCANNER))
         assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
-        assertEquals("UPS, ${text("add.detectedCarrier")}", description(ADD_CARRIER))
+        assertEquals("UPS, ${text("add.detectedCarrier")}, ${text("add.line.change")}", description(ADD_CARRIER))
         node(ADD_TRACKING).assertIsNotFocused()
     }
 

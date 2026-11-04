@@ -734,7 +734,7 @@ private fun FirstOpenAsk(
 /**
  * `field(large:)`: reads as the field it leads to, Add, which takes a number, a link or a whole message. The
  * placeholder in the tertiary label, on up to two lines (at the accessibility sizes as many as it needs), in title 3
- * when [large] or body, across a row at least 64 or 58 tall that opens Add to type, read as "Tracking number"; then,
+ * when [large] or body, across a row at least 64 or 58 tall that opens Add to type, read as its placeholder and "Tracking number"; then,
  * where the device scans, the viewfinder that opens Add on the camera. Both dim a little under the finger
  * (`.buttonStyle(.plain)`), on the paper with corners of 20 or 18 and a hairline of the separator at 30 %. TalkBack
  * goes back to the one tapped once Add has gone.
@@ -747,7 +747,8 @@ private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modi
     val fieldFocus = remember { AccessibilityFocus() }
     val scanFocus = remember { AccessibilityFocus() }
     val canScan = LocalLabelScanner.current.available()
-    val fieldLabel = localized("add.tracking")
+    // Voice Access answers to the words on the field as well as to its name, which they come before, as on screen.
+    val fieldLabel = "${localized("add.trackingPlaceholder")}, ${localized("add.tracking")}"
     val scanLabel = localized("add.scan")
     Row(
         modifier

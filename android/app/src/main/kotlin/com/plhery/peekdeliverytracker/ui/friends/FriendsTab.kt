@@ -674,7 +674,7 @@ internal fun BorderedButton(title: String, tag: String, enabled: Boolean = true,
 }
 
 /**
- * `circle(_:)`: what the reader shares, which opens the profile's panel (read as "friends.settings"); then, with no
+ * `circle(_:)`: what the reader shares, which opens the profile's panel (read as its title and "friends.settings"); then, with no
  * friend yet, the postage pair, "friends.emptyTitle" and Invite; else "friends.circle" with its count and Invite
  * beside it (under it, across the column, at the accessibility sizes), and the friends' cards 9 apart, the friend
  * being revealed first. A card opens the friend's page.
@@ -687,7 +687,8 @@ private fun Circle(state: FriendsState, data: FriendsSnapshot, focus: UUID?, asF
     val language = LocalLanguage.current
     val profile = data.profile ?: return
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
-    val settings = localized("friends.settings")
+    // Voice Access answers to the row's title as well as to its name, which it comes before, as on screen.
+    val settings = "${localized("friends.yourSharing")}, ${localized("friends.settings")}"
     Column(
         Modifier
             .fillMaxWidth()

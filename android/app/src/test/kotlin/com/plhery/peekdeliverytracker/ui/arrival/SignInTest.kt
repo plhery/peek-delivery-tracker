@@ -495,7 +495,7 @@ class SignInTest {
     fun theLanguageMenuChangesTheLanguage() {
         show()
         compose.onNodeWithTag(LANGUAGE_MENU)
-            .assert(SemanticsMatcher.expectValue(SemanticsProperties.ContentDescription, listOf(text("language.label"))))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.ContentDescription, listOf("EN, ${text("language.label")}")))
             .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "English"))
             .performClick()
         compose.waitForIdle()

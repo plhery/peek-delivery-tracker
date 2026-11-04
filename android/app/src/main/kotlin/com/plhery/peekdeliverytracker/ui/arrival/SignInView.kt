@@ -443,7 +443,7 @@ private fun SignInBack(onBack: () -> Unit) {
 
 /**
  * `AuthenticationLanguageMenu`: the globe and the language's code in upper case (semibold caption) in the secondary
- * grey, 10 in, at least 44 high, read as `language.label` with the language's own name as its value. It opens iOS's
+ * grey, 10 in, at least 44 high, read as the code and `language.label` with the language's own name as its value. It opens iOS's
  * menu of the languages by their own names, the one in use checked, its top at the label's and its trailing edge at
  * the label's, on glass that shows the arrival through it; a choice sets the app's language (`localizer.language`),
  * which the app saves and passes on.
@@ -482,7 +482,8 @@ internal fun LanguageMenu(menus: SheetMenus) {
             .accessibilityFocus(returnFocus)
             .clickable(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
             .clearAndSetSemantics {
-                contentDescription = label
+                // Voice Access answers to the code it shows as well as to its name.
+                contentDescription = "${language.rawValue.uppercase()}, $label"
                 stateDescription = language.nativeName
                 role = Role.DropdownList
                 onClick {

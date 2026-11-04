@@ -6,11 +6,13 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -37,6 +39,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -158,14 +161,18 @@ class ParcelLinkSheetTest {
     private fun show(
         links: FakeParcelLinks,
         state: AuthenticationState = links.session.value,
+        fontScale: Float = 1f,
         deliveries: (@Composable () -> Unit)? = null,
     ) {
         this.links = links
         links.session.value = state
         compose.setContent {
-            RootHost(
-                state = state, links = links, inbox = inbox, onView = { views += it }, now = { now }, deliveries = deliveries,
-            )
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale)) {
+                RootHost(
+                    state = state, links = links, inbox = inbox, onView = { views += it }, now = { now }, deliveries = deliveries,
+                )
+            }
         }
         compose.waitForIdle()
     }
@@ -600,15 +607,29 @@ class ParcelLinkSheetTest {
         val synced = LinkFixtures.viewer().parcel.lastSyncedAt!!
         fun updated() = text("parcel.updated", mapOf("date" to localizer.relativeTime(from = synced, now = now)))
         val first = updated()
-        compose.onNodeWithTag(LINK_REFRESH).assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, first))
-        assertEquals(listOf(text("detail.checkNow")), compose.onNodeWithTag(LINK_REFRESH).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ContentDescription))
+        // The age it shows, then its name: Voice Access answers to either.
+        fun label() = compose.onNodeWithTag(LINK_REFRESH).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ContentDescription)
+        assertEquals(listOf("$first, ${text("detail.checkNow")}"), label())
 
         now = CAPTURED.plus(Duration.ofMinutes(10))
         compose.mainClock.advanceTimeBy(61_000)
         compose.waitForIdle()
         val later = updated()
         assertFalse(first == later)
-        compose.onNodeWithTag(LINK_REFRESH).assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, later))
+        assertEquals(listOf("$later, ${text("detail.checkNow")}"), label())
+    }
+
+    /** Where the age doesn't fit beside the arrow, the arrow alone, read as its name with the age as its value. */
+    @Test
+    @Config(qualifiers = "w240dp-h640dp-xhdpi")
+    fun whereTheAgeDoesNotFitTheRefreshButtonIsReadAsItsNameWithTheAgeAsItsValue() {
+        show(FakeParcelLinks(), fontScale = 2f)
+        open()
+        val synced = LinkFixtures.viewer().parcel.lastSyncedAt!!
+        val updated = text("parcel.updated", mapOf("date" to localizer.relativeTime(from = synced, now = now)))
+        compose.onNodeWithTag(LINK_REFRESH)
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.ContentDescription, listOf(text("detail.checkNow"))))
+            .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, updated))
     }
 
     // Gifts

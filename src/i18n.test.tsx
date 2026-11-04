@@ -110,7 +110,9 @@ describe('localization', () => {
     expect(localizedDeliveryEstimate('2026-11-02', '2026-11-04', t, 'en-CH', now)).toBe('today');
     // One day, with or without its hours, reads as before.
     expect(localizedDeliveryEstimate(undefined, '2026-11-04', t, 'en-CH', now)).toBe('today');
-    expect(localizedDeliveryEstimate('2026-11-04T13:05:00+01:00', '2026-11-04T16:05:00+01:00', t, 'en-CH', now)).toBe('today, 13:05–16:05');
+    // Its hours on the device's clock, whatever zone the tests run in.
+    const at = (hour: number) => new Date(2026, 10, 4, hour, 5).toISOString();
+    expect(localizedDeliveryEstimate(at(13), at(16), t, 'en-CH', now)).toBe('today, 13:05–16:05');
     expect(deliveryWindowOpen('2026-11-04', '2026-11-06', now)).toBe(true);
     expect(deliveryWindowOpen('2026-11-05', '2026-11-06', now)).toBe(false);
     expect(deliveryWindowOpen(undefined, '2026-11-06', now)).toBe(false);

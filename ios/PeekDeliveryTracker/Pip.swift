@@ -689,8 +689,10 @@ enum PipArtwork {
             let keys: [(at: Double, rise: Double, turn: Double, across: Double, up: Double)] = [
                 (0, 0, 0, 1, 1), (0.12, 0, 0, 1.07, 0.9), (0.28, -10, -5, 0.96, 1.05), (0.44, 0, 2, 1.05, 0.95), (0.58, 0, 0, 1, 1), (1, 0, 0, 1, 1),
             ]
-            let phase = (time / period(.joy)).truncatingRemainder(dividingBy: 1)
-            let next = keys.firstIndex { $0.at > phase } ?? keys.count - 1
+            // A time before the hop's start counts back from the end of a period: no key comes before the first.
+            let turned = (time / period(.joy)).truncatingRemainder(dividingBy: 1)
+            let phase = turned < 0 ? turned + 1 : turned
+            let next = max(keys.firstIndex { $0.at > phase } ?? keys.count - 1, 1)
             let from = keys[next - 1], to = keys[next]
             let t = spring.value(at: (phase - from.at) / (to.at - from.at))
             pose = (from.rise + (to.rise - from.rise) * t, from.turn + (to.turn - from.turn) * t,

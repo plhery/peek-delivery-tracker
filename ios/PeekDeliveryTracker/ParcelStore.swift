@@ -1668,11 +1668,15 @@ final class ParcelStore: ObservableObject {
         }
     }
 
+    /// The token Apple gives, waited for up to 8 seconds; nil as soon as Apple says it can give none (no network, a
+    /// build without the push entitlement), so the reader is told at once instead of after the whole wait.
     private func waitForAPNSToken() async -> String? {
         if let existing = AppDelegate.currentDeviceToken { return existing }
+        let failures = AppDelegate.deviceTokenFailures
         for _ in 0..<80 {
             try? await Task.sleep(for: .milliseconds(100))
             if let token = AppDelegate.currentDeviceToken { return token }
+            if AppDelegate.deviceTokenFailures != failures { return nil }
         }
         return nil
     }
@@ -1846,8 +1850,8 @@ final class DemoRepository {
         dpdPostcode: String?,
         dpdPostcodeCountry: String?
     ) throws -> Parcel {
+        // The history stays, as the service keeps it and the sheet says, while the new carrier is checked.
         try update(id: id) { parcel in
-            let now = DateParser.isoString(Date())
             parcel.carrier = carrier
             parcel.trackingURL = trackingURL
             parcel.dpdPostcode = dpdPostcode
@@ -1857,14 +1861,6 @@ final class DemoRepository {
             parcel.syncStatus = .pending
             parcel.syncError = nil
             parcel.carrierData = Self.startingCarrierData(parcel.trackingNumber, postcode: dpdPostcode, country: dpdPostcodeCountry)
-            parcel.trackingEvents = [TrackingEvent(
-                id: UUID(),
-                packageID: id,
-                stage: .pending,
-                description: "Carrier changed; waiting for tracking",
-                location: nil,
-                occurredAt: now
-            )]
         }
     }
 

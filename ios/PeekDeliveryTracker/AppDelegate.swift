@@ -11,7 +11,6 @@ import UserNotifications
 
 extension Notification.Name {
     static let didReceiveAPNSToken = Notification.Name("SDTDidReceiveAPNSToken")
-    static let didFailAPNSRegistration = Notification.Name("SDTDidFailAPNSRegistration")
     static let didOpenParcelNotification = Notification.Name("SDTDidOpenParcelNotification")
     static let didOpenLinkNotification = Notification.Name("SDTDidOpenLinkNotification")
     static let didOpenFriendNotification = Notification.Name("SDTDidOpenFriendNotification")
@@ -21,6 +20,8 @@ extension Notification.Name {
 @MainActor
 final class AppDelegate: NSObject, PlatformApplicationDelegate, UNUserNotificationCenterDelegate {
     static private(set) var currentDeviceToken: String?
+    /// How many times this launch Apple said it could give no token: a wait for one ends at the next.
+    static private(set) var deviceTokenFailures = 0
     static private(set) var pendingParcelID: UUID?
     static private(set) var pendingFriendID: UUID?
     /// A notification about a parcel followed through its link without an account, tapped before the app could open it.
@@ -122,7 +123,7 @@ final class AppDelegate: NSObject, PlatformApplicationDelegate, UNUserNotificati
     }
 
     func application(_ application: PlatformApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        NotificationCenter.default.post(name: .didFailAPNSRegistration, object: error)
+        Self.deviceTokenFailures += 1
     }
 
     func userNotificationCenter(

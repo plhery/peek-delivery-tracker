@@ -84,6 +84,18 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertTrue(DemoRepository(defaults: defaults).list().isEmpty)
     }
 
+    func testDemoCarrierChangeKeepsTheHistory() throws {
+        let suite = "demo-carrier-tests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let repo = DemoRepository(defaults: defaults, language: { .en })
+        let sneakers = try XCTUnwrap(repo.list().first { $0.trackingNumber == "1234567899" })
+        let changed = try repo.changeCarrier(id: sneakers.id, carrier: .ups, trackingURL: nil, dpdPostcode: nil, dpdPostcodeCountry: nil)
+        XCTAssertEqual(changed.carrier, .ups)
+        XCTAssertEqual(changed.syncStatus, .pending)
+        XCTAssertEqual(changed.trackingEvents, sneakers.trackingEvents)
+    }
+
     func testDemoIsWrittenInTheAppLanguageAndKeepsEditedNames() throws {
         let suite = "demo-language-tests-\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suite)!

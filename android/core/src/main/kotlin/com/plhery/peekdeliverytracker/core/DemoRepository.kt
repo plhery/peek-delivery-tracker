@@ -102,9 +102,9 @@ class DemoRepository(
         return update(id) { it.copy(label = label) }
     }
 
+    /** The history stays, as the service keeps it and the sheet says, while the new carrier is checked. */
     fun changeCarrier(id: UUID, carrier: CarrierId, trackingUrl: String?, dpdPostcode: String?, dpdPostcodeCountry: String?): Parcel =
         update(id) { parcel ->
-            val now = DateParser.isoString(now())
             parcel.copy(
                 carrier = carrier,
                 trackingUrl = trackingUrl,
@@ -115,12 +115,6 @@ class DemoRepository(
                 syncStatus = SyncStatus.Pending,
                 syncError = null,
                 carrierData = startingCarrierData(parcel.trackingNumber, postcode = dpdPostcode, country = dpdPostcodeCountry),
-                trackingEvents = listOf(
-                    TrackingEvent(
-                        id = UUID.randomUUID(), packageId = id, stage = TrackingStage.Pending,
-                        description = "Carrier changed; waiting for tracking", location = null, occurredAt = now,
-                    ),
-                ),
             )
         }
 

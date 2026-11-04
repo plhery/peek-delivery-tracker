@@ -422,6 +422,8 @@ final class ParcelRouteTests: XCTestCase {
         XCTAssertEqual(PipArtwork.motion(.look, at: 3), .identity)
         XCTAssertNotEqual(PipArtwork.motion(.joy, at: 0.28 * 2.2), .identity)
         XCTAssertEqual(PipArtwork.motion(.joy, at: 0.8 * 2.2).ty, 0, accuracy: 0.001)
+        // A time before the hop's start, as a clock behind the animation's gives, is the same pose a period later.
+        XCTAssertEqual(PipArtwork.motion(.joy, at: -0.72 * 2.2).ty, PipArtwork.motion(.joy, at: 0.28 * 2.2).ty, accuracy: 0.001)
         XCTAssertEqual(PipArtwork.motion(.eager, at: 0).b, PipArtwork.motion(.eager, at: 1.1).b, accuracy: 0.001)
     }
 

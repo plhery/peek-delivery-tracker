@@ -134,6 +134,16 @@ class ParcelLogicTests {
     }
 
     @Test
+    fun demoCarrierChangeKeepsTheHistory() {
+        val repo = DemoRepository(MemoryDefaults(), language = { AppLanguage.En })
+        val sneakers = repo.list().first { it.trackingNumber == "1234567899" }
+        val changed = repo.changeCarrier(sneakers.id, CarrierId.Ups, trackingUrl = null, dpdPostcode = null, dpdPostcodeCountry = null)
+        assertEquals(CarrierId.Ups, changed.carrier)
+        assertEquals(SyncStatus.Pending, changed.syncStatus)
+        assertEquals(sneakers.trackingEvents, changed.trackingEvents)
+    }
+
+    @Test
     fun demoIsWrittenInTheAppLanguageAndKeepsEditedNames() {
         val defaults = MemoryDefaults()
         var language = AppLanguage.En

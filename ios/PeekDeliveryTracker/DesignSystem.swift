@@ -18,6 +18,9 @@ enum Brand {
     static let onAccent = Color(hex: "#20251E")
     static let ink = color(light: "#20251E", dark: "#F5F6F2")
     static let inkSoft = color(light: "#657060", dark: "#AFB9A9")
+    /// The system's secondary grey, a little darker in light and lighter in dark: it reads at 4.5:1 or more on the page,
+    /// the paper, the cream and every carrier's card (`ContrastTests`).
+    static let secondaryText = color(light: "#606065", dark: "#BCBCC2")
     static let cream = color(light: "#F0F0E9", dark: "#292C28")
     static let paper = color(light: "#FFFFFF", dark: "#242824")
     static let warning = color(light: "#963E19", dark: "#FFB184")

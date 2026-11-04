@@ -785,7 +785,7 @@ private struct SettingsGroup<Content: View>: View {
             if let title {
                 HStack(spacing: 8) {
                     Text(title.uppercased()).font(.caption2.weight(.medium)).tracking(1)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Brand.secondaryText)
                     if let badge {
                         Text(badge.uppercased()).font(.caption2.weight(.bold)).tracking(0.4)
                             .foregroundStyle(ExperimentalPalette.ochre)
@@ -829,15 +829,15 @@ private struct SettingsRow: View {
                 if stacked, let value, !value.isEmpty {
                     // A value of one word, such as an address, gets smaller rather than break in the middle.
                     let oneWord = !value.contains(" ")
-                    Text(value).font(.caption).foregroundStyle(.secondary)
+                    Text(value).font(.caption).foregroundStyle(Brand.secondaryText)
                         .lineLimit(oneWord ? 1 : nil).minimumScaleFactor(oneWord ? 0.5 : 1)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 if let detail { Text(detail).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
             }
             Spacer(minLength: 4)
-            if !stacked, let value, !value.isEmpty { Text(value).font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.trailing) }
-            if chevron { Image(systemName: "chevron.right").font(.system(size: 10, weight: .light)).foregroundStyle(.secondary) }
+            if !stacked, let value, !value.isEmpty { Text(value).font(.caption).foregroundStyle(Brand.secondaryText).multilineTextAlignment(.trailing) }
+            if chevron { Image(systemName: "chevron.right").font(.system(size: 10, weight: .light)).foregroundStyle(Brand.secondaryText) }
         }
         .padding(padded ? 15 : 0)
         .frame(minHeight: padded ? 54 : nil, alignment: .leading)

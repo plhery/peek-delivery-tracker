@@ -969,7 +969,7 @@ private struct DeliveryListView: View {
                 Text("\(layout.active.count)")
                     .contentTransition(.numericText())
                     .font(.caption2.monospacedDigit())
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
                     .padding(.horizontal, 6).frame(minHeight: 20)
                     .background(.secondary.opacity(0.09), in: Capsule())
                     .fixedSize()
@@ -1276,7 +1276,7 @@ private struct DeliveryListView: View {
             Text("\(section.parcels.count)")
                 .contentTransition(.numericText())
                 .font(.caption2.monospacedDigit())
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Brand.secondaryText)
                 .padding(.horizontal, 8)
                 .frame(minHeight: 20)
                 .background(.secondary.opacity(0.09), in: Capsule())
@@ -1765,7 +1765,7 @@ private struct ExperimentalNextDeliveryPass: View {
             AutomaticCarrierNotice(parcel: parcel)
             if let delivering = parcel.deliveringCarrier {
                 Text(localizer.text("parcel.deliveryCarrier", ["carrier": catalog.info(for: delivering, language: localizer.language).displayName]))
-                    .font(.caption).foregroundStyle(.secondary)
+                    .font(.caption).foregroundStyle(Brand.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
             }
 

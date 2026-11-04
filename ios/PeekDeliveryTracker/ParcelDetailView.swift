@@ -414,7 +414,7 @@ struct ParcelDetailView: View {
                         if let sender { Text(localizer.text("parcel.sender", ["sender": sender])) }
                         if let deliveryLine { Text(deliveryLine) }
                     }
-                    .font(.caption).foregroundStyle(.secondary)
+                    .font(.caption).foregroundStyle(Brand.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
                 }
                 if let postcode = parcel.refusedPostcode
@@ -777,7 +777,7 @@ struct ParcelDetailView: View {
                 row {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(parcel.trackingNumberLabel(entry, localizer: localizer))
-                            .font(.caption2).foregroundStyle(.secondary)
+                            .font(.caption2).foregroundStyle(Brand.secondaryText)
                         Text(CarrierCatalog.format(entry.number, carrier: entry.carrier))
                             .font(.system(.caption, design: .monospaced))
                             .fixedSize(horizontal: false, vertical: true)
@@ -870,7 +870,7 @@ struct ParcelDetailView: View {
             }
         }
         .font(.caption.weight(.medium))
-        .foregroundStyle(.secondary)
+        .foregroundStyle(Brand.secondaryText)
     }
 
     /// Something of the page's own stands over it: a sheet, the map, an alert or a question.
@@ -1693,7 +1693,7 @@ private struct JournalEventRow: View {
         layout {
             Text(time)
                 .font(.caption2).monospacedDigit()
-                .foregroundStyle(isCurrent ? tint : Color.secondary)
+                .foregroundStyle(isCurrent ? tint : Brand.secondaryText)
                 .frame(width: typeSize.isAccessibilitySize ? nil : timeWidth, alignment: .leading)
                 .padding(.top, 2)
             VStack(alignment: .leading, spacing: 4) {
@@ -1704,7 +1704,7 @@ private struct JournalEventRow: View {
                     .fixedSize(horizontal: false, vertical: true)
                 if let location = event.location?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty {
                     EventLocation(location: location, placed: event.place?.country)
-                        .font(.caption2).foregroundStyle(.secondary)
+                        .font(.caption2).foregroundStyle(Brand.secondaryText)
                 }
                 // A copy's words stay in sight, in case it was a scan of its own.
                 ForEach(relayed, id: \.self) { line in

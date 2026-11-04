@@ -474,7 +474,7 @@ struct SignInView: View {
                 }
                 Text(invitation == nil ? copy.signInSubtitle : localizer.text("friends.signInToAccept"))
                     .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Brand.secondaryText)
             }
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)

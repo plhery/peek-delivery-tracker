@@ -744,6 +744,27 @@ class InvitationTest {
         assertFalse(exists(INVITATION_ACCEPTANCE))
     }
 
+    /** Back while the receipt shows leaves it: its stamp lands, then the friends come with Sasha (`goBack()`'s guard). */
+    @Test
+    fun backWhileTheReceiptShowsLeavesIt() {
+        show(reader, reduceMotion = false) { accepting() }
+        openParcel()
+        compose.onNodeWithTag(INVITATION_ACCEPT).performScrollTo().performClick()
+        compose.mainClock.advanceTimeBy(100)
+        assertNotNull(invitation.receipt)
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        compose.mainClock.advanceTimeBy(100)
+        assertTrue(invitation.opened)
+        assertNotNull(invitation.receipt)
+        assertTrue(exists(INVITATION_STAMP))
+        assertFalse(exists(INVITATION_WELCOME))
+        advanceUntil { !invitation.isPresenting }
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals(1, invitation.completed)
+        assertTrue(tabShown(PeekTab.Friends))
+    }
+
     @Test
     fun theNoticeOfAnInvitationAcceptedWaitsUntilTheInvitationHasGone() {
         show(reader) {

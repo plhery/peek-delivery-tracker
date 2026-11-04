@@ -74,7 +74,7 @@ describe('shipment details', () => {
 
   it('says the sender still has the parcel once its only scan, the label, is a day old', () => {
     const label = (hoursAgo: number) => [{ id: 'label', parcelId: 'parcel', stage: 'registered' as const, description: 'Label created', occurredAt: new Date(Date.now() - hoursAgo * 3_600_000).toISOString() }];
-    const note = 'The sender has created the label but hasn’t handed the parcel to Chronopost yet. Tracking starts when they do.';
+    const note = 'The sender hasn’t handed it to Chronopost yet. Tracking starts when they do.';
     let view = show({ carrier: 'chronopost', events: label(30) });
     expect(screen.getByText(note)).toHaveClass('detail__handover');
     view.unmount();
@@ -358,7 +358,7 @@ describe('shipment details', () => {
   it('names the carrier a number’s own format points to, and after a week offers to choose another', async () => {
     const day = 24 * 3_600_000;
     const view = show({ carrier: 'unknown', trackingNumber: 'EOB10293847561029384', likelyCarrier: { carrier: 'brt', since: new Date(Date.now() - day).toISOString() } });
-    expect(screen.getByText(/^This looks like a number from BRT, but BRT doesn’t list it yet\./)).toBeInTheDocument();
+    expect(screen.getByText(/^Looks like a number from BRT, but it isn’t listed yet:/)).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Choose another carrier' })).not.toBeInTheDocument();
     view.unmount();
     show({ carrier: 'unknown', trackingNumber: 'EOB10293847561029384', likelyCarrier: { carrier: 'brt', since: new Date(Date.now() - 8 * day).toISOString() } });
@@ -384,7 +384,7 @@ describe('shipment details', () => {
   it('tells an order number or a short number no carrier answered for, and offers to choose the carrier', async () => {
     // Synthetic: a bare Amazon order number and a five-digit one.
     const view = show({ carrier: 'unknown', trackingNumber: '30245719832294617' });
-    expect(screen.getByText(/^This looks like an order number from Amazon, not a tracking number\./)).toBeInTheDocument();
+    expect(screen.getByText(/^This looks like an order number from Amazon\./)).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: 'Choose the carrier' }));
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     view.unmount();

@@ -10,7 +10,7 @@ describe('existing Amazon Logistics parcels', () => {
       onBack={vi.fn()} onRename={vi.fn()} onChangeCarrier={vi.fn()} onSetNotificationsMuted={vi.fn()}
       onRefresh={vi.fn()} onRestore={vi.fn()} onArchive={vi.fn()} onDelete={vi.fn()}
     />);
-    expect(screen.getByRole('note')).toHaveTextContent('Amazon no longer provides its tracking history');
+    expect(screen.getByRole('note')).toHaveTextContent('Amazon no longer provides this parcel’s tracking history');
     expect(screen.getByRole('link')).toHaveAttribute('href', 'https://track.amazon.co.uk/tracking/UK3999999980');
     expect(screen.queryByText('amazon_shipping_history_expired')).not.toBeInTheDocument();
   });

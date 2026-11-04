@@ -271,7 +271,7 @@ class ParcelStatesDeviceShots {
         walk.show(DemoCards.parcels() + listOf(day1, day8))
         openAt(day1, PAGE_PROMPT)
         assertTrue(walk.shows(PAGE_PROMPT, prompt(day1).text))
-        assertTrue(walk.shows(PAGE_PROMPT, "doesn’t list it yet"))
+        assertTrue(walk.shows(PAGE_PROMPT, "isn’t listed yet"))
         assertEquals(0, walk.pageButtons(walk.text("link.likely.choose")))
         val marks = compose.onNode(hasTestTag(PAGE_MARKS) and hasAnyAncestor(hasTestTag(PARCEL_PAGE))).fetchSemanticsNode()
             .config.getOrNull(SemanticsProperties.ContentDescription).orEmpty().joinToString()
@@ -358,7 +358,7 @@ class ParcelStatesDeviceShots {
         walk.show(parcels)
         openAt(cat, PAGE_QUIET)
         assertTrue(walk.shows(PAGE_QUIET, "Parcels often go quiet"))
-        assertTrue(walk.shows(PAGE_QUIET, "doesn’t show this parcel’s journey in the destination country"))
+        assertTrue(walk.shows(PAGE_QUIET, "doesn’t track it in the destination country"))
         assertTrue(walk.shows(PAGE_QUIET, "Get help from ${catalog.helpLink(cat, en)!!.name}"))
         walk.shot("B-S75-abroad")
     }
@@ -406,7 +406,7 @@ class ParcelStatesDeviceShots {
         walk.shot("B-ST06-amazon-logistics")
 
         openAt(parcels.named("35mm film rolls"), PAGE_CARRIER_HINT)
-        assertTrue(walk.shows(PAGE_CARRIER_HINT, "This is an Amazon Shipping parcel, but Amazon no longer provides its tracking history."))
+        assertTrue(walk.shows(PAGE_CARRIER_HINT, "Amazon no longer provides this parcel’s tracking history."))
         assertEquals(0, walk.pageButtons("Change carrier"))
         assertFalse(walk.exists(PAGE_SYNC_ERROR))
         walk.shot("B-ST06-history-expired")
@@ -617,7 +617,7 @@ class ParcelStatesDeviceShots {
         walk.show(parcels)
         walk.open(lamp)
         assertTrue(walk.inPage(walk.text("attention.generated")))
-        val asking = "Peek keeps asking ${name(lamp.carrier)} and shows the next real scan here."
+        val asking = "Peek keeps asking ${name(lamp.carrier)}."
         compose.onNode(hasText(asking, substring = true) and hasAnyAncestor(hasTestTag(PARCEL_PAGE)), useUnmergedTree = true).performScrollTo()
         walk.settle()
         assertTrue(walk.inPage(asking))

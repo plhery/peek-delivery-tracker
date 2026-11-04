@@ -322,7 +322,7 @@ describe('public Amazon Shipping discovery', () => {
     expect(screen.getByText('Amazon Shipping')).toBeInTheDocument();
     expect(screen.queryByText(/Amazon Logistics deliveries are usually tracked/)).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'Open my Amazon orders' })).not.toBeInTheDocument();
-    expect(screen.getByText(amazonShippingStatus === 'available' ? /Public tracking is available/ : /Amazon no longer provides its tracking history/)).toBeInTheDocument();
+    expect(screen.getByText(amazonShippingStatus === 'available' ? /Public tracking is available/ : /Amazon no longer provides this parcel’s tracking history/)).toBeInTheDocument();
     await user.click(button);
     expect(onAdd).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'amazon-shipping' }));
   });

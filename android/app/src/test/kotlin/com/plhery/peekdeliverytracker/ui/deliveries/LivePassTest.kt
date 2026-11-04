@@ -413,7 +413,7 @@ class LivePassTest {
     fun theLikelyCarrierIsSaidAndAfterAWeekTheReaderMayChooseAnother() {
         var parcel by mutableStateOf(DemoCards.probable())
         card({ parcel })
-        assertTrue(textExists("doesn’t list it yet"))
+        assertTrue(textExists("isn’t listed yet"))
         assertFalse(textExists("Choose another carrier"))
 
         val since = DateParser.isoString(CAPTURED.minus(Duration.ofDays(8)))
@@ -528,7 +528,7 @@ class LivePassTest {
         assertTrue(catalog.hidesDestinationLeg(parcel))
         quietNote(parcel)
         assertTrue(textExists("Parcels often go quiet"))
-        assertTrue(textExists("doesn’t show this parcel’s journey in the destination country"))
+        assertTrue(textExists("doesn’t track it in the destination country"))
         assertTrue(textExists("Get help from ${catalog.helpLink(parcel, AppLanguage.En)!!.name}"))
     }
 

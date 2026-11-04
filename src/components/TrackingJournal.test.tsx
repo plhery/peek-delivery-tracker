@@ -33,7 +33,7 @@ describe('TrackingJournal', () => {
     ]} />);
     expect(screen.getByText('1 update')).toBeInTheDocument();
     const planned = screen.getByRole('region', { name: 'Planned by the carrier' });
-    expect(within(planned).getByText(/^Not confirmed: the carrier wrote these steps in advance/)).toBeInTheDocument();
+    expect(within(planned).getByText('Not confirmed until they happen.')).toBeInTheDocument();
     expect([...planned.querySelectorAll('li p')].map(line => line.textContent))
       .toEqual(['Planned, not confirmed: Delivered', 'Planned, not confirmed: Departed the origin facility']);
     expect([...planned.querySelectorAll('time')].map(time => [time.getAttribute('dateTime'), time.textContent]))

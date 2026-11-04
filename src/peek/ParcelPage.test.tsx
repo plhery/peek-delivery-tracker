@@ -279,7 +279,7 @@ describe('ParcelPage stages and troubles', () => {
   it('says the sender still has the parcel once its label is a day old', async () => {
     await shown(view([scan('registered', 30)], { carrier: 'chronopost' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Label created' })).toBeVisible();
-    expect(within(card()).getByText('The sender has created the label but hasn’t handed the parcel to Chronopost yet. Tracking starts when they do.')).toBeVisible();
+    expect(within(card()).getByText('The sender hasn’t handed it to Chronopost yet. Tracking starts when they do.')).toBeVisible();
     expect(within(card()).queryByText(/hasn’t scanned the parcel yet/)).toBeNull();
   });
 
@@ -302,7 +302,7 @@ describe('ParcelPage stages and troubles', () => {
     await shown(waiting({ carrier: 'brt', since: ago(30) }));
     expect(card()).toHaveClass('peekp-card--neutral');
     expect(within(card()).getByText('Probably BRT')).toBeVisible();
-    expect(within(card()).getByText('This looks like a number from BRT, but BRT doesn’t list it yet. Senders often create it before handing the parcel over. Peek keeps asking BRT and shows the parcel as soon as BRT does.')).toBeVisible();
+    expect(within(card()).getByText('Looks like a number from BRT, but it isn’t listed yet: senders often create it before handover. Peek keeps checking.')).toBeVisible();
     // The words say Peek keeps asking already, and it is early to choose another carrier.
     expect(screen.queryByText(/^Keep this page/)).toBeNull();
     expect(screen.queryByRole('button', { name: 'Choose another carrier' })).toBeNull();
@@ -327,14 +327,14 @@ describe('ParcelPage stages and troubles', () => {
     // A synthetic Amazon order number, stored without its hyphens.
     await shown(unknown('30245719832294617'));
     expect(within(card()).getByText('Carrier not found yet')).toBeVisible();
-    expect(within(card()).getByText('This looks like an order number from Amazon, not a tracking number. The tracking number is in the shipping email or on the order’s page at Amazon.')).toBeVisible();
+    expect(within(card()).getByText('This looks like an order number from Amazon. The tracking number is in the shipping email or on the order page.')).toBeVisible();
     expect(screen.queryByText(/^Keep this page/)).toBeNull();
     await userEvent.click(screen.getByRole('button', { name: 'Choose the carrier' }));
     expect(takeCarrierHandoff()).toEqual({ text: '30245719832294617', pick: true });
 
     cleanup();
     await shown(unknown('10293'));
-    expect(within(card()).getByText('This is shorter than most tracking numbers. If it’s an order number, the tracking number is in the shipping email or on the shop’s order page.')).toBeVisible();
+    expect(within(card()).getByText('This is shorter than most tracking numbers. If it’s an order number, check the shipping email or the order page.')).toBeVisible();
     expect(screen.getByRole('button', { name: 'Choose the carrier' })).toBeVisible();
 
     // A carrier's number keeps the usual words, and the carrier the number's own format points to wins.
@@ -421,7 +421,7 @@ describe('ParcelPage stages and troubles', () => {
     await shown(view([scan('accepted', 140), scan('in_transit', 120)]));
     expect(within(card()).getByText('No tracking update for four days')).toBeVisible();
     const note = screen.getByRole('note');
-    expect(note.querySelector('p')).toHaveTextContent(/^Parcels often go quiet on long flights.+Peek keeps asking DHL and shows the next scan here\.$/);
+    expect(note.querySelector('p')).toHaveTextContent(/^Parcels often go quiet on long flights.+Peek keeps asking DHL\.$/);
     expect(within(note).getByRole('link', { name: 'Get help from DHL' })).toHaveAttribute('href', carrierInfo('dhl').helpUrl);
     expect(freshness()).toHaveTextContent('Last checked: 2 min ago');
   });
@@ -429,7 +429,7 @@ describe('ParcelPage stages and troubles', () => {
   it('says a quiet parcel’s carrier shows nothing of its leg abroad, and links no help a carrier has no page for', async () => {
     await shown(view([scan('accepted', 140)], { carrier: 'spring-gds', trackingNumber: '100000000000000001' }));
     const note = screen.getByRole('note');
-    expect(note).toHaveTextContent('PostNL doesn’t show this parcel’s journey in the destination country, so it may arrive with no new scan here.');
+    expect(note).toHaveTextContent('PostNL doesn’t track it in the destination country, so it may arrive with no new scan.');
     expect(within(note).getByRole('link', { name: 'Get help from PostNL' })).toBeVisible();
     cleanup();
     await shown(view([scan('accepted', 140)], { carrier: 'yunexpress', trackingNumber: 'YT0000000000000001' }));
@@ -445,7 +445,7 @@ describe('ParcelPage stages and troubles', () => {
     // The place the track starts from is not known to the map.
     await shown(view([{ ...move(0), place: undefined }, move(1), move(2), move(3)]));
     expect(within(card()).getByText('These updates look generated')).toBeVisible();
-    expect(screen.getByRole('note')).toHaveTextContent(/^Every update comes exactly the same length of time.+Peek keeps asking DHL and shows the next real scan here\.$/);
+    expect(screen.getByRole('note')).toHaveTextContent(/^Evenly spaced updates, each in a new place.+Peek keeps asking DHL\.$/);
     expect(freshness()).toHaveTextContent('Last checked: 2 min ago');
     expect(card()).not.toHaveClass('peekp-card--map');
   });

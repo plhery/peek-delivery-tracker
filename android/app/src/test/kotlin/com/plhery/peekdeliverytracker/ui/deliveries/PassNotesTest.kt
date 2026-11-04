@@ -305,8 +305,8 @@ class PassNotesTest {
         assertEquals(ParcelAttention.Generated, parcel.attention(CAPTURED))
         pass(parcel)
         assertTrue(textExists("These updates look generated"))
-        assertTrue(textExists("these updates were most likely generated"))
-        assertTrue(textExists("Peek keeps asking ${identities.displayName(parcel.carrier, AppLanguage.En)} and shows the next real scan here."))
+        assertTrue(textExists("most likely generated, not real scans"))
+        assertTrue(textExists("Peek keeps asking ${identities.displayName(parcel.carrier, AppLanguage.En)}."))
 
         passParcel = DemoCards.parcel("Moon lamp")
         compose.waitForIdle()
@@ -637,7 +637,7 @@ class PassNotesTest {
         show(demo("Moon lamp") { it.copy(carrier = CarrierId.AmazonShipping, syncStatus = SyncStatus.Error, syncError = "amazon_shipping_history_expired") })
         open(id("Moon lamp"))
         compose.onNodeWithTag(PAGE_CARRIER_HINT).performScrollTo()
-        assertTrue(textExists("This is an Amazon Shipping parcel, but Amazon no longer provides its tracking history."))
+        assertTrue(textExists("Amazon no longer provides this parcel’s tracking history."))
         assertEquals(0, buttons("Change carrier"))
         assertFalse(exists(PAGE_SYNC_ERROR))
     }

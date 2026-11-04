@@ -69,7 +69,7 @@ Peek found no delivery times from GZYL, and no rules for delivery attempts, pick
 
 **GZYL's tracker or a tracking service shows more than Peek.** Peek holds back steps written ahead of the time they show, the `Delivered` that ends GZYL's plan, and steps dated after its last check (below), so the extra steps may be GZYL's plan, not scans. Go by the delivery estimate the shop gave, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**`Delivered`, but nothing came.** The step may be part of GZYL's plan, not a scan. Unless Swiss Post delivers the parcel, Peek says so under "Delivered": "GZYL’s tracking follows a fixed schedule and shows no signature. If nothing arrived, ask the seller." Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
+**`Delivered`, but nothing came.** The step may be part of GZYL's plan, not a scan. Unless Swiss Post delivers the parcel, Peek says so under "Delivered": "GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller." Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
 
 **Nothing found.** For a number it doesn't know, GZYL's tracker shows one result with your number under 参考号 (reference) and every other field empty. Peek keeps checking, but compare the number with the seller's message.
 

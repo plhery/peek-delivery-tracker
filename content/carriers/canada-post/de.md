@@ -72,7 +72,7 @@ Im Verlauf zeigt Peek einige Scans in eigenen Worten: Jede Zustellung heißt dor
 
 ## Canada-Post-Paket verspätet, verloren oder zurück
 
-**Keine neuen Scans.** Steht ein Paket vier Tage lang ohne neuen Scan auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, schreibt Peek: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Canada Post nach und zeigt den nächsten Scan hier.“ Dazu kommt ein Link zur Hilfe des Paketdiensts, der das Paket gerade hat, etwa „Hol dir Hilfe bei Canada Post“. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Keine neuen Scans.** Steht ein Paket vier Tage lang ohne neuen Scan auf „Etikett erstellt“, „Beim Paketdienst eingegangen“ oder „Unterwegs“, schreibt Peek: „Auf langen Flügen, beim Zoll oder übers Wochenende wird es oft still um ein Paket. Peek fragt weiter bei Canada Post nach.“ Dazu kommt ein Link zur Hilfe des Paketdiensts, der das Paket gerade hat, etwa „Hol dir Hilfe bei Canada Post“. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 **Verloren.** Hast du online bestellt, wende dich zuerst an den Shop, der das Paket verschickt hat. Mehr in [Paket verloren](guide:lost-parcel).
 

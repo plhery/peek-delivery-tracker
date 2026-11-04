@@ -69,7 +69,7 @@ Xinghe's own site says nothing about parcels for online shoppers: no delivery ti
 
 **The tracker or a tracking service shows more than Peek.** The extra steps, `Delivered` included, may be a plan that Peek holds back, not scans. Go by the delivery estimate the shop gave, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**`Delivered`, but nothing came.** The step may be part of a timeline written in advance. Unless Swiss Post delivers the parcel, Peek says so under "Delivered": "Xinghe Freight’s tracking follows a fixed schedule and shows no signature. If nothing arrived, ask the seller." Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
+**`Delivered`, but nothing came.** The step may be part of a timeline written in advance. Unless Swiss Post delivers the parcel, Peek says so under "Delivered": "Xinghe Freight updates on a fixed schedule, with no signature. If nothing came, ask the seller." Tell the seller the parcel hasn't arrived, and ask which company delivers it and for its number. More in [delivered but not received](guide:delivered-not-received).
 
 **Lost or returned.** The seller booked the parcel with Xinghe, so ask the seller, or the marketplace, for a refund or a new parcel. See [lost parcels](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
 

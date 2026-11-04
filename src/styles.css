@@ -107,7 +107,7 @@ fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
 /* While a row moves, its clip is its own layer: Safari otherwise can drop the clip for a frame as the motion starts, showing the action beyond the row. */
 .parcel-card-swipe[data-swipe] .parcel-card-swipe__clip { will-change: transform; }
 .parcel-card-swipe { --tone: light-dark(var(--carrier-ink-light), var(--carrier-ink-dark)); --tone-surface: light-dark(var(--carrier-surface-light), var(--carrier-surface-dark)); --carrier-brand: light-dark(var(--carrier-brand-light), var(--carrier-brand-dark)); }
-.parcel-card { width: 100%; min-height: 117px; position: relative; z-index: 1; padding: 16px 18px; display: flex; flex-direction: column; align-items: stretch; gap: 7px; text-align: left; background: var(--tone-surface, var(--paper)); color: var(--ink); border-radius: 18px; touch-action: pan-y pinch-zoom; transition: scale .2s var(--spring); }
+.parcel-card { width: 100%; min-height: 117px; position: relative; z-index: 1; padding: 16px 18px; display: flex; flex-direction: column; align-items: stretch; gap: 7px; text-align: left; background: var(--tone-surface, var(--paper)); color: var(--ink); border-radius: 18px; box-shadow: var(--card-edge); touch-action: pan-y pinch-zoom; transition: scale .2s var(--spring); }
 .parcel-card-swipe[data-swipe="dragging"] .parcel-card { cursor: grabbing; -webkit-user-select: none; user-select: none; }
 .parcel-card-swipe:not([data-swipe]) .parcel-card:active:not(:disabled) { scale: .988; }
 /* A press that becomes a swipe drops its shrink at once; easing back would uncover the action around the card. */
@@ -212,8 +212,8 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 @media (forced-colors: active) { .parcel-view__search:focus-within { outline: 2px solid Highlight; } }
 
 /* Sheets use paper and clear hierarchy, with the same controls everywhere. */
-.sheet-backdrop { position: fixed; inset: 0; z-index: 60; background: rgb(15 22 15 / 28%); display: flex; align-items: center; justify-content: center; padding: 28px; overflow-y: auto; overscroll-behavior: contain; animation: backdrop-arrive .2s ease-out both; }
-.sheet { width: 100%; max-width: 500px; max-height: calc(100dvh - 56px); overflow: auto; overscroll-behavior: contain; background: var(--canvas); color: var(--ink); border: 1px solid var(--line); border-radius: 30px; padding: 24px; box-shadow: 0 24px 80px rgb(0 0 0 / 14%); animation: sheet-arrive .32s var(--spring) both; scrollbar-width: thin; }
+.sheet-backdrop { position: fixed; inset: 0; z-index: 60; background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: 28px; overflow-y: auto; overscroll-behavior: contain; animation: backdrop-arrive .2s ease-out both; }
+.sheet { --canvas: var(--sheet-canvas); --paper: var(--raised); --control: var(--sheet-control); --line: var(--sheet-line); width: 100%; max-width: 500px; max-height: calc(100dvh - 56px); overflow: auto; overscroll-behavior: contain; background: var(--canvas); color: var(--ink); border: 1px solid var(--sheet-border); border-radius: 30px; padding: 24px; box-shadow: var(--sheet-shadow); animation: sheet-arrive .32s var(--spring) both; scrollbar-width: thin; }
 .sheet__grabber { display: none; }
 .sheet__heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
 .sheet__title { margin: 0; font-size: 26px; letter-spacing: -.8px; font-weight: 650; }
@@ -342,7 +342,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 
 
 /* A shipment opens as a full page on a phone and a focused paper panel on desktop. */
-.detail { position: fixed; inset: 0; z-index: 40; margin: 0 auto; width: 100%; max-width: 740px; height: 100dvh; background: var(--canvas); overflow-y: auto; overscroll-behavior: none; animation: detail-arrive .32s var(--spring) both; box-shadow: 0 0 0 100vmax rgb(15 22 15 / 28%); padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+.detail { position: fixed; inset: 0; z-index: 40; margin: 0 auto; width: 100%; max-width: 740px; height: 100dvh; background: var(--canvas); overflow-y: auto; overscroll-behavior: none; animation: detail-arrive .32s var(--spring) both; box-shadow: 0 0 0 100vmax var(--scrim); padding-bottom: max(28px, env(safe-area-inset-bottom)); }
 .detail--from-card { animation: none; }
 .detail__header { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; min-height: 76px; gap: 12px; padding: max(12px, env(safe-area-inset-top)) 24px 12px; background: var(--canvas); border-bottom: 1px solid var(--line); }
 .detail__header > span { font-size: 13px; color: var(--ink-soft); }
@@ -538,7 +538,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .spin { animation: spin .8s linear infinite; }
 
 @keyframes page-arrive { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes backdrop-arrive { from { background: rgb(15 22 15 / 0%); } to { background: rgb(15 22 15 / 28%); } }
+@keyframes backdrop-arrive { from { background: rgb(15 22 15 / 0%); } to { background: var(--scrim); } }
 @keyframes sheet-rise { from { transform: translateY(100%); } }
 @keyframes sheet-arrive { from { opacity: 0; transform: translateY(28px) scale(.975); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes detail-arrive { from { opacity: .4; transform: translateX(35px); } to { opacity: 1; transform: translateX(0); } }
@@ -605,7 +605,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
   .sheet-backdrop { padding: 0; align-items: flex-end; }
   /* On phones a sheet rises from the bottom edge, as it does in the iPhone app. */
   .sheet-backdrop { animation-duration: .35s; }
-  .sheet { max-width: 540px; max-height: calc(100dvh - max(24px, env(safe-area-inset-top))); border-radius: 28px 28px 0 0; padding: 12px 22px max(26px, env(safe-area-inset-bottom)); border-bottom: 0; animation: sheet-rise .5s cubic-bezier(.32,.72,0,1) backwards; }
+  .sheet { max-width: 540px; max-height: calc(100dvh - max(24px, env(safe-area-inset-top))); border-radius: 28px 28px 0 0; padding: 12px 22px max(26px, env(safe-area-inset-bottom)); border-bottom: 0; box-shadow: var(--sheet-rise-shadow); animation: sheet-rise .5s cubic-bezier(.32,.72,0,1) backwards; }
   .sheet__grabber { display: block; width: 33px; height: 4px; border-radius: 10px; margin: 0 auto 18px; background: var(--line); }
   .sheet__heading { margin-bottom: 22px; }
   .sheet__title { font-size: 25px; }

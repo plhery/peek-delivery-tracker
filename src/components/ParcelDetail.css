@@ -10,7 +10,7 @@
   background: var(--paper);
 }
 .detail--postcard .detail__header { background: var(--paper); min-height: 64px; }
-.detail--postcard .detail__hero { margin: 20px 24px 0; padding: 20px; border-radius: 20px; background: var(--tone-surface); }
+.detail--postcard .detail__hero { margin: 20px 24px 0; padding: 20px; border-radius: 20px; background: var(--tone-surface); box-shadow: var(--card-edge); }
 .detail--postcard .detail__carrier { min-height: 36px; padding: 0; }
 .detail--postcard .detail__carrier .carrier-mark__truck { width: 27px; height: 18px; }
 /* Handed from one carrier to another, the card carries both marks: the delivering carrier's under the first, in its own

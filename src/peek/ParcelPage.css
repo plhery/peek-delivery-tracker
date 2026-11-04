@@ -27,7 +27,7 @@
 .peekp-textlink svg { width: 14px; height: 14px; }
 
 /* The card. */
-.peekp-card { position: relative; isolation: isolate; overflow: hidden; padding: 20px; border-radius: 24px; background: var(--tone-surface); color: var(--ink); }
+.peekp-card { position: relative; isolation: isolate; overflow: hidden; padding: 20px; border-radius: 24px; background: var(--tone-surface); color: var(--ink); box-shadow: var(--card-edge); }
 .peekp-card--neutral { --tone: var(--ink-soft); --tone-surface: var(--control); }
 .peekp-card__top { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px; }
 .peekp-card__top .carrier-mark { min-width: 0; }

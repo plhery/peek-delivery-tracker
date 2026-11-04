@@ -10,13 +10,13 @@ Chronopost est le service de colis express du groupe La Poste. Pour suivre ton c
 
 ## Numéro de suivi Chronopost : où le trouver et à quoi il ressemble
 
-Le numéro de colis Chronopost compte en général 13 caractères (2 lettres, 9 chiffres, 2 lettres), ou 15 caractères pour un colis venu de l'étranger. Si tu ne l'as pas, demande-le à la boutique. Voir aussi [où trouver son numéro de suivi](guide:find-tracking-number).
+Le numéro de colis Chronopost compte en général 13 caractères (2 lettres, 9 chiffres, 2 lettres), ou 15 caractères au format des numéros DPD. Si tu ne l'as pas, demande-le à la boutique. Voir aussi [où trouver son numéro de suivi](guide:find-tracking-number).
 
 | Numéro (inventé) | Ce qu'il faut savoir |
 | --- | --- |
 | `XY000000005FR` | 2 lettres, 9 chiffres, 2 lettres : le numéro Chronopost habituel. |
 | `AB000000000JB` | La même forme, terminée par JB, JF ou TS. |
-| `00000000000000U` | 15 caractères, 14 chiffres et une lettre de contrôle : un colis venu de l'étranger. |
+| `00000000000000U` | 15 caractères, 14 chiffres et une lettre de contrôle : la forme des numéros de colis DPD, que Chronopost suit aussi. |
 | `20000000000000` | 14 chiffres, sans 10 au début : peut-être un numéro Chronopost, mais DPD et d'autres transporteurs ont aussi cette forme. |
 
 **Attention aux numéros qui se ressemblent.** La forme à 13 caractères est le format postal international : un numéro qui finit par FR peut être un Colissimo de [La Poste](carrier:la-poste), un numéro qui finit par CH, GB ou DE celui d'une autre poste. La forme à 15 caractères est aussi celle de DPD : le colis peut être chez [DPD Suisse](carrier:dpd-ch), DPD Allemagne, DPD Portugal ou DPD UK. Si Chronopost ne connaît pas ton numéro, vérifie le transporteur cité dans l'e-mail de la boutique.
@@ -76,9 +76,9 @@ Si Chronopost laisse sans réponse pendant au moins deux mois une réclamation �
 
 ## Suivre un colis Chronopost avec Peek
 
-[Peek](/) reconnaît tout de suite un numéro à 13 caractères qui commence par PZ, XR, XT, XU, XW ou XY avec une clé de contrôle valide, ou qui finit par JB, JF ou TS. Il interroge Chronopost seul pour ces préfixes quand la clé de contrôle est fausse et pour les numéros qui finissent par RV ou VF ; un numéro valide qui finit par FR avec un autre préfixe va à La Poste. Pour 14 chiffres et une lettre, il affiche « Peek demande à … » et interroge Chronopost et les réseaux DPD qui partagent cette forme (DPD Suisse, Allemagne, Portugal et Royaume-Uni) ; si plusieurs le connaissent, ou aucun, appuie sur « Changer ». Un numéro de 14 chiffres seuls qui ne commence pas par 10 peut aussi être de Chronopost, mais Peek ne le reconnaît pas à sa seule forme : appuie sur « Changer » et choisis Chronopost sous « Correspond à ce numéro ». Un lien de suivi chronopost.fr ou chronoshop2shop.fr marche aussi. Aucun code postal n'est demandé.
+[Peek](/) reconnaît tout de suite un numéro à 13 caractères qui commence par PZ, XR, XT, XU, XW ou XY avec une clé de contrôle valide, ou qui finit par JB, JF ou TS. Il interroge Chronopost seul pour ces préfixes quand la clé de contrôle est fausse et pour les numéros qui finissent par RV ou VF ; un numéro valide qui finit par FR avec un autre préfixe va à La Poste. Pour 14 chiffres et une lettre, il affiche « Vérification des services de suivi… » et interroge Chronopost et les réseaux DPD qui partagent cette forme (DPD Suisse, Allemagne, Portugal et Royaume-Uni) ; si plusieurs le connaissent, appuie sur « Choisir », et si aucun ne le connaît, sur « Changer ». Un numéro de 14 chiffres seuls qui ne commence pas par 10 peut aussi être de Chronopost, mais Peek ne le reconnaît pas à sa seule forme : appuie sur « Changer » et choisis Chronopost sous « Correspond à ce numéro ». Un lien de suivi chronopost.fr ou chronoshop2shop.fr marche aussi. Aucun code postal n'est demandé.
 
-Les statuts restent en français, tels que Chronopost les écrit ; `Livraison effectuée` prend le libellé de Peek (« Livré »). Peek place l'agence de chaque scan sur la carte et affiche le pays de destination, l'heure de livraison, le numéro du partenaire à l'étranger et, tant que le colis attend, le nom et l'adresse du relais ou de la consigne. Une date prévue n'apparaît qu'une fois un nouveau jour ou un créneau de livraison réservé. Il ne garde ni ton adresse ni les coordonnées du point. Un colis vers l'Allemagne avec un numéro partenaire peut être suivi jusqu'à DPD Allemagne. Dès qu'un retour commence, le colis passe en « Problème signalé », et la livraison qui suit compte comme un retour à l'expéditeur.
+Les statuts restent en français, tels que Chronopost les écrit ; `Livraison effectuée` prend le libellé de Peek (« Livré »). Peek place l'agence de chaque scan sur la carte et affiche le pays de destination, l'heure de livraison, le numéro du partenaire en Allemagne ou au Portugal et, tant que le colis attend, le nom et l'adresse du relais ou de la consigne. Une date prévue n'apparaît qu'une fois un nouveau jour ou un créneau de livraison réservé. Il ne garde ni ton adresse ni les coordonnées du point. Un colis vers l'Allemagne avec un numéro partenaire peut être suivi jusqu'à DPD Allemagne. Dès qu'un retour commence, le colis passe en « Problème signalé », et la livraison qui suit compte comme un retour à l'expéditeur.
 
 Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Un scan que Chronopost donne sans fuseau horaire est lu à l'heure de son lieu.
 
@@ -94,7 +94,7 @@ Oui. Chronopost appartient à Geopost, qui appartient au groupe La Poste.
 
 ### Chronopost, c'est DPD ?
 
-Chronopost a son propre nom et son propre suivi, et fait partie de Geopost, la holding colis du groupe La Poste. Ses numéros de colis venus de l'étranger peuvent toutefois avoir la forme d'un numéro DPD.
+Chronopost a son propre nom et son propre suivi, et fait partie de Geopost, la holding colis du groupe La Poste. Certains de ses numéros ont toutefois la forme à 15 caractères d'un numéro DPD.
 
 :::sources
 - [La Poste Groupe : Chronopost](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – colis express ; points de retrait en France : agences, bureaux de poste, points Pickup

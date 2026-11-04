@@ -418,9 +418,9 @@ check at its cadence, daily rather than weekly after 7 days, since someone is lo
 that left the schedule unseen, or the daily check of one with an alert on, contacts one
 universal provider at most, picked as for an account's recheck (below). One whose links nobody opened in the last hour and that has no alert
 on is checked every 3 hours: nobody reads it, and a number no carrier is known for asks every
-provider in turn. A scheduled run checks at most ten of them, after every account's share: the
+provider in turn. A scheduled run checks at most twenty of them, after every account's share: the
 ones with an alert on or a link read in the last hour first, each the least recently checked first,
-and three of the others besides when those fill the ten, so the others' checks still come round. Their own checks queue behind every account's
+and five of the others besides when those fill the twenty, so the others' checks still come round. Their own checks queue behind every account's
 refresh and the scheduled run. A delivered or returned one is not checked, but for a
 delivery only a provider reported (above).
 

@@ -2702,38 +2702,39 @@ describe('TrackingSyncService', () => {
     // In the order the database returns them: the least recently checked first.
     const oneOffs = [
       ...Array.from({ length: 6 }, (_, index) => ({ ...due, id: `one-off-${index + 1}`, user_id: null, one_off: true })),
-      // Checked within the current ten-minute window: not due, and not counted against the ten.
+      // Checked within the current ten-minute window: not due, and not counted against the twenty.
       { ...due, id: 'one-off-fresh', user_id: null, one_off: true, last_synced_at: '2026-09-09T10:10:30Z' },
-      ...Array.from({ length: 6 }, (_, index) => ({ ...due, id: `one-off-${index + 7}`, user_id: null, one_off: true })),
+      ...Array.from({ length: 18 }, (_, index) => ({ ...due, id: `one-off-${index + 7}`, user_id: null, one_off: true })),
     ];
     const client = fakeClient(owned);
     client.listFollowedOneOffPackages.mockResolvedValue(oneOffs);
     const now = new Date('2026-09-09T10:12:00Z');
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
       { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => now);
-    await expect(service.sync()).resolves.toMatchObject({ checked: 13 });
+    await expect(service.sync()).resolves.toMatchObject({ checked: 23 });
     expect(client.listFollowedOneOffPackages).toHaveBeenCalledExactlyOnceWith(new Date('2026-09-08T10:12:00Z'));
     expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual([
-      'a1', 'b1', 'legacy', ...Array.from({ length: 10 }, (_, index) => `one-off-${index + 1}`),
+      'a1', 'b1', 'legacy', ...Array.from({ length: 20 }, (_, index) => `one-off-${index + 1}`),
     ]);
     // The scheduled reconciliation is the account-wide one; it never names a parcel without an owner.
     expect(client.autoLinkPackages).toHaveBeenCalledExactlyOnceWith(undefined);
-    // At 01:00 in Zurich a run takes ten as well; the fresh one is due again by then.
+    // At 01:00 in Zurich a run takes twenty as well; the fresh one is due again by then.
     client.startSyncAttempt.mockClear();
     now.setTime(Date.parse('2026-09-09T23:00:00Z'));
     await service.sync();
     expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['a1', 'b1', 'legacy',
-      ...Array.from({ length: 6 }, (_, index) => `one-off-${index + 1}`), 'one-off-fresh', 'one-off-7', 'one-off-8', 'one-off-9']);
+      ...Array.from({ length: 6 }, (_, index) => `one-off-${index + 1}`), 'one-off-fresh',
+      ...Array.from({ length: 13 }, (_, index) => `one-off-${index + 7}`)]);
   });
 
   it('checks the one-off parcels someone waits for first, at any hour, whichever was checked longer ago', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T21:00:00Z', sync_status: 'ok', user_id: null, one_off: true };
     for (const at of ['2026-09-09T23:00:00Z', '2026-09-10T09:00:00Z']) {
-      // Nobody reads these eight and no alert is on, but a provider has just named their carrier: due at every run.
+      // Nobody reads these twenty and no alert is on, but a provider has just named their carrier: due at every run.
       const named = { carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post',
         carrier_named_at: new Date(Date.parse(at) - 5 * 60_000).toISOString() } } };
-      const unread = Array.from({ length: 8 }, (_, index) => `named-${index + 1}`);
+      const unread = Array.from({ length: 20 }, (_, index) => `named-${index + 1}`);
       const oneOffs = [
         ...unread.map((id) => ({ ...due, ...named, id, last_synced_at: '2026-09-09T20:00:00Z' })),
         ...['alerted-1', 'alerted-2', 'read-1'].map((id) => ({ ...due, id })),
@@ -2745,17 +2746,17 @@ describe('TrackingSyncService', () => {
         { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date(at));
       await service.sync();
       expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
-        .toEqual(['alerted-1', 'alerted-2', 'read-1', ...unread.slice(0, 7)]);
+        .toEqual(['alerted-1', 'alerted-2', 'read-1', ...unread.slice(0, 17)]);
     }
   });
 
-  it('checks three one-off parcels nobody waits for in a run that the ones someone waits for fill', async () => {
+  it('checks five one-off parcels nobody waits for in a run that the ones someone waits for fill', async () => {
     const due = { carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: 'TEST1234',
       sync_status: 'ok', user_id: null, one_off: true };
     // In the order the database returns them: the least recently checked first. Nobody has
-    // read the first four for hours, so they are due every 3 hours, and long overdue.
-    const unread = Array.from({ length: 4 }, (_, index) => `unread-${index + 1}`);
-    const waited = Array.from({ length: 12 }, (_, index) => `alerted-${index + 1}`);
+    // read the first seven for hours, so they are due every 3 hours, and long overdue.
+    const unread = Array.from({ length: 7 }, (_, index) => `unread-${index + 1}`);
+    const waited = Array.from({ length: 24 }, (_, index) => `alerted-${index + 1}`);
     const client = fakeClient([]);
     client.listFollowedOneOffPackages.mockResolvedValue([
       ...unread.map((id) => ({ ...due, id, last_synced_at: '2026-09-10T03:00:00Z' })),
@@ -2766,7 +2767,7 @@ describe('TrackingSyncService', () => {
       { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-10T10:00:00Z'));
     await service.sync();
     expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id))
-      .toEqual([...waited.slice(0, 10), ...unread.slice(0, 3)]);
+      .toEqual([...waited.slice(0, 20), ...unread.slice(0, 5)]);
   });
 
   it('asks once for the copies of a number in a run and keeps them on one route', async () => {

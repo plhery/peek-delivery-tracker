@@ -82,14 +82,16 @@ const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
 const SCHEDULED_RUN_BUDGET_MS = 4 * 60_000;
 /**
  * One-off parcels have no owner: a scheduled run checks this many of them, all together, the ones
- * someone waits for first.
+ * someone waits for first. With a run every few minutes, that keeps dozens of lookups someone waits
+ * for on the 10 minutes an account's parcel gets; past that, theirs come round more slowly.
  */
-const MAX_ONE_OFF_PACKAGES_PER_SYNC = 10;
+const MAX_ONE_OFF_PACKAGES_PER_SYNC = 20;
 /**
- * And this many more of the ones nobody waits for, when the ones someone waits for fill the ten:
- * their checks every 3 hours would otherwise wait as long as those keep coming due.
+ * And this many more of the ones nobody waits for, when the ones someone waits for fill the run:
+ * their checks every 3 hours would otherwise wait as long as those keep coming due, and a backlog
+ * of them clears within hours.
  */
-const UNWATCHED_ONE_OFF_SHARE = 3;
+const UNWATCHED_ONE_OFF_SHARE = 5;
 /** A scheduled run rechecks at most this many accounts' parcels whose number nobody has answered (unseenRecheckDue). */
 const MAX_UNSEEN_RECHECKS_PER_SYNC = 3;
 /** A one-off parcel stays on the schedule this long after one of its links was last opened. */

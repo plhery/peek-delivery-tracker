@@ -224,6 +224,28 @@ where package.archived_at is null and package.current_stage not in ('pending', '
 group by 1, 2, 3, 4
 order by parcels desc, kind, carrier;
 
+\echo '== Followed lookups not checked for 6 h to 24 h: twice the 3 h of one nobody waits for, none expected'
+\echo '   (new: added in the window). A lookup with a scan, an alert or a link opened in 24 h; routing deferrals, a'
+\echo '   delivery postcode awaited and scans over 14 days old left out. Many at once: the runs'' lookups are full.'
+select package.carrier, package.sync_status,
+       count(*) filter (where package.created_at >= :since) as new, count(*) as parcels,
+       min(package.last_synced_at)::timestamp(0) as oldest_check
+from public.packages as package
+where package.one_off and package.archived_at is null and package.current_stage not in ('pending', 'delivered', 'returned')
+  and package.last_synced_at < now() - interval '6 hours' and package.last_synced_at >= now() - interval '24 hours'
+  and package.sync_status is distinct from 'unsupported'
+  and not coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'next_check_at', 'timestamptz')
+    then (package.carrier_data->'routing'->>'next_check_at')::timestamptz > now() end, false)
+  and package.carrier_data->'routing'->'input_needed'->>'field' is distinct from 'dpdPostcode'
+  and coalesce(case when pg_input_is_valid(package.carrier_data->'routing'->>'last_event_at', 'timestamptz')
+    then (package.carrier_data->'routing'->>'last_event_at')::timestamptz > now() - interval '14 days' end, true)
+  and exists (
+    select 1 from public.parcel_links as link
+    where link.package_id = package.id and (link.last_opened_at > now() - interval '24 hours' or exists (
+      select 1 from public.parcel_link_alerts as alert where alert.link_id = link.id and (link.shared or alert.owner))))
+group by 1, 2
+order by parcels desc, carrier;
+
 \echo '== Reader feedback: answers other than right not reviewed yet (new: given or completed with a note in the window)'
 \echo '   carriers: no carrier found, or the wrong one; adapters: the carrier''s status, steps, times or places;'
 \echo '   delivery-tracker: no reason given. Close each one once it is routed or handled:'

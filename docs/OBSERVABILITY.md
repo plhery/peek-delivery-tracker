@@ -471,7 +471,8 @@ window or open and failing in it (`rescued` when every check that failed still a
 through another step; an open one nothing checked, or whose checks answered, waits unlisted
 until it fails, recovers or closes), the unfinished parcels a provider tracks, grouped by type, carrier and
 provider, with `why` they stay with it, followed parcels not checked for 24 h (a scheduler fault: an
-account's parcel with a scan, or a lookup with an alert or a link opened in 24 h), and readers' answers that something is off. It
+account's parcel with a scan, or a lookup with an alert or a link opened in 24 h), such lookups not checked for 6 h, twice
+the 3 h of one nobody waits for (many at once: the scheduled runs' share of lookups is full), and readers' answers that something is off. It
 only reads, and shows a number as its shape (`MY + 10 digits + US`, from
 `private.tracking_number_pattern`). Free text can name a place, a shop or a person, so
 wording shows `…` for each word fewer than five stored wordings share and `#` for digits,

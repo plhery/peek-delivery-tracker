@@ -422,7 +422,7 @@ struct AccountView: View {
                 .textInputAutocapitalization(.never)
             }
             Button(localizer.text("common.cancel"), role: .cancel) {}
-            Button(localizer.text("account.deletePermanent")) {
+            Button(localizer.text("account.deletePermanent"), role: .destructive) {
                 run {
                     try await store.deleteAccount(confirmation: confirmation)
                     finish()
@@ -795,6 +795,7 @@ private struct SettingsGroup<Content: View>: View {
                 }
                 .padding(.leading, 2)
                 .accessibilityElement(children: .combine)
+                .accessibilityAddTraits(.isHeader)
             }
             VStack(spacing: 0) { content }
                 .frame(maxWidth: .infinity, alignment: .leading)

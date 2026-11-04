@@ -170,6 +170,15 @@ struct AddParcelView: View {
                 guard previous == .tracking, current != .tracking, !saving else { return }
                 recognition.settledNumber = normalizedNumber
             }
+            // What went wrong, and the note under the field, are read out as they appear.
+            .onChange(of: errorMessage) { _, message in
+                if let message { AccessibilityNotification.Announcement(message).post() }
+            }
+            .onChange(of: spokenNotice) { _, notice in
+                if let notice { AccessibilityNotification.Announcement(notice).post() }
+            }
+            // VoiceOver's escape closes Add as its close button does, which a full-screen cover doesn't do by itself.
+            .accessibilityAction(.escape) { if !saving { dismiss() } }
             .task(id: "\(lookupTrackingNumber ?? ""):\(lookupAttempt)") {
                 guard let number = lookupTrackingNumber else { return }
                 do {
@@ -358,6 +367,20 @@ struct AddParcelView: View {
             }
         }
         .foregroundStyle(Brand.ink)
+    }
+
+    /// The note under the field once the number has settled, as VoiceOver reads it out: none found, held back, or
+    /// questioned.
+    private var spokenNotice: String? {
+        guard recognition.settledNumber == normalizedNumber else { return nil }
+        // A note's title and its words are read one after the other, as two lines.
+        let note = { (title: String, body: String) in "\(localizer.text(title))\n\(localizer.text(body))" }
+        if parsed.trackingNumber.isEmpty && !cleanedInput.isEmpty && order == nil { return localizer.text("add.notFound") }
+        if pickupCode { return note("add.pickupCode.title", "add.pickupCode.body") }
+        if placeholderNumber { return localizer.text("tracking.failure.placeholderNumber") }
+        if let order { return note("door.order.\(order.rawValue).title", "door.order.\(order.rawValue).body") }
+        if let typo { return note("door.typo.check", typo.suggestion == nil ? "door.typo.compare" : "door.typo.letter") }
+        return nil
     }
 
     /// Why the field holds no number to add, and what to paste instead.
@@ -1368,6 +1391,7 @@ struct TrackingScannerView: View {
                     }
                 }
         }
+        .accessibilityAction(.escape) { dismiss() }
     }
 }
 

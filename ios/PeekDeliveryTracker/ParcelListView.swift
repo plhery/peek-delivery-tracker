@@ -226,6 +226,7 @@ private struct DeliveryListView: View {
     @EnvironmentObject private var invitation: FriendInvitationStore
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
+    @Environment(\.accessibilitySwitchControlEnabled) private var switchControlEnabled
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.horizontalSizeClass) private var horizontalSize
     @Environment(\.verticalSizeClass) private var verticalSize
@@ -510,14 +511,27 @@ private struct DeliveryListView: View {
                 ?? ImportChargesPreview.parcel(in: store.parcels) { show(parcel.id) }
         }
         #endif
+        // An archive is read out with its Undo, from the list or the parcel's page.
         .onChange(of: store.undoParcel?.id) { _, next in
-            guard let next else { return }
-            Task {
-                try? await Task.sleep(for: .seconds(7))
-                if store.undoParcel?.id == next { store.undoParcel = nil }
-            }
+            guard next != nil, let parcel = store.undoParcel else { return }
+            AccessibilityNotification.Announcement(localizer.text("app.archivedAnnouncement", ["name": name(of: parcel)])).post()
+        }
+        // Undo stays seven seconds; with VoiceOver or Switch Control, until it is used or another message takes its place.
+        .task(id: "\(store.undoParcel?.id.uuidString ?? ""):\(holdsUndo)") {
+            guard let shown = store.undoParcel?.id, !holdsUndo else { return }
+            do { try await Task.sleep(for: .seconds(7)) } catch { return }
+            if store.undoParcel?.id == shown { store.undoParcel = nil }
+        }
+        .onChange(of: toast) { _, next in
+            if next != nil, holdsUndo { store.undoParcel = nil }
         }
     }
+
+    /// VoiceOver and Switch Control take longer than a toast's seven seconds to reach its Undo.
+    private var holdsUndo: Bool { voiceOverEnabled || switchControlEnabled }
+
+    /// What a toast calls a parcel: its name, or "Parcel".
+    private func name(of parcel: Parcel) -> String { parcel.label.nonEmpty ?? localizer.text("common.parcel") }
 
     /// The list, and a parcel opened over it or beside it, as the window has room for.
     private func columns(_ layout: DeliveryListLayout, leaving: Set<UUID>) -> some View {
@@ -946,6 +960,7 @@ private struct DeliveryListView: View {
                     .lineLimit(largeText ? 1 : nil)
                     .minimumScaleFactor(largeText ? 0.75 : 1)
                     .layoutPriority(1)
+                    .accessibilityAddTraits(.isHeader)
                 Text("\(layout.active.count)")
                     .contentTransition(.numericText())
                     .font(.caption2.monospacedDigit())
@@ -1140,9 +1155,7 @@ private struct DeliveryListView: View {
     @ViewBuilder private var bottomControls: some View {
         if let parcel = store.undoParcel {
             InlineToast(
-                text: localizer.text("app.archivedToast", [
-                    "name": parcel.label.nonEmpty ?? localizer.text("common.parcel"),
-                ]),
+                text: localizer.text("app.archivedToast", ["name": name(of: parcel)]),
                 button: localizer.text("app.undo"),
                 symbol: "archivebox.fill",
                 tint: ExperimentalPalette.ochre
@@ -1265,6 +1278,9 @@ private struct DeliveryListView: View {
             Spacer()
         }
         .padding(.top, 3)
+        // Read as one heading: the section and how many parcels it holds.
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isHeader)
     }
 
     @ViewBuilder private func sectionContent(_ section: ParcelSection, next: Parcel?) -> some View {
@@ -1542,8 +1558,10 @@ private struct DeliveryListView: View {
     /// Brings a parcel back from the archive: the card's Restore, and the Undo of its toast or ⌘Z.
     private func restore(_ parcel: Parcel) {
         Task {
-            do { try await store.restore(parcel) }
-            catch { actionError = localizer.errorMessage(error) }
+            do {
+                try await store.restore(parcel)
+                AccessibilityNotification.Announcement(localizer.text("app.restoredAnnouncement", ["name": name(of: parcel)])).post()
+            } catch { actionError = localizer.errorMessage(error) }
         }
     }
 
@@ -1555,6 +1573,7 @@ private struct DeliveryListView: View {
             do {
                 try await store.permanentlyDelete(parcel)
                 navigation.leave(parcel.id, cards: cards)
+                AccessibilityNotification.Announcement(localizer.text("app.deletedToast", ["name": name(of: parcel)])).post()
             } catch {
                 actionError = localizer.errorMessage(error)
             }

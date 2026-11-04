@@ -517,7 +517,7 @@ private struct FriendDetailView: View {
                                 PassportSeal(symbol: value == .ten ? "10" : value == .theRegular ? "25" : value == .busyDoorstep ? "parcels" : value.symbol, tint: stampTint(value), surface: stampSurface(value), earned: earned).frame(width: 50, height: 64)
                                 Text(localizer.text(value.titleKey)).font(.caption2).foregroundStyle(earned ? Brand.ink : Brand.ink.opacity(0.6)).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
                             }.frame(maxWidth: .infinity, minHeight: 96, alignment: .top)
-                        }.buttonStyle(PassportPressStyle()).accessibilityLabel(localizer.text(value.titleKey))
+                        }.buttonStyle(PassportPressStyle()).accessibilityLabel(stampLabel(value, earned: earned, count: stats.deliveredCount))
                             .popover(isPresented: Binding(get: { stamp == value }, set: { if !$0 { stamp = nil } })) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(localizer.text(value.titleKey)).font(.headline)
@@ -550,6 +550,13 @@ private struct FriendDetailView: View {
     private func metric(_ value: String, _ title: String) -> some View { VStack(alignment: .leading, spacing: 4) { Text(value).font(.title2.weight(.semibold)); Text(title).font(.caption2).foregroundStyle(.secondary) }.frame(maxWidth: .infinity, alignment: .leading) }
     private func stampTint(_ stamp: FriendStamp) -> Color { switch stamp { case .first, .aroundWorld, .rightNextDoor, .homeForHolidays: ExperimentalPalette.delivered; case .ten, .theRegular: ExperimentalPalette.lilac; case .connected, .acrossBorders, .pickedUp: ExperimentalPalette.transit; case .express, .busyDoorstep: ExperimentalPalette.pickup; case .worthTheWait: ExperimentalPalette.ochre } }
     private func stampSurface(_ stamp: FriendStamp) -> Color { switch stamp { case .first, .aroundWorld, .rightNextDoor, .homeForHolidays: ExperimentalPalette.deliveredSurface; case .ten, .theRegular: ExperimentalPalette.lilacSurface; case .connected, .acrossBorders, .pickedUp: ExperimentalPalette.transitSurface; case .express, .busyDoorstep: ExperimentalPalette.pickupSurface; case .worthTheWait: ExperimentalPalette.ochreSurface } }
+    /// A stamp is read as Passport reads one: its title, and while it isn't earned, how far along it is, or that it isn't.
+    private func stampLabel(_ stamp: FriendStamp, earned: Bool, count: Int) -> String {
+        let title = localizer.text(stamp.titleKey)
+        guard !earned else { return title }
+        let along = progress(stamp, earned: earned, count: count).trimmingCharacters(in: .newlines)
+        return "\(title), \(along.nonEmpty ?? localizer.text("passport.notEarned"))"
+    }
     private func progress(_ stamp: FriendStamp, earned: Bool, count: Int) -> String {
         guard !earned else { return "" }
         switch stamp { case .first: return "\n\(min(count, 1)) / 1"; case .ten: return "\n\(min(count, 10)) / 10"; case .express: return "\n" + localizer.text("passport.underTwoDays"); case .theRegular: return "\n\(min(count, 25)) / 25"; default: return "" }

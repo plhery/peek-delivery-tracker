@@ -156,6 +156,8 @@ struct ParcelMapScreen: View {
         }
         .background(Brand.background)
         .task { await tiles.open() }
+        // VoiceOver's escape closes the map as its close button does.
+        .accessibilityAction(.escape) { dismiss() }
     }
 
     /// The opened map has room for a facility's own name, so it says "Zürich-Mülligen" where the card says "Zürich".

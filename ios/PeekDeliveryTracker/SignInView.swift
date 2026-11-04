@@ -380,6 +380,8 @@ struct SignInView: View {
     @State private var working = false
     @State private var activeProvider: String?
     @State private var errorMessage: String?
+    /// VoiceOver goes to the code's field once the code is sent, as the form it replaces leaves.
+    @AccessibilityFocusState private var codeFocused: Bool
 
     private var copy: ArrivalCopy { ArrivalCopy(localizer: localizer) }
 
@@ -447,6 +449,15 @@ struct SignInView: View {
             }
             .scrollDismissesKeyboard(.interactively)
         }
+        // What went wrong is read out where it appears, and the code's field takes over from the email's.
+        .onChange(of: errorMessage) { _, message in
+            if let message { AccessibilityNotification.Announcement(message).post() }
+        }
+        .task(id: step) {
+            guard step == .code else { return }
+            do { try await Task.sleep(for: .milliseconds(300)) } catch { return }
+            codeFocused = true
+        }
     }
 
     private var authenticationContent: some View {
@@ -457,6 +468,7 @@ struct SignInView: View {
                     Text(copy.signInTitle)
                         .font(.title.weight(.semibold))
                         .tracking(-0.6)
+                        .accessibilityAddTraits(.isHeader)
                 }
                 Text(invitation == nil ? copy.signInSubtitle : localizer.text("friends.signInToAccept"))
                     .font(.footnote)
@@ -692,6 +704,7 @@ struct SignInView: View {
                     .font(.system(.title2, design: .monospaced, weight: .medium))
                     .tracking(10)
                     .multilineTextAlignment(.center)
+                    .accessibilityFocused($codeFocused)
                     .onChange(of: code) { _, value in
                         code = String(value.filter(\.isNumber).prefix(6))
                     }
@@ -963,6 +976,9 @@ private struct FriendInvitationAcceptanceView: View {
             }.padding(24).frame(maxWidth: 520).frame(maxWidth: .infinity)
         }
         .scrollDismissesKeyboard(.interactively)
+        .onChange(of: invitation.errorKey ?? model.errorKey) { _, key in
+            if let key { AccessibilityNotification.Announcement(localizer.text(key)).post() }
+        }
         .sheet(isPresented: $creatingProfile) {
             NavigationStack {
                 ScrollView {

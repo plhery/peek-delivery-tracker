@@ -138,6 +138,7 @@ struct ParcelDetailView: View {
                     } label: {
                         Image(systemName: "ellipsis")
                     }
+                    .accessibilityLabel(localizer.text("detail.parcelActions"))
                     #if os(macOS)
                     .menuIndicator(.hidden)
                     #endif
@@ -340,10 +341,13 @@ struct ParcelDetailView: View {
                                     showingAlerts = true
                                     return
                                 }
+                                let muting = !parcel.notificationsMuted
                                 run {
-                                    try await store.setMuted(parcel, muted: !parcel.notificationsMuted)
+                                    try await store.setMuted(parcel, muted: muting)
                                     notificationAnimation += 1
                                     Haptics.selection()
+                                    AccessibilityNotification.Announcement(
+                                        localizer.text(muting ? "detail.mutedAnnouncement" : "detail.unmutedAnnouncement")).post()
                                 }
                             } label: {
                                 ParcelNotificationBell(muted: opensAlerts ? parcel.allAlertsMuted : parcel.notificationsMuted,
@@ -744,6 +748,7 @@ struct ParcelDetailView: View {
         Clipboard.string = point.query
         Haptics.success()
         copiedPickupPoint = true
+        AccessibilityNotification.Announcement(localizer.text("detail.copied")).post()
         Task {
             try? await Task.sleep(for: .seconds(2))
             copiedPickupPoint = false
@@ -930,6 +935,7 @@ struct ParcelDetailView: View {
     private func copy(_ value: String, carrier: CarrierID) {
         TrackingNumberCopy.copy(value, carrier: carrier)
         copiedNumber = value
+        AccessibilityNotification.Announcement(localizer.text("detail.copied")).post()
         Task {
             try? await Task.sleep(for: .seconds(2))
             if copiedNumber == value { copiedNumber = nil }
@@ -950,6 +956,7 @@ struct ParcelDetailView: View {
         run { try await store.changeCarrier(parcel, carrier: carrier, trackingURL: nil, dpdPostcode: nil, dpdPostcodeCountry: nil) }
     }
 
+    /// The list reads out an archive with its Undo; a restore or a delete is read out here.
     private func archive(_ parcel: Parcel) {
         run {
             try await store.archive(parcel)
@@ -961,6 +968,7 @@ struct ParcelDetailView: View {
         run {
             try await store.restore(parcel)
             leave()
+            AccessibilityNotification.Announcement(localizer.text("app.restoredAnnouncement", ["name": spokenName(parcel)])).post()
         }
     }
 
@@ -968,8 +976,11 @@ struct ParcelDetailView: View {
         run {
             try await store.permanentlyDelete(parcel)
             leave()
+            AccessibilityNotification.Announcement(localizer.text("app.deletedToast", ["name": spokenName(parcel)])).post()
         }
     }
+
+    private func spokenName(_ parcel: Parcel) -> String { parcel.label.nonEmpty ?? localizer.text("common.parcel") }
 
     private func run(_ operation: @escaping @MainActor () async throws -> Void) {
         guard !working else { return }

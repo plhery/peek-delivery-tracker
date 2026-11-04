@@ -224,16 +224,17 @@ class FirstOpenDeviceTest {
     private fun streaming() = onUi { preview(compose.activity.window.decorView)?.previewStreamState?.value == PreviewView.StreamState.STREAMING }
 
     /**
-     * Over the tabs, which with the empty deliveries are drawn under it out of TalkBack's reach: the field, read as the
-     * field it leads to, over Paste and track and under the lead that goes with them, Scan in the field where the back
-     * camera scans, and no demo.
+     * Over the tabs, which with the empty deliveries are drawn under it out of TalkBack's reach: the field, read as its
+     * placeholder and the field it leads to, over Paste and track and under the lead that goes with them, Scan in the
+     * field where the back camera scans, and no demo.
      */
     private fun assertTheFieldsVariant() {
         compose.onNodeWithTag(FIRST_OPEN).assertIsDisplayed()
         assertFalse(tabsReachable())
         assertTrue(exists(EMPTY_PASTE))
         assertFalse(reachable(EMPTY_PASTE))
-        compose.onNodeWithTag(FIRST_OPEN_FIELD).assertContentDescriptionEquals(text("add.tracking"))
+        compose.onNodeWithTag(FIRST_OPEN_FIELD)
+            .assertContentDescriptionEquals("${text("add.trackingPlaceholder")}, ${text("add.tracking")}")
         compose.onNodeWithTag(FIRST_OPEN_PASTE).assertExists()
         assertTrue(says(text("native.pasteLead")))
         assertTrue(says(text("landing.pasteAndTrack")))

@@ -90,7 +90,7 @@ Le détail du retrait est dans [avis de passage : que faire](guide:missed-delive
 
 ## TopYou contact : qui joindre
 
-Au 30 octobre 2026, Peek n'a pas pu vérifier le site de TopYou : pas de contact TopYou ici. Pour ta commande, adresse-toi à la boutique, puis à la plateforme si elle ne répond pas. Si la poste de ton pays a déjà le colis :
+Au 4 novembre 2026, le site de TopYou, [szty56.com](https://www.szty56.com/), donne un numéro de téléphone à Shenzhen, le +86 755 8181 9898, mais aucun horaire ni service pour les destinataires. Pour ta commande, adresse-toi à la boutique, puis à la plateforme si elle ne répond pas. Si la poste de ton pays a déjà le colis :
 
 - **bpost :** 02 278 51 27, le chat de Track & Trace, un Bureau de Poste, Point Poste ou Point Colis, ou une lettre sans timbre à bpost, Boîte 5000, 1000 Bruxelles.
 - **La Poste suisse :** +41 848 888 888 (CHF 0.08 la minute depuis le réseau fixe suisse), du lundi au vendredi de 7 h 30 à 18 h et le samedi de 8 h à 12 h, ou le chat en ligne.
@@ -132,5 +132,6 @@ La boutique où tu as commandé : c'est elle qui a réservé l'envoi chez TopYou
 - [La Poste suisse : Questions et réponses concernant la réception](https://www.post.ch/fr/aide-et-contact/reception) – douane
 - [La Poste suisse : Aide et contact](https://www.post.ch/fr/aide-et-contact) – téléphone, tarif, horaires, chat
 - [Douane : Mon colis est bloqué](https://www.douane.gouv.fr/fiche/mon-colis-est-bloque) – à qui s'adresser, SMS et courriels
+- [TopYou : 通邮集团 (accueil, en chinois)](https://www.szty56.com/) – téléphone
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – TopYou : société et autres noms, numéros, site de suivi, scans, remise à GOFO en France et scans de GOFO repris, heures des scans, deuxième numéro, numéro Lastmile sur une ligne livrée par une poste ; ce que Peek affiche et le passage de relais
 :::

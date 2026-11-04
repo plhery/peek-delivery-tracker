@@ -88,7 +88,7 @@ Se il secondo codice inizia con GFIT o CIIT, Peek lo chiede a GOFO Italy. Se è 
 
 ## TopYou contatti: numero di telefono e assistenza
 
-Al 31 ottobre 2026 Peek non ha potuto verificare il sito di TopYou, quindi qui non trovi contatti di TopYou. Per il tuo ordine scrivi al negozio, poi al marketplace se il negozio non risponde. Se il pacco ce l'ha Poste Italiane, per consegna e giacenza chiama il servizio clienti di Poste: 803 160, gratuito da rete fissa, o 06 4526 3160 da fisso e cellulare, al costo del tuo operatore, dal lunedì al sabato, festivi esclusi, dalle 8:00 alle 20:00.
+Al 4 novembre 2026 il sito di TopYou, [szty56.com](https://www.szty56.com/), indica un numero di telefono a Shenzhen, +86 755 8181 9898, ma nessun orario e nessun servizio per i destinatari. Per il tuo ordine scrivi al negozio, poi al marketplace se il negozio non risponde. Se il pacco ce l'ha Poste Italiane, per consegna e giacenza chiama il servizio clienti di Poste: 803 160, gratuito da rete fissa, o 06 4526 3160 da fisso e cellulare, al costo del tuo operatore, dal lunedì al sabato, festivi esclusi, dalle 8:00 alle 20:00.
 
 ## Tracking TopYou con Peek
 
@@ -123,5 +123,6 @@ Il negozio dove hai ordinato: è lui che ha prenotato la spedizione con TopYou. 
 - [Poste Italiane: Ricevere spedizioni dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – Dazio, Tassa di Gestione dell'Unione, sdoganamento solo per i flussi UPU, Diritti Postali
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – dazio di 3 € per articolo sugli ordini fino a 150 €, riscosso dal venditore o dal vettore, cos'è un articolo
 - [Commissione europea: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € per articolo dal 1° novembre 2026
+- [TopYou: 通邮集团 (home page, in cinese)](https://www.szty56.com/) – telefono
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – TopYou: società e altri nomi, forma dei codici, maiuscole, nessun link letto, scansioni e loro fasi, passaggio a GOFO in Italia e in Francia e scansioni di GOFO riportate, Paese accanto alle scansioni di TopYou, ora di Pechino e ore di GOFO, secondo codice, codice Lastmile su una linea della posta e nome della linea, codici sconosciuti o senza scansioni; cosa mostra Peek e il passaggio a un altro corriere
 :::

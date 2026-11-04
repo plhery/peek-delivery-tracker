@@ -92,7 +92,7 @@ Wie Abholung, Ausweis und Fristen genau laufen, steht unter [Zustellung verpasst
 
 ## TopYou Kontakt: wen du fragst
 
-Stand 30. Oktober 2026 konnte Peek TopYous Website nicht prüfen, deshalb stehen hier keine Kontaktdaten von TopYou. Für deine Bestellung ist der Shop zuständig, der das Paket bei TopYou gebucht hat, und der Marktplatz, wenn der Shop nicht antwortet. Hat die Post in deinem Land das Paket, erreichst du sie so:
+Stand 4. November 2026 nennt TopYous Website, [szty56.com](https://www.szty56.com/), eine Telefonnummer in Shenzhen, +86 755 8181 9898, aber keine Geschäftszeiten und keinen Service für Empfänger. Für deine Bestellung ist der Shop zuständig, der das Paket bei TopYou gebucht hat, und der Marktplatz, wenn der Shop nicht antwortet. Hat die Post in deinem Land das Paket, erreichst du sie so:
 
 - **DHL (Deutschland):** 0228 4333112 für internationale Sendungen, Montag bis Freitag 8 bis 20 Uhr, Samstag 8 bis 18 Uhr, außer an bundeseinheitlichen Feiertagen. Halte die Sendungsnummer bereit, dazu deine Postnummer oder, ohne DHL-Konto, deine vollständige Adresse.
 - **Österreichische Post:** Privatkundenhotline +43 800 010 100, Montag bis Freitag 7 bis 19 Uhr, Samstag 8 bis 13 Uhr. Schriftlich geht es rund um die Uhr über das Kontaktformular auf post.at.
@@ -124,7 +124,7 @@ Weil TopYou bei seinen eigenen Scans das Zielland als Ort angibt, auch am Abflug
 
 ### Wen frage ich, wenn mein TopYou-Paket nicht ankommt?
 
-Den Shop, bei dem du bestellt hast: Er hat den Versand bei TopYou gebucht. Kontaktdaten von TopYou konnte Peek nicht prüfen. Hat ein Paketdienst in deinem Land, etwa die Post, das Paket schon, fragst du ihn zur Zustellung.
+Den Shop, bei dem du bestellt hast: Er hat den Versand bei TopYou gebucht. TopYous Website nennt eine Telefonnummer in Shenzhen (oben), aber keinen Service für Empfänger. Hat ein Paketdienst in deinem Land, etwa die Post, das Paket schon, fragst du ihn zur Zustellung.
 
 :::sources
 - [DHL: Hilfe zu meiner Sendung aus dem Ausland (Import)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/import.html) – Zustellung nicht zwingend durch Deutsche Post oder DHL Paket, Prüfung in der Sendungsverfolgung, Zollanmeldung, mehrere Tage
@@ -134,5 +134,6 @@ Den Shop, bei dem du bestellt hast: Er hat den Versand bei TopYou gebucht. Konta
 - [Österreichische Post: Kontaktieren Sie uns telefonisch](https://www.post.at/k/c/hotline) – Hotline, Zeiten, Kontaktformular
 - [Die Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – Abholstelle, 15 Tage für Auslandsendungen, kostenlose Verlängerung ohne Konto
 - [Die Post: Hilfe und Kontakt](https://www.post.ch/de/hilfe-und-kontakt) – Telefon, Preis, Zeiten, Chat
+- [TopYou: 通邮集团 (Startseite, auf Chinesisch)](https://www.szty56.com/) – Telefonnummer
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmenname und weitere Namen, TYZR-Form, Großbuchstaben auf TopYous Seite, kein Link, Scan-Texte und ihre Stufen, Zielland bei TopYous Scans, Pekinger Zeit und Uhrzeit der weitergegebenen Scans, weitergegebene Scans des Zustellers, iMile in Deutschland, zweite Nummer, Lastmile-Nummer auf einer Post-Linie und Linienname, Zollscans der Österreichischen Post, unbekannte Nummern und Nummern ohne Scans, was Peek zeigt und wie es übergibt
 :::

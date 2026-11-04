@@ -86,7 +86,7 @@ Si se trata de un número postal internacional válido (dos letras, nueve cifras
 
 ## TopYou: teléfono y atención al cliente
 
-Peek no ha podido consultar la web de TopYou, así que aquí no da datos de contacto de la empresa. Fue la tienda quien contrató el envío con TopYou: pregúntale a ella por tu pedido, y al marketplace si no responde. Si tu paquete ya lo tiene Correos, en la página de [Correos](carrier:correos-spain) encontrarás su teléfono y qué significan sus estados.
+A 4 de noviembre de 2026, la web de TopYou, [szty56.com](https://www.szty56.com/), da un teléfono en Shenzhen, el +86 755 8181 9898, pero no indica horarios ni ofrece atención a los destinatarios. Fue la tienda quien contrató el envío con TopYou: pregúntale a ella por tu pedido, y al marketplace si no responde. Si tu paquete ya lo tiene Correos, en la página de [Correos](carrier:correos-spain) encontrarás su teléfono y qué significan sus estados.
 
 ## Seguir un paquete de TopYou con Peek
 
@@ -118,9 +118,10 @@ Desde el 1 de julio de 2026, las compras por internet de hasta 150 € que llega
 
 ### ¿A quién reclamo si no me llega un paquete de TopYou?
 
-A la tienda donde compraste: fue ella quien contrató el envío con TopYou. Peek no ha podido consultar la web de TopYou para buscar sus datos de contacto.
+A la tienda donde compraste: fue ella quien contrató el envío con TopYou. La web de TopYou da un teléfono en Shenzhen (arriba), pero no ofrece atención a los destinatarios.
 
 :::sources
+- [TopYou: 通邮集团 (portada, en chino)](https://www.szty56.com/) – teléfono
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y otros nombres, formato TYZR…YQ, mayúsculas en la web de TopYou, ningún enlace que Peek lea, textos de los escaneos y sus estados, el país de destino junto a los escaneos de TopYou, hora de Pekín y la hora de los escaneos copiados, el traspaso a GOFO en Francia y en Italia y sus escaneos copiados, el segundo número, el número Lastmile en una línea del correo y el nombre de la línea, números desconocidos y sin escaneos, lo que Peek muestra y cómo traspasa un paquete
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – arancel de 3 € desde el 1 de julio de 2026 en envíos de hasta 150 €, tasa de 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: Guidance on the 3 EUR customs duty and Union handling fee (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – tasa fija de 2 € por artículo en las ventas a distancia, cualquiera que sea su valor

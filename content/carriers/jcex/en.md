@@ -3,7 +3,7 @@ title: JCEX tracking: JCZ numbers, statuses and who delivers
 description: Track a JCEX parcel from China: what a JCZ waybill number looks like, what each status means, who delivers it in your country and who to ask when it stalls.
 slug: jcex-tracking
 published: 2026-10-21
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
 JCEX (佳成国际, Jiacheng International Logistics) is a logistics company in Hangzhou, China, that ships parcels abroad for online sellers and hands them to a carrier in your country for the last stretch, such as [USPS](carrier:usps) in the United States or Colissimo in France. Track the number on JCEX's tracker, [track.jcex.com](https://track.jcex.com/), or in the box above. The shop gives it with your order's shipping details.
@@ -25,23 +25,23 @@ Lower case and spaces don't matter in Peek. JCEX's tracker takes up to 100 numbe
 
 ## JCEX tracking statuses explained
 
-JCEX's tracker is in Chinese only, but each line's text can be English, Chinese or both, after a UTC offset, a time and a place. The lines people see, in the order a parcel usually meets them:
+JCEX's tracker is in Chinese only, but each line's text can be English, Chinese or both, after a UTC offset, a time and a place. The lines people see, in the order a parcel usually meets them, with what Peek shows while each is the newest:
 
-| JCEX says | What it means for you |
-| --- | --- |
-| `Shipment order info received` | The seller sent the order to JCEX. JCEX doesn't have the parcel yet. |
-| `Arrive at the delivery point` | JCEX's warehouse in China has received the parcel. Not your local delivery point. |
-| `Item outbound in sorting center` | It left JCEX's sorting centre. |
-| `Departed from origin facility to airport` | On its way to the airport. |
-| `Flight dispatched（航班已飞）` | The flight has left. |
-| `Flight arrived（航班已落地）` | It landed in the destination country. |
-| `Customs held（清关中）` | Import customs. The Chinese part says "clearing customs": not necessarily a problem. |
-| `Clearance processing complete（清关完成）` | Through customs. |
-| `Handed over to the trucking company, waiting for transport（已交卡车公司 待运输）` | Waiting for the truck to the delivering carrier. |
-| `Delivered to warehouse, waiting to be scanned（已交仓，待扫描）` | Handed to the delivering carrier's depot, not to you. |
-| `CONSIGNMENT RECEIVED BY OVERSEAS FORWARDER` | The delivering carrier has the parcel. |
-| `out for delivery` | Out for delivery. |
-| `Delivered` | Delivered to you. |
+| JCEX says | What it means for you | Peek shows |
+| --- | --- | --- |
+| `Shipment order info received` | The seller sent the order to JCEX. JCEX doesn't have the parcel yet. | "Label created" |
+| `Arrive at the delivery point` | JCEX's warehouse in China has received the parcel. Not your local delivery point. | "In transit" |
+| `Item outbound in sorting center` | It left JCEX's sorting centre. | "In transit" |
+| `Departed from origin facility to airport` | On its way to the airport. | "In transit" |
+| `Flight dispatched（航班已飞）` | The flight has left. | "In transit" |
+| `Flight arrived（航班已落地）` | It landed in the destination country. | "In transit" |
+| `Customs held（清关中）` | Import customs. The Chinese part says "clearing customs": not necessarily a problem. | "At customs" |
+| `Clearance processing complete（清关完成）` | Through customs. | "In transit" |
+| `Handed over to the trucking company, waiting for transport（已交卡车公司 待运输）` | Waiting for the truck to the delivering carrier. | "In transit" |
+| `Delivered to warehouse, waiting to be scanned（已交仓，待扫描）` | Handed to the delivering carrier's depot, not to you. | "In transit" |
+| `CONSIGNMENT RECEIVED BY OVERSEAS FORWARDER` | The delivering carrier has the parcel. | "In transit" |
+| `out for delivery` | Out for delivery. | "Out for delivery" |
+| `Delivered` | Delivered to you. | "Delivered" |
 
 `The order information has been sent` and `货物电子信息已经收到` mean the same as the first row, `到达收货点(包裹已入库)` that a JCEX collection point booked the parcel in. `under clearance` is import customs and `CUSTOMS CLEARANCE COMPLETE` its end. `InTransit_Arrival` and `InTransit_Departure` mark a hub in Hong Kong, and `turck transferring（卡车运输中）` (JCEX's spelling) a parcel on a truck. After the handover come the delivering carrier's own lines: USPS's in English, such as `ARRIVAL AT POST OFFICE`, Colissimo's in French.
 
@@ -59,9 +59,9 @@ JCEX publishes no rules for delivery attempts, notice cards, pickup points or ho
 
 **Who acts.** JCEX's customers are the sellers who ship with it. JCEX publishes no claim route for recipients, so for a late, lost, damaged or returned parcel, contact the seller or the marketplace you bought from.
 
-**No tracking yet.** A new waybill can show `查询不到` with no lines until JCEX scans the parcel. If it stays that way, check the number with the seller.
+**No tracking yet.** A new waybill can show `查询不到` with no lines until JCEX scans the parcel; Peek shows "Waiting for the carrier" meanwhile. If it stays that way, check the number with the seller. If `Shipment order info received` is still the only line a day later, Peek notes that the seller hasn't handed the parcel to JCEX yet: ask the seller when it will.
 
-**No update.** JCEX doesn't say after how long a parcel counts as `运输过久`. If nothing moves, ask the seller, which booked the parcel and can ask JCEX. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china); for customs stops, see [parcels held at customs](guide:customs).
+**No update.** JCEX doesn't say after how long a parcel counts as `运输过久`. If nothing moves, ask the seller, which booked the parcel and can ask JCEX. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china); for customs stops or import charges, which in the EU now include a €2 handling fee per item (due since 1 November 2026), see [parcels held at customs](guide:customs).
 
 **Delivered but not there.** Check that the delivered line comes from the delivering carrier, not JCEX's handover. If it does, see [delivered but not received](guide:delivered-not-received).
 
@@ -116,5 +116,7 @@ On its small-parcel line, JCEX tells sellers 13 to 16 working days to the United
 - [JCEX: English site](https://enjc.jcex.com/) – Jiacheng International Logistics Co., Ltd, platforms it serves, complaint email
 - [JCEX: 国际小包 (small parcels)](https://www.jcex.com/chanpinyufuwu/guojixiaobaoyukuaidi/index.html) – up to 2 kg, by air, delivered by the post, delivery times
 - [JCEX: 国际快递与快运 (express and freight)](https://www.jcex.com/chanpinyufuwu/guojikuaiyun/1438101270410715138.html) – delivered by the post or commercial couriers
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 Union handling fee from 1 November 2026
+- [European Commission: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item sold at a distance, whatever its value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shape, warehouse and handover lines, scan wordings
 :::

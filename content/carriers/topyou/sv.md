@@ -84,7 +84,7 @@ Efter flyget och tullen lämnar TopYou över paketet till ett bolag som delar ut
 
 ## TopYous kundtjänst och kontaktuppgifter
 
-Peek har inte kunnat kontrollera TopYous webbplats, så här finns inga kontaktuppgifter till TopYou. Frågor om din beställning ställer du till säljaren, som bokade frakten hos TopYou, och till marknadsplatsen om säljaren inte svarar.
+TopYous webbplats, [szty56.com](https://www.szty56.com/), anger ett telefonnummer i Shenzhen, +86 755 8181 9898 (kontrollerat 4 november 2026), men inga öppettider och ingen service för mottagare. Frågor om din beställning ställer du till säljaren, som bokade frakten hos TopYou, och till marknadsplatsen om säljaren inte svarar.
 
 ## Spåra TopYou-paket med Peek
 
@@ -116,8 +116,9 @@ Det framgår inte av TopYous uppgifter: de kan innehålla numret hos bolaget som
 
 ### Vem kontaktar jag om mitt TopYou-paket inte kommer?
 
-Säljaren du beställde från, eftersom det var säljaren som bokade frakten hos TopYou. Peek har inte kunnat kontrollera TopYous webbplats för kontaktuppgifter.
+Säljaren du beställde från, eftersom det var säljaren som bokade frakten hos TopYou. TopYous webbplats anger ett telefonnummer i Shenzhen (se ovan), men ingen service för mottagare.
 
 :::sources
+- [TopYou: 通邮集团 (startsida, på kinesiska)](https://www.szty56.com/) – telefonnummer
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – företagets namn och andra namn, TYZR-formen, versaler på TopYous sida, ingen länk som Peek läser, skanningarnas ord och vad Peek visar för dem, destinationslandet vid TopYous egna skanningar, Pekingtid och tiderna på leveransbolagets skanningar, USPS i USA, GOFO i Frankrike och Italien och iMile i Tyskland, leveransbolagets skanningar, det andra numret, Lastmile-numret på en postlinje och linjens namn, okända nummer och nummer utan skanningar, PostNord som Peek frågar i Sverige och hur Peek lämnar över paketet
 :::

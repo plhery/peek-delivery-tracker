@@ -3,7 +3,7 @@ title: TopYou tracking: TYZR numbers, scans and who delivers
 description: Track a TopYou (通邮) parcel from China: what a TYZR…YQ number looks like, what its English scans mean and who takes the parcel over in your country.
 slug: topyou-tracking
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-04
 ---
 
 TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZ and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
@@ -18,7 +18,7 @@ TopYou's waybills are TYZR, one letter, ten digits and YQ, 17 characters in all;
 | `TYZRA000000017YQ` | Only nine digits: not TopYou's layout. Check for a missing digit. |
 | `JXCAB0000000017YQ` | Also ends in YQ, as other Chinese forwarders' waybills do, but opens with JXC: a [Juxi Express](carrier:juxi-express) number. |
 
-Spaces and lower case don't matter when you paste the number into Peek. TopYou's own tracker tells capitals from lower case, so type the number there in capitals. If you can't find it in your order's details, see [how to find your tracking number](guide:find-tracking-number).
+Spaces and lower case don't matter when you paste the number into Peek. TopYou's own tracker, [track.szty56.com](https://track.szty56.com/), tells capitals from lower case, so type the number there in capitals. If you can't find it in your order's details, see [how to find your tracking number](guide:find-tracking-number).
 
 **A second number.** TopYou's record can also hold the delivering carrier's own number, which TopYou's tracker shows.
 
@@ -79,7 +79,7 @@ In Germany, iMile's scans come as iMile's name for the step, a comma and iMile's
 
 ## TopYou parcel not arriving or tracking stuck
 
-**Stuck on `Shipment started the customs clearance process at destination`.** Your country's customs have the parcel. If you're asked for import charges, see [parcels held at customs](guide:customs); if it stays there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
+**Stuck on `Shipment started the customs clearance process at destination`.** Your country's customs have the parcel. If you're asked for import charges, which in the EU now include a €2 handling fee per item (due since 1 November 2026), see [parcels held at customs](guide:customs); if it stays there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
 
 **Nothing after `Departed from customs` or `Import clearance success`.** The delivering carrier should have the parcel. Look for its number on TopYou's tracker, or ask the seller which carrier delivers and under which number. Background in [tracking a parcel from China](guide:tracking-from-china).
 
@@ -91,7 +91,7 @@ In Germany, iMile's scans come as iMile's name for the step, a comma and iMile's
 
 ## TopYou contact number and customer service
 
-As of 28 October 2026, Peek couldn't check TopYou's website, so it lists no contact details for TopYou here. The seller booked the parcel with TopYou and is the one to ask about your order, and the marketplace if the seller doesn't answer.
+As of 4 November 2026, TopYou's website, [szty56.com](https://www.szty56.com/), gives a phone number in Shenzhen, +86 755 8181 9898 (0755-81819898 within China). It names no opening hours and no service for recipients: its customers are the shops that ship with it. The seller booked the parcel with TopYou and is the one to ask about your order, and the marketplace if the seller doesn't answer.
 
 ## Track a TopYou parcel with Peek
 
@@ -107,7 +107,7 @@ Peek checks every 10 minutes, or hourly once TopYou has gone quiet: after 12 hou
 
 ### What is TopYou (通邮)?
 
-It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China, with international lines. Its waybills are TYZR, a letter, ten digits and YQ, some with another letter in place of the R.
+It is 深圳市通邮物流科技（集团）股份有限公司, also called 通邮集团, Tongyou or SZTY56, a cross-border forwarder in Shenzhen, China, with international lines. It says it was founded in 2016, has branches and sorting centres in Shenzhen, Guangzhou, Shanghai and other Chinese cities, and handles more than 800,000 orders a day, sent by post, on its own international lines or with the big express couriers. Its waybills are TYZR, a letter, ten digits and YQ, some with another letter in place of the R.
 
 ### Why does TopYou show my country before my parcel has left China?
 
@@ -119,8 +119,13 @@ In the United States, USPS, which takes the parcel over from TopYou's line after
 
 ### Who do I contact about a missing TopYou parcel?
 
-The seller you ordered from: it booked the parcel with TopYou. Peek couldn't check TopYou's website for contact details.
+The seller you ordered from: it booked the parcel with TopYou. TopYou's website gives a phone number in Shenzhen (above), but no service for recipients.
 
 :::sources
+- [TopYou: 通邮集团 (home page)](https://www.szty56.com/) – phone
+- [TopYou: 关于我们 (about)](https://www.szty56.com/view?path=about/about) – founded 2016, branches, orders a day, services
+- [TopYou: 轨迹查询 (tracking)](https://track.szty56.com/) – TopYou's tracker
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 Union handling fee from 1 November 2026
+- [European Commission: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item sold at a distance, whatever its value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name and other names, TYZR number shape, capitals on TopYou's tracker, no link Peek reads, scan wordings and their stages, the destination country beside TopYou's own scans, Beijing time and the relayed scans' clocks, USPS taking over in the US, GOFO in France and Italy and iMile in Germany, the delivering carrier's relayed scans, the second number, the Lastmile number on a post's line and the line name, unknown numbers and numbers without scans, what Peek shows and how it hands a parcel over
 :::

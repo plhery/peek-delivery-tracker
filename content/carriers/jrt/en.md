@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-10-30
 ---
 
-JRT (今日通, Jinritong) is 厦门今日通商贸有限公司, a forwarder in Xiamen, China. If a Chinese shop sent your order with JRT, it gives you a number that starts with JRT and ends with MM: paste it in the box above. Its tracker follows the parcel from China through the flight and customs to the company that delivers: into Europe, DHL, and into the United States, UPS, whose scans it copies. JRT's FedEx line to Ireland ends with FedEx instead.
+JRT (今日通, Jinritong) is 厦门今日通商贸有限公司, a forwarder in Xiamen, China. If a Chinese shop sent your order with JRT, it gives you a number that starts with JRT and ends with MM: paste it in the box above. Its tracker follows the parcel from China through the flight and customs to the company that delivers: into Europe, DHL, and into the United States, UPS, whose scans it copies. JRT's FedEx line to Ireland ends with FedEx instead, its line into Spain with CTT Express and its line into Poland with InPost.
 
 ## JRT tracking number: what it looks like
 
@@ -70,7 +70,7 @@ On the line into Europe, JRT's own lines are on Beijing time: 17:00 there is 09:
 
 ## Who delivers JRT parcels
 
-**Into Europe**, JRT's lines end with DHL, all but its FedEx line to Ireland (below): JRT hands the parcel in at a Deutsche Post outlet, and its tracker copies DHL's scans. Once JRT has handed the parcel in, its record holds DHL's number in place of JRT's, though still not the line's name. When Peek can tell that number is DHL's, it shows "Delivery with DHL" with the number, and moves to DHL's own tracking once DHL has scanned the parcel (more below). If not, ask the seller for DHL's number: DHL's tracking follows the parcel to its delivery (see [DHL Paket](carrier:dhl) for its numbers and statuses).
+**Into Europe**, JRT's lines end with DHL, all but its FedEx line to Ireland (below), its line into Spain, which ends with CTT Express, and its line into Poland, which ends with InPost. On DHL's lines, JRT hands the parcel in at a Deutsche Post outlet, and its tracker copies DHL's scans. Once JRT has handed the parcel in, its record holds DHL's number in place of JRT's, though still not the line's name. When Peek can tell that number is DHL's, it shows "Delivery with DHL" with the number, and moves to DHL's own tracking once DHL has scanned the parcel (more below). If not, ask the seller for DHL's number: DHL's tracking follows the parcel to its delivery (see [DHL Paket](carrier:dhl) for its numbers and statuses).
 
 **Into the United States**, JRT's lines end with UPS: JRT hands the parcel over at the delivering company's warehouse (`已交仓`), and its tracker copies UPS's scans up to the delivery.
 
@@ -118,7 +118,7 @@ Because of its translations. `Cargo delivered to airport` means JRT handed the p
 
 ### Who delivers JRT parcels in my country?
 
-Into Europe, DHL, and into the United States, UPS: JRT's tracker copies their scans. Some parcels go to FedEx, such as those on JRT's FedEx line to Ireland. Elsewhere Peek doesn't know: ask the seller which company delivers and for its number.
+Into Europe, DHL, and into the United States, UPS: JRT's tracker copies their scans. Some parcels go to FedEx, such as those on JRT's FedEx line to Ireland, and JRT's lines into Spain and Poland end with CTT Express and InPost. Elsewhere Peek doesn't know: ask the seller which company delivers and for its number.
 
 ### Who do I contact about a missing JRT parcel?
 

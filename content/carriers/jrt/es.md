@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-JRT (今日通, Jinritong) es 厦门今日通商贸有限公司, una empresa de logística de Xiamen, en China. Si una tienda china te ha enviado el pedido con JRT, te habrá dado un número de seguimiento que empieza por JRT y acaba en MM: pégalo en la casilla de arriba para rastrear el paquete. La web de seguimiento de JRT lo sigue desde China: el vuelo, la aduana y el paso a DHL, en los envíos a Europa, o a UPS, en los envíos a Estados Unidos. JRT copia en su web los escaneos de DHL y de UPS. En su línea a Irlanda con FedEx en el nombre del producto, el paquete pasa en cambio a FedEx.
+JRT (今日通, Jinritong) es 厦门今日通商贸有限公司, una empresa de logística de Xiamen, en China. Si una tienda china te ha enviado el pedido con JRT, te habrá dado un número de seguimiento que empieza por JRT y acaba en MM: pégalo en la casilla de arriba para rastrear el paquete. La web de seguimiento de JRT lo sigue desde China: el vuelo, la aduana y el paso a DHL, en los envíos a Europa, o a UPS, en los envíos a Estados Unidos. JRT copia en su web los escaneos de DHL y de UPS. En su línea a Irlanda con FedEx en el nombre del producto, el paquete pasa en cambio a FedEx; en su línea a España, a CTT Express, y en la de Polonia, a InPost.
 
 ## Número de seguimiento de JRT: cómo es
 
@@ -112,7 +112,7 @@ En los envíos a Europa, las horas de los pasos de JRT van en hora de Pekín (UT
 
 ## Quién reparte los paquetes de JRT en Europa y en Estados Unidos
 
-**En los envíos a Europa**, el historial de JRT acaba con DHL, salvo en su línea a Irlanda con FedEx (más abajo): JRT entrega el paquete en una oficina de Deutsche Post, y su web copia los escaneos de DHL. Cuando JRT ya ha entregado el paquete, sus datos traen el número de DHL en lugar del de JRT, aunque siguen sin el nombre de la línea. Si Peek reconoce ese número como de DHL, muestra «Entrega con DHL» con el número y pasa al seguimiento de DHL en cuanto DHL escanea el paquete (más abajo). Si no, pide a la tienda el número de DHL: con él, el seguimiento de DHL te lleva hasta la entrega (en [DHL Paket](carrier:dhl) tienes cómo son sus números, qué significan sus estados y quién entrega sus paquetes en España).
+**En los envíos a Europa**, el historial de JRT acaba con DHL, salvo en su línea a Irlanda con FedEx (más abajo), en su línea a España, que acaba con CTT Express, y en la de Polonia, que acaba con InPost. En las líneas de DHL, JRT entrega el paquete en una oficina de Deutsche Post, y su web copia los escaneos de DHL. Cuando JRT ya ha entregado el paquete, sus datos traen el número de DHL en lugar del de JRT, aunque siguen sin el nombre de la línea. Si Peek reconoce ese número como de DHL, muestra «Entrega con DHL» con el número y pasa al seguimiento de DHL en cuanto DHL escanea el paquete (más abajo). Si no, pide a la tienda el número de DHL: con él, el seguimiento de DHL te lleva hasta la entrega (en [DHL Paket](carrier:dhl) tienes cómo son sus números, qué significan sus estados y quién entrega sus paquetes en España).
 
 **En los envíos a Estados Unidos**, el historial de JRT acaba con UPS: JRT deja el paquete en el almacén de la empresa que reparte (`已交仓`), y su web copia los escaneos de UPS hasta la entrega.
 
@@ -162,7 +162,7 @@ Por cómo traduce sus pasos. `Cargo delivered to airport` quiere decir que JRT e
 
 ### ¿Quién reparte los paquetes de JRT en España y en Estados Unidos?
 
-En los envíos a Europa, el historial de JRT acaba con DHL, y en los envíos a Estados Unidos, con UPS: la web de JRT copia sus escaneos. Quién entrega en España los paquetes de DHL Paket te lo cuenta la página de [DHL Paket](carrier:dhl). Algunos paquetes pasan a FedEx, como los de la línea de JRT a Irlanda con FedEx en el nombre del producto. En los demás casos, Peek no lo sabe: pregunta a la tienda qué empresa reparte el tuyo y con qué número.
+En los envíos a Europa, el historial de JRT acaba con DHL, y en los envíos a Estados Unidos, con UPS: la web de JRT copia sus escaneos. Quién entrega en España los paquetes de DHL Paket te lo cuenta la página de [DHL Paket](carrier:dhl). Algunos paquetes pasan a FedEx, como los de la línea de JRT a Irlanda con FedEx en el nombre del producto, a CTT Express, como los de su línea a España, o a InPost, como los de su línea a Polonia. En los demás casos, Peek no lo sabe: pregunta a la tienda qué empresa reparte el tuyo y con qué número.
 
 ### ¿A quién reclamo si no me llega un paquete de JRT?
 

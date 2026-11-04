@@ -29,6 +29,7 @@ La web de seguimiento está en chino, pero los escaneos salen en inglés. Las l�
 | --- | --- |
 | `Forecast has been received` | El vendedor envió los datos del pedido. FIRST LINE todavía no tiene el paquete. |
 | `Parcel information received` | Lo mismo: solo hay datos del pedido. |
+| `Order received` | La empresa que lo entregará, como UniUni, tiene los datos del pedido, pero aún no el paquete. |
 | `Barcode scanning` | El primer escaneo en el almacén de FIRST LINE en Shenzhen. |
 | `Shipment arrived` | También el primer escaneo en Shenzhen; no es la llegada a tu país. |
 | `Packaged` | Empaquetado para el viaje al extranjero. |
@@ -36,7 +37,6 @@ La web de seguimiento está en chino, pero los escaneos salen en inglés. Las l�
 | `Export customs declaration completed` | La declaración de exportación, hecha en Shenzhen antes del vuelo; el paquete no está retenido en la aduana. |
 | `Depart from facility to service provider` | Va de FIRST LINE a la empresa que se encarga del siguiente tramo. |
 | `Hand over to airline` | Entregado a la aerolínea en el aeropuerto de Hong Kong, tras la declaración de exportación. |
-| `Order received` | La empresa que lo entregará, como UniUni, tiene los datos del pedido, pero aún no el paquete. |
 | `Next stop destination airport` | En vuelo hacia el aeropuerto de destino. El lugar sigue siendo el aeropuerto de Hong Kong. |
 | `Arrived at destination airport` | El vuelo ha aterrizado; luego viene el despacho de importación. |
 | `The package is being submitted for customs clearance` | El despacho de importación a la llegada, tras el vuelo. Peek muestra «En aduanas». |

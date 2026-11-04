@@ -6,7 +6,7 @@ published: 2026-10-31
 updated: 2026-10-31
 ---
 
-JRT (今日通, Jinritong) to 厦门今日通商贸有限公司, firma spedycyjna z Xiamen w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez JRT, dostajesz numer, który zaczyna się od JRT i kończy na MM: wklej go w pole powyżej. Śledzenie JRT pokazuje drogę paczki z Chin: lot, odprawę celną i przekazanie firmie, która ją doręcza. Przy wysyłkach do Europy w historii JRT pojawia się dalej DHL: JRT przepisuje jego skany. Wyjątkiem jest linia JRT do Irlandii z FedEx w nazwie produktu: tam ostatni odcinek ma FedEx.
+JRT (今日通, Jinritong) to 厦门今日通商贸有限公司, firma spedycyjna z Xiamen w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez JRT, dostajesz numer, który zaczyna się od JRT i kończy na MM: wklej go w pole powyżej. Śledzenie JRT pokazuje drogę paczki z Chin: lot, odprawę celną i przekazanie firmie, która ją doręcza. Przy wysyłkach do Europy w historii JRT pojawia się dalej DHL: JRT przepisuje jego skany. Wyjątki to linia JRT do Irlandii z FedEx w nazwie produktu, na której ostatni odcinek ma FedEx, linia do Polski, na której ma go InPost, i linia do Hiszpanii, na której ma go CTT Express.
 
 ## Numer przesyłki JRT: jak wygląda
 
@@ -69,7 +69,7 @@ Przy przesyłkach do Europy godziny linii JRT są podane w czasie pekińskim: 17
 
 ## Kto doręcza paczki JRT w Polsce
 
-**Przy wysyłkach do Europy** historia JRT kończy się skanami DHL (poza linią do Irlandii z FedEx, opisaną niżej): JRT nadaje paczkę w placówce Deutsche Post, a jego śledzenie przepisuje skany DHL. Jeśli widzisz je w historii przesyłki, ostatni odcinek ma DHL. Gdy JRT przekaże już paczkę DHL, w jego rekordzie numer DHL zastępuje numer JRT (nazwy kanału wysyłki nadal brak). Jeśli Peek rozpozna ten numer jako numer DHL, pokaże „Doręcza: DHL” z tym numerem i przejdzie do śledzenia DHL, gdy tylko DHL zeskanuje paczkę (więcej niżej). Jeśli nie, poproś sprzedawcę o numer DHL: śledzenie DHL prowadzi paczkę aż do doręczenia (numery i statusy DHL opisuje strona [DHL Paket](carrier:dhl)).
+**Przy wysyłkach do Europy** historia JRT kończy się skanami DHL (poza linią do Irlandii z FedEx, opisaną niżej, linią do Polski, na której paczkę przejmuje InPost, i linią do Hiszpanii, na której przejmuje ją CTT Express). Na pozostałych liniach JRT nadaje paczkę w placówce Deutsche Post, a jego śledzenie przepisuje skany DHL. Jeśli widzisz je w historii przesyłki, ostatni odcinek ma DHL. Gdy JRT przekaże już paczkę DHL, w jego rekordzie numer DHL zastępuje numer JRT (nazwy kanału wysyłki nadal brak). Jeśli Peek rozpozna ten numer jako numer DHL, pokaże „Doręcza: DHL” z tym numerem i przejdzie do śledzenia DHL, gdy tylko DHL zeskanuje paczkę (więcej niżej). Jeśli nie, poproś sprzedawcę o numer DHL: śledzenie DHL prowadzi paczkę aż do doręczenia (numery i statusy DHL opisuje strona [DHL Paket](carrier:dhl)).
 
 **Na linii do Irlandii z FedEx w nazwie produktu** JRT przekazuje paczkę firmie FedEx, a w jego rekordzie numer FedEx zastępuje wtedy numer JRT. Jeśli ten numer ma jeden z kształtów numerów FedEx, Peek pokaże „Doręcza: FedEx” z tym numerem i przejdzie do śledzenia FedEx, gdy tylko FedEx zeskanuje paczkę, tak jak przy DHL (więcej niżej). Jeśli paczkę doręcza FedEx, a Peek nie pokazuje numeru FedEx, poproś sprzedawcę o ten numer i śledź go na stronie [FedEx](carrier:fedex).
 
@@ -117,7 +117,7 @@ Przez tłumaczenia. `Cargo delivered to airport` znaczy, że JRT przekazał pacz
 
 ### Kto doręcza paczki JRT w Polsce?
 
-Przy wysyłkach do Europy historia JRT pokazuje DHL, którego skany przepisuje śledzenie JRT; część paczek trafia do FedEx, na przykład te na linii JRT do Irlandii z FedEx w nazwie produktu. Poza tym Peek nie wie: zapytaj sprzedawcę, która firma doręcza i pod jakim numerem.
+Przy wysyłkach do Europy historia JRT pokazuje DHL, którego skany przepisuje śledzenie JRT; część paczek trafia do FedEx, na przykład te na linii JRT do Irlandii z FedEx w nazwie produktu. Na linii JRT do Polski ostatni odcinek ma InPost, a na linii do Hiszpanii CTT Express. Poza tym Peek nie wie: zapytaj sprzedawcę, która firma doręcza i pod jakim numerem.
 
 ### Do kogo pisać, gdy paczka JRT zaginęła?
 

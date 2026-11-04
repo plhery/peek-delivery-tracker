@@ -28,6 +28,7 @@ FIRST LINE's tracker is in Chinese, but the scans are in English. FIRST LINE's o
 | FIRST LINE says | What it means for you |
 | --- | --- |
 | `Forecast has been received` | The seller sent the order's details. FIRST LINE doesn't have the parcel yet. `Parcel information received` means the same. |
+| `Order received` | The delivering company, such as UniUni, has the order's details but not the parcel yet. |
 | `Barcode scanning` | The first scan at FIRST LINE's warehouse in Shenzhen. |
 | `Shipment arrived` | Also the first scan in Shenzhen, not an arrival in your country. |
 | `Packaged` | Packed for the trip abroad. |
@@ -35,7 +36,6 @@ FIRST LINE's tracker is in Chinese, but the scans are in English. FIRST LINE's o
 | `Export customs declaration completed` | China's export declaration, made in Shenzhen before the flight. The parcel isn't held at customs. |
 | `Depart from facility to service provider` | On its way from FIRST LINE to the company that takes it on. |
 | `Hand over to airline` | Handed to the airline at Hong Kong's airport, after the export declaration. |
-| `Order received` | The delivering company, such as UniUni, has the order's details but not the parcel yet. |
 | `Next stop destination airport` | On the flight to the destination airport. The place still reads Hong Kong's airport. |
 | `Arrived at destination airport` | The flight has landed. Import clearance comes next. |
 | `The package is being submitted for customs clearance` | Import clearance on arrival, after the flight. Peek shows "At customs". |

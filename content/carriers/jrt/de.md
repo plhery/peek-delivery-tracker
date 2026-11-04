@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-03
 ---
 
-JRT (今日通, Jinritong) ist 厦门今日通商贸有限公司, ein Spediteur aus Xiamen in China. Hat ein Shop in China deine Bestellung mit JRT verschickt, bekommst du eine Nummer, die mit JRT beginnt und auf MM endet: Füg sie oben ins Feld ein. JRTs Tracking-Seite zeigt den Weg des Pakets von China über den Flug und den Zoll bis zur Firma, die zustellt, und übernimmt deren Scans: bei Sendungen nach Europa die von DHL, bei Sendungen in die USA die von UPS. Auf JRTs FedEx-Linie nach Irland übernimmt FedEx die letzte Strecke.
+JRT (今日通, Jinritong) ist 厦门今日通商贸有限公司, ein Spediteur aus Xiamen in China. Hat ein Shop in China deine Bestellung mit JRT verschickt, bekommst du eine Nummer, die mit JRT beginnt und auf MM endet: Füg sie oben ins Feld ein. JRTs Tracking-Seite zeigt den Weg des Pakets von China über den Flug und den Zoll bis zur Firma, die zustellt, und übernimmt deren Scans: bei Sendungen nach Europa die von DHL, bei Sendungen in die USA die von UPS. Auf JRTs FedEx-Linie nach Irland übernimmt FedEx die letzte Strecke, auf seiner Linie nach Spanien CTT Express und auf der nach Polen InPost.
 
 ## JRT Sendungsnummer: so sieht sie aus
 

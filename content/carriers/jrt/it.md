@@ -6,7 +6,7 @@ published: 2026-10-31
 updated: 2026-10-31
 ---
 
-JRT (今日通, Jinritong) è 厦门今日通商贸有限公司, uno spedizioniere di Xiamen, in Cina. Se un negozio cinese ha spedito il tuo ordine con JRT, ti avrà dato un numero che inizia con JRT e finisce con MM: incollalo nel box qui sopra. Il tracking di JRT segue il pacco dalla Cina al volo, alla dogana e poi al corriere che lo consegna: verso l'Europa la cronologia finisce con DHL, di cui copia le scansioni, tranne sulla linea di JRT per l'Irlanda con FedEx nel nome del prodotto, dove il pacco passa a FedEx.
+JRT (今日通, Jinritong) è 厦门今日通商贸有限公司, uno spedizioniere di Xiamen, in Cina. Se un negozio cinese ha spedito il tuo ordine con JRT, ti avrà dato un numero che inizia con JRT e finisce con MM: incollalo nel box qui sopra. Il tracking di JRT segue il pacco dalla Cina al volo, alla dogana e poi al corriere che lo consegna: verso l'Europa la cronologia finisce con DHL, di cui copia le scansioni, tranne sulla linea di JRT per l'Irlanda con FedEx nel nome del prodotto, dove il pacco passa a FedEx, e su quelle per la Spagna e la Polonia, dove passa a CTT Express e a InPost.
 
 ## Numero di tracking JRT: com'è fatto
 
@@ -85,11 +85,11 @@ Sulle spedizioni verso l'Europa le righe di JRT sono sull'ora di Pechino: le 17:
 
 ## Chi consegna i pacchi JRT in Italia
 
-**Verso l'Europa**, salvo sulla linea per l'Irlanda con FedEx (vedi sotto), la cronologia di JRT finisce con DHL, a cui JRT affida il pacco in una filiale Deutsche Post. Quando JRT ha consegnato il pacco, nei suoi dati il numero DHL prende il posto di quello JRT, ma il nome della linea continua a mancare. Se Peek riconosce quel numero come DHL, mostra «Consegna con DHL» con il numero e passa al tracking di DHL appena DHL scansiona il pacco (vedi sotto). Altrimenti chiedi al venditore il numero DHL: con quello il tracking di DHL segue il pacco fino alla consegna (numeri e stati nella pagina [DHL Paket](carrier:dhl)).
+**Verso l'Europa**, salvo sulla linea per l'Irlanda con FedEx (vedi sotto) e su quelle per la Spagna e la Polonia, che finiscono con CTT Express e con InPost, la cronologia di JRT finisce con DHL, a cui JRT affida il pacco in una filiale Deutsche Post. Quando JRT ha consegnato il pacco, nei suoi dati il numero DHL prende il posto di quello JRT, ma il nome della linea continua a mancare. Se Peek riconosce quel numero come DHL, mostra «Consegna con DHL» con il numero e passa al tracking di DHL appena DHL scansiona il pacco (vedi sotto). Altrimenti chiedi al venditore il numero DHL: con quello il tracking di DHL segue il pacco fino alla consegna (numeri e stati nella pagina [DHL Paket](carrier:dhl)).
 
 **Sulla linea per l'Irlanda con FedEx nel nome del prodotto** JRT passa il pacco a FedEx, e da quel momento nei suoi dati il numero FedEx prende il posto di quello JRT. Se quel numero ha una delle forme dei numeri FedEx, Peek mostra «Consegna con FedEx» con il numero e passa al tracking di FedEx appena FedEx scansiona il pacco, come con DHL (vedi sotto). Se a consegnare è FedEx e Peek non mostra un numero FedEx, chiedilo al venditore e seguilo su [FedEx](carrier:fedex).
 
-**Senza DHL né FedEx nella cronologia** Peek non sa chi consegna il pacco: chiedi al venditore quale corriere te lo porta e con che numero. Tentativi di consegna, punti di ritiro e giacenza seguono le regole di quel corriere, non di JRT. Ti chiedono di pagare qualcosa per la dogana? Leggi [pacco fermo in dogana](guide:customs).
+**Senza DHL, FedEx, CTT Express o InPost nella cronologia** Peek non sa chi consegna il pacco: chiedi al venditore quale corriere te lo porta e con che numero. Tentativi di consegna, punti di ritiro e giacenza seguono le regole di quel corriere, non di JRT. Ti chiedono di pagare qualcosa per la dogana? Leggi [pacco fermo in dogana](guide:customs).
 
 ## Pacco JRT fermo o che non arriva
 
@@ -131,7 +131,7 @@ Peek controlla ogni 10 minuti e ogni ora quando JRT tace (dopo 12 ore ferme alle
 
 ### Chi consegna i pacchi JRT in Italia?
 
-Verso l'Europa la cronologia di JRT finisce con DHL, che fa l'ultimo tratto e di cui JRT copia le scansioni; alcuni pacchi passano invece a FedEx, come quelli della linea di JRT per l'Irlanda con FedEx nel nome del prodotto. Negli altri casi Peek non lo sa: chiedi al venditore quale corriere consegna e con che numero.
+Verso l'Europa la cronologia di JRT finisce con DHL, che fa l'ultimo tratto e di cui JRT copia le scansioni; alcuni pacchi passano invece a FedEx, come quelli della linea di JRT per l'Irlanda con FedEx nel nome del prodotto, o a CTT Express e a InPost, come quelli delle sue linee per la Spagna e la Polonia. Negli altri casi Peek non lo sa: chiedi al venditore quale corriere consegna e con che numero.
 
 ### A chi mi rivolgo se il pacco JRT non arriva?
 

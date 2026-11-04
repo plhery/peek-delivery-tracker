@@ -219,6 +219,7 @@ class KeyboardDeviceTest {
         assertTrue(WindowKey.Undo in available())
 
         press(KeyEvent.KEYCODE_F, CTRL)
+        compose.waitUntil(LONG_MILLIS) { walk.onUi { walk.deliveries.showingSearch } }
         compose.waitUntil(LONG_MILLIS) { walk.onUi { walk.deliveries.searchFocused } }
         assertFalse(WindowKey.Undo in available())
         press(KeyEvent.KEYCODE_Z, CTRL)
@@ -342,11 +343,12 @@ class KeyboardDeviceTest {
         press(KeyEvent.KEYCODE_N, CTRL)
         assertFalse(walk.onUi { walk.deliveries.showingAccount })
         assertFalse(walk.exists(SETTINGS_SHEET))
-        assertTrue(selected(PeekTab.Deliveries))
         assertEquals(addition, walk.onUi { walk.deliveries.addition })
         walk.awaitKeyboard(required = false)
         walk.shot("A-ST23-add-over-the-window")
         closeAdd()
+        // The tab bar says nothing under what stands over the window: read once that has gone.
+        assertTrue(selected(PeekTab.Deliveries))
 
         press(KeyEvent.KEYCODE_COMMA, CTRL)
         compose.waitUntil(LONG_MILLIS) { walk.exists(SETTINGS_SHEET) }
@@ -354,10 +356,10 @@ class KeyboardDeviceTest {
         press(KeyEvent.KEYCODE_N, CTRL)
         press(KeyEvent.KEYCODE_2, CTRL)
         assertNull(walk.onUi { walk.deliveries.addition })
-        assertTrue(selected(PeekTab.Deliveries))
         walk.back()
         compose.waitUntil(LONG_MILLIS) { !walk.exists(SETTINGS_SHEET) }
         walk.settle()
+        assertTrue(selected(PeekTab.Deliveries))
         press(KeyEvent.KEYCODE_2, CTRL)
         compose.waitUntil(LONG_MILLIS) { selected(PeekTab.Passport) }
     }

@@ -3131,8 +3131,8 @@ extension SessionIsolationTests {
                     started.fulfill()
                 } else { callback(.success((200, Data("{}".utf8)))) }
             }
-            // A change of account turns this device's notifications off; the token goes only while they are on.
-            UserDefaults.standard.removeObject(forKey: "sdt.notificationsDeviceOptOut")
+            // The token goes only while this device's notifications are on and belong to the account signed in.
+            for key in ["sdt.notificationsDeviceOptOut", "sdt.notificationsOwner.v1"] { UserDefaults.standard.removeObject(forKey: key) }
             let pending = Task {
                 if path == "/api/push/preferences" { await store.loadNotificationPreferences() }
                 else { await store.forwardNativePushToken("synthetic-token", language: .en) }
@@ -3144,6 +3144,39 @@ extension SessionIsolationTests {
             await pending.value
             XCTAssertNil(store.notificationError, path)
         }
+    }
+
+    @MainActor func testSigningBackInBringsTheDevicesNotificationsBackAndAnotherAccountIsAsked() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let owner = UUID()
+        try await authorize(session, id: owner)
+        let store = store(session, transport)
+        for key in ["sdt.notificationsDeviceOptOut", "sdt.notificationsOwner.v1"] { UserDefaults.standard.removeObject(forKey: key) }
+        nonisolated(unsafe) var registrations = 0
+        let answer: (URLRequest, @escaping (Result<(Int, Data), Error>) -> Void) -> Void = { request, complete in
+            if request.httpMethod == "POST", request.url?.path == "/api/push/devices" { registrations += 1 }
+            complete(.success((200, Data(#"{"ok":true,"testSent":false}"#.utf8))))
+        }
+        SessionTestURLProtocol.handler = answer
+        await store.forwardNativePushToken("synthetic-token", language: .en)
+        XCTAssertEqual(registrations, 1)
+        // Signing out, or a session that ends, takes the token away without saying no for the person.
+        session.forceSignOut()
+        XCTAssertFalse(UserDefaults.standard.bool(forKey: "sdt.notificationsDeviceOptOut"))
+        try await authorize(session)
+        SessionTestURLProtocol.handler = answer
+        await store.forwardNativePushToken("synthetic-token", language: .en)
+        XCTAssertEqual(registrations, 1, "Another account is asked first")
+        XCTAssertFalse(store.notificationsEnabledOnDevice)
+        session.forceSignOut()
+        try await authorize(session, id: owner)
+        SessionTestURLProtocol.handler = answer
+        await store.forwardNativePushToken("synthetic-token", language: .en)
+        XCTAssertEqual(registrations, 2, "The same account gets its notifications back")
+        XCTAssertTrue(store.notificationsEnabledOnDevice)
     }
 
     @MainActor func testFailedAccountDeletionKeepsWatchingTheNextChecks() async throws {

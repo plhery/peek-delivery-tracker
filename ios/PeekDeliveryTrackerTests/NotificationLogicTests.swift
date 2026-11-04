@@ -92,6 +92,15 @@ final class NotificationLogicTests: XCTestCase {
         ))
     }
 
+    func testADevicesNotificationsBelongToTheAccountThatTurnedThemOn() {
+        let owner = UUID()
+        XCTAssertTrue(NotificationDevicePolicy.belongs(to: owner, owner: owner))
+        // A device from before the owner was kept, or one never turned on.
+        XCTAssertTrue(NotificationDevicePolicy.belongs(to: owner, owner: nil))
+        XCTAssertFalse(NotificationDevicePolicy.belongs(to: UUID(), owner: owner))
+        XCTAssertFalse(NotificationDevicePolicy.belongs(to: nil, owner: nil))
+    }
+
     func testInvitationWaitsForPermissionCheckAndARealAccountWithParcels() {
         XCTAssertTrue(invitation())
         XCTAssertFalse(invitation(status: nil))
@@ -109,6 +118,8 @@ final class NotificationLogicTests: XCTestCase {
         // Permission alone does not mean the server has a working push registration.
         XCTAssertTrue(invitation(status: .authorized))
         XCTAssertTrue(invitation(status: .provisional))
+        // A token on its way to this account needs no question.
+        XCTAssertFalse(invitation(status: .authorized, registering: true))
     }
 
     func testInvitationDismissalPersistsPerAccount() {
@@ -428,11 +439,12 @@ final class NotificationLogicTests: XCTestCase {
         status: UNAuthorizationStatus? = .notDetermined,
         enabled: Bool = false,
         optedOut: Bool = false,
-        dismissed: Bool = false
+        dismissed: Bool = false,
+        registering: Bool = false
     ) -> Bool {
         NotificationInvitationPolicy.shouldPresent(
             isAuthenticated: isAuthenticated, isDemo: isDemo, hasParcels: hasParcels,
-            status: status, enabled: enabled, optedOut: optedOut, dismissed: dismissed
+            status: status, enabled: enabled, optedOut: optedOut, dismissed: dismissed, registering: registering
         )
     }
 }

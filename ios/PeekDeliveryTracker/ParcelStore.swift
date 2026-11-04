@@ -108,6 +108,8 @@ final class ParcelStore: ObservableObject {
     private let installationID: UUID
     private let notificationOptOutKey = "sdt.notificationsDeviceOptOut"
     private let nativePushRegisteredKey = "sdt.notificationsNativePushRegistered.v1"
+    /// The account that last turned this device's notifications on (`NotificationDevicePolicy.belongs`).
+    private let notificationOwnerKey = "sdt.notificationsOwner.v1"
     private let demoNotificationsKey = "sdt.demoNotificationsEnabled"
     private static let installationIDKey = "sdt.installationID.v1"
 
@@ -157,10 +159,7 @@ final class ParcelStore: ObservableObject {
             shareNotes.forgetAll()
             // So does what it answered about its parcels.
             ParcelFeedbackMemory().forgetAll()
-            PlatformApplication.shared.unregisterForRemoteNotifications()
-            AppDelegate.clearDeviceToken()
-            UserDefaults.standard.set(true, forKey: notificationOptOutKey)
-            UserDefaults.standard.set(false, forKey: nativePushRegisteredKey)
+            releaseDeviceNotifications(from: cacheOwnerID)
         }
         cacheOwnerID = session.user?.id
         notificationInvitationDismissed = session.user.map { NotificationInvitationPreference.isDismissed(for: $0.id) } ?? false
@@ -818,10 +817,7 @@ final class ParcelStore: ObservableObject {
         try session.checkGeneration(generation)
         await endAllDeliveryLiveActivities()
         try session.checkGeneration(generation)
-        PlatformApplication.shared.unregisterForRemoteNotifications()
-        AppDelegate.clearDeviceToken()
-        UserDefaults.standard.set(true, forKey: notificationOptOutKey)
-        UserDefaults.standard.set(false, forKey: nativePushRegisteredKey)
+        releaseDeviceNotifications(from: session.user?.id)
         notificationsEnabledOnDevice = false
         notificationPreferences = nil
         notificationError = nil
@@ -850,15 +846,29 @@ final class ParcelStore: ObservableObject {
         try session.checkGeneration(generation)
         await endAllDeliveryLiveActivities()
         try session.checkGeneration(generation)
-        PlatformApplication.shared.unregisterForRemoteNotifications()
-        AppDelegate.clearDeviceToken()
-        UserDefaults.standard.set(true, forKey: notificationOptOutKey)
-        UserDefaults.standard.set(false, forKey: nativePushRegisteredKey)
+        releaseDeviceNotifications(from: session.user?.id)
         notificationsEnabledOnDevice = false
         notificationPreferences = nil
         notificationError = nil
         if let userID = session.user?.id { cache.delete(userID: userID) }
         try await session.signOut()
+    }
+
+    /// An account leaves the device: its token goes with it, while the person's own on or off for this device stays.
+    /// The device keeps whose notifications they were, so that account gets them back when it signs in again and
+    /// another account is asked first.
+    private func releaseDeviceNotifications(from account: UUID?) {
+        PlatformApplication.shared.unregisterForRemoteNotifications()
+        AppDelegate.clearDeviceToken()
+        let defaults = UserDefaults.standard
+        if let account, defaults.bool(forKey: nativePushRegisteredKey), defaults.string(forKey: notificationOwnerKey) == nil {
+            defaults.set(account.uuidString, forKey: notificationOwnerKey)
+        }
+        defaults.set(false, forKey: nativePushRegisteredKey)
+    }
+
+    private var notificationOwner: UUID? {
+        UserDefaults.standard.string(forKey: notificationOwnerKey).flatMap(UUID.init(uuidString:))
     }
 
     func refreshNotificationState() async {
@@ -924,6 +934,7 @@ final class ParcelStore: ObservableObject {
         )
         try session.checkGeneration(generation)
         UserDefaults.standard.set(true, forKey: nativePushRegisteredKey)
+        if let user = session.user?.id { UserDefaults.standard.set(user.uuidString, forKey: notificationOwnerKey) }
         notificationsEnabledOnDevice = true
         dismissNotificationInvitation()
         succeeded = true
@@ -955,7 +966,9 @@ final class ParcelStore: ObservableObject {
                 status: notificationStateLoaded ? notificationStatus : nil,
                 enabled: notificationsEnabledOnDevice,
                 optedOut: UserDefaults.standard.bool(forKey: notificationOptOutKey),
-                dismissed: notificationInvitationDismissed
+                dismissed: notificationInvitationDismissed,
+                registering: NotificationDevicePolicy.isAuthorized(notificationStatus)
+                    && NotificationDevicePolicy.belongs(to: session.user?.id, owner: notificationOwner)
             )
     }
 
@@ -1022,7 +1035,9 @@ final class ParcelStore: ObservableObject {
         guard !isDemo,
               session.isAuthenticated,
               !notificationEnableInProgress,
-              !UserDefaults.standard.bool(forKey: notificationOptOutKey) else { return }
+              !UserDefaults.standard.bool(forKey: notificationOptOutKey),
+              let user = session.user?.id,
+              NotificationDevicePolicy.belongs(to: user, owner: notificationOwner) else { return }
         let generation = nativePushGeneration
         let sessionGeneration = session.generation
         do {
@@ -1039,6 +1054,7 @@ final class ParcelStore: ObservableObject {
                 return
             }
             UserDefaults.standard.set(true, forKey: nativePushRegisteredKey)
+            UserDefaults.standard.set(user.uuidString, forKey: notificationOwnerKey)
             notificationsEnabledOnDevice = session.isAuthenticated
             notificationError = nil
         } catch {

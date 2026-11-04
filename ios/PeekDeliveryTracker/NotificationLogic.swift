@@ -139,6 +139,15 @@ enum NotificationDevicePolicy {
     ) -> Bool {
         isAuthorized(status) && !optedOut
     }
+
+    /// Whether the device's token may go to the account signed in: its notifications belong to the account that
+    /// last turned them on here, or to nobody yet. Signing out, an expired session or a deleted account takes the
+    /// token away but not that owner, so the same account signing in again gets its notifications back on its own,
+    /// and another account asks for its own yes.
+    static func belongs(to user: UUID?, owner: UUID?) -> Bool {
+        guard let user else { return false }
+        return owner == nil || owner == user
+    }
 }
 
 enum NotificationInvitationPolicy {
@@ -149,9 +158,11 @@ enum NotificationInvitationPolicy {
         status: UNAuthorizationStatus?,
         enabled: Bool,
         optedOut: Bool,
-        dismissed: Bool
+        dismissed: Bool,
+        registering: Bool = false
     ) -> Bool {
-        guard isAuthenticated, !isDemo, hasParcels, !enabled, !optedOut, !dismissed,
+        // `registering`: the device's notifications are this account's and its token is on its way, so there is nothing to ask.
+        guard isAuthenticated, !isDemo, hasParcels, !enabled, !optedOut, !dismissed, !registering,
               let status else { return false }
         return status == .notDetermined || status == .authorized || status == .provisional
     }

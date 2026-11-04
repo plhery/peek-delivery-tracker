@@ -157,7 +157,10 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
 
 - With an account, the app asks for notification permission only after the user taps Enable
   (from a small prompt above the tab bar, or from Account). Debug builds use the APNs
-  sandbox and Release builds use production.
+  sandbox and Release builds use production. Signing out, an expired session or a deleted
+  account takes the device's token off the server but keeps the person's own on or off: the
+  same account signing in again gets its notifications back by itself, and another account
+  sees the prompt first.
 - Without an account, it asks when a parcel first comes to the iPhone: looked up, followed
   from a link or handed over by the site. Each parcel still on its way is then signed up on
   the device token through `/api/public/parcels/{linkId}/app-alerts`, with the owner key

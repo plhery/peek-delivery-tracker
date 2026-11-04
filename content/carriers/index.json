@@ -16,7 +16,7 @@
   { "id": "inpost", "catalog": "inpost", "name": "InPost", "languages": ["en", "pl", "it", "pt", "es"] },
   { "id": "paack", "catalog": "paack", "name": "Paack", "languages": ["en", "es", "pt", "fr"] },
   { "id": "evri", "catalog": "evri-uk", "name": "Evri", "languages": ["en"] },
-  { "id": "chronopost", "catalog": "chronopost", "name": "Chronopost", "languages": ["en", "fr", "pt"] },
+  { "id": "chronopost", "catalog": "chronopost", "name": "Chronopost", "languages": ["en", "fr", "pt", "de"] },
   { "id": "relais-colis", "catalog": "relais-colis", "name": "Relais Colis", "languages": ["en", "fr"] },
   { "id": "poste-italiane", "catalog": "poste-italiane", "name": "Poste Italiane", "languages": ["en", "it"] },
   { "id": "seur", "catalog": "seur", "name": "SEUR", "languages": ["en", "es", "pt"] },

@@ -1988,6 +1988,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "chronopost",
+      "catalog": "chronopost",
+      "slug": "chronopost-sendungsverfolgung",
+      "title": "Chronopost Sendungsverfolgung: Paket aus Frankreich, Status",
+      "name": "Chronopost",
+      "color": "#0056a7"
+    },
+    {
       "id": "packeta",
       "catalog": "packeta",
       "slug": "packeta-sendungsverfolgung",

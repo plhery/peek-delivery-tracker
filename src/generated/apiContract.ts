@@ -37977,7 +37977,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Lagos",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fez-delivery",
+      "recognitionRank": 82,
+      "recognitionPattern": "^(?![A-Z]{2,3}\\d+$|1G|ASE)(?=[0-9]{0,3}[A-Z])[A-Z0-9]{4}(?:0[1-9]|[12]\\d|3[01])(?:0[1-9]|1[0-2])2\\d{3}$"
     },
     "trackingUrlTemplate": "https://web.fezdelivery.co/track-delivery/{trackingNumber}",
     "linkRules": [
@@ -43525,7 +43527,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Hong_Kong",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "royale-international"
     },
     "trackingUrlTemplate": "https://www.royaleinternational.com/tracking?waybillno={trackingNumber}",
     "linkRules": [
@@ -44075,7 +44077,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "junfeng-international"
     },
     "trackingUrlTemplate": "https://www.junfengfast.com/tracking.html?no={trackingNumber}",
     "linkRules": [
@@ -44318,7 +44320,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "shipglobal-us",
+      "recognitionRank": 83,
+      "recognitionPattern": "^FFUSA\\d{6,7}$"
     },
     "trackingUrlTemplate": "https://shipglobal.us/track.html?waybill={trackingNumber}",
     "linkRules": [

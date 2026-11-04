@@ -23125,7 +23125,8 @@
     "asked": [
       "colis-prive",
       "aramex-au",
-      "aramex-nz"
+      "aramex-nz",
+      "fez-delivery"
     ]
   },
   {
@@ -44747,7 +44748,8 @@
       "fez-delivery"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "fez-delivery"
     ]
   },
   {
@@ -55290,7 +55292,8 @@
       "fez-delivery"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "fez-delivery"
     ]
   },
   {
@@ -70994,7 +70997,8 @@
       "fez-delivery"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "fez-delivery"
     ]
   },
   {
@@ -80293,6 +80297,9 @@
     ],
     "preferred": [
       "shipglobal-us"
+    ],
+    "asked": [
+      "shipglobal-us"
     ]
   },
   {
@@ -84035,7 +84042,8 @@
     ],
     "asked": [
       "australia-post",
-      "colis-prive"
+      "colis-prive",
+      "fez-delivery"
     ]
   },
   {

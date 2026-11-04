@@ -428,13 +428,21 @@ internal class ParcelWalk(
     /**
      * The window leaves the screen for `seconds` (the carrier's page in the browser over it, which [monitor] kept from
      * opening) and comes back, the questions' clock moved on as much; the test's own clock then stands still, which
-     * [advanceTo] moves on.
+     * [advanceTo] moves on. It returns once the window is in front again ([awaitInFront]).
      */
     fun awayAndBack(seconds: Long = 2) {
         compose.activityRule.scenario.moveToState(Lifecycle.State.CREATED)
         source.now = source.now.plusSeconds(seconds)
         compose.mainClock.autoAdvance = false
         compose.activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        awaitInFront()
+    }
+
+    /** The window back in front, the window the scenario put over it gone from the screen. */
+    fun awaitInFront() {
+        compose.waitUntil(LONG_MILLIS) { onUi { compose.activity.hasWindowFocus() } }
+        // The scenario's window closes with the system's animation, which a shot would catch.
+        instrumentation.uiAutomation.waitForIdle(IDLE_MILLIS, LONG_MILLIS)
     }
 
     /**
@@ -461,6 +469,9 @@ internal class ParcelWalk(
 
         /** How long the device tests wait for the window to show what was asked. */
         const val LONG_MILLIS = 5_000L
+
+        /** How long the screen's events stay quiet before a window's animation counts as over. */
+        const val IDLE_MILLIS = 500L
 
         /** How long a keyboard takes to start coming up, where the device shows one. */
         const val KEYBOARD_MILLIS = 3_000L

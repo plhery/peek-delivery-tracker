@@ -296,6 +296,7 @@ class ListFeedbackDeviceShots {
         compose.activityRule.scenario.moveToState(Lifecycle.State.CREATED)
         deliver(lamp)
         compose.activityRule.scenario.moveToState(Lifecycle.State.RESUMED)
+        walk.awaitInFront()
         compose.waitUntil(LONG_MILLIS) { cardKey(past, lamp.id) in keys() }
         compose.waitUntil(LONG_MILLIS) { lamp.id !in walk.onUi { walk.source.onTheWay.ids } }
         walk.settle()

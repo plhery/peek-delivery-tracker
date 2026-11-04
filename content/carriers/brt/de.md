@@ -29,7 +29,7 @@ Findet BRT nichts, ist die Nummer vielleicht vertippt oder die Sendung noch nich
 
 ## BRT Sendungsverfolgung: was die Statusmeldungen bedeuten
 
-BRTs Sendungsverfolgung auf vas.brt.it öffnet auf Italienisch und lässt sich auf Englisch, Französisch oder Deutsch umstellen. Peek liest die englische Fassung, in der die Spaltenköpfe italienisch bleiben: Data (Datum), Ora (Uhrzeit), Filiale (die BRT-Filiale, bei der du nachfragen kannst) und Evento (Ereignis). Die Meldungen unten stehen dort wörtlich so, und so zeigt sie auch Peeks Verlauf; nur jede Zustellung, auch die Abholung im BRT-fermopoint oder am Locker, heißt in Peek „Zugestellt“. Rechts steht die Stufe, die Peek dafür zeigt.
+BRTs Sendungsverfolgung auf vas.brt.it öffnet auf Italienisch und lässt sich auf Englisch, Französisch oder Deutsch umstellen. Peek liest die englische Fassung, in der die Spaltenköpfe italienisch bleiben: Data (Datum), Ora (Uhrzeit), Filiale (die BRT-Filiale, bei der du nachfragen kannst) und Evento (Ereignis). Die Meldungen unten stehen dort wörtlich so, und so zeigt sie auch Peeks Verlauf; nur jede Zustellung, auch die Abholung im BRT-fermopoint oder am Locker, heißt in Peek „Zugestellt“. Ist dein Peek auf Italienisch eingestellt, zeigt es stattdessen BRTs italienische Meldungen und eine Zustellung als „Consegnata“; hat ein Paket eine Meldung, die Peek nur auf Englisch kennt, etwa vom Locker, bleibt es auf Englisch. Rechts steht die Stufe, die Peek dafür zeigt.
 
 | BRT schreibt | Was es für dich heißt | In Peek |
 | --- | --- | --- |

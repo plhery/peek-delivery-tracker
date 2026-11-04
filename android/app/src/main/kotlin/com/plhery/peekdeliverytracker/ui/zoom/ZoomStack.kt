@@ -96,6 +96,7 @@ import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
+import kotlin.math.max
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
@@ -125,6 +126,12 @@ import kotlinx.coroutines.withContext
  * - Dragged down while its content is at its top, the page follows the finger and shrinks, the root showing behind
  *   it. Let go far or fast enough, it goes back into its source from there; otherwise it springs back on a spring of
  *   response 0.25 s, and a finger down on it meanwhile catches it where it is.
+ * - Carried sideways by a finger anywhere on it, to either side and wherever its content is scrolled, as the web's
+ *   page is, the page follows the finger along and, once under way, 0.7 of its way up or down. It shrinks about the
+ *   finger to 76 % over 0.9 of the window's width, its corners round to 36 dp and the dim behind it lifts. Let go
+ *   further along than 120 dp or 0.3 of the window's width, unless coming back, or flicked on, it goes back into its
+ *   source from there, carrying on the way it was thrown for a moment as it turns; otherwise it springs back as from a
+ *   drag down. Whatever the content takes first stays its own ([dragToClose]).
  * - The predictive back gesture shrinks it as Android's does for a container the size of the window: to 90 %, away
  *   from the edge it was swiped from, and up or down with the finger. Let go, it goes back into its source from there,
  *   and a cancel springs it back, which the next gesture takes over. A back press closes it.
@@ -365,13 +372,31 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     private var density = 1f
     private var surroundings: (() -> Surroundings)? = null
 
-    /** Where a gesture let the page go, which it flies back from. */
+    /**
+     * Where a gesture let the page go, which it flies back from, with its corners there where a drag sideways rounded
+     * them ([pageRadius]), and how much of the dim that drag had left ([light]).
+     */
     private var heldAt: Rect? by mutableStateOf(null)
+    private var heldRadius: Float? = null
+    private var heldLight = 1f
+
+    /** How fast the finger was going as it let the page go: down, or across where it carried the page off sideways. */
     private var releaseVelocity = 0f
+    private var releaseAcross = false
+
+    /**
+     * How far a page thrown sideways carries on past where its flight back has it, in pixels across, and how fast: it
+     * goes on the way the finger threw it for a moment as it turns into its card ([ZoomGeometry.closingCarry]).
+     */
+    private var carry: Float by mutableFloatStateOf(0f)
+    private var carryVelocity = 0f
 
     private var dragAnchor: Offset? by mutableStateOf(null)
     private var dragStart = Offset.Zero
     private var drag: Offset by mutableStateOf(Offset.Zero)
+
+    /** The side a drag carries the page off to, 1 right or -1 left; 0 for a drag down. */
+    private var dragSide: Int by mutableIntStateOf(0)
 
     /** The page springing back from a drag, which a finger catches. */
     private var dragSpring: Job? = null
@@ -396,6 +421,9 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     val atRest: Boolean get() = phase == Phase.Rest && !dragging && !backing
     val flying: Boolean get() = phase != Phase.Rest
     val hidesRoot: Boolean get() = id != null && atRest && progress >= 1f
+
+    /** Whether a drag carries the page off sideways. */
+    private val swiping: Boolean get() = dragAnchor != null && dragSide != 0
 
     /** Whether a drag may take the page now. */
     fun canDrag(): Boolean = id != null && atRest && !crossfade && !reduceMotion && backEnabled
@@ -469,8 +497,15 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
             resolve(id, around)
         }
         val held = heldAt
-        velocity = if (held != null && !crossfade) ZoomGeometry.closingVelocity(small(), held, releaseVelocity) else 0f
+        velocity = 0f
+        carryVelocity = 0f
+        if (held != null && !crossfade) {
+            val small = small()
+            velocity = ZoomGeometry.closingVelocity(small, held, releaseVelocity, releaseAcross)
+            if (releaseAcross) carryVelocity = ZoomGeometry.closingCarry(small, held, releaseVelocity, velocity, density)
+        }
         releaseVelocity = 0f
+        releaseAcross = false
         barHeld = true
         setOff()
         closingFor = 0f
@@ -547,6 +582,8 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         fallback = null
         heldAt = null
         crossfade = false
+        carry = 0f
+        carryVelocity = 0f
     }
 
     suspend fun animateTo(target: Float) {
@@ -558,9 +595,23 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
                 velocity = speed
             }
         }
-        // Reduce Motion's crossfade plays even with animations off, as iOS keeps it.
-        if (crossfade) withContext(KeepMotion) { flight() } else flight()
+        coroutineScope {
+            // A page thrown sideways carries on, and comes back to its flight's line, beside the flight; a flight turned
+            // round takes it on from where it is.
+            if (carry != 0f || carryVelocity != 0f) launch { carryOn() }
+            // Reduce Motion's crossfade plays even with animations off, as iOS keeps it.
+            if (crossfade) withContext(KeepMotion) { flight() } else flight()
+        }
         velocity = 0f
+    }
+
+    private suspend fun carryOn() {
+        animate(carry, 0f, carryVelocity, FLIGHT) { value, speed ->
+            carry = value
+            carryVelocity = speed
+        }
+        carry = 0f
+        carryVelocity = 0f
     }
 
     /** The source's frame: followed while it is laid out, kept as last seen once it isn't. */
@@ -573,7 +624,13 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     /** The page's frame at the end of its flight: where a gesture holds it, or the window. */
     private fun large(): Rect {
         heldAt?.let { return it }
-        dragAnchor?.let { return ZoomGeometry.dragFrame(bounds, it, drag) }
+        dragAnchor?.let { anchor ->
+            return if (dragSide != 0) {
+                ZoomGeometry.swipeFrame(bounds, anchor, drag, dragSide, density)
+            } else {
+                ZoomGeometry.dragFrame(bounds, anchor, drag)
+            }
+        }
         if (backing) {
             return ZoomGeometry.backFrame(
                 bounds, backProgress, backFromLeft, backDeltaY,
@@ -583,10 +640,31 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         return bounds
     }
 
-    fun container(): Rect = if (crossfade || id == null) bounds else ZoomGeometry.frame(small(), large(), progress)
+    /** The container: on its flight's line from its source to where it goes, and as far aside as a throw carries it. */
+    fun container(): Rect = if (crossfade || id == null) bounds else ZoomGeometry.frame(small(), large(), progress).translate(carry, 0f)
 
-    /** The container's corners: the source's, each growing to the display's own as the page comes. */
-    fun corners(): FlightCorners = if (atRest || crossfade) FlightCorners.Square else sourceCorners.toward(displayRadius, progress)
+    /** The container's corners: the source's, each growing to the page's own ([pageRadius]) as the page comes. */
+    fun corners(): FlightCorners = if (atRest || crossfade) FlightCorners.Square else sourceCorners.toward(pageRadius(), progress)
+
+    /**
+     * The page's corners at the end of its flight: the display's own, or as a drag sideways rounds them, or rounded them
+     * as it let the page go.
+     */
+    private fun pageRadius(): Float = when {
+        heldAt != null -> heldRadius ?: displayRadius
+        swiping -> ZoomGeometry.swipeRadius(pull(), density)
+        else -> displayRadius
+    }
+
+    /** How much of the dim shows behind the page: less as a drag carries it off sideways, and as it let it go. */
+    private fun light(): Float = when {
+        heldAt != null -> heldLight
+        swiping -> ZoomGeometry.swipeLight(ZoomGeometry.swipeShare(pull(), bounds.width))
+        else -> 1f
+    }
+
+    /** How far a drag sideways has carried the page along. */
+    private fun pull(): Float = ZoomGeometry.swipePull(drag, dragSide)
 
     /** How far the page has come over the root. Under Reduce Motion the root stays as it is. */
     fun behind(): Float = if (id == null || crossfade) 0f else progress
@@ -634,7 +712,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     fun drawBehindPage(scope: DrawScope, shadow: ShadowPaint) = with(scope) {
         if (crossfade || id == null) return@with
-        drawRect(Color.Black, alpha = ZoomGeometry.dim(behind()))
+        drawRect(Color.Black, alpha = ZoomGeometry.dim(behind()) * light())
         if (atRest) return@with
         val opacity = ZoomGeometry.SHADOW_OPACITY * progress * containerOpacity()
         if (opacity <= 0f) return@with
@@ -677,11 +755,13 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
         scale(scale, scale, pivot = Offset.Zero) { drawLayer(face) }
     }
 
-    fun startDrag(at: Offset) {
+    /** A drag takes the page where the finger is, down, or off to `side` (1 right, -1 left). */
+    fun startDrag(at: Offset, side: Int = 0) {
         surroundings?.invoke()?.let(::takeWindow)
         dragAnchor = at
         dragStart = at
         drag = Offset.Zero
+        dragSide = side
     }
 
     fun dragTo(position: Offset) {
@@ -690,17 +770,32 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
 
     /** The finger has let go: the page goes back into its source from where it is, or springs back. */
     fun release(velocity: Velocity, scope: CoroutineScope, onBack: () -> Unit) {
-        val anchor = dragAnchor ?: return
-        if (ZoomGeometry.dismisses(drag.y, velocity.y, bounds.height)) {
-            heldAt = ZoomGeometry.dragFrame(bounds, anchor, drag)
-            releaseVelocity = velocity.y
+        if (!dragging) return
+        val side = dragSide
+        val closes = if (side != 0) {
+            ZoomGeometry.swipeDismisses(pull(), velocity.x * side, bounds.width, density)
+        } else {
+            ZoomGeometry.dismisses(drag.y, velocity.y, bounds.height)
+        }
+        if (closes) {
+            hold()
+            releaseVelocity = if (side != 0) velocity.x else velocity.y
+            releaseAcross = side != 0
             dragAnchor = null
             drag = Offset.Zero
+            dragSide = 0
             beginClose()
             onBack()
         } else {
             springBack(scope)
         }
+    }
+
+    /** Keeps where the gesture holds the page, its corners and its dim, for the flight back to start from. */
+    private fun hold() {
+        heldRadius = if (swiping) ZoomGeometry.swipeRadius(pull(), density) else null
+        heldLight = light()
+        heldAt = large()
     }
 
     /** The page springs back to the window: let go short of closing, or the system took the drag back. */
@@ -715,6 +810,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
                     dragSpring = null
                     dragAnchor = null
                     drag = Offset.Zero
+                    dragSide = 0
                 }
             }
         }
@@ -756,7 +852,7 @@ internal class ZoomFlight(private val transition: ZoomTransition, initial: Any?)
     /** The gesture has let go: the page goes back into its source from where the gesture held it. */
     fun letBackGo() {
         if (!backing) return
-        heldAt = large()
+        hold()
         backing = false
         backProgress = 0f
         backDeltaY = 0f
@@ -835,7 +931,8 @@ internal class ShadowPaint(density: Density) {
 
 /**
  * The page's content, at its top and dragged further down by a finger, hands the drag to the page ([dragToClose]); a
- * wheel or a key scrolling it there doesn't. While the page has the drag, the content scrolls no more, nor flings.
+ * wheel or a key scrolling it there doesn't, nor does a row scrolling sideways at its end. While the page has a drag,
+ * down or sideways, the content scrolls no more, nor flings.
  */
 private class DragConnection(private val flight: ZoomFlight) : NestedScrollConnection {
     override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset = if (flight.dragging) available else Offset.Zero
@@ -851,9 +948,13 @@ private class DragConnection(private val flight: ZoomFlight) : NestedScrollConne
 }
 
 /**
- * The page's drag down to close it. The page sees the finger before its content does and, once the drag is the page's,
- * keeps it from the content. Content that doesn't scroll lets a drag down past the touch slop take the page; content
- * that scrolls hands it over at its top ([DragConnection]). A drag the system cancels springs back, however far it went.
+ * The page's drags to close it: down, or sideways. The page sees the finger before its content does and, once the drag
+ * is the page's, keeps it from the content. Content that doesn't scroll lets a drag down past the touch slop take the
+ * page; content that scrolls hands it over at its top ([DragConnection]). A finger that goes past the touch slop more
+ * than 1.25 times as far across as up or down takes the page sideways, wherever the content is scrolled
+ * ([ZoomGeometry.swipeSide]); one that went past it otherwise doesn't later. Whatever the content takes first stays its
+ * own: a scroll up or down, a row that scrolls sideways (at its ends too), a switch's knob, a text's selection, a map
+ * that turns. A drag the system cancels springs back, however far it went.
  */
 private suspend fun PointerInputScope.dragToClose(flight: ZoomFlight, scope: CoroutineScope, onBack: () -> Unit) {
     awaitEachGesture {
@@ -864,6 +965,8 @@ private suspend fun PointerInputScope.dragToClose(flight: ZoomFlight, scope: Cor
         val tracker = VelocityTracker()
         tracker.addPosition(down.uptimeMillis, down.position)
         var released = false
+        // Whether the finger has gone past the touch slop, which is when it takes the page sideways or never does.
+        var decided = false
         try {
             while (true) {
                 val change = awaitPointerEvent(PointerEventPass.Initial).changes.firstOrNull { it.id == down.id } ?: break
@@ -881,12 +984,20 @@ private suspend fun PointerInputScope.dragToClose(flight: ZoomFlight, scope: Cor
                     break
                 }
                 val after = awaitPointerEvent(PointerEventPass.Final).changes.firstOrNull { it.id == down.id } ?: break
-                if (!flight.dragging && !after.isConsumed && flight.canDrag()) {
+                if (!flight.dragging) {
                     val moved = after.position - down.position
-                    if (moved.y > viewConfiguration.touchSlop && moved.y > abs(moved.x)) {
-                        flight.startDrag(after.position)
-                        after.consume()
+                    val slop = viewConfiguration.touchSlop
+                    val side = if (decided) 0 else ZoomGeometry.swipeSide(moved, slop)
+                    if (!after.isConsumed && flight.canDrag()) {
+                        if (moved.y > slop && moved.y > abs(moved.x)) {
+                            flight.startDrag(after.position)
+                            after.consume()
+                        } else if (side != 0) {
+                            flight.startDrag(after.position, side)
+                            after.consume()
+                        }
                     }
+                    if (max(abs(moved.x), abs(moved.y)) > slop) decided = true
                 }
             }
         } finally {

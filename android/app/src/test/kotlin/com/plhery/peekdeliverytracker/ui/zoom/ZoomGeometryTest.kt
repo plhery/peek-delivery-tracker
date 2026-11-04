@@ -161,6 +161,111 @@ class ZoomGeometryTest {
     }
 
     @Test
+    fun aFingerTakesThePageSidewaysPastTheSlopGoingMoreThan125TimesAsFarAcross() {
+        assertEquals(0, ZoomGeometry.swipeSide(Offset(8f, 0f), slop = 8f))
+        assertEquals(1, ZoomGeometry.swipeSide(Offset(9f, 0f), slop = 8f))
+        assertEquals(-1, ZoomGeometry.swipeSide(Offset(-9f, 2f), slop = 8f))
+        // As far across as 1.25 times up or down is too steep; a little further across isn't.
+        assertEquals(0, ZoomGeometry.swipeSide(Offset(10f, -8f), slop = 8f))
+        assertEquals(1, ZoomGeometry.swipeSide(Offset(10.1f, -8f), slop = 8f))
+        assertEquals(0, ZoomGeometry.swipeSide(Offset(0f, 20f), slop = 8f))
+    }
+
+    @Test
+    fun aPageCarriedSidewaysFollowsTheFingerAndShrinksAboutIt() {
+        val finger = Offset(220f, 500f)
+        // 100 along, it has come 100 / (0.9 × 440) of its way, 1 - 0.24 of that its size.
+        val scale = 1f - 0.24f * 100f / 396f
+        assertEquals(scale, ZoomGeometry.swipeScale(100f, 440f), 0.0001f)
+        val right = ZoomGeometry.swipeFrame(window, finger, Offset(100f, 0f), side = 1, density = 1f)
+        assertEquals(440f * scale, right.width, 0.01f)
+        assertEquals(956f * scale, right.height, 0.01f)
+        // The point under the finger stays under it.
+        assertEquals(320f, right.left + (finger.x - window.left) * scale, 0.01f)
+        assertEquals(500f, right.top + (finger.y - window.top) * scale, 0.01f)
+        // To the left, the same the other way.
+        val left = ZoomGeometry.swipeFrame(window, finger, Offset(-100f, 0f), side = -1, density = 1f)
+        assertEquals(440f - right.right, left.left, 0.01f)
+        assertEquals(right.top, left.top, 0.01f)
+        // Never back past where the finger took it.
+        assertRect(window, ZoomGeometry.swipeFrame(window, finger, Offset(-50f, 30f), side = 1, density = 1f))
+        // All its way, 0.9 of the width along, it is 76 % of its size, and no smaller further on.
+        assertEquals(0.76f, ZoomGeometry.swipeScale(396f, 440f), 0.0001f)
+        assertEquals(0.76f, ZoomGeometry.swipeScale(1_000f, 440f), 0.0001f)
+    }
+
+    @Test
+    fun aPageCarriedSidewaysFollowsTheFingerUpAndDownOnceUnderWay() {
+        val finger = Offset(220f, 500f)
+        fun moved(along: Float, down: Float, density: Float = 1f): Float {
+            val frame = ZoomGeometry.swipeFrame(window, finger, Offset(along, down), side = 1, density = density)
+            return frame.top + (finger.y - window.top) * ZoomGeometry.swipeScale(along, 440f) - finger.y
+        }
+        // 0.7 of the finger's way once 90 dp along, as much less before.
+        assertEquals(0f, moved(0f, 40f), 0.01f)
+        assertEquals(14f, moved(45f, 40f), 0.01f)
+        assertEquals(28f, moved(90f, 40f), 0.01f)
+        assertEquals(-28f, moved(200f, -40f), 0.01f)
+        // At three pixels to the dp, 90 dp is 270 pixels.
+        assertEquals(14f, moved(135f, 40f, density = 3f), 0.01f)
+    }
+
+    @Test
+    fun aPageCarriedSidewaysRoundsItsCornersAndLiftsTheDim() {
+        assertEquals(0f, ZoomGeometry.swipeRadius(0f, 1f), 0f)
+        assertEquals(20f, ZoomGeometry.swipeRadius(50f, 1f), 0.0001f)
+        assertEquals(36f, ZoomGeometry.swipeRadius(90f, 1f), 0.0001f)
+        assertEquals(36f, ZoomGeometry.swipeRadius(400f, 1f), 0.0001f)
+        assertEquals(108f, ZoomGeometry.swipeRadius(400f, 3f), 0.0001f)
+        assertEquals(1f, ZoomGeometry.swipeLight(0f), 0f)
+        assertEquals(0.725f, ZoomGeometry.swipeLight(0.5f), 0.0001f)
+        assertEquals(0.45f, ZoomGeometry.swipeLight(1f), 0.0001f)
+        assertEquals(0.5f, ZoomGeometry.swipeShare(198f, 440f), 0.0001f)
+    }
+
+    @Test
+    fun aPageCarriedSidewaysClosesFarEnoughOrFlicked() {
+        // 120 dp in a window 440 wide, whose 0.3 is 132.
+        assertFalse(ZoomGeometry.swipeDismisses(119f, 0f, 440f, 1f))
+        assertTrue(ZoomGeometry.swipeDismisses(121f, 0f, 440f, 1f))
+        // Unless it is coming back faster than 150 a second.
+        assertTrue(ZoomGeometry.swipeDismisses(200f, -149f, 440f, 1f))
+        assertFalse(ZoomGeometry.swipeDismisses(200f, -151f, 440f, 1f))
+        // 0.3 of a window 390 wide, 117, is less than 120.
+        assertTrue(ZoomGeometry.swipeDismisses(118f, 0f, 390f, 1f))
+        // Flicked on faster than 550 a second, once 18 along.
+        assertTrue(ZoomGeometry.swipeDismisses(19f, 551f, 440f, 1f))
+        assertFalse(ZoomGeometry.swipeDismisses(19f, 549f, 440f, 1f))
+        assertFalse(ZoomGeometry.swipeDismisses(18f, 2_000f, 440f, 1f))
+        // In dp: at two pixels to the dp, 0.3 of the width (234 of 780) and 1100 pixels a second.
+        assertFalse(ZoomGeometry.swipeDismisses(233f, 0f, 780f, 2f))
+        assertTrue(ZoomGeometry.swipeDismisses(235f, 0f, 780f, 2f))
+        assertFalse(ZoomGeometry.swipeDismisses(60f, 1_000f, 780f, 2f))
+        assertTrue(ZoomGeometry.swipeDismisses(60f, 1_200f, 780f, 2f))
+    }
+
+    @Test
+    fun aPageLetGoSidewaysKeepsTheFingersSpeedAcrossOnItsWayBack() {
+        // Carried off to the right, its middle 110 right of its card's.
+        val held = Rect(140f, 60f, 520f, 885f)
+        // The finger going back toward the card: the flight takes its speed, and nothing is left to carry on.
+        val back = ZoomGeometry.closingVelocity(card, held, -550f, across = true)
+        assertEquals(-5f, back, 0.001f)
+        assertEquals(0f, ZoomGeometry.closingCarry(card, held, -550f, back, 1f), 0.01f)
+        // Going on away from it: the flight starts from rest, and the page carries on with all the finger's speed.
+        val away = ZoomGeometry.closingVelocity(card, held, 600f, across = true)
+        assertEquals(0f, away, 0f)
+        assertEquals(600f, ZoomGeometry.closingCarry(card, held, 600f, away, 1f), 0.01f)
+        // Faster toward it than 12 a second takes it: the rest is carried, up to 3000 dp a second.
+        val fast = ZoomGeometry.closingVelocity(card, held, -2_000f, across = true)
+        assertEquals(-12f, fast, 0f)
+        assertEquals(-680f, ZoomGeometry.closingCarry(card, held, -2_000f, fast, 1f), 0.01f)
+        assertEquals(9_000f, ZoomGeometry.closingCarry(card, held, 20_000f, 0f, 3f), 0.01f)
+        // Down, the top keeps its way as before.
+        assertEquals(-5f, ZoomGeometry.closingVelocity(card, Rect(40f, 300f, 400f, 1082f), -600f), 0.001f)
+    }
+
+    @Test
     fun thePredictiveBackShrinksThePageAwayFromTheEdge() {
         val gap = 8f
         val lift = 24f

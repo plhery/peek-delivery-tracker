@@ -73,6 +73,44 @@ internal object ZoomGeometry {
     /** Let go past a quarter of the window's height, or flung there, a drag closes the page. */
     const val DISMISS_SHARE = 0.25f
 
+    /**
+     * A finger past the touch slop takes the page sideways going more than this many times as far across as up or
+     * down.
+     */
+    const val SWIPE_SLANT = 1.25f
+
+    /**
+     * Carried off sideways, as the web's page is, the page loses this share of its size over this share of the
+     * window's width ([swipeScale]).
+     */
+    const val SWIPE_SHRINK = 0.24f
+    const val SWIPE_SPAN = 0.9f
+
+    /** Carried off sideways, the page follows the finger up and down this much, once it has come this many dp along. */
+    const val SWIPE_ACROSS = 0.7f
+    const val SWIPE_ACROSS_PULL = 90f
+
+    /** The corners of a page carried off sideways round as it comes along, by a dp for each 2.5, to 36 dp at most. */
+    const val SWIPE_RADIUS = 36f
+    const val SWIPE_RADIUS_PULL = 2.5f
+
+    /** The dim behind a page carried off sideways loses this share of itself as the page comes all its way. */
+    const val SWIPE_LIGHTEN = 0.55f
+
+    /**
+     * Let go further along than 120 dp or 0.3 of the window's width, whichever is less, unless coming back faster than
+     * 150 dp a second, or flicked on faster than 550 dp a second once 18 dp along, a page carried off sideways closes
+     * ([swipeDismisses]).
+     */
+    const val SWIPE_FAR = 120f
+    const val SWIPE_FAR_SHARE = 0.3f
+    const val SWIPE_RETURN_SPEED = 150f
+    const val SWIPE_FLICK_SPEED = 550f
+    const val SWIPE_FLICK_PULL = 18f
+
+    /** A page thrown sideways faster than this many dp a second carries on no further than it would at this speed. */
+    const val SWIPE_MAX_SPEED = 3000f
+
     /** A card of the list, in dp, for a page whose card can't be seen: the list's column less its margins. */
     const val FALLBACK_WIDTH = 628f
     const val FALLBACK_HEIGHT = 100f
@@ -179,14 +217,89 @@ internal object ZoomGeometry {
         distance > 0f && distance + velocity * PROJECTION > height * DISMISS_SHARE
 
     /**
-     * How fast the flight back starts, in progress a second, for a page let go moving down at `velocity`: the
-     * container's top keeps the finger's speed toward its card, and never sets off away from it.
+     * The side a finger `moved` from where it went down carries the page off to, 1 right or -1 left: once past the
+     * touch `slop`, going more than 1.25 times as far across as up or down. 0 otherwise.
      */
-    fun closingVelocity(small: Rect, large: Rect, velocity: Float): Float {
-        val span = large.top - small.top
+    fun swipeSide(moved: Offset, slop: Float): Int =
+        if (abs(moved.x) > slop && abs(moved.x) > SWIPE_SLANT * abs(moved.y)) sign(moved.x).toInt() else 0
+
+    /**
+     * How far a page carried off to `side` has come along, `translation` from where the finger took it: never back
+     * past there.
+     */
+    fun swipePull(translation: Offset, side: Int): Float = max(0f, translation.x * side)
+
+    /** How much of its way a page carried off sideways `pull` pixels has come, in a window `width` wide. */
+    fun swipeShare(pull: Float, width: Float): Float = if (width <= 0f) 0f else min(1f, pull / (SWIPE_SPAN * width))
+
+    /** The page's scale carried off sideways `pull` pixels in a window `width` wide: 76 % once 0.9 of the width along. */
+    fun swipeScale(pull: Float, width: Float): Float = 1f - SWIPE_SHRINK * swipeShare(pull, width)
+
+    /**
+     * The page carried off to `side` (1 right, -1 left) by `translation` from where the finger took it, `anchor`, in
+     * pixels, `density` to the dp. Along, it follows the finger, never back past where it took it; up and down, it
+     * follows 0.7 of the finger's way once it has come 90 dp along, less until then; and it shrinks about the finger,
+     * which stays on the same point of the page.
+     */
+    fun swipeFrame(page: Rect, anchor: Offset, translation: Offset, side: Int, density: Float): Rect {
+        val pull = swipePull(translation, side)
+        val scale = swipeScale(pull, page.width)
+        val dx = pull * side
+        val dy = translation.y * SWIPE_ACROSS * min(1f, pull / (SWIPE_ACROSS_PULL * density))
+        return Rect(
+            anchor.x + (page.left - anchor.x) * scale + dx,
+            anchor.y + (page.top - anchor.y) * scale + dy,
+            anchor.x + (page.right - anchor.x) * scale + dx,
+            anchor.y + (page.bottom - anchor.y) * scale + dy,
+        )
+    }
+
+    /**
+     * The corners of a page carried off sideways `pull` pixels, in pixels: square as it sets off, 36 dp round 90 dp
+     * along.
+     */
+    fun swipeRadius(pull: Float, density: Float): Float = min(SWIPE_RADIUS * density, max(0f, pull) / SWIPE_RADIUS_PULL)
+
+    /** How much of the dim stays behind a page carried `share` of its way off sideways: 45 % of it all the way. */
+    fun swipeLight(share: Float): Float = 1f - SWIPE_LIGHTEN * share.coerceIn(0f, 1f)
+
+    /**
+     * Whether a page carried off sideways `pull` pixels and let go moving on at `along` pixels a second (back the way it
+     * came below zero), in a window `width` wide, closes: let go further along than 120 dp or 0.3 of the width,
+     * unless coming back faster than 150 dp a second, or flicked on faster than 550 dp a second once 18 dp along.
+     * `density` pixels to the dp.
+     */
+    fun swipeDismisses(pull: Float, along: Float, width: Float, density: Float): Boolean {
+        val far = min(SWIPE_FAR * density, SWIPE_FAR_SHARE * width)
+        if (pull > far) return along > -SWIPE_RETURN_SPEED * density
+        return along > SWIPE_FLICK_SPEED * density && pull > SWIPE_FLICK_PULL * density
+    }
+
+    /**
+     * How fast the flight back starts, in progress a second, for a page let go moving at `velocity` pixels a second:
+     * down, where the container's top keeps the finger's speed toward its card, or across (`across`), where its
+     * middle does. It never sets off away from its card.
+     */
+    fun closingVelocity(small: Rect, large: Rect, velocity: Float, across: Boolean = false): Float {
+        val span = closingSpan(small, large, across)
         if (abs(span) < 1f) return 0f
         return (velocity / span).coerceIn(-MAX_CLOSING_RATE, 0f)
     }
+
+    /**
+     * How fast a page let go moving across at `velocity` pixels a second carries on sideways past where its flight back
+     * has it, the flight starting at `rate` progress a second ([closingVelocity]): the finger's speed that the flight
+     * leaves out, away from the card most often, and never more than 3000 dp a second. Its middle so keeps the
+     * finger's speed as it turns into its card. `density` pixels to the dp.
+     */
+    fun closingCarry(small: Rect, large: Rect, velocity: Float, rate: Float, density: Float): Float {
+        val most = SWIPE_MAX_SPEED * density
+        return (velocity - rate * closingSpan(small, large, across = true)).coerceIn(-most, most)
+    }
+
+    /** How far the container's top, or its middle across, goes from its card to `large` over a whole flight. */
+    private fun closingSpan(small: Rect, large: Rect, across: Boolean): Float =
+        if (across) large.center.x - small.center.x else large.top - small.top
 
     private const val MAX_CLOSING_RATE = 12f
 

@@ -30,8 +30,9 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * A parcel's page zooming out of its card on the iPhone the captures were taken on (440 × 956 points at three pixels
  * to the point), in the demo, light and dark: three frames into the flight of New trainers' page out of its Next up card,
- * the page a quarter of the way out of it over the receding list with the card's picture half gone, and the page
- * dragged 200 points down, shrinking about the finger.
+ * the page a quarter of the way out of it over the receding list with the card's picture half gone, the page
+ * dragged 200 points down, shrinking about the finger, and the page carried 200 points to the right from the middle of
+ * the window, shrinking about the finger with its corners round and the list's dim lifting.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -115,6 +116,20 @@ class ParcelZoomScreenshotTest {
         compose.screenshot("zoom_drag_${theme(dark)}")
     }
 
+    private fun swiped(dark: Boolean) {
+        show(dark)
+        open()
+        advance(1_000)
+        // From the middle of the window, the finger still on it.
+        compose.onRoot().performTouchInput {
+            down(center)
+            repeat(20) { moveBy(Offset(200f * density / 20, 0f), delayMillis = 16) }
+            moveBy(Offset.Zero)
+        }
+        advance(2 * FRAME)
+        compose.screenshot("zoom_swipe_${theme(dark)}")
+    }
+
     private fun theme(dark: Boolean) = if (dark) "dark" else "light"
 
     @Test
@@ -128,6 +143,12 @@ class ParcelZoomScreenshotTest {
 
     @Test
     fun thePageDraggedDownInDark() = dragged(dark = true)
+
+    @Test
+    fun thePageCarriedSideways() = swiped(dark = false)
+
+    @Test
+    fun thePageCarriedSidewaysInDark() = swiped(dark = true)
 
     private companion object {
         const val FRAME = 16L

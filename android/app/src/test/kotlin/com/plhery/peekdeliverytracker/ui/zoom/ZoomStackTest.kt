@@ -2,15 +2,19 @@ package com.plhery.peekdeliverytracker.ui.zoom
 
 import androidx.activity.BackEventCompat
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.text.BasicText
@@ -73,6 +77,7 @@ class ZoomStackTest {
     private var sourceId by mutableStateOf(SOURCE)
     private var sourceTop: Dp by mutableStateOf(120.dp)
     private val list = LazyListState()
+    private val row = ScrollState(0)
     private val rootFocus = FocusRequester()
     private var rootFocused = false
     private var pageFocused = false
@@ -81,9 +86,17 @@ class ZoomStackTest {
 
     /**
      * The root, with the page on top from the first frame (`initial`), or opened once the root is drawn (`open`); with
-     * `bar`, the page's bar: a black square for its ‹ and one for its •••, on the window's top corners.
+     * `bar`, the page's bar: a black square for its ‹ and one for its •••, on the window's top corners. With `scroller`,
+     * the list's first row scrolls sideways, 2000 dp wide; `backEnabled` is the stack's.
      */
-    private fun show(reduceMotion: Boolean = false, initial: String? = null, open: Boolean = initial == null, bar: Boolean = false) {
+    private fun show(
+        reduceMotion: Boolean = false,
+        initial: String? = null,
+        open: Boolean = initial == null,
+        bar: Boolean = false,
+        scroller: Boolean = false,
+        backEnabled: Boolean = true,
+    ) {
         top = initial
         compose.setContent {
             PeekTheme(dark = false, highContrast = false, reduceMotion = reduceMotion, reduceTransparency = false, carrierIdentities = null) {
@@ -116,17 +129,30 @@ class ZoomStackTest {
                             Column(Modifier.fillMaxSize()) {
                                 Box(Modifier.onFocusChanged { pageFocused = it.isFocused }.focusable().clickable { taps++ }.size(40.dp).testTag(PAGE_BUTTON))
                                 LazyColumn(Modifier.fillMaxSize().testTag(PAGE), state = list) {
-                                    items(40) { row -> BasicText("Row $row", Modifier.height(80.dp)) }
+                                    items(40) { index ->
+                                        if (scroller && index == 0) {
+                                            Row(Modifier.height(80.dp).horizontalScroll(row)) {
+                                                repeat(20) { BasicText("Cell $it", Modifier.width(100.dp)) }
+                                            }
+                                        } else {
+                                            BasicText("Row $index", Modifier.height(80.dp))
+                                        }
+                                    }
                                 }
                             }
                         }
                     },
                     bar = if (!bar) null else { { BarSquares(transition) } },
+                    backEnabled = backEnabled,
                 )
             }
         }
         compose.waitForIdle()
-        if (!open) return
+        if (open) openPage()
+    }
+
+    /** Opens the page and lets it land. */
+    private fun openPage() {
         compose.runOnUiThread { top = SOURCE }
         compose.mainClock.advanceTimeBy(1_000)
         compose.waitForIdle()
@@ -277,6 +303,220 @@ class ZoomStackTest {
         compose.mainClock.advanceTimeBy(1_000)
         assertEquals(390f, width(), 0.5f)
         assertEquals(SOURCE, top)
+    }
+
+    // Sideways. The touch slop is 32 pixels, and the window 780 wide: 0.3 of it, 234, is short of 120 dp.
+
+    /** A finger down in the middle of the window, taking the page 50 pixels to `side`, then carrying it `pull` further, slowly. */
+    private fun carry(side: Float, pull: Float) = compose.onRoot().performTouchInput {
+        down(center)
+        moveBy(Offset(50f * side, 0f), delayMillis = 100)
+        moveBy(Offset(pull * side, 0f), delayMillis = 400)
+    }
+
+    /** The page's scale carried `pull` pixels along. */
+    private fun carriedScale(pull: Float) = 1f - 0.24f * pull / (0.9f * 780f)
+
+    @Test
+    fun aPageCarriedSidewaysFollowsTheFingerWhereverItsContentIsScrolledAndGoesFarEnoughBackIntoItsSource() {
+        show()
+        compose.onNodeWithTag(PAGE).performScrollToIndex(5)
+        compose.waitForIdle()
+        val before = scrolled()
+        carry(side = 1f, pull = 200f)
+        compose.waitForIdle()
+        // Shrunk about the finger, which took it at 440 by 844 pixels, the content where it was. The list is 40 dp down
+        // the page.
+        val scale = carriedScale(200f)
+        val held = page()
+        assertEquals(390f * scale, width(), 0.5f)
+        assertEquals((440f - 440f * scale + 200f) / 2f, held.left.value, 0.5f)
+        assertEquals((844f - 844f * scale + 80f * scale) / 2f, held.top.value, 0.5f)
+        assertEquals(before, scrolled())
+
+        // On past 234 pixels and let go slowly, it goes back into its source.
+        compose.onRoot().performTouchInput {
+            moveBy(Offset(60f, 0f), delayMillis = 400)
+            up()
+        }
+        compose.waitForIdle()
+        assertEquals(null, top)
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(PAGE).assertDoesNotExist()
+    }
+
+    @Test
+    fun aPageCarriedSidewaysShortOfTheWaySpringsBackAndAFingerCatchesIt() {
+        show()
+        carry(side = -1f, pull = 150f)
+        compose.waitForIdle()
+        // To the left, its right edge from where the finger took it, 340 pixels in.
+        val scale = carriedScale(150f)
+        assertEquals(390f * scale, width(), 0.5f)
+        assertEquals((340f + 440f * scale - 150f) / 2f, page().right.value, 0.5f)
+        compose.mainClock.autoAdvance = false
+        val root = compose.onRoot()
+        root.performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(64)
+
+        // Down on it as it springs back, the finger holds it where it is.
+        root.performTouchInput { down(center) }
+        val caught = width()
+        assertTrue("Caught at $caught", caught > 390f * scale + 1f && caught < 389f)
+        compose.mainClock.advanceTimeBy(500)
+        assertEquals(caught, width(), 0.5f)
+        root.performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(390f, width(), 0.5f)
+        assertEquals(0f, page().left.value, 0.5f)
+        assertEquals(SOURCE, top)
+    }
+
+    @Test
+    fun aPageFlickedSidewaysGoesBackIntoItsSourceEitherWay() {
+        show()
+        for (side in listOf(1f, -1f)) {
+            // 30 pixels a frame, about 940 dp a second, and 120 pixels along as it lets go.
+            compose.onRoot().performTouchInput {
+                down(center)
+                repeat(5) { moveBy(Offset(30f * side, 0f), delayMillis = 16) }
+                up()
+            }
+            compose.waitForIdle()
+            assertEquals("Flicked to $side", null, top)
+            compose.mainClock.advanceTimeBy(1_000)
+            compose.onNodeWithTag(PAGE).assertDoesNotExist()
+            openPage()
+        }
+    }
+
+    @Test
+    fun aPageFlickedSidewaysCarriesOnThatWayAsItTurnsIntoItsSource() {
+        show()
+        compose.mainClock.autoAdvance = false
+        // 40 pixels a frame to the left, taken at 350 pixels and 160 along as it lets go.
+        compose.onRoot().performTouchInput {
+            down(center)
+            repeat(5) { moveBy(Offset(-40f, 0f), delayMillis = 16) }
+            up()
+        }
+        val held = (350f - 350f * carriedScale(160f) - 160f) / 2f
+        var furthest = Float.MAX_VALUE
+        repeat(6) {
+            compose.mainClock.advanceTimeByFrame()
+            furthest = minOf(furthest, page().left.value)
+        }
+        assertEquals(null, top)
+        // Its card is to its right; it goes on left first.
+        assertTrue("Furthest $furthest from $held", furthest < held - 3f)
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.onNodeWithTag(PAGE).assertDoesNotExist()
+    }
+
+    @Test
+    fun aDragSidewaysTheSystemCancelsSpringsBackHoweverFarItWent() {
+        show()
+        compose.onRoot().performTouchInput {
+            down(center)
+            moveBy(Offset(50f, 0f), delayMillis = 100)
+            moveBy(Offset(400f, 0f), delayMillis = 400)
+            cancel()
+        }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(SOURCE, top)
+        assertEquals(390f, width(), 0.5f)
+        assertEquals(0f, page().left.value, 0.5f)
+    }
+
+    @Test
+    fun aRowThatScrollsSidewaysKeepsTheFingerAtItsEndsToo() {
+        show(scroller = true)
+        val root = compose.onRoot()
+        // On the row, the list's first, 40 dp down the page: dragged right at its start, it has nowhere to go, and the
+        // page stays.
+        val onRow = Offset(390f, 160f)
+        root.performTouchInput {
+            down(onRow)
+            moveBy(Offset(50f, 0f), delayMillis = 100)
+            moveBy(Offset(300f, 0f), delayMillis = 400)
+        }
+        compose.waitForIdle()
+        assertEquals(390f, width(), 0.5f)
+        assertEquals(0f, page().left.value, 0.5f)
+        root.performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(SOURCE, top)
+        assertEquals(0, row.value)
+
+        // Dragged left, it scrolls, and the page stays.
+        root.performTouchInput {
+            down(onRow)
+            moveBy(Offset(-50f, 0f), delayMillis = 100)
+            moveBy(Offset(-300f, 0f), delayMillis = 400)
+        }
+        compose.waitForIdle()
+        assertTrue("Scrolled ${row.value}", row.value > 250)
+        assertEquals(390f, width(), 0.5f)
+        root.performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(SOURCE, top)
+    }
+
+    @Test
+    fun aFingerPastTheSlopUpOrDownDoesntTakeThePageSidewaysLater() {
+        show()
+        // Up from the button over the page's top, which doesn't scroll, past the slop, then across, and on.
+        compose.onRoot().performTouchInput {
+            down(Offset(40f, 60f))
+            moveBy(Offset(0f, -40f), delayMillis = 100)
+            moveBy(Offset(200f, 0f), delayMillis = 400)
+            moveBy(Offset(200f, 0f), delayMillis = 400)
+        }
+        compose.waitForIdle()
+        assertEquals(390f, width(), 0.5f)
+        compose.onRoot().performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(SOURCE, top)
+    }
+
+    /** A drag sideways far and slow, and let go: the page stays where it is, open. */
+    private fun assertStaysUnderADragSideways() {
+        carry(side = 1f, pull = 400f)
+        compose.waitForIdle()
+        assertEquals(390f, width(), 0.5f)
+        assertEquals(0f, page().left.value, 0.5f)
+        compose.onRoot().performTouchInput { up() }
+        compose.mainClock.advanceTimeBy(1_000)
+        assertEquals(SOURCE, top)
+        assertEquals(390f, width(), 0.5f)
+    }
+
+    @Test
+    fun underReduceMotionThePageStaysUnderADragSideways() {
+        show(reduceMotion = true)
+        assertStaysUnderADragSideways()
+    }
+
+    @Test
+    fun aPageWithoutItsBackStaysUnderADragSideways() {
+        show(backEnabled = false)
+        assertStaysUnderADragSideways()
+    }
+
+    @Test
+    fun theBarsItemsStayAsADragSidewaysHoldsThePageAndTheListsTitleComesBack() {
+        show(bar = true)
+        // 600 pixels along, 0.85 of its way: the page is 79.5 % of its size.
+        carry(side = 1f, pull = 600f)
+        compose.waitForIdle()
+        val title = ZoomGeometry.titleUncovered(carriedScale(600f))
+        assertTrue("Title $title", title > 0.1f)
+        assertNear(ZoomBar(leading = 1f, trailing = 1f, root = 0f, title = title), transition.bar, 0.001f)
+        compose.onRoot().performTouchInput { up() }
+        compose.waitForIdle()
+        assertEquals(null, top)
+        compose.mainClock.advanceTimeBy(2_000)
+        assertEquals(ZoomBar.Root, transition.bar)
     }
 
     @Test

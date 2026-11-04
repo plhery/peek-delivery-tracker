@@ -5,24 +5,17 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
-import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasContentDescription
-import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollTo
-import androidx.compose.ui.test.performSemanticsAction
-import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.core.AuthUser
@@ -41,7 +34,6 @@ import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_SHOW_ALL
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_STAMP
 import com.plhery.peekdeliverytracker.ui.passport.PassportFixtures
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
-import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
@@ -115,25 +107,7 @@ class PassportDeviceTest {
     }
 
     /** What [node] finds, scrolled into the window and up clear of the tab bar floating over the page. */
-    private fun reveal(node: SemanticsNodeInteraction): SemanticsNodeInteraction {
-        node.performScrollTo()
-        val bounds = node.getBoundsInRoot()
-        // A phone's tab bar, at the foot of the window; a tablet's stands at its top, over nothing it scrolls.
-        val bar = compose.onAllNodes(hasTestTag(TAB_BAR)).fetchSemanticsNodes().firstOrNull()?.boundsInRoot
-        val window = compose.onRoot().fetchSemanticsNode().boundsInRoot
-        val hidden = if (bar != null && bar.top > window.height / 2) {
-            bounds.bottom - with(compose.density) { bar.top.toDp() }
-        } else {
-            0.dp
-        }
-        if (hidden > 0.dp) {
-            compose.onNode(hasScrollAction()).performSemanticsAction(SemanticsActions.ScrollBy) { scroll ->
-                scroll(0f, with(compose.density) { (hidden + 16.dp).toPx() })
-            }
-            compose.waitForIdle()
-        }
-        return node
-    }
+    private fun reveal(node: SemanticsNodeInteraction): SemanticsNodeInteraction = compose.reveal(node)
 
     /** A finger where [tag] shows, on whatever stands over it there. */
     private fun tapWhereItShows(tag: String) {

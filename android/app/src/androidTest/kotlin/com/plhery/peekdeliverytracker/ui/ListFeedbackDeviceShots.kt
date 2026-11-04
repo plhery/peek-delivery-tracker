@@ -1,10 +1,8 @@
 package com.plhery.peekdeliverytracker.ui
 
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.app.UiModeManager
 import android.content.Intent
 import android.graphics.Bitmap
-import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
 import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
@@ -198,7 +196,7 @@ class ListFeedbackDeviceShots {
      * service out of reach offline, as a warning.
      */
     @Test
-    fun theRefreshButtonSaysHowTheCheckWentOnlineAndOffline() = exploringByTouch {
+    fun theRefreshButtonSaysHowTheCheckWentOnlineAndOffline() = compose.exploringByTouch {
         walk.show(demo)
         assumeTrue("Touch exploration stayed off and the list stands alone: no refresh button", walk.exists(REFRESH_BUTTON))
         walk.node(REFRESH_BUTTON).assertContentDescriptionEquals(walk.text("app.refresh")).assert(button)
@@ -238,14 +236,14 @@ class ListFeedbackDeviceShots {
 
     /** A-AN16: while the parcels are checked the refresh arrow turns where it is, and rests once the check is done. */
     @Test
-    fun theRefreshArrowTurnsWhileTheCheckRuns() = exploringByTouch {
+    fun theRefreshArrowTurnsWhileTheCheckRuns() = compose.exploringByTouch {
         walk.reduceMotion = false
         arrowMovesOnlyWhileChecking()
     }
 
     /** A-AN16 under Remove animations: the arrow fades to a third and back while the parcels are checked instead. */
     @Test
-    fun underRemoveAnimationsTheRefreshArrowPulses() = exploringByTouch {
+    fun underRemoveAnimationsTheRefreshArrowPulses() = compose.exploringByTouch {
         walk.reduceMotion = true
         arrowMovesOnlyWhileChecking()
     }
@@ -273,33 +271,6 @@ class ListFeedbackDeviceShots {
     }
 
     private fun arrow(): Bitmap = walk.node(REFRESH_BUTTON).captureToImage().asAndroidBitmap()
-
-    private fun touchExploration(): Boolean =
-        instrumentation.targetContext.getSystemService(AccessibilityManager::class.java)?.isTouchExplorationEnabled == true
-
-    /**
-     * `body` with touch exploration on, as TalkBack turns it on, asked of the system by the tests' own accessibility
-     * connection (UiAutomation), which the shots share; off again after, as it was.
-     */
-    private fun exploringByTouch(body: () -> Unit) {
-        val automation = instrumentation.uiAutomation
-        val info = automation.serviceInfo
-        val flags = info?.flags ?: 0
-        if (info != null) {
-            info.flags = flags or AccessibilityServiceInfo.FLAG_REQUEST_TOUCH_EXPLORATION_MODE
-            runCatching { automation.serviceInfo = info }
-            runCatching { compose.waitUntil(LONG_MILLIS) { touchExploration() } }
-        }
-        try {
-            body()
-        } finally {
-            if (info != null) {
-                info.flags = flags
-                runCatching { automation.serviceInfo = info }
-                runCatching { compose.waitUntil(LONG_MILLIS) { !touchExploration() } }
-            }
-        }
-    }
 
     // A-ST32: Remove animations.
 

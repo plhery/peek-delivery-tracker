@@ -2085,10 +2085,9 @@ export class TrackingSyncService {
         return matches.reused.get(id) ?? matches.skipped.get(id) ?? (storedIds.has(id) ? id : undefined);
       };
       const listsFewer = (answered: readonly JsonObject[], progressAt: number, newerLabels = false) => answered.length > 0 && answered.every((event) => {
+        if (newerLabels && event.stage === 'registered') return true;
         const row = rowOf(event);
-        return row === undefined
-          ? (newerLabels && event.stage === 'registered') || Date.parse(String(event.occurred_at ?? '')) < progressAt
-          : storedStages.get(row) === event.stage;
+        return row === undefined ? Date.parse(String(event.occurred_at ?? '')) < progressAt : storedStages.get(row) === event.stage;
       });
       const progressAt = latest(past(stored));
       // The answering source's own rows past the selected stage, and whether its answer leaves one out.
@@ -2100,8 +2099,10 @@ export class TrackingSyncService {
       // Progress that only other sources' rows show (ParcelsApp's copies of an origin leg GOFO never
       // lists) is none the carrier takes back: the stored progress stays and the check answered, with
       // no signal. So does a label of its own however new (Swiss Post's pre-advice of a parcel AliExpress's
-      // scans show in transit): it announces the parcel and moves nothing back. A newer scan in no stage,
-      // or a stored scan read in an earlier stage, still makes progress disappear.
+      // scans show in transit), even one stored as another source's copy read further on (ParcelsApp's
+      // copies of Spring's pre-advice, read in transit after the origin leg): it announces the parcel and
+      // moves nothing back. A newer scan in no stage, or a stored scan read in an earlier stage other than
+      // the label, still makes progress disappear.
       const othersProgress = carrierWithoutProgress && ownRows.length === 0 && past(stored).length > 0
         && listsFewer(events, progressAt, true);
       // Nor does its answer that lists every stored scan of its own, and nothing newer than the stored progress,

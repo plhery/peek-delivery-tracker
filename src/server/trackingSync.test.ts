@@ -5406,6 +5406,25 @@ describe('TrackingSyncService', () => {
       expect([...store.rows.values()]).toEqual(rows);
     });
 
+    // The carrier's labels stored only as the provider's copies, which the provider read in transit (ParcelsApp
+    // reading a pre-advice listed after the origin leg's movements as a late registration).
+    it('keeps that progress when the carrier reads as its label a copy stored further on', async () => {
+      const { store, check } = await providerOnly();
+      for (const [id, row] of [...store.rows]) {
+        if (id.startsWith('unknown:')) continue;
+        store.rows.delete(id);
+        const copy = `unknown:copy-${String(row.occurred_at)}`;
+        store.rows.set(copy, { ...row, provider_event_id: copy, stage: 'in_transit',
+          raw_data: { ...row.raw_data as JsonObject, stage: 'in_transit', universal_provider: 'ParcelsApp' } });
+      }
+      const rows = structuredClone([...store.rows.values()]);
+      const checked = await check(answer(relabel, label));
+      expect(checked.attempt).toMatchObject({ outcome: 'unchanged', anomaly_codes: [], error_type: null });
+      expect(checked.parcel).toMatchObject({ current_stage: 'in_transit', last_status_text: 'Outbound from sorting center',
+        sync_status: 'ok', sync_error: null });
+      expect([...store.rows.values()]).toEqual(rows);
+    });
+
     it('still finds that progress gone after a newer scan in no stage', async () => {
       const { check } = await providerOnly();
       const checked = await check(answer({ stage: 'pending', description: 'Status 42', time: '2026-10-21T08:00:00Z' }, relabel, label));

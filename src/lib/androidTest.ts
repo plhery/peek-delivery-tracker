@@ -9,10 +9,10 @@
  */
 
 /**
- * Whether the site invites anyone. Off until Google has approved both the release testers install and the testers'
- * group on the closed track; until then `/android` is not found either.
+ * Whether the site invites anyone. Off, it shows nothing and `/android` is not found: once Google opens the app to
+ * everyone, or while the release testers install doesn't work.
  */
-export const ANDROID_TEST_OPEN = false;
+export const ANDROID_TEST_OPEN = true;
 
 /** The three steps' links: Peek's own testers' group, Google Play's page to become a tester, and the app on Google Play. */
 export const ANDROID_TEST_LINKS = {

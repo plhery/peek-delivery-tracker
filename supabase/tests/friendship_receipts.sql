@@ -15,7 +15,7 @@ declare sender uuid := '11111111-aaaa-4111-8111-111111111111'; receiver uuid := 
 begin
  if has_table_privilege('authenticated','public.friendship_updates','select')
     or has_table_privilege('anon','public.friendship_push_deliveries','select')
-    or has_function_privilege('authenticated','public.claim_friendship_push(boolean,boolean,integer)','execute')
+    or has_function_privilege('authenticated','public.claim_friendship_push(boolean,boolean,integer,boolean)','execute')
     or has_function_privilege('authenticated','public.finish_friendship_push(uuid,uuid,boolean)','execute')
     or has_function_privilege('anon','public.friends_activity()','execute') then raise exception 'Receipt privilege leak'; end if;
  perform set_config('request.jwt.claim.sub',sender::text,true);

@@ -12,7 +12,7 @@ declare
 begin
   foreach role_name in array array['anon', 'authenticated'] loop
     foreach service_function in array array[
-      'public.add_parcel_link_app_alert(text,text,text,text,text,text)',
+      'public.add_parcel_link_app_alert(text,text,text,text,text,text,text)',
       'public.remove_parcel_link_app_alert(text,text)'
     ] loop
       if has_function_privilege(role_name, service_function, 'EXECUTE') then

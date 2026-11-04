@@ -36,12 +36,12 @@ La web de seguimiento está en chino, pero los escaneos salen en inglés. Las l�
 | `Export customs declaration completed` | La declaración de exportación, hecha en Shenzhen antes del vuelo; el paquete no está retenido en la aduana. |
 | `Depart from facility to service provider` | Va de FIRST LINE a la empresa que se encarga del siguiente tramo. |
 | `Hand over to airline` | Entregado a la aerolínea en el aeropuerto de Hong Kong, tras la declaración de exportación. |
+| `Order received` | La empresa que lo entregará, como UniUni, tiene los datos del pedido, pero aún no el paquete. |
 | `Next stop destination airport` | En vuelo hacia el aeropuerto de destino. El lugar sigue siendo el aeropuerto de Hong Kong. |
 | `Arrived at destination airport` | El vuelo ha aterrizado; luego viene el despacho de importación. |
 | `The package is being submitted for customs clearance` | El despacho de importación a la llegada, tras el vuelo. Peek muestra «En aduanas». |
 | `The package has been cleared through customs` | La aduana lo ha liberado. Peek vuelve a mostrar «En tránsito». |
 | `Customs broker picked it up` | El agente de aduanas lo ha recogido tras el despacho para pasarlo al reparto; ya no está retenido en la aduana. |
-| `Order received` | La empresa que lo entregará, como UniUni, tiene los datos del pedido, pero aún no el paquete. |
 | `The package has been transferred to the service provider` | Entregado a la empresa que lo reparte, después del agente de aduanas. |
 
 Después siguen los escaneos de la empresa que reparte, como USPS o UniUni en Estados Unidos, con sus palabras; la web no la nombra, pero su redacción da la pista.

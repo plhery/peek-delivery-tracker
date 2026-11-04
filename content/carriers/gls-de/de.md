@@ -33,6 +33,8 @@ In der englischen Sendungsverfolgung der GLS-Gruppe, aus der auch Peek liest, he
 | --- | --- |
 | `The parcel data was entered into the GLS IT system…`, `The parcel has not been handed over to GLS.` | Der Versender hat GLS die Paketdaten übermittelt, GLS hat das Paket aber noch nicht. |
 | `The parcel was handed over to GLS.` | GLS hat das Paket und schickt es über seine Paketzentren. |
+| `The parcel has not been released by customs.` | Ein Paket von außerhalb der EU liegt noch beim Zoll; Peek zeigt „Beim Zoll“. |
+| `The parcel was released by customs.` | Der Zoll hat es freigegeben, es ist wieder unterwegs; Peek zeigt „Unterwegs“. |
 | `The parcel is in delivery.`, `The parcel is expected to be delivered during the day.` | Im GLS-Fahrzeug, voraussichtlich im Laufe des Tages bei dir. |
 | `The parcel is ready for collection at the ParcelShop.` | Es wartet im Paketshop oder in der Paketstation, mit Frist. |
 | `The parcel has been delivered.` | Zugestellt, an dich oder an jemanden, der es für dich angenommen hat, etwa einen Nachbarn. |
@@ -67,12 +69,14 @@ Den Vertrag mit GLS hat der Versender, bei einem Online-Kauf ist also der Shop d
 
 **Fristen und Haftung.** Ohne Versicherung des Versenders ersetzt GLS laut AGB den Warenwert bis 750 € je Paket. Nach § 438 HGB zeigst du sichtbare Schäden spätestens bei der Ablieferung an, verdeckte innerhalb von sieben und Verspätungen innerhalb von 21 Tagen nach der Ablieferung, beide in Textform. Das Transportrisiko trägt der Händler, außer du hast den Paketdienst selbst beauftragt (§ 475 BGB). Einigst du dich mit GLS über Verlust oder Beschädigung nicht, kannst du die Schlichtungsstelle Post der Bundesnetzagentur anrufen, auch als Empfänger.
 
+**Widerruf.** Ein nicht abgeholtes Paket ist noch kein Widerruf. Hast du als Verbraucher bei einem Unternehmer im Fernabsatz, etwa online, oder außerhalb seiner Geschäftsräume gekauft, steht dir in der Regel ein Widerrufsrecht zu. Den Widerruf erklärst du nach § 355 BGB dem Unternehmer gegenüber, eindeutig und ohne Begründung, innerhalb von 14 Tagen. Bei Waren beginnt die Frist, sobald du sie erhalten hast (§ 356 BGB), und es genügt, den Widerruf rechtzeitig abzuschicken.
+
 ## GLS Kontakt und Kundenservice
 
 - **Paket von einem Shop:** Dein erster Ansprechpartner ist der Shop. GLS Germany selbst erreichst du über gls-pakete.de, die deutsche Website von GLS.
 - **Österreich:** GLS Austria ist eine eigene Landesgesellschaft, ihre Kontaktwege deckt diese Seite nicht ab.
 
-> Die GLS-Gruppe warnt vor gefälschten E-Mails, SMS und Websites unter ihrem Namen. Ihre Hauptwebsite ist gls-group.com, echt sind nur sie und die Seiten, auf die sie verlinkt, etwa gls-pakete.de. GLS fordert Empfänger nie per E-Mail auf, den Kaufpreis per Kreditkarte, Überweisung oder Online-Bezahldienst zu zahlen. Verdächtige E-Mails schickst du als Anhang an security@gls-group.com.
+> Die GLS-Gruppe warnt vor gefälschten E-Mails, SMS und Websites unter ihrem Namen. Ihre Hauptwebsite ist gls-group.com, echt sind nur sie und die Seiten, auf die sie verlinkt, etwa gls-pakete.de. GLS fordert Empfänger nie per E-Mail auf, den Kaufpreis per Kreditkarte, Überweisung oder Online-Bezahldienst zu zahlen. Bei einem Paket von außerhalb der EU können GLS oder ein autorisierter Vertreter dich aber per E-Mail, SMS oder Brief auffordern, Zölle und Steuern zu zahlen. Nachnahmepakete mit dem GLS Cash Service gibt es nur gegen Barzahlung beim Fahrer. Ein Nachnahmepaket, das du nicht erwartest, solltest du laut GLS nicht bezahlen, weder für dich noch für Nachbarn. Verdächtige E-Mails schickst du als Anhang an security@gls-group.com.
 
 ## GLS-Paket mit Peek verfolgen
 
@@ -106,9 +110,11 @@ Nach einem verpassten Zustellversuch mindestens sieben Werktage, im Paketshop wi
 - [GLS Germany: AGB für Geschäftskunden (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – kein Samstag, Laufzeiten, kleine Pakete im Briefkasten, Nachbar, zwei Versuche, sieben Werktage, Paketstation, Zustelloptionen, 750 €
 - [GLS Germany: AGB für GLS-Pakete.de und die App (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS-paketeApp_EN_2023-08-21.pdf) – Unternehmen, Karte oder E-Mail, Abstellgenehmigung, Schlichtungsstelle Post
 - [GLS Germany: Verbraucherinformation zu Zustelloptionen (auf Englisch)](https://gls-group.com/DE/media/downloads/180130_Verbraucherinformation_Umverfuegung_DE_EN.pdf) – kostenlos für Empfänger (Stand Januar 2018)
-- [GLS-Gruppe: Security advice (auf Englisch)](https://gls-group.com/GROUP/en/security-advice/) – Betrug, echte Websites, Meldung
+- [GLS-Gruppe: Security advice (auf Englisch)](https://gls-group.com/GROUP/en/security-advice/) – Betrug, echte Websites, Zölle und Steuern bei Paketen von außerhalb der EU, GLS Cash Service, Meldung
 - [Bundesnetzagentur: Schlichtungsstelle Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/start.html) – Schlichtung, auch für Empfänger
 - [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – Fristen
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – Transportrisiko
+- [Gesetze im Internet: § 355 BGB](https://www.gesetze-im-internet.de/bgb/__355.html) – Widerruf gegenüber dem Unternehmer, ohne Begründung, 14 Tage
+- [Gesetze im Internet: § 356 BGB](https://www.gesetze-im-internet.de/bgb/__356.html) – Fernabsatz und außerhalb von Geschäftsräumen, Beginn der Widerrufsfrist
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest, englische Status von GLS, Track-ID
 :::

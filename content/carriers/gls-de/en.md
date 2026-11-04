@@ -31,6 +31,8 @@ GLS's English wordings, in the order a parcel meets them:
 | --- | --- |
 | `The parcel data was entered into the GLS IT system…`, `The parcel has not been handed over to GLS.` | GLS has the sender's data, not yet the parcel. |
 | `The parcel was handed over to GLS.` | GLS has it. |
+| `The parcel has not been released by customs.` | A parcel from outside the EU is still held at customs; Peek shows "At customs". |
+| `The parcel was released by customs.` | Customs has let it go and it's on its way again; Peek shows "In transit". |
 | `The parcel is in delivery.`, `The parcel is expected to be delivered during the day.` | In the GLS van, expected today. |
 | `The parcel is ready for collection at the ParcelShop.` | Waiting for you at a ParcelShop or Parcelstation. |
 | `The parcel has been delivered.` | Delivered to you or to someone who took it in for you, such as a neighbour. |
@@ -63,11 +65,13 @@ GLS's contract is with the sender, so refunds go through the shop.
 
 **Disputes.** Loss or damage you can't settle with GLS can go to the Bundesnetzagentur's Schlichtungsstelle Post.
 
+**Withdrawal (Widerruf).** Not collecting a parcel doesn't withdraw you from the purchase. If you bought as a consumer from a business at a distance, such as online, or away from its premises, you can usually withdraw by telling the business, clearly and without giving a reason, within 14 days (Civil Code, § 355). For goods, the period starts once you have received them (§ 356), and sending your notice in time is enough.
+
 ## GLS Germany customer service and contact
 
 For a parcel from a shop, the shop is your first contact. GLS Germany's own contact options are on gls-pakete.de, its German site.
 
-> GLS's group warns of fake emails, SMS and websites in its name. Its main website is gls-group.com, and only that site and the sites it links to, such as gls-pakete.de, are genuine. GLS never asks recipients by email to pay for goods by card, transfer or online payment. Send suspicious emails as an attachment to security@gls-group.com.
+> GLS's group warns of fake emails, SMS and websites in its name. Its main website is gls-group.com, and only that site and the sites it links to, such as gls-pakete.de, are genuine. GLS never asks recipients by email to pay for goods by card, transfer or online payment. For a parcel from outside the EU, though, GLS or an authorised agent may ask you by email, SMS or letter to pay duties and taxes. Cash-on-delivery parcels sent with the GLS Cash Service are handed over only against cash paid to the driver, and GLS advises against paying for a cash-on-delivery parcel you didn't expect, for yourself or for a neighbour. Send suspicious emails as an attachment to security@gls-group.com.
 
 ## Tracking a GLS Germany parcel with Peek
 
@@ -105,9 +109,11 @@ Yes: GLS Germany is General Logistics Systems Germany GmbH & Co. OHG, of Neuenst
 - [GLS Germany: General Terms and Conditions for business customers](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – no Saturday, estimated times, small parcels in the letterbox, neighbours, two attempts, seven working days, Parcelstations, delivery options, Guaranteed24Service
 - [GLS Germany: Terms for GLS-Pakete.de and the app](https://gls-group.com/DE/media/downloads/AGB_GLS-paketeApp_EN_2023-08-21.pdf) – company, notification card or email, drop-off permit, Schlichtungsstelle Post
 - [GLS Germany: Consumer information on delivery options](https://gls-group.com/DE/media/downloads/180130_Verbraucherinformation_Umverfuegung_DE_EN.pdf) – free for recipients (January 2018)
-- [GLS: Security advice](https://gls-group.com/GROUP/en/security-advice/) – scams, genuine sites, reporting
+- [GLS: Security advice](https://gls-group.com/GROUP/en/security-advice/) – scams, genuine sites, duties and taxes on parcels from outside the EU, GLS Cash Service, reporting
 - [Bundesnetzagentur: Schlichtungsstelle Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/start.html) – disputes, senders and recipients
 - [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – notice periods
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – transit risk
+- [Gesetze im Internet: § 355 BGB](https://www.gesetze-im-internet.de/bgb/__355.html) – withdrawal declared to the seller, no reason needed, 14 days
+- [Gesetze im Internet: § 356 BGB](https://www.gesetze-im-internet.de/bgb/__356.html) – distance and off-premises contracts, when the withdrawal period starts
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, GLS's English wordings, Track-ID
 :::

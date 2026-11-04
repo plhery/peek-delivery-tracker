@@ -255,21 +255,24 @@ export interface ParcelAppAlertValues {
   environment: NativePushEnvironment;
   locale: NativePushLocale;
   preset: ApiParcelAlertPreset;
+  transport: NativePushTransport;
 }
 
-/** An alert for a parcel link in the iPhone app: its device token, checked as an account's is. */
+/** An alert for a parcel link in the iPhone or Android app: its device token, checked as an account's is. */
 export function parcelAppAlert(payload: JsonObject): ParcelAppAlertValues {
+  const transport = nativePushTransport(payload.transport);
   return {
-    token: apnsToken(payload.token),
-    environment: nativePushEnvironment(payload.environment),
+    token: appToken(payload.token, transport),
+    environment: transport === 'fcm' ? 'production' : nativePushEnvironment(payload.environment),
     locale: nativePushLocale(payload.locale),
     preset: alertPreset(payload.preset),
+    transport,
   };
 }
 
 /** The device token whose alert for a link is turned off. */
 export function parcelAppAlertToken(payload: JsonObject): string {
-  return apnsToken(payload.token);
+  return appToken(payload.token, nativePushTransport(payload.transport));
 }
 
 /**
@@ -314,6 +317,7 @@ export function pushSubscriptionLocale(payload: JsonObject): { endpoint: string;
 
 export interface NativePushDeviceValues {
   token: string;
+  transport: NativePushTransport;
   installationId: string | null;
   environment: 'development' | 'production';
   locale: Locale;
@@ -323,6 +327,32 @@ export interface NativePushDeviceValues {
 
 type NativePushEnvironment = NativePushDeviceValues['environment'];
 type NativePushLocale = NativePushDeviceValues['locale'];
+/** APNs for the iPhone app, Firebase Cloud Messaging for the Android app. */
+export type NativePushTransport = 'apns' | 'fcm';
+
+/** The service a device token is for; a request that does not say is the iPhone app's. */
+export function nativePushTransport(value: unknown): NativePushTransport {
+  if (value === undefined || value === null || value === 'apns') return 'apns';
+  if (value === 'fcm') return 'fcm';
+  throw new HttpError(400, 'Choose apns or fcm as the transport');
+}
+
+/**
+ * An FCM registration token. Unlike an APNs token it is case-sensitive, and stays within what the
+ * database's unique index on tokens can hold.
+ */
+function fcmToken(value: unknown): string {
+  if (typeof value !== 'string') throw new HttpError(400, 'Send a valid FCM registration token');
+  const token = value.trim();
+  if (token.length < 32 || token.length > 2048 || !/^[A-Za-z0-9:_-]+$/.test(token)) {
+    throw new HttpError(400, 'Send a valid FCM registration token');
+  }
+  return token;
+}
+
+function appToken(value: unknown, transport: NativePushTransport): string {
+  return transport === 'fcm' ? fcmToken(value) : apnsToken(value);
+}
 
 function apnsToken(value: unknown, label = 'APNs device token'): string {
   if (typeof value !== 'string') throw new HttpError(400, `Send a valid ${label}`);
@@ -367,10 +397,12 @@ export function nativePushDevice(
   payload: JsonObject,
   registration = true,
 ): NativePushDeviceValues {
-  const token = apnsToken(payload.token);
+  const transport = nativePushTransport(payload.transport);
+  const token = appToken(payload.token, transport);
   if (!registration) {
     return {
       token,
+      transport,
       installationId: null,
       environment: 'production',
       locale: 'en',
@@ -378,7 +410,8 @@ export function nativePushDevice(
       sendTest: false,
     };
   }
-  const environment = nativePushEnvironment(payload.environment);
+  // FCM has no development service: whatever an Android phone sends, its device is a production one.
+  const environment = transport === 'fcm' ? 'production' : nativePushEnvironment(payload.environment);
   const locale = nativePushLocale(payload.locale);
   const parsedInstallationId = payload.installationId == null
     ? null
@@ -393,6 +426,7 @@ export function nativePushDevice(
   }
   return {
     token,
+    transport,
     installationId: parsedInstallationId,
     environment,
     locale,

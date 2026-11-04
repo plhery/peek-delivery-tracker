@@ -3072,6 +3072,13 @@ enum NativePushEnvironment: String, Codable, CaseIterable, Hashable, Sendable, I
     var id: String { rawValue }
 }
 
+enum NativePushTransport: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case apns
+    case fcm
+
+    var id: String { rawValue }
+}
+
 enum NativePushLocale: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case en
     case de
@@ -3094,6 +3101,7 @@ struct NativePushDeviceRequest: Codable, Equatable, Hashable, Sendable {
     var locale: NativePushLocale
     var deviceName: String? = nil
     var sendTest: Bool
+    var transport: NativePushTransport? = nil
 
     private enum CodingKeys: String, CodingKey {
         case token
@@ -3102,11 +3110,13 @@ struct NativePushDeviceRequest: Codable, Equatable, Hashable, Sendable {
         case locale
         case deviceName
         case sendTest
+        case transport
     }
 }
 
 struct DeleteNativePushDeviceRequest: Codable, Equatable, Hashable, Sendable {
     var token: String
+    var transport: NativePushTransport? = nil
 }
 
 struct LiveActivityDeviceRequest: Codable, Equatable, Hashable, Sendable {
@@ -3524,10 +3534,12 @@ struct ParcelAppAlertRequest: Codable, Equatable, Hashable, Sendable {
     var environment: NativePushEnvironment
     var preset: ParcelAlertPreset
     var locale: NativePushLocale
+    var transport: NativePushTransport? = nil
 }
 
 struct DeleteParcelAppAlertRequest: Codable, Equatable, Hashable, Sendable {
     var token: String
+    var transport: NativePushTransport? = nil
 }
 
 enum ParcelFeedbackAnswer: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {

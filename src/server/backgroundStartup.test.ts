@@ -47,8 +47,8 @@ it('sends delivery emails on a deployment without push, and says so at startup',
   expect(service.emails).toBeInstanceOf(DeliveryEmailService);
   expect(service.emails!.settings).toMatchObject({ host: 'smtp.example.com', origin: 'https://peek.example.com' });
   expect(logged).toHaveBeenCalledExactlyOnceWith('background_services_started', {
-    sync_enabled: true, web_push_enabled: false, native_push_enabled: false, live_activity_push_enabled: false,
-    delivery_email_enabled: true,
+    sync_enabled: true, web_push_enabled: false, native_push_enabled: false, fcm_push_enabled: false,
+    live_activity_push_enabled: false, delivery_email_enabled: true,
   });
 });
 

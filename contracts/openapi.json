@@ -49514,6 +49514,7 @@
     "/api/push/devices": {
       "post": {
         "operationId": "upsertNativePushDevice",
+        "description": "Stores a phone's token for the signed-in account's notifications: an iPhone's APNs token, or an Android phone's FCM token with `transport` fcm. Answers 503 when this server does not send through that service.",
         "requestBody": {
           "required": true,
           "content": {
@@ -50479,7 +50480,7 @@
       ],
       "put": {
         "operationId": "setPublicParcelAppAlert",
-        "summary": "Turn on the iPhone app's notifications for this parcel, until it is delivered",
+        "summary": "Turn on the iPhone or Android app's notifications for this parcel, until it is delivered",
         "security": [],
         "parameters": [
           {
@@ -50547,7 +50548,7 @@
             "$ref": "#/components/responses/ApiError"
           },
           "503": {
-            "description": "APNs is not configured on this server",
+            "description": "APNs, or FCM for an Android token, is not configured on this server",
             "content": {
               "application/json": {
                 "schema": {
@@ -50560,7 +50561,7 @@
       },
       "delete": {
         "operationId": "removePublicParcelAppAlert",
-        "summary": "Turn off this iPhone's notifications for the parcel",
+        "summary": "Turn off this phone's notifications for the parcel",
         "security": [],
         "requestBody": {
           "required": true,
@@ -50574,7 +50575,7 @@
         },
         "responses": {
           "204": {
-            "description": "Off, also when the link or the iPhone had no such alert"
+            "description": "Off, also when the link or the phone had no such alert"
           },
           "400": {
             "$ref": "#/components/responses/ApiError"
@@ -54207,7 +54208,16 @@
         "enum": [
           "development",
           "production"
-        ]
+        ],
+        "description": "The APNs service an iPhone token belongs to. A request with `transport` fcm may send either value: FCM has no development service, so its devices are recorded as production."
+      },
+      "NativePushTransport": {
+        "type": "string",
+        "enum": [
+          "apns",
+          "fcm"
+        ],
+        "description": "The service that reaches the device: APNs for the iPhone app, Firebase Cloud Messaging for the Android app. A request that does not say is an APNs one."
       },
       "NativePushLocale": {
         "type": "string",
@@ -54237,8 +54247,9 @@
           "token": {
             "type": "string",
             "minLength": 32,
-            "maxLength": 512,
-            "pattern": "^[0-9A-Fa-f]+$"
+            "maxLength": 2048,
+            "pattern": "^[A-Za-z0-9:_-]+$",
+            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), or with `transport` fcm an FCM registration token, which is case-sensitive."
           },
           "installationId": {
             "type": "string",
@@ -54256,6 +54267,9 @@
           },
           "sendTest": {
             "type": "boolean"
+          },
+          "transport": {
+            "$ref": "#/components/schemas/NativePushTransport"
           }
         }
       },
@@ -54269,8 +54283,12 @@
           "token": {
             "type": "string",
             "minLength": 32,
-            "maxLength": 512,
-            "pattern": "^[0-9A-Fa-f]+$"
+            "maxLength": 2048,
+            "pattern": "^[A-Za-z0-9:_-]+$",
+            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), or with `transport` fcm an FCM registration token, which is case-sensitive."
+          },
+          "transport": {
+            "$ref": "#/components/schemas/NativePushTransport"
           }
         }
       },
@@ -55543,8 +55561,9 @@
           "token": {
             "type": "string",
             "minLength": 32,
-            "maxLength": 512,
-            "pattern": "^[0-9A-Fa-f]+$"
+            "maxLength": 2048,
+            "pattern": "^[A-Za-z0-9:_-]+$",
+            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), or with `transport` fcm an FCM registration token, which is case-sensitive."
           },
           "environment": {
             "$ref": "#/components/schemas/NativePushEnvironment"
@@ -55554,6 +55573,9 @@
           },
           "locale": {
             "$ref": "#/components/schemas/NativePushLocale"
+          },
+          "transport": {
+            "$ref": "#/components/schemas/NativePushTransport"
           }
         }
       },
@@ -55567,8 +55589,12 @@
           "token": {
             "type": "string",
             "minLength": 32,
-            "maxLength": 512,
-            "pattern": "^[0-9A-Fa-f]+$"
+            "maxLength": 2048,
+            "pattern": "^[A-Za-z0-9:_-]+$",
+            "description": "An APNs device token in hexadecimal (at most 512 characters, of even length), or with `transport` fcm an FCM registration token, which is case-sensitive."
+          },
+          "transport": {
+            "$ref": "#/components/schemas/NativePushTransport"
           }
         }
       },

@@ -1259,7 +1259,9 @@ describe('alerts for a parcel link in the iPhone app', () => {
     const response = await turnOn(body({ token: token.toUpperCase() }));
     expect(response.status).toBe(204);
     expect(response.headers.get('cache-control')).toBe('no-store');
-    expect(stored).toHaveBeenCalledExactlyOnceWith(linkId, null, { token, environment: 'production', locale: 'fr', preset: 'important' });
+    expect(stored).toHaveBeenCalledExactlyOnceWith(linkId, null, {
+      token, environment: 'production', locale: 'fr', preset: 'important', transport: 'apns',
+    });
     expect(counted).toHaveBeenCalledExactlyOnceWith('added', 'ios');
     expect(authenticate).not.toHaveBeenCalled();
     stored.mockClear();
@@ -1321,5 +1323,69 @@ describe('alerts for a parcel link in the iPhone app', () => {
     for (const text of [...lines, ...await Promise.all(answers.map((response) => response.text()))]) {
       for (const secret of [token, ownerKey, keyHash, linkId]) expect(text).not.toContain(secret);
     }
+  });
+});
+
+describe('alerts for a parcel link in the Android app', () => {
+  // A synthetic registration token and service account key: FCM and Google never issued them.
+  const token = `synthetic:${'Fc_m-'.repeat(30)}`;
+  const body = (changes: JsonObject = {}) => ({ token, transport: 'fcm', preset: 'important', locale: 'de', ...changes });
+  const request = (handler: typeof appAlertOn, method: string, payload: unknown, id = linkId) =>
+    handler(new NextRequest(`https://delivery.example/api/public/parcels/${id}/app-alerts`, {
+      method,
+      headers: { 'content-type': 'application/json', 'x-real-ip': nextIp() },
+      body: JSON.stringify(payload),
+    }), route(id));
+  const store = () => vi.spyOn(SupabaseServiceClient.prototype, 'addParcelLinkAppAlert').mockResolvedValue('added');
+
+  beforeEach(() => {
+    vi.stubEnv('FCM_PROJECT_ID', 'synthetic-project');
+    vi.stubEnv('FCM_CLIENT_EMAIL', 'sender@synthetic-project.example');
+    vi.stubEnv('FCM_PRIVATE_KEY', generateKeyPairSync('rsa', { modulusLength: 2048 }).privateKey
+      .export({ type: 'pkcs8', format: 'pem' }).toString());
+  });
+
+  it('stores the phone\'s FCM token as it was sent, for FCM\'s one environment', async () => {
+    const stored = store();
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSet');
+    expect((await request(appAlertOn, 'PUT', body({ environment: 'development' }))).status).toBe(204);
+    expect(stored).toHaveBeenCalledExactlyOnceWith(linkId, null, {
+      token, environment: 'production', locale: 'de', preset: 'important', transport: 'fcm',
+    });
+    expect(counted).toHaveBeenCalledExactlyOnceWith('added', 'android');
+  });
+
+  it.each([
+    ['a token with characters FCM never uses', { token: `${token}/x` }],
+    ['a token too short', { token: 'abc:def' }],
+    ['an unknown transport', { transport: 'gcm' }],
+  ])('rejects %s without storing anything', async (_name, changes) => {
+    const stored = store();
+    expect((await request(appAlertOn, 'PUT', body(changes))).status).toBe(400);
+    expect(stored).not.toHaveBeenCalled();
+  });
+
+  it('says so when this server cannot send to Android phones, whatever it sends to iPhones', async () => {
+    vi.stubEnv('FCM_PROJECT_ID', '');
+    vi.stubEnv('FCM_CLIENT_EMAIL', '');
+    vi.stubEnv('FCM_PRIVATE_KEY', '');
+    vi.stubEnv('APNS_TEAM_ID', 'TEAM000000');
+    vi.stubEnv('APNS_KEY_ID', 'KEY0000000');
+    vi.stubEnv('APNS_PRIVATE_KEY', generateKeyPairSync('ec', { namedCurve: 'prime256v1' }).privateKey
+      .export({ type: 'pkcs8', format: 'pem' }).toString());
+    vi.stubEnv('APNS_BUNDLE_ID', 'com.example.peek');
+    const stored = store();
+    const response = await request(appAlertOn, 'PUT', body());
+    expect(response.status).toBe(503);
+    expect(await response.json()).toEqual({ error: 'FCM is not configured' });
+    expect(stored).not.toHaveBeenCalled();
+  });
+
+  it('turns the alert off by its token, letter case kept', async () => {
+    const removed = vi.spyOn(SupabaseServiceClient.prototype, 'removeParcelLinkAppAlert').mockResolvedValue(true);
+    expect((await request(appAlertOff, 'DELETE', { token, transport: 'fcm' })).status).toBe(204);
+    expect(removed).toHaveBeenCalledExactlyOnceWith(linkId, token);
+    // Without its transport, the token is read as an iPhone's, which it is not.
+    expect((await request(appAlertOff, 'DELETE', { token })).status).toBe(400);
   });
 });

@@ -50219,6 +50219,8 @@ export interface ApiPushSubscriptionStatusResponse {
 
 export type ApiNativePushEnvironment = "development" | "production";
 
+export type ApiNativePushTransport = "apns" | "fcm";
+
 export type ApiNativePushLocale = "en" | "de" | "fr" | "it" | "es" | "pt" | "pt-br" | "pl" | "ru" | "zh";
 
 export interface ApiNativePushDeviceRequest {
@@ -50228,10 +50230,12 @@ export interface ApiNativePushDeviceRequest {
   "locale": ApiNativePushLocale;
   "deviceName"?: string;
   "sendTest": boolean;
+  "transport"?: ApiNativePushTransport;
 }
 
 export interface ApiDeleteNativePushDeviceRequest {
   "token": string;
+  "transport"?: ApiNativePushTransport;
 }
 
 export interface ApiLiveActivityDeviceRequest {
@@ -50530,10 +50534,12 @@ export interface ApiParcelAppAlertRequest {
   "environment": ApiNativePushEnvironment;
   "preset": ApiParcelAlertPreset;
   "locale": ApiNativePushLocale;
+  "transport"?: ApiNativePushTransport;
 }
 
 export interface ApiDeleteParcelAppAlertRequest {
   "token": string;
+  "transport"?: ApiNativePushTransport;
 }
 
 export type ApiParcelFeedbackAnswer = "right" | "wrong" | "found_elsewhere";

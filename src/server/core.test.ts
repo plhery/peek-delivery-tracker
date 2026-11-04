@@ -1158,7 +1158,7 @@ describe('native notification boundaries', () => {
     expect(devices.recordNativePushDeliveries).not.toHaveBeenCalled();
     expect(devices.updateNativePushDevice).toHaveBeenCalledExactlyOnceWith('device-1', { last_error: 'APNs delivery failed' });
     expect(logged).toHaveBeenCalledExactlyOnceWith('push_delivery_failed', {
-      channel: 'native', status: 503, reason: 'ServiceUnavailable', error_type: 'APNsError',
+      channel: 'native', transport: 'apns', status: 503, reason: 'ServiceUnavailable', error_type: 'APNsError',
     }, 'warning');
 
     const subscriptions = {

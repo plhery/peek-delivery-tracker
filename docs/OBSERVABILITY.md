@@ -670,7 +670,8 @@ Key JSON events:
   to the next run, with how many parcels it `checked` and how many it `left`;
 - `sync_job_completed` (by `job_id`): the job's `SyncSummary` counts
   ([contracts/openapi.json](../contracts/openapi.json)), with what each push channel sent
-  (`web`, `native`, `live_activity`, `link_alert`) beside the `notifications_sent` total;
+  (`web`, `native` for the iPhone and Android apps, `live_activity`, `link_alert`) beside the
+  `notifications_sent` total;
 - `sync_job_failed`, `sync_job_finish_failed` (by `job_id`). Alert on these. A scheduled
   run whose worker died three times is logged as failed by the next run, with
   `error_type` `WorkerLeaseExpired`;
@@ -716,8 +717,9 @@ Key JSON events:
   iPhone app is out; the server asks again ten minutes later and offers the app until then
   as it last knew.
 - `push_delivery_failed`: a notification the push service did not take, by `channel` (`web`,
-  `native` or `live_activity`), with its HTTP `status`, the APNs `reason` and the `error_type`;
-  never the endpoint or token. The scan stays pending and the next dispatch sends it again.
+  `native` or `live_activity`) and, for `native`, its `transport` (`apns` or `fcm`), with its
+  HTTP `status`, the `reason` APNs or FCM gave (FCM's error code, or Google's OAuth error when
+  the service account was refused) and the `error_type`; never the endpoint or token. The scan stays pending and the next dispatch sends it again.
 - `parcel_feedback`: an answer about a parcel, with the `answer`, its `reasons`, the
   `carrier`, where it was `asked` (`page` or `back`, on the way back from the carrier's
   site), `via` an `account` or a `link`, the `app` and the `outcome` as
@@ -968,9 +970,9 @@ dashboard's failure panels leave out.
 | `parcel_claim_total` (outcome) | Links kept after sign-in: `kept`, `already`, `quota`, `unavailable` |
 | `parcel_forgotten_total` (kind, reason) | Forgotten links and parcels (`kind`): `asked` by their owner, `expired`, or `stopped` 30 days ago |
 | `parcel_share_total` (kind, change) | Sharing `started`, `changed` (what the link shows) or `stopped`, through a `lookup`'s link or an `account`'s |
-| `parcel_alert_set_total` (outcome, app) | Requests to turn on an alert for a link, from a browser (`web`) or the iPhone app (`ios`): `added`, `updated`, `full` (ten already), `finished` (journey over), `stopped`, `unavailable` |
-| `parcel_alert_sent_total` (outcome, app) | Batches of new scans per alert, to a browser (`web`) or the iPhone app (`ios`): `sent`, `skipped` (not in its preset, backfilled, known when the parcel was added, more than a day old, a generated track's move, or the owner's own browser or iPhone), `failed`, `expired` (the push service or APNs says the subscription or token is gone) |
-| `account_push_sent_total` (outcome, app) | Batches of an account's new scans per browser (`web`) or iPhone (`ios`) it gets notifications on: `sent`, `skipped` (repeats or copies of scans it had, backfilled, known when the parcel was added, more than a day old, a generated track's move, the parcel put away, or already shown by the iPhone's Live Activity), `failed` (tried again by the next check), `expired` (the push service or APNs says the subscription or token is gone) |
+| `parcel_alert_set_total` (outcome, app) | Requests to turn on an alert for a link, from a browser (`web`), the iPhone app (`ios`) or the Android app (`android`): `added`, `updated`, `full` (ten already), `finished` (journey over), `stopped`, `unavailable` |
+| `parcel_alert_sent_total` (outcome, app) | Batches of new scans per alert, to a browser (`web`), the iPhone app (`ios`) or the Android app (`android`): `sent`, `skipped` (not in its preset, backfilled, known when the parcel was added, more than a day old, a generated track's move, or the owner's own browser or phone), `failed`, `expired` (the push service, APNs or FCM says the subscription or token is gone) |
+| `account_push_sent_total` (outcome, app) | Batches of an account's new scans per browser (`web`), iPhone (`ios`) or Android phone (`android`) it gets notifications on: `sent`, `skipped` (repeats or copies of scans it had, backfilled, known when the parcel was added, more than a day old, a generated track's move, the parcel put away, or already shown by the iPhone's Live Activity), `failed` (tried again by the next check), `expired` (the push service, APNs or FCM says the subscription or token is gone) |
 | `parcel_alert_removed_total` (reason) | Alerts ended: `asked`, `delivered` (journey over), `expired`, `failed` (three failed sends in a row) |
 | `parcel_feedback_total` (answer, via, app, outcome) | What readers say of a parcel: `right`, `wrong` or `found_elsewhere`, through an `account` or a `link`. `stored`, `replaced` (a note followed its reason), `full` (twenty answers for the number that day) or `closed` (too late to add to) |
 | `provider_input_total` (provider, step) | Whether relaying a provider's postcode request pays off: a parcel starts asking its owner (`asked`), the owner gives one (`supplied`), then each lookup made with it: `history`, `still_required`, `no_history` or `failed`. Every provider receives the postcode; supported sources can submit it |

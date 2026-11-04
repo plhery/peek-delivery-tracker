@@ -35,10 +35,28 @@ describe('friendship receipts', () => {
   it('acknowledges each successful device delivery with its lease', async () => {
     const { service, client, web, native } = fixture([row, { ...row, id: 'native-receipt', subscription_id: null, device_id: 'iphone' }]);
     expect(await service.dispatch()).toEqual({ attempted: 2, sent: 2, failed: 0, expired: 0 });
-    expect(client.claimFriendshipPush).toHaveBeenCalledWith(true, true);
+    expect(client.claimFriendshipPush).toHaveBeenCalledWith(true, true, false);
     expect(web.send).toHaveBeenCalledOnce(); expect(native.send).toHaveBeenCalledOnce();
     expect(client.finishFriendshipPush).toHaveBeenCalledWith('receipt', 'lease', true);
     expect(client.finishFriendshipPush).toHaveBeenCalledWith('native-receipt', 'lease', true);
+  });
+  it('sends an Android phone\'s notice through FCM, and retires its token as FCM says', async () => {
+    const { client, web, native } = fixture([{ ...row, id: 'android-receipt', subscription_id: null, device_id: 'android', transport: 'fcm' }]);
+    const fcm = { send: vi.fn().mockRejectedValue(new Error('unregistered')), isExpired: vi.fn().mockReturnValue(true) };
+    const service = new FriendshipPushService(client as never, web as never, native as never, fcm as never);
+    expect(await service.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 0, expired: 1 });
+    expect(client.claimFriendshipPush).toHaveBeenCalledWith(true, true, true);
+    expect(fcm.send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ device_id: 'android' }),
+      expect.objectContaining({ kind: 'friend_accepted', friend_id: friendID }));
+    expect(native.send).not.toHaveBeenCalled();
+    expect(client.updateNativePushDevice).toHaveBeenCalledWith('android', expect.objectContaining({ disabled_at: expect.any(String) }));
+    expect(client.finishFriendshipPush).toHaveBeenCalledWith('android-receipt', 'lease', false);
+  });
+  it('claims Android notices on a server that sends through FCM alone', async () => {
+    const { client } = fixture([]);
+    const fcm = { send: vi.fn(), isExpired: vi.fn() };
+    await new FriendshipPushService(client as never, null, null, fcm as never).dispatch();
+    expect(client.claimFriendshipPush).toHaveBeenCalledWith(false, false, true);
   });
   it('releases failed sends for retry without marking them delivered', async () => {
     const { service, client, web } = fixture();

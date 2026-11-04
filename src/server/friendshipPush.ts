@@ -1,7 +1,7 @@
 import 'server-only';
 import {
   friendNotificationCopy, WEB_NOTIFICATION_PICTURES,
-  type NativePushNotificationService, type WebPushNotificationService, type PushSummary,
+  type FcmPushNotificationService, type NativePushNotificationService, type WebPushNotificationService, type PushSummary,
 } from './push';
 import type { SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
@@ -17,24 +17,32 @@ export function friendshipNotification(row: JsonObject): { web: JsonObject; nati
   };
 }
 
+/** A friendship's notice, to a browser, an iPhone through APNs or an Android phone through FCM. */
 export class FriendshipPushService {
-  constructor(readonly client: SupabaseServiceClient, readonly web: WebPushNotificationService | null, readonly native: NativePushNotificationService | null) {}
+  constructor(
+    readonly client: SupabaseServiceClient,
+    readonly web: WebPushNotificationService | null,
+    readonly native: NativePushNotificationService | null,
+    readonly fcm: FcmPushNotificationService | null = null,
+  ) {}
   async dispatch(): Promise<PushSummary> {
     const summary: PushSummary = { attempted: 0, sent: 0, failed: 0, expired: 0 };
-    if (!this.web && !this.native) return summary;
-    const deliveries = await this.client.claimFriendshipPush(!!this.web, !!this.native);
+    if (!this.web && !this.native && !this.fcm) return summary;
+    const deliveries = await this.client.claimFriendshipPush(!!this.web, !!this.native, !!this.fcm);
     // Small leased batches run concurrently; each delivery retains its own acknowledgement.
     await Promise.all(deliveries.map(async (row) => {
       summary.attempted++;
       const payload = friendshipNotification(row);
       let success = false;
+      // The claim returns a device only to a server that sends its transport.
+      const app = !row.device_id ? null : row.transport === 'fcm' ? this.fcm : this.native;
       try {
-        if (row.device_id) await this.native!.send(row, payload.native);
+        if (row.device_id) await app!.send(row, payload.native);
         else await this.web!.send(row, payload.web);
         success = true; summary.sent++;
       } catch (error) {
         const status = typeof error === 'object' && error && 'statusCode' in error ? Number(error.statusCode) : 0;
-        if (row.device_id ? this.native!.isExpired(error) : status === 404 || status === 410) {
+        if (row.device_id ? app!.isExpired(error) : status === 404 || status === 410) {
           const values = { disabled_at: new Date().toISOString(), last_error: 'Notification destination expired' };
           if (row.device_id) await this.client.updateNativePushDevice(String(row.device_id), values);
           else await this.client.updatePushSubscription(String(row.subscription_id), values);

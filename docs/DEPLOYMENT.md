@@ -13,10 +13,10 @@ The official instance runs at
 - SMTP with an authenticated sending domain, if email sign-in or the delivery email is on.
 - A host that can build the `Dockerfile` and keep the container running. Serverless
   won't work: the worker must stay alive.
-- Optional: stable VAPID keys (Web Push), and an APNs key with an Apple team (iPhone
-  notifications and Live Activities).
+- Optional: stable VAPID keys (Web Push), an APNs key with an Apple team (iPhone
+  notifications and Live Activities), and a Firebase service account (Android notifications).
 
-Never pass the service-role, VAPID private, SMTP, APNs or carrier credentials as build
+Never pass the service-role, VAPID private, SMTP, APNs, FCM or carrier credentials as build
 arguments.
 
 ## 1. Database
@@ -80,10 +80,16 @@ optional:
   parcel links followed in the app. With it, the server asks the App Store once an hour
   which version is out, to offer the app on a link's "Notify me" once that version
   follows links.
+- Firebase Cloud Messaging: `FCM_PROJECT_ID`, `FCM_CLIENT_EMAIL` and `FCM_PRIVATE_KEY`, the
+  `project_id`, `client_email` and `private_key` of a service account key of the Firebase
+  project the Android app is built with (a role that may send messages, such as Firebase Cloud
+  Messaging API Admin). Literal `\n` line breaks in the key are accepted. It sends the Android
+  app's notifications and the alerts of parcel links followed in it. Without it, Android
+  phones are refused registration as iPhones are without APNs.
 - Sign in with Apple: `APPLE_SIGN_IN_*` revokes Apple's tokens when an iPhone account is
   deleted ([AUTHENTICATION.md](AUTHENTICATION.md)).
 
-Partial VAPID, APNs or Sign in with Apple configuration is rejected at startup.
+Partial VAPID, APNs, FCM or Sign in with Apple configuration is rejected at startup.
 [`.env.example`](../.env.example) lists everything. Copy it to `.env`, set the Supabase values and
 `NEXT_PUBLIC_USE_API=true`, remove the optional services you don't use, and start the
 container:
@@ -432,7 +438,8 @@ See [OBSERVABILITY.md](OBSERVABILITY.md) for verification monitoring.
 - **Backups**: back up Postgres independently and regularly test restoring Auth, parcels,
   events and push tables together.
 - **Secrets**: rotate anything exposed. New VAPID keys invalidate all browser subscriptions.
-  Revoke an exposed APNs key in the Apple Developer portal before replacing it. A new
+  Revoke an exposed APNs key in the Apple Developer portal, or an FCM service account key in
+  Google Cloud, before replacing it. A new
   service-role key invalidates the unsubscribe links of delivery emails already sent.
 
 ## Migrating from a pre-account deployment

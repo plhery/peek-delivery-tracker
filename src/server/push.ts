@@ -13,6 +13,7 @@ import { catalogLanguage, tagLocale, type Locale } from '../lib/locale';
 import { languageTags } from '../lib/messages';
 import { ALERT_PRESET_STAGES } from '../lib/notificationPresets';
 import { capitalized } from '../peek/parcel/summary';
+import { FCMAuthError, FcmClient, FCMError, fcmTokenGone } from './fcm';
 import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent } from './metrics';
 import { errorType, logOperationalEvent } from './observability';
 import { providerCopies } from './providerCopies';
@@ -804,13 +805,19 @@ export class WebPushNotificationService {
 
 /** The push service says the subscription is gone, as for an account's. */
 const GONE_SUBSCRIPTION = new Set([404, 410]);
+
+/** What a link's alert is sent through: a browser's push service, APNs or FCM. */
+function linkAlertTransport(row: JsonObject): 'web' | NativeTransport {
+  if (stringField(row, 'apns_token')) return 'apns';
+  return stringField(row, 'fcm_token') ? 'fcm' : 'web';
+}
 /** An alert whose sends keep failing is removed after this many in a row. */
 const MAX_LINK_ALERT_FAILURES = 3;
 const FINISHED_STAGES = new Set(['delivered', 'returned']);
 
 /**
- * Notifications for parcel links, for people without an account, in a browser
- * or in the iPhone app. An alert is told about its parcel's scans with the
+ * Notifications for parcel links, for people without an account, in a browser,
+ * the iPhone app or the Android app. An alert is told about its parcel's scans with the
  * words an account gets, in the alert's language, when its preset covers the
  * scan's stage. It never carries the parcel's name or number.
  *
@@ -819,7 +826,7 @@ const FINISHED_STAGES = new Set(['delivered', 'returned']);
  *   still announced to the people it was shared with, not to its owner.
  * - A gift on its way is announced as one: without the place of a scan, and
  *   without the scans its page leaves out.
- * - An alert on a browser or iPhone the parcel's owner gets account
+ * - An alert on a browser or phone the parcel's owner gets account
  *   notifications on is passed over, so nobody is told twice.
  * - An alert ends with the journey, when the push service says its
  *   subscription is gone, and after a few failed sends in a row. A failed send
@@ -833,22 +840,24 @@ export class ParcelLinkAlertService {
   constructor(
     readonly web: WebPushNotificationService | null,
     readonly native: NativePushNotificationService | null = null,
+    readonly fcm: FcmPushNotificationService | null = null,
   ) {
-    const client = web?.client ?? native?.client;
-    if (!client) throw new TypeError('Parcel link alerts need Web Push or APNs');
+    const client = web?.client ?? native?.client ?? fcm?.client;
+    if (!client) throw new TypeError('Parcel link alerts need Web Push, APNs or FCM');
     this.client = client;
   }
 
   /** Milliseconds, whichever channel keeps the clock. */
   now(): number {
-    return this.web ? this.web.now() : this.native!.now() * 1_000;
+    return this.web ? this.web.now() : (this.native ?? this.fcm)!.now() * 1_000;
   }
 
   async dispatch(signal?: AbortSignal): Promise<PushSummary> {
     signal?.throwIfAborted();
     const { client } = this;
     const grouped = new Map<string, JsonObject[]>();
-    for (const row of await client.listPendingParcelLinkAlerts({ web: this.web !== null, app: this.native !== null })) {
+    const channels = { web: this.web !== null, apns: this.native !== null, fcm: this.fcm !== null };
+    for (const row of await client.listPendingParcelLinkAlerts(channels)) {
       const alertId = stringField(row, 'alert_id');
       grouped.set(alertId, [...(grouped.get(alertId) ?? []), row]);
     }
@@ -858,8 +867,9 @@ export class ParcelLinkAlertService {
     for (const [alertId, events] of grouped) {
       signal?.throwIfAborted();
       const newest = announcedScan(events.filter((event) => this.announces(event)), times);
-      const app = stringField(events[0]!, 'apns_token') !== '';
-      const channel = app ? 'ios' : 'web';
+      const transport = linkAlertTransport(events[0]!);
+      const app = transport === 'apns' ? this.native : transport === 'fcm' ? this.fcm : null;
+      const channel = app?.app ?? 'web';
       const finished = FINISHED_STAGES.has(stringField(events[0]!, 'package_stage'));
       const failures = Number(events[0]!.failures ?? 0);
       const eventIds = events.map((event) => stringField(event, 'event_id')).filter(Boolean);
@@ -882,12 +892,12 @@ export class ParcelLinkAlertService {
       }
       summary.attempted += 1;
       try {
-        if (app) await this.native!.send(this.appDevice(newest), this.appPayload(newest), `link-${stringField(newest, 'link_id')}`);
+        if (transport !== 'web') await app!.send(this.appDevice(newest), this.appPayload(newest), `link-${stringField(newest, 'link_id')}`);
         else await this.web!.send(newest, this.payload(newest));
       } catch (error) {
         signal?.throwIfAborted();
         const status = typeof error === 'object' && error !== null && 'statusCode' in error ? Number(error.statusCode) : 0;
-        if (app ? this.native!.isExpired(error) : GONE_SUBSCRIPTION.has(status)) {
+        if (transport !== 'web' ? app!.isExpired(error) : GONE_SUBSCRIPTION.has(status)) {
           await remove('expired');
           recordParcelAlertSent('expired', channel);
           summary.expired += 1;
@@ -950,12 +960,14 @@ export class ParcelLinkAlertService {
     };
   }
 
-  /** Where APNs sends an iPhone's alert. */
+  /** Where APNs sends an iPhone's alert, or FCM an Android phone's. */
   private appDevice(row: JsonObject): JsonObject {
-    return { token: stringField(row, 'apns_token'), environment: stringField(row, 'apns_environment') };
+    return linkAlertTransport(row) === 'fcm'
+      ? { token: stringField(row, 'fcm_token'), environment: 'production' }
+      : { token: stringField(row, 'apns_token'), environment: stringField(row, 'apns_environment') };
   }
 
-  /** The same words for the iPhone app, which opens the link it follows when the notification is tapped. */
+  /** The same words for the phone apps, which open the link they follow when the notification is tapped. */
   appPayload(row: JsonObject): JsonObject {
     const { title, body, ...web } = this.payload(row);
     const clock = Object.fromEntries(DEVICE_CLOCK_KEYS.flatMap((key) => key in web ? [[key, web[key]]] : []));
@@ -1038,40 +1050,61 @@ async function postApns(
   });
 }
 
-export class NativePushNotificationService {
-  static readonly EXPIRED_REASONS = new Set([
-    'BadDeviceToken',
-    'DeviceTokenNotForTopic',
-    'Unregistered',
-  ]);
+/** How the server reaches a phone: APNs for the iPhone app, Firebase Cloud Messaging for the Android app. */
+export type NativeTransport = 'apns' | 'fcm';
 
-  #privateKey: KeyObject;
-  #cachedToken: { token: string; issuedAt: number } | null = null;
+/** What replaces an earlier notification for the same thing: given, else the parcel's id, else the friend's. */
+function collapseKey(row: JsonObject, given?: string): string {
+  const packageId = stringField(row, 'package_id');
+  return (given ?? (packageId || (row.friend_id ? `friend-${String(row.friend_id)}` : ''))).slice(0, 64);
+}
 
-  constructor(
-    readonly client: SupabaseServiceClient,
-    readonly teamId: string,
-    readonly keyId: string,
-    privateKey: string,
-    readonly bundleId: string,
-    readonly now: () => number = () => Date.now() / 1_000,
-  ) {
-    try {
-      const key = createPrivateKey(privateKey.replaceAll('\\n', '\n').trim());
-      if (
-        key.asymmetricKeyType !== 'ec'
-        || key.asymmetricKeyDetails?.namedCurve !== 'prime256v1'
-      ) throw new TypeError('APNS_PRIVATE_KEY must be a P-256 private key');
-      this.#privateKey = key;
-    } catch (error) {
-      throw new TypeError('APNS_PRIVATE_KEY must be a P-256 private key', { cause: error });
-    }
+/**
+ * The iPhone's payload as FCM data, which holds strings alone: the alert's title and body
+ * beside the payload's own fields (`parcel_id`, `link_id`, `kind`, `friend_id` and those of
+ * `deviceClockFields`), which the Android app reads as the iPhone's notification service does.
+ */
+export function fcmData(payload: JsonObject): Record<string, string> {
+  const { aps, ...fields } = payload;
+  const alert = isRecord(aps) && isRecord(aps.alert) ? aps.alert : {};
+  const data: Record<string, string> = {};
+  for (const [key, value] of Object.entries({ title: alert.title, body: alert.body, ...fields })) {
+    if (value === undefined || value === null) continue;
+    data[key] = typeof value === 'string' ? value : JSON.stringify(value);
+  }
+  return data;
+}
+
+/**
+ * An account's notifications on its phones, from one queue in the same words: each service
+ * sends to the devices of its own transport. Payloads take the iPhone's shape (`payload`);
+ * FCM carries the same alert and fields as data (`fcmData`).
+ */
+abstract class AppPushNotificationService {
+  abstract readonly client: SupabaseServiceClient;
+  /** Seconds. */
+  abstract readonly now: () => number;
+  abstract readonly transport: NativeTransport;
+
+  /** `collapseId` replaces a later notification for the same thing; a parcel's id, or a friend's, unless given. */
+  abstract send(row: JsonObject, payload?: JsonObject, collapseId?: string): Promise<void>;
+
+  /** Whether the push service says the device's token will never take a notification again. */
+  abstract isExpired(error: unknown): boolean;
+
+  /** The app that metrics count this transport's sends for. */
+  get app(): 'ios' | 'android' {
+    return this.transport === 'fcm' ? 'android' : 'ios';
+  }
+
+  private get serviceName(): string {
+    return this.transport === 'fcm' ? 'FCM' : 'APNs';
   }
 
   async dispatch(signal?: AbortSignal): Promise<PushSummary> {
     signal?.throwIfAborted();
     const grouped = new Map<string, JsonObject[]>();
-    for (const row of await this.client.listPendingNativePushNotifications()) {
+    for (const row of await this.client.listPendingNativePushNotifications(this.transport)) {
       const key = JSON.stringify([stringField(row, 'device_id'), stringField(row, 'package_id')]);
       grouped.set(key, [...(grouped.get(key) ?? []), row]);
     }
@@ -1087,7 +1120,7 @@ export class NativePushNotificationService {
           deviceId,
           events.map((event) => stringField(event, 'event_id')).filter(Boolean),
         );
-        recordAccountPushSent('skipped', 'ios');
+        recordAccountPushSent('skipped', this.app);
         continue;
       }
       summary.attempted += 1;
@@ -1102,23 +1135,23 @@ export class NativePushNotificationService {
           last_success_at: new Date().toISOString(),
           last_error: null,
         });
-        recordAccountPushSent('sent', 'ios');
+        recordAccountPushSent('sent', this.app);
         summary.sent += 1;
       } catch (error) {
         signal?.throwIfAborted();
         if (this.isExpired(error)) {
           await this.client.updateNativePushDevice(deviceId, {
             disabled_at: new Date().toISOString(),
-            last_error: 'APNs device token expired',
+            last_error: `${this.serviceName} device token expired`,
           });
-          recordAccountPushSent('expired', 'ios');
+          recordAccountPushSent('expired', this.app);
           summary.expired += 1;
         } else {
-          logDeliveryFailure('native', error);
+          logDeliveryFailure('native', error, this.transport);
           await this.client.updateNativePushDevice(deviceId, {
-            last_error: 'APNs delivery failed',
+            last_error: `${this.serviceName} delivery failed`,
           });
-          recordAccountPushSent('failed', 'ios');
+          recordAccountPushSent('failed', this.app);
           summary.failed += 1;
         }
       }
@@ -1129,33 +1162,6 @@ export class NativePushNotificationService {
   async sendTest(device: JsonObject): Promise<void> {
     const copy = PUSH_COPY[this.locale(device)];
     await this.send(device, this.payload(copy.test_title!, copy.test_body!, null));
-  }
-
-  /** `collapseId` replaces a later notification for the same thing; a parcel's id, or a friend's, unless given. */
-  async send(row: JsonObject, payload?: JsonObject, collapseId?: string): Promise<void> {
-    const environment = stringField(row, 'environment') || 'production';
-    const host = environment === 'development'
-      ? 'api.sandbox.push.apple.com'
-      : 'api.push.apple.com';
-    const packageId = stringField(row, 'package_id');
-    const headers: Record<string, string> = {
-      authorization: `bearer ${await this.providerToken()}`,
-      'apns-topic': this.bundleId,
-      'apns-push-type': 'alert',
-      'apns-priority': '10',
-      'apns-expiration': String(Math.floor(this.now()) + 86_400),
-      'content-type': 'application/json',
-    };
-    const collapse = collapseId ?? (packageId || (row.friend_id ? `friend-${String(row.friend_id)}` : ''));
-    if (collapse) headers['apns-collapse-id'] = collapse.slice(0, 64);
-    const response = await postApns(
-      host,
-      `/3/device/${stringField(row, 'token')}`,
-      headers,
-      payload ?? this.eventPayload(row),
-      15_000,
-    );
-    if (response.status !== 200) throw new APNsError(response.status, response.reason);
   }
 
   eventPayload(row: JsonObject): JsonObject {
@@ -1190,6 +1196,65 @@ export class NativePushNotificationService {
   locale(row: JsonObject): Locale {
     return notificationLocale(stringField(row, 'locale'));
   }
+}
+
+/** The iPhone app's notifications, through APNs with a provider token. */
+export class NativePushNotificationService extends AppPushNotificationService {
+  static readonly EXPIRED_REASONS = new Set([
+    'BadDeviceToken',
+    'DeviceTokenNotForTopic',
+    'Unregistered',
+  ]);
+
+  readonly transport = 'apns';
+  #privateKey: KeyObject;
+  #cachedToken: { token: string; issuedAt: number } | null = null;
+
+  constructor(
+    readonly client: SupabaseServiceClient,
+    readonly teamId: string,
+    readonly keyId: string,
+    privateKey: string,
+    readonly bundleId: string,
+    readonly now: () => number = () => Date.now() / 1_000,
+  ) {
+    super();
+    try {
+      const key = createPrivateKey(privateKey.replaceAll('\\n', '\n').trim());
+      if (
+        key.asymmetricKeyType !== 'ec'
+        || key.asymmetricKeyDetails?.namedCurve !== 'prime256v1'
+      ) throw new TypeError('APNS_PRIVATE_KEY must be a P-256 private key');
+      this.#privateKey = key;
+    } catch (error) {
+      throw new TypeError('APNS_PRIVATE_KEY must be a P-256 private key', { cause: error });
+    }
+  }
+
+  async send(row: JsonObject, payload?: JsonObject, collapseId?: string): Promise<void> {
+    const environment = stringField(row, 'environment') || 'production';
+    const host = environment === 'development'
+      ? 'api.sandbox.push.apple.com'
+      : 'api.push.apple.com';
+    const headers: Record<string, string> = {
+      authorization: `bearer ${await this.providerToken()}`,
+      'apns-topic': this.bundleId,
+      'apns-push-type': 'alert',
+      'apns-priority': '10',
+      'apns-expiration': String(Math.floor(this.now()) + 86_400),
+      'content-type': 'application/json',
+    };
+    const collapse = collapseKey(row, collapseId);
+    if (collapse) headers['apns-collapse-id'] = collapse;
+    const response = await postApns(
+      host,
+      `/3/device/${stringField(row, 'token')}`,
+      headers,
+      payload ?? this.eventPayload(row),
+      15_000,
+    );
+    if (response.status !== 200) throw new APNsError(response.status, response.reason);
+  }
 
   async providerToken(): Promise<string> {
     const issuedAt = Math.floor(this.now());
@@ -1208,6 +1273,36 @@ export class NativePushNotificationService {
   isExpired(error: unknown): boolean {
     return error instanceof APNsError
       && (error.statusCode === 410 || NativePushNotificationService.EXPIRED_REASONS.has(error.reason));
+  }
+}
+
+/**
+ * The Android app's notifications, through Firebase Cloud Messaging. Each is a data message
+ * the app writes itself (`fcmData`), sent at high priority, kept a day, and collapsed by the
+ * key APNs gets as `apns-collapse-id`. Live Activities stay the iPhone's.
+ */
+export class FcmPushNotificationService extends AppPushNotificationService {
+  readonly transport = 'fcm';
+  readonly fcm: FcmClient;
+
+  constructor(
+    readonly client: SupabaseServiceClient,
+    projectId: string,
+    clientEmail: string,
+    privateKey: string,
+    readonly now: () => number = () => Date.now() / 1_000,
+    fetcher: typeof fetch = fetch,
+  ) {
+    super();
+    this.fcm = new FcmClient(projectId, clientEmail, privateKey, now, fetcher);
+  }
+
+  async send(row: JsonObject, payload?: JsonObject, collapseId?: string): Promise<void> {
+    await this.fcm.send(stringField(row, 'token'), fcmData(payload ?? this.eventPayload(row)), collapseKey(row, collapseId));
+  }
+
+  isExpired(error: unknown): boolean {
+    return fcmTokenGone(error);
   }
 }
 
@@ -1400,12 +1495,14 @@ export class DeliveryLiveActivityNotificationService {
 }
 
 /** Logs what the push service said about a send that failed, without its endpoint or token. */
-function logDeliveryFailure(channel: 'web' | 'native' | 'live_activity', error: unknown): void {
+function logDeliveryFailure(channel: 'web' | 'native' | 'live_activity', error: unknown, transport?: NativeTransport): void {
   const status = typeof error === 'object' && error !== null && 'statusCode' in error ? Number(error.statusCode) : null;
   logOperationalEvent('push_delivery_failed', {
     channel,
+    ...transport ? { transport } : {},
     status,
-    reason: error instanceof APNsError ? error.reason || null : null,
+    reason: error instanceof APNsError || error instanceof FCMError || error instanceof FCMAuthError
+      ? error.reason || null : null,
     error_type: errorType(error),
   }, 'warning');
 }
@@ -1424,14 +1521,19 @@ export class CompositePushNotificationService {
     readonly native: NativePushNotificationService | null,
     readonly liveActivities: DeliveryLiveActivityNotificationService | null,
     readonly linkAlerts: ParcelLinkAlertService | null = null,
+    readonly fcm: FcmPushNotificationService | null = null,
   ) {}
 
   async dispatch(signal?: AbortSignal): Promise<PushSummary> {
     signal?.throwIfAborted();
     const combined: PushSummary & { sentByChannel: Partial<Record<PushChannel, number>> } = { ...emptySummary(), sentByChannel: {} };
     const errors: unknown[] = [];
-    // Accounts first: a parcel link's alerts come on top of its owner's notifications.
-    const channels = [['live_activity', this.liveActivities], ['web', this.web], ['native', this.native], ['link_alert', this.linkAlerts]] as const;
+    // Accounts first: a parcel link's alerts come on top of its owner's notifications. The iPhone's
+    // and Android's sends both count as native.
+    const channels = [
+      ['live_activity', this.liveActivities], ['web', this.web], ['native', this.native], ['native', this.fcm],
+      ['link_alert', this.linkAlerts],
+    ] as const;
     for (const [channel, service] of channels) {
       if (!service) continue;
       try {
@@ -1440,7 +1542,7 @@ export class CompositePushNotificationService {
         combined.sent += summary.sent;
         combined.failed += summary.failed;
         combined.expired += summary.expired;
-        combined.sentByChannel[channel] = summary.sent;
+        combined.sentByChannel[channel] = (combined.sentByChannel[channel] ?? 0) + summary.sent;
       } catch (error) {
         signal?.throwIfAborted();
         // One channel's outage or schema drift must not hold back the others.
@@ -1475,13 +1577,21 @@ export function pushServices(client: SupabaseServiceClient): CompositePushNotifi
     privateKey: process.env.APNS_PRIVATE_KEY?.trim() ?? '',
     bundleId: process.env.APNS_BUNDLE_ID?.trim() ?? '',
   };
+  const fcmValues = {
+    projectId: process.env.FCM_PROJECT_ID?.trim() ?? '',
+    clientEmail: process.env.FCM_CLIENT_EMAIL?.trim() ?? '',
+    privateKey: process.env.FCM_PRIVATE_KEY?.trim() ?? '',
+  };
   if (Boolean(webValues.publicKey) !== Boolean(webValues.privateKey)) {
     throw new Error('VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY must be configured together');
   }
   if (Object.values(nativeValues).some(Boolean) && !Object.values(nativeValues).every(Boolean)) {
     throw new Error('APNS_TEAM_ID, APNS_KEY_ID, APNS_PRIVATE_KEY and APNS_BUNDLE_ID are all required');
   }
-  const signature = JSON.stringify([webValues, nativeValues]);
+  if (Object.values(fcmValues).some(Boolean) && !Object.values(fcmValues).every(Boolean)) {
+    throw new Error('FCM_PROJECT_ID, FCM_CLIENT_EMAIL and FCM_PRIVATE_KEY are all required');
+  }
+  const signature = JSON.stringify([webValues, nativeValues, fcmValues]);
   if (
     globalPush.__deliveryPushRuntime?.signature !== signature
     || globalPush.__deliveryPushRuntime.client !== client
@@ -1515,6 +1625,9 @@ export function pushServices(client: SupabaseServiceClient): CompositePushNotifi
           nativeValues.bundleId,
         )
       : null;
+    const fcm = Object.values(fcmValues).every(Boolean)
+      ? new FcmPushNotificationService(client, fcmValues.projectId, fcmValues.clientEmail, fcmValues.privateKey)
+      : null;
     globalPush.__deliveryPushRuntime = {
       signature,
       client,
@@ -1522,7 +1635,8 @@ export function pushServices(client: SupabaseServiceClient): CompositePushNotifi
         web,
         native,
         native ? new DeliveryLiveActivityNotificationService(client, native) : null,
-        web || native ? new ParcelLinkAlertService(web, native) : null,
+        web || native || fcm ? new ParcelLinkAlertService(web, native, fcm) : null,
+        fcm,
       ),
     };
   }

@@ -3039,6 +3039,17 @@ enum class NativePushEnvironment(val rawValue: String) {
 }
 
 @Serializable
+enum class NativePushTransport(val rawValue: String) {
+    @SerialName("apns") Apns("apns"),
+    @SerialName("fcm") Fcm("fcm"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): NativePushTransport? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
 enum class NativePushLocale(val rawValue: String) {
     @SerialName("en") En("en"),
     @SerialName("de") De("de"),
@@ -3065,11 +3076,13 @@ data class NativePushDeviceRequest(
     val locale: NativePushLocale,
     val deviceName: String? = null,
     val sendTest: Boolean,
+    val transport: NativePushTransport? = null,
 )
 
 @Serializable
 data class DeleteNativePushDeviceRequest(
     val token: String,
+    val transport: NativePushTransport? = null,
 )
 
 @Serializable
@@ -3436,11 +3449,13 @@ data class ParcelAppAlertRequest(
     val environment: NativePushEnvironment,
     val preset: ParcelAlertPreset,
     val locale: NativePushLocale,
+    val transport: NativePushTransport? = null,
 )
 
 @Serializable
 data class DeleteParcelAppAlertRequest(
     val token: String,
+    val transport: NativePushTransport? = null,
 )
 
 @Serializable

@@ -16,11 +16,13 @@ import * as observability from './observability';
 import {
   APNsError,
   CompositePushNotificationService,
+  FcmPushNotificationService,
   NativePushNotificationService,
   ParcelLinkAlertService,
   pushServices,
   WebPushNotificationService,
 } from './push';
+import { FCMError } from './fcm';
 import { messagesFor } from './requestLocale';
 import { SupabaseServiceClient } from './supabase';
 import type { JsonObject } from './types';
@@ -528,7 +530,7 @@ describe('alerts in the iPhone app', () => {
     const queue = pending([row(), appRow({ alert_id: 'alert-2', locale: 'fr' })]);
     const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
     expect(await alerts.dispatch()).toEqual({ attempted: 2, sent: 2, failed: 0, expired: 0 });
-    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: true, app: true });
+    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: true, apns: true, fcm: false });
     expect(send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ alert_id: 'alert-1' }), expect.anything());
     const words = alerts.payload(appRow({ locale: 'fr' }));
     expect(apns).toHaveBeenCalledExactlyOnceWith({ token, environment: 'development' }, {
@@ -575,7 +577,71 @@ describe('alerts in the iPhone app', () => {
     const queue = pending([]);
     await new ParcelLinkAlertService(null, native).dispatch();
     await new ParcelLinkAlertService(web).dispatch();
-    expect(queue.mock.calls).toEqual([[{ web: false, app: true }], [{ web: true, app: false }]]);
+    expect(queue.mock.calls).toEqual([[{ web: false, apns: true, fcm: false }], [{ web: true, apns: false, fcm: false }]]);
     expect(() => new ParcelLinkAlertService(null, null)).toThrow(TypeError);
+  });
+});
+
+describe('alerts in the Android app', () => {
+  // A synthetic registration token and service account key: FCM and Google never issued them.
+  const token = `synthetic:${'Fc_m-'.repeat(30)}`;
+  const appRow = (changes: JsonObject = {}) => row({
+    endpoint: null, p256dh: null, auth: null, apns_token: null, apns_environment: null, fcm_token: token, ...changes,
+  });
+  const rsaKey = () => generateKeyPairSync('rsa', { modulusLength: 2048 }).privateKey.export({ type: 'pkcs8', format: 'pem' }).toString();
+  let fcm: FcmPushNotificationService;
+  let android: MockInstance<FcmPushNotificationService['send']>;
+
+  beforeEach(() => {
+    fcm = new FcmPushNotificationService(client, 'synthetic-project', 'sender@synthetic-project.example', rsaKey(), () => now / 1_000);
+    android = vi.spyOn(fcm, 'send').mockResolvedValue();
+    alerts = new ParcelLinkAlertService(web, null, fcm);
+  });
+
+  it('sends an Android phone\'s alert through FCM in the words an iPhone gets', async () => {
+    const queue = pending([row(), appRow({ alert_id: 'alert-2', locale: 'fr' })]);
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
+    expect(await alerts.dispatch()).toEqual({ attempted: 2, sent: 2, failed: 0, expired: 0 });
+    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: true, apns: false, fcm: true });
+    expect(android).toHaveBeenCalledExactlyOnceWith({ token, environment: 'production' }, alerts.appPayload(appRow({ locale: 'fr' })), `link-${linkId}`);
+    expect(JSON.stringify(android.mock.calls)).not.toContain('package-1');
+    expect(counted.mock.calls).toEqual([['sent', 'web'], ['sent', 'android']]);
+  });
+
+  it('passes over an alert on a phone the parcel\'s owner gets the app\'s account notifications on', async () => {
+    pending([appRow({ account_endpoint: true })]);
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
+    expect(await alerts.dispatch()).toEqual({ attempted: 0, sent: 0, failed: 0, expired: 0 });
+    expect(android).not.toHaveBeenCalled();
+    expect(counted).toHaveBeenCalledExactlyOnceWith('skipped', 'android');
+  });
+
+  it.each([new FCMError(404, 'UNREGISTERED'), new FCMError(400, 'INVALID_ARGUMENT', true)])(
+    'is removed when FCM says the token is gone (%s)', async (error) => {
+      pending([appRow()]);
+      android.mockRejectedValue(error);
+      const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
+      expect(await alerts.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 0, expired: 1 });
+      expect(removed).toHaveBeenCalledExactlyOnceWith('alert-1');
+      expect(counted).toHaveBeenCalledExactlyOnceWith('expired', 'android');
+    },
+  );
+
+  it('counts another refusal as a failed send', async () => {
+    pending([appRow()]);
+    android.mockRejectedValue(new FCMError(503, 'UNAVAILABLE'));
+    const counted = vi.spyOn(metrics, 'recordParcelAlertSent');
+    expect(await alerts.dispatch()).toEqual({ attempted: 1, sent: 0, failed: 0, expired: 0 });
+    expect(failures).toHaveBeenCalledExactlyOnceWith('alert-1', 1);
+    expect(removed).not.toHaveBeenCalled();
+    expect(counted).toHaveBeenCalledExactlyOnceWith('failed', 'android');
+  });
+
+  it('runs on a server that sends through FCM alone, on its clock', async () => {
+    const queue = pending([appRow()]);
+    const alone = new ParcelLinkAlertService(null, null, fcm);
+    expect(alone.now()).toBe(now);
+    expect(await alone.dispatch()).toMatchObject({ sent: 1 });
+    expect(queue).toHaveBeenCalledExactlyOnceWith({ web: false, apns: false, fcm: true });
   });
 });

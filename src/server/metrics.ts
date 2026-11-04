@@ -212,7 +212,7 @@ function createRuntime(): PrometheusRuntime {
     }),
     parcelAlertSetTotal: new Counter({
       name: 'parcel_alert_set_total',
-      help: 'Requests to turn on an alert for a parcel link by outcome (added, updated, full, finished, stopped, unavailable) and app (web, ios).',
+      help: 'Requests to turn on an alert for a parcel link by outcome (added, updated, full, finished, stopped, unavailable) and app (web, ios, android).',
       labelNames: ['outcome', 'app'] as const,
       registers: [registry],
     }),
@@ -224,13 +224,13 @@ function createRuntime(): PrometheusRuntime {
     }),
     parcelAlertSentTotal: new Counter({
       name: 'parcel_alert_sent_total',
-      help: 'Batches of new scans handled for a parcel link alert by outcome (sent, skipped, failed, expired) and app (web, ios).',
+      help: 'Batches of new scans handled for a parcel link alert by outcome (sent, skipped, failed, expired) and app (web, ios, android).',
       labelNames: ['outcome', 'app'] as const,
       registers: [registry],
     }),
     accountPushSentTotal: new Counter({
       name: 'account_push_sent_total',
-      help: 'Batches of new scans of an account\'s parcel handled for one of its browsers or iPhones by outcome (sent, skipped, failed, expired) and app (web, ios).',
+      help: 'Batches of new scans of an account\'s parcel handled for one of its browsers or phones by outcome (sent, skipped, failed, expired) and app (web, ios, android).',
       labelNames: ['outcome', 'app'] as const,
       registers: [registry],
     }),
@@ -508,8 +508,8 @@ export function recordParcelShare(kind: 'lookup' | 'account', change: 'started' 
 
 export type ParcelAlertOutcome = 'added' | 'updated' | 'full' | 'finished' | 'stopped' | 'unavailable';
 
-/** Which app an alert for a parcel link notifies in: the browser's or the iPhone app. */
-export type ParcelAlertApp = 'web' | 'ios';
+/** Which app an alert for a parcel link notifies in: the browser's, the iPhone app or the Android app. */
+export type ParcelAlertApp = 'web' | 'ios' | 'android';
 
 export function recordParcelAlertSet(outcome: ParcelAlertOutcome, app: ParcelAlertApp): void {
   count(runtime.parcelAlertSetTotal, 'parcel_alert_set_total', { outcome, app });
@@ -541,7 +541,7 @@ export function recordParcelAlertSent(outcome: 'sent' | 'skipped' | 'failed' | '
   count(runtime.parcelAlertSentTotal, 'parcel_alert_sent_total', { outcome, app });
 }
 
-/** One batch of an account's new scans for one of its browsers or iPhones, as for a link's alert. */
+/** One batch of an account's new scans for one of its browsers or phones, as for a link's alert. */
 export function recordAccountPushSent(outcome: 'sent' | 'skipped' | 'failed' | 'expired', app: ParcelAlertApp): void {
   count(runtime.accountPushSentTotal, 'account_push_sent_total', { outcome, app });
 }

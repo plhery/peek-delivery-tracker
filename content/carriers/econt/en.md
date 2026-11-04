@@ -12,13 +12,13 @@ Econt Express is a Bulgarian courier, founded in 1993, that delivers to your doo
 
 Econt calls it the shipment number or waybill number. Econt's emails and SMS carry a link that opens the tracking; SMS is an option the sender pays for, so not every parcel gets one. No message? Ask the shop, or see [where else to find a tracking number](guide:find-tracking-number).
 
-Econt publishes no format; Peek reads its shipment numbers as 13 digits, like the invented `1111111111111`.
+Econt publishes no format, but the sample waybill numbers in its XML integration manual have 13 digits, and Peek reads Econt's shipment numbers as 13 digits too, like the invented `1111111111111`.
 
 Thirteen digits also fit other carriers, among them [DPD France](carrier:dpd-fr), Ukraine's [Ukrposhta](carrier:ukrposhta) and Romania's [FAN Courier](carrier:fan-courier), so check which carrier the shop's email or the SMS names.
 
 ## What Econt's tracking statuses mean
 
-econt.com opens in Bulgarian, with a switch to English. The English site shows each scan's label in English and its place in Latin script, plus a summary status at the top. These are its English labels, in the order a parcel meets them.
+econt.com opens in Bulgarian, with a switch to English. These are Econt's scan labels in English, as Peek reads them, in the order a parcel meets them.
 
 | Econt's status | What it means for you |
 | --- | --- |
@@ -66,7 +66,7 @@ Econt's channels, as read on 12 October 2026 on its [customer service page](http
 
 ## Tracking an Econt parcel with Peek
 
-[Peek](/) can't tell an Econt parcel from its 13 digits: it offers them to other carriers, such as Delhivery, never Econt. If none knows it, you'll see "not found yet · Peek keeps checking": pick "Econt" with "Change". Or paste an econt.com link with `/services/track-shipment/`, `/tracking/` or `/tracking/?num=` and the number, which names Econt straight away.
+[Peek](/) can't tell an Econt parcel from its 13 digits: it offers them to other carriers, such as Delhivery, and asks Econt itself only when you add the number on the website from Bulgaria, or in the app on a phone whose region is Bulgaria. If none knows it, you'll see "not found yet · Peek keeps checking": pick "Econt" with "Change". Or paste an econt.com link with `/services/track-shipment/`, `/tracking/` or `/tracking/?num=` and the number, which names Econt straight away.
 
 It then shows its own status, set from Econt's summary when that settles one, the history with the office of each office scan on a map, and the delivery time. While the parcel waits, it shows the name of the Econt office storing it. Econt gives no expected delivery day or weight. The parcel count, courier's and recipient's names, sender and order references are left out.
 
@@ -76,7 +76,7 @@ Scans keep the English labels above, except `Delivered`, shown in Peek's own wor
 
 ### Can I see Econt tracking in English?
 
-Yes: econt.com's English version shows scans in English and places in Latin script.
+In Peek, yes: it shows Econt's scans with the English labels in the table above. econt.com also has an English version, with "Track a shipment".
 
 ### How long does Econt delivery take?
 
@@ -95,5 +95,6 @@ Paste the number in the box above and pick "Econt" with "Change": Peek can't tel
 - [Econt: Econtomat](https://www.econt.com/en/services/econtomat) – 24/7, sizes, how to receive
 - [Econt: Имейл или SMS известяване](https://www.econt.com/developers/29-sms-izvestyavane.html) – tracking link in notifications
 - [Econt: Instructions form](https://instruction.econt.com/5cZyLrYsBZH) – neighbour, forwarding, office choice
+- [Econt: Integration of e-shops with the information system of Econt Express](https://www.econt.com/e-econt/doc_templates/XML_manual_engl.pdf) – 13-digit sample waybill numbers
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

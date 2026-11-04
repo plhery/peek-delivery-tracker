@@ -48,13 +48,13 @@ Once the delivery partner has the parcel, its scans appear in its own words. Evr
 
 ## Landmark Global delivery: who brings it and missed parcels
 
-In most countries Landmark doesn't deliver itself. Its own pages name some partners: bpost in Belgium, its sister company Apple Express in Canada, and DHL eCommerce and UPS in the US. Its UK page speaks of "multiple logistics partners" without naming them. Evri's hub and depot scans also turn up on Landmark parcels. These are examples, not rules: the partner named on your parcel is what counts.
+In most countries Landmark doesn't deliver itself. Its own pages name some partners: bpost in Belgium, its sister company Apple Express in Canada, and DHL eCommerce and UPS in the US. Its UK page speaks of "multiple logistics partners" without naming them. On parcels Peek has looked up, Evri took over in the UK, with its own hub and depot scans, Hermes delivered in Germany, and the national post delivered in Italy, Morocco and Colombia. These are examples, not rules: the partner named on your parcel is what counts.
 
 Notices, pickup points, holding times and redelivery follow that partner's rules, not Landmark's. If you're out, Landmark says to follow the driver's instructions or contact its customer service to reschedule or arrange pickup, adding that not every service offers redelivery or pickup.
 
 Address changes: Landmark's European FAQ says once the parcel has a label, the address can no longer be changed. Its US and Canada page says a change depends on the shipping stage.
 
-For the partner's own rules, see the [Evri](carrier:evri), [UPS](carrier:ups) or [bpost](carrier:bpost) page.
+For the partner's own rules, see the [Evri](carrier:evri), [Hermes](carrier:hermes-de), [UPS](carrier:ups) or [bpost](carrier:bpost) page.
 
 ## Landmark Global parcel delayed, lost or returned
 
@@ -62,7 +62,7 @@ For the partner's own rules, see the [Evri](carrier:evri), [UPS](carrier:ups) or
 
 **No update after handover.** Newer scans may appear only on the delivery partner's site, under the "Delivery Partner" link on Landmark's page. See [why tracking stops updating](guide:tracking-not-updating).
 
-**Lost, damaged or wrong item.** Landmark asks you to contact the seller, who can open an investigation and deal with Landmark. It offers insurance only to its direct customers, the shops.
+**Lost, damaged or wrong item.** Landmark asks you to contact the seller, who can open an investigation and deal with Landmark. It offers insurance only to its direct customers, the shops. Act quickly: Landmark's EU terms give the shop 30 calendar days from Landmark's "accepted" scan to file a complaint.
 
 **Customs.** Landmark publishes nothing for recipients on duties; [parcels held at customs](guide:customs) explains what generally applies.
 
@@ -112,5 +112,6 @@ Landmark says delivery times depend on the service the shop chose and the destin
 - [Landmark Global: Parcel delivery to Canada](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-canada/) – Apple Express, part of Bnode, 60% of the population
 - [Landmark Global: Parcel delivery to the US](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-united-states/) – DHL E-Com, UPS, SurePost and UPS Ground; standard 3 to 6 days
 - [Landmark Global: Parcel delivery to the UK](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-uk/) – "multiple logistics partners", none named
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – statuses, Evri's scans, delivery partner, returns, scan times, what Peek reads and shows
+- [Landmark Global: EU General Terms and Conditions 2026](https://landmarkglobal.com/uploads/no-index-files/2026-GTC-_-LG-EN-EU.pdf) – 30 calendar days for the shop's complaint
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – statuses, Evri's scans, partners on parcels looked up, delivery partner, returns, scan times, what Peek reads and shows
 :::

@@ -48,7 +48,7 @@ Le site de suivi a un menu de langues, dont le français. Mais Peek lit la page 
 
 ## Livraison Landmark Global en France, en Belgique et en Suisse
 
-Dans la plupart des pays, Landmark ne livre pas lui-même : il se dit « neutre vis-à-vis des transporteurs » et travaille avec des postes et des livreurs locaux. Sa page Belgique nomme bpost, qui livre selon elle à domicile, dans plus de 2 000 points d'enlèvement ou 1 300 distributeurs de colis. Sa page France parle de plusieurs partenaires logistiques sans en nommer aucun, et Landmark ne nomme aucun livreur pour la Suisse. C'est le livreur indiqué dans le suivi de ton colis qui compte.
+Dans la plupart des pays, Landmark ne livre pas lui-même : il se dit « neutre vis-à-vis des transporteurs » et travaille avec des postes et des livreurs locaux. Sa page Belgique nomme bpost, qui livre selon elle à domicile, dans plus de 2 000 points d'enlèvement ou 1 300 distributeurs de colis. Sa page France parle de plusieurs partenaires logistiques sans en nommer aucun, et Landmark ne nomme aucun livreur pour la Suisse. Sur des colis que Peek a consultés, le partenaire était par exemple Hermes en Allemagne ou Evri au Royaume-Uni, et la poste nationale a livré en Italie, au Maroc ou en Algérie. Ce sont des exemples : c'est le livreur indiqué dans le suivi de ton colis qui compte.
 
 Avis de passage, point de retrait, durée de garde et nouvelle livraison suivent donc les règles de ce livreur, pas celles de Landmark. Si c'est bpost, vois [le suivi bpost](carrier:bpost).
 
@@ -66,7 +66,7 @@ Landmark travaille pour la boutique, pas pour toi : il traite les envois selon l
 
 **Plus rien après la remise au livreur.** Les nouveaux scans peuvent n'apparaître que chez le livreur, via le lien vers le livreur sur la page Landmark. [Pourquoi un suivi ne bouge plus](guide:tracking-not-updating) explique les causes habituelles.
 
-**Perdu, abîmé ou mauvais article.** Landmark demande de contacter le magasin en ligne, qui peut ouvrir une enquête et voir avec lui. Il n'assure que ses clients directs, les boutiques.
+**Perdu, abîmé ou mauvais article.** Landmark demande de contacter le magasin en ligne, qui peut ouvrir une enquête et voir avec lui. Il n'assure que ses clients directs, les boutiques. Fais vite : ses conditions générales européennes donnent à la boutique 30 jours calendaires après le scan d'acceptation de Landmark pour déposer une réclamation.
 
 **Douane.** Landmark ne publie rien pour les destinataires sur les droits et taxes ; [colis bloqué en douane](guide:customs) explique ce qui s'applique en général.
 
@@ -117,5 +117,6 @@ Oui : le site de suivi de Landmark accepte jusqu'à 25 numéros séparés par de
 - [Landmark Global : Parcel delivery to Belgium](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-belgium/) – bpost, points d'enlèvement, distributeurs
 - [Landmark Global : Parcel delivery to France](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-france/) – plusieurs partenaires, aucun nommé
 - [Landmark Global : Parcel delivery to the US](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-united-states/) – UPS
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – statuts, livreur, retours, heures des scans, ce que Peek lit et affiche
+- [Landmark Global : Conditions générales UE 2026](https://landmarkglobal.com/uploads/no-index-files/2026-GTC-_-LG-FR-EU.pdf) – 30 jours pour la réclamation de la boutique
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – statuts, livreur, partenaires sur des colis consultés, retours, heures des scans, ce que Peek lit et affiche
 :::

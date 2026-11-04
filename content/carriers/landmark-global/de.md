@@ -18,7 +18,7 @@ Landmark nennt sie LTN, seine eindeutige Kennung für jedes Paket, mit der sich 
 | `LTN123456789` | LTN und 9 Ziffern: ebenfalls. |
 | `LTN123456789N1` | LTN, 9 Ziffern und N1: ebenfalls, mit Landmarks Endung. |
 | `AB12345678` | Die Bestell- oder Paketreferenz des Shops, die Landmarks Tracking auch annimmt. |
-| Nummer eines anderen Paketdiensts | Die eigene Nummer des Zustellpartners für dasselbe Paket. |
+| Nummer eines anderen Paketdiensts | Die eigene Nummer des Zustellpartners für dasselbe Paket, etwa von Hermes. |
 
 Auf Landmarks Tracking-Seite kannst du bis zu 25 Nummern auf einmal eingeben, getrennt durch Kommas. Sobald der Zustellpartner feststeht, also der Paketdienst, der zustellt, nennt die Seite ihn mit seiner eigenen Nummer und einem Link zu seinem Tracking (auf der englischen Seite unter „Delivery Partner“). Ein Paket kann also zwei Nummern haben.
 
@@ -48,9 +48,9 @@ Sobald der Zustellpartner das Paket hat, kommen seine Scans in seinen eigenen Wo
 
 ## Wer liefert Landmark Global in Deutschland, Österreich und der Schweiz?
 
-In den meisten Ländern stellt Landmark nicht selbst zu. Seine Seite zu Deutschland spricht nur von mehreren Zustellfirmen und Logistikpartnern vor Ort, ohne Namen zu nennen. Für Österreich und die Schweiz gibt Landmark keinen Partner an. Was für dein Paket gilt, steht beim Zustellpartner auf Landmarks Seite.
+In den meisten Ländern stellt Landmark nicht selbst zu. Seine Seite zu Deutschland spricht nur von mehreren Zustellfirmen und Logistikpartnern vor Ort, ohne Namen zu nennen. Bei Paketen, die Peek abgefragt hat, stellte in Deutschland zum Beispiel Hermes zu. Für Österreich und die Schweiz gibt Landmark keinen Partner an. Was für dein Paket gilt, steht beim Zustellpartner auf Landmarks Seite.
 
-Benachrichtigung, Abholstelle, Lagerfrist und neuer Zustellversuch richten sich nach diesem Partner, nicht nach Landmark. Warst du nicht da, sollst du laut Landmark den Hinweisen des Zustellers folgen oder Landmarks Kundenservice kontaktieren, um einen neuen Termin oder eine Abholung zu vereinbaren. Landmark fügt hinzu, dass nicht jeder Versandservice eine neue Zustellung oder Abholung anbietet.
+Benachrichtigung, Abholstelle, Lagerfrist und neuer Zustellversuch richten sich nach diesem Partner, nicht nach Landmark. Wie Hermes das handhabt, steht auf der Seite zu [Hermes](carrier:hermes-de). Warst du nicht da, sollst du laut Landmark den Hinweisen des Zustellers folgen oder Landmarks Kundenservice kontaktieren, um einen neuen Termin oder eine Abholung zu vereinbaren. Landmark fügt hinzu, dass nicht jeder Versandservice eine neue Zustellung oder Abholung anbietet.
 
 Adresse ändern: Laut Landmarks europäischer FAQ geht das nicht mehr, sobald das Paket ein Etikett hat. Für Details verweist Landmark an seinen Kundenservice.
 
@@ -60,7 +60,7 @@ Adresse ändern: Laut Landmarks europäischer FAQ geht das nicht mehr, sobald da
 
 **Kein Update nach der Übergabe.** Neue Scans erscheinen dann manchmal nur beim Zustellpartner, über den Link beim Zustellpartner. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Verloren, beschädigt oder falscher Artikel.** Landmark bittet dich, den Verkäufer zu kontaktieren: Er kann Nachforschungen anstoßen und sich mit Landmark abstimmen. Eine Versicherung bietet Landmark nur seinen direkten Kunden an, den Shops.
+**Verloren, beschädigt oder falscher Artikel.** Landmark bittet dich, den Verkäufer zu kontaktieren: Er kann Nachforschungen anstoßen und sich mit Landmark abstimmen. Eine Versicherung bietet Landmark nur seinen direkten Kunden an, den Shops. Melde dich schnell: Laut Landmarks EU-Geschäftsbedingungen hat der Shop 30 Kalendertage ab Landmarks Annahmescan, um eine Reklamation einzureichen.
 
 **Zoll.** Für Empfänger veröffentlicht Landmark zu Zoll und Steuern nichts. Was allgemein gilt, erklärt [Paket beim Zoll](guide:customs).
 
@@ -110,5 +110,6 @@ Laut Landmark hängt die Lieferzeit vom Service ab, den der Shop gewählt hat, u
 - [Landmark Global: Parcel delivery to Germany](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-germany/) – mehrere Zustellfirmen, kein namentlicher Partner
 - [Landmark Global: Parcel delivery to Belgium](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-belgium/) – bpost
 - [Landmark Global: Parcel delivery to the US](https://landmarkglobal.com/eu/en/destinations/parcel-delivery-to-united-states/) – UPS
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Status, Zustellpartner, Rücksendungen, Scanzeiten, was Peek liest und zeigt
+- [Landmark Global: EU General Terms and Conditions 2026](https://landmarkglobal.com/uploads/no-index-files/2026-GTC-_-LG-EN-EU.pdf) – 30 Kalendertage für Reklamationen des Shops
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Status, Zustellpartner, Hermes auf abgefragten Paketen, Rücksendungen, Scanzeiten, was Peek liest und zeigt
 :::

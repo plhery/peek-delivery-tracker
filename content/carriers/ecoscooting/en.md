@@ -78,7 +78,7 @@ As listed on ecoscooting.com on 12 October 2026:
 - **Hours:** Monday to Friday 9:00 to 18:00, Saturday and Sunday 9:00 to 13:00.
 - **Chat and a contact form** on the customer service page, which also says where to download Spain's official complaint sheet ("Hoja de reclamaciones").
 
-Ecoscooting pages cited here, in Spanish, English and Portuguese: on www.ecoscooting.com, the home page, "Entrega a domicilio", "Red de puntos de recogida y lockers", "Atención al cliente" with its "Preguntas frecuentes", and the tracking page "Localiza tu envío".
+Ecoscooting's legal notice gives another number, 931 222 879, for queries and complaints, and says it provides official complaint sheets where the law requires them. The company is Ecoscooting Delivery, S.L., with its registered office in San Fernando de Henares, near Madrid.
 
 ## Tracking Ecoscooting parcels with Peek
 
@@ -94,7 +94,7 @@ Peek checks every 10 minutes, or every 2 once the parcel is out for delivery, an
 
 ### Is Ecoscooting legit?
 
-Yes. Ecoscooting Delivery S.L. delivers parcels in Spain and Portugal and says it has more than 8 years' experience in logistics in both countries, for cross-border online platforms and local sellers.
+Yes. Ecoscooting Delivery, S.L. is a registered Spanish company based near Madrid. It delivers parcels in Spain and Portugal and says it has more than 8 years' experience in logistics in both countries, for cross-border online platforms and local sellers.
 
 ### What is Ecoscooting delivery?
 
@@ -109,5 +109,10 @@ In Spain, yes: every day, Saturdays and Sundays included. In Portugal it deliver
 Ecoscooting advertises 24 to 48 hours for its national delivery, in its pitch to shops. That's no promise for your whole order, and its tracking shows no expected day.
 
 :::sources
+- [Ecoscooting: Customer Service / Frequent Questions](https://www.ecoscooting.com/atencionCliente) – contacts, hours, chat, failed attempts, 3 business days, someone else signing, 14 days, delivered not received, lost or stolen, returns, complaint sheet, scam advice, 8 years (English, Spanish and Portuguese versions)
+- [Ecoscooting: Home](https://www.ecoscooting.com/) – Spain and Portugal, delivery days, two attempts, pickup-point redirect in Spain, 24/48 hours, the "Track your shipment" box and its results (headlines, not-found message)
+- [Ecoscooting: Home Deliveries](https://www.ecoscooting.com/toDoor) – two attempts, third at a pickup point in Spain, 24-48 hours
+- [Ecoscooting: Network of Pickup Points and Lockers](https://www.ecoscooting.com/pickUpPoint) – 8,000+ pickup points, lockers
+- [Ecoscooting: Aviso legal](https://www.ecoscooting.com/aviso-legal) – company name, registered office, Spanish commercial register, phone for queries and complaints, complaint sheets
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

@@ -9638,6 +9638,11 @@ export const CARRIER_CAPABILITIES = {
         "params": [
           "shipment_id"
         ]
+      },
+      {
+        "domains": [
+          "t-t.sps-sro.sk"
+        ]
       }
     ],
     "detectionRules": [

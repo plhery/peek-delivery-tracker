@@ -32,7 +32,6 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertContentDescriptionEquals
-import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -209,7 +208,7 @@ class DeliveryListTest {
         // Nobody chose a parcel: the first card's shows beside the list, ringed.
         assertPageShows("New trainers")
         compose.card("New trainers").assertIsSelected()
-        compose.card("Birthday gift").assertIsNotSelected()
+        compose.card("Birthday gift").assert(SemanticsMatcher.keyNotDefined(SemanticsProperties.Selected))
         resize(700.dp)
         assertEquals(true, sideBySide())
 
@@ -249,7 +248,7 @@ class DeliveryListTest {
         compose.waitForIdle()
         assertPageShows("Birthday gift")
         compose.card("Birthday gift").assertIsSelected()
-        compose.card("New trainers").assertIsNotSelected()
+        compose.card("New trainers").assert(SemanticsMatcher.keyNotDefined(SemanticsProperties.Selected))
         assertEquals(listOf("parcel"), views)
 
         resize(600.dp)

@@ -156,7 +156,8 @@ internal fun Modifier.cardTouches(
     .clearAndSetSemantics {
         contentDescription = label
         role = Role.Button
-        this.selected = selected
+        // The selected trait only while shown beside the list: a card not chosen says nothing of it, not "Not selected".
+        if (selected) this.selected = true
         onClick(label = hint) {
             onOpen()
             true

@@ -21,7 +21,6 @@ import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.SemanticsPropertiesAndroid
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
-import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasContentDescription
@@ -279,7 +278,7 @@ class PeekRootTest {
         newProcess()
         assertPageShows("Birthday gift")
         compose.card("Birthday gift").assertIsSelected()
-        compose.card("New trainers").assertIsNotSelected()
+        compose.card("New trainers").assert(SemanticsMatcher.keyNotDefined(SemanticsProperties.Selected))
         assertEquals(listOf("parcel"), views)
     }
 

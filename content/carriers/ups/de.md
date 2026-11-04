@@ -3,10 +3,10 @@ title: UPS Sendungsverfolgung: Nummer, Status und Zustellung
 description: UPS-Paket verfolgen: wie die 1Z-Trackingnummer aussieht, was Scans wie „Exception“ bedeuten, Access Point, Zollgebühren und deine Rechte bei Verlust.
 slug: ups-sendungsverfolgung
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
-UPS-Sendungsnummern (UPS steht für United Parcel Service) beginnen meist mit `1Z`. Füg die Nummer oder einen UPS-Tracking-Link oben ins Feld ein, um dein Paket zu verfolgen. UPS' eigene Sendungsverfolgung findest du auf ups.com.
+Um ein UPS-Paket zu verfolgen, füg die Sendungsnummer oder einen UPS-Tracking-Link oben ins Feld ein. Die Nummer beginnt meist mit `1Z` und hat 18 Zeichen, etwa `1Z1234567812345674`; du findest sie in der Versandbestätigung des Shops. UPS' eigene Sendungsverfolgung (UPS steht für United Parcel Service) findest du auf ups.com.
 
 ## UPS Trackingnummer: wo sie steht und wie sie aussieht
 
@@ -26,6 +26,7 @@ UPS' englische Tracking-Seite zeigt einen Fortschrittsbalken (`Label Created`, `
 | `Drop-Off`, `Pickup Scan` | Beim Paketdienst eingegangen | UPS hat das Paket: Der Versender hat es in einem Access Point abgegeben, oder UPS hat es abgeholt. Das erste `Arrived at Facility` zählt auch dazu. |
 | `Arrived at Facility`, `Departed from Facility`, `Processing at UPS Facility` | Unterwegs | Es ist in UPS' Netz unterwegs. `Export Scan` und `Import Scan` markieren eine Grenze. |
 | `Your package is prepared for clearance.` | Beim Zoll | Es wird verzollt. |
+| `The package is at the clearing agency awaiting final release.` | Beim Zoll | Es liegt beim Zollagenten von UPS und wartet auf die Freigabe. |
 | `Duties or taxes are due on this package.` | Beim Zoll | Du musst Einfuhrabgaben zahlen, bevor UPS zustellt (siehe unten). |
 | `Loaded on Delivery Vehicle`, `Out For Delivery Today` | In Zustellung | Ein Fahrer hat es dabei. |
 | `The receiver was not available at the time of the final delivery attempt.` | Zustellversuch | Auch der letzte Zustellversuch ist gescheitert. |
@@ -45,7 +46,7 @@ UPS kann das Paket auch in einen UPS Access Point bringen. Dort lauten die Scans
 
 Kommt ein Paket aus einem Nicht-EU-Staat, können Einfuhrabgaben fällig werden, bevor UPS zustellt. Die Sendungsverfolgung zeigt dann `Duties or taxes are due on this package.` und `Your package is being held until duties and taxes are paid. Awaiting customer action.`
 
-In Deutschland übernimmt laut Zoll in den meisten Fällen der Post- oder Kurierdienst die Zollanmeldung und legt die Einfuhrabgaben aus. Du zahlst sie in der Regel bei der Zustellung, dazu meist eine Servicepauschale, deren Höhe in den AGB des Dienstes steht. Seit dem 1. Juli 2026 fällt für Sendungen aus Nicht-EU-Staaten bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie an, dazu wie bisher die Einfuhrumsatzsteuer von 19 bzw. 7 %. Dieser Pauschalzoll gilt laut dem EU-Portal „Ihr Europa“ in der ganzen EU, also auch in Österreich. Mehr in [Paket beim Zoll](guide:customs).
+In Deutschland übernimmt laut Zoll in den meisten Fällen der Post- oder Kurierdienst die Zollanmeldung und legt die Einfuhrabgaben aus. Du zahlst sie in der Regel bei der Zustellung, dazu meist eine Servicepauschale, deren Höhe in den AGB des Dienstes steht. Seit dem 1. Juli 2026 fällt für Sendungen aus Nicht-EU-Staaten bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie an, dazu wie bisher die Einfuhrumsatzsteuer von 19 bzw. 7 %. Dieser Pauschalzoll gilt laut dem EU-Portal „Ihr Europa“ in der ganzen EU, also auch in Österreich. Seit dem 1. November 2026 kommt eine Abfertigungspauschale der EU von 2 € dazu, laut Zoll je Warenkategorie und unabhängig vom Warenwert. Mehr in [Paket beim Zoll](guide:customs).
 
 ## UPS Paket kommt nicht an, ist verspätet oder beschädigt
 
@@ -63,9 +64,9 @@ Ist ein verlorenes, gestohlenes oder beschädigtes Paket mit dem Paketdienst nic
 
 [Peek](/) erkennt UPS sofort an einer `1Z`-Nummer, deren letzte Ziffer UPS' Prüfung besteht. Fällt sie durch, wird nur UPS angeboten, und UPS lehnt sie als vertippt ab. Bei UPS selbst fragt Peek nur `1Z`-Nummern ab. Andere Formen gehen deshalb nie an UPS: Wählst du über „Paketdienst ändern“ UPS, liefern nur Tracking-Dienste den Verlauf. Links von ups.com mit einer Nummer kannst du ebenso einfügen wie jeden Link, in dem eine `1Z`-Nummer steckt.
 
-Peeks Server öffnet dafür UPS' Tracking-Seite in einem Browser, alle 10 Minuten und ab der Zustellung alle 5 Minuten. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Blockt UPS den Abruf oder ist nur der Status lesbar, liefern Tracking-Dienste den Verlauf. Du siehst den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den geplanten Zustelltag (nie ein Zeitfenster), die Zustellzeit, das Zielland und, solange das Paket wartet, Name und Adresse des Access Points. Mitteilungen bekommst du auf Wunsch bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind, wer unterschrieben hat, deine Adresse, der Zustellnachweis, der Ablageort und das Zustellfoto. Gewicht und Absender gibt UPS nicht heraus.
+Peeks Server öffnet dafür UPS' Tracking-Seite in einem Browser, alle 10 Minuten und ab der Zustellung alle 5 Minuten. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Blockt UPS den Abruf oder ist nur der Status lesbar, liefern Tracking-Dienste den Verlauf. Du siehst den Status, jeden Scan mit Ort und genauer Uhrzeit auf einer Karte, den geplanten Zustelltag, die Zustellzeit, das Zielland und, solange das Paket wartet, Name und Adresse des Access Points. Mitteilungen bekommst du auf Wunsch bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Nicht zu sehen sind, wer unterschrieben hat, deine Adresse, der Zustellnachweis, der Ablageort und das Zustellfoto. Gewicht und Absender gibt UPS nicht heraus.
 
-Die Scans erscheinen in jeder Sprache in UPS' englischer Fassung: Zugestellt heißt dort „DELIVERED“. Übergibt UPS in den USA ein Ground-Saver-Paket an die US-Post und nennt deren Nummer, geht die Verfolgung dort weiter („Zustellung durch USPS“), sobald USPS das Paket bewegt.
+Die Scans erscheinen in jeder Sprache in UPS' englischer Fassung: Zugestellt heißt dort „DELIVERED“. Übergibt UPS in den USA ein Ground-Saver-Paket an die US-Post und nennt deren Nummer, geht die Verfolgung dort weiter („Zustellung durch USPS“), sobald USPS das Paket bewegt. Steht das Paket nach einem Tag noch auf „Etikett erstellt“, sagt Peek dazu, dass der Absender es noch nicht an UPS übergeben hat.
 
 ## Fragen zur UPS Sendungsverfolgung
 
@@ -82,7 +83,8 @@ Nein, Peek liest UPS' Sendungsverfolgung nur mit. Änderungen, die du bei UPS vo
 Nicht unbedingt. Die Verbraucherzentralen warnen vor SMS angeblicher Paketdienste, in denen du auf einen Link tippen sollst: Die Folge können schädliche Apps, Massen-SMS oder Abofallen sein. Tipp den Link nicht an, installier keine App, antworte nicht und lösch die SMS. Erwartest du ein Paket, gib die Sendungsnummer selbst auf ups.com oder in Peek ein. Zollgebühren zahlst du in der Regel bei der Zustellung, nicht vorab über eine Internetseite. Bietet ein Paketdienst die Zahlung vorab an, musst du dich dafür registriert haben, und seine Nachrichten nennen immer Sendungsnummer und Absender. Mehr in [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 
 :::sources
-- [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – Kurierdienst meldet an und legt aus, Zahlung bei Zustellung, Servicepauschale, 3 € seit 1. Juli 2026, 19 bzw. 7 %
+- [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – Kurierdienst meldet an und legt aus, Zahlung bei Zustellung, Servicepauschale, 3 € seit 1. Juli 2026, 19 bzw. 7 %, Abfertigungspauschale 2 € je Warenkategorie
+- [Europäische Kommission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € seit 1. November 2026
 - [Ihr Europa: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – 30 Tage, Nachfrist, Rücktritt, Haftung des Händlers, 3 € je Position in der EU
 - [Verbraucherzentrale: Was tun, wenn meine Online-Bestellung nach dem Versand nicht ankommt?](https://www.verbraucherzentrale.de/wissen/digitale-welt/onlinehandel/was-tun-wenn-meine-onlinebestellung-nach-dem-versand-nicht-ankommt-28083) – nichts zahlen ohne Ware, Fehler des Zustellers, Frist
 - [Verbraucherzentrale: Paketdienst-SMS: Vorsicht, Abzocke!](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/paketdienstsms-vorsicht-abzocke-58988) – Fake-SMS, Zollgebühren bei Zustellung, Nummer selbst eingeben

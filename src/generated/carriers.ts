@@ -2369,7 +2369,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "chronopost-suivi",
-      "title": "Chronopost suivi\u00a0: numéro, statuts et point relais",
+      "title": "Suivi colis Chronopost\u00a0: numéro, statuts, délais et relais",
       "name": "Chronopost",
       "color": "#0056a7"
     },

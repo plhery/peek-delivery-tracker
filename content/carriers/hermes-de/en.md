@@ -10,7 +10,7 @@ Hermes Germany is the Otto Group's Hamburg-based parcel carrier, focused on deli
 
 ## Hermes tracking number: where to find it
 
-Hermes's form asks for the "Sendungs- oder Quittungsnummer" (shipment or receipt number), 14 to 20 letters or digits. Hermes doesn't say where recipients find it, and sends no SMS. No number? Ask the sender, or see [how to find a tracking number](guide:find-tracking-number).
+Hermes's form asks for "Deine Sendungsnummer" (your tracking number), 14 to 20 letters or digits. Hermes doesn't say where recipients find it, and sends no SMS. No number? Ask the sender, or see [how to find a tracking number](guide:find-tracking-number).
 
 | Shape (invented) | What it is |
 | --- | --- |
@@ -75,11 +75,11 @@ Hermes lists no customer-service phone line, hours or chat; the head-office numb
 
 ## Tracking a Hermes parcel with Peek
 
-[Peek](/) recognises `H` and 16 to 19 digits at once. For 14 digits it asks Hermes among the likely carriers when the last digit fits Hermes's check digit; otherwise press "Change" and pick Hermes Germany. For `H` and 15 digits it asks Hermes Germany, and Evri too when the number also fits Evri's check digit. With an extra leading zero, a 14-digit number isn't recognised as Hermes's: drop the zero. Other numbers Hermes accepts (14 to 20 letters or digits) need "Change" too. myhermes.de links can be pasted; no postcode is needed.
+[Peek](/) recognises `H` and 16 to 19 digits at once. For 14 digits it asks Hermes among the likely carriers when the last digit fits Hermes's check digit; otherwise press "Change" and pick Hermes Germany. For `H` and 15 digits it asks Hermes Germany, and Evri too when the number also fits Evri's check digit. If a 14-digit number that starts with 0 has an extra zero in front, Peek asks Hermes the same way; otherwise, drop the zero. Other numbers Hermes accepts (14 to 20 letters or digits) need "Change" too. myhermes.de links can be pasted; no postcode is needed.
 
-It shows the status, history, expected day (with Hermes's time window when it gives one), sending shop and delivery time. At a ParcelShop it shows "Ready for pickup" with the shop's name and address. It drops your name, address and booked preferences. Each scan keeps Hermes's own sentence, which Peek asks for in English, though some lines stay German; delivery to a neighbour, or pickup at a ParcelShop, counts as delivered. A parcel in a Hermes Box shows "Ready for pickup" until you take it out with its pickup TAN. Hermes gives no scan places, so the map stays empty.
+It shows the status, history, expected day (with Hermes's time window when it gives one), sending shop and delivery time. At a ParcelShop it shows "Ready for pickup" with the shop's name and address. It drops your name, address and booked preferences. Each scan keeps Hermes's own sentence, which Peek asks for in English, though some lines stay German; delivery to a neighbour, or pickup at a ParcelShop, counts as delivered. A parcel in a Hermes Box shows "Ready for pickup" until you take it out with its pickup TAN. Hermes names places only inside its sentences: Peek reads the depot, destination region or country, or the ParcelShop's town from them and shows it on the map.
 
-Peek checks every 10 minutes, or every 2 once out for delivery, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow parcels to other carriers, and old numbers show as not found once Hermes deletes them after 30 days. Hermes Einrichtungs-Service (furniture) is a separate carrier, picked by hand.
+Peek checks every 10 minutes, or every 2 once out for delivery, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. When Hermes links a delivery partner abroad that Peek knows, Peek shows "Delivery with …" and the partner's number, and follows the parcel there once the partner has fresh scans. Old numbers show as not found once Hermes deletes them after 30 days. Hermes Einrichtungs-Service (furniture) is a separate carrier, picked by hand.
 
 ## Questions about Hermes tracking
 

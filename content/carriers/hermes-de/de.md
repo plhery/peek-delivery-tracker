@@ -3,14 +3,14 @@ title: Hermes Sendungsverfolgung: Status, PaketShop und Kontakt
 description: Hermes-Paket verfolgen: wo die Sendungsnummer steht, was die Status heißen, wie lange es im PaketShop liegt und wie du Hermes ohne Hotline erreichst.
 slug: hermes-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
-Hermes Germany aus Hamburg gehört zur Otto Group und stellt vor allem Pakete innerhalb Deutschlands zu. Dein Paket verfolgst du mit der Sendungsnummer in der [Sendungsverfolgung auf myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) oder in der Hermes App, oder du fügst die Nummer oben ins Feld ein. Die Nummer hat der Absender, der die Sendung bei Hermes gebucht hat; E-Mails von Hermes bekommst du, wenn er Hermes deine E-Mail-Adresse gegeben hat oder du dich in der Sendungsverfolgung selbst dafür anmeldest.
+Um ein Hermes-Paket zu verfolgen, füg die Sendungsnummer oben ins Feld ein oder gib sie in der [Sendungsverfolgung auf myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/) oder in der Hermes App ein. Sie hat 14 bis 20 Zeichen, etwa ein H mit 16 bis 19 Ziffern wie `H1234567890123456` oder 14 Ziffern. Die Nummer hat der Absender, der die Sendung bei Hermes gebucht hat, bei einer Bestellung also der Shop; E-Mails von Hermes bekommst du, wenn er Hermes deine E-Mail-Adresse gegeben hat oder du dich in der Sendungsverfolgung selbst dafür anmeldest. Hermes Germany aus Hamburg gehört zur Otto Group und stellt vor allem Pakete innerhalb Deutschlands zu.
 
 ## Hermes Sendungsnummer: wo du sie findest
 
-Das Feld der Sendungsverfolgung fragt nach der „Sendungs- oder Quittungsnummer“ und nimmt 14 bis 20 Buchstaben oder Ziffern an. Eine Retoure verfolgst du laut Hermes mit der 10- bis 20-stelligen Sendungs- oder Quittungsnummer. Wo Empfänger die Nummer finden, schreibt Hermes nirgends. SMS verschickt Hermes Germany keine; kommt dein Paket in eine Hermes Box, steht die Nummer in der E-Mail dazu. Fehlt sie dir, frag den Absender, oder lies, [wie du die Sendungsnummer findest](guide:find-tracking-number).
+Das Feld der Sendungsverfolgung heißt „Deine Sendungsnummer“ und nimmt 14 bis 20 Buchstaben oder Ziffern an. Eine Retoure verfolgst du laut Hermes mit der 10- bis 20-stelligen Sendungs- oder Quittungsnummer. Wo Empfänger die Nummer finden, schreibt Hermes nirgends. SMS verschickt Hermes Germany keine; kommt dein Paket in eine Hermes Box, steht die Nummer in der E-Mail dazu. Fehlt sie dir, frag den Absender, oder lies, [wie du die Sendungsnummer findest](guide:find-tracking-number).
 
 Diese Formen kennt Peek:
 
@@ -26,19 +26,19 @@ Die vierstellige TAN, die Hermes bei manchen Paketen per E-Mail schickt, ist ein
 
 Die Sendungsverfolgung von Hermes ist auf Deutsch. Zu jedem Schritt zeigt sie einen Satz, dazu kurze Beschriftungen. Diese Texte begegnen dir in der Reihenfolge, in der sie bei einem Paket erscheinen:
 
-| Hermes schreibt | Was es für dich heißt |
-| --- | --- |
-| `Die Sendung wurde Hermes elektronisch angekündigt.` | Der Versender hat die Sendung gebucht. Ob Hermes das Paket schon hat, sagt dieser Status nicht. |
-| `Die Sendung wurde von Hermes in … übernommen und wird für den weiteren Versand vorbereitet.` | Hermes hat das Paket am genannten Ort übernommen. |
-| `In 1 - 2 Tagen`, `In 2 - 4 Tagen`, `Offen` | Die Prognose bis zur Zustellung. `Offen` heißt: noch keine. |
-| `Die Sendung wurde ins Zustellfahrzeug geladen und wird voraussichtlich heute zugestellt.` | In Zustellung, es kommt voraussichtlich heute. |
-| `1 Stopp entfernt`, `Du bist der nächste Stopp` | Live-Tracking: Der Bote ist fast bei dir. |
-| `Zustellversuch` | Der Bote hat es versucht. Warst du nicht da, folgt eine Karte im Briefkasten oder eine E-Mail. |
-| `Die Zustelladresse wurde nicht gefunden. Mögliche Gründe: Fehler in der Adressübermittlung. Bitte PaketShop buchen oder Kundenservice kontaktieren.` | Der Bote hat deine Adresse nicht gefunden (mehr dazu unten). |
-| `Abholbereit seit`, `Abzuholen` | Das Paket liegt zur Abholung bereit: seit wann und bis wann du es abholen musst. |
-| `Abgeholt am` | Du hast es an diesem Tag abgeholt. |
-| `Die Sendung wurde an der Empfangsadresse zugestellt.` | Zugestellt an deiner Adresse. |
-| `Die Sendung wurde erfolgreich zugestellt.` | Zugestellt; gesehen bei einem Paket ins Ausland. |
+| Hermes schreibt | Peek zeigt | Was es für dich heißt |
+| --- | --- | --- |
+| `Die Sendung wurde Hermes elektronisch angekündigt.` | Etikett erstellt | Der Versender hat die Sendung gebucht. Ob Hermes das Paket schon hat, sagt dieser Status nicht. |
+| `Die Sendung wurde von Hermes in … übernommen und wird für den weiteren Versand vorbereitet.` | Beim Paketdienst eingegangen | Hermes hat das Paket am genannten Ort übernommen. |
+| `In 1 - 2 Tagen`, `In 2 - 4 Tagen`, `Offen` | – | Die Prognose bis zur Zustellung. `Offen` heißt: noch keine. |
+| `Die Sendung wurde ins Zustellfahrzeug geladen und wird voraussichtlich heute zugestellt.` | In Zustellung | Es kommt voraussichtlich heute. |
+| `1 Stopp entfernt`, `Du bist der nächste Stopp` | In Zustellung | Live-Tracking: Der Bote ist fast bei dir. |
+| `Zustellversuch` | Zustellversuch | Der Bote hat es versucht. Warst du nicht da, folgt eine Karte im Briefkasten oder eine E-Mail. |
+| `Die Zustelladresse wurde nicht gefunden. Mögliche Gründe: Fehler in der Adressübermittlung. Bitte PaketShop buchen oder Kundenservice kontaktieren.` | Zustellversuch | Der Bote hat deine Adresse nicht gefunden (mehr dazu unten). |
+| `Abholbereit seit`, `Abzuholen` | Abholbereit | Das Paket liegt zur Abholung bereit: seit wann und bis wann du es abholen musst. |
+| `Abgeholt am` | Zugestellt | Du hast es an diesem Tag abgeholt. |
+| `Die Sendung wurde an der Empfangsadresse zugestellt.` | Zugestellt | Zugestellt an deiner Adresse. |
+| `Die Sendung wurde erfolgreich zugestellt.` | Zugestellt | Zugestellt; gesehen bei einem Paket ins Ausland. |
 
 Bleibt der erste Status zwei bis drei Tage stehen, sollst du laut Hermes den Versender fragen. Nach der Übergabe kann es bis zu 5 Stunden dauern, bis der Status erscheint, und Hermes führt nicht jeden Transportschritt auf. `Für die Sendung wurde ein WunschPaketShop gebucht.` ist eine Buchung, keine Bewegung.
 
@@ -64,6 +64,8 @@ Bei einem Paket aus einem Online-Shop ist der Shop deine erste Adresse, denn er 
 
 **Seit Tagen keine Bewegung.** Ein ruhiger Tag kann normal sein. Laut Hermes kann es ab Versand bis zu 3 Werktage dauern, bis eine Sendung ankommt. Frühestens nach 5 Werktagen leitest du über das Kontaktformular eine Sendungsrecherche ein. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
+**Bestellung aus einem Land außerhalb der EU.** Laut Zoll kommt seit dem 1. November 2026 zu den Einfuhrabgaben eine Abfertigungspauschale von 2 € je Warenkategorie dazu. Hermes Germany treibt laut eigener Sicherheitsseite keine Zollgebühren ein. Mehr in [Paket beim Zoll](guide:customs).
+
 **Verloren.** Bleibt die Recherche innerhalb Deutschlands 20 Tage erfolglos, international 30 Tage, schickt Hermes ein digitales Verlustformular per E-Mail. Dazu gehört ein Wertnachweis, etwa Kaufbelege; ohne ihn erstattet Hermes nach Gewicht. Diese Belege beschreibt Hermes für den Versender, sag also auch dem Shop Bescheid. Für Sendungen von Privatkunden haftet Hermes mit höchstens 500 € pro Paket und 50 € pro Päckchen.
 
 **Zugestellt, aber nicht da.** Frag im Haushalt und bei den Nachbarn, und schau am gebuchten Ablageort. Hermes hat eine Nichterhaltserklärung, die sich nur über einen Link in einer E-Mail von Hermes öffnet; darin bestätigst du, dass du Haushalt und direkte Nachbarn gefragt hast. Wann diese E-Mail kommt, sagt Hermes nicht. Sonst bleiben der Shop und das Kontaktformular. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
@@ -85,11 +87,11 @@ So stand es am 10. Oktober 2026 auf myhermes.de:
 
 ## Hermes-Paket mit Peek verfolgen
 
-[Peek](/) erkennt `H` mit 16 bis 19 Ziffern sofort als Hermes. Bei 14 Ziffern fragt es die wahrscheinlichen Paketdienste, darunter Hermes, wenn die letzte Ziffer zur Prüfziffer von Hermes passt. Passt sie nicht, fragt es Hermes gar nicht: Tipp dann auf „Ändern“ und wähle Hermes Germany. Bei `H` mit 15 Ziffern, einer Form, die auch Evri nutzt, fragt es Hermes Germany und, wenn die Nummer auch zur Prüfziffer von Evri passt, Evri. Eine 14-stellige Nummer mit zusätzlicher Null vorne erkennt es nicht als Hermes-Nummer, lass die Null also weg. Bei anderen Nummern, die Hermes annimmt (14 bis 20 Buchstaben oder Ziffern), wählst du Hermes Germany ebenfalls mit „Ändern“. Links von myhermes.de kannst du einfügen. Eine Postleitzahl braucht es nicht.
+[Peek](/) erkennt `H` mit 16 bis 19 Ziffern sofort als Hermes. Bei 14 Ziffern fragt es die wahrscheinlichen Paketdienste, darunter Hermes, wenn die letzte Ziffer zur Prüfziffer von Hermes passt. Passt sie nicht, fragt es Hermes gar nicht: Tipp dann auf „Ändern“ und wähle Hermes Germany; ist die Nummer eine Referenz, findet Hermes das Paket dazu. Bei `H` mit 15 Ziffern, einer Form, die auch Evri nutzt, fragt es Hermes Germany und, wenn die Nummer auch zur Prüfziffer von Evri passt, Evri. Steht vor einer 14-stelligen Nummer, die mit 0 beginnt, eine zusätzliche Null, fragt es Hermes genauso; sonst lass die Null weg. Bei anderen Nummern, die Hermes annimmt (14 bis 20 Buchstaben oder Ziffern), wählst du Hermes Germany ebenfalls mit „Ändern“. Links von myhermes.de kannst du einfügen. Eine Postleitzahl braucht es nicht.
 
-Peek zeigt Status, Sendungsverlauf, den erwarteten Zustelltag (mit dem Zeitfenster, wenn Hermes eines nennt), den Absender, etwa den Shop, und den Zeitpunkt der Zustellung. Wartet das Paket in einem PaketShop, steht es auf „Abholbereit“, mit Name und Adresse des Shops. Nicht zu sehen sind dein Name, deine Adresse und gebuchte Wünsche wie Ablageort oder WunschPaketShop. Jeder Scan behält den Satz von Hermes, den Peek auf Englisch abfragt; einige Zeilen bleiben deutsch. Zustellung an Nachbarn und Abholung im PaketShop zählen als „Zugestellt“. Liegt das Paket in einer Hermes Box, steht es auf „Abholbereit“, bis du es mit der Abhol-TAN herausnimmst. Welcher Nachbar das Paket hat, liest Peek nicht aus: Das sagen dir Karte oder E-Mail von Hermes. Orte zu den Scans gibt Hermes nicht heraus, deshalb erscheint auf der Karte nichts.
+Peek zeigt Status, Sendungsverlauf, den erwarteten Zustelltag (mit dem Zeitfenster, wenn Hermes eines nennt), den Absender, etwa den Shop, und den Zeitpunkt der Zustellung. Wartet das Paket in einem PaketShop, steht es auf „Abholbereit“, mit Name und Adresse des Shops. Nicht zu sehen sind dein Name, deine Adresse und gebuchte Wünsche wie Ablageort oder WunschPaketShop. Nutzt du Peek auf Deutsch, behält jeder Scan den deutschen Satz von Hermes, sonst fragt Peek ihn auf Englisch ab. Steht das Paket nach einem Tag noch auf „Etikett erstellt“, sagt Peek dazu, dass der Absender es noch nicht an Hermes übergeben hat. Zustellung an Nachbarn und Abholung im PaketShop zählen als „Zugestellt“. Liegt das Paket in einer Hermes Box, steht es auf „Abholbereit“, bis du es mit der Abhol-TAN herausnimmst. Welcher Nachbar das Paket hat, liest Peek nicht aus: Das sagen dir Karte oder E-Mail von Hermes. Orte nennt Hermes nur im Satz selbst: Daraus liest Peek das Depot, die Zielregion oder das Zielland und den Ort des PaketShops und zeigt sie auf der Karte.
 
-Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Zu einem anderen Paketdienst folgt Peek dem Paket nicht. Ältere Nummern erscheinen als nicht gefunden, sobald Hermes sie nach 30 Tagen löscht. Für Möbel vom [Hermes Einrichtungs Service](carrier:hermes-einrichtungs-service) (eigene Sendungsverfolgung auf myhes.de) wählst du von Hand den Paketdienst „Hermes Einrichtungs-Service“.
+Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist, und schickt dir auf Wunsch Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Verlinkt Hermes für ein Paket ins Ausland einen Versandpartner, den Peek kennt, zeigt Peek „Zustellung durch …“ mit dessen Nummer und folgt dem Paket dort weiter, sobald der Partner selbst aktuelle Scans meldet. Ältere Nummern erscheinen als nicht gefunden, sobald Hermes sie nach 30 Tagen löscht. Für Möbel vom [Hermes Einrichtungs Service](carrier:hermes-einrichtungs-service) (eigene Sendungsverfolgung auf myhes.de) wählst du von Hand den Paketdienst „Hermes Einrichtungs-Service“.
 
 ## Fragen zur Hermes Sendungsverfolgung
 
@@ -144,7 +146,8 @@ Ein Paket, das aus Deutschland über myhermes.de nach Österreich geht, verfolgs
 - [Hermes: Kontakt](https://www.myhermes.de/service/kontakt/) – Formular, WhatsApp
 - [Hermes: Nichterhaltserklärung](https://www.myhermes.de/service/kontakt/nichterhaltserklaerung/) – Link aus E-Mail
 - [Hermes: Impressum](https://www.myhermes.de/impressum/) – Postfach, Schlichtung
-- [Hermes: Sicherheitshinweise](https://www.myhermes.de/sicherheit/) – SMS, Zahlungen
+- [Hermes: Sicherheitshinweise](https://www.myhermes.de/sicherheit/) – SMS, Zahlungen, keine Zollgebühren
+- [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – Abfertigungspauschale 2 €
 - [Hermes: Wo ist meine Retoure?](https://www.myhermes.de/service/fragen/retournieren/wo-ist-meine-retoure.html) – Retourennummer
 - [Hermes: Versand nach Österreich](https://www.myhermes.de/preise/versandlaender/oesterreich/) – Laufzeit, Lagerung
 - [Hermes Österreich: Sendungsverfolgung](https://www.myhermes.at/sendungsverfolgung/) – Auftragsnummer

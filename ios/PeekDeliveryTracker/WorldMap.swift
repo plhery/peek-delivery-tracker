@@ -481,31 +481,35 @@ struct MapPalette {
     /// The card's ink and surface, which Pip is drawn in; nil on a map with no card.
     var card: (ink: Color, surface: Color)?
 
-    /// The full map: quiet greens, with the carrier's colour on the parcel. Pip beside it is a deeper green of the land,
-    /// whoever carries the parcel: a carrier's colour can clash with the map.
-    static func map(accent: Color) -> MapPalette {
-        let ocean = Brand.color(light: "#F4F6F1", dark: "#171C17")
+    /// The full map: quiet greens in light and warm kraft greys in dark, with the carrier's colour on the parcel. Pip
+    /// beside it is in the map's own ink, whoever carries the parcel: a deeper green of the land in light, a warm
+    /// shade of it in dark. A carrier's colour can clash with the map.
+    ///
+    /// In dark the urban areas, roads, grid, rim and visited countries sit a hair further off what they stand on than
+    /// an even mix would put them, so each stands out at least as much as on the green map before.
+    static func map(accent: Color, in colorScheme: ColorScheme) -> MapPalette {
+        let ocean = Brand.color(light: "#F4F6F1", dark: "#1B1915")
         return MapPalette(
-            space: Brand.color(light: "#E9ECE5", dark: "#0E120E"),
+            space: Brand.color(light: "#E9ECE5", dark: "#0F0D0A"),
             ocean: ocean,
-            land: Brand.color(light: "#DFE4D8", dark: "#2D352B"),
-            visited: accent.opacity(0.13),
-            urban: Brand.color(light: "#D2D7CB", dark: "#3B4339"),
-            road: Brand.color(light: "#BDC2B7", dark: "#51584F"),
+            land: Brand.color(light: "#DFE4D8", dark: "#36322B"),
+            visited: accent.opacity(colorScheme == .dark ? 0.135 : 0.13),
+            urban: Brand.color(light: "#D2D7CB", dark: "#454038"),
+            road: Brand.color(light: "#BDC2B7", dark: "#59564F"),
             border: ocean,
             night: adaptive(light: rgb(24, 34, 40, 0.10), dark: rgb(0, 0, 0, 0.34)),
-            grid: adaptive(light: rgb(32, 37, 30, 0.06), dark: rgb(245, 246, 242, 0.04)),
-            limb: adaptive(light: rgb(32, 37, 30, 0.09), dark: rgb(245, 246, 242, 0.10)),
+            grid: adaptive(light: rgb(32, 37, 30, 0.06), dark: rgb(250, 246, 235, 0.042)),
+            limb: adaptive(light: rgb(32, 37, 30, 0.09), dark: rgb(250, 246, 235, 0.11)),
             shade: adaptive(light: rgb(32, 45, 32, 0.07), dark: rgb(0, 0, 0, 0.26)),
             route: Brand.ink,
             routeMuted: Brand.ink.opacity(0.38),
             accent: accent,
-            label: Brand.color(light: "#657060", dark: "#AFB9A9"),
+            label: Brand.inkSoft,
             labelStrong: Brand.ink,
-            labelBackground: adaptive(light: rgb(255, 255, 255, 0.84), dark: rgb(32, 38, 31, 0.82)),
+            labelBackground: adaptive(light: rgb(255, 255, 255, 0.84), dark: rgb(31, 28, 23, 0.82)),
             dotRing: ocean,
             currentRing: Brand.paper,
-            card: (Brand.color(light: "#55654B", dark: "#B7C6AA"), ocean)
+            card: (Brand.color(light: "#55654B", dark: "#CFBFA3"), ocean)
         )
     }
 

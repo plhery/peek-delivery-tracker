@@ -91,6 +91,7 @@ struct ParcelMapScreen: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.colorScheme) private var colorScheme
     @State private var chosen: ParcelRoute.Mode?
     @State private var free = false
     @State private var recenter = 0
@@ -112,7 +113,7 @@ struct ParcelMapScreen: View {
             ZStack(alignment: .bottom) {
                 // The route is framed in the space the summary leaves.
                 WorldMapView(
-                    atlas: atlas, route: route, mode: mode, palette: .map(accent: accent), sites: true, interactive: true, night: time,
+                    atlas: atlas, route: route, mode: mode, palette: .map(accent: accent, in: colorScheme), sites: true, interactive: true, night: time,
                     live: stage != .delivered && stage != .returned,
                     // Pip came along from the card. Here he keeps clear of what lies over the map: the summary and the button that closes it.
                     pip: PipMood(stage: stage).map { PipRequest(mood: $0, inset: true) },

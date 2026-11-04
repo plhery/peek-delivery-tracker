@@ -14,7 +14,7 @@ import AppKit
 @MainActor
 enum DeliveryWidgetPictures {
     /// Changes whenever the pictures are drawn differently, so that the ones already drawn are drawn again.
-    private static let version = 2
+    private static let version = 3
 
     /// How a route is drawn for each size of widget. A route is no bigger than the smallest widget it goes in, which
     /// shows it as wide as the card: an image larger than its widget is not shown.

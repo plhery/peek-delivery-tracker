@@ -178,7 +178,7 @@ final class WorldDetailTests: XCTestCase {
         let atlas = try atlas()
         let pack = try pack()
         let route = ParcelRoute(places: [zurich])
-        func picture(_ kilometres: Double, tiles: [DetailTile], palette: MapPalette = .map(accent: .red)) throws -> [UInt8] {
+        func picture(_ kilometres: Double, tiles: [DetailTile], palette: MapPalette = .map(accent: .red, in: .light)) throws -> [UInt8] {
             let camera = close(kilometres, in: small)
             let map = Canvas { context, size in
                 MapPainter.drawBase(&context, size: size, atlas: atlas, route: route, camera: camera, palette: palette, night: nil,

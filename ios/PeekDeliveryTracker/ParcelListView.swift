@@ -1805,6 +1805,7 @@ private struct ExperimentalNextDeliveryPass: View {
                 .transition(.opacity)
             }
         }
+        .cardEdge(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .experimentalSurface(fill: identity.surface, cornerRadius: 24)
         .overlay { SelectedCardRing(shape: RoundedRectangle(cornerRadius: 24, style: .continuous), shown: selected) }
         .modifier(DeliveredPress(arrived: arrived, dip: 0.982, wait: 0.42))
@@ -1943,6 +1944,7 @@ private struct ExperimentalParcelPassCard: View {
                 .transition(.opacity)
             }
         }
+        .cardEdge(RoundedRectangle(cornerRadius: 16))
         .background {
             RoundedRectangle(cornerRadius: 16).fill(Brand.paper)
                 .overlay { RoundedRectangle(cornerRadius: 16).fill(identity.surface.opacity(past ? 0.35 : 1)) }

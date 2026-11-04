@@ -46,7 +46,7 @@ enum DeliveryWidgetCardColors {
     }
 
     /// The page the app's list of cards stands on.
-    static func page(_ scheme: ColorScheme) -> Color { color(["#F4F5F1", "#151915"], scheme) }
+    static func page(_ scheme: ColorScheme) -> Color { color(["#F4F5F1", "#13110E"], scheme) }
 }
 
 /// A card's colour, with its route drawn across the top as wide as the card. A tinted, clear or inactive desktop

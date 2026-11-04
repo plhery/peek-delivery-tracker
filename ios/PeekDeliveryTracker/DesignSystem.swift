@@ -366,6 +366,9 @@ extension EnvironmentValues {
     @Entry var sheetEdgeLit = true
 }
 
+/// The warm light that catches a sheet's or a card's top edge in dark.
+private let lamplight = Color(red: 1, green: 244 / 255, blue: 220 / 255)
+
 /// A sheet's ground. In dark a lamp catches its top edge: one point of warm light, as on the web's sheets.
 struct SheetGround: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -375,10 +378,42 @@ struct SheetGround: View {
         Brand.sheet
             .overlay(alignment: .top) {
                 if lit && colorScheme == .dark {
-                    Color(red: 1, green: 244 / 255, blue: 220 / 255).opacity(0.09).frame(height: 1)
+                    lamplight.opacity(0.09).frame(height: 1)
                 }
             }
             .ignoresSafeArea()
+    }
+}
+
+/// A carrier card's top edge in dark: one point of the lamp's light along its top, under what the card shows, which
+/// thins away round its corners as the web's inset `--card-edge` does. Nothing in light.
+private struct CardEdge<Card: Shape>: ViewModifier {
+    let shape: Card
+    @Environment(\.colorScheme) private var colorScheme
+
+    func body(content: Content) -> some View {
+        content.background {
+            if colorScheme == .dark {
+                TopEdge(card: shape).fill(lamplight.opacity(0.08)).allowsHitTesting(false)
+            }
+        }
+    }
+
+    /// The card less itself one point lower.
+    private struct TopEdge: Shape {
+        let card: Card
+
+        func path(in rect: CGRect) -> Path {
+            let outline = card.path(in: rect)
+            return outline.subtracting(outline.offsetBy(dx: 0, dy: 1))
+        }
+    }
+}
+
+extension View {
+    /// Lights the top edge of a card shaped `shape` in dark. Put it under the card's own drawings and over its fill.
+    func cardEdge(_ shape: some Shape) -> some View {
+        modifier(CardEdge(shape: shape))
     }
 }
 

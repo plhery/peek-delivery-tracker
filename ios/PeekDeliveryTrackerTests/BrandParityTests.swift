@@ -50,6 +50,8 @@ final class BrandParityTests: XCTestCase {
                 let points: [[Double]]
                 let fill: String
                 let stroke: String?
+                /// The glass's paint in dark.
+                let dark: String?
             }
 
             struct Wheels: Decodable {
@@ -58,8 +60,17 @@ final class BrandParityTests: XCTestCase {
                     let fill: String
                 }
 
+                struct Tire: Decodable {
+                    let r: Double
+                    let fill: String
+                    let dark: String
+                    let rim: String
+                    let rimOpacity: Double
+                    let rimWidth: Double
+                }
+
                 let centers: [[Double]]
-                let tire: Disc
+                let tire: Tire
                 let hub: Disc
             }
 
@@ -85,12 +96,22 @@ final class BrandParityTests: XCTestCase {
             let decals: [String: [Shape]]
         }
 
+        struct LitEdge: Decodable {
+            let below: Double
+            let lift: Double
+            let floor: Double
+            let maxChroma: Double
+        }
+
         let defaultColor: String
         let fallbackColor: String
         let properties: [String]
         let derivation: [Step]
         /// `[input, expected]` pairs for the dark cards' tone, which the web checks too.
         let toneExamples: [[String]]
+        let litEdge: LitEdge
+        /// `[truck, surface-dark, edge, expected]` rows for the truck's outline on its dark card, which the web checks too.
+        let litEdgeExamples: [[String]]
         let families: [String: String]
         let palettes: [String: [String: String]]
         let decals: [String: String]
@@ -208,6 +229,48 @@ final class BrandParityTests: XCTestCase {
         XCTAssertEqual(CarrierTruckGeometry.hubColor, truck.wheels.hub.fill)
         // The body and cab wear the identity's own colors; the glass is a literal.
         XCTAssertEqual([truck.body.fill, truck.body.stroke, truck.cab.fill, truck.cab.stroke], ["truck", "edge", "truck", "edge"])
+        // In dark the glass and tyre take the shared dark paints, and the tyre its rim
+        // (`testDarkGlassAndTyresStandOutAsMuchAsTheLightOnes`).
+        XCTAssertEqual(CarrierTruckGeometry.windshieldDarkColor, truck.windshield.dark)
+        XCTAssertEqual(CarrierTruckGeometry.tireDarkColor, truck.wheels.tire.dark)
+        XCTAssertEqual(CarrierTruckGeometry.tireRimColor, truck.wheels.tire.rim)
+        XCTAssertEqual(CarrierTruckGeometry.tireRimOpacity, truck.wheels.tire.rimOpacity)
+        XCTAssertEqual(CarrierTruckGeometry.tireRimWidth, CGFloat(truck.wheels.tire.rimWidth))
+    }
+
+    func testDarkTrucksLightTheirOutlineAsTheSharedExamples() throws {
+        let brand = try brand()
+        let rule = CarrierBrandAssets.shared.litEdge
+        XCTAssertEqual([rule.below, rule.lift, rule.floor, rule.maxChroma],
+                       [brand.litEdge.below, brand.litEdge.lift, brand.litEdge.floor, brand.litEdge.maxChroma])
+        XCTAssertFalse(brand.litEdgeExamples.isEmpty)
+        for example in brand.litEdgeExamples {
+            XCTAssertEqual(example.count, 4)
+            XCTAssertEqual(CarrierVisualIdentity.litEdge(example[0], on: example[1], edge: example[2], rule), example[3], example[0])
+        }
+    }
+
+    /// On its dark card every carrier's truck keeps its outline, glass and tyres at least as visible as the light paints
+    /// would leave them: the outline against the card, the glass against the body, a tyre's fill or rim against the body
+    /// and the card. Only a white body is lighter than the glass, and it loses less than 0.001 to it.
+    func testDarkGlassAndTyresStandOutAsMuchAsTheLightOnes() throws {
+        let truck = CarrierTruckGeometry.self
+        let contrast = CarrierVisualIdentity.contrast
+        let rim = { (ground: String) in
+            CarrierVisualIdentity.mix(ground, truck.tireRimColor, truck.tireRimOpacity)
+        }
+        XCTAssertGreaterThan(catalog.definitions.count, 1000)
+        for id in catalog.definitions.keys.map(\.rawValue) {
+            let colors = try identity(id).colors
+            let (card, body, edge) = (colors[1], colors[6], colors[7])
+            let lit = CarrierVisualIdentity.litEdge(body, on: card, edge: edge)
+            XCTAssertGreaterThanOrEqual(contrast(lit, card), contrast(edge, card), "\(id)'s outline")
+            XCTAssertGreaterThanOrEqual(contrast(truck.windshieldDarkColor, body), contrast(truck.windshieldColor, body) - 0.001, "\(id)'s glass")
+            for (name, ground) in [("card", card), ("body", body)] {
+                let shown = max(contrast(truck.tireDarkColor, ground), contrast(rim(ground), ground))
+                XCTAssertGreaterThanOrEqual(shown, contrast(truck.tireColor, ground), "\(id)'s tyre on its \(name)")
+            }
+        }
     }
 
     func testDecalGeometryMatchesTheSharedDefinition() throws {

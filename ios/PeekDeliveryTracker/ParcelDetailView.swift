@@ -497,6 +497,7 @@ struct ParcelDetailView: View {
                         .transition(.opacity)
                 }
             }
+            .cardEdge(RoundedRectangle(cornerRadius: 18))
             .background(branding.surface, in: RoundedRectangle(cornerRadius: 18))
 
             // Offered once, on a delivered parcel. Accepted, it stays as one line until the parcel is closed.

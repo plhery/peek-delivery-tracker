@@ -571,6 +571,7 @@ private struct SharedParcelCard: View {
                     .transition(.opacity)
             }
         }
+        .cardEdge(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .background(identity.surface, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
         .accessibilityElement(children: .contain)
         .task(id: placed) {
@@ -773,6 +774,7 @@ private struct GiftParcelCard: View {
         .padding(.horizontal, 18)
         .padding(.top, 10)
         .padding(.bottom, 20)
+        .cardEdge(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .background(ExperimentalPalette.lilacSurface, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
         .accessibilityElement(children: .contain)
         .onChange(of: opened, initial: true) { _, opened in

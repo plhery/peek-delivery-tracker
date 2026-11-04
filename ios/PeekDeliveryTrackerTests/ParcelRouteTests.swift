@@ -231,7 +231,7 @@ final class ParcelRouteTests: XCTestCase {
         let atlas = try WorldAtlas(data: Data(contentsOf: url))
         let camera = GlobeCamera(center: GeoPoint(longitude: 70, latitude: 30), scale: 180, offset: CGPoint(x: 200, y: 200))
         // The real, faint night colour, without the rim's shading.
-        var palette = MapPalette.map(accent: .red)
+        var palette = MapPalette.map(accent: .red, in: .light)
         palette.shade = nil
         palette.limb = nil
         palette.grid = nil

@@ -120,7 +120,7 @@ struct DeliveryPostageStamp: View {
         // Without a caption the globe sits in the middle of the print.
         let globeY = (origin == nil ? 28 : 25) * unit
         let ink = identity.ink
-        let paper = colorScheme == .dark ? identity.surface.mix(with: ink, by: 0.22) : Color(hex: "#FFFEFA")
+        let paper = Color(hex: colorScheme == .dark ? "#D9D0BC" : "#FFFEFA")
         ZStack {
             DieCutStampShape(wavelength: 3.6 * unit, depth: 1.1 * unit)
                 .fill(paper)
@@ -148,25 +148,15 @@ struct DeliveryPostageStamp: View {
         }
         .frame(width: width, height: 56 * unit)
         .overlay {
-            if let date = parcel.stampDeliveryDate {
-                ZStack {
-                    Circle().stroke(ink, lineWidth: 0.9 * unit)
-                    Circle().stroke(ink, lineWidth: 0.55 * unit).padding(2.8 * unit)
-                    Text(date)
-                        .font(.system(size: 5.2 * unit, weight: .heavy))
-                        .monospacedDigit()
-                        .foregroundStyle(ink)
-                }
-                .frame(width: 23 * unit, height: 23 * unit)
-                .rotationEffect(.degrees(-12))
-                .opacity(0.8)
-                .position(x: 38 * unit, y: 36 * unit)
-                .allowsHitTesting(false)
-                // On a stamp that is being looked at, the postmark comes down: large and askew above the paper, then pressed home.
-                .transition(.asymmetric(
-                    insertion: .modifier(active: PostmarkPose(scale: 2.6, degrees: 16, opacity: 0), identity: PostmarkPose(scale: 1, degrees: 0, opacity: 1)),
-                    removal: .identity
-                ))
+            if colorScheme == .dark {
+                // The card's light ink would hardly show on the cream paper, so where it lands there the postmark is
+                // printed in the card's own colour.
+                postmark(ink, unit: unit)
+                    .mask { StampPaper(unit: unit, inverted: true).fill(style: FillStyle(eoFill: true)) }
+                postmark(identity.surface, unit: unit)
+                    .mask { StampPaper(unit: unit).fill(style: FillStyle(eoFill: true)) }
+            } else {
+                postmark(ink, unit: unit)
             }
         }
         .animation(reduceMotion ? nil : .easeIn(duration: 0.28).delay(0.2), value: parcel.stampDeliveryDate)
@@ -174,6 +164,45 @@ struct DeliveryPostageStamp: View {
         .scaleEffect(reduceMotion || appeared ? 1 : 1.12)
         .animation(reduceMotion ? nil : .spring(response: 0.48, dampingFraction: 0.6).delay(0.08), value: appeared)
         .accessibilityHidden(true)
+    }
+
+    /// The delivery's postmark in `ink`, once the parcel is delivered.
+    @ViewBuilder
+    private func postmark(_ ink: Color, unit: CGFloat) -> some View {
+        if let date = parcel.stampDeliveryDate {
+            ZStack {
+                Circle().stroke(ink, lineWidth: 0.9 * unit)
+                Circle().stroke(ink, lineWidth: 0.55 * unit).padding(2.8 * unit)
+                Text(date)
+                    .font(.system(size: 5.2 * unit, weight: .heavy))
+                    .monospacedDigit()
+                    .foregroundStyle(ink)
+            }
+            .frame(width: 23 * unit, height: 23 * unit)
+            .rotationEffect(.degrees(-12))
+            .opacity(0.8)
+            .position(x: 38 * unit, y: 36 * unit)
+            .allowsHitTesting(false)
+            // On a stamp that is being looked at, the postmark comes down: large and askew above the paper, then pressed home.
+            .transition(.asymmetric(
+                insertion: .modifier(active: PostmarkPose(scale: 2.6, degrees: 16, opacity: 0), identity: PostmarkPose(scale: 1, degrees: 0, opacity: 1)),
+                removal: .identity
+            ))
+        }
+    }
+}
+
+/// The stamp's paper around its print, filled even-odd; `inverted`, everything but the paper, as far out as a
+/// postmark on its way down reaches.
+private struct StampPaper: Shape {
+    let unit: CGFloat
+    var inverted = false
+
+    func path(in rect: CGRect) -> Path {
+        var path = DieCutStampShape(wavelength: 3.6 * unit, depth: 1.1 * unit).path(in: rect)
+        path.addRect(rect.insetBy(dx: 4.5 * unit, dy: 4.5 * unit))
+        if inverted { path.addRect(rect.insetBy(dx: -2 * rect.width, dy: -2 * rect.height)) }
+        return path
     }
 }
 
@@ -359,11 +388,21 @@ struct CarrierBrandAssets: Decodable {
         }
     }
 
+    /// A dark card can swallow a dark truck: when the body's contrast with the card is under `below`, its outline takes
+    /// the body's hue at `lift` more OKLCH lightness (at least `floor`), its chroma capped at `maxChroma`.
+    struct LitEdge: Decodable {
+        let below: Double
+        let lift: Double
+        let floor: Double
+        let maxChroma: Double
+    }
+
     struct Truck: Decodable { let decals: [String: [DecalShape]] }
     let defaultColor: String
     let fallbackColor: String
     let properties: [String]
     let derivation: [Step]
+    let litEdge: LitEdge
     let families: [String: String]
     let palettes: [String: [String: String]]
     let decals: [String: String]
@@ -388,6 +427,8 @@ struct CarrierVisualIdentity {
     private(set) var fullName: String
     let colors: [String]
     let decal: String
+    /// The truck's outline in dark, on its dark card (`litEdge`).
+    let edgeInDark: Color
 
     private final class Cached {
         let identity: CarrierVisualIdentity
@@ -426,6 +467,7 @@ struct CarrierVisualIdentity {
         colors = assets.derivation.map { step in
             assets.palettes[id]?[step.property] ?? Self.derived(carrier.color, step)
         }
+        edgeInDark = Color(hex: Self.litEdge(colors[6], on: colors[1], edge: colors[7]))
     }
 
     func paint(_ value: String) -> Color {
@@ -467,6 +509,20 @@ struct CarrierVisualIdentity {
             : sourceHue
         let toned = fromOklch(tone.lightness, min(tone.maxChroma, sourceChroma * tone.chroma), hue)
         return luminance(toned) > luminance(color) ? color : toned
+    }
+
+    /// The truck's outline on its dark card: `edge`, unless the body sinks into the card (see `CarrierBrandAssets.LitEdge`).
+    static func litEdge(_ truck: String, on surface: String, edge: String,
+                        _ rule: CarrierBrandAssets.LitEdge = CarrierBrandAssets.shared.litEdge) -> String {
+        guard contrast(truck, surface) < rule.below else { return edge }
+        let (lightness, chroma, hue) = oklch(truck)
+        return fromOklch(max(lightness + rule.lift, rule.floor), min(chroma, rule.maxChroma), hue)
+    }
+
+    /// WCAG 2 contrast ratio of two `#rrggbb` colours.
+    static func contrast(_ first: String, _ second: String) -> Double {
+        let (one, other) = (luminance(first), luminance(second))
+        return (max(one, other) + 0.05) / (min(one, other) + 0.05)
     }
 
     /// WCAG 2 relative luminance of a `#rrggbb` colour.
@@ -534,21 +590,33 @@ enum CarrierTruckGeometry {
     static let windshield = [CGPoint(x: 22, y: 9.5), CGPoint(x: 24.5, y: 9.5),
                              CGPoint(x: 27.5, y: 12.5), CGPoint(x: 22, y: 12.5)]
     static let windshieldColor = "#edf1ee"
+    /// The glass in dark: a warm glass at the light glass's luminance, so it stands out from every body as much as the
+    /// light glass does (`BrandParityTests`).
+    static let windshieldDarkColor = "#fff0ba"
     static let wheelCenters = [CGPoint(x: 8, y: 16.5), CGPoint(x: 25, y: 16.5)]
     static let tireRadius: CGFloat = 2.4
     static let tireColor = "#42483d"
+    /// In dark a tyre is darker than any card, with a faint rim so it still reads.
+    static let tireDarkColor = "#0e0d0a"
+    static let tireRimColor = "#fff4dc"
+    /// Strong enough that a tyre stands out from the darkest bodies as much as the light tyre does.
+    static let tireRimOpacity = 0.29
+    static let tireRimWidth: CGFloat = 0.45
     static let hubRadius: CGFloat = 0.9
     static let hubColor = "#d2d4c7"
 
     /// Draws the truck in a carrier's livery, in its own 32 × 21 units: scale the context to the size wanted first.
-    static func draw(_ context: GraphicsContext, _ identity: CarrierVisualIdentity) {
+    /// `dark` gives it the dark card's paints: a lit outline where the body would sink into the card, lit glass and
+    /// rimmed tyres.
+    static func draw(_ context: GraphicsContext, _ identity: CarrierVisualIdentity, dark: Bool) {
         let body = Path(roundedRect: Self.body, cornerRadius: bodyCornerRadius)
+        let edge = dark ? identity.edgeInDark : identity.edge
         context.fill(body, with: .color(identity.truck))
-        context.stroke(body, with: .color(identity.edge), lineWidth: strokeWidth)
+        context.stroke(body, with: .color(edge), lineWidth: strokeWidth)
         let cab = polygon(Self.cab)
         context.fill(cab, with: .color(identity.truck))
-        context.stroke(cab, with: .color(identity.edge), lineWidth: strokeWidth)
-        context.fill(polygon(windshield), with: .color(Color(hex: windshieldColor)))
+        context.stroke(cab, with: .color(edge), lineWidth: strokeWidth)
+        context.fill(polygon(windshield), with: .color(Color(hex: dark ? windshieldDarkColor : windshieldColor)))
         let decals = CarrierBrandAssets.shared.truck.decals
         for shape in decals[identity.decal] ?? decals["default"]! {
             let paint = GraphicsContext.Shading.color(identity.paint(shape.paint))
@@ -559,7 +627,11 @@ enum CarrierTruckGeometry {
             }
         }
         for center in wheelCenters {
-            context.fill(disc(center, tireRadius), with: .color(Color(hex: tireColor)))
+            let tire = disc(center, tireRadius)
+            context.fill(tire, with: .color(Color(hex: dark ? tireDarkColor : tireColor)))
+            if dark {
+                context.stroke(tire, with: .color(Color(hex: tireRimColor).opacity(tireRimOpacity)), lineWidth: tireRimWidth)
+            }
             context.fill(disc(center, hubRadius), with: .color(Color(hex: hubColor)))
         }
     }
@@ -581,12 +653,14 @@ enum CarrierTruckGeometry {
 /// The carrier's truck alone, in its livery, beside a name written elsewhere.
 struct CarrierTruckMark: View {
     let identity: CarrierVisualIdentity
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
+        let dark = colorScheme == .dark
         Canvas { context, size in
             let truck = CarrierTruckGeometry.self
             context.scaleBy(x: size.width / truck.viewBox.width, y: size.height / truck.viewBox.height)
-            truck.draw(context, identity)
+            truck.draw(context, identity, dark: dark)
         }
         .frame(width: 27, height: 18)
         .accessibilityHidden(true)

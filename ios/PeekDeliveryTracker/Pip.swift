@@ -378,7 +378,8 @@ enum PipArtwork {
     }
 
     /// The carrier's label on the box's right side: its truck, its name in its own colour, a barcode and the
-    /// tracking number. The label's paper is light in either appearance, so the name takes the brand's light colour.
+    /// tracking number. The label's paper is light in either appearance, so the name takes the brand's light colour and
+    /// the truck its light paints.
     static func label(_ context: GraphicsContext, _ label: PipLabel) {
         let measures = PipGeometry.Label.self
         let ink = Color(hex: "#20251E")
@@ -390,7 +391,7 @@ enum PipArtwork {
         var truck = paper
         truck.translateBy(x: measures.truck.x, y: measures.truck.y)
         truck.scaleBy(x: 0.5, y: 0.5)
-        CarrierTruckGeometry.draw(truck, label.identity)
+        CarrierTruckGeometry.draw(truck, label.identity, dark: false)
         let name = Text(label.identity.name)
             .font(.system(size: measures.nameSize, weight: .heavy))
             .italic(label.identity.family == "dhl")

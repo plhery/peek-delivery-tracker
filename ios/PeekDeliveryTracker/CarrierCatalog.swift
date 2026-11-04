@@ -1483,6 +1483,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     static func checksumPasses(_ checksum: String, _ number: String) -> Bool? {
         switch checksum {
         case "mondial-relay": isValidMondialRelayBarcode(number)
+        case "mondial-relay-head": isMondialRelayBarcodeHead(number)
         case "s10": isValidS10(number)
         case "hermes": isValidHermesParcelNumber(number)
         case "gls": isValidGlsParcelNumber(number)
@@ -1522,6 +1523,15 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         let sum = digits.reversed().enumerated().reduce(0) { $0 + $1.element * (2 + $1.offset % 6) }
         let remainder = 11 - sum % 11
         return remainder >= 10 ? 0 : remainder
+    }
+
+    /// The barcode's head without its key: brand(2), shipment(8), sequence(2), count(2). Its parcel sequence runs from
+    /// one to the count. It has no check digit, so it filters the shape and proves nothing about the carrier.
+    static func isMondialRelayBarcodeHead(_ value: String) -> Bool {
+        guard matches(value, pattern: "^[0-9]{14}$") else { return false }
+        let digits = value.compactMap(\.wholeNumberValue)
+        let sequence = digits[10] * 10 + digits[11]
+        return sequence > 0 && sequence <= digits[12] * 10 + digits[13]
     }
 
     static func isValidMondialRelayBarcode(_ value: String) -> Bool {

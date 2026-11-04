@@ -12,6 +12,7 @@ import com.plhery.peekdeliverytracker.core.CatalogExpressions.matches
  */
 fun CarrierCatalog.Companion.checksumPasses(checksum: String, number: String): Boolean? = when (checksum) {
     "mondial-relay" -> isValidMondialRelayBarcode(number)
+    "mondial-relay-head" -> isMondialRelayBarcodeHead(number)
     "s10" -> isValidS10(number)
     "hermes" -> isValidHermesParcelNumber(number)
     "gls" -> isValidGlsParcelNumber(number)
@@ -53,6 +54,17 @@ private fun mod11CheckDigit(digits: List<Int>): Int {
     val sum = digits.reversed().withIndex().sumOf { (offset, digit) -> digit * (2 + offset % 6) }
     val remainder = 11 - sum % 11
     return if (remainder >= 10) 0 else remainder
+}
+
+/**
+ * The barcode's head without its key: brand(2), shipment(8), sequence(2), count(2). Its parcel sequence runs from one
+ * to the count. It has no check digit, so it filters the shape and proves nothing about the carrier.
+ */
+fun CarrierCatalog.Companion.isMondialRelayBarcodeHead(value: String): Boolean {
+    if (!matches(value, "^[0-9]{14}$")) return false
+    val digits = value.digits()
+    val sequence = digits[10] * 10 + digits[11]
+    return sequence > 0 && sequence <= digits[12] * 10 + digits[13]
 }
 
 fun CarrierCatalog.Companion.isValidMondialRelayBarcode(value: String): Boolean {

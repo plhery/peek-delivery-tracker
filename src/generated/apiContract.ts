@@ -15679,13 +15679,13 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "envia-colombia",
       "recognitionRank": 912
     },
-    "trackingUrlTemplate": "https://envia.co/tracking?guia={trackingNumber}",
+    "trackingUrlTemplate": "https://envia.co/rastreo/?guia={trackingNumber}",
     "linkRules": [
       {
         "domains": [
           "envia.co"
         ],
-        "pathPattern": "^/tracking/?$",
+        "pathPattern": "^/(?:rastreo|tracking)/?$",
         "params": [
           "guia"
         ]
@@ -15710,7 +15710,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://envia.co/tracking"
+    "trackingSearchUrl": "https://envia.co/rastreo/"
   },
   "europochta": {
     "displayName": "Europochta",

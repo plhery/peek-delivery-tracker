@@ -78754,6 +78754,14 @@
     ]
   },
   {
+    "input": "EN544513815JP",
+    "carrier": "japan-post",
+    "confidence": "high",
+    "candidates": [
+      "japan-post"
+    ]
+  },
+  {
     "input": "EN844273821IN",
     "carrier": "india-post",
     "confidence": "high",

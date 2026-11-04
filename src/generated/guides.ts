@@ -74,7 +74,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "temu-order-tracking",
-      "title": "Temu order tracking: order number or tracking number?"
+      "title": "Temu order tracking: which carrier has your parcel"
     },
     {
       "id": "shein-orders",
@@ -568,7 +568,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "temu-orders",
       "slug": "suivi-commande-temu",
-      "title": "Suivi de commande Temu\u00a0: numéro de commande ou de suivi\u202f?"
+      "title": "Suivi de commande Temu\u00a0: quel transporteur a ton colis\u202f?"
     },
     {
       "id": "shein-orders",

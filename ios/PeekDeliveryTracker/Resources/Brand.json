@@ -79,6 +79,18 @@
     ["#363b36", "#222622"],
     ["#1a1f28", "#1a1f28"]
   ],
+  "litEdge": {
+    "below": 2.2,
+    "lift": 0.3,
+    "floor": 0.72,
+    "maxChroma": 0.09
+  },
+  "litEdgeExamples": [
+    ["#4d148c", "#272131", "#4d148c", "#ab99d6"],
+    ["#573626", "#2c2317", "#573626", "#c29b88"],
+    ["#1634a7", "#152538", "#1634a7", "#8aa4de"],
+    ["#ffcc00", "#30210b", "#b88d16", "#b88d16"]
+  ],
   "families": {
     "ait-home-delivery": "ait-worldwide",
     "amazon-shipping": "amazon-logistics",
@@ -2001,13 +2013,18 @@
     "windshield": {
       "d": "M22 9.5h2.5l3 3H22Z",
       "points": [[22, 9.5], [24.5, 9.5], [27.5, 12.5], [22, 12.5]],
-      "fill": "#edf1ee"
+      "fill": "#edf1ee",
+      "dark": "#e9dba6"
     },
     "wheels": {
       "centers": [[8, 16.5], [25, 16.5]],
       "tire": {
         "r": 2.4,
-        "fill": "#42483d"
+        "fill": "#42483d",
+        "dark": "#0e0d0a",
+        "rim": "#fff4dc",
+        "rimOpacity": 0.24,
+        "rimWidth": 0.45
       },
       "hub": {
         "r": 0.9,

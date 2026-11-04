@@ -25,7 +25,10 @@ Catalog colours come from Universal Parcel Scraper. `palette.json` defines fallb
 colours and palette mixing; `truck.json` defines the shared truck geometry. The dark card's
 mix then takes its `tone`: one lightness for every carrier, a softer chroma and amber for
 yellows, unless that comes out brighter than the mix, so card text never loses contrast.
-`toneExamples` holds pairs the web, iPhone and Android tests all check.
+`toneExamples` holds pairs the web, iPhone and Android tests all check. On that card a
+truck too dark to stand out gets a lit outline: `litEdge` lifts its colour's lightness and
+softens its chroma, and `litEdgeExamples` holds cases the tests check. In the dark the
+truck's glass and tyres take their `dark` paints.
 
 `truck.json` spells every outline twice: `d` for the web's SVG, and `points` or `segments`,
 the same outline in straight lines, for the iPhone app's canvas.

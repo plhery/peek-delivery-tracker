@@ -11,6 +11,8 @@ import {
   carrierBrand,
   carrierBrandFamily,
   carrierDecal,
+  contrast,
+  litEdge,
   luminance,
   mix,
   tone,
@@ -73,6 +75,20 @@ describe('carrier brand', () => {
       expect(luminance(palette['ink-dark']), id).toBeGreaterThan(luminance(palette['surface-dark']));
       expect(luminance(palette['brand-dark']), id).toBeGreaterThan(luminance(palette['surface-dark']));
     }
+  });
+
+  it('lights up the outline of a dark truck on its dark card, as the examples the native apps also check', () => {
+    for (const [truck, surface, edge, expected] of paletteSource.litEdgeExamples) expect(litEdge(truck, surface, edge)).toBe(expected);
+    let lit = 0;
+    for (const id of Object.keys(CARRIER_DEFINITIONS)) {
+      const palette = carrierBrand(CARRIER_DEFINITIONS[id as keyof typeof CARRIER_DEFINITIONS].color, CARRIER_PALETTES[id]);
+      const edge = litEdge(palette.truck, palette['surface-dark'], palette.edge);
+      if (edge === palette.edge) continue;
+      lit += 1;
+      // A lit outline stands out from the card the body sinks into.
+      expect(contrast(edge, palette['surface-dark']), id).toBeGreaterThanOrEqual(paletteSource.litEdge.below);
+    }
+    expect(lit).toBeGreaterThan(0);
   });
 
   it('gives the GLS countries one family, one palette and one livery', () => {

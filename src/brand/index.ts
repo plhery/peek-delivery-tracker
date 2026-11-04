@@ -8,6 +8,7 @@ import {
 import paletteData from './palette.json';
 import type {
   BrandDerivationStep,
+  BrandLitEdge,
   BrandProperty,
   BrandTone,
   CarrierDecal,
@@ -16,6 +17,9 @@ import type {
 } from './types';
 
 export * from './types';
+
+/** When a truck's outline lights up on a dark card. */
+export const BRAND_LIT_EDGE = paletteData.litEdge as BrandLitEdge;
 
 /** The neutral color for unknown carriers and newly scaffolded entries. */
 export const DEFAULT_CARRIER_COLOR: string = paletteData.defaultColor;
@@ -65,6 +69,12 @@ export function luminance(hex: string): number {
   return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 }
 
+/** WCAG 2 contrast ratio of two `#rrggbb` colours. */
+export function contrast(first: string, second: string): number {
+  const [light, dark] = [luminance(first), luminance(second)].sort((a, b) => b - a);
+  return (light + 0.05) / (dark + 0.05);
+}
+
 /** A `#rrggbb` colour as OKLCH: lightness, chroma, hue in degrees. */
 export function oklch(hex: string): [number, number, number] {
   const [red, green, blue] = channels(hex).map(linear);
@@ -96,6 +106,13 @@ export function tone(color: string, { lightness, chroma, maxChroma, amber }: Bra
   const hue = sourceHue > amber.from && sourceHue < amber.to ? amber.hue + (sourceHue - amber.from) * amber.slope : sourceHue;
   const toned = fromOklch(lightness, Math.min(maxChroma, sourceChroma * chroma), hue);
   return luminance(toned) > luminance(color) ? color : toned;
+}
+
+/** The truck's outline on its dark card: `edge`, unless the body sinks into the card (see `BrandLitEdge`). */
+export function litEdge(truck: string, surface: string, edge: string, { below, lift, floor, maxChroma }: BrandLitEdge = BRAND_LIT_EDGE): string {
+  if (!HEX.test(truck) || !HEX.test(surface) || contrast(truck, surface) >= below) return edge;
+  const [lightness, chroma, hue] = oklch(truck);
+  return fromOklch(Math.max(lightness + lift, floor), Math.min(chroma, maxChroma), hue);
 }
 
 /**

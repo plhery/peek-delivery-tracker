@@ -13,6 +13,17 @@ function paint(value: string): string {
   return value.startsWith('#') ? value : `var(--carrier-${value})`;
 }
 
+/**
+ * A paint for dark too. It sits in `style`, which wins over the attribute where `light-dark()` works; a browser
+ * without it drops the declaration and keeps the attribute's paint.
+ */
+function night(property: 'fill' | 'stroke', light: string, dark: string) {
+  return { [property]: `light-dark(${light}, ${dark})` };
+}
+
+/** On a dark card the outline can light up (`litEdge`). */
+const EDGE_IN_DARK = night('stroke', 'var(--carrier-edge)', 'var(--carrier-edge-dark, var(--carrier-edge))');
+
 function Decal({ shape }: { shape: TruckDecalShape }) {
   if (shape.type === 'circle') {
     return <circle cx={n(shape.cx)} cy={n(shape.cy)} r={n(shape.r)} fill={paint(shape.fill)} />;
@@ -25,17 +36,23 @@ function Decal({ shape }: { shape: TruckDecalShape }) {
 function TruckBody() {
   const { strokeWidth, body, cab, windshield } = CARRIER_TRUCK;
   return <>
-    <rect x={n(body.x)} y={n(body.y)} width={n(body.width)} height={n(body.height)} rx={n(body.rx)} fill={paint(body.fill)} stroke={paint(body.stroke)} strokeWidth={n(strokeWidth)} />
-    <path d={cab.d} fill={paint(cab.fill)} stroke={paint(cab.stroke)} strokeWidth={n(strokeWidth)} />
-    <path d={windshield.d} fill={paint(windshield.fill)} />
+    <rect x={n(body.x)} y={n(body.y)} width={n(body.width)} height={n(body.height)} rx={n(body.rx)} fill={paint(body.fill)} stroke={paint(body.stroke)} strokeWidth={n(strokeWidth)} style={body.stroke === 'edge' ? EDGE_IN_DARK : undefined} />
+    <path d={cab.d} fill={paint(cab.fill)} stroke={paint(cab.stroke)} strokeWidth={n(strokeWidth)} style={cab.stroke === 'edge' ? EDGE_IN_DARK : undefined} />
+    <path d={windshield.d} fill={paint(windshield.fill)} style={night('fill', paint(windshield.fill), windshield.dark)} />
   </>;
 }
 
 /** What every truck shares over its livery: the wheels. */
 function TruckWheels() {
   const { wheels } = CARRIER_TRUCK;
+  const { tire } = wheels;
+  // In dark a tyre is darker than any card, and a faint rim keeps it round.
+  const tireStyle = {
+    ...night('fill', paint(tire.fill), tire.dark),
+    ...night('stroke', 'transparent', `color-mix(in srgb, ${tire.rim} ${tire.rimOpacity * 100}%, transparent)`),
+  };
   return wheels.centers.map(([x, y]) => <g key={x}>
-    <circle cx={n(x)} cy={n(y)} r={n(wheels.tire.r)} fill={paint(wheels.tire.fill)} />
+    <circle cx={n(x)} cy={n(y)} r={n(tire.r)} fill={paint(tire.fill)} strokeWidth={n(tire.rimWidth)} style={tireStyle} />
     <circle cx={n(x)} cy={n(y)} r={n(wheels.hub.r)} fill={paint(wheels.hub.fill)} />
   </g>);
 }

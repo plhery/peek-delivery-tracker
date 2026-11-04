@@ -1,15 +1,15 @@
 /* The map. Every colour is a variable, so a card can tint it; light-dark() follows the page's appearance. */
 .worldMap {
-  --map-space: light-dark(#e9ece5, #0e120e); --map-ocean: light-dark(#f4f6f1, #171c17);
-  --map-land: light-dark(#dfe4d8, #2d352b); --map-border: var(--map-ocean);
+  --map-space: light-dark(#e9ece5, #0f0d0a); --map-ocean: light-dark(#f4f6f1, #1b1915);
+  --map-land: light-dark(#dfe4d8, #36322b); --map-border: var(--map-ocean);
   --map-visited: color-mix(in srgb, var(--map-accent) 13%, var(--map-land));
   /* What shows up close: built-up areas a shade off the land, roads a little further off it. */
   --map-urban: color-mix(in srgb, var(--map-land) 93%, var(--ink)); --map-road: color-mix(in srgb, var(--map-land) 82%, var(--ink));
-  --map-night: light-dark(rgb(24 34 40 / 10%), rgb(0 0 0 / 34%)); --map-grid: light-dark(rgb(32 37 30 / 6%), rgb(245 246 242 / 4%));
-  --map-limb: light-dark(rgb(32 37 30 / 9%), rgb(245 246 242 / 10%)); --map-shade: light-dark(rgb(32 45 32 / 7%), rgb(0 0 0 / 26%));
+  --map-night: light-dark(rgb(24 34 40 / 10%), rgb(0 0 0 / 34%)); --map-grid: light-dark(rgb(32 37 30 / 6%), rgb(250 246 235 / 4%));
+  --map-limb: light-dark(rgb(32 37 30 / 9%), rgb(250 246 235 / 10%)); --map-shade: light-dark(rgb(32 45 32 / 7%), rgb(0 0 0 / 26%));
   --map-route: var(--ink); --map-route-muted: color-mix(in srgb, var(--ink) 38%, transparent);
   --map-accent: var(--tone, var(--ink)); --map-label: var(--ink-soft); --map-label-strong: var(--ink);
-  --map-label-bg: light-dark(color-mix(in srgb, var(--paper) 84%, transparent), color-mix(in srgb, #20261f 82%, transparent));
+  --map-label-bg: light-dark(color-mix(in srgb, var(--paper) 84%, transparent), color-mix(in srgb, #1f1c17 82%, transparent));
   --map-dot-ring: var(--map-ocean); --map-rim-shade: light-dark(rgb(20 30 20 / 7%), rgb(0 0 0 / 40%));
   user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
 }

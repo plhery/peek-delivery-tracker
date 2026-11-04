@@ -61,6 +61,8 @@ export function readBrandData() {
     properties: palette.properties,
     derivation: palette.derivation,
     toneExamples: palette.toneExamples,
+    litEdge: palette.litEdge,
+    litEdgeExamples: palette.litEdgeExamples,
     families: sortedByKey(families),
     palettes: sortedByKey(palettes),
     decals: sortedByKey(decals),

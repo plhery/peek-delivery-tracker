@@ -677,6 +677,18 @@ export interface BrandTone {
   amber: { from: number; to: number; hue: number; slope: number };
 }
 
+/**
+ * A dark card can swallow a dark truck: when the body's contrast with the card is
+ * under `below`, its outline takes the body's hue at `lift` more OKLCH lightness
+ * (at least `floor`), its chroma capped at `maxChroma`.
+ */
+export interface BrandLitEdge {
+  below: number;
+  lift: number;
+  floor: number;
+  maxChroma: number;
+}
+
 /** `[x, y]` in the truck's own 32x21 coordinate space. */
 export type TruckPoint = readonly [number, number];
 
@@ -705,15 +717,17 @@ export interface TruckPanel {
   stroke: TruckPaint;
 }
 
-/** Same, without a stroke. */
+/** Same, without a stroke; `dark` is its paint in dark. */
 export interface TruckGlass {
   d: string;
   fill: TruckPaint;
+  dark: string;
 }
 
 export interface TruckWheels {
   centers: readonly TruckPoint[];
-  tire: { r: number; fill: TruckPaint };
+  /** In dark a tyre is `dark`, darker than any card, with a thin `rim` so it still reads. */
+  tire: { r: number; fill: TruckPaint; dark: string; rim: string; rimOpacity: number; rimWidth: number };
   hub: { r: number; fill: TruckPaint };
 }
 

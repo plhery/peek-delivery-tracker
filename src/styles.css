@@ -138,7 +138,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .progress-track__dot { display: block; flex: 1; height: 3px; background: color-mix(in srgb, var(--ink) 14%, transparent); border-radius: 4px; transition: background .25s; }
 .progress-track__dot--filled { background: var(--tone, var(--blue)); }
 /* The parcel's stamp: a die-cut globe in the card's colours, postmarked once the parcel is delivered. */
-.parcel-stamp { --stamp-paper: light-dark(#fffefa, color-mix(in srgb, var(--tone) 22%, var(--tone-surface))); flex: 0 0 auto; width: 46px; height: 58px; overflow: visible; fill: none; stroke: none; rotate: -2deg; }
+.parcel-stamp { --stamp-paper: light-dark(#fffefa, #d9d0bc); flex: 0 0 auto; width: 46px; height: 58px; overflow: visible; fill: none; stroke: none; rotate: -2deg; }
 .parcel-stamp__paper { fill: var(--stamp-paper); }
 .parcel-stamp__print { fill: var(--tone-surface); }
 .parcel-stamp__globe { fill: color-mix(in srgb, var(--tone) 14%, var(--tone-surface)); }

@@ -10,6 +10,7 @@ import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasClickAction
@@ -23,6 +24,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performScrollToKey
+import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeUp
 import androidx.compose.ui.text.TextLayoutResult
@@ -34,6 +36,8 @@ import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.ParcelSectionKind
+import com.plhery.peekdeliverytracker.core.ParcelSort
+import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
@@ -49,18 +53,27 @@ import com.plhery.peekdeliverytracker.ui.deliveries.ADD_PARCEL
 import com.plhery.peekdeliverytracker.ui.deliveries.ALL_ARRIVED
 import com.plhery.peekdeliverytracker.ui.deliveries.ARCHIVE_KEY
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
+import com.plhery.peekdeliverytracker.ui.deliveries.CLEAR_ALL
 import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
 import com.plhery.peekdeliverytracker.ui.deliveries.DEVICE_ACCOUNT_ROW
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.EMPTY_ADD
 import com.plhery.peekdeliverytracker.ui.deliveries.EMPTY_PASTE
+import com.plhery.peekdeliverytracker.ui.deliveries.FILTERS_BUTTON
+import com.plhery.peekdeliverytracker.ui.deliveries.FILTERS_SORT
+import com.plhery.peekdeliverytracker.ui.deliveries.FILTERS_STATUS
+import com.plhery.peekdeliverytracker.ui.deliveries.FILTER_CHIPS
 import com.plhery.peekdeliverytracker.ui.deliveries.FIRST_OPEN
 import com.plhery.peekdeliverytracker.ui.deliveries.FIRST_OPEN_FIELD
 import com.plhery.peekdeliverytracker.ui.deliveries.FOOT
 import com.plhery.peekdeliverytracker.ui.deliveries.LIST_NOTICE
 import com.plhery.peekdeliverytracker.ui.deliveries.LocalOnTheWayHeading
+import com.plhery.peekdeliverytracker.ui.deliveries.NO_RESULTS
+import com.plhery.peekdeliverytracker.ui.deliveries.NO_RESULTS_CLEAR
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
+import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_BUTTON
+import com.plhery.peekdeliverytracker.ui.deliveries.SEARCH_FIELD
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.cardId
 import com.plhery.peekdeliverytracker.ui.deliveries.cardKey
@@ -84,11 +97,12 @@ import org.junit.runner.RunWith
 
 /**
  * The deliveries list in each state the m7c list walk names, on this device's own window (A-ST01-A-ST04, A-ST07,
- * A-ST08, A-ST10, A-ST11, A-ST14-A-ST16, A-ST18, A-ST19, A-ST21, A-ST24, A-ST26): the launch screen blank, then saying
+ * A-ST08-A-ST11, A-ST14-A-ST19, A-ST21, A-ST24, A-ST26): the launch screen blank, then saying
  * the app is opening, then the first screen; signed out, and the first open after signing out; the demo, which needs
  * no connection; a guest with nothing followed opening Add and cancelling it under the first open; a first load the
  * fakes hold; signed in with no parcels, and with only delivered ones; offline with the parcels the phone kept, and
- * the sign-in expired; the demo, a guest with parcels and that guest's Friends tab at the largest text, and German
+ * the sign-in expired; a search matching nothing, and a guest's view of their own with its chips and the archived it
+ * finds; the demo, a guest with parcels and that guest's Friends tab at the largest text, and German
  * there too; the archive's shelf opened, the past deliveries, the parcel shown beside the list where the window lays
  * them out side by side, and a long list scrolled to its foot and back. Each moment saved as
  * liststates/<row>-<moment>.png, with -dark, and -largest at the largest text, in the test package's external files,
@@ -424,6 +438,69 @@ class ListStatesDeviceShots {
         val size = layout.layoutInput.style.fontSize.value
         assertTrue("$size of $full", size <= full + 0.01f && size >= full * 0.75f - 0.01f)
         walk.shot("A-ST24-german")
+    }
+
+    // A-ST09, A-ST17: a view of the reader's own.
+
+    /**
+     * A-ST09: a search matching nothing says so in place of the list ("view.noResultsTitle", its words and Clear), with
+     * no "On the way" or count over it; its Clear empties the field and shows every parcel again.
+     */
+    @Test
+    fun aSearchMatchingNothingSaysSoAndItsClearShowsEverythingAgain() {
+        walk.show(demo)
+        walk.tap(SEARCH_BUTTON)
+        compose.onNodeWithTag(SEARCH_FIELD).performTextInput("giftzz")
+        compose.waitUntil(LONG_MILLIS) { walk.exists(NO_RESULTS) }
+        walk.awaitKeyboard(required = false)
+        assertTrue(says(walk.text("view.noResultsTitle"), within = NO_RESULTS))
+        assertTrue(says(walk.text("view.noResultsDescription"), within = NO_RESULTS))
+        assertFalse(walk.exists(ACTIVE_COUNT))
+        walk.shot("A-ST09-no-results")
+
+        walk.tap(NO_RESULTS_CLEAR)
+        compose.waitUntil(LONG_MILLIS) { !walk.exists(NO_RESULTS) }
+        compose.onNodeWithTag(SEARCH_FIELD).assertTextEquals("")
+        assertEquals("${demo.count { it.isActive }}", figure(ACTIVE_COUNT))
+        walk.shot("A-ST09-cleared")
+    }
+
+    /**
+     * A-ST17: a guest's view of their own (a query, a status, a sort) puts its chips over the list, one for each, and
+     * leaves out the offer of an account; a query finding an archived parcel lists it under "Archived" in the list,
+     * not on the shelf. Clear all puts the list back as it was, the offer with it.
+     */
+    @Test
+    fun aViewOfTheirOwnShowsItsChipsAndTheArchivedItFindsAsAGroup() {
+        walk.show(demo, session = AuthenticationState.Welcome) { isGuest = true }
+        assertTrue("deviceAccount" in keys())
+        walk.tap(SEARCH_BUTTON)
+        compose.onNodeWithTag(SEARCH_FIELD).performTextInput("e")
+        compose.waitForIdle()
+        val active = "$FILTERS_STATUS.${ParcelStatusFilter.Active.rawValue}"
+        walk.tap(FILTERS_BUTTON)
+        compose.waitUntil(LONG_MILLIS) { walk.exists(active) }
+        walk.settle()
+        walk.tap(active)
+        walk.tap("$FILTERS_SORT.${ParcelSort.Carrier.rawValue}")
+        walk.shot("A-ST17-filters")
+        walk.back()
+        compose.waitUntil(LONG_MILLIS) { !walk.exists(active) }
+        for (chip in listOf("query", "status", "sort")) assertTrue(chip, walk.exists("$FILTER_CHIPS.$chip"))
+        assertFalse(walk.exists("$FILTER_CHIPS.carrier"))
+        assertFalse("deviceAccount" in keys())
+        walk.shot("A-ST17-chips")
+
+        walk.tap(CLEAR_ALL)
+        compose.waitUntil(LONG_MILLIS) { !walk.exists(FILTER_CHIPS) }
+        assertTrue("deviceAccount" in keys())
+        val ramen = DemoCards.archived().first { it.label.startsWith("Ceramic ramen") }
+        compose.onNodeWithTag(SEARCH_FIELD).performTextInput("ramen")
+        compose.waitUntil(LONG_MILLIS) { ramen.id in walk.onUi { walk.deliveries.rows } }
+        walk.settle()
+        assertFalse(walk.onUi { walk.deliveries.archiveOpen })
+        assertTrue(says(walk.text("app.archived"), within = PARCEL_LIST))
+        walk.shot("A-ST17-archived-found")
     }
 
     // A-ST18, A-ST19, A-ST21, A-ST26: the list's parts.

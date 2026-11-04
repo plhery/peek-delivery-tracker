@@ -55,6 +55,45 @@ begin
 end;
 $$;
 
+-- Each queue carries the scan's time as its source wrote it, and whether the account chose a time zone:
+-- a delivery is told on the scan's clock when it did not.
+do $$
+declare
+  queue text;
+  written integer;
+begin
+  foreach queue in array array['pending_push_notifications', 'pending_native_push_notifications'] loop
+    execute format('select count(*) from public.%I as pending
+      where package_id = %L and timezone_chosen is false and event_time is not distinct from
+        (select raw_data ->> ''time'' from public.tracking_events where id = pending.event_id)',
+      queue, '97000000-0000-0000-0000-000000000002') into written;
+    if written <> 5 then
+      raise exception '% lost the scan''s clock or the account''s choice: % of 5', queue, written;
+    end if;
+  end loop;
+  if not exists (
+    select 1 from information_schema.columns
+    where table_schema = 'public' and table_name = 'pending_parcel_link_alerts' and column_name = 'event_time'
+  ) then
+    raise exception 'Link alerts lost the scan''s clock';
+  end if;
+end;
+$$;
+insert into public.notification_preferences (user_id, timezone)
+values ('97000000-0000-0000-0000-000000000001', 'America/Los_Angeles');
+do $$
+begin
+  if (select count(*) from public.pending_push_notifications
+      where package_id = '97000000-0000-0000-0000-000000000002' and timezone_chosen
+        and timezone = 'America/Los_Angeles') <> 5
+     or (select count(*) from public.pending_native_push_notifications
+      where package_id = '97000000-0000-0000-0000-000000000002' and timezone_chosen) <> 5 then
+    raise exception 'The queues missed the time zone the account chose';
+  end if;
+end;
+$$;
+delete from public.notification_preferences where user_id = '97000000-0000-0000-0000-000000000001';
+
 -- Updating the device language must not drop queued events or restart its cursor.
 update public.push_subscriptions set locale = 'fr'
 where user_id = '97000000-0000-0000-0000-000000000001';

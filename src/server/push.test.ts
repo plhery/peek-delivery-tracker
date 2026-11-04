@@ -95,6 +95,23 @@ describe('friendly parcel notifications', () => {
       .toBe('Coffee beans · delivered at 14:32');
   });
 
+  it('tells a delivery on its scan\'s clock when the account chose no timezone', () => {
+    const unchosen = { ...delivered, timezone_chosen: false };
+    const pacific = { ...unchosen, event_time: '2026-09-07T05:32:00-07:00' };
+    expect(web.payload(pacific).body).toBe('Coffee beans · delivered at 05:32');
+    expect(alert(native.eventPayload(pacific)).body).toBe('Coffee beans · delivered at 05:32');
+    // The evening before, there: not "at 01:51", which is Zurich's night.
+    expect(web.payload({ ...unchosen, occurred_at: '2026-09-06T23:51:00Z', event_time: '2026-09-06T16:51:00-07:00' }).body)
+      .toBe('Coffee beans · delivered on 6 September at 16:51');
+    // A time in UTC, or without its offset, says nothing of the place: Zurich's clock.
+    expect(web.payload({ ...unchosen, event_time: '2026-09-07T12:32:00Z' }).body).toBe('Coffee beans · delivered at 14:32');
+    expect(web.payload({ ...unchosen, event_time: '07.09.2026 14:32' }).body).toBe('Coffee beans · delivered at 14:32');
+    expect(web.payload({ ...unchosen, event_time: null }).body).toBe('Coffee beans · delivered at 14:32');
+    // A time zone the account chose is the one its devices read the app in.
+    expect(web.payload({ ...pacific, timezone: 'America/New_York', timezone_chosen: true }).body)
+      .toBe('Coffee beans · delivered at 08:32');
+  });
+
   it('does not call delayed alerts recent, and dates deliveries from a previous day', () => {
     expect(web.payload({ ...delivered, occurred_at: '2026-09-07T09:32:00Z' }).body)
       .toBe('Coffee beans · delivered at 11:32');

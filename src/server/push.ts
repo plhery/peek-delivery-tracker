@@ -5,7 +5,7 @@ import 'server-only';
 import { connect, constants as http2Constants } from 'node:http2';
 import { createPrivateKey, type KeyObject } from 'node:crypto';
 import { SignJWT } from 'jose';
-import { DateTime, IANAZone } from 'luxon';
+import { DateTime, FixedOffsetZone, IANAZone, type Zone } from 'luxon';
 import webpush from 'web-push';
 import { CARRIER_CAPABILITIES, type ApiParcelAlertPreset } from '../generated/apiContract';
 import { dayAndTime } from '../lib/format';
@@ -458,13 +458,26 @@ export function notificationExpectedDelivery(
   return expectedDelivery(value, notificationLocale(locale), timezone, now)?.text ?? '';
 }
 
+/**
+ * The clock a delivery's time is told on: the time zone its reader chose; else the scan's own, when its
+ * source wrote the offset (a parcel is delivered where its reader is); else Zurich's. A time written
+ * in UTC ("Z") says nothing of the place.
+ */
+function deliveryClock(row: JsonObject): Zone | string {
+  const timezone = stringField(row, 'timezone');
+  if (row.timezone_chosen !== false && IANAZone.isValidZone(timezone)) return timezone;
+  const offset = /[T ]\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?([+-])(\d{2}):?(\d{2})$/.exec(stringField(row, 'event_time'));
+  const minutes = offset ? Number(offset[2]) * 60 + Number(offset[3]) : NaN;
+  if (minutes <= 14 * 60) return FixedOffsetZone.instance(offset![1] === '-' ? -minutes : minutes);
+  return 'Europe/Zurich';
+}
+
 function deliveredMessage(row: JsonObject, locale: Locale, now: number): string {
   const copy = PUSH_COPY[locale];
   const fallback = copy.body_delivered!;
   // The queue distinguishes carrier times from date-only and observed updates.
   if (row.event_has_time !== true) return fallback;
-  const timezone = stringField(row, 'timezone');
-  const zone = IANAZone.isValidZone(timezone) ? timezone : 'Europe/Zurich';
+  const zone = deliveryClock(row);
   const delivered = DateTime.fromISO(stringField(row, 'occurred_at'), { zone });
   const current = DateTime.fromMillis(now, { zone });
   if (!delivered.isValid || !current.isValid || delivered.toMillis() > now) return fallback;
@@ -892,10 +905,14 @@ export class ParcelLinkAlertService {
     const lead = gift && stage !== 'delivered' && stage !== 'in_transit' ? news : '';
     return {
       title: notificationText(title, 80),
-      // Neither the parcel's name nor its number: both are its owner's. The scan's place is part of what a gift
-      // keeps to itself. Nobody chose a timezone: Zurich's, as for an account without one.
+      // Neither the parcel's name nor its number: both are its owner's. The scan's place, and the clock it
+      // was written on, are part of what a gift keeps to itself. Nobody chose a time zone: a delivery is told
+      // on the scan's clock, the rest on Zurich's, as for an account without one.
       body: notificationBody(
-        { ...row, timezone: 'Europe/Zurich', location: this.wrappedGift(row) ? null : row.location },
+        {
+          ...row, timezone: 'Europe/Zurich', timezone_chosen: false,
+          ...this.wrappedGift(row) ? { location: null, event_time: null } : {},
+        },
         locale, this.now(), lead,
       ),
       ...WEB_NOTIFICATION_PICTURES,

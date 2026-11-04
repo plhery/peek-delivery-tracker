@@ -478,7 +478,9 @@ and nothing typed is sent.
 ## Notifications and Live Activities
 
 - Web Push, APNs and Live Activities use the same status sentences. Delivered alerts show
-  the carrier's event time in the recipient's timezone when the carrier gave a clock time.
+  the carrier's event time when the carrier gave a clock time: in the timezone the account
+  saved with its notification settings, or else on the scan's own clock when the carrier
+  gave its UTC offset, or else in Zurich's. A link's alert never has a saved timezone.
 - Estimates appear only while a parcel is on its way. They are hidden after delivery, a
   failed attempt, pickup readiness or a return, and whenever they are in the past.
 - An `exception` means the carrier reported a problem that is neither a missed delivery

@@ -278,8 +278,14 @@ describe('what an alert says', () => {
     }
   });
 
-  it('reads times in Zurich\'s timezone, as for an account that chose none', () => {
-    expect(alerts.payload(row({ stage: 'delivered', timezone: 'America/New_York' })).body).toMatch(/^Delivered at 14:30/);
+  it('tells a delivery on its scan\'s clock, as for an account that chose no timezone, and Zurich\'s otherwise', () => {
+    const delivered = row({ stage: 'delivered', timezone: 'America/New_York', event_time: '2026-10-02T05:30:00-07:00' });
+    expect(alerts.payload(delivered).body).toMatch(/^Delivered at 05:30/);
+    expect(alerts.appPayload(delivered)).toMatchObject({ aps: { alert: { body: expect.stringMatching(/^Delivered at 05:30/) } } });
+    expect(alerts.payload(row({ stage: 'delivered', event_time: '2026-10-02T12:30:00Z' })).body).toMatch(/^Delivered at 14:30/);
+    expect(alerts.payload(row({ stage: 'delivered' })).body).toMatch(/^Delivered at 14:30/);
+    // A gift still on its way keeps its scan's clock to itself, as it keeps its place.
+    expect(alerts.payload({ ...delivered, gift: true }).body).toMatch(/^Delivered at 14:30/);
   });
 
   it.each(SUPPORTED_LOCALES)('announces a gift on its way as one, without the place of the scan, in %s', (locale) => {

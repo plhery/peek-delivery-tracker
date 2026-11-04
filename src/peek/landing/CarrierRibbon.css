@@ -7,7 +7,8 @@
 .door-ribbon__truck { --carrier-brand: light-dark(var(--carrier-brand-light), var(--carrier-brand-dark)); display: inline-flex; flex-shrink: 0; padding: 0 16px; animation: door-wheel ease-in-out infinite; }
 .door-ribbon__truck .carrier-mark { white-space: nowrap; }
 .door-ribbon__road[data-paused] .door-ribbon__lane, .door-ribbon__road[data-paused] .door-ribbon__truck { animation-play-state: paused; }
-@keyframes door-drive { to { transform: translateX(-50%); } }
+/* The trucks face right, so the lane rolls right: it starts a line back, where the second line looks like the first. */
+@keyframes door-drive { from { transform: translateX(-50%); } }
 @keyframes door-wheel { 50% { transform: translateY(-1.5px); } }
 @media (hover: hover) {
   .door-ribbon__road:hover .door-ribbon__lane, .door-ribbon__road:hover .door-ribbon__truck { animation-play-state: paused; }

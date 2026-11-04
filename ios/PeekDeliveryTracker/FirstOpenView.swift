@@ -654,7 +654,9 @@ struct CarrierFleet: View {
                             line
                         }
                         .fixedSize()
-                        .offset(x: -42 - travelled.truncatingRemainder(dividingBy: max(lap, 1)))
+                        // The trucks face right, so they roll right: from a lap back, where the second line
+                        // stands as the first did.
+                        .offset(x: -42 - lap + travelled.truncatingRemainder(dividingBy: max(lap, 1)))
                     }
                 }
                 .clipped()

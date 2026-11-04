@@ -1061,9 +1061,9 @@ private fun CarrierFleet(rolling: Boolean, modifier: Modifier = Modifier) {
 }
 
 /**
- * The fleet's lane, as tall as the names and 20 at least: the line twice, 26 apart, from 42 before the lane's start and
- * [travelled] points on, a lap at a time; clipped to the lane, whose tenth at each end fades out. The line is wider
- * than the screen and doesn't widen it.
+ * The fleet's lane, as tall as the names and 20 at least: the line twice, 26 apart, from a lap and 42 before the lane's
+ * start and [travelled] points to the right, the way the trucks face, a lap at a time; clipped to the lane, whose
+ * tenth at each end fades out. The line is wider than the screen and doesn't widen it.
  */
 @Composable
 internal fun FleetLane(fleet: List<CarrierVisualIdentity>, travelled: FloatState) {
@@ -1092,7 +1092,8 @@ internal fun FleetLane(fleet: List<CarrierVisualIdentity>, travelled: FloatState
         val height = constraints.constrainHeight(maxOf(FLEET_HEIGHT.roundToPx(), lines.maxOfOrNull { it.height } ?: 0))
         layout(constraints.maxWidth, height) {
             // Read as it is placed: the lane moves on without being composed again.
-            val x = (-FLEET_LEAD.toPx() - travelled.floatValue.dp.toPx() % lap.coerceAtLeast(1)).roundToInt()
+            // The trucks face right, so they roll right: from a lap back, where the second line stands as the first did.
+            val x = (-FLEET_LEAD.toPx() - lap + travelled.floatValue.dp.toPx() % lap.coerceAtLeast(1)).roundToInt()
             lines.forEachIndexed { index, placeable -> placeable.placeRelative(x + index * lap, (height - placeable.height) / 2) }
         }
     }

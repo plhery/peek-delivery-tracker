@@ -3,7 +3,7 @@ title: DHLink tracking: numbers, statuses and who delivers
 description: Track a DHLink parcel from a DHgate order: which numbers DHLink's tracker takes, what its English scans mean, who delivers in your country and who to ask.
 slug: dhlink-tracking
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
 DHLink (驼飞侠) is the cross-border logistics platform of DHgate (敦煌网). Founded in 2014, it ships orders for DHgate sellers and other customers, from China or from its warehouses abroad, and hands them to a carrier in your country for the last leg. Track the number on DHLink's [tracking page](https://www.dhlink.com/trackQuery?lang=en) or in the box above. Take the number from your DHgate order, or ask the seller for it.
@@ -35,11 +35,12 @@ A result shows the status (`In transit`, `Delivered`), the origin and destinatio
 | `Package received & scanned at warehouse` | Booked in at DHLink's warehouse. |
 | `Parcel handed over to carrier,waiting for transportation` | The collection point has it and it waits for transport. |
 | `Package departed from the warehouse`, `The package has sent from the warehouse` | It has left the warehouse. |
+| `Customs export clearance completed`, `Package handed over to airline` | Chinese export customs has released it, then an airline took it. |
 | `Flight departure`, `The flight has taken off` | Flown out of China. |
 | `Shipment Departed From Original Country at …` | Same: it has left China. |
 | `The flight has arrived and the board is being dismantled` | Landed; the pallets are being broken down. |
 | `Shipment has arriveved at destination Country at …` | In your country. The spelling is DHLink's. |
-| `Customs clearance completed` | Import customs has released it. |
+| `Customs clearance completed`, `Customs import clearance completed, awaiting pickup by local carrier` | Import customs has released it; the carrier in your country collects it next. |
 | `UPS/USPS/Fedex` | A handover to the US carrier is coming. |
 | `货物已交UPS/USPS/Fedex,The goods have been delivered to UPS/USPS/Fedex` | Handed to the US carrier. Not delivered to you yet. |
 | `Package picked up by last-mile carrier` | The carrier in your country has taken it over. |
@@ -50,9 +51,9 @@ US lines add hub scans such as `Arrived at Origin Hub` and `Departed Destination
 
 ## Who delivers DHLink parcels
 
-DHLink's site is written for sellers and names no last-mile partner by country. Its tracker shows who delivers. On US lines, one scan says the parcel went to "UPS/USPS/Fedex" without saying which; the rows that follow are that carrier's, such as [USPS](carrier:usps)'s. Some US lines end with [GOFO Express](carrier:gofo) or SwiftX, whose number shows as the "Last Leg No.". Parcels carried by China Post keep their CN number to the end: see [China Post](carrier:china-post) for who delivers them in your country.
+DHLink's site is written for sellers and names no last-mile partner by country. Its tracker shows who delivers. On US lines, one scan says the parcel went to "UPS/USPS/Fedex" without saying which; the rows that follow are that carrier's, such as [USPS](carrier:usps)'s. Some US lines end with [GOFO Express](carrier:gofo) or SwiftX, whose number shows as the "Last Leg No."; in Switzerland, that number can be [DPD Switzerland](carrier:dpd-ch)'s. Parcels carried by China Post keep their CN number to the end: see [China Post](carrier:china-post) for who delivers them in your country.
 
-Once you know the carrier and its number, its own tracking has the local detail, and its rules apply to delivery attempts, notice cards and pickup: see [missed a delivery](guide:missed-delivery). For duties and fees on goods from China, see [parcels held at customs](guide:customs).
+Once you know the carrier and its number, its own tracking has the local detail, and its rules apply to delivery attempts, notice cards and pickup: see [missed a delivery](guide:missed-delivery). Since 1 November 2026, the EU charges a €2 handling fee per item on online orders from outside it; the seller or the delivering carrier pays it and may pass it on to you, at checkout or before delivery. For duties and other fees on goods from China, see [parcels held at customs](guide:customs).
 
 ## DHLink parcel not updating, lost or delivered but missing
 
@@ -60,17 +61,17 @@ Once you know the carrier and its number, its own tracking has the local detail,
 
 **Stuck after the flight or customs.** Look for a "Last Leg No." and check it with that carrier, whose scans may be newer than DHLink's. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**Delivered but not there, lost or late.** DHLink's refund and compensation rules for problem parcels are written for sellers: the seller claims from DHLink, and you deal with the seller or DHgate. They exclude what the buyer causes: a late delivery because the parcel wasn't collected or signed for, or failed customs clearance because the buyer didn't help in time. So pick it up and answer customs requests promptly. See [delivered but not received](guide:delivered-not-received) and [lost parcels](guide:lost-parcel).
+**Delivered but not there, lost or late.** DHLink's refund and compensation rules for problem parcels are written for sellers: the seller claims from DHLink, and you deal with the seller or DHgate. They exclude what the buyer causes: a late delivery because the parcel wasn't collected or signed for, or failed customs clearance because the buyer didn't help in time. So pick it up and answer customs requests promptly, and tell the seller early: it can claim only within 90 days of booking the shipment. See [delivered but not received](guide:delivered-not-received) and [lost parcels](guide:lost-parcel).
 
 ## DHLink contact and customer service
 
-As read on 22 October 2026, DHLink's contact page lists one customer service address, dhlinkservice@dhlink.com, and a platform enquiry form. The site also has a chat assistant, "AI 小飞". The contact page is in Chinese and lists no phone number. For your order, contact the seller through DHgate first; for a delivery problem in your country, the delivering carrier.
+As read on 4 November 2026, DHLink's contact page lists one customer service address, dhlinkservice@dhlink.com, and a platform enquiry form. The site also has a chat assistant, "AI 小飞". The contact page is in Chinese and lists no phone number. For your order, contact the seller through DHgate first; for a delivery problem in your country, the delivering carrier.
 
 ## Track a DHLink parcel with Peek
 
 [Peek](/) can't tell DHLink by the number's shape alone: its FC, XZG, YLUS, QH and EYT numbers are only weak matches. Paste it all the same: Peek follows more than 3,500 carriers. It shows "Checking tracking services…" and then "DHLink has this parcel." when DHLink knows the number; otherwise pick DHLink with "Change". A CN number goes to China Post.
 
-Peek reads DHLink's tracker. It shows the status, the history with each scan's place and the destination country, and lists each scan once. Scans in China are read on Beijing time and USPS scans on the time of their US state; others keep the time DHLink gives. DHLink gives no delivery time, weight or service name, and Peek drops postcodes and order references. Its only delivery estimate is a relayed USPS "Out for Delivery, Expected Delivery …" scan read on its US state's time: while that scan is the newest, Peek shows its day, with the window when it gives one. When the "Last Leg No." is a GOFO number (GFUS and 14 digits) or a SwiftX one (SWX and 18 digits), Peek shows that carrier and its number, asks it and switches to it once it shows newer progress. Other last-leg numbers stay on DHLink's history.
+Peek reads DHLink's tracker. It shows the status, the history with each scan's place and the destination country, and lists each scan once. Scans in China are read on Beijing time and USPS scans on the time of their US state; others keep the time DHLink gives. DHLink gives no delivery time, weight or service name, and Peek drops postcodes and order references. Its only delivery estimate is a relayed USPS "Out for Delivery, Expected Delivery …" scan read on its US state's time: while that scan is the newest, Peek shows its day, with the window when it gives one. When the "Last Leg No." is a GOFO number (GFUS and 14 digits), a SwiftX one (SWX and 18 digits) or a DPD Switzerland one (14 digits starting 060 or 061), Peek shows that carrier and its number, asks it and switches to it once it shows newer progress. Other last-leg numbers stay on DHLink's history.
 
 Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact DHLink, DHgate or the seller for you.
 
@@ -82,7 +83,7 @@ DHgate's cross-border logistics platform, run by 驼飞侠科技（北京）有�
 
 ### Who delivers my DHLink package?
 
-A carrier in your country. On US lines, DHLink hands parcels to UPS, USPS or FedEx, or to GOFO or SwiftX. Look for the "Last Leg No." on DHLink's result.
+A carrier in your country. On US lines, DHLink hands parcels to UPS, USPS or FedEx, or to GOFO or SwiftX; in Switzerland, sometimes to DPD. Look for the "Last Leg No." on DHLink's result.
 
 ### What does "The goods have been delivered to UPS/USPS/Fedex" mean?
 
@@ -94,6 +95,7 @@ DHLink has handed the parcel to the US carrier. It isn't delivered to you yet: t
 - [DHLink: Tracking (轨迹查询)](https://www.dhlink.com/trackQuery?lang=en) – 40 numbers, accepted numbers, result fields, DHLink No., Tracking No., Last Leg No., progress bar, "There is no track for this waybill number"
 - [DHLink: Contact us (联系我们)](https://www.dhlink.com/about/connect) – customer service email, enquiry form, chat
 - [DHLink: Service agreement (服务协议)](https://www.dhlink.com/agreementPage/service) – operator 驼飞侠科技（北京）有限公司
-- [DHgate Seller Help: DHLink物流异常件赔付规则 (DHLink compensation rules)](https://seller.dhgate.com/help/c7502/516002.html) – compensation for sellers, logistics types, exclusions for buyer-caused late delivery and failed clearance
+- [DHgate Seller Help: DHLink物流异常件赔付规则 (DHLink compensation rules)](https://seller.dhgate.com/help/c7502/516002.html) – compensation for sellers, logistics types, exclusions for buyer-caused late delivery and failed clearance, claims within 90 days of the logistics order
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, for goods bought outside the EU, paid by the seller or the delivery company, which may pass it on at checkout or before delivery
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, scan wordings, last-leg partners, what Peek reads and shows
 :::

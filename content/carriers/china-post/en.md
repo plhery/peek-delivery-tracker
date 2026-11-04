@@ -3,7 +3,7 @@ title: China Post tracking: number, statuses and who delivers
 description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-04
 ---
 
 China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
@@ -45,6 +45,9 @@ China Post writes its scans in Chinese. Place names go in brackets, here shown a
 | `航空公司接收`, `航空公司启运` | An airline took it, then departed with it. |
 | `飞机进港` | The flight landed. |
 | `到达寄达地处理中心` | It reached the processing centre in your country. |
+| `送交境外进口海关` | Presented to customs in your country. |
+| `境外进口海关留存待验` | Customs there holds it for a check. |
+| `寄达地海关允许进口` | Customs let it in. |
 | `离开【…】处理中心` | It left that centre. |
 | `已到达【…】投递局` | It reached your delivery office. |
 | `【…】安排投递`, `邮件正在派送中` | Out for delivery. |
@@ -60,7 +63,7 @@ China Post flies the parcel out; in your country the national post takes over, t
 
 - **United States**: [USPS](carrier:usps).
 - **United Kingdom**: [Royal Mail](carrier:royal-mail). It takes the parcel through UK customs and tells you if VAT or duty is due. EMS numbers (starting with E) go to [Parcelforce](carrier:parcelforce), the UK's EMS operator, instead.
-- **Ireland**: [An Post](carrier:an-post).
+- **Ireland**: [An Post](carrier:an-post). Since 1 November 2026, the EU adds a €2 handling fee per item; if the shop didn't charge it at checkout, An Post asks for it, with the duty and any VAT, before delivering.
 - **Canada**: [Canada Post](carrier:canada-post). Look the number up in its Track tool; if nothing appears, Canada Post asks you to have the sender investigate with their country's post.
 - **Australia**: [Australia Post](carrier:australia-post). It says tracking for items from overseas depends on the service used in the sending country, and that customs can take up to 15 days.
 
@@ -80,7 +83,7 @@ Delivery attempts, notice cards and how long a parcel waits at the post office f
 
 ## China Post contact number and customer service
 
-As read on 22 October 2026, China Post's English site lists these lines:
+As read on 4 November 2026, China Post's English site lists these lines:
 
 - **Logistics and EMS**: 8610 11183.
 - **Postal Business**: 8610 11185.
@@ -89,7 +92,7 @@ China Post doesn't say which languages they speak. A formal inquiry has to come 
 
 ## Track a China Post parcel with Peek
 
-[Peek](/) recognises two letters, nine digits and `CN` as China Post straight away when the check digit is right, unless it starts with YY: those are YYpost's numbers. With a wrong one, Peek doesn't take it for China Post, and if you pick China Post it says China Post "doesn't issue numbers like this one": check the number in the shop's email. A ZS, ZC or ZA number with 11 digits is recognised as China Post straight away too. Paste any other number all the same: Peek follows more than 3,500 carriers. If it settles on the wrong carrier, pick China Post with "Change".
+[Peek](/) recognises two letters, nine digits and `CN` as China Post straight away when the check digit is right, unless it starts with YY: those are YYpost's numbers. With a wrong one, Peek doesn't take it for China Post, and if you pick China Post it says China Post "doesn’t issue numbers like this one": check the number in the shop's email. A ZS, ZC or ZA number with 11 digits is recognised as China Post straight away too. Paste any other number all the same: Peek follows more than 3,500 carriers. If it settles on the wrong carrier, pick China Post with "Change".
 
 Peek reads China Post's own tracking. When China Post asks for phone digits, Peek tries the public preview on ems.com.cn instead; Peek never asks you for them. If the preview refuses too and no tracking service has the parcel, Peek says more information is needed: look the number up on China Post's site with the four digits. China Post gives visitors only its three newest scans, so Peek adds the acceptance date when China Post gives one, and takes a fuller history from tracking services when one has it.
 
@@ -126,6 +129,7 @@ Your national post: USPS in the US, Royal Mail in the UK. They deliver it under 
 - [China Post: Home page (English)](https://english.chinapost.com.cn/) – Logistics and EMS and Postal Business numbers
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – number format, service letters, U range without tracking, one number per item
 - [GOV.UK: Tax and customs for goods sent from abroad: Overview](https://www.gov.uk/goods-sent-from-abroad) – Royal Mail takes goods through UK customs and says if VAT or duty is due
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, paid at checkout or to the postal service before delivery
 - [Canada Post: Tracking international packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-international-packages.page) – packages coming to Canada, sender investigates, timelines
 - [Australia Post: International tracking](https://auspost.com.au/help/parcel-tracking/international-parcel/tracking) – tracking depends on the sending country's service
 - [Australia Post: Customs](https://auspost.com.au/help/parcel-tracking/international-parcel/customs) – up to 15 days

@@ -481,10 +481,11 @@ and nothing typed is sent.
   the carrier's event time when the carrier gave a clock time. The push carries the scan's
   instant and the sentence with the time left out (`deviceClockFields` in
   [`push.ts`](../src/server/push.ts)), so the device that shows it writes the time on its own
-  clock as it arrives: the browser's push worker does. Where no device code runs, the
-  server's sentence shows, in the timezone the account saved with its notification settings,
-  or else on the scan's own clock when the carrier gave its UTC offset, or else in Zurich's.
-  A link's alert never has a saved timezone.
+  clock as it arrives: the browser's push worker, the iPhone and Mac app's notification
+  service extension and the Android app do. A Live Activity's alert, and a device without
+  that code, show the server's sentence, in the timezone the account saved with its
+  notification settings, or else on the scan's own clock when the carrier gave its UTC
+  offset, or else in Zurich's. A link's alert never has a saved timezone.
 - Estimates appear only while a parcel is on its way. They are hidden after delivery, a
   failed attempt, pickup readiness or a return, and whenever they are in the past.
 - An `exception` means the carrier reported a problem that is neither a missed delivery

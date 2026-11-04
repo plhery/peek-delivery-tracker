@@ -110,18 +110,18 @@ English text in both places at once; the generator fails when they differ.
 
 ## Signing for a device
 
-1. Select your team for the app, `ShareExtension` and `DeliveryWidget` targets.
-2. Register the three bundle ids (`com.plhery.PeekDeliveryTracker` and its extensions),
+1. Select your team for the app, `ShareExtension`, `DeliveryWidget` and `NotificationService` targets.
+2. Register the four bundle ids (`com.plhery.PeekDeliveryTracker` and its extensions),
    or change them to your own.
 3. Create the App Group, set `SDT_APP_GROUP_IDENTIFIER` in `Shared.xcconfig`, and enable
-   it on all three targets.
+   it on the app, `ShareExtension` and `DeliveryWidget`.
 4. Enable Push Notifications, Associated Domains and App Attest on the app id.
 5. Create an APNs key and set `APNS_TEAM_ID`, `APNS_KEY_ID`, `APNS_PRIVATE_KEY` and
    `APNS_BUNDLE_ID` on the server. The bundle id must match the installed app.
 
 `scripts/refresh-ios-app.sh` can also install with a free Personal Team. Apple doesn't
-allow App Groups, push or Associated Domains there, so the widget can't read parcels and links
-open in the browser first: the invitation page then offers "Open in the iOS app". Sign in with Apple also needs a paid
+allow App Groups, push or Associated Domains there, so the widget can't read parcels, the build leaves out the
+share and notification extensions, and links open in the browser first: the invitation page then offers "Open in the iOS app". Sign in with Apple also needs a paid
 team ([AUTHENTICATION.md](../docs/AUTHENTICATION.md)). App Attest also needs a
 paid team. The Personal Team project disables it and uses Turnstile for anonymous
 lookups instead. No paid Cloudflare account is needed.
@@ -171,6 +171,9 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   without an account, so that forgetting one, or an account taking it over, stops its
   notifications here. Someone else's parcel forgotten while the service can't be told leaves
   the list at once, and each refresh tells the service again until it has.
+- **A delivery's time** is written on the device's clock as its notification arrives, wherever the iPhone or Mac
+  is: the `NotificationService` extension fills the time into the server's sentence (`DeviceClock`). Every other
+  notification shows as the server wrote it.
 - **Live Activities** are switched off (`ParcelStore.offersLiveActivities`, and
   `NSSupportsLiveActivities` in `Info.plist`). Settings has no switch for them, and the
   app ends any still showing and withdraws the iPhone's registration, so the server

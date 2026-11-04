@@ -25,6 +25,12 @@ describe('Personal Team Xcode project preparation', () => {
       /CODE_SIGN_ENTITLEMENTS = (?:PeekDeliveryTracker|DeliveryWidgetExtension)\//,
     );
     assert.doesNotMatch(transformed, /APS_ENVIRONMENT =|APP_ATTEST_ENVIRONMENT =/);
+    // Without push, the notification extension has nothing to do: only the widget is embedded.
+    assert.match(
+      transformed,
+      /files = \(B10000000000000000000022 \/\* DeliveryWidgetExtension\.appex in Embed App Extensions \*\/, \); name = "Embed App Extensions";/,
+    );
+    assert.match(transformed, /dependencies = \(D20000000000000000000003, \); name = PeekDeliveryTracker;/);
     assert.equal(transformed.split("SDT_APP_ATTEST_ENABLED = NO;").length - 1, 2);
     assert.doesNotMatch(transformed, /com.apple.SignInWithApple/);
     // Associated Domains: the capability is recorded as SafariKeychain, and its

@@ -3,7 +3,7 @@ import { pathToFileURL } from 'node:url';
 
 const replacements = [
   [
-    'buildPhases = (E30000000000000000000001, E20000000000000000000001, E40000000000000000000001, E10000000000000000000001, ); buildRules = (); dependencies = (D20000000000000000000001, D20000000000000000000003, );',
+    'buildPhases = (E30000000000000000000001, E20000000000000000000001, E40000000000000000000001, E10000000000000000000001, ); buildRules = (); dependencies = (D20000000000000000000001, D20000000000000000000003, D20000000000000000000004, );',
     'buildPhases = (E30000000000000000000001, E20000000000000000000001, E40000000000000000000001, E10000000000000000000001, ); buildRules = (); dependencies = (D20000000000000000000003, );',
     1,
   ],
@@ -18,7 +18,7 @@ const replacements = [
     1,
   ],
   [
-    'files = (B10000000000000000000014 /* ShareExtension.appex in Embed App Extensions */, B10000000000000000000022 /* DeliveryWidgetExtension.appex in Embed App Extensions */, );',
+    'files = (B10000000000000000000014 /* ShareExtension.appex in Embed App Extensions */, B10000000000000000000022 /* DeliveryWidgetExtension.appex in Embed App Extensions */, B100000000000000000000D4 /* NotificationService.appex in Embed App Extensions */, );',
     'files = (B10000000000000000000022 /* DeliveryWidgetExtension.appex in Embed App Extensions */, );',
     1,
   ],

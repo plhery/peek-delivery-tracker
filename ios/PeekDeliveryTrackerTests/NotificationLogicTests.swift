@@ -365,6 +365,48 @@ final class NotificationLogicTests: XCTestCase {
         )
     }
 
+    func testADeliveryIsToldOnTheDevicesClockWhereverItIs() throws {
+        // Delivered at 16:51 in California, which is 01:51 the next morning in Zürich.
+        let push: [AnyHashable: Any] = [
+            "scan_at": "2026-09-06T23:51:00.000Z",
+            "body_same_day": "Kitchen scale · delivered at {{time}}",
+            "body_other_day": "Kitchen scale · delivered on {{date}} at {{time}}",
+            "date_locale": "en-CH",
+        ]
+        let california = try XCTUnwrap(TimeZone(identifier: "America/Los_Angeles"))
+        let zurich = try XCTUnwrap(TimeZone(identifier: "Europe/Zurich"))
+        let evening = try instant("2026-09-07T03:00:00Z")
+        XCTAssertEqual(DeviceClock.body(push, now: evening, timeZone: california), "Kitchen scale · delivered at 16:51")
+        XCTAssertEqual(DeviceClock.body(push, now: evening, timeZone: zurich), "Kitchen scale · delivered at 01:51")
+        let twoDaysLater = try instant("2026-09-08T12:00:00Z")
+        XCTAssertEqual(
+            DeviceClock.body(push, now: twoDaysLater, timeZone: california),
+            "Kitchen scale · delivered on 6 September at 16:51"
+        )
+        var german = push
+        german["body_other_day"] = "Kitchen scale · am {{date}} um {{time}} Uhr zugestellt"
+        german["date_locale"] = "de-CH"
+        german["scan_at"] = "2026-09-06T23:51:00Z"
+        XCTAssertEqual(
+            DeviceClock.body(german, now: twoDaysLater, timeZone: california),
+            "Kitchen scale · am 6. September um 16:51 Uhr zugestellt"
+        )
+
+        // The server's own sentence stays: a delivery after this device's clock, or a push without the fields.
+        XCTAssertNil(DeviceClock.body(push, now: try instant("2026-09-06T23:00:00Z"), timeZone: california))
+        XCTAssertNil(DeviceClock.body(push.filter { $0.key as? String != "scan_at" }, now: evening, timeZone: california))
+        XCTAssertNil(DeviceClock.body(push.merging(["scan_at": "yesterday"]) { $1 }, now: evening, timeZone: california))
+        XCTAssertNil(DeviceClock.body(["body": "Kitchen scale · in transit"], now: evening, timeZone: california))
+        // Without a language for the date, the device's own writes it.
+        var unnamed = push
+        unnamed["date_locale"] = ""
+        XCTAssertNotNil(DeviceClock.body(unnamed, now: twoDaysLater, timeZone: california)?.range(of: "16:51"))
+    }
+
+    private func instant(_ text: String) throws -> Date {
+        try XCTUnwrap(ISO8601DateFormatter().date(from: text))
+    }
+
     private func email(_ choice: Bool?) throws -> DeliveryEmail {
         try XCTUnwrap(DeliveryEmail(isDemo: false, preferences: preferences(email: choice), address: "alex@example.com"))
     }

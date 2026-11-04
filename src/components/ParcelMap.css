@@ -60,8 +60,8 @@
 }
 .parcel-map:focus { outline: none; }
 .parcel-map__map { position: absolute; inset: 0; }
-/* On the map Pip is a deeper green of its land, whoever carries the parcel: a carrier's colour can clash with it. The dot keeps that colour. */
-.parcel-map [data-pip] { --pip-ink: light-dark(#55654b, #b7c6aa); --pip-surface: var(--map-ocean); }
+/* On the map Pip is drawn in a shade of its land, whoever carries the parcel: a carrier's colour can clash with it. The dot keeps that colour. */
+.parcel-map [data-pip] { --pip-ink: light-dark(#55654b, #cfbfa3); --pip-surface: var(--map-ocean); }
 .parcel-map__close {
   position: absolute; top: max(14px, env(safe-area-inset-top)); right: 14px; z-index: 1; display: grid; place-items: center;
   width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: var(--map-glass);

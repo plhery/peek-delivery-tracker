@@ -35894,7 +35894,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ets-express",
+      "recognitionRank": 734
     },
     "linkRules": [],
     "detectionRules": [
@@ -35921,7 +35922,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Seoul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rincos"
     },
     "trackingUrlTemplate": "https://www.rincos.asia/out/TraceInfo_kr.do?SCGBN=20&P_VAL={trackingNumber}",
     "linkRules": [
@@ -36017,7 +36018,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Hong_Kong",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "kec-ecommerce"
     },
     "trackingUrlTemplate": "https://kec.kln.com/en/logistics-tracking/?tracking={trackingNumber}",
     "linkRules": [
@@ -36916,7 +36917,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Seoul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "shipter",
+      "recognitionRank": 727
     },
     "trackingUrlTemplate": "https://www.shipter.kr/tracking/{trackingNumber}",
     "linkRules": [
@@ -36936,7 +36938,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^H3[A-Z]{2}\\d{6}KR$",
+        "pattern": "^H3[A-Z]{2}\\d{5,6}KR$",
         "confidence": "low"
       }
     ],

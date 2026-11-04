@@ -79,4 +79,9 @@ class ParcelJournalScreenshotTest {
 
     @Test
     fun withThePlannedStepsInDark() = shot("journal_planned_dark", dark = true, parcel = DemoCards.parcel("Kind of Blue"))
+
+    /** At Android's largest font scale, in dark: the marks and their rail grow with the words, beside them. */
+    @Test
+    fun withThePlannedStepsAtTheLargestFontScaleInDark() =
+        shot("journal_planned_accessibility_dark", dark = true, fontScale = 2f, parcel = DemoCards.parcel("Kind of Blue"))
 }

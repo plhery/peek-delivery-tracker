@@ -1787,8 +1787,8 @@ private struct PlannedSteps: View {
 }
 
 /// A planned step laid out as a scan's row, greyed: a dashed circle where the time goes, a dashed rail down to the next
-/// step's, then the words, the day it is planned for and where. At the largest sizes the circle goes above the words, as
-/// a scan's time does, without the rail.
+/// step's, then the words, the day it is planned for and where. The circle and the rail grow with the words; at the
+/// largest sizes the circle keeps a column of its own width beside the words, its rail beside them too.
 private struct PlannedStepRow: View {
     let step: PlannedTrackingEvent
     let joinsNext: Bool
@@ -1796,21 +1796,22 @@ private struct PlannedStepRow: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     /// The time column of a scan's row, which the circle stands in.
     @ScaledMetric(relativeTo: .caption2) private var timeWidth: CGFloat = 38
+    /// The circle, 12 across beside footnote words at the default size, grown with them.
+    @ScaledMetric(relativeTo: .footnote) private var mark: CGFloat = 12
 
     var body: some View {
         let large = typeSize.isAccessibilitySize
-        let layout = large
-            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 2)) : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+        let scale = mark / 12
         let wording = localizer.eventDescription(step.description.nonEmpty ?? localizer.text(step.stage.localizationKey))
         let when = localizer.plannedDate(step)
         let location = step.location?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
-        layout {
+        HStack(alignment: .top, spacing: large ? 10 : 12) {
             Circle()
-                .inset(by: 1.4)
-                .stroke(Brand.secondaryText, style: StrokeStyle(lineWidth: 1.2, dash: [2.4, 1.9]))
-                .frame(width: 12, height: 12)
-                .padding(.top, 3)
-                .frame(width: large ? nil : timeWidth, alignment: .leading)
+                .inset(by: 1.4 * scale)
+                .stroke(Brand.secondaryText, style: StrokeStyle(lineWidth: 1.2 * scale, dash: [2.4 * scale, 1.9 * scale]))
+                .frame(width: mark, height: mark)
+                .padding(.top, 3 * scale)
+                .frame(width: large ? mark : max(mark, timeWidth), alignment: .leading)
             VStack(alignment: .leading, spacing: 0) {
                 Text(wording)
                     .font(.footnote).foregroundStyle(Brand.secondaryText)
@@ -1829,13 +1830,14 @@ private struct PlannedStepRow: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        // The rail runs from under this step's circle to just over the next one's, 18 below.
+        // The rail runs from just under this step's circle to just over the next one's, 18 below.
         .background(alignment: .topLeading) {
-            if joinsNext && !large {
+            if joinsNext {
+                let width = max(1, 0.7 * scale)
                 DashedRule(axis: .vertical)
-                    .stroke(Brand.secondaryText.opacity(0.45), style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
-                    .frame(width: 1)
-                    .padding(.top, 18).padding(.bottom, -16).padding(.leading, 5.5)
+                    .stroke(Brand.secondaryText.opacity(0.45), style: StrokeStyle(lineWidth: width, dash: [3 * scale, 3 * scale]))
+                    .frame(width: width)
+                    .padding(.top, 18 * scale).padding(.bottom, -16).padding(.leading, (mark - width) / 2)
                     .accessibilityHidden(true)
             }
         }

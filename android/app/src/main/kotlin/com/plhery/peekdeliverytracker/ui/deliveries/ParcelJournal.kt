@@ -206,8 +206,9 @@ private fun PlannedSteps(steps: List<PlannedTrackingEvent>, now: Instant) {
  * A planned step laid out as a scan's row ([JournalEventRow]), greyed: in the time's column, a hollow dashed circle 12
  * across, 3 lower than the words, and when `joinsNext` a dashed rail at 45% down from under it to just over the next
  * step's circle; then the words in footnote, the day it is planned for ([plannedDate]) 3 under them and where
- * ([EventLocation]) 4 under that, all in the secondary grey. At the accessibility sizes the circle goes over the words,
- * as a scan's time does, without the rail. TalkBack reads the row as one ([plannedStepLabel]).
+ * ([EventLocation]) 4 under that, all in the secondary grey. The circle and the rail grow with the footnote words; at
+ * the accessibility sizes the circle keeps a column of its own width beside the words, its rail beside them too.
+ * TalkBack reads the row as one ([plannedStepLabel]).
  */
 @Composable
 private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: Instant) {
@@ -217,12 +218,18 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val secondary = colors.secondaryLabel
     val date = localizer.plannedDate(step, now)
-    val mark = @Composable {
-        Box(Modifier.padding(top = 3.dp).then(if (large) Modifier else Modifier.width(type.scaled(TIME_WIDTH, IosTextStyle.Caption2).dp))) {
-            Canvas(Modifier.size(12.dp)) {
+    // The circle, 12 across beside footnote words at the default size, grown with them.
+    val mark = type.scaled(12f, IosTextStyle.Footnote)
+    val scale = mark / 12f
+    val circle = @Composable {
+        Box(Modifier.padding(top = (3f * scale).dp).width((if (large) mark else maxOf(mark, type.scaled(TIME_WIDTH, IosTextStyle.Caption2))).dp)) {
+            Canvas(Modifier.size(mark.dp)) {
                 drawCircle(
-                    secondary, radius = 4.6.dp.toPx(),
-                    style = Stroke(1.2.dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(2.4.dp.toPx(), 1.9.dp.toPx()))),
+                    secondary, radius = (4.6f * scale).dp.toPx(),
+                    style = Stroke(
+                        (1.2f * scale).dp.toPx(),
+                        pathEffect = PathEffect.dashPathEffect(floatArrayOf((2.4f * scale).dp.toPx(), (1.9f * scale).dp.toPx())),
+                    ),
                 )
             }
         }
@@ -241,14 +248,14 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
         .fillMaxWidth()
         .testTag(JOURNAL_PLANNED_ROW)
         .then(
-            if (joinsNext && !large) {
+            if (joinsNext) {
                 Modifier.drawBehind {
-                    // From 3 under this step's circle to 2 over the next row, whose circle stands 3 lower.
-                    val x = 6.dp.toPx()
-                    val dash = 3.dp.toPx()
+                    // From just under this step's circle to just over the next row's, whose circle stands lower.
+                    val x = (mark / 2f).dp.toPx()
+                    val dash = (3f * scale).dp.toPx()
                     drawLine(
-                        secondary.copy(alpha = secondary.alpha * 0.45f), Offset(x, 18.dp.toPx()), Offset(x, size.height + 16.dp.toPx()),
-                        strokeWidth = 1.dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(dash, dash)),
+                        secondary.copy(alpha = secondary.alpha * 0.45f), Offset(x, (18f * scale).dp.toPx()), Offset(x, size.height + 16.dp.toPx()),
+                        strokeWidth = maxOf(1f, 0.7f * scale).dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(dash, dash)),
                     )
                 }
             } else {
@@ -256,16 +263,9 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
             },
         )
         .clearAndSetSemantics { contentDescription = label }
-    if (large) {
-        Column(row, verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            mark()
-            details(Modifier.fillMaxWidth())
-        }
-    } else {
-        Row(row, horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.Top) {
-            mark()
-            details(Modifier.weight(1f))
-        }
+    Row(row, horizontalArrangement = Arrangement.spacedBy(if (large) 10.dp else 12.dp), verticalAlignment = Alignment.Top) {
+        circle()
+        details(Modifier.weight(1f))
     }
 }
 

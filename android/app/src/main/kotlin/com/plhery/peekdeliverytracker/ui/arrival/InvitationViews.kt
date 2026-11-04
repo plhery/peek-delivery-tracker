@@ -692,6 +692,7 @@ private fun ProfileSheet(
         detents = listOf(SheetDetent.Large),
         dismissible = !joining,
         page = !asForm,
+        lit = true,
     ) {
         val insets = LocalSheetInsets.current
         val form = if (!asForm) insets else insets.copy(barTop = FORM_BAR_TOP, barSide = FORM_BAR_SIDE, formSide = FORM_TITLE_SIDE)

@@ -253,7 +253,7 @@ class NextDeliveryWidgetTest {
         assertEquals(Color.Black, WidgetCardColors.primary.getColor(mode(night = false)))
         assertEquals(Color.White, WidgetCardColors.primary.getColor(mode(night = true)))
         assertEquals(Color(0xFFF4F5F1), WidgetCardColors.page.getColor(mode(night = false)))
-        assertEquals(Color(0xFF151915), WidgetCardColors.page.getColor(mode(night = true)))
+        assertEquals(Color(0xFF13110E), WidgetCardColors.page.getColor(mode(night = true)))
         // A pair with one colour is that colour in both.
         assertEquals(Color(0xFF23093F), WidgetCardColors.pair(listOf("#23093f")).getColor(mode(night = true)))
     }

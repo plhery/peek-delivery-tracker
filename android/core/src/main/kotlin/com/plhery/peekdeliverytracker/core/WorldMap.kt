@@ -951,34 +951,45 @@ data class MapPalette(
 
     companion object {
         /**
-         * The full map: quiet greens, with the carrier's colour on the parcel. Pip beside it is a deeper green of the
-         * land, whoever carries the parcel: a carrier's colour can clash with the map.
+         * The full map: quiet greens in light and warm kraft greys in dark, with the carrier's colour on the parcel. Pip
+         * beside it is in the map's own ink, whoever carries the parcel: a deeper green of the land in light, a warm
+         * shade of it in dark. A carrier's colour can clash with the map.
+         *
+         * In dark the urban areas, roads, grid, rim and visited countries sit a hair further off what they stand on than
+         * an even mix would put them, so each stands out at least as much as on the green map before. The parcel's ring
+         * there is near black (black in high contrast), below the darkest the map draws, rather than the paper.
          */
         fun map(accent: AdaptiveColor): MapPalette {
-            val ocean = Brand.color(light = "#F4F6F1", dark = "#171C17")
+            val ocean = Brand.color(light = "#F4F6F1", dark = "#1B1915")
             return MapPalette(
-                space = Brand.color(light = "#E9ECE5", dark = "#0E120E"),
+                space = Brand.color(light = "#E9ECE5", dark = "#0F0D0A"),
                 ocean = ocean,
-                land = Brand.color(light = "#DFE4D8", dark = "#2D352B"),
-                visited = accent.opacity(0.13),
-                urban = Brand.color(light = "#D2D7CB", dark = "#3B4339"),
-                road = Brand.color(light = "#BDC2B7", dark = "#51584F"),
+                land = Brand.color(light = "#DFE4D8", dark = "#36322B"),
+                // 0.137 is 35/255 in Compose's eight-bit alpha, where 0.135 would round down to 34 and fall short.
+                visited = accent.opacity(light = 0.13, dark = 0.137),
+                urban = Brand.color(light = "#D2D7CB", dark = "#454038"),
+                road = Brand.color(light = "#BDC2B7", dark = "#59564F"),
                 border = ocean,
                 night = adaptive(light = rgb(24.0, 34.0, 40.0, 0.10), dark = rgb(0.0, 0.0, 0.0, 0.34)),
-                grid = adaptive(light = rgb(32.0, 37.0, 30.0, 0.06), dark = rgb(245.0, 246.0, 242.0, 0.04)),
-                limb = adaptive(light = rgb(32.0, 37.0, 30.0, 0.09), dark = rgb(245.0, 246.0, 242.0, 0.10)),
+                grid = adaptive(light = rgb(32.0, 37.0, 30.0, 0.06), dark = rgb(250.0, 246.0, 235.0, 0.042)),
+                limb = adaptive(light = rgb(32.0, 37.0, 30.0, 0.09), dark = rgb(250.0, 246.0, 235.0, 0.11)),
                 shade = adaptive(light = rgb(32.0, 45.0, 32.0, 0.07), dark = rgb(0.0, 0.0, 0.0, 0.26)),
                 route = Brand.ink,
                 routeMuted = Brand.ink.opacity(0.38),
                 accent = accent,
-                label = Brand.color(light = "#657060", dark = "#AFB9A9"),
+                label = Brand.inkSoft,
                 labelStrong = Brand.ink,
-                labelBackground = adaptive(light = rgb(255.0, 255.0, 255.0, 0.84), dark = rgb(32.0, 38.0, 31.0, 0.82)),
+                labelBackground = adaptive(light = rgb(255.0, 255.0, 255.0, 0.84), dark = rgb(31.0, 28.0, 23.0, 0.82)),
                 dotRing = ocean,
-                currentRing = Brand.paper,
-                card = Card(Brand.color(light = "#55654B", dark = "#B7C6AA"), ocean),
+                currentRing = Brand.paper.copy(dark = RgbaColor.hex("#060504"), darkHighContrast = RgbaColor.hex("#000000")),
+                card = Card(Brand.color(light = "#55654B", dark = "#D0C0A4"), ocean),
             )
         }
+
+        /** `color` at `light` opacity in light and `dark` opacity in dark. */
+        private fun AdaptiveColor.opacity(light: Double, dark: Double): AdaptiveColor = AdaptiveColor(
+            this.light.opacity(light), this.dark.opacity(dark), lightHighContrast.opacity(light), darkHighContrast.opacity(dark),
+        )
 
         /** The card's engraving: the carrier's ink on the card's own colour. */
         fun tint(ink: AdaptiveColor, surface: AdaptiveColor): MapPalette = MapPalette(

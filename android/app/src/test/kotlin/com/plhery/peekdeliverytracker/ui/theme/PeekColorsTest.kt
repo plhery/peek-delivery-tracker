@@ -68,6 +68,31 @@ class PeekColorsTest {
         assertEquals("#2A2A2C", hex(appearances[1].separator.compositeOver(Color.Black)))
     }
 
+    /**
+     * In light a sheet is the page: each of its colours is, exactly, the page's colour it stands for, so Light draws as
+     * before. In dark it stands up: its ground over the page, its rows over its ground, its controls over its rows.
+     */
+    @Test
+    fun sheetsKeepThePagesColoursInLightAndStandUpInDark() {
+        for (colors in listOf(PeekColors(dark = false), PeekColors(dark = false, highContrast = true))) {
+            assertEquals(colors.background, colors.sheet)
+            assertEquals(colors.paper, colors.raised)
+            assertEquals(colors.cream, colors.sheetControl)
+            assertEquals(colors.ink.copy(alpha = colors.ink.alpha * 0.07f), colors.sheetButton)
+            for (opacity in listOf(0.25f, 0.3f, 0.5f, 0.6f)) {
+                assertEquals(colors.separator.copy(alpha = colors.separator.alpha * opacity), colors.sheetLine(opacity))
+            }
+        }
+        val dark = PeekColors(dark = true)
+        assertEquals(
+            listOf("#13110E", "#191612", "#292620", "#2E2A24", "#4A463E"),
+            listOf(dark.background, dark.sheet, dark.raised, dark.sheetControl, dark.sheetLine(0.3f)).map(::hex),
+        )
+        assertEquals("#292622", hex(dark.sheetButton.compositeOver(dark.sheet)))
+        assertEquals("#37352F", hex(dark.sheetButton.compositeOver(dark.raised)))
+        assertEquals(dark.sheetLine(0.25f), dark.sheetLine(0.6f))
+    }
+
     /** Compose keeps an sRGB colour's opacity in 8 bits: within half a step, and a hair for the float. */
     private fun assertOpacities(expected: List<Double>, colors: List<Color>) {
         for ((opacity, color) in expected.zip(colors)) assertEquals(opacity, color.alpha.toDouble(), 0.501 / 255)

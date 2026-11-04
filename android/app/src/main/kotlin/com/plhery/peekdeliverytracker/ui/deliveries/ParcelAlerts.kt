@@ -150,6 +150,7 @@ internal fun ParcelAlertsHost(state: DeliveriesState) {
             state.alertsClosed()
         },
         dismissible = shown?.request?.saving == null,
+        lit = true,
     ) {
         if (shown != null) {
             val id = shown.request.id
@@ -192,7 +193,7 @@ internal fun ParcelAlertSwitches(
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    Box(Modifier.fillMaxSize().background(colors.background).verticalScroll(rememberScrollState())) {
+    Box(Modifier.fillMaxSize().background(colors.sheet).verticalScroll(rememberScrollState())) {
         Column(
             Modifier
                 .testTag(PARCEL_ALERTS)
@@ -232,7 +233,7 @@ internal fun ParcelAlertSwitches(
 
 /**
  * The sheet's heading, "email.parcel.title" with the parcel's name or "email.parcel.open", title2 semibold across what
- * the close button leaves it, 16 from it: an ✕ of 13 semibold in a circle of the ink at 7 %, 36 across in 44, a plain
+ * the close button leaves it, 16 from it: an ✕ of 13 semibold in a circle of the sheet's button, 36 across in 44, a plain
  * button named "common.close".
  */
 @Composable
@@ -259,7 +260,7 @@ private fun AlertsHeader(parcel: Parcel, close: () -> Unit) {
                 .semantics { contentDescription = closeLabel },
             contentAlignment = Alignment.Center,
         ) {
-            Box(Modifier.size(36.dp).background(colors.ink.copy(alpha = colors.ink.alpha * 0.07f), CircleShape), contentAlignment = Alignment.Center) {
+            Box(Modifier.size(36.dp).background(colors.sheetButton, CircleShape), contentAlignment = Alignment.Center) {
                 PeekSymbol("xmark", font = type.fixed(13f, FontWeight.SemiBold), tint = colors.label)
             }
         }
@@ -269,7 +270,7 @@ private fun AlertsHeader(parcel: Parcel, close: () -> Unit) {
 /**
  * A switch of the sheet (`switchRow`): the symbol, 16 in the secondary grey 22 wide (none at the accessibility sizes,
  * where the words need the room), 12 from the title in subheadline semibold over what it does in caption secondary,
- * and the switch at the trailing end, in the delivered green while on; 14 and 12 in on the paper, 60 tall at least,
+ * and the switch at the trailing end, in the delivered green while on; 14 and 12 in, raised, 60 tall at least,
  * with 14-point continuous corners. A tap on the switch flips it (`flip`); TalkBack reads the row as one switch, its
  * words and its state, as iOS's `Toggle` with its label.
  */
@@ -292,7 +293,7 @@ private fun SwitchRow(tag: String, symbol: String, title: String, hint: String, 
                 if (!enabled) disabled()
             }
             .heightIn(min = 60.dp)
-            .background(colors.paper, ContinuousRoundedShape(14.dp))
+            .background(colors.raised, ContinuousRoundedShape(14.dp))
             .padding(horizontal = 14.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,

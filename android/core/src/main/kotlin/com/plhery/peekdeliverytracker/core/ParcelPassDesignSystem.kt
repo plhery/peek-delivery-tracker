@@ -59,6 +59,7 @@ data class CarrierBrandAssets(
     val fallbackColor: String,
     val properties: List<String>,
     val derivation: List<Step>,
+    val litEdge: LitEdge,
     val families: Map<String, String>,
     val palettes: Map<String, Map<String, String>>,
     val decals: Map<String, String>,
@@ -78,6 +79,13 @@ data class CarrierBrandAssets(
         @Serializable
         data class Amber(val from: Double, val to: Double, val hue: Double, val slope: Double)
     }
+
+    /**
+     * A dark card can swallow a dark truck: when the body's contrast with the card is under `below`, its outline takes
+     * the body's hue at `lift` more OKLCH lightness (at least `floor`), its chroma capped at `maxChroma`.
+     */
+    @Serializable
+    data class LitEdge(val below: Double, val lift: Double, val floor: Double, val maxChroma: Double)
 
     @Serializable
     data class DecalShape(
@@ -167,13 +175,11 @@ class CarrierVisualIdentity private constructor(
     val edge: RgbaColor get() = RgbaColor.hex(colors[7])
     val accent: RgbaColor get() = RgbaColor.hex(colors[8])
 
-    /** `DeliveryPostageStamp`'s paper: warm white in light mode; in dark mode the surface, 22% of the way to the ink. */
-    val stampPaper: AdaptiveColor
-        get() {
-            val tinted = surface.mix(ink, 0.22)
-            val white = RgbaColor.hex("#FFFEFA")
-            return AdaptiveColor(white, tinted.dark, white, tinted.darkHighContrast)
-        }
+    /** The truck's outline in dark, on its dark card ([litEdge]). */
+    val edgeInDark: RgbaColor by lazy { RgbaColor.hex(litEdge(colors[6], colors[1], colors[7])) }
+
+    /** `DeliveryPostageStamp`'s paper: warm white in light mode, a cream in dark mode, whatever the carrier. */
+    val stampPaper: AdaptiveColor get() = AdaptiveColor(RgbaColor.hex("#FFFEFA"), RgbaColor.hex("#D9D0BC"))
 
     /** The stamp's globe: the surface, 14% of the way to the ink. */
     val stampGlobe: AdaptiveColor get() = surface.mix(ink, 0.14)
@@ -232,6 +238,28 @@ class CarrierVisualIdentity private constructor(
             val hue = if (sourceHue > amber.from && sourceHue < amber.to) amber.hue + (sourceHue - amber.from) * amber.slope else sourceHue
             val toned = fromOklch(tone.lightness, Math.min(tone.maxChroma, sourceChroma * tone.chroma), hue)
             return if (luminance(toned) > luminance(color)) color else toned
+        }
+
+        /**
+         * The truck's outline on its dark card: `edge`, unless the body sinks into the card (see
+         * [CarrierBrandAssets.LitEdge]).
+         */
+        fun litEdge(
+            truck: String,
+            surface: String,
+            edge: String,
+            rule: CarrierBrandAssets.LitEdge = CarrierBrandAssets.shared.litEdge,
+        ): String {
+            if (contrast(truck, surface) >= rule.below) return edge
+            val (lightness, chroma, hue) = oklch(truck)
+            return fromOklch(Math.max(lightness + rule.lift, rule.floor), Math.min(chroma, rule.maxChroma), hue)
+        }
+
+        /** WCAG 2 contrast ratio of two `#rrggbb` colours. */
+        fun contrast(first: String, second: String): Double {
+            val one = luminance(first)
+            val other = luminance(second)
+            return (Math.max(one, other) + 0.05) / (Math.min(one, other) + 0.05)
         }
 
         /** WCAG 2 relative luminance of a `#rrggbb` colour. */
@@ -303,27 +331,40 @@ object CarrierTruckGeometry {
     val cab = listOf(Point(20.0, 8.0), Point(25.0, 8.0), Point(30.0, 13.0), Point(30.0, 16.0), Point(20.0, 16.0))
     val windshield = listOf(Point(22.0, 9.5), Point(24.5, 9.5), Point(27.5, 12.5), Point(22.0, 12.5))
     const val windshieldColor = "#edf1ee"
+
+    /**
+     * The glass in dark: the warm hue and chroma of Brand.json's dark glass (#e9dba6) at the light glass's lightness, so
+     * it stands out from every body as much as the light glass does (`BrandParityTests`).
+     */
+    const val windshieldDarkColor = "#fff0ba"
     val wheelCenters = listOf(Point(8.0, 16.5), Point(25.0, 16.5))
     const val tireRadius = 2.4
     const val tireColor = "#42483d"
+
+    /** In dark a tyre is darker than any card, with a faint rim so it still reads. */
+    const val tireDarkColor = "#0e0d0a"
+    const val tireRimColor = "#fff4dc"
+    const val tireRimOpacity = 0.29
+    const val tireRimWidth = 0.45
     const val hubRadius = 0.9
     const val hubColor = "#d2d4c7"
 
     /**
      * The truck in a carrier's livery, as steps for :app's canvas, in its own 32 × 21 units: :app scales its canvas to
-     * the size wanted first (27 × 18 points for `CarrierTruckMark`, which is hidden from accessibility).
+     * the size wanted first (27 × 18 points for `CarrierTruckMark`, which is hidden from accessibility). `dark` gives it
+     * the dark card's paints: a lit outline where the body would sink into the card, lit glass and rimmed tyres.
      */
-    fun draw(identity: CarrierVisualIdentity): List<MapDrawing> {
+    fun draw(identity: CarrierVisualIdentity, dark: Boolean): List<MapDrawing> {
         val steps = mutableListOf<MapDrawing>()
         val truck = AdaptiveColor(identity.truck)
-        val edge = AdaptiveColor(identity.edge)
+        val edge = AdaptiveColor(if (dark) identity.edgeInDark else identity.edge)
         val body = MapPath.roundedRect(body, bodyCornerRadius)
         steps += MapDrawing.Fill(body, truck)
         steps += MapDrawing.Stroke(body, edge, StrokeStyle(strokeWidth))
         val cab = polygon(cab)
         steps += MapDrawing.Fill(cab, truck)
         steps += MapDrawing.Stroke(cab, edge, StrokeStyle(strokeWidth))
-        steps += MapDrawing.Fill(polygon(windshield), AdaptiveColor(RgbaColor.hex(windshieldColor)))
+        steps += MapDrawing.Fill(polygon(windshield), AdaptiveColor(RgbaColor.hex(if (dark) windshieldDarkColor else windshieldColor)))
         val decals = CarrierBrandAssets.shared.truck.decals
         for (shape in decals[identity.decal] ?: decals.getValue("default")) {
             val paint = AdaptiveColor(identity.paint(shape.paint))
@@ -334,7 +375,9 @@ object CarrierTruckGeometry {
             }
         }
         for (center in wheelCenters) {
-            steps += MapDrawing.Fill(disc(center, tireRadius), AdaptiveColor(RgbaColor.hex(tireColor)))
+            val tire = disc(center, tireRadius)
+            steps += MapDrawing.Fill(tire, AdaptiveColor(RgbaColor.hex(if (dark) tireDarkColor else tireColor)))
+            if (dark) steps += MapDrawing.Stroke(tire, AdaptiveColor(RgbaColor.hex(tireRimColor).opacity(tireRimOpacity)), StrokeStyle(tireRimWidth))
             steps += MapDrawing.Fill(disc(center, hubRadius), AdaptiveColor(RgbaColor.hex(hubColor)))
         }
         return steps

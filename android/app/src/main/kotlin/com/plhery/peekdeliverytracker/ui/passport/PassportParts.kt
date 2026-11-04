@@ -188,7 +188,8 @@ internal fun ExplanationPopover(visible: Boolean, anchor: Rect, onDismiss: () ->
         size = BUBBLE_SIZE,
         above = true,
         radius = BUBBLE_RADIUS,
-        ground = PeekTheme.colors.paper,
+        // One step up from the page's paper, as a sheet's rows are.
+        ground = PeekTheme.colors.raised,
     ) {
         ExplanationBubble(title, explanation, tag)
     }

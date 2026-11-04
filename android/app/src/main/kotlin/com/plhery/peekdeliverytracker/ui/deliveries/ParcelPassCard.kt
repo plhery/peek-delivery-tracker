@@ -41,6 +41,7 @@ import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.litEdge
 import com.plhery.peekdeliverytracker.ui.map.CardRoute
 import com.plhery.peekdeliverytracker.ui.map.CardRouteMetrics
 import com.plhery.peekdeliverytracker.ui.map.rememberParcelRoute
@@ -151,6 +152,7 @@ fun ParcelPassCard(
             .clip(shape)
             .background(colors.paper, shape)
             .background(surface.copy(alpha = surface.alpha * if (past) 0.35f else 1f), shape)
+            .litEdge(shape)
             .fillMaxWidth(),
     ) {
         if (drawsRoute && atlas != null) {

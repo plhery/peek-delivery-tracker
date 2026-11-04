@@ -81,7 +81,7 @@ internal val settingsGreen = Brand.color(light = "#688363", dark = "#97B084")
 /**
  * `SettingsGroup`: its [title], if any, in caption 2 medium, upper case, tracked 1, in the secondary grey, 2 in, with a
  * [badge] beside it (caption 2 bold, upper case, tracked 0.4, ochre on its surface), read by TalkBack as one; 9 under
- * it, the rows on the paper with 16-point corners and a hairline of the separator at a quarter.
+ * it, the rows raised with 16-point corners and a hairline of the sheet's line at a quarter.
  */
 @Composable
 internal fun SettingsGroup(
@@ -119,17 +119,17 @@ internal fun SettingsGroup(
         Column(
             Modifier
                 .fillMaxWidth()
-                .background(colors.paper, shape)
-                .stroke(0.5.dp, colors.separator.quarter(), shape),
+                .background(colors.raised, shape)
+                .stroke(0.5.dp, colors.sheetLine(0.25f), shape),
             content = content,
         )
     }
 }
 
-/** `settingsDivider`: a hairline of 0.5 in the separator at a quarter, across the group. */
+/** `settingsDivider`: a hairline of 0.5 in the sheet's line at a quarter, across the group. */
 @Composable
 internal fun SettingsDivider() {
-    Box(Modifier.fillMaxWidth().height(0.5.dp).background(PeekTheme.colors.separator.quarter()))
+    Box(Modifier.fillMaxWidth().height(0.5.dp).background(PeekTheme.colors.sheetLine(0.25f)))
 }
 
 /**
@@ -265,7 +265,7 @@ internal fun SettingsLanguageRow() {
     var row by remember { mutableStateOf(Rect.Zero) }
     var value by remember { mutableStateOf(Rect.Zero) }
     val returnFocus = remember { AccessibilityFocus() }
-    val behind = colors.paper
+    val behind = colors.raised
     val stacked = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val open = {
         menus?.content = {
@@ -328,8 +328,8 @@ internal fun SettingsLanguageRow() {
 /**
  * `SettingsAppearancePicker`: "native.appearance.title" in subheadline, 13 over the three appearances side by side, 8
  * apart, each a tile of its miniature (60 × 43) over its name in caption, the ink for the one chosen and the secondary
- * grey for the others, 10 above and below, on the app's ground with 12-point corners, outlined in [settingsGreen] at 1.5
- * when chosen, else a hairline of the separator at a quarter; 15 in. At the accessibility sizes they stand one under
+ * grey for the others, 10 above and below, on the sheet's ground with 12-point corners, outlined in [settingsGreen] at
+ * 1.5 when chosen, else a hairline of the sheet's line at a quarter; 15 in. At the accessibility sizes they stand one under
  * the other without their pictures. A tap chooses one ([onChoose]); TalkBack reads each by its name, the chosen one
  * selected.
  */
@@ -358,10 +358,10 @@ internal fun SettingsAppearancePicker(appearance: AppAppearance, onChoose: (AppA
                                 true
                             }
                         }
-                        .background(colors.background, shape)
+                        .background(colors.sheet, shape)
                         .stroke(
                             if (chosen) 1.5.dp else 0.5.dp,
-                            if (chosen) colors.resolve(settingsGreen) else colors.separator.quarter(),
+                            if (chosen) colors.resolve(settingsGreen) else colors.sheetLine(0.25f),
                             shape,
                         )
                         .padding(vertical = 10.dp),
@@ -445,7 +445,7 @@ internal fun AccountRow(email: String?, demo: Boolean) {
 /**
  * AccountView's `signInOffer` (C-S39): "link.account.title" in headline over "link.keep.body" in subheadline secondary,
  * 5 apart, then 14 under them the app's main button, "arrival.signInTitle" (`FirstParcelPrimaryLabel`), which gives
- * under the finger; 18 in, on the paper with 18-point continuous corners and a hairline of 0.75 in the separator at 0.3.
+ * under the finger; 18 in, raised with 18-point continuous corners and a hairline of 0.75 in the sheet's line at 0.3.
  */
 @Composable
 internal fun SignInOffer(onSignIn: () -> Unit) {
@@ -456,8 +456,8 @@ internal fun SignInOffer(onSignIn: () -> Unit) {
     Column(
         Modifier
             .fillMaxWidth()
-            .background(colors.paper, shape)
-            .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape)
+            .background(colors.raised, shape)
+            .border(0.75.dp, colors.sheetLine(0.3f), shape)
             .padding(18.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
@@ -468,8 +468,6 @@ internal fun SignInOffer(onSignIn: () -> Unit) {
         FirstParcelPrimaryButton(localized("arrival.signInTitle"), null, false, SETTINGS_SIGN_IN, focus, Modifier.fillMaxWidth(), onSignIn)
     }
 }
-
-private fun Color.quarter() = copy(alpha = alpha * 0.25f)
 
 internal fun appearanceTag(option: AppAppearance) = "$SETTINGS_APPEARANCE.${option.rawValue}"
 

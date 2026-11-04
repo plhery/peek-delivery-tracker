@@ -162,6 +162,7 @@ internal fun AccountSheetHost(state: AccountHost) {
         },
         dismissible = !work.working(SETTINGS_PAGE),
         page = !state.sheetsAsForms,
+        lit = true,
     ) {
         val insets = LocalSheetInsets.current
         val form = if (!state.sheetsAsForms) insets else insets.copy(barTop = FORM_BAR_TOP, barSide = FORM_BAR_SIDE, formSide = FORM_TITLE_SIDE)
@@ -350,7 +351,7 @@ private fun SettingsRootPage(
         else -> preferences?.let { localized(NotificationPreset.matching(it.enabledStages).titleKey) } ?: ""
     }
     Box(Modifier.fillMaxSize()) {
-        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(colors.background)) {
+        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(colors.sheet)) {
             Column(Modifier.fillMaxSize().verticalScroll(scroll).padding(top = barHeight + NAV_BAR_FOOT, bottom = sheetBottomInset())) {
                 Box(Modifier.fillMaxWidth().heightIn(min = LARGE_TITLE).padding(horizontal = insets.formSide), contentAlignment = Alignment.BottomStart) {
                     Text(
@@ -469,7 +470,7 @@ private fun AccountDataPage(state: AccountHost, nav: SettingsNav, scroll: Scroll
     PushedPage(
         accountTitle(demo, guest), scroll, backEnabled = !working, onBack = onBack,
         trailing = if (!working) null else {
-            { GlassSurface(CapsuleShape, Modifier.size(BAR_ROW), backdrop = null, behind = colors.background) {
+            { GlassSurface(CapsuleShape, Modifier.size(BAR_ROW), backdrop = null, behind = colors.sheet) {
                 ActivityIndicator(Modifier.align(Alignment.Center).testTag(SETTINGS_WORKING), size = REGULAR_SPINNER)
             } }
         },
@@ -544,7 +545,7 @@ internal fun PushedPage(
     val barTop = insets.barTop + NAV_BAR_DROP
     val barHeight = barTop + BAR_ROW
     Box(Modifier.fillMaxSize()) {
-        Box(Modifier.fillMaxSize().background(colors.background)) {
+        Box(Modifier.fillMaxSize().background(colors.sheet)) {
             Column(
                 Modifier
                     .fillMaxSize()
@@ -587,7 +588,7 @@ private fun SettingsBack(enabled: Boolean, onBack: () -> Unit) {
     val focus = remember { AccessibilityFocus() }
     LaunchedEffect(Unit) { focus.request() }
     val label = localized("settings.title")
-    GlassSurface(CapsuleShape, Modifier.size(BAR_ROW), backdrop = null, behind = colors.background) {
+    GlassSurface(CapsuleShape, Modifier.size(BAR_ROW), backdrop = null, behind = colors.sheet) {
         Box(
             Modifier
                 .size(BAR_ROW)

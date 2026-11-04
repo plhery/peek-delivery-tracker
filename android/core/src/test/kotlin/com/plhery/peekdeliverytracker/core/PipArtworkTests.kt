@@ -150,7 +150,7 @@ class PipArtworkTests {
         // The truck goes on the label at half size, its own steps as CarrierTruckGeometry draws them.
         val label = MapDrawingContext().also { PipArtwork.label(it, dhl) }.drawing
         val truck = label.filterIsInstance<MapDrawing.Transformed>().single { it.steps.size > 1 }
-        assertEquals(CarrierTruckGeometry.draw(dhl.identity).size, truck.steps.size)
+        assertEquals(CarrierTruckGeometry.draw(dhl.identity, dark = false).size, truck.steps.size)
     }
 
     @Test

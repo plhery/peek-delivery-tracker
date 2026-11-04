@@ -17,12 +17,15 @@ import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.graphicsLayer
@@ -180,6 +183,17 @@ fun DeliveryPostageStamp(
                     val lines = globeLines(Rect(globeCenter, 11f * u))
                     val originLine = origin?.let { measurer.measure(it, originStyle, softWrap = false, maxLines = 1) }
                     val dateLine = date?.let { measurer.measure(it, dateStyle, softWrap = false, maxLines = 1) }
+                    // The paper around the print. In dark the card's light ink would hardly show on the cream paper, so
+                    // where the postmark lands there it is printed in the card's own colour.
+                    val margin = if (colors.dark) {
+                        Path().apply {
+                            addPath(edge)
+                            addRect(Rect(4.5f * u, 4.5f * u, size.width - 4.5f * u, size.height - 4.5f * u))
+                            fillType = PathFillType.EvenOdd
+                        }
+                    } else {
+                        null
+                    }
                     onDrawBehind {
                         drawPath(edge, paper)
                         drawRect(surface, topLeft = Offset(4.5f * u, 4.5f * u), size = Size(size.width - 9f * u, size.height - 9f * u))
@@ -193,7 +207,14 @@ fun DeliveryPostageStamp(
                             style = Stroke(0.6f * u),
                         )
                         if (originLine != null) drawCentred(originLine, Offset(22f * u, 45f * u), tracking = 0.5f * u)
-                        if (dateLine != null) drawPostmark(dateLine, ink, u, pressed.value)
+                        when {
+                            dateLine == null -> Unit
+                            margin == null -> drawPostmark(dateLine, ink, u, pressed.value, POSTMARK_OPACITY)
+                            else -> {
+                                clipPath(margin, ClipOp.Difference) { drawPostmark(dateLine, ink, u, pressed.value, POSTMARK_DARK_OPACITY) }
+                                clipPath(margin) { drawPostmark(dateLine, surface, u, pressed.value, POSTMARK_DARK_OPACITY) }
+                            }
+                        }
                     }
                 },
         )
@@ -201,12 +222,12 @@ fun DeliveryPostageStamp(
 }
 
 /**
- * The postmark: two rings and the delivery date, 23 across, turned 12° back and at 80 %, centred at (38, 36). On its
- * way down (`pressed` below 1) it is up to 2.6 times as large, turned 16° further and faded out.
+ * The postmark in `ink`: two rings and the delivery date, 23 across, turned 12° back and at `strength`, centred at
+ * (38, 36). On its way down (`pressed` below 1) it is up to 2.6 times as large, turned 16° further and faded out.
  */
-private fun DrawScope.drawPostmark(date: TextLayoutResult, ink: Color, u: Float, pressed: Float) {
+private fun DrawScope.drawPostmark(date: TextLayoutResult, ink: Color, u: Float, pressed: Float, strength: Float) {
     val away = 1 - pressed
-    val opacity = 0.8f * pressed
+    val opacity = strength * pressed
     if (opacity <= 0f) return
     val center = Offset(38f * u, 36f * u)
     val faded = ink.copy(alpha = ink.alpha * opacity)
@@ -214,7 +235,7 @@ private fun DrawScope.drawPostmark(date: TextLayoutResult, ink: Color, u: Float,
         rotate(-12f + 16f * away, pivot = center) {
             drawCircle(faded, radius = 11.5f * u, center = center, style = Stroke(0.9f * u))
             drawCircle(faded, radius = 8.7f * u, center = center, style = Stroke(0.55f * u))
-            drawCentred(date, center, alpha = opacity)
+            drawCentred(date, center, alpha = opacity, color = ink)
         }
     }
 }
@@ -223,6 +244,18 @@ private fun DrawScope.drawPostmark(date: TextLayoutResult, ink: Color, u: Float,
  * One line centred on `center`, as `.position` centres a Text. CoreText adds tracking after each character, so the
  * iPhone's glyphs sit half a tracking earlier in the frame than Android's.
  */
-private fun DrawScope.drawCentred(line: TextLayoutResult, center: Offset, tracking: Float = 0f, alpha: Float = 1f) {
-    drawText(line, topLeft = Offset(center.x - line.size.width / 2f - tracking / 2, center.y - line.size.height / 2f), alpha = alpha)
+private fun DrawScope.drawCentred(
+    line: TextLayoutResult,
+    center: Offset,
+    tracking: Float = 0f,
+    alpha: Float = 1f,
+    color: Color = Color.Unspecified,
+) {
+    drawText(line, color, Offset(center.x - line.size.width / 2f - tracking / 2, center.y - line.size.height / 2f), alpha = alpha)
 }
+
+/** The postmark's ink, at 80 %. */
+private const val POSTMARK_OPACITY = 0.8f
+
+/** In dark a shade firmer, so that on the darker cards the date over the print reads as well as it did before them. */
+private const val POSTMARK_DARK_OPACITY = 0.81f

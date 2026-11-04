@@ -43,9 +43,11 @@ import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
+import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.DeliveryPostageStamp
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.experimentalSurface
+import com.plhery.peekdeliverytracker.ui.draw.litEdge
 import com.plhery.peekdeliverytracker.ui.map.RouteEngraving
 import com.plhery.peekdeliverytracker.ui.map.rememberParcelRoute
 import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
@@ -153,6 +155,7 @@ fun NextDeliveryPass(
             // A card the list can swipe is cut to its corners there, which takes its surface's shadow: the swipe's own
             // replaces it, in the same colours (`cardButton`).
             .experimentalSurface(fill = colors.resolve(identity.surface), cornerRadius = Radii.nextUp, shadow = decorative)
+            .litEdge(ContinuousRoundedShape(Radii.nextUp))
             .fillMaxWidth(),
     ) {
         if (placed && atlas != null) {

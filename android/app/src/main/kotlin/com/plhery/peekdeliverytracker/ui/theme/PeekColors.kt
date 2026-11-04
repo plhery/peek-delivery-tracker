@@ -111,7 +111,20 @@ class PeekColors(val dark: Boolean, val highContrast: Boolean = false) {
     val warning = resolve(Brand.warning)
     val warningSoft = resolve(Brand.warningSoft)
     val background = resolve(Brand.background)
+
+    /** A sheet's ground ([Brand.sheet]): the page's in light. */
+    val sheet = resolve(Brand.sheet)
+
+    /** A control in a sheet, where the page has the cream. */
+    val sheetControl = resolve(Brand.sheetControl)
+
+    /** A sheet's round buttons and its copy button, where the page has the ink at 7 %. */
+    val sheetButton = resolve(Brand.sheetButton)
     val separator = resolve(SystemColors.separator)
+    private val solidSheetLine = resolve(Brand.sheetLine)
+
+    /** A line in a sheet: the separator at [opacity] in light, as on the page, and one solid line in dark. */
+    fun sheetLine(opacity: Float): Color = if (dark) solidSheetLine else separator.copy(alpha = separator.alpha * opacity)
     val divider = resolve(SystemColors.divider)
     val label = resolve(SystemColors.label)
     val secondaryLabel = resolve(SystemColors.secondaryLabel)

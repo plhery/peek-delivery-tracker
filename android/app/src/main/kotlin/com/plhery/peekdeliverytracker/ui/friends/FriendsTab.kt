@@ -845,6 +845,7 @@ private fun FriendsPanelHost(state: FriendsState) {
         onClosed = { drawn = null },
         dismissible = !working,
         page = !state.panelAsForm,
+        lit = true,
     ) {
         if (panel == null) return@Sheet
         val insets = LocalSheetInsets.current
@@ -899,7 +900,7 @@ private fun PanelContent(state: FriendsState, panel: FriendsPanel, snapshot: Fri
 }
 
 /**
- * The panel's `NavigationStack` and `ScrollView`: the page's ground, what it holds in by 24 and 20 apart, 10 under the
+ * The panel's `NavigationStack` and `ScrollView`: the sheet's ground, what it holds in by 24 and 20 apart, 10 under the
  * inline bar, which stands a point lower than the sheet's own bar row; its [title] in the middle as a heading and Close
  * on glass at its trailing end, semibold as the confirmation, and the scroll edge once it has scrolled. With
  * [dismissesKeyboard], a drag of it down takes the keyboard down (`.scrollDismissesKeyboard(.interactively)`), which
@@ -920,7 +921,7 @@ internal fun PanelPage(
     val bottom = sheetBottomInset()
     val scroll = rememberScrollState()
     Box(Modifier.fillMaxSize().testTag(FRIENDS_PANEL)) {
-        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
+        Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.sheet)) {
             KeyboardScrollColumn(
                 Modifier.fillMaxSize(), scroll, top = barHeight, bottom = bottom, dismissesKeyboard = dismissesKeyboard,
                 contentModifier = Modifier.padding(top = barHeight + NAV_BAR_FOOT, bottom = bottom).padding(24.dp),

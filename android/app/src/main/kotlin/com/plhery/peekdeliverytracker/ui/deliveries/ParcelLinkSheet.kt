@@ -138,6 +138,7 @@ import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.SmallPip
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.litEdge
 import com.plhery.peekdeliverytracker.ui.map.RouteEngraving
 import com.plhery.peekdeliverytracker.ui.map.rememberParcelRoute
 import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
@@ -351,6 +352,7 @@ internal fun ParcelLinkSheetHost(source: ParcelLinkSource) {
         },
         dismissible = !state.adding,
         grabber = false,
+        lit = true,
     ) {
         ParcelLinkSheet(source, state)
     }
@@ -475,7 +477,7 @@ private fun LinkSheetPage(
     val bottom = sheetBottomInset()
     Box(Modifier.fillMaxSize().testTag(LINK_SHEET)) {
         Box(Modifier.fillMaxSize().then(if (covered) Modifier.clearAndSetSemantics {} else Modifier)) {
-            Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.background)) {
+            Box(Modifier.fillMaxSize().materialBackdrop(backdrop).background(PeekTheme.colors.sheet)) {
                 content(barHeight, bottom)
             }
             FormScrollEdge(barHeight, scrolled)
@@ -747,7 +749,7 @@ private fun AlreadyFollowed(source: ParcelLinkSource, parcelId: UUID?, here: Boo
         Modifier
             .fillMaxWidth()
             .testTag(LINK_ALREADY)
-            .background(colors.paper, ContinuousRoundedShape(16.dp))
+            .background(colors.raised, ContinuousRoundedShape(16.dp))
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
@@ -945,6 +947,7 @@ private fun SharedParcelCard(
         Modifier
             .fillMaxWidth()
             .background(colors.resolve(identity.surface), ContinuousRoundedShape(CARD_RADIUS))
+            .litEdge(ContinuousRoundedShape(CARD_RADIUS))
             .onGloballyPositioned {
                 frames.card = it
                 frames.measure(density)
@@ -1207,6 +1210,7 @@ private fun GiftParcelCard(parcel: Parcel, opened: Boolean, refreshing: Boolean,
         Modifier
             .fillMaxWidth()
             .background(colors.resolve(ExperimentalPalette.lilacSurface), ContinuousRoundedShape(CARD_RADIUS))
+            .litEdge(ContinuousRoundedShape(CARD_RADIUS))
             .padding(start = 18.dp, top = 10.dp, end = 18.dp, bottom = 20.dp)
             .testTag(LINK_GIFT_CARD),
         horizontalAlignment = Alignment.CenterHorizontally,

@@ -89,7 +89,7 @@ object DeliveryWidgetTimeline {
  */
 object DeliveryWidgetPictures {
     /** Changes whenever the pictures are drawn differently, so that the ones already drawn are drawn again. */
-    const val version = 2
+    const val version = 3
 
     /**
      * How a route is drawn for each size of widget. A route is no bigger than the smallest widget it goes in, which

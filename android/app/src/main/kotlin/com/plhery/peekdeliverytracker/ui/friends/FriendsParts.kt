@@ -317,7 +317,7 @@ internal fun String.cutToScalars(limit: Int = NICKNAME_SCALARS): String =
     if (codePointCount(0, length) <= limit) this else substring(0, offsetByCodePoints(0, limit))
 
 /**
- * `FriendsProfileForm`: "friends.nickname" over its field (on paper with 14-point corners, in by 14, the nickname's
+ * `FriendsProfileForm`: "friends.nickname" over its field (raised with 14-point corners, in by 14, the nickname's
  * keyboard, Done taking the keyboard down, at most 24 scalars), the preview of the reader's card as friends will see
  * it, the two shares as switches in delivered between dividers (each 10 above and below, its detail read as its hint),
  * the privacy line and Save, or "friends.join" for a new profile, or [submitKey]'s words where it is given: off while
@@ -380,7 +380,7 @@ internal fun FriendsProfileForm(
 }
 
 /**
- * The nickname's `TextField`: body on paper with 14-point corners, in by 14, its placeholder in the tertiary grey and
+ * The nickname's `TextField`: body raised with 14-point corners, in by 14, its placeholder in the tertiary grey and
  * the accent's cursor; the first letter capitalised, and Done takes the keyboard down (`submitLabel(.done)`).
  */
 @Composable
@@ -393,7 +393,7 @@ private fun NicknameField(value: String, onValueChange: (String) -> Unit, placeh
         Modifier
             .fillMaxWidth()
             .testTag(FRIENDS_NICKNAME)
-            .background(colors.paper, ContinuousRoundedShape(14.dp))
+            .background(colors.raised, ContinuousRoundedShape(14.dp))
             .padding(14.dp)
             .semantics {
                 contentDescription = label

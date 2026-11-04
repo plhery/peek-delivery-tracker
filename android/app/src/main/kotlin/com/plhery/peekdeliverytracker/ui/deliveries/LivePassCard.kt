@@ -90,6 +90,7 @@ import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.DeliveryPostageStamp
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.litEdge
 import com.plhery.peekdeliverytracker.ui.map.RouteEngraving
 import com.plhery.peekdeliverytracker.ui.map.RouteEngravingMetrics
 import com.plhery.peekdeliverytracker.ui.map.rememberParcelRoute
@@ -198,6 +199,7 @@ internal fun LivePassCard(
         modifier
             .fillMaxWidth()
             .background(colors.resolve(branding.surface), ContinuousRoundedShape(CARD_RADIUS))
+            .litEdge(ContinuousRoundedShape(CARD_RADIUS))
             .onGloballyPositioned {
                 frames.card = it
                 frames.measure(density)

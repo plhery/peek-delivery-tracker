@@ -187,6 +187,22 @@ object Brand {
     val warningSoft = color(light = "#FFDDC7", dark = "#341F14")
     val background = color(light = "#F4F5F1", dark = "#13110E")
 
+    // A sheet stands one step up from the page in dark: a ground of its own under raised rows, with its own controls
+    // and lines (the web's `--sheet-*`, the iPhone's `Brand.sheet…`). In light each is the page's own colour. In dark
+    // the ground is the web's #191612, the controls sit a step below its #36322C, and the buttons keep the green
+    // palette's ink, so that nothing in a sheet stands out less than on the sheets before them.
+    /** A sheet's ground. */
+    val sheet = color(light = "#F4F5F1", dark = "#191612")
+
+    /** A control in a sheet, where the page has the cream. */
+    val sheetControl = color(light = "#F0F0E9", dark = "#2E2A24")
+
+    /** A sheet's round buttons and its copy button: the ink at 7 % in light, as on the page; the green palette's in dark. */
+    val sheetButton = color(light = "#20251E", dark = "#F5F6F2").opacity(0.07)
+
+    /** A sheet's lines in dark, solid. In light a sheet keeps the page's lines, the system's separator at their opacity. */
+    val sheetLine = color(light = "#4A463E", dark = "#4A463E")
+
     /** A colour for each appearance; with increased contrast, a little further from the middle grey. */
     fun color(light: String, dark: String): AdaptiveColor {
         val lightColor = RgbaColor.hex(light)

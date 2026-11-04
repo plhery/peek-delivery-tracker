@@ -382,6 +382,7 @@ internal fun ParcelShareHost(state: DeliveriesState) {
         detent = if (shown?.work?.large == true) SheetDetent.Large else SheetDetent.Fitted,
         onDetentChange = { detent -> shown?.work?.large = detent == SheetDetent.Large },
         dismissible = !working,
+        lit = true,
     ) {
         if (shown != null && parcel != null) ParcelShareSheet(shown.work, parcel, close = { state.closeShare() })
     }
@@ -404,7 +405,7 @@ private fun ParcelShareSheet(work: ParcelShareSheetWork, parcel: Parcel, close: 
     val saving by model.savingFlow.collectAsState()
     val bottom = sheetBottomInset()
     // Clear of the keyboard, the field with the focus in view above it, and a drag down takes it down.
-    KeyboardScrollColumn(Modifier.fillMaxSize().background(colors.background), bottom = bottom, dismissesKeyboard = true) {
+    KeyboardScrollColumn(Modifier.fillMaxSize().background(colors.sheet), bottom = bottom, dismissesKeyboard = true) {
         Column(
             Modifier
                 .testTag(PARCEL_SHARE)
@@ -463,7 +464,7 @@ private fun Sharing(work: ParcelShareSheetWork, parcel: Parcel, working: Boolean
 
 /**
  * The heading, "share.titleNamed" with the parcel's name or "share.title", title2 semibold across what the close
- * button leaves it, 16 from it: an ✕ of 13 semibold in a circle of the ink at 7 %, 36 across in 44, a plain button
+ * button leaves it, 16 from it: an ✕ of 13 semibold in a circle of the sheet's button, 36 across in 44, a plain button
  * named "common.close", off and faded while sharing, copying or stopping is under way.
  */
 @Composable
@@ -489,7 +490,7 @@ private fun ShareHeader(name: String?, working: Boolean, close: () -> Unit) {
                 .semantics { contentDescription = closeLabel },
             contentAlignment = Alignment.Center,
         ) {
-            Box(Modifier.size(36.dp).background(colors.ink.copy(alpha = colors.ink.alpha * 0.07f), CircleShape), contentAlignment = Alignment.Center) {
+            Box(Modifier.size(36.dp).background(colors.sheetButton, CircleShape), contentAlignment = Alignment.Center) {
                 PeekSymbol("xmark", font = type.fixed(13f, FontWeight.SemiBold), tint = colors.label)
             }
         }
@@ -498,7 +499,7 @@ private fun ShareHeader(name: String?, working: Boolean, close: () -> Unit) {
 
 /**
  * `options`: showing the number, the parcel's name (with the name itself) where it has one, and the gift, in one card
- * on the paper with 14-point continuous corners, a hairline of the separator at half strength between them. The
+ * raised with 14-point continuous corners, a hairline of the sheet's line at half strength between them. The
  * switches wait while the link is read. A parcel without a name has no name to show.
  */
 @Composable
@@ -506,7 +507,7 @@ private fun ShareOptions(work: ParcelShareSheetWork, shown: ParcelShareModel.Set
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val name = work.model.name
-    Column(Modifier.fillMaxWidth().background(colors.paper, ContinuousRoundedShape(14.dp))) {
+    Column(Modifier.fillMaxWidth().background(colors.raised, ContinuousRoundedShape(14.dp))) {
         ShareSwitch(PARCEL_SHARE_NUMBER, "receipt", localizer.text("share.number.title"), null, shown.showNumber, enabled = !loading) {
             work.set(ParcelShareModel.Field.ShowNumber, it)
         }
@@ -525,8 +526,7 @@ private fun ShareOptions(work: ParcelShareSheetWork, shown: ParcelShareModel.Set
 
 @Composable
 private fun Hairline() {
-    val separator = PeekTheme.colors.separator
-    Box(Modifier.fillMaxWidth().height(1.dp).background(separator.copy(alpha = separator.alpha * 0.5f)))
+    Box(Modifier.fillMaxWidth().height(1.dp).background(PeekTheme.colors.sheetLine(0.5f)))
 }
 
 /**
@@ -595,7 +595,7 @@ private fun ShareSwitch(tag: String, symbol: String, title: String, value: Strin
 /**
  * `giftWords`: a gift's note, two to five lines, and who it is from, with the name autofill and Done, which puts the
  * keyboard away; each under its label in caption secondary, 10 apart, then "share.gift.private" in caption secondary;
- * 14 in on the paper with 14-point continuous corners. Each keeps within what a link carries as it is typed (280 and 60).
+ * 14 in, raised, with 14-point continuous corners. Each keeps within what a link carries as it is typed (280 and 60).
  * Either field taking the focus opens the sheet fully (`onChange(of: writing)`).
  */
 @Composable
@@ -604,7 +604,7 @@ private fun GiftWords(work: ParcelShareSheetWork, words: ParcelShareWords) {
     val colors = PeekTheme.colors
     val writing = { work.large = true }
     Column(
-        Modifier.fillMaxWidth().background(colors.paper, ContinuousRoundedShape(14.dp)).padding(14.dp),
+        Modifier.fillMaxWidth().background(colors.raised, ContinuousRoundedShape(14.dp)).padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         WordsField(PARCEL_SHARE_NOTE, localizer.text("share.gift.note"), words.note, name = false, writing) {
@@ -655,7 +655,7 @@ private fun WordsField(tag: String, label: String, value: String, name: Boolean,
             decorationBox = { text ->
                 Box(
                     Modifier
-                        .background(colors.background, ContinuousRoundedShape(10.dp))
+                        .background(colors.sheet, ContinuousRoundedShape(10.dp))
                         .heightIn(min = 44.dp)
                         .padding(horizontal = 12.dp, vertical = 10.dp),
                     contentAlignment = Alignment.CenterStart,
@@ -671,7 +671,7 @@ private fun WordsField(tag: String, label: String, value: String, name: Boolean,
  * "share.pending" in footnote secondary while there is no link; then Copy, "detail.copied" for two seconds after it
  * copied, off while the link is read or something is on its way. Side by side 8 apart, or at the accessibility sizes
  * the button under the address, which then has the whole width. 16 in at the leading side, 6 elsewhere and 6 more over
- * a stack, 56 tall at least, on the paper with 16-point continuous corners and a stroke of the separator at 60 %.
+ * a stack, 56 tall at least, raised with 16-point continuous corners and a stroke of the sheet's line at 60 %.
  */
 @Composable
 private fun LinkRow(loading: Boolean, address: String?, copied: Boolean, enabled: Boolean, copy: () -> Unit) {
@@ -684,8 +684,8 @@ private fun LinkRow(loading: Boolean, address: String?, copied: Boolean, enabled
         .fillMaxWidth()
         .testTag(PARCEL_SHARE_LINK)
         .heightIn(min = 56.dp)
-        .background(colors.paper, shape)
-        .border(1.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.6f), shape)
+        .background(colors.raised, shape)
+        .border(1.dp, colors.sheetLine(0.6f), shape)
         .padding(start = 16.dp, end = 6.dp, top = if (stacked) 12.dp else 6.dp, bottom = 6.dp)
     val label = localizer.text("share.address")
     val shown = @Composable { modifier: Modifier ->
@@ -728,7 +728,7 @@ private fun LinkRow(loading: Boolean, address: String?, copied: Boolean, enabled
 
 /**
  * Copy: doc.on.doc and "detail.copy", or a checkmark and "detail.copied", in footnote semibold, `Label`'s 6 apart
- * (estimated), 14 in on the ink at 7 % with 14-point continuous corners, 44 tall at least, giving under the finger.
+ * (estimated), 14 in on the sheet's button with 14-point continuous corners, 44 tall at least, giving under the finger.
  */
 @Composable
 private fun CopyButton(copied: Boolean, enabled: Boolean, copy: () -> Unit) {
@@ -739,7 +739,7 @@ private fun CopyButton(copied: Boolean, enabled: Boolean, copy: () -> Unit) {
         Modifier
             .testTag(PARCEL_SHARE_COPY)
             .clickable(interactionSource = null, indication = PressStyle.Tactile, enabled = enabled, role = Role.Button, onClick = copy)
-            .background(colors.ink.copy(alpha = colors.ink.alpha * 0.07f), ContinuousRoundedShape(14.dp))
+            .background(colors.sheetButton, ContinuousRoundedShape(14.dp))
             .heightIn(min = 44.dp)
             .padding(horizontal = 14.dp),
         horizontalArrangement = Arrangement.spacedBy(LABEL_SPACING),

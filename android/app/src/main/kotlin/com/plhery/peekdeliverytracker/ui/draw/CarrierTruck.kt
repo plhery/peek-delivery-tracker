@@ -19,8 +19,8 @@ import com.plhery.peekdeliverytracker.ui.theme.LocalPeekColors
  */
 @Composable
 fun CarrierTruck(identity: CarrierVisualIdentity, modifier: Modifier = Modifier) {
-    val steps = remember(identity) { CarrierTruckGeometry.draw(identity) }
     val colors = LocalPeekColors.current
+    val steps = remember(identity, colors.dark) { CarrierTruckGeometry.draw(identity, colors.dark) }
     Canvas(modifier.size(27.dp, 18.dp).clearAndSetSemantics {}) {
         val viewBox = CarrierTruckGeometry.viewBox
         scale((size.width / viewBox.width).toFloat(), (size.height / viewBox.height).toFloat(), pivot = Offset.Zero) {

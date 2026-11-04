@@ -24,6 +24,9 @@ class BrandParityTests {
         val properties: List<String>,
         val derivation: List<Step>,
         val toneExamples: List<List<String>>,
+        val litEdge: LitEdge,
+        /** `[truck, surface-dark, edge, expected]` rows for the truck's outline on its dark card, which the web checks too. */
+        val litEdgeExamples: List<List<String>>,
         val families: Map<String, String>,
         val palettes: Map<String, Map<String, String>>,
         val decals: Map<String, String>,
@@ -37,6 +40,9 @@ class BrandParityTests {
             @Serializable
             data class Amber(val from: Double, val to: Double, val hue: Double, val slope: Double)
         }
+
+        @Serializable
+        data class LitEdge(val below: Double, val lift: Double, val floor: Double, val maxChroma: Double)
 
         @Serializable
         data class Truck(
@@ -62,13 +68,30 @@ class BrandParityTests {
                 val stroke: String,
             )
 
+            /** `dark` is the glass's paint in dark. */
             @Serializable
-            data class Panel(val d: String, val points: List<List<Double>>, val fill: String, val stroke: String? = null)
+            data class Panel(
+                val d: String,
+                val points: List<List<Double>>,
+                val fill: String,
+                val stroke: String? = null,
+                val dark: String? = null,
+            )
 
             @Serializable
-            data class Wheels(val centers: List<List<Double>>, val tire: Disc, val hub: Disc) {
+            data class Wheels(val centers: List<List<Double>>, val tire: Tire, val hub: Disc) {
                 @Serializable
                 data class Disc(val r: Double, val fill: String)
+
+                @Serializable
+                data class Tire(
+                    val r: Double,
+                    val fill: String,
+                    val dark: String,
+                    val rim: String,
+                    val rimOpacity: Double,
+                    val rimWidth: Double,
+                )
             }
 
             @Serializable
@@ -207,6 +230,53 @@ class BrandParityTests {
         assertEquals(truck.wheels.hub.fill, CarrierTruckGeometry.hubColor)
         // The body and cab wear the identity's own colors; the glass is a literal.
         assertEquals(listOf("truck", "edge", "truck", "edge"), listOf(truck.body.fill, truck.body.stroke, truck.cab.fill, truck.cab.stroke))
+        // In dark the tyre is the shared dark paint with its rim.
+        assertEquals(truck.wheels.tire.dark, CarrierTruckGeometry.tireDarkColor)
+        assertEquals(truck.wheels.tire.rim, CarrierTruckGeometry.tireRimColor)
+        assertEquals(truck.wheels.tire.rimOpacity, CarrierTruckGeometry.tireRimOpacity, 0.0)
+        assertEquals(truck.wheels.tire.rimWidth, CarrierTruckGeometry.tireRimWidth, 0.0)
+        assertEquals(truck.windshield.dark, CarrierTruckGeometry.windshieldDarkColor)
+    }
+
+    @Test
+    fun darkTrucksLightTheirOutlineAsTheSharedExamples() {
+        val brand = brand()
+        val rule = CarrierBrandAssets.shared.litEdge
+        assertEquals(
+            listOf(brand.litEdge.below, brand.litEdge.lift, brand.litEdge.floor, brand.litEdge.maxChroma),
+            listOf(rule.below, rule.lift, rule.floor, rule.maxChroma),
+        )
+        assertFalse(brand.litEdgeExamples.isEmpty())
+        for (example in brand.litEdgeExamples) {
+            assertEquals(4, example.size)
+            assertEquals(example[0], example[3], CarrierVisualIdentity.litEdge(example[0], example[1], example[2], rule))
+        }
+    }
+
+    /**
+     * On its dark card every carrier's truck keeps its outline, glass and tyres at least as visible as the light paints
+     * would leave them: the outline against the card, the glass against the body, a tyre's fill or rim against the body
+     * and the card. Only a white body is lighter than the glass, and it loses less than 0.001 to it.
+     */
+    @Test
+    fun darkGlassAndTyresStandOutAsMuchAsTheLightOnes() {
+        val truck = CarrierTruckGeometry
+        fun contrast(first: String, second: String) = CarrierVisualIdentity.contrast(first, second)
+        fun rim(ground: String) = CarrierVisualIdentity.mix(ground, truck.tireRimColor, truck.tireRimOpacity)
+        assertTrue(catalog.definitions.size > 1000)
+        for (id in catalog.definitions.keys.map { it.rawValue }) {
+            val identity = identity(id)
+            val colors = identity.colors
+            val (card, body, edge) = Triple(colors[1], colors[6], colors[7])
+            val lit = CarrierVisualIdentity.litEdge(body, card, edge)
+            assertEquals(id, RgbaColor.hex(lit), identity.edgeInDark)
+            assertTrue("$id's outline", contrast(lit, card) >= contrast(edge, card))
+            assertTrue("$id's glass", contrast(truck.windshieldDarkColor, body) >= contrast(truck.windshieldColor, body) - 0.001)
+            for ((name, ground) in listOf("card" to card, "body" to body)) {
+                val shown = Math.max(contrast(truck.tireDarkColor, ground), contrast(rim(ground), ground))
+                assertTrue("$id's tyre on its $name", shown >= contrast(truck.tireColor, ground))
+            }
+        }
     }
 
     @Test
@@ -250,7 +320,7 @@ class BrandParityTests {
     @Test
     fun theTruckIsDrawnInTheCarriersLiveryBackToFront() {
         val identity = identity("dhl")
-        val steps = CarrierTruckGeometry.draw(identity)
+        val steps = CarrierTruckGeometry.draw(identity, dark = false)
         val decals = CarrierBrandAssets.shared.truck.decals.getValue(identity.decal)
         // Body and cab, filled then outlined, the glass, the decals, then a tire and its hub for each wheel.
         assertEquals(5 + decals.size + 4, steps.size)
@@ -294,6 +364,30 @@ class BrandParityTests {
         assertEquals(AdaptiveColor(RgbaColor.hex(CarrierTruckGeometry.hubColor)), hub.color)
         assertEquals(25.0, hub.path.boundingBoxOfPath.midX, 1e-12)
         assertEquals(1.8, hub.path.boundingBoxOfPath.width, 1e-12)
+        assertEquals(AdaptiveColor(RgbaColor.hex(CarrierTruckGeometry.tireColor)), (steps[steps.size - 2] as MapDrawing.Fill).color)
+    }
+
+    @Test
+    fun aDarkTruckLightsItsOutlineGlassAndTyres() {
+        // UPS's brown body sinks into its dark card, so its outline is lit; DHL's yellow keeps its own edge.
+        val ups = identity("ups")
+        val steps = CarrierTruckGeometry.draw(ups, dark = true)
+        val decals = CarrierBrandAssets.shared.truck.decals.getValue(ups.decal)
+        // As in light, with a rim stroked round each tyre between the tyre and its hub.
+        assertEquals(5 + decals.size + 6, steps.size)
+        assertEquals(AdaptiveColor(ups.truck), (steps[0] as MapDrawing.Fill).color)
+        assertEquals(AdaptiveColor(RgbaColor.hex("#c29b88")), (steps[1] as MapDrawing.Stroke).color)
+        assertEquals(AdaptiveColor(RgbaColor.hex("#c29b88")), (steps[3] as MapDrawing.Stroke).color)
+        assertEquals(AdaptiveColor(RgbaColor.hex(CarrierTruckGeometry.windshieldDarkColor)), (steps[4] as MapDrawing.Fill).color)
+        val wheel = steps.takeLast(3)
+        assertEquals(AdaptiveColor(RgbaColor.hex(CarrierTruckGeometry.tireDarkColor)), (wheel[0] as MapDrawing.Fill).color)
+        val rim = wheel[1] as MapDrawing.Stroke
+        assertEquals(AdaptiveColor(RgbaColor.hex(CarrierTruckGeometry.tireRimColor).opacity(CarrierTruckGeometry.tireRimOpacity)), rim.color)
+        assertEquals(CarrierTruckGeometry.tireRimWidth, rim.style.lineWidth, 0.0)
+        assertEquals((wheel[0] as MapDrawing.Fill).path.boundingBoxOfPath, rim.path.boundingBoxOfPath)
+        assertEquals(AdaptiveColor(RgbaColor.hex(CarrierTruckGeometry.hubColor)), (wheel[2] as MapDrawing.Fill).color)
+        val dhl = identity("dhl")
+        assertEquals(AdaptiveColor(dhl.edge), (CarrierTruckGeometry.draw(dhl, dark = true)[1] as MapDrawing.Stroke).color)
     }
 
     // Not an iPhone test: `Color.mix(with:by:)` mixes in OKLab unless Swift passes `.device`, each colour weighted by its
@@ -322,13 +416,16 @@ class BrandParityTests {
         assertEquals(surface.mix(ink, 0.22), adaptive.dark)
         assertEquals(RgbaColor(1.0, 1.0, 1.0).mix(RgbaColor(0.0, 0.0, 0.0), 0.22), adaptive.light)
 
-        // The stamp's paper and globe mix the livery's surface toward its ink perceptually; in light mode the paper is warm white.
+        // The stamp's globe mixes the livery's surface toward its ink perceptually; its paper is warm white in light mode
+        // and a cream in dark mode, whatever the carrier.
         val identity = identity("dhl")
         assertEquals(identity.surface.mix(identity.ink, 0.14), identity.stampGlobe)
+        assertNotEquals(identity.surface.mix(identity.ink, 0.14, GradientColorSpace.Device), identity.stampGlobe)
+        assertEquals(RgbaColor.hex("#FFFEFA"), identity.stampPaper.resolve(dark = false))
         assertEquals(RgbaColor.hex("#FFFEFA"), identity.stampPaper.resolve(dark = false, highContrast = true))
-        assertEquals(identity.surface.dark.mix(identity.ink.dark, 0.22), identity.stampPaper.dark)
-        assertEquals(identity.surface.darkHighContrast.mix(identity.ink.darkHighContrast, 0.22), identity.stampPaper.darkHighContrast)
-        assertNotEquals(identity.surface.dark.mix(identity.ink.dark, 0.22, GradientColorSpace.Device), identity.stampPaper.dark)
+        assertEquals(RgbaColor.hex("#D9D0BC"), identity.stampPaper.resolve(dark = true))
+        assertEquals(RgbaColor.hex("#D9D0BC"), identity.stampPaper.resolve(dark = true, highContrast = true))
+        assertEquals(identity.stampPaper, identity("ups").stampPaper)
     }
 
     // Not an iPhone test: `Color(hex:)` trims what is not a letter, mark or number from both ends, then reads ASCII

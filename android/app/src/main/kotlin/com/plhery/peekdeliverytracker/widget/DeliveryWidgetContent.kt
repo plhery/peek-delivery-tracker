@@ -105,7 +105,7 @@ internal object WidgetCardColors {
     }
 
     /** The page the app's list of cards stands on. */
-    val page: ColorProvider = pair(listOf("#F4F5F1", "#151915"))
+    val page: ColorProvider = pair(listOf("#F4F5F1", "#13110E"))
 
     /** `Color.primary`: the label's colour on a card. */
     val primary: ColorProvider = ColorProvider(day = Color.Black, night = Color.White)

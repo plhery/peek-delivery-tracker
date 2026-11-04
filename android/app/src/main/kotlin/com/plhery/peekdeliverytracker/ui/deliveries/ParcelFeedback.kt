@@ -136,6 +136,7 @@ import com.plhery.peekdeliverytracker.ui.draw.SmallPip
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.keptFocus
 import com.plhery.peekdeliverytracker.ui.sheet.KeyboardScrollColumn
+import com.plhery.peekdeliverytracker.ui.sheet.LocalInSheet
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
 import com.plhery.peekdeliverytracker.ui.sheet.sheetBottomInset
@@ -512,8 +513,9 @@ private fun PipQuestion(work: ParcelFeedbackWork, shown: Boolean, hops: Int, mod
 }
 
 /**
- * `bubble`: what Pip says, on the paper with 18-point continuous corners but 5 at its tail beside him (18 at the
- * accessibility sizes, with no Pip), a hairline of the separator at 60 % and a faint shadow; 14 in at its leading
+ * `bubble`: what Pip says, on the paper (raised in a sheet, a shared parcel's) with 18-point continuous corners but 5 at
+ * its tail beside him (18 at the accessibility sizes, with no Pip), a hairline of the separator at 60 % (the sheet's
+ * line in a sheet) and a faint shadow; 14 in at its leading
  * side, and 8 elsewhere, or 12 while it offers the reasons; 52 tall at least, across what Pip leaves it. Asked, it
  * asks whether the page is right, "Yes" and "Not quite" beside or under the question; offering, the reasons; answered,
  * its thanks, with the way to add a note once a reason was given in place. The 4 more the reasons take are their own,
@@ -526,13 +528,14 @@ private fun Bubble(work: ParcelFeedbackWork, large: Boolean, modifier: Modifier)
     val colors = PeekTheme.colors
     val localizer = LocalLocalizer.current
     val shape = UnevenContinuousRoundedShape(topLeading = 18.dp, bottomLeading = if (large) 18.dp else 5.dp, bottomTrailing = 18.dp, topTrailing = 18.dp)
+    val inSheet = LocalInSheet.current
     Box(
         modifier
             .testTag(FEEDBACK_BUBBLE)
             .dropShadow(shape, BUBBLE_SHADOW)
-            .background(colors.paper, shape)
+            .background(if (inSheet) colors.raised else colors.paper, shape)
             .clip(shape)
-            .border(1.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.6f), shape)
+            .border(1.dp, if (inSheet) colors.sheetLine(0.6f) else colors.separator.copy(alpha = colors.separator.alpha * 0.6f), shape)
             .heightIn(min = 52.dp)
             .padding(start = 14.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
         contentAlignment = Alignment.CenterStart,
@@ -741,12 +744,14 @@ private fun AddNote(action: () -> Unit) {
 /**
  * `FeedbackPill`: a small answer in footnote medium, 14 and 6 in, 36 tall in a touch 44 tall, with 12-point continuous
  * corners, giving under the finger at 0.96. On paper it is the ink at 7 %; on the row's fill it is paper with a
- * hairline of the separator at 60 %. One wider than its line wraps its words.
+ * hairline of the separator at 60 % (raised, with the sheet's line, in a sheet). One wider than its line wraps its words.
  */
 @Composable
 private fun FeedbackPill(title: String, tag: String, modifier: Modifier = Modifier, onControl: Boolean = false, action: () -> Unit) {
     val colors = PeekTheme.colors
     val shape = ContinuousRoundedShape(12.dp)
+    val inSheet = LocalInSheet.current
+    val line = if (inSheet) colors.sheetLine(0.6f) else colors.separator.copy(alpha = colors.separator.alpha * 0.6f)
     Box(
         modifier
             .overhang(vertical = 4.dp)
@@ -754,8 +759,8 @@ private fun FeedbackPill(title: String, tag: String, modifier: Modifier = Modifi
             .clickable(interactionSource = null, indication = PressStyle.tactile(0.96f), role = Role.Button, onClick = action)
             .padding(vertical = 4.dp)
             .heightIn(min = 36.dp)
-            .background(if (onControl) colors.paper else colors.ink.copy(alpha = colors.ink.alpha * 0.07f), shape)
-            .then(if (onControl) Modifier.border(1.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.6f), shape) else Modifier)
+            .background(if (onControl) (if (inSheet) colors.raised else colors.paper) else colors.ink.copy(alpha = colors.ink.alpha * 0.07f), shape)
+            .then(if (onControl) Modifier.border(1.dp, line, shape) else Modifier)
             .padding(horizontal = 14.dp, vertical = 6.dp),
         contentAlignment = Alignment.CenterStart,
     ) {
@@ -964,6 +969,7 @@ internal fun ParcelFeedbackOverlays(
         detent = if (work.large) SheetDetent.Large else SheetDetent.Fitted,
         onDetentChange = { work.large = it == SheetDetent.Large },
         dismissible = !work.sending,
+        lit = true,
     ) {
         WordsSheet(work, writing)
     }
@@ -976,6 +982,7 @@ internal fun ParcelFeedbackOverlays(
         detent = if (work.large) SheetDetent.Large else SheetDetent.Fitted,
         onDetentChange = { work.large = it == SheetDetent.Large },
         dismissible = !work.sending,
+        lit = true,
     ) {
         CarrierSheet(work, writing)
     }
@@ -1219,7 +1226,7 @@ private fun FeedbackSheet(title: String, tag: String, busy: Boolean, close: () -
     val type = PeekTheme.type
     val bottom = sheetBottomInset()
     val closeLabel = LocalLocalizer.current.text("common.close")
-    KeyboardScrollColumn(Modifier.fillMaxSize().background(colors.background), bottom = bottom, dismissesKeyboard = true) {
+    KeyboardScrollColumn(Modifier.fillMaxSize().background(colors.sheet), bottom = bottom, dismissesKeyboard = true) {
         Column(
             Modifier
                 .testTag(tag)
@@ -1246,7 +1253,7 @@ private fun FeedbackSheet(title: String, tag: String, busy: Boolean, close: () -
                         .semantics { contentDescription = closeLabel },
                     contentAlignment = Alignment.Center,
                 ) {
-                    Box(Modifier.size(36.dp).background(colors.ink.copy(alpha = colors.ink.alpha * 0.07f), CircleShape), contentAlignment = Alignment.Center) {
+                    Box(Modifier.size(36.dp).background(colors.sheetButton, CircleShape), contentAlignment = Alignment.Center) {
                         PeekSymbol("xmark", font = type.fixed(13f, FontWeight.SemiBold), tint = colors.label)
                     }
                 }
@@ -1257,8 +1264,8 @@ private fun FeedbackSheet(title: String, tag: String, busy: Boolean, close: () -
 }
 
 /**
- * `chip(_:)`: a reason in footnote medium, 14 and 10 in, 44 tall at least, with 14-point continuous corners: on paper
- * with a hairline of the separator at 60 %, or chosen on ochre's surface with a stroke of ochre 1.5 wide. It gives
+ * `chip(_:)`: a reason in footnote medium, 14 and 10 in, 44 tall at least, with 14-point continuous corners: raised
+ * with a hairline of the sheet's line at 60 %, or chosen on ochre's surface with a stroke of ochre 1.5 wide. It gives
  * under the finger at 0.97, and TalkBack hears it selected once chosen, and nothing of a choice otherwise
  * (`.accessibilityAddTraits(on ? .isSelected : [])`).
  */
@@ -1272,10 +1279,10 @@ private fun ReasonChip(title: String, tag: String, on: Boolean, enabled: Boolean
             .clickable(interactionSource = null, indication = PressStyle.tactile(0.97f), enabled = enabled, role = Role.Button, onClick = toggle)
             .semantics { if (on) selected = true }
             .heightIn(min = 44.dp)
-            .background(if (on) colors.resolve(ExperimentalPalette.ochreSurface) else colors.paper, shape)
+            .background(if (on) colors.resolve(ExperimentalPalette.ochreSurface) else colors.raised, shape)
             .border(
                 if (on) 1.5.dp else 1.dp,
-                if (on) colors.resolve(ExperimentalPalette.ochre) else colors.separator.copy(alpha = colors.separator.alpha * 0.6f),
+                if (on) colors.resolve(ExperimentalPalette.ochre) else colors.sheetLine(0.6f),
                 shape,
             )
             .padding(horizontal = 14.dp, vertical = 10.dp),
@@ -1322,8 +1329,8 @@ private fun Modifier.feedbackField(tag: String, label: String, focused: MutableS
 private fun fieldStyle() = PeekTheme.type.callout.sfLines().copy(color = PeekTheme.colors.label)
 
 /**
- * The field's frame: what is typed in callout, 14 and 12 in, 50 tall at least, on the paper with 14-point continuous
- * corners and a hairline of the separator at 60 %, or a stroke of ochre 1.5 wide while it has the focus. A tap anywhere
+ * The field's frame: what is typed in callout, 14 and 12 in, 50 tall at least, raised with 14-point continuous
+ * corners and a hairline of the sheet's line at 60 %, or a stroke of ochre 1.5 wide while it has the focus. A tap anywhere
  * in it starts writing.
  */
 @Composable
@@ -1334,10 +1341,10 @@ private fun FieldFrame(focused: Boolean, text: @Composable () -> Unit) {
         Modifier
             .fillMaxWidth()
             .heightIn(min = 50.dp)
-            .background(colors.paper, shape)
+            .background(colors.raised, shape)
             .border(
                 if (focused) 1.5.dp else 1.dp,
-                if (focused) colors.resolve(ExperimentalPalette.ochre) else colors.separator.copy(alpha = colors.separator.alpha * 0.6f),
+                if (focused) colors.resolve(ExperimentalPalette.ochre) else colors.sheetLine(0.6f),
                 shape,
             )
             .padding(horizontal = 14.dp, vertical = 12.dp),

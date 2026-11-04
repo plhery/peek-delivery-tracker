@@ -43,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
@@ -74,7 +75,10 @@ import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.deliveries.OverlayLayer
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.Lamplight
+import com.plhery.peekdeliverytracker.ui.draw.SHEET_EDGE_OPACITY
 import com.plhery.peekdeliverytracker.ui.draw.UnevenContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.litEdgePath
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.GlassFace
@@ -120,6 +124,12 @@ internal val LocalSheetAttachment = staticCompositionLocalOf<() -> Float> { { 1f
  */
 internal val LocalSheetGround = staticCompositionLocalOf<(@Composable (Modifier) -> Unit)?> { null }
 
+/**
+ * Whether what is drawn stands in one of Peek's own sheets, on the sheet ground (a [lit][Sheet] sheet): there cards
+ * stand on the raised level rather than the paper. Views the page shows too ask.
+ */
+val LocalInSheet = staticCompositionLocalOf { false }
+
 /** Where a menu opened in a sheet or a popover is drawn, over all of it ([MenuRow]); null outside one. */
 internal val LocalSheetMenus = staticCompositionLocalOf<SheetMenus?> { null }
 
@@ -149,9 +159,9 @@ internal class SheetMenus {
  *   top 32 down the window or under the status bar where that is taller, 44 lower in a window wider than it is tall,
  *   and its foot 32 over the window's bottom or over the bottom bar where that is taller.
  *
- * The window under it dims, black at 20 % (48 % in dark), and a tap there dismisses it, but in the status bar's strip
- * at the window's top, whose taps iOS gives to its status bar; the system's back and its predictive gesture dismiss it
- * too, the sheet following the gesture down. While it isn't [dismissible]
+ * The window under it dims, black at 20 % (in dark a warm black at 62 %, the web's scrim), and a tap there dismisses
+ * it, but in the status bar's strip at the window's top, whose taps iOS gives to its status bar; the system's back and
+ * its predictive gesture dismiss it too, the sheet following the gesture down. While it isn't [dismissible]
  * (`interactiveDismissDisabled`), none of them does: the back is kept from what is under it, and a drag down past its
  * lowest detent stretches less and less and comes back. It comes and goes on a critically damped spring, and moves
  * between its detents on a snappy one; as it starts to go, what it holds lets go of the focus, and the keyboard goes
@@ -162,6 +172,10 @@ internal class SheetMenus {
  * gone, [onClosed] runs, where TalkBack's focus goes back to what opened it. The window made again (a rotation) finds it
  * at the detent it had, without coming up again, and [onShown] runs again there. Without its [grabber] it shows none,
  * as UIKit's page sheet; in a compact window the page sheet is the sheet at its large detent.
+ *
+ * A [lit] sheet, one of Peek's own on its sheet ground ([PeekColors.sheet]) rather than a system list, stands up in dark
+ * as the web's do: a lamp catches its top edge, one dp of warm light that thins away round its corners, and it casts a
+ * deep shadow on the dimmed window. Light draws it as any other.
  */
 @Composable
 fun Sheet(
@@ -177,6 +191,7 @@ fun Sheet(
     onShown: () -> Unit = {},
     grabber: Boolean = true,
     page: Boolean = false,
+    lit: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     var present by remember { mutableStateOf(visible) }
@@ -196,7 +211,7 @@ fun Sheet(
                     present = false
                     closed()
                 },
-                detent, { detentChanged(it) }, dismissible, { shown() }, grabber, page, content,
+                detent, { detentChanged(it) }, dismissible, { shown() }, grabber, page, lit, content,
             )
         }
     }
@@ -334,6 +349,7 @@ private fun SheetLayer(
     onShown: () -> Unit,
     grabber: Boolean,
     page: Boolean,
+    lit: Boolean,
     content: @Composable () -> Unit,
 ) {
     val density = LocalDensity.current
@@ -571,6 +587,8 @@ private fun SheetLayer(
         // The dim and the sheet: a layer over the tab, which the glass of an alert over the sheet blurs with the tab.
         val layer = if (backdrop != null) Modifier.materialBackdropLayer(backdrop) else Modifier
         val dim = if (colors.dark) DIM_DARK else DIM_LIGHT
+        val dimColor = if (colors.dark) DIM_DARK_COLOR else Color.Black
+        val standsUp = lit && colors.dark
         val statusBar = WindowInsets.statusBars
         Box(Modifier.fillMaxSize().then(layer)) {
             // The dim, which a tap dismisses the sheet from, but in the status bar's strip: the layer covers the window
@@ -579,7 +597,7 @@ private fun SheetLayer(
                 Modifier
                     .fillMaxSize()
                     .graphicsLayer { alpha = presence() }
-                    .background(Color.Black.copy(alpha = dim))
+                    .background(dimColor.copy(alpha = dim))
                     .pointerInput(statusBar) {
                         detectTapGestures { if (showing && canDismiss && it.y >= statusBar.getTop(this)) dismiss() }
                     }
@@ -596,7 +614,7 @@ private fun SheetLayer(
                         .placedAt({ Size(formWidth, formHeight) }) { Offset((width - formWidth) / 2, motion.top + backOffset() - raised()) }
                         .testTag(SHEET_PANEL)
                         .then(modifier)
-                        .dropShadow(shape, SHEET_SHADOW)
+                        .dropShadow(shape, if (standsUp) SHEET_DARK_SHADOW else SHEET_SHADOW)
                         .clip(shape)
                         .background(colors.groupedBackground)
                         .then(sheetModifier),
@@ -604,10 +622,11 @@ private fun SheetLayer(
                     CompositionLocalProvider(
                         LocalSheetAttachment provides { 1f }, LocalSheetMenus provides menus,
                         LocalSheetInsets provides SheetInsets.sheet(if (page) with(density) { formWidth.toDp() } else FORM_WIDTH, reachesBottom = false),
-                        LocalSheetGround provides ground,
+                        LocalSheetGround provides ground, LocalInSheet provides lit,
                     ) {
                         if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
-                        // Over what it holds, whose ground would hide it.
+                        // Over what it holds, whose ground would hide them.
+                        if (standsUp) LitEdge(shape, Modifier.matchParentSize())
                         if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
                     }
                 }
@@ -636,7 +655,7 @@ private fun SheetLayer(
                         }
                         .testTag(SHEET_PANEL)
                         .then(modifier)
-                        .dropShadow(shape, SHEET_SHADOW)
+                        .dropShadow(shape, if (standsUp) SHEET_RISE_SHADOW else SHEET_SHADOW)
                         .then(sheetModifier),
                 ) {
                     // The glass it floats on, giving way to the opaque ground as it attaches.
@@ -650,7 +669,7 @@ private fun SheetLayer(
                     Box(Modifier.matchParentSize().clip(shape)) {
                         CompositionLocalProvider(
                             LocalSheetAttachment provides attachment, LocalSheetMenus provides menus, LocalSheetInsets provides insets,
-                            LocalSheetGround provides ground,
+                            LocalSheetGround provides ground, LocalInSheet provides lit,
                         ) {
                             // Floating, the sheet is its attached self made smaller to its width, as UIKit draws it: laid
                             // out across the whole window, and scaled into the inset panel.
@@ -660,6 +679,7 @@ private fun SheetLayer(
                                     .scaledFrom(scale)
                                     .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier),
                             ) { content() }
+                            if (standsUp) LitEdge(shape, Modifier.matchParentSize())
                             if (grabber) Grabber(Modifier.align(Alignment.TopCenter))
                         }
                     }
@@ -754,6 +774,21 @@ internal fun SheetGlass(shape: Shape, backdrop: MaterialBackdrop?, modifier: Mod
     Box(modifier.clip(shape).drawBehind { drawRect(black, alpha = dim()) })
 }
 
+/**
+ * A lit sheet's top edge in dark: the sheet's [shape] less itself one dp lower, in the lamp's light, as the web's inset
+ * `0 1px 0` shadow draws it.
+ */
+@Composable
+private fun LitEdge(shape: Shape, modifier: Modifier) {
+    // Outlined again as the shape squares off on attaching.
+    Box(
+        modifier.drawWithCache {
+            val edge = litEdgePath(shape, size, this)
+            onDrawBehind { drawPath(edge, Lamplight.copy(alpha = SHEET_EDGE_OPACITY)) }
+        },
+    )
+}
+
 /** `.presentationDragIndicator(.visible)`: 36 × 5, 5 under the sheet's top. */
 @Composable
 private fun Grabber(modifier: Modifier) {
@@ -795,7 +830,10 @@ private val GRABBER_TOP = 5.dp
 private val GRABBER_WIDTH = 36.dp
 private val GRABBER_HEIGHT = 5.dp
 private const val DIM_LIGHT = 0.2f
-private const val DIM_DARK = 0.48f
+private const val DIM_DARK = 0.62f
+
+/** The web's dark scrim, rgb(8 7 4): a warm black. */
+private val DIM_DARK_COLOR = Color(8, 7, 4)
 private const val PRESENT_DURATION = 0.5
 private const val DETENT_DURATION = 0.4
 /** How many frames a sheet made again with the window keeps to its rest at once, while the window's bars come. */
@@ -803,6 +841,13 @@ private const val RESTORING_FRAMES = 2
 /** How far down the predictive back gesture takes the sheet, as a part of its height. */
 private const val BACK_TRAVEL = 0.1f
 private val SHEET_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.12f), radius = 20.dp, y = 0.dp)
+
+/**
+ * A lit sheet's shadow in dark, the web's `0 ±24px 64px` black at 55 %: down from a form in the window's middle, up from
+ * a sheet that comes from the bottom. CSS blurs 64 to a Gaussian of 32.
+ */
+private val SHEET_DARK_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.55f), radius = 32.dp, y = 24.dp)
+private val SHEET_RISE_SHADOW = swiftUiShadow(Color.Black.copy(alpha = 0.55f), radius = 32.dp, y = (-24).dp)
 
 /** The sheet's panel, the dim around it aside. */
 const val SHEET_PANEL = "sheet.panel"

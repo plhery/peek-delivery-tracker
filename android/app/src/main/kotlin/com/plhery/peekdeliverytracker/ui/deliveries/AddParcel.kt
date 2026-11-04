@@ -217,10 +217,11 @@ internal fun AddParcelHost(state: DeliveriesState) {
             onClosed = { state.addClosed(adding) }, dismissible = !saving, content = content,
         )
     } else {
-        // The iPad's form shows no drag indicator: `presentationSizing(.form)` alone.
+        // The iPad's form shows no drag indicator: `presentationSizing(.form)` alone. Over the whole screen on a phone,
+        // Add has no top edge to light.
         Sheet(
             visible = request != null, onDismiss = state::closeAdd, paneTitle = title, detents = listOf(SheetDetent.Large),
-            onClosed = { state.addClosed(adding) }, dismissible = !saving, grabber = false, content = content,
+            onClosed = { state.addClosed(adding) }, dismissible = !saving, grabber = false, lit = true, content = content,
         )
     }
 }
@@ -487,7 +488,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     Column(
         modifier
             .fillMaxSize()
-            .background(colors.background)
+            .background(colors.sheet)
             .then(if (cover) Modifier.windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)) else Modifier)
             .onSizeChanged { viewHeight = it.height },
     ) {
@@ -762,8 +763,8 @@ private fun AnimatedVisibilityScope.Going(content: @Composable () -> Unit) {
 }
 
 /**
- * `heading`: "Add a parcel" in title2 semibold, a heading, and the ✕ on a cream circle 36 across in a 44 square, read
- * "Close", off while Add saves.
+ * `heading`: "Add a parcel" in title2 semibold, a heading, and the ✕ on a circle of the sheet's control 36 across in a
+ * 44 square, read "Close", off while Add saves.
  */
 @Composable
 private fun AddHeading(saving: Boolean, close: () -> Unit, modifier: Modifier = Modifier) {
@@ -793,7 +794,7 @@ private fun AddHeading(saving: Boolean, close: () -> Unit, modifier: Modifier = 
                     .semantics { contentDescription = closeLabel },
                 contentAlignment = Alignment.Center,
             ) {
-                Box(Modifier.size(36.dp).background(colors.cream, CircleShape), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(36.dp).background(colors.sheetControl, CircleShape), contentAlignment = Alignment.Center) {
                     PeekSymbol("xmark", font = type.style(IosTextStyle.Body, FontWeight.Medium), tint = colors.ink.copy(alpha = if (saving) 0.4f else 1f))
                 }
             }
@@ -1215,8 +1216,8 @@ private fun NumberRow(addition: ParcelAddition, number: NumberInText, chosen: Bo
                     }
                 }
             }
-            .background(if (chosen) colors.resolve(ExperimentalPalette.ochreSurface) else colors.paper, shape)
-            .border(if (chosen) 1.5.dp else 1.dp, if (chosen) ochre else colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape)
+            .background(if (chosen) colors.resolve(ExperimentalPalette.ochreSurface) else colors.raised, shape)
+            .border(if (chosen) 1.5.dp else 1.dp, if (chosen) ochre else colors.sheetLine(0.3f), shape)
             .padding(horizontal = 14.dp, vertical = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -1350,7 +1351,7 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
 }
 
 /**
- * `requirementField`: its title in subheadline semibold, "Optional" beside it where it is, the field on the paper with
+ * `requirementField`: its title in subheadline semibold, "Optional" beside it where it is, the field raised with
  * 12-point corners and a hairline, and what it is for under it.
  */
 @Composable
@@ -1367,8 +1368,8 @@ private fun RequirementField(title: String, help: String, optional: Boolean = fa
             Modifier
                 .fillMaxWidth()
                 .height(IntrinsicSize.Min)
-                .background(colors.paper, shape)
-                .border(0.7.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape),
+                .background(colors.raised, shape)
+                .border(0.7.dp, colors.sheetLine(0.3f), shape),
             verticalAlignment = Alignment.CenterVertically,
             content = field,
         )
@@ -1406,7 +1407,7 @@ private fun NameField(form: AddForm, focus: AddFocus, actions: AddActions, addit
 
 /**
  * A field of Add as `drawnField()` draws one: its placeholder in the tertiary grey while it is empty, the cursor in the
- * accent, its text grey while off; [framed], 14 in on the paper with 14-point corners, outlined in ochre while it has
+ * accent, its text grey while off; [framed], 14 in, raised, with 14-point corners, outlined in ochre while it has
  * the focus. TalkBack reads [label] as its name. Its submit key acts ([onSubmit]), as a hardware Return does. It keeps
  * the focus and the keyboard through a window made again. The keyboard offers no suggestions where the field is
  * `.autocorrectionDisabled()`.
@@ -1456,8 +1457,8 @@ private fun AddTextField(
                 .then(
                     if (framed) {
                         Modifier
-                            .background(colors.paper, shape)
-                            .border(1.dp, if (focused) ochre else colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape)
+                            .background(colors.raised, shape)
+                            .border(1.dp, if (focused) ochre else colors.sheetLine(0.3f), shape)
                     } else Modifier,
                 )
                 .padding(14.dp)
@@ -1586,7 +1587,7 @@ private fun AddButton(
     Box(
         modifier
             .fillMaxWidth()
-            .background(colors.background)
+            .background(colors.sheet)
             .then(keyboard),
         contentAlignment = Alignment.TopCenter,
     ) {

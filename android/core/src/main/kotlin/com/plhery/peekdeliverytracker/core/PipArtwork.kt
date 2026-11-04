@@ -66,7 +66,8 @@ object PipArtwork {
 
     /**
      * The carrier's label on the box's right side: its truck, its name in its own colour, a barcode and the tracking
-     * number. The label's paper is light in either appearance, so the name takes the brand's light colour.
+     * number. The label's paper is light in either appearance, so the name takes the brand's light colour and the truck
+     * its light paints.
      */
     fun label(context: MapDrawingContext, label: PipLabel) {
         val measures = PipGeometry.Label
@@ -81,7 +82,7 @@ object PipArtwork {
         val truck = paper.copy()
         truck.translateBy(measures.truck.x, measures.truck.y)
         truck.scaleBy(0.5, 0.5)
-        truck.draw(CarrierTruckGeometry.draw(label.identity))
+        truck.draw(CarrierTruckGeometry.draw(label.identity, dark = false))
         val name = MapFont(measures.NAME_SIZE, MapFont.Weight.Heavy, italic = label.identity.family == "dhl")
         paper.text(label.identity.name, name, AdaptiveColor(RgbaColor.hex(label.identity.colors[4])), measures.nameStart, measures.nameRoom)
         val bars = MapPath()

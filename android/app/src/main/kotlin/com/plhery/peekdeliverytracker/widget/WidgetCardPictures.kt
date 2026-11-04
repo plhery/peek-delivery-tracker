@@ -194,7 +194,7 @@ class WidgetCardPictures(
             .copy(color = identity.brand.resolve(dark).toColor())
         val measurer = TextMeasurer(createFontFamilyResolver(context), density, LayoutDirection.Ltr)
         val text = measurer.measure(identity.name + if (identity.family == "gls") "." else "", style, softWrap = false)
-        val truck = CarrierTruckGeometry.draw(identity)
+        val truck = CarrierTruckGeometry.draw(identity, dark)
         val textWidth = text.size.width / scale
         val textHeight = text.size.height / scale
         val height = maxOf(TRUCK_HEIGHT, textHeight)

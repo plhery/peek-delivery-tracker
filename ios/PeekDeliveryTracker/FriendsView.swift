@@ -111,7 +111,7 @@ struct FriendsView: View {
                         sheetContent(value)
                     }.padding(24)
                 }
-                .background(Brand.background)
+                .sheetGround()
                 .navigationTitle(value.title(localizer)).navigationBarTitleDisplayMode(.inline)
                 .toolbar { ToolbarItem(placement: .confirmationAction) { Button(text("common.close")) { panel = nil; model.errorKey = nil }.disabled(model.working) } }
             }
@@ -348,7 +348,7 @@ struct FriendsProfileForm: View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(localizer.text("friends.nickname")).font(.subheadline.weight(.semibold))
-                TextField(localizer.text("friends.nicknamePlaceholder"), text: $name).textContentType(.nickname).padding(14).background(Brand.paper, in: RoundedRectangle(cornerRadius: 14))
+                TextField(localizer.text("friends.nicknamePlaceholder"), text: $name).textContentType(.nickname).padding(14).background(Brand.raised, in: RoundedRectangle(cornerRadius: 14))
                     .drawnField()
                     .focused($nameFocused).submitLabel(.done).onSubmit { nameFocused = false }
                     .onChange(of: name) { _, next in
@@ -546,7 +546,7 @@ private struct FriendDetailView: View {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text(localizer.text(value.titleKey)).font(.headline)
                                     Text(localizer.text(value.explanationKey) + progress(value, earned: earned, count: stats.deliveredCount)).font(.subheadline).foregroundStyle(.secondary)
-                                }.fixedSize(horizontal: false, vertical: true).frame(idealWidth: 260, maxWidth: 280, alignment: .leading).padding(20).foregroundStyle(Brand.ink).presentationBackground(Brand.paper).presentationCompactAdaptation(.popover)
+                                }.fixedSize(horizontal: false, vertical: true).frame(idealWidth: 260, maxWidth: 280, alignment: .leading).padding(20).foregroundStyle(Brand.ink).presentationBackground(Brand.raised).presentationCompactAdaptation(.popover)
                             }
                     }
                 }

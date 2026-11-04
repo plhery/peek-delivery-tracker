@@ -106,7 +106,7 @@ struct AddParcelView: View {
                 .scrollIndicators(.hidden)
                 .scrollDismissesKeyboard(.interactively)
             }
-            .background(Brand.background)
+            .sheetGround()
             .toolbar(.hidden, for: .navigationBar)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 primaryAction
@@ -227,7 +227,7 @@ struct AddParcelView: View {
                 Image(systemName: "xmark")
                     .font(.body.weight(.medium))
                     .frame(width: 36, height: 36)
-                    .background(Brand.cream, in: Circle())
+                    .background(Brand.sheetControl, in: Circle())
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
             }
@@ -269,10 +269,10 @@ struct AddParcelView: View {
                     if value.count > 80 { label = String(value.prefix(80)) }
                 }
                 .padding(14)
-                .background(Brand.paper, in: RoundedRectangle(cornerRadius: 14))
+                .background(Brand.raised, in: RoundedRectangle(cornerRadius: 14))
                 .overlay {
                     RoundedRectangle(cornerRadius: 14)
-                        .strokeBorder(focusedField == .label ? ExperimentalPalette.ochre : Brand.separator.opacity(0.3), lineWidth: 1)
+                        .strokeBorder(focusedField == .label ? ExperimentalPalette.ochre : Brand.sheetLine(0.3), lineWidth: 1)
                 }
         }
         .foregroundStyle(Brand.ink)
@@ -329,10 +329,10 @@ struct AddParcelView: View {
                 if !several.contains(where: { $0.normalized == pick }) { pick = nil }
             }
             .padding(14)
-            .background(Brand.paper, in: RoundedRectangle(cornerRadius: 14))
+            .background(Brand.raised, in: RoundedRectangle(cornerRadius: 14))
             .overlay {
                 RoundedRectangle(cornerRadius: 14)
-                    .strokeBorder(focusedField == .tracking ? ExperimentalPalette.ochre : Brand.separator.opacity(0.3), lineWidth: 1)
+                    .strokeBorder(focusedField == .tracking ? ExperimentalPalette.ochre : Brand.sheetLine(0.3), lineWidth: 1)
             }
 
             if parsed.trackingNumber.isEmpty && !cleanedInput.isEmpty && order == nil {
@@ -546,8 +546,8 @@ struct AddParcelView: View {
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
             .frame(minHeight: 56)
-            .background(chosen ? ExperimentalPalette.ochreSurface : Brand.paper, in: shape)
-            .overlay(shape.strokeBorder(chosen ? ExperimentalPalette.ochre : Brand.separator.opacity(0.3), lineWidth: chosen ? 1.5 : 1))
+            .background(chosen ? ExperimentalPalette.ochreSurface : Brand.raised, in: shape)
+            .overlay(shape.strokeBorder(chosen ? ExperimentalPalette.ochre : Brand.sheetLine(0.3), lineWidth: chosen ? 1.5 : 1))
             .contentShape(shape)
         }
         .buttonStyle(TactileButtonStyle(scale: 0.98))
@@ -745,8 +745,8 @@ struct AddParcelView: View {
                 }
             }
             field()
-                .background(Brand.paper, in: RoundedRectangle(cornerRadius: 12))
-                .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Brand.separator.opacity(0.3), lineWidth: 0.7))
+                .background(Brand.raised, in: RoundedRectangle(cornerRadius: 12))
+                .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Brand.sheetLine(0.3), lineWidth: 0.7))
             Text(help)
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -785,7 +785,7 @@ struct AddParcelView: View {
             .padding(.vertical, 16)
             .frame(maxWidth: 560)
             .frame(maxWidth: .infinity)
-            .background(Brand.background)
+            .background(Brand.sheet)
     }
 
     private var addButton: some View {
@@ -1535,7 +1535,7 @@ struct ParcelFilterView: View {
             // Sections as iOS draws them, rather than a label beside each picker, on the app's paper rather than the
             // popover's glass; a popover closes on a click outside it.
             .formStyle(.grouped)
-            .presentationBackground(Brand.background)
+            .presentationBackground(Brand.sheet)
             #else
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

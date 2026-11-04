@@ -447,7 +447,13 @@ private struct DeliveryListView: View {
         .onChange(of: sort) { _, _ in DeliveryAnalytics.shared.action("sort-change") }
         .onChange(of: archivedExpanded) { _, open in if open { DeliveryAnalytics.shared.action("archive-open") } }
         .sensoryFeedback(.success, trigger: parcelBurstID) { _, next in next != nil }
-        .fullScreenCover(isPresented: addShown(asForm: false), onDismiss: addClosed) { addParcel }
+        .fullScreenCover(isPresented: addShown(asForm: false), onDismiss: addClosed) {
+            addParcel
+                #if os(iOS)
+                // Over the whole screen, Add has no top edge to light.
+                .environment(\.sheetEdgeLit, false)
+                #endif
+        }
         .sheet(isPresented: addShown(asForm: true), onDismiss: addClosed) { addParcel.presentationSizing(.form) }
         .onChange(of: showingAdd) { _, showing in
             adding = showing

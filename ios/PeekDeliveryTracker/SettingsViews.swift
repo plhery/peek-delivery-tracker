@@ -217,7 +217,7 @@ struct NotificationSettingsView: View {
             .frame(maxWidth: 520)
             .frame(maxWidth: .infinity)
         }
-        .background(Brand.background)
+        .sheetGround()
         // One save at a time: a preset saved while the email switch waits could undo its answer.
         .disabled(working || emailChoice != nil)
         .navigationTitle(localizer.text("settings.deliveryUpdates"))
@@ -452,7 +452,7 @@ struct AccountView: View {
             .frame(maxWidth: 520)
             .frame(maxWidth: .infinity)
         }
-        .background(Brand.background)
+        .sheetGround()
         .disabled(working)
         .sheet(isPresented: $showingHomePage) {
             SafariPage(url: session.configuration.homePageURL)
@@ -514,7 +514,7 @@ struct AccountView: View {
                 .frame(maxWidth: 520)
                 .frame(maxWidth: .infinity)
             }
-            .background(Brand.background)
+            .sheetGround()
             .navigationTitle(localizer.text("settings.title"))
             .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $showingHomePage) {
@@ -613,8 +613,8 @@ struct AccountView: View {
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Brand.paper, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-        .overlay { RoundedRectangle(cornerRadius: 18, style: .continuous).strokeBorder(Brand.separator.opacity(0.3), lineWidth: 0.75) }
+        .background(Brand.raised, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay { RoundedRectangle(cornerRadius: 18, style: .continuous).strokeBorder(Brand.sheetLine(0.3), lineWidth: 0.75) }
     }
 
     private var account: some View {
@@ -646,7 +646,7 @@ struct AccountView: View {
             .frame(maxWidth: 520)
             .frame(maxWidth: .infinity)
         }
-        .background(Brand.background)
+        .sheetGround()
         .disabled(working)
         .interactiveDismissDisabled(working)
         .navigationTitle(accountTitle)
@@ -772,7 +772,7 @@ private extension String {
 
 
 private let settingsGreen = Brand.color(light: "#688363", dark: "#97B084")
-private var settingsDivider: some View { Rectangle().fill(Brand.separator.opacity(0.25)).frame(height: 0.5) }
+private var settingsDivider: some View { Rectangle().fill(Brand.sheetLine(0.25)).frame(height: 0.5) }
 
 private struct SettingsGroup<Content: View>: View {
     var title: String? = nil
@@ -799,8 +799,8 @@ private struct SettingsGroup<Content: View>: View {
             }
             VStack(spacing: 0) { content }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Brand.paper, in: RoundedRectangle(cornerRadius: 16))
-                .overlay(RoundedRectangle(cornerRadius: 16).stroke(Brand.separator.opacity(0.25), lineWidth: 0.5))
+                .background(Brand.raised, in: RoundedRectangle(cornerRadius: 16))
+                .overlay(RoundedRectangle(cornerRadius: 16).stroke(Brand.sheetLine(0.25), lineWidth: 0.5))
         }
     }
 }
@@ -906,8 +906,8 @@ private struct SettingsAppearancePicker: View {
                         }
                         .padding(.vertical, 10)
                         .frame(maxWidth: .infinity)
-                        .background(Brand.background, in: RoundedRectangle(cornerRadius: 12))
-                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(appearance == option ? settingsGreen : Brand.separator.opacity(0.25), lineWidth: appearance == option ? 1.5 : 0.5))
+                        .background(Brand.sheet, in: RoundedRectangle(cornerRadius: 12))
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(appearance == option ? settingsGreen : Brand.sheetLine(0.25), lineWidth: appearance == option ? 1.5 : 0.5))
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(localizer.text(option.titleKey))
@@ -969,6 +969,8 @@ struct SettingsWindow: View {
             }
         }
         .frame(width: 560)
+        // The Account sheet's ground, under the window's toolbar rather than a sheet's edge.
+        .environment(\.sheetEdgeLit, false)
     }
 }
 
@@ -1017,7 +1019,7 @@ private struct GeneralSettings: View {
         .padding(24)
         .frame(maxWidth: 520)
         .frame(maxWidth: .infinity)
-        .background(Brand.background)
+        .sheetGround()
         // The person may change it in System Settings meanwhile.
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             login = SMAppService.mainApp.status

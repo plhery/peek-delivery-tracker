@@ -22,7 +22,7 @@ struct ParcelLinkSheet: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                ExperimentalBackdrop()
+                SheetGround()
                 switch links.phase {
                 case .loading:
                     ProgressView().controlSize(.large)
@@ -36,6 +36,7 @@ struct ParcelLinkSheet: View {
                     failed(failure)
                 }
             }
+            .environment(\.inSheet, true)
             .parcelFeedback(feedback, busy: adding)
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
@@ -292,7 +293,7 @@ struct ParcelLinkSheet: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Brand.paper, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .background(Brand.raised, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 
     private func note(_ text: String) -> some View {

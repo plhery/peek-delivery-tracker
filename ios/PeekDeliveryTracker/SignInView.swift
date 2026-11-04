@@ -994,7 +994,7 @@ private struct FriendInvitationAcceptanceView: View {
                     }.padding(24).frame(maxWidth: 520).frame(maxWidth: .infinity)
                 }
                 .scrollDismissesKeyboard(.interactively)
-                .background(Brand.background)
+                .sheetGround()
                 .navigationTitle(localizer.text(editingProfile ? "friends.settings" : "friends.enable")).navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {

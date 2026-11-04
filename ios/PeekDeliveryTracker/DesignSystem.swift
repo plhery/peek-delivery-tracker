@@ -19,7 +19,7 @@ enum Brand {
     static let ink = color(light: "#20251E", dark: "#FAF6EB")
     static let inkSoft = color(light: "#657060", dark: "#C2BAAA")
     /// The system's secondary grey, a little darker in light and lighter in dark: it reads at 4.5:1 or more on the page,
-    /// the paper, the cream and every carrier's card (`ContrastTests`).
+    /// the paper, the cream, a sheet's grounds and every carrier's card (`ContrastTests`).
     static let secondaryText = color(light: "#606065", dark: "#BCBCC2")
     static let cream = color(light: "#F0F0E9", dark: "#292620")
     static let paper = color(light: "#FFFFFF", dark: "#1F1C17")
@@ -31,9 +31,53 @@ enum Brand {
     static let background = color(light: "#F4F5F1", dark: "#13110E")
     static let separator = Color(uiColor: .separator)
 
+    // A sheet stands one step up from the page in dark: a ground of its own under raised rows, with its own controls
+    // and lines (the web's `--sheet-*`). The ground is no brighter than the old dark page, so its words keep their
+    // contrast. In light each is the page's own colour.
+    static let sheet = color(light: "#F4F5F1", dark: "#1A1713")
+    /// A control in a sheet, where the page has the cream.
+    static let sheetControl = color(light: "#F0F0E9", dark: "#36322C")
+    /// A sheet's round buttons and its copy button: the ink at 7% in light, as on the page, and the control in dark.
+    static let sheetButton = keeping(PlatformColor(ink), opacity: 0.07, dark: "#36322C", name: "ink")
+
+    /// A line in a sheet: the system's separator at `opacity` in light, as on the page, and one solid line in dark.
+    static func sheetLine(_ opacity: Double) -> Color {
+        keeping(.separator, opacity: opacity, dark: "#4A463E", name: "separator")
+    }
+
     /// Cards ask for carrier colors on every render. Returning the same dynamic
     /// color each time lets SwiftUI see that nothing changed.
     private static let dynamicColors = NSCache<NSString, PlatformColor>()
+
+    /// `light` at `opacity` in light, resolved as the page resolves it, and `dark` in dark: a sheet keeps the page's
+    /// translucent fills and lines in light and has solid ones in dark.
+    private static func keeping(_ light: PlatformColor, opacity: Double, dark: String, name: String) -> Color {
+        let key = "\(name)@\(opacity)|\(dark)" as NSString
+        if let cached = dynamicColors.object(forKey: key) { return Color(uiColor: cached) }
+        let darkColor = PlatformColor(Color(hex: dark))
+        #if os(macOS)
+        let dynamic = NSColor(name: nil) { appearance in
+            let match = appearance.bestMatch(from: [
+                .aqua, .darkAqua, .accessibilityHighContrastAqua, .accessibilityHighContrastDarkAqua,
+            ])
+            if match == .darkAqua { return darkColor }
+            if match == .accessibilityHighContrastDarkAqua { return darkColor.usingColorSpace(.sRGB).map(contrasted) ?? darkColor }
+            var resolved = light
+            appearance.performAsCurrentDrawingAppearance { resolved = light.usingColorSpace(.sRGB) ?? light }
+            return resolved.withAlphaComponent(resolved.alphaComponent * opacity)
+        }
+        #else
+        let dynamic = UIColor { traits in
+            guard traits.userInterfaceStyle == .dark else {
+                let resolved = light.resolvedColor(with: traits)
+                return resolved.withAlphaComponent(resolved.cgColor.alpha * opacity)
+            }
+            return traits.accessibilityContrast == .high ? contrasted(darkColor) : darkColor
+        }
+        #endif
+        dynamicColors.setObject(dynamic, forKey: key)
+        return Color(uiColor: dynamic)
+    }
 
     static func color(light: String, dark: String) -> Color {
         let key = "\(light)|\(dark)" as NSString
@@ -315,6 +359,27 @@ struct KeyboardShortcuts<Content: View>: View {
 extension EnvironmentValues {
     /// Whether the keyboard acts on the screen: its tab is the one chosen, and nothing of the app's stands over it.
     @Entry var keyboardInFront = true
+    /// In a sheet, cards stand on the raised level rather than the paper. Views the page shows too ask.
+    @Entry var inSheet = false
+    /// Whether a sheet's top edge is lit. Not where it covers the whole screen, as Add does on a phone, nor in a Mac's
+    /// Settings window, under its toolbar.
+    @Entry var sheetEdgeLit = true
+}
+
+/// A sheet's ground. In dark a lamp catches its top edge: one point of warm light, as on the web's sheets.
+struct SheetGround: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.sheetEdgeLit) private var lit
+
+    var body: some View {
+        Brand.sheet
+            .overlay(alignment: .top) {
+                if lit && colorScheme == .dark {
+                    Color(red: 1, green: 244 / 255, blue: 220 / 255).opacity(0.09).frame(height: 1)
+                }
+            }
+            .ignoresSafeArea()
+    }
 }
 
 #if os(macOS)
@@ -422,6 +487,11 @@ extension View {
             presentationDetents(detents)
         }
         #endif
+    }
+
+    /// Stands what a sheet shows on the sheet's ground, and tells the views in it that they are in a sheet.
+    func sheetGround() -> some View {
+        background { SheetGround() }.environment(\.inSheet, true)
     }
 
     @ViewBuilder

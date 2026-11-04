@@ -12,6 +12,8 @@ struct ParcelFeedbackQuestionView: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var typeSize
+    /// A shared parcel's sheet asks it too, on the sheet's raised level.
+    @Environment(\.inSheet) private var inSheet
     /// It comes in once it is scrolled to.
     @State private var arrived = false
     /// Pip hops each time an answer is taken.
@@ -128,9 +130,9 @@ struct ParcelFeedbackQuestionView: View {
         .padding(.trailing, offering ? 12 : 8)
         .padding(.vertical, offering ? 12 : 8)
         .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
-        .background(Brand.paper, in: shape)
+        .background(inSheet ? Brand.raised : Brand.paper, in: shape)
         .clipShape(shape)
-        .overlay(shape.strokeBorder(Brand.separator.opacity(0.6)))
+        .overlay(shape.strokeBorder(inSheet ? Brand.sheetLine(0.6) : Brand.separator.opacity(0.6)))
         .shadow(color: .black.opacity(0.04), radius: 1, y: 1)
     }
 
@@ -298,6 +300,8 @@ private struct FeedbackPill: View {
     var onControl = false
     let action: () -> Void
 
+    @Environment(\.inSheet) private var inSheet
+
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: 12, style: .continuous)
         Button(action: action) {
@@ -307,8 +311,8 @@ private struct FeedbackPill: View {
                 .padding(.horizontal, 14)
                 .padding(.vertical, 6)
                 .frame(minHeight: 36)
-                .background(onControl ? Brand.paper : Brand.ink.opacity(0.07), in: shape)
-                .overlay { if onControl { shape.strokeBorder(Brand.separator.opacity(0.6)) } }
+                .background(onControl ? (inSheet ? Brand.raised : Brand.paper) : Brand.ink.opacity(0.07), in: shape)
+                .overlay { if onControl { shape.strokeBorder(inSheet ? Brand.sheetLine(0.6) : Brand.separator.opacity(0.6)) } }
                 // 44 pt to the touch, in the room of 36.
                 .padding(.vertical, 4)
                 .contentShape(Rectangle())
@@ -526,8 +530,8 @@ private struct ParcelFeedbackWordsSheet: View {
                 .padding(.horizontal, 14)
                 .padding(.vertical, 10)
                 .frame(minHeight: 44)
-                .background(on ? ExperimentalPalette.ochreSurface : Brand.paper, in: shape)
-                .overlay(shape.strokeBorder(on ? ExperimentalPalette.ochre : Brand.separator.opacity(0.6), lineWidth: on ? 1.5 : 1))
+                .background(on ? ExperimentalPalette.ochreSurface : Brand.raised, in: shape)
+                .overlay(shape.strokeBorder(on ? ExperimentalPalette.ochre : Brand.sheetLine(0.6), lineWidth: on ? 1.5 : 1))
                 .contentShape(shape)
         }
         .buttonStyle(TactileButtonStyle(scale: 0.97))
@@ -631,7 +635,7 @@ private struct FeedbackSheet<Content: View>: View {
                         Image(systemName: "xmark")
                             .font(.system(size: 13, weight: .semibold))
                             .frame(width: 36, height: 36)
-                            .background(Brand.ink.opacity(0.07), in: Circle())
+                            .background(Brand.sheetButton, in: Circle())
                             .frame(width: 44, height: 44)
                             .contentShape(Circle())
                     }
@@ -650,12 +654,12 @@ private struct FeedbackSheet<Content: View>: View {
         }
         .scrollBounceBehavior(.basedOnSize)
         .scrollDismissesKeyboard(.interactively)
-        .background(Brand.background)
+        .sheetGround()
         .tint(Brand.ink)
         .environment(\.locale, localizer.language.locale)
         .fittedSheet(height: contentHeight, detent: $detent)
         .presentationDragIndicator(.visible)
-        .presentationBackground(Brand.background)
+        .presentationBackground(Brand.sheet)
         .interactiveDismissDisabled(busy)
         .onChange(of: fitted, initial: true) { _, fitted in
             if detent != .large { detent = fitted }
@@ -688,8 +692,8 @@ private struct FeedbackField<Input: View>: View {
                 .padding(.horizontal, 14)
                 .padding(.vertical, 12)
                 .frame(minHeight: 50)
-                .background(Brand.paper, in: shape)
-                .overlay(shape.strokeBorder(focused ? ExperimentalPalette.ochre : Brand.separator.opacity(0.6), lineWidth: focused ? 1.5 : 1))
+                .background(Brand.raised, in: shape)
+                .overlay(shape.strokeBorder(focused ? ExperimentalPalette.ochre : Brand.sheetLine(0.6), lineWidth: focused ? 1.5 : 1))
                 .contentShape(shape)
                 .onTapGesture(perform: focus)
         }

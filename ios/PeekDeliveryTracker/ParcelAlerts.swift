@@ -35,12 +35,12 @@ struct ParcelAlertsSheet: View {
             }
         }
         .scrollBounceBehavior(.basedOnSize)
-        .background(Brand.background)
+        .sheetGround()
         .tint(Brand.ink)
         .environment(\.locale, localizer.language.locale)
         .fittedSheet(height: contentHeight, detent: $detent)
         .presentationDragIndicator(.visible)
-        .presentationBackground(Brand.background)
+        .presentationBackground(Brand.sheet)
         .onChange(of: fitted, initial: true) { _, fitted in
             if detent != .large { detent = fitted }
         }
@@ -117,7 +117,7 @@ struct ParcelAlertSwitches: View {
                 Image(systemName: "xmark")
                     .font(.system(size: 13, weight: .semibold))
                     .frame(width: 36, height: 36)
-                    .background(Brand.ink.opacity(0.07), in: Circle())
+                    .background(Brand.sheetButton, in: Circle())
                     .frame(width: 44, height: 44)
                     .contentShape(Circle())
             }
@@ -154,7 +154,7 @@ struct ParcelAlertSwitches: View {
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
         .frame(minHeight: 60)
-        .background(Brand.paper, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Brand.raised, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     private var doneButton: some View {

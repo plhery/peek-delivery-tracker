@@ -54,12 +54,12 @@ struct ParcelShareSheet: View {
         }
         .scrollBounceBehavior(.basedOnSize)
         .scrollDismissesKeyboard(.interactively)
-        .background(Brand.background)
+        .sheetGround()
         .tint(Brand.ink)
         .environment(\.locale, localizer.language.locale)
         .fittedSheet(height: contentHeight, detent: $detent)
         .presentationDragIndicator(.visible)
-        .presentationBackground(Brand.background)
+        .presentationBackground(Brand.sheet)
         .interactiveDismissDisabled(model.working)
         .onChange(of: fitted, initial: true) { _, fitted in
             if detent != .large { detent = fitted }
@@ -124,7 +124,7 @@ struct ParcelShareSheet: View {
                 Image(systemName: "xmark")
                     .font(.system(size: 13, weight: .semibold))
                     .frame(width: 36, height: 36)
-                    .background(Brand.ink.opacity(0.07), in: Circle())
+                    .background(Brand.sheetButton, in: Circle())
                     .frame(width: 44, height: 44)
                     .contentShape(Circle())
             }
@@ -183,11 +183,11 @@ struct ParcelShareSheet: View {
             hairline
             switchRow(symbol: "gift", title: localizer.text("share.gift.title"), isOn: binding(.gift))
         }
-        .background(Brand.paper, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Brand.raised, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     private var hairline: some View {
-        Rectangle().fill(Brand.separator.opacity(0.5)).frame(height: 1)
+        Rectangle().fill(Brand.sheetLine(0.5)).frame(height: 1)
     }
 
     /// Sharing was stopped: the link shows nothing, and sharing again makes a new one.
@@ -231,7 +231,7 @@ struct ParcelShareSheet: View {
                     .font(.footnote.weight(.semibold))
                     .padding(.horizontal, 14)
                     .frame(minHeight: 44)
-                    .background(Brand.ink.opacity(0.07), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .background(Brand.sheetButton, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                     .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
             }
             .buttonStyle(TactileButtonStyle())
@@ -242,8 +242,8 @@ struct ParcelShareSheet: View {
         .padding(.vertical, 6)
         .padding(.top, stacked ? 6 : 0)
         .frame(minHeight: 56)
-        .background(Brand.paper, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).strokeBorder(Brand.separator.opacity(0.6)))
+        .background(Brand.raised, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).strokeBorder(Brand.sheetLine(0.6)))
     }
 
     private func switchRow(symbol: String, title: String, value: String? = nil, isOn: Binding<Bool>) -> some View {
@@ -313,7 +313,7 @@ struct ParcelShareSheet: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(14)
-        .background(Brand.paper, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Brand.raised, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     private func wordsField(_ label: String, _ which: WordsField, @ViewBuilder field: () -> some View) -> some View {
@@ -325,7 +325,7 @@ struct ParcelShareSheet: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, 10)
                 .frame(minHeight: 44)
-                .background(Brand.background, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .background(Brand.sheet, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         }
     }
 

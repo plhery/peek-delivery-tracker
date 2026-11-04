@@ -322,7 +322,8 @@ struct PassportView: View {
         .frame(idealWidth: 260, maxWidth: 280, alignment: .leading)
         .padding(20)
         .foregroundStyle(Brand.ink)
-        .presentationBackground(Brand.paper)
+        // One step up from the page's paper, as a sheet's rows are.
+        .presentationBackground(Brand.raised)
         .presentationCompactAdaptation(.popover)
     }
 

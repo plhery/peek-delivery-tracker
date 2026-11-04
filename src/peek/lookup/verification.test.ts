@@ -73,17 +73,54 @@ it('recovers after verification fails without retaining a bad token', async () =
   await expect(second).resolves.toBe('verified-proof');
 });
 
-it('retries only an explicit verification refusal, preserving the request and signal', async () => {
-  const request = vi.fn().mockResolvedValueOnce(new Response(null, { status: 403, headers: { 'X-Lookup-Verification': 'required' } }))
-    .mockResolvedValueOnce(Response.json({ trackingNumber: 'TEST123456', carrier: 'unknown' }));
+it('waits for the page verification instead of sending a request it would refuse', async () => {
+  const request = vi.fn().mockResolvedValue(Response.json({ trackingNumber: 'TEST123456', carrier: 'unknown' }));
   const answer = createApiLinks(request).detectCarrierPublic('TEST123456');
   await complete();
   await expect(answer).resolves.toMatchObject({ carrier: 'unknown' });
-  expect(request).toHaveBeenCalledTimes(2);
-  expect(request.mock.calls[1]![1]).toMatchObject({ credentials: 'omit', headers: { 'X-Lookup-Proof': 'verified-proof' }, body: JSON.stringify({ trackingNumber: 'TEST123456' }) });
+  expect(request).toHaveBeenCalledTimes(1);
+  expect(request.mock.calls[0]![1]).toMatchObject({ credentials: 'omit', headers: { 'X-Lookup-Proof': 'verified-proof' }, body: JSON.stringify({ trackingNumber: 'TEST123456' }) });
+});
+
+it('sends without a proof when the server verifies no one, asking it once', async () => {
+  vi.mocked(fetch).mockImplementation(async () => Response.json({ siteKey: null }));
+  const request = vi.fn().mockImplementation(async () => Response.json({ trackingNumber: 'TEST123456', carrier: 'unknown' }));
+  const links = createApiLinks(request);
+  await links.detectCarrierPublic('TEST123456');
+  await links.detectCarrierPublic('TEST123456');
+  expect(request.mock.calls.map(([, init]) => (init as RequestInit & { headers: Record<string, string> }).headers['X-Lookup-Proof']))
+    .toEqual([undefined, undefined]);
+  expect(fetch).toHaveBeenCalledTimes(1);
+  expect(window.turnstile?.render).not.toHaveBeenCalled();
+});
+
+it('sends without a proof after verification fails, and does not verify a refusal again', async () => {
+  const request = vi.fn().mockImplementation(async () => required());
+  const answer = createApiLinks(request).detectCarrierPublic('TEST123456');
+  const failure = expect(answer).rejects.toThrow('verification');
+  await vi.waitFor(() => expect(window.turnstile?.render).toHaveBeenCalled());
+  (options['error-callback'] as () => void)();
+  await failure;
+  expect(request).toHaveBeenCalledTimes(1);
+  expect((request.mock.calls[0]![1] as RequestInit & { headers: Record<string, string> }).headers['X-Lookup-Proof']).toBeUndefined();
+  expect(window.turnstile?.render).toHaveBeenCalledTimes(1);
+});
+
+it('drops a proof the server refuses right after verifying, without verifying again', async () => {
+  const request = vi.fn().mockImplementation(async () => required());
+  const answer = createApiLinks(request).detectCarrierPublic('TEST123456');
+  const failure = expect(answer).rejects.toThrow('verification');
+  await complete();
+  await failure;
+  expect(request).toHaveBeenCalledTimes(1);
+  expect(window.turnstile?.render).toHaveBeenCalledTimes(1);
+  expect(lookupProof()).toBeNull();
+  expect(saved()).toBeNull();
 });
 
 it('does not loop or resend writes for ordinary forbidden responses', async () => {
+  // A page without verification sends what it has.
+  mounted.dispose();
   const request = vi.fn().mockResolvedValue(Response.json({ error: 'Forbidden' }, { status: 403 }));
   await expect(createApiLinks(request).detectCarrierPublic('TEST123456')).rejects.toThrow();
   expect(request).toHaveBeenCalledTimes(1);
@@ -144,6 +181,7 @@ it('forgets a refused saved proof and saves the one that replaces it', async () 
     await expect(answer).resolves.toMatchObject({ carrier: 'unknown' });
     expect(request.mock.calls.map(([, init]) => (init as RequestInit & { headers: Record<string, string> }).headers['X-Lookup-Proof']))
       .toEqual(['refused-proof', 'verified-proof']);
+    expect(request.mock.calls[1]![1]).toMatchObject({ credentials: 'omit', body: JSON.stringify({ trackingNumber: 'TEST123456' }) });
     expect(saved()).toMatchObject({ proof: 'verified-proof' });
   } finally {
     verifier.dispose();
@@ -151,6 +189,7 @@ it('forgets a refused saved proof and saves the one that replaces it', async () 
 });
 
 it('drops a saved proof the server refuses again after verifying', async () => {
+  sessionStorage.setItem(PROOF_KEY, JSON.stringify({ proof: 'refused-proof', expiresAt: Date.now() + 600_000 }));
   const page = await reloaded();
   const verifier = page.mountLookupVerification(document.createElement('div'), 'en');
   try {

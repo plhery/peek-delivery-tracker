@@ -55,6 +55,11 @@ export function forgetLookupProof(rejected: string | null): void {
   if (rejected !== null && current()?.proof === rejected) keep(null);
 }
 
+/** Whether this page runs verification: a lookup form has mounted it. */
+export function canVerifyLookup(): boolean {
+  return verify !== null;
+}
+
 export async function getLookupProof(signal?: AbortSignal): Promise<string | null> {
   signal?.throwIfAborted();
   if (lookupProof()) return lookupProof();
@@ -97,15 +102,18 @@ export function mountLookupVerification(container: HTMLElement, language: string
   let widget: string | null = null;
   let pending: Promise<string | null> | null = null;
   let cancel: (() => void) | null = null;
+  /** The server verifies no one: asked once per page. */
+  let unprotected = false;
 
   async function start(): Promise<string | null> {
     if (lookupProof()) return lookupProof();
+    if (unprotected) return null;
     const configResponse = await fetch('/api/public/verification', {
       credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer', signal: AbortSignal.timeout(8_000),
     });
     if (!configResponse.ok) throw new LookupVerificationError();
     const configuration = await configResponse.json() as { siteKey?: unknown };
-    if (configuration.siteKey === null) return null;
+    if (configuration.siteKey === null) { unprotected = true; return null; }
     if (typeof configuration.siteKey !== 'string' || !configuration.siteKey) throw new LookupVerificationError();
     await loadScript();
     if (disposed || !window.turnstile) throw new LookupVerificationError();

@@ -7,7 +7,7 @@ tuning protection. Client lookup failures remain in the existing parcel-lookup
 analytics event; `public_lookup` logs how each lookup ended on the server.
 Configuration belongs in [DEPLOYMENT.md](DEPLOYMENT.md).
 `lookup_proof` logs each refused proof with its `reason`: `missing` (none sent,
-as when a page asks before its verification has finished), `malformed`,
+as an app's first try before it verifies; the web waits for its check), `malformed`,
 `bad_signature` (another hostname, a changed `TURNSTILE_SECRET_KEY`, or
 tampering), `expired` or `too_many_networks`. It logs `moved` when a proof first
 works on another network. Each line has the request `kind`, the address family

@@ -13,9 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.BlurEffect
@@ -27,7 +25,6 @@ import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.GraphicsContext
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.RenderEffect
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.TileMode
@@ -37,7 +34,6 @@ import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
-import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.compose.ui.graphics.layer.drawLayer
@@ -427,9 +423,10 @@ fun glassShadow(minDimension: Float): Shadow {
  * sides darker and the middle of its bottom clear, and a glow under its top edge adds white at up to 8 % (deviation 4).
  * Dark takes the same, unmeasured, as CoreAnimation sets the light's amounts the same in both.
  *
- * The lens and the luminance ceiling are a runtime shader from Android 13. Android 12 draws the lens as the face
- * mirrored about the band's inner line along each side, the band split on the shape's diagonals, and holds each
- * channel to the ceiling, which dulls bright colours in dark.
+ * The lens and the luminance ceiling are a runtime shader from Android 13. Android 12, which has no runtime shaders,
+ * draws no lens, the face reaching the edge as it is: the face drawn again mirrored along each side, each copy clipped
+ * to its own path, would cost more than the rest of the glass. It holds each channel to the ceiling, which dulls
+ * bright colours in dark.
  *
  * It is drawn solid, the face over `behind` (the page's background) with no lens, where there is no backdrop, and
  * under Reduce Transparency ([PeekTheme.reduceTransparency]), whose face is all but opaque on the iPhone too. Increase
@@ -462,8 +459,8 @@ fun GlassSurface(
                     hazeStyle(gaussianBlurRadius(GLASS_BLUR.dp), filter, recipe.over(behind, 0f), behind)
                 }
                 // The face reaches GLASS_MARGIN past the shape; the drawing clips it to the shape. It blurs the marked
-                // content: a backdrop input samples what lies behind where it is drawn, and Android 12 draws the face
-                // again for the lens.
+                // content: a backdrop input samples what lies behind where it is drawn, which the face's layer,
+                // recorded for the lens's shader, would not hold.
                 Box(Modifier.pastTheEdge().hazeBlur(blurred.sources, style, expandLayerBounds = false))
             }
         }
@@ -563,11 +560,6 @@ private class GlassNode(private var shape: Shape, private var recipe: GlassRecip
             layers.face.record(geometry.faceSize) { translate(margin, margin) { this@draw.drawContent() } }
             clipPath(geometry.path) {
                 drawLayer(layers.face)
-                val bands = geometry.bands
-                for (index in bands.indices) {
-                    val band = bands[index]
-                    clipPath(band.clip) { scale(band.scaleX, band.scaleY, band.pivot) { drawLayer(layers.face) } }
-                }
                 if (geometry.ceiling != null) drawRect(geometry.ceiling, blendMode = BlendMode.Darken)
             }
         }
@@ -589,9 +581,9 @@ private class GlassLayers(private val context: GraphicsContext) {
 }
 
 /**
- * What a glass of one size draws: its outline, the face's size past it, the lens (a shader set on [GlassLayers.face],
- * or [bands] on Android 12), the ceiling Android 12 darkens to, or the face drawn solid; it records the shadow and the
- * edge into their layers.
+ * What a glass of one size draws: its outline, the face's size past it, the lens (a shader set on [GlassLayers.face]
+ * from Android 13), the ceiling Android 12 darkens to, or the face drawn solid; it records the shadow and the edge into
+ * their layers.
  */
 private class GlassGeometry(scope: DrawScope, shape: Shape, recipe: GlassRecipe, solid: Color?, layers: GlassLayers) {
     val size = scope.size
@@ -603,7 +595,6 @@ private class GlassGeometry(scope: DrawScope, shape: Shape, recipe: GlassRecipe,
     val faceSize: IntSize
     val solidFace: Color?
     val ceiling: Color?
-    val bands: List<GlassBand>
 
     init {
         val plain = Density(density, fontScale)
@@ -619,20 +610,13 @@ private class GlassGeometry(scope: DrawScope, shape: Shape, recipe: GlassRecipe,
         val amount = with(plain) { lens.amount.dp.toPx() }
         val cap = recipe.cap(minDimension)
         layers.face.topLeft = IntOffset(-margin, -margin)
-        when {
-            solid != null -> {
-                ceiling = null
-                bands = emptyList()
-            }
+        ceiling = when {
+            solid != null -> null
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
                 layers.face.renderEffect = GlassLensShader.effect(size, margin, radius, height to amount, recipe, cap)
-                ceiling = null
-                bands = emptyList()
+                null
             }
-            else -> {
-                ceiling = Color(cap, cap, cap)
-                bands = glassBands(path, size, radius, height, amount)
-            }
+            else -> Color(cap, cap, cap)
         }
         recordShadow(layers.shadow, plain, glassShadow(minDimension))
         recordEdge(layers, plain, radius)
@@ -786,41 +770,6 @@ private object GlassLensShader {
         shader.setFloatUniform("cap", cap)
         return android.graphics.RenderEffect.createRuntimeShaderEffect(shader, "face").asComposeRenderEffect()
     }
-}
-
-/** Part of the lens on Android 12: the face drawn within [clip] scaled by [scaleX] and [scaleY] about [pivot]. */
-private class GlassBand(val clip: Path, val scaleX: Float, val scaleY: Float, val pivot: Offset)
-
-/**
- * The lens along each side of a glass of [size] whose outline is [outline]: within the band, [height] pixels deep and
- * split on the shape's diagonals, a pixel `d` deep shows the face `amount + (1 − amount / height) d` deep, the face
- * mirrored about the band's inner line, along the side's normal. Across the corners it keeps its side's normal.
- */
-private fun glassBands(outline: Path, size: Size, radius: Float, height: Float, amount: Float): List<GlassBand> {
-    val (width, tall) = size
-    val inner = Path().apply {
-        addRoundRect(RoundRect(height, height, width - height, tall - height, CornerRadius(maxOf(radius - height, 0f))))
-    }
-    val band = Path.combine(PathOperation.Difference, outline, inner)
-    val middle = size.minDimension / 2
-    fun side(a: Offset, b: Offset, c: Offset, d: Offset) = Path.combine(
-        PathOperation.Intersect,
-        band,
-        Path().apply {
-            moveTo(a.x, a.y)
-            lineTo(b.x, b.y)
-            lineTo(c.x, c.y)
-            lineTo(d.x, d.y)
-            close()
-        },
-    )
-    val scale = 1 / (1 - amount / height)
-    return listOf(
-        GlassBand(side(Offset(0f, 0f), Offset(width, 0f), Offset(width - middle, middle), Offset(middle, middle)), 1f, scale, Offset(0f, height)),
-        GlassBand(side(Offset(0f, tall), Offset(width, tall), Offset(width - middle, tall - middle), Offset(middle, tall - middle)), 1f, scale, Offset(0f, tall - height)),
-        GlassBand(side(Offset(0f, 0f), Offset(middle, middle), Offset(middle, tall - middle), Offset(0f, tall)), scale, 1f, Offset(height, 0f)),
-        GlassBand(side(Offset(width, 0f), Offset(width - middle, middle), Offset(width - middle, tall - middle), Offset(width, tall)), scale, 1f, Offset(width - height, 0f)),
-    )
 }
 
 /** Lays the face out past the glass's edge on each side by [GLASS_MARGIN], drawn from where the glass's edge is. */

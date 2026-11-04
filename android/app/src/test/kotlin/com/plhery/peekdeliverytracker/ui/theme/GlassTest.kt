@@ -174,21 +174,39 @@ class GlassTest {
         assertTrue(behind - green(bitmap, 138, 240) <= 1)
     }
 
-    @Test
-    fun theBarAsTheIPhoneDrawsIt() = bar()
-
-    /** The bar where Android 12 draws the lens along each side, without a shader. */
-    @Test
-    @Config(sdk = [31])
-    fun theBarOnAndroid12() = bar()
-
     /**
      * The map's summary bar, 416 × 170 points from y = 60, x = 22 to 438, with dark stripes over its left half: one
      * 1 to 3 points above its top edge, which the glass can't see, and one 25 to 35 points inside, which the band
      * along the top edge, looking 60 points in at the edge and nothing 20 points in, shows mirrored 12.5 to 17.5 points
      * in.
      */
-    private fun bar() {
+    @Test
+    fun theBarAsTheIPhoneDrawsIt() {
+        val bitmap = bar()
+        // 15 points in, it shows the inner stripe as dark as the stripe itself shows 30 points in, where the band
+        // doesn't reach; 20 points in, at the band's inner line, it shows the face 20 points in, lighter.
+        val mirrored = green(bitmap, 300, 225)
+        val seen = green(bitmap, 300, 270)
+        assertTrue("$mirrored, $seen", green(bitmap, 1080, 225) - mirrored >= 40)
+        assertEquals(seen.toDouble(), mirrored.toDouble(), 8.0)
+        assertTrue(green(bitmap, 300, 240) - mirrored >= 20)
+    }
+
+    /** Android 12 has no shader for the lens: the face reaches the edge as it is, the inner stripe where it lies. */
+    @Test
+    @Config(sdk = [31])
+    fun theBarOnAndroid12HasNoLens() {
+        val bitmap = bar()
+        // 15 points in, beside the stripe, the face is within 10 levels of the face away from it, where the lens
+        // shows the stripe 40 levels darker: only the blur's edge reaches there.
+        val beside = green(bitmap, 300, 225)
+        assertTrue("$beside", green(bitmap, 1080, 225) - beside <= 10)
+        // 30 points in, the stripe shows dark, as it does where the lens doesn't reach.
+        assertTrue(green(bitmap, 1080, 270) - green(bitmap, 300, 270) >= 40)
+    }
+
+    /** [theBarAsTheIPhoneDrawsIt]'s bar, with its face, its edge over the outer stripe and its shadow checked. */
+    private fun bar(): Bitmap {
         val bitmap = capture(backdrop = BEHIND_THE_BUTTON, behind = {
             for ((top, bottom) in listOf(57f to 59f, 85f to 95f)) {
                 drawRect(Color.Black, Offset(0f, top.dp.toPx()), Size(230.dp.toPx(), (bottom - top).dp.toPx()))
@@ -199,17 +217,11 @@ class GlassTest {
         val behind = (BEHIND_THE_BUTTON.green * 255).toDouble()
         // The face away from the edge is the circle's.
         assertRgb(listOf(243, 246, 239), bitmap.getPixel(1080, 435), 2)
-        // 3 points in, the band is the same over the stripe outside as away from it, 160 points to the right.
+        // 3 points in, the edge is the same over the stripe outside as away from it, 160 points to the right.
         assertTrue(abs(green(bitmap, 300, 189) - green(bitmap, 1080, 189)) <= 1)
-        // 15 points in, it shows the inner stripe as dark as the stripe itself shows 30 points in, where the band
-        // doesn't reach; 20 points in, at the band's inner line, it shows the face 20 points in, lighter.
-        val mirrored = green(bitmap, 300, 225)
-        val seen = green(bitmap, 300, 270)
-        assertTrue("$mirrored, $seen", green(bitmap, 1080, 225) - mirrored >= 40)
-        assertEquals(seen.toDouble(), mirrored.toDouble(), 8.0)
-        assertTrue(green(bitmap, 300, 240) - mirrored >= 20)
         // The shadow under it: 18 levels just below, on the iPhone.
         assertEquals(18.0, behind - green(bitmap, 1080, 690 + 5), 4.0)
+        return bitmap
     }
 
     @Test

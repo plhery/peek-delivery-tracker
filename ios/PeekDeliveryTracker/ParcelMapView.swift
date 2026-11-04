@@ -196,12 +196,15 @@ struct ParcelMapScreen: View {
             summary
             // With every place close by there is only one view: no buttons, even once the map is moved.
             if route.hasNearView {
-                HStack(spacing: 2) {
-                    viewButton(.journey, key: "map.journey", symbol: "globe")
-                    viewButton(.now, key: "map.nearby", symbol: "location")
+                // Side by side where they fit; at the largest text sizes one under the other, so no word breaks in two.
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 2) { viewButtons(wide: false) }
+                        .padding(3)
+                        .background(Color.primary.opacity(0.06), in: Capsule())
+                    VStack(spacing: 2) { viewButtons(wide: true) }
+                        .padding(3)
+                        .background(Color.primary.opacity(0.06), in: RoundedRectangle(cornerRadius: 21, style: .continuous))
                 }
-                .padding(3)
-                .background(Color.primary.opacity(0.06), in: Capsule())
                 .accessibilityElement(children: .contain)
                 .accessibilityLabel(localizer.text("map.view"))
             }
@@ -287,7 +290,12 @@ struct ParcelMapScreen: View {
         .accessibilityLabel(name == country ? "\(title), \(country)" : "\(title), \(name), \(country)")
     }
 
-    private func viewButton(_ target: ParcelRoute.Mode, key: String, symbol: String) -> some View {
+    @ViewBuilder private func viewButtons(wide: Bool) -> some View {
+        viewButton(.journey, key: "map.journey", symbol: "globe", wide: wide)
+        viewButton(.now, key: "map.nearby", symbol: "location", wide: wide)
+    }
+
+    private func viewButton(_ target: ParcelRoute.Mode, key: String, symbol: String, wide: Bool) -> some View {
         let selected = mode == target && !free
         return Button {
             if target == mode { recenter += 1 }
@@ -296,7 +304,7 @@ struct ParcelMapScreen: View {
             Label(localizer.text(key), systemImage: symbol)
                 .font(.caption.weight(.medium))
                 .padding(.horizontal, 12)
-                .frame(minHeight: 36)
+                .frame(maxWidth: wide ? .infinity : nil, minHeight: 36, alignment: .leading)
                 .foregroundStyle(selected ? Brand.paper : Color.secondary)
                 .background(selected ? Brand.ink : Color.clear, in: Capsule())
                 .contentShape(Capsule())

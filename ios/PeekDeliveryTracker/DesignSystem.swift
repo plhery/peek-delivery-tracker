@@ -528,12 +528,19 @@ struct NoticeBanner: View {
     var actionTitle: String?
     var action: (() -> Void)?
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    /// The symbol's circle grows with it.
+    @ScaledMetric(relativeTo: .body) private var badge: CGFloat = 28
+
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
+        // At the largest text sizes the symbol stands over the words, which keep the width.
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8)) : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+        layout {
             Image(systemName: symbol)
                 .font(.body.weight(.semibold))
                 .foregroundStyle(tint)
-                .frame(width: 28, height: 28)
+                .frame(width: badge, height: badge)
                 .background(tint.opacity(0.12), in: Circle())
             VStack(alignment: .leading, spacing: 3) {
                 Text(title).font(.subheadline.weight(.semibold))
@@ -548,8 +555,9 @@ struct NoticeBanner: View {
                         .padding(.top, 3)
                 }
             }
-            Spacer(minLength: 0)
+            if !dynamicTypeSize.isAccessibilitySize { Spacer(minLength: 0) }
         }
+        .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, alignment: .leading)
         .padding(14)
         .background(tint.opacity(0.09), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }

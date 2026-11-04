@@ -622,6 +622,8 @@ struct CarrierFleet: View {
     @EnvironmentObject private var localizer: Localizer
     @ObservedObject private var catalog = CarrierCatalog.shared
     @State private var lap: CGFloat = 0
+    /// The names' height, which grows with the text size.
+    @State private var height: CGFloat = 20
     @State private var started = Date()
 
     private static let carriers: [CarrierID] = [.swissPost, .dhl, .ups, .dpd, .glsDe, .fedex, .laPoste, .royalMail, .chronopost, .usps]
@@ -637,15 +639,18 @@ struct CarrierFleet: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-            // The line is wider than the screen and must not widen it.
+            // The line is wider than the screen and must not widen it. It is as tall as the names.
             Color.clear
-                .frame(height: 20)
+                .frame(height: max(20, height))
                 .overlay(alignment: .leading) {
                     TimelineView(.animation(paused: !rolling || lap == 0)) { timeline in
                         let travelled = rolling && lap > 0
                             ? CGFloat(timeline.date.timeIntervalSince(started)) * Self.speed : 0
                         HStack(spacing: Self.gap) {
-                            line.onGeometryChange(for: CGFloat.self) { $0.size.width } action: { lap = $0 + Self.gap }
+                            line.onGeometryChange(for: CGSize.self) { $0.size } action: {
+                                lap = $0.width + Self.gap
+                                height = $0.height
+                            }
                             line
                         }
                         .fixedSize()

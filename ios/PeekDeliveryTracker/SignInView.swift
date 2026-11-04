@@ -380,6 +380,7 @@ struct SignInView: View {
     @State private var working = false
     @State private var activeProvider: String?
     @State private var errorMessage: String?
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     /// VoiceOver goes to the code's field once the code is sent, as the form it replaces leaves.
     @AccessibilityFocusState private var codeFocused: Bool
 
@@ -421,7 +422,8 @@ struct SignInView: View {
                             authenticationContent
                         }
                     }
-                    .frame(maxWidth: invitation == nil ? 365 : .infinity)
+                    // At the largest text sizes the card takes the width a word needs not to break.
+                    .frame(maxWidth: invitation == nil ? (dynamicTypeSize.isAccessibilitySize ? 520 : 365) : .infinity)
 
                     if invitation == nil {
                         Button { session.enterDemo() } label: {

@@ -291,14 +291,29 @@ struct AddParcelView: View {
                     captureActions
                 }
             }
+            // The field's own words keep to one line, cut short at the largest text sizes. There they are drawn in its
+            // place on the lines the field has, and the unseen original is still read as the field's placeholder.
+            let placeholder = localizer.text("add.trackingPlaceholder")
+            let drawsPlaceholder = dynamicTypeSize.isAccessibilitySize
             TextField(
-                localizer.text("add.trackingPlaceholder"),
+                placeholder,
                 text: $trackingInput,
+                prompt: drawsPlaceholder ? Text(placeholder).foregroundStyle(.clear) : nil,
                 axis: .vertical
             )
             .drawnField()
             .font(.body)
             .lineLimit(2...4)
+            .overlay(alignment: .topLeading) {
+                if drawsPlaceholder && trackingInput.isEmpty {
+                    Text(placeholder)
+                        .font(.body)
+                        .foregroundStyle(Color(uiColor: .tertiaryLabel))
+                        .lineLimit(2)
+                        .allowsHitTesting(false)
+                        .accessibilityHidden(true)
+                }
+            }
             .textInputAutocapitalization(.never)
             .autocorrectionDisabled()
             .accessibilityLabel(localizer.text("add.tracking"))

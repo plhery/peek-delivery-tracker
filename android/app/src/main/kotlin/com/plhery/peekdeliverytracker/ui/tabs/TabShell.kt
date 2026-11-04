@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.view.KeyEvent
+import android.view.ViewTreeObserver
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.focusGroup
@@ -206,6 +207,12 @@ class WindowLayers private constructor(restored: List<String>) {
      */
     private val restored = restored.toMutableList()
 
+    /** Made again with layers over it, as a fold, an unfold or a rotation makes it again with a sheet up. */
+    private val remade = restored.isNotEmpty()
+
+    /** The layers composed where they stand, by [id]: what the window made again waits for before it is first drawn. */
+    private val composed = mutableSetOf<String>()
+
     constructor() : this(emptyList())
 
     /** Whether anything stands over the window: a sheet, a popover or a menu, which TalkBack keeps to. */
@@ -239,16 +246,44 @@ class WindowLayers private constructor(restored: List<String>) {
     /** The layers, in the order they came. */
     @Composable
     fun Content() {
+        if (remade) HoldFirstFrame()
         layers.forEachIndexed { index, layer ->
             val place = places[layer.host] ?: return@forEachIndexed
             val under = (index + 1 until layers.size).any { layers[it].host !== layer.host }
             // By the overlay's name, not the overlay, which the window made again makes anew: what a layer saves is
             // keyed by where it is composed.
             key(layer.host.name, layer.key) {
+                val id = id(layer.host, layer.key)
+                DisposableEffect(id) {
+                    composed += id
+                    onDispose { composed -= id }
+                }
                 CompositionLocalProvider(place) {
                     Box(if (under) Modifier.clearAndSetSemantics {} else Modifier) { layer.content() }
                 }
             }
+        }
+    }
+
+    /**
+     * The window made again keeps its first frame from the screen while a layer it shows isn't composed yet, as a sheet
+     * stays on the iPhone's screen through a resize: each layer comes back a frame after what shows it, so the window
+     * drawn at once would show what is under them for a few frames, then them, at once. [HELD_FRAMES] at most.
+     */
+    @Composable
+    private fun HoldFirstFrame() {
+        val view = LocalView.current
+        DisposableEffect(view) {
+            var frames = 0
+            val hold = object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    if (frames++ < HELD_FRAMES && layers.any { id(it.host, it.key) !in composed }) return false
+                    view.viewTreeObserver.removeOnPreDrawListener(this)
+                    return true
+                }
+            }
+            view.viewTreeObserver.addOnPreDrawListener(hold)
+            onDispose { view.viewTreeObserver.removeOnPreDrawListener(hold) }
         }
     }
 
@@ -584,6 +619,12 @@ private tailrec fun Context.activity(): Activity? = when (this) {
     is ContextWrapper -> baseContext.activity()
     else -> null
 }
+
+/**
+ * How many frames the window made again keeps from the screen at most, waiting for its layers: a sheet comes back in
+ * the window's second frame, one presented from it in the third, and a layer that never comes back keeps it no longer.
+ */
+private const val HELD_FRAMES = 6
 
 /** The bottom bar's bottom edge over the gesture bar, as the iPhone's tab bar stands over the home indicator. */
 private val GESTURE_GAP = 21.dp

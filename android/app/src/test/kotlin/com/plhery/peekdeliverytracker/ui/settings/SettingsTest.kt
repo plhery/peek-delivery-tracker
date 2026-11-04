@@ -28,6 +28,7 @@ import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -655,6 +656,34 @@ class SettingsTest {
         val privacy = started()!!
         assertEquals(source.privacyUrl, privacy.dataString)
         assertFalse("No Custom Tab", privacy.hasExtra(CustomTabsIntent.EXTRA_SESSION))
+    }
+
+    /**
+     * Made again with Settings up (a fold, an unfold or a rotation), the window keeps its first frame from the screen
+     * until the sheet, which comes back a frame after it, is there, as the iPhone's sheet stays through a resize. The
+     * window's frames are told here, one per frame of the composition, as a phone's come.
+     */
+    @Test
+    fun aWindowMadeAgainIsFirstDrawnWithSettingsOverIt() {
+        val frames = View(compose.activity)
+        val recreation = Recreation(compose)
+        show(view = frames, recreation = recreation)
+        open()
+        recreation.recreate()
+        // The window's first frame: Settings shown again but not composed yet, under which nothing is drawn.
+        assertTrue(compose.onAllNodesWithTag(SETTINGS_SHEET).fetchSemanticsNodes().isEmpty())
+        assertTrue("Kept from the screen", held(frames))
+        compose.mainClock.advanceTimeByFrame()
+        node(SETTINGS_SHEET).assertExists()
+        assertFalse("Drawn with Settings over it", held(frames))
+        compose.mainClock.autoAdvance = true
+    }
+
+    /** Whether the window's frame now would be kept from the screen. */
+    private fun held(frames: View): Boolean {
+        var held = false
+        compose.runOnUiThread { held = frames.viewTreeObserver.dispatchOnPreDraw() }
+        return held
     }
 
     @Test

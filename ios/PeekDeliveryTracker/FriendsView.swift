@@ -138,6 +138,8 @@ struct FriendsView: View {
                     Divider()
                 }.frame(maxWidth: .infinity, alignment: .leading)
             }.buttonStyle(.plain).accessibilityLabel(text("friends.settings"))
+                // Voice Control answers to the row's title as well as to its name.
+                .accessibilityInputLabels([text("friends.yourSharing"), text("friends.settings")])
         }
         if data.friends.isEmpty {
             VStack(spacing: 24) {

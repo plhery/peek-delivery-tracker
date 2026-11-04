@@ -290,12 +290,15 @@ struct ParcelDetailView: View {
                             }
                         }
                     if editable {
+                        let label = [
+                            localizer.text("detail.changeCarrierFrom", ["carrier": branding.fullName]),
+                            deliveryLine,
+                        ].compactMap { $0 }.joined(separator: ". ")
                         Button { carrierEditor = CarrierEditorRequest() } label: { marks }
                             .buttonStyle(.plain)
-                            .accessibilityLabel([
-                                localizer.text("detail.changeCarrierFrom", ["carrier": branding.fullName]),
-                                deliveryLine,
-                            ].compactMap { $0 }.joined(separator: ". "))
+                            .accessibilityLabel(label)
+                            // Voice Control answers to the carrier names the marks show, as well as to the label.
+                            .accessibilityInputLabels([branding.name, delivery?.name, label].compactMap { $0 })
                     } else {
                         marks
                     }

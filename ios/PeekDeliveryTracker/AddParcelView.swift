@@ -597,6 +597,12 @@ struct AddParcelView: View {
         .buttonStyle(TactileButtonStyle())
         .accessibilityLabel([name, detail].compactMap { $0 }.joined(separator: ", "))
         .accessibilityHint(localizer.text(choosingCarrier ? "add.line.choose" : "add.line.change"))
+        // Voice Control answers to the word that says the line opens the picker, and to the carrier's name.
+        .accessibilityInputLabels([
+            amazonNumber ? nil : localizer.text(choosingCarrier ? "add.line.choose" : "add.line.change"),
+            name,
+            [name, detail].compactMap { $0 }.joined(separator: ", "),
+        ].compactMap { $0 })
         .accessibilityIdentifier("addParcel.carrier")
         .disabled(amazonNumber)
     }

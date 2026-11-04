@@ -496,6 +496,8 @@ struct FirstOpenView: View {
                     .contentShape(Rectangle())
             }
             .accessibilityLabel(localizer.text("add.tracking"))
+            // Voice Control answers to the words on the field as well as to its name.
+            .accessibilityInputLabels([localizer.text("add.trackingPlaceholder"), localizer.text("add.tracking")])
             .accessibilityIdentifier("welcome.field")
             if LabelScanner.isAvailable {
                 Button { onAdd(.scan) } label: {

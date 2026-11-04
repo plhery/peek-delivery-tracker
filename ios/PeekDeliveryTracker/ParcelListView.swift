@@ -132,6 +132,11 @@ struct DemoModeBar: View {
             .background(Brand.cream)
             .overlay(alignment: .bottom) { Divider().opacity(0.45) }
             .accessibilityLabel("\(localizer.text("app.demo")), \(localizer.text("native.exitDemo"))")
+            // Voice Control answers to the words the bar shows, one at a time or together.
+            .accessibilityInputLabels([
+                localizer.text("native.exitDemo"), localizer.text("app.demo"),
+                "\(localizer.text("app.demo")), \(localizer.text("native.exitDemo"))",
+            ])
             .accessibilityIdentifier("demo.exit")
             .accessibilityShowsLargeContentViewer()
         }

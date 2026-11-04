@@ -1080,6 +1080,8 @@ private struct AuthenticationLanguageMenu: View {
         .tint(Brand.ink)
         .accessibilityLabel(localizer.text("language.label"))
         .accessibilityValue(localizer.language.nativeName)
+        // Voice Control answers to the language's code the menu shows, as well as to its name.
+        .accessibilityInputLabels([localizer.language.rawValue.uppercased(), localizer.text("language.label")])
     }
 }
 

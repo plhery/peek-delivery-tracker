@@ -696,6 +696,11 @@ private struct LinkRefreshButton: View {
         .foregroundStyle(tint.opacity(0.75))
         .disabled(refreshing)
         .accessibilityLabel(localizer.text("detail.checkNow"))
+        // Voice Control answers to the age the button shows, as well as to its name.
+        .accessibilityInputLabels([
+            dated ? parcel.lastSyncedAt.map { localizer.text("parcel.updated", ["date": localizer.relativeTime(from: $0)]) } : nil,
+            localizer.text("detail.checkNow"),
+        ].compactMap { $0 })
         .accessibilityValue(parcel.lastSyncedAt.map {
             localizer.text("parcel.updated", ["date": localizer.relativeTime(from: $0)])
         } ?? "")

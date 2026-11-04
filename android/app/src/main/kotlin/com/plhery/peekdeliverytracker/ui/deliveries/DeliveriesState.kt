@@ -1291,10 +1291,9 @@ internal class DeliveriesState(
     /**
      * The bell of the page with `pageId` (`store.setMuted(_:muted:)` in the page's `run`): switches the parcel's
      * notifications off or back on, one change at a time, then `saved`, where the bell rings; an alert says why it
-     * failed.
+     * failed. A notification already posted for the parcel stays, as the iPhone leaves its delivered ones.
      */
     fun muteOnPage(pageId: UUID, parcel: Parcel, muted: Boolean, saved: () -> Unit) = workOnPage(pageId) {
-        // Once the app posts notifications (B-W01), a mute cancels the parcel's posted one here.
         source.setMuted(parcel, muted)
         saved()
         announce(text(if (muted) "detail.mutedAnnouncement" else "detail.unmutedAnnouncement"))

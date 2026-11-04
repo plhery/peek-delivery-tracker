@@ -11,12 +11,14 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
@@ -68,10 +70,10 @@ import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
 
 /**
- * What the deliveries list says and does as it is used, on this device's own window (A-ST12, A-ST13, A-ST32,
+ * What the deliveries list says and does as it is used, on this device's own window (A-ST12, A-ST13, A-AN16, A-ST32,
  * A-ST35, A-S23, A-SE01): a pull checking every parcel, online and offline, what TalkBack is told of each and the
  * offline message under the list it isn't; the refresh button TalkBack users get, online and offline, its words while
- * it checks and the message each check leaves; a delivery under Remove animations, seen arriving or missed while the
+ * it checks, its arrow turning or pulsing then, and the message each check leaves; a delivery under Remove animations, seen arriving or missed while the
  * app was away, taking its place at once without postmark, paper or flight; a parcel kept from its link while Add is
  * open, said and shown under the list, and revealed half a second after Add has closed; each of the foot's links
  * opening the site in a Custom Tab, the list at the same scroll when the window comes back; and Settings' appearance
@@ -233,6 +235,44 @@ class ListFeedbackDeviceShots {
         assertTrue(walk.heard(offline))
         walk.shot("A-ST13-offline")
     }
+
+    /** A-AN16: while the parcels are checked the refresh arrow turns where it is, and rests once the check is done. */
+    @Test
+    fun theRefreshArrowTurnsWhileTheCheckRuns() = exploringByTouch {
+        walk.reduceMotion = false
+        arrowMovesOnlyWhileChecking()
+    }
+
+    /** A-AN16 under Remove animations: the arrow fades to a third and back while the parcels are checked instead. */
+    @Test
+    fun underRemoveAnimationsTheRefreshArrowPulses() = exploringByTouch {
+        walk.reduceMotion = true
+        arrowMovesOnlyWhileChecking()
+    }
+
+    /** The refresh button's arrow, still before a check, moving a quarter of a second apart while it runs, still after. */
+    private fun arrowMovesOnlyWhileChecking() {
+        walk.show(demo)
+        assumeTrue("Touch exploration stayed off and the list stands alone: no refresh button", walk.exists(REFRESH_BUTTON))
+        compose.mainClock.autoAdvance = false
+        val resting = arrow()
+        advance(250)
+        assertTrue("The arrow moved before any check", resting.sameAs(arrow()))
+        val checked = CompletableDeferred<ParcelStore.RefreshResult?>()
+        walk.onUi { walk.source.checking = checked }
+        walk.node(REFRESH_BUTTON).performClick()
+        advance(250)
+        val early = arrow()
+        advance(250)
+        assertFalse("The arrow held still while the parcels were checked", early.sameAs(arrow()))
+        checked.complete(ParcelStore.RefreshResult.Unchanged)
+        advance(200)
+        val done = arrow()
+        advance(250)
+        assertTrue("The arrow went on moving once the check was done", done.sameAs(arrow()))
+    }
+
+    private fun arrow(): Bitmap = walk.node(REFRESH_BUTTON).captureToImage().asAndroidBitmap()
 
     private fun touchExploration(): Boolean =
         instrumentation.targetContext.getSystemService(AccessibilityManager::class.java)?.isTouchExplorationEnabled == true

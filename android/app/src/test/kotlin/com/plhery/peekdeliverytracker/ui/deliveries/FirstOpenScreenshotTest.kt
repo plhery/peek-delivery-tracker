@@ -129,7 +129,7 @@ class FirstOpenScreenshotTest {
         compose.screenshot("first_open_phone_ru")
     }
 
-    /** At the largest text, the first open grows no further than accessibility 1. */
+    /** At the largest text, accessibility 2 on Android: the question on the lines it needs, the fleet as tall as its names. */
     @Test
     fun aPhoneAtTheLargestText() {
         show(fontScale = 2f)
@@ -182,7 +182,7 @@ class FirstOpenScreenshotTest {
         compose.screenshot("first_open_landscape")
     }
 
-    /** A small phone at the largest text, no larger than accessibility 1's: too short for the page, it scrolls. */
+    /** A small phone at the largest text: too short for the page, it scrolls. */
     @Test
     @Config(qualifiers = "w360dp-h640dp-xxhdpi")
     fun aShortPhoneAtTheLargestText() {

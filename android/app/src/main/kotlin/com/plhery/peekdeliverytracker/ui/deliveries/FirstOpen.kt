@@ -89,6 +89,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.constrainHeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -122,8 +123,6 @@ import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowHinge
 import com.plhery.peekdeliverytracker.ui.tabs.LocalWindowLevelHinge
-import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
-import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
@@ -248,7 +247,7 @@ internal fun FirstOpenHost(firstOpen: FirstOpen, source: DeliveriesSource, shows
 
 /**
  * FirstOpenView (A-S09): the sample parcel's journey on its map and the question, laid out as the window has room for
- * ([FirstOpenLayouts]), text no larger than accessibility 1's. Its picture opens the sample parcel's page in the first
+ * ([FirstOpenLayouts]), its text as large as the reader's. Its picture opens the sample parcel's page in the first
  * open's own stack (`navigationDestination`), zooming out of it, and the page goes back to the first open, not to the
  * deliveries under it. The page is drawn from a state of the first open's own, as FirstOpenView's stack has its own.
  *
@@ -260,48 +259,46 @@ internal fun FirstOpenHost(firstOpen: FirstOpen, source: DeliveriesSource, shows
  */
 @Composable
 private fun FirstOpenView(firstOpen: FirstOpen, source: DeliveriesSource) {
-    CappedDynamicTypeSize(DynamicTypeSize.Accessibility1) {
-        val state = rememberDeliveriesState(source, firstOpen, rememberForLaunch<String?>(source.launch, null))
-        val reduceMotion = PeekTheme.reduceMotion
-        var step by rememberSaveable { mutableIntStateOf(FirstOpenJourney.stillStep) }
-        var appeared by rememberSaveable { mutableStateOf(false) }
-        val appearance = remember { Animatable(if (appeared) 1f else 0f) }
-        val atlas = rememberWorldAtlas()
-        val lifecycle = LocalLifecycleOwner.current.lifecycle
-        val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
-        val linkOpen = LocalParcelLinkOpen.current
-        val running = !reduceMotion && resumed && !firstOpen.addOpen && atlas != null && !linkOpen && !firstOpen.sampleShown
-        LaunchedEffect(atlas != null) {
-            if (atlas == null || appeared) return@LaunchedEffect
-            // The story starts from its first scan; a still picture shows the parcel a day away.
-            if (!reduceMotion) step = 1
-            appeared = true
-            if (reduceMotion) appearance.snapTo(1f) else appearance.animateTo(1f, Motion.spring(APPEAR_DURATION, APPEAR_BOUNCE))
+    val state = rememberDeliveriesState(source, firstOpen, rememberForLaunch<String?>(source.launch, null))
+    val reduceMotion = PeekTheme.reduceMotion
+    var step by rememberSaveable { mutableIntStateOf(FirstOpenJourney.stillStep) }
+    var appeared by rememberSaveable { mutableStateOf(false) }
+    val appearance = remember { Animatable(if (appeared) 1f else 0f) }
+    val atlas = rememberWorldAtlas()
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
+    val linkOpen = LocalParcelLinkOpen.current
+    val running = !reduceMotion && resumed && !firstOpen.addOpen && atlas != null && !linkOpen && !firstOpen.sampleShown
+    LaunchedEffect(atlas != null) {
+        if (atlas == null || appeared) return@LaunchedEffect
+        // The story starts from its first scan; a still picture shows the parcel a day away.
+        if (!reduceMotion) step = 1
+        appeared = true
+        if (reduceMotion) appearance.snapTo(1f) else appearance.animateTo(1f, Motion.spring(APPEAR_DURATION, APPEAR_BOUNCE))
+    }
+    LaunchedEffect(running) {
+        if (!running) return@LaunchedEffect
+        while (true) {
+            delay((FirstOpenJourney.hold(step) * 1000).roundToLong())
+            step = step % FirstOpenJourney.steps + 1
         }
-        LaunchedEffect(running) {
-            if (!running) return@LaunchedEffect
-            while (true) {
-                delay((FirstOpenJourney.hold(step) * 1000).roundToLong())
-                step = step % FirstOpenJourney.steps + 1
-            }
-        }
-        LaunchedEffect(reduceMotion) { if (reduceMotion) step = FirstOpenJourney.stillStep }
+    }
+    LaunchedEffect(reduceMotion) { if (reduceMotion) step = FirstOpenJourney.stillStep }
 
-        val language = LocalLanguage.current
-        val identity = carrierIdentity(CarrierId.Dhl, language)
-        val stack = remember(state) { PageStack(firstOpen.zoom, state::closeFirstSample) }
-        Box(Modifier.fillMaxSize().background(PeekTheme.colors.background).semantics { journeyStep = step }) {
-            if (identity == null) return@Box
-            val scene = rememberScene(state, firstOpen, identity, step, atlas, appeared, appearance, running, language)
-            ZoomStack(
-                transition = firstOpen.zoom,
-                top = if (firstOpen.sampleShown) FirstOpenJourney.parcelId else null,
-                onBack = state::closeFirstSample,
-                root = { FirstOpenLayouts(scene) },
-                page = { CompositionLocalProvider(LocalPageStack provides stack) { ParcelPage(state, FirstOpenJourney.parcelId) } },
-                bar = { CompositionLocalProvider(LocalPageStack provides stack) { ParcelPageBar(state, FirstOpenJourney.parcelId) } },
-            )
-        }
+    val language = LocalLanguage.current
+    val identity = carrierIdentity(CarrierId.Dhl, language)
+    val stack = remember(state) { PageStack(firstOpen.zoom, state::closeFirstSample) }
+    Box(Modifier.fillMaxSize().background(PeekTheme.colors.background).semantics { journeyStep = step }) {
+        if (identity == null) return@Box
+        val scene = rememberScene(state, firstOpen, identity, step, atlas, appeared, appearance, running, language)
+        ZoomStack(
+            transition = firstOpen.zoom,
+            top = if (firstOpen.sampleShown) FirstOpenJourney.parcelId else null,
+            onBack = state::closeFirstSample,
+            root = { FirstOpenLayouts(scene) },
+            page = { CompositionLocalProvider(LocalPageStack provides stack) { ParcelPage(state, FirstOpenJourney.parcelId) } },
+            bar = { CompositionLocalProvider(LocalPageStack provides stack) { ParcelPageBar(state, FirstOpenJourney.parcelId) } },
+        )
     }
 }
 
@@ -688,10 +685,10 @@ private fun FirstOpenMasthead(scene: FirstOpenScene, modifier: Modifier = Modifi
 
 /**
  * `ask(roomy:centred:)`: Track any parcel. in large title rounded bold, tightened 1.2, in the ink, on at most two lines
- * shrinking to 70 % rather than be cut, a heading; under it the lead in subheadline; then the field over Paste and
- * track, or the demo where the build has no server. Roomy, it stands lower and further apart, the carriers rolling at
- * its foot. [centred] stands it in the middle of its room, and where it [fills] its room the carriers keep to its foot.
- * 24 in from the sides and no wider than 560, centred.
+ * shrinking to 70 % rather than be cut (at the accessibility sizes on the lines it needs), a heading; under it the lead
+ * in subheadline; then the field over Paste and track, or the demo where the build has no server. Roomy, it stands
+ * lower and further apart, the carriers rolling at its foot. [centred] stands it in the middle of its room, and where
+ * it [fills] its room the carriers keep to its foot. 24 in from the sides and no wider than 560, centred.
  */
 @Composable
 private fun FirstOpenAsk(
@@ -712,7 +709,9 @@ private fun FirstOpenAsk(
         val title = type.tracking(type.style(IosTextStyle.LargeTitle, FontWeight.Bold, FontDesign.Rounded), -1.2f)
         Text(
             localized("peek.title"), Modifier.padding(top = if (roomy) 26.dp else 18.dp).semantics { heading() },
-            color = colors.ink, style = title, textAlign = TextAlign.Center, maxLines = 2,
+            // At the accessibility sizes the question takes the lines it needs, and the screen scrolls.
+            color = colors.ink, style = title, textAlign = TextAlign.Center,
+            maxLines = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) Int.MAX_VALUE else 2,
             autoSize = TextAutoSize.StepBased(minFontSize = title.fontSize * ASK_TITLE_MINIMUM_SCALE, maxFontSize = title.fontSize),
         )
         Text(
@@ -734,10 +733,11 @@ private fun FirstOpenAsk(
 
 /**
  * `field(large:)`: reads as the field it leads to, Add, which takes a number, a link or a whole message. The
- * placeholder in the tertiary label, on up to two lines, in title 3 when [large] or body, across a row at least 64 or
- * 58 tall that opens Add to type, read as "Tracking number"; then, where the device scans, the viewfinder that opens
- * Add on the camera. Both dim a little under the finger (`.buttonStyle(.plain)`), on the paper with corners of 20 or
- * 18 and a hairline of the separator at 30 %. TalkBack goes back to the one tapped once Add has gone.
+ * placeholder in the tertiary label, on up to two lines (at the accessibility sizes as many as it needs), in title 3
+ * when [large] or body, across a row at least 64 or 58 tall that opens Add to type, read as "Tracking number"; then,
+ * where the device scans, the viewfinder that opens Add on the camera. Both dim a little under the finger
+ * (`.buttonStyle(.plain)`), on the paper with corners of 20 or 18 and a hairline of the separator at 30 %. TalkBack
+ * goes back to the one tapped once Add has gone.
  */
 @Composable
 private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modifier = Modifier) {
@@ -768,8 +768,11 @@ private fun FirstOpenField(scene: FirstOpenScene, large: Boolean, modifier: Modi
             contentAlignment = Alignment.CenterStart,
         ) {
             Text(
+                // A long placeholder takes a second line rather than being cut off, and at the accessibility sizes as
+                // many as it needs.
                 localized("add.trackingPlaceholder"), Modifier.clearAndSetSemantics {},
-                color = colors.tertiaryLabel, style = if (large) type.title3 else type.body, maxLines = 2,
+                color = colors.tertiaryLabel, style = if (large) type.title3 else type.body,
+                maxLines = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) Int.MAX_VALUE else 2,
             )
         }
         if (canScan) {
@@ -1057,12 +1060,12 @@ private fun CarrierFleet(rolling: Boolean, modifier: Modifier = Modifier) {
 }
 
 /**
- * The fleet's lane, 20 tall: the line twice, 26 apart, from 42 before the lane's start and [travelled] points on,
- * a lap at a time; clipped to the lane, whose tenth at each end fades out. The line is wider than the screen and
- * doesn't widen it.
+ * The fleet's lane, as tall as the names and 20 at least: the line twice, 26 apart, from 42 before the lane's start and
+ * [travelled] points on, a lap at a time; clipped to the lane, whose tenth at each end fades out. The line is wider
+ * than the screen and doesn't widen it.
  */
 @Composable
-private fun FleetLane(fleet: List<CarrierVisualIdentity>, travelled: FloatState) {
+internal fun FleetLane(fleet: List<CarrierVisualIdentity>, travelled: FloatState) {
     val line = @Composable {
         Row(horizontalArrangement = Arrangement.spacedBy(FLEET_GAP), verticalAlignment = Alignment.CenterVertically) {
             fleet.forEach { CarrierFleetMark(it) }
@@ -1075,7 +1078,6 @@ private fun FleetLane(fleet: List<CarrierVisualIdentity>, travelled: FloatState)
         },
         modifier = Modifier
             .fillMaxWidth()
-            .height(20.dp)
             .clipToBounds()
             .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
             .drawWithContent {
@@ -1083,12 +1085,14 @@ private fun FleetLane(fleet: List<CarrierVisualIdentity>, travelled: FloatState)
                 drawRect(FLEET_FADE, blendMode = BlendMode.DstIn)
             },
     ) { measurables, constraints ->
-        val lines = measurables.map { it.measure(Constraints(maxHeight = constraints.maxHeight)) }
+        val lines = measurables.map { it.measure(Constraints()) }
         val lap = (lines.firstOrNull()?.width ?: 0) + FLEET_GAP.roundToPx()
-        layout(constraints.maxWidth, constraints.maxHeight) {
+        // The names grow with the text size.
+        val height = constraints.constrainHeight(maxOf(FLEET_HEIGHT.roundToPx(), lines.maxOfOrNull { it.height } ?: 0))
+        layout(constraints.maxWidth, height) {
             // Read as it is placed: the lane moves on without being composed again.
             val x = (-FLEET_LEAD.toPx() - travelled.floatValue.dp.toPx() % lap.coerceAtLeast(1)).roundToInt()
-            lines.forEachIndexed { index, placeable -> placeable.placeRelative(x + index * lap, (constraints.maxHeight - placeable.height) / 2) }
+            lines.forEachIndexed { index, placeable -> placeable.placeRelative(x + index * lap, (height - placeable.height) / 2) }
         }
     }
 }
@@ -1141,6 +1145,7 @@ private val FLEET = listOf(
     CarrierId.Fedex, CarrierId.LaPoste, CarrierId.RoyalMail, CarrierId.Chronopost, CarrierId.Usps,
 )
 private val FLEET_GAP = 26.dp
+private val FLEET_HEIGHT = 20.dp
 
 /** Points a second. */
 private const val FLEET_SPEED = 16f

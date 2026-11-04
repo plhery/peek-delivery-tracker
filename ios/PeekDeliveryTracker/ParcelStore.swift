@@ -1952,6 +1952,12 @@ final class DemoRepository {
                 scan.location = event.location.map(say)
                 return scan
             }
+            copy.plannedEvents = parcel.plannedEvents?.map { planned in
+                var step = planned
+                step.description = say(planned.description)
+                step.location = planned.location.map(say)
+                return step
+            }
             return copy
         }
         save(translated)
@@ -2043,6 +2049,28 @@ final class DemoRepository {
            [.inTransit, .customs, .outForDelivery, .delivered].contains(next) {
             copy.carrierData = CarrierData(activeTrackingCarrier: .swissPost, swissPostReady: true)
         }
+        return Self.stillPlanned(copy)
+    }
+
+    /// The stages a parcel moves through in order, which tell how far its scans have come.
+    private static let progress: [TrackingStage] = [.registered, .accepted, .inTransit, .outForDelivery, .delivered]
+
+    /// The planned steps a demo parcel still shows once its scans move on, by the server's rule: none once it is
+    /// delivered or returned, and none a scan is as late as or has come further than.
+    static func stillPlanned(_ parcel: Parcel) -> Parcel {
+        guard let planned = parcel.plannedEvents else { return parcel }
+        var copy = parcel
+        copy.plannedEvents = nil
+        if parcel.trackingEvents.contains(where: { $0.stage == .delivered || $0.stage == .returned }) { return copy }
+        let latest = parcel.trackingEvents.compactMap { DateParser.date($0.occurredAt) }.max()
+        let reached = parcel.trackingEvents.compactMap { progress.firstIndex(of: $0.stage) }.max() ?? -1
+        let kept = planned.filter { step in
+            guard let date = DateParser.date(step.occurredAt) else { return false }
+            if let latest, date <= latest { return false }
+            guard let stage = progress.firstIndex(of: step.stage) else { return true }
+            return stage >= reached
+        }
+        if !kept.isEmpty { copy.plannedEvents = kept }
         return copy
     }
 
@@ -2100,6 +2128,8 @@ final class DemoRepository {
             let pickupPoint: String?
             let weightKg: Double?
             let events: [Event]
+            /// Steps the carrier wrote ahead, never scans; a negative `hoursAgo` is still to come.
+            let plannedEvents: [Event]?
         }
         let parcels: [Sample]
         let translations: [String: [String: String]]
@@ -2122,6 +2152,10 @@ final class DemoRepository {
                     description: event.description, location: event.location, occurredAt: iso(event.hoursAgo),
                     place: event.place)
             }
+            let planned = sample.plannedEvents?.map { step in
+                PlannedTrackingEvent(description: step.description, stage: step.stage, location: step.location,
+                                     occurredAt: iso(step.hoursAgo))
+            }
             let expected = sample.expectedInDays.flatMap { days in
                 Calendar.current.date(byAdding: .day, value: days, to: now).map { ParcelOrganizer.dayKey($0) }
             }
@@ -2134,7 +2168,7 @@ final class DemoRepository {
                 carrierData: sample.senderName == nil && sample.pickupPoint == nil && sample.weightKg == nil ? nil
                     : CarrierData(senderName: sample.senderName, pickupPoint: sample.pickupPoint, weightKg: sample.weightKg),
                 archivedAt: sample.archivedHoursAgo.map(iso), notificationsMuted: false,
-                trackingEvents: history
+                trackingEvents: history, plannedEvents: planned
             )
         }
     }

@@ -102,8 +102,11 @@ struct ParcelLinkSheet: View {
         let gift = response.gift
         let wrapped = gift == .wrapped
         var parcel = Parcel(shared: response.package)
-        // A gift on its way tells its hidden beginning once.
-        if wrapped { parcel.trackingEvents = parcel.trackingEvents.collapsingGiftRows() }
+        // A gift on its way tells its hidden beginning once, and nothing of the steps its carrier planned.
+        if wrapped {
+            parcel.trackingEvents = parcel.trackingEvents.collapsingGiftRows()
+            parcel.plannedEvents = nil
+        }
         let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, language: localizer.language)
         let tint = wrapped || gift == .opened ? ExperimentalPalette.lilac : identity.ink
         return ScrollView {

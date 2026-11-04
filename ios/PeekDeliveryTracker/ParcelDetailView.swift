@@ -1594,6 +1594,9 @@ struct ParcelJournal: View {
             .buttonStyle(.plain)
             .accessibilityValue(localizer.text(showingFullJourney ? "design.lessJourney" : "design.fullJourney"))
             if showingFullJourney {
+                if let planned = parcel.plannedEvents, !planned.isEmpty {
+                    PlannedSteps(steps: planned)
+                }
                 if groups.isEmpty {
                     Text(localizer.text(syncing ? "timeline.emptySyncing" : "timeline.empty"))
                         .font(.footnote).foregroundStyle(.secondary).padding(.vertical, 12)
@@ -1748,6 +1751,119 @@ private struct JournalEventRow: View {
     }
 }
 
+/// The steps the carrier listed before they happen, newest first, under a heading that says so: greyed, each on a
+/// dashed mark instead of a time and joined by a dashed rail, with its planned day, and a dashed line under them. They
+/// are no scans and count as no update.
+private struct PlannedSteps: View {
+    let steps: [PlannedTrackingEvent]
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        let newestFirst = steps.enumerated().sorted { a, b in
+            let (first, second) = (a.element.displayDate ?? .distantPast, b.element.displayDate ?? .distantPast)
+            return first != second ? first > second : a.offset < b.offset
+        }.map(\.element)
+        VStack(alignment: .leading, spacing: 0) {
+            Text(localizer.text("timeline.planned.title"))
+                .font(.caption2).textCase(.uppercase).tracking(1)
+                .foregroundStyle(.secondary).padding(.top, 22).padding(.bottom, 4)
+                .accessibilityAddTraits(.isHeader)
+            Text(localizer.text("timeline.planned.note"))
+                .font(.caption2).foregroundStyle(Brand.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 15)
+            VStack(alignment: .leading, spacing: 18) {
+                ForEach(Array(newestFirst.enumerated()), id: \.offset) { index, step in
+                    PlannedStepRow(step: step, joinsNext: index < newestFirst.count - 1)
+                }
+            }
+            DashedRule(axis: .horizontal)
+                .stroke(Brand.separator, style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
+                .frame(height: 1)
+                .padding(.top, 18)
+                .accessibilityHidden(true)
+        }
+    }
+}
+
+/// A planned step laid out as a scan's row, greyed: a dashed circle where the time goes, a dashed rail down to the next
+/// step's, then the words, the day it is planned for and where. At the largest sizes the circle goes above the words, as
+/// a scan's time does, without the rail.
+private struct PlannedStepRow: View {
+    let step: PlannedTrackingEvent
+    let joinsNext: Bool
+    @EnvironmentObject private var localizer: Localizer
+    @Environment(\.dynamicTypeSize) private var typeSize
+    /// The time column of a scan's row, which the circle stands in.
+    @ScaledMetric(relativeTo: .caption2) private var timeWidth: CGFloat = 38
+
+    var body: some View {
+        let large = typeSize.isAccessibilitySize
+        let layout = large
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 2)) : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
+        let wording = localizer.eventDescription(step.description.nonEmpty ?? localizer.text(step.stage.localizationKey))
+        let when = localizer.plannedDate(step)
+        let location = step.location?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
+        layout {
+            Circle()
+                .inset(by: 1.4)
+                .stroke(Brand.secondaryText, style: StrokeStyle(lineWidth: 1.2, dash: [2.4, 1.9]))
+                .frame(width: 12, height: 12)
+                .padding(.top, 3)
+                .frame(width: large ? nil : timeWidth, alignment: .leading)
+            VStack(alignment: .leading, spacing: 0) {
+                Text(wording)
+                    .font(.footnote).foregroundStyle(Brand.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+                if !when.isEmpty {
+                    Text(when)
+                        .font(.caption2).monospacedDigit().foregroundStyle(Brand.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 3)
+                }
+                if let location {
+                    EventLocation(location: location, placed: nil)
+                        .font(.caption2).foregroundStyle(Brand.secondaryText)
+                        .padding(.top, 4)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        // The rail runs from under this step's circle to just over the next one's, 18 below.
+        .background(alignment: .topLeading) {
+            if joinsNext && !large {
+                DashedRule(axis: .vertical)
+                    .stroke(Brand.secondaryText.opacity(0.45), style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
+                    .frame(width: 1)
+                    .padding(.top, 18).padding(.bottom, -16).padding(.leading, 5.5)
+                    .accessibilityHidden(true)
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(localizer.text("timeline.planned.step", [
+            "step": [wording, when, location.map { EventLocation.spoken($0, placed: nil, language: localizer.language) }]
+                .compactMap { $0?.nonEmpty }.joined(separator: ", "),
+        ]))
+    }
+}
+
+/// A dashed line along the middle of its frame, across or down it.
+private struct DashedRule: Shape {
+    let axis: Axis
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        if axis == .horizontal {
+            path.move(to: CGPoint(x: rect.minX, y: rect.midY))
+            path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        } else {
+            path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+        }
+        return path
+    }
+}
+
 /// The flag leads and the country closes the place, named in the reader's language.
 private struct EventLocation: View {
     let location: String
@@ -1755,11 +1871,18 @@ private struct EventLocation: View {
     let placed: String?
     @EnvironmentObject private var localizer: Localizer
 
+    /// What VoiceOver reads of the place: its words without the flag.
+    static func spoken(_ location: String, placed: String?, language: AppLanguage) -> String {
+        let place = TrackingLocation.place(location, placedIn: placed)
+        guard let country = place.country else { return place.name }
+        let name = TrackingLocation.countryName(country, language: language)
+        return place.name.isEmpty ? name : "\(place.name), \(name)"
+    }
+
     var body: some View {
         let place = TrackingLocation.place(location, placedIn: placed)
         if let country = place.country {
-            let name = TrackingLocation.countryName(country, language: localizer.language)
-            let text = place.name.isEmpty ? name : "\(place.name), \(name)"
+            let text = Self.spoken(location, placed: placed, language: localizer.language)
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text(TrackingLocation.flag(country)).font(.caption)
                 Text(text).fixedSize(horizontal: false, vertical: true)

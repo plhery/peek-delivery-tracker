@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
@@ -438,6 +439,24 @@ class Localizer(
     }
 
     /**
+     * When the carrier planned a step, in the phone's zone: "today", "tomorrow", "yesterday" or the journal's short
+     * date, with its year when it isn't `now`'s ([journalDays]), then its clock time unless the carrier dated it by its
+     * day alone: "Fri 6 Nov, 07:54". Nothing for a date that doesn't read.
+     */
+    fun plannedDate(step: PlannedTrackingEvent, now: Instant = Instant.now()): String {
+        val date = step.displayDate ?: return ""
+        val zone = ZoneId.systemDefault()
+        val today = now.atZone(zone).toLocalDate()
+        val day = when (date.atZone(zone).toLocalDate()) {
+            today -> text("time.today")
+            today.plusDays(1) -> text("time.tomorrow")
+            today.minusDays(1) -> text("time.yesterday")
+            else -> shortDate(date, withYear = FoundationDates.dateFields(date, zone).yearOfEra != FoundationDates.dateFields(now, zone).yearOfEra)
+        }
+        return if (step.calendarDay == null) dayAndTime(day, clockTime(date)) else day
+    }
+
+    /**
      * A day and a time on it, as the web's `dayAndTime` joins them: "tomorrow, 09:00–12:00", and in Chinese with a
      * space, "明天 09:00–12:00". The iPhone joins them with a comma in every language.
      */
@@ -626,6 +645,12 @@ val TrackingEvent.calendarDay: Instant? get() = day?.let(DateParser::deliveryDat
 
 /** The date to show for the scan: its day when it has no clock time, else its moment. */
 val TrackingEvent.displayDate: Instant? get() = calendarDay ?: DateParser.date(occurredAt)
+
+/** The day of a step the carrier dated by its day alone, as a local calendar day. */
+val PlannedTrackingEvent.calendarDay: Instant? get() = day?.let(DateParser::deliveryDate)
+
+/** The date to show for the step: its day when it has no clock time, else its moment. */
+val PlannedTrackingEvent.displayDate: Instant? get() = calendarDay ?: DateParser.date(occurredAt)
 
 /** Foundation's `timeIntervalSince`: the seconds from `other` to this instant. */
 internal fun Instant.timeIntervalSince(other: Instant): Double =

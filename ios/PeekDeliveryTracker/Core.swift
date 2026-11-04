@@ -536,6 +536,21 @@ final class Localizer: ObservableObject {
         return dayAndTime(shortDate(date), clockTime(date))
     }
 
+    /// When the carrier planned a step: "today", "tomorrow", "yesterday" or the journal's short date, with its year
+    /// when it isn't this one, then its clock time unless the carrier dated it by its day alone: "Fri 6 Nov, 07:54".
+    func plannedDate(_ step: PlannedTrackingEvent, now: Date = Date()) -> String {
+        guard let date = step.displayDate else { return "" }
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        let day = switch calendar.dateComponents([.day], from: calendar.startOfDay(for: now), to: calendar.startOfDay(for: date)).day {
+        case 0: text("time.today")
+        case 1: text("time.tomorrow")
+        case -1: text("time.yesterday")
+        default: shortDate(date) + (year == calendar.component(.year, from: now) ? "" : " \(year)")
+        }
+        return step.calendarDay == nil ? dayAndTime(day, clockTime(date)) : day
+    }
+
     /// A day and a time of it, as Chinese writes them without a comma: "9月12日周六 14:05".
     private func dayAndTime(_ day: String, _ time: String) -> String {
         language == .zh ? "\(day) \(time)" : "\(day), \(time)"
@@ -622,6 +637,14 @@ extension TrackingEvent {
     var calendarDay: Date? { day.flatMap(DateParser.deliveryDate) }
 
     /// The date to show for the scan: its day when it has no clock time, else its moment.
+    var displayDate: Date? { calendarDay ?? DateParser.date(occurredAt) }
+}
+
+extension PlannedTrackingEvent {
+    /// The day of a step the carrier dated by its day alone, as a local calendar day.
+    var calendarDay: Date? { day.flatMap(DateParser.deliveryDate) }
+
+    /// The date to show for the step: its day when it has no clock time, else its moment.
     var displayDate: Date? { calendarDay ?? DateParser.date(occurredAt) }
 }
 

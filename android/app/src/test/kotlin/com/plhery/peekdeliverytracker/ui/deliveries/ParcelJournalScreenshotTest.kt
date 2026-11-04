@@ -10,6 +10,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.screenshot
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import org.junit.Rule
@@ -23,7 +24,8 @@ import org.robolectric.annotation.GraphicsMode
  * The parcel page's journal on the page's paper, on the iPhone the captures were taken on, at the captures' moment
  * ([JournalFixtures.journey]): three days, the current scan's time in Swiss Post's ink, a place with its flag, a copy's
  * words under its scan and the carrier's repeat folded into its own; light and dark, collapsed, and at the first
- * accessibility size, the times over the words.
+ * accessibility size, the times over the words. And the demo's vinyl, the steps its carrier planned over its scans,
+ * light and dark.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -34,9 +36,14 @@ class ParcelJournalScreenshotTest {
     @get:Rule
     val rules: RuleChain = RuleChain.outerRule(ZurichTime()).around(compose)
 
-    /** The journey's journal on the page's paper, 18 in from its sides, with the text `fontScale` times the normal. */
-    private fun shot(name: String, dark: Boolean = false, fontScale: Float = 1f, collapsed: Boolean = false) {
-        val parcel = JournalFixtures.journey()
+    /** `parcel`'s journal on the page's paper, 18 in from its sides, with the text `fontScale` times the normal. */
+    private fun shot(
+        name: String,
+        dark: Boolean = false,
+        fontScale: Float = 1f,
+        collapsed: Boolean = false,
+        parcel: Parcel = JournalFixtures.journey(),
+    ) {
         compose.setContent {
             CardHost(dark = dark, fontScale = fontScale) {
                 Box(Modifier.background(PeekTheme.colors.paper).padding(18.dp)) {
@@ -62,4 +69,14 @@ class ParcelJournalScreenshotTest {
     /** At the first accessibility size: each time over its scan's words. */
     @Test
     fun atAnAccessibilitySize() = shot("journal_accessibility_light", fontScale = 1.5f)
+
+    /**
+     * The steps the carrier wrote ahead, greyed on dashed marks joined by a dashed rail under their heading and note,
+     * newest first, then a dashed line and the scans.
+     */
+    @Test
+    fun withThePlannedSteps() = shot("journal_planned_light", parcel = DemoCards.parcel("Kind of Blue"))
+
+    @Test
+    fun withThePlannedStepsInDark() = shot("journal_planned_dark", dark = true, parcel = DemoCards.parcel("Kind of Blue"))
 }

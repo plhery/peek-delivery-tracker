@@ -42,7 +42,8 @@ extension Parcel {
             ),
             archivedAt: package.archivedAt,
             notificationsMuted: package.notificationsMuted,
-            trackingEvents: package.trackingEvents
+            trackingEvents: package.trackingEvents,
+            plannedEvents: package.plannedEvents
         )
     }
 }

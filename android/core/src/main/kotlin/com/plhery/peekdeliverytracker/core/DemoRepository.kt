@@ -8,6 +8,7 @@ import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.PostcodeCountry
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
@@ -170,6 +171,9 @@ class DemoRepository(
                 trackingEvents = parcel.trackingEvents.map { event ->
                     event.copy(description = say(event.description), location = event.location?.let(::say))
                 },
+                plannedEvents = parcel.plannedEvents?.map { step ->
+                    step.copy(description = say(step.description), location = step.location?.let(::say))
+                },
             )
         }
         save(translated)
@@ -253,7 +257,7 @@ class DemoRepository(
         ) {
             copy = copy.copy(carrierData = CarrierData(activeTrackingCarrier = CarrierId.SwissPost, swissPostReady = true))
         }
-        return copy
+        return stillPlanned(copy)
     }
 
     /** The scan a simulated refresh adds. */
@@ -273,6 +277,8 @@ class DemoRepository(
             val pickupPoint: String? = null,
             val weightKg: Double? = null,
             val events: List<Event>,
+            /** Steps the carrier wrote ahead, never scans; a negative `hoursAgo` is still to come. */
+            val plannedEvents: List<Event>? = null,
         ) {
             @Serializable
             class Event(
@@ -384,6 +390,30 @@ class DemoRepository(
             )
         }
 
+        /** The stages a parcel moves through in order, which tell how far its scans have come. */
+        private val progress = listOf(
+            TrackingStage.Registered, TrackingStage.Accepted, TrackingStage.InTransit, TrackingStage.OutForDelivery, TrackingStage.Delivered,
+        )
+
+        /**
+         * The planned steps a demo parcel still shows once its scans move on, by the server's rule: none once it is
+         * delivered or returned, and none a scan is as late as or has come further than.
+         */
+        fun stillPlanned(parcel: Parcel): Parcel {
+            val planned = parcel.plannedEvents ?: return parcel
+            if (parcel.trackingEvents.any { it.stage == TrackingStage.Delivered || it.stage == TrackingStage.Returned }) {
+                return parcel.copy(plannedEvents = null)
+            }
+            val latest = parcel.trackingEvents.mapNotNull { DateParser.date(it.occurredAt) }.maxOrNull()
+            val reached = parcel.trackingEvents.maxOfOrNull { progress.indexOf(it.stage) } ?: -1
+            val kept = planned.filter { step ->
+                val date = DateParser.date(step.occurredAt) ?: return@filter false
+                val stage = progress.indexOf(step.stage)
+                (latest == null || date > latest) && (stage < 0 || stage >= reached)
+            }
+            return parcel.copy(plannedEvents = kept.ifEmpty { null })
+        }
+
         /** The sample parcels in English; `list()` writes them in the app's language. */
         fun seed(now: Instant = Instant.now()): List<Parcel> {
             fun iso(hoursAgo: Double): String = DateParser.isoString(now.minusNanos((hoursAgo * 3_600 * 1_000_000_000).toLong()))
@@ -393,6 +423,11 @@ class DemoRepository(
                     TrackingEvent(
                         id = UUID.randomUUID(), packageId = id, stage = event.stage, description = event.description,
                         location = event.location, occurredAt = iso(event.hoursAgo), place = event.place,
+                    )
+                }
+                val planned = sample.plannedEvents?.map { step ->
+                    PlannedTrackingEvent(
+                        description = step.description, stage = step.stage, location = step.location, occurredAt = iso(step.hoursAgo),
                     )
                 }
                 val expected = sample.expectedInDays?.let { days ->
@@ -410,7 +445,7 @@ class DemoRepository(
                         CarrierData(senderName = sample.senderName, pickupPoint = sample.pickupPoint, weightKg = sample.weightKg)
                     },
                     archivedAt = sample.archivedHoursAgo?.let(::iso), notificationsMuted = false,
-                    trackingEvents = history,
+                    trackingEvents = history, plannedEvents = planned,
                 )
             }
         }

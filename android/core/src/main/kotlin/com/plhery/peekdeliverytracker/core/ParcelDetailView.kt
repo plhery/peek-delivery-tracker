@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Instant
@@ -136,6 +137,39 @@ fun Localizer.relayedWordings(entry: JournalEntry): List<String> {
 /** Where the journal says a scan was: its location trimmed, and none when nothing is left. */
 val TrackingEvent.journalLocation: String?
     get() = location?.trimmingWhitespacesAndNewlines()?.nonEmpty
+
+/**
+ * The steps the carrier planned as the journal lists them (`PlannedSteps`), newest first; steps without a readable
+ * date last, and steps of the same moment in their order.
+ */
+fun plannedNewestFirst(steps: List<PlannedTrackingEvent>): List<PlannedTrackingEvent> =
+    steps.sortedByDescending { it.displayDate ?: distantPast }
+
+/** A planned step's words, as a scan's ([journalWording]): the carrier's, else its stage's, in the app language. */
+fun Localizer.plannedWording(step: PlannedTrackingEvent): String =
+    eventDescription(step.description.nonEmpty ?: text(step.stage.localizationKey))
+
+/** Where the journal says a planned step will be: its location trimmed, and none when nothing is left. */
+val PlannedTrackingEvent.journalLocation: String?
+    get() = location?.trimmingWhitespacesAndNewlines()?.nonEmpty
+
+/**
+ * What TalkBack reads of a planned step's row: "Planned, not confirmed: " and its words, its day ([Localizer.plannedDate])
+ * and where it will be as the location row reads it, without the flag, joined by ", ".
+ */
+fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = Instant.now()): String {
+    val place = step.journalLocation?.let { location ->
+        val place = TrackingLocation.place(location, null)
+        val country = place.country
+        when {
+            country == null -> place.name
+            place.name.isEmpty() -> TrackingLocation.countryName(country, language)
+            else -> "${place.name}, ${TrackingLocation.countryName(country, language)}"
+        }
+    }
+    val parts = listOfNotNull(plannedWording(step), plannedDate(step, now), place).filter { it.isNotEmpty() }
+    return text("timeline.planned.step", mapOf("step" to parts.joinToString(", ")))
+}
 
 /**
  * What the change-carrier sheet (`ChangeCarrierView`) holds and works out for [parcel]: the carrier chosen, null while

@@ -3777,6 +3777,141 @@ extension ParcelLogicTests {
     }
 }
 
+extension ParcelLogicTests {
+    /// The demo's vinyl carries the steps its carrier wrote ahead apart from its scans: none of them moves the parcel
+    /// on, dates it or counts as an update.
+    func testTheDemosPlannedStepsStayApartFromItsScans() throws {
+        let now = DateParser.date("2026-09-09T12:00:00Z")!
+        let vinyl = try XCTUnwrap(DemoRepository.seed(now: now).first { $0.label == Self.vinyl })
+        XCTAssertEqual(vinyl.carrier, .ups)
+        XCTAssertEqual(vinyl.trackingEvents.map(\.stage), [.registered, .accepted, .inTransit])
+        let planned = try XCTUnwrap(vinyl.plannedEvents)
+        XCTAssertEqual(planned.map(\.description), ["Customs cleared", "Arrived at the local delivery centre", "Out for delivery", "Delivered"])
+        XCTAssertEqual(planned.map(\.stage), [.customs, .inTransit, .outForDelivery, .delivered])
+        XCTAssertEqual(planned.map(\.location), ["Basel, Switzerland", "Zürich, Switzerland", nil, nil])
+        // A negative `hoursAgo` is still to come; the step an hour ago has passed with no scan to confirm it.
+        XCTAssertEqual(planned.compactMap { DateParser.date($0.occurredAt) },
+                       [-1.0, 10, 20, 24].map { now.addingTimeInterval($0 * 3_600) })
+        XCTAssertEqual(vinyl.currentStage, .inTransit)
+        XCTAssertFalse(vinyl.isDelivered)
+        XCTAssertNil(vinyl.expectedDelivery)
+        XCTAssertEqual(vinyl.journalEntries.count, 3)
+        XCTAssertTrue(DemoRepository.seed(now: now).filter { $0.label != Self.vinyl }.allSatisfy { $0.plannedEvents == nil })
+    }
+
+    private static let vinyl = "Kind of Blue · vinyl 🎷"
+
+    func testTheDemoTranslatesItsPlannedStepsAndARefreshDropsTheOnesItsScansOvertake() throws {
+        let suite = "demo-planned-tests-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        var language = AppLanguage.en
+        let repo = DemoRepository(defaults: defaults, language: { language })
+        let vinyl = try XCTUnwrap(repo.list().first { $0.label == Self.vinyl })
+
+        language = .fr
+        let french = try XCTUnwrap(repo.list().first { $0.id == vinyl.id })
+        XCTAssertEqual(french.plannedEvents?.map(\.description), [
+            "Dédouané", "Arrivé au centre de distribution local", "En cours de livraison", "Livré",
+        ])
+        XCTAssertEqual(french.plannedEvents?.map(\.occurredAt), vinyl.plannedEvents?.map(\.occurredAt))
+        language = .en
+        XCTAssertEqual(try XCTUnwrap(repo.list().first { $0.id == vinyl.id }).plannedEvents, vinyl.plannedEvents)
+
+        // Out for delivery for real: the steps dated before it go, and so does a later one of an earlier stage.
+        let out = try repo.refresh(id: vinyl.id)
+        XCTAssertEqual(out.currentStage, .outForDelivery)
+        XCTAssertEqual(out.plannedEvents?.map(\.description), ["Out for delivery", "Delivered"])
+        // Delivered, nothing is planned any more.
+        let delivered = try repo.refresh(id: vinyl.id)
+        XCTAssertEqual(delivered.currentStage, .delivered)
+        XCTAssertNil(delivered.plannedEvents)
+        XCTAssertNil(try XCTUnwrap(repo.list().first { $0.id == vinyl.id }).plannedEvents)
+    }
+
+    func testAPlannedStepStaysUntilAScanIsAsLateOrHasComeFurther() {
+        let id = UUID()
+        func step(_ stage: TrackingStage, _ occurredAt: String) -> PlannedTrackingEvent {
+            PlannedTrackingEvent(description: "\(stage.rawValue) planned", stage: stage, occurredAt: occurredAt)
+        }
+        var parcel = makeParcel(id: id, events: [
+            event(id, .accepted, "2026-09-01T10:00:00Z"), event(id, .outForDelivery, "2026-09-03T08:00:00Z"),
+        ])
+        parcel.plannedEvents = [
+            step(.inTransit, "2026-09-02T10:00:00Z"),
+            step(.inTransit, "2026-09-03T09:00:00Z"),
+            step(.customs, "2026-09-03T08:00:00Z"),
+            step(.customs, "2026-09-03T10:00:00Z"),
+            step(.exception, "2026-09-03T11:00:00Z"),
+            step(.outForDelivery, "2026-09-03T12:00:00Z"),
+            step(.delivered, "2026-09-03T15:00:00Z"),
+        ]
+        // Dated before the newest scan, or as late, it is overtaken; so is a step behind the furthest stage scanned. A
+        // step outside the stages' order is never behind.
+        XCTAssertEqual(DemoRepository.stillPlanned(parcel).plannedEvents?.map(\.occurredAt), [
+            "2026-09-03T10:00:00Z", "2026-09-03T11:00:00Z", "2026-09-03T12:00:00Z", "2026-09-03T15:00:00Z",
+        ])
+        XCTAssertEqual(DemoRepository.stillPlanned(makeParcel(id: id, events: parcel.trackingEvents)), makeParcel(id: id, events: parcel.trackingEvents))
+        for ending in [TrackingStage.delivered, .returned] {
+            var ended = parcel
+            ended.trackingEvents.insert(event(id, ending, "2026-09-02T09:00:00Z"), at: 1)
+            XCTAssertNil(DemoRepository.stillPlanned(ended).plannedEvents, "\(ending)")
+        }
+        // None left: none planned.
+        var overtaken = parcel
+        overtaken.trackingEvents.append(event(id, .outForDelivery, "2026-09-04T08:00:00Z"))
+        XCTAssertNil(DemoRepository.stillPlanned(overtaken).plannedEvents)
+    }
+
+    @MainActor
+    func testAPlannedStepReadsItsDayAsTheJournalDoesAndItsTimeWhenItHasOne() throws {
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        let calendar = Calendar.current
+        let now = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 11, day: 4, hour: 12)))
+        func at(month: Int, day: Int, year: Int = 2026) throws -> String {
+            DateParser.isoString(try XCTUnwrap(calendar.date(from: DateComponents(year: year, month: month, day: day, hour: 7, minute: 54))))
+        }
+        func step(_ occurredAt: String, day: String? = nil) -> PlannedTrackingEvent {
+            PlannedTrackingEvent(description: "Planned", stage: .inTransit, occurredAt: occurredAt, day: day)
+        }
+        localizer.language = .en
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 4)), now: now), "today, 07:54")
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 5)), now: now), "tomorrow, 07:54")
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 3)), now: now), "yesterday, 07:54")
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 6)), now: now), "Fri 6 Nov, 07:54")
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 1, day: 8, year: 2027)), now: now), "Fri 8 Jan 2027, 07:54")
+        // A step the carrier dated by its day alone has no time.
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 6), day: "2026-11-06"), now: now), "Fri 6 Nov")
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 5), day: "2026-11-05"), now: now), "tomorrow")
+        XCTAssertEqual(localizer.plannedDate(step("not a date"), now: now), "")
+        localizer.language = .zh
+        XCTAssertEqual(localizer.plannedDate(step(try at(month: 11, day: 5)), now: now), "明天 07:54")
+    }
+
+    func testALinkCarriesThePlannedStepsItShows() throws {
+        let now = DateParser.date("2026-09-09T12:00:00Z")!
+        let vinyl = try XCTUnwrap(DemoRepository.seed(now: now).first { $0.label == Self.vinyl })
+        let package = PublicPackage(
+            id: vinyl.id, trackingNumber: vinyl.trackingNumber, label: "", carrier: vinyl.carrier, createdAt: vinyl.createdAt,
+            syncStatus: .ok, carrierData: PublicPackageCarrierData(), notificationsMuted: false,
+            trackingEvents: vinyl.trackingEvents, plannedEvents: vinyl.plannedEvents
+        )
+        XCTAssertEqual(Parcel(shared: package).plannedEvents, vinyl.plannedEvents)
+        XCTAssertEqual(Parcel(shared: package).trackingEvents, vinyl.trackingEvents)
+    }
+
+    /// The journal of the demo's vinyl, with the steps its carrier planned over the scans, at regular type in light and
+    /// at large type in dark, each picture kept with the test's results.
+    @MainActor func testTheJournalDrawsThePlannedStepsOverTheScans() async throws {
+        try await draw(.en, named: "journal-planned", in: [CGSize(width: 390, height: 1000)]) { store in
+            let vinyl = try XCTUnwrap(store.parcels.first { $0.label == Self.vinyl })
+            ScrollView { ParcelJournal(parcel: vinyl, tint: .orange).padding(16) }
+        }
+    }
+}
+
 /// A parcel's page as the list opens it, over itself or beside it, with the transition it comes in by.
 private struct DetailPage: View {
     let parcelID: UUID

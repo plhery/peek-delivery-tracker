@@ -527,8 +527,8 @@ private fun LinkShared(
     val opened = gift == ParcelLinkGift.Opened
     val parcel = remember(response, wrapped) {
         val shared = Parcel(shared = response.parcel)
-        // A gift on its way tells its hidden beginning once.
-        if (wrapped) shared.copy(trackingEvents = shared.trackingEvents.collapsingGiftRows()) else shared
+        // A gift on its way tells its hidden beginning once, and nothing of the steps its carrier planned.
+        if (wrapped) shared.copy(trackingEvents = shared.trackingEvents.collapsingGiftRows(), plannedEvents = null) else shared
     }
     val identity = remember(identities, parcel, language) { identities.of(parcel.displayedCarrier, language) }
     val colors = PeekTheme.colors

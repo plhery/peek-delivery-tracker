@@ -9,6 +9,7 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +21,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,22 +32,29 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.JournalDay
 import com.plhery.peekdeliverytracker.core.JournalEntry
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.core.displayStatus
@@ -54,6 +63,9 @@ import com.plhery.peekdeliverytracker.core.journalEntries
 import com.plhery.peekdeliverytracker.core.journalLocation
 import com.plhery.peekdeliverytracker.core.journalTime
 import com.plhery.peekdeliverytracker.core.journalWording
+import com.plhery.peekdeliverytracker.core.plannedNewestFirst
+import com.plhery.peekdeliverytracker.core.plannedStepLabel
+import com.plhery.peekdeliverytracker.core.plannedWording
 import com.plhery.peekdeliverytracker.core.relayedWordings
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -64,6 +76,7 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.monospacedDigit
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
+import java.time.Instant
 import java.util.UUID
 
 /**
@@ -74,6 +87,7 @@ import java.util.UUID
  * being asked while the parcel syncs, and that there is nothing yet otherwise. Each day is headed in caption2 capitals
  * tracked 1 in the secondary grey, 22 under what comes before and 13 over its rows, which stand 18 apart; TalkBack
  * hears the heading as one, as written rather than in capitals. The row of the current scan, or of the scan whose copy it is, has its time in `tint`.
+ * The steps the carrier planned and has not confirmed ([PlannedSteps]) come before the days, apart from the scans.
  */
 @Composable
 internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Modifier) {
@@ -101,6 +115,7 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                 fadeOut(Motion.easeInOut(TOGGLE)) + shrinkVertically(Motion.easeInOut<IntSize>(TOGGLE), Alignment.Top, clip = false),
         ) {
             Column(Modifier.fillMaxWidth()) {
+                parcel.plannedEvents?.takeIf { it.isNotEmpty() }?.let { PlannedSteps(it, now()) }
                 if (days.isEmpty()) {
                     Text(
                         localizer.text(if (syncing) "timeline.emptySyncing" else "timeline.empty"),
@@ -114,25 +129,142 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                         // A scan without a date or a day: SwiftUI's empty text takes no room, its padding does.
                         Spacer(Modifier.height(22.dp + 13.dp))
                     } else {
-                        Text(
-                            day.label.uppercase(language.locale),
-                            // CoreText tracks after each letter, Android half before it: the words start where the iPhone's start.
-                            Modifier
-                                .padding(top = 22.dp, bottom = 13.dp)
-                                .offset(x = (-0.5).dp)
-                                .testTag(JOURNAL_DAY)
-                                // Capitals only to the eye, as `.textCase` draws them: TalkBack hears the day as written.
-                                .clearAndSetSemantics {
-                                    heading()
-                                    text = AnnotatedString(day.label)
-                                },
-                            color = colors.secondaryLabel,
-                            style = type.tracking(type.caption2, 1f).sfLines(),
-                        )
+                        JournalHeading(day.label, bottom = 13.dp, Modifier.testTag(JOURNAL_DAY))
                     }
                     JournalDayRows(day, tint, currentId, syncing)
                 }
             }
+        }
+    }
+}
+
+/**
+ * A heading of the journal, a day's or the planned steps': `label` in caption2 capitals tracked 1 in the secondary grey,
+ * 22 under what comes before and `bottom` over what follows. TalkBack hears it as one heading, as written rather than in
+ * capitals.
+ */
+@Composable
+private fun JournalHeading(label: String, bottom: Dp, modifier: Modifier = Modifier) {
+    val type = PeekTheme.type
+    Text(
+        label.uppercase(LocalLanguage.current.locale),
+        // CoreText tracks after each letter, Android half before it: the words start where the iPhone's start.
+        Modifier
+            .padding(top = 22.dp, bottom = bottom)
+            .offset(x = (-0.5).dp)
+            .then(modifier)
+            // Capitals only to the eye, as `.textCase` draws them: TalkBack hears the day as written.
+            .clearAndSetSemantics {
+                heading()
+                text = AnnotatedString(label)
+            },
+        color = PeekTheme.colors.secondaryLabel,
+        style = type.tracking(type.caption2, 1f).sfLines(),
+    )
+}
+
+/**
+ * `PlannedSteps`: the steps the carrier listed before they happen, newest first ([plannedNewestFirst]), under the
+ * heading "Planned by the carrier" ([JournalHeading], 4 over the note) and a note in caption2 secondary that they are
+ * not confirmed, 15 over the steps. The steps stand 18 apart ([PlannedStepRow]), and a dashed line in the separator's
+ * colour, 1 high, closes them 18 under the last. They are no scans and count as no update.
+ */
+@Composable
+private fun PlannedSteps(steps: List<PlannedTrackingEvent>, now: Instant) {
+    val localizer = LocalLocalizer.current
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val ordered = remember(steps) { plannedNewestFirst(steps) }
+    Column(Modifier.fillMaxWidth().testTag(JOURNAL_PLANNED)) {
+        JournalHeading(localizer.text("timeline.planned.title"), bottom = 4.dp)
+        Text(
+            localizer.text("timeline.planned.note"),
+            Modifier.padding(bottom = 15.dp),
+            color = colors.secondaryLabel,
+            style = type.caption2.sfLines(),
+        )
+        Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+            ordered.forEachIndexed { index, step -> PlannedStepRow(step, joinsNext = index < ordered.lastIndex, now = now) }
+        }
+        val separator = colors.separator
+        Canvas(
+            Modifier
+                .padding(top = 18.dp)
+                .fillMaxWidth()
+                .height(1.dp),
+        ) {
+            val dash = 3.dp.toPx()
+            drawLine(
+                separator, Offset(0f, size.height / 2), Offset(size.width, size.height / 2), strokeWidth = 1.dp.toPx(),
+                pathEffect = PathEffect.dashPathEffect(floatArrayOf(dash, dash)),
+            )
+        }
+    }
+}
+
+/**
+ * A planned step laid out as a scan's row ([JournalEventRow]), greyed: in the time's column, a hollow dashed circle 12
+ * across, 3 lower than the words, and when `joinsNext` a dashed rail at 45% down from under it to just over the next
+ * step's circle; then the words in footnote, the day it is planned for ([plannedDate]) 3 under them and where
+ * ([EventLocation]) 4 under that, all in the secondary grey. At the accessibility sizes the circle goes over the words,
+ * as a scan's time does, without the rail. TalkBack reads the row as one ([plannedStepLabel]).
+ */
+@Composable
+private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: Instant) {
+    val localizer = LocalLocalizer.current
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
+    val secondary = colors.secondaryLabel
+    val date = localizer.plannedDate(step, now)
+    val mark = @Composable {
+        Box(Modifier.padding(top = 3.dp).then(if (large) Modifier else Modifier.width(type.scaled(TIME_WIDTH, IosTextStyle.Caption2).dp))) {
+            Canvas(Modifier.size(12.dp)) {
+                drawCircle(
+                    secondary, radius = 4.6.dp.toPx(),
+                    style = Stroke(1.2.dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(2.4.dp.toPx(), 1.9.dp.toPx()))),
+                )
+            }
+        }
+    }
+    val details = @Composable { modifier: Modifier ->
+        Column(modifier) {
+            Text(localizer.plannedWording(step), color = secondary, style = type.footnote.sfLines())
+            if (date.isNotEmpty()) {
+                Text(date, Modifier.padding(top = 3.dp), color = secondary, style = type.caption2.monospacedDigit().sfLines())
+            }
+            step.journalLocation?.let { location -> Box(Modifier.padding(top = 4.dp)) { EventLocation(location, null) } }
+        }
+    }
+    val label = localizer.plannedStepLabel(step, now)
+    val row = Modifier
+        .fillMaxWidth()
+        .testTag(JOURNAL_PLANNED_ROW)
+        .then(
+            if (joinsNext && !large) {
+                Modifier.drawBehind {
+                    // From 3 under this step's circle to 2 over the next row, whose circle stands 3 lower.
+                    val x = 6.dp.toPx()
+                    val dash = 3.dp.toPx()
+                    drawLine(
+                        secondary.copy(alpha = secondary.alpha * 0.45f), Offset(x, 18.dp.toPx()), Offset(x, size.height + 16.dp.toPx()),
+                        strokeWidth = 1.dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(dash, dash)),
+                    )
+                }
+            } else {
+                Modifier
+            },
+        )
+        .clearAndSetSemantics { contentDescription = label }
+    if (large) {
+        Column(row, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            mark()
+            details(Modifier.fillMaxWidth())
+        }
+    } else {
+        Row(row, horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.Top) {
+            mark()
+            details(Modifier.weight(1f))
         }
     }
 }
@@ -288,7 +420,9 @@ private const val TOGGLE = 0.2
 /** The time column's width at the Large text size (`@ScaledMetric(relativeTo: .caption2)`). */
 private const val TIME_WIDTH = 38f
 
-/** The test tags of the journal's header, its days' headings and its rows. */
+/** The test tags of the journal's header, its days' headings, its rows, its planned steps and their rows. */
 const val JOURNAL_TOGGLE = "journal.toggle"
 const val JOURNAL_DAY = "journal.day"
 const val JOURNAL_ROW = "journal.row"
+const val JOURNAL_PLANNED = "journal.planned"
+const val JOURNAL_PLANNED_ROW = "journal.planned.row"

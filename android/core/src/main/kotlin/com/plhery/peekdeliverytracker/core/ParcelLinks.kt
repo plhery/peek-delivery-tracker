@@ -75,6 +75,7 @@ fun Parcel(shared: PublicPackage): Parcel {
         archivedAt = shared.archivedAt,
         notificationsMuted = shared.notificationsMuted,
         trackingEvents = shared.trackingEvents,
+        plannedEvents = shared.plannedEvents,
     )
 }
 

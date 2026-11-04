@@ -166,8 +166,6 @@ import com.plhery.peekdeliverytracker.ui.sheet.LocalSheetGround
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
-import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
-import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalCarrierIdentities
@@ -1545,8 +1543,8 @@ private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.
  * before "Adding…". The words swap at once on the tap, as `saving = true` rides no animation (`.animation` is on
  * `canSave` alone); they cross over the form's snappy 0.3 s only where [error] appears or clears in the same update (a
  * try again after a failure, a failure coming back), as the form animates on `errorMessage` (`.contentTransition
- * (.opacity)`); at once under Reduce Motion. At the accessibility sizes its words keep to one line, shrinking to 70 %,
- * and grow no further than accessibility2.
+ * (.opacity)`); at once under Reduce Motion. Its words are centred; at the accessibility sizes they keep to two lines,
+ * and only a longer title than those hold is made smaller, down to 70 %.
  */
 @Composable
 private fun AddButton(
@@ -1604,40 +1602,41 @@ private fun AddButton(
                 .padding(horizontal = 16.dp),
             contentAlignment = Alignment.Center,
         ) {
-            CappedDynamicTypeSize(DynamicTypeSize.Accessibility2) {
-                val style = PeekTheme.type.headline.sfLines()
-                val label = @Composable { busy: Boolean ->
-                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
-                        if (busy) ActivityIndicator(size = REGULAR_SPINNER, tint = colors.onAccent)
-                        ShrinkingText(if (busy) adding else words, style, colors.onAccent, oneLine = large)
-                    }
+            val style = PeekTheme.type.headline.sfLines()
+            val label = @Composable { busy: Boolean ->
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                    if (busy) ActivityIndicator(size = REGULAR_SPINNER, tint = colors.onAccent)
+                    ShrinkingText(if (busy) adding else words, style, colors.onAccent, twoLines = large)
                 }
-                if (crossing == null) {
-                    Box(Modifier.clearAndSetSemantics {}) { label(saving) }
-                } else {
-                    val transition = rememberTransition(crossing, label = "add label")
-                    val now by transition.animateFloat({ Motion.snappy(STATE_MOTION) }, label = "add words") { if (it == saving) 1f else 0f }
-                    Box(Modifier.clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
-                        if (transition.currentState != transition.targetState) Box(Modifier.graphicsLayer { alpha = 1f - now }) { label(!saving) }
-                        Box(Modifier.graphicsLayer { alpha = now }) { label(saving) }
-                    }
+            }
+            if (crossing == null) {
+                Box(Modifier.clearAndSetSemantics {}) { label(saving) }
+            } else {
+                val transition = rememberTransition(crossing, label = "add label")
+                val now by transition.animateFloat({ Motion.snappy(STATE_MOTION) }, label = "add words") { if (it == saving) 1f else 0f }
+                Box(Modifier.clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
+                    if (transition.currentState != transition.targetState) Box(Modifier.graphicsLayer { alpha = 1f - now }) { label(!saving) }
+                    Box(Modifier.graphicsLayer { alpha = now }) { label(saving) }
                 }
             }
         }
     }
 }
 
-/** Words on one line where [oneLine], shrinking to 70 % rather than wrap (`minimumScaleFactor(0.7)`). */
+/**
+ * Words centred on the lines they need, or on two at most where [twoLines], only a longer title than those hold made
+ * smaller, down to 70 % (`lineLimit(2)`, `minimumScaleFactor(0.7)`).
+ */
 @Composable
-private fun ShrinkingText(text: String, style: TextStyle, color: Color, oneLine: Boolean) {
-    if (!oneLine) {
+private fun ShrinkingText(text: String, style: TextStyle, color: Color, twoLines: Boolean) {
+    if (!twoLines) {
         Text(text, color = color, style = style, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
         return
     }
     androidx.compose.foundation.text.BasicText(
         text,
-        style = style.copy(color = color),
-        maxLines = 1,
+        style = style.copy(color = color, textAlign = androidx.compose.ui.text.style.TextAlign.Center),
+        maxLines = 2,
         autoSize = androidx.compose.foundation.text.TextAutoSize.StepBased(minFontSize = style.fontSize * MINIMUM_SCALE, maxFontSize = style.fontSize),
     )
 }

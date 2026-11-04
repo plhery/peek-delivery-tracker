@@ -54,6 +54,7 @@ import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
 import androidx.compose.ui.unit.width
 import androidx.core.graphics.Insets
@@ -1176,6 +1177,21 @@ class AddParcelTest {
         type("1Z999AA10123456784")
         val line = node(ADD_CARRIER).getUnclippedBoundsInRoot()
         assertTrue("${line.height}", line.height.value > 60f)
+    }
+
+    /**
+     * As `addButton`: at the largest text its words take two lines rather than one made smaller, and the button grows
+     * around them (headline at accessibility 2's 33 points).
+     */
+    @Test
+    @Config(qualifiers = "w240dp-h640dp-xhdpi")
+    fun atTheAccessibilitySizesAddsWordsTakeTwoLines() {
+        show(fontScale = 2f)
+        open()
+        type("UPS 1Z999AA10123456784\nUPS 1Z999AA10123456793")
+        assertEquals(text("door.several.track"), description(ADD_SAVE))
+        val button = node(ADD_SAVE).getUnclippedBoundsInRoot()
+        assertTrue("${button.height}", button.height > 33.dp * 2)
     }
 
     @Test

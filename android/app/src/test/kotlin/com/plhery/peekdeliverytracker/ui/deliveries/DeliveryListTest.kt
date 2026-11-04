@@ -52,6 +52,7 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.width
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppConfiguration
@@ -64,6 +65,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.draw.NOTICE_BADGE
 import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
 import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
@@ -378,11 +380,16 @@ class DeliveryListTest {
 
     /** X-AD35: "On the way" over the list is plain text to TalkBack, as it is to VoiceOver (`listOverview`). */
     @Test
-    fun onTheWayOverTheListIsNoHeading() {
+    fun onTheWayOverTheListAndTheSectionsAreHeadings() {
         show()
         val words = compose.onAllNodes(hasText("On the way")).fetchSemanticsNodes()
         assertTrue(words.isNotEmpty())
-        words.forEach { assertFalse(SemanticsProperties.Heading in it.config) }
+        words.forEach { assertTrue(SemanticsProperties.Heading in it.config) }
+        // A section's header is read as one heading: its name and how many parcels it holds.
+        val past = compose.onNode(isHeading() and hasText(localizer.text("app.pastDeliveries"))).fetchSemanticsNode()
+        val said = past.config[SemanticsProperties.Text].map { it.text }
+        assertEquals(said.toString(), 2, said.size)
+        assertTrue(said.toString(), said[1].all(Char::isDigit))
     }
 
     @Test
@@ -707,6 +714,32 @@ class DeliveryListTest {
         compose.runOnUiThread { source.errorMessage.value = null }
         compose.waitForIdle()
         compose.onNodeWithTag(LIST_NOTICE).assertDoesNotExist()
+    }
+
+    /** As NoticeBanner's at the accessibility sizes: its circle, grown with the text, stands 8 over the words. */
+    @Test
+    fun atTheAccessibilitySizesTheNoticesSymbolStandsOverItsWords() {
+        show(width = 600.dp, session = reader, fontScale = 2f)
+        compose.runOnUiThread { source.errorMessage.value = localizer.text("error.connection") }
+        compose.waitForIdle()
+        val badge = compose.onNode(hasTestTag(NOTICE_BADGE) and hasAnyAncestor(hasTestTag(LIST_NOTICE)), useUnmergedTree = true).getBoundsInRoot()
+        val title = compose.onNode(hasText(localizer.text("app.trackingBreak")) and hasAnyAncestor(hasTestTag(LIST_NOTICE)), useUnmergedTree = true)
+            .getBoundsInRoot()
+        assertTrue("$badge over $title", title.top >= badge.bottom + 7.5.dp)
+        assertEquals(badge.left.value, title.left.value, 0.5f)
+        assertTrue("${badge.width}", badge.width > 28.dp)
+    }
+
+    @Test
+    fun atTheDefaultSizeTheNoticesSymbolStandsBesideItsWords() {
+        show(width = 600.dp, session = reader)
+        compose.runOnUiThread { source.errorMessage.value = localizer.text("error.connection") }
+        compose.waitForIdle()
+        val badge = compose.onNode(hasTestTag(NOTICE_BADGE) and hasAnyAncestor(hasTestTag(LIST_NOTICE)), useUnmergedTree = true).getBoundsInRoot()
+        val title = compose.onNode(hasText(localizer.text("app.trackingBreak")) and hasAnyAncestor(hasTestTag(LIST_NOTICE)), useUnmergedTree = true)
+            .getBoundsInRoot()
+        assertEquals(28f, badge.width.value, 0.5f)
+        assertEquals(badge.right.value + 12f, title.left.value, 0.5f)
     }
 
     /**

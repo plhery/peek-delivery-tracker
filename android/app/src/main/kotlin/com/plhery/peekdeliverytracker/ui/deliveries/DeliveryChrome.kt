@@ -538,13 +538,13 @@ internal fun OverviewRow(state: DeliveriesState, active: Int, change: ListChange
         // The words and the count take what the buttons leave, the words giving way first.
         Row(Modifier.weight(1f), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
             if (active > 0) {
-                // At the accessibility sizes the heading gets a little smaller rather than break in two. Plain text to
-                // TalkBack, as the iPhone's is to VoiceOver (`listOverview`, no `.isHeader`), and the sections' headers.
+                // At the accessibility sizes the heading gets a little smaller rather than break in two. A heading to
+                // TalkBack, as the iPhone's is to VoiceOver (`listOverview`), without its count.
                 val style = PeekTheme.type.headline
                 val probe = LocalOnTheWayHeading.current
                 Text(
                     localized("app.onTheWaySection"),
-                    Modifier.weight(1f, fill = false),
+                    Modifier.weight(1f, fill = false).semantics { heading() },
                     color = colors.ink,
                     style = style,
                     maxLines = if (largeText) 1 else Int.MAX_VALUE,

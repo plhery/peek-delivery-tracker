@@ -257,8 +257,11 @@ class FriendPageTest {
         // Earned, First and Express; then the next three to earn, in the stamps' order, four to a row.
         assertEquals(listOf(FriendStamp.First, FriendStamp.Ten, FriendStamp.Connected, FriendStamp.Express, FriendStamp.AcrossBorders), stamps())
         assertEquals(4, firstRow())
-        // Each stamp reads as its title alone, a button.
-        assertEquals(text(FriendStamp.Ten.titleKey), label(friendStampTag(FriendStamp.Ten)))
+        // Each stamp reads as Passport's, a button: its title, and while it isn't earned, how far along it is or that it
+        // isn't.
+        assertEquals(text(FriendStamp.First.titleKey), label(friendStampTag(FriendStamp.First)))
+        assertEquals("${text(FriendStamp.Ten.titleKey)}, 8 / 10", label(friendStampTag(FriendStamp.Ten)))
+        assertEquals("${text(FriendStamp.Connected.titleKey)}, ${text("passport.notEarned")}", label(friendStampTag(FriendStamp.Connected)))
         assertEquals(Role.Button, semantics(friendStampTag(FriendStamp.Ten))[SemanticsProperties.Role])
         assertEquals(listOf(text("passport.showAll")), words(FRIENDS_SHOW_ALL))
         tap(FRIENDS_SHOW_ALL)

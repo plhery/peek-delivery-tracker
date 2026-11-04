@@ -266,8 +266,9 @@ class SettingsTest {
         assertTrue(shows(text("settings.off")))
         assertTrue(source.accountCalls.containsAll(listOf("refreshNotificationState", "loadNotificationPreferences")))
         assertTrue(shows(text("settings.version", mapOf("version" to "1.0"))))
-        // The groups' titles are read as one each.
-        assertTrue(shows(text("settings.preferences").uppercase()))
+        // The groups' titles are read as one heading each.
+        val group = compose.onNode(hasText(text("settings.preferences").uppercase())).fetchSemanticsNode().config
+        assertTrue(SemanticsProperties.Heading in group)
         press(SETTINGS_CLOSE)
         assertFalse(deliveries.showingAccount)
         assertFalse(exists(SETTINGS_SHEET))

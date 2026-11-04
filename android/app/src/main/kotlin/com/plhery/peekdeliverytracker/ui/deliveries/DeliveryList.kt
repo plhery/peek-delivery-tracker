@@ -76,6 +76,7 @@ import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -888,14 +889,14 @@ private fun CardComposed(parcelId: UUID) {
     SideEffect { told(parcelId) }
 }
 
-/** A section's name and its count, as the overview's. */
+/** A section's name and its count, as the overview's, read as one heading. */
 @Composable
 private fun SectionHeader(kind: ParcelSectionKind, count: Int, change: ListChange?) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
     val title = remember(kind, localizer, language) { localizer.text(sectionTitleKey(kind)) }
     androidx.compose.foundation.layout.Row(
-        Modifier.fillMaxWidth().padding(top = 3.dp),
+        Modifier.fillMaxWidth().padding(top = 3.dp).semantics(mergeDescendants = true) { heading() },
         horizontalArrangement = Arrangement.spacedBy(9.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {

@@ -315,7 +315,11 @@ private fun PlainButton(
 private fun FriendStampButton(value: FriendStamp, earned: Boolean, count: Int, open: Boolean, onOpen: () -> Unit, onDismiss: () -> Unit) {
     val colors = PeekTheme.colors
     val title = localized(value.titleKey)
-    val explanation = localized(value.explanationKey) + progress(value, earned, count, localized("passport.underTwoDays"))
+    val along = progress(value, earned, count, localized("passport.underTwoDays"))
+    val explanation = localized(value.explanationKey) + along
+    // Read as Passport reads one: its title, and while it isn't earned, how far along it is, or that it isn't.
+    val notEarned = localized("passport.notEarned")
+    val label = if (earned) title else "$title, ${along.trim('\n').ifEmpty { notEarned }}"
     var anchor by remember { mutableStateOf(Rect.Zero) }
     val (tint, surface) = stampColors(value)
     Column(
@@ -326,7 +330,7 @@ private fun FriendStampButton(value: FriendStamp, earned: Boolean, count: Int, o
             .testTag(friendStampTag(value))
             .clickable(interactionSource = null, indication = PressStyle.Passport, onClick = onOpen)
             .clearAndSetSemantics {
-                contentDescription = title
+                contentDescription = label
                 role = Role.Button
                 onClick {
                     onOpen()

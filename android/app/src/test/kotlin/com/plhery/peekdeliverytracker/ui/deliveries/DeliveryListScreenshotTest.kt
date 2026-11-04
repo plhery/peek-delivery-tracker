@@ -127,7 +127,7 @@ class DeliveryListScreenshotTest {
         compose.waitForIdle()
     }
 
-    private fun scrollToThePast(top: Float) = scrollTo("section-Delivered", { compose.onNodeWithText("Past deliveries") }, top)
+    private fun scrollToThePast(top: Float) = scrollTo("section-Delivered", { compose.onNodeWithText("Past deliveries", useUnmergedTree = true) }, top)
 
     private fun openTheArchive() {
         scrollToEnd()

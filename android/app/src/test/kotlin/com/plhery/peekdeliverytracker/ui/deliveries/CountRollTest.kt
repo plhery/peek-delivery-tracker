@@ -315,7 +315,7 @@ class CountRollTest {
         val active = number(ACTIVE_COUNT).toInt()
         val delivered = number(past).toInt()
         // The section moves up as the list takes its new places: each figure is measured from its own capsule.
-        fun inPill(tag: String) = compose.onNodeWithTag(tag).getUnclippedBoundsInRoot().top.value.let { pill -> figures(tag).map { (text, top) -> text to top - pill } }
+        fun inPill(tag: String) = compose.onNodeWithTag(tag, useUnmergedTree = true).getUnclippedBoundsInRoot().top.value.let { pill -> figures(tag).map { (text, top) -> text to top - pill } }
         val activeRest = inPill(ACTIVE_COUNT).last().second
         val pastRest = inPill(past).last().second
         compose.mainClock.autoAdvance = false

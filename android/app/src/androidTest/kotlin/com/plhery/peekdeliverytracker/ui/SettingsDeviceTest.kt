@@ -144,8 +144,9 @@ class SettingsDeviceTest {
             ViewCompat.setWindowInsetsAnimationCallback(window.decorView, keyboardSlides)
         }
         compose.setContent {
-            val dark = appearanceSetting().isDark(isSystemInDarkTheme())
-            DisposableEffect(dark) {
+            val night = isSystemInDarkTheme()
+            val dark = appearanceSetting().isDark(night)
+            DisposableEffect(dark, night) {
                 compose.activity.edgeToEdge(dark)
                 onDispose {}
             }

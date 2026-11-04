@@ -221,6 +221,26 @@ class NightModeTest {
         }
     }
 
+    /**
+     * A-SE01: Dark picked on a light phone, the app's own dark comes before the night's change, which has the platform
+     * lay the window theme's icons, those of the night the window was made in, over the bars (as a tablet does): the
+     * window sets its bars again for the night, light icons over the dark app.
+     */
+    @Test
+    fun theBarsAreSetAgainOnTheNightsChangeThatComesAfterTheAppsDark() {
+        val window = main()
+        val shown = window.get()
+        assertTrue(lightBars(shown))
+        store.set(AppAppearance.Dark)
+        idle()
+        assertFalse("The app's own dark", lightBars(shown))
+        val icons = WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS or WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
+        checkNotNull(shown.window.insetsController).setSystemBarsAppearance(icons, icons)
+        window.configurationChange(night(shown, dark = true))
+        idle()
+        assertFalse("Set again for the night", lightBars(shown))
+    }
+
     /** System picked: the night mode is the phone's, and the window follows the phone as it goes dark and light. */
     @Test
     fun underSystemTheWindowFollowsThePhone() {

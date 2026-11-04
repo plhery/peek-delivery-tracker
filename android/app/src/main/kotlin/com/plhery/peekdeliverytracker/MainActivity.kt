@@ -94,8 +94,11 @@ class MainActivity : ComponentActivity() {
             // composed after that has them from its first frame, where the first one to ask would go a frame without.
             WindowInsets.safeDrawing
             val appearance = appearanceSetting()
-            val dark = appearance.isDark(isSystemInDarkTheme())
-            DisposableEffect(dark) {
+            val night = isSystemInDarkTheme()
+            val dark = appearance.isDark(night)
+            // Set again on a change of the night too, Dark picked included, where the app's own dark comes first: the
+            // platform then lays the window theme's icons, as the window was made, over the bars.
+            DisposableEffect(dark, night) {
                 systemBars(dark)
                 onDispose {}
             }

@@ -40,10 +40,11 @@ Lingdong publishes no list of its statuses. It writes its scans in English, or i
 | `拆板作业中，等待取货通知【Under destuffing, waiting for pickup instructions.】` | After the landing, the flight's pallets are being broken down while the cargo waits to be collected for customs clearance: you don't have to collect anything. |
 | `货物在清关【Customs clearance in progress】` | In customs in the destination country, after the landing. |
 | `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete`, `货物已完成清关【The goods have completed customs clearance】` | The destination country's customs have cleared it, after the landing and before the delivery. "Domestic" here means the destination country's, not China's. |
+| `货物已交服务商【The shipment has been transferred to the logistics partner.】` | After customs clearance, Lingdong has handed the parcel to the company that delivers it. |
 
 The Chinese line isn't a scan of the parcel. Lingdong's tracking system writes it by itself for an order that has no scans yet, dated when the order was created.
 
-None of the Lingdong lines Peek knows is a delivery line: the last is customs clearance in the destination country. Another company delivers the parcel there, and its tracking has the rest.
+None of the Lingdong lines Peek knows is a delivery line: the last is the hand-over after customs clearance in the destination country. Another company delivers the parcel there, and its tracking has the rest.
 
 ## Who delivers Lingdong parcels
 

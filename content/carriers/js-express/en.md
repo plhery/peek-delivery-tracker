@@ -35,6 +35,8 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | `Item has been collected` | JS Express's warehouse in China has the parcel: its first real scan. | "Received by carrier" |
 | `Item inbound in sorting center.`, `Item outbound in sorting center.` | Sorted at JS Express in China. | "In transit" |
 | `Domestic allocation has begun`, `Under domestic allocation` | Still at JS Express's warehouse in China, after sorting and before it leaves. | "In transit" |
+| `Waybill Generated for` | The courier in your country has made its waybill, while JS Express's warehouse in China still has the parcel. | "In transit" |
+| `Arrive at transit center` | At JS Express's transit centre in China, between sorting and departure. | "In transit" |
 | `Item departed from origin.`, `Arrive at international airport to abroad` | On its way out, then at the airport in China. | "In transit" |
 | `Released From Export Customs` | China's export customs are done. Not your country's customs. | "In transit" |
 | `DEPART ORIGIN AIRPORT`, `Item Flight departure`, `Initial landing`, `Connecting flights flight takeoff` | The flight has left, sometimes with a stop and a connecting flight. | "In transit" |
@@ -48,7 +50,7 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 | `到达待取` | JS Express's own status, in Chinese: arrived, awaiting collection. Its place is only the country. | "Ready for pickup" |
 | `The delivery address is incorrect. Please ask the recipient to contact their local area?` | JS Express's own notice after the courier failed to deliver: the address is unclear or wrong. It asks you to contact the local office, whose phone number JS Express's page gives; Peek leaves phone numbers out. | "Delivery attempted" |
 
-**The courier's scans.** After `Delivery to local courier`, the history goes on in the courier's words. In the US, USPS's: `Accepted at USPS Origin Facility` (its first scan, not a new shipment), `Out for Delivery`, `Delivered, Front Door/Porch`. In Canada, Straightship's `Package is received at a Straightship station`, then `Package will be delivered before 9:00pm`, the driver's round that day ("Out for delivery": a delivery or an attempt follows), and `Delivered` with the town in brackets.
+**The courier's scans.** After `Delivery to local courier`, the history goes on in the courier's words. In the US, USPS's: `Accepted at USPS Origin Facility` (its first scan, not a new shipment), `Out for Delivery`, `Delivered, Front Door/Porch`. In Canada, Straightship's `Package is received at a Straightship station`, then `Package will be delivered before 9:00pm`, the driver's round that day ("Out for delivery": a delivery or an attempt follows), and `Delivered` with the town in brackets. In Hungary, the courier's `Arrived to HU HUB`, `Linehaul Transit` (the trip from its hub to a sorting centre) and `Shipment arrived to sorting centre / Shipment in the sorting centre` follow, all "In transit".
 
 **Lines that aren't scans.** `SHIPPING INFORMATION RECEIVED`, `SHIPMENT CREATED`, `Data Received`, USPS's `Shipping Label Created, USPS Awaiting Item`, `Package information is created in the system` and, at a European hub, `Shipment Data Uploaded` then `Processed` are a partner's record of the parcel's details, sometimes days before it has the parcel.
 

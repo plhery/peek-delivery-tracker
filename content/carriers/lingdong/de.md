@@ -40,10 +40,11 @@ Eine Liste seiner Status veröffentlicht Lingdong nicht. Seine Zeilen schreibt e
 | `拆板作业中，等待取货通知【Under destuffing, waiting for pickup instructions.】` | Nach der Landung werden die Frachtpaletten entladen, und die Ladung wartet darauf, zur Verzollung abgeholt zu werden. Abholen musst du nichts. | „Unterwegs“ |
 | `货物在清关【Customs clearance in progress】` | Beim Einfuhrzoll, nach der Landung. | „Beim Zoll“ |
 | `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete`, `货物已完成清关【The goods have completed customs clearance】` | Der Einfuhrzoll hat das Paket freigegeben, nach der Landung und vor der Zustellung. *Domestic* (inländisch) meint hier das Einfuhrland, nicht China. | „Unterwegs“ |
+| `货物已交服务商【The shipment has been transferred to the logistics partner.】` | Nach der Verzollung hat Lingdong das Paket dem Unternehmen übergeben, das es zustellt. | „Unterwegs“ |
 
 `货物电子信息已经收到` ist kein Scan deines Pakets. Lingdongs Tracking-System schreibt diese Zeile selbst für einen Auftrag, der noch keinen Scan hat, und datiert sie auf den Zeitpunkt, an dem der Auftrag angelegt wurde.
 
-Keine der Lingdong-Zeilen, die Peek kennt, meldet eine Zustellung: Die letzte ist die Verzollung nach der Landung. Zugestellt wird das Paket von einem anderen Unternehmen, und dessen Sendungsverfolgung zeigt den Rest.
+Keine der Lingdong-Zeilen, die Peek kennt, meldet eine Zustellung: Die letzte ist die Übergabe nach der Verzollung. Zugestellt wird das Paket von einem anderen Unternehmen, und dessen Sendungsverfolgung zeigt den Rest.
 
 ## Wer Lingdong-Pakete in Deutschland, Österreich und der Schweiz zustellt
 

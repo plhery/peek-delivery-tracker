@@ -32,8 +32,9 @@ J&T's tracker lists a parcel's scans newest first. Each scan has a short heading
 | "At customs" | J&T's `Customs Declaration`, then `Customs Clearance`: a parcel from abroad is being cleared at the J&T branch it came in by. |
 | "Received by carrier" | J&T's `Picked-up`: J&T has collected the parcel. For a parcel from abroad, this comes after customs. |
 | "In transit" | J&T has the parcel and is moving it between its branches. Scans name the branch's town and province. |
-| "Out for delivery" | A J&T driver has it for delivery. Keep your phone on: J&T tries to reach recipients by phone, email or SMS. |
+| "Out for delivery" | J&T's `Delivering`: a J&T driver has it for delivery. Keep your phone on: J&T tries to reach recipients by phone, email or SMS. |
 | "Delivery attempted" | The driver couldn't deliver. J&T makes up to three attempts. |
+| "Needs attention" | J&T's `Abnormal Parcel`, after a delivery round that didn't deliver it. The reason is in the sentence under it on J&T's tracker, which Peek doesn't show. |
 | "Delivered" | Delivered to the address, not necessarily to you in person. |
 | "Returned to sender" | On its way back to the sender, or back there. |
 | "Waiting for the carrier" | J&T doesn't list the number yet, or lists it with no scans. |

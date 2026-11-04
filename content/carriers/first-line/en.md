@@ -36,8 +36,12 @@ FIRST LINE's tracker is in Chinese, but the scans are in English. FIRST LINE's o
 | `Depart from facility to service provider` | On its way from FIRST LINE to the company that takes it on. |
 | `Hand over to airline` | Handed to the airline at Hong Kong's airport, after the export declaration. |
 | `Next stop destination airport` | On the flight to the destination airport. The place still reads Hong Kong's airport. |
+| `Arrived at destination airport` | The flight has landed. Import clearance comes next. |
 | `The package is being submitted for customs clearance` | Import clearance on arrival, after the flight. Peek shows "At customs". |
+| `The package has been cleared through customs` | Customs released it. Peek shows "In transit" again. |
+| `Customs broker picked it up` | The customs broker collected it after the release, to pass it on for delivery. It is no longer held at customs. |
 | `Order received` | The delivering company, such as UniUni, has the order's details but not the parcel yet. |
+| `The package has been transferred to the service provider` | Handed over to the delivering company, after the broker. |
 
 In the US, the delivering company's scans follow in its own words, up to delivery: USPS's or [UniUni](carrier:uniuni)'s in the histories seen, whose pages explain them. FIRST LINE's tracker never names the company, so that wording is the clue.
 

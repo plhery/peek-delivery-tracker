@@ -18,7 +18,7 @@ Peek knows these shapes:
 | --- | --- |
 | `11111111111` | 11 digits. Also fits [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Austria, GLS Poland, PostLogistics and others. |
 | `123459999981` | 12 digits, the last a check digit. Also fits [BRT](carrier:brt), [Mondial Relay](carrier:mondial-relay), Colis Privé and others. |
-| `AB123456` | 8 letters and digits. Also fits GLS Switzerland, GLS France and Loggi. |
+| `AB123456` | 8 letters and digits: a Track-ID can look like this too. Also fits GLS Switzerland, GLS France and Loggi. |
 | Track-ID | Six letters, on the notification card. Peek reads it like a parcel number; if it doesn't take yours, use the parcel number. |
 
 Number refused? If the shop's email names another carrier, the number is theirs: see [tracking number formats](guide:tracking-number-formats).
@@ -29,9 +29,9 @@ GLS's English wordings, in the order a parcel meets them:
 
 | GLS says | What it means for you |
 | --- | --- |
-| `The parcel has not been handed over to GLS.` | GLS has the sender's data, not yet the parcel. |
+| `The parcel data was entered into the GLS IT system…`, `The parcel has not been handed over to GLS.` | GLS has the sender's data, not yet the parcel. |
 | `The parcel was handed over to GLS.` | GLS has it. |
-| `The parcel is in delivery.` | In the GLS van, expected today. |
+| `The parcel is in delivery.`, `The parcel is expected to be delivered during the day.` | In the GLS van, expected today. |
 | `The parcel is ready for collection at the ParcelShop.` | Waiting for you at a ParcelShop or Parcelstation. |
 | `The parcel has been delivered.` | Delivered to you or to someone who took it in for you, such as a neighbour. |
 
@@ -40,6 +40,8 @@ In between, scans say when the parcel reaches or leaves a GLS parcel centre or d
 ## GLS delivery times, ParcelShops and parcel lockers
 
 **When.** Monday to Friday, never Saturday, within estimated delivery times that GLS doesn't guarantee.
+
+**Letterbox.** A small parcel, up to 2 kg, no larger than DIN C4 and no more than 5 cm high, may go straight into your letterbox.
 
 **Nobody home.** The driver may hand the parcel to someone at your home or business, or to a neighbour in the same or the nearest building, unless you or the sender said otherwise; a card or email names the neighbour. Otherwise GLS asks you to collect it from the nearest ParcelShop, depot or Parcelstation. GLS makes at most two delivery attempts.
 
@@ -100,7 +102,7 @@ Yes: GLS Germany is General Logistics Systems Germany GmbH & Co. OHG, of Neuenst
 :::sources
 - [GLS: Parcel Tracking](https://gls-group.com/EU/en/parcel-tracking) – GLS's group tracking page
 - [GLS: About us](https://gls-group.com/GROUP/en/about-us/) – ParcelShops and lockers in Germany
-- [GLS Germany: General Terms and Conditions for business customers](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – no Saturday, estimated times, neighbours, two attempts, seven working days, Parcelstations, delivery options, Guaranteed24Service
+- [GLS Germany: General Terms and Conditions for business customers](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – no Saturday, estimated times, small parcels in the letterbox, neighbours, two attempts, seven working days, Parcelstations, delivery options, Guaranteed24Service
 - [GLS Germany: Terms for GLS-Pakete.de and the app](https://gls-group.com/DE/media/downloads/AGB_GLS-paketeApp_EN_2023-08-21.pdf) – company, notification card or email, drop-off permit, Schlichtungsstelle Post
 - [GLS Germany: Consumer information on delivery options](https://gls-group.com/DE/media/downloads/180130_Verbraucherinformation_Umverfuegung_DE_EN.pdf) – free for recipients (January 2018)
 - [GLS: Security advice](https://gls-group.com/GROUP/en/security-advice/) – scams, genuine sites, reporting

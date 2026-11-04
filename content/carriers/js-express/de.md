@@ -35,6 +35,8 @@ Die Seite von JS Express listet jeden Scan mit Datum und Uhrzeit, einem Ort in �
 | `Item has been collected` | Das Lager von JS Express in China hat das Paket: der erste echte Scan. | „Beim Paketdienst eingegangen“ |
 | `Item inbound in sorting center.`, `Item outbound in sorting center.` | Bei JS Express in China sortiert. | „Unterwegs“ |
 | `Domestic allocation has begun`, `Under domestic allocation` | Noch im Lager von JS Express in China, nach der Sortierung und bevor es losgeht. | „Unterwegs“ |
+| `Waybill Generated for` | Der Paketdienst in deinem Land hat seinen Frachtbrief erstellt, während das Paket noch im Lager von JS Express in China liegt. | „Unterwegs“ |
+| `Arrive at transit center` | Im Umschlagzentrum von JS Express in China, zwischen Sortierung und Abfahrt. | „Unterwegs“ |
 | `Item departed from origin.`, `Arrive at international airport to abroad` | Auf dem Weg aus dem Lager, dann am Flughafen in China. | „Unterwegs“ |
 | `Released From Export Customs` | Die Ausfuhrabfertigung in China ist erledigt. Mit der Einfuhr hat das noch nichts zu tun. | „Unterwegs“ |
 | `DEPART ORIGIN AIRPORT`, `Item Flight departure`, `Initial landing`, `Connecting flights flight takeoff` | Der Flug ist gestartet, manchmal mit Zwischenlandung und Anschlussflug. | „Unterwegs“ |

@@ -40,10 +40,11 @@ Lingdong no publica la lista de sus estados. Sus pasos van en inglés, o en chin
 | `拆板作业中，等待取货通知【Under destuffing, waiting for pickup instructions.】` | Tras el aterrizaje, se están deshaciendo los palés del vuelo mientras la carga espera a que la recojan para el despacho de aduana: tú no tienes que recoger nada. | «En tránsito» |
 | `货物在清关【Customs clearance in progress】` | Está en la aduana del país de destino, después del aterrizaje. | «En aduanas» |
 | `已完成国内报关手续【Domestic customs clearance procedures have been completed.】`, `货物已清关完成/Import customs clearance complete`, `货物已完成清关【The goods have completed customs clearance】` | La aduana del país de destino lo ha despachado, después del aterrizaje y antes de la entrega. Aquí *Domestic* (nacional) se refiere al país de destino, no a China. | «En tránsito» |
+| `货物已交服务商【The shipment has been transferred to the logistics partner.】` | Tras el despacho de aduana, Lingdong ha entregado el paquete a la empresa que lo reparte. | «En tránsito» |
 
 `货物电子信息已经收到`, el único paso solo en chino, no es un escaneo del paquete: el sistema de seguimiento de Lingdong lo escribe por su cuenta en un pedido que aún no tiene escaneos, con la fecha en que se creó el pedido.
 
-Ninguno de los pasos de Lingdong que Peek conoce es de reparto o de entrega: el último es el despacho de aduana en el país de destino. La entrega en España la hace otra empresa, y el resto está en su seguimiento.
+Ninguno de los pasos de Lingdong que Peek conoce es de reparto o de entrega: el último es el traspaso a la empresa de reparto tras el despacho de aduana en el país de destino. La entrega en España la hace otra empresa, y el resto está en su seguimiento.
 
 ## Quién reparte los paquetes de Lingdong en España
 

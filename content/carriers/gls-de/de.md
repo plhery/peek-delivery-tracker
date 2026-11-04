@@ -20,7 +20,7 @@ Diese Formen kennt Peek:
 | --- | --- |
 | `12345678901` | 11 Ziffern. Passt auch zu [GLS Schweiz](carrier:gls-ch), GLS Frankreich, GLS Österreich, GLS Polen, PostLogistics und anderen. |
 | `123459999981` | 12 Ziffern, die letzte eine Prüfziffer. Passt auch zu BRT, Mondial Relay, Colis Privé und anderen. |
-| `AB123456` | 8 Zeichen aus Buchstaben und Ziffern. Passt auch zu GLS Schweiz, GLS Frankreich und Loggi. |
+| `AB123456` | 8 Zeichen aus Buchstaben und Ziffern: So kann auch eine Track-ID aussehen. Passt auch zu GLS Schweiz, GLS Frankreich und Loggi. |
 | Track-ID | Sechs Buchstaben, auf der Karte. Peek liest sie wie eine Paketnummer; nimmt Peek deine nicht an, verwende die Paketnummer. |
 
 Nennt die E-Mail des Shops einen anderen Paketdienst, gehört die Nummer diesem. Welcher Dienst hinter einer Nummer steckt, erklärt der [Ratgeber zu Sendungsnummern](guide:tracking-number-formats).
@@ -31,9 +31,9 @@ In der englischen Sendungsverfolgung der GLS-Gruppe, aus der auch Peek liest, he
 
 | GLS schreibt | Was es für dich heißt |
 | --- | --- |
-| `The parcel has not been handed over to GLS.` | Der Versender hat GLS die Paketdaten übermittelt, GLS hat das Paket aber noch nicht. |
+| `The parcel data was entered into the GLS IT system…`, `The parcel has not been handed over to GLS.` | Der Versender hat GLS die Paketdaten übermittelt, GLS hat das Paket aber noch nicht. |
 | `The parcel was handed over to GLS.` | GLS hat das Paket und schickt es über seine Paketzentren. |
-| `The parcel is in delivery.` | Im GLS-Fahrzeug, voraussichtlich im Laufe des Tages bei dir. |
+| `The parcel is in delivery.`, `The parcel is expected to be delivered during the day.` | Im GLS-Fahrzeug, voraussichtlich im Laufe des Tages bei dir. |
 | `The parcel is ready for collection at the ParcelShop.` | Es wartet im Paketshop oder in der Paketstation, mit Frist. |
 | `The parcel has been delivered.` | Zugestellt, an dich oder an jemanden, der es für dich angenommen hat, etwa einen Nachbarn. |
 
@@ -42,6 +42,8 @@ Dazwischen melden die Scans, wenn das Paket ein Paketzentrum oder Depot von GLS 
 ## GLS Zustellung: Nachbar, Paketshop und Paketstation
 
 **Wann.** Montags bis freitags, laut AGB an Werktagen außer samstags. Die Laufzeiten sind Richtwerte, die GLS nicht garantiert.
+
+**Briefkasten.** Ein kleines Paket bis 2 kg, höchstens im Format DIN C4 und nicht höher als 5 cm, darf GLS auch in deinen Briefkasten einwerfen.
 
 **Niemand da.** Annehmen darf auch jemand, der in deiner Wohnung oder deinem Geschäft ist. Sonst versucht der Fahrer es bei einem Nachbarn im selben oder im nächsten Haus, außer es gibt eine andere Anweisung von dir oder vom Versender. Name und Adresse des Nachbarn bekommst du per Karte oder E-Mail. Klappt auch das nicht, holst du das Paket im nächsten Paketshop, GLS Depot oder in der Paketstation ab. GLS versucht höchstens zweimal zuzustellen; was nicht abgeholt wird, geht an den Versender zurück.
 
@@ -101,7 +103,7 @@ Nach einem verpassten Zustellversuch mindestens sieben Werktage, im Paketshop wi
 :::sources
 - [GLS: Parcel Tracking (auf Englisch)](https://gls-group.com/EU/en/parcel-tracking) – Sendungsverfolgung der GLS-Gruppe
 - [GLS-Gruppe: About us (auf Englisch)](https://gls-group.com/GROUP/en/about-us/) – Paketshops und Paketstationen in Deutschland
-- [GLS Germany: AGB für Geschäftskunden (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – kein Samstag, Laufzeiten, Nachbar, zwei Versuche, sieben Werktage, Paketstation, Zustelloptionen, 750 €
+- [GLS Germany: AGB für Geschäftskunden (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS_Germany_2025-01_EN_2024-10-25_FINAL-WEB.pdf) – kein Samstag, Laufzeiten, kleine Pakete im Briefkasten, Nachbar, zwei Versuche, sieben Werktage, Paketstation, Zustelloptionen, 750 €
 - [GLS Germany: AGB für GLS-Pakete.de und die App (auf Englisch)](https://gls-group.com/DE/media/downloads/AGB_GLS-paketeApp_EN_2023-08-21.pdf) – Unternehmen, Karte oder E-Mail, Abstellgenehmigung, Schlichtungsstelle Post
 - [GLS Germany: Verbraucherinformation zu Zustelloptionen (auf Englisch)](https://gls-group.com/DE/media/downloads/180130_Verbraucherinformation_Umverfuegung_DE_EN.pdf) – kostenlos für Empfänger (Stand Januar 2018)
 - [GLS-Gruppe: Security advice (auf Englisch)](https://gls-group.com/GROUP/en/security-advice/) – Betrug, echte Websites, Meldung

@@ -1237,6 +1237,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^FV\\d{8}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^\\d{14}$",
+        "confidence": "low",
+        "checksum": "mondial-relay-head"
       }
     ],
     "countries": [
@@ -7126,7 +7131,7 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
-        "pattern": "^(?:[2-5]\\d{12}|7000\\d{9})$",
+        "pattern": "^[2-57]\\d{12}$",
         "confidence": "low"
       }
     ],
@@ -28628,7 +28633,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^DBRPST\\d{10}$",
+        "pattern": "^DBRPST\\d{10,11}$",
         "confidence": "high"
       }
     ],

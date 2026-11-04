@@ -74,6 +74,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.ContentType
@@ -137,6 +138,7 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierRecognition
 import com.plhery.peekdeliverytracker.core.CarrierRequirement
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NumberInText
 import com.plhery.peekdeliverytracker.core.NumberRefusals
 import com.plhery.peekdeliverytracker.core.OrderShop
@@ -180,6 +182,8 @@ import kotlin.math.roundToInt
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.merge
 
 /**
  * Add (`showingAdd`, ParcelListView's `addShown(asForm:)`): wherever the list isn't side by side, a full-screen cover
@@ -469,6 +473,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
 
     val error = if (form.pasteFailed) localizer.text("add.pasteFailed") else work.failure(request.id)
     val duplicate = work.duplicate(request.id)
+    AddAnnouncements(error, spokenNotice(addition, localizer))
 
     // What the title and Add leave the form, which the number's field needs.
     var viewHeight by remember { mutableIntStateOf(0) }
@@ -913,6 +918,42 @@ private fun ScanButton(scan: () -> Unit) {
         contentAlignment = Alignment.Center,
     ) {
         PeekSymbol("barcode.viewfinder", font = PeekTheme.type.body, tint = PeekTheme.colors.secondaryLabel)
+    }
+}
+
+/**
+ * What went wrong, and the note under the field, read out as they appear (`onChange(of: errorMessage)`,
+ * `onChange(of: spokenNotice)`): not as Add opens, nor as the window is made again with them.
+ */
+@Composable
+private fun AddAnnouncements(error: String?, notice: String?) {
+    var announcement by remember { mutableStateOf<Announcement?>(null) }
+    val shownError by rememberUpdatedState(error)
+    val shownNotice by rememberUpdatedState(notice)
+    LaunchedEffect(Unit) {
+        merge(snapshotFlow { shownError }.drop(1), snapshotFlow { shownNotice }.drop(1)).collect { text ->
+            if (text != null) announcement = Announcement(text, (announcement?.count ?: 0) + 1)
+        }
+    }
+    Announcements(announcement, ADD_ANNOUNCEMENT) { if (announcement == it) announcement = it.copy(text = "") }
+}
+
+/**
+ * The note under the field once the number has settled, as TalkBack reads it out (`spokenNotice`): none found, held
+ * back, or questioned, a note's title and its words one after the other, as two lines.
+ */
+internal fun spokenNotice(addition: ParcelAddition, localizer: Localizer): String? {
+    if (!addition.settled) return null
+    fun note(title: String, body: String) = "${localizer.text(title)}\n${localizer.text(body)}"
+    val order = addition.order
+    val typo = addition.typo
+    return when {
+        addition.notFound -> localizer.text("add.notFound")
+        addition.pickupCode -> note("add.pickupCode.title", "add.pickupCode.body")
+        addition.placeholderNumber -> localizer.text("tracking.failure.placeholderNumber")
+        order != null -> note("door.order.${order.rawValue}.title", "door.order.${order.rawValue}.body")
+        typo != null -> note("door.typo.check", if (typo.suggestion == null) "door.typo.compare" else "door.typo.letter")
+        else -> null
     }
 }
 
@@ -1718,6 +1759,7 @@ internal const val ADD_FEEDBACK = "addParcel.feedback"
 internal const val ADD_DETAILS = "addParcel.details"
 internal const val ADD_HINT = "addParcel.hint"
 internal const val ADD_NOT_FOUND = "addParcel.notFound"
+internal const val ADD_ANNOUNCEMENT = "addParcel.announcement"
 internal const val ADD_PICKUP_CODE = "addParcel.pickupCode"
 internal const val ADD_PLACEHOLDER = "addParcel.placeholder"
 internal const val ADD_ORDER = "addParcel.order"

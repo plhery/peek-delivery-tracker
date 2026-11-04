@@ -665,6 +665,43 @@ class AddParcelTest {
         node(ADD_SAVE).assertIsNotEnabled()
     }
 
+    /** As `onChange(of: spokenNotice)`: once the number settles, the note under the field is read out, title then words. */
+    @Test
+    fun theNoteUnderTheFieldIsReadOutOnceTheNumberSettles() {
+        show()
+        open()
+        type("204 617")
+        compose.assertAnnounced("${text("add.pickupCode.title")}\n${text("add.pickupCode.body")}", ADD_ANNOUNCEMENT) {
+            node(ADD_NAME).performClick()
+        }
+        type("hello there")
+        compose.assertAnnounced(text("add.notFound"), ADD_ANNOUNCEMENT) { node(ADD_NAME).performClick() }
+        type("LX9999999B7DE")
+        compose.assertAnnounced("${text("door.typo.check")}\n${text("door.typo.letter")}", ADD_ANNOUNCEMENT) {
+            node(ADD_NAME).performClick()
+        }
+    }
+
+    @Test
+    fun aNoteIsNotReadOutBeforeTheNumberSettles() {
+        show()
+        open()
+        type("204 617")
+        settle()
+        assertEquals("", description(ADD_ANNOUNCEMENT, unmerged = true))
+    }
+
+    /** As `onChange(of: errorMessage)`: what went wrong is read out as it appears. */
+    @Test
+    fun whatWentWrongIsReadOut() {
+        show { failure = IllegalStateException("No connection") }
+        open()
+        type("1Z999AA10123456784")
+        compose.assertAnnounced("No connection", ADD_ANNOUNCEMENT) { node(ADD_SAVE).performClick() }
+        clipboard(null)
+        compose.assertAnnounced(text("add.pasteFailed"), ADD_ANNOUNCEMENT) { node(ADD_PASTE).performClick() }
+    }
+
     @Test
     fun aCheckDigitThatDoesNotAddUpOffersTheNumberItMayBeOrAddsItAsTyped() {
         show()

@@ -221,8 +221,11 @@ internal class ParcelWalk(
             ViewCompat.setWindowInsetsAnimationCallback(window.decorView, keyboardSlides)
         }
         compose.setContent {
-            val inDark = if (followsAppearance) appearanceSetting().isDark(isSystemInDarkTheme()) else dark
-            DisposableEffect(inDark) {
+            val night = isSystemInDarkTheme()
+            val inDark = if (followsAppearance) appearanceSetting().isDark(night) else dark
+            // Set again on a change of the night too: the platform then lays the window theme's icons over the bars,
+            // the light ones of this activity's theme (MainActivity's theme has a dark and a light of its own).
+            DisposableEffect(inDark, night) {
                 compose.activity.edgeToEdge(inDark)
                 onDispose {}
             }

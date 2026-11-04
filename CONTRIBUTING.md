@@ -53,6 +53,8 @@ elsewhere, run `:app:testDebugUnitTest` instead of `:app:verifyRoborazziDebug` a
   `public/privacy.html`, the page both apps open.
 - **Help page**: edit `SUPPORT.md`, then run `npm run support`. It writes
   `public/support.html`.
+- **Accessibility page**: edit `ACCESSIBILITY.md`, then run `npm run accessibility`.
+  It writes `public/accessibility.html`.
 - Keep commits small enough to review on their own.
 
 By contributing, you agree that your contribution is licensed under the

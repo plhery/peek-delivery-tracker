@@ -18,8 +18,10 @@ for (const [name, { source, output }] of Object.entries(PAGES)) {
   });
 }
 
-test('the help page says where to write', () => {
-  assert.match(published('support'), /<a data-mail="[0-9a-f]+">hello at peektracker\.com<\/a>/);
+test('the help page and the accessibility page say where to write', () => {
+  for (const name of ['support', 'accessibility']) {
+    assert.match(published(name), /<a data-mail="[0-9a-f]+">hello at peektracker\.com<\/a>/, name);
+  }
 });
 
 test('a document becomes the blocks of its page', () => {
@@ -45,7 +47,9 @@ test('a document becomes the blocks of its page', () => {
 test('only the notice has an effective date', () => {
   const markdown = '# Title\n\nEffective: at once, in most cases.';
   assert.deepEqual(pageBlocks(PAGES.privacy, markdown, scrambled), ['<p class="effective">Effective at once, in most cases.</p>']);
-  assert.deepEqual(pageBlocks(PAGES.support, markdown, scrambled), ['<p>Effective: at once, in most cases.</p>']);
+  for (const page of [PAGES.support, PAGES.accessibility]) {
+    assert.deepEqual(pageBlocks(page, markdown, scrambled), ['<p>Effective: at once, in most cases.</p>']);
+  }
 });
 
 test('each page frames its document under its own heading and carries the two scripts as given', () => {
@@ -58,6 +62,10 @@ test('each page frames its document under its own heading and carries the two sc
   assert.match(support, /^<!doctype html>\n<!-- Generated from SUPPORT\.md/);
   assert.match(support, /<title>Help — Peek<\/title>\n {4}<script>appearance\(\)<\/script>/);
   assert.match(support, /<h1>Help<\/h1>\n {6}<p>One paragraph\.<\/p>\n {4}<\/main>\n {4}<script>addresses\(\)<\/script>\n {2}<\/body>/);
+  const accessibility = frame('accessibility');
+  assert.match(accessibility, /^<!doctype html>\n<!-- Generated from ACCESSIBILITY\.md/);
+  assert.match(accessibility, /<title>Accessibility — Peek<\/title>\n {4}<script>appearance\(\)<\/script>/);
+  assert.match(accessibility, /<h1>Accessibility<\/h1>\n {6}<p>One paragraph\.<\/p>\n {4}<\/main>\n {4}<script>addresses\(\)<\/script>\n {2}<\/body>/);
 });
 
 test('Markdown a page cannot show is refused, naming its document', () => {

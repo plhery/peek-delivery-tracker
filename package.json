@@ -50,6 +50,7 @@
     "icons": "node scripts/generate-icons.mjs",
     "privacy": "node scripts/generate-privacy.mjs privacy",
     "support": "node scripts/generate-privacy.mjs support",
+    "accessibility": "node scripts/generate-privacy.mjs accessibility",
     "guides": "node scripts/generate-guides.mjs",
     "ios:resources": "node scripts/generate-ios-resources.mjs",
     "grafana:alerts": "node scripts/sync-grafana-alerts.mjs",

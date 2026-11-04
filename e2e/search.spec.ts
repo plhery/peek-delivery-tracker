@@ -55,7 +55,7 @@ test('robots.txt lets everything be fetched and names the sitemap by its whole a
   expect(lines).toEqual(['User-Agent: *', 'Allow: /', `Sitemap: ${baseURL}/sitemap.xml`]);
 });
 
-test('sitemap.xml lists the landing, the guides and the carriers’ pages in every language, the privacy notice and the help page, dating only the guides and the carriers’ pages', async ({ request, baseURL }) => {
+test('sitemap.xml lists the landing, the guides and the carriers’ pages in every language, the privacy notice, the help page and the accessibility page, dating only the guides and the carriers’ pages', async ({ request, baseURL }) => {
   test.skip(test.info().project.name !== 'desktop-chromium', 'The server answers the same whatever the browser.');
   // Hundreds of pages, each drawn when it is asked for.
   test.setTimeout(120_000);
@@ -66,15 +66,17 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
   const addresses = [...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map((match) => match[1]);
   const landings = [`${baseURL}/`, ...languages.map((language) => `${baseURL}/${language}`)];
   expect(addresses.slice(0, landings.length)).toEqual(landings);
-  expect(addresses.slice(-2)).toEqual([`${baseURL}/privacy.html`, `${baseURL}/support.html`]);
+  // At the end, the static documents.
+  const documents = ['/privacy.html', '/support.html', '/accessibility.html'].map((path) => `${baseURL}${path}`);
+  expect(addresses.slice(-documents.length)).toEqual(documents);
   // Between them, the guides: their own page in every language, then each guide in every language.
   const under = (section: string) => (address: string) => new RegExp(`^(?:/(?:${languages.join('|')}))?/${section}(?:/[a-z0-9-]+)?$`).test(new URL(address).pathname);
-  const guides = addresses.slice(landings.length, -2).filter(under('guides'));
+  const guides = addresses.slice(landings.length, -documents.length).filter(under('guides'));
   expect(guides.slice(0, GUIDE_LANGUAGES.length)).toEqual([`${baseURL}/guides`, ...guideLanguages.map((language) => `${baseURL}/${language}/guides`)]);
   expect(guides.length % GUIDE_LANGUAGES.length).toBe(0);
   // Then the carriers' pages: their own page in every language a carrier's page is written in, then each carrier's page
   // in each of its languages. A language with none yet leaves its empty list out.
-  const carriers = addresses.slice(landings.length + guides.length, -2);
+  const carriers = addresses.slice(landings.length + guides.length, -documents.length);
   const carrierLanguages = CARRIER_LOCALES.filter((language) => language !== 'en');
   const hubCount = carrierLanguages.length + 1;
   expect(carriers.slice(0, hubCount)).toEqual([`${baseURL}/carriers`, ...carrierLanguages.map((language) => `${baseURL}/${language}/carriers`)]);
@@ -100,7 +102,7 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
   }
   // The carriers' own page names every language it is in, dated by its newest carrier's page; a carrier's page names only
   // the languages it is written in, English first and for a reader of none, dated by the day it was checked.
-  const [hubs, pages] = [entries.slice(landings.length + guides.length, landings.length + guides.length + hubCount), entries.slice(landings.length + guides.length + hubCount, -2)];
+  const [hubs, pages] = [entries.slice(landings.length + guides.length, landings.length + guides.length + hubCount), entries.slice(landings.length + guides.length + hubCount, -documents.length)];
   hubs.forEach((entry, at) => {
     expect(Object.keys(Object.fromEntries(alternates(entry)))).toEqual(['en', ...carrierLanguages.map(hrefLanguage), 'x-default']);
     const own = new URL(carriers[at]).pathname;
@@ -113,7 +115,7 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
     expect(Object.values(named)).toContain(/<loc>([^<]*)<\/loc>/.exec(entry)![1]);
     expect(entry).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   }
-  for (const entry of entries.slice(-2)) {
+  for (const entry of entries.slice(-documents.length)) {
     expect(entry).not.toContain('xhtml:link');
     expect(entry).not.toContain('<lastmod>');
   }

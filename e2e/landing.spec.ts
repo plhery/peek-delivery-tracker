@@ -106,6 +106,7 @@ test('asks four questions in order, with the field first and the name, the code 
   await expect(who.getByRole('link', { name: '@plhery on X' })).toHaveAttribute('href', 'https://x.com/plhery');
   const footer = page.getByRole('contentinfo');
   await expect(footer.getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', '/privacy.html');
+  await expect(footer.getByRole('link', { name: 'Accessibility' })).toHaveAttribute('href', '/accessibility.html');
   await footer.getByRole('combobox', { name: 'Language' }).selectOption('de');
   await expect(page.getByRole('heading', { level: 2, name: 'Wer steckt hinter Peek?' })).toBeVisible();
   await expect(page).toHaveTitle('Peek — Wo ist mein Paket? Universelle Paketverfolgung');

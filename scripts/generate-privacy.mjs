@@ -7,11 +7,13 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 /**
  * The site's documents, each written in Markdown at the repository's root and published
  * as a page of its own: `npm run privacy` writes the privacy notice, `npm run support` the
- * help page. Only the notice says since when it applies.
+ * help page, `npm run accessibility` the accessibility page. Only the notice says since when
+ * it applies.
  */
 export const PAGES = {
   privacy: { source: 'PRIVACY.md', output: 'public/privacy.html', title: 'Privacy — Peek', heading: 'Privacy notice', dated: true },
   support: { source: 'SUPPORT.md', output: 'public/support.html', title: 'Help — Peek', heading: 'Help', dated: false },
+  accessibility: { source: 'ACCESSIBILITY.md', output: 'public/accessibility.html', title: 'Accessibility — Peek', heading: 'Accessibility', dated: false },
 };
 
 function escaped(text) {
@@ -111,7 +113,7 @@ export async function currentPage(name) {
   });
 }
 
-// `privacy` or `support` names the page to write; without a name, both are. `--check` writes nothing.
+// `privacy`, `support` or `accessibility` names the page to write; without a name, all are. `--check` writes nothing.
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const names = process.argv.slice(2).filter((argument) => argument !== '--check');
   const unknown = names.find((name) => !Object.hasOwn(PAGES, name));

@@ -24,9 +24,9 @@ const carriersChecked = (locale: Locale) => CARRIER_LINKS[locale].map(({ id }) =
  * page and every guide in each language they are written in, each naming the
  * others, the carriers' own page in each language a carrier's page is written
  * in and every carrier's page in each of its languages, naming only those, as
- * hreflang names them, the privacy notice and the help page. A guide or a
- * carrier's page is dated by the day its facts were last checked. A parcel,
- * an invitation and the demo are not listed.
+ * hreflang names them, the privacy notice, the help page and the
+ * accessibility page. A guide or a carrier's page is dated by the day its
+ * facts were last checked. A parcel, an invitation and the demo are not listed.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = await siteOrigin();
@@ -47,5 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
     { url: xml(new URL('/privacy.html', origin).href) },
     { url: xml(new URL('/support.html', origin).href) },
+    { url: xml(new URL('/accessibility.html', origin).href) },
   ];
 }

@@ -235,7 +235,9 @@ describe('public product metadata', () => {
     const local = alternates('https://delivery.example.test');
     const here = await sitemap();
     expect(here.slice(0, SUPPORTED_LOCALES.length)).toEqual(SUPPORTED_LOCALES.map((locale) => ({ url: local[hrefLanguage(locale)], alternates: { languages: local } })));
-    expect(here.slice(-2)).toEqual([{ url: 'https://delivery.example.test/privacy.html' }, { url: 'https://delivery.example.test/support.html' }]);
+    // At the end, the static documents.
+    const documents = ['/privacy.html', '/support.html', '/accessibility.html'];
+    expect(here.slice(-documents.length)).toEqual(documents.map((path) => ({ url: `https://delivery.example.test${path}` })));
     vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.test');
     const origin = 'https://peek.example.test';
     const entries = await sitemap();
@@ -264,17 +266,16 @@ describe('public product metadata', () => {
       ...ids.flatMap((id) => GUIDE_LANGUAGES.map((locale) => guides(id)[locale])),
       ...CARRIER_LOCALES.map((locale) => `${origin}${carrierPath(locale)}`),
       ...carrierPages.map(({ id, locale }) => carriers(id)[locale]),
-      'https://peek.example.test/privacy.html',
-      'https://peek.example.test/support.html',
+      ...documents.map((path) => `https://peek.example.test${path}`),
     ]);
     const indexesEnd = SUPPORTED_LOCALES.length + GUIDE_LANGUAGES.length;
     const articlesEnd = indexesEnd + ids.length * GUIDE_LANGUAGES.length;
     const [landings, indexes, articles] = [entries.slice(0, SUPPORTED_LOCALES.length), entries.slice(SUPPORTED_LOCALES.length, indexesEnd), entries.slice(indexesEnd, articlesEnd)];
-    const [hubs, pages] = [entries.slice(articlesEnd, articlesEnd + CARRIER_LOCALES.length), entries.slice(articlesEnd + CARRIER_LOCALES.length, -2)];
+    const [hubs, pages] = [entries.slice(articlesEnd, articlesEnd + CARRIER_LOCALES.length), entries.slice(articlesEnd + CARRIER_LOCALES.length, -documents.length)];
     // Each language's landing names all of them, itself included, and `/` for a reader of none.
     for (const entry of landings) expect(entry.alternates?.languages).toEqual(alternates(origin));
     // No date is claimed for a page whose last change nobody recorded.
-    for (const entry of [...landings, ...entries.slice(-2)]) expect(entry).not.toHaveProperty('lastModified');
+    for (const entry of [...landings, ...entries.slice(-documents.length)]) expect(entry).not.toHaveProperty('lastModified');
     // A guide is dated by the day its facts were last checked, never after the build's, and its list by its newest guide.
     const updated = (id: string, locale: GuideLanguage) => shownDay(/^updated: (\S+)$/m.exec(readFileSync(`content/guides/${id}/${locale}.md`, 'utf8'))![1]);
     GUIDE_LANGUAGES.forEach((locale, at) => {

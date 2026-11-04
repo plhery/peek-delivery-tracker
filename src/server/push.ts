@@ -472,15 +472,21 @@ function deliveryClock(row: JsonObject): Zone | string {
   return 'Europe/Zurich';
 }
 
+/** When a delivery happened, if its notification tells the time: the carrier gave a clock time, not in the future. */
+function deliveredInstant(row: JsonObject, now: number): DateTime | null {
+  // The queue distinguishes carrier times from date-only and observed updates.
+  if (stringField(row, 'stage') !== 'delivered' || row.event_has_time !== true) return null;
+  const delivered = DateTime.fromISO(stringField(row, 'occurred_at'), { zone: 'utc' });
+  return delivered.isValid && delivered.toMillis() <= now ? delivered : null;
+}
+
 function deliveredMessage(row: JsonObject, locale: Locale, now: number): string {
   const copy = PUSH_COPY[locale];
-  const fallback = copy.body_delivered!;
-  // The queue distinguishes carrier times from date-only and observed updates.
-  if (row.event_has_time !== true) return fallback;
+  const instant = deliveredInstant(row, now);
   const zone = deliveryClock(row);
-  const delivered = DateTime.fromISO(stringField(row, 'occurred_at'), { zone });
+  const delivered = instant?.setZone(zone);
   const current = DateTime.fromMillis(now, { zone });
-  if (!delivered.isValid || !current.isValid || delivered.toMillis() > now) return fallback;
+  if (!delivered?.isValid || !current.isValid) return copy.body_delivered!;
 
   const sameDay = delivered.toISODate() === current.toISODate();
   const template = sameDay ? copy.delivered_time : copy.delivered_date;
@@ -517,13 +523,35 @@ function notificationDetail(row: JsonObject, locale: Locale, now: number): strin
  * The line under the title: what leads it (the parcel's name, for whoever may
  * read it), then the detail, then the scan's place on a line of its own.
  */
-function notificationBody(row: JsonObject, locale: Locale, now: number, lead = row.label): string {
+function notificationBody(
+  row: JsonObject, locale: Locale, now: number, lead = row.label, detail = notificationDetail(row, locale, now),
+): string {
   const name = notificationText(lead, 80);
-  const detail = notificationDetail(row, locale, now);
   const primary = notificationText(name ? `${name} · ${detail}` : capitalized(detail, languageTags[locale]), 220);
   const remaining = 220 - [...primary].length - 1;
   const location = remaining > 1 ? notificationText(row.location, Math.min(140, remaining)) : '';
   return location ? `${primary}\n${location}` : primary;
+}
+
+const DEVICE_CLOCK_KEYS = ['scan_at', 'body_same_day', 'body_other_day', 'date_locale'] as const;
+
+/**
+ * What lets a device write a delivery's time on its own clock as the notification arrives, wherever it is
+ * by then: the scan's instant (`scan_at`), the body with the time left for the device to write, for a
+ * delivery on the device's day and on another (`{{time}}`, `{{date}}`), and the language tag the day is
+ * written in. The body beside them is what shows where no device code runs. Nothing when the body tells
+ * no time. Flat strings, as every push service carries them.
+ */
+export function deviceClockFields(row: JsonObject, locale: Locale, now: number, lead = row.label): Record<string, string> {
+  const instant = deliveredInstant(row, now);
+  if (!instant) return {};
+  const copy = PUSH_COPY[locale];
+  return {
+    scan_at: instant.toISO()!,
+    body_same_day: notificationBody(row, locale, now, lead, copy.delivered_time!),
+    body_other_day: notificationBody(row, locale, now, lead, copy.delivered_date!),
+    date_locale: languageTags[locale],
+  };
 }
 
 // Database insertion times are identical for events imported in one transaction.
@@ -765,6 +793,7 @@ export class WebPushNotificationService {
     return {
       title: notificationTitle(row, locale),
       body: notificationBody(row, locale, this.now()),
+      ...deviceClockFields(row, locale, this.now()),
       ...WEB_NOTIFICATION_PICTURES,
       tag: `parcel-${packageId}`,
       lang: locale,
@@ -903,18 +932,17 @@ export class ParcelLinkAlertService {
     const gift = row.gift === true && row.owner !== true && stage !== 'returned';
     const title = gift ? appWord(locale, stage === 'delivered' ? 'share.gift.here' : 'share.gift.headline')! : news;
     const lead = gift && stage !== 'delivered' && stage !== 'in_transit' ? news : '';
+    // Neither the parcel's name nor its number: both are its owner's. The scan's place, and the clock it
+    // was written on, are part of what a gift keeps to itself. Nobody chose a time zone: a delivery is told
+    // on the scan's clock, the rest on Zurich's, as for an account without one.
+    const told: JsonObject = {
+      ...row, timezone: 'Europe/Zurich', timezone_chosen: false,
+      ...this.wrappedGift(row) ? { location: null, event_time: null } : {},
+    };
     return {
       title: notificationText(title, 80),
-      // Neither the parcel's name nor its number: both are its owner's. The scan's place, and the clock it
-      // was written on, are part of what a gift keeps to itself. Nobody chose a time zone: a delivery is told
-      // on the scan's clock, the rest on Zurich's, as for an account without one.
-      body: notificationBody(
-        {
-          ...row, timezone: 'Europe/Zurich', timezone_chosen: false,
-          ...this.wrappedGift(row) ? { location: null, event_time: null } : {},
-        },
-        locale, this.now(), lead,
-      ),
+      body: notificationBody(told, locale, this.now(), lead),
+      ...deviceClockFields(told, locale, this.now(), lead),
       ...WEB_NOTIFICATION_PICTURES,
       tag: `parcel-link-${linkId}`,
       lang: locale,
@@ -929,11 +957,16 @@ export class ParcelLinkAlertService {
 
   /** The same words for the iPhone app, which opens the link it follows when the notification is tapped. */
   appPayload(row: JsonObject): JsonObject {
-    const { title, body } = this.payload(row);
+    const { title, body, ...web } = this.payload(row);
+    const clock = Object.fromEntries(DEVICE_CLOCK_KEYS.flatMap((key) => key in web ? [[key, web[key]]] : []));
     const linkId = stringField(row, 'link_id');
     return {
-      aps: { alert: { title, body }, sound: 'default', badge: 1, 'thread-id': `link-${linkId}` },
+      aps: {
+        alert: { title, body }, sound: 'default', badge: 1, 'thread-id': `link-${linkId}`,
+        ...Object.keys(clock).length ? { 'mutable-content': 1 } : {},
+      },
       link_id: linkId,
+      ...clock,
     };
   }
 }
@@ -1131,10 +1164,12 @@ export class NativePushNotificationService {
       notificationTitle(row, locale),
       notificationBody(row, locale, this.now() * 1_000),
       stringField(row, 'package_id'),
+      deviceClockFields(row, locale, this.now() * 1_000),
     );
   }
 
-  payload(title: string, body: string, parcelId: string | null): JsonObject {
+  /** `clock` lets the app's notification service write a delivery's time on the device's clock (`deviceClockFields`). */
+  payload(title: string, body: string, parcelId: string | null, clock: Record<string, string> = {}): JsonObject {
     const aps: JsonObject = {
       alert: { title, body },
       sound: 'default',
@@ -1144,6 +1179,10 @@ export class NativePushNotificationService {
     if (parcelId) {
       aps['thread-id'] = parcelId;
       payload.parcel_id = parcelId;
+    }
+    if (Object.keys(clock).length) {
+      aps['mutable-content'] = 1;
+      Object.assign(payload, clock);
     }
     return payload;
   }

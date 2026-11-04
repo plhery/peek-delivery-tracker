@@ -259,6 +259,10 @@ describe('what an alert says', () => {
     expect(payload).toEqual({
       title: 'It’s arrived',
       body: 'Delivered at 14:30\nExample Town',
+      scan_at: '2026-10-02T12:30:00.000Z',
+      body_same_day: 'Delivered at {{time}}\nExample Town',
+      body_other_day: 'Delivered on {{date}} at {{time}}\nExample Town',
+      date_locale: 'en-CH',
       icon: '/icons/icon-192.png',
       badge: '/icons/badge-96.png',
       tag: `parcel-link-${linkId}`,
@@ -286,6 +290,19 @@ describe('what an alert says', () => {
     expect(alerts.payload(row({ stage: 'delivered' })).body).toMatch(/^Delivered at 14:30/);
     // A gift still on its way keeps its scan's clock to itself, as it keeps its place.
     expect(alerts.payload({ ...delivered, gift: true }).body).toMatch(/^Delivered at 14:30/);
+  });
+
+  it('lets the browser or the iPhone write a delivery\'s time on its own clock', () => {
+    const delivered = row({ stage: 'delivered' });
+    const clock = {
+      scan_at: '2026-10-02T12:30:00.000Z', body_same_day: 'Delivered at {{time}}\nExample Town',
+      body_other_day: 'Delivered on {{date}} at {{time}}\nExample Town', date_locale: 'en-CH',
+    };
+    expect(alerts.payload(delivered)).toMatchObject(clock);
+    expect(alerts.appPayload(delivered)).toMatchObject({ aps: { 'mutable-content': 1 }, ...clock });
+    const travelling = alerts.appPayload(row());
+    expect(travelling.aps).not.toHaveProperty('mutable-content');
+    expect(Object.keys(travelling)).toEqual(['aps', 'link_id']);
   });
 
   it.each(SUPPORTED_LOCALES)('announces a gift on its way as one, without the place of the scan, in %s', (locale) => {

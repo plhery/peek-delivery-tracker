@@ -112,6 +112,30 @@ describe('friendly parcel notifications', () => {
       .toBe('Coffee beans · delivered at 08:32');
   });
 
+  it('lets the device write a delivery\'s time on its own clock, and tells nothing else that way', () => {
+    const clock = {
+      scan_at: '2026-09-07T12:32:00.000Z',
+      body_same_day: 'Coffee beans · delivered at {{time}}',
+      body_other_day: 'Coffee beans · delivered on {{date}} at {{time}}',
+      date_locale: 'en-CH',
+    };
+    expect(web.payload(delivered)).toMatchObject({ body: 'Coffee beans · delivered at 14:32', ...clock });
+    const app = native.eventPayload(delivered);
+    expect(app).toMatchObject({ aps: { 'mutable-content': 1, alert: { body: 'Coffee beans · delivered at 14:32' } }, ...clock });
+    expect(web.payload({ ...delivered, label: '', location: 'Zürich' }))
+      .toMatchObject({ body_same_day: 'Delivered at {{time}}\nZürich', body_other_day: 'Delivered on {{date}} at {{time}}\nZürich' });
+    expect(web.payload({ ...delivered, locale: 'de' })).toMatchObject({
+      body_same_day: 'Coffee beans · um {{time}} Uhr zugestellt', date_locale: 'de-CH',
+    });
+    for (const changes of [{ stage: 'out_for_delivery' }, { event_has_time: false }, { occurred_at: '2026-09-08T12:32:00Z' }]) {
+      const payload = web.payload({ ...delivered, ...changes });
+      expect(Object.keys(payload)).not.toContain('scan_at');
+      const quiet = native.eventPayload({ ...delivered, ...changes });
+      expect(Object.keys(quiet)).not.toContain('scan_at');
+      expect(quiet.aps).not.toHaveProperty('mutable-content');
+    }
+  });
+
   it('does not call delayed alerts recent, and dates deliveries from a previous day', () => {
     expect(web.payload({ ...delivered, occurred_at: '2026-09-07T09:32:00Z' }).body)
       .toBe('Coffee beans · delivered at 11:32');
@@ -266,6 +290,45 @@ describe('service worker fallback copy', () => {
     expect(shown[0]![0]).toBe(expected.title);
     expect(shown[0]![1].body).toBe(expected.body);
     expect(shown[0]![1].lang).toBe(locale);
+  });
+
+  it('writes a delivery\'s time on the device\'s clock, wherever it is', () => {
+    const zone = process.env.TZ;
+    process.env.TZ = 'America/Los_Angeles';
+    try {
+      const shown: string[] = [];
+      const listeners: Record<string, (event: unknown) => void> = {};
+      vi.useFakeTimers({ now, toFake: ['Date'] });
+      runInNewContext(worker, {
+        Date,
+        caches: { delete: async () => true },
+        self: {
+          addEventListener: (type: string, listener: (event: unknown) => void) => { listeners[type] = listener; },
+          registration: { showNotification: async (_title: string, options: { body: string }) => { shown.push(options.body); } },
+        },
+      });
+      const show = (payload: JsonObject) => listeners.push!({ data: { json: () => payload }, waitUntil: () => undefined });
+      show(web.payload(delivered));
+      // The evening before, there, though it is the same day in Zurich.
+      show(web.payload({ ...delivered, occurred_at: '2026-09-06T23:51:00Z' }));
+      show(web.payload({ ...delivered, locale: 'de', occurred_at: '2026-09-06T23:51:00Z' }));
+      show({ ...web.payload(delivered), scan_at: '2026-09-07T12:50:00Z' });
+      show({ ...web.payload(delivered), date_locale: 'not a language' });
+      show(web.payload({ ...delivered, stage: 'out_for_delivery' }));
+      expect(shown).toEqual([
+        'Coffee beans · delivered at 05:32',
+        'Coffee beans · delivered on 6 September at 16:51',
+        'Coffee beans · am 6. September um 16:51 Uhr zugestellt',
+        // A scan the device's clock calls the future is told as the service wrote it.
+        'Coffee beans · delivered at 14:32',
+        'Coffee beans · delivered at 05:32',
+        web.payload({ ...delivered, stage: 'out_for_delivery' }).body,
+      ]);
+    } finally {
+      vi.useRealTimers();
+      if (zone === undefined) delete process.env.TZ;
+      else process.env.TZ = zone;
+    }
   });
 
   it('tells open windows to show the new state at once', async () => {

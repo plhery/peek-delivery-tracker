@@ -7,6 +7,29 @@ self.addEventListener('activate', (event) => {
   ]));
 });
 
+/**
+ * A delivery's time on this device's clock, wherever it is now: the service sends the scan's instant and the
+ * sentence with the time left out, for a delivery today and on another day (deviceClockFields in
+ * src/server/push.ts). Null when it sent none, and the service's own body shows.
+ */
+function deviceClockBody(payload) {
+  const { scan_at: at, body_same_day: sameDay, body_other_day: otherDay, date_locale: dateLocale } = payload;
+  if (typeof at !== 'string' || typeof sameDay !== 'string' || typeof otherDay !== 'string') return null;
+  const scanned = new Date(at);
+  const now = new Date();
+  if (Number.isNaN(scanned.getTime()) || scanned > now) return null;
+  const today = scanned.toDateString() === now.toDateString();
+  const two = (value) => String(value).padStart(2, '0');
+  const time = `${two(scanned.getHours())}:${two(scanned.getMinutes())}`;
+  let date;
+  try {
+    date = new Intl.DateTimeFormat(typeof dateLocale === 'string' ? dateLocale : undefined, { day: 'numeric', month: 'long' }).format(scanned);
+  } catch {
+    date = new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'long' }).format(scanned);
+  }
+  return (today ? sameDay : otherDay).replaceAll('{{time}}', () => time).replaceAll('{{date}}', () => date);
+}
+
 self.addEventListener('push', (event) => {
   let decoded = {};
   try {
@@ -41,7 +64,7 @@ self.addEventListener('push', (event) => {
   const [fallbackTitle, fallbackBody] = fallbackCopy[lang];
   const title = text(payload.title, fallbackTitle, 120);
   const options = {
-    body: text(payload.body, fallbackBody, 500),
+    body: text(deviceClockBody(payload) ?? payload.body, fallbackBody, 500),
     lang,
     icon: text(payload.icon, '/icons/icon-192.png', 2_048),
     badge: text(payload.badge, '/icons/badge-96.png', 2_048),

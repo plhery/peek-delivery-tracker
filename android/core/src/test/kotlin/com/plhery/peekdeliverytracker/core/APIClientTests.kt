@@ -186,6 +186,31 @@ class APIClientTests {
         assertEquals(emptyList<String>(), analytics)
     }
 
+    /**
+     * Android's own: the phone's token is an FCM registration token, sent through FCM whatever the build, so it says so
+     * and gives FCM's one environment. Turning notifications off names the same transport.
+     */
+    @Test
+    fun thePhonesTokenIsRegisteredAndRemovedAsAnFcmOne() = runTest {
+        val token = "synthetic-fcm:" + "a".repeat(40)
+        val installation = UUID.fromString("42000000-0000-4000-8000-000000000003")
+        val transport = serving(jsonResponse(200, """{"ok":true,"testSent":true}"""))
+        assertTrue(client(transport, TestSession()).registerNativePushToken(token, installation, AppLanguage.Fr, sendTest = true))
+        val registered = transport.requests.single()
+        assertEquals("POST https://peek.example/api/push/devices", "${registered.method} ${registered.url}")
+        assertEquals(
+            """{"deviceName":"Synthetic phone","environment":"production","installationId":"42000000-0000-4000-8000-000000000003",""" +
+                """"locale":"fr","sendTest":true,"token":"$token","transport":"fcm"}""",
+            registered.body?.decodeToString(),
+        )
+
+        val removal = serving(jsonResponse(200, """{"ok":true}"""))
+        client(removal, TestSession()).unregisterNativePushToken(token)
+        val removed = removal.requests.single()
+        assertEquals("DELETE https://peek.example/api/push/devices", "${removed.method} ${removed.url}")
+        assertEquals("""{"token":"$token","transport":"fcm"}""", removed.body?.decodeToString())
+    }
+
     @Test
     fun aDetectionGoesUnsignedFromAnInstallationThatCannotSign() = runTest {
         val transport = serving(jsonResponse(200, """{"trackingNumber":"SYNTHETIC123","carrier":"dhl","recognized":["dhl","ups"]}"""))

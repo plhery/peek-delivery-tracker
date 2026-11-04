@@ -5,7 +5,6 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
 import com.plhery.peekdeliverytracker.core.api.CreatePackageResponse
-import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
@@ -158,12 +157,12 @@ class DeviceParcelTests {
         },
         setAlert = { linkId, key, request ->
             calls.add(
-                "alert $linkId ${(key ?: "-").take(1)} ${request.preset.rawValue} ${request.token} ${request.locale.rawValue} ${request.environment.rawValue}",
+                "alert $linkId ${(key ?: "-").take(1)} ${request.preset.rawValue} ${request.token} ${request.locale.rawValue} ${request.environment.rawValue} ${request.transport?.rawValue}",
             )
             alert(linkId)
         },
         removeAlert = { linkId, request ->
-            calls.add("unalert $linkId ${request.token}")
+            calls.add("unalert $linkId ${request.token} ${request.transport?.rawValue}")
             unalert(linkId)
         },
     )
@@ -978,40 +977,40 @@ class DeviceParcelTests {
         val device = device(client(calls), storage, this)
         assertTrue(device.hasParcelsOnTheirWay)
 
-        device.registerAlerts(token = "token1", locale = NativePushLocale.Fr, environment = NativePushEnvironment.Development)
+        device.registerAlerts(token = "token1", locale = NativePushLocale.Fr)
         // Every scan while nothing has moved yet, the steps that matter after; nothing for a parcel that arrived.
-        assertEquals(listOf("alert 22222222222A k important token1 fr development", "alert 33333333333B - all token1 fr development"), calls.all)
+        assertEquals(listOf("alert 22222222222A k important token1 fr production fcm", "alert 33333333333B - all token1 fr production fcm"), calls.all)
         assertEquals(listOf("token1", "token1", null), storage.parcels.map { it.alertToken })
         assertEquals(listOf(ParcelAlertPreset.Important, ParcelAlertPreset.All, null), storage.parcels.map { it.alertPreset })
 
-        device.registerAlerts(token = "token1", locale = NativePushLocale.Fr, environment = NativePushEnvironment.Development)
+        device.registerAlerts(token = "token1", locale = NativePushLocale.Fr)
         assertEquals("Asked once a launch", 2, calls.all.size)
 
         // A new token takes the old one's place, and the preset first chosen stays.
-        device.registerAlerts(token = "token2", locale = NativePushLocale.Fr, environment = NativePushEnvironment.Development)
+        device.registerAlerts(token = "token2", locale = NativePushLocale.Fr)
         assertEquals(
             listOf(
-                "alert 22222222222A k important token2 fr development", "unalert 22222222222A token1",
-                "alert 33333333333B - all token2 fr development", "unalert 33333333333B token1",
+                "alert 22222222222A k important token2 fr production fcm", "unalert 22222222222A token1 fcm",
+                "alert 33333333333B - all token2 fr production fcm", "unalert 33333333333B token1 fcm",
             ),
             calls.all.drop(2),
         )
         // Another language asks again.
-        device.registerAlerts(token = "token2", locale = NativePushLocale.De, environment = NativePushEnvironment.Development)
+        device.registerAlerts(token = "token2", locale = NativePushLocale.De)
         assertEquals(8, calls.all.size)
 
         // A launch asks again, in case the service lost them.
         val relaunched = device(client(calls), storage, this)
-        relaunched.registerAlerts(token = "token2", locale = NativePushLocale.De, environment = NativePushEnvironment.Development)
+        relaunched.registerAlerts(token = "token2", locale = NativePushLocale.De)
         assertEquals(10, calls.all.size)
-        assertFalse(calls.all.contains("unalert 22222222222A token2"))
+        assertFalse(calls.all.contains("unalert 22222222222A token2 fcm"))
 
         // Forgetting a parcel, or letting an account take it over, stops its notifications here.
         relaunched.forget(id = theirs)
-        assertEquals("unalert 33333333333B token2", calls.all.last())
+        assertEquals("unalert 33333333333B token2 fcm", calls.all.last())
         relaunched.release(setOf("22222222222A"))
         advanceUntilIdle()
-        assertEquals("unalert 22222222222A token2", calls.all.last())
+        assertEquals("unalert 22222222222A token2 fcm", calls.all.last())
     }
 
     @Test
@@ -1022,7 +1021,7 @@ class DeviceParcelTests {
         val shown = PublicParcelResponse(link = reader("33333333333B"), parcel = pkg(id))
         val offline = device(client(calls, unalert = { throw DeliveryApiError.ServiceFailed(503) }), storage, this)
         offline.follow(shown, key = null, label = "Books for Ana")
-        offline.registerAlerts(token = "token1", locale = NativePushLocale.Fr, environment = NativePushEnvironment.Development)
+        offline.registerAlerts(token = "token1", locale = NativePushLocale.Fr)
 
         // The service can't turn its notifications off yet: the parcel leaves the list all the same,
         // an account can't take it over, and each refresh asks again.
@@ -1037,8 +1036,8 @@ class DeviceParcelTests {
         offline.forget(id = id)
         assertEquals(
             listOf(
-                "alert 33333333333B - important token1 fr development",
-                "unalert 33333333333B token1", "unalert 33333333333B token1", "unalert 33333333333B token1",
+                "alert 33333333333B - important token1 fr production fcm",
+                "unalert 33333333333B token1 fcm", "unalert 33333333333B token1 fcm", "unalert 33333333333B token1 fcm",
             ),
             calls.all,
         )
@@ -1049,7 +1048,7 @@ class DeviceParcelTests {
         relaunched.refresh()
         relaunched.refresh()
         assertEquals(5, calls.all.size)
-        assertEquals("unalert 33333333333B token1", calls.all.last())
+        assertEquals("unalert 33333333333B token1 fcm", calls.all.last())
         assertTrue(storage.parcels.isEmpty())
     }
 
@@ -1120,7 +1119,7 @@ class DeviceParcelTests {
         assertEquals(id, store.followedHere(shown))
         assertEquals(id, store.followedHere(linkId = "33333333333A"))
         assertEquals("33333333333A", store.viewerLink(store.parcels.first()))
-        val alert = "alert 33333333333A - all token1 ${NativePushLocale(localizer.language).rawValue} ${NativePushEnvironment.current(false).rawValue}"
+        val alert = "alert 33333333333A - all token1 ${NativePushLocale(localizer.language).rawValue} production fcm"
         runCurrent()
         assertEquals(listOf(alert), calls.all.filter { it.startsWith("alert") })
         assertEquals(listOf("status", "request", "status", "register"), asked)
@@ -1166,8 +1165,9 @@ class DeviceParcelTests {
     }
 
     /**
-     * Android's own, until Firebase Cloud Messaging: a phone without pushes never asks a guest for notifications, at
-     * launch, on adding a parcel or on following a link, and so never reads the permission or registers.
+     * Android's own, in a build without Firebase Cloud Messaging: a phone without pushes never asks a guest for
+     * notifications, at launch, on adding a parcel or on following a link, and so never reads the permission or
+     * registers.
      */
     @Test
     fun aPhoneWithoutPushNeverAsksAGuestForNotifications() = runTest {
@@ -1303,10 +1303,10 @@ class DeviceParcelTests {
         }
 
         cancelledRefresh()
-        assertEquals(listOf("unalert 33333333333B token1"), calls.all)
+        assertEquals(listOf("unalert 33333333333B token1 fcm"), calls.all)
         unalertLeaves = false
         cancelledRefresh()
-        assertEquals(listOf("unalert 33333333333B token1", "unalert 33333333333B token1", "forget 22222222222C"), calls.all)
+        assertEquals(listOf("unalert 33333333333B token1 fcm", "unalert 33333333333B token1 fcm", "forget 22222222222C"), calls.all)
         assertTrue(storage.parcels.isEmpty())
         assertEquals(mapOf("22222222222C" to key), storage.keys)
         forgetLeaves = false

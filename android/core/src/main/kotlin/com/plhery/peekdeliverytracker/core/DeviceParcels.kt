@@ -10,6 +10,7 @@ import com.plhery.peekdeliverytracker.core.api.DeleteParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.GiftWords
 import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
+import com.plhery.peekdeliverytracker.core.api.NativePushTransport
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
@@ -411,7 +412,7 @@ class DeviceParcelFiles(private val keychain: SessionPersistence, private val fi
  * service a replaced or released parcel's notifications and link are no longer this phone's) runs in `scope`, which
  * nothing cancels: the one `MainScope()` the application keeps and gives every store (`Dispatchers.Main` with a
  * `SupervisorJob`, never `Main.immediate`: a Swift `Task` starts once the code that made it has returned). A build without a server has no `client` and follows
- * nothing. `debug` says whether this is a debug build, whose notification tokens are development ones.
+ * nothing.
  */
 class DeviceParcels(
     private val client: DeviceParcelClient?,
@@ -430,7 +431,6 @@ class DeviceParcels(
      */
     private val language: () -> AppLanguage,
     private val now: () -> Instant = Instant::now,
-    private val debug: Boolean = false,
 ) {
     private var entries: List<DeviceParcel>
     private var keys: Map<String, String>
@@ -507,7 +507,7 @@ class DeviceParcels(
             keys = keys.setting(old.linkId, null)
             if (key != null || old.alertToken != null) {
                 scope.launch {
-                    old.alertToken?.let { token -> attempt { client.removeAlert(old.linkId, DeleteParcelAppAlertRequest(token = token)) } }
+                    old.alertToken?.let { token -> attempt { client.removeAlert(old.linkId, removal(token)) } }
                     if (key != null) attempt { client.forget(old.linkId, key) }
                 }
             }
@@ -586,7 +586,7 @@ class DeviceParcels(
         val client = client
         var alerting = false
         if (client != null && entry.alertToken != null) {
-            alerting = !succeeds { client.removeAlert(entry.linkId, DeleteParcelAppAlertRequest(token = entry.alertToken)) }
+            alerting = !succeeds { client.removeAlert(entry.linkId, removal(entry.alertToken)) }
         }
         val key = keys.keyOf(entry.linkId)
         if (client != null && key != null) client.forget(entry.linkId, key)
@@ -604,7 +604,7 @@ class DeviceParcels(
     private suspend fun stopForgottenAlerts(client: DeviceParcelClient) {
         for (entry in forgotten) {
             val token = entry.alertToken
-            if (token != null && !succeeds { client.removeAlert(entry.linkId, DeleteParcelAppAlertRequest(token = token)) }) return
+            if (token != null && !succeeds { client.removeAlert(entry.linkId, removal(token)) }) return
             forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(entry.alertToken)) }
             save()
         }
@@ -722,7 +722,7 @@ class DeviceParcels(
         val client = client
         if (client != null && alerts.isNotEmpty()) {
             scope.launch {
-                for ((linkId, token) in alerts) attempt { client.removeAlert(linkId, DeleteParcelAppAlertRequest(token = token)) }
+                for ((linkId, token) in alerts) attempt { client.removeAlert(linkId, removal(token)) }
             }
         }
     }
@@ -756,7 +756,7 @@ class DeviceParcels(
                 val client = client
                 val token = old.alertToken
                 if (client != null && token != null) {
-                    scope.launch { attempt { client.removeAlert(old.linkId, DeleteParcelAppAlertRequest(token = token)) } }
+                    scope.launch { attempt { client.removeAlert(old.linkId, removal(token)) } }
                 }
             }
             change(index) { owned }
@@ -788,17 +788,19 @@ class DeviceParcels(
     /** Whether a parcel is still on its way, with something left to tell. */
     val hasParcelsOnTheirWay: Boolean get() = entries.any { it.parcel.currentStage?.isFinal != true }
 
+    /** What tells the service that this phone's FCM [token] hears nothing more of a parcel. */
+    private fun removal(token: String) = DeleteParcelAppAlertRequest(token = token, transport = NativePushTransport.Fcm)
+
     /**
      * Turns notifications on, on this phone's token and in its language, for every parcel still on its way: once a
      * launch, and again when the token or the language changes. A parcel that arrived needs none. A round is short and
      * quiet: a few parcels at most, and it ends at the first sign that the service wants a pause or sends no
      * notifications. A link that leads nowhere, has no room or is no longer shared is left until the next launch.
      *
-     * On Android: the service takes APNs tokens alone (`ParcelAppAlertRequest`: 32 to 512 hex digits), so the app
-     * calls this once the service accepts FCM tokens, and from the main thread (`FirebaseMessagingService.onNewToken`
-     * runs on another).
+     * On Android the token is this phone's FCM registration token, which has one environment. Called from the main
+     * thread: `FirebaseMessagingService.onNewToken` runs on another, and the app hands its token over to the main one.
      */
-    suspend fun registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = NativePushEnvironment.current(debug)) {
+    suspend fun registerAlerts(token: String, locale: NativePushLocale) {
         val asked = "$token ${locale.rawValue}"
         val client = client ?: return
         val round = asked.nfc()
@@ -810,7 +812,10 @@ class DeviceParcels(
                 val answer = try {
                     client.setAlert(
                         entry.linkId, keys.keyOf(entry.linkId),
-                        ParcelAppAlertRequest(token = token, environment = environment, preset = preset, locale = locale),
+                        ParcelAppAlertRequest(
+                            token = token, environment = NativePushEnvironment.Production, preset = preset, locale = locale,
+                            transport = NativePushTransport.Fcm,
+                        ),
                     )
                 } catch (cancellation: CancellationException) {
                     throw cancellation
@@ -826,7 +831,7 @@ class DeviceParcels(
                 save()
                 // The token changed: the old one hears nothing more of this parcel.
                 if (old != null && !old.equalsCanonically(token)) {
-                    attempt { client.removeAlert(entry.linkId, DeleteParcelAppAlertRequest(token = old)) }
+                    attempt { client.removeAlert(entry.linkId, removal(old)) }
                 }
             }
         } finally {

@@ -23,6 +23,7 @@ import com.plhery.peekdeliverytracker.core.api.LiveActivityUpdateTokenRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushDeviceRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushEnvironment
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
+import com.plhery.peekdeliverytracker.core.api.NativePushTransport
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalResponse
@@ -393,14 +394,19 @@ class DeliveryApiClient(
         return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", encode(NotificationPreferences.serializer(), sent))
     }
 
+    /**
+     * This phone's Firebase Cloud Messaging registration token, sent through FCM. FCM has one environment, so a debug
+     * build's token is a production one too.
+     */
     suspend fun registerNativePushToken(token: String, installationId: UUID, language: AppLanguage, sendTest: Boolean): Boolean {
         val response = request(
             "/api/push/devices", PushSubscriptionResponse.serializer(), "POST",
             encode(
                 NativePushDeviceRequest.serializer(),
                 NativePushDeviceRequest(
-                    token = token, installationId = installationId, environment = NativePushEnvironment.current(debug),
+                    token = token, installationId = installationId, environment = NativePushEnvironment.Production,
                     locale = NativePushLocale(language), deviceName = deviceName, sendTest = sendTest,
+                    transport = NativePushTransport.Fcm,
                 ),
             ),
         )
@@ -410,7 +416,10 @@ class DeliveryApiClient(
     suspend fun unregisterNativePushToken(token: String) {
         request(
             "/api/push/devices", OkResponse.serializer(), "DELETE",
-            encode(DeleteNativePushDeviceRequest.serializer(), DeleteNativePushDeviceRequest(token = token)),
+            encode(
+                DeleteNativePushDeviceRequest.serializer(),
+                DeleteNativePushDeviceRequest(token = token, transport = NativePushTransport.Fcm),
+            ),
         )
     }
 
@@ -767,7 +776,7 @@ class LiveActivityRevocations(
     }
 }
 
-/** The APNs environment this build's tokens belong to: development in a debug build. */
+/** The APNs environment this build's Live Activity tokens belong to: development in a debug build. */
 fun NativePushEnvironment.Companion.current(debug: Boolean): NativePushEnvironment =
     if (debug) NativePushEnvironment.Development else NativePushEnvironment.Production
 

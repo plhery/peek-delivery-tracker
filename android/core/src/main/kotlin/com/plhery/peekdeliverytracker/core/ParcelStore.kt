@@ -42,13 +42,13 @@ import kotlinx.serialization.Serializable
  * (Firebase's callbacks come on others), and `authorizationStatus` never throws.
  *
  * On Android, the permission is POST_NOTIFICATIONS with NotificationManagerCompat, and the token Firebase Cloud
- * Messaging's. The service takes APNs tokens alone for now (`/api/push/devices` and the parcels' app alerts): FCM
- * tokens need it to send through FCM first.
+ * Messaging's, which the service sends through FCM (`/api/push/devices` and the parcels' app alerts say `fcm`).
  */
 interface PushNotifications {
     /**
-     * Whether this phone can receive pushes at all: not on Android until Firebase Cloud Messaging is set up. Without
-     * them nothing offers notifications, asks for the permission or tunes them, and a parcel's alerts are its email.
+     * Whether this phone can receive pushes at all: not on Android in a build without Firebase Cloud Messaging's
+     * settings. Without them nothing offers notifications, asks for the permission or tunes them, and a parcel's alerts
+     * are its email.
      */
     val available: Boolean get() = true
 

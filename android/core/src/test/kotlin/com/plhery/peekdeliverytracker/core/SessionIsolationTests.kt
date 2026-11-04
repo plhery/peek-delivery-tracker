@@ -246,8 +246,8 @@ class SessionIsolationTests {
     }
 
     /**
-     * Android's own, until Firebase Cloud Messaging: an account with parcels on a phone without pushes is never invited
-     * to turn them on, where the same account on a phone with them is.
+     * Android's own, in a build without Firebase Cloud Messaging: an account with parcels on a phone without pushes is
+     * never invited to turn them on, where the same account on a phone with them is.
      */
     @Test
     fun aPhoneWithoutPushNeverInvitesTheAccountToTurnThemOn() = runTest {

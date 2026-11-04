@@ -8,7 +8,7 @@
   { "id": "yunexpress", "catalog": "yunexpress", "name": "YunExpress", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "cainiao", "catalog": "aliexpress", "name": "Cainiao", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
   { "id": "mondial-relay", "catalog": "mondial-relay", "name": "Mondial Relay", "languages": ["en", "fr", "es", "pt", "nl"] },
-  { "id": "gls-de", "catalog": "gls-de", "name": "GLS Germany", "languages": ["en", "de"] },
+  { "id": "gls-de", "catalog": "gls-de", "name": "GLS Germany", "languages": ["en", "de", "uk"] },
   { "id": "dpd-de", "catalog": "dpd-de", "name": "DPD Germany", "languages": ["en", "de"] },
   { "id": "hermes-de", "catalog": "hermes-de", "name": "Hermes", "languages": ["en", "de", "es"] },
   { "id": "gls-ch", "catalog": "gls-ch", "name": "GLS Switzerland", "languages": ["en", "de", "fr", "it"] },

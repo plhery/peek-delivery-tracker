@@ -4574,6 +4574,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "uk": [
     {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "gls-vidstezhennia-posylky-nimechchyna",
+      "title": "GLS відстеження посилки в Німеччині: статуси, ParcelShop",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
+    },
+    {
       "id": "meest",
       "catalog": "meest",
       "slug": "meest-vidstezhennia-posylky",

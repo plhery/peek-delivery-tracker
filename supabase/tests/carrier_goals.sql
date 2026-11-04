@@ -144,10 +144,11 @@ begin
   if after.feedback_7d - before.feedback_7d <> 2 or after.feedback_right_7d - before.feedback_right_7d <> 1 then
     raise exception 'Readers'' answers were miscounted: % then %', before, after;
   end if;
-  if after.scans - before.scans <> 2 or after.scans_unmapped - before.scans_unmapped <> 1 then
+  -- Late enough in the day that the scans and checks of the last minutes are today's.
+  if (now() at time zone 'UTC')::time >= time '00:10' and (
+      after.scans - before.scans <> 2 or after.scans_unmapped - before.scans_unmapped <> 1) then
     raise exception 'Scans no map read were miscounted: % then %', before, after;
   end if;
-  -- Late enough in the day that the checks of the last minutes are today's.
   if (now() at time zone 'UTC')::time >= time '00:10' and (
       after.checks - before.checks <> 5 or after.failed_checks - before.failed_checks <> 2
       or after.answered_checks - before.answered_checks <> 2 or after.direct_checks - before.direct_checks <> 1

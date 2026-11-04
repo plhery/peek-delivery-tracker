@@ -288,6 +288,25 @@ describe('createDemoRepo', () => {
     await expect(repo.rename(parcel.id, 'x'.repeat(81))).rejects.toThrow('at most 80');
   });
 
+  it('keeps the steps a carrier planned apart from the scans until scans overtake them', async () => {
+    let clock = Date.parse('2026-09-09T12:00:00Z');
+    const repo = createDemoRepo(window.localStorage, () => clock);
+    const vinyl = (await repo.list()).find(parcel => parcel.label === 'Kind of Blue · vinyl 🎷')!;
+    expect(currentStage(vinyl.events)).toBe('in_transit');
+    expect(vinyl.expectedDelivery).toBeUndefined();
+    expect(vinyl.plannedEvents!.map(step => step.stage)).toEqual(['customs', 'in_transit', 'out_for_delivery', 'delivered']);
+    // One planned step's time has passed with no scan to confirm it.
+    expect(vinyl.plannedEvents!.filter(step => Date.parse(step.occurredAt) > clock)).toHaveLength(3);
+    clock += 60_000;
+    let parcel = await repo.refreshParcel!(vinyl.id);
+    // Out for delivery for real: the steps dated before it go, and so does a later one of an earlier stage.
+    expect(currentStage(parcel.events)).toBe('out_for_delivery');
+    expect(parcel.plannedEvents!.map(step => step.description)).toEqual(['Out for delivery', 'Delivered']);
+    parcel = await repo.refreshParcel!(vinyl.id);
+    expect(isDelivered(parcel.events)).toBe(true);
+    expect(parcel).not.toHaveProperty('plannedEvents');
+  });
+
   it('refresh advances non-final parcels by exactly one stage', async () => {
     const repo = createDemoRepo(window.localStorage);
     const parcel = await repo.add({ trackingNumber: '1234567890', label: 'Socks' });
@@ -369,6 +388,7 @@ describe('createDemoRepo', () => {
     for (const sample of demoSamples) {
       texts.add(sample.label);
       for (const event of sample.events) texts.add(event.description);
+      for (const step of sample.plannedEvents ?? []) texts.add(step.description);
     }
     for (const [stage, update] of Object.entries(SIMULATED_UPDATES)) {
       // The waiting message is one of the app's own tracking messages.

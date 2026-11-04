@@ -419,6 +419,16 @@ and nothing typed is sent.
   them. In one stage they read in the order their source listed them, the scraper's
   `tie_order` stored in the row's raw data and served as `tie_order`, then by id; a row
   stored before the order goes after those with one until its next check rewrites it.
+- **A carrier's planned steps**: some carriers list steps before they happen (a script of
+  the whole route written when the order is made, a scan entered at its planned time). The
+  scraper holds them out of the scans and names them (`planned_events`). The router keeps
+  each carrier's latest list for the number in `routing.planned`, at most 30, the earliest,
+  until that carrier answers again or finds no history. `src/server/plannedSteps.ts` serves
+  those of the carrier delivering now as `planned_events`, apart from the scans: a step goes
+  once a shown scan tells it in the same words, is as late or has come further, and every
+  step goes once the parcel is delivered or returned. The apps list them greyed above the
+  scans, under "Planned by the carrier". They are never scans: they set no stage, status,
+  estimate, alert, email, count, map or drawing, and a wrapped gift's link shows none.
 - **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
   pay import duties or taxes, or send documents is served with `recipient_action`, as the
   scraper flagged it when the scan was stored, or, for a row stored before the flag, as its

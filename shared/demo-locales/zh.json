@@ -89,5 +89,9 @@
   "Tracking updated": "物流已更新",
   "Your neighbourhood": "你家附近",
   "Post branch": "邮局",
-  "Home": "家"
+  "Home": "家",
+  "Customs cleared": "已清关",
+  "Arrived at the local delivery centre": "已到达当地派送中心",
+  "Out for delivery": "派送中",
+  "Delivered": "已签收"
 }

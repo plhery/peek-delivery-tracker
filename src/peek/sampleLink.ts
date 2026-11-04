@@ -1,7 +1,7 @@
 import type { Locale } from '../lib/locale';
 import { currentEvent, latestEvent } from '../lib/stages';
 import { uid } from '../lib/uid';
-import { demoWording, nextStage, seedParcels, SIMULATED_UPDATES } from '../store/demoRepo';
+import { demoWording, nextStage, seedParcels, SIMULATED_UPDATES, stillPlanned } from '../store/demoRepo';
 import type { ParcelWithEvents } from '../types';
 import type { ParcelLinkReadOptions, ParcelLinkView } from './linkModel';
 import { SAMPLE_LINK_ID } from './sample';
@@ -25,7 +25,7 @@ function advanced(parcel: ParcelWithEvents, now: number): ParcelWithEvents {
   const next = current && nextStage(current.stage);
   if (!next) return parcel;
   const occurredAt = new Date(Math.max(now, Date.parse(latestEvent(parcel.events)!.occurredAt) + 1_000)).toISOString();
-  return { ...parcel, events: [...parcel.events, { id: uid(), parcelId: parcel.id, stage: next, occurredAt, ...SIMULATED_UPDATES[next] }] };
+  return stillPlanned({ ...parcel, events: [...parcel.events, { id: uid(), parcelId: parcel.id, stage: next, occurredAt, ...SIMULATED_UPDATES[next] }] });
 }
 
 /** The demo's text in the reader's language; in English where its translation cannot be loaded. */

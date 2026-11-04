@@ -528,7 +528,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {!wrapped && <NumberSection view={view} links={links} onVisit={(link) => feedback.visited(link.name)} />}
         <ShipmentFacts parcel={parcel} stage={stage} />
         {carrierKnown && (automatic || moving) && <section className="peekp-journal">
-          <TrackingJournal events={wrapped ? collapseGiftRows(parcel.events) : parcel.events} syncing={checking} fold />
+          <TrackingJournal events={wrapped ? collapseGiftRows(parcel.events) : parcel.events} planned={wrapped ? undefined : parcel.plannedEvents} syncing={checking} fold />
         </section>}
         {!final && freshness.kind !== 'live' && <FreshnessLine freshness={freshness} busy={refreshing} onCheck={() => void check()} />}
         <FeedbackQuestion feedback={feedback} />

@@ -150,6 +150,15 @@
 .tracking-journal__flag { flex: none; margin-left: -1px; font-size: 12px; line-height: 1; }
 .tracking-journal .tracking-journal__relay { margin-top: 3px; font-size: 11px; color: var(--ink-soft); }
 .tracking-journal .timeline-empty { margin-top: 12px; color: var(--ink-soft); }
+/* Steps the carrier planned and has not confirmed: greyed, on dashed marks joined by a dashed rail, apart from the scans. */
+.tracking-journal__planned { padding-bottom: 2px; border-bottom: 1px dashed var(--line); }
+.tracking-journal__planned > h3 { margin-bottom: 4px; }
+.tracking-journal .tracking-journal__planned-note { margin: 0 0 16px; color: var(--ink-soft); font-size: 11px; line-height: 1.45; }
+.tracking-journal__planned .tracking-journal__events > li { position: relative; margin-bottom: 18px; }
+.tracking-journal__planned .tracking-journal__events > li:not(:last-child)::before { content: ''; position: absolute; left: 5.5px; top: 18px; bottom: -16px; border-left: 1px dashed var(--ink-soft); opacity: .45; }
+.tracking-journal__planned p { color: var(--ink-soft); }
+.tracking-journal__planned-mark { width: 12px; height: 12px; margin-top: 3px; fill: none; stroke: var(--ink-soft); stroke-width: 1.2; stroke-dasharray: 2.4 1.9; }
+.tracking-journal .tracking-journal__planned-when { display: block; margin-top: 2px; padding: 0; }
 /* A long journey folds its older days into one line each. */
 .tracking-journal__day > summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 48px; border-top: 1px solid var(--line); list-style: none; cursor: pointer; }
 .tracking-journal__day > summary::-webkit-details-marker { display: none; }

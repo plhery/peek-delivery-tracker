@@ -89,5 +89,9 @@
   "Tracking updated": "Sendungsverfolgung aktualisiert",
   "Your neighbourhood": "Dein Viertel",
   "Post branch": "Postfiliale",
-  "Home": "Zuhause"
+  "Home": "Zuhause",
+  "Customs cleared": "Verzollt",
+  "Arrived at the local delivery centre": "Im örtlichen Zustellzentrum angekommen",
+  "Out for delivery": "In Zustellung",
+  "Delivered": "Zugestellt"
 }

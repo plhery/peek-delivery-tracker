@@ -89,5 +89,9 @@
   "Tracking updated": "Отслеживание обновлено",
   "Your neighbourhood": "Ваш район",
   "Post branch": "Почтовое отделение",
-  "Home": "Дом"
+  "Home": "Дом",
+  "Customs cleared": "Прошла таможню",
+  "Arrived at the local delivery centre": "Прибыла в местный центр доставки",
+  "Out for delivery": "Передана курьеру",
+  "Delivered": "Доставлена"
 }

@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { localizedCalendarDate, scanDate } from '../lib/format';
+import { useId, useState } from 'react';
+import { dayAndTime, localizedCalendarDate, scanDate } from '../lib/format';
 import { countryFlag, countryName } from 'universal-parcel-scraper/app';
 import { localizedEventDescription, stageLabel, useI18n } from '../i18n';
 import { scanPlace } from '../lib/scanPlace';
 import { currentEvent, sortEventsDesc } from '../lib/stages';
-import type { TrackingEvent } from '../types';
+import type { PlannedEvent, TrackingEvent } from '../types';
 
 /** A folded journal keeps this many days open, and this many more as one line each. */
 const FOLD_FROM_EVENTS = 12;
@@ -32,9 +32,12 @@ function withRelays(events: TrackingEvent[]): { listed: TrackingEvent[]; relays:
 /**
  * The whole journey grouped by local calendar day, newest first. With `fold`,
  * a long journey shows its newest days, the days before as one line each to
- * open, and keeps the oldest behind a button.
+ * open, and keeps the oldest behind a button. The steps the carrier planned
+ * and has not confirmed (`planned`) open it, greyed, apart from the scans.
  */
-export function TrackingJournal({ events: allEvents, syncing = false, fold = false }: { events: TrackingEvent[]; syncing?: boolean; fold?: boolean }) {
+export function TrackingJournal({ events: allEvents, planned = [], syncing = false, fold = false }: {
+  events: TrackingEvent[]; planned?: PlannedEvent[]; syncing?: boolean; fold?: boolean;
+}) {
   const { languageTag, t } = useI18n();
   const [oldestShown, setOldestShown] = useState(false);
   const { listed: events, relays } = withRelays(allEvents);
@@ -81,6 +84,7 @@ export function TrackingJournal({ events: allEvents, syncing = false, fold = fal
 
   return <details className="tracking-journal" open>
     <summary><span>{t('timeline.label')}</span><span className="tracking-journal__count">{updates(events.length)}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg></span></summary>
+    {planned.length > 0 && <PlannedSteps steps={planned} />}
     {!events.length ? <p className="timeline-empty">{t(syncing ? 'timeline.emptySyncing' : 'timeline.empty')}</p>
       : <ol className="tracking-journal__days" aria-label={t('timeline.label')}>
         {listed.map(([key, group], index) => <li key={key}>
@@ -97,6 +101,43 @@ export function TrackingJournal({ events: allEvents, syncing = false, fold = fal
       <svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg>{t('link.showOldest.many', { count: oldest })}
     </button>}
   </details>;
+}
+
+/**
+ * The steps the carrier listed before they happen, newest first, under a heading that says so: greyed, each on a
+ * dashed mark instead of a time, with its planned day. They are no scans and count as no update.
+ */
+function PlannedSteps({ steps }: { steps: PlannedEvent[] }) {
+  const { languageTag, t } = useI18n();
+  const heading = useId();
+  const now = new Date();
+  const offset = (days: number) => new Date(now.getFullYear(), now.getMonth(), now.getDate() + days).toDateString();
+  const when = (step: PlannedEvent) => {
+    const scan = scanDate(step);
+    if (!scan) return '';
+    const { date, timed } = scan;
+    const day = date.toDateString() === offset(0) ? t('time.today') : date.toDateString() === offset(1) ? t('time.tomorrow')
+      : date.toDateString() === offset(-1) ? t('time.yesterday') : localizedCalendarDate(date, languageTag, date.getFullYear() !== now.getFullYear());
+    return timed ? dayAndTime(day, new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(date), languageTag) : day;
+  };
+  const newestFirst = [...steps].sort((a, b) => (scanDate(b)?.date.getTime() ?? 0) - (scanDate(a)?.date.getTime() ?? 0));
+  return <section className="tracking-journal__planned" aria-labelledby={heading}>
+    <h3 id={heading}>{t('timeline.planned.title')}</h3>
+    <p className="tracking-journal__planned-note">{t('timeline.planned.note')}</p>
+    <ol className="tracking-journal__events">
+      {newestFirst.map((step, index) => {
+        const wording = localizedEventDescription(step.description, t) || stageLabel(t, step.stage);
+        return <li key={`${step.occurredAt}-${index}`}>
+          <svg className="tracking-journal__planned-mark" aria-hidden="true" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6" /></svg>
+          <div>
+            <p><span className="sr-only">{t('timeline.planned.step', { step: '' }).trim()} </span>{wording}</p>
+            <time className="tracking-journal__planned-when" dateTime={step.day ?? step.occurredAt}>{when(step)}</time>
+            {step.location?.trim() && <EventPlace location={step.location} />}
+          </div>
+        </li>;
+      })}
+    </ol>
+  </section>;
 }
 
 /**

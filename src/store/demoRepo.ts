@@ -31,6 +31,8 @@ interface DemoSample {
   pickupPoint?: string;
   weightKg?: number;
   events: { stage: string; hoursAgo: number; description: string; location?: string; place?: unknown }[];
+  /** Steps the carrier wrote ahead, never scans; a negative `hoursAgo` is still to come. */
+  plannedEvents?: { stage: string; hoursAgo: number; description: string; location?: string }[];
 }
 
 const demoCatalog: DemoSample[] = demoSamples;
@@ -224,8 +226,28 @@ export function seedParcels(now: number): ParcelWithEvents[] {
         description: event.description, location: event.location, occurredAt: iso(event.hoursAgo),
         place: event.place as EventPlace | undefined,
       })),
+      ...(sample.plannedEvents ? { plannedEvents: sample.plannedEvents.map((step) => ({
+        stage: step.stage as Stage, description: step.description, location: step.location, occurredAt: iso(step.hoursAgo),
+      })) } : {}),
     };
   });
+}
+
+const PROGRESS: readonly Stage[] = ['registered', 'accepted', 'in_transit', 'out_for_delivery', 'delivered'];
+
+/**
+ * The planned steps a demo parcel still shows once its scans move on, by the server's rule (plannedSteps.ts): none
+ * once it is delivered or returned, and none a scan is as late as or has come further than.
+ */
+export function stillPlanned(parcel: ParcelWithEvents): ParcelWithEvents {
+  if (!parcel.plannedEvents) return parcel;
+  const { plannedEvents, ...rest } = parcel;
+  if (parcel.events.some((event) => event.stage === 'delivered' || event.stage === 'returned')) return rest;
+  const latest = Math.max(...parcel.events.map((event) => Date.parse(event.occurredAt)));
+  const reached = Math.max(-1, ...parcel.events.map((event) => PROGRESS.indexOf(event.stage)));
+  const kept = plannedEvents.filter((step) => Date.parse(step.occurredAt) > latest
+    && !(PROGRESS.indexOf(step.stage) >= 0 && PROGRESS.indexOf(step.stage) < reached));
+  return kept.length ? { ...rest, plannedEvents: kept } : rest;
 }
 
 function load(storage: Storage): ParcelWithEvents[] | null {
@@ -308,6 +330,9 @@ export function createDemoRepo(
       events: parcel.events.map((scan) => ({
         ...scan, description: say(scan.description), location: scan.location && say(scan.location),
       })),
+      ...(parcel.plannedEvents ? { plannedEvents: parcel.plannedEvents.map((step) => ({
+        ...step, description: say(step.description), location: step.location && say(step.location),
+      })) } : {}),
     }));
     save(storage, parcels);
     storage.setItem(LANGUAGE_KEY, target);
@@ -340,12 +365,12 @@ export function createDemoRepo(
     const occurredAt = new Date(Math.max(now(), lastTs + 1000)).toISOString();
     const swissPostReady = supportsSwissPostHandoff(parcel.trackingNumber)
       && ['in_transit', 'customs', 'out_for_delivery', 'delivered'].includes(next);
-    return {
+    return stillPlanned({
       ...parcel,
       trackingSource: swissPostReady ? 'swiss-post' : parcel.trackingSource,
       swissPostReady: swissPostReady || parcel.swissPostReady,
       events: [...parcel.events, event(parcel.id, next, occurredAt)],
-    };
+    });
   };
 
   return {

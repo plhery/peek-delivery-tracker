@@ -318,6 +318,30 @@
           "name": "Eindhoven"
         }
       }
+    ],
+    "plannedEvents": [
+      {
+        "stage": "customs",
+        "hoursAgo": 1,
+        "description": "Customs cleared",
+        "location": "Basel, Switzerland"
+      },
+      {
+        "stage": "in_transit",
+        "hoursAgo": -10,
+        "description": "Arrived at the local delivery centre",
+        "location": "Zürich, Switzerland"
+      },
+      {
+        "stage": "out_for_delivery",
+        "hoursAgo": -20,
+        "description": "Out for delivery"
+      },
+      {
+        "stage": "delivered",
+        "hoursAgo": -24,
+        "description": "Delivered"
+      }
     ]
   },
   {

@@ -107,8 +107,23 @@ export interface TrackingEvent {
   tieOrder?: number;
 }
 
+/**
+ * A step the carrier listed before it happened, such as a script of the whole journey written when the order was
+ * made: no scan. The timeline shows it greyed as planned and not confirmed; nothing else reads it.
+ */
+export interface PlannedEvent {
+  stage: Stage;
+  description: string;
+  location?: string;
+  occurredAt: string; // ISO timestamp
+  /** The day (YYYY-MM-DD) of a step the carrier dated by its day alone. */
+  day?: string;
+}
+
 export interface ParcelWithEvents extends Parcel {
   events: TrackingEvent[];
+  /** The carrier's planned steps still ahead of its scans, oldest first. */
+  plannedEvents?: PlannedEvent[];
 }
 
 export interface NewParcelInput {

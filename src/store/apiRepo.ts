@@ -12,6 +12,7 @@ import type {
   ApiQueueResponse,
   ApiRenamePackageRequest,
   ApiPackageNotificationRequest,
+  ApiPlannedTrackingEvent,
   ApiTrackingEventRow,
   ApiSyncJobListResponse,
 } from '../generated/apiContract';
@@ -22,6 +23,7 @@ import {
   type ParcelCarrierInput,
   type ParcelRepo,
   type ParcelWithEvents,
+  type PlannedEvent,
   type TrackingEvent,
 } from '../types';
 
@@ -162,6 +164,18 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     notificationsMuted: row.notifications_muted,
     emailMuted: row.email_muted,
     events: (row.tracking_events ?? []).map(toEvent),
+    ...(row.planned_events?.length ? { plannedEvents: row.planned_events.map(toPlannedEvent) } : {}),
+  };
+}
+
+/** A step the carrier planned, which only the timeline shows. */
+export function toPlannedEvent(row: ApiPlannedTrackingEvent): PlannedEvent {
+  return {
+    stage: row.stage,
+    description: row.description,
+    location: row.location ?? undefined,
+    occurredAt: row.occurred_at,
+    day: row.day ?? undefined,
   };
 }
 

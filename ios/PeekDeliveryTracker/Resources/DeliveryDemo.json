@@ -319,6 +319,30 @@
             "name": "Eindhoven"
           }
         }
+      ],
+      "plannedEvents": [
+        {
+          "stage": "customs",
+          "hoursAgo": 1,
+          "description": "Customs cleared",
+          "location": "Basel, Switzerland"
+        },
+        {
+          "stage": "in_transit",
+          "hoursAgo": -10,
+          "description": "Arrived at the local delivery centre",
+          "location": "Zürich, Switzerland"
+        },
+        {
+          "stage": "out_for_delivery",
+          "hoursAgo": -20,
+          "description": "Out for delivery"
+        },
+        {
+          "stage": "delivered",
+          "hoursAgo": -24,
+          "description": "Delivered"
+        }
       ]
     },
     {
@@ -1108,7 +1132,11 @@
       "Tracking updated": "Sendungsverfolgung aktualisiert",
       "Your neighbourhood": "Dein Viertel",
       "Post branch": "Postfiliale",
-      "Home": "Zuhause"
+      "Home": "Zuhause",
+      "Customs cleared": "Verzollt",
+      "Arrived at the local delivery centre": "Im örtlichen Zustellzentrum angekommen",
+      "Out for delivery": "In Zustellung",
+      "Delivered": "Zugestellt"
     },
     "es": {
       "Coffee beans ☕": "Café en grano ☕",
@@ -1201,7 +1229,11 @@
       "Tracking updated": "Seguimiento actualizado",
       "Your neighbourhood": "Tu barrio",
       "Post branch": "Oficina de correos",
-      "Home": "Casa"
+      "Home": "Casa",
+      "Customs cleared": "Despachado de aduanas",
+      "Arrived at the local delivery centre": "Llegó al centro de reparto local",
+      "Out for delivery": "En reparto",
+      "Delivered": "Entregado"
     },
     "fr": {
       "Coffee beans ☕": "Café en grains ☕",
@@ -1294,7 +1326,11 @@
       "Tracking updated": "Suivi mis à jour",
       "Your neighbourhood": "Ton quartier",
       "Post branch": "Office de poste",
-      "Home": "Domicile"
+      "Home": "Domicile",
+      "Customs cleared": "Dédouané",
+      "Arrived at the local delivery centre": "Arrivé au centre de distribution local",
+      "Out for delivery": "En cours de livraison",
+      "Delivered": "Livré"
     },
     "it": {
       "Coffee beans ☕": "Caffè in grani ☕",
@@ -1387,7 +1423,11 @@
       "Tracking updated": "Tracciamento aggiornato",
       "Your neighbourhood": "Il tuo quartiere",
       "Post branch": "Filiale postale",
-      "Home": "Casa"
+      "Home": "Casa",
+      "Customs cleared": "Sdoganato",
+      "Arrived at the local delivery centre": "Arrivato al centro di consegna locale",
+      "Out for delivery": "In consegna",
+      "Delivered": "Consegnato"
     },
     "pl": {
       "Coffee beans ☕": "Kawa ziarnista ☕",
@@ -1480,7 +1520,11 @@
       "Tracking updated": "Śledzenie zaktualizowane",
       "Your neighbourhood": "Twoja okolica",
       "Post branch": "Placówka pocztowa",
-      "Home": "Dom"
+      "Home": "Dom",
+      "Customs cleared": "Odprawiona celnie",
+      "Arrived at the local delivery centre": "Dotarła do lokalnego centrum doręczeń",
+      "Out for delivery": "W doręczeniu",
+      "Delivered": "Doręczona"
     },
     "pt": {
       "Coffee beans ☕": "Café em grão ☕",
@@ -1573,7 +1617,11 @@
       "Tracking updated": "Seguimento atualizado",
       "Your neighbourhood": "O teu bairro",
       "Post branch": "Estação de correios",
-      "Home": "Casa"
+      "Home": "Casa",
+      "Customs cleared": "Desalfandegada",
+      "Arrived at the local delivery centre": "Chegou ao centro de distribuição local",
+      "Out for delivery": "Em distribuição",
+      "Delivered": "Entregue"
     },
     "pt-br": {
       "Coffee beans ☕": "Café em grãos ☕",
@@ -1666,7 +1714,11 @@
       "Tracking updated": "Rastreamento atualizado",
       "Your neighbourhood": "Seu bairro",
       "Post branch": "Agência dos correios",
-      "Home": "Casa"
+      "Home": "Casa",
+      "Customs cleared": "Liberada pela alfândega",
+      "Arrived at the local delivery centre": "Chegou ao centro de distribuição local",
+      "Out for delivery": "Saiu para entrega",
+      "Delivered": "Entregue"
     },
     "ru": {
       "Coffee beans ☕": "Кофе в зёрнах ☕",
@@ -1759,7 +1811,11 @@
       "Tracking updated": "Отслеживание обновлено",
       "Your neighbourhood": "Ваш район",
       "Post branch": "Почтовое отделение",
-      "Home": "Дом"
+      "Home": "Дом",
+      "Customs cleared": "Прошла таможню",
+      "Arrived at the local delivery centre": "Прибыла в местный центр доставки",
+      "Out for delivery": "Передана курьеру",
+      "Delivered": "Доставлена"
     },
     "zh": {
       "Coffee beans ☕": "咖啡豆 ☕",
@@ -1852,7 +1908,11 @@
       "Tracking updated": "物流已更新",
       "Your neighbourhood": "你家附近",
       "Post branch": "邮局",
-      "Home": "家"
+      "Home": "家",
+      "Customs cleared": "已清关",
+      "Arrived at the local delivery centre": "已到达当地派送中心",
+      "Out for delivery": "派送中",
+      "Delivered": "已签收"
     }
   }
 }

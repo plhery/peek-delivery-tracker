@@ -750,7 +750,7 @@ export function ParcelDetail({
 
       {(automaticTracking || parcelHasCarrierUpdate(parcel)) && (
         <section className="detail__timeline">
-          <TrackingJournal events={parcel.events} syncing={status.syncing} />
+          <TrackingJournal events={parcel.events} planned={parcel.plannedEvents} syncing={status.syncing} />
         </section>
       )}
 

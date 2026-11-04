@@ -3,7 +3,7 @@ import { normalizeTrackingNumber, parseTrackingInput, validTrackingNumber } from
 import { currentEvent, isFinal, latestEvent, sortEventsDesc } from '../lib/stages';
 import { uid } from '../lib/uid';
 import { browserStorage } from '../store/apiRepo';
-import { nextStage, seedParcels, SIMULATED_UPDATES } from '../store/demoRepo';
+import { nextStage, seedParcels, SIMULATED_UPDATES, stillPlanned } from '../store/demoRepo';
 import type { CarrierId, ParcelWithEvents, TrackingEvent } from '../types';
 import {
   GIFT_ORIGIN_DESCRIPTION,
@@ -201,11 +201,11 @@ export function createDemoLinks(
     const next = current && nextStage(current.stage);
     if (!current || !next) return parcel;
     const occurredAt = new Date(Math.max(now(), Date.parse(latestEvent(parcel.events)!.occurredAt) + 1_000)).toISOString();
-    return {
+    return stillPlanned({
       ...parcel,
       lastSyncedAt: new Date(now()).toISOString(),
       events: [...parcel.events, simulated(parcel.id, next, occurredAt)],
-    };
+    });
   }
 
   /** The link with the given id, when it exists and has not expired. */

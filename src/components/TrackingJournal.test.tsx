@@ -26,6 +26,26 @@ describe('TrackingJournal', () => {
     expect(screen.getByText('08:42')).toHaveAttribute('dateTime', '2024-09-09T08:42:00');
   });
 
+  it('shows the steps the carrier planned apart, greyed and newest first, without counting them as updates', () => {
+    const { container } = render(<TrackingJournal events={[event('picked', '2024-09-07T10:00:00', 'Picked up', 'Shenzhen, China')]} planned={[
+      { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2024-09-08T09:00:00', location: 'Shenzhen, China' },
+      { stage: 'delivered', description: 'Delivered', occurredAt: '2024-09-15T22:00:00.000Z', day: '2024-09-16' },
+    ]} />);
+    expect(screen.getByText('1 update')).toBeInTheDocument();
+    const planned = screen.getByRole('region', { name: 'Planned by the carrier' });
+    expect(within(planned).getByText(/^Not confirmed: the carrier wrote these steps in advance/)).toBeInTheDocument();
+    expect([...planned.querySelectorAll('li p')].map(line => line.textContent))
+      .toEqual(['Planned, not confirmed: Delivered', 'Planned, not confirmed: Departed the origin facility']);
+    expect([...planned.querySelectorAll('time')].map(time => [time.getAttribute('dateTime'), time.textContent]))
+      .toEqual([['2024-09-16', 'Mon 16 Sep 2024'], ['2024-09-08T09:00:00', 'Sun 8 Sep 2024, 09:00']]);
+    expect(planned.querySelector('.tracking-journal__location')).toHaveTextContent(/^🇨🇳Shenzhen, China$/u);
+    // The scans keep their own list and day groups.
+    const history = screen.getByRole('list', { name: 'Tracking history' });
+    expect(within(history).getByText('Picked up')).toBeInTheDocument();
+    expect(within(history).queryByText(/Departed|Delivered/)).not.toBeInTheDocument();
+    expect(container.querySelectorAll('.tracking-journal__planned-mark')).toHaveLength(2);
+  });
+
   it('leads each place with its flag and closes it with the country’s name', () => {
     const { container } = render(<TrackingJournal events={[
       event('city', '2024-09-09T10:00:00', 'With courier', 'ZUERICH, CH'),

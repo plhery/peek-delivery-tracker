@@ -23,13 +23,20 @@ class BrandParityTests {
         val fallbackColor: String,
         val properties: List<String>,
         val derivation: List<Step>,
+        val toneExamples: List<List<String>>,
         val families: Map<String, String>,
         val palettes: Map<String, Map<String, String>>,
         val decals: Map<String, String>,
         val truck: Truck,
     ) {
         @Serializable
-        data class Step(val property: String, val base: String, val amount: Double)
+        data class Step(val property: String, val base: String, val amount: Double, val tone: Tone? = null)
+
+        @Serializable
+        data class Tone(val lightness: Double, val chroma: Double, val maxChroma: Double, val amber: Amber) {
+            @Serializable
+            data class Amber(val from: Double, val to: Double, val hue: Double, val slope: Double)
+        }
 
         @Serializable
         data class Truck(
@@ -129,11 +136,49 @@ class BrandParityTests {
             val colors = identity(id).colors
             assertEquals(brand.derivation.size, colors.size)
             for ((index, step) in brand.derivation.withIndex()) {
-                assertEquals("$id ${step.property}", CarrierVisualIdentity.mix(color, step.base, step.amount), colors[index])
+                val mixed = CarrierVisualIdentity.mix(color, step.base, step.amount)
+                val expected = step.tone?.let { CarrierVisualIdentity.tone(mixed, it.shared()) } ?: mixed
+                assertEquals("$id ${step.property}", expected, colors[index])
                 assertEquals(brand.properties[index], step.property)
             }
         }
     }
+
+    @Test
+    fun darkCardsSettleAtOneLightnessAsTheSharedExamplesDo() {
+        val brand = brand()
+        val step = brand.derivation.single { it.property == "surface-dark" }
+        assertNotNull("surface-dark has no tone", step.tone)
+        val tone = step.tone!!.shared()
+        // The app decodes the same tone the brand data declares.
+        assertEquals(tone, CarrierBrandAssets.shared.derivation.single { it.property == "surface-dark" }.tone)
+        assertFalse(brand.toneExamples.isEmpty())
+        for ((input, expected) in brand.toneExamples) {
+            assertEquals(input, expected, CarrierVisualIdentity.tone(input, tone))
+        }
+        // The other properties are mixed only.
+        assertTrue(brand.derivation.filter { it.property != "surface-dark" }.all { it.tone == null })
+    }
+
+    @Test
+    fun aDarkCardIsNeverBrighterThanItsMixSoItsWordsKeepTheirContrast() {
+        val brand = brand()
+        val index = brand.properties.indexOf("surface-dark")
+        val step = brand.derivation[index]
+        for ((id, definition) in catalog.definitions) {
+            val colors = identity(id.rawValue).colors
+            val declared = brand.palettes[id.rawValue]?.get("surface-dark")
+            val mixed = declared ?: CarrierVisualIdentity.mix(definition.color, step.base, step.amount)
+            val surface = CarrierVisualIdentity.luminance(colors[index])
+            assertTrue(id.rawValue, surface <= CarrierVisualIdentity.luminance(mixed))
+            assertTrue(id.rawValue, CarrierVisualIdentity.luminance(colors[brand.properties.indexOf("ink-dark")]) > surface)
+            assertTrue(id.rawValue, CarrierVisualIdentity.luminance(colors[brand.properties.indexOf("brand-dark")]) > surface)
+        }
+    }
+
+    private fun BrandDefinition.Tone.shared() = CarrierBrandAssets.Tone(
+        lightness, chroma, maxChroma, CarrierBrandAssets.Tone.Amber(amber.from, amber.to, amber.hue, amber.slope),
+    )
 
     @Test
     fun namedColorsMatchTheSharedBrand() {

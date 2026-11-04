@@ -263,7 +263,7 @@ data class DeliveredConfetti(val origin: Point, val pieces: List<Piece>, val gli
          */
         fun colors(ink: AdaptiveColor, surface: AdaptiveColor, brand: AdaptiveColor): List<AdaptiveColor> = listOf(
             ink, brand, Brand.accent, Brand.accent, ink.mix(surface, 0.45, GradientColorSpace.Device),
-            Brand.color(light = "#FFFFFF", dark = "#F5F6F2"), ink.mix(Brand.accent, 0.3, GradientColorSpace.Device),
+            Brand.color(light = "#FFFFFF", dark = "#FAF6EB"), ink.mix(Brand.accent, 0.3, GradientColorSpace.Device),
         )
     }
 }

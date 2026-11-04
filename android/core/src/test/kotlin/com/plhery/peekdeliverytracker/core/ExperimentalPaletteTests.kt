@@ -42,12 +42,12 @@ class ExperimentalPaletteTests {
     fun theSurfacesAreTheIPhonesInLightAndDark() {
         assertEquals(
             listOf(
-                "transit #DAEAFE #213A51",
-                "pickup #FFDDC7 #4C3123",
-                "delivered #DCF0D7 #243D2E",
-                "lilac #E9DEFF #382D4C",
-                "rose #FADDE7 #482C39",
-                "ochre #FFEBAB #443918",
+                "transit #DAEAFE #152636",
+                "pickup #FFDDC7 #341F14",
+                "delivered #DCF0D7 #142A1D",
+                "lilac #E9DEFF #272034",
+                "rose #FADDE7 #331D27",
+                "ochre #FFEBAB #2F220E",
             ),
             listOf(
                 "transit" to ExperimentalPalette.transitSurface,

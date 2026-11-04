@@ -173,15 +173,19 @@ object Brand {
     val accent = AdaptiveColor(RgbaColor.hex("#F3CF48"))
     val accentBright = accent
     val onAccent = AdaptiveColor(RgbaColor.hex("#20251E"))
-    val ink = color(light = "#20251E", dark = "#F5F6F2")
-    val inkSoft = color(light = "#657060", dark = "#AFB9A9")
-    val cream = color(light = "#F0F0E9", dark = "#292C28")
-    val paper = color(light = "#FFFFFF", dark = "#242824")
+    val ink = color(light = "#20251E", dark = "#FAF6EB")
+    val inkSoft = color(light = "#657060", dark = "#C2BAAA")
+    val cream = color(light = "#F0F0E9", dark = "#292620")
+    val paper = color(light = "#FFFFFF", dark = "#1F1C17")
+
+    /** The level above the paper: rows inside a sheet, menus, toasts (the web's `--raised`, the iPhone's `Brand.raised`). */
+    val raised = color(light = "#FFFFFF", dark = "#292620")
+
     val warning = color(light = "#963E19", dark = "#FFB184")
 
     /** The tray behind a swiped card. */
-    val warningSoft = color(light = "#FFDDC7", dark = "#4C3123")
-    val background = color(light = "#F4F5F1", dark = "#151915")
+    val warningSoft = color(light = "#FFDDC7", dark = "#341F14")
+    val background = color(light = "#F4F5F1", dark = "#13110E")
 
     /** A colour for each appearance; with increased contrast, a little further from the middle grey. */
     fun color(light: String, dark: String): AdaptiveColor {

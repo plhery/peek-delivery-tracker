@@ -20,12 +20,12 @@ object ExperimentalPalette {
     val rose = Brand.color(light = "#9A3D5C", dark = "#FFADC8")
     val ochre = Brand.color(light = "#745300", dark = "#FFD65F")
 
-    val transitSurface = Brand.color(light = "#DAEAFE", dark = "#213A51")
-    val pickupSurface = Brand.color(light = "#FFDDC7", dark = "#4C3123")
-    val deliveredSurface = Brand.color(light = "#DCF0D7", dark = "#243D2E")
-    val lilacSurface = Brand.color(light = "#E9DEFF", dark = "#382D4C")
-    val roseSurface = Brand.color(light = "#FADDE7", dark = "#482C39")
-    val ochreSurface = Brand.color(light = "#FFEBAB", dark = "#443918")
+    val transitSurface = Brand.color(light = "#DAEAFE", dark = "#152636")
+    val pickupSurface = Brand.color(light = "#FFDDC7", dark = "#341F14")
+    val deliveredSurface = Brand.color(light = "#DCF0D7", dark = "#142A1D")
+    val lilacSurface = Brand.color(light = "#E9DEFF", dark = "#272034")
+    val roseSurface = Brand.color(light = "#FADDE7", dark = "#331D27")
+    val ochreSurface = Brand.color(light = "#FFEBAB", dark = "#2F220E")
 
     fun surface(parcel: Parcel): AdaptiveColor = when (parcel.currentStage) {
         TrackingStage.Delivered -> deliveredSurface
@@ -64,8 +64,20 @@ data class CarrierBrandAssets(
     val decals: Map<String, String>,
     val truck: Truck,
 ) {
+    /** How one property is mixed out of the carrier's catalog colour, then settled by [tone] if it has one. */
     @Serializable
-    data class Step(val property: String, val base: String, val amount: Double)
+    data class Step(val property: String, val base: String, val amount: Double, val tone: Tone? = null)
+
+    /**
+     * Brings a mixed colour to one OKLCH lightness, its hue kept and its chroma scaled and capped; hues between
+     * `amber.from` and `amber.to` (the yellows, which turn khaki when dark) move towards `amber.hue`. A colour already
+     * darker than the result, by WCAG luminance, stays as it is, so text on it never loses contrast.
+     */
+    @Serializable
+    data class Tone(val lightness: Double, val chroma: Double, val maxChroma: Double, val amber: Amber) {
+        @Serializable
+        data class Amber(val from: Double, val to: Double, val hue: Double, val slope: Double)
+    }
 
     @Serializable
     data class DecalShape(
@@ -127,7 +139,7 @@ class CarrierVisualIdentity private constructor(
         family = assets.families[id] ?: id,
         name = mapOf("dhl" to "DHL", "gls" to "GLS", "ups" to "ups")[assets.families[id] ?: id] ?: carrier.displayName,
         fullName = carrier.displayName,
-        colors = assets.derivation.map { step -> assets.palettes[id]?.get(step.property) ?: mix(carrier.color, step.base, step.amount) },
+        colors = assets.derivation.map { step -> assets.palettes[id]?.get(step.property) ?: derived(carrier.color, step) },
         decal = assets.decals[id] ?: "default",
     )
 
@@ -205,6 +217,69 @@ class CarrierVisualIdentity private constructor(
                     .rounded().toInt()
             }
             return String.format(Locale.ROOT, "#%02x%02x%02x", channels[0], channels[1], channels[2])
+        }
+
+        /** A property the brand data does not declare: [mix], then the step's [tone] if it has one. */
+        fun derived(color: String, step: CarrierBrandAssets.Step): String {
+            val mixed = mix(color, step.base, step.amount)
+            return if (step.tone != null) tone(mixed, step.tone) else mixed
+        }
+
+        /** `color` at the tone's lightness, unless that would make it brighter (see [CarrierBrandAssets.Tone]). */
+        fun tone(color: String, tone: CarrierBrandAssets.Tone): String {
+            val (_, sourceChroma, sourceHue) = oklch(color)
+            val amber = tone.amber
+            val hue = if (sourceHue > amber.from && sourceHue < amber.to) amber.hue + (sourceHue - amber.from) * amber.slope else sourceHue
+            val toned = fromOklch(tone.lightness, Math.min(tone.maxChroma, sourceChroma * tone.chroma), hue)
+            return if (luminance(toned) > luminance(color)) color else toned
+        }
+
+        /** WCAG 2 relative luminance of a `#rrggbb` colour. */
+        fun luminance(hex: String): Double {
+            val (red, green, blue) = linearChannels(hex)
+            return 0.2126 * red + 0.7152 * green + 0.0722 * blue
+        }
+
+        /** A `#rrggbb` colour as OKLCH: lightness, chroma, hue in degrees. */
+        fun oklch(hex: String): Triple<Double, Double, Double> {
+            val (red, green, blue) = linearChannels(hex)
+            val l = Math.cbrt(0.4122214708 * red + 0.5363325363 * green + 0.0514459929 * blue)
+            val m = Math.cbrt(0.2119034982 * red + 0.6806995451 * green + 0.1073969566 * blue)
+            val s = Math.cbrt(0.0883024619 * red + 0.2817188376 * green + 0.6299787005 * blue)
+            val a = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s
+            val b = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s
+            return Triple(
+                0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s,
+                Math.hypot(a, b),
+                (Math.atan2(b, a) * 180 / Math.PI + 360) % 360,
+            )
+        }
+
+        /** An OKLCH colour as "#rrggbb", each channel clamped into sRGB. */
+        fun fromOklch(lightness: Double, chroma: Double, hue: Double): String {
+            val a = chroma * Math.cos(hue * Math.PI / 180)
+            val b = chroma * Math.sin(hue * Math.PI / 180)
+            val l = Math.pow(lightness + 0.3963377774 * a + 0.2158037573 * b, 3.0)
+            val m = Math.pow(lightness - 0.1055613458 * a - 0.0638541728 * b, 3.0)
+            val s = Math.pow(lightness - 0.0894841775 * a - 1.291485548 * b, 3.0)
+            val channels = listOf(
+                4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+                -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+                -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
+            ).map { channel -> Math.round(encoded(channel) * 255).toInt() }
+            return String.format(Locale.ROOT, "#%02x%02x%02x", channels[0], channels[1], channels[2])
+        }
+
+        /** The sRGB channels of a `#rrggbb` colour, from 0 to 1, made linear. */
+        private fun linearChannels(hex: String): List<Double> = listOf(1, 3, 5).map { offset ->
+            val channel = hex.substring(offset, offset + 2).toInt(16) / 255.0
+            if (channel <= 0.04045) channel / 12.92 else Math.pow((channel + 0.055) / 1.055, 2.4)
+        }
+
+        /** A linear channel gamma-encoded, clamped to 0…1 first. */
+        private fun encoded(channel: Double): Double {
+            val clamped = Math.min(1.0, Math.max(0.0, channel))
+            return if (clamped <= 0.0031308) 12.92 * clamped else 1.055 * Math.pow(clamped, 1 / 2.4) - 0.055
         }
 
         /** `UInt32(text.dropFirst(), radix: 16)`: what follows the first Character, as Swift reads an unsigned number. */

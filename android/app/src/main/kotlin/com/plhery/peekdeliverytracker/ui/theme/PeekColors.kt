@@ -107,6 +107,7 @@ class PeekColors(val dark: Boolean, val highContrast: Boolean = false) {
     val inkSoft = resolve(Brand.inkSoft)
     val cream = resolve(Brand.cream)
     val paper = resolve(Brand.paper)
+    val raised = resolve(Brand.raised)
     val warning = resolve(Brand.warning)
     val warningSoft = resolve(Brand.warningSoft)
     val background = resolve(Brand.background)

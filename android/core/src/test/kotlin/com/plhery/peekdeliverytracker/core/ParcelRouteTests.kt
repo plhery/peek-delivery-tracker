@@ -1117,13 +1117,13 @@ class ParcelRouteTests {
             Triple(light.shadow, false, listOf(0.102902, 0.11898, 0.096471, 0.14)),
             Triple(light.speedLines, false, listOf(0.12549, 0.145098, 0.117647, 0.32)),
             Triple(light.glint(3), false, listOf(0.247922, 0.264784, 0.241176, 1.0)),
-            Triple(dark.inside, true, listOf(0.115765, 0.128627, 0.115765, 1.0)),
-            Triple(dark.right, true, listOf(0.829647, 0.835451, 0.819765, 1.0)),
-            Triple(dark.eyeWhite, true, listOf(0.985098, 0.986588, 0.980627, 1.0)),
-            Triple(dark.blush, true, listOf(0.787718, 0.515733, 0.538871, 1.0)),
+            Triple(dark.inside, true, listOf(0.099686, 0.090039, 0.073961, 1.0)),
+            Triple(dark.right, true, listOf(0.84298, 0.827922, 0.788549, 1.0)),
+            Triple(dark.eyeWhite, true, listOf(0.992549, 0.986588, 0.970196, 1.0)),
+            Triple(dark.blush, true, listOf(0.788776, 0.506416, 0.521859, 1.0)),
             Triple(dark.shadow, true, listOf(0.0, 0.0, 0.0, 0.26)),
-            Triple(dark.speedLines, true, listOf(0.960784, 0.964706, 0.94902, 0.32)),
-            Triple(dark.glint(3), true, listOf(0.846039, 0.851608, 0.835922, 1.0)),
+            Triple(dark.speedLines, true, listOf(0.980392, 0.964706, 0.921569, 0.32)),
+            Triple(dark.glint(3), true, listOf(0.860157, 0.84502, 0.805176, 1.0)),
         )
         for ((index, case) in cases.withIndex()) {
             val (color, inDark, expected) = case

@@ -314,6 +314,20 @@ describe('one-off parcels and their links', () => {
     expect(request).toHaveBeenCalledTimes(2);
   });
 
+  it('queues again when the job in the way finishes before it is read', async () => {
+    const client = service();
+    // The previous scheduled run held the key at the insert and was done by the read.
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([]).mockResolvedValueOnce([])
+      .mockResolvedValueOnce([{ id: 'next-run' }]);
+    await expect(client.enqueueSyncJob({ scheduled: true })).resolves.toEqual({ row: { id: 'next-run' }, queued: true });
+    expect(request.mock.calls.map(([path, options]) => options?.method ?? String(path).split('?')[0]))
+      .toEqual(['POST', '/rest/v1/sync_jobs', 'POST']);
+    // A key that keeps changing hands is still an error after the second try.
+    request.mockReset().mockResolvedValue([]);
+    await expect(client.enqueueSyncJob({ scheduled: true })).rejects.toThrow('could not be queued');
+    expect(request).toHaveBeenCalledTimes(4);
+  });
+
   it('gives a queued check to the reader who asks for it, unless they only opened its link', async () => {
     const client = service();
     const release = { id: 'job', state: 'queued', priority: -30, reason: 'release' };

@@ -1839,26 +1839,29 @@ export class SupabaseServiceClient extends SupabaseClient {
       reason = options.background ? 'release' : options.reason ?? null;
     }
 
-    const created = rows(await this.request('/rest/v1/sync_jobs?on_conflict=dedupe_key', {
-      method: 'POST',
-      body: {
-        user_id: options.userId ?? null,
-        package_id: options.packageId ?? null,
-        kind,
-        dedupe_key: dedupeKey,
-        priority,
-        ...(kind === 'package' ? { reason } : {}),
-      },
-      prefer: 'resolution=ignore-duplicates,return=representation',
-    }));
-    if (created[0]) return { row: created[0], queued: true };
-
     const params = query({
       select: 'id,user_id,package_id,kind,state,priority,requested_at',
       dedupe_key: `eq.${dedupeKey}`,
       limit: '1',
     });
-    const existing = rows(await this.request(`/rest/v1/sync_jobs?${params}`));
+    let existing: JsonObject[] = [];
+    // The job in the way may finish between the two requests, which frees its key: queue again.
+    for (let attempt = 0; attempt < 2 && !existing[0]; attempt += 1) {
+      const created = rows(await this.request('/rest/v1/sync_jobs?on_conflict=dedupe_key', {
+        method: 'POST',
+        body: {
+          user_id: options.userId ?? null,
+          package_id: options.packageId ?? null,
+          kind,
+          dedupe_key: dedupeKey,
+          priority,
+          ...(kind === 'package' ? { reason } : {}),
+        },
+        prefer: 'resolution=ignore-duplicates,return=representation',
+      }));
+      if (created[0]) return { row: created[0], queued: true };
+      existing = rows(await this.request(`/rest/v1/sync_jobs?${params}`));
+    }
     if (!existing[0]) throw new SupabaseError('The durable sync job could not be queued');
     // Asking for a check already queued behind others, such as a release's re-check, moves it up.
     // A reader's check takes over one a link queued, which is dropped once the parcel is not due.

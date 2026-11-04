@@ -130,7 +130,7 @@ struct FriendsView: View {
                         FriendAvatarView(name: profile.nickname, tint: ExperimentalPalette.transit, surface: ExperimentalPalette.transitSurface).frame(width: 31, height: 38)
                         VStack(alignment: .leading, spacing: 3) {
                             Text(text("friends.yourSharing")).font(.subheadline.weight(.medium)).foregroundStyle(Brand.ink)
-                            Text(text(profile.shareStats ? "friends.shareStats" : "friends.privateStats") + (profile.shareArrival ? " · " + text("friends.shareArrival") : "")).font(.caption2).foregroundStyle(.secondary)
+                            DottedLine(parts: [text(profile.shareStats ? "friends.shareStats" : "friends.privateStats")] + (profile.shareArrival ? [text("friends.shareArrival")] : [])).font(.caption2).foregroundStyle(.secondary)
                         }
                         Spacer(minLength: 6)
                         Image(systemName: "slider.horizontal.3").font(.footnote).foregroundStyle(.secondary)
@@ -247,6 +247,7 @@ private extension FriendCard {
 
 private struct FriendCardView: View {
     @EnvironmentObject private var localizer: Localizer
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let friend: FriendCard
     private var tint: Color { friend.tone.tint }
     private var surface: Color { friend.tone.surface }
@@ -256,7 +257,8 @@ private struct FriendCardView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(friend.nickname).font(.system(.title3, weight: .semibold)).foregroundStyle(Brand.ink)
                 Text(friend.stats.map { localizer.text("friends.stampCount", ["count": $0.stamps.count]) } ?? localizer.text("friends.privateStats")).font(.caption2).foregroundStyle(tint)
-                if friend.arrivedThisWeek == true { HStack(spacing: 5) { Circle().fill(tint).frame(width: 4, height: 4); Text(localizer.text("friends.arrived")).font(.caption2).foregroundStyle(tint) }.padding(.top, 1) }
+                // At the largest text sizes the words take the line alone: the small dot would read as a stray "·".
+                if friend.arrivedThisWeek == true { HStack(spacing: 5) { if !dynamicTypeSize.isAccessibilitySize { Circle().fill(tint).frame(width: 4, height: 4) }; Text(localizer.text("friends.arrived")).font(.caption2).foregroundStyle(tint) }.padding(.top, 1) }
             }
             Spacer(minLength: 0)
         }.padding(.horizontal, 16).padding(.vertical, 14).frame(maxWidth: .infinity, minHeight: 80, alignment: .leading)
@@ -266,6 +268,7 @@ private struct FriendCardView: View {
 
 struct FriendPostcardView: View {
     @EnvironmentObject private var localizer: Localizer
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let nickname: String
     var arrivedThisWeek: Bool? = nil
     var tint: Color = ExperimentalPalette.lilac
@@ -274,7 +277,7 @@ struct FriendPostcardView: View {
         HStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 12) {
                 Text(nickname).font(.system(size: 28, weight: .semibold)).tracking(-1)
-                if arrivedThisWeek == true { HStack(spacing: 5) { Circle().fill(tint).frame(width: 4, height: 4); Text(localizer.text("friends.arrived")).font(.caption).foregroundStyle(tint) } }
+                if arrivedThisWeek == true { HStack(spacing: 5) { if !dynamicTypeSize.isAccessibilitySize { Circle().fill(tint).frame(width: 4, height: 4) }; Text(localizer.text("friends.arrived")).font(.caption).foregroundStyle(tint) } }
             }
             Spacer(minLength: 0)
             FriendAvatarView(name: nickname, tint: tint, surface: surface).frame(width: 61, height: 74)
@@ -288,14 +291,33 @@ struct FriendSharingPreviewView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack { Text(friend.nickname).font(.headline).foregroundStyle(Brand.ink); Spacer(minLength: 8); FriendAvatarView(name: friend.nickname, tint: ExperimentalPalette.transit, surface: ExperimentalPalette.transitSurface).frame(width: 33, height: 41) }
-            Text(summary).font(.caption2).frame(minHeight: 36, alignment: .topLeading).fixedSize(horizontal: false, vertical: true)
+            DottedLine(parts: summary).font(.caption2).frame(minHeight: 36, alignment: .topLeading).fixedSize(horizontal: false, vertical: true)
             Text(localizer.text(friend.arrivedThisWeek == true ? "friends.arrived" : "friends.noArrival")).font(.caption2).frame(minHeight: 18).opacity(friend.arrivedThisWeek == nil ? 0 : 1).accessibilityHidden(friend.arrivedThisWeek == nil)
         }.foregroundStyle(ExperimentalPalette.transit).padding(16).frame(maxWidth: .infinity, alignment: .leading).background(ExperimentalPalette.transitSurface, in: RoundedRectangle(cornerRadius: 17))
     }
-    private var summary: String {
-        guard let stats = friend.stats else { return localizer.text("friends.privateStats") }
+    private var summary: [String] {
+        guard let stats = friend.stats else { return [localizer.text("friends.privateStats")] }
         let days = stats.averageDays.map { localizer.text($0 == 1 ? "friends.day" : "friends.days", ["count": $0]) } ?? "—"
-        return "\(stats.deliveredCount) \(localizer.text("passport.delivered", ["count": stats.deliveredCount])) · \(days) · \(localizer.text("friends.stampCount", ["count": stats.stamps.count]))"
+        return ["\(stats.deliveredCount) \(localizer.text("passport.delivered", ["count": stats.deliveredCount]))", days,
+                localizer.text("friends.stampCount", ["count": stats.stamps.count])]
+    }
+}
+
+/// Words parted by "·" on one line. The dot keeps to the word before it, so a line never starts with it; at the
+/// largest text sizes, where the line would break, each part takes a line of its own and the dot goes.
+private struct DottedLine: View {
+    let parts: [String]
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    var body: some View {
+        if dynamicTypeSize.isAccessibilitySize, parts.count > 1 {
+            VStack(alignment: .leading, spacing: 2) {
+                ForEach(Array(parts.enumerated()), id: \.offset) { Text($0.element).fixedSize(horizontal: false, vertical: true) }
+            }
+            .accessibilityElement(children: .combine)
+        } else {
+            Text(parts.joined(separator: "\u{00A0}· "))
+        }
     }
 }
 
@@ -419,7 +441,7 @@ private struct FriendsInvitationView: View {
     @State private var previousInvitationsCancelled = false
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(localizer.text("friends.inviteExpiry")).font(.caption2).foregroundStyle(.secondary)
+            DottedLine(parts: localizer.text("friends.inviteExpiry").components(separatedBy: " · ")).font(.caption2).foregroundStyle(.secondary)
             FriendsInvitationParcel(nickname: nickname)
             if code.isEmpty {
                 if !requestedInvitation || busy { ProgressView().frame(maxWidth: .infinity, minHeight: 44).accessibilityLabel(localizer.text("friends.link")) }

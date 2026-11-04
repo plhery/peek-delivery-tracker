@@ -831,9 +831,7 @@ private struct DeliveryListView: View {
                 }
                 .background { DeliveryScrollProbe(places: places) }
                 #if os(iOS)
-                .background(alignment: .top) {
-                    PullToRefreshIndicator(model: pull, pullLabel: localizer.text("app.pullToRefresh"))
-                }
+                .modifier(PullToRefreshSpace(model: pull, pullLabel: localizer.text("app.pullToRefresh")))
                 #endif
             }
             .scrollIndicators(.hidden)
@@ -1117,7 +1115,8 @@ private struct DeliveryListView: View {
         case nil:
             break
         }
-        pull.settle()
+        // The list goes back up with the gap as the seal fades.
+        withAnimation(reduceMotion ? nil : .easeOut(duration: 0.3)) { pull.settle() }
     }
 
     /// The button turns while the parcels are checked, then says how it went.

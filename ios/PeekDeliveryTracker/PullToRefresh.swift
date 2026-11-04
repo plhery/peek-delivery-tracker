@@ -48,11 +48,35 @@ final class PullToRefreshModel {
     /// before it can refresh again, so the seal stays hidden until then.
     private(set) var awaitingRest = false
 
+    /// How tall the seal and its words stand once the text is too large for one line of them, and they take the
+    /// lines they need; zero at the default sizes, where they keep to the indicator's height.
+    private(set) var grownHeight: CGFloat = 0
+
     @ObservationIgnored private var restingInset: CGFloat?
     /// The wait after a refresh before the seal returns to rest; tests await it.
     @ObservationIgnored private(set) var settleTask: Task<Void, Never>?
 
     var progress: CGFloat { phase == .idle ? min(1, distance / threshold) : 1 }
+
+    /// While refreshing, how much further the list moves down than the gap the system holds open, so that grown
+    /// words keep clear of the cards and of the bar above them.
+    var room: CGFloat {
+        guard phase == .refreshing, grownHeight > PullToRefreshModel.height else { return 0 }
+        return max(0, (Self.gap(for: grownHeight) - max(holdDistance, distance)).rounded(.up))
+    }
+
+    /// The indicator's height at the default text sizes.
+    nonisolated static let height: CGFloat = 48
+
+    /// The gap the indicator needs, kept a little under halfway down it, to stand clear of the top.
+    nonisolated static func gap(for height: CGFloat) -> CGFloat { (height / 2 + 3) / 0.45 }
+
+    /// How far above the top of the list the indicator stands, a little under halfway down the gap.
+    nonisolated static func offset(gap: CGFloat, height: CGFloat) -> CGFloat { -0.55 * gap - (height / 2 - 3) }
+
+    func grow(to height: CGFloat) {
+        if height != grownHeight { grownHeight = height }
+    }
 
     func track(_ geometry: PullGeometry) {
         // While refreshing, the system adds its gap to the top inset, so the pull
@@ -107,38 +131,61 @@ enum PullToRefreshPalette {
 
 // The Mac has no pull-to-refresh: it refreshes from the menu and ⌘R.
 #if os(iOS)
+/// The seal over the top of the list. While refreshing at the largest text sizes, the list moves down to make room for
+/// its words; only this reads the pull, so the list itself isn't redrawn as it moves.
+struct PullToRefreshSpace: ViewModifier {
+    let model: PullToRefreshModel
+    let pullLabel: String
+
+    func body(content: Content) -> some View {
+        content
+            .padding(.top, model.room)
+            .background(alignment: .top) { PullToRefreshIndicator(model: model, pullLabel: pullLabel) }
+    }
+}
+
 /// Stands in for the system spinner, like the web app's seal: neutral ink while
 /// pulling and refreshing, green only once every parcel has been checked.
 struct PullToRefreshIndicator: View {
     let model: PullToRefreshModel
     let pullLabel: String
 
-    static let height: CGFloat = 48
-
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         let pulling = model.phase == .idle
         let progress = model.progress
+        // Past the sizes where they fit on one line, the words take the lines they need, and the list makes room for them.
+        let grows = dynamicTypeSize > .xxLarge
+        let height = grows ? max(PullToRefreshModel.height, model.grownHeight) : PullToRefreshModel.height
         // Kept a little under halfway down the gap, so it stays centred as it grows.
-        let gap = pulling ? model.distance : max(model.holdDistance, model.distance)
+        let gap = (pulling ? model.distance : max(model.holdDistance, model.distance)) + model.room
+        // While pulling, grown words rise from where the indicator's foot stands at the default sizes, so they come
+        // into view with the pull as it always has, and never reach further down over the list.
+        let offset = pulling
+            ? PullToRefreshModel.offset(gap: gap, height: PullToRefreshModel.height) + PullToRefreshModel.height - height
+            : PullToRefreshModel.offset(gap: gap, height: height) + model.room
         VStack(spacing: 4) {
             PullToRefreshSeal(model: model, progress: progress)
                 .scaleEffect(reduceMotion ? 1 : 0.82 + 0.18 * progress)
             Text(model.label ?? pullLabel)
                 .font(.caption2.weight(.medium))
                 .foregroundStyle(PullToRefreshPalette.inkSoft)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
-                .dynamicTypeSize(...DynamicTypeSize.xxLarge)
+                .multilineTextAlignment(.center)
+                .lineLimit(grows ? nil : 1)
+                .minimumScaleFactor(grows ? 1 : 0.8)
+                .fixedSize(horizontal: false, vertical: grows)
                 .padding(.horizontal, 12)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: Self.height)
+        .frame(height: grows ? nil : PullToRefreshModel.height)
+        .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { model.grow(to: grows ? $0 : 0) }
+        .onChange(of: grows) { _, grows in if !grows { model.grow(to: 0) } }
         .opacity(model.phase == .settling || (pulling && model.awaitingRest) ? 0
             : pulling ? min(1, max(0, progress * 2 - 0.15)) : 1)
         .animation(.easeOut(duration: 0.22), value: model.phase)
-        .offset(y: -0.55 * gap - 21)
+        .offset(y: offset)
         .background { NativeRefreshSpinnerHider(pulling: model.distance > 0) }
         .sensoryFeedback(.impact(weight: .light), trigger: model.starts)
         .allowsHitTesting(false)

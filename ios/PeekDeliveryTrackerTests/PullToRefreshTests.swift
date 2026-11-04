@@ -25,6 +25,37 @@ final class PullToRefreshTests: XCTestCase {
         XCTAssertEqual(model.distance, 60)
     }
 
+    func testGrownWordsGetRoomOnlyWhileRefreshing() async {
+        let model = PullToRefreshModel()
+        model.track(PullGeometry(overscroll: 0, inset: 164, height: 874))
+        // At the default sizes the seal and its words keep to the gap the system holds, where they always stood.
+        XCTAssertEqual(PullToRefreshModel.offset(gap: 60, height: PullToRefreshModel.height), -0.55 * 60 - 21, accuracy: 0.001)
+        model.begin(label: "Checking for updates…")
+        model.track(PullGeometry(overscroll: 0, inset: 224, height: 874))
+        XCTAssertEqual(model.room, 0)
+
+        // Two lines of the largest text: the list moves down by what the 60-point gap lacks.
+        model.grow(to: 132)
+        XCTAssertEqual(model.room, 94)
+        let gap = model.holdDistance + model.room
+        let top = PullToRefreshModel.offset(gap: gap, height: 132)
+        XCTAssertGreaterThanOrEqual(top, -gap, "clear of the bar")
+        XCTAssertLessThanOrEqual(top + 132, 0, "clear of the cards")
+
+        // A finger holding the list further down leaves less to make up.
+        model.track(PullGeometry(overscroll: 50, inset: 224, height: 874))
+        XCTAssertEqual(model.room, 44)
+        model.track(PullGeometry(overscroll: 0, inset: 224, height: 874))
+        model.finish(succeeded: true, label: "Tracking updated")
+        XCTAssertEqual(model.room, 94)
+
+        // The list goes back up as the system closes its gap.
+        model.settle()
+        XCTAssertEqual(model.room, 0)
+        await model.settleTask?.value
+        XCTAssertEqual(model.room, 0)
+    }
+
     func testResultAppearsOnlyAtTheEndAndClearsOnceSettled() async {
         let model = PullToRefreshModel()
         model.begin(label: "Checking for updates…")

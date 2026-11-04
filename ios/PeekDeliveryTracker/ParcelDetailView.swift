@@ -28,6 +28,9 @@ struct ParcelDetailView: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     @Environment(\.keyboardInFront) private var keyboardInFront
     @Environment(\.scenePhase) private var scenePhase
+    /// The card's globe, share and bell grow with the text, and their buttons with them, keeping the room around each.
+    @ScaledMetric(relativeTo: .body) private var cardSymbol: CGFloat = 17
+    private var cardButton: CGFloat { cardSymbol + 27 }
 
     @State private var showingTitleEditor = false
     @State private var editedTitle = ""
@@ -307,8 +310,8 @@ struct ParcelDetailView: View {
                         if placed {
                             Button(action: openMap) {
                                 Image(systemName: "globe")
-                                    .font(.system(size: 17))
-                                    .frame(width: 44, height: 44)
+                                    .font(.system(size: cardSymbol))
+                                    .frame(width: cardButton, height: cardButton)
                                     .contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
@@ -319,8 +322,8 @@ struct ParcelDetailView: View {
                         if let readerLink {
                             ShareLink(item: ParcelLinkRoute.address(id: readerLink)) {
                                 Image(systemName: "square.and.arrow.up")
-                                    .font(.system(size: 16))
-                                    .frame(width: 44, height: 44)
+                                    .font(.system(size: cardSymbol * 16 / 17))
+                                    .frame(width: cardButton, height: cardButton)
                                     .contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
@@ -329,8 +332,8 @@ struct ParcelDetailView: View {
                         } else if sample == nil {
                             Button { showingShare = true } label: {
                                 Image(systemName: "square.and.arrow.up")
-                                    .font(.system(size: 16))
-                                    .frame(width: 44, height: 44)
+                                    .font(.system(size: cardSymbol * 16 / 17))
+                                    .frame(width: cardButton, height: cardButton)
                                     .contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
@@ -354,8 +357,8 @@ struct ParcelDetailView: View {
                                 }
                             } label: {
                                 ParcelNotificationBell(muted: opensAlerts ? parcel.allAlertsMuted : parcel.notificationsMuted,
-                                                       trigger: notificationAnimation)
-                                    .frame(width: 44, height: 44)
+                                                       trigger: notificationAnimation, size: cardSymbol * 18 / 17)
+                                    .frame(width: cardButton, height: cardButton)
                                     .contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
@@ -1028,6 +1031,8 @@ struct ParcelDetailView: View {
 private struct ParcelNotificationBell: View {
     let muted: Bool
     let trigger: Int
+    /// The drawing's side: 18 points at the default text size, growing with the text.
+    var size: CGFloat = 18
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private struct Pose {
@@ -1038,21 +1043,26 @@ private struct ParcelNotificationBell: View {
 
     var body: some View {
         let reduceMotion = self.reduceMotion
+        let size = self.size
+        // The slash and the waves are drawn on an 18-point grid, scaled to the drawing.
+        let unit = size / 18
+        let grid = CGAffineTransform(scaleX: unit, y: unit)
         return Color.clear
-            .frame(width: 18, height: 18)
+            .frame(width: size, height: size)
             .keyframeAnimator(initialValue: Pose(), trigger: trigger) { _, pose in
                 ZStack {
                     Image(systemName: "bell")
-                        .font(.system(size: 16, weight: .light))
-                        .frame(width: 18, height: 18)
+                        .font(.system(size: 16 * unit, weight: .light))
+                        .frame(width: size, height: size)
                         .rotationEffect(.degrees(reduceMotion ? 0 : pose.angle), anchor: UnitPoint(x: 0.5, y: 0.16))
                         .scaleEffect(reduceMotion ? 1 : pose.scale)
                     Path { path in
                         path.move(to: CGPoint(x: 2, y: 2))
                         path.addLine(to: CGPoint(x: 16, y: 16))
                     }
+                    .applying(grid)
                     .trim(from: 0, to: muted ? 1 : 0)
-                    .stroke(style: StrokeStyle(lineWidth: 1, lineCap: .round))
+                    .stroke(style: StrokeStyle(lineWidth: unit, lineCap: .round))
                     .opacity(muted ? 1 : 0)
                     .animation(reduceMotion ? nil : .easeOut(duration: 0.22), value: muted)
                     Path { path in
@@ -1061,10 +1071,11 @@ private struct ParcelNotificationBell: View {
                         path.move(to: CGPoint(x: 18, y: 4))
                         path.addQuadCurve(to: CGPoint(x: 18, y: 11), control: CGPoint(x: 20, y: 7.5))
                     }
-                    .stroke(style: StrokeStyle(lineWidth: 0.9, lineCap: .round))
+                    .applying(grid)
+                    .stroke(style: StrokeStyle(lineWidth: 0.9 * unit, lineCap: .round))
                     .opacity(reduceMotion || muted ? 0 : pose.waves)
                 }
-                .frame(width: 18, height: 18)
+                .frame(width: size, height: size)
             } keyframes: { _ in
                 KeyframeTrack(\.angle) {
                     if muted {

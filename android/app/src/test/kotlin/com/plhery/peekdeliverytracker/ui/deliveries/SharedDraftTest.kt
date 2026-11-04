@@ -103,7 +103,7 @@ class SharedDraftTest {
         assertTrue(exists(ADD_PARCEL))
         assertEquals("Your parcel 1Z999AA10123456784 is on its way", fieldText(ADD_TRACKING))
         assertEquals("Desk lamp", fieldText(ADD_NAME))
-        assertEquals("UPS, ${localizer.text("add.detectedCarrier")}", carrier())
+        assertEquals("UPS, ${localizer.text("add.detectedCarrier")}, ${localizer.text("add.line.change")}", carrier())
         assertEquals(1, received())
         assertEquals("add-parcel", source.views.last())
         assertFalse("Taken away", defaults.hasObject(forKey = ShareInbox.key))
@@ -117,7 +117,7 @@ class SharedDraftTest {
         share(text, label = "Desk lamp")
         show()
         assertEquals(text, fieldText(ADD_TRACKING))
-        assertEquals("UPS, ${localizer.text("add.detectedCarrier")}", carrier())
+        assertEquals("UPS, ${localizer.text("add.detectedCarrier")}, ${localizer.text("add.line.change")}", carrier())
         assertNull("The window keeps the text in Add's form alone", deliveries.addition?.draft)
 
         // Typed on, the field keeps it all.
@@ -170,7 +170,7 @@ class SharedDraftTest {
         assertEquals("The same Add", opening, deliveries.addition?.id)
         assertEquals("UPS 1Z999AA10123456784", fieldText(ADD_TRACKING))
         assertEquals("Running shoes", fieldText(ADD_NAME))
-        assertEquals("UPS, ${localizer.text("add.detectedCarrier")}", carrier())
+        assertEquals("UPS, ${localizer.text("add.detectedCarrier")}, ${localizer.text("add.line.change")}", carrier())
 
         share("1Z999AA10123456793")
         comeBack()

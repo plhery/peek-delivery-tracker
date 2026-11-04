@@ -95,9 +95,10 @@ import kotlin.math.max
  * summary, the close button and the system's bars ([MapCoverLayout]). Over it, on glass: the summary at the foot, no
  * wider than 420, with the ends of the journey, how far it came, has to go and through how many countries, and the
  * switch between the journey and close by where both differ; and the close button at the top trailing corner. At the
- * accessibility sizes the ends stand one under the other, names wrap, and the summary scrolls past half the window's
- * height. Beside an upright hinge the summary keeps to the second part of the window and the route to the first; with
- * a level hinge (`levelHinge`), the route keeps above it and the summary under it.
+ * accessibility sizes the ends stand one under the other, names wrap, the views stand one under the other where they
+ * don't fit side by side, and the summary scrolls past half the window's height. Beside an upright hinge the summary
+ * keeps to the second part of the window and the route to the first; with a level hinge (`levelHinge`), the route
+ * keeps above it and the summary under it.
  *
  * The map turns under a finger and zooms under two (A-G12), and flies between the views (A-AN46). Once moved, neither
  * view is selected, and either brings it back; the view shown brings it back too (A-G14). TalkBack hears the map as
@@ -215,26 +216,39 @@ internal fun ParcelMapScreen(
                         MapSummary(route, stage, large)
                         // With every place close by there is only one view: no buttons.
                         if (route.hasNearView) {
-                            Row(
-                                Modifier
-                                    .background(colors.label.copy(alpha = colors.label.alpha * 0.06f), CapsuleShape)
-                                    .padding(3.dp)
-                                    .testTag(MAP_VIEWS)
-                                    .selectableGroup()
-                                    .semantics { isTraversalGroup = true },
-                                horizontalArrangement = Arrangement.spacedBy(2.dp),
-                            ) {
-                                // A view is selected while the map shows it as it framed it; the one shown recentres it.
-                                // TalkBack reads no group's name of its own: the first view says it, as VoiceOver says
-                                // the group's as it comes to its views.
+                            val fill = colors.label.copy(alpha = colors.label.alpha * 0.06f)
+                            // A view is selected while the map shows it as it framed it; the one shown recentres it.
+                            // TalkBack reads no group's name of its own: the first view says it, as VoiceOver says the
+                            // group's as it comes to its views.
+                            val views: @Composable (Boolean) -> Unit = { wide ->
                                 VIEWS.forEachIndexed { index, (target, key, symbol) ->
-                                    val group = localizer.text("map.view").takeIf { index == 0 }
-                                    ViewButton(localizer.text(key), symbol, selected = mode == target && !free, group = group) {
+                                    val name = localizer.text("map.view").takeIf { index == 0 }
+                                    ViewButton(localizer.text(key), symbol, selected = mode == target && !free, group = name, wide = wide) {
                                         if (target == mode) recenter++
                                         chosen = target
                                     }
                                 }
                             }
+                            val group = Modifier.testTag(MAP_VIEWS).selectableGroup().semantics { isTraversalGroup = true }
+                            val side: @Composable (Modifier) -> Unit = { modifier ->
+                                Row(
+                                    Modifier.background(fill, CapsuleShape).padding(3.dp).then(modifier),
+                                    horizontalArrangement = Arrangement.spacedBy(2.dp),
+                                ) { views(false) }
+                            }
+                            // Side by side where they fit; at the largest text sizes one under the other, so no word
+                            // breaks in two. Measured side by side without the group, which is the switch shown.
+                            FirstThatFits(
+                                Modifier,
+                                wide = { side(group) },
+                                narrow = {
+                                    Column(
+                                        Modifier.fillMaxWidth().background(fill, ContinuousRoundedShape(VIEWS_RADIUS)).padding(3.dp).then(group),
+                                        verticalArrangement = Arrangement.spacedBy(2.dp),
+                                    ) { views(true) }
+                                },
+                                measured = { side(Modifier) },
+                            )
                         }
                     }
                 }
@@ -393,11 +407,12 @@ private fun MapEndpoint(title: String, place: RoutePlace, trailing: Boolean, lar
 
 /**
  * A button of the switch between the journey and close by: its symbol and words in medium caption, in the paper on
- * the ink while it is the view shown, secondary otherwise, 36 tall and 12 in from its sides. The space between the
- * symbol and the words is `Label`'s, estimated. TalkBack hears `group`, the switch's name, before its words.
+ * the ink while it is the view shown, secondary otherwise, 36 tall and 12 in from its sides, as wide as the switch
+ * where the buttons stand one under the other (`wide`). The space between the symbol and the words is `Label`'s,
+ * estimated. TalkBack hears `group`, the switch's name, before its words.
  */
 @Composable
-private fun ViewButton(title: String, symbol: String, selected: Boolean, group: String?, action: () -> Unit) {
+private fun ViewButton(title: String, symbol: String, selected: Boolean, group: String?, wide: Boolean, action: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val tint = if (selected) colors.paper else colors.secondaryLabel
@@ -410,6 +425,7 @@ private fun ViewButton(title: String, symbol: String, selected: Boolean, group: 
                 // Compose gives TalkBack a description of a node with words of its own as a child before them.
                 if (group != null) contentDescription = group
             }
+            .then(if (wide) Modifier.fillMaxWidth() else Modifier)
             .background(if (selected) colors.ink else Color.Transparent, CapsuleShape)
             .heightIn(min = 36.dp)
             .padding(horizontal = 12.dp),
@@ -489,6 +505,7 @@ private const val BAR_HEIGHT_GUESS = 220f
 private val BAR_WIDTH = 420.dp
 private val BAR_SIDE = 12.dp
 private val BAR_RADIUS = 24.dp
+private val VIEWS_RADIUS = 21.dp
 private val CLOSE_BUTTON = 44.dp
 private val CLOSE_SIDE = 14.dp
 private val LABEL_SPACING = 6.dp

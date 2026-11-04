@@ -1233,12 +1233,18 @@ internal fun AllArrived(state: DeliveriesState) {
 /**
  * `ViewThatFits(in: .horizontal)` of two: [wide] when it fits the width as it would lay itself out, [narrow]
  * otherwise. The width is taken on a copy of [wide] that TalkBack doesn't read, which stays composed and unplaced
- * beside the narrow one, so only the one drawn is in the tree.
+ * beside the narrow one, so only the one drawn is in the tree; or on [measured], as wide as [wide] without what it says
+ * of itself (its tag, the group it makes), where a copy of that would be a second of it to the tree.
  */
 @Composable
-internal fun FirstThatFits(modifier: Modifier, wide: @Composable () -> Unit, narrow: @Composable () -> Unit) {
+internal fun FirstThatFits(
+    modifier: Modifier,
+    wide: @Composable () -> Unit,
+    narrow: @Composable () -> Unit,
+    measured: @Composable () -> Unit = wide,
+) {
     // The same content from one pass to the next, or each would compose the copy again and ask for another frame.
-    val probe: @Composable () -> Unit = remember(wide) { { Box(Modifier.clearAndSetSemantics {}) { wide() } } }
+    val probe: @Composable () -> Unit = remember(measured) { { Box(Modifier.clearAndSetSemantics {}) { measured() } } }
     SubcomposeLayout(modifier) { constraints ->
         val fits = subcompose(PROBE, probe).all { it.maxIntrinsicWidth(Constraints.Infinity) <= constraints.maxWidth }
         val chosen = if (fits) subcompose(WIDE, wide) else subcompose(NARROW, narrow)

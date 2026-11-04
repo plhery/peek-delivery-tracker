@@ -3,9 +3,14 @@ package com.plhery.peekdeliverytracker.ui
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.unit.width
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.ParcelWalk.Companion.LONG_MILLIS
@@ -28,7 +33,8 @@ import org.junit.runner.RunWith
 /**
  * The opened map's summary in each state of the journey (A-ST30) on this device's own window: delivered where it is
  * known, with the journey's length and no view switch; through several countries; scanned where it is now; one place
- * and nowhere to go; headed for a country, with how far it has to go; its newest scan nowhere said; and sent back. Each
+ * and nowhere to go; headed for a country, with how far it has to go; its newest scan nowhere said; sent back; and the
+ * views at the largest text (A-S84), side by side where they fit, else one under the other. Each
  * saved as stateswalk/<row>-<moment>.png in the test package's external files, which adb pulls, the first with -dark.
  * Signed in on fake deliveries ([ParcelWalk]): nothing goes to the network. In Zurich's time at the captures' moment,
  * under Reduce Motion, as the other device tests are.
@@ -140,6 +146,22 @@ class ParcelMapStatesDeviceShots {
         assertEquals(listOf("From, Berlin, Germany", "Now, Berlin, Germany"), ends())
         assertFigures(KILOMETRES)
         walk.shot("A-ST30-returned", alsoDark = false)
+    }
+
+    /** At the largest text the views stand side by side where they fit, else one under the other, each as wide. */
+    @Test
+    fun theViewsAtTheLargestText() {
+        walk.fontScale = 2f
+        val parcels = demo()
+        walk.show(parcels)
+        openMap(parcels.named("Moon lamp"))
+        // Where the summary scrolls at this size, scrolled to its foot, the views.
+        compose.onNode(hasText("Nearby") and hasClickAction()).performScrollTo()
+        walk.settle()
+        val journey = compose.onNode(hasText("Journey") and hasClickAction()).getBoundsInRoot()
+        val nearby = compose.onNode(hasText("Nearby") and hasClickAction()).getBoundsInRoot()
+        assertTrue("$journey, $nearby", journey.top == nearby.top || nearby.top >= journey.bottom && journey.width == nearby.width)
+        walk.shot("A-S84-views", alsoDark = false)
     }
 
     private companion object {

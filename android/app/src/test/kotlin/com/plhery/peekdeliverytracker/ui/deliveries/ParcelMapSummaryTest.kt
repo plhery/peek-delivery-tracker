@@ -6,14 +6,19 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.DpRect
+import androidx.compose.ui.unit.width
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -33,8 +38,9 @@ import org.robolectric.annotation.GraphicsMode
  * "Delivered" once delivered where it is known, "To" where the parcel is headed, "Now" where it was last scanned, "Last
  * seen" where its newest scan has no place; one place and nowhere to go, only that end and no figures; a journey over
  * (delivered or returned), its length rather than how far "so far", and nothing "to go"; the views only where the
- * journey has a close-up of its own. The parcel's place pulsing until the journey is over is seen on a phone: a test's
- * composition cancels animations that never end.
+ * journey has a close-up of its own, side by side where they fit and one under the other where they don't. The
+ * parcel's place pulsing until the journey is over is seen on a phone: a test's composition cancels animations that
+ * never end.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -146,6 +152,31 @@ class ParcelMapSummaryTest {
         val figures = figures()
         assertEquals(1, figures.size)
         assertTrue(figures.toString(), Regex("\\d+ km").matches(figures.single()))
+    }
+
+    private fun view(name: String): DpRect = compose.onNode(hasText(name) and hasClickAction()).getBoundsInRoot()
+
+    @Test
+    fun theViewsStandSideBySideWhereTheyFit() {
+        openMap("Moon lamp")
+        val journey = view("Journey")
+        val nearby = view("Nearby")
+        assertEquals(journey.top, nearby.top)
+        assertTrue(nearby.left > journey.right)
+    }
+
+    /** As ParcelMapView's since its largest text on an iPad broke "Journey" in two: each as wide as the switch. */
+    @Test
+    @Config(qualifiers = "w320dp-h700dp-xhdpi")
+    fun atTheLargestTextOnANarrowPhoneTheViewsStandOneUnderTheOther() {
+        openMap("Moon lamp", fontScale = 2f)
+        val journey = view("Journey")
+        val nearby = view("Nearby")
+        assertTrue("$journey over $nearby", nearby.top >= journey.bottom)
+        assertEquals(journey.left, nearby.left)
+        assertEquals(journey.width, nearby.width)
+        val switch = compose.onNodeWithTag(MAP_VIEWS).getBoundsInRoot()
+        assertEquals(switch.width, journey.width)
     }
 
     private companion object {

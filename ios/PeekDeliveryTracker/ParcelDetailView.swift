@@ -446,7 +446,7 @@ struct ParcelDetailView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(localizer.parcelStatus(parcel))
                         .font(.subheadline)
-                    if let date = localizer.parcelCompletionDate(parcel) ?? localizer.parcelDeliveryEstimate(parcel) {
+                    if let date = localizer.parcelCompletionDate(parcel) ?? localizer.parcelDeliveryWindow(parcel) {
                         Text(date).font(.caption)
                     }
                 }

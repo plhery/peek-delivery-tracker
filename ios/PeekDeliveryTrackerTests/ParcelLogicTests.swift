@@ -1400,6 +1400,24 @@ final class ParcelLogicTests: XCTestCase {
     }
 
     @MainActor
+    func testCardsGiveAWindowOfDaysThatHasBegunByItsLastDayAndThePageWhole() {
+        let id = UUID()
+        let now = DateParser.date("2026-09-07T12:00:00Z")!
+        let localizer = Localizer()
+        localizer.language = .en
+        var parcel = makeParcel(id: id, events: [event(id, .inTransit, "2026-09-07T10:00:00Z")])
+        parcel.expectedDelivery = "2026-09-09"
+        parcel.carrierData = CarrierData(expectedDeliveryFrom: "2026-09-07")
+        XCTAssertEqual(localizer.parcelDeliveryEstimate(parcel, now: now), "by Wed 9 Sep")
+        XCTAssertEqual(localizer.parcelDeliveryWindow(parcel, now: now), "today – Wed 9 Sep")
+        parcel.carrierData = CarrierData(expectedDeliveryFrom: "2026-09-08")
+        XCTAssertEqual(localizer.parcelDeliveryEstimate(parcel, now: now), "tomorrow – Wed 9 Sep")
+        parcel.expectedDelivery = "2026-09-06"
+        XCTAssertNil(localizer.parcelDeliveryEstimate(parcel, now: now))
+        XCTAssertNil(localizer.parcelDeliveryWindow(parcel, now: now))
+    }
+
+    @MainActor
     func testCompletionDatesUseRelativeLabelsForFinalEvents() throws {
         let localizer = Localizer()
         localizer.language = .en

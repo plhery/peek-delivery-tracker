@@ -380,7 +380,8 @@ final class Localizer: ObservableObject {
         return text(trackingMessages.failures[kind] ?? "detail.trackingUnavailable")
     }
 
-    /// A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00".
+    /// A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". Once its first day
+    /// has passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov".
     func deliveryWindow(from: String?, to: String, now: Date = Date()) -> String {
         let end = expectedDelivery(to, now: now)
         guard let from, let startDate = DateParser.deliveryDate(from),
@@ -390,7 +391,34 @@ final class Localizer: ObservableObject {
             let day = formatter("yyyy-MM-dd", posix: true, gregorian: true).string(from: start)
             return dayAndTime(expectedDelivery(day, now: now), "\(clockTime(start))–\(clockTime(finish))")
         }
+        if let days = windowDays(from: from, to: to), days.first < Calendar.current.startOfDay(for: now) {
+            let ending = to.contains("T") && DateParser.date(to) != nil ? dateTime(to) : shortDate(days.last)
+            return "\(shortDate(days.first)) – \(ending)"
+        }
         return "\(expectedDelivery(from, now: now)) – \(end)"
+    }
+
+    /// The first and last day of a window that spans more than one.
+    private func windowDays(from: String?, to: String) -> (first: Date, last: Date)? {
+        guard let from, let start = DateParser.deliveryDate(from), let end = DateParser.deliveryDate(to) else { return nil }
+        let calendar = Calendar.current
+        let (first, last) = (calendar.startOfDay(for: start), calendar.startOfDay(for: end))
+        return first < last ? (first, last) : nil
+    }
+
+    /// An estimate as short as a card writes it. A window of several days reads whole until it begins, then by the day
+    /// it ends, since the parcel may come any day until then: "by Fri 6 Nov". The parcel's page gives the whole window.
+    func deliveryEstimate(from: String?, to: String, now: Date = Date()) -> String {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: now)
+        guard let days = windowDays(from: from, to: to), days.first <= today, days.last >= today else {
+            return deliveryWindow(from: from, to: to, now: now)
+        }
+        if days.last == today { return text("time.today") }
+        if let tomorrow = calendar.date(byAdding: .day, value: 1, to: today), calendar.isDate(days.last, inSameDayAs: tomorrow) {
+            return text("parcel.byTomorrow")
+        }
+        return text("parcel.byDate", ["date": shortDate(days.last)])
     }
 
     func relativeTime(from value: String, now: Date = Date()) -> String {
@@ -520,7 +548,20 @@ final class Localizer: ObservableObject {
         return text(key, ["carrier": CarrierCatalog.shared.info(for: likely, language: language).displayName])
     }
 
+    /// The estimate a card, a widget or a shared line gives: a window of days that has begun, by the day it ends.
     func parcelDeliveryEstimate(_ parcel: Parcel, now: Date = Date()) -> String? {
+        guard let value = shownEstimate(parcel, now: now) else { return nil }
+        return deliveryEstimate(from: parcel.carrierData?.expectedDeliveryFrom, to: value, now: now)
+    }
+
+    /// The estimate the parcel's page gives, with a window of days whole.
+    func parcelDeliveryWindow(_ parcel: Parcel, now: Date = Date()) -> String? {
+        guard let value = shownEstimate(parcel, now: now) else { return nil }
+        return deliveryWindow(from: parcel.carrierData?.expectedDeliveryFrom, to: value, now: now)
+    }
+
+    /// The carrier's estimate while it still explains what happens next: the parcel is on its way and its last day has not passed.
+    private func shownEstimate(_ parcel: Parcel, now: Date) -> String? {
         guard let value = parcel.expectedDelivery,
               parcel.currentStage?.isFinal != true,
               parcel.currentStage != .readyForPickup, parcel.currentStage != .failedAttempt,
@@ -528,7 +569,7 @@ final class Localizer: ObservableObject {
               let date = DateParser.deliveryDate(value) else { return nil }
         let calendar = Calendar.current
         guard calendar.startOfDay(for: date) >= calendar.startOfDay(for: now) else { return nil }
-        return deliveryWindow(from: parcel.carrierData?.expectedDeliveryFrom, to: value, now: now)
+        return value
     }
 
     func parcelCompletionDate(_ parcel: Parcel, now: Date = Date()) -> String? {

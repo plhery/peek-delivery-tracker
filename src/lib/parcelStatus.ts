@@ -1,5 +1,5 @@
 import { scanDate } from './format';
-import { localizedDeliveryDate, numberToCheck, type MessageKey, type Translate } from './messages';
+import { estimateDay, localizedDeliveryDate, numberToCheck, type MessageKey, type Translate } from './messages';
 import type { CarrierId, ParcelWithEvents } from '../types';
 import { currentEvent, stageMeta } from './stages';
 import { activeTrackingCarrierId, carrierInfo, tracksAutomatically } from './carriers';
@@ -15,14 +15,10 @@ export function parcelDeliveryEstimate(parcel: ParcelWithEvents, now = Date.now(
   const value = parcel.expectedDelivery;
   const stage = currentEvent(parcel.events)?.stage;
   if (!value || (stage && ['delivered', 'returned', 'ready_for_pickup', 'failed_attempt', 'exception'].includes(stage))) return null;
-  const match = /^(\d{4}-\d{2}-\d{2})/.exec(value);
-  if (!match) return null;
-  const day = /T\d{2}:\d{2}/.test(value) && !Number.isNaN(Date.parse(value))
-    ? new Date(value) : new Date(`${match[1]}T00:00:00`);
-  day.setHours(0, 0, 0, 0);
+  const day = estimateDay(value);
   const today = new Date(now);
   today.setHours(0, 0, 0, 0);
-  if (!Number.isFinite(day.getTime()) || day < today) return null;
+  if (!day || day < today) return null;
   return value;
 }
 

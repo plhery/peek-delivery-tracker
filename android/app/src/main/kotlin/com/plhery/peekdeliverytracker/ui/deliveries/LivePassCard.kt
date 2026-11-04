@@ -365,7 +365,7 @@ internal fun LivePassCard(
             }
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(localizer.parcelStatus(parcel), color = ink, style = type.subheadline.sfLines())
-                val date = localizer.parcelCompletionDate(parcel, now) ?: localizer.parcelDeliveryEstimate(parcel, now)
+                val date = localizer.parcelCompletionDate(parcel, now) ?: localizer.parcelDeliveryWindow(parcel, now)
                 if (date != null) Text(date, color = ink, style = type.caption.sfLines())
             }
             val displayed = identities.displayName(parcel.displayedCarrier, language)

@@ -1,7 +1,7 @@
 import trackingMessages from '../../shared/tracking-messages.json';
 import type en from '../../shared/locales/en.json';
 import type { Stage, TrackingEvent } from '../types';
-import { dayAndTime, localizedCalendarDate, scanDate } from './format';
+import { dayAndTime, localizedCalendarDate, localizedCalendarDateTime, scanDate } from './format';
 import type { Locale } from './locale';
 
 /**
@@ -149,7 +149,38 @@ export function trackingFailureMessage(error: string | undefined, t: Translate):
   return t((Object.hasOwn(messages, kind) ? messages[kind] : 'detail.trackingUnavailable') as MessageKey);
 }
 
-/** A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". */
+/** The local day an estimate falls on, at midnight: a date's own, or a time's on this device's clock. */
+export function estimateDay(value: string): Date | null {
+  const match = /^(\d{4}-\d{2}-\d{2})/.exec(value.trim());
+  if (!match) return null;
+  const day = /T\d{2}:\d{2}/.test(value) && Number.isFinite(Date.parse(value)) ? new Date(value) : new Date(`${match[1]}T00:00:00`);
+  if (!Number.isFinite(day.getTime())) return null;
+  day.setHours(0, 0, 0, 0);
+  return day;
+}
+
+function startOfToday(now: number): Date {
+  const today = new Date(now);
+  today.setHours(0, 0, 0, 0);
+  return today;
+}
+
+/** The first and last day of a window that spans more than one. */
+function windowDays(from: string | undefined, to: string): { first: Date; last: Date } | null {
+  const [first, last] = [from ? estimateDay(from) : null, estimateDay(to)];
+  return first && last && first < last ? { first, last } : null;
+}
+
+/** Whether the window of several days an estimate gives has begun: the parcel may come any day until its last. */
+export function deliveryWindowOpen(from: string | undefined, to: string, now = Date.now()): boolean {
+  const days = windowDays(from, to);
+  return !!days && days.first <= startOfToday(now);
+}
+
+/**
+ * A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". Once its first day has
+ * passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov".
+ */
 export function localizedDeliveryWindow(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now()): string {
   const end = localizedExpectedDelivery(to, t, languageTag, now);
   if (!from || !Number.isFinite(Date.parse(from)) || !Number.isFinite(Date.parse(to)) || Date.parse(from) >= Date.parse(to)) return end;
@@ -159,6 +190,24 @@ export function localizedDeliveryWindow(from: string | undefined, to: string, t:
     const clock = new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
     return dayAndTime(localizedDeliveryDate(first, t, languageTag, now), `${clock.format(first)}–${clock.format(last)}`, languageTag);
   }
-  const start = localizedExpectedDelivery(from, t, languageTag, now);
-  return `${start} – ${end}`;
+  const days = windowDays(from, to);
+  if (days && days.first < startOfToday(now)) {
+    const ending = timed(to) ? localizedCalendarDateTime(last, languageTag) : localizedCalendarDate(days.last, languageTag);
+    return `${localizedCalendarDate(days.first, languageTag)} – ${ending}`;
+  }
+  return `${localizedExpectedDelivery(from, t, languageTag, now)} – ${end}`;
+}
+
+/**
+ * An estimate as short as a card writes it. A window of several days reads whole until it begins, then by the day it
+ * ends, since the parcel may come any day until then: "by Fri 6 Nov". The parcel's page gives the whole window.
+ */
+export function localizedDeliveryEstimate(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now()): string {
+  const days = windowDays(from, to);
+  const today = startOfToday(now);
+  if (!days || days.first > today || days.last < today) return localizedDeliveryWindow(from, to, t, languageTag, now);
+  if (days.last.getTime() === today.getTime()) return t('time.today');
+  const tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+  return days.last.getTime() === tomorrow.getTime() ? t('parcel.byTomorrow')
+    : t('parcel.byDate', { date: localizedCalendarDate(days.last, languageTag) });
 }

@@ -570,6 +570,8 @@
   "parcel.aria": "{{name}} — {{status}}",
   "parcel.ariaExpected": "{{name}} — {{status}} — previsto: {{date}}",
   "parcel.onDate": "{{date}}",
+  "parcel.byDate": "entro {{date}}",
+  "parcel.byTomorrow": "entro domani",
   "parcel.sender": "Mittente: {{sender}}",
   "parcel.pickedUpAt": "Ritirato presso {{place}}",
   "parcel.autoChangedCarrier": "Cambio automatico da {{carrier}}",

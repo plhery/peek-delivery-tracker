@@ -24,11 +24,14 @@ import {
   translate,
   localizedEventDescription,
   localizedDeliveryWindow,
+  localizedDeliveryEstimate,
   trackingFailureMessage,
   SUPPORTED_LOCALES,
+  type Locale,
   type MessageKey,
 } from './i18n';
 import { documentLanguage } from './lib/locale';
+import { deliveryWindowOpen, languageTags } from './lib/messages';
 
 function TranslationProbe() {
   const { t } = useI18n();
@@ -93,6 +96,41 @@ describe('localization', () => {
     for (const from of [undefined, 'invalid', '2026-09-12', '2026-09-11']) {
       expect(localizedDeliveryWindow(from, '2026-09-11', t, 'en-CH', now)).toBe('Fri 11 Sep');
     }
+  });
+
+  it('gives a window of days whole until it begins, then by its last day', () => {
+    const now = new Date(2026, 10, 4, 20, 45).getTime();
+    const t: Translate = (key, variables) => translate('en', key, variables);
+    // Not begun: both ends, as the carrier gives them.
+    expect(localizedDeliveryEstimate('2026-11-05', '2026-11-06', t, 'en-CH', now)).toBe('tomorrow – Fri 6 Nov');
+    // Begun today or before: it may still come any day until its last.
+    expect(localizedDeliveryEstimate('2026-11-04', '2026-11-06', t, 'en-CH', now)).toBe('by Fri 6 Nov');
+    expect(localizedDeliveryEstimate('2026-10-23', '2026-11-06', t, 'en-CH', now)).toBe('by Fri 6 Nov');
+    expect(localizedDeliveryEstimate('2026-11-03', '2026-11-05', t, 'en-CH', now)).toBe('by tomorrow');
+    expect(localizedDeliveryEstimate('2026-11-02', '2026-11-04', t, 'en-CH', now)).toBe('today');
+    // One day, with or without its hours, reads as before.
+    expect(localizedDeliveryEstimate(undefined, '2026-11-04', t, 'en-CH', now)).toBe('today');
+    expect(localizedDeliveryEstimate('2026-11-04T13:05:00+01:00', '2026-11-04T16:05:00+01:00', t, 'en-CH', now)).toBe('today, 13:05–16:05');
+    expect(deliveryWindowOpen('2026-11-04', '2026-11-06', now)).toBe(true);
+    expect(deliveryWindowOpen('2026-11-05', '2026-11-06', now)).toBe(false);
+    expect(deliveryWindowOpen(undefined, '2026-11-06', now)).toBe(false);
+    const by: Record<string, [string, string]> = {
+      de: ['bis Fr 6. Nov', 'bis morgen'], fr: ['d’ici ven 6 nov', 'd’ici demain'], it: ['entro ven 6 nov', 'entro domani'],
+      es: ['para el vie 6 nov', 'para mañana'], pt: ['até sex 6 nov', 'até amanhã'], 'pt-br': ['até sex 6 nov', 'até amanhã'],
+      pl: ['do pt 6 lis', 'do jutra'], ru: ['до пт 6 нояб', 'до завтра'], zh: ['11月6日周五前', '明天前'],
+    };
+    for (const [locale, [date, tomorrow]] of Object.entries(by)) {
+      const words: Translate = (key, variables) => translate(locale as Locale, key, variables);
+      expect(localizedDeliveryEstimate('2026-11-04', '2026-11-06', words, languageTags[locale as Locale], now)).toBe(date);
+      expect(localizedDeliveryEstimate('2026-11-04', '2026-11-05', words, languageTags[locale as Locale], now)).toBe(tomorrow);
+    }
+  });
+
+  it('dates the first day of a window once it has passed', () => {
+    const now = new Date(2026, 10, 5, 9).getTime();
+    const t: Translate = (key, variables) => translate('en', key, variables);
+    expect(localizedDeliveryWindow('2026-11-04', '2026-11-06', t, 'en-CH', now)).toBe('Wed 4 Nov – Fri 6 Nov');
+    expect(localizedDeliveryWindow('2026-11-05', '2026-11-07', t, 'en-CH', now)).toBe('today – Sat 7 Nov');
   });
 
   it('names the day of a window within one day once', () => {

@@ -18,6 +18,7 @@ export { detectLocale, SUPPORTED_LOCALES, type Locale };
 export {
   localizedDatePhrase,
   localizedDeliveryDate,
+  localizedDeliveryEstimate,
   localizedDeliveryWindow,
   localizedEventDescription,
   localizedExpectedDelivery,

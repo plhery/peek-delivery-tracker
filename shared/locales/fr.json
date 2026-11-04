@@ -570,6 +570,8 @@
   "parcel.aria": "{{name}} — {{status}}",
   "parcel.ariaExpected": "{{name}} — {{status}} — prévu : {{date}}",
   "parcel.onDate": "le {{date}}",
+  "parcel.byDate": "d’ici {{date}}",
+  "parcel.byTomorrow": "d’ici demain",
   "parcel.sender": "Expéditeur : {{sender}}",
   "parcel.pickedUpAt": "Retiré chez {{place}}",
   "parcel.autoChangedCarrier": "Transporteur remplacé automatiquement (ancien : {{carrier}})",

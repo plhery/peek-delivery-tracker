@@ -570,6 +570,8 @@
   "parcel.aria": "{{name}} — {{status}}",
   "parcel.ariaExpected": "{{name}} — {{status}} — ожидается: {{date}}",
   "parcel.onDate": "{{date}}",
+  "parcel.byDate": "до {{date}}",
+  "parcel.byTomorrow": "до завтра",
   "parcel.sender": "Отправитель: {{sender}}",
   "parcel.pickedUpAt": "Получена: {{place}}",
   "parcel.autoChangedCarrier": "Служба доставки сменилась автоматически (раньше: {{carrier}})",

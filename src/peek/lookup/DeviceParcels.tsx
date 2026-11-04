@@ -5,7 +5,7 @@ import { defaultMode } from '../../components/map/route';
 import { WorldMap } from '../../components/map/WorldMap';
 import { CardRoute, useParcelRoute } from '../../components/ParcelMap';
 import { ProgressTrack } from '../../components/ProgressTrack';
-import { localizedExpectedDelivery, useI18n } from '../../i18n';
+import { localizedDeliveryEstimate, useI18n } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
 import { ON_THE_WAY, useDeliveredHold } from '../../lib/deliveredHold';
 import type { CardList } from '../../lib/deliveredMove';
@@ -53,7 +53,7 @@ function DeviceParcel({ recent, arrived = false }: { recent: RecentParcel; arriv
   const { parcel } = recent.snapshot;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
   const estimate = parcelDeliveryEstimate(parcel);
-  const when = estimate ? localizedExpectedDelivery(estimate, t, languageTag) : localizedParcelCompletionDate(parcel, languageTag, t);
+  const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag) : localizedParcelCompletionDate(parcel, languageTag, t);
   const title = useParcelTitle(recent);
   const { placed, route } = useParcelRoute(parcel, languageTag);
   return <a className={`door-parcel${placed ? ' door-parcel--route' : ''}`} style={carrierBrand(carrier).style} href={parcelLinkPath(recent.id)} data-parcel-link={recent.id} data-arrived={arrived ? '' : undefined} onClick={openOnClick(recent.id)}>

@@ -240,7 +240,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   const number = parcel.trackingNumber ? formatTrackingNumber(parcel.trackingNumber, parcel.carrier)
     : numberHint ? maskedNumber(numberHint) : null;
   const headline = wrapped ? t('share.gift.headline') : opened ? t('share.gift.here') : parcelHeadline(parcel, t);
-  const detail = wrapped ? giftArrival(parcel, wording) : (opened ? giftDelivered(parcel, wording) : null) ?? parcelDetail(parcel, wording);
+  // The page gives a window of days whole, where cards and previews give the day it ends.
+  const detail = wrapped ? giftArrival(parcel, wording) : (opened ? giftDelivered(parcel, wording) : null) ?? parcelDetail(parcel, wording, true, true);
   const offline = useOffline() || trouble?.kind === 'offline';
   const failing = trouble && !offline ? trouble : null;
   // A number no carrier knows yet says so in its headline already.

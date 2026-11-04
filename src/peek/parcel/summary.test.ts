@@ -42,6 +42,12 @@ describe('what the card says under the headline', () => {
     expect(parcelDetail(moving({ expectedDelivery: '2026-10-06' }), wording)).toBe('Expected: Tue 6 Oct');
     expect(parcelDetail(moving({ expectedDelivery: '2026-10-02 13:00-17:00' }), german)).toBe('Heute, 13:00–17:00');
     expect(parcelDetail(moving({ expectedDelivery: '2026-10-06' }), german)).toBe('Erwartet: Di 6. Okt');
+    // A window of days that has begun reads by its last day; the parcel's page gives it whole.
+    const window = moving({ expectedDeliveryFrom: '2026-10-02', expectedDelivery: '2026-10-06' });
+    expect(parcelDetail(window, wording)).toBe('By Tue 6 Oct');
+    expect(parcelDetail(window, german)).toBe('Bis Di 6. Okt');
+    expect(parcelDetail(window, wording, true, true)).toBe('Today – Tue 6 Oct');
+    expect(parcelDetail(moving({ expectedDeliveryFrom: '2026-10-05', expectedDelivery: '2026-10-06' }), wording)).toBe('Expected: Mon 5 Oct – Tue 6 Oct');
   });
 
   it('says there is no date yet while the parcel travels without one, and nothing once it waits or failed', () => {

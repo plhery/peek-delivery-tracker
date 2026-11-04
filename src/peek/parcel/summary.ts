@@ -1,6 +1,8 @@
 import { scanDate } from '../../lib/format';
 import {
+  deliveryWindowOpen,
   localizedDeliveryDate,
+  localizedDeliveryEstimate,
   localizedDeliveryWindow,
   localizedRelativeTime,
   localizedScanAge,
@@ -52,12 +54,17 @@ export function momentLabel(at: string | Pick<TrackingEvent, 'occurredAt' | 'day
     : `${localizedDeliveryDate(date, t, languageTag, now)}, ${clock(date, languageTag)}`;
 }
 
-/** An estimate the way the card writes it: "Today, 13:00–17:00" for a day close by, "Expected: Fri 2 Oct" otherwise. */
-function estimateLine(parcel: ParcelWithEvents, estimate: string, wording: Wording): string {
+/**
+ * An estimate the way the card writes it: "Today, 13:00–17:00" for a day close by, "By Fri 6 Nov" in a window of days
+ * that has begun, "Expected: Fri 2 Oct" otherwise. `whole` gives a window of days whole, as the parcel's page does.
+ */
+function estimateLine(parcel: ParcelWithEvents, estimate: string, wording: Wording, whole = false): string {
   const { t, languageTag, now = Date.now() } = wording;
-  const text = localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate, t, languageTag, now);
+  const from = parcel.expectedDeliveryFrom;
+  const open = !whole && deliveryWindowOpen(from, estimate, now);
+  const text = (whole ? localizedDeliveryWindow : localizedDeliveryEstimate)(from, estimate, t, languageTag, now);
   const nearby = (['time.today', 'time.tomorrow', 'time.yesterday'] as const).some((key) => text.startsWith(t(key)));
-  return nearby ? capitalized(text, languageTag) : t('detail.expected', { date: text });
+  return open || nearby ? capitalized(text, languageTag) : t('detail.expected', { date: text });
 }
 
 export function parcelStage(parcel: ParcelWithEvents): Stage | null {
@@ -75,7 +82,7 @@ export function parcelHeadline(parcel: ParcelWithEvents, t: Translate): string {
  * nobody knows yet. `clockTime` is off where the reader's time zone is not
  * known, as on the server.
  */
-export function parcelDetail(parcel: ParcelWithEvents, wording: Wording, clockTime = true): string | null {
+export function parcelDetail(parcel: ParcelWithEvents, wording: Wording, clockTime = true, wholeWindow = false): string | null {
   const { t, languageTag, now = Date.now() } = wording;
   const current = currentEvent(parcel.events);
   const stage = parcelStage(parcel);
@@ -90,7 +97,7 @@ export function parcelDetail(parcel: ParcelWithEvents, wording: Wording, clockTi
     return dated ? t('link.returnedSince', { date: localizedDeliveryDate(dated, t, languageTag, now) }) : null;
   }
   const estimate = parcelDeliveryEstimate(parcel, now);
-  if (estimate) return estimateLine(parcel, estimate, wording);
+  if (estimate) return estimateLine(parcel, estimate, wording, wholeWindow);
   return stage && ['registered', 'accepted', 'in_transit', 'customs'].includes(stage) ? t('link.noDate') : null;
 }
 
@@ -187,7 +194,7 @@ function shortEstimate(parcel: ParcelWithEvents, wording: Wording): string | nul
   const { t, languageTag, now = Date.now() } = wording;
   const estimate = parcelDeliveryEstimate(parcel, now);
   if (!estimate) return null;
-  const text = localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate, t, languageTag, now);
+  const text = localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, now);
   const today = `${t('time.today')}, `;
   return text.startsWith(today) ? text.slice(today.length) : text;
 }
@@ -232,7 +239,7 @@ export function parcelPreviewText(parcel: ParcelWithEvents, carrierName: string,
 export function giftArrival(parcel: ParcelWithEvents, wording: Wording): string | null {
   const { t, languageTag, now = Date.now() } = wording;
   const estimate = parcelDeliveryEstimate(parcel, now);
-  return estimate ? t('share.gift.arrives', { date: localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate, t, languageTag, now) }) : null;
+  return estimate ? t('share.gift.arrives', { date: localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, now) }) : null;
 }
 
 /** "Delivered today at 14:12", for a gift that has arrived. Without a time the card's own line gives the day. */

@@ -8,6 +8,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
 import java.io.IOException
 import java.time.Instant
+import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -289,7 +290,10 @@ class Localizer(
         return text(trackingMessages.failures[canonical(kind)] ?: "detail.trackingUnavailable")
     }
 
-    /** A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". */
+    /**
+     * A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". Once its first day
+     * has passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov".
+     */
     fun deliveryWindow(from: String?, to: String, now: Instant = Instant.now()): String {
         val end = expectedDelivery(to, now)
         if (from == null) return end
@@ -303,7 +307,39 @@ class Localizer(
                 return dayAndTime(expectedDelivery(localDay(start), now), "${clockTime(start)}–${clockTime(finish)}")
             }
         }
+        val days = windowDays(from, to)
+        if (days != null && days.first < today(now)) {
+            val ending = if (to.contains("T") && DateParser.date(to) != null) dateTime(to) else shortDate(dayStart(days.second))
+            return "${shortDate(dayStart(days.first))} – $ending"
+        }
         return "${expectedDelivery(from, now)} – $end"
+    }
+
+    private fun today(now: Instant): LocalDate = now.atZone(ZoneId.systemDefault()).toLocalDate()
+
+    private fun dayStart(day: LocalDate): Instant = day.atStartOfDay(ZoneId.systemDefault()).toInstant()
+
+    /** The first and last day of a window that spans more than one. */
+    private fun windowDays(from: String?, to: String): Pair<LocalDate, LocalDate>? {
+        val zone = ZoneId.systemDefault()
+        val first = from?.let(DateParser::deliveryDate)?.atZone(zone)?.toLocalDate() ?: return null
+        val last = DateParser.deliveryDate(to)?.atZone(zone)?.toLocalDate() ?: return null
+        return if (first < last) first to last else null
+    }
+
+    /**
+     * An estimate as short as a card writes it. A window of several days reads whole until it begins, then by the day
+     * it ends, since the parcel may come any day until then: "by Fri 6 Nov". The parcel's page gives the whole window.
+     */
+    fun deliveryEstimate(from: String?, to: String, now: Instant = Instant.now()): String {
+        val today = today(now)
+        val days = windowDays(from, to)
+        if (days == null || days.first > today || days.second < today) return deliveryWindow(from, to, now)
+        return when (days.second) {
+            today -> text("time.today")
+            today.plusDays(1) -> text("parcel.byTomorrow")
+            else -> text("parcel.byDate", mapOf("date" to shortDate(dayStart(days.second))))
+        }
     }
 
     fun relativeTime(from: String, now: Instant = Instant.now()): String {
@@ -415,7 +451,20 @@ class Localizer(
         return text(key, mapOf("carrier" to CarrierCatalog.shared.info(likely, language).displayName))
     }
 
+    /** The estimate a card, a widget or a shared line gives: a window of days that has begun, by the day it ends. */
     fun parcelDeliveryEstimate(parcel: Parcel, now: Instant = Instant.now()): String? {
+        val value = shownEstimate(parcel, now) ?: return null
+        return deliveryEstimate(parcel.carrierData?.expectedDeliveryFrom, value, now)
+    }
+
+    /** The estimate the parcel's page gives, with a window of days whole. */
+    fun parcelDeliveryWindow(parcel: Parcel, now: Instant = Instant.now()): String? {
+        val value = shownEstimate(parcel, now) ?: return null
+        return deliveryWindow(parcel.carrierData?.expectedDeliveryFrom, value, now)
+    }
+
+    /** The carrier's estimate while it still explains what happens next: the parcel is on its way and its last day has not passed. */
+    private fun shownEstimate(parcel: Parcel, now: Instant): String? {
         val value = parcel.expectedDelivery ?: return null
         val stage = parcel.currentStage
         if (stage?.isFinal == true || stage == TrackingStage.ReadyForPickup || stage == TrackingStage.FailedAttempt ||
@@ -424,7 +473,7 @@ class Localizer(
         val date = DateParser.deliveryDate(value) ?: return null
         val zone = ZoneId.systemDefault()
         if (date.atZone(zone).toLocalDate() < now.atZone(zone).toLocalDate()) return null
-        return deliveryWindow(parcel.carrierData?.expectedDeliveryFrom, value, now)
+        return value
     }
 
     fun parcelCompletionDate(parcel: Parcel, now: Instant = Instant.now()): String? {

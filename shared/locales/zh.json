@@ -570,6 +570,8 @@
   "parcel.aria": "{{name}}：{{status}}",
   "parcel.ariaExpected": "{{name}}：{{status}}，预计送达：{{date}}",
   "parcel.onDate": "{{date}}",
+  "parcel.byDate": "{{date}}前",
+  "parcel.byTomorrow": "明天前",
   "parcel.sender": "来自 {{sender}}",
   "parcel.pickedUpAt": "已在 {{place}} 取件",
   "parcel.autoChangedCarrier": "已自动从 {{carrier}} 切换",

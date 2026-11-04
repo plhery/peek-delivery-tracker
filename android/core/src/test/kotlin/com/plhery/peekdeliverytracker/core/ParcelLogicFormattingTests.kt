@@ -39,6 +39,22 @@ class ParcelLogicFormattingTests {
     }
 
     @Test
+    fun cardsGiveAWindowOfDaysThatHasBegunByItsLastDayAndThePageWhole() {
+        val id = UUID.randomUUID()
+        val now = DateParser.date("2026-09-07T12:00:00Z")!!
+        val localizer = Localizer(AppLanguage.En)
+        var parcel = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-09-07T10:00:00Z")))
+            .copy(expectedDelivery = "2026-09-09", carrierData = CarrierData(expectedDeliveryFrom = "2026-09-07"))
+        assertEquals("by Wed 9 Sep", localizer.parcelDeliveryEstimate(parcel, now))
+        assertEquals("today – Wed 9 Sep", localizer.parcelDeliveryWindow(parcel, now))
+        parcel = parcel.copy(carrierData = CarrierData(expectedDeliveryFrom = "2026-09-08"))
+        assertEquals("tomorrow – Wed 9 Sep", localizer.parcelDeliveryEstimate(parcel, now))
+        parcel = parcel.copy(expectedDelivery = "2026-09-06")
+        assertNull(localizer.parcelDeliveryEstimate(parcel, now))
+        assertNull(localizer.parcelDeliveryWindow(parcel, now))
+    }
+
+    @Test
     fun completionDatesUseRelativeLabelsForFinalEvents() {
         val localizer = Localizer(AppLanguage.En)
         val now = DateParser.deliveryDate("2026-09-09")!!

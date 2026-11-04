@@ -1,7 +1,7 @@
 import { AutoCarrierNotice } from './AutoCarrierNotice';
 import { useEffect, useRef, useState } from 'react';
 import { deliveringCarrierId, displayedCarrierId, carrierInfo } from '../lib/carriers';
-import { localizedDatePhrase, localizedExpectedDelivery, useI18n } from '../i18n';
+import { localizedDatePhrase, localizedDeliveryEstimate, useI18n } from '../i18n';
 import { numberToCheck } from '../lib/messages';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel, shownCarrier } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
@@ -31,7 +31,7 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   const deliveryLabel = deliveryCarrier ? t('parcel.deliveryCarrier', { carrier: carrierInfo(deliveryCarrier, locale).name }) : null;
   const current = currentEvent(parcel.events);
   const estimate = parcelDeliveryEstimate(parcel);
-  const expectedDelivery = estimate ? localizedExpectedDelivery(estimate, t, languageTag) : null;
+  const expectedDelivery = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag) : null;
   const statusLabel = parcelStatusLabel(parcel, t, locale);
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
   // A parcel waiting for collection says where.

@@ -56,6 +56,33 @@ class LocalizationTests {
     }
 
     @Test
+    fun deliveryEstimateGivesAWindowOfDaysByItsLastDayOnceItBegins() {
+        val localizer = Localizer(AppLanguage.En)
+        val now = settingTime(assertNotNull(DateParser.deliveryDate("2026-11-04")), hour = 20, minute = 45)
+        // Not begun: both ends, as the carrier gives them.
+        assertEquals("tomorrow – Fri 6 Nov", localizer.deliveryEstimate("2026-11-05", "2026-11-06", now))
+        // Begun today or before: it may still come any day until its last.
+        assertEquals("by Fri 6 Nov", localizer.deliveryEstimate("2026-11-04", "2026-11-06", now))
+        assertEquals("by Fri 6 Nov", localizer.deliveryEstimate("2026-10-23", "2026-11-06", now))
+        assertEquals("by tomorrow", localizer.deliveryEstimate("2026-11-03", "2026-11-05", now))
+        assertEquals("today", localizer.deliveryEstimate("2026-11-02", "2026-11-04", now))
+        assertEquals("today", localizer.deliveryEstimate(null, "2026-11-04", now))
+        // The parcel's page gives the window whole, dating both ends once its first day has passed.
+        assertEquals("today – Fri 6 Nov", localizer.deliveryWindow("2026-11-04", "2026-11-06", now))
+        assertEquals("Tue 3 Nov – Fri 6 Nov", localizer.deliveryWindow("2026-11-03", "2026-11-06", now))
+        val by = listOf(
+            Triple(AppLanguage.De, "bis Fr 6. Nov", "bis morgen"), Triple(AppLanguage.Fr, "d’ici ven 6 nov", "d’ici demain"),
+            Triple(AppLanguage.Es, "para el vie 6 nov", "para mañana"), Triple(AppLanguage.Pl, "do pt 6 lis", "do jutra"),
+            Triple(AppLanguage.Zh, "11月6日周五前", "明天前"),
+        )
+        for ((language, date, tomorrow) in by) {
+            val words = Localizer(language)
+            assertEquals(date, words.deliveryEstimate("2026-11-04", "2026-11-06", now))
+            assertEquals(tomorrow, words.deliveryEstimate("2026-11-04", "2026-11-05", now))
+        }
+    }
+
+    @Test
     fun deliveryWindowNamesTheDayOfAWindowWithinOneDayOnce() {
         val localizer = Localizer(AppLanguage.En)
         val now = assertNotNull(DateParser.deliveryDate("2026-09-09"))

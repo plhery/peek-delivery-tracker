@@ -1,7 +1,7 @@
 import { useEffect, useRef, type MouseEvent } from 'react';
 import { CarrierTruck } from '../../components/CarrierMark';
 import { Icon } from '../../components/Icon';
-import { localizedExpectedDelivery, useI18n } from '../../i18n';
+import { localizedDeliveryEstimate, useI18n } from '../../i18n';
 import { carrierBrand } from '../../lib/carrierBrand';
 import { carrierInfo, displayedCarrierId } from '../../lib/carriers';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
@@ -19,7 +19,7 @@ function OtherParcel({ recent }: { recent: RecentParcel }) {
   const { parcel, numberHint } = recent.snapshot;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
   const estimate = parcelDeliveryEstimate(parcel);
-  const when = estimate ? localizedExpectedDelivery(estimate, t, languageTag) : localizedParcelCompletionDate(parcel, languageTag, t);
+  const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag) : localizedParcelCompletionDate(parcel, languageTag, t);
   const number = parcel.trackingNumber ? shortNumber(parcel.trackingNumber, parcel.carrier)
     : numberHint ? maskedNumber(numberHint) : t('common.parcel');
   function open(event: MouseEvent) {

@@ -41,6 +41,32 @@ final class LocalizationTests: XCTestCase {
         }
     }
 
+    func testDeliveryEstimateGivesAWindowOfDaysByItsLastDayOnceItBegins() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let now = try XCTUnwrap(Calendar.current.date(from: DateComponents(year: 2026, month: 11, day: 4, hour: 20, minute: 45)))
+        // Not begun: both ends, as the carrier gives them.
+        XCTAssertEqual(localizer.deliveryEstimate(from: "2026-11-05", to: "2026-11-06", now: now), "tomorrow – Fri 6 Nov")
+        // Begun today or before: it may still come any day until its last.
+        XCTAssertEqual(localizer.deliveryEstimate(from: "2026-11-04", to: "2026-11-06", now: now), "by Fri 6 Nov")
+        XCTAssertEqual(localizer.deliveryEstimate(from: "2026-10-23", to: "2026-11-06", now: now), "by Fri 6 Nov")
+        XCTAssertEqual(localizer.deliveryEstimate(from: "2026-11-03", to: "2026-11-05", now: now), "by tomorrow")
+        XCTAssertEqual(localizer.deliveryEstimate(from: "2026-11-02", to: "2026-11-04", now: now), "today")
+        XCTAssertEqual(localizer.deliveryEstimate(from: nil, to: "2026-11-04", now: now), "today")
+        // The parcel's page gives the window whole, dating both ends once its first day has passed.
+        XCTAssertEqual(localizer.deliveryWindow(from: "2026-11-04", to: "2026-11-06", now: now), "today – Fri 6 Nov")
+        XCTAssertEqual(localizer.deliveryWindow(from: "2026-11-03", to: "2026-11-06", now: now), "Tue 3 Nov – Fri 6 Nov")
+        let by: [(AppLanguage, String, String)] = [
+            (.de, "bis Fr 6. Nov", "bis morgen"), (.fr, "d’ici ven 6 nov", "d’ici demain"), (.es, "para el vie 6 nov", "para mañana"),
+            (.pl, "do pt 6 lis", "do jutra"), (.zh, "11月6日周五前", "明天前"),
+        ]
+        for (language, date, tomorrow) in by {
+            localizer.language = language
+            XCTAssertEqual(localizer.deliveryEstimate(from: "2026-11-04", to: "2026-11-06", now: now), date)
+            XCTAssertEqual(localizer.deliveryEstimate(from: "2026-11-04", to: "2026-11-05", now: now), tomorrow)
+        }
+    }
+
     func testDeliveryWindowNamesTheDayOfAWindowWithinOneDayOnce() throws {
         let localizer = Localizer()
         localizer.language = .en

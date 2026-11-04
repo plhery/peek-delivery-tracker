@@ -9,6 +9,7 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollAction
@@ -16,6 +17,7 @@ import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
@@ -31,6 +33,8 @@ import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_ACCOUNT_BUTTON
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_AVERAGE
+import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRIES
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_POPOVER
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_SHOW_ALL
@@ -53,10 +57,10 @@ import org.junit.rules.TestName
 import org.junit.runner.RunWith
 
 /**
- * The passport (A-S87 to A-S92) on this device's own window, its bars and density the device's, on fake deliveries,
- * which reach no server: the tab opened on the demo's parcels; a stamp's popover, and a tap on another stamp closing it
- * without opening that one; another opened and closed by the system's back; all the stamps shown; the account button
- * opening Settings. Each saved as passport/<test>.png in the test package's external files, which adb pulls.
+ * The passport (A-S87 to A-S92, A-ST29) on this device's own window, its bars and density the device's, on fake
+ * deliveries, which reach no server: the tab opened on the demo's parcels; a stamp's popover, and a tap on another stamp
+ * closing it without opening that one; another opened and closed by the system's back; nothing delivered yet; the
+ * stamps earned and the next three; all the stamps shown; the account button opening Settings. Each saved as passport/<test>.png in the test package's external files, which adb pulls.
  * Under Reduce Motion, as the other device tests are; each test puts back the appearance it found.
  */
 @RunWith(AndroidJUnit4::class)
@@ -106,7 +110,13 @@ class PassportDeviceTest {
 
     /** A finger on what has [tag], scrolled into the window and up clear of the tab bar floating over the page first. */
     private fun tap(tag: String) {
-        val node = compose.onNodeWithTag(tag).performScrollTo()
+        reveal(compose.onNodeWithTag(tag)).performClick()
+        compose.waitForIdle()
+    }
+
+    /** What [node] finds, scrolled into the window and up clear of the tab bar floating over the page. */
+    private fun reveal(node: SemanticsNodeInteraction): SemanticsNodeInteraction {
+        node.performScrollTo()
         val bounds = node.getBoundsInRoot()
         // A phone's tab bar, at the foot of the window; a tablet's stands at its top, over nothing it scrolls.
         val bar = compose.onAllNodes(hasTestTag(TAB_BAR)).fetchSemanticsNodes().firstOrNull()?.boundsInRoot
@@ -122,8 +132,7 @@ class PassportDeviceTest {
             }
             compose.waitForIdle()
         }
-        node.performClick()
-        compose.waitForIdle()
+        return node
     }
 
     /** A finger where [tag] shows, on whatever stands over it there. */
@@ -178,6 +187,37 @@ class PassportDeviceTest {
         assertEquals(12, compose.onAllNodes(SemanticsMatcher("a stamp") { node ->
             node.config.getOrNull(SemanticsProperties.TestTag)?.startsWith("$PASSPORT_STAMP.") == true
         }, useUnmergedTree = true).fetchSemanticsNodes().size)
+        shot()
+    }
+
+    /** The stamps shown, in the tree's order, by id. */
+    private fun stamps(): List<String> = compose.onAllNodes(
+        SemanticsMatcher("a stamp") { it.config.getOrNull(SemanticsProperties.TestTag)?.startsWith("$PASSPORT_STAMP.") == true }, useUnmergedTree = true,
+    )
+        .fetchSemanticsNodes()
+        .map { it.config[SemanticsProperties.TestTag].removePrefix("$PASSPORT_STAMP.") }
+
+    /**
+     * A-ST29: with nothing delivered the times wait for a whole journey, no country shows, and the first three stamps are
+     * next, the rest behind All stamps.
+     */
+    @Test
+    fun withNothingDeliveredTheTimesWaitAndTheFirstThreeStampsAreNext() {
+        show(emptyList(), reader)
+        assertEquals(listOf("first", "ten", "carriers"), stamps())
+        assertTrue(exists(PASSPORT_SHOW_ALL))
+        assertFalse(exists(PASSPORT_AVERAGE))
+        assertFalse(exists(PASSPORT_COUNTRIES))
+        reveal(compose.onNodeWithText("Waiting for a complete journey"))
+        shot()
+    }
+
+    /** A-ST29: the stamps earned and the next three, the rest behind All stamps. */
+    @Test
+    fun theStampsEarnedAndTheNextThreeShowUntilAllStamps() {
+        show(PassportFixtures.delivered(3), reader)
+        assertEquals(listOf("first", "ten", "carriers", "speed", "acrossBorders", "rightNextDoor"), stamps())
+        reveal(compose.onNodeWithTag(PASSPORT_SHOW_ALL))
         shot()
     }
 

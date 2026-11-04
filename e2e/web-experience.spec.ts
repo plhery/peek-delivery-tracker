@@ -195,11 +195,11 @@ test('updates an open settings sheet from dark to system and follows OS changes'
   await demo(page);
   const sheet = await settings(page);
   await sheet.getByRole('button', { name: 'Dark', exact: true }).click();
-  await expect(sheet).toHaveCSS('background-color', 'rgb(21, 25, 21)');
+  await expect(sheet).toHaveCSS('background-color', 'rgb(26, 23, 19)');
   await sheet.getByRole('button', { name: 'System', exact: true }).click();
   await expect(sheet).toHaveCSS('background-color', 'rgb(244, 245, 241)');
   await page.emulateMedia({ colorScheme: 'dark' });
-  await expect(sheet).toHaveCSS('background-color', 'rgb(21, 25, 21)');
+  await expect(sheet).toHaveCSS('background-color', 'rgb(26, 23, 19)');
   await sheet.getByRole('button', { name: 'Light', exact: true }).click();
   await expect(sheet).toHaveCSS('background-color', 'rgb(244, 245, 241)');
   await page.reload();

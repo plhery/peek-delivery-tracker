@@ -92,7 +92,7 @@ test('a delivered parcel says so where its card stands, then the card travels to
   const stood = await box(page, '.delivery-next [data-parcel-id="tea"]');
   await expect(next.locator('.parcel-card__summary')).toContainText('Delivered');
   await expect(next.locator('.parcel-card__next-label')).toBeHidden();
-  await expect(next.locator('.parcel-stamp__postmark')).toBeVisible();
+  await expect(next.locator('.parcel-stamp__around .parcel-stamp__postmark')).toBeVisible();
   await expect(page.getByRole('region', { name: 'On the way' }).locator('.parcel-section__heading > span')).toHaveText('3');
   await expect(page.locator('.parcel-section--past [data-parcel-id="tea"]')).toHaveCount(0);
   // Paper is thrown from the card, over the screen and out of a finger's way.

@@ -753,6 +753,34 @@ describe('persistent tracking routing', () => {
     const shown = await router.fetch(parcel({ carrier: 'ups', carrier_data: { routing } }), false);
     expect(shown.result.routing).not.toHaveProperty('written_ahead');
   });
+  it('keeps the steps a carrier plans for the timeline until its next answer, or its finding no history, replaces them', async () => {
+    const { router, direct, universal } = setup();
+    const planned = [{ time: '2026-09-12T10:00:00+08:00', description: 'Departed the origin hub', stage: 'in_transit' },
+      { time: '2026-09-15T15:00:00+08:00', description: 'Delivered', stage: 'delivered' }];
+    // The carrier answers with its scan and lists, beside it, the steps it wrote ahead.
+    direct.mockResolvedValue({ ...directValue(), result: { ...history(), planned_events: planned } as CarrierResult });
+    const first = await router.fetch(parcel({ carrier: 'ups' }), false);
+    const kept = (first.result.routing as JsonObject).planned;
+    expect(kept).toEqual({ number: 'TEST1234', carriers: { ups: planned } });
+    // Its list is never the parcel's data.
+    expect(first.result).toHaveProperty('planned_events');
+    // A failed check keeps them.
+    const routing = state({ configured_carrier: 'ups', confirmed_carrier: 'ups', confirmed_number: 'TEST1234', planned: kept });
+    direct.mockRejectedValue(new TransportError('UPS', 'down'));
+    universal.mockResolvedValue(history());
+    const failed = await router.fetch(parcel({ carrier: 'ups', carrier_data: { routing } }), false);
+    expect((failed.result.routing as JsonObject).planned).toEqual(kept);
+    // Its answer without a plan drops them; another number's plan is not this parcel's.
+    direct.mockResolvedValue(directValue());
+    const answered = await router.fetch(parcel({ carrier: 'ups', carrier_data: { routing } }), false);
+    expect(answered.result.routing).not.toHaveProperty('planned');
+    // Finding no history for the number, it lists what it still plans.
+    const error = Object.assign(new NoHistoryError('UPS', 'UPS has no scans for the shipment yet', { reason: 'written_ahead' }), { plannedEvents: planned.slice(1) });
+    direct.mockRejectedValue(error);
+    const empty = await router.fetch(parcel({ carrier: 'ups', carrier_data: { routing } }), false).catch((value: unknown) => value);
+    const left = empty instanceof RoutingDeferred ? empty.routing : (empty as RoutedResult).result.routing as JsonObject;
+    expect(left.planned).toEqual({ number: 'TEST1234', carriers: { ups: planned.slice(1) } });
+  });
   it('sets aside a provider\'s copies of the rows a carrier answering on local clocks names as written ahead', async () => {
     fixedPlan('Ship24');
     const { router, direct, universal } = setup();

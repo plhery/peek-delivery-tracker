@@ -8,6 +8,7 @@ import { clockDay, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, relayCopies } from './relayCopies';
 import { repeatLeads } from './scanRepeats';
+import { servedPlannedSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
 import { isRecord, type JsonObject } from './types';
 
@@ -73,13 +74,19 @@ export function timeline(events: JsonObject[]): JsonObject[] {
   return events.filter((event) => !isOwnRow(event) || !(firstScan <= time(event)));
 }
 
-/** A package row without the carrier data that only the service reads. */
+/** A package row without the carrier data that only the service reads. Planned steps are served on their own (`planned_events`). */
 function withoutServiceData(row: JsonObject): JsonObject {
   const stored = isRecord(row.carrier_data) ? row.carrier_data : null;
-  if (!stored || !('add_recognition_pending' in stored || DIRECT_HISTORY in stored)) return row;
+  const planned = stored && isRecord(stored.routing) && 'planned' in stored.routing;
+  if (!stored || !('add_recognition_pending' in stored || DIRECT_HISTORY in stored || planned)) return row;
   const data = { ...stored };
   delete data.add_recognition_pending;
   delete data[DIRECT_HISTORY];
+  if (planned) {
+    const routing = { ...stored.routing as JsonObject };
+    delete routing.planned;
+    data.routing = routing;
+  }
   return { ...row, carrier_data: data };
 }
 
@@ -212,9 +219,16 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * reach back to it (see `timeline`), and a row of a relay pair or a carrier's repeat of a scan names the row it
  * is shown under (`relay_of`, see `relayLeads`, relayCopies.ts and scanRepeats.ts). A carrier's scan that names no place the
  * gazetteer finds, such as an office, takes the place of a left-out copy of it (`placeLenders`). A placeholder
- * number's parcel is served without what was stored from it (`withoutPlaceholderAnswers`).
+ * number's parcel is served without what was stored from it (`withoutPlaceholderAnswers`). The steps its carrier
+ * listed before they happen and that are still ahead are served apart from the scans (`planned_events`, plannedSteps.ts).
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
+  const served = placedEvents(row);
+  const planned = servedPlannedSteps(withoutPlaceholderAnswers(row), shownEvents(row));
+  return planned.length ? { ...served, planned_events: planned } : served;
+}
+
+function placedEvents(row: JsonObject): JsonObject {
   const stored = row;
   row = withoutPlaceholderAnswers(withoutServiceData(row));
   if (!Array.isArray(row.tracking_events) || !row.tracking_events.length) return row;

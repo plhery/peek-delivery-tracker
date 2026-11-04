@@ -50022,6 +50022,14 @@ export interface ApiTrackingEventRow {
   "tie_order"?: number;
 }
 
+export interface ApiPlannedTrackingEvent {
+  "description": string;
+  "stage": ApiStage;
+  "location": string | null;
+  "occurred_at": string;
+  "day"?: string;
+}
+
 export interface ApiPackageRow {
   "id": string;
   "tracking_number": string;
@@ -50084,6 +50092,7 @@ export interface ApiPackageRow {
   "archived_at": string | null;
   "notifications_muted": boolean;
   "tracking_events": Array<ApiTrackingEventRow> | null;
+  "planned_events"?: Array<ApiPlannedTrackingEvent>;
   "email_muted"?: boolean;
 }
 
@@ -50434,6 +50443,7 @@ export interface ApiPublicPackage {
   "archived_at": string | null;
   "notifications_muted": boolean;
   "tracking_events": Array<ApiTrackingEventRow>;
+  "planned_events"?: Array<ApiPlannedTrackingEvent>;
 }
 
 export interface ApiPublicParcelResponse {

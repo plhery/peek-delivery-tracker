@@ -19,6 +19,7 @@ import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, I
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
 import { plannedClocks } from './futureScans';
+import { plannedStepsOf, type PlannedStep } from './plannedSteps';
 import { eventTimestamp, latestResultTime, resultTimezone } from 'universal-parcel-scraper/app';
 import type { Recognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
@@ -133,6 +134,12 @@ export interface RoutingState extends JsonObject {
    * carrier's own answer showing one at its clock frees it.
    */
   written_ahead?: { number: string; carriers: Record<string, string[]> };
+  /**
+   * The steps each carrier listed for the number before they happen (`plannedStepsOf`): rows written ahead of their
+   * clock and scans not due yet. Only the timeline shows them, greyed (`servedPlannedSteps`). The carrier's answer
+   * replaces its own, as does its finding no history for the number; a failed check keeps them.
+   */
+  planned?: { number: string; carriers: Record<string, PlannedStep[]> };
   probe_cursor: number;
   discovery_cursor: number;
   failures: Record<string, Failure>;
@@ -572,7 +579,7 @@ export function earlierParcelRows(parcel: JsonObject): string[] | null {
 const KEPT_WITHOUT_EARLIER_PARCEL = ['lookup_country_hint', 'lookup_language', 'postcode_country', 'account_postcode', 'universal_input', 'add_recognition_pending', 'delivery_probe', 'earlier_checked_at'];
 /** Routing a reused number's earlier parcel taught: where its answers came from, its watermark and what filed or confirmed it. */
 const EARLIER_PARCEL_ROUTING = ['last_event_at', 'last_success_at', 'discovered_carrier', 'preferred_provider', 'preferred_number',
-  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested', 'likely_carrier', 'written_ahead'];
+  'reported_carriers_seen', 'provider_copy', 'set_aside', 'partial_history', 'partial_checked_at', 'label_rounds', 'carrier_named_at', 'input_suggested', 'likely_carrier', 'written_ahead', 'planned'];
 /**
  * The parcel as if it had never stored a reused number's earlier parcel (`earlierParcelRows`):
  * no stage, summary, estimate or rows of that parcel, nor the routing it taught, so the check
@@ -999,6 +1006,15 @@ export class TrackingRouter {
       if (Object.keys(carriers).length) state.written_ahead = { number, carriers };
       else delete state.written_ahead;
     };
+    // The steps a carrier lists before they happen, which only the timeline shows (plannedSteps.ts).
+    const keepPlanned = (carrier: string, steps: readonly PlannedStep[]) => {
+      const kept = state.planned;
+      const carriers = isRecord(kept) && kept.number === number && isRecord(kept.carriers) ? { ...kept.carriers } : {};
+      if (steps.length) carriers[carrier] = [...steps];
+      else delete carriers[carrier];
+      if (Object.keys(carriers).length) state.planned = { number, carriers };
+      else delete state.planned;
+    };
     let attempts = 0;
     // Probes are this parcel's own guesses: they are no evidence of provider health.
     let probeContacts = 0;
@@ -1069,6 +1085,7 @@ export class TrackingRouter {
         // An answer names the rows it holds back as written ahead beside the scans it keeps, as a
         // failure does: a provider asked after it shows its copies of them as scans.
         holdBack(carrier, value.result.written_ahead ?? [], value.result);
+        keepPlanned(carrier, plannedStepsOf(value.result));
         // An empty summary archive binds the fallback to this parcel without
         // creating a scan; earlier real scans survive when it is merged.
         const capturedHistory = hasUnresolvedDirectHistory(value.sourceCarrierId, value.result)
@@ -1182,6 +1199,8 @@ export class TrackingRouter {
         const failure = fail(carrier, error);
         if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
         holdBack(carrier, writtenAheadClocks(error));
+        // A carrier finding no history for the number lists what it still plans, or nothing.
+        if (failure.kind === 'not_found' || failure.kind === 'no_history' || plannedStepsOf(error).length) keepPlanned(carrier, plannedStepsOf(error));
         // A probe asks only a carrier that knows the number: wanting an input, it holds the parcel behind it.
         if (probe && failure.kind === 'input_required') heldDirect.add(carrier);
         if (probe && ['rate_limited', 'verification', 'schema', 'transport'].includes(failure.kind)) unsettledDirect.add(carrier);

@@ -2835,6 +2835,14 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
     }
 }
 
+struct PlannedTrackingEvent: Codable, Equatable, Hashable, Sendable {
+    var description: String
+    var stage: TrackingStage
+    var location: String? = nil
+    var occurredAt: String
+    var day: String? = nil
+}
+
 struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var id: UUID
     var trackingNumber: String
@@ -2852,6 +2860,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var archivedAt: String? = nil
     var notificationsMuted: Bool
     var trackingEvents: [TrackingEvent] = []
+    var plannedEvents: [PlannedTrackingEvent]? = nil
     var emailMuted: Bool? = nil
 
     private enum CodingKeys: String, CodingKey {
@@ -2871,6 +2880,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case archivedAt
         case notificationsMuted
         case trackingEvents
+        case plannedEvents
         case emailMuted
     }
 }
@@ -3384,6 +3394,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
     var archivedAt: String? = nil
     var notificationsMuted: Bool
     var trackingEvents: [TrackingEvent]
+    var plannedEvents: [PlannedTrackingEvent]? = nil
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -3403,6 +3414,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
         case archivedAt
         case notificationsMuted
         case trackingEvents
+        case plannedEvents
     }
 }
 
@@ -3962,6 +3974,7 @@ extension Parcel {
         archivedAt = try values.decodeIfPresent(String.self, forKey: .archivedAt)
         notificationsMuted = try values.decode(Bool.self, forKey: .notificationsMuted)
         trackingEvents = try values.decodeIfPresent([TrackingEvent].self, forKey: .trackingEvents) ?? []
+        plannedEvents = try values.decodeIfPresent([PlannedTrackingEvent].self, forKey: .plannedEvents)
         emailMuted = try values.decodeIfPresent(Bool.self, forKey: .emailMuted)
     }
 }

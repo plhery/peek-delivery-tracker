@@ -9,6 +9,7 @@ import type {
   ApiParcelAlerts,
   ApiParcelLink,
   ApiParcelNumberHint,
+  ApiPlannedTrackingEvent,
   ApiPublicPackage,
   ApiPublicParcelResponse,
   ApiSyncStatus,
@@ -441,6 +442,11 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
     ...(typeof event.recipient_action === 'string' ? { recipient_action: event.recipient_action as ApiTrackingEventRow['recipient_action'] } : {}),
     ...(tieOrder(event.tie_order) >= 0 ? { tie_order: tieOrder(event.tie_order) } : {}),
   }));
+  const planned: ApiPlannedTrackingEvent[] = (Array.isArray(row.planned_events) ? row.planned_events.filter(isRecord) : []).map((step) => ({
+    description: String(step.description ?? ''), stage: String(step.stage ?? 'in_transit') as ApiTrackingEventRow['stage'],
+    location: typeof step.location === 'string' ? step.location : null, occurred_at: String(step.occurred_at ?? ''),
+    ...(typeof step.day === 'string' ? { day: step.day } : {}),
+  }));
   const carrierData = isRecord(row.carrier_data) ? row.carrier_data : {};
   const destination = typeof carrierData.destination_country === 'string' && /^[A-Za-z]{2}$/.test(carrierData.destination_country)
     ? carrierData.destination_country.toUpperCase() : null;
@@ -489,6 +495,8 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       archived_at: null,
       notifications_muted: false,
       tracking_events: wrapped ? giftEvents(events, destination) : events,
+      // A wrapped gift tells nothing of where its parcel is going before it gets there.
+      ...(!wrapped && planned.length ? { planned_events: planned } : {}),
     },
   };
 }

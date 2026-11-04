@@ -53273,6 +53273,42 @@
           }
         }
       },
+      "PlannedTrackingEvent": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "description",
+          "stage",
+          "location",
+          "occurred_at"
+        ],
+        "description": "A step the carrier listed before it happened, not a scan: a row it wrote ahead of its own date, such as a script of the whole journey written when the order was made, or a scan it entered at its planned time. Apps show it greyed in the timeline, as planned by the carrier and not confirmed, and nowhere else: it sets no stage, status, estimate, alert or count. The server serves only those still ahead of the parcel's scans; a scan that tells one replaces it.",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/Stage",
+            "description": "The stage the carrier gave the step, or in_transit when it gave none."
+          },
+          "location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "occurred_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the carrier planned the step. With day, the start of that day in the carrier's zone."
+          },
+          "day": {
+            "type": "string",
+            "format": "date",
+            "description": "Set when the carrier dated the step by its day alone: apps show no time for it."
+          }
+        }
+      },
       "PackageRow": {
         "type": "object",
         "additionalProperties": false,
@@ -53666,6 +53702,13 @@
                 "type": "null"
               }
             ]
+          },
+          "planned_events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlannedTrackingEvent"
+            },
+            "description": "The steps the carrier planned that are still ahead of the scans, oldest first; absent when none. Never scans: see PlannedTrackingEvent."
           },
           "email_muted": {
             "type": "boolean",
@@ -55168,6 +55211,13 @@
             "items": {
               "$ref": "#/components/schemas/TrackingEventRow"
             }
+          },
+          "planned_events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlannedTrackingEvent"
+            },
+            "description": "The steps the carrier planned that are still ahead of the scans, oldest first; absent when none. Never scans: see PlannedTrackingEvent."
           }
         }
       },

@@ -2837,6 +2837,15 @@ data class TrackingEvent(
 )
 
 @Serializable
+data class PlannedTrackingEvent(
+    val description: String,
+    val stage: TrackingStage,
+    val location: String? = null,
+    @SerialName("occurred_at") val occurredAt: String,
+    val day: String? = null,
+)
+
+@Serializable
 data class Parcel(
     val id: UUID,
     @SerialName("tracking_number") val trackingNumber: String,
@@ -2854,6 +2863,7 @@ data class Parcel(
     @SerialName("archived_at") val archivedAt: String? = null,
     @SerialName("notifications_muted") val notificationsMuted: Boolean,
     @SerialName("tracking_events") @Serializable(with = TrackingEventsSerializer::class) val trackingEvents: List<TrackingEvent> = emptyList(),
+    @SerialName("planned_events") val plannedEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("email_muted") val emailMuted: Boolean? = null,
 )
 
@@ -3315,6 +3325,7 @@ data class PublicPackage(
     @SerialName("archived_at") val archivedAt: String? = null,
     @SerialName("notifications_muted") val notificationsMuted: Boolean,
     @SerialName("tracking_events") val trackingEvents: List<TrackingEvent>,
+    @SerialName("planned_events") val plannedEvents: List<PlannedTrackingEvent>? = null,
 )
 
 @Serializable

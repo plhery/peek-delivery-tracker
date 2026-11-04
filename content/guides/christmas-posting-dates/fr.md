@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-10-28
 ---
 
-On n'a trouvé aucune date de Noël 2026 pour La Poste (Colissimo), Chronopost ou Mondial Relay : vérifie sur leur site avant d'envoyer. [La Poste suisse](carrier:swiss-post), elle, a déjà fixé le mercredi 23 décembre 2026 pour le Courrier A et le PostPac Priority. Les dates des tableaux ont été vérifiées le mercredi 28 octobre 2026.
+Pour Noël 2026, deux transporteurs de ce guide ont déjà publié leurs dates : [La Poste suisse](carrier:swiss-post), avec le mercredi 23 décembre pour le Courrier A et le PostPac Priority, et DPD Belgium, qui livre avant Noël en Belgique les colis enlevés jusqu'au mardi 22 décembre. Pour La Poste (Colissimo), Chronopost et Mondial Relay, on n'a trouvé aucune date 2026 : vérifie sur leur site avant d'envoyer. Pour Colissimo, tu trouveras plus bas les dates de 2025 qu'il donnait à ses clients pros. Chez bpost et POST Luxembourg, on n'a trouvé aucune date de Noël, ni pour 2025 ni pour 2026.
 
 ## France : La Poste, Colissimo, Chronopost et Mondial Relay
 
@@ -15,7 +15,7 @@ Côté France, on n'a trouvé aucune date 2026 pour l'instant :
 
 | Transporteur | Service | Envoyer au plus tard |
 | --- | --- | --- |
-| [La Poste](carrier:la-poste), Colissimo | Tous services | Pas de date trouvée : regarde sur son site |
+| [La Poste](carrier:la-poste), Colissimo | Tous services | Pas encore annoncée (2025, pour ses clients pros, en France : samedi 20 décembre pour une livraison en J+2, lundi 22 en J+1, mardi 23 en J) |
 | [Chronopost](carrier:chronopost) | Tous services | Pas de date trouvée : regarde sur son site |
 | [Mondial Relay](carrier:mondial-relay) | Point Relais, Locker | Pas de date trouvée : regarde sur son site |
 | [Colis Privé](carrier:colis-prive) | Tous services | Pas encore annoncée (2025 : aucune date trouvée) |
@@ -62,7 +62,7 @@ Selon POST, un envoi ordinaire est « généralement remis en J+1 » dans le pay
 
 ## Envoyer un colis à l'étranger pour Noël
 
-Les dates pour l'étranger tombent plus tôt, parfois dès novembre. Pour un Colissimo vers l'étranger, on n'a pas trouvé de date 2026 non plus : regarde sur le site de La Poste.
+Les dates pour l'étranger tombent plus tôt, parfois dès novembre. Pour un Colissimo vers l'étranger, on n'a pas trouvé de date 2026 non plus : regarde sur le site de La Poste. En 2025, Colissimo demandait à ses clients pros de déposer au plus tard le jeudi 18 décembre vers l'Allemagne, la Belgique, l'Espagne, le Luxembourg ou le Royaume-Uni, le mercredi 17 vers la Suisse ou l'Italie, le samedi 13 vers les États-Unis, le Canada ou le Japon, et le mardi 9 vers les pays qu'il range dans le « reste du monde ».
 
 | Depuis | Transporteur et service | Envoyer au plus tard |
 | --- | --- | --- |
@@ -109,6 +109,7 @@ Pas encore envoyé et la date est passée ? Un service plus rapide ferme souvent
 Tu attends un cadeau ? Colle son numéro dans [Peek](/) et choisis les notifications « Livraison seulement » : il vérifie le suivi jusqu'à toutes les 2 minutes une fois le colis en cours de livraison, sans pouvoir le faire arriver plus tôt. Indiqué livré, mais rien à ta porte ? Lis [colis livré mais non reçu](guide:delivered-not-received).
 
 :::sources
+- [Colissimo : Peak Period, Colissimo est à vos côtés comme chaque année](https://www.colissimo.entreprise.laposte.fr/actualite/peak-period-colissimo-est-vos-cotes-comme-chaque-annee) – dates limites de dépôt 2025, France et international
 - [Mondial Relay Belgique : Délai de garde en Locker ou Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires en Belgique, jours fériés compris, sans prolongation
 - [Colis Privé : Actualités](https://colisprive.fr/nos-actualites/) – pas de date
 - [bpost : Changes to bpost services (en anglais)](https://www.bpost.be/en/changes-bpost-services) – 25 décembre

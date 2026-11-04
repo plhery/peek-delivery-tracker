@@ -4,14 +4,14 @@ description: Bis wann musst du Pakete und Briefe für Weihnachten abgeben? Die F
 slug: weihnachten-paket-letzter-termin
 picture: Ein Kalenderblatt mit einem eingekreisten Dezembertag, ein Lieferwagen, der ein Paket mit roter Schleife durch fallenden Schnee fährt, und Pip, der nebenher eilt.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
-DHL und die Deutsche Post haben ihre Weihnachtstermine für 2026 veröffentlicht: Pakete, Briefe und Postkarten innerhalb Deutschlands gibst du bis Montag, 21. Dezember, ab. [GLS](carrier:gls-de) nennt ebenfalls Montag, 21. Dezember, 12 Uhr, und die [Schweizerische Post](carrier:swiss-post) Mittwoch, 23. Dezember, für A-Post und PostPac Priority. Die Tabellen zeigen die Frist jedes Paketdiensts, wie sie auf seinen eigenen Seiten stand (bei DHL, der Deutschen Post und der Schweizerischen Post am Dienstag, 27. Oktober 2026, sonst am Freitag, 9. Oktober), und das Datum vom Vorjahr, wo das neue noch fehlt.
+DHL, die Deutsche Post, Hermes, [GLS](carrier:gls-de) und die [Schweizerische Post](carrier:swiss-post) haben ihre Weihnachtstermine für 2026 veröffentlicht: Innerhalb Deutschlands gibst du Pakete, Briefe und Postkarten bei DHL und der Deutschen Post bis Montag, 21. Dezember, ab, Pakete bei GLS bis Montag, 21. Dezember, 12 Uhr, und im Hermes PaketShop bis Samstag, 19. Dezember. In der Schweiz gilt Mittwoch, 23. Dezember, für A-Post und PostPac Priority. DPD und die Österreichische Post haben noch keine Termine für 2026 genannt: Für sie zeigen die Tabellen die Daten vom Vorjahr.
 
 ## Deutschland: DHL, Deutsche Post, Hermes, DPD und GLS
 
-DHL, die Deutsche Post und GLS haben ihre Fristen für 2026 veröffentlicht, [Hermes](carrier:hermes-de) zeigte am 9. Oktober noch seine Zusage für 2025. Heiligabend ist 2026 ein Donnerstag (2025: Mittwoch), die Daten vom Vorjahr sind also nur ein Anhaltspunkt. Alle Termine gelten für Sendungen innerhalb Deutschlands.
+DHL, die Deutsche Post, [Hermes](carrier:hermes-de) und GLS haben ihre Fristen für 2026 veröffentlicht, [DPD](carrier:dpd-de) noch nicht. Heiligabend ist 2026 ein Donnerstag (2025: Mittwoch), die DPD-Daten vom Vorjahr sind also nur ein Anhaltspunkt. Alle Termine gelten für Sendungen innerhalb Deutschlands.
 
 | Paketdienst | Service | Abgabe bis |
 | --- | --- | --- |
@@ -20,9 +20,9 @@ DHL, die Deutsche Post und GLS haben ihre Fristen für 2026 veröffentlicht, [He
 | Deutsche Post | Einschreiben | Dienstag, 22. Dezember |
 | [DHL Express](carrier:dhl-express) | Express national, bis zur jeweiligen Versandschlusszeit | Dienstag, 22. Dezember |
 | DHL Paket | Geschäftskunden, Regelabholung | Dienstag, 22. Dezember |
-| Hermes | Abgabe im PaketShop bis 12 Uhr | Noch nicht veröffentlicht (2025: Freitag, 19. Dezember) |
-| Hermes | Paket- oder Gepäckabholung an der Haustür | Noch nicht veröffentlicht (2025: Freitag, 19. Dezember) |
-| [DPD](carrier:dpd-de) | Standard-Pakete | Noch nicht veröffentlicht (2025: Freitag, 19. Dezember) |
+| Hermes | Abgabe im PaketShop | Samstag, 19. Dezember |
+| Hermes | Paket- oder Gepäckabholung an der Haustür | Beauftragen bis Freitag, 18. Dezember, letzte Abholung Samstag, 19. Dezember |
+| DPD | Standard-Pakete | Noch nicht veröffentlicht (2025: Freitag, 19. Dezember) |
 | DPD | Express und Priority | Noch nicht veröffentlicht (2025: Dienstag, 23. Dezember) |
 | GLS | Pakete, Abgabe bis 12 Uhr | Montag, 21. Dezember |
 
@@ -66,16 +66,16 @@ Ins Ausland gelten je nach Zielland deutlich frühere Fristen. Die Österreichis
 
 | Von | Paketdienst und Ziel | Abgabe bis |
 | --- | --- | --- |
-| Deutschland | DHL Pakete in Nachbarländer | 17. Dezember (bei DHL „Samstag“, der 17. ist aber ein Donnerstag) |
-| Deutschland | DHL Pakete in sonstige europäische Länder | 14. Dezember (bei DHL „Mittwoch“, der 14. ist aber ein Montag) |
+| Deutschland | DHL Pakete in Nachbarländer | Donnerstag, 17. Dezember |
+| Deutschland | DHL Pakete in sonstige europäische Länder | Montag, 14. Dezember |
 | Deutschland | DHL Pakete außerhalb Europas | Donnerstag, 26. November |
 | Deutschland | Deutsche Post, Briefe und Postkarten | Europa: Mittwoch, 9. Dezember. Außerhalb Europas: Mittwoch, 25. November |
-| Deutschland | DHL Express ins Ausland | Dienstag, 22. Dezember, bis zur jeweiligen Versandschlusszeit |
-| Deutschland | Hermes in EU-Länder, PaketShop bis 12 Uhr | Noch nicht veröffentlicht (2025: je nach Land Montag, 8., bis Montag, 15. Dezember; Österreich: Freitag, 12. Dezember) |
+| Deutschland | DHL Express ins Ausland, bis zur jeweiligen Versandschlusszeit | Europa: Dienstag, 22. Dezember. Außerhalb Europas: Freitag, 18. Dezember |
+| Deutschland | Hermes in EU-Länder, Abgabe im PaketShop | Montag, 14. Dezember, auch nach Österreich. Finnland, Italien, Polen, Portugal und Spanien: Samstag, 12. Dezember |
 | Deutschland | DPD innerhalb Europas | Noch nicht veröffentlicht (2025: Mittwoch, 17. Dezember) |
-| Deutschland | GLS in EU-Nachbarländer | Freitag, 18. Dezember |
-| Deutschland | GLS in alle weiteren EU-Länder | Donnerstag, 17. Dezember |
-| Deutschland | GLS international | Dienstag, 15. Dezember |
+| Deutschland | GLS in EU-Nachbarländer | Freitag, 18. Dezember, 12 Uhr |
+| Deutschland | GLS in alle weiteren EU-Länder | Donnerstag, 17. Dezember, 12 Uhr |
+| Deutschland | GLS international | Dienstag, 15. Dezember, 12 Uhr |
 | Österreich | Post, Paket International | Noch nicht veröffentlicht (2025: angrenzende Länder Donnerstag, 18. Dezember; Europa Mittwoch, 17. Dezember; Rest der Welt Dienstag, 16. Dezember) |
 | Österreich | Post, Priority-Brief | Noch nicht veröffentlicht (2025: Europa Montag, 15. Dezember; Rest der Welt Mittwoch, 10. Dezember) |
 | Österreich | Post Express International | Noch nicht veröffentlicht (2025: Europa Freitag, 19. Dezember; Rest der Welt Mittwoch, 17. Dezember) |
@@ -84,7 +84,6 @@ Ins Ausland gelten je nach Zielland deutlich frühere Fristen. Die Österreichis
 | Schweiz | URGENT Waren | Europa: Donnerstag, 10. Dezember. Übrige Länder: Dienstag, 8. Dezember |
 | Schweiz | Dokumente und Kleinwaren | Europa: Dienstag, 8. Dezember. Übrige Länder: Dienstag, 1. Dezember |
 
-- **DHL-Termine ins Ausland:** Bei zwei Terminen passt der Wochentag nicht zum Datum. Halt dich ans Datum, es ist jeweils der frühere Tag.
 - **Online frankiert:** Pakete ins Ausland, die du online frankierst, darfst du bei DHL 1 bis 2 Tage später einliefern.
 - **Inseln und abgelegene Orte:** Auch ins Ausland rät DHL, auf Inseln 1 bis 2 Tage früher einzuliefern. Hermes nennt für Inseln und Überseegebiete wie die Kanaren, die Azoren oder Madeira keinen Termin, für die Schweiz und Großbritannien ebenfalls nicht. Die URGENT-Laufzeiten der Schweizerischen Post gelten nur für Wirtschafts- und Ballungszentren.
 - **GLS** sagt nicht, welche Länder zu den „EU-Nachbarländern“ zählen und welche zu „allen weiteren EU-Ländern“. Im Zweifel nimm den früheren Tag.
@@ -124,7 +123,7 @@ Wartest du auf ein Geschenk? Füg die Sendungsnummer in [Peek](/) ein und stell 
 - [GLS: Start in die Peak Season 2025](https://newsroom.de.gls-group.com/news/mehr-kapazit-ten--smarte-planung-und-starke-teamleistung--gls-germany-startet-erfolgreich-in-die-pea/s/ee77fd1d-45ba-48d0-bc6b-265a035fd5a0) – Betrieb zwischen Weihnachten und Neujahr
 - [DHL: Weihnachten mit DHL](https://www.dhl.de/de/privatkunden/kampagnenseiten/weihnachten.html) – Termine 2026 für Pakete, Briefe und Express im Inland und ins Ausland, Online-Frankierung, Inseln, Faden und Schleife
 - [DHL Geschäftskunden: Weihnachten 2026, Versandlösungen und Fristen](https://www.dhl.de/de/geschaeftskunden/paket/information/business-weihnachten.html) – Regelabholung bis 22.12., keine Abholungen am 24.12., Kleinpaket und Sperrgut, Spitzentage
-- [Hermes: Weihnachtslieferzusage](https://www.myhermes.de/weihnachten/) – Termine 2025, erster Zustellversuch, EU-Länder, ausgenommene Gebiete
+- [Hermes: Weihnachtslieferzusage](https://www.myhermes.de/weihnachten/) – Termine 2026, erster Zustellversuch, EU-Länder, ausgenommene Gebiete
 - [Hermes Newsroom: Geschenkeversand, eine Checkliste](https://newsroom.hermesworld.com/geschenkeversand-eine-checkliste-bis-wann-pakete-fuer-weihnachten-verschicken-fristen-und-versandtipps-32691/) – Außendeko, Öffnungszeiten der PaketShops
 - [DPD: Versandfristen für die Paketzustellung an Weihnachten](https://www.dpd.com/de/de/news/versandfristen-fuer-die-paketzustellung-an-weihnachten/) – Termine 2025, 12 Uhr im Pickup Paketshop
 - [DPD: Delivery times for parcel delivery at Christmas](https://www.dpd.com/de/en/news/delivery-times-for-parcel-delivery-at-christmas/) – englische Fassung, Express als Zustelltag

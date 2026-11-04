@@ -7,21 +7,21 @@ published: 2026-10-09
 updated: 2026-10-28
 ---
 
-Poczta Polska, DPD i GLS nie podały jeszcze terminów na święta 2026. W 2025 roku [Poczta Polska](carrier:poczta-polska) radziła nadać paczkę najpóźniej w niedzielę 21 grudnia, a [InPost](carrier:inpost) gwarantował, że paczki nadane do poniedziałku 22 grudnia dotrą do wtorku 23 grudnia. Tam, gdzie tegorocznych terminów jeszcze nie ma, tabele poniżej podają zeszłoroczne: Poczty Polskiej, DPD i GLS z ich stron, sprawdzonych w piątek 9 października 2026 r., a InPostu za portalem Super Biznes. Terminy InPostu, DHL i ORLEN Paczki na 2026 r. sprawdzisz na ich stronach.
+InPost, Poczta Polska, ORLEN Paczka, DPD i GLS nie podały jeszcze terminów na święta 2026, a u DHL eCommerce też ich nie znaleźliśmy. W 2025 roku [Poczta Polska](carrier:poczta-polska) radziła nadać paczkę najpóźniej w niedzielę 21 grudnia, a [InPost](carrier:inpost) gwarantował, że paczki nadane do poniedziałku 22 grudnia dotrą do wtorku 23 grudnia. Wszystkie terminy w tabelach poniżej są więc zeszłoroczne: Poczty Polskiej i DPD z ich stron, a InPostu za portalem Super Biznes.
 
 ## Polska: InPost, Poczta Polska, ORLEN Paczka, DPD, DHL i GLS
 
-Na 9 października Poczta Polska, DPD i GLS nie miały jeszcze stron o świętach 2026. [DPD](carrier:dpd-pl) pisze tylko „Tryb pracy na grudzień i styczeń - wkrótce”. Daty poniżej są więc zeszłoroczne, dla paczek wysyłanych w Polsce.
+U żadnego z tych przewoźników nie znaleźliśmy jeszcze terminów na święta 2026. [DPD](carrier:dpd-pl) pisze tylko „Tryb pracy na grudzień i styczeń - wkrótce”. Daty poniżej są więc zeszłoroczne, dla paczek wysyłanych w Polsce.
 
 | Przewoźnik | Usługa | Nadaj do |
 | --- | --- | --- |
-| InPost | Paczka w kraju, nadana w Paczkomacie albo w PaczkoPunkcie | Na 2026 r. sprawdź na stronie InPost (2025: poniedziałek, 22 grudnia, do 13:00, 14:00, 15:00 lub 16:00 zależnie od strefy) |
+| InPost | Paczka w kraju, nadana w Paczkomacie albo w PaczkoPunkcie | Nie ogłoszono jeszcze (2025: poniedziałek, 22 grudnia, do 13:00, 14:00, 15:00 lub 16:00 zależnie od strefy) |
 | Poczta Polska | Paczka w kraju, z pewnością dostawy do 23 grudnia | Nie ogłoszono jeszcze (2025: niedziela, 21 grudnia) |
 | Poczta Polska | Paczka w kraju, ostatnia szansa: do 15:00 w placówce, automacie lub punkcie partnerskim, do 17:00 u kuriera | Nie ogłoszono jeszcze (2025: poniedziałek, 22 grudnia) |
 | Poczta Polska | Listy i kartki w kraju | Nie ogłoszono jeszcze (2025: terminy podano tylko dla paczek) |
-| [ORLEN Paczka](carrier:orlen-paczka) | Paczki w kraju | Sprawdź na stronie ORLEN Paczki |
+| [ORLEN Paczka](carrier:orlen-paczka) | Paczki w kraju | Nie ogłoszono jeszcze |
 | DPD Polska | Paczki krajowe: kurier, punkty i automaty DPD Pickup | Nie ogłoszono jeszcze (2025: brak terminu) |
-| [DHL eCommerce](carrier:dhl-ecommerce-pl) | Paczki w kraju | Sprawdź na stronie DHL eCommerce |
+| [DHL eCommerce](carrier:dhl-ecommerce-pl) | Paczki w kraju | Nie znaleźliśmy jeszcze terminu: sprawdź na stronie DHL eCommerce |
 | GLS | Paczki krajowe | Nie ogłoszono jeszcze (2025: brak terminu) |
 
 Co kryje się za tymi datami:
@@ -61,7 +61,7 @@ Na co uważać:
 
 - **Godzina nadania.** W Poczcie Polskiej list nadany po 15:00 liczy się jako nadany następnego dnia, a czasy paczek priorytetowych dotyczą nadania do 15:00.
 - **Paczka ekonomiczna poza Europę.** Płynie statkiem tygodniami, więc do Kanady, Australii czy Nowej Zelandii wyślij ją jeszcze w październiku albo na początku listopada.
-- **USA.** Od poniedziałku 25 sierpnia 2025 r. Poczta Polska nie przyjmuje przesyłek z towarami do Stanów Zjednoczonych i 9 października 2026 r. nadal tak było. Kartkę lub list bez towaru wyślesz jako zwykły albo polecony, a dokumenty także jako EMS. Prezentu w paczce Pocztą Polską tam nie nadasz.
+- **USA.** Od poniedziałku 25 sierpnia 2025 r. Poczta Polska nie przyjmuje przesyłek z towarami do Stanów Zjednoczonych i nadal tak jest. Kartkę lub list bez towaru wyślesz jako zwykły albo polecony, a dokumenty także jako EMS. Prezentu w paczce Pocztą Polską tam nie nadasz.
 - **Kraje spoza UE.** Deklarację celną wypełnia nadawca, a Poczta Polska ostrzega: „brak deklaracji celnej skutkuje zatrzymaniem przesyłki na granicy”. Dotyczy to też Wysp Kanaryjskich, Ceuty, Melilli, Wysp Owczych i Grenlandii.
 - **Zawieszenia.** Poczta Polska w 2026 r. kilka razy wstrzymywała i wznawiała przyjmowanie przesyłek do różnych krajów. Przed nadaniem sprawdź kraj na jej stronie [Realizacja przesyłek zagranicznych](https://www.poczta-polska.pl/realizacja-przesylek-zagranicznych/).
 - **Wyspy.** Do części krajów, na przykład Hiszpanii, Grecji czy Włoch, DPD Pickup wozi paczki tylko transportem drogowym. Gdzie nie da się dojechać, usługa jest niedostępna, więc wyspa może być poza zasięgiem.
@@ -104,6 +104,9 @@ Czekasz na prezent? Wklej jego numer do [Peeka](/) i ustaw powiadomienia na „T
 - [Poczta Polska: Informacje dodatkowe dotyczące usług pocztowych w obrocie zagranicznym (PDF)](https://www.poczta-polska.pl/wp-content/uploads/2026/09/informacje_dodatkowe_dot_uslug_w_obrocie_zagranicznym-1.pdf) – paczki priorytetowe, wyspy
 - [Poczta Polska: Terminy doręczania paczek ekonomicznych (PDF)](https://www.poczta-polska.pl/wp-content/uploads/2023/09/Terminy_paczkapocztowazagraniczna_ekonomiczna.pdf) – paczki ekonomiczne, drogą morską
 - [Super Biznes: Gwarancja dostawy paczek na święta: terminy InPost i Poczty Polskiej](https://superbiz.se.pl/wiadomosci/inpost-i-poczta-polska-gwarantuja-dostawe-paczek-na-swieta-do-kiedy-najpozniej-trzeba-nadac-wysylke-aa-RLir-pGf8-PJdj.html) – 17 grudnia 2025 r.: InPost, 22 i 23 grudnia, strefy A–D, Paczkomat i PaczkoPunkt, bez paczek z zagranicy i za granicę
+- [InPost: Aktualności](https://inpost.pl/aktualnosci) – brak terminów na święta 2026
+- [ORLEN Paczka: Aktualności](https://www.orlenpaczka.pl/aktualnosci/) – brak terminów na święta 2026
+- [DHL eCommerce: DHL24](https://dhl24.com.pl/) – brak terminów na święta 2026
 - [DPD Polska: Tryb pracy DPD Polska w IV kwartale 2026](https://www.dpd.com/pl/pl/2026/09/29/tryb-pracy-dpd-polska-w-iv-kwartale-2026/) – grudzień „wkrótce”
 - [DPD Polska: Tryb pracy DPD Polska w IV kwartale (2025)](https://www.dpd.com/pl/pl/2025/10/14/tryb-pracy-dpd-polska-w-iv-kwartale/) – 23 i 29 grudnia, dni wolne
 - [DPD Polska: Przewodnik po zakupach świątecznych](https://www.dpd.com/pl/pl/2025/12/01/przewodnik-po-zakupach-swiatecznych-z-dpd/) – zamawiaj z wyprzedzeniem

@@ -4,27 +4,27 @@ description: When to send for Christmas with Royal Mail, Evri, USPS, FedEx, An P
 slug: christmas-posting-dates
 picture: A December calendar page with one day circled, a van carrying a red-ribboned parcel through falling snow, and Pip hurrying alongside.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
-Royal Mail hasn't published its 2026 Christmas dates yet: in 2025, the last days to post in the UK were Wednesday 17 December for 2nd Class, Saturday 20 December for 1st Class and Tuesday 23 December for Special Delivery Guaranteed. In the US, USPS says to send by Thursday 17 December 2026 with Ground Advantage or First-Class Mail, and by Saturday 19 December with Priority Mail Express. The tables below give each carrier's own deadline as checked on Friday 9 October 2026, with last year's date where this year's is not out yet.
+Royal Mail's last recommended posting dates for Christmas 2026 are Friday 18 December for 2nd Class and Wednesday 23 December for Special Delivery Guaranteed; post 1st Class by Saturday 19 December to be safe (see below). In the US, USPS says to send by Thursday 17 December with Ground Advantage or First-Class Mail, and by Saturday 19 December with Priority Mail Express. Royal Mail, USPS, FedEx, Canada Post and Australia Post have published their 2026 dates. Evri and InPost haven't yet, and An Post's aren't confirmed, so their rows still give last year's.
 
 ## United Kingdom: Royal Mail, Evri and InPost
 
-UK carriers haven't put their 2026 dates on their own pages yet, so most dates here are last year's, for UK addresses.
+Royal Mail has announced its 2026 dates. Evri and InPost haven't yet, so their dates here are last year's. All are for UK addresses.
 
 | Carrier | Service | Send by |
 | --- | --- | --- |
-| [Royal Mail](carrier:royal-mail) | 2nd Class, 2nd Class Signed For | Not announced yet (2025: Wednesday 17 December) |
-| Royal Mail | Tracked 48 | Not announced yet (2025: Friday 19 December) |
-| Royal Mail | 1st Class, 1st Class Signed For | Not announced yet (2025: Saturday 20 December) |
-| Royal Mail | Tracked 24 | Not announced yet (2025: Sunday 21 December) |
-| Royal Mail | Special Delivery Guaranteed | Not announced yet (2025: Tuesday 23 December) |
+| [Royal Mail](carrier:royal-mail) | 2nd Class, 2nd Class Signed For | Friday 18 December |
+| Royal Mail | Tracked 48 | Saturday 19 December |
+| Royal Mail | 1st Class, 1st Class Signed For | Saturday 19 December (see below) |
+| Royal Mail | Tracked 24 | Monday 21 December |
+| Royal Mail | Special Delivery Guaranteed | Wednesday 23 December |
 | [Evri](carrier:evri) | Standard, UK mainland | Not announced yet (2025: Friday 19 December) |
 | Evri | Next Day, UK mainland, drop-off by 11am | Not announced yet (2025: Saturday 20 December) |
 | [InPost](carrier:inpost) | Drop-off at a locker or shop | Not announced yet (2025: Saturday 20 December) |
 
-[DPD UK](carrier:dpd-uk)'s pages show no Christmas cut-off for UK deliveries.
+Royal Mail's announcement lists 1st Class and 1st Class Signed For under Saturday 19 December, but its text gives Monday 21 December for 1st Class, so Saturday is the safe date. [DPD UK](carrier:dpd-uk)'s pages show no Christmas cut-off for UK deliveries.
 
 ## United States: USPS and FedEx
 
@@ -35,7 +35,7 @@ Both have published their 2026 dates. USPS aims at delivery before Christmas Day
 | [USPS](carrier:usps) | Ground Advantage, First-Class Mail (cards and letters) | Thursday 17 December |
 | USPS | Priority Mail | Friday 18 December |
 | USPS | Priority Mail Express | Saturday 19 December |
-| USPS | Ground Advantage to Alaska, Hawaii, Puerto Rico and US territories | Wednesday 16 December |
+| USPS | Ground Advantage to Alaska, Hawaii, Puerto Rico and US territories | No set date: 10 days or more in transit, look up your ZIP Codes on usps.com |
 | USPS | Military APO/FPO/DPO, Ground Advantage | Wednesday 4 November |
 | USPS | Military APO/FPO/DPO, First-Class Mail and Priority Mail | Wednesday 9 December |
 | [FedEx](carrier:fedex) | Ground Economy | Tuesday 15 December |
@@ -45,7 +45,7 @@ Both have published their 2026 dates. USPS aims at delivery before Christmas Day
 | FedEx | First, Priority or Standard Overnight | Wednesday 23 December |
 | FedEx | SameDay | Thursday 24 December |
 
-USPS notes that Hanukkah, from Friday 4 to Saturday 12 December, is earlier this year, so send for it earlier. FedEx's Ground and Home Delivery transit days don't count weekends.
+To Alaska, Hawaii, Puerto Rico and US territories, USPS gives the same dates as above for First-Class Mail, Priority Mail and Priority Mail Express. USPS notes that Hanukkah, from Friday 4 to Saturday 12 December, is earlier this year, so send for it earlier. FedEx's Ground and Home Delivery transit days don't count weekends.
 
 ## Ireland: An Post
 
@@ -134,14 +134,13 @@ Sent after the last date? Australia Post delivers such items as quickly as it ca
 Waiting for a gift? Paste its number into [Peek](/) and set its notifications to "Delivery only": it checks up to every 2 minutes once the parcel is out for delivery, though it can't make it arrive sooner.
 
 :::sources
-- [Royal Mail: Christmas](https://www.royalmail.com/christmas) – 2026 dates coming soon
-- [Royal Mail: Christmas last posting dates](https://www.royalmail.com/christmas/last-posting-dates) – 2025 dates
+- [Royal Mail: Royal Mail announces last recommended posting dates for Christmas](https://www.internationaldistributionservices.com/en/press-centre/press-releases/royal-mail/royal-mail-announces-last-recommended-posting-dates-for-christmas/) – 2026 dates, two dates for 1st Class, 27 October 2026
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – no post on bank holidays
 - [GOV.UK: UK bank holidays](https://www.gov.uk/bank-holidays) – 25 and 28 December 2026
 - [Evri: Last posting dates for Christmas 2025](https://www.evri.com/news/last-posting-dates-for-christmas-2025) – 2025 dates, service status
 - [InPost: Christmas drop-off date](https://inpost.co.uk/blog/do-they-know-its-xs-mas-time) – 2025 date
 - [DPD UK: Delivery schedule](https://www.dpd.co.uk/content/about_dpd/delivery_schedule.jsp) – 2026 days off in Great Britain
-- [USPS: Holiday shipping deadlines](https://www.usps.com/holiday/holiday-shipping-dates.htm) – 2026 dates, Hanukkah
+- [USPS: Holiday shipping deadlines](https://www.usps.com/holiday/holiday-shipping-dates.htm) – 2026 dates, Alaska, Hawaii and territories, Hanukkah
 - [FOX 13 Tampa Bay: Here are FedEx's deadlines to ensure holiday gifts arrive by Christmas](https://www.fox13news.com/news/here-fedexs-deadlines-ensure-your-holiday-gifts-arrive-christmas) – FedEx's 2026 dates, weekends, 23 September 2026
 - [RTÉ: What are the Christmas postal dates in Ireland for 2025?](https://www.rte.ie/lifestyle/living/2025/1203/1547111-what-are-the-christmas-postal-dates-in-ireland-for-2025/) – An Post's 2025 dates, "only estimated", 3 December 2025
 - [ComReg: Latest postal dates for Christmas delivery](https://www.comreg.ie/latest-postal-dates-for-christmas-delivery-2/) – An Post's 2025 dates in Ireland and to the UK, 3 December 2025

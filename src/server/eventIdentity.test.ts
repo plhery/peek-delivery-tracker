@@ -1137,6 +1137,29 @@ describe('scans a carrier and a universal provider both report', () => {
     expect(pairs(sharedScans([spanish, portuguese], [own], new Map(), 'ctt-express').skipped)).toEqual([['unknown:sent', 'ctt-express:sent']]);
   });
 
+  it('leaves out a provider\'s copy to the minute of the one carrier scan in that minute, answered in the same check', () => {
+    // ParcelsApp's "Departed country of origin" of 23:11, beside Royal Mail's "Item Leaving the UK" of 23:11:14 in the same answer.
+    const own = scan('royal-mail:left', '2026-10-05T23:11:14Z', 'Item Leaving the UK', 'in_transit');
+    const stored = row('royal-mail:left', '2026-10-05T23:11:14+00:00', 'Item Leaving the UK', 'in_transit');
+    const copy = scan('unknown:departed', '2026-10-05T23:11:00Z', 'Departed country of origin', 'in_transit');
+    const earlier = row('royal-mail:accepted', '2026-10-04T10:00:00+00:00', 'We have your item', 'accepted');
+    expect(pairs(sharedScans([own, copy], [earlier, stored]).skipped)).toEqual([['unknown:departed', 'royal-mail:left']]);
+    // The carrier's scan new to the parcel as well.
+    expect(pairs(sharedScans([own, copy], [earlier]).skipped)).toEqual([['unknown:departed', 'royal-mail:left']]);
+    const skipped = (events: JsonObject[], rows: JsonObject[] = [earlier, stored], relaying: string | null = null) => (
+      sharedScans(events, rows, new Map(), relaying).skipped.size);
+    // Another stage, a copy within the minute but not on it, another place: another scan.
+    expect(skipped([own, { ...copy, stage: 'delivered' }])).toBe(0);
+    expect(skipped([own, { ...copy, occurred_at: '2026-10-05T23:11:05Z' }])).toBe(0);
+    expect(skipped([{ ...own, location: 'Coventry' }, { ...copy, location: 'Madrid' }],
+      [earlier, { ...stored, location: 'Coventry' }])).toBe(0);
+    // Two carrier scans in the minute, or two of the provider's copies meeting one: no one to one pair.
+    expect(skipped([own, scan('royal-mail:customs', '2026-10-05T23:11:40Z', 'Customs check', 'in_transit'), copy])).toBe(0);
+    expect(skipped([own, copy, scan('unknown:sorted', '2026-10-05T23:11:00Z', 'Sorted', 'in_transit')])).toBe(0);
+    // An earlier carrier's relay is no such scan.
+    expect(skipped([own, copy], [earlier, stored], 'royal-mail')).toBe(0);
+  });
+
   it('meets a scan or row dated by its day alone at its own instant only, not in its minute or second', () => {
     // FedEx dates its pickup by the day, a second after 17TRACK's label of that minute; ParcelsApp dates its copy alike.
     const pickup = { ...scan('fedex:pickup', '2026-10-30T19:12:01Z', 'Picked up', 'accepted'), raw_data: { time: '2026-10-30' } };

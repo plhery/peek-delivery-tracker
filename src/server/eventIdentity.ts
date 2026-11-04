@@ -39,7 +39,8 @@
  *   left out of the batch, and a carrier's scan takes over the universal copy
  *   stored while it was down (`sharedScans`). The other copies at its instant
  *   are absorbed: the sync deletes them, and leaves out a provider's later
- *   copy of a scan a carrier holds.
+ *   copy of a scan a carrier holds, and its copy to the minute of the one
+ *   scan a carrier holds or answers in that minute.
  * - A row only a universal provider has written names that provider
  *   (`UNIVERSAL_PROVIDER`), and follows the provider's clock when a scraper
  *   fix moves it, and the stage a fix reads in a scan it held unclassified. A carrier's scan writes the row without the name, so the
@@ -1147,6 +1148,27 @@ export function sharedScans(
     const twin = heldCopy(event);
     if (twin) shared.skipped.set(id, identity(twin));
   }
+  // A provider's copy to the whole minute of the one scan a carrier holds or answers in that minute, in a stage that
+  // agrees, from no conflicting place and with no row at the copy's own instant, repeats that scan when no other copy
+  // of the provider's meets it: ParcelsApp's "Departed country of origin" of 23:11 beside Royal Mail's "Item Leaving the
+  // UK" of 23:11:14 in the check that answered both, where the batch shows the carrier's row and so pairs it with no
+  // copy above. An earlier carrier's relay is no such scan.
+  const minuteScans = [...new Map([...held, ...events.filter((event) => heldByCarrier(event) && !observedOnly(event))]
+    .filter((row) => !dayAlone(row) && Number.isFinite(instantOf(row)) && sourceOf(identity(row)) !== relaying)
+    .map((row) => [identity(row), row] as const)).values()];
+  const minuteCopies = new Map<string, string[]>();
+  for (const event of pending) {
+    const id = identity(event);
+    const at = instantOf(event);
+    if (sourceOf(id) !== UNIVERSAL || providerOf(event) === '' || shared.skipped.has(id) || shared.reused.has(id)
+      || stageOf(event) === '' || at % MINUTE_MS !== 0 || dayAlone(event) || occupied.has(at)) continue;
+    const inMinute = minuteScans.filter((row) => Math.floor(instantOf(row) / MINUTE_MS) * MINUTE_MS === at);
+    const scan = inMinute.length === 1 ? inMinute[0]! : undefined;
+    if (!scan || instantOf(scan) === at || !stagesAgree(stageOf(event), stageOf(scan)) || placesApart(event, scan)) continue;
+    const scanId = shared.reused.get(identity(scan)) ?? reused.get(identity(scan)) ?? identity(scan);
+    minuteCopies.set(scanId, [...minuteCopies.get(scanId) ?? [], id]);
+  }
+  for (const [scanId, ids] of minuteCopies) if (ids.length === 1) shared.skipped.set(ids[0]!, scanId);
   // A provider's scan that matched nothing, at the shift most of its scans show from another provider's
   // rows (`providerShift`), repeats the row there: the row holds the scan, and the shift is flagged.
   const unmatched = pending.filter((event) => sourceOf(identity(event)) === UNIVERSAL && providerOf(event) !== ''

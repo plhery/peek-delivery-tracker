@@ -3,7 +3,7 @@ title: Rastreio SPX Express: pedidos da Shopee, status e prazos
 description: Rastreie seu pedido da Shopee pela SPX Express: onde achar o código de rastreio BR, o que cada status significa, Agência Shopee e reembolso.
 slug: rastreio-spx-express
 published: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-04
 ---
 
 A SPX Express (Shopee Xpress) é a logística própria da Shopee no Brasil. Ela coleta os pacotes com os vendedores e entrega na sua casa ou em uma Agência Shopee, um comércio parceiro onde você retira o pedido. A Shopee chama o serviço de Entrega Padrão e orienta a acompanhar tudo pelo app, onde ficam o pedido, a data prevista e o eventual reembolso. O site spx.com.br também tem uma busca de rastreio; ou cole o código no campo acima.
@@ -28,23 +28,26 @@ Nem todo pedido da Shopee vai pela SPX. A Shopee lista a Entrega Padrão (Shopee
 
 O rastreio da SPX vem em português; alguns status terminam com o local depois dos dois-pontos.
 
-| Status da SPX | O que significa para você |
-| --- | --- |
-| `Pedido em preparação` | O vendedor está preparando o pedido. |
-| `Pedido postado …` | O vendedor deixou o pacote em um ponto de postagem (no site da SPX, a cidade vem em seguida); a SPX coleta o pacote ali. |
-| `Seu pedido foi coletado` | A SPX já está com o pacote. |
-| `Seu pedido chegou ao centro logístico: …` | Chegou a um centro logístico. |
-| `Seu pedido saiu do centro logístico: …` | Saiu de um centro logístico. |
-| `O pedido está em separação no centro logístico, novas atualizações em até 1 dia.` | Está na triagem; a SPX avisa que a próxima atualização sai em até 1 dia. |
-| `Pedido em trânsito` | Está em transferência entre centros. |
-| `Pedido em rota de entrega para seu endereço, aguarde pelas próximas horas.` | Saiu para entrega e deve chegar nas próximas horas. |
-| `Pedido entregue` | A SPX registrou a entrega. |
-| `Pedido será devolvido ao vendedor` | O pacote vai voltar para o vendedor. |
-| `Pedido devolvido` | O pacote voltou para o vendedor. |
+| Status da SPX | O que significa para você | O Peek mostra |
+| --- | --- | --- |
+| `Pedido em preparação` | O vendedor está preparando o pedido. | "Etiqueta criada" |
+| `Pedido postado …` | O vendedor deixou o pacote em um ponto de postagem (no site da SPX, a cidade vem em seguida); a SPX coleta o pacote ali. | "Recebida pela transportadora" |
+| `Seu pedido foi coletado` | A SPX já está com o pacote. | "Recebida pela transportadora" |
+| `Seu pedido chegou ao centro logístico: …` | Chegou a um centro logístico. | "Em trânsito" |
+| `Seu pedido saiu do centro logístico: …` | Saiu de um centro logístico. | "Em trânsito" |
+| `O pedido está em separação no centro logístico, novas atualizações em até 1 dia.` | Está na triagem; a SPX avisa que a próxima atualização sai em até 1 dia. | "Em trânsito" |
+| `Pedido em trânsito` | Está em transferência entre centros. Entre estados ou cidades distantes, diz a Shopee, o pacote passa dias dentro do caminhão de transferência, e o status só muda quando ele é descarregado e bipado no centro de distribuição do seu estado. | "Em trânsito" |
+| `Pedido em rota de entrega para seu endereço, aguarde pelas próximas horas.` | Saiu para entrega e deve chegar nas próximas horas. | "Saiu para entrega" |
+| `Houve um imprevisto durante a entrega do seu pedido …`, `Um imprevisto ocorreu …` | A entrega não pôde ser concluída naquele dia; a SPX diz que vai tentar de novo no seu endereço o quanto antes. Veja as tentativas abaixo. | "Tentativa de entrega" |
+| `Pedido entregue` | A SPX registrou a entrega. | "Entregue" |
+| `Pedido será devolvido ao vendedor` | O pacote vai voltar para o vendedor. | "Devolvida ao remetente" |
+| `Pedido devolvido` | O pacote voltou para o vendedor. | "Devolvida ao remetente" |
 
-**Pacotes do exterior.** Os status que começam com `[China]` são atualizações feitas na China, como `[China]O pedido foi liberado na alfândega de exportação`. Depois vêm `Pedido chegou no Brasil`, `Pedido está na alfândega de importação`, `Pedido em inspeção na alfândega de importação` e, em inglês, `Import Customs Cleared`: a alfândega brasileira liberou o pacote.
+Alguns pacotes recebem, em vez disso, status da frota de entrega da SPX, que começam com `Seu pacote`, entre eles `Seu pacote foi recebido pelo centro de triagem`, `Seu pacote foi recebido pelo centro de distribuição` (o centro que entrega na sua região), `Seu pacote está sendo entregue pelo entregador` e `Seu pacote foi entregue`. O Peek mostra as mesmas etapas para eles, como "Saiu para entrega".
 
-Um status é má notícia: `O pacote não pôde ser importado, será retornado ou confiscado pela alfândega`. A alfândega recusou a importação, e o pacote vai voltar ou ser apreendido. Fale com a Shopee: o reembolso de compras internacionais segue o mesmo passo a passo das nacionais (veja abaixo).
+**Pacotes do exterior.** Os status que começam com `[China]` são atualizações feitas na China, como `[China]O pedido foi liberado na alfândega de exportação`. Depois vêm `Pedido chegou no Brasil`, `Pedido está na alfândega de importação`, `Pedido em inspeção na alfândega de importação` e, em inglês, `Import Customs Cleared`: a alfândega brasileira liberou o pacote. O Peek mostra "Na alfândega" nos dois status da alfândega e volta a "Em trânsito" depois de `Import Customs Cleared`.
+
+Um status é má notícia: `O pacote não pôde ser importado, será retornado ou confiscado pela alfândega`. A alfândega recusou a importação, e o pacote vai voltar ou ser apreendido; o Peek mostra "Precisa de atenção". Fale com a Shopee: o reembolso de compras internacionais segue o mesmo passo a passo das nacionais (veja abaixo).
 
 ## Entrega SPX: tentativas, palavra-chave e Agência Shopee
 
@@ -144,7 +147,7 @@ Pela Shopee, que diz não ser possível falar direto com a transportadora: use o
 - [Shopee: O que fazer se minha palavra-chave não funcionar corretamente?](https://help.shopee.com.br/portal/4/article/127205) – recusar uma entrega errada
 - [Shopee: Retirada de pacotes na Agência Shopee](https://help.shopee.com.br/portal/4/article/164642) – Retire Fácil, notificações, PIN, data máxima para retirada
 - [Shopee: Sobre a Agência Shopee](https://help.shopee.com.br/portal/4/article/164639) – PIN e código de rastreio, 7 dias úteis, a SPX recolhe o pacote, sem troca para entrega em casa, redirecionamento
-- [Shopee: Meu pedido está sem atualização no rastreamento](https://help.shopee.com.br/portal/4/article/223973) – sem atualização diária, "salto", 5 dias após a data prevista
+- [Shopee: Meu pedido está sem atualização no rastreamento](https://help.shopee.com.br/portal/4/article/223973) – sem atualização diária, dias no caminhão de transferência entre estados, "salto", 5 dias após a data prevista
 - [Shopee: Por que meu pedido está parado ou mudou de rota?](https://help.shopee.com.br/portal/4/article/159363) – mudanças de rota
 - [Shopee: Por que meu código de rastreio não está funcionando?](https://help.shopee.com.br/portal/4/article/76369) – motivos, falar com o vendedor
 - [Shopee: O que devo fazer se não receber meu pedido até a data prevista de entrega?](https://help.shopee.com.br/portal/4/article/76321) – passo a passo do reembolso, 2 dias para o vendedor

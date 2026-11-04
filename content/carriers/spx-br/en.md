@@ -3,10 +3,10 @@ title: SPX Express Brazil tracking: Shopee orders and statuses
 description: Track an SPX Express parcel from a Shopee order in Brazil: where to follow it, what BR numbers and SPX's Portuguese statuses mean, Agência Shopee pickup and refunds.
 slug: spx-express-brazil-tracking
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
-SPX Express (Shopee Xpress) is Shopee's own logistics network in Brazil. It collects orders from sellers and brings them to your door or to an Agência Shopee, a partner shop where you pick parcels up. Shopee calls the service Entrega Padrão (standard delivery), and says you track it in the Shopee app, where the order, its delivery date and any refund live. spx.com.br has a tracking box too, or you can paste the number in the box above.
+*Leia em português:* [rastreio da SPX Express, status, prazos e reembolso](https://peektracker.com/pt-br/carriers/rastreio-spx-express). SPX Express (Shopee Xpress) is Shopee's own logistics network in Brazil. It collects orders from sellers and brings them to your door or to an Agência Shopee, a partner shop where you pick parcels up. Shopee calls the service Entrega Padrão (standard delivery), and says you track it in the Shopee app, where the order, its delivery date and any refund live. spx.com.br has a tracking box too, or you can paste the number in the box above.
 
 ## SPX Express tracking number: where to find it
 
@@ -28,23 +28,26 @@ Not every Shopee order goes with SPX. Shopee lists Entrega Padrão (Shopee Xpres
 
 SPX writes its tracking in Portuguese; some lines end with the place after a colon.
 
-| SPX's line | What it means for you |
-| --- | --- |
-| `Pedido em preparação` | "Order being prepared": the seller is getting it ready. |
-| `Pedido postado …` | "Order posted": the seller left it at a drop-off point (spx.com.br adds its town); SPX collects it from there. |
-| `Seu pedido foi coletado` | "Your order was collected": SPX has it. |
-| `Seu pedido chegou ao centro logístico: …` | It reached a logistics centre. |
-| `Seu pedido saiu do centro logístico: …` | It left a logistics centre. |
-| `O pedido está em separação no centro logístico, novas atualizações em até 1 dia.` | It's being sorted; SPX says to expect new updates within a day. |
-| `Pedido em trânsito` | In transit. |
-| `Pedido em rota de entrega para seu endereço, aguarde pelas próximas horas.` | Out for delivery to your address, in the next few hours. |
-| `Pedido entregue` | Delivered. |
-| `Pedido será devolvido ao vendedor` | It's going back to the seller. |
-| `Pedido devolvido` | Returned to the seller. |
+| SPX's line | What it means for you | Peek shows |
+| --- | --- | --- |
+| `Pedido em preparação` | "Order being prepared": the seller is getting it ready. | "Label created" |
+| `Pedido postado …` | "Order posted": the seller left it at a drop-off point (spx.com.br adds its town); SPX collects it from there. | "Received by carrier" |
+| `Seu pedido foi coletado` | "Your order was collected": SPX has it. | "Received by carrier" |
+| `Seu pedido chegou ao centro logístico: …` | It reached a logistics centre. | "In transit" |
+| `Seu pedido saiu do centro logístico: …` | It left a logistics centre. | "In transit" |
+| `O pedido está em separação no centro logístico, novas atualizações em até 1 dia.` | It's being sorted; SPX says to expect new updates within a day. | "In transit" |
+| `Pedido em trânsito` | On its way between centres. Between states or distant cities, Shopee says, it spends days in the transfer truck, and the next line comes only once it's unloaded and scanned at the distribution centre in your state. | "In transit" |
+| `Pedido em rota de entrega para seu endereço, aguarde pelas próximas horas.` | Out for delivery to your address, in the next few hours. | "Out for delivery" |
+| `Houve um imprevisto durante a entrega do seu pedido …`, `Um imprevisto ocorreu …` | The delivery couldn't be completed that day; SPX says it will try again at your address as soon as it can. See the attempts below. | "Delivery attempted" |
+| `Pedido entregue` | Delivered. | "Delivered" |
+| `Pedido será devolvido ao vendedor` | It's going back to the seller. | "Returned to sender" |
+| `Pedido devolvido` | Returned to the seller. | "Returned to sender" |
 
-**Parcels from abroad.** Lines starting `[China]` are scans in China, such as `[China]O pedido foi liberado na alfândega de exportação` (it cleared export customs). Then come `Pedido chegou no Brasil` (it's in Brazil), `Pedido está na alfândega de importação` (at Brazilian import customs), `Pedido em inspeção na alfândega de importação` (being inspected) and `Import Customs Cleared`, in English: customs released it.
+Some parcels get lines from SPX's delivery fleet instead, starting `Seu pacote`, among them `Seu pacote foi recebido pelo centro de triagem` (at a sorting centre), `Seu pacote foi recebido pelo centro de distribuição` (at the centre that delivers to you), `Seu pacote está sendo entregue pelo entregador` (out for delivery) and `Seu pacote foi entregue` (delivered). Peek shows the same stages for them, such as "Out for delivery".
 
-One line is bad news: `O pacote não pôde ser importado, será retornado ou confiscado pela alfândega`. Customs refused the import, and the parcel will be returned or seized. Ask Shopee: refunds for orders from abroad follow the usual steps (below).
+**Parcels from abroad.** Lines starting `[China]` are scans in China, such as `[China]O pedido foi liberado na alfândega de exportação` (it cleared export customs). Then come `Pedido chegou no Brasil` (it's in Brazil), `Pedido está na alfândega de importação` (at Brazilian import customs), `Pedido em inspeção na alfândega de importação` (being inspected) and `Import Customs Cleared`, in English: customs released it. Peek shows "At customs" for the two customs lines, then "In transit" again after `Import Customs Cleared`.
+
+One line is bad news: `O pacote não pôde ser importado, será retornado ou confiscado pela alfândega`. Customs refused the import, and the parcel will be returned or seized; Peek shows "Needs attention". Ask Shopee: refunds for orders from abroad follow the usual steps (below).
 
 ## SPX delivery: attempts, the keyword and Agência Shopee
 
@@ -94,7 +97,9 @@ Shopee says you can't contact the carrier directly about tracking or delivery: S
 
 [Peek](/) names SPX Express Brazil straight away for a `BR` number with 12 digits and a final digit or letter. A tracking link from spx.com.br (`/track?` or `/detail/` with the number) names SPX too, even when a text message prints it without `https://`. Peek's SPX lookup takes only `BR` numbers, not Shopee order IDs.
 
-Peek reads the same tracking spx.com.br does and shows the status, SPX's own lines (in Portuguese, a few in English), the place SPX gives for scans at its centres, hubs and ports, and the delivery time. It also shows some lines SPX's page hides, such as `Seu pedido chegou ao último centro logístico` (it reached the last logistics centre) or a failed pickup at the seller's. There's no expected delivery date, weight, pickup point or delivering partner, and Peek drops the name of whoever took the parcel. The order, its keyword, the Agência PIN and refunds stay in the Shopee app. If the parcel is still on its way and 4 days pass without a new scan, Peek shows "Get help from SPX Express Brazil", which opens Shopee's Customer Service hours page.
+Peek reads the same tracking spx.com.br does and shows the status, SPX's own lines (in Portuguese, a few in English), the place SPX gives for scans at its centres, hubs and ports, and the delivery time. It also shows some lines SPX's page hides, such as `Seu pedido chegou ao último centro logístico` (it reached the last logistics centre) or a failed pickup at the seller's. There's no expected delivery date, weight, pickup point or delivering partner, and Peek drops the name of whoever took the parcel. The order, its keyword, the Agência PIN and refunds stay in the Shopee app.
+
+While SPX doesn't know the number yet, Peek shows "Waiting for the carrier" and keeps checking. If the parcel is still on its way and 4 days pass without a new scan, Peek shows "Get help from SPX Express Brazil", which opens Shopee's Customer Service hours page.
 
 Peek checks every 10 minutes, or every 2 once the parcel is out for delivery. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact SPX or Shopee for you.
 
@@ -142,7 +147,7 @@ Shopee says no: it handles tracking and delivery problems itself through Chat Sh
 - [Shopee: O que fazer se minha palavra-chave não funcionar corretamente?](https://help.shopee.com.br/portal/4/article/127205) – refusing a wrong delivery
 - [Shopee: Retirada de pacotes na Agência Shopee](https://help.shopee.com.br/portal/4/article/164642) – Retire Fácil, notifications, PIN, deadline
 - [Shopee: Sobre a Agência Shopee](https://help.shopee.com.br/portal/4/article/164639) – PIN and tracking number, 7 working days, SPX takes it back, no switch, redirect
-- [Shopee: Meu pedido está sem atualização no rastreamento](https://help.shopee.com.br/portal/4/article/223973) – no daily updates, 5 days after the estimated date
+- [Shopee: Meu pedido está sem atualização no rastreamento](https://help.shopee.com.br/portal/4/article/223973) – no daily updates, days in the transfer truck between states, 5 days after the estimated date
 - [Shopee: Por que meu pedido está parado ou mudou de rota?](https://help.shopee.com.br/portal/4/article/159363) – route changes
 - [Shopee: Por que meu código de rastreio não está funcionando?](https://help.shopee.com.br/portal/4/article/76369) – reasons, ask the seller
 - [Shopee: O que devo fazer se não receber meu pedido até a data prevista de entrega?](https://help.shopee.com.br/portal/4/article/76321) – refund steps, 2 days for the seller

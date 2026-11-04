@@ -3,7 +3,7 @@ title: J&T Express Sendungsverfolgung: JTDE-Nummer und Status
 description: J&T-Paket in Deutschland verfolgen: wie eine JTDE-Nummer aussieht, was jede Zeile der Sendungsverfolgung heißt und was du tust, wenn das Paket fehlt.
 slug: jt-express-sendungsverfolgung
 published: 2026-10-21
-updated: 2026-10-27
+updated: 2026-11-04
 ---
 
 J&T Express Germany (J&T Express Germany GmbH aus Frankfurt am Main) ist das deutsche Netz der Paketgruppe J&T Express und stellt Pakete in Deutschland zu. Hat ein Shop deine Bestellung mit J&T verschickt, beginnt die Sendungsnummer mit `JTDE`: Füg sie oben ins Feld ein oder schau in der [Sendungsverfolgung auf jtexpress.de](https://www.jtexpress.de/tracking) nach. Der Shop, der deine Bestellung verschickt hat, kennt die Nummer: Sie steht in seiner Versand-E-Mail oder in deinen Bestelldetails.
@@ -78,7 +78,7 @@ Den Auftrag an J&T hat der Shop erteilt, bei einem Online-Kauf ist er also deine
 
 **Zugestellt, aber nicht da.** Lies den Zustellsatz in Peek: Nennt er einen Ort, etwa `Mailbox` oder `Garage`, schau dort nach. Steht dort `Left with neighbor`, frag deine Nachbarn oder lass dir in der Sendungsverfolgung von J&T zeigen, welcher es ist (siehe oben). Die FAQ von J&T rät außerdem nachzufragen, ob Familie, Nachbarn, die Hausverwaltung oder andere Berechtigte das Paket angenommen haben. Immer noch nichts? Melde es der Hotline von J&T und bitte den Shop mit deiner Sendungsnummer um Erstattung oder ein neues Paket. Mehr in [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-**Verloren, beschädigt oder zurück.** Bitte den Shop mit deiner Sendungsnummer um Erstattung oder Ersatz. Ein Schadensformular, Fristen oder eine Entschädigung für Empfänger nennt die FAQ von J&T nicht. Mehr in [Paket verloren](guide:lost-parcel), [Paket beschädigt](guide:damaged-parcel) und [Paket zurück an den Absender](guide:returned-to-sender).
+**Verloren, beschädigt oder zurück.** Bitte den Shop mit deiner Sendungsnummer um Erstattung oder Ersatz. Ein Schadensformular, Fristen oder eine Entschädigung für Empfänger nennt die FAQ von J&T nicht; die Fristen stehen im Gesetz. Einen sichtbaren Schaden zeigst du dem Paketdienst nach § 438 HGB spätestens bei der Ablieferung an (dann genügt es, ihn dem Zusteller zu nennen), einen verdeckten innerhalb von sieben Tagen danach in Textform, etwa per E-Mail an J&T. Einigst du dich mit J&T über Verlust oder Beschädigung nicht, kannst du auch als Empfänger die gebührenfreie Schlichtungsstelle Post der Bundesnetzagentur anrufen. Bei E-Commerce-Sendungen großer Onlinehändler gelten aber in der Regel Sonderbedingungen, die eine Schlichtung ausschließen; dann bleibt dir der Verbraucherservice Post der Bundesnetzagentur. Mehr in [Paket verloren](guide:lost-parcel), [Paket beschädigt](guide:damaged-parcel) und [Paket zurück an den Absender](guide:returned-to-sender).
 
 ## J&T Kontakt und Kundenservice
 
@@ -106,7 +106,7 @@ Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung
 
 ### Ist J&T Express Germany seriös?
 
-Ja. Die J&T Express Germany GmbH mit Sitz in Frankfurt am Main ist die deutsche Gesellschaft von J&T Express, einer 2015 in Indonesien gegründeten und in Hongkong börsennotierten Paketgruppe. J&T wirbt bundesweit um Franchise-Partner, die auf der letzten Meile Pakete zustellen und abholen. Jeder Satz in der Statustabelle oben stammt aus der Sendungsverfolgung echter Pakete von J&T Express Germany.
+Ja. Die J&T Express Germany GmbH mit Sitz in Frankfurt am Main ist die deutsche Gesellschaft von J&T Express, einer 2015 in Indonesien gegründeten und in Hongkong börsennotierten Paketgruppe. Die Bundesnetzagentur führt die GmbH seit dem 1. September 2026 in ihrem Anbieterverzeichnis Post. J&T wirbt bundesweit um Franchise-Partner, die auf der letzten Meile Pakete zustellen und abholen. Jeder Satz in der Statustabelle oben stammt aus der Sendungsverfolgung echter Pakete von J&T Express Germany.
 
 ### Welcher Nachbar hat mein J&T-Paket?
 
@@ -137,4 +137,7 @@ Ruf +49 6931090650 an (Mo. – Fr. 8:00 bis 20:00 Uhr), nutze den Live-Chat auf 
 - [Universal Parcel Scraper: gemeinsame Abfrage der J&T-Netze](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – englische Sätze, genaue Scanzeiten, kein Ort, kein Zustelltag, kein Gewicht, Namen und Telefonnummern weggelassen, neueste 100 Scans
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummern anderer J&T-Netze, keine Übergabe an einen anderen Paketdienst, Tracking-Dienste als Rückfall
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – Transportrisiko beim Verbrauchsgüterkauf
+- [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – Schadensanzeige bei der Ablieferung, verdeckte Schäden binnen sieben Tagen, Textform
+- [Bundesnetzagentur: Anbieterverzeichnis Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – J&T Express Germany GmbH, eingetragen am 1. September 2026
+- [Bundesnetzagentur: Häufig gestellte Fragen zur Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – Antrag auch durch Empfänger, gebührenfrei, Sonderbedingungen bei E-Commerce-Sendungen, Verbraucherservice Post
 :::

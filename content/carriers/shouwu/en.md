@@ -3,7 +3,7 @@ title: Shouwu tracking: SWECN…YQ numbers, scans and who delivers
 description: Track a Shouwu International (守务国际) parcel from China: what a SWECN…YQ number looks like, what its statuses mean and who delivers it in the UK and US.
 slug: shouwu-tracking
 published: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-04
 ---
 
 Shouwu International (守务国际, also SWE) is a Shanghai logistics company that ships parcels for online sellers in China to Europe and the United States, where a post or courier delivers them. If a shop sent your order with Shouwu, its number starts with SWECN and ends with YQ: paste it in the box above or in Shouwu's tracker at [admin.shshouwu.com](https://admin.shshouwu.com/track.html). The shop gives you the number with your order's shipping details.
@@ -46,13 +46,17 @@ Shouwu calls its statuses "auto-judged by the system" and "only for information 
 | `Carrier received the shipment` | Shouwu writes it two hours after the order data, days before the first warehouse scan: no one has the parcel yet. | "Label created" |
 | `Arrival processing center` | Shouwu's warehouse in China has taken the parcel in. | "Received by carrier" |
 | `Package processing completed` | The warehouse is done with it, before the flight. | "Received by carrier" |
+| `Shipment started the customs clearance process at origin` | Export clearance in China, not your country's customs. | "At customs" |
+| `Export customs declaration completed`, `Export Released` | China has cleared it for export; nothing is held. | "In transit" |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | At the airport in Shanghai, then flown out of China. | "In transit" |
-| `Arrived at airport of Destination` | Landed in your country. | "In transit" |
-| `Shipment started the customs clearance process at destination` | Your country's customs are clearing it. | "At customs" |
-| `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | Your country's customs have let it through. | "In transit" |
-| `Delivery to local courier` | Handed to the courier that delivers in your country, not to you. | "In transit" |
+| `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Landed in your country. | "In transit" |
+| `NOA received` | The agent in your country has the airline's notice of arrival; customs comes next. | "In transit" |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress` | Your country's customs are clearing it. | "At customs" |
+| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed` | Your country's customs have let it through. | "In transit" |
+| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider` | Handed to the courier that delivers in your country, not to you ("deliverey" is Shouwu's spelling). | "In transit" |
 | `Your consignment has been picked up` | The courier has collected it from Shouwu's depot abroad, after customs: no pickup from the seller, nor by you. | "In transit" |
 | `Out for delivery` | The local courier's delivery round. | "Out for delivery" |
+| `Abnormal delivery` | The round didn't deliver. The courier's reason follows as a scan of its own in angle brackets, such as `<Incorrect address.>`. | "Delivery attempted" |
 | `Delivered by post man`, `This parcel has been delivered` | The local post or courier has delivered it. | "Delivered", once Shouwu's status says `Delivered` |
 
 **Lines in Chinese.** Some parcels also get lines Shouwu writes in Chinese, which Peek shows as written. `货物电子信息已经收到` (the goods' electronic data received) comes with the order data: "Label created". Then, all "In transit": `申报过港中` after a batch's code (the batch is declared for the road to Hong Kong), `已到港，安排航班中` (at the port of departure, waiting for a flight), `预计23号的航班` (the flight booked, here for the 23rd; with `二程` in front, for the second leg), `航班已飞` and `二程航班已飞` (the flight, or the second leg's, has left) and `已落地` (landed). `已落地，清关提货中` (landed, being cleared and collected from the airline) is "At customs"; `清关完成` (cleared) and `已交仓扫描` (scanned in at the delivering courier's depot) are "In transit" again.
@@ -65,6 +69,7 @@ Shouwu says it works directly with USPS, Royal Mail, La Poste, DHL, DPD and Herm
 
 - **United Kingdom.** The UK lines cover the whole of the UK. Their last-mile couriers are Royal Mail, Yodel and Evri (spelt ERVI there); the line for goods with batteries goes mainly by Royal Mail.
 - **United States.** The US lines cover the whole country, delivered mainly by USPS.
+- **European Union.** Shouwu also has lines to Germany, delivered mainly by [DHL](carrier:dhl), [Hermes](carrier:hermes-de) or [DPD](carrier:dpd-de) depending on the line, France (mainly [Colissimo](carrier:la-poste)), the Netherlands (mainly DHL), Sweden (mainly [Early Bird](carrier:early-bird)) and Italy (UniUni and [Poste Italiane](carrier:poste-italiane)). Here too the seller may pass on the courier's number.
 - **Ireland, Canada and Australia.** Shouwu lists no line for them and names no courier. Ask the seller who delivers.
 
 Shouwu's tracker gives no courier's name or number, beyond what a scan's wording may say.
@@ -77,7 +82,7 @@ Shouwu's tracker gives no courier's name or number, beyond what a scan's wording
 
 **Stuck on `Preparing`, `Shipment information received` or `Carrier received the shipment`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
 
-**Stuck at customs.** After `Shipment started the customs clearance process at destination` or `已落地，清关提货中`, it waits for your country's customs. If you're asked for import charges, see [parcels held at customs](guide:customs).
+**Stuck at customs.** After `Shipment started the customs clearance process at destination`, `Customs clearance in progress` or `已落地，清关提货中`, it waits for your country's customs. On the EU lines, a parcel from outside the EU worth up to €150 now owes €3 duty per item (since 1 July 2026) and the EU's €2 handling fee (since 1 November 2026); Shouwu's line pages don't say who pays them. If you're asked for import charges, see [parcels held at customs](guide:customs).
 
 **Nothing after `Delivery to local courier`.** The courier has it, but Shouwu's tracker doesn't give the courier's number. Ask the seller for the courier's number and paste it into Peek. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
@@ -117,7 +122,7 @@ A local post or courier: Shouwu's line pages name Royal Mail, Yodel and Evri in 
 
 ### How long does Shouwu take to deliver?
 
-It depends on the line the seller chose. Shouwu's reference times are 5 to 8 working days on its UK standard line, 10 to 12 on UK economy, 6 to 8 on US standard and 8 to 12 on US economy.
+It depends on the line the seller chose. Shouwu's reference times are 5 to 8 working days on its UK standard line, 10 to 12 on UK economy, 6 to 8 on US standard and 8 to 12 on US economy. In the EU, they're 4 to 7 working days to Germany and France, 4 to 8 to the Netherlands and Sweden, and 10 to 12 to Italy.
 
 ### Who do I contact about a missing Shouwu parcel?
 
@@ -133,6 +138,14 @@ The seller you ordered from: it booked the parcel with Shouwu and can claim with
 - [Shouwu International: 英国带电 (UK, batteries)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=4) – mainly Royal Mail
 - [Shouwu International: 美国标快 (US standard express)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=1) – mainly USPS, 6 to 8 working days, no return to China, claims
 - [Shouwu International: 美国经济 (US economy)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=21) – 8 to 12 working days
+- [Shouwu International: 德国标快 (Germany standard express)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=19) – mainly DHL, choice of number, 4 to 7 working days, claims
+- [Shouwu International: 德国经济 (Germany economy)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=22) – mainly Hermes, 4 to 7 working days
+- [Shouwu International: 德国带电 (Germany, batteries)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=25) – mainly DPD, 4 to 7 working days
+- [Shouwu International: 法国标快 (France standard express)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=20) – mainly Colissimo, 4 to 7 working days
+- [Shouwu International: 荷兰标快 (Netherlands standard express)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=28) – mainly DHL, 4 to 8 working days
+- [Shouwu International: 瑞典经济 (Sweden economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=29) – mainly EarlyBird, 4 to 8 working days
+- [Shouwu International: 意大利经济 (Italy economy)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – UniUni and Poste Italiane, 10 to 12 working days
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty from 1 July 2026, €2 handling fee from 1 November 2026
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, tracker and link, statuses, scan wordings and stages, clocks, places, what Peek shows
 :::

@@ -101,6 +101,38 @@ final class NotificationLogicTests: XCTestCase {
         XCTAssertFalse(NotificationDevicePolicy.belongs(to: nil, owner: nil))
     }
 
+    func testAnOffWrittenByASignOutIsTakenBackOnceAndThePersonsOwnBecomesAQuestion() throws {
+        func defaults(_ values: [String: Any]) throws -> UserDefaults {
+            let name = "notification-repair-\(UUID().uuidString)"
+            let defaults = try XCTUnwrap(UserDefaults(suiteName: name))
+            defaults.removePersistentDomain(forName: name)
+            defaults.setValuesForKeys(values)
+            return defaults
+        }
+        let optOut = NotificationDeviceKeys.optOut, owner = NotificationDeviceKeys.owner, demo = NotificationDeviceKeys.demo
+        // A sign-out never touched the demo's switch: notifications come back for whoever signs in.
+        for values in [[optOut: true], [optOut: true, demo: true]] as [[String: Any]] {
+            let signedOut = try defaults(values)
+            NotificationDevicePolicy.repairAccountChangeOptOut(signedOut)
+            XCTAssertFalse(signedOut.bool(forKey: optOut))
+            XCTAssertNil(signedOut.string(forKey: owner))
+        }
+        // The person's own off switched the demo's off too: the next account is asked, not signed up.
+        let chosen = try defaults([optOut: true, demo: false])
+        NotificationDevicePolicy.repairAccountChangeOptOut(chosen)
+        XCTAssertFalse(chosen.bool(forKey: optOut))
+        XCTAssertFalse(NotificationDevicePolicy.belongs(to: UUID(), owner: chosen.string(forKey: owner).flatMap(UUID.init(uuidString:))))
+        // An off made since the owner is kept is the person's, and the repair runs once.
+        let kept = try defaults([optOut: true, owner: UUID().uuidString])
+        NotificationDevicePolicy.repairAccountChangeOptOut(kept)
+        XCTAssertTrue(kept.bool(forKey: optOut))
+        let repaired = try defaults([optOut: true])
+        NotificationDevicePolicy.repairAccountChangeOptOut(repaired)
+        repaired.set(true, forKey: optOut)
+        NotificationDevicePolicy.repairAccountChangeOptOut(repaired)
+        XCTAssertTrue(repaired.bool(forKey: optOut))
+    }
+
     func testInvitationWaitsForPermissionCheckAndARealAccountWithParcels() {
         XCTAssertTrue(invitation())
         XCTAssertFalse(invitation(status: nil))

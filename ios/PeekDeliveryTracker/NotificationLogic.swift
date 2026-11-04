@@ -117,6 +117,16 @@ extension Localizer {
     }
 }
 
+/// Where the device keeps its notification state.
+enum NotificationDeviceKeys {
+    /// The person turned this device's notifications off.
+    static let optOut = "sdt.notificationsDeviceOptOut"
+    /// The account that last turned them on (`NotificationDevicePolicy.belongs`).
+    static let owner = "sdt.notificationsOwner.v1"
+    static let demo = "sdt.demoNotificationsEnabled"
+    static let optOutRepaired = "sdt.notificationsOptOutRepaired.v1"
+}
+
 enum NotificationDevicePolicy {
     static func isAuthorized(_ status: UNAuthorizationStatus) -> Bool {
         status == .authorized || status == .provisional
@@ -147,6 +157,24 @@ enum NotificationDevicePolicy {
     static func belongs(to user: UUID?, owner: UUID?) -> Bool {
         guard let user else { return false }
         return owner == nil || owner == user
+    }
+
+    /// An owner no account has, so whoever signs in next is asked.
+    static let nobody = UUID(uuid: (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+
+    /// Before the owner was kept, signing out, an expired session or a deleted account wrote the person's "off",
+    /// and their next sign-in had no notifications and no prompt. Once, that "off" is taken back: the person's own
+    /// off has always switched the demo's notifications off with it, which an account change never did, so a device
+    /// without that mark gets its notifications back like a returning account, and one with it is asked again.
+    static func repairAccountChangeOptOut(_ defaults: UserDefaults) {
+        guard !defaults.bool(forKey: NotificationDeviceKeys.optOutRepaired) else { return }
+        defaults.set(true, forKey: NotificationDeviceKeys.optOutRepaired)
+        guard defaults.bool(forKey: NotificationDeviceKeys.optOut),
+              defaults.string(forKey: NotificationDeviceKeys.owner) == nil else { return }
+        defaults.set(false, forKey: NotificationDeviceKeys.optOut)
+        if defaults.object(forKey: NotificationDeviceKeys.demo) as? Bool == false {
+            defaults.set(nobody.uuidString, forKey: NotificationDeviceKeys.owner)
+        }
     }
 }
 

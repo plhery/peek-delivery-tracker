@@ -106,11 +106,10 @@ final class ParcelStore: ObservableObject {
     private var deliveryLiveActivitySystemDisabled = false
     private var deliveryLiveActivityRegistrationRemovalPending = false
     private let installationID: UUID
-    private let notificationOptOutKey = "sdt.notificationsDeviceOptOut"
+    private let notificationOptOutKey = NotificationDeviceKeys.optOut
     private let nativePushRegisteredKey = "sdt.notificationsNativePushRegistered.v1"
-    /// The account that last turned this device's notifications on (`NotificationDevicePolicy.belongs`).
-    private let notificationOwnerKey = "sdt.notificationsOwner.v1"
-    private let demoNotificationsKey = "sdt.demoNotificationsEnabled"
+    private let notificationOwnerKey = NotificationDeviceKeys.owner
+    private let demoNotificationsKey = NotificationDeviceKeys.demo
     private static let installationIDKey = "sdt.installationID.v1"
 
     init(configuration: AppConfiguration = .current, session: SessionStore, localizer: Localizer, transport: URLSession = .shared,
@@ -120,6 +119,7 @@ final class ParcelStore: ObservableObject {
         self.session = session
         self.localizer = localizer
         installationID = Self.installationIdentifier()
+        NotificationDevicePolicy.repairAccountChangeOptOut(.standard)
         deliveryWidgetStore = DeliveryWidgetSharedStore(
             appGroupIdentifier: configuration.appGroupIdentifier,
             fallbackToStandard: true

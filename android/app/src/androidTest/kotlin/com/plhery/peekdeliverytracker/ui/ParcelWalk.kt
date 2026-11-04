@@ -4,10 +4,13 @@ import android.app.Activity
 import android.app.Instrumentation
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.provider.Settings
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -58,6 +61,7 @@ import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
@@ -68,6 +72,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_PAGE
 import com.plhery.peekdeliverytracker.ui.deliveries.cardId
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
+import com.plhery.peekdeliverytracker.ui.theme.appearanceSetting
 import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.Job
@@ -75,25 +80,37 @@ import kotlinx.coroutines.launch
 import org.junit.rules.ExternalResource
 
 /**
- * What the fixture walks share ([ParcelStatesDeviceShots], [ParcelFeedbackDeviceShots], [ParcelAlertsDeviceShots]):
- * the synthetic reader@example.com's deliveries on [FakeDeliveries], whose stores answer every read in memory, shown on
- * this device's own window edge to edge, its keyboard resizing the room as the app's does; each parcel opened from its
- * card in the list, beside it where the window lays them out side by side and over it where it stacks them; and each
- * moment saved, once still, as [FOLDER]/<row>-<moment>.png in the test package's external files, in light and dark.
- * The app's clock is [clock] (the captures' [CAPTURED] unless a test moves it on), its words English as the app's
- * Android copy has them, under Reduce Motion. [fontScale] is the composition's own Density, not the phone's setting:
- * 2, Android's largest step, which the app reads as iOS's accessibility2 (DynamicTypeSize), a shot at it named
+ * What the fixture walks share ([ParcelStatesDeviceShots], [ParcelFeedbackDeviceShots], [ParcelAlertsDeviceShots],
+ * [ListStatesDeviceShots], [ListFeedbackDeviceShots]): the synthetic reader@example.com's deliveries on
+ * [FakeDeliveries], whose stores answer every read in memory, shown on this device's own window edge to edge, its
+ * keyboard resizing the room as the app's does; each parcel opened from its card in the list, beside it where the
+ * window lays them out side by side and over it where it stacks them; and each moment saved, once still, as
+ * [FOLDER]/<row>-<moment>.png (or in the folder the walk is given) in the test package's external files, in light and
+ * dark. The app's clock is [clock] (the captures' [CAPTURED] unless a test moves it on), its words English as the app's
+ * Android copy has them unless a test picks another [language], under Reduce Motion unless a test turns [reduceMotion]
+ * off. The root shows [session], which a test may change as the session's store would, in the walk's own appearance
+ * unless it [followsAppearance]. [fontScale] is the composition's own Density, not the phone's setting: 2, Android's
+ * largest step, which the app reads as iOS's accessibility2 (DynamicTypeSize), a shot at it named
  * <row>-<moment>-largest. What TalkBack would hear is read from the deliveries' announcements ([heard]). The views the
  * app asks the system for (a carrier's page in the browser) are kept here and not started, so nothing leaves the
  * device; the catalog a test installs is put back after it, with the monitor that keeps them.
  */
 internal class ParcelWalk(
     private val compose: AndroidComposeTestRule<ActivityScenarioRule<ComponentActivity>, ComponentActivity>,
+    folder: String = FOLDER,
 ) : ExternalResource() {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
-    private val shots = DeviceShots(compose, FOLDER)
+    private val shots = DeviceShots(compose, folder)
 
-    val localizer = Localizer(AppLanguage.En, variant = "android")
+    /** The app's language, picked before the window shows, and its words as the app's Android copy has them. */
+    var language: AppLanguage = AppLanguage.En
+        set(value) {
+            field = value
+            localizer = Localizer(value, variant = "android")
+        }
+
+    var localizer = Localizer(AppLanguage.En, variant = "android")
+        private set
 
     /** The bundled catalog's carriers, made before any test installs another catalog. */
     val identities: CarrierIdentities = DemoCards.identities
@@ -114,6 +131,15 @@ internal class ParcelWalk(
 
     var dark by mutableStateOf(false)
     var fontScale by mutableFloatStateOf(1f)
+
+    /** The session the root shows: what [show] was told, then what a test sets, as the session's store would. */
+    var session by mutableStateOf<AuthenticationState>(READER)
+
+    /** Remove animations, as the app reads the phone's setting; on unless a test turns it off. */
+    var reduceMotion by mutableStateOf(true)
+
+    /** Whether the window's appearance is the one picked in Settings, as MainActivity's, rather than [dark]. */
+    var followsAppearance = false
 
     private val asked = mutableListOf<Intent>()
 
@@ -168,14 +194,20 @@ internal class ParcelWalk(
 
     /**
      * `parcels` in the deliveries of `session`, the reader's unless said, their carriers `identities`, the stores set
-     * up by `prepare`; the list once it shows.
+     * up by `prepare`, the links received from `inbox` where a test gives one, the root drawn inside `around`; once
+     * `until` holds (the list shows, unless said), a second of the app's time where `settles`.
      */
     fun show(
         parcels: List<Parcel>,
         session: AuthenticationState = READER,
         identities: CarrierIdentities = this.identities,
+        inbox: DeliveriesInbox? = null,
+        until: () -> Boolean = { exists(PARCEL_LIST) },
+        settles: Boolean = true,
+        around: @Composable (@Composable () -> Unit) -> Unit = { it() },
         prepare: FakeDeliveries.() -> Unit = {},
     ) {
+        this.session = session
         val shown = FakeDeliveries(parcels, session).apply {
             localizer = this@ParcelWalk.localizer
             prepare()
@@ -189,18 +221,23 @@ internal class ParcelWalk(
             ViewCompat.setWindowInsetsAnimationCallback(window.decorView, keyboardSlides)
         }
         compose.setContent {
-            val inDark = dark
+            val inDark = if (followsAppearance) appearanceSetting().isDark(isSystemInDarkTheme()) else dark
             DisposableEffect(inDark) {
                 compose.activity.edgeToEdge(inDark)
                 onDispose {}
             }
             val density = LocalDensity.current
             CompositionLocalProvider(LocalDensity provides Density(density.density, fontScale), LocalDeliveriesState provides ::hear) {
-                RootHost(state = session, dark = inDark, reduceMotion = true, source = shown, identities = identities, now = { clock })
+                around {
+                    RootHost(
+                        state = this@ParcelWalk.session, language = language, dark = inDark, reduceMotion = reduceMotion, source = shown,
+                        inbox = inbox, identities = identities, now = { clock },
+                    )
+                }
             }
         }
-        compose.waitUntil(LONG_MILLIS) { exists(PARCEL_LIST) }
-        settle()
+        compose.waitUntil(LONG_MILLIS) { until() }
+        if (settles) settle() else compose.waitForIdle()
     }
 
     private fun hear(state: DeliveriesState) {
@@ -402,19 +439,20 @@ internal class ParcelWalk(
 
     /**
      * The whole screen once still as [FOLDER]/`moment`.png, -largest at the largest text, then, unless `alsoDark` is
-     * false, again in the dark appearance as `moment`-dark, the light one put back after.
+     * false, again in the dark appearance as `moment`-dark, the light one put back after; the first, which it returns.
      */
-    fun shot(moment: String, alsoDark: Boolean = true) {
+    fun shot(moment: String, alsoDark: Boolean = true): Bitmap {
         val name = if (fontScale >= 2f) "$moment-largest" else moment
         awaitStill()
-        shots.take(name)
-        if (!alsoDark) return
+        val light = shots.take(name)
+        if (!alsoDark) return light
         dark = true
         recompose()
         awaitStill()
         shots.take("$name-dark")
         dark = false
         recompose()
+        return light
     }
 
     companion object {

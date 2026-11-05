@@ -80,7 +80,7 @@ Juxi lists no contact, form or office for recipients outside China. For anything
 
 Juxi has no tracking page left for Peek to read: the tracking button on its home page no longer opens a tracker. So Peek follows Juxi parcels through tracking services and shows the status and history those services hold, in their wording. That history can lag behind the local carrier's own, and for some parcels there's nothing yet.
 
-If a tracking service names the carrier that took the parcel over, with that carrier's own number, Peek shows "Delivery with" and that carrier's name, with its number. Where Peek can read that carrier's own tracking, it asks there too, and once a scan there is at least as new as the newest in the history, it follows the parcel there and keeps the earlier scans.
+If a tracking service names the carrier that took the parcel over, with that carrier's own number, Peek shows "Delivery with" and that carrier's name, with its number. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. Where Peek can read that carrier's own tracking, it asks there too, and once a scan there is at least as new as the newest in the history, it follows the parcel there and keeps the earlier scans.
 
 While Peek follows the parcel through tracking services, it checks every 15 minutes, out for delivery too. After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Juxi Express or the seller for you.
 

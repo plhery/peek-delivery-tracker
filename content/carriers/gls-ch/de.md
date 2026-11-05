@@ -86,7 +86,7 @@ Ohne Postleitzahl zeigt GLS keinen Sendungsverlauf, deshalb ist das Feld „Post
 
 Dann siehst du den Status, jeden Scan mit Ort und Land auf einer Karte, den erwarteten Zustelltag, das Gewicht und den Zeitpunkt der Zustellung, ohne deinen Namen, deine Adresse, Kontaktdaten, Unterschrift und Referenz. Die Scans behalten den englischen Text von GLS. Liegt das Paket in einem ParcelShop, steht es auf „Abholbereit“. GLS gibt seine Zeiten ohne Zeitzone an, sie werden als Schweizer Zeit gelesen. GLS wird etwa einmal pro Stunde abgefragt, auch am Liefertag, und nach einer fehlgeschlagenen Abfrage erst nach 4 Stunden wieder. Mitteilungen bekommst du auf Wunsch für jeden Scan, nur für wichtige Schritte oder nur am Liefertag.
 
-Nennt GLS die Post als Zustellerin, steht auf der Paketseite „Zustellung durch Swiss Post“. Dann kann Peek dem Paket mit derselben Nummer in der Sendungsverfolgung der Post folgen, sobald die Post dort mindestens so aktuelle Schritte zeigt wie GLS. GLS oder die Post für dich kontaktieren kann es nicht.
+Nennt GLS die Post als Zustellerin, steht auf der Paketseite „Zustellung durch Swiss Post“ (oder „Bei Swiss Post angekündigt, noch nicht eingetroffen“, solange es bei der Post nur angekündigt ist, noch ohne eigenen Scan). Dann kann Peek dem Paket mit derselben Nummer in der Sendungsverfolgung der Post folgen, sobald die Post dort mindestens so aktuelle Schritte zeigt wie GLS. GLS oder die Post für dich kontaktieren kann es nicht.
 
 ## Fragen zur GLS Sendungsverfolgung in der Schweiz
 

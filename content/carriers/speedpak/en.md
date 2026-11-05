@@ -85,7 +85,7 @@ eBay prints the same email with the hours in China Standard Time, on a page for 
 
 [Peek](/) recognises an ES or EE number of 28 characters straight away, as no other carrier uses that shape. Links from orangeconnex.com or orangeconnex.cn with the number inside can be pasted too. It shows the status, the history with the town and country of each scan, the destination country, the delivery time and the delivering carrier with its number. SpeedPAK gives no expected delivery date and no pickup point, so Peek can't show them.
 
-When SpeedPAK names the delivering carrier, Peek can ask that carrier and switch to it once it shows newer progress. The parcel keeps the number you added, its page says "Delivery with" that carrier, and lists the carrier's own number with a link to its tracking. This depends on what SpeedPAK publishes, so not every parcel gets it.
+When SpeedPAK names the delivering carrier, Peek can ask that carrier and switch to it once it shows newer progress. The parcel keeps the number you added, its page says "Delivery with" that carrier, and lists the carrier's own number with a link to its tracking. While that carrier has only the announcement of the parcel, with no scan of its own, the page says "Announced to …, not received yet" instead. This depends on what SpeedPAK publishes, so not every parcel gets it.
 
 Peek checks every 10 minutes (every 2 minutes once the parcel is out for delivery), puts each scan on a map and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SpeedPAK or the seller, or open a claim for you.
 

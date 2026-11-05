@@ -50,7 +50,7 @@ Peek liest Chronoposts Sendungsverfolgung auf Französisch und zeigt die Meldung
 
 Chronopost liefert laut La Poste Groupe in 230 Länder.
 
-**Deutschland.** Nennt Chronopost für ein Paket nach Deutschland eine Paketnummer von DPD, stellt DPD in Deutschland es zu. Peek zeigt diese Nummer dann mit „Zustellung durch DPD Germany“ und fragt damit bei [DPD Germany](carrier:dpd-de) nach. Sobald DPD einen datierten Scan zeigt, der mindestens so neu ist wie Chronoposts neuester, verfolgt Peek das Paket bei DPD weiter und behält Chronoposts Verlauf; bei Chronopost fragt Peek noch einen Tag lang weiter nach, höchstens alle 55 Minuten.
+**Deutschland.** Nennt Chronopost für ein Paket nach Deutschland eine Paketnummer von DPD, stellt DPD in Deutschland es zu. Peek zeigt diese Nummer dann mit „Zustellung durch DPD Germany“ und fragt damit bei [DPD Germany](carrier:dpd-de) nach. Solange Peek das Paket bei DPD nur angekündigt findet, noch ohne eigenen Scan, zeigt es stattdessen „Bei DPD Germany angekündigt, noch nicht eingetroffen“. Sobald DPD einen datierten Scan zeigt, der mindestens so neu ist wie Chronoposts neuester, verfolgt Peek das Paket bei DPD weiter und behält Chronoposts Verlauf; bei Chronopost fragt Peek noch einen Tag lang weiter nach, höchstens alle 55 Minuten.
 
 **Österreich und Schweiz.** Hier nennt Peek keinen Partner und zeigt keine Partnernummer: Es verfolgt das Paket weiter bei Chronopost.
 
@@ -109,7 +109,7 @@ Nein. Chronopost tritt nicht als DPD auf, aber beide gehören zu Geopost, der Pa
 
 ### Wer stellt ein Chronopost-Paket in Deutschland zu?
 
-DPD, wenn Chronopost eine Paketnummer von DPD nennt. Peek zeigt dann „Zustellung durch DPD Germany“ und verfolgt das Paket bei DPD weiter, sobald DPD einen aktuellen Scan zeigt.
+DPD, wenn Chronopost eine Paketnummer von DPD nennt. Peek zeigt dann „Zustellung durch DPD Germany“ (solange es bei DPD nur angekündigt ist: „Bei DPD Germany angekündigt, noch nicht eingetroffen“) und verfolgt das Paket bei DPD weiter, sobald DPD einen aktuellen Scan zeigt.
 
 ### Wie lange bleibt ein Chronopost-Paket im Pickup-Relais?
 

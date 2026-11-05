@@ -53,7 +53,7 @@ BRTs Sendungsverfolgung auf vas.brt.it öffnet auf Italienisch und lässt sich a
 
 ## BRT-Paket nach Deutschland, Österreich oder in die Schweiz
 
-**Wer zustellt.** Ins europäische Ausland bringt BRT Pakete über das Netz von DPD, schwere oder sperrige Sendungen über einen anderen Partner. Bei DPD-Sendungen zeigt BRTs Sendungsdetail einen Kasten, der zu DPDs Sendungsverfolgung führt. Peek fragt DPD selbst, wenn die Sendung aus einem einzigen Paket besteht, BRT dessen 14-stellige DPD-Nummer nennt (Parcel number dpd) und der neueste Scan aus einem DPD-Depot in Deutschland, Österreich oder der Schweiz kommt. Dann zeigt Peek die DPD-Nummer mit „Zustellung durch DPD Germany“, „Zustellung durch DPD Austria“ oder „Zustellung durch DPD Switzerland“ und fragt mit ihr [DPD Germany](carrier:dpd-de), DPD Austria oder [DPD Switzerland](carrier:dpd-ch). Sobald DPD einen datierten Scan zeigt, der mindestens so neu ist wie BRTs neuester, verfolgt Peek das Paket bei DPD weiter und behält BRTs Verlauf; BRT fragt Peek noch einen Tag lang mit, höchstens alle 55 Minuten. Bei einer Sendung aus mehreren Paketen bleibt Peek bei BRT.
+**Wer zustellt.** Ins europäische Ausland bringt BRT Pakete über das Netz von DPD, schwere oder sperrige Sendungen über einen anderen Partner. Bei DPD-Sendungen zeigt BRTs Sendungsdetail einen Kasten, der zu DPDs Sendungsverfolgung führt. Peek fragt DPD selbst, wenn die Sendung aus einem einzigen Paket besteht, BRT dessen 14-stellige DPD-Nummer nennt (Parcel number dpd) und der neueste Scan aus einem DPD-Depot in Deutschland, Österreich oder der Schweiz kommt. Dann zeigt Peek die DPD-Nummer mit „Zustellung durch DPD Germany“, „Zustellung durch DPD Austria“ oder „Zustellung durch DPD Switzerland“ und fragt mit ihr [DPD Germany](carrier:dpd-de), DPD Austria oder [DPD Switzerland](carrier:dpd-ch). Solange Peek das Paket bei DPD nur angekündigt findet, noch ohne eigenen Scan, zeigt es stattdessen etwa „Bei DPD Germany angekündigt, noch nicht eingetroffen“. Sobald DPD einen datierten Scan zeigt, der mindestens so neu ist wie BRTs neuester, verfolgt Peek das Paket bei DPD weiter und behält BRTs Verlauf; BRT fragt Peek noch einen Tag lang mit, höchstens alle 55 Minuten. Bei einer Sendung aus mehreren Paketen bleibt Peek bei BRT.
 
 **Zoll.** Von Italien nach Deutschland oder Österreich bleibt ein Paket in der EU, also ohne Zoll. Die Schweiz gehört nicht zur EU; wie die Verzollung dort läuft, steht in [Paket beim Zoll](guide:customs).
 
@@ -116,7 +116,7 @@ Innerhalb Italiens meist 24 bis 48 Stunden, auf der Straße in die meisten europ
 
 ### Wer stellt ein BRT-Paket in Deutschland, Österreich oder der Schweiz zu?
 
-Meist DPD in deinem Land, mit einer eigenen DPD-Nummer. Besteht die Sendung aus einem Paket und nennt BRT diese Nummer, zeigt Peek etwa „Zustellung durch DPD Germany“ und verfolgt das Paket bei DPD weiter, sobald DPD einen aktuellen Scan zeigt.
+Meist DPD in deinem Land, mit einer eigenen DPD-Nummer. Besteht die Sendung aus einem Paket und nennt BRT diese Nummer, zeigt Peek etwa „Zustellung durch DPD Germany“ (solange es bei DPD nur angekündigt ist: „Bei DPD Germany angekündigt, noch nicht eingetroffen“) und verfolgt das Paket bei DPD weiter, sobald DPD einen aktuellen Scan zeigt.
 
 :::sources
 - [BRT: FAQ (Englisch)](https://www.brt.it/en/customer-service/faq/) – BRTcode, verpasste Zustellung, Einlagerung, Lieferzeiten, Schäden, Locker, 20 kg

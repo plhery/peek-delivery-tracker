@@ -61,7 +61,7 @@ YWE says it started in Los Angeles in 2024 and plans to cover most of the United
 
 **UK, Ireland, Canada and Australia.** YWE names no service outside the United States. If you were given a YWE number for a parcel to another country, ask the seller which carrier delivers it there.
 
-**YWE and Yanwen.** [Yanwen](carrier:yanwen) is a separate carrier in Peek, with its own numbers and tracker, and YWE's site doesn't say whether the two are linked. When Yanwen's tracker names YanwenExpress as a parcel's distributor and gives a YWE number for it, Peek shows "Delivery with YWE" and asks YWE's tracker too. Once YWE shows a scan at least as recent as Yanwen's latest, Peek follows the parcel on YWE's tracker and keeps Yanwen's scans.
+**YWE and Yanwen.** [Yanwen](carrier:yanwen) is a separate carrier in Peek, with its own numbers and tracker, and YWE's site doesn't say whether the two are linked. When Yanwen's tracker names YanwenExpress as a parcel's distributor and gives a YWE number for it, Peek shows "Delivery with YWE" and asks YWE's tracker too. While YWE has only the announcement of the parcel, with no scan of its own, it shows "Announced to YWE, not received yet" instead. Once YWE shows a scan at least as recent as Yanwen's latest, Peek follows the parcel on YWE's tracker and keeps Yanwen's scans.
 
 ## YWE parcel not arriving or tracking stuck
 

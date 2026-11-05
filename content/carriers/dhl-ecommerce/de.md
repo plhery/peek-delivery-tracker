@@ -99,7 +99,7 @@ Gefragt wird zuerst Webtrack. Kennt Webtrack das Paket nicht, wird DHLs globale 
 
 Du siehst den Status, jeden Scan mit Ort und Land auf einer Karte, den erwarteten Liefertag, wenn DHL einen nennt, den Absender und den Zustellzeitpunkt; von Webtrack auch Gewicht und Zusteller. Deine Adresse, die Referenz des Shops und der Name der Person, die unterschrieben hat, fallen weg. Die Scans bleiben in DHLs US-Englisch, jede Zustellung erscheint als „Zugestellt“. Ein Scan, der sich zeitlich nicht einordnen lässt, erscheint nicht.
 
-Nennt Webtrack USPS, kann das Paket bei USPS weiterverfolgt werden, und seine Seite zeigt „Zustellung durch USPS“. Pakete, die DHLs globale Seite beantwortet (Europa, Asien), verfolgt Peek nicht bis zur Post vor Ort. Mitteilungen kannst du für jeden Scan, nur für wichtige Schritte oder „Nur die Zustellung“ einstellen.
+Nennt Webtrack USPS, kann das Paket bei USPS weiterverfolgt werden, und seine Seite zeigt „Zustellung durch USPS“. Solange Peek das Paket bei USPS nur angekündigt findet, noch ohne eigenen Scan, zeigt sie stattdessen „Bei USPS angekündigt, noch nicht eingetroffen“. Pakete, die DHLs globale Seite beantwortet (Europa, Asien), verfolgt Peek nicht bis zur Post vor Ort. Mitteilungen kannst du für jeden Scan, nur für wichtige Schritte oder „Nur die Zustellung“ einstellen.
 
 ## Fragen zur DHL eCommerce Sendungsverfolgung
 

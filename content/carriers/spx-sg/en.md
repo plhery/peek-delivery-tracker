@@ -92,7 +92,7 @@ Added without a carrier, a parcel shows "No tracking history yet" while Peek ask
 
 **What Peek shows.** The status, each line in SPX's words, and the place for scans at warehouses, ports and sorting centres. SPX gives the exact moment of each scan, so Peek shows it in your device's time zone. Peek also keeps a few steps SPX's own page hides, such as import clearance and a return on its way back. It leaves out the seller's location, office addresses and the name of whoever took the parcel. SPX gives no expected delivery date, weight or pickup point, so Peek shows none.
 
-**From Janio to SPX.** When a Janio parcel's tracking names SPX with an SPX Singapore number, the parcel card says "Delivery with SPX Express Singapore" and Peek asks SPX too. Once SPX has a scan as recent as Janio's latest, Peek follows the parcel there and keeps Janio's history.
+**From Janio to SPX.** When a Janio parcel's tracking names SPX with an SPX Singapore number, the parcel card says "Delivery with SPX Express Singapore" and Peek asks SPX too. While SPX has only the announcement of the parcel, with no scan of its own, the card says "Announced to SPX Express Singapore, not received yet" instead. Once SPX has a scan as recent as Janio's latest, Peek follows the parcel there and keeps Janio's history.
 
 If SPX's tracker can't be reached, Peek shows what tracking services report instead, in their words.
 

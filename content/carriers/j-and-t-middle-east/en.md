@@ -30,7 +30,7 @@ J&T's tracker lists a parcel's scans newest first. Each scan has a short heading
 | --- | --- |
 | "Label created" | J&T's `Order creation`: the order exists, but J&T doesn't have the parcel yet. |
 | "At customs" | J&T's `Customs Declaration`, then `Customs Clearance`: a parcel from abroad is being cleared at the J&T branch it came in by. |
-| "Received by carrier" | J&T's `Picked-up`: J&T has collected the parcel. For a parcel from abroad, this comes after customs. |
+| "Received by carrier" | J&T's `Picked-up`: J&T has collected the parcel. For a parcel from abroad, `Picked-up` comes after customs and shows as "In transit". |
 | "In transit" | J&T has the parcel and is moving it between its branches. Scans name the branch's town and province. |
 | "Out for delivery" | J&T's `Delivering`: a J&T driver has it for delivery. Keep your phone on: J&T tries to reach recipients by phone, email or SMS. |
 | "Delivery attempted" | The driver couldn't deliver. J&T makes up to three attempts. |

@@ -85,7 +85,7 @@ GLS n'affiche son historique qu'avec le code postal : le champ « Code postal de
 
 Tu vois ensuite le statut, la ville et le pays de chaque scan sur une carte, le jour de livraison prévu, le poids et l'heure de livraison, sans ton nom, ton adresse, tes coordonnées, ta signature ni la référence. Les statuts gardent l'anglais de GLS ; celui du ParcelShop s'affiche « Prêt à être retiré ». Les heures des scans sont interprétées comme heure suisse. GLS est consulté environ une fois par heure, jour de livraison compris, et de nouveau 4 heures après une consultation qui a échoué. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
-Quand GLS nomme La Poste comme livreur, la page du colis affiche « Livraison par Swiss Post », et le suivi peut passer sur celui de La Poste, avec le même numéro, dès qu'elle y montre une étape au moins aussi récente que le dernier scan de GLS.
+Quand GLS nomme La Poste comme livreur, la page du colis affiche « Livraison par Swiss Post » (ou « Annoncé à Swiss Post, pas encore reçu » tant que La Poste n'a que l'annonce du colis, sans scan de sa part), et le suivi peut passer sur celui de La Poste, avec le même numéro, dès qu'elle y montre une étape au moins aussi récente que le dernier scan de GLS.
 
 ## Questions sur le suivi de colis GLS en Suisse
 

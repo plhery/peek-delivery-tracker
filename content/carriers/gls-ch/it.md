@@ -84,7 +84,7 @@ GLS mostra la cronologia delle scansioni solo con l'NPA di consegna, quindi il c
 
 Poi vedi lo stato, la città e il paese di ogni scansione su una mappa, il giorno di consegna previsto, il peso e l'ora di consegna, senza il tuo nome, indirizzo, recapiti o firma. Gli stati restano nell'inglese di GLS; quello del ParcelShop compare come «Pronto per il ritiro». Gli orari delle scansioni sono letti come ora svizzera. GLS viene controllato circa una volta all'ora, anche il giorno di consegna, e dopo un controllo non riuscito si riprova dopo 4 ore. Puoi ricevere notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna».
 
-Quando GLS indica che a consegnare è la Posta, la pagina del pacco mostra «Consegna con Swiss Post», e Peek può seguire il pacco sul tracking della Posta con lo stesso numero, appena la Posta mostra un avanzamento più recente. Peek non può contattare GLS o la Posta al posto tuo.
+Quando GLS indica che a consegnare è la Posta, la pagina del pacco mostra «Consegna con Swiss Post» (o «Annunciato a Swiss Post, non ancora ricevuto» finché la Posta ha il pacco solo annunciato, senza una sua scansione), e Peek può seguire il pacco sul tracking della Posta con lo stesso numero, appena la Posta mostra un avanzamento più recente. Peek non può contattare GLS o la Posta al posto tuo.
 
 ## Domande sul tracking GLS in Svizzera
 

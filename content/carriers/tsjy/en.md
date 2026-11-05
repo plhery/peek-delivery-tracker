@@ -111,7 +111,7 @@ For any other number, paste it all the same: Peek follows more than 3,500 carrie
 
 Peek reads TSJY's tracker: every line with its place and time. It leaves out the origin, the destination country and the line's name. TSJY gives no delivery date or weight. Peek's status follows the newest line it understands.
 
-When TSJY gives a 17FEIA number, or a line's number whose shape points to one carrier Peek knows, Peek asks that carrier. Until that carrier shows a scan at least as recent as TSJY's newest, Peek stays on TSJY's tracking, and the parcel already shows who delivers it ("Delivery with 17FEIA") and that number. Then Peek follows the parcel there and keeps TSJY's history.
+When TSJY gives a 17FEIA number, or a line's number whose shape points to one carrier Peek knows, Peek asks that carrier. Until that carrier shows a scan at least as recent as TSJY's newest, Peek stays on TSJY's tracking, and the parcel already shows who delivers it ("Delivery with 17FEIA", or "Announced to 17FEIA, not received yet" while 17FEIA has only the announcement of the parcel, with no scan of its own) and that number. Then Peek follows the parcel there and keeps TSJY's history.
 
 Peek checks every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TSJY, 17FEIA or the shops for you.
 

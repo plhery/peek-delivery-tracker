@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.ShareInbox
+import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import com.plhery.peekdeliverytracker.ui.LAUNCH_SLOW_MILLIS
 import com.plhery.peekdeliverytracker.ui.LocalWindowShortcuts
 import com.plhery.peekdeliverytracker.ui.PeekRoot
@@ -79,10 +80,11 @@ class MainActivity : ComponentActivity() {
         // The links that come to this window. A parcel's link comes by ParcelLinkActivity, in memory; one aimed at the
         // window itself still goes first, to the app's stores. What another app shared waits where ShareActivity saved it.
         // A notification opened brings its push's data, counted as the iPhone counts it. A link the app has just
-        // followed, here or by ParcelLinkActivity, isn't followed again.
+        // followed, here or by ParcelLinkActivity, isn't followed again. A shortcut on the app's icon is reported used.
         val inbox = DeliveriesInbox.of(
             this, parcelLink = app::openParcelLink, sharedDrafts = { ShareInbox.consume(app.shareDefaults()) }, invitationLink = app::openInvitation,
             opened = app::linkOpened, notificationOpened = app::notificationOpened, repeated = app::isRepeat,
+            shortcutUsed = { LauncherShortcuts.used(this, it) },
         )
         splash.setKeepOnScreenCondition {
             val now = SystemClock.uptimeMillis()

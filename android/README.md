@@ -34,6 +34,15 @@ As on the iPhone, signing out, an expired session or a deleted account takes the
 keeps the person's own on or off: the same account signing in again gets its notifications back by itself, and another
 account sees the prompt first.
 
+## Shortcuts on the app's icon
+
+Long-pressing the icon offers the iPhone's two App Shortcuts (`ShortcutIntents.swift`) as launcher shortcuts:
+
+- **Add a parcel** (`res/xml/shortcuts.xml`), there from install on, opens Add with its field empty.
+- **Next delivery** (`LauncherShortcuts.kt`) follows what the app publishes for the widget. It is named after the
+  first parcel on its way in the widget's order and opens its page. It goes when nothing is on the way, the widget's
+  switch is off or nobody is signed in; a copy pinned to the home screen stays, greyed, as "Next delivery".
+
 ## Release bundle
 
 ```sh

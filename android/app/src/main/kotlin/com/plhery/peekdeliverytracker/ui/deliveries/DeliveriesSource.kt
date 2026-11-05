@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.platform.AppNotifications
+import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import java.io.File
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
@@ -888,6 +889,7 @@ class DeliveriesInbox(
     private val notificationOpened: (NativeRoute) -> Unit = {},
     add: String? = null,
     private val repeated: (String) -> Boolean = { false },
+    private val shortcutUsed: (String) -> Unit = {},
 ) {
     private val parcelState = MutableStateFlow(parcel)
     private val addState = MutableStateFlow(add?.let(::AddLink))
@@ -974,7 +976,8 @@ class DeliveriesInbox(
      * analytics hear every `.onOpenURL`. Each is noted as the address seen last ([repeated], `LinkDeliveries.isRepeat`),
      * and the same again within a second isn't followed again where RootView's `open(_:)` would drop it: a parcel's link,
      * a friend, an invitation. The list's own routes, `parcel/<uuid>` and `add`, which ParcelListView's `handleURL`
-     * follows unguarded, open again. A notification the app posted, opened, comes before them all
+     * follows unguarded, open again. One of the shortcuts on the app's icon opens one of those, and is reported used
+     * ([shortcutUsed], [LauncherShortcuts]). A notification the app posted, opened, comes before them all
      * ([AppNotifications.payload], which reads the app's own alone).
      */
     fun follow(intent: Intent?) {
@@ -985,6 +988,7 @@ class DeliveriesInbox(
         if (intent?.action != Intent.ACTION_VIEW) return
         val url = intent.dataString ?: return
         opened()
+        LauncherShortcuts.shortcut(intent)?.let(shortcutUsed)
         val repeat = repeated(url)
         when (val route = NativeRoute(url)) {
             is NativeRoute.Parcel -> open(route.id)
@@ -1034,7 +1038,8 @@ class DeliveriesInbox(
          * takes it away. Each link followed is counted once ([opened]), and not again as the window is made again.
          * A notification opened is followed the same way, the window's own or one that comes after, its push's data
          * forgotten once read, and counted once ([notificationOpened]). Add's text waits as the parcel does. A link
-         * the app had just followed, in this window or another, is not followed again ([repeated]).
+         * the app had just followed, in this window or another, is not followed again ([repeated]). A shortcut on the
+         * app's icon that opened the window is reported used once ([shortcutUsed]).
          */
         fun of(
             activity: ComponentActivity,
@@ -1044,13 +1049,14 @@ class DeliveriesInbox(
             opened: () -> Unit = {},
             notificationOpened: (NativeRoute) -> Unit = {},
             repeated: (String) -> Boolean = { false },
+            shortcutUsed: (String) -> Unit = {},
         ): DeliveriesInbox {
             val registry = activity.savedStateRegistry
             val saved = registry.consumeRestoredStateForKey(SAVED)
             val inbox = DeliveriesInbox(
                 saved?.getString(PARCEL)?.let(UUID::fromString), parcelLink, sharedDrafts, saved?.getString(FRIEND)?.let(UUID::fromString),
                 invitationLink, opened, saved?.getString(NOTIFIED_FRIEND)?.let(UUID::fromString), saved?.getString(NOTIFIED_LINK),
-                notificationOpened, saved?.getString(ADD), repeated,
+                notificationOpened, saved?.getString(ADD), repeated, shortcutUsed,
             )
             registry.registerSavedStateProvider(SAVED) {
                 Bundle().apply {

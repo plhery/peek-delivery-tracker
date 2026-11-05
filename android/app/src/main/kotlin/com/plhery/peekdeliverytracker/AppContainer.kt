@@ -58,6 +58,7 @@ import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.DeviceParcelsFile
 import com.plhery.peekdeliverytracker.platform.FirebasePushTokens
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
+import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.NoAppleSignIn
@@ -111,7 +112,8 @@ import okhttp3.OkHttpClient
  * What the app cannot do yet is a stand-in (platform/StandIns.kt): Sign in with Apple and device attestation. Web
  * sign-in opens a Custom Tab (platform/CustomTabSignIn.kt). Pushes come through Firebase Cloud Messaging in a build
  * with its settings, and in no other (platform/FirebasePush.kt).
- * The home screen widget reads what the store publishes for it, and the cards' pictures it draws (widget/).
+ * The home screen widget reads what the store publishes for it, and the cards' pictures it draws (widget/); the next
+ * delivery's shortcut on the app's icon follows it (platform/LauncherShortcuts.kt).
  */
 class AppContainer(
     private val context: Context,
@@ -135,6 +137,9 @@ class AppContainer(
 
     /** The app group's defaults, which the iPhone shares with its widget. */
     private val groupDefaults: UserDefaults = PreferencesDefaults.appGroup(context, configuration.appGroupIdentifier)
+
+    /** What the store publishes for the widget, which the next delivery's shortcut on the app's icon follows too. */
+    private val deliveryWidgetStore = DeliveryWidgetSharedStore(groupDefaults)
 
     private val userAgent = PeekHttp.userAgent(BuildConfig.VERSION_CODE)
     private val log: ((String) -> Unit)? = if (debug) { line -> Log.d("PeekHttp", line) } else null
@@ -275,10 +280,10 @@ class AppContainer(
                 configuration, transport, KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.liveActivityRevocations"),
             ),
             defaults = defaults,
-            deliveryWidgetStore = DeliveryWidgetSharedStore(groupDefaults),
+            deliveryWidgetStore = deliveryWidgetStore,
             cacheFiles = ParcelCacheFolder.of(context),
             notifications = notifications,
-            widgetCenter = GlanceWidgetCenter(context),
+            widgetCenter = LauncherShortcuts.widgetCenter(context, deliveryWidgetStore, scope, GlanceWidgetCenter(context)),
             exportFiles = CacheExportFiles.of(context),
             region = region,
             scope = scope,

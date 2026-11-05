@@ -83,6 +83,11 @@
                 <data android:host="friend" />
                 <data android:host="add" />
             </intent-filter>
+            <!-- The shortcuts on the app's icon: "Add a parcel" (res/xml/shortcuts.xml), and the next delivery, which the
+                 app publishes (LauncherShortcuts). -->
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
 
         <!-- Web sign-in's window, over the app's: it opens the provider's page above itself, in the app's task, in the

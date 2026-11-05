@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.LocaleList
 import android.os.Looper
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -26,6 +27,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.FakeAndroidKeyStore
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
+import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
@@ -222,6 +224,27 @@ class AppContainerTest {
         idleUntil("the demo's widget again") { widget.snapshot?.parcels?.isNotEmpty() == true }
         assertTrue(widget.isEnabled)
         assertTrue(source.deliveryWidgetEnabled.value)
+    }
+
+    /**
+     * The next delivery's shortcut on the app's icon follows what the store publishes for the widget: the demo's first
+     * parcel on its way, by its name, and none once the widget is turned off.
+     */
+    @Test
+    fun theNextDeliverysShortcutFollowsTheWidget() {
+        PreferencesDefaults.standard(context).set("demo", forKey = "sdt.native.experience.v1")
+        val app = container()
+        val widget = DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(context, "group.test.peek"))
+        app.start(process.lifecycle)
+        idleUntil("the demo's next delivery") { ShortcutManagerCompat.getDynamicShortcuts(context).isNotEmpty() }
+        val next = checkNotNull(widget.snapshot).parcels.first { it.deliveredAt == null }
+        val shortcut = ShortcutManagerCompat.getDynamicShortcuts(context).single()
+        assertEquals(LauncherShortcuts.NEXT_DELIVERY, shortcut.id)
+        assertEquals(next.label, shortcut.shortLabel.toString())
+        assertEquals(next.deepLink, shortcut.intent.dataString)
+
+        ContainerDeliveries(app).setDeliveryWidgetEnabled(false)
+        idleUntil("the shortcut gone") { ShortcutManagerCompat.getDynamicShortcuts(context).isEmpty() }
     }
 
     /**

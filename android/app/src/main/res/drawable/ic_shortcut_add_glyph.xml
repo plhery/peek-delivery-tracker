@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Add a parcel"'s glyph, 44 across in the middle of the icon's 108: Material Symbols Rounded's add (weight 400,
+     optical size 24), whose outlines the app draws for SF Symbols (MaterialSymbolPaths.kt), in the mark's ink. The
+     icon's monochrome layer too, which a launcher tints by its alpha alone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.0458333"
+        android:scaleY="0.0458333"
+        android:translateX="32"
+        android:translateY="76">
+        <path
+            android:fillColor="@color/mark_ink"
+            android:pathData="M440-440H240q-17 0-28.5-11.5T200-480q0-17 11.5-28.5T240-520h200v-200q0-17 11.5-28.5T480-760q17 0 28.5 11.5T520-720v200h200q17 0 28.5 11.5T760-480q0 17-11.5 28.5T720-440H520v200q0 17-11.5 28.5T480-200q-17 0-28.5-11.5T440-240v-200Z" />
+    </group>
+</vector>

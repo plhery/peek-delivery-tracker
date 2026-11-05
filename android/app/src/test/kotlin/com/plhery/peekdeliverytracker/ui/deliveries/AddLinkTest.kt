@@ -34,15 +34,19 @@ import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
-/** A window of the app as far as an add link goes: its own inbox, the links it counted, and the deliveries' screens. */
+/**
+ * A window of the app as far as an add link goes: its own inbox, the links it counted, the shortcuts on the app's icon
+ * it was opened on, and the deliveries' screens.
+ */
 class AddLinkWindow : ComponentActivity() {
     val views = mutableListOf<String>()
     var opened = 0
+    val shortcuts = mutableListOf<String>()
     lateinit var inbox: DeliveriesInbox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inbox = DeliveriesInbox.of(this, opened = { opened++ })
+        inbox = DeliveriesInbox.of(this, opened = { opened++ }, shortcutUsed = { shortcuts += it })
         setContent {
             CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
                 RootHost(state = state.value, source = source, onView = { views += it }, inbox = inbox)

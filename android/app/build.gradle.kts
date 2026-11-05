@@ -263,6 +263,8 @@ val systemStrings = tasks.register<SystemStrings>("systemStrings") {
     // The widget's name and description in the widget gallery (`configurationDisplayName`, `description`).
     strings.put("widget_gallery_name", "widget.galleryName")
     strings.put("widget_gallery_description", "widget.galleryDescription")
+    // The "Add a parcel" shortcut on the app's icon (res/xml/shortcuts.xml), the iPhone's AddParcelIntent's title.
+    strings.put("shortcut_add_parcel", "appIntents.addParcel")
     // Localization.json's languages, as the iPhone's .lproj folders name them.
     qualifiers.putAll(
         mapOf(

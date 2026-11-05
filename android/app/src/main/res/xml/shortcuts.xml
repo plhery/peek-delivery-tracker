@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The shortcut the launcher shows on the app's icon from install on, the iPhone's "Add a parcel" App Shortcut
+     (ShortcutIntents.swift), in the phone's language (shortcut_add_parcel, written at build time from the shared copy):
+     the app's own link to Add, with no number, which opens Add with its field empty. Android starts a manifest
+     shortcut's window in a task made again (FLAG_ACTIVITY_CLEAR_TASK), so the deliveries come up anew under Add. Its id,
+     in the intent, is how the window reports the shortcut used (LauncherShortcuts). The next delivery's shortcut is
+     published from the app (LauncherShortcuts). -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_add"
+        android:shortcutId="add"
+        android:shortcutLongLabel="@string/shortcut_add_parcel"
+        android:shortcutShortLabel="@string/shortcut_add_parcel">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="peekdeliverytracker://add"
+            android:targetClass="com.plhery.peekdeliverytracker.MainActivity"
+            android:targetPackage="com.plhery.peekdeliverytracker">
+            <extra
+                android:name="android.intent.extra.shortcut.ID"
+                android:value="add" />
+        </intent>
+    </shortcut>
+</shortcuts>

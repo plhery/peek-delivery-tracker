@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -35,7 +36,8 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The app's icon (X-AD14) at a launcher's size on a phone, as launchers mask it: under a circle, Android's own mask, and
- * a squircle; and the eyes alone tinted as a themed icon, in a light launcher and a dark one.
+ * a squircle; the eyes alone tinted as a themed icon, in a light launcher and a dark one; and the icons of the
+ * shortcuts on it, in a light launcher and a dark one too.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -73,6 +75,21 @@ class AppIconScreenshotTest {
         shoot("themed") {
             OnWallpaper(Color.White) { LauncherIcon(light, CircleShape) }
             OnWallpaper(Color.Black) { LauncherIcon(dark, CircleShape) }
+        }
+    }
+
+    /** "Add a parcel" and the next delivery (LauncherShortcuts), as the launcher's menu masks them. */
+    @Test
+    fun shortcuts() {
+        val icons = listOf(R.drawable.ic_shortcut_add, R.drawable.ic_shortcut_next_delivery).map { app.getDrawable(it) as AdaptiveIconDrawable }
+        shoot("shortcuts") {
+            for (wallpaper in listOf(Color.White, Color.Black)) {
+                OnWallpaper(wallpaper) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        for (icon in icons) LauncherIcon(listOf(icon.background, icon.foreground), CircleShape)
+                    }
+                }
+            }
         }
     }
 }

@@ -223,6 +223,17 @@ process.stdout.write(JSON.stringify(fixture[key]));
     assert.equal(result.output, `deploy=true\ncommit=${sha('2')}\n`);
   });
 
+  it('deploys a re-run commit when the commits after it handed nothing over, and stands it down when one passed', () => {
+    // A web change whose first run failed passes on a re-run after a documentation push, whose run hands nothing over.
+    const runs = [ciRun('2', 6), { ...ciRun('1', 0), run_attempt: 2 }];
+    for (const args of [[`--commit=${sha('1')}`], [`--commit=${sha('1')}`, '--at-once']]) {
+      const result = gate(args, { runs, jobs: { 2: failed, 1: passed } });
+      assert.equal(result.status, 0, result.log);
+      assert.equal(result.output, `deploy=true\ncommit=${sha('1')}\n`);
+      assert.equal(gate(args, { runs, jobs: { 2: passed, 1: passed } }).output, `deploy=false\ncommit=${sha('1')}\n`);
+    }
+  });
+
   it('stops a re-run of a commit a newer one replaced, without waiting', () => {
     const result = gate([`--commit=${sha('1')}`, '--at-once'], { runs: [ciRun('3', 6, 'in_progress'), ciRun('2', 3), ciRun('1', 0)], jobs: { 3: failed, 2: passed, 1: passed } });
     assert.equal(result.status, 0, result.log);

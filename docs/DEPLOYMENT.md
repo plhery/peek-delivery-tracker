@@ -175,8 +175,11 @@ arrive during a run, only the newest is tested next. So a push that only changes
 waits for the native tests in progress, then skips them, instead of restarting them. For web changes, once all selected checks have passed, CI hands the commit
 to the Deploy workflow (`.github/workflows/deploy.yml`). Intentionally skipped migration
 tests allow this; failures and canceled checks block it. Documentation, native-only and
-SQL-only changes do not deploy the web image. The iPhone and Android apps are tested in
-their own workflows and do not hold a deploy back.
+SQL-only changes do not deploy the web image. A re-run on `main` that passes hands its commit
+over too, even after newer pushes, and it deploys unless a newer commit has been handed over
+since: web changes whose first run failed still reach production when only changes that deploy
+nothing came after them. The iPhone and Android apps are tested in their own workflows and do
+not hold a deploy back.
 
 Every deploy restarts the server, and pushes often come a few minutes apart. So a handed
 over commit waits while CI tests a newer one pushed before the oldest commit still waiting

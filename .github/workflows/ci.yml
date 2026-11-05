@@ -231,15 +231,12 @@ jobs:
       contents: read
       actions: write
     steps:
-      # Runs on main go one at a time, so commits are handed over in order. Only a re-run could
-      # hand over an older commit, and it is skipped unless its commit is still the newest.
+      # Runs on main go one at a time, so commits are handed over in order. A re-run hands its
+      # commit over too once main has moved on: the Deploy workflow stands it down when a newer
+      # commit has been handed over, and deploys it when the commits after it handed nothing over
+      # (documentation, native or SQL changes, or failed runs), which would otherwise leave its
+      # web changes out of production.
       - name: Hand the commit to the Deploy workflow
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          current_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
-          if [ "$GITHUB_RUN_ATTEMPT" != 1 ] && [ "$current_sha" != "$GITHUB_SHA" ]; then
-            echo "Skipping the re-run of $GITHUB_SHA: main is now $current_sha"
-            exit 0
-          fi
-          gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main -f commit="$GITHUB_SHA"
+        run: gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main -f commit="$GITHUB_SHA"

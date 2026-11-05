@@ -23,6 +23,9 @@
  *   row showing that wall clock under another offset (DHL Express's mobile API
  *   and global portal). A scan its source restates with or without its
  *   milliseconds takes over the row of that second (Royal Mail's locker drop-off).
+ *   A scan that takes a row over by its wall clock under another offset never
+ *   moves the row later than it was first stored: it keeps the row's time
+ *   (`withHeldClocks`).
  * - Whatever the policy, a scan the carrier's own answer moved up to three
  *   hours later, or up to an hour earlier, takes over the row of the old time
  *   that the answer no longer lists (`retimedScans`). The row keeps that old
@@ -158,12 +161,15 @@ function byInstant(rows: readonly JsonObject[]): Map<number, JsonObject[]> {
  * matched by `relabelled`, its `matchWallClock` another, matched by
  * `sameWallClock`, and its `matchWithinMinute` another, for rows less than a
  * minute away that its `matches` accepts. A last pass, for every policy,
- * matches the scans and rows left by `restatedSecond`.
+ * matches the scans and rows left by `restatedSecond`. The relabelled and
+ * same-wall-clock passes put in `held` each scan whose instant is past when
+ * the row it takes over was first stored (`pastFirstStored`), with that row.
  */
 export function sameInstantIdentities(
   events: readonly JsonObject[],
   stored: readonly JsonObject[],
   sourceCarrierId: string,
+  held: Map<string, string> = new Map(),
 ): Map<string, string> {
   const reused = new Map<string, string>();
   const policy = sameInstantIdentityPolicy(sourceCarrierId, { supportsScanMatching: true });
@@ -195,8 +201,8 @@ export function sameInstantIdentities(
     }
   }
   const zone = relabelledFrom(policy);
-  if (zone) matchLeft(reused, unmatched, candidates, (scan, row) => relabelled(zone, scan, row));
-  if (matchesWallClock(policy)) matchLeft(reused, unmatched, candidates, sameWallClock);
+  if (zone) matchLeft(reused, unmatched, candidates, (scan, row) => relabelled(zone, scan, row), held);
+  if (matchesWallClock(policy)) matchLeft(reused, unmatched, candidates, sameWallClock, held);
   const { matches } = policy;
   if (matchesWithinMinute(policy) && matches) {
     matchLeft(reused, unmatched, candidates, (scan, row) => withinMinute(scan, row) && matches(scanEvidence(scan), scanEvidence(row)));
@@ -224,12 +230,16 @@ function restatedSecond(policy: SameInstantIdentityPolicy, scan: JsonObject, row
     && String(scan.location ?? '').trim() === String(row.location ?? '').trim();
 }
 
-/** Each scan left whose one matching row left matches no other scan left takes that row over. */
+/**
+ * Each scan left whose one matching row left matches no other scan left takes that row over.
+ * With `held`, a scan whose instant is past when that row was first stored goes in it too.
+ */
 function matchLeft(
   reused: Map<string, string>,
   unmatched: ReadonlyMap<number, JsonObject[]>,
   candidates: ReadonlyMap<number, JsonObject[]>,
   matches: (scan: JsonObject, row: JsonObject) => boolean,
+  held?: Map<string, string>,
 ): void {
   const taken = new Set(reused.values());
   const scans = [...unmatched.values()].flat().filter((scan) => !reused.has(identity(scan)));
@@ -240,7 +250,53 @@ function matchLeft(
     const saved = matching[0]!;
     if (scans.filter((other) => matches(other, saved)).length !== 1) continue;
     reused.set(identity(scan), identity(saved));
+    if (held && pastFirstStored(scan, saved)) held.set(identity(scan), identity(saved));
   }
+}
+
+/** How far a source's clock may run ahead of Peek's when a row is first stored (`pastFirstStored`). */
+const FIRST_STORED_SKEW_MS = 5 * 60 * 1_000;
+
+/**
+ * A scan dated later than the row it takes over was first stored, beyond the clocks' skew, and
+ * later than the row shows. Nothing is scanned after Peek stored it, so a wall clock read under
+ * such an offset is read under the wrong one: USPS reads a label's wall clock in UTC or on
+ * Pacific time depending on when it is read.
+ */
+function pastFirstStored(scan: JsonObject, row: JsonObject): boolean {
+  const first = Date.parse(String(row.created_at ?? ''));
+  const at = instantOf(scan);
+  return Number.isFinite(first) && at > first + FIRST_STORED_SKEW_MS && at > instantOf(row);
+}
+
+/** The raw data keys that hold a row's clock, which the stored identities carry (`withHeldClocks`). */
+const CLOCK_KEYS = ['time', 'local_time', 'time_zone_basis', 'time_provenance', 'provider_time_iso'] as const;
+
+/**
+ * The batch with each scan `held` names at the time of the row it takes over, when it still
+ * takes that row over (`reused`): the row's instant and the clock keys of its raw data, so the
+ * row keeps its time and no second row holds the scan.
+ */
+export function withHeldClocks(
+  events: readonly JsonObject[],
+  stored: readonly JsonObject[],
+  reused: ReadonlyMap<string, string>,
+  held: ReadonlyMap<string, string>,
+): JsonObject[] {
+  if (held.size === 0) return [...events];
+  const rows = new Map(stored.map((row) => [identity(row), row]));
+  return events.map((event) => {
+    const row = rows.get(held.get(identity(event)) ?? '');
+    if (!row || reused.get(identity(event)) !== identity(row) || !Number.isFinite(instantOf(row))) return event;
+    const raw: JsonObject = { ...(isRecord(event.raw_data) ? event.raw_data : {}) };
+    for (const key of CLOCK_KEYS) {
+      const value = rawOf(row, key);
+      if (typeof value === 'string' && value !== '') raw[key] = value;
+      else delete raw[key];
+    }
+    const occurredAt = DateTime.fromMillis(instantOf(row), { zone: 'utc' }).toISO({ suppressMilliseconds: true });
+    return { ...event, occurred_at: occurredAt, raw_data: raw };
+  });
 }
 
 /** The zone a policy's source once read every wall clock in. Policies from scraper releases before the field name none. */

@@ -7290,6 +7290,43 @@ describe('DHL Express records from either feed', () => {
   });
 });
 
+describe('a USPS label read on another clock after it was stored', () => {
+  // USPS reads a label's wall clock in UTC, and read later on Pacific time: 8 h after Peek stored the scan.
+  const label = (time: string): CarrierResult => ({ status: 'pending', current_stage: 'registered', last_update: time,
+    last_status_text: 'Shipping Label Created, USPS Awaiting Item', events: [{ time, stage: 'registered',
+      description: 'Shipping Label Created, USPS Awaiting Item', location: 'EXAMPLE CITY, CA 90000' }] });
+  const load = (store: ReturnType<typeof eventStore>) => ({ id: 'usps-parcel', user_id: 'owner', carrier: 'usps',
+    tracking_number: '9400100000000000000000', current_stage: 'registered', [STORED_EVENT_IDENTITIES]: store.identities() });
+  const rows = (store: ReturnType<typeof eventStore>) => [...store.rows.values()]
+    .map(({ id, provider_event_id, occurred_at, raw_data }) => ({ id, provider_event_id, occurred_at, time: (raw_data as JsonObject).time }));
+
+  it('keeps one row at the time it was stored with', async () => {
+    const store = eventStore();
+    const adapter = { fetch: vi.fn().mockResolvedValueOnce(label('2026-11-04T04:41:00Z')).mockResolvedValue(label('2026-11-04T04:41:00-08:00')) };
+    const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-11-04T13:00:00Z'));
+    await service.syncPackage(load(store));
+    const [stored] = rows(store);
+    expect(stored).toMatchObject({ occurred_at: eventTimestamp('2026-11-04T04:41:00Z', 'UTC'), time: '2026-11-04T04:41:00Z' });
+    store.rows.get(stored!.provider_event_id as string)!.created_at = '2026-11-04T05:04:16.173+00:00';
+    await service.syncPackage(load(store));
+    await service.syncPackage(load(store));
+    expect(rows(store)).toEqual([stored]);
+  });
+
+  it('moves a row stored after the later clock to it', async () => {
+    const store = eventStore();
+    const adapter = { fetch: vi.fn().mockResolvedValueOnce(label('2026-11-04T04:41:00Z')).mockResolvedValue(label('2026-11-04T04:41:00-08:00')) };
+    const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-11-04T13:00:00Z'));
+    await service.syncPackage(load(store));
+    const [stored] = rows(store);
+    store.rows.get(stored!.provider_event_id as string)!.created_at = '2026-11-04T12:50:00+00:00';
+    await service.syncPackage(load(store));
+    expect(rows(store)).toEqual([{ ...stored, occurred_at: eventTimestamp('2026-11-04T04:41:00-08:00', 'UTC'), time: '2026-11-04T04:41:00-08:00' }]);
+  });
+});
+
 describe('reworded DPD scans', () => {
   // The fixtures' synthetic number: a DPD reply must name the parcel asked for.
   const NUMBER = '06080000000001';

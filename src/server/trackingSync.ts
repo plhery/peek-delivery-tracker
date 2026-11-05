@@ -39,7 +39,7 @@ import {
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
 import { REDETECTION_PAGE, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
-import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
   askedForCheck,
@@ -2068,7 +2068,8 @@ export class TrackingSyncService {
       adopt(strippedMarkup(events, stored));
       const policyCarriers = fetched.earlierResult && fetched.earlierCarrierId && fetched.earlierCarrierId !== sourceCarrierId
         ? [sourceCarrierId, fetched.earlierCarrierId] : [sourceCarrierId];
-      for (const policyCarrier of policyCarriers) adopt(sameInstantIdentities(events, stored, policyCarrier));
+      const held = new Map<string, string>();
+      for (const policyCarrier of policyCarriers) adopt(sameInstantIdentities(events, stored, policyCarrier, held));
       // Last, a scan its source reworded takes over the row of its old words once the source no longer lists them.
       adopt(rewordedScans(events, stored, reworded));
       // The earlier carrier's relay of a delivery scan stays its own row, at the same second or to the minute.
@@ -2078,6 +2079,9 @@ export class TrackingSyncService {
       const retimed = typeof result.tracking_provider === 'string' ? new Map<string, string>()
         : retimedScans(events, stored, sourceCarrierId, new Map([...reworded, ...shared.reused, ...shared.skipped]));
       const matches = { reused: new Map([...reworded, ...shared.reused, ...retimed]), skipped: shared.skipped };
+      // A scan that takes a row over by its wall clock under another offset keeps the row's time
+      // when its own is past when the row was first stored.
+      events = withHeldClocks(events, stored, matches.reused, held);
       // The parcel's own carrier listing fewer of its own scans already stored (JRT dropping a parcel's
       // later scans and keeping the label's, sometimes with a label scan the rows lack) takes nothing
       // back while each stored scan keeps its stage and no scan is newer than its stored progress: the

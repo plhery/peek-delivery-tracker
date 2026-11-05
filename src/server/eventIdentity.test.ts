@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { JsonObject } from './types';
-import { datedObservations, filledPlaceholders, misdatedCopies, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { datedObservations, filledPlaceholders, misdatedCopies, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 
 // New events carry the sync's ISO spelling; stored rows come back from
 // PostgREST with an explicit +00:00 offset. Both name the same instant.
@@ -295,6 +295,61 @@ describe('scans a source once read on one zone\'s clock', () => {
 
   it('leaves the same-instant match first', () => {
     expect([...sameInstantIdentities([abroad], [labelled, own], 'india-post')]).toEqual([['india-post:abroad', 'india-post:own']]);
+  });
+});
+
+describe('a wall-clock take-over past when the row was first stored', () => {
+  // USPS reads a label's wall clock in UTC, and read later on Pacific time: 8 h after Peek stored the scan.
+  const description = 'Shipping Label Created, USPS Awaiting Item';
+  const location = 'EXAMPLE CITY, CA 90000';
+  const row = { provider_event_id: 'usps:label-utc', occurred_at: '2026-11-04T04:41:00+00:00', time: '2026-11-04T04:41:00Z',
+    stage: 'registered', description, location, created_at: '2026-11-04T05:04:16.173+00:00' };
+  const pacific = { package_id: 'package-1', provider_event_id: 'usps:label-pacific', occurred_at: '2026-11-04T12:41:00.000Z',
+    stage: 'registered', description, location, raw_data: { time: '2026-11-04T04:41:00-08:00', local_time: '2026-11-04T04:41:00',
+      time_zone_basis: 'carrier', stage: 'registered' } };
+  const takeOver = (scan: JsonObject, stored: JsonObject, carrier = 'usps') => {
+    const held = new Map<string, string>();
+    const reused = sameInstantIdentities([scan], [stored], carrier, held);
+    return { reused, held, persisted: withHeldClocks([scan], [stored], reused, held) };
+  };
+
+  it('takes the row over at the row\'s time, its clock keys with it', () => {
+    const { reused, held, persisted } = takeOver(pacific, row);
+    expect([...reused]).toEqual([['usps:label-pacific', 'usps:label-utc']]);
+    expect([...held]).toEqual([['usps:label-pacific', 'usps:label-utc']]);
+    expect(persisted).toEqual([{ ...pacific, occurred_at: '2026-11-04T04:41:00Z',
+      raw_data: { time: '2026-11-04T04:41:00Z', stage: 'registered' } }]);
+    // A scan India Post's labelled clock would move past when its row was stored, too.
+    const labelled = { provider_event_id: 'india-post:labelled', occurred_at: '2026-07-14T02:20:00+00:00', time: '2026-07-14T02:20:00Z',
+      stage: 'in_transit', description: 'Item Received', location: 'EXAMPLE EXCHANGE OFFICE 999001', provider_code: 'ItemReceived' };
+    const abroad = { package_id: 'package-1', provider_event_id: 'india-post:abroad', occurred_at: '2026-07-14T05:50:00.000Z',
+      stage: 'in_transit', description: 'Item received at office of exchange (Inb)', location: labelled.location,
+      raw_data: { time: '2026-07-14T07:50:00+02:00', provider_code: 'ItemReceived' } };
+    expect(takeOver(abroad, { ...labelled, created_at: '2026-07-14T02:30:00+00:00' }, 'india-post').persisted)
+      .toEqual([{ ...abroad, occurred_at: '2026-07-14T02:20:00Z', raw_data: { time: '2026-07-14T02:20:00Z', provider_code: 'ItemReceived' } }]);
+    expect(takeOver(abroad, { ...labelled, created_at: '2026-07-15T09:00:00+00:00' }, 'india-post').persisted).toEqual([abroad]);
+  });
+
+  it('moves the row within the clocks\' skew of when it was first stored, earlier, or when that is unknown', () => {
+    for (const stored of [{ ...row, created_at: '2026-11-04T12:37:00+00:00' }, { ...row, created_at: '2026-11-04T13:00:00Z' },
+      { ...row, created_at: undefined }, { ...row, created_at: 'never' }]) {
+      const { reused, held, persisted } = takeOver(pacific, stored);
+      expect(reused.size).toBe(1);
+      expect(held.size).toBe(0);
+      expect(persisted).toEqual([pacific]);
+    }
+    // A row a take-over moved past when it was stored goes back to the earlier clock.
+    const moved = { ...row, occurred_at: '2026-11-04T12:41:00+00:00', time: '2026-11-04T04:41:00-08:00' };
+    const utc = { ...pacific, provider_event_id: 'usps:label-utc-scan', occurred_at: '2026-11-04T04:41:00.000Z', raw_data: { time: '2026-11-04T04:41:00Z' } };
+    expect(takeOver(utc, moved)).toMatchObject({ held: new Map(), persisted: [utc] });
+    expect(takeOver(utc, moved).reused.size).toBe(1);
+  });
+
+  it('leaves a scan on its own clock when it takes no row over, or another one', () => {
+    const held = new Map([['usps:label-pacific', 'usps:label-utc']]);
+    expect(withHeldClocks([pacific], [row], new Map(), held)).toEqual([pacific]);
+    expect(withHeldClocks([pacific], [row], new Map([['usps:label-pacific', 'usps:other']]), held)).toEqual([pacific]);
+    expect(withHeldClocks([pacific], [], new Map([['usps:label-pacific', 'usps:label-utc']]), held)).toEqual([pacific]);
   });
 });
 

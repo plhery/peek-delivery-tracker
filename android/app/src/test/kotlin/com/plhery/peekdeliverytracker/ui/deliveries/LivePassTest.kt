@@ -293,7 +293,8 @@ class LivePassTest {
     fun theMarksTheNameAndTheButtonsSayWhatTheyDoAndTheMarksOpenTheCarrierEditor() {
         show()
         open("Birthday gift")
-        node(PAGE_MARKS).assertContentDescriptionEquals("Change carrier from Chronopost")
+        // Voice Access answers to the name the mark shows, which the label starts with.
+        node(PAGE_MARKS).assertContentDescriptionEquals("Chronopost. Change carrier from Chronopost")
         assertEquals("Edit parcel name", clickLabel(node(PAGE_NAME)))
         node(PAGE_GLOBE).assertContentDescriptionEquals("Open the map")
         node(PAGE_SHARE).assertContentDescriptionEquals("Share this parcel")
@@ -341,6 +342,13 @@ class LivePassTest {
         assertNull(deliveries.mapCover)
         assertEquals(gift, deliveries.carrierEditor?.parcelId)
         assertEquals(0, source.actions.count { it == "parcel-map-open" })
+    }
+
+    @Test
+    fun handedOverTheMarksAreReadByBothNamesFirst() {
+        show(parcels = handedOver())
+        open("Birthday gift")
+        node(PAGE_MARKS).assertContentDescriptionEquals("Chronopost, Swiss Post. Change carrier from Chronopost. Delivery with Swiss Post")
     }
 
     @Test

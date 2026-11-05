@@ -232,8 +232,12 @@ internal fun LivePassCard(
         Column(Modifier.fillMaxWidth().padding(CARD_PADDING), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             val tint = ink.copy(alpha = ink.alpha * 0.75f)
             val marks = @Composable {
-                val label = listOfNotNull(localizer.text("detail.changeCarrierFrom", mapOf("carrier" to branding.fullName)), deliveryLine)
-                    .joinToString(". ")
+                // Voice Access answers to the carrier names the marks show, which come first, as well as to what they do.
+                val label = listOfNotNull(
+                    listOfNotNull(branding.name, delivery?.name).joinToString(", "),
+                    localizer.text("detail.changeCarrierFrom", mapOf("carrier" to branding.fullName)),
+                    deliveryLine,
+                ).joinToString(". ")
                 val change = { onEditCarrier(null, marksFocus) }
                 PassMarks(
                     branding, delivery, frames, change.takeIf { editable },

@@ -104,6 +104,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_CARRIER_LINK
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_COPY_NUMBER
 import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_NUMBER
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.deliveries.assertAnnounced
 import com.plhery.peekdeliverytracker.ui.sheet.FullScreenCover
 import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
@@ -699,11 +700,23 @@ class ParcelLinkSheetTest {
         assertEquals(hapticFeedbackConstant(SensoryFeedback.Success), shadowOf(rootView()).lastHapticFeedbackPerformed())
         assertEquals(listOf("parcel-copy-tracking"), links.actions.filter { it == "parcel-copy-tracking" })
         copy.assertContentDescriptionEquals(text("detail.copied"))
+        // From Android 13 the system's overlay shows the copy and TalkBack reads it: the sheet adds no second one.
+        assertTrue(announcement().isNullOrEmpty())
         compose.mainClock.advanceTimeBy(1_800)
         copy.assertContentDescriptionEquals(text("detail.copied"))
         compose.mainClock.advanceTimeBy(200)
         copy.assertContentDescriptionEquals(text("detail.copyTracking"))
         compose.mainClock.autoAdvance = true
+    }
+
+    /** Up to Android 12L nothing of the system's says so: TalkBack is told, as VoiceOver is. */
+    @Test
+    @Config(sdk = [31])
+    fun beforeAndroid13TheCopyOfTheNumberIsReadOut() {
+        show(FakeParcelLinks(LinkFixtures.keepable()))
+        open()
+        val copy = compose.onNodeWithTag(PAGE_COPY_NUMBER).performScrollTo()
+        compose.assertAnnounced(text("detail.copied"), LINK_ANNOUNCEMENT) { copy.performClick() }
     }
 
     @Test

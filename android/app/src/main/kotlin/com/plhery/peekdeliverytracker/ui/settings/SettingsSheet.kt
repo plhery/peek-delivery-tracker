@@ -667,6 +667,7 @@ private fun SettingsAlerts(state: AccountHost, nav: SettingsNav) {
                             message = localizer.text("account.deleteDescription"),
                             action = localizer.text("account.deletePermanent"),
                             actionTag = SETTINGS_ALERT_ACTION,
+                            destructive = true,
                             actionEnabled = demo || typed.cleaned() == email.cleaned(),
                             field = if (demo) null else AlertField(localizer.text("account.typeToConfirm", mapOf("email" to email)), typed) {
                                 nav.confirmation.value = it

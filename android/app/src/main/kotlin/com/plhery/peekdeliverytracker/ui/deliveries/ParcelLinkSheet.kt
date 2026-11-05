@@ -130,6 +130,7 @@ import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
+import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -409,6 +410,7 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
     LaunchedEffect(feedback, feedbackPage) { feedback?.show(feedbackPage, route?.let { source.feedbackClient(it.id) }, source.feedbackPreview) }
     var covered by remember { mutableStateOf(false) }
     var announcement by remember { mutableStateOf<Announcement?>(null) }
+    val announce = { text: String -> announcement = Announcement(text, (announcement?.count ?: 0) + 1) }
 
     val scroll = rememberScrollState()
     LinkSheetPage(
@@ -418,7 +420,7 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
             if (feedback != null) {
                 ParcelFeedbackOverlays(
                     feedback, backdrop, Modifier.align(Alignment.BottomCenter).padding(bottom = bottom), busy = state.adding,
-                    announce = { announcement = Announcement(it, (announcement?.count ?: 0) + 1) }, cover = { covered = it },
+                    announce = announce, cover = { covered = it },
                 )
             }
         },
@@ -428,7 +430,7 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
                 ParcelLinkStore.Phase.Loading -> Centered(top, bottom) { ActivityIndicator(Modifier.testTag(LINK_LOADING)) }
                 is ParcelLinkStore.Phase.Shown -> LinkShared(
                     source, state, current.response, top, bottom, scroll, feedback,
-                    keeping = KeepingContext(signedIn, followsHere, canSignIn),
+                    keeping = KeepingContext(signedIn, followsHere, canSignIn), announce = announce,
                 )
                 ParcelLinkStore.Phase.Unavailable -> Centered(top, bottom) { Nothing("link.gone.title", "link.gone.body") { links.close() } }
                 ParcelLinkStore.Phase.Stopped -> Centered(top, bottom) { Nothing("share.stopped.title", "share.stopped.body") { links.close() } }
@@ -517,6 +519,7 @@ private fun LinkShared(
     scroll: ScrollState,
     feedback: ParcelFeedbackWork?,
     keeping: KeepingContext,
+    announce: (String) -> Unit,
 ) {
     val links = source.links
     val localizer = LocalLocalizer.current
@@ -613,7 +616,7 @@ private fun LinkShared(
                 }
                 Column(Modifier.padding(start = 6.dp, top = 6.dp, end = 6.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
                     // The number and the carrier's own page would tell where a gift comes from.
-                    if (!wrapped) SharedParcelNumber(source, parcel, response.parcel.numberHint, tint) { feedback?.visited(it.name) }
+                    if (!wrapped) SharedParcelNumber(source, parcel, response.parcel.numberHint, tint, announce) { feedback?.visited(it.name) }
                     // A gift's recipient usually pays them at the door.
                     localizer.importCharges(parcel)?.let { SharedImportCharges(it, asksForNumber = parcel.trackingNumber.isEmpty()) }
                     if (identities.catalog.tracksAutomatically(parcel.activeTrackingCarrier) || parcel.hasCarrierUpdate) {
@@ -1401,8 +1404,9 @@ private fun SharedImportCharges(charges: ImportChargesLine, asksForNumber: Boole
  * SharedParcelNumber (B-S47, B-G04, B-H03): the number as the link shows it. Hidden, "detail.trackingNumber" over the
  * masked number, read as one, and the carrier's search page, which takes a number typed in. Whole, each number, which
  * a long press selects, with its copy and its carriers' pages ([ShipmentNumbers]); a copy puts the number on the
- * clipboard as its carrier's site takes it with the success tap, and says so on its row for two seconds. A carrier's
- * page opened is counted and told ([onVisit]).
+ * clipboard as its carrier's site takes it with the success tap, and says so on its row for two seconds and, before
+ * Android 13, whose system shows no copy, to TalkBack ([announce], [Device.confirmsCopies]). A carrier's page opened is
+ * counted and told ([onVisit]).
  */
 @Composable
 private fun SharedParcelNumber(
@@ -1410,9 +1414,11 @@ private fun SharedParcelNumber(
     parcel: Parcel,
     hint: ParcelNumberHint?,
     tint: Color,
+    announce: (String) -> Unit,
     onVisit: (ParcelTrackingLink) -> Unit,
 ) {
     val language = LocalLanguage.current
+    val localizer = LocalLocalizer.current
     val identities = LocalCarrierIdentities.current ?: return
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -1443,6 +1449,7 @@ private fun SharedParcelNumber(
             val text = TrackingNumberCopy.text(entry.number, entry.carrier)
             context.getSystemService(ClipboardManager::class.java)?.setPrimaryClip(ClipData.newPlainText(text, text))
             haptics.success()
+            if (!Device.confirmsCopies) announce(localizer.text("detail.copied"))
             copied = entry.number
             scope.launch {
                 delay(COPIED_MILLIS)

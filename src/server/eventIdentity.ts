@@ -692,19 +692,47 @@ function zoneShift(copy: number, scan: number): number {
   return shift % QUARTER_HOUR_MS === 0 && Math.abs(shift) <= MAX_ZONE_SHIFT_MS ? shift : 0;
 }
 
+/** The codes carriers print for a state or province, in the countries whose places name one ("Hankamer, TX, US"). */
+const REGION_CODES: Readonly<Record<string, ReadonlySet<string>>> = {
+  US: new Set(('AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'
+    + ' PR VI GU AS MP AA AE AP').split(' ')),
+  CA: new Set('AB BC MB NB NL NS NT NU ON PE QC SK YT'.split(' ')),
+  AU: new Set('ACT NSW NT QLD SA TAS VIC WA'.split(' ')),
+  BR: new Set('AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' ')),
+};
+const ANY_REGION_CODE = new Set(Object.values(REGION_CODES).flatMap((codes) => [...codes]));
+
 /**
- * The words of a scan's place, without accents, case or countries ("Paris, FR"
- * and "PARIS CDG" share paris), umlauts spelt out (ZUERICH is Zürich). A word
- * with letters beyond a to z (Cyrillic, Chinese, ł) is left out.
+ * A place without the state or province it names by its code after the town, alone or before a postcode ("Sierra
+ * Blanca, TX", "SCARBOROUGH - ON", "Austin, TX 78701"), or as all of it: two towns of one state share no word by it.
+ * A first field of several stays, as it is the town ("LA, CA").
+ */
+function withoutRegion(place: string, country: string | null): string {
+  const codes = country === null ? ANY_REGION_CODE : REGION_CODES[country];
+  if (!codes) return place;
+  const fields = place.split(/\s*,\s*|\s+-\s+/);
+  const region = (field: string) => /^([A-Z]{2,3})(?:\s+[A-Z]?\d[\dA-Z -]*)?$/.exec(field.trim())?.[1];
+  return fields.map((field, index) => {
+    const code = region(field);
+    return code && codes.has(code) && (index > 0 || fields.length === 1) ? field.trim().slice(code.length) : field;
+  }).join(', ');
+}
+
+/**
+ * The words of a scan's place, without accents, case, countries or states ("Paris, FR"
+ * and "PARIS CDG" share paris; "Sierra Blanca, TX, US" and "Hankamer, TX, US" share
+ * none), umlauts spelt out (ZUERICH is Zürich). A word with letters beyond a to z
+ * (Cyrillic, Chinese, ł) is left out.
  */
 export function placeWords(row: JsonObject): string[] {
-  return trackingPlace(String(row.location ?? '')).place.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
+  const { place, country } = trackingPlace(String(row.location ?? ''));
+  return withoutRegion(place, country).normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
     .split(/[^\p{L}\p{N}]+/u)
     .filter((word) => /^[a-z0-9]+$/.test(word) && trackingPlace(word.toUpperCase()).country === null)
     .map((word) => word.replace(/([aou])e/g, '$1'));
 }
 
-/** Two places named with no word in common. A place that names no more than a country conflicts with none. */
+/** Two places named with no word in common. A place that names no more than a country or a state conflicts with none. */
 export function placesConflict(left: readonly string[], right: readonly string[]): boolean {
   return left.length > 0 && right.length > 0 && !left.some((word) => right.includes(word));
 }

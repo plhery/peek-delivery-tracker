@@ -198,6 +198,44 @@ class NotificationLogicTests {
     }
 
     @Test
+    fun aDevicesNotificationsBelongToTheAccountThatTurnedThemOn() {
+        val owner = UUID.randomUUID()
+        assertTrue(NotificationDevicePolicy.belongs(owner, owner))
+        // A device from before the owner was kept, or one never turned on.
+        assertTrue(NotificationDevicePolicy.belongs(owner, null))
+        assertFalse(NotificationDevicePolicy.belongs(UUID.randomUUID(), owner))
+        assertFalse(NotificationDevicePolicy.belongs(null, null))
+    }
+
+    @Test
+    fun anOffWrittenByASignOutIsTakenBackOnceAndThePersonsOwnBecomesAQuestion() {
+        val optOut = NotificationDeviceKeys.OPT_OUT
+        val owner = NotificationDeviceKeys.OWNER
+        val demo = NotificationDeviceKeys.DEMO
+        // A sign-out never touched the demo's switch: notifications come back for whoever signs in.
+        for (values in listOf(mapOf<String, Any>(optOut to true), mapOf<String, Any>(optOut to true, demo to true))) {
+            val signedOut = MemoryDefaults(values.toMutableMap())
+            NotificationDevicePolicy.repairAccountChangeOptOut(signedOut)
+            assertFalse(signedOut.bool(forKey = optOut))
+            assertNull(signedOut.string(forKey = owner))
+        }
+        // The person's own off switched the demo's off too: the next account is asked, not signed up.
+        val chosen = MemoryDefaults(mutableMapOf(optOut to true, demo to false))
+        NotificationDevicePolicy.repairAccountChangeOptOut(chosen)
+        assertFalse(chosen.bool(forKey = optOut))
+        assertFalse(NotificationDevicePolicy.belongs(UUID.randomUUID(), chosen.string(forKey = owner)?.let(::uuid)))
+        // An off made since the owner is kept is the person's, and the repair runs once.
+        val kept = MemoryDefaults(mutableMapOf(optOut to true, owner to UUID.randomUUID().uuidString))
+        NotificationDevicePolicy.repairAccountChangeOptOut(kept)
+        assertTrue(kept.bool(forKey = optOut))
+        val repaired = MemoryDefaults(mutableMapOf(optOut to true))
+        NotificationDevicePolicy.repairAccountChangeOptOut(repaired)
+        repaired.set(true, forKey = optOut)
+        NotificationDevicePolicy.repairAccountChangeOptOut(repaired)
+        assertTrue(repaired.bool(forKey = optOut))
+    }
+
+    @Test
     fun invitationWaitsForPermissionCheckAndARealAccountWithParcels() {
         assertTrue(invitation())
         assertFalse(invitation(status = null))
@@ -216,6 +254,8 @@ class NotificationLogicTests {
         // Permission alone does not mean the server has a working push registration.
         assertTrue(invitation(status = NotificationAuthorizationStatus.Authorized))
         assertTrue(invitation(status = NotificationAuthorizationStatus.Provisional))
+        // A token on its way to this account needs no question.
+        assertFalse(invitation(status = NotificationAuthorizationStatus.Authorized, registering = true))
     }
 
     @Test
@@ -426,8 +466,9 @@ class NotificationLogicTests {
         enabled: Boolean = false,
         optedOut: Boolean = false,
         dismissed: Boolean = false,
+        registering: Boolean = false,
     ): Boolean = NotificationInvitationPolicy.shouldPresent(
         isAuthenticated = isAuthenticated, isDemo = isDemo, hasParcels = hasParcels,
-        status = status, enabled = enabled, optedOut = optedOut, dismissed = dismissed,
+        status = status, enabled = enabled, optedOut = optedOut, dismissed = dismissed, registering = registering,
     )
 }

@@ -418,11 +418,13 @@ class ParcelStore(
     // without Live Activities, never makes.
     private var deliveryLiveActivitySystemDisabled = false
     private val installationId: UUID = installationIdentifier(defaults)
-    private val notificationOptOutKey = "sdt.notificationsDeviceOptOut"
+    private val notificationOptOutKey = NotificationDeviceKeys.OPT_OUT
     private val nativePushRegisteredKey = "sdt.notificationsNativePushRegistered.v1"
-    private val demoNotificationsKey = "sdt.demoNotificationsEnabled"
+    private val notificationOwnerKey = NotificationDeviceKeys.OWNER
+    private val demoNotificationsKey = NotificationDeviceKeys.DEMO
 
     init {
+        NotificationDevicePolicy.repairAccountChangeOptOut(defaults)
         deliveryWidgetStore.setLiveActivitiesEnabled(deliveryLiveActivitiesEnabled)
         cacheOwnerId = session.user?.id
         notificationInvitationDismissed = session.user?.let { NotificationInvitationPreference.isDismissed(it.id, defaults) } ?: false
@@ -449,10 +451,7 @@ class ParcelStore(
             shareNotes.forgetAll()
             // So does what it answered about its parcels.
             ParcelFeedbackMemory(defaults, now).forgetAll()
-            notifications.unregisterForRemoteNotifications()
-            notifications.clearDeviceToken()
-            defaults.set(true, forKey = notificationOptOutKey)
-            defaults.set(false, forKey = nativePushRegisteredKey)
+            releaseDeviceNotifications(from = owner)
         }
         cacheOwnerId = session.user?.id
         notificationInvitationDismissed = session.user?.let { NotificationInvitationPreference.isDismissed(it.id, defaults) } ?: false
@@ -1131,10 +1130,7 @@ class ParcelStore(
         session.checkGeneration(generation)
         endAllDeliveryLiveActivities()
         session.checkGeneration(generation)
-        notifications.unregisterForRemoteNotifications()
-        notifications.clearDeviceToken()
-        defaults.set(true, forKey = notificationOptOutKey)
-        defaults.set(false, forKey = nativePushRegisteredKey)
+        releaseDeviceNotifications(from = session.user?.id)
         notificationsEnabledOnDevice = false
         notificationPreferences = null
         notificationError = null
@@ -1160,16 +1156,30 @@ class ParcelStore(
         session.checkGeneration(generation)
         endAllDeliveryLiveActivities()
         session.checkGeneration(generation)
-        notifications.unregisterForRemoteNotifications()
-        notifications.clearDeviceToken()
-        defaults.set(true, forKey = notificationOptOutKey)
-        defaults.set(false, forKey = nativePushRegisteredKey)
+        releaseDeviceNotifications(from = session.user?.id)
         notificationsEnabledOnDevice = false
         notificationPreferences = null
         notificationError = null
         session.user?.id?.let { cache.delete(it) }
         session.signOut()
     }
+
+    /**
+     * An account leaves the device: its token goes with it, while the person's own on or off for this device stays.
+     * The device keeps whose notifications they were, so that account gets them back when it signs in again and
+     * another account is asked first.
+     */
+    private fun releaseDeviceNotifications(from: UUID?) {
+        notifications.unregisterForRemoteNotifications()
+        notifications.clearDeviceToken()
+        if (from != null && defaults.bool(forKey = nativePushRegisteredKey) && defaults.string(forKey = notificationOwnerKey) == null) {
+            defaults.set(from.uuidString, forKey = notificationOwnerKey)
+        }
+        defaults.set(false, forKey = nativePushRegisteredKey)
+    }
+
+    private val notificationOwner: UUID?
+        get() = defaults.string(forKey = notificationOwnerKey)?.let(::uuid)
 
     suspend fun refreshNotificationState() {
         val generation = session.generation
@@ -1220,6 +1230,7 @@ class ParcelStore(
                 val sent = api.registerNativePushToken(token, installationId, language, sendTest = true)
                 session.checkGeneration(generation)
                 defaults.set(true, forKey = nativePushRegisteredKey)
+                session.user?.id?.let { defaults.set(it.uuidString, forKey = notificationOwnerKey) }
                 notificationsEnabledOnDevice = true
                 dismissNotificationInvitation()
                 succeeded = true
@@ -1260,6 +1271,8 @@ class ParcelStore(
                 enabled = notificationsEnabledOnDevice,
                 optedOut = defaults.bool(forKey = notificationOptOutKey),
                 dismissed = notificationInvitationDismissed,
+                registering = NotificationDevicePolicy.isAuthorized(notificationStatus) &&
+                    NotificationDevicePolicy.belongs(session.user?.id, notificationOwner),
             )
 
     fun dismissNotificationInvitation() {
@@ -1327,6 +1340,8 @@ class ParcelStore(
 
     suspend fun forwardNativePushToken(token: String, language: AppLanguage) {
         if (isDemo || !session.isAuthenticated || notificationEnableInProgress || defaults.bool(forKey = notificationOptOutKey)) return
+        val user = session.user?.id ?: return
+        if (!NotificationDevicePolicy.belongs(user, notificationOwner)) return
         val generation = nativePushGeneration
         val sessionGeneration = session.generation
         try {
@@ -1336,6 +1351,7 @@ class ParcelStore(
                 return
             }
             defaults.set(true, forKey = nativePushRegisteredKey)
+            defaults.set(user.uuidString, forKey = notificationOwnerKey)
             notificationsEnabledOnDevice = session.isAuthenticated
             notificationError = null
         } catch (error: Exception) {

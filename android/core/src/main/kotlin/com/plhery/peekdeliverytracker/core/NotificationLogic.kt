@@ -176,6 +176,17 @@ enum class NotificationAuthorizationStatus {
     }
 }
 
+/** Where the device keeps its notification state. */
+object NotificationDeviceKeys {
+    /** The person turned this device's notifications off. */
+    const val OPT_OUT = "sdt.notificationsDeviceOptOut"
+
+    /** The account that last turned them on ([NotificationDevicePolicy.belongs]). */
+    const val OWNER = "sdt.notificationsOwner.v1"
+    const val DEMO = "sdt.demoNotificationsEnabled"
+    const val OPT_OUT_REPAIRED = "sdt.notificationsOptOutRepaired.v1"
+}
+
 object NotificationDevicePolicy {
     fun isAuthorized(status: NotificationAuthorizationStatus): Boolean =
         status == NotificationAuthorizationStatus.Authorized || status == NotificationAuthorizationStatus.Provisional
@@ -193,6 +204,37 @@ object NotificationDevicePolicy {
 
     fun shouldRegisterForRemoteNotifications(status: NotificationAuthorizationStatus, optedOut: Boolean): Boolean =
         isAuthorized(status) && !optedOut
+
+    /**
+     * Whether the device's token may go to the account signed in: its notifications belong to the account that last
+     * turned them on here, or to nobody yet. Signing out, an expired session or a deleted account takes the token away
+     * but not that owner, so the same account signing in again gets its notifications back on its own, and another
+     * account asks for its own yes.
+     */
+    fun belongs(user: UUID?, owner: UUID?): Boolean {
+        user ?: return false
+        return owner == null || owner == user
+    }
+
+    /** An owner no account has, so whoever signs in next is asked. */
+    val nobody: UUID = UUID(0, 0)
+
+    /**
+     * Before the owner was kept, signing out, an expired session or a deleted account wrote the person's "off", and
+     * their next sign-in had no notifications and no prompt. Once, that "off" is taken back: the person's own off has
+     * always switched the demo's notifications off with it, which an account change never did, so a device without
+     * that mark gets its notifications back like a returning account, and one with it is asked again.
+     */
+    fun repairAccountChangeOptOut(defaults: UserDefaults) {
+        if (defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT_REPAIRED)) return
+        defaults.set(true, forKey = NotificationDeviceKeys.OPT_OUT_REPAIRED)
+        if (!defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT) || defaults.string(forKey = NotificationDeviceKeys.OWNER) != null) return
+        defaults.set(false, forKey = NotificationDeviceKeys.OPT_OUT)
+        // Swift's `object(forKey:) as? Bool == false`: the demo's switch was saved, and saved off.
+        if (defaults.hasObject(forKey = NotificationDeviceKeys.DEMO) && !defaults.bool(forKey = NotificationDeviceKeys.DEMO)) {
+            defaults.set(nobody.uuidString, forKey = NotificationDeviceKeys.OWNER)
+        }
+    }
 }
 
 object NotificationInvitationPolicy {
@@ -204,8 +246,10 @@ object NotificationInvitationPolicy {
         enabled: Boolean,
         optedOut: Boolean,
         dismissed: Boolean,
+        registering: Boolean = false,
     ): Boolean {
-        if (!isAuthenticated || isDemo || !hasParcels || enabled || optedOut || dismissed || status == null) return false
+        // `registering`: the device's notifications are this account's and its token is on its way, so there is nothing to ask.
+        if (!isAuthenticated || isDemo || !hasParcels || enabled || optedOut || dismissed || registering || status == null) return false
         return status == NotificationAuthorizationStatus.NotDetermined || status == NotificationAuthorizationStatus.Authorized ||
             status == NotificationAuthorizationStatus.Provisional
     }

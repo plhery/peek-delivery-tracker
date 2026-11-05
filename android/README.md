@@ -30,6 +30,10 @@ build reads the Firebase project's Android app from four xcconfig settings that 
 build without all four has no pushes: nothing offers them, and a parcel's alerts are its email. The server sends
 through the same Firebase project ([docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md)).
 
+As on the iPhone, signing out, an expired session or a deleted account takes the phone's token off the server but
+keeps the person's own on or off: the same account signing in again gets its notifications back by itself, and another
+account sees the prompt first.
+
 ## Release bundle
 
 ```sh

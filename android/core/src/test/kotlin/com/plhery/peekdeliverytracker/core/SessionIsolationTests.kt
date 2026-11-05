@@ -1001,8 +1001,8 @@ class SessionIsolationTests {
                     jsonResponse(200, "{}")
                 }
             }
-            // A change of account turns this device's notifications off; the token goes only while they are on.
-            defaults.removeObject(forKey = "sdt.notificationsDeviceOptOut")
+            // The token goes only while this device's notifications are on and belong to the account signed in.
+            for (key in listOf("sdt.notificationsDeviceOptOut", "sdt.notificationsOwner.v1")) defaults.removeObject(forKey = key)
             val pending = async {
                 if (path == "/api/push/preferences") store.loadNotificationPreferences() else store.forwardNativePushToken("synthetic-token", AppLanguage.En)
             }
@@ -1013,6 +1013,38 @@ class SessionIsolationTests {
             pending.await()
             assertNull(path, store.notificationError)
         }
+    }
+
+    @Test
+    fun signingBackInBringsTheDevicesNotificationsBackAndAnotherAccountIsAsked() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        val owner = UUID.randomUUID()
+        authorize(session, transport, id = owner)
+        val store = store(session, transport)
+        for (key in listOf("sdt.notificationsDeviceOptOut", "sdt.notificationsOwner.v1")) defaults.removeObject(forKey = key)
+        var registrations = 0
+        val answer: suspend (HttpRequest) -> HttpResponse = { request ->
+            if (request.method == "POST" && request.path == "/api/push/devices") registrations += 1
+            jsonResponse(200, """{"ok":true,"testSent":false}""")
+        }
+        transport.handler = answer
+        store.forwardNativePushToken("synthetic-token", AppLanguage.En)
+        assertEquals(1, registrations)
+        // Signing out, or a session that ends, takes the token away without saying no for the person.
+        session.forceSignOut()
+        assertFalse(defaults.bool(forKey = "sdt.notificationsDeviceOptOut"))
+        authorize(session, transport)
+        transport.handler = answer
+        store.forwardNativePushToken("synthetic-token", AppLanguage.En)
+        assertEquals("Another account is asked first", 1, registrations)
+        assertFalse(store.notificationsEnabledOnDevice)
+        session.forceSignOut()
+        authorize(session, transport, id = owner)
+        transport.handler = answer
+        store.forwardNativePushToken("synthetic-token", AppLanguage.En)
+        assertEquals("The same account gets its notifications back", 2, registrations)
+        assertTrue(store.notificationsEnabledOnDevice)
     }
 
     /**
@@ -1040,7 +1072,7 @@ class SessionIsolationTests {
                     jsonResponse(200, "{}")
                 }
             }
-            defaults.removeObject(forKey = "sdt.notificationsDeviceOptOut")
+            for (key in listOf("sdt.notificationsDeviceOptOut", "sdt.notificationsOwner.v1")) defaults.removeObject(forKey = key)
             val pending = async {
                 if (path == "/api/push/preferences") store.loadNotificationPreferences() else store.forwardNativePushToken("synthetic-token", AppLanguage.En)
             }

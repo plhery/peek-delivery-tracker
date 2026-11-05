@@ -4,10 +4,10 @@ description: «Alta en la unidad de reparto» no quiere decir que vaya en la fur
 slug: estados-de-envio-significado
 picture: Una ruta con curvas y paradas ya completadas (etiqueta, almacén, avión), una furgoneta en la parada actual, una casa más adelante y Pip corriendo.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
-Un estado de seguimiento es el último escaneo del transportista resumido en pocas palabras, y casi ninguno te pide nada. «Pre-admisión» o «Etiqueta creada» quieren decir que el transportista aún no tiene tu paquete; «En tránsito», que está en algún punto entre dos escaneos, y «En reparto», que va hoy con el repartidor. Solo unos pocos te necesitan: un intento de entrega fallido, un paquete que te espera en una oficina o un punto de recogida, un pago de aduanas y un «Entregado» cuando a ti no te ha llegado nada.
+Busca aquí el estado que ves en el seguimiento de Correos, SEUR, GLS, MRW, NACEX o CTT Express para saber qué significa y si tienes que hacer algo. Un estado es el último escaneo del transportista resumido en pocas palabras, y casi ninguno te pide nada. «Pre-admisión» o «Etiqueta creada» quieren decir que el transportista aún no tiene tu paquete; «En tránsito», que está en algún punto entre dos escaneos, y «En reparto», que va hoy con el repartidor. Solo unos pocos te necesitan: un intento de entrega fallido, un paquete que te espera en una oficina o un punto de recogida, un pago de aduanas y un «Entregado» cuando a ti no te ha llegado nada.
 
 ## ¿Cuáles son las fases del seguimiento de un paquete?
 
@@ -17,35 +17,41 @@ Todos los paquetes pasan por las mismas paradas, y los que vienen del extranjero
 - label | Etiqueta creada | El transportista tiene los datos, no el paquete.
 - warehouse | En tránsito | Recogido y de centro en centro, sin escaneos en la carretera.
 - plane | Sale del país | Solo del extranjero. En el aire no hay escaneos.
-- customs | Aduanas | Solo de fuera de la UE o con Canarias, Ceuta y Melilla. A veces hay que pagar.
+- customs | En aduanas | Solo de fuera de la UE o con Canarias, Ceuta y Melilla. A veces hay que pagar.
 - handover | Transportista local | Solo del extranjero. Sus escaneos pueden salir solo en su web.
 - truck | En reparto | En la furgoneta de hoy.
-- locker | Para recoger | En una oficina, una tienda o un locker.
+- locker | Listo para recoger | En una oficina, una tienda o un locker.
 - home | Entregado | En tus manos, o donde el transportista lo da por entregado.
 :::
 
-## ¿Qué significan los estados de Correos, GLS y SEUR?
+## ¿Qué significan los estados de Correos, GLS, MRW, SEUR y NACEX?
 
 Las mismas fases, con otras palabras:
 
-| Fase | Correos | GLS |
-| --- | --- | --- |
-| Etiqueta creada | `Pre-admisión` o `Prerregistrado` | `Etiqueta creada` |
-| Recogido | `Admitido` | `Envío recogido por GLS` |
-| En tránsito | `En tránsito`, `Clasificado`, `Alta en la unidad de reparto` | `En tránsito` |
-| En reparto | `En reparto` | `En reparto` |
-| Para recoger | `A disposición del destinatario` | `Depositado en Parcel Shop` |
-| Entregado | `Entregado` | `Entregado` |
+| En Peek | Correos | GLS | MRW |
+| --- | --- | --- | --- |
+| Etiqueta creada | `Pre-admisión` o `Prerregistrado` | `Etiqueta creada` | `Pendiente de recoger` |
+| Admitido por el transportista | `Admitido` | `Envío recogido por GLS` | `Envío recogido en origen` |
+| En tránsito | `En tránsito`, `Clasificado`, `Alta en la unidad de reparto` | `En tránsito` | `En tránsito`, `Pendiente de recibir en destino` |
+| En reparto | `En reparto` | `En reparto` | `Envío en reparto` |
+| Listo para recoger | `A disposición del destinatario` | `Depositado en Parcel Shop` | `Depositado en punto MRW` |
+| Entregado | `Entregado` | `Entregado` | `Envío entregado` |
 
 [Correos](carrier:correos-spain) agrupa sus estados en cuatro fases: `Pre-admisión`, `En Camino`, `En entrega` y `Entregado`. [SEUR](carrier:seur) escribe frases enteras en mayúsculas: `EL ENVÍO HA SIDO REGISTRADO.` cuando solo tiene los datos, `EL ENVÍO ESTÁ EN REPARTO.` el día de la entrega y `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` cuando te espera en una tienda.
 
+En [MRW](carrier:mrw), `Pendiente de recoger en Franquicia destino` no es lo mismo que `Pendiente de recoger`: se ha acordado que lo recojas tú en una oficina MRW. En [NACEX](carrier:nacex), `Solucionado sin OK` cierra una incidencia sin entregarte nada: pregunta a NACEX o a la tienda qué ha pasado.
+
 ## «Pre-admisión» o «etiqueta creada»: ¿lo tiene ya el transportista?
 
-No: la tienda ha impreso una etiqueta y ha mandado los datos, nada más. Correos explica que `Pre-admisión` se genera cuando se prerregistra el envío: ya existe el número, pero el paquete está «pendiente de ser entregado a Correos». En el seguimiento también puede salir como `Prerregistrado`. [GLS](carrier:gls-es) dice lo mismo de `Etiqueta creada`: tiene el prerregistro, pero el paquete todavía no está en su red ni en ninguna de sus instalaciones.
+No: la tienda ha impreso una etiqueta y ha mandado los datos, nada más. Correos explica que `Pre-admisión` se genera cuando se prerregistra el envío: ya existe el número, pero el paquete está «pendiente de ser entregado a Correos». En el seguimiento también puede salir como `Prerregistrado`. [GLS](carrier:gls-es) dice lo mismo de `Etiqueta creada`: tiene el prerregistro, pero el paquete todavía no está en su red ni en ninguna de sus instalaciones. Lo mismo vale para `Pendiente de recoger` en MRW y `Pendiente de recepción en CTT Express` en [CTT Express](carrier:ctt-express).
 
 También ocurre al revés: si a Correos le llega un paquete sin prerregistro, lo deja «estacionado» y lo entrega cuando la empresa que lo envía le pasa los datos.
 
 Si lleva varios días sin cambiar, pregunta a la tienda, no al transportista. GLS no puede darte plazos hasta tener el paquete físicamente, y te dice que hables con el remitente.
+
+### ¿Y si el número no muestra nada?
+
+Comprueba que está completo y que es del transportista que indica la tienda: cada uno tiene [su propio formato](guide:tracking-number-formats). Si todo cuadra, suele ser un envío nuevo, aún sin escaneos: mira [por qué no sale nada con tu número](guide:find-tracking-number).
 
 ## ¿Qué significa «en tránsito»?
 
@@ -59,8 +65,8 @@ GLS suele entregar los envíos nacionales en 24 horas laborables desde que tiene
 
 ## Paquetes del extranjero: salida del país, aduanas y transportista local
 
-- **Sale del país.** Lo cargan en un avión, un barco o un tren. DHL explica que viaja dentro de un contenedor y que los paquetes se vuelven a escanear uno a uno ya en el país de destino. En el seguimiento de Correos verás líneas como `Salida de oficina de cambio` y, ya en el país de llegada, `Salida de oficina de cambio de destino`.
-- **Aduanas.** Según Correos, pasa por aduanas todo lo que llega a la Península y Baleares desde fuera de la UE o desde Canarias, Ceuta y Melilla, y todo lo que entra en esos tres territorios. En su seguimiento verás `Inicio de tramitación aduanera` o `Pendiente de tramitación aduanera`. Casi siempre es un trámite: DHL, en su web alemana, habla de varios días laborables según la documentación, y ningún transportista da un máximo general. Desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE a la Península, Baleares o Canarias paga un arancel de 3 € por cada tipo de producto, aunque la tienda ya te haya cobrado el IVA. Correos lo muestra como `Arancel UE`, con su importe, y no entrega el paquete sin cobrarlo, salvo que el vendedor lo pagara por adelantado. Paga solo lo que te pidan: entrando tú en la App de Correos o en la web Mi Oficina hasta que empiece la entrega, o después al cartero o en la oficina. El resto está en [paquetes retenidos en aduanas](guide:customs).
+- **Sale del país.** Lo cargan en un avión, un barco o un tren. DHL explica que viaja dentro de un contenedor y que los paquetes se vuelven a escanear uno a uno ya en el país de destino. En el seguimiento de Correos verás `En oficina de cambio` antes de que salga y `Llegada a oficina de cambio` en el país de destino.
+- **Aduanas.** Según Correos, pasa por aduanas todo lo que llega a la Península y Baleares desde fuera de la UE o desde Canarias, Ceuta y Melilla, y todo lo que entra en esos tres territorios. En su seguimiento verás `Inicio de tramitación aduanera` o `Pendiente de tramitación aduanera` (en MRW, `Retenido en aduana`), y `Finalizada tramitación aduanera` al terminar. Casi siempre es un trámite: DHL, en su web alemana, habla de varios días laborables según la documentación, y ningún transportista da un máximo general. Desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE a la Península, Baleares o Canarias paga un arancel de 3 € por cada tipo de producto, aunque la tienda ya te haya cobrado el IVA. Correos lo muestra como `Arancel UE`, con su importe, y no entrega el paquete sin cobrarlo, salvo que el vendedor lo pagara por adelantado. Desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por tipo de producto, que se paga junto con el arancel. Paga solo lo que te pidan: entrando tú en la App de Correos o en la web Mi Oficina hasta que empiece la entrega, o después al cartero o en la oficina. El resto está en [paquetes retenidos en aduanas](guide:customs).
 - **Transportista local.** Cuando otra empresa hace el último tramo, DHL te remite al seguimiento del transportista del país de destino. ¿Has pedido en AliExpress, Temu o Shein? Mira [cómo seguir un paquete que viene de China](guide:tracking-from-china). Si su seguimiento sale en inglés, las páginas de [Cainiao](carrier:cainiao) y [YunExpress](carrier:yunexpress) explican qué significan sus estados.
 
 ## ¿«En reparto» significa que llega hoy?
@@ -70,13 +76,13 @@ Normalmente, sí:
 - **Correos:** `En reparto` quiere decir que el repartidor ya está haciendo su ruta. Si te llega un SMS de entrega en domicilio, Correos cuenta con entregarlo entre 24 y 72 horas después, según el producto.
 - **GLS:** reparte de lunes a viernes, más o menos de 9 a 20 h; los sábados, antes de mediodía, solo con Express Saturday. Con `En reparto`, su seguimiento muestra una franja estimada, y cuando quedan menos de 10 paradas se activa el seguimiento en tiempo real.
 
-Ojo con un estado que despista: en una entrega a domicilio, `Alta en la unidad de reparto` significa que el paquete ha llegado a la unidad de Correos que lo entregará «en cuanto sea posible», no que ya vaya en la furgoneta.
+Ojo con dos estados que despistan. En una entrega a domicilio, `Alta en la unidad de reparto` significa que el paquete ha llegado a la unidad de Correos que lo entregará «en cuanto sea posible», no que ya vaya en la furgoneta. Y en CTT Express, `Aceptado por la última milla` quiere decir que ya lo tiene la delegación que lo entregará, aunque quizá aún sin ruta asignada.
 
 [Peek](/) consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (y hasta una vez cada 10 minutos el resto del tiempo), y puedes dejar sus notificaciones en «Solo la entrega».
 
 ## «Intento de entrega» o «ausente»: ¿y ahora qué?
 
-Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-delivery) o el repartidor no pudo llegar a la puerta. En Correos aparece como `Realizado intento de entrega` o `Intento de entrega. Ausente`, normalmente después de un primer intento que no se completó por ausencia, un problema con la dirección u otro inconveniente. SEUR lo escribe `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE…`.
+Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-delivery) o el repartidor no pudo llegar a la puerta. En Correos aparece como `Realizado intento de entrega` o `Intento de entrega. Ausente`, normalmente después de un primer intento que no se completó por ausencia, un problema con la dirección u otro inconveniente. SEUR lo escribe `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE…`, y MRW, `Destinatario ausente o cerrado`. La «Incidencia de destinatario no contesta/ausente» de CTT Express puede salir aunque estuvieras en casa; vuelven a intentarlo el siguiente día laborable.
 
 :::steps
 - Lee el aviso | Papel en el buzón, SMS o email: dónde está el paquete y qué número dar.
@@ -93,9 +99,9 @@ Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-del
 
 > Correos nunca pide datos personales o bancarios ni pagos por SMS o correo electrónico, y avisa de que los engaños que más usan su nombre te piden un pago o que completes la dirección de entrega para recibir un paquete. Cambia la entrega o paga solo en la web o la app del transportista, entrando tú, nunca desde el enlace de un mensaje.
 
-## «A disposición del destinatario» o «para recoger»: ¿dónde está?
+## «A disposición del destinatario» o «listo para recoger»: ¿dónde está?
 
-En una oficina, una tienda o un locker, [hasta que acabe el plazo](guide:uncollected-parcel) de la tabla de arriba. Correos usa `A disposición del destinatario` tanto para la oficina como para la taquilla Citypaq; GLS, `Depositado en Parcel Shop`. InPost te manda un email o un SMS cuando el paquete llega al Punto Pack o al Locker.
+En una oficina, una tienda o un locker, [hasta que acabe el plazo](guide:uncollected-parcel) de la tabla de arriba. Correos usa `A disposición del destinatario` tanto para la oficina como para la taquilla Citypaq; GLS, `Depositado en Parcel Shop`; NACEX, `Disponible en punto NACEX`, y CTT Express, `Disponible en Punto Collectt Express`. InPost te manda un email o un SMS cuando el paquete llega al Punto Pack o al Locker.
 
 Espera a ese estado o al aviso antes de ir: en Correos, el envío no está en la oficina hasta el día siguiente al SMS, o hasta el siguiente día laborable si te dejaron el aviso en papel. En un Punto Pack de InPost puedes enseñar el DNI, el pasaporte o el carnet de conducir.
 
@@ -121,7 +127,7 @@ Eso sí, fíjate bien si el motivo es la dirección o un pago. En Correos, corri
 
 Los motivos que dan los transportistas: no lo recogiste a tiempo, la dirección estaba mal o incompleta, lo rehusaste, no se pagaron los gastos de aduanas o llegó dañado. Así lo cuenta cada uno:
 
-- **Correos:** `Finalizado plazo retirada` no dice «devuelto», pero lo es: se acabó el plazo para recogerlo, y Correos lo devuelve al remitente.
+- **Correos:** `Finalizado plazo retirada` no dice «devuelto», pero lo es: se acabó el plazo para recogerlo, y Correos lo devuelve al remitente. Y `Entregado al remitente` no es una entrega a ti: ya ha vuelto a quien lo envió.
 - **GLS:** si el segundo intento falla, el paquete se queda en la agencia y vuelve 7 días naturales después del primer intento.
 - **InPost:** pasados los 5 días en el Locker o el Punto Pack, vuelve al remitente (tienda online, vendedor o particular).
 
@@ -134,11 +140,14 @@ Si ya [va de vuelta](guide:returned-to-sender), habla con la tienda: pídele que
 - [Correos: Envíos estacionados](https://www.correos.es/es/es/atencion-al-cliente/recibir/envios-estacionados) – incidencias, prerregistro, 5 días naturales, Gestión de estacionados
 - [Correos: Información aduanera](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera) – qué pasa por aduanas
 - [Correos: Arancel para envíos de bajo valor en la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – 3 € por tipo de producto, Arancel UE, IVA ya pagado, pago anticipado, formas de pago
+- [Agencia Tributaria: Envíos de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – tasa de 2 €
 - [Correos: Qué es el phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – nunca pide datos ni pagos por SMS o email
-- [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – Prerregistrado, oficina de cambio, tramitación aduanera, Intento de entrega. Ausente, Finalizado plazo retirada
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – estados, plazos, horario, intentos, 7 días, Parcel Shop
+- [MRW: Conoce el estado de tu envío](https://blog.mrw.es/conoce-el-estado-de-tu-envio/) – estados, aduana, ausente, Franquicia destino
+- [CTT Express: FAQs sobre los estados de envío](https://www.cttexpress.com/preguntas-frecuentes/estados-envio) – ausencia, nuevo intento
+- [CTT Express: Estados de envío](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – pendiente de recepción, última milla
 - [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – textos en mayúsculas, en tránsito, ausencia, retraso, entregado a un vecino
-- [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – 3 días laborables, 5 días naturales, avisos, documentos, ausencia
+- [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 3 días laborables, 5 días naturales, avisos, documentos, ausencia
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – escaneos de UPS que lee Peek: «Left at», «Exception»
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – contenedores, aduana, seguimiento del transportista de destino
 :::

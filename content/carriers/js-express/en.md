@@ -3,10 +3,10 @@ title: JS Express tracking: JSE…YQ numbers, scans and who delivers
 description: Track a JS Express (急速国际) parcel from China: what a JSE…YQ number looks like, what its scans mean and who delivers it in the US, Canada and beyond.
 slug: js-express-tracking
 published: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-05
 ---
 
-JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS or GOFO in the United States, Straightship in Canada and Yodel in the UK.
+JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS or GOFO in the United States, Straightship in Canada, Yodel in the UK, DHL in Germany and Colissimo in France.
 
 ## JS Express tracking number: what it looks like
 
@@ -62,7 +62,9 @@ JS Express's page lists each scan as a time, a place in 【brackets】 and a wor
 
 **Canada.** [Straightship](carrier:straightship), a Canadian courier, delivers some JS Express parcels; its scans show in JS Express's history.
 
-**UK, Ireland, Australia and elsewhere.** In the UK, JS Express's history shows Yodel's scans; two of them, `DESPATCHED AND ON ROUTE TO YODEL` and `PARCEL PICKED UP`, come while the parcel is still at JS Express's warehouse in China. JS Express's record can hold the local courier's number, but not its name, and JS Express's page shows neither. Peek names the courier when that number fits one carrier in your country, and asks your country's post about a [postal number](guide:tracking-number-formats) (two letters, nine digits, two letters); more below. If Peek names no courier, ask the seller who delivers.
+**Germany and France.** JS Express's Europe line serves countries such as the UK, France, Germany, Italy, Spain, Switzerland and Denmark, though not some remote postcodes. For Germany, JS Express names DPD and other couriers for the last mile and says over 98% of parcels are delivered within 8 working days; its history there has shown [DHL Paket](carrier:dhl)'s scans. In France it has shown [Colissimo](carrier:la-poste)'s, in French.
+
+**UK, Ireland, Australia and elsewhere.** In the UK, JS Express's history shows Yodel's scans; two of them, `DESPATCHED AND ON ROUTE TO YODEL` and `PARCEL PICKED UP`, come while the parcel is still at JS Express's warehouse in China. For Australia, JS Express names Australia Post and Fastway, now [Aramex Australia](carrier:aramex-au), below 4 kg, and DPEX above. JS Express's record can hold the local courier's number, but not its name, and JS Express's page shows neither. Peek names the courier when that number fits one carrier in your country, and asks your country's post about a [postal number](guide:tracking-number-formats) (two letters, nine digits, two letters); more below. If Peek names no courier, ask the seller who delivers.
 
 Delivery attempts, notice cards and pickup points follow the local courier's rules: JS Express publishes none. A `到达待取` row names only the country, so check the courier's tracking or ask the seller where the parcel waits.
 
@@ -72,13 +74,13 @@ Delivery attempts, notice cards and pickup points follow the local courier's rul
 
 **Stuck on `Electronic notification of order creation received.`** JS Express hasn't collected the parcel yet. Ask the shop when it was handed over.
 
-**Stuck on `Inbound to customs temporary warehouse`.** It's waiting for your country's customs. If you're asked for import charges, see [parcels held at customs](guide:customs); if it sits there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck on `Inbound to customs temporary warehouse`.** It's waiting for your country's customs. On some routes the rows read `Start Custom clearance Process`, then `customs clearance completed`; an earlier `Under customs clearance, please wait patiently.` is China's export customs at the departure airport, though Peek shows "At customs" for it too. JS Express sells its Europe line and its standard US line with duties paid (DDP): it collects the import taxes from the shop in advance, so on those lines you shouldn't be asked for any. If a courier asks, check with the seller before paying. In the EU, a €2 handling fee per item has been due since 1 November 2026; the seller or the delivering company pays it and may pass it on. See [parcels held at customs](guide:customs); if the parcel sits there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Nothing after `Delivery to local courier`.** The local courier has it. If Peek shows the courier's number, look it up on that courier's tracking; if not, ask the seller who delivers.
 
-**Delivered, but nothing came.** Ask the local courier first (USPS in the US), then the seller. See [delivered but not received](guide:delivered-not-received).
+**Delivered, but nothing came.** Ask the local courier first (USPS in the US), then the seller. On its US line, JS Express helps check a delivery the courier shows but you didn't get, and pays no compensation for it, so the seller's own policy decides. See [delivered but not received](guide:delivered-not-received).
 
-**Lost, damaged or returned.** The seller is JS Express's customer. Under JS Express's terms, the customer claims in writing within 30 days of JS Express receiving the parcel, and claims for insured parcels through its own account. So ask the shop or marketplace for a refund or a new parcel, and don't wait. A parcel that can't be delivered (nobody home, refused, wrong address, customs) is sent back for a fee if the sender asks, or destroyed. See [lost parcels](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
+**Lost, damaged or returned.** The seller is JS Express's customer. Under JS Express's terms, the customer claims in writing within 30 days of JS Express receiving the parcel, and claims for insured parcels through its own account. So ask the shop or marketplace for a refund or a new parcel, and don't wait. A parcel that can't be delivered (nobody home, refused, wrong address, customs) is sent back for a fee if the sender asks, or destroyed; on its US line, JS Express neither brings a returned parcel back to China nor sends it out again. On some routes, `Refused` then `Returned` mean the parcel was refused on the delivery round and is back at the courier's sorting centre, not yet with the seller: Peek shows "Needs attention". See [lost parcels](guide:lost-parcel) and [returned to sender](guide:returned-to-sender).
 
 ## JS Express contact number and customer service
 
@@ -119,7 +121,7 @@ In the box above, or on JS Express's English "Express Query" page at js-exp.com.
 
 ### Who delivers JS Express parcels in my country?
 
-A courier in your country. JS Express's history shows USPS or GOFO delivering in the United States, Straightship in Canada and Yodel in the UK. Elsewhere, ask the seller which company delivers.
+A courier in your country. JS Express's history shows USPS or GOFO delivering in the United States, Straightship in Canada, Yodel in the UK, DHL in Germany and Colissimo in France. Elsewhere, ask the seller which company delivers.
 
 ### Who do I contact about a missing JS Express parcel?
 
@@ -136,6 +138,11 @@ The seller you ordered from: it booked the parcel with JS Express and makes the 
 - [JS Express: Complaint](https://www.js-exp.com/EN/index.php?page=32) – form, hotline
 - [JS Express: Contact Us](https://www.js-exp.com/EN/index.php?page=35) – hotline, QQ, WeChat, older numbers and addresses
 - [JS Express: 联系我们 (contact us)](https://www.js-exp.com/index.php?page=35) – hotline for international queries, QQ, WeChat, offices
+- [JS Express: 国际专线 (international lines)](https://www.js-exp.com/index.php?catid=13) – Germany line: DPD and others, over 98% within 8 working days; Australia line: Australia Post, Fastway, DPEX
+- [JS Express: 急速美国专线 (US line)](https://www.js-exp.com/index.php?aid=27) – duties paid (DDP), returns neither brought back to China nor sent out again, delivered but not received
+- [JS Express: 急速欧洲专线 (Europe line)](https://www.js-exp.com/index.php?aid=35) – countries, duties paid (DDP), remote postcodes
+- [Aramex Australia: About Aramex Australia](https://www.aramex.com.au/why-aramex/about-us/) – Fastway became Aramex Australia
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, paid by the seller or the delivering business, may be passed on
 - [USPS: Missing Mail and Lost Packages](https://www.usps.com/help/missing-mail.htm) – senders or recipients, from 7 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, scan wordings and stages, clocks, USPS, GOFO, Straightship and Yodel scans, the courier's number, what Peek shows and how it hands a parcel over
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, scan wordings and stages, clocks, USPS, GOFO, Straightship, Yodel, DHL and Colissimo scans, customs, refusals and returns, the courier's number, what Peek shows and how it hands a parcel over
 :::

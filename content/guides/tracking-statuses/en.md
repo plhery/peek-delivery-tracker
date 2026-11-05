@@ -39,7 +39,7 @@ Same stages, different words:
 
 ## "Label created" or "pre-shipment": does the carrier have it?
 
-No: the seller has printed a label and sent the details, nothing more. [USPS](carrier:usps) says the parcel "has not yet been given to USPS", and [UPS](carrier:ups)'s first scan reads `Shipper created a label, UPS has not received the package yet.` [An Post](carrier:an-post) words it `We have received information about your incoming item from the sender`. Some US parcels show `Picked Up by Shipping Partner, USPS Awaiting Item`: a partner company has it and will hand it to USPS.
+No: the seller has printed a label and sent the details, nothing more. [USPS](carrier:usps) says the parcel "has not yet been given to USPS", and [UPS](carrier:ups)'s first scan reads `Shipper created a label, UPS has not received the package yet`. [An Post](carrier:an-post) words it `We have received information about your incoming item from the sender`. Some US parcels show `Picked Up by Shipping Partner, USPS Awaiting Item`: a partner company has it and will hand it to USPS.
 
 [Australia Post](carrier:australia-post)'s `Pending` (nothing scanned yet) should update within 24 to 48 hours. If nothing moves, ask the seller, not the carrier: USPS and [Evri](carrier:evri) say so.
 
@@ -82,7 +82,7 @@ This one needs you: [nobody could take the parcel](guide:missed-delivery), or th
 | Carrier | After a missed delivery | Kept for pickup |
 | --- | --- | --- |
 | USPS (US) | `Notice Left`: no automatic second try; book a redelivery or collect | Signature mail "usually 15 days"; Priority Mail Express 5 calendar days |
-| UPS (US) | The scan says you weren't available or the business was closed, and UPS tries again; after the final attempt it holds the parcel, takes it to an Access Point or sends it back | – |
+| UPS (US) | A UPS InfoNotice and another try on the next delivery day, up to three in all; after the last, the tracking shows your options, such as an Access Point | – |
 | [FedEx](carrier:fedex) | `Customer not available or business closed` | – |
 | Royal Mail (UK) | `Due for Redelivery the Next Working Day`, or a red card naming where to collect | About 3 weeks with a customs bill to pay |
 | Evri (UK) | Three attempts and a calling card; no depot collection | If sent to a ParcelShop, 10 days; a locker, 3 |
@@ -94,7 +94,7 @@ This one needs you: [nobody could take the parcel](guide:missed-delivery), or th
 
 ## "Ready for pickup" or "awaiting collection": where is it?
 
-It's at a post office, shop or locker, [until the deadline](guide:uncollected-parcel) in the table above. Canada Post, like USPS, says `Available for Pickup`, and UPS's `Delivered to UPS Access Point™` means it's ready for you there.
+It's at a post office, shop or locker, [until the deadline](guide:uncollected-parcel) in the table above. Canada Post, like USPS, says `Available for Pickup`, and UPS's `Delivered to a UPS Access Point` means it's ready for you there.
 
 Wait for this status or the carrier's message before going: USPS makes items available from the next business day, and Australia Post's notification gives the date and time. Canada Post prints the pickup place on the card, and it can change from one delivery to the next.
 
@@ -103,7 +103,7 @@ Wait for this status or the carrier's message before going: USPS makes items ava
 Not always. It means the driver scanned it as handed over or left:
 
 - **With a neighbour.** Royal Mail's `Delivered to Neighbour/Reception by` goes on to name who took it in.
-- **Somewhere safe.** UPS's page can show where the parcel was left (`Left at: Front Door`, for example). USPS's spots at home include the mailbox and the back entrance; a key in your mail compartment means a parcel locker. Canada Post's `Delivered as a safe drop` usually comes with a photo.
+- **Somewhere safe.** UPS's tracking details can show where the parcel was left, such as the front door or a porch. USPS's spots at home include the mailbox and the back entrance; a key in your mail compartment means a parcel locker. Canada Post's `Delivered as a safe drop` usually comes with a photo.
 
 Australia Post also shows `Delivered` once you've collected it from a Post Office or Parcel Locker. Nothing there? Check the full tracking for a photo, a name or a place, then see [delivered but not received](guide:delivered-not-received).
 
@@ -128,7 +128,10 @@ Don't count on stopping it: "Once the return process starts, we can't stop it," 
 - [USPS: Where is my package?](https://faq.usps.com/s/article/Where-is-my-package) – statuses, 9 pm rule
 - [USPS: Redelivery, the basics](https://faq.usps.com/s/article/Redelivery-The-Basics) – holding periods
 - [Royal Mail: Tracking terms explained](https://www.royalmail.com/help/postage-tracking-terms-explained) – Internal exception occurred
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail, UPS, An Post and FedEx status wordings
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Royal Mail, An Post and FedEx status wordings
+- [Ship24: UPS tracking](https://www.ship24.com/couriers/ups-tracking) – UPS's first scan, Access Point, Exception and its reasons, Ground Saver and USPS, where a delivered parcel was left, new attempt or Access Point after a missed delivery
+- [Parcels: UPS tracking](https://parcelsapp.com/en/carriers/ups) – `Package transferred to post office`, SurePost's last leg by USPS, Exception, InfoNotice, three attempts
+- [Pirate Ship: What does my UPS tracking status mean?](https://support.pirateship.com/en/articles/9321937-what-does-my-ups-tracking-status-mean) – Delivered to a UPS Access Point, Exception and the Shipment Progress section
 - [Citizens Advice: Telling delivery companies about your delivery or collection needs](https://www.citizensadvice.org.uk/consumer/post-and-parcels/telling-delivery-companies-about-your-delivery-or-collection-needs/) – Royal Mail's red card
 - [Citizens Advice: If something you ordered hasn't been delivered](https://www.citizensadvice.org.uk/consumer/somethings-gone-wrong-with-a-purchase/if-something-you-ordered-hasnt-been-delivered/) – pay-by-link messages
 - [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – about 3 weeks with a bill to pay

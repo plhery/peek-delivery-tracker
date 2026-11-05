@@ -3,10 +3,15 @@ title: DPD Sendungsverfolgung Deutschland: Status und Hilfe
 description: DPD-Paket in Deutschland verfolgen: wo die 14-stellige Paketnummer steht, was die Status heißen, wie Predict und der Paketshop funktionieren und wen du anrufst.
 slug: dpd-sendungsverfolgung-deutschland
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
-DPD in Deutschland ist die DPD Deutschland GmbH aus Aschaffenburg, ein Paketdienst im Geopost-Netz mit 10.300 Pickup Paketshops. Dein Paket verfolgst du mit der 14-stelligen Paketnummer auf DPDs Seite, mit deiner Postleitzahl siehst du dort alle Details. Oder du fügst die Nummer oben ins Feld ein: Sie steht in der Versandbestätigung des Shops und in DPDs Benachrichtigung per E-Mail.
+DPD in Deutschland ist die DPD Deutschland GmbH aus Aschaffenburg, ein Paketdienst im Geopost-Netz mit 10.300 Pickup Paketshops. Dein Paket verfolgst du mit der 14-stelligen Paketnummer auf DPDs Seite, mit deiner Postleitzahl siehst du dort alle Details. Oder du fügst die Nummer oben ins Feld ein. Je nachdem, was du in der Hand hast:
+
+- **Predict-Nachricht oder Versand-E-Mail:** Darin steht die Paketnummer, bei Predict auch das Zeitfenster von 2 Stunden am Zustelltag. Umleiten kannst du in der DPD App oder in der Sendungsverfolgung.
+- **Paketinfokarte im Briefkasten:** Die Nummer unter dem QR-Code ist die Paketnummer, der QR-Code zeigt, wo das Paket liegt.
+- **Abholung im Paketshop:** Geh erst hin, wenn DPD meldet, dass es bereitliegt; du brauchst nur deinen Lichtbildausweis.
+- **Rücksendung:** mit dem Retourenschein des Shops, mehr unten.
 
 ## DPD Paketnummer: wo du sie findest
 
@@ -56,6 +61,8 @@ DPDs deutsche FAQ erklärt einige Schritte: Bei `Auftragsdaten übermittelt` hat
 
 **Paket abholen.** Warte auf die E-Mail oder SMS, dass es abholbereit ist. Im Paketshop zeigst du nur einen amtlichen Lichtbildausweis vor, die Paketinfokarte brauchst du nicht. Abholen lassen geht mit deiner unterschriebenen [Vollmacht](https://www.dpd.com/de/de/support/vollmacht/) und dem eigenen Ausweis der abholenden Person. Wie lange es wartet, sagt DPD unterschiedlich: Die FAQ nennt 7 Tage im Paketshop und 3 an der Paketstation, in Kalendertagen mit Wochenenden und Feiertagen. Die AGB nennen für Pakete nach einer verpassten Zustellung 7 Werktage. Danach geht das Paket an den Versender zurück.
 
+**Zurückschicken.** Mit dem Retourenschein des Shops gibst du das Paket kostenlos im Pickup Paketshop, an einer Pickup Station oder beim DPD-Fahrer ab. Einen mobilen Schein erstellst du in der DPD App oder in myDPD und zeigst den QR-Code im Paketshop vor. Die Retoure verfolgst du wie jedes DPD-Paket, siehe [Retouren verfolgen](guide:returns-tracking).
+
 ## DPD Paket nicht angekommen, nicht zugestellt oder beschädigt
 
 Den Vertrag mit DPD hat der Versender. Laut DPD kümmert er sich um Erstattung, ein Paket, das nicht ankommt, beschädigte Ware und Ersatz. DPD hilft beim Status, beim Nachbarn, Paketshop oder Abstellort und beim Ändern von Tag oder Ort.
@@ -68,7 +75,7 @@ Den Vertrag mit DPD hat der Versender. Laut DPD kümmert er sich um Erstattung, 
 
 **Beschädigt.** Fotografiere den Schaden am Karton und an der Ware und melde ihn umgehend beim Versender. Einen sichtbar beschädigten Karton öffnest du laut Verbraucherzentrale am besten im Beisein des Fahrers. Das Handelsgesetzbuch (§ 438) setzt Fristen für die Anzeige beim Paketdienst: äußerlich erkennbare Schäden spätestens bei der Ablieferung, verdeckte innerhalb von sieben Tagen danach, in Textform, Verspätungen innerhalb von 21 Tagen. Einigst du dich mit DPD Deutschland über Verlust oder Beschädigung nicht, kannst du die Schlichtungsstelle Post der Bundesnetzagentur anrufen.
 
-**Zoll.** Pakete von außerhalb der EU, etwa aus Großbritannien oder den USA, können Zoll, Einfuhrumsatzsteuer und eine Verwaltungsgebühr kosten, die du zahlst, wenn der Versender es nicht getan hat. Die Zahlungsaufforderung von noreply-ecom@dpd.de ist laut DPD echt. Mehr in [Paket beim Zoll](guide:customs).
+**Zoll.** Pakete von außerhalb der EU, etwa aus Großbritannien oder den USA, können Zoll, Einfuhrumsatzsteuer und eine Verwaltungsgebühr kosten, die du zahlst, wenn der Versender es nicht getan hat. Seit dem 1. November 2026 kommen bei Online-Bestellungen 2 € EU-Bearbeitungsgebühr pro Ware hinzu, die Verkäufer oder Zusteller an dich weitergeben dürfen. Die Zahlungsaufforderung von noreply-ecom@dpd.de ist laut DPD echt. Mehr in [Paket beim Zoll](guide:customs).
 
 ## DPD Kontakt: Telefonnummer, Kontaktformular und E-Mail
 
@@ -134,6 +141,8 @@ Im [Paketshop Finder](https://www.dpd.com/de/de/pickup-paketshops/paketshop-find
 - [DPD: Zweiter Zustellversuch](https://www.dpd.com/de/de/faq/das-paket-konnte-nicht-zugestellt-werden-gibt-es-einen-zweiten-zustellversuch/) – Versuche
 - [DPD: Zeit zum Abholen](https://www.dpd.com/de/de/faq/wie-lange-habe-ich-zeit-mein-paket-im-paketshop-abzuholen/) – 7 und 3 Tage
 - [DPD: Ohne Paketinfokarte abholen](https://www.dpd.com/de/de/faq/kann-ich-mein-paket-ohne-paketinfokarte-abholen/) – Ausweis
+- [DPD: Wie funktioniert die Retoure?](https://www.dpd.com/de/de/faq/wie-funktioniert-die-retoure/) – Retourenschein, kostenlos
+- [DPD: Parcel return](https://www.dpd.com/de/en/support/recipients/parcel-return/) – Abgabe, mobiler Schein
 - [DPD: AGB DPD CLASSIC](https://www.dpd.com/wp-content/uploads/sites/59/2026/07/AGB-DPD-CLASSIC_06-2026_DE_END.pdf) – Zustellung, Haftung
 - [DPD: Zusatzleistungen](https://www.dpd.com/wp-content/uploads/sites/59/2025/01/Beforderungsbedingungen-Zusatzleistungen-01-2025_DE_END.pdf) – Samstag
 - [DPD: DPD oder Versender?](https://www.dpd.com/de/de/faq/wann-wende-ich-mich-an-dpd-und-wann-an-den-versender/) – wer was klärt
@@ -145,6 +154,8 @@ Im [Paketshop Finder](https://www.dpd.com/de/de/pickup-paketshops/paketshop-find
 - [Verbraucherzentrale: Paketempfang](https://www.verbraucherzentrale.de/wissen/digitale-welt/onlinehandel/worauf-sie-als-empfaenger-eines-pakets-achten-sollten-12322) – Schaden
 - [DPD: Impressum](https://www.dpd.com/de/de/impressum/) – Schlichtung
 - [DPD: Zustellung und Zoll](https://www.dpd.com/de/de/support/empfaenger/zustellung-und-zoll/) – Zoll
+- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € ab 1. November 2026
+- [Revenue: Union Handling Fee](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – Weitergabe
 - [DPD: Kontakt](https://www.dpd.com/de/de/support/kontakt/) – Hotline, Formular
 - [DPD: Support über die App](https://www.dpd.com/de/de/faq/wie-kontaktiere-ich-den-support-ueber-die-app/) – App
 - [DPD: Sicherheitshinweise](https://www.dpd.com/de/de/sicherheit/) – SMS, E-Mail

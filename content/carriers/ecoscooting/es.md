@@ -20,11 +20,11 @@ Tampoco publica un formato de número. Su seguimiento responde a estos (cifras i
 | `CNPRT00000000000000000000` | CNPRT y 20 cifras: un paquete para Portugal. |
 | `123456789012345678` | 18 cifras. |
 
-Hay números parecidos que son de otros. En un pedido de AliExpress sueles ver un número LP con 14 cifras: es la referencia logística de AliExpress y se sigue con [Cainiao](carrier:cainiao). CNES con 11 cifras es una referencia que puede salir en el seguimiento de [CACESA](carrier:cacesa), el agente de aduanas que despacha muchos de estos paquetes. Si ecoscooting.com no reconoce tu número, sigue el que aparece en el pedido. Más en [seguimiento de paquetes de China](guide:tracking-from-china).
+Hay números parecidos que son de otros. En un pedido de AliExpress sueles ver un número LP con 14 cifras: es la referencia logística de AliExpress y se sigue con [Cainiao](carrier:cainiao). Un paquete de China pasa la aduana antes de la entrega local, por ejemplo con [CACESA](carrier:cacesa), un agente de aduanas. Si ecoscooting.com no reconoce tu número, sigue el que aparece en el pedido. Más en [seguimiento de paquetes de China](guide:tracking-from-china).
 
 ## Estados del seguimiento de Ecoscooting: qué significa cada uno
 
-ecoscooting.com sale en español, inglés o portugués según tu navegador, y tiene un menú de idioma. Cada escaneo lleva un título en negrita y una línea debajo; estas son las líneas que verás en español, en el orden en que suelen aparecer. Los primeros pasos, los de Cainiao, salen en inglés en todos los idiomas, como `Shipment is in transit to Cainiao Express`.
+ecoscooting.com sale en español, inglés o portugués según tu navegador, y tiene un menú de idioma. Cada escaneo lleva un título en negrita y una línea debajo; estas son las líneas que verás en español, en el orden en que suelen aparecer.
 
 | Ecoscooting escribe | Qué significa para ti |
 | --- | --- |
@@ -83,9 +83,9 @@ El aviso legal da otro teléfono para consultas y reclamaciones, el 931 222 879,
 
 ## Seguir un paquete de Ecoscooting con Peek
 
-[Peek](/) reconoce enseguida como de Ecoscooting un número CNESP o CNPRT con 20 cifras. Uno de 18 cifras también podría ser de bpost, y Peek no puede preguntar a Ecoscooting si conoce un número, así que solo pregunta a bpost: pulsa «Cambiar» y elige Ecoscooting, o pega el enlace de seguimiento de ecoscooting.com, que lleva a Ecoscooting.
+[Peek](/) reconoce enseguida como de Ecoscooting un número CNESP o CNPRT con 20 cifras y la mayoría de las etiquetas españolas de 18 cifras que empiezan por el código postal seguido de `0000`. Para un número de paquete de SHEIN (C o E, una fecha de seis cifras y luego ocho cifras), que [Paack](carrier:paack) también reparte en España, Peek pregunta a Ecoscooting si lo conoce. Otro número de 18 cifras también podría ser de bpost. Si no aparece Ecoscooting, pulsa «Cambiar» y elígelo, o pega el enlace de seguimiento de ecoscooting.com, que lleva a Ecoscooting.
 
-Cuando Cainiao o CACESA dan un número CNESP o CNPRT, Peek puede seguir el paquete hasta Ecoscooting; con uno de 18 cifras no. Ecoscooting ya no responde a algunas referencias CNESP antiguas, así que esas pueden quedarse vacías.
+Cuando Cainiao o CACESA dan un número CNESP o CNPRT, o una etiqueta que Peek reconoce como de Ecoscooting, Peek puede seguir el paquete hasta Ecoscooting; con otro número de 18 cifras no.
 
 Peek muestra el estado, el historial con las horas exactas de Ecoscooting pero sin lugares, el peso, la hora de entrega y, cuando el paquete llega a un punto de recogida, su nombre y dirección, que se quedan después de recogerlo. No hay fecha de entrega prevista. Deja fuera el PIN, el teléfono y el horario del punto, los códigos postales y las referencias del pedido. Las líneas salen en el inglés de Ecoscooting, porque Peek lo consulta en ese idioma, salvo un `Out for delivery` a secas, que aparece como «En reparto». Ecoscooting responde igual con un número desconocido que con uno que no puede consultar, así que un número equivocado simplemente se queda sin novedades.
 
@@ -107,7 +107,7 @@ Ecoscooting anuncia a las tiendas entregas nacionales en 24 o 48 horas. Es solo 
 
 ### ¿Por qué no funciona el seguimiento de Ecoscooting?
 
-Si sale `No se encontraron datos`, Ecoscooting no encuentra ese número: revísalo o sigue el número del pedido. Algunas referencias CNESP antiguas ya no responden. `Sin trayectoria` significa que todavía no hay escaneos.
+Si sale `No se encontraron datos`, Ecoscooting no encuentra ese número: revísalo o sigue el número del pedido. `Sin trayectoria` significa que todavía no hay escaneos.
 
 ### ¿Cuál es el teléfono gratuito de Ecoscooting?
 

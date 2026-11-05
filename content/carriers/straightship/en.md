@@ -3,7 +3,7 @@ title: Straightship tracking: STRTD numbers, statuses and delivery
 description: Track a Straightship parcel in Canada: what STRTD, STRCA and STSH numbers look like, what each status means, missed deliveries, customs and who to contact.
 slug: straightship-tracking
 published: 2026-10-23
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
 Straightship (Straightship Solutions Limited) is a logistics company based in Burnaby, British Columbia, that ships goods from Asia to North America and delivers parcels across Canada with its own drivers. Its site lists SHEIN among its partners. If an online order came with a number starting `STRTD` or `STRCA`, Straightship has it; one starting `STSH` can be Straightship's too. Track it on [straightship.com](https://www.straightship.com/new/), in the "Track Your Shipment" box, or in the box above. The shop gives the number in its shipping email or on the order page.
@@ -50,9 +50,9 @@ A parcel being returned can still be scanned at a depot and sent out again: `Pac
 
 ## Straightship delivery in Canada: who brings it
 
-Straightship's tracker is for Canada: its heading reads "Canada B2C Shipment Tracking". Straightship says its own delivery network covers 95% of Canada's population, with over 85 delivery hubs, and its out-for-delivery line promises delivery before 9 pm.
+Straightship's tracker is for Canada: its heading reads "Canada B2C Shipment Tracking". Straightship says its own delivery network reaches 90% of Canadian postal codes and over 95% of the population, with over 85 delivery hubs, and its out-for-delivery line promises delivery before 9 pm. It also delivers for [JS Express](carrier:js-express), a Chinese logistics company: JS Express's tracking shows Straightship's scans in Canada, and when JS Express's record holds a `STRTD` or `STRCA` number, Peek asks Straightship as well.
 
-For parcels it brings into Canada from the US, Straightship offers "different options on last-mile carriers": its own network, [Canada Post](carrier:canada-post) or [UPS](carrier:ups), plus [Purolator](carrier:purolator) on its English page but FedEx on its Chinese one. Which one depends on the shipment. Its tracker shows only Straightship's own depots and names no other carrier or second number.
+For parcels it brings into Canada from the US, Straightship offers "different options on last-mile carriers": its own network, [Canada Post](carrier:canada-post) or [UPS](carrier:ups), plus [Purolator](carrier:purolator) on its English page but FedEx on its Chinese one. Which one depends on the shipment. Straightship says this service delivers within 6 to 10 days and clears customs within 24 hours. Its tracker shows only Straightship's own depots and names no other carrier or second number.
 
 Straightship publishes no rules for how many attempts it makes, whether it leaves a notice card, or how long it keeps an undelivered parcel at the depot. What it does say:
 
@@ -62,7 +62,9 @@ Straightship publishes no rules for how many attempts it makes, whether it leave
 
 ## Customs on a Straightship parcel from Asia
 
-Straightship clears customs for the businesses it ships for, and its pages don't say whether it ever bills recipients. If you're asked to pay for a Straightship parcel, check with the seller first.
+Straightship clears customs for the businesses it ships for, and its pages don't say whether it ever bills recipients. If you're asked to pay for a Straightship parcel, check with the seller first. SHEIN says all its orders to Canada are delivered duty paid, with no customs fees for you to pay. Other trackers can show `Customs Released` before the first scan in Canada; Straightship's own tracker doesn't.
+
+What's owed depends on the value and where the goods come from. By courier, nothing is due up to CAD 20 from China or any country other than the US and Mexico, and duty and taxes above that. From the US or Mexico, nothing is due up to CAD 40, taxes only up to CAD 150, and duty and taxes above.
 
 For a parcel coming by courier, the Canada Border Services Agency (CBSA) lets the courier account for duty and taxes on your behalf. The CBSA says the courier "will reach out to you to organize the duties and taxes payment prior to the delivery" and holds the parcel until you pay, and that a courier's clearance fees are separate from duty and taxes and outside the CBSA's control. The CBSA never contacts you by phone, text or email to ask for your Social Insurance Number or card number: such a message is a scam. What you owe, the exemptions and refunds are in [parcels held at customs](guide:customs).
 
@@ -74,7 +76,7 @@ For a parcel coming by courier, the Canada Border Services Agency (CBSA) lets th
 
 **No update in Canada.** If nothing moves for several days after a depot scan, or `Shipment delayed` shows, use Straightship's contact form with "Delivery Status Enquiry". More in [why tracking stops updating](guide:tracking-not-updating).
 
-**Delivered but not there.** Look for a delivery photo on Straightship's tracker (there isn't always one), then check the neighbours, your building's mailroom and any safe spot around your door. Then use the form's "Delivered Order Not Received" and tell the seller. See [delivered but not received](guide:delivered-not-received).
+**Delivered but not there.** Look for a delivery photo on Straightship's tracker (there isn't always one), then check the neighbours, your building's mailroom and any safe spot around your door. SHEIN adds that, in rare cases, a parcel shows as delivered up to 48 hours before it arrives. Then use the form's "Delivered Order Not Received" and tell the seller; on a SHEIN order, look for the "Parcel Delivered, Not Received" button in My orders, which starts a refund request. See [delivered but not received](guide:delivered-not-received).
 
 **Returned.** `Package is being returned to shipper` means it's going back to the seller. Ask the seller to refund you or ship it again; see [returned to sender](guide:returned-to-sender).
 
@@ -112,7 +114,7 @@ The "Package Status" summary can keep `ReadyForShipping` while the parcel moves 
 
 ### How long does Straightship take to deliver?
 
-Straightship publishes no delivery time for parcels from Asia. Go by the estimate the shop gives for your order. Once a line says `Package will be delivered before 9:00pm`, the driver comes that day.
+Straightship publishes no delivery time for parcels from Asia; for its service from the US, it says 6 to 10 days. Go by the estimate the shop gives for your order. Once a line says `Package will be delivered before 9:00pm`, the driver comes that day.
 
 ### Who delivers Straightship parcels?
 
@@ -121,12 +123,15 @@ Straightship's own drivers, from its depots across Canada, as far as its tracker
 :::sources
 - [Straightship: Home](https://www.straightship.com/new/) – Asia to North America, own fleet, tracking box, POD image, partners, phone, email, hours
 - [Straightship: About](https://www.straightship.com/new/about.html) – door-to-door from Asia to North America
-- [Straightship: Services](https://www.straightship.com/new/services.html) – own network covering 95% of Canada's population; US-to-Canada service with last-mile options of its own network, Canada Post, Purolator or UPS; customs clearance
+- [Straightship: Services](https://www.straightship.com/new/services.html) – own network reaching 90% of postal codes and 95% of Canada's population; US-to-Canada service in 6 to 10 days, customs within 24 hours, last-mile options of its own network, Canada Post, Purolator or UPS; customs clearance
 - [Straightship: 服务 (services, Chinese)](https://www.straightship.com/new/cn/services.html) – the same US-to-Canada service with its own network, Canada Post, FedEx or UPS for the last mile
 - [Straightship: Resources](https://www.straightship.com/new/resources.html) – over 85 delivery hubs
 - [Straightship: Contact](https://www.straightship.com/new/contact.html) – contact reasons, tracking number required, 2 business days
 - [Straightship: Privacy Policy](https://www.straightship.com/new/privacy.html) – Straightship Solutions Limited, Burnaby
 - [CBSA: Importing casual goods by courier](https://www.cbsa-asfc.gc.ca/import/courier/lvs-efv/prsn-eng.html) – couriers account for duty and taxes, clearance fees outside the CBSA's control
 - [CBSA: Protect yourself against fraud](https://www.cbsa-asfc.gc.ca/security-securite/pyaf-pvcf-eng.html) – the courier organizes payment before delivery and holds the parcel, no SIN or card requests
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings, UTC note, summary values
+- [CBSA: Low-value shipment thresholds](https://www.cbsa-asfc.gc.ca/services/cusma-aceum/lvs-efv-eng.html) – by courier: CAD 20 from other countries, CAD 40 and CAD 150 from the US and Mexico
+- [SHEIN Canada: Are there any additional fees for customs?](https://ca.shein.com/faq/detail?id=2307) – orders to Canada delivered duty paid
+- [SHEIN Canada: My order is marked as delivered, but I haven't received it](https://ca.shein.com/faq/detail?id=2362) – delivered up to 48 hours early, Parcel Delivered, Not Received
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, number shapes, scan wordings, UTC note, summary values, `Customs Released` on other trackers, the hand-off from JS Express
 :::

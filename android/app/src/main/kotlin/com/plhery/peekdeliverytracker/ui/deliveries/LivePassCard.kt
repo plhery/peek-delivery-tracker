@@ -51,6 +51,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
@@ -126,8 +127,9 @@ internal class PassBell(
  *
  * - The carrier the card shows, a probable one named as such (B-S72), and under it the carrier that delivers where
  *   another does, which a tap offers to change (B-G03) on a parcel that is the reader's to change. At the trailing end,
- *   44 square each, the globe that opens the map (B-G02, where scans have places, once the route is drawn), the share
- *   button and the bell (B-S03). At the accessibility sizes the marks take the line, and the buttons go under them.
+ *   44 square each at the default text size, the globe that opens the map (B-G02, where scans have places, once the
+ *   route is drawn), the share button and the bell (B-S03), their symbols growing with the text and their buttons with
+ *   them ([CardButtons]). At the accessibility sizes the marks take the line, and the buttons go under them.
  * - The route engraved behind the card's top, 176 tall, and 40 more under a second mark, once what it keeps clear of
  *   is laid out; at the accessibility sizes it goes as much lower as the buttons' line adds. It fades in over 0.5 s
  *   once drawn (B-AN03, B-AN04), at once under Reduce Motion, and a tap on it opens the map. Decorative: the globe is
@@ -189,6 +191,7 @@ internal fun LivePassCard(
     val neededFocus = remember { AccessibilityFocus() }
     val shareFocus = remember { AccessibilityFocus() }
     val open by rememberUpdatedState { onMap(globeFocus) }
+    val sizes = CardButtons(type.scaled(CardButtons.SYMBOL))
 
     // A map that keeps clear of the second mark and the buttons waits to know where they stand, rather than moving
     // once it does.
@@ -260,16 +263,16 @@ internal fun LivePassCard(
                     },
                 ) {
                     if (placed) {
-                        HeaderButton(localizer.text("map.open"), PAGE_GLOBE, enabled = route != null, Modifier.accessibilityFocus(globeFocus), open) {
-                            PeekSymbol("globe", font = type.fixed(17f), tint = tint)
+                        HeaderButton(localizer.text("map.open"), PAGE_GLOBE, enabled = route != null, Modifier.accessibilityFocus(globeFocus), open, sizes.button.dp) {
+                            PeekSymbol("globe", font = type.fixed(sizes.globe), tint = tint)
                         }
                     }
                     if (readerLink || !sample) {
-                        HeaderButton(localizer.text("link.shareAria"), PAGE_SHARE, enabled = true, Modifier.accessibilityFocus(shareFocus), { onShare(shareFocus) }) {
-                            PeekSymbol("square.and.arrow.up", font = type.fixed(16f), tint = tint)
+                        HeaderButton(localizer.text("link.shareAria"), PAGE_SHARE, enabled = true, Modifier.accessibilityFocus(shareFocus), { onShare(shareFocus) }, sizes.button.dp) {
+                            PeekSymbol("square.and.arrow.up", font = type.fixed(sizes.share), tint = tint)
                         }
                     }
-                    if (bell != null) BellButton(parcel, bell, working, tint, localizer)
+                    if (bell != null) BellButton(parcel, bell, working, tint, localizer, sizes)
                 }
             }
             // The buttons sit a tap apart, which leaves a long carrier name its line. At the largest text sizes the
@@ -460,7 +463,7 @@ internal fun PassMarks(
     }
 }
 
-/** A button of the card's top row, 44 square, as the iPhone's plain buttons dim while pressed or off. */
+/** A button of the card's top row, `side` square (44 by default), as the iPhone's plain buttons dim while pressed or off. */
 @Composable
 internal fun HeaderButton(
     label: String,
@@ -468,11 +471,12 @@ internal fun HeaderButton(
     enabled: Boolean,
     modifier: Modifier,
     action: () -> Unit,
+    side: Dp = HEADER_BUTTON,
     content: @Composable () -> Unit,
 ) {
     Box(
         modifier
-            .size(HEADER_BUTTON)
+            .size(side)
             .testTag(tag)
             .clickable(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = action)
             .plainDisabled(enabled)
@@ -489,7 +493,7 @@ internal fun HeaderButton(
  * instead, struck out while every alert of the parcel is: its email, on a phone without pushes.
  */
 @Composable
-private fun BellButton(parcel: Parcel, bell: PassBell, working: Boolean, tint: Color, localizer: Localizer) {
+private fun BellButton(parcel: Parcel, bell: PassBell, working: Boolean, tint: Color, localizer: Localizer, sizes: CardButtons) {
     var rings by remember { mutableIntStateOf(0) }
     val haptics = rememberHaptics()
     val focus = remember { AccessibilityFocus() }
@@ -505,13 +509,13 @@ private fun BellButton(parcel: Parcel, bell: PassBell, working: Boolean, tint: C
             rings++
             haptics.selection()
         }
-    }) {
+    }, sizes.button.dp) {
         val struck = when {
             !bell.opensAlerts -> parcel.notificationsMuted
             bell.pushes -> parcel.allAlertsMuted
             else -> parcel.isEmailMuted
         }
-        ParcelNotificationBell(struck, rings, tint)
+        ParcelNotificationBell(struck, rings, tint, side = sizes.bell.dp)
     }
 }
 
@@ -629,6 +633,22 @@ internal class PassFrames {
         val box = card.localBoundingBoxOf(node, clipBounds = false)
         val scale = density.density.toDouble()
         return Rect(box.left / scale, box.top / scale, box.width / scale, box.height / scale)
+    }
+}
+
+/**
+ * The card's globe, share and bell, in points (`@ScaledMetric(relativeTo: .body) var cardSymbol = 17`): the globe's
+ * symbol [globe] grows with the body's size from 17 at Large, the share's and the bell's drawing keep their 16 and 18 to
+ * it, and each button is the globe's symbol and 27 more, so the room around each stays as it grows.
+ */
+internal data class CardButtons(val globe: Float) {
+    val share: Float get() = globe * 16 / SYMBOL
+    val bell: Float get() = globe * 18 / SYMBOL
+    val button: Float get() = globe + 27
+
+    companion object {
+        /** The globe's size at Large. */
+        const val SYMBOL = 17f
     }
 }
 

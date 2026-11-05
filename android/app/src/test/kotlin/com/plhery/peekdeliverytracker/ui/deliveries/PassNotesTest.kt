@@ -492,6 +492,8 @@ class PassNotesTest {
 
         fontScale = 2f
         compose.waitForIdle()
+        // The card's top row grows with the text, and the buttons go under the bottom of the screen.
+        compose.onNodeWithTag(PAGE_PICKUP_COPY).performScrollTo()
         card = bounds(PAGE_PICKUP)
         directions = bounds(PAGE_PICKUP_DIRECTIONS)
         copy = bounds(PAGE_PICKUP_COPY)

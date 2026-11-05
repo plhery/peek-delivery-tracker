@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.ui.deliveries
 
 import com.plhery.peekdeliverytracker.core.EdgeInsets
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.PeekKeyframes
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -42,6 +44,22 @@ class PassLayoutTest {
         // Not before the header is measured, nor at the other sizes.
         assertEquals(0.0, PassRouteMetrics.of(handover = false, largeText = true, headerHeight = 0.0).lower, 0.0)
         assertEquals(0.0, PassRouteMetrics.of(handover = false, largeText = false, headerHeight = 108.0).lower, 0.0)
+    }
+
+    @Test
+    fun theCardsSymbolsGrowWithTheBodyAndTheirButtonsKeep27AroundThem() {
+        val usual = CardButtons(CardButtons.SYMBOL)
+        assertEquals(17f, usual.globe, 0.001f)
+        assertEquals(16f, usual.share, 0.001f)
+        assertEquals(18f, usual.bell, 0.001f)
+        assertEquals(44f, usual.button, 0.001f)
+        // The body's 17 is 33 at the largest text, as `@ScaledMetric` grows the 17 of the globe.
+        assertEquals(33f, IosTextStyle.Body.pointSize(DynamicTypeSize.Accessibility2), 0.001f)
+        val largest = CardButtons(CardButtons.SYMBOL * 33 / 17)
+        assertEquals(33f, largest.globe, 0.001f)
+        assertEquals(33f * 16 / 17, largest.share, 0.001f)
+        assertEquals(33f * 18 / 17, largest.bell, 0.001f)
+        assertEquals(60f, largest.button, 0.001f)
     }
 
     @Test

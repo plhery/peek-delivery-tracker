@@ -401,11 +401,25 @@ class LivePassTest {
         marks = bounds(PAGE_MARKS)
         bell = bounds(PAGE_BELL)
         assertTrue("Bell $bell under the marks $marks", bell.top >= marks.bottom)
-        // The marks, then 4, then the buttons' 44: all of it more than the top row's 44 lowers the map.
+        // The marks, then 4, then the buttons' 60: all of it more than the top row's 44 lowers the map.
         val route = bounds(PAGE_ROUTE)
         val markHeight = (marks.bottom - marks.top).value
-        assertEquals(176f + markHeight + 4f, (route.bottom - route.top).value, 1f)
+        assertEquals(176f + markHeight + 4f + 60f - 44f, (route.bottom - route.top).value, 1f)
     }
+
+    @Test
+    fun theGlobeTheShareAndTheBellGrowWithTheTextAndTheirButtonsWithThem() {
+        show()
+        open("Birthday gift")
+        for (tag in listOf(PAGE_GLOBE, PAGE_SHARE, PAGE_BELL)) assertEquals(tag, 44f, side(tag), 0.5f)
+
+        // The body's 17 at the largest text is 33, and the buttons keep 27 around it.
+        fontScale = 2f
+        compose.waitForIdle()
+        for (tag in listOf(PAGE_GLOBE, PAGE_SHARE, PAGE_BELL)) assertEquals(tag, 60f, side(tag), 0.5f)
+    }
+
+    private fun side(tag: String): Float = bounds(tag).let { (it.right - it.left).value }
 
     // What the pass asks of the carrier.
 

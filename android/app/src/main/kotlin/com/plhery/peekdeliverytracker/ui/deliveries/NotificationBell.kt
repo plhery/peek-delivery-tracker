@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.theme.Motion
@@ -29,13 +30,14 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.keyframeAnimator
 
 /**
- * `ParcelNotificationBell` (B-S03): the page's bell, 18 square, light at 16 points in `tint`. A line strikes it out
- * while `muted`, drawn in over 0.22 s (B-AN06), and it rings each time `trigger` changes (B-AN07): it swings about a
- * point 16 % down its height and gives a little, and two sound lines pulse beside it as it comes back on. Reduce Motion
- * keeps it still and draws the line at once. Decorative: its button says what it does.
+ * `ParcelNotificationBell` (B-S03): the page's bell, `side` square, 18 at the default text size, light at 16 points in
+ * `tint` there. A line strikes it out while `muted`, drawn in over 0.22 s (B-AN06), and it rings each time `trigger`
+ * changes (B-AN07): it swings about a point 16 % down its height and gives a little, and two sound lines pulse beside it
+ * as it comes back on. The line and the sound lines are drawn on an 18-point grid scaled to `side`, their strokes too,
+ * as is the bell. Reduce Motion keeps it still and draws the line at once. Decorative: its button says what it does.
  */
 @Composable
-internal fun ParcelNotificationBell(muted: Boolean, trigger: Int, tint: Color, modifier: Modifier = Modifier) {
+internal fun ParcelNotificationBell(muted: Boolean, trigger: Int, tint: Color, modifier: Modifier = Modifier, side: Dp = BELL_SIDE) {
     val reduceMotion = PeekTheme.reduceMotion
     val pose = keyframeAnimator(PeekKeyframes.BellPose(), trigger, still = reduceMotion) { PeekKeyframes.bell(muted) }
     // Worked out once a frame, for the bell's two layers and its sound lines.
@@ -45,11 +47,13 @@ internal fun ParcelNotificationBell(muted: Boolean, trigger: Int, tint: Color, m
         if (reduceMotion) snap() else Motion.easeOut(0.22),
         label = "bell slash",
     )
-    Box(modifier.size(BELL_SIDE).clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
+    // The drawing's points to the 18 of its grid.
+    val unit = side / BELL_SIDE
+    Box(modifier.size(side).clearAndSetSemantics {}, contentAlignment = Alignment.Center) {
         // `.rotationEffect(_:anchor:)` under `.scaleEffect(_:)`, on the bell alone.
         Box(
             Modifier
-                .size(BELL_SIDE)
+                .size(side)
                 .graphicsLayer {
                     val scale = drawing.scale
                     scaleX = scale
@@ -61,27 +65,27 @@ internal fun ParcelNotificationBell(muted: Boolean, trigger: Int, tint: Color, m
                 },
             contentAlignment = Alignment.Center,
         ) {
-            PeekSymbol("bell", font = PeekTheme.type.fixed(16f, FontWeight.Light), tint = tint)
+            PeekSymbol("bell", font = PeekTheme.type.fixed(16f * unit, FontWeight.Light), tint = tint)
         }
         Canvas(Modifier.fillMaxSize()) {
-            val unit = size.width / 18f
+            val grid = size.width / 18f
             if (slash > 0f) {
                 // `.trim(from: 0, to:)` of the line from (2, 2) to (16, 16), and as opaque as it is drawn.
                 val end = 2f + 14f * slash
                 drawLine(
-                    tint.copy(alpha = tint.alpha * slash), Offset(2f * unit, 2f * unit), Offset(end * unit, end * unit),
-                    strokeWidth = 1.dp.toPx(), cap = StrokeCap.Round,
+                    tint.copy(alpha = tint.alpha * slash), Offset(2f * grid, 2f * grid), Offset(end * grid, end * grid),
+                    strokeWidth = 1.dp.toPx() * unit, cap = StrokeCap.Round,
                 )
             }
             val waves = drawing.waves
             if (waves > 0f) {
                 val lines = Path().apply {
-                    moveTo(0f, 4f * unit)
-                    quadraticTo(-2f * unit, 7.5f * unit, 0f, 11f * unit)
-                    moveTo(18f * unit, 4f * unit)
-                    quadraticTo(20f * unit, 7.5f * unit, 18f * unit, 11f * unit)
+                    moveTo(0f, 4f * grid)
+                    quadraticTo(-2f * grid, 7.5f * grid, 0f, 11f * grid)
+                    moveTo(18f * grid, 4f * grid)
+                    quadraticTo(20f * grid, 7.5f * grid, 18f * grid, 11f * grid)
                 }
-                drawPath(lines, tint.copy(alpha = tint.alpha * waves), style = Stroke(0.9.dp.toPx(), cap = StrokeCap.Round))
+                drawPath(lines, tint.copy(alpha = tint.alpha * waves), style = Stroke(0.9.dp.toPx() * unit, cap = StrokeCap.Round))
             }
         }
     }

@@ -1130,16 +1130,21 @@ export function heldStage(parcel: JsonObject, previousStage: string, rows: reado
 /**
  * Whether a held stage is the earlier leg's while the delivery partner, now answering for a
  * handed-over parcel, starts its own: it announces or accepts the parcel the earlier carrier
- * already moved (Poczta Polska's posting scan in the minute 4PX hands the parcel over). That is
- * no step back. One the partner's own rows had passed is, as is one on a parcel loaded
- * without its rows.
+ * already moved (Poczta Polska's posting scan in the minute 4PX hands the parcel over). So does
+ * the parcel's own carrier after another carrier's scans held the stage (Swiss Post's posting
+ * scan once AliExpress's leg left the transit country). That is no step back. One the
+ * partner's own rows had passed is, as is one on a parcel loaded without its rows.
  */
 function partnerStartsLeg(parcel: JsonObject, carrierData: JsonObject, sourceCarrierId: string,
   selectedStage: string, keptStage: string, rows: readonly JsonObject[]): boolean {
-  return typeof carrierData.handed_over_at === 'string' && carrierData.active_tracking_carrier === sourceCarrierId
+  const source = (row: JsonObject) => String(row.provider_event_id).split(':')[0]!;
+  const past = (row: JsonObject) => stageRank(String(row.stage ?? '')) >= stageRank(keptStage);
+  const handedOver = typeof carrierData.handed_over_at === 'string' && carrierData.active_tracking_carrier === sourceCarrierId;
+  const afterAnother = parcel.carrier === sourceCarrierId
+    && rows.some((row) => past(row) && !['', 'app', 'unknown', sourceCarrierId].includes(source(row)));
+  return (handedOver || afterAnother)
     && ['registered', 'accepted'].includes(selectedStage) && Array.isArray(parcel[STORED_EVENT_IDENTITIES])
-    && !rows.some((row) => String(row.provider_event_id).startsWith(`${sourceCarrierId}:`)
-      && stageRank(String(row.stage ?? '')) >= stageRank(keptStage));
+    && !rows.some((row) => source(row) === sourceCarrierId && past(row));
 }
 
 /**

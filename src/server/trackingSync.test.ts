@@ -4103,6 +4103,37 @@ describe('TrackingSyncService', () => {
       .toEqual([['2026-01-12T11:00:00Z', undefined]]);
   });
 
+  it('keeps the stage another carrier\'s leg reached when the parcel\'s own carrier posts it later, and records no step back', async () => {
+    // The seller's carrier moved the parcel abroad; the destination post's posting scan comes after (synthetic wording and times).
+    const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
+    const left = { time: '2026-01-12T12:43:30Z', description: 'Leaving transit country/region', stage: 'in_transit' };
+    const posted = { time: '2026-01-12T13:18:36Z', description: 'Item posted', stage: 'accepted' };
+    const sorted = { time: '2026-01-12T15:00:00Z', description: 'Sorted', stage: 'in_transit' };
+    const answer = (...events: (typeof posted)[]): CarrierResult => ({ status: 'in_transit',
+      current_stage: events[0]!.stage as CarrierResult['current_stage'], last_status_text: events[0]!.description,
+      last_update: events[0]!.time, events });
+    const adapter = { fetch: vi.fn(async () => answer(posted)), fetchUniversal: vi.fn() };
+    let now = new Date('2026-01-12T17:19:00Z');
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    const row = (carrier: string, scan: typeof posted) => ({ stage: scan.stage, description: scan.description,
+      occurred_at: scan.time, provider_event_id: providerEventId(carrier, scan.time, '', scan.description) });
+    let parcel: JsonObject = { id: 'own-leg', carrier: 'la-poste', tracking_number: 'CW123456785FR', current_stage: 'in_transit',
+      carrier_data: { active_tracking_carrier: 'la-poste' }, [STORED_EVENT_IDENTITIES]: [row('aliexpress', left)] };
+    const sync = async () => {
+      await service.syncPackage(parcel);
+      parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+      return { stage: parcel.current_stage, anomalies: (client.completeSyncAttempt.mock.calls.at(-1)![1] as JsonObject).anomaly_codes };
+    };
+
+    expect(await sync()).toEqual({ stage: 'in_transit', anomalies: [] });
+    expect(parcel.last_status_text).toBe('Item posted');
+    // Once the carrier's own scans moved it, its posting scan again is a step back.
+    adapter.fetch.mockResolvedValue(answer({ ...posted, time: '2026-01-12T16:00:00Z', description: 'Item posted again' }, sorted, posted));
+    now = new Date('2026-01-12T18:19:00Z');
+    parcel = { ...parcel, [STORED_EVENT_IDENTITIES]: [row('aliexpress', left), row('la-poste', posted), row('la-poste', sorted)] };
+    expect(await sync()).toEqual({ stage: 'in_transit', anomalies: ['early_stage_regression'] });
+  });
+
   it('records no step back when the delivery partner starts its leg at acceptance, only when it had moved the parcel itself', async () => {
     const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
     let now = new Date('2026-01-12T10:30:00Z');

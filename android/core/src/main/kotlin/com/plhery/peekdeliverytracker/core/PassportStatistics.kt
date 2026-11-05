@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import com.plhery.peekdeliverytracker.core.api.EventPlace
+import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -387,6 +389,29 @@ object TrackingLocation {
         val written = place(location)
         return if (written.country == null) placedCode(location, placedIn) ?: written else written
     }
+
+    private val eastAsian: Pattern = Pattern.compile("[\\p{script=Han}\\p{script=Hiragana}\\p{script=Katakana}\\p{script=Hangul}]")
+    private val kanaOrHangul: Pattern = Pattern.compile("[\\p{script=Hiragana}\\p{script=Katakana}\\p{script=Hangul}]")
+
+    /**
+     * Whether a location is shown by its town's romanised name rather than as written, as on the web
+     * (`romanisesPlace`): it is in Chinese, Japanese or Korean script, which a Chinese reader keeps when it is
+     * Chinese characters alone. The stored scan keeps its words.
+     */
+    fun romanises(location: String, language: AppLanguage): Boolean =
+        eastAsian.matcher(location).find() && !(language == AppLanguage.Zh && !kanaOrHangul.matcher(location).find())
+
+    /**
+     * For display: a location written in a script the reader may not read ([romanises]) is named by the town the
+     * server placed it in ("深圳市" is Shenzhen), or by the country alone where it placed it no closer, and kept as
+     * written where it placed it nowhere. Otherwise as [place] with the country it was placed in reads it.
+     */
+    fun place(location: String, placed: EventPlace?, language: AppLanguage): Place =
+        if (placed != null && romanises(location, language)) {
+            Place(country = placed.country, name = if (placed.precision == EventPlacePrecision.City) placed.name else "")
+        } else {
+            place(location, placed?.country)
+        }
 
     /**
      * Passport evidence, with a final code that is also a state or canton counted once the scan

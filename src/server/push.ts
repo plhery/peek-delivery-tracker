@@ -7,11 +7,14 @@ import { createPrivateKey, type KeyObject } from 'node:crypto';
 import { SignJWT } from 'jose';
 import { DateTime, FixedOffsetZone, IANAZone, type Zone } from 'luxon';
 import webpush from 'web-push';
+import { countryName } from 'universal-parcel-scraper/app';
+import { locatePlace } from 'universal-parcel-scraper/places';
 import { CARRIER_CAPABILITIES, type ApiParcelAlertPreset } from '../generated/apiContract';
 import { dayAndTime } from '../lib/format';
 import { catalogLanguage, tagLocale, type Locale } from '../lib/locale';
 import { languageTags } from '../lib/messages';
 import { ALERT_PRESET_STAGES } from '../lib/notificationPresets';
+import { romanisesPlace } from '../lib/scanPlace';
 import { capitalized } from '../peek/parcel/summary';
 import { FCMAuthError, FcmClient, FCMError, fcmTokenGone } from './fcm';
 import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent } from './metrics';
@@ -621,8 +624,22 @@ function notificationDetail(row: JsonObject, locale: Locale, now: number): strin
 }
 
 /**
+ * The scan's place as a notification says it: as written, unless it is in Chinese, Japanese or Korean script the
+ * reader may not read (`romanisesPlace`) and the place reader finds its town ("深圳市" is "Shenzhen, China") or its
+ * country. The stored scan keeps its words.
+ */
+function notificationPlace(row: JsonObject, locale: Locale): unknown {
+  const location = typeof row.location === 'string' ? row.location.trim() : '';
+  if (!romanisesPlace(location, locale)) return row.location;
+  const place = locatePlace(location, typeof row.carrier === 'string' ? { carriers: [row.carrier] } : undefined);
+  if (!place) return row.location;
+  const country = countryName(place.country, languageTags[locale]);
+  return place.precision === 'city' ? `${place.name}, ${country}` : country;
+}
+
+/**
  * The line under the title: what leads it (the parcel's name, for whoever may
- * read it), then the detail, then the scan's place on a line of its own.
+ * read it), then the detail, then the scan's place on a line of its own (`notificationPlace`).
  */
 function notificationBody(
   row: JsonObject, locale: Locale, now: number, lead = row.label, detail = notificationDetail(row, locale, now),
@@ -630,7 +647,7 @@ function notificationBody(
   const name = notificationText(lead, 80);
   const primary = notificationText(name ? `${name} · ${detail}` : capitalized(detail, languageTags[locale]), 220);
   const remaining = 220 - [...primary].length - 1;
-  const location = remaining > 1 ? notificationText(row.location, Math.min(140, remaining)) : '';
+  const location = remaining > 1 ? notificationText(notificationPlace(row, locale), Math.min(140, remaining)) : '';
   return location ? `${primary}\n${location}` : primary;
 }
 

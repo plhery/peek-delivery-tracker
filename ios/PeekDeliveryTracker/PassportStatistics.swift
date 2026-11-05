@@ -313,6 +313,29 @@ enum TrackingLocation {
         return written.country == nil ? placedCode(location, placedIn: placed) ?? written : written
     }
 
+    private static let eastAsian = try! NSRegularExpression(pattern: "[\\p{Script=Han}\\p{Script=Hiragana}\\p{Script=Katakana}\\p{Script=Hangul}]")
+    private static let kanaOrHangul = try! NSRegularExpression(pattern: "[\\p{Script=Hiragana}\\p{Script=Katakana}\\p{Script=Hangul}]")
+
+    /// Whether a location is shown by its town's romanised name rather than as written, as on the web
+    /// (`romanisesPlace`): it is in Chinese, Japanese or Korean script, which a Chinese reader keeps when it is
+    /// Chinese characters alone. The stored scan keeps its words.
+    static func romanises(_ location: String, language: AppLanguage) -> Bool {
+        func has(_ expression: NSRegularExpression) -> Bool {
+            expression.firstMatch(in: location, range: NSRange(location.startIndex..., in: location)) != nil
+        }
+        return has(eastAsian) && !(language == .zh && !has(kanaOrHangul))
+    }
+
+    /// For display: a location written in a script the reader may not read (`romanises`) is named by the town the
+    /// server placed it in ("深圳市" is Shenzhen), or by the country alone where it placed it no closer, and kept as
+    /// written where it placed it nowhere. Otherwise as `place(_:placedIn:)` reads it.
+    static func place(_ location: String, placed: EventPlace?, language: AppLanguage) -> Place {
+        if let placed, romanises(location, language: language) {
+            return Place(country: placed.country, name: placed.precision == .city ? placed.name : "")
+        }
+        return place(location, placedIn: placed?.country)
+    }
+
     /// Passport evidence, with a final code that is also a state or canton counted once the scan
     /// was placed in that country.
     static func countryCode(in location: String?, placedIn placed: String?) -> String? {

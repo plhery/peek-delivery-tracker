@@ -19,6 +19,13 @@ translating it (not implemented).
   `TrackingLocation` in `PassportStatistics.swift`). Passport and Friends stamps count a
   final country field, or a code that is also a state or canton once the scan was placed in
   that country ([`scanPlace.ts`](../src/lib/scanPlace.ts)).
+- A scan location in Chinese, Japanese or Korean script shows the town the server placed the
+  scan in, from the scraper's place reader, with its flag and country: "深圳市" reads
+  "🇨🇳 Shenzhen, China", and one placed only in a country shows the country. A Chinese
+  reader keeps Chinese characters as written, and a location placed nowhere keeps its text.
+  The web, both apps and notifications do this at display time (`romanisesPlace` in
+  [`scanPlace.ts`](../src/lib/scanPlace.ts), `notificationPlace` in
+  [`push.ts`](../src/server/push.ts)); the stored scans keep the carrier's words.
 - Every carrier lookup sends the parcel's language (`language` in `TrackingInput`): its
   owner's app language (the account's `locale`, read through the `owner_locale` computed
   field), else the app language a lookup without an account was made in (`lookup_language`

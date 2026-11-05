@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.EventPlace
+import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
@@ -576,6 +578,21 @@ class LocalizationTests {
             TrackingLocation.place("Los Angeles, CA", placedIn = "US"),
         )
         assertEquals(TrackingLocation.Place(country = "CA", name = "Toronto"), TrackingLocation.place("Toronto, CA", placedIn = "CA"))
+        // A place written in Chinese, Japanese or Korean script is named by the town it was placed in, as on the web.
+        fun placed(country: String, name: String, precision: EventPlacePrecision = EventPlacePrecision.City) =
+            EventPlace(latitude = 0.0, longitude = 0.0, precision = precision, country = country, name = name)
+        val shenzhen = placed("CN", "Shenzhen")
+        assertEquals(TrackingLocation.Place(country = "CN", name = "Shenzhen"), TrackingLocation.place("深圳市", shenzhen, AppLanguage.De))
+        assertEquals(TrackingLocation.Place(country = "CN", name = "Shanghai"), TrackingLocation.place("上海市, CN", placed("CN", "Shanghai"), AppLanguage.En))
+        assertEquals(
+            TrackingLocation.Place(country = "CN", name = ""),
+            TrackingLocation.place("中国 广东省", placed("CN", "China", EventPlacePrecision.Country), AppLanguage.En),
+        )
+        assertEquals(TrackingLocation.Place(country = "JP", name = "Tokyo"), TrackingLocation.place("とうきょう", placed("JP", "Tokyo"), AppLanguage.Zh))
+        assertEquals(TrackingLocation.Place(country = null, name = "台北"), TrackingLocation.place("台北", null, AppLanguage.En))
+        assertEquals(TrackingLocation.Place(country = null, name = "深圳市"), TrackingLocation.place("深圳市", shenzhen, AppLanguage.Zh))
+        assertEquals(TrackingLocation.Place(country = "DE", name = "Haiger"), TrackingLocation.place("Haiger, DE", placed("DE", "Haiger"), AppLanguage.En))
+        assertEquals(TrackingLocation.Place(country = null, name = "Shenzhen"), TrackingLocation.place("Shenzhen", shenzhen, AppLanguage.En))
         assertEquals("🇨🇭", TrackingLocation.flag("CH"))
         // Passport evidence stays a final field that names a region.
         assertEquals("CH", TrackingLocation.countryCode("Zürich, CH"))

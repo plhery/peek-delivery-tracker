@@ -436,6 +436,19 @@ final class LocalizationTests: XCTestCase {
         XCTAssertEqual(TrackingLocation.place("Austin, TX", placedIn: "US"), .init(country: nil, name: "Austin, TX"))
         XCTAssertEqual(TrackingLocation.place("Los Angeles, CA", placedIn: "US"), .init(country: nil, name: "Los Angeles, CA"))
         XCTAssertEqual(TrackingLocation.place("Toronto, CA", placedIn: "CA"), .init(country: "CA", name: "Toronto"))
+        // A place written in Chinese, Japanese or Korean script is named by the town it was placed in, as on the web.
+        let shenzhen = EventPlace(latitude: 22.55, longitude: 114.07, precision: .city, country: "CN", name: "Shenzhen")
+        XCTAssertEqual(TrackingLocation.place("深圳市", placed: shenzhen, language: .de), .init(country: "CN", name: "Shenzhen"))
+        XCTAssertEqual(TrackingLocation.place("上海市, CN", placed: EventPlace(latitude: 31.22, longitude: 121.46, precision: .city, country: "CN", name: "Shanghai"),
+                                              language: .en), .init(country: "CN", name: "Shanghai"))
+        XCTAssertEqual(TrackingLocation.place("中国 广东省", placed: EventPlace(latitude: 32.5, longitude: 106.34, precision: .country, country: "CN", name: "China"),
+                                              language: .en), .init(country: "CN", name: ""))
+        XCTAssertEqual(TrackingLocation.place("台北", placed: nil, language: .en), .init(country: nil, name: "台北"))
+        XCTAssertEqual(TrackingLocation.place("深圳市", placed: shenzhen, language: .zh), .init(country: nil, name: "深圳市"))
+        XCTAssertEqual(TrackingLocation.place("서울", placed: EventPlace(latitude: 37.57, longitude: 126.98, precision: .city, country: "KR", name: "Seoul"),
+                                              language: .zh), .init(country: "KR", name: "Seoul"))
+        XCTAssertEqual(TrackingLocation.place("Haiger, DE", placed: EventPlace(latitude: 50.74, longitude: 8.2, precision: .city, country: "DE", name: "Haiger"),
+                                              language: .en), .init(country: "DE", name: "Haiger"))
         XCTAssertEqual(TrackingLocation.flag("CH"), "🇨🇭")
         // Passport evidence stays a final field that names a region.
         XCTAssertEqual(TrackingLocation.countryCode(in: "Zürich, CH"), "CH")

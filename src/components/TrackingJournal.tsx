@@ -4,7 +4,7 @@ import { countryFlag, countryName } from 'universal-parcel-scraper/app';
 import { localizedEventDescription, stageLabel, useI18n } from '../i18n';
 import { scanPlace } from '../lib/scanPlace';
 import { currentEvent, sortEventsDesc } from '../lib/stages';
-import type { PlannedEvent, TrackingEvent } from '../types';
+import type { EventPlace as EventPlaceData, PlannedEvent, TrackingEvent } from '../types';
 
 /** A folded journal keeps this many days open, and this many more as one line each. */
 const FOLD_FROM_EVENTS = 12;
@@ -75,7 +75,7 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
         {when && !when.timed ? <time dateTime={event.day} />
           : <time dateTime={when ? event.occurredAt : undefined}>{when ? new Intl.DateTimeFormat(languageTag, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(when.date) : '—'}</time>}
         <div><p>{syncing && isCurrent && event.stage === 'pending' ? t('timeline.syncing') : wording(event)}</p>
-          {event.location?.trim() && <EventPlace location={event.location} placed={event.place?.country} />}
+          {event.location?.trim() && <EventPlace location={event.location} placed={event.place} />}
           {relayed.map(line => <p key={line} className="tracking-journal__relay">{line}</p>)}
         </div>
       </li>;
@@ -143,11 +143,12 @@ function PlannedSteps({ steps }: { steps: PlannedEvent[] }) {
 /**
  * The flag leads and the country closes the place, named in the reader's language. A final code
  * that is also a state or canton ("Haiger, DE", "Wilmington, DE") names a country only when the
- * scan was placed in that country.
+ * scan was placed in that country. A place written in Chinese, Japanese or Korean script is named
+ * by the town it was placed in (`scanPlace`).
  */
-function EventPlace({ location, placed }: { location: string; placed?: string }) {
-  const { languageTag } = useI18n();
-  const { country, place } = scanPlace(location, placed);
+function EventPlace({ location, placed }: { location: string; placed?: EventPlaceData | null }) {
+  const { languageTag, locale } = useI18n();
+  const { country, place } = scanPlace(location, placed, locale);
   if (!country) return <span className="tracking-journal__location">{place}</span>;
   const name = countryName(country, languageTag);
   return <span className="tracking-journal__location">

@@ -258,6 +258,17 @@ describe('friendly parcel notifications', () => {
     }
   });
 
+  it('names a place written in Chinese script by its town, unless the reader reads Chinese', () => {
+    const departed = { ...delivered, stage: 'in_transit', expected_delivery: null, label: '' };
+    expect(web.payload({ ...departed, location: '广东省深圳市' }).body).toBe('One step closer\nShenzhen, China');
+    expect(alert(native.eventPayload({ ...departed, location: '厦门', locale: 'de' })).body).toMatch(/\nXiamen, China$/u);
+    expect(web.payload({ ...departed, location: '中国' }).body).toMatch(/\nChina$/u);
+    expect(web.payload({ ...departed, location: '深圳市', locale: 'zh' }).body).toMatch(/\n深圳市$/u);
+    // Placed nowhere, or written in Latin script, the place stays as written.
+    expect(web.payload({ ...departed, location: '台北' }).body).toMatch(/\n台北$/u);
+    expect(web.payload({ ...departed, location: 'SHENZHEN' }).body).toMatch(/\nSHENZHEN$/u);
+  });
+
   it('keeps the delivery message readable before a long Unicode location', () => {
     const body = String(web.payload({ ...delivered, location: '😀'.repeat(250) }).body);
     expect(body).toMatch(/^Coffee beans · delivered at 14:32\n😀+…$/u);

@@ -1718,7 +1718,7 @@ private struct JournalEventRow: View {
                     .font(.footnote)
                     .fixedSize(horizontal: false, vertical: true)
                 if let location = event.location?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty {
-                    EventLocation(location: location, placed: event.place?.country)
+                    EventLocation(location: location, placed: event.place)
                         .font(.caption2).foregroundStyle(Brand.secondaryText)
                 }
                 // A copy's words stay in sight, in case it was a scan of its own.
@@ -1866,23 +1866,24 @@ private struct DashedRule: Shape {
     }
 }
 
-/// The flag leads and the country closes the place, named in the reader's language.
+/// The flag leads and the country closes the place, named in the reader's language. A place written in Chinese,
+/// Japanese or Korean script is named by the town it was placed in (`TrackingLocation.place(_:placed:language:)`).
 private struct EventLocation: View {
     let location: String
-    /// The country the scan was placed in, which settles a final code that is also a state or canton.
-    let placed: String?
+    /// Where the server placed the scan: its country settles a final code that is also a state or canton.
+    let placed: EventPlace?
     @EnvironmentObject private var localizer: Localizer
 
     /// What VoiceOver reads of the place: its words without the flag.
-    static func spoken(_ location: String, placed: String?, language: AppLanguage) -> String {
-        let place = TrackingLocation.place(location, placedIn: placed)
+    static func spoken(_ location: String, placed: EventPlace?, language: AppLanguage) -> String {
+        let place = TrackingLocation.place(location, placed: placed, language: language)
         guard let country = place.country else { return place.name }
         let name = TrackingLocation.countryName(country, language: language)
         return place.name.isEmpty ? name : "\(place.name), \(name)"
     }
 
     var body: some View {
-        let place = TrackingLocation.place(location, placedIn: placed)
+        let place = TrackingLocation.place(location, placed: placed, language: localizer.language)
         if let country = place.country {
             let text = Self.spoken(location, placed: placed, language: localizer.language)
             HStack(alignment: .firstTextBaseline, spacing: 4) {

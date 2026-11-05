@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.core.JournalDay
 import com.plhery.peekdeliverytracker.core.JournalEntry
 import com.plhery.peekdeliverytracker.core.TrackingLocation
+import com.plhery.peekdeliverytracker.core.api.EventPlace
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -351,7 +352,7 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
                 color = colors.label,
                 style = type.footnote.sfLines(),
             )
-            event.journalLocation?.let { EventLocation(it, event.place?.country) }
+            event.journalLocation?.let { EventLocation(it, event.place) }
             // A copy's words stay in sight, in case it was a scan of its own.
             for (line in localizer.relayedWordings(entry)) {
                 Text(line, color = colors.secondaryLabel, style = type.caption2.sfLines())
@@ -378,15 +379,16 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
 /**
  * `EventLocation` (B-S16), in caption2 secondary: with a country, its flag in caption, then 4 on and on the flag's
  * baseline the place and the country named in the app language, or the country alone where the place has no name;
- * TalkBack reads the words without the flag. Without a country, the place as written. `placed` is the country the scan
- * was placed in, which settles a final code that is also a state or canton.
+ * TalkBack reads the words without the flag. Without a country, the place as written. `placed` is where the server
+ * placed the scan: its country settles a final code that is also a state or canton, and its town names a place written
+ * in Chinese, Japanese or Korean script ([TrackingLocation.place]).
  */
 @Composable
-private fun EventLocation(location: String, placed: String?) {
+private fun EventLocation(location: String, placed: EventPlace?) {
     val language = LocalLanguage.current
     val type = PeekTheme.type
     val secondary = PeekTheme.colors.secondaryLabel
-    val place = TrackingLocation.place(location, placed)
+    val place = TrackingLocation.place(location, placed, language)
     val country = place.country
     if (country == null) {
         Text(place.name, color = secondary, style = type.caption2.sfLines())

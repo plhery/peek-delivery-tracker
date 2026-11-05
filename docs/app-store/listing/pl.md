@@ -71,8 +71,14 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Czerwona kropka na ikonie Peeka znika teraz za każdym razem, gdy otwierasz aplikację.
-• Numery śledzenia drukowane z myślnikami lub spacjami, np. przez Packetę i Ozon, są teraz przypisywane do właściwego przewoźnika tak, jak je wpisano.
-• Gdy przewoźnik przyjmuje opcjonalny kod pocztowy odbiorcy, Peek wyjaśnia teraz, co daje ten kod u danego przewoźnika: na przykład GLS w Austrii i w Polsce bez niego nie pokazuje żadnych skanów.
-• Przesyłka GZYL lub Xinghe Freight oznaczona jako dostarczona informuje teraz, że jej statusy pojawiają się według stałego harmonogramu i nie pokazują podpisu, więc jeśli nic nie dotarło, wiesz, że warto zapytać sprzedawcę.
+• Obok wyszukiwania w sekcji „W drodze” jest teraz przycisk „Sortuj i filtruj”: ułóż przesyłki w innej kolejności albo pokaż tylko te o danym statusie lub od danego przewoźnika.
+• Siri i Skróty na iPhonie, iPadzie i Macu: „Najbliższa dostawa” mówi, kiedy dotrze Twoja najbliższa przesyłka, a „Dodaj przesyłkę” otwiera aplikację Peek z wpisanym już numerem śledzenia i niczego nie dodaje, dopóki nie potwierdzisz.
+• Historia śledzenia przesyłki pokazuje teraz kroki zaplanowane przez przewoźnika, wyszarzone pod nagłówkiem „Zaplanowane przez przewoźnika”, oddzielnie od faktycznych skanów.
+• Gdy zacznie się kilkudniowe okno dostawy, karty i widżety podają teraz „do” i jego ostatni dzień, a przedział godzin w obrębie jednego dnia wymienia ten dzień tylko raz.
+• Powiadomienie o doręczeniu podaje teraz godzinę według zegara Twojego urządzenia; niektóre pokazywały błędną godzinę.
+• Wylogowanie nie wyłącza już powiadomień na stałe: zaloguj się ponownie na to samo konto, a wrócą same; przy innym koncie Peek najpierw zapyta. Jeśli wcześniejsze wylogowanie je wyłączyło, wrócą z tą aktualizacją albo Peek zapyta Cię ponownie.
+• Przesyłka doręczona, gdy nie było Cię na liście, dostaje teraz swoją chwilę „Dostarczona”, kiedy wrócisz do listy.
+• Tryb ciemny jest cieplejszy: brązy papieru pakowego, podświetlone krawędzie ciemnych furgonetek, kremowy znaczek i mapa w ciepłych barwach.
+• Dostępność: więcej ekranów powiększa się aż do największych rozmiarów tekstu, VoiceOver odczytuje zmiany na ekranie i pozwala przechodzić między nagłówkami, funkcja Sterowanie głosowe reaguje na słowa widoczne na przyciskach, a tekst pomocniczy ma lepszy kontrast.
+• W Ustawieniach jest teraz wiersz „Oceń Peek”, jeśli chcesz zostawić recenzję.
 ```

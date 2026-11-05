@@ -73,8 +73,14 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• The red badge on Peek’s icon now clears each time you open the app.
-• Tracking numbers printed with dashes or spaces, such as Packeta’s and Ozon’s, are now matched to their carrier as you typed them.
-• Where a carrier takes an optional delivery postal code, Peek now says what it adds for that carrier: GLS in Austria and Poland, for example, shows no scans without it.
-• A delivered GZYL or Xinghe Freight package now says that its tracking follows a fixed schedule and shows no signature, so you know to ask the seller if nothing arrived.
+• A “Sort & filter” button now sits beside the search in “On the way”: put your packages in another order, or show only one status or carrier.
+• Siri and Shortcuts, on iPhone, iPad, and Mac: “Next delivery” tells you when your next package comes, and “Add a parcel” opens Peek with the tracking number filled in, ready for you to confirm.
+• A package’s tracking history now shows the steps its carrier has planned, grayed under “Planned by the carrier” and kept apart from the scans that actually happened.
+• Once a delivery window of several days has begun, cards and widgets now say “by” its last day, and a window within one day names that day only once.
+• A delivery notification now gives the time on your device’s own clock; some used to show the wrong hour.
+• Signing out no longer turns notifications off for good: sign back in with the same account and they come back on their own, while another account is asked first. If an earlier sign-out turned them off, they come back with this update, or Peek asks you again.
+• A package delivered while you were away from the list now gets its “Delivered” moment when you come back to it.
+• Dark Mode is warmer: kraft-paper browns, lit edges on dark trucks, a cream stamp, and a warm map.
+• Accessibility: more screens grow with the largest text sizes, VoiceOver announces what changes on screen and can jump between headings, Voice Control answers to the words each control shows, and secondary text has stronger contrast.
+• Settings now has a “Rate Peek” row, if you’d like to leave a review.
 ```

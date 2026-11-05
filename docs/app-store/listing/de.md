@@ -71,8 +71,14 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Die rote Zahl auf dem Peek-Symbol verschwindet jetzt jedes Mal, wenn du die App öffnest.
-• Sendungsnummern mit Bindestrichen oder Leerzeichen, wie sie etwa Packeta und Ozon drucken, werden jetzt so, wie du sie eingegeben hast, ihrem Paketdienst zugeordnet.
-• Kannst du bei einem Paketdienst optional die Postleitzahl der Lieferadresse angeben, sagt Peek jetzt, was sie dort bringt: GLS in Österreich und Polen etwa zeigt ohne sie keine Scans.
-• Ein als zugestellt gemeldetes Paket von GZYL oder Xinghe Freight weist jetzt darauf hin, dass seine Sendungsverfolgung einem festen Zeitplan folgt und keine Unterschrift zeigt. So weißt du, dass du beim Verkäufer nachfragen solltest, falls nichts angekommen ist.
+• Neben der Suche unter „Unterwegs“ gibt es jetzt die Taste „Sortieren & filtern“: Bring deine Pakete in eine andere Reihenfolge oder filtere sie nach Status oder Paketdienst.
+• Siri und Kurzbefehle auf iPhone, iPad und Mac: „Nächste Lieferung“ sagt dir, wann dein nächstes Paket kommt, und „Paket hinzufügen“ öffnet Peek mit bereits eingetragener Sendungsnummer – hinzugefügt wird erst, wenn du bestätigst.
+• Der Sendungsverlauf eines Pakets zeigt jetzt die Schritte, die sein Paketdienst geplant hat, ausgegraut unter „Vom Paketdienst geplant“ und getrennt von den Scans, die wirklich stattgefunden haben.
+• Hat ein Lieferzeitraum über mehrere Tage begonnen, zeigen Karten und Widgets jetzt „bis“ und seinen letzten Tag, und ein Zeitfenster innerhalb eines Tages nennt diesen Tag nur noch einmal.
+• Eine Zustellmitteilung zeigt die Uhrzeit jetzt nach der Uhr deines Geräts; manche nannten bisher die falsche Stunde.
+• Abmelden schaltet die Mitteilungen nicht mehr dauerhaft aus: Meldest du dich mit demselben Konto wieder an, sind sie von selbst wieder da; bei einem anderen Konto fragt Peek zuerst. Hat eine frühere Abmeldung sie ausgeschaltet, kommen sie mit diesem Update zurück, oder Peek fragt dich noch einmal.
+• Wird ein Paket zugestellt, während du nicht in der Liste bist, bekommt es seinen „Zugestellt“-Moment jetzt, sobald du zurückkommst.
+• Der Dunkelmodus ist wärmer: Brauntöne wie Kraftpapier, aufgehellte Kanten an dunklen Lieferwagen, eine cremefarbene Briefmarke und eine warme Karte.
+• Bedienungshilfen: Mehr Bildschirme wachsen mit den größten Textgrößen mit, VoiceOver sagt an, was sich auf dem Bildschirm ändert, und lässt dich von Überschrift zu Überschrift springen, die Sprachsteuerung reagiert auf die Wörter, die auf einer Taste stehen, und Nebentexte haben mehr Kontrast.
+• In den Einstellungen gibt es jetzt die Zeile „Peek bewerten“, falls du eine Bewertung schreiben möchtest.
 ```

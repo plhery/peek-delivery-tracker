@@ -71,8 +71,14 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• A bolinha vermelha no ícone do Peek agora some toda vez que você abre o app.
-• Códigos de rastreamento impressos com hífens ou espaços, como os de Packeta e Ozon, agora são associados à transportadora certa do jeito que você digitou.
-• Quando uma transportadora aceita um código postal de entrega opcional, o Peek agora explica para que esse código serve em cada uma: sem ele, GLS na Áustria e na Polônia, por exemplo, não mostra nenhuma movimentação.
-• Uma encomenda de GZYL ou Xinghe Freight marcada como entregue agora avisa que as atualizações seguem um cronograma fixo e não mostram assinatura, para você saber que deve falar com o vendedor se nada chegou.
+• Ao lado da busca, em “A caminho”, agora há um botão “Ordenar e filtrar”: coloque suas encomendas em outra ordem ou filtre por situação ou transportadora.
+• Siri e Atalhos, no iPhone, iPad e Mac: “Próxima entrega” diz quando chega sua próxima encomenda, e “Adicionar encomenda” abre o Peek com o código de rastreamento já preenchido, sem adicionar nada até você confirmar.
+• O histórico de uma encomenda agora mostra as etapas previstas pela transportadora, em cinza sob “Previsto pela transportadora”, separadas das movimentações que de fato aconteceram.
+• Quando uma janela de entrega de vários dias já começou, os cartões e widgets agora mostram “até” o último dia, e uma janela dentro de um só dia cita esse dia uma vez só.
+• Uma notificação de entrega agora mostra o horário pelo relógio do seu aparelho; algumas mostravam a hora errada.
+• Sair da conta não desativa mais as notificações de vez: entre de novo com a mesma conta e elas voltam sozinhas; com outra conta, o Peek pergunta antes. Se uma saída anterior as desativou, elas voltam com esta atualização, ou o Peek pergunta de novo.
+• Uma encomenda entregue enquanto você estava fora da lista agora ganha seu momento “Entregue” quando você volta para ela.
+• O Modo Escuro ficou mais quente: marrons de papel kraft, contornos iluminados nos caminhões escuros, um selo cor de creme e um mapa em tons quentes.
+• Acessibilidade: mais telas crescem até os maiores tamanhos de texto, o VoiceOver anuncia o que muda na tela e permite navegar pelos títulos, o Controle por Voz responde às palavras que cada controle mostra e os textos secundários têm mais contraste.
+• As Configurações agora têm a opção “Avaliar o Peek”, caso você queira deixar uma avaliação.
 ```

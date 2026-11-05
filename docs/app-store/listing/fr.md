@@ -73,8 +73,14 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• La pastille rouge sur l’icône de Peek disparaît désormais chaque fois que tu ouvres l’app.
-• Les numéros de suivi imprimés avec des tirets ou des espaces, comme ceux de Packeta et d’Ozon, sont désormais associés à leur transporteur tels que tu les as saisis.
-• Quand un transporteur accepte un code postal de livraison facultatif, Peek explique désormais à quoi ce code lui sert : sans lui, GLS en Autriche et en Pologne, par exemple, n’affiche aucun scan.
-• Un colis GZYL ou Xinghe Freight marqué comme livré précise désormais que son suivi avance selon un calendrier fixe et n’indique aucune signature : si rien n’est arrivé, tu sais qu’il faut contacter le vendeur.
+• Un bouton « Trier et filtrer » se trouve désormais à côté de la recherche, dans « En route » : range tes colis dans un autre ordre, ou n’affiche qu’un statut ou qu’un transporteur.
+• Avec Siri et Raccourcis, sur iPhone, iPad et Mac, « Prochaine livraison » te dit quand arrive ton prochain colis, et « Ajouter un colis » ouvre Peek avec le numéro de suivi déjà saisi : rien n’est ajouté avant que tu confirmes.
+• L’historique d’un colis affiche désormais les étapes prévues par son transporteur, en grisé sous « Prévu par le transporteur », séparées des scans qui ont vraiment eu lieu.
+• Une fois commencée, une fenêtre de livraison de plusieurs jours s’affiche désormais « d’ici » son dernier jour sur les cartes et les widgets, et un créneau sur une seule journée ne nomme ce jour qu’une fois.
+• Une notification de livraison donne désormais l’heure selon l’horloge de ton appareil ; certaines affichaient une mauvaise heure.
+• Se déconnecter ne coupe plus les notifications pour de bon : reconnecte-toi avec le même compte et elles reviennent toutes seules ; avec un autre compte, Peek demande d’abord. Si une déconnexion précédente les avait coupées, elles reviennent avec cette mise à jour, ou Peek te pose de nouveau la question.
+• Un colis livré pendant que tu n’étais pas sur la liste a désormais droit à son moment « Livré » quand tu y reviens.
+• Le Mode sombre est plus chaleureux : des bruns de papier kraft, des contours éclairés sur les camions sombres, un timbre crème et une carte aux tons chauds.
+• Accessibilité : davantage d’écrans s’agrandissent avec les plus grandes tailles de texte, VoiceOver annonce ce qui change à l’écran et permet de passer d’un titre à l’autre, le contrôle vocal répond aux mots affichés sur chaque commande, et les textes secondaires sont plus contrastés.
+• Les Réglages ont maintenant une ligne « Noter Peek », si tu veux laisser un avis.
 ```

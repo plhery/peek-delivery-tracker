@@ -71,8 +71,14 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• El número rojo sobre el icono de Peek ahora desaparece cada vez que abres la app.
-• Los números de seguimiento impresos con guiones o espacios, como los de Packeta y Ozon, ahora se asocian a su transportista tal como los has escrito.
-• Cuando un transportista admite un código postal de entrega opcional, Peek ahora indica para qué le sirve ese código: sin él, GLS en Austria y Polonia, por ejemplo, no muestra ningún escaneo.
-• Cuando un paquete de GZYL o Xinghe Freight figura como entregado, ahora indica que su seguimiento sigue un calendario fijo y no muestra ninguna firma: si no ha llegado nada, ya sabes que conviene contactar con el vendedor.
+• Junto a la búsqueda, en «En camino», ahora hay un botón «Ordenar y filtrar»: ordena tus paquetes de otra forma o fíltralos por estado o transportista.
+• Siri y Atajos, en iPhone, iPad y Mac: «Próxima entrega» te dice cuándo llega tu próximo paquete y «Añadir un paquete» abre Peek con el número de seguimiento ya escrito, sin añadir nada hasta que lo confirmes.
+• El historial de un paquete ahora muestra los pasos que ha previsto su transportista, en gris bajo «Previsto por el transportista», separados de los escaneos que sí han ocurrido.
+• Cuando ya ha empezado un plazo de entrega de varios días, las tarjetas y los widgets ahora indican «para el» último día, y una franja dentro de un mismo día menciona ese día una sola vez.
+• Una notificación de entrega ahora da la hora según el reloj de tu dispositivo; algunas mostraban una hora equivocada.
+• Cerrar sesión ya no desactiva las notificaciones para siempre: vuelve a iniciar sesión con la misma cuenta y se reactivan solas; con otra cuenta, Peek pregunta antes. Si un cierre de sesión anterior las desactivó, vuelven con esta actualización, o Peek te lo vuelve a preguntar.
+• Un paquete entregado mientras no estabas en la lista ahora tiene su momento «Entregado» cuando vuelves a ella.
+• El modo oscuro es más cálido: marrones de papel kraft, bordes iluminados en las furgonetas oscuras, un sello color crema y un mapa de tonos cálidos.
+• Accesibilidad: más pantallas crecen hasta los tamaños de texto más grandes, VoiceOver anuncia lo que cambia en pantalla y permite moverse por encabezados, el control por voz responde a las palabras que muestra cada control y los textos secundarios tienen más contraste.
+• En Ajustes ahora hay una fila «Valorar Peek», por si quieres dejar una reseña.
 ```

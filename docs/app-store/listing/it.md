@@ -71,8 +71,14 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Il pallino rosso sull’icona di Peek ora sparisce ogni volta che apri l’app.
-• I numeri di tracciamento stampati con trattini o spazi, come quelli di Packeta e Ozon, ora vengono associati al loro corriere così come li hai scritti.
-• Quando un corriere accetta un codice postale di consegna facoltativo, Peek ora spiega a cosa gli serve il codice: GLS in Austria e in Polonia, per esempio, senza codice non mostra nessuna scansione.
-• Quando un pacco di GZYL o Xinghe Freight risulta consegnato, ora dice che il suo tracciamento segue un calendario fisso e non mostra nessuna firma: se non è arrivato nulla, sai che conviene contattare il venditore.
+• Accanto alla ricerca, nella sezione «In arrivo», ora c’è il pulsante «Ordina e filtra»: metti i tuoi pacchi in un altro ordine o filtrali per stato o corriere.
+• Siri e Comandi Rapidi, su iPhone, iPad e Mac: «Prossima consegna» ti dice quando arriva il tuo prossimo pacco e «Aggiungi un pacco» apre Peek con il numero di tracciamento già inserito, senza aggiungere nulla finché non confermi.
+• La cronologia di un pacco ora mostra i passaggi previsti dal suo corriere, in grigio sotto «Previsto dal corriere», separati dalle scansioni avvenute davvero.
+• Una volta iniziata una finestra di consegna di più giorni, schede e widget ora indicano «entro» il suo ultimo giorno, e una fascia oraria nello stesso giorno riporta quel giorno una sola volta.
+• Una notifica di consegna ora indica l’ora secondo l’orologio del tuo dispositivo: alcune mostravano un’ora sbagliata.
+• Uscire dall’account non disattiva più definitivamente le notifiche: rientra con lo stesso account e tornano da sole, mentre con un altro account Peek chiede prima. Se un’uscita precedente le aveva disattivate, tornano con questo aggiornamento, oppure Peek te lo chiede di nuovo.
+• Un pacco consegnato mentre non eri nell’elenco ora ha il suo momento «Consegnato» quando ci torni.
+• La modalità scura è più calda: marroni da carta kraft, bordi illuminati sui furgoni scuri, un francobollo color crema e una mappa dai toni caldi.
+• Accessibilità: più schermate si ingrandiscono fino alle dimensioni del testo più grandi, VoiceOver annuncia cosa cambia sullo schermo e permette di spostarsi tra le intestazioni, la funzione Controllo vocale risponde alle parole mostrate da ogni comando e i testi secondari hanno più contrasto.
+• Nelle Impostazioni ora c’è la voce «Valuta Peek», se vuoi lasciare una recensione.
 ```

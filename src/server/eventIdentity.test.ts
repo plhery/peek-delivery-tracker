@@ -75,48 +75,49 @@ describe('same-instant identity reuse', () => {
       [saved], 'ups').size).toBe(0);
   });
 
-  it('updates a reworded coded scan without changing its saved identity', () => {
+  it('keeps an India Post scan restated at the same second and office on its saved identity', () => {
     const at = '2026-07-11T18:05:00Z';
-    const incoming = { ...scan('india-post:flight-details', at, 'Flight ZZ0101 departed: FRA → CDG'),
-      raw_data: { provider_code: 'AircraftTakeOff' } };
-    const saved = { ...row('india-post:uplift', at, 'UPLIFT'), provider_code: 'AircraftTakeOff' };
-    expect([...sameInstantIdentities([incoming], [saved], 'india-post')])
-      .toEqual([['india-post:flight-details', 'india-post:uplift']]);
-    for (const code of ['ItemReceived', '', undefined]) {
-      expect(sameInstantIdentities([incoming], [{ ...saved, provider_code: code }], 'india-post').size).toBe(0);
+    const incoming = { ...scan('india-post:closed', at, 'Bag Closed', 'in_transit'), location: 'Example GPO',
+      raw_data: { provider_code: 'BagOpened' } };
+    const saved = { ...row('india-post:bagged', at, 'Item bagged', 'in_transit'), location: 'Example GPO', provider_code: 'ItemBagged' };
+    const expected = [['india-post:closed', 'india-post:bagged']];
+    // MySpeedPost can change the event type as well as the wording of this scan.
+    for (const code of ['BagOpened', 'ItemBagged', 'Unknown', '', undefined]) {
+      expect([...sameInstantIdentities([incoming], [{ ...saved, provider_code: code }], 'india-post')]).toEqual(expected);
     }
+    for (const location of ['Another GPO', '', undefined]) {
+      expect(sameInstantIdentities([incoming], [{ ...saved, location }], 'india-post').size).toBe(0);
+    }
+    expect(sameInstantIdentities([incoming], [{ ...saved, occurred_at: '2026-07-11T18:05:01Z' }], 'india-post').size).toBe(0);
     expect(sameInstantIdentities([incoming], [saved, { ...saved, provider_event_id: 'india-post:another' }], 'india-post').size).toBe(0);
-    expect(sameInstantIdentities([incoming], [{ ...saved, provider_event_id: 'other:flight' }], 'india-post').size).toBe(0);
-    expect(sameInstantIdentities([{ ...incoming, raw_data: { provider_code: 'Unknown' } }],
-      [{ ...saved, provider_code: 'Unknown' }], 'india-post').size).toBe(0);
+    expect(sameInstantIdentities([incoming, { ...incoming, provider_event_id: 'india-post:another-new' }], [saved], 'india-post').size).toBe(0);
+    expect(sameInstantIdentities([incoming], [{ ...saved, provider_event_id: 'other:bagged' }], 'india-post').size).toBe(0);
   });
 
-  it('matches reworded scans sharing an instant by their unique provider codes', () => {
+  it('matches same-second India Post scans by unique offices and leaves ambiguous offices separate', () => {
     const at = '2026-07-11T18:05:00Z';
     const saved = [
-      { ...row('india-post:arrival', at, 'Arrived at sorting centre'), location: 'Example Office 000000', provider_code: 'MailArrived' },
-      { ...row('india-post:receipt', at, 'Item received'), location: 'Example Office 000000', provider_code: 'ItemReceived' },
+      { ...row('india-post:arrival', at, 'Item arrived'), location: 'Example GPO', provider_code: 'MailArrived' },
+      { ...row('india-post:receipt', at, 'Item received'), location: 'Another GPO', provider_code: 'ItemReceived' },
     ];
-    const incoming = saved.map(({ provider_code, ...item }) => ({ ...item, provider_event_id: `${item.provider_event_id}-located`,
-      location: 'Example Office 000001', raw_data: { provider_code } }));
-    expect(pairs(sameInstantIdentities(incoming, saved, 'india-post'))).toEqual([
-      ['india-post:arrival-located', 'india-post:arrival'],
-      ['india-post:receipt-located', 'india-post:receipt'],
-    ]);
-    // An unchanged scan in the batch does not prevent the other code's reuse.
-    expect([...sameInstantIdentities([incoming[0]!, saved[1]!], saved, 'india-post')])
-      .toEqual([['india-post:arrival-located', 'india-post:arrival']]);
-    expect([...sameInstantIdentities([incoming[0]!], saved, 'india-post')])
-      .toEqual([['india-post:arrival-located', 'india-post:arrival']]);
-    // Repeated codes at one instant are still ambiguous in either direction.
+    const incoming = saved.map(item => ({ ...item, provider_event_id: `${item.provider_event_id}-restated`,
+      description: 'Restated scan', provider_code: undefined, raw_data: { provider_code: 'MailArrived' } }));
+    const expected = [
+      ['india-post:arrival-restated', 'india-post:arrival'],
+      ['india-post:receipt-restated', 'india-post:receipt'],
+    ];
+    expect(pairs(sameInstantIdentities(incoming, saved, 'india-post'))).toEqual(expected);
+    expect([...sameInstantIdentities([incoming[0]!, saved[1]!], saved, 'india-post')]).toEqual([expected[0]]);
+    expect([...sameInstantIdentities([incoming[0]!], saved, 'india-post')]).toEqual([expected[0]]);
     expect([...sameInstantIdentities(incoming, [...saved, { ...saved[0]!, provider_event_id: 'india-post:another-arrival' }], 'india-post')])
-      .toEqual([['india-post:receipt-located', 'india-post:receipt']]);
+      .toEqual([expected[1]]);
     expect([...sameInstantIdentities([...incoming, { ...incoming[0]!, provider_event_id: 'india-post:another-new-arrival' }], saved, 'india-post')])
-      .toEqual([['india-post:receipt-located', 'india-post:receipt']]);
-    for (const code of ['', 'Unknown', 'OtherCode']) {
-      const changed = [{ ...incoming[0]!, raw_data: { provider_code: code } }, incoming[1]!];
-      expect(sameInstantIdentities(changed, saved, 'india-post').has('india-post:arrival-located')).toBe(false);
-    }
+      .toEqual([expected[1]]);
+    expect([...sameInstantIdentities([{ ...incoming[0]!, location: 'Changed GPO' }, incoming[1]!], saved, 'india-post')])
+      .toEqual([expected[1]]);
+    // Distinct event codes cannot disambiguate two rows at one second and office.
+    const sameOffice = saved.map(item => ({ ...item, location: 'Same GPO' }));
+    expect(sameInstantIdentities(incoming.map(item => ({ ...item, location: 'Same GPO' })), sameOffice, 'india-post').size).toBe(0);
   });
   it('gives each reworded scan the one stored identity at its instant', () => {
     const stored = [

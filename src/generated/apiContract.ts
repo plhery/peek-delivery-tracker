@@ -39471,11 +39471,11 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "v-xpress"
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://vxpress.in/track-result/"
+    "trackingSearchUrl": "https://vxpress.in/track-result-new/"
   },
   "world-package": {
     "displayName": "World Package",

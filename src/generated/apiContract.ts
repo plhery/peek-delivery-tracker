@@ -23118,6 +23118,7 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "JS Express",
     "aliases": [
       "JS EXP",
+      "JS",
       "急速国际",
       "急创速供应链管理（苏州）有限公司"
     ],

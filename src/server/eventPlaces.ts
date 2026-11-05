@@ -84,18 +84,20 @@ function deliveryAnnounced(data: JsonObject): boolean {
     && probe.carrier === data.delivery_carrier && !data.original_carrier && data.active_tracking_carrier !== data.delivery_carrier;
 }
 
+/** The carrier data only the service reads, the delivering carrier's last check with its number (`delivery_probe`) among them. */
+const SERVICE_DATA = ['add_recognition_pending', DIRECT_HISTORY, 'delivery_probe'];
+
 /**
- * A package row without the carrier data that only the service reads, and with what the card says of the delivering
- * carrier (`delivery_announced`). Planned steps are served on their own (`planned_events`).
+ * A package row without the carrier data that only the service reads (`SERVICE_DATA`), and with what the card says of
+ * the delivering carrier's check (`delivery_announced`). Planned steps are served on their own (`planned_events`).
  */
 function withoutServiceData(row: JsonObject): JsonObject {
   const stored = isRecord(row.carrier_data) ? row.carrier_data : null;
   const planned = stored && isRecord(stored.routing) && 'planned' in stored.routing;
   const announced = stored !== null && deliveryAnnounced(stored);
-  if (!stored || !('add_recognition_pending' in stored || DIRECT_HISTORY in stored || planned || announced)) return row;
+  if (!stored || !(SERVICE_DATA.some((key) => key in stored) || planned)) return row;
   const data: JsonObject = { ...stored, ...announced ? { delivery_announced: true } : {} };
-  delete data.add_recognition_pending;
-  delete data[DIRECT_HISTORY];
+  for (const key of SERVICE_DATA) delete data[key];
   if (planned) {
     const routing = { ...stored.routing as JsonObject };
     delete routing.planned;

@@ -21,6 +21,10 @@ it('says when the named delivering carrier lists the parcel without a scan of it
     { delivery_probe: probe },
     { delivery_carrier: 'dhl', delivery_probe: probe, original_carrier: 'jrt', active_tracking_carrier: 'dhl' },
   ]) expect(served(data)).not.toHaveProperty('delivery_announced');
+  // The check itself, with the partner's number, stays on the server.
+  expect(served({ delivery_carrier: 'dhl', delivery_probe: probe })).not.toHaveProperty('delivery_probe');
+  expect(served({ delivery_probe: { ...probe, listed: undefined } })).toEqual({});
+  expect(withoutEventSources({ carrier_data: { delivery_probe: probe } })).toEqual({ carrier_data: {} });
 });
 
 const event = (id: string, location: string | null, occurredAt: string) => ({

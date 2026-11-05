@@ -563,7 +563,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     static let maximumRecognitions = 5
     /// Brands with several catalog networks ("DPD" is `dpd` and `dpd-fr`), as in
     /// Universal Parcel Scraper's catalog networks.
-    private static let networkBrands = ["dhl", "dpd", "gls", "hermes", "evri", "gofo"]
+    private static let networkBrands = ["dhl", "dpd", "gls", "hermes", "evri", "gofo", "jumppoint"]
 
     static func networkBrand(_ carrier: CarrierID) -> String? {
         networkBrands.first { carrier.rawValue == $0 || carrier.rawValue.hasPrefix("\($0)-") }

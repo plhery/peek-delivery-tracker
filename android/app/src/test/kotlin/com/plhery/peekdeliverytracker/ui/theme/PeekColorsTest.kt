@@ -85,7 +85,7 @@ class PeekColorsTest {
         }
         val dark = PeekColors(dark = true)
         assertEquals(
-            listOf("#13110E", "#191612", "#292620", "#2E2A24", "#4A463E"),
+            listOf("#13110E", "#191612", "#292620", "#36322C", "#4A463E"),
             listOf(dark.background, dark.sheet, dark.raised, dark.sheetControl, dark.sheetLine(0.3f)).map(::hex),
         )
         assertEquals("#292622", hex(dark.sheetButton.compositeOver(dark.sheet)))

@@ -189,13 +189,12 @@ object Brand {
 
     // A sheet stands one step up from the page in dark: a ground of its own under raised rows, with its own controls
     // and lines (the web's `--sheet-*`, the iPhone's `Brand.sheet…`). In light each is the page's own colour. In dark
-    // the ground is the web's #191612, the controls sit a step below its #36322C, and the buttons keep the green
-    // palette's ink, so that nothing in a sheet stands out less than on the sheets before them.
+    // the ground and the controls are the web's #191612 and #36322C, and the buttons keep the green palette's ink.
     /** A sheet's ground. */
     val sheet = color(light = "#F4F5F1", dark = "#191612")
 
     /** A control in a sheet, where the page has the cream. */
-    val sheetControl = color(light = "#F0F0E9", dark = "#2E2A24")
+    val sheetControl = color(light = "#F0F0E9", dark = "#36322C")
 
     /** A sheet's round buttons and its copy button: the ink at 7 % in light, as on the page; the green palette's in dark. */
     val sheetButton = color(light = "#20251E", dark = "#F5F6F2").opacity(0.07)

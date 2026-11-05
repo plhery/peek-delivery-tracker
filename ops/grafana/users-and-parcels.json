@@ -1230,7 +1230,7 @@
       "gridPos": {
         "x": 0,
         "y": 40,
-        "w": 6,
+        "w": 5,
         "h": 4
       },
       "targets": [
@@ -1291,9 +1291,9 @@
         "uid": "${datasource}"
       },
       "gridPos": {
-        "x": 6,
+        "x": 5,
         "y": 40,
-        "w": 6,
+        "w": 5,
         "h": 4
       },
       "targets": [
@@ -1346,6 +1346,69 @@
     },
     {
       "type": "stat",
+      "id": 25,
+      "title": "Android notifications",
+      "description": "Accounts with notifications switched on on at least one Android phone.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "x": 10,
+        "y": 40,
+        "w": 5,
+        "h": 4
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "${datasource}"
+          },
+          "refId": "A",
+          "editorMode": "code",
+          "rawQuery": true,
+          "format": "table",
+          "rawSql": "select android_push_accounts from metrics.live"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "textMode": "value",
+        "wideLayout": true
+      }
+    },
+    {
+      "type": "stat",
       "id": 23,
       "title": "Delivery emails",
       "description": "Accounts that get an email when a parcel is delivered.",
@@ -1354,9 +1417,9 @@
         "uid": "${datasource}"
       },
       "gridPos": {
-        "x": 12,
+        "x": 15,
         "y": 40,
-        "w": 6,
+        "w": 5,
         "h": 4
       },
       "targets": [
@@ -1417,9 +1480,9 @@
         "uid": "${datasource}"
       },
       "gridPos": {
-        "x": 18,
+        "x": 20,
         "y": 40,
-        "w": 6,
+        "w": 4,
         "h": 4
       },
       "targets": [

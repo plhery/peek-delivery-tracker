@@ -46,7 +46,7 @@ W sprawie paczki kontaktujesz się z obsługą klienta Amazona, a przy zakupie o
 
 ## Amazon Logistics tracking w Peek
 
-[Peek](/) nie śledzi i nie zapisuje paczek Amazon Logistics: Amazon pokazuje ich status i historię tylko na Twoim koncie. Gdy wkleisz taki numer albo link z track.amazon, Peek najpierw sprawdza publiczne śledzenie Amazon Shipping. Jeśli Amazon odpowie, to przesyłka Amazon Shipping i Peek ją śledzi: „Publiczne śledzenie jest dostępne w Amazon Shipping. Peek będzie aktualizować informacje o tej dostawie.” Jeśli Amazon nie udostępnia już historii, możesz zachować przesyłkę jako informację.
+[Peek](/) nie śledzi i nie zapisuje paczek Amazon Logistics: Amazon pokazuje ich status i historię tylko na Twoim koncie. Gdy wkleisz taki numer albo link z track.amazon, Peek najpierw sprawdza publiczne śledzenie Amazon Shipping. Jeśli Amazon odpowie, to przesyłka Amazon Shipping albo przesyłka ze sprzedaży poza Amazonem, którą Amazon wysyła w imieniu sprzedawcy, i Peek ją śledzi: „Publiczne śledzenie jest dostępne w Amazon Shipping. Peek będzie aktualizować informacje o tej dostawie.” Jeśli Amazon nie udostępnia już historii, możesz zachować przesyłkę jako informację.
 
 W przeciwnym razie Peek pisze „Dostawy Amazon Logistics można zwykle śledzić w sekcji »Twoje zamówienia« na Amazonie.” i pokazuje przycisk „Otwórz moje zamówienia Amazon”. Otwiera on historię zamówień na stronie, na którą wskazuje numer: amazon.pl dla `PL`, amazon.de dla `DE` i `AT`, amazon.co.uk dla `UK` i `GB`, amazon.com dla `TBA`. Gdy sprawdzenie się nie uda, kliknij „Sprawdź ponownie”. Numer zamówienia dostaje komunikat „To wygląda na numer zamówienia Amazon”.
 

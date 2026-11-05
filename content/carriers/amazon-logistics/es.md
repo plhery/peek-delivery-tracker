@@ -45,7 +45,7 @@ Según Amazon, su Servicio de Atención al Cliente está disponible 24/7 para cu
 
 ## Seguimiento de Amazon Logistics en Peek
 
-[Peek](/) no puede seguir ni guardar un paquete de Amazon Logistics: Amazon solo muestra su estado, su historial y su foto dentro de tu cuenta. Si pegas un número con una de las formas de arriba o un enlace de track.amazon, Peek consulta primero el seguimiento público de Amazon Shipping. Si Amazon responde, es un paquete de [Amazon Shipping](carrier:amazon-shipping) y Peek lo sigue: «Amazon Shipping ofrece seguimiento público para este paquete. Peek mantendrá esta entrega al día.» Si Amazon ya no da su historial, verás un aviso y puedes conservarlo como referencia.
+[Peek](/) no puede seguir ni guardar un paquete de Amazon Logistics: Amazon solo muestra su estado, su historial y su foto dentro de tu cuenta. Si pegas un número con una de las formas de arriba o un enlace de track.amazon, Peek consulta primero el seguimiento público de Amazon Shipping. Si Amazon responde, es un paquete de [Amazon Shipping](carrier:amazon-shipping) o un pedido hecho fuera de Amazon que Amazon envía en nombre del vendedor, y Peek lo sigue: «Amazon Shipping ofrece seguimiento público para este paquete. Peek mantendrá esta entrega al día.» Si Amazon ya no da su historial, verás un aviso y puedes conservarlo como referencia.
 
 Si no, verás «Las entregas de Amazon Logistics suelen seguirse desde Mis pedidos en Amazon.» y el botón «Abrir mis pedidos de Amazon», que abre el historial de pedidos de la web que indica el número: Amazon.es para `ES` y `PT`, Amazon.com para `TBA`. Si la consulta falla, pulsa «Volver a comprobar». Con un número de pedido verás «Parece un número de pedido de Amazon».
 

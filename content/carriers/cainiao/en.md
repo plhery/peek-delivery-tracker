@@ -76,7 +76,7 @@ In Spain, Ecoscooting's FAQ lists +34 912 15 93 69, the free line +34 800 00 03 
 
 ## Track a Cainiao parcel with Peek
 
-[Peek](/) shows these parcels as "AliExpress / Cainiao". It recognises DOFR and CNFR numbers straight away; for LP, CNG and AP numbers, and other Cainiao references such as CNUSUP, CNBR or CNMEX, it asks Cainiao among the likely carriers. Postal numbers typed alone go to the post, except those ending in TY or MI, for which it also asks Cainiao. For other postal numbers, paste the global.cainiao.com link with `mailNoList=`, which reaches Cainiao whatever the number. It doesn't recognise links from track.cainiao.com or AliExpress orders.
+[Peek](/) shows these parcels as "AliExpress / Cainiao". It recognises DOFR, CNFR, CNG and AP numbers straight away; for LP numbers, and other Cainiao references such as CNUSUP, CNBR or CNMEX, it asks Cainiao among the likely carriers. Postal numbers typed alone go to the post, except those ending in TY, MI, XX or GO, for which it also asks Cainiao. For other postal numbers, paste the global.cainiao.com link with `mailNoList=`, which reaches Cainiao whatever the number. It doesn't recognise links from track.cainiao.com or AliExpress orders.
 
 AliExpress sometimes gives you the delivery carrier's own number, such as an SDA number for a parcel to Italy, while Cainiao still has the parcel. For some of these shapes Peek asks Cainiao beside that carrier. If both know it, the parcel stays under AliExpress / Cainiao, and the delivery carrier's scans join the history once it reports the parcel.
 

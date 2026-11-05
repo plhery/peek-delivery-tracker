@@ -3,10 +3,17 @@ title: Paack suivi colis : numéro, code postal et statuts
 description: Suivre un colis Paack en France : numéro de commande et code postal, ce que veulent dire les statuts, les PaackGo Points, le lien avec Colis Privé et le téléphone.
 slug: paack-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
-Paack livre les colis des boutiques en ligne sur le dernier kilomètre, à ta porte ou dans un point de retrait. Rapprochés à l'été 2026, Paack et [Colis Privé](carrier:colis-prive) sont présents ensemble en France, en Belgique, au Luxembourg, en Espagne et au Portugal. Pour suivre ton colis, il te faut le numéro de commande et le code postal de livraison : saisis-les sur la page de suivi de Paack, sur paack.co, ou colle le numéro dans le champ ci-dessus et choisis Paack.
+Paack livre les colis des boutiques en ligne sur le dernier kilomètre, à ta porte ou dans un point de retrait. Rapprochés à l'été 2026, Paack et [Colis Privé](carrier:colis-prive) sont présents ensemble en France, en Belgique, au Luxembourg, en Espagne et au Portugal. Pour suivre ton colis, Paack demande ton numéro et le code postal de livraison. Selon ce que tu as en main :
+
+- **Le lien de suivi de Paack**, envoyé une fois le colis arrivé chez Paack : ouvre-le, ou colle-le dans le champ ci-dessus s'il contient `tracking_number=`, et indique ton code postal.
+- **Un numéro `PK` suivi de 18 chiffres** : colle-le, Peek le suit sans code postal.
+- **Un numéro de colis SHEIN, ou le numéro de commande ou d'étiquette donné par la boutique** : colle-le, choisis Paack avec « Changer » si Peek ne le propose pas, et indique ton code postal.
+- **Un e-mail de Colis Privé** : ton colis se suit chez Colis Privé ; colle son numéro de 12 caractères et indique ton code postal.
+
+Rien de tout ça ? Tant que Paack ne t'a pas confirmé l'arrivée du colis, il te conseille de demander à la boutique où en est l'envoi.
 
 ## Paack suivi numéro : numéro de commande et code postal
 
@@ -49,7 +56,9 @@ Peek, lui, affiche chaque étape avec ses propres mots, presque tous en françai
 
 ## Paack livraison : créneau horaire et point relais
 
-**Le créneau.** La page de suivi de Paack affiche le jour et le créneau de livraison prévus, à l'heure du pays de livraison. Après un passage raté, c'est celui de la nouvelle tentative.
+**Le créneau.** La page de suivi de Paack affiche le jour et le créneau de livraison prévus, à l'heure du pays de livraison, ou parfois une fenêtre de plusieurs jours. Après un passage raté, c'est celui de la nouvelle tentative. Selon le service de livraison pris chez la boutique, tu peux choisir un créneau précis ; sinon, laisse des instructions au livreur par le chat de Paack.
+
+**Si tu n'es pas là.** Paack prévoit au moins deux tentatives (le nombre exact dépend de son accord avec la boutique), la deuxième le lendemain ou le premier jour ouvrable suivant. Il peut aussi laisser le colis à ton voisin disponible le plus proche ou à la conciergerie de l'immeuble, sauf si tu as dit non. Si l'adresse pose problème, Paack t'envoie un e-mail pour la corriger. Après plusieurs échecs, le colis repart chez la boutique : c'est avec elle que tu organises une nouvelle livraison.
 
 **Les PaackGo Points** sont les points de retrait de Paack. Une fois le colis arrivé, la page de suivi donne le nom et l'adresse du point, un code de retrait, un code QR et ta date limite. Passé cette date, le colis repart chez la boutique.
 
@@ -65,13 +74,15 @@ C'est la boutique qui confie ton colis à Paack, et dans l'UE, elle est responsa
 
 **Téléphone en France :** +33 1 87 65 31 89, du lundi au vendredi de 10 h à 20 h, le samedi et le dimanche de 10 h à 14 h.
 
+**Chat :** sur la page de suivi de Paack, ou en bas à droite de son aide en ligne. C'est là que tu modifies ou complètes ton adresse, si la boutique le permet et si le colis n'est pas déjà en livraison.
+
 ## Suivre un colis Paack avec Peek
 
 [Peek](/) reconnaît tout de suite comme Paack un numéro `PK` suivi de 18 chiffres, celui des colis que Paack livre pour Evri International, et le suit sans code postal. Pour un numéro d'étiquette de `5340` suivi de 14 chiffres, qu'on trouve sur des colis Paack, « Changer » propose Paack en premier sous « Correspond à ce numéro », devant d'autres transporteurs aux numéros de 18 chiffres. Pour un numéro de colis SHEIN (`C` ou `E`, une date en six chiffres, année, mois et jour, puis 8 chiffres), il y propose aussi Paack. Les autres numéros Paack n'ont pas de forme propre, et Peek ne peut pas demander à Paack s'il en connaît un. Tout autre numéro avec des lettres reste en général sans transporteur (« Peek le trouvera quand tu lanceras le suivi ») ; un numéro fait de chiffres peut ressembler à celui d'un autre transporteur, interrogé à la place de Paack. Appuie alors sur « Changer » et choisis Paack. Tu peux aussi coller un lien vers la page de suivi de Paack contenant `tracking_number=`, sur mydeliveries.paack.app ou paack.co/shipments/tracking.
 
 Remplis alors le champ « Code postal de livraison ». Il est marqué facultatif, car un numéro `PK` n'en a pas besoin, mais Paack n'affiche les autres commandes qu'avec lui, et un code postal contenu dans le lien n'est pas repris. Paack ne répond que si le numéro et le code postal correspondent : sinon, le colis a l'air inconnu. Le code postal est envoyé à Paack et, si besoin, à des services de suivi. Le numéro est mis en majuscules, sans espaces, points ni tirets : si rien ne s'affiche, essaie aussi la page de Paack.
 
-Tu vois le statut, l'historique, le jour et le créneau prévus, à l'heure de l'adresse de livraison. Au PaackGo Point, Peek affiche « Prêt à être retiré » avec le nom et l'adresse du point (pas encore vu sur un vrai colis), jamais le code de retrait, le code QR ni la date limite : pour ceux-là, ouvre la page de suivi de Paack. Les étapes s'affichent avec les mots de Peek ; un retrait au point apparaît comme « Livré ». Paack ne donne pas le lieu de ses scans (la carte n'en montre donc aucun) et ne nomme aucun autre transporteur à suivre. Pour un numéro `PK`, en revanche, l'historique vient du suivi d'Evri International, avec ses mots et ses lieux. Le nom de la boutique, ton nom et ton adresse ne sont pas repris. Le suivi est vérifié toutes les 10 minutes (toutes les 2 minutes une fois le colis en livraison), avec des notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Tu vois le statut, l'historique, le jour et le créneau prévus, à l'heure de l'adresse de livraison, ou le premier et le dernier jour quand Paack annonce une fenêtre de plusieurs jours. Au PaackGo Point, Peek affiche « Prêt à être retiré » avec le nom et l'adresse du point (pas encore vu sur un vrai colis), jamais le code de retrait, le code QR ni la date limite : pour ceux-là, ouvre la page de suivi de Paack. Les étapes s'affichent avec les mots de Peek ; un retrait au point apparaît comme « Livré ». Paack ne donne pas le lieu de ses scans (la carte n'en montre donc aucun) et ne nomme aucun autre transporteur à suivre. Pour un numéro `PK`, en revanche, l'historique vient du suivi d'Evri International, avec ses mots et ses lieux. Le nom de la boutique, ton nom et ton adresse ne sont pas repris. Le suivi est vérifié toutes les 10 minutes (toutes les 2 minutes une fois le colis en livraison), avec des notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi Paack
 
@@ -85,11 +96,14 @@ Paack vérifie le numéro et le code postal ensemble : si l'un des deux ne corre
 
 ### Combien de temps met Paack pour livrer ?
 
-Ton jour et ton créneau s'affichent sur la page de suivi de Paack. Sans date annoncée, c'est le délai de la boutique qui compte : dans l'UE, elle doit te livrer dans les 30 jours, sauf si vous avez convenu d'un autre délai.
+Ton jour et ton créneau, ou une fenêtre de plusieurs jours, s'affichent sur la page de suivi de Paack. Sans date annoncée, c'est le délai de la boutique qui compte : dans l'UE, elle doit te livrer dans les 30 jours, sauf si vous avez convenu d'un autre délai.
 
 :::sources
 - [Paack : Track your order](https://paack.co/shipments/tracking?lng=fr) – libellé « Au centre de distribution de Paack »
-- [Paack Support : À propos de Paack](https://help.paack.co/fr/support/solutions/folders/44001208241) – téléphone, horaires
+- [Paack Support : À propos de Paack](https://paackcustomerservice.freshdesk.com/fr/support/solutions/folders/44001208241) – téléphone, horaires, chat
+- [Paack Support : Statut de ma commande](https://paackcustomerservice.freshdesk.com/fr/support/solutions/folders/44001208238) – lien de suivi, tentatives, voisin, conciergerie, retour
+- [Paack Support : Autres questions ?](https://paackcustomerservice.freshdesk.com/fr/support/solutions/folders/44001208240) – au moins deux tentatives, e-mail d'adresse
+- [Paack Support : FAQs](https://paackcustomerservice.freshdesk.com/fr/support/home) – créneau, instructions au livreur, adresse par le chat
 - [Colis Privé : Colis Privé et Paack s'unissent sous une marque commune : Paack](https://colisprive.fr/blog/colis-prive-et-paack-sunissent-sous-une-marque-commune-paack/) – annonce du 16 octobre 2026, rapprochement, pays, marque commune, janvier 2027, suivi inchangé
 - [Colis Privé : Comment suivre mon colis ?](https://colisprive.fr/aide/comment-suivre-mon-colis-3/) – colisprive.fr, code postal
 - [Colis Privé : Comment éviter les attaques de phishing ?](https://colisprive.fr/aide/comment-eviter-les-attaques-de-phishing/) – adresse des e-mails de suivi

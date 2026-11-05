@@ -89,7 +89,7 @@ Porque Paack solo enseña un pedido a quien tiene a la vez el número y el códi
 La página de seguimiento de Paack muestra el día y la franja previstos para tu paquete, y Peek muestra la misma franja. Los plazos de envío que ofrece la tienda, pregúntaselos a ella.
 
 :::sources
-- [Paack Support: Sobre Paack](https://help.paack.co/es/support/solutions/folders/44001208241) – teléfonos
+- [Paack Support: Sobre Paack](https://paackcustomerservice.freshdesk.com/es/support/solutions/folders/44001208241) – teléfonos
 - [Colis Privé: Colis Privé and Paack unite under one brand: Paack (en inglés)](https://colisprive.fr/en/blog/colis-prive-and-paack-unite-under-one-brand-paack/) – 16 de octubre de 2026: unidas desde el verano de 2026, marca común desde enero de 2027, cinco países, entrega y seguimiento como siempre
 - [Universal Parcel Scraper: Paack](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/paack) – número de pedido o código de barras con el código postal, «Pedido no encontrado», formatos de número, pasos del seguimiento y cómo los anota Peek, franja, PaackGo Point
 :::

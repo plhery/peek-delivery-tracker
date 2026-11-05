@@ -3,12 +3,15 @@ title: Amazon Logistics suivi : où suivre ton colis et que faire
 description: Suivre un colis Amazon Logistics dans Vos commandes : le numéro TBA ou FR, qui livre en France et en Belgique, les Amazon Locker et comment joindre Amazon.
 slug: amazon-logistics-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
 Amazon Logistics est le réseau de livraison d'Amazon. En France, ce sont des entreprises de livraison indépendantes qui travaillent avec les agences de livraison de proximité d'Amazon ; Amazon confie aussi des colis au groupe [La Poste](carrier:la-poste) et à d'autres transporteurs, qui livrent avec leur propre réseau. En Belgique, Amazon Logistics travaille avec des entreprises de livraison locales, notamment depuis l'agence de livraison d'Amazon à Anvers, et Amazon continue de livrer avec [bpost](carrier:bpost), son partenaire de longue date.
 
-Amazon Logistics n'a pas de page de suivi publique : ton colis se suit dans Vos commandes, sur le site Amazon où tu as commandé (amazon.fr, amazon.com.be…).
+Amazon Logistics n'a pas de page de suivi publique. Selon ce que tu as en main :
+
+- **Une commande passée sur Amazon** (numéro de commande comme `000-0000000-0000000`) : ton colis se suit dans Vos commandes, sur le site Amazon où tu as commandé (amazon.fr, amazon.com.be…). Si Vos commandes ou l'e-mail d'expédition donne le numéro d'un autre transporteur, La Poste par exemple, colle ce numéro dans le champ ci-dessus : Peek le suit chez ce transporteur.
+- **Un numéro `TBA`, `FR` ou `BE`, ou un lien track.amazon** : colle-le ci-dessus. Peek interroge d'abord le suivi public d'Amazon. Celui-ci répond quand le vendeur expédie avec [Amazon Shipping](carrier:amazon-shipping), le service de livraison d'Amazon pour les entreprises, que tu aies commandé « sur Amazon.fr ou tout autre site internet », ou quand Amazon expédie pour un vendeur une commande passée ailleurs que sur Amazon. Peek suit alors le colis tout seul ; sinon, il te renvoie vers Vos commandes.
 
 ## Numéro de suivi Amazon Logistics : TBA, FR et les autres
 
@@ -69,7 +72,7 @@ C'est une forme de numéro Amazon : TBC et 12 chiffres, comme TBA ou TBM. Si Ama
 
 ### Pourquoi mon numéro de suivi Amazon ne marche pas ailleurs ?
 
-Parce qu'Amazon Logistics n'a pas de suivi public : seul Vos commandes affiche ce colis. Un numéro accepté par track.amazon.fr est un colis Amazon Shipping, que Peek peut suivre.
+Parce qu'Amazon Logistics n'a pas de suivi public : seul Vos commandes affiche ce colis. Un numéro accepté par track.amazon.fr est un colis Amazon Shipping, ou une commande passée hors d'Amazon et expédiée par Amazon : Peek peut le suivre.
 
 ### Comment contacter Amazon Logistics en Belgique ?
 
@@ -80,11 +83,13 @@ Par le service client Amazon du site où tu as commandé. Celui d'amazon.com.be 
 - [About Amazon (Europe) : Amazon announces plans to launch Amazon.com.be](https://www.aboutamazon.eu/news/job-creation-and-investment/amazon-announces-plans-to-launch-amazon-com-be-in-the-coming-months) – Amazon Logistics et les entreprises de livraison locales en Belgique, bpost
 - [About Amazon (Europe) : Amazon announces plans to invest over €1 billion in Belgium](https://www.aboutamazon.eu/news/job-creation-and-investment/amazon-announces-plans-to-invest-over-1-billion-to-enhance-belgian-customer-experience) – agence de livraison d'Anvers, bpost
 - [About Amazon (Europe) : Amazon.com.be launches in Belgium](https://www.aboutamazon.eu/news/amazon-prime/amazon-com-be-launches-in-belgium) – service client en français, néerlandais ou anglais
+- [Amazon Shipping : Suivre votre colis](https://track.amazon.fr/) – commande passée sur Amazon.fr ou tout autre site, envoi créé par le vendeur avec Amazon Shipping
+- [About Amazon France : Expédié par Amazon](https://www.aboutamazon.fr/actualites/innovations/expedie-par-amazon) – ventes sur Amazon ou via d'autres canaux de vente
 - [About Amazon France : Garantir des livraisons fiables et efficaces](https://www.aboutamazon.fr/actualites/activite-logistique/garantir-des-livraisons-fiables-et-efficaces-pendant-les-periodes-exceptionnelles) – Mon Jour Amazon, points de retrait partenaires
 - [About Amazon France : Comment retirer un colis dans un Amazon Locker](https://www.aboutamazon.fr/actualites/activite-logistique/comment-utiliser-amazon-locker) – e-mail, code à six chiffres, trois jours, renvoi et remboursement
 - [About Amazon France : Un service de proximité très pratique](https://www.aboutamazon.fr/actualites/innovations/un-service-de-proximite-tres-pratique) – Amazon Counter, code-barres
 - [About Amazon France : La Garantie A à Z](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeur d'abord, remboursement
 - [About Amazon France : Comment contacter le service client Amazon](https://www.aboutamazon.fr/actualites/nos-boutiques/comment-contacter-le-service-client-amazon) – chat, téléphone, horaires, rappel
 - [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – faux messages, signalement
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek reconnaît et vérifie
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek reconnaît et vérifie, Amazon Shipping et ventes hors d'Amazon (MCF) dans le suivi public d'Amazon
 :::

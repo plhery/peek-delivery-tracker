@@ -77,7 +77,7 @@ I numeri di telefono del sito cinese di Cainiao sono per i clienti in Cina e per
 
 ## Tracciare un pacco Cainiao con Peek
 
-[Peek](/) mostra questi pacchi come «AliExpress / Cainiao». Riconosce subito i numeri DOFR e CNFR; per i numeri LP, CNG e AP, e per altri riferimenti Cainiao come CNUSUP, CNBR o CNMEX, chiede a Cainiao tra i corrieri probabili. I numeri postali digitati da soli vanno alla posta, tranne quelli che finiscono con TY o MI, per cui chiede anche a Cainiao. Per gli altri numeri postali incolla il link di global.cainiao.com con `mailNoList=`, che arriva a Cainiao qualunque sia il numero. I link di track.cainiao.com e degli ordini AliExpress, invece, non li riconosce.
+[Peek](/) mostra questi pacchi come «AliExpress / Cainiao». Riconosce subito i numeri DOFR, CNFR, CNG e AP; per i numeri LP, e per altri riferimenti Cainiao come CNUSUP, CNBR o CNMEX, chiede a Cainiao tra i corrieri probabili. I numeri postali digitati da soli vanno alla posta, tranne quelli che finiscono con TY, MI, XX o GO, per cui chiede anche a Cainiao. Per gli altri numeri postali incolla il link di global.cainiao.com con `mailNoList=`, che arriva a Cainiao qualunque sia il numero. I link di track.cainiao.com e degli ordini AliExpress, invece, non li riconosce.
 
 A volte AliExpress ti dà già il numero del corriere che consegnerà, per esempio una lettera di vettura SDA di 13 caratteri come `123A12345678B`, mentre il pacco è ancora con Cainiao. In quel caso Peek chiede sia a Cainiao sia a Poste Italiane. Se lo conoscono entrambi, Peek mette il pacco sotto «AliExpress / Cainiao», che ha le scansioni di prima del confine, e per l'ultimo tratto chiede anche a Poste Italiane: le sue scansioni entrano nella cronologia appena segnala il pacco.
 

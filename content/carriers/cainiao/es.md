@@ -3,7 +3,7 @@ title: Cainiao seguimiento en España: estados, entregas y teléfono
 description: Sigue tu paquete de Cainiao o AliExpress en España: cómo es el número, qué significa cada estado, qué pasa si falla la entrega y a quién llamar.
 slug: cainiao-seguimiento
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
 Cainiao es el grupo logístico de Alibaba: lleva al extranjero los paquetes de vendedores de plataformas como AliExpress y en España dice tener su propia red de reparto. Para seguir tu paquete, escribe el número en [global.cainiao.com](https://global.cainiao.com/), su web de seguimiento, que solo sigue paquetes de Cainiao y AliExpress, o pégalo en la casilla de arriba. En AliExpress, el número está en tu pedido: entra en «My Orders», busca el pedido y pulsa «Tracking».
@@ -15,8 +15,7 @@ La web de seguimiento de Cainiao admite hasta 100 números por búsqueda («Intr
 | Número | De quién es |
 | --- | --- |
 | `LP12345678901234` | LP y 14 cifras: probablemente Cainiao, aunque no es seguro. |
-| `CNG12345678900000` | CNG y 14 cifras: probablemente Cainiao. |
-| `CNG12345678975001` | Lo mismo, pero acaba en algo parecido a un código postal francés: Cainiao o, quizá, Colis Privé. |
+| `CNG12345678900000` | CNG y 14 cifras: Cainiao. |
 | `DOFR1234567890123HD` | DOFR o CNFR, 13 cifras y HD: Cainiao. |
 | `RR000000005CN` | [Un número postal](guide:tracking-number-formats): la web de Cainiao sigue este formato, pero también el correo de origen, aquí [China Post](carrier:china-post). |
 | `YT1234567890123456` | No es de Cainiao, sino de [YunExpress](carrier:yunexpress). |
@@ -60,7 +59,7 @@ Cainiao, por su parte, no da un número de días. Su estado `Undelivered` cubre 
 
 **Todavía sin seguimiento.** Según el FAQ de Cainiao, el seguimiento suele aparecer como mucho 11 días después del envío; si a los 12 días no cambia, pregunta al vendedor. Mientras, la web en español puede decir `Sin actualización del seguimiento`, y `Not Found` también puede ser un número mal escrito. Si el vendedor no envía en el plazo del pedido, AliExpress cierra el pedido y te devuelve todo el dinero.
 
-**Parado al llegar a España.** El FAQ de Cainiao dice que suele faltar la información del país de destino y aconseja preguntar a la oficina de correos local. Una dirección o un teléfono incorrectos también lo retrasan; para ese caso, el FAQ en inglés manda a la oficina de correos y su versión francesa, a la empresa de reparto de última milla. En aduanas, Cainiao pide al destinatario que [contacte con la aduana](guide:customs). Con envío económico, el `Aviso de seguimiento` dice: «El seguimiento con envío económico solo se actualiza a la entrega al transportista del país/región de destino». Pregunta al vendedor qué empresa es. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
+**Parado al llegar a España.** El FAQ de Cainiao dice que suele faltar la información del país de destino y aconseja preguntar a la oficina de correos local. Una dirección o un teléfono incorrectos también lo retrasan; para ese caso, el FAQ en inglés manda a la oficina de correos y su versión francesa, a la empresa de reparto de última milla. En aduanas, Cainiao pide al destinatario que contacte con la aduana. Desde el 1 de noviembre de 2026, la UE suma una tasa de tramitación de 2 € por tipo de producto; [la guía de aduanas](guide:customs) explica qué pagas y cuándo. Con envío económico, el `Aviso de seguimiento` dice: «El seguimiento con envío económico solo se actualiza a la entrega al transportista del país/región de destino». Pregunta al vendedor qué empresa es. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
 
 **Muy retrasado o perdido.** Cainiao pide esperar hasta la última fecha de entrega prometida. Después, para un pedido de AliExpress, abre en AliExpress «Help->Customer Service» o «Disputes&Reports» (así, en inglés, lo escribe Cainiao). Si Ecoscooting no puede entregarlo, recibes el correo «Aviso importante: Su paquete no puede ser entregado», con el que puedes pedir el reembolso al vendedor. Ninguna página de Cainiao da un formulario, un plazo ni un trámite de reclamación para destinatarios: el reembolso pasa por AliExpress o por la tienda.
 
@@ -83,7 +82,7 @@ La página de contacto de Cainiao en inglés no da teléfono: solo el correo cai
 
 ## Seguir un paquete de Cainiao con Peek
 
-[Peek](/) muestra estos paquetes como «AliExpress / Cainiao». Reconoce enseguida los números DOFR y CNFR; con los LP, CNG y AP, y con otras referencias de Cainiao como CNUSUP, CNBR o CNMEX, pregunta a Cainiao entre los transportistas probables. Un número postal escrito solo va al correo que le corresponde, salvo si acaba en TY o MI: entonces pregunta también a Cainiao. Para los demás números postales, pega el enlace de global.cainiao.com con `mailNoList=`, que llega a Cainiao sea cual sea el número. No reconoce los enlaces de track.cainiao.com (el seguimiento que usa la web de Ecoscooting) ni los de los pedidos de AliExpress.
+[Peek](/) muestra estos paquetes como «AliExpress / Cainiao». Reconoce enseguida los números DOFR, CNFR, CNG y AP; con los LP, y con otras referencias de Cainiao como CNUSUP, CNBR o CNMEX, pregunta a Cainiao entre los transportistas probables. Un número postal escrito solo va al correo que le corresponde, salvo si acaba en TY, MI, XX o GO: entonces pregunta también a Cainiao. Para los demás números postales, pega el enlace de global.cainiao.com con `mailNoList=`, que llega a Cainiao sea cual sea el número. No reconoce los enlaces de track.cainiao.com (el seguimiento que usa la web de Ecoscooting) ni los de los pedidos de AliExpress.
 
 A veces AliExpress te da ya el número del transportista que lo entregará, por ejemplo uno de SDA para un paquete a Italia, cuando Cainiao todavía tiene el paquete. Con algunos de esos formatos, Peek pregunta a Cainiao además de a ese transportista. Si los dos conocen el número, Peek guarda el paquete como «AliExpress / Cainiao», que tiene los escaneos de antes de la frontera, y pregunta también al transportista que lo entrega para el último tramo: sus escaneos se suman al historial en cuanto da noticias del paquete.
 
@@ -125,5 +124,7 @@ Las fuentes de esta página no lo miden: ninguna da cifras de puntualidad ni de 
 - [Cainiao: Contact Cainiao](https://www.cainiao.com/en/about-us-contact-us.html) – correo, Hangzhou
 - [AliExpress: How to track my package?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=es) – My Orders, Online Service
 - [AliExpress: When will the seller send out the order?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063471&language=en) – pedido no enviado
+- [Comisión Europea: EU Customs Reform, en inglés](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de 2 € desde el 1 de noviembre de 2026
+- [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por artículo, es decir, por mercancías con la misma clasificación arancelaria
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que muestra Peek
 :::

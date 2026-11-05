@@ -15,8 +15,7 @@ Nenhuma página da Cainiao descreve as formas LP, CNG, DOFR ou CNFR. O site acei
 | Número | De quem é |
 | --- | --- |
 | `LP12345678901234` | LP e 14 algarismos: pode ser Cainiao. |
-| `CNG12345678900000` | CNG e 14 algarismos: pode ser Cainiao. |
-| `CNG12345678975001` | O mesmo, terminado no que parece um código postal francês: Cainiao ou talvez a Colis Privé. |
+| `CNG12345678900000` | CNG e 14 algarismos: Cainiao. |
 | `DOFR1234567890123HD` | DOFR ou CNFR, 13 algarismos e HD: Cainiao. |
 | `RR000000005CN` | Um [número postal](guide:tracking-number-formats), aqui da [China Post](carrier:china-post). O site da Cainiao também segue esta forma. |
 | `LP000000005HK` | Também postal (Hongkong Post): apesar do LP, não é um número LP da Cainiao. |
@@ -85,7 +84,7 @@ Os números do site chinês da Cainiao são para clientes na China e para lojas.
 
 ## Rastrear encomenda Cainiao com o Peek
 
-O [Peek](/) mostra estas encomendas como «AliExpress / Cainiao». Reconhece logo os números DOFR e CNFR; com os LP, CNG e AP, e com outras referências da Cainiao como CNUSUP, CNBR ou CNMEX, pergunta à Cainiao entre as transportadoras prováveis. Um número postal escrito sozinho vai para o correio, a não ser que acabe em TY ou MI: aí pergunta também à Cainiao. Para os outros números postais, cola a ligação do global.cainiao.com com `mailNoList=`, que chega à Cainiao seja qual for o número. Ligações do track.cainiao.com, o seguimento do site da Ecoscooting, e das encomendas do AliExpress não são reconhecidas.
+O [Peek](/) mostra estas encomendas como «AliExpress / Cainiao». Reconhece logo os números DOFR, CNFR, CNG e AP; com os LP, e com outras referências da Cainiao como CNUSUP, CNBR ou CNMEX, pergunta à Cainiao entre as transportadoras prováveis. Um número postal escrito sozinho vai para o correio, a não ser que acabe em TY, MI, XX ou GO: aí pergunta também à Cainiao. Para os outros números postais, cola a ligação do global.cainiao.com com `mailNoList=`, que chega à Cainiao seja qual for o número. Ligações do track.cainiao.com, o seguimento do site da Ecoscooting, e das encomendas do AliExpress não são reconhecidas.
 
 Às vezes, o AliExpress dá-te já o número da transportadora que vai entregar, por exemplo um da SDA para uma encomenda para Itália, quando a Cainiao ainda tem a encomenda. Com algumas dessas formas, o Peek pergunta à Cainiao além dessa transportadora. Se as duas conhecerem o número, o Peek arquiva a encomenda como «AliExpress / Cainiao», que tem as leituras de antes da fronteira, e pergunta também à transportadora que entrega para a última etapa: as leituras dela juntam-se ao histórico assim que der notícias da encomenda.
 

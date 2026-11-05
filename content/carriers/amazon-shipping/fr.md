@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-10-27
 ---
 
-Un colis Amazon Shipping se suit sans compte Amazon, avec son numéro de suivi, sur le site de suivi public d'Amazon Shipping, track.amazon.fr. Ce site ne montre que des colis qui ne viennent pas d'une commande passée sur Amazon même : une commande Amazon se suit plutôt dans « Vos commandes ».
+Un colis Amazon Shipping se suit sans compte Amazon, avec son numéro de suivi, sur le site de suivi public d'Amazon Shipping, track.amazon.fr. D'après ce site, c'est le vendeur qui crée l'envoi avec Amazon Shipping, que tu aies commandé « sur Amazon.fr ou tout autre site internet » ; les autres commandes Amazon se suivent dans « Vos commandes ».
 
 ## Numéro de suivi Amazon Shipping : à quoi il ressemble
 
@@ -46,7 +46,7 @@ Peek affiche le statut, l'historique avec la ville, la région et le pays de cha
 
 ### Amazon Shipping, c'est quoi ?
 
-Un colis Amazon Shipping se suit sur le site de suivi public d'Amazon, qui ne montre que des colis ne venant pas d'une commande passée sur Amazon même. Ta commande vient donc d'une autre boutique, que tu contactes en cas de problème.
+Le service de livraison d'Amazon pour les entreprises, sur le réseau d'Amazon. Le vendeur, sur Amazon.fr ou dans une autre boutique, a expédié ton colis avec Amazon Shipping : c'est lui que tu contactes en cas de problème.
 
 ### Quel est le délai de livraison d'Amazon Shipping ?
 
@@ -57,6 +57,7 @@ Quand le site de suivi d'Amazon donne un jour de livraison prévu, Peek l'affich
 La boutique où tu as commandé : dans l'UE, selon Your Europe, le vendeur est responsable de la livraison, et c'est à lui de prendre contact avec le service de livraison.
 
 :::sources
+- [Amazon Shipping : Suivre votre colis](https://track.amazon.fr/) – commande passée sur Amazon.fr ou tout autre site, envoi créé par le vendeur, service de livraison pour les entreprises sur le réseau d'Amazon
 - [Your Europe : Expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_fr.htm) – responsabilité du commerçant de l'expédition à la réception, 30 jours, délai supplémentaire, annulation et remboursement
 - [Your Europe : FAQ expédition et livraison](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_fr.htm) – vendeur responsable de la livraison, preuve de livraison, article identique ou remboursement, dommages pendant le transport
 - [About Amazon France : Six conseils contre les arnaques](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – messages sur un achat, paiement, carte cadeau, numéros à ne pas appeler, signalement

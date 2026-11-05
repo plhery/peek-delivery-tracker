@@ -3,7 +3,7 @@ title: iMile Sendungsverfolgung: Nummer, Status, Zustellung
 description: iMile Sendungsverfolgung in Deutschland, Österreich und der Schweiz: wie die Nummer aussieht, was die Status heißen, wer zustellt und wie du iMile erreichst.
 slug: imile-sendungsverfolgung
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
 iMile ist ein Zustelldienst für den Onlinehandel, 2017 in Dubai gegründet. Er bringt Pakete über Grenzen, auch aus China, und hat Gesellschaften in Deutschland (Düsseldorf) und Österreich (Wien). Verfolge die Nummer auf iMiles [Tracking-Seite](https://www.imile.com/en/track) oder oben im Feld. Die Nummer bekommst du vom Shop, in den Versanddaten deiner Bestellung.
@@ -74,6 +74,8 @@ Weitere Gründe, die der Fahrer eintragen kann, neben `User not at home`: `wrong
 
 **Seit Tagen nichts Neues.** Pakete aus China sind zwischen Flug, Zoll und erstem Zentrum oft länger still. Mehr dazu in [Pakete aus China](guide:tracking-from-china) und [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
+**Zoll und Gebühren.** Auf Online-Bestellungen von außerhalb der EU, etwa aus China, erhebt die EU seit 1. November 2026 eine Bearbeitungsgebühr von 2 € pro Ware, bei jedem Warenwert; in der Schweiz nicht. Ob Steuer, Zoll und Gebühr schon im Preis waren, weiß der Shop; wie iMile offene Beträge einzieht, veröffentlicht iMile nicht. Was du wann zahlst, steht im [Zoll-Ratgeber](guide:customs).
+
 **Zugestellt, aber nicht da.** Schau dir das Foto im Zustellnachweis auf iMiles Seite an, frag Nachbarn, dann schreib iMile und dem Shop. Mehr in [zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
 **Beschädigt.** In Österreich verlangen die AGB, offensichtliche Schäden unverzüglich nach der Zustellung zu melden, versteckte unverzüglich nach der Entdeckung, spätestens binnen 7 Werktagen.
@@ -136,12 +138,14 @@ iMile ist ein echter Zustelldienst, 2017 in Dubai gegründet, mit eigener Tracki
 - [iMile: Bürostandorte](https://www.imile.com/DE-de/CustomerService/OfficeLocations) – Kontakte für Deutschland und Österreich, Länderliste ohne Schweiz
 - [iMile: Nationaler Expresszustelldienst](https://www.imile.com/DE-de/logistics-solutions/domestic-express-delivery) – Länder des nationalen Dienstes
 - [iMile: Internationaler Direktversand](https://www.imile.com/DE-de/logistics-solutions/international-dropship-delivery) – eigenes Zustellteam, Routen ab China
-- [iMile: FAQs](https://www.imile.com/en/CustomerService/FAQ) – Adresse ändern, Online-Bot
+- [iMile: FAQs](https://www.imile.com/en/CustomerService/FAQ) – Adresse ändern, Online-Bot, nichts zu Zoll oder Abgaben
 - [iMile: Track Your Shipment](https://www.imile.com/en/track) – Tracking-Seite, leeres Feld, Zustellnachweis-Ansicht
 - [iMile: Kundensupport](https://www.imile.com/DE-de/CustomerService/CustomerSupport) – Kontaktformular und seine Felder
 - [iMile: iMile Chat](https://help.imile.com/) – virtueller Assistent auf Deutsch
 - [RTR: Probleme mit Postsendungen](https://www.rtr.at/TKP/was_wir_tun/post/konsumentenservice/faq/probleme_mit_postsendungen.de.html) – Nachforschung nur durch den Absender, Vollmacht, keine Antwort auf einzelne Beschwerden
 - [RTR: Voraussetzungen für ein Schlichtungsverfahren](https://www.rtr.at/TKP/was_wir_tun/post/konsumentenservice/schlichtungsstelle/PKS_Schlichtung.de.html) – Schlichtung zu einer Sendung nur durch den Versender, Formular für Empfangsbeschwerden
 - [Bundesnetzagentur: Häufig gestellte Fragen zur Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – Antrag auch durch Empfänger, Sonderbedingungen bei E-Commerce-Sendungen, Verbraucherservice Post
+- [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € Bearbeitungsgebühr ab 1. November 2026
+- [EU-Kommission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € pro Position bei Online-Bestellungen, bei jedem Warenwert
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Nummernformen, Status, was Peek zeigt
 :::

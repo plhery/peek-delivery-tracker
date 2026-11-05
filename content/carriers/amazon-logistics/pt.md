@@ -43,7 +43,7 @@ Recebeste um SMS ou um e-mail sobre uma entrega que não esperavas? Antes de car
 
 ## Rastreio da Amazon Logistics no Peek
 
-O [Peek](/) não consegue seguir nem guardar uma encomenda da Amazon Logistics: a Amazon só mostra o estado, o histórico e a fotografia dentro da tua conta. Se colares um destes números ou um link do track.amazon, o Peek consulta primeiro o seguimento público da Amazon Shipping. Se a Amazon responder, a encomenda é da Amazon Shipping e o Peek segue-a: «A Amazon Shipping disponibiliza seguimento público para esta encomenda. O Peek mantém esta entrega atualizada.» Se a Amazon já não disponibilizar o histórico, o Peek diz-te isso e podes guardá-la como referência.
+O [Peek](/) não consegue seguir nem guardar uma encomenda da Amazon Logistics: a Amazon só mostra o estado, o histórico e a fotografia dentro da tua conta. Se colares um destes números ou um link do track.amazon, o Peek consulta primeiro o seguimento público da Amazon Shipping. Se a Amazon responder, a encomenda é da Amazon Shipping ou de uma venda feita fora da Amazon que a Amazon envia em nome do vendedor, e o Peek segue-a: «A Amazon Shipping disponibiliza seguimento público para esta encomenda. O Peek mantém esta entrega atualizada.» Se a Amazon já não disponibilizar o histórico, o Peek diz-te isso e podes guardá-la como referência.
 
 Caso contrário, o Peek diz «As entregas da Amazon Logistics são geralmente acompanhadas na página «Os meus pedidos» da Amazon.» e mostra o botão «Abrir os meus pedidos Amazon», que abre o histórico de pedidos do site que o número indica: a Amazon.es para `PT` e `ES`, a Amazon.com para `TBA`. Se a consulta falhar, toca em «Tentar novamente». Com um número de pedido, vês «Parece um número de pedido da Amazon».
 

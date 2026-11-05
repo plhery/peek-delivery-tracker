@@ -78,7 +78,7 @@ Numery z chińskiej strony Cainiao są dla klientów w Chinach oraz dla sprzedaw
 
 ## Śledzenie paczki Cainiao w Peek
 
-[Peek](/) pokazuje te paczki jako „AliExpress / Cainiao”. Numery DOFR i CNFR rozpoznaje od razu, a przy numerach LP, CNG i AP oraz innych numerach Cainiao, takich jak CNUSUP, CNBR czy CNMEX, pyta Cainiao wśród prawdopodobnych przewoźników. Sam numer pocztowy Peek sprawdza u operatora pocztowego, nie w Cainiao, chyba że kończy się na TY lub MI: wtedy pyta też Cainiao. Przy pozostałych numerach pocztowych wklej link z global.cainiao.com z `mailNoList=`, który dociera do Cainiao bez względu na numer. Linków z track.cainiao.com ani z zamówień AliExpress nie rozpoznaje.
+[Peek](/) pokazuje te paczki jako „AliExpress / Cainiao”. Numery DOFR, CNFR, CNG i AP rozpoznaje od razu, a przy numerach LP oraz innych numerach Cainiao, takich jak CNUSUP, CNBR czy CNMEX, pyta Cainiao wśród prawdopodobnych przewoźników. Sam numer pocztowy Peek sprawdza u operatora pocztowego, nie w Cainiao, chyba że kończy się na TY, MI, XX lub GO: wtedy pyta też Cainiao. Przy pozostałych numerach pocztowych wklej link z global.cainiao.com z `mailNoList=`, który dociera do Cainiao bez względu na numer. Linków z track.cainiao.com ani z zamówień AliExpress nie rozpoznaje.
 
 Czasem AliExpress od razu podaje numer przewoźnika, który doręczy paczkę, na przykład numer SDA przy paczce do Włoch, choć paczka jest jeszcze w Cainiao. Przy niektórych takich kształtach Peek pyta Cainiao obok tego przewoźnika. Jeśli obaj znają numer, Peek zapisuje paczkę pod „AliExpress / Cainiao”, gdzie są skany sprzed granicy, i na ostatni odcinek pyta też przewoźnika doręczającego: jego skany trafiają do historii, gdy tylko zgłosi on paczkę.
 

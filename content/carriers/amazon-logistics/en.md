@@ -53,7 +53,7 @@ Amazon Customer Service handles questions about your orders. On Amazon.co.uk:
 
 ## Amazon Logistics tracking in Peek
 
-[Peek](/) can't track or save an Amazon Logistics parcel: Amazon shows its status, history and photo only in your account. Paste one of these numbers, or a track.amazon link, and Peek first checks Amazon's public Amazon Shipping tracker. If Amazon answers, it's an [Amazon Shipping](carrier:amazon-shipping) parcel, and Peek tracks it: "Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date." If Amazon no longer gives its history, it can stay as a reference.
+[Peek](/) can't track or save an Amazon Logistics parcel: Amazon shows its status, history and photo only in your account. Paste one of these numbers, or a track.amazon link, and Peek first checks Amazon's public Amazon Shipping tracker. If Amazon answers, it's an [Amazon Shipping](carrier:amazon-shipping) parcel, or a sale made away from Amazon that Amazon ships for the seller, and Peek tracks it: "Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date." If Amazon no longer gives its history, it can stay as a reference.
 
 Otherwise Peek says "Amazon Logistics deliveries are usually tracked in Your Orders on Amazon." and offers "Open my Amazon orders", which opens the order history on the site the number points to: amazon.co.uk for `UK` and `GB`, amazon.ie for `IE`, amazon.com for `TBA`. If the check can't run, tap "Check again". An order number gets "That looks like an Amazon order number".
 

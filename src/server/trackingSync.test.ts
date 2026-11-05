@@ -8209,11 +8209,11 @@ describe('a carrier a provider names, whose scans the provider copied in the wro
       .mockRejectedValueOnce(new Error('4PX tracking is unavailable')).mockResolvedValue(result(scans));
     const { store, adapter, sync } = setup(fetch);
     const first = await sync('2026-01-05T12:00:00Z');
-    // A copy dated past the check is misdated: the watermark is the newest copy before it.
+    // A copy dated past the check is misdated and waits until due: the watermark is the newest copy before it.
     expect(first).toMatchObject({ carrier_data: { tracking_provider: 'ParcelsApp',
       routing: { discovered_carrier: 'four-px', last_event_at: '2026-01-04T16:30:00.000Z' } } });
     const copied = new Map([...store.rows.values()].map((row) => [row.provider_event_id, row.id]));
-    expect(copied.size).toBe(3);
+    expect(copied.size).toBe(2);
     // The parcel was added after the carrier's newest scan: the app's row is no scan.
     store.rows.set('app:pending', { id: 'added', provider_event_id: 'app:pending', stage: 'pending',
       description: 'Tracking added', occurred_at: '2026-01-05T09:00:00.000Z' });
@@ -8224,11 +8224,12 @@ describe('a carrier a provider names, whose scans the provider copied in the wro
     expect(values).toMatchObject({ carrier: 'four-px',
       carrier_data: { routing: { confirmed_carrier: 'four-px', last_event_at: '2026-01-05T06:55:00.000Z' } } });
     expect(values.carrier_data).not.toHaveProperty('tracking_provider');
-    // The carrier's scans take the copies over at their own instants.
+    // The carrier's scans take the copies over at their own instants; the scan whose copy waited is a row of its own.
     expect(store.rows.size).toBe(4);
-    expect([...copied].map(([id, row]) => store.rows.get(String(id))?.id === row)).toEqual([true, true, true]);
+    expect([...copied].map(([id, row]) => store.rows.get(String(id))?.id === row)).toEqual([true, true]);
     expect([...copied.keys()].map((id) => store.rows.get(String(id))?.occurred_at))
-      .toEqual(['2026-01-05T06:55:00Z', '2026-01-04T08:30:00Z', '2026-01-02T20:18:58Z']);
+      .toEqual(['2026-01-04T08:30:00Z', '2026-01-02T20:18:58Z']);
+    expect([...store.rows.values()].map((row) => row.occurred_at)).toContain('2026-01-05T06:55:00Z');
   });
 
   it('files it under the carrier when the provider corrected its copies on an earlier check', async () => {

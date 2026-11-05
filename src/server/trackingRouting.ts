@@ -1471,12 +1471,16 @@ export class TrackingRouter {
     // named: a hint must not echo a provider's answer.
     const askedCarrier = (state.confirmed_carrier && state.confirmed_number === universalNumber ? state.confirmed_carrier : null)
       ?? (universalCarrier === 'unknown' ? null : universalCarrier);
-    // A provider's answer without the rows a carrier holds back: those it wrote ahead, and, for a parcel
-    // of a carrier that enters scans at their planned time, those not due yet (`plannedClocks`).
-    const dueOnly = (result: CarrierResult) => {
+    // A provider's answer without the rows a carrier holds back: those it wrote ahead, and those not due yet
+    // (`plannedClocks`), for a parcel of a carrier that enters scans at their planned time or from ParcelsApp,
+    // which dates some carriers' scans hours ahead on any parcel (its clock read in the wrong zone). Each
+    // ParcelsApp hold is logged, as the row reaches no `future_event_timestamp` once it is due.
+    const dueOnly = (result: CarrierResult, source: string | undefined) => {
       const planned = [declared, universalCarrier, metadata.active_tracking_carrier, askedCarrier, state.discovered_carrier]
         .some((carrier) => typeof carrier === 'string' && carrier !== 'unknown' && this.options.plannedScans?.(carrier) === true);
-      return withoutWrittenAhead(result, planned ? [...heldBack(), ...plannedClocks(result, now())] : heldBack());
+      const ahead = planned || source === 'ParcelsApp' ? plannedClocks(result, now()) : [];
+      if (!planned && ahead.length > 0) report('provider_scans_held', String(source));
+      return withoutWrittenAhead(result, [...heldBack(), ...ahead]);
     };
     const attemptedUniversal = new Set<UniversalSource>();
     // Providers that answered without history for this number in this check.
@@ -1490,7 +1494,7 @@ export class TrackingRouter {
       attemptedUniversal.add(source);
       const prefetched = prefetchedUniversal.get(source) ?? this.options.takePrefetchedUniversal?.(source, universalNumber, providerPostcode);
       if (prefetched) {
-        const result = dueOnly(normalizeCarrierResult(prefetched));
+        const result = dueOnly(normalizeCarrierResult(prefetched), source);
         if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           delete state.failures[source];
           return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
@@ -1531,8 +1535,8 @@ export class TrackingRouter {
       let retryAfterMs = 0;
       try {
         const result = dueOnly(normalizeCarrierResult(await (reused ?? this.options.universal(source, universalNumber,
-          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier))));
-        if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier holds back`);
+          Math.max(1, Math.min(universalSourceBudget(source), Math.floor(universalDeadline - performance.now()) - 5_000)), providerPostcode, zone, askedCarrier))), source);
+        if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier holds back or not due yet`);
         if (!usable(result)) throw new TypeError('No usable universal progress');
         if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           report('foreign_history_rejected', source);
@@ -1681,7 +1685,7 @@ export class TrackingRouter {
         state.last_event_at = watermark;
         if (direct) return persistResult(direct, state.discovered_carrier);
         // The provider's copies of rows the carrier holds back are no scans.
-        const scans = dueOnly(value.result);
+        const scans = dueOnly(value.result, typeof value.result.tracking_provider === 'string' ? value.result.tracking_provider : undefined);
         if (!scans) return defer();
         value = { ...value, result: scans };
       }

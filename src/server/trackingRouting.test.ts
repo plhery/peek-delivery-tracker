@@ -803,6 +803,21 @@ describe('persistent tracking routing', () => {
     expect(result.result.events?.map((event) => event.time)).toEqual([...(planned ? [] : [ahead.time]), fast.time, '2026-09-10T11:00:00Z']);
     expect(result.result).toMatchObject(planned ? { last_update: fast.time, last_status_text: fast.description } : { last_update: ahead.time });
   });
+  it.each([['ParcelsApp', true], ['17TRACK', false]])('%s: holds back a provider\'s scan dated ahead on any carrier\'s parcel: %s', async (source, held) => {
+    const { router, direct, universal } = setup(time);
+    direct.mockRejectedValue(new ChallengeError('BRT', 'Tracking challenged'));
+    // ParcelsApp dated the carrier's scan 40 min after the check; a clock a few minutes fast is no plan.
+    const ahead = { time: '2026-09-10T12:40:00Z', description: 'In transit', stage: 'in_transit' as const };
+    const fast = { time: '2026-09-10T12:04:00Z', description: 'Sorted', stage: 'in_transit' as const };
+    const answer = { ...history(), last_update: ahead.time, last_status_text: ahead.description, events: [ahead, fast, ...history().events!] };
+    universal.mockImplementation(async (asked: string) => { if (asked === source) return answer; throw new NotFoundError(asked); });
+    const result = await router.fetch(parcel({ carrier: 'brt' }), false);
+    expect(result.result).toMatchObject({ tracking_provider: source });
+    expect(result.result.events?.map((event) => event.time)).toEqual([...(held ? [] : [ahead.time]), fast.time, '2026-09-10T11:00:00Z']);
+    expect(result.result).toMatchObject(held ? { last_update: fast.time, last_status_text: fast.description } : { last_update: ahead.time });
+    expect(vi.mocked(monitoring.reportRoutingEvent).mock.calls.filter(([code]) => code === 'provider_scans_held')
+      .map(([, context]) => context.provider)).toEqual(held ? ['ParcelsApp'] : []);
+  });
   it.each(['saved', 'discovered'])('shows a %s earlier leg handing the parcel to its carrier without swapping', async (hint) => {
     const number = 'CNPRT90000000000000000017';
     const { router, direct, universal } = setup();

@@ -326,12 +326,6 @@ struct ExperimentalCopy {
     var parcelTitle: String { localizer.text("design.parcelTitle") }
 }
 
-extension Parcel {
-    var experimentalLatestLocation: String? {
-        sortedEvents.compactMap { $0.location?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty }.first
-    }
-}
-
 /// The same bundled identities and decorations the web reads from core/brand.
 /// Load once so a palette or family added to carrier.json also reaches iPhone.
 struct CarrierBrandAssets: Decodable {

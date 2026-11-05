@@ -1,13 +1,13 @@
 ---
 title: Vinted parcel tracking: where to look and why it stalls
-description: Where to track a Vinted or Vinted Go parcel, which carrier delivers it in the UK, Ireland, the US and Australia, and why tracking stops or the number changes.
+description: Track a Vinted or Vinted Go parcel: which carrier has it in the UK, Ireland, France, Spain, Germany, Italy, Poland or the US, and why tracking stalls.
 slug: vinted-tracking
 picture: Two phones, a seller's and a buyer's, with a parcel travelling between them in a van, and a cheerful Pip.
 published: 2026-10-16
-updated: 2026-10-16
+updated: 2026-11-05
 ---
 
-On Vinted, the buyer picks the carrier at checkout and pays for the label; the seller gets it as a prepaid label or a QR code and has 5 business days to drop the parcel off. Buyer and seller both follow it in the order's conversation, under **Track parcel**, where you can also copy the carrier's tracking number. Tracking can take up to 48 hours to appear after drop-off, and the seller is paid only once the buyer confirms all is well, or 2 days after delivery.
+To see where your Vinted parcel is, open the order's conversation and press **Track parcel**: you get the latest status, a link to the carrier's own tracking page and the tracking number, which you can copy and paste into [Peek](/). Tracking can take up to 48 hours to appear after the seller drops the parcel off, and the seller has 5 business days to do so. The carrier is the one the buyer picked at checkout, and the seller is paid only once the buyer confirms all is well, or 2 days after delivery.
 
 ## How does shipping work on Vinted?
 
@@ -39,11 +39,16 @@ The one the buyer chose. Each country has its own list, and sellers can switch s
 | Country | Carriers on Vinted | Orders to and from |
 | --- | --- | --- |
 | UK | [Evri](carrier:evri), [InPost](carrier:inpost), [DPD](carrier:dpd-uk), [Royal Mail](carrier:royal-mail), Relay, AnyVan, [DHL Express](carrier:dhl-express) | US, Australia |
-| Ireland | [An Post](carrier:an-post), [DPD](carrier:dpd-ie), Drop2Shop, DHL Express | France |
+| Ireland | [An Post](carrier:an-post), [DPD](carrier:dpd-ie), Drop2Shop, DHL Express | France, Belgium, Luxembourg |
+| France | [Mondial Relay](carrier:mondial-relay), [Colissimo](carrier:la-poste), [Chronopost](carrier:chronopost), Vinted Go, DHL Express | Spain, Portugal, Italy, Germany, Austria, Belgium, the Netherlands, Luxembourg, Ireland |
+| Spain | InPost (formerly Mondial Relay Punto Pack), [Correos](carrier:correos-spain), [SEUR](carrier:seur), Ontime, [GLS](carrier:gls-es), Vinted Go, DHL Express | From mainland Spain, Ibiza and Majorca: France, mainland Portugal, Italy, Belgium, the Netherlands, Luxembourg |
+| Germany | [DPD](carrier:dpd-de), [GLS](carrier:gls-de), [DHL Paket / DHL Päckchen](carrier:dhl), [Hermes](carrier:hermes-de), DHL Express | France, Italy, Austria, Belgium, the Netherlands |
+| Italy | [Poste Italiane](carrier:poste-italiane), InPost, [BRT-fermopoint](carrier:brt), [GLS](carrier:gls-it) (with Item or Electronics Verification only), DHL Express | France, Spain, Portugal, Germany, Austria, Belgium, the Netherlands, Luxembourg |
+| Poland | [ORLEN Paczka](carrier:orlen-paczka), [DPD](carrier:dpd-pl), DPD Collect, InPost, [Poczta Polska / Pocztex](carrier:poczta-polska), [DHL](carrier:dhl-ecommerce-pl), DHL Express, GLS | Czechia, Slovakia, Hungary, Romania, Slovenia, mainland Croatia, Denmark, Sweden, mainland Finland, Lithuania, Latvia, Estonia |
 | US | [USPS](carrier:usps), [FedEx](carrier:fedex), [SpeedX](carrier:speedx) | UK |
 | Australia | [Australia Post](carrier:australia-post) | UK |
 
-In the UK, DPD goes from parcel shop to parcel shop and AnyVan collects large items from the seller's door; the others deliver to your home or a pick-up point. Vinted closed its Canadian site on 12 February 2024, and no other Vinted site ships to Canada.
+In the UK, DPD goes from parcel shop to parcel shop and AnyVan collects large items from the seller's door; the others deliver to your home or a pick-up point. On an order from abroad, the UK and Australian sites show any import VAT or GST at checkout, before you pay. Vinted closed its Canadian site on 12 February 2024, and no other Vinted site ships to Canada.
 
 Vinted also runs its own carrier, [Vinted Go](carrier:vinted-go), with lockers and parcel shops in France, Belgium, the Netherlands, Spain, Portugal and Finland. In the US, SpeedX parcels start at a Vinted Go Shop.
 
@@ -54,7 +59,7 @@ It's the carrier's own number, so it works on the carrier's site too. The shapes
 | Carrier | The number looks like |
 | --- | --- |
 | Evri | `H` or `T`, 5 letters or digits, then 10 digits |
-| InPost | `JD` or `JJD` + 16 digits, or `8YDR` + 9 digits |
+| InPost | In the UK, `JD` or `JJD` + 16 digits, or `8YDR` + 9 digits; in Poland and Italy, 24 digits |
 | DPD UK | 14 digits, often starting `1550` |
 | Royal Mail | 2 letters, 9 digits, `GB` |
 | Relay | `RELR` + 8 letters or digits |
@@ -65,7 +70,7 @@ It's the carrier's own number, so it works on the carrier's site too. The shapes
 | SpeedX | `SPX`, 3 letters, then 12 or 18 digits |
 | Australia Post | 21 or 23 characters with `000` before the last 6 digits |
 
-Two codes are not tracking numbers: the QR code the seller shows at the drop-off point, and the pick-up code the buyer gets when the parcel is ready. A Vinted Go number has 16 digits, made up here:
+For the carriers in France, Spain, Germany, Italy and Poland, each carrier's page linked in the first table shows its shapes. Two codes are not tracking numbers: the QR code the seller shows at the drop-off point, and the pick-up code the buyer gets when the parcel is ready. A Vinted Go number is usually `VGS` + 13 or 14 digits, or 16 digits, made up here:
 
 :::anatomy 17 1234567890123 8
 - 17 | Always `17` or `18`
@@ -94,11 +99,11 @@ Usually because a code became a label, or the parcel took a longer route:
 
 Each quiet spell has its own reason:
 
-- **Within 48 hours of drop-off.** Normal: Vinted says it "can take up to 48 hours" for tracking to appear.
+- **Within 48 hours of drop-off.** Normal: Vinted says it "can take up to 48 hours" for tracking to appear. Until the first scan, the carrier's site and Peek may not find the number at all.
 - **No scan after 5 business days.** The seller may not have sent it. Unless they confirmed sending or you agreed to an extension, Vinted cancels the order and refunds you.
 - **Stuck on the way.** If the parcel is late, Vinted tells you and shows a new delivery date in the conversation. If tracking is stuck both on Vinted and on the carrier's site, Vinted asks you to wait up to 25 business days from when the order was marked as shipped.
 - **Collected, but not `Delivered`.** Vinted's system doesn't always update at once: press **Track parcel**, then **Mark as received**.
-- **Custom shipping.** A parcel sent without Vinted's label can't be tracked on Vinted. The seller should send you the number.
+- **Not bought with Buy now.** Vinted only tracks items bought with **Buy now** and sent as the app instructs. For anything else, ask the seller for the carrier's tracking number.
 
 More on gaps: [why tracking stops updating](guide:tracking-not-updating).
 
@@ -135,16 +140,16 @@ Vinted's refund policy covers purchases made with **Buy now** from sellers who a
 
 ## Can I track a Vinted parcel outside the app?
 
-Yes: copy the number from **Track parcel** and paste it into [Peek](/). Vinted Go numbers and vintedgo.com tracking links are tracked automatically. Peek also works out most of the other carriers above from their numbers, though a shared shape such as 14 digits may need you to press "Change" and pick the carrier Vinted names. It doesn't know Drop2Shop or AnyVan: follow those in Vinted. It can't report a problem for you either; that stays in the conversation.
+Yes: copy the number from **Track parcel** and paste it into [Peek](/). A Vinted Go number starting `VGS` and a vintedgo.com tracking link name Vinted Go at once; for a 16-digit number, Peek asks Vinted Go and the other carriers that use that shape which one has it. Peek also works out most of the other carriers above from their numbers, though a shared shape such as 14 digits may need you to press "Change" and pick the carrier Vinted names. It doesn't know AnyVan: follow that one in Vinted. It can't report a problem for you either; that stays in the conversation.
 
 :::sources
-- [Vinted UK: Shipping on Vinted](https://www.vinted.co.uk/help/234) – UK carriers, label or code, cancelled with another label, US and Australia
+- [Vinted UK: Shipping on Vinted](https://www.vinted.co.uk/help/234) – UK carriers, label or code, cancelled with another label, US and Australia, import VAT at checkout
 - [Vinted UK: Delivery process](https://www.vinted.co.uk/help/444) – buyer picks the option, 5 working days, 48 hours
 - [Vinted UK: Shipping an item](https://www.vinted.co.uk/help/482) – label in the conversation and by email, nothing changes after the sale
 - [Vinted UK: Delivery time](https://www.vinted.co.uk/help/101) – 2 to 5 business days, verification up to 10, extension of 3 or 5 days
 - [Vinted UK: I can't send the item on time](https://www.vinted.co.uk/help/740) – cancelled the next business day, "I confirm I've sent the order"
 - [Vinted UK: Shipping label not received or not working](https://www.vinted.co.uk/help/154) – another drop-off point, cancel and order again, forwarding addresses
-- [Vinted UK: Tracking a parcel](https://www.vinted.co.uk/help/100) – Track parcel, 48 hours, Mark as received, custom shipping
+- [Vinted UK: Tracking a parcel](https://www.vinted.co.uk/help/100) – Track parcel, 48 hours, Mark as received, tracking only for Buy now orders
 - [Vinted UK: Parcel didn't arrive](https://www.vinted.co.uk/help/657) – delay notice, 25 business days, compensation
 - [Vinted UK: Collecting a parcel](https://www.vinted.co.uk/help/1601) – pick-up code, deadlines per carrier, refund, 2-day confirmation
 - [Vinted UK: Collecting your order](https://www.vinted.co.uk/help/738) – 2 calendar days, no code, other pick-up point, empty locker
@@ -160,12 +165,17 @@ Yes: copy the number from **Track parcel** and paste it into [Peek](/). Vinted G
 - [Vinted UK: Evri shipping](https://www.vinted.co.uk/help/706) – home or parcelshop
 - [Vinted UK: DHL Express shipping](https://www.vinted.co.uk/help/1606) – two delivery attempts, then a pick-up point
 - [Vinted UK: AnyVan shipping](https://www.vinted.co.uk/help/1523) – collection from the seller's address
-- [Vinted Ireland: Shipping on Vinted](https://www.vinted.ie/help/234) – Irish carriers, France
+- [Vinted Ireland: Shipping on Vinted](https://www.vinted.ie/help/234) – Irish carriers, France, Belgium and Luxembourg
 - [Vinted Ireland: Compensation for sellers when shipping with integrated labels](https://www.vinted.ie/help/1018) – caps set by each carrier, An Post €50
 - [Vinted Ireland: AnPost shipping](https://www.vinted.ie/help/1401) – PIN code by text
+- [Vinted France: Quels sont les différents modes d'envoi sur Vinted ?](https://www.vinted.fr/help/234) – French carriers, connected countries
+- [Vinted Spain: Enviar en Vinted](https://www.vinted.es/help/234) – Spanish carriers, connected countries
+- [Vinted Germany: Der Versand auf Vinted](https://www.vinted.de/help/234) – German carriers, connected countries
+- [Vinted Italy: Spedizione su Vinted](https://www.vinted.it/help/234) – Italian carriers, GLS with verification only, connected countries
+- [Vinted Poland: Wysyłka na Vinted](https://www.vinted.pl/help/234) – Polish carriers, connected countries
 - [Vinted US: Shipping on Vinted](https://www.vinted.com/help/234) – US carriers, UK
 - [Vinted US: SpeedX shipping](https://www.vinted.com/help/1549) – SpeedX from a Vinted Go Shop
-- [Vinted Australia: Shipping on Vinted](https://www.vinted.com.au/help/234) – Australia Post, UK
+- [Vinted Australia: Shipping on Vinted](https://www.vinted.com.au/help/234) – Australia Post, UK, GST at checkout
 - [Vinted Australia: Australia Post shipping](https://www.vinted.com.au/help/1644) – post office or locker, home or pick-up point
 - [Vinted Canada: What happened with the Vinted Canada platform?](https://www.vinted.ca/) – closed on 12 February 2024
 - [Vinted Go: Home](https://vintedgo.com/en?country=fr&region=europe) – Vinted Go's countries

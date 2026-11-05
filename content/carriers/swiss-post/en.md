@@ -80,7 +80,7 @@ As listed on post.ch on 11 October 2026:
 
 [Peek](/) recognises both shapes at once, with dots or spaces. A service.post.ch link ending in `/entry/search/` and the number works too; other post.ch links only when one of those numbers is inside. No postcode needed.
 
-Peek reads Swiss Post's English texts, whatever your language. It shows the status, each scan's facility on a map, the expected delivery day (with a time window when Swiss Post gives one), the weight, size, delivery time and destination country. While the parcel waits, it shows the branch or My Post 24 terminal's name and address, gone once delivered. It leaves out your name, address, signature and delivery instructions, and doesn't read the pickup deadline.
+Peek reads Swiss Post's English texts, whatever your language. It shows the status, each scan's facility on a map, the expected delivery day (with a time window when Swiss Post gives one) or range of days, the weight, size, delivery time and destination country. While the parcel waits, it shows the branch or My Post 24 terminal's name and address, gone once delivered. It leaves out your name, address, signature and delivery instructions, and doesn't read the pickup deadline.
 
 `Delivered` shows as Peek's own "Delivered". `Registered for collection` and `Deposited in the MyPost24 machine` show as ready for pickup.
 

@@ -69,7 +69,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "allegro-orders",
       "slug": "allegro-order-tracking",
-      "title": "Allegro order tracking: carriers, numbers and disputes"
+      "title": "Allegro order tracking: where's my parcel and who has it"
     },
     {
       "id": "temu-orders",

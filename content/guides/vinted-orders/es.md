@@ -134,7 +134,7 @@ La política de reembolso de Vinted cubre las compras hechas con «Comprar» a m
 
 ## ¿Se puede seguir un paquete de Vinted fuera de la app?
 
-Sí: copia el número desde «Rastrear paquete» y pégalo en [Peek](/). Los números de Vinted Go y los enlaces de vintedgo.com se siguen automáticamente. Peek también reconoce Correos, SEUR y DHL Express por su número; con una forma compartida, como 10 o 14 cifras, pulsa «Cambiar» y elige la empresa que indica Vinted. Un número de InPost de 8 cifras lo reconoce como Mondial Relay y pide además el código postal de entrega; si no aparece, síguelo en Vinted. No reconoce los números de GLS ni de Ontime: síguelos en Vinted. Los problemas se avisan en la conversación del pedido, no en Peek.
+Sí: copia el número desde «Rastrear paquete» y pégalo en [Peek](/). Los números de Vinted Go y los enlaces de vintedgo.com se siguen automáticamente. Peek también reconoce Correos, SEUR y DHL Express por su número; con una forma compartida, como 10 o 14 cifras, pulsa «Cambiar» y elige la empresa que indica Vinted. Un número de InPost de 8 cifras lo reconoce como Mondial Relay y pide además el código postal de entrega; si no aparece, síguelo en Vinted. Con GLS y con Ontime, si Peek no da con la empresa, pulsa «Cambiar» y búscala por su nombre; GLS pide además el código postal de entrega. Los problemas se avisan en la conversación del pedido, no en Peek.
 
 :::sources
 - [Vinted: Enviar en Vinted](https://www.vinted.es/help/234) – empresas, países conectados, etiqueta o código, cancelación

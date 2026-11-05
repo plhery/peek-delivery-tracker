@@ -82,7 +82,7 @@ Come risultavano su post.ch l'11 ottobre 2026:
 
 [Peek](/) riconosce subito entrambe le forme, anche con punti o spazi. Funziona anche un link di service.post.ch con `/entry/search/` seguito dal numero; gli altri link di post.ch solo se contengono uno di questi numeri. Non serve un NPA.
 
-Legge i testi inglesi della Posta, in qualunque lingua usi Peek. Mostra lo stato, il luogo di ogni scansione su una mappa, il giorno di consegna previsto (con una fascia oraria quando la Posta la dà), peso, dimensioni, ora di consegna e paese di destinazione. Mentre il pacco aspetta, mostra nome e indirizzo della filiale o del My Post 24, che spariscono dopo il ritiro. Lascia fuori nome e indirizzo del destinatario, firma e istruzioni di recapito, e non legge il termine di ritiro.
+Legge i testi inglesi della Posta, in qualunque lingua usi Peek. Mostra lo stato, il luogo di ogni scansione su una mappa, il giorno di consegna previsto (con una fascia oraria quando la Posta la dà) o l'intervallo di giorni, peso, dimensioni, ora di consegna e paese di destinazione. Mentre il pacco aspetta, mostra nome e indirizzo della filiale o del My Post 24, che spariscono dopo il ritiro. Lascia fuori nome e indirizzo del destinatario, firma e istruzioni di recapito, e non legge il termine di ritiro.
 
 Peek mostra `Delivered` con la sua etichetta «Consegnato» e segna `Registered for collection` e `Deposited in the MyPost24 machine` come «Pronto per il ritiro»; `Delivered to the mailbox/letter box` resta come lo scrive la Posta.
 

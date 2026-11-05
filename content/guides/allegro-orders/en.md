@@ -1,15 +1,15 @@
 ---
-title: Allegro order tracking: carriers, numbers and disputes
-description: Who delivers your Allegro order, where the tracking number is, how long the seller has to ship, what Smart! covers and what to do when a parcel never arrives.
+title: Allegro order tracking: where's my parcel and who has it
+description: Track an Allegro order in English: where the tracking number is, which carrier has it (Allegro One, InPost, DPD…) and what to do if it doesn't arrive.
 slug: allegro-order-tracking
 picture: A parcel in an open One Box locker, a phone showing an order, and Pip running to collect it.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-05
 ---
 
-Allegro shows your tracking number and carrier under "Moje przesyłki" (my parcels) and in the purchase details under "Moje zakupy" (my purchases). The carrier is the one in the delivery method you chose: Allegro One, InPost, DPD, DHL, ORLEN Paczka or Poczta Polska. If the parcel doesn't come, write to the seller, then report a "problem z zakupem" (purchase problem), and Allegro's buyer protection can refund you. Allegro's terms name four marketplaces, allegro.pl, allegro.cz, allegro.sk and allegro.hu, so there's no Allegro site for the US, UK, Ireland, Canada or Australia.
+To see where your Allegro order is, open **My Parcels** (Moje przesyłki), or the order in **Purchase History** (Moje zakupy): Allegro shows the carrier and the tracking number once the seller adds it, and emails you both. Paste the number into [Peek](/), which shows Allegro One's tracking in English, or open it on the carrier's site. The carrier is the one in the delivery method you chose: Allegro One, InPost, DPD, DHL, ORLEN Paczka or Poczta Polska. If the parcel doesn't come, write to the seller, then report a purchase problem, and Allegro Buyer Protection can refund you. Allegro's terms name four marketplaces, allegro.pl, allegro.cz, allegro.sk and allegro.hu, so there's no Allegro site for the US, UK, Ireland, Canada or Australia.
 
-Allegro has an English version. This guide gives Allegro's labels in Polish, with a translation.
+Allegro is available in English: in your account, under **Location settings**, change the language. This guide gives Allegro's labels in English with the Polish in brackets, or in Polish with a translation.
 
 ## Which carrier delivers my Allegro order?
 
@@ -39,8 +39,8 @@ With Allegro Delivery, you get an email, SMS or app notification when the parcel
 
 In four places:
 
-- **Moje przesyłki.** Every parcel from the moment it's waiting to be sent until you collect it, with the expected date once it's on its way.
-- **Moje zakupy.** The purchase details show the tracking number, once the seller adds it, and its status.
+- **My Parcels (Moje przesyłki).** Every parcel from the moment it's waiting to be sent until you collect it, with the expected date once it's on its way.
+- **Purchase History (Moje zakupy).** The order details show the tracking number, once the seller adds it, and its status.
 - **The email** Allegro sends once the number is added, with the carrier's name, the number and a tracking link.
 - **The Allegro app.**
 
@@ -66,12 +66,12 @@ Other shapes: [identify a carrier by its number](guide:tracking-number-formats).
 
 Every offer shows an expected delivery time: the seller's dispatch time, from payment (or from the order, with cash on delivery) until the courier scans the parcel, plus the carrier's transit time. Allegro bases the dispatch time on the offer and on how fast the seller has actually shipped before. It's an estimate, not a guarantee: it can't allow for chance events such as bad weather or road accidents, or for unplanned delays at the seller or the carrier. The usual reasons for silence:
 
-- **Not sent yet.** The parcel shows in "Moje przesyłki" before it's sent, but Allegro counts it as sent only once the carrier's status confirms it.
+- **Not sent yet.** The parcel shows in My Parcels before it's sent, but Allegro counts it as sent only once the carrier's status confirms it.
 - **Payment.** The dispatch time runs from payment, so check that yours went through.
 - **Several parcels.** The seller can send one order as several shipments, each with its own number.
 - **A missed delivery.** Contact the carrier.
 
-If you buy from a personal account and don't ask for a company invoice, you can cancel an order from a seller with a business account in "Moje zakupy" until the seller adds a tracking number or changes the order's status, to "w realizacji" (being processed) for example, but no later than 3 days after buying. When waiting is still normal: [tracking not updating](guide:tracking-not-updating).
+If you buy from a personal account and don't ask for a company invoice, you can cancel an order from a seller with a business account in Purchase History until the seller adds a tracking number or changes the order's status, to "w realizacji" (being processed) for example, but no later than 3 days after buying. When waiting is still normal: [tracking not updating](guide:tracking-not-updating).
 
 ## Allegro Smart! and delivery times
 
@@ -86,21 +86,21 @@ Delivery is free on offers marked Smart!, when the order's delivery cost is no m
 
 Cash on delivery adds PLN 4.99. At Magazyn Allegro, the threshold counts the whole combined order.
 
-Allegro shows the expected date as, for example, "dostawa jutro" (delivery tomorrow) or "dostawa pojutrze" (the day after), and for offers that take more than 3 days to ship as a date range, a date or a number of days. In Allegro Delivery, Allegro One Punkt and One Box deliver the next day, and selected sellers also offer same-day Allegro One Box delivery. With most next-day methods, a Magazyn Allegro order placed and paid by 20:00 on a working day goes to the courier the same day.
+Allegro shows the expected date as, for example, "delivery tomorrow" or "delivery the day after tomorrow" (dostawa jutro, dostawa pojutrze), and for offers that take more than 3 days to ship as a date range, a date or a number of days. In Allegro Delivery, Allegro One Punkt and One Box deliver the next day, and selected sellers also offer same-day Allegro One Box delivery. With most next-day methods, a Magazyn Allegro order placed and paid by 20:00 on a working day goes to the courier the same day.
 
 ## Allegro parcel not arrived or marked delivered: what to do
 
 Past the date and no parcel? Do this:
 
 :::steps
-- Check the tracking | Open "Moje przesyłki" and see whether the parcel has been sent. In "Moje zakupy", check the address and payment too.
+- Check the tracking | Open My Parcels and see whether the parcel has been sent. In Purchase History, check the address and payment too.
 - Write to the seller | Ask for the tracking number or proof of sending. The seller has 24 hours to reply, not counting weekends and public holidays.
 - Report a purchase problem | Say which item it's about, how many units and why. You can report it from an hour after paying. The seller again has 24 hours to answer your first message, not counting weekends and public holidays, and Allegro joins the conversation only if you ask. On Allegro Lokalnie and with sellers who use Magazyn Allegro, you still open a Dyskusja (Discussion), and a Dyskusja opened before 28 October 2026 carries on as before.
-- Allegro reviews it | For a parcel problem (a delay, a lost parcel or the item missing from the parcel), the seller has 7 days to resolve it, and 14 days for anything else. If Allegro then can't see that it's resolved, it asks you, and if you say the problem is still there, it suggests a claim under its buyer protection.
+- Allegro reviews it | For a parcel problem (a delay, a lost parcel or the item missing from the parcel), the seller has 7 days to resolve it, and 14 days for anything else. If Allegro then can't see that it's resolved, it asks you, and if you say the problem is still there, it suggests a claim under Allegro Buyer Protection.
 - Decision | Allegro decides within 30 working days of receiving a complete claim.
 :::
 
-Allegro Ochrona Kupujących, the buyer protection, covers Allegro and Allegro Lokalnie purchases up to PLN 20,000, but no more than the item's price, and delivery costs only if you paid through Allegro. For a parcel that didn't arrive you can claim after 7 days at the earliest (14 for other problems), and no later than 730 days after buying. It doesn't cover items handed over in person and paid for on collection, or goods destroyed or lost in transit through the carrier's fault. If the seller refunds you as well, you pay Allegro back within 7 days.
+Allegro Buyer Protection (Allegro Ochrona Kupujących) covers Allegro and Allegro Lokalnie purchases up to PLN 20,000, but no more than the item's price, and delivery costs only if you paid through Allegro. For a parcel that didn't arrive you can claim after 7 days at the earliest (14 for other problems), and no later than 730 days after buying. It doesn't cover items handed over in person and paid for on collection, or goods destroyed or lost in transit through the carrier's fault. If the seller refunds you as well, you pay Allegro back within 7 days.
 
 Marked collected but not with you? Check whether someone else took it: someone you live with, a neighbour, your office reception. If the parcel turns up while your report is open, Allegro closes it automatically; if the problem comes back, you can reopen it up to 2 years after buying.
 
@@ -108,11 +108,11 @@ With Allegro Delivery you can also complain to Allegro online about the delivery
 
 ## Buying on Allegro from abroad
 
-There's no Allegro for the US, UK, Ireland, Canada or Australia, but you can use Allegro in English. Under Lokalizacja (location) in your account, you set the language, currency and delivery country. With a delivery country set, you see only offers from sellers who ship there, and the currency sets the prices and payment methods you see.
+There's no Allegro for the US, UK, Ireland, Canada or Australia, but you can use Allegro in English. Under **Location settings** (Lokalizacja) in your account, you set the language, currency and delivery country. With a delivery country set, you see only offers from sellers who ship there, and the currency sets the prices and payment methods you see.
 
 These routes leave Poland, each only if the seller offers it:
 
-- **23 EU countries**: Allegro Kurier DPD and Allegro Kurier DHL, in 2 to 7 working days depending on the country and carrier.
+- **23 EU countries**, all but France, Cyprus and Malta: Allegro Kurier DPD and Allegro Kurier DHL, in 2 to 7 working days depending on the country and carrier. Some islands and mountain areas are left out.
 - **Ireland**: about 4 working days with either.
 - **Czechia, Slovakia and Hungary**: [Packeta](carrier:packeta) points and lockers, to Czechia in 2 to 3 working days. These offers are also on allegro.cz, allegro.sk and allegro.hu.
 - **Ukraine**: a pilot, with selected sellers only. [Nova Post](carrier:nova-poshta) delivers, and any duty and import VAT are, as a rule, paid by the buyer.
@@ -125,7 +125,7 @@ As a consumer, you have at least 14 days from the day after delivery to tell the
 
 ## Can I track an Allegro parcel in Peek?
 
-Yes, with the tracking number. Copy it from "Moje przesyłki" or the purchase details and paste it into [Peek](/). Peek recognises Allegro One numbers and tracks them automatically, as well as an allegro.pl tracking link with the number in it. It also knows DPD Poland and Pocztex numbers by their shape. For a shape several carriers share, such as InPost's 24 digits, press "Change" and pick the carrier the purchase details name.
+Yes, with the tracking number. Copy it from My Parcels or the order in Purchase History and paste it into [Peek](/). Peek recognises Allegro One numbers and tracks them automatically, as well as an allegro.pl tracking link with the number in it, and shows Allegro's tracking wording in English unless you use Peek in Polish. It also knows DPD Poland and Pocztex numbers by their shape. For a shape several carriers share, such as InPost's 24 digits, press "Change" and pick the carrier the purchase details name.
 
 - **Several parcels, several numbers.** Add each one: Peek tracks each parcel separately.
 - **An order or offer number isn't enough.** Peek needs the tracking number.
@@ -141,9 +141,9 @@ Peek shows what the carrier publishes. A purchase problem, a complaint, buyer pr
 - [Allegro: Allegro Kurier24 InPost and Allegro miniKurier24 InPost — information for sellers](https://help.allegro.com/en/sell/a/allegro-kurier24-inpost-and-allegro-minikurier24-inpost-information-for-sellers-8dvv7BzV5Iv) – InPost couriers, free returns
 - [Allegro: Allegro Smart! on allegro.pl — information for sellers with a business account](https://help.allegro.com/en/sell/a/allegro-smart-on-allegro-pl-information-for-sellers-with-a-business-account-LR8j8Y26GTR) – Smart! methods including InPost lockers and Pocztex, free delivery and returns, PLN 100, cash on delivery
 - [Allegro: We changed the Allegro Smart! Terms & Conditions for buyers — information for sellers](https://help.allegro.com/en/sell/a/we-changed-the-allegro-smart-terms-conditions-for-buyers-wwkzRYxRdio) – PLN 49.90 from one seller, PLN 45 and 65 until the billing period ends
-- [Allegro: How to correctly dispatch parcels with orders — a guide for sellers](https://help.allegro.com/en/sell/a/how-to-correctly-dispatch-parcels-with-orders-a-guide-for-sellers-GRv326wwXF1) – where buyers see the status, numbers added by the seller, sent only on the carrier's status, carrier sites
+- [Allegro: How to correctly dispatch parcels with orders — a guide for sellers](https://help.allegro.com/en/sell/a/how-to-correctly-dispatch-parcels-with-orders-a-guide-for-sellers-GRv326wwXF1) – where buyers see the status (Purchase History, My Parcels, app, email), numbers added by the seller, sent only on the carrier's status, carrier sites
 - [Allegro: How to dispatch several parcels for one order — information for sellers](https://help.allegro.com/en/sell/a/how-to-dispatch-several-parcels-for-one-order-LR8DB0Xg0U0) – several shipments, each with its own number
-- [Allegro: Estimated delivery time — information for sellers](https://help.allegro.com/en/sell/a/estimated-delivery-time-zlKxReRdPUb) – dispatch and transit time, not a guarantee, how the date is shown
+- [Allegro: Estimated delivery time — information for sellers](https://help.allegro.com/en/sell/a/estimated-delivery-time-zlKxReRdPUb) – dispatch and transit time, not a guarantee, how the date is shown ("delivery tomorrow")
 - [Allegro: Canceling orders ― information for sellers](https://help.allegro.com/en/sell/a/canceling-orders-information-for-sellers-oAd1mEk66uZ) – who can cancel and until when, 3 days
 - [Allegro: What combined orders in One Fulfillment by Allegro are all about — information for sellers](https://help.allegro.com/en/sell/a/what-combined-orders-in-one-fulfillment-by-allegro-are-all-about-g0lqGbkDXfw) – one parcel from several sellers, Smart! threshold
 - [Allegro: How we process orders in One Fulfillment by Allegro — information for sellers](https://help.allegro.com/en/sell/a/how-we-process-orders-in-one-fulfillment-by-allegro-d2WoKw11DCG) – orders paid by 20:00 handed to the courier the same day
@@ -152,10 +152,10 @@ Peek shows what the carrier publishes. A purchase problem, a complaint, buyer pr
 - [Allegro: What Allegro Buyer Protection is — information for sellers](https://help.allegro.com/en/sell/a/what-allegro-buyer-protection-is-and-what-to-do-when-my-customer-applies-for-compensation-7G6E75KlPcM) – Allegro and Allegro Lokalnie
 - [Allegro: Allegro DPD Courier — dispatch abroad from Poland — information for sellers](https://help.allegro.com/en/sell/a/allegro-dpd-courier-dispatch-abroad-from-poland-information-for-sellers-2Yb2dvzKWCL) – 23 EU countries, no Smart!, returns at the buyer's cost
 - [Allegro: Allegro DHL Courier with dispatch abroad from Poland — information for sellers](https://help.allegro.com/en/sell/a/allegro-dhl-courier-with-dispatch-abroad-from-poland-d2Wv3wKYZIv) – 23 EU countries, no Smart!, returns at the buyer's cost
-- [Allegro: How to ship abroad with Allegro — information for sellers](https://help.allegro.com/en/sell/a/how-to-ship-abroad-with-allegro-g0lqGDMDrT4) – EU transit times, Ireland, Packeta to Czechia
+- [Allegro: How to ship abroad with Allegro — information for sellers](https://help.allegro.com/en/sell/a/how-to-ship-abroad-with-allegro-g0lqGDMDrT4) – the 23 countries (not France, Cyprus or Malta), islands and mountain postcodes left out, EU transit times, Ireland, Packeta to Czechia
 - [Allegro: Allegro Packeta delivery options — information for sellers](https://help.allegro.com/en/sell/c/allegro-packeta-delivery-options) – Packeta to Czechia, Slovakia and Hungary, allegro.cz, .sk, .hu
 - [Allegro: Program pilotażowy Allegro International Ukraina – informacje dla sprzedających](https://help.allegro.com/pl/sell/a/program-pilotazowy-allegro-international-ukraina-informacje-dla-sprzedajacych-q0bdxDbjxHd) – selected sellers, Nova Post, duty and VAT
-- [Allegro: How to change language, currency, and country of delivery on Allegro](https://help.allegro.com/en/sell/a/how-to-change-language-currency-and-country-of-delivery-on-allegro-O3PwMxodWfY) – English, Lokalizacja, offers from sellers who ship to you
+- [Allegro: How to change language, currency, and country of delivery on Allegro](https://help.allegro.com/en/sell/a/how-to-change-language-currency-and-country-of-delivery-on-allegro-O3PwMxodWfY) – English, Location settings, offers from sellers who ship to you
 - [Allegro: The Allegro returns policy — information for sellers](https://help.allegro.com/en/sell/a/the-allegro-returns-policy-information-for-sellers-1nPyxjWmZTl) – at least 14 days, 14 days to send, free returns
 - [UOKiK: Odstąpienie od umowy – pytania i odpowiedzi](https://prawakonsumenta.uokik.gov.pl/pytania-i-odpowiedzi/odstapienie-od-umowy/) – 14 days from the day after delivery
 - [Your Europe: Returns and the right of withdrawal](https://europa.eu/youreurope/citizens/consumers/shopping/returns/index_en.htm) – no right of withdrawal when buying from a private individual

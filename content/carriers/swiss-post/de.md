@@ -89,7 +89,7 @@ Eine E-Mail-Adresse für Empfänger steht auf den Kontaktseiten nicht.
 
 [Peek](/) erkennt beide Nummernformen sofort, auch mit Punkten oder Leerzeichen. Ein Link von service.post.ch, der auf `/entry/search/` und die Nummer endet, funktioniert ebenso. Andere post.ch-Links nur, wenn eine der beiden Nummern darin steht. Eine Postleitzahl braucht es nicht.
 
-Es liest die englischen Texte der Post, egal in welcher Sprache du die Seite nutzt, und zeigt den Status, die Stelle jedes Scans auf der Karte, die voraussichtliche Zustellung (den Tag, mit Zeitfenster, wenn die Post eines nennt), Gewicht, Maße, Zeitpunkt der Zustellung und Zielland. Wartet das Paket auf dich, siehst du Namen und Adresse der Filiale oder des My Post 24-Automaten, bis es abgeholt ist. Deinen Namen, deine Adresse, die Unterschrift und Zustellanweisungen zeigt es nicht, und die Abholfrist liest es nicht.
+Es liest die englischen Texte der Post, egal in welcher Sprache du die Seite nutzt, und zeigt den Status, die Stelle jedes Scans auf der Karte, die voraussichtliche Zustellung (den Tag, mit Zeitfenster, wenn die Post eines nennt, oder mehrere Tage, wenn sie keinen einzelnen nennt), Gewicht, Maße, Zeitpunkt der Zustellung und Zielland. Wartet das Paket auf dich, siehst du Namen und Adresse der Filiale oder des My Post 24-Automaten, bis es abgeholt ist. Deinen Namen, deine Adresse, die Unterschrift und Zustellanweisungen zeigt es nicht, und die Abholfrist liest es nicht.
 
 `Delivered` erscheint als „Zugestellt“, `Delivered to the mailbox/letter box` so, wie die Post es schreibt. Bei `Registered for collection` und `Deposited in the MyPost24 machine` steht das Paket auf „Abholbereit“, die Zeile selbst bleibt englisch.
 

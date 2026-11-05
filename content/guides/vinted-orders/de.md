@@ -127,7 +127,7 @@ Vinteds Rückerstattungsrichtlinien gelten für Käufe über den „Kaufen“-Bu
 
 ## Kann ich ein Vinted-Paket außerhalb der App verfolgen?
 
-Ja: Kopiere die Nummer unter „Sendung verfolgen“ und füge sie in [Peek](/) ein. Peek erkennt die Versanddienste an ihrer Nummer; bei einer geteilten Form wie 14 Ziffern tippe auf „Ändern“ und wähle den Versanddienst, den Vinted nennt. Vinted-Go-Nummern und vintedgo.com-Links verfolgt Peek automatisch. Die österreichischen Netze von GLS, Hermes und DPD kennt Peek nicht eigens; diese Sendungen verfolgst du am besten in Vinted. Ein Problem melden kann Peek nicht für dich, das geht nur im Chat.
+Ja: Kopiere die Nummer unter „Sendung verfolgen“ und füge sie in [Peek](/) ein. Peek erkennt die Versanddienste an ihrer Nummer; bei einer geteilten Form wie 14 Ziffern tippe auf „Ändern“ und wähle den Versanddienst, den Vinted nennt. Vinted-Go-Nummern und vintedgo.com-Links verfolgt Peek automatisch. Auch GLS, Hermes und DPD in Österreich verfolgt Peek: Erkennt es den Versanddienst nicht an der Nummer, tippe auf „Ändern“ und wähle GLS Austria, Hermes Austria oder DPD Austria. Ein Problem melden kann Peek nicht für dich, das geht nur im Chat.
 
 :::sources
 - [Vinted: Der Versand auf Vinted](https://www.vinted.de/help/234) – Versanddienste in Deutschland, verbundene Länder, Versandschein oder Code, Stornierung

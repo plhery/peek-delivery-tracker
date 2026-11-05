@@ -1,13 +1,13 @@
 ---
 title: Shein order tracking: carriers, statuses and delays
-description: Who delivers Shein orders in the US, UK, Ireland, Canada and Australia, where the tracking number is, what each status means and what to do if a parcel never comes.
+description: Where's my Shein order? Who delivers it in the UK, Europe, the US, Canada and Australia, where the tracking number is and what each status means.
 slug: shein-order-tracking
 picture: A soft mailer bag with a size tag, a van, and Pip trying on a scarf.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-05
 ---
 
-Shein emails you a tracking number as each package ships, and My orders → Track shows the same number, the carrier and the latest status. Most orders fly from China, clear customs and reach you with a local post or courier, so tracking goes quiet at each handover. Each Shein site (US, UK, Canada, Australia, and the European one for Ireland) sets its own delivery times.
+To see where your Shein order is, open My orders, pick the order and press **Track**: it shows each package's carrier, tracking number and latest status, and Shein also emails the number as each package ships. Paste that tracking number, not the order number, into [Peek](/) or the carrier's site. Most orders fly from China, clear customs and reach you with a local post or courier, so tracking goes quiet at each handover. Each Shein site (US, UK, Canada, Australia, and the European one for Ireland) sets its own delivery times.
 
 ## Which carrier delivers Shein parcels in your country?
 
@@ -18,10 +18,15 @@ Shein picks it, and you can't swap it: "The system assigns the carrier based on 
 | US | None by name: look on the Track page |
 | UK | [Evri](carrier:evri), [InPost](carrier:inpost), [Royal Mail](carrier:royal-mail), and Yodel for some parcels |
 | Ireland | [An Post](carrier:an-post), GLS, [YunExpress](carrier:yunexpress) |
+| France | [La Poste](carrier:la-poste), [Mondial Relay](carrier:mondial-relay), [Colis Privé](carrier:colis-prive), [Chronopost](carrier:chronopost), [Paack](carrier:paack), [GOFO](carrier:gofo-fr), DHL, GLS |
+| Spain | [Correos](carrier:correos-spain), and Paack, which may ask for a 6-digit code sent to your phone at the door |
+| Germany | [Hermes](carrier:hermes-de), [DHL Paket](carrier:dhl), Leapro |
+| Italy | [Poste Italiane](carrier:poste-italiane), [GLS](carrier:gls-it), [BRT](carrier:brt), InPost, Paack |
+| Poland | InPost lockers (Paczkomat 24/7); for standard and economy delivery, look on the Track page |
 | Canada | [Canada Post](carrier:canada-post), [UniUni](carrier:uniuni), [FedEx](carrier:fedex), DHL, Neighbour Express |
 | Australia | [Australia Post](carrier:australia-post), [Aramex](carrier:aramex-au), iMile, HOMEXPRESS |
 
-More on who delivers parcels from China: [tracking a parcel from China](guide:tracking-from-china).
+That 6-digit code, like a locker or pick-up code, is not a tracking number. More on who delivers parcels from China: [tracking a parcel from China](guide:tracking-from-china).
 
 :::journey
 - warehouse | Shein | Packed and shipped: the email with the tracking number goes out
@@ -90,7 +95,7 @@ Customs rarely costs extra:
 - **Canada:** "all orders to Canada will be delivered duty paid (DDP)", says Shein.
 - **Australia:** a package over AUD 1,000 may owe a tariff, and you pay it.
 
-What the EU's €3 per item and the €2 handling fee due since 1 November 2026 mean for Ireland, and how to spot a fake fee text: [parcels held at customs](guide:customs).
+What the EU's €3 per item and the €2 handling fee due since 1 November 2026 mean for Ireland and the rest of the EU, and how to spot a fake fee text: [parcels held at customs](guide:customs).
 
 ## Shein package not received or marked delivered: what to do
 
@@ -114,7 +119,7 @@ A return travels under its own tracking number. Shein keeps the label under My O
 
 Yes, with the carrier's number. Copy it from the shipping email or from Track and paste it into [Peek](/). Peek works out most carriers from the number alone. A shape several carriers share, such as 12 digits, may need you to press "Change" and pick the carrier the Track page names. When the first carrier names the partner taking over, Peek keeps the first carrier's history and follows the partner once its own tracking shows fresh progress.
 
-Each package has its own number, so add each one. The Shein order number isn't a tracking number, and Peek can't track it.
+Each package has its own number, so add each one. The Shein order number isn't a tracking number: paste one that starts `GSU`, `GSO` or `GSH` and has 12 more letters or digits into Peek, and it says "That looks like a Shein order number" and sends you back to Track for the carrier's number.
 
 Peek shows what the carrier publishes. A refund request, On-Time Delivery points or a question to customer service stay in your Shein account.
 
@@ -154,6 +159,12 @@ Peek shows what the carrier publishes. A refund request, On-Time Delivery points
 - [Shein Europe: What is "On-Time Delivery Guarantee"?](https://eur.shein.com/faq/detail?id=138125) – 500 points, Express options
 - [Shein Europe: On-Time Delivery Service Terms and Conditions](https://eur.shein.com/on-time-delivery-terms-and-conditions-a-3491.html) – Ireland: 500 points, all delivery options, check the box at checkout
 - [Shein Europe: Does the small parcel fee apply to SHEIN orders?](https://eur.shein.com/faq/detail?id=181570) – paid once at checkout
+- [Shein France: Comment prendre contact avec la compagnie de livraison ?](https://fr.shein.com/faq/detail?id=32787) – French carriers
+- [Shein Spain: ¿Por qué necesito un código de verificación para recibir el paquete de Paack?](https://es.shein.com/faq/detail?id=150105) – Paack, 6-digit code
+- [Shein Spain: ¿Por qué me devolvieron mi paquete?](https://es.shein.com/faq/detail?id=56072) – Correos
+- [Shein Germany: Wie kann ich das Versandunternehmen kontaktieren?](https://de.shein.com/faq/detail?id=110460) – Hermes, DHL Paket, Leapro
+- [Shein Italy: Consegnato ma non ricevuto](https://it.shein.com/faq/detail?id=48422) – Poste Italiane, GLS, BRT, InPost, Paack
+- [Shein Poland: Czy oferujecie przyspieszone przesyłki?](https://pl.shein.com/faq/detail?id=41177) – InPost Paczkomat 24/7, standard, economy
 - [Shein Canada: Shipping info](https://ca.shein.com/Shipping-Info-a-280.html) – window of dates, 45/30 days, CAD 5 credit
 - [Shein Canada: My order is marked as delivered, but I haven't received it](https://ca.shein.com/faq/detail?id=2362) – Canadian carriers, Parcel Delivered, Not Received
 - [Shein Canada: What is On-Time Delivery Guarantee?](https://ca.shein.com/faq/detail?id=147530) – Standard and Express

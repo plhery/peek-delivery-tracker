@@ -147,7 +147,7 @@ Polityka zwrotów Vinted obejmuje zakupy przez „Kup teraz”: zamówienie niew
 
 ## Jak śledzić paczkę z Vinted poza aplikacją?
 
-Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpoznaje po numerze ORLEN Paczkę, InPost, DPD, Pocztę Polską, DHL i DHL Express. Kształt wspólny dla kilku firm, jak 11 albo 14 cyfr, może wymagać naciśnięcia „Zmień” i wybrania przewoźnika, którego podaje Vinted. Numery Vinted Go i linki do śledzenia z vintedgo.com Peek śledzi automatycznie. GLS w Polsce Peek nie zna: tę paczkę śledź na Vinted. Problemu Peek za Ciebie nie zgłosi: to zostaje w oknie rozmowy.
+Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpoznaje po numerze ORLEN Paczkę, InPost, DPD, Pocztę Polską, DHL i DHL Express. Kształt wspólny dla kilku firm, jak 11 albo 14 cyfr, może wymagać naciśnięcia „Zmień” i wybrania przewoźnika, którego podaje Vinted. Numery Vinted Go i linki do śledzenia z vintedgo.com Peek śledzi automatycznie. Paczki GLS w Polsce Peek też śledzi: jeśli nie rozpozna przewoźnika po numerze, naciśnij „Zmień” i wybierz GLS Poland. Problemu Peek za Ciebie nie zgłosi: to zostaje w oknie rozmowy.
 
 :::sources
 - [Vinted: Wysyłka na Vinted](https://www.vinted.pl/help/234) – przewoźnicy, 12 krajów, etykieta albo kod, anulowanie, przewoźnicy domyślni

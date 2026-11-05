@@ -39,7 +39,7 @@ Celui que l'acheteur a choisi. Chaque pays a sa liste, et le vendeur peut désac
 | Pays | Transporteurs sur Vinted | Commandes possibles avec |
 | --- | --- | --- |
 | France | [Mondial Relay](carrier:mondial-relay), [Colissimo](carrier:la-poste), [Chronopost](carrier:chronopost), [Vinted Go](carrier:vinted-go), [DHL Express](carrier:dhl-express) | Allemagne, Autriche, Belgique, Espagne, Irlande, Italie, Luxembourg, Pays-Bas, Portugal |
-| Belgique | Mondial Relay, Vinted Go, DHL ServicePoint ou à domicile, Shop2Shop by Chronopost, DPD, [bpost](carrier:bpost), DHL Express | Allemagne, Espagne, France, Italie, Luxembourg, Pays-Bas, Portugal |
+| Belgique | Mondial Relay, Vinted Go, DHL ServicePoint ou à domicile, Shop2Shop by Chronopost, DPD, [bpost](carrier:bpost), DHL Express | Allemagne, Espagne, France, Irlande, Italie, Luxembourg, Pays-Bas, Portugal |
 
 Vinted Go est le transporteur de Vinted, avec ses consignes et points relais en France, en Belgique, aux Pays-Bas, en Espagne, au Portugal et en Finlande.
 

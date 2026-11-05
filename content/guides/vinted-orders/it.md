@@ -58,7 +58,7 @@ L'Italia è collegata con Francia, Belgio, Paesi Bassi, Spagna, Lussemburgo, Por
 | GLS Italia | 2 lettere e 9 cifre, oppure 1 lettera e 10 cifre |
 | DHL Express | 10 cifre |
 
-Due codici non sono codici di tracciamento: il QR che chi vende mostra al punto di consegna e il codice di ritiro che riceve chi compra. Nei paesi in cui lavora, Vinted Go usa codici di 16 cifre. Eccone uno inventato:
+Due codici non sono codici di tracciamento: il QR che chi vende mostra al punto di consegna e il codice di ritiro che riceve chi compra. Nei paesi in cui lavora, Vinted Go usa di solito codici con `VGS` e 13 o 14 cifre, oppure codici di 16 cifre. Eccone uno di 16 cifre, inventato:
 
 :::anatomy 17 1234567890123 8
 - 17 | Sempre `17` o `18`

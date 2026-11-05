@@ -25,17 +25,17 @@ All-digit numbers of 16 or 23 digits are never Correos's: they may be Correos Ex
 
 ## What Correos tracking statuses mean
 
-Correos's tracker is in Spanish by default, with an English version. The Spanish lines below are also what Peek shows, in the order a parcel meets them; Correos's English wording follows each one.
+Correos's tracker is in Spanish by default, with an English version. The Spanish statuses below come in the order a parcel meets them, each with Correos's English wording.
 
 | Correos status | What it means for you |
 | --- | --- |
-| `Prerregistrado` | `Pre-registered`: the sender has registered the parcel, but hasn't handed it to Correos yet. |
+| `Pre-admisión` | Usually the first status: the sender has registered the parcel, but hasn't handed it to Correos yet. In English, its line reads `Pre-registered`. |
 | `Admitido.` | `Accepted`: Correos has the parcel at the point of origin. |
 | `En tránsito` | `In transit`: on its way to the unit that will deliver it. |
 | `Inicio de tramitación aduanera` | `Customs procedures starting`: an imported parcel has reached Correos's facilities and customs clearance begins. |
 | `Alta en la unidad de reparto` | `Registration in the delivery unit`: at the local delivery office, delivered as soon as possible. |
 | `En reparto` | `In delivery`: the postman is on the round with it. |
-| `Intento de entrega. Ausente` | `Delivery attempt. Absent.`: nobody was home and a notice was left. |
+| `Realizado intento de entrega` | The attempt failed, for example because nobody was home, and a notice was left. In English, an attempt with nobody home can read `Delivery attempt. Absent.` |
 | `A disposición del destinatario` | `At recipient’s disposal`: waiting for you at the post office (or the Citypaq you chose). |
 | `Entregado` | `Delivered`: handed to you or an authorised person, at home or at the post office. |
 | `Entregado al remitente` | `Delivered to the sender`: returned. It was not delivered to you. |
@@ -77,7 +77,7 @@ Correos's channels, as read on 13 October 2026, are the same for English speaker
 
 [Peek](/) names Correos at once for 23-character parcel codes, 16-character shipment codes, `PR` numbers and postal numbers ending ES. A code whose check letter fails names no carrier: check it for a typo, or pick Correos with "Change". For a shipment code with one parcel, Peek follows that parcel; with several, track each parcel's 23-character code. correos.es links with `tracking-number=` work, and so do older links with `numero=`.
 
-Peek reads Correos in Spanish, so statuses stay Spanish. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads every time on Madrid's clock, so a scan in the Canary Islands can show an hour early.
+Peek shows Correos's statuses in Correos's words: in Spanish, Portuguese or French if you use Peek in one of those, in English otherwise. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads every time on Madrid's clock, so a scan in the Canary Islands can show an hour early.
 
 A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks every 10 minutes (every 2 once out for delivery) and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't pay customs or change a delivery.
 

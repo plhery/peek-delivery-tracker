@@ -54,12 +54,12 @@ C'est le numéro du transporteur : il marche aussi sur son site. Les formes que 
 | Mondial Relay | 8, 10 ou 12 chiffres, ou 26 chiffres |
 | Colissimo | 1 chiffre, 1 lettre, 11 chiffres |
 | Chronopost | 2 lettres, 9 chiffres, 2 lettres |
-| Vinted Go | 16 chiffres qui commencent par 17 ou 18 |
+| Vinted Go | Le plus souvent `VGS` et 13 ou 14 chiffres, ou 16 chiffres qui commencent par 17 ou 18 |
 | DHL Express | 10 chiffres |
 | bpost | 24 chiffres, ou 2 lettres, 9 chiffres et `BE` |
 | DPD Belgique | 14 chiffres |
 
-Deux codes ne sont pas des numéros de suivi : le code que le vendeur présente au point de dépôt, et le code de retrait que reçoit l'acheteur quand le colis est prêt. Un numéro Vinted Go, inventé ici :
+Deux codes ne sont pas des numéros de suivi : le code que le vendeur présente au point de dépôt, et le code de retrait que reçoit l'acheteur quand le colis est prêt. Un numéro Vinted Go à 16 chiffres, inventé ici :
 
 :::anatomy 17 1234567890123 8
 - 17 | Toujours `17` ou `18`

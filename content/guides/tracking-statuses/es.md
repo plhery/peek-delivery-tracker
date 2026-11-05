@@ -30,7 +30,7 @@ Las mismas fases, con otras palabras:
 
 | En Peek | Correos | GLS | MRW |
 | --- | --- | --- | --- |
-| Etiqueta creada | `Pre-admisión` o `Prerregistrado` | `Etiqueta creada` | `Pendiente de recoger` |
+| Etiqueta creada | `Pre-admisión` | `Etiqueta creada` | `Pendiente de recoger` |
 | Admitido por el transportista | `Admitido` | `Envío recogido por GLS` | `Envío recogido en origen` |
 | En tránsito | `En tránsito`, `Clasificado`, `Alta en la unidad de reparto` | `En tránsito` | `En tránsito`, `Pendiente de recibir en destino` |
 | En reparto | `En reparto` | `En reparto` | `Envío en reparto` |
@@ -43,7 +43,7 @@ En [MRW](carrier:mrw), `Pendiente de recoger en Franquicia destino` no es lo mis
 
 ## «Pre-admisión» o «etiqueta creada»: ¿lo tiene ya el transportista?
 
-No: la tienda ha impreso una etiqueta y ha mandado los datos, nada más. Correos explica que `Pre-admisión` se genera cuando se prerregistra el envío: ya existe el número, pero el paquete está «pendiente de ser entregado a Correos». En el seguimiento también puede salir como `Prerregistrado`. [GLS](carrier:gls-es) dice lo mismo de `Etiqueta creada`: tiene el prerregistro, pero el paquete todavía no está en su red ni en ninguna de sus instalaciones. Lo mismo vale para `Pendiente de recoger` en MRW y `Pendiente de recepción en CTT Express` en [CTT Express](carrier:ctt-express).
+No: la tienda ha impreso una etiqueta y ha mandado los datos, nada más. Correos explica que `Pre-admisión` se genera cuando se prerregistra el envío: ya existe el número, pero el paquete está «pendiente de ser entregado a Correos». [GLS](carrier:gls-es) dice lo mismo de `Etiqueta creada`: tiene el prerregistro, pero el paquete todavía no está en su red ni en ninguna de sus instalaciones. Lo mismo vale para `Pendiente de recoger` en MRW y `Pendiente de recepción en CTT Express` en [CTT Express](carrier:ctt-express).
 
 También ocurre al revés: si a Correos le llega un paquete sin prerregistro, lo deja «estacionado» y lo entrega cuando la empresa que lo envía le pasa los datos.
 
@@ -82,7 +82,7 @@ Ojo con dos estados que despistan. En una entrega a domicilio, `Alta en la unida
 
 ## «Intento de entrega» o «ausente»: ¿y ahora qué?
 
-Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-delivery) o el repartidor no pudo llegar a la puerta. En Correos aparece como `Realizado intento de entrega` o `Intento de entrega. Ausente`, normalmente después de un primer intento que no se completó por ausencia, un problema con la dirección u otro inconveniente. SEUR lo escribe `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE…`, y MRW, `Destinatario ausente o cerrado`. La «Incidencia de destinatario no contesta/ausente» de CTT Express puede salir aunque estuvieras en casa; vuelven a intentarlo el siguiente día laborable.
+Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-delivery) o el repartidor no pudo llegar a la puerta. En Correos aparece como `Realizado intento de entrega`, normalmente después de un primer intento que no se completó por ausencia, un problema con la dirección u otro inconveniente. SEUR lo escribe `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE…`, y MRW, `Destinatario ausente o cerrado`. La «Incidencia de destinatario no contesta/ausente» de CTT Express puede salir aunque estuvieras en casa; vuelven a intentarlo el siguiente día laborable.
 
 :::steps
 - Lee el aviso | Papel en el buzón, SMS o email: dónde está el paquete y qué número dar.
@@ -146,8 +146,6 @@ Si ya [va de vuelta](guide:returned-to-sender), habla con la tienda: pídele que
 - [MRW: Conoce el estado de tu envío](https://blog.mrw.es/conoce-el-estado-de-tu-envio/) – estados, aduana, ausente, Franquicia destino
 - [CTT Express: FAQs sobre los estados de envío](https://www.cttexpress.com/preguntas-frecuentes/estados-envio) – ausencia, nuevo intento
 - [CTT Express: Estados de envío](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – pendiente de recepción, última milla
-- [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – textos en mayúsculas, en tránsito, ausencia, retraso, entregado a un vecino
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 3 días laborables, 5 días naturales, avisos, documentos, ausencia
-- [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – escaneos de UPS que lee Peek: «Left at», «Exception»
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – contenedores, aduana, seguimiento del transportista de destino
 :::

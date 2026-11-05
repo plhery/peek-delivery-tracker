@@ -58,10 +58,10 @@ Es el número de la empresa, así que también sirve en su web. Las formas que P
 | --- | --- |
 | Correos | `PR` + 15 cifras + `C`; 2 letras, 9 cifras y `ES`; o 16 o 23 caracteres que empiezan por 2 letras y acaban en letra |
 | SEUR | 14 o 21 cifras |
-| Vinted Go | 16 cifras que empiezan por 17 o 18 |
+| Vinted Go | Normalmente `VGS` + 13 o 14 cifras, o 16 cifras que empiezan por 17 o 18 |
 | DHL Express | 10 cifras |
 
-Dos códigos no son números de seguimiento: el código QR que el vendedor enseña en el punto de envío y el código de recogida que recibe el comprador. Un número de Vinted Go, inventado:
+Dos códigos no son números de seguimiento: el código QR que el vendedor enseña en el punto de envío y el código de recogida que recibe el comprador. Un número de 16 cifras de Vinted Go, inventado:
 
 :::anatomy 17 1234567890123 8
 - 17 | Siempre `17` o `18`

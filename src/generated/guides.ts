@@ -1232,7 +1232,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "missed-delivery",
       "slug": "intento-de-entrega-ausente",
-      "title": "«Intento de entrega. Ausente» en Correos: qué hacer"
+      "title": "Intento de entrega ausente en Correos: qué hacer"
     },
     {
       "id": "delivery-times",

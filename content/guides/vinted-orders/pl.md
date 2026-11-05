@@ -64,7 +64,7 @@ To numer przewoźnika, więc działa też na jego stronie. Kształty, które zna
 | DHL | 11 cyfr |
 | DHL Express | 10 cyfr |
 
-Kilka kodów to nie numery przesyłki: kod QR i 9-cyfrowy kod nadania od InPost, kod nadania DHL, kod PIN, którym DPD Collect drukuje etykietę, a także kod odbioru albo PIN, który dostajesz, gdy paczka na Ciebie czeka. Numer Vinted Go, przewoźnika Vinted w innych krajach, ma 16 cyfr. Wymyślony przykład:
+Kilka kodów to nie numery przesyłki: kod QR i 9-cyfrowy kod nadania od InPost, kod nadania DHL, kod PIN, którym DPD Collect drukuje etykietę, a także kod odbioru albo PIN, który dostajesz, gdy paczka na Ciebie czeka. Numer Vinted Go, przewoźnika Vinted w innych krajach, to zwykle `VGS` i 13 lub 14 cyfr albo 16 cyfr. Wymyślony przykład numeru 16-cyfrowego:
 
 :::anatomy 17 1234567890123 8
 - 17 | Zawsze `17` albo `18`

@@ -1,5 +1,5 @@
 ---
-title: «Intento de entrega. Ausente» en Correos: qué hacer
+title: Intento de entrega ausente en Correos: qué hacer
 description: El repartidor pasó y no había nadie. Qué hacer con el aviso de llegada o el SMS: otra entrega, cuándo recogerlo en Correos (desde el día siguiente) y qué llevar.
 slug: intento-de-entrega-ausente
 picture: Una puerta con un aviso metido por debajo, una furgoneta ya lejos y Pip llegando sin aliento, un momento tarde.
@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-10-14
 ---
 
-Si el seguimiento dice «Intento de entrega. Ausente», el repartidor pasó y no había nadie para recoger el paquete. El aviso de llegada, el SMS o el email te dicen dónde está ahora y qué toca: un segundo intento, otra entrega que concertas tú o ir a recogerlo con tu DNI. Casi nunca está listo el mismo día: en Correos, a partir del día siguiente.
+Si el seguimiento marca un intento de entrega por ausencia, el repartidor pasó y no había nadie para recoger el paquete. El aviso de llegada, el SMS o el email te dicen dónde está ahora y qué toca: un segundo intento, otra entrega que concertas tú o ir a recogerlo con tu DNI. Casi nunca está listo el mismo día: en Correos, a partir del día siguiente.
 
 ## Intento de entrega ausente: qué hacer
 
@@ -28,9 +28,9 @@ Esto es lo que deja cada transportista y lo que hace después:
 | InPost | Su agencia de reparto se pone en contacto contigo | Concierta contigo una nueva cita |
 | [MRW](carrier:mrw) | Estado `Destinatario ausente o cerrado` | Sus condiciones: si no puede entregar, avisa al remitente, que tiene 15 días para decir si lo recupera o lo manda a otro sitio |
 
-## ¿Qué significa «Intento de entrega. Ausente» en Correos?
+## ¿Qué significa un intento de entrega por ausencia en Correos?
 
-Que el cartero llamó, nadie recogió el paquete y te dejó un aviso. En el seguimiento de Correos lo verás como `Intento de entrega. Ausente` o `Realizado intento de entrega`. SEUR escribe `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.`
+Que el cartero llamó, nadie recogió el paquete y te dejó un aviso. En el seguimiento de Correos suele aparecer como `Realizado intento de entrega`, el mensaje para un primer intento que no se pudo completar, por ejemplo porque no había nadie. SEUR escribe `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE. SE PUEDE REPROGRAMAR UNA NUEVA ENTREGA.`
 
 El Aviso de Llegada de Correos tiene dos caras. Delante, en «Datos del envío», van el número de envío, el origen, el remitente y la fecha del intento; en «Situación del envío», si te lo volverán a llevar o tienes que recogerlo en la oficina; y según el producto, cuántos días te lo guardan. Detrás, en «Oficina», la dirección, el horario y el teléfono de la oficina, y el apartado «Requisitos para la recogida en oficina», que rellenas si va otra persona.
 
@@ -126,7 +126,7 @@ La CNMC no resuelve reclamaciones concretas entre usuarios y empresas: te remite
 - [Correos: Oficina o Citypaq](https://www.correos.es/es/es/actualidad/2026/oficina-o-citypaq--elige-el-metodo-de-recogida-que-mejor-se-adap) – código o PIN, 5 días naturales en Citypaq
 - [Correos: Qué es el phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – nunca pide datos ni pagos por SMS o email
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – canales, teléfonos y horarios, respuesta en 1 mes
-- [Universal Parcel Scraper: estados de Correos](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/correos-spain/statuses.json) – Intento de entrega. Ausente, Realizado intento de entrega
+- [Correos: Sigue tu paquete con el Localizador de Envíos](https://www.correos.es/es/es/actualidad/2023/sigue-tu-paquete-en-tiempo-real-con-nuestra-herramienta-de-local) – Realizado intento de entrega, por ejemplo por ausencia del destinatario
 - [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – no entregado por ausencia o cierre, nueva entrega, disponible en el punto SEUR Pickup
 - [Universal Parcel Scraper: estados de MRW](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mrw/statuses.json) – Destinatario ausente o cerrado
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – nota de paso, intentos, 7 días naturales, Depositado en Parcel Shop, documento oficial, contacto

@@ -55,11 +55,11 @@ Quem vende pode desativar transportadoras em **Perfil** → **Definições** →
 | Transportadora | O número tem |
 | --- | --- |
 | CTT | 2 letras, 9 algarismos e `PT`, ou 22 algarismos a começar por `00` (CTT Express) |
-| Vinted Go | 16 algarismos, a começar por 17 ou 18 |
+| Vinted Go | Normalmente `VGS` e 13 ou 14 algarismos, ou 16 algarismos a começar por 17 ou 18 |
 | DHL Express | 10 algarismos |
 | DPD | 14 algarismos, por vezes com mais um carácter de controlo no fim |
 
-Há dois códigos que não são números de seguimento: o código QR que quem vende mostra no ponto de envio e o código de levantamento, ou PIN, que quem compra recebe quando a encomenda está pronta. Um número Vinted Go tem 16 algarismos, aqui inventados:
+Há dois códigos que não são números de seguimento: o código QR que quem vende mostra no ponto de envio e o código de levantamento, ou PIN, que quem compra recebe quando a encomenda está pronta. Um número Vinted Go de 16 algarismos, aqui inventado:
 
 :::anatomy 17 1234567890123 8
 - 17 | Sempre `17` ou `18`

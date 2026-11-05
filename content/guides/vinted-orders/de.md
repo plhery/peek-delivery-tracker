@@ -57,7 +57,7 @@ Es ist die Nummer des Versanddienstes, sie funktioniert also auch auf dessen Sei
 | GLS | 11 oder 12 Ziffern, oder 8 Buchstaben und Ziffern |
 | DHL Express | 10 Ziffern |
 
-Zwei Codes sind keine Sendungsnummern: der Code, den der Verkäufer an der Annahmestelle zeigt, und der Abholcode, den der Käufer bekommt, wenn das Paket bereitliegt. Eine Vinted-Go-Nummer hat 16 Ziffern, hier erfunden:
+Zwei Codes sind keine Sendungsnummern: der Code, den der Verkäufer an der Annahmestelle zeigt, und der Abholcode, den der Käufer bekommt, wenn das Paket bereitliegt. Eine Vinted-Go-Nummer besteht meist aus `VGS` und 13 oder 14 Ziffern oder aus 16 Ziffern; hier eine erfundene mit 16 Ziffern:
 
 :::anatomy 17 1234567890123 8
 - 17 | Immer `17` oder `18`

@@ -38,7 +38,7 @@ Sobre la aduana: desde el 1 de julio de 2026, una compra de hasta 150 € que ll
 
 El número suele existir antes de que la empresa de reparto tenga el paquete. Hasta el primer escaneo, Peek muestra uno de estos avisos:
 
-- **Etiqueta creada**: la empresa tiene la etiqueta, no el paquete (CTT Express escribe `Pendiente de recepción en CTT Express`; Correos, `Prerregistrado`). Pasado un día, Peek te dice que el remitente aún no se lo ha entregado; el seguimiento empezará cuando lo entregue.
+- **Etiqueta creada**: la empresa tiene la etiqueta, no el paquete (CTT Express escribe `Pendiente de recepción en CTT Express`; Correos, `Pre-admisión`). Pasado un día, Peek te dice que el remitente aún no se lo ha entregado; el seguimiento empezará cuando lo entregue.
 - **Probablemente** y el nombre de una empresa: el número tiene la forma de los suyos, pero esa empresa aún no lo tiene. Peek sigue preguntándole y mostrará el paquete en cuanto lo tenga. ¿Sigue sin aparecer después de una semana? Comprueba el número con Temu o elige otra empresa.
 - **Transportista aún no encontrado**: ninguna empresa conoce el número. Es normal uno o dos días después del pedido, y Peek seguirá comprobando.
 
@@ -66,5 +66,6 @@ Peek muestra lo que publican las empresas de reparto. Las reclamaciones y los re
 - [CTT: CTT e Temu reforçam parceria para a logística na Ibéria, en portugués](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-e-temu-reforcam-parceria-para-a-logistica-na-iberia-e-apoiar-vendedores-europeus) – memorando de entendimiento, diciembre de 2025
 - [Comisión Europea: EU Customs Reform, en inglés](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de tramitación de 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € por tipo de producto
+- [Correos: Sigue tu paquete con el Localizador de Envíos](https://www.correos.es/es/es/actualidad/2023/sigue-tu-paquete-en-tiempo-real-con-nuestra-herramienta-de-local) – Pre-admisión, primer estado, paquete aún sin entregar a Correos
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, primeros estados, empresas que Peek reconoce
 :::

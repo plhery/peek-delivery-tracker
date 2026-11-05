@@ -29,14 +29,14 @@ Estos son los estados que más se ven, en el orden en que los va encontrando un 
 
 | Estado | Qué significa para ti |
 | --- | --- |
-| `Prerregistrado` | El remitente ha registrado el envío, pero aún no lo ha entregado a Correos. |
+| `Pre-admisión` | El remitente ha registrado el envío, pero aún no lo ha entregado a Correos. |
 | `Admitido.` | Correos ya tiene el paquete: lo ha recibido en origen. |
 | `Clasificado` | Lo han clasificado en un centro logístico y asignado al transporte del siguiente tramo. |
 | `En tránsito` | Ha salido del centro logístico de origen y va hacia la unidad que lo entregará. |
 | `Inicio de tramitación aduanera` | Un paquete de fuera ha llegado a las instalaciones de Correos y empieza el trámite de aduana. |
 | `Alta en la unidad de reparto` | Ya está en la unidad que lo entrega; te llegará en cuanto sea posible. |
 | `En reparto` | El cartero o repartidor lo lleva en su ruta. |
-| `Intento de entrega. Ausente` | No había nadie y te han dejado aviso. |
+| `Realizado intento de entrega` | No han podido entregarlo, por ejemplo porque no había nadie, y te han dejado aviso. |
 | `A disposición del destinatario` | Te espera en la oficina de Correos de referencia o en el Citypaq que elegiste. |
 | `Entregado` | Entregado a ti o a una persona autorizada, en casa o en la oficina. |
 | `Finalizado plazo retirada` | Nadie lo recogió a tiempo y vuelve al remitente. |

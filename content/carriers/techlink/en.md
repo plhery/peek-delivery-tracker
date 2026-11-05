@@ -62,7 +62,7 @@ Techlink's door-to-door express service comes duties paid (DDP) or duties unpaid
 
 **Only `Parcel electronic information received`.** The seller has booked the parcel, but it hasn't reached Techlink's warehouse. If nothing follows for several days, ask the seller whether it has been sent.
 
-**Stuck after `Arrive at the destination airport`.** The flight has landed in your country. Import customs and the handover to the local carrier come next and can bring days without a scan. After this line, Techlink's tracker has so far shown only moves inside the destination country: a hub, a sorting centre and the way on from it, the last five lines in the table above. If it stays quiet, ask the seller which carrier delivers in your country and for that carrier's number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+**Stuck after `Arrive at the destination airport`.** The flight has landed in your country. Import customs and the handover to the local carrier come next and can bring days without a scan. After this line, Techlink's tracker has so far shown only steps inside the destination country: a hub, a sorting centre and the way on from it, the last five lines in the table above, and, for some parcels, the delivering carrier's own scans in its words, up to `Parcel is out for delivery.` or a failed delivery. If it stays quiet, ask the seller which carrier delivers in your country and for that carrier's number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
 **Nothing found.** Check the number with the seller: a ZHPHD number has exactly 19 characters. A parcel the seller has only just booked may not show anything yet either.
 
@@ -100,7 +100,7 @@ A carrier in your country that Techlink doesn't name. Its tracker can hold that 
 
 ### Why has my Techlink tracking stopped?
 
-The scans seen on Techlink's tracker so far end when the flight lands in your country (`Arrive at the destination airport`) or a few steps later, at a hub or sorting centre there or on the way between two facilities (`In transit, it is currently in transit to the next facility`). What happens after the handover shows on the local carrier's tracking, so ask the seller for that carrier and its number, and contact the seller if the parcel is late.
+The scans seen on Techlink's tracker so far end when the flight lands in your country (`Arrive at the destination airport`) or a few steps later, at a hub or sorting centre there or on the way between two facilities (`In transit, it is currently in transit to the next facility`); for some parcels Techlink also passes on the delivering carrier's scans, up to `Parcel is out for delivery.` or a failed delivery. What happens after the handover shows on the local carrier's tracking, so ask the seller for that carrier and its number, and contact the seller if the parcel is late.
 
 :::sources
 - [Techlink: 智禾官网 (home)](http://www.techlinksz.cn/) – company name, small-parcel lines to Europe and America, Amazon, Walmart, TK and independent shops, DDU and DDP door-to-door, customs clearance abroad and the 2023 company, delivery accounts at destination, contact link with no target

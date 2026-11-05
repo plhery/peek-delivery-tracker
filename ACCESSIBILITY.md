@@ -13,10 +13,7 @@ Mac:
   effect and the story that plays by itself on first launch stop. On iPhone
   and iPad, opening a parcel cross-fades instead of zooming.
 
-## In the next update
-
-These fixes are built, but not released yet. They come with the version after
-1.1.7.
+Peek also does these, which the App Store doesn't list yet:
 
 - **Larger Text:** first launch, adding a parcel, the Share extension and pull
   to refresh grow through the largest text sizes.
@@ -47,4 +44,4 @@ Bugs also go to
 Issues are public: leave out real tracking numbers, postcodes and sign-in
 codes.
 
-Last updated 4 November 2026
+Last updated 5 November 2026

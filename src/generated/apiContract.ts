@@ -37751,7 +37751,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Manila",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "airspeed"
     },
     "trackingUrlTemplate": "https://logistics.airspeed.com.ph/track/TrackingSearch.aspx?waybill={trackingNumber}",
     "linkRules": [

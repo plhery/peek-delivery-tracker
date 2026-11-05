@@ -1517,7 +1517,7 @@ describe('TrackingSyncService', () => {
     const scans = [
       { time: '2026-10-26T18:00:00Z', description: 'Departed facility', stage: 'in_transit' },
       { time: '2026-10-26T10:00:00Z', description: 'Picked up', stage: 'accepted' }];
-    const answer = (status: CarrierResult['status'], dates: { expected_delivery?: string; expected_delivery_from?: string },
+    const answer = (status: CarrierResult['status'], dates: { expected_delivery?: string; expected_delivery_from?: string; unread_estimates?: string[] },
       ...newer: Array<{ time: string; description: string; stage: string }>): CarrierResult => {
       const events = [...newer, ...scans];
       return { status, current_stage: events[0]!.stage, last_status_text: events[0]!.description, last_update: events[0]!.time, events, ...dates };
@@ -1545,7 +1545,10 @@ describe('TrackingSyncService', () => {
 
     it('stays while a provider without one answers for the carrier, and goes when the carrier gives none', async () => {
       const check = parcel();
-      expect(await check('2026-10-26T20:00:00Z', answer('in_transit', dated))).toMatchObject({ expected_delivery: '2026-10-29' });
+      const first = await check('2026-10-26T20:00:00Z', answer('in_transit', { ...dated, unread_estimates: ['timeWindow'] }));
+      expect(first).toMatchObject({ expected_delivery: '2026-10-29' });
+      // The fields the adapter does not read are the review's, never the parcel's data.
+      expect(first.carrier_data).not.toHaveProperty('unread_estimates');
       const relayed = await check('2026-10-27T07:00:00Z', new Error('down'), answer('in_transit', {}, hub));
       expect(relayed).toMatchObject({ current_stage: 'in_transit', expected_delivery: '2026-10-29',
         carrier_data: { tracking_provider: 'ParcelsApp', expected_delivery_from: '2026-10-28' } });

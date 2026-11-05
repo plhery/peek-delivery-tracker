@@ -15,10 +15,14 @@ import { UpstreamHttpError, type UpstreamHttpDiagnostics } from 'universal-parce
  */
 export const ROUTING_SIGNALS = [
   'carrier_coverage_discovered', 'carrier_auto_swapped', 'carrier_mismatch_confirmed', 'direct_support_opportunity',
+  'unread_delivery_estimate',
 ] as const;
 export type RoutingSignalCode = typeof ROUTING_SIGNALS[number];
 
-/** `subject` is what the signal is about: a carrier a provider named, or a carrier id. */
+/**
+ * `subject` is what the signal is about: a carrier a provider named, a carrier id, or, for an
+ * unread estimate, the adapter's carrier and the reply field (`australia-post: timeWindow`).
+ */
 export interface RoutingSignal {
   signal: RoutingSignalCode;
   carrier: string;

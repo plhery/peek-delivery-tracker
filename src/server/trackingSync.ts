@@ -2235,9 +2235,10 @@ export class TrackingSyncService {
       const preserveSummary = keepSaved || olderSnapshot || unprovenUpuSummary || unprovenLocalSummary || unprovenProviderSummary
         || (['delivered', 'returned'].includes(previousStage) && selectedStage !== previousStage && !disputedRows.length
           && !returnAfterDelivery(previousStage, selectedStage, [...stored, ...events], returnedEventTime));
-      // The steps a carrier plans are routing's to keep (`routing.planned`), never the parcel's data.
+      // The steps a carrier plans are routing's to keep (`routing.planned`), never the parcel's data,
+      // and the estimate fields an adapter does not read are the review's (`unread_delivery_estimate`).
       const carrierData: JsonObject = Object.fromEntries(
-        Object.entries(result).filter(([key, value]) => key !== 'events' && key !== 'planned_events' && value != null),
+        Object.entries(result).filter(([key, value]) => key !== 'events' && key !== 'planned_events' && key !== 'unread_estimates' && value != null),
       );
       // The saved watermark takes the same correction, so later replies are compared with the carrier's clock.
       const routing = isRecord(result.routing) ? { ...result.routing } : null;

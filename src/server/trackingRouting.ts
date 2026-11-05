@@ -383,6 +383,17 @@ function carrierZone(carrier: string): string | null {
     return zone === 'UTC' ? null : zone;
   } catch { return null; }
 }
+// A field path as the scraper names it in `unread_estimates`, short enough for a signal's subject.
+const UNREAD_ESTIMATE_FIELD = /^[A-Za-z][\w.[\]-]{0,79}$/;
+
+/** The reply fields an adapter's answer names as holding an estimate it does not read yet. */
+function unreadEstimates(result: CarrierResult): string[] {
+  const named = result.unread_estimates;
+  return Array.isArray(named)
+    ? [...new Set(named.filter((field): field is string => typeof field === 'string' && UNREAD_ESTIMATE_FIELD.test(field)))].slice(0, 8)
+    : [];
+}
+
 function usable(value: CarrierResult): boolean {
   return Boolean(value.events?.length || value.status && !['unknown', 'pending'].includes(value.status)
     || value.current_stage && value.current_stage !== 'pending');
@@ -1086,6 +1097,9 @@ export class TrackingRouter {
         // failure does: a provider asked after it shows its copies of them as scans.
         holdBack(carrier, value.result.written_ahead ?? [], value.result);
         keepPlanned(carrier, plannedStepsOf(value.result));
+        // Estimate fields the adapter does not read yet that this answer fills: the review keeps
+        // the number, so a capture of the reply can teach the adapter their shape.
+        for (const field of unreadEstimates(value.result)) report('unread_delivery_estimate', `${carrier}: ${field}`);
         // An empty summary archive binds the fallback to this parcel without
         // creating a scan; earlier real scans survive when it is merged.
         const capturedHistory = hasUnresolvedDirectHistory(value.sourceCarrierId, value.result)

@@ -379,6 +379,17 @@ describe('persistent tracking routing', () => {
     expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('detected_carrier_confirmed', expect.objectContaining({ carrier, provider: 'ups' }));
     expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('carrier_mismatch_confirmed', expect.anything());
   });
+  it('keeps the estimate fields an adapter does not read yet as a signal with the number, once each', async () => {
+    const { router, direct } = setup();
+    direct.mockResolvedValue({ ...directValue('ups'),
+      result: { ...history(), unread_estimates: ['timeWindow', 'timeWindow', 'orderDates.max', 'not a path', 7] } });
+    await router.fetch(parcel({ carrier: 'ups', tracking_number: '1Z999AA10123456784' }), false);
+    const unread = vi.mocked(monitoring.reportRoutingEvent).mock.calls.filter(([code]) => code === 'unread_delivery_estimate');
+    expect(unread.map(([, context]) => context)).toEqual([
+      expect.objectContaining({ carrier: 'ups', provider: 'ups: timeWindow', trackingNumber: '1Z999AA10123456784' }),
+      expect.objectContaining({ carrier: 'ups', provider: 'ups: orderDates.max' }),
+    ]);
+  });
   it("takes no health sample from a candidate's inconclusive answer, and keeps the filed carrier's", async () => {
     const { router, direct } = setup();
     direct.mockImplementation(async (_parcel, asked: string) => {

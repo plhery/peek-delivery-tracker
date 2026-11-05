@@ -1,9 +1,9 @@
 -- What the review queues learnt and readers reported in the last hours, grouped by type,
 -- carrier and provider, each with the lane that acts on it: carriers (number formats,
--- detection, the catalog), adapters (no adapter, a failing one, unmapped wording), captcha
--- (a verification page stops an adapter) or delivery-tracker (the app's routing). Numbers
--- appear only as their shape, and free text with its rare words, which can name a place, a
--- shop or a person, masked. Read-only; see docs/OBSERVABILITY.md.
+-- detection, the catalog), adapters (no adapter, a failing one, unmapped wording, an estimate
+-- field it does not read), captcha (a verification page stops an adapter) or delivery-tracker
+-- (the app's routing). Numbers appear only as their shape, and free text with its rare words,
+-- which can name a place, a shop or a person, masked. Read-only; see docs/OBSERVABILITY.md.
 --
 --   psql "$DATABASE_URL" -v hours=1 -f ops/review/signals.sql
 \set ON_ERROR_STOP on
@@ -20,7 +20,7 @@ set session characteristics as transaction read only;
 \echo
 \echo '== Routing signals: numbers seen in the window (new: first seen in it)'
 select signal, carrier, subject,
-       case when signal = 'direct_support_opportunity' then 'adapters' else 'carriers' end as lane,
+       case when signal in ('direct_support_opportunity', 'unread_delivery_estimate') then 'adapters' else 'carriers' end as lane,
        count(*) filter (where first_seen >= :since) as new, count(*) as numbers,
        array_to_string((array_agg(distinct private.tracking_number_pattern(tracking_number)))[1:3], '; ') as patterns
 from public.tracking_routing_signals

@@ -927,6 +927,7 @@ detection or the adapters could act on: each check saves them for the hourly rev
 | `foreign_history_rejected` | A source returned an older parcel for the number (`provider` is the universal, or the carrier whose own adapter answered): one never delivered or returned, or, from a universal, another carrier's or a stranger's delivery for a short number, or a delivery the carrier's own stored scans moved on from |
 | `carrier_input_needed` | A recognized carrier needs the user's input (the GLS postcode, DHL's for a parcel it holds behind one, or the filed PostNL's for a 3S barcode sent within the Netherlands); the parcel asks for it |
 | `direct_support_opportunity` | Signal: a carrier without an adapter of its own is tracked through a provider, a candidate for an adapter. Reported once per number |
+| `unread_delivery_estimate` | Signal: the carrier's adapter answered with a reply field it names in `unread_estimates`, one that holds a delivery estimate or slot it does not read yet. `subject` is the carrier and the field (`australia-post: timeWindow`); the number stays with the row for the adapters' review to capture the reply |
 | `carrier_coverage_discovered` | Signal: a provider named a carrier the catalog doesn't know |
 | `fresher_provider_found` | A shadow check found newer history at another provider and the parcel moved to it. Evidence to revisit the default order |
 | `delivery_disputed` | The parcel's own carrier disputed a provider's delivery in the same check, which was left out. Evidence for the provider's status map |

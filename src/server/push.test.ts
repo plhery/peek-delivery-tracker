@@ -171,11 +171,39 @@ describe('friendly parcel notifications', () => {
       .toBe((live.payload({ ...row, stage: 'failed_attempt' }, 'end').aps as JsonObject)['dismissal-date']);
   });
 
-  it('says when a parcel out for delivery arrives, or that it is close', () => {
+  it('gives a parcel out for delivery only the hours the carrier gives for today', () => {
     const row = { ...delivered, stage: 'out_for_delivery', expected_delivery_changed: false };
-    expect(web.payload(row).body).toBe('Coffee beans · arriving today');
-    expect(alert(live.payload(row, 'start')).body).toBe(web.payload(row).body);
-    expect(web.payload({ ...row, expected_delivery: null }).body).toBe('Coffee beans · almost there');
+    const slot = { ...row, expected_delivery: '2026-09-07 14:00–16:00' };
+    expect(web.payload(slot).body).toBe('Coffee beans · arriving today, 14:00–16:00');
+    expect(alert(live.payload(slot, 'start')).body).toBe(web.payload(slot).body);
+    expect(web.payload({ ...row, expected_delivery_from: '2026-09-07T14:00:00+02:00', expected_delivery: '2026-09-07T16:00:00+02:00' }).body)
+      .toBe('Coffee beans · arriving today, 14:00–16:00');
+    // Out for delivery says today already; a day, or the last day of a window, would contradict it.
+    for (const changes of [
+      { expected_delivery: '2026-09-07' },
+      { expected_delivery: '2026-09-08' },
+      { expected_delivery_from: '2026-09-06', expected_delivery: '2026-09-08' },
+      { expected_delivery: '2026-09-08 09:00–12:00' },
+      { expected_delivery: null },
+    ]) expect(web.payload({ ...row, ...changes }).body).toBe('Coffee beans · almost there');
+  });
+
+  it('says a window of days whole until it begins, then by its last day', () => {
+    const row = { ...delivered, stage: 'in_transit', expected_delivery_changed: false };
+    const body = (changes: JsonObject) => web.payload({ ...row, ...changes }).body;
+    expect(body({ expected_delivery_from: '2026-09-09', expected_delivery: '2026-09-11' }))
+      .toBe('Coffee beans · arriving between 9 September and 11 September');
+    expect(body({ expected_delivery_from: '2026-09-09', expected_delivery: '2026-09-11', expected_delivery_changed: true }))
+      .toBe('Coffee beans · now arriving between 9 September and 11 September');
+    expect(body({ expected_delivery_from: '2026-09-07', expected_delivery: '2026-09-11' })).toBe('Coffee beans · arriving by 11 September');
+    expect(body({ expected_delivery_from: '2026-09-06', expected_delivery: '2026-09-08' })).toBe('Coffee beans · arriving by tomorrow');
+    expect(body({ expected_delivery_from: '2026-09-05T08:00:00+02:00', expected_delivery: '2026-09-07T18:00:00+02:00' }))
+      .toBe('Coffee beans · arriving today');
+    // Two times on one day are a slot on it.
+    expect(body({ expected_delivery_from: '2026-09-08T08:00:00+02:00', expected_delivery: '2026-09-08T12:00:00+02:00' }))
+      .toBe('Coffee beans · arriving tomorrow, 08:00–12:00');
+    // A start that does not come before the end is not a window.
+    expect(body({ expected_delivery_from: '2026-09-12', expected_delivery: '2026-09-11' })).toBe('Coffee beans · arriving 11 September');
   });
 
   it('says when the parcel arrives instead of what the step means, once that is known', () => {
@@ -203,6 +231,31 @@ describe('friendly parcel notifications', () => {
     expect(web.payload({ ...row, expected_delivery: '2026-09-11' }).body).toBe(`Coffee beans · ${dated}`);
     expect(web.payload({ ...row, expected_delivery: '2026-09-11', expected_delivery_changed: true }).body)
       .toBe(`Coffee beans · ${changed}`);
+  });
+
+  it.each([
+    ['en', 'arriving by tomorrow', 'arriving by 11 September', 'arriving between 9 September and 11 September'],
+    ['de', 'kommt bis morgen', 'kommt bis zum 11. September', 'kommt zwischen dem 9. September und dem 11. September'],
+    ['fr', 'arrive d’ici demain', 'arrive d’ici le 11 septembre', 'arrive entre le 9 septembre et le 11 septembre'],
+    ['it', 'arriva entro domani', 'arriva entro 11 settembre', 'arrivo previsto: 9 settembre – 11 settembre'],
+    ['es', 'llega para mañana', 'llega para el 11 de septiembre', 'llega entre el 9 de septiembre y el 11 de septiembre'],
+    ['pt', 'chega até amanhã', 'chega até 11 de setembro', 'chega entre 9 de setembro e 11 de setembro'],
+    ['pt-br', 'chega até amanhã', 'chega até 11 de setembro', 'chega entre 9 de setembro e 11 de setembro'],
+    ['pl', 'dotrze najpóźniej jutro', 'dotrze najpóźniej 11 września', 'dotrze w dniach 9 września – 11 września'],
+    ['ru', 'прибудет до завтра', 'прибудет до 11 сентября', 'прибудет с 9 сентября по 11 сентября'],
+    ['zh', '预计明天前送达', '预计9月11日前送达', '预计9月9日至9月11日送达'],
+  ])('fits a window of days into a %s sentence', (locale, byTomorrow, byDate, ahead) => {
+    const row = { ...delivered, locale, stage: 'in_transit', expected_delivery_changed: false };
+    const body = (expected_delivery_from: string, expected_delivery: string, changed = false) =>
+      web.payload({ ...row, expected_delivery_from, expected_delivery, expected_delivery_changed: changed }).body;
+    expect(body('2026-09-06', '2026-09-08')).toBe(`Coffee beans · ${byTomorrow}`);
+    expect(body('2026-09-06', '2026-09-11')).toBe(`Coffee beans · ${byDate}`);
+    expect(body('2026-09-09', '2026-09-11')).toBe(`Coffee beans · ${ahead}`);
+    for (const [from, to] of [['2026-09-06', '2026-09-08'], ['2026-09-06', '2026-09-11'], ['2026-09-09', '2026-09-11']]) {
+      const changed = String(body(from!, to!, true));
+      expect(changed).not.toMatch(/\{\{|undefined/);
+      expect(changed).not.toBe(body(from!, to!));
+    }
   });
 
   it('keeps the delivery message readable before a long Unicode location', () => {
@@ -242,7 +295,7 @@ describe('useful, localized tracking updates', () => {
     for (const expected_delivery of ['2026-09-06', 'invalid']) {
       expect(web.payload({ ...row, expected_delivery }).body).toBe('Coffee beans · presque arrivé');
     }
-    expect(web.payload({ ...row, expected_delivery: '2026-09-07' }).body).toBe('Coffee beans · arrive aujourd’hui');
+    expect(web.payload({ ...row, expected_delivery: '2026-09-07' }).body).toBe('Coffee beans · presque arrivé');
     // Chinese runs the day on into its window after a space.
     expect(web.payload({ ...row, locale: 'zh', expected_delivery: '2026-09-07 14:00–16:00' }).body).toMatch(/今天 14:00–16:00$/);
   });
@@ -251,7 +304,8 @@ describe('useful, localized tracking updates', () => {
     const row = { ...delivered, stage: 'out_for_delivery', locale: 'fr', expected_delivery_changed: false };
     const parcel = (changes: JsonObject) => ((live.payload({ ...row, ...changes }, 'start').aps as JsonObject)['content-state'] as JsonObject).parcel;
     expect(parcel({})).toMatchObject({ label: 'Coffee beans', detail: 'En livraison', status: 'En livraison' });
-    expect(parcel({ expected_delivery: '2026-09-08 09:00–12:00' })).toMatchObject({ detail: 'demain, 09:00–12:00', status: 'En livraison' });
+    expect(parcel({ expected_delivery: '2026-09-07 15:00–18:00' })).toMatchObject({ detail: 'aujourd’hui, 15:00–18:00', status: 'En livraison' });
+    expect(parcel({ expected_delivery_from: '2026-09-06', expected_delivery: '2026-09-08' })).toMatchObject({ detail: 'En livraison' });
     expect(parcel({ label: '', stage: 'failed_attempt' })).toMatchObject({ label: 'Colis', status: 'Tentative de livraison' });
   });
 

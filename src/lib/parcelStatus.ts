@@ -11,15 +11,37 @@ export interface ParcelDisplayStatus {
 }
 
 /** Show estimates only when they still help explain what happens next. */
-export function parcelDeliveryEstimate(parcel: ParcelWithEvents, now = Date.now()): string | null {
+/** The carrier's estimate while the parcel is on its way and the estimate's last day has not passed. */
+function liveEstimate(parcel: ParcelWithEvents, now: number): { value: string; day: Date; today: Date } | null {
   const value = parcel.expectedDelivery;
   const stage = currentEvent(parcel.events)?.stage;
   if (!value || (stage && ['delivered', 'returned', 'ready_for_pickup', 'failed_attempt', 'exception'].includes(stage))) return null;
   const day = estimateDay(value);
   const today = new Date(now);
   today.setHours(0, 0, 0, 0);
-  if (!day || day < today) return null;
+  return day && day >= today ? { value, day, today } : null;
+}
+
+/**
+ * The carrier's estimate while it still explains what happens next: the parcel is on its way and its last day has not
+ * passed. Out for delivery already says the parcel comes today, so only the hours a carrier gives for today are kept,
+ * not a day, nor the last day of a window.
+ */
+export function parcelDeliveryEstimate(parcel: ParcelWithEvents, now = Date.now()): string | null {
+  const live = liveEstimate(parcel, now);
+  if (!live) return null;
+  const { value, day, today } = live;
+  if (currentEvent(parcel.events)?.stage === 'out_for_delivery') {
+    const first = parcel.expectedDeliveryFrom ? estimateDay(parcel.expectedDeliveryFrom) : null;
+    const hours = /^\S+[ T]\d{2}:\d{2}/.test(value.trim());
+    if (day.getTime() !== today.getTime() || !hours || (first && first < today)) return null;
+  }
   return value;
+}
+
+/** Whether a parcel out for delivery has an estimate: it comes today, whichever day the estimate named. */
+export function parcelArrivesToday(parcel: ParcelWithEvents, now = Date.now()): boolean {
+  return currentEvent(parcel.events)?.stage === 'out_for_delivery' && liveEstimate(parcel, now) !== null;
 }
 
 export function parcelHasCarrierUpdate(parcel: ParcelWithEvents): boolean {

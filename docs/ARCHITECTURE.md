@@ -497,11 +497,14 @@ and nothing typed is sent.
   notification settings, or else on the scan's own clock when the carrier gave its UTC
   offset, or else in Zurich's. A link's alert never has a saved timezone.
 - Estimates appear only while a parcel is on its way. They are hidden after delivery, a
-  failed attempt, pickup readiness or a return, and whenever they are in the past.
+  failed attempt, pickup readiness or a return, and whenever they are in the past. Out for
+  delivery already says the parcel comes today, so the apps, notifications and Live
+  Activities then show only the hours a carrier gives for today, never a day.
 - A carrier's window of several days (`expected_delivery_from` to `expected_delivery`)
-  is shown whole until its first day. From then on cards, widgets, previews and shared
-  lines give its last day ("by Fri 6 Nov"), since the parcel may come any day until then,
-  and the parcel's own page keeps the whole window.
+  is shown whole until its first day. From then on cards, widgets, previews, shared
+  lines and notifications give its last day ("by Fri 6 Nov"), since the parcel may come
+  any day until then, and the parcel's own page keeps the whole window. The notification
+  queues carry `expected_delivery_from` for this.
 - An `exception` means the carrier reported a problem that is neither a missed delivery
   nor a return. The parcel keeps its place and keeps refreshing.
 - An archived parcel is never announced to its owner. Its new scans are recorded as

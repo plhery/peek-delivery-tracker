@@ -641,7 +641,7 @@ describe('App', () => {
     expect(onTheWay.querySelector('.parcel-section__heading > span')).toHaveTextContent('1');
   });
 
-  it.each(['', ' 13:00–15:00'])('shows today’s ETA once while out for delivery (window: %s)', async (window) => {
+  it.each([['', 0], [' 13:00–15:00', 1]])('shows only today’s hours, once, while out for delivery (window: %s)', async (window, shown) => {
     const today = new Date();
     const pad = (value: number) => String(value).padStart(2, '0');
     const expectedDelivery = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}${window}`;
@@ -674,7 +674,7 @@ describe('App', () => {
 
     const section = await screen.findByRole('button', { name: /Next up: Today parcel/ });
     expect(within(section).getByText('Today parcel')).toBeInTheDocument();
-    expect(within(section).getAllByText(/^today/)).toHaveLength(1);
+    expect(within(section).queryAllByText(/^today/)).toHaveLength(shown);
     expect(screen.getByRole('region', { name: 'On the way' })).toContainElement(section);
   });
 

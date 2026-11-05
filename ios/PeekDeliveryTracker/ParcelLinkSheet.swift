@@ -655,7 +655,9 @@ extension Localizer {
             guard let date = DateParser.date(event.occurredAt) else { return nil }
             return text("share.gift.delivered", ["date": deliveryDate(date, now: now), "time": clockTime(date)])
         }
-        return parcelDeliveryEstimate(parcel, now: now).map { text("share.gift.arrives", ["date": $0]) }
+        if let estimate = parcelDeliveryEstimate(parcel, now: now) { return text("share.gift.arrives", ["date": estimate]) }
+        // A gift's card names no stage, so it says what out for delivery means.
+        return parcelArrivesToday(parcel, now: now) ? text("share.gift.arrives", ["date": text("time.today")]) : nil
     }
 }
 

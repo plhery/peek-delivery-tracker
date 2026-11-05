@@ -482,8 +482,8 @@ class Localizer(
         return deliveryWindow(parcel.carrierData?.expectedDeliveryFrom, value, now)
     }
 
-    /** The carrier's estimate while it still explains what happens next: the parcel is on its way and its last day has not passed. */
-    private fun shownEstimate(parcel: Parcel, now: Instant): String? {
+    /** The carrier's estimate while the parcel is on its way and the estimate's last day has not passed. */
+    private fun liveEstimate(parcel: Parcel, now: Instant): Pair<String, Instant>? {
         val value = parcel.expectedDelivery ?: return null
         val stage = parcel.currentStage
         if (stage?.isFinal == true || stage == TrackingStage.ReadyForPickup || stage == TrackingStage.FailedAttempt ||
@@ -492,8 +492,29 @@ class Localizer(
         val date = DateParser.deliveryDate(value) ?: return null
         val zone = ZoneId.systemDefault()
         if (date.atZone(zone).toLocalDate() < now.atZone(zone).toLocalDate()) return null
+        return value to date
+    }
+
+    /**
+     * The carrier's estimate while it still explains what happens next: the parcel is on its way and its last day has not
+     * passed. Out for delivery already says the parcel comes today, so only the hours a carrier gives for today are kept,
+     * not a day, nor the last day of a window.
+     */
+    private fun shownEstimate(parcel: Parcel, now: Instant): String? {
+        val (value, date) = liveEstimate(parcel, now) ?: return null
+        if (parcel.currentStage == TrackingStage.OutForDelivery) {
+            val zone = ZoneId.systemDefault()
+            val (day, today) = date.atZone(zone).toLocalDate() to now.atZone(zone).toLocalDate()
+            val hours = Regex("""^\S+[ T]\d{2}:\d{2}""").containsMatchIn(value.trim())
+            val first = parcel.carrierData?.expectedDeliveryFrom?.let(DateParser::deliveryDate)?.atZone(zone)?.toLocalDate()
+            if (day != today || !hours || (first != null && first < today)) return null
+        }
         return value
     }
+
+    /** Whether a parcel out for delivery has an estimate: it comes today, whichever day the estimate named. */
+    fun parcelArrivesToday(parcel: Parcel, now: Instant = Instant.now()): Boolean =
+        parcel.currentStage == TrackingStage.OutForDelivery && liveEstimate(parcel, now) != null
 
     fun parcelCompletionDate(parcel: Parcel, now: Instant = Instant.now()): String? {
         val event = parcel.currentEvent ?: return null

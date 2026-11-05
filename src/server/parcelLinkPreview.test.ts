@@ -37,7 +37,7 @@ function stored(overrides: JsonObject = {}, events: JsonObject[] = [
     link: { id: linkId, owner: false, shared: false, show_number: false, created_at: '2026-09-30T08:00:00Z', forget_at: '2026-12-30T08:00:00Z' },
     package: {
       id: 'p', user_id: null, one_off: true, tracking_number: trackingNumber, label: 'A private name', carrier: 'dhl',
-      created_at: '2026-09-30T08:00:00Z', expected_delivery: '2026-10-02', last_status_text: null, last_synced_at: '2026-10-02T09:00:00Z',
+      created_at: '2026-09-30T08:00:00Z', expected_delivery: '2026-10-02 13:00–17:00', last_status_text: null, last_synced_at: '2026-10-02T09:00:00Z',
       sync_status: 'ok', sync_error: null, tracking_url: null, dpd_postcode: '9999', archived_at: null, notifications_muted: false,
       carrier_data: { sender_name: 'Example Shop', pickup_point: 'Example Kiosk' }, tracking_events: events, ...overrides,
     },
@@ -66,8 +66,8 @@ describe('parcelLinkPreview', () => {
     const found = vi.spyOn(SupabaseServiceClient.prototype, 'publicParcel').mockResolvedValue(stored());
     const preview = await parcelLinkPreview(linkId, new Headers(), 'en');
     expect(preview).toMatchObject({
-      title: 'Out for delivery · DHL', description: 'Today. Follow it on Peek.', headline: 'Out for delivery', detail: 'Today', steps: 5,
-      carrier: { id: 'dhl' },
+      title: 'Out for delivery · DHL', description: 'Today, 13:00–17:00. Follow it on Peek.', headline: 'Out for delivery',
+      detail: 'Today, 13:00–17:00', steps: 5, carrier: { id: 'dhl' },
     });
     // No owner key, and the read does not count as a visit.
     expect(found).toHaveBeenCalledExactlyOnceWith(linkId, null, false);
@@ -75,9 +75,11 @@ describe('parcelLinkPreview', () => {
   });
 
   it('writes the preview in the page’s language', async () => {
-    vi.spyOn(SupabaseServiceClient.prototype, 'publicParcel').mockResolvedValue(stored({ expected_delivery: '2026-10-05' }));
+    vi.spyOn(SupabaseServiceClient.prototype, 'publicParcel').mockResolvedValue(stored({ expected_delivery: '2026-10-05' }, [
+      { id: 'e1', package_id: 'p', stage: 'in_transit', description: 'In transit', location: 'Exampletown, DE', occurred_at: '2026-10-02T06:00:00Z' },
+    ]));
     expect(await parcelLinkPreview(linkId, new Headers(), 'de')).toMatchObject({
-      title: 'In Zustellung · DHL', description: 'Erwartet: Mo 5. Okt. Verfolge es auf Peek.',
+      title: 'Unterwegs · DHL', description: 'Erwartet: Mo 5. Okt. Verfolge es auf Peek.',
     });
   });
 
@@ -185,7 +187,7 @@ describe('the parcel page’s metadata', () => {
     const picture = `https://peek.example.test/api/public/parcels/${linkId}/image?lang=de`;
     expect(metadata).toMatchObject({
       title: 'In Zustellung · DHL',
-      description: 'Heute. Verfolge es auf Peek.',
+      description: 'Heute, 13:00–17:00. Verfolge es auf Peek.',
       robots: { index: false, follow: false },
       referrer: 'no-referrer',
       openGraph: {
@@ -202,7 +204,8 @@ describe('the parcel page’s metadata', () => {
 
   it('previews a gift on its way without saying who carries it', async () => {
     request.headers.set('x-real-ip', '198.51.100.34');
-    const found = stored();
+    // Out for delivery with a day: a gift's card names no stage, so it says the parcel comes today.
+    const found = stored({ expected_delivery: '2026-10-02' });
     vi.spyOn(SupabaseServiceClient.prototype, 'publicParcel').mockResolvedValue({ ...found, link: { ...found.link, gift: true } });
     const metadata = await generateMetadata({ params: Promise.resolve({ id: linkId }) });
     expect(metadata).toMatchObject({

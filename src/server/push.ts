@@ -62,6 +62,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'arriving {{date}}',
     eta_changed_day: 'now arriving {{date}}',
     eta_changed_date: 'now arriving {{date}}',
+    eta_by_day: 'arriving by {{date}}',
+    eta_by_date: 'arriving by {{date}}',
+    eta_window: 'arriving between {{from}} and {{to}}',
+    eta_changed_by_day: 'now arriving by {{date}}',
+    eta_changed_by_date: 'now arriving by {{date}}',
+    eta_changed_window: 'now arriving between {{from}} and {{to}}',
   },
   de: {
     test_title: 'Ab jetzt hörst du von Peek',
@@ -93,6 +99,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'kommt am {{date}}',
     eta_changed_day: 'neuer Liefertermin: {{date}}',
     eta_changed_date: 'neuer Liefertermin: {{date}}',
+    eta_by_day: 'kommt bis {{date}}',
+    eta_by_date: 'kommt bis zum {{date}}',
+    eta_window: 'kommt zwischen dem {{from}} und dem {{to}}',
+    eta_changed_by_day: 'neuer Liefertermin: bis {{date}}',
+    eta_changed_by_date: 'neuer Liefertermin: bis zum {{date}}',
+    eta_changed_window: 'neuer Liefertermin: zwischen dem {{from}} und dem {{to}}',
   },
   fr: {
     test_title: 'Peek te tient au courant',
@@ -124,6 +136,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'arrive le {{date}}',
     eta_changed_day: 'arrive désormais {{date}}',
     eta_changed_date: 'arrive désormais le {{date}}',
+    eta_by_day: 'arrive d’ici {{date}}',
+    eta_by_date: 'arrive d’ici le {{date}}',
+    eta_window: 'arrive entre le {{from}} et le {{to}}',
+    eta_changed_by_day: 'arrive désormais d’ici {{date}}',
+    eta_changed_by_date: 'arrive désormais d’ici le {{date}}',
+    eta_changed_window: 'arrive désormais entre le {{from}} et le {{to}}',
   },
   it: {
     test_title: 'Peek ti terrà al corrente',
@@ -155,6 +173,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'arrivo previsto: {{date}}',
     eta_changed_day: 'ora arriva {{date}}',
     eta_changed_date: 'nuova data prevista: {{date}}',
+    eta_by_day: 'arriva entro {{date}}',
+    eta_by_date: 'arriva entro {{date}}',
+    eta_window: 'arrivo previsto: {{from}} – {{to}}',
+    eta_changed_by_day: 'ora arriva entro {{date}}',
+    eta_changed_by_date: 'nuova data prevista: entro {{date}}',
+    eta_changed_window: 'nuova data prevista: {{from}} – {{to}}',
   },
   es: {
     test_title: 'Peek te mantendrá al tanto',
@@ -186,6 +210,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'llega el {{date}}',
     eta_changed_day: 'ahora llega {{date}}',
     eta_changed_date: 'ahora llega el {{date}}',
+    eta_by_day: 'llega para {{date}}',
+    eta_by_date: 'llega para el {{date}}',
+    eta_window: 'llega entre el {{from}} y el {{to}}',
+    eta_changed_by_day: 'ahora llega para {{date}}',
+    eta_changed_by_date: 'ahora llega para el {{date}}',
+    eta_changed_window: 'ahora llega entre el {{from}} y el {{to}}',
   },
   pt: {
     test_title: 'O Peek vai dando notícias',
@@ -217,6 +247,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'chega a {{date}}',
     eta_changed_day: 'afinal chega {{date}}',
     eta_changed_date: 'afinal chega a {{date}}',
+    eta_by_day: 'chega até {{date}}',
+    eta_by_date: 'chega até {{date}}',
+    eta_window: 'chega entre {{from}} e {{to}}',
+    eta_changed_by_day: 'afinal chega até {{date}}',
+    eta_changed_by_date: 'afinal chega até {{date}}',
+    eta_changed_window: 'afinal chega entre {{from}} e {{to}}',
   },
   pl: {
     test_title: 'Peek da Ci znać',
@@ -248,6 +284,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'dotrze {{date}}',
     eta_changed_day: 'nowy termin: {{date}}',
     eta_changed_date: 'nowy termin: {{date}}',
+    eta_by_day: 'dotrze najpóźniej {{date}}',
+    eta_by_date: 'dotrze najpóźniej {{date}}',
+    eta_window: 'dotrze w dniach {{from}} – {{to}}',
+    eta_changed_by_day: 'nowy termin: najpóźniej {{date}}',
+    eta_changed_by_date: 'nowy termin: najpóźniej {{date}}',
+    eta_changed_window: 'nowy termin: {{from}} – {{to}}',
   },
   'pt-br': {
     test_title: 'O Peek vai dar notícias',
@@ -279,6 +321,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'chega em {{date}}',
     eta_changed_day: 'agora chega {{date}}',
     eta_changed_date: 'agora chega em {{date}}',
+    eta_by_day: 'chega até {{date}}',
+    eta_by_date: 'chega até {{date}}',
+    eta_window: 'chega entre {{from}} e {{to}}',
+    eta_changed_by_day: 'agora chega até {{date}}',
+    eta_changed_by_date: 'agora chega até {{date}}',
+    eta_changed_window: 'agora chega entre {{from}} e {{to}}',
   },
   ru: {
     test_title: 'Peek будет держать вас в курсе',
@@ -310,6 +358,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: 'прибудет {{date}}',
     eta_changed_day: 'теперь прибудет {{date}}',
     eta_changed_date: 'теперь прибудет {{date}}',
+    eta_by_day: 'прибудет до {{date}}',
+    eta_by_date: 'прибудет до {{date}}',
+    eta_window: 'прибудет с {{from}} по {{to}}',
+    eta_changed_by_day: 'теперь прибудет до {{date}}',
+    eta_changed_by_date: 'теперь прибудет до {{date}}',
+    eta_changed_window: 'теперь прибудет с {{from}} по {{to}}',
   },
   zh: {
     test_title: 'Peek 会随时通知你',
@@ -341,6 +395,12 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     eta_date: '预计送达：{{date}}',
     eta_changed_day: '预计送达改为：{{date}}',
     eta_changed_date: '预计送达改为：{{date}}',
+    eta_by_day: '预计{{date}}前送达',
+    eta_by_date: '预计{{date}}前送达',
+    eta_window: '预计{{from}}至{{to}}送达',
+    eta_changed_by_day: '预计送达改为：{{date}}前',
+    eta_changed_by_date: '预计送达改为：{{date}}前',
+    eta_changed_window: '预计送达改为：{{from}}至{{to}}',
   },
 };
 
@@ -413,50 +473,87 @@ function notificationDay(day: DateTime, locale: Locale): string {
 }
 
 interface ExpectedDelivery {
-  text: string;
-  /** Whether it names a day of the year rather than today or tomorrow: a sentence may need another word before it. */
-  dated: boolean;
+  /** The day, or the days, filled into the sentence. */
+  date: string;
+  to?: string;
+  /**
+   * The sentence that writes it: a day or time that needs no word before it ("tomorrow"), a day of the year that may
+   * ("9 October"), the last day of a window that has begun ("by tomorrow", "by 6 November"), or a window still ahead.
+   */
+  form: 'day' | 'date' | 'by_day' | 'by_date' | 'window';
 }
 
+/** An estimate on the reader's clock: its day, and the time or slot the carrier gave on it. */
+function estimatePoint(value: unknown, zone: string): { day: DateTime; time: string; instant: DateTime | null } | null {
+  const cleaned = notificationText(value, 100);
+  if (!cleaned) return null;
+  const slot = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})(?:[–-](\d{2}:\d{2}))?$/.exec(cleaned);
+  if (slot) {
+    const day = DateTime.fromISO(slot[1]!, { zone });
+    return day.isValid ? { day, time: `${slot[2]}${slot[3] ? `–${slot[3]}` : ''}`, instant: null } : null;
+  }
+  const expected = DateTime.fromISO(cleaned, { zone });
+  if (!expected.isValid) return null;
+  const timed = /T\d{2}:\d{2}/.test(cleaned);
+  return { day: expected.startOf('day'), time: timed ? expected.toFormat('HH:mm') : '', instant: timed ? expected : null };
+}
+
+/**
+ * When a parcel is expected, as a notification says it. A window of days reads whole until it begins, then by its last
+ * day. Out for delivery already says the parcel comes today, so only the hours a carrier gives for today are added.
+ */
 function expectedDelivery(
   value: unknown,
+  from: unknown,
+  stage: string,
   locale: Locale,
   timezone: string,
   now: number,
 ): ExpectedDelivery | null {
-  const cleaned = notificationText(value, 100);
-  if (!cleaned) return null;
   const zone = IANAZone.isValidZone(timezone) ? timezone : 'Europe/Zurich';
-  const today = DateTime.fromMillis(now, { zone });
-
-  const formattedDay = (raw: string, time = ''): ExpectedDelivery | null => {
-    const expected = DateTime.fromISO(raw, { zone });
-    if (!expected.isValid || !today.isValid || expected.startOf('day') < today.startOf('day')) return null;
-    const relative = expected.toISODate() === today.toISODate() ? 'time.today'
-      : expected.toISODate() === today.plus({ days: 1 }).toISODate() ? 'time.tomorrow' : null;
-    const day = relative ? appWord(locale, relative)! : notificationDay(expected, locale);
-    return { text: time ? dayAndTime(day, time, languageTags[locale]) : day, dated: !relative };
+  const today = DateTime.fromMillis(now, { zone }).startOf('day');
+  const end = estimatePoint(value, zone);
+  if (!end || !today.isValid || end.day < today) return null;
+  const start = estimatePoint(from, zone);
+  const sameDay = (a: DateTime, b: DateTime) => a.toISODate() === b.toISODate();
+  // Two times on one day are a slot on it.
+  const time = start?.instant && end.instant && start.instant < end.instant && sameDay(start.day, end.day)
+    ? `${start.time}–${end.time}` : end.time;
+  const named = (day: DateTime) => {
+    const relative = sameDay(day, today) ? 'time.today' : sameDay(day, today.plus({ days: 1 })) ? 'time.tomorrow' : null;
+    return { text: relative ? appWord(locale, relative)! : notificationDay(day, locale), relative: !!relative };
   };
+  const tag = languageTags[locale];
 
-  const window = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})(?:[–-](\d{2}:\d{2}))?$/.exec(
-    cleaned,
-  );
-  if (window) return formattedDay(window[1]!, `${window[2]}${window[3] ? `–${window[3]}` : ''}`);
-  const expected = DateTime.fromISO(cleaned, { zone });
-  if (expected.isValid && /T\d{2}:\d{2}/.test(cleaned)) {
-    return formattedDay(expected.toISODate()!, expected.toFormat('HH:mm'));
+  if (stage === 'out_for_delivery') {
+    return sameDay(end.day, today) && time ? { date: dayAndTime(named(today).text, time, tag), form: 'day' } : null;
   }
-  return formattedDay(cleaned);
+  if (start && start.day < end.day && !sameDay(end.day, today)) {
+    if (start.day > today) return { date: notificationDay(start.day, locale), to: notificationDay(end.day, locale), form: 'window' };
+    const last = named(end.day);
+    return { date: last.text, form: last.relative ? 'by_day' : 'by_date' };
+  }
+  const day = named(end.day);
+  // The last day of a window is its whole day: the time it ends by says nothing of when the parcel comes.
+  const shown = start && start.day < end.day ? '' : time;
+  return { date: shown ? dayAndTime(day.text, shown, tag) : day.text, form: day.relative ? 'day' : 'date' };
 }
 
-/** When a parcel is expected, as a notification writes it: "tomorrow, 09:00–12:00". Empty for a day that has passed. */
+/**
+ * When a parcel is expected, as a notification writes it: "tomorrow, 09:00–12:00". Empty for a day that has passed,
+ * and for a parcel out for delivery that the carrier gives no hours today for.
+ */
 export function notificationExpectedDelivery(
   value: unknown,
   locale = 'en',
   timezone = 'Europe/Zurich',
   now = Date.now(),
+  from: unknown = null,
+  stage = '',
 ): string {
-  return expectedDelivery(value, notificationLocale(locale), timezone, now)?.text ?? '';
+  const expected = expectedDelivery(value, from, stage, notificationLocale(locale), timezone, now);
+  if (!expected) return '';
+  return expected.to ? `${expected.date} – ${expected.to}` : expected.date;
 }
 
 /**
@@ -513,11 +610,14 @@ function notificationDetail(row: JsonObject, locale: Locale, now: number): strin
   const copy = PUSH_COPY[locale];
   if (stage === 'delivered') return deliveredMessage(row, locale, now);
   const expected = ETA_NOTIFICATION_STAGES.has(stage)
-    ? expectedDelivery(row.expected_delivery, locale, stringField(row, 'timezone') || 'Europe/Zurich', now)
+    ? expectedDelivery(row.expected_delivery, row.expected_delivery_from, stage, locale,
+      stringField(row, 'timezone') || 'Europe/Zurich', now)
     : null;
   if (!expected) return copy[`body_${stage}`] ?? copy.body_update!;
   const changed = row.expected_delivery_changed === true ? 'eta_changed' : 'eta';
-  return copy[`${changed}_${expected.dated ? 'date' : 'day'}`]!.replace('{{date}}', expected.text);
+  // Functions, so that a day written with a dollar sign is kept as it is.
+  return copy[`${changed}_${expected.form}`]!
+    .replace(/\{\{(?:date|from)\}\}/, () => expected.date).replace('{{to}}', () => expected.to ?? '');
 }
 
 /**
@@ -1443,11 +1543,14 @@ export class DeliveryLiveActivityNotificationService {
     const stage = stringField(row, 'stage');
     // The words the app writes on the activities it starts itself.
     const status = appWord(locale, `stage.${stage}`) ?? PUSH_COPY[locale].update!;
+    // Out for delivery, only the hours the carrier gives for today.
     const expected = notificationExpectedDelivery(
       row.expected_delivery,
       locale,
       stringField(row, 'timezone') || 'Europe/Zurich',
       timestamp * 1_000,
+      row.expected_delivery_from,
+      stage,
     );
     const phase = LIVE_ACTIVITY_PHASES.has(stage) ? stage : 'ended';
     const contentState: JsonObject = {
@@ -1457,8 +1560,7 @@ export class DeliveryLiveActivityNotificationService {
         carrier: notificationText(carrierDisplayName(row.carrier, locale), 80),
         status: notificationText(status, 80),
         // Older app versions already suppress a detail equal to the status.
-        detail: notificationText(stage === 'out_for_delivery' && expected && expected !== appWord(locale, 'time.today')
-          ? expected : status, 100),
+        detail: notificationText(stage === 'out_for_delivery' && expected ? expected : status, 100),
         phase,
       },
       languageCode: locale,

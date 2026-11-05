@@ -575,8 +575,8 @@ final class Localizer: ObservableObject {
         return deliveryWindow(from: parcel.carrierData?.expectedDeliveryFrom, to: value, now: now)
     }
 
-    /// The carrier's estimate while it still explains what happens next: the parcel is on its way and its last day has not passed.
-    private func shownEstimate(_ parcel: Parcel, now: Date) -> String? {
+    /// The carrier's estimate while the parcel is on its way and the estimate's last day has not passed.
+    private func liveEstimate(_ parcel: Parcel, now: Date) -> (value: String, date: Date)? {
         guard let value = parcel.expectedDelivery,
               parcel.currentStage?.isFinal != true,
               parcel.currentStage != .readyForPickup, parcel.currentStage != .failedAttempt,
@@ -584,7 +584,27 @@ final class Localizer: ObservableObject {
               let date = DateParser.deliveryDate(value) else { return nil }
         let calendar = Calendar.current
         guard calendar.startOfDay(for: date) >= calendar.startOfDay(for: now) else { return nil }
+        return (value, date)
+    }
+
+    /// The carrier's estimate while it still explains what happens next: the parcel is on its way and its last day has not passed.
+    /// Out for delivery already says the parcel comes today, so only the hours a carrier gives for today are kept, not a
+    /// day, nor the last day of a window.
+    private func shownEstimate(_ parcel: Parcel, now: Date) -> String? {
+        guard let (value, date) = liveEstimate(parcel, now: now) else { return nil }
+        if parcel.currentStage == .outForDelivery {
+            let calendar = Calendar.current
+            let today = calendar.startOfDay(for: now)
+            let hours = value.trimmingCharacters(in: .whitespaces).range(of: #"^\S+[ T]\d{2}:\d{2}"#, options: .regularExpression) != nil
+            let first = parcel.carrierData?.expectedDeliveryFrom.flatMap(DateParser.deliveryDate).map(calendar.startOfDay(for:))
+            guard calendar.isDate(date, inSameDayAs: now), hours, first.map({ $0 >= today }) ?? true else { return nil }
+        }
         return value
+    }
+
+    /// Whether a parcel out for delivery has an estimate: it comes today, whichever day the estimate named.
+    func parcelArrivesToday(_ parcel: Parcel, now: Date = Date()) -> Bool {
+        parcel.currentStage == .outForDelivery && liveEstimate(parcel, now: now) != nil
     }
 
     func parcelCompletionDate(_ parcel: Parcel, now: Date = Date()) -> String? {

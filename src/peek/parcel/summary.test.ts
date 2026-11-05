@@ -212,6 +212,11 @@ describe('the tab’s title and the link preview', () => {
     expect(giftArrival(moving({ expectedDelivery: '2026-10-06' }), wording)).toBe('Arrives Tue 6 Oct');
     expect(giftArrival(moving({ expectedDelivery: '2026-10-03' }), german)).toBe('Kommt morgen');
     expect(giftArrival(moving(), wording)).toBeNull();
+    // A gift's card names no stage: out for delivery, it comes today, whichever day the window ends.
+    const out = (overrides: Partial<ParcelWithEvents>) => parcel([['in_transit', at(1, 8)], ['out_for_delivery', at(2, 7)]], overrides);
+    expect(giftArrival(out({ expectedDeliveryFrom: '2026-10-01', expectedDelivery: '2026-10-03' }), wording)).toBe('Arrives today');
+    expect(giftArrival(out({ expectedDelivery: '2026-10-02 13:00-17:00' }), wording)).toBe('Arrives today, 13:00–17:00');
+    expect(giftArrival(out({}), wording)).toBeNull();
     const delivered = parcel([['in_transit', at(1, 8)], ['delivered', at(2, 9, 12)]]);
     expect(giftDelivered(delivered, wording)).toBe('Delivered today at 09:12');
     expect(giftDelivered(delivered, { ...wording, now: NOW + 86_400_000 })).toBe('Delivered yesterday at 09:12');

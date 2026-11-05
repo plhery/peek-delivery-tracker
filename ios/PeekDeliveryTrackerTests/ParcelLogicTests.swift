@@ -1375,7 +1375,7 @@ final class ParcelLogicTests: XCTestCase {
     }
 
     @MainActor
-    func testEstimatesKeepTodayAndWindowsWhileOutForDeliveryAndHideObsoleteDates() {
+    func testEstimatesKeepOnlyTodaysHoursWhileOutForDeliveryAndHideObsoleteDates() {
         let id = UUID()
         let now = DateParser.date("2026-09-07T12:00:00Z")!
         let localizer = Localizer()
@@ -1386,8 +1386,16 @@ final class ParcelLogicTests: XCTestCase {
             XCTAssertNil(localizer.parcelDeliveryEstimate(parcel, now: now))
         }
         var parcel = makeParcel(id: id, events: [event(id, .outForDelivery, "2026-09-07T10:00:00Z")])
-        parcel.expectedDelivery = "2026-09-07"
-        XCTAssertEqual(localizer.parcelDeliveryEstimate(parcel, now: now), "aujourd’hui")
+        // Out for delivery says today already: a day, or the last day of a window, would only repeat or contradict it.
+        let contradicting: [(String?, String)] = [
+            (nil, "2026-09-07"), (nil, "2026-09-08"), (nil, "2026-09-08 09:00–12:00"), ("2026-09-06", "2026-09-08"),
+        ]
+        for (from, to) in contradicting {
+            parcel.carrierData = from.map { CarrierData(expectedDeliveryFrom: $0) }
+            parcel.expectedDelivery = to
+            XCTAssertNil(localizer.parcelDeliveryEstimate(parcel, now: now), to)
+        }
+        parcel.carrierData = nil
         parcel.expectedDelivery = "2026-09-07 14:00–16:00"
         XCTAssertEqual(localizer.parcelDeliveryEstimate(parcel, now: now), "aujourd’hui, 14:00–16:00")
         parcel.expectedDelivery = "2026-09-07T12:30:00Z"
@@ -1448,8 +1456,12 @@ final class ParcelLogicTests: XCTestCase {
         var moving = makeParcel(id: id, events: [event(id, .outForDelivery, DateParser.isoString(now))])
         XCTAssertNil(localizer.sharedParcelDetail(moving))
         XCTAssertNil(localizer.giftDetail(moving, opened: false))
+        moving.expectedDelivery = today.string(from: now) + " 13:00–17:00"
+        XCTAssertEqual(localizer.sharedParcelDetail(moving), "Today, 13:00–17:00")
+        XCTAssertEqual(localizer.giftDetail(moving, opened: false), "Arrives today, 13:00–17:00")
+        // Out for delivery, a card names no day; a gift's names no stage, so it says what out for delivery means.
         moving.expectedDelivery = today.string(from: now)
-        XCTAssertEqual(localizer.sharedParcelDetail(moving), "Today")
+        XCTAssertNil(localizer.sharedParcelDetail(moving))
         XCTAssertEqual(localizer.giftDetail(moving, opened: false), "Arrives today")
 
         // Arrived: the day on the usual card, the day and the time for a gift that is opened.

@@ -18,7 +18,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "heute",
+        "detail" : "In Zustellung",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Belgische Schokolade 🍫",
@@ -66,7 +66,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "today",
+        "detail" : "Out for delivery",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Belgian chocolate 🍫",
@@ -114,7 +114,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "hoy",
+        "detail" : "En reparto",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Chocolate belga 🍫",
@@ -162,7 +162,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "aujourd’hui",
+        "detail" : "En livraison",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Chocolat belge 🍫",
@@ -210,7 +210,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "oggi",
+        "detail" : "In consegna",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Cioccolato belga 🍫",
@@ -258,7 +258,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "dziś",
+        "detail" : "W doręczeniu",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Belgijska czekolada 🍫",
@@ -306,7 +306,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "hoje",
+        "detail" : "Em distribuição",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Chocolate belga 🍫",
@@ -354,7 +354,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "hoje",
+        "detail" : "Saiu para entrega",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Chocolate belga 🍫",
@@ -402,7 +402,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "сегодня",
+        "detail" : "Передана курьеру",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "Бельгийский шоколад 🍫",
@@ -450,7 +450,7 @@
           ]
         },
         "carrier" : "FedEx",
-        "detail" : "今天",
+        "detail" : "派送中",
         "id" : "00000000-0000-4000-8000-000000000000",
         "isOutForDelivery" : true,
         "label" : "比利时巧克力 🍫",

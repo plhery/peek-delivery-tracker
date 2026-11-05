@@ -335,7 +335,7 @@ describe('the parcel page of a link’s owner', () => {
 describe('a gift', () => {
   const words = `#n=${encodeURIComponent('trail running shoes')}&g=${encodeURIComponent('Happy birthday, Alex!')}&f=Sam`;
   const origin = (id: string, hoursAgo: number): TrackingEvent => ({ id, parcelId: 'parcel-1', stage: 'in_transit', description: 'Left the sender', location: 'DE', occurredAt: ago(hoursAgo) });
-  const wrapped = (events: TrackingEvent[] = [origin('a', 30), origin('b', 28), origin('c', 26), scan('customs', 10, 'Cleared customs', { location: 'Basel, Switzerland' }), scan('out_for_delivery', 2, 'With the courier')]) =>
+  const wrapped = (events: TrackingEvent[] = [origin('a', 30), origin('b', 28), origin('c', 26), scan('customs', 10, 'Cleared customs', { location: 'Basel, Switzerland' }), scan('in_transit', 2, 'Sorted for delivery')]) =>
     view({ owner: false, link: { gift: true }, events, parcel: { expectedDelivery: '2099-01-05', senderName: undefined } });
 
   it('on its way is wrapped: something is coming, when, and nothing the link carries about what or from whom', async () => {

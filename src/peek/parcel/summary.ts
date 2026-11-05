@@ -10,7 +10,7 @@ import {
   type Translate,
 } from '../../lib/messages';
 import { parcelAttention, type ParcelAttention } from '../../lib/parcelPriority';
-import { parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel } from '../../lib/parcelStatus';
+import { parcelArrivesToday, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel } from '../../lib/parcelStatus';
 import { currentEvent, isFinal } from '../../lib/stages';
 import type { ParcelWithEvents, Stage, TrackingEvent } from '../../types';
 
@@ -239,7 +239,9 @@ export function parcelPreviewText(parcel: ParcelWithEvents, carrierName: string,
 export function giftArrival(parcel: ParcelWithEvents, wording: Wording): string | null {
   const { t, languageTag, now = Date.now() } = wording;
   const estimate = parcelDeliveryEstimate(parcel, now);
-  return estimate ? t('share.gift.arrives', { date: localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, now) }) : null;
+  if (estimate) return t('share.gift.arrives', { date: localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, now) });
+  // A gift's card names no stage, so it says what out for delivery means.
+  return parcelArrivesToday(parcel, now) ? t('share.gift.arrives', { date: t('time.today') }) : null;
 }
 
 /** "Delivered today at 14:12", for a gift that has arrived. Without a time the card's own line gives the day. */

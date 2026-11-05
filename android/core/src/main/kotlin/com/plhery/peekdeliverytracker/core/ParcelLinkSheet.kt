@@ -26,5 +26,7 @@ fun Localizer.giftDetail(parcel: Parcel, opened: Boolean, now: Instant = Instant
         val date = DateParser.date(event.occurredAt) ?: return null
         return text("share.gift.delivered", mapOf("date" to deliveryDate(date, now), "time" to clockTime(date)))
     }
-    return parcelDeliveryEstimate(parcel, now)?.let { text("share.gift.arrives", mapOf("date" to it)) }
+    parcelDeliveryEstimate(parcel, now)?.let { return text("share.gift.arrives", mapOf("date" to it)) }
+    // A gift's card names no stage, so it says what out for delivery means.
+    return if (parcelArrivesToday(parcel, now)) text("share.gift.arrives", mapOf("date" to text("time.today"))) else null
 }

@@ -120,13 +120,24 @@ describe('useful delivery estimates', () => {
     saved.expectedDelivery = '2026-09-07';
     expect(parcelDeliveryEstimate(saved, now)).toBeNull();
   });
-  it('keeps today and time windows while out for delivery, but hides stale estimates', () => {
+  it('keeps only today\'s hours while out for delivery, and hides stale estimates', () => {
     const saved = parcel('ok');
     saved.events[0].stage = 'out_for_delivery';
-    saved.expectedDelivery = '2026-09-07';
-    expect(parcelDeliveryEstimate(saved, now)).toBe('2026-09-07');
     saved.expectedDelivery = '2026-09-07 14:00–16:00';
     expect(parcelDeliveryEstimate(saved, now)).toBe(saved.expectedDelivery);
+    saved.expectedDeliveryFrom = new Date(2026, 8, 7, 14).toISOString();
+    saved.expectedDelivery = new Date(2026, 8, 7, 16).toISOString();
+    expect(parcelDeliveryEstimate(saved, now)).toBe(saved.expectedDelivery);
+    // Out for delivery says today already: a day, or the last day of a window, would only repeat or contradict it.
+    for (const [from, to] of [
+      [undefined, '2026-09-07'], [undefined, '2026-09-08'], [undefined, '2026-09-08 09:00–12:00'],
+      ['2026-09-06', '2026-09-08'], ['2026-09-06', new Date(2026, 8, 7, 18).toISOString()],
+    ]) {
+      saved.expectedDeliveryFrom = from;
+      saved.expectedDelivery = to;
+      expect(parcelDeliveryEstimate(saved, now)).toBeNull();
+    }
+    saved.expectedDeliveryFrom = undefined;
     saved.events[0].stage = 'in_transit';
     saved.expectedDelivery = '2026-09-07';
     expect(parcelDeliveryEstimate(saved, now)).toBe(saved.expectedDelivery);

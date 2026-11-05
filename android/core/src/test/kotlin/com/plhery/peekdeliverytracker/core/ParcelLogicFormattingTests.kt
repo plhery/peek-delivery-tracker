@@ -18,7 +18,7 @@ import org.junit.Test
 /** ParcelLogicTests.swift: how the localizer writes a parcel's dates, estimates and charges. */
 class ParcelLogicFormattingTests {
     @Test
-    fun estimatesKeepTodayAndWindowsWhileOutForDeliveryAndHideObsoleteDates() {
+    fun estimatesKeepOnlyTodaysHoursWhileOutForDeliveryAndHideObsoleteDates() {
         val id = UUID.randomUUID()
         val now = DateParser.date("2026-09-07T12:00:00Z")!!
         val localizer = Localizer(AppLanguage.Fr)
@@ -26,8 +26,12 @@ class ParcelLogicFormattingTests {
             val parcel = makeParcel(id, events = listOf(event(id, stage, "2026-09-07T10:00:00Z"))).copy(expectedDelivery = "2026-09-07")
             assertNull(localizer.parcelDeliveryEstimate(parcel, now))
         }
-        var parcel = makeParcel(id, events = listOf(event(id, TrackingStage.OutForDelivery, "2026-09-07T10:00:00Z"))).copy(expectedDelivery = "2026-09-07")
-        assertEquals("aujourd’hui", localizer.parcelDeliveryEstimate(parcel, now))
+        var parcel = makeParcel(id, events = listOf(event(id, TrackingStage.OutForDelivery, "2026-09-07T10:00:00Z")))
+        // Out for delivery says today already: a day, or the last day of a window, would only repeat or contradict it.
+        for ((from, to) in listOf(null to "2026-09-07", null to "2026-09-08", null to "2026-09-08 09:00–12:00", "2026-09-06" to "2026-09-08")) {
+            val shown = parcel.copy(expectedDelivery = to, carrierData = from?.let { CarrierData(expectedDeliveryFrom = it) })
+            assertNull(to, localizer.parcelDeliveryEstimate(shown, now))
+        }
         parcel = parcel.copy(expectedDelivery = "2026-09-07 14:00–16:00")
         assertEquals("aujourd’hui, 14:00–16:00", localizer.parcelDeliveryEstimate(parcel, now))
         parcel = parcel.copy(expectedDelivery = "2026-09-07T12:30:00Z")
@@ -83,8 +87,12 @@ class ParcelLogicFormattingTests {
         var moving = makeParcel(id, events = listOf(event(id, TrackingStage.OutForDelivery, DateParser.isoString(now))))
         assertNull(localizer.sharedParcelDetail(moving))
         assertNull(localizer.giftDetail(moving, opened = false))
+        moving = moving.copy(expectedDelivery = "$today 13:00–17:00")
+        assertEquals("Today, 13:00–17:00", localizer.sharedParcelDetail(moving))
+        assertEquals("Arrives today, 13:00–17:00", localizer.giftDetail(moving, opened = false))
+        // Out for delivery, a card names no day; a gift's names no stage, so it says what out for delivery means.
         moving = moving.copy(expectedDelivery = today)
-        assertEquals("Today", localizer.sharedParcelDetail(moving))
+        assertNull(localizer.sharedParcelDetail(moving))
         assertEquals("Arrives today", localizer.giftDetail(moving, opened = false))
 
         // Arrived: the day on the usual card, the day and the time for a gift that is opened.

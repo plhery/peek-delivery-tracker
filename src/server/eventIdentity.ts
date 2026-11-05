@@ -263,7 +263,8 @@ const FIRST_STORED_SKEW_MS = 5 * 60 * 1_000;
  * and later than the row shows. Nothing is scanned after Peek stored it, so a wall clock read
  * under such an offset is read under the wrong one (USPS reads a label's wall clock in UTC or on
  * Pacific time depending on when it is read), and a carrier's later scan in the row's words is
- * the next one (DHL Express lists only a facility's latest "Processed at").
+ * the next one (DHL Express lists only a facility's latest "Processed at"), as is a provider's
+ * later scan a zone shift from its own row (ParcelsApp lists only FedEx's latest "On the way").
  */
 function pastFirstStored(scan: JsonObject, row: JsonObject): boolean {
   const first = Date.parse(String(row.created_at ?? ''));
@@ -1005,7 +1006,8 @@ export function rewordedScans(
  *
  * A row that only the scan's universal provider has written follows that
  * provider's clock instead (a scraper fix that reads its scans in another
- * zone), and the stage a fix now reads in a scan the row holds unclassified,
+ * zone), but for a scan dated past when the row was first stored, which is
+ * the provider's next scan (`pastFirstStored`), and the stage a fix now reads in a scan the row holds unclassified,
  * at the row's instant from no conflicting place: the scan takes the row over. A scan whose own row it is moves the row to the scan's instant,
  * unless another row matches the scan by the rules above: that row holds the
  * scan already, so the scan is left out and its row on the old clock goes. So
@@ -1126,7 +1128,10 @@ export function sharedScans(
       : eligible.filter((row) => !dayAlone(row) && sameTruncated(at, instantOf(row)) && !shown.has(instantOf(row)));
     const minuted = truncated.filter((row) => sameWording(wordingOf(row), wording));
     const restaged = restagedOf(event);
-    const apart = occupied.has(at) ? [] : eligible.filter((row) => !shown.has(instantOf(row)) && !placesApart(event, row));
+    // A scan of the provider's own row dated past when the row was first stored is its next scan, not the row on a
+    // corrected clock: ParcelsApp lists only FedEx's latest "On the way", 13 h after the one it replaced.
+    const apart = occupied.has(at) ? [] : eligible.filter((row) => !shown.has(instantOf(row)) && !placesApart(event, row)
+      && !(followsClock(row, event) && pastFirstStored(event, row)));
     const zoned = apart.filter((row) => zoneApart(at, instantOf(row)));
     const paired = (row: JsonObject) => (sourceOf(identity(row)) === UNIVERSAL) !== universal;
     const shifted = apart.filter((row) => sameWording(wordingOf(row), wording) && (zoneApart(at, instantOf(row))

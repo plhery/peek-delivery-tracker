@@ -1572,6 +1572,19 @@ describe('rows only a universal provider wrote', () => {
     }
   });
 
+  it('leaves the provider\'s next scan a zone shift away, past when its own row was first stored, a scan of its own', () => {
+    // ParcelsApp lists only a carrier's latest "In Transit": the next, 13 h on, replaced the first after Peek stored it.
+    const first = { ...named(row('unknown:first', '2026-11-04T11:07:00+00:00', 'In Transit', 'in_transit')), location: 'Example Town, TX, US' };
+    const next = { ...scan('unknown:next', '2026-11-05T00:07:00Z', 'In Transit', 'in_transit'), location: 'Other City, TX, US' };
+    const storedAt = (createdAt: string | undefined) => [{ ...first, created_at: createdAt }];
+    const kept = sharedScans([next], storedAt('2026-11-04T14:04:37+00:00'));
+    expect(kept.reused.size + kept.skipped.size + kept.absorbed.size + kept.shifted.size).toBe(0);
+    // Within the clocks' skew of its storing, before it, or unknown, it may be the row on a corrected clock.
+    for (const createdAt of ['2026-11-05T00:03:00+00:00', '2026-11-05T01:00:00Z', undefined]) {
+      expect(pairs(sharedScans([next], storedAt(createdAt)).reused)).toEqual([['unknown:next', 'unknown:first']]);
+    }
+  });
+
   it('takes over a row its provider alone wrote across an offset, not within the minute', () => {
     // The fix changed the time the identity hashes, so the scan meets its old row under another identity.
     const unnamed = row('unknown:departed-late', '2026-01-04T02:30:10+00:00', 'Departed from sorting center');

@@ -7162,6 +7162,36 @@ it('keeps a scan its carrier replaces by a later one in the same words after Pee
   expect(processing()).toEqual([first, { id: expect.any(String), at: '2026-11-04T21:19:00.000Z' }]);
 });
 
+it('stores a provider\'s next scan a zone shift from its own row, past when Peek stored that row, as a scan of its own', async () => {
+  const store = eventStore();
+  Object.assign(store.client, { acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+    finishTrackingProvider: vi.fn().mockResolvedValue(undefined) });
+  // ParcelsApp lists only a carrier's latest "In Transit": the next one, 13 h later in another town of the same
+  // state, replaces the first after Peek stored it (synthetic places and times).
+  const scan = (time: string, location: string) => ({ time, stage: 'in_transit', description: 'In Transit', location });
+  const result = (...events: ReturnType<typeof scan>[]) => ({ tracking_provider: 'ParcelsApp', status: 'in_transit',
+    current_stage: 'in_transit', last_update: events.at(-1)!.time, last_status_text: 'In Transit', events });
+  const first = scan('2026-11-04T11:07:00Z', 'Example Town, TX, US');
+  const next = scan('2026-11-05T00:07:00Z', 'Other City, TX, US');
+  const adapter = { fetch: vi.fn().mockRejectedValue(new Error('carrier blocked')),
+    fetchUniversal: vi.fn().mockResolvedValueOnce(result(first)).mockResolvedValue(result(next)) };
+  const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+    () => new Date('2026-11-05T00:24:00Z'));
+  const load = () => ({ id: 'latest-only-parcel', carrier: 'unknown', tracking_number: 'TEST1234',
+    current_stage: store.rows.size ? 'in_transit' : 'pending', [STORED_EVENT_IDENTITIES]: store.identities() });
+  const transit = () => [...store.rows.values()].filter((row) => row.description === 'In Transit')
+    .map(({ id, occurred_at, location }) => ({ id, at: new Date(String(occurred_at)).toISOString(), location }));
+
+  await service.syncPackage(load());
+  const [stored] = transit();
+  expect(stored).toEqual({ id: expect.any(String), at: '2026-11-04T11:07:00.000Z', location: 'Example Town, TX, US' });
+  [...store.rows.values()].forEach((row) => { row.created_at = '2026-11-04T14:04:37.000+00:00'; });
+  // 00:07 is past when Peek stored 11:07: the provider's next scan, not the first on a corrected clock.
+  await service.syncPackage(load());
+  await service.syncPackage(load());
+  expect(transit()).toEqual([stored, { id: expect.any(String), at: '2026-11-05T00:07:00.000Z', location: 'Other City, TX, US' }]);
+});
+
 it('tells a check that stored a scan from one that rewrote the scans it had', async () => {
   const store = eventStore();
   const scan = (time: string, description: string, location = '') => ({ time, stage: 'in_transit', description, location });

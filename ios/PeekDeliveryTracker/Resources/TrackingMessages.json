@@ -268,8 +268,20 @@
       "key": "event.carrier.preparing",
       "variables": {}
     },
-    "Commande en livraison": {
-      "key": "stage.out_for_delivery",
+    "Commande en route vers la plateforme régionale": {
+      "key": "event.carrier.toRegionalDepot",
+      "variables": {}
+    },
+    "Commande en route vers le point retrait": {
+      "key": "event.carrier.toPickupPoint",
+      "variables": {}
+    },
+    "Commande disponible au point retrait": {
+      "key": "event.carrier.atPickupPoint",
+      "variables": {}
+    },
+    "Commande retirée au point retrait": {
+      "key": "event.carrier.collectedAtPickupPoint",
       "variables": {}
     },
     "Commande livrée": {

@@ -3,7 +3,7 @@ title: C Chez Vous tracking: order number, statuses and contact
 description: Track a C Chez Vous delivery of furniture or appliances in France: where the order number is, what the French statuses mean and how to change the date.
 slug: c-chez-vous-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
 C Chez Vous delivers bulky online orders of more than 30 kg, such as furniture and large appliances, to homes and pickup points in France, on a booked appointment. The shop chose it when you ordered. Track it on [C Chez Vous's tracking page](https://www.cchezvous.fr/suivi-colis) with the order number from its email or SMS, or paste that number in the box above.
@@ -95,7 +95,7 @@ C Chez Vous is not part of GEODIS. Geopost, of the La Poste group, holds 80% of 
 
 Paste an order number shaped like `ABCD12EF34` and [Peek](/) names C Chez Vous at once. A link from cchezvous.fr (`/suivi-colis/` followed by the reference) works for any reference. Other references, including the long one with your postcode, get no carrier when typed: press "Change" and pick C Chez Vous, or paste the link.
 
-Peek's status reads Label created while the order is registered and its appointment being booked, In transit while it is prepared and on its way to the regional depot, then Delivered. Its history adds a line each time the status changes, named after the step showing then: Order registered or Scheduling delivery, then Order being prepared or, in C Chez Vous's French, `Commande en route vers la plateforme régionale`, and Delivered. A pickup-point order turns Ready for pickup at `Commande disponible au point retrait` and Delivered at `Commande retirée au point retrait`, and its history keeps these lines in French. When an order has several parcels, Peek shows the least advanced one. Your appointment day appears as the expected delivery until the order is delivered, with its time slot when the tracking page gives one. C Chez Vous gives no history, places or times, so each line is dated when Peek first saw it.
+Peek's status reads Label created while the order is registered and its appointment being booked, In transit while it is prepared and on its way to the regional depot, then Delivered. Its history adds a line each time the status changes, named after the step showing then: Order registered or Scheduling delivery, then Order being prepared or Order on its way to the regional depot, and Delivered. A pickup-point order's history reads Order on its way to the pickup point, then Order ready at the pickup point as its status turns Ready for pickup, and Order collected from the pickup point as it turns Delivered. When an order has several parcels, Peek shows the least advanced one. Your appointment day appears as the expected delivery until the order is delivered, with its time slot when the tracking page gives one. C Chez Vous gives no history, places or times, so each line is dated when Peek first saw it.
 
 Some limits. `En livraison` stays In transit in Peek, since C Chez Vous's own text says the order is still heading to the regional depot, and the tracking page has no out-for-delivery step. Peek doesn't read `Annulée`: a cancelled order simply stops moving.
 

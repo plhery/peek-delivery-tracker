@@ -67,17 +67,17 @@ With the link in BRT's message, or in the myBRT app or on [mybrt.it](https://www
 
 ## BRT parcel late, lost or damaged
 
-BRT calls its delivery times indicative, and its pages say nothing about what to do when tracking stops moving. Ask the branch named in the tracking, or the shop, which holds the contract with BRT; see [tracking that isn't updating](guide:tracking-not-updating).
+BRT calls its delivery times indicative. If tracking stops moving, ask the shop, which holds the contract with BRT, or the branch named in the tracking, or choose "The delivery is delayed" on BRT's [Support](https://services.brt.it/en/support) page; see [tracking that isn't updating](guide:tracking-not-updating).
 
 For loss or damage, if you paid the transport costs, use BRT's damage form with photos; if not, tell the sender. At the door, note visible damage on the waybill specifically (BRT says general remarks count for nothing), and report hidden damage in writing within 8 calendar days of receipt for parcels within Italy.
 
-Recipients can complain too: attach BRT's complaint form, a PDF on its [Carta dei servizi page](https://www.brt.it/it/carta-dei-servizi/), to the form at services.brt.it/it/form-agcom. BRT answers within 45 days. Without a satisfying answer, conciliation follows via conciliazioni@brt.it with Casa del Consumatore, which you must join (€50 a year, €25 for disputes up to €50), then the regulator, AGCOM. No BRT page covers a parcel [marked delivered but not received](guide:delivered-not-received); this complaint route is the one that applies.
+Recipients can complain too: attach BRT's complaint form, a PDF on its [Carta dei servizi page](https://www.brt.it/it/carta-dei-servizi/), to the form at services.brt.it/it/form-agcom. BRT answers within 45 days. Without a satisfying answer, conciliation follows via conciliazioni@brt.it with Casa del Consumatore, which you must join (€50 a year, €25 for disputes up to €50), then the regulator, AGCOM. For a parcel [marked delivered but not received](guide:delivered-not-received), check with neighbours and family first, then use the matching report on BRT's Support page; the complaint route comes after.
 
 ## BRT contact number and customer service
 
-BRT's channels for recipients, as read on 9 October 2026:
+BRT's channels for recipients, as read on 5 November 2026:
 
-- **Forms** on the English [Contact us](https://www.brt.it/en/customer-service/contact-us/) page, which shows no phone number.
+- **Forms** via BRT's [Support](https://services.brt.it/en/support) page, which replaced Contact us: pick your case (late, damaged, delivered but not received, and so on) to reach a report form. It shows no phone number.
 - **Freephone** 800 278 708, Monday to Friday, 8.30am to 6.30pm, per BRT's Italian service charter. BRT doesn't say it works from abroad.
 - **Email** assistenzaclienti@brt.it, also per the charter, with your name, surname, pickup and delivery postcodes and BRTcode, or BRT won't answer.
 - **Chat** on brt.it, or your **branch**, via the [branch finder](https://services.brt.it/en/customer-service/search-for-a-branch).
@@ -120,7 +120,7 @@ BRT's [fermopoint finder](https://www.mybrt.it/it/mybrt/parcel-shops/search) lis
 - [BRT: BRT-fermopoint](https://www.brt.it/en/brt-fermopoint/) – shops, weekends, 10 days
 - [BRT: Locker](https://www.brt.it/en/network/locker/) – QR code, PIN, limits
 - [BRT: Branch pickup FAQ](https://www.brt.it/en/faq/can-i-pick-up-my-shipment-at-a-brt-branch/) – delegates
-- [BRT: Contact us](https://www.brt.it/en/customer-service/contact-us/) – forms, branch finder
+- [BRT: Support](https://services.brt.it/en/support) – report forms, delays, delivered but not received
 - [BRT: Carta dei servizi PDF](https://www.brt.it/wp-content/uploads/sites/275/2026/03/Carta-dei-Servizi_marzo_2026.pdf) – attempts, holds, damage, contacts, 45 days
 - [BRT: Carta dei servizi](https://www.brt.it/it/carta-dei-servizi/) – complaints, conciliation, AGCOM
 - [BRT: Modulo di Reclamo](https://www.brt.it/wp-content/uploads/sites/275/2026/02/2.-Modulo-Reclamo.pdf) – recipients may file

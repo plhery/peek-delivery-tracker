@@ -81,9 +81,9 @@ BRTs Lieferzeiten sind laut BRT nur Richtwerte. Bewegt sich die Sendungsverfolgu
 
 ## BRT Kundenservice und Kontakt
 
-So erreichst du BRT als Empfänger, Stand 3. November 2026:
+So erreichst du BRT als Empfänger, Stand 5. November 2026:
 
-- **Formulare** auf der englischen Seite [Contact us](https://www.brt.it/en/customer-service/contact-us/), etwa für Fragen zu einer Sendung, für Schäden oder ein Problem. Eine Telefonnummer steht dort nicht.
+- **Formulare** über die englische Seite [Support](https://services.brt.it/en/support), die die frühere Seite Contact us ersetzt: Du wählst deinen Fall, etwa eine Verspätung, einen Schaden oder ein Paket, das als zugestellt gilt, aber nicht angekommen ist, und kommst so zum passenden Formular. Eine Telefonnummer steht dort nicht.
 - **Gebührenfreie Nummer** (numero verde) 800 278 708, montags bis freitags von 8:30 bis 18:30 Uhr, laut BRTs Charta. Ob sie aus dem Ausland erreichbar ist, sagt BRT nicht.
 - **E-Mail** an assistenzaclienti@brt.it, ebenfalls laut Charta, mit Vor- und Nachnamen, den Postleitzahlen von Abholung und Zustellung und dem BRTcode; andere E-Mails bearbeitet BRT nicht.
 - **Chat** auf brt.it oder deine **Filiale**, zu finden über die [Filialsuche](https://services.brt.it/en/customer-service/search-for-a-branch).
@@ -125,7 +125,7 @@ Meist DPD in deinem Land, mit einer eigenen DPD-Nummer. Besteht die Sendung aus 
 - [BRT: BRT-fermopoint (Englisch)](https://www.brt.it/en/brt-fermopoint/) – Geschäfte, Wochenende, 10 Tage
 - [BRT: Locker (Englisch)](https://www.brt.it/en/network/locker/) – Standorte, rund um die Uhr, QR-Code, PIN
 - [BRT: Can I pick up my shipment at a BRT branch? (Englisch)](https://www.brt.it/en/faq/can-i-pick-up-my-shipment-at-a-brt-branch/) – Abholung mit Vollmacht
-- [BRT: Contact us (Englisch)](https://www.brt.it/en/customer-service/contact-us/) – Formulare, keine Telefonnummer, Filialsuche
+- [BRT: Support (Englisch)](https://services.brt.it/en/support) – Formulare je nach Fall, keine Telefonnummer
 - [BRT: Carta dei servizi, PDF (Italienisch)](https://www.brt.it/wp-content/uploads/sites/275/2026/03/Carta-dei-Servizi_marzo_2026.pdf) – Geopost, DPD-Netz, Zustellversuche, Einlagerung, Schäden, CMR, Richtwerte, Kontakt, 45 Tage, Schlichtung
 - [BRT: Carta dei servizi (Italienisch)](https://www.brt.it/it/carta-dei-servizi/) – Beschwerde, Schlichtung, AGCOM
 - [BRT: Modulo di Conciliazione con istruzioni (Italienisch)](https://www.brt.it/wp-content/uploads/sites/275/2026/02/3.-Modulo-di-Conciliazione-con-istruzioni.pdf) – Mitgliedsbeitrag, Erstattung, andere Stellen

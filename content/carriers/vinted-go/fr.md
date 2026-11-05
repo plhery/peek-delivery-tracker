@@ -3,7 +3,7 @@ title: Vinted Go suivi : statuts, consigne, point relais et contact
 description: Suivre un colis Vinted Go : où trouver le numéro, ce que veut dire chaque statut, combien de temps le colis t'attend en consigne et qui contacter en cas de souci.
 slug: vinted-go-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
 Vinted Go est le service de livraison de Vinted : il achemine les colis vendus sur Vinted d'une consigne ou d'un point relais vers une autre consigne, un point relais ou un voisin relais, et en France parfois jusqu'à ta porte. Pour suivre ton colis, ouvre la conversation de la commande sur Vinted et clique sur « Suivre le colis », ou saisis le numéro sur la [page de suivi de Vinted Go](https://vintedgo.com/fr/tracking).
@@ -30,25 +30,25 @@ Tu ne trouves pas le numéro du tout ? Voir [où trouver son numéro de suivi](g
 
 ## Vinted Go suivi colis : ce que veulent dire les statuts
 
-Le site de suivi de Vinted Go existe en sept langues, dont le français ; en Belgique, c'est le même site en français. En haut s'affiche la dernière étape avec son heure, puis la liste de toutes les étapes ; un bouton ouvre le détail des scans de chaque étape, dont certains nomment la ville du centre de tri. Dans l'ordre où ton colis les rencontre :
+Le site de suivi de Vinted Go existe en sept langues, dont le français ; en Belgique, c'est le même site en français. En haut s'affiche la dernière étape avec son heure, puis la liste de toutes les étapes ; un bouton ouvre le détail des scans de chaque étape, dont certains nomment la ville du centre de tri. Dans l'ordre où ton colis les rencontre, avec le titre affiché par Peek :
 
-| Vinted Go écrit | Ce que ça veut dire pour toi |
-| --- | --- |
-| `Bordereau d'envoi créé` | Le vendeur a créé l'étiquette. Vinted Go n'a pas encore le colis. |
-| `Le colis a été déposé en consigne` | Le vendeur l'a déposé (ou `Le colis a été déposé en point relais`). |
-| `Colis expédié` | L'étape qui correspond à ce dépôt : Vinted Go a le colis. |
-| `Colis en cours d'acheminement` | Il passe par les centres de tri, en route vers ton point. |
-| `Le colis est en chemin vers le/la consigne` | Il est en route vers la consigne que tu as choisie (ou `Le colis est en chemin vers le/la point relais`). |
-| `Le colis est prêt à être retiré en consigne` | Il t'attend (ou `Le colis est prêt à être retiré en point relais`). Ton code de retrait est en route. |
-| `Colis prêt à être récupéré` | Le nom de l'étape. Le délai de 7 jours pour le retirer commence. |
-| `Le colis a été retiré par le destinataire` | Le colis a été retiré au point. |
-| `Colis retiré par le destinataire` | La dernière étape : c'est le « livré » de Vinted Go. |
-| `Colis introuvable dans la consigne` | Le colis n'est pas dans son casier. Signale-le sur Vinted. |
-| `Colis en cours de retour vers l'expéditeur` | Il repart chez le vendeur, par exemple parce que personne ne l'a retiré en 7 jours. |
+| Vinted Go écrit | Ce que ça veut dire pour toi | Peek affiche |
+| --- | --- | --- |
+| `Bordereau d'envoi créé` | Le vendeur a créé l'étiquette. Vinted Go n'a pas encore le colis. | « Étiquette créée » |
+| `Le colis a été déposé en consigne` | Le vendeur l'a déposé (ou `Le colis a été déposé en point relais`). | « Pris en charge » |
+| `Colis expédié` | L'étape qui correspond à ce dépôt : Vinted Go a le colis. | « Pris en charge » |
+| `Colis en cours d'acheminement` | Il passe par les centres de tri, en route vers ton point. | « En transit » |
+| `Le colis est en chemin vers le/la consigne` | Il est en route vers la consigne que tu as choisie (ou `Le colis est en chemin vers le/la point relais`). | « En transit » |
+| `Le colis est prêt à être retiré en consigne` | Il t'attend (ou `Le colis est prêt à être retiré en point relais`). Ton code de retrait est en route. | « Prêt à être retiré » |
+| `Colis prêt à être récupéré` | Le nom de l'étape. Le délai de 7 jours pour le retirer commence. | « Prêt à être retiré » |
+| `Le colis a été retiré par le destinataire` | Le colis a été retiré au point. | « Livré » |
+| `Colis retiré par le destinataire` | La dernière étape : c'est le « livré » de Vinted Go. | « Livré » |
+| `Colis introuvable dans la consigne` | Le colis n'est pas dans son casier. Signale-le sur Vinted. | « Problème signalé » |
+| `Colis en cours de retour vers l'expéditeur` | Il repart chez le vendeur, par exemple parce que personne ne l'a retiré en 7 jours. | « Retourné à l’expéditeur » |
 
 `Colis expédié` ne veut pas dire que le colis est près de chez toi : le vendeur l'a seulement remis à Vinted Go. Et chez Vinted Go, un colis n'est « livré » qu'une fois retiré, pas quand il arrive dans la consigne. Si ton code ne marche pas, la FAQ de Vinted Go conseille donc de vérifier dans le suivi si le colis est déjà indiqué comme livré.
 
-La page de suivi prévoit aussi d'autres libellés, comme `En cours de livraison`, `Colis impossible à livrer` ou `Colis perdu`. Tu ne les vois que si ton colis passe par cette étape.
+La page de suivi prévoit aussi d'autres libellés, comme `En cours de livraison`, `Colis impossible à livrer` ou `Colis perdu`. Tu ne les vois que si ton colis passe par cette étape. Pour un colis perdu ou impossible à livrer, Peek affiche « Problème signalé » ; un colis déclaré perdu peut encore être retrouvé plus tard.
 
 ## Consigne Vinted Go et point relais : retirer ou déposer un colis
 

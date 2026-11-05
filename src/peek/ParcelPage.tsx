@@ -13,7 +13,7 @@ import { TrackingJournal } from '../components/TrackingJournal';
 import { localizedDeliveryWindow, localizedEventDescription, stageLabel, trackingFailureMessage, useI18n, type MessageKey } from '../i18n';
 import { trackAction, trackScreen } from '../lib/analytics';
 import { carrierBrand } from '../lib/carrierBrand';
-import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber, scheduledDelivery, tracksAutomatically } from '../lib/carriers';
+import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, deliveryLineKey, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber, scheduledDelivery, tracksAutomatically } from '../lib/carriers';
 import { writeCarrierHandoff } from '../lib/carrierHandoff';
 import { LANDING_PATH } from '../lib/experience';
 import { numberToCheck } from '../lib/messages';
@@ -264,7 +264,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // own card does. So does a gift's: its journey tells the country it comes from anyway, and the one who rings is news.
   const deliveringId = deliveringCarrierId(parcel);
   const delivering = carrierKnown && deliveringId ? carrierInfo(deliveringId, locale) : null;
-  const deliveryNote = delivering ? t('parcel.deliveryCarrier', { carrier: delivering.name }) : null;
+  const deliveryNote = delivering ? t(deliveryLineKey(parcel), { carrier: delivering.name }) : null;
   // The carrier the number's own format points to, while it does not list the number yet. After a week, its owner,
   // who reads the number, may choose another carrier at the front door.
   const likely = !carrierKnown && !placeholder && !present ? likelyCarrier(parcel, now) : null;

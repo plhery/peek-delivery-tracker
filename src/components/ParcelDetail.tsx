@@ -12,6 +12,7 @@ import {
   carrierRequirements,
   carrierTrackingHintKey,
   deliveringCarrierId,
+  deliveryLineKey,
   formatTrackingNumber,
   normalizeTrackingNumber,
   parcelTrackingLinks,
@@ -129,7 +130,7 @@ export function ParcelDetail({
   // Handed from one carrier to another, or about to be, the card carries both marks and says who delivers, as its card in the list does.
   const deliveryId = deliveringCarrierId(parcel);
   const delivery = deliveryId ? carrierInfo(deliveryId, locale) : null;
-  const deliveryLabel = delivery ? t('parcel.deliveryCarrier', { carrier: delivery.name }) : null;
+  const deliveryLabel = delivery ? t(deliveryLineKey(parcel), { carrier: delivery.name }) : null;
   const amazonHistoryExpired = carrier.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automaticTracking = tracksAutomatically(carrier.id) && !amazonHistoryExpired;
   const current = currentEvent(parcel.events);

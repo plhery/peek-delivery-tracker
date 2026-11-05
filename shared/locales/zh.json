@@ -576,6 +576,7 @@
   "parcel.pickedUpAt": "已在 {{place}} 取件",
   "parcel.autoChangedCarrier": "已自动从 {{carrier}} 切换",
   "parcel.deliveryCarrier": "由 {{carrier}} 派送",
+  "parcel.deliveryAnnounced": "{{carrier}} 已收到预报，尚未收到包裹",
   "parcel.awaitingHandover": "寄件人还没有把包裹交给 {{carrier}}，交寄后就会开始跟踪。",
   "parcel.scheduledDelivery": "{{carrier}} 按固定时间表更新，不显示签收人。如果没有收到，请联系卖家。",
   "parcel.updated": "更新时间：{{date}}",

@@ -1,6 +1,6 @@
 import { AutoCarrierNotice } from './AutoCarrierNotice';
 import { useEffect, useRef, useState } from 'react';
-import { deliveringCarrierId, displayedCarrierId, carrierInfo } from '../lib/carriers';
+import { deliveringCarrierId, deliveryLineKey, displayedCarrierId, carrierInfo } from '../lib/carriers';
 import { localizedDatePhrase, localizedDeliveryEstimate, useI18n } from '../i18n';
 import { numberToCheck } from '../lib/messages';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelStatusLabel, shownCarrier } from '../lib/parcelStatus';
@@ -28,7 +28,7 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   const { locale, languageTag, t } = useI18n();
   const carrier = shownCarrier(parcel, carrierInfo(displayedCarrierId(parcel), locale), t, locale);
   const deliveryCarrier = deliveringCarrierId(parcel);
-  const deliveryLabel = deliveryCarrier ? t('parcel.deliveryCarrier', { carrier: carrierInfo(deliveryCarrier, locale).name }) : null;
+  const deliveryLabel = deliveryCarrier ? t(deliveryLineKey(parcel), { carrier: carrierInfo(deliveryCarrier, locale).name }) : null;
   const current = currentEvent(parcel.events);
   const estimate = parcelDeliveryEstimate(parcel);
   const expectedDelivery = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag) : null;

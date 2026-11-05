@@ -365,6 +365,20 @@ val Parcel.namedDelivery: NamedDelivery?
 val Parcel.deliveringCarrier: CarrierId?
     get() = if (activeTrackingCarrier != displayedCarrier) activeTrackingCarrier else namedDelivery?.carrier
 
+/**
+ * The words of the card's line on who delivers ([deliveringCarrier]): announced there and not received yet while the
+ * carrier its carrier names lists the parcel without a scan of its own, else who delivers, as on the web.
+ */
+val Parcel.deliveryLineKey: String
+    get() {
+        val named = namedDelivery?.carrier
+        return if (carrierData?.deliveryAnnounced == true && named != null && named == deliveringCarrier) {
+            "parcel.deliveryAnnounced"
+        } else {
+            "parcel.deliveryCarrier"
+        }
+    }
+
 val Parcel.amazonShippingHistoryExpired: Boolean
     get() = carrier == CarrierId.AmazonShipping && syncError == "amazon_shipping_history_expired"
 

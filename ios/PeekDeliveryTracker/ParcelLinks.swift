@@ -22,6 +22,7 @@ extension Parcel {
                 activeTrackingNumber: data.activeTrackingNumber,
                 deliveryCarrier: data.deliveryCarrier,
                 deliveryTrackingNumber: data.deliveryTrackingNumber,
+                deliveryAnnounced: data.deliveryAnnounced,
                 canonicalTrackingNumber: data.canonicalTrackingNumber,
                 originalCarrier: data.originalCarrier,
                 originalTrackingNumber: data.originalTrackingNumber,

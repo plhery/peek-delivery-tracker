@@ -63,6 +63,17 @@ describe('shipment details', () => {
     expect(screen.queryByText('Not ready yet')).not.toBeInTheDocument();
   });
 
+  it('says the carrier that will deliver has only been told of the parcel, while it lists it without a scan of its own', () => {
+    const view = show({ carrier: 'chronopost', trackingNumber: 'XY123456789FR', deliveryCarrier: 'dpd-de', deliveryAnnounced: true });
+    expect(screen.getByText('Announced to DPD Germany, not received yet')).toHaveClass('detail__delivery');
+    expect(screen.getByRole('button', { name: 'Change carrier from Chronopost. Announced to DPD Germany, not received yet' })).toBeVisible();
+    view.unmount();
+    // Handed over, the line names who delivers.
+    show({ carrier: 'gls-de', trackingNumber: '12345678901', originalCarrier: 'gls-de', trackingSource: 'swiss-post', deliveryCarrier: 'swiss-post',
+      deliveryAnnounced: true });
+    expect(screen.getByText('Delivery with Swiss Post')).toHaveClass('detail__delivery');
+  });
+
   it('shows the number the carrier tracks the parcel by under the one typed', () => {
     show({ carrier: 'hermes-de', trackingNumber: '00000000000001', canonicalTrackingNumber: 'H0000000000001' });
     expect([...document.querySelectorAll('.detail__tracking-label')].map(label => label.textContent))

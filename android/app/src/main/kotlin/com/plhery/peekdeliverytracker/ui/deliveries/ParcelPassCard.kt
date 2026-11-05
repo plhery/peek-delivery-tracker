@@ -29,6 +29,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.deliveringCarrier
+import com.plhery.peekdeliverytracker.core.deliveryLineKey
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.isArchived
@@ -114,7 +115,7 @@ fun ParcelPassCard(
     val name = parcel.label.ifEmpty { localizer.text("common.parcel") }
     val carrierNotice = automaticCarrierNotice(parcel)
     val delivering = parcel.deliveringCarrier?.let {
-        localizer.text("parcel.deliveryCarrier", mapOf("carrier" to identities.displayName(it, language)))
+        localizer.text(parcel.deliveryLineKey, mapOf("carrier" to identities.displayName(it, language)))
     }
     val status = listOfNotNull(localizer.parcelStatus(parcel), parcel.pickupPlace).joinToString(" · ")
     val ink = colors.resolve(identity.ink)

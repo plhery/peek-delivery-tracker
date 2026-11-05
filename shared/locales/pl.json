@@ -576,6 +576,7 @@
   "parcel.pickedUpAt": "Odebrano w {{place}}",
   "parcel.autoChangedCarrier": "Automatycznie zmieniono przewoźnika (wcześniej: {{carrier}})",
   "parcel.deliveryCarrier": "Doręcza: {{carrier}}",
+  "parcel.deliveryAnnounced": "Zgłoszona przewoźnikowi {{carrier}}, jeszcze nieprzyjęta",
   "parcel.awaitingHandover": "Nadawca nie przekazał jej jeszcze przewoźnikowi {{carrier}}. Śledzenie zacznie się po przekazaniu.",
   "parcel.scheduledDelivery": "Statusy przewoźnika {{carrier}} pojawiają się według stałego harmonogramu, bez podpisu. Jeśli nic nie dotarło, zapytaj sprzedawcę.",
   "parcel.updated": "Aktualizacja: {{date}}",

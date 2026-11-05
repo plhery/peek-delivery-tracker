@@ -245,6 +245,32 @@ final class CarrierCatalogTests: XCTestCase {
             deliveryCarrier: .glsDe, originalCarrier: .chronopost, originalTrackingNumber: "XY123456789FR")
         XCTAssertEqual(named.deliveringCarrier, .dpdDe)
         XCTAssertEqual(named.trackingNumbers.map(\.number), ["01234567890123", "XY123456789FR"])
+        // Handed over, the line names who delivers even if a probe had found the carrier's record only.
+        named.carrierData?.deliveryAnnounced = true
+        XCTAssertEqual(named.deliveryLineKey, "parcel.deliveryCarrier")
+    }
+
+    @MainActor
+    func testTheDeliveryLineSaysTheNamedCarrierHasOnlyBeenToldOfTheParcel() {
+        var named = Parcel(
+            id: UUID(), trackingNumber: "XY123456789FR", label: "Lamp",
+            carrier: .chronopost, createdAt: "2026-09-10T07:00:00Z", syncStatus: .ok,
+            carrierData: CarrierData(deliveryCarrier: .dpdDe), notificationsMuted: false
+        )
+        XCTAssertEqual(named.deliveryLineKey, "parcel.deliveryCarrier")
+        named.carrierData?.deliveryAnnounced = true
+        XCTAssertEqual(named.deliveryLineKey, "parcel.deliveryAnnounced")
+        let shared = Parcel(shared: PublicPackage(
+            id: named.id, trackingNumber: named.trackingNumber, label: "", carrier: .chronopost, createdAt: named.createdAt, syncStatus: .ok,
+            carrierData: PublicPackageCarrierData(deliveryCarrier: .dpdDe, deliveryAnnounced: true), notificationsMuted: false,
+            trackingEvents: []
+        ))
+        XCTAssertEqual(shared.deliveryLineKey, "parcel.deliveryAnnounced")
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        XCTAssertEqual(localizer.text(shared.deliveryLineKey, ["carrier": "DPD Germany"]), "Announced to DPD Germany, not received yet")
     }
 
     @MainActor

@@ -36,6 +36,7 @@ import com.plhery.peekdeliverytracker.core.EdgeInsets
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.deliveringCarrier
+import com.plhery.peekdeliverytracker.core.deliveryLineKey
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.pickupPlace
 import com.plhery.peekdeliverytracker.core.updateFailed
@@ -120,7 +121,7 @@ fun NextDeliveryPass(
     val nextUp = localizer.text("app.nextUp")
     val notice = automaticCarrierNotice(parcel)
     val delivering = parcel.deliveringCarrier?.let {
-        localizer.text("parcel.deliveryCarrier", mapOf("carrier" to identities.displayName(it, language)))
+        localizer.text(parcel.deliveryLineKey, mapOf("carrier" to identities.displayName(it, language)))
     }
     val status = listOfNotNull(
         localizer.parcelStatus(parcel),

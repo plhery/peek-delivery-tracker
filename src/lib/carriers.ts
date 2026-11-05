@@ -184,6 +184,7 @@ export function carrierClaimingNumber(trackingNumber: string, carrierId: Carrier
 interface NamedDelivery {
   deliveryCarrier?: CarrierId;
   deliveryTrackingNumber?: string;
+  deliveryAnnounced?: boolean;
 }
 
 /**
@@ -201,6 +202,15 @@ function namedDelivery(parcel: Parameters<typeof displayedCarrierId>[0] & NamedD
 export function deliveringCarrierId(parcel: Parameters<typeof namedDelivery>[0]): CarrierId | null {
   const active = activeTrackingCarrierId(parcel);
   return active !== displayedCarrierId(parcel) ? active : namedDelivery(parcel)?.carrier ?? null;
+}
+
+/**
+ * The words of the card's line on who delivers (`deliveringCarrierId`): announced there and not received yet while the
+ * carrier its carrier names lists the parcel without a scan of its own, else who delivers.
+ */
+export function deliveryLineKey(parcel: Parameters<typeof namedDelivery>[0]): 'parcel.deliveryAnnounced' | 'parcel.deliveryCarrier' {
+  const named = namedDelivery(parcel);
+  return parcel.deliveryAnnounced && named && named.carrier === deliveringCarrierId(parcel) ? 'parcel.deliveryAnnounced' : 'parcel.deliveryCarrier';
 }
 
 /**

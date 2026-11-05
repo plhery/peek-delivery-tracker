@@ -576,6 +576,7 @@
   "parcel.pickedUpAt": "Получена: {{place}}",
   "parcel.autoChangedCarrier": "Служба доставки сменилась автоматически (раньше: {{carrier}})",
   "parcel.deliveryCarrier": "Доставляет {{carrier}}",
+  "parcel.deliveryAnnounced": "В {{carrier}} посылку ждут, но ещё не получили",
   "parcel.awaitingHandover": "Отправитель ещё не передал посылку в {{carrier}}. Отслеживание начнётся после передачи.",
   "parcel.scheduledDelivery": "{{carrier}} обновляет статусы по графику, без подписи. Если посылка не пришла, спросите продавца.",
   "parcel.updated": "Обновлено: {{date}}",

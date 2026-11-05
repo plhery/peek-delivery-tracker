@@ -469,7 +469,7 @@ private struct SharedParcelCard: View {
         // With a second mark over its map, the card is two lines taller, all of them map.
         let room = delivery == nil ? 0 : RouteEngraving.handoverRoom
         let deliveryLine = delivering.map {
-            localizer.text("parcel.deliveryCarrier", ["carrier": catalog.info(for: $0, language: localizer.language).displayName])
+            localizer.text(parcel.deliveryLineKey, ["carrier": catalog.info(for: $0, language: localizer.language).displayName])
         }
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .firstMark, spacing: 4) {
@@ -736,7 +736,7 @@ private struct GiftParcelCard: View {
         let delivering = parcel.deliveringCarrier
         let delivery = delivering.map { CarrierVisualIdentity.of($0, catalog: catalog, language: localizer.language) }
         let deliveryLine = delivering.map {
-            localizer.text("parcel.deliveryCarrier", ["carrier": catalog.info(for: $0, language: localizer.language).displayName])
+            localizer.text(parcel.deliveryLineKey, ["carrier": catalog.info(for: $0, language: localizer.language).displayName])
         }
         let tone = ExperimentalPalette.lilac
         let width: CGFloat = typeSize.isAccessibilitySize ? 150 : opened ? 250 : 220

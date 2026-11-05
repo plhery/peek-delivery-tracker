@@ -157,6 +157,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     activeTrackingNumber: row.carrier_data?.active_tracking_number ?? undefined,
     deliveryCarrier: row.carrier_data?.delivery_carrier ?? undefined,
     deliveryTrackingNumber: row.carrier_data?.delivery_tracking_number ?? undefined,
+    deliveryAnnounced: row.carrier_data?.delivery_announced ?? undefined,
     canonicalTrackingNumber: row.carrier_data?.canonical_tracking_number ?? undefined,
     swissPostReady: row.carrier_data?.swiss_post_ready ?? undefined,
     destinationCountry: row.carrier_data?.destination_country ?? undefined,

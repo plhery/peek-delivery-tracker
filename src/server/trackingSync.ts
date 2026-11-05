@@ -196,6 +196,8 @@ interface DeliveryProbe extends JsonObject {
   origin_update: string | null;
   /** The partner had the parcel on record, dated no earlier than the origin's news, without a scan of its own. */
   announced?: true;
+  /** The partner had the parcel on record, however old the record, without a scan of its own: the card says so. */
+  listed?: true;
   /** The probes in a row that found nothing while the origin (Cainiao for Swiss Post) had no news. */
   misses?: number;
 }
@@ -240,6 +242,7 @@ function previousDeliveryProbe(parcel: JsonObject, carrier: string, number: stri
   if ((stored.carrier != null && stored.carrier !== carrier) || (stored.number != null && stored.number !== number)) return null;
   return { at: stored.at, origin_update: typeof stored.origin_update === 'string' ? stored.origin_update : null,
     ...(stored.announced === true ? { announced: true as const } : {}),
+    ...(stored.listed === true ? { listed: true as const } : {}),
     ...(Number.isSafeInteger(stored.misses) && Number(stored.misses) > 0 ? { misses: Number(stored.misses) } : {}) };
 }
 
@@ -2774,8 +2777,9 @@ export class TrackingSyncService {
               ...(providerOrigin ? {} : { earlierResult: origin, earlierCarrierId: carrierId }),
             };
           }
-          // It has the parcel on record with news of its own and no scan yet: its first scan comes next.
-          if (!scanned && deliveryTime > 0 && fresh) Object.assign(probe, { announced: true, misses: 1 });
+          // It has the parcel on record and no scan yet: the record the earlier carrier sent ahead. With news of
+          // its own, its first scan comes next.
+          if (!scanned && deliveryTime > 0) Object.assign(probe, { listed: true }, fresh ? { announced: true, misses: 1 } : {});
         } catch (error) {
           fallbackError = errorType(error);
           // A partner that does not know the item yet, or answers inconclusively

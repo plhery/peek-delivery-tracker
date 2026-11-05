@@ -70,6 +70,7 @@ import com.plhery.peekdeliverytracker.core.awaitingHandover
 import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.deliveringCarrier
+import com.plhery.peekdeliverytracker.core.deliveryLineKey
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.inputNeededPrompt
@@ -173,7 +174,7 @@ internal fun LivePassCard(
     val delivering = parcel.deliveringCarrier
     val delivery = remember(identities, delivering, language) { delivering?.let { identities.of(it, language) } }
     val deliveryLine = delivering?.let {
-        localizer.text("parcel.deliveryCarrier", mapOf("carrier" to identities.displayName(it, language)))
+        localizer.text(parcel.deliveryLineKey, mapOf("carrier" to identities.displayName(it, language)))
     }
     val placed = parcel.hasMappedPlace
     val route = if (placed && atlas != null) rememberParcelRoute(parcel, atlas, language) else null

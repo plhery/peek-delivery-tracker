@@ -704,7 +704,10 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the provider names, the same way. Parcels filed under no carrier keep their routing.
 - Until then the parcel is followed on the origin. The cards, parcel links and the delivered email
   already name the partner the origin names (`delivery_carrier`) as who delivers, and the cards and
-  links show its number (`delivery_tracking_number`) after the followed one.
+  links show its number (`delivery_tracking_number`) after the followed one. While that partner's
+  last answer is a dated record without a scan of its own, however old, the line reads "Announced
+  to DHL, not received yet" instead of "Delivery with DHL" (`delivery_announced`, served from the
+  probe's `listed` marker in [`eventPlaces.ts`](../src/server/eventPlaces.ts)).
 - The reverse holds too. A carrier that confirms the number and would hand the parcel to the
   carrier it is filed under, with the same number, is an earlier leg, such as a customs agent
   before the local courier. Its history is shown while the filed carrier has none, but it

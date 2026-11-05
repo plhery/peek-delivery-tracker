@@ -576,6 +576,7 @@
   "parcel.pickedUpAt": "Recogido en {{place}}",
   "parcel.autoChangedCarrier": "Cambiado automáticamente desde {{carrier}}",
   "parcel.deliveryCarrier": "Entrega con {{carrier}}",
+  "parcel.deliveryAnnounced": "Anunciado a {{carrier}}, aún no recibido",
   "parcel.awaitingHandover": "El remitente aún no lo ha entregado a {{carrier}}. El seguimiento empezará cuando lo haga.",
   "parcel.scheduledDelivery": "{{carrier}} actualiza según un calendario fijo, sin firma. Si no ha llegado nada, contacta con el vendedor.",
   "parcel.updated": "Actualizado: {{date}}",

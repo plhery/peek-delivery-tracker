@@ -146,7 +146,7 @@ describe('what a link shows', () => {
       ...Object.keys(contract.components.schemas.PackageRow.properties.carrier_data.properties),
       'delivery_probe', 'swiss_post_probe', 'upu_history', 'direct_local_history',
       'international_tracking_number', 'pickup_code', 'last_update', 'events',
-    ].map((key) => [key, ['carrier_answered', 'swiss_post_ready', 'dpd_postcode_verified'].includes(key) ? true
+    ].map((key) => [key, ['carrier_answered', 'swiss_post_ready', 'dpd_postcode_verified', 'delivery_announced'].includes(key) ? true
       : key === 'weight_kg' ? 2 : key === 'import_charges' ? { currency: 'EUR', customs: 23.41 }
         : key === 'routing' ? { confirmed_postcode: '9999', likely_carrier: { carrier: 'brt', since: '2026-10-02T08:00:00Z', at: 1 } }
           : `stored ${key}`]));

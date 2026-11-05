@@ -576,6 +576,7 @@
   "parcel.pickedUpAt": "Retirada em {{place}}",
   "parcel.autoChangedCarrier": "Transportadora trocada automaticamente (antes: {{carrier}})",
   "parcel.deliveryCarrier": "Entrega por {{carrier}}",
+  "parcel.deliveryAnnounced": "Anunciada a {{carrier}}, ainda não recebida",
   "parcel.awaitingHandover": "O remetente ainda não entregou a encomenda a {{carrier}}. O rastreamento começa quando ele entregar.",
   "parcel.scheduledDelivery": "As atualizações de {{carrier}} seguem um cronograma fixo, sem assinatura. Se nada chegou, fale com o vendedor.",
   "parcel.updated": "Atualizada: {{date}}",

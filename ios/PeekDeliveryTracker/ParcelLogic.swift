@@ -291,6 +291,15 @@ extension Parcel {
         activeTrackingCarrier != displayedCarrier ? activeTrackingCarrier : namedDelivery?.carrier
     }
 
+    /// The words of the card's line on who delivers (`deliveringCarrier`): announced there and not received yet while the
+    /// carrier its carrier names lists the parcel without a scan of its own, else who delivers, as on the web.
+    var deliveryLineKey: String {
+        guard carrierData?.deliveryAnnounced == true, let named = namedDelivery?.carrier, named == deliveringCarrier else {
+            return "parcel.deliveryCarrier"
+        }
+        return "parcel.deliveryAnnounced"
+    }
+
     var amazonShippingHistoryExpired: Bool {
         carrier == .amazonShipping && syncError == "amazon_shipping_history_expired"
     }

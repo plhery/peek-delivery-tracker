@@ -50116,6 +50116,7 @@ export interface ApiPackageRow {
   "active_tracking_number"?: string | null;
   "delivery_carrier"?: ApiCarrierId | null;
   "delivery_tracking_number"?: string | null;
+  "delivery_announced"?: boolean | null;
   "canonical_tracking_number"?: string | null;
   "original_package_id"?: string | null;
   "original_carrier"?: ApiCarrierId | null;
@@ -50496,6 +50497,7 @@ export interface ApiPublicPackage {
   "original_tracking_number"?: string;
   "delivery_carrier"?: ApiCarrierId;
   "delivery_tracking_number"?: string;
+  "delivery_announced"?: boolean;
   "canonical_tracking_number"?: string;
   "tracking_provider"?: string;
   "carrier_answered"?: boolean;

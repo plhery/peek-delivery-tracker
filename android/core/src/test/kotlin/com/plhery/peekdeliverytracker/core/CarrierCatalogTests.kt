@@ -331,6 +331,27 @@ class CarrierCatalogTests {
         )
         assertEquals(CarrierId.DpdDe, named.deliveringCarrier)
         assertEquals(listOf("01234567890123", "XY123456789FR"), named.trackingNumbers.map { it.number })
+        // Handed over, the line names who delivers even if a probe had found the carrier's record only.
+        assertEquals("parcel.deliveryCarrier", named.copy(carrierData = named.carrierData?.copy(deliveryAnnounced = true)).deliveryLineKey)
+    }
+
+    @Test
+    fun theDeliveryLineSaysTheNamedCarrierHasOnlyBeenToldOfTheParcel() {
+        val named = parcel(
+            "XY123456789FR", "Lamp", CarrierId.Chronopost, "2026-09-10T07:00:00Z",
+            carrierData = CarrierData(deliveryCarrier = CarrierId.DpdDe),
+        )
+        assertEquals("parcel.deliveryCarrier", named.deliveryLineKey)
+        assertEquals("parcel.deliveryAnnounced", named.copy(carrierData = named.carrierData?.copy(deliveryAnnounced = true)).deliveryLineKey)
+        val shared = Parcel(
+            shared = PublicPackage(
+                id = named.id, trackingNumber = named.trackingNumber, label = "", carrier = CarrierId.Chronopost,
+                createdAt = named.createdAt, syncStatus = SyncStatus.Ok,
+                carrierData = PublicPackageCarrierData(deliveryCarrier = CarrierId.DpdDe, deliveryAnnounced = true),
+                notificationsMuted = false, trackingEvents = emptyList(),
+            ),
+        )
+        assertEquals("parcel.deliveryAnnounced", shared.deliveryLineKey)
     }
 
     @Test

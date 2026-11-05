@@ -121,6 +121,7 @@ import com.plhery.peekdeliverytracker.core.awaitingHandover
 import com.plhery.peekdeliverytracker.core.collapsingGiftRows
 import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.core.deliveringCarrier
+import com.plhery.peekdeliverytracker.core.deliveryLineKey
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.gift
 import com.plhery.peekdeliverytracker.core.giftDetail
@@ -933,7 +934,7 @@ private fun SharedParcelCard(
     // Handed from one carrier to another, or about to be, the card carries both marks and says who delivers.
     val delivering = parcel.deliveringCarrier
     val delivery = remember(identities, delivering, language) { delivering?.let { identities.of(it, language) } }
-    val deliveryLine = delivering?.let { localizer.text("parcel.deliveryCarrier", mapOf("carrier" to identities.displayName(it, language))) }
+    val deliveryLine = delivering?.let { localizer.text(parcel.deliveryLineKey, mapOf("carrier" to identities.displayName(it, language))) }
     val metrics = PassRouteMetrics.of(handover = delivery != null, largeText = false, headerHeight = 0.0)
     val frames = remember { PassFrames() }
     var showingMap by rememberSaveable { mutableStateOf(false) }
@@ -1203,7 +1204,7 @@ private fun GiftParcelCard(parcel: Parcel, opened: Boolean, refreshing: Boolean,
     val identity = remember(identities, parcel, language) { identities.of(parcel.displayedCarrier, language) }
     val delivering = parcel.deliveringCarrier
     val delivery = remember(identities, delivering, language) { delivering?.let { identities.of(it, language) } }
-    val deliveryLine = delivering?.let { localizer.text("parcel.deliveryCarrier", mapOf("carrier" to identities.displayName(it, language))) }
+    val deliveryLine = delivering?.let { localizer.text(parcel.deliveryLineKey, mapOf("carrier" to identities.displayName(it, language))) }
     val tone = colors.resolve(ExperimentalPalette.lilac)
     val width = if (PeekTheme.dynamicTypeSize.isAccessibilitySize) 150.dp else if (opened) 250.dp else 220.dp
     Column(

@@ -258,7 +258,7 @@ struct ParcelDetailView: View {
         // At the largest text sizes the buttons' line under the marks pushes the map down by as much as it adds.
         let lower = typeSize.isAccessibilitySize ? max(0, headerHeight - 44) : 0
         let deliveryLine = delivering.map {
-            localizer.text("parcel.deliveryCarrier", ["carrier": catalog.info(for: $0, language: localizer.language).displayName])
+            localizer.text(parcel.deliveryLineKey, ["carrier": catalog.info(for: $0, language: localizer.language).displayName])
         }
         // A made-up number has no page at its carrier, and neither has one a link hides.
         let trackingLinks = sample == nil && !parcel.trackingNumber.isEmpty ? catalog.trackingLinks(for: parcel, language: localizer.language) : []

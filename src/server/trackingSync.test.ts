@@ -5016,6 +5016,39 @@ describe('TrackingSyncService', () => {
     }
   });
 
+  it('remembers that the named partner lists the parcel without a scan, however old its record, until it no longer does', async () => {
+    const client = fakeClient();
+    let now = new Date('2026-09-10T16:00:00Z');
+    const originUpdate = '2026-09-10T17:19:00+02:00';
+    let listed = true;
+    const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => {
+      if (carrier !== 'swiss-post') return { status: 'in_transit', delivery_carrier: 'swiss-post', last_update: originUpdate, timezone: 'Europe/Paris',
+        events: [{ time: originUpdate, description: 'In transit', stage: 'in_transit' }] };
+      if (!listed) throw Object.assign(new Error('Shipment not found'), { status: 404 });
+      return { status: 'pending', current_stage: 'registered', last_update: '2026-09-08T09:00:00+02:00', timezone: 'Europe/Zurich',
+        events: [{ time: '2026-09-08T09:00:00+02:00', description: 'Data received', stage: 'registered' }] };
+    }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'pre-advice', carrier: 'la-poste', tracking_number: 'LX123456785FR' };
+    const probe = async () => {
+      adapter.fetch.mockClear();
+      await service.syncPackage(parcel, { trigger: 'scheduled' });
+      parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+      return [adapter.fetch.mock.calls.map((call) => call[0]), (parcel.carrier_data as JsonObject).delivery_probe as JsonObject];
+    };
+
+    // A record older than the origin's news: listed, not announced, so the long gap holds.
+    expect(await probe()).toEqual([['la-poste', 'swiss-post'], expect.objectContaining({ listed: true, misses: 1 })]);
+    expect((await probe())[1]).not.toHaveProperty('announced');
+    now = new Date('2026-09-10T16:10:00Z');
+    expect(await probe()).toEqual([['la-poste'], expect.objectContaining({ listed: true })]);
+    listed = false;
+    now = new Date('2026-09-10T17:00:00Z');
+    const [asked, missed] = await probe();
+    expect(asked).toEqual(['la-poste', 'swiss-post']);
+    expect(missed).not.toHaveProperty('listed');
+  });
+
   it('hands over to a partner relaying the origin’s newest scan to the minute', async () => {
     const origin: CarrierResult = { status: 'in_transit', destination_country: 'PT', last_update: '2026-10-20T05:10:08+01:00',
       timezone: 'Europe/London', events: [{ time: '2026-10-20T05:10:08+01:00', description: 'Item Leaving the UK', stage: 'in_transit' }] };

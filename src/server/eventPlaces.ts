@@ -74,12 +74,26 @@ export function timeline(events: JsonObject[]): JsonObject[] {
   return events.filter((event) => !isOwnRow(event) || !(firstScan <= time(event)));
 }
 
-/** A package row without the carrier data that only the service reads. Planned steps are served on their own (`planned_events`). */
+/**
+ * Whether the carrier the followed one names as delivering lists the parcel without a scan of its own: its last
+ * probe found only the record the earlier carrier sent ahead (DHL's pre-advice), and the parcel was not handed over.
+ */
+function deliveryAnnounced(data: JsonObject): boolean {
+  const probe = data.delivery_probe;
+  return isRecord(probe) && probe.listed === true && typeof data.delivery_carrier === 'string'
+    && probe.carrier === data.delivery_carrier && !data.original_carrier && data.active_tracking_carrier !== data.delivery_carrier;
+}
+
+/**
+ * A package row without the carrier data that only the service reads, and with what the card says of the delivering
+ * carrier (`delivery_announced`). Planned steps are served on their own (`planned_events`).
+ */
 function withoutServiceData(row: JsonObject): JsonObject {
   const stored = isRecord(row.carrier_data) ? row.carrier_data : null;
   const planned = stored && isRecord(stored.routing) && 'planned' in stored.routing;
-  if (!stored || !('add_recognition_pending' in stored || DIRECT_HISTORY in stored || planned)) return row;
-  const data = { ...stored };
+  const announced = stored !== null && deliveryAnnounced(stored);
+  if (!stored || !('add_recognition_pending' in stored || DIRECT_HISTORY in stored || planned || announced)) return row;
+  const data: JsonObject = { ...stored, ...announced ? { delivery_announced: true } : {} };
   delete data.add_recognition_pending;
   delete data[DIRECT_HISTORY];
   if (planned) {

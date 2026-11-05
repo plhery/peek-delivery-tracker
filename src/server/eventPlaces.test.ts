@@ -10,6 +10,19 @@ it('keeps addition-only query context out of client package data', () => {
   expect(row.carrier_data.add_recognition_pending).toBe(true);
 });
 
+it('says when the named delivering carrier lists the parcel without a scan of its own, until it is handed over', () => {
+  const probe = { at: '2026-11-05T10:00:00Z', origin_update: null, carrier: 'dhl', number: 'TESTPARTNER001', listed: true };
+  const served = (data: Record<string, unknown>) => (withEventPlaces({ carrier_data: data }) as { carrier_data: Record<string, unknown> }).carrier_data;
+  expect(served({ delivery_carrier: 'dhl', delivery_probe: probe })).toMatchObject({ delivery_announced: true });
+  // Found nothing, another partner, or the parcel is followed there now: the line names who delivers.
+  for (const data of [
+    { delivery_carrier: 'dhl', delivery_probe: { ...probe, listed: undefined } },
+    { delivery_carrier: 'dhl', delivery_probe: { ...probe, carrier: 'swiss-post' } },
+    { delivery_probe: probe },
+    { delivery_carrier: 'dhl', delivery_probe: probe, original_carrier: 'jrt', active_tracking_carrier: 'dhl' },
+  ]) expect(served(data)).not.toHaveProperty('delivery_announced');
+});
+
 const event = (id: string, location: string | null, occurredAt: string) => ({
   id, package_id: 'parcel', stage: 'in_transit', description: 'Scan', location, occurred_at: occurredAt,
 });

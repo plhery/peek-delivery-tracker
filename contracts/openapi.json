@@ -53503,6 +53503,13 @@
                 ],
                 "description": "The number the named delivering carrier gave the parcel."
               },
+              "delivery_announced": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "The delivering carrier named in `delivery_carrier` lists the parcel without a scan of its own: the earlier carrier announced it there, and it has not been received."
+              },
               "canonical_tracking_number": {
                 "type": [
                   "string",
@@ -55227,6 +55234,10 @@
               "delivery_tracking_number": {
                 "type": "string",
                 "description": "Only when the number is shown."
+              },
+              "delivery_announced": {
+                "type": "boolean",
+                "description": "The delivering carrier named in `delivery_carrier` lists the parcel without a scan of its own: the earlier carrier announced it there, and it has not been received."
               },
               "canonical_tracking_number": {
                 "type": "string",

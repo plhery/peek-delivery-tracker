@@ -23,7 +23,9 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
+import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
@@ -35,6 +37,7 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
 import androidx.compose.ui.unit.width
@@ -822,6 +825,54 @@ class FriendsTest {
     }
 
     @Test
+    fun aDotKeepsToTheWordBeforeItAndAFriendsArrivalHasItsDot() {
+        show { snapshot = FriendFixtures.circle(profile = FriendFixtures.profile.copy(shareArrival = true)) }
+        // A line never starts with "·": a no-break space ties it to the part before it.
+        assertTrue(line("${text("friends.shareStats")}\u00A0· ${text("friends.shareArrival")}") != null)
+        assertTrue(exists(FRIENDS_ARRIVAL_DOT))
+        tap(FRIENDS_SHARING)
+        val summary = words(FRIENDS_PREVIEW)[1]
+        assertEquals(summary, 2, summary.split("\u00A0· ").size - 1)
+        assertFalse(summary, summary.contains(" · "))
+        back()
+        tap(FRIENDS_INVITE)
+        assertTrue(shows(text("friends.inviteExpiry").replace(" · ", "\u00A0· ")))
+    }
+
+    @Test
+    fun atTheAccessibilitySizesEachPartOfADottedLineTakesALineOfItsOwnAndAnArrivalLosesItsDot() {
+        show(fontScale = 2f) { snapshot = FriendFixtures.circle(profile = FriendFixtures.profile.copy(shareArrival = true)) }
+        assertLines(listOf(text("friends.shareStats"), text("friends.shareArrival")), within = FRIENDS_SHARING)
+        // The row still reads as one button.
+        assertEquals("${text("friends.yourSharing")}, ${text("friends.settings")}", label(FRIENDS_SHARING))
+        // The words alone: the small dot would read as a stray "·".
+        assertFalse(exists(FRIENDS_ARRIVAL_DOT))
+        assertEquals(listOf("Ada", "2 stamps", text("friends.arrived")), words(friendCardTag(FriendFixtures.ada.id)))
+        tap(FRIENDS_SHARING)
+        // The name, then the three parts of what friends see, read in order.
+        val preview = words(FRIENDS_PREVIEW)
+        assertEquals(preview.toString(), 5, preview.size)
+        assertLines(preview.subList(1, 4), within = FRIENDS_PREVIEW)
+        back()
+        tap(FRIENDS_INVITE)
+        assertLines(text("friends.inviteExpiry").split(" · "), within = SHEET_PANEL)
+    }
+
+    /** The text node that shows [text] exactly, if one does, in the tree as drawn. */
+    private fun line(text: String): DpRect? =
+        compose.onAllNodes(hasText(text), useUnmergedTree = true).fetchSemanticsNodes().singleOrNull()?.let {
+            compose.onNode(hasText(text), useUnmergedTree = true).getBoundsInRoot()
+        }
+
+    /** Each of [parts] stands on a line of its own under the one before, and no words in the part tagged [within] have a "·". */
+    private fun assertLines(parts: List<String>, within: String) {
+        val lines = parts.map { requireNotNull(line(it)) { "No line of its own for \"$it\"" } }
+        lines.zipWithNext().forEachIndexed { i, (above, below) -> assertTrue("${parts[i + 1]} under ${parts[i]}", below.top >= above.bottom) }
+        val dotted = hasText("·", substring = true) and hasAnyAncestor(hasTestTag(within))
+        assertTrue(compose.onAllNodes(dotted, useUnmergedTree = true).fetchSemanticsNodes().isEmpty())
+    }
+
+    @Test
     fun atTheUsualSizeTheInvitePillStandsBesideTheTitle() {
         show()
         val header = compose.onNodeWithTag(FRIENDS_HEADER).getUnclippedBoundsInRoot()
@@ -849,7 +900,7 @@ class FriendsTest {
         show()
         tap(FRIENDS_INVITE)
         assertEquals(1, requests(FriendsAction.CreateInvite).size)
-        assertTrue(shows(text("friends.inviteExpiry")))
+        assertTrue(shows(text("friends.inviteExpiry").replace(" · ", "\u00A0· ")))
         assertEquals(link, words(FRIENDS_INVITATION_URL).single())
         assertEquals(text("friends.link") + ": " + link, label(FRIENDS_INVITATION_URL))
         repeat(3) { settle() }

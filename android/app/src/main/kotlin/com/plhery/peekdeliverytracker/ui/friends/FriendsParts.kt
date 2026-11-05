@@ -189,8 +189,9 @@ internal fun FriendsPostagePair(modifier: Modifier = Modifier) {
 
 /**
  * `FriendCardView`: the friend's stamp 39 × 48 and, 12 beside it, the name in title3 semibold, the stamps they earned or
- * "friends.privateStats" in caption2 in their colour, and this week's arrival behind a dot of 4 where they share it; in
- * by 16 and 14 on their surface with 18-point corners, 80 tall at least.
+ * "friends.privateStats" in caption2 in their colour, and this week's arrival behind a dot of 4 where they share it (the
+ * words alone at the accessibility sizes, [ArrivalLine]); in by 16 and 14 on their surface with 18-point corners, 80
+ * tall at least.
  */
 @Composable
 internal fun FriendCardView(friend: FriendCard) {
@@ -256,14 +257,36 @@ internal fun FriendPostcard(
     }
 }
 
-/** "friends.arrived" behind a dot of 4 in [tint], 5 apart. */
+/**
+ * "friends.arrived" behind a dot of 4 in [tint], 5 apart. At the accessibility sizes the words take the line alone: the
+ * small dot would read as a stray "·".
+ */
 @Composable
 private fun ArrivalLine(tint: Color, style: TextStyle, modifier: Modifier = Modifier) {
     Row(modifier, horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
-        Box(Modifier.size(4.dp).background(tint, CircleShape))
+        if (!PeekTheme.dynamicTypeSize.isAccessibilitySize) Box(Modifier.size(4.dp).background(tint, CircleShape).testTag(FRIENDS_ARRIVAL_DOT))
         Text(localized("friends.arrived"), color = tint, style = style.sfLines())
     }
 }
+
+/**
+ * `DottedLine`: [parts] parted by "·" on one line, the dot kept to the part before it by a no-break space, so a line
+ * never starts with it. At the accessibility sizes, where the line would break, each part takes a line of its own, 2
+ * apart, and the dot goes; TalkBack reads them as one.
+ */
+@Composable
+internal fun DottedLine(parts: List<String>, color: Color, style: TextStyle, modifier: Modifier = Modifier) {
+    if (PeekTheme.dynamicTypeSize.isAccessibilitySize && parts.size > 1) {
+        Column(modifier.semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            parts.forEach { Text(it, color = color, style = style) }
+        }
+    } else {
+        Text(dottedLine(parts), modifier, color = color, style = style)
+    }
+}
+
+/** [parts] on one line, each "·" kept to the part before it. */
+internal fun dottedLine(parts: List<String>): String = parts.joinToString("\u00A0· ")
 
 /**
  * `FriendSharingPreviewView`: what friends see of the reader, in transit on its surface with 17-point corners, in by
@@ -278,11 +301,14 @@ internal fun FriendSharingPreview(friend: FriendCard) {
     val transit = colors.resolve(ExperimentalPalette.transit)
     val stats = friend.stats
     val summary = if (stats == null) {
-        localizer.text("friends.privateStats")
+        listOf(localizer.text("friends.privateStats"))
     } else {
         val days = stats.averageDays?.let { localizer.text(if (it == 1) "friends.day" else "friends.days", mapOf("count" to it)) } ?: "—"
-        "${stats.deliveredCount} ${localizer.text("passport.delivered", mapOf("count" to stats.deliveredCount))} · $days · " +
-            localizer.text("friends.stampCount", mapOf("count" to stats.stamps.size))
+        listOf(
+            "${stats.deliveredCount} ${localizer.text("passport.delivered", mapOf("count" to stats.deliveredCount))}",
+            days,
+            localizer.text("friends.stampCount", mapOf("count" to stats.stamps.size)),
+        )
     }
     Column(
         Modifier
@@ -297,7 +323,7 @@ internal fun FriendSharingPreview(friend: FriendCard) {
             Spacer(Modifier.width(8.dp))
             FriendAvatar(friend.nickname, Modifier.size(33.dp, 41.dp), ExperimentalPalette.transit, ExperimentalPalette.transitSurface)
         }
-        Text(summary, Modifier.heightIn(min = 36.dp), color = transit, style = type.caption2.sfLines())
+        DottedLine(summary, transit, type.caption2.sfLines(), Modifier.heightIn(min = 36.dp))
         val arrival = friend.arrivedThisWeek
         Text(
             localized(if (arrival == true) "friends.arrived" else "friends.noArrival"),
@@ -554,7 +580,7 @@ internal fun FriendsInvitationView(
         create()
     }
     Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(localized("friends.inviteExpiry"), color = colors.secondaryLabel, style = type.caption2.sfLines())
+        DottedLine(localized("friends.inviteExpiry").split(" · "), colors.secondaryLabel, type.caption2.sfLines())
         FriendsInvitationParcel(nickname)
         if (invitation.code.isEmpty()) {
             if (!invitation.requested || busy) {
@@ -900,6 +926,7 @@ const val FRIENDS_PANEL = "$FRIENDS.panel"
 const val FRIENDS_CLOSE = "$FRIENDS.close"
 const val FRIENDS_NICKNAME = "$FRIENDS.nickname"
 const val FRIENDS_PREVIEW = "$FRIENDS.preview"
+const val FRIENDS_ARRIVAL_DOT = "$FRIENDS.arrivalDot"
 const val FRIENDS_SHARE_STATS = "$FRIENDS.shareStats"
 const val FRIENDS_SHARE_ARRIVAL = "$FRIENDS.shareArrival"
 const val FRIENDS_SAVE = "$FRIENDS.save"

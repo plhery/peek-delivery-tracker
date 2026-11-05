@@ -707,9 +707,11 @@ private fun Circle(state: FriendsState, data: FriendsSnapshot, focus: UUID?, asF
             FriendAvatar(profile.nickname, Modifier.size(31.dp, 38.dp), ExperimentalPalette.transit, ExperimentalPalette.transitSurface)
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(localized("friends.yourSharing"), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
-                val summary = localizer.text(if (profile.shareStats) "friends.shareStats" else "friends.privateStats") +
-                    if (profile.shareArrival) " · " + localizer.text("friends.shareArrival") else ""
-                Text(summary, color = colors.secondaryLabel, style = type.caption2.sfLines())
+                val summary = listOfNotNull(
+                    localizer.text(if (profile.shareStats) "friends.shareStats" else "friends.privateStats"),
+                    localizer.text("friends.shareArrival").takeIf { profile.shareArrival },
+                )
+                DottedLine(summary, colors.secondaryLabel, type.caption2.sfLines())
             }
             // `Spacer(minLength: 6)`, with the stack's 12 either side of it.
             PeekSymbol("slider.horizontal.3", Modifier.padding(start = 18.dp), font = type.footnote, tint = colors.secondaryLabel)

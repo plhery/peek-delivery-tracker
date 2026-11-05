@@ -84762,6 +84762,14 @@
     "candidates": []
   },
   {
+    "input": "JPMY4551840739",
+    "carrier": "jumppoint-international",
+    "confidence": "high",
+    "candidates": [
+      "jumppoint-international"
+    ]
+  },
+  {
     "input": "JQ0004224658",
     "carrier": "unknown",
     "confidence": "low",
@@ -86857,7 +86865,8 @@
     "asked": [
       "colis-prive",
       "aramex-au",
-      "aramex-nz"
+      "aramex-nz",
+      "lm-parcel"
     ]
   },
   {
@@ -86873,7 +86882,8 @@
     "asked": [
       "colis-prive",
       "aramex-au",
-      "aramex-nz"
+      "aramex-nz",
+      "lm-parcel"
     ]
   },
   {
@@ -103324,6 +103334,9 @@
     "confidence": "low",
     "candidates": [
       "znlogic"
+    ],
+    "asked": [
+      "znlogic"
     ]
   },
   {
@@ -103331,6 +103344,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "znlogic"
+    ],
+    "asked": [
       "znlogic"
     ]
   },

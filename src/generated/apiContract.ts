@@ -41312,7 +41312,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "lm-parcel",
+      "recognitionRank": 2,
+      "recognitionPattern": "^LM\\d{10}$"
     },
     "trackingUrlTemplate": "https://www.lmparcel.com/search?nums={trackingNumber}",
     "linkRules": [
@@ -47822,10 +47824,12 @@ export const CARRIER_CAPABILITIES = {
     ],
     "color": "#ac7138",
     "selectable": true,
-    "timezone": "America/Los_Angeles",
+    "timezone": "UTC",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "znlogic",
+      "recognitionRank": 3,
+      "recognitionPattern": "^ZPY[A-Z]{2}\\d{10}YQ$"
     },
     "trackingUrlTemplate": "https://tracking.link/tracking?tracking_id={trackingNumber}",
     "linkRules": [
@@ -48584,6 +48588,42 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.tiptop56.com/"
+  },
+  "jumppoint-international": {
+    "displayName": "Jumppoint International Express",
+    "aliases": [
+      "Jumppoint International",
+      "Jumppoint國際快遞"
+    ],
+    "countries": [
+      "HK"
+    ],
+    "color": "#0f4ae1",
+    "selectable": true,
+    "timezone": "Asia/Hong_Kong",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://int-tracking.jumppoint.io/?q={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "int-tracking.jumppoint.io"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "q"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^JP[A-Z]{2}\\d{10}$",
+        "confidence": "high"
+      }
+    ],
+    "trackingSearchUrl": "https://int-tracking.jumppoint.io/"
   }
 } as const;
 
@@ -49975,7 +50015,8 @@ export const CARRIER_IDS = [
   "edi-express",
   "fmd-distribution",
   "jas-worldwide",
-  "tiptop"
+  "tiptop",
+  "jumppoint-international"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

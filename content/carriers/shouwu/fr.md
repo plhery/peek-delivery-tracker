@@ -18,7 +18,7 @@ Un numéro Shouwu, c'est SWECN, douze chiffres et YQ, soit 19 caractères. Avec 
 | `SWECN00000000000YQ` | Onze chiffres seulement : pas un numéro Shouwu. Vérifie qu'il ne manque pas un chiffre. |
 | `JSEAA0000000000YQ` | Finit aussi par YQ, mais commence par JSE : un numéro de JS Express. |
 
-D'autres transitaires chinois terminent aussi leurs numéros par YQ, avec leurs propres lettres devant et, dans le catalogue de Peek, dix chiffres. SWECN et douze chiffres, c'est Shouwu. Espaces, tirets et minuscules ne gênent pas Peek.
+D'autres transitaires chinois terminent aussi leurs numéros par YQ, avec leurs propres lettres devant et, dans le catalogue de Peek, le plus souvent dix chiffres. SWECN et douze chiffres, c'est Shouwu. Espaces, tirets et minuscules ne gênent pas Peek.
 
 **Où le trouver.** S'il n'est ni dans l'e-mail d'expédition de la boutique ni sur la page de ta commande, lis [où trouver son numéro de suivi](guide:find-tracking-number).
 

@@ -18,7 +18,7 @@ Shouwu's waybills are SWECN, twelve digits and YQ, 19 characters in all. With in
 | `SWECN00000000000YQ` | Only eleven digits: not Shouwu's layout. Check for a missing digit. |
 | `JSEAA0000000000YQ` | Also ends in YQ, but opens with JSE: a [JS Express](carrier:js-express) number. |
 
-Other Chinese forwarders end their waybills in YQ too, with their own letters in front and, in Peek's catalog, ten digits. SWECN and twelve digits mark Shouwu. Spaces, dashes and lower case don't matter in Peek.
+Other Chinese forwarders end their waybills in YQ too, with their own letters in front and, in Peek's catalog, mostly ten digits. SWECN and twelve digits mark Shouwu. Spaces, dashes and lower case don't matter in Peek.
 
 **Where to find it.** If it isn't in the shop's shipping email or on your order page, see [how to find your tracking number](guide:find-tracking-number).
 

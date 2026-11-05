@@ -38849,7 +38849,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Pacific/Auckland",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "freightways-global"
     },
     "trackingUrlTemplate": "https://track.fgmailconnect.co.nz/?id={trackingNumber}",
     "linkRules": [
@@ -41000,7 +41000,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Winnipeg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "frontier-ca"
     },
     "trackingUrlTemplate": "https://tracking.carrierlogistics.com/scripts/fscf.pol/boldetail.htm?wbtn=PRO&wpro1={trackingNumber}",
     "linkRules": [
@@ -43203,7 +43203,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Kralendijk",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fxdc-post"
     },
     "trackingUrlTemplate": "https://my.fxdc-post.com/klant/volgen?ref={trackingNumber}",
     "linkRules": [

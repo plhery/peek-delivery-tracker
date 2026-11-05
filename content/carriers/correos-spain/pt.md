@@ -23,7 +23,7 @@ Um PIN de Citypaq só abre o cacifo: não é número de rastreio. Um número só
 
 ## Estados do rastreio Correos: o que quer dizer cada um
 
-Estas são as frases da versão inglesa do localizador, as que o Peek mostra, pela ordem em que a encomenda costuma passar por elas:
+Estas são as frases da versão inglesa do localizador, pela ordem em que a encomenda costuma passar por elas:
 
 | A Correos escreve | O que quer dizer para ti |
 | --- | --- |
@@ -101,7 +101,7 @@ Segundo as páginas de cada empresa, consultadas em outubro de 2026:
 
 O [Peek](/) reconhece logo a Correos nos códigos de encomenda de 23 caracteres, nos códigos de envio de 16, nos números `PR` e nos números postais acabados em `ES`. Se a letra de controlo não bater certo, o Peek não indica transportadora: confirma se há um erro no número ou escolhe a Correos em «Alterar transportadora». Num código de envio com uma só encomenda, o Peek segue essa encomenda; com várias, não consegue escolher, por isso cola o código de 23 caracteres de cada uma. Os links do correos.es com `tracking-number=` também funcionam.
 
-O Peek pede os estados à Correos em inglês, por isso aparecem em inglês. Mostra os 20 eventos mais recentes (sem locais), o peso e as medidas, a hora de entrega e, enquanto a encomenda espera, o nome e a morada da estação de correios. Não guarda o teu nome, a tua morada nem a assinatura, e não mostra uma data prevista. Lê as horas da Correos como hora de Madrid e mostra-as na hora do teu telemóvel ou computador.
+O Peek mostra os estados com as palavras da Correos: em espanhol, português ou francês se usares o Peek numa dessas línguas, em inglês nas outras. Mostra os 20 eventos mais recentes (sem locais), o peso e as medidas, a hora de entrega e, enquanto a encomenda espera, o nome e a morada da estação de correios. Não guarda o teu nome, a tua morada nem a assinatura, e não mostra uma data prevista. Lê as horas da Correos como hora de Madrid e mostra-as na hora do teu telemóvel ou computador.
 
 Um número postal acabado em `ES` que consultes a partir de Portugal pode ser procurado também nos CTT, e o Peek passa a segui-lo lá quando os CTT mostrarem progresso. Um código de 23 caracteres segue-se só na Correos. O Peek consulta a cada 10 minutos, a cada 2 quando a encomenda está em distribuição, e avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue mudar uma entrega nem reclamar por ti.
 

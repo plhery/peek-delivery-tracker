@@ -44,7 +44,7 @@ Lingdong no publica la lista de sus estados. Sus pasos van en inglés, o en chin
 
 `货物电子信息已经收到`, el único paso solo en chino, no es un escaneo del paquete: el sistema de seguimiento de Lingdong lo escribe por su cuenta en un pedido que aún no tiene escaneos, con la fecha en que se creó el pedido.
 
-Ninguno de los pasos de Lingdong que Peek conoce es de reparto o de entrega: el último es el traspaso a la empresa de reparto tras el despacho de aduana en el país de destino. La entrega en España la hace otra empresa, y el resto está en su seguimiento.
+Ninguno de los pasos de Lingdong que Peek conoce es de reparto o de entrega: el último de los suyos es el traspaso a la empresa de reparto tras el despacho de aduana en el país de destino. En Italia, la web de seguimiento de Lingdong puede mostrar después los primeros escaneos de Poste Italiane: `First parcel scan along Poste Italiane’s logistic network` y `In transit along Poste Italiane’s logistic network`. La entrega en España la hace otra empresa, y el resto está en su seguimiento.
 
 ## Quién reparte los paquetes de Lingdong en España
 

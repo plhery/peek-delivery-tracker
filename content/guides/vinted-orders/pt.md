@@ -131,7 +131,7 @@ A Política de Reembolso da Vinted cobre as compras feitas com o botão de compr
 
 ## Posso seguir uma encomenda Vinted fora da app?
 
-Sim: copia o número em «Acompanhar encomenda» e cola-o no [Peek](/). Os números Vinted Go e os links de acompanhamento do vintedgo.com são seguidos automaticamente. O Peek também reconhece pela forma os outros números da tabela; numa forma partilhada, como 10 algarismos, pode ser preciso pressionar «Alterar» e escolher a transportadora que a Vinted indica. Um número de 8 algarismos pede ainda o código postal de entrega. Os 14 algarismos da DPD Portugal são uma forma partilhada: se o Peek não a indicar, pressiona «Alterar» e escolhe a DPD Portugal. E não pode comunicar um problema por ti: isso faz-se na conversa do pedido.
+Sim: copia o número em «Acompanhar encomenda» e cola-o no [Peek](/). Um número Vinted Go que comece por `VGS` e um link de acompanhamento do vintedgo.com são reconhecidos logo; num número de 16 algarismos, o Peek pergunta à Vinted Go, à DHL eCommerce e à TNT qual delas o conhece. O Peek também reconhece pela forma os outros números da tabela; numa forma partilhada, como 10 algarismos, pode ser preciso pressionar «Alterar» e escolher a transportadora que a Vinted indica. Um número de 8 algarismos pede ainda o código postal de entrega. Os 14 algarismos da DPD Portugal são uma forma partilhada: se o Peek não a indicar, pressiona «Alterar» e escolhe a DPD Portugal. E não pode comunicar um problema por ti: isso faz-se na conversa do pedido.
 
 :::sources
 - [Vinted: Envio na Vinted](https://www.vinted.pt/help/234) – transportadoras, países ligados, cancelamento, transportadoras padrão

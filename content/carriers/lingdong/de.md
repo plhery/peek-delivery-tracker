@@ -44,7 +44,7 @@ Eine Liste seiner Status veröffentlicht Lingdong nicht. Seine Zeilen schreibt e
 
 `货物电子信息已经收到` ist kein Scan deines Pakets. Lingdongs Tracking-System schreibt diese Zeile selbst für einen Auftrag, der noch keinen Scan hat, und datiert sie auf den Zeitpunkt, an dem der Auftrag angelegt wurde.
 
-Keine der Lingdong-Zeilen, die Peek kennt, meldet eine Zustellung: Die letzte ist die Übergabe nach der Verzollung. Zugestellt wird das Paket von einem anderen Unternehmen, und dessen Sendungsverfolgung zeigt den Rest.
+Keine der Lingdong-Zeilen, die Peek kennt, meldet eine Zustellung: Lingdongs letzte eigene Zeile ist die Übergabe nach der Verzollung. In Italien kann Lingdongs Tracking-Seite danach noch die ersten Scans der Poste Italiane zeigen: `First parcel scan along Poste Italiane’s logistic network` und `In transit along Poste Italiane’s logistic network`. Zugestellt wird das Paket von einem anderen Unternehmen, und dessen Sendungsverfolgung zeigt den Rest.
 
 ## Wer Lingdong-Pakete in Deutschland, Österreich und der Schweiz zustellt
 

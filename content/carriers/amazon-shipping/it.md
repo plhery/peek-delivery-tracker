@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-10-27
 ---
 
-Amazon Shipping è Amazon che consegna pacchi per conto di altri negozi online: un e-commerce che non è Amazon può spedirti l'ordine con la rete di Amazon. Lo segui con il suo ID di tracciamento sul tracker pubblico di Amazon Shipping (track.amazon.it per i numeri italiani). Gli ordini fatti su Amazon.it invece si seguono da I miei ordini.
+Amazon Shipping è Amazon che consegna pacchi per conto di altri venditori: un venditore che non è Amazon può spedirti l'ordine con la rete di Amazon. Lo segui con il suo ID di tracciamento sul tracker pubblico di Amazon Shipping (track.amazon.it per i numeri italiani). Secondo quel tracker, è il venditore ad affidare la spedizione ad Amazon Shipping, che tu abbia acquistato «su Amazon.it o qualsiasi altro sito web». Gli altri ordini di Amazon.it si seguono da I miei ordini.
 
 ## Numero di tracking Amazon Shipping: com'è fatto
 
@@ -45,7 +45,7 @@ Peek mostra lo stato, la cronologia con città, regione e Paese di ogni scansion
 
 ### Amazon Shipping cos'è?
 
-È il servizio con cui Amazon mette la sua rete di consegna dell'ultimo miglio a disposizione dei venditori che gestiscono da sé le spedizioni: compri su un altro sito e Amazon porta il pacco a te. Per i problemi ti rivolgi al negozio, non ad Amazon.it.
+È il servizio con cui Amazon mette la sua rete di consegna dell'ultimo miglio a disposizione dei venditori che gestiscono da sé le spedizioni: compri su Amazon.it o su un altro sito e Amazon porta il pacco a te. Per i problemi ti rivolgi al venditore.
 
 ### Chi contatto se il pacco Amazon Shipping non arriva?
 
@@ -56,6 +56,7 @@ Il negozio da cui hai comprato: nell'UE, secondo Your Europe, il commerciante è
 Se il tracker di Amazon dà un giorno di consegna previsto, Peek lo mostra, tranne per i numeri `TBA`, `TBC` e `TBM`. Se con il negozio non hai concordato un'altra data, nell'UE l'ordine va consegnato entro 30 giorni, secondo Your Europe.
 
 :::sources
+- [Amazon Shipping: Traccia un pacco](https://track.amazon.it/) – acquisto su Amazon.it o qualsiasi altro sito web, il venditore affida la spedizione ad Amazon Shipping
 - [About Amazon Italia: Lettera agli azionisti dal CEO Andy Jassy - 2024](https://www.aboutamazon.it/notizie/company-news/lettera-agli-azionisti-dal-ceo-andy-jassy-2024) – cos'è Amazon Shipping: la rete di consegna dell'ultimo miglio di Amazon per i venditori che gestiscono da sé le spedizioni
 - [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – commerciante responsabile dei danni fino alla consegna, 30 giorni, proroga, rimborso
 - [Your Europe: FAQ su spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_it.htm) – commerciante responsabile della consegna, prova della consegna, articolo identico o rimborso, annullare l'ordine

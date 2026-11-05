@@ -37,7 +37,7 @@ Las mismas fases, con otras palabras:
 | Listo para recoger | `A disposición del destinatario` | `Depositado en Parcel Shop` | `Depositado en punto MRW` |
 | Entregado | `Entregado` | `Entregado` | `Envío entregado` |
 
-[Correos](carrier:correos-spain) agrupa sus estados en cuatro fases: `Pre-admisión`, `En Camino`, `En entrega` y `Entregado`. [SEUR](carrier:seur) escribe frases enteras en mayúsculas: `EL ENVÍO HA SIDO REGISTRADO.` cuando solo tiene los datos, `EL ENVÍO ESTÁ EN REPARTO.` el día de la entrega y `EL ENVÍO ESTÁ DISPONIBLE PARA RECOGER EN EL PUNTO SEUR PICKUP.` cuando te espera en una tienda.
+[Correos](carrier:correos-spain) agrupa sus estados en cuatro fases: `Pre-admisión`, `En Camino`, `En entrega` y `Entregado`. [SEUR](carrier:seur) escribe frases enteras en mayúsculas: `EL ENVÍO HA SIDO REGISTRADO.` cuando solo tiene los datos, `EL ENVÍO ESTÁ EN REPARTO.` el día de la entrega y `EL ENVÍO ESTÁ ENTREGADO.` al final.
 
 En [MRW](carrier:mrw), `Pendiente de recoger en Franquicia destino` no es lo mismo que `Pendiente de recoger`: se ha acordado que lo recojas tú en una oficina MRW. En [NACEX](carrier:nacex), `Solucionado sin OK` cierra una incidencia sin entregarte nada: pregunta a NACEX o a la tienda qué ha pasado.
 
@@ -55,7 +55,7 @@ Comprueba que está completo y que es del transportista que indica la tienda: ca
 
 ## ¿Qué significa «en tránsito»?
 
-Que el transportista tiene tu paquete en algún punto de su red. No quiere decir que se esté moviendo ahora mismo, ni que ya vaya con el repartidor: para eso está «en reparto». En SEUR, `EL ENVÍO ESTÁ EN TRÁNSITO. PRÓXIMAMENTE LLEGARÁ A LAS INSTALACIONES DE DESTINO.` indica que aún no ha llegado a las instalaciones de destino. En Correos, `En tránsito` aparece al salir del centro logístico de origen y otra vez cuando va hacia la unidad que lo entregará; entre medias, `Clasificado` quiere decir que lo han clasificado y asignado a un transporte.
+Que el transportista tiene tu paquete en algún punto de su red. No quiere decir que se esté moviendo ahora mismo, ni que ya vaya con el repartidor: para eso está «en reparto». En SEUR, el estado que empieza por `EL ENVÍO ESTÁ EN TRÁNSITO.` indica que el paquete circula por su red y aún no ha llegado a la zona de destino. En Correos, `En tránsito` aparece al salir del centro logístico de origen y otra vez cuando va hacia la unidad que lo entregará; entre medias, `Clasificado` quiere decir que lo han clasificado y asignado a un transporte.
 
 Entre un centro y otro puede haber algún rodeo: GLS explica que usa varios centros de distribución, así que la ruta no siempre es directa.
 
@@ -82,7 +82,7 @@ Ojo con dos estados que despistan. En una entrega a domicilio, `Alta en la unida
 
 ## «Intento de entrega» o «ausente»: ¿y ahora qué?
 
-Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-delivery) o el repartidor no pudo llegar a la puerta. En Correos aparece como `Realizado intento de entrega`, normalmente después de un primer intento que no se completó por ausencia, un problema con la dirección u otro inconveniente. SEUR lo escribe `EL ENVÍO NO SE HA ENTREGADO POR AUSENCIA O CIERRE…`, y MRW, `Destinatario ausente o cerrado`. La «Incidencia de destinatario no contesta/ausente» de CTT Express puede salir aunque estuvieras en casa; vuelven a intentarlo el siguiente día laborable.
+Este sí te necesita: [no había nadie para recibir el paquete](guide:missed-delivery) o el repartidor no pudo llegar a la puerta. En Correos aparece como `Realizado intento de entrega`, normalmente después de un primer intento que no se completó por ausencia, un problema con la dirección u otro inconveniente. En MRW es `Destinatario ausente o cerrado`. La «Incidencia de destinatario no contesta/ausente» de CTT Express puede salir aunque estuvieras en casa; vuelven a intentarlo el siguiente día laborable.
 
 :::steps
 - Lee el aviso | Papel en el buzón, SMS o email: dónde está el paquete y qué número dar.
@@ -109,8 +109,8 @@ Espera a ese estado o al aviso antes de ir: en Correos, el envío no está en la
 
 No siempre. Significa que el repartidor lo ha escaneado como entregado:
 
-- **A otra persona.** El seguimiento de SEUR tiene hasta un estado para eso: `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.`
-- **En un lugar seguro.** La página de [UPS](carrier:ups) puede mostrar dónde se dejó el paquete (`Left at: Front Door`, por ejemplo).
+- **A otra persona.** A menudo, a un vecino: es una de las prácticas más habituales cuando no estás en casa.
+- **En un lugar seguro.** En la puerta o en el jardín, por ejemplo, si lo autorizaste en las instrucciones de entrega.
 - **En una tienda.** Si elegiste recogerlo en un Parcel Shop de GLS, GLS te dice que vayas cuando el seguimiento marque `Depositado en Parcel Shop` o `Entregado`: ahí, «entregado» quiere decir que está en la tienda, no en tus manos. Lleva un documento oficial.
 
 ¿No está? Revisa el historial completo por si da un nombre o un lugar, y después mira [paquete entregado pero no recibido](guide:delivered-not-received).
@@ -119,7 +119,7 @@ No siempre. Significa que el repartidor lo ha escaneado como entregado:
 
 No. Correos llama «envío estacionado» al que tiene una incidencia que impide entregarlo: un paquete roto o dañado, datos del destinatario insuficientes, una dirección incorrecta o desconocida, que nadie se haga cargo o que falte el prerregistro. Lo guarda 5 días naturales a la espera de que se corrijan los datos, y puedes corregirlos tú en «Gestión de estacionados» con el [número de envío](guide:find-tracking-number) y el PIN que te manda por SMS o email. Si no tienes PIN, habla con la empresa que te lo envía: ella se encarga del trámite.
 
-En SEUR, `EL ENVÍO HA SUFRIDO UN RETRASO Y ES POSIBLE QUE SE DEMORE LA ENTREGA…` avisa de un retraso, no de una pérdida. `Exception` es el estado genérico de UPS y puede indicar un simple retraso: lo que cuenta es el escaneo de debajo.
+En SEUR, el estado que empieza por `EL ENVÍO ESTÁ PENDIENTE DE LLEGAR A DESTINO.` avisa de una demora, no de una pérdida: el paquete aún no ha llegado a la instalación de destino, por ejemplo por un retraso en el transporte o por un alto volumen de paquetes.
 
 Eso sí, fíjate bien si el motivo es la dirección o un pago. En Correos, corrige un estacionado dentro de esos 5 días naturales; si te lo envía un particular, es él quien tiene que llamar a Atención al Cliente antes de que pasen.
 
@@ -143,9 +143,11 @@ Si ya [va de vuelta](guide:returned-to-sender), habla con la tienda: pídele que
 - [Agencia Tributaria: Envíos de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – tasa de 2 €
 - [Correos: Qué es el phishing](https://www.correos.es/es/es/atencion-al-cliente/seguridad-de-la-informacion/phishing) – nunca pide datos ni pagos por SMS o email
 - [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – estados, plazos, horario, intentos, 7 días, Parcel Shop
+- [Ship24: Seguimiento SEUR](https://www.ship24.com/es/transportistas/seur-seguimiento) – estados de SEUR: registrado, en tránsito, en demora, en reparto, entregado
 - [MRW: Conoce el estado de tu envío](https://blog.mrw.es/conoce-el-estado-de-tu-envio/) – estados, aduana, ausente, Franquicia destino
 - [CTT Express: FAQs sobre los estados de envío](https://www.cttexpress.com/preguntas-frecuentes/estados-envio) – ausencia, nuevo intento
 - [CTT Express: Estados de envío](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – pendiente de recepción, última milla
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – 3 días laborables, 5 días naturales, avisos, documentos, ausencia
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – contenedores, aduana, seguimiento del transportista de destino
+- [Genbeta: Que entreguen tu paquete a un vecino puede ser ilegal](https://www.genbeta.com/a-fondo/que-entreguen-tu-paquete-a-vecino-puede-ser-ilegal-como-hacerlo-sea-legal) – entrega a un vecino, instrucciones para dejarlo en la puerta o el jardín
 :::

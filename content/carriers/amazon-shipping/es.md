@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-10-27
 ---
 
-Amazon Shipping es Amazon repartiendo paquetes para otras empresas: una tienda que no es Amazon puede enviarte el pedido por la red de Amazon. Lo sigues con su número en el seguimiento público de Amazon Shipping (track.amazon.es para los números españoles). Los pedidos hechos en Amazon.es se siguen en Mis pedidos.
+Amazon Shipping es Amazon repartiendo paquetes para otras empresas: un vendedor que no es Amazon puede enviarte el pedido por la red de Amazon. Lo sigues con su número en el seguimiento público de Amazon Shipping (track.amazon.es para los números españoles). Según ese seguimiento, es el vendedor quien comunica el envío a Amazon Shipping, tanto si pediste en Amazon.es como «en cualquier otra web». Los demás pedidos de Amazon.es se siguen en Mis pedidos.
 
 ## Número de seguimiento de Amazon Shipping
 
@@ -18,7 +18,7 @@ Estas son las formas que Peek reconoce (todos los números son inventados):
 | `FR0000000000` | Otros códigos de país europeos funcionan igual (`FR`, `PT`, `IT`, `DE` y otros). |
 | `TBA123456789012` | `TBA`, `TBC` o `TBM` y 12 cifras. |
 
-Aquí está la trampa: Amazon Logistics, que reparte los pedidos de la propia Amazon, usa exactamente las mismas formas. Solo el seguimiento de Amazon Shipping las distingue: con un pedido de Amazon dice que no encuentra el número. Si no aparece y compraste en Amazon.es, mira el [seguimiento de Amazon Logistics](carrier:amazon-logistics). Un número como `000-0000000-0000000` es un número de pedido, no de seguimiento. ¿No tienes el número? Lo tiene la tienda: mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
+Aquí está la trampa: Amazon Logistics, que reparte los pedidos de la propia Amazon, usa exactamente las mismas formas. Solo el seguimiento de Amazon Shipping las distingue: con un pedido de la propia Amazon dice que no encuentra el número. Si no aparece y compraste en Amazon.es, mira el [seguimiento de Amazon Logistics](carrier:amazon-logistics). Un número como `000-0000000-0000000` es un número de pedido, no de seguimiento. ¿No tienes el número? Lo tiene la tienda: mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
 ## Paquete de Amazon Shipping no entregado o perdido: reclamación
 
@@ -46,7 +46,7 @@ Peek muestra el estado, el historial con la ciudad, la región y el país de cad
 
 ### ¿Amazon Shipping es lo mismo que Amazon?
 
-Es la red de Amazon repartiendo para otras tiendas: lo sigues en track.amazon.es y los problemas los hablas con la tienda. Los pedidos hechos en Amazon.es se siguen en Mis pedidos.
+No del todo: es la red de Amazon repartiendo para otras empresas, tanto si les compraste en Amazon.es como en otra web. Lo sigues en track.amazon.es y los problemas los hablas con el vendedor. Los demás pedidos de Amazon.es se siguen en Mis pedidos.
 
 ### ¿Qué hago si mi paquete de Amazon Shipping no llega?
 
@@ -57,6 +57,7 @@ Habla con la tienda: en la UE, según Your Europe, el vendedor es responsable de
 Si el seguimiento de Amazon da un día de entrega previsto, Peek lo muestra, salvo en los números `TBA`, `TBC` y `TBM`. Si no acordaste otra fecha con la tienda, en la UE el pedido debe llegar como máximo en 30 días, según Your Europe.
 
 :::sources
+- [Amazon Shipping: Seguimiento de un paquete](https://track.amazon.es/) – pedido en Amazon.es o en cualquier otra web, el vendedor comunica el envío, servicios de entrega para empresas
 - [About Amazon España: Carta anual a los accionistas de nuestro CEO, Andy Jassy](https://www.aboutamazon.es/noticias/noticias-de-la-compania/carta-anual-a-los-accionistas-2023-de-nuestro-ceo-andy-jassy) – qué es Amazon Shipping: la red de entrega de última milla de Amazon para los envíos de otras empresas a sus clientes
 - [Your Europe: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – el vendedor responde de los daños hasta que recibes el pedido, treinta días, plazo adicional, rescisión y reembolso
 - [Your Europe: Preguntas frecuentes sobre envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_es.htm) – el vendedor responde de la entrega, prueba de la entrega, producto idéntico o reembolso, cancelar el pedido

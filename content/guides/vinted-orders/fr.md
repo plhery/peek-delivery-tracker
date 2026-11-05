@@ -129,7 +129,7 @@ La politique de remboursement de Vinted couvre les achats faits avec le bouton �
 
 ## Peut-on suivre un colis Vinted en dehors de l'appli ?
 
-Oui : copie le numéro depuis « Suivre le colis » et colle-le dans [Peek](/). Les numéros Vinted Go et les liens de suivi vintedgo.com sont suivis automatiquement. Peek reconnaît aussi les autres transporteurs à leur numéro ; pour une forme partagée, comme 8 ou 14 chiffres, appuie sur « Changer » et choisis le transporteur que Vinted indique. Un numéro Mondial Relay à 8 chiffres demande en plus le code postal de livraison. Peek ne peut pas signaler un problème à ta place : ça se passe dans la conversation.
+Oui : copie le numéro depuis « Suivre le colis » et colle-le dans [Peek](/). Un numéro Vinted Go qui commence par `VGS` et un lien de suivi vintedgo.com sont reconnus tout de suite ; pour un numéro à 16 chiffres, Peek demande à Vinted Go, à DHL eCommerce et à TNT lequel le connaît. Peek reconnaît aussi les autres transporteurs à leur numéro ; pour une forme partagée, comme 8 ou 14 chiffres, appuie sur « Changer » et choisis le transporteur que Vinted indique. Un numéro Mondial Relay à 8 chiffres demande en plus le code postal de livraison. Peek ne peut pas signaler un problème à ta place : ça se passe dans la conversation.
 
 :::sources
 - [Vinted : Quels sont les différents modes d'envoi sur Vinted ?](https://www.vinted.fr/help/234) – transporteurs en France, pays reliés, bordereau ou code, annulation

@@ -44,7 +44,7 @@ Lingdong publishes no list of its statuses. It writes its scans in English, or i
 
 The Chinese line isn't a scan of the parcel. Lingdong's tracking system writes it by itself for an order that has no scans yet, dated when the order was created.
 
-None of the Lingdong lines Peek knows is a delivery line: the last is the hand-over after customs clearance in the destination country. Another company delivers the parcel there, and its tracking has the rest.
+None of the Lingdong lines Peek knows is a delivery line: the last of Lingdong's own is the hand-over after customs clearance in the destination country. In Italy its tracker can then pass on Poste Italiane's first scans, `First parcel scan along Poste Italiane’s logistic network` and `In transit along Poste Italiane’s logistic network`. Another company delivers the parcel there, and its tracking has the rest.
 
 ## Who delivers Lingdong parcels
 

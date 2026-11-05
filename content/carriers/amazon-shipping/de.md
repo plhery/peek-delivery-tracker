@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-10-27
 ---
 
-Ein Paket von Amazon Shipping verfolgst du ohne Amazon-Konto mit seiner Tracking-ID auf Amazons öffentlichem Amazon-Shipping-Tracker, etwa track.amazon.fr. Der zeigt nur Pakete, die nicht aus einer Bestellung bei Amazon selbst stammen. Was du direkt bei Amazon bestellt hast, verfolgst du dagegen unter „Meine Bestellungen“.
+Ein Paket von Amazon Shipping verfolgst du ohne Amazon-Konto mit seiner Tracking-ID auf Amazons öffentlichem Amazon-Shipping-Tracker, etwa track.amazon.fr. Laut diesem Tracker erstellt der Verkäufer die Sendung mit Amazon Shipping, ob du bei Amazon oder in einem anderen Onlineshop bestellt hast. Andere Amazon-Bestellungen verfolgst du unter „Meine Bestellungen“.
 
 ## Amazon Shipping Tracking-ID: wie sie aussieht
 
@@ -19,7 +19,7 @@ Diese Formen erkennt Peek (alle Ziffern erfunden):
 | `DE0000000000` | Ein europäisches Länderkürzel und 10 Ziffern, etwa `DE`, `AT`, `CH`, `FR` oder `UK`. |
 | `TBA123456789012` | `TBA`, `TBC` oder `TBM` und 12 Ziffern. |
 
-Der Haken: Amazon Logistics, das Amazons eigene Bestellungen ausliefert, nutzt genau dieselben Formen. Nur Amazons Tracker trennt die beiden, denn er kennt nur Amazon-Shipping-Pakete und meldet für alle anderen „nicht gefunden“. Hast du bei Amazon selbst bestellt, lies [Amazon Logistics Tracking](carrier:amazon-logistics). Eine Bestellnummer wie `000-0000000-0000000` ist keine Trackingnummer, und zwei andere Buchstaben mit 10 Ziffern, etwa `US0000000000`, hält Peek nicht für eine Amazon-Nummer. Keine Nummer? Die hat der Shop: [Sendungsnummer finden](guide:find-tracking-number).
+Der Haken: Amazon Logistics, das Amazons eigene Bestellungen ausliefert, nutzt genau dieselben Formen. Nur Amazons Tracker trennt die beiden, denn er kennt nur Amazon-Shipping-Pakete und meldet für alle anderen „nicht gefunden“. Findet er nichts und hast du bei Amazon bestellt, lies [Amazon Logistics Tracking](carrier:amazon-logistics). Eine Bestellnummer wie `000-0000000-0000000` ist keine Trackingnummer, und zwei andere Buchstaben mit 10 Ziffern, etwa `US0000000000`, hält Peek nicht für eine Amazon-Nummer. Keine Nummer? Die hat der Shop: [Sendungsnummer finden](guide:find-tracking-number).
 
 ## Amazon Shipping Paket nicht angekommen oder verloren
 
@@ -47,7 +47,7 @@ Zu sehen sind der Status, der Verlauf mit Ort, Region und Land jedes Scans, der 
 
 ### Ist Amazon Shipping dasselbe wie Amazon?
 
-Ein Amazon-Shipping-Paket verfolgst du mit der Tracking-ID auf Amazons eigenem Tracker, aber was dieser öffentlich zeigt, stammt nicht aus einer Bestellung bei Amazon selbst. Bei Problemen wendest du dich an den Shop. Was du bei Amazon selbst bestellt hast, steht unter „Meine Bestellungen“.
+Nicht ganz: Amazon Shipping ist Amazons Lieferdienst für Unternehmen. Der Verkäufer, bei Amazon oder in einem anderen Onlineshop, hat dein Paket damit verschickt, und du verfolgst es mit der Tracking-ID auf Amazons Tracker. Bei Problemen wendest du dich an den Verkäufer. Andere Amazon-Bestellungen stehen unter „Meine Bestellungen“.
 
 ### Gibt es Amazon Shipping in Deutschland?
 
@@ -58,6 +58,7 @@ Einen deutschen Tracker von Amazon Shipping gibt es nicht. Amazons europäischer
 Gibt Amazons Tracker einen erwarteten Liefertag an, zeigt Peek ihn, außer bei Nummern mit `TBA`, `TBC` oder `TBM`. Ist mit dem Shop nichts anderes vereinbart, sollte eine Bestellung in der EU laut Your Europe innerhalb von 30 Tagen geliefert werden.
 
 :::sources
+- [Amazon Shipping: Suivre un colis](https://track.amazon.fr/) – der französische Tracker, den Peek für Nummern mit DE, AT oder CH fragt: Bestellung auf Amazon.fr oder einer anderen Website, der Verkäufer erstellt die Sendung, Lieferdienst für Unternehmen
 - [Your Europe: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – Haftung des Händlers vom Versand bis zum Erhalt, 30 Tage, Nachfrist, Stornierung und Erstattung
 - [Your Europe: Fragen und Antworten zu Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_de.htm) – Händler verantwortlich für die Lieferung, Nachweis der Zustellung, identischer Artikel oder Erstattung, Transportrisiko
 - [About Amazon: 5 praktische Tipps gegen Betrugsmaschen](https://www.aboutamazon.de/news/amazon-prime-und-shopping/5-praktische-tipps-die-dir-helfen-sicher-bei-amazon-einzukaufen-und-betrugsmaschen-zu-verhindern) – Nachrichten zu einem Kauf, Zahlungen, Geschenkkarten, Nummern, Verdächtiges melden

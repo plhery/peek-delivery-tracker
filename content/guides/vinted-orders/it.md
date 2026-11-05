@@ -128,7 +128,7 @@ La politica di rimborso di Vinted copre gli acquisti fatti con «Acquista» da u
 
 ## Si può tracciare un pacco Vinted fuori dall'app?
 
-Sì: copia il codice da «Traccia il pacco» e incollalo in [Peek](/). I codici Vinted Go e i link di tracciamento vintedgo.com vengono seguiti in automatico. Peek riconosce dal codice anche Poste Italiane, InPost, BRT, GLS e DHL Express; per una forma condivisa, come 12 o 14 cifre, premi «Cambia» e scegli il corriere indicato da Vinted. Segnalare un problema non lo può fare per te: quello resta nella conversazione.
+Sì: copia il codice da «Traccia il pacco» e incollalo in [Peek](/). Un codice Vinted Go che inizia con `VGS` e un link di tracciamento vintedgo.com vengono riconosciuti subito; per un codice di 16 cifre, Peek chiede a Vinted Go, DHL eCommerce e TNT chi lo conosce. Peek riconosce dal codice anche Poste Italiane, InPost, BRT, GLS e DHL Express; per una forma condivisa, come 12 o 14 cifre, premi «Cambia» e scegli il corriere indicato da Vinted. Segnalare un problema non lo può fare per te: quello resta nella conversazione.
 
 :::sources
 - [Vinted: Spedizione su Vinted](https://www.vinted.it/help/234) – corrieri in Italia, paesi collegati, etichetta o codice, annullamento, impostazioni di spedizione

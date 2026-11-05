@@ -6,7 +6,7 @@ published: 2026-10-12
 updated: 2026-10-27
 ---
 
-Amazon Shipping is Amazon delivering parcels for other businesses, so a shop that isn't Amazon can send your order through Amazon's network. You track it with its tracking number on Amazon Shipping's public tracker (track.amazon.co.uk for UK numbers). Orders placed on Amazon itself are followed in Your Orders instead.
+Amazon Shipping is Amazon delivering parcels for other businesses, so a seller other than Amazon can send your order through Amazon's network. You track it with its tracking number on Amazon Shipping's public tracker (track.amazon.co.uk for UK numbers), which says the seller creates the shipment whether you ordered "on Amazon.co.uk or any other website". Other Amazon orders are followed in Your Orders.
 
 ## Amazon Shipping tracking number and tracking ID
 
@@ -44,7 +44,7 @@ Peek shows the status, the history with the town, region and country of each sca
 
 ### Is Amazon Shipping the same as Amazon?
 
-It's Amazon's network delivering for other shops: you track it on track.amazon.co.uk and contact the shop about problems. Orders placed on Amazon itself live in Your Orders.
+Not quite: it's Amazon's network delivering for other businesses, whether you bought from them on Amazon.co.uk or on another website. You track it on track.amazon.co.uk and contact the seller about problems. Other Amazon orders live in Your Orders.
 
 ### Is Amazon Shipping legit?
 
@@ -55,6 +55,7 @@ Yes. It's Amazon's delivery service for other businesses. A text about an order 
 When Amazon's tracker gives an expected delivery day, Peek shows it, except for `TBA`, `TBC` and `TBM` numbers.
 
 :::sources
+- [Amazon Shipping: Track a Package](https://track.amazon.co.uk/) – order placed on Amazon.co.uk or any other website, the seller creates the shipment, delivery services for businesses
 - [About Amazon UK: Amazon CEO Andy Jassy's 2023 Letter to Shareholders](https://www.aboutamazon.co.uk/news/company-news/ceo-andy-jassys-2023-letter-to-shareholders) – what Amazon Shipping is: Amazon's last-mile delivery network carrying other businesses' parcels to their customers
 - [Citizens Advice: Damaged, lost or delayed post or parcel](https://www.citizensadvice.org.uk/consumer/post-and-parcels/damaged-lost-delayed-post-or-parcel/) – contact the seller first, refund or redelivery, returning damaged goods
 - [About Amazon UK: 7 tips to avoid scams impersonating Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-avoid-scams-impersonating-amazon-this-holiday-season) – messages about a purchase, payment, gift cards, numbers not to call, reporting

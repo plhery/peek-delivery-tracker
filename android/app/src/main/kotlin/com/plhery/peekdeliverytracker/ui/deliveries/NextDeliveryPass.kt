@@ -202,7 +202,7 @@ fun NextDeliveryPass(
                 DeliveryPostageStamp(parcel, identity, appeared = appeared || decorative)
             }
             if (notice != null) Text(notice, color = colors.secondaryLabel, style = type.caption.sfLines())
-            if (delivering != null) Text(delivering, color = colors.secondaryLabel, style = type.caption.sfLines())
+            if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())
             Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (arrived) PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
                 Text(status, color = ink, style = type.caption.sfLines())

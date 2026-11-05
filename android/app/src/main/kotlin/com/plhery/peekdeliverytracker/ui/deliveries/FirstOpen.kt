@@ -716,7 +716,7 @@ private fun FirstOpenAsk(
         )
         Text(
             localized(if (scene.tracks) "native.pasteLead" else "arrival.welcomeSubtitle"), Modifier.padding(top = 8.dp),
-            color = colors.secondaryLabel, style = type.subheadline, textAlign = TextAlign.Center,
+            color = colors.secondaryText, style = type.subheadline, textAlign = TextAlign.Center,
         )
         if (scene.tracks) {
             Column(Modifier.padding(top = if (roomy) 20.dp else 14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -950,7 +950,7 @@ private fun PosterForeground(
             )
             Text(
                 localized(if (scene.tracks) "native.pasteLead" else "arrival.welcomeSubtitle"), Modifier.padding(top = 10.dp).takesTaps(),
-                color = colors.secondaryLabel, style = type.title3, textAlign = TextAlign.Center,
+                color = colors.secondaryText, style = type.title3, textAlign = TextAlign.Center,
             )
             if (scene.tracks) {
                 // On one line while the field keeps room for a number; one under the other at large type.

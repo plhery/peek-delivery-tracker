@@ -65,16 +65,17 @@ internal val CountFigure = SemanticsPropertyKey<String>("CountFigure")
 class ListChange(val releasing: Boolean)
 
 /**
- * A count in a faint capsule, beside a heading (`Text("\(count)").contentTransition(.numericText())`). A count that
- * changes with a new [change] of the list rolls as SwiftUI's numeric text does in that change's animation, the list's
- * snappy 0.32 s or the release's spring: each figure that changes goes up and fades as the new one comes up from under
- * it, whether the number went up or down (`.numericText()` counts up), and the others stay; figures are matched from
- * the right. A figure a longer count adds rolls in the same way from an empty place, and one a shorter count drops rolls
- * out, the capsule's width following in the same motion. Under Reduce Motion the count just changes: the list's changes
- * aren't animated then, and nothing is held for the release (`watching`). A count that changes otherwise (a search, a
- * filter, a parcel taking another stage) just changes, as SwiftUI's transaction has no animation for it. The count and
- * its change come together (the list's items carry both), or a change seen a composition before its count would be
- * taken for an old one. TalkBack reads the count as one number.
+ * A count in the opaque secondary grey, in a capsule of the secondary label at 9 %, beside a heading
+ * (`Text("\(count)").contentTransition(.numericText())`). A count that changes with a new [change] of the list rolls as
+ * SwiftUI's numeric text does in that change's animation, the list's snappy 0.32 s or the release's spring: each figure
+ * that changes goes up and fades as the new one comes up from under it, whether the number went up or down
+ * (`.numericText()` counts up), and the others stay; figures are matched from the right. A figure a longer count adds
+ * rolls in the same way from an empty place, and one a shorter count drops rolls out, the capsule's width following in
+ * the same motion. Under Reduce Motion the count just changes: the list's changes aren't animated then, and nothing is
+ * held for the release (`watching`). A count that changes otherwise (a search, a filter, a parcel taking another stage)
+ * just changes, as SwiftUI's transaction has no animation for it. The count and its change come together (the list's
+ * items carry both), or a change seen a composition before its count would be taken for an old one. TalkBack reads the
+ * count as one number.
  */
 @Composable
 internal fun CountPill(count: Int, horizontalPadding: Dp, change: ListChange?, modifier: Modifier = Modifier) {
@@ -99,7 +100,7 @@ internal fun CountPill(count: Int, horizontalPadding: Dp, change: ListChange?, m
             .semantics { text = AnnotatedString("$count") },
         contentAlignment = Alignment.Center,
     ) {
-        RollingFigures("$count", releasing, epoch, PeekTheme.type.caption2.monospacedDigit(), secondary)
+        RollingFigures("$count", releasing, epoch, PeekTheme.type.caption2.monospacedDigit(), PeekTheme.colors.secondaryText)
     }
 }
 

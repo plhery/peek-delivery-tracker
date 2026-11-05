@@ -166,9 +166,9 @@ private fun JournalHeading(label: String, bottom: Dp, modifier: Modifier = Modif
 
 /**
  * `PlannedSteps`: the steps the carrier listed before they happen, newest first ([plannedNewestFirst]), under the
- * heading "Planned by the carrier" ([JournalHeading], 4 over the note) and a note in caption2 secondary that they are
- * not confirmed, 15 over the steps. The steps stand 18 apart ([PlannedStepRow]), and a dashed line in the separator's
- * colour, 1 high, closes them 18 under the last. They are no scans and count as no update.
+ * heading "Planned by the carrier" ([JournalHeading], 4 over the note) and a note in caption2 in the opaque secondary
+ * grey that they are not confirmed, 15 over the steps. The steps stand 18 apart ([PlannedStepRow]), and a dashed line
+ * in the separator's colour, 1 high, closes them 18 under the last. They are no scans and count as no update.
  */
 @Composable
 private fun PlannedSteps(steps: List<PlannedTrackingEvent>, now: Instant) {
@@ -181,7 +181,7 @@ private fun PlannedSteps(steps: List<PlannedTrackingEvent>, now: Instant) {
         Text(
             localizer.text("timeline.planned.note"),
             Modifier.padding(bottom = 15.dp),
-            color = colors.secondaryLabel,
+            color = colors.secondaryText,
             style = type.caption2.sfLines(),
         )
         Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
@@ -207,9 +207,9 @@ private fun PlannedSteps(steps: List<PlannedTrackingEvent>, now: Instant) {
  * A planned step laid out as a scan's row ([JournalEventRow]), greyed: in the time's column, a hollow dashed circle 12
  * across, 3 lower than the words, and when `joinsNext` a dashed rail at 45% down from under it to just over the next
  * step's circle; then the words in footnote, the day it is planned for ([plannedDate]) 3 under them and where
- * ([EventLocation]) 4 under that, all in the secondary grey. The circle and the rail grow with the footnote words; at
- * the accessibility sizes the circle keeps a column of its own width beside the words, its rail beside them too.
- * TalkBack reads the row as one ([plannedStepLabel]).
+ * ([EventLocation]) 4 under that, all in the opaque secondary grey. The circle and the rail grow with the footnote
+ * words; at the accessibility sizes the circle keeps a column of its own width beside the words, its rail beside them
+ * too. TalkBack reads the row as one ([plannedStepLabel]).
  */
 @Composable
 private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: Instant) {
@@ -217,7 +217,7 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val large = PeekTheme.dynamicTypeSize.isAccessibilitySize
-    val secondary = colors.secondaryLabel
+    val secondary = colors.secondaryText
     val date = localizer.plannedDate(step, now)
     // The circle, 12 across beside footnote words at the default size, grown with them.
     val mark = type.scaled(12f, IosTextStyle.Footnote)
@@ -322,8 +322,8 @@ private fun JournalDayRows(day: JournalDay, tint: Color, currentId: UUID?, synci
 }
 
 /**
- * `JournalEventRow` (B-S15): the scan's time in caption2 with figures of one width, in `tint` for the `current` row
- * and the secondary grey otherwise, 2 lower than the words and in a column 38 wide at the Large text size that grows
+ * `JournalEventRow` (B-S15): the scan's time in caption2 with figures of one width, in `tint` for the `current` row and
+ * the opaque secondary grey otherwise, 2 lower than the words and in a column 38 wide at the Large text size that grows
  * with caption2; then, 12 on, the words in footnote, which say the carrier is being asked for the current pending scan
  * while the parcel syncs, and under them, 4 apart, where the scan was ([EventLocation]) and its copies' words in
  * caption2 secondary. At the accessibility sizes the time goes 2 over the words, as wide as it is. A scan dated by its
@@ -342,7 +342,7 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
         if (time.isEmpty()) {
             Box(timeFrame)
         } else {
-            Text(time, timeFrame, color = if (current) tint else colors.secondaryLabel, style = type.caption2.monospacedDigit().sfLines())
+            Text(time, timeFrame, color = if (current) tint else colors.secondaryText, style = type.caption2.monospacedDigit().sfLines())
         }
     }
     val details = @Composable { modifier: Modifier ->
@@ -377,17 +377,17 @@ private fun JournalEventRow(entry: JournalEntry, tint: Color, current: Boolean, 
 }
 
 /**
- * `EventLocation` (B-S16), in caption2 secondary: with a country, its flag in caption, then 4 on and on the flag's
- * baseline the place and the country named in the app language, or the country alone where the place has no name;
- * TalkBack reads the words without the flag. Without a country, the place as written. `placed` is where the server
- * placed the scan: its country settles a final code that is also a state or canton, and its town names a place written
- * in Chinese, Japanese or Korean script ([TrackingLocation.place]).
+ * `EventLocation` (B-S16), in caption2 in the opaque secondary grey: with a country, its flag in caption, then 4 on and
+ * on the flag's baseline the place and the country named in the app language, or the country alone where the place has
+ * no name; TalkBack reads the words without the flag. Without a country, the place as written. `placed` is where the
+ * server placed the scan: its country settles a final code that is also a state or canton, and its town names a place
+ * written in Chinese, Japanese or Korean script ([TrackingLocation.place]).
  */
 @Composable
 private fun EventLocation(location: String, placed: EventPlace?) {
     val language = LocalLanguage.current
     val type = PeekTheme.type
-    val secondary = PeekTheme.colors.secondaryLabel
+    val secondary = PeekTheme.colors.secondaryText
     val place = TrackingLocation.place(location, placed, language)
     val country = place.country
     if (country == null) {

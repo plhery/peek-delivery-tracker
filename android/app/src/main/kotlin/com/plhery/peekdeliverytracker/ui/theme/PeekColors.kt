@@ -105,6 +105,9 @@ class PeekColors(val dark: Boolean, val highContrast: Boolean = false) {
     val onAccent = resolve(Brand.onAccent)
     val ink = resolve(Brand.ink)
     val inkSoft = resolve(Brand.inkSoft)
+
+    /** [Brand.secondaryText]: secondary words that read at 4.5:1 where [secondaryLabel], translucent, falls short. */
+    val secondaryText = resolve(Brand.secondaryText)
     val cream = resolve(Brand.cream)
     val paper = resolve(Brand.paper)
     val raised = resolve(Brand.raised)

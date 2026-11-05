@@ -41,12 +41,13 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 /**
  * `shipmentIdentity` (B-S06): the parcel's numbers, 2 in from the sides, each but an empty one (a number the link of
- * someone else's parcel hides). What a number is in caption2 secondary (`trackingNumberLabel`), 4 above it in
- * monospaced caption as its carrier writes it (`CarrierCatalog.format`), which a long press selects (B-G04); at the
- * line's end its copy, a 14-point copy symbol in the secondary grey in 44 square, a check while its row says it copied
- * the number (`copied`). At the accessibility sizes the number takes the line and its copy goes under it, saying what
- * it does in footnote, 44 tall. TalkBack hears the copy as "Copy tracking number" or "Copied", and which number it
- * copies where there are several. A copy calls `onCopy`, which puts the number on the clipboard (B-H03).
+ * someone else's parcel hides). What a number is in caption2 in the opaque secondary grey (`trackingNumberLabel`), 4
+ * above it in monospaced caption as its carrier writes it (`CarrierCatalog.format`), which a long press selects
+ * (B-G04); at the line's end its copy, a 14-point copy symbol in the secondary grey in 44 square, a check while its row
+ * says it copied the number (`copied`). At the accessibility sizes the number takes the line and its copy goes under
+ * it, saying what it does in footnote, 44 tall. TalkBack hears the copy as "Copy tracking number" or "Copied", and
+ * which number it copies where there are several. A copy calls `onCopy`, which puts the number on the clipboard
+ * (B-H03).
  *
  * Under each number its carrier's own pages, and after the numbers the pages that are none of theirs
  * (`ParcelTrackingLink.byNumber`, [CarrierLinks]), in `tint`.
@@ -76,7 +77,7 @@ internal fun ShipmentNumbers(
                 val copyLabel = localizer.text(if (says) "detail.copied" else "detail.copyTracking") + if (numbers.size > 1) " — $label" else ""
                 val number = @Composable { numberModifier: Modifier ->
                     Column(numberModifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(label, color = colors.secondaryLabel, style = type.caption2.sfLines())
+                        Text(label, color = colors.secondaryText, style = type.caption2.sfLines())
                         SelectionContainer {
                             Text(
                                 CarrierCatalog.format(entry.number, entry.carrier),

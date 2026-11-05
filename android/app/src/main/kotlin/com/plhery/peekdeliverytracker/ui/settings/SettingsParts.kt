@@ -79,9 +79,9 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 internal val settingsGreen = Brand.color(light = "#688363", dark = "#97B084")
 
 /**
- * `SettingsGroup`: its [title], if any, in caption 2 medium, upper case, tracked 1, in the secondary grey, 2 in, with a
- * [badge] beside it (caption 2 bold, upper case, tracked 0.4, ochre on its surface), read by TalkBack as one; 9 under
- * it, the rows raised with 16-point corners and a hairline of the sheet's line at a quarter.
+ * `SettingsGroup`: its [title], if any, in caption 2 medium, upper case, tracked 1, in the opaque secondary grey, 2 in,
+ * with a [badge] beside it (caption 2 bold, upper case, tracked 0.4, ochre on its surface), read by TalkBack as one; 9
+ * under it, the rows raised with 16-point corners and a hairline of the sheet's line at a quarter.
  */
 @Composable
 internal fun SettingsGroup(
@@ -100,7 +100,7 @@ internal fun SettingsGroup(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    title.uppercase(locale), color = colors.secondaryLabel,
+                    title.uppercase(locale), color = colors.secondaryText,
                     style = type.tracking(type.style(IosTextStyle.Caption2, FontWeight.Medium), 1f).sfLines(),
                 )
                 if (badge != null) {
@@ -133,10 +133,11 @@ internal fun SettingsDivider() {
 }
 
 /**
- * `SettingsRow`: the [symbol] in 15 light in the secondary grey, 17 wide, 11 from the [title] in subheadline in the ink,
- * the [detail] under it in caption secondary, then the [value] in caption secondary at the trailing end and a chevron
- * of 10 light; 15 in and 54 tall at least where [padded]. At the accessibility sizes the value goes under the title, a
- * value of one word made smaller down to half rather than broken, and the symbol gives its room to the words.
+ * `SettingsRow`: the [symbol] in 15 light in the secondary grey, 17 wide, 11 from the [title] in subheadline in the
+ * ink, the [detail] under it in caption secondary, then the [value] in caption at the trailing end and a chevron of 10
+ * light, both in the opaque secondary grey; 15 in and 54 tall at least where [padded]. At the accessibility sizes the
+ * value goes under the title, a value of one word made smaller down to half rather than broken, and the symbol gives
+ * its room to the words.
  */
 @Composable
 internal fun SettingsRow(
@@ -166,7 +167,7 @@ internal fun SettingsRow(
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(title, color = colors.ink, style = type.subheadline.sfLines())
             if (stacked && !value.isNullOrEmpty()) {
-                val style = type.caption.sfLines().copy(color = colors.secondaryLabel)
+                val style = type.caption.sfLines().copy(color = colors.secondaryText)
                 if (' ' !in value) {
                     BasicText(
                         value, style = style, maxLines = 1,
@@ -179,9 +180,9 @@ internal fun SettingsRow(
             if (detail != null) Text(detail, color = colors.secondaryLabel, style = type.caption.sfLines())
         }
         if (!stacked && !value.isNullOrEmpty()) {
-            Text(value, Modifier.padding(start = 4.dp), color = colors.secondaryLabel, style = type.caption.sfLines(), textAlign = TextAlign.End)
+            Text(value, Modifier.padding(start = 4.dp), color = colors.secondaryText, style = type.caption.sfLines(), textAlign = TextAlign.End)
         }
-        if (chevron) PeekSymbol("chevron.right", font = type.fixed(10f, FontWeight.Light), tint = colors.secondaryLabel)
+        if (chevron) PeekSymbol("chevron.right", font = type.fixed(10f, FontWeight.Light), tint = colors.secondaryText)
     }
 }
 

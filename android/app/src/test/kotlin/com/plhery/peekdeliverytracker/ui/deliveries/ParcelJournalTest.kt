@@ -76,7 +76,7 @@ class ParcelJournalTest {
     /** The parcel the journal shows, which a test may change once it shows. */
     private var shown by mutableStateOf(journey())
 
-    /** The secondary grey the journal draws in. */
+    /** The opaque secondary grey a scan's time is drawn in, but the current one's. */
     private var secondary = Color.Unspecified
 
     private var started = false
@@ -84,7 +84,7 @@ class ParcelJournalTest {
     /** The journal of [shown] on the page's paper, tinted with [tint]. */
     private fun content(reduceMotion: Boolean, fontScale: Float = 1f): @Composable () -> Unit = {
         CardHost(reduceMotion = reduceMotion, fontScale = fontScale) {
-            secondary = PeekTheme.colors.secondaryLabel
+            secondary = PeekTheme.colors.secondaryText
             Box(Modifier.background(PeekTheme.colors.paper).padding(18.dp)) {
                 ParcelJournal(shown, tint, Modifier.testTag(PAGE_JOURNAL))
             }

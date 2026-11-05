@@ -372,7 +372,7 @@ internal fun SignInView(
                         )
                     }
                     Text(
-                        localized(if (invitation == null) "arrival.signInSubtitle" else "friends.signInToAccept"), color = colors.secondaryLabel,
+                        localized(if (invitation == null) "arrival.signInSubtitle" else "friends.signInToAccept"), color = colors.secondaryText,
                         textAlign = TextAlign.Center, style = type.footnote.sfLines(),
                     )
                 }

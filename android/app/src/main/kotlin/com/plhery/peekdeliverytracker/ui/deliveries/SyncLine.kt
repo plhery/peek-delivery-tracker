@@ -31,13 +31,13 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 
 /**
  * `syncStatus` (B-S08): when the carrier was last asked and last said something, as the web says them, 3 apart, in
- * caption medium in the secondary grey: when the next check comes, in caption regular, as the iPhone's format style
- * writes a date with its time ([com.plhery.peekdeliverytracker.core.Localizer.abbreviatedDateTime]), while the
+ * caption medium in the opaque secondary grey: when the next check comes, in caption regular, as the iPhone's format
+ * style writes a date with its time ([com.plhery.peekdeliverytracker.core.Localizer.abbreviatedDateTime]), while the
  * parcel isn't archived; how long ago the carrier was last asked; and how long ago its latest scan was, but a pending
- * one. The times are those of when the page was drawn, as the iPhone's are. Then, 7 after them and centred on them,
- * the refresh where `onRefresh` is given ([RefreshButton]), waiting while `working`. The refresh keeps its 26 and the
- * lines wrap in what is left, as SwiftUI sizes the fixed button first, at the largest text or in a narrow column.
- * Nothing where there is nothing to say, so the page leaves no gap for it.
+ * one. The times are those of when the page was drawn, as the iPhone's are. Then, 7 after them and centred on them, the
+ * refresh where `onRefresh` is given ([RefreshButton]), waiting while `working`. The refresh keeps its 26 and the lines
+ * wrap in what is left, as SwiftUI sizes the fixed button first, at the largest text or in a narrow column. Nothing
+ * where there is nothing to say, so the page leaves no gap for it.
  */
 @Composable
 internal fun SyncLine(parcel: Parcel, tint: Color, working: Boolean, onRefresh: (() -> Unit)?, modifier: Modifier = Modifier) {
@@ -48,7 +48,7 @@ internal fun SyncLine(parcel: Parcel, tint: Color, working: Boolean, onRefresh: 
     val update = parcel.currentEvent?.takeIf { it.stage != TrackingStage.Pending }
     if (next == null && checked == null && update == null && onRefresh == null) return
     val type = PeekTheme.type
-    val secondary = PeekTheme.colors.secondaryLabel
+    val secondary = PeekTheme.colors.secondaryText
     val medium = type.style(IosTextStyle.Caption, FontWeight.Medium).sfLines()
     Row(modifier, horizontalArrangement = Arrangement.spacedBy(7.dp), verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f, fill = false), verticalArrangement = Arrangement.spacedBy(3.dp)) {

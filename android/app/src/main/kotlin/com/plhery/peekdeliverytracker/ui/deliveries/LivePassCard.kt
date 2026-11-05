@@ -340,9 +340,9 @@ internal fun LivePassCard(
             if (sender != null || deliveryLine != null) {
                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                     if (sender != null) {
-                        Text(localizer.text("parcel.sender", mapOf("sender" to sender)), color = secondary, style = type.caption.sfLines())
+                        Text(localizer.text("parcel.sender", mapOf("sender" to sender)), color = colors.secondaryText, style = type.caption.sfLines())
                     }
-                    if (deliveryLine != null) Text(deliveryLine, color = secondary, style = type.caption.sfLines())
+                    if (deliveryLine != null) Text(deliveryLine, color = colors.secondaryText, style = type.caption.sfLines())
                 }
             }
             val active = identities.displayName(parcel.activeTrackingCarrier, language)

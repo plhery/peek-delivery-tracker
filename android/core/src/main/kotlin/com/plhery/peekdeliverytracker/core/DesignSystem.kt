@@ -175,6 +175,12 @@ object Brand {
     val onAccent = AdaptiveColor(RgbaColor.hex("#20251E"))
     val ink = color(light = "#20251E", dark = "#FAF6EB")
     val inkSoft = color(light = "#657060", dark = "#C2BAAA")
+
+    /**
+     * The system's secondary grey, a little darker in light and lighter in dark, opaque: it reads at 4.5:1 or more on
+     * the page, the paper, the cream, a sheet's grounds and every carrier's card (`ContrastTest`).
+     */
+    val secondaryText = color(light = "#606065", dark = "#BCBCC2")
     val cream = color(light = "#F0F0E9", dark = "#292620")
     val paper = color(light = "#FFFFFF", dark = "#1F1C17")
 

@@ -12,18 +12,24 @@ class PeekColorsTest {
     private fun hex(color: Color): String = "#%06X".format(color.toArgb() and 0xFFFFFF)
 
     private fun tokens(colors: PeekColors) = listOf(
-        colors.accent, colors.accentBright, colors.onAccent, colors.ink, colors.inkSoft, colors.cream, colors.paper,
-        colors.raised, colors.warning, colors.warningSoft, colors.background,
+        colors.accent, colors.accentBright, colors.onAccent, colors.ink, colors.inkSoft, colors.secondaryText, colors.cream,
+        colors.paper, colors.raised, colors.warning, colors.warningSoft, colors.background,
     ).map(::hex)
 
     @Test
     fun theBrandIsTheIPhonesInLightAndDark() {
         assertEquals(
-            listOf("#F3CF48", "#F3CF48", "#20251E", "#20251E", "#657060", "#F0F0E9", "#FFFFFF", "#FFFFFF", "#963E19", "#FFDDC7", "#F4F5F1"),
+            listOf(
+                "#F3CF48", "#F3CF48", "#20251E", "#20251E", "#657060", "#606065", "#F0F0E9", "#FFFFFF", "#FFFFFF", "#963E19",
+                "#FFDDC7", "#F4F5F1",
+            ),
             tokens(PeekColors(dark = false)),
         )
         assertEquals(
-            listOf("#F3CF48", "#F3CF48", "#20251E", "#FAF6EB", "#C2BAAA", "#292620", "#1F1C17", "#292620", "#FFB184", "#341F14", "#13110E"),
+            listOf(
+                "#F3CF48", "#F3CF48", "#20251E", "#FAF6EB", "#C2BAAA", "#BCBCC2", "#292620", "#1F1C17", "#292620", "#FFB184",
+                "#341F14", "#13110E",
+            ),
             tokens(PeekColors(dark = true)),
         )
     }

@@ -18,5 +18,11 @@ SDT_EMAIL_OTP_ENABLED = YES
 SDT_OIDC_PROVIDER =
 SDT_OIDC_NAME =
 SDT_APP_GROUP_IDENTIFIER = group.com.plhery.PeekDeliveryTracker
+// Android only: the Firebase project's Android app, which the Android app's
+// pushes come through (android/README.md). Without all four it has none.
+SDT_FIREBASE_PROJECT_ID =
+SDT_FIREBASE_APP_ID =
+SDT_FIREBASE_API_KEY =
+SDT_FIREBASE_SENDER_ID =
 
 #include? "Local.xcconfig"

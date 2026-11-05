@@ -74,6 +74,18 @@ val iosSettings = mapOf(
     "SDTOIDCName" to "SDT_OIDC_NAME",
 )
 
+/**
+ * Firebase Cloud Messaging's settings, which the app starts Firebase with (platform/FirebasePush.kt), by their
+ * BuildConfig names: Android's alone, from the same xcconfigs, and empty in Shared.xcconfig. A build without all four
+ * has no pushes. The Firebase project's Android app gives them (android/README.md); no google-services.json is read.
+ */
+val firebaseSettings = mapOf(
+    "SDTFirebaseProjectID" to "SDT_FIREBASE_PROJECT_ID",
+    "SDTFirebaseAppID" to "SDT_FIREBASE_APP_ID",
+    "SDTFirebaseAPIKey" to "SDT_FIREBASE_API_KEY",
+    "SDTFirebaseSenderID" to "SDT_FIREBASE_SENDER_ID",
+)
+
 android {
     namespace = "com.plhery.peekdeliverytracker"
     compileSdk = 37
@@ -87,8 +99,8 @@ android {
         versionName = "1.1.7"
         // What only a device can show (src/androidTest): the WebView's own engine behind the browser check.
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        // The iPhone build's settings, under the names its Info.plist gives them (AppConfiguration.from).
-        for ((key, setting) in iosSettings) {
+        // The iPhone build's settings, under the names its Info.plist gives them (AppConfiguration.from), and Firebase's.
+        for ((key, setting) in iosSettings + firebaseSettings) {
             buildConfigField("String", key, javaString(xcconfig[setting].orEmpty()))
         }
         // The hosts whose /p/ links open the parcel's sheet, as the iPhone's associated domains name them.
@@ -115,7 +127,7 @@ android {
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.findByName("upload")
-            for ((key, setting) in iosSettings) {
+            for ((key, setting) in iosSettings + firebaseSettings) {
                 releaseOverrides[setting]?.let { buildConfigField("String", key, javaString(it)) }
             }
         }
@@ -423,6 +435,10 @@ dependencies {
     // Glance runs its widget sessions on WorkManager. Its own minimum (2.7.1) brings Room 2.2.5, whose keep rule leaves
     // R8 free to drop WorkDatabase_Impl's constructor, which Room makes by reflection: a release then fails at launch.
     implementation(libs.work.runtime)
+    // APNs' stand-in: Firebase Cloud Messaging's token and pushes (platform/FirebasePush.kt), started from the build's
+    // settings rather than by the google-services plugin.
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 

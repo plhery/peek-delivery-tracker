@@ -750,7 +750,7 @@ class SettingsTest {
     }
 
     /**
-     * Android's own, until Firebase Cloud Messaging: on a phone without pushes Delivery updates keeps the delivery
+     * Android's own, without Firebase's settings: on a phone without pushes Delivery updates keeps the delivery
      * email, and neither the device's switch nor the presets that only tune pushes; the row names no preset.
      */
     @Test

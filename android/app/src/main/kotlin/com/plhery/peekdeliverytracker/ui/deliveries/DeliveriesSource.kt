@@ -288,12 +288,12 @@ interface DeliveriesSource {
      */
     val notificationStatus: StateFlow<NotificationAuthorizationStatus>
 
-    /** `store.notificationsEnabledOnDevice`: pushes registered for this phone. None until Firebase brings a token. */
+    /** `store.notificationsEnabledOnDevice`: pushes registered for this phone. */
     val notificationsEnabledOnDevice: StateFlow<Boolean>
 
     /**
-     * `PushNotifications.available`: whether this phone can receive pushes, which it can't until Firebase brings a
-     * token. Without them Settings, the bell and the parcel's alerts offer the delivery email alone.
+     * `PushNotifications.available`: whether this phone can receive pushes, which it can't in a build without
+     * Firebase's settings. Without them Settings, the bell and the parcel's alerts offer the delivery email alone.
      */
     val pushAvailable: Boolean
 

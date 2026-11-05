@@ -17,6 +17,7 @@ import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.BuildSettings
 import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
+import com.plhery.peekdeliverytracker.platform.FirebasePushTokens
 import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.theme.CarrierIdentities
@@ -99,6 +100,8 @@ class PeekApplication : Application() {
         // measured off the main thread while a composition was open, that composition couldn't, and the app stopped.
         TextMeasurer(createFontFamilyResolver(this), Density(1f), LayoutDirection.Ltr).measure(" ")
         registerActivityLifecycleCallbacks(foreground)
+        // Firebase, which the manifest no longer starts: before a push or a new token reaches PeekMessagingService.
+        BuildSettings.firebase?.let { FirebasePushTokens.start(this, it) }
         val assets = assets
         SharedResources.install { name ->
             try {
@@ -107,6 +110,14 @@ class PeekApplication : Application() {
                 null
             }
         }
+    }
+
+    /**
+     * A token Firebase made (`FirebaseMessagingService.onNewToken`), for the stores to hand to the service: dropped
+     * before they are made, as they ask for the token themselves once they are. On the main thread.
+     */
+    fun pushTokenRefreshed(token: String) {
+        container.value?.pushTokenRefreshed(token)
     }
 
     /**

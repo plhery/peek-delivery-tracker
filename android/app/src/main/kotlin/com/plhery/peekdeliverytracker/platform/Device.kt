@@ -81,4 +81,12 @@ object BuildSettings {
     )
 
     val configuration: AppConfiguration by lazy { AppConfiguration.from { values[it] } }
+
+    /** Firebase Cloud Messaging's settings (SDT_FIREBASE_*, Android's alone), or null in a build without all four. */
+    val firebase: FirebaseSettings? by lazy {
+        FirebaseSettings.of(
+            projectId = BuildConfig.SDTFirebaseProjectID, applicationId = BuildConfig.SDTFirebaseAppID,
+            apiKey = BuildConfig.SDTFirebaseAPIKey, senderId = BuildConfig.SDTFirebaseSenderID,
+        )
+    }
 }

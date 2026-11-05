@@ -20,6 +20,16 @@ builds the app and `:coredevice`. The app's tests and `:app:verifyRoborazziDebug
 screenshots are recorded: Robolectric draws text edges and blurs a little differently on Linux x86-64. A failed run
 keeps the reports, and each differing screenshot's `_actual` and `_compare` images, as artifacts.
 
+## Pushes
+
+Pushes come through Firebase Cloud Messaging, without the google-services plugin or a `google-services.json`. The
+build reads the Firebase project's Android app from four xcconfig settings that only Android reads and
+`ios/Configuration/Shared.xcconfig` leaves empty: `SDT_FIREBASE_PROJECT_ID` (`project_id` in `google-services.json`),
+`SDT_FIREBASE_APP_ID` (`mobilesdk_app_id`), `SDT_FIREBASE_API_KEY` (`current_key`) and `SDT_FIREBASE_SENDER_ID`
+(`project_number`). Debug builds take them from `Local.xcconfig`, a release from the `peek.releaseXcconfig` file. A
+build without all four has no pushes: nothing offers them, and a parcel's alerts are its email. The server sends
+through the same Firebase project ([docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md)).
+
 ## Release bundle
 
 ```sh

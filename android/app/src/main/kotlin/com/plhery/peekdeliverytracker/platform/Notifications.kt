@@ -120,23 +120,36 @@ class NotificationPermission(context: Context) {
 }
 
 /**
- * The phone's notifications (`PushNotifications`): Android's permission, and no token yet.
+ * The phone's notifications (`PushNotifications`): Android's permission, and Firebase Cloud Messaging's token.
  *
  * What the phone allows is read from POST_NOTIFICATIONS and the app's notification setting
  * ([NotificationAuthorizationStatus.fromAndroid]): on Android 13 and later not asked, may ask again, or denied once the
  * system no longer asks; on Android 12 the setting alone. The question ([requestAuthorization]) is asked from the
  * window on screen ([NotificationPermission]), only where the permission isn't granted yet.
  *
- * The token is absent until Firebase Cloud Messaging is set up: [registerForRemoteNotifications] gets none, so pushes
- * are not [available] and nothing offers them (turning them on would end as the iPhone's does when APNs never
- * answers, `native.apnsTokenError`). Firebase plugs in here, and [available] turns true:
- * [registerForRemoteNotifications] asks `FirebaseMessaging.getInstance().token` and keeps the answer as
- * [currentDeviceToken], then hands it to `ParcelStore.forwardNativePushToken` and `registerDeviceAlerts` on the main
- * thread, as `FirebaseMessagingService.onNewToken` does with each new one; [unregisterForRemoteNotifications] calls
- * `FirebaseMessaging.deleteToken()`. Its `onMessageReceived` hands each push's data to [AppNotifications.post].
+ * The token is [tokens]' ([FirebasePushTokens]), in a build with Firebase's settings; in one without, pushes are not
+ * [available] and nothing offers them. [registerForRemoteNotifications] asks for it and keeps the answer as
+ * [currentDeviceToken], as AppDelegate keeps APNs', then hands it to [received]; a token Firebase makes anew
+ * ([tokenRefreshed], from `FirebaseMessagingService.onNewToken`) goes the same way. An answer to a question asked before
+ * [unregisterForRemoteNotifications], which deletes the token, is dropped. On the main thread.
  */
-class AndroidPushNotifications(private val context: Context, private val permission: NotificationPermission) : PushNotifications {
-    override val available: Boolean get() = false
+class AndroidPushNotifications(
+    private val context: Context,
+    private val permission: NotificationPermission,
+    /** Firebase Cloud Messaging's tokens, or a test's; null in a build without Firebase's settings. */
+    private val tokens: PushTokens? = null,
+    /**
+     * What each token kept is handed to, as AppDelegate posts `.didReceiveAPNSToken` and the app's root view forwards
+     * it: `ParcelStore.forwardNativePushToken` and `registerDeviceAlerts`, in the app's language.
+     */
+    private val received: (String) -> Unit = {},
+) : PushNotifications {
+    private var token: String? = null
+
+    /** Raised by each [unregisterForRemoteNotifications]: an answer to a question asked before it is dropped. */
+    private var registrations = 0
+
+    override val available: Boolean get() = tokens != null
 
     override suspend fun authorizationStatus(): NotificationAuthorizationStatus = NotificationAuthorizationStatus.fromAndroid(
         sdkInt = Build.VERSION.SDK_INT,
@@ -154,13 +167,38 @@ class AndroidPushNotifications(private val context: Context, private val permiss
 
     override val answeredBefore: Boolean get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && permission.answered
 
-    override fun registerForRemoteNotifications() {}
+    override fun registerForRemoteNotifications() {
+        val tokens = tokens ?: return
+        val asked = registrations
+        tokens.token { answer ->
+            // A failure is AppDelegate's `didFailToRegisterForRemoteNotificationsWithError`: nothing is kept, and the
+            // store's wait for a token ends without one.
+            if (asked == registrations) answer.onSuccess(::keep)
+        }
+    }
 
-    override fun unregisterForRemoteNotifications() {}
+    /** A token Firebase made (`onNewToken`): kept and handed on, unless it is the one kept already. */
+    fun tokenRefreshed(value: String) {
+        if (tokens == null || value == token) return
+        keep(value)
+    }
 
-    override val currentDeviceToken: String? get() = null
+    private fun keep(value: String) {
+        token = value
+        received(value)
+    }
 
-    override fun clearDeviceToken() {}
+    override fun unregisterForRemoteNotifications() {
+        val tokens = tokens ?: return
+        registrations++
+        tokens.delete()
+    }
+
+    override val currentDeviceToken: String? get() = token
+
+    override fun clearDeviceToken() {
+        token = null
+    }
 
     private fun granted(): Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
         ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED

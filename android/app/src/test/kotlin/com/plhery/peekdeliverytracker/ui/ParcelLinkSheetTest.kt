@@ -356,7 +356,7 @@ class ParcelLinkSheetTest {
 
     // Signed out
 
-    /** Android's own, until Firebase Cloud Messaging: a phone without pushes follows the parcel without promising them. */
+    /** Android's own, without Firebase's settings: a phone without pushes follows the parcel without promising them. */
     @Test
     fun aPhoneWithoutPushFollowsTheParcelWithoutPromisingNotifications() {
         show(FakeParcelLinks(answer = LinkFixtures.keepable(), pushAvailable = false))

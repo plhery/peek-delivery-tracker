@@ -45,8 +45,8 @@ interface ParcelLinkSource {
     val tracksWithoutAccount: Boolean
 
     /**
-     * `PushNotifications.available`: whether this phone can receive pushes, which it can't until Firebase brings a
-     * token; without them, following a parcel here promises no notifications.
+     * `PushNotifications.available`: whether this phone can receive pushes, which it can't in a build without
+     * Firebase's settings; without them, following a parcel here promises no notifications.
      */
     val pushAvailable: Boolean get() = true
 

@@ -56,6 +56,7 @@ import com.plhery.peekdeliverytracker.platform.CarrierCatalogLoader
 import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.DeviceParcelsFile
+import com.plhery.peekdeliverytracker.platform.FirebasePushTokens
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.NotificationPermission
@@ -66,6 +67,7 @@ import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PlayReviews
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.platform.PushTokens
 import com.plhery.peekdeliverytracker.platform.QueuedDeviceParcelStorage
 import com.plhery.peekdeliverytracker.platform.ReadAheadSecretStore
 import com.plhery.peekdeliverytracker.platform.SensorArrivalMotion
@@ -107,8 +109,8 @@ import okhttp3.OkHttpClient
  * write bring the account back, and a save that failed is the sign-in's or refresh's failure.
  *
  * What the app cannot do yet is a stand-in (platform/StandIns.kt): Sign in with Apple and device attestation. Web
- * sign-in opens a Custom Tab (platform/CustomTabSignIn.kt). Notifications have no token until Firebase is set up
- * (platform/Notifications.kt).
+ * sign-in opens a Custom Tab (platform/CustomTabSignIn.kt). Pushes come through Firebase Cloud Messaging in a build
+ * with its settings, and in no other (platform/FirebasePush.kt).
  * The home screen widget reads what the store publishes for it, and the cards' pictures it draws (widget/).
  */
 class AppContainer(
@@ -125,6 +127,8 @@ class AppContainer(
     val posted: AppNotifications = (context as? PeekApplication)?.posted ?: AppNotifications(context),
     /** Web sign-in in an Auth Tab or a Custom Tab over the window in front: the process's, which each window registers with. */
     webAuthentication: WebAuthenticating = (context as? PeekApplication)?.signInTab ?: CustomTabSignIn(),
+    /** The pushes' tokens: Firebase Cloud Messaging's in a build with its settings, or a test's; null without them. */
+    pushTokens: PushTokens? = FirebasePushTokens.of(context, BuildSettings.firebase),
 ) {
     /** `UserDefaults.standard`. */
     val defaults: UserDefaults = PreferencesDefaults.standard(context)
@@ -198,7 +202,9 @@ class AppContainer(
     /** `DeliveryLiveActivities`: none on Android. */
     val liveActivities: DeliveryLiveActivities = DeliveryLiveActivities.None
 
-    val notifications: PushNotifications = AndroidPushNotifications(context, notificationPermission)
+    private val pushes = AndroidPushNotifications(context, notificationPermission, pushTokens, received = { forwardPushToken(it) })
+
+    val notifications: PushNotifications = pushes
 
     /**
      * When the app asks for a rating (ReviewPrompt), in this version. A debug build's `sdt.debug.reviewDue` asks at
@@ -508,7 +514,17 @@ class AppContainer(
         parcels.demoLanguageChanged()
         parcels.refreshDeliverySurfaces()
         posted.updateChannels(localizer)
-        val token = notifications.currentDeviceToken ?: return
+        notifications.currentDeviceToken?.let { forwardPushToken(it, language) }
+    }
+
+    /** A token Firebase made (`FirebaseMessagingService.onNewToken`), kept and handed on unless it is the one kept. */
+    fun pushTokenRefreshed(token: String) = pushes.tokenRefreshed(token)
+
+    /**
+     * RootView's `.didReceiveAPNSToken`, and its language's change: the token goes to the account's devices and to the
+     * parcels this phone follows without one, in `language`.
+     */
+    private fun forwardPushToken(token: String, language: AppLanguage = localizer.language) {
         scope.launch {
             parcels.forwardNativePushToken(token, language)
             parcels.registerDeviceAlerts(token, language)

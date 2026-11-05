@@ -25,6 +25,7 @@ camerax = "1.6.2"
 mlkit-barcode = "17.3.0"
 glance = "1.2.0"
 work = "2.12.0"
+firebase-bom = "35.1.0"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -55,6 +56,8 @@ mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version
 glance-appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "glance" }
 glance-appwidget-testing = { module = "androidx.glance:glance-appwidget-testing", version.ref = "glance" }
 work-runtime = { module = "androidx.work:work-runtime", version.ref = "work" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 mockwebserver = { module = "com.squareup.okhttp3:mockwebserver3", version.ref = "okhttp" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }

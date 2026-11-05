@@ -35,14 +35,14 @@ import java.util.UUID
  * makes its stores and whenever its language changes.
  *
  * [post] takes a push's data as the service sends it (`title`, `body`, `kind`, `friend_id`, `link_id`, `parcel_id`):
- * what Firebase's `onMessageReceived` will hand it on its own thread, and the debug build's receiver until then. The
- * parcel's, the link's or the friend's notification replaces the one before for the same (its tag the push's
- * `apns-collapse-id`: the parcel's id, `link-<id>`, `friend-<id>`), and is grouped as iOS threads it (the parcel's id,
- * `link-<id>`, `friends`). One without a collapse id, such as the service's welcome, has a tag of its own, so it stays
- * beside every other, an earlier process's included, as each stays on the iPhone. The friends' are bundled under a
- * summary of their own ([FRIENDS_SUMMARY]), as iOS stacks their thread; a parcel's or a link's group only ever holds
- * one. A friend who accepted while the app is on screen comes into the shade without a sound or a banner
- * (`willPresent`'s `[.list]`) and [friendActivity] refreshes the friends' notices on the main thread
+ * what Firebase's `onMessageReceived` hands it on its own thread ([PeekMessagingService]), and the debug build's
+ * receiver without a server. The parcel's, the link's or the friend's notification replaces the one before for the
+ * same (its tag the push's `apns-collapse-id`: the parcel's id, `link-<id>`, `friend-<id>`), and is grouped as iOS
+ * threads it (the parcel's id, `link-<id>`, `friends`). One without a collapse id, such as the service's welcome, has a
+ * tag of its own, so it stays beside every other, an earlier process's included, as each stays on the iPhone. The
+ * friends' are bundled under a summary of their own ([FRIENDS_SUMMARY]), as iOS stacks their thread; a parcel's or a
+ * link's group only ever holds one. A friend who accepted while the app is on screen comes into the shade without a
+ * sound or a banner (`willPresent`'s `[.list]`) and [friendActivity] refreshes the friends' notices on the main thread
  * (`.didReceiveFriendActivity`).
  *
  * Opening one opens the app's window with the push's data, whose route the window follows

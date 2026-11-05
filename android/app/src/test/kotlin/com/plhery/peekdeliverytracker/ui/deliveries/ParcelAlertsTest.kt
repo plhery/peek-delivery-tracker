@@ -271,7 +271,7 @@ class ParcelAlertsTest {
     }
 
     /**
-     * Android's own, until Firebase Cloud Messaging: on a phone without pushes the bell is there only to open the
+     * Android's own, without Firebase's settings: on a phone without pushes the bell is there only to open the
      * parcel's alerts, which keep the email's switch alone; once it would mute the notifications instead, it is gone.
      */
     @Test

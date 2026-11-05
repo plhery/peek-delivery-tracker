@@ -3,12 +3,14 @@ package com.plhery.peekdeliverytracker.platform
 import android.Manifest
 import android.app.Activity
 import android.app.Application
+import android.app.Notification
 import android.app.NotificationManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
@@ -17,6 +19,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.RemoteMessage
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.PeekApplication
 import com.plhery.peekdeliverytracker.core.AppConfiguration
@@ -28,7 +32,9 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.JsonEncoder
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
+import java.io.IOException
 import java.security.Security
+import java.util.Collections
 import java.time.Duration
 import java.time.Instant
 import java.util.UUID
@@ -41,6 +47,7 @@ import okhttp3.Interceptor
 import okhttp3.Protocol
 import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
+import okio.Buffer
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -67,9 +74,10 @@ class AskingWindow : ComponentActivity() {
 /**
  * The phone's notifications (C-P01, C-P03, C-ST21): POST_NOTIFICATIONS' states as the store reads them (not asked, may
  * ask again, denied once the system no longer asks, Android 12's setting alone), the question asked from the window on
- * screen and ended unanswered when that window closes for good or the question can't be shown, and through the app's
- * own stores the token that never comes until Firebase, the demo, the channels and a friend's notification taken away. The server is answered on the client itself (synthetic hosts), so nothing leaves
- * the machine.
+ * screen and ended unanswered when that window closes for good or the question can't be shown, Firebase's token kept
+ * and handed to the stores, a push's data posted, and through the app's own stores the token that never comes, the
+ * demo, the channels and a friend's notification taken away. The server is answered on the client itself (synthetic
+ * hosts) and Firebase by a stand-in ([Tokens]), so nothing leaves the machine.
  */
 @RunWith(AndroidJUnit4::class)
 class NotificationsTest {
@@ -85,6 +93,24 @@ class NotificationsTest {
 
     private val user = AuthUser(UUID(0, 7), email = "reader@example.com", isAnonymous = false)
 
+    /** Firebase's tokens as a test gives them: each question answered with [next] on the main thread, or never if null. */
+    private class Tokens(var next: String? = null) : PushTokens {
+        val asked = mutableListOf<(Result<String>) -> Unit>()
+        var deletions = 0
+
+        override fun token(answer: (Result<String>) -> Unit) {
+            asked += answer
+            next?.let { token -> Handler(Looper.getMainLooper()).post { answer(Result.success(token)) } }
+        }
+
+        override fun delete() {
+            deletions++
+        }
+    }
+
+    /** What the account's devices were sent (`/api/push/devices`): each request's method and body. */
+    private val devices: MutableList<String> = Collections.synchronizedList(mutableListOf())
+
     private val answers = Interceptor { chain ->
         val request = chain.request()
         val (code, body) = when (request.url.encodedPath) {
@@ -95,6 +121,10 @@ class NotificationsTest {
                     expiresAt = Instant.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
                 ),
             ).decodeToString()
+            "/api/push/devices" -> {
+                devices += "${request.method} ${request.body?.let { body -> Buffer().also(body::writeTo).readUtf8() }}"
+                200 to (if (request.method == "POST") """{"ok":true,"testSent":true}""" else """{"ok":true}""")
+            }
             else -> 404 to "{}"
         }
         Response.Builder().request(request).protocol(Protocol.HTTP_1_1).code(code).message("").body(body.toResponseBody()).build()
@@ -114,9 +144,10 @@ class NotificationsTest {
         CarrierCatalog.install(previousCatalog)
         KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.auth").delete()
         Security.removeProvider("AndroidKeyStore")
+        FirebaseApp.getApps(context).forEach(FirebaseApp::delete)
     }
 
-    private fun container(): AppContainer {
+    private fun container(tokens: PushTokens? = null): AppContainer {
         val server = "https://peek.example.test"
         val configuration = AppConfiguration(
             mode = AppConfiguration.Mode.Api, apiBaseUrl = server, supabaseUrl = server,
@@ -124,13 +155,29 @@ class NotificationsTest {
             emailOtpEnabled = true, appGroupIdentifier = "group.test.peek",
         )
         val http = PeekHttp.client(MemoryCookieJar()).newBuilder().addInterceptor(answers).build()
-        return AppContainer(context, configuration, http, scope = MainScope()).also { container = it }
+        return AppContainer(context, configuration, http, scope = MainScope(), pushTokens = tokens).also { container = it }
     }
 
-    private fun idleUntil(what: String, done: () -> Boolean) {
+    /** Signs `app` in with the synthetic account's code, the stores started here unless they are already. */
+    private fun signIn(app: AppContainer, start: Boolean = true) {
+        if (start) app.start(process.lifecycle)
+        idleUntil("the session") { app.session.state != AuthenticationState.Loading }
+        var signedIn = false
+        app.scope.launch {
+            app.session.verifyCode(email = "reader@example.com", code = "123456")
+            signedIn = true
+        }
+        idleUntil("the sign-in") { signedIn && app.session.state is AuthenticationState.SignedIn }
+    }
+
+    /**
+     * Runs the main thread's work, and lets the background threads answer, until `done`; with `ticking`, the main
+     * thread's clock moves on too, a tenth of a second a turn, for the store's wait for the token.
+     */
+    private fun idleUntil(what: String, ticking: Boolean = false, done: () -> Boolean) {
         val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
         while (true) {
-            shadowOf(Looper.getMainLooper()).idle()
+            if (ticking) shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(100)) else shadowOf(Looper.getMainLooper()).idle()
             if (done()) return
             if (System.nanoTime() > deadline) fail("Timed out waiting for $what")
             Thread.sleep(10)
@@ -301,26 +348,120 @@ class NotificationsTest {
     }
 
     /**
-     * Until Firebase Cloud Messaging is set up the app's pushes aren't available, the app's own stores included: nothing
-     * offers them, asks for the permission for them or tunes them ([AndroidPushNotifications.available]).
+     * In a build without Firebase's four settings the app's pushes aren't available, the app's own stores included:
+     * nothing offers them, asks for the permission for them or tunes them ([AndroidPushNotifications.available]). With
+     * them the app starts Firebase with them, as google-services.json would, and the pushes are available.
      */
     @Test
-    fun theAppsPushesAreNotAvailableUntilFirebase() {
+    fun theAppsPushesAreAvailableOnlyWithFirebasesSettings() {
+        assertNull(FirebaseSettings.of(projectId = "", applicationId = "1:1:android:1", apiKey = "synthetic-key", senderId = "1"))
+        assertNull(FirebaseSettings.of(projectId = "peek-synthetic", applicationId = "1:1:android:1", apiKey = " ", senderId = "1"))
+        assertNull(FirebasePushTokens.of(context, null))
         assertFalse(notifications.available)
         assertFalse(container().notifications.available)
+        assertTrue("Firebase never started without its settings", FirebaseApp.getApps(context).isEmpty())
+
+        val settings = requireNotNull(
+            FirebaseSettings.of(projectId = "peek-synthetic", applicationId = "1:1:android:1", apiKey = "synthetic-key", senderId = "1"),
+        )
+        val tokens = requireNotNull(FirebasePushTokens.of(context, settings))
+        val options = FirebaseApp.getInstance().options
+        assertEquals(listOf("peek-synthetic", "1:1:android:1", "synthetic-key", "1"), listOf(options.projectId, options.applicationId, options.apiKey, options.gcmSenderId))
+        assertTrue(AndroidPushNotifications(context, app.notificationPermission, tokens).available)
+        assertTrue(container(Tokens()).notifications.available)
+    }
+
+    /**
+     * AppDelegate's token: Firebase's answer is kept for the launch and handed on, and so is a token Firebase makes anew
+     * (`onNewToken`), but not the one already kept again. No answer keeps none. An answer to a question asked before the
+     * token was deleted ([AndroidPushNotifications.unregisterForRemoteNotifications]) is dropped.
+     */
+    @Test
+    fun firebasesTokenIsKeptAndHandedOn() {
+        val tokens = Tokens()
+        val handed = mutableListOf<String>()
+        val pushes = AndroidPushNotifications(context, app.notificationPermission, tokens, received = { handed += it })
+        pushes.registerForRemoteNotifications()
+        assertNull(pushes.currentDeviceToken)
+        tokens.asked.single()(Result.success("synthetic-token-1"))
+        assertEquals("synthetic-token-1", pushes.currentDeviceToken)
+        pushes.tokenRefreshed("synthetic-token-1")
+        pushes.tokenRefreshed("synthetic-token-2")
+        assertEquals("synthetic-token-2", pushes.currentDeviceToken)
+        assertEquals(listOf("synthetic-token-1", "synthetic-token-2"), handed)
+
+        pushes.clearDeviceToken()
+        pushes.registerForRemoteNotifications()
+        tokens.asked.last()(Result.failure(IOException("SERVICE_NOT_AVAILABLE")))
+        assertNull(pushes.currentDeviceToken)
+
+        pushes.registerForRemoteNotifications()
+        pushes.unregisterForRemoteNotifications()
+        pushes.clearDeviceToken()
+        assertEquals(1, tokens.deletions)
+        tokens.asked.last()(Result.success("synthetic-token-3"))
+        assertNull(pushes.currentDeviceToken)
+        assertEquals(2, handed.size)
+
+        // Without Firebase nothing is asked, deleted or kept.
+        val none = AndroidPushNotifications(context, app.notificationPermission, received = { handed += it })
+        none.registerForRemoteNotifications()
+        none.unregisterForRemoteNotifications()
+        none.tokenRefreshed("synthetic-token-4")
+        assertNull(none.currentDeviceToken)
+        assertEquals(2, handed.size)
+    }
+
+    /**
+     * An account turns them on with Firebase's token, sent as an FCM one with the test notification; a token Firebase
+     * makes later (PeekMessagingService's `onNewToken`) reaches the stores through the application and is sent in turn.
+     */
+    @Test
+    fun anAccountTurnsThemOnWithFirebasesTokenAndANewOneFollows() {
+        val stores = container(Tokens(next = "synthetic-token-1"))
+        app.makeStores = { stores }
+        app.makeContainer()
+        idleUntil("the stores") { app.container.value === stores }
+        signIn(stores, start = false)
+        allow()
+
+        var outcome: Result<Boolean>? = null
+        stores.scope.launch { outcome = runCatching { stores.parcels.enableNotifications(AppLanguage.En) } }
+        idleUntil("notifications on", ticking = true) { outcome != null }
+        assertEquals(true, outcome?.getOrThrow())
+        assertTrue(stores.parcels.notificationsEnabledOnDevice)
+        val sent = devices.first()
+        assertTrue(sent, sent.startsWith("POST ") && "\"token\":\"synthetic-token-1\"" in sent && "\"transport\":\"fcm\"" in sent)
+        assertTrue(sent, "\"environment\":\"production\"" in sent && "\"sendTest\":true" in sent)
+
+        val service = Robolectric.buildService(PeekMessagingService::class.java).create().get()
+        service.onNewToken("synthetic-token-2")
+        idleUntil("the new token sent") { devices.any { "synthetic-token-2" in it } }
+        assertEquals("synthetic-token-2", stores.notifications.currentDeviceToken)
+        val renewed = devices.last { "synthetic-token-2" in it }
+        assertTrue(renewed, "\"sendTest\":false" in renewed && "\"transport\":\"fcm\"" in renewed)
+    }
+
+    /** A push's data, as Firebase hands it to PeekMessagingService, is posted as the app's notification. */
+    @Test
+    fun aPushsDataIsPostedAsTheAppsNotification() {
+        allow()
+        val parcel = UUID(0, 44)
+        val message = RemoteMessage.Builder("1@fcm.googleapis.com")
+            .setData(mapOf("title" to "Books", "body" to "Out for delivery", "parcel_id" to "$parcel"))
+            .build()
+        Robolectric.buildService(PeekMessagingService::class.java).create().get().onMessageReceived(message)
+        val shade = shadowOf(context.getSystemService(NotificationManager::class.java))
+        val posted = requireNotNull(shade.getNotification("$parcel", AppNotifications.ID)) { "Nothing posted" }
+        assertEquals("Books", posted.extras.getString(Notification.EXTRA_TITLE))
+        assertEquals("Out for delivery", posted.extras.getCharSequence(Notification.EXTRA_TEXT)?.toString())
     }
 
     @Test
     fun anAccountOnAPhoneThatAllowsThemWaitsForTheTokenAndKeepsTheInvitation() {
-        val app = container()
-        app.start(process.lifecycle)
-        idleUntil("the session") { app.session.state != AuthenticationState.Loading }
-        var signedIn = false
-        app.scope.launch {
-            app.session.verifyCode(email = "reader@example.com", code = "123456")
-            signedIn = true
-        }
-        idleUntil("the sign-in") { signedIn && app.session.state is AuthenticationState.SignedIn }
+        // Firebase never answers, as on a phone without Google Play services.
+        val app = container(Tokens())
+        signIn(app)
         allow()
 
         var outcome: Result<Boolean>? = null

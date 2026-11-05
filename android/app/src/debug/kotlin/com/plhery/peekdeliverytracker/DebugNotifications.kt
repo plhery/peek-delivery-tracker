@@ -6,7 +6,7 @@ import android.content.Intent
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 
 /**
- * The debug build's stand-in for a push, until Firebase delivers them: posts the notification a push with the
+ * The debug build's stand-in for a push, without a server or Firebase: posts the notification a push with the
  * broadcast's string extras would ([AppNotifications.post], the same keys as the service's data), as the app on the
  * phone would, in front or not, so opening it goes through the app's own alias as a push's does. Only a sender
  * holding DUMP reaches it (its manifest), as adb's shell does:

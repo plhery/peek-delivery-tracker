@@ -774,6 +774,19 @@ describe('a scan its carrier moves a little', () => {
     expect(retimedScans([later], stored, 'usps').size).toBe(0);
   });
 
+  it('leaves a later scan past when the row was first stored a scan of its own', () => {
+    // DHL Express lists only a facility's latest "Processed at": the later one is the next scan, not the first moved.
+    const storedAt = (createdAt: string | undefined) => [label, arrived, { ...departed, created_at: createdAt }];
+    expect(retimedScans([label, arrived, later], storedAt('2026-10-23T09:10:00+00:00'), 'usps').size).toBe(0);
+    // Within five minutes of the storing, stored after the later time, or when the storing is unknown, it moves.
+    for (const createdAt of ['2026-10-23T09:56:00+00:00', '2026-10-23T10:30:00Z', undefined, 'never']) {
+      expect(pairs(retimedScans([label, arrived, later], storedAt(createdAt), 'usps'))).toEqual([['usps:departed-later', 'usps:departed']]);
+    }
+    // Earlier, it moves whenever the row was stored.
+    const hour = at('2026-10-23T00:55:00-07:00', 'usps:hour-earlier');
+    expect(pairs(retimedScans([label, arrived, hour], storedAt('2026-10-23T09:00:00Z'), 'usps'))).toEqual([['usps:hour-earlier', 'usps:departed']]);
+  });
+
   it('keeps the time the row was first stored with while the row shows another', () => {
     const moved = retimedScans([label, arrived, later], stored, 'usps');
     const [row] = withIdentities([later], moved, stored, moved);

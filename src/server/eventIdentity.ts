@@ -29,7 +29,8 @@
  * - Whatever the policy, a scan the carrier's own answer moved up to three
  *   hours later, or up to an hour earlier, takes over the row of the old time
  *   that the answer no longer lists (`retimedScans`). The row keeps that old
- *   time as the one it was first stored with (`RETIMED_FROM`).
+ *   time as the one it was first stored with (`RETIMED_FROM`). A scan later
+ *   than the row was first stored is the next scan, and gets a row of its own.
  * - A row taken over keeps its old identity while its strings follow the
  *   scan. When a later check meets the scan again, a policy that matched the
  *   old strings (AliExpress's town in brackets) no longer matches, so a scan
@@ -258,10 +259,11 @@ function matchLeft(
 const FIRST_STORED_SKEW_MS = 5 * 60 * 1_000;
 
 /**
- * A scan dated later than the row it takes over was first stored, beyond the clocks' skew, and
- * later than the row shows. Nothing is scanned after Peek stored it, so a wall clock read under
- * such an offset is read under the wrong one: USPS reads a label's wall clock in UTC or on
- * Pacific time depending on when it is read.
+ * A scan dated later than the row it would take over was first stored, beyond the clocks' skew,
+ * and later than the row shows. Nothing is scanned after Peek stored it, so a wall clock read
+ * under such an offset is read under the wrong one (USPS reads a label's wall clock in UTC or on
+ * Pacific time depending on when it is read), and a carrier's later scan in the row's words is
+ * the next one (DHL Express lists only a facility's latest "Processed at").
  */
 function pastFirstStored(scan: JsonObject, row: JsonObject): boolean {
   const first = Date.parse(String(row.created_at ?? ''));
@@ -838,7 +840,9 @@ const RETIMED_EARLIER_WITHIN_MS = HOUR_MS;
  * neither the answer nor the stored rows hold a scan of the source between the two. Scans and rows another rule matched, observations, scans dated by their day alone and
  * universal or app rows are left out, and the match is one to one. A carrier that lists only the
  * latest of a run of the same scan (TNT's daily scan of a parcel held at its depot) moves it to
- * the next day: those are scans of their own, and stay.
+ * the next day: those are scans of their own, and stay. So is a scan later than the row was first
+ * stored (`pastFirstStored`): DHL Express lists only a facility's latest "Processed at", and
+ * replaced one Peek stored at 21:02 by one at 21:19.
  */
 export function retimedScans(
   events: readonly JsonObject[],
@@ -862,7 +866,8 @@ export function retimedScans(
     return to !== from && to - from <= RETIMED_WITHIN_MS && from - to <= RETIMED_EARLIER_WITHIN_MS
       && earliest < Math.min(from, to)
       && wordingOf(scan) !== '' && wordingOf(scan) === wordingOf(row) && placeOf(scan) === placeOf(row)
-      && stageOf(scan) !== '' && stageOf(scan) === stageOf(row) && codesAgree(scan, row);
+      && stageOf(scan) !== '' && stageOf(scan) === stageOf(row) && codesAgree(scan, row)
+      && !pastFirstStored(scan, row);
   };
   for (const scan of scans) {
     const matching = rows.filter((row) => alike(scan, row));

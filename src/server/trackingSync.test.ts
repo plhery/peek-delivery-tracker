@@ -7134,6 +7134,34 @@ it('moves the row of a scan its carrier restates a little later, and keeps the n
   expect(departures()).toEqual([{ ...moved, at: '2026-10-23T11:00:00.000Z' }, { id: 'row-3', at: '2026-10-24T09:10:00.000Z' }]);
 });
 
+it('keeps a scan its carrier replaces by a later one in the same words after Peek stored it, and adds the later one', async () => {
+  const store = eventStore();
+  // DHL Express lists only a facility's latest "Processed at": the parcel is processed again 50 minutes later,
+  // after Peek stored the first one (synthetic place and times).
+  const scan = (time: string, description: string) => ({ time, stage: 'in_transit', description, location: 'EXAMPLE CITY - FRANCE' });
+  const result = (...events: ReturnType<typeof scan>[]) => ({ status: 'in_transit', current_stage: 'in_transit',
+    last_update: events.at(-1)!.time, last_status_text: events.at(-1)!.description, events });
+  const pickedUp = scan('2026-11-04T19:12:00Z', 'Shipment picked up');
+  const processed = scan('2026-11-04T20:29:00Z', 'Processed at EXAMPLE CITY - FRANCE');
+  const again = { ...processed, time: '2026-11-04T21:19:00Z' };
+  const adapter = { fetch: vi.fn().mockResolvedValueOnce(result(pickedUp, processed)).mockResolvedValue(result(pickedUp, again)) };
+  const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+    () => new Date('2026-11-05T12:00:00Z'));
+  const load = () => ({ id: 'reprocessed-parcel', user_id: 'owner', carrier: 'dhl-express', tracking_number: 'TEST1234',
+    current_stage: store.rows.size ? 'in_transit' : 'pending', [STORED_EVENT_IDENTITIES]: store.identities() });
+  const processing = () => [...store.rows.values()].filter((row) => row.description === processed.description)
+    .map(({ id, occurred_at }) => ({ id, at: new Date(String(occurred_at)).toISOString() }));
+
+  await service.syncPackage(load());
+  const [first] = processing();
+  expect(first).toEqual({ id: expect.any(String), at: '2026-11-04T20:29:00.000Z' });
+  [...store.rows.values()].forEach((row) => { row.created_at = '2026-11-04T21:02:30.412+00:00'; });
+  // 21:19 is past when Peek stored 20:29: a scan of its own, not the first moved.
+  await expect(service.syncPackage(load())).resolves.toMatchObject({ updated: 1 });
+  await expect(service.syncPackage(load())).resolves.toMatchObject({ updated: 0 });
+  expect(processing()).toEqual([first, { id: expect.any(String), at: '2026-11-04T21:19:00.000Z' }]);
+});
+
 it('tells a check that stored a scan from one that rewrote the scans it had', async () => {
   const store = eventStore();
   const scan = (time: string, description: string, location = '') => ({ time, stage: 'in_transit', description, location });

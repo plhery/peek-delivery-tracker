@@ -36273,7 +36273,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "profit-fields",
+      "recognitionRank": 1,
+      "recognitionPattern": "^EWS[A-Z]{2}(?:\\d{10}|\\d{12})YQ$"
     },
     "trackingUrlTemplate": "https://www.8dt.com/tracking?track={trackingNumber}",
     "linkRules": [
@@ -36291,6 +36293,10 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^EWS[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^EWS[A-Z]{2}\\d{12}YQ$",
         "confidence": "low"
       }
     ],
@@ -48559,6 +48565,25 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://www.jas.com/"
+  },
+  "tiptop": {
+    "displayName": "TipTop",
+    "aliases": [
+      "义乌壹皓国际物流有限公司"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#e6212a",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.tiptop56.com/"
   }
 } as const;
 
@@ -49949,7 +49974,8 @@ export const CARRIER_IDS = [
   "cargo-trans-logistik",
   "edi-express",
   "fmd-distribution",
-  "jas-worldwide"
+  "jas-worldwide",
+  "tiptop"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

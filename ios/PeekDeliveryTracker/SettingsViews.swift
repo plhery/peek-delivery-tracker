@@ -880,7 +880,6 @@ private struct SettingsLanguageRow: View {
 private struct SettingsAppearancePicker: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @Environment(\.colorScheme) private var colorScheme
     @Binding var appearance: AppAppearance
 
     var body: some View {
@@ -921,11 +920,10 @@ private struct SettingsAppearancePicker: View {
     }
 
     private func miniature(_ option: AppAppearance) -> some View {
-        // In dark, the Dark and System pictures show the dark palette; in light, they keep their own.
-        let inDark = colorScheme == .dark
-        let light = Color(hex: "#F2F4EB"), dark = Color(hex: inDark ? "#1F1C17" : "#30392D")
-        let lightLine = Color(hex: "#DCE2D1"), darkLine = Color(hex: inDark ? "#433F38" : "#69755C")
-        let edge = Color(hex: inDark && option == .dark ? "#57524A" : "#69755C")
+        // The Dark and System pictures show the kraft palette in either appearance.
+        let light = Color(hex: "#F2F4EB"), dark = Color(hex: "#1F1C17")
+        let lightLine = Color(hex: "#DCE2D1"), darkLine = Color(hex: "#433F38")
+        let edge = Color(hex: option == .dark ? "#57524A" : "#69755C")
         return ZStack(alignment: .top) {
             HStack(spacing: 0) {
                 (option == .dark ? dark : light)

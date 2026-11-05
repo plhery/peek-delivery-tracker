@@ -23,21 +23,11 @@
 .settings-appearance button[aria-pressed=true] { border-color: var(--green); box-shadow: inset 0 0 0 .5px var(--green); color: var(--ink); background: color-mix(in srgb,var(--green) 5%,var(--paper)); }
 .settings-mini-screen { display: grid; gap: 4px; align-content: start; width: min(100%,63px); height: 44px; border: 1px solid #cfd4c5; border-radius: 5px; padding: 7px; background: #f2f4eb; }
 .settings-mini-screen i { height: 6px; border-radius: 2px; background: #dce2d1; }
-.settings-mini-screen--dark { background: #30392d; border-color: #56624d; }
-.settings-mini-screen--dark i { background: #69755c; }
-.settings-mini-screen--system { background: linear-gradient(90deg,#f2f4eb 50%,#30392d 50%); }
-.settings-mini-screen--system i { background: linear-gradient(90deg,#dce2d1 50%,#69755c 50%); }
-/* In dark, the Dark and System tiles preview the kraft palette; Light keeps its tiles as they are. */
-:root[data-appearance="dark"] .settings-mini-screen--dark { background: #1f1c17; border-color: #57524a; }
-:root[data-appearance="dark"] .settings-mini-screen--dark i { background: #433f38; }
-:root[data-appearance="dark"] .settings-mini-screen--system { background: linear-gradient(90deg,#f2f4eb 50%,#1f1c17 50%); }
-:root[data-appearance="dark"] .settings-mini-screen--system i { background: linear-gradient(90deg,#dce2d1 50%,#433f38 50%); }
-@media (prefers-color-scheme: dark) {
-  :root[data-appearance="system"] .settings-mini-screen--dark { background: #1f1c17; border-color: #57524a; }
-  :root[data-appearance="system"] .settings-mini-screen--dark i { background: #433f38; }
-  :root[data-appearance="system"] .settings-mini-screen--system { background: linear-gradient(90deg,#f2f4eb 50%,#1f1c17 50%); }
-  :root[data-appearance="system"] .settings-mini-screen--system i { background: linear-gradient(90deg,#dce2d1 50%,#433f38 50%); }
-}
+/* The Dark and System tiles preview the kraft palette in either appearance. */
+.settings-mini-screen--dark { background: #1f1c17; border-color: #57524a; }
+.settings-mini-screen--dark i { background: #433f38; }
+.settings-mini-screen--system { background: linear-gradient(90deg,#f2f4eb 50%,#1f1c17 50%); }
+.settings-mini-screen--system i { background: linear-gradient(90deg,#dce2d1 50%,#433f38 50%); }
 .refined-settings .language-control--account { padding: 5px 13px; min-height: 54px; border-top: 1px solid var(--line); }
 .refined-settings .language-control--account > span { font-weight: 400; }
 .refined-settings .language-control--account select { background: transparent; color: var(--ink-soft); padding-right: 0; font-size: 12px; max-width: 60%; }

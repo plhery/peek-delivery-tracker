@@ -383,20 +383,17 @@ internal fun SettingsAppearancePicker(appearance: AppAppearance, onChoose: (AppA
 
 /**
  * `miniature(_:)`: a window of 60 × 43 with 5-point corners and a hairline of #69755C at 0.35, light or dark, or split
- * down the middle for the phone's own, two bars of 6 with 2-point corners in it, 4 apart, 7 in. In dark, the Dark and
- * System pictures show the dark palette, and the Dark one's hairline is #57524A at 0.35; in light, they keep their own.
+ * down the middle for the phone's own, two bars of 6 with 2-point corners in it, 4 apart, 7 in. The Dark and System
+ * pictures show the kraft palette in either appearance, and the Dark one's hairline is #57524A at 0.35.
  */
 @Composable
 private fun AppearanceMiniature(option: AppAppearance) {
     val shape = ContinuousRoundedShape(5.dp)
-    val inDark = PeekTheme.colors.dark
-    val dark = if (inDark) MINI_KRAFT else MINI_DARK
-    val darkLine = if (inDark) MINI_KRAFT_LINE else MINI_DARK_LINE
-    val edge = if (inDark && option == AppAppearance.Dark) MINI_KRAFT_EDGE else MINI_DARK_LINE
-    val leading = if (option == AppAppearance.Dark) dark else MINI_LIGHT
-    val trailing = if (option == AppAppearance.Light) MINI_LIGHT else dark
-    val leadingLine = if (option == AppAppearance.Dark) darkLine else MINI_LIGHT_LINE
-    val trailingLine = if (option == AppAppearance.Light) MINI_LIGHT_LINE else darkLine
+    val edge = if (option == AppAppearance.Dark) MINI_DARK_EDGE else MINI_LIGHT_EDGE
+    val leading = if (option == AppAppearance.Dark) MINI_DARK else MINI_LIGHT
+    val trailing = if (option == AppAppearance.Light) MINI_LIGHT else MINI_DARK
+    val leadingLine = if (option == AppAppearance.Dark) MINI_DARK_LINE else MINI_LIGHT_LINE
+    val trailingLine = if (option == AppAppearance.Light) MINI_LIGHT_LINE else MINI_DARK_LINE
     Box(Modifier.size(60.dp, 43.dp).stroke(0.5.dp, edge.copy(alpha = 0.35f), shape).clip(shape)) {
         Row(Modifier.fillMaxWidth().fillMaxHeight()) {
             Box(Modifier.weight(1f).fillMaxHeight().background(leading))
@@ -480,15 +477,13 @@ private val PICKER_GAP = 5.dp
 private val PICKER_TRAILING = 11.dp
 private val TILE = Brand.color(light = "#F7EFC9", dark = "#49452A")
 private val TILE_LETTER = Brand.color(light = "#695824", dark = "#E2D08D")
+/** The pictures' paper and bars, light and kraft, and their hairlines. */
 private val MINI_LIGHT = Color(0xFFF2F4EB)
-private val MINI_DARK = Color(0xFF30392D)
 private val MINI_LIGHT_LINE = Color(0xFFDCE2D1)
-private val MINI_DARK_LINE = Color(0xFF69755C)
-
-/** The Dark and System pictures in dark: the paper, the line, and the Dark one's hairline. */
-private val MINI_KRAFT = Color(0xFF1F1C17)
-private val MINI_KRAFT_LINE = Color(0xFF433F38)
-private val MINI_KRAFT_EDGE = Color(0xFF57524A)
+private val MINI_LIGHT_EDGE = Color(0xFF69755C)
+private val MINI_DARK = Color(0xFF1F1C17)
+private val MINI_DARK_LINE = Color(0xFF433F38)
+private val MINI_DARK_EDGE = Color(0xFF57524A)
 
 internal const val SETTINGS_ACCOUNT = "$SETTINGS_SHEET.account"
 internal const val SETTINGS_SIGN_IN = "$SETTINGS_SHEET.signIn"

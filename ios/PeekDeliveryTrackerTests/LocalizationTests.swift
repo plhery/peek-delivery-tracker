@@ -420,14 +420,28 @@ final class LocalizationTests: XCTestCase {
             // A code before a dot, as CNE names its facilities.
             "CN.CNE East China Sort Facility": .init(country: "CN", name: "CNE East China Sort Facility"),
             "CN.Shenzhen": .init(country: "CN", name: "Shenzhen"),
+            // The country after the last dash, as DHL Express ends its locations.
+            "BENIN CITY - NIGERIA": .init(country: "NG", name: "BENIN CITY"),
+            "AMSTERDAM - NETHERLANDS, THE": .init(country: "NL", name: "AMSTERDAM"),
+            "HONG KONG - HONG KONG SAR, CHINA": .init(country: "HK", name: "HONG KONG"),
+            "STERLING - Virginia - USA": .init(country: "US", name: "STERLING - Virginia"),
+            "ATLANTA - GEORGIA - USA": .init(country: "US", name: "ATLANTA - GEORGIA"),
+            "SCARBOROUGH - ON - CANADA": .init(country: "CA", name: "SCARBOROUGH - ON"),
+            "EXAMPLE CITY - KOREA, REPUBLIC OF (SOUTH K.)": .init(country: "KR", name: "EXAMPLE CITY"),
+            "EXAMPLE CITY - THE PEOPLE'S REPUBLIC OF CHINA": .init(country: "CN", name: "EXAMPLE CITY"),
+            "EXAMPLE CITY - IRELAND, REPUBLIC OF": .init(country: "IE", name: "EXAMPLE CITY"),
         ]
         for (location, place) in places {
             XCTAssertEqual(TrackingLocation.place(location), place, location)
         }
+        // Georgia after a dash is the state; ST. and PT. are Saint and Port.
         for location in ["", "Warehouse", "Paris", "Buchs AG", "Basel, BS", "Wilmington, DE", "France distribution center",
-                         "Zürich Briefzentrum", "Mexico City", "Andorra la Vella", "ST.LOUIS", "PT.ELIZABETH", "CA.Toronto"] {
+                         "Zürich Briefzentrum", "Mexico City", "Andorra la Vella", "ST.LOUIS", "PT.ELIZABETH", "CA.Toronto",
+                         "TBILISI - GEORGIA", "CURITIBA - PR", "Shenzhen - Futian"] {
             XCTAssertEqual(TrackingLocation.place(location), .init(country: nil, name: location), location)
         }
+        // Display only: Passport evidence stays a final field that names a region.
+        XCTAssertNil(TrackingLocation.countryCode(in: "SCARBOROUGH - ON - CANADA"))
         // A code that is also a state or canton names the country the scan was placed in, and only that one.
         XCTAssertEqual(TrackingLocation.place("Haiger, DE", placedIn: "DE"), .init(country: "DE", name: "Haiger"))
         XCTAssertEqual(TrackingLocation.place("Haiger (DE)", placedIn: "DE"), .init(country: "DE", name: "Haiger"))

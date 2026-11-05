@@ -177,6 +177,13 @@ enum TrackingLocation {
         "korea": "KR", "republic of korea": "KR",
     ]
 
+    // DHL Express's own country names, after the article and any bracket are dropped.
+    private static let dhlSpellings: [String: String] = [
+        "hong kong sar, china": "HK", "macau sar, china": "MO", "macao sar, china": "MO", "china mainland": "CN",
+        "china, peoples republic": "CN", "people's republic of china": "CN", "korea, republic of": "KR",
+        "ireland, republic of": "IE",
+    ]
+
     // "Mexico City" is a city, not Mexico followed by one.
     private static let settlementWords: Set<String> = ["city", "town", "ville", "stadt", "ciudad", "cidade", "citta"]
 
@@ -247,10 +254,32 @@ enum TrackingLocation {
         return fieldCountry(field, in: location.trimmingCharacters(in: .whitespacesAndNewlines), display: false)
     }
 
-    /// For display, takes an explicit country off a location: the final field ("Zürich, CH",
-    /// repeated in "Hebron, KY, US, US") or a leading name ("Switzerland Haerkingen").
+    private static let dashed = try! NSRegularExpression(pattern: "^(.*\\S)\\s+-\\s+(.+)$")
+
+    /// The country DHL Express ends its locations with: "UK", "NETHERLANDS, THE", "HONG KONG SAR, CHINA".
+    private static func dashCountry(_ part: String) -> String? {
+        let name = normalized(part)
+            .replacingOccurrences(of: "\\s*\\(.*\\)$", with: "", options: .regularExpression)
+            .replacingOccurrences(of: "^the |, the$", with: "", options: .regularExpression)
+        // Also a US state: "ATLANTA - GEORGIA" is not in the Caucasus.
+        if name == "georgia" { return nil }
+        return dhlSpellings[name] ?? namedCountry(name, display: true)
+    }
+
+    /// The country after a location's last dash, with what comes before it: "SCARBOROUGH - ON - CANADA".
+    private static func dashedPlace(_ text: String) -> Place? {
+        guard let match = dashed.firstMatch(in: text, range: NSRange(text.startIndex..., in: text)),
+              let name = Range(match.range(at: 1), in: text), let part = Range(match.range(at: 2), in: text),
+              let country = dashCountry(String(text[part])) else { return nil }
+        return Place(country: country, name: String(text[name]))
+    }
+
+    /// For display, takes an explicit country off a location: the name after the last dash ("SCARBOROUGH - ON -
+    /// CANADA"), a country's code before a dot ("CN.CNE East China Sort Facility"), the final field ("Zürich, CH",
+    /// repeated in "Hebron, KY, US, US") or a leading name ("Switzerland Haerkingen"), as the web and Android read it.
     static func place(_ location: String) -> Place {
         let text = location.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let dashed = dashedPlace(text) { return dashed }
         if let prefixed = prefixedPlace(text) { return prefixed }
         let fields = fieldPattern.matches(in: text, range: NSRange(text.startIndex..., in: text))
             .compactMap { Range($0.range, in: text) }

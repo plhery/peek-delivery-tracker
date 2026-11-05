@@ -166,6 +166,56 @@ class PullToRefreshTests {
     }
 
     @Test
+    fun grownWordsGetRoomOnlyWhileRefreshing() = runTest {
+        val model = PullToRefreshModel(this)
+        model.track(PullGeometry(overscroll = 0.0, inset = 164.0, height = 874.0))
+        // At the default sizes the seal and its words keep to the gap the system holds, where they always stood.
+        assertEquals(-0.55 * 60 - 21, PullToRefreshModel.offset(gap = 60.0, height = PullToRefreshIndicator.HEIGHT), 0.001)
+        model.begin(label = "Checking for updates…")
+        model.track(PullGeometry(overscroll = 0.0, inset = 224.0, height = 874.0))
+        assertEquals(0.0, model.room, 0.0)
+
+        // Two lines of the largest text: the list moves down by what the 60-point gap lacks.
+        model.grow(132.0)
+        assertEquals(94.0, model.room, 0.0)
+        val gap = model.holdDistance + model.room
+        val top = PullToRefreshModel.offset(gap, height = 132.0)
+        assertTrue("clear of the bar", top >= -gap)
+        assertTrue("clear of the cards", top + 132 <= 0)
+        // The indicator stands there, counted from the top of the room, where the content stands without it.
+        val grown = PullToRefreshIndicator.of(model, "Pull to refresh", reduceMotion = false, grows = true)
+        assertEquals(gap, grown.gap, 0.0)
+        assertEquals(top + 94, grown.offset, 1e-9)
+
+        // A finger holding the list further down leaves less to make up.
+        model.track(PullGeometry(overscroll = 50.0, inset = 224.0, height = 874.0))
+        assertEquals(44.0, model.room, 0.0)
+        model.track(PullGeometry(overscroll = 0.0, inset = 224.0, height = 874.0))
+        model.finish(succeeded = true, label = "Tracking updated")
+        assertEquals(94.0, model.room, 0.0)
+
+        // The list goes back up as the system closes its gap.
+        model.settle()
+        assertEquals(0.0, model.room, 0.0)
+        model.settleJob?.join()
+        assertEquals(0.0, model.room, 0.0)
+    }
+
+    @Test
+    fun whilePulledGrownWordsRiseFromWhereTheIndicatorsFootAlwaysStood() = runTest {
+        val model = PullToRefreshModel(this)
+        model.track(PullGeometry(overscroll = 0.0, inset = 164.0, height = 874.0))
+        model.grow(132.0)
+        model.track(PullGeometry(overscroll = 87.4, inset = 164.0, height = 874.0))
+        val usual = PullToRefreshIndicator.of(model, "Pull to refresh", reduceMotion = false)
+        val grown = PullToRefreshIndicator.of(model, "Pull to refresh", reduceMotion = false, grows = true)
+        assertEquals(-0.55 * 87.4 - 21, usual.offset, 0.0)
+        // 132 tall rather than 48, it stands 84 higher, its foot where the usual one's is; the list makes no room.
+        assertEquals(usual.offset - 84, grown.offset, 1e-9)
+        assertEquals(0.0, model.room, 0.0)
+    }
+
+    @Test
     fun sealMovesAsSwiftUIMovesIt() {
         // The pop's keyframes, from SwiftUI's KeyframeTimeline: its easing is solved in Float, its spring exactly.
         assertEquals(1.0, PullToRefreshSeal.pop(0.0), 0.0)

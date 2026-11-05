@@ -45,11 +45,13 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
@@ -68,20 +70,24 @@ import com.plhery.peekdeliverytracker.core.Rect
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.draw.toComposePath
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
-import com.plhery.peekdeliverytracker.ui.theme.CappedDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekKeyframes
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.RubberBandOverscroll
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedbackEffect
 import com.plhery.peekdeliverytracker.ui.theme.keyframeAnimator
+import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import kotlin.math.max
 import kotlin.math.min
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -119,6 +125,13 @@ internal class ListPull(
 
     /** How far the content is moved down from its rest: what the list is drawn translated by, beside its gap. */
     val shown: Float get() = past + held.value
+
+    /**
+     * How much further than the gap the list moves its content down while refreshing, so the seal's words, grown past
+     * the xxLarge text size, keep clear of the bar and the cards ([PullToRefreshModel.room]); the list's own, which
+     * [ListPullEffects] keeps, and none elsewhere.
+     */
+    val room = Animatable(0f)
 
     /**
      * How far a finger or a throw has scrolled the content down since the list was made, as the list took it: with
@@ -236,9 +249,34 @@ internal class ListPull(
     }
 }
 
-/** The tab's side of the pull ([DeliveriesState.listPull]): the window's density, and the gap closing as the refresh settles. */
+/**
+ * The tab's side of the pull ([DeliveriesState.listPull]): the window's density, the gap closing as the refresh settles,
+ * and the room for the seal's grown words ([ListPull.room]).
+ */
 @Composable
-internal fun ListPullEffects(state: DeliveriesState) = PullEffects(state.listPull, state.pull)
+internal fun ListPullEffects(state: DeliveriesState) {
+    PullEffects(state.listPull, state.pull)
+    PullRoom(state.listPull, state.pull)
+}
+
+/**
+ * The room the list makes for the seal's grown words ([ListPull.room]): there at once as a refresh starts, less as a
+ * finger holds the list further down, and gone with the gap as the seal fades, on an ease out over 0.3 s (at once with
+ * Reduce Motion).
+ */
+@Composable
+private fun PullRoom(pull: ListPull, model: PullToRefreshModel) {
+    val reduceMotion = PeekTheme.reduceMotion
+    val density = LocalDensity.current
+    LaunchedEffect(pull, model, reduceMotion, density) {
+        combine(model.phaseFlow, model.distanceFlow, model.holdDistanceFlow, model.grownHeightFlow) { phase, _, _, _ -> phase to model.room }
+            .distinctUntilChanged()
+            .collectLatest { (phase, room) ->
+                val target = with(density) { room.toFloat().dp.toPx() }
+                if (phase == PullToRefreshModel.Phase.Settling && !reduceMotion) pull.room.animateTo(target, Motion.easeOut(0.3)) else pull.room.snapTo(target)
+            }
+    }
+}
 
 /** A pull's side in the window: the window's density, and the gap closing as `model`'s refresh settles. */
 @Composable
@@ -252,12 +290,15 @@ internal fun PullEffects(pull: ListPull, model: PullToRefreshModel) {
 
 /**
  * `PullToRefreshIndicator`: the seal over its label in a band [PullToRefreshIndicator.HEIGHT] tall across the list, behind
- * its content and moving with its top (`origin`, in pixels from the list's top, `null` once the top has scrolled away),
- * kept a little under halfway down the gap. It fades in with the pull, and out as the refresh settles; it takes no
- * touches and TalkBack doesn't read it, as the list says how a refresh went. A light tap as each refresh starts.
+ * its content and moving with its top (`origin`, in pixels from the list's top, above the [room] the list makes, in
+ * points, `null` once the top has scrolled away), kept a little under halfway down the gap. Past the xxLarge text size
+ * the label takes the lines it needs and the band is as tall as they make it, which the model hears
+ * ([PullToRefreshModel.grow]) so that the list makes room for it while refreshing. It fades in with the pull, and out
+ * as the refresh settles; it takes no touches and TalkBack doesn't read it, as the list says how a refresh went. A light
+ * tap as each refresh starts.
  */
 @Composable
-internal fun PullIndicator(model: PullToRefreshModel, origin: () -> Float?, modifier: Modifier = Modifier) {
+internal fun PullIndicator(model: PullToRefreshModel, origin: () -> Float?, modifier: Modifier = Modifier, room: Double = 0.0) {
     val localizer = LocalLocalizer.current
     val reduceMotion = PeekTheme.reduceMotion
     val colors = PeekTheme.colors
@@ -270,9 +311,13 @@ internal fun PullIndicator(model: PullToRefreshModel, origin: () -> Float?, modi
     val starts by model.startsFlow.collectAsState()
     val awaitingRest by model.awaitingRestFlow.collectAsState()
     val result by model.resultFlow.collectAsState()
+    val grownHeight by model.grownHeightFlow.collectAsState()
     val pullLabel = localizer.text("app.pullToRefresh")
-    val indicator = remember(phase, distance, threshold, holdDistance, label, awaitingRest, result, pullLabel, reduceMotion) {
-        PullToRefreshIndicator.of(model, pullLabel, reduceMotion)
+    // Past the sizes where they fit on one line, the words take the lines they need, and the list makes room for them.
+    val grows = PeekTheme.dynamicTypeSize > DynamicTypeSize.XXLarge
+    LaunchedEffect(model, grows) { if (!grows) model.grow(0.0) }
+    val indicator = remember(phase, distance, threshold, holdDistance, label, awaitingRest, result, pullLabel, reduceMotion, grows, grownHeight, room) {
+        PullToRefreshIndicator.of(model, pullLabel, reduceMotion, grows, room)
     }
 
     // As the phase changes, the opacity and the seal's scale ease from where they were (`.animation(value: phase)`).
@@ -287,7 +332,8 @@ internal fun PullIndicator(model: PullToRefreshModel, origin: () -> Float?, modi
     Column(
         modifier
             .fillMaxWidth()
-            .height(bandHeight)
+            .then(if (grows) Modifier else Modifier.height(bandHeight))
+            .onSizeChanged { if (grows) model.grow(it.height / density.density.toDouble()) }
             .layout { measurable, constraints ->
                 val placeable = measurable.measure(constraints)
                 layout(placeable.width, placeable.height) {
@@ -305,40 +351,51 @@ internal fun PullIndicator(model: PullToRefreshModel, origin: () -> Float?, modi
             scaleX = sealScale.toFloat()
             scaleY = sealScale.toFloat()
         })
-        PullLabel(indicator.label, colors.resolve(PullToRefreshPalette.inkSoft), density)
+        PullLabel(indicator.label, colors.resolve(PullToRefreshPalette.inkSoft), density, grows)
     }
 }
 
-/** The label under the seal: caption 2 medium on one line, shrinking to 0.8 of its size before it is cut. */
+/**
+ * The label under the seal: caption 2 medium on one line, shrinking to 0.8 of its size before it is cut; once it
+ * `grows`, centred on the lines it needs at its full size.
+ */
 @Composable
-private fun PullLabel(text: String, color: Color, density: Density) {
-    CappedDynamicTypeSize(DynamicTypeSize.XXLarge) {
-        val style = PeekTheme.type.style(IosTextStyle.Caption2, FontWeight.Medium)
-        val measurer = rememberTextMeasurer()
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .height(PullToRefreshIndicator.LABEL_HEIGHT.dp)
-                .padding(horizontal = PullToRefreshIndicator.LABEL_PADDING.dp)
-                .layout { measurable, constraints ->
-                    val line = measurer.measure(text, style, maxLines = 1, softWrap = false)
-                    val scale = PullToRefreshIndicator.labelScale(
-                        lineHeight = line.size.height / density.density.toDouble(),
-                        textWidth = line.size.width / density.density.toDouble(),
-                        availableWidth = constraints.maxWidth / density.density.toDouble(),
-                    )
-                    // Its own width, centred, and as wide again as it shrinks.
-                    val placeable = measurable.measure(Constraints(maxWidth = (constraints.maxWidth / scale).toInt()))
-                    layout(constraints.maxWidth, constraints.maxHeight) {
-                        placeable.placeWithLayer((constraints.maxWidth - placeable.width) / 2, (constraints.maxHeight - placeable.height) / 2) {
-                            scaleX = scale.toFloat()
-                            scaleY = scale.toFloat()
-                        }
+private fun PullLabel(text: String, color: Color, density: Density, grows: Boolean) {
+    val style = PeekTheme.type.style(IosTextStyle.Caption2, FontWeight.Medium)
+    if (grows) {
+        Text(
+            text,
+            Modifier.fillMaxWidth().padding(horizontal = PullToRefreshIndicator.LABEL_PADDING.dp),
+            color = color,
+            style = style.sfLines(),
+            textAlign = TextAlign.Center,
+        )
+        return
+    }
+    val measurer = rememberTextMeasurer()
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(PullToRefreshIndicator.LABEL_HEIGHT.dp)
+            .padding(horizontal = PullToRefreshIndicator.LABEL_PADDING.dp)
+            .layout { measurable, constraints ->
+                val line = measurer.measure(text, style, maxLines = 1, softWrap = false)
+                val scale = PullToRefreshIndicator.labelScale(
+                    lineHeight = line.size.height / density.density.toDouble(),
+                    textWidth = line.size.width / density.density.toDouble(),
+                    availableWidth = constraints.maxWidth / density.density.toDouble(),
+                )
+                // Its own width, centred, and as wide again as it shrinks.
+                val placeable = measurable.measure(Constraints(maxWidth = (constraints.maxWidth / scale).toInt()))
+                layout(constraints.maxWidth, constraints.maxHeight) {
+                    placeable.placeWithLayer((constraints.maxWidth - placeable.width) / 2, (constraints.maxHeight - placeable.height) / 2) {
+                        scaleX = scale.toFloat()
+                        scaleY = scale.toFloat()
                     }
-                },
-        ) {
-            Text(text, color = color, style = style, maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis)
-        }
+                }
+            },
+    ) {
+        Text(text, color = color, style = style, maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis)
     }
 }
 

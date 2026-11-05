@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlin.math.PI
+import kotlin.math.ceil
 
 // From PullToRefresh.swift: the pull's state, and what the seal and its label show for it, frame by frame, in points.
 // On the iPhone the scroll view does the rest: it resists the pull, starts the refresh, holds the gap open, then
@@ -58,6 +59,7 @@ class PullToRefreshModel(private val scope: CoroutineScope) {
     private val labelState = MutableStateFlow<String?>(null)
     private val startsState = MutableStateFlow(0)
     private val awaitingRestState = MutableStateFlow(false)
+    private val grownHeightState = MutableStateFlow(0.0)
 
     val phaseFlow: StateFlow<Phase> = phaseState.asStateFlow()
     val resultFlow: StateFlow<Result?> = resultState.asStateFlow()
@@ -67,6 +69,7 @@ class PullToRefreshModel(private val scope: CoroutineScope) {
     val labelFlow: StateFlow<String?> = labelState.asStateFlow()
     val startsFlow: StateFlow<Int> = startsState.asStateFlow()
     val awaitingRestFlow: StateFlow<Boolean> = awaitingRestState.asStateFlow()
+    val grownHeightFlow: StateFlow<Double> = grownHeightState.asStateFlow()
 
     var phase: Phase
         get() = phaseState.value
@@ -128,6 +131,16 @@ class PullToRefreshModel(private val scope: CoroutineScope) {
             awaitingRestState.value = value
         }
 
+    /**
+     * How tall the seal and its words stand once the text is too large for one line of them, and they take the lines
+     * they need; zero at the default sizes, where they keep to the indicator's height (:app measures it, [grow]).
+     */
+    var grownHeight: Double
+        get() = grownHeightState.value
+        private set(value) {
+            grownHeightState.value = value
+        }
+
     private var restingInset: Double? = null
 
     /** The wait after a refresh before the seal returns to rest; tests await it. */
@@ -135,6 +148,20 @@ class PullToRefreshModel(private val scope: CoroutineScope) {
         private set
 
     val progress: Double get() = if (phase == Phase.Idle) swiftMin(1.0, distance / threshold) else 1.0
+
+    /**
+     * While refreshing, how much further the list moves down than the gap the system holds open, so that grown words
+     * keep clear of the cards and of the bar above them.
+     */
+    val room: Double
+        get() {
+            if (phase != Phase.Refreshing || !(grownHeight > PullToRefreshIndicator.HEIGHT)) return 0.0
+            return swiftMax(0.0, ceil(gap(grownHeight) - swiftMax(holdDistance, distance)))
+        }
+
+    fun grow(height: Double) {
+        if (height != grownHeight) grownHeight = height
+    }
 
     fun track(geometry: PullGeometry) {
         // While refreshing, the system adds its gap to the top inset, so the pull is measured from the inset the list
@@ -185,6 +212,12 @@ class PullToRefreshModel(private val scope: CoroutineScope) {
     companion object {
         /** How long the seal takes to fade before it returns to rest. */
         const val SETTLE_MILLISECONDS = 450L
+
+        /** The gap an indicator `height` tall needs, kept a little under halfway down it, to stand clear of the top. */
+        fun gap(height: Double): Double = (height / 2 + 3) / 0.45
+
+        /** How far above the top of the list an indicator `height` tall stands, a little under halfway down `gap`. */
+        fun offset(gap: Double, height: Double): Double = -0.55 * gap - (height / 2 - 3)
     }
 }
 
@@ -215,8 +248,10 @@ object PullToRefreshPalette {
  *
  * :app lays it out as the iPhone does: the seal, then the label `SPACING` below it, centred in a band `HEIGHT` tall
  * and as wide as the list, behind the list's content and aligned with its top (top padding included), moved down by
- * `offset` (so up, as it is negative) and faded to `opacity`. It takes no touches and is hidden from accessibility: the
- * list announces how a refresh went.
+ * `offset` (so up, as it is negative) and faded to `opacity`. Past the xxLarge text size the label takes the lines it
+ * needs, the band is as tall as they make it (`PullToRefreshModel.grownHeight`), and while refreshing the list's content
+ * moves `PullToRefreshModel.room` further down to keep clear of it: `offset` is then from the top of that room, where the
+ * content stands without it. It takes no touches and is hidden from accessibility: the list announces how a refresh went.
  */
 data class PullToRefreshIndicator(
     /** The gap the seal stays centred in: the pull, or the gap held while refreshing if that is larger. */
@@ -233,8 +268,9 @@ data class PullToRefreshIndicator(
         const val SPACING = 4.0
 
         /**
-         * The label is caption 2, medium, in `PullToRefreshPalette.inkSoft`, on one line that shrinks to 0.8 of its size
-         * before it is cut, no larger than the xxLarge text size, this far in from each side.
+         * The label is caption 2, medium, in `PullToRefreshPalette.inkSoft`, this far in from each side: up to the
+         * xxLarge text size on one line that shrinks to 0.8 of its size before it is cut, and past it centred on the
+         * lines it needs, at its full size.
          */
         const val LABEL_PADDING = 12.0
         const val LABEL_MINIMUM_SCALE = 0.8
@@ -242,16 +278,16 @@ data class PullToRefreshIndicator(
         /** The height the band leaves the label under the seal. */
         const val LABEL_HEIGHT = HEIGHT - PullToRefreshSeal.SIZE - SPACING
 
-        /** Caption 2's size in points at the default text sizes (up to Large), and at xxLarge, past which it stops. */
+        /** Caption 2's size in points at the default text sizes (up to Large), and at xxLarge, the largest on one line. */
         const val LABEL_FONT_SIZE = 11.0
         const val LABEL_MAXIMUM_FONT_SIZE = 15.0
 
         /**
          * The label's scale (`minimumScaleFactor(0.8)`): it shrinks until its line fits the `LABEL_HEIGHT` left under
          * the seal and its text, `textWidth` wide at full size, fits `availableWidth`, but never below 0.8. :app measures
-         * the line height of caption 2 medium at the reader's text size, capped at `LABEL_MAXIMUM_FONT_SIZE`, and centres
-         * the line on the label's height, so a line still too tall overflows it equally above and below; a line still
-         * too wide is cut at its end.
+         * the line height of caption 2 medium at the reader's text size, up to xxLarge (`LABEL_MAXIMUM_FONT_SIZE`), and
+         * centres the line on the label's height, so a line still too tall overflows it equally above and below; a line
+         * still too wide is cut at its end.
          */
         fun labelScale(lineHeight: Double, textWidth: Double = 0.0, availableWidth: Double = Double.POSITIVE_INFINITY): Double =
             swiftMin(1.0, swiftMax(LABEL_MINIMUM_SCALE, swiftMin(LABEL_HEIGHT / lineHeight, availableWidth / textWidth)))
@@ -262,11 +298,29 @@ data class PullToRefreshIndicator(
          */
         val phaseAnimation = MotionCurve.EaseOut(0.22)
 
-        fun of(model: PullToRefreshModel, pullLabel: String, reduceMotion: Boolean): PullToRefreshIndicator {
+        /**
+         * `grows` past the xxLarge text size, where the label takes the lines it needs. `room` is the room the list
+         * makes over its content as it moves: `PullToRefreshModel.room`, as :app eases it back to nothing with the gap.
+         */
+        fun of(
+            model: PullToRefreshModel,
+            pullLabel: String,
+            reduceMotion: Boolean,
+            grows: Boolean = false,
+            room: Double = model.room,
+        ): PullToRefreshIndicator {
             val pulling = model.phase == PullToRefreshModel.Phase.Idle
             val progress = model.progress
+            val height = if (grows) swiftMax(HEIGHT, model.grownHeight) else HEIGHT
             // Kept a little under halfway down the gap, so it stays centred as it grows.
-            val gap = if (pulling) model.distance else swiftMax(model.holdDistance, model.distance)
+            val gap = (if (pulling) model.distance else swiftMax(model.holdDistance, model.distance)) + room
+            // While pulling, grown words rise from where the indicator's foot stands at the default sizes, so they come
+            // into view with the pull as it always has, and never reach further down over the list.
+            val offset = if (pulling) {
+                PullToRefreshModel.offset(gap, HEIGHT) - (height - HEIGHT)
+            } else {
+                PullToRefreshModel.offset(gap, height) + room
+            }
             val opacity = when {
                 model.phase == PullToRefreshModel.Phase.Settling || (pulling && model.awaitingRest) -> 0.0
                 pulling -> swiftMin(1.0, swiftMax(0.0, progress * 2 - 0.15))
@@ -274,7 +328,7 @@ data class PullToRefreshIndicator(
             }
             return PullToRefreshIndicator(
                 gap = gap,
-                offset = -0.55 * gap - 21,
+                offset = offset,
                 opacity = opacity,
                 sealScale = if (reduceMotion) 1.0 else 0.82 + 0.18 * progress,
                 label = model.label ?: pullLabel,

@@ -767,11 +767,12 @@ internal class DeliveriesState(
 
     /**
      * How far the list's content has moved down since the list was made, in pixels: scrolled by a finger or a throw,
-     * pulled, and pushed down by the gap held open as it refreshes. The iPhone flies its cards in the scroll content's
-     * space, which moves with all of these; here a flight is drawn over the list, moved by as much as this has changed
-     * since it began. The list's own scrolls (to its top, to a card) end the flights first.
+     * pulled, and pushed down by the gap held open as it refreshes and the room for the seal's grown words. The iPhone
+     * flies its cards in the scroll content's space, which moves with all of these; here a flight is drawn over the
+     * list, moved by as much as this has changed since it began. The list's own scrolls (to its top, to a card) end the
+     * flights first.
      */
-    val contentShift: Float get() = listPull.scrolled + listPull.shown
+    val contentShift: Float get() = listPull.scrolled + listPull.shown + listPull.room.value
 
     fun openArchive(open: Boolean) {
         if (open == archiveOpen) return

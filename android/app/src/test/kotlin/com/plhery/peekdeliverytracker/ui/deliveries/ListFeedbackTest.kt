@@ -6,6 +6,7 @@ import android.view.accessibility.AccessibilityManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -19,6 +20,8 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipe
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.height
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
@@ -58,10 +61,11 @@ class ListFeedbackTest {
     private lateinit var source: FakeDeliveries
     private lateinit var deliveries: DeliveriesState
 
-    private fun show(parcels: List<Parcel> = DemoCards.parcels()) {
+    private fun show(parcels: List<Parcel> = DemoCards.parcels(), fontScale: Float = 1f) {
         source = FakeDeliveries(parcels, AuthenticationState.Demo)
         compose.setContent {
-            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalDensity provides Density(density.density, fontScale)) {
                 RootHost(state = AuthenticationState.Demo, source = source, reduceMotion = false)
             }
         }
@@ -159,6 +163,33 @@ class ListFeedbackTest {
         advance(1200)
         assertEquals(rest, top("New trainers"), 0.5f)
         compose.onNodeWithTag(INLINE_TOAST).assertDoesNotExist()
+    }
+
+    @Test
+    fun atTheLargestTextTheListMakesRoomForThePullsWordsWhileCheckingThenGoesBackUp() {
+        show(fontScale = 2f)
+        val rest = firstRowTop()
+        val checked = CompletableDeferred<ParcelStore.RefreshResult?>()
+        source.checking = checked
+        compose.mainClock.autoAdvance = false
+        pull(520f)
+        advance(2000)
+        assertEquals(1, source.refreshes)
+        // The words take the lines they need, and the list moves further down than the 60-point gap to keep them clear
+        // of the bar above and of the list's first row.
+        val words = compose.onNodeWithTag(PULL_INDICATOR, useUnmergedTree = true).getUnclippedBoundsInRoot()
+        val bar = compose.onNodeWithTag(DEMO_EXIT).getUnclippedBoundsInRoot()
+        assertTrue("Words $words taller than the usual 48", words.height.value > 48f)
+        assertTrue("Words $words under the bar $bar", words.top.value >= bar.bottom.value)
+        assertTrue("Words $words over the first row at ${firstRowTop()}", words.bottom.value <= firstRowTop())
+        assertTrue("First row at ${firstRowTop()}, more than 60 under $rest", firstRowTop() > rest + 61f)
+
+        // Once the seal has said how it went, the list goes back up with the gap.
+        checked.complete(ParcelStore.RefreshResult.Updated)
+        advance(100)
+        assertEquals("Tracking updated", announced())
+        advance(1800)
+        assertEquals(rest, firstRowTop(), 0.5f)
     }
 
     @Test

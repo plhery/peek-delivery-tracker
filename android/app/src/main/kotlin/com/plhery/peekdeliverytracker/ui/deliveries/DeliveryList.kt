@@ -395,8 +395,10 @@ private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding
     val pull = state.listPull
     val density = LocalDensity.current
     state.places.density = density.density
-    // While refreshing, the gap stands over the content, as the system adds it to the list's inset.
+    // While refreshing, the gap stands over the content, as the system adds it to the list's inset, and at the largest
+    // text sizes the room for the seal's words over that.
     val held = with(density) { pull.held.value.toDp() }
+    val room = with(density) { pull.room.value.toDp() }
     val listState = state.listState
     DisposableEffect(state) { onDispose(state::dropFlights) }
     Box(
@@ -412,17 +414,18 @@ private fun ListColumn(state: DeliveriesState, entries: List<ListEntry>, padding
             // Text or a link dropped on the list opens Add with it.
             .parcelDrop(state),
     ) {
-        PullIndicator(state.pull, origin = {
-            // The top of the content: the list's first item, less the content's own room above it.
+        PullIndicator(state.pull, room = room.value.toDouble(), origin = {
+            // The top of the content: the list's first item, less the content's own room above it and the room for
+            // the seal's words.
             val info = listState.layoutInfo
             info.visibleItemsInfo.firstOrNull { it.index == 0 }?.let {
-                it.offset - info.viewportStartOffset - with(density) { CONTENT_TOP.toPx() } + pull.past
+                it.offset - info.viewportStartOffset - with(density) { CONTENT_TOP.toPx() } - pull.room.value + pull.past
             }
         })
         LazyColumn(
             Modifier.fillMaxSize().graphicsLayer { translationY = pull.past }.testTag(PARCEL_LIST),
             state = listState,
-            contentPadding = PaddingValues(top = padding.calculateTopPadding() + held, bottom = padding.calculateBottomPadding()),
+            contentPadding = PaddingValues(top = padding.calculateTopPadding() + held + room, bottom = padding.calculateBottomPadding()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             items(entries, key = { it.key }, contentType = { it.type }) { entry ->

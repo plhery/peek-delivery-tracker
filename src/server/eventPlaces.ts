@@ -234,12 +234,34 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * is shown under (`relay_of`, see `relayLeads`, relayCopies.ts and scanRepeats.ts). A carrier's scan that names no place the
  * gazetteer finds, such as an office, takes the place of a left-out copy of it (`placeLenders`). A placeholder
  * number's parcel is served without what was stored from it (`withoutPlaceholderAnswers`). The steps its carrier
- * listed before they happen and that are still ahead are served apart from the scans (`planned_events`, plannedSteps.ts).
+ * listed before they happen and that are still ahead are served apart from the scans, each with its place
+ * (`planned_events`, plannedSteps.ts and `placedSteps`).
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
   const served = placedEvents(row);
-  const planned = servedPlannedSteps(withoutPlaceholderAnswers(row), shownEvents(row));
+  const planned = placedSteps(row, servedPlannedSteps(withoutPlaceholderAnswers(row), shownEvents(row)));
   return planned.length ? { ...served, planned_events: planned } : served;
+}
+
+/**
+ * Planned steps with the place each one's location names, found as a scan's from the parcel's destination and
+ * carriers, so the apps name its town as they name a scan's (a place written in another script is shown by it). No
+ * map shows them. Without the gazetteer they are served as listed.
+ */
+function placedSteps(row: JsonObject, steps: JsonObject[]): JsonObject[] {
+  if (!steps.length) return steps;
+  const data = isRecord(row.carrier_data) ? row.carrier_data : {};
+  try {
+    const places = placesForEvents(steps.map((step) => typeof step.location === 'string' ? step.location : null), {
+      destinationCountry: typeof data.destination_country === 'string' ? data.destination_country : null,
+      carriers: [data.active_tracking_carrier, row.carrier].filter((carrier): carrier is string => typeof carrier === 'string'),
+    });
+    return steps.map((step, index) => ({ ...step, place: places[index] ?? null }));
+  } catch (error) {
+    if (!reported) captureOperationalError(error, { component: 'api', operation: 'locate_event_places' });
+    reported = true;
+    return steps;
+  }
 }
 
 function placedEvents(row: JsonObject): JsonObject {

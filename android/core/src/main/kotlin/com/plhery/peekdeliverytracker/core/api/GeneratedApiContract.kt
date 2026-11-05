@@ -2847,6 +2847,7 @@ data class PlannedTrackingEvent(
     val location: String? = null,
     @SerialName("occurred_at") val occurredAt: String,
     val day: String? = null,
+    val place: EventPlace? = null,
 )
 
 @Serializable

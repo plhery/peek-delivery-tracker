@@ -390,16 +390,26 @@ object TrackingLocation {
         return if (written.country == null) placedCode(location, placedIn) ?: written else written
     }
 
-    private val eastAsian: Pattern = Pattern.compile("[\\p{script=Han}\\p{script=Hiragana}\\p{script=Katakana}\\p{script=Hangul}]")
-    private val kanaOrHangul: Pattern = Pattern.compile("[\\p{script=Hiragana}\\p{script=Katakana}\\p{script=Hangul}]")
+    /**
+     * A letter in a script other than Latin and the one each language is written in: a Russian reader's Cyrillic, a
+     * Chinese reader's characters.
+     */
+    private val foreignLetters: Map<AppLanguage, Pattern> = AppLanguage.entries.associateWith { language ->
+        val own = when (language) {
+            AppLanguage.Ru -> "\\p{script=Cyrillic}"
+            AppLanguage.Zh -> "\\p{script=Han}"
+            else -> ""
+        }
+        Pattern.compile("(?![\\p{script=Latin}$own])\\p{L}")
+    }
 
     /**
-     * Whether a location is shown by its town's romanised name rather than as written, as on the web
-     * (`romanisesPlace`): it is in Chinese, Japanese or Korean script, which a Chinese reader keeps when it is
-     * Chinese characters alone. The stored scan keeps its words.
+     * Whether a location is shown by its town's name, as the server's place lookup gives it, rather than as written,
+     * as on the web (`romanisesPlace`): it has a letter in a script other than Latin and the reader's own ("深圳市" for
+     * all but a Chinese reader, "東京都 ちよだ" for every one, "Москва" for all but a Russian reader). The stored scan
+     * keeps its words.
      */
-    fun romanises(location: String, language: AppLanguage): Boolean =
-        eastAsian.matcher(location).find() && !(language == AppLanguage.Zh && !kanaOrHangul.matcher(location).find())
+    fun romanises(location: String, language: AppLanguage): Boolean = foreignLetters.getValue(language).matcher(location).find()
 
     /**
      * For display: a location written in a script the reader may not read ([romanises]) is named by the town the

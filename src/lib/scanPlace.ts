@@ -15,15 +15,22 @@ function placedCode(location: string, placed: string | null | undefined): { coun
   return code && code[2] === placed ? { country: placed, place: code[1] } : null;
 }
 
-const EAST_ASIAN = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u;
-const KANA_OR_HANGUL = /[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u;
+/** The script a reader of each language reads besides Latin: a Russian reader's Cyrillic, a Chinese reader's characters. */
+const OWN_SCRIPT: Partial<Record<Locale, string>> = { ru: '\\p{Script=Cyrillic}', zh: '\\p{Script=Han}' };
+const foreignLetters = new Map<Locale | undefined, RegExp>();
 
 /**
- * Whether a location is shown by its town's romanised name rather than as written: it is in Chinese, Japanese or
- * Korean script, which a Chinese reader keeps when it is Chinese characters alone. The stored scan keeps its words.
+ * Whether a location is shown by its town's name, as the server's place lookup gives it, rather than as written: it
+ * has a letter in a script other than Latin and the one the reader's language is written in ("深圳市" for all but a
+ * Chinese reader, "東京都 ちよだ" for every one, "Москва" for all but a Russian reader). The stored scan keeps its words.
  */
 export function romanisesPlace(location: string, locale?: Locale): boolean {
-  return EAST_ASIAN.test(location) && !(locale === 'zh' && !KANA_OR_HANGUL.test(location));
+  let foreign = foreignLetters.get(locale);
+  if (!foreign) {
+    foreign = new RegExp(`(?![\\p{Script=Latin}${(locale && OWN_SCRIPT[locale]) ?? ''}])\\p{L}`, 'u');
+    foreignLetters.set(locale, foreign);
+  }
+  return foreign.test(location);
 }
 
 /**

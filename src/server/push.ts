@@ -624,8 +624,8 @@ function notificationDetail(row: JsonObject, locale: Locale, now: number): strin
 }
 
 /**
- * The scan's place as a notification says it: as written, unless it is in Chinese, Japanese or Korean script the
- * reader may not read (`romanisesPlace`) and the place reader finds its town ("深圳市" is "Shenzhen, China") or its
+ * The scan's place as a notification says it: as written, unless it is in a script other than Latin and the
+ * reader's own (`romanisesPlace`) and the place reader finds its town ("深圳市" is "Shenzhen, China") or its
  * country. The stored scan keeps its words.
  */
 function notificationPlace(row: JsonObject, locale: Locale): unknown {

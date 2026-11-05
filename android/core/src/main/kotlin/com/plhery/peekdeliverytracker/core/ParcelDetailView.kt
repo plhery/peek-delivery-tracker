@@ -155,11 +155,12 @@ val PlannedTrackingEvent.journalLocation: String?
 
 /**
  * What TalkBack reads of a planned step's row: "Planned, not confirmed: " and its words, its day ([Localizer.plannedDate])
- * and where it will be as the location row reads it, without the flag, joined by ", ".
+ * and where it will be as the location row reads it (the town its place names, for one written in another script),
+ * without the flag, joined by ", ".
  */
 fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = Instant.now()): String {
     val place = step.journalLocation?.let { location ->
-        val place = TrackingLocation.place(location, null)
+        val place = TrackingLocation.place(location, step.place, language)
         val country = place.country
         when {
             country == null -> place.name

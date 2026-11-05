@@ -18,7 +18,7 @@ describe('scan places', () => {
     expect(scanPlace(location, placed ? { country: placed, name: 'Town', precision: 'city' } : undefined)).toEqual({ country, place });
   });
 
-  it('names a place written in Chinese, Japanese or Korean script by the town it was placed in', () => {
+  it('names a place written in a script other than Latin and the reader\'s own by the town it was placed in', () => {
     const shenzhen = { country: 'CN', name: 'Shenzhen', precision: 'city' as const };
     expect(scanPlace('深圳市', shenzhen, 'de')).toEqual({ country: 'CN', place: 'Shenzhen' });
     expect(scanPlace('【深圳市】', shenzhen)).toEqual({ country: 'CN', place: 'Shenzhen' });
@@ -33,7 +33,16 @@ describe('scan places', () => {
     // Latin script keeps its own spelling.
     expect(scanPlace('Shenzhen', shenzhen, 'en')).toEqual({ country: null, place: 'Shenzhen' });
     expect(romanisesPlace('ZUERICH, CH')).toBe(false);
+    expect(romanisesPlace('Hà Nội, VN', 'en')).toBe(false);
     expect(romanisesPlace('とうきょう', 'zh')).toBe(true);
+    // Any other script, which a reader of its language keeps: Cyrillic for a Russian reader.
+    const moscow = { country: 'RU', name: 'Moscow', precision: 'city' as const };
+    expect(scanPlace('Москва', moscow, 'en')).toEqual({ country: 'RU', place: 'Moscow' });
+    expect(scanPlace('Москва', moscow, 'zh')).toEqual({ country: 'RU', place: 'Moscow' });
+    expect(scanPlace('Москва', moscow, 'ru')).toEqual({ country: null, place: 'Москва' });
+    expect(scanPlace('深圳市', shenzhen, 'ru')).toEqual({ country: 'CN', place: 'Shenzhen' });
+    expect(scanPlace('กรุงเทพมหานคร', { country: 'TH', name: 'Bangkok', precision: 'city' }, 'de')).toEqual({ country: 'TH', place: 'Bangkok' });
+    expect(scanPlace('ΑΘΗΝΑ', null, 'en')).toEqual({ country: null, place: 'ΑΘΗΝΑ' });
   });
 
   it('counts a final field only, settled by where the scan was placed', () => {

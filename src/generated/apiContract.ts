@@ -50096,6 +50096,7 @@ export interface ApiPlannedTrackingEvent {
   "location": string | null;
   "occurred_at": string;
   "day"?: string;
+  "place"?: ApiEventPlace | null;
 }
 
 export interface ApiPackageRow {

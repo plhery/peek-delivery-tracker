@@ -342,17 +342,19 @@ enum TrackingLocation {
         return written.country == nil ? placedCode(location, placedIn: placed) ?? written : written
     }
 
-    private static let eastAsian = try! NSRegularExpression(pattern: "[\\p{Script=Han}\\p{Script=Hiragana}\\p{Script=Katakana}\\p{Script=Hangul}]")
-    private static let kanaOrHangul = try! NSRegularExpression(pattern: "[\\p{Script=Hiragana}\\p{Script=Katakana}\\p{Script=Hangul}]")
+    /// A letter in a script other than Latin and the one each language is written in: a Russian reader's Cyrillic,
+    /// a Chinese reader's characters.
+    private static let foreignLetters: [AppLanguage: NSRegularExpression] = Dictionary(uniqueKeysWithValues: AppLanguage.allCases.map { language in
+        let own = language == .ru ? "\\p{Script=Cyrillic}" : language == .zh ? "\\p{Script=Han}" : ""
+        return (language, try! NSRegularExpression(pattern: "(?![\\p{Script=Latin}\(own)])\\p{L}"))
+    })
 
-    /// Whether a location is shown by its town's romanised name rather than as written, as on the web
-    /// (`romanisesPlace`): it is in Chinese, Japanese or Korean script, which a Chinese reader keeps when it is
-    /// Chinese characters alone. The stored scan keeps its words.
+    /// Whether a location is shown by its town's name, as the server's place lookup gives it, rather than as written,
+    /// as on the web (`romanisesPlace`): it has a letter in a script other than Latin and the reader's own ("深圳市"
+    /// for all but a Chinese reader, "東京都 ちよだ" for every one, "Москва" for all but a Russian reader). The stored
+    /// scan keeps its words.
     static func romanises(_ location: String, language: AppLanguage) -> Bool {
-        func has(_ expression: NSRegularExpression) -> Bool {
-            expression.firstMatch(in: location, range: NSRange(location.startIndex..., in: location)) != nil
-        }
-        return has(eastAsian) && !(language == .zh && !has(kanaOrHangul))
+        foreignLetters[language]?.firstMatch(in: location, range: NSRange(location.startIndex..., in: location)) != nil
     }
 
     /// For display: a location written in a script the reader may not read (`romanises`) is named by the town the

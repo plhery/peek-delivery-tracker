@@ -92,6 +92,13 @@ describe('withEventPlaces', () => {
     expect((served.carrier_data as JsonObject).routing).toEqual({ version: 1 });
   });
 
+  it('places each planned step as a scan is placed, so a town written in another script is named', () => {
+    const steps = [{ ...script[0], location: '深圳市' }, ...script.slice(1)];
+    const served = withEventPlaces(row({}, steps)).planned_events as JsonObject[];
+    expect(served[0]!.place).toMatchObject({ precision: 'city', country: 'CN', name: 'Shenzhen' });
+    expect(served[1]!.place).toBeNull();
+  });
+
   it('serves no plan for a delivered parcel, nor for a placeholder number', () => {
     expect(withEventPlaces(row({ current_stage: 'delivered' }))).not.toHaveProperty('planned_events');
     expect(withEventPlaces(row({ tracking_number: '123456789', carrier_data: { routing: { version: 1,

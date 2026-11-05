@@ -2845,6 +2845,7 @@ struct PlannedTrackingEvent: Codable, Equatable, Hashable, Sendable {
     var location: String? = nil
     var occurredAt: String
     var day: String? = nil
+    var place: EventPlace? = nil
 }
 
 struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {

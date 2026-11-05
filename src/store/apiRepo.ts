@@ -177,6 +177,7 @@ export function toPlannedEvent(row: ApiPlannedTrackingEvent): PlannedEvent {
     location: row.location ?? undefined,
     occurredAt: row.occurred_at,
     day: row.day ?? undefined,
+    place: row.place ?? undefined,
   };
 }
 

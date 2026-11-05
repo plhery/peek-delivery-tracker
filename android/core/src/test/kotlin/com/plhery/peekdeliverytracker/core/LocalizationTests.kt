@@ -578,7 +578,8 @@ class LocalizationTests {
             TrackingLocation.place("Los Angeles, CA", placedIn = "US"),
         )
         assertEquals(TrackingLocation.Place(country = "CA", name = "Toronto"), TrackingLocation.place("Toronto, CA", placedIn = "CA"))
-        // A place written in Chinese, Japanese or Korean script is named by the town it was placed in, as on the web.
+        // A place written in a script other than Latin and the reader's own is named by the town it was placed in, as on
+        // the web.
         fun placed(country: String, name: String, precision: EventPlacePrecision = EventPlacePrecision.City) =
             EventPlace(latitude = 0.0, longitude = 0.0, precision = precision, country = country, name = name)
         val shenzhen = placed("CN", "Shenzhen")
@@ -593,6 +594,12 @@ class LocalizationTests {
         assertEquals(TrackingLocation.Place(country = null, name = "深圳市"), TrackingLocation.place("深圳市", shenzhen, AppLanguage.Zh))
         assertEquals(TrackingLocation.Place(country = "DE", name = "Haiger"), TrackingLocation.place("Haiger, DE", placed("DE", "Haiger"), AppLanguage.En))
         assertEquals(TrackingLocation.Place(country = null, name = "Shenzhen"), TrackingLocation.place("Shenzhen", shenzhen, AppLanguage.En))
+        val moscow = placed("RU", "Moscow")
+        assertEquals(TrackingLocation.Place(country = "RU", name = "Moscow"), TrackingLocation.place("Москва", moscow, AppLanguage.En))
+        assertEquals(TrackingLocation.Place(country = null, name = "Москва"), TrackingLocation.place("Москва", moscow, AppLanguage.Ru))
+        assertEquals(TrackingLocation.Place(country = "CN", name = "Shenzhen"), TrackingLocation.place("深圳市", shenzhen, AppLanguage.Ru))
+        assertEquals(TrackingLocation.Place(country = "TH", name = "Bangkok"), TrackingLocation.place("กรุงเทพมหานคร", placed("TH", "Bangkok"), AppLanguage.Fr))
+        assertEquals(false, TrackingLocation.romanises("Hà Nội, VN", AppLanguage.En))
         assertEquals("🇨🇭", TrackingLocation.flag("CH"))
         // Passport evidence stays a final field that names a region.
         assertEquals("CH", TrackingLocation.countryCode("Zürich, CH"))

@@ -120,6 +120,8 @@ export interface PlannedEvent {
   occurredAt: string; // ISO timestamp
   /** The day (YYYY-MM-DD) of a step the carrier dated by its day alone. */
   day?: string;
+  /** Where the server places its location, which names its town as a scan's place does; no map shows it. */
+  place?: EventPlace;
 }
 
 export interface ParcelWithEvents extends Parcel {

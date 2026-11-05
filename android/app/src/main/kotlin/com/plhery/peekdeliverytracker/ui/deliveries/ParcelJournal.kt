@@ -241,7 +241,7 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
             if (date.isNotEmpty()) {
                 Text(date, Modifier.padding(top = 3.dp), color = secondary, style = type.caption2.monospacedDigit().sfLines())
             }
-            step.journalLocation?.let { location -> Box(Modifier.padding(top = 4.dp)) { EventLocation(location, null) } }
+            step.journalLocation?.let { location -> Box(Modifier.padding(top = 4.dp)) { EventLocation(location, step.place) } }
         }
     }
     val label = localizer.plannedStepLabel(step, now)

@@ -3,6 +3,8 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.event
 import com.plhery.peekdeliverytracker.core.ParcelLogicTestFixtures.makeParcel
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.EventPlace
+import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.PublicPackage
 import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
@@ -160,6 +162,13 @@ class PlannedStepsTests {
             localizer.plannedStepLabel(steps[1], now),
         )
         assertEquals("Planned, not confirmed: ${localizer.eventDescription("Delivered")}", localizer.plannedStepLabel(steps[2], now))
+        // A town written in another script is named by the place the server found for it, as a scan's.
+        val guangzhou = EventPlace(latitude = 23.13, longitude = 113.26, precision = EventPlacePrecision.City, country = "CN", name = "Guangzhou")
+        val placed = steps[1].copy(location = "广州市", place = guangzhou)
+        assertEquals(
+            "Planned, not confirmed: ${localizer.text("stage.out_for_delivery")}, tomorrow, 07:54, Guangzhou, China",
+            localizer.plannedStepLabel(placed, now),
+        )
     }
 
     @Test

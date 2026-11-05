@@ -1823,7 +1823,7 @@ private struct PlannedStepRow: View {
                         .padding(.top, 3)
                 }
                 if let location {
-                    EventLocation(location: location, placed: nil)
+                    EventLocation(location: location, placed: step.place)
                         .font(.caption2).foregroundStyle(Brand.secondaryText)
                         .padding(.top, 4)
                 }
@@ -1843,7 +1843,7 @@ private struct PlannedStepRow: View {
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(localizer.text("timeline.planned.step", [
-            "step": [wording, when, location.map { EventLocation.spoken($0, placed: nil, language: localizer.language) }]
+            "step": [wording, when, location.map { EventLocation.spoken($0, placed: step.place, language: localizer.language) }]
                 .compactMap { $0?.nonEmpty }.joined(separator: ", "),
         ]))
     }

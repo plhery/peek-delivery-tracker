@@ -81,9 +81,13 @@ describe('TrackingJournal', () => {
     const { container } = render(<TrackingJournal events={[
       { ...event('xiamen', '2024-09-09T10:00:00', 'Departed', '厦门'), place: { latitude: 24.48, longitude: 118.09, precision: 'city', country: 'CN', name: 'Xiamen' } },
       event('unplaced', '2024-09-09T09:00:00', 'Accepted', '台北'),
+    ]} planned={[
+      { stage: 'in_transit', description: 'Departed', occurredAt: '2024-09-12T09:00:00', location: '广州市',
+        place: { latitude: 23.13, longitude: 113.26, precision: 'city', country: 'CN', name: 'Guangzhou' } },
+      { stage: 'in_transit', description: 'Arrived', occurredAt: '2024-09-11T09:00:00', location: '台北' },
     ]} />);
     expect([...container.querySelectorAll('.tracking-journal__location')].map(place => place.textContent))
-      .toEqual(['🇨🇳Xiamen, China', '台北']);
+      .toEqual(['🇨🇳Guangzhou, China', '台北', '🇨🇳Xiamen, China', '台北']);
   });
 
   it('shows an earlier carrier\'s relay copy as a line under the scan it repeats, keeping its words', () => {

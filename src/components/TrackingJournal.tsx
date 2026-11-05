@@ -132,7 +132,7 @@ function PlannedSteps({ steps }: { steps: PlannedEvent[] }) {
           <div>
             <p><span className="sr-only">{t('timeline.planned.step', { step: '' }).trim()} </span>{wording}</p>
             <time className="tracking-journal__planned-when" dateTime={step.day ?? step.occurredAt}>{when(step)}</time>
-            {step.location?.trim() && <EventPlace location={step.location} />}
+            {step.location?.trim() && <EventPlace location={step.location} placed={step.place} />}
           </div>
         </li>;
       })}
@@ -143,8 +143,8 @@ function PlannedSteps({ steps }: { steps: PlannedEvent[] }) {
 /**
  * The flag leads and the country closes the place, named in the reader's language. A final code
  * that is also a state or canton ("Haiger, DE", "Wilmington, DE") names a country only when the
- * scan was placed in that country. A place written in Chinese, Japanese or Korean script is named
- * by the town it was placed in (`scanPlace`).
+ * scan was placed in that country. A place written in a script other than Latin and the reader's own
+ * is named by the town it was placed in (`scanPlace`), a planned step's as a scan's.
  */
 function EventPlace({ location, placed }: { location: string; placed?: EventPlaceData | null }) {
   const { languageTag, locale } = useI18n();

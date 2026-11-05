@@ -3,14 +3,16 @@ title: Poste Italiane tracking: codici 1UW e 3UW, stati e giacenza
 description: Tracking Poste Italiane: dove trovi il codice spedizione (anche 1UW e 3UW), cosa vogliono dire gli stati, giacenza, Punto Poste, reclami e numero verde.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
 Poste Italiane consegna i pacchi dei negozi online italiani e quelli che arrivano dall'estero. Per seguire il tuo pacco cerca il codice spedizione in «Cerca Spedizioni» su poste.it (il servizio che prima si chiamava Dove Quando) o nell'App Poste Italiane, oppure incollalo nel box qui sopra. Il codice è sulla ricevuta di chi ha spedito; se hai comprato online, te lo dà il venditore.
 
+Sull'avviso di giacenza trovi il numero della raccomandata, da incollare qui sopra, l'ufficio postale e da quando ritirare; se l'avviso lo indica, puoi ritirarla anche online con Ritiro Digitale. Ti chiedono via SMS di pagare lo sdoganamento? Non aprire il link, che può essere falso: cerca il codice su www.poste.it e usa il pulsante «Paga». Peek mostra gli «Oneri doganali» che indica Poste. Il «Codice Prenotazione Ritiro» (CP più cifre) serve a chi spedisce per il ritiro a domicilio, non a seguire il pacco.
+
 ## Codice spedizione Poste Italiane: dove si trova e com'è fatto
 
-Poste lo chiama «codice spedizione». Sulla ricevuta o sulla lettera di vettura sta sotto il codice a barre: scrivilo senza spazi e senza trattino; vanno bene sia le maiuscole sia le minuscole. Per un ordine online guarda l'e-mail di spedizione del negozio o la pagina dell'ordine. Se il mittente l'ha attivato, con Scegli Tu Poste ti manda anche un'e-mail e/o un SMS con la data di consegna prevista e un link. Il «Codice Prenotazione Ritiro» (CP più cifre) identifica il ritiro a domicilio prenotato, non serve a seguire il pacco.
+Poste lo chiama «codice spedizione». Sulla ricevuta o sulla lettera di vettura sta sotto il codice a barre: scrivilo senza spazi e senza trattino; vanno bene sia le maiuscole sia le minuscole. Per un ordine online guarda l'e-mail di spedizione del negozio o la pagina dell'ordine. Se il mittente l'ha attivato, con Scegli Tu Poste ti manda anche un'e-mail e/o un SMS con la data di consegna prevista e un link.
 
 I codici hanno forme diverse. Questi sono inventati:
 
@@ -70,7 +72,7 @@ Poste prevede 2 tentativi a domicilio, al piano strada. Dopo il primo il portale
 
 **Cambiare la consegna.** Se il mittente ha attivato Scegli Tu, dal link puoi scegliere, una sola volta per spedizione, un altro giorno, un altro indirizzo in Italia, un ufficio postale o un Punto Poste, un vicino o il portiere, un luogo sicuro o il fermo del pacco mentre sei in vacanza. Con PostePlus, gratuito per chi vive in Italia e ha un account poste.it, ricevi notifiche e scegli indirizzo e giorni preferiti per i pacchi che il mittente ha abilitato.
 
-**Pacchi da fuori UE.** Gli oneri d'importazione si pagano alla consegna o in ufficio postale, oppure prima, online, spendendo meno. La tariffa di sdoganamento di Poste per un bene commerciale è di 3,00 € fino a 22 €, 7,00 € fino a 150 € e 21,00 € oltre (online: 1,00 € fino a 150 €, 18,00 € oltre); dal 1° luglio 2026, secondo la Commissione europea, sulle spedizioni fino a 150 € si applica anche un dazio forfettario temporaneo di 3 € per articolo. Poste Italiane avvisa che, per problemi dovuti all'aggiornamento dei sistemi informatici doganali nazionali, le operazioni di sdoganamento delle spedizioni da Paesi extra-UE sono state «fortemente rallentate» e che Poste è stata «costretta a sospendere temporaneamente le operazioni di sdoganamento»: «al momento non è possibile stimarne i tempi di ripristino». Vedi [pacco fermo in dogana](guide:customs).
+**Pacchi da fuori UE.** Gli oneri d'importazione si pagano alla consegna o in ufficio postale, oppure prima, online, spendendo meno. La tariffa di sdoganamento di Poste per un bene commerciale è di 3,00 € fino a 22 €, 7,00 € fino a 150 € e 21,00 € oltre (online: 1,00 € fino a 150 €, 18,00 € oltre); dal 1° luglio 2026, secondo la Commissione europea, sulle spedizioni fino a 150 € si applica anche un dazio forfettario temporaneo di 3 € per articolo; dal 1° novembre 2026 sugli acquisti online si aggiunge la Tassa di Gestione dell'Unione, 2 € per articolo a prescindere dal valore. Poste Italiane avvisa che, per problemi dovuti all'aggiornamento dei sistemi informatici doganali nazionali, le operazioni di sdoganamento delle spedizioni da Paesi extra-UE sono state «fortemente rallentate» e che Poste è stata «costretta a sospendere temporaneamente le operazioni di sdoganamento»: «al momento non è possibile stimarne i tempi di ripristino». Vedi [pacco fermo in dogana](guide:customs).
 
 ## Pacco Poste Italiane non arriva, smarrito o danneggiato
 
@@ -135,6 +137,8 @@ Chiama l'803 160 da rete fissa o il +39 06 4526 3160 da cellulare, dal lunedì a
 - [Poste Italiane: Chiamaci](https://www.poste.it/assistenza/chiamaci/) – 803 160, +39 06 4526 3160, orari, chat, intestatario
 - [Poste Italiane: Scrivici](https://www.poste.it/assistenza/scrivici) – modulo, e-mail, 06 4526 4526
 - [Poste Italiane: Reclami e conciliazione](https://www.poste.it/assistenza/reclami) – canali di reclamo
+- [Poste Italiane: Raccomandata](https://www.poste.it/posta-raccomandata/raccomandata) – numero sull'avviso
+- [Poste Italiane: Ritiro Digitale](https://www.poste.it/ritiro-digitale) – ritiro online
 - [Poste Italiane: Come difendersi dalle truffe](https://www.poste.it/sicurezza-online/guide-per-operare-in-sicurezza/come-difendersi-dalle-truffe) – SMS falsi, antiphishing
 - [Poste Italiane: Poste Delivery Express](https://www.poste.it/prodotti/poste-delivery-express.html) – tempi di consegna
 - [Poste Italiane: Condizioni Poste Delivery Express](https://www.media.poste.it/d9e41964-551f-4f58-9887-6608322cdf87/web/poste-delivery-express-cgc) – «già paccocelere», stato dal giorno dopo
@@ -144,8 +148,8 @@ Chiama l'803 160 da rete fissa o il +39 06 4526 3160 da cellulare, dal lunedì a
 - [Poste Italiane: Carta dei servizi postali universali](https://www.media.poste.it/c919f7cf-8236-428e-82fc-f8b2be8428b8/web/carta-servizi-universali) – termini di reclamo Poste Delivery Standard, Posta4 vecchio nome della Posta Ordinaria, giacenza delle raccomandate
 - [Poste Italiane: Posta Ordinaria](https://www.poste.it/lettera/posta-ordinaria) – esito della consegna, anche per Postamail
 - [Poste Italiane: Nuove condizioni del Servizio Universale](https://www.poste.it/variazione-servizio-postale-universale) – fine di Posta1, Postapriority Internazionale in ufficio postale
-- [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – oneri d'importazione, tariffe di sdoganamento, pagamento online
+- [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – oneri d'importazione, Tassa di Gestione dell'Unione, tariffe di sdoganamento, pagamento online
 - [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi) – Ritardi sdoganamento
-- [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio temporaneo di 3 € per articolo dal 1° luglio 2026, fino a 150 €
+- [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio temporaneo di 3 € per articolo dal 1° luglio 2026, fino a 150 €; 2 € per articolo dal 1° novembre 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
 :::

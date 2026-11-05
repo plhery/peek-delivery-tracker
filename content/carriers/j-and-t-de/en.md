@@ -3,7 +3,7 @@ title: J&T Express Germany tracking: JTDE numbers and statuses
 description: Track a J&T Express parcel in Germany: what a JTDE number looks like, what each tracking line means, and what to do when your parcel is late, lost or missing.
 slug: jt-express-germany-tracking
 published: 2026-10-21
-updated: 2026-10-27
+updated: 2026-11-05
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt am Main) is the German network of the J&T Express parcel group: it delivers parcels in Germany. If a shop sent your order with J&T, the tracking number starts with `JTDE`: paste it in the box above, or look it up on [J&T's own tracker at jtexpress.de](https://www.jtexpress.de/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -78,7 +78,7 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 **Delivered but not received.** Read the delivered line in Peek: if it names a place, such as `Mailbox` or `Garage`, look there; if it says `Left with neighbor`, ask your neighbours, or look the neighbour up on J&T's tracker (see above). J&T's FAQ also asks you to check whether family, a neighbour or building staff took the parcel in. Still missing? Report it to J&T's hotline, and ask the shop for a refund or a new parcel, with your tracking number. See also [delivered but not received](guide:delivered-not-received).
 
-**Lost, damaged or returned.** Ask the shop for a refund or replacement, with your tracking number. J&T's FAQ gives no claim form, deadline or compensation for recipients; see [lost parcels](guide:lost-parcel), [damaged parcels](guide:damaged-parcel) and [returned to sender](guide:returned-to-sender).
+**Lost, damaged or returned.** Ask the shop for a refund or replacement, with your tracking number. J&T's FAQ gives no claim form, deadline or compensation for recipients; German law sets the deadlines. Under § 438 of the Commercial Code (HGB), report visible damage on delivery at the latest (telling the driver is enough), and hidden damage within seven days of delivery, in text form, such as an email to J&T. If you can't agree with J&T over a lost or damaged parcel, you can take it to the Bundesnetzagentur's postal arbitration board (Schlichtungsstelle Post), which charges no fee and hears recipients as well as senders. Parcels from large online shops, though, usually travel under special terms that rule arbitration out; you can then still turn to the Bundesnetzagentur's consumer service for postal matters (Verbraucherservice Post). See [lost parcels](guide:lost-parcel), [damaged parcels](guide:damaged-parcel) and [returned to sender](guide:returned-to-sender).
 
 ## J&T Express Germany customer service and contact
 
@@ -106,7 +106,7 @@ Peek checks every 10 minutes, and every 2 minutes once the parcel is out for del
 
 ### Is J&T Express Germany legit?
 
-Yes. J&T Express Germany GmbH, registered in Frankfurt am Main, is the German company of J&T Express, a parcel group founded in Indonesia in 2015 and listed in Hong Kong. J&T is looking for franchise partners all over Germany to run last-mile deliveries and collections. Every sentence in the status table above was read on live J&T Express Germany parcels.
+Yes. J&T Express Germany GmbH, registered in Frankfurt am Main, is the German company of J&T Express, a parcel group founded in Indonesia in 2015 and listed in Hong Kong. Germany's postal regulator, the Bundesnetzagentur, has listed the GmbH in its register of postal providers since 1 September 2026. J&T is looking for franchise partners all over Germany to run last-mile deliveries and collections. Every sentence in the status table above was read on live J&T Express Germany parcels.
 
 ### Which neighbour has my J&T parcel?
 
@@ -137,4 +137,7 @@ Call +49 6931090650 (Monday to Friday, 8:00 to 20:00), use the live chat on jtex
 - [Universal Parcel Scraper: J&T's shared tracker lookup](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – English sentences, exact scan times, no place, expected day or weight, names and phone numbers left out, newest 100 scans
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – other J&T networks' shapes, no hand-over to another carrier, tracking services as a fallback
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – the seller's risk in transit
+- [Gesetze im Internet: § 438 HGB](https://www.gesetze-im-internet.de/hgb/__438.html) – damage reported on delivery, hidden damage within seven days, text form
+- [Bundesnetzagentur: Anbieterverzeichnis Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/Anbieterverzeichnis/PostAnbieterverzeichnis.html) – register of postal providers: J&T Express Germany GmbH, listed on 1 September 2026
+- [Bundesnetzagentur: Häufig gestellte Fragen zur Schlichtung Post](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/Schlichtung_Post/_FAQ_Schlichtung/faqSchlichtung.html) – recipients may apply, no fee, special terms for online shops' parcels, Verbraucherservice Post
 :::

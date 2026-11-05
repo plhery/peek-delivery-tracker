@@ -57,7 +57,7 @@ The notice or SMS gives the last day; Poste's pages give between 3 working days 
 
 **Changing a delivery.** If the sender activated Scegli Tu, its link lets you, once per parcel, pick another day, another address in Italy, a pickup point, a neighbour, a safe place or a holiday hold.
 
-**From outside the EU**, import charges are paid on delivery or at a post office, or beforehand online for a lower fee. Poste's clearance fee for a commercial item is €3.00 up to €22, €7.00 up to €150 and €21.00 above (online: €1.00 up to €150, €18.00 above), and since 1 July 2026, says the European Commission, a temporary flat duty of €3 per item applies to parcels worth up to €150. Poste Italiane warns that, after problems with an update to Italy's national customs IT systems, customs clearance of shipments from outside the EU has been heavily slowed and it has had to suspend clearance temporarily; for now, it says, it isn't possible to estimate when clearance will resume. See [parcels held at customs](guide:customs).
+**From outside the EU**, import charges are paid on delivery or at a post office, or beforehand online for a lower fee. Poste's clearance fee for a commercial item is €3.00 up to €22, €7.00 up to €150 and €21.00 above (online: €1.00 up to €150, €18.00 above), and since 1 July 2026, says the European Commission, a temporary flat duty of €3 per item applies to parcels worth up to €150; since 1 November 2026, online orders also carry the EU's €2 handling fee per item, whatever their value. Poste Italiane warns that, after problems with an update to Italy's national customs IT systems, customs clearance of shipments from outside the EU has been heavily slowed and it has had to suspend clearance temporarily; for now, it says, it isn't possible to estimate when clearance will resume. See [parcels held at customs](guide:customs).
 
 ## Poste Italiane lost, late or damaged parcel
 
@@ -108,7 +108,7 @@ Yes: Punto Poste lockers, chosen at the shop's checkout and opened with the PIN 
 - [Poste Italiane: Legenda degli stati di spedizione](https://www.poste.it/cerca/views/risultati-spedizioni.html) – statuses, 2-month limit
 - [Poste Italiane: FAQ Scegli Tu](https://www.poste.it/assistenza/faq-scegli-tu) – delivery options
 - [Poste Italiane: FAQ Rete Punto Poste](https://www.poste.it/assistenza/faq-rete-punto-poste) – choosing a point
-- [Poste Italiane: Ricevere dall'estero (Italian)](https://www.poste.it/ricevere-spedizioni-da-estero) – import charges, clearance fees, online payment
+- [Poste Italiane: Ricevere dall'estero (Italian)](https://www.poste.it/ricevere-spedizioni-da-estero) – import charges, Union handling fee, clearance fees, online payment
 - [Poste Italiane: Aggiornamenti operativi posta e pacchi (Italian)](https://www.poste.it/aggiornamenti-operativi) – customs clearance delays and suspension
 - [Poste Italiane: Reclami e conciliazione](https://www.poste.it/assistenza/reclami) – complaint channels
 - [Poste Italiane: Chiamaci](https://www.poste.it/assistenza/chiamaci/) – phone numbers, hours, chat
@@ -117,6 +117,6 @@ Yes: Punto Poste lockers, chosen at the shop's checkout and opened with the PIN 
 - [Poste Italiane: Poste Delivery Express](https://www.poste.it/prodotti/poste-delivery-express.html) – delivery time
 - [Poste Italiane: Carta dei servizi postali](https://www.media.poste.it/37381c9f-a87e-4292-8b89-00e88fa53323/web/carta-servizi-non-universali) – Crono, damage, claims, Saturday
 - [Poste Italiane: Carta dei servizi postali universali](https://www.media.poste.it/c919f7cf-8236-428e-82fc-f8b2be8428b8/web/carta-servizi-universali) – Standard complaint window
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 duty per item from 1 July 2026, up to €150
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 duty per item from 1 July 2026, up to €150; €2 handling fee per item from 1 November 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

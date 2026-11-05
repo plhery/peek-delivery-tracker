@@ -3,7 +3,7 @@ title: TopYou Sendungsverfolgung: TYZR-Nummer, Status, Zustellung
 description: TopYou-Paket (通邮) aus China verfolgen: wie die TYZR-Nummer aussieht, was die englischen Scans bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: topyou-sendungsverfolgung
 published: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-05
 ---
 
 TopYou (通邮, Tongyou, auch 通邮集团 oder SZTY56) ist 深圳市通邮物流科技（集团）股份有限公司, ein Spediteur aus Shenzhen in China, der Sendungen über eigene internationale Linien ins Ausland bringt. Hat ein chinesischer Shop deine Bestellung mit TopYou verschickt, bekommst du eine Nummer, die mit TYZ beginnt und auf YQ endet: Füg sie oben ins Feld ein. TopYous Verlauf reicht vom Lager in China über Flug und Zoll bis in dein Land, wo ein Paketdienst vor Ort das Paket übernimmt.
@@ -18,7 +18,7 @@ Eine TopYou-Nummer besteht aus TYZR, einem Buchstaben, zehn Ziffern und YQ, zusa
 | `TYZRA000000017YQ` | Nur neun Ziffern: So sieht keine TopYou-Nummer aus. Prüf, ob eine Ziffer fehlt. |
 | `JXCAB0000000017YQ` | Endet auch auf YQ, wie bei vielen chinesischen Spediteuren, beginnt aber mit JXC: eine Nummer von Juxi Express. |
 
-Leerzeichen und Kleinbuchstaben stören Peek nicht. TopYous eigene Tracking-Seite unterscheidet aber zwischen Groß- und Kleinschreibung, also tipp die Nummer dort in Großbuchstaben ein. Links von TopYous Seite liest Peek nicht, kopier also die Nummer. Steht die Nummer nicht in deiner Bestellung, lies [wo du die Sendungsnummer findest](guide:find-tracking-number).
+Leerzeichen und Kleinbuchstaben stören Peek nicht. TopYous eigene Tracking-Seite, [track.szty56.com](https://track.szty56.com/), unterscheidet aber zwischen Groß- und Kleinschreibung, also tipp die Nummer dort in Großbuchstaben ein. Links von TopYous Seite liest Peek nicht, kopier also die Nummer. Steht die Nummer nicht in deiner Bestellung, lies [wo du die Sendungsnummer findest](guide:find-tracking-number).
 
 **Eine zweite Nummer.** TopYous Datensatz kann auch die Nummer des Paketdiensts enthalten, der das Paket bei dir zustellt, und TopYous Tracking-Seite zeigt sie an. Unter dieser Nummer verfolgt der Zusteller das Paket.
 
@@ -28,6 +28,7 @@ TopYou schreibt seine Scans auf Englisch, und so zeigt sie auch Peek. In der Rei
 
 | TopYou schreibt | Was es für dich heißt | Peek zeigt |
 | --- | --- | --- |
+| `Parcel Data Received` | Der Shop hat die Sendungsdaten übermittelt, aber TopYou hat das Paket noch nicht. | „Etikett erstellt“ |
 | `Arrived at the first mile sorting center` | TopYous Lager in China hat das Paket: der erste Scan bei TopYou. | „Beim Paketdienst eingegangen“ |
 | `Departed from the first mile sorting center` | Es hat dieses Lager verlassen. | „Unterwegs“ |
 | `Arrived at airport of the original country` | Am Abflughafen in China, vor dem Flug. | „Unterwegs“ |
@@ -80,11 +81,11 @@ Wie Abholung, Ausweis und Fristen genau laufen, steht unter [Zustellung verpasst
 
 ## TopYou Paket kommt nicht an oder Tracking hängt
 
-**Hängt beim Zoll.** Steht `Shipment started the customs clearance process at destination` da, oder zeigt Peek nach dem Flug „Beim Zoll“, wartet das Paket auf den Einfuhrzoll. Sollst du Abgaben zahlen, lies [Paket beim Zoll](guide:customs); bleibt es tagelang dort, sag dem Shop Bescheid. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Hängt beim Zoll.** Steht `Shipment started the customs clearance process at destination` da, oder zeigt Peek nach dem Flug „Beim Zoll“, wartet das Paket auf den Einfuhrzoll. Sollst du Abgaben zahlen (in der EU seit 1. November 2026 auch eine Bearbeitungsgebühr von 2 € pro Ware), lies [Paket beim Zoll](guide:customs); bleibt es tagelang dort, sag dem Shop Bescheid. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
-**Nichts mehr nach der Zollfreigabe.** Nach `Departed from customs`, `Shipment completed the customs clearance process at destination` oder `Import clearance success` sollte der Paketdienst vor Ort das Paket haben. Such auf TopYous Tracking-Seite nach seiner Nummer und gib sie in seine Sendungsverfolgung ein, oder frag den Shop, wer zustellt und unter welcher Nummer. Hintergrund unter [Paket aus China verfolgen](guide:tracking-from-china).
+**Nichts mehr nach der Zollfreigabe.** Nach `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` oder `Import clearance success` sollte der Paketdienst vor Ort das Paket haben. Such auf TopYous Tracking-Seite nach seiner Nummer und gib sie in seine Sendungsverfolgung ein, oder frag den Shop, wer zustellt und unter welcher Nummer. Hintergrund unter [Paket aus China verfolgen](guide:tracking-from-china).
 
-**Nicht gefunden oder noch keine Scans.** Eine Nummer, die TopYou nicht kennt, beantwortet die Tracking-Seite mit 查询不到 (nicht gefunden). Bei einer bekannten Nummer ohne Scan kann 暂无轨迹信息 (noch keine Sendungsdaten) stehen. Peek zeigt in beiden Fällen „Warten auf den Paketdienst“ und fragt weiter nach. Vergleiche die Nummer Zeichen für Zeichen mit der Nachricht des Shops. Kommt nach ein paar Tagen nichts, frag den Shop, ob er das Paket wirklich verschickt hat.
+**Nicht gefunden oder noch keine Scans.** Eine Nummer, die TopYou nicht kennt, beantwortet die Tracking-Seite mit 查询不到 (nicht gefunden). Bei einer bekannten Nummer ohne Scan kann 暂无轨迹信息 (noch keine Sendungsdaten) stehen. Peek zeigt in beiden Fällen „Warten auf den Paketdienst“ und fragt weiter nach. Steht seit mehr als einem Tag nur `Parcel Data Received` da, weist Peek darauf hin, dass der Absender das Paket noch nicht an TopYou übergeben hat: Frag den Shop, wann er es verschickt. Vergleiche die Nummer Zeichen für Zeichen mit der Nachricht des Shops. Kommt nach ein paar Tagen nichts, frag den Shop, ob er das Paket wirklich verschickt hat.
 
 **Zugestellt, aber nicht da.** Zugestellt hat der Paketdienst vor Ort, also fang bei ihm an und frag danach den Shop. Siehe [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
@@ -112,7 +113,7 @@ Peek schaut alle 10 Minuten nach. Wird es bei TopYou still, nur noch stündlich:
 
 ### Was ist TopYou (通邮)?
 
-深圳市通邮物流科技（集团）股份有限公司, kurz 通邮 oder 通邮集团, auch Tongyou oder SZTY56, ist ein Spediteur aus Shenzhen in China mit internationalen Linien. Seine Nummern bestehen aus TYZR, einem Buchstaben, zehn Ziffern und YQ, manche mit einem anderen Buchstaben statt des R.
+深圳市通邮物流科技（集团）股份有限公司, kurz 通邮 oder 通邮集团, auch Tongyou oder SZTY56, ist ein Spediteur aus Shenzhen in China mit internationalen Linien. Nach eigenen Angaben wurde er 2016 gegründet, hat Niederlassungen und Sortierzentren in Shenzhen, Guangzhou, Shanghai und weiteren chinesischen Städten und bearbeitet mehr als 800.000 Aufträge am Tag, die er per Post, über eigene Linien oder mit den großen Expressdiensten verschickt. Seine Nummern bestehen aus TYZR, einem Buchstaben, zehn Ziffern und YQ, manche mit einem anderen Buchstaben statt des R.
 
 ### Welcher Paketdienst stellt TopYou-Pakete in Deutschland zu?
 
@@ -135,5 +136,9 @@ Den Shop, bei dem du bestellt hast: Er hat den Versand bei TopYou gebucht. TopYo
 - [Die Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – Abholstelle, 15 Tage für Auslandsendungen, kostenlose Verlängerung ohne Konto
 - [Die Post: Hilfe und Kontakt](https://www.post.ch/de/hilfe-und-kontakt) – Telefon, Preis, Zeiten, Chat
 - [TopYou: 通邮集团 (Startseite, auf Chinesisch)](https://www.szty56.com/) – Telefonnummer
+- [TopYou: 关于我们 (Über uns, auf Chinesisch)](https://www.szty56.com/view?path=about/about) – gegründet 2016, Niederlassungen, Aufträge pro Tag, Leistungen
+- [TopYou: 轨迹查询 (Sendungsverfolgung)](https://track.szty56.com/) – TopYous Tracking-Seite
+- [EU-Kommission: EU customs reform (auf Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € Bearbeitungsgebühr ab 1. November 2026
+- [EU-Kommission: Customs Guidance on EUR 3 customs duty (PDF, auf Englisch)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € pro Ware bei Online-Bestellungen, bei jedem Warenwert
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmenname und weitere Namen, TYZR-Form, Großbuchstaben auf TopYous Seite, kein Link, Scan-Texte und ihre Stufen, Zielland bei TopYous Scans, Pekinger Zeit und Uhrzeit der weitergegebenen Scans, weitergegebene Scans des Zustellers, iMile in Deutschland, zweite Nummer, Lastmile-Nummer auf einer Post-Linie und Linienname, Zollscans der Österreichischen Post, unbekannte Nummern und Nummern ohne Scans, was Peek zeigt und wie es übergibt
 :::

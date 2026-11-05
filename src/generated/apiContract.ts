@@ -3068,6 +3068,7 @@ export const CARRIER_CAPABILITIES = {
       "BRT Bartolini",
       "BRT Bartolini (Parcel ID)",
       "BRT Bartolini (DPD)",
+      "BRT Italy (DPD Group)",
       "myBRT.it"
     ],
     "helpUrl": "https://www.brt.it/it/servizio-clienti/contattaci/"
@@ -40957,7 +40958,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Prague",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "expedico"
     },
     "trackingUrlTemplate": "https://expedico.eu/tracking?code={trackingNumber}",
     "linkRules": [
@@ -47327,7 +47328,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Istanbul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "kargoturk"
     },
     "trackingUrlTemplate": "https://online.kargoturk.com.tr/tracking?har_kod={trackingNumber}",
     "linkRules": [
@@ -47500,7 +47501,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Moscow",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "topdelivery"
     },
     "trackingUrlTemplate": "https://www.topdelivery.ru/tracking/?order={trackingNumber}",
     "linkRules": [

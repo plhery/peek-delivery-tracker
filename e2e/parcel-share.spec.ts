@@ -225,7 +225,8 @@ test('alerts: turned on only when asked, changed and turned off, and gone once t
   const sheet = page.getByRole('dialog', { name: 'Notify me when it arrives' });
   await expect(sheet.getByRole('radio', { name: /^Notifications in this browser/ })).toBeChecked();
   await expect(sheet.getByText('Works while this page is closed. Stops when the parcel is delivered.')).toBeVisible();
-  await expect(sheet.getByRole('radio', { name: /^Add the delivery window to my calendar/ })).toBeVisible();
+  // Out for delivery without the carrier's hours for today, it has no window to add to a calendar.
+  await expect(sheet.getByRole('radio', { name: /^Add the delivery window to my calendar/ })).toHaveCount(0);
   await expect(sheet.getByText('This is the demo: nothing is sent.')).toBeVisible();
   // The row that invites to sign in promises what an account does, and no email.
   await expect(sheet.getByText('Notifications on all your devices')).toBeVisible();
@@ -274,8 +275,8 @@ test('alerts: turned on only when asked, changed and turned off, and gone once t
 
 test('alerts: a browser that refuses notifications gets plain guidance and the calendar file', async ({ page }) => {
   await answerNotifications(page, 'denied');
-  await track(page, 'DEMOCHOC20260001');
-  await expect(status(page)).toHaveText('Out for delivery');
+  await track(page, 'DEMOGLS20260001');
+  await expect(status(page)).toHaveText('In transit');
   await actions(page).getByRole('button', { name: /^Notify me/ }).click();
   const sheet = page.getByRole('dialog', { name: 'Notify me when it arrives' });
   await sheet.getByRole('button', { name: 'Turn on' }).click();
@@ -293,15 +294,15 @@ test('alerts: a browser that refuses notifications gets plain guidance and the c
   for await (const chunk of stream) calendar += chunk.toString();
   expect(calendar).toMatch(/^BEGIN:VCALENDAR\r\n/);
   expect(calendar).toMatch(/DTSTART;VALUE=DATE:\d{8}\r\n/);
-  expect(calendar).toContain('SUMMARY:Out for delivery\r\n');
+  expect(calendar).toContain('SUMMARY:In transit\r\n');
   expect(calendar).toMatch(/URL:http:\/\/[^\r]+\/p\/[2-9A-HJ-NP-Za-km-z]{12}\r\n/);
 });
 
 test('alerts: a browser without notifications is told so, and offered the calendar file instead', async ({ page }) => {
   // Playwright's WebKit is such a browser; Chromium is made one.
   await page.addInitScript(() => { Object.defineProperty(window, 'Notification', { configurable: true, value: undefined }); });
-  await track(page, 'DEMOCHOC20260001');
-  await expect(status(page)).toHaveText('Out for delivery');
+  await track(page, 'DEMOGLS20260001');
+  await expect(status(page)).toHaveText('In transit');
   await actions(page).getByRole('button', { name: /^Notify me/ }).click();
   const sheet = page.getByRole('dialog', { name: 'Notify me when it arrives' });
   const notifications = sheet.getByRole('radio', { name: /^Notifications in this browser/ });

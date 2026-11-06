@@ -81,7 +81,7 @@ GEODIS publishes no phone line for recipients. The shop holds the contract and c
 
 ## Tracking GEODIS parcels with Peek
 
-Paste a `1G` number and [Peek](/) names GEODIS at once; no other carrier uses that shape. A link from espace-client.geodis.com or geodis.com with `noSuivi=` or `trackingNumber=` names GEODIS too, but only a `1G` number inside it can be tracked. Peek can't track the 14-digit shipment number: it doesn't read it as GEODIS, so use the `1G` number instead.
+Paste a `1G` number and [Peek](/) names GEODIS at once; no other carrier uses that shape. A link to GEODIS's Espace destinataire (espace-client.geodis.com/services/destinataires/) with `noSuivi=` or `trackingNumber=` names GEODIS too, but only a `1G` number inside it can be tracked. Peek can't track the 14-digit shipment number: it doesn't read it as GEODIS, so use the `1G` number instead.
 
 Peek reads GEODIS's tracking in French and shows the steps in GEODIS's French wording (the first column above; `Livraison effectuée` shows as Delivered), with the GEODIS site of each scan on a map; times are read on Paris time and shown in your device's time zone. It also shows the expected delivery day, the sender and the weight. A missed delivery, a problem, a return or a parcel held for pickup takes priority over the timeline step. When GEODIS gives steps without dated scans, Peek dates the status when it first saw it.
 

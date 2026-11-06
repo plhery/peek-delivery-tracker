@@ -94,7 +94,7 @@ GEODIS ne publie aucun numéro de téléphone, gratuit ou non, pour les destinat
 
 ## Suivre un colis GEODIS avec Peek
 
-Colle un numéro `1G` et [Peek](/) reconnaît GEODIS tout de suite : aucun autre transporteur n'utilise cette forme. Un lien espace-client.geodis.com ou geodis.com avec `noSuivi=` ou `trackingNumber=` désigne aussi GEODIS, mais seul un numéro `1G` à l'intérieur peut être suivi. Le lien edesti.com d'un SMS de GEODIS, ou tout le SMS, marche aussi. Peek ne suit pas le numéro d'envoi à 14 chiffres : il ne le reconnaît pas comme GEODIS. Utilise le numéro `1G`.
+Colle un numéro `1G` et [Peek](/) reconnaît GEODIS tout de suite : aucun autre transporteur n'utilise cette forme. Un lien vers l'Espace destinataire de GEODIS (espace-client.geodis.com/services/destinataires/) avec `noSuivi=` ou `trackingNumber=` désigne aussi GEODIS, mais seul un numéro `1G` à l'intérieur peut être suivi. Le lien edesti.com d'un SMS de GEODIS, ou tout le SMS, marche aussi. Peek ne suit pas le numéro d'envoi à 14 chiffres : il ne le reconnaît pas comme GEODIS. Utilise le numéro `1G`.
 
 Peek lit le suivi de GEODIS en français et affiche ses étapes telles que GEODIS les écrit (la première colonne ci-dessus) ; `Livraison effectuée` devient « Livré ». Il montre le site GEODIS de chaque scan sur une carte, lit les heures de GEODIS comme celles de Paris et affiche le jour de livraison prévu, l'expéditeur et le poids. Une livraison manquée, un problème, un retour ou un colis à retirer passe avant l'étape de la frise. Quand GEODIS donne des étapes sans scans datés, Peek date le statut du moment où il l'a vu.
 

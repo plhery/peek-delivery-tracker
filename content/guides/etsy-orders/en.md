@@ -42,7 +42,7 @@ Whichever one the seller chose. Etsy sells shipping labels only to sellers in th
 
 If the seller used a carrier Etsy supports directly, a **Track Package** button sits next to the order. Otherwise the number appears only under **View Receipt**, and you track it on the carrier's own site.
 
-Since 1 July 2026, because of a new EU handling fee, Etsy has temporarily stopped selling USPS and Canada Post labels to Ireland and much of the rest of the EU. US sellers then use Global Postal Shipping or buy a label elsewhere. Parcels from China follow their own route: see [tracking a parcel from China](guide:tracking-from-china).
+Since 1 July 2026, Etsy has temporarily stopped selling USPS and Canada Post labels to Ireland and much of the rest of the EU, "due to a new EU handling fee affecting some carriers", it says. US sellers then use Global Postal Shipping or buy a label elsewhere. Parcels from China follow their own route: see [tracking a parcel from China](guide:tracking-from-china).
 
 ## What does an Etsy tracking number look like?
 

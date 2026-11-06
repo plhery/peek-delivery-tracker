@@ -3,7 +3,7 @@ title: YTO Express tracking: YT numbers, statuses and contact
 description: Track a YTO Express (圆通) parcel: what a YT number looks like, what YTO's Chinese scans mean, where parcels wait in China and how to reach YTO.
 slug: yto-express-tracking
 published: 2026-10-24
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 YTO Express (圆通速递, Yuantong) is a Chinese express company founded in Shanghai in 2000, with more than 5,000 branches across China. A YTO number often belongs to a parcel inside China: an order from Taobao, Pinduoduo or Douyin, platforms YTO serves, on its way to a forwarder's warehouse or a friend's address. Track it on [YTO's tracker](https://www.yto.net.cn/ytoExpress/waybill/search), which is in Chinese only, or in the box above. YTO's service abroad is run by YTO International, which has its own tracker on [ytoglobal.com](https://www.ytoglobal.com/service).
@@ -60,9 +60,9 @@ To have a parcel sent back or to a new address before delivery (`退回/更址`)
 
 YTO International (圆通国际) dates back to 2006 and says it has over 50 offices in 18 countries and regions. Its tracker on [ytoglobal.com/service](https://www.ytoglobal.com/service) comes in English, as "Express Freight Tracking", and in Chinese, as 国际快递查询, and takes up to 10 numbers separated by commas or semicolons.
 
-YTO's pages don't name the carrier that delivers in your country, only partnerships with "top-notch global logistics service providers". For International Standard Express, its service for individuals, YTO lists 7 to 12 working days from its international warehouse to the UK, Ireland and Canada, 9 to 12 to the United States and 8 to 13 to Australia, "for reference only".
+YTO's pages don't name the carrier that delivers in your country, only partnerships with "top-notch global logistics service providers". For International Standard Express, its service for individuals, YTO lists 7 to 12 working days from its international warehouse to the UK, Canada and most EU countries, among them Ireland, France, Germany, Spain and Poland (12 to 17 to Bulgaria and Romania), 9 to 12 to the United States and 8 to 13 to Australia, "for reference only".
 
-If you're out, its FAQ says to follow the "Redelivery Notification" to arrange a free redelivery; if that fails too, YTO asks the sender what to do. To arrange a delivery time in advance, the FAQ says to call 400 60 95554. Customs may open the parcel, and duties depend on your country: see [parcels held at customs](guide:customs).
+If you're out, its FAQ says to follow the "Redelivery Notification" to arrange a free redelivery; if that fails too, YTO asks the sender what to do. To arrange a delivery time in advance, the FAQ says to call 400 60 95554. Customs may open the parcel, and duties depend on your country: see [parcels held at customs](guide:customs). Since 1 November 2026, goods bought online from outside the EU also owe a €2 Union handling fee per item, at any value, on top of the €3 duty per item in parcels up to €150.
 
 ## YTO parcel not arriving, lost or returned
 
@@ -113,7 +113,7 @@ YTO hasn't scanned the parcel yet, the number is wrong, or the waybill is older 
 
 ### Does YTO Express deliver outside China?
 
-YTO International does, with its own tracker on ytoglobal.com. Its pages don't say which carrier delivers in your country, and it gives its delivery times "for reference only": 7 to 13 working days to the UK, Ireland, the US, Canada and Australia.
+YTO International does, with its own tracker on ytoglobal.com. Its pages don't say which carrier delivers in your country, and it gives its delivery times "for reference only": 7 to 13 working days to the UK, most EU countries, the US, Canada and Australia.
 
 ### What is YTO Express's phone number?
 
@@ -130,9 +130,11 @@ YTO International does, with its own tracker on ytoglobal.com. Its pages don't s
 - [YTO Express: International Business Service](https://www.yto.net.cn/en/global/globalProduct) – YTO International's hotline 4006095554, 021-69777888
 - [YTO International: Company Introduction](https://www.ytoglobal.com/about-us) – history from 2006, offices, partners
 - [YTO International: Express Freight Tracking](https://www.ytoglobal.com/service) – tracker in English and Chinese, up to 10 numbers
-- [YTO International: International Standard Express](https://www.ytoglobal.com/product/express-intl) – service for individuals, reference delivery times
+- [YTO International: International Standard Express](https://www.ytoglobal.com/product/express-intl) – service for individuals, reference delivery times, EU countries
 - [YTO International: FAQ](https://www.ytoglobal.com/rich/question) – hotline 400 60 95554, redelivery, delivery appointments, parcels opened for inspection
 - [YTO International: Contact Us](https://www.ytoglobal.com/about-us/contact) – contact form
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item, whatever the value
 - [Ministry of Transport of China: 快递市场管理办法 (Express Market Administration Measures)](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – in force 1 March 2024, inspection on delivery, no locker or station without consent, appeals to the postal authorities
 - [State Post Bureau of China: 国家邮政局主要职责 (main duties)](https://www.spb.gov.cn/gjyzj/c100001/c100006/201306/2722edab189242549b320d06e0dbd382.shtml) – postal regulator, express market included
 - [State Post Bureau of China: 中华人民共和国国家邮政局 (home page)](https://www.spb.gov.cn/) – consumer appeal section (消费者申诉)

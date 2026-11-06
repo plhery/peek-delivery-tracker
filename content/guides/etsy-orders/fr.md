@@ -43,7 +43,7 @@ Celui que le vendeur a choisi. Etsy ne vend des étiquettes d'expédition qu'aux
 
 Si le vendeur a utilisé un transporteur directement pris en charge par Etsy, un bouton **Suivre le colis** apparaît à côté de la commande. Sinon, le numéro n'est visible que dans **Voir le reçu**, et tu le suis sur le site du transporteur.
 
-Depuis le 1er juillet 2026, à cause de nouveaux frais de traitement dans l'UE, Etsy ne vend temporairement plus d'étiquettes USPS vers la France, la Belgique et la Suisse, ni d'étiquettes Postes Canada vers la France et la Belgique. Les vendeurs américains passent alors par Global Postal Shipping ou achètent leur étiquette ailleurs. Les colis venus de Chine suivent leur propre chemin : voir [suivre un colis venant de Chine](guide:tracking-from-china).
+Depuis le 1er juillet 2026, Etsy ne vend temporairement plus d'étiquettes USPS vers la France, la Belgique et la Suisse, ni d'étiquettes Postes Canada vers la France et la Belgique, « en raison de nouveaux frais de traitement de l'UE qui concernent certains transporteurs », écrit Etsy. Les vendeurs américains passent alors par Global Postal Shipping ou achètent leur étiquette ailleurs. Les colis venus de Chine suivent leur propre chemin : voir [suivre un colis venant de Chine](guide:tracking-from-china).
 
 ## À quoi ressemble un numéro de suivi Etsy ?
 

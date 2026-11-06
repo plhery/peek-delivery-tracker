@@ -98,7 +98,7 @@ Since 1 July 2026, online orders from outside the EU worth €150 or less pay �
 - two identical T-shirts: €3;
 - a notepad, a pen and a keyring: €9.
 
-Since 1 November 2026, Revenue says, a €2 EU handling fee per item is added: €15 for the notepad, pen and keyring. VAT comes on top. Above €150, normal duty rates apply, plus the €2 fee. If the shop didn't charge it at checkout, An Post or the courier asks for it, with the duty, before delivering.
+Since 1 November 2026, Revenue says, the EU's €2 Union handling fee is added per item, counted like the €3: €15 for the notepad, pen and keyring. VAT comes on top, charged on the fee too. Above €150, normal duty rates apply, plus the €2 fee. If the shop didn't charge it at checkout, An Post or the courier asks for it, with the duty, before delivering.
 
 ## Do I have to pay customs on Temu or Shein orders?
 
@@ -154,6 +154,7 @@ In the UK, an unpaid parcel [goes back to the sender](guide:returned-to-sender) 
 - [GOV.UK: Report suspicious emails, websites and text messages](https://www.gov.uk/report-suspicious-emails-websites-phishing) – 7726
 - [Revenue: Removal of the de minimis relief](https://www.revenue.ie/en/customs/individuals/relief-low-value-consignments/index.aspx) – €3 per item
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 fee, paid at checkout or before delivery, refunds
+- [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 fee from 1 November 2026, per item like the €3, at any value, VAT on the fee
 - [Revenue: Rules for duty relief on gift consignments](https://www.revenue.ie/en/customs/individuals/relief-gifts-low-value/rules-gifts.aspx) – €45 gifts
 - [Revenue: How to locate your goods](https://www.revenue.ie/en/customs/individuals/buying-online-personal/locate-your-goods.aspx) – who to contact, seizures
 - [Revenue: Fraudulent emails, SMS and phone calls](https://www.revenue.ie/en/customs/individuals/buying-online-personal/fraudulent-requests.aspx) – no payment links, never a link in An Post's texts

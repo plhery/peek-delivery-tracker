@@ -82,7 +82,7 @@ Shouwu's tracker gives no courier's name or number, beyond what a scan's wording
 
 **Stuck on `Preparing`, `Shipment information received` or `Carrier received the shipment`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
 
-**Stuck at customs.** After `Shipment started the customs clearance process at destination`, `Customs clearance in progress` or `已落地，清关提货中`, it waits for your country's customs. On the EU lines, a parcel from outside the EU worth up to €150 now owes €3 duty per item (since 1 July 2026) and the EU's €2 handling fee (since 1 November 2026); Shouwu's line pages don't say who pays them. If you're asked for import charges, see [parcels held at customs](guide:customs).
+**Stuck at customs.** After `Shipment started the customs clearance process at destination`, `Customs clearance in progress` or `已落地，清关提货中`, it waits for your country's customs. On the EU lines, goods bought online from outside the EU now owe €3 duty per item in parcels worth up to €150 (since 1 July 2026) and the EU's €2 handling fee per item, at any value (since 1 November 2026); Shouwu's line pages don't say who pays them. If you're asked for import charges, see [parcels held at customs](guide:customs).
 
 **Nothing after `Delivery to local courier`.** The courier has it, but Shouwu's tracker doesn't give the courier's number. Ask the seller for the courier's number and paste it into Peek. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 

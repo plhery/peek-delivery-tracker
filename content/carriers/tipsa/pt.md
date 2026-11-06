@@ -92,7 +92,7 @@ Tenta primeiro resolver com a TIPSA ou com a loja: o Livro de Reclamações diz 
 As páginas da TIPSA não falam de alfândega nem de quem te cobra os impostos. As regras gerais:
 
 - Desde 1 de julho de 2026 acabou a isenção de direitos aduaneiros para remessas até 150 €: numa compra online a uma empresa, pagas 3 € por adição, além do IVA, devido desde julho de 2021. No exemplo da Autoridade Tributária, uma remessa de 100 € com uma camisa e um chapéu tem duas adições: 6 €. Acima de 150 €, aplica-se a taxa de direitos de cada mercadoria.
-- Desde 1 de novembro de 2026, a UE aplica também uma taxa de tratamento de 2 € às pequenas encomendas importadas, segundo a Comissão Europeia.
+- Desde 1 de novembro de 2026, a UE aplica também uma taxa de tratamento de 2 € por adição, como os 3 €, às compras online importadas, seja qual for o valor, segundo a Comissão Europeia.
 
 Mais em [alfândega e taxas](guide:customs).
 
@@ -156,5 +156,6 @@ Diz que sim, com pontos e cacifos, mas não diz onde ficam nem quanto tempo lá 
 - [CNIACC: Competências](https://www.cniacc.pt/pt/competencias-cniacc) – centro nacional supletivo
 - [Portal das Finanças: Mercadorias eCommerce – Alterações para 1 de julho de 2026](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição, IVA
 - [Comissão Europeia: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de 2 € desde novembro
+- [Comissão Europeia: Guidance on the EUR 3 customs duty and the Union handling fee (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – taxa de 2 € por adição, como os 3 €, a qualquer valor
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê
 :::

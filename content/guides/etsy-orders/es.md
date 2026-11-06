@@ -41,7 +41,7 @@ El que elige el vendedor. Etsy solo vende etiquetas de envío a vendedores de Es
 
 Si el vendedor ha usado una compañía de transporte compatible con Etsy, verás un botón **Seguir paquete** junto al pedido. Si no, el número solo aparece en **Ver el recibo**, y lo sigues en la web del transportista.
 
-Desde el 1 de julio de 2026, por una nueva tasa de gestión de la UE, Etsy no vende temporalmente etiquetas de USPS ni de Canada Post con destino a España. Los vendedores de Estados Unidos usan entonces Global Postal Shipping o compran la etiqueta en otro sitio. Los paquetes desde China siguen su propio camino: mira [seguir un paquete desde China](guide:tracking-from-china).
+Desde el 1 de julio de 2026, Etsy no vende temporalmente etiquetas de USPS ni de Canada Post con destino a España, por una nueva tasa de gestión de la UE que afecta a algunos transportistas, según Etsy. Los vendedores de Estados Unidos usan entonces Global Postal Shipping o compran la etiqueta en otro sitio. Los paquetes desde China siguen su propio camino: mira [seguir un paquete desde China](guide:tracking-from-china).
 
 ## ¿Cómo es un número de seguimiento de Etsy?
 

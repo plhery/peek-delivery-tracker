@@ -3,7 +3,7 @@ title: Lietuvos paštas: Lithuania Post tracking, statuses, lockers
 description: Track a Lietuvos paštas (Lithuania Post, LP Express) parcel in English: the number, what each status means, parcel lockers, claims and contacts.
 slug: lietuvos-pastas-lithuania-post-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Lietuvos paštas (Lithuania Post) is Lithuania's national post, and LP Express is its brand for parcel lockers, couriers and self-service sending. Track a parcel on [lpexpress.lt/track](https://lpexpress.lt/track), which has an English switch, or paste the number in the box above. The number is in the SMS or email Lietuvos paštas sends you, or on the receipt if you posted the item yourself.
@@ -63,6 +63,8 @@ Lietuvos paštas asks you to report a lost or late registered or insured item on
 
 For an item posted abroad, Lietuvos paštas says to contact the sender. If you spot damage when a courier delivers, have it noted on the courier's device or the accompanying document while the courier is there; Lietuvos paštas does not accept liability otherwise.
 
+**Sent from Lithuania to another country.** After `The parcel has been sent abroad`, an operator in the destination country delivers it, and in a claim Lietuvos paštas goes by what that operator confirms about delivery or loss. Peek asks the destination's post too (below). The sender still has 6 months from posting to claim, whichever country lost the item, and Lietuvos paštas pays compensation for an international item within 90 calendar days of the claim.
+
 If tracking hasn't moved for days, see [tracking that isn't updating](guide:tracking-not-updating).
 
 ## Lietuvos paštas contact and customer service
@@ -103,10 +105,10 @@ Yes, if it was sent with tracking: from Lithuania that means a service "Su sekim
 
 ### How long does an LP Express parcel take?
 
-Lietuvos paštas says a locker parcel usually reaches a locker in Lithuania the next working day or on Saturday, if the sender drops it off before the collection time.
+Lietuvos paštas says a locker parcel usually reaches a locker in Lithuania the next working day or on Saturday, if the sender drops it off before the collection time. For post office parcels inside Lithuania, the quality target post.lt lists is 97% delivered within 4 working days of posting; for priority letters to other EU countries, 85% within 3 working days and 97% within 5.
 
 :::sources
-- [Lietuvos paštas: Siuntų sekimas](https://www.post.lt/lt/siuntu-sekimas) – number shape, receipt, route visibility, late items and 1842, claims, second attempt at a locker, international search
+- [Lietuvos paštas: Siuntų sekimas](https://www.post.lt/lt/siuntu-sekimas) – number shape, receipt, route visibility, late items and 1842, claims, second attempt at a locker, international search, claims abroad go by the destination operator, 6 months whichever country lost it, 90 days for international claims, delivery quality targets
 - [LP Express: Parcel tracking](https://lpexpress.lt/track) – English tracking page, languages, headlines, not-found and redirect messages
 - [Lietuvos paštas: Dažniausiai užduodami klausimai](https://www.post.lt/duk) – locker FAQ, collecting at the post office, storage
 - [Lietuvos paštas: Siuntos](https://www.post.lt/lt/duk/siuntos) – storage periods, collection rules

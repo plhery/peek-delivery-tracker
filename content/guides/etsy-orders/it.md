@@ -41,7 +41,7 @@ Quello scelto dal venditore. Etsy vende etichette di spedizione solo ai venditor
 
 Se il venditore ha usato un corriere supportato direttamente da Etsy, accanto all'ordine c'è il pulsante **Traccia spedizione**. Altrimenti il codice si trova solo in **Visualizza ricevuta**, e lo segui sul sito del corriere.
 
-Dal 1° luglio 2026, per un nuovo onere di gestione nell'UE, Etsy non vende temporaneamente etichette USPS e Canada Post per l'Italia. I venditori negli Stati Uniti usano allora Global Postal Shipping o comprano l'etichetta altrove. I pacchi dalla Cina seguono una strada tutta loro: vedi [tracciare un pacco dalla Cina](guide:tracking-from-china).
+Dal 1° luglio 2026 Etsy non vende temporaneamente etichette USPS e Canada Post per l'Italia, a causa, dice Etsy, di un nuovo onere di gestione dell'UE che riguarda alcuni corrieri. I venditori negli Stati Uniti usano allora Global Postal Shipping o comprano l'etichetta altrove. I pacchi dalla Cina seguono una strada tutta loro: vedi [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 ## Com'è fatto un codice di tracciamento Etsy?
 

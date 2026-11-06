@@ -43,7 +43,7 @@ Der, den der Shop gewählt hat. Versandetiketten verkauft Etsy nur an Shops in d
 
 Nutzt der Shop einen Versanddienst, den Etsy direkt unterstützt, steht neben der Bestellung der Button **Paket verfolgen**. Sonst findest du die Nummer nur unter **Beleg anzeigen** und verfolgst sie auf der Seite des Versanddienstes.
 
-Seit dem 1. Juli 2026 verkauft Etsy wegen einer neuen EU-Bearbeitungsgebühr vorübergehend keine USPS-Etiketten nach Deutschland, Österreich und in die Schweiz und keine von Canada Post nach Deutschland und Österreich. Shops in den USA nehmen dann Global Postal Shipping oder kaufen das Etikett woanders. Pakete aus China nehmen einen eigenen Weg: siehe [Pakete aus China verfolgen](guide:tracking-from-china).
+Seit dem 1. Juli 2026 verkauft Etsy vorübergehend keine USPS-Etiketten nach Deutschland, Österreich und in die Schweiz und keine von Canada Post nach Deutschland und Österreich, nach eigenen Angaben wegen einer neuen EU-Bearbeitungsgebühr, die einige Versanddienste betrifft. Shops in den USA nehmen dann Global Postal Shipping oder kaufen das Etikett woanders. Pakete aus China nehmen einen eigenen Weg: siehe [Pakete aus China verfolgen](guide:tracking-from-china).
 
 ## Wie sieht eine Etsy-Sendungsnummer aus?
 

@@ -69,7 +69,7 @@ Cuando Correos te manda el SMS de entrega en domicilio, cuenta con que llegue en
 Normalmente porque los impuestos de un producto que viene de fuera de la UE no se pagaron en la compra, y el transportista los cobra al entregar, a menudo con su propia tarifa. La factura tiene hasta tres partes:
 
 1. **IVA de importación**: el 21 % en la Península y Baleares, para el Estado. En Canarias se aplica el IGIC, y en Ceuta y Melilla, el IPSI.
-2. **Arancel**: 3 € por tipo de producto en compras de hasta 150 €, y el arancel normal por encima. La AEAT solo cobra el arancel, el IVA y, si toca, los impuestos especiales.
+2. **Arancel**: 3 € por tipo de producto en compras de hasta 150 €, y el arancel normal por encima. La AEAT solo cobra el arancel, la tasa de tramitación (desde el 1 de noviembre de 2026), el IVA y, si toca, los impuestos especiales.
 3. **La gestión del transportista**: un servicio, no un impuesto. Correos cobra su tarifa de gestión aduanera en los envíos de hasta 150 € que no vienen por IOSS.
 
 Dónde pagas depende de la compra:
@@ -99,7 +99,7 @@ Desde el 1 de julio de 2026 y hasta el 1 de julio de 2028, las compras online de
 
 Para Correos, dos cosas son el mismo tipo de producto si comparten clasificación arancelaria, descripción y origen. Cuenta la descripción que el remitente declaró al enviar, no la de tu factura: dos artículos que en la factura se llaman igual pueden pagar dos aranceles.
 
-Según la Comisión Europea, desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por tipo de producto, también en envíos de más de 150 €: la camiseta y el reloj pasan a 10 €. Se paga junto con el arancel y con sus mismas reglas, dice la AEAT: lo normal es que la cobre la tienda en la compra; si no, el transportista puede pedírtela con el arancel antes de entregarte el paquete. El IVA va aparte y se calcula también sobre el arancel.
+Según la Comisión Europea, desde el 1 de noviembre de 2026 se suma una tasa de tramitación de 2 € por tipo de producto, también en envíos de más de 150 €: la camiseta y el reloj pasan a 10 €. Se paga junto con el arancel y con sus mismas reglas, dice la AEAT: lo normal es que la cobre la tienda en la compra; si no, el transportista puede pedírtela con el arancel antes de entregarte el paquete. El IVA va aparte y se calcula también sobre el arancel y la tasa.
 
 ## ¿Hay que pagar aduanas en AliExpress, Shein o Temu?
 
@@ -168,7 +168,7 @@ Si lo devuelves a la tienda:
 - [BOE: Ley 20/1991, del Régimen Económico Fiscal de Canarias](https://www.boe.es/buscar/act.php?id=BOE-A-1991-14463) – artículo 14.11: sin IGIC hasta 150 €, salvo alcohol, perfumes y tabaco; artículos 67 y 73: el AIEM, solo para los bienes de su anexo, de cualquier procedencia y sin la exención de 150 €
 - [Comisión Europea: Preguntas y respuestas sobre los derechos de aduana de 3 EUR](https://ec.europa.eu/commission/presscorner/detail/es/qanda_26_1492) – por artículo, camisetas y reloj
 - [Comisión Europea: EU Customs Reform, en inglés](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de 2 € desde el 1 de noviembre de 2026
-- [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por línea y a cualquier valor
+- [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por línea y a cualquier valor, cobrada por la aduana, IVA sobre la tasa
 - [INCIBE: SMS fraudulentos que suplantan a Correos](https://www.incibe.es/ciudadania/avisos/circulan-sms-fraudulentos-que-suplantan-correos-solicitandote-dinero) – tasas de aduana, 1,79 €, banco, denuncia
 - [INCIBE: SMS que suplantan a Correos y Correos Express](https://www.incibe.es/ciudadania/avisos/suplantadas-por-sms-empresas-de-paqueteria-como-correos-y-correos-express) – 2,64 €
 - [INCIBE: Tu Ayuda en Ciberseguridad](https://www.incibe.es/linea-de-ayuda-en-ciberseguridad) – 017, horario

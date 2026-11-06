@@ -3,10 +3,12 @@ title: UniUni tracking: statuses, missed deliveries and contact
 description: Track a UniUni parcel in Canada or the US: what the tracking number looks like, what UniUni's statuses mean, missed deliveries, photos and how to reach support.
 slug: uniuni-tracking
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 UniUni (Uni Express Inc., based in Richmond, B.C.) is a last-mile delivery company that brings online orders to the door in Canada and the United States, for shops such as Shein and Temu. Track a parcel on [uniuni.com/tracking](https://www.uniuni.com/tracking/) or paste its number in the box above. The number comes from the shop or marketplace you ordered from, which hands the labelled parcel to UniUni for the final stretch.
+
+No number to hand? Look in the order at the shop; if UniUni's tracking shows nothing yet, the seller most likely still has the parcel. For a new delivery, a new address or delivery instructions, a damaged parcel or feedback on a driver, use the UniUni chatbot on its [support page](https://www.uniuni.com/support/). Missing or wrong items and returns go to the seller. Got a parcel you didn't order? UniUni says it has little information about who sent it.
 
 ## UniUni tracking number: format and where to find it
 
@@ -111,7 +113,7 @@ Usually the seller hasn't given UniUni the parcel yet. UniUni's estimated date a
 
 :::sources
 - [UniUni: Package Tracking](https://www.uniuni.com/tracking/) – tracking, 25 numbers, estimated date, no updates, attempts, delivery photos
-- [UniUni: Customer Support](https://www.uniuni.com/support/) – chatbot, second attempt, storage for 30 days, PO boxes, pickup cities, address changes, damage, delivered but not received
+- [UniUni: Customer Support](https://www.uniuni.com/support/) – chatbot, second attempt, storage for 30 days, PO boxes, pickup cities, address changes, damage, delivered but not received, driver feedback, returns, few sender details
 - [UniUni: Home](https://www.uniuni.com/) – last-mile delivery, Canada and US coverage, phone numbers and hours, proof photos
 - [UniUni: Shipping & Last Mile Delivery Services](https://www.uniuni.com/shipping-last-mile-delivery-services/) – next day to 7 days, proof photos
 - [UniUni: FAQ (French)](https://www.uniuni.com/fr/faqs-fr/) – Shein and Temu, misrouted parcels, Canada Post and USPS

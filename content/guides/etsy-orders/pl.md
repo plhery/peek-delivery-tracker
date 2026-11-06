@@ -41,7 +41,7 @@ Ten, którego wybrał sprzedawca. Etsy sprzedaje etykiety wysyłkowe tylko sprze
 
 Jeśli sprzedawca skorzystał z przewoźnika, który współpracuje z Etsy, obok zamówienia jest przycisk **Śledź paczkę**. W innym razie numer znajdziesz tylko pod **Wyświetl potwierdzenie** i śledzisz go na stronie przewoźnika.
 
-Od 1 lipca 2026 r., z powodu nowej opłaty manipulacyjnej w UE, Etsy tymczasowo nie sprzedaje etykiet USPS z wysyłką do Polski. Sprzedawcy z USA korzystają wtedy z Global Postal Shipping albo kupują etykietę gdzie indziej. Paczki z Chin mają swoją drogę: zobacz [śledzenie paczki z Chin](guide:tracking-from-china).
+Od 1 lipca 2026 r. Etsy tymczasowo nie sprzedaje etykiet USPS z wysyłką do Polski, jak podaje, „ze względu na nowe opłaty manipulacyjne w UE wpływające na niektórych dostawców”. Sprzedawcy z USA korzystają wtedy z Global Postal Shipping albo kupują etykietę gdzie indziej. Paczki z Chin mają swoją drogę: zobacz [śledzenie paczki z Chin](guide:tracking-from-china).
 
 ## Jak wygląda numer przesyłki z Etsy?
 

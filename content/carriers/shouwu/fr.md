@@ -3,10 +3,10 @@ title: Suivi colis Shouwu : numéro SWECN…YQ, statuts et livraison
 description: Suivre un colis Shouwu International (守务国际) venu de Chine : à quoi ressemble le numéro SWECN…YQ, ce que veulent dire les statuts et qui livre en France.
 slug: shouwu-suivi
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-06
 ---
 
-Shouwu International (守务国际, aussi SWE) est une société de logistique de Shanghai qui expédie les colis de vendeurs en ligne chinois vers l'Europe et les États-Unis, où une poste ou un transporteur les livre. Si une boutique a envoyé ta commande avec Shouwu, ton numéro de suivi commence par SWECN et finit par YQ : colle-le dans le champ ci-dessus ou sur le site de suivi de Shouwu, [admin.shshouwu.com](https://admin.shshouwu.com/track.html).
+Shouwu International (守务国际, aussi SWE) est une société de logistique de Shanghai qui expédie les colis de vendeurs en ligne chinois vers l'Europe et les États-Unis, où une poste ou un transporteur les livre. En France, c'est surtout Colissimo, et Shouwu annonce 4 à 7 jours ouvrés. Le vendeur choisit le numéro qu'il te transmet : celui de Shouwu, qui commence par SWECN et finit par YQ, ou celui de Colissimo. Colle l'un ou l'autre dans le champ ci-dessus, ou le numéro Shouwu sur son site de suivi, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Pas de numéro ? Demande-le au vendeur : Shouwu n'a aucun contact pour les destinataires.
 
 ## Numéro de suivi Shouwu : à quoi il ressemble
 
@@ -22,7 +22,7 @@ D'autres transitaires chinois terminent aussi leurs numéros par YQ, avec leurs 
 
 **Où le trouver.** S'il n'est ni dans l'e-mail d'expédition de la boutique ni sur la page de ta commande, lis [où trouver son numéro de suivi](guide:find-tracking-number).
 
-**Tu as peut-être le numéro du transporteur.** Shouwu laisse le vendeur choisir le numéro qu'il te transmet : celui de Shouwu, qui suit le colis de bout en bout, ou celui du transporteur qui livre dans ton pays. En France, un colis Shouwu peut donc t'arriver avec un numéro Colissimo. Colle-le quand même : Peek suit plus de 3 500 transporteurs.
+**Tu as peut-être le numéro du transporteur.** Selon les pages de ses lignes, le numéro Shouwu suit le colis de bout en bout, et celui du transporteur, la livraison finale. Si la boutique t'a donné un numéro Colissimo, colle-le quand même : Peek suit plus de 3 500 transporteurs.
 
 **Un lien de suivi.** Le bouton « Copy Link » du site de Shouwu copie un lien avec `?q=` et le numéro. Il ouvre ce colis et se colle tel quel dans Peek. Le site de Shouwu accepte jusqu'à 40 numéros à la fois, un par ligne.
 
@@ -45,13 +45,17 @@ Shouwu prévient que ses statuts sont « auto-judged by the system », attribué
 | `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Le vendeur a réservé l'envoi. Shouwu n'a pas encore le colis. | « Étiquette créée » |
 | `Carrier received the shipment` | Shouwu écrit cette ligne deux heures après les données de commande, des jours avant le premier scan de l'entrepôt : personne n'a encore le colis. | « Étiquette créée » |
 | `Arrival processing center`, `Package processing completed` | L'entrepôt de Shouwu en Chine a reçu le colis, puis l'a préparé pour le vol. | « Pris en charge » |
+| `Export customs declaration completed`, `Export Released` | La Chine l'a dédouané à l'export ; rien n'est bloqué. | « En transit » |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | À l'aéroport de Shanghai, puis parti de Chine. | « En transit » |
-| `Arrived at airport of Destination` | Arrivé par avion dans ton pays. | « En transit » |
-| `Shipment started the customs clearance process at destination` | Dédouanement en cours dans ton pays. | « À la douane » |
-| `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | La douane de ton pays l'a libéré. | « En transit » |
-| `Delivery to local courier` | Remis au transporteur qui livre chez toi, pas à toi. | « En transit » |
+| `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Arrivé par avion dans ton pays. | « En transit » |
+| `NOA received` | L'agent sur place a reçu l'avis d'arrivée de la compagnie aérienne ; la douane vient ensuite. | « En transit » |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress` | Dédouanement en cours dans ton pays. | « À la douane » |
+| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed` | La douane de ton pays l'a libéré. | « En transit » |
+| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider` | Remis au transporteur qui livre chez toi, pas à toi (« deliverey » est l'orthographe de Shouwu). | « En transit » |
 | `Your consignment has been picked up` | Le transporteur l'a récupéré à l'entrepôt de Shouwu à l'étranger, après la douane : ce n'est ni un enlèvement chez le vendeur, ni un retrait par toi. | « En transit » |
+| `FR, Votre envoi est en transit sur nos plateformes logistiques.,运输途中` | Une ligne du transporteur qui livre en France, reprise avec le code du pays devant et « en transit » en chinois derrière. | « En transit » |
 | `Out for delivery` | La tournée de livraison du transporteur local. | « En livraison » |
+| `The shipment could not be delivered. Please find more information here.` | Le transporteur n'a pas pu livrer ; une autre tournée suit. Le lien annoncé n'est pas repris. | « Tentative de livraison » |
 | `Delivered by post man`, `This parcel has been delivered` | La poste ou le transporteur local l'a livré. | « Livré », une fois que le statut de Shouwu dit aussi `Delivered` |
 
 Deux autres lignes sont à connaître. `Shipment started the customs clearance process at origin`, c'est le dédouanement à l'export en Chine, pas la douane française, même si Peek affiche « À la douane ». Et `Abnormal delivery`, suivi d'une raison comme `<Incorrect address.>` (adresse erronée), signale une tournée sans livraison : Peek affiche « Tentative de livraison ».
@@ -63,6 +67,7 @@ Pour certains colis, l'historique reprend aussi des lignes de Colis Privé, en a
 | `Your parcel has been prepared by your web merchant. It will soon be delivered to Colis Privé.` | Colis Privé a les données du colis ; rien n'a bougé. | « Étiquette créée » |
 | `Your parcel arrived at the shipping partner. It will be sent to Colis Privé.` | Chez le partenaire qui l'amène en France. | « En transit » |
 | `Your package is in transit to Colis Privé` | En route vers Colis Privé, qui ne l'a pas encore. | « En transit » |
+| `Delivered to letterbox` | Colis Privé l'a déposé dans ta boîte aux lettres. | « Livré », une fois que le statut de Shouwu dit aussi `Delivered` |
 
 **Des lignes en chinois.** Certains colis ont aussi des lignes que Shouwu écrit en chinois, et Peek les affiche telles quelles. `货物电子信息已经收到` (les données électroniques des marchandises sont reçues) accompagne les données de commande : « Étiquette créée ». Viennent ensuite, toutes affichées « En transit » : `申报过港中` après le code d'un lot (le lot est déclaré pour la route vers Hong Kong), `已到港，安排航班中` (arrivé au point de départ, en attente d'un vol), `预计23号的航班` (le vol réservé, ici le 23 ; avec `二程` devant, pour le second tronçon), `航班已飞` (le vol est parti), `二程航班已飞` (le vol du second tronçon est parti) et `已落地` (atterri). Peek affiche `已落地，清关提货中` (atterri, en cours de dédouanement et de retrait auprès de la compagnie aérienne) comme « À la douane », puis `清关完成` (dédouané) et `已交仓扫描` (scanné à l'entrepôt du transporteur qui livre) de nouveau comme « En transit ».
 
@@ -80,7 +85,7 @@ Shouwu dit travailler directement avec USPS, Royal Mail, La Poste, DHL, DPD et H
 
 **Bloqué sur `Preparing`, `Shipment information received` ou `Carrier received the shipment`.** Shouwu n'a pas encore le colis, ou ne l'a pas encore expédié de son entrepôt. Demande au vendeur quand il le lui a remis.
 
-**Bloqué en douane.** Après `Shipment started the customs clearance process at destination` ou `已落地，清关提货中`, le colis attend la douane de ton pays. Si on te demande de payer des frais d'importation, lis [colis bloqué en douane](guide:customs).
+**Bloqué en douane.** Après `Shipment started the customs clearance process at destination`, `Customs clearance in progress` ou `已落地，清关提货中`, le colis attend la douane de ton pays. Depuis le 1er novembre 2026, un achat en ligne venu de Chine est soumis, en plus des 3 € de droits par ligne de déclaration (jusqu'à 150 €), aux frais de traitement de l'UE : 2 € par ligne, quelle que soit la valeur, perçus par la douane avec les droits. Les pages des lignes de Shouwu ne disent pas qui les paie. Si on te demande de payer des frais d'importation, lis [colis bloqué en douane](guide:customs).
 
 **Plus rien après `Delivery to local courier`.** Le transporteur a le colis, mais le suivi de Shouwu ne donne pas son numéro. Demande ce numéro au vendeur et colle-le dans Peek. Voir aussi [pourquoi un suivi ne bouge plus](guide:tracking-not-updating) et [le suivi d'un colis venant de Chine](guide:tracking-from-china).
 
@@ -134,5 +139,6 @@ Le vendeur chez qui tu as commandé : il a réservé l'envoi chez Shouwu et peut
 - [Shouwu International : 法国标快 (France, standard)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=20) – toute la France, surtout Colissimo, choix du numéro, 4 à 7 jours ouvrés, réclamations
 - [Shouwu International : 法国经济 (France, économique)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=23) – surtout Colissimo, 4 à 7 jours ouvrés
 - [Shouwu International : 法国带电 (France, avec batteries)](http://www.sedel.com/main-route-secondary.html?groupId=3&groupItemId=26) – surtout Colissimo, 4 à 7 jours ouvrés
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme du numéro, suivi et lien, statuts, libellés des scans et leurs étapes, lignes de Colis Privé, heures, lieux, ce qu'affiche Peek
+- [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droits de 3 € depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme du numéro, suivi et lien, statuts, libellés des scans et leurs étapes, lignes de Colis Privé et du transporteur français, heures, lieux, ce qu'affiche Peek
 :::

@@ -3,7 +3,7 @@ title: Lingdong International tracking: SZLD numbers and statuses
 description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its scans mean and why its tracking stops before the delivery.
 slug: lingdong-tracking
 published: 2026-10-21
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Lingdong International (领东国际, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) is a freight forwarder in Shenzhen, China, that ships parcels abroad for online sellers. Its numbers start with SZLD: type yours in the 快件查询 (parcel lookup) box on Lingdong's site, lingdong56.com, which opens its tracker, or in the box above. The shop that sent your order gives the number with its shipping details.
@@ -44,6 +44,8 @@ Lingdong publishes no list of its statuses. It writes its scans in English, or i
 
 The Chinese line isn't a scan of the parcel. Lingdong's tracking system writes it by itself for an order that has no scans yet, dated when the order was created.
 
+In Peek, the Chinese line shows as "Label created", `Shipment arrived at facility` as "Received by carrier", `货物在清关【Customs clearance in progress】` as "At customs", and every other line in the table as "In transit".
+
 None of the Lingdong lines Peek knows is a delivery line: the last of Lingdong's own is the hand-over after customs clearance in the destination country. In Italy its tracker can then pass on Poste Italiane's first scans, `First parcel scan along Poste Italiane’s logistic network` and `In transit along Poste Italiane’s logistic network`. Another company delivers the parcel there, and its tracking has the rest.
 
 ## Who delivers Lingdong parcels
@@ -57,6 +59,8 @@ Lingdong publishes no delivery times and no rules for delivery attempts, notice 
 ## Lingdong parcel not arriving or tracking stuck
 
 **Stuck on `Shipment departed from facility`.** That's the parcel leaving Lingdong's warehouse in Shenzhen. Flight and customs lines can follow, but none of the lines Peek knows is a delivery line, so Lingdong's history can stay still while the parcel moves on. Ask the seller which carrier delivers it in your country and for that carrier's number; its tracking has the rest. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
+
+**Stuck after the hand-over.** `货物已交服务商【The shipment has been transferred to the logistics partner.】` ends Lingdong's part. Four days after the newest line, Peek flags the parcel "No tracking update for four days", even if the delivering company is moving it. If Lingdong's tracker shows a 渠道转单号 (channel transfer number) for your parcel, that's the delivering company's number: add it to Peek as a parcel of its own. If not, ask the seller for it.
 
 **Only the Chinese line.** `货物电子信息已经收到` on its own means the seller has booked the parcel but it hasn't reached Lingdong's warehouse. If nothing follows for several days, ask the seller whether it has been sent.
 
@@ -113,7 +117,7 @@ The seller you ordered from: it booked the parcel with Lingdong and holds the co
 - [Lingdong: 快递业务 (express)](http://www.lingdong56.com/kdyw.html) – UPS, DHL and FedEx agent
 - [Lingdong: 联系我们 (contact)](http://www.lingdong56.com/lxwm.html) – address, phones
 - [Lingdong: 运输条款 (terms of carriage)](http://www.lingdong56.com/ystk.html) – the page holds no terms
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – SZLD number shape, scan wordings, the tracker's answers, what Peek shows and leaves out, the hand-over to Swiss Post
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – SZLD number shape, scan wordings and their stages, the tracker's answers and its transfer number, what Peek shows and leaves out, the hand-over to Swiss Post
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 customs duty per item on consignments up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: The temporary EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 fee per item on distance sales, whatever the items' value; VAT schemes for consignments up to €150 unchanged, IOSS VAT collected when the order is paid
 :::

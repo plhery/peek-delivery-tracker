@@ -3,7 +3,7 @@ title: Tracking iMile: codici, stati e consegna in Italia
 description: Tracking iMile in Italia: com'è fatto il codice, cosa vogliono dire gli stati in inglese, quanti tentativi fa, come fare reclamo e il numero del servizio clienti.
 slug: imile-tracking
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 iMile è una società di consegne per l'e-commerce, fondata a Dubai nel 2017. Porta pacchi da un paese all'altro, anche dalla Cina, e in Italia consegna con iMile Italy S.r.l., che ha sede a San Giuliano Milanese. Segui il codice sulla [pagina di tracciamento di iMile](https://www.imile.com/en/track) o nel riquadro qui sopra. Il codice te lo dà il negozio: lo trovi nei dati di spedizione dell'ordine.
@@ -48,11 +48,11 @@ Le scansioni di iMile sono in inglese, così come le legge Peek. Tra le parentes
 
 Sui pacchi europei la prima riga compare come `Order Submited.`: l'errore di battitura è di iMile, come in `Your order has assigned delivery drvier.`, che indica il corriere assegnato prima che il furgone parta. `Shipment is scheduled to` seguito da una data tra parentesi quadre vuol dire che è stato fissato un giorno di consegna.
 
-Altri motivi che il corriere può indicare, oltre a `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather` e `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` Anche `Lost order` può comparire come motivo durante un giro di consegna: da solo non vuol dire che il pacco sia perso, guarda le scansioni successive. Per i pacchi fermi in dogana c'è la [guida alla dogana](guide:customs).
+Altri motivi che il corriere può indicare, oltre a `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, una riga che inizia con «failed to schedule due to» e indica un motivo tra parentesi quadre, come «noanswer» (il corriere non è riuscito a concordare la consegna con te), e `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` Anche `Lost order` può comparire come motivo durante un giro di consegna: da solo non vuol dire che il pacco sia perso, guarda le scansioni successive. Per i pacchi fermi in dogana c'è la [guida alla dogana](guide:customs).
 
 ## Consegna iMile in Italia: tentativi, giacenza e ritiro
 
-**Chi consegna.** Secondo la sua Carta dei servizi, iMile Italy opera «sull'intero territorio nazionale attraverso una rete operativa composta da hub logistici, magazzini e partner operativi». La sua informativa sulla privacy parla di «subappaltatori per la consegna dell'ultimo miglio» e di «corrieri professionisti». Nessuno dei due documenti fa nomi.
+**Chi consegna.** Secondo la sua Carta dei servizi, iMile Italy opera «sull'intero territorio nazionale attraverso una rete operativa composta da hub logistici, magazzini e partner operativi». La sua informativa sulla privacy parla di «subappaltatori per la consegna dell'ultimo miglio» e di «corrieri professionisti». Nessuno dei due documenti fa nomi. Nelle cronologie lette da Peek, anche spedizionieri cinesi come [Techlink](carrier:techlink) e [Shouwu](carrier:shouwu) affidano a iMile la consegna in Italia: se il negozio ti ha dato il loro codice, il loro tracking riporta le righe di iMile, con i centri tra 【】.
 
 **Tentativi.** La Carta prevede «di norma, fino a due tentativi di consegna, ove le circostanze operative lo consentano». Tra i casi che iMile gestisce elenca indirizzo incompleto, destinatario assente, consegna rifiutata e luogo di consegna non accessibile.
 
@@ -73,6 +73,8 @@ Altri motivi che il corriere può indicare, oltre a `User not at home`: `wrong a
 **Nessun tracking.** Finché c'è solo `Order submitted, pending to receive.`, il negozio ha creato l'etichetta ma forse non ha ancora consegnato il pacco. Chiedigli quando l'ha spedito.
 
 **Fermo da giorni.** I pacchi dalla Cina restano spesso senza novità tra il volo, la dogana e il primo centro in Italia. Lo spieghiamo in [pacchi dalla Cina](guide:tracking-from-china) e in [tracking che non si aggiorna](guide:tracking-not-updating).
+
+**Dogana e oneri.** Sugli acquisti online spediti da fuori UE, come dalla Cina, dal 1° novembre 2026 l'UE applica anche la tassa di gestione di 2 € per voce, a qualunque valore, che la dogana riscuote insieme al dazio (3 € per voce fino a 150 €). iMile non dice come si pagano dazio, IVA e tassa sui suoi pacchi: se erano già compresi nel prezzo, lo sa il negozio. Cosa si paga e quando, nella [guida alla dogana](guide:customs).
 
 **Consegnato ma non ce l'hai.** Guarda la prova di consegna sulla pagina di iMile, controlla cassetta, portineria e vicini, poi scrivi a iMile e al negozio. Altri consigli in [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -136,5 +138,6 @@ Scrivi a servizioclienti.it@imile.me, usa il modulo online o chiama lo 02 8126 0
 - [iMile: Assistenza clienti](https://www.imile.com/IT-it/CustomerService/CustomerSupport) – modulo online e i suoi campi
 - [iMile: Track Your Shipment](https://www.imile.com/en/track) – pagina di tracciamento, riquadro vuoto, vista della prova di consegna
 - [iMile: iMile Chat](https://help.imile.com/) – assistente virtuale in italiano
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme dei codici, stati, cosa mostra Peek
+- [Commissione europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026, dazio di 3 € per voce fino a 150 €
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme dei codici, stati, cosa mostra Peek, righe di iMile nei tracking di Techlink e Shouwu
 :::

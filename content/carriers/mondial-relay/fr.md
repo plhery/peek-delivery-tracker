@@ -3,7 +3,7 @@ title: Mondial Relay suivi : statuts, Point Relais et contact
 description: Suivi Mondial Relay en France et en Belgique : le numéro à 8 chiffres, ce que veut dire chaque statut, le délai de retrait en Point Relais et qui contacter.
 slug: mondial-relay-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Mondial Relay est un transporteur français du groupe InPost qui livre en Point Relais (des commerces de proximité), en Locker et à domicile. Pour suivre ton colis, saisis le numéro d'expédition à 8 chiffres et le code postal du destinataire sur le site de Mondial Relay, ou colle le numéro dans le champ ci-dessus.
@@ -17,6 +17,7 @@ Mondial Relay l'appelle « numéro d'expédition » : 8 chiffres, imprimés sur 
 | `12345678` | Le numéro d'expédition. Même longueur chez [Colisweb](carrier:colisweb) et Heppner. |
 | `0012345678` | 10 chiffres : un code d'enseigne, puis le numéro d'expédition. Même longueur chez [DHL](carrier:dhl-express), Relais Colis et d'autres. |
 | `001234567802` | 12 chiffres : la même chose, plus le rang du colis. Même longueur chez [DPD France](carrier:dpd-fr), [Colis Privé](carrier:colis-prive), BRT et d'autres. |
+| `00123456780101` | 14 chiffres : le début du code-barres, avec le code d'enseigne, le numéro d'expédition, le rang du colis et le nombre de colis. Même longueur chez DPD, [Chronopost](carrier:chronopost) et d'autres. |
 | `00123456780101700000000000` | 26 chiffres : le code-barres de l'étiquette, propre à Mondial Relay, avec le numéro d'expédition du 3e au 10e chiffre. |
 
 Si l'e-mail de la boutique nomme un autre transporteur, le numéro est sans doute le sien : lis [à quel transporteur appartient un numéro de suivi](guide:tracking-number-formats). En Espagne et au Portugal, InPost a repris Mondial Relay en 2021 : mondialrelay.es et mondialrelay.pt mènent désormais aux sites d'InPost.
@@ -39,7 +40,7 @@ Le suivi s'affiche en français (ou en néerlandais sur le site belge). Les lign
 | `Retiré par le destinataire`, `Colis livré au destinataire` | Colis livré : tu l'as retiré ou reçu. |
 | `Retour à l'expéditeur` | Il repart chez l'expéditeur. |
 
-Sur une livraison en relais, attends `Disponible dans votre Point Relais` avant de te déplacer. `Échec de livraison` signale une tentative de livraison qui a échoué, et `Votre colis a été livré à l'enseigne.` un retour arrivé chez la boutique.
+Sur une livraison en relais, attends `Disponible dans votre Point Relais` avant de te déplacer. `Échec de livraison` signale une tentative de livraison qui a échoué, et `Votre colis a été livré à l'enseigne.` un retour arrivé chez la boutique : Peek affiche alors « Livré », mais c'est la boutique qui l'a reçu.
 
 ## Point Relais et Locker Mondial Relay : retrait et délai de garde
 
@@ -49,7 +50,7 @@ Les règles ci-dessous sont celles du site belge de Mondial Relay : pour un coli
 
 **Par quelqu'un d'autre.** Au Point Relais, la personne apporte sa pièce d'identité originale, pas une photocopie, et la tienne ; pas besoin de procuration. Tu peux aussi lui donner ton code PIN. En Locker, le code suffit.
 
-**Combien de temps il attend.** En Belgique, 5 jours calendaires, dimanches et jours fériés compris : un colis arrivé un mercredi t'attend jusqu'au lundi suivant inclus. Pas de prolongation possible ; ensuite, le colis repart automatiquement chez l'expéditeur. Un colis envoyé de Belgique vers la France attend aussi 5 jours.
+**Combien de temps il attend.** En Belgique, 5 jours calendaires, dimanches et jours fériés compris : un colis arrivé un mercredi t'attend jusqu'au lundi suivant inclus. Pas de prolongation possible ; ensuite, le colis repart automatiquement chez l'expéditeur. Pour la France, le tableau du site belge indique aussi 5 jours, en Point Relais comme en Locker.
 
 **Point Relais fermé ou indisponible.** Une fois le colis pris en charge, impossible de changer de Point Relais. Si ton relais ne peut pas recevoir le colis (fermé, en congés ou saturé), Mondial Relay te demande par e-mail ou SMS si tu préfères attendre sa réouverture ou en choisir un autre ; sans réponse, il peut en choisir un proche.
 
@@ -74,7 +75,7 @@ Relevé le 10 octobre 2026 :
 
 ## Suivre un colis Mondial Relay avec Peek
 
-[Peek](/) reconnaît tout de suite le code-barres de 26 chiffres, même tapé avec des espaces. Avec 8, 10 ou 12 chiffres, il peut ne pas nommer Mondial Relay de lui-même : d'autres transporteurs utilisent ces longueurs, et Peek ne peut pas demander à Mondial Relay s'il connaît un numéro. Appuie alors sur « Changer » et choisis Mondial Relay, ou colle un lien de suivi de mondialrelay.fr, .be, .nl ou .com (ceux de ses sites espagnol et portugais ne sont pas lus).
+[Peek](/) reconnaît tout de suite le code-barres de 26 chiffres, même tapé avec des espaces. Avec 8, 10, 12 ou 14 chiffres, il peut ne pas nommer Mondial Relay de lui-même : d'autres transporteurs utilisent ces longueurs, et Peek ne peut pas demander à Mondial Relay s'il connaît un numéro. Appuie alors sur « Changer » et choisis Mondial Relay, ou colle un lien de suivi de mondialrelay.fr, .be, .nl ou .com (ceux de ses sites espagnol et portugais ne sont pas lus).
 
 Un numéro à 8 chiffres demande aussi le « Code postal de livraison » : tape le numéro seul, puis le code postal dans son champ. Seuls des codes postaux français et portugais ont été testés, et un code portugais doit avoir ses sept chiffres (1234-567, avec ou sans tiret). Avec un mauvais code, le colis reste introuvable. Il est envoyé à Mondial Relay et, si besoin, à des services de suivi.
 
@@ -92,7 +93,7 @@ Oui : en Belgique, les livreurs passent dans les Points Relais du mardi au samed
 
 ### Peut-on suivre un colis Mondial Relay sans code postal ?
 
-Pas sur le site belge de Mondial Relay, qui demande le numéro et le code postal de destination. Sur Peek, seul le numéro à 8 chiffres en a besoin : les formes à 10 ou 12 chiffres et le code-barres de 26 chiffres se suivent sans.
+Pas sur le site belge de Mondial Relay, qui demande le numéro et le code postal de destination. Sur Peek, seul le numéro à 8 chiffres en a besoin : les formes à 10, 12 ou 14 chiffres et le code-barres de 26 chiffres se suivent sans.
 
 ### Que devient un colis Mondial Relay non récupéré ?
 
@@ -113,7 +114,7 @@ Non, mais il n'est pas surtaxé : en Belgique, le +32 2 340 06 10 coûte le prix
 - [Mondial Relay Belgique : Retrait en Locker](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-retirer-un-colis-dans-un-lockers-mondial-relay/) – « Retirer un colis », code à 6 chiffres
 - [Mondial Relay Belgique : Lockers](https://www.mondialrelay.be/fr-be/consignes-lockers/) – code à partager avec un proche
 - [Mondial Relay Belgique : Une autre personne](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/une-autre-personne-peut-elle-venir-chercher-mon-colis/) – pièces d'identité, sans procuration
-- [Mondial Relay Belgique : Délai de garde](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires, France 5 jours, pas de prolongation
+- [Mondial Relay Belgique : Délai de garde](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/quel-est-le-d%C3%A9lai-de-garde-dun-colis-en-locker-ou-point-relais/) – 5 jours calendaires, France 5 jours en Point Relais et en Locker, pas de prolongation
 - [Mondial Relay Belgique : Colis gardé 5 jours](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/pendant-combien-de-temps-mon-colis-sera-garde-par-le-point-relais/) – retour au point d'origine ou au vendeur
 - [Mondial Relay Belgique : Modifier le Point Relais](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/je-souhaite-modifier-le-point-relais-de-livraison-est-ce-possible/) – aucune modification après la prise en charge
 - [Mondial Relay Belgique : Point Relais fermé](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/mon-point-relais-est-ferme-ou-mon-colis-va-t-il-etre-livre/) – choix par e-mail ou SMS, sinon automatique
@@ -131,5 +132,5 @@ Non, mais il n'est pas surtaxé : en Belgique, le +32 2 340 06 10 coûte le prix
 - [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – frais additionnels, signalement au 33700
 - [InPost : Quiénes somos](https://www.inpost.es/quienes-somos) – reprise en Espagne
 - [InPost : Quem somos](https://www.inpost.pt/quem-somos) – reprise au Portugal
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek lit, numéros à 14 chiffres, libellés et étapes
 :::

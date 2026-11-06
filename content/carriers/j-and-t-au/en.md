@@ -3,7 +3,7 @@ title: J&T Express Australia tracking: JTAU numbers and statuses
 description: Track a J&T Express Australia parcel: what a JTAU number looks like, what each tracking line means, and what to do when your parcel is late, lost or not delivered.
 slug: jt-express-australia-tracking
 published: 2026-10-21
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 J&T Express Australia (J&T Express Australia Pty Ltd, Villawood NSW) is the Australian arm of J&T Express, the parcel group behind J&T in South-East Asia and China. It delivers parcels in Australia for e-commerce platforms, brands and retailers, including orders from overseas once they've cleared customs. If a shop sent your order with J&T, the tracking number starts with `JTAU`: paste it in the box above, or look it up on [J&T's own tracker](https://www.jtexpress.au/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -51,6 +51,8 @@ On J&T's tracker, some sentences end with J&T's customer service number or an in
 ## J&T Express Australia delivery and proof of delivery
 
 J&T recruits delivery partners across Australia, companies that do its last-mile delivery and collection. On the live parcels behind Peek's code, J&T's courier takes the parcel out for delivery and then either delivers it or reports why the delivery failed. Peek's code shows no hand-over to another carrier: J&T's tracker follows the parcel to your door.
+
+**Parcels from overseas lines.** Lines that carry parcels from abroad can hand them to J&T in Australia. [Yanwen](carrier:yanwen), a Chinese logistics company, hands its parcels over in batches at the port of arrival, and Yanwen's own tracking then carries J&T's sentences, some with J&T's customer service number after them. If your order came with a Yanwen number, keep following that number: Peek shows J&T's scans in its history, without that number, and shows J&T's pickup as "In transit", since Yanwen had the parcel long before.
 
 **Out for delivery.** `Your parcel is out for delivery.` means your parcel is on a delivery round. J&T's tracker gives no delivery window or expected day, so Peek can't show one either.
 
@@ -131,6 +133,6 @@ Yes. Its privacy notice says drivers photograph the parcel and where they left i
 - [J&T Express Australia: About Us](https://www.jtexpress.au/about) – J&T Express group, 01519.HK, founded in Indonesia in 2015, South-East Asia and China
 - [J&T Express Australia: Privacy Notice](https://www.jtexpress.au/privacy-policy) – company name and registered office; recipient details from senders and marketplaces; proof of delivery, photos and SMS link; no-photo instructions and privacy contact; investigations; proof of delivery to senders; support providers in Malaysia and the Philippines
 - [Universal Parcel Scraper: J&T Express Australia](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/j-and-t-au) – names, the JTAU shape, tracking links, the tracker's sentences read on live parcels and their stages, customs pickup, failed deliveries, English sentences, exact scan times, no place, expected day, weight or proof of delivery, customer service lines, bracketed text, names and phone numbers left out, office contact details, newest 100 scans, help page
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – other J&T networks' shapes, no hand-over to another carrier, tracking services as a fallback
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – other J&T networks' shapes, no hand-over to another carrier, tracking services as a fallback, Yanwen's batch hand-over to J&T and the J&T scans its tracking relays
 - [ABN Lookup: J&T Express Australia Pty Ltd](https://abr.business.gov.au/ABN/View?abn=18698743609) – active ABN since 4 June 2026, Australian private company, main business location in NSW
 :::

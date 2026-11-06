@@ -48,7 +48,7 @@ Los escaneos de iMile están en inglés, tal como los lee Peek. Lo que va entre 
 
 En paquetes europeos, la primera línea aparece como `Order Submited.`, con la falta de ortografía de iMile, igual que `Your order has assigned delivery drvier.`, que indica que ya hay repartidor asignado antes de que salga la furgoneta. Si ves `Shipment is scheduled to` seguido de una fecha entre corchetes, se ha fijado un día de entrega.
 
-Otros motivos que puede anotar el repartidor, además de `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather` y `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` También puede aparecer `Lost order` como motivo durante una ruta de reparto. Por sí solo no significa que el paquete se haya perdido: fíjate en los escaneos siguientes. Si se queda parado en la aduana, mira la [guía de aduanas](guide:customs).
+Otros motivos que puede anotar el repartidor, además de `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, una línea que empieza por «failed to schedule due to» con un motivo entre corchetes, como «noanswer» (el repartidor no pudo acordar la entrega contigo), y `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` También puede aparecer `Lost order` como motivo durante una ruta de reparto. Por sí solo no significa que el paquete se haya perdido: fíjate en los escaneos siguientes. Si se queda parado en la aduana, mira la [guía de aduanas](guide:customs).
 
 ## Entrega de iMile en España
 

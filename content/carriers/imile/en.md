@@ -48,7 +48,7 @@ iMile's scans below are in its English wording, as Peek reads them. Names in 【
 
 `Order Submited.` means the same as the first row on a European parcel; the misspelling is iMile's, as in `Your order has assigned delivery drvier.`, which names the driver before the van leaves. `Shipment is scheduled to` followed by a date in square brackets books a delivery day.
 
-The driver's reasons for a failed attempt, besides `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather` and `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` `Lost order` can also turn up as a driver's reason on a delivery run. It doesn't mean on its own that the parcel is gone: watch the next scans. For customs stops, see [customs and import fees](guide:customs).
+The driver's reasons for a failed attempt, besides `User not at home`: `wrong address`, `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, a line starting "failed to schedule due to" with a reason in square brackets, such as "noanswer" (the driver couldn't arrange the delivery with you), and `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` `Lost order` can also turn up as a driver's reason on a delivery run. It doesn't mean on its own that the parcel is gone: watch the next scans. For customs stops, see [customs and import fees](guide:customs).
 
 ## iMile delivery in the UK, US, Ireland, Canada and Australia
 

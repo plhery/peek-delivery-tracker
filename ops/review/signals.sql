@@ -99,6 +99,78 @@ where not exists (
     and 'future_event_timestamp' = any(earlier.anomaly_codes))
 order by a.started_at desc;
 
+\echo '== Stage step-backs: a parcel''s saved stage going back in the window, by short id'
+\echo '   back: to an earlier one of pending, registered and accepted, from a moving stage to one of them, or from'
+\echo '   delivered or returned to any other (moves between moving stages are the carrier''s); carrier_changed: filed'
+\echo '   under another carrier at the next check, as an owner''s change or a correction starts over'
+-- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check.
+with saved as (
+  select a.package_id, a.configured_carrier as carrier, a.previous_stage as from_stage,
+         coalesce(lead(a.previous_stage) over w, p.current_stage) as to_stage,
+         coalesce(lead(a.configured_carrier) over w, p.carrier) as next_carrier
+  from public.tracking_sync_attempts as a
+  join public.packages as p on p.id = a.package_id
+  where a.started_at >= :since and a.previous_stage is not null
+  window w as (partition by a.package_id order by a.started_at, a.id)
+),
+ranked as (
+  select s.*, rank.from_rank, rank.to_rank
+  from saved as s
+  cross join lateral (
+    select array_position(array['pending', 'registered', 'accepted'], s.from_stage) as from_early,
+           array_position(array['pending', 'registered', 'accepted'], s.to_stage) as to_early
+  ) as early
+  cross join lateral (
+    select coalesce(early.from_early, case when s.from_stage in ('delivered', 'returned') then 5 else 4 end) as from_rank,
+           coalesce(early.to_early, case when s.to_stage in ('delivered', 'returned') then 5 else 4 end) as to_rank
+  ) as rank
+)
+select carrier, from_stage, to_stage, carrier is distinct from next_carrier as carrier_changed,
+       'delivery-tracker' as lane, count(*) as steps, count(distinct package_id) as parcels,
+       array_to_string((array_agg(distinct left(package_id::text, 8)))[1:5], ' ') as sample
+from ranked
+where to_rank < from_rank
+group by 1, 2, 3, 4
+order by steps desc, carrier, from_stage, to_stage;
+
+\echo '== Expected days dropped in the window from parcels still on their way, by short id'
+\echo '   a day stays through answers without one until it passes on the carrier''s clock, the parcel is delivered,'
+\echo '   held or waiting to be collected, or its carrier changes: each is a day that passed or one dropped too early'
+select p.carrier, p.current_stage as stage, 'delivery-tracker' as lane, count(*) as parcels,
+       array_to_string((array_agg(left(p.id::text, 8) order by p.expected_delivery_changed_at desc))[1:5], ' ') as latest
+from public.packages as p
+where p.expected_delivery is null and p.expected_delivery_changed_at >= :since
+  and p.current_stage in ('pending', 'registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery')
+group by 1, 2
+order by parcels desc, carrier, stage;
+
+\echo '== Planned steps passed: parcels on their way whose kept plan has a step dated over a day ago, by short id'
+\echo '   the server serves a planned step only while it is ahead and the apps hide one as it passes, so such a step'
+\echo '   shows only if that rule broke; with_plan: parcels whose plan the server can serve'
+with planned as (
+  select p.id, p.carrier, coalesce(step->>'time', step->>'local_time') as dated
+  from public.packages as p
+  -- The plan of the carrier tracking the parcel now, as plannedSteps.ts serves it.
+  cross join lateral (
+    select coalesce(case when jsonb_typeof(p.carrier_data #> array['routing', 'planned', 'carriers',
+      p.carrier_data->>'active_tracking_carrier']) = 'array' then p.carrier_data->>'active_tracking_carrier' end, p.carrier) as planner
+  ) as c
+  cross join lateral jsonb_array_elements(case
+    when jsonb_typeof(p.carrier_data #> array['routing', 'planned', 'carriers', c.planner]) = 'array'
+      then p.carrier_data #> array['routing', 'planned', 'carriers', c.planner]
+    else '[]'::jsonb end) as step
+  where p.carrier_data->'routing'->'planned'->>'number' = p.tracking_number
+    and p.current_stage not in ('delivered', 'returned')
+)
+select carrier, 'delivery-tracker' as lane, count(distinct id) as with_plan,
+       -- A day before yesterday in UTC has passed in every zone.
+       count(distinct id) filter (where substring(dated from '^\d{4}-\d{2}-\d{2}') < to_char(now() at time zone 'UTC' - interval '1 day', 'YYYY-MM-DD')) as passed,
+       array_to_string((array_agg(distinct left(id::text, 8)) filter (
+         where substring(dated from '^\d{4}-\d{2}-\d{2}') < to_char(now() at time zone 'UTC' - interval '1 day', 'YYYY-MM-DD')))[1:5], ' ') as sample
+from planned
+group by 1
+order by passed desc, with_plan desc, carrier;
+
 \echo '== Unmapped wording: open and seen in the window (new: first seen in it; … masks a rare word; look the wording up by id)'
 -- Wording can quote a number or name a place, a shop or a person: its digits are masked, and so
 -- is each word fewer than five stored wordings share once their digits are masked, so that

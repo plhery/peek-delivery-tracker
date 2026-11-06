@@ -465,7 +465,11 @@ a window of hours (1 by default, 24 for the daily review) it lists routing signa
 anomalies (with `looping_track` for a parcel whose moves in transit, each to a new place, repeat one
 interval to within 2 s three times or more: a generated track, which the app also flags to the parcel's readers,
 leaving it off the map and its moves unannounced ([generatedTrack.ts](../src/lib/generatedTrack.ts))), the parcels first flagged in the window with a scan
-dated over an hour after its check (`future_event_timestamp`, by short id, with the provider that dated it), open unmapped wording seen in the window (`new` when first seen in it; a provider's
+dated over an hour after its check (`future_event_timestamp`, by short id, with the provider that dated it), parcels whose saved
+stage went back in the window (to an earlier one of pending, registered and accepted, or from delivered or returned, read
+from each check's `previous_stage`; by short id, and whether the next check filed the parcel under another carrier),
+expected days dropped in the window from parcels still on their way (each a day that passed or one dropped too early),
+parcels on their way whose kept plan has a step dated over a day ago (a step the server no longer serves), open unmapped wording seen in the window (`new` when first seen in it; a provider's
 own wording as relayed by it, beside the carrier of its sample's parcel), new open support cases that still give a reason, health incidents notified in the
 window or open and failing in it (`rescued` when every check that failed still answered
 through another step; an open one nothing checked, or whose checks answered, waits unlisted
@@ -498,8 +502,8 @@ Each row names the lane that acts on it:
   their carrier's adapter answers other parcels and was not asked for them (for a parcel
   filed under a carrier only providers track, the carrier a provider names as delivering it) or had its answer
   set aside as older than the parcel's newest scan without the parcel showing that answer's
-  newest scan, a check whose worker died, a generated track (`looping_track`), or a reader's
-  answer that gives no reason.
+  newest scan, a check whose worker died, a generated track (`looping_track`), a stage that went
+  back, an expected day dropped, a planned step past its time, or a reader's answer that gives no reason.
 
 A parcel a provider tracks can also be **dormant**, not checked for 24 h because nobody
 follows it any more, whatever its last check stored, a failure included, or need **none**: its carrier answers and the provider's fuller history

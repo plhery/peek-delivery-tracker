@@ -66,6 +66,15 @@ class CarrierCatalogTests {
         UrlComponents.parse(url)?.queryItems?.firstOrNull { it.name == name }?.value
 
     @Test
+    fun aBrandWithSeveralNetworksNamesEachOfThem() {
+        // As the scraper's catalog networks: a provider's "Jumppoint" names the network whose rule fits the number.
+        assertEquals("jumppoint", CarrierCatalog.networkBrand(CarrierId("jumppoint")))
+        assertEquals("jumppoint", CarrierCatalog.networkBrand(CarrierId("jumppoint-international")))
+        assertEquals("dpd", CarrierCatalog.networkBrand(CarrierId("dpd-fr")))
+        assertNull(CarrierCatalog.networkBrand(CarrierId.Fedex))
+    }
+
+    @Test
     fun discoveryIncludesBrowserCandidatesWithoutChangingHTTPRecognition() {
         val http = catalog.recognitionCandidates("000000000103")
         assertFalse(http.isEmpty())

@@ -149,6 +149,9 @@ class AndroidPushNotifications(
     /** Raised by each [unregisterForRemoteNotifications]: an answer to a question asked before it is dropped. */
     private var registrations = 0
 
+    override var deviceTokenFailures = 0
+        private set
+
     override val available: Boolean get() = tokens != null
 
     override suspend fun authorizationStatus(): NotificationAuthorizationStatus = NotificationAuthorizationStatus.fromAndroid(
@@ -172,8 +175,8 @@ class AndroidPushNotifications(
         val asked = registrations
         tokens.token { answer ->
             // A failure is AppDelegate's `didFailToRegisterForRemoteNotificationsWithError`: nothing is kept, and the
-            // store's wait for a token ends without one.
-            if (asked == registrations) answer.onSuccess(::keep)
+            // store's wait for a token ends there without one.
+            if (asked == registrations) answer.onSuccess(::keep).onFailure { deviceTokenFailures++ }
         }
     }
 

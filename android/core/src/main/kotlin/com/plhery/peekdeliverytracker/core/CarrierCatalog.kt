@@ -942,7 +942,7 @@ class CarrierCatalog private constructor(
 
         /** Brands with several catalog networks ("DPD" is `dpd` and `dpd-fr`), as in Universal Parcel
          * Scraper's catalog networks. */
-        private val networkBrands = listOf("dhl", "dpd", "gls", "hermes", "evri", "gofo")
+        private val networkBrands = listOf("dhl", "dpd", "gls", "hermes", "evri", "gofo", "jumppoint")
 
         fun networkBrand(carrier: CarrierId): String? =
             networkBrands.firstOrNull { carrier.rawValue == it || carrier.rawValue.startsWith("$it-") }

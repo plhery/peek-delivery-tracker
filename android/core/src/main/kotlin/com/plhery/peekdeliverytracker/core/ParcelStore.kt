@@ -85,6 +85,12 @@ interface PushNotifications {
     /** AppDelegate's `currentDeviceToken`: the token this launch was given, kept in memory alone; nil until then. */
     val currentDeviceToken: String?
 
+    /**
+     * AppDelegate's `deviceTokenFailures`: how many times this launch Firebase said it could give no token (no Google
+     * Play services, no network). A wait for a token ends at the next one.
+     */
+    val deviceTokenFailures: Int get() = 0
+
     /** AppDelegate's `clearDeviceToken()`: forgets `currentDeviceToken`. */
     fun clearDeviceToken()
 }
@@ -1218,6 +1224,7 @@ class ParcelStore(
                     throw DeliveryApiError.NotificationsDenied()
                 }
                 defaults.set(false, forKey = notificationOptOutKey)
+                val failures = notifications.deviceTokenFailures
                 notifications.registerForRemoteNotifications()
                 if (isDemo) {
                     defaults.set(true, forKey = demoNotificationsKey)
@@ -1225,7 +1232,7 @@ class ParcelStore(
                     succeeded = true
                     return true
                 }
-                val token = waitForApnsToken() ?: throw DeliveryApiError.PushTokenUnavailable()
+                val token = waitForApnsToken(failures) ?: throw DeliveryApiError.PushTokenUnavailable()
                 session.checkGeneration(generation)
                 val sent = api.registerNativePushToken(token, installationId, language, sendTest = true)
                 session.checkGeneration(generation)
@@ -1597,11 +1604,16 @@ class ParcelStore(
         }
     }
 
-    private suspend fun waitForApnsToken(): String? {
+    /**
+     * The token Firebase gives, waited for up to 8 seconds; null as soon as Firebase says it can give none after the
+     * question asked when [failures] were counted, so the reader is told at once instead of after the whole wait.
+     */
+    private suspend fun waitForApnsToken(failures: Int): String? {
         notifications.currentDeviceToken?.let { return it }
         repeat(80) {
             delay(100.milliseconds)
             notifications.currentDeviceToken?.let { return it }
+            if (notifications.deviceTokenFailures != failures) return null
         }
         return null
     }

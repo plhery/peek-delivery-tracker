@@ -93,14 +93,18 @@ class NotificationsTest {
 
     private val user = AuthUser(UUID(0, 7), email = "reader@example.com", isAnonymous = false)
 
-    /** Firebase's tokens as a test gives them: each question answered with [next] on the main thread, or never if null. */
-    private class Tokens(var next: String? = null) : PushTokens {
+    /**
+     * Firebase's tokens as a test gives them: each question answered with [next] on the main thread, or with [failure],
+     * or never if both are null.
+     */
+    private class Tokens(var next: String? = null, var failure: Throwable? = null) : PushTokens {
         val asked = mutableListOf<(Result<String>) -> Unit>()
         var deletions = 0
 
         override fun token(answer: (Result<String>) -> Unit) {
             asked += answer
             next?.let { token -> Handler(Looper.getMainLooper()).post { answer(Result.success(token)) } }
+            failure?.let { error -> Handler(Looper.getMainLooper()).post { answer(Result.failure(error)) } }
         }
 
         override fun delete() {
@@ -475,6 +479,26 @@ class NotificationsTest {
         assertEquals(app.localizer.text("native.apnsTokenError"), app.localizer.errorMessage(error!!))
         assertFalse(app.parcels.notificationsEnabledOnDevice)
         // Not a refusal: the invitation can still come.
+        assertFalse(app.parcels.notificationInvitationDismissed)
+    }
+
+    @Test
+    fun aTokenFirebaseRefusesEndsTheWaitThere() {
+        // Firebase answers that it can give none, as without a network: the reader is told then, not 8 s later.
+        val app = container(Tokens(failure = java.io.IOException("SERVICE_NOT_AVAILABLE")))
+        signIn(app)
+        allow()
+
+        var outcome: Result<Boolean>? = null
+        app.scope.launch { outcome = runCatching { app.parcels.enableNotifications(AppLanguage.En) } }
+        var tenths = 0
+        while (outcome == null && tenths < 100) {
+            shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(100))
+            tenths++
+        }
+        assertTrue("$outcome", outcome?.exceptionOrNull() is DeliveryApiError.PushTokenUnavailable)
+        assertTrue("Waited $tenths tenths of a second", tenths < 10)
+        assertFalse(app.parcels.notificationsEnabledOnDevice)
         assertFalse(app.parcels.notificationInvitationDismissed)
     }
 

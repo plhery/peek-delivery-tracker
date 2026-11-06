@@ -803,6 +803,7 @@ describe('carrier brand', () => {
       'walker-logistics',
       'xpress-freight-management',
       'yuexi-logistics',
+      'dongdu',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

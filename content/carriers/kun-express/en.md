@@ -82,7 +82,7 @@ Kun Express publishes no help for recipients and no warning about fake delivery 
 
 [Peek](/) names Kun Express at once from a KUN number with 10 digits, which no other carrier in its catalog shares. Type or paste the number itself: Peek takes no Kun Express tracking links.
 
-Peek reads Kun Express's own tracking every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with each scan's place where Kun Express gives one, and the destination country. Each scan is read on the clock Kun Express gives it and shown in your device's time zone; a USPS scan without a time shows only its day. Where Kun Express's page repeats a USPS scan, Peek shows it once, without USPS's explanation or ZIP codes. Peek leaves out the recipient's name, which Kun Express's page shows, and gives no expected delivery date.
+Peek reads Kun Express's own tracking every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with each scan's place where Kun Express gives one, and the destination country. Each scan is read on the clock Kun Express gives it and shown in your device's time zone; a USPS scan without a time shows only its day. Where Kun Express's page repeats a USPS scan, Peek shows it once, without USPS's explanation or ZIP codes. Kun Express's record can also carry its `KUN Warehouse` departure again, weeks after USPS delivered the parcel: Peek leaves out a `KUN Warehouse` line dated a day or more after a delivery. Peek leaves out the recipient's name, which Kun Express's page shows, and gives no expected delivery date.
 
 `Shipment information received` appears in Peek's own words. The other lines, USPS's included, show as written, except exact matches such as `Delivered`.
 
@@ -120,5 +120,5 @@ No. Kunyoung Express is a Korean carrier with numeric tracking numbers; Kun Expr
 - [Kun Express: Overseas Warehouse (US, Canada, Germany)](https://www.kun-express.com/product_c_en) – warehouses abroad and their delivery carriers
 - [Kun Express: About us](https://www.kun-express.com/about_en) – company name, Hangzhou headquarters, branches, business
 - [Kun Express: Contact us](https://www.kun-express.com/contact_en) – contact form
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, scan wordings and their meaning, copied USPS scans and their clocks, search by reference, what Peek shows and leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, scan wordings and their meaning, copied USPS scans and their clocks, search by reference, what Peek shows and leaves out (a `KUN Warehouse` line dated a day or more after the delivery included)
 :::

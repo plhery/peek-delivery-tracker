@@ -19,6 +19,8 @@ DHLink publishes no number format. Its tracker takes up to 40 numbers at once an
 | `YLUS0000000000` | YLUS and 10 digits: a US line that GOFO delivers. |
 | `QH000000000000FS` | QH, 12 digits, FS: another US line that GOFO delivers. |
 | `EYT0000000000HZ` | EYT, 10 digits, HZ: a US line that SwiftX delivers. |
+| `CYS00000000000` | CYS and 11 digits: a US line that [UniUni](carrier:uniuni) delivers. |
+| `JXCAA0000000000YQ` | JXC, two letters, 10 digits, YQ: the shape of [Juxi Express](carrier:juxi-express)'s waybills, which DHLink's tracker also answers for some parcels on a US line. For now, Peek asks DHLink first about a number of this shape. |
 | `RR000000005CN` | Two letters, 9 digits and CN: a [China Post](carrier:china-post) number. Some DHLink parcels travel with China Post under such a number. |
 | `GFUS00000000000000` | Not DHLink's: a [GOFO Express](carrier:gofo) number, the last leg of some US lines. |
 
@@ -69,7 +71,7 @@ As read on 4 November 2026, DHLink's contact page lists one customer service add
 
 ## Track a DHLink parcel with Peek
 
-[Peek](/) can't tell DHLink by the number's shape alone: its FC, XZG, YLUS, QH and EYT numbers are only weak matches. Paste it all the same: Peek follows more than 3,500 carriers. It shows "Checking tracking services…" and then "DHLink has this parcel." when DHLink knows the number; otherwise pick DHLink with "Change". A CN number goes to China Post.
+[Peek](/) can't tell DHLink by the number's shape alone: its FC, XZG, YLUS, QH, EYT, CYS and JXC numbers are only weak matches. Paste it all the same: Peek follows more than 3,500 carriers. It shows "Checking tracking services…" and then "DHLink has this parcel." when DHLink knows the number; otherwise pick DHLink with "Change". A JXC number may be Juxi Express's too: for now, Peek asks DHLink first and, while nobody lists the number yet, shows the parcel as "Probably DHLink"; if the seller shipped with Juxi, pick Juxi Express with "Change". A CN number goes to China Post.
 
 Peek reads DHLink's tracker. It shows the status, the history with each scan's place and the destination country, and lists each scan once. Scans in China are read on Beijing time and USPS scans on the time of their US state; others keep the time DHLink gives. DHLink gives no delivery time, weight or service name, and Peek drops postcodes and order references. Its only delivery estimate is a relayed USPS "Out for Delivery, Expected Delivery …" scan read on its US state's time: while that scan is the newest, Peek shows that day's window when the scan gives one; a scan with only a latest time adds no estimate, since "Out for delivery" already means today. When the "Last Leg No." is a GOFO number (GFUS and 14 digits), a SwiftX one (SWX and 18 digits) or a DPD Switzerland one (14 digits starting 060 or 061), Peek shows that carrier and its number, asks it and switches to it once it shows newer progress. Other last-leg numbers stay on DHLink's history.
 
@@ -83,7 +85,7 @@ DHgate's cross-border logistics platform, run by 驼飞侠科技（北京）有�
 
 ### Who delivers my DHLink package?
 
-A carrier in your country. On US lines, DHLink hands parcels to UPS, USPS or FedEx, or to GOFO or SwiftX; in Switzerland, sometimes to DPD. Look for the "Last Leg No." on DHLink's result.
+A carrier in your country. On US lines, DHLink hands parcels to UPS, USPS or FedEx, or to GOFO, SwiftX or UniUni; in Switzerland, sometimes to DPD. Look for the "Last Leg No." on DHLink's result.
 
 ### What does "The goods have been delivered to UPS/USPS/Fedex" mean?
 
@@ -97,5 +99,5 @@ DHLink has handed the parcel to the US carrier. It isn't delivered to you yet: t
 - [DHLink: Service agreement (服务协议)](https://www.dhlink.com/agreementPage/service) – operator 驼飞侠科技（北京）有限公司
 - [DHgate Seller Help: DHLink物流异常件赔付规则 (DHLink compensation rules)](https://seller.dhgate.com/help/c7502/516002.html) – compensation for sellers, logistics types, exclusions for buyer-caused late delivery and failed clearance, claims within 90 days of the logistics order
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, for goods bought outside the EU, paid by the seller or the delivery company, which may pass it on at checkout or before delivery
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, scan wordings, last-leg partners, what Peek reads and shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes (CYS on a UniUni US line; JXC shared with Juxi Express, DHLink asked first), scan wordings, last-leg partners, what Peek reads and shows
 :::

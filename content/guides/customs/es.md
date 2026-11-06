@@ -88,7 +88,7 @@ Dónde pagas depende de la compra:
 | Compra de más de 150 € | Nada, si la tienda lo pagó todo por adelantado (entrega con derechos pagados) | Arancel según el producto, la tasa de tramitación de 2 € por tipo de producto e IVA. Si Correos tramita el DUA, también sus tarifas por el DUA, la presentación en aduana y la manipulación, que verás antes en su presupuesto. En la Península y Baleares, en 2026, el DUA de importación cuesta 26,39 € y la manipulación, 6,27 €, IVA incluido |
 | Regalo de un particular | Nada, si vale 45 € o menos sin contar el envío y no lo has pagado tú. Aun así, se declara en aduana | IVA y arancel, si vale más |
 | Envío a Canarias | El IGIC, hasta 150 € y salvo excepciones | El arancel de 3 € y la tasa de tramitación de 2 € por tipo de producto, si viene de fuera de la UE y la tienda no los cobró. El AIEM, un arbitrio canario que solo grava los productos de su lista: el 5, el 10 o el 15 %, según el producto. En las compras se paga desde el primer euro, también en las de hasta 150 € que no llevan IGIC, y venga de donde venga el pedido, incluida la Península. Todo lo que entra en Canarias se declara en aduana, aunque venga de la Península o de otro país de la UE |
-| Envío a Ceuta o Melilla | El arancel de 3 € | Los impuestos locales, como el IPSI, si corresponden. Todo lo que entra se declara en aduana, aunque venga de la Península o de otro país de la UE |
+| Envío a Ceuta o Melilla | El arancel de 3 € y la tasa de tramitación de 2 €, porque Ceuta y Melilla no forman parte del territorio aduanero de la UE | Los impuestos locales, como el IPSI, si corresponden. Todo lo que entra se declara en aduana, aunque venga de la Península o de otro país de la UE |
 
 ### Qué significa «3 € por tipo de producto»
 
@@ -145,7 +145,7 @@ Si lo devuelves a la tienda:
 - **Guarda la factura y el justificante de pago:** la AEAT puede pedírtelos durante los cuatro años siguientes a la compra.
 
 :::sources
-- [Correos: Arancel para envíos de bajo valor en la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – 3 € por tipo de producto, Arancel UE, PDDP, IOSS, pago, Canarias, Ceuta y Melilla, devolución
+- [Correos: Arancel para envíos de bajo valor en la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – 3 € por tipo de producto, Arancel UE, PDDP, IOSS, pago, Canarias, Ceuta y Melilla (ni arancel ni Tasa UE de 2 €: fuera del territorio aduanero de la UE), devolución
 - [Correos: Gestión aduanera](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera) – qué pasa por aduana, paquetes pendientes de tramitación aduanera
 - [Correos: Tramitación aduanera en la importación](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion) – factura, tarifa fuera de IOSS, IVA, IGIC e IPSI, Reino Unido
 - [Correos: Importación en Península y Baleares](https://www.correos.es/es/es/particulares/recibir/tramitacion-aduanera-en-la-importacion/importacion-en-peninsula-y-baleares) – trámite para cualquier envío, H7 y DUA ordinario

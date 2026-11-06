@@ -115,7 +115,7 @@ A veces, como último recurso:
 
 ### ¿Puede Peek encontrar mi paquete?
 
-No. Como cualquier [localizador universal](guide:universal-tracker), [Peek](/) solo muestra lo que publica el transportista y no puede contactar con él ni reclamar por ti. Eso sí, consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto y puede enviarte una notificación, así llegas a la puerta poco después del escaneo «Entregado».
+No. Como cualquier [localizador universal](guide:universal-tracker), [Peek](/) solo muestra lo que publica el transportista y no puede contactar con él ni reclamar por ti. Eso sí, consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de la empresa) y puede enviarte una notificación, así llegas a la puerta poco después del escaneo «Entregado». A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (GLS en la mayoría de los países y Royal Mail cada hora, Poste Italiane y PostNL cada 30 minutos).
 
 ### ¿Tengo que denunciar el robo a la policía?
 

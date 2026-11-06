@@ -95,7 +95,7 @@ Peek reads YTO's own tracking in China, not YTO International's. It shows the st
 
 YTO gives no expected delivery date. Peek leaves out couriers' names and phone numbers, the recipient's details and collection addresses: YTO's own tracker has those. YTO answers any number in a valid shape, so no scans yet doesn't prove a mistake: Peek keeps checking.
 
-It checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact YTO or the seller for you.
+It checks every 10 minutes, or every 2 minutes from 6 a.m. China time on the day YTO scans the parcel out for delivery, while YTO's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact YTO or the seller for you.
 
 ## Questions about YTO Express tracking
 

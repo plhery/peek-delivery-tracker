@@ -87,7 +87,7 @@ Peek reads JD's international tracking: the status, each step in JD's words with
 
 For a number starting with JDJ and 12 digits, or JDAZ and 11, Peek also opens JD's Chinese tracker on jdl.com when the international one has nothing. It shows those lines in Chinese, without the courier's name, phone number or the name of whoever signed. For other JD numbers, Peek doesn't open the Chinese tracker: if a parcel inside China shows nothing in Peek, look it up on jdl.com. An empty answer from JD doesn't prove the number wrong: Peek keeps checking.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery (every 5 when it has to open JD's Chinese tracker). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact JD or the shop for you.
+Peek checks every 10 minutes, and every 2 minutes (every 5 when it has to open JD's Chinese tracker) from 6 a.m. local time on the day JD scans the parcel out for delivery, while JD's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact JD or the shop for you.
 
 ## Questions about JD Logistics tracking
 

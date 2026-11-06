@@ -91,7 +91,7 @@ Juxi ne donne aucun contact, formulaire ou bureau pour les destinataires en Belg
 
 ## Suivre un colis Juxi Express avec Peek
 
-[Peek](/) ne peut pas reconnaître Juxi Express à la seule forme JXC : le suivi de DHLink, la plateforme logistique de DHgate, connaît aussi certains de ces numéros. Quand tu en ajoutes un, Peek affiche « Vérification des services de suivi… » et interroge DHLink ; si DHLink le connaît, Peek affiche « DHLink a ce colis. » et le suit là-bas. Si personne ne le connaît encore, le colis affiche « Probablement DHLink » pendant que Peek continue de vérifier. Pour le suivre comme colis Juxi Express, touche « Changer » et choisis Juxi Express sous « Correspond à ce numéro ». Il n'y a pas de lien de suivi Juxi à coller, et il ne faut ni compte, ni code postal, ni numéro de téléphone. Si ton numéro n'a pas cette forme, colle-le quand même : Peek suit plus de 3 500 transporteurs.
+[Peek](/) reconnaît tout de suite un numéro Juxi Express de forme JXC, sauf quand les deux lettres après JXC sont YI ou ZO : le suivi de DHLink, la plateforme logistique de DHgate, connaît aussi certains de ces numéros-là. Quand tu en ajoutes un, Peek affiche « Vérification des services de suivi… » et interroge DHLink ; si DHLink le connaît, Peek affiche « DHLink a ce colis. » et le suit là-bas. Si personne ne le connaît encore, le colis affiche « Probablement DHLink » pendant que Peek continue de vérifier. Pour le suivre comme colis Juxi Express, touche « Changer » et choisis Juxi Express sous « Correspond à ce numéro ». Il n'y a pas de lien de suivi Juxi à coller, et il ne faut ni compte, ni code postal, ni numéro de téléphone. Si ton numéro n'a pas cette forme, colle-le quand même : Peek suit plus de 3 500 transporteurs.
 
 Juxi n'a plus de page de suivi que Peek pourrait lire : le bouton « 在线追踪 » (suivi en ligne) de son site n'ouvre plus rien. Peek suit donc les colis Juxi via des services de suivi et affiche le statut et l'historique qu'ils ont, dans leur formulation ; les libellés exacts qu'il connaît, comme `Delivered`, s'affichent avec ses propres mots en français. Cet historique peut être en retard sur celui du transporteur local, et pour certains colis il n'y a encore rien.
 
@@ -107,7 +107,7 @@ Un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en 
 
 ### Où suivre un colis Juxi Express ?
 
-Dans le champ ci-dessus, car Juxi n'a plus de suivi à lui. Pour l'instant, Peek interroge d'abord DHLink, dont le suivi connaît certains numéros JXC ; pour suivre ton colis comme un colis Juxi, touche « Changer » en l'ajoutant et choisis Juxi Express. Pour sa ligne de petits colis vers le Royaume-Uni et l'Allemagne, Juxi renvoie au service de suivi 17TRACK, qui le répertorie sous le nom SHJX. 17TRACK ne fait qu'afficher le suivi : il dit ne pouvoir ni modifier une livraison, ni rembourser, ni accepter une réclamation. Une fois le colis chez le transporteur local, tu peux aussi le suivre chez lui avec son propre numéro.
+Dans le champ ci-dessus, car Juxi n'a plus de suivi à lui. Peek reconnaît un numéro JXC comme celui de Juxi, sauf s'il porte YI ou ZO après JXC : pour ceux-là, Peek interroge d'abord DHLink, dont le suivi en connaît certains ; pour suivre un tel colis comme un colis Juxi, touche « Changer » en l'ajoutant et choisis Juxi Express. Pour sa ligne de petits colis vers le Royaume-Uni et l'Allemagne, Juxi renvoie au service de suivi 17TRACK, qui le répertorie sous le nom SHJX. 17TRACK ne fait qu'afficher le suivi : il dit ne pouvoir ni modifier une livraison, ni rembourser, ni accepter une réclamation. Une fois le colis chez le transporteur local, tu peux aussi le suivre chez lui avec son propre numéro.
 
 ### Qui livre les colis Juxi Express en Belgique et en France ?
 
@@ -134,5 +134,5 @@ Un transporteur de ton pays, mais Juxi ne dit pas lequel. Pour ses produits post
 - [Douane : IMPORT-EXPORT : quels changements sont à attendre dans les prochaines semaines ?](https://www.douane.gouv.fr/actualites/import-export-quels-changements-sont-attendre-dans-les-prochaines-semaines) – taxe « petits colis » remplacée par le droit forfaitaire de 3 € le 1er juillet 2026
 - [Commission européenne : EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – frais de traitement de 2 € par article depuis le 1er novembre 2026
 - [17TRACK : Suivi SHJX](https://www.17track.net/fr/carriers/shjx) – Juxi listé sous SHJX, rôle de 17TRACK
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme JXC, DHLink interrogé en premier pour les numéros JXC, plus de suivi Juxi, suivi via des services de suivi, ce que Peek affiche
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme JXC, DHLink interrogé en premier pour les numéros JXCYI et JXCZO, plus de suivi Juxi, suivi via des services de suivi, ce que Peek affiche
 :::

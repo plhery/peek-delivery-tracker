@@ -54,7 +54,7 @@ HuaHan's tracker lists each scan with a time, a wording and a place, newest firs
 | `The courier will deliver the parcel soon. Additional details are available in the SAMEDAY app, email or SMS.` | On the delivery run, in the words of [Sameday](carrier:sameday), a courier in Romania and Bulgaria. | "Out for delivery" |
 | `The parcel has been successfully delivered.` | Delivered. | "Delivered" |
 
-HuaHan files the local carrier's out-for-delivery, pickup-point and delivery scans under codes of its own, and Peek goes by the code, whatever the words: "Out for delivery", "Ready for pickup" or "Delivered".
+HuaHan files the local carrier's out-for-delivery, pickup-point and delivery scans under codes of its own, and Peek shows them as "Out for delivery", "Ready for pickup" or "Delivered", unless the words name another step: HuaHan also puts USPS's departure from a distribution centre under its out-for-delivery code.
 
 **Two lines that confuse people.** `We will pick up your parcel from the sender soon.` can turn up near the start, before HuaHan has even received the parcel in China: it's the local carrier's notice that it has been told about the parcel, not a pickup from you. Peek shows "Label created". `The parcel was redirected. As soon as it is in the couriers possession, it will be processed as requested.` is that carrier noting a redirection you asked for, also written while the parcel is still in China. It moves nothing, and Peek gives it no status of its own.
 
@@ -115,7 +115,7 @@ When HuaHan names a local carrier Peek knows, with a number of that carrier's sh
 
 When HuaHan's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the export-clearance line `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, the customs scans of China Post that HuaHan passes on in Chinese for a parcel it sends by post (such as `送交出口海关` and `送交境外进口海关`), the delivery run, a pickup point and the delivery, not HuaHan's other export-customs scans or flights. Peek can't contact HuaHan or the seller for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while HuaHan's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the export-clearance line `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, the customs scans of China Post that HuaHan passes on in Chinese for a parcel it sends by post (such as `送交出口海关` and `送交境外进口海关`), the delivery run, a pickup point and the delivery, not HuaHan's other export-customs scans or flights. Peek can't contact HuaHan or the seller for you.
 
 ## Questions about HuaHan tracking
 

@@ -107,7 +107,7 @@ Hai spedito dopo l'ultima data? Nel 2025 Poste avvisava che le spedizioni affida
 - Ancora fermo dopo Natale? | Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 :::
 
-Aspetti un regalo? Incolla il numero su [Peek](/) e scegli le notifiche «Solo la consegna»: quando il pacco è in consegna lo controlla fino a ogni 2 minuti, ma non può farlo arrivare prima.
+Aspetti un regalo? Incolla il numero su [Peek](/) e scegli le notifiche «Solo la consegna»: quando il pacco è in consegna lo controlla fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking del corriere stesso), ma non può farlo arrivare prima. Quando rispondono servizi di tracciamento come 17TRACK, lo controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (GLS nella maggior parte dei Paesi e Royal Mail ogni ora, Poste Italiane e PostNL ogni 30 minuti).
 
 :::sources
 - [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi/) – nessuna data 2026, sospensioni e ritardi per l'estero, Raccomandata Internazionale, Stati Uniti

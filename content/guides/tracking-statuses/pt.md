@@ -72,7 +72,7 @@ Normalmente, sim:
 
 Um estado que engana: na InPost, `Chegada ao centro local de distribuição` quer dizer que a encomenda está no centro mais próximo do destino, prestes a sair para distribuição ou a ser colocada num ponto InPost. Ainda não vai na carrinha.
 
-No [Peek](/), esta etapa chama-se «Em distribuição»: no último troço, o seguimento é verificado até de 2 em 2 minutos, e as notificações podem ficar só para o dia da entrega.
+No [Peek](/), esta etapa chama-se «Em distribuição»: no último troço, o seguimento é verificado até de 2 em 2 minutos (no dia em que a encomenda sai para entrega, a partir das 6h00, hora local, e enquanto for o próprio seguimento da transportadora a responder), e as notificações podem ficar só para o dia da entrega. Através de serviços de seguimento como o 17TRACK, é verificado de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (a GLS na maioria dos países e a Royal Mail de hora a hora, a Poste Italiane e a PostNL de 30 em 30 minutos).
 
 ## «Entrega não conseguida»: e agora?
 

@@ -97,7 +97,7 @@ DAI Post's channels, as read on 1 November 2026:
 
 Peek shows the status, each line in DAI Post's words, the town and country of each scan, the expected delivery date when DAI Post gives one, and the delivery time. It shows no pick up point, service name, weight or proof of delivery. "Open the DAI Post website" opens the number on DAI Post's tracker. In Peek's code, some [Asendia](carrier:asendia) parcels, and some [ePost Global](carrier:epost-global) parcels to New Zealand, reach DAI Post: their tracking shows its scans.
 
-Peek checks every 10 minutes, or every 2 minutes once out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact DAI Post or the shop for you.
+Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DAI Post scans the parcel out for delivery, while DAI Post's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact DAI Post or the shop for you.
 
 ## Questions about DAI Post tracking
 

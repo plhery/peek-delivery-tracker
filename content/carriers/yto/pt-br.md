@@ -111,7 +111,7 @@ O Peek lê o rastreio doméstico da YTO, na China, e não o da YTO International
 
 A YTO não dá data prevista de entrega. O Peek deixa de fora os nomes e telefones dos entregadores, os dados de quem recebe e os endereços de retirada: essas informações ficam no rastreador da própria YTO. A YTO responde a qualquer código num formato válido, então a falta de registros não prova que o código está errado: o Peek mostra "Aguardando a transportadora" e continua consultando.
 
-O Peek consulta a YTO a cada 10 minutos e a cada 2 minutos quando o pacote sai para entrega. Depois de dois dias sem movimentação nova (12 horas enquanto mostra "Recebida pela transportadora"), passa a consultar de hora em hora. Você escolhe os avisos: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não fala com a YTO nem com o vendedor por você.
+O Peek consulta a YTO a cada 10 minutos e a cada 2 minutos quando o pacote sai para entrega: só nesse dia, a partir das 6h no fuso da China e enquanto o rastreio da própria YTO responder. Por serviços de rastreamento, a consulta é a cada 15 minutos. Depois de dois dias sem movimentação nova (12 horas enquanto mostra "Recebida pela transportadora"), passa a consultar de hora em hora. Você escolhe os avisos: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não fala com a YTO nem com o vendedor por você.
 
 ## Perguntas sobre o rastreio YTO Express
 

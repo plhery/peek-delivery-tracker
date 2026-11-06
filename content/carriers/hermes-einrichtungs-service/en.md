@@ -85,7 +85,7 @@ Hermes Germany sends no SMS, but HES does, so a text from HES can be genuine.
 
 Peek shows the status and history in HES's German wording, the planned delivery day with its time window when myhes.de gives one, the shop or dealer that sold the goods and the time of delivery. HES gives no places, so nothing appears on the map, and the van's live tracking isn't shown. A cancelled or returned order shows as a problem. Your name, address and delivery instructions are left out, and times are read as German time.
 
-It checks every 10 minutes, or every 2 once the van is out, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly.
+It checks every 10 minutes, or every 2 on the day the van goes out, from 6 a.m. local time or, when HES gives a time window, from half an hour before it opens, while HES's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Hermes Einrichtungs-Service tracking
 

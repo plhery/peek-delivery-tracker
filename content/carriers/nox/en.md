@@ -90,7 +90,7 @@ If none does yet, the parcel reads "No tracking history yet" while Peek keeps ch
 
 Peek reads the status, each scan's German wording and time (as German time) and the delivery time. It leaves out the scan place and the remark, and it asks for no postcode, so it doesn't show what the tracker shows after the postcode check. Peek shows no expected delivery day, weight, drop-off place or delivery photo.
 
-Day and night, Peek checks every 10 minutes, or every 2 once a shipment is out for delivery. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't set your drop-off place or file a complaint for you.
+Day and night, Peek checks every 10 minutes, or every 2 from 6:00 German time on the day nox scans a shipment out for delivery, while nox's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't set your drop-off place or file a complaint for you.
 
 ## Questions about nox tracking
 

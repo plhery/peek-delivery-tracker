@@ -76,7 +76,7 @@ Juxi lists no contact, form or office for recipients outside China. For anything
 
 ## Tracking Juxi Express parcels with Peek
 
-[Peek](/) can't tell Juxi Express by the JXC shape alone, since [DHLink](carrier:dhlink)'s tracker knows some of these numbers too. While you add one, Peek shows "Checking tracking services…" and asks DHLink; when DHLink knows it, Peek shows "DHLink has this parcel." and follows it there. If nobody lists it yet, the parcel shows "Probably DHLink" while Peek keeps checking. To follow it as a Juxi Express parcel, press "Change" and pick Juxi Express under "Fits this number". There's no Juxi tracking link to paste, and no account, postcode or phone number is needed.
+[Peek](/) names Juxi Express straight away for a number of the JXC shape. Only when the two letters after JXC are YI or ZO is the shape not enough, since [DHLink](carrier:dhlink)'s tracker knows some of those numbers too. While you add one of those, Peek shows "Checking tracking services…" and asks DHLink; when DHLink knows it, Peek shows "DHLink has this parcel." and follows it there. If nobody lists it yet, the parcel shows "Probably DHLink" while Peek keeps checking. To follow it as a Juxi Express parcel, press "Change" and pick Juxi Express under "Fits this number". There's no Juxi tracking link to paste, and no account, postcode or phone number is needed.
 
 Juxi has no tracking page left for Peek to read: the tracking button on its home page no longer opens a tracker. So Peek follows Juxi parcels through tracking services and shows the status and history those services hold, in their wording. That history can lag behind the local carrier's own, and for some parcels there's nothing yet.
 
@@ -92,7 +92,7 @@ A Shanghai forwarder, Shanghai Juxi International Freight Forwarding Co., Ltd., 
 
 ### Where can I track a Juxi Express parcel?
 
-In the box above, since Juxi has no tracker of its own any more. For now, Peek asks DHLink first about a JXC number, since DHLink's tracker knows some of them; to follow the parcel as Juxi's, press "Change" while you add it and pick Juxi Express. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK, which lists it as SHJX. 17TRACK only shows tracking: it says it can't change a delivery, refund you or approve a claim. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
+In the box above, since Juxi has no tracker of its own any more. Peek takes a JXC number as Juxi's, except one with YI or ZO after JXC: it asks DHLink first about those, since DHLink's tracker knows some of them; to follow such a parcel as Juxi's, press "Change" while you add it and pick Juxi Express. For its small-parcel line to the UK and Germany, Juxi points to the tracking service 17TRACK, which lists it as SHJX. 17TRACK only shows tracking: it says it can't change a delivery, refund you or approve a claim. Once the local carrier has the parcel, you can also track it there with that carrier's own number.
 
 ### Who delivers Juxi Express parcels?
 
@@ -120,5 +120,5 @@ It depends on the line the seller chose. Juxi quotes 5 to 8 days on its UK line,
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 customs duty per item up to €150 from 1 July 2026, €2 Union handling fee from 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 fee per item like the €3, at any value, collected by customs from the declarant, which can charge it to the buyer at sale
 - [17TRACK: SHJX Tracking](https://www.17track.net/en/carriers/shjx) – Juxi listed as SHJX, 17TRACK's role
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC number shape, DHLink asked first for JXC numbers, DHLink's tracker answering some JXC numbers on a US line, no Juxi tracker left, how Peek follows Juxi parcels through tracking services
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – JXC number shape, DHLink asked first for JXCYI and JXCZO numbers, DHLink's tracker answering some JXC numbers on a US line, no Juxi tracker left, how Peek follows Juxi parcels through tracking services
 :::

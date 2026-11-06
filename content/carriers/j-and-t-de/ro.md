@@ -100,7 +100,7 @@ Peek arată statusul, fiecare scanare la ora ei exactă și ora livrării. Pentr
 
 Până când J&T scanează coletul, Peek arată „Waiting for the carrier” și continuă să întrebe. Când trackerul J&T nu poate fi accesat sau nu cunoaște numărul, Peek întreabă servicii de urmărire și îți arată istoricul dat de ele, cu propriile lor formulări.
 
-Peek verifică coletul la fiecare 10 minute și, cât e în livrare, la fiecare 2 minute. Dacă trec două zile fără o scanare nouă (12 ore, cât timp arată „Received by carrier”), îl verifică o dată pe oră. Pentru notificări alegi „Every scan” (fiecare scanare), „Important steps” (pașii importanți) sau „Delivery only” (doar livrarea). Peek nu poate contacta J&T sau magazinul în locul tău, nu poate schimba adresa și nu poate programa o nouă livrare.
+Peek verifică coletul la fiecare 10 minute și, cât e în livrare, la fiecare 2 minute: doar în ziua aceea, de la ora 6:00, ora locală, și cât timp răspunde trackerul J&T însuși. Prin servicii de urmărire, îl verifică la fiecare 15 minute. Dacă trec două zile fără o scanare nouă (12 ore, cât timp arată „Received by carrier”), îl verifică o dată pe oră. Pentru notificări alegi „Every scan” (fiecare scanare), „Important steps” (pașii importanți) sau „Delivery only” (doar livrarea). Peek nu poate contacta J&T sau magazinul în locul tău, nu poate schimba adresa și nu poate programa o nouă livrare.
 
 ## Întrebări despre urmărirea J&T Express în Germania
 

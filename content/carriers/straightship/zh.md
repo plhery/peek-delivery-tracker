@@ -94,7 +94,7 @@ Straightship 为用它发货的企业办理清关，它的页面没有说会不�
 
 Peek 读取的是 Straightship 自己的查询页面，显示状态、物流记录（含每次扫描的城市和省份）和送达时间。页面注明时间是 UTC，Peek 就按 UTC 读取，再换算成你设备所在的时区显示。`Package will be delivered before 9:00pm` 算作“派送中”，`Attempted Delivery` 和上面两条派送失败记录算作“派送未成功”，`Delivery is in progress` 算作“运输中”；`Delivered` 这一行在 Peek 里显示为“已签收”。Straightship 不提供预计送达日期，Peek 也就不显示；客户参考号和送达照片 Peek 不显示，请到 Straightship 的查询页面看。Straightship 不写其他快递公司，所以 Peek 一直用 Straightship 的单号跟踪到底。
 
-Straightship 还查不到这个单号时，Peek 显示“等待快递公司更新”；有了面单信息，就显示“已生成面单”。Peek 全天候每 10 分钟查询一次，包裹派送中时每 2 分钟一次。两天没有新记录（状态还是“已生成面单”或“已揽收”时为 12 小时），Peek 就改为每小时查询一次。“通知范围”可以选“每次扫描”“重要环节”或“仅派送当天”。Peek 不能替你联系 Straightship 或卖家。
+Straightship 还查不到这个单号时，Peek 显示“等待快递公司更新”；有了面单信息，就显示“已生成面单”。Peek 全天候每 10 分钟查询一次，包裹派送中时每 2 分钟一次（只在派送当天太平洋时间早上 6 点以后，且结果来自 Straightship 官方查询时；结果来自第三方查询服务时每 15 分钟一次）。两天没有新记录（状态还是“已生成面单”或“已揽收”时为 12 小时），Peek 就改为每小时查询一次。“通知范围”可以选“每次扫描”“重要环节”或“仅派送当天”。Peek 不能替你联系 Straightship 或卖家。
 
 ## 关于 Straightship 物流查询的常见问题
 

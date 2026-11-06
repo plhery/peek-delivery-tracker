@@ -80,7 +80,7 @@ As listed on CouriersPlease's Help Centre on 15 October 2026:
 
 Peek reads CouriersPlease's own tracking and shows its scans in CouriersPlease's wording, each with its state, and the Delivery ETA once CouriersPlease has scanned the parcel. It shows no collection point or proof of delivery for CouriersPlease.
 
-Peek checks every 10 minutes, or every 2 once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you when the status changes. For redelivery, a PIN or a claim, go to CouriersPlease or the shop.
+Peek checks every 10 minutes, or every 2 from 6 a.m. local time on the day CouriersPlease scans the parcel out for delivery, while CouriersPlease's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you when the status changes. For redelivery, a PIN or a claim, go to CouriersPlease or the shop.
 
 ## Questions about Couriers Please tracking
 

@@ -100,7 +100,7 @@ Peek mostra lo stato, ogni scansione con l'ora esatta e il momento della consegn
 
 Finché J&T non scansiona il pacco, Peek mostra «In attesa del corriere» e continua a chiedere. Se il tracking di J&T non risponde o non conosce il numero, Peek chiede ai servizi di tracking e mostra la loro cronologia, con le loro parole.
 
-Peek controlla ogni 10 minuti, e ogni 2 minuti quando il pacco è in consegna. Se per due giorni non arriva nessuna scansione nuova (12 ore se resta su «Preso in carico»), controlla una volta all'ora. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare J&T o il negozio al posto tuo, cambiare l'indirizzo o prenotare una nuova consegna.
+Peek controlla ogni 10 minuti, e ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di J&T; quando rispondono i servizi di tracciamento, ogni 15 minuti). Se per due giorni non arriva nessuna scansione nuova (12 ore se resta su «Preso in carico»), controlla una volta all'ora. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare J&T o il negozio al posto tuo, cambiare l'indirizzo o prenotare una nuova consegna.
 
 ## Domande sul tracking J&T Express Germany
 

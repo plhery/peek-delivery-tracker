@@ -85,7 +85,7 @@ As Correos Express's sites listed them on 9 October 2026 (none in English):
 
 A 16-digit number is shared, so [Peek](/) asks the likely carriers; a 23-digit number points to Correos Express, apart from the Australia Post case above. If Peek doesn't offer Correos Express, check the digits. Paste the number, not a link.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or delivery day only. It shows the status, the estimated delivery (only while the parcel is still on its way) and the history, with each scan's place on a map. It leaves out the proof of delivery, contact details and delivery comments, and can't contact Correos Express for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day Correos Express scans the parcel out for delivery, while Correos Express's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or delivery day only. It shows the status, the estimated delivery (only while the parcel is still on its way) and the history, with each scan's place on a map. It leaves out the proof of delivery, contact details and delivery comments, and can't contact Correos Express for you.
 
 ## Questions about Correos Express tracking
 

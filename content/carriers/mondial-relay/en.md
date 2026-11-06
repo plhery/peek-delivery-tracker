@@ -39,7 +39,7 @@ Mondial Relay's tracking is in French (or Dutch on its Belgian site), with no En
 | `Retiré par le destinataire`, `Colis livré au destinataire` | Picked up by you, or delivered to your home. |
 | `Retour à l'expéditeur` | Going back to the sender. |
 
-On a relay delivery, wait for `Disponible…` before you go. `Échec de livraison` means a home delivery failed, and `Votre colis a été livré à l'enseigne.` that a return reached the shop. Peek currently shows that line as "Delivered", though the shop got the parcel, not you.
+On a relay delivery, wait for `Disponible…` before you go. `Échec de livraison` means a home delivery failed, and `Votre colis a été livré à l'enseigne.` that the parcel reached the shop. If its history already showed it going back (`Retour à l'expéditeur`), Peek shows "Returned to sender"; on a return you sent to the shop, under its own number, it shows "Delivered".
 
 ## Mondial Relay parcel shops, lockers and missed deliveries
 
@@ -75,7 +75,7 @@ As listed on 10 October 2026.
 
 An 8-digit number also needs the "Delivery postcode": type the number alone, then the postcode in its field. Peek compares it with the recipient's as typed, in any country's format, but a Portuguese one needs all seven digits (1234-567, hyphen optional). A wrong one reads as not found. It's sent to Mondial Relay and, when needed, to tracking services.
 
-Peek shows Mondial Relay's French wordings as written and each scan's logistics site on a map, plus the expected day, delivery time and destination country when given. While the parcel waits, it shows the Point Relais or locker's name and address, never your pickup code or name. It checks every 10 minutes, or every few minutes once out for delivery, and can notify you of each change. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek doesn't follow parcels to other carriers. It reads InPost Spain's `FV` numbers on inpost.es, but can't promise to find InPost's other Spanish or Portuguese parcels.
+Peek shows Mondial Relay's French wordings as written and each scan's logistics site on a map, plus the expected day, delivery time and destination country when given. While the parcel waits, it shows the Point Relais or locker's name and address, never your pickup code or name. It checks every 10 minutes, or every few minutes on the day Mondial Relay scans the parcel out for delivery, from 6 a.m. Paris time, while Mondial Relay's own tracker answers (through tracking services, every 15 minutes), and can notify you of each change. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek doesn't follow parcels to other carriers. It reads InPost Spain's `FV` numbers on inpost.es, but can't promise to find InPost's other Spanish or Portuguese parcels.
 
 ## Questions about Mondial Relay tracking
 

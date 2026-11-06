@@ -106,7 +106,7 @@ Quantium's times carry no time zone, so Peek reads them all on one clock: the de
 
 When the number has the postal shape with a valid check digit and Quantium names the destination country, Peek also asks that country's post with the same number, such as [Australia Post](carrier:australia-post), [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [Canada Post](carrier:canada-post) or [NZ Post](carrier:nz-post). It follows the parcel there once that post shows fresh scans, and keeps Quantium's history. Not for every country: not for parcels to Singapore, Malaysia, Thailand, Hong Kong or Vietnam, for example, and never for ten-digit numbers.
 
-Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It has no help page to link for Quantium and can't contact Quantium or the shop for you: use the contacts above.
+Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Quantium scans the parcel out for delivery, while Quantium's own tracker answers (through tracking services, every 15 minutes). It can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It has no help page to link for Quantium and can't contact Quantium or the shop for you: use the contacts above.
 
 ## Questions about Quantium Solutions tracking
 

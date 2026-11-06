@@ -84,7 +84,7 @@ Per Poste Delivery Standard, Poste Italiane prevede la consegna in 5 giorni lavo
 
 Hai trovato un avviso perché non eri in casa? Leggi [mancata consegna pacco](guide:missed-delivery). Nessuna nuova scansione da giorni? Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 
-Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato ogni 2 minuti, e puoi impostare le notifiche su «Solo la consegna»: così smetti di aggiornare la pagina.
+Quando un pacco è in consegna con un corriere che Peek legge direttamente, viene ricontrollato ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e puoi impostare le notifiche su «Solo la consegna»: così smetti di aggiornare la pagina. Quando rispondono servizi di tracciamento come 17TRACK, Peek controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (GLS nella maggior parte dei Paesi e Royal Mail ogni ora, Poste Italiane e PostNL ogni 30 minuti).
 
 ## Il corriere consegna nei giorni festivi?
 

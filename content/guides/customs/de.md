@@ -67,7 +67,7 @@ Lass es nicht zu lange liegen:
 | Österreich | Bis zu dem Datum in der Benachrichtigung über das Zollhindernis. Danach geht das Paket zurück, wird vernichtet oder der Zollbehörde übergeben |
 | Schweiz | Antwortest du auf eine Wertabklärung nicht innerhalb von 3 Werktagen, kostet sie CHF 20.–. Online zahlen kannst du 20 Tage lang, danach kommt eine Mahnung mit QR-Rechnung |
 
-Keine Lust, ständig neu zu laden? Füge die Sendungsnummer in [Peek](/) ein: Dort wird sie tagsüber bis zu alle 10 Minuten geprüft, und du bekommst eine Mitteilung, sobald sich der Status ändert. Die Abgaben zahlen oder den Zoll beschleunigen kann Peek allerdings nicht. Tut sich lange nichts und kommt keine Aufforderung, lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
+Keine Lust, ständig neu zu laden? Füge die Sendungsnummer in [Peek](/) ein: Dort wird sie rund um die Uhr bis zu alle 10 Minuten geprüft, und du bekommst eine Mitteilung, sobald sich der Status ändert. Die Abgaben zahlen oder den Zoll beschleunigen kann Peek allerdings nicht. Tut sich lange nichts und kommt keine Aufforderung, lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
 ### Wie lange dauert es nach der Verzollung?
 

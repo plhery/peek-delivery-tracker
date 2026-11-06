@@ -91,7 +91,7 @@ Füg die 9-stellige Sendungsnummer ein. Stimmt ihre Prüfziffer, fragt [Peek](/)
 
 Peek zeigt den Status, den Verlauf mit Stadt und Land jedes Scans, das Zielland und den voraussichtlichen Liefertag, solange TNT einen nennt. Die Uhrzeiten zeigt Peek in der Zeitzone deines Geräts. Die Referenz des Versenders und die Unterschrift bleiben auf tnt.com. Weil TNT Nummern neu vergibt, folgt Peek der Sendung mit dem neuesten Scan: Prüf, ob die Strecke zu deiner passt.
 
-Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald die Sendung in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange die Sendung noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. TNT oder den Absender für dich kontaktieren, Zoll bezahlen oder die Zustellung ändern kann Peek nicht.
+Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald die Sendung in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange TNT selbst antwortet; über Tracking-Dienste alle 15 Minuten). Kommt zwei Tage lang nichts Neues (solange die Sendung noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen wählst du selbst: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. TNT oder den Absender für dich kontaktieren, Zoll bezahlen oder die Zustellung ändern kann Peek nicht.
 
 ## Fragen zur TNT Sendungsverfolgung
 

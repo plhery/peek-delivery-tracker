@@ -91,7 +91,7 @@ Le +41 44 744 64 64 est la centrale du groupe à Dietikon, pas une ligne colis :
 
 Pour un numéro de 13 chiffres commençant par 99990, il te demande le lien partagé complet (trackandtrace.planzergroup.com/shared/…, avec son accessKey), puis n'en lit que les étapes franchies, avec leur heure, et une date de livraison prévue : ni poids, ni dimensions, ni pays.
 
-Il vérifie le suivi toutes les 10 minutes, toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Planzer ne donne pas le lieu de ses scans : la carte n'en montre donc pas. Peek ne peut pas contacter Planzer à ta place.
+Il vérifie le suivi toutes les 10 minutes, toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison (le jour même, et tant que c'est le suivi de Planzer qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Planzer ne donne pas le lieu de ses scans : la carte n'en montre donc pas. Peek ne peut pas contacter Planzer à ta place.
 
 ## Questions sur le suivi de colis Planzer
 

@@ -79,7 +79,7 @@ Correos's channels, as read on 13 October 2026, are the same for English speaker
 
 Peek shows Correos's statuses in Correos's words: in Spanish, Portuguese or French if you use Peek in one of those, in English otherwise. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads every time on Madrid's clock, so a scan in the Canary Islands can show an hour early.
 
-A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks every 10 minutes (every 2 once out for delivery) and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't pay customs or change a delivery.
+A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks every 10 minutes (every 2 from 6 a.m. Madrid time on the day Correos scans the parcel out for delivery, while Correos's own tracker answers; through tracking services, every 15 minutes) and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't pay customs or change a delivery.
 
 ## Questions about Correos tracking
 

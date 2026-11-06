@@ -92,7 +92,7 @@ Pega el número de 9 cifras. Si su dígito de control es correcto, [Peek](/) pre
 
 Peek muestra el estado, el historial con la ciudad y el país de cada escaneo, el país de destino y la fecha prevista mientras TNT la da, con las horas en la zona horaria de tu dispositivo. La referencia y la firma se quedan en tnt.com. Como los números se repiten, Peek se queda con el envío del escaneo más reciente: comprueba que el recorrido es el tuyo.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede llamar a TNT ni al remitente, pagar la aduana ni cambiar una entrega.
+Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de TNT; a través de servicios de seguimiento, cada 15 minutos), y puede avisarte de «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede llamar a TNT ni al remitente, pagar la aduana ni cambiar una entrega.
 
 ## Preguntas sobre el seguimiento de TNT
 

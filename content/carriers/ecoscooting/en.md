@@ -88,7 +88,7 @@ When Cainiao or CACESA gives a `CNESP` or `CNPRT` number, or a label Peek recogn
 
 Peek shows the status, the history with Ecoscooting's exact times but no places, the weight, the delivery time and, once the parcel reaches a parcelshop, its name and address, kept after you pick it up. There's no expected delivery date. It leaves out the PIN, the shop's phone and hours, postcodes and order references. Lines appear in Ecoscooting's English, except a plain `Out for delivery`, which shows in Peek's own words. Ecoscooting never says a number doesn't exist, so a wrong number simply stays without updates.
 
-Peek checks every 10 minutes, or every 2 once the parcel is out for delivery, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek checks every 10 minutes, or every 2 from 6 a.m. local time on the day Ecoscooting scans the parcel out for delivery, while Ecoscooting's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Ecoscooting tracking
 

@@ -100,7 +100,7 @@ Peek citește serviciul de urmărire din spatele aplicației Cargus Mobile și �
 | `With courier` | E la curier, în livrare. |
 | `Delivered` | Livrat. |
 
-Peek verifică coletul la fiecare 10 minute, la fiecare 2 minute cât e la curier, și te poate anunța când se schimbă statusul. Dacă trec două zile fără noutăți (sau 12 ore, cât timp coletul e doar înregistrat ori preluat de curier), Peek îl verifică o dată pe oră. Cargus nu-i dă o zi estimată de livrare, așa că Peek nu arată niciuna. Peek lasă deoparte cine a semnat, PIN-ul de livrare, referința expeditorului și numărul de colete. Nu-ți spune nici în ce punct SHIP & GO sau locker te așteaptă coletul: pe acela îl afli din avizul Cargus. Peek nu poate contacta Cargus sau magazinul în locul tău.
+Peek verifică coletul la fiecare 10 minute, la fiecare 2 minute cât e la curier (doar în ziua aceea, de la ora 6:00, ora României, și cât timp răspunde trackingul Cargus însuși; prin servicii de urmărire, la fiecare 15 minute), și te poate anunța când se schimbă statusul. Dacă trec două zile fără noutăți (sau 12 ore, cât timp coletul e doar înregistrat ori preluat de curier), Peek îl verifică o dată pe oră. Cargus nu-i dă o zi estimată de livrare, așa că Peek nu arată niciuna. Peek lasă deoparte cine a semnat, PIN-ul de livrare, referința expeditorului și numărul de colete. Nu-ți spune nici în ce punct SHIP & GO sau locker te așteaptă coletul: pe acela îl afli din avizul Cargus. Peek nu poate contacta Cargus sau magazinul în locul tău.
 
 ## Întrebări despre urmărirea Cargus
 

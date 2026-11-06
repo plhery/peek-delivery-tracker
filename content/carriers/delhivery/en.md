@@ -86,7 +86,7 @@ Filed under Delhivery, a parcel shows "Waiting for the carrier" until its first 
 
 It files the lines under its own stages: `Picked Up` shows as "Received by carrier", `In Transit` as "In transit", `Dispatched` as "Out for delivery", `RTO` as "Returned to sender", and `LOST` or a cancellation as "Needs attention". A parcel delivered back to the seller shows as "Returned to sender", not "Delivered".
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks about once an hour. Alerts: "Every scan", "Important steps" or "Delivery only".
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day Delhivery scans the parcel out for delivery, while Delhivery's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks about once an hour. Alerts: "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Delhivery tracking
 

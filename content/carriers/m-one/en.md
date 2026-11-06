@@ -88,7 +88,7 @@ A number starting with `C`, `E`, `L` or `R`, ending in `RS` and with a valid che
 
 Peek reads M-ONE's own tracker. You get the status and the history in M-ONE's Serbian words, the depot that handled each step and the parcel's weight. M-ONE gives its times without a time zone. Peek reads them on Serbian time and shows them in your device's time zone. M-ONE's tracker gives no expected delivery day and no pickup point, so Peek shows neither. The sender's and recipient's names are left out. A parcel filed under M-ONE shows "Waiting for the carrier" until M-ONE knows the number, and Peek keeps checking.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't redirect a parcel, open a claim, or contact M-ONE or the shop for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while M-ONE's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't redirect a parcel, open a claim, or contact M-ONE or the shop for you.
 
 ## Questions about M-ONE tracking
 

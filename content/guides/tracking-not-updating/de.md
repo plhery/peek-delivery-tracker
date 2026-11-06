@@ -113,7 +113,7 @@ Innerhalb Deutschlands ist das langsam: DHL stellt Pakete in der Regel 1 bis 2 W
 
 ### Wie oft wird die Sendungsverfolgung aktualisiert?
 
-So oft, wie jemand dein Paket scannt. Schneller geht es nicht: Auch der DHL-Kundenservice kann eine Sendung nicht beschleunigen, und ein [Paket-Tracker](guide:universal-tracker) zeigt nur, was der Paketdienst veröffentlicht. [Peek](/) fragt tagsüber bis zu alle 10 Minuten beim Paketdienst nach und kann sich melden, sobald ein neuer Scan da ist. Das ständige Neuladen kannst du dir also sparen.
+So oft, wie jemand dein Paket scannt. Schneller geht es nicht: Auch der DHL-Kundenservice kann eine Sendung nicht beschleunigen, und ein [Paket-Tracker](guide:universal-tracker) zeigt nur, was der Paketdienst veröffentlicht. [Peek](/) fragt rund um die Uhr bis zu alle 10 Minuten beim Paketdienst nach und kann sich melden, sobald ein neuer Scan da ist. Das ständige Neuladen kannst du dir also sparen.
 
 ### Meine Sendungsnummer funktioniert nicht
 

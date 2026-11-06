@@ -82,7 +82,7 @@ PL and 16 digits isn't a shape GEODIS owns (PL stands for Poland), so Peek can't
 
 Peek reads Strefa Klienta in English and shows the status, each scan in GEODIS's English wording with the terminal's place, the delivery time and the destination country. Scans at Polish terminals are read on Warsaw time; a terminal abroad keeps its own clock. When a `Pseudoscan` row cancels earlier scans, Peek drops them too, and `Claim Received` leaves the status as it was. GEODIS's tracker gives no expected delivery date, weight, service name, recipient name or proof of delivery. Peek leaves out the delivery postcode and address, the item count, the terminals' codes and the remarks, which can name who signed.
 
-Peek checks every 10 minutes, and every 2 once the shipment is out for delivery. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or the delivery day only. It can't set a delivery date, arrange a pickup or file a claim: call GEODIS or ask the shop.
+Peek checks every 10 minutes, and every 2 from 6 a.m. local time on the day GEODIS scans the shipment out for delivery, while GEODIS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or the delivery day only. It can't set a delivery date, arrange a pickup or file a claim: call GEODIS or ask the shop.
 
 ## Questions about GEODIS Poland tracking
 

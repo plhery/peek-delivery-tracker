@@ -66,7 +66,7 @@ Usually, yes:
 
 Two look-alikes: Peek counts Royal Mail's `Ready for delivery` as in transit, not out for delivery. And at [DHL](carrier:dhl) in Germany, a loading scan shown more than once means the round wasn't finished: a delay of 1 to 2 days is possible.
 
-[Peek](/) checks up to every 2 minutes once a parcel is out for delivery, and its notifications can be set to delivery day only.
+[Peek](/) checks up to every 2 minutes once a parcel is out for delivery (on that day, from 6 a.m. local time, while the carrier's own tracker answers), and its notifications can be set to delivery day only. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (GLS in most countries and Royal Mail hourly, Poste Italiane and PostNL every 30 minutes).
 
 ## "Delivery attempted" or "notice left": what now?
 

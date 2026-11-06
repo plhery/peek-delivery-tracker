@@ -95,7 +95,7 @@ Peek shows the status, each scan with its town, region and country, and the dest
 
 When ECMS's record names a local carrier Peek knows, Peek shows "Delivery with" that carrier, with its number when ECMS's scans give one. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. If Peek reads that carrier's own tracker, it asks it too, and once that carrier shows a scan at least as recent as ECMS's latest, Peek follows the parcel there and keeps ECMS's scans. Otherwise, add the "LM Tracking No." as a parcel of its own: Peek follows more than 3,500 carriers.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers ECMS's customs step, the delivery run and the delivery, not its flights or warehouse scans. Peek can't contact ECMS or the seller for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while ECMS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers ECMS's customs step, the delivery run and the delivery, not its flights or warehouse scans. Peek can't contact ECMS or the seller for you.
 
 ## Questions about ECMS Express tracking
 

@@ -88,7 +88,7 @@ Come risultavano sulle pagine di Planzer il 9 ottobre 2026:
 
 Per un numero di 13 cifre che inizia con 99990 ti chiede il link di tracciamento condiviso completo (trackandtrace.planzergroup.com/shared/…, con il suo accessKey), poi legge i passaggi raggiunti finora, con i loro orari, e una data prevista.
 
-Controlla il pacco ogni 10 minuti, ogni 2 minuti dalle 06.00 (ora svizzera) quando è in consegna, e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Il tracking di Planzer non dice dove avvengono le scansioni, quindi non ci sono luoghi da mostrarti. Peek non può contattare Planzer al posto tuo.
+Controlla il pacco ogni 10 minuti, ogni 2 minuti dalle 06.00 (ora svizzera) quando è in consegna (solo il giorno stesso e finché risponde il tracking di Planzer; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Il tracking di Planzer non dice dove avvengono le scansioni, quindi non ci sono luoghi da mostrarti. Peek non può contattare Planzer al posto tuo.
 
 ## Domande sul tracking Planzer
 

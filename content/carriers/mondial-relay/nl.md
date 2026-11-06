@@ -43,7 +43,7 @@ De trackingpagina van Mondial Relay is in het Nederlands, maar Peek leest de Fra
 | `Échec de livraison` | De levering aan huis is mislukt. |
 | `Retour à l'expéditeur` | Het gaat terug naar de afzender. |
 
-`Votre colis a été livré à l'enseigne.` betekent dat een retourzending bij de winkel is aangekomen. Op dit moment toont Peek die regel als ‘Delivered’, al heeft de winkel het pakket gekregen en niet u.
+`Votre colis a été livré à l'enseigne.` betekent dat het pakket bij de winkel is aangekomen. Toonde de geschiedenis al dat het terugging (`Retour à l'expéditeur`), dan toont Peek ‘Returned to sender’; bij een retourzending die u zelf met een eigen nummer naar de winkel stuurde, toont Peek ‘Delivered’.
 
 Op mondialrelay.nl ziet u soms "in behandeling": uw pakket ligt in het depot en wacht op een bezorger. Wacht dan een paar dagen.
 

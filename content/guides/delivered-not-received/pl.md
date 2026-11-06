@@ -115,7 +115,7 @@ Często tak, jako ostatni krok:
 
 ### Czy Peek znajdzie moją paczkę?
 
-Nie. [Peek](/), jak [każdy tracker](guide:universal-tracker), pokazuje tylko to, co publikuje przewoźnik, i nie skontaktuje się z nim ani nie złoży za Ciebie reklamacji. Na ostatnim odcinku sprawdza śledzenie nawet co 2 minuty i może wysłać Ci powiadomienie, więc dotrzesz do drzwi niedługo po skanie „doręczona”.
+Nie. [Peek](/), jak [każdy tracker](guide:universal-tracker), pokazuje tylko to, co publikuje przewoźnik, i nie skontaktuje się z nim ani nie złoży za Ciebie reklamacji. Na ostatnim odcinku sprawdza śledzenie nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika) i może wysłać Ci powiadomienie, więc dotrzesz do drzwi niedługo po skanie „doręczona”. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (GLS w większości krajów i Royal Mail co godzinę, Poste Italiane i PostNL co 30 minut).
 
 ### Czy zgłaszać kradzież paczki na policję?
 

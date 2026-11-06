@@ -85,7 +85,7 @@ La Poste suisse accepte une demande de recherche quand le délai habituel est d�
 
 Un avis de passage alors que tu attendais chez toi ? Lis [que faire après un avis de passage](guide:missed-delivery). Plus aucun scan depuis des jours ? Lis [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 
-Peek vérifie toutes les 2 minutes un colis en cours de livraison chez les transporteurs qu'il lit directement, et peut te prévenir le jour de livraison uniquement : plus besoin de rafraîchir la page.
+Peek vérifie toutes les 2 minutes un colis en cours de livraison chez les transporteurs qu'il lit directement (le jour même, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond), et peut te prévenir le jour de livraison uniquement : plus besoin de rafraîchir la page. Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (GLS dans la plupart des pays et Royal Mail toutes les heures, Poste Italiane et PostNL toutes les 30 minutes).
 
 ## Les colis sont-ils livrés les jours fériés ?
 

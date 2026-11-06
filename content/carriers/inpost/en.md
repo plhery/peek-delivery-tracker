@@ -83,7 +83,7 @@ In Spain, Peek follows InPost under its [Mondial Relay](carrier:mondial-relay) e
 
 It reads InPost's service at inposteasy.com, not yet confirmed to answer for UK numbers. You see the status, the newest 20 scans with each town or hub and country on a map, the delivery time and the destination country; InPost gives no expected date. For a 24-digit parcel waiting in a Paczkomat or pickup point, the point's name and address appear once InPost's Polish tracking confirms them, never your code. Peek asks InPost's service for its English wordings, and a parcel waiting at an Italian point may not show "Ready for pickup". Scans without a time zone are left out, and your name, address and phone are never read.
 
-Peek doesn't follow the parcel to another carrier. It checks every 10 minutes, or every 2 once out for delivery, and can notify you of each change. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek doesn't follow the parcel to another carrier. It checks every 10 minutes, or every 2 from 6 a.m. local time on the day InPost scans the parcel out for delivery, while InPost's own tracker answers (through tracking services, every 15 minutes), and can notify you of each change. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about InPost tracking
 

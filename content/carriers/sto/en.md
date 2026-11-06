@@ -89,7 +89,7 @@ To have Peek read STO's own tracking from the start, tap "Change" and pick STO E
 
 Peek reads STO's own tracking, the one behind its online customer service. For each scan it shows the step (table above), the city of the STO site that made it (the site's Chinese name where Peek can't place it), and the time, read on China's clock and shown in your device's time zone. It shows a repeated scan once, and the parcel's weight when STO's scales recorded it. It leaves out STO's full line for each scan and, with it, couriers' and stations' names and phone numbers, pickup addresses and codes, and who signed. STO gives no expected delivery date, so Peek shows none. Peek follows the STO number only: a forwarder's number is another parcel to add.
 
-It checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact STO, the forwarder or the seller for you.
+It checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day STO scans the parcel out for delivery, while STO's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact STO, the forwarder or the seller for you.
 
 ## Questions about STO Express tracking
 

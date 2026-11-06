@@ -82,7 +82,7 @@ Pasting Ekart's tracking link (ekartlogistics.com, then shipmenttrack and the ID
 
 Filed under Ekart, a parcel shows "Waiting for the carrier" until Ekart's first scan. One added without a carrier shows "No tracking history yet". Peek reads Ekart's own tracker, with no account or phone number: each line in Ekart's words, codes included, with its exact time and the city Ekart gives, newest first and without repeats. It shows Ekart's expected delivery date while the parcel is on its way to you, and drops it once the parcel is delivered or heads back.
 
-Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Ekart or the shop for you.
+Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Ekart scans the parcel out for delivery, while Ekart's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Ekart or the shop for you.
 
 ## Questions about Ekart tracking
 

@@ -108,7 +108,7 @@ Peek doesn't hand the parcel over to the post: the post's scans reach you throug
 
 The tracker prints each time on the clock of whoever scanned the parcel, with no time zone. Peek reads each line on the clock of its place, or of the leg the parcel was on. Without a place, `In Transit` and `Item processed at Interpost` are on UTC, `Interpost handed item over to postal company` on UTC+2, and `Customs Clearance` on the clock of the country it names. Every time is shown in your device's time zone.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Pitney Bowes, the seller or the post for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Pitney Bowes's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Pitney Bowes, the seller or the post for you.
 
 ## Questions about Pitney Bowes tracking
 

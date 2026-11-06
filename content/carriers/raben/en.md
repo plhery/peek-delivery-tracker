@@ -88,7 +88,7 @@ A link from myraben.com or oftc.myraben.com files the parcel under Raben straigh
 
 Peek reads Raben's tracker in English: the status, each step in Raben's wording with its town and country, the planned delivery day (a date, without a time) or, once the driver's place on the round sets one, the delivery slot with its times, the weight and the delivery time. Times show in your device's time zone. Steps that only change a date or data leave the status as it was. Peek leaves out the item count, volume, progress bar, remarks and the office's contact. The public tracker gives no sender or recipient name, address, pickup point, service or proof of delivery.
 
-Peek checks every 10 minutes, and every 2 once the shipment is out for delivery. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Raben or the shop for you, book unloading or file a claim.
+Peek checks every 10 minutes, and every 2 on the day Raben scans the shipment out for delivery, from 6 a.m. local time or, once Raben gives a delivery slot, from half an hour before it opens, while Raben's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Raben or the shop for you, book unloading or file a claim.
 
 ## Questions about Raben tracking
 

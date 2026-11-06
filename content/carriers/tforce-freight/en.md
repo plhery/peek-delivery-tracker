@@ -103,7 +103,7 @@ Peek asks TForce's tracker by the PRO alone. It shows the status, each line with
 
 TForce gives each line its service center's local time, with no time zone. Peek reads it on the clock of the line's town, else of a line next to it or of where the freight is going, else on Eastern time, and shows it in your device's time zone.
 
-Peek checks every 10 minutes, and every 2 minutes once the freight is out for delivery. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TForce, the shop or the shipper for you, or file a claim.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day TForce scans the freight out for delivery, while TForce's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TForce, the shop or the shipper for you, or file a claim.
 
 ## Questions about TForce Freight tracking
 

@@ -89,7 +89,7 @@ Cuando Cainiao o CACESA dan un número CNESP o CNPRT, o una etiqueta que Peek re
 
 Peek muestra el estado, el historial con las horas exactas de Ecoscooting pero sin lugares, el peso, la hora de entrega y, cuando el paquete llega a un punto de recogida, su nombre y dirección, que se quedan después de recogerlo. No hay fecha de entrega prevista. Deja fuera el PIN, el teléfono y el horario del punto, los códigos postales y las referencias del pedido. Las líneas salen en el inglés de Ecoscooting, porque Peek lo consulta en ese idioma, salvo un `Out for delivery` a secas, que aparece como «En reparto». Ecoscooting responde igual con un número desconocido que con uno que no puede consultar, así que un número equivocado simplemente se queda sin novedades.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
+Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Ecoscooting; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
 
 ## Preguntas sobre el seguimiento de Ecoscooting
 

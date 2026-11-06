@@ -101,7 +101,7 @@ O Peek lê o mesmo rastreio do spx.com.br e mostra o status, as mensagens da SPX
 
 Enquanto a SPX ainda não conhece o código, o Peek mostra "Aguardando a transportadora" e continua consultando. Se o rastreio já começou e o pacote passa 4 dias em trânsito sem atualização nova, aparece o link "Pedir ajuda a SPX Express Brazil", que abre a página de horários do Atendimento ao Cliente da Shopee.
 
-O Peek consulta a SPX a cada 10 minutos e a cada 2 minutos quando o pacote sai para entrega. Você escolhe os avisos: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não fala com a SPX nem com a Shopee por você.
+O Peek consulta a SPX a cada 10 minutos e a cada 2 minutos quando o pacote sai para entrega: só nesse dia, a partir das 6h no horário local e enquanto o rastreio da própria SPX responder. Por serviços de rastreamento, a consulta é a cada 15 minutos. Você escolhe os avisos: "Cada movimentação", "Etapas importantes" ou "Só a entrega". O Peek não fala com a SPX nem com a Shopee por você.
 
 ## Perguntas sobre o rastreio SPX Express
 

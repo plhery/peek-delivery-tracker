@@ -89,7 +89,7 @@ It then asks for the delivery postcode and tracks nothing without it: 5 digits a
 
 It shows the status and history with exact times, every step in Peek's own words: Shipment collected, In transit, Shipment forwarded, Out for delivery, Delivered, Returned to sender, Awaiting delivery instructions, Shipment exception. Awaiting instructions, an inbound-scan issue and a cancelled shipment ("Shipment cancelled") count as problems. Heppner's message that your order will go to a new address under a new reference shows as "Forwarded to a new address under a new reference", still in transit. There are no scan places, expected date or pickup point, and it leaves out the sender, your name, address and delivery instructions.
 
-Peek checks every 10 minutes, or every 2 once the order is out for delivery, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't book your slot: do that on Heppner's page.
+Peek checks every 10 minutes, or every 2 from 6 a.m. local time on the day Heppner scans the order out for delivery, while Heppner's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the order still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't book your slot: do that on Heppner's page.
 
 ## Questions about Heppner tracking
 

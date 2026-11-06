@@ -69,7 +69,7 @@ A number from another country's post isn't offered to Ukrposhta. When the item i
 
 It reads the service behind Ukrposhta's app; when that service fails or doesn't know an item to or from abroad, Peek opens Ukrposhta's tracking page in a browser on its server. It shows each step on a map with its place and country, the customs steps and the time it was delivered. Ukrposhta gives its times without a time zone: Peek reads a step in Ukraine on Kyiv time and works out the zone of a step abroad from its place or the steps around it, so that time can be off; it shows each in your device's time zone. Peek shows no expected arrival day and leaves out Ukrposhta's planned date and postcodes; the only pickup point named is the branch on `Arrived to the Branch`. Statuses keep Ukrposhta's English wording, `Final delivery` included.
 
-Peek checks every 10 minutes. Once the item is out for delivery, it checks every 2 minutes, or every 5 when its last check had to open that browser. After two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you when the status changes.
+Peek checks every 10 minutes. Once the item is out for delivery, it checks every 2 minutes, or every 5 when its last check had to open that browser: on that day, from 6 a.m. Kyiv time, while Ukrposhta's own service or page answers. Through tracking services, it checks every 15 minutes. After two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you when the status changes.
 
 ## Questions about Ukrposhta tracking
 

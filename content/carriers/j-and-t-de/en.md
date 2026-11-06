@@ -100,7 +100,7 @@ Peek shows the status, each scan at its exact time and the delivery time. J&T gi
 
 Until J&T scans the parcel, Peek shows "Waiting for the carrier" and keeps asking. When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day J&T scans the parcel out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
 
 ## Questions about J&T Express Germany tracking
 

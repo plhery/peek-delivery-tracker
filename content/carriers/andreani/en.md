@@ -93,7 +93,7 @@ A 15-digit number doesn't tell [Peek](/) by its shape alone that it's Andreani's
 
 **When Andreani doesn't answer.** Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows their copy in their own words. Peek knows no hand-over from Andreani to another carrier, so it follows the parcel with Andreani to the end.
 
-**Checks and alerts.** Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. A parcel with no news for two days, or for 12 hours at "Label created" or "Received by carrier", is checked hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Andreani or the shop for you.
+**Checks and alerts.** Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Andreani scans the parcel out for delivery, while Andreani's own tracker answers (through tracking services, every 15 minutes). A parcel with no news for two days, or for 12 hours at "Label created" or "Received by carrier", is checked hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Andreani or the shop for you.
 
 ## Questions about Andreani tracking
 

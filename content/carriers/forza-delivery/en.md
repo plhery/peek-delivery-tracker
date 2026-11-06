@@ -92,7 +92,7 @@ Peek asks Forza's tracker with the guía alone: no phone number or postcode. It 
 
 Forza's times name no time zone: Peek reads them on Guatemala's clock and shows them in your device's. Guatemala, El Salvador and Honduras share that clock (UTC−6, with no summer time), so a scan in any of the three shows at the right time.
 
-Peek asks Forza every 10 minutes, or every 2 minutes on the day of an `En ruta` scan. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only": "Delivery only" covers `En ruta` and `Entregado`. Peek can't contact Forza or the shop for you, and it can't pay a COD amount.
+Peek asks Forza every 10 minutes, or every 2 minutes (every 5 when it has to open Forza's tracker in a browser) from 6 a.m. local time on the day of an `En ruta` scan, while Forza's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only": "Delivery only" covers `En ruta` and `Entregado`. Peek can't contact Forza or the shop for you, and it can't pay a COD amount.
 
 ## Questions about Forza Delivery tracking
 

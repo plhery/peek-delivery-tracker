@@ -95,7 +95,7 @@ Paste the `JTE` number in [Peek](/): it names J&T Express Middle East at once ("
 
 Peek asks J&T's own tracker, through the same lookup its tracking page makes, in English. It shows each scan's heading, its exact time and the branch's town and province, and on a very long history it keeps the newest 100 scans. It leaves out the sentence under each heading, the courier's name and contact details and the proof of delivery. J&T gives no expected delivery day or weight, so Peek shows none. Until J&T lists a scan, the parcel reads "Waiting for the carrier" and Peek keeps asking. When J&T's tracker asks for a captcha, Peek doesn't solve it: it tries J&T again later and asks other tracking services in the meantime.
 
-Peek checks J&T about every 10 minutes while you follow the parcel, or every 2 minutes once it's out for delivery. After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact J&T or the shop for you.
+Peek checks J&T about every 10 minutes while you follow the parcel, or every 2 minutes from 6 a.m. local time on the day J&T scans it out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact J&T or the shop for you.
 
 ## Questions about J&T Express tracking in the Middle East
 

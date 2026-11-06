@@ -116,7 +116,7 @@ Peek shows the status, each step in Mainfreight's wording with its place, and th
 
 Road steps that name a New Zealand, Australian or US time zone (`NZDT`, `AEST`, `PST` and the like) give their exact time. Others, such as air and ocean milestones, have no zone: Peek reads them on the clock of the step's place, the steps around it or the destination, else New Zealand's, so now and then one can be off.
 
-Peek checks every 10 minutes, or every 2 minutes once the shipment is out for delivery. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Mainfreight for you, book a delivery or file a claim.
+Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Mainfreight scans the shipment out for delivery, while Mainfreight's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Mainfreight for you, book a delivery or file a claim.
 
 ## Questions about Mainfreight tracking
 

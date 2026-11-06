@@ -104,7 +104,7 @@ When DayOne gives a scan the time offset of its place, Peek uses it. For a scan 
 
 DayOne's tracker doesn't show the delivering company's number, but its lookup sometimes has it. Peek then asks that company too: your country's post for a postal number (two letters, nine digits, two letters), such as Royal Mail, USPS, Canada Post, An Post or Australia Post, or the one carrier the number's shape points to, such as YunExpress for a YT number. Once that carrier shows a scan at least as recent as DayOne's newest, Peek follows the parcel there, shows its number next to the DOT number and keeps DayOne's history.
 
-For a DOT0 number, Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery; when tracking services answer, as for a DOT1 number, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact DayOne or the shop for you.
+For a DOT0 number, Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DayOne scans the parcel out for delivery, while DayOne's own tracker answers; when tracking services answer, as for a DOT1 number, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact DayOne or the shop for you.
 
 ## Questions about DayOne tracking
 

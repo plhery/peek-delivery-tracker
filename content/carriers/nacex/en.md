@@ -89,7 +89,7 @@ NACEX's contact pages list no WhatsApp number.
 
 [Peek](/) recognises a NACEX number from its shape: exactly four digits, a slash and eight digits. A nacex.es tracking link (with `intcli=`) or the whole shipping email works too.
 
-It checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status and history, and where the parcel was scanned on a map. NACEX's tracking gives a time only for the delivery; for the other steps you see just the day. It leaves out the recipient's details, proof of delivery, delivery comments, contact details and the shop's reference, and can't speed a parcel up or contact NACEX for you.
+It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day NACEX scans the parcel out for delivery, while NACEX's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status and history, and where the parcel was scanned on a map. NACEX's tracking gives a time only for the delivery; for the other steps you see just the day. It leaves out the recipient's details, proof of delivery, delivery comments, contact details and the shop's reference, and can't speed a parcel up or contact NACEX for you.
 
 ## Questions about NACEX tracking
 

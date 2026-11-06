@@ -90,7 +90,7 @@ If no carrier knows the number yet, add it all the same, or pick Blue Dart yours
 
 Filed under Blue Dart, a shipment shows "Waiting for the carrier" until its first scan; added without a carrier, "No tracking history yet". Peek reads Blue Dart's public tracker by the waybill alone, with no account: the status Blue Dart gives the shipment, then each scan in Blue Dart's words with its place, read on India time. It leaves out the recipient's details and shows no expected delivery date. The link on the parcel's page, "Open the Blue Dart website", opens the waybill on Blue Dart's tracker.
 
-Peek checks every 10 minutes, and every 2 minutes once the shipment is out for delivery. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only".
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day Blue Dart scans the shipment out for delivery, while Blue Dart's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Blue Dart tracking
 

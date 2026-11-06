@@ -92,7 +92,7 @@ Peek consulta el rastreo de Forza solo con la guía: sin número de teléfono ni
 
 Las horas de Forza no indican zona horaria: Peek las toma como hora de Guatemala y te las muestra en la zona horaria de tu dispositivo. Guatemala, El Salvador y Honduras tienen la misma hora (UTC−6, sin horario de verano), así que un escaneo en cualquiera de los tres países aparece con la hora correcta.
 
-Peek consulta a Forza cada 10 minutos, o cada 2 minutos el día en que aparece el estado `En ruta`. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega»: «Solo la entrega» cubre `En ruta` y `Entregado`. Peek no puede contactar a Forza ni a la tienda por ti, y tampoco puede pagar un monto contra entrega.
+Peek consulta a Forza cada 10 minutos, o cada 2 minutos (cada 5 si tiene que abrir el seguimiento de Forza en un navegador) desde las 6:00, hora local, el día en que aparece el estado `En ruta`, mientras responda el propio seguimiento de Forza; a través de servicios de seguimiento, cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega»: «Solo la entrega» cubre `En ruta` y `Entregado`. Peek no puede contactar a Forza ni a la tienda por ti, y tampoco puede pagar un monto contra entrega.
 
 ## Preguntas sobre el rastreo de Forza Delivery
 

@@ -76,7 +76,7 @@ A tracking link from Border Express works too and names Border Express at once (
 
 **What you see.** Peek shows the status, each step with its suburb and state, the expected delivery day until the parcel is delivered, and the time of delivery. It leaves out the progress bar, the despatch date, the number of items and each item's scans, the sender's and your town and postcode, and the name of whoever signed. Peek shows no weight or proof of delivery for Border Express. Each step carries the clock of its state, so steps in states on different time zones fall in the right order.
 
-**How often.** Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. If Border Express's tracker can't be reached, Peek asks tracking services instead and shows what they hold, in their words. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Border Express or the shop for you.
+**How often.** Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Border Express scans the parcel out for delivery, while Border Express's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. If Border Express's tracker can't be reached, Peek asks tracking services instead and shows what they hold, in their words. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Border Express or the shop for you.
 
 ## Questions about Border Express tracking
 

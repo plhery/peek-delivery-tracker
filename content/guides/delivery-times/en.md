@@ -89,7 +89,7 @@ USPS asks you to wait one full postal business day after `Out for Delivery` befo
 
 A card saying the driver came while you were out? See [missed delivery](guide:missed-delivery). No new scan for days? See [why tracking stops updating](guide:tracking-not-updating).
 
-Peek checks every 2 minutes once a parcel is out for delivery with the carriers it reads directly, and can notify you on delivery day only, so you can stop refreshing.
+Peek checks every 2 minutes once a parcel is out for delivery with the carriers it reads directly (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and can notify you on delivery day only, so you can stop refreshing. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (GLS in most countries and Royal Mail hourly, Poste Italiane and PostNL every 30 minutes).
 
 ## Do parcels get delivered on bank holidays?
 

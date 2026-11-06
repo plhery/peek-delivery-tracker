@@ -83,7 +83,7 @@ A InPost aceita uma reclamação por atraso quando passam mais de 5 dias desde a
 
 Deixaram um aviso porque não estavas em casa? Vê [encomenda não entregue](guide:missed-delivery). Há dias sem uma leitura nova? Vê [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
-O Peek verifica de 2 em 2 minutos quando a encomenda sai para entrega, nas transportadoras que lê diretamente, e pode enviar-te notificações com a opção «Só a entrega». Assim não tens de atualizar a página.
+O Peek verifica de 2 em 2 minutos quando a encomenda sai para entrega, nas transportadoras que lê diretamente (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e pode enviar-te notificações com a opção «Só a entrega». Assim não tens de atualizar a página. Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (a GLS na maioria dos países e a Royal Mail de hora a hora, a Poste Italiane e a PostNL de 30 em 30 minutos).
 
 ## Há entregas nos feriados?
 

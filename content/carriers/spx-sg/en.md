@@ -96,7 +96,7 @@ Added without a carrier, a parcel shows "No tracking history yet" while Peek ask
 
 If SPX's tracker can't be reached, Peek shows what tracking services report instead, in their words.
 
-**Checks and alerts.** Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact SPX, Shopee or the seller for you.
+**Checks and alerts.** Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day SPX scans the parcel out for delivery, while SPX's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact SPX, Shopee or the seller for you.
 
 ## Questions about SPX Express Singapore tracking
 

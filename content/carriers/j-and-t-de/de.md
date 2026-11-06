@@ -100,7 +100,7 @@ Peek zeigt den Status, jeden Scan mit genauer Uhrzeit und den Zeitpunkt der Zust
 
 Bis J&T das Paket scannt, zeigt Peek „Warten auf den Paketdienst“ und fragt weiter nach. Ist die Sendungsverfolgung von J&T nicht erreichbar oder kennt sie die Nummer nicht, fragt Peek bei Tracking-Diensten nach und zeigt deren Verlauf in deren Worten.
 
-Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist. Kommt zwei Tage lang kein neuer Scan (solange es „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek stündlich nach. Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. J&T oder den Shop kann Peek nicht für dich kontaktieren, und es kann weder die Adresse ändern noch eine neue Zustellung buchen.
+Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange J&T selbst antwortet; über Tracking-Dienste alle 15 Minuten). Kommt zwei Tage lang kein neuer Scan (solange es „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek stündlich nach. Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. J&T oder den Shop kann Peek nicht für dich kontaktieren, und es kann weder die Adresse ändern noch eine neue Zustellung buchen.
 
 ## Fragen zur J&T Express Sendungsverfolgung
 

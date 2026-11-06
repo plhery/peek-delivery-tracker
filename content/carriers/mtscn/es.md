@@ -81,7 +81,7 @@ Peek no muestra los pasos escritos más de doce horas antes de la hora que lleva
 
 Peek sigue el paquete en la web de Meiteshun. Solo lo pasa a otra empresa en un caso: cuando el registro indica una línea y un número de Swiss Post, el correo suizo, para un paquete que va a Suiza o Liechtenstein. Si la tienda te da el número de la empresa que reparte en España, añádelo como otro paquete.
 
-Peek consulta cada 10 minutos, y cada 2 minutos mientras el paquete está «En reparto», aunque ningún paso de Meiteshun que Peek conozca da ese estado. Puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con Meiteshun ni con la tienda por ti.
+Peek consulta cada 10 minutos, y cada 2 minutos mientras el paquete está «En reparto» (ese día, desde las 6:00, hora local, y siempre que responda el propio seguimiento de Meiteshun o de Swiss Post; a través de servicios de seguimiento, cada 15 minutos), aunque ningún paso de Meiteshun que Peek conozca da ese estado. Puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con Meiteshun ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Meiteshun
 

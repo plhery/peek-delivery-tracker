@@ -75,7 +75,7 @@ Peek reads Yilong's tracker directly. It shows each line in Yilong's words, the 
 
 A line dated later than the moment Peek checks, on Beijing time, is held back until that time. Since Yilong's record names no delivery company, Peek follows the parcel only as far as Yilong's history goes. When the seller gives you the delivering company's number, add it as a separate parcel.
 
-While the parcel moves, Peek checks Yilong every 10 minutes, and every 2 minutes once it's out for delivery; after two days with nothing new (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Yilong's own lines, import customs included, are steps on the way, so only the setting that alerts you to every scan reports them: the important-steps and delivery-day settings start with the delivering company's `Out for Delivery`. Peek can't chase Yilong or the seller for you.
+While the parcel moves, Peek checks Yilong every 10 minutes, and every 2 minutes from 6 a.m. local time on the day it goes out for delivery, while Yilong's own tracker answers (through tracking services, every 15 minutes); after two days with nothing new (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Yilong's own lines, import customs included, are steps on the way, so only the setting that alerts you to every scan reports them: the important-steps and delivery-day settings start with the delivering company's `Out for Delivery`. Peek can't chase Yilong or the seller for you.
 
 ## Questions about Yilong Logistics tracking
 

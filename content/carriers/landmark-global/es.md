@@ -98,7 +98,7 @@ Peek muestra el estado, el lugar de cada paso en un mapa, el país de destino y 
 
 Cuando Landmark nombra una empresa de reparto que Peek conoce, la ficha del paquete dice «Entrega con» esa empresa y muestra su número. Mientras Peek encuentre el paquete solo anunciado a esa empresa, sin ningún escaneo suyo, la ficha dice en su lugar «Anunciado a …, aún no recibido». Si es una que Peek sigue directamente, como [Correos](carrier:correos-spain) o [SEUR](carrier:seur), pasa a seguir el paquete con ella en cuanto esa empresa tenga escaneos recientes, sin perder el historial de Landmark. No ocurre con todos los paquetes.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto, y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Landmark ni con la tienda por ti.
+Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00 según la hora de sus escaneos, que en los de Landmark es la del centro de Estados Unidos, y mientras responda el propio seguimiento de Landmark o de la empresa que reparte; a través de servicios de seguimiento, cada 15 minutos), y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Landmark ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Landmark Global
 

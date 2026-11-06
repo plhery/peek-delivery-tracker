@@ -90,7 +90,7 @@ Peek shows the status, each line in 17FEIA's English with its place where it giv
 
 When 17FEIA names DPD Germany, DHL or FedEx with a number of that carrier's shape, the parcel card says so ("Delivery with DPD Germany", for example) and lists that number after 17FEIA's. While that carrier has only the announcement of the parcel, with no scan of its own, the card says "Announced to …, not received yet" instead. Once that carrier shows a scan at least as recent as 17FEIA's newest, Peek follows the parcel there and keeps 17FEIA's history. When 17FEIA's tracker can't be reached, Peek asks tracking services instead and shows their history, in their words.
 
-Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only"; "Important steps" includes customs, so the export declaration in China counts. Peek can't contact 17FEIA, the seller or your forwarder for you.
+Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while 17FEIA's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only"; "Important steps" includes customs, so the export declaration in China counts. Peek can't contact 17FEIA, the seller or your forwarder for you.
 
 ## Questions about 17FEIA tracking
 

@@ -94,7 +94,7 @@ Peek asks DPD for its English tracking and shows the status, the history in DPD'
 
 When DPD hands a parcel to [ACS Courier](carrier:acs-courier) for the last leg, to Cyprus for example, it names ACS and the ACS number. If that number has ten digits, as ACS's vouchers do, Peek asks ACS with it and follows ACS once it has a scan as recent as DPD's latest. Until then, or for a number of another shape, Peek follows DPD, and the parcel's card already names ACS and shows its number.
 
-Peek checks every 10 minutes, or every 2 minutes once the parcel is out for delivery, and notifies you as you choose: "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. To change the delivery, use Smart Control.
+Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers (through tracking services, every 15 minutes). It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. To change the delivery, use Smart Control.
 
 ## Questions about DPD tracking in Romania
 

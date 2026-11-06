@@ -74,7 +74,7 @@ Evri lists these UK channels (read 10 October 2026), and none for Ireland or els
 
 You see the status, the history, the sender's name when it's a business and, while out for delivery, Evri's window in UK time; no earlier date. Evri gives no scan places, so the map stays empty. A courier delivery shows as "Delivered", without where it was left. Any other scan naming the recipient reads "Delivery update", and the rest keep Evri's own sentence, not the headlines above. A parcel waiting at a ParcelShop or Locker shows as "Ready for pickup", and one collected from a ParcelShop as "Delivered". Your name, address, the delivery photo and collection codes are dropped.
 
-Peek checks every 10 minutes, or every 2 once out for delivery, and can notify you of every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow parcels to other carriers.
+Peek checks every 10 minutes, or every 2 once out for delivery (every 5 when it has to open Evri's tracker in a browser), and can notify you of every scan, important steps only or delivery day only. The faster checks run on the day Evri scans the parcel out for delivery, from 6 a.m. UK time (once Evri sends its window, from half an hour before it opens), and only while Evri's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow parcels to other carriers.
 
 ## Questions about Evri tracking
 

@@ -40,7 +40,7 @@ O Seguir objeto existe em português e em inglês. Estas são as palavras dos CT
 | `No ponto de entrega` | À tua espera num ponto de levantamento. |
 | `Entregue` | Entregue. |
 | `Devolvido` | Voltou para o remetente. |
-| `Cancelado` | Não vai haver entrega: o envio foi cancelado. |
+| `Cancelado` | Não vai haver entrega: o envio foi cancelado. Com `Importação cancelada.`, os CTT só anulam uma chegada que registaram um segundo antes noutro centro, e a encomenda segue viagem. |
 
 `Em importação` é a alfândega portuguesa quando a encomenda vem para cá, e é aí que podes ter de pagar (ver abaixo). Se o destino não for Portugal, os CTT mandam perguntar ao correio desse país. `Não entregue` também é uma tentativa falhada. Na versão inglesa, `International dispatch` é o dia em que saiu do país de origem e `International reception` o dia em que entrou no de destino. Com `Em espera`, os CTT podem contactar-te se precisarem de alguma coisa.
 
@@ -94,7 +94,7 @@ Mostra o estado, o código de estado dos CTT e as 20 leituras mais recentes num 
 
 Os números de 22 e 25 algarismos (`00`, quatro algarismos, `00` e 14 algarismos, mais `001` nos de 25) vão para a CTT Express, que o Peek lista à parte, mesmo quando é o Seguir objeto que os segue. Para esses, mostra o histórico sem locais, o dia de entrega previsto, o peso, a hora de entrega e os estados em espanhol, como `El envío fue entregado correctamente`.
 
-Verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda sai para entrega, e envia-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue acelerar a encomenda nem reclamar por ti.
+Verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento dos CTT a responder; através de serviços de seguimento, de 15 em 15 minutos), e envia-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue acelerar a encomenda nem reclamar por ti.
 
 ## Perguntas sobre o rastreio CTT
 

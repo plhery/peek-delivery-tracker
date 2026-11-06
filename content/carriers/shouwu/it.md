@@ -114,7 +114,7 @@ Peek ricava la fase del pacco dallo stato di Shouwu, come nelle tabelle qui sopr
 
 Shouwu non indica a parte chi consegna, quindi Peek non mostra la riga «Consegna con» e non segue il pacco sul tracking del corriere, nemmeno quando una riga nomina Poste Italiane o riprende quelle di iMile. Se hai il numero del corriere, aggiungilo a Peek come pacco a sé.
 
-Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» (consegna, ritiro, dogana, tentativi non riusciti e resi) e «Solo la consegna». Peek non può contattare Shouwu o il venditore al posto tuo.
+Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Shouwu; quando rispondono i servizi di tracciamento, ogni 15 minuti). Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» (consegna, ritiro, dogana, tentativi non riusciti e resi) e «Solo la consegna». Peek non può contattare Shouwu o il venditore al posto tuo.
 
 ## Domande sul tracking Shouwu
 

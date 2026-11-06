@@ -93,7 +93,7 @@ Peek doesn't show the delivery photo, the driver or anything else behind Roadie'
 
 Peek doesn't get the number of the carrier Roadie hands a delivery to from Roadie's tracker. After `Transferred to Carrier`, unlock that number on Roadie's tracker with your ZIP code and add it to Peek: it names UPS at once for a `1Z` number whose check digit is right.
 
-Peek checks Roadie's tracker every 10 minutes, and every 2 minutes once the delivery is "Out for delivery"; while a service has the delivery, it checks every 15 minutes, out for delivery too. After two days without news (12 hours while the delivery still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Roadie or the shop for you.
+Peek checks Roadie's tracker every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the delivery turns "Out for delivery", while Roadie's own tracker answers; while a service has the delivery, it checks every 15 minutes, out for delivery too. After two days without news (12 hours while the delivery still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Roadie or the shop for you.
 
 ## Questions about Roadie tracking
 

@@ -91,7 +91,7 @@ Juxi ne donne aucun contact, formulaire ou bureau pour les destinataires en Belg
 
 ## Suivre un colis Juxi Express avec Peek
 
-[Peek](/) reconnaît tout de suite un numéro Juxi Express de forme JXC. Il n'y a pas de lien de suivi Juxi à coller, et il ne faut ni compte, ni code postal, ni numéro de téléphone. Si ton numéro n'a pas cette forme, colle-le quand même : Peek suit plus de 3 500 transporteurs, et tu peux choisir Juxi Express avec « Changer ».
+[Peek](/) ne peut pas reconnaître Juxi Express à la seule forme JXC : le suivi de DHLink, la plateforme logistique de DHgate, connaît aussi certains de ces numéros. Quand tu en ajoutes un, Peek affiche « Vérification des services de suivi… » et interroge DHLink ; si DHLink le connaît, Peek affiche « DHLink a ce colis. » et le suit là-bas. Si personne ne le connaît encore, le colis affiche « Probablement DHLink » pendant que Peek continue de vérifier. Pour le suivre comme colis Juxi Express, touche « Changer » et choisis Juxi Express sous « Correspond à ce numéro ». Il n'y a pas de lien de suivi Juxi à coller, et il ne faut ni compte, ni code postal, ni numéro de téléphone. Si ton numéro n'a pas cette forme, colle-le quand même : Peek suit plus de 3 500 transporteurs.
 
 Juxi n'a plus de page de suivi que Peek pourrait lire : le bouton « 在线追踪 » (suivi en ligne) de son site n'ouvre plus rien. Peek suit donc les colis Juxi via des services de suivi et affiche le statut et l'historique qu'ils ont, dans leur formulation ; les libellés exacts qu'il connaît, comme `Delivered`, s'affichent avec ses propres mots en français. Cet historique peut être en retard sur celui du transporteur local, et pour certains colis il n'y a encore rien.
 

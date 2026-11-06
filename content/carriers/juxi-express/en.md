@@ -76,7 +76,7 @@ Juxi lists no contact, form or office for recipients outside China. For anything
 
 ## Tracking Juxi Express parcels with Peek
 
-[Peek](/) names Juxi Express straight away for a number of the JXC shape. There's no Juxi tracking link to paste, and no account, postcode or phone number is needed.
+[Peek](/) can't tell Juxi Express by the JXC shape alone, since [DHLink](carrier:dhlink)'s tracker knows some of these numbers too. While you add one, Peek shows "Checking tracking services…" and asks DHLink; when DHLink knows it, Peek shows "DHLink has this parcel." and follows it there. If nobody lists it yet, the parcel shows "Probably DHLink" while Peek keeps checking. To follow it as a Juxi Express parcel, press "Change" and pick Juxi Express under "Fits this number". There's no Juxi tracking link to paste, and no account, postcode or phone number is needed.
 
 Juxi has no tracking page left for Peek to read: the tracking button on its home page no longer opens a tracker. So Peek follows Juxi parcels through tracking services and shows the status and history those services hold, in their wording. That history can lag behind the local carrier's own, and for some parcels there's nothing yet.
 

@@ -45,6 +45,7 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.performScrollToKey
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
@@ -477,6 +478,23 @@ class ParcelSearchTest {
         back()
         assertFalse(exists(SHEET_PANEL))
         assertTrue(exists(SEARCH_ROW))
+    }
+
+    /**
+     * ⌘F with the list scrolled past its top: the iPhone's scroll view brings the field it focuses into view, so the
+     * list goes back to its top, where the search shows with the cursor in it.
+     */
+    @Test
+    fun controlFFromFarDownTheListBringsTheSearchBackWithTheCursorInIt() {
+        show()
+        compose.onNodeWithTag(PARCEL_LIST).performScrollToIndex(deliveries.itemKeys.lastIndex)
+        compose.waitForIdle()
+        assertTrue(deliveries.listState.firstVisibleItemIndex > 0)
+        assertFalse(exists(SEARCH_BUTTON))
+        press(KeyEvent.KEYCODE_F, ctrl)
+        assertEquals(0, deliveries.listState.firstVisibleItemIndex)
+        assertTrue(exists(SEARCH_ROW))
+        assertTrue(focused(SEARCH_FIELD))
     }
 
     /**

@@ -450,9 +450,14 @@ internal fun ComposeTestRule.reveal(node: SemanticsNodeInteraction, scrollable: 
     return node
 }
 
-/** What has `tag`, revealed as [reveal] does where something scrolls it, by the innermost scroll that holds it. */
+/**
+ * What has `tag`, revealed as [reveal] does where something scrolls it, by the innermost scroll that holds it. Only
+ * the drawn one: a layout that measures a copy of its content before choosing (FirstThatFits) leaves that copy
+ * unplaced, with no size, and TalkBack never meets it.
+ */
 internal fun ComposeTestRule.reveal(tag: String) {
-    val scrolled = onAllNodes(hasTestTag(tag) and hasAnyAncestor(hasScrollAction()), useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
-    if (scrolled) reveal(onNode(hasTestTag(tag), useUnmergedTree = true), hasScrollAction() and hasAnyDescendant(hasTestTag(tag)))
+    val drawn = hasTestTag(tag) and SemanticsMatcher("is drawn") { it.size.width > 0 && it.size.height > 0 }
+    val scrolled = onAllNodes(drawn and hasAnyAncestor(hasScrollAction()), useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty()
+    if (scrolled) reveal(onNode(drawn, useUnmergedTree = true), hasScrollAction() and hasAnyDescendant(hasTestTag(tag)))
     waitForIdle()
 }

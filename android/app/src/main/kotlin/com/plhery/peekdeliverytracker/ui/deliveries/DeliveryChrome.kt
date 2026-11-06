@@ -713,7 +713,7 @@ internal fun SearchControls(state: DeliveriesState) {
     val activity = LocalActivity.current
     val windowMadeAgain = { activity?.isChangingConfigurations == true }
     val refocus = remember { mutableStateOf(state.searchFocused) }
-    LaunchedEffect(state.focusRequest) {
+    LaunchedEffect(state.focusRequest, state.searchReturning) {
         when (state.takeFocusRequest()) {
             true -> focus.requestFocus()
             false -> if (state.searchFocused) focusManager.clearFocus()

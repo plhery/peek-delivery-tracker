@@ -76,7 +76,9 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.max
@@ -377,8 +379,19 @@ internal class DeliveriesState(
     var focusRequest: Boolean? by mutableStateOf(null)
         private set
 
-    /** The field's ask for the focus, which no other field then takes. */
-    fun takeFocusRequest(): Boolean? = focusRequest.also { focusRequest = null }
+    /**
+     * The field's ask for the focus, which no other field then takes; none while the list scrolls back to the field
+     * ([searchReturning]), which takes it once it is there.
+     */
+    fun takeFocusRequest(): Boolean? = if (searchReturning) null else focusRequest.also { focusRequest = null }
+
+    /**
+     * The list scrolling back to its top for the search that opened scrolled past it ([openSearch]): the iPhone's
+     * scroll view brings the field it focuses into view, and the field only takes the cursor once it shows, rather than
+     * under the bar at the window's top, where Compose would leave a field that takes the focus as it scrolls in.
+     */
+    var searchReturning: Boolean by mutableStateOf(false)
+        private set
 
     /** The parcels the list shows, by their status. Each change counts as `filter-status`. */
     var statusFilter: ParcelStatusFilter
@@ -456,6 +469,8 @@ internal class DeliveriesState(
     /** `find()` and the search's button: the search shows and its field takes the focus. */
     fun openSearch() {
         showingSearch = true
+        searchReturning = itemKeys.firstOrNull() == OVERVIEW_KEY &&
+            (listState.firstVisibleItemIndex > 0 || listState.firstVisibleItemScrollOffset > 0)
         focusSearch(true)
     }
 
@@ -1984,6 +1999,20 @@ internal class DeliveriesState(
         if (reduceMotion) listState.scrollToItem(0) else listState.animateScrollToItem(0)
     }
 
+    /**
+     * The list back at its top for the search ([searchReturning]), and then its field takes the cursor, as it does
+     * where a drag cut the scroll short.
+     */
+    suspend fun returnToSearch(reduceMotion: Boolean) {
+        try {
+            scrollToTop(reduceMotion)
+        } catch (error: CancellationException) {
+            currentCoroutineContext().ensureActive()
+        } finally {
+            searchReturning = false
+        }
+    }
+
     /** `proxy.scrollTo(id)`: the card scrolled just far enough to show whole, on a snappy 0.25 s. */
     suspend fun bringIntoView(parcelId: UUID, reduceMotion: Boolean) {
         dropFlights()
@@ -2182,6 +2211,9 @@ internal fun cardId(key: Any?): UUID? {
 
 /** The archive's shelf's key in the list. */
 internal const val ARCHIVE_KEY = "archive"
+
+/** The overview's key in the list: its first item, which holds the search. */
+internal const val OVERVIEW_KEY = "overview"
 
 /** `revealParcelID`'s scroll, `smooth(duration: 0.35)`. */
 private const val REVEAL_DURATION = 0.35

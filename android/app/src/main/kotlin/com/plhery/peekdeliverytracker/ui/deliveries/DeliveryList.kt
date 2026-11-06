@@ -55,6 +55,7 @@ import androidx.compose.runtime.referentialEqualityPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.runtime.withFrameNanos
@@ -116,6 +117,7 @@ import com.plhery.peekdeliverytracker.ui.zoom.recedingUnderZoom
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
 import java.util.UUID
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 /** Which of the window's sides a column of the deliveries reaches, whose bars and cutout it keeps clear of. */
@@ -206,6 +208,10 @@ internal fun DeliveryList(state: DeliveriesState) {
         withFrameNanos {}
         state.keepCard(parcelId)
         state.navigator.keptCard = null
+    }
+    val reduceMotion = PeekTheme.reduceMotion
+    LaunchedEffect(state, reduceMotion) {
+        snapshotFlow { state.searchReturning }.filter { it }.collect { state.returnToSearch(reduceMotion) }
     }
 
     val backdrop = rememberMaterialBackdrop()
@@ -536,7 +542,7 @@ private fun listEntries(
     }
 
     val custom = state.hasCustomView
-    if (parcels.isNotEmpty()) first("overview", "overview", ListItem.Overview(layout.active.size, sideBySide, change))
+    if (parcels.isNotEmpty()) first(OVERVIEW_KEY, "overview", ListItem.Overview(layout.active.size, sideBySide, change))
     if (custom) first("chips", "chips", ListItem.Chips)
     notice?.let { first("notice", "notice", it) }
     if (!loading) {

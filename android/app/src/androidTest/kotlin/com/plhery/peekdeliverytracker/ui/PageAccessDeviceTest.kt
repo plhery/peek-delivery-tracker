@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.accessibility.AccessibilityNodeInfo
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import androidx.activity.ComponentActivity
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -410,6 +414,15 @@ class PageAccessDeviceTest {
         val name = country.state.orEmpty()
         assertTrue("The menu reads no country", name.isNotEmpty())
         assertTrue(country.click())
+        walk.settle()
+        tree.await("The countries' menu") { nodes -> nodes.filter { it.viewIdResourceName?.startsWith("$CHANGE_CARRIER_COUNTRY.") == true }.ifEmpty { null } }
+        // The menu opens at its top, the carrier's own countries first, as the iPhone's: the chosen one may be further
+        // down, where TalkBack's swipes or a finger's scroll take it.
+        val option = SemanticsMatcher("the menu's $name") { node ->
+            node.config.getOrNull(SemanticsProperties.TestTag)?.startsWith("$CHANGE_CARRIER_COUNTRY.") == true &&
+                node.config.getOrNull(SemanticsProperties.Text)?.any { it.text.endsWith(name) } == true
+        }
+        compose.onNode(option).performScrollTo()
         walk.settle()
         val options = tree.await("The countries' menu") { nodes -> nodes.filter { it.viewIdResourceName?.startsWith("$CHANGE_CARRIER_COUNTRY.") == true }.ifEmpty { null } }
         val shown = options.firstOrNull { option -> option.spokenParts.any { it.endsWith(name) } }

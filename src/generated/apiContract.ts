@@ -1571,9 +1571,9 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [
       {
         "domains": [
-          "espace-client.geodis.com",
-          "geodis.com"
+          "espace-client.geodis.com"
         ],
+        "pathPattern": "^/services/destinataires/?$",
         "params": [
           "noSuivi",
           "trackingNumber"

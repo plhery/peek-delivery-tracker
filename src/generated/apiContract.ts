@@ -49567,8 +49567,10 @@ export const CARRIER_CAPABILITIES = {
     "trackingSearchUrl": "https://xfm.com.au/xpress-track/"
   },
   "yuexi-logistics": {
-    "displayName": "YXI Logistics",
+    "displayName": "YXL Logistics",
     "aliases": [
+      "YXI Logistics",
+      "YXIL",
       "YXI International",
       "悦希国际物流",
       "悦希国际",

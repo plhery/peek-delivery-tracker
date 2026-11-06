@@ -3,7 +3,7 @@ title: Xinghe Freight tracking: GZXH…YQ numbers and scans
 description: Track a Xinghe Freight (星和货运) parcel from Guangzhou: what a GZXH…YQ number looks like, whose tracker it runs on, what its steps mean and who to ask.
 slug: xinghe-freight-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 Xinghe Freight (星和货运, 广州星和货运代理有限公司) is a freight forwarder in Guangzhou, China. If a Chinese shop sent your order with Xinghe, look for a number of GZXH, ten digits and YQ, the shape Peek knows as Xinghe's, and paste it in the box above. Xinghe's tracking runs on the tracker of GZYL, another Guangzhou forwarder: the tracking box on Xinghe's website sends your number there. That tracker sits on a bare server address, over plain HTTP. Peek reads it for you, and asks tracking services when that tracker doesn't know your number.
@@ -45,6 +45,8 @@ Xinghe's tracking runs on GZYL's tracker, so its steps come in GZYL's words: in 
 | `Package is on the way` | Moving on in your country, with a town. It doesn't say the parcel is out for delivery. | "In transit" |
 | `Delivered` | The delivery, with the town. It may be a plan, not a scan: see below. | "Delivered", with a note on the fixed schedule, unless Peek holds it back (below) |
 
+**Through Hong Kong.** A parcel can also show `香港处理中心已收寄【Hong Kong】`: a postal acceptance at the Hong Kong processing centre, which the tracker relays in Chinese with the city in brackets. Peek shows the line as written, under "Received by carrier".
+
 **A line in Chinese.** For an order with no scans yet, the tracker's page can show `货物电子信息已经收到`, which means that the goods' electronic information has been received. The platform writes this line by itself. The seller has created the order, but nobody has scanned the parcel. Peek shows the line in Chinese, under "Label created".
 
 **Times.** Peek reads every time on the tracker as Beijing time, steps in your country included, and shows it in your device's time zone. In winter, a step at 20:00 in Beijing is 13:00 in Paris or Berlin, 12:00 in London and 7:00 in New York.
@@ -75,7 +77,7 @@ Xinghe's own site says nothing about parcels for online shoppers: no delivery ti
 
 ## Xinghe Freight contact number and customer service
 
-As read on 2 November 2026, Xinghe's website, xinghe-express.cn, in Chinese only, lists:
+As read on 6 November 2026, Xinghe's website, xinghe-express.cn, in Chinese only, lists:
 
 - **Hotline**: 19924483103, which it says is open 24 hours a day, every day (+86 199 2448 3103 from abroad).
 - **Email**: 3975605292@qq.com, for business enquiries and price quotes.
@@ -120,5 +122,5 @@ The tracker may not have the order yet, or only steps written ahead, which can e
 - [Xinghe Freight: 联系我们 (contact)](http://xinghe-express.cn/contact.html) – 24-hour hotline, email for business enquiries and quotes, address given as Guangzhou only, get in touch before visiting, contact form opening an email
 - [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item on parcels up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – handling fee per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, GZXH…YQ number shape, Xinghe read on GZYL's tracker, step wordings and stages, Chinese line, Beijing clock, timelines written ahead, tracking services as fallback, Swiss Post hand-over, what Peek shows, holds back and leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, GZXH…YQ number shape, Xinghe read on GZYL's tracker, step wordings and stages, Hong Kong acceptance, Chinese line, Beijing clock, timelines written ahead, tracking services as fallback, Swiss Post hand-over, what Peek shows, holds back and leaves out
 :::

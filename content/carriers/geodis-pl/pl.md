@@ -3,10 +3,14 @@ title: GEODIS Polska (Pekaes): śledzenie przesyłki i statusy
 description: Śledzenie przesyłki GEODIS (dawniej Pekaes) po numerze z PL i 16 cyframi: co znaczą statusy, jak wygląda dostawa i odbiór z terminala, reklamacja i telefon.
 slug: geodis-polska-sledzenie
 published: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-06
 ---
 
-GEODIS Polska to polska sieć przewozu palet i paczek francuskiej grupy GEODIS, której właścicielem są koleje SNCF. GEODIS przejął PEKAES w 2021 roku, a dziś sieć prowadzi spółka GEODIS Road Network z siedzibą w Błoniu. Przesyłkę śledzisz w [Strefie Klienta](https://strefaklienta.pekaes.geodis.pl/pl/) po numerze złożonym z liter PL i 16 cyfr albo wklejasz ten numer w pole powyżej. Numer podaje sklep lub nadawca, najczęściej w e-mailu z potwierdzeniem zamówienia albo w powiadomieniu o wysyłce.
+GEODIS Polska to polska sieć przewozu palet i paczek francuskiej grupy GEODIS, której właścicielem są koleje SNCF. GEODIS przejął PEKAES w 2021 roku, a dziś sieć prowadzi spółka GEODIS Road Network z siedzibą w Błoniu. Co zrobić, zależy od tego, co przekazał Ci nadawca:
+
+- **Numer z PL i 16 cyframi albo link do Strefy Klienta:** to przesyłka GEODIS Polska, paczka lub paleta. Wklej numer lub link w pole powyżej albo wyszukaj numer w śledzeniu GEODIS Polska, [Strefie Klienta](https://strefaklienta.pekaes.geodis.pl/pl/).
+- **Inny numer GEODIS:** Peek czyta jeszcze jedno śledzenie GEODIS, francuskie, w którym numery zaczynają się od 1G (niżej). Wyszukiwarka na geodis.com znajduje przesyłki lotnicze, morskie i dostawy na ostatnim etapie, a przy transporcie drogowym odsyła do Strefy Klienta.
+- **Brak numeru:** podaje go sklep lub nadawca, najczęściej w e-mailu z potwierdzeniem zamówienia albo w powiadomieniu o wysyłce.
 
 ## Numer przesyłki GEODIS: jak wygląda i gdzie go szukać
 
@@ -26,7 +30,7 @@ Strefa Klienta działa po polsku i po angielsku. Po wyszukaniu widzisz najpierw 
 | Strona GEODIS po polsku | W Peek (po angielsku) | Co to znaczy dla Ciebie |
 | --- | --- | --- |
 | `Odebrana od nadawcy` | `Received from the sender` | GEODIS odebrał przesyłkę od nadawcy. |
-| `wejście do terminala od kierowcy` | `Inbound Scan From Driver to Terminal` | Kierowca przywiózł ją do terminala nadania. |
+| `wejście do terminala od kierowcy` | `Inbound Scan From Driver to Terminal` | Kierowca przywiózł ją do terminala: po odbiorze do terminala nadania, a po `wydanie do dostawy` do terminala dostawy, na koniec kursu. Jeśli wcześniej nie ma `odbiorca nieobecny` ani `Niedostarczona (SMS)`, w tym kursie nie było próby doręczenia: przesyłka czeka na następny. |
 | `wyjście z terminala (odbioru) na linię` | `Outbound Scan from (Collection) Terminal to Line-haul` | Wyjechała z terminala nadania w trasę do terminala, który obsługuje Twój adres. |
 | `wejscie z linii do terminala (dostawy)` | `Inbound Scan from Line-haul to (Delivery) Terminal` | Dotarła do terminala, który ją doręczy. |
 | `oczekiwanie na dostawę` | `Awaiting Delivery` | Czeka w tym terminalu na kurs z dostawą. |
@@ -74,7 +78,7 @@ Według stron GEODIS (stan na 30 października 2026):
 
 ## Śledzenie przesyłki GEODIS w Peek
 
-PL i 16 cyfr to nie znak rozpoznawczy GEODIS (PL oznacza Polskę), więc Peek nie rozpozna GEODIS Poland po samym numerze. I tak wklej numer: Peek śledzi ponad 3500 przewoźników. Zapyta GEODIS Poland, czy zna ten numer, a gdy zna, pokaże „GEODIS Poland ma tę przesyłkę.” Jeśli GEODIS jeszcze go nie zna, zobaczysz „Prawdopodobnie GEODIS Poland” i „Oczekiwanie na pierwszy skan przewoźnika GEODIS Poland”, a Peek będzie pytać dalej. Przewoźnika wybierzesz też sam: kliknij „Zmień” w wierszu przewoźnika i wskaż „GEODIS Poland” w sekcji „Pasują do numeru” albo wyszukaj go – znajdziesz go także, wpisując Pekaes. Samo „GEODIS” to GEODIS we Francji. Przy dodanej już przesyłce użyj „Zmień przewoźnika”.
+PL i 16 cyfr to nie znak rozpoznawczy GEODIS (PL oznacza Polskę), więc Peek nie rozpozna GEODIS Poland po samym numerze. I tak wklej numer: Peek śledzi ponad 3500 przewoźników. Zapyta GEODIS Poland, czy zna ten numer, a gdy zna, pokaże „GEODIS Poland ma tę przesyłkę.” Jeśli GEODIS jeszcze go nie zna, zobaczysz „Prawdopodobnie GEODIS Poland” i „Oczekiwanie na pierwszy skan przewoźnika GEODIS Poland”, a Peek będzie pytać dalej. Przewoźnika wybierzesz też sam: kliknij „Zmień” w wierszu przewoźnika i wskaż „GEODIS Poland” w sekcji „Pasują do numeru” albo wyszukaj go – znajdziesz go także, wpisując Pekaes. Samo „GEODIS” to GEODIS we Francji. Przy dodanej już przesyłce użyj „Zmień przewoźnika”. Link do Strefy Klienta z numerem przesyłki nie wymaga żadnego z tych kroków: Peek od razu przypisuje go do GEODIS Poland.
 
 Peek czyta angielską wersję Strefy Klienta i pokazuje status, każdy skan w angielskim brzmieniu GEODIS z lokalizacją terminala, godzinę doręczenia i kraj dostawy. Skany z polskich terminali odczytuje w czasie warszawskim, a skan z terminala za granicą ma godzinę lokalną tego terminala. Gdy wiersz `Pseudoscan` skasuje wcześniejsze skany, Peek też je pomija, a `Claim Received` nie zmienia statusu. Strona GEODIS nie podaje przewidywanej daty dostawy, wagi, nazwy usługi, nazwiska odbiorcy ani dowodu doręczenia. Peek pomija kod pocztowy i adres dostawy, liczbę sztuk, kody terminali i uwagi, w których może paść nazwisko osoby podpisującej odbiór.
 
@@ -103,12 +107,12 @@ W Polsce GEODIS podaje 24–48 godzin dla dostawy standardowej i następny dzie�
 - [GEODIS Polska: Strefa Klienta po angielsku](https://strefaklienta.pekaes.geodis.pl/en/) – wersja, którą czyta Peek
 - [GEODIS Road Network: Ogólny Regulamin Świadczenia Usług od 04.11.2024](https://strefaklienta.pekaes.geodis.pl/pl/?file=files/pekaes/Dla%20Klienta%20-%20nowe%20www/GEODIS_SK/GEODIS%20RN_Ogolny%20Regulamin%20Swiadczenia%20Uslug_od%2004.11.2024.pdf) – zleceniodawca, próby doręczenia, dostawa palet na adres prywatny, awizacja, rozładunek, wniesienie, odbiór z terminala, pobranie, podpis, czas dostawy, reklamacje
 - [GEODIS Road Network: Formularz zgłoszenia reklamacji](https://strefaklienta.pekaes.geodis.pl/pl/?file=files/pekaes/Dla%20Klienta%20-%20nowe%20www/GEODIS_SK/GRN%20Formularz%20zgloszenia%20reklamacji.pdf) – adres Działu Reklamacji, protokół szkody to nie reklamacja
-- [GEODIS: Śledź swoją przesyłkę](https://geodis.com/pl-pl/sledz-swoja-przesylke) – gdzie jest numer, co zrobić, gdy nie działa
+- [GEODIS: Śledź swoją przesyłkę](https://geodis.com/pl-pl/sledz-swoja-przesylke) – gdzie jest numer, przesyłki lotnicze, morskie i dostawy na ostatnim etapie na geodis.com, transport drogowy we własnym śledzeniu, co zrobić, gdy numer nie działa
 - [GEODIS: Twój obszar roboczy](https://geodis.com/pl-pl/twoj-obszar-roboczy) – Strefa Klienta jako śledzenie GEODIS
 - [GEODIS: Transport palet i paczek](https://geodis.com/pl-pl/uslugi-transportowe/transport-palet-i-paczek) – tylko dla firm, czasy dostawy
 - [GEODIS: Skontaktuj się z nami](https://geodis.com/pl-pl/skontaktuj-sie-z-nami) – formularz, 42 lokalizacje w Polsce
 - [GEODIS: Historia](https://geodis.com/pl-pl/historia) – przejęcie PEKAES w 2021 roku, SNCF
 - [UOKiK: Odpowiedzialność za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – sprzedawca odpowiada do wydania, reklamacja u sprzedawcy
 - [UOKiK: Wydanie towaru](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/wydanie-towaru/) – 30 dni, dodatkowy termin, odstąpienie
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – kształt numeru, statusy po polsku i angielsku, co Peek odczytuje
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – kształt numeru, linki do Strefy Klienta, statusy po polsku i angielsku, kurs zakończony powrotem do terminala, numery GEODIS France, co Peek odczytuje
 :::

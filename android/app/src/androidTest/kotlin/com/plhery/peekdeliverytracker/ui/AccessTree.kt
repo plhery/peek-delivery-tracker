@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityServiceInfo
 import android.graphics.Rect
 import android.os.Build
 import android.os.SystemClock
+import android.util.Log
 import android.view.View
 import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityNodeInfo
@@ -21,11 +22,15 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.unit.dp
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.test.platform.app.InstrumentationRegistry
 import com.plhery.peekdeliverytracker.ui.ParcelWalk.Companion.LONG_MILLIS
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.rules.TestRule
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
 
 /**
  * The window as an accessibility service receives it, which is what TalkBack reads: UiAutomation's root of the active
@@ -36,6 +41,13 @@ import org.junit.Assert.assertTrue
  * app's test tags (`testTagsAsResourceId` at the root, as UI Automator and Maestro find them), and it receives the nodes
  * not important for accessibility too, which a test tells apart by [AccessibilityNodeInfo.isImportantForAccessibility]
  * and [AccessibilityNodeInfo.isScreenReaderFocusable], the stops TalkBack makes.
+ *
+ * Compose hands the service its nodes unmerged and leaves the merging to TalkBack. A node that merges children of its
+ * own (anything clickable, or a row made one element) carries the actions, the state and the focus, but rarely its
+ * words: the description it was given goes to a first child Compose makes up for it, the words drawn inside stay on
+ * their own children, and its role goes to a last child made up the same way, the node itself keeping a plain class. A
+ * test reads what TalkBack says for a node with [spoken] and its role with [isButton] or [isSwitch], and reads the node
+ * alone ([words], [description], [state], [clickLabel]) only where it means the node itself.
  */
 internal class AccessTree(private val compose: ComposeTestRule) {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
@@ -142,7 +154,7 @@ internal class AccessTree(private val compose: ComposeTestRule) {
      * hears a polite region's words as they change.
      */
     fun awaitSaid(id: String, words: String): AccessibilityNodeInfo {
-        val said = await("$id saying \"$words\"", read = ::framed) { nodes -> nodes.firstOrNull { it.viewIdResourceName == id && it.description == words } }
+        val said = await("$id saying \"$words\"", read = ::framed) { nodes -> nodes.firstOrNull { it.viewIdResourceName == id && it.spoken == words } }
         assertEquals("$id is no polite live region", View.ACCESSIBILITY_LIVE_REGION_POLITE, said.liveRegion)
         return said
     }
@@ -156,14 +168,13 @@ internal class AccessTree(private val compose: ComposeTestRule) {
         node.isScreenReaderFocusable && under(node).drop(1).none { it.isClickable || it.isLongClickable || it.isCheckable || it.isEditable }
 
     /**
-     * The stops that would say nothing: a node TalkBack stops on or a finger can press, shown, with no words of its own
-     * nor any under it. A live region's node is left out: it is heard as its words change, not stopped on, and stands
-     * empty between two announcements.
+     * The stops that would say nothing: a node TalkBack stops on or a finger can press, shown, that TalkBack reads no
+     * words nor any state for, its own or those of the children it reads with it ([spoken]). A live region's node is
+     * left out: it is heard as its words change, not stopped on, and stands empty between two announcements.
      */
     fun blankStops(nodes: List<AccessibilityNodeInfo> = nodes()): List<AccessibilityNodeInfo> =
         nodes.filter { node ->
-            node.isVisibleToUser && (node.isScreenReaderFocusable || node.isClickable) && node.liveRegion == 0 &&
-                under(node).all { it.words.isEmpty() && it.state.isNullOrEmpty() }
+            node.isVisibleToUser && node.isStop && node.liveRegion == 0 && node.readWith().all { it.ownWords.isEmpty() && it.state.isNullOrEmpty() }
         }
 
     /** Asserts nothing TalkBack stops on or a finger presses in `nodes` says nothing. */
@@ -175,19 +186,86 @@ internal class AccessTree(private val compose: ComposeTestRule) {
     /** The window's nodes as lines, for a failure's message. */
     fun dump(nodes: List<AccessibilityNodeInfo> = nodes()): String = nodes.take(DUMP_LINES).joinToString("\n") { it.line() }
 
+    /**
+     * A rule that logs the whole window to logcat under [LOG_TAG] when the test it wraps fails, before the test's other
+     * rules take the window down: every node on a line of its own, indented under the node that holds it, so that a run
+     * on a device shows what the window had. The innermost of a test's rules.
+     */
+    val logsTheWindowOnFailure: TestRule = object : TestWatcher() {
+        override fun failed(e: Throwable, description: Description) {
+            runCatching { log("${description.className}.${description.methodName} failed: ${e.message?.lineSequence()?.firstOrNull()}") }
+        }
+    }
+
+    /** The whole window logged under [LOG_TAG] as [logsTheWindowOnFailure] logs it, after `heading`. */
+    fun log(heading: String) {
+        Log.i(LOG_TAG, heading)
+        val root = instrumentation.uiAutomation.rootInActiveWindow
+        if (root == null || !root.refresh()) {
+            Log.i(LOG_TAG, "No active window")
+            return
+        }
+        log(root, 0)
+    }
+
+    private fun log(node: AccessibilityNodeInfo, depth: Int) {
+        Log.i(LOG_TAG, "  ".repeat(depth) + node.fullLine())
+        for (index in 0 until node.childCount) {
+            val child = node.getChild(index) ?: continue
+            if (child.refresh()) log(child, depth + 1)
+        }
+    }
+
     companion object {
         /** How long a test waits for the tree to show something: each read of it asks the app for every node. */
         const val AWAIT_MILLIS = 10_000L
+
+        /** The logcat tag a failed test's window is logged under ([logsTheWindowOnFailure]). */
+        const val LOG_TAG = "AccessTree"
 
         private const val POLL_MILLIS = 50L
         private const val DUMP_LINES = 400
     }
 }
 
-/** What TalkBack says a node is called: its description, or its text where it has none. */
+/** The node's own words: its description, or its text where it has none. What TalkBack says is [spoken]. */
 internal val AccessibilityNodeInfo.words: String get() = (contentDescription ?: text)?.toString().orEmpty()
 
+/** The node's own description, which Compose moves off a node that merges children of its own ([AccessTree]). */
 internal val AccessibilityNodeInfo.description: String? get() = contentDescription?.toString()
+
+/**
+ * What TalkBack says for the node on a stop, part by part in order: its description where it has one; otherwise its
+ * text, then what each of its children shown says, by the same rule, past those TalkBack stops on by themselves (a
+ * child that can be focused, clicked or long-pressed). The words Compose moves off a node that merges children of its
+ * own are read from those children this way, as TalkBack reads them. The node's role and state are read apart
+ * ([isButton], [isSwitch], [state]).
+ */
+internal val AccessibilityNodeInfo.spokenParts: List<String> get() = readWith().map { it.ownWords }.filter(String::isNotEmpty)
+
+/** What TalkBack says for the node on a stop: its [spokenParts], joined as TalkBack joins them. */
+internal val AccessibilityNodeInfo.spoken: String get() = spokenParts.joinToString(", ")
+
+/** Whether TalkBack stops on the node or a finger can press it. */
+internal val AccessibilityNodeInfo.isStop: Boolean get() = isScreenReaderFocusable || isClickable
+
+/** The node and, where it has no description, the children shown that TalkBack reads with it, theirs after each. */
+private fun AccessibilityNodeInfo.readWith(): List<AccessibilityNodeInfo> {
+    val read = mutableListOf(this)
+    if (contentDescription.isNullOrEmpty()) {
+        for (index in 0 until childCount) {
+            val child = getChild(index) ?: continue
+            if (child.refresh() && child.isVisibleToUser && !child.standsAlone) read += child.readWith()
+        }
+    }
+    return read
+}
+
+/** What TalkBack takes from the node itself: its description, or its text where it has none or an empty one. */
+private val AccessibilityNodeInfo.ownWords: String get() = contentDescription?.toString()?.ifEmpty { null } ?: text?.toString().orEmpty()
+
+/** Whether TalkBack stops on the node by itself rather than reading it with the stop that holds it. */
+private val AccessibilityNodeInfo.standsAlone: Boolean get() = isScreenReaderFocusable || isClickable || isLongClickable || isFocusable
 
 /** The state TalkBack reads after a node's name. */
 internal val AccessibilityNodeInfo.state: String? get() = stateDescription?.toString()
@@ -200,11 +278,48 @@ internal val AccessibilityNodeInfo.clickLabel: String? get() = action(Accessibil
 /** The action TalkBack's actions menu lists as `label`, a custom action of the app's. */
 internal fun AccessibilityNodeInfo.actionNamed(label: String): AccessibilityAction? = actionList.firstOrNull { it.label?.toString() == label }
 
-/** Whether TalkBack calls the node a button, from the class Compose gives `Role.Button`. */
-internal val AccessibilityNodeInfo.isButton: Boolean get() = className == "android.widget.Button"
+/** The role TalkBack says in place of the node's class, where it has one: Compose gives one to a switch and a tab. */
+internal val AccessibilityNodeInfo.roleDescription: String? get() = AccessibilityNodeInfoCompat.wrap(this).roleDescription?.toString()
 
-/** Whether TalkBack calls the node a switch, from the class Compose gives `Role.Switch`. */
-internal val AccessibilityNodeInfo.isSwitch: Boolean get() = className == "android.widget.Switch"
+/**
+ * The child Compose makes up to carry the role of a node that merges children of its own, the last of them: no id,
+ * words, children or action of its own, and the role's class or role description. The node itself keeps a plain class,
+ * and TalkBack says the role as it reads that child with it. Null where the node carries its role itself.
+ */
+private val AccessibilityNodeInfo.roleChild: AccessibilityNodeInfo?
+    get() {
+        if (childCount == 0 || !isScreenReaderFocusable) return null
+        val last = getChild(childCount - 1)?.takeIf { it.refresh() } ?: return null
+        val bare = last.childCount == 0 && last.viewIdResourceName == null && last.contentDescription.isNullOrEmpty() &&
+            last.text.isNullOrEmpty() && !last.standsAlone
+        val role = last.className?.toString() != "android.view.View" || !last.roleDescription.isNullOrEmpty()
+        return last.takeIf { bare && role }
+    }
+
+/** What carries the node's role: its [roleChild] where Compose made one up, else the node itself. */
+private val AccessibilityNodeInfo.roleBearer: AccessibilityNodeInfo get() = roleChild ?: this
+
+/** Whether TalkBack calls the node a button, from the class Compose gives `Role.Button` on it or its [roleChild]. */
+internal val AccessibilityNodeInfo.isButton: Boolean get() = roleBearer.className == "android.widget.Button"
+
+/**
+ * Whether TalkBack calls the node a switch: Compose gives `Role.Switch` no class but its role description (its string
+ * `switch_role`, in the app's language), on the node or its [roleChild].
+ */
+internal val AccessibilityNodeInfo.isSwitch: Boolean
+    get() = roleBearer.let { it.className == "android.widget.Switch" || it.roleDescription == switchRole }
+
+/**
+ * The role description Compose gives `Role.Switch`: its string `switch_role`, looked up by name among the app's own
+ * resources, where Compose's are merged, in the app's words.
+ */
+private val switchRole: String by lazy {
+    val app = InstrumentationRegistry.getInstrumentation().targetContext
+    @Suppress("DiscouragedApi")
+    val id = app.resources.getIdentifier("switch_role", "string", app.packageName)
+    check(id != 0) { "The app has no string switch_role of Compose's" }
+    app.getString(id)
+}
 
 /**
  * Whether TalkBack hears the node as selected: Compose sets a tab's selection as the node's, and any other's as its
@@ -247,6 +362,7 @@ private fun AccessibilityNodeInfo.line(): String = listOfNotNull(
     contentDescription?.let { "desc=\"$it\"" },
     text?.let { "text=\"$it\"" },
     stateDescription?.let { "state=\"$it\"" },
+    roleDescription?.let { "role=\"$it\"" },
     "focusable".takeIf { isScreenReaderFocusable },
     "clickable".takeIf { isClickable },
     "heading".takeIf { isHeading },
@@ -255,6 +371,37 @@ private fun AccessibilityNodeInfo.line(): String = listOfNotNull(
     "hidden".takeIf { !isVisibleToUser },
     "children=$childCount",
 ).joinToString(" ")
+
+/**
+ * The node as a line of the window's log ([AccessTree.logsTheWindowOnFailure]): its class, id, description, text, state
+ * and role description, whether it is checked, selected, a heading, focusable, focusable by a screen reader, clickable
+ * and shown, its actions' labels and its bounds.
+ */
+private fun AccessibilityNodeInfo.fullLine(): String = listOfNotNull(
+    className?.toString()?.substringAfterLast('.'),
+    viewIdResourceName?.let { "#$it" },
+    contentDescription?.let { "desc=\"$it\"" },
+    text?.let { "text=\"$it\"" },
+    stateDescription?.let { "state=\"$it\"" },
+    roleDescription?.let { "role=\"$it\"" },
+    "checked".takeIf { ticked },
+    "selected".takeIf { isSelected },
+    "heading".takeIf { isHeading },
+    "focusable".takeIf { isFocusable },
+    "screenReaderFocusable".takeIf { isScreenReaderFocusable },
+    "clickable".takeIf { isClickable },
+    "live".takeIf { liveRegion != View.ACCESSIBILITY_LIVE_REGION_NONE },
+    "hidden".takeIf { !isVisibleToUser },
+    actionList.mapNotNull { action -> action.label?.let { "${actionName(action.id)}=\"$it\"" } }.ifEmpty { null }?.joinToString(" ", "actions[", "]"),
+    bounds.toShortString(),
+).joinToString(" ")
+
+/** The name of a standard action TalkBack labels, or the id of one of the app's own. */
+private fun actionName(id: Int): String = when (id) {
+    AccessibilityNodeInfo.ACTION_CLICK -> "click"
+    AccessibilityNodeInfo.ACTION_LONG_CLICK -> "longClick"
+    else -> id.toString()
+}
 
 /** Whether touch exploration is on, as TalkBack turns it on and the app reads it. */
 internal fun touchExploration(): Boolean =

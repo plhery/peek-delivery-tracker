@@ -114,7 +114,7 @@ class PageAccessDeviceTest {
     private val tree = AccessTree(compose)
 
     @get:Rule
-    val rules: RuleChain = RuleChain.outerRule(MadePreferences()).around(ZurichTime()).around(compose).around(walk)
+    val rules: RuleChain = RuleChain.outerRule(MadePreferences()).around(ZurichTime()).around(compose).around(walk).around(tree.logsTheWindowOnFailure)
 
     /** A parcel its carrier answers for, with its history and one number. */
     private val gift: Parcel get() = DemoCards.parcel("Birthday gift")
@@ -126,7 +126,7 @@ class PageAccessDeviceTest {
 
     private fun fullName(parcel: Parcel): String = walk.identities.shown(parcel, walk.localizer).fullName
 
-    /** The node `id` once it reads `check`. */
+    /** The node `id` once `check` holds of it, as TalkBack reads it ([spoken]) or as it stands. */
     private fun awaitReading(id: String, what: String, check: (AccessibilityNodeInfo) -> Boolean): AccessibilityNodeInfo =
         tree.await("$id $what") { nodes -> nodes.firstOrNull { it.viewIdResourceName == id && check(it) } }
 
@@ -146,7 +146,7 @@ class PageAccessDeviceTest {
     /**
      * B-AX01, B-AX02, B-AX11, B-AX19, B-AX14: the pass's carrier is one button read "detail.changeCarrierFrom" with the
      * carrier's full name, then the delivery; the globe, share and bell are buttons named "map.open", "link.shareAria"
-     * and "detail.mute" (or "detail.unmute"), each a finger's 44 across, the bell's drawing saying nothing; the bell's
+     * and "detail.mute" (or "detail.unmute") alone, each a finger's 44 across, the bell's drawing no stop; the bell's
      * double tap mutes and it then says the other. The name is a button whose double tap is said as "detail.editTitle".
      * Nothing on the page stops without saying something. The carrier's button opens its editor, whose carrier row is
      * one button read "add.carrier" with the carrier as its state.
@@ -160,24 +160,24 @@ class PageAccessDeviceTest {
         assertTrue(marks.isButton)
         assertEquals("Nothing in the carrier's button is a stop of its own", 0, marks.childCount)
         val from = walk.text("detail.changeCarrierFrom", "carrier" to fullName(lamp))
-        assertTrue(marks.description.orEmpty(), marks.description.orEmpty().startsWith(from))
+        assertTrue(marks.spoken, marks.spoken.startsWith(from))
         for ((id, key) in listOf(PAGE_GLOBE to "map.open", PAGE_SHARE to "link.shareAria")) {
             val button = tree.awaitId(id)
-            assertEquals(walk.text(key), button.description)
+            assertEquals(walk.text(key), button.spoken)
             assertTrue(button.isButton)
             button.assertTarget(id)
         }
         val (mute, unmute) = listOf("detail.mute", "detail.unmute").map(walk::text).let { if (lamp.notificationsMuted) it.reversed() else it }
         val bell = tree.awaitId(PAGE_BELL)
-        assertEquals(mute, bell.description)
+        assertEquals(mute, bell.spoken)
         assertTrue(bell.isButton)
         bell.assertTarget(PAGE_BELL)
-        assertTrue("The bell's drawing is read", tree.under(bell).drop(1).all { it.words.isEmpty() && !it.isScreenReaderFocusable })
+        assertTrue("The bell's drawing is a stop", tree.under(bell).drop(1).none { it.isScreenReaderFocusable })
         assertTrue(bell.click())
-        awaitReading(PAGE_BELL, "saying \"$unmute\"") { it.description == unmute }
+        awaitReading(PAGE_BELL, "saying \"$unmute\"") { it.spoken == unmute }
 
         val name = tree.awaitId(PAGE_NAME)
-        assertEquals(lamp.label, name.words)
+        assertEquals(lamp.label, name.spoken)
         assertTrue(name.isButton)
         assertEquals(walk.text("detail.editTitle"), name.clickLabel)
         tree.assertNoBlankStops(tree.within(PARCEL_PAGE))
@@ -187,7 +187,7 @@ class PageAccessDeviceTest {
         compose.waitUntil(LONG_MILLIS) { walk.exists(CHANGE_CARRIER_SHEET) }
         compose.reveal(CHANGE_CARRIER_ROW)
         val row = tree.awaitId(CHANGE_CARRIER_ROW)
-        assertEquals(walk.text("add.carrier"), row.description)
+        assertEquals(walk.text("add.carrier"), row.spoken)
         assertTrue(row.isButton)
         assertEquals(0, row.childCount)
         assertFalse("The carrier row reads no carrier", row.state.isNullOrEmpty())
@@ -213,20 +213,20 @@ class PageAccessDeviceTest {
         val current = (stage?.metadata?.progress ?: 0).coerceIn(0, steps - 1)
         val step = walk.text("progress.step", "step" to current + 1, "total" to steps, "stage" to walk.text(stage?.localizationKey ?: "status.pending"))
         val progress = walk.text("native.deliveryProgress")
-        val rail = tree.await("The journey's rail", read = { tree.within(PARCEL_PAGE) }) { nodes -> nodes.firstOrNull { it.description == progress } }
+        val rail = tree.await("The journey's rail", read = { tree.within(PARCEL_PAGE) }) { nodes -> nodes.firstOrNull { it.isStop && it.spoken == progress } }
         assertEquals(step, rail.state)
         assertEquals(0, rail.childCount)
 
         compose.reveal(PAGE_REFRESH)
         val refresh = tree.awaitId(PAGE_REFRESH)
-        assertEquals(walk.text("detail.checkNow"), refresh.description)
+        assertEquals(walk.text("detail.checkNow"), refresh.spoken)
         assertTrue(refresh.isButton)
 
         compose.reveal(PAGE_COPY_NUMBER)
         val copyTracking = walk.text("detail.copyTracking")
         val copied = walk.text("detail.copied")
         val copy = tree.awaitId(PAGE_COPY_NUMBER)
-        assertTrue(copy.description.orEmpty(), copy.description.orEmpty().startsWith(copyTracking))
+        assertTrue(copy.spoken, copy.spoken.startsWith(copyTracking))
         assertTrue(copy.isButton)
         assertEquals(0, copy.childCount)
         copy.assertTarget(PAGE_COPY_NUMBER)
@@ -234,12 +234,12 @@ class PageAccessDeviceTest {
             tree.holdingTheClock {
                 assertTrue(copy.click())
                 tree.await("The copy saying \"$copied\"", read = tree::framed) { nodes ->
-                    nodes.firstOrNull { it.viewIdResourceName == PAGE_COPY_NUMBER && it.description.orEmpty().startsWith(copied) }
+                    nodes.firstOrNull { it.viewIdResourceName == PAGE_COPY_NUMBER && it.spoken.startsWith(copied) }
                 }
                 if (!Device.confirmsCopies) tree.awaitSaid(ANNOUNCEMENT, copied)
                 compose.mainClock.advanceTimeBy(COPIED_MILLIS)
                 tree.await("The copy saying \"$copyTracking\" again", read = tree::framed) { nodes ->
-                    nodes.firstOrNull { it.viewIdResourceName == PAGE_COPY_NUMBER && it.description.orEmpty().startsWith(copyTracking) }
+                    nodes.firstOrNull { it.viewIdResourceName == PAGE_COPY_NUMBER && it.spoken.startsWith(copyTracking) }
                 }
             }
         }
@@ -255,9 +255,9 @@ class PageAccessDeviceTest {
         for (day in days) {
             assertTrue(day.isHeading)
             assertEquals(0, day.childCount)
-            assertTrue(day.words.isNotEmpty())
+            assertTrue(day.spoken.isNotEmpty())
         }
-        assertTrue("Each day is read in capitals: ${days.map { it.words }}", days.any { day -> day.words.any(Char::isLowerCase) })
+        assertTrue("Each day is read in capitals: ${days.map { it.spoken }}", days.any { day -> day.spoken.any(Char::isLowerCase) })
         val rows = shown.filter { it.viewIdResourceName == JOURNAL_ROW }
         assertTrue("No row of the history shown\n${tree.dump(shown)}", rows.isNotEmpty())
         for (row in rows) assertTrue("A row of the history isn't read as one\n${tree.dump(tree.under(row))}", tree.oneElement(row))
@@ -295,9 +295,9 @@ class PageAccessDeviceTest {
         openAdd()
         val title = tree.awaitId(ADD_TITLE)
         assertTrue(title.isHeading)
-        assertEquals(walk.text("add.title"), title.words)
+        assertEquals(walk.text("add.title"), title.spoken)
         val close = checkNotNull(tree.byId(ADD_CLOSE))
-        assertEquals(walk.text("common.close"), close.description)
+        assertEquals(walk.text("common.close"), close.spoken)
         assertTrue(close.isButton)
         close.assertTarget(ADD_CLOSE)
         tree.byId(ADD_SCAN)?.let { scan ->
@@ -307,11 +307,11 @@ class PageAccessDeviceTest {
 
         type("Your parcel $NUMBER is on its way")
         val foundText = walk.text("add.foundText", "number" to CarrierCatalog.format(NUMBER, CarrierId.Ups))
-        val found = awaitReading(ADD_FOUND, "saying \"$foundText\"") { it.description == foundText }
+        val found = awaitReading(ADD_FOUND, "saying \"$foundText\"") { it.spoken == foundText }
         assertEquals(0, found.childCount)
         val change = walk.text("add.line.change")
         val detected = "UPS, ${walk.text("add.detectedCarrier")}, $change"
-        val line = awaitReading(ADD_CARRIER, "saying \"$detected\"") { it.description == detected }
+        val line = awaitReading(ADD_CARRIER, "saying \"$detected\"") { it.spoken == detected }
         assertTrue(line.isButton)
         assertEquals(0, line.childCount)
         assertEquals(change, line.clickLabel)
@@ -319,7 +319,7 @@ class PageAccessDeviceTest {
         type(AMAZON)
         val amazon = awaitReading(ADD_CARRIER, "off for an Amazon number") { !it.isEnabled }
         assertNull(amazon.action(AccessibilityNodeInfo.ACTION_CLICK))
-        assertFalse(amazon.description.orEmpty(), amazon.description.orEmpty().endsWith(change))
+        assertFalse(amazon.spoken, amazon.spoken.endsWith(change))
     }
 
     /**
@@ -333,10 +333,10 @@ class PageAccessDeviceTest {
         type("UPS $NUMBER\nUPS $SECOND")
         val several = tree.awaitId(ADD_SEVERAL)
         assertTrue(several.isHeading)
-        assertEquals(walk.text("door.several.title.many", "count" to 2), several.words)
+        assertEquals(walk.text("door.several.title.many", "count" to 2), several.spoken)
         val first = tree.awaitId(numberRowTag(NUMBER))
         val second = checkNotNull(tree.byId(numberRowTag(SECOND)))
-        assertEquals("UPS, ${CarrierCatalog.format(NUMBER, CarrierId.Ups)}", first.description)
+        assertEquals("UPS, ${CarrierCatalog.format(NUMBER, CarrierId.Ups)}", first.spoken)
         assertTrue(first.isButton && second.isButton)
         assertEquals(0, first.childCount)
         assertTrue(first.chosen)
@@ -350,7 +350,8 @@ class PageAccessDeviceTest {
 
     /**
      * B-AX08, B-AX12, B-AX13, B-AX19, B-AX10: for a number no carrier is found for, the carrier line's double tap is said
-     * as "add.line.choose" and opens the picker, where the automatic row is the one heard selected and the carriers'
+     * as "add.line.change" ("add.line.choose" is for a number several carriers know, as on the iPhone) and opens the
+     * picker, where the automatic row is the one heard selected and the carriers'
      * rows are buttons, each one element, none heard as a choice. The letter rail is one element 44 wide read
      * "picker.jump" with its letter, a range from the first letter that setting its progress moves. A carrier chosen
      * from a search brings the postcode's country, a drop-down list read "add.requirement.postcodeCountry" with the
@@ -362,9 +363,9 @@ class PageAccessDeviceTest {
         walk.show(DemoCards.parcels())
         openAdd()
         type(MONDIAL_NUMBER)
-        val choose = walk.text("add.line.choose")
-        val line = awaitReading(ADD_CARRIER, "saying \"$choose\"") { it.clickLabel == choose }
-        assertTrue(line.description.orEmpty(), line.description.orEmpty().endsWith(choose))
+        val change = walk.text("add.line.change")
+        val line = awaitReading(ADD_CARRIER, "saying \"$change\"") { it.clickLabel == change }
+        assertTrue(line.spoken, line.spoken.endsWith(change))
         assertTrue(line.click())
         walk.settle()
         compose.waitUntil(LONG_MILLIS) { walk.exists(ADD_PICKER) }
@@ -377,11 +378,11 @@ class PageAccessDeviceTest {
         for (row in rows) {
             assertTrue(row.isButton)
             assertEquals(0, row.childCount)
-            assertFalse("${row.description} is read as a choice", row.isCheckable)
+            assertFalse("${row.spoken} is read as a choice", row.isCheckable)
         }
 
         val rail = tree.awaitId(LETTER_RAIL)
-        assertEquals(walk.text("picker.jump"), rail.description)
+        assertEquals(walk.text("picker.jump"), rail.spoken)
         assertEquals(0, rail.childCount)
         rail.assertTarget(LETTER_RAIL, along = false)
         assertEquals(0f, checkNotNull(rail.rangeInfo) { "The rail has no range" }.current, 0f)
@@ -396,7 +397,7 @@ class PageAccessDeviceTest {
         walk.settle()
         val mondial = walk.identities.catalog.info(CarrierId.MondialRelay, walk.language).displayName
         val row = tree.awaitId(carrierPickerRowTag(CarrierId.MondialRelay))
-        assertTrue(row.description.orEmpty(), row.description.orEmpty().startsWith(mondial))
+        assertTrue(row.spoken, row.spoken.startsWith(mondial))
         assertTrue(row.click())
         walk.settle()
         compose.waitUntil(LONG_MILLIS) { !walk.exists(ADD_PICKER) }
@@ -404,14 +405,14 @@ class PageAccessDeviceTest {
         compose.reveal(ADD_COUNTRY)
         val country = tree.awaitId(ADD_COUNTRY)
         assertEquals("android.widget.Spinner", country.className)
-        assertEquals(walk.text("add.requirement.postcodeCountry"), country.description)
+        assertEquals(walk.text("add.requirement.postcodeCountry"), country.spoken)
         assertEquals(0, country.childCount)
         val name = country.state.orEmpty()
         assertTrue("The menu reads no country", name.isNotEmpty())
         assertTrue(country.click())
         walk.settle()
         val options = tree.await("The countries' menu") { nodes -> nodes.filter { it.viewIdResourceName?.startsWith("$CHANGE_CARRIER_COUNTRY.") == true }.ifEmpty { null } }
-        val shown = options.firstOrNull { option -> tree.under(option).any { it.words.endsWith(name) } }
+        val shown = options.firstOrNull { option -> option.spokenParts.any { it.endsWith(name) } }
         assertTrue("$name is not selected in its menu\n${tree.dump(options)}", shown?.chosen == true)
         walk.back()
         tree.awaitGone("The countries' menu") { nodes -> nodes.none { it.viewIdResourceName?.startsWith("$CHANGE_CARRIER_COUNTRY.") == true } }
@@ -446,13 +447,13 @@ class PageAccessDeviceTest {
         walk.awaitStill()
         assertTrue(tree.awaitId(PARCEL_SHARE_TITLE).isHeading)
         val close = checkNotNull(tree.byId(PARCEL_SHARE_CLOSE))
-        assertEquals(walk.text("common.close"), close.description)
+        assertEquals(walk.text("common.close"), close.spoken)
         assertTrue(close.isButton)
         close.assertTarget(PARCEL_SHARE_CLOSE)
 
         compose.reveal(PARCEL_SHARE_ADDRESS)
         val address = tree.awaitId(PARCEL_SHARE_ADDRESS)
-        assertEquals(walk.text("share.address"), address.description)
+        assertEquals(walk.text("share.address"), address.spoken)
         val whole = address.state.orEmpty()
         assertTrue(whole, Regex("^https?://").containsMatchIn(whole) && whole.contains(LINK_ID))
         assertTrue("$whole doesn't end with the words shown, ${address.text}", whole.endsWith(address.text?.toString().orEmpty()))
@@ -478,7 +479,7 @@ class PageAccessDeviceTest {
             tree.holdingTheClock {
                 assertTrue(copy.click())
                 tree.await("Copy saying \"$copied\"", read = tree::framed) { nodes ->
-                    nodes.firstOrNull { node -> node.viewIdResourceName == PARCEL_SHARE_COPY && tree.under(node).any { it.words == copied } }
+                    nodes.firstOrNull { it.viewIdResourceName == PARCEL_SHARE_COPY && it.spoken == copied }
                 }
                 if (!Device.confirmsCopies) tree.awaitSaid(ANNOUNCEMENT, walk.text("link.copied"))
             }
@@ -495,16 +496,16 @@ class PageAccessDeviceTest {
         walk.show(DemoCards.parcels()) { signedInWithEmail(true) }
         val gift = gift
         walk.open(gift)
-        val bell = awaitReading(PAGE_BELL, "opening the alerts") { it.description == walk.text("email.parcel.open") }
+        val bell = awaitReading(PAGE_BELL, "opening the alerts") { it.spoken == walk.text("email.parcel.open") }
         assertTrue(bell.click())
         walk.settle()
         compose.waitUntil(LONG_MILLIS) { walk.exists(PARCEL_ALERTS) }
         walk.awaitStill()
         val title = tree.awaitId(PARCEL_ALERTS_TITLE)
         assertTrue(title.isHeading)
-        assertEquals(walk.text("email.parcel.title", "name" to gift.label), title.words)
+        assertEquals(walk.text("email.parcel.title", "name" to gift.label), title.spoken)
         val close = checkNotNull(tree.byId(PARCEL_ALERTS_CLOSE))
-        assertEquals(walk.text("common.close"), close.description)
+        assertEquals(walk.text("common.close"), close.spoken)
         assertTrue(close.isButton)
         close.assertTarget(PARCEL_ALERTS_CLOSE)
         for (id in listOf(PARCEL_ALERTS_NOTIFICATIONS, PARCEL_ALERTS_EMAIL)) {
@@ -533,12 +534,12 @@ class PageAccessDeviceTest {
         walk.open(delivered)
         compose.reveal(PAGE_EMAIL_OFFER)
         val offer = tree.await("The offer", read = { tree.within(PAGE_EMAIL_OFFER) }) { it.takeIf(List<AccessibilityNodeInfo>::isNotEmpty) }
-        assertTrue("The offer's title is no heading\n${tree.dump(offer)}", offer.any { it.isHeading && it.words.isNotEmpty() })
+        assertTrue("The offer's title is no heading\n${tree.dump(offer)}", offer.any { it.isHeading && it.spoken.isNotEmpty() })
         for (id in listOf(PAGE_EMAIL_OFFER_TURN_ON, PAGE_EMAIL_OFFER_NOT_NOW)) {
             val button = checkNotNull(offer.firstOrNull { it.viewIdResourceName == id }) { "No $id\n${tree.dump(offer)}" }
             assertTrue(button.isButton)
             assertTrue("$id isn't read as one", tree.oneElement(button))
-            assertTrue(tree.under(button).any { it.words.isNotEmpty() })
+            assertTrue("$id says nothing", button.spoken.isNotEmpty())
         }
 
         walk.onUi { walk.source.failure = IOException("offline") }
@@ -562,8 +563,8 @@ class PageAccessDeviceTest {
     /**
      * B-AX17, B-AX19: the question's answers are buttons a finger's 44 tall, as each reason is; a reason given is
      * thanked through the window's live region, "feedback.pip.sent". In the words' sheet the reason given is the chip
-     * heard selected, the others with nothing of a choice until chosen, each 44 tall; the note's field carries its label,
-     * which nothing beside it reads.
+     * heard selected, the others with nothing of a choice until chosen, each 44 tall; the note's field is read with its
+     * label "feedback.note" alone, which no other stop of the sheet reads.
      */
     @Test
     fun theQuestionsAnswersAreFingerSizedItsThanksAreSaidAndItsChipsHeardSelected() {
@@ -606,9 +607,10 @@ class PageAccessDeviceTest {
         awaitReading(arrived, "chosen") { it.chosen }
         val note = tree.awaitId(FEEDBACK_NOTE)
         assertTrue(note.isEditable)
-        val label = note.description.orEmpty()
-        assertTrue("The note's field has no label", label.isNotEmpty())
-        assertEquals("The note's label is read apart from its field", 1, tree.within(FEEDBACK_WORDS_SHEET).count { it.words == label })
+        val label = walk.text("feedback.note")
+        assertEquals("The note's field isn't read with its label alone", label, note.spoken)
+        val apart = tree.within(FEEDBACK_WORDS_SHEET).filter { it.isStop && it.viewIdResourceName != FEEDBACK_NOTE && label in it.spokenParts }
+        assertTrue("The note's label is read apart from its field\n${tree.dump(apart)}", apart.isEmpty())
     }
 
     private companion object {

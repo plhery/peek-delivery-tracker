@@ -404,7 +404,8 @@ private fun AccountButton(state: DeliveriesState, modifier: Modifier) =
 /**
  * `AccountToolbarButton`: the account's initial, or a figure, on a 34-point yellow disc, which opens Settings. Ctrl or
  * Meta with a comma presses it, as ⌘, does, while its screen has the keys ([inFront]), and does nothing while anything
- * stands over the tabs ([LocalTabsCovered]), as the iPhone's `open()` waits while `windowCovered`.
+ * stands over the tabs ([LocalTabsCovered]), as the iPhone's `open()` waits while `windowCovered`. TalkBack reads it
+ * "native.account" alone, as VoiceOver reads its label: the initial on it says nothing.
  */
 @Composable
 private fun AccountButton(
@@ -424,7 +425,7 @@ private fun AccountButton(
             .size(BUTTON_SIDE)
             .testTag(tag)
             .clickable(interactionSource = null, indication = PressStyle.tactile(0.94f), onClick = onClick)
-            .semantics {
+            .clearAndSetSemantics {
                 contentDescription = label
                 role = Role.Button
             },

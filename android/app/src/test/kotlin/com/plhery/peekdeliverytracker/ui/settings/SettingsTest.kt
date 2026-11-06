@@ -21,6 +21,7 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
+import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsEnabled
@@ -273,6 +274,23 @@ class SettingsTest {
         assertFalse(deliveries.showingAccount)
         assertFalse(exists(SETTINGS_SHEET))
         assertEquals("deliveries", source.views.last())
+    }
+
+    /**
+     * The account button is one button read "native.account" alone, as VoiceOver reads `AccountToolbarButton`'s label:
+     * the initial drawn on it is not read with it, and its click still opens Settings.
+     */
+    @Test
+    fun theAccountButtonIsReadByItsNameAloneWithoutTheInitialOnIt() {
+        show()
+        compose.onNode(hasText("R") and hasAnyAncestor(hasTestTag(ACCOUNT_BUTTON)), useUnmergedTree = true).assertExists()
+        val account = node(ACCOUNT_BUTTON).fetchSemanticsNode()
+        assertEquals(listOf(text("native.account")), account.config.getOrNull(SemanticsProperties.ContentDescription))
+        assertEquals(Role.Button, account.config.getOrNull(SemanticsProperties.Role))
+        assertNull("The initial is read with the account button", account.config.getOrNull(SemanticsProperties.Text))
+        node(ACCOUNT_BUTTON).performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertTrue(deliveries.showingAccount)
     }
 
     @Test

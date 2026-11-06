@@ -98,14 +98,14 @@ class ListAccessDeviceTest {
     private val tree = AccessTree(compose)
 
     @get:Rule
-    val rules: RuleChain = RuleChain.outerRule(MadePreferences()).around(ZurichTime()).around(compose).around(walk)
+    val rules: RuleChain = RuleChain.outerRule(MadePreferences()).around(ZurichTime()).around(compose).around(walk).around(tree.logsTheWindowOnFailure)
 
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
     private val demo: List<Parcel> = DemoCards.parcels()
 
     /** The card of `parcel` among the list's nodes: a button read with its name, other than a toast saying it. */
     private fun card(nodes: List<AccessibilityNodeInfo>, parcel: Parcel): AccessibilityNodeInfo? =
-        nodes.firstOrNull { it.isButton && it.viewIdResourceName != INLINE_TOAST && it.description?.contains(parcel.label) == true }
+        nodes.firstOrNull { it.isStop && it.viewIdResourceName != INLINE_TOAST && it.isButton && it.spoken.contains(parcel.label) }
 
     /** The list's nodes, read again. */
     private fun list(): List<AccessibilityNodeInfo> = tree.within(PARCEL_LIST)
@@ -147,7 +147,7 @@ class ListAccessDeviceTest {
         val next = nextUp()
         val card = tree.await("The Next up card", read = ::list) { card(it, next) }
         assertEquals("Nothing in the Next up card is a stop of its own", 0, card.childCount)
-        val label = card.description.orEmpty()
+        val label = card.spoken
         assertTrue(label, label.startsWith(fullName(next)))
         if (next.currentStage != TrackingStage.Delivered) assertTrue(label, label.contains(walk.text("app.nextUp")))
         assertEquals(walk.text("detail.label"), card.clickLabel)
@@ -158,7 +158,7 @@ class ListAccessDeviceTest {
         assertTrue("No compact card shown", shown.isNotEmpty())
         for ((parcel, compact) in shown) {
             assertEquals("Nothing in ${parcel.label}'s card is a stop of its own", 0, compact.childCount)
-            assertTrue(compact.description.orEmpty(), compact.description.orEmpty().startsWith(fullName(parcel)))
+            assertTrue(compact.spoken, compact.spoken.startsWith(fullName(parcel)))
             assertNotNull(compact.action(AccessibilityNodeInfo.ACTION_CLICK))
             assertNull(compact.clickLabel)
             assertNotNull(compact.actionNamed(archive))
@@ -187,7 +187,7 @@ class ListAccessDeviceTest {
         val undo = walk.text("app.undo")
         val toast = tree.awaitId(INLINE_TOAST)
         assertTrue(toast.isButton)
-        assertTrue(toast.description.orEmpty(), toast.description.orEmpty().endsWith(", $undo"))
+        assertTrue(toast.spoken, toast.spoken.endsWith(", $undo"))
         assertEquals(undo, toast.clickLabel)
         assertTrue("The toast is read as one", tree.oneElement(toast))
         assertTrue(toast.click())
@@ -199,14 +199,14 @@ class ListAccessDeviceTest {
         walk.settle()
         val archived = DemoCards.archived()
         val shelfLabel = "${walk.text("app.archived")}, ${archived.size}"
-        val shelf = tree.await("The archive's shelf", read = ::list) { nodes -> nodes.firstOrNull { it.description == shelfLabel } }
+        val shelf = tree.await("The archive's shelf", read = ::list) { nodes -> nodes.firstOrNull { it.isStop && it.spoken == shelfLabel } }
         assertTrue(shelf.isButton)
         assertEquals(0, shelf.childCount)
         assertEquals(walk.text("design.showArchive"), shelf.clickLabel)
         assertTrue(shelf.click())
         walk.settle()
         val open = tree.await("The open shelf", read = ::list) { nodes ->
-            nodes.firstOrNull { it.description == shelfLabel && it.clickLabel == walk.text("design.hideArchive") }
+            nodes.firstOrNull { it.isStop && it.clickLabel == walk.text("design.hideArchive") && it.spoken == shelfLabel }
         }
         assertTrue(open.isButton)
         val row = tree.await("${archived.first().label}'s row", read = ::list) { card(it, archived.first()) }
@@ -258,23 +258,23 @@ class ListAccessDeviceTest {
     fun theTopBarIsReadByNameAndTheSearchFieldTakesTheFocusAndGivesItBack() {
         walk.show(demo)
         val add = tree.awaitId(ADD_BUTTON)
-        assertEquals(walk.text("app.addParcelAria"), add.description)
+        assertEquals(walk.text("app.addParcelAria"), add.spoken)
         assertTrue(add.isButton)
         val account = checkNotNull(tree.byId(ACCOUNT_BUTTON))
-        assertEquals(walk.text("native.account"), account.description)
+        assertEquals(walk.text("native.account"), account.spoken)
         assertTrue(account.isButton)
         val filters = checkNotNull(tree.byId(FILTERS_BUTTON))
-        assertEquals(walk.text("view.sortFilter"), filters.description)
+        assertEquals(walk.text("view.sortFilter"), filters.spoken)
         assertNull(filters.state)
         val search = checkNotNull(tree.byId(SEARCH_BUTTON))
-        assertEquals(walk.text("view.search"), search.description)
+        assertEquals(walk.text("view.search"), search.spoken)
         assertTrue(search.isButton)
         tree.assertNoBlankStops()
 
         assertTrue(search.click())
         walk.settle()
         val field = tree.await("The focused search field") { nodes -> nodes.firstOrNull { it.viewIdResourceName == SEARCH_FIELD && it.isFocused } }
-        assertEquals(walk.text("view.search"), field.description)
+        assertEquals(walk.text("view.search"), field.spoken)
         assertTrue(field.isEditable)
         tree.assertNoBlankStops(tree.within(SEARCH_ROW))
         assertTrue(
@@ -285,9 +285,9 @@ class ListAccessDeviceTest {
         )
         walk.settle()
         val clear = tree.awaitId(SEARCH_CLEAR)
-        assertEquals(walk.text("view.clear"), clear.description)
+        assertEquals(walk.text("view.clear"), clear.spoken)
         assertTrue(clear.isButton)
-        assertEquals(walk.text("view.hideSearch"), checkNotNull(tree.byId(SEARCH_BUTTON)).description)
+        assertEquals(walk.text("view.hideSearch"), checkNotNull(tree.byId(SEARCH_BUTTON)).spoken)
 
         assertTrue(checkNotNull(tree.byId(FILTERS_BUTTON)).click())
         walk.settle()
@@ -318,23 +318,23 @@ class ListAccessDeviceTest {
         compose.exploringByTouch {
             assumeTrue("Touch exploration stayed off and the list stands alone: no refresh button", !walk.stacked() || touchExploration())
             val refresh = tree.awaitId(REFRESH_BUTTON)
-            assertEquals(walk.text("app.refresh"), refresh.description)
+            assertEquals(walk.text("app.refresh"), refresh.spoken)
             assertTrue(refresh.isButton)
             val checked = CompletableDeferred<ParcelStore.RefreshResult?>()
             walk.onUi { walk.source.checking = checked }
             assertTrue(refresh.click())
             tree.holdingTheClock {
                 tree.await("The refresh button checking", read = tree::framed) { nodes ->
-                    nodes.firstOrNull { it.viewIdResourceName == REFRESH_BUTTON && it.description == walk.text("app.refreshing") }
+                    nodes.firstOrNull { it.viewIdResourceName == REFRESH_BUTTON && it.spoken == walk.text("app.refreshing") }
                 }
                 checked.complete(ParcelStore.RefreshResult.Unchanged)
                 val unchanged = walk.text("app.refreshUnchanged")
                 tree.awaitSaid(ANNOUNCEMENT, unchanged)
                 val toast = checkNotNull(tree.byId(INLINE_TOAST))
-                assertEquals(unchanged, toast.description)
+                assertEquals(unchanged, toast.spoken)
                 assertFalse(toast.isButton)
                 assertEquals(0, toast.childCount)
-                assertEquals(walk.text("app.refresh"), checkNotNull(tree.byId(REFRESH_BUTTON)).description)
+                assertEquals(walk.text("app.refresh"), checkNotNull(tree.byId(REFRESH_BUTTON)).spoken)
             }
         }
     }
@@ -343,7 +343,8 @@ class ListAccessDeviceTest {
 
     /**
      * A-AX12, A-AX20, A-AX03: in the demo the bar over the list is one button read "app.demo, native.exitDemo" and found
-     * as demo.exit, at the default text size and at the largest; its words drawn inside say nothing of their own.
+     * as demo.exit, at the default text size and at the largest; its words drawn inside add nothing to that and are no
+     * stops of their own.
      */
     @Test
     fun theDemoBarIsOneButtonNamedDemoExitAtEveryTextSize() {
@@ -353,16 +354,16 @@ class ListAccessDeviceTest {
             walk.fontScale = scale
             walk.recompose()
             walk.settle()
-            val bar = tree.await("The demo bar at $scale") { nodes -> nodes.firstOrNull { it.viewIdResourceName == DEMO_EXIT && it.description == label } }
+            val bar = tree.await("The demo bar at $scale") { nodes -> nodes.firstOrNull { it.viewIdResourceName == DEMO_EXIT && it.spoken == label } }
             assertTrue(bar.isButton)
             assertTrue("The demo bar is read as one at $scale", tree.oneElement(bar))
-            assertTrue(tree.under(bar).drop(1).all { it.words.isEmpty() })
+            assertTrue("Something under the demo bar is a stop of its own at $scale", tree.under(bar).drop(1).none { it.isScreenReaderFocusable })
         }
     }
 
     /**
      * A-AX13, A-AX20, A-AX16: the list's foot, found as deliveries.foot, reads the app's name and tagline as one stop,
-     * its mark silent, then its three links, each one button found by its id and read by its words.
+     * its mark adding nothing, then its three links, each one button found by its id and read by its words alone.
      */
     @Test
     fun theFootReadsItsNameOnceThenThreeLinksByTheirIds() {
@@ -371,14 +372,15 @@ class ListAccessDeviceTest {
         walk.settle()
         val foot = tree.await("The foot", read = { tree.within(FOOT) }) { it.takeIf(List<AccessibilityNodeInfo>::isNotEmpty) }
         val name = "${walk.text("app.title")} · ${walk.text("native.tagline")}"
-        val row = foot.first { node -> node.isScreenReaderFocusable && !node.isClickable && tree.under(node).any { it.words == name } }
+        val row = checkNotNull(foot.firstOrNull { it.isScreenReaderFocusable && !it.isClickable && it.spoken == name }) {
+            "No stop of the foot reads \"$name\" alone\n${tree.dump(foot)}"
+        }
         assertTrue("The foot's name is read as one", tree.oneElement(row))
-        assertTrue(tree.under(row).filter { it.words != name }.all { it.words.isEmpty() })
         for ((id, words) in listOf("home" to walk.text("app.homePage"), "privacy" to walk.text("auth.privacyLink"), "source" to "GitHub")) {
             val link = foot.first { it.viewIdResourceName == "$FOOT.$id" }
             assertTrue(link.isButton)
             assertTrue("The $id link is read as one", tree.oneElement(link))
-            assertEquals(words, tree.under(link).firstOrNull { it.words.isNotEmpty() }?.words)
+            assertEquals(words, link.spoken)
         }
     }
 
@@ -386,23 +388,22 @@ class ListAccessDeviceTest {
 
     /**
      * A-AX20, A-AX17, A-AX16: signed in with no parcels, Pip's parcel is the button deliveries.empty.sample read
-     * "landing.pip.open", the drawing in it silent, under it the app's name a heading, and paste and add are buttons found
-     * by their ids and read by their words. Nothing stops without saying something.
+     * "landing.pip.open" alone, the drawing in it adding nothing, under it the app's name a heading, and paste and add
+     * are buttons found by their ids and read by their words. Nothing stops without saying something.
      */
     @Test
     fun anEmptyListOffersTheSampleAndItsWaysInByTheirIds() {
         walk.show(emptyList())
         val sample = tree.awaitId(EMPTY_SAMPLE)
-        assertEquals(walk.text("landing.pip.open"), sample.description)
+        assertEquals(walk.text("landing.pip.open"), sample.spoken)
         assertTrue(sample.isButton)
-        assertTrue(tree.under(sample).drop(1).all { it.words.isEmpty() })
-        assertTrue(tree.nodes().any { it.isHeading && it.words == walk.text("peek.title") })
+        assertTrue(tree.nodes().any { it.isHeading && it.spoken == walk.text("peek.title") })
         for (tag in listOf(EMPTY_PASTE, EMPTY_ADD)) {
             compose.reveal(tag)
             val button = tree.awaitId(tag)
             assertTrue(button.isButton)
             assertTrue(tree.oneElement(button))
-            assertTrue(tree.under(button).any { it.words.isNotEmpty() })
+            assertTrue(button.spoken.isNotEmpty())
         }
         tree.assertNoBlankStops()
     }
@@ -419,19 +420,21 @@ class ListAccessDeviceTest {
         val nodes = tree.await("The first open's field") { nodes -> nodes.takeIf { all -> all.any { it.viewIdResourceName == FIRST_OPEN_FIELD } } }
         assertTrue("The list is in the tree under the first open", nodes.none { it.viewIdResourceName == PARCEL_LIST })
         assertTrue("The tab bar is in the tree under the first open", nodes.none { it.viewIdResourceName == TAB_BAR })
-        assertTrue(nodes.any { it.isHeading && it.words == walk.text("peek.title") })
+        assertTrue(nodes.any { it.isHeading && it.spoken == walk.text("peek.title") })
         val field = nodes.first { it.viewIdResourceName == FIRST_OPEN_FIELD }
         assertTrue(field.isButton)
-        assertEquals("${walk.text("add.trackingPlaceholder")}, ${walk.text("add.tracking")}", field.description)
+        assertEquals("${walk.text("add.trackingPlaceholder")}, ${walk.text("add.tracking")}", field.spoken)
         nodes.firstOrNull { it.viewIdResourceName == FIRST_OPEN_SCAN }?.let { scan ->
-            assertEquals(walk.text("add.scan"), scan.description)
+            assertEquals(walk.text("add.scan"), scan.spoken)
             assertTrue(scan.isButton)
         }
-        assertTrue(nodes.any { it.viewIdResourceName == FIRST_OPEN_PICTURE && it.description == walk.text("landing.pip.open") && it.isButton })
+        val picture = nodes.first { it.viewIdResourceName == FIRST_OPEN_PICTURE }
+        assertEquals(walk.text("landing.pip.open"), picture.spoken)
+        assertTrue(picture.isButton)
         compose.reveal(FIRST_OPEN_RIBBON)
         val ribbon = tree.awaitId(FIRST_OPEN_RIBBON)
         assertEquals(0, ribbon.childCount)
-        val label = ribbon.description.orEmpty()
+        val label = ribbon.spoken
         val (before, after) = walk.text("landing.ribbon.label", "carriers" to MARK).split(MARK)
         assertTrue(label, label.startsWith(before) && label.endsWith(after))
         assertEquals(label, 5, label.removePrefix(before).removeSuffix(after).split(", ").size)
@@ -461,13 +464,13 @@ class ListAccessDeviceTest {
         val cover = tree.awaitId(PASSPORT_COVER)
         assertTrue(cover.isButton)
         assertEquals(0, cover.childCount)
-        assertTrue(cover.description.orEmpty().isNotEmpty())
+        assertTrue(cover.spoken.isNotEmpty())
         assertEquals(collapsed, cover.state)
         assertEquals(details, cover.clickLabel)
         assertTrue(cover.click())
         walk.settle()
         val bubble = tree.await("The popover", read = { tree.within(PASSPORT_POPOVER) }) { it.takeIf(List<AccessibilityNodeInfo>::isNotEmpty) }
-        val title = checkNotNull(bubble.firstOrNull { it.isHeading }) { "The popover's title is no heading\n${tree.dump(bubble)}" }.words
+        val title = checkNotNull(bubble.firstOrNull { it.isHeading }) { "The popover's title is no heading\n${tree.dump(bubble)}" }.spoken
         val nodes = tree.nodes()
         assertTrue("The passport stays in the tree under its popover", nodes.none { it.viewIdResourceName == PASSPORT_COVER })
         assertTrue("No pane is named ${title}", nodes.any { it.paneTitle?.toString() == title })
@@ -478,7 +481,7 @@ class ListAccessDeviceTest {
         val countries = tree.awaitId(PASSPORT_COUNTRIES)
         assertTrue(countries.isButton)
         assertEquals(0, countries.childCount)
-        assertEquals(walk.text("passport.firstSeenIn"), countries.description)
+        assertEquals(walk.text("passport.firstSeenIn"), countries.spoken)
         assertEquals(collapsed, countries.state)
         assertEquals(details, countries.clickLabel)
         val parcels = Regex(".+, (${walk.pattern("passport.parcels.one", "count").pattern}|${walk.pattern("passport.parcels.many", "count").pattern})")
@@ -504,8 +507,8 @@ class ListAccessDeviceTest {
     /**
      * A-AX19: a parcel's map is one image read with its journey, "map.label" from one place to another, and each end of
      * the journey one element read with its title, place and country; its close button is "map.close". Its views are
-     * buttons, the first read with "map.view", the group's name, and the view shown selected. Where the journey keeps to
-     * one place the map is read "map.labelOne", with no views.
+     * buttons read by their names, the first after "map.view", the group's name, and the view shown selected. Where the
+     * journey keeps to one place the map is read "map.labelOne", with no views.
      */
     @Test
     fun theMapIsOneImageReadWithItsJourneyAndItsViewsSaySelected() {
@@ -514,26 +517,25 @@ class ListAccessDeviceTest {
         val map = tree.awaitId(MAP_COVER_MAP)
         assertEquals("android.widget.ImageView", map.className)
         assertEquals(0, map.childCount)
-        assertTrue(map.description.orEmpty(), walk.pattern("map.label", "from", "to").matches(map.description.orEmpty()))
+        assertTrue(map.spoken, walk.pattern("map.label", "from", "to").matches(map.spoken))
         val bar = tree.within(MAP_BAR)
         for (end in listOf("From, Berlin, Germany", "Now, Neuenstein, Germany")) {
-            val node = checkNotNull(bar.firstOrNull { it.description == end }) { "No end read \"$end\"\n${tree.dump(bar)}" }
+            val node = checkNotNull(bar.firstOrNull { it.isScreenReaderFocusable && it.spoken == end }) { "No end read \"$end\"\n${tree.dump(bar)}" }
             assertEquals(0, node.childCount)
         }
         val views = tree.within(MAP_VIEWS).filter { it.isClickable }
-        assertTrue("No views", views.size > 1)
+        assertEquals(listOf("${walk.text("map.view")}, ${walk.text("map.journey")}", walk.text("map.nearby")), views.map { it.spoken })
         assertTrue(views.all { it.isButton })
-        assertEquals(walk.text("map.view"), views.first().description)
         assertEquals(1, views.count { it.chosen })
         val close = checkNotNull(tree.byId(MAP_CLOSE))
-        assertEquals(walk.text("map.close"), close.description)
+        assertEquals(walk.text("map.close"), close.spoken)
         assertTrue(close.click())
         compose.waitUntil(LONG_MILLIS) { !walk.exists(MAP_COVER_MAP) }
         walk.settle()
 
         openMap(DemoCards.parcel("Trail weekend kit"))
         val one = tree.awaitId(MAP_COVER_MAP)
-        assertTrue(one.description.orEmpty(), walk.pattern("map.labelOne", "place").matches(one.description.orEmpty()))
+        assertTrue(one.spoken, walk.pattern("map.labelOne", "place").matches(one.spoken))
         assertNull(tree.byId(MAP_VIEWS))
     }
 

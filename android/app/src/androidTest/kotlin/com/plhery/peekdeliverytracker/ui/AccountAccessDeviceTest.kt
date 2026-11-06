@@ -78,7 +78,7 @@ class AccountAccessDeviceTest {
     private val tree = AccessTree(compose)
 
     @get:Rule
-    val rules: RuleChain = RuleChain.outerRule(MadePreferences()).around(ZurichTime()).around(compose).around(walk)
+    val rules: RuleChain = RuleChain.outerRule(MadePreferences()).around(ZurichTime()).around(compose).around(walk).around(tree.logsTheWindowOnFailure)
 
     private val store = AppearanceStore.of(InstrumentationRegistry.getInstrumentation().targetContext)
     private val appearanceBefore = store.appearance.value
@@ -88,10 +88,7 @@ class AccountAccessDeviceTest {
         store.set(appearanceBefore)
     }
 
-    /** The words read under `node`, its own first. */
-    private fun said(node: AccessibilityNodeInfo): List<String> = tree.under(node).map { it.words }.filter(String::isNotEmpty)
-
-    /** The node `id` once it reads `check`. */
+    /** The node `id` once `check` holds of it, as TalkBack reads it ([spoken]) or as it stands. */
     private fun awaitReading(id: String, what: String, check: (AccessibilityNodeInfo) -> Boolean): AccessibilityNodeInfo =
         tree.await("$id $what") { nodes -> nodes.firstOrNull { it.viewIdResourceName == id && check(it) } }
 
@@ -131,13 +128,13 @@ class AccountAccessDeviceTest {
         compose.waitUntil(LONG_MILLIS) { walk.exists(WELCOME_OPEN_PARCEL) }
         walk.settle()
         val open = awaitReading(WELCOME_OPEN_PARCEL, "on") { it.isEnabled }
-        assertEquals(walk.text("arrival.tapToOpen"), open.description)
+        assertEquals(walk.text("arrival.tapToOpen"), open.spoken)
         assertTrue(open.isButton)
         assertEquals("The parcel's drawing is read", 0, open.childCount)
         assertEquals(walk.text("arrival.openHint"), open.clickLabel)
         val heading = tree.awaitId(INVITATION_HEADING)
         assertTrue(heading.isHeading)
-        assertTrue(heading.words.isNotEmpty())
+        assertTrue(heading.spoken.isNotEmpty())
         assertNull("The tabs are read under the invitation", tree.byId(TAB_BAR))
         tree.assertNoBlankStops()
     }
@@ -156,17 +153,17 @@ class AccountAccessDeviceTest {
         walk.show(DemoCards.parcels())
         openSettings()
         val title = walk.text("settings.title")
-        tree.await("The heading \"$title\"", read = { tree.within(SETTINGS_SHEET) }) { nodes -> nodes.firstOrNull { it.isHeading && it.words == title } }
+        tree.await("The heading \"$title\"", read = { tree.within(SETTINGS_SHEET) }) { nodes -> nodes.firstOrNull { it.isHeading && it.spoken == title } }
         val close = tree.awaitId(SETTINGS_CLOSE)
         assertTrue(close.isButton)
-        assertTrue("The close reads ${said(close)}", walk.text("common.close") in said(close))
+        assertEquals(walk.text("common.close"), close.spoken)
         close.assertTarget(SETTINGS_CLOSE, across = false)
 
         for ((key, id) in listOf("native.deliveries" to SETTINGS_DELIVERY_UPDATES, "settings.preferences" to appearanceTag(AppAppearance.Light))) {
             compose.reveal(id)
             val group = walk.text(key)
             val heading = tree.await("The group's heading \"$group\"", read = { tree.within(SETTINGS_SHEET) }) { nodes ->
-                nodes.firstOrNull { node -> node.isHeading && said(node).any { it.equals(group, ignoreCase = true) } }
+                nodes.firstOrNull { node -> node.isHeading && node.spokenParts.any { it.equals(group, ignoreCase = true) } }
             }
             assertTrue("The group's title isn't read as one", tree.oneElement(heading))
         }
@@ -174,13 +171,13 @@ class AccountAccessDeviceTest {
             val row = shown(id)
             assertTrue("$id is neither a button nor a switch", row.isButton || row.isSwitch)
             assertTrue("$id isn't read as one", tree.oneElement(row))
-            assertTrue(said(row).isNotEmpty())
+            assertTrue("$id says nothing", row.spoken.isNotEmpty())
             row.assertTarget(id, across = false)
         }
 
         for (option in AppAppearance.entries) {
             val tile = shown(appearanceTag(option))
-            assertEquals(walk.text("native.appearance.${option.rawValue}"), tile.description)
+            assertEquals(walk.text("native.appearance.${option.rawValue}"), tile.spoken)
             assertTrue(tile.isButton)
             assertEquals(0, tile.childCount)
             assertEquals("${option.rawValue} heard selected", option == AppAppearance.Light, tile.chosen)
@@ -225,7 +222,7 @@ class AccountAccessDeviceTest {
             tree.awaitSaid(ANNOUNCEMENT, failed)
         }
         compose.reveal(SETTINGS_DELIVERY_EMAIL_ERROR)
-        assertEquals(failed, tree.awaitId(SETTINGS_DELIVERY_EMAIL_ERROR).words)
+        assertEquals(failed, tree.awaitId(SETTINGS_DELIVERY_EMAIL_ERROR).spoken)
     }
 
     // C-AX10, C-AX11, C-AX14, C-AX17: the friends tab.
@@ -241,7 +238,7 @@ class AccountAccessDeviceTest {
         openFriends()
         tree.assertNoBlankStops()
         val sharing = tree.awaitId(FRIENDS_SHARING)
-        assertEquals("${walk.text("friends.yourSharing")}, ${walk.text("friends.settings")}", sharing.description)
+        assertEquals("${walk.text("friends.yourSharing")}, ${walk.text("friends.settings")}", sharing.spoken)
         assertTrue(sharing.isButton)
         assertEquals(0, sharing.childCount)
         assertTrue(sharing.click())
@@ -250,12 +247,12 @@ class AccountAccessDeviceTest {
         walk.awaitStill()
         val stats = shown(FRIENDS_SHARE_STATS)
         val summary = walk.text("friends.sharedStatsSummary")
-        assertEquals("${walk.text("friends.shareStats")}, $summary", stats.description)
+        assertEquals("${walk.text("friends.shareStats")}, $summary", stats.spoken)
         assertTrue(stats.isSwitch)
         assertEquals(0, stats.childCount)
         assertEquals(summary, stats.clickLabel)
         val arrival = shown(FRIENDS_SHARE_ARRIVAL)
-        assertEquals(walk.text("friends.shareArrival"), arrival.description)
+        assertEquals(walk.text("friends.shareArrival"), arrival.spoken)
         assertTrue(arrival.isSwitch)
         assertEquals(0, arrival.childCount)
         assertEquals(walk.text("friends.shareArrivalDetail"), arrival.clickLabel)
@@ -279,7 +276,7 @@ class AccountAccessDeviceTest {
         val url = shown(FRIENDS_INVITATION_URL)
         val link = url.text?.toString().orEmpty()
         assertTrue(link, link.startsWith("http"))
-        assertEquals("${walk.text("friends.link")}: $link", url.description)
+        assertEquals("${walk.text("friends.link")}: $link", url.spoken)
     }
 
     /** C-AX17: the demo's invitation offers the sign-in as a button found as "friends.demoSignIn". */
@@ -294,7 +291,7 @@ class AccountAccessDeviceTest {
         val signIn = shown(FRIENDS_DEMO_SIGN_IN)
         assertTrue(signIn.isButton)
         assertTrue("The sign-in isn't read as one", tree.oneElement(signIn))
-        assertTrue(walk.text("welcome.signInInstead") in said(signIn))
+        assertTrue(signIn.spoken, walk.text("welcome.signInInstead") in signIn.spokenParts)
     }
 
     // C-AX07, C-AX10, C-AX14, C-AX17: the notifications' card.
@@ -313,7 +310,7 @@ class AccountAccessDeviceTest {
         val container = card.first()
         assertFalse("The card is read as one", container.isScreenReaderFocusable || container.isClickable)
         val title = walk.text("notifications.prompt.title")
-        assertTrue("The card's title is no heading\n${tree.dump(card)}", card.any { it.isHeading && it.words == title })
+        assertTrue("The card's title is no heading\n${tree.dump(card)}", card.any { it.isHeading && it.spoken == title })
         card.firstOrNull { it.viewIdResourceName == NOTIFICATIONS_PROMPT_BELL }?.let { bell ->
             assertTrue("The bell is read", tree.under(bell).all { it.words.isEmpty() && !it.isScreenReaderFocusable && !it.isClickable })
         }
@@ -321,7 +318,7 @@ class AccountAccessDeviceTest {
             val button = checkNotNull(card.firstOrNull { it.viewIdResourceName == id }) { "No $id\n${tree.dump(card)}" }
             assertTrue(button.isButton)
             assertTrue("$id isn't read as one", tree.oneElement(button))
-            assertTrue(walk.text(key) in said(button))
+            assertTrue(button.spoken, walk.text(key) in button.spokenParts)
             button.assertTarget(id, across = false)
         }
         tree.assertNoBlankStops(card)
@@ -329,7 +326,7 @@ class AccountAccessDeviceTest {
         walk.onUi { walk.source.enableFailure = IOException("offline") }
         assertTrue(tree.awaitId(NOTIFICATIONS_PROMPT_ENABLE).click())
         walk.settle()
-        assertTrue(tree.awaitId(NOTIFICATIONS_PROMPT_ERROR).words.isNotEmpty())
+        assertTrue(tree.awaitId(NOTIFICATIONS_PROMPT_ERROR).spoken.isNotEmpty())
     }
 
     private companion object {

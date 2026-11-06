@@ -45,9 +45,9 @@ class PlannedStepsTests {
             planned.map { it.stage },
         )
         assertEquals(listOf("Basel, Switzerland", "Zürich, Switzerland", null, null), planned.map { it.location })
-        // A negative `hoursAgo` is still to come; the step an hour ago has passed with no scan to confirm it.
+        // A negative `hoursAgo` is still to come, as every planned step the demo shows.
         assertEquals(
-            listOf(-1L, 10L, 20L, 24L).map { now.plus(Duration.ofHours(it)) },
+            listOf(2L, 10L, 20L, 24L).map { now.plus(Duration.ofHours(it)) },
             planned.map { DateParser.date(it.occurredAt) },
         )
         assertEquals(TrackingStage.InTransit, parcel.currentStage)
@@ -76,11 +76,12 @@ class PlannedStepsTests {
         language = AppLanguage.En
         assertEquals(parcel.plannedEvents, repo.list().first { it.id == parcel.id }.plannedEvents)
 
-        // Out for delivery for real: the steps dated before it go, and so does a later one of an earlier stage.
+        // Out for delivery for real: a later step of an earlier stage goes. Customs tells where a parcel is, not how
+        // far it has come, so its step stays while its time is ahead.
         now = start.plusSeconds(60)
         val out = repo.refresh(parcel.id)
         assertEquals(TrackingStage.OutForDelivery, out.currentStage)
-        assertEquals(listOf("Out for delivery", "Delivered"), out.plannedEvents?.map { it.description })
+        assertEquals(listOf("Customs cleared", "Out for delivery", "Delivered"), out.plannedEvents?.map { it.description })
         // Delivered, nothing is planned any more.
         now = start.plusSeconds(120)
         val delivered = repo.refresh(parcel.id)

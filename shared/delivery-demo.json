@@ -322,7 +322,7 @@
     "plannedEvents": [
       {
         "stage": "customs",
-        "hoursAgo": 1,
+        "hoursAgo": -2,
         "description": "Customs cleared",
         "location": "Basel, Switzerland"
       },

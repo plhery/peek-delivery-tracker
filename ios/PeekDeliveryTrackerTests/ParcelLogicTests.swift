@@ -3801,9 +3801,9 @@ extension ParcelLogicTests {
         XCTAssertEqual(planned.map(\.description), ["Customs cleared", "Arrived at the local delivery centre", "Out for delivery", "Delivered"])
         XCTAssertEqual(planned.map(\.stage), [.customs, .inTransit, .outForDelivery, .delivered])
         XCTAssertEqual(planned.map(\.location), ["Basel, Switzerland", "Zürich, Switzerland", nil, nil])
-        // A negative `hoursAgo` is still to come; the step an hour ago has passed with no scan to confirm it.
+        // A negative `hoursAgo` is still to come, as every planned step the demo shows.
         XCTAssertEqual(planned.compactMap { DateParser.date($0.occurredAt) },
-                       [-1.0, 10, 20, 24].map { now.addingTimeInterval($0 * 3_600) })
+                       [2.0, 10, 20, 24].map { now.addingTimeInterval($0 * 3_600) })
         XCTAssertEqual(vinyl.currentStage, .inTransit)
         XCTAssertFalse(vinyl.isDelivered)
         XCTAssertNil(vinyl.expectedDelivery)
@@ -3830,10 +3830,11 @@ extension ParcelLogicTests {
         language = .en
         XCTAssertEqual(try XCTUnwrap(repo.list().first { $0.id == vinyl.id }).plannedEvents, vinyl.plannedEvents)
 
-        // Out for delivery for real: the steps dated before it go, and so does a later one of an earlier stage.
+        // Out for delivery for real: a later step of an earlier stage goes. Customs tells where a parcel is, not how far
+        // it has come, so its step stays while its time is ahead.
         let out = try repo.refresh(id: vinyl.id)
         XCTAssertEqual(out.currentStage, .outForDelivery)
-        XCTAssertEqual(out.plannedEvents?.map(\.description), ["Out for delivery", "Delivered"])
+        XCTAssertEqual(out.plannedEvents?.map(\.description), ["Customs cleared", "Out for delivery", "Delivered"])
         // Delivered, nothing is planned any more.
         let delivered = try repo.refresh(id: vinyl.id)
         XCTAssertEqual(delivered.currentStage, .delivered)

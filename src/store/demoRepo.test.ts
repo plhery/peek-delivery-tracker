@@ -295,13 +295,14 @@ describe('createDemoRepo', () => {
     expect(currentStage(vinyl.events)).toBe('in_transit');
     expect(vinyl.expectedDelivery).toBeUndefined();
     expect(vinyl.plannedEvents!.map(step => step.stage)).toEqual(['customs', 'in_transit', 'out_for_delivery', 'delivered']);
-    // One planned step's time has passed with no scan to confirm it.
-    expect(vinyl.plannedEvents!.filter(step => Date.parse(step.occurredAt) > clock)).toHaveLength(3);
+    // Every planned step the demo shows is still ahead.
+    expect(vinyl.plannedEvents!.every(step => Date.parse(step.occurredAt) > clock)).toBe(true);
     clock += 60_000;
     let parcel = await repo.refreshParcel!(vinyl.id);
-    // Out for delivery for real: the steps dated before it go, and so does a later one of an earlier stage.
+    // Out for delivery for real: a later step of an earlier stage goes. Customs tells where a parcel is, not how far it
+    // has come, so its step stays while its time is ahead.
     expect(currentStage(parcel.events)).toBe('out_for_delivery');
-    expect(parcel.plannedEvents!.map(step => step.description)).toEqual(['Out for delivery', 'Delivered']);
+    expect(parcel.plannedEvents!.map(step => step.description)).toEqual(['Customs cleared', 'Out for delivery', 'Delivered']);
     parcel = await repo.refreshParcel!(vinyl.id);
     expect(isDelivered(parcel.events)).toBe(true);
     expect(parcel).not.toHaveProperty('plannedEvents');

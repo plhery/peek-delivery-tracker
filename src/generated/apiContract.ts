@@ -32436,8 +32436,12 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [
       {
-        "pattern": "^[A-Z]{3}\\d{9}PY$",
+        "pattern": "^(?!ZXA)[A-Z]{3}\\d{9}PY$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^ZXA\\d{9}PY$",
+        "confidence": "high"
       }
     ]
   },

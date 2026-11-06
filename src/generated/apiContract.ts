@@ -7426,6 +7426,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^RWM\\d{9}$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^RAPI\\d{8}$",
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://www.kuehne-nagel.com/"
@@ -45796,7 +45800,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Kyiv",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "skladusa"
     },
     "trackingUrlTemplate": "https://skladusa.com/en/tracking/{trackingNumber}/",
     "linkRules": [
@@ -45805,7 +45809,8 @@ export const CARRIER_CAPABILITIES = {
           "skladusa.com",
           "www.skladusa.com"
         ],
-        "path": "^/en/tracking/([A-Za-z0-9]+)/?$"
+        "path": "^/(?:en/)?tracking/([A-Za-z0-9]+)/?$",
+        "ownNumbersOnly": true
       }
     ],
     "detectionRules": [

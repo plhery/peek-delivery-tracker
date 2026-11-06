@@ -3787,7 +3787,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "id": "allegro-one",
       "catalog": "allegro-one",
       "slug": "allegro-one-sledzenie",
-      "title": "Allegro One śledzenie przesyłki: statusy i odbiór paczki",
+      "title": "Allegro One śledzenie przesyłki: One Box, Punkt i Kurier",
       "name": "Allegro One",
       "color": "#006d57"
     },

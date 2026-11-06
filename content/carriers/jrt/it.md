@@ -3,7 +3,7 @@ title: JRT tracking: numero JRT…MM, stati, dogana e DHL
 description: Tracking JRT (今日通) per i pacchi da Xiamen: com'è fatto il numero JRT…MM, cosa vogliono dire le righe in cinese e in inglese e chi consegna in Italia.
 slug: jrt-tracking
 published: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-06
 ---
 
 JRT (今日通, Jinritong) è 厦门今日通商贸有限公司, uno spedizioniere di Xiamen, in Cina. Se un negozio cinese ha spedito il tuo ordine con JRT, ti avrà dato un numero che inizia con JRT e finisce con MM: incollalo nel box qui sopra. Il tracking di JRT segue il pacco dalla Cina al volo, alla dogana e poi al corriere che lo consegna: verso l'Europa la cronologia finisce con DHL, di cui copia le scansioni, tranne sulla linea di JRT per l'Irlanda con FedEx nel nome del prodotto, dove il pacco passa a FedEx, e su quelle per la Spagna e la Polonia, dove passa a CTT Express e a InPost.
@@ -49,6 +49,8 @@ Sulle spedizioni verso l'Europa, le righe che JRT scrive solo in cinese compaion
 
 Più avanti nel viaggio verso l'Europa arrivano altre tre righe solo in cinese, che Peek mostra in inglese, tutte «In transito»: `航班已抵达` come «Flight has arrived» (l'atterraggio nell'aeroporto europeo indicato nella riga), `清关完成，中转德国中` come «Customs cleared, in transit to Germany» (sdoganato all'aeroporto di arrivo e in viaggio verso la Germania, dove passa al corriere che consegna) e `抵达德国，已交服务商` come «Arrived in Germany, handed to the delivering carrier» (affidato al corriere che consegna, per esempio DHL: non è la consegna a te).
 
+**Via terra attraverso il Kazakistan.** Sulla linea stradale di JRT verso l'Europa il pacco lascia la Cina via terra, non in aereo, con quattro righe solo in cinese che Peek mostra in inglese, tutte «In transito»: `已装柜发车，待抵达新疆` come «Loaded into a container and on its way to Xinjiang» (dopo il centro di Shenzhen), `已抵达新疆，换装/报关，待出境` come «Arrived in Xinjiang for transloading and export declaration, waiting to leave China», `因哈萨克斯坦拥堵，外车入境新疆拥堵缓慢，在等待外车倒装后报关出境。` come «Congestion in Kazakhstan is slowing foreign trucks into Xinjiang; the parcel will be declared for export once it is reloaded onto one» (un'attesa alla frontiera, non un pacco perso) e `已出境，哈萨克斯坦阿拉木图` come «Left China, Almaty, Kazakhstan» (ha passato la frontiera ed è ad Almaty).
+
 **Righe solo in inglese.** In Peek sono tutte «In transito», salvo dove indicato:
 
 - `Shipment arrived at facility`, `Sending to the airport`, `The goods have been packed and sent to the airline`: in viaggio verso l'aeroporto.
@@ -75,31 +77,39 @@ Nelle date con il punto viene prima il mese: 11.12 è il 12 novembre, non l'11 d
 | `loaded to movement / tour vehicle`, `unloaded from movement / tour vehicle`, `movement / tour vehicle arrived` | Caricato su un mezzo, scaricato, mezzo arrivato. | «In transito» |
 | `the shipment has been processed in the destination parcel center` | Smistato nel centro pacchi DHL vicino a te. | «In transito» |
 | `not delivered-consignee could not be reached` | Consegna non riuscita: non c'era nessuno. | «Tentativo di consegna» |
+| `not delivered-bad address` | Consegna non riuscita: il corriere non ha trovato l'indirizzo. | «Tentativo di consegna» |
 | `held for consignee collection` | Il pacco ti aspetta in un punto di ritiro. | «Pronto per il ritiro» |
 | `the shipment has been successfully delivered` | Consegnato. | «Consegnato» |
 | `shipment will be returned to origin-not ordered` | Rifiutato dal destinatario perché non ordinato: torna indietro. | «Restituito al mittente» |
+| `shipment will be returned to origin-bad address` | L'indirizzo non si trova: il pacco torna indietro. | «Restituito al mittente» |
 
 Dopo un reso sono «Restituito al mittente» le righe dei mezzi che finiscono con «(return to sender)», `returned shipment has been received by processing center` (il pacco è di nuovo al centro di JRT) e anche `the shipment has been successfully delivered`, che a quel punto è la consegna al mittente, non a te. Alcuni pacchi cominciano invece con `Shipment information sent to FedEx`: i dati dell'etichetta sono passati a FedEx, che fa l'ultimo tratto («Etichetta creata»). Poi il tracking di JRT copia le scansioni di FedEx in inglese, come `Arrived at FedEx hub`, `Departed FedEx hub` e `On the way`, tutte «In transito».
 
-Sulle spedizioni verso l'Europa le righe di JRT sono sull'ora di Pechino: le 17:00 a Pechino sono le 10:00 in Italia con l'ora solare e le 11:00 con l'ora legale. Le righe copiate da DHL sono invece sull'ora locale di DHL: quelle che cominciano con `The shipment …`, `The international shipment …` o `the instruction data …`, le righe dei mezzi, `pick-up was successful.`, `not delivered-consignee …`, `held for consignee collection` e `shipment will be returned to origin …`. Se una di queste righe indica una città in Germania o nel Paese di destinazione, Peek la legge sull'ora di quella città. Altrimenti (una sigla di Paese accanto alla riga non basta) legge i dati dell'etichetta e le righe sul centro pacchi di origine, sul centro pacchi di esportazione e sul trasporto verso il Paese di destinazione sull'ora tedesca, e le altre sull'ora del Paese di destinazione (su quella tedesca se JRT non indica la destinazione).
+Sulle spedizioni verso l'Europa le righe di JRT sono sull'ora di Pechino: le 17:00 a Pechino sono le 10:00 in Italia con l'ora solare e le 11:00 con l'ora legale. Le righe copiate da DHL sono invece sull'ora locale di DHL: quelle che cominciano con `The shipment …`, `The international shipment …` o `the instruction data …`, le righe dei mezzi, `pick-up was successful.`, `not delivered-consignee …`, `not delivered-bad address`, `held for consignee collection` e `shipment will be returned to origin …`. Se una di queste righe indica una città in Germania o nel Paese di destinazione, Peek la legge sull'ora di quella città. Altrimenti (una sigla di Paese accanto alla riga non basta) legge i dati dell'etichetta e le righe sul centro pacchi di origine, sul centro pacchi di esportazione e sul trasporto verso il Paese di destinazione sull'ora tedesca, e le altre sull'ora del Paese di destinazione (su quella tedesca se JRT non indica la destinazione).
 
 ## Chi consegna i pacchi JRT in Italia
 
 **Verso l'Europa**, salvo sulla linea per l'Irlanda con FedEx (vedi sotto) e su quelle per la Spagna e la Polonia, che finiscono con CTT Express e con InPost, la cronologia di JRT finisce con DHL, a cui JRT affida il pacco in una filiale Deutsche Post. Quando JRT ha consegnato il pacco, nei suoi dati il numero DHL prende il posto di quello JRT, ma il nome della linea continua a mancare. Se Peek riconosce quel numero come DHL, mostra «Consegna con DHL» con il numero (o «Annunciato a DHL, non ancora ricevuto» finché DHL ha il pacco solo annunciato, senza una sua scansione) e passa al tracking di DHL appena DHL scansiona il pacco (vedi sotto). Altrimenti chiedi al venditore il numero DHL: con quello il tracking di DHL segue il pacco fino alla consegna (numeri e stati nella pagina [DHL Paket](carrier:dhl)).
 
+**In Italia** i pacchi di DHL Paket partiti dalla Germania li consegna SDA, i cui servizi di corriere espresso sono passati a Poste Italiane, oppure DHL Express. Secondo DHL arrivano in 2-4 giorni lavorativi, con consegne dal lunedì al venerdì (in alcune zone anche il sabato) e un solo tentativo, dopo il quale il pacco si ritira in una filiale. Più dettagli nella pagina DHL Paket.
+
+**Dogana e costi.** Sulle linee aeree di JRT il pacco passa la dogana d'importazione nell'aeroporto dove atterra il volo (le righe «In dogana» qui sopra). Dal 1° novembre 2026, sugli acquisti online da fuori UE, si paga anche la tassa di gestione dell'Unione di 2 €: chi te la chiede, insieme a IVA e dazi, lo spiega la guida [pacco fermo in dogana](guide:customs).
+
 **Sulla linea per l'Irlanda con FedEx nel nome del prodotto** JRT passa il pacco a FedEx, e da quel momento nei suoi dati il numero FedEx prende il posto di quello JRT. Se quel numero ha una delle forme dei numeri FedEx, Peek mostra «Consegna con FedEx» con il numero (o «Annunciato a FedEx, non ancora ricevuto» finché FedEx ha il pacco solo annunciato) e passa al tracking di FedEx appena FedEx scansiona il pacco, come con DHL (vedi sotto). Se a consegnare è FedEx e Peek non mostra un numero FedEx, chiedilo al venditore e seguilo su [FedEx](carrier:fedex).
 
-**Senza DHL, FedEx, CTT Express o InPost nella cronologia** Peek non sa chi consegna il pacco: chiedi al venditore quale corriere te lo porta e con che numero. Tentativi di consegna, punti di ritiro e giacenza seguono le regole di quel corriere, non di JRT. Ti chiedono di pagare qualcosa per la dogana? Leggi [pacco fermo in dogana](guide:customs).
+**Senza DHL, FedEx, CTT Express o InPost nella cronologia** Peek non sa chi consegna il pacco: chiedi al venditore quale corriere te lo porta e con che numero. Tentativi di consegna, punti di ritiro e giacenza seguono le regole di quel corriere, non di JRT.
 
 ## Pacco JRT fermo o che non arriva
 
 **Solo le prime righe.** Se vedi solo `货物电子信息已经收到`, `Shipment information received` o una riga dell'etichetta DHL o FedEx, il venditore ha prenotato la spedizione ma nessuno ha ancora scansionato il pacco. Se dopo qualche giorno non succede niente, chiedi al venditore se l'ha spedito davvero.
 
-**In attesa del volo.** Le righe del volo indicano il giorno per cui è prenotato. Se quel giorno passa senza una riga di partenza, avvisa il venditore.
+**In attesa del volo.** Le righe del volo indicano il giorno per cui è prenotato, e `航班延误，预计…号飞出 Flight delayed, estimated departure on …` un nuovo giorno. Se quel giorno passa senza una riga di partenza, avvisa il venditore.
 
 **Niente dopo `已交服务商`.** JRT ha finito la sua parte. Se il suo tracking non copia le scansioni di DHL o di FedEx e Peek non mostra il numero DHL o FedEx, i passi successivi sono sul tracking di chi consegna: chiedi al venditore quel numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 **Nessun risultato.** Per un numero sconosciuto il tracking di JRT mostra un solo risultato, con il numero come riferimento e il resto vuoto. Peek mostra «In attesa del corriere» e continua a controllare. Confronta il numero con il messaggio del venditore, carattere per carattere.
+
+**Indirizzo non trovato.** Dopo `not delivered-bad address` controlla l'indirizzo nell'ordine e avvisa subito il venditore. Se segue `shipment will be returned to origin-bad address`, il pacco sta tornando indietro: chiedi al venditore un rimborso o un nuovo invio.
 
 **Consegnato, ma non è arrivato niente.** La riga di consegna è del corriere, non di JRT, anche quando JRT la copia da DHL: chiedi prima al corriere, poi avvisa il venditore. Più dettagli in [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -131,12 +141,16 @@ Peek controlla ogni 10 minuti e ogni ora quando JRT tace (dopo 12 ore ferme alle
 
 ### Chi consegna i pacchi JRT in Italia?
 
-Verso l'Europa la cronologia di JRT finisce con DHL, che fa l'ultimo tratto e di cui JRT copia le scansioni; alcuni pacchi passano invece a FedEx, come quelli della linea di JRT per l'Irlanda con FedEx nel nome del prodotto, o a CTT Express e a InPost, come quelli delle sue linee per la Spagna e la Polonia. Negli altri casi Peek non lo sa: chiedi al venditore quale corriere consegna e con che numero.
+Verso l'Europa la cronologia di JRT finisce con DHL, di cui JRT copia le scansioni: in Italia i pacchi di DHL Paket li consegna SDA, oggi Poste Italiane, oppure DHL Express. Alcuni pacchi passano invece a FedEx, come quelli della linea di JRT per l'Irlanda con FedEx nel nome del prodotto, o a CTT Express e a InPost, come quelli delle sue linee per la Spagna e la Polonia. Negli altri casi Peek non lo sa: chiedi al venditore quale corriere consegna e con che numero.
 
 ### A chi mi rivolgo se il pacco JRT non arriva?
 
 Al venditore da cui hai comprato: è lui che ha prenotato la spedizione con JRT. Oltre al tracking, Peek non conosce siti né contatti di JRT.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome e iniziali dell'azienda, piattaforma Hualei, tracking su un indirizzo numerico in HTTP semplice, i suoi link e nessun link pubblicato, forme JRT…MM e UP, ricerca per numero o riferimento con i trattini, diciture delle righe e loro fasi, date mese.giorno, l'inglese delle righe solo in cinese, le righe solo in cinese verso l'Europa dall'atterraggio al passaggio in Germania, righe copiate da DHL (tentativo, ritiro, consegna, reso) e filiale Deutsche Post, riga di FedEx e sue scansioni copiate, il numero DHL o FedEx nei dati dopo la consegna, il passaggio a DHL e, sulla linea per l'Irlanda, a FedEx, passaggio alla Posta Svizzera, ora di Pechino e ora locale di DHL per le sue righe copiate, secondo la città indicata, risposta per un numero sconosciuto, cosa Peek mostra, tiene da parte e lascia fuori
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome e iniziali dell'azienda, piattaforma Hualei, tracking su un indirizzo numerico in HTTP semplice, i suoi link e nessun link pubblicato, forme JRT…MM e UP, ricerca per numero o riferimento con i trattini, diciture delle righe e loro fasi, date mese.giorno, l'inglese delle righe solo in cinese, le righe solo in cinese verso l'Europa dall'atterraggio al passaggio in Germania, righe copiate da DHL (tentativo, ritiro, consegna, reso) e filiale Deutsche Post, riga di FedEx e sue scansioni copiate, il numero DHL o FedEx nei dati dopo la consegna, il passaggio a DHL e, sulla linea per l'Irlanda, a FedEx, passaggio alla Posta Svizzera, ora di Pechino e ora locale di DHL per le sue righe copiate, secondo la città indicata, risposta per un numero sconosciuto, cosa Peek mostra, tiene da parte e lascia fuori; righe DHL con indirizzo non trovato, linea stradale dallo Xinjiang al Kazakistan, volo in ritardo
+- [DHL: Paket nach Italien versenden (in tedesco)](https://www.dhl.de/de/privatkunden/pakete-versenden/weltweit-versenden/land/italien.html) – consegna di SDA, un tentativo, ritiro in filiale, dal lunedì al venerdì e in alcune zone il sabato, 2-4 giorni lavorativi
+- [DHL: DHL Paket International – Informationen zu Destinationen & Zielgebieten (in tedesco)](https://www.dhl.de/dam/jcr:75e9d96c-e4f1-4282-9b80-a4ee7f334fcf/dhl-paket-international-infoblatt-destinationen-de-092026.pdf) – partner di consegna in Italia: SDA (Poste Italiane) o DHL Express
+- [SDA: Home](https://www.sda.it/wps/portal/sdait.home/) – servizi di corriere espresso ex SDA passati a Poste Italiane
+- [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione dell'Unione di 2 € dal 1° novembre 2026
 :::

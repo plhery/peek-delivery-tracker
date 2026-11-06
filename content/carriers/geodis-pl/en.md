@@ -3,10 +3,14 @@ title: GEODIS Poland tracking: shipment number, statuses, delivery
 description: Track a GEODIS Poland (formerly Pekaes) shipment: what its number looks like, what each status means, delivery, terminal pickup, claims and who to call.
 slug: geodis-poland-tracking
 published: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-06
 ---
 
-GEODIS Poland is the Polish pallet and parcel network of GEODIS, the French transport group owned by SNCF. GEODIS bought PEKAES in 2021, and the network is now run by GEODIS Road Network, based in Błonie. Track a shipment on its tracker, [Strefa Klienta](https://strefaklienta.pekaes.geodis.pl/en/), with the number made of PL and 16 digits, or paste it in the box above. The shop or sender gives you the number, most often in the order confirmation or shipping email.
+GEODIS Poland is the Polish pallet and parcel network of GEODIS, the French transport group owned by SNCF. GEODIS bought PEKAES in 2021, and the network is now run by GEODIS Road Network, based in Błonie. What to do depends on what the sender gave you:
+
+- **A number of PL and 16 digits, or a link to Strefa Klienta:** a GEODIS Poland shipment, parcel or pallet. Paste either in the box above, or search the number on GEODIS Poland's tracker, [Strefa Klienta](https://strefaklienta.pekaes.geodis.pl/en/).
+- **Another GEODIS number:** Peek reads one other GEODIS tracker, GEODIS France's, whose numbers start with 1G (below). GEODIS's search on geodis.com finds its air, sea and last-mile shipments, and points road shipments to Strefa Klienta.
+- **No number:** the shop or sender gives it, most often in the order confirmation or shipping email.
 
 ## GEODIS Poland tracking number: format and where to find it
 
@@ -26,7 +30,7 @@ Strefa Klienta comes in Polish and English. A search first shows a summary: the 
 | GEODIS says | What it means for you |
 | --- | --- |
 | `Received from the sender` | GEODIS has picked up the shipment from the sender. |
-| `Inbound Scan From Driver to Terminal` | The collecting driver has brought it into the local terminal. |
+| `Inbound Scan From Driver to Terminal` | A driver has brought it into a terminal: the collecting one after pickup or, after `Outbound for Delivery`, the delivery terminal at the end of a round. With no `Consignee Absent` or `Failed delivery (SMS)` before it, that round made no attempt: the shipment waits for the next one. |
 | `Outbound Scan from (Collection) Terminal to Line-haul` | It left that terminal on a truck bound for the terminal that serves your address. |
 | `Inbound Scan from Line-haul to (Delivery) Terminal` | It reached the terminal that will deliver it. |
 | `Awaiting Delivery` | It's waiting at that terminal for a delivery round. |
@@ -74,7 +78,7 @@ GEODIS's channels in Poland, as read on 30 October 2026:
 
 ## Tracking a GEODIS Poland parcel with Peek
 
-PL and 16 digits isn't a shape GEODIS owns (PL stands for Poland), so Peek can't tell GEODIS Poland by the number alone. Paste it all the same: Peek follows more than 3,500 carriers. It asks GEODIS Poland whether it knows the number and shows "GEODIS Poland has this parcel." when it does. If GEODIS doesn't list it yet, the parcel reads "Probably GEODIS Poland" and "Waiting for GEODIS Poland’s first scan" while Peek keeps asking. To set the carrier yourself, press "Change" on the carrier line and pick "GEODIS Poland" under "Fits this number", or search for it; typing Pekaes finds it too. "GEODIS" alone is GEODIS France. On a parcel you've already added, use "Change carrier".
+PL and 16 digits isn't a shape GEODIS owns (PL stands for Poland), so Peek can't tell GEODIS Poland by the number alone. Paste it all the same: Peek follows more than 3,500 carriers. It asks GEODIS Poland whether it knows the number and shows "GEODIS Poland has this parcel." when it does. If GEODIS doesn't list it yet, the parcel reads "Probably GEODIS Poland" and "Waiting for GEODIS Poland’s first scan" while Peek keeps asking. To set the carrier yourself, press "Change" on the carrier line and pick "GEODIS Poland" under "Fits this number", or search for it; typing Pekaes finds it too. "GEODIS" alone is GEODIS France. On a parcel you've already added, use "Change carrier". A link to Strefa Klienta that holds the number needs none of this: Peek takes it as GEODIS Poland's.
 
 Peek reads Strefa Klienta in English and shows the status, each scan in GEODIS's English wording with the terminal's place, the delivery time and the destination country. Scans at Polish terminals are read on Warsaw time; a terminal abroad keeps its own clock. When a `Pseudoscan` row cancels earlier scans, Peek drops them too, and `Claim Received` leaves the status as it was. GEODIS's tracker gives no expected delivery date, weight, service name, recipient name or proof of delivery. Peek leaves out the delivery postcode and address, the item count, the terminals' codes and the remarks, which can name who signed.
 
@@ -103,12 +107,12 @@ GEODIS quotes 24 to 48 hours within Poland as standard, or next day before noon 
 - [GEODIS Poland: Strefa Klienta, Śledzenie przesyłek](https://strefaklienta.pekaes.geodis.pl/pl/) – customer service number, general terms
 - [GEODIS Road Network: Ogólny Regulamin Świadczenia Usług, from 4 November 2024](https://strefaklienta.pekaes.geodis.pl/pl/?file=files/pekaes/Dla%20Klienta%20-%20nowe%20www/GEODIS_SK/GEODIS%20RN_Ogolny%20Regulamin%20Swiadczenia%20Uslug_od%2004.11.2024.pdf) – the client, attempts, pallets to private addresses, notice, unloading, carry-in, terminal pickup, cash on delivery, signing, delivery times, claims
 - [GEODIS Road Network: Formularz zgłoszenia reklamacji](https://strefaklienta.pekaes.geodis.pl/pl/?file=files/pekaes/Dla%20Klienta%20-%20nowe%20www/GEODIS_SK/GRN%20Formularz%20zgloszenia%20reklamacji.pdf) – claims address, damage report isn't a claim
-- [GEODIS: Śledź swoją przesyłkę](https://geodis.com/pl-pl/sledz-swoja-przesylke) – where the number is, number not working
+- [GEODIS: Śledź swoją przesyłkę](https://geodis.com/pl-pl/sledz-swoja-przesylke) – where the number is, air, sea and last-mile shipments on geodis.com, road transport on its own tracker, number not working
 - [GEODIS: Twój obszar roboczy](https://geodis.com/pl-pl/twoj-obszar-roboczy) – Strefa Klienta as GEODIS's tracking
 - [GEODIS: Transport palet i paczek](https://geodis.com/pl-pl/uslugi-transportowe/transport-palet-i-paczek) – businesses only, transit times
 - [GEODIS: Skontaktuj się z nami](https://geodis.com/pl-pl/skontaktuj-sie-z-nami) – contact form, 42 locations
 - [GEODIS: Historia](https://geodis.com/pl-pl/historia) – PEKAES bought in 2021, SNCF
 - [UOKiK: Odpowiedzialność za przesyłkę](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/odpowiedzialnosc-sprzedawcy-za-przesylke/) – seller responsible until delivery
 - [UOKiK: Wydanie towaru](https://prawakonsumenta.uokik.gov.pl/prawa-ogolne/wydanie-towaru/) – 30 days, extra time, withdrawal
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, status wordings, what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shape, links to Strefa Klienta, status wordings, a delivery round brought back to the terminal, GEODIS France's numbers, what Peek reads
 :::

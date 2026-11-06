@@ -3,7 +3,7 @@ title: JRT seguimiento: número JRT…MM, vuelos, DHL y UPS
 description: Sigue tu paquete de JRT (今日通) desde Xiamen: cómo es un número JRT…MM, qué significan sus pasos en chino y en inglés y quién lo entrega en Europa y en EE. UU.
 slug: jrt-seguimiento
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 JRT (今日通, Jinritong) es 厦门今日通商贸有限公司, una empresa de logística de Xiamen, en China. Si una tienda china te ha enviado el pedido con JRT, te habrá dado un número de seguimiento que empieza por JRT y acaba en MM: pégalo en la casilla de arriba para rastrear el paquete. La web de seguimiento de JRT lo sigue desde China: el vuelo, la aduana y el paso a DHL, en los envíos a Europa, o a UPS, en los envíos a Estados Unidos. JRT copia en su web los escaneos de DHL y de UPS. En su línea a Irlanda con FedEx en el nombre del producto, el paquete pasa en cambio a FedEx; en su línea a España, a CTT Express, y en la de Polonia, a InPost.
@@ -55,6 +55,8 @@ Ya al final del trayecto a Europa, JRT escribe solo en chino otros tres pasos, q
 | `清关完成，中转德国中` | «Customs cleared, in transit to Germany» | Ha pasado la aduana en el aeropuerto de llegada y va camino de Alemania, donde se entrega a la empresa que reparte. |
 | `抵达德国，已交服务商` | «Arrived in Germany, handed to the delivering carrier» | Ha llegado a Alemania y se ha entregado a la empresa que reparte, como DHL. No es la entrega a ti. |
 
+**Por carretera, a través de Kazajistán.** En la línea de JRT a Europa por carretera, el paquete sale de China por tierra y no en avión, con cuatro pasos solo en chino que Peek muestra en inglés, todos «En tránsito»: `已装柜发车，待抵达新疆` como «Loaded into a container and on its way to Xinjiang» (después del centro de Shenzhen), `已抵达新疆，换装/报关，待出境` como «Arrived in Xinjiang for transloading and export declaration, waiting to leave China», `因哈萨克斯坦拥堵，外车入境新疆拥堵缓慢，在等待外车倒装后报关出境。` como «Congestion in Kazakhstan is slowing foreign trucks into Xinjiang; the parcel will be declared for export once it is reloaded onto one» (una espera en la frontera, no un paquete perdido) y `已出境，哈萨克斯坦阿拉木图` como «Left China, Almaty, Kazakhstan» (ha cruzado la frontera y está en Almaty).
+
 **Pasos solo en inglés.** Otros pasos de JRT van solo en inglés. En Peek todos son «En tránsito», salvo que se indique otra cosa:
 
 - `Shipment arrived at facility`, `Sending to the airport`, `The goods have been packed and sent to the airline`: camino del vuelo.
@@ -70,6 +72,8 @@ En `The flight is expected to depart on … and land on …` y `The flight has d
 
 **Pasos con barra.** En algunos envíos, JRT une el chino y el inglés con una barra, y en Peek todos son «En tránsito»: `预计…航班/Flight scheduled for …` (el vuelo está reservado, con su día en las dos partes en lugar de los puntos), `航班已启运/Package in transit to destination country` (en el aire) y `航班已落地，拆板中/Package arrived at destination country` (ha aterrizado y aún no ha pasado la aduana). Antes llega `国内清关完成`: es el despacho de exportación en China, no la aduana de tu país («En tránsito»).
 
+**Pasos de la línea a México.** En su línea a México, JRT anuncia el vuelo en español: `Se espera que el vuelo salga hacia … el …`, con el destino y el día en lugar de los puntos (el vuelo está reservado), y después `The flight is en route to the airport in …`, que vuelve a nombrar el destino (en el aire). Los dos son «En tránsito».
+
 **Pasos de DHL y de FedEx.** En los envíos a Europa, la web de JRT sigue con los escaneos de DHL, casi siempre en minúsculas:
 
 | DHL escribe | Qué significa para ti | Peek muestra |
@@ -81,8 +85,10 @@ En `The flight is expected to depart on … and land on …` y `The flight has d
 | `the shipment has been processed in the parcel center of origin`, `loaded to movement / tour vehicle` | Clasificado en el centro de paquetes de origen de DHL y cargado en un vehículo. | «En tránsito» |
 | `the shipment has been processed in the destination parcel center` | Clasificado en el centro de paquetes de DHL de destino, cerca de ti. | «En tránsito» |
 | `not delivered-consignee could not be reached` | No se pudo entregar: no había nadie. | «Intento de entrega» |
+| `not delivered-bad address` | No se pudo entregar: el repartidor no encontró la dirección. | «Intento de entrega» |
 | `held for consignee collection` | Te espera en un punto de recogida. | «Listo para recoger» |
 | `shipment will be returned to origin-not ordered` | El destinatario lo rechazó porque no lo había pedido, y vuelve al origen. | «Devuelto al remitente» |
+| `shipment will be returned to origin-bad address` | No se encontró la dirección, y vuelve al origen. | «Devuelto al remitente» |
 | `the shipment has been successfully delivered` | Entregado. Si antes hubo un paso de devolución, es la entrega al remitente. | «Entregado», o «Devuelto al remitente» tras una devolución |
 
 Algunos paquetes empiezan, en cambio, con `Shipment information sent to FedEx`: los datos de la etiqueta han pasado a FedEx, que hace el último tramo («Etiqueta creada»). Después, la web de JRT copia los escaneos de FedEx en inglés, como `Arrived at FedEx hub`, `Departed FedEx hub` y `On the way`, todos «En tránsito».
@@ -108,11 +114,13 @@ Después, la web de JRT copia los escaneos de UPS en chino, y Peek los muestra c
 | `已装上递送车辆`, `准备今天递送` | «Loaded on Delivery Vehicle», «Out For Delivery Today»: en el vehículo de reparto. | «En reparto» |
 | `已递送` | «Delivered» | «Entregado» |
 
-En los envíos a Europa, las horas de los pasos de JRT van en hora de Pekín (UTC+8): las 17:00 allí son las 10:00 en la España peninsular con el horario de invierno (desde el 25 de octubre de 2026) y las 11:00 con el de verano; en Canarias, una hora menos. Los pasos copiados de DHL van, en cambio, en la hora local de DHL: los que empiezan por `The shipment …`, `The international shipment …` o `the instruction data …`, `loaded to movement / tour vehicle` y los demás pasos del vehículo, `pick-up was successful.`, `not delivered-consignee …`, `held for consignee collection` y `shipment will be returned to origin …`. Si uno de ellos nombra una ciudad de Alemania o del país de destino, Peek lo lee en la hora de esa ciudad. Si no nombra ninguna (un código de país a su lado no basta), lee los datos de la etiqueta y los pasos del centro de paquetería de origen, del centro de exportación y del transporte al país de destino en hora de Alemania, y los demás en la hora del país de destino (en la de Alemania si los datos de JRT no lo traen). Los escaneos copiados de UPS, y cualquier paso con lugar en Estados Unidos, Peek los lee en la hora local de ese lugar.
+En los envíos a Europa, las horas de los pasos de JRT van en hora de Pekín (UTC+8): las 17:00 allí son las 10:00 en la España peninsular con el horario de invierno (desde el 25 de octubre de 2026) y las 11:00 con el de verano; en Canarias, una hora menos. Los pasos copiados de DHL van, en cambio, en la hora local de DHL: los que empiezan por `The shipment …`, `The international shipment …` o `the instruction data …`, `loaded to movement / tour vehicle` y los demás pasos del vehículo, `pick-up was successful.`, `not delivered-consignee …`, `not delivered-bad address`, `held for consignee collection` y `shipment will be returned to origin …`. Si uno de ellos nombra una ciudad de Alemania o del país de destino, Peek lo lee en la hora de esa ciudad. Si no nombra ninguna (un código de país a su lado no basta), lee los datos de la etiqueta y los pasos del centro de paquetería de origen, del centro de exportación y del transporte al país de destino en hora de Alemania, y los demás en la hora del país de destino (en la de Alemania si los datos de JRT no lo traen). Los escaneos copiados de UPS, y cualquier paso con lugar en Estados Unidos, Peek los lee en la hora local de ese lugar.
 
 ## Quién reparte los paquetes de JRT en Europa y en Estados Unidos
 
 **En los envíos a Europa**, el historial de JRT acaba con DHL, salvo en su línea a Irlanda con FedEx (más abajo), en su línea a España, que acaba con CTT Express, y en la de Polonia, que acaba con InPost. En las líneas de DHL, JRT entrega el paquete en una oficina de Deutsche Post, y su web copia los escaneos de DHL. Cuando JRT ya ha entregado el paquete, sus datos traen el número de DHL en lugar del de JRT, aunque siguen sin el nombre de la línea. Si Peek reconoce ese número como de DHL, muestra «Entrega con DHL» con el número (o «Anunciado a DHL, aún no recibido» mientras DHL solo lo tenga anunciado, sin ningún escaneo suyo) y pasa al seguimiento de DHL en cuanto DHL escanea el paquete (más abajo). Si no, pide a la tienda el número de DHL: con él, el seguimiento de DHL te lleva hasta la entrega (en [DHL Paket](carrier:dhl) tienes cómo son sus números, qué significan sus estados y quién entrega sus paquetes en España).
+
+**En la línea a España**, `En tránsito internacional. Pendiente de recepción en CTT Express` quiere decir que CTT Express ya tiene el aviso del paquete, pero aún no lo ha recibido («En tránsito»). Peek no pasa al seguimiento de CTT Express: si la tienda te da su número, síguelo en [CTT Express](carrier:ctt-express).
 
 **En los envíos a Estados Unidos**, el historial de JRT acaba con UPS: JRT deja el paquete en el almacén de la empresa que reparte (`已交仓`), y su web copia los escaneos de UPS hasta la entrega.
 
@@ -126,11 +134,13 @@ En los envíos a Europa, las horas de los pasos de JRT van en hora de Pekín (UT
 
 **Solo los primeros pasos.** Si solo ves `货物电子信息已经收到`, `Shipment information received` o un paso de etiqueta de DHL o de FedEx, la tienda ha registrado el envío, pero nadie ha escaneado el paquete. Si en unos días no aparece nada más, pregunta a la tienda si lo envió de verdad.
 
-**Esperando un vuelo.** Un paso de vuelo da el día para el que está reservado. Si pasa ese día sin un paso de salida, avisa a la tienda.
+**Esperando un vuelo.** Un paso de vuelo da el día para el que está reservado, y `航班延误，预计…号飞出 Flight delayed, estimated departure on …`, el nuevo día si se retrasa. Si pasa ese día sin un paso de salida, avisa a la tienda.
 
 **Nada después de `已交服务商` o `已交仓`.** JRT ya ha hecho su parte. Si su web no copia los escaneos de DHL, de UPS o de FedEx y Peek no muestra el número de DHL o de FedEx, los siguientes pasos están en el seguimiento de la empresa que reparte: pide ese número a la tienda. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
 
 **No sale nada.** Con un número que no conoce, la web de JRT muestra un solo resultado, con el número como referencia y todas las demás columnas vacías. Peek muestra «Esperando al transportista» y sigue comprobando (si pegaste una referencia UP sin elegir transportista, «Esperando el primer escaneo de JRT»). Compara el número con el mensaje de la tienda, carácter por carácter.
+
+**Dirección no encontrada.** Después de `not delivered-bad address`, revisa la dirección de tu pedido y avisa enseguida a la tienda. Si luego aparece `shipment will be returned to origin-bad address`, el paquete vuelve al origen: pide a la tienda el reembolso o un nuevo envío.
 
 **Entregado, pero no ha llegado nada.** El escaneo de entrega es de la empresa que reparte, no de JRT: pregunta a esa empresa y después avisa a la tienda. Más en [paquete entregado pero no recibido](guide:delivered-not-received).
 
@@ -169,7 +179,7 @@ En los envíos a Europa, el historial de JRT acaba con DHL, y en los envíos a E
 A la tienda donde compraste: fue ella quien contrató el envío con JRT. Aparte de su web de seguimiento, Peek no conoce ninguna web ni datos de contacto de JRT.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y sus iniciales, plataforma Hualei, la web de seguimiento en una dirección numérica por HTTP sin cifrar, sus enlaces y ningún enlace publicado, formatos JRT…MM y UP, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, el inglés de los pasos solo en chino, los pasos solo en chino del final del trayecto a Europa, fechas mes.día, pasos copiados de DHL y la oficina de Deutsche Post, la ruta a Estados Unidos y los pasos copiados de UPS en hora local, el paso de FedEx y sus escaneos copiados, el número de DHL o de FedEx en los datos tras la entrega, el traspaso a DHL y, en la línea a Irlanda, a FedEx, traspaso a Swiss Post, hora de Pekín y hora local de DHL en sus pasos copiados, según la ciudad que nombran, la respuesta a un número desconocido, lo que Peek muestra, aparta y deja fuera
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y sus iniciales, plataforma Hualei, la web de seguimiento en una dirección numérica por HTTP sin cifrar, sus enlaces y ningún enlace publicado, formatos JRT…MM y UP, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, el inglés de los pasos solo en chino, los pasos solo en chino del final del trayecto a Europa, fechas mes.día, pasos copiados de DHL y la oficina de Deutsche Post, la ruta a Estados Unidos y los pasos copiados de UPS en hora local, el paso de FedEx y sus escaneos copiados, el número de DHL o de FedEx en los datos tras la entrega, el traspaso a DHL y, en la línea a Irlanda, a FedEx, traspaso a Swiss Post, hora de Pekín y hora local de DHL en sus pasos copiados, según la ciudad que nombran, la respuesta a un número desconocido, lo que Peek muestra, aparta y deja fuera, los pasos de DHL con dirección no encontrada, la línea por carretera de Xinjiang a Kazajistán, el vuelo retrasado, los pasos en español de la línea a México, el aviso de CTT Express
 - [BOE: Orden PCM/186/2022, calendario de la hora de verano de 2022 a 2026](https://www.boe.es/buscar/doc.php?id=BOE-A-2022-4026) – fin del horario de verano el 25 de octubre de 2026; en Canarias, una hora menos
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – arancel de 3 € desde el 1 de julio de 2026 en envíos de hasta 150 €, tasa de 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: Guidance on the 3 EUR customs duty and Union handling fee (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – tasa fija de 2 € por tipo de producto en ventas a distancia, también por encima de 150 €; qué es un tipo de producto

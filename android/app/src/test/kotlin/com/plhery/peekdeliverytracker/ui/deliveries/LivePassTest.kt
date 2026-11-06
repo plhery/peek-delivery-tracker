@@ -72,6 +72,7 @@ import com.plhery.peekdeliverytracker.core.currentStage
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.map.LocalMapSceneWatch
 import com.plhery.peekdeliverytracker.ui.map.WorldAtlases
 import com.plhery.peekdeliverytracker.ui.theme.SensoryFeedback
 import com.plhery.peekdeliverytracker.ui.theme.hapticFeedbackConstant
@@ -658,8 +659,8 @@ class LivePassTest {
     }
 
     /**
-     * The route's pixels before its picture comes, a few frames after, and once it has settled, on a card whose
-     * scans no map has drawn yet, so its picture is made then, as a page's is the first time.
+     * The route's pixels before its picture comes, two frames after the frame that first shows it, and once it has
+     * settled, on a card whose scans no map has drawn yet, so its picture is made then, as a page's is the first time.
      */
     private fun routeFrames(reduceMotion: Boolean): Triple<IntArray, IntArray, IntArray> {
         val birthday = DemoCards.parcel("Birthday gift")
@@ -668,14 +669,17 @@ class LivePassTest {
                 it.copy(id = UUID.nameUUIDFromBytes("entrance $reduceMotion ${it.id}".toByteArray()))
             },
         )
+        var pictured = false
         compose.waitsForMaps()
         compose.mainClock.autoAdvance = false
         compose.setContent {
-            CardHost(reduceMotion = reduceMotion) {
-                LivePassCard(
-                    parcel, WorldAtlases.loadedOrNull(), sample = false, readerLink = false, bell = null, working = false, onMap = {},
-                    onEditCarrier = { _, _ -> }, onRename = {}, onShare = {},
-                )
+            CompositionLocalProvider(LocalMapSceneWatch provides { _, _ -> pictured = true }) {
+                CardHost(reduceMotion = reduceMotion) {
+                    LivePassCard(
+                        parcel, WorldAtlases.loadedOrNull(), sample = false, readerLink = false, bell = null, working = false, onMap = {},
+                        onEditCarrier = { _, _ -> }, onRename = {}, onShare = {},
+                    )
+                }
             }
         }
         var frames = 0
@@ -685,9 +689,16 @@ class LivePassTest {
         }
         val route = compose.onNodeWithTag(PAGE_ROUTE)
         val blank = compose.drawn(route)
-        // Its picture is made off the main thread, and shown from the next frame.
-        compose.waitForIdle()
-        repeat(3) { compose.mainClock.advanceTimeByFrame() }
+        // Its picture is made off the main thread, which a busy machine slows: the frames wait for the one that first
+        // shows it, as the test's clock moves no fade on before then.
+        val until = System.nanoTime() + 10_000_000_000
+        while (!pictured) {
+            check(System.nanoTime() < until) { "No picture of the route" }
+            Thread.sleep(5)
+            compose.waitForIdle()
+            compose.mainClock.advanceTimeByFrame()
+        }
+        repeat(2) { compose.mainClock.advanceTimeByFrame() }
         val early = compose.drawn(route)
         compose.mainClock.advanceTimeBy(1_000)
         val late = compose.drawn(route)

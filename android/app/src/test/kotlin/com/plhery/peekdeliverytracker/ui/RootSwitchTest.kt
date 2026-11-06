@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.ui
 
-import android.os.Looper
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -29,8 +28,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.time.Duration
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -70,21 +67,16 @@ class RootSwitchTest {
     }
 
     /**
-     * The window's centre as it draws the last frame: laid out once the composition is idle, and drawn on its looper's
-     * clock, which a frame's length brings up. Read once two frames agree: a busy machine can leave the first capture
-     * on the frame before, and the test's clock, standing still, moves no animation on meanwhile.
+     * The window's centre as it draws the last frame: laid out once the composition is idle, and drawn once the window
+     * has committed frames ([awaitFrame]). Robolectric's renderer can put a frame off, and a capture in between shows
+     * the bare window, neither screen, as a busy machine did. The window draws on Robolectric's own clock, which the
+     * test's frame clock, standing still, doesn't move: no animation goes on meanwhile.
      */
     private fun centre(): Color {
         compose.waitForIdle()
-        var last: Color? = null
-        repeat(5) {
-            shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
-            val image = compose.onRoot().captureToImage().toPixelMap()
-            val colour = image[image.width / 2, image.height / 2]
-            if (colour == last) return colour
-            last = colour
-        }
-        return checkNotNull(last)
+        compose.awaitFrame()
+        val image = compose.onRoot().captureToImage().toPixelMap()
+        return image[image.width / 2, image.height / 2]
     }
 
     private fun exists(tag: String) = compose.onAllNodes(hasTestTag(tag)).fetchSemanticsNodes().isNotEmpty()

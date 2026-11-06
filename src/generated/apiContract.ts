@@ -8113,7 +8113,8 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Speedy",
     "aliases": [
       "Speedy AD",
-      "Speedy Bulgaria"
+      "Speedy Bulgaria",
+      "Speedy (DPD)"
     ],
     "countries": [
       "BG",
@@ -27579,7 +27580,8 @@ export const CARRIER_CAPABILITIES = {
   "tdn": {
     "displayName": "TDN",
     "aliases": [
-      "TDN, S.A.U."
+      "TDN, S.A.U.",
+      "TDN Online"
     ],
     "countries": [
       "ES",
@@ -48625,6 +48627,25 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://int-tracking.jumppoint.io/"
+  },
+  "westweg": {
+    "displayName": "Westweg",
+    "aliases": [
+      "Westweg GmbH"
+    ],
+    "countries": [
+      "DE"
+    ],
+    "color": "#281569",
+    "selectable": true,
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://westweg.itdida.com/"
   }
 } as const;
 
@@ -50017,7 +50038,8 @@ export const CARRIER_IDS = [
   "fmd-distribution",
   "jas-worldwide",
   "tiptop",
-  "jumppoint-international"
+  "jumppoint-international",
+  "westweg"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

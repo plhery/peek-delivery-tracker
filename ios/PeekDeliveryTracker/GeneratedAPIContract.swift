@@ -1391,6 +1391,7 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let jasWorldwide = CarrierID(rawValue: "jas-worldwide")
     static let tiptop = CarrierID(rawValue: "tiptop")
     static let jumppointInternational = CarrierID(rawValue: "jumppoint-international")
+    static let westweg = CarrierID(rawValue: "westweg")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2732,6 +2733,7 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .jasWorldwide,
         .tiptop,
         .jumppointInternational,
+        .westweg,
     ]
 
     init(from decoder: Decoder) throws {

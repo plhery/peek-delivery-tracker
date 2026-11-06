@@ -102832,6 +102832,14 @@
     ]
   },
   {
+    "input": "YL7389999980YQ",
+    "carrier": "gzyl",
+    "confidence": "high",
+    "candidates": [
+      "gzyl"
+    ]
+  },
+  {
     "input": "YL9999999980YQ",
     "carrier": "unknown",
     "confidence": "low",

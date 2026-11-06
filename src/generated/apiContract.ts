@@ -15145,8 +15145,12 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [
       {
-        "pattern": "^YL\\d{10}YQ$",
+        "pattern": "^YL(?!738)\\d{10}YQ$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^YL738\\d{7}YQ$",
+        "confidence": "high"
       }
     ]
   },

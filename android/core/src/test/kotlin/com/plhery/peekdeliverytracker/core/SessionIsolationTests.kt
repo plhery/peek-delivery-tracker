@@ -544,6 +544,29 @@ class SessionIsolationTests {
         assertFalse(store.authenticationRequired)
     }
 
+    /**
+     * C-ST29: a sign-in the server refuses even with a fresh token ends the session (`forceSignOut`), and the answer,
+     * the old session's, leaves the store as it is: no error and no "sign in again" over the welcome that follows, as
+     * the iPhone's `load()` drops an answer once `session.generation` has moved on.
+     */
+    @Test
+    fun aSignInTheServerRefusesEndsTheSessionWithNoErrorLeftBehind() = runTest {
+        val transport = RecordingTransport()
+        val session = sessionStore(transport)
+        val user = AuthUser(id = UUID.randomUUID(), email = "test@example.com", isAnonymous = false)
+        authorize(session, transport, id = user.id)
+        val store = store(session, transport)
+        transport.handler = { request ->
+            if (request.path.orEmpty().endsWith("/token")) jsonResponse(200, sessionJson(user, accessToken = "refreshed"))
+            else jsonResponse(401, """{"error":"Unauthorized"}""")
+        }
+        store.load()
+        assertNull(session.user)
+        assertTrue(transport.requests.any { it.path.orEmpty().endsWith("/token") })
+        assertFalse(store.authenticationRequired)
+        assertNull(store.errorMessage)
+    }
+
     @Test
     fun liveActivityRevocationSurvivesOfflineSignOutAndRestart() = runTest {
         val persistence = MemorySessionPersistence()

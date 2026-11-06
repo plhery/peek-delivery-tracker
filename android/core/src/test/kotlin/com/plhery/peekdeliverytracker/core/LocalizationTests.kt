@@ -287,6 +287,14 @@ class LocalizationTests {
         assertEquals("Die Anmeldung wurde abgebrochen.", localizer.errorMessage(AuthenticationError.OauthCancelled()))
     }
 
+    /** C-ST30: checks still running after two minutes say so in the app's words, as an error and as a refresh's end. */
+    @Test
+    fun checksStillRunningSayTheRefreshTimeout() {
+        val localizer = Localizer(AppLanguage.De)
+        assertEquals(localizer.text("app.refreshTimeout"), localizer.errorMessage(DeliveryApiError.RefreshTimeout()))
+        assertEquals("app.refreshTimeout", ParcelStore.RefreshResult.StillChecking.messageKey)
+    }
+
     @Test
     fun serverErrorsAndAppEventsFollowTheSelectedLanguage() {
         val localizer = Localizer(AppLanguage.Fr)

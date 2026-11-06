@@ -749,6 +749,10 @@ class DeviceParcelTests {
         assertTrue(store.parcels.isEmpty())
         assertTrue(storage.parcels.isEmpty())
         assertFalse(transport.requests.any { it.path == "/api/public/verification" })
+        // C-ST30: the lookup waits 30 s for the server, with no cookies, as DeviceParcels.swift's requests.
+        val lookup = transport.requests.first { it.method == "POST" && it.path == "/api/public/parcels" }
+        assertEquals(30.0, lookup.timeout, 0.0)
+        assertFalse(lookup.handlesCookies)
     }
 
     @Test

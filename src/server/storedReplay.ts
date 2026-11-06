@@ -248,6 +248,7 @@ export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonl
   get diagnostics n = row_count; stepped := stepped + n;`);
   return `\\set ON_ERROR_STOP on
 begin;
+set local peek.hand_fix = 'stored-scan replay';
 do $$
 declare n int; total int := 0; stepped int := 0;
 begin

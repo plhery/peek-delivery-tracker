@@ -102,10 +102,12 @@ order by a.started_at desc;
 \echo '== Stage step-backs: a parcel''s saved stage going back in the window, by short id'
 \echo '   back: to an earlier one of pending, registered and accepted, from a moving stage to one of them, or from'
 \echo '   delivered or returned to any other (moves between moving stages are the carrier''s); carrier_changed: filed'
-\echo '   under another carrier at the next check, as an owner''s change or a correction starts over'
+\echo '   under another carrier at the next check, as an owner''s change or a correction starts over; by_hand: set'
+\echo '   between the checks outside the API (a fix script, a migration, the replay), fixes naming them (- for none)'
 -- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check.
 with saved as (
-  select a.package_id, a.configured_carrier as carrier, a.previous_stage as from_stage,
+  select a.package_id, a.started_at, lead(a.started_at) over w as next_at,
+         a.configured_carrier as carrier, a.previous_stage as from_stage,
          coalesce(lead(a.previous_stage) over w, p.current_stage) as to_stage,
          coalesce(lead(a.configured_carrier) over w, p.carrier) as next_carrier
   from public.tracking_sync_attempts as a
@@ -126,12 +128,20 @@ ranked as (
   ) as rank
 )
 select carrier, from_stage, to_stage, carrier is distinct from next_carrier as carrier_changed,
-       'delivery-tracker' as lane, count(*) as steps, count(distinct package_id) as parcels,
-       array_to_string((array_agg(distinct left(package_id::text, 8)))[1:5], ' ') as sample
+       hand.fix is not null as by_hand, 'delivery-tracker' as lane, count(*) as steps, count(distinct package_id) as parcels,
+       array_to_string((array_agg(distinct left(package_id::text, 8)))[1:5], ' ') as sample,
+       array_to_string((array_agg(distinct hand.fix))[1:3], ', ') as fixes
 from ranked
+-- The hand fix that set the stage the next check found, after this one began.
+left join lateral (
+  select coalesce(h.fix, '-') as fix from private.hand_stage_changes as h
+  where h.package_id = ranked.package_id and h.to_stage = ranked.to_stage
+    and h.changed_at >= ranked.started_at and h.changed_at < coalesce(ranked.next_at, 'infinity')
+  order by h.changed_at desc limit 1
+) as hand on true
 where to_rank < from_rank
-group by 1, 2, 3, 4
-order by steps desc, carrier, from_stage, to_stage;
+group by 1, 2, 3, 4, 5
+order by by_hand, steps desc, carrier, from_stage, to_stage;
 
 \echo '== Expected days dropped in the window from parcels still on their way, by short id'
 \echo '   a day stays through answers without one until it passes on the carrier''s clock, the parcel is delivered,'

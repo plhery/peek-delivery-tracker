@@ -146,6 +146,8 @@ describe('stored scan replay', () => {
     const sql = replaySql(changes, steppedBack([open], changes));
     expect(sql).toContain("update public.packages set current_stage = 'registered'\n   where id = 'parcel-1' and current_stage = 'in_transit';");
     expect(sql).toContain('if stepped <> 1 then raise exception');
+    // The review reads the step back as the replay's, not a check's.
+    expect(sql).toContain("begin;\nset local peek.hand_fix = 'stored-scan replay';\n");
 
     // A row still in transit, a closed or delivered parcel, or an export without the stage: no step back.
     const moved = { ...parcel(label, origin), stage: 'in_transit' };

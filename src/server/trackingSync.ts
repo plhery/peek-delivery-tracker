@@ -2372,9 +2372,9 @@ export class TrackingSyncService {
         && String(row.provider_event_id).startsWith(`${sourceCarrierId}:`) && daysDated.has(JSON.stringify([row.stage, row.description])))
         .map((row) => String(row.provider_event_id));
       // A stage change seen without a time goes too once a dated scan holds it, or the scan
-      // takes its row over.
+      // takes its row over. So does a provider's copy dated by its day alone of a carrier's timed scan.
       const dated = datedObservations(eventsToPersist.filter((event) => !normalized.relays.has(String(event.provider_event_id))),
-        stored, matches);
+        stored, { ...matches, absorbed: shared.absorbed });
       const absorbed = eventsToPersist.length > 0 ? [...new Set([...shared.absorbed, ...undated, ...dated.absorbed])] : [];
       const removed = preserveSummary ? absorbed : [...absorbed, ...disputedRows];
       const keptEvents = eventsToPersist.filter((event) => !matches.skipped.has(String(event.provider_event_id))

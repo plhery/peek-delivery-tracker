@@ -7124,6 +7124,67 @@ it('lets a carrier\'s scan, once dated, take over the row of its day', async () 
   expect(store.rows.get(day)).toMatchObject({ id: row, occurred_at: '2026-10-11T10:20:00Z' });
 });
 
+describe('a provider\'s copy dated by its day alone of a carrier\'s timed scan', () => {
+  // UPS times its shipping partner's step; ParcelsApp dates its copy by the day and adds the place to its words.
+  const parcel = { id: 'ups-partner', user_id: 'owner', carrier: 'ups', tracking_number: '1Z0000000000000001' };
+  const departed = { time: '2026-11-06T07:43:00-08:00', description: 'Departed Shipping Partner Facility', location: 'Example Town, CA',
+    stage: 'in_transit' };
+  const copied = { ...departed, time: '2026-11-06', description: 'Departed Shipping Partner Facility, Example Town, CA' };
+  const answer = (scan: JsonObject): CarrierResult => ({ status: 'in_transit', current_stage: 'in_transit',
+    last_status_text: String(scan.description), last_update: String(scan.time), events: [scan] });
+  const own = providerEventId('ups', departed.time, departed.location, departed.description);
+  const copy = providerEventId('unknown', copied.time, copied.location, copied.description);
+  const down = new Error('UPS tracking endpoint is unavailable');
+  const service = (adapter: ConstructorParameters<typeof TrackingSyncService>[1]) => {
+    vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
+    const store = eventStore();
+    const client = { ...store.client,
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-11-07T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined) };
+    const sync = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-07T12:00:00Z'));
+    // Each check starts from a fresh snapshot, so the router asks UPS first every time.
+    return { store, sync: (stage: string) => sync.syncPackage({ ...parcel, current_stage: stage, [STORED_EVENT_IDENTITIES]: store.identities() }) };
+  };
+
+  it('lets the carrier\'s scan take over the copy\'s row', async () => {
+    const { store, sync } = service({ fetch: vi.fn().mockRejectedValueOnce(down).mockResolvedValueOnce(answer(departed)).mockRejectedValue(down),
+      fetchUniversal: vi.fn().mockResolvedValue({ ...answer(copied), tracking_provider: 'ParcelsApp' }) });
+    await sync('pending');
+    expect([...store.rows.keys()]).toEqual([copy]);
+    const row = store.rows.get(copy)!.id;
+    await sync('in_transit');
+    // The same row, at the carrier's time and in its words: nothing new to announce.
+    expect(store.batch().map((event) => event.provider_event_id)).toEqual([copy]);
+    expect([...store.rows.keys()]).toEqual([copy]);
+    expect(store.rows.get(copy)).toMatchObject({ id: row, occurred_at: '2026-11-06T15:43:00Z', description: departed.description });
+    expect((store.rows.get(copy)!.raw_data as JsonObject).universal_provider).toBeUndefined();
+    // The provider's copy again, the carrier down: the row the carrier's scan took over stays as it is.
+    const taken = store.rows.get(copy);
+    await sync('in_transit');
+    expect([...store.rows.values()]).toEqual([taken]);
+  });
+
+  it('leaves out the copy of a scan the carrier holds', async () => {
+    const { store, sync } = service({ fetch: vi.fn().mockResolvedValueOnce(answer(departed)).mockRejectedValue(down),
+      fetchUniversal: vi.fn().mockResolvedValue({ ...answer(copied), tracking_provider: 'ParcelsApp' }) });
+    await sync('pending');
+    expect([...store.rows.keys()]).toEqual([own]);
+    const row = store.rows.get(own)!;
+    await sync('in_transit');
+    expect(store.batch().map((event) => event.provider_event_id)).not.toContain(copy);
+    expect([...store.rows.values()]).toEqual([row]);
+  });
+
+  it('keeps the copy beside another step of the day', async () => {
+    const { store, sync } = service({ fetch: vi.fn().mockResolvedValueOnce(answer(departed)).mockRejectedValue(down),
+      fetchUniversal: vi.fn().mockResolvedValue({ ...answer({ ...copied, description: 'Arrived at Shipping Partner Facility, Example Town, CA' }),
+        tracking_provider: 'ParcelsApp' }) });
+    await sync('pending');
+    await sync('in_transit');
+    expect(store.rows.size).toBe(2);
+  });
+});
+
 it('fills in a UPS scan location without creating another notification event', async () => {
   const store = eventStore();
   const at = '2026-07-11T18:05:00Z';

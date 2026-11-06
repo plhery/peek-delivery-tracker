@@ -56,7 +56,9 @@
  *   clocks), which the carrier's scan takes over when it is new.
  * - A stage change the sync stored at the time it saw it goes once a scan
  *   dates it, a scan new to the parcel taking its row over, and a new one a
- *   stored row dates is not stored (`datedObservations`).
+ *   stored row dates is not stored (`datedObservations`). So does a universal
+ *   provider's copy dated by its day alone, once the carrier's own timed scan
+ *   of that step reaches the parcel.
  * - A handoff's batch carries the earlier carrier's scans too, and that
  *   carrier may relay the delivery carrier's scans in its own words and stage.
  *   Both are stored (relayCopies.ts), but only the delivery carrier's scan
@@ -65,7 +67,7 @@
 import { createHash } from 'node:crypto';
 import { DateTime, FixedOffsetZone } from 'luxon';
 import { eventTimestamp, sameInstantIdentityPolicy, statusMapAnswer, trackingPlace, type SameInstantIdentityPolicy, type SameInstantScan } from 'universal-parcel-scraper/app';
-import { locatePlace } from 'universal-parcel-scraper/places';
+import { carrierHomeZone, locatePlace } from 'universal-parcel-scraper/places';
 import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { isRecord, type JsonObject } from './types';
 
@@ -606,9 +608,14 @@ function stageless(row: JsonObject): boolean {
   return (row.stage_source ?? (isRecord(row.raw_data) ? row.raw_data.stage_source : undefined)) === 'none';
 }
 
+/** The day of a scan dated by its day alone (`scanDay`), from a row of the batch or a stored one. */
+function dayOf(row: JsonObject): string | null {
+  return scanDay(isRecord(row.raw_data) ? row.raw_data : row);
+}
+
 /** A scan dated by its day alone: it stands at the start of that day, with no clock that could be off. */
 function dayAlone(row: JsonObject): boolean {
-  return scanDay(isRecord(row.raw_data) ? row.raw_data : row) !== null;
+  return dayOf(row) !== null;
 }
 
 /**
@@ -1494,6 +1501,23 @@ export function showsClock(local: string, instant: number): boolean {
   return shift % QUARTER_HOUR_MS === 0 && Math.abs(shift) <= MAX_ZONE_SHIFT_MS;
 }
 
+/**
+ * Whether a universal provider's copy dated by its day alone tells a carrier's timed scan: the
+ * same stage and place, codes that agree, the scan's words (`sameWording`) or those words
+ * followed by the copy's place (ParcelsApp's "Departed Shipping Partner Facility, Example
+ * Town, CA"), and the scan's instant on the copy's day, on the clock the scan states or on its
+ * carrier's home clock, where the sync starts a carrier's day.
+ */
+function toldOnDay(copy: JsonObject, scan: JsonObject): boolean {
+  const [day, words, place] = [dayOf(copy), wordingOf(scan), placeOf(copy)];
+  const zone = carrierHomeZone(sourceOf(identity(scan)));
+  const days = [labelledTime(scan)?.toISODate(), LOCAL_CLOCK.exec(localTimeOf(scan))?.[1],
+    zone ? DateTime.fromMillis(instantOf(scan), { zone }).toISODate() : null];
+  return day !== null && days.includes(day) && stageOf(copy) === stageOf(scan) && placeOf(scan) === place
+    && codesAgree(copy, scan)
+    && (sameWording(wordingOf(copy), words) || (words !== '' && place !== '' && wordingOf(copy) === `${words}, ${place}`));
+}
+
 export interface DatedObservations {
   /** A scan's computed identity → the sighting's row it takes over in place. */
   reused: Map<string, string>;
@@ -1521,11 +1545,16 @@ export interface DatedObservations {
  * holds the scan as any row of that source does. Otherwise the sighting is
  * absorbed, or left out of the batch. A stored sighting in words its source
  * no longer gives is absorbed by the scan of its stage before it.
+ *
+ * A universal provider's copy dated by its day alone is the carrier's own
+ * timed scan of that step (`toldOnDay`), one to one: a scan new to the parcel
+ * takes the copy's row over, unless `matches.absorbed` deletes it, and a copy
+ * of a scan the carrier holds already is absorbed, or left out of the batch.
  */
 export function datedObservations(
   events: readonly JsonObject[],
   stored: readonly JsonObject[],
-  matches: { reused: ReadonlyMap<string, string>; skipped: ReadonlyMap<string, string> },
+  matches: { reused: ReadonlyMap<string, string>; skipped: ReadonlyMap<string, string>; absorbed?: ReadonlySet<string> },
 ): DatedObservations {
   const dated: DatedObservations = { reused: new Map(), absorbed: new Set(), skipped: new Set() };
   const storedIds = new Set(stored.map(identity));
@@ -1573,6 +1602,39 @@ export function datedObservations(
   for (const [row, matching] of pairs) {
     const scan = matching.length === 1 ? identity(matching[0]!) : '';
     if (scan && claims.get(scan) === 1 && !dated.reused.has(scan)) dated.reused.set(scan, identity(row));
+  }
+  // A universal provider's copy dated by its day alone (ParcelsApp's of a shipping partner's step under UPS, Ship24's
+  // of ECMS's flights) is the carrier's own scan of that step with its time, from the batch or stored: the copy tells
+  // that one scan, and the scan no other copy of the provider's. A scan new to the parcel takes the copy's row over,
+  // as it takes over a copy at its instant (`sharedScans`); a copy of a scan the carrier holds already goes, or stays
+  // out of the batch. The copy never takes the carrier's row over.
+  const holderOf = (id: string) => matches.reused.get(id) ?? matches.skipped.get(id) ?? dated.reused.get(id) ?? id;
+  const carrierTimed = (row: JsonObject) => heldByCarrier(row) && !observedOnly(row) && Number.isFinite(instantOf(row))
+    && !dayAlone(row) && clockDay(row) === null && timeOf(row) !== '';
+  // Each of the carrier's timed scans under the row that holds it, or its own identity when it is new.
+  const timed = new Map<string, JsonObject>();
+  for (const row of [...stored, ...events]) if (carrierTimed(row)) timed.set(holderOf(identity(row)), row);
+  const dayCopy = (row: JsonObject) => sourceOf(identity(row)) === UNIVERSAL && providerOf(row) !== '' && !observedOnly(row)
+    && Number.isFinite(instantOf(row)) && dayAlone(row);
+  // A copy of the batch another rule matched to another row is that row's.
+  const dayCopies = [...stored.filter((row) => dayCopy(row) && !held.has(identity(row))),
+    ...events.filter((event) => dayCopy(event) && holderOf(identity(event)) === identity(event))];
+  const told = dayCopies.map((copy) => [copy, [...timed].filter(([, scan]) => toldOnDay(copy, scan)).map(([key]) => key)] as const);
+  const teller = (key: string, copy: JsonObject) => `${key}\n${providerOf(copy)}`;
+  const tellers = new Map<string, number>();
+  for (const [copy, keys] of told) for (const key of keys) tellers.set(teller(key, copy), (tellers.get(teller(key, copy)) ?? 0) + 1);
+  const storedById = new Map(stored.map((row) => [identity(row), row] as const));
+  for (const [copy, keys] of told) {
+    if (keys.length !== 1 || tellers.get(teller(keys[0]!, copy)) !== 1) continue;
+    const id = identity(copy);
+    const scan = identity(timed.get(keys[0]!)!);
+    if (batchIds.has(id)) dated.skipped.add(id);
+    // A row the carrier's scan took over keeps the copy's identity: it holds the scan, and stays.
+    const row = storedById.get(id);
+    if (!row || !dayCopy(row)) continue;
+    if (!batchIds.has(id) && keys[0] === scan && batchIds.has(scan) && !storedIds.has(scan) && !dated.reused.has(scan)
+      && !matches.absorbed?.has(id)) dated.reused.set(scan, id);
+    else dated.absorbed.add(id);
   }
   // A stored sighting whose words its source's answer no longer lists, as when the scraper rewords a
   // status, goes once a scan of that answer holds the change it saw: the answer's newest scan dated

@@ -1990,6 +1990,80 @@ describe('a stage change the sync saw without a time', () => {
   });
 });
 
+describe('a provider\'s copy dated by its day alone', () => {
+  // UPS times its shipping partner's step; ParcelsApp dates its copy by the day and adds the place to its words.
+  const timed = (values: JsonObject = {}) => ({ ...scan('ups:departed', '2026-11-06T15:43:00Z', 'Departed Shipping Partner Facility', 'in_transit'),
+    location: 'Example Town, CA', raw_data: { time: '2026-11-06T07:43:00-08:00' }, ...values });
+  const kept = (values: JsonObject = {}) => ({ ...row('ups:departed', '2026-11-06T15:43:00+00:00', 'Departed Shipping Partner Facility', 'in_transit'),
+    location: 'Example Town, CA', time: '2026-11-06T07:43:00-08:00', ...values });
+  const copy = (values: JsonObject = {}) => ({ ...scan('unknown:departed', '2026-11-06T00:00:00Z', 'Departed Shipping Partner Facility, Example Town, CA', 'in_transit'),
+    location: 'Example Town, CA', raw_data: { universal_provider: 'ParcelsApp', time: '2026-11-06' }, ...values });
+  const copied = (values: JsonObject = {}) => ({ ...row('unknown:departed', '2026-11-06T00:00:00+00:00', 'Departed Shipping Partner Facility, Example Town, CA', 'in_transit'),
+    location: 'Example Town, CA', time: '2026-11-06', universal_provider: 'ParcelsApp', ...values });
+  const none = { reused: new Map<string, string>(), skipped: new Map<string, string>() };
+  const found = (events: JsonObject[], stored: JsonObject[], matches: Parameters<typeof datedObservations>[2] = none) => {
+    const dated = datedObservations(events, stored, matches);
+    return { reused: pairs(dated.reused), absorbed: [...dated.absorbed], skipped: [...dated.skipped] };
+  };
+  const left = (events: JsonObject[], stored: JsonObject[]) => Object.values(found(events, stored)).flat().length;
+
+  it('is the carrier\'s timed scan of its step, which takes the copy\'s row over', () => {
+    expect(found([timed()], [copied()])).toEqual({ reused: [['ups:departed', 'unknown:departed']], absorbed: [], skipped: [] });
+    // In the scan's own words (Ship24's), too.
+    expect(found([timed()], [copied({ description: 'Departed Shipping Partner Facility', universal_provider: 'Ship24' })]).reused)
+      .toEqual([['ups:departed', 'unknown:departed']]);
+    // A scan stated in UTC falls on the copy's day on its carrier's home clock: a USPS evening is the next day in UTC.
+    const evening = { occurred_at: '2026-11-07T03:00:00Z', raw_data: { time: '2026-11-07T03:00:00Z' } };
+    expect(found([timed({ ...evening, provider_event_id: 'usps:departed' })], [copied()]).reused).toEqual([['usps:departed', 'unknown:departed']]);
+    // A carrier the catalog gives no home clock has only the one the scan states.
+    expect(left([timed(evening)], [copied()])).toBe(0);
+  });
+
+  it('goes once the carrier holds the scan', () => {
+    const gone = { reused: [], absorbed: ['unknown:departed'], skipped: [] };
+    // The carrier's scan stored, in the batch or not.
+    expect(found([timed()], [copied(), kept()])).toEqual(gone);
+    expect(found([], [copied(), kept()])).toEqual(gone);
+    // The scan holding another row, or the copy's row going with the check.
+    expect(found([timed()], [copied()], { ...none, reused: new Map([['ups:departed', 'unknown:timed']]) })).toEqual(gone);
+    expect(found([timed()], [copied()], { ...none, absorbed: new Set(['unknown:departed']) })).toEqual(gone);
+    // One scan takes one copy's row over, and another provider's copy goes.
+    expect(found([timed()], [copied(), copied({ provider_event_id: 'unknown:ship24', universal_provider: 'Ship24' })]))
+      .toEqual({ reused: [['ups:departed', 'unknown:departed']], absorbed: ['unknown:ship24'], skipped: [] });
+  });
+
+  it('is left out of a provider\'s answer once the carrier holds the scan', () => {
+    expect(found([copy()], [kept()])).toEqual({ reused: [], absorbed: [], skipped: ['unknown:departed'] });
+    // Its row stored beside the carrier's goes too, but not the row the carrier's scan took over.
+    expect(found([copy()], [kept(), copied()])).toEqual({ reused: [], absorbed: ['unknown:departed'], skipped: ['unknown:departed'] });
+    expect(found([copy()], [kept({ provider_event_id: 'unknown:departed' })]))
+      .toEqual({ reused: [], absorbed: [], skipped: ['unknown:departed'] });
+    // A copy another rule matched to another row stays that row's.
+    expect(found([copy()], [kept()], { ...none, skipped: new Map([['unknown:departed', 'unknown:other']]) }).skipped).toEqual([]);
+  });
+
+  it('stays beside another step, place or day, or when no one scan tells it', () => {
+    expect(left([timed({ stage: 'out_for_delivery' })], [copied()])).toBe(0);
+    expect(left([timed({ location: 'Other Town, CA' })], [copied()])).toBe(0);
+    expect(left([timed({ description: 'Arrived at Shipping Partner Facility' })], [copied()])).toBe(0);
+    expect(left([timed({ occurred_at: '2026-11-07T15:43:00Z', raw_data: { time: '2026-11-07T07:43:00-08:00' } })], [copied()])).toBe(0);
+    expect(left([timed({ raw_data: { time: '2026-11-06T07:43:00-08:00', provider_code: 'DP' } })], [copied({ provider_code: 'XX' })])).toBe(0);
+    expect(left([copy({ stage: 'out_for_delivery' })], [kept()])).toBe(0);
+    // Two scans of the step that day, or two of the provider's copies of it.
+    const again = { provider_event_id: 'ups:again', occurred_at: '2026-11-06T19:10:00Z', raw_data: { time: '2026-11-06T11:10:00-08:00' } };
+    expect(left([timed(), timed(again)], [copied()])).toBe(0);
+    expect(left([copy()], [kept(), kept({ ...again, occurred_at: '2026-11-06T19:10:00+00:00', time: '2026-11-06T11:10:00-08:00' })])).toBe(0);
+    expect(left([timed()], [copied(), copied({ provider_event_id: 'unknown:again' })])).toBe(0);
+    // Peek's own rows and a provider's timed scan are no carrier's.
+    expect(left([timed({ provider_event_id: 'app:departed' })], [copied()])).toBe(0);
+    expect(left([timed({ provider_event_id: 'unknown:timed', raw_data: { universal_provider: 'Ship24', time: '2026-11-06T07:43:00-08:00' } })],
+      [copied()])).toBe(0);
+    // Nor does a copy with a clock take the carrier's row, or a carrier's own day row the rule of a provider's copy.
+    expect(left([copy({ raw_data: { universal_provider: 'ParcelsApp', time: '2026-11-06T07:43:00-08:00' } })], [kept()])).toBe(0);
+    expect(left([timed()], [copied({ provider_event_id: 'usps:departed', universal_provider: undefined })])).toBe(0);
+  });
+});
+
 describe('an earlier carrier relaying the delivery carrier\'s scans', () => {
   const at = (id: string, occurredAt: string, description: string, location: string, stage = 'in_transit') => ({
     ...scan(id, occurredAt, description, stage), location,

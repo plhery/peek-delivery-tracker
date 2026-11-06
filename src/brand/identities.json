@@ -394,6 +394,9 @@
   "big-smart": {
     "decal": "big-smart"
   },
+  "bigpost": {
+    "decal": "bigpost"
+  },
   "bjs-home-delivery": {
     "decal": "bjs-home-delivery",
     "palette": {
@@ -783,6 +786,9 @@
       "brand-light": "#002e6d"
     },
     "decal": "correos"
+  },
+  "coship": {
+    "decal": "coship"
   },
   "costco-logistics": {
     "decal": "costco-logistics"

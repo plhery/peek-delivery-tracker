@@ -654,7 +654,9 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'edi-express'
   | 'cargo-trans-logistik'
   | 'jas-worldwide'
-  | 'westweg';
+  | 'westweg'
+  | 'bigpost'
+  | 'coship';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

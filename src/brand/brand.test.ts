@@ -771,6 +771,8 @@ describe('carrier brand', () => {
       'cargo-trans-logistik',
       'jas-worldwide',
       'westweg',
+      'bigpost',
+      'coship',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

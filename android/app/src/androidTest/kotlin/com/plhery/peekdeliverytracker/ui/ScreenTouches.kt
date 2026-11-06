@@ -70,16 +70,19 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
         finger.send(MotionEvent.ACTION_DOWN)
         for (step in 1..steps) {
             frame()
+            finger.pace()
             finger.at = from + by * (step / steps.toFloat())
             finger.send(MotionEvent.ACTION_MOVE)
         }
         if (holds) {
             repeat(HOLD_FRAMES) {
                 frame()
+                finger.pace()
                 finger.send(MotionEvent.ACTION_MOVE)
             }
         }
         frame()
+        finger.pace()
         finger.send(MotionEvent.ACTION_UP)
         compose.waitForIdle()
     }
@@ -96,6 +99,17 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
     /** A finger on the screen at [at], its touches sent as the screen's are. */
     private inner class Finger(var at: Offset) {
         private val down = SystemClock.uptimeMillis()
+
+        /**
+         * The time a drag's touches carry, a frame after the one before, rather than when they are sent: a device can
+         * take longer than 40 ms to draw a frame, and touches that far apart read as a finger that stopped, which the
+         * velocity tracker counts as no speed at all. Null for a tap's, sent as they happen.
+         */
+        private var paced: Long? = null
+
+        fun pace() {
+            paced = (paced ?: down) + FRAME_MILLIS
+        }
         private val properties = MotionEvent.PointerProperties().apply {
             id = 0
             toolType = MotionEvent.TOOL_TYPE_FINGER
@@ -108,7 +122,7 @@ internal class ScreenTouches(private val compose: AndroidComposeTestRule<*, *>) 
                 pressure = 1f
                 size = 1f
             }
-            val time = if (action == MotionEvent.ACTION_DOWN) down else SystemClock.uptimeMillis()
+            val time = if (action == MotionEvent.ACTION_DOWN) down else paced ?: SystemClock.uptimeMillis()
             val event = MotionEvent.obtain(
                 down, time, action, 1, arrayOf(properties), arrayOf(where), 0, 0, 1f, 1f, 0, 0, InputDevice.SOURCE_TOUCHSCREEN, 0,
             )

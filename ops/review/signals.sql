@@ -103,10 +103,12 @@ order by a.started_at desc;
 \echo '   back: to an earlier one of pending, registered and accepted, from a moving stage to one of them, or from'
 \echo '   delivered or returned to any other (moves between moving stages are the carrier''s); carrier_changed: filed'
 \echo '   under another carrier at the next check, as an owner''s change or a correction starts over; by_hand: set'
-\echo '   between the checks outside the API (a fix script, a migration, the replay), fixes naming them (- for none)'
+\echo '   between the checks outside the API (a fix script, a migration, the replay), fixes naming them (- for none);'
+\echo '   over_provider: the parcel''s own carrier answered the check after a universal provider had answered the one'
+\echo '   before it, and may read the same scans in an earlier stage (17TRACK''s in transit for an arrival at the origin)'
 -- The stage a check saved is the next check's previous_stage, or the parcel's stage after its latest check.
 with saved as (
-  select a.package_id, a.started_at, lead(a.started_at) over w as next_at,
+  select a.id, a.package_id, a.started_at, lead(a.started_at) over w as next_at, a.source_carrier,
          a.configured_carrier as carrier, a.previous_stage as from_stage,
          coalesce(lead(a.previous_stage) over w, p.current_stage) as to_stage,
          coalesce(lead(a.configured_carrier) over w, p.carrier) as next_carrier
@@ -126,22 +128,32 @@ ranked as (
     select coalesce(early.from_early, case when s.from_stage in ('delivered', 'returned') then 5 else 4 end) as from_rank,
            coalesce(early.to_early, case when s.to_stage in ('delivered', 'returned') then 5 else 4 end) as to_rank
   ) as rank
+),
+back as (
+  select * from ranked where to_rank < from_rank
 )
 select carrier, from_stage, to_stage, carrier is distinct from next_carrier as carrier_changed,
-       hand.fix is not null as by_hand, 'delivery-tracker' as lane, count(*) as steps, count(distinct package_id) as parcels,
+       hand.fix is not null as by_hand,
+       back.source_carrier = back.carrier and back.carrier <> 'unknown' and prior.source_carrier = 'unknown' as over_provider,
+       'delivery-tracker' as lane, count(*) as steps, count(distinct package_id) as parcels,
        array_to_string((array_agg(distinct left(package_id::text, 8)))[1:5], ' ') as sample,
        array_to_string((array_agg(distinct hand.fix))[1:3], ', ') as fixes
-from ranked
+from back
 -- The hand fix that set the stage the next check found, after this one began.
 left join lateral (
   select coalesce(h.fix, '-') as fix from private.hand_stage_changes as h
-  where h.package_id = ranked.package_id and h.to_stage = ranked.to_stage
-    and h.changed_at >= ranked.started_at and h.changed_at < coalesce(ranked.next_at, 'infinity')
+  where h.package_id = back.package_id and h.to_stage = back.to_stage
+    and h.changed_at >= back.started_at and h.changed_at < coalesce(back.next_at, 'infinity')
   order by h.changed_at desc limit 1
 ) as hand on true
-where to_rank < from_rank
-group by 1, 2, 3, 4, 5
-order by by_hand, steps desc, carrier, from_stage, to_stage;
+-- The check before this one, in the window or not: whose answer it took.
+left join lateral (
+  select b.source_carrier from public.tracking_sync_attempts as b
+  where b.package_id = back.package_id and (b.started_at, b.id) < (back.started_at, back.id)
+  order by b.started_at desc, b.id desc limit 1
+) as prior on true
+group by 1, 2, 3, 4, 5, 6
+order by by_hand, over_provider, steps desc, carrier, from_stage, to_stage;
 
 \echo '== Expected days dropped in the window from parcels still on their way, by short id'
 \echo '   a day stays through answers without one until it passes on the carrier''s clock, the parcel is delivered,'

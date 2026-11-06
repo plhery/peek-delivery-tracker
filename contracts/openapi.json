@@ -16589,7 +16589,8 @@
         "易客满国际快递",
         "ECMSGlobal",
         "ECMS Global",
-        "ECMS"
+        "ECMS",
+        "ECMS International Logistics Co."
       ],
       "countries": [
         "CN",
@@ -32083,6 +32084,7 @@
     "far-international": {
       "displayName": "FAR International",
       "aliases": [
+        "FAR",
         "FAR International Logistics",
         "Far International Logistics",
         "泛远国际",
@@ -38445,11 +38447,11 @@
       "timezone": "America/Bogota",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "xcargo"
       },
       "linkRules": [],
       "detectionRules": [],
-      "trackingSearchUrl": "https://x-cargo.co/"
+      "trackingSearchUrl": "https://x-cargo.co/tracking/"
     },
     "zimpost": {
       "displayName": "Zimpost",

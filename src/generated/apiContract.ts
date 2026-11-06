@@ -16584,7 +16584,8 @@ export const CARRIER_CAPABILITIES = {
       "易客满国际快递",
       "ECMSGlobal",
       "ECMS Global",
-      "ECMS"
+      "ECMS",
+      "ECMS International Logistics Co."
     ],
     "countries": [
       "CN",
@@ -32078,6 +32079,7 @@ export const CARRIER_CAPABILITIES = {
   "far-international": {
     "displayName": "FAR International",
     "aliases": [
+      "FAR",
       "FAR International Logistics",
       "Far International Logistics",
       "泛远国际",
@@ -38440,11 +38442,11 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Bogota",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "xcargo"
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://x-cargo.co/"
+    "trackingSearchUrl": "https://x-cargo.co/tracking/"
   },
   "zimpost": {
     "displayName": "Zimpost",

@@ -64,6 +64,7 @@ import com.plhery.peekdeliverytracker.core.journalEntries
 import com.plhery.peekdeliverytracker.core.journalLocation
 import com.plhery.peekdeliverytracker.core.journalTime
 import com.plhery.peekdeliverytracker.core.journalWording
+import com.plhery.peekdeliverytracker.core.isAhead
 import com.plhery.peekdeliverytracker.core.plannedNewestFirst
 import com.plhery.peekdeliverytracker.core.plannedStepLabel
 import com.plhery.peekdeliverytracker.core.plannedWording
@@ -116,7 +117,8 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                 fadeOut(Motion.easeInOut(TOGGLE)) + shrinkVertically(Motion.easeInOut<IntSize>(TOGGLE), Alignment.Top, clip = false),
         ) {
             Column(Modifier.fillMaxWidth()) {
-                parcel.plannedEvents?.takeIf { it.isNotEmpty() }?.let { PlannedSteps(it, now()) }
+                val moment = now()
+                parcel.plannedEvents?.filter { it.isAhead(moment) }?.takeIf { it.isNotEmpty() }?.let { PlannedSteps(it, moment) }
                 if (days.isEmpty()) {
                     Text(
                         localizer.text(if (syncing) "timeline.emptySyncing" else "timeline.empty"),

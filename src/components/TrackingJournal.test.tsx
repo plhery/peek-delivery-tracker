@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { TrackingJournal } from './TrackingJournal';
 import type { TrackingEvent } from '../types';
 
@@ -8,7 +8,12 @@ function event(id: string, occurredAt: string, description: string, location?: s
   return { id, parcelId: 'parcel', stage: 'in_transit', occurredAt, description, location };
 }
 
+// Planned steps show while their time is ahead: these are read in the year before their journeys.
+const beforeTheJourneys = () => { vi.useFakeTimers({ toFake: ['Date'] }); vi.setSystemTime(new Date('2023-12-01T00:00:00Z')); };
+
 describe('TrackingJournal', () => {
+  afterEach(() => { vi.useRealTimers(); });
+
   it('keeps all scans in newest-first calendar-day groups, including older years', () => {
     const { container } = render(<TrackingJournal events={[
       event('first', '2024-09-07T10:00:00', 'Collected', 'Germany'),
@@ -27,6 +32,7 @@ describe('TrackingJournal', () => {
   });
 
   it('shows the steps the carrier planned apart, greyed and newest first, without counting them as updates', () => {
+    beforeTheJourneys();
     const { container } = render(<TrackingJournal events={[event('picked', '2024-09-07T10:00:00', 'Picked up', 'Shenzhen, China')]} planned={[
       { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2024-09-08T09:00:00', location: 'Shenzhen, China' },
       { stage: 'delivered', description: 'Delivered', occurredAt: '2024-09-15T22:00:00.000Z', day: '2024-09-16' },
@@ -44,6 +50,27 @@ describe('TrackingJournal', () => {
     expect(within(history).getByText('Picked up')).toBeInTheDocument();
     expect(within(history).queryByText(/Departed|Delivered/)).not.toBeInTheDocument();
     expect(container.querySelectorAll('.tracking-journal__planned-mark')).toHaveLength(2);
+  });
+
+  it('shows a planned step only while its time is ahead, one dated by its day alone through that day', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2024-09-08T10:00:00Z'));
+    const picked = [event('picked', '2024-09-07T10:00:00Z', 'Picked up')];
+    const plan = [
+      { stage: 'in_transit' as const, description: 'Departed the origin facility', occurredAt: '2024-09-08T09:00:00Z' },
+      { stage: 'customs' as const, description: 'Customs cleared', occurredAt: '2024-09-06T22:00:00.000Z', day: '2024-09-07' },
+      { stage: 'out_for_delivery' as const, description: 'Out for delivery', occurredAt: '2024-09-07T22:00:00.000Z', day: '2024-09-08' },
+      { stage: 'delivered' as const, description: 'Delivered', occurredAt: '2024-09-08T15:00:00Z' },
+    ];
+    const { container, rerender } = render(<TrackingJournal events={picked} planned={plan} />);
+    const planned = screen.getByRole('region', { name: 'Planned by the carrier' });
+    expect([...planned.querySelectorAll('li p')].map(line => line.textContent))
+      .toEqual(['Planned, not confirmed: Delivered', 'Planned, not confirmed: Out for delivery']);
+    // Once the carrier's pre-written "Delivered" is due, nothing planned is left to show.
+    vi.setSystemTime(new Date('2024-09-08T22:00:00Z'));
+    rerender(<TrackingJournal events={picked} planned={plan} />);
+    expect(screen.queryByRole('region', { name: 'Planned by the carrier' })).not.toBeInTheDocument();
+    expect(container.querySelector('.tracking-journal__planned-mark')).toBeNull();
   });
 
   it('leads each place with its flag and closes it with the country’s name', () => {
@@ -78,6 +105,7 @@ describe('TrackingJournal', () => {
   });
 
   it('names a place written in Chinese by the town it was placed in, keeping it as written where it was placed nowhere', () => {
+    beforeTheJourneys();
     const { container } = render(<TrackingJournal events={[
       { ...event('xiamen', '2024-09-09T10:00:00', 'Departed', '厦门'), place: { latitude: 24.48, longitude: 118.09, precision: 'city', country: 'CN', name: 'Xiamen' } },
       event('unplaced', '2024-09-09T09:00:00', 'Accepted', '台北'),

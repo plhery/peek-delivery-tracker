@@ -666,6 +666,14 @@ extension PlannedTrackingEvent {
 
     /// The date to show for the step: its day when it has no clock time, else its moment.
     var displayDate: Date? { calendarDay ?? DateParser.date(occurredAt) }
+
+    /// Whether the step's time is still ahead, as the server serves it: a step dated by its day alone stands through
+    /// that day, which starts at `occurredAt` in the carrier's zone. So a carrier's pre-written "Delivered" never shows
+    /// as planned for a time gone by.
+    func isAhead(of now: Date) -> Bool {
+        guard let at = DateParser.date(occurredAt) else { return false }
+        return (day == nil ? at : at.addingTimeInterval(24 * 60 * 60)) > now
+    }
 }
 
 enum DateParser {

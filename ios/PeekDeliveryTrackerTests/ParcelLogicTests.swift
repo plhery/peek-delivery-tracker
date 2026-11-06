@@ -3875,6 +3875,21 @@ extension ParcelLogicTests {
         XCTAssertNil(DemoRepository.stillPlanned(overtaken).plannedEvents)
     }
 
+    func testAPlannedStepShowsOnlyWhileItsTimeIsAhead() throws {
+        func step(_ occurredAt: String, day: String? = nil) -> PlannedTrackingEvent {
+            PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: occurredAt, day: day)
+        }
+        let now = try XCTUnwrap(DateParser.date("2026-11-04T10:00:00Z"))
+        XCTAssertTrue(step("2026-11-04T10:01:00Z").isAhead(of: now))
+        // The carrier's pre-written "Delivered" whose time has come is no longer planned.
+        XCTAssertFalse(step("2026-11-04T10:00:00Z").isAhead(of: now))
+        XCTAssertFalse(step("2026-11-04T07:00:00Z").isAhead(of: now))
+        // A step dated by its day alone stands through that day, from its start in the carrier's zone.
+        XCTAssertTrue(step("2026-11-03T16:00:00Z", day: "2026-11-04").isAhead(of: now))
+        XCTAssertFalse(step("2026-11-02T16:00:00Z", day: "2026-11-03").isAhead(of: now))
+        XCTAssertFalse(step("not a date").isAhead(of: now))
+    }
+
     @MainActor
     func testAPlannedStepReadsItsDayAsTheJournalDoesAndItsTimeWhenItHasOne() throws {
         let localizer = Localizer()

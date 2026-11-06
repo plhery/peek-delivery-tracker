@@ -11,6 +11,7 @@ import com.plhery.peekdeliverytracker.core.api.PublicPackageCarrierData
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.time.Duration
+import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.UUID
@@ -140,6 +141,21 @@ class PlannedStepsTests {
         assertEquals("tomorrow", localizer.plannedDate(step(at(11, 5), day = "2026-11-05"), now))
         assertEquals("", localizer.plannedDate(step("not a date"), now))
         assertEquals("明天 07:54", Localizer(AppLanguage.Zh).plannedDate(step(at(11, 5)), now))
+    }
+
+    @Test
+    fun aPlannedStepShowsOnlyWhileItsTimeIsAhead() {
+        fun step(occurredAt: String, day: String? = null) =
+            PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = occurredAt, day = day)
+        val now = Instant.parse("2026-11-04T10:00:00Z")
+        assertTrue(step("2026-11-04T10:01:00Z").isAhead(now))
+        // The carrier's pre-written "Delivered" whose time has come is no longer planned.
+        assertFalse(step("2026-11-04T10:00:00Z").isAhead(now))
+        assertFalse(step("2026-11-04T07:00:00Z").isAhead(now))
+        // A step dated by its day alone stands through that day, from its start in the carrier's zone.
+        assertTrue(step("2026-11-03T16:00:00Z", day = "2026-11-04").isAhead(now))
+        assertFalse(step("2026-11-02T16:00:00Z", day = "2026-11-03").isAhead(now))
+        assertFalse(step("not a date").isAhead(now))
     }
 
     @Test

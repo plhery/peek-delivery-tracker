@@ -51,6 +51,7 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
     groups.get(key)!.events.push(event);
   }
   const now = new Date();
+  const ahead = planned.filter((step) => plannedAhead(step, now.getTime()));
   const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
   const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString();
   const dayLabel = (date: Date | null, fallback: string) => !date ? fallback
@@ -84,7 +85,7 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
 
   return <details className="tracking-journal" open>
     <summary><span>{t('timeline.label')}</span><span className="tracking-journal__count">{updates(events.length)}<svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg></span></summary>
-    {planned.length > 0 && <PlannedSteps steps={planned} />}
+    {ahead.length > 0 && <PlannedSteps steps={ahead} />}
     {!events.length ? <p className="timeline-empty">{t(syncing ? 'timeline.emptySyncing' : 'timeline.empty')}</p>
       : <ol className="tracking-journal__days" aria-label={t('timeline.label')}>
         {listed.map(([key, group], index) => <li key={key}>
@@ -101,6 +102,18 @@ export function TrackingJournal({ events: allEvents, planned = [], syncing = fal
       <svg aria-hidden="true" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" /></svg>{t('link.showOldest.many', { count: oldest })}
     </button>}
   </details>;
+}
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Whether a planned step's time is still ahead, as the server serves it (plannedSteps.ts): a step dated by its day
+ * alone stands through that day, which starts at `occurredAt` in the carrier's zone. One whose time passes while the
+ * page is open goes at the next render, so a carrier's pre-written "Delivered" never shows as planned for a time gone by.
+ */
+export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day'>, now: number): boolean {
+  const at = Date.parse(step.occurredAt);
+  return Number.isFinite(at) && (step.day ? at + DAY_MS : at) > now;
 }
 
 /**

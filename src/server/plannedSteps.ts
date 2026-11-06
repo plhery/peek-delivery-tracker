@@ -69,11 +69,13 @@ const words = (value: unknown) => String(value ?? '').replace(/\s+/g, ' ').trim(
 /**
  * The planned steps a parcel's timeline shows, greyed under "Planned by the carrier", as the API serves them
  * (`planned_events`): those its routing kept for the carrier tracking it now (`routing.planned`) and still ahead of
- * what happened. They are never scans: nothing else reads them, so they set no stage, status line, estimate, alert,
- * email, count or drawing. A step goes once the parcel is delivered or returned, once a shown scan (`events`, as
- * served) is as late or later, tells it in the same words or has come further, and for a placeholder number.
+ * what happened and of `now`. They are never scans: nothing else reads them, so they set no stage, status line,
+ * estimate, alert, email, count or drawing. A step goes once its time has passed (a step dated by its day alone, once
+ * that day has), once the parcel is delivered or returned, once a shown scan (`events`, as served) is as late or later,
+ * tells it in the same words or has come further, and for a placeholder number: a carrier's script that has run past
+ * its "Delivered" never shows that step as planned for a time gone by.
  */
-export function servedPlannedSteps(row: JsonObject, events: readonly JsonObject[]): JsonObject[] {
+export function servedPlannedSteps(row: JsonObject, events: readonly JsonObject[], now = Date.now()): JsonObject[] {
   const data = isRecord(row.carrier_data) ? row.carrier_data : {};
   const routing = isRecord(data.routing) ? data.routing : {};
   const kept = isRecord(routing.planned) ? routing.planned : null;
@@ -97,7 +99,7 @@ export function servedPlannedSteps(row: JsonObject, events: readonly JsonObject[
     if (!Number.isFinite(instant)) return [];
     // A day-only step stands until the end of its day.
     const until = day ? DateTime.fromISO(day, { zone }).endOf('day').toMillis() : instant;
-    if (until <= latest || told.has(words(step.description))) return [];
+    if (until <= Math.max(latest, now) || told.has(words(step.description))) return [];
     const stage = step.stage && EVENT_STAGE_ORDER.includes(step.stage) ? step.stage : 'in_transit';
     if (PROGRESS.indexOf(stage) >= 0 && PROGRESS.indexOf(stage) < reached) return [];
     return [{ description: step.description, stage, location: step.location ?? null,

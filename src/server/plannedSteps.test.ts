@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NoHistoryError } from 'universal-parcel-scraper';
 import { plannedSteps, plannedStepsOf, PLANNED_STEPS_KEPT, servedPlannedSteps } from './plannedSteps';
 import type { JsonObject } from './types';
@@ -14,6 +14,10 @@ const script = [
   { time: '2026-11-04T15:00:00+08:00', description: 'Delivered', stage: 'delivered' },
 ];
 const pickedUp = { id: 'scan', description: 'Picked up', stage: 'accepted', occurred_at: '2026-10-18T02:00:00.000Z', provider_event_id: 'mtscn:1' };
+// The plan is read the morning after the parcel was picked up, before any of its steps is due.
+beforeAll(() => { vi.useFakeTimers({ toFake: ['Date'] }); vi.setSystemTime(new Date('2026-10-18T03:00:00Z')); });
+afterAll(() => { vi.useRealTimers(); });
+
 const row = (overrides: JsonObject = {}, steps: unknown[] = script): JsonObject => ({
   id: 'parcel', carrier: 'mtscn', tracking_number: 'TEST1234', current_stage: 'accepted',
   carrier_data: { routing: { version: 1, planned: { number: 'TEST1234', carriers: { mtscn: steps } } } },
@@ -76,6 +80,15 @@ describe('servedPlannedSteps', () => {
     // The carrier delivering now is the one whose plan shows.
     expect(servedPlannedSteps(row({ carrier: 'ups', carrier_data: { active_tracking_carrier: 'mtscn',
       routing: (row().carrier_data as JsonObject).routing } }), [pickedUp])).toHaveLength(4);
+  });
+
+  it('leaves out a step whose time has passed, and a step dated by its day alone once that day is over', () => {
+    // Out for delivery's planned morning is gone, its pre-written "Delivered" not yet.
+    expect(servedPlannedSteps(row(), [pickedUp], Date.parse('2026-11-04T06:59:00Z')).map((step) => step.description)).toEqual(['Delivered']);
+    expect(servedPlannedSteps(row(), [pickedUp], Date.parse('2026-11-04T07:00:00Z'))).toEqual([]);
+    const customs = row({}, [{ local_time: '2026-10-18', description: 'Customs cleared', stage: 'customs' }]);
+    expect(servedPlannedSteps(customs, [pickedUp], Date.parse('2026-10-18T15:59:00Z'))).toHaveLength(1);
+    expect(servedPlannedSteps(customs, [pickedUp], Date.parse('2026-10-18T16:00:00Z'))).toEqual([]);
   });
 
   it('serves a plan before the first scan, Peek\'s own row aside', () => {

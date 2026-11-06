@@ -1594,7 +1594,7 @@ struct ParcelJournal: View {
             .buttonStyle(.plain)
             .accessibilityValue(localizer.text(showingFullJourney ? "design.lessJourney" : "design.fullJourney"))
             if showingFullJourney {
-                if let planned = parcel.plannedEvents, !planned.isEmpty {
+                if let planned = parcel.plannedEvents?.filter({ $0.isAhead(of: Date()) }), !planned.isEmpty {
                     PlannedSteps(steps: planned)
                 }
                 if groups.isEmpty {

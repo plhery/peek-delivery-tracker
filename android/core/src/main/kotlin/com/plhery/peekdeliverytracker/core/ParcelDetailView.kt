@@ -145,6 +145,16 @@ val TrackingEvent.journalLocation: String?
 fun plannedNewestFirst(steps: List<PlannedTrackingEvent>): List<PlannedTrackingEvent> =
     steps.sortedByDescending { it.displayDate ?: distantPast }
 
+/**
+ * Whether a planned step's time is still ahead, as the server serves it: a step dated by its day alone stands through
+ * that day, which starts at `occurredAt` in the carrier's zone. So a carrier's pre-written "Delivered" never shows as
+ * planned for a time gone by.
+ */
+fun PlannedTrackingEvent.isAhead(now: Instant): Boolean {
+    val at = DateParser.date(occurredAt) ?: return false
+    return (if (day == null) at else at.plusSeconds(24 * 60 * 60)) > now
+}
+
 /** A planned step's words, as a scan's ([journalWording]): the carrier's, else its stage's, in the app language. */
 fun Localizer.plannedWording(step: PlannedTrackingEvent): String =
     eventDescription(step.description.nonEmpty ?: text(step.stage.localizationKey))

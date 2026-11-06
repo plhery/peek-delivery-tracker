@@ -2264,12 +2264,43 @@ describe('TrackingSyncService', () => {
     const adapter = { fetch: vi.fn().mockResolvedValue(answer('exception')) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
     await service.syncPackage({ id: 'tie', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'in_transit' });
-    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'returned' });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'returned', last_status_text: 'Returned to the sender' });
 
     // A summary in a stage none of those scans has is newer than them, and stands.
     adapter.fetch.mockResolvedValue(answer('delivered'));
     await service.syncPackage({ id: 'tie', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'in_transit' });
-    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'delivered' });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'delivered', last_status_text: 'Address problem' });
+  });
+
+  it('tells the scan that sets the stage over a summary naming another scan of its instant', async () => {
+    // GLS Spain writes "At delivery agency" beside its "Out for delivery" of the same minute, and later
+    // lists it first, so its summary names it (synthetic times).
+    const at = '2026-11-06T10:17:00Z';
+    const answer = (summary: string, stage = 'out_for_delivery') => ({ status: stage, current_stage: stage,
+      last_status_text: summary, last_update: at,
+      events: [
+        { time: at, description: 'At delivery agency', stage: 'in_transit' },
+        { time: at, description: 'Out for delivery', stage: 'out_for_delivery' },
+        { time: '2026-11-06T07:51:00Z', description: 'At delivery agency', stage: 'in_transit' },
+      ] });
+    const client = fakeClient();
+    const adapter = { fetch: vi.fn().mockResolvedValue(answer('At delivery agency')) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-06T11:36:00Z'));
+    const parcel = { id: 'tied-line', carrier: 'gls-es', tracking_number: 'TEST1234', current_stage: 'in_transit' };
+    const saved = async () => {
+      await service.syncPackage(parcel);
+      const values = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+      return [values.current_stage, values.last_status_text];
+    };
+    await expect(saved()).resolves.toEqual(['out_for_delivery', 'Out for delivery']);
+    // So does a summary in the earlier scan's stage.
+    adapter.fetch.mockResolvedValue(answer('At delivery agency', 'in_transit'));
+    await expect(saved()).resolves.toEqual(['out_for_delivery', 'Out for delivery']);
+    // A summary in words of its own, or naming the scan that sets the stage, keeps them.
+    adapter.fetch.mockResolvedValue(answer('Your parcel will be delivered today'));
+    await expect(saved()).resolves.toEqual(['out_for_delivery', 'Your parcel will be delivered today']);
+    adapter.fetch.mockResolvedValue(answer('Out for delivery'));
+    await expect(saved()).resolves.toEqual(['out_for_delivery', 'Out for delivery']);
   });
 
   it('follows the carrier once no scan the parcel keeps shows the stage it was held at', async () => {

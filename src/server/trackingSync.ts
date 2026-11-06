@@ -2011,8 +2011,15 @@ export class TrackingSyncService {
           : (progressEvent ? String(progressEvent.stage) : null) ?? normalizedReportedStage ?? latestEventStage;
         // The scan that sets the stage over a pending summary tells it too: Royal Mail's "Pending"
         // summary beside its customs scans would say otherwise.
-        const scanText = result!.status === 'pending' && progressEvent && normalizedSelectedStage === progressEvent.stage
-          && normalizedSelectedStage !== normalizedReportedStage ? String(progressEvent.description ?? '').trim() || null : null;
+        // So does it over a summary naming another scan of its instant in another stage, which the apps
+        // list after it (GLS Spain's "At delivery agency" written beside its "Out for delivery" of that minute).
+        const summaryText = String(result!.last_status_text ?? '').trim();
+        const tiedScanNamed = progressEvent !== undefined && summaryOfTie && normalizedSelectedStage === progressEvent.stage
+          && newestEvents.some((event) => event.occurred_at === progressEvent.occurred_at && event.stage !== progressEvent.stage
+            && String(event.description ?? '').trim() === summaryText);
+        const scanText = progressEvent && normalizedSelectedStage === progressEvent.stage && (tiedScanNamed
+          || (result!.status === 'pending' && normalizedSelectedStage !== normalizedReportedStage))
+          ? String(progressEvent.description ?? '').trim() || null : null;
         // The delivery carrier answers for the parcel's stage: the earlier
         // carrier's stage, seen without a time of its own, dates no row.
         const earlierEvents = fetched.earlierResult && fetched.earlierCarrierId

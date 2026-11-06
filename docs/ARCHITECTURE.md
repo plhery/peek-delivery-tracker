@@ -415,8 +415,8 @@ and nothing typed is sent.
   `day`: the apps list it under that day without a time, and the delivery email names that day. `src/server/eventPlaces.ts` applies this to every parcel and link the API serves; the
   account export keeps every stored row. Scans of one instant read by delivery progress
   (`EVENT_STAGE_ORDER` in `src/lib/stages.ts`) in the timeline, the map, the stage a check
-  picks and the scan an alert announces, even where the carrier's summary names another of
-  them. In one stage they read in the order their source listed them, the scraper's
+  picks, the status line it saves and the scan an alert announces, even where the carrier's
+  summary names another of them. In one stage they read in the order their source listed them, the scraper's
   `tie_order` stored in the row's raw data and served as `tie_order`, then by id; a row
   stored before the order goes after those with one until its next check rewrites it.
 - **A carrier's planned steps**: some carriers list steps before they happen (a script of

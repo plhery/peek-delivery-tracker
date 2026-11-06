@@ -3475,8 +3475,10 @@ describe('TrackingSyncService', () => {
     { scan: 'from this morning at +10:00', carrier: 'australia-post', lastEvent: '2026-09-08T21:00:00Z', lastUpdate: '2026-09-09T07:00:00+10:00', every2Minutes: true },
     { scan: 'from the morning before at +10:00', carrier: 'australia-post', lastEvent: '2026-09-07T21:00:00Z', lastUpdate: '2026-09-08T07:00:00+10:00', every2Minutes: false },
     { scan: 'from the evening before at -05:00', carrier: 'ups', lastEvent: '2026-09-09T01:00:00Z', lastUpdate: '2026-09-08T20:00:00-05:00', every2Minutes: false },
-    // A zero offset is a UTC instant, not the scan's own clock.
-    { scan: 'from 01:00 at +00:00', carrier: 'ups', lastEvent: '2026-09-09T01:00:00Z', lastUpdate: '2026-09-09T01:00:00+00:00', every2Minutes: true },
+    // A stated +00:00 is a clock too (a Canary Islands office in winter, an hour behind Madrid); a "Z" is a UTC instant.
+    { scan: 'from 05:00 at +00:00, before 06:00', carrier: 'correos-spain', lastEvent: '2026-09-09T05:00:00Z', lastUpdate: '2026-09-09T05:00:00+00:00', time: '05:52:00', every2Minutes: false },
+    { scan: 'from 05:00 at +00:00, at 06:00', carrier: 'correos-spain', lastEvent: '2026-09-09T05:00:00Z', lastUpdate: '2026-09-09T05:00:00+00:00', time: '06:02:00', every2Minutes: true },
+    { scan: 'from 05:00 UTC, at 06:00 in Madrid', carrier: 'correos-spain', lastEvent: '2026-09-09T05:00:00Z', lastUpdate: '2026-09-09T05:00:00Z', time: '05:52:00', every2Minutes: true },
     // Rounds leave from 06:00 on the carrier's clock: a scan sorted overnight waits for it.
     { scan: 'from 03:00 in Zurich, before 06:00', lastEvent: '2026-09-09T01:00:00Z', time: '03:52:00', every2Minutes: false },
     { scan: 'from 03:00 in Zurich, at 06:00', lastEvent: '2026-09-09T01:00:00Z', time: '04:02:00', every2Minutes: true },
@@ -3519,6 +3521,11 @@ describe('TrackingSyncService', () => {
     { carrier: 'spring-gds', stage: 'out_for_delivery', time: '10:02:00', checked: 0 },
     { carrier: 'spring-gds', stage: 'out_for_delivery', time: '10:10:00', checked: 0 },
     { carrier: 'spring-gds', stage: 'out_for_delivery', time: '10:30:00', checked: 1 },
+    // So does the carrier a handoff moved the parcel to, and the carrier it left keeps no longer interval.
+    { carrier: 'swiss-post', active: 'royal-mail', stage: 'out_for_delivery', time: '10:02:00', checked: 0 },
+    { carrier: 'swiss-post', active: 'royal-mail', stage: 'out_for_delivery', time: '10:30:00', checked: 0 },
+    { carrier: 'swiss-post', active: 'royal-mail', stage: 'out_for_delivery', time: '11:00:00', checked: 1 },
+    { carrier: 'spring-gds', active: 'swiss-post', stage: 'out_for_delivery', time: '10:02:00', checked: 1 },
     { carrier: 'swiss-post', stage: 'in_transit', time: '10:02:00', checked: 0 },
     { carrier: 'swiss-post', stage: 'in_transit', time: '10:10:00', checked: 1 },
     { carrier: 'spring-gds', stage: 'in_transit', time: '10:02:00', checked: 0 },
@@ -3532,11 +3539,12 @@ describe('TrackingSyncService', () => {
     { carrier: 'swiss-post', stage: 'customs', time: '10:02:00', checked: 0 },
     { carrier: 'swiss-post', stage: 'registered', time: '10:10:00', checked: 1 },
     { carrier: 'gls-de', stage: 'in_transit', time: '10:02:00', checked: 0 },
-  ])('schedules $carrier at $stage at $time (provider: $provider, browser: $browser, failed: $failed): $checked checks', async ({ carrier, provider, browser, failed, stage, time, checked }) => {
+  ])('schedules $carrier at $stage at $time (active: $active, provider: $provider, browser: $browser, failed: $failed): $checked checks', async ({ carrier, active, provider, browser, failed, stage, time, checked }) => {
     const parcel = {
       id: 'scheduled', carrier, current_stage: stage, tracking_number: 'TEST1234',
       last_synced_at: '2026-09-09T10:00:15Z', sync_status: failed ? 'error' : 'ok',
       ...(provider ? { carrier_data: { tracking_provider: provider } } : {}),
+      ...(active ? { carrier_data: { active_tracking_carrier: active } } : {}),
       ...(browser ? { carrier_data: { routing: { version: 1, configured_carrier: carrier, browser_check: true } } } : {}),
     };
     const client = fakeClient([parcel]);

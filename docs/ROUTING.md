@@ -353,8 +353,8 @@ would keep the cadence of one someone is waiting for).
 
 **Out for delivery**, the news is the delivery. A carrier's own adapter is cheap and as
 fresh as the carrier, so a parcel it answers for is checked every 2 minutes whether or not
-anyone is looking, unless nobody is waiting for it or the carrier sets a longer interval of
-its own. While its lookups open a browser, as FedEx's and UPS's do, each takes seconds of
+anyone is looking, unless nobody is waiting for it or the carrier now tracking it (after a
+handoff, the one it went to) sets a longer interval of its own. While its lookups open a browser, as FedEx's and UPS's do, each takes seconds of
 the browser service, so it is checked every 5 minutes: the last check that ran a lookup
 says which (`browser_check` in its routing). A lookup that only sends a plain HTTP request
 through the browser service, as TopYou's and Spee-Dee's do, opens no browser and keeps the 2 minutes. A universal provider has quotas, costs more and lags behind the carrier: its
@@ -365,8 +365,9 @@ while the summary it shows came from one (`tracking_provider` in `carrier_data`)
 **A round from an earlier day** is over: when the carrier's newest scan, timed or dated
 alone (`last_update_local`), is from an earlier day on its clock, the parcel keeps the
 regular cadence until the carrier scans it again. Its clock is the offset the newest scan
-states, else the zone the delivery window below is read in (a zero offset is a UTC instant,
-not a stated clock); a parcel without a dated scan counts as today's.
+states, "+00:00" included (a Canary Islands office in winter), else the zone the delivery
+window below is read in (a "Z" is a UTC instant, not a stated clock); a parcel without a
+dated scan counts as today's.
 
 **A round sorted overnight** has not left yet: before 06:00 on the carrier's clock, the same
 clock, a parcel out for delivery keeps the regular cadence. Planzer, Quickpac and Swiss Post

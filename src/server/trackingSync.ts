@@ -304,9 +304,13 @@ export function isTrackingSyncDue(parcel: JsonObject, now: Date): boolean {
   return now.getTime() >= trackingSyncDueAt(parcel);
 }
 
-/** The least interval between two checks of a carrier, and after a failed one, when its catalog entry sets any. */
-function refreshLimit(carrier: unknown): { minMinutes: number; afterFailureMinutes?: number } | undefined {
-  return CARRIER_DEFINITIONS[String(carrier) as CarrierId]?.tracking.refresh;
+/**
+ * The least interval between two checks of the carrier now tracking the parcel (the one a handoff
+ * moved it to, else its own), and after a failed one, when its catalog entry sets any.
+ */
+function refreshLimit(parcel: JsonObject): { minMinutes: number; afterFailureMinutes?: number } | undefined {
+  const active = isRecord(parcel.carrier_data) ? parcel.carrier_data.active_tracking_carrier : undefined;
+  return CARRIER_DEFINITIONS[String(active ?? parcel.carrier) as CarrierId]?.tracking.refresh;
 }
 
 /**
@@ -319,8 +323,7 @@ export function trackingSyncDueAt(parcel: JsonObject): number {
   if (parcel.sync_status === 'unsupported' && requiresAmazonAccount(String(parcel.carrier), String(parcel.tracking_number ?? ''))) return Infinity;
   const deferred = Date.parse(String(routingState(parcel).next_check_at ?? ''));
   const after = Number.isFinite(deferred) ? deferred : 0;
-  const activeCarrier = isRecord(parcel.carrier_data) ? parcel.carrier_data.active_tracking_carrier : undefined;
-  const refresh = refreshLimit(activeCarrier ?? parcel.carrier);
+  const refresh = refreshLimit(parcel);
   if (!refresh?.afterFailureMinutes) return after;
   const lastChecked = Date.parse(String(parcel.last_synced_at ?? ''));
   if (!Number.isFinite(lastChecked)) return after;
@@ -384,12 +387,13 @@ function expectedDayAhead(parcel: JsonObject, now: Date): boolean {
 }
 
 /**
- * The carrier's clock: the offset its newest scan states ("…T07:00:00+10:00"), else the
- * carrier's zone in the catalog. A zero offset is a UTC instant, not the scan's own clock.
+ * The carrier's clock: the offset its newest scan states ("…T07:00:00+10:00", or "+00:00" from
+ * a Canary Islands office in winter), else the carrier's zone in the catalog. A "Z" is a UTC
+ * instant, and "-00:00" an unknown offset, not the scan's own clock.
  */
 function carrierClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const stated = /T[\d:.]+[+-](?!00:?00$)\d{2}:?\d{2}$/.test(String(data.last_update ?? ''))
+  const stated = /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(String(data.last_update ?? ''))
     ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;
   return stated?.isValid ? stated.zone : resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
 }
@@ -508,7 +512,7 @@ function isScheduledTrackingSyncDue(
   // scans late, so it keeps the regular cadence. Until shortly before a delivery window opens, the
   // regular cadence still catches a changed slot, as it does a round from an earlier day, and
   // until 06:00 on the carrier's clock, a round sorted overnight.
-  const minimum = refreshLimit(parcel.carrier)?.minMinutes;
+  const minimum = refreshLimit(parcel)?.minMinutes;
   const delivering = parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now);
   const opens = delivering ? deliveryWindowOpens(parcel) : null;
   const lastMile = delivering && !minimum && answeredByCarrier(parcel)

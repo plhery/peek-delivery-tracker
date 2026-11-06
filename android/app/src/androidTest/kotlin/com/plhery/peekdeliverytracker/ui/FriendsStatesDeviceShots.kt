@@ -334,7 +334,8 @@ class FriendsStatesDeviceShots {
         }
         if (!regular) assertEquals("The panel at the large detent", largeTop, bounds(SHEET_PANEL).top, 2f)
         val parcel = bounds(FRIENDS_REPLAY)
-        val from = bounds(hasText(walk.text("friends.from")) and hasAnyAncestor(hasTestTag(FRIENDS_PANEL)))
+        // The sender's name, not the label the parcel draws on its card (cleared from TalkBack, in the test's tree).
+        val from = bounds(hasText(walk.text("friends.from")) and hasAnyAncestor(hasTestTag(FRIENDS_PANEL)) and !hasAnyAncestor(hasTestTag(FRIENDS_REPLAY)))
         assertTrue("The parcel over the sender's name: $parcel, $from", parcel.bottom <= from.top + 0.5f)
         walk.shot("C-ST16-invitation")
         closePanel()
@@ -380,7 +381,11 @@ class FriendsStatesDeviceShots {
 
         openPage(konstantina.id)
         val name = layoutOf(hasText(konstantina.nickname) and hasAnyAncestor(hasTestTag(FRIENDS_POSTCARD)))
-        assertFalse("The name uncut", (0 until name.lineCount).any(name::isLineEllipsized) || name.hasVisualOverflow)
+        // Each line whole within what the text shows: the paragraph is laid out across the room, wider than the name
+        // it holds, which `hasVisualOverflow` counts as overflowing.
+        val cut = (0 until name.lineCount).any { name.isLineEllipsized(it) || name.getLineRight(it) > name.size.width + 0.5f } ||
+            name.didOverflowHeight
+        assertFalse("The name uncut: ${name.lineCount} lines, ${name.size}", cut)
         walk.shot("C-ST17-long-postcard-name")
     }
 

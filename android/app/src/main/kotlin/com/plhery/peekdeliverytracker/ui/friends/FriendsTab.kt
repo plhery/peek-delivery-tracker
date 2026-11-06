@@ -299,23 +299,34 @@ internal fun rememberFriendsState(source: DeliveriesSource, share: InvitationSha
     val launch = source.launch
     val showing = rememberForLaunch(launch, false)
     val forms = rememberForLaunch(launch, false)
-    val panel = rememberForLaunch<FriendsPanel?>(launch, null)
+    val panel = rememberForWindow<FriendsPanel?>(launch, null)
     val panelForm = rememberForLaunch(launch, false)
-    val friend = rememberForLaunch<UUID?>(launch, null)
+    val friend = rememberForWindow<UUID?>(launch, null)
     val invitation = rememberForLaunch(launch, InvitationValue())
-    // `arrivingID`, which `onDisappear` forgets: kept through a rotation, not through another tab chosen, whose holder
-    // saves the tab's state before the tab's own disposal could forget it.
-    val window = LocalActivity.current
-    val arriving = rememberSaveable(
-        launch,
-        saver = listSaver<MutableState<UUID?>, String?>(
-            save = { listOf(launch.toString(), if (window?.isChangingConfigurations == true) it.value?.toString() else null) },
-            restore = { saved -> mutableStateOf(if (saved[0] == launch.toString()) saved[1]?.let(UUID::fromString) else null) },
-        ),
-    ) { mutableStateOf<UUID?>(null) }
+    val arriving = rememberForWindow<UUID?>(launch, null)
     val landed = rememberForLaunch(launch, false)
     val presented = rememberForLaunch<UUID?>(launch, null)
     return remember(source, share) { FriendsState(source, share, showing, forms, panel, panelForm, friend, invitation, arriving, landed, presented) }
+}
+
+/**
+ * What `onDisappear` forgets (the panel, the friend's page, `arrivingID`), held as [rememberForLaunch] holds it but
+ * through a window made again (a rotation) alone: another tab chosen forgets it, whose holder saves the tab's state
+ * before the tab's own disposal could forget it.
+ */
+@Composable
+private fun <T> rememberForWindow(launch: UUID, initial: T): MutableState<T> {
+    val window = LocalActivity.current
+    return rememberSaveable(
+        launch,
+        saver = listSaver(
+            save = { listOf(launch.toString(), if (window?.isChangingConfigurations == true) it.value else initial) },
+            restore = { saved ->
+                @Suppress("UNCHECKED_CAST")
+                mutableStateOf(if (saved[0] == launch.toString()) saved[1] as T else initial)
+            },
+        ),
+    ) { mutableStateOf(initial) }
 }
 
 /** The circle's scrolled content and its cards as last placed. */

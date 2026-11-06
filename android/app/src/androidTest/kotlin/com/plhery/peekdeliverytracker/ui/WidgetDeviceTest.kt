@@ -74,6 +74,7 @@ import java.time.Instant
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
@@ -390,12 +391,16 @@ class WidgetDeviceTest {
         val composed = mode(night = false, LARGEST_TEXT)
         val long = "Handmade ceramic breakfast set"
         val short = "Lamp"
-        val entry = wordsEntry(listOf(widgetParcel(21, long, detail = "today"), widgetParcel(22, short, detail = "Friday")), medium = true)
+        // Two side by side: a medium widget pairs a parcel out for delivery with the next one.
+        val entry = wordsEntry(listOf(widgetParcel(21, long, detail = "today", outForDelivery = true), widgetParcel(22, short, detail = "Friday")), medium = true)
         val views = runBlocking { widgetViews(composed, IPHONE_MEDIUM, entry) }
         val root = applied(views, composed)
         val full = WidgetText(composed).points(IosTextStyle.Subheadline) * context.resources.displayMetrics.density
         fun size(text: String): Float = compose.runOnUiThread {
-            root.all().filterIsInstance<TextView>().first { it.text?.toString() == text }.textSize
+            val texts = root.all().filterIsInstance<TextView>().toList()
+            val view = texts.firstOrNull { it.text?.toString() == text }
+            assertNotNull("\"$text\" among ${texts.map { "${it.text} (${it.textSize})" }}", view)
+            view!!.textSize
         }
         assertEquals("The long name at 85 % of $full px", full * 0.85f, size(long), full * 0.02f)
         assertEquals("The short name at $full px", full, size(short), full * 0.02f)

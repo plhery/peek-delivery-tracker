@@ -564,6 +564,26 @@ class FriendsTest {
         assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
     }
 
+    /**
+     * C-ST13, `onDisappear`: another tab chosen (by a parcel's link, as the panel keeps the tab bar from the finger)
+     * closes the panel, which the tab's holder would otherwise have saved open before the tab's own disposal closed it.
+     */
+    @Test
+    fun anotherTabClosesThePanel() {
+        val inbox = DeliveriesInbox()
+        show(inbox = inbox)
+        tap(FRIENDS_SHARING)
+        assertEquals(text("friends.settings"), panel())
+        val parcel = DemoCards.parcels().first().id
+        compose.runOnUiThread { inbox.follow(Intent(Intent.ACTION_VIEW, Uri.parse("peekdeliverytracker://parcel/$parcel"))) }
+        settle()
+        assertFalse(exists(PeekTab.Friends.screen))
+        compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
+        settle()
+        choose("Friends")
+        assertNull(panel())
+    }
+
     @Test
     fun aParcelsLinkOverAFriendsPageTakesTheDeliveriesForwardAndClosesThePage() {
         val inbox = DeliveriesInbox()

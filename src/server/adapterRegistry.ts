@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { AdapterRegistry, TrawlClient, REGISTRY, type AdapterEnvironment } from 'universal-parcel-scraper/node';
+import { hostRetryTrialStore } from './fedexRetryTrial';
 import { reportTrackingBrowser } from './observability';
 import { hostStepRecorder } from './stepRecorder';
 import { trackingProxyFetcher } from './trackingProxy';
@@ -31,9 +32,15 @@ export class HostTrawlClient extends TrawlClient {
 export function hostAdapterEnvironment(env: Record<string, string | undefined> = process.env): AdapterEnvironment {
   const trawlUrl = env.FLARESOLVERR_URL?.trim();
   const residentialUrl = env.FEDEX_RESIDENTIAL_TRAWL_URL?.trim();
+  const datacenterUrl = env.FEDEX_DATACENTER_TRAWL_URL?.trim();
+  const trialStore = datacenterUrl && residentialUrl ? hostRetryTrialStore(env) : null;
   return {
     fetcher: trackingProxyFetcher(env),
-    trawlRoutes: residentialUrl ? { 'fedex-residential': new HostTrawlClient(residentialUrl) } : undefined,
+    trawlRoutes: residentialUrl || datacenterUrl ? {
+      ...(residentialUrl ? { 'fedex-residential': new HostTrawlClient(residentialUrl) } : {}),
+      ...(datacenterUrl ? { 'fedex-datacenter': new HostTrawlClient(datacenterUrl) } : {}),
+    } : undefined,
+    ...(trialStore ? { retryTrialStores: { 'fedex-retry': trialStore } } : {}),
     trawl: trawlUrl ? new HostTrawlClient(trawlUrl) : null,
     browserExecutablePath: env.TRACKING_CHROMIUM_PATH?.trim() || null,
     recorder: hostStepRecorder(),

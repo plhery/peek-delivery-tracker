@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { DpdSession } from 'universal-parcel-scraper/node';
+import type { DpdSession, RetryRouteAttempt } from 'universal-parcel-scraper/node';
 import type { ApiGiftWords } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import type { TrackingEvent } from '../types';
@@ -2355,6 +2355,40 @@ export class SupabaseServiceClient extends SupabaseClient {
     await this.request(`/rest/v1/dpd_app_sessions?${query({ on_conflict: 'token' })}`, {
       method: 'POST',
       body: [{ token: session.token, opened_at: time(session.openedAt), checked_at: time(session.checkedAt), refused_at: time(session.refusedAt) }],
+      prefer: 'resolution=merge-duplicates,return=minimal',
+    });
+  }
+
+  /** Every attempt saved for a retry route trial, in the order they began. */
+  async retryRouteTrialAttempts(trial: string): Promise<RetryRouteAttempt[]> {
+    const time = (value: unknown) => typeof value === 'string' ? Date.parse(value) : Number.NaN;
+    return rows(await this.request(`/rest/v1/retry_route_trial_attempts?${query([
+      ['select', 'id,trial,route,assigned_at,settled_at,outcome,history,bytes'],
+      ['trial', `eq.${trial}`],
+      ['order', 'assigned_at.asc'],
+      ['limit', '5000'],
+    ])}`)).flatMap((row) => {
+      const assignedAt = time(row.assigned_at), settledAt = time(row.settled_at);
+      if (typeof row.id !== 'string' || row.trial !== trial || (row.route !== 'datacenter' && row.route !== 'residential')
+        || !Number.isFinite(assignedAt)) return [];
+      const bytes = typeof row.bytes === 'number' ? row.bytes : typeof row.bytes === 'string' ? Number(row.bytes) : Number.NaN;
+      return [{
+        id: row.id, trial, route: row.route, assignedAt,
+        ...(Number.isFinite(settledAt) ? { settledAt } : {}),
+        ...(typeof row.outcome === 'string' ? { outcome: row.outcome } : {}),
+        ...(typeof row.history === 'boolean' ? { history: row.history } : {}),
+        ...(Number.isSafeInteger(bytes) && bytes >= 0 ? { bytes } : {}),
+      }];
+    });
+  }
+
+  /** Saves a retry route trial attempt, replacing what was saved under its id. */
+  async saveRetryRouteTrialAttempt(attempt: RetryRouteAttempt): Promise<void> {
+    const time = (ms: number | undefined) => ms === undefined ? null : new Date(ms).toISOString();
+    await this.request(`/rest/v1/retry_route_trial_attempts?${query({ on_conflict: 'id' })}`, {
+      method: 'POST',
+      body: [{ id: attempt.id, trial: attempt.trial, route: attempt.route, assigned_at: time(attempt.assignedAt),
+        settled_at: time(attempt.settledAt), outcome: attempt.outcome ?? null, history: attempt.history ?? null, bytes: attempt.bytes ?? null }],
       prefer: 'resolution=merge-duplicates,return=minimal',
     });
   }

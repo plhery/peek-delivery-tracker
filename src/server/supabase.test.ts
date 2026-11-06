@@ -1043,6 +1043,34 @@ describe('notification reads', () => {
     }]);
   });
 
+  it('reads a retry trial attempts in order, dropping malformed rows, and saves one under its id', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([
+      { id: '00000000-0000-4000-8000-000000000001', trial: 'example', route: 'residential', assigned_at: '2026-11-06T01:00:00+00:00',
+        settled_at: '2026-11-06T01:00:30+00:00', outcome: 'ok', history: true, bytes: 1_900_000 },
+      { id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter', assigned_at: '2026-11-06T01:05:00+00:00',
+        settled_at: null, outcome: null, history: null, bytes: null },
+      { id: '00000000-0000-4000-8000-000000000003', trial: 'example', route: 'default', assigned_at: '2026-11-06T01:06:00+00:00' },
+      { id: '00000000-0000-4000-8000-000000000004', trial: 'other', route: 'datacenter', assigned_at: '2026-11-06T01:06:00+00:00' },
+    ]).mockResolvedValueOnce(null);
+    await expect(client.retryRouteTrialAttempts('example')).resolves.toEqual([
+      { id: '00000000-0000-4000-8000-000000000001', trial: 'example', route: 'residential', assignedAt: Date.parse('2026-11-06T01:00:00Z'),
+        settledAt: Date.parse('2026-11-06T01:00:30Z'), outcome: 'ok', history: true, bytes: 1_900_000 },
+      { id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter', assignedAt: Date.parse('2026-11-06T01:05:00Z') },
+    ]);
+    const read = new URL(`https://database.example${String(request.mock.calls[0]![0])}`);
+    expect(read.pathname).toBe('/rest/v1/retry_route_trial_attempts');
+    expect(Object.fromEntries(read.searchParams)).toMatchObject({ trial: 'eq.example', order: 'assigned_at.asc' });
+    await client.saveRetryRouteTrialAttempt({ id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter',
+      assignedAt: Date.parse('2026-11-06T01:05:00Z') });
+    expect(request.mock.calls[1]).toEqual(['/rest/v1/retry_route_trial_attempts?on_conflict=id', {
+      method: 'POST',
+      body: [{ id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter', assigned_at: '2026-11-06T01:05:00.000Z',
+        settled_at: null, outcome: null, history: null, bytes: null }],
+      prefer: 'resolution=merge-duplicates,return=minimal',
+    }]);
+  });
+
   it('reads the scans of handed-over parcels, with their carriers, for relay copies', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const scan = { id: 'scan', stage: 'in_transit', occurred_at: '2026-09-09T14:16:00Z', created_at: '2026-09-09T15:30:01Z', provider_event_id: 'dhl:a' };

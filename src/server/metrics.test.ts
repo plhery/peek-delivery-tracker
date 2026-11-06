@@ -50,6 +50,42 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('fedex_network_attempt_total{attempt="initial",route="residential",outcome="ok",family="unknown",history="yes"} 1');
   });
 
+  it('keeps the datacenter route its own label in both route series and their bytes', async () => {
+    const record = { carrier: 'fedex', step: 'trawl', attempt: 2, outcome: 'ok', errorType: null,
+      durationMs: 3000, fallbackFrom: 'trawl', fallbackReason: 'challenge', fallbackErrorType: 'ChallengeError',
+      networkRoute: 'datacenter', networkAttempt: 'retry', networkFamily: 'unknown', historyAvailable: true, networkBytes: 777 } as const;
+    metrics.prometheusStepRecorder.step(record);
+    metrics.prometheusStepRecorder.step({ ...record, outcome: 'challenge', historyAvailable: false, networkBytes: 23 });
+    const text = await scraped();
+    expect(text).toContain('fedex_network_attempt_total{attempt="retry",route="datacenter",outcome="ok",family="unknown",history="yes"} 1');
+    expect(text).toContain('fedex_network_attempt_total{attempt="retry",route="datacenter",outcome="challenge",family="unknown",history="no"} 1');
+    expect(text).toContain('browser_network_attempt_total{carrier="fedex",attempt="retry",route="datacenter",outcome="ok",family="unknown",partial="no",history="yes"} 1');
+    expect(text).toContain('browser_network_bytes_total{carrier="fedex",attempt="retry",route="datacenter"} 800');
+  });
+
+  it('shows the retry trial from its snapshot at each scrape, and nothing without one', async () => {
+    const tally = (attempts: number, settled: number, history: number, outcomes: Record<string, number>, bytes: number, unmeasured: number) =>
+      ({ attempts, settled, history, outcomes, bytes, unmeasured });
+    metrics.setRetryTrialSource(() => ({
+      trial: 'example-trial', phase: 'complete', startedAt: 1_000_000, deadlineAt: 2_000_000, endedAt: 1_500_000, endReason: 'bytes',
+      chargedResidentialBytes: 248_500_000, maxResidentialBytes: 250_000_000, targetAttempts: 100,
+      routes: { datacenter: tally(90, 89, 20, { ok: 25, challenge: 64 }, 9_000_000, 1), residential: tally(88, 88, 55, { ok: 60, transport: 28 }, 230_000_000, 9) },
+      after: tally(3, 3, 1, { ok: 1, challenge: 2 }, 300_000, 0),
+    }));
+    let text = await metrics.metricsText();
+    expect(text).toContain('fedex_retry_trial_attempts{period="trial",route="residential",outcome="transport"} 28');
+    expect(text).toContain('fedex_retry_trial_attempts{period="trial",route="datacenter",outcome="running"} 1');
+    expect(text).toContain('fedex_retry_trial_histories{period="trial",route="residential"} 55');
+    expect(text).toContain('fedex_retry_trial_bytes{period="trial",route="residential",measure="charged"} 248500000');
+    expect(text).toContain('fedex_retry_trial_bytes{period="after",route="datacenter",measure="proven"} 300000');
+    expect(text).toContain('fedex_retry_trial_state{trial="example-trial",phase="complete",end_reason="bytes"} 1');
+    expect(text).toContain('fedex_retry_trial_time_seconds{event="ended"} 1500');
+    expect(text).toContain('fedex_retry_trial_limit{limit="residential_bytes"} 250000000');
+    metrics.setRetryTrialSource(null);
+    text = await metrics.metricsText();
+    expect(text).not.toContain('fedex_retry_trial_state{');
+  });
+
   it('compares native residential recoveries with normal recoveries without inferring IP family', async () => {
     const record = { carrier: 'poste-italiane', step: 'browser', attempt: 3, outcome: 'ok', errorType: null,
       durationMs: 2000, fallbackFrom: 'trawl', fallbackReason: 'challenge', fallbackErrorType: 'ChallengeError',

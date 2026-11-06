@@ -36,3 +36,15 @@ it('constructs an independent host-owned residential route', () => {
   expect(env.trawlRoutes?.['fedex-residential']?.scrapeUrl().hostname).toBe('residential.test');
   expect(env.trawlRoutes?.['fedex-residential']).not.toBe(env.trawl);
 });
+
+it('adds the datacenter route beside the residential one, and keeps a trial only with both routes and a name', () => {
+  const env = hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test', FEDEX_DATACENTER_TRAWL_URL: 'http://datacenter.test:8192' });
+  expect(env.trawlRoutes?.['fedex-datacenter']?.scrapeUrl().hostname).toBe('datacenter.test');
+  expect(env.trawlRoutes?.['fedex-residential']).toBeUndefined();
+  expect(env.retryTrialStores).toBeUndefined();
+  const both = hostAdapterEnvironment({ FEDEX_DATACENTER_TRAWL_URL: 'http://datacenter.test:8192', FEDEX_RESIDENTIAL_TRAWL_URL: 'http://residential.test:8192' });
+  expect(Object.keys(both.trawlRoutes ?? {}).sort()).toEqual(['fedex-datacenter', 'fedex-residential']);
+  // Without a database the trial has nowhere to keep its limits, so the scraper sends every retry to the datacenter route.
+  expect(hostAdapterEnvironment({ FEDEX_DATACENTER_TRAWL_URL: 'http://datacenter.test', FEDEX_RESIDENTIAL_TRAWL_URL: 'http://residential.test',
+    FEDEX_RETRY_TRIAL: 'example' }).retryTrialStores).toBeUndefined();
+});

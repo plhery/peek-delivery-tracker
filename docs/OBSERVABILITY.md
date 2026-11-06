@@ -1175,11 +1175,30 @@ and `GRAFANA_METRICS_UID`.
 
 FedEx network retries are measured by `fedex_network_attempt_total`: selected route,
 observed connection family, outcome and whether dated history was returned. Compare
-`attempt="retry"` recovery rates for `route="default"` and `route="residential"` over the
-same window, together with counts and `fedex_network_attempt_duration_seconds`. The
-residential route's family stays unknown; on the default route, unknown means no
-connection was observed. Residential retries that end in `outcome="transport"` usually
-mean the proxy's exit is down rather than FedEx refusing it. First browser attempts,
-including those after optional API credentials fail, remain `attempt="initial"`.
+`attempt="retry"` recovery rates for `route="default"`, `route="datacenter"` and
+`route="residential"` over the same window, together with counts and
+`fedex_network_attempt_duration_seconds`. The proxied routes' family stays unknown; on the
+default route, unknown means no connection was observed. A proxied retry whose worker
+cannot prove that both the page and FedEx's API went through its route fails as
+`datacenter_unverified` or `residential_unverified`. Proxied retries that end in
+`outcome="transport"` usually mean the proxy's exit is down rather than FedEx refusing it.
+First browser attempts, including those after optional API credentials fail, remain
+`attempt="initial"`.
 
-`browser_network_bytes_total` counts observed encrypted proxy payload during attempts, including page dependencies. Missing transport replies and idle-session traffic are excluded; the private retry worker's `/metrics` byte counter also includes that traffic. These counters are diagnostic usage estimates, not proxy invoices. Residential routes retain unknown IP family unless the actual carrier connection is independently observed.
+`browser_network_bytes_total` counts encrypted proxy payload the worker proves for an
+attempt, including page dependencies and the idle traffic the worker carried since its
+previous reply, so the series adds up to the worker's own `fedex_retry_proxy_bytes_total`
+except for replies lost in transport. These counters are usage estimates to reconcile with
+the proxy provider's statistics, not invoices.
+
+While `FEDEX_RETRY_TRIAL` names a trial, the `fedex_retry_trial_*` gauges show it from the
+attempts kept in `retry_route_trial_attempts`, so they carry on across deploys:
+`fedex_retry_trial_attempts{period="trial"}` by route and outcome (`running` until an
+attempt settles), `fedex_retry_trial_histories`, `fedex_retry_trial_bytes` proven per route
+and charged against the residential cap, `fedex_retry_trial_state` with its phase and end
+reason (`samples`, `bytes` or `deadline`), `fedex_retry_trial_time_seconds` and
+`fedex_retry_trial_limit`. `period="after"` counts the datacenter retries since the process
+started once the trial ended. The comparison is dated-history recovery out of all
+attempts of a route. `phase="unavailable"` means the store failed to load or save
+(`retry_trial_store_failed` in the logs): retries take the datacenter route until it
+answers, and the residential one waits.

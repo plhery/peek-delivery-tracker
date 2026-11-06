@@ -118,7 +118,7 @@ object DeliveryWidgetSelection {
     fun parcels(
         onTheWay: List<DeliveryWidgetParcel>,
         delivered: List<DeliveryWidgetParcel>,
-        now: Instant = Instant.now(),
+        now: Instant = AppClock.now(),
     ): List<DeliveryWidgetParcel> {
         val recent = delivered.filter { isShown(it, now) && it.deliveredAt != null }
         return (onTheWay.filter { it.isOutForDelivery } + onTheWay.filter { !it.isOutForDelivery } + recent).take(limit)
@@ -128,7 +128,7 @@ object DeliveryWidgetSelection {
      * What a widget shows at a time, first page first. A small one shows one parcel. A medium one shows a parcel out for
      * delivery beside the parcel after it, and any other parcel alone, across it.
      */
-    fun pages(of: List<DeliveryWidgetParcel>, medium: Boolean, now: Instant = Instant.now()): List<List<DeliveryWidgetParcel>> {
+    fun pages(of: List<DeliveryWidgetParcel>, medium: Boolean, now: Instant = AppClock.now()): List<List<DeliveryWidgetParcel>> {
         val rest = ArrayDeque(of.filter { isShown(it, now) })
         val pages = mutableListOf<List<DeliveryWidgetParcel>>()
         while (true) {
@@ -223,7 +223,7 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
     }
 
     /** Where the widgets of one size were turned to, until the turn's spell ends. */
-    fun turn(size: String, now: Instant = Instant.now()): DeliveryWidgetTurn? =
+    fun turn(size: String, now: Instant = AppClock.now()): DeliveryWidgetTurn? =
         turns[size]?.takeIf { now < it.ends }
 
     fun setTurn(turn: DeliveryWidgetTurn, size: String) {

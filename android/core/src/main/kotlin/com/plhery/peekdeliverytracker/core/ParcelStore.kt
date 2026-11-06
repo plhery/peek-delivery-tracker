@@ -201,7 +201,7 @@ class ParcelStore(
     private val liveActivities: DeliveryLiveActivities = DeliveryLiveActivities.None,
     private val widgetPictures: DeliveryWidgetArtist? = null,
     private val analytics: (event: String, outcome: DeliveryAnalytics.Outcome?) -> Unit = { _, _ -> },
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
     importCharges: () -> String? = { null },
 ) {
     sealed class RefreshStart {
@@ -1639,13 +1639,13 @@ class ParcelStore(
         // As JSONEncoder.deliveryTracker writes the iPhone's models.
         private val exportEncoder = JsonEncoder(sortedKeys = true, swiftKeys = true)
 
-        fun nextDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = Instant.now()): List<DeliveryWidgetParcel> {
+        fun nextDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> {
             val ordered = ParcelOrganizer.visible(parcels, query = "", status = ParcelStatusFilter.Active, carrier = null, sort = ParcelSort.Priority, now = now)
             return ordered.map { parcel -> widgetParcel(parcel, localizer, localizer.parcelDeliveryEstimate(parcel, now)) }
         }
 
         /** The parcels the widget turns through: those on their way, then those delivered within the last day, the latest first. */
-        fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = Instant.now()): List<DeliveryWidgetParcel> {
+        fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now()): List<DeliveryWidgetParcel> {
             val delivered = ParcelOrganizer
                 .visible(parcels, query = "", status = ParcelStatusFilter.Delivered, carrier = null, sort = ParcelSort.Updated, now = now)
                 .mapNotNull { parcel ->

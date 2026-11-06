@@ -80,7 +80,7 @@ class ParcelShareNotes(private val defaults: UserDefaults) {
     fun words(parcelId: UUID): ParcelShareWords? = read()[parcelId.uuidString]?.words
 
     /** Words that say nothing are not kept. */
-    fun remember(words: ParcelShareWords, parcelId: UUID, now: Instant = Instant.now()) {
+    fun remember(words: ParcelShareWords, parcelId: UUID, now: Instant = AppClock.now()) {
         val entries = read().toMutableMap()
         val cleaned = words.cleaned
         if (cleaned == ParcelShareWords()) {
@@ -130,7 +130,7 @@ class DemoParcelShares(private val defaults: UserDefaults) {
     fun link(parcelId: UUID): ParcelShare? = read()[parcelId.uuidString]
 
     /** Makes the parcel's link when it has none, else changes what the link shows. */
-    fun share(parcelId: UUID, showNumber: Boolean, gift: Boolean, giftWords: GiftWords? = null, now: Instant = Instant.now()): ParcelShare {
+    fun share(parcelId: UUID, showNumber: Boolean, gift: Boolean, giftWords: GiftWords? = null, now: Instant = AppClock.now()): ParcelShare {
         val links = read().toMutableMap()
         var link = links[parcelId.uuidString] ?: ParcelShare(
             id = ParcelLinkRoute.madeUpId(SecureRandom().asKotlinRandom()), showNumber = showNumber, gift = gift,

@@ -166,6 +166,9 @@ android {
             it.jvmArgs("--add-exports=java.base/jdk.internal.access=ALL-UNNAMED", "--add-opens=java.base/java.io=ALL-UNNAMED")
             // Screenshots draw through Android's own renderer (Roborazzi).
             it.systemProperty("robolectric.pixelCopyRenderMode", "hardware")
+            // In Zurich's time, as the screenshots were taken, whatever the computer's zone; TestPeekApplication stops the
+            // clock.
+            it.systemProperty("user.timezone", "Europe/Zurich")
             // Every test runs in one JVM, and an iPad-sized screenshot compares images of 20 MB and more: Gradle's
             // default 512 MB runs out.
             it.maxHeapSize = "2g"

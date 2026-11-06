@@ -107,7 +107,7 @@ class NativeVerification(
     records: Map<String, NativeAttestRecord>,
     private val save: (Map<String, NativeAttestRecord>) -> Unit,
     private val language: () -> AppLanguage,
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
 ) {
     /** Keeps the records where the iPhone keeps them in its Keychain, as JSON. */
     constructor(
@@ -115,7 +115,7 @@ class NativeVerification(
         present: TurnstilePresenter,
         persistence: SessionPersistence,
         language: () -> AppLanguage,
-        now: () -> Instant = Instant::now,
+        now: () -> Instant = AppClock::now,
     ) : this(
         provider, present,
         savedRecords(persistence),

@@ -292,7 +292,7 @@ class SessionStore(
     private val webAuthentication: WebAuthenticating,
     private val scope: CoroutineScope,
     private val analytics: (event: String, outcome: DeliveryAnalytics.Outcome?) -> Unit = { _, _ -> },
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
     /** `SecRandomCopyBytes`: that many random bytes, for the PKCE verifier and the Apple nonce. */
     private val random: (count: Int) -> ByteArray = ::secureRandomBytes,
 ) : DeliveryApiClient.Session {

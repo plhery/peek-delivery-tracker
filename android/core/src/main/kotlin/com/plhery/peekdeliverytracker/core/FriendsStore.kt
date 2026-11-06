@@ -213,7 +213,7 @@ class FriendsStore(private val client: FriendsClient) {
          * stamps in their order, the average rounded up to whole days (one at least), and whether a parcel was delivered
          * since this ISO week began, each only where the profile shares it.
          */
-        fun ownCard(parcels: List<Parcel>, profile: FriendProfile, now: Instant = Instant.now()): FriendCard {
+        fun ownCard(parcels: List<Parcel>, profile: FriendProfile, now: Instant = AppClock.now()): FriendCard {
             val stats = PassportStatistics(parcels, ZoneOffset.UTC)
             val stamps = buildList {
                 if (stats.deliveredCount >= 1) add(FriendStamp.First)
@@ -411,7 +411,7 @@ class FriendInvitationStore(
     private val linkHosts: List<String>,
     private val preview: suspend (String) -> String,
     private val friends: FriendsClient,
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
 ) {
     private val presentingState = MutableStateFlow(false)
     private val presentationIdState = MutableStateFlow(UUID.randomUUID())

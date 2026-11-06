@@ -205,6 +205,6 @@ interface ReviewRequester {
  * Nothing about the parcel is wrong or waits on its reader: its carrier is known and answers, and nothing on it needs
  * attention. Only then is an answer that its page is right the moment to ask for a rating.
  */
-fun Parcel.untroubled(now: Instant = Instant.now()): Boolean =
+fun Parcel.untroubled(now: Instant = AppClock.now()): Boolean =
     displayedCarrier != CarrierId.Unknown && syncStatus !in listOf(SyncStatus.Error, SyncStatus.Unsupported, SyncStatus.Waiting) &&
         attention(now) == null

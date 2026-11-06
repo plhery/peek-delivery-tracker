@@ -97,7 +97,7 @@ sealed class ParcelFeedbackSubject {
  * scan, and the scan the way back from a carrier's site last asked about. The question on the page stands on every
  * visit; the way back asks about a scan once, and about a parcel at most once a day. Nothing of it leaves the device.
  */
-class ParcelFeedbackMemory(private val defaults: UserDefaults, private val now: () -> Instant = Instant::now) {
+class ParcelFeedbackMemory(private val defaults: UserDefaults, private val now: () -> Instant = AppClock::now) {
     /** `answeredAt` and `savedAt` are Swift's `Date` in JSON: seconds since 2001. */
     @Serializable
     private data class Entry(
@@ -249,7 +249,7 @@ class ParcelFeedbackModel(
      */
     private val scope: CoroutineScope,
     private val memory: ParcelFeedbackMemory,
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
     /** `DeliveryAnalytics.action`: an answer counted under its name, with how it went. */
     private val report: (String, DeliveryAnalytics.Outcome) -> Unit,
     private val review: ReviewPrompt,

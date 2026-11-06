@@ -10,7 +10,9 @@ builds alone.
 `./gradlew :app:testDebugUnitTest` runs the app's tests on the JVM with Robolectric. The design system's screenshots
 are kept in `app/src/test/snapshots`: `./gradlew :app:verifyRoborazziDebug` fails when more than a thousandth of a
 shot's pixels differ (see `Screenshots.kt`), and `./gradlew :app:recordRoborazziDebug` records them again after a
-change meant to show.
+change meant to show. The tests run with the app's clock (`AppClock`, which every "now" in the app and
+`:core` reads) stopped at one Thursday morning in Zurich's time (`TestPeekApplication`), so the screenshots are the same
+whatever the day, the hour or the computer's zone.
 
 ## CI
 

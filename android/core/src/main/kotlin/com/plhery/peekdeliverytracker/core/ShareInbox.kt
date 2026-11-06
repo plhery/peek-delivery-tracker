@@ -14,7 +14,7 @@ data class SharedParcelDraft(
     val label: String = "",
     val trackingInput: String,
     /** To the microsecond, as the Double a Date is written as reads back. */
-    val createdAt: Instant = Instant.now().truncatedTo(ChronoUnit.MICROS),
+    val createdAt: Instant = AppClock.now().truncatedTo(ChronoUnit.MICROS),
 )
 
 /**
@@ -51,7 +51,7 @@ object ShareInbox {
      * `consume(defaults:now:)`: the draft, once, where it is 0 to 600 seconds old and has text. Any draft is taken away,
      * malformed, from an older version or expired too, so none comes back on another launch.
      */
-    fun consume(defaults: UserDefaults, now: Instant = Instant.now()): SharedParcelDraft? {
+    fun consume(defaults: UserDefaults, now: Instant = AppClock.now()): SharedParcelDraft? {
         val data = defaults.data(forKey = key) ?: return null
         defaults.removeObject(forKey = key)
         val stored = try {

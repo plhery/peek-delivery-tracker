@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthSession
@@ -34,7 +35,6 @@ import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import java.security.Security
-import java.time.Instant
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.MainScope
@@ -266,7 +266,7 @@ class AppContainerTest {
                     AuthSession.serializer(),
                     AuthSession(
                         accessToken = "synthetic-access", tokenType = "bearer", expiresIn = 3600,
-                        expiresAt = Instant.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
+                        expiresAt = AppClock.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
                     ),
                 ).decodeToString()
                 "DELETE" to "/api/account" -> {
@@ -333,7 +333,7 @@ class AppContainerTest {
                     AuthSession.serializer(),
                     AuthSession(
                         accessToken = "synthetic-access", tokenType = "bearer", expiresIn = 3600,
-                        expiresAt = Instant.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
+                        expiresAt = AppClock.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
                     ),
                 ).decodeToString()
                 path.endsWith("/feedback") -> {
@@ -498,12 +498,12 @@ class AppContainerTest {
         forced.start(process.lifecycle)
         idleUntil("the demo's parcels") { forced.session.state == AuthenticationState.Demo && forced.parcels.parcelsFlow.value.isNotEmpty() }
         idleUntil("a calm moment") { forced.reviewSettled.value }
-        assertTrue(forced.reviewPrompt.isDue(Instant.now(), calm = true))
+        assertTrue(forced.reviewPrompt.isDue(AppClock.now(), calm = true))
         // Read at each use, as the iPhone reads it: cleared while the app runs, a calm moment is an ordinary one again.
         defaults.set(false, forKey = "sdt.debug.reviewDue")
-        assertFalse(forced.reviewPrompt.isDue(Instant.now(), calm = true))
+        assertFalse(forced.reviewPrompt.isDue(AppClock.now(), calm = true))
         defaults.set(true, forKey = "sdt.debug.reviewDue")
-        assertTrue(forced.reviewPrompt.isDue(Instant.now(), calm = true))
+        assertTrue(forced.reviewPrompt.isDue(AppClock.now(), calm = true))
         // Never in a release, whatever the defaults say.
         forced.scope.cancel()
         val release = AppContainer(context, configuration(), scope = MainScope(), debug = false).also { container = it }
@@ -511,7 +511,7 @@ class AppContainerTest {
         idleUntil("the demo's parcels") { release.session.state == AuthenticationState.Demo && release.parcels.parcelsFlow.value.isNotEmpty() }
         settle()
         assertFalse(release.reviewSettled.value)
-        assertFalse(release.reviewPrompt.isDue(Instant.now(), calm = true))
+        assertFalse(release.reviewPrompt.isDue(AppClock.now(), calm = true))
     }
 
     @Test

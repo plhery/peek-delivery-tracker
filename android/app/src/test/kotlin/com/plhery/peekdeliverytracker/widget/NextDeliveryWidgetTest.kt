@@ -31,6 +31,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.MainActivity
 import com.plhery.peekdeliverytracker.R
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
@@ -47,7 +48,6 @@ import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import java.time.Duration
-import java.time.Instant
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -339,7 +339,7 @@ class NextDeliveryWidgetTest {
     @Test
     fun refreshIsSetOnlyWhileAWidgetIsPlaced() {
         val store = DeliveryWidgetSharedStore(com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults())
-        val now = Instant.now()
+        val now = AppClock.now()
         assertFalse(DeliveryWidgetUpdates.isPlaced(app))
         DeliveryWidgetUpdates.schedule(app, store, now)
         assertTrue(alarms.scheduledAlarms.isEmpty())
@@ -371,7 +371,7 @@ class NextDeliveryWidgetTest {
     fun turnsEndIsAsCloseAsTheSystemAllows() {
         place()
         val store = DeliveryWidgetSharedStore(com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults())
-        val now = Instant.now()
+        val now = AppClock.now()
         store.setTurn(DeliveryWidgetTurn(three[1].id, now), size = "medium")
         val ends = store.turn(size = "medium", now = now)!!.ends
         DeliveryWidgetUpdates.schedule(app, store, now)

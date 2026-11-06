@@ -110,7 +110,7 @@ class CarrierCatalog private constructor(
     suspend fun refresh(
         apiBaseUrl: String,
         force: Boolean = false,
-        now: Instant = Instant.now(),
+        now: Instant = AppClock.now(),
     ): CarrierCatalogRefreshResult {
         synchronized(this) {
             val lastRefreshAttempt = lastRefreshAttempt

@@ -115,7 +115,7 @@ private fun <T> List<T>.firstById(id: (T) -> UUID): Map<UUID, T> {
 }
 
 /** The carrier an automatic correction replaced, for 12 hours. A parcel filed without a carrier only found one: nothing was swapped. */
-fun Parcel.automaticallyChangedFrom(at: Instant = Instant.now()): CarrierId? {
+fun Parcel.automaticallyChangedFrom(at: Instant = AppClock.now()): CarrierId? {
     val from = carrierData?.autoChangedFrom ?: return null
     if (from == carrier || from == CarrierId.Unknown || from == CarrierId.InternationalPost) return null
     if (carrierData?.autoChangedTo != carrier) return null
@@ -192,7 +192,7 @@ data class LikelyCarrierPrompt(val carrier: CarrierId, val waited: Boolean)
  * The likely carrier, said under the header. `waited` once it has not listed the number for a week, when its owner is
  * asked to check the number or choose another carrier.
  */
-fun Parcel.likelyCarrierPrompt(now: Instant = Instant.now()): LikelyCarrierPrompt? {
+fun Parcel.likelyCarrierPrompt(now: Instant = AppClock.now()): LikelyCarrierPrompt? {
     if (inputNeededPrompt != null || inputSuggestedPrompt != null) return null
     val likely = carrierData?.routing?.likelyCarrier ?: return null
     if (likelyCarrier == null || isArchived) return null
@@ -424,7 +424,7 @@ val Parcel.displayStatus: ParcelDisplayStatus
     }
 
 /** What a card says the parcel needs: no failed update for a number only the owner can correct, whose status says to check it. */
-fun Parcel.notice(now: Instant = Instant.now()): ParcelAttention? {
+fun Parcel.notice(now: Instant = AppClock.now()): ParcelAttention? {
     val reason = attention(now)
     return if (reason == ParcelAttention.SyncError && numberToCheck) null else reason
 }
@@ -432,7 +432,7 @@ fun Parcel.notice(now: Instant = Instant.now()): ParcelAttention? {
 /** Whether a card says the latest update failed: not for a number only the owner can correct. */
 val Parcel.updateFailed: Boolean get() = syncStatus == SyncStatus.Error && !numberToCheck
 
-fun Parcel.attention(now: Instant = Instant.now()): ParcelAttention? {
+fun Parcel.attention(now: Instant = AppClock.now()): ParcelAttention? {
     // The carrier waits on the recipient until a later scan says it moved on.
     currentEvent?.recipientAction?.let { return ParcelAttention(it) }
     when (currentStage) {
@@ -464,7 +464,7 @@ val Parcel.hasMappedPlace: Boolean get() = GeneratedTrack.without(trackingEvents
  * Whether the carrier has only ever announced the parcel, its first label at least a day ago: the sender made the
  * label and still has the parcel. The carrier has nothing more to say until they hand it over.
  */
-fun Parcel.awaitingHandover(now: Instant = Instant.now()): Boolean {
+fun Parcel.awaitingHandover(now: Instant = AppClock.now()): Boolean {
     val carrierEvents = trackingEvents.filter { it.stage != TrackingStage.Pending }
     if (carrierEvents.isEmpty() || !carrierEvents.all { it.stage == TrackingStage.Registered }) return false
     val first = carrierEvents.mapNotNull { DateParser.date(it.occurredAt) }.minOrNull() ?: return false
@@ -672,7 +672,7 @@ object ParcelOrganizer {
         status: ParcelStatusFilter,
         carrier: CarrierId?,
         sort: ParcelSort,
-        now: Instant = Instant.now(),
+        now: Instant = AppClock.now(),
         catalog: CarrierCatalog = CarrierCatalog.shared,
     ): List<Parcel> {
         val trimmed = query.trimmingWhitespacesAndNewlines().lowercase()
@@ -710,7 +710,7 @@ object ParcelOrganizer {
     }
 
     /** Feature an arrival or pickup. Issues are shown separately as compact notices. */
-    fun nextDelivery(from: List<Parcel>, now: Instant = Instant.now()): Parcel? {
+    fun nextDelivery(from: List<Parcel>, now: Instant = AppClock.now()): Parcel? {
         val today = dayKey(now)
         val candidates = from.filter { parcel ->
             if (!parcel.isActive) return@filter false
@@ -745,7 +745,7 @@ object ParcelOrganizer {
         return next?.key?.parcel
     }
 
-    fun sections(from: List<Parcel>, now: Instant = Instant.now()): List<ParcelSection> {
+    fun sections(from: List<Parcel>, now: Instant = AppClock.now()): List<ParcelSection> {
         val today = dayKey(now)
         val active = from.filter { it.isActive }.map { it to it.attention(now) }
         val attention = active.filter { it.second != null }.map { it.first }
@@ -923,7 +923,7 @@ val Parcel.onItsWay: Parcel get() = copy(trackingEvents = trackingEvents.filter 
  * has no `stringArray`: the ids are kept there as a JSON array of the iPhone's sorted strings. `now` is the clock a
  * delivery's age is told by.
  */
-class OnTheWayRecord(private val defaults: UserDefaults, private val now: () -> Instant = Instant::now) {
+class OnTheWayRecord(private val defaults: UserDefaults, private val now: () -> Instant = AppClock::now) {
     /** The parcels the list showed on their way when it was last in view. */
     val ids: Set<UUID> get() = stored().orEmpty().mapNotNullTo(LinkedHashSet(), ::uuid)
 
@@ -1242,7 +1242,7 @@ class DeliveryListLayout(
     carrier: CarrierId?,
     sort: ParcelSort,
     featuresNext: Boolean,
-    now: Instant = Instant.now(),
+    now: Instant = AppClock.now(),
     catalog: CarrierCatalog = CarrierCatalog.shared,
 ) {
     val visible: List<Parcel> = ParcelOrganizer.visible(parcels, query, status, carrier, sort, now, catalog)

@@ -77,7 +77,7 @@ data class JournalDay(
  * start together in the rows' order: a scan dated by its day alone can sort among the day before's scans, west of the
  * carrier's zone.
  */
-fun Localizer.journalDays(entries: List<JournalEntry>, now: Instant = Instant.now()): List<JournalDay> {
+fun Localizer.journalDays(entries: List<JournalEntry>, now: Instant = AppClock.now()): List<JournalDay> {
     val zone = ZoneId.systemDefault()
     val today = now.atZone(zone).toLocalDate()
     val year = FoundationDates.dateFields(now, zone).yearOfEra
@@ -168,7 +168,7 @@ val PlannedTrackingEvent.journalLocation: String?
  * and where it will be as the location row reads it (the town its place names, for one written in another script),
  * without the flag, joined by ", ".
  */
-fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = Instant.now()): String {
+fun Localizer.plannedStepLabel(step: PlannedTrackingEvent, now: Instant = AppClock.now()): String {
     val place = step.journalLocation?.let { location ->
         val place = TrackingLocation.place(location, step.place, language)
         val country = place.country

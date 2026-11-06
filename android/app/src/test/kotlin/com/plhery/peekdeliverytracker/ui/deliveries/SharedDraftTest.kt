@@ -13,6 +13,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextReplacement
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -22,7 +23,6 @@ import com.plhery.peekdeliverytracker.core.SharedParcelDraft
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
-import java.time.Instant
 import java.util.UUID
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -76,7 +76,7 @@ class SharedDraftTest {
 
     /** A draft saved by the share card, `age` seconds ago. */
     private fun share(text: String, label: String = "", age: Long = 0) {
-        assertTrue(ShareInbox.save(SharedParcelDraft(label = label, trackingInput = text, createdAt = Instant.now().minusSeconds(age)), defaults))
+        assertTrue(ShareInbox.save(SharedParcelDraft(label = label, trackingInput = text, createdAt = AppClock.now().minusSeconds(age)), defaults))
     }
 
     /** The window leaves the front and comes back to it. */

@@ -430,7 +430,7 @@ class DeviceParcels(
      * iPhone, the Localizer's language here.
      */
     private val language: () -> AppLanguage,
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
 ) {
     private var entries: List<DeviceParcel>
     private var keys: Map<String, String>

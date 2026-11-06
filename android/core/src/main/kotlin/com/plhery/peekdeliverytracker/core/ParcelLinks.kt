@@ -215,7 +215,7 @@ enum class ParcelLinkFailure {
  */
 class ParcelLinkStore(
     private val defaults: UserDefaults,
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
     private val read: ParcelLinkReader?,
 ) {
     sealed class Phase {
@@ -240,7 +240,7 @@ class ParcelLinkStore(
     }
 
     /** Swift's `init(defaults:configuration:now:)`: reads through `api`, the app's API client, when the build has a server. */
-    constructor(defaults: UserDefaults, configuration: AppConfiguration, api: ParcelLinkReader, now: () -> Instant = Instant::now) :
+    constructor(defaults: UserDefaults, configuration: AppConfiguration, api: ParcelLinkReader, now: () -> Instant = AppClock::now) :
         this(defaults, now, if (configuration.mode == AppConfiguration.Mode.Api) api else null)
 
     private val routeState = MutableStateFlow<ParcelLinkRoute?>(null)
@@ -489,7 +489,7 @@ class ParcelLinkStore(
                 words = ParcelLinkWords(
                     name = "trail running shoes", note = "Happy birthday, Alex! I hope these keep up with you on the trails.", from = "Sam",
                 )
-                val now = Instant.now()
+                val now = AppClock.now()
                 if (variant == "giftDelivered") {
                     changeLink { it.copy(numberShown = true, canKeep = true) }
                     val delivered = TrackingEvent(
@@ -509,7 +509,7 @@ class ParcelLinkStore(
             }
             val deliveredPackage = response?.parcel
             if (variant == "delivered" && deliveredPackage != null) {
-                val now = Instant.now()
+                val now = AppClock.now()
                 val delivered = TrackingEvent(
                     id = UUID.randomUUID(), packageId = deliveredPackage.id, stage = TrackingStage.Delivered, description = "Delivered",
                     occurredAt = DateParser.isoString(now.minusSeconds(180)),
@@ -538,7 +538,7 @@ class ParcelLinkStore(
             }
             val handedOver = response?.parcel
             if (variant.startsWith("handover") && handedOver != null) {
-                val now = Instant.now()
+                val now = AppClock.now()
                 val stops = listOf(
                     EventPlace(22.54, 114.06, EventPlacePrecision.City, "CN", "Shenzhen"),
                     EventPlace(22.32, 114.17, EventPlacePrecision.City, "HK", "Hong Kong"),

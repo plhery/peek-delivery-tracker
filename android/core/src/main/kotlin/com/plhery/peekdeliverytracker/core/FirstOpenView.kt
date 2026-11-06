@@ -107,7 +107,7 @@ object FirstOpenJourney {
     fun name(localizer: Localizer): String = "${localizer.text("landing.parcel.sneakers")} 👟"
 
     /** The parcel once `step` of its scans are in. */
-    fun parcel(step: Int, name: String, now: Instant = Instant.now()): Parcel {
+    fun parcel(step: Int, name: String, now: Instant = AppClock.now()): Parcel {
         val step = maxOf(1, minOf(step, steps))
         val events = scans.take(step).mapIndexed { index, scan ->
             TrackingEvent(
@@ -130,7 +130,7 @@ object FirstOpenJourney {
     }
 
     /** The parcel as it opens: picked up, every scan of its story told in the app's language. */
-    fun delivered(localizer: Localizer, now: Instant = Instant.now()): Parcel {
+    fun delivered(localizer: Localizer, now: Instant = AppClock.now()): Parcel {
         val events = story.mapIndexed { index, scan ->
             TrackingEvent(
                 id = UUID.fromString(String.format(Locale.ROOT, "5A3B1E00-0000-4000-8000-%012X", 0x100 + index)), packageId = parcelId,

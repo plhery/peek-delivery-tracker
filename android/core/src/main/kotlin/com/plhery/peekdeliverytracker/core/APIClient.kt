@@ -226,7 +226,7 @@ class DeliveryApiClient(
     private val region: () -> Locale,
     private val debug: Boolean = false,
     private val analytics: (event: String, outcome: DeliveryAnalytics.Outcome) -> Unit = { _, _ -> },
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
     private val decoding: CoroutineDispatcher = Dispatchers.Default,
 ) {
     /** What the client needs of SessionStore, which answers on its own thread whichever thread asks. */
@@ -653,7 +653,7 @@ class DeliveryApiClient(
          * A `Retry-After` header in seconds, given either as seconds or as an HTTP date. Read as the iPhone reads
          * it: a hexadecimal number counts, and the date is DateFormatter's ("EEE, dd MMM yyyy HH:mm:ss zzz").
          */
-        fun retryAfterSeconds(value: String?, now: Instant = Instant.now()): Double {
+        fun retryAfterSeconds(value: String?, now: Instant = AppClock.now()): Double {
             if (value == null) return 0.0
             timeInterval(value)?.let { return nonNegative(it) }
             val date = FoundationDates.httpDate(value) ?: return 0.0

@@ -40,7 +40,7 @@ object SiteLink {
 class LinkDeliveries {
     private var last: Pair<String, Instant>? = null
 
-    fun isRepeat(url: String, now: Instant = Instant.now()): Boolean {
+    fun isRepeat(url: String, now: Instant = AppClock.now()): Boolean {
         // URL's `==` compares the strings `URL(string:)` makes.
         val link = UrlComponents.parse(url)?.url ?: url
         val last = last

@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.platform
 
 import android.os.Build
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.HttpRequest
 import com.plhery.peekdeliverytracker.core.HttpResponse
 import com.plhery.peekdeliverytracker.core.HttpTransport
@@ -189,7 +190,7 @@ class MemoryCookieJar : CookieJar {
 
     @Synchronized
     override fun loadForRequest(url: HttpUrl): List<Cookie> {
-        val now = System.currentTimeMillis()
+        val now = AppClock.now().toEpochMilli()
         cookies.removeAll { it.expiresAt < now }
         return cookies.filter { it.matches(url) }
     }

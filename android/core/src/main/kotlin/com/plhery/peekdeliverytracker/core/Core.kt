@@ -295,7 +295,7 @@ class Localizer(
      * A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". Once its first day
      * has passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov".
      */
-    fun deliveryWindow(from: String?, to: String, now: Instant = Instant.now()): String {
+    fun deliveryWindow(from: String?, to: String, now: Instant = AppClock.now()): String {
         val end = expectedDelivery(to, now)
         if (from == null) return end
         val startDate = DateParser.deliveryDate(from) ?: return end
@@ -332,7 +332,7 @@ class Localizer(
      * An estimate as short as a card writes it. A window of several days reads whole until it begins, then by the day
      * it ends, since the parcel may come any day until then: "by Fri 6 Nov". The parcel's page gives the whole window.
      */
-    fun deliveryEstimate(from: String?, to: String, now: Instant = Instant.now()): String {
+    fun deliveryEstimate(from: String?, to: String, now: Instant = AppClock.now()): String {
         val today = today(now)
         val days = windowDays(from, to)
         if (days == null || days.first > today || days.second < today) return deliveryWindow(from, to, now)
@@ -343,7 +343,7 @@ class Localizer(
         }
     }
 
-    fun relativeTime(from: String, now: Instant = Instant.now()): String {
+    fun relativeTime(from: String, now: Instant = AppClock.now()): String {
         val date = DateParser.date(from) ?: return ""
         val seconds = now.timeIntervalSince(date)
         if (seconds < 60) return text("time.justNow")
@@ -354,7 +354,7 @@ class Localizer(
     }
 
     /** How long ago a scan happened, or its day when the carrier gave no clock time. */
-    fun relativeTime(of: TrackingEvent, now: Instant = Instant.now()): String {
+    fun relativeTime(of: TrackingEvent, now: Instant = AppClock.now()): String {
         of.calendarDay?.let { return deliveryDate(it, now) }
         return relativeTime(from = of.occurredAt, now = now)
     }
@@ -379,7 +379,7 @@ class Localizer(
     private fun localDay(timestamp: Instant): String =
         fields(timestamp).let { "${it.yearOfEra.toString().padStart(4, '0')}-${twoDigits(it.month)}-${twoDigits(it.dayOfMonth)}" }
 
-    fun expectedDelivery(value: String, now: Instant = Instant.now()): String {
+    fun expectedDelivery(value: String, now: Instant = AppClock.now()): String {
         val match = deliveryWindowPattern?.matcher(value)
         if (match != null && match.find()) {
             val day = expectedDelivery(match.group(1), now)
@@ -397,7 +397,7 @@ class Localizer(
         return deliveryDate(date, now)
     }
 
-    fun deliveryDate(date: Instant, now: Instant = Instant.now()): String {
+    fun deliveryDate(date: Instant, now: Instant = AppClock.now()): String {
         val zone = ZoneId.systemDefault()
         val day = date.atZone(zone).toLocalDate()
         val today = now.atZone(zone).toLocalDate()
@@ -443,7 +443,7 @@ class Localizer(
      * date, with its year when it isn't `now`'s ([journalDays]), then its clock time unless the carrier dated it by its
      * day alone: "Fri 6 Nov, 07:54". Nothing for a date that doesn't read.
      */
-    fun plannedDate(step: PlannedTrackingEvent, now: Instant = Instant.now()): String {
+    fun plannedDate(step: PlannedTrackingEvent, now: Instant = AppClock.now()): String {
         val date = step.displayDate ?: return ""
         val zone = ZoneId.systemDefault()
         val today = now.atZone(zone).toLocalDate()
@@ -471,13 +471,13 @@ class Localizer(
     }
 
     /** The estimate a card, a widget or a shared line gives: a window of days that has begun, by the day it ends. */
-    fun parcelDeliveryEstimate(parcel: Parcel, now: Instant = Instant.now()): String? {
+    fun parcelDeliveryEstimate(parcel: Parcel, now: Instant = AppClock.now()): String? {
         val value = shownEstimate(parcel, now) ?: return null
         return deliveryEstimate(parcel.carrierData?.expectedDeliveryFrom, value, now)
     }
 
     /** The estimate the parcel's page gives, with a window of days whole. */
-    fun parcelDeliveryWindow(parcel: Parcel, now: Instant = Instant.now()): String? {
+    fun parcelDeliveryWindow(parcel: Parcel, now: Instant = AppClock.now()): String? {
         val value = shownEstimate(parcel, now) ?: return null
         return deliveryWindow(parcel.carrierData?.expectedDeliveryFrom, value, now)
     }
@@ -513,10 +513,10 @@ class Localizer(
     }
 
     /** Whether a parcel out for delivery has an estimate: it comes today, whichever day the estimate named. */
-    fun parcelArrivesToday(parcel: Parcel, now: Instant = Instant.now()): Boolean =
+    fun parcelArrivesToday(parcel: Parcel, now: Instant = AppClock.now()): Boolean =
         parcel.currentStage == TrackingStage.OutForDelivery && liveEstimate(parcel, now) != null
 
-    fun parcelCompletionDate(parcel: Parcel, now: Instant = Instant.now()): String? {
+    fun parcelCompletionDate(parcel: Parcel, now: Instant = AppClock.now()): String? {
         val event = parcel.currentEvent ?: return null
         if (!event.stage.isFinal) return null
         val date = event.displayDate ?: return null

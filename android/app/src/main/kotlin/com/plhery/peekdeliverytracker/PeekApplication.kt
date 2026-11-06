@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.createFontFamilyResolver
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.lifecycle.Lifecycle
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.FriendInvitationLink
 import com.plhery.peekdeliverytracker.core.LinkDeliveries
@@ -29,8 +30,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-/** The process: :core reads the shared data (brand, catalog, copy, map) from the app's assets. */
-class PeekApplication : Application() {
+/**
+ * The process: :core reads the shared data (brand, catalog, copy, map) from the app's assets. Open for the tests' own,
+ * which sets the clock first.
+ */
+open class PeekApplication : Application() {
     private val containerState = MutableStateFlow<AppContainer?>(null)
 
     /** The app's stores once made and started ([makeContainer]); null until then. */
@@ -60,7 +64,7 @@ class PeekApplication : Application() {
 
     /** The clock [isRepeat] reads: the phone's, or a test's. */
     @VisibleForTesting
-    internal var now: () -> Instant = Instant::now
+    internal var now: () -> Instant = AppClock::now
 
     /** The links the app was opened with before the stores were made, counted once they are ([linkOpened]). */
     private var waitingOpens = 0

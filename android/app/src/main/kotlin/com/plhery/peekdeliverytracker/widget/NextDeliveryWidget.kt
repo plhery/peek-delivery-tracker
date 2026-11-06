@@ -32,6 +32,7 @@ import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.updateAll
 import com.plhery.peekdeliverytracker.BuildConfig
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
@@ -86,7 +87,7 @@ class NextDeliveryWidget : GlanceAppWidget() {
         provideContent {
             val size = LocalSize.current
             val medium = isMedium(size)
-            val entry = remember(medium) { source.preview(medium, Instant.now()) }
+            val entry = remember(medium) { source.preview(medium, AppClock.now()) }
             DeliveryWidgetContent(entry, size)
         }
     }
@@ -121,7 +122,7 @@ internal fun NextDeliveryWidgetBody(source: DeliveryWidgetSource) {
     val revision by DeliveryWidgetUpdates.revision.collectAsState()
     val size = LocalSize.current
     val medium = NextDeliveryWidget.isMedium(size)
-    val entry = remember(revision, medium) { source.current(medium, Instant.now()) }
+    val entry = remember(revision, medium) { source.current(medium, AppClock.now()) }
     DeliveryWidgetContent(entry, size)
 }
 
@@ -161,7 +162,7 @@ class ShowNextParcelAction : ActionCallback {
     override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         val parcel = parameters[PARCEL]?.let { runCatching { UUID.fromString(it) }.getOrNull() } ?: return
         val size = parameters[SIZE] ?: return
-        DeliveryWidgetSource.of(context).store.setTurn(DeliveryWidgetTurn(parcel = parcel, at = Instant.now()), size = size)
+        DeliveryWidgetSource.of(context).store.setTurn(DeliveryWidgetTurn(parcel = parcel, at = AppClock.now()), size = size)
         DeliveryWidgetUpdates.update(context)
     }
 
@@ -294,7 +295,7 @@ object DeliveryWidgetUpdates {
      * The timeline's next entry while a widget is `placed`: the refresh, or the end of a turn's spell where a widget was
      * turned to other parcels. With none placed, there is none.
      */
-    fun schedule(context: Context, store: DeliveryWidgetSharedStore, now: Instant = Instant.now(), placed: Boolean = isPlaced(context)) {
+    fun schedule(context: Context, store: DeliveryWidgetSharedStore, now: Instant = AppClock.now(), placed: Boolean = isPlaced(context)) {
         val alarms = context.getSystemService(AlarmManager::class.java) ?: return
         if (!placed) {
             alarms.cancel(refresh(context))
@@ -371,7 +372,7 @@ object DeliveryWidgetUpdates {
         private val defaults = PreferencesDefaults.standard(context)
         private val provider = ComponentName(context, NextDeliveryWidgetReceiver::class.java)
 
-        override fun shows(): WidgetGalleryPreviews.Shows = previewsShow(DeliveryWidgetSource.of(context), Instant.now())
+        override fun shows(): WidgetGalleryPreviews.Shows = previewsShow(DeliveryWidgetSource.of(context), AppClock.now())
 
         override var held: WidgetGalleryPreviews.Shows?
             get() = defaults.string(PREVIEWS_KEY)?.let { WidgetGalleryPreviews.Shows(it, defaults.bool(PREVIEWS_SAMPLE_KEY)) }

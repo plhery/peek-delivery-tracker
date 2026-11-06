@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
@@ -58,4 +59,4 @@ private class QuietUriHandler(private val links: UriHandler) : UriHandler {
  * The time a screen reads for what it says about now ("today", an automatic carrier change still shown): `Date()` on
  * the iPhone. Tests give a fixed one.
  */
-val LocalNow = staticCompositionLocalOf<() -> Instant> { Instant::now }
+val LocalNow = staticCompositionLocalOf<() -> Instant> { AppClock::now }

@@ -32,7 +32,7 @@ import kotlinx.serialization.json.Json
 class DemoRepository(
     private val defaults: UserDefaults,
     private val language: () -> AppLanguage,
-    private val now: () -> Instant = Instant::now,
+    private val now: () -> Instant = AppClock::now,
     private val importCharges: () -> String? = { null },
 ) {
     private val catalogKey = "sdt.native.demo.catalog.v2"
@@ -415,7 +415,7 @@ class DemoRepository(
         }
 
         /** The sample parcels in English; `list()` writes them in the app's language. */
-        fun seed(now: Instant = Instant.now()): List<Parcel> {
+        fun seed(now: Instant = AppClock.now()): List<Parcel> {
             fun iso(hoursAgo: Double): String = DateParser.isoString(now.minusNanos((hoursAgo * 3_600 * 1_000_000_000).toLong()))
             return catalog.parcels.map { sample ->
                 val id = UUID.randomUUID()

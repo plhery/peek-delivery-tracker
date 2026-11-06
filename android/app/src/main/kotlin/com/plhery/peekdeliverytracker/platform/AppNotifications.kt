@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.plhery.peekdeliverytracker.R
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NativeRoute
@@ -224,7 +225,7 @@ class AppNotifications(
          * src/server/push.ts sends them. Null when it sent none, or a scan this clock calls the future: the service's
          * own body shows. "HH:mm" as the service writes it, and the day as the browser's push worker does.
          */
-        fun deviceClockBody(data: Map<String, String>, now: Instant = Instant.now(), zone: ZoneId = ZoneId.systemDefault()): String? {
+        fun deviceClockBody(data: Map<String, String>, now: Instant = AppClock.now(), zone: ZoneId = ZoneId.systemDefault()): String? {
             val sameDay = data["body_same_day"] ?: return null
             val otherDay = data["body_other_day"] ?: return null
             val scanned = data["scan_at"]?.let { runCatching { Instant.parse(it) }.getOrNull() } ?: return null

@@ -23,6 +23,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.RemoteMessage
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.PeekApplication
+import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthSession
@@ -36,7 +37,6 @@ import java.io.IOException
 import java.security.Security
 import java.util.Collections
 import java.time.Duration
-import java.time.Instant
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.MainScope
@@ -122,7 +122,7 @@ class NotificationsTest {
                 AuthSession.serializer(),
                 AuthSession(
                     accessToken = "synthetic-access", tokenType = "bearer", expiresIn = 3600,
-                    expiresAt = Instant.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
+                    expiresAt = AppClock.now().epochSecond + 3600, refreshToken = "synthetic-refresh", user = user,
                 ),
             ).decodeToString()
             "/api/push/devices" -> {

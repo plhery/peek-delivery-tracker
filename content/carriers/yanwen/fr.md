@@ -3,7 +3,7 @@ title: Yanwen suivi : numéros, statuts et qui contacter
 description: Suivre un colis Yanwen venu de Chine : à quoi ressemble le numéro, ce que veut dire chaque statut, qui le livre chez toi et qui contacter s'il bloque.
 slug: yanwen-suivi
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Yanwen est une société de logistique chinoise, fondée à Pékin en 1998, qui expédie à l'étranger les colis de vendeurs en ligne puis les confie à un transporteur local pour le dernier kilomètre. Pour suivre ton colis, saisis son numéro sur [track.yw56.com.cn](https://track.yw56.com.cn/en/index), le site de suivi de Yanwen, ou colle-le dans le champ ci-dessus. Le numéro vient de la boutique ou de la plateforme où tu as commandé, dans les détails d'expédition de ta commande.
@@ -53,9 +53,11 @@ Au-dessus des scans, Yanwen range chaque colis dans une catégorie. `Info_Receiv
 
 Yanwen ne livre pas lui-même en Europe : il dit travailler avec des transporteurs locaux pour le dernier kilomètre. Quand il nomme ce transporteur, la page de résultat affiche un encadré avec « Distributor », « Distributor Website » et « Contact Number ». Pour certains colis, l'encadré reste vide.
 
-Le transporteur dépend du pays et du service choisi par le vendeur. Le catalogue de Yanwen pour les vendeurs cite par exemple une ligne vers la France via [Colissimo](carrier:la-poste) ; aucune page de Yanwen ne dit qui livre en Belgique ou en Suisse.
+Le transporteur dépend du pays et du service choisi par le vendeur. Pour la France, le catalogue de Yanwen pour les vendeurs propose une ligne [Colissimo](carrier:la-poste) et une ligne « CP », sans fiche détaillée. Sur la ligne Colissimo, Yanwen imprime directement l'étiquette et le numéro Colissimo, et renvoie au suivi de laposte.fr : c'est La Poste qui livre, avec ce numéro. Yanwen reprend alors les phrases de La Poste mot pour mot : `Votre Colissimo va bientôt nous être confié ! Il est en cours de préparation chez votre expéditeur.` arrive avant même la prise en charge par Yanwen, et Peek l'affiche comme « Étiquette créée » ; `Votre colis est en transit sur nos plateformes logistiques.` et `Votre Colissimo est en cours de traitement sur le site de tri local.` donnent « En transit », `Votre colis est sur son site de distribution. Nous le préparons pour le mettre en livraison.` donne « En livraison ».
 
-Tentatives, avis de passage, nouvelle date et durée de garde en point relais relèvent du transporteur local : Yanwen n'en publie aucune règle. `Available_For_Pick_Up` veut dire que le colis t'attend dans un point de retrait ; `Undelivered`, que la livraison a échoué. Avec le numéro « Last Mile Tracking » et le contact de l'encadré, demande à ce transporteur une nouvelle livraison.
+Aucune page de Yanwen ne dit qui livre en Belgique ou en Suisse. En Australie, Yanwen remet ses colis par lots à J&T Express Australia au port d'arrivée ; les scans de J&T apparaissent ensuite dans l'historique de Yanwen, et Peek affiche la prise en charge par J&T comme « En transit ».
+
+Tentatives, avis de passage, nouvelle date et durée de garde en point relais relèvent du transporteur local : Yanwen n'en publie aucune règle. Pour un colis Colissimo, voir la page [La Poste](carrier:la-poste). `Available_For_Pick_Up` veut dire que le colis t'attend dans un point de retrait ; `Undelivered`, que la livraison a échoué. Avec le numéro « Last Mile Tracking » et le contact de l'encadré, demande à ce transporteur une nouvelle livraison.
 
 La page de résultat propose aussi une fenêtre « Proof of Delivery Images », qui s'ouvre avec le code postal du destinataire. Chaque scan affiche son décalage horaire GMT, et un bouton change le fuseau.
 
@@ -65,9 +67,11 @@ La page de résultat propose aussi une fenêtre « Proof of Delivery Images », 
 
 **Bloqué depuis des jours.** Une fois le colis chez le transporteur local, regarde son propre suivi avec le numéro « Last Mile Tracking ». Les silences pendant le vol ou à la douane sont expliqués dans [le suivi d'un colis venu de Chine](guide:tracking-from-china), les autres dans [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 
-**Livré mais pas reçu.** C'est le transporteur local qui a livré : commence par lui, puis par la boutique. Étape par étape : [colis livré mais non reçu](guide:delivered-not-received).
+**Bloqué en douane.** Sur sa ligne Colissimo, la TVA est réglée d'avance : la boutique la déclare avec son numéro IOSS, ou Yanwen la lui facture, et le destinataire n'a alors pas de TVA à payer ; sur sa ligne pour l'UE, tous les droits et taxes sont à la charge de l'expéditeur. Depuis le 1er juillet 2026, ces envois paient 3 € de droits par catégorie de produit jusqu'à 150 € ; depuis le 1er novembre 2026, la douane perçoit en plus, avec les droits, 2 € de frais de traitement de l'UE par ligne de déclaration, quelle que soit la valeur. Les fiches de Yanwen ne disent pas qui paie ces 2 €. Si on te demande de payer, vérifie auprès de la boutique et lis [colis bloqué en douane](guide:customs).
 
-**Perdu, abîmé ou renvoyé.** Yanwen ne publie pour les destinataires ni procédure de réclamation, ni délai, ni indemnisation. Ses sites s'adressent aux vendeurs, et c'est la boutique ou la plateforme qui a un contrat avec Yanwen : demande-lui un remboursement ou un nouvel envoi. `Exception` et `Returned` sont les catégories de Yanwen pour ces cas.
+**Livré mais pas reçu.** C'est le transporteur local qui a livré : commence par lui, puis par la boutique. Si le site du transporteur montre le colis livré, Yanwen aide la boutique à le chercher, mais ne l'indemnise pas. Étape par étape : [colis livré mais non reçu](guide:delivered-not-received).
+
+**Perdu, abîmé ou renvoyé.** Yanwen ne publie pour les destinataires ni procédure de réclamation, ni délai, ni indemnisation. Ses sites s'adressent aux vendeurs, et c'est la boutique ou la plateforme qui a un contrat avec Yanwen : demande-lui un remboursement ou un nouvel envoi. Préviens-la vite : elle peut lancer une recherche à partir de 10 jours après l'envoi, et plus aucune passé 60 jours. Sur la ligne Colissimo, un colis non livré ne revient pas en Chine : si la boutique ne demande pas de nouvelle livraison dans les 14 jours, il est détruit. `Exception` et `Returned` sont les catégories de Yanwen pour ces cas.
 
 **Colis ancien.** Après un an, un envoi sort du suivi en libre-service ; selon une annonce de Yanwen, une personne de sa hotline peut encore le retrouver.
 
@@ -87,7 +91,7 @@ Yanwen ne publie aucun contact pour la France, la Belgique ou la Suisse. Pour la
 
 Il affiche le statut, l'historique avec la ville ou la région de chaque scan sur une carte, l'heure de livraison, le pays de destination et le transporteur local avec son numéro (« Livraison par » ce transporteur, ou « Annoncé à …, pas encore reçu » tant que Peek ne trouve chez lui que l'annonce du colis, sans scan de sa part). Quand Yanwen nomme un transporteur local que Peek connaît et que le numéro lui correspond, il l'interroge et bascule sur lui dès qu'il montre une étape plus récente ; pour un numéro YP, il peut aussi suivre la poste du pays de destination. Yanwen ne donne pas de date de livraison prévue ni de point de retrait, et Peek écarte références de commande, contacts, codes postaux, codes PIN de livraison et numéros de porte.
 
-Les heures sont lues avec le décalage GMT de Yanwen et affichées dans le fuseau horaire de ton appareil ; les scans répétés sont supprimés. Peek affiche `Delivered` et `Out for delivery` avec ses propres mots, en français ; les autres lignes restent telles qu'écrites. Il vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni Yanwen ni la boutique à ta place.
+Les heures sont lues avec le décalage GMT de Yanwen et affichées dans le fuseau horaire de ton appareil ; les scans répétés sont supprimés. Les scans de La Poste que Yanwen traduit en anglais, comme `Arrived at destination`, portent chez lui l'heure UTC sous le décalage français : Peek les remet à l'heure de La Poste, une ou deux heures plus tard. Peek affiche `Delivered` et `Out for delivery` avec ses propres mots, en français ; les autres lignes restent telles qu'écrites. Il vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni Yanwen ni la boutique à ta place.
 
 ## Questions sur le suivi Yanwen
 
@@ -97,7 +101,7 @@ Yanwen ne publie aucun délai de livraison pour les destinataires : fie-toi à l
 
 ### Peut-on retirer un colis Yanwen en point relais ?
 
-Parfois : Yanwen a une catégorie `Available_For_Pick_Up` pour un colis qui attend dans un point de retrait. Le point et la durée de garde dépendent du transporteur local, pas de Yanwen.
+Parfois : Yanwen a une catégorie `Available_For_Pick_Up` pour un colis qui attend dans un point de retrait. Le point et la durée de garde dépendent du transporteur local, pas de Yanwen : La Poste pour un colis Colissimo.
 
 ### Yanwen, avis : est-ce un transporteur fiable ?
 
@@ -113,7 +117,10 @@ Yanwen ne livre pas lui-même chez toi : c'est le transporteur local qui fixe se
 - [Yanwen : page d'accueil YANWEN EXPRESS](https://www.yw56.com.cn/en/) – société, Pékin 1998, dernier kilomètre par des transporteurs locaux, hotline, e-mail
 - [Yanwen : Company Profile](https://www.yw56.com.cn/webfile/Profile/) – AliExpress et eBay
 - [Yanwen : Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – hotline, e-mail
-- [Yanwen : 联系我们 (contact, en chinois)](https://www.yw56.com.cn/webfile/联系我们/) – horaires de la hotline, ligne France via Colissimo
+- [Yanwen : 联系我们 (contact, en chinois)](https://www.yw56.com.cn/webfile/联系我们/) – horaires de la hotline, lignes France Colissimo et CP (relu le 6 novembre 2026)
+- [Yanwen : 燕文法国Colissimo快线 (fiche de la ligne Colissimo, en chinois)](https://www.yw56.com.cn/cn/wishDetail.html?productCode=779&productName=燕文法国Colissimo快线-普货) – numéro et étiquette Colissimo, suivi sur laposte.fr, TVA payée par l'expéditeur, 3 € de droits, pas de retour en Chine, 14 jours, recherche de 10 à 60 jours, livré mais pas reçu
+- [Yanwen : 燕文TemuY2欧盟快线 (fiche de la ligne UE, en chinois)](https://www.yw56.com.cn/cn/wishDetail.html?productCode=1938&productName=燕文TemuY2欧盟快线-普货) – droits et taxes à la charge de l'expéditeur
+- [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droits de 3 € depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
 - [Yanwen : 关于官方快件查询入口及服务的通告 (canaux de suivi officiels)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numéros, limite d'un an, recherche par téléphone, chat, portail, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek affiche
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ce que Peek affiche, phrases de La Poste reprises par Yanwen et heure de ses scans traduits, scans de J&T Express Australia après la remise par lots
 :::

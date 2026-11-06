@@ -3,7 +3,7 @@ title: Lingdong International seguimiento: número SZLD y estados
 description: Sigue tu paquete de Lingdong International (领东国际) desde Shenzhen: cómo es un número SZLD, qué significa cada paso, dónde acaba el seguimiento y qué pagas en aduana.
 slug: lingdong-seguimiento
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 Lingdong International (领东国际; razón social, 深圳市领东国际货运代理有限公司) es un transitario de Shenzhen, en China, que envía al extranjero los pedidos de tiendas online chinas. Sus números de seguimiento empiezan por SZLD: pega el tuyo en la casilla de arriba o escríbelo en la casilla 快件查询 (consulta de envíos) de lingdong56.com, que abre la web de seguimiento de Lingdong.
@@ -62,6 +62,8 @@ Lingdong no publica plazos de entrega ni reglas sobre intentos de entrega, aviso
 
 **Esperando un vuelo.** El paso del vuelo reservado da su fecha. Si pasan unos días sin un paso de despegue, pregunta a la tienda.
 
+**Parado tras el traspaso.** Con `货物已交服务商【The shipment has been transferred to the logistics partner.】` termina la parte de Lingdong. Cuatro días después del último paso, Peek marca el paquete con «Sin novedades desde hace cuatro días», aunque la empresa de reparto lo esté moviendo. Si la web de seguimiento de Lingdong muestra un 渠道转单号 (número de traspaso del canal) para tu paquete, ese es el número de la empresa que lo reparte: añádelo a Peek como un paquete aparte. Si no, pídeselo a la tienda.
+
 **Solo `货物电子信息已经收到`.** La tienda ha registrado el envío, pero el paquete aún no ha llegado al almacén de Lingdong. Si en varios días no aparece nada más, pregunta a la tienda si de verdad lo ha enviado.
 
 **No sale nada.** Con un número que no conoce, la web de Lingdong muestra el número como referencia y todos los demás campos vacíos. Peek muestra «Esperando al transportista» y sigue comprobando. Compara el número con el mensaje de la tienda, carácter por carácter.
@@ -119,7 +121,7 @@ A la tienda donde compraste: es ella quien contrató el envío con Lingdong. Lin
 - [Lingdong: 快递业务 (envíos urgentes)](http://www.lingdong56.com/kdyw.html) – agente de UPS, DHL y FedEx
 - [Lingdong: 联系我们 (contacto)](http://www.lingdong56.com/lxwm.html) – dirección, teléfonos
 - [Lingdong: 运输条款 (condiciones de transporte)](http://www.lingdong56.com/ystk.html) – la página no tiene condiciones
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato SZLD, referencias, enlaces, textos de los pasos y sus estados, hora de Pekín, números desconocidos, lo que Peek muestra y cuándo traspasa un paquete
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formato SZLD, referencias, enlaces, textos de los pasos y sus estados, número de traspaso (渠道转单号), hora de Pekín, números desconocidos, lo que Peek muestra y cuándo traspasa un paquete
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – arancel de 3 € desde el 1 de julio de 2026 en envíos de hasta 150 €, tasa de 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: The temporary EUR 3 customs duty and the Union handling fee (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – tasa fija de 2 € por artículo en las ventas a distancia, cualquiera que sea su valor
 - [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – arancel de 3 € y tasa de tramitación de 2 € por categoría de artículos, quién los cobra y cuándo puede pedirlos el transportista, la Aduana reclama el arancel al declarante, no al consumidor

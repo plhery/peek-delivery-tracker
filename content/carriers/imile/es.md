@@ -3,7 +3,7 @@ title: Seguimiento iMile: números, estados y quién reparte
 description: Sigue tu paquete de iMile en España: cómo es el número, qué significan sus estados en inglés, quién lo reparte y cómo contactar con iMile si se atasca.
 slug: imile-seguimiento
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 iMile es una empresa de reparto para el comercio electrónico, fundada en Dubái en 2017. Lleva paquetes de un país a otro, por ejemplo desde China, se encarga del despacho de aduanas y en España tiene su propia sociedad, iMile Logistics & Transportation, S.L., con sede en Madrid. Sigue el número en la página de seguimiento de iMile, [imile.com/track](https://www.imile.com/en/track), o en el recuadro de arriba. El número te lo da la tienda, en los datos de envío del pedido.
@@ -68,6 +68,8 @@ Otros motivos que puede anotar el repartidor, además de `User not at home`: `wr
 
 **Parado varios días.** Los paquetes que vienen de China suelen quedarse sin novedades entre el vuelo, la aduana y el primer centro en España. Lo explicamos en [paquetes desde China](guide:tracking-from-china) y en [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
+**Aduana y cargos.** Desde el 1 de noviembre de 2026, en las compras en línea enviadas desde fuera de la UE, como desde China, la UE cobra una tasa de tramitación de 2 € por tipo de producto, sea cual sea el valor, que la aduana recauda junto con el arancel (3 € por tipo de producto en compras de hasta 150 €). iMile no explica cómo se pagan el arancel, el IVA y la tasa en sus paquetes: si ya iban incluidos en el precio, lo sabe la tienda. Qué se paga y cuándo, en la [guía de aduanas](guide:customs).
+
 **El enlace de seguimiento no funciona.** Según sus preguntas frecuentes, recarga la página o ábrela en otro navegador, borra las cookies y, si sigue igual, escribe a atención al cliente con el número de pedido para que te manden un enlace nuevo.
 
 **Entregado pero no lo tienes.** Mira la foto de la prueba de entrega en la página de iMile, revisa portal, buzón y vecinos, y luego escribe a iMile y a la tienda. Más en [entregado pero no recibido](guide:delivered-not-received).
@@ -124,5 +126,6 @@ Es una empresa de reparto real, fundada en Dubái en 2017, con su propia página
 - [iMile: Entregas Dropship Internacional](https://www.imile.com/ES-es/logistics-solutions/international-dropship-delivery) – equipo propio de última milla, rutas desde China
 - [iMile: Atención al cliente](https://www.imile.com/ES-es/CustomerService/CustomerSupport) – formulario de contacto y sus campos
 - [iMile: iMile Chat](https://help.imile.com/) – asistente virtual en español
+- [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de tramitación de 2 € desde el 1 de noviembre de 2026, arancel de 3 € por tipo de producto hasta 150 €
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formas de número, estados, qué muestra Peek
 :::

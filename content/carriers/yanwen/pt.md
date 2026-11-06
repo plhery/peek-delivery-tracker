@@ -3,7 +3,7 @@ title: Yanwen tracking: rastrear encomenda, estados e contactos
 description: Rastrear uma encomenda Yanwen em Portugal: como é o número, o que quer dizer cada estado em inglês, quem faz a entrega e a quem perguntar quando fica parada.
 slug: rastrear-encomenda-yanwen
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 A Yanwen é uma empresa chinesa de logística, fundada em Pequim em 1998, que envia para o estrangeiro as encomendas de vendedores online e as entrega a uma transportadora local para o último troço. Para rastrear a encomenda, escreve o número no site de seguimento da Yanwen, o [track.yw56.com.cn](https://track.yw56.com.cn/en/index), ou cola-o na caixa acima. O número vem da loja ou do marketplace onde compraste, nos detalhes de envio da encomenda.
@@ -55,7 +55,7 @@ Por cima das leituras, a Yanwen arruma cada encomenda numa categoria. `Info_Rece
 
 A Yanwen não entrega na Europa: diz que trabalha «with local carriers to fulfill the last mile package delivery». Quando nomeia essa transportadora, a página de resultados mostra uma caixa de notas com «Distributor», «Distributor Website» e «Contact Number». Nas encomendas para Portugal que foram lidas, essa caixa estava vazia, e a Yanwen não diz em lado nenhum quem entrega cá. Quem tem a tua, dizem-no as linhas depois de `Batch delivery to carrier` e o número do «Last Mile Tracking».
 
-Quem entrega depende do país e do serviço que a loja escolheu. Na lista de produtos da Yanwen, em chinês, há uma linha para as ilhas de Espanha e de Portugal, e linhas noutros países com transportadoras como a Colissimo em França ou a DHL na Alemanha. São nomes de produtos para vendedores, não dizem quem entrega uma encomenda concreta.
+Quem entrega depende do país e do serviço que a loja escolheu. Na lista de produtos da Yanwen, em chinês, há uma linha para as ilhas de Espanha e de Portugal, e linhas noutros países com transportadoras como a Colissimo em França ou a DHL na Alemanha. São nomes de produtos para vendedores, não dizem quem entrega uma encomenda concreta. Na Austrália, a Yanwen entrega as encomendas em lotes à J&T Express Australia, no porto de chegada; as leituras da J&T aparecem depois no histórico da Yanwen, e o Peek mostra a recolha pela J&T como «Em trânsito».
 
 As tentativas de entrega, os avisos, a mudança de dia e o tempo que a encomenda fica à espera seguem as regras da transportadora local: a Yanwen não publica nenhuma. `Available_For_Pick_Up` quer dizer que a encomenda está à tua espera num ponto de levantamento; `Undelivered`, que a entrega falhou. Para pedir uma nova entrega, usa o número do «Last Mile Tracking» com a transportadora que o seguimento mostrar.
 
@@ -117,5 +117,5 @@ Não: a Yanwen não publica telefone, e-mail nem morada em Portugal. Fala com a 
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – linha de apoio, e-mail
 - [Yanwen: 联系我们 (contactos)](https://www.yw56.com.cn/webfile/联系我们/) – horário da linha de apoio, linhas de produtos (ilhas de Espanha e Portugal, Colissimo, DHL)
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canais oficiais de seguimento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 números, limite de um ano, pesquisa por telefone, chat, portal, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – o que o Peek lê e mostra, leituras da J&T Express Australia depois da entrega em lotes
 :::

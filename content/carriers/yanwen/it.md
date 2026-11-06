@@ -3,7 +3,7 @@ title: Yanwen tracking: numero, stati e chi consegna in Italia
 description: Tracking Yanwen per i pacchi dalla Cina: com'è fatto il numero, cosa vogliono dire gli stati in inglese, chi consegna in Italia e a chi scrivere.
 slug: yanwen-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Yanwen è un'azienda di logistica cinese, nata a Pechino nel 1998, che spedisce all'estero i pacchi dei venditori online e poi li passa a un corriere locale per l'ultimo tratto. Per il tracking inserisci il numero sul sito di Yanwen, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), oppure incollalo nel box qui sopra. Il numero te lo dà il negozio o il marketplace dove hai comprato, nei dettagli di spedizione dell'ordine.
@@ -55,7 +55,7 @@ Sopra le scansioni Yanwen mette ogni pacco in una categoria. `Info_Received` è 
 
 ## Yanwen in Italia: corriere, tentativi e ritiro
 
-Yanwen non consegna da sé in Europa: dice di lavorare «with local carriers», con corrieri locali, per l'ultimo miglio. Quando nomina il corriere, la pagina dei risultati mostra un riquadro con «Distributor», «Distributor Website» e «Contact Number». Nei pacchi verso l'Italia visti sul sito di Yanwen il riquadro era vuoto: il corriere non era nominato, ma aveva depositi a Milano, Roma e Torino. Il numero locale di quei pacchi aveva 13 cifre.
+Yanwen non consegna da sé in Europa: dice di lavorare «with local carriers», con corrieri locali, per l'ultimo miglio. Quando nomina il corriere, la pagina dei risultati mostra un riquadro con «Distributor», «Distributor Website» e «Contact Number». Nei pacchi verso l'Italia visti sul sito di Yanwen il riquadro era vuoto: il corriere non era nominato, ma aveva depositi a Milano, Roma e Torino. Il numero locale di quei pacchi aveva 13 cifre. In Australia, invece, Yanwen affida i pacchi in blocco a J&T Express Australia al porto di arrivo: le scansioni di J&T compaiono poi nella cronologia di Yanwen, e Peek mostra il ritiro di J&T come «In transito».
 
 Tentativi, avvisi, giacenza e nuova consegna seguono le regole del corriere locale: Yanwen non ne pubblica nessuna. In un pacco consegnato in Italia si sono visti due `<User not at home>`, un `<wrong address>` e un `Back To DS.` prima della consegna, quindi il corriere riprova. La categoria `Available_For_Pick_Up` vuol dire che il pacco ti aspetta in un punto di ritiro; `Undelivered` che la consegna non è riuscita.
 
@@ -121,5 +121,5 @@ Yanwen non pubblica tempi di consegna per chi riceve: vale la stima che il negoz
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – telefono, e-mail
 - [Yanwen: 联系我们 (contatti)](https://www.yw56.com.cn/webfile/联系我们/) – orari del telefono
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canali ufficiali di tracciamento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numeri, limite di un anno, ricerca al telefono, chat, portale, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek, scansioni di J&T Express Australia dopo il passaggio
 :::

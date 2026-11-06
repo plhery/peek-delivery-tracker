@@ -3,7 +3,7 @@ title: Lingdong Sendungsverfolgung: SZLD-Nummer, Status und Zoll
 description: Lingdong-International-Paket (领东国际) aus Shenzhen verfolgen: wie die SZLD-Nummer aussieht, was die Status bedeuten, wo das Tracking endet und was beim Zoll anfällt.
 slug: lingdong-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 Lingdong International (领东国际, mit vollem Namen 深圳市领东国际货运代理有限公司) ist ein Spediteur aus Shenzhen in China, der Bestellungen von Onlinehändlern ins Ausland verschickt. Seine Sendungsnummern beginnen mit SZLD: Füg deine oben ins Feld ein oder gib sie auf Lingdongs Website lingdong56.com bei 快件查询 (Sendungsabfrage) ein; das öffnet Lingdongs Tracking-Seite. Die Nummer bekommst du vom Shop, der Lingdong gebucht hat.
@@ -64,6 +64,8 @@ Mehr dazu in [Paket beim Zoll](guide:customs).
 
 **Hängt bei `Shipment departed from facility`.** Das Paket hat Lingdongs Lager in Shenzhen verlassen. Danach können Zeilen zum Flug und zum Zoll kommen, aber keine Lingdong-Zeile, die Peek kennt, meldet die Zustellung. Lingdongs Verlauf kann also stillstehen, während das Paket weiterreist. Frag den Shop, welcher Paketdienst es in deinem Land zustellt und unter welcher Nummer: Dessen Sendungsverfolgung zeigt den Rest. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 
+**Hängt nach der Übergabe.** Mit `货物已交服务商【The shipment has been transferred to the logistics partner.】` endet Lingdongs Teil. Vier Tage nach der neuesten Zeile markiert Peek das Paket mit „Seit vier Tagen keine Aktualisierung“, auch wenn der Zusteller es längst weiterbringt. Zeigt Lingdongs Tracking-Seite bei deinem Paket eine 渠道转单号 (Transfernummer des Versandkanals), ist das die Nummer des Zustellers: Füg sie in Peek als eigenes Paket hinzu. Wenn nicht, frag den Shop danach.
+
 **Nur `货物电子信息已经收到`.** Der Shop hat das Paket gebucht, aber in Lingdongs Lager ist es noch nicht angekommen. Kommt mehrere Tage nichts nach, frag den Shop, ob er es wirklich verschickt hat.
 
 **Nichts gefunden.** Kennt Lingdongs Tracking-Seite eine Nummer nicht, zeigt sie nur die Nummer und lässt alle anderen Felder leer. Peek zeigt dann „Warten auf den Paketdienst“ und fragt weiter nach. Vergleich die Nummer Zeichen für Zeichen mit der Nachricht des Shops.
@@ -123,7 +125,7 @@ Den Shop, bei dem du bestellt hast: Er hat das Paket bei Lingdong gebucht und ha
 - [Lingdong: 快递业务 (Expressversand)](http://www.lingdong56.com/kdyw.html) – Agent für UPS, DHL und FedEx
 - [Lingdong: 联系我们 (Kontakt)](http://www.lingdong56.com/lxwm.html) – Adresse, Telefonnummern
 - [Lingdong: 运输条款 (Beförderungsbedingungen)](http://www.lingdong56.com/ystk.html) – die Seite enthält keine Bedingungen
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – SZLD-Nummernform, Referenzen und Links, Wortlaute der Zeilen und ihre Status, Pekinger Zeit, Antwort bei unbekannter Nummer, was Peek zeigt, zurückhält und weglässt, Übergabe an die Schweizerische Post
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – SZLD-Nummernform, Referenzen und Links, Wortlaute der Zeilen und ihre Status, Transfernummer (渠道转单号), Pekinger Zeit, Antwort bei unbekannter Nummer, was Peek zeigt, zurückhält und weglässt, Übergabe an die Schweizerische Post
 - [Europäische Kommission: EU Customs Reform (Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – befristeter Zoll von 3 € auf Sendungen bis 150 € seit 1. Juli 2026, 2 € Union handling fee seit 1. November 2026
 - [Europäische Kommission: The temporary EUR 3 customs duty and the Union handling fee (Englisch)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – je Warenkategorie, Bearbeitungsgebühr von 2 € unabhängig vom Warenwert, Mehrwertsteuer bis 150 € unverändert, IOSS
 - [BAZG: Interneteinkauf, Post- und Kuriersendungen: Allgemeine Informationen zur Einfuhr in die Schweiz](https://www.bazg.admin.ch/de/interneteinkauf-postsendungen-informationen-einfuhr) – Zoll und Mehrwertsteuer grundsätzlich fällig, Kosten des Transportunternehmens in der Regel beim Empfänger, dort nachfragen

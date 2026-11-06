@@ -3,7 +3,7 @@ title: HYWL tracking: numero TRK e stati di Huiyi Logistics
 description: Tracking HYWL (Huiyi Logistics, 汇一物流) per i pacchi dalla Cina: com'è fatto il numero TRK, cosa vogliono dire i passaggi in inglese e in cinese e a chi rivolgersi.
 slug: hywl-tracking
 published: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-06
 ---
 
 Huiyi Logistics (HYWL, 汇一物流) è 深圳市汇一物流有限公司, un'azienda di logistica di Shenzhen, in Cina, che spedisce all'estero i pacchi dei venditori online. Se un negozio ha spedito il tuo ordine con HYWL, il numero è TRK seguito da dodici caratteri, oppure quattro lettere, due cifre, una D, quattro cifre e quattro lettere: incollalo nel box qui sopra. Il tracking di HYWL è sul suo sito, in cinese, e i passaggi sono in inglese, in cinese o in entrambe le lingue. HYWL non dice quale corriere consegna il pacco in Italia.
@@ -57,6 +57,8 @@ Le descrizioni dicono di più. Nell'ordine in cui compaiono:
 
 **Luoghi.** In Italia i passaggi di HYWL riportano la tua città e il CAP, il primo passaggio una città e il codice di un ufficio. Peek tiene solo la città e taglia ogni nome che segue `signed by` o `签收人`.
 
+**Passaggi in due lingue.** Quando HYWL scrive un passaggio in inglese e poi in cinese con lo stesso luogo (`Dispatching` e poi `出门投递`, per esempio), Peek ne tiene solo la parte inglese, con il luogo tra parentesi quadre.
+
 **Orari.** Il tracking di HYWL mostra gli orari senza fuso orario. I passaggi con il luogo scritto in cinese, o a Shenzhen, Guangzhou, Dongguan, Huizhou o Hong Kong, sono nell'ora di Pechino: le 20:00 a Pechino sono le 13:00 in Italia con l'ora solare e le 14:00 con l'ora legale.
 
 **Passaggi con una data futura.** La pagina di tracking di HYWL dice che il suo personale crea gli ordini e ne aggiorna il tracciamento in un gestionale interno. I suoi dati possono contenere passaggi con una data successiva al momento in cui guardi: il tracking di HYWL li mostra lo stesso, e anche lo stato in alto può essere in anticipo. Peek tiene da parte questi passaggi del tracking di HYWL finché la loro ora non è passata: quelli in Cina secondo l'ora di Pechino, gli altri leggendo l'orario come UTC. Peek si basa sui passaggi che tiene, non sullo stato di HYWL. Un passaggio con una data futura non è ancora successo, nemmeno `Delivered`.
@@ -75,7 +77,7 @@ I passaggi di HYWL arrivano fino alla consegna: `Dispatching`, poi `Delivered`. 
 
 **Il tracking di HYWL mostra più di Peek.** Peek tiene da parte i passaggi datati dopo il suo ultimo controllo, quindi la pagina di HYWL può mostrarne alcuni che Peek non ha. Guarda gli orari: un passaggio con una data futura non è ancora successo. Regolati sulla data di consegna stimata dal negozio e, quando è passata, scrivi al venditore. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-**Niente dopo `Arrival at`.** Il pacco è arrivato in Italia. Se ti chiedono di pagare spese d'importazione, leggi [pacco fermo in dogana](guide:customs). Se resta fermo per giorni, chiedi al venditore quale corriere lo consegna e con che numero.
+**Niente dopo `Arrival at`.** Il pacco è arrivato in Italia. Dal 1° luglio 2026 un acquisto online spedito da fuori UE paga un dazio di 3 € per voce se vale al massimo 150 € e, dal 1° novembre 2026, anche la tassa di gestione UE di 2 € per voce, a qualunque valore, che la dogana riscuote insieme al dazio. HYWL non dice chi li paga. Se ti chiedono di pagare spese d'importazione, leggi [pacco fermo in dogana](guide:customs). Se resta fermo per giorni, chiedi al venditore quale corriere lo consegna e con che numero.
 
 **`Delivered`, ma non è arrivato niente.** Prima guarda l'ora del passaggio: se è ancora nel futuro, la consegna non è avvenuta. Se è già passata, avvisa il venditore e chiedi quale corriere ha consegnato. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -93,11 +95,11 @@ Dalla sola forma, [Peek](/) non può essere sicuro che un numero sia di HYWL. In
 
 Se aggiungi un numero TRK senza scegliere il corriere e HYWL non lo conosce ancora, Peek mostra «Probabilmente Huiyi Logistics» e «In attesa della prima scansione di Huiyi Logistics», e continua a chiedere. Dopo una settimana ti chiede di verificare il numero con il mittente o di scegliere un altro corriere.
 
-Peek mostra lo stato, ogni passaggio con il suo luogo e, quando i dati di HYWL lo indicano, il Paese di destinazione. Legge i passaggi in Cina con l'ora di Pechino, ricava il fuso degli altri dal loro luogo o dalla tratta in cui si trovava il pacco e mostra ogni orario nel fuso del tuo dispositivo, dal più recente. Non mostra i CAP né il Paese di partenza. HYWL non indica data di consegna prevista, peso, servizio, corriere che consegna e relativo numero, nomi di mittente e destinatario né prova di consegna, quindi Peek non li mostra.
+Peek mostra lo stato, ogni passaggio con il suo luogo e, quando i dati di HYWL lo indicano, il Paese di destinazione. Legge i passaggi in Cina con l'ora di Pechino, ricava il fuso degli altri dal loro luogo o dalla tratta in cui si trovava il pacco e mostra ogni orario nel fuso del tuo dispositivo, dal più recente. Non mostra i CAP né il Paese di partenza. HYWL non indica data di consegna prevista, peso, corriere che consegna e relativo numero, nomi di mittente e destinatario né prova di consegna, quindi Peek non li mostra.
 
-Quando il tracking di HYWL non risponde, Peek si rivolge ai servizi di tracciamento e mostra la cronologia che hanno, con le loro parole. Nelle loro copie Peek non tiene da parte i passaggi con una data futura, quindi guarda l'ora di ogni passaggio.
+Quando il tracking di HYWL non risponde, Peek si rivolge ai servizi di tracciamento e mostra la cronologia che hanno, con le loro parole. Le loro copie possono mostrare passaggi con una data futura, ma un passaggio datato più di un'ora dopo il controllo di Peek non diventa mai lo stato del pacco. Quindi guarda l'ora di ogni passaggio.
 
-Peek resta sul tracking di HYWL: se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco separato. Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: «Passaggi importanti» comprende `Dispatching` e `Delivered`, non la dogana d'esportazione né lo smistamento di HYWL. Peek non può contattare HYWL o il venditore al posto tuo.
+Peek resta sul tracking di HYWL: se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco separato. Peek controlla ogni 10 minuti. Con `Dispatching` o `出门投递` il pacco passa a «In consegna» e Peek controlla ogni 2 minuti, ma solo finché risponde il tracking di HYWL, nel giorno di quel passaggio e dalle 6 del mattino, ora locale; quando rispondono i servizi di tracciamento, ogni 15 minuti, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Anche in consegna passa a una volta all'ora o meno se nessuna notifica può raggiungerti e non apri Peek da un'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: «Passaggi importanti» comprende `Dispatching` e `Delivered`, non la dogana d'esportazione né lo smistamento di HYWL. Peek non può contattare HYWL o il venditore al posto tuo.
 
 ## Domande sul tracking HYWL
 
@@ -124,5 +126,6 @@ Al venditore da cui hai comprato: è lui che ha prenotato la spedizione con HYWL
 :::sources
 - [Huiyi Logistics: 深圳市汇一物流有限公司 (home page)](https://www.szhywl.it.com/) – nome dell'azienda, Shenzhen, 2013, clienti e servizi, consegna all'estero, i due pulsanti del tracking, indirizzo a Yantian, telefono ed e-mail 待补充
 - [Huiyi Logistics: 物流轨迹查询 (tracking)](https://www.szhywl.it.com/track.html) – tracking pubblico, ordini e passaggi gestiti nel gestionale interno, i suoi messaggi, orari mostrati come registrati, link che apre un pacco
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nomi, forme dei numeri e loro corrispondenza debole, link, codici, descrizioni e loro fasi, luoghi e CAP, ora di Pechino, passaggi con data futura tenuti da parte, nessun corriere che consegna, cosa Peek mostra e lascia fuori
+- [Commissione europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € per voce fino a 150 € dal 1° luglio 2026, tassa di gestione di 2 € dal 1° novembre 2026
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nomi, forme dei numeri e loro corrispondenza debole, link, codici, descrizioni e loro fasi, luoghi e CAP, ora di Pechino, parte inglese dei passaggi in due lingue, passaggi con data futura tenuti da parte, nessun corriere che consegna, cosa Peek mostra e lascia fuori
 :::

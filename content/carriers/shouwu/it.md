@@ -3,10 +3,10 @@ title: Shouwu tracking: numero SWECN…YQ, stati e chi consegna
 description: Tracking Shouwu International (守务国际) per i pacchi dalla Cina: com'è fatto il numero SWECN…YQ, cosa vogliono dire gli stati e chi consegna in Italia.
 slug: shouwu-tracking
 published: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-06
 ---
 
-Shouwu International (守务国际, anche SWE) è un'azienda di logistica di Shanghai che spedisce in Europa e negli Stati Uniti i pacchi dei venditori online cinesi: a destinazione li consegna una posta o un corriere locale. Se un negozio ha spedito il tuo ordine con Shouwu, il numero inizia con SWECN e finisce con YQ: incollalo nel box qui sopra o nel tracking di Shouwu, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Il numero te lo dà il negozio, nei dettagli di spedizione dell'ordine.
+Shouwu International (守务国际, anche SWE) è un'azienda di logistica di Shanghai che spedisce in Europa e negli Stati Uniti i pacchi dei venditori online cinesi: a destinazione li consegna una posta o un corriere locale. In Italia, secondo Shouwu, l'ultimo tratto lo fanno UniUni o Poste Italiane, e il tempo di riferimento è di 10-12 giorni lavorativi; nelle cronologie lette da Peek compare anche iMile. Il venditore sceglie quale numero darti: quello di Shouwu, che inizia con SWECN e finisce con YQ, o quello del corriere. Incolla l'uno o l'altro nel box qui sopra, o il numero Shouwu nel suo tracking, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Il numero te lo dà il negozio, nei dettagli di spedizione dell'ordine.
 
 ## Numero di tracking Shouwu: com'è fatto
 
@@ -22,7 +22,7 @@ Anche altri spedizionieri cinesi chiudono i loro numeri con YQ, con davanti lett
 
 **Dove trovarlo.** Se non è nell'e-mail di spedizione del negozio o nella pagina dell'ordine, leggi [dove si trova il codice tracking](guide:find-tracking-number).
 
-**Potresti avere il numero del corriere.** Shouwu lascia scegliere al venditore quale numero darti: il suo, che segue il pacco dall'inizio alla fine, oppure quello del corriere che consegna nel tuo Paese. Lo dice per le linee verso il Regno Unito e gli Stati Uniti: lì un pacco Shouwu può arrivare con un numero Royal Mail, Yodel, Evri o USPS. Se il tuo numero non è un SWECN…YQ, incollalo lo stesso: Peek segue più di 3.500 corrieri.
+**Potresti avere il numero del corriere.** Secondo le pagine delle sue linee, il numero Shouwu segue il pacco dall'inizio alla fine, e quello del corriere la consegna finale: in Italia di UniUni o Poste Italiane, nel Regno Unito di Royal Mail, Yodel o Evri, negli Stati Uniti di USPS. Se il tuo numero non è un SWECN…YQ, incollalo lo stesso: Peek segue più di 3.500 corrieri.
 
 **Un link al tracking.** Il pulsante «Copy Link» del tracking di Shouwu copia un link con `?q=` e il numero. Il link apre quel pacco, e puoi incollarlo in Peek così com'è. Il tracking di Shouwu accetta fino a 40 numeri alla volta, uno per riga.
 
@@ -46,16 +46,30 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 | `Carrier received the shipment` | Shouwu la scrive due ore dopo i dati dell'ordine, giorni prima della prima scansione in magazzino: nessuno ha ancora il pacco. | «Etichetta creata» |
 | `Arrival processing center` | Il magazzino di Shouwu in Cina ha preso in carico il pacco. | «Preso in carico» |
 | `Package processing completed` | Il magazzino ha finito di lavorarlo, prima del volo. | «Preso in carico» |
+| `Export customs declaration completed`, `Export Released` | La Cina l'ha sdoganato in uscita: non è fermo in dogana. | «In transito» |
 | `Arrived at Shanghai Pudong Airport`, `Departed from export airport` | All'aeroporto di Shanghai, poi decollato dalla Cina. | «In transito» |
-| `Arrived at airport of Destination` | Atterrato nel Paese di arrivo. | «In transito» |
-| `Shipment started the customs clearance process at destination` | Sdoganamento in corso nel Paese di arrivo. | «In dogana» |
-| `Custom clearance completed`, `Shipment completed the customs clearance process at destination` | La dogana di arrivo l'ha lasciato passare. | «In transito» |
-| `Delivery to local courier` | Passato al corriere che consegna nel tuo Paese, non a te. | «In transito» |
+| `Arrived at airport of Destination`, `Shipment arrived in the destination country` | Atterrato nel Paese di arrivo. | «In transito» |
+| `NOA received` | L'agente sul posto ha ricevuto l'avviso di arrivo della compagnia aerea; poi viene la dogana. | «In transito» |
+| `Shipment started the customs clearance process at destination`, `Customs clearance in progress` | Sdoganamento in corso nel Paese di arrivo. | «In dogana» |
+| `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed` | La dogana di arrivo l'ha lasciato passare. | «In transito» |
+| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider` | Passato al corriere che consegna nel tuo Paese, non a te («deliverey» è scritto così da Shouwu). | «In transito» |
 | `Your consignment has been picked up` | Il corriere l'ha ritirato dal magazzino di Shouwu all'estero, dopo la dogana: non è un ritiro dal venditore, né da parte tua. | «In transito» |
 | `First parcel scan along Poste Italiane’s logistic network` | Poste Italiane ha ricevuto il pacco: è la sua prima scansione. | «In transito» |
 | `In transit along Poste Italiane’s logistic network` | In viaggio nella rete di Poste Italiane. | «In transito» |
 | `Out for delivery` | Il giro di consegna del corriere locale. | «In consegna» |
+| `The shipment could not be delivered. Please find more information here.` | Il corriere non è riuscito a consegnare; segue un altro giro. Il link annunciato non viene riportato. | «Tentativo di consegna» |
 | `Delivered by post man`, `This parcel has been delivered` | La posta o il corriere locale l'ha consegnato. | «Consegnato», quando anche lo stato di Shouwu è `Delivered` |
+
+Quando in Italia consegna iMile, la cronologia riprende le sue righe, con il centro tra 【】 (al posto di Milan center o ROM 10 può comparirne un altro):
+
+| Shouwu scrive | Cosa vuol dire per te | Peek mostra |
+| --- | --- | --- |
+| `【Milan center】Received.` | Il centro di iMile ha ricevuto il pacco. | «In transito» |
+| `【Milan center】Parcel shipped to【ROM 10】.`, `【ROM 10】Arrived.` | Inviato alla sede di consegna di iMile, poi arrivato lì. | «In transito» |
+| `【ROM 10】Shipment out for delivery.` | Il giro di consegna di iMile. | «In consegna» |
+| `<User not at home>`, `【ROM 10】 Back To DS.` | Il corriere non ti ha trovato e il pacco è tornato alla sede di consegna. | «Tentativo di consegna» |
+| `【ROM 10】Parcel shipped to【Milan Transit Center】.` | Dopo due giri a vuoto, la sede lo rimanda al centro di iMile. | «In transito» |
+| `【Milan Transit Center】Order Closed.` | iMile chiude la consegna senza averla fatta; chiedi al venditore. | «Problema segnalato» |
 
 **Righe in cinese.** Alcuni pacchi hanno anche righe che Shouwu scrive in cinese, e Peek le mostra così come sono. `货物电子信息已经收到` (i dati elettronici della merce sono arrivati) accompagna i dati dell'ordine: «Etichetta creata». Poi, tutte «In transito»: `申报过港中` dopo il codice di un lotto (il lotto è dichiarato per la strada verso Hong Kong), `已到港，安排航班中` (arrivato al punto di partenza, in attesa di un volo), `预计23号的航班` (il volo prenotato, qui il 23; con `二程` davanti, per la seconda tratta), `航班已飞` (il volo è partito), `二程航班已飞` (è partito il volo della seconda tratta) e `已落地` (atterrato). `已落地，清关提货中` (atterrato, in sdoganamento e ritiro dalla compagnia aerea) compare come «In dogana», mentre `清关完成` (sdoganato) e `已交仓扫描` (scansionato al magazzino del corriere che consegna) tornano «In transito».
 
@@ -65,12 +79,12 @@ Shouwu avverte che i suoi stati sono «auto-judged by the system», cioè assegn
 
 Shouwu dice di lavorare direttamente con USPS, Royal Mail, La Poste, DHL, DPD e Hermes. Nelle sue pagine sulle linee, in cinese:
 
-- **Italia.** Tra le linee che Shouwu gestisce in proprio (自营专线) c'è una linea economica per l'Italia (意大利经济). Per alcuni pacchi la cronologia di Shouwu mostra [Poste Italiane](carrier:poste-italiane) nell'ultimo tratto, con le due righe della tabella qui sopra.
+- **Italia.** Tra le linee che Shouwu gestisce in proprio (自营专线) c'è una linea economica per l'Italia (意大利经济), con tempi di riferimento da 10 a 12 giorni lavorativi. Per l'ultimo tratto la sua pagina indica UniUni e Poste Italiane (意邮). Nelle cronologie lette da Peek compaiono [Poste Italiane](carrier:poste-italiane), con le due righe della tabella qui sopra, e [iMile](carrier:imile), con le sue righe tra 【】: tentativi, giacenza e contatti di iMile in Italia sono sulla sua pagina.
 - **Regno Unito e Stati Uniti.** Le pagine delle linee per il Regno Unito nominano Royal Mail, Yodel ed Evri (scritto ERVI), quelle per gli Stati Uniti soprattutto USPS.
 
 Il tracking di Shouwu non indica né il nome né il numero del corriere, oltre a quello che può dire la descrizione di una scansione. Se nella cronologia non vedi un corriere, chiedi al venditore chi consegna e con che numero.
 
-**Consegna mancata.** Tentativi, avvisi e punti di ritiro seguono le regole del corriere. Con `Undelivered` il tracking di Shouwu ti dice di contattare il corriere per una nuova consegna o di ritirare subito il pacco, prima della scadenza del corriere, altrimenti «might be returned to the sender»: potrebbe tornare al mittente. Le condizioni di Shouwu per le linee verso Regno Unito e Stati Uniti, in cinese, dicono invece che un pacco non consegnato non torna in Cina e di norma viene distrutto. In ogni caso, se trovi un avviso, muoviti subito. Vedi [mancata consegna](guide:missed-delivery) e [pacco non ritirato](guide:uncollected-parcel).
+**Consegna mancata.** Tentativi, avvisi e punti di ritiro seguono le regole del corriere. Con `Undelivered` il tracking di Shouwu ti dice di contattare il corriere per una nuova consegna o di ritirare subito il pacco, prima della scadenza del corriere, altrimenti «might be returned to the sender»: potrebbe tornare al mittente. Le condizioni di Shouwu per le linee verso Regno Unito e Stati Uniti, in cinese, dicono invece che un pacco non consegnato non torna in Cina e di norma viene distrutto; la pagina della linea per l'Italia non ne parla, se non per i pacchi fuori misura. In ogni caso, se trovi un avviso, muoviti subito. Vedi [mancata consegna](guide:missed-delivery) e [pacco non ritirato](guide:uncollected-parcel).
 
 ## Pacco Shouwu fermo o che non arriva
 
@@ -78,11 +92,11 @@ Il tracking di Shouwu non indica né il nome né il numero del corriere, oltre a
 
 **Fermo su `Preparing`, `Shipment information received` o `Carrier received the shipment`.** Shouwu non ha ancora il pacco, oppure non l'ha ancora fatto partire dal magazzino. Chiedi al venditore quando l'ha affidato a Shouwu.
 
-**Fermo in dogana.** Dopo `Shipment started the customs clearance process at destination` o `已落地，清关提货中` il pacco aspetta la dogana di arrivo. Se ti chiedono di pagare qualcosa, leggi [pacco fermo in dogana](guide:customs).
+**Fermo in dogana.** Dopo `Shipment started the customs clearance process at destination`, `Customs clearance in progress` o `已落地，清关提货中` il pacco aspetta la dogana di arrivo. Dal 1° novembre 2026, su un acquisto online dalla Cina l'UE applica, oltre al dazio di 3 € per voce (fino a 150 €), la tassa di gestione di 2 € per voce, a qualunque valore, che la dogana riscuote insieme al dazio. Le pagine delle linee di Shouwu non dicono chi la paga. Se ti chiedono di pagare qualcosa, leggi [pacco fermo in dogana](guide:customs).
 
 **Niente dopo `Delivery to local courier`.** Il pacco ce l'ha il corriere, ma il tracking di Shouwu non dà il suo numero. Chiedi al venditore il numero del corriere e incollalo in Peek. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-**Consegnato, ma non è arrivato niente.** Le condizioni delle linee per Regno Unito e Stati Uniti dicono che, se il sito del corriere mostra una consegna che non hai ricevuto, Shouwu aiuta a cercare il pacco ma non risarcisce nulla. Quindi chiedi prima al corriere, poi al venditore. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
+**Consegnato, ma non è arrivato niente.** Le condizioni delle linee di Shouwu, compresa quella per l'Italia, dicono che, se il sito del corriere mostra una consegna che non hai ricevuto, Shouwu aiuta a cercare il pacco ma non risarcisce nulla. Quindi chiedi prima al corriere, poi al venditore. Vedi [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
 **Perso o danneggiato.** Il cliente di Shouwu è il venditore, e secondo le stesse condizioni deve fare reclamo entro 30 giorni da quando Shouwu ha spedito il pacco. Se dopo l'ingresso nel magazzino di Shouwu il pacco non ha nessuna scansione di consegna, Shouwu rimborsa il valore dichiarato più il costo di spedizione, al massimo 200 yuan a spedizione; per i danni durante il trasporto non paga niente. Quindi chiedi subito al negozio o al marketplace un rimborso o un nuovo invio. Vedi [pacco smarrito](guide:lost-parcel).
 
@@ -98,7 +112,7 @@ Per l'ordine chiedi al venditore: ha prenotato lui la spedizione con Shouwu ed �
 
 Peek ricava la fase del pacco dallo stato di Shouwu, come nelle tabelle qui sopra, e mostra il Paese di destinazione e ogni scansione con il suo luogo, che la pagina di Shouwu non riporta. Un luogo che contiene una cifra, come un CAP, viene scartato. Shouwu non dà una data di consegna prevista, quindi Peek non la mostra.
 
-Shouwu non indica a parte chi consegna, quindi Peek non mostra la riga «Consegna con» e non segue il pacco sul tracking del corriere, nemmeno quando una riga nomina Poste Italiane. Se hai il numero del corriere, aggiungilo a Peek come pacco a sé.
+Shouwu non indica a parte chi consegna, quindi Peek non mostra la riga «Consegna con» e non segue il pacco sul tracking del corriere, nemmeno quando una riga nomina Poste Italiane o riprende quelle di iMile. Se hai il numero del corriere, aggiungilo a Peek come pacco a sé.
 
 Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» (consegna, ritiro, dogana, tentativi non riusciti e resi) e «Solo la consegna». Peek non può contattare Shouwu o il venditore al posto tuo.
 
@@ -114,11 +128,11 @@ Nel box qui sopra, oppure sul tracking in inglese di Shouwu, admin.shshouwu.com.
 
 ### Chi consegna i pacchi Shouwu in Italia?
 
-Una posta o un corriere locale. Per alcuni pacchi la cronologia di Shouwu mostra Poste Italiane, con righe come `In transit along Poste Italiane’s logistic network`. Il tracking di Shouwu però non dà il numero del corriere: se non vedi chi consegna, chiedilo al venditore.
+Sulla sua linea per l'Italia Shouwu indica UniUni e Poste Italiane, e nelle cronologie compare anche iMile, con righe come `【Milan center】Received.`. Il tracking di Shouwu però non dà il numero del corriere: se non vedi chi consegna, chiedilo al venditore.
 
 ### Quanto ci mette un pacco Shouwu?
 
-Dipende dalla linea scelta dal venditore. I tempi di riferimento di Shouwu, in giorni lavorativi, sono da 5 a 8 per il Regno Unito con la linea standard e da 10 a 12 con l'economica, da 6 a 8 e da 8 a 12 per gli Stati Uniti. Per un ordine in Italia chiedi la stima al negozio.
+Dipende dalla linea scelta dal venditore. I tempi di riferimento di Shouwu, in giorni lavorativi, sono da 10 a 12 per l'Italia, da 5 a 8 per il Regno Unito con la linea standard e da 10 a 12 con l'economica, da 6 a 8 e da 8 a 12 per gli Stati Uniti.
 
 ### A chi mi rivolgo se il pacco Shouwu non arriva?
 
@@ -129,9 +143,11 @@ Al venditore da cui hai comprato: ha prenotato lui la spedizione con Shouwu e pu
 - [Shouwu International: 首页 (home page)](http://www.sedel.com/) – contatti, chat QQ, nome dell'azienda
 - [Shouwu International: 关于我们 (chi siamo)](http://www.sedel.com/about-us.html) – 2018 e 2019, partner diretti
 - [Shouwu International: 主营线路 (linee principali)](http://www.sedel.com/main-route.html) – linee per Paese, linea economica per l'Italia
+- [Shouwu International: 意大利经济 (Italia, economica)](http://www.sedel.com/main-route-secondary.html?groupId=4&groupItemId=27) – tutta l'Italia, UniUni e Poste Italiane, scelta del numero, da 10 a 12 giorni lavorativi, pacchi fuori misura, reclami
 - [Shouwu International: 英国标快 (Regno Unito, standard)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=2) – Royal Mail, Yodel, ERVI, scelta del numero, da 5 a 8 giorni lavorativi, niente ritorno in Cina, reclami
 - [Shouwu International: 英国经济 (Regno Unito, economica)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=3) – da 10 a 12 giorni lavorativi
 - [Shouwu International: 美国标快 (Stati Uniti, standard)](http://www.sedel.com/main-route-secondary.html?groupId=1&groupItemId=1) – soprattutto USPS, da 6 a 8 giorni lavorativi, niente ritorno in Cina, reclami
 - [Shouwu International: 美国经济 (Stati Uniti, economica)](http://www.sedel.com/main-route-secondary.html?groupId=2&groupItemId=21) – da 8 a 12 giorni lavorativi
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi, righe di Poste Italiane, orari, luoghi, cosa mostra Peek
+- [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio di 3 € dal 1° luglio 2026, tassa di gestione di 2 € dal 1° novembre 2026
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forma del numero, tracking e link, stati, descrizioni delle scansioni e loro fasi, righe di Poste Italiane e di iMile, orari, luoghi, cosa mostra Peek
 :::

@@ -3,7 +3,7 @@ title: Yanwen tracking number: UL…YP format and who delivers
 description: Two letters (often UL or UK), 9 digits, then YP: that's a Yanwen tracking number. Track it here, see what each status means and who delivers it in your country.
 slug: yanwen-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Yanwen is a Chinese logistics company, founded in Beijing in 1998, that ships parcels abroad for online sellers and hands them to a local carrier for the last mile. Track the number on Yanwen's own site, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), or in the box above. The number comes from the shop or marketplace you bought from, in the shipping details of your order.
@@ -54,7 +54,7 @@ Above the scans, Yanwen files each parcel under a category. `Info_Received` is t
 
 Yanwen doesn't deliver in Europe itself: it says it works "with local carriers to fulfill the last mile package delivery". When it names that carrier, the result page shows a notes box with "Distributor", "Distributor Website" and "Contact Number". For some parcels the box is empty.
 
-Who delivers depends on the country and the shop's choice of service. Yanwen's product list names UK lines via [Royal Mail](carrier:royal-mail), Yodel, Hermes and [Evri](carrier:evri), for example. In the US, parcels tracked on Yanwen's site have been delivered by [USPS](carrier:usps), [UniUni](carrier:uniuni) or YanwenExpress, a US last-mile company whose site doesn't say whether it is linked to Yanwen (see [YWE](carrier:ywe)), and in Canada by Emile or UniUni.
+Who delivers depends on the country and the shop's choice of service. Yanwen's product list names UK lines via [Royal Mail](carrier:royal-mail), Yodel, Hermes and [Evri](carrier:evri), for example. In the US, parcels tracked on Yanwen's site have been delivered by [USPS](carrier:usps), [UniUni](carrier:uniuni) or YanwenExpress, a US last-mile company whose site doesn't say whether it is linked to Yanwen (see [YWE](carrier:ywe)), and in Canada by Emile or UniUni. In Australia, Yanwen hands its parcels in batches to [J&T Express Australia](carrier:j-and-t-au) at the port of arrival; J&T's scans then show in Yanwen's history, some with J&T's customer service number, which Peek leaves out, and Peek shows J&T's pickup as "In transit".
 
 Attempts, notice cards, rescheduling and how long a parcel waits are the local carrier's rules: Yanwen publishes none. `Available_For_Pick_Up` means the parcel is waiting at a pickup point; `Undelivered` means delivery failed. Use the "Last Mile Tracking" number and the contact in the notes box to ask that carrier about a new delivery.
 
@@ -119,5 +119,5 @@ Yanwen publishes no delivery times for recipients, so go by the estimate the sho
 - [Yanwen: 关于官方快件查询入口及服务的通告 (official tracking channels)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numbers, one-year limit, phone lookup, chat, portal, WeChat
 - [YanwenExpress: home page](https://www.yanwenexpress.com/) – last-mile delivery in the US
 - [YanwenExpress: Customer support](https://www.yanwenexpress.com/contactus.html) – email, no phone
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek shows, J&T Express Australia's scans after the batch hand-over
 :::

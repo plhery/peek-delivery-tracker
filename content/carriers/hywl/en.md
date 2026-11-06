@@ -3,7 +3,7 @@ title: HYWL tracking: Huiyi Logistics TRK numbers and scans
 description: Track an HYWL (Huiyi Logistics, 汇一物流) parcel from China: what its TRK numbers look like, what its English and Chinese scans mean and who to ask.
 slug: hywl-tracking
 published: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-06
 ---
 
 Huiyi Logistics (HYWL, 汇一物流) is 深圳市汇一物流有限公司, a logistics company in Shenzhen, China, that ships parcels abroad for online sellers. If a shop sent your order with HYWL, your number is TRK and twelve more characters, or four letters, two digits, D, four digits and four letters: paste it in the box above. HYWL's own tracker is on its website, in Chinese, and its steps come in English, Chinese or both. HYWL doesn't name the company that delivers in your country.
@@ -57,6 +57,8 @@ The wordings say more. In the order a parcel gets them:
 
 **Places.** HYWL's steps in your country name your town and postcode, and its first step a town and an office code. Peek keeps the town only, and cuts any name after "signed by" or 签收人.
 
+**Steps in two languages.** When HYWL writes a step in English and then in Chinese with the same place (`Dispatching`, then `出门投递`, for example), Peek keeps only the English half, with the place in square brackets.
+
 **Times.** HYWL's tracker prints each time with no time zone. Steps whose place is in Chinese, or in Shenzhen, Guangzhou, Dongguan, Huizhou or Hong Kong, are on Beijing time: in winter, 20:00 there is noon in London and 7am in New York.
 
 **Steps dated ahead.** HYWL's tracking page says its staff create the orders and maintain their tracking in an internal back office. Its record can hold steps dated later than the moment you look, and HYWL's tracker shows them all the same, under a status that can be ahead too. Peek holds back each such step from HYWL's tracker until its time has passed: a step in China by Beijing time, any other by its time read as UTC. Peek goes by the steps it keeps, not by HYWL's status. A step dated ahead hasn't happened yet, even `Delivered`.
@@ -75,7 +77,7 @@ HYWL's own steps run up to the delivery: `Dispatching`, then `Delivered`. Peek f
 
 **HYWL's tracker shows more than Peek.** Peek holds back the steps on HYWL's tracker dated after the moment it checks, so HYWL's page can show steps Peek doesn't. Check their times: a step dated ahead hasn't happened yet. Go by the delivery estimate the shop gave you, and ask the seller once it has passed. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**Nothing after `Arrival at`.** The parcel has reached your country. If you're asked to pay import charges, see [parcels held at customs](guide:customs). If it sits for days, ask the seller which company delivers it and under which number.
+**Nothing after `Arrival at`.** The parcel has reached your country. In Ireland and the rest of the EU, an online order from outside the EU pays €3 customs duty per kind of product when it's worth €150 or less (since 1 July 2026) and, since 1 November 2026, a €2 EU handling fee per kind of product whatever its value, which customs collects with the duty. HYWL doesn't say who pays them. If you're asked to pay import charges, see [parcels held at customs](guide:customs). If it sits for days, ask the seller which company delivers it and under which number.
 
 **`Delivered`, but nothing came.** First check the step's time: if it's still ahead, the step hasn't happened. If it has passed, tell the seller and ask which company delivered. See [delivered but not received](guide:delivered-not-received).
 
@@ -93,11 +95,11 @@ The seller booked the parcel with HYWL and is the one to ask about your order, a
 
 If you add a TRK number without picking a carrier and HYWL doesn't list it yet, Peek shows "Probably Huiyi Logistics" and "Waiting for Huiyi Logistics’s first scan", and keeps asking. After a week, it asks you to check the number or choose another carrier.
 
-Peek shows the status, each step with its place, and the destination country when HYWL's record gives it. It reads steps in China on Beijing time, works out the others' clock from their place or from the leg the parcel was on, and shows every time in your device's time zone, newest first. It leaves out postcodes and the origin country. HYWL gives no expected delivery date, weight, service, delivering company or its number, sender or recipient name, or proof of delivery, so Peek shows none of them.
+Peek shows the status, each step with its place, and the destination country when HYWL's record gives it. It reads steps in China on Beijing time, works out the others' clock from their place or from the leg the parcel was on, and shows every time in your device's time zone, newest first. It leaves out postcodes and the origin country. HYWL gives no expected delivery date, weight, delivering company or its number, sender or recipient name, or proof of delivery, so Peek shows none of them.
 
-When HYWL's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words. Peek doesn't hold back steps dated ahead in their copies, so check each step's time.
+When HYWL's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words. Their copies can show steps dated ahead, but a step dated more than an hour after Peek's check never becomes the parcel's status. So check each step's time.
 
-Peek stays with HYWL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes, and every 2 minutes once the parcel is out for delivery. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers `Dispatching` and `Delivered`, not HYWL's export customs or sorting. Peek can't contact HYWL or the seller for you.
+Peek stays with HYWL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes. With `Dispatching` or `出门投递`, the parcel shows "Out for delivery", and Peek checks every 2 minutes, but only while HYWL's own tracker answers, on that step's day and from 6am local time; while tracking services answer, it's every 15 minutes, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Even out for delivery, it checks hourly or less often when no notification can reach you and you haven't opened Peek for an hour. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers `Dispatching` and `Delivered`, not HYWL's export customs or sorting. Peek can't contact HYWL or the seller for you.
 
 ## Questions about HYWL tracking
 
@@ -124,5 +126,6 @@ The seller you ordered from: it booked the parcel with HYWL. HYWL's website list
 :::sources
 - [Huiyi Logistics: 深圳市汇一物流有限公司 (home page)](https://www.szhywl.it.com/) – company name, Shenzhen, 2013, customers and services, delivery abroad, the tracker's two buttons, address in Yantian, phone and email "to be added"
 - [Huiyi Logistics: 物流轨迹查询 (tracking)](https://www.szhywl.it.com/track.html) – public tracker, orders and tracking maintained in the back office, its messages, times printed as stored, the link that opens one parcel
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, number layouts and their weak match, links, codes, wordings and their stages, places and postcodes, Beijing clock, steps dated ahead held back, no delivering company, what Peek shows and leaves out
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 handling fee since 1 November 2026
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, number layouts and their weak match, links, codes, wordings and their stages, English half of two-language steps, places and postcodes, Beijing clock, steps dated ahead held back, no delivering company, what Peek shows and leaves out
 :::

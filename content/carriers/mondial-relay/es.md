@@ -3,7 +3,7 @@ title: Mondial Relay seguimiento: estados, Punto Pack e InPost
 description: Sigue tu paquete de Mondial Relay en España: dónde está el número, qué significan sus estados en francés, cuánto espera en un Punto Pack y a quién llamar.
 slug: mondial-relay-seguimiento
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Mondial Relay es una empresa francesa de paquetería del grupo InPost que entrega en puntos de recogida, taquillas y a domicilio; en España, InPost adquirió Mondial Relay en 2021 y mondialrelay.es lleva ahora a inpost.es. Para seguir tu paquete en España, escribe el número en [la página de seguimiento de InPost](https://www.inpost.es/seguimiento-del-envio/) o pégalo en la casilla de arriba.
@@ -19,6 +19,7 @@ En su web belga, Mondial Relay lo llama «numéro d'expédition» (número de en
 | `12345678` | El número de envío. Colisweb y Heppner usan la misma longitud. |
 | `0012345678` | 10 cifras: un código de marca y el número de envío. Misma longitud que [Tipsa](carrier:tipsa), [DHL](carrier:dhl-express), [DHL eCommerce España](carrier:dhl-ecommerce-es), Relais Colis y otras. |
 | `001234567802` | 12 cifras: lo mismo más el número de bulto. Misma longitud que MRW, DPD Francia, Colis Privé, BRT y otras. |
+| `00123456780101` | 14 cifras: el principio del código de barras, con el código de marca, el número de envío, el número de bulto y el total de bultos. Misma longitud que DPD, Chronopost, [SEUR](carrier:seur) y otras. |
 | `00123456780101700000000000` | 26 cifras: el código de barras de la etiqueta, solo de Mondial Relay, con el número de envío en las cifras 3 a 10. |
 
 Si el correo de la tienda nombra otra empresa, el número seguramente es suyo: mira [¿de qué empresa es este número de seguimiento?](guide:tracking-number-formats).
@@ -41,7 +42,7 @@ Mondial Relay publica el seguimiento en francés (o en neerlandés, en su web be
 | `Retiré par le destinataire`, `Colis livré au destinataire` | Lo has recogido, o te lo han entregado en casa. |
 | `Retour à l'expéditeur` | Vuelve al remitente. |
 
-En una entrega en punto, espera a `Disponible dans votre Point Relais` antes de ir. `Échec de livraison` es un intento de entrega fallido, y `Votre colis a été livré à l'enseigne.` significa que una devolución ha llegado a la tienda.
+En una entrega en punto, espera a `Disponible dans votre Point Relais` antes de ir. `Échec de livraison` es un intento de entrega fallido, y `Votre colis a été livré à l'enseigne.` significa que una devolución ha llegado a la tienda. Por ahora, Peek muestra esa línea como «Entregado», aunque quien recibió el paquete fue la tienda, no tú.
 
 ## Mondial Relay en España: Punto Pack, Locker y recoger el paquete
 
@@ -78,7 +79,7 @@ Datos consultados el 10 de octubre de 2026:
 
 ## Seguir un paquete de Mondial Relay con Peek
 
-[Peek](/) reconoce enseguida el código de barras de 26 cifras, aunque lo escribas con espacios. Con 8, 10 o 12 cifras puede que no nombre a Mondial Relay por sí solo, porque otras empresas usan esas longitudes y no puede preguntar a Mondial Relay si conoce un número: pulsa «Cambiar» y elige Mondial Relay, o pega un enlace de seguimiento de mondialrelay.fr, .be, .nl o .com. Los enlaces de mondialrelay.es o inpost.es no se leen.
+[Peek](/) reconoce enseguida el código de barras de 26 cifras, aunque lo escribas con espacios. Con 8, 10, 12 o 14 cifras puede que no nombre a Mondial Relay por sí solo, porque otras empresas usan esas longitudes y no puede preguntar a Mondial Relay si conoce un número: pulsa «Cambiar» y elige Mondial Relay, o pega un enlace de seguimiento de mondialrelay.fr, .be, .nl o .com. Los enlaces de mondialrelay.es o inpost.es no se leen.
 
 Un número de 8 cifras pide además el «Código postal de entrega»: escribe el número solo y luego el código postal en su campo (el de un enlace no se usa). Admite códigos de cualquier país, pero solo se han probado los franceses y los portugueses, y uno portugués necesita sus siete cifras (1234-567, con o sin guion). Uno equivocado hace que el paquete no aparezca. Se envía a Mondial Relay y, si hace falta, a servicios de seguimiento. Con un número de 8 cifras de InPost España, Peek propone Mondial Relay, no InPost, y lo busca en Mondial Relay, no en inpost.es: no se ha comprobado que así encuentre esos envíos, así que síguelos también en inpost.es. Los números FV (FV y 8 cifras) sí los lee en inpost.es, con sus textos en español: pégalo tal cual y verás «Mondial Relay tiene este paquete.»; si inpost.es pide el código postal, Peek no puede leerlo.
 
@@ -113,5 +114,5 @@ Es el 900 900 137 de InPost, de lunes a viernes de 8:30 a 20:00 y los sábados d
 - [Mondial Relay Belgique: Suivre l'acheminement](https://www.mondialrelay.be/fr-be/faq/recevoir-un-colis/comment-suivre-l-acheminement-de-mon-colis/) – numéro d'expédition de 8 cifras
 - [Mondial Relay Belgique: Mentions légales](https://www.mondialrelay.be/fr-be/mentions-legales/) – Mondial Relay S.A.S.U., RCS Lille Métropole, sede en Villeneuve-d'Ascq
 - [Mondial Relay Belgique: Qui sommes-nous](https://www.mondialrelay.be/fr-be/qui-sommes-nous/) – Points Relais, Lockers, domicilio
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que muestra Peek, estados, código de barras de 26 cifras
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que muestra Peek, estados, código de barras de 26 cifras y números de 14
 :::

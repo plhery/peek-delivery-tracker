@@ -3,7 +3,7 @@ title: Yanwen śledzenie przesyłki: statusy, kurier, kontakt
 description: Paczka Yanwen z Chin: jak wygląda numer, co znaczą angielskie statusy, kto doręcza w Polsce i do kogo się zwrócić, gdy paczka utknie.
 slug: yanwen-sledzenie
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Yanwen to chińska firma logistyczna założona w 1998 roku w Pekinie, która wysyła paczki za granicę dla sprzedawców internetowych, a ostatni odcinek oddaje lokalnemu przewoźnikowi. Paczkę śledzisz na stronie Yanwen, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), albo wklejasz numer w pole powyżej. Numer dostajesz od sklepu lub platformy, na której kupowałeś: szukaj go w danych wysyłki przy zamówieniu.
@@ -55,7 +55,7 @@ Nad skanami Yanwen przypisuje paczkę do kategorii. `Info_Received` to etap etyk
 
 Yanwen sam nie doręcza w Europie: pisze, że współpracuje „with local carriers to fulfill the last mile package delivery”. Gdy podaje tego przewoźnika, na stronie wyników pojawia się ramka z polami „Distributor”, „Distributor Website” i „Contact Number”. Przy części paczek ramka jest pusta.
 
-Kto doręcza, zależy od kraju i od linii, którą wybrał sprzedawca. Przy paczkach do Polski była to na przykład firma DPD Polska, a w ramce stał adres dpd.com/pl. Wtedy dalsze linie są od DPD i paczkę możesz śledzić także numerem DPD z pola „Last Mile Tracking”.
+Kto doręcza, zależy od kraju i od linii, którą wybrał sprzedawca. Przy paczkach do Polski była to na przykład firma DPD Polska, a w ramce stał adres dpd.com/pl. Wtedy dalsze linie są od DPD i paczkę możesz śledzić także numerem DPD z pola „Last Mile Tracking”. Do Australii Yanwen przekazuje paczki zbiorczo firmie J&T Express Australia w porcie docelowym: jej skany pojawiają się potem w historii Yanwen, a Peek pokazuje odbiór przez J&T jako „W transporcie”.
 
 Liczby prób doręczenia, awizo, zmiany terminu ani czasu przechowania paczki Yanwen nie opisuje: to zasady lokalnego przewoźnika. Kategoria `Available_For_Pick_Up` znaczy, że paczka czeka w punkcie odbioru, a `Undelivered`, że doręczenie się nie udało. O nowy termin pytaj przewoźnika z ramki, podając jego numer.
 
@@ -117,5 +117,5 @@ Yanwen nie publikuje czasów doręczenia dla odbiorców, więc kieruj się termi
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – infolinia, e-mail
 - [Yanwen: 联系我们 (kontakt, po chińsku)](https://www.yw56.com.cn/webfile/联系我们/) – godziny infolinii
 - [Yanwen: 关于官方快件查询入口及服务的通告 (oficjalne kanały śledzenia)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 numerów, limit jednego roku, sprawdzanie przez infolinię, czat, portal, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, linie DPD Polska w historiach Yanwen
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje, linie DPD Polska i J&T Express Australia w historiach Yanwen
 :::

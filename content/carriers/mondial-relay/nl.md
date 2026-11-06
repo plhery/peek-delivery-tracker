@@ -3,7 +3,7 @@ title: Mondial Relay-pakket volgen: Afhaalpunt, status, klachten
 description: Volg uw Mondial Relay-pakket in Nederland of België: wat de statussen betekenen, hoelang het Afhaalpunt het bewaart, wie klaagt en hoe u Mondial Relay bereikt.
 slug: mondial-relay-pakket-volgen
 published: 2026-10-25
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Mondial Relay is een Franse pakketdienst die pakketten aflevert in Afhaalpunten (winkels in uw buurt), in Pakketautomaten en soms aan huis. U volgt uw pakket op [mondialrelay.nl](https://www.mondialrelay.nl/mijn-mondial-relay-pakket-volgen/) of, in België, op [mondialrelay.be](https://www.mondialrelay.be/nl-be/mijn-mondial-relay-pakje-opvolgen/) met het pakketnummer en de postcode van het afleveradres, of u plakt het nummer in het veld hierboven. Ligt uw pakket klaar, dan krijgt u een e-mail of sms van Mondial Relay.
@@ -19,9 +19,10 @@ Geen nummer? Vraag het aan de afzender: de webshop, de verkoper op Vinted of Mar
 | 8 cijfers | `12345678` | Het pakketnummer, altijd met de postcode erbij. |
 | 10 cijfers | `0012345678` | Een merkcode van 2 cijfers, dan het pakketnummer. |
 | 12 cijfers | `001234567802` | Hetzelfde, plus het volgnummer van het pakket. |
+| 14 cijfers | `00123456780101` | Het begin van de barcode: merkcode, pakketnummer, volgnummer en aantal pakketten. |
 | 26 cijfers | `00123456780101700000000000` | De barcode op het etiket, met het pakketnummer op plaats 3 tot 10. |
 
-Ook andere vervoerders gebruiken nummers van 8, 10 of 12 cijfers. Noemt de webshop een andere vervoerder, dan is het nummer waarschijnlijk van die vervoerder.
+Ook andere vervoerders gebruiken nummers van 8, 10, 12 of 14 cijfers. Noemt de webshop een andere vervoerder, dan is het nummer waarschijnlijk van die vervoerder.
 
 ## Wat de statussen betekenen
 
@@ -41,6 +42,8 @@ De trackingpagina van Mondial Relay is in het Nederlands, maar Peek leest de Fra
 | `Retiré par le destinataire`, `Colis livré au destinataire` | Afgehaald, of aan huis geleverd. |
 | `Échec de livraison` | De levering aan huis is mislukt. |
 | `Retour à l'expéditeur` | Het gaat terug naar de afzender. |
+
+`Votre colis a été livré à l'enseigne.` betekent dat een retourzending bij de winkel is aangekomen. Op dit moment toont Peek die regel als ‘Delivered’, al heeft de winkel het pakket gekregen en niet u.
 
 Op mondialrelay.nl ziet u soms "in behandeling": uw pakket ligt in het depot en wacht op een bezorger. Wacht dan een paar dagen.
 
@@ -94,9 +97,9 @@ Gecontroleerd op de Nederlandstalige pagina's van Mondial Relay op 25 oktober 20
 
 ## Uw Mondial Relay-pakket volgen met Peek
 
-[Peek](/) herkent de barcode van 26 cijfers meteen. Een nummer van 8, 10 of 12 cijfers past ook bij andere vervoerders, en Peek kan Mondial Relay niet vragen of het een nummer kent. Plak het toch: Peek volgt meer dan 3.500 vervoerders. Noemt Peek Mondial Relay niet zelf, kies het dan met ‘Change’. Trackinglinks van mondialrelay.nl, mondialrelay.be, mondialrelay.fr en mondialrelay.com leest Peek ook.
+[Peek](/) herkent de barcode van 26 cijfers meteen. Een nummer van 8, 10, 12 of 14 cijfers past ook bij andere vervoerders, en Peek kan Mondial Relay niet vragen of het een nummer kent. Plak het toch: Peek volgt meer dan 3.500 vervoerders. Noemt Peek Mondial Relay niet zelf, kies het dan met ‘Change’. Trackinglinks van mondialrelay.nl, mondialrelay.be, mondialrelay.fr en mondialrelay.com leest Peek ook.
 
-Voor een nummer van 8 cijfers vraagt Peek ook de ‘Delivery postcode’, de postcode van het afleveradres. Kent niemand het nummer, dan stelt Peek vanuit Nederland of België zelf Mondial Relay voor (‘Mondial Relay may have this parcel. Add the delivery postcode to track it.’). Voor 10 of 12 cijfers en voor de barcode is geen postcode nodig.
+Voor een nummer van 8 cijfers vraagt Peek ook de ‘Delivery postcode’, de postcode van het afleveradres. Kent niemand het nummer, dan stelt Peek vanuit Nederland of België zelf Mondial Relay voor (‘Mondial Relay may have this parcel. Add the delivery postcode to track it.’). Voor 10, 12 of 14 cijfers en voor de barcode is geen postcode nodig.
 
 Peek toont bij elke scan het genoemde sorteercentrum en, als Mondial Relay ze geeft, het land van bestemming en de verwachte leveringsdag. Ligt uw pakket klaar, dan ziet u de naam en het adres van het Afhaalpunt of de automaat, nooit uw afhaalcode. Uw naam en adres laat Peek weg. Peek kijkt elke 10 minuten, en vaker zodra de bezorger onderweg is; als u wilt, krijgt u een melding bij elke nieuwe status. Komt er twee dagen lang niets nieuws binnen (of 12 uur, zolang het pakket alleen nog is aangemeld of door de vervoerder is ontvangen), dan kijkt Peek nog maar één keer per uur. Peek kan geen contact opnemen met Mondial Relay of de webshop.
 
@@ -153,5 +156,5 @@ Ja, het is een echt bedrijf: MONDIAL RELAY S.A.S.U., met hoofdkantoor in Villene
 - [Douane: Extra kosten bij online bestellingen](https://www.douane.nl/onderwerpen/online-shoppen-en-pakketpost/shoppen-bij-een-buitenlandse-webwinkel/extra-kosten-bij-bestellen/) – € 3, € 2, btw
 - [Douane: Waar is mijn pakket?](https://www.douane.nl/onderwerpen/online-shoppen-en-pakketpost/waar-is-mijn-pakket/) – vervoerder
 - [FOD Financiën: Waar blijft uw pakje?](https://fin.belgium.be/nl/particulieren/internationaal/online-aankopen-buitenland/problemen-pakje/waar-blijft-uw-pakje) – koerierdienst
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – wat Peek leest
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – wat Peek leest, nummers van 14 cijfers, statussen en fasen
 :::

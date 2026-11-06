@@ -3,7 +3,7 @@ title: Yanwen Sendungsverfolgung: Nummern, Status und Kontakt
 description: Yanwen-Paket aus China verfolgen: wie die Nummer aussieht, was die englischen Status bedeuten, wer in DE, AT und CH zustellt und wen du fragst.
 slug: yanwen-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Yanwen ist ein chinesischer Logistiker, 1998 in Peking gegründet, der Pakete für Onlinehändler ins Ausland bringt und sie dort einem Paketdienst vor Ort übergibt. Verfolgen kannst du die Nummer auf Yanwens eigener Seite [track.yw56.com.cn](https://track.yw56.com.cn/en/index) oder oben im Feld. Die Nummer bekommst du vom Shop oder Marktplatz, bei dem du bestellt hast, in den Versanddetails deiner Bestellung.
@@ -55,7 +55,7 @@ Manche Pakete übergibt Yanwen nach `Yanwen facility - Outbound` an China Post. 
 
 Yanwen stellt in Europa nicht selbst zu: Es arbeitet nach eigenen Worten „with local carriers to fulfill the last mile package delivery“. Nennt Yanwen diesen Paketdienst, zeigt die Ergebnisseite einen Hinweiskasten mit „Distributor“, „Distributor Website“ und „Contact Number“. Bei manchen Paketen bleibt der Kasten leer.
 
-Welcher Paketdienst bei dir klingelt, hängt vom Land und von der Versandart des Shops ab. Für Deutschland, Österreich und die Schweiz nennt Yanwen keinen festen Partner. In seiner chinesischen Produktliste steht zum Beispiel eine Deutschland-Linie über [DHL](carrier:dhl), für Frankreich eine über Colissimo. Das sind Angebote für Händler; wer dein Paket bringt, zeigt erst das Tracking.
+Welcher Paketdienst bei dir klingelt, hängt vom Land und von der Versandart des Shops ab. Für Deutschland, Österreich und die Schweiz nennt Yanwen keinen festen Partner. In seiner chinesischen Produktliste steht zum Beispiel eine Deutschland-Linie über [DHL](carrier:dhl), für Frankreich eine über Colissimo. Das sind Angebote für Händler; wer dein Paket bringt, zeigt erst das Tracking. In Australien übergibt Yanwen seine Pakete gesammelt im Ankunftshafen an J&T Express Australia; dessen Scans erscheinen dann in Yanwens Verlauf, und die Übernahme durch J&T zeigt Peek als „Unterwegs“.
 
 Zustellversuche, Benachrichtigungskarten, neue Termine, Paketshops und wie lange ein Paket wartet, regelt der Paketdienst vor Ort: Yanwen veröffentlicht dazu nichts. `Available_For_Pick_Up` heißt, dass das Paket an einer Abholstelle auf dich wartet; `Undelivered` heißt, dass die Zustellung gescheitert ist. Mit der „Last Mile Tracking“-Nummer und dem Kontakt im Hinweiskasten fragst du den Paketdienst nach einer neuen Zustellung.
 
@@ -117,5 +117,5 @@ Nein. Yanwens Tracking-Seite gibt es nur auf Englisch und Chinesisch, und Yanwen
 - [Yanwen: Contact Us](https://www.yw56.com.cn/webfile/ContactUs/) – Hotline, E-Mail
 - [Yanwen: 联系我们 (Kontakt)](https://www.yw56.com.cn/webfile/联系我们/) – Servicezeiten, Produktlinien über DHL und Colissimo
 - [Yanwen: 关于官方快件查询入口及服务的通告 (offizielle Tracking-Wege)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 Nummern, Ein-Jahres-Grenze, Abfrage per Telefon, Chat, Portal, WeChat
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – was Peek liest und zeigt, Scans von J&T Express Australia nach der Übergabe
 :::

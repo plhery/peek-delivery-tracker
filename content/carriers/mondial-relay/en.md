@@ -3,7 +3,7 @@ title: Mondial Relay tracking: statuses in English and pickup
 description: Track a Mondial Relay parcel: where the 8-digit number is, what the French statuses mean in English, how long a Point Relais keeps it and who to contact.
 slug: mondial-relay-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Mondial Relay is a French parcel carrier in the InPost group that delivers to Points Relais (local shops acting as pickup points), lockers and homes. Track a parcel on [Mondial Relay's Belgian tracking page](https://www.mondialrelay.be/fr-be/suivi-de-colis/) with the 8-digit shipment number and the destination postcode, or paste the number in the box above. You get it by email or SMS once the parcel ships, and the sender has it too.
@@ -17,6 +17,7 @@ Mondial Relay calls it the "numéro d'expédition": 8 digits, in the tracking em
 | `12345678` | The shipment number. Also fits [Colisweb](carrier:colisweb) and Heppner. |
 | `0012345678` | 10 digits: a brand code, then the shipment number. Also fits [DHL](carrier:dhl-express), Relais Colis and others. |
 | `001234567802` | 12 digits: the same plus the parcel's sequence. Also fits [DPD France](carrier:dpd-fr), [Colis Privé](carrier:colis-prive), [BRT](carrier:brt) and others. |
+| `00123456780101` | 14 digits: the start of the barcode, with the brand code, the shipment number, the parcel's sequence and the parcel count. Also fits DPD, [Chronopost](carrier:chronopost) and others. |
 | `00123456780101700000000000` | 26 digits: the label's barcode, Mondial Relay's alone, with the shipment number in digits 3 to 10. |
 
 If the shop's email names another carrier, [the number may be theirs](guide:tracking-number-formats).
@@ -38,7 +39,7 @@ Mondial Relay's tracking is in French (or Dutch on its Belgian site), with no En
 | `Retiré par le destinataire`, `Colis livré au destinataire` | Picked up by you, or delivered to your home. |
 | `Retour à l'expéditeur` | Going back to the sender. |
 
-On a relay delivery, wait for `Disponible…` before you go. `Échec de livraison` means a home delivery failed, and `Votre colis a été livré à l'enseigne.` that a return reached the shop.
+On a relay delivery, wait for `Disponible…` before you go. `Échec de livraison` means a home delivery failed, and `Votre colis a été livré à l'enseigne.` that a return reached the shop. Peek currently shows that line as "Delivered", though the shop got the parcel, not you.
 
 ## Mondial Relay parcel shops, lockers and missed deliveries
 
@@ -70,7 +71,7 @@ As listed on 10 October 2026.
 
 ## Tracking a Mondial Relay parcel with Peek
 
-[Peek](/) recognises the 26-digit barcode at once. With 8, 10 or 12 digits it may not name Mondial Relay on its own, since other carriers share those lengths and Mondial Relay can't be asked whether it knows a number: press "Change" and pick Mondial Relay, or paste a tracking link from mondialrelay.fr, .be, .nl or .com (links from its Spanish and Portuguese sites aren't read).
+[Peek](/) recognises the 26-digit barcode at once. With 8, 10, 12 or 14 digits it may not name Mondial Relay on its own, since other carriers share those lengths and Mondial Relay can't be asked whether it knows a number: press "Change" and pick Mondial Relay, or paste a tracking link from mondialrelay.fr, .be, .nl or .com (links from its Spanish and Portuguese sites aren't read).
 
 An 8-digit number also needs the "Delivery postcode": type the number alone, then the postcode in its field. Peek compares it with the recipient's as typed, in any country's format, but a Portuguese one needs all seven digits (1234-567, hyphen optional). A wrong one reads as not found. It's sent to Mondial Relay and, when needed, to tracking services.
 
@@ -126,5 +127,5 @@ Yes: Mondial Relay SASU is a French company based in Villeneuve-d'Ascq. Fake mes
 - [InPost: Contacto](https://www.inpost.es/contacta-con-nosotros) – Spanish line, 5 days
 - [InPost: Fala connosco](https://www.inpost.pt/fala-connosco) – Portuguese line, 5 days
 - [InPost: Como recolher](https://www.inpost.pt/recebe-a-tua-encomenda/como-recolher) – 5 or 8 days
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, 14-digit numbers, labels and stages
 :::

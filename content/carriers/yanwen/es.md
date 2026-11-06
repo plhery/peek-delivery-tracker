@@ -3,7 +3,7 @@ title: Yanwen seguimiento: estados, quién entrega y contacto
 description: Sigue tu paquete de Yanwen desde China: cómo es el número, qué significa cada estado en inglés, quién lo reparte en España y a quién preguntar si se para.
 slug: yanwen-seguimiento
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Yanwen es una empresa de logística china, fundada en Pekín en 1998, que envía al extranjero los paquetes de vendedores online y se los entrega a un transportista local para el último tramo. Para seguir tu paquete, escribe el número en su web de seguimiento, [track.yw56.com.cn](https://track.yw56.com.cn/en/index), o pégalo en la casilla de arriba. El número te lo da la tienda o el marketplace donde compraste, en los datos de envío de tu pedido.
@@ -51,7 +51,7 @@ Encima de los escaneos, Yanwen clasifica cada paquete en una categoría. `Info_R
 
 ## Quién entrega Yanwen en España
 
-Yanwen no reparte en Europa por sí misma: dice que trabaja «with local carriers to fulfill the last mile package delivery», es decir, con transportistas locales para el último tramo. Sus páginas no nombran ninguna empresa de reparto en España; su lista de productos incluye una línea para las islas de España y Portugal, sin decir quién la reparte. Quién lleva tu paquete lo dice su página de resultados: cuando Yanwen lo nombra, aparece un cuadro de notas con «Distributor» (la empresa), «Distributor Website» (su web) y «Contact Number» (su teléfono). En algunos paquetes ese cuadro sale vacío, y entonces mira las líneas que siguen a `Batch delivery to carrier`.
+Yanwen no reparte en Europa por sí misma: dice que trabaja «with local carriers to fulfill the last mile package delivery», es decir, con transportistas locales para el último tramo. Sus páginas no nombran ninguna empresa de reparto en España; su lista de productos incluye una línea para las islas de España y Portugal, sin decir quién la reparte. Quién lleva tu paquete lo dice su página de resultados: cuando Yanwen lo nombra, aparece un cuadro de notas con «Distributor» (la empresa), «Distributor Website» (su web) y «Contact Number» (su teléfono). En algunos paquetes ese cuadro sale vacío, y entonces mira las líneas que siguen a `Batch delivery to carrier`. En Australia, Yanwen entrega sus paquetes por lotes a J&T Express Australia en el puerto de llegada: los escaneos de J&T aparecen después en el historial de Yanwen, y Peek muestra la recogida de J&T como «En tránsito».
 
 Los intentos de entrega, los avisos, el cambio de fecha y cuánto tiempo espera un paquete son normas del transportista local: Yanwen no publica ninguna. `Available_For_Pick_Up` indica que el paquete te espera en un punto de recogida y `Undelivered`, que la entrega ha fallado. Para pedir otra entrega, usa el número «Last Mile Tracking» y el contacto del cuadro de notas.
 
@@ -114,5 +114,5 @@ Yanwen no publica horarios de reparto, porque en España no reparte ella: lo hac
 - [Yanwen: 联系我们 (contacto)](https://www.yw56.com.cn/webfile/联系我们/) – horario del teléfono, línea a las islas de España y Portugal
 - [Yanwen: 关于官方快件查询入口及服务的通告 (canales oficiales de seguimiento)](https://www.yw56.com.cn/webfile/ANNOUNCEMENTS/2025/06-30/7345353199651393536.html) – 100 números, límite de un año, búsqueda por teléfono, chat, portal, WeChat
 - [YanwenExpress: página principal](https://www.yanwenexpress.com/) – reparto de última milla en Estados Unidos
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek, escaneos de J&T Express Australia tras la entrega por lotes
 :::

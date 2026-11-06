@@ -3,7 +3,9 @@ package com.plhery.peekdeliverytracker.ui
 import android.content.res.Configuration
 import android.os.SystemClock
 import android.provider.Settings
+import android.text.InputType
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
@@ -14,16 +16,20 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsFocused
+import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.graphics.Color
@@ -58,6 +64,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
+import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -72,6 +79,9 @@ import java.util.concurrent.ConcurrentLinkedQueue
  * email step, with the keyboard up on its field; the code step on the number keyboard; a code refused; a code taken,
  * which signs in to the tabs; the back to the first open, and the system's; at the largest text the sign-in takes and
  * dark. Each saved as signin/<test>.png in the test package's external files, beside firstopen/, which adb pulls.
+ * Then, saved as signin/<row>-<state>.png: a finger dragging the page down through the screen takes the keyboard down
+ * with it (C-G06, where the device shows one); the address and the code ask for Done, on the email and the number
+ * keyboards, and Done sends nothing (C-G11).
  * Under Reduce Motion, as the first open's device test is. Each test keeps Zurich's time and puts the zone back
  * after; the preferences files the fakes write go once its window has.
  */
@@ -421,6 +431,80 @@ class SignInDeviceTest {
         compose.waitUntil(5_000) { exists(FIRST_OPEN) }
         assertEquals(AuthenticationState.Welcome, session.state)
         assertFalse(compose.activity.isFinishing)
+    }
+
+    private val touches = ScreenTouches(compose)
+
+    /** What the focused field asks of the keyboard, as the window hands it to the keyboard. */
+    private fun editorInfo(): EditorInfo {
+        compose.waitForIdle()
+        val view = (compose.onNode(isFocused()).fetchSemanticsNode().root as ViewRootForTest).view
+        return EditorInfo().also { info -> compose.runOnUiThread { view.onCreateInputConnection(info) } }
+    }
+
+    /**
+     * C-G06: with the keyboard up on the address, a finger just above its field dragged down 0.8 of the keyboard's
+     * height takes the keyboard down with it, and it goes on down once the finger lifts. Skipped where the device shows
+     * no keyboard on the screen.
+     */
+    @Test
+    fun aDragDownTakesTheKeyboardDown() {
+        show()
+        tap(EMAIL_FIELD)
+        assertTypingIn(EMAIL_FIELD)
+        assumeTrue("A keyboard on the screen", keyboardShown())
+        val keyboard = windowKeyboard()
+        val from = touches.point(EMAIL_FIELD, y = 0f) - Offset(0f, 8 * compose.density.density)
+        touches.drag(from, Offset(0f, keyboard * 0.8f), steps = 30)
+        compose.waitUntil(KEYBOARD_MILLIS) { keyboardDown() }
+        awaitStill()
+        assertTrue(exists(EMAIL_FIELD))
+        shots.take("C-G06-sign-in-keyboard-down")
+    }
+
+    /**
+     * C-G11: the address asks the email keyboard for Done, and the code the number keyboard (its password variation)
+     * for Done; Done takes the keyboard down and sends nothing: no code asked for, no code checked.
+     */
+    @Test
+    fun theAddressAndTheCodeAskForDoneWhichSendsNothing() {
+        show()
+        tap(EMAIL_FIELD)
+        assertTypingIn(EMAIL_FIELD)
+        var info = editorInfo()
+        assertEquals(EditorInfo.IME_ACTION_DONE, info.imeOptions and EditorInfo.IME_MASK_ACTION)
+        assertEquals(InputType.TYPE_CLASS_TEXT, info.inputType and InputType.TYPE_MASK_CLASS)
+        assertEquals(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, info.inputType and InputType.TYPE_MASK_VARIATION)
+        val shown = keyboardShown()
+        compose.onNodeWithTag(EMAIL_FIELD).performTextInput(READER_EMAIL)
+        compose.onNodeWithTag(EMAIL_FIELD).performImeAction()
+        if (shown) compose.waitUntil(KEYBOARD_MILLIS) { keyboardDown() }
+        awaitStill()
+        assertTrue(service.requests.isEmpty())
+        assertFalse(exists(CODE_FIELD))
+        shots.take("C-G11-email-done")
+
+        tap(EMAIL_SEND)
+        compose.waitUntil(5_000) { exists(CODE_FIELD) }
+        compose.waitUntil(KEYBOARD_MILLIS) { keyboardDown() }
+        awaitStill()
+        tap(CODE_FIELD)
+        assertTypingIn(CODE_FIELD)
+        info = editorInfo()
+        assertEquals(EditorInfo.IME_ACTION_DONE, info.imeOptions and EditorInfo.IME_MASK_ACTION)
+        assertEquals(
+            InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD,
+            info.inputType and (InputType.TYPE_MASK_CLASS or InputType.TYPE_MASK_VARIATION),
+        )
+        val codeShown = keyboardShown()
+        compose.onNodeWithTag(CODE_FIELD).performTextInput(READER_CODE)
+        compose.onNodeWithTag(CODE_FIELD).performImeAction()
+        if (codeShown) compose.waitUntil(KEYBOARD_MILLIS) { keyboardDown() }
+        awaitStill()
+        assertEquals(AuthenticationState.SignedOut, session.state)
+        assertEquals(1, service.requests.size)
+        assertEquals(READER_CODE, typed(CODE_FIELD))
+        shots.take("C-G11-code-done")
     }
 
     private companion object {

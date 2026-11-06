@@ -1,18 +1,23 @@
 package com.plhery.peekdeliverytracker.ui
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetHost
 import android.appwidget.AppWidgetHostView
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
 import android.os.Process
 import android.util.SizeF
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.RemoteViews
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -32,9 +37,12 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.net.toUri
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.plhery.peekdeliverytracker.MainActivity
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
@@ -43,6 +51,7 @@ import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
+import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.widget.DeliveryWidgetUpdates
 import com.plhery.peekdeliverytracker.widget.IPHONE_MEDIUM
 import com.plhery.peekdeliverytracker.widget.IPHONE_SMALL
@@ -53,6 +62,8 @@ import com.plhery.peekdeliverytracker.widget.LAUNCHER_UPRIGHT_WIDE
 import com.plhery.peekdeliverytracker.widget.NextDeliveryWidget
 import com.plhery.peekdeliverytracker.widget.NextDeliveryWidgetReceiver
 import com.plhery.peekdeliverytracker.widget.WidgetCardArt
+import com.plhery.peekdeliverytracker.widget.WidgetText
+import com.plhery.peekdeliverytracker.widget.appIntent
 import com.plhery.peekdeliverytracker.widget.publishDemo
 import com.plhery.peekdeliverytracker.widget.widgetParcel
 import com.plhery.peekdeliverytracker.widget.widgetSource
@@ -63,6 +74,7 @@ import java.time.Instant
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
@@ -79,6 +91,12 @@ import org.junit.runner.RunWith
  * - the widget itself, bound to a host in the test's window where the device lets the test bind it (`appwidget
  *   grantbind`): it reads what the test published to the app's store, and its next button turns it, through Glance's
  *   action and the app's reload. What the app's store held is put back once it ends.
+ * - where each widget's taps lead (C-G13): the activities its RemoteViews, applied, start on a click, as the launcher
+ *   starts them, read from each view's pending intent and not started: one card its parcel, two cards each theirs
+ *   with the page between them the app, small words their first parcel, medium words each column its own, and words
+ *   with nothing on their way or switched off the app; the cards' carrier marks read as their carriers and the words'
+ *   pictures read as nothing (C-AX16); and the medium words' names at the largest text, a long one shrunk to 85 % of
+ *   the subheadline and a short one at it (C-AX13).
  * A test can't pin the widget to the launcher, whose dialog a person confirms: the launcher's own frame, its resizing
  * and its gallery aren't shown, nor a tap opening a parcel, which would open the app's window on its real stores.
  */
@@ -246,6 +264,143 @@ class WidgetDeviceTest {
             DeliveryWidgetUpdates.reload(context)
             shell("appwidget revokebind --package ${context.packageName} --user $user")
         }
+    }
+
+    /** `views` applied as a launcher applies them, in `applied`, in a frame of their own off the window. */
+    private fun applied(views: RemoteViews, applied: Context): View =
+        compose.runOnUiThread { views.apply(applied, FrameLayout(applied)) }
+
+    /** This view and every view in it. */
+    private fun View.all(): Sequence<View> = sequence {
+        yield(this@all)
+        if (this@all is ViewGroup) for (index in 0 until childCount) yieldAll(getChildAt(index).all())
+    }
+
+    /**
+     * The activities a click on the applied views would start, as the views' pending intents (the framework's
+     * `pending_intent_tag`), in the order the views stand: the next button's broadcast left out.
+     */
+    private fun activityTaps(root: View): List<PendingIntent> {
+        val tag = Resources.getSystem().getIdentifier("pending_intent_tag", "id", "android")
+        check(tag != 0) { "The framework has no pending_intent_tag" }
+        return compose.runOnUiThread { root.all().mapNotNull { it.getTag(tag) as? PendingIntent }.filter { it.isActivity }.toList() }
+    }
+
+    /** The pending intent that opens `parcel` on the deliveries, as the widget asked Glance for it; null if it never did. */
+    private fun parcelTap(parcel: DeliveryWidgetParcel): PendingIntent? = PendingIntent.getActivity(
+        context, 0, Intent(Intent.ACTION_VIEW, parcel.deepLink.toUri(), context, MainActivity::class.java),
+        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_NO_CREATE,
+    )
+
+    /** [parcelTap], which the widget must have asked for. */
+    private fun tapOf(parcel: DeliveryWidgetParcel): PendingIntent = checkNotNull(parcelTap(parcel)) { "No tap for ${parcel.label}" }
+
+    /** The pending intent the page between two cards opens the app with; null if none was made. */
+    private fun pageTap(): PendingIntent? =
+        PendingIntent.getActivity(context, 0, appIntent(context), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_NO_CREATE)
+
+    /** The one tap of a widget with no parcel to open: an activity of the app's own, which is no parcel's. */
+    private fun assertOpensTheApp(taps: List<PendingIntent>, parcels: List<DeliveryWidgetParcel>) {
+        val tap = taps.single()
+        assertEquals(context.packageName, tap.creatorPackage)
+        assertTrue(parcels.none { parcelTap(it) == tap })
+    }
+
+    /** The small and medium widgets of `small` and `medium` on the window, light, saved as `name`. */
+    private fun shootLight(name: String, small: RemoteViews, medium: RemoteViews) {
+        compose.runOnUiThread { page.value = Page(night = false, listOf(IPHONE_SMALL to small, IPHONE_MEDIUM to medium)) }
+        shots.take(name)
+    }
+
+    /**
+     * C-G13: one card opens its parcel; two cards each open theirs, and the page between them the app; small words
+     * open their first parcel; medium words each column its own parcel, the rest of the widget the app; words with
+     * nothing on their way, or switched off, open the app. C-AX16: the cards' marks read as their carriers; the words'
+     * pictures (badges, the header's mark, a state's symbol) read as nothing.
+     */
+    @Test
+    fun eachWidgetsTapsLeadWhereTheyShould() {
+        open()
+        val applied = mode(night = false)
+        val store = DeliveryWidgetSharedStore(MemoryDefaults())
+        val source = widgetSource(context, File(folder, "cards"), store)
+        runBlocking { publishDemo(context, store, File(folder, "cards"), context.resources.displayMetrics.density.toDouble()) }
+
+        val one = source.current(false, CAPTURED)
+        val two = source.current(true, CAPTURED)
+        assertEquals(1, one.cards.size)
+        assertEquals(2, two.cards.size)
+        val oneViews = runBlocking { widgetViews(applied, IPHONE_SMALL, one) }
+        val twoViews = runBlocking { widgetViews(applied, IPHONE_MEDIUM, two) }
+        val oneRoot = applied(oneViews, applied)
+        val twoRoot = applied(twoViews, applied)
+        assertEquals(listOf(tapOf(one.cards.single().first)), activityTaps(oneRoot))
+        val cardTaps = two.cards.map { tapOf(it.first) }
+        val between = checkNotNull(pageTap()) { "No tap for the page between the cards" }
+        val twoTaps = activityTaps(twoRoot)
+        assertEquals(3, twoTaps.size)
+        assertEquals((listOf(between) + cardTaps).toSet(), twoTaps.toSet())
+        // C-AX16: the marks read as their carriers, nothing else pictured reads.
+        assertEquals(one.cards.map { it.first.carrier }, described(oneRoot))
+        assertEquals(two.cards.map { it.first.carrier }, described(twoRoot))
+        shootLight("C-G13-cards", oneViews, twoViews)
+
+        val small = wordsEntry(parcels, medium = false)
+        val medium = wordsEntry(parcels, medium = true)
+        val smallViews = runBlocking { widgetViews(applied, IPHONE_SMALL, small) }
+        val mediumViews = runBlocking { widgetViews(applied, IPHONE_MEDIUM, medium) }
+        val smallRoot = applied(smallViews, applied)
+        val mediumRoot = applied(mediumViews, applied)
+        assertEquals(listOf(tapOf(small.shown.first())), activityTaps(smallRoot))
+        assertEquals(2, medium.shown.size)
+        val mediumTaps = activityTaps(mediumRoot)
+        val columnTaps = medium.shown.map { tapOf(it) }
+        assertTrue(mediumTaps.containsAll(columnTaps))
+        assertOpensTheApp(mediumTaps - columnTaps.toSet(), parcels)
+        assertTrue(described(smallRoot).isEmpty())
+        assertTrue(described(mediumRoot).isEmpty())
+        shootLight("C-G13-words", smallViews, mediumViews)
+
+        for ((state, entries) in listOf(
+            "empty" to (wordsEntry(emptyList(), medium = false) to wordsEntry(emptyList(), medium = true)),
+            "disabled" to (wordsEntry(parcels, medium = false, enabled = false) to wordsEntry(parcels, medium = true, enabled = false)),
+        )) {
+            val views = runBlocking { listOf(widgetViews(applied, IPHONE_SMALL, entries.first), widgetViews(applied, IPHONE_MEDIUM, entries.second)) }
+            for (each in views) {
+                val root = applied(each, applied)
+                assertOpensTheApp(activityTaps(root), parcels)
+                assertTrue(described(root).isEmpty())
+            }
+            shootLight("C-G13-$state", views[0], views[1])
+        }
+    }
+
+    /** What the pictures under `root` read as, in the order they stand: those that read as something. */
+    private fun described(root: View): List<String> = compose.runOnUiThread {
+        root.all().filterIsInstance<ImageView>().mapNotNull { it.contentDescription?.toString()?.takeIf(String::isNotEmpty) }.toList()
+    }
+
+    /**
+     * C-AX13: at the largest text, the medium words' names are the subheadline WidgetKit's xxLarge draws (WidgetText),
+     * one too long for its column shrunk to 85 % of it before it ends, a short one at its whole size.
+     */
+    @Test
+    fun theMediumWordsNamesShrinkAtTheLargestText() {
+        open()
+        val composed = mode(night = false, LARGEST_TEXT)
+        val long = "Handmade ceramic breakfast set"
+        val short = "Lamp"
+        val entry = wordsEntry(listOf(widgetParcel(21, long, detail = "today"), widgetParcel(22, short, detail = "Friday")), medium = true)
+        val views = runBlocking { widgetViews(composed, IPHONE_MEDIUM, entry) }
+        val root = applied(views, composed)
+        val full = WidgetText(composed).points(IosTextStyle.Subheadline) * context.resources.displayMetrics.density
+        fun size(text: String): Float = compose.runOnUiThread {
+            root.all().filterIsInstance<TextView>().first { it.text?.toString() == text }.textSize
+        }
+        assertEquals("The long name at 85 % of $full px", full * 0.85f, size(long), full * 0.02f)
+        assertEquals("The short name at $full px", full, size(short), full * 0.02f)
+        compose.runOnUiThread { page.value = Page(night = false, listOf(IPHONE_MEDIUM to views), LARGEST_TEXT) }
+        shots.take("C-AX13-medium-words-largest")
     }
 
     /** Waits until the widget's views show `text`, as the host gets them from the launcher's service. */

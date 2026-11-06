@@ -28,6 +28,7 @@ import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.FriendUpdate
+import com.plhery.peekdeliverytracker.core.api.FriendsAction
 import com.plhery.peekdeliverytracker.core.api.FriendsActivity
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
@@ -43,6 +44,7 @@ import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_INVITE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_MANAGE_FRIENDSHIP
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_MANAGE_LINKS
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_NOTICE
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_NOTICE_DISMISS
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_NOTICE_OPEN
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PAGE
 import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PAGE_BACK
@@ -75,10 +77,11 @@ import org.junit.runner.RunWith
  * The friends tab (A-S20, C-S19 to C-S31) on this device's own window, its bars and density the device's, on fake
  * deliveries and made-up friends, which reach no server: the demo's circle; signed out; a friend's card opening their
  * page and the system's back closing it, and the page's ‹; a stamp's popover; manage friendship and the removal; the
- * accepted notice opening the friend; the profile's panel; the demo's invitation; an account's invitation with its
- * link copied and its manage links open; the account button opening Settings. Each saved as friends/<test>.png in the
- * test package's external files, which adb pulls. Under Reduce Motion, as the other device tests are; each test puts
- * back the appearance it found, and the copy the clipboard held.
+ * accepted notice opening the friend, and its ✕ tapped through the screen dismissing it (A-S04, A-G18); the profile's
+ * panel; the demo's invitation; an account's invitation with its link copied and its manage links open; the account
+ * button opening Settings. Each saved as friends/<test>.png in the test package's external files, which adb pulls.
+ * Under Reduce Motion, as the other device tests are; each test puts back the appearance it found, and the copy the
+ * clipboard held.
  */
 @RunWith(AndroidJUnit4::class)
 class FriendsDeviceTest {
@@ -262,6 +265,25 @@ class FriendsDeviceTest {
         compose.waitForIdle()
         assertTrue("Bo's card drawn", drawn(FriendFixtures.bo.id))
         shot()
+    }
+
+    /**
+     * A-S04, A-G18: the accepted notice's ✕, a finger on it through the screen, dismisses it where it stands: the
+     * service told the friend has been seen, the deliveries left showing.
+     */
+    @Test
+    fun theAcceptedNoticesCrossDismissesIt() {
+        show(reader, choose = false) { activity = FriendsActivity(updates = listOf(FriendUpdate(FriendFixtures.bo.id, "Bo"))) }
+        compose.waitUntil(5_000) { exists(FRIENDS_NOTICE_DISMISS) }
+        compose.waitForIdle()
+        ScreenTouches(compose).tap(FRIENDS_NOTICE_DISMISS)
+        compose.waitUntil(5_000) { !exists(FRIENDS_NOTICE) }
+        compose.waitUntil(5_000) {
+            source.friendsClient.requests.any { it.action == FriendsAction.AcknowledgeFriend && it.friendId == FriendFixtures.bo.id }
+        }
+        compose.waitForIdle()
+        assertFalse(exists(PeekTab.Friends.screen))
+        shots.take("A-G18-notice-dismissed")
     }
 
     @Test

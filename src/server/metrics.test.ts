@@ -68,7 +68,8 @@ describe('prometheus carrier metrics', () => {
       ({ attempts, settled, history, outcomes, bytes, unmeasured });
     metrics.setRetryTrialSource(() => ({
       trial: 'example-trial', phase: 'complete', startedAt: 1_000_000, deadlineAt: 2_000_000, endedAt: 1_500_000, endReason: 'bytes',
-      chargedResidentialBytes: 248_500_000, maxResidentialBytes: 250_000_000, targetAttempts: 100,
+      chargedResidentialBytes: 248_500_000, reservedResidentialBytes: 11_000_000, maxResidentialBytes: 250_000_000,
+      allowanceBytes: 10_000_000, marginBytes: 1_000_000, targetAttempts: 100,
       routes: { datacenter: tally(90, 89, 20, { ok: 25, challenge: 64 }, 9_000_000, 1), residential: tally(88, 88, 55, { ok: 60, transport: 28 }, 230_000_000, 9) },
       after: tally(3, 3, 1, { ok: 1, challenge: 2 }, 300_000, 0),
     }));
@@ -81,6 +82,9 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('fedex_retry_trial_state{trial="example-trial",phase="complete",end_reason="bytes"} 1');
     expect(text).toContain('fedex_retry_trial_time_seconds{event="ended"} 1500');
     expect(text).toContain('fedex_retry_trial_limit{limit="residential_bytes"} 250000000');
+    expect(text).toContain('fedex_retry_trial_bytes{period="trial",route="residential",measure="reserved"} 11000000');
+    expect(text).toContain('fedex_retry_trial_limit{limit="allowance_bytes"} 10000000');
+    expect(text).toContain('fedex_retry_trial_limit{limit="margin_bytes"} 1000000');
     metrics.setRetryTrialSource(null);
     text = await metrics.metricsText();
     expect(text).not.toContain('fedex_retry_trial_state{');

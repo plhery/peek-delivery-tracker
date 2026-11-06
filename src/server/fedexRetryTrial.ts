@@ -7,18 +7,24 @@ import { serviceClient } from './runtime';
 import type { SupabaseServiceClient } from './supabase';
 
 /**
- * Keeps the FedEx retry trial's attempts in `retry_route_trial_attempts`, so a
- * deploy carries its counts, bytes and deadline on. The scraper assigns only the
- * datacenter route while the store fails.
+ * Keeps the FedEx retry trial in `retry_route_trial_attempts` and
+ * `retry_route_trials`, so a deploy carries its counts, bytes, deadline and end
+ * on. A residential attempt begins only once `reserve_retry_route_trial_attempt`
+ * has saved its reservation under the trial's lock, so every process counts
+ * against one cap; the scraper assigns only the datacenter route while the store
+ * fails or is slow.
  */
-export function retryTrialStore(client: Pick<SupabaseServiceClient, 'retryRouteTrialAttempts' | 'saveRetryRouteTrialAttempt'>): RetryRouteTrialStore {
+export function retryTrialStore(client: Pick<SupabaseServiceClient,
+  'retryRouteTrialState' | 'saveRetryRouteTrialAttempt' | 'reserveRetryRouteTrialAttempt' | 'endRetryRouteTrial'>): RetryRouteTrialStore {
   return {
-    load: (trial) => logged('load', () => client.retryRouteTrialAttempts(trial)),
+    load: (trial) => logged('load', () => client.retryRouteTrialState(trial)),
     save: (attempt) => logged('save', () => client.saveRetryRouteTrialAttempt(attempt)),
+    reserve: (request) => logged('reserve', () => client.reserveRetryRouteTrialAttempt(request)),
+    end: (trial, end) => logged('end', () => client.endRetryRouteTrial(trial, end)),
   };
 }
 
-async function logged<T>(operation: 'load' | 'save', run: () => Promise<T>): Promise<T> {
+async function logged<T>(operation: 'load' | 'save' | 'reserve' | 'end', run: () => Promise<T>): Promise<T> {
   try {
     return await run();
   } catch (error) {

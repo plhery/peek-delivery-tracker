@@ -12240,6 +12240,10 @@ export const CARRIER_CAPABILITIES = {
         "preferred": true
       },
       {
+        "pattern": "^3\\d{12}$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^6(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])2[4-9]\\d{6}$",
         "confidence": "low",
         "preferred": true

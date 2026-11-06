@@ -1043,32 +1043,88 @@ describe('notification reads', () => {
     }]);
   });
 
-  it('reads a retry trial attempts in order, dropping malformed rows, and saves one under its id', async () => {
+  it('reads a retry trial with its attempts, dropping malformed rows, and saves a datacenter attempt under its id', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValueOnce([
       { id: '00000000-0000-4000-8000-000000000001', trial: 'example', route: 'residential', assigned_at: '2026-11-06T01:00:00+00:00',
-        settled_at: '2026-11-06T01:00:30+00:00', outcome: 'ok', history: true, bytes: 1_900_000 },
+        settled_at: '2026-11-06T01:00:30+00:00', outcome: 'ok', history: true, bytes: 1_900_000, reserved_bytes: 11_000_000, charged_bytes: '2900000' },
       { id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter', assigned_at: '2026-11-06T01:05:00+00:00',
-        settled_at: null, outcome: null, history: null, bytes: null },
+        settled_at: null, outcome: null, history: null, bytes: null, reserved_bytes: null, charged_bytes: null },
       { id: '00000000-0000-4000-8000-000000000003', trial: 'example', route: 'default', assigned_at: '2026-11-06T01:06:00+00:00' },
       { id: '00000000-0000-4000-8000-000000000004', trial: 'other', route: 'datacenter', assigned_at: '2026-11-06T01:06:00+00:00' },
+    ]).mockResolvedValueOnce([
+      { trial: 'example', started_at: '2026-11-06T00:55:00+00:00', ended_at: '2026-11-06T02:00:00+00:00', end_reason: 'bytes' },
     ]).mockResolvedValueOnce(null);
-    await expect(client.retryRouteTrialAttempts('example')).resolves.toEqual([
-      { id: '00000000-0000-4000-8000-000000000001', trial: 'example', route: 'residential', assignedAt: Date.parse('2026-11-06T01:00:00Z'),
-        settledAt: Date.parse('2026-11-06T01:00:30Z'), outcome: 'ok', history: true, bytes: 1_900_000 },
-      { id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter', assignedAt: Date.parse('2026-11-06T01:05:00Z') },
-    ]);
+    await expect(client.retryRouteTrialState('example')).resolves.toEqual({
+      attempts: [
+        { id: '00000000-0000-4000-8000-000000000001', trial: 'example', route: 'residential', assignedAt: Date.parse('2026-11-06T01:00:00Z'),
+          settledAt: Date.parse('2026-11-06T01:00:30Z'), outcome: 'ok', history: true, bytes: 1_900_000, reservedBytes: 11_000_000, chargedBytes: 2_900_000 },
+        { id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter', assignedAt: Date.parse('2026-11-06T01:05:00Z') },
+      ],
+      startedAt: Date.parse('2026-11-06T00:55:00Z'),
+      end: { reason: 'bytes', at: Date.parse('2026-11-06T02:00:00Z') },
+    });
     const read = new URL(`https://database.example${String(request.mock.calls[0]![0])}`);
     expect(read.pathname).toBe('/rest/v1/retry_route_trial_attempts');
     expect(Object.fromEntries(read.searchParams)).toMatchObject({ trial: 'eq.example', order: 'assigned_at.asc' });
+    const trial = new URL(`https://database.example${String(request.mock.calls[1]![0])}`);
+    expect(trial.pathname).toBe('/rest/v1/retry_route_trials');
+    expect(Object.fromEntries(trial.searchParams)).toMatchObject({ trial: 'eq.example' });
     await client.saveRetryRouteTrialAttempt({ id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter',
       assignedAt: Date.parse('2026-11-06T01:05:00Z') });
-    expect(request.mock.calls[1]).toEqual(['/rest/v1/retry_route_trial_attempts?on_conflict=id', {
+    expect(request.mock.calls[2]).toEqual(['/rest/v1/retry_route_trial_attempts?on_conflict=id', {
       method: 'POST',
       body: [{ id: '00000000-0000-4000-8000-000000000002', trial: 'example', route: 'datacenter', assigned_at: '2026-11-06T01:05:00.000Z',
         settled_at: null, outcome: null, history: null, bytes: null }],
       prefer: 'resolution=merge-duplicates,return=minimal',
     }]);
+  });
+
+  it('refuses a residential attempt read without its reservation, and a trial without its start', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    vi.spyOn(client, 'request').mockResolvedValueOnce([
+      { id: '00000000-0000-4000-8000-000000000001', trial: 'example', route: 'residential', assigned_at: '2026-11-06T01:00:00Z', reserved_bytes: null, charged_bytes: null },
+    ]).mockResolvedValueOnce([]).mockResolvedValueOnce([]).mockResolvedValueOnce([{ trial: 'example', started_at: null }]);
+    await expect(client.retryRouteTrialState('example')).rejects.toThrow('Invalid retry route trial attempt');
+    await expect(client.retryRouteTrialState('example')).rejects.toThrow('Invalid retry route trial');
+  });
+
+  it('settles a residential attempt without creating one, and reserves and ends a trial through its functions', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce(null)
+      .mockResolvedValueOnce({ granted: true, started_at: '2026-11-06T00:55:00+00:00' })
+      .mockResolvedValueOnce({ granted: false, busy: true })
+      .mockResolvedValueOnce({ granted: false, end_reason: 'deadline', ended_at: '2026-11-06T06:55:00+00:00' })
+      .mockResolvedValueOnce({ granted: 'yes' })
+      .mockResolvedValueOnce(null);
+    const attempt = { id: '00000000-0000-4000-8000-000000000001', trial: 'example', route: 'residential' as const,
+      assignedAt: Date.parse('2026-11-06T01:00:00Z'), reservedBytes: 11_000_000, chargedBytes: 11_000_000 };
+    await client.saveRetryRouteTrialAttempt({ ...attempt, settledAt: Date.parse('2026-11-06T01:00:30Z'), outcome: 'ok', history: true,
+      bytes: 1_900_000, chargedBytes: 2_900_000 });
+    const patch = request.mock.calls[0]!;
+    const target = new URL(`https://database.example${String(patch[0])}`);
+    expect(target.pathname).toBe('/rest/v1/retry_route_trial_attempts');
+    expect(Object.fromEntries(target.searchParams)).toEqual({ id: `eq.${attempt.id}`, trial: 'eq.example', route: 'eq.residential' });
+    expect(patch[1]).toEqual({ method: 'PATCH', prefer: 'return=minimal',
+      body: { settled_at: '2026-11-06T01:00:30.000Z', outcome: 'ok', history: true, bytes: 1_900_000, charged_bytes: 2_900_000 } });
+
+    const reservation = { attempt, targetAttempts: 100, maxResidentialBytes: 250_000_000, durationMs: 21_600_000, leaseMs: 180_000 };
+    await expect(client.reserveRetryRouteTrialAttempt(reservation)).resolves.toEqual({ granted: true, startedAt: Date.parse('2026-11-06T00:55:00Z') });
+    expect(request.mock.calls[1]).toEqual(['/rest/v1/rpc/reserve_retry_route_trial_attempt', { method: 'POST', body: {
+      p_id: attempt.id, p_trial: 'example', p_assigned_at: '2026-11-06T01:00:00.000Z', p_reserved_bytes: 11_000_000,
+      p_target_attempts: 100, p_max_residential_bytes: 250_000_000, p_duration_ms: 21_600_000, p_lease_ms: 180_000,
+    } }]);
+    await expect(client.reserveRetryRouteTrialAttempt(reservation)).resolves.toEqual({ granted: false, busy: true });
+    await expect(client.reserveRetryRouteTrialAttempt(reservation)).resolves.toEqual({ granted: false,
+      end: { reason: 'deadline', at: Date.parse('2026-11-06T06:55:00Z') } });
+    await expect(client.reserveRetryRouteTrialAttempt(reservation)).rejects.toThrow('Invalid retry route reservation response');
+    await expect(client.reserveRetryRouteTrialAttempt({ ...reservation, attempt: { ...attempt, route: 'datacenter' } }))
+      .rejects.toThrow('A reservation is for a residential attempt');
+
+    await client.endRetryRouteTrial('example', { reason: 'samples', at: Date.parse('2026-11-06T03:00:00Z') });
+    expect(request.mock.calls[5]).toEqual(['/rest/v1/rpc/end_retry_route_trial', { method: 'POST', body: {
+      p_trial: 'example', p_reason: 'samples', p_at: '2026-11-06T03:00:00.000Z',
+    } }]);
   });
 
   it('reads the scans of handed-over parcels, with their carriers, for relay copies', async () => {

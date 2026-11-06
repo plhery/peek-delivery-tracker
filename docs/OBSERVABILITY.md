@@ -1186,19 +1186,32 @@ First browser attempts, including those after optional API credentials fail, rem
 `attempt="initial"`.
 
 `browser_network_bytes_total` counts encrypted proxy payload the worker proves for an
-attempt, including page dependencies and the idle traffic the worker carried since its
-previous reply, so the series adds up to the worker's own `fedex_retry_proxy_bytes_total`
-except for replies lost in transport. These counters are usage estimates to reconcile with
-the proxy provider's statistics, not invoices.
+attempt's lease, page dependencies included. The worker opens a tunnel only under the
+running lookup's lease and refuses every other one (`fedex_retry_proxy_unleased_tunnels_total`),
+so nothing is carried between lookups and the series adds up to the worker's own
+`fedex_retry_proxy_bytes_total` except for replies lost in transport. These counters are
+usage estimates to reconcile with the proxy provider's statistics, not invoices.
 
 While `FEDEX_RETRY_TRIAL` names a trial, the `fedex_retry_trial_*` gauges show it from the
-attempts kept in `retry_route_trial_attempts`, so they carry on across deploys:
-`fedex_retry_trial_attempts{period="trial"}` by route and outcome (`running` until an
-attempt settles), `fedex_retry_trial_histories`, `fedex_retry_trial_bytes` proven per route
-and charged against the residential cap, `fedex_retry_trial_state` with its phase and end
-reason (`samples`, `bytes` or `deadline`), `fedex_retry_trial_time_seconds` and
-`fedex_retry_trial_limit`. `period="after"` counts the datacenter retries since the process
-started once the trial ended. The comparison is dated-history recovery out of all
-attempts of a route. `phase="unavailable"` means the store failed to load or save
-(`retry_trial_store_failed` in the logs): retries take the datacenter route until it
-answers, and the residential one waits.
+attempts kept in `retry_route_trial_attempts` and its start and end in `retry_route_trials`,
+so they carry on across deploys: `fedex_retry_trial_attempts{period="trial"}` by route and
+outcome (`running` until an attempt settles, `byte_allowance` for a failed attempt the worker
+cut at its allowance, `not_started` for a reservation answered too late to use),
+`fedex_retry_trial_histories`, `fedex_retry_trial_bytes` proven per route, `charged` against
+the residential cap and, of that, `reserved` by residential attempts still running,
+`fedex_retry_trial_state` with its phase and end reason (`samples`, `bytes` or `deadline`),
+`fedex_retry_trial_time_seconds` and `fedex_retry_trial_limit` (attempts, residential bytes,
+and each residential attempt's worker `allowance_bytes` and `margin_bytes`).
+`period="after"` counts the datacenter retries since the process started once the trial
+ended. The comparison is dated-history recovery out of all attempts of a route.
+
+A residential attempt starts only once `reserve_retry_route_trial_attempt` has saved it
+under the trial's row lock, charged its allowance plus the margin; one runs at a time, and
+an attempt waits at most 3 seconds (or a quarter of the lookup's remaining time) for the
+answer before it takes the datacenter route. The worker cuts the attempt at its allowance.
+A verified proof replaces the charge with its bytes plus the margin; a cut, lost or unproven
+attempt keeps the whole reservation. The trial ends, for good, in the database: on its
+bytes once the next reservation would pass the cap, on its samples, or at its deadline.
+`phase="unavailable"` means a store call failed (`retry_trial_store_failed` in the logs):
+retries take the datacenter route, and the residential one waits a minute before asking
+again.

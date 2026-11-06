@@ -21,12 +21,13 @@ begin
 end;
 $$;
 
--- An attempt is saved when assigned and again, under its id, when it settles; only the
--- two proxied routes, a trial name's characters and an outcome's are taken.
+-- A datacenter attempt is saved when assigned and again, under its id, when it settles
+-- (a residential one comes from a reservation: retry_route_trial_reservations.sql); only
+-- the two proxied routes, a trial name's characters and an outcome's are taken.
 insert into public.retry_route_trial_attempts (id, trial, route, assigned_at)
-values ('00000000-0000-4000-8000-000000000001', 'fedex-datacenter-1', 'residential', '2026-11-06T01:00:00Z');
+values ('00000000-0000-4000-8000-000000000001', 'fedex-datacenter-1', 'datacenter', '2026-11-06T01:00:00Z');
 insert into public.retry_route_trial_attempts (id, trial, route, assigned_at, settled_at, outcome, history, bytes)
-values ('00000000-0000-4000-8000-000000000001', 'fedex-datacenter-1', 'residential', '2026-11-06T01:00:00Z',
+values ('00000000-0000-4000-8000-000000000001', 'fedex-datacenter-1', 'datacenter', '2026-11-06T01:00:00Z',
   '2026-11-06T01:00:40Z', 'ok', true, 1900000)
 on conflict (id) do update set settled_at = excluded.settled_at, outcome = excluded.outcome,
   history = excluded.history, bytes = excluded.bytes;

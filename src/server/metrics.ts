@@ -35,7 +35,7 @@ import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason } from './
  */
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 17;
+const RUNTIME_VERSION = 18;
 
 interface PrometheusRuntime {
   version: number;
@@ -174,7 +174,7 @@ function createRuntime(): PrometheusRuntime {
     }),
     retryTrialBytes: new Gauge({
       name: 'fedex_retry_trial_bytes',
-      help: 'FedEx retry trial tunnel bytes by period and route: proven by the workers, or charged against the residential cap (proven plus a fixed charge per unmeasured attempt). Not the provider bill.',
+      help: 'FedEx retry trial tunnel bytes by period and route: proven by the workers, charged against the residential cap (a verified proof plus the margin, the whole reservation otherwise), or reserved by residential attempts still running. Not the provider bill.',
       labelNames: ['period', 'route', 'measure'] as const, registers: [registry],
     }),
     retryTrialState: new Gauge({
@@ -189,7 +189,7 @@ function createRuntime(): PrometheusRuntime {
     }),
     retryTrialLimit: new Gauge({
       name: 'fedex_retry_trial_limit',
-      help: 'The FedEx retry trial limits: attempts per route and residential bytes.',
+      help: 'The FedEx retry trial limits: attempts per route, residential bytes, and each residential attempt\'s worker allowance and charged margin.',
       labelNames: ['limit'] as const, registers: [registry],
     }),
     statusMappingTotal: new Counter({
@@ -435,12 +435,15 @@ function refreshRetryTrial(): void {
     runtime.retryTrialBytes.set({ period, route, measure: 'proven' }, tally.bytes);
   }
   runtime.retryTrialBytes.set({ period: 'trial', route: 'residential', measure: 'charged' }, snapshot.chargedResidentialBytes);
+  runtime.retryTrialBytes.set({ period: 'trial', route: 'residential', measure: 'reserved' }, snapshot.reservedResidentialBytes);
   runtime.retryTrialState.set({ trial: snapshot.trial, phase: snapshot.phase, end_reason: snapshot.endReason ?? 'none' }, 1);
   for (const [event, at] of [['started', snapshot.startedAt], ['deadline', snapshot.deadlineAt], ['ended', snapshot.endedAt]] as const) {
     if (at !== null) runtime.retryTrialTime.set({ event }, at / 1000);
   }
   runtime.retryTrialLimit.set({ limit: 'attempts' }, snapshot.targetAttempts);
   runtime.retryTrialLimit.set({ limit: 'residential_bytes' }, snapshot.maxResidentialBytes);
+  runtime.retryTrialLimit.set({ limit: 'allowance_bytes' }, snapshot.allowanceBytes);
+  runtime.retryTrialLimit.set({ limit: 'margin_bytes' }, snapshot.marginBytes);
 }
 
 export const prometheusStepRecorder: StepRecorder = {

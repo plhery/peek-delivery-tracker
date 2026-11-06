@@ -3472,7 +3472,7 @@
       "type": "stat",
       "id": 81,
       "title": "Trial residential bytes against the cap",
-      "description": "Residential bytes charged (proven, idle traffic included, plus a fixed charge per attempt without proof) out of the cap.",
+      "description": "Residential bytes charged out of the cap: a verified proof plus the margin, and the whole reservation (allowance plus margin) for a running, cut, lost or unproven attempt. The trial ends on its bytes once the next reservation would pass the cap.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"
@@ -3535,7 +3535,7 @@
       "type": "stat",
       "id": 82,
       "title": "Trial tunnel bytes by route",
-      "description": "Bytes the workers proved for trial attempts, idle traffic since the previous reply included, and the residential charge. Reconcile with the proxy provider statistics; this is not billing usage.",
+      "description": "Bytes the workers proved for trial attempts' leases (nothing is carried between lookups), the residential charge and the reservations of residential attempts still running. Reconcile with the proxy provider statistics; this is not billing usage.",
       "datasource": {
         "type": "prometheus",
         "uid": "${datasource}"

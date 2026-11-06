@@ -848,6 +848,13 @@ parcel's watermark becomes its newest scan left, and a summary whose stage no ro
 takes the newest row's stage and words. It returns each parcel's stage and watermark before
 and after, so a dry run rolled back shows what the repair changes.
 
+The watermark follows the scan that set it. Whatever deletes that row or moves it to another
+instant (a check, a release's migration, the replay of stored scans, a repair) brings the
+watermark back, in the same transaction, to the newest scan row left before it, or removes it
+with the parcel's last scan. It never moves on, and the stage stays for the next check. A
+watermark no row held, as a provider's summary sets, stays
+([migration](../supabase/migrations/20261106080000_dropped_row_watermarks.sql)).
+
 ## Direct histories without complete timestamps
 
 Some direct feeds omit scan clocks, offsets or the event year. An adapter may guess a clock

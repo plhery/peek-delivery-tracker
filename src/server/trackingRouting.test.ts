@@ -3443,6 +3443,60 @@ describe('universal preflight and recipient input', () => {
     expect(again.result.tracking_provider).toBe('Ship24');
   });
 
+  describe('a provider\'s history of a carrier that refuses the number', () => {
+    // A stranger's parcel under a number like the reader's: a delivery in the US named DHL eCommerce, for a number filed
+    // under La Poste, which the DHL eCommerce adapter refuses. The number, wording and clocks are invented.
+    const stranger = (extra: Partial<CarrierResult> = {}): CarrierResult => ({ status: 'delivered', current_stage: 'delivered',
+      last_update: '2026-09-10T11:00:00Z', events: [{ time: '2026-09-10T11:00:00Z', description: 'Delivered', stage: 'delivered' },
+        { time: '2026-09-08T09:00:00Z', description: 'Processed', stage: 'in_transit' }],
+      discovered_carrier: 'dhl-ecommerce', reported_carriers: ['DHL eCommerce Global Mail'], ...extra });
+    const filed = () => {
+      fixedPlan('Ship24', 'ParcelsApp');
+      const value = setup();
+      value.router.options.refuses = vi.fn(async (carrier: string) => carrier === 'dhl-ecommerce');
+      value.direct.mockRejectedValue(new NotFoundError('La Poste'));
+      return value;
+    };
+
+    it('is no history for a parcel filed under a carrier of other countries, and the next provider is asked', async () => {
+      const { router, universal } = filed();
+      universal.mockResolvedValueOnce(stranger());
+      universal.mockResolvedValueOnce(history());
+      const result = await router.fetch(parcel({ carrier: 'la-poste', tracking_number: '1234567891' }), false);
+      expect(router.options.refuses).toHaveBeenCalledWith('dhl-ecommerce', '1234567891');
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24', 'ParcelsApp']);
+      expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', last_update: '2026-09-10T11:00:00Z' });
+      expect(result.result).not.toHaveProperty('discovered_carrier');
+      expect(result.result.routing).toMatchObject({ failures: { Ship24: { kind: 'no_history' } } });
+      expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('foreign_history_rejected',
+        expect.objectContaining({ carrier: 'la-poste', provider: 'Ship24', category: 'refused_number' }));
+    });
+
+    it('stores none when every provider has only that history', async () => {
+      const { router, universal } = filed();
+      universal.mockResolvedValue(stranger());
+      const error = await router.fetch(parcel({ carrier: 'la-poste', tracking_number: '1234567891' }), false).catch((caught: unknown) => caught);
+      expect(error).toBeInstanceOf(Error);
+      expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('foreign_history_rejected', expect.objectContaining({ provider: 'ParcelsApp' }));
+    });
+
+    it.each([
+      ['names the filed carrier too', stranger({ reported_carriers: ['DHL eCommerce Global Mail', 'La Poste'] }), {}],
+      ['ends in a country the filed carrier delivers in', stranger({ destination_country: 'FR' }), {}],
+      ['is in the country of the reader\'s lookup', stranger(), { carrier_data: { lookup_country_hint: 'US' } }],
+      // The leg before the filed carrier's, which its carrier tells under a number of its own.
+      ['is still under way', { ...history(), discovered_carrier: 'dhl-ecommerce', reported_carriers: ['DHL eCommerce Global Mail'] }, {}],
+      ['is of a carrier that takes the number', stranger({ discovered_carrier: 'usps', reported_carriers: ['USPS'] }), {}],
+      ['is for a parcel filed under no carrier', stranger(), { carrier: 'unknown' }],
+    ])('stands when it %s', async (_label, answer, overrides) => {
+      const { router, universal } = filed();
+      universal.mockResolvedValue(answer);
+      const result = await router.fetch(parcel({ carrier: 'la-poste', tracking_number: '1234567891', ...overrides }), false);
+      expect(result.result.tracking_provider).toBe('Ship24');
+      expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('foreign_history_rejected', expect.anything());
+    });
+  });
+
   it('reuses a matching history before acquiring an upstream lease', async () => {
     const value = setup();
     value.router.options.takePrefetchedUniversal = vi.fn((source) => source === 'Ship24' ? { ...history(), discovered_carrier: 'dhl-express' } : undefined);

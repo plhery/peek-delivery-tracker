@@ -1496,6 +1496,25 @@ export class TrackingRouter {
       if (!planned && ahead.length > 0) report('provider_scans_held', String(source));
       return withoutWrittenAhead(result, [...heldBack(), ...ahead]);
     };
+    // A provider's finished journey with a carrier that refuses the number as one it does not issue, which names neither
+    // the carrier the parcel is filed under nor a country that carrier or the reader's lookup is in, is a stranger's
+    // parcel under a number like this one (a DHL eCommerce delivery in the US for a Mondial Relay number). A journey
+    // still under way may be the leg before the filed carrier's (DPD Germany's before SEUR's), and a parcel filed under
+    // no carrier, or under one the catalog places in no country, gives nothing to hold it against.
+    const countriesOf = (carrier: string): readonly string[] =>
+      (CARRIER_DEFINITIONS as Record<string, { countries?: readonly string[] } | undefined>)[carrier]?.countries ?? [];
+    const strangersHistory = async (result: CarrierResult): Promise<boolean> => {
+      const named = typeof result.discovered_carrier === 'string' ? result.discovered_carrier : undefined;
+      const filedIn = countriesOf(universalCarrier);
+      if (!named || named === universalCarrier || !filedIn.length || !finished(result) || !this.options.refuses) return false;
+      const hinted = countryHint ? [...filedIn, countryHint] : filedIn;
+      const names = Array.isArray(result.reported_carriers) ? result.reported_carriers : [];
+      if (names.some((name) => typeof name === 'string' && mayNameCarrier(name, universalCarrier))) return false;
+      const travelsIn = [...countriesOf(named),
+        ...(typeof result.destination_country === 'string' ? [result.destination_country.toUpperCase()] : [])];
+      if (!travelsIn.length || travelsIn.some((country) => hinted.includes(country))) return false;
+      return this.options.refuses(named, universalNumber);
+    };
     const attemptedUniversal = new Set<UniversalSource>();
     // Providers that answered without history for this number in this check.
     const answeredEmpty: UniversalSource[] = [];
@@ -1509,7 +1528,8 @@ export class TrackingRouter {
       const prefetched = prefetchedUniversal.get(source) ?? this.options.takePrefetchedUniversal?.(source, universalNumber, providerPostcode);
       if (prefetched) {
         const result = dueOnly(normalizeCarrierResult(prefetched), source);
-        if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
+        if (result && usable(result) && !foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])
+          && !await strangersHistory(result)) {
           delete state.failures[source];
           return { result: { ...result, tracking_provider: source }, sourceCarrierId: 'unknown', swissPostReady: null, handoffFallbackErrorType: null };
         }
@@ -1555,6 +1575,10 @@ export class TrackingRouter {
         if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           report('foreign_history_rejected', source);
           throw new IndeterminateError(source, `${source} returned an older parcel for this number`);
+        }
+        if (await strangersHistory(result)) {
+          report('foreign_history_rejected', source, 'refused_number');
+          throw new IndeterminateError(source, `${source} returned a parcel of a carrier that refuses this number`);
         }
         const previousFailure = state.failures[source];
         if (previousFailure) report('provider_recovered', source);

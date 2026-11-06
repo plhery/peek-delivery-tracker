@@ -3,7 +3,7 @@ title: WanbExpress tracking: WNB…YQ numbers, scans and who delivers
 description: Track a WanbExpress (Wanb Express) parcel from China: what a WNB…YQ number looks like, what its scans mean and who to ask when it stalls.
 slug: wanbexpress-tracking
 published: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-06
 ---
 
 WanbExpress (also Wanb Express, WanBang Express or WANB) is a Chinese carrier that sends parcels abroad, where a local carrier delivers them. If a shop sent your order with WanbExpress, its number starts with WNB and ends with YQ: paste it in the box above. WanbExpress's own tracker, tracking.wanbexpress.com, can also name the carrier that delivers in your country, with that carrier's number for the parcel.
@@ -56,6 +56,9 @@ WanbExpress's scans are in English, each with a time and sometimes a place. Here
 | `Dispatch task assigned to DA.` | A driver (DA, delivery associate) is named for the run, which can be hours before it starts. | "In transit" |
 | `Shipment out for delivery.` | On the delivery run. | "Out for delivery" |
 | `<Route not completed>`, `Back To DS.` | The run ended without the delivery, and the parcel went back to the delivery station (DS). | "Delivery attempted" |
+| `Scheduled to <2026-11-02> .` | The day booked for the next run, after the parcel came back to the station. | Still "Delivery attempted" |
+
+Other partners' moves come through the same way. On parcels to the United States, `In Processing at Transit Facility.` is the last-mile partner's sort once it has the parcel, and `In Transit to Next Facility.` its move towards the facility that delivers. `It is currently in transit to the next facility` and `The package is being transferred to the next facility` are a partner's moves between its facilities after the flight. Peek shows all four as "In transit".
 
 **Times.** Each scan's time comes with its offset from UTC. Peek reads them that way and shows them all in your device's time zone, newest first. For the gaps and handovers that parcels from China go through, see [tracking a parcel from China](guide:tracking-from-china).
 
@@ -73,7 +76,7 @@ WanbExpress's scans follow the parcel out of China, through customs and on to a 
 
 **Stuck on `Shipping Order Created.` or `Parcel Data Received`.** The shop has booked the shipment, but WanbExpress hasn't scanned the parcel yet. Ask the shop when it handed the parcel over.
 
-**Stuck after `Parcel arrives at Airport, Parcel Arrival`.** The parcel is most likely waiting for import customs. If you're asked to pay import charges, see [parcels held at customs](guide:customs); if it sits there for long, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
+**Stuck after `Parcel arrives at Airport, Parcel Arrival`.** The parcel is most likely waiting for import customs. Into the EU (Germany or Italy, for example), goods bought online owe €3 customs duty per item on parcels worth up to €150 and, since 1 November 2026, a €2 Union handling fee per item, whatever the value. If you're asked to pay import charges, see [parcels held at customs](guide:customs); if it sits there for long, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
 
 **Nothing after `Custom clearance completed`.** The delivering carrier has the parcel, or soon will, and its own tracking may be ahead of WanbExpress's. Find its name and number on WanbExpress's tracker, or ask the seller which carrier delivers and under which number.
 
@@ -122,5 +125,7 @@ A local carrier, which WanbExpress's tracker can name, with its number for the p
 The seller you ordered from: it booked the parcel with WanbExpress. Peek couldn't check WanbExpress's website for contact details.
 
 :::sources
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, WNB number shape, the tracker, its reCAPTCHA check and the link that opens one parcel, scan wordings and their stages, iMile's relayed scans on a parcel to Germany, the scan naming Poste Italiane's network, times with UTC offsets, what the tracker shows (delivering carrier, its number, delivery photos, recipient's address), what Peek keeps and leaves out, and the tracking services it turns to
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, WNB number shape, the tracker, its reCAPTCHA check and the link that opens one parcel, scan wordings and their stages, iMile's relayed scans on a parcel to Germany and its next-run line, the US last-mile partner's and other partners' relayed moves, the scan naming Poste Italiane's network, times with UTC offsets, what the tracker shows (delivering carrier, its number, delivery photos, recipient's address), what Peek keeps and leaves out, and the tracking services it turns to
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item like the €3 duty, whatever the value
 :::

@@ -3,7 +3,7 @@ title: ORLEN Paczka śledzenie: numer, statusy i odbiór paczki
 description: Śledzenie przesyłki ORLEN Paczka: gdzie jest numer paczki, co znaczą statusy, ile czasu masz na odbiór z automatu, paczki z Allegro i reklamacja.
 slug: orlen-paczka-sledzenie
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 ORLEN Paczka, dawniej Paczka w RUCHu, to polska sieć, która dowozi paczki do automatów paczkowych i punktów odbioru. Paczkę śledzisz na stronie śledzenia ORLEN Paczki na orlenpaczka.pl albo wklejasz numer w pole powyżej. Numer paczki ma 13 cyfr i znajdziesz go w wiadomości od sklepu albo sprzedającego.
@@ -43,31 +43,39 @@ Paczki z Allegro Delivery mają numer zaczynający się od `AD`: śledzisz je w 
 | `Paczka przekazana do przewoźnika w innym kraju. Dalszą drogę możesz śledzić w aplikacji Vinted` | Paczka z Vinted trafiła do przewoźnika za granicą. Dalej śledzisz ją w aplikacji Vinted. |
 | `Cieszymy się, że Twoja paczka została już odebrana z punktu odbioru` | Paczka została odebrana z punktu. |
 
-Przy niektórych paczkach te same kroki mają starsze brzmienie: `Paczka przygotowywana przez nadawcę`, `Paczka przyjęta w sortowni regionalnej` (bez miasta) i `Odebrana przez Klienta`, gdzie „Klient” to Ty.
+Przy niektórych paczkach te same kroki mają starsze brzmienie: `Paczka przygotowywana przez nadawcę`, `Paczka przyjęta w sortowni regionalnej` (bez miasta) i `Odebrana przez Klienta`, gdzie „Klient” to Ty. Przekazanie paczki za granicę bywa opisane krócej: `Paczka w innym kraju`.
 
 Mylący bywa pierwszy status. „W trakcie przygotowania” znaczy, że sklep wygenerował etykietę, ale paczka jeszcze nie ruszyła; więcej o takich krokach w poradniku [statusy przesyłek](guide:tracking-statuses). Z kolei `Twoja paczka została odebrana przez kuriera i ruszyła w drogę` nie znaczy, że paczka jest u Ciebie: odebrał ją kurier od nadawcy.
 
 ## ORLEN Paczka: punkty odbioru, automaty i czas na odbiór
 
-ORLEN Paczka dowozi paczkę do automatu paczkowego (wiele z nich stoi na stacjach paliw) albo do punktu odbioru, na przykład w kiosku Ruchu lub w placówce partnerskiej.
+ORLEN Paczka dowozi paczkę do automatu paczkowego (wiele z nich stoi na stacjach paliw) albo do punktu odbioru, na przykład w kiosku Ruchu lub w placówce partnerskiej. Gdy paczka dotrze, dostajesz SMS, e-mail albo powiadomienie w aplikacji z kodem odbioru. W niedzielę odbierzesz ją w automacie i na wybranych stacjach ORLEN. Paczek za pobraniem ORLEN Paczka nie dostarcza.
 
-**W automacie** skrytkę otworzysz też bezdotykowo, w aplikacji mobilnej ORLEN Paczki.
+**Odbiór.** W automacie wpisujesz pięcio- albo sześciocyfrowy kod odbioru, skanujesz kod QR z wiadomości lub z aplikacji albo otwierasz skrytkę zdalnie, w aplikacji mobilnej ORLEN Paczki. Paczkę może odebrać ktoś inny: wystarczy, że przekażesz mu kod. Bez kodu albo aplikacji paczki nie odbierzesz. Jeśli SMS nie przyszedł, sprawdź spam i wiadomości zablokowane, a kod znajdziesz też w e-mailu; gdy go nie masz, napisz do Centrum Obsługi Klienta przez formularz kontaktowy. Przy błędnym numerze telefonu skontaktuj się z nadawcą. Gdy automat nie działa, zadzwoń na infolinię (niżej).
 
-**Ile czasu na odbiór.** ORLEN podaje, że na odbiór paczki masz do 3 dni roboczych. Tyle samo, 3 dni robocze, daje Allegro na paczki z Allegro Delivery w punktach i automatach ORLEN Paczki; nieodebrana paczka z Allegro Delivery wraca do sprzedającego.
+**Ile czasu na odbiór.** Masz 3 dni robocze, licząc od pierwszego SMS-a lub e-maila z kodem odbioru. Potem paczka ze sklepu internetowego wraca do nadawcy, a paczka od osoby prywatnej, na przykład z Vinted, do punktu, w którym ją nadano. Tyle samo, 3 dni robocze, daje Allegro na paczki z Allegro Delivery w punktach i automatach ORLEN Paczki; nieodebrana paczka z Allegro Delivery wraca do sprzedającego.
 
 **Allegro Delivery.** Za dostawę i obsługę klienta odpowiada Allegro. Powiadomienie o paczce do odbioru dostajesz e-mailem, SMS-em albo w aplikacji Allegro, a paczkę śledzisz i odbierasz w aplikacji Allegro, w sekcji „Moje przesyłki”.
 
 ## Ile trwa dostawa ORLEN Paczka i co, gdy paczka nie dotarła
 
-ORLEN wymienia dostawę następnego dnia wśród zalet usługi. Gdy śledzenie stoi w miejscu, zapytaj sklep, bo to on ma umowę z przewoźnikiem, i zajrzyj do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating).
+Według ORLEN Paczki paczka ze sklepu internetowego dociera do punktu w 1 dzień roboczy (98% paczek), a paczka od osoby prywatnej i z Vinted w 1–3 dni robocze. Gdy śledzenie stoi w miejscu, zapytaj sklep, bo to on ma umowę z przewoźnikiem, i zajrzyj do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating). Jeśli status mówi, że paczka zaginęła, ORLEN Paczka prosi o kontakt z Centrum Obsługi Klienta przez formularz kontaktowy; zobacz też [zaginiona paczka](guide:lost-parcel).
+
+**Spóźniona paczka.** Jeśli paczka dotarła do Ciebie po terminie, czyli później niż cztery dni robocze po dniu nadania, jako odbiorca możesz według ORLEN Paczki ubiegać się o zwrot kwoty za niewywiązanie się z usługi.
 
 **Uszkodzenie.** ORLEN Paczka jest wpisana do rejestru operatorów pocztowych, który prowadzi Urząd Komunikacji Elektronicznej (UKE). Według ogólnych zasad dla operatorów pocztowych, które opisuje UKE, podstawą reklamacji uszkodzonej paczki jest protokół spisany przy odbiorze w obecności pracownika operatora. Uszkodzenia niewidoczne z zewnątrz zgłaszasz najpóźniej 7 dni po otrzymaniu paczki.
 
-**Kto składa reklamację.** Według tych samych zasad nadawca albo Ty, gdy paczka została Ci doręczona lub gdy nadawca przekazał Ci prawo dochodzenia roszczeń. Reklamację złożysz pisemnie, elektronicznie, na przykład przez formularz na stronie operatora, albo ustnie, w ciągu 12 miesięcy od nadania. Operator ma 30 dni na odpowiedź; brak odpowiedzi w terminie oznacza, że reklamację uznano. Wysokość odszkodowania wynika z Prawa pocztowego i regulaminu usługi.
+**Kto składa reklamację.** Według tych samych zasad nadawca albo Ty, gdy paczka została Ci doręczona lub gdy nadawca przekazał Ci prawo dochodzenia roszczeń. Reklamację złożysz pisemnie, elektronicznie, na przykład przez [formularz reklamacyjny ORLEN Paczki](https://www.orlenpaczka.pl/reklamacje/), albo ustnie, w ciągu 12 miesięcy od nadania. Operator ma 30 dni na odpowiedź; brak odpowiedzi w terminie oznacza, że reklamację uznano. Wysokość odszkodowania wynika z Prawa pocztowego i regulaminu usługi; ORLEN Paczka podaje, że odpowiada za paczkę do 500 zł, gdy nadał ją klient indywidualny, a do 5000 zł, gdy klient biznesowy.
 
 ## ORLEN Paczka kontakt
 
-Przy paczce z Allegro Delivery kontaktuj się z Allegro, które odpowiada za obsługę klienta tych przesyłek. Przy zamówieniu ze sklepu zacznij od sklepu. Własną stronę kontaktową ORLEN Paczka ma na orlenpaczka.pl, w zakładce „Kontakt”.
+Przy paczce z Allegro Delivery kontaktuj się z Allegro, które odpowiada za obsługę klienta tych przesyłek. Przy zamówieniu ze sklepu zacznij od sklepu. Kanały kontaktu ORLEN Paczki (stan na 6 listopada 2026 r.):
+
+- **Infolinia:** 22 33 33 999, koszt połączenia według stawki operatora. Czynna od poniedziałku do piątku w godzinach 7:00–22:00, w sobotę 9:00–19:00 (w częstych pytaniach: do 16:00) i w niedzielę 10:00–16:00.
+- **[Formularz kontaktowy](https://www.orlenpaczka.pl/formularz-kontaktowy/)**, na przykład gdy nie masz kodu odbioru albo paczka zaginęła.
+- **[Formularz reklamacyjny](https://www.orlenpaczka.pl/reklamacje/)** przy zagubieniu, uszkodzeniu lub opóźnieniu, dla nadawcy, odbiorcy i płatnika.
+
+ORLEN Paczka nie wysyła linków w SMS-ach i nie prosi o dopłatę do paczki przez link: taka wiadomość to próba oszustwa. Więcej w poradniku [oszustwo na paczkę](guide:delivery-scam-texts).
 
 ## Śledzenie paczki ORLEN Paczka w Peek
 
@@ -89,10 +97,13 @@ ORLEN opisuje ORLEN Paczkę jako usługę dostawy do automatów i punktów odbio
 
 ### Jak śledzić paczkę ORLEN Paczka za granicą?
 
-ORLEN opisuje sieć automatów i punktów w całej Polsce. Paczkę z Vinted ORLEN Paczka może przekazać przewoźnikowi w innym kraju, a dalszą drogę pokazuje wtedy aplikacja Vinted.
+Według częstych pytań na orlenpaczka.pl ORLEN Paczka realizuje dostawy tylko w Polsce. Paczkę z Vinted ORLEN Paczka może przekazać przewoźnikowi w innym kraju, a dalszą drogę pokazuje wtedy aplikacja Vinted.
 
 :::sources
-- [ORLEN: Automaty ORLEN Paczki zasilane energią słoneczną (17 kwietnia 2026)](https://www.orlen.pl/pl/o-firmie/media/komunikaty-prasowe/biezace/2026/kwieciec-2026/automaty-orlen-paczki-zasilane-energia-sloneczna-) – dostawa do automatów i punktów odbioru w Polsce, dostawa następnego dnia, do 3 dni roboczych na odbiór
+- [ORLEN Paczka: Najczęściej zadawane pytania](https://www.orlenpaczka.pl/faq/) – kod odbioru (5 lub 6 cyfr, SMS, e-mail, QR, aplikacja), odbiór przez inną osobę, brak kodu, błędny numer telefonu, 3 dni robocze od pierwszego SMS-a lub e-maila i zwrot do nadawcy albo punktu nadania, odbiór w niedzielę, bez pobrania, czas dostawy (1 dzień roboczy dla 98% paczek ze sklepów, 1–3 dni od osób prywatnych i z Vinted), zwrot kwoty po 4 dniach roboczych, zaginięcie, odpowiedzialność do 500 zł (klienci indywidualni) i 5000 zł (biznesowi), tylko dostawy w Polsce, infolinia i godziny, brak linków w SMS-ach i dopłat przez link
+- [ORLEN Paczka: Kontakt](https://www.orlenpaczka.pl/kontakt/) – infolinia 22 33 33 999 i godziny (sobota do 19:00), link do formularza kontaktowego
+- [ORLEN Paczka: Reklamacje](https://www.orlenpaczka.pl/reklamacje/) – formularz dla nadawcy, odbiorcy i płatnika; zagubienie, uszkodzenie, opóźnienie
+- [ORLEN: Automaty ORLEN Paczki zasilane energią słoneczną (17 kwietnia 2026)](https://www.orlen.pl/pl/o-firmie/media/komunikaty-prasowe/biezace/2026/kwieciec-2026/automaty-orlen-paczki-zasilane-energia-sloneczna-) – dostawa do automatów i punktów odbioru w Polsce
 - [ORLEN: ORLEN Paczka](https://www.orlen.pl/pl/dla-ciebie/orlen-paczka) – automaty na stacjach paliw, punkty w kioskach Ruchu i placówkach partnerskich, sklepy internetowe
 - [ORLEN: Automaty ORLEN Paczka dostępne już w wielu polskich miastach (2021)](https://www.orlen.pl/pl/o-firmie/media/komunikaty-prasowe/archiwum/2021/wrzesien/Automaty-ORLEN-Paczka-dostepne-juz-w-wielu-polskich-miastach) – start usługi w 2021 roku, RUCH jako partner logistyczny, bezdotykowe otwieranie skrytek w aplikacji
 - [ORLEN: Raport zintegrowany 2022, Segment Detal](https://raportzintegrowany2022.orlen.pl/grupa-orlen/dzialalnosc-operacyjna-w-2022-roku/segment-detal/) – ORLEN Paczka zastąpiła Paczkę w Ruchu
@@ -102,5 +113,5 @@ ORLEN opisuje sieć automatów i punktów w całej Polsce. Paczkę z Vinted ORLE
 - [UKE: Rejestr operatorów pocztowych, B-00267](https://bip.uke.gov.pl/rop/rejestr-operatorow-pocztowych/?p=2&page=3&rejestr=B-00267) – ORLEN Paczka Sp. z o.o. jako operator pocztowy w Polsce
 - [UKE: Reklamacje (usługi pocztowe)](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – kto składa reklamację, jak, w ciągu 12 miesięcy, odpowiedź w 30 dni
 - [UKE: Reklamacje i odszkodowania – FAQ](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – protokół przy odbiorze, ukryte uszkodzenia w ciągu 7 dni
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – kształt numeru, kody nadania, numery AD z Allegro, brzmienie statusów, co Peek odczytuje
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – kształt numeru, kody nadania, numery AD z Allegro, brzmienie statusów (także `Paczka w innym kraju`), co Peek odczytuje
 :::

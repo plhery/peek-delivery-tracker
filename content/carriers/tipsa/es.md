@@ -3,10 +3,10 @@ title: TIPSA seguimiento: número, estados y teléfono
 description: Sigue tu envío TIPSA: el número de 22 cifras, qué significa cada estado, qué pasa si estabas ausente, las agencias y los teléfonos de TIPSA.
 slug: tipsa-seguimiento
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
-TIPSA es una empresa española de paquetería urgente, integrada en la red internacional de Geopost, con más de 330 agencias en España, Portugal y Andorra. Para seguir tu paquete, escribe el número de 22 cifras en el [localizador de envíos](https://www.tip-sa.com/es/localizacion-envios) de tip-sa.com o pégalo en la casilla de arriba. El número te lo da quien te envía el paquete, casi siempre la tienda, en el correo o el SMS de envío.
+TIPSA es una empresa española de paquetería urgente, integrada en la red internacional de Geopost, con más de 330 agencias en España, Portugal y Andorra. Para seguir tu paquete, escribe el número de 22 cifras en el [localizador de envíos](https://www.tip-sa.com/es/localizacion-envios) de tip-sa.com o pégalo en la casilla de arriba. El número te lo da quien te envía el paquete, casi siempre la tienda, en el correo o el SMS de envío. Si no lo tienes, pídeselo a la tienda o a la agencia de TIPSA que reparte en tu zona; la encuentras con tu código postal en el [buscador de agencias](https://www.tip-sa.com/es/agencias-de-transporte). Con esa agencia acuerdas también la entrega si el seguimiento pone `Ausente`, o la recogida si prefieres ir tú; si el paquete se pierde o llega dañado, avisa a la tienda.
 
 ## Número de envío TIPSA: cómo es y dónde está
 
@@ -24,7 +24,7 @@ El localizador de TIPSA pide el número de envío «compuesto por 22 dígitos» 
 | `012345 012345 1234567890` | El mismo número con espacios. Peek lo lee; el campo del localizador de TIPSA solo admite 22 caracteres, así que allí escríbelo sin espacios. |
 | `1234567890` | El albarán de 10 cifras suelto. El localizador de TIPSA pide las 22 cifras. |
 
-Las tiendas pueden hacer que TIPSA te mande correos y SMS cuando sale el envío, cuando llega a la agencia, si hay una incidencia y tras la entrega; sus enlaces de seguimiento llevan a la página del envío en TIPSA. Si no tienes el número, las preguntas frecuentes de TIPSA dicen que lo pidas al remitente o a la delegación que hace la entrega. Más sitios donde buscarlo en [cómo encontrar tu número de seguimiento](guide:find-tracking-number).
+Las tiendas pueden hacer que TIPSA te mande correos y SMS cuando sale el envío, cuando llega a la agencia, si hay una incidencia y tras la entrega; sus enlaces de seguimiento llevan a la página del envío en TIPSA. Sin el número, el localizador de TIPSA también busca por la referencia del envío, pero pide además un identificador (agencia y cliente) que tendrías que pedir al remitente. Más sitios donde buscarlo en [cómo encontrar tu número de seguimiento](guide:find-tracking-number).
 
 Mucha gente busca «seguimiento TIPSA 10 dígitos» o «seguimiento TIPSA 19». Solo funciona la forma completa de 22 cifras: búscala en el correo o pídesela a la tienda. Ojo también con los parecidos: 22 cifras encajan con Austrian Post, USPS y Estafeta, y un número cuyos dos códigos de agencia empiezan por `00` tiene la forma de uno de [CTT Express](carrier:ctt-express), otro transportista español. Mira qué transportista nombra el correo de la tienda.
 
@@ -43,6 +43,7 @@ La página del envío de TIPSA está solo en español. Arriba enseña una línea
 | `REPARTO` | Ha salido para entregártelo. |
 | `Ausente` | No han podido entregarlo porque no te localizaron. |
 | `Faltan Datos / Datos incorrectos` | Faltan datos de la dirección o están mal. Se anota en el reparto, antes de otro intento. |
+| `Cerrado` | Al ir a entregarlo, encontraron cerrada la dirección. Se anota en el reparto, después de `REPARTO`. |
 | `Solicitada en otra dirección` | Se ha pedido la entrega en otra dirección y el paquete se desvía hacia ella. |
 | `DISPONIBLE` o `Pendiente de recoger en Tipsa` | Tras una entrega fallida, te espera en la agencia. |
 | `Devolver a Origen` | Vuelve al remitente. |
@@ -52,7 +53,7 @@ La página del envío de TIPSA está solo en español. Arriba enseña una línea
 
 ## TIPSA no entrega mi paquete: ausente, agencias y puntos Pickup
 
-TIPSA reparte con su propia red en toda la península (Portugal incluido), Baleares, Canarias, Ceuta y Melilla, y fuera a través de DPDgroup. Tras un `Ausente`, el segundo intento llega el siguiente día hábil; la tarifa que paga la tienda incluye dos intentos de entrega.
+TIPSA reparte con su propia red en toda la península (Portugal incluido), Baleares, Canarias, Ceuta y Melilla, y fuera a través de DPDgroup. Tras un `Ausente`, el segundo intento llega el siguiente día hábil; la tarifa que paga la tienda incluye dos intentos de entrega, o tres con su servicio Premium para tiendas online.
 
 **Recoger en la agencia.** Si no vas a estar o prefieres recogerlo, el paquete queda en la delegación más cercana a tu código postal durante 15 días desde su salida, no desde que llega. Pasado ese plazo, vuelve al remitente. Lleva tu DNI o pasaporte; si va otra persona en tu nombre, necesita una fotocopia del tuyo. El [buscador de agencias](https://www.tip-sa.com/es/agencias-de-transporte) busca por provincia, código postal o código de delegación.
 
@@ -60,7 +61,7 @@ TIPSA reparte con su propia red en toda la península (Portugal incluido), Balea
 
 **Puntos Pickup y lockers.** TIPSA comparte con [SEUR](carrier:seur) una red de puntos Pickup en comercios y lockers automáticos abiertos 24/7. La mayoría de los puntos abren al menos seis días a la semana, también por la tarde y el fin de semana, y tienes 7 días para recoger el paquete. La entrega en un punto es una opción que ofrece la tienda. Encuentra uno con el [buscador de puntos Pickup](https://aplicaciones.tip-sa.com/puntospickup/).
 
-Algunas tiendas contratan también la entrega en sábado o el preaviso, un SMS y un correo que te dicen qué día llega el paquete a destino.
+Algunas tiendas contratan también la entrega en sábado o el preaviso, un SMS y un correo que te dicen qué día llega el paquete a destino. Con el servicio Premium puedes elegir además la franja horaria de la entrega, con una hora de margen; TIPSA no explica dónde se elige, así que pregúntalo a la agencia de destino.
 
 ## Paquete TIPSA retrasado, perdido o devuelto: reclamación
 
@@ -69,6 +70,8 @@ Las páginas de TIPSA no hablan de un envío cuyo seguimiento se queda parado. L
 Si la mercancía se pierde o llega dañada, las preguntas frecuentes de TIPSA son claras: ponte en contacto con el remitente para que lo sepa. La tienda tiene el contrato con TIPSA y es quien reclama; TIPSA no publica un procedimiento ni un plazo de reclamación para el destinatario. Tampoco tiene una página sobre un paquete que pone `ENTREGADO` y no te ha llegado: avisa también a la tienda en ese caso.
 
 Un paquete que nadie recoge en 15 días desde su salida vuelve al remitente, así que pregunta a la tienda por el reembolso o un nuevo envío.
+
+Para devolver una compra, pregunta también a la tienda: TIPSA ofrece a las tiendas gestionar sus devoluciones y cambios. Si prefieres enviarlo tú, las preguntas frecuentes de TIPSA remiten a su herramienta MANDALOXTIPSA o a la delegación más cercana, donde se paga en el momento.
 
 ## TIPSA teléfono y atención al cliente
 
@@ -108,17 +111,18 @@ Puede hacerlo si la tienda contrata la entrega en sábado: TIPSA la ofrece a los
 No: el localizador de TIPSA pide el número de 22 cifras. Las 10 cifras son el albarán del final; si solo tienes esas, pide el número completo al remitente.
 
 :::sources
-- [TIPSA: Localizar mi envío](https://www.tip-sa.com/es/localizacion-envios) – número de 22 cifras, formulario, teléfono del pie de página
-- [TIPSA: Preguntas frecuentes](https://www.tip-sa.com/es/recursos/faqs) – número que falta, 15 días en la delegación, DNI, cambio de dirección, pérdida o daños, teléfono 900, correo, cobertura
+- [TIPSA: Localizar mi envío](https://www.tip-sa.com/es/localizacion-envios) – número de 22 cifras, formulario, búsqueda por referencia con identificador (agencia y cliente), teléfono del pie de página
+- [TIPSA: Preguntas frecuentes](https://www.tip-sa.com/es/recursos/faqs) – número que falta, agencia de reparto, 15 días en la delegación, DNI, cambio de dirección, pérdida o daños, envíos de particulares con MANDALOXTIPSA o en una delegación y pago en el momento, teléfono 900, correo, cobertura
 - [TIPSA: Contacto](https://www.tip-sa.com/es/contacto) – teléfonos, motivos del formulario
 - [TIPSA: Consulta de Envíos](https://dinapaqweb.tipsa-dinapaq.com/dinapaqweb/detalle_envio.php) – página del envío solo en español, textos de estado y explicaciones, agencia de destino
 - [TIPSA: Empresa de transporte urgente](https://www.tip-sa.com/es/tipsa) – Geopost, 330 agencias, plataformas, lockers
-- [TIPSA: FAQs eTIPSA](https://www.tip-sa.com/es/faqs-etipsa) – dos intentos, 24 y 48 horas, sábados, avisos de las tiendas
+- [TIPSA: FAQs eTIPSA](https://www.tip-sa.com/es/faqs-etipsa) – dos intentos, 24 y 48 horas, franja horaria con eTIPSA Premium, devoluciones y cambios, sábados, avisos de las tiendas
+- [TIPSA: 360º eCommerce](https://www.tip-sa.com/es/envios-de-paquetes/360o-ecommerce) – tres intentos con Premium, dos con Estándar, devoluciones y cambios
 - [TIPSA: Recogida en puntos de recogida](https://www.tip-sa.com/es/envios-de-paquetes/puntos-de-recogidas) – red compartida con SEUR, 7 días, horarios de los puntos
 - [TIPSA: Agencias de transporte](https://www.tip-sa.com/es/agencias-de-transporte) – buscador de agencias
 - [TIPSA: Puntos Pickup](https://aplicaciones.tip-sa.com/puntospickup/) – buscador de puntos Pickup
 - [TIPSA: Aviso legal](https://www.tip-sa.com/es/aviso-legal) – nombre de la empresa
 - [TIPSA: Pre-alert](https://www.tip-sa.com/en/services/pre-alert) – preaviso por SMS y correo
 - [TIPSA: TIPSA APP](https://www.tip-sa.com/en/recursos/app) – página de la app
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek, estado `Cerrado`
 :::

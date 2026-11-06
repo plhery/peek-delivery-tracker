@@ -52,7 +52,7 @@ TIPSA's shipment page is in Spanish only, even when you open the locator from th
 
 ## TIPSA missed delivery, agencies and pickup points
 
-TIPSA delivers through its own network across mainland Spain and Portugal, the Balearic and Canary Islands, Ceuta and Melilla, and abroad through DPDgroup. After an `Ausente`, a second attempt follows the next working day; the price shops pay includes two attempts.
+TIPSA delivers through its own network across mainland Spain and Portugal, the Balearic and Canary Islands, Ceuta and Melilla, and abroad through DPDgroup. After an `Ausente`, a second attempt follows the next working day; the price shops pay includes two attempts, or three with its Premium service for online shops.
 
 **Collecting at the agency.** If you'll be away or would rather collect it, TIPSA's FAQ says the parcel stays at the agency nearest your postcode for 15 days from dispatch, not from its arrival. After that it goes back to the sender. Bring your DNI or passport; someone collecting for you needs a photocopy of yours. TIPSA's [agency finder](https://www.tip-sa.com/es/agencias-de-transporte) searches by province or postcode.
 
@@ -120,6 +120,7 @@ Yes, Pickup points in shops and lockers, shared with SEUR, where a parcel waits 
 - [TIPSA: Empresa de transporte urgente](https://www.tip-sa.com/es/tipsa) – Geopost, 330 agencies, hubs, lockers
 - [TIPSA: Página inicial (Portugal)](https://www.tip-sa.com/pt) – more than 300 agencies
 - [TIPSA: FAQs eTIPSA](https://www.tip-sa.com/es/faqs-etipsa) – two attempts, 24 and 48 hours, Saturday, shop notifications
+- [TIPSA: 360º eCommerce](https://www.tip-sa.com/es/envios-de-paquetes/360o-ecommerce) – three attempts with Premium
 - [TIPSA: Recogida en puntos de recogida](https://www.tip-sa.com/es/envios-de-paquetes/puntos-de-recogidas) – shared with SEUR, 7 days, opening days
 - [TIPSA: Agencias de transporte](https://www.tip-sa.com/es/agencias-de-transporte) – agency finder
 - [TIPSA: Puntos Pickup](https://aplicaciones.tip-sa.com/puntospickup/) – pickup point finder

@@ -3,7 +3,7 @@ title: CTT Express seguimiento: número, estados y teléfono
 description: Sigue tu paquete CTT Express: el número de 22 cifras, qué significa cada estado, los puntos Collectt, qué hacer si no estabas y los teléfonos de CTT Express.
 slug: ctt-express-seguimiento
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 CTT Express es la filial española de paquetería urgente del grupo portugués CTT, la antigua Tourline Express, y reparte en toda España y Portugal. Para seguir tu paquete, escribe el número en el [localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) de cttexpress.com o pégalo en la casilla de arriba. El número te llega en el SMS o en el correo de confirmación de CTT Express.
@@ -47,6 +47,8 @@ El seguimiento de CTT Express está solo en español. La página muestra cuatro 
 `Pendiente de recepción en CTT Express` es el que más preocupa, y solo significa que el envío aún no ha entrado en la red. Si sigue así más de 24 horas después de pedir la recogida (en envíos desde España o Portugal), CTT Express te pide que elijas «Mi envío sigue en “Pendiente de recepción en CTT Express”» en su formulario de contacto. En compras a marketplaces internacionales, la admisión en el país de origen y el viaje hasta la península tardan más.
 
 Bajo una incidencia, el motivo te dice qué pasó: `No pudimos contactar contigo`, `Dirección incorrecta`, `Se necesita concertar cita previa` o `Envío demorado por festivo local`, por ejemplo. Las preguntas frecuentes de CTT Express avisan de que una «Incidencia de destinatario no contesta/ausente» puede salir aunque estuvieras en casa, si el repartidor no llegó hasta tu puerta; el siguiente intento es al día laborable siguiente.
+
+**Compras de fuera de la UE.** CTT Express ofrece a las tiendas despachar en aduana los paquetes que traen de fuera de la Unión Europea, por ejemplo de China, y luego los reparte con su propia red en 24 o 48 horas; el despacho tarda de media 12 horas, según CTT Express. Si la aduana retiene el paquete, puede que lo veas en el seguimiento o que te llegue una notificación, y puede haber impuestos o derechos que pagar; ante la duda, CTT Express te remite a su atención al cliente. Las compras de hasta 150 € pagan un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 todas pagan además una tasa de tramitación de 2 € por tipo de producto, sea cual sea su valor. Quién los cobra y cuándo, en [paquete retenido en aduanas](guide:customs).
 
 ## CTT Express no entrega mi paquete: intentos, cambios y puntos Collectt
 
@@ -132,7 +134,10 @@ Así llaman las preguntas frecuentes de CTT Express a un envío que sigue en `Pe
 - [CTT Express: Qué significa «aceptado por la última milla»](https://www.cttexpress.com/blog/logistica/que-significa-aceptado-ultima-milla) – significado de los estados
 - [CTT Express: Nota de prensa sobre envíos](https://www.cttexpress.com/zona-de-prensa/notas-de-prensa/como-localizo-mi-paquete-con-ctt-express-y-otras-preguntas-frecuentes-sobre-envios) – «en tránsito», compras en marketplaces internacionales
 - [CTT Express: ¿Cómo contactar con CTT Express?](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – teléfonos, horario, correo, Madrid, aviso sobre los 807
-- [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – artículo del 27 de octubre de 2026, 900 110 898
+- [CTT Express: Servicio de importación de paquetería para empresas](https://www.cttexpress.com/servicios/importacion/) – importaciones de fuera de la UE, despacho de aduanas en 12 horas de media, entrega en 24 o 48 horas
+- [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – artículo del 27 de octubre de 2026, retenciones visibles en el seguimiento o por notificación, impuestos y derechos, atención al cliente, 900 110 898
+- [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – arancel de 3 € desde el 1 de julio de 2026 en envíos de hasta 150 €, tasa de 2 € desde el 1 de noviembre de 2026
+- [Comisión Europea: Guidance on the €3 customs duty and Union handling fee (PDF, en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € se aplica como el arancel de 3 €, pero sea cual sea el valor
 - [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – formulario de contacto y sus opciones
 - [CTT Express: ¿Qué es Phishing y cómo evitar sufrirlo?](https://www.cttexpress.com/blog/actualidad/como-evitar-phishing) – SMS y correos falsos
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – lo que lee y muestra Peek

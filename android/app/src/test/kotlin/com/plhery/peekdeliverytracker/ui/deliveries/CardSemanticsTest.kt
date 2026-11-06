@@ -86,7 +86,8 @@ class CardSemanticsTest {
         val card = button()
         assertEquals("${fullName(parcel)}, Next up, New trainers 👟, Ready for pickup · Kiosk im Hauptbahnhof", card.label())
         assertEquals("Parcel details", card.hint())
-        assertEquals(false, card.selected())
+        // Not shown beside the list, it says nothing of being selected, as the iPhone's says nothing.
+        assertNull(card.selected())
         // Nothing inside it is read on its own: not the carrier's mark, the words, the stamp nor the map.
         compose.onAllNodesWithText("New trainers 👟").assertCountEquals(0)
         compose.onAllNodesWithContentDescription(fullName(parcel)).assertCountEquals(0)
@@ -146,7 +147,7 @@ class CardSemanticsTest {
         val card = button()
         assertEquals("${fullName(parcel)}, Sat 31 Oct, Moon lamp 🌙, In transit", card.label())
         assertNull(card.hint())
-        assertEquals(false, card.selected())
+        assertNull(card.selected())
         card.performClick()
         assertTrue(opened)
     }
@@ -235,7 +236,7 @@ class CardSemanticsTest {
         val rows = compose.onAllNodes(buttons)
         rows.assertCountEquals(5)
         assertEquals(true, rows[2].selected())
-        assertEquals(false, rows[0].selected())
+        assertNull(rows[0].selected())
         rows[3].performClick()
         assertEquals(parcels[3].id, opened)
     }

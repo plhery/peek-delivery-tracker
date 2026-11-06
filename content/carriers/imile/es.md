@@ -17,7 +17,7 @@ iMile no publica ningún número de ejemplo. Estas son las formas que llevan sus
 | `IM06010000000000` | IM, 0601 y diez cifras: iMile. |
 | `IM00000000000000` | IM y 14 cifras: también iMile. |
 | `6010125000000` | 13 cifras que empiezan por 6, y las seis siguientes tienen forma de fecha (mes, día, año): el número de envío propio de iMile. |
-| `3000000000000` | Otros números de 13 cifras: no son ninguna de las formas de iMile. Los usan Delhivery, Yunda y Korea Post. |
+| `2000000000000` | Otros números de 13 cifras: no son ninguna de las formas de iMile. Los usan Delhivery, Yunda y Korea Post. |
 | `LP00000000000000` | No es de iMile, sino de [Cainiao](carrier:cainiao), la referencia logística de AliExpress. |
 
 En la página de seguimiento de iMile, escribe el número bajo «TYPE YOUR ORDER NUMBER»; el historial sale bajo «ORDER STATUS». Si iMile no conoce el número, ese recuadro se queda vacío, sin ningún aviso. Si no encuentras el número, mira [dónde encontrar el número de seguimiento](guide:find-tracking-number) y, si no aparece, pídeselo a la tienda.

@@ -17,7 +17,7 @@ iMile publishes no example number. The shapes iMile's parcels carry, with invent
 | `IM06010000000000` | IM, 0601 and ten digits: iMile. |
 | `IM00000000000000` | IM and 14 digits: iMile too. |
 | `6010125000000` | 13 digits starting with 6, the next six shaped like a date (month, day, year): iMile's own waybill number. |
-| `3000000000000` | Other 13-digit numbers: not one of iMile's shapes. Delhivery, Yunda and Korea Post use 13 digits. |
+| `2000000000000` | Other 13-digit numbers: not one of iMile's shapes. Delhivery, Yunda and Korea Post use 13 digits. |
 | `LP00000000000000` | Not iMile but [Cainiao](carrier:cainiao), AliExpress's logistics reference. |
 
 On iMile's tracking page, type it under "TYPE YOUR ORDER NUMBER"; the history shows under "ORDER STATUS". A number iMile doesn't know leaves that box empty, with no error. If you can't find any number, see [where to find a tracking number](guide:find-tracking-number), then ask the shop.

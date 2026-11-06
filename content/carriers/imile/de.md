@@ -17,7 +17,7 @@ iMile veröffentlicht keine Beispielnummer. Diese Formen tragen seine Pakete, mi
 | `IM06010000000000` | IM, 0601 und zehn Ziffern: iMile. |
 | `IM00000000000000` | IM und 14 Ziffern: ebenfalls iMile. |
 | `6010125000000` | 13 Ziffern, beginnend mit 6, die nächsten sechs wie ein Datum (Monat, Tag, Jahr): iMiles eigene Sendungsnummer. |
-| `3000000000000` | Andere 13-stellige Nummern: keine von iMiles Formen. Solche Nummern nutzen Delhivery, Yunda und Korea Post. |
+| `2000000000000` | Andere 13-stellige Nummern: keine von iMiles Formen. Solche Nummern nutzen Delhivery, Yunda und Korea Post. |
 | `LP00000000000000` | Nicht iMile, sondern [Cainiao](carrier:cainiao), die Logistiknummer von AliExpress. |
 
 Auf iMiles Tracking-Seite gibst du die Nummer unter „TYPE YOUR ORDER NUMBER“ ein, den Verlauf zeigt sie unter „ORDER STATUS“. Kennt iMile die Nummer nicht, bleibt das Feld leer, ohne Fehlermeldung. Findest du keine Nummer, hilft [Sendungsnummer finden](guide:find-tracking-number); sonst frag den Shop.

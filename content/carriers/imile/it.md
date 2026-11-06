@@ -17,7 +17,7 @@ iMile non pubblica esempi di codice. Queste sono le forme che hanno i suoi pacch
 | `IM06010000000000` | IM, 0601 e dieci cifre: iMile. |
 | `IM00000000000000` | IM e 14 cifre: anche questo è iMile. |
 | `6010125000000` | 13 cifre che iniziano con 6, e le sei successive hanno la forma di una data (mese, giorno, anno): il numero di spedizione di iMile. |
-| `3000000000000` | Altri codici di 13 cifre: non corrispondono a nessuna forma di iMile. Li usano Delhivery, Yunda e Korea Post. |
+| `2000000000000` | Altri codici di 13 cifre: non corrispondono a nessuna forma di iMile. Li usano Delhivery, Yunda e Korea Post. |
 | `LP00000000000000` | Non è iMile ma [Cainiao](carrier:cainiao), il riferimento logistico di AliExpress. |
 
 Sulla pagina di tracciamento di iMile scrivi il codice sotto «TYPE YOUR ORDER NUMBER»; la cronologia compare sotto «ORDER STATUS». Se iMile non conosce il codice, il riquadro resta vuoto, senza messaggi di errore. Se il codice non lo trovi, leggi [dove trovare il codice di tracking](guide:find-tracking-number) e poi chiedilo al negozio.

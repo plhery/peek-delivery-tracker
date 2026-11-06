@@ -92453,12 +92453,9 @@
   },
   {
     "input": "PKG006261001ES9999999999980A",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "quick-rabbit",
+    "confidence": "high",
     "candidates": [
-      "quick-rabbit"
-    ],
-    "asked": [
       "quick-rabbit"
     ]
   },

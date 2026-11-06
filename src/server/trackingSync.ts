@@ -237,7 +237,7 @@ export function earlierLead(
 
 function previousDeliveryProbe(parcel: JsonObject, carrier: string, number: string): DeliveryProbe | null {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const stored = data.delivery_probe ?? (carrier === 'swiss-post' ? data.swiss_post_probe : undefined);
+  const stored = data.delivery_probe;
   if (!isRecord(stored) || typeof stored.at !== 'string' || !Number.isFinite(Date.parse(stored.at))) return null;
   if ((stored.carrier != null && stored.carrier !== carrier) || (stored.number != null && stored.number !== number)) return null;
   return { at: stored.at, origin_update: typeof stored.origin_update === 'string' ? stored.origin_update : null,

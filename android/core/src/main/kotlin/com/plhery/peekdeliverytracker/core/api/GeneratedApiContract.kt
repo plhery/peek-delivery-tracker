@@ -1403,6 +1403,36 @@ value class CarrierId(val rawValue: String) {
         val Westweg = CarrierId("westweg")
         val Bigpost = CarrierId("bigpost")
         val Coship = CarrierId("coship")
+        val ApdParcel = CarrierId("apd-parcel")
+        val BigfootExpress = CarrierId("bigfoot-express")
+        val BrinkTransport = CarrierId("brink-transport")
+        val CamposCadilhe = CarrierId("campos-cadilhe")
+        val Carrybee = CarrierId("carrybee")
+        val ExpressFreightNi = CarrierId("express-freight-ni")
+        val FasterShipe = CarrierId("faster-shipe")
+        val FozPost = CarrierId("foz-post")
+        val Garudavega = CarrierId("garudavega")
+        val GruberLogistics = CarrierId("gruber-logistics")
+        val Huuneh = CarrierId("huuneh")
+        val IntertownTransport = CarrierId("intertown-transport")
+        val KingSolutions = CarrierId("king-solutions")
+        val Lafasta = CarrierId("lafasta")
+        val LaserLogistics = CarrierId("laser-logistics")
+        val MoranTransportation = CarrierId("moran-transportation")
+        val MteXpress = CarrierId("mte-xpress")
+        val NovaKargo = CarrierId("nova-kargo")
+        val OxpertaExpress = CarrierId("oxperta-express")
+        val Puntopost = CarrierId("puntopost")
+        val RikaExpress = CarrierId("rika-express")
+        val RocketShipping = CarrierId("rocket-shipping")
+        val SouthPost = CarrierId("south-post")
+        val TmaCompanies = CarrierId("tma-companies")
+        val TotalTransportation = CarrierId("total-transportation")
+        val TransportesRapex = CarrierId("transportes-rapex")
+        val VelocityExpressIn = CarrierId("velocity-express-in")
+        val WalkerLogistics = CarrierId("walker-logistics")
+        val XpressFreightManagement = CarrierId("xpress-freight-management")
+        val YuexiLogistics = CarrierId("yuexi-logistics")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -2747,6 +2777,36 @@ value class CarrierId(val rawValue: String) {
             Westweg,
             Bigpost,
             Coship,
+            ApdParcel,
+            BigfootExpress,
+            BrinkTransport,
+            CamposCadilhe,
+            Carrybee,
+            ExpressFreightNi,
+            FasterShipe,
+            FozPost,
+            Garudavega,
+            GruberLogistics,
+            Huuneh,
+            IntertownTransport,
+            KingSolutions,
+            Lafasta,
+            LaserLogistics,
+            MoranTransportation,
+            MteXpress,
+            NovaKargo,
+            OxpertaExpress,
+            Puntopost,
+            RikaExpress,
+            RocketShipping,
+            SouthPost,
+            TmaCompanies,
+            TotalTransportation,
+            TransportesRapex,
+            VelocityExpressIn,
+            WalkerLogistics,
+            XpressFreightManagement,
+            YuexiLogistics,
         )
     }
 }

@@ -1394,6 +1394,36 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let westweg = CarrierID(rawValue: "westweg")
     static let bigpost = CarrierID(rawValue: "bigpost")
     static let coship = CarrierID(rawValue: "coship")
+    static let apdParcel = CarrierID(rawValue: "apd-parcel")
+    static let bigfootExpress = CarrierID(rawValue: "bigfoot-express")
+    static let brinkTransport = CarrierID(rawValue: "brink-transport")
+    static let camposCadilhe = CarrierID(rawValue: "campos-cadilhe")
+    static let carrybee = CarrierID(rawValue: "carrybee")
+    static let expressFreightNi = CarrierID(rawValue: "express-freight-ni")
+    static let fasterShipe = CarrierID(rawValue: "faster-shipe")
+    static let fozPost = CarrierID(rawValue: "foz-post")
+    static let garudavega = CarrierID(rawValue: "garudavega")
+    static let gruberLogistics = CarrierID(rawValue: "gruber-logistics")
+    static let huuneh = CarrierID(rawValue: "huuneh")
+    static let intertownTransport = CarrierID(rawValue: "intertown-transport")
+    static let kingSolutions = CarrierID(rawValue: "king-solutions")
+    static let lafasta = CarrierID(rawValue: "lafasta")
+    static let laserLogistics = CarrierID(rawValue: "laser-logistics")
+    static let moranTransportation = CarrierID(rawValue: "moran-transportation")
+    static let mteXpress = CarrierID(rawValue: "mte-xpress")
+    static let novaKargo = CarrierID(rawValue: "nova-kargo")
+    static let oxpertaExpress = CarrierID(rawValue: "oxperta-express")
+    static let puntopost = CarrierID(rawValue: "puntopost")
+    static let rikaExpress = CarrierID(rawValue: "rika-express")
+    static let rocketShipping = CarrierID(rawValue: "rocket-shipping")
+    static let southPost = CarrierID(rawValue: "south-post")
+    static let tmaCompanies = CarrierID(rawValue: "tma-companies")
+    static let totalTransportation = CarrierID(rawValue: "total-transportation")
+    static let transportesRapex = CarrierID(rawValue: "transportes-rapex")
+    static let velocityExpressIn = CarrierID(rawValue: "velocity-express-in")
+    static let walkerLogistics = CarrierID(rawValue: "walker-logistics")
+    static let xpressFreightManagement = CarrierID(rawValue: "xpress-freight-management")
+    static let yuexiLogistics = CarrierID(rawValue: "yuexi-logistics")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -2738,6 +2768,36 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .westweg,
         .bigpost,
         .coship,
+        .apdParcel,
+        .bigfootExpress,
+        .brinkTransport,
+        .camposCadilhe,
+        .carrybee,
+        .expressFreightNi,
+        .fasterShipe,
+        .fozPost,
+        .garudavega,
+        .gruberLogistics,
+        .huuneh,
+        .intertownTransport,
+        .kingSolutions,
+        .lafasta,
+        .laserLogistics,
+        .moranTransportation,
+        .mteXpress,
+        .novaKargo,
+        .oxpertaExpress,
+        .puntopost,
+        .rikaExpress,
+        .rocketShipping,
+        .southPost,
+        .tmaCompanies,
+        .totalTransportation,
+        .transportesRapex,
+        .velocityExpressIn,
+        .walkerLogistics,
+        .xpressFreightManagement,
+        .yuexiLogistics,
     ]
 
     init(from decoder: Decoder) throws {

@@ -20,7 +20,7 @@ import {
 } from './carriers';
 import type { AdapterRegistry, Recognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { trackCarrier } from 'universal-parcel-scraper/node';
-import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/places';
+import { airportTimeZone, carrierHomeZone, dateLocalClocks, locatePlace, placeTimeZone } from 'universal-parcel-scraper/places';
 import type { StepRecorder } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry, hostAdapterEnvironment } from './adapterRegistry';
 import { normalizedLookupCountry } from './lookupCountry';
@@ -386,16 +386,45 @@ function expectedDayAhead(parcel: JsonObject, now: Date): boolean {
   return day !== undefined && day >= today;
 }
 
+/** Carriers whose page states every scan on a clock of its own, not the scan's: Landmark Global's on US Central time. */
+const PAGE_CLOCKS: ReadonlySet<string> = new Set(['landmark-global']);
+
 /**
  * The carrier's clock: the offset its newest scan states ("…T07:00:00+10:00", or "+00:00" from
  * a Canary Islands office in winter), else the carrier's zone in the catalog. A "Z" is a UTC
- * instant, and "-00:00" an unknown offset, not the scan's own clock.
+ * instant, and "-00:00" an unknown offset, not the scan's own clock. A carrier that states its
+ * page's clock (`PAGE_CLOCKS`) is read on the clock of the place its newest stored scan names.
  */
 function carrierClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+  const carrier = String(data.active_tracking_carrier ?? parcel.carrier);
+  const placed = PAGE_CLOCKS.has(carrier) ? newestPlaceZone(parcel, carrier) : null;
+  if (placed) return placed;
   const stated = /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(String(data.last_update ?? ''))
     ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;
-  return stated?.isValid ? stated.zone : resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+  return stated?.isValid ? stated.zone : resultTimezone(carrier, data as CarrierResult);
+}
+
+/**
+ * The zone of the place the newest stored scan of `carrier` that names one names: its town's or
+ * country's, or its airport's. Null for a parcel loaded without its rows, or a place the gazetteer
+ * does not find.
+ */
+function newestPlaceZone(parcel: JsonObject, carrier: string): string | null {
+  const at = (row: JsonObject) => Date.parse(String(row.occurred_at ?? ''));
+  const newest = storedEventIdentities(parcel)
+    .filter((row) => String(row.provider_event_id ?? '').startsWith(`${carrier}:`) && typeof row.location === 'string'
+      && row.location.trim() !== '' && Number.isFinite(at(row)))
+    .reduce<JsonObject | null>((latest, row) => !latest || at(row) > at(latest) ? row : latest, null);
+  if (!newest) return null;
+  const location = String(newest.location);
+  try {
+    const place = locatePlace(location);
+    return (place ? placeTimeZone(place) : null) ?? airportTimeZone(location);
+  } catch {
+    // A place the gazetteer cannot read gives no clock.
+    return null;
+  }
 }
 
 /**

@@ -372,7 +372,8 @@ alone (`last_update_local`), is from an earlier day on its clock, the parcel kee
 regular cadence until the carrier scans it again. Its clock is the offset the newest scan
 states, "+00:00" included (a Canary Islands office in winter), else the zone the delivery
 window below is read in (a "Z" is a UTC instant, not a stated clock); a parcel without a
-dated scan counts as today's.
+dated scan counts as today's. Landmark Global states every scan on US Central time, so its
+clock is that of the place its newest scan names, when the place gazetteer finds it.
 
 **A round sorted overnight** has not left yet: before 06:00 on the carrier's clock, the same
 clock, a parcel out for delivery keeps the regular cadence. Planzer, Quickpac and Swiss Post

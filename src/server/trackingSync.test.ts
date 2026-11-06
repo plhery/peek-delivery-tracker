@@ -3485,13 +3485,21 @@ describe('TrackingSyncService', () => {
     { scan: 'from 05:00 in Sydney, before 06:00', carrier: 'j-and-t-au', lastEvent: '2026-09-09T19:00:00Z', time: '19:52:00', every2Minutes: false },
     { scan: 'from 05:00 in Sydney, at 06:00', carrier: 'j-and-t-au', lastEvent: '2026-09-09T19:00:00Z', time: '20:02:00', every2Minutes: true },
     { scan: 'from 05:00 at +10:00, before 06:00', carrier: 'australia-post', lastEvent: '2026-09-09T19:00:00Z', lastUpdate: '2026-09-10T05:00:00+10:00', time: '19:52:00', every2Minutes: false },
-  ])('checks a parcel out for delivery with its scan $scan every 2 minutes: $every2Minutes', ({ carrier = 'swiss-post', lastEvent, lastUpdate, localDay, time = '10:02:00', every2Minutes }) => {
+    // Landmark Global states every scan on US Central time: its day and 06:00 are the scan place's, when the place is found.
+    { scan: 'from 06:30 near London, stated at -05:00', carrier: 'landmark-global', lastEvent: '2026-09-09T05:30:00Z', lastUpdate: '2026-09-09T00:30:00-05:00', place: 'Feltham, SRY', time: '05:52:00', every2Minutes: true },
+    { scan: 'from 06:30 near London, before 06:00 in Chicago', carrier: 'landmark-global', lastEvent: '2026-09-09T05:30:00Z', lastUpdate: '2026-09-09T00:30:00-05:00', time: '05:52:00', every2Minutes: false },
+    { scan: 'from 06:30 at an unknown place, before 06:00 in Chicago', carrier: 'landmark-global', lastEvent: '2026-09-09T05:30:00Z', lastUpdate: '2026-09-09T00:30:00-05:00', place: 'Unit 7', time: '05:52:00', every2Minutes: false },
+    // Another carrier's stated offset stays its clock, whatever the place.
+    { scan: 'from 06:30 near London, stated at -05:00 by UPS', carrier: 'ups', lastEvent: '2026-09-09T05:30:00Z', lastUpdate: '2026-09-09T00:30:00-05:00', place: 'Feltham, SRY', time: '05:52:00', every2Minutes: false },
+  ])('checks a parcel out for delivery with its scan $scan every 2 minutes: $every2Minutes', ({ carrier = 'swiss-post', lastEvent, lastUpdate, localDay, place, time = '10:02:00', every2Minutes }) => {
     const at = (time: string) => new Date(`2026-09-09T${time}Z`);
     const checked = new Date(at(time).getTime() - 2 * 60_000 + 15_000).toISOString();
     const parcel = { carrier, current_stage: 'out_for_delivery', tracking_number: 'TEST1234', created_at: '2026-09-09T00:00:00Z',
       last_synced_at: checked, sync_status: 'ok', archived_at: null,
       carrier_data: { ...(lastUpdate ? { last_update: lastUpdate } : {}), ...(localDay ? { last_update_local: localDay } : {}),
-        routing: { version: 1, configured_carrier: carrier, last_event_at: lastEvent } } };
+        routing: { version: 1, configured_carrier: carrier, last_event_at: lastEvent } },
+      ...(place ? { [STORED_EVENT_IDENTITIES]: [{ provider_event_id: `${carrier}:out`, occurred_at: lastEvent, stage: 'out_for_delivery', location: place },
+        { provider_event_id: `${carrier}:earlier`, occurred_at: '2026-09-08T12:00:00Z', stage: 'in_transit', location: 'Chicago, IL' }] } : {}) };
     expect(isOpenedParcelSyncDue(parcel, at(time))).toBe(every2Minutes);
     expect(isOpenedParcelSyncDue(parcel, new Date(at(time).getTime() + 8 * 60_000))).toBe(true);
   });

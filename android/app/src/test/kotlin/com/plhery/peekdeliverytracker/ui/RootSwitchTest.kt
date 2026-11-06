@@ -71,13 +71,20 @@ class RootSwitchTest {
 
     /**
      * The window's centre as it draws the last frame: laid out once the composition is idle, and drawn on its looper's
-     * clock, which a frame's length brings up.
+     * clock, which a frame's length brings up. Read once two frames agree: a busy machine can leave the first capture
+     * on the frame before, and the test's clock, standing still, moves no animation on meanwhile.
      */
     private fun centre(): Color {
         compose.waitForIdle()
-        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
-        val image = compose.onRoot().captureToImage().toPixelMap()
-        return image[image.width / 2, image.height / 2]
+        var last: Color? = null
+        repeat(5) {
+            shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+            val image = compose.onRoot().captureToImage().toPixelMap()
+            val colour = image[image.width / 2, image.height / 2]
+            if (colour == last) return colour
+            last = colour
+        }
+        return checkNotNull(last)
     }
 
     private fun exists(tag: String) = compose.onAllNodes(hasTestTag(tag)).fetchSemanticsNodes().isNotEmpty()

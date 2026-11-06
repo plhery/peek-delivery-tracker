@@ -322,7 +322,7 @@
   "landing.moves.body": "Chaque scan arrive sur une carte aux couleurs du transporteur, avec Pip à côté. Peek te prévient quand ça compte, sur {{iphone}} ou dans ton navigateur.",
   "landing.moves.iphone": "ton iPhone",
   "landing.moves.every10": "Vérifié toutes les 10 min",
-  "landing.moves.lastMile": "Toutes les 2 min sur le dernier kilomètre",
+  "landing.moves.lastMile": "Toutes les 2 min le jour de la livraison",
   "landing.journey.label": "Le voyage d’un colis, scan après scan",
   "landing.journey.cleared": "Dédouané",
   "landing.journey.inTwoDays": "Arrive dans 2 jours",

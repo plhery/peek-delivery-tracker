@@ -322,7 +322,7 @@
   "landing.moves.body": "Cada movimentação aparece num mapa com as cores da transportadora, e o Pip fica ao lado. O Peek avisa você quando for importante, no {{iphone}} ou no navegador.",
   "landing.moves.iphone": "seu iPhone",
   "landing.moves.every10": "Verificada a cada 10 min",
-  "landing.moves.lastMile": "A cada 2 min na última milha",
+  "landing.moves.lastMile": "A cada 2 min no dia da entrega",
   "landing.journey.label": "O trajeto de uma encomenda, movimentação por movimentação",
   "landing.journey.cleared": "Liberada na alfândega",
   "landing.journey.inTwoDays": "Chega em 2 dias",

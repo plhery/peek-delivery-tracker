@@ -322,7 +322,7 @@
   "landing.moves.body": "Каждая отметка появляется на карте в цветах службы доставки, а рядом — Пип. Peek присылает уведомления, когда это важно, — на {{iphone}} или в браузер.",
   "landing.moves.iphone": "ваш iPhone",
   "landing.moves.every10": "Проверка каждые 10 мин",
-  "landing.moves.lastMile": "Каждые 2 мин на последней миле",
+  "landing.moves.lastMile": "Каждые 2 мин в день доставки",
   "landing.journey.label": "Путь посылки, отметка за отметкой",
   "landing.journey.cleared": "Прошла таможню",
   "landing.journey.inTwoDays": "Прибудет через 2 дня",

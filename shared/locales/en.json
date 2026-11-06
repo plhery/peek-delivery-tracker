@@ -322,7 +322,7 @@
   "landing.moves.body": "Every scan lands on a map in the carrier’s colours, with Pip beside it. Peek notifies you when it matters, on {{iphone}} or in your browser.",
   "landing.moves.iphone": "your iPhone",
   "landing.moves.every10": "Checked every 10 min",
-  "landing.moves.lastMile": "Every 2 min on the last mile",
+  "landing.moves.lastMile": "Every 2 min on delivery day",
   "landing.journey.label": "A parcel’s journey, scan by scan",
   "landing.journey.cleared": "Cleared customs",
   "landing.journey.inTwoDays": "Arrives in 2 days",

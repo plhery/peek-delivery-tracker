@@ -322,7 +322,7 @@
   "landing.moves.body": "Cada escaneo aparece en un mapa con los colores del transportista, con Pip al lado. Peek te envía una notificación cuando importa, en {{iphone}} o en tu navegador.",
   "landing.moves.iphone": "tu iPhone",
   "landing.moves.every10": "Comprobado cada 10 min",
-  "landing.moves.lastMile": "Cada 2 min en el último tramo",
+  "landing.moves.lastMile": "Cada 2 min el día del reparto",
   "landing.journey.label": "El viaje de un paquete, escaneo a escaneo",
   "landing.journey.cleared": "Aduana superada",
   "landing.journey.inTwoDays": "Llega en 2 días",

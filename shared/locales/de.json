@@ -322,7 +322,7 @@
   "landing.moves.body": "Jeder Scan landet auf einer Karte in den Farben des Paketdiensts, mit Pip daneben. Wenn es darauf ankommt, schickt dir Peek eine Mitteilung, aufs {{iphone}} oder in den Browser.",
   "landing.moves.iphone": "iPhone",
   "landing.moves.every10": "Alle 10 Min. geprüft",
-  "landing.moves.lastMile": "Alle 2 Min. auf der letzten Meile",
+  "landing.moves.lastMile": "Alle 2 Min. am Zustelltag",
   "landing.journey.label": "Die Reise eines Pakets, Scan für Scan",
   "landing.journey.cleared": "Zoll passiert",
   "landing.journey.inTwoDays": "Kommt in 2 Tagen",

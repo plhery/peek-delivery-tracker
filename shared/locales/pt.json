@@ -322,7 +322,7 @@
   "landing.moves.body": "Cada leitura aparece num mapa com as cores da transportadora, com o Pip ao lado. O Peek envia-te uma notificação quando importa, no {{iphone}} ou no teu navegador.",
   "landing.moves.iphone": "teu iPhone",
   "landing.moves.every10": "Verificado de 10 em 10 min",
-  "landing.moves.lastMile": "De 2 em 2 min no último troço",
+  "landing.moves.lastMile": "De 2 em 2 min no dia da entrega",
   "landing.journey.label": "A viagem de uma encomenda, leitura a leitura",
   "landing.journey.cleared": "Desalfandegada",
   "landing.journey.inTwoDays": "Chega daqui a 2 dias",

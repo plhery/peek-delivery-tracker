@@ -322,7 +322,7 @@
   "landing.moves.body": "Każdy skan trafia na mapę w kolorach przewoźnika, a obok stoi Pip. Peek powiadomi Cię, gdy to ważne, na {{iphone}} lub w przeglądarce.",
   "landing.moves.iphone": "iPhonie",
   "landing.moves.every10": "Sprawdzane co 10 min",
-  "landing.moves.lastMile": "Co 2 min na ostatnim odcinku",
+  "landing.moves.lastMile": "Co 2 min w dniu doręczenia",
   "landing.journey.label": "Podróż paczki, skan po skanie",
   "landing.journey.cleared": "Po odprawie celnej",
   "landing.journey.inTwoDays": "Dotrze za 2 dni",

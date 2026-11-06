@@ -322,7 +322,7 @@
   "landing.moves.body": "每次扫描都会以快递公司的品牌色标在地图上，Pip 就在一旁。有要紧的动态时，Peek 会在{{iphone}} 或浏览器上通知你。",
   "landing.moves.iphone": "你的 iPhone",
   "landing.moves.every10": "每 10 分钟查询一次",
-  "landing.moves.lastMile": "最后一公里每 2 分钟一次",
+  "landing.moves.lastMile": "派送当天每 2 分钟一次",
   "landing.journey.label": "包裹的旅程，每次扫描都看得见",
   "landing.journey.cleared": "已清关",
   "landing.journey.inTwoDays": "2 天后送达",

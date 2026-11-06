@@ -38,7 +38,7 @@ describe('Landing', () => {
       'Will I know when it moves?', 'Following more than one?', 'Who’s behind Peek?',
     ]);
     const moves = screen.getByRole('region', { name: 'Will I know when it moves?' });
-    expect(within(moves).getAllByRole('listitem').map((item) => item.textContent)).toEqual(['Checked every 10 min', 'Every 2 min on the last mile']);
+    expect(within(moves).getAllByRole('listitem').map((item) => item.textContent)).toEqual(['Checked every 10 min', 'Every 2 min on delivery day']);
     const more = screen.getByRole('region', { name: 'Following more than one?' });
     expect(within(more).getAllByRole('listitem')).toHaveLength(3);
     expect(within(more).getByText('Notifications for the steps you choose')).toBeVisible();

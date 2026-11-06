@@ -86,7 +86,7 @@ test('asks four questions in order, with the field first and the name, the code 
   await expect(page.getByRole('link', { name: 'Open source 3,500+ carriers' })).toBeVisible();
   await expect(page.getByRole('img', { name: 'Works with Swiss Post, DHL, UPS, DPD Switzerland, GLS and thousands more carriers' })).toBeVisible();
   const moves = page.getByRole('region', { name: 'Will I know when it moves?' });
-  await expect(moves.getByRole('listitem')).toHaveText(['Checked every 10 min', 'Every 2 min on the last mile']);
+  await expect(moves.getByRole('listitem')).toHaveText(['Checked every 10 min', 'Every 2 min on delivery day']);
 
   // The heavy parts arrive when their sections come near: the journey on the app's own map, the list in the app's own cards.
   await journey(page).scrollIntoViewIfNeeded();

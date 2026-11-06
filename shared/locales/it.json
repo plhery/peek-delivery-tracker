@@ -322,7 +322,7 @@
   "landing.moves.body": "Ogni scansione finisce su una mappa con i colori del corriere, con Pip accanto. Peek ti avvisa quando conta, sull’{{iphone}} o nel browser.",
   "landing.moves.iphone": "iPhone",
   "landing.moves.every10": "Controllato ogni 10 min",
-  "landing.moves.lastMile": "Ogni 2 min nell’ultimo miglio",
+  "landing.moves.lastMile": "Ogni 2 min il giorno di consegna",
   "landing.journey.label": "Il viaggio di un pacco, scansione dopo scansione",
   "landing.journey.cleared": "Dogana superata",
   "landing.journey.inTwoDays": "Arriva tra 2 giorni",

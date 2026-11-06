@@ -202,10 +202,10 @@ scan, in an answer of the carrier's own lookup that is no fallback. Its identity
 dates the scan, the scan takes the row over: the same stage, wording, provider code and place,
 at an instant showing that wall clock. A universal provider's copy dated by its day alone
 (ParcelsApp's of a shipping partner's step under UPS) is the carrier's own timed scan of that
-step, one to one: the same stage, place and provider code, the scan's words or those words
-followed by the place, and the scan's time on that day, on the clock the scan states or on the
-carrier's home clock. The carrier's new scan takes the copy's row over; a copy of a scan the
-carrier holds already is deleted, or not stored. The day dates no answer for routing.
+step, one to one: the same stage and provider code, the scan's place or that place without
+its postcode, the scan's words or those words followed by the place, and the scan's time on
+that day, on the clock the scan states or on the carrier's home clock. The carrier's new scan
+takes the copy's row over; a copy of a scan the carrier holds already is deleted, or not stored. The day dates no answer for routing.
 
 The scraper dates a scan on a wall clock in no zone on a zone it deduces: the scan's place,
 a neighbouring scan's, the destination the carrier delivers in, or the carrier's home
@@ -833,8 +833,8 @@ not asked: why (older, no movement, local clocks only unless the check then take
 answer, undated, or behind a provider's delivered or returned stage), when, how many checks
 in a row,
 for an older one its newest scan and the watermark it lost to, and how many of its scans the
-parcel's rows lack, matched as the sync matches copies (`new_scans`): none means the carrier
-only knows what the parcel shows. The app's "Tracking added"
+parcel's rows lack, matched as the sync matches copies, those dated by their day alone included
+(`new_scans`): none means the carrier only knows what the parcel shows. The app's "Tracking added"
 row is no scan, so a parcel added after its newest scan keeps that scan's time. Nor is a row stamped when it was
 observed, such as a UPU milestone: its observation time never holds the watermark ahead.
 Over a parcel still pending, an answer that moved is not older for rows its provider wrote

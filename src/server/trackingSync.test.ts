@@ -7175,6 +7175,20 @@ describe('a provider\'s copy dated by its day alone of a carrier\'s timed scan',
     expect([...store.rows.values()]).toEqual([row]);
   });
 
+  it('counts no copy of a scan the carrier holds as a scan the rows lack', () => {
+    const stored = [{ provider_event_id: own, occurred_at: '2026-11-06T15:43:00+00:00', stage: departed.stage, description: departed.description,
+      location: departed.location, time: departed.time }];
+    const provider = (scan: JsonObject) => ({ sourceCarrierId: 'unknown', result: { ...answer(scan), tracking_provider: 'ParcelsApp' } }) as unknown as RoutedResult;
+    expect(scansMissing({ ...parcel, [STORED_EVENT_IDENTITIES]: stored }, provider(copied))).toBe(0);
+    expect(scansMissing({ ...parcel, [STORED_EVENT_IDENTITIES]: [] }, provider(copied))).toBe(1);
+    expect(scansMissing({ ...parcel, [STORED_EVENT_IDENTITIES]: stored },
+      provider({ ...copied, description: 'Arrived at Shipping Partner Facility, Example Town, CA' }))).toBe(1);
+    // Nor the carrier's scan that takes the copy's row over.
+    const copyRow = [{ provider_event_id: copy, occurred_at: '2026-11-06T00:00:00+00:00', stage: copied.stage, description: copied.description,
+      location: copied.location, time: copied.time, universal_provider: 'ParcelsApp' }];
+    expect(scansMissing({ ...parcel, [STORED_EVENT_IDENTITIES]: copyRow }, { sourceCarrierId: 'ups', result: answer(departed) } as unknown as RoutedResult)).toBe(0);
+  });
+
   it('keeps the copy beside another step of the day', async () => {
     const { store, sync } = service({ fetch: vi.fn().mockResolvedValueOnce(answer(departed)).mockRejectedValue(down),
       fetchUniversal: vi.fn().mockResolvedValue({ ...answer({ ...copied, description: 'Arrived at Shipping Partner Facility, Example Town, CA' }),

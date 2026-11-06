@@ -2966,8 +2966,11 @@ export function scansMissing(parcel: JsonObject, value: RoutedResult): number | 
   const events = buildEvents(parcel, value.result, value.sourceCarrierId);
   const stored = storedEventIdentities(parcel);
   const known = new Set(stored.map((row) => row.provider_event_id));
-  const { reused, skipped } = sharedScans(events, stored, new Map(), earlierCarrier(parcel));
-  return events.filter(({ provider_event_id: id }) => typeof id === 'string' && !known.has(id) && !reused.has(id) && !skipped.has(id)).length;
+  const shared = sharedScans(events, stored, new Map(), earlierCarrier(parcel));
+  // A provider's copy dated by its day alone of a scan a row holds adds nothing either, nor a scan taking over such a copy.
+  const dated = datedObservations(events, stored, shared);
+  return events.filter(({ provider_event_id: id }) => typeof id === 'string' && !known.has(id) && !shared.reused.has(id)
+    && !shared.skipped.has(id) && !dated.reused.has(id) && !dated.skipped.has(id)).length;
 }
 
 /**

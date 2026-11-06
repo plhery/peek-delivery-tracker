@@ -2019,6 +2019,16 @@ describe('a provider\'s copy dated by its day alone', () => {
     expect(left([timed(evening)], [copied()])).toBe(0);
   });
 
+  it('names the scan\'s place, or that place without its postcode', () => {
+    const coded = { location: 'Example Town, CA 00000' };
+    expect(found([timed(coded)], [copied()]).reused).toEqual([['ups:departed', 'unknown:departed']]);
+    expect(found([copy()], [kept(coded)]).skipped).toEqual(['unknown:departed']);
+    // Another postcode, a copy that keeps a postcode the scan lacks, or a place that was a postcode alone are other places.
+    expect(left([timed(coded)], [copied({ location: 'Example Town, CA 00001' })])).toBe(0);
+    expect(left([timed()], [copied({ location: 'Example Town, CA 00000' })])).toBe(0);
+    expect(left([timed({ location: '00000' })], [copied({ location: null, description: 'Departed Shipping Partner Facility' })])).toBe(0);
+  });
+
   it('goes once the carrier holds the scan', () => {
     const gone = { reused: [], absorbed: ['unknown:departed'], skipped: [] };
     // The carrier's scan stored, in the batch or not.

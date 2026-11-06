@@ -1501,19 +1501,26 @@ export function showsClock(local: string, instant: number): boolean {
   return shift % QUARTER_HOUR_MS === 0 && Math.abs(shift) <= MAX_ZONE_SHIFT_MS;
 }
 
+/** A place without its postcode: each of its parts without the words that hold a digit ("example town, ca 90001" → "example town, ca"). */
+function withoutPostcode(place: string): string {
+  return place.split(/\s*,\s*/).map((part) => part.split(' ').filter((word) => !/\d/.test(word)).join(' '))
+    .filter(Boolean).join(', ');
+}
+
 /**
  * Whether a universal provider's copy dated by its day alone tells a carrier's timed scan: the
- * same stage and place, codes that agree, the scan's words (`sameWording`) or those words
- * followed by the copy's place (ParcelsApp's "Departed Shipping Partner Facility, Example
- * Town, CA"), and the scan's instant on the copy's day, on the clock the scan states or on its
- * carrier's home clock, where the sync starts a carrier's day.
+ * same stage, the scan's place or that place without its postcode, codes that agree, the scan's
+ * words (`sameWording`) or those words followed by the copy's place (ParcelsApp's "Departed
+ * Shipping Partner Facility, Example Town, CA"), and the scan's instant on the copy's day, on the
+ * clock the scan states or on its carrier's home clock, where the sync starts a carrier's day.
  */
 function toldOnDay(copy: JsonObject, scan: JsonObject): boolean {
   const [day, words, place] = [dayOf(copy), wordingOf(scan), placeOf(copy)];
   const zone = carrierHomeZone(sourceOf(identity(scan)));
   const days = [labelledTime(scan)?.toISODate(), LOCAL_CLOCK.exec(localTimeOf(scan))?.[1],
     zone ? DateTime.fromMillis(instantOf(scan), { zone }).toISODate() : null];
-  return day !== null && days.includes(day) && stageOf(copy) === stageOf(scan) && placeOf(scan) === place
+  return day !== null && days.includes(day) && stageOf(copy) === stageOf(scan)
+    && (placeOf(scan) === place || (place !== '' && withoutPostcode(placeOf(scan)) === place))
     && codesAgree(copy, scan)
     && (sameWording(wordingOf(copy), words) || (words !== '' && place !== '' && wordingOf(copy) === `${words}, ${place}`));
 }

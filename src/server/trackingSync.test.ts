@@ -1543,7 +1543,7 @@ describe('TrackingSyncService', () => {
     const hub = { time: '2026-10-27T05:37:00Z', description: 'Arrived at facility', stage: 'in_transit' };
     const onVehicle = { time: '2026-10-27T11:52:00Z', description: 'With delivery courier', stage: 'out_for_delivery' };
 
-    it('stays while a provider without one answers for the carrier, and goes when the carrier gives none', async () => {
+    it('stays while an answer without one comes, from a provider or the carrier, until its day has passed', async () => {
       const check = parcel();
       const first = await check('2026-10-26T20:00:00Z', answer('in_transit', { ...dated, unread_estimates: ['timeWindow'] }));
       expect(first).toMatchObject({ expected_delivery: '2026-10-29' });
@@ -1555,9 +1555,34 @@ describe('TrackingSyncService', () => {
       const again = await check('2026-10-27T13:00:00Z', new Error('down'), answer('out_for_delivery', {}, onVehicle, hub));
       expect(again).toMatchObject({ current_stage: 'out_for_delivery', expected_delivery: '2026-10-29',
         carrier_data: { expected_delivery_from: '2026-10-28' } });
+      // The carrier's own answer without a date does not take back the day it gave.
       const own = await check('2026-10-27T16:00:00Z', answer('out_for_delivery', {}, onVehicle, hub));
-      expect(own.expected_delivery).toBeNull();
-      expect(own.carrier_data).not.toHaveProperty('expected_delivery_from');
+      expect(own).toMatchObject({ expected_delivery: '2026-10-29', carrier_data: { expected_delivery_from: '2026-10-28' } });
+      const lastDay = await check('2026-10-29T20:00:00Z', answer('out_for_delivery', {}, onVehicle, hub));
+      expect(lastDay.expected_delivery).toBe('2026-10-29');
+      const after = await check('2026-10-30T08:00:00Z', answer('out_for_delivery', {}, onVehicle, hub));
+      expect(after.expected_delivery).toBeNull();
+      expect(after.carrier_data).not.toHaveProperty('expected_delivery_from');
+    });
+
+    it('goes when the carrier tells of a failed attempt or a hold, though the parcel is on its way again', async () => {
+      for (const [stage, description] of [['failed_attempt', 'Recipient not at home'], ['exception', 'Delivery postponed']] as const) {
+        const check = parcel();
+        await check('2026-10-26T20:00:00Z', answer('in_transit', dated));
+        const held = await check('2026-10-27T15:00:00Z', answer('in_transit', {},
+          { time: '2026-10-27T14:00:00Z', description: 'Back at the depot', stage: 'in_transit' },
+          { time: '2026-10-27T11:00:00Z', description, stage }, hub));
+        expect(held).toMatchObject({ current_stage: 'in_transit', expected_delivery: null });
+        // A day given again is kept again.
+        const again = await check('2026-10-27T18:00:00Z', answer('in_transit', { expected_delivery: '2026-10-30' },
+          { time: '2026-10-27T14:00:00Z', description: 'Back at the depot', stage: 'in_transit' },
+          { time: '2026-10-27T11:00:00Z', description, stage }, hub));
+        expect(again.expected_delivery).toBe('2026-10-30');
+        const kept = await check('2026-10-28T08:00:00Z', answer('in_transit', {},
+          { time: '2026-10-27T14:00:00Z', description: 'Back at the depot', stage: 'in_transit' },
+          { time: '2026-10-27T11:00:00Z', description, stage }, hub));
+        expect(kept.expected_delivery).toBe('2026-10-30');
+      }
     });
 
     it('goes once a provider shows the parcel delivered or held', async () => {

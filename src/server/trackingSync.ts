@@ -374,6 +374,16 @@ function deliveryWindowOpens(parcel: JsonObject): number | null {
 }
 
 /**
+ * Whether the day a parcel is expected (`expected_delivery`: a day, or a moment on it) has not passed yet on the
+ * carrier's clock.
+ */
+function expectedDayAhead(parcel: JsonObject, now: Date): boolean {
+  const day = /^\d{4}-\d{2}-\d{2}/.exec(typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery.trim() : '')?.[0];
+  const today = DateTime.fromJSDate(now, { zone: carrierClock(parcel) }).toISODate() ?? now.toISOString().slice(0, 10);
+  return day !== undefined && day >= today;
+}
+
+/**
  * The carrier's clock: the offset its newest scan states ("…T07:00:00+10:00"), else the
  * carrier's zone in the catalog. A zero offset is a UTC instant, not the scan's own clock.
  */
@@ -2375,13 +2385,14 @@ export class TrackingSyncService {
             anomalies = [...anomalies, 'early_stage_regression'];
           }
         }
-        // A provider's answer without a date, given while the parcel's own carrier did not answer, says nothing of the
-        // date the carrier gave: it stays, as the scraper keeps the carrier's date beside a provider's scans in one
-        // check. It goes with a changed or handed-over carrier, and once the parcel is no longer on its way.
-        if (!result.expected_delivery && typeof result.tracking_provider === 'string' && result.carrier_answered !== true
-          && !ownAnswer && directCarrier(filed) && !fetched.correction && !result.original_carrier && !previousData.original_carrier
-          && typeof parcel.expected_delivery === 'string' && parcel.expected_delivery
-          && ON_THE_WAY.has(String(values.current_stage ?? previousStage))) {
+        // An answer without a date says nothing of the day an earlier one gave: a carrier may name it once, or only on
+        // some of its pages, and a provider relaying its scans names none. The day stays while the parcel is on its way
+        // and the day has not passed. It goes once the parcel is delivered, held or waiting to be collected, once a new
+        // scan tells of a failed attempt or a hold, and with a changed or handed-over carrier, whose day it was not.
+        const held = persistedEvents.some((event) => !storedIds.has(String(event.provider_event_id))
+          && ['failed_attempt', 'exception'].includes(String(event.stage)));
+        if (!result.expected_delivery && !held && !fetched.correction && !result.original_carrier && !previousData.original_carrier
+          && expectedDayAhead(parcel, now) && ON_THE_WAY.has(String(values.current_stage ?? previousStage))) {
           values.expected_delivery = parcel.expected_delivery;
           if (typeof previousData.expected_delivery_from === 'string' && carrierData.expected_delivery_from == null) {
             carrierData.expected_delivery_from = previousData.expected_delivery_from;

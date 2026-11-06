@@ -273,9 +273,7 @@ confirming them again reports no `…_confirmed` decision and adds nothing to
 The filed carrier's partial answer, its status without scans or only its newest scans
 (`summary_only`, `history_truncated`), stands unless a provider holds a fuller history that is
 not behind it, as the scraper's `fillPartialAnswer` decides. That history then takes the
-carrier's facts it lacks, such as the estimate. So does a provider's answer saved while the
-carrier did not answer: without an estimate of its own, it keeps the stored one while the parcel
-is on its way. The carrier is still asked first on every check. While no provider holds more, the providers are asked again every 15 min.
+carrier's facts it lacks, such as the estimate. The carrier is still asked first on every check. While no provider holds more, the providers are asked again every 15 min.
 
 The same holds for the filed carrier's own answer with the parcel's label alone, nothing past
 registration, once its earliest scan, else the day the parcel was added, is two days old: a

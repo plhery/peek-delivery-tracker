@@ -246,6 +246,9 @@
   "apc-postal-logistics": {
     "decal": "apc-postal-logistics"
   },
+  "apd-parcel": {
+    "decal": "apd-parcel"
+  },
   "apg-ecommerce": {
     "decal": "apg-ecommerce"
   },
@@ -394,6 +397,9 @@
   "big-smart": {
     "decal": "big-smart"
   },
+  "bigfoot-express": {
+    "decal": "bigfoot-express"
+  },
   "bigpost": {
     "decal": "bigpost"
   },
@@ -472,6 +478,9 @@
   "bringer-parcel": {
     "decal": "bringer-parcel"
   },
+  "brink-transport": {
+    "decal": "brink-transport"
+  },
   "brt": {
     "decal": "dpd"
   },
@@ -517,6 +526,9 @@
   "c807-xpress": {
     "decal": "c807-xpress"
   },
+  "campos-cadilhe": {
+    "decal": "campos-cadilhe"
+  },
   "campost": {
     "decal": "campost"
   },
@@ -551,6 +563,9 @@
   },
   "carry-flap": {
     "decal": "carry-flap"
+  },
+  "carrybee": {
+    "decal": "carrybee"
   },
   "castores": {
     "decal": "castores"
@@ -1339,6 +1354,9 @@
   "explus-logistics": {
     "decal": "explus-logistics"
   },
+  "express-freight-ni": {
+    "decal": "express-freight-ni"
+  },
   "express-one": {
     "decal": "express-one"
   },
@@ -1380,6 +1398,9 @@
   },
   "faster-ae": {
     "decal": "faster-ae"
+  },
+  "faster-shipe": {
+    "decal": "faster-shipe"
   },
   "fastfrate": {
     "decal": "fastfrate"
@@ -1498,6 +1519,9 @@
   "foxpost": {
     "decal": "foxpost"
   },
+  "foz-post": {
+    "decal": "foz-post"
+  },
   "fragilepak": {
     "decal": "fragilepak"
   },
@@ -1527,6 +1551,9 @@
   },
   "garantpost": {
     "decal": "garantpost"
+  },
+  "garudavega": {
+    "decal": "garudavega"
   },
   "gati": {
     "decal": "gati"
@@ -1694,6 +1721,9 @@
   "groupe-guilbault": {
     "decal": "groupe-guilbault"
   },
+  "gruber-logistics": {
+    "decal": "gruber-logistics"
+  },
   "gs-postbox": {
     "decal": "gs-postbox"
   },
@@ -1850,6 +1880,9 @@
   "hunter-express": {
     "decal": "hunter-express"
   },
+  "huuneh": {
+    "decal": "huuneh"
+  },
   "hy-express": {
     "decal": "hy-express"
   },
@@ -1940,6 +1973,9 @@
   },
   "interrapidisimo": {
     "decal": "interrapidisimo"
+  },
+  "intertown-transport": {
+    "decal": "intertown-transport"
   },
   "intex-paketdienst": {
     "decal": "intex-paketdienst"
@@ -2140,6 +2176,9 @@
   "king-kong-express": {
     "decal": "king-kong-express"
   },
+  "king-solutions": {
+    "decal": "king-solutions"
+  },
   "kit-tk": {
     "decal": "kit-tk"
   },
@@ -2216,11 +2255,17 @@
   "labaih": {
     "decal": "labaih"
   },
+  "lafasta": {
+    "decal": "lafasta"
+  },
   "landmark-global": {
     "decal": "landmark-global"
   },
   "lao-post": {
     "decal": "lao-post"
+  },
+  "laser-logistics": {
+    "decal": "laser-logistics"
   },
   "last-one-mile-coop": {
     "decal": "last-one-mile-coop"
@@ -2493,6 +2538,9 @@
   "moovin": {
     "decal": "moovin"
   },
+  "moran-transportation": {
+    "decal": "moran-transportation"
+  },
   "morning-global": {
     "decal": "morning-global"
   },
@@ -2510,6 +2558,9 @@
   },
   "mrw": {
     "decal": "mrw"
+  },
+  "mte-xpress": {
+    "decal": "mte-xpress"
   },
   "multientrega": {
     "decal": "multientrega"
@@ -2594,6 +2645,9 @@
   },
   "nova-global": {
     "decal": "nova-poshta"
+  },
+  "nova-kargo": {
+    "decal": "nova-kargo"
   },
   "nova-poshta": {
     "decal": "nova-poshta"
@@ -2697,6 +2751,9 @@
   },
   "overseas-express": {
     "decal": "overseas-express"
+  },
+  "oxperta-express": {
+    "decal": "oxperta-express"
   },
   "ozon-logistics": {
     "decal": "ozon-logistics"
@@ -3040,6 +3097,9 @@
   "pullman-cargo": {
     "decal": "pullman-cargo"
   },
+  "puntopost": {
+    "decal": "puntopost"
+  },
   "purolator": {
     "decal": "purolator",
     "palette": {
@@ -3126,6 +3186,9 @@
   "rhenus-it": {
     "decal": "rhenus-it"
   },
+  "rika-express": {
+    "decal": "rika-express"
+  },
   "rincos": {
     "decal": "rincos"
   },
@@ -3140,6 +3203,9 @@
   },
   "roadrunner": {
     "decal": "roadrunner"
+  },
+  "rocket-shipping": {
+    "decal": "rocket-shipping"
   },
   "rodonaves": {
     "decal": "rodonaves"
@@ -3432,6 +3498,9 @@
   },
   "south-african-post-office": {
     "decal": "south-african-post-office"
+  },
+  "south-post": {
+    "decal": "south-post"
   },
   "southeastern-freight-lines": {
     "decal": "southeastern-freight-lines"
@@ -3729,6 +3798,9 @@
   "tiui": {
     "decal": "tiui"
   },
+  "tma-companies": {
+    "decal": "tma-companies"
+  },
   "tmm-express": {
     "decal": "tmm-express"
   },
@@ -3780,6 +3852,9 @@
   "total-express": {
     "decal": "total-express"
   },
+  "total-transportation": {
+    "decal": "total-transportation"
+  },
   "toyou": {
     "decal": "toyou"
   },
@@ -3818,6 +3893,9 @@
   },
   "transport-rdl": {
     "decal": "transport-rdl"
+  },
+  "transportes-rapex": {
+    "decal": "transportes-rapex"
   },
   "trendyol-express": {
     "decal": "trendyol-express"
@@ -3978,6 +4056,9 @@
   "veloces": {
     "decal": "veloces"
   },
+  "velocity-express-in": {
+    "decal": "velocity-express-in"
+  },
   "venipak": {
     "decal": "venipak"
   },
@@ -4045,6 +4126,9 @@
   },
   "wahana": {
     "decal": "wahana"
+  },
+  "walker-logistics": {
+    "decal": "walker-logistics"
   },
   "wanbexpress": {
     "decal": "wanbexpress"
@@ -4157,6 +4241,9 @@
   "xpress-courier-link": {
     "decal": "xpress-courier-link"
   },
+  "xpress-freight-management": {
+    "decal": "xpress-freight-management"
+  },
   "xpressbees": {
     "decal": "xpressbees"
   },
@@ -4217,6 +4304,9 @@
   },
   "yuema-express": {
     "decal": "yuema-express"
+  },
+  "yuexi-logistics": {
+    "decal": "yuexi-logistics"
   },
   "yunda": {
     "palette": {

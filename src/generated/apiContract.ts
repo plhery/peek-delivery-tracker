@@ -15063,6 +15063,15 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^YLE[A-Z]{2}\\d{10}YQ$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^CYS\\d{11}$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^JXC[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low",
+        "preferred": true
       }
     ],
     "trackingSearchUrl": "https://www.dhlink.com/trackQuery"
@@ -17208,7 +17217,11 @@ export const CARRIER_CAPABILITIES = {
       "Kerry Express (Hong Kong)",
       "Kerry Express (HK)",
       "KEX Express (Hong Kong)",
-      "嘉里快遞"
+      "嘉里快遞",
+      "Kerry Express Hong Kong (TGXpress)",
+      "TGXpress",
+      "Top Gun Express",
+      "精英速運"
     ],
     "countries": [
       "HK"
@@ -31609,7 +31622,7 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^JXC[A-Z]{2}\\d{10}YQ$",
-        "confidence": "high"
+        "confidence": "low"
       }
     ]
   },
@@ -33789,7 +33802,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Prague",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "wedo"
     },
     "trackingUrlTemplate": "https://onedelivery.cz/sledovani-zasilky?numer={trackingNumber}",
     "linkRules": [
@@ -34370,7 +34383,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "city-air-express",
+      "recognitionRank": 7,
+      "recognitionPattern": "^MN\\d{6}$"
     },
     "trackingUrlTemplate": "https://caebfs.netcourier.net/online/tracking/trackinginfo/{trackingNumber}",
     "linkRules": [
@@ -48650,6 +48665,58 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://westweg.itdida.com/"
+  },
+  "bigpost": {
+    "displayName": "Big Post",
+    "aliases": [
+      "BigPost"
+    ],
+    "countries": [
+      "AU"
+    ],
+    "color": "#2e61a3",
+    "selectable": true,
+    "timezone": "Australia/Melbourne",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://bigpost.com.au/tracking/"
+  },
+  "coship": {
+    "displayName": "COSHIP",
+    "aliases": [
+      "Canada Orient Shipping",
+      "Canada Orient Shipping Ltd.",
+      "캐나다쉬핑"
+    ],
+    "countries": [
+      "CA"
+    ],
+    "color": "#e40613",
+    "selectable": true,
+    "timezone": "America/Vancouver",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.coship.ca/tracking/?no={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.coship.ca",
+          "coship.ca"
+        ],
+        "pathPattern": "^/tracking/?$",
+        "params": [
+          "no"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.coship.ca/tracking/"
   }
 } as const;
 
@@ -50043,7 +50110,9 @@ export const CARRIER_IDS = [
   "jas-worldwide",
   "tiptop",
   "jumppoint-international",
-  "westweg"
+  "westweg",
+  "bigpost",
+  "coship"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

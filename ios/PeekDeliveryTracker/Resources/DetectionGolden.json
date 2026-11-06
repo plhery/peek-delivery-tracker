@@ -76476,6 +76476,17 @@
     ]
   },
   {
+    "input": "CYS99999999999",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink"
+    ]
+  },
+  {
     "input": "CZ000000014SI",
     "carrier": "posta-slovenije",
     "confidence": "high",
@@ -85219,18 +85230,47 @@
   },
   {
     "input": "JXCYT7091667250YQ",
-    "carrier": "juxi-express",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "dhlink",
       "juxi-express"
+    ],
+    "preferred": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink"
     ]
   },
   {
     "input": "JXCZZ9999999980YQ",
-    "carrier": "juxi-express",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "dhlink",
       "juxi-express"
+    ],
+    "preferred": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink"
+    ]
+  },
+  {
+    "input": "JXCZZ9999999990YQ",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhlink",
+      "juxi-express"
+    ],
+    "preferred": [
+      "dhlink"
+    ],
+    "asked": [
+      "dhlink"
     ]
   },
   {
@@ -88846,7 +88886,8 @@
     "asked": [
       "gls-fr",
       "gls-de",
-      "gls-ch"
+      "gls-ch",
+      "city-air-express"
     ]
   },
   {

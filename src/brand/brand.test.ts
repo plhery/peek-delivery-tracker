@@ -770,6 +770,7 @@ describe('carrier brand', () => {
       'edi-express',
       'cargo-trans-logistik',
       'jas-worldwide',
+      'westweg',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

@@ -500,7 +500,7 @@ and nothing typed is sent.
 - An answer without an estimate, the carrier's or a provider's, keeps the stored one while
   the parcel is on its way and its day has not passed. It goes once the parcel is delivered,
   held or waiting to be collected, once a new scan tells of a failed attempt or a hold, and
-  when the router changes the carrier or the parcel is handed over (`src/server/trackingSync.ts`).
+  when the router changes the carrier. A handover keeps it (`src/server/trackingSync.ts`).
 - Estimates appear only while a parcel is on its way. They are hidden after delivery, a
   failed attempt, pickup readiness or a return, and whenever they are in the past. Out for
   delivery already says the parcel comes today, so the apps, notifications and Live

@@ -1697,6 +1697,7 @@ export class TrackingSyncService {
       context,
       now,
       routing.confirmed_number === parcel.tracking_number ? routing.confirmed_carrier ?? null : null,
+      typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery : null,
     );
     await audit.start();
     // A parcel just added, or looked up, with no progress saved yet: its first answer.
@@ -2388,10 +2389,12 @@ export class TrackingSyncService {
         // An answer without a date says nothing of the day an earlier one gave: a carrier may name it once, or only on
         // some of its pages, and a provider relaying its scans names none. The day stays while the parcel is on its way
         // and the day has not passed. It goes once the parcel is delivered, held or waiting to be collected, once a new
-        // scan tells of a failed attempt or a hold, and with a changed or handed-over carrier, whose day it was not.
+        // scan tells of a failed attempt or a hold, and with a carrier the router swapped to, as another shipment's. A
+        // handover keeps it: the parcel is the same, and the delivery carrier's day stays while it or a provider
+        // relaying it answers without one.
         const held = persistedEvents.some((event) => !storedIds.has(String(event.provider_event_id))
           && ['failed_attempt', 'exception'].includes(String(event.stage)));
-        if (!result.expected_delivery && !held && !fetched.correction && !result.original_carrier && !previousData.original_carrier
+        if (!result.expected_delivery && !held && !fetched.correction
           && expectedDayAhead(parcel, now) && ON_THE_WAY.has(String(values.current_stage ?? previousStage))) {
           values.expected_delivery = parcel.expected_delivery;
           if (typeof previousData.expected_delivery_from === 'string' && carrierData.expected_delivery_from == null) {

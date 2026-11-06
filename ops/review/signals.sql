@@ -135,14 +135,33 @@ order by steps desc, carrier, from_stage, to_stage;
 
 \echo '== Expected days dropped in the window from parcels still on their way, by short id'
 \echo '   a day stays through answers without one until it passes on the carrier''s clock, the parcel is delivered,'
-\echo '   held or waiting to be collected, or its carrier changes: each is a day that passed or one dropped too early'
-select p.carrier, p.current_stage as stage, 'delivery-tracker' as lane, count(*) as parcels,
-       array_to_string((array_agg(left(p.id::text, 8) order by p.expected_delivery_changed_at desc))[1:5], ' ') as latest
-from public.packages as p
-where p.expected_delivery is null and p.expected_delivery_changed_at >= :since
-  and p.current_stage in ('pending', 'registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery')
+\echo '   held or waiting to be collected, or its carrier changes. By the day the check that dropped it found: passed'
+\echo '   on every clock, early (still ahead on every clock: the ones to read), edge (passed on some clocks only), and'
+\echo '   unknown (none recorded, as before checks kept it); latest lists the early ones first'
+with dropped as (
+  select p.id, p.carrier, p.current_stage, p.expected_delivery_changed_at,
+         case when a.previous_expected_delivery ~ '^\d{4}-\d{2}-\d{2}' then left(a.previous_expected_delivery, 10) end as day,
+         -- The drop's date on the clocks furthest behind and ahead of UTC.
+         to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT+12', 'YYYY-MM-DD') as west,
+         to_char(p.expected_delivery_changed_at at time zone 'Etc/GMT-14', 'YYYY-MM-DD') as east
+  from public.packages as p
+  -- The check that dropped it: the parcel's last one begun by then.
+  left join lateral (
+    select a.previous_expected_delivery from public.tracking_sync_attempts as a
+    where a.package_id = p.id and a.started_at <= p.expected_delivery_changed_at
+    order by a.started_at desc limit 1
+  ) as a on true
+  where p.expected_delivery is null and p.expected_delivery_changed_at >= :since
+    and p.current_stage in ('pending', 'registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery')
+)
+select carrier, current_stage as stage, 'delivery-tracker' as lane, count(*) as parcels,
+       count(*) filter (where day < west) as passed, count(*) filter (where day >= east) as early,
+       count(*) filter (where day >= west and day < east) as edge, count(*) filter (where day is null) as unknown,
+       array_to_string((array_agg(left(id::text, 8)
+         order by day >= east desc nulls last, expected_delivery_changed_at desc))[1:5], ' ') as latest
+from dropped
 group by 1, 2
-order by parcels desc, carrier, stage;
+order by early desc, parcels desc, carrier, stage;
 
 \echo '== Planned steps passed: parcels on their way whose kept plan has a step dated over a day ago, by short id'
 \echo '   the server serves a planned step only while it is ahead and the apps hide one as it passes, so such a step'

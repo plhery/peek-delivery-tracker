@@ -214,8 +214,14 @@ begin
   if (select reason from public.claim_sync_job('reason-worker')) <> 'opened' then raise exception 'claim lost the reason'; end if;
   if not public.start_leased_sync_attempt(gen_random_uuid(), job_id, 'reason-worker', jsonb_build_object(
     'package_id','97000000-0000-0000-0000-000000000005', 'trigger','opened',
-    'configured_carrier','ups', 'previous_stage','pending', 'started_at',clock_timestamp())) then
+    'configured_carrier','ups', 'previous_stage','in_transit', 'previous_expected_delivery','2026-11-08',
+    'started_at',clock_timestamp())) then
     raise exception 'a check opened by a link was not logged';
+  end if;
+  -- It keeps the day the parcel was expected when it began, beside its stage.
+  if (select previous_expected_delivery from public.tracking_sync_attempts
+      where package_id = '97000000-0000-0000-0000-000000000005') is distinct from '2026-11-08' then
+    raise exception 'a check lost the day the parcel was expected';
   end if;
   begin
     insert into public.sync_jobs(kind, dedupe_key, reason) values ('scheduled', 'scheduled-reason', 'refresh');

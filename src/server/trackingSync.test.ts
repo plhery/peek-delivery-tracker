@@ -1522,21 +1522,28 @@ describe('TrackingSyncService', () => {
       const events = [...newer, ...scans];
       return { status, current_stage: events[0]!.stage, last_status_text: events[0]!.description, last_update: events[0]!.time, events, ...dates };
     };
-    const parcel = () => {
+    const parcel = (start: JsonObject = {}) => {
       vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: ['ParcelsApp'], carrier: null, tier: () => 'unknown', rank: () => 0 });
       const store = eventStore();
       const client = Object.assign(store.client, {
         acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
         finishTrackingProvider: vi.fn().mockResolvedValue(undefined) });
       let saved: JsonObject = { id: 'dated-by-carrier', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'pending',
-        created_at: '2026-10-26T09:00:00Z' };
-      return async (at: string, carrier: CarrierResult | Error, provider?: CarrierResult) => {
-        const adapter = { fetch: carrier instanceof Error ? vi.fn().mockRejectedValue(carrier) : vi.fn().mockResolvedValue(carrier),
+        created_at: '2026-10-26T09:00:00Z', ...start };
+      // Each carrier's answer, or one for every carrier asked.
+      return async (at: string, carrier: CarrierResult | Error | ((carrier: string) => CarrierResult | Error), provider?: CarrierResult) => {
+        const answerOf = typeof carrier === 'function' ? carrier : () => carrier;
+        const adapter = { fetch: vi.fn(async (id: string) => {
+          const value = answerOf(id);
+          if (value instanceof Error) throw value;
+          return value;
+        }),
           fetchUniversal: provider ? vi.fn().mockResolvedValue(provider) : vi.fn().mockRejectedValue(new Error('not asked')) };
         await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
           .syncPackage({ ...saved, [STORED_EVENT_IDENTITIES]: store.identities() });
         saved = { ...saved, ...client.applyTrackingSync.mock.calls.at(-1)![1] };
-        return saved;
+        // What the check's audit found when it began.
+        return { ...saved, started: client.startSyncAttempt.mock.calls.at(-1)![1] } as JsonObject;
       };
     };
     const dated = { expected_delivery: '2026-10-29', expected_delivery_from: '2026-10-28' };
@@ -1563,6 +1570,36 @@ describe('TrackingSyncService', () => {
       const after = await check('2026-10-30T08:00:00Z', answer('out_for_delivery', {}, onVehicle, hub));
       expect(after.expected_delivery).toBeNull();
       expect(after.carrier_data).not.toHaveProperty('expected_delivery_from');
+      // The check that dropped it keeps the day it found, so the review tells a day that passed from one dropped early.
+      expect(after.started).toMatchObject({ previous_stage: 'out_for_delivery', previous_expected_delivery: '2026-10-29' });
+      expect(first.started).toMatchObject({ previous_stage: 'pending', previous_expected_delivery: null });
+    });
+
+    it('stays through a handover, while the delivery carrier or a provider relaying it answers without one', async () => {
+      // A France-to-Finland parcel La Poste hands to Posti.
+      const check = parcel({ carrier: 'la-poste', tracking_number: 'CW123456785FR' });
+      const inFinland = { time: '2026-10-27T06:00:00Z', description: 'Arrived in Finland', stage: 'in_transit' };
+      const sorted = { time: '2026-10-28T05:00:00Z', description: 'Sorted at the terminal', stage: 'in_transit' };
+      const posti = (dates: { expected_delivery?: string }, ...events: Array<{ time: string; description: string; stage: string }>): CarrierResult =>
+        ({ status: 'in_transit', current_stage: 'in_transit', last_status_text: events[0]!.description, last_update: events[0]!.time,
+          events, ...dates });
+      await check('2026-10-26T20:00:00Z', answer('in_transit', dated));
+      // The handover's answer gives no day: La Poste's stays.
+      const handedOver = await check('2026-10-27T07:00:00Z', (id) => id === 'la-poste'
+        ? { ...answer('in_transit', dated, hub), destination_country: 'FI', delivery_carrier: 'posti' } : posti({}, inFinland));
+      expect(handedOver).toMatchObject({ expected_delivery: '2026-10-29',
+        carrier_data: { active_tracking_carrier: 'posti', original_carrier: 'la-poste' } });
+      const own = await check('2026-10-27T13:00:00Z', (id) => id === 'la-poste' ? new Error('not asked') : posti(
+        { expected_delivery: '2026-10-30' }, inFinland));
+      expect(own.expected_delivery).toBe('2026-10-30');
+      // Posti down, a provider relays its scans without the day; then Posti answers without it.
+      const relayed = await check('2026-10-28T07:00:00Z', new Error('down'), posti({}, sorted, inFinland));
+      expect(relayed).toMatchObject({ current_stage: 'in_transit', expected_delivery: '2026-10-30',
+        carrier_data: { tracking_provider: 'ParcelsApp', original_carrier: 'la-poste' } });
+      const again = await check('2026-10-28T13:00:00Z', (id) => id === 'la-poste' ? new Error('not asked') : posti({}, sorted, inFinland));
+      expect(again.expected_delivery).toBe('2026-10-30');
+      const after = await check('2026-10-31T08:00:00Z', (id) => id === 'la-poste' ? new Error('not asked') : posti({}, sorted, inFinland));
+      expect(after.expected_delivery).toBeNull();
     });
 
     it('goes when the carrier tells of a failed attempt or a hold, though the parcel is on its way again', async () => {

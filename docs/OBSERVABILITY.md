@@ -88,7 +88,8 @@ All tables and views here are service-role only.
   added or a lookup, `refresh`, `opened` for a link read, `changed` for a carrier or input
   changed, `scheduled`, `release` for a scraper release's re-check, and `package` for a check
   someone asked for before checks named their reason. It also holds
-  the configured and actual carrier, job and package, previous and selected stage, provider status, event counts, outcome,
+  the configured and actual carrier, job and package, previous and selected stage, the expected day the parcel had when
+  the check began (`previous_expected_delivery`), provider status, event counts, outcome,
   error class, anomaly codes and a bounded private `status_text`. A check that stored a
   scan for the first time, moved the parcel's stage or restaged a stored scan into news
   (see `scans_reannounced`) ends `updated`; one whose carrier answered with the progress
@@ -468,7 +469,8 @@ leaving it off the map and its moves unannounced ([generatedTrack.ts](../src/lib
 dated over an hour after its check (`future_event_timestamp`, by short id, with the provider that dated it), parcels whose saved
 stage went back in the window (to an earlier one of pending, registered and accepted, or from delivered or returned, read
 from each check's `previous_stage`; by short id, and whether the next check filed the parcel under another carrier),
-expected days dropped in the window from parcels still on their way (each a day that passed or one dropped too early),
+expected days dropped in the window from parcels still on their way (by the day the dropping check's
+`previous_expected_delivery` held: passed, still ahead on every clock, or passed on some clocks only),
 parcels on their way whose kept plan has a step dated over a day ago (a step the server no longer serves), open unmapped wording seen in the window (`new` when first seen in it; a provider's
 own wording as relayed by it, beside the carrier of its sample's parcel), new open support cases that still give a reason, health incidents notified in the
 window or open and failing in it (`rescued` when every check that failed still answered

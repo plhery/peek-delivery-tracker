@@ -248,6 +248,8 @@ export class TrackingSyncAudit {
     now = new Date(),
     /** The carrier that confirmed this number directly, if any (trackingSupport.ts). */
     readonly answeredBy: string | null = null,
+    /** The day the parcel was expected when the check began, so the review tells a day that passed from one dropped. */
+    readonly previousExpectedDelivery: string | null = null,
   ) {
     this.#startedAtIso = now.toISOString();
   }
@@ -297,6 +299,7 @@ export class TrackingSyncAudit {
         trigger: this.context.trigger,
         configured_carrier: this.configuredCarrier,
         previous_stage: this.previousStage,
+        previous_expected_delivery: this.previousExpectedDelivery?.trim().slice(0, 100) || null,
         started_at: this.#startedAtIso,
         support_context: trackingSupportContext(this.trackingNumber, this.configuredCarrier, this.answeredBy),
       }, this.context.lease);

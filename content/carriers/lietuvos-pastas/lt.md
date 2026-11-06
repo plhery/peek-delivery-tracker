@@ -3,7 +3,7 @@ title: Lietuvos paštas siuntų sekimas: statusai ir paštomatai
 description: Sek Lietuvos pašto ar LP EXPRESS siuntą: kur rasti siuntos numerį, ką reiškia statusai, kiek siunta laukia paštomate, kaip sumokėti muitą ir kur skambinti.
 slug: lietuvos-pastas-siuntu-sekimas
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 Lietuvos paštas – nacionalinis Lietuvos pašto operatorius, o LP EXPRESS – jo paštomatų, kurjerių ir savitarnos prekės ženklas. Siuntą gali sekti [lpexpress.lt/track](https://lpexpress.lt/track) arba [post.lt siuntų sekimo puslapyje](https://www.post.lt/lt/siuntu-sekimas), o gali tiesiog įklijuoti numerį į laukelį viršuje. Numerį rasi Lietuvos pašto SMS žinutėje ar el. laiške, o jei siuntą siuntei pats – kasos kvite, kurį gavai pašte arba iš kurjerio.
@@ -70,6 +70,8 @@ Jei registruota ar įvertinta siunta vėluoja arba dingo, Lietuvos paštas praš
 
 Dingusią ar sugadintą paštomato siuntą pranešk Klientų aptarnavimo centrui arba užpildyk pretenzijos formą, bet pretenziją ir čia turi teikti siuntėjas. Jei siunta išsiųsta iš užsienio pašto, Lietuvos paštas prašo kreiptis į siuntėją. Siuntėjas iš Lietuvos gali užsakyti tarptautinę paiešką: nemokamai, kai nuo išsiuntimo praėjo du mėnesiai, anksčiau – už 19,99 €.
 
+**Siunta iš Lietuvos į užsienį.** Po įvykio `The parcel has been sent abroad` siuntą pristato gavėjo šalies operatorius, o nagrinėdamas pretenziją Lietuvos paštas remiasi tuo, ką šis operatorius patvirtina: jei jis patvirtina, kad siunta įteikta, žala neatlyginama, o jei dingimo nepatvirtina, žala atlyginama tik tada, kai siuntėjas kartu su tarptautinės paieškos forma pateikia ir gavėjo pretenziją. 6 mėnesių terminas galioja nepriklausomai nuo to, kurioje šalyje siunta dingo ar buvo sugadinta.
+
 Siunta grįžta siuntėjui, kai jos neatsiimi per terminą, nenukreipi per 4 dienas arba nesumoki importo mokesčių. Jei sekimas kelias dienas nejuda, skaityk [kodėl sekimas neatsinaujina](guide:tracking-not-updating) (anglų kalba).
 
 ## Lietuvos pašto kontaktai
@@ -102,7 +104,7 @@ LP EXPRESS – Lietuvos pašto paštomatų, kurjerių ir savitarnos prekės žen
 
 ### Kiek laiko keliauja LP EXPRESS siunta?
 
-Lietuvos paštas nurodo, kad siunta į paštomatą Lietuvoje dažniausiai atkeliauja kitą darbo dieną ar šeštadienį, jei siuntėjas ją įdeda iki nurodyto siuntų išėmimo laiko. Pasak jo, daugiau nei 97 proc. siuntų gavėjus pasiekia kitą darbo dieną.
+Lietuvos paštas nurodo, kad siunta į paštomatą Lietuvoje dažniausiai atkeliauja kitą darbo dieną ar šeštadienį, jei siuntėjas ją įdeda iki nurodyto siuntų išėmimo laiko. Pasak jo, daugiau nei 97 proc. siuntų gavėjus pasiekia kitą darbo dieną. Pašto siuntiniams Lietuvoje post.lt nurodo kokybės reikalavimą – 97 proc. pristatyti per 4 darbo dienas nuo išsiuntimo, o pirmenybinėms korespondencijos siuntoms į kitas ES šalis – 85 proc. per 3 ir 97 proc. per 5 darbo dienas.
 
 ### Kiek laiko siunta laukia paštomate?
 
@@ -117,7 +119,7 @@ Importo mokesčius nustato įstatymai, o Lietuvos paštas, tarpininkaudamas tarp
 Patikrink siuntėją: tikros Lietuvos pašto žinutės ateina nuo `LPASTAS` arba `LP_EXPRESS`, ne nuo telefono numerio, ir neturi nuorodų tiesioginiam mokėjimui. Sukčiai rašo apie neva sulaikytą siuntą ar klaidą adrese ir spaudžia veikti greitai.
 
 :::sources
-- [Lietuvos paštas: Siuntų sekimas](https://www.post.lt/lt/siuntu-sekimas) – numeris, kasos kvitas, kada matomas kelias, vėlavimas ir 1842, pretenzijos, pakartotinis pristatymas, tarptautinė paieška
+- [Lietuvos paštas: Siuntų sekimas](https://www.post.lt/lt/siuntu-sekimas) – numeris, kasos kvitas, kada matomas kelias, vėlavimas ir 1842, pretenzijos, pakartotinis pristatymas, tarptautinė paieška, siuntos į užsienį (gavėjo šalies operatoriaus patvirtinimas, gavėjo pretenzija, 6 mėnesiai nepriklausomai nuo šalies), kokybės reikalavimai
 - [LP EXPRESS: Siuntos sekimas](https://lpexpress.lt/track) – kalbos, būsenos, pranešimas apie nerastą siuntą, nukreipimas
 - [Lietuvos paštas: Dažniausiai užduodami klausimai](https://www.post.lt/duk) – paštomatai, mokesčiai prieš pristatymą
 - [Lietuvos paštas: Siuntos](https://www.post.lt/lt/duk/siuntos) – laiškininkai, atsiėmimas pašte, žalos atlyginimas

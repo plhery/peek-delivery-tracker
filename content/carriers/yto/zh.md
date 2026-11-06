@@ -3,7 +3,7 @@ title: 圆通速递（YTO）物流查询：YT 单号、物流记录与客服电�
 description: 圆通速递（YTO Express）快递单号查询：YT 单号长什么样，揽收扫描、派件扫描等物流记录是什么意思，查不到或丢件怎么办，圆通和圆通国际的客服电话。
 slug: yto-yuantong-wuliu-chaxun
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-06
 ---
 
 圆通速递（YTO Express）2000 年在上海创立，在国内有 5000 多家分公司。很多圆通单号对应的是国内包裹，比如淘宝、拼多多、抖音上的订单，寄往集运仓库或亲友家。可以在圆通官网的 [我要查件](https://www.yto.net.cn/ytoExpress/waybill/search/) 页面查，也可以把单号粘贴到上方的查询框。寄往海外的包裹归圆通国际，它在 [ytoglobal.com](https://www.ytoglobal.com/service/?lang=zh-cn) 有自己的查询页面。
@@ -62,9 +62,9 @@ updated: 2026-11-02
 
 圆通国际成立于 2006 年，称在全球 18 个国家和地区设有 50 多个海外办事处。它的“国际快递查询”页面在 [ytoglobal.com/service](https://www.ytoglobal.com/service/?lang=zh-cn)，有中英文界面，一次最多查 10 个单号。
 
-圆通国际的页面只说与全球多家优秀的国际物流服务供应商有战略合作，没说在你所在的国家由哪家公司派送。“国际标快”主要面向个人寄件，从国际仓出发到妥投的参考时效：英国、爱尔兰和加拿大 7 到 12 个工作日，美国 9 到 12 个，澳大利亚 8 到 13 个；圆通注明“以上时效只做参考，不做时效承诺”。其他国家和地区见 [国际标快页面](https://www.ytoglobal.com/product/express-intl/?lang=zh-cn) 的表格。
+圆通国际的页面只说与全球多家优秀的国际物流服务供应商有战略合作，没说在你所在的国家由哪家公司派送。“国际标快”主要面向个人寄件，从国际仓出发到妥投的参考时效：英国、加拿大和大多数欧盟国家（如爱尔兰、法国、德国、西班牙、波兰）7 到 12 个工作日（保加利亚、罗马尼亚 12 到 17 个），美国 9 到 12 个，澳大利亚 8 到 13 个；圆通注明“以上时效只做参考，不做时效承诺”。其他国家和地区见 [国际标快页面](https://www.ytoglobal.com/product/express-intl/?lang=zh-cn) 的表格。
 
-派送时你不在家，圆通国际的常见问题说，可以照“再次派件通知”上的说明约时间，再次派件免费；再派不成功，圆通会通知寄件人，按寄件人的意见处理。想提前约派件时间，可以打 400 60 95554。海关和机场安检可能开箱查验；要交多少税费，取决于你所在的国家。
+派送时你不在家，圆通国际的常见问题说，可以照“再次派件通知”上的说明约时间，再次派件免费；再派不成功，圆通会通知寄件人，按寄件人的意见处理。想提前约派件时间，可以打 400 60 95554。海关和机场安检可能开箱查验；要交多少税费，取决于你所在的国家。从欧盟以外网购寄到欧盟的商品，自 2026 年 11 月 1 日起还要交欧盟处理费（Union handling fee），不论货值，按海关税则归类每类 2 欧元；150 欧元以下的包裹，同样按每类另交 3 欧元关税。详见 [包裹被海关扣留](guide:customs)（英文）。
 
 ## 圆通包裹查不到、丢件或被退回
 
@@ -115,7 +115,7 @@ Peek 每 10 分钟查询一次，包裹派送中时每 2 分钟一次；两天�
 
 ### 圆通能寄到国外吗，多久能到？
 
-能，由圆通国际负责，它在 ytoglobal.com 有自己的查询页面。圆通国际没说在你所在的国家由哪家公司派送；寄到英国、爱尔兰、美国、加拿大和澳大利亚的参考时效是 7 到 13 个工作日，不做承诺。
+能，由圆通国际负责，它在 ytoglobal.com 有自己的查询页面。圆通国际没说在你所在的国家由哪家公司派送；寄到英国、大多数欧盟国家、美国、加拿大和澳大利亚的参考时效是 7 到 13 个工作日，不做承诺。
 
 ### 圆通客服电话是多少？
 
@@ -132,9 +132,11 @@ Peek 每 10 分钟查询一次，包裹派送中时每 2 分钟一次；两天�
 - [圆通速递：国际业务服务](https://www.yto.net.cn/global/globalProduct/) – 圆通国际的服务热线 4006095554、021-69777888
 - [圆通国际：企业介绍](https://www.ytoglobal.com/about-us/?lang=zh-cn) – 2006 年成立、海外办事处、合作伙伴
 - [圆通国际：国际快递查询](https://www.ytoglobal.com/service/?lang=zh-cn) – 中英文查询页面、一次最多 10 个单号
-- [圆通国际：国际标快](https://www.ytoglobal.com/product/express-intl/?lang=zh-cn) – 为个人寄件、参考时效
+- [圆通国际：国际标快](https://www.ytoglobal.com/product/express-intl/?lang=zh-cn) – 为个人寄件、参考时效、欧盟国家
 - [圆通国际：常见问题](https://www.ytoglobal.com/rich/question/?lang=zh-cn) – 客服热线 400 60 95554、再次派件、预约派件时间、开箱查验
 - [圆通国际：联系我们](https://www.ytoglobal.com/about-us/contact/?lang=zh-cn) – 在线留言表单
+- [欧盟委员会：EU customs reform（英文）](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2026 年 7 月 1 日起 150 欧元以下包裹每类 3 欧元关税，2026 年 11 月 1 日起每类 2 欧元欧盟处理费
+- [欧盟委员会：Guidance on the €3 customs duty and the Union handling fee（PDF，英文）](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 每类 2 欧元，不论货值
 - [交通运输部：快递市场管理办法（交通运输部令 2023 年第 22 号）](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – 2024 年 3 月 1 日起施行、当面验收、未经同意不得投递到智能快件箱或快递服务站、向邮政管理部门申诉
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Peek 显示的内容、单号格式、圆通记录原文、北京时间、退回路程
 :::

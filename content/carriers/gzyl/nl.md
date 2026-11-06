@@ -3,7 +3,7 @@ title: GZYL track & trace: pakket volgen met een YL…YQ-nummer
 description: Volg je GZYL-pakket (广州云链) uit China: hoe een YL…YQ-trackingnummer eruitziet, wat de statussen betekenen en waarom het al op bezorgd kan staan.
 slug: gzyl-pakket-volgen
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) is 广州云链货运代理有限公司, een expediteur in Guangzhou, China. Heeft een Chinese webshop je bestelling met GZYL verstuurd, dan bestaat je trackingnummer uit YL, tien cijfers en YQ: plak het in het vak hierboven. De website van GZYL, yunlianhouyun.com, is in het Chinees, en de pakketzoeker (小包查询) daar opent de trackingpagina van GZYL, die op een IP-adres zonder domeinnaam draait. Neem die tracking met een korreltje zout: GZYL schrijft een groot deel van de reis van een pakket vooraf, dus een stap daar is niet altijd een scan, ook `Delivered` niet.
@@ -51,7 +51,7 @@ Zet GZYL een plaatsnaam achter die woorden, dan toont Peek die als de plaats van
 
 **Een regel in het Chinees.** Bij een bestelling zonder scans schrijft het platform waarop de trackingpagina van GZYL draait, zelf `货物电子信息已经收到`: de elektronische gegevens van de goederen zijn ontvangen. De verkoper heeft de bestelling aangemaakt, maar niemand heeft het pakket nog gescand. Peek toont de regel in het Chinees, onder "Label created".
 
-**Via China Post.** Een pakket kan ook `广州处理中心已收寄` tonen, met de stad tussen haken erachter: China Post heeft het pakket in ontvangst genomen in zijn verwerkingscentrum in Guangzhou, en GZYL geeft dat in het Chinees door. Peek toont de regel in het Chinees, onder "Received by carrier".
+**Via China Post.** Een pakket kan ook `广州处理中心已收寄` tonen, met de stad tussen haken erachter: China Post heeft het pakket in ontvangst genomen in zijn verwerkingscentrum in Guangzhou, en GZYL geeft dat in het Chinees door. Bij nummers van Xinghe Freight is `香港处理中心已收寄` dezelfde ontvangst, in het verwerkingscentrum in Hongkong. Peek toont beide regels in het Chinees, onder "Received by carrier".
 
 **Tijden.** Alle tijden op de trackingpagina van GZYL staan in Pekingse tijd, ook die van de stappen in je eigen land, en er staat geen tijdzone bij. Staat er 20.00 uur, dan was het in België en Nederland 13.00 uur in de winter en 14.00 uur in de zomer.
 
@@ -67,7 +67,7 @@ Peek vond bij GZYL geen levertijden en geen regels over bezorgpogingen, afhaalpu
 
 **Alleen `Order information received` of `货物电子信息已经收到`.** De verkoper heeft de bestelling aangemaakt, maar GZYL heeft het pakket nog niet gescand. Een dag na die stap zet Peek onder "Label created": "The sender hasn’t handed it to GZYL yet. Tracking starts when they do." Dat wil zeggen: de afzender heeft het pakket nog niet aan GZYL gegeven, en de tracking begint zodra dat gebeurt. Komt er na een paar dagen niets bij, vraag de verkoper dan of het pakket echt verstuurd is.
 
-**Vast bij de douane.** Moet je invoerkosten betalen, lees dan de gids over [pakketten bij de douane](guide:customs) (in het Engels). Blijft het pakket er dagen liggen, laat het de verkoper weten.
+**Vast bij de douane.** Moet je invoerkosten betalen, lees dan de gids over [pakketten bij de douane](guide:customs) (in het Engels). Sinds 1 november 2026 int de douane in de hele EU naast de invoerrechten ook een afhandelingsvergoeding van € 2 per productcategorie (HS-code), net als de € 3 invoerrechten, maar ook voor zendingen van meer dan € 150. Meestal betaal je die al bij het afrekenen; zo niet, dan kan in Nederland je bezorger, zoals PostNL of DHL, je erom vragen. Blijft het pakket er dagen liggen, laat het de verkoper weten.
 
 **De trackingpagina van GZYL of een trackingdienst toont meer dan Peek.** Peek houdt drie soorten stappen tegen: vooraf geschreven stappen, de `Delivered` waarmee de planning van GZYL afsluit, en stappen met een tijd na de laatste controle van Peek (zie hieronder). De extra stappen kunnen dus de planning van GZYL zijn, geen scans. Ga uit van de levertermijn die de webshop je gaf, en vraag de verkoper wat er aan de hand is als die voorbij is. Meer in de gids over [een pakket uit China volgen](guide:tracking-from-china) (in het Engels).
 
@@ -112,5 +112,6 @@ Peek weet het niet: de stappen van GZYL in je land noemen geen bedrijf. Vraag de
 :::sources
 - [广州云链货运代理有限公司 (GZYL): home (in het Chinees)](http://yunlianhouyun.com/) – bedrijfsnaam, Chinese website, pakketzoeker (小包查询) naar de trackingpagina van GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (contact, in het Chinees)](http://yunlianhouyun.com/contact.html) – 24-uurs hotline, WeChat en QQ voor aftersales
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – bedrijfsnaam en andere namen, trackingpagina op een IP-adres, de YL…YQ-vorm en zijn zwakke herkenning, Xinghe Freight op de trackingpagina van GZYL, zoeken op nummer of referentie met streepjes, de woorden van de stappen en hun status, de Chinese regels, plaatsnamen na de woorden, Pekingse tijd, de vooraf geschreven planning en de `Delivered` die ze afsluit, het antwoord voor een onbekend nummer, Swiss Post als enige overdracht, wat Peek toont, tegenhoudt en weglaat
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – bedrijfsnaam en andere namen, trackingpagina op een IP-adres, de YL…YQ-vorm en zijn zwakke herkenning, Xinghe Freight op de trackingpagina van GZYL en de ontvangst in Hongkong, zoeken op nummer of referentie met streepjes, de woorden van de stappen en hun status, de Chinese regels, plaatsnamen na de woorden, Pekingse tijd, de vooraf geschreven planning en de `Delivered` die ze afsluit, het antwoord voor een onbekend nummer, Swiss Post als enige overdracht, wat Peek toont, tegenhoudt en weglaat
+- [Douane: Extra kosten bij online bestellingen](https://www.douane.nl/onderwerpen/online-shoppen-en-pakketpost/shoppen-bij-een-buitenlandse-webwinkel/extra-kosten-bij-bestellen/) – afhandelingsvergoeding van € 2 per productcategorie (HS-code) sinds 1 november 2026 in de hele EU, ook boven € 150, betaald bij het afrekenen of aan de bezorger
 :::

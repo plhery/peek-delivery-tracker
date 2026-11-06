@@ -3,7 +3,7 @@ title: Praćenje GZYL pošiljke iz Kine: broj YL…YQ i statusi
 description: Prati paket iz Kine poslan preko GZYL-a (广州云链): kako izgleda broj YL…YQ, što znače statusi i zašto praćenje može pokazati Delivered iako paket nije stigao.
 slug: gzyl-pracenje-posiljke
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, špeditersko poduzeće iz Guangzhoua (Kantona) u Kini. Ako ti je kineska web-trgovina narudžbu poslala preko GZYL-a, broj za praćenje ima oblik YL, deset znamenki i YQ: zalijepi ga u polje iznad. GZYL-ova web-stranica, yunlianhouyun.com, na kineskom je, a njezina tražilica pošiljaka (小包查询) otvara GZYL-ov sustav za praćenje, koji radi na IP adresi, bez imena domene. Podatke u njemu uzmi s rezervom: GZYL velik dio puta paketa upisuje unaprijed, pa korak koji ondje vidiš nije uvijek stvarno skeniranje, čak ni kad piše `Delivered`.
@@ -51,7 +51,7 @@ Grad koji GZYL dopiše iza tih tekstova Peek prikazuje kao mjesto koraka.
 
 **Redak na kineskom.** Za narudžbu koja još nema nijedno skeniranje, platforma na kojoj radi GZYL-ov sustav za praćenje sama upiše redak `货物电子信息已经收到`, što znači da su elektronički podaci o robi zaprimljeni. Prodavač je izradio narudžbu, ali paket još nitko nije skenirao. Peek taj redak prikazuje na kineskom, sa statusom "Label created".
 
-**Preko kineske pošte.** Može se pojaviti i `广州处理中心已收寄`, s gradom u zagradama iza teksta: kineska pošta China Post preuzela je paket u svom centru za obradu u Guangzhouu, a GZYL taj redak prenosi na kineskom. I Peek ga prikazuje na kineskom, sa statusom "Received by carrier".
+**Preko kineske pošte.** Može se pojaviti i `广州处理中心已收寄`, s gradom u zagradama iza teksta: kineska pošta China Post preuzela je paket u svom centru za obradu u Guangzhouu, a GZYL taj redak prenosi na kineskom. Kod brojeva Xinghe Freighta `香港处理中心已收寄` znači isto preuzimanje, u centru za obradu u Hong Kongu. I Peek oba retka prikazuje na kineskom, sa statusom "Received by carrier".
 
 **Vrijeme.** Sva su vremena u GZYL-ovu sustavu za praćenje po pekinškom vremenu, i ona za korake u tvojoj zemlji, a vremenska zona uz njih nije navedena. Korak u 20:00 po pekinškom vremenu zimi je u 13:00 po hrvatskom vremenu, a ljeti u 14:00.
 
@@ -67,7 +67,7 @@ Peek kod GZYL-a nije našao rokove dostave ni pravila o pokušajima dostave, mje
 
 **Samo `Order information received` ili `货物电子信息已经收到`.** Prodavač je izradio narudžbu, ali GZYL paket još nije skenirao. Ako se ni dan nakon takvog koraka ne pojavi ništa novo, Peek ispod "Label created" dopiše: "The sender hasn’t handed it to GZYL yet. Tracking starts when they do." To znači da pošiljatelj paket još nije predao GZYL-u, a praćenje počinje kad to učini. Ako se ni nakon nekoliko dana ništa ne pomakne, pitaj prodavača je li paket stvarno poslan.
 
-**Paket je zapeo na carini.** Ako od tebe traže uvozna davanja, pogledaj vodič o [pošiljkama na carini](guide:customs) (na engleskom). Ako paket ondje stoji danima, javi prodavaču.
+**Paket je zapeo na carini.** Ako od tebe traže uvozna davanja, pogledaj vodič o [pošiljkama na carini](guide:customs) (na engleskom). Od 1. studenoga 2026. Carinska uprava za internetske narudžbe iz zemalja izvan EU-a uz carinu naplaćuje i naknadu za rukovanje: 2 € za svaku stavku deklaracije, kao kod fiksne carine od 3 €, ali i za narudžbe iznad 150 €. Ako ih trgovina nije naplatila pri kupnji, plaća ih onaj tko prijavljuje pošiljku carini, obično prijevoznik, koji ih može tražiti od tebe prije uručenja. Ako paket ondje stoji danima, javi prodavaču.
 
 **GZYL-ov sustav za praćenje ili neki servis za praćenje pokazuje više od Peeka.** Peek ne prikazuje korake upisane više od 12 sati prije vremena koje navode, `Delivered` kojim završava GZYL-ov plan ni korake s vremenom kasnijim od trenutka svoje posljednje provjere (vidi niže). Koraci kojih u Peeku nema zato mogu biti GZYL-ov plan, a ne skeniranja. Ravnaj se po roku dostave koji ti je dala trgovina, a kad prođe, javi se prodavaču. Više u vodiču o [praćenju paketa iz Kine](guide:tracking-from-china) (na engleskom).
 
@@ -112,5 +112,7 @@ Peek to ne zna: GZYL-ovi koraci u tvojoj zemlji ne navode nijednu tvrtku. Pitaj 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): početna stranica (na kineskom)](http://yunlianhouyun.com/) – ime tvrtke, web-stranica na kineskom, tražilica pošiljaka (小包查询) prema GZYL-ovu sustavu za praćenje
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, na kineskom)](http://yunlianhouyun.com/contact.html) – linija 0–24, WeChat i QQ za postprodajnu podršku
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ime tvrtke i drugi nazivi, sustav za praćenje na IP adresi, oblik YL…YQ kao slab znak, Xinghe Freight u GZYL-ovu sustavu za praćenje, traženje po broju ili referentnom broju s crticama, tekstovi koraka i njihovi statusi, redci na kineskom, gradovi iza tekstova, pekinško vrijeme, plan upisan unaprijed i `Delivered` kojim završava, odgovor za nepoznat broj, Swiss Post kao jedini prijevoznik na kojeg Peek prebacuje praćenje, što Peek prikazuje, ne prikazuje i izostavlja
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ime tvrtke i drugi nazivi, sustav za praćenje na IP adresi, oblik YL…YQ kao slab znak, Xinghe Freight u GZYL-ovu sustavu za praćenje i preuzimanje u Hong Kongu, traženje po broju ili referentnom broju s crticama, tekstovi koraka i njihovi statusi, redci na kineskom, gradovi iza tekstova, pekinško vrijeme, plan upisan unaprijed i `Delivered` kojim završava, odgovor za nepoznat broj, Swiss Post kao jedini prijevoznik na kojeg Peek prebacuje praćenje, što Peek prikazuje, ne prikazuje i izostavlja
+- [Carinska uprava: Naplata naknade za rukovanje od 1. studenog 2026.](https://carina.gov.hr/vijesti/naplata-naknade-za-rukovanje-od-1-studenog-2026/20646) – naknada za rukovanje od 2 € za svaku stavku deklaracije uz fiksnu carinu od 3 €, i za internetske narudžbe iznad 150 €
+- [Europska komisija: The temporary EUR 3 customs duty and the Union handling fee (PDF, na engleskom)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – naknadu plaća onaj tko podnosi deklaraciju: platforma, prodavač ili prijevoznik
 :::

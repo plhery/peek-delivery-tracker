@@ -3,7 +3,7 @@ title: Sledovanie zásielky GZYL z Číny: číslo YL…YQ a stavy
 description: Ako sledovať balík z Číny poslaný cez GZYL (广州云链): ako vyzerá číslo YL…YQ, čo znamenajú stavy a prečo sledovanie môže ukázať Delivered, hoci balík neprišiel.
 slug: gzyl-sledovanie-zasielky
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, špedičná firma z mesta Guangzhou (Kanton) v Číne. Ak vám čínsky e-shop poslal objednávku cez GZYL, číslo zásielky má tvar YL, desať číslic a YQ: vložte ho do poľa vyššie. Webová stránka GZYL, yunlianhouyun.com, je po čínsky a jej vyhľadávanie zásielok (小包查询) otvára sledovanie, ktoré beží na IP adrese bez doménového mena. Údaje v ňom berte s rezervou: GZYL zapisuje veľkú časť cesty balíka vopred, takže krok, ktorý tam uvidíte, nemusí byť skutočný sken, a to ani `Delivered`.
@@ -51,7 +51,7 @@ Mesto, ktoré GZYL dopíše za tieto texty, ukáže Peek ako miesto kroku.
 
 **Riadok po čínsky.** Pri objednávke, ktorá ešte nemá žiadny sken, zapíše platforma, na ktorej beží sledovanie GZYL, sama riadok `货物电子信息已经收到`, teda že elektronické údaje o tovare boli prijaté. Predajca objednávku vytvoril, ale balík ešte nikto nenaskenoval. Peek tento riadok ukáže po čínsky, so stavom „Label created“.
 
-**Cez China Post.** Objaviť sa môže aj `广州处理中心已收寄` s mestom v zátvorkách za textom: China Post, čínska pošta, prevzala balík vo svojom spracovateľskom centre v Guangzhou a GZYL tento riadok preberá po čínsky. Aj Peek ho ukáže po čínsky, so stavom „Received by carrier“.
+**Cez China Post.** Objaviť sa môže aj `广州处理中心已收寄` s mestom v zátvorkách za textom: China Post, čínska pošta, prevzala balík vo svojom spracovateľskom centre v Guangzhou a GZYL tento riadok preberá po čínsky. Pri číslach Xinghe Freight znamená `香港处理中心已收寄` to isté prevzatie, v spracovateľskom centre v Hongkongu. Aj Peek ukáže oba riadky po čínsky, so stavom „Received by carrier“.
 
 **Časy.** Všetky časy v sledovaní GZYL sú v pekinskom čase, aj pri krokoch vo vašej krajine, a časové pásmo sa pri nich neuvádza. Krok o 20:00 pekinského času je v zime 13:00 slovenského času, v lete 14:00.
 
@@ -67,7 +67,7 @@ Peek u GZYL nenašiel lehoty doručenia ani pravidlá pre pokusy o doručenie, v
 
 **Len `Order information received` alebo `货物电子信息已经收到`.** Predajca objednávku vytvoril, ale GZYL balík ešte nenaskenoval. Ak ani deň po takom kroku nepribudne nič ďalšie, Peek pod „Label created“ doplní: „The sender hasn’t handed it to GZYL yet. Tracking starts when they do.“ Teda: odosielateľ balík GZYL ešte neodovzdal a sledovanie sa začne, až keď to urobí. Ak ani po niekoľkých dňoch nič nepribudne, opýtajte sa predajcu, či balík naozaj odoslal.
 
-**Zásielka uviazla na colnici.** Ak od vás žiadajú dovozné poplatky, pozrite si návod [o zásielkach na colnici](guide:customs) (v angličtine). Ak tam zásielka leží niekoľko dní, dajte vedieť predajcovi.
+**Zásielka uviazla na colnici.** Ak od vás žiadajú dovozné poplatky, pozrite si návod [o zásielkach na colnici](guide:customs) (v angličtine). Od 1. novembra 2026 colný úrad spolu s clom vyberá aj manipulačný poplatok Únie: 2 eurá za každú položku colného vyhlásenia, rovnako ako pri 3-eurovom cle, ale bez ohľadu na hodnotu tovaru. Ak ho e-shop nezahrnul do ceny, platí ho ten, kto zásielku colne deklaruje, zvyčajne prepravca, a ten ho môže pred doručením žiadať od vás. Ak tam zásielka leží niekoľko dní, dajte vedieť predajcovi.
 
 **Sledovanie GZYL alebo služba sledovania zásielok ukazuje viac ako Peek.** Peek zadrží tri druhy krokov: kroky zapísané viac ako 12 hodín pred časom, ktorý uvádzajú, `Delivered`, ktorým sa končí plán GZYL, a kroky s časom neskorším než posledná kontrola Peeku (pozrite nižšie). Kroky navyše teda môžu byť plán GZYL, nie skeny. Riaďte sa termínom doručenia, ktorý vám dal e-shop, a keď uplynie, napíšte predajcovi. Viac v návode [o sledovaní zásielok z Číny](guide:tracking-from-china) (v angličtine).
 
@@ -112,5 +112,7 @@ Peek to nevie: kroky GZYL vo vašej krajine neuvádzajú žiadnu firmu. Opýtajt
 :::sources
 - [广州云链货运代理有限公司 (GZYL): úvodná stránka (po čínsky)](http://yunlianhouyun.com/) – názov firmy, web po čínsky, vyhľadávanie zásielok (小包查询) v sledovaní GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, po čínsky)](http://yunlianhouyun.com/contact.html) – nonstop linka, WeChat a QQ popredajného servisu
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – názov firmy a ďalšie mená, sledovanie na IP adrese, tvar YL…YQ ako slabý náznak, Xinghe Freight v sledovaní GZYL, vyhľadávanie podľa čísla alebo referenčného čísla s pomlčkami, texty krokov a ich stavy, riadky po čínsky, mestá za textami, pekinský čas, plán zapísaný vopred a `Delivered`, ktorým sa končí, odpoveď pri neznámom čísle, Swiss Post ako jediné odovzdanie, čo Peek ukazuje, zadrží a vynechá
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – názov firmy a ďalšie mená, sledovanie na IP adrese, tvar YL…YQ ako slabý náznak, Xinghe Freight v sledovaní GZYL a prevzatie v Hongkongu, vyhľadávanie podľa čísla alebo referenčného čísla s pomlčkami, texty krokov a ich stavy, riadky po čínsky, mestá za textami, pekinský čas, plán zapísaný vopred a `Delivered`, ktorým sa končí, odpoveď pri neznámom čísle, Swiss Post ako jediné odovzdanie, čo Peek ukazuje, zadrží a vynechá
+- [Finančná správa: Pri zásielkach z krajín mimo EÚ pribudne od 1. novembra poplatok 2 eurá](https://www.financnasprava.sk/sk/pre-media/novinky/archiv-noviniek/detail-novinky/_col-manip-popl-zasiel-eu-ts) – manipulačný poplatok Únie 2 eurá za položku colného vyhlásenia od 1. novembra 2026, vyberá ho colný orgán, nezávisí od hodnoty tovaru
+- [Európska komisia: The temporary EUR 3 customs duty and the Union handling fee (PDF, v angličtine)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – poplatok platí ten, kto podáva colné vyhlásenie: platforma, predajca alebo prepravca
 :::

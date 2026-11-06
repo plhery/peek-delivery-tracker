@@ -3,7 +3,7 @@ title: GZYL tracking: numero YL…YQ, stati e pacco non arrivato
 description: Tracking GZYL (广州云链) per i pacchi dalla Cina: com'è fatto il numero YL…YQ, cosa vogliono dire gli stati e perché il pacco può risultare consegnato senza esserlo.
 slug: gzyl-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) è 广州云链货运代理有限公司, uno spedizioniere di Guangzhou (Canton), in Cina. Se un negozio cinese ha spedito il tuo ordine con GZYL, il numero di tracking è composto da YL, dieci cifre e YQ: incollalo nel box qui sopra. Il sito web di GZYL, yunlianhouyun.com, è in cinese, e la sua ricerca pacchi (小包查询) apre un tracking che si trova su un semplice indirizzo IP, senza nome di dominio. Prendi con cautela quello che mostra: GZYL scrive in anticipo buona parte del viaggio di un pacco, quindi un passaggio, persino `Delivered`, non è sempre una vera scansione.
@@ -51,7 +51,7 @@ Quando GZYL scrive una città dopo uno degli ultimi quattro testi della tabella,
 
 **Una riga in cinese.** Per un ordine ancora senza scansioni, la piattaforma su cui gira il tracking di GZYL scrive da sola `货物电子信息已经收到`, cioè: i dati elettronici della merce sono stati ricevuti. Il venditore ha creato l'ordine, ma nessuno ha ancora scansionato il pacco. Peek mostra la riga così com'è, in cinese, con lo stato «Etichetta creata».
 
-**Passando da China Post.** Un pacco può mostrare anche `广州处理中心已收寄`, con la città tra parentesi dopo il testo: è l'accettazione di China Post nel suo centro di smistamento di Guangzhou, che GZYL riporta in cinese. Peek mostra la riga in cinese, con lo stato «Preso in carico».
+**Passando da China Post.** Un pacco può mostrare anche `广州处理中心已收寄`, con la città tra parentesi dopo il testo: è l'accettazione di China Post nel suo centro di smistamento di Guangzhou, che GZYL riporta in cinese. Sui numeri di Xinghe Freight, `香港处理中心已收寄` è la stessa accettazione, nel centro di smistamento di Hong Kong. Peek mostra entrambe le righe in cinese, con lo stato «Preso in carico».
 
 **Orari.** Sul tracking di GZYL tutti gli orari sono nell'ora di Pechino, anche quelli dei passaggi in Italia, e il fuso orario non è indicato. Le 20:00 sul tracking di GZYL sono le 13:00 in Italia con l'ora solare e le 14:00 con l'ora legale.
 
@@ -67,7 +67,7 @@ Peek non ha trovato tempi di consegna di GZYL, né regole su tentativi di conseg
 
 **Solo `Order information received` o `货物电子信息已经收到`.** Il venditore ha creato l'ordine, ma GZYL non ha ancora scansionato il pacco. Se dopo un giorno non è arrivato altro, Peek scrive sotto lo stato: «Il mittente non l’ha ancora affidato a GZYL. Il tracciamento partirà da quel momento.» Se dopo qualche giorno non succede niente, chiedi al venditore se l'ha spedito davvero.
 
-**Fermo in dogana.** Se ti chiedono di pagare spese d'importazione, leggi [pacco fermo in dogana](guide:customs). Se resta lì per giorni, avvisa il venditore.
+**Fermo in dogana.** Se ti chiedono di pagare spese d'importazione, leggi [pacco fermo in dogana](guide:customs). Dal 1° novembre 2026 la dogana riscuote, insieme al dazio, anche la tassa di gestione dell'Unione: 2 € per articolo, cioè per voce doganale come il dazio di 3 €, qualunque sia il valore. Se il venditore non te l'ha già fatta pagare all'acquisto, di solito te la chiede chi consegna (Poste, per esempio) insieme a dazio e IVA, online prima della consegna o alla consegna. Se resta lì per giorni, avvisa il venditore.
 
 **Il tracking di GZYL o un servizio di tracciamento mostra più di Peek.** Peek tiene da parte i passaggi scritti in anticipo rispetto all'ora che riportano, il `Delivered` che chiude il programma di GZYL e i passaggi datati dopo il suo ultimo controllo (vedi sotto), quindi quelli in più possono essere solo il programma di GZYL, non vere scansioni. Regolati sulla data di consegna stimata dal negozio e, quando è passata, scrivi al venditore. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
@@ -112,5 +112,7 @@ Peek non lo sa: i passaggi di GZYL nel Paese di destinazione non nominano alcun 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): home (in cinese)](http://yunlianhouyun.com/) – nome dell'azienda, sito in cinese, ricerca pacchi (小包查询) sul tracking di GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (contatti, in cinese)](http://yunlianhouyun.com/contact.html) – linea attiva 24 ore su 24, WeChat e QQ post-vendita
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome dell'azienda e altri nomi, tracking su un semplice indirizzo IP, forma YL…YQ e corrispondenza debole, Xinghe Freight sul tracking di GZYL, ricerca per numero o per riferimento con i suoi trattini, testi dei passaggi e loro fasi, la riga in cinese della piattaforma, città dopo i testi e CAP tolti, ora di Pechino, cronologia scritta in anticipo e la consegna che la chiude, risposta a un numero sconosciuto, Posta Svizzera come unico passaggio ad altro corriere, cosa Peek mostra, tiene da parte e lascia fuori
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome dell'azienda e altri nomi, tracking su un semplice indirizzo IP, forma YL…YQ e corrispondenza debole, Xinghe Freight sul tracking di GZYL e la sua accettazione a Hong Kong, ricerca per numero o per riferimento con i suoi trattini, testi dei passaggi e loro fasi, la riga in cinese della piattaforma, città dopo i testi e CAP tolti, ora di Pechino, cronologia scritta in anticipo e la consegna che la chiude, risposta a un numero sconosciuto, Posta Svizzera come unico passaggio ad altro corriere, cosa Peek mostra, tiene da parte e lascia fuori
+- [Agenzia delle Dogane e dei Monopoli: Avviso Union Handling Fee (PDF)](https://www.adm.gov.it/portale/documents/20182/6262318/Avviso+e-commerce+-+le+novit%C3%A0+dal+1+novembre++2026+-+UNION+HANDLING+FEE+%28UHF%29.pdf/cfe7b95c-e4c6-3a05-3531-3c6b26d27a7e?version=1.1&t=1793003680444) – tassa di gestione dell'Unione di 2 € per articolo dal 1° novembre 2026, qualunque sia il valore, dovuta da chi presenta la dichiarazione doganale
+- [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – tassa di gestione dell'Unione per voce doganale, pagata con dazio e IVA online prima della consegna o alla consegna
 :::

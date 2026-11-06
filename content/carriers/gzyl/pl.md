@@ -3,7 +3,7 @@ title: GZYL śledzenie przesyłki: numer YL…YQ, statusy i kontakt
 description: Paczka GZYL (广州云链) z Chin: jak wygląda numer YL…YQ, co znaczą statusy i dlaczego status Delivered może się pojawić, zanim paczka dotrze.
 slug: gzyl-sledzenie
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) to 广州云链货运代理有限公司, firma spedycyjna z Kantonu (Guangzhou) w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez GZYL, dostajesz numer, który zaczyna się od YL i kończy na YQ: wklej go w pole powyżej. Strona internetowa GZYL, yunlianhouyun.com, jest po chińsku, a jej wyszukiwarka paczek (小包查询) prowadzi do strony śledzenia, która działa pod samym adresem IP serwera. Czytaj ją z rezerwą: GZYL zapisuje dużą część drogi paczki z góry, więc nie każdy etap na tej stronie, nawet `Delivered`, jest skanem.
@@ -51,7 +51,7 @@ Miejscowość, którą GZYL dopisuje po słowach etapu, Peek pokazuje jako miejs
 
 **Linia po chińsku.** Gdy zamówienie nie ma jeszcze skanów, platforma, na której działa strona śledzenia GZYL, sama zapisuje `货物电子信息已经收到`, czyli: otrzymano elektroniczne dane towaru. Sprzedawca założył zamówienie, ale nikt jeszcze nie zeskanował paczki. Peek pokazuje tę linię po chińsku, ze statusem „Zarejestrowana”.
 
-**Przez China Post.** W historii może się też pojawić `广州处理中心已收寄`, a po nim nazwa miasta w nawiasie: to przyjęcie paczki przez China Post w jej centrum przetwarzania w Kantonie, które GZYL przekazuje po chińsku. Peek pokazuje tę linię po chińsku, ze statusem „Przyjęta przez przewoźnika”.
+**Przez China Post.** W historii może się też pojawić `广州处理中心已收寄`, a po nim nazwa miasta w nawiasie: to przyjęcie paczki przez China Post w jej centrum przetwarzania w Kantonie, które GZYL przekazuje po chińsku. Przy numerach Xinghe Freight `香港处理中心已收寄` oznacza to samo przyjęcie, tyle że w centrum przetwarzania w Hongkongu. Peek pokazuje obie linie po chińsku, ze statusem „Przyjęta przez przewoźnika”.
 
 **Godziny.** Wszystkie godziny na stronie śledzenia GZYL są w czasie pekińskim (UTC+8), także przy etapach w kraju docelowym, choć strona nie wskazuje strefy czasowej. Godzina 20:00 w Pekinie to w Polsce 13:00 zimą i 14:00 w czasie letnim, który trwa od ostatniej niedzieli marca do ostatniej niedzieli października.
 
@@ -112,7 +112,7 @@ Peek tego nie wie: etapy GZYL w kraju docelowym nie wymieniają żadnej firmy, a
 :::sources
 - [广州云链货运代理有限公司 (GZYL): strona główna (po chińsku)](http://yunlianhouyun.com/) – nazwa firmy, strona po chińsku, wyszukiwarka paczek (小包查询) prowadząca do strony śledzenia GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, po chińsku)](http://yunlianhouyun.com/contact.html) – całodobowa infolinia, WeChat i QQ obsługi posprzedażowej
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inne nazwy, strona śledzenia pod adresem IP, kształt numeru YL…YQ i jego słabe dopasowanie, Xinghe Freight na stronie śledzenia GZYL, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie etapów i ich statusy, chińska linia platformy, miejscowości po etapach, zegar pekiński, etapy zapisane z góry, odpowiedź na nieznany numer, przekazanie śledzenia tylko Poczcie Szwajcarskiej, co Peek pokazuje i pomija
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inne nazwy, strona śledzenia pod adresem IP, kształt numeru YL…YQ i jego słabe dopasowanie, Xinghe Freight na stronie śledzenia GZYL i przyjęcie w Hongkongu, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie etapów i ich statusy, chińska linia platformy, miejscowości po etapach, zegar pekiński, etapy zapisane z góry, odpowiedź na nieznany numer, przekazanie śledzenia tylko Poczcie Szwajcarskiej, co Peek pokazuje i pomija
 - [Komisja Europejska: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – cło 3 euro za pozycję przy przesyłkach do 150 euro od 1 lipca 2026, unijna opłata manipulacyjna 2 euro od 1 listopada 2026
 - [Komisja Europejska: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – opłata 2 euro za każdą pozycję bez względu na wartość, czym jest pozycja
 - [Komisja Europejska: Summertime](https://transport.ec.europa.eu/transport-themes/summertime_en) – czas letni od ostatniej niedzieli marca do ostatniej niedzieli października

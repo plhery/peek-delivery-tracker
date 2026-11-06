@@ -3,7 +3,7 @@ title: HuaHan Logistics tracking: HHW…YQ numbers and who delivers
 description: Track a HuaHan Logistics (华翰物流) parcel from China: what an HHW…YQ number looks like, what its scans mean and how to find who delivers it in your country.
 slug: huahan-logistics-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-06
 ---
 
 HuaHan Logistics (华翰物流, also HuaHan Express or 华翰速递) is a Chinese carrier that flies parcels out of China and hands them to a local carrier in the destination country, which delivers them. If a shop sent your order with HuaHan, look for a number that starts with HHW and ends with YQ, and paste it in the box above. HuaHan's own tracker is on its website, hh-exp.cn, and can name the carrier that delivers near you, with that carrier's number for your parcel.
@@ -59,6 +59,21 @@ HuaHan files the local carrier's out-for-delivery, pickup-point and delivery sca
 **Two lines that confuse people.** `We will pick up your parcel from the sender soon.` can turn up near the start, before HuaHan has even received the parcel in China: it's the local carrier's notice that it has been told about the parcel, not a pickup from you. Peek shows "Label created". `The parcel was redirected. As soon as it is in the couriers possession, it will be processed as requested.` is that carrier noting a redirection you asked for, also written while the parcel is still in China. It moves nothing, and Peek gives it no status of its own.
 
 **One scan, two lines.** HuaHan's tracker can list one of the local carrier's scans twice at the same time: in that carrier's words with its place, and with no place in HuaHan's generic words, such as `Delivered, Parcel was delivered successfully`. Peek keeps the line with the place.
+
+**By post.** HuaHan can also send a parcel through China Post. Its tracker then passes on China Post's scans in Chinese, with the office in 【】, and later the destination post's scans as China Post copies them. Peek shows them in Chinese, as HuaHan passes them on:
+
+| HuaHan passes on | What it means for you | Peek shows |
+| --- | --- | --- |
+| `中国邮政已收取邮件` | China Post has the parcel from HuaHan: from here it goes by post. | "In transit" |
+| `邮件已在【…】完成分拣，准备发出`, `邮件到达【…】`, `邮件离开【…】，正在发往【…】`, `邮件离开【…】，正在发往下一站` | Sorted at, arrived at or leaving a China Post office in China, named in 【】. | "In transit" |
+| `送交出口海关` | Handed to export customs in China. Not your country's customs. | "At customs" |
+| `出口海关/放行` | Export customs have released it. | "In transit" |
+| `已交承运商运输` | Handed to the airline that flies it abroad. | "In transit" |
+| `到达寄达地`, `到达寄达地处理中心`, `到达境外经转局` | Arrived in the destination country, at its post's processing centre, or at a transit office on the way. | "In transit" |
+| `境外进口海关留存待验(等待提交给边境机构/安全部门)` | Held for your country's import customs; the brackets say it's waiting to be presented to the border or security authorities. | "At customs" |
+| `境外进口互换局留存`, `送交境外进口海关` | Kept at the destination post's office of exchange, then handed to import customs. | "At customs" |
+| `寄达地海关允许进口（无需缴税）` | Import customs have let it in, with no duty to pay. | "In transit" |
+| `离开【…】处理中心`, `已到达【…】投递局` | Left the processing centre in the country named in 【】, then arrived at the delivery office. | "In transit" |
 
 ## Who delivers HuaHan parcels
 
@@ -127,5 +142,5 @@ The seller you ordered from: it booked the parcel with HuaHan. Peek couldn't che
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, HHW number shape, the tracker and its sum check, scan wordings, codes and their stages, the local carrier's relayed scans and duplicate lines, Sameday's wording, the local carrier's name and number with the underscore suffix and USPS barcodes, clocks, destination country, no delivery date or weight, the hand-off
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, HHW number shape, the tracker and its sum check, scan wordings, codes and their stages, the local carrier's relayed scans and duplicate lines, Sameday's wording, China Post's and the destination post's scans in Chinese on the postal line and their stages, the local carrier's name and number with the underscore suffix and USPS barcodes, clocks, destination country, no delivery date or weight, the hand-off
 :::

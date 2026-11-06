@@ -3,10 +3,12 @@ title: UniUni suivi colis : statuts, livraison et contact
 description: Suivre un colis UniUni au Québec et au Canada : où trouver le numéro, ce que disent les statuts, la livraison manquée, les photos de preuve et qui appeler.
 slug: uniuni-suivi-colis
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-06
 ---
 
 UniUni (Uni Express inc.) est une entreprise de livraison du dernier kilomètre fondée à Vancouver en 2019 et établie à Richmond, en Colombie-Britannique. Elle livre au Canada et aux États-Unis des commandes en ligne, notamment de Shein, de Temu ou de TikTok. Ton numéro de suivi vient du marchand : entre-le sur [uniuni.com/fr/suivi](https://www.uniuni.com/fr/suivi/) ou colle-le dans le champ ci-dessus.
+
+Pas de numéro sous la main ? Regarde ta commande chez le marchand ; si le suivi d'UniUni ne montre encore rien, le marchand a sans doute encore le colis. Pour une nouvelle livraison, un changement d'adresse ou de consignes, un colis endommagé ou un commentaire sur un livreur, passe par le chatbot de la [page de soutien](https://www.uniuni.com/support/) d'UniUni, en anglais. Pour un article manquant, un mauvais article ou un retour, adresse-toi au marchand.
 
 ## Numéro de suivi UniUni : où le trouver et à quoi il ressemble
 
@@ -124,13 +126,13 @@ Le plus souvent, le marchand n'a pas encore remis le colis à UniUni. La date es
 
 :::sources
 - [UniUni : Suivi](https://www.uniuni.com/fr/suivi/) – date estimée, tentatives, stockage 30 jours, photos, récupération, boîtes postales
-- [UniUni : Questions fréquemment posées](https://www.uniuni.com/fr/faqs-fr/) – acheminement incorrect, Postes Canada, Shein, Temu et TikTok, photos floues, chatbot
+- [UniUni : Questions fréquemment posées](https://www.uniuni.com/fr/faqs-fr/) – acheminement incorrect, Postes Canada, Shein, Temu et TikTok, photos floues, chatbot, commentaires sur un livreur
 - [UniUni : Accueil](https://www.uniuni.com/fr/home-fr/) – téléphones au Canada, heures
 - [UniUni : Services](https://www.uniuni.com/fr/services-fr/) – livraison le lendemain, photos de preuve, textos et courriels
 - [UniUni : En savoir plus](https://www.uniuni.com/fr/en-savoir-plus/) – fondée à Vancouver en 2019
 - [UniUni : Termes et conditions](https://www.uniuni.com/fr/termes-et-conditions/) – Uni Express inc., Richmond (C.-B.)
 - [UniUni : script de la page de suivi](https://www.uniuni.com/_next/static/chunks/0z-~y0mss68d2.js) – étapes en français, confirmation de livraison, numéro à appeler
-- [UniUni : Customer Support (en anglais)](https://www.uniuni.com/support/) – chatbot
+- [UniUni : Customer Support (en anglais)](https://www.uniuni.com/support/) – chatbot : nouvelle livraison, adresse et consignes, dommages, commentaires sur un livreur ; retours au marchand
 - [UniUni Platform : Vérification de livraison](https://help.ship.uniuni.com/fr/shipments/canada/delivery-verification) – NIP au Canada
 - [UniUni Platform : Déposer une réclamation](https://help.ship.uniuni.com/fr/services/add-on/deposer-une-reclamation) – réclamations des expéditeurs
 - [UniUni Platform : Points de dépôt](https://help.ship.uniuni.com/fr/services/drop-off/drop-spots) – Magasins UniUni et Points UniUni

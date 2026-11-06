@@ -3,7 +3,7 @@ title: Suivi colis Lietuvos paštas : poste lituanienne, LP EXPRESS
 description: Suivre un colis Lietuvos paštas, la poste lituanienne (LP EXPRESS) : le numéro, ce que veut dire chaque statut, les consignes, la douane et qui contacter.
 slug: lietuvos-pastas-suivi
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-06
 ---
 
 Lietuvos paštas est la poste nationale de Lituanie, et LP EXPRESS sa marque pour les consignes, les coursiers et l'envoi en libre-service. Pour suivre un colis, saisis son numéro sur [lpexpress.lt/track](https://lpexpress.lt/track) (en anglais) ou colle-le dans le champ ci-dessus. Il figure dans le SMS ou l'e-mail de Lietuvos paštas, ou sur le reçu remis à l'expéditeur.
@@ -57,6 +57,8 @@ Si la page affiche `Your parcel could not be found`, vérifie le numéro ; `With
 
 Pour un recommandé ou un envoi assuré en retard ou perdu, Lietuvos paštas renvoie au 1842 (depuis la Lituanie). C'est l'expéditeur qui réclame, dans les 6 mois suivant le dépôt : pour une commande en ligne, écris d'abord au vendeur. Rien n'est indemnisé si tu as signé à la remise. Envoi déposé à l'étranger : vois avec l'expéditeur, dit Lietuvos paštas.
 
+**Colis parti de Lituanie vers un autre pays.** Après `The parcel has been sent abroad`, un opérateur du pays de destination le livre, et pour une réclamation Lietuvos paštas s'en tient à ce que cet opérateur confirme : pas d'indemnité s'il confirme la remise ; s'il ne confirme pas la perte, l'expéditeur doit joindre ta réclamation à sa demande de recherche internationale. Les 6 mois valent quel que soit le pays où le colis s'est perdu, et Lietuvos paštas indemnise un envoi international dans les 90 jours calendaires suivant la réclamation. Pour un colis vers la France, la Belgique ou la Suisse, Peek interroge aussi la poste de destination (voir plus bas).
+
 Un dommage à la livraison par coursier, en Lituanie ? Fais-le noter sur son appareil ou le document d'accompagnement, en sa présence ; sinon, Lietuvos paštas n'en répond pas. Suivi figé : voir [pourquoi un suivi ne bouge plus](guide:tracking-not-updating) et [colis perdu](guide:lost-parcel).
 
 ## Contact Lietuvos paštas : téléphone et service client
@@ -95,11 +97,11 @@ Non : lpexpress.lt/track est en anglais, lituanien, letton ou estonien, post.lt 
 
 ### Combien de temps met un colis LP EXPRESS ?
 
-En Lituanie, un colis de consigne à consigne arrive en général le jour ouvré suivant ou le samedi, s'il est déposé avant l'heure de levée, selon Lietuvos paštas.
+En Lituanie, un colis de consigne à consigne arrive en général le jour ouvré suivant ou le samedi, s'il est déposé avant l'heure de levée, selon Lietuvos paštas. Pour les colis postaux en Lituanie, post.lt affiche un objectif de qualité de 97 % livrés dans les 4 jours ouvrés suivant le dépôt ; pour les lettres prioritaires vers un autre pays de l'UE, 85 % en 3 jours ouvrés et 97 % en 5.
 
 :::sources
 - [LP EXPRESS : Parcel tracking](https://lpexpress.lt/track) – langues, titres, messages, réorientation
-- [Lietuvos paštas : Siuntų sekimas](https://www.post.lt/lt/siuntu-sekimas) – numéro, trajet, réclamations
+- [Lietuvos paštas : Siuntų sekimas](https://www.post.lt/lt/siuntu-sekimas) – numéro, trajet, réclamations, envois vers l'étranger (opérateur de destination, réclamation du destinataire, 6 mois, 90 jours), objectifs de qualité
 - [Lietuvos paštas : Dažniausiai užduodami klausimai](https://www.post.lt/duk) – consignes, garde (un mois)
 - [Lietuvos paštas : Siuntos](https://www.post.lt/lt/duk/siuntos) – garde, retrait
 - [Lietuvos paštas : LP EXPRESS paštomatai](https://www.post.lt/lt/duk/lp-express-pastomatai) – délais en consigne, taxes payées d'avance

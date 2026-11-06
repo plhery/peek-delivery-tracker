@@ -3,7 +3,7 @@ title: GZYL csomagkövetés Kínából: YL…YQ szám, státuszok
 description: Így követheti a GZYL-lel (广州云链) érkező kínai csomagot: milyen az YL…YQ szám, mit jelentenek a státuszok, és miért jelezhet kézbesítést a követés, ha nem jött semmi.
 slug: gzyl-csomagkovetes
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 A GZYL (广州云链, Guangzhou Yunlian) teljes neve 广州云链货运代理有限公司: szállítmányozó cég a kínai Kantonban (Guangzhou). Ha egy kínai webáruház a GZYL-lel küldte el a rendelését, a nyomkövetési szám YL-lel kezdődik, ezt 10 számjegy követi, a végén pedig YQ áll: illessze be a fenti mezőbe. A GZYL weboldala, a yunlianhouyun.com, kínai nyelvű, és csomagkeresője (小包查询) a GZYL nyomkövetőjét nyitja meg, amely csak egy IP-címen érhető el, domainnév nélkül. Amit ott lát, azt fenntartással kezelje: a GZYL a csomag útjának nagy részét előre rögzíti, így egy ott látható lépés, akár a `Delivered` is, nem mindig valódi beolvasás.
@@ -51,7 +51,7 @@ A táblázat utolsó négy lépésénél a szöveg után álló települést a P
 
 **Kínai nyelvű sor.** Ha egy rendelésnek még nincs beolvasása, a platform, amelyen a GZYL nyomkövetője fut, magától beírja a `货物电子信息已经收到` sort, ami annyit tesz: az áru elektronikus adatai megérkeztek. Az eladó létrehozta a rendelést, de a csomagot még senki sem olvasta be. A Peek ezt a sort kínaiul mutatja, „Label created” állapottal.
 
-**A China Poston át.** Megjelenhet a `广州处理中心已收寄` is, utána zárójelben a várossal: a China Post (a kínai posta) átvette a csomagot kantoni feldolgozóközpontjában, és a GZYL ezt kínaiul adja tovább. A Peek is kínaiul mutatja, „Received by carrier” állapottal.
+**A China Poston át.** Megjelenhet a `广州处理中心已收寄` is, utána zárójelben a várossal: a China Post (a kínai posta) átvette a csomagot kantoni feldolgozóközpontjában, és a GZYL ezt kínaiul adja tovább. A Xinghe Freight számainál a `香港处理中心已收寄` ugyanez az átvétel, a hongkongi feldolgozóközpontban. A Peek mindkét sort kínaiul mutatja, „Received by carrier” állapottal.
 
 **Időpontok.** A GZYL nyomkövetőjében minden időpont pekingi idő szerint szerepel, az Ön országában történt lépéseké is, időzóna jelölése nélkül. A pekingi 20:00 télen magyar idő szerint 13:00, nyáron 14:00.
 
@@ -67,7 +67,7 @@ A GZYL-től a Peek nem talált sem szállítási időket, sem a kézbesítési k
 
 **Csak `Order information received` vagy `货物电子信息已经收到`.** Az eladó létrehozta a rendelést, de a GZYL még nem olvasta be a csomagot. Ha egy ilyen lépés után egy nap elteltével sincs újabb, a Peek a „Label created” alá ezt írja: „The sender hasn’t handed it to GZYL yet. Tracking starts when they do.” Vagyis a feladó még nem adta át a csomagot a GZYL-nek, és a követés csak akkor indul, amikor átadja. Ha néhány nap múlva sem történik semmi, kérdezze meg az eladót, valóban elküldte-e a csomagot.
 
-**Elakadt a vámnál.** Ha behozatali költségeket kérnek Öntől, olvassa el a [vámnál feltartott csomagokról szóló útmutatót](guide:customs) (angolul). Ha a csomag napokig ott marad, szóljon az eladónak.
+**Elakadt a vámnál.** Ha behozatali költségeket kérnek Öntől, olvassa el a [vámnál feltartott csomagokról szóló útmutatót](guide:customs) (angolul). 2026. november 1-jétől a vámhatóság a vámmal együtt uniós kezelési díjat is kiszab: tételsoronként 2 eurót, ugyanúgy számolva, mint a 3 eurós átalányvámot, de a küldemény értékétől függetlenül. Ha a webáruház nem számolta fel a vásárláskor, a vámkezelést intéző posta vagy futárszolgálat kérheti el Öntől. Ha a csomag napokig ott marad, szóljon az eladónak.
 
 **A GZYL nyomkövetője vagy egy nyomkövető szolgáltatás többet mutat, mint a Peek.** A Peek háromféle lépést tart vissza: azt, amelyet több mint 12 órával a rajta szereplő időpont előtt írtak be, a GZYL tervét lezáró `Delivered` lépést, és azt, amelynek időpontja későbbi, mint a Peek legutóbbi ellenőrzése (lásd lent). A többletlépések tehát lehetnek a GZYL tervének részei, nem beolvasások. Igazodjon a webáruház által megadott szállítási határidőhöz, és ha lejárt, írjon az eladónak. Bővebben: [csomagkövetés Kínából](guide:tracking-from-china) (angolul).
 
@@ -112,5 +112,6 @@ A Peek nem tudja: a GZYL lépései az Ön országában nem neveznek meg céget. 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): főoldal (kínaiul)](http://yunlianhouyun.com/) – a cég neve, kínai nyelvű weboldal, csomagkereső (小包查询) a GZYL nyomkövetőjéhez
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (kapcsolat, kínaiul)](http://yunlianhouyun.com/contact.html) – éjjel-nappal hívható forródrót, WeChat és értékesítés utáni QQ
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – a cég neve és más nevei, a domainnév nélküli nyomkövető, az YL…YQ számforma mint gyenge támpont, a Xinghe Freight a GZYL nyomkövetőjén, keresés számra vagy hivatkozási számra és a kötőjelek, a lépések szövegei és állapotaik, a kínai nyelvű sorok, a települések a szövegek után, pekingi idő, az előre rögzített terv és az azt lezáró `Delivered`, a válasz ismeretlen számra, a Swiss Post mint egyetlen átadás, mit mutat, mit tart vissza és mit nem vesz át a Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – a cég neve és más nevei, a domainnév nélküli nyomkövető, az YL…YQ számforma mint gyenge támpont, a Xinghe Freight a GZYL nyomkövetőjén és hongkongi átvétele, keresés számra vagy hivatkozási számra és a kötőjelek, a lépések szövegei és állapotaik, a kínai nyelvű sorok, a települések a szövegek után, pekingi idő, az előre rögzített terv és az azt lezáró `Delivered`, a válasz ismeretlen számra, a Swiss Post mint egyetlen átadás, mit mutat, mit tart vissza és mit nem vesz át a Peek
+- [NAV: A 3 euró átalányvám és az uniós kezelési díj alkalmazása (PDF)](https://nav.gov.hu/pfile/file?path=/vam/e-kereskedelem/a-3-euro-atalanyvam-alkalmazasa) – uniós kezelési díj 2026. november 1-jétől, tételsoronként 2 euró, mint az átalányvám, értékhatártól függetlenül, a vámtartozással egy határozatban; a nyilatkozattevő, például a postai szolgáltató szedi be
 :::

@@ -3,7 +3,7 @@ title: Rastreo y seguimiento GZYL: número YL…YQ y estados
 description: Rastrea tu paquete de GZYL (广州云链) desde China: cómo es un número YL…YQ, qué significa cada estado y por qué puede salir entregado sin haber llegado.
 slug: gzyl-seguimiento
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) es 广州云链货运代理有限公司, un transitario (agente de carga) de Guangzhou, en China, que envía paquetes al extranjero. Si una tienda china te ha enviado el pedido con GZYL, tu número de seguimiento empieza por YL, lleva diez cifras y acaba en YQ: pégalo en la casilla de arriba para rastrear el paquete. El sitio web de GZYL, yunlianhouyun.com, está en chino, y su búsqueda de paquetes (小包查询) abre una página de seguimiento que está en una simple dirección IP, sin nombre de dominio. Lee ese seguimiento con cautela: GZYL escribe de antemano buena parte del recorrido de un paquete, así que un paso, incluso `Delivered`, no siempre es un escaneo.
@@ -51,7 +51,7 @@ Cuando GZYL escribe una ciudad después de estos textos, Peek la muestra como lu
 
 **Una línea en chino.** En un pedido que todavía no tiene escaneos, la plataforma en la que funciona la página de seguimiento de GZYL escribe por su cuenta `货物电子信息已经收到` (datos electrónicos de la mercancía recibidos). La tienda ha creado el pedido, pero nadie ha escaneado aún el paquete. Peek muestra la línea tal cual, en chino, con el estado «Etiqueta creada».
 
-**De paso por China Post.** Un paquete también puede mostrar `广州处理中心已收寄`, con la ciudad entre corchetes detrás: es la admisión de China Post en su centro de procesamiento de Guangzhou, que GZYL transmite en chino. Peek muestra la línea tal cual, en chino, con el estado «Admitido por el transportista».
+**De paso por China Post.** Un paquete también puede mostrar `广州处理中心已收寄`, con la ciudad entre corchetes detrás: es la admisión de China Post en su centro de procesamiento de Guangzhou, que GZYL transmite en chino. En los números de Xinghe Freight, `香港处理中心已收寄` es la misma admisión, en el centro de procesamiento de Hong Kong. Peek muestra cualquiera de las dos líneas tal cual, en chino, con el estado «Admitido por el transportista».
 
 **Horas.** Todas las horas de la página de seguimiento de GZYL van en hora de Pekín (UTC+8), también las de los pasos en tu país, sin indicar la zona horaria. Un paso de las 20:00 en la página de GZYL es de las 6:00 de esa misma mañana en El Salvador o en Ciudad de México, y de las 13:00 en la España peninsular en invierno (las 14:00 en verano; en Canarias, una hora menos).
 
@@ -67,7 +67,7 @@ Peek no ha encontrado plazos de entrega de GZYL, ni reglas sobre intentos de ent
 
 **Solo `Order information received` o `货物电子信息已经收到`.** La tienda ha creado el pedido, pero GZYL no ha escaneado el paquete. Si en unos días no aparece nada más, pregúntale a la tienda si de verdad lo ha enviado.
 
-**Parado en la aduana.** Si te piden pagar algo para recibir el paquete, mira [paquete retenido en aduanas](guide:customs). Si se queda ahí varios días, avisa a la tienda.
+**Parado en la aduana.** Si te piden pagar algo para recibir el paquete, mira [paquete retenido en aduanas](guide:customs). En España, desde el 1 de noviembre de 2026, la aduana cobra además una tasa de tramitación de 2 € por tipo de producto, como el arancel de 3 €, pero sea cual sea el valor; si la tienda no la cobró en la compra, el transportista puede pedírtela junto con el arancel antes de entregarte el paquete. Si se queda ahí varios días, avisa a la tienda.
 
 **La página de GZYL o un servicio de seguimiento muestra más pasos que Peek.** Peek deja fuera los pasos escritos de antemano, el `Delivered` con el que termina la previsión de GZYL y los pasos con fecha posterior a su última consulta (más abajo), así que los pasos que ves de más pueden ser la previsión de GZYL y no escaneos. Guíate por el plazo de entrega que te dio la tienda, y escríbele cuando se haya cumplido. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
 
@@ -112,5 +112,7 @@ Peek no lo sabe: los pasos de GZYL en el país de destino no nombran ninguna emp
 :::sources
 - [广州云链货运代理有限公司 (GZYL): inicio (en chino)](http://yunlianhouyun.com/) – nombre de la empresa, sitio en chino, búsqueda de paquetes (小包查询) en la página de seguimiento de GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (contacto, en chino)](http://yunlianhouyun.com/contact.html) – línea 24 horas, WeChat y QQ de posventa
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y otros nombres, página de seguimiento en una dirección IP, formato YL…YQ y su coincidencia débil, Xinghe Freight en la página de seguimiento de GZYL, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, la línea en chino de la plataforma, ciudades después de los textos, hora de Pekín, recorrido escrito de antemano y la entrega que lo cierra, respuesta a un número desconocido, Swiss Post como único traspaso, lo que Peek muestra, deja fuera y descarta
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y otros nombres, página de seguimiento en una dirección IP, formato YL…YQ y su coincidencia débil, Xinghe Freight en la página de seguimiento de GZYL y su admisión en Hong Kong, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, la línea en chino de la plataforma, ciudades después de los textos, hora de Pekín, recorrido escrito de antemano y la entrega que lo cierra, respuesta a un número desconocido, Swiss Post como único traspaso, lo que Peek muestra, deja fuera y descarta
+- [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – tasa de tramitación de 2 € por categoría de artículos desde el 1 de noviembre de 2026, que se paga con el arancel y con sus mismas reglas
+- [Comisión Europea: The temporary EUR 3 customs duty and the Union handling fee (PDF, en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por línea de la declaración, como el arancel de 3 €, a cualquier valor
 :::

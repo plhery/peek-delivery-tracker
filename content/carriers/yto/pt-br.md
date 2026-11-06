@@ -3,7 +3,7 @@ title: Rastreio YTO Express: código YT, status e contato
 description: Rastreie sua encomenda YTO Express (圆通): como é o código YT, o que significam os registros em chinês, prazos para o Brasil e a Ásia e como falar com a YTO.
 slug: rastreio-yto-express
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 A YTO Express (圆通速递, Yuantong) é uma empresa chinesa de entregas expressas, fundada em Xangai em 2000 e com mais de 5.000 filiais no país. Um código da YTO costuma ser de um pacote que ainda está dentro da China: um pedido do Taobao, do Pinduoduo ou do Douyin, plataformas que a YTO atende, a caminho do armazém de um redirecionador ou da casa de um amigo. Para rastrear, use o [rastreador da YTO](https://www.yto.net.cn/ytoExpress/waybill/search/), que é só em chinês, ou o campo acima. Os envios da YTO para fora da China ficam com a YTO International, que tem rastreador próprio no [ytoglobal.com](https://www.ytoglobal.com/service/?lang=en-us).
@@ -68,6 +68,7 @@ As páginas da YTO não dizem qual transportadora faz a entrega no seu país; fa
 - Macau, Taiwan e Japão: 5 a 8;
 - Singapura e Coreia do Sul: 6 a 9;
 - Tailândia, Filipinas, Vietnã, Indonésia e Brunei: 7 a 12; Malásia: 8 a 12;
+- Portugal e a maioria dos outros países da União Europeia: 7 a 12; Bulgária e Romênia: 12 a 17;
 - Brasil: 10 a 13.
 
 Se você não estiver em casa, as perguntas frequentes da YTO International mandam seguir as instruções do "Redelivery Notification" (aviso de nova entrega) e marcar um horário: a nova entrega é gratuita. Se também não der certo, a YTO avisa o remetente e segue as instruções dele. Para combinar antes um horário de entrega, a YTO indica o 400 60 95554. Nos envios aéreos, a alfândega e a segurança do aeroporto inspecionam os pacotes, e a alfândega pode apreender ou até destruir um envio com itens proibidos. Os impostos dependem do país de destino.
@@ -144,7 +145,7 @@ Pela YTO International, sim: o International Standard Express lista o Brasil, co
 - [YTO Express: International Business Service](https://www.yto.net.cn/en/global/globalProduct/) – central da YTO International 4006095554, 95161, 021-69777888
 - [YTO International: Company Introduction](https://www.ytoglobal.com/about-us/?lang=en-us) – história desde 2006, escritórios, parceiros
 - [YTO International: Express Freight Tracking](https://www.ytoglobal.com/service/?lang=en-us) – rastreador em inglês e em chinês
-- [YTO International: International Standard Express](https://www.ytoglobal.com/product/express-intl/?lang=en-us) – serviço para pessoas físicas, prazos de referência para Hong Kong, Singapura, Brasil e outros destinos
+- [YTO International: International Standard Express](https://www.ytoglobal.com/product/express-intl/?lang=en-us) – serviço para pessoas físicas, prazos de referência para Hong Kong, Singapura, Brasil, Portugal, demais países da UE e outros destinos
 - [YTO International: FAQ](https://www.ytoglobal.com/rich/question/?lang=en-us) – central 400 60 95554, nova entrega, agendamento, inspeção e apreensão na alfândega
 - [YTO International: Contact Us](https://www.ytoglobal.com/about-us/contact/?lang=en-us) – formulário de contato
 - [Ministério dos Transportes da China: 快递市场管理办法 (normas do mercado de entregas expressas)](https://xxgk.mot.gov.cn/gz/202401/t20240104_3980684.html) – em vigor desde 1º de março de 2024, conferência na entrega, nada de armário ou posto sem consentimento, recurso às autoridades postais

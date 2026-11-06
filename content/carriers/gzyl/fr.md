@@ -3,7 +3,7 @@ title: Suivi colis GZYL : numéro YL…YQ, statuts et qui contacter
 description: Suivre un colis GZYL (广州云链) venu de Chine : le numéro YL…YQ, ce que veulent dire les statuts et pourquoi ton colis peut s'afficher livré avant d'arriver.
 slug: gzyl-suivi-colis
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-06
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) est 广州云链货运代理有限公司, un transitaire de Guangzhou (Canton), en Chine. Si une boutique chinoise a confié ta commande à GZYL, ton numéro de suivi commence par YL et finit par YQ, avec dix chiffres entre les deux : colle-le dans le champ ci-dessus. Le site web de GZYL, yunlianhouyun.com, est en chinois, et sa recherche de colis (小包查询) ouvre un site de suivi qui tourne sur une simple adresse IP, sans nom de domaine. Prends ce suivi avec des pincettes : GZYL écrit d'avance une bonne partie du trajet d'un colis, si bien qu'une étape, même `Delivered`, n'y correspond pas toujours à un scan.
@@ -51,7 +51,7 @@ Peek affiche la ville écrite après ces mots comme lieu de l'étape. Il garde l
 
 **Une ligne en chinois.** Pour une commande encore sans scan, la plateforme qui fait tourner le site de suivi de GZYL écrit d'elle-même `货物电子信息已经收到` : les données électroniques de la marchandise ont été reçues. La boutique a créé la commande, mais personne n'a encore scanné le colis. Peek affiche cette ligne en chinois, sous « Étiquette créée ».
 
-**Par China Post.** Un colis peut aussi afficher `广州处理中心已收寄`, suivi de la ville entre crochets : la prise en charge par China Post dans son centre de traitement de Guangzhou, que GZYL relaie en chinois. Peek affiche cette ligne en chinois, sous « Pris en charge ».
+**Par China Post.** Un colis peut aussi afficher `广州处理中心已收寄`, suivi de la ville entre crochets : la prise en charge par China Post dans son centre de traitement de Guangzhou, que GZYL relaie en chinois. Sur les numéros de Xinghe Freight, `香港处理中心已收寄` est la même prise en charge, au centre de traitement de Hong Kong. Peek affiche l'une comme l'autre en chinois, sous « Pris en charge ».
 
 **Heures.** Toutes les heures du site de suivi de GZYL sont à l'heure de Pékin (UTC+8), même pour les étapes dans le pays de destination, et le fuseau n'est indiqué nulle part. Une étape affichée à 20 h correspond à 13 h en France et en Belgique en hiver, et à 14 h à l'heure d'été, du dernier dimanche de mars au dernier dimanche d'octobre.
 
@@ -112,7 +112,7 @@ Peek ne le sait pas : dans le pays de destination, les étapes de GZYL ne nommen
 :::sources
 - [广州云链货运代理有限公司 (GZYL) : accueil (en chinois)](http://yunlianhouyun.com/) – nom de la société, site en chinois, recherche de colis (小包查询) vers le site de suivi de GZYL
 - [广州云链货运代理有限公司 (GZYL) : 联系我们 (contact, en chinois)](http://yunlianhouyun.com/contact.html) – ligne 24 h/24, WeChat et QQ après-vente
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GZYL : nom de la société et autres noms, site de suivi sur une adresse IP, forme YL…YQ et sa correspondance faible, Xinghe Freight sur le site de suivi de GZYL, recherche par numéro ou par référence avec ses tirets, étapes et leurs statuts, ligne en chinois de la plateforme, villes après les étapes, heure de Pékin, trajet écrit à l'avance, réponse à un numéro inconnu, relais vers La Poste suisse seulement, ce que Peek affiche, écarte et laisse de côté
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GZYL : nom de la société et autres noms, site de suivi sur une adresse IP, forme YL…YQ et sa correspondance faible, Xinghe Freight sur le site de suivi de GZYL et sa prise en charge à Hong Kong, recherche par numéro ou par référence avec ses tirets, étapes et leurs statuts, ligne en chinois de la plateforme, villes après les étapes, heure de Pékin, trajet écrit à l'avance, réponse à un numéro inconnu, relais vers La Poste suisse seulement, ce que Peek affiche, écarte et laisse de côté
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € de droits de douane par article sur les achats en ligne hors UE de 150 € maximum depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
 - [Commission européenne : The temporary EUR 3 customs duty and the Union handling fee (PDF, en anglais)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € par article quelle que soit la valeur, et ce qu'est un article (une ligne de la déclaration)
 - [Commission européenne : Summertime (en anglais)](https://transport.ec.europa.eu/transport-themes/summertime_en) – heure d'été du dernier dimanche de mars au dernier dimanche d'octobre, heure d'Europe centrale

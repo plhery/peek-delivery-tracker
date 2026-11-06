@@ -236,6 +236,8 @@ rolled-back run before the commit.
 An open parcel whose rows showed progress, none of them once the changes apply, steps back with
 them: to the label when a row shows one, else to pending, guarded on its saved stage. Until then
 the carrier's answers, read by the new release, show no progress, and each check keeps the saved
-stage with a `stages_reread` signal ([ROUTING.md](ROUTING.md)). So the replay runs after each
+stage with a `stages_reread` signal ([ROUTING.md](ROUTING.md)). A delivered parcel that is not
+archived, whose every row that showed the delivery the changes read in another stage, takes the
+stage the newest of those rows reads then: the sync keeps a delivery no row shows. So the replay runs after each
 adoption, and its rows and parcels are applied the same way: backup, rolled-back run, commit with
 the counts checked.

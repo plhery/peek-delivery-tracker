@@ -15,7 +15,7 @@
  * source of its own, keeps it whatever the map says of its code. A notice stored as one
  * keeps its stage, as do differences that come only from the order of the scans around a row:
  * the next check of the parcel settles those. Peek's own rows and the stage changes it saw without
- * a scan time are left out. It is a dry run: it lists the rows that would change, the open parcels
+ * a scan time are left out. It is a dry run: it lists the rows that would change, the parcels
  * that would step back with them, and the SQL that would change both, guarded on their stored
  * values; applying it is the operator's
  * ([docs/SCRAPER.md](../../docs/SCRAPER.md)).
@@ -45,6 +45,8 @@ export interface StoredParcel {
   open: boolean;
   /** Its saved stage. Exports before the field have none. */
   stage?: string | null;
+  /** Put away by its follower, and no longer checked. Exports before the field have none. */
+  archived?: boolean;
   /** The carriers whose answers it stores: its own, and the one tracking it since a hand-over. Exports before the field have none. */
   carriers?: string[];
   events: StoredScan[];
@@ -72,13 +74,14 @@ export interface StageChange extends Change {
   stageSource: string;
 }
 export type ReplayedChange = ClockChange | StageChange;
-/** An open parcel whose saved stage no row shows once the changes apply, and the stage they leave it. */
+/** A parcel whose saved stage no row shows once the changes apply, and the stage they leave it. */
 export interface StepBack { parcel: string; from: string; to: string }
 
 /** The read-only export the replay reads, one parcel a line. */
 export const STORED_SCANS_QUERY = `set default_transaction_read_only = on;
 select json_build_object('id', p.id, 'destination', p.carrier_data->>'destination_country',
   'open', p.archived_at is null and coalesce(p.current_stage, '') not in ('delivered', 'returned'), 'stage', p.current_stage,
+  'archived', p.archived_at is not null,
   'carriers', (select coalesce(json_agg(distinct c), '[]') from unnest(array[p.carrier, p.carrier_data->>'original_carrier', p.carrier_data->>'active_tracking_carrier']) c
     where c is not null and c <> 'unknown'),
   'events', (select json_agg(json_build_object('id', e.id, 'providerEventId', e.provider_event_id, 'stage', e.stage,
@@ -207,19 +210,31 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
 }
 
 /**
- * The open parcels the changes step back. A parcel past the label whose rows showed progress keeps its stage while a
+ * The parcels the changes step back. A parcel past the label whose rows showed progress keeps its stage while a
  * row still shows it; once the changes read every such row as the label or earlier, the carrier's next answer shows
  * none, and the sync keeps the saved stage with a `stages_reread` signal. The parcel steps back with its rows: to the
- * label when a row shows one, else to pending, as `rereadStage` reads a universal provider's rows. Delivered, returned
- * and exception parcels keep their stage.
+ * label when a row shows one, else to pending, as `rereadStage` reads a universal provider's rows. Returned and
+ * exception parcels keep their stage. So does a delivered one, unless the changes read every row that showed the
+ * delivery in another stage, one of them past pending: the sync keeps a delivery no row shows, so a parcel still checked takes
+ * the stage the newest of those rows reads then (an undelivered attempt an earlier release read as delivered), and
+ * its next check takes the carrier's answer from there.
  */
 export function steppedBack(parcels: readonly StoredParcel[], changes: readonly ReplayedChange[]): StepBack[] {
   const restaged = new Map(changes.flatMap((change) => change.kind === 'stage' ? [[change.row, change.to] as const] : []));
   return parcels.flatMap((parcel): StepBack[] => {
     const from = parcel.stage ?? '';
-    if (!parcel.open || !PROGRESS_STAGES.has(from) || HELD_STAGES.has(from) || !parcel.events.some((scan) => restaged.has(scan.id))) return [];
+    if (!parcel.events.some((scan) => restaged.has(scan.id))) return [];
     const before = parcel.events.map((scan) => scan.stage);
     const after = parcel.events.map((scan) => restaged.get(scan.id) ?? scan.stage);
+    if (from === 'delivered') {
+      if (parcel.archived !== false || after.includes('delivered')) return [];
+      // The rows that showed the delivery, newest first, as the changes read them.
+      const [to] = parcel.events.filter((scan) => scan.stage === 'delivered')
+        .sort((a, b) => Date.parse(b.occurredAt) - Date.parse(a.occurredAt))
+        .map((scan) => restaged.get(scan.id)!).filter((stage) => stage !== 'pending');
+      return to ? [{ parcel: parcel.id, from, to }] : [];
+    }
+    if (!parcel.open || !PROGRESS_STAGES.has(from) || HELD_STAGES.has(from)) return [];
     if (!before.some((stage) => PROGRESS_STAGES.has(stage)) || after.some((stage) => PROGRESS_STAGES.has(stage))) return [];
     return [{ parcel: parcel.id, from, to: after.includes('registered') ? 'registered' : 'pending' }];
   });

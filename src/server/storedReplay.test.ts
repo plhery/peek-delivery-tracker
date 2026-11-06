@@ -157,4 +157,31 @@ describe('stored scan replay', () => {
     }
     expect(replaySql(changes)).toContain('if stepped <> 0 then raise exception');
   });
+
+  it('steps a delivered parcel still checked back once no row shows the delivery, to its newest row', () => {
+    // An undelivered attempt an earlier release read as delivered, its row read again as the attempt.
+    const round = scan('round', 'ekart', '2026-10-30T02:30:00Z', 'out_for_delivery', 'Out for delivery', { provider_code: 'OFD', stage: 'out_for_delivery' });
+    const attempt = scan('attempt', 'ekart', '2026-10-30T09:50:00Z', 'delivered', 'Delivery attempted', { provider_code: 'UA', stage: 'delivered' });
+    const notice = scan('notice', 'ekart', '2026-10-30T10:00:00Z', 'pending', 'Message sent', { stage_source: 'none' });
+    const reread = { kind: 'stage', parcel: 'parcel-1', row: 'attempt', source: 'ekart', open: false, from: 'delivered', to: 'failed_attempt',
+      code: 'UA', reason: 'mapped', declared: 'failed_attempt', stageSource: 'carrier_map' } as const;
+    const delivered = { ...parcel(round, attempt, notice), open: false, stage: 'delivered', archived: false };
+    expect(steppedBack([delivered], [reread])).toEqual([{ parcel: 'parcel-1', from: 'delivered', to: 'failed_attempt' }]);
+    // A pickup notice once read as delivered, which the carrier's summary named over a later round: the stage its scan
+    // reads now, not the round's. Read as a notice, it leaves the delivery to the operator.
+    const later = scan('later', 'ekart', '2026-10-30T11:00:00Z', 'out_for_delivery', 'Out for delivery', { provider_code: 'OFD', stage: 'out_for_delivery' });
+    expect(steppedBack([{ ...delivered, events: [round, attempt, later] }], [{ ...reread, to: 'ready_for_pickup' }]))
+      .toEqual([{ parcel: 'parcel-1', from: 'delivered', to: 'ready_for_pickup' }]);
+    expect(steppedBack([delivered], [{ ...reread, to: 'pending' }])).toEqual([]);
+    // Of two deliveries read again, the newer one's.
+    const handed = scan('handed', 'ekart', '2026-10-29T12:00:00Z', 'delivered', 'Delivered to the counter', { provider_code: 'DL', stage: 'delivered' });
+    expect(steppedBack([{ ...delivered, events: [round, handed, attempt] }], [reread, { ...reread, row: 'handed', to: 'ready_for_pickup' }]))
+      .toEqual([{ parcel: 'parcel-1', from: 'delivered', to: 'failed_attempt' }]);
+
+    // Another row still showing a delivery, an archived parcel, an export without the field, or rows that showed none: no step back.
+    for (const other of [{ ...delivered, events: [round, handed, attempt] }, { ...delivered, archived: true },
+      { ...delivered, archived: undefined }, { ...delivered, events: [round, { ...attempt, stage: 'in_transit' }] }]) {
+      expect(steppedBack([other], [reread])).toEqual([]);
+    }
+  });
 });

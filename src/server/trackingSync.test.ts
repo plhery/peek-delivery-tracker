@@ -1689,6 +1689,58 @@ describe('TrackingSyncService', () => {
     });
   });
 
+  describe('a delivery read again in another stage', () => {
+    // An undelivered attempt an earlier release read as delivered; the number, wording and clocks are invented.
+    const attempt = { time: '2026-10-30T15:20:00+05:30', description: 'Delivery attempted, customer not available' };
+    const before = [
+      { time: '2026-10-30T08:00:00+05:30', description: 'Out for delivery', stage: 'out_for_delivery' },
+      { time: '2026-10-29T20:00:00+05:30', description: 'In transit', stage: 'in_transit' }];
+    type Scan = { time: string; description: string; stage: string };
+    const answer = (read: string, ...others: Scan[]): CarrierResult => {
+      const events = [...others, { ...attempt, stage: read }, ...before]
+        .sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
+      return { status: events[0]!.stage === 'delivered' ? 'delivered' : 'exception', current_stage: events[0]!.stage,
+        last_status_text: events[0]!.description, last_update: events[0]!.time, events };
+    };
+    const parcel = () => {
+      const store = eventStore();
+      let saved: JsonObject = { id: 'read-again', carrier: 'ekart', tracking_number: 'TEST20481357', current_stage: 'pending',
+        created_at: '2026-10-29T09:00:00Z' };
+      return async (at: string, carrier: CarrierResult) => {
+        const adapter = { fetch: vi.fn().mockResolvedValue(carrier), fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+        await new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
+          .syncPackage({ ...saved, [STORED_EVENT_IDENTITIES]: store.identities() });
+        saved = { ...saved, ...store.client.applyTrackingSync.mock.calls.at(-1)![1] };
+        return { ...saved, stages: [...store.rows.values()].map((row) => row.stage) } as JsonObject;
+      };
+    };
+
+    it('takes the stage the scan that set it now reads, and nothing else moves the delivery back', async () => {
+      const check = parcel();
+      expect(await check('2026-10-30T12:00:00Z', answer('delivered'))).toMatchObject({ current_stage: 'delivered' });
+      const reread = await check('2026-10-31T06:00:00Z', answer('failed_attempt'));
+      expect(reread).toMatchObject({ current_stage: 'failed_attempt', last_status_text: attempt.description });
+      expect(reread.stages).not.toContain('delivered');
+
+      // A later scan of another stage leaves the delivery its scan still reads.
+      const later = parcel();
+      await later('2026-10-30T12:00:00Z', answer('delivered'));
+      expect(await later('2026-10-31T06:00:00Z', answer('delivered',
+        { time: '2026-10-31T09:00:00+05:30', description: 'In transit', stage: 'in_transit' })))
+        .toMatchObject({ current_stage: 'delivered', last_status_text: attempt.description });
+      // So does an answer that reads it again beside a delivery of its own, or leaves another delivered row out.
+      const delivery = { time: '2026-10-30T17:00:00+05:30', description: 'Delivered', stage: 'delivered' };
+      const damaged = { time: '2026-10-31T10:00:00+05:30', description: 'Damaged', stage: 'exception' };
+      const beside = parcel();
+      await beside('2026-10-30T12:00:00Z', answer('delivered'));
+      expect(await beside('2026-10-31T06:00:00Z', answer('failed_attempt', delivery, damaged))).toMatchObject({ current_stage: 'delivered' });
+      const counter = { time: '2026-10-30T14:00:00+05:30', description: 'Delivered at the counter', stage: 'delivered' };
+      const leftOut = parcel();
+      await leftOut('2026-10-30T12:00:00Z', answer('delivered', counter));
+      expect(await leftOut('2026-10-31T06:00:00Z', answer('failed_attempt'))).toMatchObject({ current_stage: 'delivered' });
+    });
+  });
+
   describe('rows the carrier lists past the scan it puts first', () => {
     // JCEX read its copies of a partner's scans hours late, past the delivery it lists first; wording and clocks are invented.
     const transit = { time: '2026-10-27T06:00:00Z', description: 'Departed', stage: 'in_transit' };

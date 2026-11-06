@@ -6,7 +6,7 @@
 // which the replay imports; an older one fails on that import. The report names rows by their ids'
 // first eight characters and shows no number, place or wording. `--sql <file>` writes the guarded
 // transaction that would apply the changes and step back the open parcels no row then shows past
-// the label, and needs `--from`. `--source <a,b>` keeps the rows of those sources only.
+// the label and the delivered ones still checked that no row then shows delivered, and needs `--from`. `--source <a,b>` keeps the rows of those sources only.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';

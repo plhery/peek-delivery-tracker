@@ -2216,6 +2216,15 @@ export class TrackingSyncService {
         && savedDeliveries.every((row) => String(row.provider_event_id).startsWith('unknown:')
           && Date.parse(String(row.occurred_at)) <= carrierMoved)
         ? savedDeliveries.map((row) => String(row.provider_event_id)) : [];
+      // Nor is a saved delivery whose every row this answer lists again in another stage, and no scan as
+      // delivered: a scraper release re-read the scan that set it (Ekart's undelivered attempt, once read as
+      // delivered), and the parcel takes the answer's stage. A later scan of another stage leaves it.
+      const deliveryReread = previousStage === 'delivered' && selectedStage !== null && selectedStage !== 'delivered'
+        && savedDeliveries.length > 0 && !events.some((event) => event.stage === 'delivered')
+        && savedDeliveries.every((row) => {
+          const stage = answeredAs.get(String(row.provider_event_id));
+          return stage !== undefined && stage !== 'delivered';
+        });
       // An answer of the parcel's own carrier that disputes the saved delivery is not older either:
       // the watermark came from the provider whose delivery it disputes. Nor is one past which the
       // stored rows are only a provider's notices of a stage it shows (noticesOnlyPast): the saved
@@ -2249,10 +2258,10 @@ export class TrackingSyncService {
         && directCarrier(String(parcel.carrier)) && answeredByCarrier(parcel) && previousStage !== 'pending'
         && Number.isFinite(previousEventTime) && !(returnedEventTime > previousEventTime);
       // A delivered or returned parcel keeps its summary, unless the answer disputes a provider's
-      // delivery or brings the return that came after the delivery.
+      // delivery, reads the delivery's own scans again, or brings the return that came after the delivery.
       const preserveSummary = keepSaved || olderSnapshot || unprovenUpuSummary || unprovenLocalSummary || unprovenProviderSummary
         || (['delivered', 'returned'].includes(previousStage) && selectedStage !== previousStage && !disputedRows.length
-          && !returnAfterDelivery(previousStage, selectedStage, [...stored, ...events], returnedEventTime));
+          && !deliveryReread && !returnAfterDelivery(previousStage, selectedStage, [...stored, ...events], returnedEventTime));
       // The steps a carrier plans are routing's to keep (`routing.planned`), never the parcel's data,
       // and the estimate fields an adapter does not read are the review's (`unread_delivery_estimate`).
       const carrierData: JsonObject = Object.fromEntries(

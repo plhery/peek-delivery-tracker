@@ -33674,7 +33674,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "polonez"
     },
     "trackingUrlTemplate": "https://tracking-iframe.meest.com/t/en/{trackingNumber}",
     "linkRules": [],

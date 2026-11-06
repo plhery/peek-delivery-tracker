@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 3 November 2026
+Effective: 6 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -23,11 +23,11 @@ analytics.
   postcode, a private tracking link, or a reference that itself contains the
   postcode.
 - Web Push subscription endpoints, encryption keys, browser user agent, native
-  iPhone APNs device token, optional device name and locale, a random local
-  installation identifier, ActivityKit push-to-start and per-activity update
-  tokens, delivery acknowledgements, and delivery errors when you enable the
-  corresponding notification or Live Activity setting. The Android app
-  registers no device token and sends no device name.
+  iPhone APNs device token or Android Firebase Cloud Messaging registration
+  token, optional device name (on Android, the phone's model) and locale, a
+  random local installation identifier, ActivityKit push-to-start and
+  per-activity update tokens, delivery acknowledgements, and delivery errors
+  when you enable the corresponding notification or Live Activity setting.
 - Whether you asked for an email when a parcel arrives and when you
   turned it on, the parcels you muted for it, and a record of each of these
   emails: the parcel, whether it told a delivery or a parcel ready for pickup,
@@ -131,11 +131,12 @@ A postcode or private link you supply goes to the carrier it is for; ParcelsApp
 and 17TRACK also receive the postcode, and 17TRACK the parcel's carrier. Dachser's link shows more than the journey: the
 service discards its sender, recipient, address, contact and document fields.
 
-Browser push services receive encrypted Web Push messages; Apple processes
-native notification and Live Activity payloads through APNs. Those Apple
-payloads can contain a parcel label, carrier, status, location, and expected
-delivery text, but Peek does not put the tracking number in them. The Android
-app receives no push notifications.
+Browser push services receive encrypted Web Push messages; Apple processes the
+iPhone app's notification and Live Activity payloads through APNs, and Google
+processes the Android app's notifications through Firebase Cloud Messaging.
+Those payloads can contain a parcel label, carrier, status, location, the time
+of the latest scan, and expected delivery text, but Peek does not put the
+tracking number in them.
 
 Error reports go to Sentry (Functional Software, Inc.), which stores them in
 the United States for up to 90 days. Sentry is certified under the EU–US and
@@ -285,12 +286,13 @@ what you chose to send along, until the parcel is forgotten on that device. A
 gift's page shows its recipient none of it before the parcel is delivered.
 
 Anyone who has a link can turn on notifications for that one parcel, without an
-account, in their browser or in the iPhone app. The service then stores that
-browser's Web Push endpoint and encryption keys, or that iPhone's APNs device
-token, with its language, which updates to announce, and whether the device
-that made the lookup turned notifications on. This is deleted when the parcel is
-delivered or returned, when the browser or iPhone turns notifications off, its
-push subscription ends or Apple says the token is no longer valid, when the link
+account, in their browser or in the iPhone or Android app. The service then
+stores that browser's Web Push endpoint and encryption keys, or that phone's
+APNs device token or Firebase Cloud Messaging registration token, with its
+language, which updates to announce, and whether the device that made the lookup
+turned notifications on. This is deleted when the parcel is delivered or
+returned, when the browser or phone turns notifications off, its push
+subscription ends or Apple or Google says the token is no longer valid, when the link
 is forgotten, and, for everyone but the device that made the lookup, when
 sharing is stopped. The notifications carry the parcel's status and never its
 number or name; a gift's do not say where it is before it arrives.
@@ -299,10 +301,10 @@ Your browser is asked for notifications, and creates its push subscription,
 only when you choose "Turn on". The iPhone app asks when a parcel first comes to
 it without an account, and keeps the device token beside the parcels it follows
 that way so that forgetting one turns its notifications off. The Android app
-offers no notifications: it never asks for Android's notification permission
-and registers no device token, so nothing is sent to the service for it. It
-can still ask for an email when a parcel arrives. Adding a delivery to your
-calendar makes a calendar file in the browser; nothing is sent for it.
+asks for Android's notification permission only when you choose to turn
+notifications on, and keeps its token beside the parcels it follows without an
+account in the same way. Adding a delivery to your calendar makes a calendar
+file in the browser; nothing is sent for it.
 
 ## Answering whether a parcel is right
 

@@ -414,17 +414,19 @@ function networkRoute(route: StepRecord['networkRoute'] | string): 'default' | '
   return route === 'default' || route === 'datacenter' || route === 'residential' ? route : 'other';
 }
 
-let retryTrialSource: (() => RetryRouteTrialSnapshot) | null = null;
+// On globalThis: the route that runs the trial and the metrics route are separate bundles,
+// each with its own copy of this module.
+const globalTrialSource = globalThis as typeof globalThis & { __deliveryRetryTrialSource?: (() => RetryRouteTrialSnapshot) | null };
 
 /** Gives the metrics the running FedEx retry trial, read at each scrape. */
-export function setRetryTrialSource(source: (() => RetryRouteTrialSnapshot) | null): void { retryTrialSource = source; }
+export function setRetryTrialSource(source: (() => RetryRouteTrialSnapshot) | null): void { globalTrialSource.__deliveryRetryTrialSource = source; }
 
 function refreshRetryTrial(): void {
   const gauges = [runtime.retryTrialAttempts, runtime.retryTrialHistories, runtime.retryTrialBytes,
     runtime.retryTrialState, runtime.retryTrialTime, runtime.retryTrialLimit];
   for (const gauge of gauges) gauge.reset();
   let snapshot: RetryRouteTrialSnapshot | null = null;
-  try { snapshot = retryTrialSource?.() ?? null; } catch { snapshot = null; }
+  try { snapshot = globalTrialSource.__deliveryRetryTrialSource?.() ?? null; } catch { snapshot = null; }
   if (!snapshot) return;
   const periods = [['trial', 'datacenter', snapshot.routes.datacenter], ['trial', 'residential', snapshot.routes.residential],
     ['after', 'datacenter', snapshot.after]] as const;

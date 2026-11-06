@@ -88,6 +88,17 @@ describe('prometheus carrier metrics', () => {
     metrics.setRetryTrialSource(null);
     text = await metrics.metricsText();
     expect(text).not.toContain('fedex_retry_trial_state{');
+    // Another bundle's copy of the module sets it on the process.
+    const source = (globalThis as { __deliveryRetryTrialSource?: unknown });
+    source.__deliveryRetryTrialSource = () => ({
+      trial: 'other-bundle', phase: 'active', startedAt: 1_000_000, deadlineAt: 2_000_000, endedAt: null, endReason: null,
+      chargedResidentialBytes: 0, reservedResidentialBytes: 0, maxResidentialBytes: 250_000_000, allowanceBytes: 10_000_000,
+      marginBytes: 1_000_000, targetAttempts: 100,
+      routes: { datacenter: tally(0, 0, 0, {}, 0, 0), residential: tally(0, 0, 0, {}, 0, 0) }, after: tally(0, 0, 0, {}, 0, 0),
+    });
+    text = await metrics.metricsText();
+    expect(text).toContain('fedex_retry_trial_state{trial="other-bundle",phase="active",end_reason="none"} 1');
+    metrics.setRetryTrialSource(null);
   });
 
   it('compares native residential recoveries with normal recoveries without inferring IP family', async () => {

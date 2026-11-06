@@ -1,6 +1,5 @@
 package com.plhery.peekdeliverytracker.ui.arrival
 
-import android.os.Looper
 import android.text.InputType
 import android.view.View
 import android.view.accessibility.AccessibilityManager
@@ -64,6 +63,7 @@ import com.plhery.peekdeliverytracker.platform.NoWebAuthentication
 import com.plhery.peekdeliverytracker.ui.LocalRootFade
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.RootScreen
+import com.plhery.peekdeliverytracker.ui.awaitFrame
 import com.plhery.peekdeliverytracker.ui.deliveries.assertAnnounced
 import com.plhery.peekdeliverytracker.ui.deliveries.editorInfo
 import com.plhery.peekdeliverytracker.ui.deliveries.CARD_PHONE
@@ -82,7 +82,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
-import java.time.Duration
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
@@ -774,9 +773,13 @@ class SignInTest {
         assertTrue("Above the bar: ${demo.bottom} in ${window.bottom}", demo.bottom <= window.bottom - dp(48f) + 0.5f)
     }
 
-    /** The window's pixel at [x], [y], as it draws the last frame (on its looper's clock, which a frame's length brings up). */
+    /**
+     * The window's pixel at [x], [y], as it draws the last frame: laid out once the composition is idle, and drawn once
+     * the window has committed frames ([awaitFrame]), as Robolectric's renderer can put a frame off on a busy machine.
+     */
     private fun pixel(x: Float, y: Float): Color {
-        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(17))
+        compose.waitForIdle()
+        compose.awaitFrame()
         return compose.onRoot().captureToImage().toPixelMap()[x.toInt(), y.toInt()]
     }
 

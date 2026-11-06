@@ -84,7 +84,7 @@ Chat o WhatsApp: GLS Italy non ne indica.
 
 Gli orari di GLS Italy non hanno fuso orario: Peek li legge nell'ora italiana e mostra la cronologia di GLS Italy. Quando l'ultima scansione ha la data ma non l'ora, Peek prende le date dai servizi di tracciamento universali che conoscono il pacco. Gli stati di GLS Italy compaiono nella dicitura inglese, così come sono scritti: `Delivered.`, con il punto, non diventa il «Consegnato» di Peek. Si vedono anche la città di ogni scansione e il peso, e puoi ricevere notifiche quando lo stato cambia.
 
-Non mostra un giorno di consegna previsto, il punto di ritiro né il mittente, e lascia fuori nome, indirizzo e firma. Non segue una spedizione inoltrata o resa con un nuovo numero, e le spedizioni vecchie risultano non trovate.
+L'unico giorno di consegna previsto che mostra è quello per cui prenoti la riconsegna dopo un tentativo non riuscito: GLS lo scrive `Consegna prenotata il` con la data, in italiano anche tra gli stati in inglese. Non mostra il punto di ritiro né il mittente, e lascia fuori nome, indirizzo e firma. Non segue una spedizione inoltrata o resa con un nuovo numero, e le spedizioni vecchie risultano non trovate.
 
 ## Domande sul tracking GLS
 

@@ -83,7 +83,7 @@ GLS Italy's channels, as read on 11 October 2026:
 
 GLS Italy's scan times carry no time zone: Peek reads them on Italian time and lists GLS Italy's own history. When the newest scan has a day but no time, Peek dates the history from universal tracking services that know the parcel. Statuses keep GLS's English wording, and the weight shows.
 
-It shows no expected delivery day, pickup point or sender, and drops your name, address and signature. A parcel forwarded or returned under a new number isn't followed, and old shipments come back as not found.
+The only expected delivery day it shows is the one you book a redelivery for after a missed delivery: GLS writes it as `Consegna prenotata il` and the date, in Italian even among its English statuses. It shows no pickup point or sender, and drops your name, address and signature. A parcel forwarded or returned under a new number isn't followed, and old shipments come back as not found.
 
 ## Questions about GLS tracking in Italy
 

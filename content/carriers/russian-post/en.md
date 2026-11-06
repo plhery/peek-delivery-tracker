@@ -47,7 +47,7 @@ For any other Russian Post parcel, Peek reads Russian Post's own tracker, which 
 
 ## How Russian Post delivers
 
-The steps above show the route in Russia: sorting centres, then the post office that delivers the parcel. From there, a postman may bring it (`Передано почтальону`). If you weren't in, or if you are to collect it, the step says so. On Qwintry's tracker, Peek shows the post office as the step's place, so you know which one has your parcel.
+The steps above show the route in Russia: sorting centres, then the post office that delivers the parcel. From there, a postman may bring it (`Передано почтальону`). If you weren't in, or if you are to collect it, the step says so. On Qwintry's tracker, Peek shows the post office's town as the step's place. With Peek in Russian, or where Peek can't place the office, it shows the office as Russian Post writes it, so you know which one has your parcel.
 
 Peek found no delivery times, holding periods or rules for delivery attempts that it could check on Russian Post's own website, so this page gives none. For a parcel waiting at a post office, see [uncollected parcels](guide:uncollected-parcel) and [missed deliveries](guide:missed-delivery).
 

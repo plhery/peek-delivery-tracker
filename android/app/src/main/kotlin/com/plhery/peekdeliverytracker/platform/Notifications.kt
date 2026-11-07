@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,7 +26,8 @@ import kotlinx.coroutines.CompletableDeferred
  * and [request] waits for the answer, which comes to the window made again after a turn as well. A window that asked
  * and closes for good before the answer, or a question that couldn't be shown, ends it unanswered, so the next can be
  * asked. The answer counts once given ([answered]), kept in the app's files that no backup carries, so a phone set up
- * from another asks again; a question dismissed without an answer, which Android 13 asks again, doesn't count. Whether
+ * from another asks again; a question dismissed without an answer, which Android 13 asks again, doesn't count, and a
+ * refusal Android gives without showing the question, which it no longer asks, does ([watchFocus]). Whether
  * Android would still ask after a refusal ([rationale]) is read from the window on screen, or as last read while none
  * is. On the main thread.
  */
@@ -39,6 +42,10 @@ class NotificationPermission(context: Context) {
     private var asker: ComponentActivity? = null
     private var rationaleBefore = false
     private var lastRationale = false
+
+    /** Whether the question showed, as far as the asking window can tell ([watchFocus]). */
+    private var shown = true
+    private var focus: Pair<View, ViewTreeObserver.OnWindowFocusChangeListener>? = null
 
     /** The window `activity` can ask; in its `onCreate`, before it starts, as Android registers each question. */
     fun attach(activity: ComponentActivity) {
@@ -83,11 +90,13 @@ class NotificationPermission(context: Context) {
             CompletableDeferred<Boolean>().also {
                 answer = it
                 asker = window.activity
+                watchFocus(window.activity)
                 try {
                     window.launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 } catch (error: RuntimeException) {
                     answer = null
                     asker = null
+                    stopWatchingFocus()
                     throw error
                 }
             }
@@ -101,8 +110,9 @@ class NotificationPermission(context: Context) {
     private fun answered(activity: ComponentActivity, granted: Boolean) {
         val rationale = activity.shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)
         lastRationale = rationale
-        // A first refusal asks for a rationale, a second ends it; a dismissal leaves it as it was, unanswered.
-        if (granted || rationale || rationaleBefore) runCatching { marker.createNewFile() }
+        // A first refusal asks for a rationale, a second ends it; a dismissal leaves it as it was, unanswered; a refusal
+        // without the question is Android's own, which no longer asks.
+        if (granted || rationale || rationaleBefore || !shown) runCatching { marker.createNewFile() }
         end(granted)
     }
 
@@ -111,7 +121,30 @@ class NotificationPermission(context: Context) {
         val pending = answer
         answer = null
         asker = null
+        stopWatchingFocus()
         pending?.complete(granted)
+    }
+
+    /**
+     * Whether Android shows the question: its window takes the focus from the one that asked. Android refuses without it
+     * where it no longer asks: refused for good on this phone, or on the one it was set up from, whose permissions come
+     * with it while the marker, kept from backups, doesn't. Not known where the asking window hadn't the focus to lose,
+     * which counts as shown.
+     */
+    private fun watchFocus(activity: ComponentActivity) {
+        stopWatchingFocus()
+        val decor = activity.window.decorView
+        shown = !decor.hasWindowFocus()
+        val listener = ViewTreeObserver.OnWindowFocusChangeListener { hasFocus -> if (!hasFocus) shown = true }
+        decor.viewTreeObserver.addOnWindowFocusChangeListener(listener)
+        focus = decor to listener
+    }
+
+    private fun stopWatchingFocus() {
+        val (decor, listener) = focus ?: return
+        focus = null
+        // A window gone since has no observer left to take it from.
+        runCatching { decor.viewTreeObserver.removeOnWindowFocusChangeListener(listener) }
     }
 
     private companion object {

@@ -217,17 +217,20 @@ class NotificationsTest {
 
     /**
      * Asks from `window` and answers as the user would: `granted`, and whether Android would still ask after it
-     * (`rationale`); a refusal without it the first time is the question dismissed without an answer.
+     * (`rationale`); a refusal without it the first time is the question dismissed without an answer. The question
+     * [shown] takes the window's focus while it shows, as the system's dialog does; not shown, Android answers alone.
      */
-    private fun ask(window: ActivityController<AskingWindow>, granted: Boolean, rationale: Boolean = false): Boolean {
+    private fun ask(window: ActivityController<AskingWindow>, granted: Boolean, rationale: Boolean = false, shown: Boolean = true): Boolean {
         var answer: Result<Boolean>? = null
         MainScope().launch { answer = runCatching { notifications.requestAuthorization() } }
         shadowOf(Looper.getMainLooper()).idle()
         val request = requireNotNull(shadowOf(window.get()).lastRequestedPermission) { "Nothing was asked" }
         assertEquals(listOf(Manifest.permission.POST_NOTIFICATIONS), request.requestedPermissions.toList())
         assertNull("Not answered before the user does", answer)
+        if (shown) window.windowFocusChanged(false)
         rationale(rationale)
         answer(window, granted)
+        if (shown) window.windowFocusChanged(true)
         return requireNotNull(answer).getOrThrow()
     }
 
@@ -265,9 +268,27 @@ class NotificationsTest {
     @Config(sdk = [QUESTION_SDK])
     fun aQuestionDismissedWithoutAnAnswerIsStillToBeAsked() {
         val window = window()
+        // The window has the focus the question takes.
+        window.windowFocusChanged(true)
         assertFalse(ask(window, granted = false, rationale = false))
         assertEquals(NotificationAuthorizationStatus.NotDetermined, status())
         assertFalse(notifications.answeredBefore)
+    }
+
+    /**
+     * Refused for good before this phone's app ever asked, on the phone it was set up from, whose permissions came with
+     * it: Android answers without showing the question, which counts, so Settings is offered rather than a question
+     * that never shows.
+     */
+    @Test
+    @Config(sdk = [QUESTION_SDK])
+    fun aRefusalAndroidGivesWithoutShowingTheQuestionIsDenied() {
+        val window = window()
+        window.windowFocusChanged(true)
+        assertEquals(NotificationAuthorizationStatus.NotDetermined, status())
+        assertFalse(ask(window, granted = false, rationale = false, shown = false))
+        assertEquals("Denied: only Settings turns them on", NotificationAuthorizationStatus.Denied, status())
+        assertTrue(notifications.answeredBefore)
     }
 
     @Test
@@ -353,8 +374,9 @@ class NotificationsTest {
 
     /**
      * In a build without Firebase's four settings the app's pushes aren't available, the app's own stores included:
-     * nothing offers them, asks for the permission for them or tunes them ([AndroidPushNotifications.available]). With
-     * them the app starts Firebase with them, as google-services.json would, and the pushes are available.
+     * nothing offers them, asks for the permission for them or tunes them ([AndroidPushNotifications.available]); nor on
+     * a phone without Google Play services, which Firebase gets its tokens from. With them, on a phone with Play
+     * services, the app starts Firebase with them, as google-services.json would, and the pushes are available.
      */
     @Test
     fun theAppsPushesAreAvailableOnlyWithFirebasesSettings() {
@@ -368,7 +390,9 @@ class NotificationsTest {
         val settings = requireNotNull(
             FirebaseSettings.of(projectId = "peek-synthetic", applicationId = "1:1:android:1", apiKey = "synthetic-key", senderId = "1"),
         )
-        val tokens = requireNotNull(FirebasePushTokens.of(context, settings))
+        assertNull("No Play services, no tokens", FirebasePushTokens.of(context, settings, playServices = { false }))
+        assertTrue("Firebase never started without Play services", FirebaseApp.getApps(context).isEmpty())
+        val tokens = requireNotNull(FirebasePushTokens.of(context, settings, playServices = { true }))
         val options = FirebaseApp.getInstance().options
         assertEquals(listOf("peek-synthetic", "1:1:android:1", "synthetic-key", "1"), listOf(options.projectId, options.applicationId, options.apiKey, options.gcmSenderId))
         assertTrue(AndroidPushNotifications(context, app.notificationPermission, tokens).available)

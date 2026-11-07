@@ -2,6 +2,8 @@ package com.plhery.peekdeliverytracker.platform
 
 import android.content.Context
 import androidx.core.content.ContextCompat
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailabilityLight
 import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
@@ -91,12 +93,27 @@ class FirebasePushTokens private constructor() : PushTokens {
             if (FirebaseApp.getApps(context).isEmpty()) FirebaseApp.initializeApp(context, settings.options)
         }
 
-        /** The tokens of a build with Firebase's [settings], Firebase started; null without them. */
-        fun of(context: Context, settings: FirebaseSettings?): PushTokens? {
+        /**
+         * The tokens of a build with Firebase's [settings], Firebase started; null without them, or on a phone without
+         * Google Play services ([playServices]), which Firebase gets its tokens from: such a phone has no pushes, and
+         * nothing offers them, where the iPhone always has APNs.
+         */
+        fun of(context: Context, settings: FirebaseSettings?, playServices: (Context) -> Boolean = ::hasPlayServices): PushTokens? {
             settings ?: return null
+            if (!playServices(context)) return null
             start(context.applicationContext, settings)
             return FirebasePushTokens()
         }
+
+        /**
+         * Whether the phone has Google Play services: missing, turned off or not Google's, no token ever comes; out of
+         * date or updating, they still count, as the token's own answer says whether one comes.
+         */
+        private fun hasPlayServices(context: Context): Boolean =
+            when (GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(context)) {
+                ConnectionResult.SERVICE_MISSING, ConnectionResult.SERVICE_DISABLED, ConnectionResult.SERVICE_INVALID -> false
+                else -> true
+            }
     }
 }
 

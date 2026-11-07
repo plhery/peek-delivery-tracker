@@ -29,7 +29,8 @@ build reads the Firebase project's Android app from four xcconfig settings that 
 `ios/Configuration/Shared.xcconfig` leaves empty: `SDT_FIREBASE_PROJECT_ID` (`project_id` in `google-services.json`),
 `SDT_FIREBASE_APP_ID` (`mobilesdk_app_id`), `SDT_FIREBASE_API_KEY` (`current_key`) and `SDT_FIREBASE_SENDER_ID`
 (`project_number`). Debug builds take them from `Local.xcconfig`, a release from the `peek.releaseXcconfig` file. A
-build without all four has no pushes: nothing offers them, and a parcel's alerts are its email. The server sends
+build without all four has no pushes: nothing offers them, and a parcel's alerts are its email. Neither has a phone
+without Google Play services, which Firebase gets its tokens from. The server sends
 through the same Firebase project ([docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md)).
 
 As on the iPhone, signing out, an expired session or a deleted account takes the phone's token off the server but

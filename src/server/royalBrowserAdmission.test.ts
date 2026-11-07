@@ -13,8 +13,9 @@ it.each([
   ['swiss-post', 'royal-mail', 'tracking', false],
   ['unknown', 'royal-mail', 'tracking', false],
   ['parcelforce', 'parcelforce', 'tracking', false],
-  ['royal-mail', 'parcelforce', 'tracking', true],
+  ['royal-mail', 'parcelforce', 'tracking', false],
   ['royal-mail', 'royal-mail', 'recognition', false],
+  ['royal-mail', 'royal-mail', 'handoff', false],
   ['ups', 'ups', 'tracking', true],
 ] as const)('filed %s asking %s for %s during the incident: %s', async (filed, carrier, phase, allowed) => {
   await expect(withRoyalBrowserAdmission(filed, client, () => royalBrowserAllowed(carrier, phase))).resolves.toBe(allowed);

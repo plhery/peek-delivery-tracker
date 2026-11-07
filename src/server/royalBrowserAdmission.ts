@@ -33,13 +33,13 @@ export function usesRoyalBrowser(carrier: string): boolean {
   return carrierAdapter(carrier) === 'royal-mail';
 }
 
-export async function royalBrowserAllowed(carrier: string, phase: 'tracking' | 'recognition' = 'tracking',
+export async function royalBrowserAllowed(carrier: string, phase: 'tracking' | 'recognition' | 'handoff' = 'tracking',
   context: { signal?: AbortSignal; budgetMs?: number } = {}): Promise<boolean> {
   if (!usesRoyalBrowser(carrier)) return true;
   const parcel = filed.getStore();
   const signal = context.signal ?? parcel?.signal;
   signal?.throwIfAborted();
-  if (phase === 'tracking' && parcel?.carrier === 'royal-mail') return true;
+  if (phase === 'tracking' && carrier === 'royal-mail' && parcel?.carrier === 'royal-mail') return true;
   let reason = 'incident_open';
   try {
     const client = parcel?.client ?? serviceClient();
@@ -62,7 +62,7 @@ export async function royalBrowserAllowed(carrier: string, phase: 'tracking' | '
   return false;
 }
 
-export async function requireRoyalBrowser(carrier: string, phase: 'tracking' | 'recognition',
+export async function requireRoyalBrowser(carrier: string, phase: 'tracking' | 'recognition' | 'handoff',
   context: { signal?: AbortSignal; budgetMs?: number } = {}): Promise<void> {
   if (!await royalBrowserAllowed(carrier, phase, context)) throw new RoyalBrowserPaused();
 }

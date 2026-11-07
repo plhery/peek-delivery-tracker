@@ -2786,12 +2786,12 @@ export class TrackingSyncService {
       : legacySwissReady ? 'swiss-post' : '';
     const activeNumber = typeof metadata.active_tracking_number === 'string' ? metadata.active_tracking_number : trackingNumber;
     if ((metadata.original_carrier || legacySwissReady) && hasDirectHandoffAdapter(activeCarrier, activeNumber)
-      && await royalBrowserAllowed(activeCarrier)) {
+      && await royalBrowserAllowed(activeCarrier, 'handoff')) {
       // The earlier carrier still publishes late scans: ask it too, as at the handoff, for a while.
       // One with no adapter of its own has none to ask.
       const followUp = metadata.original_carrier === carrierId && carrierId !== activeCarrier && directCarrier(carrierId)
         && metadata.original_tracking_number === trackingNumber && asksEarlierCarrier(metadata, this.now())
-        && await royalBrowserAllowed(carrierId);
+        && await royalBrowserAllowed(carrierId, 'handoff');
       const [result, earlier] = await Promise.all([
         this.fetchCarrier(checks, activeCarrier, activeNumber, null, handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language, metadata),
         followUp ? this.fetchCarrier(checks, carrierId, trackingNumber,
@@ -2835,7 +2835,7 @@ export class TrackingSyncService {
       let fallbackError: string | null = null;
       // The country the parcel was looked up from proposes a postal item's destination post only when nothing names one.
       const proposed = savedPartner ?? deliveryHandoff(carrierId, trackingNumber, origin, lookupCountry);
-      const candidate = proposed && await royalBrowserAllowed(proposed.carrier) ? proposed : null;
+      const candidate = proposed && await royalBrowserAllowed(proposed.carrier, 'handoff') ? proposed : null;
       const previousProbe = candidate ? previousDeliveryProbe(parcel, candidate.carrier, candidate.number) : null;
       const originUpdate = typeof origin.last_update === 'string' ? origin.last_update : previousProbe?.origin_update ?? null;
       const sinceProbe = previousProbe ? this.now().getTime() - Date.parse(previousProbe.at) : Number.NaN;

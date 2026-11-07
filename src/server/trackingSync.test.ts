@@ -1262,6 +1262,23 @@ describe('TrackingSyncService', () => {
     expect(client.updatePackage.mock.calls.at(-1)?.[1]).toMatchObject({ sync_status: 'ok', carrier_data: { routing: { failures: {} } } });
   });
 
+  it('pauses a Royal follow-up after handoff even for a Royal-filed parcel, until the incident closes', async () => {
+    const client = fakeClient();
+    client.trackingProviderIncidentOpen.mockResolvedValue(true);
+    const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'ready_for_pickup',
+      last_update: '2026-09-10T11:00:00Z', events: [{ time: '2026-09-10T11:00:00Z', description: 'Ready for pickup', stage: 'ready_for_pickup' }] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    const parcel = { id: 'paused-royal-followup', carrier: 'royal-mail', tracking_number: 'RR123456785GB', current_stage: 'in_transit',
+      carrier_data: { original_carrier: 'royal-mail', original_tracking_number: 'RR123456785GB', active_tracking_carrier: 'posti',
+        handed_over_at: '2026-09-10T10:00:00Z' } };
+    await expect(service.syncPackage(parcel)).resolves.toMatchObject({ updated: 1, errors: 0 });
+    expect(adapter.fetch.mock.calls.map(call => call[0])).toEqual(['posti']);
+    client.trackingProviderIncidentOpen.mockResolvedValue(false);
+    adapter.fetch.mockClear();
+    await expect(service.syncPackage(parcel)).resolves.toMatchObject({ updated: 1, errors: 0 });
+    expect(adapter.fetch.mock.calls.map(call => call[0])).toEqual(['posti', 'royal-mail']);
+  });
+
   it('gives an account parcel its owner’s postcode once a check finds it with a carrier that shows more with one', async () => {
     const parcel = { id: 'given', user_id: 'owner', carrier: 'dpd', tracking_number: '06080000000001', current_stage: 'in_transit',
       dpd_postcode: null, archived_at: null, carrier_data: {}, tracking_generation: 'generation' };

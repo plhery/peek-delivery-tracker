@@ -3994,8 +3994,8 @@ describe('TrackingSyncService', () => {
     { name: 'before a window on an unknown clock', timezone: 'UTC', window: '2026-09-09 15:00–17:00', last: '10:00:15', time: '10:02:00', checked: 1 },
     // A carrier whose catalog zone is UTC spans several: its slot is on the clock of its newest scan,
     // the delivering office's. 13:15–16:15 on US Central summer time opens at 18:15 UTC.
-    { name: 'before a window on the newest scan\'s clock', carrier: 'usps', scanned: '2026-09-09T08:05:00-05:00', window: '2026-09-09 13:15–16:15', last: '17:20:15', time: '17:22:00', checked: 0 },
-    { name: '30 minutes before a window on the newest scan\'s clock', carrier: 'usps', scanned: '2026-09-09T08:05:00-05:00', window: '2026-09-09 13:15–16:15', last: '17:45:15', time: '17:47:00', checked: 1 },
+    { name: 'before a window on the newest scan\'s clock', carrier: 'ontrac', scanned: '2026-09-09T08:05:00-05:00', window: '2026-09-09 13:15–16:15', last: '17:20:15', time: '17:22:00', checked: 0 },
+    { name: '30 minutes before a window on the newest scan\'s clock', carrier: 'ontrac', scanned: '2026-09-09T08:05:00-05:00', window: '2026-09-09 13:15–16:15', last: '17:45:15', time: '17:47:00', checked: 1 },
     // A window given as two timestamps opens at the first: 13:00 on London's summer time is 12:00 UTC.
     { name: 'before a window of two timestamps', carrier: 'parcelforce', from: '2026-09-09T13:00:00+01:00', window: '2026-09-09T15:00:00+01:00', last: '11:20:15', time: '11:22:00', checked: 0 },
     { name: '30 minutes before a window of two timestamps', carrier: 'parcelforce', from: '2026-09-09T13:00:00+01:00', window: '2026-09-09T15:00:00+01:00', last: '11:30:15', time: '11:32:00', checked: 1 },

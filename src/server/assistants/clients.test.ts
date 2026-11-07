@@ -31,16 +31,27 @@ vi.mock('node:https', async () => {
   return {
     request: (url: string, options: RequestOptions, answer: (response: unknown) => void) => {
       network.requests.push({ url, options });
+      // Like a real request, it closes once: after the whole answer, an error, or being destroyed.
+      let closed = false;
+      const close = () => {
+        if (closed) return;
+        closed = true;
+        queueMicrotask(() => outgoing.emit('close'));
+      };
       const outgoing = Object.assign(new EventEmitter(), {
-        destroy: (error?: Error) => { if (error) outgoing.emit('error', error); },
+        destroy: (error?: Error) => {
+          if (error) outgoing.emit('error', error);
+          close();
+        },
         end: () => {
           const document = network.documents.get(url);
-          if (!document) return queueMicrotask(() => outgoing.emit('error', new Error('unreachable')));
+          if (!document) return queueMicrotask(() => { outgoing.emit('error', new Error('unreachable')); close(); });
           if (!document.status) return; // A server that never answers.
           const response = Object.assign(Readable.from([Buffer.from(document.body)]), {
             statusCode: document.status,
             headers: { 'content-type': document.type },
           });
+          response.once('end', close);
           queueMicrotask(() => answer(response));
         },
       });

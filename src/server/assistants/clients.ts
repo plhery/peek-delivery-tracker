@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { lookup as dnsLookup, type LookupAddress, type LookupOptions } from 'node:dns';
+import type { IncomingMessage } from 'node:http';
 import { request } from 'node:https';
 import { BlockList, isIP } from 'node:net';
 import type { SupabaseServiceClient } from '../supabase';
@@ -156,12 +157,19 @@ function remember<Value>(cache: Map<string, Value>, key: string, value: Value): 
   cache.set(key, value);
 }
 
+/**
+ * The document at an address. It settles only once the connection has closed, so a fetch counts among those at once
+ * until its socket is gone; any answer refused closes the connection there and then, without reading on.
+ */
 function readDocument(url: string): Promise<unknown> {
-  return new Promise((done, fail) => {
-    // The whole answer, not each pause in it, must come within the time.
-    const deadline = setTimeout(() => outgoing.destroy(new Error('The metadata document took too long')), DOCUMENT_TIMEOUT_MS);
-    const resolve = (value: unknown) => { clearTimeout(deadline); done(value); };
-    const reject = (error: unknown) => { clearTimeout(deadline); fail(error); };
+  return new Promise((resolve, reject) => {
+    let outcome: { document: unknown } | { error: unknown } | undefined;
+    let answer: IncomingMessage | undefined;
+    const fail = (error: unknown) => {
+      outcome ??= { error };
+      answer?.destroy();
+      outgoing.destroy();
+    };
     const outgoing = request(url, {
       method: 'GET',
       agent: false,
@@ -169,29 +177,35 @@ function readDocument(url: string): Promise<unknown> {
       headers: { Accept: 'application/json', 'User-Agent': 'Peek OAuth' },
       timeout: DOCUMENT_TIMEOUT_MS,
     }, (response) => {
+      answer = response;
       if (response.statusCode !== 200 || !/^application\/(?:[\w.+-]+\+)?json\b/i.test(response.headers['content-type'] ?? '')) {
-        response.resume();
-        return reject(new Error(`The metadata document answered ${response.statusCode}`));
+        return fail(new Error(`The metadata document answered ${response.statusCode}`));
       }
       const chunks: Buffer[] = [];
       let size = 0;
       response.on('data', (chunk: Buffer) => {
         size += chunk.length;
-        if (size > MOST_DOCUMENT_BYTES) return outgoing.destroy(new Error('The metadata document is too large'));
+        if (size > MOST_DOCUMENT_BYTES) return fail(new Error('The metadata document is too large'));
         chunks.push(chunk);
       });
       response.on('end', () => {
         try {
-          resolve(JSON.parse(Buffer.concat(chunks).toString('utf8')));
+          outcome ??= { document: JSON.parse(Buffer.concat(chunks).toString('utf8')) };
         } catch (error) {
-          reject(error);
+          fail(error);
         }
       });
-      response.on('error', reject);
+      response.on('error', fail);
     });
-    outgoing.on('close', () => clearTimeout(deadline));
-    outgoing.on('timeout', () => outgoing.destroy(new Error('The metadata document took too long')));
-    outgoing.on('error', reject);
+    // The whole answer, not each pause in it, must come within the time, and the connection must end with it.
+    const deadline = setTimeout(() => fail(new Error('The metadata document took too long')), DOCUMENT_TIMEOUT_MS);
+    outgoing.on('timeout', () => fail(new Error('The metadata document took too long')));
+    outgoing.on('error', fail);
+    outgoing.on('close', () => {
+      clearTimeout(deadline);
+      if (outcome && 'document' in outcome) resolve(outcome.document);
+      else reject(outcome?.error ?? new Error('The metadata document connection closed'));
+    });
     outgoing.end();
   });
 }
@@ -210,7 +224,8 @@ export function clientFromDocument(id: string, document: unknown): AssistantClie
 
 /**
  * The client a metadata document describes, read at most once an hour, and once at a time. A document that can't be
- * read is tried again a minute later; while many are being read, a new one counts as unknown.
+ * read is tried again a minute later; while many are being read (until their connections have closed), a new one counts
+ * as unknown.
  */
 async function documentClient(id: string, now = Date.now()): Promise<AssistantClient | null> {
   const cached = documents.get(id);

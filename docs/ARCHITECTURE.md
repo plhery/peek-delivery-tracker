@@ -258,7 +258,8 @@ Key server modules:
     address they registered (any port on this computer's loopback), and the issuer in each
     answer (RFC 9207). A client registers (`/oauth/register`) or names its metadata document
     by its URL; the server fetches that over HTTPS from public addresses only, at most 10 KB
-    in five seconds, and keeps it an hour.
+    in five seconds over at most 16 connections at a time, closes a connection as soon as it
+    refuses the answer, and keeps the document an hour.
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
     comes from (or warns that a registered name can't be checked) and where the answer goes,
     and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`) and

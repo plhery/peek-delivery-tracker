@@ -234,10 +234,14 @@ export class TrackingSyncAudit {
   readonly #browserCall = (): void => { this.#browser = true; };
   /** The carriers and providers the check's lookups asked, with how each ended; a success stays. */
   readonly #lookups = new Map<string, string>();
-  readonly #lookup = (carrier: string, outcome: string): void => {
+  /** Why each failed lookup failed, without numbers: a reason code or the error's wording. */
+  readonly #lookupReasons = new Map<string, string>();
+  readonly #lookup = (carrier: string, outcome: string, reason?: string): void => {
     const key = carrier.slice(0, 100);
     if ((!this.#lookups.has(key) && this.#lookups.size >= 32) || this.#lookups.get(key) === 'success') return;
     this.#lookups.set(key, outcome.slice(0, 40));
+    if (reason && outcome !== 'success') this.#lookupReasons.set(key, reason.slice(0, 100));
+    else this.#lookupReasons.delete(key);
   };
 
   constructor(
@@ -268,6 +272,14 @@ export class TrackingSyncAudit {
   lookupOutcome(carrier: string): string {
     const sample = this.#healthSamples.get(`provider:${carrier}`);
     return !sample ? 'not_asked' : sample.recovered ? 'ok' : String(sample.details.category ?? 'unknown').slice(0, 40);
+  }
+
+  /**
+   * Why a carrier's lookup in this check failed: its reason code, or its error's wording with each number given as its
+   * shape (`CTT Express returned no tracking scans`). Null when it answered, was not asked or said nothing more.
+   */
+  lookupReason(carrier: string): string | null {
+    return ['ok', 'not_asked'].includes(this.lookupOutcome(carrier)) ? null : this.#lookupReasons.get(carrier.slice(0, 100)) ?? null;
   }
 
   /**

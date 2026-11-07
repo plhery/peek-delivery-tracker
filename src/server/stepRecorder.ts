@@ -43,6 +43,19 @@ function outcomeLabel(record: StepRecord | LookupRecord): string {
   return ANSWERS.has(outcome) ? outcome : 'error';
 }
 
+/**
+ * Why a lookup failed, as the check's audit keeps it: the carrier's reason code, or else its error's wording without
+ * numbers, which tells apart the ways one kind fails (CTT Express's empty history from its unavailable endpoint).
+ * A run of four or five digits, such as a postcode, is given as its length too; an HTTP status stays.
+ */
+function failureReason(record: LookupRecord): string | undefined {
+  if (record.outcome === 'ok') return undefined;
+  const { error_reason: code, error_message: message } = errorDetails(record.error);
+  const reason = typeof code === 'string' && code ? code : message;
+  return typeof reason === 'string' && reason
+    ? reason.replace(/(?<!\d)\d{4,}(?!\d)/g, (digits) => `[${digits.length} digits]`).slice(0, 100) : undefined;
+}
+
 /** A failure's line says why: the carrier's reason code and the error's wording, with each cause's. */
 function failure(outcome: string, error: unknown) {
   return outcome === 'error' ? errorDetails(error) : {};
@@ -107,7 +120,7 @@ const attemptStepRecorder: StepRecorder = {
   step(record: StepRecord & { networkBytes?: number }) {
     reportTrackingStep(record.step, record.carrier, stepOutcome(record.outcome, record.error));
   },
-  lookup(record: LookupRecord) { reportTrackingLookup(record.carrier, outcomeLabel(record)); },
+  lookup(record: LookupRecord) { reportTrackingLookup(record.carrier, outcomeLabel(record), failureReason(record)); },
 };
 
 const extraRecorders: StepRecorder[] = [];

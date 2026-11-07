@@ -34,7 +34,7 @@ interface TrackingAttempt {
   id: string;
   signal?: (signal: RoutingSignal) => void;
   step?: (step: string, carrier?: string, outcome?: string) => void;
-  lookup?: (carrier: string, outcome: string) => void;
+  lookup?: (carrier: string, outcome: string, reason?: string) => void;
   browser?: () => void;
 }
 
@@ -44,13 +44,13 @@ const trackingAttempts = new AsyncLocalStorage<TrackingAttempt>();
 /**
  * `signal` receives the routing signals reported while the operation runs, `step`
  * each lookup tier that runs (`direct`, `trawl` and the like) with its carrier and outcome, `lookup` each
- * carrier or provider asked, with how its lookup ended, and `browser` each call
+ * carrier or provider asked, with how its lookup ended and why a failed one failed, and `browser` each call
  * to the browser service that can open a browser.
  */
 export function withTrackingAttempt<T>(
   attemptId: string, operation: () => T, signal?: (signal: RoutingSignal) => void,
   step?: (step: string, carrier?: string, outcome?: string) => void,
-  lookup?: (carrier: string, outcome: string) => void, browser?: () => void,
+  lookup?: (carrier: string, outcome: string, reason?: string) => void, browser?: () => void,
 ): T {
   return trackingAttempts.run({ id: attemptId, signal, step, lookup, browser }, operation);
 }
@@ -69,9 +69,12 @@ export function reportTrackingBrowser(): void {
   trackingAttempts.getStore()?.browser?.();
 }
 
-/** Tells the running check which carrier or provider a lookup asked, and how it ended. */
-export function reportTrackingLookup(carrier: string, outcome: string): void {
-  trackingAttempts.getStore()?.lookup?.(carrier, outcome);
+/**
+ * Tells the running check which carrier or provider a lookup asked, how it ended and, for a failure, why: the
+ * carrier's reason code or the error's wording, without numbers.
+ */
+export function reportTrackingLookup(carrier: string, outcome: string, reason?: string): void {
+  trackingAttempts.getStore()?.lookup?.(carrier, outcome, reason);
 }
 
 /**

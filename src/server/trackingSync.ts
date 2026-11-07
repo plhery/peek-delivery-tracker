@@ -296,6 +296,15 @@ function partnerStage(result: CarrierResult, carrierId: string): string | null {
   return newest?.stage ?? null;
 }
 
+/**
+ * How a parcel's own carrier did when another source served the check, and why its lookup failed when it did, so
+ * repeated fallbacks of one carrier can be told apart. The reason never holds a number.
+ */
+function directLookup(audit: TrackingSyncAudit, carrier: string): JsonObject {
+  const reason = audit.lookupReason(carrier);
+  return { direct_outcome: audit.lookupOutcome(carrier), ...(reason ? { direct_reason: reason } : {}) };
+}
+
 /** How many answers a check took from another copy of its number in the same run, when any. */
 function sharedAnswers(checks: ParcelLookups | undefined): JsonObject {
   return checks?.shared ? { shared_answers: checks.shared } : {};
@@ -2058,7 +2067,7 @@ export class TrackingSyncService {
         // The carrier answered too, when a provider serves its answer on local clocks or in part.
         carrier_answered: result.carrier_answered === true,
         // Why another source served the parcel: how its own carrier's lookup went.
-        ...(sourceCarrierId !== carrierId && carrierId !== 'unknown' ? { direct_outcome: audit.lookupOutcome(carrierId) } : {}),
+        ...(sourceCarrierId !== carrierId && carrierId !== 'unknown' ? directLookup(audit, carrierId) : {}),
         swiss_post_ready: swissPostReady,
         handoff_fallback_error_type: handoffFallbackErrorType,
         ...sharedAnswers(checks),

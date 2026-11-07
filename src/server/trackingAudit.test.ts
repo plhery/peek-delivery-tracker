@@ -239,6 +239,24 @@ describe('a carrier\'s lookup in a check', () => {
     await audit.observeFetch(async () => healthStepRecorder.lookup({ ...lookup, outcome: 'ok', errorType: null }));
     expect(audit.lookupOutcome('nacex')).toBe('ok');
   });
+
+  it('says why an inconclusive lookup failed, until a later one answered', async () => {
+    const audit = new TrackingSyncAudit({} as SupabaseServiceClient, 'synthetic-package', 'TEST1234', 'ctt-express', 'pending', { trigger: 'package' });
+    const lookup = { carrier: 'ctt-express', finalStep: 'retry', durationMs: 1, attempts: 2 };
+    expect(audit.lookupReason('ctt-express')).toBeNull();
+    const failure = new IndeterminateError('CTT Express', 'CTT Express returned no tracking scans');
+    await audit.observeFetch(async () => {
+      healthStepRecorder.lookup({ ...lookup, outcome: 'indeterminate', errorType: failure.name, error: failure });
+      reportTrackingLookup('ctt-express', 'error', 'CTT Express returned no tracking scans');
+    });
+    expect(audit.lookupOutcome('ctt-express')).toBe('indeterminate');
+    expect(audit.lookupReason('ctt-express')).toBe('CTT Express returned no tracking scans');
+    await audit.observeFetch(async () => {
+      healthStepRecorder.lookup({ ...lookup, outcome: 'ok', errorType: null });
+      reportTrackingLookup('ctt-express', 'success');
+    });
+    expect(audit.lookupReason('ctt-express')).toBeNull();
+  });
 });
 
 describe('the lookups of a check', () => {

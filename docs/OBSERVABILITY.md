@@ -135,7 +135,10 @@ All tables and views here are service-role only.
   parcel filed under a carrier, `direct_outcome` says how that carrier's own lookup went in the
   check: `ok`, the category of its failure (such as `transport`, `schema` or `not_found`), or
   `not_asked` when the check ran none, as while it waits out an earlier failure, reuses an
-  answer of the run or has no adapter. A `fetch` that reused answers another copy of
+  answer of the run or has no adapter. A failed one has `direct_reason` too: the carrier's
+  reason code, or else its error's wording with every number given as its shape, which tells
+  apart repeated fallbacks of one kind (`CTT Express returned no tracking scans` from an
+  unavailable endpoint). A `fetch` that reused answers another copy of
   its number got earlier in the same scheduled run counts them in `shared_answers`, as it
   does the failure of a carrier whose own browser already failed in the run. A `fetch` whose
   lookups ran a step has `lookup_trail`, the path they took: each carrier or provider asked, in
@@ -1018,11 +1021,12 @@ Useful questions:
   amplified. Why it did not serve is the `fetch` step's `direct_outcome`:
 
   ```sql
-  select attempt.configured_carrier, step.details ->> 'direct_outcome' as direct_outcome, count(*)
+  select attempt.configured_carrier, step.details ->> 'direct_outcome' as direct_outcome,
+    step.details ->> 'direct_reason' as direct_reason, count(*)
   from public.tracking_sync_attempts as attempt
   join public.tracking_sync_steps as step on step.attempt_id = attempt.id and step.step = 'fetch'
   where attempt.started_at >= now() - interval '1 day' and step.details ? 'direct_outcome'
-  group by 1, 2 order by 3 desc;
+  group by 1, 2, 3 order by 4 desc;
   ```
 - **Does an in-adapter retry ever help?**
   Compare `carrier_recovery_total{outcome="ok"}` with all outcomes for the same

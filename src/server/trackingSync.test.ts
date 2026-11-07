@@ -6619,6 +6619,7 @@ describe('TrackingSyncService', () => {
     const parcel = { id: 'fell-back', carrier: 'la-poste', tracking_number: 'CW123456785FR', current_stage: 'accepted' };
     await service.syncPackage(parcel);
     expect(fetchStep()).toMatchObject({ source_carrier: 'unknown', direct_outcome: 'schema' });
+    expect(fetchStep()).not.toHaveProperty('direct_reason');
     // A carrier waiting out its failure was not asked.
     now = new Date('2026-09-10T12:20:00Z');
     await service.syncPackage({ ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] });
@@ -6630,6 +6631,26 @@ describe('TrackingSyncService', () => {
     await service.syncPackage({ ...parcel, id: 'direct' });
     expect(fetchStep()).toMatchObject({ source_carrier: 'la-poste' });
     expect(fetchStep()).not.toHaveProperty('direct_outcome');
+  });
+
+  it('records why the parcel\'s own carrier was inconclusive when another source served the check', async () => {
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const failure = new IndeterminateError('La Poste', 'La Poste returned no tracking scans');
+    const progress: CarrierResult = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-10T11:00:00Z',
+      events: [{ time: '2026-09-10T11:00:00Z', description: 'In transit', stage: 'in_transit' }] };
+    const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => {
+      healthStepRecorder.lookup({ carrier, finalStep: 'retry', durationMs: 1, attempts: 2, outcome: 'indeterminate', errorType: failure.name, error: failure });
+      observability.reportTrackingLookup(carrier, 'error', 'La Poste returned no tracking scans');
+      throw failure;
+    }), fetchUniversal: vi.fn().mockResolvedValue(progress) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await service.syncPackage({ id: 'inconclusive', carrier: 'la-poste', tracking_number: 'CW123456785FR', current_stage: 'accepted' });
+    const steps = client.completeSyncAttempt.mock.lastCall![2] as { step: string; details: JsonObject }[];
+    expect(steps.find((step) => step.step === 'fetch')!.details).toMatchObject({
+      source_carrier: 'unknown', direct_outcome: 'indeterminate', direct_reason: 'La Poste returned no tracking scans' });
   });
 
   it('says at the first check that the carrier chosen for a parcel without scans refuses its number', async () => {

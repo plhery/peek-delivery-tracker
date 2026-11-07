@@ -5,7 +5,7 @@ const metrics = { distribution: vi.fn(), count: vi.fn() };
 const observability = {
   initObservability: vi.fn(() => true), logOperationalEvent: vi.fn(), reportRoutingEvent: vi.fn(),
   trackingAttemptId: vi.fn((): string | undefined => undefined), reportTrackingStep: vi.fn(), reportTrackingLookup: vi.fn(),
-  errorDetails: vi.fn((error: unknown) => (error instanceof Error ? { error_message: error.message } : {})),
+  errorDetails: vi.fn((error: unknown): Record<string, unknown> => (error instanceof Error ? { error_message: error.message } : {})),
 };
 
 vi.mock('@sentry/node', () => ({ metrics }));
@@ -143,9 +143,24 @@ describe('sentryStepRecorder', () => {
 
   it('tells the running check whom its lookup asked and how it ended', () => {
     hostStepRecorder().lookup({ carrier: 'parcelsapp', finalStep: 'direct', outcome: 'not_found', errorType: 'NotFoundError', durationMs: 1, attempts: 1 });
-    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('parcelsapp', 'not_found');
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('parcelsapp', 'not_found', undefined);
     hostStepRecorder().lookup({ carrier: 'dhl', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
-    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('dhl', 'success');
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('dhl', 'success', undefined);
+  });
+
+  it('tells the running check why an inconclusive lookup failed, without numbers', () => {
+    const lookup = { carrier: 'ctt-express', finalStep: 'retry', outcome: 'indeterminate', errorType: 'IndeterminateError', durationMs: 1, attempts: 2 } as const;
+    hostStepRecorder().lookup({ ...lookup, error: new IndeterminateError('CTT Express', 'CTT Express returned no tracking scans') });
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('ctt-express', 'error', 'CTT Express returned no tracking scans');
+    // errorDetails gives a long number as its shape; a run of a postcode's length is given as its length.
+    hostStepRecorder().lookup({ ...lookup, error: new IndeterminateError('CTT Express', 'No reply for office 28001 (HTTP 503)') });
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('ctt-express', 'error', 'No reply for office [5 digits] (HTTP 503)');
+    // A reason code says it all.
+    const details = observability.errorDetails.getMockImplementation()!;
+    observability.errorDetails.mockImplementation(() => ({ error_reason: 'portal_not_found', error_message: 'Not on the portal' }));
+    hostStepRecorder().lookup({ ...lookup, error: new IndeterminateError('CTT Express', 'Not on the portal') });
+    observability.errorDetails.mockImplementation(details);
+    expect(observability.reportTrackingLookup).toHaveBeenLastCalledWith('ctt-express', 'error', 'portal_not_found');
   });
 
   it('fans out to registered sinks', () => {

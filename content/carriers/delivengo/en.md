@@ -71,7 +71,7 @@ Peek shows what La Poste publishes: the status, the history with the country of 
 
 When La Poste gives the destination country, Peek can also ask the post it follows there, and switches to it once it shows newer progress. It does so for every EU country, the UK, Switzerland, Norway, the US, Canada, Australia and Japan, among others. La Poste's history can still go quiet after export, so the last leg doesn't always show.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while La Poste's or the destination post's own tracker answers (through tracking services, every 15 minutes). Its notifications can cover every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while La Poste's or the destination post's own tracker answers (Royal Mail is checked hourly, PostNL and Poste Italiane every 30 minutes; through tracking services, every 15 minutes). Its notifications can cover every scan, important steps only or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Delivengo tracking
 

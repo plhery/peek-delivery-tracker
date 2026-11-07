@@ -39,7 +39,7 @@ There is no English tracking. The English switch on cttexpress.com shows the Spa
 | `Almacenado temporalmente` | "Stored temporarily": back at the depot after a failed attempt, until a new round or a return. |
 | `Nuevo reparto` | "New delivery": out again for another attempt. |
 | `Disponible en Punto Collectt Express` | Ready to pick up at a Collectt point; your PIN comes by email and SMS. |
-| `Entregado` | Delivered. |
+| `El envío fue entregado correctamente` | Delivered. |
 | `En devolución` | On its way back to the sender. |
 | `Devuelto a remitente` | Returned to the sender. |
 

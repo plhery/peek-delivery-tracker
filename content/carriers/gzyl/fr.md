@@ -15,6 +15,7 @@ Un numéro GZYL, c'est YL, dix chiffres et YQ : 14 caractères en tout. Avec des
 | Numéro | Ce que c'est |
 | --- | --- |
 | `YL0000000000YQ` | YL, dix chiffres et YQ : la forme des lettres de transport de GZYL. Peek vérifie le numéro auprès du site de suivi de GZYL. |
+| `YL7380000000YQ` | YL738, sept chiffres et YQ : à cette forme, Peek reconnaît GZYL tout de suite. |
 | `YL000000000YQ` | Neuf chiffres seulement : ce n'est pas la forme GZYL. Vérifie qu'il ne manque pas un chiffre. |
 | `GZXH0000000000YQ` | GZXH, dix chiffres et YQ : Xinghe Freight (星和货运), un autre transitaire. Ses colis se suivent sur le site de suivi de GZYL, avec les mêmes formulations. |
 | `JXCAA0000000000YQ` | Finit aussi par YQ, comme chez beaucoup de transitaires chinois, mais commence par JXC : un numéro [Juxi Express](carrier:juxi-express). |
@@ -83,7 +84,7 @@ Au 4 novembre 2026, la page contact (联系我们) du site de GZYL, en chinois, 
 
 ## Suivre un colis GZYL avec Peek
 
-[Peek](/) ne peut pas reconnaître un numéro GZYL à coup sûr d'après sa seule forme : YL, dix chiffres et YQ, ce n'est qu'un indice faible. Colle-le quand même : Peek suit plus de 3 500 transporteurs. Pendant l'ajout, Peek interroge le site de suivi de GZYL (« Vérification des services de suivi… ») et affiche « GZYL a ce colis. » si le site connaît le numéro. Sinon, touche « Changer » et choisis GZYL sous « Correspond à ce numéro » (tu le trouves aussi en tapant 广州云链), ou utilise « Changer de transporteur » sur un colis déjà ajouté. Une référence donnée par la boutique fonctionne aussi, mais seulement si tu choisis GZYL toi-même : touche « Changer » (ou « Changer de transporteur ») et cherche GZYL. Peek affiche alors aussi le numéro de suivi de la commande chez GZYL, avec la mention « GZYL le suit sous le numéro ». Peek retire toutefois les tirets : une référence qui en contient reste introuvable. Demande alors à la boutique le numéro YL…YQ.
+Si ton numéro commence par YL738, suivi de sept chiffres et de YQ, [Peek](/) reconnaît GZYL tout de suite d'après sa forme (« Transporteur détecté »). Pour les autres numéros en YL, dix chiffres et YQ, la forme n'est qu'un indice faible. Colle-le quand même : Peek suit plus de 3 500 transporteurs. Pendant l'ajout, Peek interroge le site de suivi de GZYL (« Vérification des services de suivi… ») et affiche « GZYL a ce colis. » si le site connaît le numéro. Sinon, touche « Changer » et choisis GZYL sous « Correspond à ce numéro » (tu le trouves aussi en tapant 广州云链), ou utilise « Changer de transporteur » sur un colis déjà ajouté. Une référence donnée par la boutique fonctionne aussi, mais seulement si tu choisis GZYL toi-même : touche « Changer » (ou « Changer de transporteur ») et cherche GZYL. Peek affiche alors aussi le numéro de suivi de la commande chez GZYL, avec la mention « GZYL le suit sous le numéro ». Peek retire toutefois les tirets : une référence qui en contient reste introuvable. Demande alors à la boutique le numéro YL…YQ.
 
 Peek lit le site de suivi de GZYL et affiche le statut, chaque étape avec son lieu et, quand la fiche de GZYL l'indique, le pays de destination. Il lit les heures comme des heures de Pékin et les affiche dans le fuseau horaire de ton appareil. Il laisse de côté les noms, l'adresse, les codes postaux, le poids, les frais, la signature et la preuve de livraison que la fiche de GZYL peut contenir, et n'affiche aucune date de livraison prévue : GZYL n'en donne pas.
 
@@ -99,7 +100,7 @@ C'est 广州云链货运代理有限公司 (Guangzhou Yunlian), un transitaire d
 
 ### Un numéro YL…YQ est-il forcément un numéro GZYL ?
 
-Pas à coup sûr. YL, dix chiffres et YQ, c'est la forme des numéros GZYL, et aucun autre transporteur du catalogue de Peek ne l'utilise ; Peek demande quand même au site de suivi de GZYL avant de rattacher le numéro à GZYL. Avec neuf ou onze chiffres, ce n'est pas la forme GZYL.
+Pas à coup sûr. YL, dix chiffres et YQ, c'est la forme des numéros GZYL, et aucun autre transporteur du catalogue de Peek ne l'utilise. Un numéro qui commence par YL738, Peek le rattache à GZYL d'après sa seule forme ; pour tout autre, il demande d'abord au site de suivi de GZYL. Avec neuf ou onze chiffres, ce n'est pas la forme GZYL.
 
 ### Pourquoi mon colis GZYL est-il marqué livré alors que je ne l'ai pas reçu ?
 
@@ -112,7 +113,7 @@ Peek ne le sait pas : dans le pays de destination, les étapes de GZYL ne nommen
 :::sources
 - [广州云链货运代理有限公司 (GZYL) : accueil (en chinois)](http://yunlianhouyun.com/) – nom de la société, site en chinois, recherche de colis (小包查询) vers le site de suivi de GZYL
 - [广州云链货运代理有限公司 (GZYL) : 联系我们 (contact, en chinois)](http://yunlianhouyun.com/contact.html) – ligne 24 h/24, WeChat et QQ après-vente
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GZYL : nom de la société et autres noms, site de suivi sur une adresse IP, forme YL…YQ et sa correspondance faible, Xinghe Freight sur le site de suivi de GZYL et sa prise en charge à Hong Kong, recherche par numéro ou par référence avec ses tirets, étapes et leurs statuts, ligne en chinois de la plateforme, villes après les étapes, heure de Pékin, trajet écrit à l'avance, réponse à un numéro inconnu, page de suivi à la place de l'interface de données, relais vers La Poste suisse seulement, ce que Peek affiche, écarte et laisse de côté
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – GZYL : nom de la société et autres noms, site de suivi sur une adresse IP, formes YL…YQ, YL738 reconnu tout de suite et les autres en correspondance faible, Xinghe Freight sur le site de suivi de GZYL et sa prise en charge à Hong Kong, recherche par numéro ou par référence avec ses tirets, étapes et leurs statuts, ligne en chinois de la plateforme, villes après les étapes, heure de Pékin, trajet écrit à l'avance, réponse à un numéro inconnu, page de suivi à la place de l'interface de données, relais vers La Poste suisse seulement, ce que Peek affiche, écarte et laisse de côté
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € de droits de douane par article sur les achats en ligne hors UE de 150 € maximum depuis le 1er juillet 2026, frais de traitement de 2 € depuis le 1er novembre 2026
 - [Commission européenne : The temporary EUR 3 customs duty and the Union handling fee (PDF, en anglais)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € par article quelle que soit la valeur, et ce qu'est un article (une ligne de la déclaration)
 - [Commission européenne : Summertime (en anglais)](https://transport.ec.europa.eu/transport-themes/summertime_en) – heure d'été du dernier dimanche de mars au dernier dimanche d'octobre, heure d'Europe centrale

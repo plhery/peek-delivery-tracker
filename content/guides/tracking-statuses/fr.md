@@ -69,7 +69,7 @@ Deux statuts prêtent à confusion. Chez La Poste, `Votre colis est sur son site
 
 Toujours rien le soir ? Regarde si la date a bougé : chez [Chronopost](carrier:chronopost), `Livraison reportée de 24h` veut dire que l'agence garde le colis un jour sans tenter de le livrer, puis reprend la livraison d'elle-même.
 
-[Peek](/) vérifie un colis jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes sur le dernier kilomètre (le jour où le colis part en livraison, dès 6 h, heure locale, et tant que c'est le suivi du transporteur qui répond). Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (GLS dans la plupart des pays et Royal Mail toutes les heures, Poste Italiane et PostNL toutes les 30 minutes). Tu peux régler ses notifications sur « Livraison seulement ».
+[Peek](/) vérifie un colis jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes le jour de la livraison (une fois le colis remis au livreur, dès 6 h, heure locale, et tant que c'est le suivi du transporteur qui répond). Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (GLS dans la plupart des pays et Royal Mail toutes les heures, Poste Italiane et PostNL toutes les 30 minutes). Tu peux régler ses notifications sur « Livraison seulement ».
 
 ## « Destinataire absent » ou « avis de passage » : que faire ?
 
@@ -146,5 +146,5 @@ Et ensuite ? Contacte l'expéditeur (le site marchand) pour [un nouvel envoi ou 
 - [Ship24 : suivi UPS](https://www.ship24.com/fr/transporteurs/ups-suivi-colis) – étiquette créée, motifs d'une « Exception », lieu où le colis livré a été déposé
 - [Universal Parcel Scraper : FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – scans de FedEx que lit Peek : informations d'envoi transmises à FedEx
 - [La Poste suisse : FAQ Importation](https://www.post.ch/fr/solutions-commerciales/exportation-importation-et-dedouanement/importation/faq-importation-droits-de-douane-et-tva) – trois à quatre jours ouvrés
-- [Peek : page d'accueil](https://peektracker.com/fr) – jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes sur le dernier kilomètre
+- [Peek : page d'accueil](https://peektracker.com/fr) – « Vérifié toutes les 10 min » et « Toutes les 2 min le jour de la livraison »
 :::

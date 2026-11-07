@@ -156,5 +156,5 @@ Puoi farla, ma nessuna delle regole qui sopra la pone come condizione per il rim
 - [Centro Europeo Consumatori Italia: Rimborso tramite chargeback (gennaio 2021)](https://www.euroconsumatori.org/it/download/extoXXMnP.pdf) – chargeback per merce non consegnata
 - [ACSI: Il chargeback, un'arma in più](https://www.acsi.ch/wp-content/uploads/2025/02/Chargeback.pdf) – prima il commerciante, formulario entro 30 giorni dalla fattura
 - [Vinted: Il pacco non è arrivato](https://www.vinted.it/help/658) – 2 giorni, o 14 giorni per gli ordini dai Seller Pro
-- [Peek: home page](https://peektracker.com/it) – «Fino a ogni 2 min nell'ultimo miglio»
+- [Peek: home page](https://peektracker.com/it) – «Ogni 2 min il giorno di consegna»
 :::

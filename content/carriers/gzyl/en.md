@@ -15,6 +15,7 @@ GZYL's waybills are YL, ten digits and YQ, 14 characters in all. With invented d
 | Number | What it is |
 | --- | --- |
 | `YL0000000000YQ` | YL, ten digits and YQ: the layout of GZYL's waybills. Peek checks it with GZYL's tracker. |
+| `YL7380000000YQ` | YL738, seven digits and YQ: from this shape, Peek names GZYL at once. |
 | `YL000000000YQ` | Only nine digits: not GZYL's layout. Check for a missing digit. |
 | `GZXH0000000000YQ` | GZXH, ten digits and YQ: Xinghe Freight (星和货运), another forwarder. Its tracking runs on GZYL's tracker, in GZYL's words. |
 | `JXCAA0000000000YQ` | Also ends in YQ, as many Chinese forwarders' numbers do, but starts with JXC: a [Juxi Express](carrier:juxi-express) number. |
@@ -81,7 +82,7 @@ As read on 4 November 2026, the contact page (联系我们) of GZYL's website, i
 
 ## Track a GZYL parcel with Peek
 
-[Peek](/) can't be sure of a GZYL number by its shape alone: YL, ten digits and YQ is only a weak match. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks GZYL's tracker ("Checking tracking services…") and shows "GZYL has this parcel." when the tracker knows the number. Otherwise press "Change" and pick GZYL under "Fits this number" (typing 广州云链 finds it too), or use "Change carrier" on a parcel you've already added. A seller's reference works too, but only once you pick GZYL yourself: press "Change" (or "Change carrier") and search for GZYL. Peek then shows the order's own number, labelled "GZYL tracks this as". Peek drops dashes, though, so a reference with dashes isn't found: ask the seller for the YL…YQ number.
+[Peek](/) names GZYL at once for a number that starts YL738, with seven more digits and YQ ("Detected carrier"). Other numbers of YL, ten digits and YQ are only a weak match. Paste yours all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks GZYL's tracker ("Checking tracking services…") and shows "GZYL has this parcel." when the tracker knows the number. Otherwise press "Change" and pick GZYL under "Fits this number" (typing 广州云链 finds it too), or use "Change carrier" on a parcel you've already added. A seller's reference works too, but only once you pick GZYL yourself: press "Change" (or "Change carrier") and search for GZYL. Peek then shows the order's own number, labelled "GZYL tracks this as". Peek drops dashes, though, so a reference with dashes isn't found: ask the seller for the YL…YQ number.
 
 Peek reads GZYL's own tracker and shows the status, each step with its place, and the destination country when GZYL's record gives it. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, fees, signature and proof of delivery GZYL's record can hold, and shows no expected delivery date: GZYL gives none.
 
@@ -97,7 +98,7 @@ Apart from a hand-over to Swiss Post, Peek stays with GZYL: if the seller gives 
 
 ### Is every YL…YQ number a GZYL number?
 
-Not for sure. YL, ten digits and YQ is GZYL's layout, and no other carrier in Peek's catalog uses it, but Peek still asks GZYL's tracker before it counts the number as GZYL's. With nine or eleven digits, it isn't GZYL's layout.
+Not for sure. YL, ten digits and YQ is GZYL's layout, and no other carrier in Peek's catalog uses it. Peek counts a number that starts YL738 as GZYL's from its shape alone; for any other, it asks GZYL's tracker first. With nine or eleven digits, it isn't GZYL's layout.
 
 ### Why does GZYL say my parcel was delivered when it wasn't?
 
@@ -111,5 +112,5 @@ Peek doesn't know: GZYL's steps in your country name no company. Ask the seller 
 - [广州云链货运代理有限公司 (GZYL): Home](http://yunlianhouyun.com/) – company name, Chinese site, parcel search (小包查询) on GZYL's tracker
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (contact)](http://yunlianhouyun.com/contact.html) – hotline, WeChat and after-sales QQ
 - [Revenue: Union Handling Fee](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item in Ireland from 1 November 2026, at checkout or before delivery
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company and other names, the tracker on a bare address, YL…YQ number shape and its weak match, Xinghe Freight on GZYL's tracker, search by number or reference with its dashes, step wordings and their stages, the platform's Chinese line, towns after wordings, Beijing clock, timeline written in advance, the answer for an unknown number, Swiss Post as the only hand-over, what Peek shows, holds back and leaves out
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company and other names, the tracker on a bare address, YL…YQ number shapes, YL738 named at once and the others a weak match, Xinghe Freight on GZYL's tracker, search by number or reference with its dashes, step wordings and their stages, the platform's Chinese line, towns after wordings, Beijing clock, timeline written in advance, the answer for an unknown number, Swiss Post as the only hand-over, what Peek shows, holds back and leaves out
 :::

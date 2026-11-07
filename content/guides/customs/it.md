@@ -163,5 +163,5 @@ Per segnalare un falso:
 - [UDSC: Attenzione alle truffe via e-mail e sms](https://www.bazg.admin.ch/it/avviso-di-truffe-via-e-mail-e-per-sms) – nessuna richiesta di pagamento per e-mail o SMS, falsi mittenti
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – durata dei controlli doganali
 - [Cainiao: Logistics Status Explanation](https://global.cainiao.com/helpDoc.htm?slug=phdx0i) – Import customs clearance started
-- [Peek: home page](https://peektracker.com/it) – «Controllato fino a ogni 10 min»
+- [Peek: home page](https://peektracker.com/it) – «Controllato ogni 10 min»
 :::

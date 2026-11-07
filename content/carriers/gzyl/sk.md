@@ -15,6 +15,7 @@ GZYL (广州云链, Guangzhou Yunlian) je 广州云链货运代理有限公司, 
 | Číslo (vymyslené) | Čo to je |
 | --- | --- |
 | `YL0000000000YQ` | YL, desať číslic a YQ: tvar čísel GZYL. Peek ho overí v sledovaní GZYL. |
+| `YL7380000000YQ` | YL738, sedem číslic a YQ: podľa tohto tvaru Peek hneď rozpozná GZYL. |
 | `YL000000000YQ` | Len deväť číslic: to nie je tvar GZYL. Skontrolujte, či nechýba číslica. |
 | `GZXH0000000000YQ` | GZXH, desať číslic a YQ: Xinghe Freight (星和货运), iná špedičná firma. Jej zásielky ukazuje sledovanie GZYL, s rovnakým znením krokov. |
 | `JXCAA0000000000YQ` | Aj toto číslo končí na YQ, ako čísla mnohých čínskych špeditérov, ale začína sa na JXC: je to číslo Juxi Express. |
@@ -83,7 +84,7 @@ K 4. novembru 2026 uvádza kontaktná stránka (联系我们) webu GZYL, po čí
 
 ## Sledovanie zásielok GZYL v Peeku
 
-[Peek](/) nevie číslo GZYL s istotou rozpoznať iba podľa tvaru: YL, desať číslic a YQ je len slabý náznak. Vložte ho aj tak: Peek sleduje viac ako 3 500 prepravcov. Kým číslo pridávate, Peek sa opýta sledovania GZYL a zobrazí „Checking tracking services…“ (overujú sa služby sledovania). Ak GZYL číslo pozná, Peek ukáže „GZYL has this parcel.“ (GZYL túto zásielku eviduje). Ak nie, kliknite na „Change“ (zmeniť) a vyberte GZYL v časti „Fits this number“ (zodpovedá tomuto číslu); GZYL nájdete aj vtedy, keď napíšete 广州云链. Pri zásielke, ktorú už máte pridanú, použite „Change carrier“ (zmeniť prepravcu). Funguje aj referenčné číslo od predajcu, ale len keď GZYL vyberiete sami: kliknite na „Change“ (alebo „Change carrier“) a vyhľadajte GZYL. Peek potom ukáže aj číslo, pod ktorým GZYL objednávku vedie, s označením „GZYL tracks this as“ (GZYL ju sleduje pod číslom). Peek však z čísla odstraňuje pomlčky, takže referenčné číslo s pomlčkami sa nenájde: vtedy si od predajcu vypýtajte číslo YL…YQ.
+Číslo, ktoré sa začína na YL738 a pokračuje siedmimi číslicami a YQ, [Peek](/) podľa tvaru hneď priradí GZYL a ukáže „Detected carrier“ (rozpoznaný prepravca). Pri iných číslach s YL, desiatimi číslicami a YQ je tvar len slabý náznak. Vložte ho aj tak: Peek sleduje viac ako 3 500 prepravcov. Kým číslo pridávate, Peek sa opýta sledovania GZYL a zobrazí „Checking tracking services…“ (overujú sa služby sledovania). Ak GZYL číslo pozná, Peek ukáže „GZYL has this parcel.“ (GZYL túto zásielku eviduje). Ak nie, kliknite na „Change“ (zmeniť) a vyberte GZYL v časti „Fits this number“ (zodpovedá tomuto číslu); GZYL nájdete aj vtedy, keď napíšete 广州云链. Pri zásielke, ktorú už máte pridanú, použite „Change carrier“ (zmeniť prepravcu). Funguje aj referenčné číslo od predajcu, ale len keď GZYL vyberiete sami: kliknite na „Change“ (alebo „Change carrier“) a vyhľadajte GZYL. Peek potom ukáže aj číslo, pod ktorým GZYL objednávku vedie, s označením „GZYL tracks this as“ (GZYL ju sleduje pod číslom). Peek však z čísla odstraňuje pomlčky, takže referenčné číslo s pomlčkami sa nenájde: vtedy si od predajcu vypýtajte číslo YL…YQ.
 
 Peek číta priamo sledovanie GZYL a ukazuje stav, každý krok aj s miestom a cieľovú krajinu, ak ju záznam GZYL uvádza. Časy číta podľa pekinského času a ukazuje ich v časovom pásme vášho zariadenia. Mená, adresu, PSČ, hmotnosť, platobné údaje, podpis a doklad o doručení, ktoré záznam GZYL môže obsahovať, Peek vynechá. Predpokladaný dátum doručenia neukazuje: GZYL ho neuvádza.
 
@@ -99,7 +100,7 @@ GZYL je 广州云链货运代理有限公司 (Guangzhou Yunlian), špedičná fi
 
 ### Je každé číslo YL…YQ od GZYL?
 
-Nie s úplnou istotou. YL, desať číslic a YQ je tvar čísel GZYL a žiadny iný prepravca v katalógu Peeku ho nepoužíva. Peek sa však aj tak najprv opýta sledovania GZYL a až potom číslo priradí GZYL. S deviatimi alebo jedenástimi číslicami to nie je tvar GZYL.
+Nie s úplnou istotou. YL, desať číslic a YQ je tvar čísel GZYL a žiadny iný prepravca v katalógu Peeku ho nepoužíva. Číslo, ktoré sa začína na YL738, priradí Peek GZYL už podľa tvaru; pri každom inom sa najprv opýta sledovania GZYL. S deviatimi alebo jedenástimi číslicami to nie je tvar GZYL.
 
 ### Prečo GZYL ukazuje zásielku ako doručenú, hoci neprišla?
 
@@ -112,7 +113,7 @@ Peek to nevie: kroky GZYL vo vašej krajine neuvádzajú žiadnu firmu. Opýtajt
 :::sources
 - [广州云链货运代理有限公司 (GZYL): úvodná stránka (po čínsky)](http://yunlianhouyun.com/) – názov firmy, web po čínsky, vyhľadávanie zásielok (小包查询) v sledovaní GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, po čínsky)](http://yunlianhouyun.com/contact.html) – nonstop linka, WeChat a QQ popredajného servisu
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – názov firmy a ďalšie mená, sledovanie na IP adrese, tvar YL…YQ ako slabý náznak, Xinghe Freight v sledovaní GZYL a prevzatie v Hongkongu, vyhľadávanie podľa čísla alebo referenčného čísla s pomlčkami, texty krokov a ich stavy, riadky po čínsky, mestá za textami, pekinský čas, plán zapísaný vopred a `Delivered`, ktorým sa končí, odpoveď pri neznámom čísle, webová stránka namiesto dátového rozhrania, Swiss Post ako jediné odovzdanie, čo Peek ukazuje, zadrží a vynechá
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – názov firmy a ďalšie mená, sledovanie na IP adrese, tvary YL…YQ: YL738 rozpoznaný hneď, ostatné ako slabý náznak, Xinghe Freight v sledovaní GZYL a prevzatie v Hongkongu, vyhľadávanie podľa čísla alebo referenčného čísla s pomlčkami, texty krokov a ich stavy, riadky po čínsky, mestá za textami, pekinský čas, plán zapísaný vopred a `Delivered`, ktorým sa končí, odpoveď pri neznámom čísle, webová stránka namiesto dátového rozhrania, Swiss Post ako jediné odovzdanie, čo Peek ukazuje, zadrží a vynechá
 - [Finančná správa: Pri zásielkach z krajín mimo EÚ pribudne od 1. novembra poplatok 2 eurá](https://www.financnasprava.sk/sk/pre-media/novinky/archiv-noviniek/detail-novinky/_col-manip-popl-zasiel-eu-ts) – manipulačný poplatok Únie 2 eurá za položku colného vyhlásenia od 1. novembra 2026, vyberá ho colný orgán, nezávisí od hodnoty tovaru; „clo“ zaplatené platforme pri objednávke sa k colnému orgánu nemusí dostať a vtedy sa platí znova
 - [Európska komisia: The temporary EUR 3 customs duty and the Union handling fee (PDF, v angličtine)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – poplatok platí ten, kto podáva colné vyhlásenie: platforma, predajca alebo prepravca
 :::

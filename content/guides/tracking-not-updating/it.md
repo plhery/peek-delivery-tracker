@@ -153,5 +153,5 @@ Il pacco forse non è ancora stato scansionato, il codice può essere di un altr
 - [Normattiva: Codice del consumo, art. 61](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art61) – 30 giorni, termine supplementare, rimborso
 - [Normattiva: Codice del consumo, art. 63](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2005-09-06;206~art63) – passaggio del rischio
 - [Fedlex: Codice delle obbligazioni, art. 185](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/it#art_185) – utili e rischi in Svizzera
-- [Peek: home page](https://peektracker.com/it) – «Controllato fino a ogni 10 min» e «Fino a ogni 2 min nell'ultimo miglio»
+- [Peek: home page](https://peektracker.com/it) – «Controllato ogni 10 min» e «Ogni 2 min il giorno di consegna»
 :::

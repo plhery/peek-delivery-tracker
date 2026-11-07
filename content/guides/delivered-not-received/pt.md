@@ -119,7 +119,7 @@ Muitas vezes, como último recurso:
 
 ### O Peek consegue encontrar a minha encomenda?
 
-Não. O [Peek](/), como qualquer [serviço de seguimento](guide:universal-tracker), só mostra o que a transportadora publica e não pode contactá-la nem fazer reclamações por ti. Mas, no último troço, verifica o seguimento até de 2 em 2 minutos (no dia em que a encomenda sai para entrega, a partir das 6h00, hora local, e enquanto for o próprio seguimento da transportadora a responder) e pode enviar-te uma notificação, para chegares à porta pouco depois de aparecer «entregue». Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (a GLS na maioria dos países e a Royal Mail de hora a hora, a Poste Italiane e a PostNL de 30 em 30 minutos).
+Não. O [Peek](/), como qualquer [serviço de seguimento](guide:universal-tracker), só mostra o que a transportadora publica e não pode contactá-la nem fazer reclamações por ti. Mas, no dia da entrega, verifica o seguimento até de 2 em 2 minutos (com a encomenda já em distribuição, a partir das 6h00, hora local, e enquanto for o próprio seguimento da transportadora a responder) e pode enviar-te uma notificação, para chegares à porta pouco depois de aparecer «entregue». Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (a GLS na maioria dos países e a Royal Mail de hora a hora, a Poste Italiane e a PostNL de 30 em 30 minutos).
 
 ### Devo apresentar queixa à polícia se a encomenda foi roubada?
 

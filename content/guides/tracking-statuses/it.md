@@ -151,5 +151,5 @@ A quel punto decide il venditore: chiedigli di [rispedirtelo o di rimborsarti](g
 - [Planzer: Tracking](https://tracking.app.planzer.ch/) – `Shipped` nel tracking inglese di Planzer e Quickpac
 - [DHL: What does my shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – stati fermi per ore o giorni
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – dogana in alcuni giorni lavorativi, tracking del corriere di destinazione
-- [Peek: home page](https://peektracker.com/it) – «Controllato fino a ogni 10 min» e «Fino a ogni 2 min nell'ultimo miglio»
+- [Peek: home page](https://peektracker.com/it) – «Controllato ogni 10 min» e «Ogni 2 min il giorno di consegna»
 :::

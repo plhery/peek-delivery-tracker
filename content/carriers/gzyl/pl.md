@@ -15,6 +15,7 @@ Numery listów przewozowych GZYL to litery YL, dziesięć cyfr i litery YQ, raze
 | Numer | Co to jest |
 | --- | --- |
 | `YL0000000000YQ` | YL, dziesięć cyfr i YQ: numer listu przewozowego GZYL. Peek sprawdza go na stronie śledzenia GZYL. |
+| `YL7380000000YQ` | YL738, siedem cyfr i YQ: po tym kształcie Peek od razu rozpoznaje GZYL. |
 | `YL000000000YQ` | Tylko dziewięć cyfr: tak numer GZYL nie wygląda. Sprawdź, czy nie brakuje cyfry. |
 | `GZXH0000000000YQ` | GZXH, dziesięć cyfr i YQ: Xinghe Freight (星和货运), inna firma spedycyjna. Jej przesyłki śledzi ta sama strona co przesyłki GZYL, a etapy brzmią tak samo. |
 | `JXCAA0000000000YQ` | Też kończy się na YQ, jak numery wielu chińskich spedytorów, ale zaczyna się od JXC: to numer Juxi Express. |
@@ -83,7 +84,7 @@ Stan na 4 listopada 2026: strona kontaktowa (联系我们) chińskiej witryny GZ
 
 ## Śledzenie paczki GZYL w Peek
 
-[Peek](/) nie rozpozna numeru GZYL z całą pewnością po samym kształcie: YL, dziesięć cyfr i YQ to tylko słaba wskazówka. I tak go wklej: Peek śledzi ponad 3500 przewoźników. Gdy dodajesz numer, Peek pyta stronę śledzenia GZYL („Sprawdzanie usług śledzenia…”) i pokazuje „GZYL ma tę przesyłkę.”, jeśli GZYL zna numer. Jeśli nie, kliknij „Zmień” i wybierz GZYL w sekcji „Pasują do numeru” (znajdziesz go też, wpisując 广州云链), a przy dodanej już przesyłce użyj „Zmień przewoźnika”. Po numerze referencyjnym sprzedawcy też śledzisz, ale tylko gdy sam wybierzesz GZYL: kliknij „Zmień” (albo „Zmień przewoźnika”) i wyszukaj GZYL. Peek pokaże wtedy numer, pod którym GZYL prowadzi zamówienie, przy napisie „GZYL śledzi przesyłkę pod numerem”. Peek usuwa jednak myślniki, więc numeru referencyjnego z myślnikami przez Peek nie znajdziesz: poproś sprzedawcę o numer YL…YQ.
+Numer, który zaczyna się od YL738, a dalej ma siedem cyfr i YQ, [Peek](/) od razu rozpoznaje po kształcie jako numer GZYL („Wykryty przewoźnik”). Przy innych numerach z YL, dziesięcioma cyframi i YQ kształt to tylko słaba wskazówka. I tak go wklej: Peek śledzi ponad 3500 przewoźników. Gdy dodajesz numer, Peek pyta stronę śledzenia GZYL („Sprawdzanie usług śledzenia…”) i pokazuje „GZYL ma tę przesyłkę.”, jeśli GZYL zna numer. Jeśli nie, kliknij „Zmień” i wybierz GZYL w sekcji „Pasują do numeru” (znajdziesz go też, wpisując 广州云链), a przy dodanej już przesyłce użyj „Zmień przewoźnika”. Po numerze referencyjnym sprzedawcy też śledzisz, ale tylko gdy sam wybierzesz GZYL: kliknij „Zmień” (albo „Zmień przewoźnika”) i wyszukaj GZYL. Peek pokaże wtedy numer, pod którym GZYL prowadzi zamówienie, przy napisie „GZYL śledzi przesyłkę pod numerem”. Peek usuwa jednak myślniki, więc numeru referencyjnego z myślnikami przez Peek nie znajdziesz: poproś sprzedawcę o numer YL…YQ.
 
 Peek czyta stronę śledzenia GZYL i pokazuje status, każdy etap z jego miejscem i kraj docelowy, gdy rekord GZYL go podaje. Godziny odczytuje w czasie pekińskim i pokazuje w strefie czasowej Twojego urządzenia. Nie pokazuje nazwisk, adresu, kodów pocztowych, wagi, opłat, podpisu ani potwierdzenia doręczenia, nawet jeśli rekord GZYL je zawiera. Przewidywanej daty doręczenia też nie ma, bo GZYL jej nie podaje.
 
@@ -99,7 +100,7 @@ To 广州云链货运代理有限公司 (Guangzhou Yunlian), firma spedycyjna z 
 
 ### Czy każdy numer YL…YQ to numer GZYL?
 
-Niekoniecznie. YL, dziesięć cyfr i YQ to format numerów GZYL i żaden inny przewoźnik z katalogu Peek go nie używa, ale Peek i tak pyta stronę śledzenia GZYL, zanim uzna numer za numer GZYL. Numer z dziewięcioma albo jedenastoma cyframi nie ma formatu GZYL.
+Niekoniecznie. YL, dziesięć cyfr i YQ to format numerów GZYL i żaden inny przewoźnik z katalogu Peek go nie używa. Numer zaczynający się od YL738 Peek uznaje za numer GZYL już po kształcie; o każdy inny najpierw pyta stronę śledzenia GZYL. Numer z dziewięcioma albo jedenastoma cyframi nie ma formatu GZYL.
 
 ### Dlaczego GZYL pokazuje doręczenie, choć paczka nie dotarła?
 
@@ -112,7 +113,7 @@ Peek tego nie wie: etapy GZYL w kraju docelowym nie wymieniają żadnej firmy, a
 :::sources
 - [广州云链货运代理有限公司 (GZYL): strona główna (po chińsku)](http://yunlianhouyun.com/) – nazwa firmy, strona po chińsku, wyszukiwarka paczek (小包查询) prowadząca do strony śledzenia GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, po chińsku)](http://yunlianhouyun.com/contact.html) – całodobowa infolinia, WeChat i QQ obsługi posprzedażowej
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inne nazwy, strona śledzenia pod adresem IP, kształt numeru YL…YQ i jego słabe dopasowanie, Xinghe Freight na stronie śledzenia GZYL i przyjęcie w Hongkongu, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie etapów i ich statusy, chińska linia platformy, miejscowości po etapach, zegar pekiński, etapy zapisane z góry, odpowiedź na nieznany numer, strona śledzenia zamiast interfejsu danych, przekazanie śledzenia tylko Poczcie Szwajcarskiej, co Peek pokazuje i pomija
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nazwa firmy i inne nazwy, strona śledzenia pod adresem IP, kształty numerów YL…YQ: YL738 rozpoznawany od razu, pozostałe ze słabym dopasowaniem, Xinghe Freight na stronie śledzenia GZYL i przyjęcie w Hongkongu, wyszukiwanie po numerze lub numerze referencyjnym z myślnikami, brzmienie etapów i ich statusy, chińska linia platformy, miejscowości po etapach, zegar pekiński, etapy zapisane z góry, odpowiedź na nieznany numer, strona śledzenia zamiast interfejsu danych, przekazanie śledzenia tylko Poczcie Szwajcarskiej, co Peek pokazuje i pomija
 - [Komisja Europejska: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – cło 3 euro za pozycję przy przesyłkach do 150 euro od 1 lipca 2026, unijna opłata manipulacyjna 2 euro od 1 listopada 2026
 - [Komisja Europejska: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – opłata 2 euro za każdą pozycję bez względu na wartość, czym jest pozycja
 - [Komisja Europejska: Summertime](https://transport.ec.europa.eu/transport-themes/summertime_en) – czas letni od ostatniej niedzieli marca do ostatniej niedzieli października

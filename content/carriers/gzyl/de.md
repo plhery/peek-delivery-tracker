@@ -15,6 +15,7 @@ Die Frachtbriefnummern von GZYL bestehen aus YL, zehn Ziffern und YQ, zusammen 1
 | Nummer | Was sie ist |
 | --- | --- |
 | `YL0000000000YQ` | YL, zehn Ziffern und YQ: So sehen die Nummern von GZYL aus. Peek fragt dazu bei GZYLs Tracking-Seite nach. |
+| `YL7380000000YQ` | YL738, sieben Ziffern und YQ: An dieser Form erkennt Peek GZYL sofort. |
 | `YL000000000YQ` | Nur neun Ziffern: So sehen die Nummern von GZYL nicht aus. Prüf, ob eine Ziffer fehlt. |
 | `GZXH0000000000YQ` | GZXH, zehn Ziffern und YQ: Xinghe Freight (星和货运), ein anderer Spediteur. Seine Sendungsverfolgung läuft über GZYLs Tracking-Seite, mit GZYLs Wortlaut. |
 | `JXCAA0000000000YQ` | Endet auch auf YQ, wie die Nummern vieler chinesischer Spediteure, beginnt aber mit JXC: eine Nummer von Juxi Express. |
@@ -81,7 +82,7 @@ Stand 4. November 2026 nennt die Kontaktseite (联系我们) von GZYLs chinesisc
 
 ## GZYL Paket verfolgen mit Peek
 
-[Peek](/) kann eine GZYL-Nummer an ihrer Form allein nicht sicher zuordnen: YL, zehn Ziffern und YQ ist nur ein schwacher Hinweis. Füg sie trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Beim Hinzufügen fragt Peek bei der Tracking-Seite von GZYL nach („Tracking-Dienste werden geprüft…“) und zeigt „GZYL hat dieses Paket.“, wenn sie die Nummer kennt. Sonst tipp auf „Ändern“ und wähl GZYL unter „Passt zu dieser Nummer“ (auch über 广州云链 findest du GZYL), oder nimm „Paketdienst ändern“ bei einem Paket, das du schon hinzugefügt hast. Eine Referenz des Shops funktioniert auch, aber nur, wenn du GZYL selbst wählst: Tipp auf „Ändern“ (oder „Paketdienst ändern“) und such nach GZYL. Peek zeigt dann die eigene Nummer der Bestellung mit der Beschriftung „GZYL führt die Sendung unter“. Peek entfernt allerdings Bindestriche, deshalb findet es eine Referenz mit Bindestrichen nicht: Frag den Shop nach der YL…YQ-Nummer.
+Beginnt die Nummer mit YL738, gefolgt von sieben Ziffern und YQ, erkennt [Peek](/) GZYL sofort an der Form („Erkannter Paketdienst“). Bei anderen Nummern aus YL, zehn Ziffern und YQ ist die Form nur ein schwacher Hinweis. Füg sie trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Beim Hinzufügen fragt Peek bei der Tracking-Seite von GZYL nach („Tracking-Dienste werden geprüft…“) und zeigt „GZYL hat dieses Paket.“, wenn sie die Nummer kennt. Sonst tipp auf „Ändern“ und wähl GZYL unter „Passt zu dieser Nummer“ (auch über 广州云链 findest du GZYL), oder nimm „Paketdienst ändern“ bei einem Paket, das du schon hinzugefügt hast. Eine Referenz des Shops funktioniert auch, aber nur, wenn du GZYL selbst wählst: Tipp auf „Ändern“ (oder „Paketdienst ändern“) und such nach GZYL. Peek zeigt dann die eigene Nummer der Bestellung mit der Beschriftung „GZYL führt die Sendung unter“. Peek entfernt allerdings Bindestriche, deshalb findet es eine Referenz mit Bindestrichen nicht: Frag den Shop nach der YL…YQ-Nummer.
 
 Peek liest die eigene Tracking-Seite von GZYL und zeigt den Status, jeden Schritt mit seinem Ort und, wenn der Datensatz es nennt, das Zielland. Die Schritte zeigt Peek so, wie GZYL sie schreibt, auf Englisch und die chinesischen Zeilen unübersetzt; nur `Delivered` steht im Verlauf auf Deutsch, als „Zugestellt“. Die Uhrzeiten liest Peek in Pekinger Zeit und zeigt sie in der Zeitzone deines Geräts. Namen, Adresse, Postleitzahlen, Gewicht, Gebühren, Unterschrift und Zustellnachweis, die der Datensatz enthalten kann, lässt Peek weg. Einen voraussichtlichen Liefertermin zeigt es nicht, weil GZYL keinen nennt.
 
@@ -99,7 +100,7 @@ Peek schaut alle 10 Minuten nach. Kommt zwei Tage lang nichts Neues (solange das
 
 ### Ist jede YL…YQ-Nummer eine GZYL-Nummer?
 
-Nicht mit Sicherheit. YL, zehn Ziffern und YQ ist die Form von GZYL, und kein anderer Paketdienst in Peeks Katalog nutzt sie, aber Peek fragt trotzdem bei der Tracking-Seite von GZYL nach, bevor es die Nummer GZYL zuordnet. Mit neun oder elf Ziffern ist es nicht die Form von GZYL.
+Nicht mit Sicherheit. YL, zehn Ziffern und YQ ist die Form von GZYL, und kein anderer Paketdienst in Peeks Katalog nutzt sie. Eine Nummer, die mit YL738 beginnt, ordnet Peek schon an ihrer Form GZYL zu; bei jeder anderen fragt es vorher bei der Tracking-Seite von GZYL nach. Mit neun oder elf Ziffern ist es nicht die Form von GZYL.
 
 ### Warum meldet GZYL mein Paket als zugestellt, obwohl es nicht da ist?
 
@@ -114,5 +115,5 @@ Die Schritte von GZYL nennen keine Firma, deshalb weiß Peek es nicht: Frag den 
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (Kontakt, auf Chinesisch)](http://yunlianhouyun.com/contact.html) – Hotline, WeChat und QQ für den Kundendienst
 - [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – Abfertigungspauschale von 2 € je Warenkategorie seit 1. November 2026, Paketdienst legt die Abgaben aus, Zahlung bei der Zustellung, Preis im Shop prüfen
 - [EU-Kommission: EU Customs Reform (auf Englisch)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – Abfertigungspauschale der EU von 2 € seit 1. November 2026, in der ganzen EU
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmen- und andere Namen, Tracking-Seite unter einer IP-Adresse, YL…YQ-Form und ihre schwache Zuordnung, Xinghe Freight auf GZYLs Tracking-Seite und seine Annahme in Hongkong, Suche nach Nummer oder Referenz mit Bindestrichen, Wortlaute der Schritte und ihre Phasen, die chinesische Zeile der Plattform, Orte hinter dem Wortlaut, Pekinger Zeit, im Voraus geschriebener Verlauf, Antwort bei unbekannter Nummer, Tracking-Seite statt Datenschnittstelle, Übergaberegel der Schweizerischen Post, was Peek zeigt, zurückhält und weglässt
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Firmen- und andere Namen, Tracking-Seite unter einer IP-Adresse, YL…YQ-Formen, YL738 sicher erkannt, die übrigen schwach zugeordnet, Xinghe Freight auf GZYLs Tracking-Seite und seine Annahme in Hongkong, Suche nach Nummer oder Referenz mit Bindestrichen, Wortlaute der Schritte und ihre Phasen, die chinesische Zeile der Plattform, Orte hinter dem Wortlaut, Pekinger Zeit, im Voraus geschriebener Verlauf, Antwort bei unbekannter Nummer, Tracking-Seite statt Datenschnittstelle, Übergaberegel der Schweizerischen Post, was Peek zeigt, zurückhält und weglässt
 :::

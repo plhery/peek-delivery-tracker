@@ -39,7 +39,7 @@ O seguimento da CTT Express está só em espanhol: não tem versão portuguesa n
 | `Almacenado temporalmente` | Guardada no armazém depois de uma entrega falhada, até nova volta ou devolução. |
 | `Nuevo reparto` | Saiu outra vez para uma nova tentativa. |
 | `Disponible en Punto Collectt Express` | Pronta para levantar num ponto Collectt; o PIN chega por email e SMS. |
-| `Entregado` | Entregue. |
+| `El envío fue entregado correctamente` | Entregue. |
 | `En devolución` | A caminho do remetente. |
 | `Devuelto a remitente` | Devolvida ao remetente. |
 

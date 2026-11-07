@@ -112,7 +112,7 @@ W kraju to długo. DPD doręcza standardowo następnego dnia roboczego, a dla pr
 
 ### Czy da się przyspieszyć aktualizację statusu?
 
-Nie, i żaden tracker tego nie zrobi: pokazuje tylko to, co opublikował przewoźnik. [Peek](/) sprawdza śledzenie nawet co 10 minut, także w nocy, a na ostatnim odcinku nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika), i da Ci znać na iPhonie lub w przeglądarce: przy każdym skanie, tylko przy ważnych krokach albo tylko w dniu dostawy. Nie musisz więc w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, Peek sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (GLS w większości krajów i Royal Mail co godzinę, Poste Italiane i PostNL co 30 minut).
+Nie, i żaden tracker tego nie zrobi: pokazuje tylko to, co opublikował przewoźnik. [Peek](/) sprawdza śledzenie nawet co 10 minut, także w nocy, a w dniu doręczenia nawet co 2 minuty (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika), i da Ci znać na iPhonie lub w przeglądarce: przy każdym skanie, tylko przy ważnych krokach albo tylko w dniu dostawy. Nie musisz więc w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, Peek sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (GLS w większości krajów i Royal Mail co godzinę, Poste Italiane i PostNL co 30 minut).
 
 ### Numer przesyłki nie działa
 

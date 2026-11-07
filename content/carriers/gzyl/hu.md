@@ -15,6 +15,7 @@ A GZYL fuvarlevélszámai 14 karakteresek: elöl YL, utána 10 számjegy, a vég
 | Szám (kitalált példa) | Mit jelent |
 | --- | --- |
 | `YL0000000000YQ` | YL, 10 számjegy és YQ: a GZYL fuvarlevélszámainak formája. A Peek a GZYL nyomkövetőjénél ellenőrzi. |
+| `YL7380000000YQ` | YL738, 7 számjegy és YQ: erről a formáról a Peek azonnal felismeri a GZYL-t. |
 | `YL000000000YQ` | Csak 9 számjegy: ez nem a GZYL formája. Nézze meg, nem maradt-e ki egy számjegy. |
 | `GZXH0000000000YQ` | GZXH, 10 számjegy és YQ: a Xinghe Freight (星和货运), egy másik szállítmányozó száma. Ezeket a csomagokat is a GZYL nyomkövetője mutatja, ugyanazokkal a szövegekkel. |
 | `JXCAA0000000000YQ` | Ez is YQ-ra végződik, mint sok kínai szállítmányozó száma, de JXC-vel kezdődik: ez a Juxi Express száma. |
@@ -83,7 +84,7 @@ A 2026. november 4-i állapot szerint a GZYL kínai nyelvű weboldalának kapcso
 
 ## GZYL-csomagok követése a Peekkel
 
-A [Peek](/) felülete angol nyelvű. A GZYL-számot a Peek pusztán a formájáról nem ismeri fel biztosan: az YL, 10 számjegy és YQ csak gyenge támpont. Illessze be így is: a Peek több mint 3500 szállítót követ. Hozzáadás közben a Peek megkérdezi a GZYL nyomkövetőjét („Checking tracking services…”, vagyis a nyomkövető szolgáltatások ellenőrzése), és ha a nyomkövető ismeri a számot, ezt látja: „GZYL has this parcel.” (a GZYL ismeri ezt a csomagot). Ha nem, nyomja meg a „Change” (módosítás) gombot, és válassza a GZYL-t a „Fits this number” (illik erre a számra) listából; a 广州云链 beírásával is megtalálja. Már hozzáadott csomagnál a „Change carrier” (szállító módosítása) gombot használja. Az eladó hivatkozási száma is működik, de csak akkor, ha a GZYL-t Ön választja ki: nyomja meg a „Change” (vagy a „Change carrier”) gombot, és keressen rá a GZYL-re. A Peek ezután azt a számot is mutatja, amelyen a GZYL a rendelést nyilvántartja, „GZYL tracks this as” (a GZYL ezen a számon követi) felirattal. A kötőjeleket viszont a Peek elhagyja, így a kötőjeles hivatkozási számra nincs találat: ilyenkor kérje el az eladótól az YL…YQ számot.
+A [Peek](/) felülete angol nyelvű. Ha a szám YL738-cal kezdődik, és 7 számjegy, majd YQ követi, a Peek a formájáról azonnal felismeri a GZYL-t, és ezt mutatja: „Detected carrier” (felismert szállító). A többi, YL-lel kezdődő, 10 számjegyből és YQ-ból álló számnál a forma csak gyenge támpont. Illessze be így is: a Peek több mint 3500 szállítót követ. Hozzáadás közben a Peek megkérdezi a GZYL nyomkövetőjét („Checking tracking services…”, vagyis a nyomkövető szolgáltatások ellenőrzése), és ha a nyomkövető ismeri a számot, ezt látja: „GZYL has this parcel.” (a GZYL ismeri ezt a csomagot). Ha nem, nyomja meg a „Change” (módosítás) gombot, és válassza a GZYL-t a „Fits this number” (illik erre a számra) listából; a 广州云链 beírásával is megtalálja. Már hozzáadott csomagnál a „Change carrier” (szállító módosítása) gombot használja. Az eladó hivatkozási száma is működik, de csak akkor, ha a GZYL-t Ön választja ki: nyomja meg a „Change” (vagy a „Change carrier”) gombot, és keressen rá a GZYL-re. A Peek ezután azt a számot is mutatja, amelyen a GZYL a rendelést nyilvántartja, „GZYL tracks this as” (a GZYL ezen a számon követi) felirattal. A kötőjeleket viszont a Peek elhagyja, így a kötőjeles hivatkozási számra nincs találat: ilyenkor kérje el az eladótól az YL…YQ számot.
 
 A Peek közvetlenül a GZYL nyomkövetőjét olvassa, és mutatja az állapotot, minden lépést a helyével együtt, valamint a célországot, ha a GZYL adatai tartalmazzák. Az időpontokat pekingi idő szerint értelmezi, és az eszköze időzónájában jeleníti meg. A GZYL adataiban esetleg szereplő neveket, címet, irányítószámot, súlyt, díjakat, aláírást és kézbesítési igazolást a Peek nem veszi át. Várható kézbesítési napot nem mutat: a GZYL nem ad meg ilyet.
 
@@ -99,7 +100,7 @@ A GZYL teljes neve 广州云链货运代理有限公司 (Guangzhou Yunlian): sz�
 
 ### Minden YL…YQ szám a GZYL-é?
 
-Nem feltétlenül. Az YL, 10 számjegy és YQ a GZYL formája, és a Peek katalógusában más szállító nem használja. A Peek mégis megkérdezi a GZYL nyomkövetőjét, mielőtt a számot a GZYL-éként kezelné. Ha 9 vagy 11 számjegy van benne, az nem a GZYL formája.
+Nem feltétlenül. Az YL, 10 számjegy és YQ a GZYL formája, és a Peek katalógusában más szállító nem használja. Az YL738-cal kezdődő számot a Peek már a formája alapján a GZYL-éként kezeli; minden más számnál előbb megkérdezi a GZYL nyomkövetőjét. Ha 9 vagy 11 számjegy van benne, az nem a GZYL formája.
 
 ### Miért mutatja a GZYL kézbesítettnek a csomagot, ha nem kaptam meg?
 
@@ -112,6 +113,6 @@ A Peek nem tudja: a GZYL lépései az Ön országában nem neveznek meg céget. 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): főoldal (kínaiul)](http://yunlianhouyun.com/) – a cég neve, kínai nyelvű weboldal, csomagkereső (小包查询) a GZYL nyomkövetőjéhez
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (kapcsolat, kínaiul)](http://yunlianhouyun.com/contact.html) – éjjel-nappal hívható forródrót, WeChat és értékesítés utáni QQ
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – a cég neve és más nevei, a domainnév nélküli nyomkövető, az YL…YQ számforma mint gyenge támpont, a Xinghe Freight a GZYL nyomkövetőjén és hongkongi átvétele, keresés számra vagy hivatkozási számra és a kötőjelek, a lépések szövegei és állapotaik, a kínai nyelvű sorok, a települések a szövegek után, pekingi idő, az előre rögzített terv és az azt lezáró `Delivered`, a válasz ismeretlen számra, a weboldal az adatfelület helyett, a Swiss Post mint egyetlen átadás, mit mutat, mit tart vissza és mit nem vesz át a Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – a cég neve és más nevei, a domainnév nélküli nyomkövető, az YL…YQ számformák: az YL738 azonnal felismerve, a többi gyenge támpontként, a Xinghe Freight a GZYL nyomkövetőjén és hongkongi átvétele, keresés számra vagy hivatkozási számra és a kötőjelek, a lépések szövegei és állapotaik, a kínai nyelvű sorok, a települések a szövegek után, pekingi idő, az előre rögzített terv és az azt lezáró `Delivered`, a válasz ismeretlen számra, a weboldal az adatfelület helyett, a Swiss Post mint egyetlen átadás, mit mutat, mit tart vissza és mit nem vesz át a Peek
 - [NAV: A 3 euró átalányvám és az uniós kezelési díj alkalmazása (PDF)](https://nav.gov.hu/pfile/file?path=/vam/e-kereskedelem/a-3-euro-atalanyvam-alkalmazasa) – uniós kezelési díj 2026. november 1-jétől, tételsoronként 2 euró, mint az átalányvám, értékhatártól függetlenül, a vámtartozással egy határozatban; a nyilatkozattevő, például a postai szolgáltató szedi be
 :::

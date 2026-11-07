@@ -15,6 +15,7 @@ I numeri di spedizione di GZYL sono composti da YL, dieci cifre e YQ: 14 caratte
 | Numero | Cos'è |
 | --- | --- |
 | `YL0000000000YQ` | YL, dieci cifre e YQ: la forma dei numeri di GZYL. Peek lo verifica sul tracking di GZYL. |
+| `YL7380000000YQ` | YL738, sette cifre e YQ: da questa forma Peek riconosce subito GZYL. |
 | `YL000000000YQ` | Solo nove cifre: non è la forma di GZYL. Controlla che non ne manchi una. |
 | `GZXH0000000000YQ` | GZXH, dieci cifre e YQ: Xinghe Freight (星和货运), un altro spedizioniere. Il suo tracking passa da quello di GZYL e i passaggi hanno gli stessi testi. |
 | `JXCAA0000000000YQ` | Anche questo finisce con YQ, come i numeri di molti spedizionieri cinesi, ma inizia con JXC: è un numero di Juxi Express, non di GZYL. |
@@ -83,7 +84,7 @@ Al 4 novembre 2026 la pagina dei contatti (联系我们) del sito di GZYL, in ci
 
 ## Tracciare un pacco GZYL con Peek
 
-Dalla sola forma, [Peek](/) non può essere sicuro che un numero sia di GZYL: YL, dieci cifre e YQ è solo un indizio. Incollalo lo stesso: Peek segue più di 3.500 corrieri. Mentre lo aggiungi, Peek interroga il tracking di GZYL («Verifica dei servizi di tracciamento…») e, se GZYL conosce il numero, mostra «GZYL ha questo pacco.» Altrimenti premi «Cambia» e scegli GZYL sotto «Compatibili con questo numero» (lo trovi anche scrivendo 广州云链), oppure usa «Cambia corriere» su un pacco già aggiunto. Funziona anche il riferimento che ti ha dato il venditore, ma solo se scegli tu GZYL: premi «Cambia» (o «Cambia corriere») e cerca GZYL. Peek mostra allora il numero con cui GZYL registra la spedizione, alla voce «GZYL lo traccia con il numero». Peek però toglie i trattini, quindi un riferimento che li contiene non viene trovato: in quel caso chiedi al venditore il numero YL…YQ.
+Se il numero inizia con YL738, seguito da sette cifre e YQ, [Peek](/) riconosce subito GZYL dalla forma («Corriere rilevato»). Per gli altri numeri con YL, dieci cifre e YQ, la forma è solo un indizio. Incollalo lo stesso: Peek segue più di 3.500 corrieri. Mentre lo aggiungi, Peek interroga il tracking di GZYL («Verifica dei servizi di tracciamento…») e, se GZYL conosce il numero, mostra «GZYL ha questo pacco.» Altrimenti premi «Cambia» e scegli GZYL sotto «Compatibili con questo numero» (lo trovi anche scrivendo 广州云链), oppure usa «Cambia corriere» su un pacco già aggiunto. Funziona anche il riferimento che ti ha dato il venditore, ma solo se scegli tu GZYL: premi «Cambia» (o «Cambia corriere») e cerca GZYL. Peek mostra allora il numero con cui GZYL registra la spedizione, alla voce «GZYL lo traccia con il numero». Peek però toglie i trattini, quindi un riferimento che li contiene non viene trovato: in quel caso chiedi al venditore il numero YL…YQ.
 
 Peek legge il tracking di GZYL e mostra lo stato, ogni passaggio con il suo luogo e, quando i dati di GZYL lo indicano, il Paese di destinazione. Legge gli orari come ora di Pechino e li mostra nel fuso orario del tuo dispositivo. Non riporta nomi, indirizzo, CAP, peso, dati di pagamento, firma né prova di consegna, che i dati di GZYL possono contenere, e non mostra una data di consegna prevista: GZYL non la indica.
 
@@ -99,7 +100,7 @@ A parte il passaggio alla Posta Svizzera, Peek resta con GZYL e non passa a un a
 
 ### Tutti i numeri YL…YQ sono di GZYL?
 
-Non è detto. YL, dieci cifre e YQ è la forma di GZYL e nessun altro corriere del catalogo di Peek la usa, ma Peek chiede comunque al tracking di GZYL prima di attribuirgli il numero. Con nove o undici cifre il numero non ha la forma di GZYL.
+Non è detto. YL, dieci cifre e YQ è la forma di GZYL e nessun altro corriere del catalogo di Peek la usa. Un numero che inizia con YL738 Peek lo attribuisce a GZYL già dalla forma; per ogni altro chiede prima al tracking di GZYL. Con nove o undici cifre il numero non ha la forma di GZYL.
 
 ### Perché GZYL dice che il pacco è stato consegnato se non è arrivato?
 
@@ -112,7 +113,7 @@ Peek non lo sa: i passaggi di GZYL nel Paese di destinazione non nominano alcun 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): home (in cinese)](http://yunlianhouyun.com/) – nome dell'azienda, sito in cinese, ricerca pacchi (小包查询) sul tracking di GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (contatti, in cinese)](http://yunlianhouyun.com/contact.html) – linea attiva 24 ore su 24, WeChat e QQ post-vendita
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome dell'azienda e altri nomi, tracking su un semplice indirizzo IP, forma YL…YQ e corrispondenza debole, Xinghe Freight sul tracking di GZYL e la sua accettazione a Hong Kong, ricerca per numero o per riferimento con i suoi trattini, testi dei passaggi e loro fasi, la riga in cinese della piattaforma, città dopo i testi e CAP tolti, ora di Pechino, cronologia scritta in anticipo e la consegna che la chiude, risposta a un numero sconosciuto, Posta Svizzera come unico passaggio ad altro corriere, cosa Peek mostra, tiene da parte e lascia fuori
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nome dell'azienda e altri nomi, tracking su un semplice indirizzo IP, forme YL…YQ, YL738 riconosciuto subito e le altre con corrispondenza debole, Xinghe Freight sul tracking di GZYL e la sua accettazione a Hong Kong, ricerca per numero o per riferimento con i suoi trattini, testi dei passaggi e loro fasi, la riga in cinese della piattaforma, città dopo i testi e CAP tolti, ora di Pechino, cronologia scritta in anticipo e la consegna che la chiude, risposta a un numero sconosciuto, Posta Svizzera come unico passaggio ad altro corriere, cosa Peek mostra, tiene da parte e lascia fuori
 - [Agenzia delle Dogane e dei Monopoli: Avviso Union Handling Fee (PDF)](https://www.adm.gov.it/portale/documents/20182/6262318/Avviso+e-commerce+-+le+novit%C3%A0+dal+1+novembre++2026+-+UNION+HANDLING+FEE+%28UHF%29.pdf/cfe7b95c-e4c6-3a05-3531-3c6b26d27a7e?version=1.1&t=1793003680444) – tassa di gestione dell'Unione di 2 € per articolo dal 1° novembre 2026, qualunque sia il valore, dovuta da chi presenta la dichiarazione doganale
 - [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – tassa di gestione dell'Unione per voce doganale, pagata con dazio e IVA online prima della consegna o alla consegna
 :::

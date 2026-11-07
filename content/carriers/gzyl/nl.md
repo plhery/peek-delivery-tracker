@@ -15,6 +15,7 @@ De nummers van GZYL bestaan uit YL, tien cijfers en YQ: 14 tekens in totaal. Voo
 | Nummer | Wat het is |
 | --- | --- |
 | `YL0000000000YQ` | YL, tien cijfers en YQ: de vorm van de nummers van GZYL. Peek gaat het na op de trackingpagina van GZYL. |
+| `YL7380000000YQ` | YL738, zeven cijfers en YQ: aan deze vorm herkent Peek GZYL meteen. |
 | `YL000000000YQ` | Maar negen cijfers: niet de vorm van GZYL. Kijk of er een cijfer ontbreekt. |
 | `GZXH0000000000YQ` | GZXH, tien cijfers en YQ: Xinghe Freight (星和货运), een andere expediteur. De tracking daarvan loopt via de trackingpagina van GZYL, in dezelfde bewoordingen. |
 | `JXCAA0000000000YQ` | Eindigt ook op YQ, zoals de nummers van veel Chinese expediteurs, maar begint met JXC: een nummer van Juxi Express. |
@@ -83,7 +84,7 @@ Toen Peek het op 4 november 2026 naging, noemde de contactpagina (联系我们) 
 
 ## Een GZYL-pakket volgen met Peek
 
-[Peek](/) kan een GZYL-nummer niet met zekerheid alleen aan zijn vorm herkennen: YL, tien cijfers en YQ is maar een zwakke aanwijzing. Plak het toch: Peek volgt meer dan 3.500 vervoerders. Terwijl je het toevoegt, gaat Peek op de trackingpagina van GZYL na of het nummer bekend is; je ziet dan "Checking tracking services…" (trackingdiensten worden gecontroleerd). Kent GZYL het nummer, dan toont Peek "GZYL has this parcel." (GZYL heeft dit pakket). Anders druk je op "Change" (wijzigen) en kies je GZYL onder "Fits this number" (past bij dit nummer); typ je 广州云链, dan vind je GZYL ook. Bij een pakket dat je al hebt toegevoegd, gebruik je "Change carrier" (vervoerder wijzigen). Ook een referentie van de verkoper werkt: kies GZYL met "Change", en Peek toont dan het eigen nummer van de bestelling, met het label "GZYL tracks this as" (GZYL volgt dit als). Peek haalt streepjes echter weg, dus een referentie met streepjes wordt niet gevonden: vraag de verkoper dan om het YL…YQ-nummer.
+Begint je nummer met YL738, gevolgd door zeven cijfers en YQ, dan herkent [Peek](/) GZYL meteen aan de vorm en toont "Detected carrier" (herkende vervoerder). Bij andere nummers met YL, tien cijfers en YQ is de vorm maar een zwakke aanwijzing. Plak het toch: Peek volgt meer dan 3.500 vervoerders. Terwijl je het toevoegt, gaat Peek op de trackingpagina van GZYL na of het nummer bekend is; je ziet dan "Checking tracking services…" (trackingdiensten worden gecontroleerd). Kent GZYL het nummer, dan toont Peek "GZYL has this parcel." (GZYL heeft dit pakket). Anders druk je op "Change" (wijzigen) en kies je GZYL onder "Fits this number" (past bij dit nummer); typ je 广州云链, dan vind je GZYL ook. Bij een pakket dat je al hebt toegevoegd, gebruik je "Change carrier" (vervoerder wijzigen). Ook een referentie van de verkoper werkt: kies GZYL met "Change", en Peek toont dan het eigen nummer van de bestelling, met het label "GZYL tracks this as" (GZYL volgt dit als). Peek haalt streepjes echter weg, dus een referentie met streepjes wordt niet gevonden: vraag de verkoper dan om het YL…YQ-nummer.
 
 Peek leest de trackingpagina van GZYL zelf en toont de status, elke stap met zijn plaats en, als GZYL het vermeldt, het land van bestemming. Peek leest de tijden in Pekingse tijd en toont ze in de tijdzone van je toestel. De namen, het adres, de postcodes, het gewicht, de betaalgegevens, de handtekening en het bewijs van bezorging die GZYL kan vermelden, laat Peek weg. Een verwachte bezorgdatum toont Peek niet: GZYL geeft er geen.
 
@@ -99,7 +100,7 @@ GZYL is 广州云链货运代理有限公司 (Guangzhou Yunlian), een expediteur
 
 ### Is elk YL…YQ-nummer van GZYL?
 
-Niet met zekerheid. YL, tien cijfers en YQ is de vorm van GZYL, en geen andere vervoerder in de lijst van Peek gebruikt die. Toch kijkt Peek eerst op de trackingpagina van GZYL of het nummer bekend is, voordat het dat nummer aan GZYL toeschrijft. Met negen of elf cijfers is het niet de vorm van GZYL.
+Niet met zekerheid. YL, tien cijfers en YQ is de vorm van GZYL, en geen andere vervoerder in de lijst van Peek gebruikt die. Een nummer dat met YL738 begint, schrijft Peek al op zijn vorm aan GZYL toe; bij elk ander nummer kijkt Peek eerst op de trackingpagina van GZYL of het bekend is. Met negen of elf cijfers is het niet de vorm van GZYL.
 
 ### Waarom staat mijn GZYL-pakket op bezorgd terwijl er niets kwam?
 
@@ -112,6 +113,6 @@ Peek weet het niet: de stappen van GZYL in je land noemen geen bedrijf. Vraag de
 :::sources
 - [广州云链货运代理有限公司 (GZYL): home (in het Chinees)](http://yunlianhouyun.com/) – bedrijfsnaam, Chinese website, pakketzoeker (小包查询) naar de trackingpagina van GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (contact, in het Chinees)](http://yunlianhouyun.com/contact.html) – 24-uurs hotline, WeChat en QQ voor aftersales
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – bedrijfsnaam en andere namen, trackingpagina op een IP-adres, de YL…YQ-vorm en zijn zwakke herkenning, Xinghe Freight op de trackingpagina van GZYL en de ontvangst in Hongkong, zoeken op nummer of referentie met streepjes, de woorden van de stappen en hun status, de Chinese regels, plaatsnamen na de woorden, Pekingse tijd, de vooraf geschreven planning en de `Delivered` die ze afsluit, het antwoord voor een onbekend nummer, de trackingpagina in plaats van de gegevensinterface, Swiss Post als enige overdracht, wat Peek toont, tegenhoudt en weglaat
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – bedrijfsnaam en andere namen, trackingpagina op een IP-adres, de YL…YQ-vormen: YL738 meteen herkend, de andere zwak, Xinghe Freight op de trackingpagina van GZYL en de ontvangst in Hongkong, zoeken op nummer of referentie met streepjes, de woorden van de stappen en hun status, de Chinese regels, plaatsnamen na de woorden, Pekingse tijd, de vooraf geschreven planning en de `Delivered` die ze afsluit, het antwoord voor een onbekend nummer, de trackingpagina in plaats van de gegevensinterface, Swiss Post als enige overdracht, wat Peek toont, tegenhoudt en weglaat
 - [Douane: Extra kosten bij online bestellingen](https://www.douane.nl/onderwerpen/online-shoppen-en-pakketpost/shoppen-bij-een-buitenlandse-webwinkel/extra-kosten-bij-bestellen/) – afhandelingsvergoeding van € 2 per productcategorie (HS-code) sinds 1 november 2026 in de hele EU, ook boven € 150, betaald bij het afrekenen of aan de bezorger
 :::

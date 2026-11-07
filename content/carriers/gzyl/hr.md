@@ -15,6 +15,7 @@ GZYL-ovi brojevi pošiljaka imaju oblik YL, deset znamenki i YQ, ukupno 14 znako
 | Broj (izmišljen) | Što je to |
 | --- | --- |
 | `YL0000000000YQ` | YL, deset znamenki i YQ: oblik GZYL-ovih brojeva. Peek ga provjerava u GZYL-ovu sustavu za praćenje. |
+| `YL7380000000YQ` | YL738, sedam znamenki i YQ: po tom obliku Peek odmah prepoznaje GZYL. |
 | `YL000000000YQ` | Samo devet znamenki: to nije GZYL-ov oblik. Provjeri nedostaje li znamenka. |
 | `GZXH0000000000YQ` | GZXH, deset znamenki i YQ: Xinghe Freight (星和货运), drugo špeditersko poduzeće. Njegove pošiljke prikazuje GZYL-ov sustav za praćenje, s GZYL-ovim tekstovima koraka. |
 | `JXCAA0000000000YQ` | I ovaj broj završava s YQ, kao brojevi mnogih kineskih špeditera, ali počinje s JXC: to je broj Juxi Expressa. |
@@ -83,7 +84,7 @@ Na dan 4. studenoga 2026. stranica za kontakt (联系我们) GZYL-ove web-strani
 
 ## Praćenje GZYL pošiljaka s Peekom
 
-[Peek](/) GZYL-ov broj ne može sa sigurnošću prepoznati samo po obliku: YL, deset znamenki i YQ tek je slab znak. Svejedno ga zalijepi: Peek prati više od 3.500 prijevoznika. Dok broj dodaješ, Peek pita GZYL-ov sustav za praćenje i pokazuje "Checking tracking services…" (provjeravaju se servisi za praćenje). Ako GZYL poznaje broj, Peek javlja "GZYL has this parcel." (GZYL ima ovu pošiljku). Ako ne, pritisni "Change" (promijeni) i odaberi GZYL pod "Fits this number" (odgovara ovom broju); GZYL ćeš naći i ako upišeš 广州云链. Za pošiljku koju si već dodao koristi "Change carrier" (promijeni prijevoznika). Radi i prodavačev referentni broj, ali tek kad sam odabereš GZYL: pritisni "Change" (ili "Change carrier") i potraži GZYL. Peek tada pokazuje i broj pod kojim GZYL vodi narudžbu, s oznakom "GZYL tracks this as" (GZYL ovu pošiljku vodi pod brojem). No Peek iz broja briše crtice, pa se referentni broj s crticama ne može pronaći: tada od prodavača zatraži broj YL…YQ.
+Broj koji počinje s YL738, a zatim ima sedam znamenki i YQ, [Peek](/) po obliku odmah pripiše GZYL-u i pokaže "Detected carrier" (prepoznat prijevoznik). Kod drugih brojeva s YL, deset znamenki i YQ oblik je tek slab znak. Svejedno ga zalijepi: Peek prati više od 3.500 prijevoznika. Dok broj dodaješ, Peek pita GZYL-ov sustav za praćenje i pokazuje "Checking tracking services…" (provjeravaju se servisi za praćenje). Ako GZYL poznaje broj, Peek javlja "GZYL has this parcel." (GZYL ima ovu pošiljku). Ako ne, pritisni "Change" (promijeni) i odaberi GZYL pod "Fits this number" (odgovara ovom broju); GZYL ćeš naći i ako upišeš 广州云链. Za pošiljku koju si već dodao koristi "Change carrier" (promijeni prijevoznika). Radi i prodavačev referentni broj, ali tek kad sam odabereš GZYL: pritisni "Change" (ili "Change carrier") i potraži GZYL. Peek tada pokazuje i broj pod kojim GZYL vodi narudžbu, s oznakom "GZYL tracks this as" (GZYL ovu pošiljku vodi pod brojem). No Peek iz broja briše crtice, pa se referentni broj s crticama ne može pronaći: tada od prodavača zatraži broj YL…YQ.
 
 Peek čita GZYL-ov vlastiti sustav za praćenje i pokazuje status, svaki korak s mjestom te zemlju odredišta kad je GZYL-ov zapis navodi. Vremena čita po pekinškom vremenu i prikazuje ih u vremenskoj zoni tvog uređaja. Imena, adresu, poštanske brojeve, težinu, podatke o plaćanju, potpis i dokaz o dostavi koje GZYL-ov zapis može sadržavati Peek izostavlja. Očekivani datum dostave ne pokazuje jer ga GZYL ne daje.
 
@@ -99,7 +100,7 @@ GZYL je 广州云链货运代理有限公司 (Guangzhou Yunlian), špeditersko p
 
 ### Je li svaki broj YL…YQ GZYL-ov?
 
-Ne nužno. YL, deset znamenki i YQ je GZYL-ov oblik i nijedan ga drugi prijevoznik u Peekovu katalogu ne koristi, ali Peek ipak najprije pita GZYL-ov sustav za praćenje, pa tek onda broj pripiše GZYL-u. S devet ili jedanaest znamenki to nije GZYL-ov oblik.
+Ne nužno. YL, deset znamenki i YQ je GZYL-ov oblik i nijedan ga drugi prijevoznik u Peekovu katalogu ne koristi. Broj koji počinje s YL738 Peek pripiše GZYL-u već po obliku; za svaki drugi najprije pita GZYL-ov sustav za praćenje. S devet ili jedanaest znamenki to nije GZYL-ov oblik.
 
 ### Zašto GZYL piše da je paket dostavljen iako nije stigao?
 
@@ -112,7 +113,7 @@ Peek to ne zna: GZYL-ovi koraci u tvojoj zemlji ne navode nijednu tvrtku. Pitaj 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): početna stranica (na kineskom)](http://yunlianhouyun.com/) – ime tvrtke, web-stranica na kineskom, tražilica pošiljaka (小包查询) prema GZYL-ovu sustavu za praćenje
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (kontakt, na kineskom)](http://yunlianhouyun.com/contact.html) – linija 0–24, WeChat i QQ za postprodajnu podršku
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ime tvrtke i drugi nazivi, sustav za praćenje na IP adresi, oblik YL…YQ kao slab znak, Xinghe Freight u GZYL-ovu sustavu za praćenje i preuzimanje u Hong Kongu, traženje po broju ili referentnom broju s crticama, tekstovi koraka i njihovi statusi, redci na kineskom, gradovi iza tekstova, pekinško vrijeme, plan upisan unaprijed i `Delivered` kojim završava, odgovor za nepoznat broj, stranica za praćenje umjesto podatkovnog sučelja, Swiss Post kao jedini prijevoznik na kojeg Peek prebacuje praćenje, što Peek prikazuje, ne prikazuje i izostavlja
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – ime tvrtke i drugi nazivi, sustav za praćenje na IP adresi, oblici YL…YQ: YL738 prepoznat odmah, ostali kao slab znak, Xinghe Freight u GZYL-ovu sustavu za praćenje i preuzimanje u Hong Kongu, traženje po broju ili referentnom broju s crticama, tekstovi koraka i njihovi statusi, redci na kineskom, gradovi iza tekstova, pekinško vrijeme, plan upisan unaprijed i `Delivered` kojim završava, odgovor za nepoznat broj, stranica za praćenje umjesto podatkovnog sučelja, Swiss Post kao jedini prijevoznik na kojeg Peek prebacuje praćenje, što Peek prikazuje, ne prikazuje i izostavlja
 - [Carinska uprava: Naplata naknade za rukovanje od 1. studenog 2026.](https://carina.gov.hr/vijesti/naplata-naknade-za-rukovanje-od-1-studenog-2026/20646) – naknada za rukovanje od 2 € za svaku stavku deklaracije uz fiksnu carinu od 3 €, i za internetske narudžbe iznad 150 €
 - [Europska komisija: The temporary EUR 3 customs duty and the Union handling fee (PDF, na engleskom)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – naknadu plaća onaj tko podnosi deklaraciju: platforma, prodavač ili prijevoznik
 :::

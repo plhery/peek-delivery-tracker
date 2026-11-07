@@ -15,6 +15,7 @@ Los números de envío de GZYL llevan YL, diez cifras y YQ: 14 caracteres en tot
 | Número | Qué es |
 | --- | --- |
 | `YL0000000000YQ` | YL, diez cifras y YQ: el formato de los números de GZYL. Peek lo comprueba en la página de seguimiento de GZYL. |
+| `YL7380000000YQ` | YL738, siete cifras y YQ: con esta forma, Peek reconoce GZYL al momento. |
 | `YL000000000YQ` | Solo nueve cifras: no es el formato de GZYL. Mira si falta una cifra. |
 | `GZXH0000000000YQ` | GZXH, diez cifras y YQ: Xinghe Freight (星和货运), otro transitario. Sus paquetes se siguen en la página de seguimiento de GZYL, con los mismos textos. |
 | `JXCAA0000000000YQ` | También acaba en YQ, como los números de muchos transitarios chinos, pero empieza por JXC: es un número de Juxi Express, no de GZYL. |
@@ -83,7 +84,7 @@ Cuando Peek lo comprobó, el 4 de noviembre de 2026, la página de contacto (联
 
 ## Seguir un paquete de GZYL con Peek
 
-[Peek](/) no puede saber con seguridad que un número es de GZYL solo por su forma: YL, diez cifras y YQ es solo un indicio. Pégalo igualmente: Peek sigue más de 3500 transportistas. Mientras lo añades, Peek consulta la página de seguimiento de GZYL («Comprobando servicios de seguimiento…») y muestra «GZYL tiene este paquete.» si la página conoce el número. Si no, pulsa «Cambiar» y elige GZYL en «Encaja con este número» (también lo encuentras escribiendo 广州云链), o usa «Cambiar transportista» en un paquete que ya hayas añadido. La referencia que te dio la tienda también sirve: pulsa «Cambiar» y busca GZYL. Peek muestra entonces el número de seguimiento del pedido junto a «GZYL lo sigue con el número». Eso sí, Peek quita los guiones, así que una referencia con guiones no se encuentra: pídele a la tienda el número YL…YQ.
+Si tu número empieza por YL738, seguido de siete cifras y YQ, [Peek](/) reconoce GZYL al momento por su forma («Transportista detectado»). En los demás números con YL, diez cifras y YQ, la forma es solo un indicio. Pégalo igualmente: Peek sigue más de 3500 transportistas. Mientras lo añades, Peek consulta la página de seguimiento de GZYL («Comprobando servicios de seguimiento…») y muestra «GZYL tiene este paquete.» si la página conoce el número. Si no, pulsa «Cambiar» y elige GZYL en «Encaja con este número» (también lo encuentras escribiendo 广州云链), o usa «Cambiar transportista» en un paquete que ya hayas añadido. La referencia que te dio la tienda también sirve: pulsa «Cambiar» y busca GZYL. Peek muestra entonces el número de seguimiento del pedido junto a «GZYL lo sigue con el número». Eso sí, Peek quita los guiones, así que una referencia con guiones no se encuentra: pídele a la tienda el número YL…YQ.
 
 Peek lee la página de seguimiento de GZYL y muestra el estado, cada paso con su lugar y, cuando los datos de GZYL lo indican, el país de destino. Lee las horas como hora de Pekín y te las muestra en la zona horaria de tu dispositivo. Deja fuera los nombres, la dirección, los códigos postales, el peso, los datos de pago, la firma y la prueba de entrega que pueden traer los datos de GZYL, y no muestra fecha prevista de entrega: GZYL no da ninguna.
 
@@ -99,7 +100,7 @@ Es 广州云链货运代理有限公司 (Guangzhou Yunlian), un transitario de G
 
 ### ¿Todos los números YL…YQ son de GZYL?
 
-No con total seguridad. YL, diez cifras y YQ es el formato de GZYL, y ningún otro transportista del catálogo de Peek lo usa, pero Peek consulta igualmente la página de seguimiento de GZYL antes de dar el número por suyo. Con nueve u once cifras, no es el formato de GZYL.
+No con total seguridad. YL, diez cifras y YQ es el formato de GZYL, y ningún otro transportista del catálogo de Peek lo usa. Un número que empieza por YL738, Peek lo atribuye a GZYL solo por su forma; con cualquier otro, consulta antes la página de seguimiento de GZYL. Con nueve u once cifras, no es el formato de GZYL.
 
 ### ¿Por qué GZYL dice que mi paquete está entregado si no ha llegado?
 
@@ -112,7 +113,7 @@ Peek no lo sabe: los pasos de GZYL en el país de destino no nombran ninguna emp
 :::sources
 - [广州云链货运代理有限公司 (GZYL): inicio (en chino)](http://yunlianhouyun.com/) – nombre de la empresa, sitio en chino, búsqueda de paquetes (小包查询) en la página de seguimiento de GZYL
 - [广州云链货运代理有限公司 (GZYL): 联系我们 (contacto, en chino)](http://yunlianhouyun.com/contact.html) – línea 24 horas, WeChat y QQ de posventa
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y otros nombres, página de seguimiento en una dirección IP, formato YL…YQ y su coincidencia débil, Xinghe Freight en la página de seguimiento de GZYL y su admisión en Hong Kong, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, la línea en chino de la plataforma, ciudades después de los textos, hora de Pekín, recorrido escrito de antemano y la entrega que lo cierra, respuesta a un número desconocido, la página de seguimiento en lugar de la interfaz de datos, Swiss Post como único traspaso, lo que Peek muestra, deja fuera y descarta
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – nombre de la empresa y otros nombres, página de seguimiento en una dirección IP, formatos YL…YQ: YL738 reconocido al momento, los demás con coincidencia débil, Xinghe Freight en la página de seguimiento de GZYL y su admisión en Hong Kong, búsqueda por número o por referencia con sus guiones, textos de los pasos y sus estados, la línea en chino de la plataforma, ciudades después de los textos, hora de Pekín, recorrido escrito de antemano y la entrega que lo cierra, respuesta a un número desconocido, la página de seguimiento en lugar de la interfaz de datos, Swiss Post como único traspaso, lo que Peek muestra, deja fuera y descarta
 - [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – tasa de tramitación de 2 € por categoría de artículos desde el 1 de noviembre de 2026, que se paga con el arancel y con sus mismas reglas
 - [Comisión Europea: The temporary EUR 3 customs duty and the Union handling fee (PDF, en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – la tasa de 2 € por línea de la declaración, como el arancel de 3 €, a cualquier valor
 :::

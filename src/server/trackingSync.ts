@@ -1586,10 +1586,21 @@ export class TrackingSyncService {
     const listed = new Set(followed.map((parcel) => String(parcel.id)));
     const unfiled = await list('list_unfiled_one_off_packages',
       () => this.client.listUnfiledOneOffPackages(new Date(now.getTime() - REDETECTION_WINDOW_MS), PROVIDER_TRACKED_CARRIERS));
-    const due = [...followed.filter(followedDue), ...unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel))];
+    const unfollowed = new Set(unfiled.filter((parcel) => !listed.has(String(parcel.id)) && unfollowedDue(parcel)));
+    const due = [...followed.filter(followedDue), ...unfollowed];
     const waited = due.filter(watched).slice(0, limit);
     const others = due.filter((parcel) => !watched(parcel));
-    return [...waited, ...others.slice(0, Math.max(limit - waited.length, UNWATCHED_ONE_OFF_SHARE))];
+    const taken = [...waited, ...others.slice(0, Math.max(limit - waited.length, UNWATCHED_ONE_OFF_SHARE))];
+    // The unfiled list comes without the stored rows, which the cadence of a lookup nobody follows
+    // does not read: the ones taken are read again with them, and checked if still due.
+    const ids = taken.filter((parcel) => unfollowed.has(parcel)).map((parcel) => String(parcel.id));
+    const read = new Map((ids.length ? await list('read_unfiled_one_off_packages', () => this.client.listSyncCandidates(ids)) : [])
+      .map((parcel) => [String(parcel.id), parcel]));
+    return taken.flatMap((parcel) => {
+      if (!unfollowed.has(parcel)) return [parcel];
+      const current = read.get(String(parcel.id));
+      return current && unfollowedDue(current) ? [current] : [];
+    });
   }
 
   /**

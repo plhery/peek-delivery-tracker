@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { STORED_EVENT_IDENTITIES, SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
+import { postgrestTables } from '../test/postgrest';
 
 describe('guarded tracking writes', () => {
   it('requests account-scoped automatic linking', async () => {
@@ -191,14 +192,50 @@ describe('one-off parcels and their links', () => {
 
   it('lists the one-off parcels a scheduled run follows in the shape of the other candidates', async () => {
     const client = service();
-    const request = vi.spyOn(client, 'request').mockResolvedValue([{ id: 'one-off', one_off: true }]);
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ id: 'one-off', one_off: true }]).mockResolvedValue([]);
     await expect(client.listFollowedOneOffPackages(new Date('2026-10-01T10:00:00Z'))).resolves.toEqual([{ id: 'one-off', one_off: true }]);
     const [path, options] = request.mock.calls[0];
     expect(path).toMatch(/^\/rest\/v1\/rpc\/followed_one_off_packages\?/);
     expect(options).toEqual({ method: 'POST', body: { p_opened_since: '2026-10-01T10:00:00.000Z' } });
+    expect(request.mock.calls[1][1]).toEqual(options);
     await client.listActivePackages();
-    expect(params(path).get('select')).toBe(params(request.mock.calls[1][0]).get('select'));
-    expect(params(path).get('order')).toBe('last_synced_at.asc.nullsfirst,created_at.asc');
+    expect(params(path).get('select')).toBe(params(request.mock.calls[2][0]).get('select'));
+    expect(params(path).get('order')).toBe('id.asc');
+  });
+
+  it('reads every scheduled candidate list past the API\'s row limit, by id, then the least recently checked first', async () => {
+    const parcel = (id: string, checked: string | null, added = '2026-10-01T08:00:00Z') => ({ id, user_id: null, one_off: true,
+      last_synced_at: checked, created_at: added, tracking_events: [] });
+    const stored = [parcel('b5', '2026-10-01T09:00:00Z'), parcel('a2', '2026-10-01T09:00:00Z'), parcel('c1', null),
+      parcel('a9', '2026-10-01T09:00:00.000+00:00'), parcel('b1', '2026-10-01T08:00:00Z'), parcel('a1', null, '2026-10-01T07:00:00Z')];
+    const client = service();
+    // The API answers two rows at most, whatever the request's limit.
+    const request = vi.spyOn(client, 'request').mockImplementation(postgrestTables({
+      'rpc/followed_one_off_packages': stored, 'rpc/unfiled_one_off_packages': stored,
+      packages: stored.map((row) => ({ ...row, user_id: 'owner-1', one_off: false })),
+    }, 2));
+    for (const list of [() => client.listFollowedOneOffPackages(new Date('2026-10-01T10:00:00Z')),
+      () => client.listUnfiledOneOffPackages(new Date('2026-09-01T10:00:00Z'), ['unknown']), () => client.listActivePackages()]) {
+      request.mockClear();
+      // Never checked first, then the first checked, and those checked at the same time by id.
+      expect((await list()).map((row) => row.id)).toEqual(['a1', 'c1', 'b1', 'a2', 'a9', 'b5']);
+      // Each page starts after the last id of the one before, until one adds none.
+      expect(request.mock.calls.map(([path]) => [params(path).get('order'), params(path).get('limit'), params(path).get('id')]))
+        .toEqual([['id.asc', '1000', null], ['id.asc', '1000', 'gt.a2'], ['id.asc', '1000', 'gt.b1'], ['id.asc', '1000', 'gt.c1']]);
+    }
+  });
+
+  it('reads the unfiled lookups a run takes again by id, with their stored event identities', async () => {
+    const client = service();
+    const request = vi.spyOn(client, 'request').mockResolvedValue([{ id: 'lookup' }]);
+    const ids = Array.from({ length: 150 }, (_, index) => `lookup-${index}`);
+    await expect(client.listSyncCandidates(ids)).resolves.toEqual([{ id: 'lookup' }, { id: 'lookup' }]);
+    expect(request.mock.calls.map(([path]) => params(path).get('id')))
+      .toEqual([`in.(${ids.slice(0, 100).join(',')})`, `in.(${ids.slice(100).join(',')})`]);
+    await client.listActivePackages();
+    expect(params(request.mock.calls[0][0]).get('select')).toBe(params(request.mock.calls[2][0]).get('select'));
+    await expect(client.listSyncCandidates([])).resolves.toEqual([]);
+    expect(request).toHaveBeenCalledTimes(4);
   });
 
   it('reads provider incident state separately from refresh incidents and rejects unreadable state', async () => {
@@ -231,9 +268,9 @@ describe('one-off parcels and their links', () => {
     await expect(client.previousThinAnswer('package-1', 'jrt')).resolves.toBeNull();
   });
 
-  it('lists the new one-off parcels filed under the given carriers in the shape of the other candidates', async () => {
+  it('lists the new one-off parcels filed under the given carriers in the shape of the other candidates, without their events', async () => {
     const client = service();
-    const request = vi.spyOn(client, 'request').mockResolvedValue([{ id: 'unfiled', one_off: true }]);
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ id: 'unfiled', one_off: true }]).mockResolvedValue([]);
     await expect(client.listUnfiledOneOffPackages(new Date('2026-09-21T10:00:00Z'), ['unknown', 'intl-post', 'z-leading']))
       .resolves.toEqual([{ id: 'unfiled', one_off: true }]);
     await client.listActivePackages();
@@ -241,8 +278,11 @@ describe('one-off parcels and their links', () => {
     expect(path).toMatch(/^\/rest\/v1\/rpc\/unfiled_one_off_packages\?/);
     expect(options).toEqual({ method: 'POST',
       body: { p_added_since: '2026-09-21T10:00:00.000Z', p_carriers: ['unknown', 'intl-post', 'z-leading'] } });
-    expect(params(path).get('select')).toBe(params(request.mock.calls[1][0]).get('select'));
-    expect(params(path).get('order')).toBe('last_synced_at.asc.nullsfirst,created_at.asc');
+    // The other candidates' columns, without what the sync loaders read besides them.
+    expect(params(request.mock.calls[2][0]).get('select')!.startsWith(`${params(path).get('select')},owner_locale,${STORED_EVENT_IDENTITIES}:`))
+      .toBe(true);
+    expect(params(path).get('select')).not.toContain(STORED_EVENT_IDENTITIES);
+    expect(params(path).get('order')).toBe('id.asc');
   });
 
   it('keeps the carriers of the unfiled one-off parcels out of the URL, however many the catalog holds', async () => {

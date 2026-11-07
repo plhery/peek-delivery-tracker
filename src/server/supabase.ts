@@ -487,13 +487,32 @@ export class SupabaseClient {
     select: string,
     filters: ReadonlyArray<readonly [string, string]> = [],
   ): Promise<JsonObject[]> {
-    const params = query([
+    return await this.everyCandidate('/rest/v1/packages', [
       ['select', select],
       ['or', `(current_stage.not.in.(delivered,returned),last_status_text.eq.TO_BE_DELIVERED,carrier_data->>unconfirmed_delivery_until.gt."${new Date().toISOString()}")`],
       ...filters,
-      ['order', 'last_synced_at.asc.nullsfirst,created_at.asc'],
     ]);
-    return rows(await this.request(`/rest/v1/packages?${params}`));
+  }
+
+  /**
+   * Every row a read of parcels answers, the least recently checked first. They come in pages
+   * by id until one adds none: the database's API ends every answer at its row limit without
+   * saying so, and a parcel left past it would never be checked.
+   */
+  protected async everyCandidate(
+    path: string,
+    params: ReadonlyArray<readonly [string, string]>,
+    options: { method?: string; body?: unknown } = {},
+  ): Promise<JsonObject[]> {
+    const found = new Map<string, JsonObject>();
+    for (let after: string | undefined; ;) {
+      const page = rows(await this.request(`${path}?${query([...params, ['order', 'id.asc'], ['limit', String(CANDIDATE_PAGE)],
+        ...(after === undefined ? [] : [['id', `gt.${after}`] as const])])}`, options))
+        .filter((row) => typeof row.id === 'string' && !found.has(row.id));
+      if (page.length === 0) return leastRecentlyChecked([...found.values()]);
+      for (const row of page) found.set(String(row.id), row);
+      after = String(page.at(-1)!.id);
+    }
   }
 
   async updatePackage(packageId: string, values: JsonObject): Promise<void> {
@@ -1079,6 +1098,25 @@ export class SupabaseClient {
 export const REDETECTION_PAGE = 500;
 /** How many ids a page of the parcels nobody is waiting for holds: the API's row limit. */
 const UNWATCHED_PAGE = 1000;
+/** How many parcels a page of scheduled sync candidates holds: the API's row limit. */
+const CANDIDATE_PAGE = 1000;
+/** How many parcels listSyncCandidates reads by id at once, which keeps their ids well inside a request line. */
+const SYNC_CANDIDATES_PER_READ = 100;
+
+/**
+ * The parcels the least recently checked first, as the schedule takes them: never checked
+ * first, then the first added, then by id, so that parcels checked at the same time keep
+ * one order from run to run.
+ */
+function leastRecentlyChecked(parcels: JsonObject[]): JsonObject[] {
+  const time = (value: unknown) => {
+    const parsed = typeof value === 'string' ? Date.parse(value) : Number.NaN;
+    return Number.isFinite(parsed) ? parsed : -Infinity;
+  };
+  const compare = <T extends number | string>(left: T, right: T) => left === right ? 0 : left < right ? -1 : 1;
+  return parcels.sort((a, b) => compare(time(a.last_synced_at), time(b.last_synced_at))
+    || compare(time(a.created_at), time(b.created_at)) || compare(String(a.id), String(b.id)));
+}
 
 /** The priority of a re-check nobody asked for, such as a scraper release's: it waits behind every other job. */
 export const BACKGROUND_SYNC_PRIORITY = -30;
@@ -1149,30 +1187,40 @@ export class SupabaseServiceClient extends SupabaseClient {
    * listActivePackages.
    */
   async listFollowedOneOffPackages(openedSince: Date): Promise<JsonObject[]> {
-    const params = query({
-      select: `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`,
-      order: 'last_synced_at.asc.nullsfirst,created_at.asc',
-    });
-    return rows(await this.request(`/rest/v1/rpc/followed_one_off_packages?${params}`, {
+    return await this.everyCandidate('/rest/v1/rpc/followed_one_off_packages', [['select', `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`]], {
       method: 'POST', body: { p_opened_since: openedSince.toISOString() },
-    }));
+    });
   }
 
   /**
    * The open, unarchived one-off parcels filed under one of `carriers` (no
    * carrier, or one with no adapter of its own) and added since `addedSince`,
    * followed or not, the least recently checked first, in the shape of
-   * listActivePackages. The carriers go in the body: hundreds of them in the URL
-   * pass the gateway's limit on its length.
+   * listActivePackages without what the sync loaders read besides the columns
+   * (SYNC_EXTRAS): thousands of them, most of which have left the schedule, and
+   * the cadence of one nobody follows reads none of it. listSyncCandidates reads
+   * the ones a run takes with it. The carriers go in the body: hundreds of them in
+   * the URL pass the gateway's limit on its length.
    */
   async listUnfiledOneOffPackages(addedSince: Date, carriers: readonly string[]): Promise<JsonObject[]> {
-    const params = query({
-      select: `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`,
-      order: 'last_synced_at.asc.nullsfirst,created_at.asc',
-    });
-    return rows(await this.request(`/rest/v1/rpc/unfiled_one_off_packages?${params}`, {
+    return await this.everyCandidate('/rest/v1/rpc/unfiled_one_off_packages', [['select', ACTIVE_PACKAGE_SELECT]], {
       method: 'POST', body: { p_added_since: addedSince.toISOString(), p_carriers: [...carriers] },
-    }));
+    });
+  }
+
+  /**
+   * These parcels by id, in the shape of listActivePackages: the ones a scheduled
+   * run takes from listUnfiledOneOffPackages, with their stored event identities.
+   * One deleted since is left out.
+   */
+  async listSyncCandidates(ids: readonly string[]): Promise<JsonObject[]> {
+    const found: JsonObject[] = [];
+    for (let start = 0; start < ids.length; start += SYNC_CANDIDATES_PER_READ) {
+      found.push(...rows(await this.request(`/rest/v1/packages?${query({
+        select: `${ACTIVE_PACKAGE_SELECT},${SYNC_EXTRAS}`, id: `in.(${ids.slice(start, start + SYNC_CANDIDATES_PER_READ).join(',')})`,
+      })}`)));
+    }
+    return found;
   }
 
   /**

@@ -1190,11 +1190,17 @@ describe('status observation collection', () => {
 });
 
 function fakeClient(packages: JsonObject[] = []) {
+  const listUnfiledOneOffPackages = vi.fn().mockResolvedValue([]);
   const client = {
     listActivePackages: vi.fn().mockResolvedValue(packages),
     getPackage: vi.fn(async (id: string): Promise<JsonObject | null> => packages.find((parcel) => parcel.id === id) ?? null),
     listFollowedOneOffPackages: vi.fn().mockResolvedValue([]),
-    listUnfiledOneOffPackages: vi.fn().mockResolvedValue([]),
+    listUnfiledOneOffPackages,
+    // The unfiled lookups a run takes, read again by id as the unfiled list gave them.
+    listSyncCandidates: vi.fn(async (ids: string[]): Promise<JsonObject[]> => {
+      const listed: JsonObject[] = await listUnfiledOneOffPackages.mock.results.at(-1)?.value ?? [];
+      return listed.filter((parcel) => ids.includes(String(parcel.id)));
+    }),
     listUnwatchedPackageIds: vi.fn().mockResolvedValue([]),
     sharedAlertPackageIds: vi.fn().mockResolvedValue(new Set()),
     autoLinkPackages: vi.fn().mockResolvedValue(0),
@@ -3134,6 +3140,32 @@ describe('TrackingSyncService', () => {
     expect(adapter.browserOnly('usps')).toBe(false);
     expect(adapter.browserOnly('dhl-ecommerce')).toBe(false);
     expect(adapter.browserOnly('swiss-post')).toBe(false);
+  });
+
+  it('checks the followed lookups when the unfiled ones a run takes cannot be read again with their stored rows', async () => {
+    const report = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
+    const routing = { version: 1, configured_carrier: 'unknown', failures: {}, last_success_at: '2026-09-08T10:00:00Z',
+      last_event_at: '2026-09-08T09:00:00Z' };
+    const lookup = (id: string): JsonObject => ({ id, user_id: null, one_off: true, carrier: 'unknown', current_stage: 'in_transit',
+      tracking_number: ON_THE_HOUR, created_at: '2026-09-05T10:00:00Z', archived_at: null, last_synced_at: '2026-09-09T06:00:15Z',
+      sync_status: 'ok', carrier_data: { routing } });
+    const client = fakeClient();
+    client.listFollowedOneOffPackages.mockResolvedValue([lookup('followed')]);
+    client.listUnfiledOneOffPackages.mockResolvedValue([lookup('unfiled')]);
+    client.listUnwatchedPackageIds.mockResolvedValue(['followed', 'unfiled']);
+    const failure = new Error('unavailable');
+    client.listSyncCandidates.mockRejectedValue(failure);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn(), fetchUniversal: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-09T12:00:00Z'));
+    await service.sync();
+    expect(client.listSyncCandidates).toHaveBeenCalledExactlyOnceWith(['unfiled']);
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['followed']);
+    expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'tracking', operation: 'read_unfiled_one_off_packages' });
+    // One checked since the run listed it is left for the next run.
+    client.listSyncCandidates.mockReset().mockResolvedValue([{ ...lookup('unfiled'), last_synced_at: '2026-09-09T11:59:00Z' }]);
+    client.startSyncAttempt.mockClear();
+    await service.sync();
+    expect(client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id)).toEqual(['followed']);
   });
 
   it('still checks the accounts when the one-off parcels cannot be listed', async () => {
@@ -9113,24 +9145,28 @@ describe('lookups as the scheduled run reads them', () => {
    * queries: each list answers with the columns it selects alone. Every lookup is unwatched but
    * the `watched` ones (an alert on, or a link opened in the last hour).
    */
-  const run = async (at: string, tables: { followed?: JsonObject[]; unfiled?: JsonObject[] }, watched: string[] = [],
+  const run = async (at: string, tables: { followed?: JsonObject[]; unfiled?: JsonObject[]; cap?: number }, watched: string[] = [],
     adapter: ConstructorParameters<typeof TrackingSyncService>[1] = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }) => {
-    const { followed = [], unfiled = [] } = tables;
+    const { followed = [], unfiled = [], cap } = tables;
     const database = new SupabaseServiceClient('https://database.example', 'service-key');
-    vi.spyOn(database, 'request').mockImplementation(postgrestTables({
+    const request = vi.spyOn(database, 'request').mockImplementation(postgrestTables({
       packages: [...followed, ...unfiled], 'rpc/followed_one_off_packages': followed, 'rpc/unfiled_one_off_packages': unfiled,
-    }));
+    }, cap));
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
       listActivePackages: () => database.listActivePackages(),
       listFollowedOneOffPackages: (since: Date) => database.listFollowedOneOffPackages(since),
       listUnfiledOneOffPackages: (since: Date, carriers: readonly string[]) => database.listUnfiledOneOffPackages(since, carriers),
+      listSyncCandidates: (ids: string[]) => database.listSyncCandidates(ids),
     };
     client.listUnwatchedPackageIds.mockResolvedValue([...followed, ...unfiled].map((row) => String(row.id)).filter((id) => !watched.includes(id)));
     await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at)).sync();
+    reads = request.mock.calls.map(([path]) => decodeURIComponent(path));
     return client.startSyncAttempt.mock.calls.map(([, values]) => values.package_id);
   };
+  /** What the last run read of the database. */
+  let reads: string[] = [];
   // Added at 07:30 in Zurich and checked at 12:00, its link opened that morning; its carrier has not found the number.
   const lookup = (id: string, extra: JsonObject = {}): JsonObject => ({ id, user_id: null, one_off: true, carrier: 'chronodiali',
     current_stage: 'pending', tracking_number: 'TEST1234', created_at: '2026-09-09T05:30:00Z', last_synced_at: '2026-09-09T10:00:15Z',
@@ -9178,5 +9214,24 @@ describe('lookups as the scheduled run reads them', () => {
     await expect(asked()).resolves.toEqual(['ParcelsApp', 'Ship24', '17TRACK']);
     vi.stubEnv('TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS', 'true');
     await expect(asked()).resolves.toEqual(['ParcelsApp']);
+  });
+
+  it('checks the lookups past the API\'s row limit when every one before it has left the schedule', async () => {
+    // Nobody has seen these numbers: off the schedule, and the least recently checked.
+    const left = [1, 2, 3, 4].map((index) => lookup(`lookup-${index}`, { ...unknown, parcel_links: [], last_synced_at: '2026-09-09T06:00:15Z' }));
+    // A provider answered for these, checked later, at the same time, due again 6 hours on.
+    const seen = (id: string) => lookup(id, { ...unknown, parcel_links: [], current_stage: 'in_transit', sync_status: 'ok',
+      tracking_events: [{ provider_event_id: 'unknown:scan', occurred_at: '2026-09-09T09:00:00Z', stage: 'in_transit', description: 'Scan' }],
+      carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {}, last_success_at: '2026-09-09T10:00:15Z',
+        last_event_at: '2026-09-09T09:00:00Z' } } });
+    // The API answers two rows at most: the first page by id holds none of them.
+    await expect(run('2026-09-09T17:00:00Z', { unfiled: [seen('lookup-6'), seen('lookup-5'), ...left], cap: 2 }))
+      .resolves.toEqual(['lookup-5', 'lookup-6']);
+    // The unfiled list comes without the stored rows; the two the run took were read again with them.
+    const unfiled = reads.filter((path) => path.startsWith('/rest/v1/rpc/unfiled_one_off_packages?'));
+    expect(unfiled).toHaveLength(4);
+    expect(unfiled.some((path) => path.includes(STORED_EVENT_IDENTITIES))).toBe(false);
+    expect(reads.filter((path) => path.startsWith('/rest/v1/packages?') && path.includes('id=in.(lookup-5,lookup-6)')
+      && path.includes(`${STORED_EVENT_IDENTITIES}:tracking_events(`))).toHaveLength(1);
   });
 });

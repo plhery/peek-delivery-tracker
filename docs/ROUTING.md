@@ -352,7 +352,10 @@ next run, is a parcel a provider just filed under a carrier with an adapter of i
 the check did not ask (an Add preflight's history skips confirming it): that carrier is asked
 without waiting the provider's 15 minutes, archived or delivered too (`carrier_named_at` in its
 routing, which that check clears and which lapses after 15 minutes). A scheduled run handles at most five due parcels
-per account, round-robin, every 2 minutes. A run starts no check after 4 minutes; the next run takes the parcels it left, which are still due.
+per account, round-robin, every 2 minutes. It lists every open parcel and lookup in pages by id,
+as the database's API ends each answer at its row limit, and takes the least recently checked
+first. Lookups nobody follows are listed without their stored scans, which their cadence doesn't
+read: the run reads those of the ones it takes. A run starts no check after 4 minutes; the next run takes the parcels it left, which are still due.
 
 **Someone is waiting** for a parcel while a notification can reach them: its account has
 browser or phone notifications or the delivery email on and the parcel is not muted for

@@ -3,13 +3,9 @@ package com.plhery.peekdeliverytracker.ui
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
-import android.os.ParcelFileDescriptor
 import android.os.SystemClock
-import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
-import android.view.HapticFeedbackConstants
 import android.view.InputDevice
 import android.view.MotionEvent
 import androidx.activity.ComponentActivity
@@ -22,6 +18,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -30,7 +27,6 @@ import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.hasTestTag
-import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
@@ -48,10 +44,12 @@ import com.plhery.peekdeliverytracker.core.ArchiveSwipeState
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.OAuthFlow
+import com.plhery.peekdeliverytracker.core.api.FriendStamp
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.ui.ParcelWalk.Companion.LONG_MILLIS
+import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_NAME
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_PARCEL
@@ -66,15 +64,26 @@ import com.plhery.peekdeliverytracker.ui.deliveries.INLINE_TOAST
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.cardId
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_PAGE_BACK
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_POPOVER
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_SHARE_ARRIVAL
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_SHARE_STATS
+import com.plhery.peekdeliverytracker.ui.friends.FRIENDS_SHARING
+import com.plhery.peekdeliverytracker.ui.friends.FriendFixtures
+import com.plhery.peekdeliverytracker.ui.friends.friendCardTag
+import com.plhery.peekdeliverytracker.ui.friends.friendStampTag
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_AVERAGE
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COUNTRIES
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_COVER
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_PERSONAL_BEST
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_POPOVER
 import com.plhery.peekdeliverytracker.ui.passport.PASSPORT_STAMP
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
+import com.plhery.peekdeliverytracker.ui.settings.appearanceTag
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
-import java.io.File
+import com.plhery.peekdeliverytracker.ui.theme.AppAppearance
+import com.plhery.peekdeliverytracker.ui.theme.AppearanceStore
 import java.util.UUID
 import kotlin.math.abs
 import kotlin.math.ceil
@@ -87,26 +96,27 @@ import org.junit.Assume.assumeTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.ExternalResource
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
 
 /**
  * What the phone's vibrator is asked to play where the iPhone gives feedback (A-H01, A-H02, A-H03, A-H04, A-H05, A-H06,
- * A-H08, X-AD17), on this device's own window: the tabs and a link bringing the deliveries forward, a delivery's
- * postmark, a parcel added reaching the list's middle, a card's swipe arming archive, Archive from the open card's
- * button and from TalkBack, the archive's shelf, the passport's items, and a tab with the phone's touch feedback off.
- * Emulators don't vibrate, but the vibrator service keeps each request in its history: each step reads
- * `dumpsys vibrator_manager` through UiAutomation before and after, and takes the records of the app's package it added
- * once nothing new has come for a second ([VibratorRecords]). Android 12 names what was asked as prebaked effects (TICK,
- * CLICK, as the window manager maps a constant) or a composition's primitives with their scale; Android 17 gives the
- * constant too (`performHapticFeedback(constant=N)`); [VibratorDump] reads both, and a record it can't read fails the
- * test with its lines. Each step's added lines are saved as hapticswalk/<row>-<step>.txt in the test package's external
- * files, which adb pulls. An impact below full intensity is a primitive where the device's vibrator has it
- * ([Vibrator.areAllPrimitivesSupported]), as Haptics.kt chooses. Signed in as the synthetic reader@example.com (the
- * demo's session for the passport) on fake deliveries ([ParcelWalk]), which reach no server; each test keeps Zurich's
- * time and the captures' moment, and the zone, the phone's touch feedback and the preferences files the fakes write are
- * put back after it. Skipped on a device without a vibrator.
+ * A-H08, C-H04, C-H05, C-H06, X-AD17), on this device's own window: the tabs and a link bringing the deliveries
+ * forward, a delivery's postmark, a parcel added reaching the list's middle, a card's swipe arming archive, Archive
+ * from the open card's button and from TalkBack, the archive's shelf, the passport's items, Settings' appearance, the
+ * profile panel's sharing switches, a friend's stamp popover, and a tab with the phone's touch feedback off (the
+ * invitation's are InvitationDeviceTest's). Emulators don't vibrate, but the vibrator service keeps each request in its
+ * history: each step reads `dumpsys vibrator_manager` through UiAutomation before and after, and takes the records of
+ * the app's package it added once nothing new has come for a second ([Vibrations], [VibratorRecords]). Android 12 names
+ * what was asked as prebaked effects (TICK, CLICK, as the window manager maps a constant) or a composition's primitives
+ * with their scale; Android 17 gives the constant too (`performHapticFeedback(constant=N)`); [VibratorDump] reads both,
+ * and a record it can't read fails the test with its lines. Each step's added lines are saved as
+ * hapticswalk/<row>-<step>.txt in the test package's external files, which adb pulls. An impact below full intensity is
+ * a primitive where the device's vibrator has it ([Vibrator.areAllPrimitivesSupported]), as Haptics.kt chooses. Signed
+ * in as the synthetic reader@example.com (the demo's session for the passport) on fake deliveries and made-up friends
+ * ([ParcelWalk]), which reach no server; each test keeps Zurich's time and the captures' moment, and the zone, the
+ * phone's touch feedback, the appearance and the preferences files the fakes write are put back after it. Skipped on a
+ * device without a vibrator.
  */
 @RunWith(AndroidJUnit4::class)
 class HapticsDeviceTest {
@@ -120,7 +130,7 @@ class HapticsDeviceTest {
 
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
     private val vibrator: Vibrator = instrumentation.targetContext.getSystemService(VibratorManager::class.java).defaultVibrator
-    private val records = VibratorRecords(compose, DeviceShots(compose, FOLDER).folder, vibrator)
+    private val vibrations = Vibrations(compose, DeviceShots(compose, FOLDER).folder, vibrator)
     private val demo: List<Parcel> = DemoCards.parcels()
 
     @Before
@@ -137,7 +147,7 @@ class HapticsDeviceTest {
     @Test
     fun eachTabAsksForOneSelectionAndALinkOneAsTheDeliveriesComeForward() {
         val inbox = DeliveriesInbox()
-        records.mark()
+        vibrations.mark()
         walk.show(demo, inbox = inbox)
         assertNone("A-H01-launch")
 
@@ -171,7 +181,7 @@ class HapticsDeviceTest {
         compose.waitUntil(LONG_MILLIS) {
             walk.onUi { walk.source.onTheWay.ids }.containsAll(listOf(chocolate.id, lamp.id, trainers.id))
         }
-        records.mark()
+        vibrations.mark()
 
         compose.mainClock.autoAdvance = false
         for ((hold, parcels) in listOf("together" to listOf(chocolate, lamp), "alone" to listOf(trainers))) {
@@ -207,7 +217,7 @@ class HapticsDeviceTest {
         walk.show(demo)
         val chocolate = DemoCards.parcel("Belgian chocolate")
         compose.waitUntil(LONG_MILLIS) { chocolate.id in walk.onUi { walk.source.onTheWay.ids } }
-        records.mark()
+        vibrations.mark()
 
         compose.mainClock.autoAdvance = false
         deliver(listOf(chocolate))
@@ -231,7 +241,7 @@ class HapticsDeviceTest {
         walk.reduceMotion = false
         val chocolate = DemoCards.parcel("Belgian chocolate")
         var process by mutableIntStateOf(0)
-        records.mark()
+        vibrations.mark()
         walk.show(demo.map { if (it.id == chocolate.id) it.delivered() else it }, around = { content -> key(process) { content() } })
         walk.settle()
         assertEquals(0, walk.onUi { walk.deliveries.postmarks })
@@ -266,7 +276,7 @@ class HapticsDeviceTest {
         walk.settle()
         compose.onNodeWithTag(ADD_NAME).performTextInput(NAME)
         compose.waitForIdle()
-        records.mark()
+        vibrations.mark()
 
         compose.mainClock.autoAdvance = false
         compose.onNodeWithTag(ADD_SAVE).performClick()
@@ -302,7 +312,7 @@ class HapticsDeviceTest {
         walk.show(lamps)
         val dragged = lamps[3]
         val finger = Finger(dragged)
-        records.mark()
+        vibrations.mark()
 
         finger.down()
         finger.decide()
@@ -329,7 +339,7 @@ class HapticsDeviceTest {
         walk.reduceMotion = false
         val lamps = (1..12).map { syntheticLamp(it, due = it) }
         walk.show(lamps)
-        records.mark()
+        vibrations.mark()
 
         val opened = lamps[2]
         Finger(opened).run {
@@ -377,7 +387,7 @@ class HapticsDeviceTest {
     @Test
     fun theArchivedShelfOpenedAndClosedAsksForOneSelectionEach() {
         walk.show(demo)
-        records.mark()
+        vibrations.mark()
         val header = hasContentDescription("Archived", substring = true) and hasClickAction() and hasAnyAncestor(hasTestTag(PARCEL_LIST))
         // Opened from the list's foot, as the walk opens it; closed from its own item, which then has the list below it.
         for ((step, item, open) in listOf(Triple("open", "foot", true), Triple("closed", ARCHIVE_KEY, false))) {
@@ -403,7 +413,7 @@ class HapticsDeviceTest {
         tapTab(PeekTab.Passport)
         compose.waitUntil(LONG_MILLIS) { walk.exists(PASSPORT_COVER) }
         walk.settle()
-        records.mark()
+        vibrations.mark()
 
         val items = listOf(
             "cover" to PASSPORT_COVER, "average" to PASSPORT_AVERAGE, "personal-best" to PASSPORT_PERSONAL_BEST,
@@ -428,6 +438,85 @@ class HapticsDeviceTest {
         }
     }
 
+    // C-H04 to C-H06: Settings and the friends.
+
+    /**
+     * C-H04: `.sensoryFeedback(.selection, trigger: appearance)`: each appearance chosen in Settings asks for one
+     * selection; the one already chosen, tapped again, nothing. The appearance the phone had is put back.
+     */
+    @Test
+    fun eachAppearanceChosenAsksForOneSelection() {
+        val appearances = AppearanceStore.of(instrumentation.targetContext)
+        val before = appearances.appearance.value
+        try {
+            appearances.set(AppAppearance.Light)
+            walk.show(demo)
+            compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
+            compose.waitUntil(LONG_MILLIS) { walk.exists(SETTINGS_SHEET) }
+            walk.settle()
+            vibrations.mark()
+
+            listOf(AppAppearance.Dark, AppAppearance.System, AppAppearance.Light).forEach { option ->
+                tapIn(appearanceTag(option))
+                compose.waitUntil(LONG_MILLIS) { appearances.appearance.value == option }
+                assertOne("C-H04-${option.rawValue}", selection())
+            }
+            tapIn(appearanceTag(AppAppearance.Light))
+            assertNone("C-H04-light-again")
+        } finally {
+            appearances.set(before)
+        }
+    }
+
+    /**
+     * C-H05: `.impact(weight: .light, intensity: 0.5)` on each change of the profile panel's two sharing switches: one
+     * light impact at 0.5 for each flip, either switch, either way (PRIMITIVE_TICK at 0.5 where the vibrator has it,
+     * CONTEXT_CLICK otherwise). The made-up circle's friends client answers the saves.
+     */
+    @Test
+    fun eachSharingSwitchFlippedAsksForOneLightImpact() {
+        walk.show(demo)
+        tapTab(PeekTab.Friends)
+        compose.waitUntil(LONG_MILLIS) { walk.exists(FRIENDS_SHARING) }
+        tapIn(FRIENDS_SHARING)
+        compose.waitUntil(LONG_MILLIS) { walk.exists(FRIENDS_SHARE_STATS) && walk.exists(FRIENDS_SHARE_ARRIVAL) }
+        walk.settle()
+        vibrations.mark()
+
+        val flips = listOf("stats" to FRIENDS_SHARE_STATS, "arrival" to FRIENDS_SHARE_ARRIVAL, "stats-back" to FRIENDS_SHARE_STATS)
+        flips.forEach { (step, tag) ->
+            val was = toggled(tag)
+            compose.onNodeWithTag(tag, useUnmergedTree = true).performSemanticsAction(SemanticsActions.OnClick)
+            compose.waitUntil(LONG_MILLIS) { toggled(tag) != was }
+            assertOne("C-H05-$step", light(0.5f))
+        }
+    }
+
+    /**
+     * C-H06: `.impact(weight: .light, intensity: 0.6)` whenever a friend's selected stamp changes: one light impact at
+     * 0.6 as a stamp's popover opens, and one as the system's back closes it.
+     */
+    @Test
+    fun aStampsPopoverOpenedAndClosedAsksForOneLightImpactEach() {
+        walk.show(demo)
+        tapTab(PeekTab.Friends)
+        compose.waitUntil(LONG_MILLIS) { walk.exists(friendCardTag(FriendFixtures.ada.id)) }
+        compose.onNodeWithTag(friendCardTag(FriendFixtures.ada.id)).performScrollTo().performClick()
+        compose.waitUntil(LONG_MILLIS) { walk.exists(FRIENDS_PAGE_BACK) }
+        walk.settle()
+        vibrations.mark()
+
+        tapIn(friendStampTag(FriendStamp.Ten))
+        compose.waitUntil(LONG_MILLIS) { walk.exists(FRIENDS_POPOVER) }
+        compose.waitForIdle()
+        assertOne("C-H06-open", light(0.6f))
+        instrumentation.uiAutomation.performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
+        compose.waitUntil(LONG_MILLIS) { !walk.exists(FRIENDS_POPOVER) }
+        compose.waitForIdle()
+        assertTrue(walk.exists(FRIENDS_PAGE_BACK))
+        assertOne("C-H06-back", light(0.6f))
+    }
+
     // X-AD17: the phone's touch feedback off.
 
     /**
@@ -439,67 +528,31 @@ class HapticsDeviceTest {
     @Test
     fun withTouchFeedbackOffATabAsksForNothingThatPlays() {
         walk.show(demo)
-        records.mark()
+        vibrations.mark()
         tapTab(PeekTab.Passport)
         assertOne("X-AD17-feedback-on", selection())
 
         touchFeedback.switch(on = false)
-        records.mark()
+        vibrations.mark()
         tapTab(PeekTab.Deliveries)
         assertNothingPlays("X-AD17-feedback-off")
     }
 
-    // What each moment asks for, by what the device has.
+    // What each moment asks for, by what the device has ([Vibrations]).
 
-    /** `.selection`: SEGMENT_TICK from Android 14, CONTEXT_CLICK before; a prebaked tick on Android 12. */
-    private fun selection(): Asked = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-        Asked.Constant(HapticFeedbackConstants.SEGMENT_TICK, "SEGMENT_TICK", "TICK")
-    } else {
-        Asked.Constant(HapticFeedbackConstants.CONTEXT_CLICK, "CONTEXT_CLICK", "TICK")
-    }
+    private fun selection(): Asked = vibrations.selection()
 
-    /** `Haptics.success()`: CONFIRM, a prebaked click on Android 12. */
-    private fun success(): Asked = Asked.Constant(HapticFeedbackConstants.CONFIRM, "CONFIRM", "CLICK")
+    private fun success(): Asked = vibrations.success()
 
-    /** A medium impact below full intensity: a click at that scale where the vibrator has it, VIRTUAL_KEY otherwise. */
-    private fun medium(intensity: Float): Asked =
-        if (vibrator.areAllPrimitivesSupported(VibrationEffect.Composition.PRIMITIVE_CLICK)) {
-            Asked.Primitive("CLICK", intensity)
-        } else {
-            Asked.Constant(HapticFeedbackConstants.VIRTUAL_KEY, "VIRTUAL_KEY", "CLICK")
-        }
+    private fun medium(intensity: Float): Asked = vibrations.medium(intensity)
 
-    /** A light impact below full intensity: a tick at that scale where the vibrator has it, CONTEXT_CLICK otherwise. */
-    private fun light(intensity: Float): Asked =
-        if (vibrator.areAllPrimitivesSupported(VibrationEffect.Composition.PRIMITIVE_TICK)) {
-            Asked.Primitive("TICK", intensity)
-        } else {
-            Asked.Constant(HapticFeedbackConstants.CONTEXT_CLICK, "CONTEXT_CLICK", "TICK")
-        }
+    private fun light(intensity: Float): Asked = vibrations.light(intensity)
 
-    private fun raw(added: List<RecordedVibration>): String = added.joinToString("\n") { it.line }.ifEmpty { "(nothing)" }
+    private fun assertNone(step: String) = vibrations.assertNone(step)
 
-    /** The step asked the vibrator for nothing. */
-    private fun assertNone(step: String) {
-        val added = records.step(step, "nothing", 0)
-        assertTrue("$step: nothing asked for, but:\n${raw(added)}", added.isEmpty())
-    }
+    private fun assertOne(step: String, asked: Asked) = vibrations.assertOne(step, asked)
 
-    /** The step asked the vibrator for `asked`, once, in a record this test can read. */
-    private fun assertOne(step: String, asked: Asked) {
-        val added = records.step(step, "one ${asked.description}", 1)
-        assertEquals("$step: one vibration for ${asked.description}, not:\n${raw(added)}", 1, added.size)
-        val vibration = added.single()
-        assertTrue("$step: a record this test can't read:\n${raw(added)}", vibration.read)
-        assertTrue("$step: ${asked.description}, not:\n${raw(added)}", asked.playedBy(vibration))
-    }
-
-    /** Nothing the step asked for plays: no request, or one the vibrator service ignored. */
-    private fun assertNothingPlays(step: String) {
-        val added = records.step(step, "nothing that plays: no request, or one ignored for the settings", 0)
-        assertTrue("$step: at most the tap's request, not:\n${raw(added)}", added.size <= 1)
-        assertTrue("$step: nothing played, but:\n${raw(added)}", added.all { it.ignored })
-    }
+    private fun assertNothingPlays(step: String) = vibrations.assertNothingPlays(step)
 
     // The window.
 
@@ -508,6 +561,16 @@ class HapticsDeviceTest {
 
     private fun selected(tab: PeekTab): Boolean =
         compose.onAllNodes(tabItem(tab)).fetchSemanticsNodes().any { it.config.getOrNull(SemanticsProperties.Selected) == true }
+
+    /** A finger on what has `tag`, scrolled into the window first. */
+    private fun tapIn(tag: String) {
+        compose.onNodeWithTag(tag).performScrollTo().performClick()
+        compose.waitForIdle()
+    }
+
+    /** Whether the switch tagged `tag` is on. */
+    private fun toggled(tag: String): Boolean = compose.onNodeWithTag(tag, useUnmergedTree = true).fetchSemanticsNode()
+        .config.getOrNull(SemanticsProperties.ToggleableState) == ToggleableState.On
 
     /** A finger on the tab bar's item for `tab`, and the tab chosen. */
     private fun tapTab(tab: PeekTab) {
@@ -683,216 +746,5 @@ class HapticsDeviceTest {
         val ADDED: UUID = UUID(0, 5_799)
         const val NUMBER = "1Z999AA10123456784"
         const val NAME = "Running shoes"
-    }
-}
-
-/** How long the vibrator's history stands still before a step's vibrations are taken as all there. */
-private const val QUIET_MILLIS = 1_000L
-
-/** `command`'s output, run by the shell through UiAutomation, once it has ended. */
-private fun shell(command: String): String = ParcelFileDescriptor.AutoCloseInputStream(
-    InstrumentationRegistry.getInstrumentation().uiAutomation.executeShellCommand(command),
-).use { it.readBytes().decodeToString() }
-
-/** What a step should have asked the vibrator for. */
-private sealed interface Asked {
-    val description: String
-
-    fun playedBy(vibration: RecordedVibration): Boolean
-
-    /**
-     * `View.performHapticFeedback(constant)`: the constant where the record names it (Android 17), else, with no
-     * primitive, the prebaked `effect` the window manager plays for it (Android 12).
-     */
-    data class Constant(val constant: Int, val name: String, val effect: String) : Asked {
-        override val description: String get() = "$name (constant $constant, prebaked $effect)"
-
-        override fun playedBy(vibration: RecordedVibration): Boolean =
-            vibration.constant?.let { it == constant } ?: (vibration.primitives.isEmpty() && effect in vibration.effects)
-    }
-
-    /** A composition of the primitive `name` at `scale`, the scale asked for being in the record. */
-    data class Primitive(val name: String, val scale: Float) : Asked {
-        override val description: String get() = "PRIMITIVE_$name at $scale"
-
-        override fun playedBy(vibration: RecordedVibration): Boolean =
-            vibration.constant == null && vibration.primitives.any { (primitive, at) -> primitive == name && abs(at - scale) < 0.01f }
-    }
-}
-
-/**
- * One record of the vibrator's history, as [VibratorDump.read] makes it out: the constant it names, the prebaked
- * effects and the primitives with their scale in what was played and what was asked (both, where the touch-feedback
- * strength scaled it), and its status (finished, ignored_for_settings...).
- */
-private data class RecordedVibration(
-    val line: String,
-    val constant: Int?,
-    val effects: Set<String>,
-    val primitives: List<Pair<String, Float>>,
-    val status: String?,
-) {
-    val read: Boolean get() = constant != null || effects.isNotEmpty() || primitives.isNotEmpty()
-    val ignored: Boolean get() = status?.startsWith("ignored") == true
-}
-
-/**
- * `dumpsys vibrator_manager` read without knowing each release's wording: the lines under a history's header
- * ("Previous vibrations for usage TOUCH:" on Android 12, "Recent vibrations:" and a usage's on 17, not the aggregated
- * history, which repeats them), kept where they name the app's package, each by its time; and in each, the names and
- * numbers both forms give: `Prebaked{effect=TICK` or `Prebaked=TICK(`, `Primitive{primitive=PRIMITIVE_CLICK, scale=0.9`
- * or `Primitive=CLICK(scale=0.90`, an effect's or primitive's id in place of its name, and `constant=N`.
- */
-private object VibratorDump {
-    private val time = Regex("""\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}""")
-    private val history = Regex("""(?i)^m?(previous|recent)\b""")
-    private val constant = Regex("""\bconstant=(-?\d+)""")
-    private val prebaked = Regex("""Prebaked(?:Segment)?\W{1,2}(?:m?[Ee]ffect(?:Id)?=)?(?:EFFECT_)?([A-Z][A-Z_0-9]*|\d+)""")
-    private val primitive =
-        Regex("""Primitive(?:Segment)?\W{1,2}(?:primitive=|mPrimitiveId=|id=)?(?:PRIMITIVE_)?([A-Z][A-Z_]*|\d+)\W{1,2}(?:m?[sS]cale[=:]\s*)?(\d+(?:[.,]\d+)?)""")
-
-    /** A primitive named as the vibrator's info lists them, `CLICK(0.90`, where no segment says so. */
-    private val shortPrimitive = Regex("""\b(NOOP|CLICK|THUD|SPIN|QUICK_RISE|SLOW_RISE|QUICK_FALL|TICK|LOW_TICK)\(\s*(?:scale=)?(\d+(?:\.\d+)?)""")
-    private val status = Regex("""(?i)\b(running|finished\w*|forwarded\w*|cancelled\w*|ignored\w*)\b""")
-    private val effects = mapOf(0 to "CLICK", 1 to "DOUBLE_CLICK", 2 to "TICK", 3 to "THUD", 4 to "POP", 5 to "HEAVY_CLICK", 21 to "TEXTURE_TICK")
-    private val primitives =
-        mapOf(0 to "NOOP", 1 to "CLICK", 2 to "THUD", 3 to "SPIN", 4 to "QUICK_RISE", 5 to "SLOW_RISE", 6 to "QUICK_FALL", 7 to "TICK", 8 to "LOW_TICK")
-
-    /** The records of `app`'s vibrations in the histories of `dump`, by their time (the whole line where none shows). */
-    fun records(dump: String, app: String): Map<String, String> {
-        val own = Regex("""(?<![\w.])${Regex.escape(app)}(?![\w.])""")
-        val headers = mutableListOf<Pair<Int, String>>()
-        val found = LinkedHashMap<String, String>()
-        for (line in dump.lineSequence()) {
-            val text = line.trim()
-            if (text.isEmpty()) continue
-            val indent = line.length - line.trimStart().length
-            val header = text.endsWith(":") && text.none { it in "|{},=" }
-            while (headers.isNotEmpty() && (headers.last().first > indent || (headers.last().first == indent && header))) {
-                headers.removeAt(headers.lastIndex)
-            }
-            if (header) {
-                headers += indent to text
-                continue
-            }
-            val inHistory = headers.any { history.containsMatchIn(it.second) } && headers.none { it.second.contains("aggregat", ignoreCase = true) }
-            if (inHistory && own.containsMatchIn(text)) found[time.find(text)?.value ?: text] = text
-        }
-        return found
-    }
-
-    fun read(line: String): RecordedVibration {
-        val asked = constant.find(line)?.groupValues?.get(1)?.toIntOrNull()
-        val named = prebaked.findAll(line).map { name(it.groupValues[1], effects) }.toSet()
-        var composed = primitive.findAll(line).mapNotNull { match ->
-            match.groupValues[2].replace(',', '.').toFloatOrNull()?.let { name(match.groupValues[1], primitives) to it }
-        }.toList()
-        if (composed.isEmpty()) {
-            composed = shortPrimitive.findAll(line).mapNotNull { match -> match.groupValues[2].toFloatOrNull()?.let { match.groupValues[1] to it } }.toList()
-        }
-        return RecordedVibration(line, asked, named, composed, status.find(line)?.groupValues?.get(1)?.lowercase())
-    }
-
-    private fun name(value: String, ids: Map<Int, String>): String = value.toIntOrNull()?.let { ids[it] ?: value } ?: value
-}
-
-/**
- * The app's vibrations in the vibrator service's history, read around each step of a test: [mark] takes what the
- * history holds once nothing new has come for [QUIET_MILLIS]; [step] waits, up to the device tests' time, for the
- * vibrations the step should have asked for, then for the history to stand still, and returns the records it added,
- * their lines saved as [folder]/<step>.txt after what was asked and what the device has. Written by the shell, as
- * [DeviceShots] writes its shots.
- */
-private class VibratorRecords(
-    private val compose: AndroidComposeTestRule<*, *>,
-    private val folder: File,
-    private val vibrator: Vibrator,
-) {
-    private val app = InstrumentationRegistry.getInstrumentation().targetContext.packageName
-    private var marked: Set<String>? = null
-
-    private fun records(): Map<String, String> = VibratorDump.records(shell("dumpsys vibrator_manager"), app)
-
-    private fun quiet(): Map<String, String> {
-        var last = records()
-        var since = SystemClock.uptimeMillis()
-        runCatching {
-            compose.waitUntil(LONG_MILLIS) {
-                val now = records()
-                if (now.keys != last.keys) {
-                    last = now
-                    since = SystemClock.uptimeMillis()
-                }
-                SystemClock.uptimeMillis() - since >= QUIET_MILLIS
-            }
-        }
-        return last
-    }
-
-    fun mark() {
-        marked = quiet().keys
-    }
-
-    fun step(name: String, asked: String, expected: Int): List<RecordedVibration> {
-        val before = checkNotNull(marked) { "No mark before $name" }
-        if (expected > 0) runCatching { compose.waitUntil(LONG_MILLIS) { (records().keys - before).size >= expected } }
-        val now = quiet()
-        marked = now.keys
-        val added = now.filterKeys { it !in before }.values.toList()
-        save(name, asked, added)
-        return added.map(VibratorDump::read)
-    }
-
-    private fun save(name: String, asked: String, lines: List<String>) {
-        val click = vibrator.areAllPrimitivesSupported(VibrationEffect.Composition.PRIMITIVE_CLICK)
-        val tick = vibrator.areAllPrimitivesSupported(VibrationEffect.Composition.PRIMITIVE_TICK)
-        val text = buildString {
-            appendLine("# $name: asked for $asked")
-            appendLine("# Android SDK ${Build.VERSION.SDK_INT}; PRIMITIVE_CLICK ${if (click) "supported" else "missing"}, PRIMITIVE_TICK ${if (tick) "supported" else "missing"}")
-            lines.forEach { appendLine(it) }
-        }
-        val bytes = text.toByteArray()
-        val file = File(folder, "$name.txt")
-        shell("mkdir -p $folder")
-        val (output, input) = InstrumentationRegistry.getInstrumentation().uiAutomation.executeShellCommandRw("dd of=$file")
-        ParcelFileDescriptor.AutoCloseOutputStream(input).use { it.write(bytes) }
-        // dd has ended once its output closes.
-        ParcelFileDescriptor.AutoCloseInputStream(output).use { it.readBytes() }
-        assertEquals("$file written", bytes.size.toString(), shell("stat -c %s $file").trim())
-    }
-}
-
-/**
- * The phone's touch feedback (`haptic_feedback_enabled`) on for each test, as phones come, a test switching it off as it
- * needs, and what the phone had put back after it; set by the shell, which may write the system's settings. From
- * Android 13 the vibrator service follows the setting a moment later (touch vibrations OFF in its dump), which [switch]
- * waits for, as far as the dump says.
- */
-private class TouchFeedback(private val compose: AndroidComposeTestRule<*, *>) : ExternalResource() {
-    private var before = ""
-
-    override fun before() {
-        before = shell("settings get system $SETTING").trim()
-        switch(on = true)
-    }
-
-    override fun after() {
-        if (before.isEmpty() || before == "null") shell("settings delete system $SETTING") else shell("settings put system $SETTING $before")
-        if (before != "0") awaitTouch(on = true)
-    }
-
-    fun switch(on: Boolean) {
-        shell("settings put system $SETTING ${if (on) 1 else 0}")
-        awaitTouch(on)
-    }
-
-    private fun awaitTouch(on: Boolean) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
-        runCatching { compose.waitUntil(LONG_MILLIS) { TOUCH_OFF.containsMatchIn(shell("dumpsys vibrator_manager")) != on } }
-    }
-
-    private companion object {
-        const val SETTING = "haptic_feedback_enabled"
-        val TOUCH_OFF = Regex("""\bTOUCH\s*=\s*OFF\b""")
     }
 }

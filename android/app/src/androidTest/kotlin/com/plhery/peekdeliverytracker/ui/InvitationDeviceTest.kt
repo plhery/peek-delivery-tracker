@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.SystemClock
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.provider.Settings
 import android.text.InputType
 import android.view.WindowManager
@@ -97,6 +99,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -120,6 +123,11 @@ import org.junit.runner.RunWith
  * off while it opens, tapped through the screen (C-G01); the profile's sheet thrown down by its grabber, its keyboard
  * taken down by a finger dragging the sheet, the nickname's Done, and the sheet held while it joins, against a throw
  * and the system's back (C-G07, C-G06, C-G11); and the lockup on one line at the largest text (C-AX12).
+ *
+ * What the arrival asks the phone's vibrator for (C-H01, C-H02, C-H03), read from the vibrator service's history as
+ * HapticsDeviceTest reads it ([Vibrations]), each step saved as hapticswalk/<row>-<step>.txt: the parcel opening, the
+ * sign-in taking the welcome's place, the system's back shutting it, and the receipt's stamp landing. The phone's touch
+ * feedback is on for each test and put back after it; these steps are skipped on a device without a vibrator.
  */
 @RunWith(AndroidJUnit4::class)
 class InvitationDeviceTest {
@@ -127,10 +135,13 @@ class InvitationDeviceTest {
     private val name = TestName()
 
     @get:Rule
-    val rules: RuleChain = RuleChain.outerRule(name).around(MadePreferences()).around(ZurichTime()).around(compose)
+    val rules: RuleChain =
+        RuleChain.outerRule(name).around(MadePreferences()).around(ZurichTime()).around(compose).around(TouchFeedback(compose))
 
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
     private val shots = DeviceShots(compose, "invite")
+    private val vibrator: Vibrator = instrumentation.targetContext.getSystemService(VibratorManager::class.java).defaultVibrator
+    private val vibrations = Vibrations(compose, DeviceShots(compose, "hapticswalk").folder, vibrator)
     private val store = AppearanceStore.of(instrumentation.targetContext)
     private val appearanceBefore = store.appearance.value
     private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 7), email = "reader@example.com"))
@@ -303,6 +314,48 @@ class InvitationDeviceTest {
         shots.take("${name.methodName}-sheet")
         acceptedThenTheFriends(FRIENDS_SAVE)
         shots.take(name.methodName)
+    }
+
+    // C-H01 to C-H03: what the arrival asks the vibrator for.
+
+    /**
+     * C-H02, C-H03: signed out, the parcel tapped asks for a soft impact at 0.65 as it starts to open, then a light one
+     * at 0.35 as the sign-in takes the welcome's place; the system's back shutting the parcel asks for nothing.
+     */
+    @Test
+    fun signedOutTheParcelAsksForASoftImpactThenTheSignInALightOne() {
+        assumeTrue("No vibrator to ask", vibrator.hasVibrator())
+        show(AuthenticationState.Welcome, signIn = true)
+        follow()
+        vibrations.mark()
+        compose.onNodeWithTag(WELCOME_OPEN_PARCEL).performClick()
+        compose.waitUntil(5_000) { source.invitation.opened && !exists(INVITATION_WELCOME) }
+        compose.waitForIdle()
+        vibrations.assertInOrder("C-H02-C-H03-open-signed-out", vibrations.soft(0.65f), vibrations.light(0.35f))
+        back()
+        compose.waitUntil(5_000) { exists(WELCOME_OPEN_PARCEL) }
+        compose.waitForIdle()
+        assertFalse(source.invitation.opened)
+        vibrations.assertNone("C-H03-back")
+    }
+
+    /**
+     * C-H02, C-H01: signed in, the parcel tapped asks for its soft impact at 0.65 and no light one, the acceptance not
+     * being the sign-in; accepted, the receipt's stamp lands with a soft impact at 0.45, and the friends come after it
+     * with nothing more.
+     */
+    @Test
+    fun signedInTheParcelAsksForASoftImpactAndTheReceiptsStampAnother() {
+        assumeTrue("No vibrator to ask", vibrator.hasVibrator())
+        show()
+        follow()
+        vibrations.mark()
+        press(WELCOME_OPEN_PARCEL, until = INVITATION_ACCEPT)
+        vibrations.assertOne("C-H02-open-signed-in", vibrations.soft(0.65f))
+        compose.onNodeWithTag(INVITATION_ACCEPT).performScrollTo().performClick()
+        compose.waitUntil(5_000) { !source.invitation.isPresenting && exists(PeekTab.Friends.screen) }
+        compose.waitForIdle()
+        vibrations.assertOne("C-H01-stamp", vibrations.soft(0.45f))
     }
 
     private val localizer = Localizer(AppLanguage.En, variant = "android")

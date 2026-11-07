@@ -1318,9 +1318,8 @@ describe('carrier detection', () => {
   it('tipsa — TIPSA', () => {
     // REPORTED REAL merchant-confirmed tracking assignment, separate from the order number.
     // Source: https://www.ocu.org/reclamar/lista-reclamaciones-publicas/no-recibido-pedido/ca39ecd30bb517b380
-    const match = detectCarrierMatch('8104405448');
-    expect(match).toMatchObject({ carrier: 'unknown', confidence: 'low' });
-    expect(match.candidates).toContain('tipsa');
+    // TIPSA's tracker needs the 22-digit reference, so detection need not offer TIPSA for ten digits.
+    expect(detectCarrierMatch('8104405448')).toMatchObject({ carrier: 'unknown', confidence: 'low' });
     // REPORTED REAL 22-digit reference: agency codes that start with 0 make TIPSA the first suggestion.
     // Source: https://www.ocu.org/reclamar/lista-reclamaciones-publicas/incumplimiento-en-la-entrega-d/fac22bd26674a21683
     expect(detectCarrierMatch('0460040240008103140542')).toMatchObject({
@@ -1512,7 +1511,7 @@ describe('ambiguous number shapes', () => {
     expect(detectCarrierMatch('1234567890')).toEqual({
       carrier: 'unknown',
       confidence: 'low',
-      candidates: expect.arrayContaining(['dhl', 'mondial-relay', 'relais-colis', 'tipsa', 'estafeta']),
+      candidates: expect.arrayContaining(['dhl', 'mondial-relay', 'relais-colis', 'estafeta']),
       preferred: [],
     });
   });

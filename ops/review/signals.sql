@@ -5,17 +5,26 @@
 -- (the app's routing). Numbers appear only as their shape, and free text with its rare words,
 -- which can name a place, a shop or a person, masked. Read-only; see docs/OBSERVABILITY.md.
 --
---   psql "$DATABASE_URL" -v hours=1 -f ops/review/signals.sql
+--   psql "$DATABASE_URL" -v hours=1 [-v until=2026-01-01T09:00Z] -f ops/review/signals.sql
+--
+-- The window is the `hours` before `until`, a time with its zone (default now), so that a round
+-- that starts late still reads its own hour. Lists of what stands now (parcels a provider tracks,
+-- planned steps passed, parcels not checked, feedback not reviewed) read the parcels as they are.
 \set ON_ERROR_STOP on
 \set QUIET on
 \if :{?hours}
 \else
   \set hours 1
 \endif
+\if :{?until}
+  \set upto '(' :'until' '::timestamptz)'
+\else
+  \set upto '(now())'
+\endif
 set session characteristics as transaction read only;
 \pset null '-'
 \pset footer off
-\set since '(now() - make_interval(hours => :hours))'
+\set since '(:upto - make_interval(hours => :hours))'
 
 \echo
 \echo '== Routing signals: numbers seen in the window (new: first seen in it)'
@@ -24,7 +33,7 @@ select signal, carrier, subject,
        count(*) filter (where first_seen >= :since) as new, count(*) as numbers,
        array_to_string((array_agg(distinct private.tracking_number_pattern(tracking_number)))[1:3], '; ') as patterns
 from public.tracking_routing_signals
-where last_seen >= :since and reviewed_at is null
+where last_seen >= :since and first_seen < :upto and reviewed_at is null
 group by signal, carrier, subject
 order by new desc, numbers desc, signal, carrier, subject;
 
@@ -36,7 +45,7 @@ order by new desc, numbers desc, signal, carrier, subject;
 with checks as (
   select package_id, configured_carrier as carrier, coalesce(source_carrier, '-') as served_by, anomaly_codes
   from public.tracking_sync_attempts
-  where started_at >= :since
+  where started_at >= :since and started_at < :upto
 ),
 scans as (
   select package_id, occurred_at, bool_and(stage = 'in_transit') as transit,
@@ -61,7 +70,7 @@ looping as (
   ) as repeated
   where alike >= 3
   group by package_id
-  having max(occurred_at) >= now() - interval '3 days'
+  having max(occurred_at) >= :upto - interval '3 days'
 )
 select carrier, served_by, anomaly,
        -- A worker that died mid-check and a generated track are the app's; every other anomaly is a carrier's or provider's answer.
@@ -89,7 +98,7 @@ select left(a.package_id::text, 8) as parcel, a.configured_carrier as carrier,
 from (
   select distinct on (package_id) package_id, configured_carrier, source_carrier, started_at
   from public.tracking_sync_attempts
-  where started_at >= :since and 'future_event_timestamp' = any(anomaly_codes)
+  where started_at >= :since and started_at < :upto and 'future_event_timestamp' = any(anomaly_codes)
   order by package_id, started_at
 ) as a
 left join public.packages as p on p.id = a.package_id
@@ -129,8 +138,9 @@ ranked as (
            coalesce(early.to_early, case when s.to_stage in ('delivered', 'returned') then 5 else 4 end) as to_rank
   ) as rank
 ),
+-- The stage a check saved is read from the next one, which may be after the window.
 back as (
-  select * from ranked where to_rank < from_rank
+  select * from ranked where to_rank < from_rank and started_at < :upto
 )
 select carrier, from_stage, to_stage, carrier is distinct from next_carrier as carrier_changed,
        hand.fix is not null as by_hand,
@@ -173,7 +183,7 @@ with dropped as (
     where a.package_id = p.id and a.started_at <= p.expected_delivery_changed_at
     order by a.started_at desc limit 1
   ) as a on true
-  where p.expected_delivery is null and p.expected_delivery_changed_at >= :since
+  where p.expected_delivery is null and p.expected_delivery_changed_at >= :since and p.expected_delivery_changed_at < :upto
     and p.current_stage in ('pending', 'registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery')
 )
 select carrier, current_stage as stage, 'delivery-tracker' as lane, count(*) as parcels,
@@ -244,10 +254,10 @@ select t.id, t.shown as carrier, coalesce(t.provider_code, '-') as code,
 from templates as t
 cross join regexp_matches(t.template, '[[:alpha:]]+|[^[:alpha:]]+', 'g') with ordinality as token(part, n)
 left join common on common.word = token.part[1]
-where t.reviewed_at is null and t.last_seen >= :since
+where t.reviewed_at is null and t.last_seen >= :since and t.first_seen < :upto
   and not (t.carrier <> 'unknown' and exists (
     select from public.tracking_review_runs as run
-    where run.started_at > t.last_seen and run.started_at < now() - interval '2 days'
+    where run.started_at > t.last_seen and run.started_at < :upto - interval '2 days'
       and run.version is distinct from t.last_seen_version))
 group by t.id, t.shown, t.provider_code, t.chosen_stage, t.first_seen, t.count
 order by new desc, sightings desc, carrier, wording
@@ -265,7 +275,7 @@ from public.tracking_support_cases
 -- A case held for a carrier recognition asks only through a browser waits until its hold ends.
 -- One whose parcel's latest check left no reason, its carrier having confirmed the number, needs
 -- no work: the next release's replay marks it fixed (reviewQueues.ts).
-where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_seen) <= now() and fix_status = 'open'
+where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_seen) < :upto and fix_status = 'open'
   and cardinality(reasons) > 0
 group by 1, 2, 3, 4
 order by cases desc, carrier;
@@ -287,13 +297,13 @@ left join lateral (
            select 1 from public.tracking_health_samples refresh
            where refresh.attempt_id = sample.attempt_id and refresh.kind = 'refresh' and refresh.healthy) as rescued
   from public.tracking_health_samples sample
-  where sample.kind = i.kind and sample.subject = i.subject and sample.observed_at >= :since
+  where sample.kind = i.kind and sample.subject = i.subject and sample.observed_at >= :since and sample.observed_at < :upto
 ) s on true
-where i.last_notified_at >= :since or i.active or i.pending is not null
+where (i.last_notified_at >= :since and i.last_notified_at < :upto) or i.active or i.pending is not null
 group by i.kind, i.subject, i.active, i.last_notified_at, i.pending is not null
 -- An open incident whose checks answered in the window, or that nothing checked, is not listed again
 -- until it fails, its six-hourly reminder goes out, or it recovers or closes.
-having i.last_notified_at >= :since or i.pending is not null or count(s.healthy) filter (where not s.healthy) > 0
+having (i.last_notified_at >= :since and i.last_notified_at < :upto) or i.pending is not null or count(s.healthy) filter (where not s.healthy) > 0
 order by i.active desc, i.last_notified_at desc;
 
 \echo '== Unfinished parcels a provider tracks, by the carrier that could take them (new: added in the window)'
@@ -311,7 +321,7 @@ order by i.active desc, i.last_notified_at desc;
 \echo '   else the one whose input Peek asks its reader for'
 -- private.tracking_gaps classifies them, as the carrier dashboard's goals count them.
 select carrier, could_take, provider, lane, why,
-       count(*) filter (where created_at >= :since) as new, count(*) as parcels,
+       count(*) filter (where created_at >= :since and created_at < :upto) as new, count(*) as parcels,
        array_to_string((array_agg(distinct private.tracking_number_pattern(tracking_number)))[1:3], '; ') as patterns
 from private.tracking_gaps
 where provider is not null
@@ -323,7 +333,7 @@ order by parcels desc, could_take, provider;
 \echo '   and routing deferrals left out. Lookups nobody follows leave the schedule (the dormant lane above).'
 select case when package.user_id is not null then 'account' else 'lookup' end as kind, package.carrier,
        package.carrier_data->>'tracking_provider' as provider, package.sync_status,
-       count(*) filter (where package.created_at >= :since) as new, count(*) as parcels,
+       count(*) filter (where package.created_at >= :since and package.created_at < :upto) as new, count(*) as parcels,
        min(package.last_synced_at)::timestamp(0) as oldest_check
 from public.packages as package
 where package.archived_at is null and package.current_stage not in ('pending', 'delivered', 'returned')
@@ -341,7 +351,7 @@ order by parcels desc, kind, carrier;
 \echo '   (new: added in the window). A lookup with a scan, an alert or a link opened in 24 h; routing deferrals, a'
 \echo '   delivery postcode awaited and scans over 14 days old left out. Many at once: the runs'' lookups are full.'
 select package.carrier, package.sync_status,
-       count(*) filter (where package.created_at >= :since) as new, count(*) as parcels,
+       count(*) filter (where package.created_at >= :since and package.created_at < :upto) as new, count(*) as parcels,
        min(package.last_synced_at)::timestamp(0) as oldest_check
 from public.packages as package
 where package.one_off and package.archived_at is null and package.current_stage not in ('pending', 'delivered', 'returned')
@@ -366,12 +376,12 @@ order by parcels desc, carrier;
 select format('%s right, %s wrong, %s found elsewhere', count(*) filter (where answer = 'right'),
          count(*) filter (where answer = 'wrong'), count(*) filter (where answer = 'found_elsewhere')) as counts
 from public.parcel_feedback
-where created_at >= :since \gset feedback_
+where created_at >= :since and created_at < :upto \gset feedback_
 \echo '   answers given in the window:' :feedback_counts
 -- A reader's words can quote a number or name a person or a shop: a note is only counted, a
 -- carrier's name shows its first three words with digits masked, and a tracking page shows its
 -- host alone.
-select f.id, f.updated_at >= :since as new, to_char(f.created_at, 'YYYY-MM-DD HH24:MI') as given,
+select f.id, f.updated_at >= :since and f.updated_at < :upto as new, to_char(f.created_at, 'YYYY-MM-DD HH24:MI') as given,
        f.carrier, f.answer,
        coalesce(nullif(array_to_string(f.reasons, ','), ''), '-') as reasons,
        case when f.note is null then 'no' else 'yes' end as note,

@@ -168,7 +168,7 @@ another stage.
 | `early_stage_regression` | A scan only announcing or accepting the parcel came after a later stage, which was kept. Only the check that brings the scan flags it, not later checks that repeat it or answers that only lack the later scans. A delivery partner starting its leg after the handover, or the parcel's own carrier after another carrier's scans, is no step back unless its own scans had passed that stage ([ROUTING.md](ROUTING.md)) |
 | `provider_clock_offset` | One scan reached the parcel on two clocks a zone apart: a provider read it in the wrong zone, or a scraper fix moved the provider's clock and its rows followed. Also a provider's copy stored whole hours after the carrier's scan, unless the carrier has a scan in the copy's own minute, or dated past the check that returned it. A scan dated by its day alone has no clock and shows no offset, nor does a copy that puts right a zone the scraper deduced for a carrier's wall clock. Each stored scan shows it once, at the check that first meets it, not at the checks after that repeat the copy ([ROUTING.md](ROUTING.md)) |
 | `progress_disappeared` | The carrier's own adapter or the provider its saved summary came from answers without progress; for a carrier without an adapter, exhausted providers return only thin answers and the routing failure threshold is reached. The saved state is kept and the check ends as an error, with `error_type` `ProgressDisappeared`. The carrier's own answer listing fewer of its own stored scans, each stored one in its stored stage and none newer than its stored progress, is not: the saved state is kept and the check answered (`scans_withdrawn`). Nor is its answer behind progress that only other sources' rows show, which carries no anomaly, or one that lists every stored scan of its own but reads some in an earlier stage (`stages_reread`). Nor is its answer the sync reads past the label, such as one whose scan no rule reads yet is stored in transit. |
-| `scans_withdrawn` | A source's first answer without scans it had for the parcel: its own carrier listing fewer of its own stored scans (see `progress_disappeared`), which answers; a delivery partner falling behind rows of its own and no longer listing them, which the parcel's stage outlasts; or every source answering without history for a parcel that only showed its label, which waits. Each source signals it once per parcel; later such answers carry no anomaly |
+| `scans_withdrawn` | A source's first answer without scans it had for the parcel: its own carrier listing fewer of its own stored scans (see `progress_disappeared`), which answers; a delivery partner falling behind rows of its own and no longer listing them, which the parcel's stage outlasts; or every source answering without history for a parcel that only showed its label, which waits, once a source whose row showed the label was among them. Each source signals it once per parcel; later such answers carry no anomaly |
 | `stages_reread` | The parcel's own carrier lists every stored scan of its own and nothing newer than the stored progress, but the installed scraper reads some of them in an earlier stage, so the answer shows no progress. The saved state is kept and the check answered. Each such check signals it until the release's replay of the stored scans steps the rows and the parcel back ([SCRAPER.md](SCRAPER.md)) |
 | `fallback_without_progress` | A different fallback provider answers without progress for a carrier with its own adapter, or a thin answer for a carrier without one stays below the routing failure threshold. The saved state is kept and the check ends as waiting. |
 | `worker_abandoned_attempt` | The check was still running after 30 min, usually because its worker died, and was marked `abandoned` by the audit maintenance |
@@ -464,7 +464,8 @@ them, and the "Review signals" row of the carrier dashboard shows them beside sy
 anomalies and health incidents.
 
 [ops/review/signals.sql](../ops/review/signals.sql) is the hourly review of every queue. For
-a window of hours (1 by default, 24 for the daily review) it lists routing signals, sync
+a window of hours (1 by default, 24 for the daily review) ending at `until` (now by default, so
+that a round that starts late can still read its own hour) it lists routing signals, sync
 anomalies (with `looping_track` for a parcel whose moves in transit, each to a new place, repeat one
 interval to within 2 s three times or more: a generated track, which the app also flags to the parcel's readers,
 leaving it off the map and its moves unannounced ([generatedTrack.ts](../src/lib/generatedTrack.ts))), the parcels first flagged in the window with a scan
@@ -493,6 +494,7 @@ three words:
 
 ```sh
 psql "$DATABASE_URL" -v hours=1 -f ops/review/signals.sql
+psql "$DATABASE_URL" -v hours=1 -v until=2026-01-01T09:00Z -f ops/review/signals.sql
 ```
 
 Each row names the lane that acts on it:

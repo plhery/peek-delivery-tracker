@@ -359,6 +359,7 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
 
 # The hourly review reads every queue: it must still run on the schema.
 psql "$database_url" -X -v hours=24 -f "$repo_root/ops/review/signals.sql" > /dev/null
+psql "$database_url" -X -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" > /dev/null
 
 # Closing a reader's answer marks it reviewed once.
 feedback_id=$(psql "$database_url" -X -Atq -v ON_ERROR_STOP=1 -c "

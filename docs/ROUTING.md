@@ -146,7 +146,8 @@ progress the parcel hasn't had yet and names a carrier that said not found, that
 asked again in the same check. A pending parcel, or one that only showed its label, whose failures
 are all not-found or `no_history` shows as waiting, not as an outage, unless its own carrier asks
 for an input: the missed checks then show that request. The first such check of a parcel that
-showed its label carries the `scans_withdrawn` signal ([OBSERVABILITY.md](OBSERVABILITY.md)). A provider resting on a rate limit was
+showed its label carries the `scans_withdrawn` signal ([OBSERVABILITY.md](OBSERVABILITY.md)), once a source whose
+row showed the label answered without history in that check: one the check did not ask withdrew nothing. A provider resting on a rate limit was
 not asked, and a universal provider that failed (transport, verification, an unreadable
 answer) did not answer, so neither changes that; a carrier's own adapter failing does. When a failed direct adapter recovers, it
 takes over from the universal provider again.
@@ -372,8 +373,9 @@ alone (`last_update_local`), is from an earlier day on its clock, the parcel kee
 regular cadence until the carrier scans it again. Its clock is the offset the newest scan
 states, "+00:00" included (a Canary Islands office in winter), else the zone the delivery
 window below is read in (a "Z" is a UTC instant, not a stated clock); a parcel without a
-dated scan counts as today's. Landmark Global states every scan on US Central time, so its
-clock is that of the place its newest scan names, when the place gazetteer finds it.
+dated scan counts as today's. A carrier whose page states every scan on a clock of its own
+(the catalog's `pageClock`, Landmark Global's US Central time) has the clock of the place its
+newest scan names instead, when the place gazetteer finds it.
 
 **A round sorted overnight** has not left yet: before 06:00 on the carrier's clock, the same
 clock, a parcel out for delivery keeps the regular cadence. Planzer, Quickpac and Swiss Post
@@ -392,8 +394,11 @@ brings the 2-minute checks back.
 2-minute checks back: until 30 minutes before it opens, the regular cadence still catches a
 changed slot. Inside the window and after it ends, they resume. The times are read in the
 zone the carrier's answer declares (`timezone` in `carrier_data`, the recipient's for Paack),
-else in the carrier's catalog zone. A single time, or a
-window whose zone is unknown (UTC in the catalog), is not waited for.
+else in the carrier's catalog zone. A catalog zone of UTC stands for none (USPS and UPS span
+several): the slot is then read on the offset the newest scan states, the delivering office's.
+A window given as two timestamps with their offsets (Royal Mail's and Parcelforce's, from
+`expected_delivery_from` to `expected_delivery`) opens at the first. A single time, or a slot
+with no known clock, is not waited for.
 
 **Archived parcels** stay on the schedule until they have gone 30 days without a new
 carrier event, so one put away while it waits at a pickup point still shows its collection.

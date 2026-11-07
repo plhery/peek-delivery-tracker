@@ -3868,11 +3868,21 @@ describe('TrackingSyncService', () => {
     { name: '30 minutes before a whole-day window', carrier: 'paack', timezone: 'Atlantic/Canary', window: '2026-09-09 09:00–22:00', last: '07:30:15', time: '07:32:00', checked: 1 },
     // UTC stands for no known zone: the window cannot be placed, so it is not waited for.
     { name: 'before a window on an unknown clock', timezone: 'UTC', window: '2026-09-09 15:00–17:00', last: '10:00:15', time: '10:02:00', checked: 1 },
-  ])('checks a parcel out for delivery $name at $time: $checked checks', async ({ carrier = 'swiss-post', timezone, window, last, time, checked }) => {
+    // A carrier whose catalog zone is UTC spans several: its slot is on the clock of its newest scan,
+    // the delivering office's. 13:15–16:15 on US Central summer time opens at 18:15 UTC.
+    { name: 'before a window on the newest scan\'s clock', carrier: 'usps', scanned: '2026-09-09T08:05:00-05:00', window: '2026-09-09 13:15–16:15', last: '17:20:15', time: '17:22:00', checked: 0 },
+    { name: '30 minutes before a window on the newest scan\'s clock', carrier: 'usps', scanned: '2026-09-09T08:05:00-05:00', window: '2026-09-09 13:15–16:15', last: '17:45:15', time: '17:47:00', checked: 1 },
+    // A window given as two timestamps opens at the first: 13:00 on London's summer time is 12:00 UTC.
+    { name: 'before a window of two timestamps', carrier: 'parcelforce', from: '2026-09-09T13:00:00+01:00', window: '2026-09-09T15:00:00+01:00', last: '11:20:15', time: '11:22:00', checked: 0 },
+    { name: '30 minutes before a window of two timestamps', carrier: 'parcelforce', from: '2026-09-09T13:00:00+01:00', window: '2026-09-09T15:00:00+01:00', last: '11:30:15', time: '11:32:00', checked: 1 },
+  ])('checks a parcel out for delivery $name at $time: $checked checks', async ({ carrier = 'swiss-post', timezone, scanned, from, window, last, time, checked }) => {
     const parcel = {
       id: 'window', carrier, current_stage: 'out_for_delivery', tracking_number: 'TEST1234', expected_delivery: window,
       last_synced_at: `2026-09-09T${last}Z`, sync_status: 'ok',
-      carrier_data: { ...(timezone ? { timezone } : {}), routing: { version: 1, configured_carrier: carrier, last_event_at: '2026-09-09T06:00:00Z' } },
+      carrier_data: {
+        ...(timezone ? { timezone } : {}), ...(scanned ? { last_update: scanned } : {}), ...(from ? { expected_delivery_from: from } : {}),
+        routing: { version: 1, configured_carrier: carrier, last_event_at: '2026-09-09T06:00:00Z' },
+      },
     };
     const client = fakeClient([parcel]);
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
@@ -6213,15 +6223,22 @@ describe('TrackingSyncService', () => {
         expect.arrayContaining([expect.objectContaining({ kind: 'refresh', healthy: waiting })]));
     });
 
+  /** Providers that answer without history, each lookup reported as the scraper's step recorder reports it. */
+  const withoutHistory = () => vi.fn(async (source: string) => {
+    observability.reportTrackingLookup(source, source === 'Ship24' ? 'not_found' : 'no_history');
+    throw source === 'Ship24' ? new NotFoundError(source) : new IndeterminateError(source, `${source} has no usable shipment history`);
+  });
+
   it('signals the first check of a labelled parcel whose every source answers without history, once', async () => {
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
     };
-    const adapter = { fetch: vi.fn(), fetchUniversal: vi.fn(async (source: string) => {
-      throw source === 'Ship24' ? new NotFoundError(source) : new IndeterminateError(source, `${source} has no usable shipment history`);
-    }) };
+    const adapter = { fetch: vi.fn(), fetchUniversal: withoutHistory() };
+    const label = { provider_event_id: 'unknown:label', occurred_at: '2026-09-08T10:00:00Z', stage: 'registered', description: 'Label created',
+      universal_provider: 'ParcelsApp' };
     let parcel: JsonObject = { id: 'label-only', carrier: 'unknown', tracking_number: 'TEST1234', current_stage: 'registered',
+      [STORED_EVENT_IDENTITIES]: [label],
       carrier_data: { routing: { version: 1, configured_carrier: 'unknown', consecutive_failures: 1, probe_cursor: 0, discovery_cursor: 0 } } };
     client.updatePackage.mockImplementation(async (_id: string, values: JsonObject) => { parcel = { ...parcel, ...values }; });
     let now = new Date('2026-09-10T12:00:00Z');
@@ -6235,6 +6252,27 @@ describe('TrackingSyncService', () => {
     expect(parcel).toMatchObject({ carrier_data: { scans_withdrawn: { unknown: '2026-09-10T12:00:00.000Z' } } });
   });
 
+  it('does not signal a labelled parcel whose label came from a source the round did not ask', async () => {
+    // ParcelsApp, the only source that showed the label, rests on a rate limit; the others answer without history.
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn(async (provider: string) => provider === 'ParcelsApp'
+        ? { token: null, retry_at: '2026-09-10T13:00:00Z' } : { token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const adapter = { fetch: vi.fn(), fetchUniversal: withoutHistory() };
+    const label = { provider_event_id: 'unknown:label', occurred_at: '2026-09-08T10:00:00Z', stage: 'registered', description: 'Label created',
+      universal_provider: 'ParcelsApp' };
+    let parcel: JsonObject = { id: 'label-only', carrier: 'unknown', tracking_number: 'TEST1234', current_stage: 'registered',
+      [STORED_EVENT_IDENTITIES]: [label],
+      carrier_data: { routing: { version: 1, configured_carrier: 'unknown', consecutive_failures: 1, probe_cursor: 0, discovery_cursor: 0 } } };
+    client.updatePackage.mockImplementation(async (_id: string, values: JsonObject) => { parcel = { ...parcel, ...values }; });
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await expect(service.syncPackage(parcel, { trigger: 'scheduled' })).resolves.toMatchObject({ waiting: 1, errors: 0 });
+    expect(adapter.fetchUniversal.mock.calls.map(([source]) => source)).not.toContain('ParcelsApp');
+    expect(client.completeSyncAttempt.mock.lastCall![1]).toMatchObject({ outcome: 'waiting', anomaly_codes: [] });
+    expect(parcel.carrier_data).not.toHaveProperty('scans_withdrawn');
+  });
+
   it.each([
     // Printed ten months before the parcel was added: a reused number's earlier parcel, which an
     // older release stored and today's rules refuse. The check forgets it.
@@ -6246,9 +6284,7 @@ describe('TrackingSyncService', () => {
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-10-24T12:01:30Z' }),
       finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
     };
-    const adapter = { fetch: vi.fn().mockRejectedValue(new NoHistoryError('Chronopost')), fetchUniversal: vi.fn(async (source: string) => {
-      throw source === 'Ship24' ? new NotFoundError(source) : new IndeterminateError(source, `${source} has no usable shipment history`);
-    }) };
+    const adapter = { fetch: vi.fn().mockRejectedValue(new NoHistoryError('Chronopost')), fetchUniversal: withoutHistory() };
     const added = '2026-10-20T09:00:00Z';
     const own = { provider_event_id: 'app:pending', occurred_at: added, stage: 'pending', description: 'Tracking added' };
     const label = { provider_event_id: 'unknown:label', occurred_at: printed, stage: 'registered', description: 'Label created',

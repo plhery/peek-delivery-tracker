@@ -15,6 +15,7 @@ const config = [
       'out/**',
       'public/sw.js',
       'src/generated/**',
+      'android/**/build/**',
     ],
   },
   {

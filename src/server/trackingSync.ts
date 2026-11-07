@@ -362,18 +362,32 @@ function checkedInBrowser(parcel: JsonObject): boolean {
 }
 
 /**
- * When a parcel's delivery window ("2026-10-08 13:00–15:00") opens. Its times
- * are the clock of the carrier that answered: the zone its answer declares,
- * else that carrier's zone in the catalog. Null without a window with both
- * ends, or when the zone is unknown: UTC stands for none.
+ * When a parcel's delivery window opens: the start of one given as two timestamps with their
+ * offsets (Royal Mail's and Parcelforce's, from `expected_delivery_from` to `expected_delivery`),
+ * or the start of a slot ("2026-10-08 13:00–15:00"). A slot's times are the clock of the carrier
+ * that answered: the zone its answer declares, else that carrier's zone in the catalog, else, when
+ * that is UTC, which stands for none (USPS spans several), the carrier's clock its newest scan
+ * gives, the delivering office's. Null without a window with both ends, or when no clock is known.
  */
 function deliveryWindowOpens(parcel: JsonObject): number | null {
-  const slot = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})[–-]\d{2}:\d{2}$/.exec(String(parcel.expected_delivery ?? '').trim());
-  if (!slot) return null;
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const zone = resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+  const expected = String(parcel.expected_delivery ?? '').trim();
+  const [start, end] = [instant(data.expected_delivery_from), instant(expected)];
+  if (start !== null && end !== null) return start < end ? start : null;
+  const slot = /^(\d{4}-\d{2}-\d{2})[ T]+(\d{2}:\d{2})[–-]\d{2}:\d{2}$/.exec(expected);
+  if (!slot) return null;
+  const declared = resultTimezone(String(data.active_tracking_carrier ?? parcel.carrier), data as CarrierResult);
+  const zone = declared !== 'UTC' ? declared : carrierClock(parcel);
   const opens = DateTime.fromISO(`${slot[1]}T${slot[2]}`, { zone });
   return zone !== 'UTC' && opens.isValid ? opens.toMillis() : null;
+}
+
+/** A timestamp that states its offset or a "Z" ("2026-10-08T13:00:00+01:00"), as epoch milliseconds; else null. */
+function instant(value: unknown): number | null {
+  const text = typeof value === 'string' ? value.trim() : '';
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})$/.test(text)) return null;
+  const time = DateTime.fromISO(text);
+  return time.isValid ? time.toMillis() : null;
 }
 
 /**
@@ -386,19 +400,21 @@ function expectedDayAhead(parcel: JsonObject, now: Date): boolean {
   return day !== undefined && day >= today;
 }
 
-/** Carriers whose page states every scan on a clock of its own, not the scan's: Landmark Global's on US Central time. */
-const PAGE_CLOCKS: ReadonlySet<string> = new Set(['landmark-global']);
+/** Whether the carrier's page states every scan on a clock of its own, not the scan's, as Landmark Global's US Central time (the catalog's `pageClock`). */
+function pageClock(carrier: string): boolean {
+  return CARRIER_DEFINITIONS[carrier as CarrierId]?.tracking.pageClock === true;
+}
 
 /**
  * The carrier's clock: the offset its newest scan states ("…T07:00:00+10:00", or "+00:00" from
  * a Canary Islands office in winter), else the carrier's zone in the catalog. A "Z" is a UTC
  * instant, and "-00:00" an unknown offset, not the scan's own clock. A carrier that states its
- * page's clock (`PAGE_CLOCKS`) is read on the clock of the place its newest stored scan names.
+ * page's clock (`pageClock`) is read on the clock of the place its newest stored scan names.
  */
 function carrierClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
   const carrier = String(data.active_tracking_carrier ?? parcel.carrier);
-  const placed = PAGE_CLOCKS.has(carrier) ? newestPlaceZone(parcel, carrier) : null;
+  const placed = pageClock(carrier) ? newestPlaceZone(parcel, carrier) : null;
   if (placed) return placed;
   const stated = /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(String(data.last_update ?? ''))
     ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;
@@ -1203,6 +1219,17 @@ function withdrawals(parcel: JsonObject): JsonObject {
     ...(isRecord(data.scans_withdrawn) ? data.scans_withdrawn : {}) };
 }
 
+/**
+ * The sources whose stored rows show the parcel's label: a universal provider by its name, else the carrier
+ * whose scan it is. Without such a row, the parcel's own carrier, which showed it in its summary.
+ */
+function labelSources(parcel: JsonObject): string[] {
+  const sources = storedEventIdentities(parcel).filter((row) => row.stage === 'registered').map((row) =>
+    typeof row[UNIVERSAL_PROVIDER] === 'string' && row[UNIVERSAL_PROVIDER] !== '' ? String(row[UNIVERSAL_PROVIDER])
+      : String(row.provider_event_id ?? '').split(':')[0]).filter((source) => source !== '' && source !== 'app');
+  return sources.length ? [...new Set(sources)] : [String(parcel.carrier ?? '')];
+}
+
 export function detectSyncAnomalies(
   parcel: JsonObject,
   result: CarrierResult,
@@ -1963,8 +1990,10 @@ export class TrackingSyncService {
           // A carrier saying the label has no scans is an answer, not a missed check.
           if (error instanceof RoutingDeferred) error.routing.consecutive_failures = 0;
           // A parcel that showed its label first answering without it is a review signal, as when
-          // its carrier lists fewer of its scans (`scans_withdrawn`, below).
-          const withdrawn = previousStage === 'registered' && withdrawals(parcel)[carrierId] == null;
+          // its carrier lists fewer of its scans (`scans_withdrawn`, below): once a source that showed
+          // the label answered without it this round. One the round did not ask has withdrawn nothing.
+          const withdrawn = previousStage === 'registered' && withdrawals(parcel)[carrierId] == null
+            && labelSources(parcel).some((source) => audit.answeredWithoutHistory(source));
           audit.record('fetch', 'succeeded', performance.now() - fetchStartedAt, {
             disposition: 'unannounced', ...sharedAnswers(checks),
           });

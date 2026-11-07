@@ -288,6 +288,11 @@ export class TrackingSyncAudit {
     return this.#browser;
   }
 
+  /** Whether the check's lookups asked this carrier or provider and it answered that it holds no history for the number. */
+  answeredWithoutHistory(source: string): boolean {
+    return ['not_found', 'no_history'].includes(this.#lookups.get(source.slice(0, 100)) ?? '');
+  }
+
   /** What a write of the check saved: the parcel's carrier, and the carrier that confirmed its number, if any. */
   filed(carrier: string, answeredBy: string | null): void {
     this.#filed = { carrier, answeredBy };

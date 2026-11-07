@@ -3141,6 +3141,22 @@ describe('TrackingSyncService', () => {
     await expect(check('2026-09-09T23:00:00Z', [owned('waiting', { last_synced_at: '2026-09-08T23:00:15Z' })])).resolves.toEqual(['waiting']);
     // Filed under that carrier, or asked for a link the parcel does not ask the owner for, it keeps its cadence.
     await expect(check('2026-09-09T12:00:00Z', [owned('filed', { carrier: 'dhl' })])).resolves.toEqual(['filed']);
+    // Unless nothing has answered for the parcel for a day, as when its carrier refuses the postcode stored.
+    // Adding or changing the postcode clears the parcel's last check, so the next run checks it.
+    const routed = (parcel: JsonObject, routing: JsonObject): JsonObject => ({ ...parcel,
+      carrier_data: { routing: { ...(parcel.carrier_data as { routing: JsonObject }).routing, ...routing } } });
+    const unanswered = { last_success_at: '2026-09-08T11:00:00Z' };
+    await expect(check('2026-09-09T12:00:00Z', [routed(owned('alone', { carrier: 'dhl' }), unanswered)])).resolves.toEqual([]);
+    await expect(check('2026-09-09T12:00:00Z', [routed(owned('given', { carrier: 'dhl', dpd_postcode: '8001' }), unanswered)]))
+      .resolves.toEqual(['given']);
+    const refused = owned('refused', { carrier: 'dhl', dpd_postcode: '8001' }, null);
+    const refusal = { postcode_refused: { carrier: 'dhl' } };
+    await expect(check('2026-09-09T12:00:00Z', [routed(refused, refusal)])).resolves.toEqual(['refused']);
+    await expect(check('2026-09-09T12:00:00Z', [routed(refused, { ...refusal, ...unanswered })])).resolves.toEqual([]);
+    await expect(check('2026-09-09T12:00:00Z', [routed({ ...refused, sync_status: 'error' }, { ...refusal, last_success_at: null })]))
+      .resolves.toEqual([]);
+    await expect(check('2026-09-09T12:00:00Z', [routed({ ...refused, last_synced_at: null }, { ...refusal, ...unanswered })]))
+      .resolves.toEqual(['refused']);
     await expect(check('2026-09-09T12:00:00Z', [owned('link', {}, { carrier: 'dhl', field: 'trackingUrl' })])).resolves.toEqual(['link']);
     // A lookup without an account waits the same; opening its link checks it at that cadence.
     const lookup = { ...owned('lookup'), user_id: null, one_off: true };

@@ -1425,6 +1425,16 @@ describe('persistent tracking routing', () => {
       cleared.direct.mockRejectedValue(unknown());
       expect((await cleared.router.fetch({ ...moving, dpd_postcode: null, carrier_data: flagged.result }, false)).result.routing)
         .not.toHaveProperty('postcode_refused');
+      // A check the carrier fails to answer keeps it, unless the owner changed the postcode since, which
+      // clears the parcel's last check: the refusal was of the old one.
+      const checked = { ...moving, dpd_postcode: '5678 CD', last_synced_at: '2026-09-10T14:10:00Z', carrier_data: flagged.result };
+      for (const [given, refused] of [[checked, true], [{ ...checked, last_synced_at: null }, false]] as const) {
+        const down = setup(new Date('2026-09-10T15:10:00Z'));
+        down.direct.mockRejectedValue(new Error('socket hang up'));
+        const routing = (await down.router.fetch(given, false)).result.routing;
+        if (refused) expect(routing).toMatchObject({ postcode_refused: { carrier: 'spring-gds' } });
+        else expect(routing).not.toHaveProperty('postcode_refused');
+      }
     });
     it('suggests a carrier that cannot be asked about the number without the postcode', async () => {
       // An 8-digit shipment fits Mondial Relay, which needs the recipient's postcode for it, so

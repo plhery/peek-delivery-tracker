@@ -165,6 +165,11 @@ const PROVIDER_TRACKED_CARRIERS = [...AUTOMATIC_CARRIER_IDS].filter((carrier) =>
  * collection.
  */
 const ARCHIVED_FOLLOWED_MS = 30 * 24 * 60 * 60 * 1_000;
+/**
+ * A parcel whose own carrier waits for its delivery postcode is checked daily once no source has
+ * answered for it for this long: the providers asked hourly can't answer without it either.
+ */
+const POSTCODE_UNANSWERED_MS = 24 * 60 * 60 * 1_000;
 
 /**
  * An unsuccessful partner confirmation must not double every refresh's cost.
@@ -529,8 +534,9 @@ function isScheduledTrackingSyncDue(
   if (archived || unconfirmedDelivery(parcel, now)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   // A carrier holds the parcel and waits for its delivery postcode, which the parcel asks the
   // owner for: until the owner adds it, which files the parcel there and checks it at once, the
-  // providers are asked daily.
-  if (waitsForPostcode(parcel)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
+  // providers are asked daily. So is a parcel whose own carrier waits for it, or refuses the one
+  // stored, while nothing else answers for it; adding or changing the postcode checks it at once.
+  if (waitsForPostcode(parcel, now)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   // A lookup without an account filed under no carrier, or under one with no adapter of its own, whose
   // newest scan is over 14 days old, followed or not, while nobody watches it: daily. It stays on
   // the schedule as long as before, and opening its link queues a check as before.
@@ -581,11 +587,20 @@ function isScheduledTrackingSyncDue(
   return lastChecked < windowStart.toMillis();
 }
 
-/** Another carrier than the parcel's holds it and asks for the delivery postcode (`routing.input_needed`). */
-function waitsForPostcode(parcel: JsonObject): boolean {
-  const needed = routingState(parcel).input_needed;
-  return isRecord(needed) && needed.field === 'dpdPostcode' && typeof needed.carrier === 'string'
-    && needed.carrier !== parcel.carrier;
+/**
+ * A carrier holds the parcel and asks for the delivery postcode (`routing.input_needed`): another
+ * carrier than the parcel's, or the parcel's own while the parcel has none, or the parcel's own
+ * refuses the one stored (`routing.postcode_refused`). The parcel's own counts only while no source
+ * has answered for the parcel for POSTCODE_UNANSWERED_MS, as a provider may track it without one.
+ */
+function waitsForPostcode(parcel: JsonObject, now: Date): boolean {
+  const routing = routingState(parcel);
+  const needed = routing.input_needed;
+  const neededBy = isRecord(needed) && needed.field === 'dpdPostcode' && typeof needed.carrier === 'string' ? needed.carrier : null;
+  if (neededBy !== null && neededBy !== parcel.carrier) return true;
+  const postcode = typeof parcel.dpd_postcode === 'string' && parcel.dpd_postcode.trim() !== '';
+  const own = postcode ? routing.postcode_refused?.carrier === parcel.carrier : neededBy === parcel.carrier;
+  return own && !(now.getTime() - Date.parse(String(routing.last_success_at ?? '')) < POSTCODE_UNANSWERED_MS);
 }
 
 /**

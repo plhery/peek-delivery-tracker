@@ -7,6 +7,7 @@ import { carrierErrorReason } from './trackingFailure';
 import { healthMessage, healthReviewSignal } from './trackingHealth';
 import type { JsonObject } from './types';
 import { UpstreamHttpError, type UpstreamHttpDiagnostics } from 'universal-parcel-scraper/node';
+import { UNIVERSAL_SOURCES } from 'universal-parcel-scraper';
 
 /**
  * What a check learnt that the catalog, detection or the adapters could act on.
@@ -297,9 +298,15 @@ function withoutNumber(text: string, number: string): string {
 /** A word of six letters and digits or more, with a digit: it could be a tracking number. */
 const NUMBER_LIKE = /(?<![A-Za-z0-9])(?=[A-Za-z0-9]*\d)[A-Za-z0-9]{6,}(?![A-Za-z0-9])/g;
 
-/** Wording for a line that is given no number: addresses cut down, and each word that could be a number given as its shape. */
+/** The universal providers' names, which look like numbers ("17TRACK", "Ship24") and stay as they are, to search by. */
+const PROVIDER_NAMES: ReadonlySet<string> = new Set(['Track123', ...UNIVERSAL_SOURCES].map((name) => name.toLowerCase()));
+
+/**
+ * Wording for a line that is given no number: addresses cut down, and each word that could be a number given as its
+ * shape, except a provider's name.
+ */
 function withoutNumbers(text: string): string {
-  return scrubText(text).replace(NUMBER_LIKE, (word) => `[${numberPattern(word)}]`);
+  return scrubText(text).replace(NUMBER_LIKE, (word) => PROVIDER_NAMES.has(word.toLowerCase()) ? word : `[${numberPattern(word)}]`);
 }
 
 /**

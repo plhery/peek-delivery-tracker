@@ -263,6 +263,20 @@ group by t.id, t.shown, t.provider_code, t.chosen_stage, t.first_seen, t.count
 order by new desc, sightings desc, carrier, wording
 limit 50;
 
+\echo '== Provider deliveries read from wording: a universal provider''s delivered row stored in the window that a'
+\echo '   wording rule read, on a parcel that is not delivered, by short id. A misread (a hand-over to the carrier read as'
+\echo '   the delivery) shows here. The row keeps no wording ("Delivered"), so the replay cannot re-read it: once the'
+\echo '   scraper''s rule is fixed and live, the row is removed by hand'
+select left(e.package_id::text, 8) as parcel, left(e.id::text, 8) as row, p.carrier, p.current_stage as stage,
+       e.raw_data->>'universal_provider' as provider, e.raw_data->>'stage_source' as read_by, 'adapters' as lane,
+       to_char(e.occurred_at, 'YYYY-MM-DD HH24:MI') as dated, to_char(e.created_at, 'YYYY-MM-DD HH24:MI') as stored
+from public.tracking_events as e
+join public.packages as p on p.id = e.package_id
+where e.created_at >= :since and e.created_at < :upto and e.stage = 'delivered'
+  and coalesce(e.raw_data->>'universal_provider', '') <> '' and e.raw_data->>'stage_source' like 'wording:%'
+  and p.current_stage <> 'delivered'
+order by e.created_at desc;
+
 \echo '== Support cases: opened in the window, or held until then, and still open with a reason'
 select configured_carrier as carrier, detection_carrier as detected, array_to_string(reasons, ',') as reasons,
        array_to_string(array_remove(array[

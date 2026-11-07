@@ -479,7 +479,9 @@ universal provider answered the one before it, as the carrier may read the provi
 expected days dropped in the window from parcels still on their way (by the day the dropping check's
 `previous_expected_delivery` held: passed, still ahead on every clock, or passed on some clocks only),
 parcels on their way whose kept plan has a step dated over a day ago (a step the server no longer serves), open unmapped wording seen in the window (`new` when first seen in it; a provider's
-own wording as relayed by it, beside the carrier of its sample's parcel), new open support cases that still give a reason, health incidents notified in the
+own wording as relayed by it, beside the carrier of its sample's parcel), a universal provider's delivered rows stored in the window that a
+wording rule read, on parcels not delivered (a misread keeps no wording, so the replay cannot re-read it: the row is removed by hand once
+the scraper's rule is fixed), new open support cases that still give a reason, health incidents notified in the
 window or open and failing in it (`rescued` when every check that failed still answered
 through another step; an open one nothing checked, or whose checks answered, waits unlisted
 until it fails, recovers or closes), the unfinished parcels a provider tracks, grouped by type, carrier and
@@ -642,7 +644,8 @@ Key JSON events:
   An `error` line says why: the carrier's `error_reason` when it gave one, `error_message`,
   and `error_cause`, the wording of up to three causes. Its wording has no number to mask,
   so addresses lose their query and number-like path segments, and every word of six
-  letters and digits or more with a digit reads as its shape (`[LX + 9 digits + PL]`).
+  letters and digits or more with a digit reads as its shape (`[LX + 9 digits + PL]`),
+  except a universal provider's name (`17TRACK`, `Ship24`), which stays to search by.
   A `tracking_routing` line is a warning for `transport_fallback` and `provider_failed`,
   except a provider's `no_history` answer, which is info. One with an error has its
   `error_type` and, when the carrier gave one, its `error_reason` (such as `parcel_found`

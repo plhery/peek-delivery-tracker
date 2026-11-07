@@ -108,6 +108,15 @@ describe('why a lookup failed', () => {
     });
     expect(errorDetails('not an error')).toEqual({});
   });
+
+  it('keeps a provider\'s name, which looks like a number, and still masks the numbers beside it', () => {
+    expect(errorDetails(new Error('17TRACK has no usable shipment history for AB123456789CD'))).toMatchObject({
+      error_message: '17TRACK has no usable shipment history for [AB + 9 digits + CD]',
+    });
+    expect(errorDetails(new Error('Ship24 and Track718 found nothing; 17track saw 1234567'))).toMatchObject({
+      error_message: 'Ship24 and Track718 found nothing; 17track saw [7 digits]',
+    });
+  });
 });
 
 describe('routing log levels', () => {

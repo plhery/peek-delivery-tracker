@@ -741,7 +741,8 @@ export class TrackingRouter {
     const declared = String(parcel.carrier);
     const number = String(parcel.tracking_number ?? '');
     const postcode = String(parcel.dpd_postcode ?? '').trim();
-    if (state.postcode_refused?.carrier !== declared || !postcode) delete state.postcode_refused;
+    // The owner changing the postcode clears the parcel's last check: the refusal was of the old one.
+    if (state.postcode_refused?.carrier !== declared || !postcode || parcel.last_synced_at == null) delete state.postcode_refused;
     if (declared === 'unknown' || declared === 'intl-post') state.recognizers = recognizers(number);
     else delete state.recognizers;
     const metadata = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};

@@ -311,6 +311,9 @@ class PageAccessDeviceTest {
 
         type("Your parcel $NUMBER is on its way")
         val foundText = walk.text("add.foundText", "number" to CarrierCatalog.format(NUMBER, CarrierId.Ups))
+        // A phone's short window leaves the form a row or two between the field and Add above the keyboard: what is
+        // read is scrolled to first, as TalkBack does.
+        compose.reveal(ADD_FOUND)
         val found = awaitReading(ADD_FOUND, "saying \"$foundText\"") { it.spoken == foundText }
         assertEquals(0, found.childCount)
         val change = walk.text("add.line.change")
@@ -321,6 +324,7 @@ class PageAccessDeviceTest {
         assertEquals(change, line.clickLabel)
 
         type(AMAZON)
+        compose.reveal(ADD_CARRIER)
         val amazon = awaitReading(ADD_CARRIER, "off for an Amazon number") { !it.isEnabled }
         assertNull(amazon.action(AccessibilityNodeInfo.ACTION_CLICK))
         assertFalse(amazon.spoken, amazon.spoken.endsWith(change))
@@ -338,8 +342,11 @@ class PageAccessDeviceTest {
         val several = tree.awaitId(ADD_SEVERAL)
         assertTrue(several.isHeading)
         assertEquals(walk.text("door.several.title.many", "count" to 2), several.spoken)
+        // Each row scrolled to, as TalkBack does: on a phone the keyboard leaves room for a row or two.
+        compose.reveal(numberRowTag(NUMBER))
         val first = tree.awaitId(numberRowTag(NUMBER))
-        val second = checkNotNull(tree.byId(numberRowTag(SECOND)))
+        compose.reveal(numberRowTag(SECOND))
+        val second = tree.awaitId(numberRowTag(SECOND))
         assertEquals("UPS, ${CarrierCatalog.format(NUMBER, CarrierId.Ups)}", first.spoken)
         assertTrue(first.isButton && second.isButton)
         assertEquals(0, first.childCount)
@@ -347,7 +354,8 @@ class PageAccessDeviceTest {
         assertFalse("A number not chosen is read as a choice", second.isCheckable)
         assertTrue(second.click())
         awaitReading(numberRowTag(SECOND), "chosen") { it.chosen }
-        assertFalse(checkNotNull(tree.byId(numberRowTag(NUMBER))).isCheckable)
+        compose.reveal(numberRowTag(NUMBER))
+        assertFalse(tree.awaitId(numberRowTag(NUMBER)).isCheckable)
     }
 
     // B-AX10, B-AX12, B-AX13, B-AX19: the carrier picker.

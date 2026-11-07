@@ -15,6 +15,7 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToKey
@@ -411,8 +412,9 @@ class ListAccessDeviceTest {
     /**
      * A-AX17, A-AX20, A-AX16: while the first open covers the list neither the list nor the tab bar is in the tree. Its
      * question is a heading; the field, found as welcome.field, is read with its placeholder then "add.tracking"; scan is
-     * "add.scan"; Pip's picture opens the sample as "landing.pip.open"; the carriers' ribbon is one element naming the
-     * first five; paste, the demo and sign in are found by their ids. Nothing stops without saying something.
+     * "add.scan"; Pip's picture opens the sample as "landing.pip.open"; the carriers' ribbon, where the screen is tall
+     * enough to show it, is one element naming the first five; paste, the demo and sign in are found by their ids.
+     * Nothing stops without saying something.
      */
     @Test
     fun theFirstOpenHidesTheListAndNamesItsQuestionFieldAndRibbon() {
@@ -431,13 +433,16 @@ class ListAccessDeviceTest {
         val picture = nodes.first { it.viewIdResourceName == FIRST_OPEN_PICTURE }
         assertEquals(walk.text("landing.pip.open"), picture.spoken)
         assertTrue(picture.isButton)
-        compose.reveal(FIRST_OPEN_RIBBON)
-        val ribbon = tree.awaitId(FIRST_OPEN_RIBBON)
-        assertEquals(0, ribbon.childCount)
-        val label = ribbon.spoken
-        val (before, after) = walk.text("landing.ribbon.label", "carriers" to MARK).split(MARK)
-        assertTrue(label, label.startsWith(before) && label.endsWith(after))
-        assertEquals(label, 5, label.removePrefix(before).removeSuffix(after).split(", ").size)
+        // The carriers roll at the question's foot only on a screen 800 tall, as on the iPhone; a shorter one shows none.
+        if (compose.onAllNodesWithTag(FIRST_OPEN_RIBBON).fetchSemanticsNodes().isNotEmpty()) {
+            compose.reveal(FIRST_OPEN_RIBBON)
+            val ribbon = tree.awaitId(FIRST_OPEN_RIBBON)
+            assertEquals(0, ribbon.childCount)
+            val label = ribbon.spoken
+            val (before, after) = walk.text("landing.ribbon.label", "carriers" to MARK).split(MARK)
+            assertTrue(label, label.startsWith(before) && label.endsWith(after))
+            assertEquals(label, 5, label.removePrefix(before).removeSuffix(after).split(", ").size)
+        }
         for (tag in listOf(FIRST_OPEN_PASTE, FIRST_OPEN_DEMO, FIRST_OPEN_SIGN_IN).filter(walk::exists)) {
             compose.reveal(tag)
             assertTrue(tree.awaitId(tag).isClickable)

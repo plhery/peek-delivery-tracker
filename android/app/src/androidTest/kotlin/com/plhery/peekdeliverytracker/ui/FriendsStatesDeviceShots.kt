@@ -341,8 +341,9 @@ class FriendsStatesDeviceShots {
         closePanel()
 
         openPage(FriendFixtures.ada.id)
+        // Where each stamp stands, not what the window shows of it: on a phone the last rows are below its foot.
         val columns = FriendStamp.entries.filter { walk.exists(friendStampTag(it)) }
-            .map { bounds(friendStampTag(it)).left.roundToInt() }.toSet()
+            .map { touches.node(hasTestTag(friendStampTag(it))).positionInWindow.x.roundToInt() }.toSet()
         assertEquals("Two stamps to a row", 2, columns.size)
         walk.shot("C-ST16-stamps")
     }
@@ -374,9 +375,12 @@ class FriendsStatesDeviceShots {
         val link = FriendInvitationLink.url(LEGACY_CODE, null, walk.source.linkBaseUrl)
         val laid = layoutOf(hasTestTag(FRIENDS_INVITATION_URL))
         assertEquals(link, laid.layoutInput.text.text)
-        assertEquals("The link on one line", 1, laid.lineCount)
-        assertTrue("The link cut", laid.isLineEllipsized(0))
         walk.shot("C-ST17-long-link")
+        assertEquals("The link on one line", 1, laid.lineCount)
+        assertTrue(
+            "The link cut: ${laid.getLineEnd(0)} of ${link.length} characters on its line, ${laid.size} in ${laid.layoutInput.constraints}",
+            laid.isLineEllipsized(0),
+        )
         closePanel()
 
         openPage(konstantina.id)

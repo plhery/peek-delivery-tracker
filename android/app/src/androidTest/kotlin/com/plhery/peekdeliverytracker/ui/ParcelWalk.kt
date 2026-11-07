@@ -380,8 +380,12 @@ internal class ParcelWalk(
 
     fun tap(tag: String) = tap(hasTestTag(tag))
 
-    /** A finger on the row's switch, at its trailing end. */
+    /**
+     * A finger on the row's switch, at its trailing end, scrolled into the window first where it scrolls: on a phone the
+     * row may stand below the window's foot or under the tab bar, where a finger can't reach it.
+     */
     fun flip(tag: String) {
+        compose.reveal(tag)
         node(tag).performTouchInput { click(Offset(width - 45.dp.toPx(), height / 2f)) }
         compose.waitForIdle()
     }

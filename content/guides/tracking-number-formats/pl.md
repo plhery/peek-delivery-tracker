@@ -122,6 +122,8 @@ Jeśli ma 13 znaków i kończy się dwiema literami, np. `CN`, to numer pocztowy
 
 Numer zamówienia i numer oferty należą do sklepu. Do paczki prowadzi za to kod nadania DPD i ORLEN Paczki. Masz tylko numer zamówienia? Przeczytaj, [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
+Numerem przesyłki nie jest też numer kontenera morskiego: trzy litery właściciela, `U`, sześć cyfr i cyfra kontrolna, jak `TEMU1234565` (zmyślony). Oznacza kontener, a nie paczkę, i żaden przewoźnik nie śledzi po nim paczek. W rejestrze kodów właścicieli kontenerów, który prowadzi Bureau International des Containers (BIC), kod `TEMU` należy do firmy Textainer, która wynajmuje kontenery, a nie do sklepu Temu. Jeśli dodasz taki numer i nie odpowie żaden przewoźnik, Peek napisze „To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.” i zaproponuje „Wybierz przewoźnika”.
+
 ## Dlaczego numer przesyłki może się zmienić po drodze
 
 Paczka, która przekracza granicę, często zmienia przewoźnika, a każda firma może nakleić własną etykietę. UPU pozwala poczcie kraju docelowego dodać własny kod kreskowy obok pierwotnego, o ile nie jest on w 13-znakowym formacie pocztowym.
@@ -167,5 +169,8 @@ Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród p
 - [Cainiao: Help centre](https://global.cainiao.com/helpDoc.htm) – przy taniej wysyłce brak śledzenia po przekazaniu lokalnemu przewoźnikowi
 - [Cainiao: Guidance](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – numery Cainiao bez opisu formatu, tylko litery i cyfry
 - [bpost: Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – kodów kreskowych zaczynających się od U nie da się śledzić
-- [Peek: Routing (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – jak Peek potwierdza przewoźnika niejednoznacznego numeru: najwyżej pięciu naraz, liczą się tylko niedawne przesyłki, wybór należy do Ciebie, gdy numer zna kilku
+- [Peek: Routing (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – jak Peek potwierdza przewoźnika niejednoznacznego numeru: najwyżej pięciu naraz, liczą się tylko niedawne przesyłki, wybór należy do Ciebie, gdy numer zna kilku; numer kontenera, na który nie odpowiada żaden przewoźnik: gdzie jest numer śledzenia, wybór przewoźnika
+- [BIC: Container Identification Number (po angielsku)](https://www.bic-code.org/identification-number/) – kod właściciela, U dla kontenerów ładunkowych, sześciocyfrowy numer seryjny i cyfra kontrolna
+- [BIC: Registered BIC Code TEMU (po angielsku)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (po angielsku)](https://www.textainer.com/) – wynajem kontenerów
 :::

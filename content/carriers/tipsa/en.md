@@ -22,7 +22,7 @@ TIPSA's locator asks for the 22-digit shipment number and marks the destination 
 | --- | --- |
 | `0123450123451234567890` | The full 22-digit TIPSA number. Use this one. |
 | `012345 012345 1234567890` | The same number with spaces. Peek reads it; TIPSA's locator field holds only 22 characters, so type it there without spaces. |
-| `1234567890` | The 10-digit waybill alone. TIPSA's locator doesn't take it. |
+| `1234567890` | The 10-digit waybill alone. TIPSA's locator doesn't take it, and Peek doesn't take it as a TIPSA number. |
 
 Shops can have TIPSA send emails and SMS when the parcel sets off, when it reaches the agency, after an incident and after delivery, and their tracking links lead to TIPSA's shipment page. Without the number, TIPSA's locator also searches by the shipment's reference, but then asks for an identifier (agency plus client) that you'd have to get from the sender. More places to look are in [how to find your tracking number](guide:find-tracking-number).
 
@@ -86,7 +86,7 @@ Portugal has no separate line: TIPSA's Portuguese contact page gives the same tw
 
 [Peek](/) takes the 22-digit number with or without spaces. Other carriers share that shape, so Peek asks the likely ones at once, TIPSA first; you see "asking…" and then "TIPSA has this parcel." when TIPSA knows it. A number whose agency codes both start with `00` is taken for CTT Express (unless it starts `00001000`); if your shop said TIPSA, press "Change" and pick it. No postcode is needed.
 
-A 10-digit waybill can't be tracked through TIPSA, even after "Change" or from a link. Links from a shop's TIPSA email can be pasted: Peek reads tip-sa.com links with `id=` on pages ending `datos_env.php`, `datos_prestashop.php` or `datos.php`, and on the bare tip-sa.com address. Links to TIPSA's locator or its shipment pages on tipsa-dinapaq.com are not read.
+A 10-digit waybill can't be tracked through TIPSA, even after "Change" or from a link. Peek doesn't suggest TIPSA for ten digits or ask it about them; if you pick TIPSA, Peek says TIPSA "doesn’t issue numbers like this one" and asks tracking services instead. Look for the full 22-digit number, or the tracking link, in the shop's shipping email or SMS, or ask the shop. Links from a shop's TIPSA email can be pasted: Peek reads tip-sa.com links with `id=` on pages ending `datos_env.php`, `datos_prestashop.php` or `datos.php`, and on the bare tip-sa.com address. Links to TIPSA's locator or its shipment pages on tipsa-dinapaq.com are not read.
 
 Peek shows the status, the history with each scan's town on a map, the sender's name unless TIPSA masks it, and the weight. Statuses stay in TIPSA's Spanish, as written. Peek reads every scan time as Madrid time, Portuguese agencies included. It drops the recipient, address, postcodes, reference, parcel count, volume and proof of delivery. Peek shows no expected delivery date and doesn't follow the parcel to another carrier. It checks every 10 minutes, and every 2 minutes from 6 a.m. Madrid time on the day TIPSA scans the parcel out for delivery, while TIPSA's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
@@ -102,7 +102,7 @@ It depends on the service the shop bought. TIPSA sells shops delivery in 24 hour
 
 ### Can I track a TIPSA parcel with 10 digits?
 
-No: TIPSA's locator asks for the 22-digit number. The 10 digits are the waybill at its end; ask the sender for the full number if you only have those.
+No: TIPSA's locator asks for the 22-digit number, and Peek doesn't take 10 digits as a TIPSA number either. The 10 digits are the waybill at its end; ask the sender for the full number if you only have those.
 
 ### Does TIPSA have parcel shops?
 

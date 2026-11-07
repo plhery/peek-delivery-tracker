@@ -4,7 +4,7 @@ description: Por qué el número de pedido de Temu no sirve para seguir el paque
 slug: seguimiento-pedido-temu
 picture: Una pila de paquetes pequeños saliendo de la bodega de un avión, una furgoneta y Pip contándolos.
 published: 2026-10-17
-updated: 2026-11-04
+updated: 2026-11-07
 ---
 
 Para seguir tu pedido de Temu necesitas el número de seguimiento de la empresa de reparto, no el número de pedido de Temu («PO» y 20 cifras). Pégalo en [Peek](/), que encuentra la empresa entre más de 3500, de CTT Express a Correos; si la primera empresa indica quién toma el relevo en España, Peek pasa a la nueva. Un número recién creado puede no mostrar nada durante uno o dos días: la etiqueta existe antes de que la empresa tenga el paquete.
@@ -19,6 +19,8 @@ No. El número de pedido de Temu empieza por «PO» y lleva 20 cifras (`PO-000-0
 :::
 
 Si pegas un mensaje entero con los dos números, Peek toma el de seguimiento y deja aparte el de pedido. Dónde mirar en otras tiendas: [encontrar el número de seguimiento](guide:find-tracking-number). Las formas de los números: [reconocer la empresa por el número](guide:tracking-number-formats).
+
+Un número de tres letras, una `U` y siete cifras, como `TEMU1234565` (inventado), tampoco es un número de seguimiento: es el de un contenedor marítimo, y ninguna empresa de reparto sigue un paquete con él. El `TEMU` del principio no tiene que ver con la tienda: en el registro de códigos de propietario de contenedores que lleva el Bureau International des Containers (BIC), `TEMU` es de Textainer, una empresa de alquiler de contenedores. Si añades uno y ninguna empresa de reparto responde, Peek dice «Parece el número de un contenedor marítimo. El número de seguimiento está en el correo de envío o en la página del pedido.» y te ofrece «Elegir transportista».
 
 ## ¿Qué empresa reparte los paquetes de Temu en España?
 
@@ -68,4 +70,8 @@ Peek muestra lo que publican las empresas de reparto. Las reclamaciones y los re
 - [Comisión Europea: Customs Guidance on EUR 3 customs duty, en inglés](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € por tipo de producto
 - [Correos: Sigue tu paquete con el Localizador de Envíos](https://www.correos.es/es/es/actualidad/2023/sigue-tu-paquete-en-tiempo-real-con-nuestra-herramienta-de-local) – Pre-admisión, primer estado, paquete aún sin entregar a Correos
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, primeros estados, empresas que Peek reconoce
+- [BIC: Container Identification Number, en inglés](https://www.bic-code.org/identification-number/) – código del propietario, U para los contenedores de carga, número de serie de seis cifras y dígito de control
+- [BIC: Registered BIC Code TEMU, en inglés](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer, en inglés](https://www.textainer.com/) – alquiler de contenedores
+- [Peek: Routing, en inglés](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – número de contenedor por el que no responde ningún transportista: dónde está el número de seguimiento, elegir transportista
 :::

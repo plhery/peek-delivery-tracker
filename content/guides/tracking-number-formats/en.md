@@ -4,7 +4,7 @@ description: Tracking number formats for USPS, UPS, FedEx, DHL, Royal Mail, Evri
 slug: tracking-number-formats-by-carrier
 picture: Three tracking-number labels split into coloured parts, a magnifying glass on the country code CH, and a curious Pip.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 A tracking number's letters and length often tell you which carrier has your parcel or package. `1Z` followed by 16 letters and digits is UPS, 22 digits starting `92` to `95` is USPS, and 13 characters shaped like `RR000000005CH` (two letters, nine digits, two letters) usually belong to a national post, with the issuing country in the last two letters. Plain digits are the hard case: 10, 12 or 14 digits each fit several carriers, so the shipping email, or a tracker that checks the candidates, has the final word.
@@ -118,6 +118,7 @@ If it has 13 characters and ends in two letters, such as `CN`, it's a postal num
 Other numbers travel with a parcel. Some lead back to it, some don't:
 
 - **Order number.** The shop's own reference. DHL reminds you that a tracking number is not an order number.
+- **Shipping container number.** Three letters for the owner, `U`, six digits and a check digit, such as `TEMU1234565` (made up). It names a freight container, not a parcel, and no carrier tracks a parcel by it. In the register of container owner codes kept by the Bureau International des Containers (BIC), `TEMU` belongs to Textainer, a company that leases containers, not to the shop Temu. If you add one and no carrier answers, Peek says "This looks like a shipping container number. The tracking number is in the shipping email or on the order page." and offers "Choose the carrier".
 - **Missed-delivery cards.** An Evri calling card (8 digits), a Canada Post Delivery Notice Card (15 digits) and the barcode on a USPS PS Form 3849 all lead back to the parcel in their carrier's tracking. [What to do after a missed delivery](guide:missed-delivery) depends on the carrier.
 
 Have only an order number? [Where to find a tracking number](guide:find-tracking-number) shows where to look in your order.
@@ -174,4 +175,8 @@ A number that returns nothing isn't always mistyped. Portugal's CTT gives two re
 - [Mondial Relay Belgium: Suivi de colis](https://www.mondialrelay.be/fr-be/suivi-de-colis/) – 8, 10 or 12 digits
 - [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – Your Orders, then Track Package
 - [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – the TBA, YT, LP and CNG shapes in Peek's carrier data, InPost's JD, JJD and 8YDR shapes, 4PX's 4PX and LP shapes, Yanwen's BYS, YP and YW shapes, XDP's ZDB shape, APC's 22-digit shape, Royal Mail's and Parcelforce's shapes, An Post's shape ending IE and La Poste's 14 digits
+- [BIC: Container Identification Number](https://www.bic-code.org/identification-number/) – owner code, U for freight containers, six-digit serial number and check digit
+- [BIC: Registered BIC Code TEMU](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer](https://www.textainer.com/) – container leasing
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – a shipping container's number no carrier answered for: where the tracking number is, choosing the carrier
 :::

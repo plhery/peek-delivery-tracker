@@ -17,7 +17,7 @@ En su web belga, Mondial Relay lo llama «numéro d'expédition» (número de en
 | Número (inventado) | Qué es |
 | --- | --- |
 | `12345678` | El número de envío. Colisweb y Heppner usan la misma longitud. |
-| `0012345678` | 10 cifras: un código de marca y el número de envío. Misma longitud que [Tipsa](carrier:tipsa), [DHL](carrier:dhl-express), [DHL eCommerce España](carrier:dhl-ecommerce-es), Relais Colis y otras. |
+| `0012345678` | 10 cifras: un código de marca y el número de envío. Misma longitud que [DHL](carrier:dhl-express), [DHL eCommerce España](carrier:dhl-ecommerce-es), Relais Colis y otras. |
 | `001234567802` | 12 cifras: lo mismo más el número de bulto. Misma longitud que MRW, DPD Francia, Colis Privé, BRT y otras. |
 | `00123456780101` | 14 cifras: el principio del código de barras, con el código de marca, el número de envío, el número de bulto y el total de bultos. Misma longitud que DPD, Chronopost, [SEUR](carrier:seur) y otras. |
 | `00123456780101700000000000` | 26 cifras: el código de barras de la etiqueta, solo de Mondial Relay, con el número de envío en las cifras 3 a 10. |

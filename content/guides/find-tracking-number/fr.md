@@ -4,7 +4,7 @@ description: E-mail d'expédition, commande, avis de passage, preuve de dépôt 
 slug: ou-trouver-numero-de-suivi
 picture: Un e-mail d'expédition où le numéro RR000000005CH est surligné en jaune, une étiquette à code-barres à côté, et Pip qui sourit.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 Ton numéro de suivi se trouve en général dans l'e-mail ou le SMS d'expédition de la boutique, ou dans le détail de ta commande sur son site ou son app, à un clic du numéro de commande. Si c'est toi qui as envoyé le colis, il figure sur ta preuve de dépôt ou ton bordereau. Aucun transporteur ne retrouve un colis à partir de ton nom ou de ton adresse, mais un avis de passage, le compte gratuit de certains transporteurs ou l'expéditeur peuvent quand même te permettre de le suivre.
@@ -106,6 +106,8 @@ Ce sont deux numéros différents. DHL le précise : le numéro de commande est 
 :::
 
 Pour les distinguer : un numéro accompagné du mot « commande » est celui de la boutique et ne marchera pas sur le site du transporteur, alors qu'un numéro de suivi vient avec le nom d'un transporteur ou un lien vers sa page de suivi. Quelques repères : chez [La Poste](carrier:la-poste), un numéro d'envoi compte 13 caractères, ou 14 chiffres suivis parfois d'un caractère de contrôle ; chez Mondial Relay, 8 chiffres le plus souvent, parfois 10 ou 12 ; chez [Colis Privé](carrier:colis-prive), 12 caractères. `1Z999AA10123456784` est un numéro UPS, et beaucoup d'envois postaux portent le format postal international à 13 caractères, comme `RR000000005CH`. Le guide des [formats de numéros de suivi](guide:tracking-number-formats) t'aide à savoir à quel transporteur appartient un numéro.
+
+Le numéro d'un conteneur maritime n'est pas non plus celui d'un colis : trois lettres, un U et sept chiffres, comme `TEMU1234565` (inventé). Il désigne la caisse en acier que transporte un navire, pas ton colis. Si aucun transporteur ne connaît un numéro de cette forme, [Peek](/) affiche « On dirait un numéro de conteneur maritime. Le numéro de suivi figure dans l’e-mail d’expédition ou sur la page de la commande. » et te propose « Choisir le transporteur ».
 
 ## Mon numéro de suivi ne donne rien : est-ce le bon numéro ?
 

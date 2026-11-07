@@ -4,7 +4,7 @@ description: Dove si trova il codice tracking tra e-mail, ordine, SMS e ricevuta
 slug: dove-si-trova-il-codice-tracking
 picture: Un'e-mail di spedizione con il codice RR000000005CH evidenziato in giallo, un'etichetta con il codice a barre accanto e Pip che sorride.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Di solito il codice tracking è nell'e-mail o nell'SMS di spedizione, oppure nel tuo ordine sul sito o nell'app del negozio, un clic dopo il numero d'ordine. Se il pacco l'hai spedito tu, è sulla ricevuta dello sportello o nell'e-mail di conferma. Nessun corriere cerca un pacco per nome e cognome, ma puoi seguirlo lo stesso con l'avviso lasciato dal corriere, con l'account gratuito che alcuni corrieri offrono per i pacchi in arrivo o chiedendo il codice al mittente.
@@ -125,6 +125,8 @@ Per distinguerli: un numero accanto alla parola «ordine» è del negozio (eBay,
 | eBay.it | codice della spedizione |
 
 `1Z999AA10123456784` è un codice UPS; molti invii postali hanno il formato internazionale di 13 caratteri, come `RR000000005CH`. Per capire di chi è un codice, leggi [come capire il corriere dal numero di tracking](guide:tracking-number-formats).
+
+Nemmeno il numero di un container marittimo è quello di un pacco: tre lettere, una U e sette cifre, come `TEMU1234565` (inventato). Indica la cassa d'acciaio che viaggia sulla nave, non il tuo pacco. Se nessun corriere conosce un numero di questa forma, [Peek](/) scrive «Sembra il numero di un container marittimo. Il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine.» e ti propone «Scegli il corriere».
 
 ## Codice tracking non trovato: è il numero giusto?
 

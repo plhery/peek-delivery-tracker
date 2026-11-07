@@ -4,7 +4,7 @@ description: Dal formato del codice si risale spesso al corriere: prefissi, lung
 slug: corriere-dal-numero-di-tracking
 picture: Tre codici di tracking divisi in parti colorate, una lente sul codice paese CH e Pip che osserva incuriosito.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Spesso bastano le lettere e la lunghezza del numero di tracking per capire quale corriere ha il tuo pacco. `1Z` seguito da 16 lettere e cifre è UPS, 18 cifre che iniziano con `99` sono la [Posta svizzera](carrier:swiss-post), e un codice di 13 caratteri come `RR000000005CH` (due lettere, nove cifre, due lettere) di solito è di una posta nazionale, con il Paese che l'ha emesso nelle ultime due lettere. Il caso difficile sono i codici di sole cifre: 14 cifre, per esempio, possono essere di BRT come di DPD. In quei casi l'ultima parola spetta all'e-mail di spedizione, o a un tracker che prova tutti i corrieri possibili.
@@ -123,6 +123,7 @@ Se ha 13 caratteri e finisce con due lettere, per esempio `CN`, è un codice pos
 Con un pacco viaggiano anche altri numeri:
 
 - **Non sono codici di tracking:** il numero d'ordine, che è del negozio (DHL ricorda che il numero di spedizione non è un numero d'ordine), e il codice prenotazione ritiro di Poste, come `CP123456789`, che segue il ritiro a domicilio, non la spedizione.
+- **Nemmeno il numero di un container:** tre lettere del proprietario, una `U`, sei cifre e una cifra di controllo, come `TEMU1234565` (inventato). Indica un container marittimo, non un pacco, e nessun corriere segue un pacco con quel numero. Nel registro dei codici dei proprietari di container tenuto dal Bureau International des Containers (BIC), `TEMU` è della società di noleggio di container Textainer, non del negozio Temu. Se ne aggiungi uno e nessun corriere risponde, Peek scrive «Sembra il numero di un container marittimo. Il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine.» e ti propone «Scegli il corriere».
 - **Funziona, ma accorciato:** l'ID collo GLS. GLS chiede di togliere gli zeri iniziali e la sigla finale «GLS»: resta un numero di cifre come `12345678`.
 
 Gli avvisi lasciati dal corriere, il riferimento del mittente e cosa fare se hai solo il numero d'ordine: [dove trovare il codice di tracking](guide:find-tracking-number).
@@ -176,4 +177,8 @@ Un codice che non dà risultati non è per forza sbagliato. Le poste portoghesi 
 - [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – i formati IT, TBA, LP, 5P e YT, e quelli di Poste Italiane (RA, 1UW, 3UW, 2IMA, 5P e i codici in stile SDA), 4PX, Yanwen (BYS, YP e YW), la Posta svizzera (98 e 99), Cainiao, Quickpac, Planzer, GLS Svizzera e DPD Svizzera, nei dati dei corrieri di Peek
 - [bpost: Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – i codici che iniziano con U non si possono seguire
 - [CTT: Encontrar o código de envio](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/encontrar-o-codigo-de-envio) – codici PT per invii dall'estero, codici che non danno risultati, contattare il mittente
+- [BIC: Container Identification Number (in inglese)](https://www.bic-code.org/identification-number/) – codice del proprietario, U per i container da carico, numero di serie di sei cifre e cifra di controllo
+- [BIC: Registered BIC Code TEMU (in inglese)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (in inglese)](https://www.textainer.com/) – noleggio di container
+- [Peek: Routing (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – numero di container per cui nessun corriere risponde: dov'è il codice, scegliere il corriere
 :::

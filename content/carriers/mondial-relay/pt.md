@@ -15,7 +15,7 @@ O número de expedição da Mondial Relay tem 8 algarismos. O site belga chama-l
 | Número (inventado) | O que é |
 | --- | --- |
 | `12345678` | O número de expedição. A Colisweb e a Heppner usam o mesmo comprimento. |
-| `0012345678` | 10 algarismos: um código da loja e o número de expedição. Também pode ser da [DHL](carrier:dhl-express), da Relais Colis, da Tipsa ou de outras. |
+| `0012345678` | 10 algarismos: um código da loja e o número de expedição. Também pode ser da [DHL](carrier:dhl-express), da Relais Colis ou de outras. |
 | `001234567802` | 12 algarismos: o mesmo, mais o número de ordem do volume. Também pode ser da DPD França, da MRW, da BRT ou de outras. |
 | `00123456780101` | 14 algarismos: o início do código de barras, com o código da loja, o número de expedição, o número de ordem do volume e o total de volumes. Também pode ser da DPD, da [Chronopost](carrier:chronopost), da [SEUR](carrier:seur) ou de outras. |
 | `00123456780101700000000000` | 26 algarismos: o código de barras da etiqueta, só da Mondial Relay, com o número de expedição nos algarismos 3 a 10. |

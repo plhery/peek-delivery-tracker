@@ -17,7 +17,7 @@ Numer przesyłki DHL Express to numer listu przewozowego (po angielsku waybill n
 | `1234567891` | List przewozowy: 10 cyfr, numer całej przesyłki. Tym śledzisz. Ostatnia cyfra jest cyfrą kontrolną. |
 | `JD014600001234567890` | Identyfikator paczki: `JD01` i 16 cyfr, wydrukowany jako `(J)JD…` pod dolnym kodem kreskowym etykiety. Każda paczka w przesyłce ma własny, a prowadzi on do listu przewozowego. |
 
-Dziesięć cyfr mają też numery Mondial Relay, Relais Colis, TIPSA, Estafety, [Packety](carrier:packeta), DHL eCommerce Iberia i [DHL Paket](carrier:dhl), więc sprawdź, jakiego przewoźnika wymienia e-mail ze sklepu. Według dhlexpress.pl numery DHL Parcel / eCommerce mogą mieć 11 znaków lub więcej i często zaczynają się od „C”, „3S”, „JVGL” albo „HL”; w Peek to osobny przewoźnik, [DHL eCommerce Poland](carrier:dhl-ecommerce-pl), z własnym śledzeniem.
+Dziesięć cyfr mają też numery Mondial Relay, Relais Colis, Estafety, [Packety](carrier:packeta), DHL eCommerce Iberia i [DHL Paket](carrier:dhl), więc sprawdź, jakiego przewoźnika wymienia e-mail ze sklepu. Według dhlexpress.pl numery DHL Parcel / eCommerce mogą mieć 11 znaków lub więcej i często zaczynają się od „C”, „3S”, „JVGL” albo „HL”; w Peek to osobny przewoźnik, [DHL eCommerce Poland](carrier:dhl-ecommerce-pl), z własnym śledzeniem.
 
 DHL używa numerów listów przewozowych ponownie: pod numerem mogą pojawić się skany wcześniejszej przesyłki, które Peek pomija.
 

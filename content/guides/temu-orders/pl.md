@@ -4,7 +4,7 @@ description: Gdzie w Temu szukać numeru śledzenia, czemu numer zamówienia go 
 slug: sledzenie-zamowienia-temu
 picture: Stos małych paczek wyjeżdżających z luku samolotu, furgonetka i Pip, który je liczy.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 W Temu numer śledzenia znajdziesz w „Twoich zamówieniach”. Numer zamówienia Temu to nie numer śledzenia: przewoźnik go nie zna. Wklej numer śledzenia do [Peek](/): znajdzie przewoźnika po kształcie numeru, a jeśli pierwszy przewoźnik poda, kto przejmuje paczkę w Polsce, przełączy się na nowego.
@@ -19,6 +19,8 @@ Masz numer, ale nie wiesz, do którego przewoźnika należy? Wpisz go tutaj:
 :::
 
 Jeśli wkleisz całą wiadomość z oboma numerami, Peek weźmie numer śledzenia, a numer zamówienia pominie. Gdzie szukać numeru w innych sklepach: [gdzie znaleźć numer przesyłki](guide:find-tracking-number). Jak wyglądają numery: [rozpoznaj przewoźnika po numerze](guide:tracking-number-formats).
+
+Numer z trzech liter, `U` i siedmiu cyfr, jak `TEMU1234565` (zmyślony), też nie jest numerem śledzenia: to numer kontenera morskiego, a żaden przewoźnik nie śledzi po nim paczek. `TEMU` na początku nie oznacza sklepu: w rejestrze kodów właścicieli kontenerów, który prowadzi Bureau International des Containers (BIC), kod `TEMU` należy do firmy Textainer, która wynajmuje kontenery. Jeśli dodasz taki numer i nie odpowie żaden przewoźnik, Peek napisze „To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.” i zaproponuje „Wybierz przewoźnika”.
 
 ## Kto dostarcza paczki z Temu w Polsce?
 
@@ -49,4 +51,8 @@ Peek pokazuje to, co publikują przewoźnicy. Zgłoszenia i zwroty pieniędzy za
 - [Komisja Europejska: EU customs reform (po angielsku)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – opłata manipulacyjna 2 euro od 1 listopada 2026 r.
 - [Komisja Europejska: Customs Guidance on EUR 3 customs duty (po angielsku)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 euro za rodzaj produktu
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów, przewoźnicy rozpoznawani przez Peek
+- [BIC: Container Identification Number (po angielsku)](https://www.bic-code.org/identification-number/) – kod właściciela, U dla kontenerów ładunkowych, sześciocyfrowy numer seryjny i cyfra kontrolna
+- [BIC: Registered BIC Code TEMU (po angielsku)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (po angielsku)](https://www.textainer.com/) – wynajem kontenerów
+- [Peek: Routing (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – numer kontenera, na który nie odpowiada żaden przewoźnik: gdzie jest numer śledzenia, wybór przewoźnika
 :::

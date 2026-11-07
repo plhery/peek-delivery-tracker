@@ -4,7 +4,7 @@ description: Dónde encontrar el número de seguimiento de un pedido y cómo loc
 slug: localizar-paquete-sin-numero-de-seguimiento
 picture: Un correo de envío con el número RR000000005CH resaltado en amarillo, una etiqueta con código de barras al lado y Pip sonriendo.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Lo normal es que el número de seguimiento esté en el correo o el SMS que te manda la tienda cuando envía el pedido, o en el propio pedido, en su web o su app, a un clic del número de pedido. Si el paquete lo has enviado tú, está en el recibo o el justificante que te dieron al dejarlo. Ni [Correos](carrier:correos-spain) ni GLS buscan envíos por nombre o DNI, pero aún puedes seguir el paquete con el aviso de llegada, con la cuenta de algunos transportistas o pidiéndole el número al remitente.
@@ -21,7 +21,7 @@ El número de seguimiento se crea para el remitente, y si te llega es gracias a 
 - El remitente | Si no tienes el número, pídeselo a quien te envía el paquete.
 :::
 
-No siempre se llama igual: Correos habla de «código de envío» o «número de envío», [MRW](carrier:mrw) de «número de envío», InPost de «número de expedición» y casi todas las tiendas de «número de seguimiento»; [NACEX](carrier:nacex) lo pide en dos partes, «Agencia» y «Albarán». ¿Tienes el correo pero no sabes cuál de todos los números es el bueno? Pega el correo entero en [Peek](/) y él se encarga de encontrar el número de seguimiento y el transportista.
+No siempre se llama igual: Correos habla de «código de envío» o «número de envío», [MRW](carrier:mrw) de «número de envío», InPost de «número de expedición» y casi todas las tiendas de «número de seguimiento»; [NACEX](carrier:nacex) lo pide en dos partes, «Agencia» y «Albarán». Cómo es el número de cada transportista y dónde lo encuentras: [SEUR](carrier:seur), [CTT Express](carrier:ctt-express), [Correos Express](carrier:correos-express) y [Correos](carrier:correos-spain). ¿Tienes el correo pero no sabes cuál de todos los números es el bueno? Pega el correo entero en [Peek](/) y él se encarga de encontrar el número de seguimiento y el transportista.
 
 ### En tu pedido de Amazon, eBay, Shein y otras tiendas
 
@@ -34,7 +34,7 @@ No siempre se llama igual: Correos habla de «código de envío» o «número de
 | Vinted | La conversación del pedido → **Rastrear paquete**, donde también puedes copiar el número |
 | Zalando | El enlace del correo que te manda cuando el pedido sale del almacén, o el apartado **Mi cuenta** |
 
-¿No hay número? Puede que todavía no lo haya, o que no vaya a haberlo nunca. eBay solo lo muestra si el vendedor usa un servicio con seguimiento y añade el número en eBay. Y Vinted no rastrea los paquetes con envío personalizado: en esos pedidos, es el vendedor quien debería pasarte el número.
+¿No hay número? Puede que todavía no lo haya, o que no vaya a haberlo nunca. eBay solo lo muestra si el vendedor usa un servicio con seguimiento y añade el número en eBay. Y Vinted solo rastrea los artículos comprados con el botón «Comprar ahora» y enviados siguiendo las instrucciones de su app.
 
 Quién reparte para cada tienda y qué hacer si el seguimiento se para: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) y [Wallapop](guide:second-hand-orders).
 
@@ -112,6 +112,8 @@ No. DHL lo deja claro: el número de pedido lo asigna la tienda, y no es un núm
 
 Para distinguirlos: el número que aparece como «Pedido» es el de la tienda (eBay, por ejemplo, lo manda en el correo «Pedido confirmado») y no sirve en la web del transportista; el de seguimiento viene con el nombre de un transportista o con un enlace a su página. `1Z999AA10123456784` es un número de UPS; muchos envíos postales llevan el formato internacional de 13 caracteres, como `RR000000005CH`. Para saber de qué transportista es un número, mira [los formatos de los números de seguimiento](guide:tracking-number-formats).
 
+Tampoco es de un paquete el número de un contenedor marítimo: tres letras, una U y siete cifras, como `TEMU1234565` (inventado). Identifica la caja de acero que viaja en el barco, no tu paquete. Si ningún transportista conoce un número con esa forma, [Peek](/) te dice «Parece el número de un contenedor marítimo. El número de seguimiento está en el correo de envío o en la página del pedido.» y te ofrece «Elegir transportista».
+
 ## ¿Por qué no sale nada con mi número de seguimiento?
 
 Casi siempre porque es nuevo: la etiqueta ya existe, pero el transportista aún no tiene el paquete. Vinted avisa de que el seguimiento puede tardar hasta 48 horas en aparecer; lo que tarda cada transportista lo tienes en [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
@@ -143,7 +145,7 @@ Pasado ese plazo, revisa el número:
 - [eBay.es: Realizar el seguimiento de un artículo](https://www.ebay.es/help/buying/envio-entrega/seguimiento-articulo?id=4027) – Historial de compras, Pedido confirmado, servicio con seguimiento, pedir al vendedor que añada la información
 - [Etsy: ¿Cuál es el estado de mi pedido?](https://help.etsy.com/hc/es/articles/115015521948) – Compras y reseñas, Seguir paquete, Ver el recibo, Ayuda con el pedido, no todos los métodos de envío tienen seguimiento
 - [SHEIN: Cómo rastrear el pedido](https://m.shein.com/es/How-to-track-my-order-a-496.html) – Mis Pedidos, Seguir cuando el pedido diga «Enviado»
-- [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – Rastrear paquete, 48 horas, envío personalizado
+- [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – Rastrear paquete, 48 horas, seguimiento solo con «Comprar ahora» y las instrucciones de la app
 - [Zalando: ¿Dónde está mi pedido?](https://www.zalando.es/faq/where-is-my-parcel.html) – correo al salir del almacén, Mi cuenta
 - [UPU: Norma S10](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – el formato postal de 13 caracteres
 :::

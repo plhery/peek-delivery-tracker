@@ -17,7 +17,7 @@ O número de seguimento da DHL Express é o número da carta de porte (em inglê
 | `1234567891` | A carta de porte: 10 algarismos, o número que segue o envio inteiro. O último é um algarismo de controlo. |
 | `JD014600001234567890` | O identificador de volume: `JD01` e 16 algarismos, impresso como `(J)JD…` por baixo do código de barras inferior da etiqueta. Cada volume do envio tem o seu, que leva à carta de porte. |
 
-A [Mondial Relay](carrier:mondial-relay), a Relais Colis, a [TIPSA](carrier:tipsa), a Estafeta, a Packeta, a [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) e a [DHL Paket](carrier:dhl) também usam números de 10 algarismos, por isso confirma no e-mail da loja qual é a transportadora.
+A [Mondial Relay](carrier:mondial-relay), a Relais Colis, a Estafeta, a Packeta, a [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) e a [DHL Paket](carrier:dhl) também usam números de 10 algarismos, por isso confirma no e-mail da loja qual é a transportadora.
 
 A DHL reutiliza números de carta de porte: um número pode trazer leituras de um envio anterior, que o Peek ignora.
 

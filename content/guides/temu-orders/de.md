@@ -4,7 +4,7 @@ description: Warum du mit der Temu-Bestellnummer kein Paket verfolgst, wie du de
 slug: temu-sendungsverfolgung
 picture: Ein Stapel kleiner Pakete, der aus dem Frachtraum eines Flugzeugs kommt, ein Lieferwagen und Pip, der sie zählt.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 Mit der Temu-Bestellnummer verfolgst du kein Paket: Dafür brauchst du die Sendungsnummer des Paketdienstes. Füg sie in [Peek](/) ein, und Peek findet den passenden unter mehr als 3.500 Paketdiensten und folgt dem Partner vor Ort, wenn der erste Paketdienst einen nennt. Fügst du stattdessen die Bestellnummer ein, sagt dir Peek, dass sie nach einer Temu-Bestellnummer aussieht und nicht nach einer Sendungsnummer.
@@ -17,6 +17,8 @@ Nein. Die Temu-Bestellnummer ist Temus eigene Referenz und keine Sendungsnummer:
 :::
 
 Fügst du eine ganze Nachricht mit beiden Nummern ein, nimmt Peek die Sendungsnummer und lässt die Bestellnummer beiseite. Wo andere Shops die Nummer in Mails und Konten verstecken: [Sendungsnummer finden](guide:find-tracking-number).
+
+Auch eine Nummer aus drei Buchstaben, einem `U` und sieben Ziffern, etwa `TEMU1234565` (erfunden), ist keine Sendungsnummer, sondern die eines Seecontainers, und kein Paketdienst verfolgt damit ein Paket. Das `TEMU` darin steht nicht für den Shop: Im Register der Container-Eigentümercodes, das das Bureau International des Containers (BIC) führt, gehört `TEMU` dem Container-Vermieter Textainer. Fügst du eine solche Nummer hinzu und antwortet kein Paketdienst, schreibt Peek „Das sieht nach einer Containernummer aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.“ und bietet „Paketdienst wählen“ an.
 
 ## Welcher Paketdienst liefert mein Temu-Paket?
 
@@ -44,4 +46,8 @@ Peek zeigt, was der Paketdienst veröffentlicht. Eine Reklamation oder eine Erst
 - [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € seit 1. November 2026
 - [EU-Kommission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € pro Ware bis 150 € seit 1. Juli 2026, 2 € pro Ware, pro Position der Zollanmeldung
 - [Universal Parcel Scraper: Carrier-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – was Peek prüft
+- [BIC: Container Identification Number](https://www.bic-code.org/identification-number/) – Eigentümercode, U für Frachtcontainer, sechsstellige Seriennummer und Prüfziffer
+- [BIC: Registered BIC Code TEMU](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer](https://www.textainer.com/) – Container-Vermietung
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – Containernummer, auf die kein Paketdienst antwortet: wo die Sendungsnummer steht, Paketdienst wählen
 :::

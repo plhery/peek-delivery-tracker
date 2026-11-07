@@ -4,7 +4,7 @@ description: Porque é que o número da encomenda Temu não serve para seguir o 
 slug: rastrear-encomenda-temu
 picture: Uma pilha de pequenas encomendas a sair do porão de um avião, uma carrinha e o Pip a contá-las.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 O número da encomenda Temu não serve para seguir o volume: precisas do número de seguimento da transportadora. Cola-o no [Peek](/), que descobre a transportadora pela forma do número e, se a primeira transportadora indicar quem fica com o volume em Portugal, passa para a nova. Se colares o número da encomenda, o Peek avisa-te de que parece um número de encomenda da Temu, e não de seguimento.
@@ -19,6 +19,8 @@ Tens o número mas não sabes de que transportadora é? Escreve-o aqui:
 :::
 
 Se colares uma mensagem inteira com os dois números, o Peek fica com o de seguimento e põe de lado o da encomenda. Onde procurar noutras lojas: [onde encontrar o número de seguimento](guide:find-tracking-number). As formas dos números: [reconhecer a transportadora pelo número](guide:tracking-number-formats).
+
+Um número de três letras, um `U` e sete algarismos, como `TEMU1234565` (inventado), também não é um número de seguimento: é o de um contentor marítimo, e nenhuma transportadora segue uma encomenda por ele. O `TEMU` do início não tem nada a ver com a loja: no registo de códigos de proprietários de contentores mantido pelo Bureau International des Containers (BIC), `TEMU` é da Textainer, uma empresa de aluguer de contentores. Se adicionares um e nenhuma transportadora responder, o Peek diz «Isto parece o número de um contentor marítimo. O número de seguimento está no e-mail de envio ou na página do pedido.» e propõe «Escolher a transportadora».
 
 ## Que transportadora entrega as encomendas da Temu em Portugal?
 
@@ -52,4 +54,8 @@ O Peek mostra o que as transportadoras publicam. As reclamações e os reembolso
 - [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento de 2 € desde 1 de novembro de 2026
 - [Comissão Europeia: Customs Guidance on EUR 3 customs duty (em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € por tipo de produto
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas dos números, transportadoras que o Peek reconhece
+- [BIC: Container Identification Number (em inglês)](https://www.bic-code.org/identification-number/) – código do proprietário, U para os contentores de carga, número de série de seis algarismos e algarismo de controlo
+- [BIC: Registered BIC Code TEMU (em inglês)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (em inglês)](https://www.textainer.com/) – aluguer de contentores
+- [Peek: Routing (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – número de contentor sem resposta de nenhuma transportadora: onde está o número de seguimento, escolher a transportadora
 :::

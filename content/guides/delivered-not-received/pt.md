@@ -142,7 +142,7 @@ Podes, mas nenhuma das regras acima o exige para teres o reembolso. Um furto pod
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 horas, 30 dias, estornos
 - [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/726) – 2 dias, cancelar o pedido
 - [Vinted: Política de Reembolso](https://www.vinted.pt/help/465) – Tenho um problema, compras a particulares
-- [Vinted: A encomenda não foi entregue (prazos)](https://www.vinted.pt/help/658) – 14 dias nas compras a uma Conta de Venda Pro, concluídas automaticamente ao fim desse prazo
+- [Vinted: Termos e Condições da Vinted Pro](https://www.vinted.pt/pro-terms-and-conditions) – 14 dias nas compras a uma Conta de Venda Pro, concluídas automaticamente ao fim desse prazo
 - [PayPal: Programa de Proteção do comprador do PayPal](https://www.paypal.com/pt/legalhub/paypal/buyer-protection?locale.x=pt_PT) – 180 dias, comprovativo de entrega, emissor do cartão
 - [MAI: Queixa Eletrónica](https://queixaselectronicas.mai.gov.pt/) – furto, PSP e GNR
 :::

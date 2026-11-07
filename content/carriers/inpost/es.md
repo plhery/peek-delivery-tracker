@@ -18,7 +18,7 @@ El número está en los correos de la tienda y en los avisos de InPost. En la Ap
 | --- | --- |
 | `FV00000000` | FV y 8 cifras: un número propio de InPost España. |
 | `00000000` | 8 cifras, como el ejemplo de inpost.es. [Mondial Relay](carrier:mondial-relay), Colisweb y Heppner usan la misma longitud. |
-| `0000000000` | 10 cifras, igual que [DHL Express](carrier:dhl-express), [DHL eCommerce Iberia](carrier:dhl-ecommerce-es), [TIPSA](carrier:tipsa) y otras. |
+| `0000000000` | 10 cifras, igual que [DHL Express](carrier:dhl-express), [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) y otras. |
 | `000000000000` | 12 cifras, igual que [MRW](carrier:mrw), Sending y otras. |
 
 Si el correo de la tienda nombra otra empresa, el número seguramente es suyo: mira [de qué empresa es un número de seguimiento](guide:tracking-number-formats).

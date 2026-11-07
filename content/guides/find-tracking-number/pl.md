@@ -4,7 +4,7 @@ description: Gdzie znaleźć numer przesyłki: e-mail, SMS, zamówienie w sklepi
 slug: gdzie-znalezc-numer-przesylki
 picture: E-mail o wysyłce z numerem przesyłki RR000000005CH zaznaczonym na żółto, obok etykieta z kodem kreskowym i uśmiechnięty Pip.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Numer przesyłki zwykle znajdziesz w e-mailu lub SMS-ie o wysyłce albo w szczegółach zamówienia na stronie czy w aplikacji sklepu, o jedno kliknięcie dalej niż numer zamówienia. Jeśli to Ty nadajesz paczkę, numer jest na potwierdzeniu nadania. Żaden przewoźnik nie wyszuka paczki po nazwisku ani adresie, ale numer może Ci dać awizo albo nadawca, a aplikacja przewoźnika sama pokaże paczki wysłane na Twój numer telefonu.
@@ -106,6 +106,8 @@ To dwa różne numery. DHL pisze wprost, że numer przesyłki to nie numer zamó
 :::
 
 Jak je odróżnić? Numer opisany jako „zamówienie” należy do sklepu i u przewoźnika nie zadziała. Numer przesyłki zwykle stoi obok nazwy przewoźnika albo linku do jego śledzenia. Numer [InPost](carrier:inpost) ma zwykle 24 cyfry, `1Z999AA10123456784` to numer UPS, a wiele przesyłek pocztowych ma międzynarodowy format 13 znaków, jak `RR000000005CH`. Do którego przewoźnika należy numer, podpowie poradnik [jaki kurier po numerze przesyłki](guide:tracking-number-formats).
+
+Numer kontenera morskiego też nie jest numerem paczki: to trzy litery, U i siedem cyfr, jak `TEMU1234565` (zmyślony). Oznacza stalową skrzynię, którą wiezie statek, a nie Twoją paczkę. Jeśli żaden przewoźnik nie zna numeru o takim kształcie, [Peek](/) napisze: „To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.” i zaproponuje „Wybierz przewoźnika”.
 
 ## Dlaczego numer przesyłki nic nie pokazuje?
 

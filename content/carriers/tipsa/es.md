@@ -22,7 +22,7 @@ El localizador de TIPSA pide el número de envío «compuesto por 22 dígitos» 
 | --- | --- |
 | `0123450123451234567890` | El número completo de 22 cifras. Es el que sirve. |
 | `012345 012345 1234567890` | El mismo número con espacios. Peek lo lee; el campo del localizador de TIPSA solo admite 22 caracteres, así que allí escríbelo sin espacios. |
-| `1234567890` | El albarán de 10 cifras suelto. El localizador de TIPSA pide las 22 cifras. |
+| `1234567890` | El albarán de 10 cifras suelto. El localizador de TIPSA pide las 22 cifras, y Peek no lo toma por un número de TIPSA. |
 
 Las tiendas pueden hacer que TIPSA te mande correos y SMS cuando sale el envío, cuando llega a la agencia, si hay una incidencia y tras la entrega; sus enlaces de seguimiento llevan a la página del envío en TIPSA. Sin el número, el localizador de TIPSA también busca por la referencia del envío, pero pide además un identificador (agencia y cliente) que tendrías que pedir al remitente. Más sitios donde buscarlo en [cómo encontrar tu número de seguimiento](guide:find-tracking-number).
 
@@ -88,7 +88,7 @@ TIPSA mantiene una página de su app, pero sus fichas en las tiendas de aplicaci
 
 [Peek](/) acepta el número de 22 cifras con o sin espacios. Otros transportistas comparten esa forma, así que Peek pregunta a la vez a los posibles, TIPSA el primero: verás «preguntando a…» y luego «TIPSA tiene este paquete.» si TIPSA lo conoce. Un número cuyos dos códigos de agencia empiezan por `00` se asigna a CTT Express (salvo si empieza por `00001000`); si la tienda te dijo TIPSA, pulsa «Cambiar» y elígelo. No hace falta código postal.
 
-El albarán de 10 cifras no se puede seguir a través de TIPSA, ni con «Cambiar» ni desde un enlace. Puedes pegar el enlace del correo de la tienda: Peek lee los enlaces de tip-sa.com con `id=` en páginas que acaban en `datos_env.php`, `datos_prestashop.php` o `datos.php`, y en la dirección principal de tip-sa.com. Los enlaces al localizador de TIPSA o a la página del envío en dinapaqweb no se leen.
+El albarán de 10 cifras no se puede seguir a través de TIPSA, ni con «Cambiar» ni desde un enlace. Peek no propone TIPSA para 10 cifras ni le pregunta por ellas; si eliges TIPSA, Peek avisa de que TIPSA «no emite números como este» y pregunta a servicios de seguimiento. Busca el número completo de 22 cifras, o el enlace de seguimiento, en el correo o el SMS de envío, o pídeselo a la tienda. Puedes pegar el enlace del correo de la tienda: Peek lee los enlaces de tip-sa.com con `id=` en páginas que acaban en `datos_env.php`, `datos_prestashop.php` o `datos.php`, y en la dirección principal de tip-sa.com. Los enlaces al localizador de TIPSA o a la página del envío en dinapaqweb no se leen.
 
 Peek muestra el estado, el historial con la población de cada escaneo en un mapa, el nombre del remitente si TIPSA no lo oculta y el peso. Los estados salen en el español de TIPSA, tal como los escribe. Peek lee todas las horas como hora de Madrid, también las de agencias portuguesas. Descarta el destinatario, la dirección, los códigos postales, la referencia, el número de bultos, el volumen y la prueba de entrega. No muestra fecha de entrega prevista ni sigue el paquete si pasa a otro transportista. Consulta TIPSA cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora de Madrid, y mientras responda el propio seguimiento de TIPSA; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones cuando cambia el estado. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
 
@@ -108,7 +108,7 @@ Puede hacerlo si la tienda contrata la entrega en sábado: TIPSA la ofrece a los
 
 ### ¿Se puede seguir un envío TIPSA con 10 dígitos?
 
-No: el localizador de TIPSA pide el número de 22 cifras. Las 10 cifras son el albarán del final; si solo tienes esas, pide el número completo al remitente.
+No: el localizador de TIPSA pide el número de 22 cifras, y Peek tampoco toma 10 cifras por un número de TIPSA. Las 10 cifras son el albarán del final; si solo tienes esas, pide el número completo al remitente.
 
 :::sources
 - [TIPSA: Localizar mi envío](https://www.tip-sa.com/es/localizacion-envios) – número de 22 cifras, formulario, búsqueda por referencia con identificador (agencia y cliente), teléfono del pie de página

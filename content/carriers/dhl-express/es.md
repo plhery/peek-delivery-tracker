@@ -17,7 +17,7 @@ El número de seguimiento de DHL Express es el número de albarán (en inglés, 
 | `1234567891` | El albarán: 10 cifras, con el que sigues todo el envío. La última es un dígito de control. |
 | `JD014600001234567890` | El identificador de pieza: `JD01` y 16 cifras, impreso como `(J)JD…` bajo el código de barras inferior de la etiqueta. Cada bulto del envío tiene el suyo, y lleva al albarán. |
 
-Otras empresas también usan números de 10 cifras, como [TIPSA](carrier:tipsa), [Mondial Relay](carrier:mondial-relay), Relais Colis, Estafeta, Packeta, [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (DHL Parcel en España) y [DHL Paket](carrier:dhl), así que comprueba qué empresa nombra el correo de la tienda.
+Otras empresas también usan números de 10 cifras, como [Mondial Relay](carrier:mondial-relay), Relais Colis, Estafeta, Packeta, [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (DHL Parcel en España) y [DHL Paket](carrier:dhl), así que comprueba qué empresa nombra el correo de la tienda.
 
 DHL reutiliza los números de albarán: con un número pueden aparecer escaneos de un envío anterior, que Peek ignora.
 

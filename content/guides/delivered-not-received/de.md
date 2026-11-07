@@ -157,7 +157,7 @@ Das kannst du, aber keine der Regeln oben verlangt eine Anzeige, bevor du dein G
 - [eBay.de: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 Kalendertage, 3 Werktage, Zustellnachweis, Rückbelastung
 - [Etsy: Einen Fall eröffnen](https://help.etsy.com/hc/de/articles/5745586898199) – 48 Stunden, 30 Tage, Rückbuchung
 - [Vinted: Die Sendung wurde nicht geliefert](https://www.vinted.de/help/726) – 2 Tage, Problem lösen
-- [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/658) – 2 Tage, 14 Kalendertage bei Pro-Verkäufern, automatischer Abschluss
+- [Vinted: Allgemeine Geschäftsbedingungen für Vinted Pro](https://www.vinted.de/pro-terms-and-conditions) – 14 Kalendertage bei Pro-Verkäufern, automatischer Abschluss
 - [Vinted: Rückerstattungsrichtlinien](https://www.vinted.de/help/465) – 2 Kalendertage, Ich habe ein Problem
 - [PayPal: PayPal-Käuferschutz](https://www.paypal.com/de/legalhub/paypal/buyer-protection) – 180 Tage, 20 Tage, Lieferung an deine Adresse, Freunde und Familie, Polizeibericht, Kreditkarte
 - [Klarna: Ich habe meine Bestellung nicht erhalten. Muss ich dafür zahlen?](https://www.klarna.com/de/hilfe/lieferung-und-retouren/ich-habe-meine-bestellung-nicht-erhalten-muss-ich-dafur-zahlen/) – nur bezahlen, wenn alles da ist, Zahlung pausieren

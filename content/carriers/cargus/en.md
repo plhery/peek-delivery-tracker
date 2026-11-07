@@ -20,7 +20,7 @@ Where to find it:
 
 The AWB isn't your order number. Lost the email or SMS? Cargus says to ask the shop you ordered from. More in [how to find a tracking number](guide:find-tracking-number).
 
-Ten digits also fit other carriers: DHL, [Relais Colis](carrier:relais-colis), [TIPSA](carrier:tipsa) and others use numbers of that length. Go by the courier the shop's email or the SMS names, and see [tracking number formats](guide:tracking-number-formats).
+Ten digits also fit other carriers: DHL, [Relais Colis](carrier:relais-colis) and others use numbers of that length. Go by the courier the shop's email or the SMS names, and see [tracking number formats](guide:tracking-number-formats).
 
 ## What Cargus tracking statuses mean
 

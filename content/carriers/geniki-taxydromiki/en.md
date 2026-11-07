@@ -19,7 +19,7 @@ Geniki calls it the shipment number of the courier consignment note (ΣΥ.ΔΕ.�
 
 Geniki doesn't say where recipients get it: look in the shop's shipping email or order page, or ask the shop. See [how to find your tracking number](guide:find-tracking-number).
 
-Ten digits are not unique to Geniki. [ACS Courier](carrier:acs-courier) vouchers look exactly the same, and [DHL Express](carrier:dhl-express), [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), [TIPSA](carrier:tipsa) and others use [10-digit numbers](guide:tracking-number-formats) too. If the shop's email names another carrier, track it there. Geniki's tracker takes up to 10 vouchers at once, separated by commas.
+Ten digits are not unique to Geniki. [ACS Courier](carrier:acs-courier) vouchers look exactly the same, and [DHL Express](carrier:dhl-express), [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis) and others use [10-digit numbers](guide:tracking-number-formats) too. If the shop's email names another carrier, track it there. Geniki's tracker takes up to 10 vouchers at once, separated by commas.
 
 ## Geniki Taxydromiki tracking statuses explained
 

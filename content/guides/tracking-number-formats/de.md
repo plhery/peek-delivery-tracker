@@ -4,7 +4,7 @@ description: An Anfang, Länge und Endung der Sendungsnummer erkennst du oft den
 slug: sendungsnummer-welcher-paketdienst
 picture: Drei Etiketten mit Sendungsnummern, in farbige Teile zerlegt, eine Lupe auf dem Ländercode CH, und Pip schaut neugierig zu.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-07
 ---
 
 Füge deine Sendungsnummer unten ins Feld ein: Peek erkennt an ihrer Form, welcher Paketdienst dein Paket hat, und mit „Dein Paket verfolgen“ siehst du, wo es gerade ist. Steht dort „Könnte sein“, nutzen mehrere Paketdienste diese Form, und der richtige ist der aus der Versandmail. Fügst du eine Bestellnummer von Amazon, Shein oder Temu ein, sagt dir das Feld, wo die Sendungsnummer steht. Oft reicht auch ein Blick: Beginnt die Nummer mit `1Z` und hat 18 Zeichen, ist es UPS; `H` plus 16 bis 19 Ziffern ist Hermes. 18 Ziffern ab `99`, gedruckt wie `99.34.123456.99999980`, kommen von der [Schweizerischen Post](carrier:swiss-post), und 13 Zeichen wie `RR000000005DE` (zwei Buchstaben, neun Ziffern, zwei Buchstaben) stammen meist von einer nationalen Post, deren Land in den letzten zwei Buchstaben steht, hier Deutschland. Schwierig wird es bei reinen Ziffern: 10, 12, 14 oder 22 Stellen passen jeweils zu mehreren Paketdiensten.
@@ -122,6 +122,8 @@ Die Bestellnummer stammt vom Shop, und DHL erinnert daran, dass sie keine Sendun
 
 Drei Bestellnummern, die oft statt der Sendungsnummer eingefügt werden, erkennt das Feld oben und sagt dir, wo die Sendungsnummer steht: Amazon (`000-0000000-0000000`, drei, sieben und sieben Ziffern), Shein (`GSH` plus 12 Buchstaben oder Ziffern) und Temu (`PO-000-` plus 17 Ziffern). Bei Temu tippst du unter „Deine Bestellungen“ neben der Bestellung auf „Verfolgen“; mehr dazu unter [Temu-Sendungsverfolgung](guide:temu-orders).
 
+Auch eine Containernummer ist keine Sendungsnummer: drei Buchstaben für den Eigentümer, ein `U`, sechs Ziffern und eine Prüfziffer, etwa `TEMU1234565` (erfunden). Sie bezeichnet einen Seecontainer, kein Paket, und kein Paketdienst verfolgt damit ein Paket. Im Register der Container-Eigentümercodes, das das Bureau International des Containers (BIC) führt, gehört `TEMU` dem Container-Vermieter Textainer, nicht dem Shop Temu. Fügst du eine solche Nummer hinzu und antwortet kein Paketdienst, schreibt Peek „Das sieht nach einer Containernummer aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.“ und bietet „Paketdienst wählen“ an.
+
 ## Warum sich die Sendungsnummer unterwegs ändern kann
 
 Ein Paket, das eine Grenze überquert, wechselt oft den Paketdienst, und jeder kann sein eigenes Etikett aufkleben. Die UPU erlaubt der Post im Zielland, neben die ursprüngliche Nummer einen eigenen Strichcode zu setzen, solange er nicht das 13-stellige Postformat hat.
@@ -167,4 +169,8 @@ Findet die Sendungsverfolgung nichts, ist die Nummer nicht unbedingt falsch abge
 - [Yanwen: YW Tracking (auf Englisch)](https://track.yw56.com.cn/en/index) – Yanwens Tracking-Seite, kein Beispiel veröffentlicht
 - [Cainiao: Help centre](https://global.cainiao.com/helpDoc.htm) – beim Economy-Versand keine Sendungsverfolgung nach der Übergabe
 - [bpost: Kann ich mein Paket online verfolgen?](https://www.bpost.be/de/faq/kann-ich-mein-paket-online-verfolgen) – Strichcodes mit U lassen sich nicht verfolgen
+- [BIC: Container Identification Number (auf Englisch)](https://www.bic-code.org/identification-number/) – Eigentümercode, U für Frachtcontainer, sechsstellige Seriennummer und Prüfziffer
+- [BIC: Registered BIC Code TEMU (auf Englisch)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (auf Englisch)](https://www.textainer.com/) – Container-Vermietung
+- [Peek: Routing (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – Containernummer, auf die kein Paketdienst antwortet: wo die Sendungsnummer steht, Paketdienst wählen
 :::

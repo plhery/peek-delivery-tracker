@@ -144,7 +144,7 @@ You can, though none of the rules above require it for a refund. Citizens Advice
 - [eBay.co.uk: Money Back Guarantee](https://www.ebay.co.uk/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – £450, 30 days
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 hours, 30 days, chargebacks
 - [Vinted: Refund policy](https://www.vinted.co.uk/help/465-the-vinted-refund-policy) – 2 days
-- [Vinted: Parcel didn't arrive](https://www.vinted.co.uk/help/658-package-didn-t-arrive) – 2 days, 14 days for Pro sellers
+- [Vinted: Pro Terms and Conditions](https://www.vinted.co.uk/pro-terms-and-conditions) – 14 calendar days for Pro sellers, "I have an issue"
 - [Vinted: Parcel wasn't delivered](https://www.vinted.co.uk/help/726) – seller paid, cancelling
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – EU: seller responsible for damage until you receive the goods
 - [UK Consumer Rights Act 2015, s. 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29) – risk

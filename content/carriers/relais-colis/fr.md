@@ -15,8 +15,8 @@ Le formulaire de suivi demande un « numéro de colis » de 12 à 16 caractères
 | Numéro (inventé) | Ce qu'il faut savoir |
 | --- | --- |
 | `CC1234567890` à `CC12345678901234` | `CC` puis 10 à 14 chiffres : la forme de l'exemple de Relais Colis. |
-| `1234567890` | 10 chiffres. Correspond aussi à DHL, [Mondial Relay](carrier:mondial-relay), TIPSA et d'autres. |
-| `19999999999980` | 14 chiffres. Correspond aussi à DPD, SEUR, BRT, [Ciblex](carrier:ciblex) et d'autres. |
+| `1234567890` | 10 chiffres. Correspond aussi à DHL, [Mondial Relay](carrier:mondial-relay) et d'autres. |
+| `19999999999980` | 14 chiffres. Correspond à DPD, SEUR, BRT, [Ciblex](carrier:ciblex) et d'autres ; Peek n'interroge pas Relais Colis pour un tel numéro. |
 | `VD1234567890` | `VD` puis 10 chiffres. Correspond aussi à [Colis Privé](carrier:colis-prive). |
 
 **Où le chercher.** Pour un colis entre particuliers, Relais Colis envoie au destinataire un e-mail de confirmation qui permet de suivre le colis ; l'expéditeur, lui, retrouve le numéro dans son compte, rubrique « Mes Commandes ». Pour une commande en ligne, regarde l'e-mail d'expédition de la boutique ou la page de ta commande.
@@ -85,7 +85,7 @@ Relevé sur relaiscolis.com le 11 octobre 2026 :
 
 ## Suivre un colis Relais Colis avec Peek
 
-[Peek](/) reconnaît tout de suite un numéro `CC` comme un numéro Relais Colis. Les autres formes sont partagées : il interroge les transporteurs les plus probables et affiche « Peek demande à … » pendant ce temps. Pour 10 chiffres, il demande à Relais Colis, TIPSA et DHL eCommerce Spain (et d'abord à [DHL Express](carrier:dhl-express) si le numéro passe sa clé de contrôle) ; pour un numéro `VD`, à Colis Privé et Relais Colis. Avec 14 chiffres, Relais Colis n'est interrogé en premier que si tu es en France ; ailleurs, il peut ne pas l'être du tout. Si plusieurs transporteurs connaissent le numéro, ou aucun, appuie sur « Changer » et choisis Relais Colis. Un lien de suivi relaiscolis.com marche aussi. Aucun code postal n'est demandé.
+[Peek](/) reconnaît tout de suite un numéro `CC` comme un numéro Relais Colis. Les autres formes sont partagées : il interroge les transporteurs les plus probables et affiche « Peek demande à … » pendant ce temps. Pour 10 chiffres, il demande à DHL eCommerce Spain, Packeta et BOX NOW, pas à Relais Colis (et d'abord à [DHL Express](carrier:dhl-express), ACS Courier et Geniki Taxydromiki si le numéro passe la clé de contrôle de DHL Express) ; pour un numéro `VD`, à Colis Privé et Relais Colis. Avec 14 chiffres, il demande à Chronopost, à DPD et à d'autres, mais pas à Relais Colis, même si tu es en France. Si plusieurs transporteurs connaissent le numéro, ou aucun, appuie sur « Changer » et choisis Relais Colis. Un lien de suivi relaiscolis.com marche aussi. Aucun code postal n'est demandé.
 
 Peek affiche uniquement le statut et l'historique : pas de lieu sur la carte, pas de date de livraison prévue, ni le nom ou l'adresse du relais qui garde ton colis. Il ne garde pas non plus ton nom ni ton adresse. Les statuts restent en français, tels que Relais Colis les écrit ; seuls quelques libellés exacts, comme `Livraison effectuée`, prennent le libellé de Peek (« Livré »). Les heures sont lues à l'heure de Paris. Quand le dernier statut de Relais Colis n'a pas d'heure exacte, Peek prend l'historique daté chez d'autres services de suivi et redemande à Relais Colis toutes les 6 heures. Sinon, il vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Relais Colis qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 

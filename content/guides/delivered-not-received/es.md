@@ -4,7 +4,7 @@ description: Pone «entregado» y no tienes el paquete: qué comprobar primero, 
 slug: paquete-entregado-pero-no-recibido
 picture: Una puerta cerrada, una notificación con un tic verde, el contorno vacío de una caja con un interrogante sobre el felpudo y Pip, preocupado.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Si el seguimiento pone «Entregado» pero no tienes el paquete, no lo des por perdido: «entregado» es un escaneo en la PDA del repartidor, no la prueba de que llegó a tus manos. Mira si el seguimiento dice dónde o con quién se quedó, busca en los sitios de siempre y date un margen. Si sigue sin aparecer, reclama a la tienda, no al transportista: en España, si compraste a una empresa, el paquete es responsabilidad del vendedor hasta que lo tengas en tus manos.
@@ -50,11 +50,11 @@ Si compraste a una empresa, reclama a la tienda. Además, los transportistas sue
 - home | Tu puerta | Se escanea «Entregado». En España y en la UE, el riesgo es del vendedor hasta que lo tienes en tus manos.
 :::
 
-Lo que dice la ley en España (Ley General para la Defensa de los Consumidores y Usuarios):
+Lo que dice la ley en España (Ley General para la Defensa de los Consumidores y Usuarios, el Real Decreto Legislativo 1/2007):
 
 | Caso | La regla |
 | --- | --- |
-| Compra a una empresa | El riesgo es del vendedor hasta que el paquete está en tus manos o en las de alguien que hayas indicado, que no sea el transportista (art. 66 ter) |
+| Compra a una empresa | Entregar es transmitirte la posesión material de los bienes (art. 66 bis), y el riesgo es del vendedor hasta que el paquete está en tus manos o en las de alguien que hayas indicado, que no sea el transportista (art. 66 ter) |
 | ¿Quién prueba la entrega? | El vendedor: «Recaerá en el empresario la carga de la prueba» (art. 66 bis) |
 | Sin fecha pactada | Tiene que entregar sin demora indebida y en un máximo de 30 días naturales desde la compra. Si no cumple, le das un plazo adicional adecuado, y si tampoco entrega, puedes resolver el contrato (art. 66 bis) |
 | Tienda de otro país de la UE | Lo mismo: el vendedor responde de los daños desde la expedición hasta que recibes el paquete, recuerda el portal Tu Europa. El Centro Europeo del Consumidor en España asesora en estos casos |
@@ -95,8 +95,9 @@ A veces, pero la indemnización suele ir al remitente, así que por la tienda ll
 
 | Transportista | Qué puedes hacer | Plazo |
 | --- | --- | --- |
-| Correos | Reclamar, pero la indemnización es para el remitente, salvo que firme una solicitud para que la cobres tú. El Paq Ligero no tiene indemnización por pérdida ni robo | Paq Premium, a partir de 3 días; Paq Estándar, a partir de 4; hasta 1 año desde la admisión. Responde en 1 mes como máximo |
-| GLS | Mirar la nota de paso. Si no basta, escribir por WhatsApp o redes sociales, o llamar al 91 080 62 29, con el número de seguimiento a mano | Sus preguntas frecuentes no lo indican |
+| Correos | Abrir una incidencia o una reclamación en su web, o ir a cualquier oficina, pero la indemnización es para el remitente, salvo que firme una solicitud para que la cobres tú. El Paq Ligero no tiene indemnización por pérdida ni robo | Paq Premium, a partir de 3 días; Paq Estándar, a partir de 4; hasta 1 año desde la admisión. Responde en 1 mes como máximo |
+| GLS | Mirar la nota de paso. Si no basta, escribir a su asistente virtual o por redes sociales, o llamar al 91 080 62 29, con el número de seguimiento a mano | Sus preguntas frecuentes no lo indican |
+| CTT Express | Revisar el estado del envío en su web. Si no se trata de una ausencia ni de una dirección incompleta, usar su formulario de contacto: CTT Express abre un expediente y te contacta | Daños: 7 días naturales. Para lo demás, sus preguntas frecuentes no lo indican |
 | InPost | ¿La taquilla del Locker estaba vacía? Avisa con una foto de la taquilla. Si no, abre una incidencia con su formulario: responde en 15 días como máximo. Si se pierde, InPost indemniza al remitente según el seguro contratado | Taquilla vacía: 24 horas desde la entrega registrada. Retraso: más de 5 días desde el aviso de envío. Pérdida total: a los 30 días de ese aviso |
 
 ### ¿Responde Correos si se pierde un paquete?
@@ -127,17 +128,19 @@ Puedes, aunque ninguna de las normas de arriba lo exige para devolverte el diner
 - [eBay.es: Política sobre la Garantía al cliente de eBay](https://www.ebay.es/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 días, 3 días laborables, prueba de entrega, cierre automático, 550 €, devolución de cargo
 - [Vinted: No se ha entregado el paquete](https://www.vinted.es/help/726) – 2 días, «Resolver incidencia», no se puede deshacer
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – «Tengo un problema», 2 días naturales
-- [Vinted: El paquete no llega](https://www.vinted.es/help/658) – 14 días con vendedores Pro
+- [Vinted: Términos y condiciones de Vinted Pro](https://www.vinted.es/pro-terms-and-conditions) – 14 días naturales con vendedores Pro, «Tengo un problema»
 - [Wallapop: El estado del envío no se actualiza](https://ayuda.wallapop.com/hc/es-es/articles/360015264778-El-estado-del-env%C3%ADo-no-se-actualiza) – entregado pero no recibido: contactar con Wallapop, código de seguimiento
 - [Wallapop: He realizado la compra, ¿ahora qué?](https://ayuda.wallapop.com/hc/es-es/articles/360013447218-He-realizado-la-compra-ahora-qu%C3%A9) – 48 horas, «Todo OK», pago automático al vendedor
 - [Wallapop: ¿Cómo abro una disputa al vendedor?](https://ayuda.wallapop.com/hc/es-es/articles/360004532197--C%C3%B3mo-abro-una-disputa-al-vendedor) – la disputa, solo para un producto recibido
 - [Correos: Paq Ligero](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paq-ligero) – buzón sin firma, sin indemnización
 - [Correos: Extravío, envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – indemnización al remitente, 3 y 4 días, 1 año
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – respuesta en 1 mes
+- [Correos: Incidencias en el envío](https://www.correos.es/es/es/atencion-al-cliente/recibir/incidencias) – incidencia o reclamación en la web, cualquier oficina
+- [CTT Express: Preguntas frecuentes de incidencias con envíos](https://www.cttexpress.com/preguntas-frecuentes/incidencias) – estado del envío, ausencia o dirección incompleta, formulario, expediente, daños en 7 días naturales
 - [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – entregado a un vecino
-- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Parcel Shop, «Entregado», EconomyParcel, nota de paso, contacto
+- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Parcel Shop, «Entregado», EconomyParcel, nota de paso, asistente virtual, redes sociales y teléfono
 - [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – Locker y Punto Pack, códigos, 5 días, taquilla vacía en 24 horas, 15 días, retraso, pérdida, remitente
-- [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – arts. 2, 66 bis y 66 ter
+- [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – Real Decreto Legislativo 1/2007, arts. 2, 66 bis (entrega con la posesión material, carga de la prueba) y 66 ter
 - [Tu Europa: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – el vendedor responde de los daños hasta que lo recibes, 30 días
 - [Centro Europeo del Consumidor en España: ECC-Net publica un informe sobre los servicios de mensajería](https://portal-cec.consumo.gob.es/sites/default/files/documentos/NI_PARCEL_DELIVERY_16_08_2024.pdf) – terceros autorizados, portero, firma o clave, foto, denuncias policiales
 - [Centro Europeo del Consumidor en España](https://portal-cec.consumo.gob.es/es) – asesoramiento a consumidores de la UE

@@ -17,7 +17,7 @@ Die Sendungsnummer von DHL Express ist die Frachtbriefnummer (englisch „waybil
 | `1234567891` | Die Frachtbriefnummer: 10 Ziffern, damit verfolgst du die ganze Sendung. Die letzte Ziffer ist eine Prüfziffer. |
 | `JD014600001234567890` | Die Packstück-Nummer: `JD01` und 16 Ziffern, auf dem Etikett als `(J)JD…` unter dem unteren Barcode. Jedes Paket einer Sendung hat seine eigene, und sie führt zur Frachtbriefnummer zurück. |
 
-Auch Mondial Relay, Relais Colis, TIPSA, Estafeta, [Packeta](carrier:packeta), DHL eCommerce Iberia und [DHL Paket](carrier:dhl) vergeben 10-stellige Nummern. Schau also in der E-Mail des Shops nach, welcher Paketdienst genannt ist.
+Auch Mondial Relay, Relais Colis, Estafeta, [Packeta](carrier:packeta), DHL eCommerce Iberia und [DHL Paket](carrier:dhl) vergeben 10-stellige Nummern. Schau also in der E-Mail des Shops nach, welcher Paketdienst genannt ist.
 
 DHL vergibt Frachtbriefnummern neu: Unter einer Nummer können Scans einer früheren Sendung auftauchen, die Peek ignoriert.
 

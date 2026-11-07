@@ -18,7 +18,7 @@ A maior parte destes números não tem forma fixa, por isso um número de pedido
 | --- | --- |
 | `123456789AB` | Letras e algarismos: nenhuma transportadora em especial. |
 | `12345678` | 8 algarismos: também a forma da Mondial Relay, da Colisweb e da Heppner. |
-| `1234567890` | 10 algarismos: também a da [DHL](carrier:dhl-express), da Mondial Relay, da Tipsa e de outras. |
+| `1234567890` | 10 algarismos: também a da [DHL](carrier:dhl-express), da Mondial Relay e de outras. |
 
 Se a loja te diz que é a Paack que entrega, o número é da Paack, tenha a forma que tiver.
 

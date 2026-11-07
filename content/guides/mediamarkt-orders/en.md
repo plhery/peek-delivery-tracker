@@ -64,7 +64,7 @@ Number shapes for the carriers MediaMarkt names, with made-up digits:
 | Correos | `PR`, 15 digits and `C`, or two letters, 9 digits and `ES` |
 | Paack | `PK` and 18 digits |
 | SEUR | 14 or 21 digits, among other shapes |
-| TIPSA | 10 digits, or 22 digits whose first and seventh digits are `0` |
+| TIPSA | 22 digits whose first and seventh digits are `0` (not the 10-digit waybill alone) |
 
 Other shops: [find your tracking number](guide:find-tracking-number). Not sure what you've got? Type it here:
 

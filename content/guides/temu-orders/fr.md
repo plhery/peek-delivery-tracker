@@ -4,7 +4,7 @@ description: Suis ton colis Temu avec le numéro du transporteur, pas le numéro
 slug: suivi-commande-temu
 picture: Une pile de petits colis qui sort de la soute d'un avion, une camionnette, et Pip qui les compte.
 published: 2026-10-17
-updated: 2026-11-04
+updated: 2026-11-07
 ---
 
 Pour suivre ta commande Temu, il te faut le numéro de suivi du transporteur, pas le numéro de commande Temu (PO et 20 chiffres). Colle-le dans [Peek](/) : il retrouve le transporteur parmi plus de 3 500, de La Poste (Colissimo) à bpost, puis suit le partenaire local si le premier transporteur en nomme un. Un numéro tout neuf peut ne rien afficher pendant un jour ou deux : l'étiquette existe avant que le transporteur ait le colis.
@@ -17,6 +17,8 @@ Non. Le numéro de commande Temu est sa propre référence, pas un numéro de su
 :::
 
 Si tu colles un message entier qui contient les deux numéros, Peek prend le numéro de suivi et laisse le numéro de commande de côté. Où les autres boutiques cachent le numéro dans leurs e-mails et ton compte : [trouver son numéro de suivi](guide:find-tracking-number).
+
+Un numéro de trois lettres, un `U` et sept chiffres, comme `TEMU1234565` (inventé), n'est pas non plus un numéro de suivi : c'est celui d'un conteneur maritime, et aucun transporteur ne s'en sert pour suivre un colis. Le `TEMU` du début n'a rien à voir avec la boutique : dans le registre des codes propriétaires de conteneurs tenu par le Bureau International des Containers (BIC), `TEMU` est celui du loueur de conteneurs Textainer. Si tu en ajoutes un et qu'aucun transporteur ne répond, Peek affiche « On dirait un numéro de conteneur maritime. Le numéro de suivi figure dans l’e-mail d’expédition ou sur la page de la commande. » et te propose « Choisir le transporteur ».
 
 ## Quel transporteur livre mon colis Temu ?
 
@@ -67,4 +69,8 @@ Peek affiche ce que publie le transporteur. Une réclamation ou un remboursement
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € au 1er novembre 2026
 - [Commission européenne : Guidance on EUR 3 customs duty (PDF, en anglais)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € par article jusqu'à 150 € depuis le 1er juillet 2026, 2 € par article, par ligne de déclaration
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formes des numéros, premiers statuts, ce que Peek vérifie
+- [BIC : Container Identification Number (en anglais)](https://www.bic-code.org/identification-number/) – code du propriétaire, U pour les conteneurs de fret, numéro de série à six chiffres et chiffre de contrôle
+- [BIC : Registered BIC Code TEMU (en anglais)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (en anglais)](https://www.textainer.com/) – location de conteneurs
+- [Peek : Routing (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – numéro de conteneur auquel aucun transporteur ne répond : où est le numéro de suivi, choisir le transporteur
 :::

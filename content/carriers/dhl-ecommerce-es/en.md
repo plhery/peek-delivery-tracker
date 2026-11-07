@@ -16,10 +16,10 @@ The shapes Peek's catalog knows (examples invented):
 
 | Shape | Example | Whose it can be |
 | --- | --- | --- |
-| 10 digits | `1234567890` | DHL eCommerce Iberia, but also [DHL Express](carrier:dhl-express), Mondial Relay, Relais Colis, TIPSA and GLS Spain |
+| 10 digits | `1234567890` | DHL eCommerce Iberia, but also [DHL Express](carrier:dhl-express), Mondial Relay, Relais Colis and GLS Spain |
 | Two letters, 7 digits, then `0` | `AB12345670` | DHL eCommerce Iberia |
 
-If the shop's email names [Mondial Relay](carrier:mondial-relay), [TIPSA](carrier:tipsa) or [GLS Spain](carrier:gls-es) for a 10-digit number, track it there. Two letters, nine digits and `ES` is a [Correos](carrier:correos-spain) number.
+If the shop's email names [Mondial Relay](carrier:mondial-relay) or [GLS Spain](carrier:gls-es) for a 10-digit number, track it there. Two letters, nine digits and `ES` is a [Correos](carrier:correos-spain) number.
 
 ## DHL eCommerce tracking statuses explained
 
@@ -68,7 +68,7 @@ Look for DHL eCommerce's contact details on DHL's website for the country the pa
 
 ## Tracking DHL eCommerce Iberia parcels with Peek
 
-[Peek](/) asks DHL eCommerce Iberia and [TNT Italy](carrier:tnt-it), whose waybills have the same shape, about two letters, 7 digits and `0`. For 10 digits it asks Relais Colis, TIPSA and DHL eCommerce Iberia, and DHL Express first when its check digit passes; if DHL Express knows the number too, it wins. If carriers of different brands know it, or none does, you pick with "Change carrier". DHL's other numbers (12 or 22 digits, `JJD` plates, postal numbers) work only after picking "DHL eCommerce Iberia" there. No postcode is needed.
+[Peek](/) asks DHL eCommerce Iberia and [TNT Italy](carrier:tnt-it), whose waybills have the same shape, about two letters, 7 digits and `0`. For 10 digits it asks DHL eCommerce Iberia, Packeta and BOX NOW, and DHL Express first when its check digit passes (then also ACS Courier and Geniki Taxydromiki, whose numbers pass the same check); if DHL Express knows the number too, it wins. If carriers of different brands know it, or none does, you pick with "Change carrier". DHL's other numbers (12 or 22 digits, `JJD` plates, postal numbers) work only after picking "DHL eCommerce Iberia" there. No postcode is needed.
 
 Shipment links from DHL eCommerce Iberia's tracking page can be pasted too, in Spanish, Portuguese or English (`/LiveTracking/ModificarEnvio/`, `ModificarMeuEnvio` or `ModifyMyShipment`). They name DHL eCommerce Iberia straight away, whatever the number's shape. A postcode at the end of the link is left out, as none is needed.
 

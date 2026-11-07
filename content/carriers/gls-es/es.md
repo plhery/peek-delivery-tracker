@@ -16,7 +16,7 @@ GLS no publica la longitud ni el formato de sus números en España. El formular
 
 La página de seguimiento te pregunta primero si el envío es nacional o internacional. En los dos casos hace falta el código postal de destino; sin él, GLS no enseña nada.
 
-Diez cifras encajan también con otros transportistas, entre ellos [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) y [TIPSA](carrier:tipsa). Si GLS no encuentra el número con el código postal correcto, mira qué transportista nombra el correo de la tienda.
+Diez cifras encajan también con otros transportistas, como [DHL eCommerce Iberia](carrier:dhl-ecommerce-es). Si GLS no encuentra el número con el código postal correcto, mira qué transportista nombra el correo de la tienda.
 
 ## Estados de GLS: qué significa cada uno
 
@@ -79,7 +79,7 @@ GLS dice que el asistente y los mensajes por redes sociales son gratuitos. El 91
 
 Verás cada escaneo con su hora y el texto inglés de GLS, como `At delivery agency`, bajo un titular con las palabras de Peek («Listo para recoger», «Entregado»); solo `Delivered` y `Out for delivery` salen traducidos. GLS no dice dónde se hizo cada escaneo. También verás el día previsto de entrega, el peso y, cuando GLS lo nombra, el Parcel Shop o el Parcel Locker donde te espera el paquete. El código de recogida, el PIN y el plazo se quedan en la página de GLS, y el enlace «Abrir la web de GLS Spain» lleva a su formulario sin el número. Se consulta cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de GLS; a través de servicios de seguimiento, cada 15 minutos), y puedes recibir notificaciones cuando cambia el estado. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora.
 
-Peek no reconoce GLS Spain solo por el número, y sin el código postal GLS no dice si lo conoce. Con un número de 10 cifras, pregunta a TIPSA, Relais Colis y DHL eCommerce Iberia, y también a [DHL Express](carrier:dhl-express) si cuadra su dígito de control; puede que un servicio de seguimiento te pida el código postal. Mejor pulsa «Cambiar», elige «GLS Spain» y añade el código postal. Un enlace de mygls.gls-spain.es, o uno de gls-group.com o gls-group.eu con `/ES/`, nombra GLS Spain directamente, aunque el código postal se te sigue pidiendo. Si otro transportista pasa tu paquete a GLS Spain, Peek no lo sigue allí por su cuenta, porque haría falta tu código postal.
+Peek no reconoce GLS Spain solo por el número, y sin el código postal GLS no dice si lo conoce. Con un número de 10 cifras, pregunta a DHL eCommerce Iberia, Packeta y BOX NOW, y también a [DHL Express](carrier:dhl-express), ACS Courier y Geniki Taxydromiki si cuadra el dígito de control de DHL Express; puede que un servicio de seguimiento te pida el código postal. Mejor pulsa «Cambiar», elige «GLS Spain» y añade el código postal. Un enlace de mygls.gls-spain.es, o uno de gls-group.com o gls-group.eu con `/ES/`, nombra GLS Spain directamente, aunque el código postal se te sigue pidiendo. Si otro transportista pasa tu paquete a GLS Spain, Peek no lo sigue allí por su cuenta, porque haría falta tu código postal.
 
 ## Preguntas sobre el seguimiento de GLS
 

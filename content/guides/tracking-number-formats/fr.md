@@ -4,7 +4,7 @@ description: Colle ton numéro de suivi pour savoir quel transporteur a ton coli
 slug: quel-transporteur-numero-de-suivi
 picture: Trois étiquettes de numéros de suivi découpées en parties colorées, une loupe sur le code pays CH et Pip, curieux.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-07
 ---
 
 Colle ton numéro de suivi dans le champ ci-dessous : Peek reconnaît à sa forme quel transporteur a ton colis, et « Suivre ton colis » te montre où il en est. Si le champ affiche « Peut-être », plusieurs transporteurs utilisent cette forme, et le bon est celui que nomme l'e-mail d'expédition ; si tu colles un numéro de commande Amazon, Shein ou Temu, il te dit où trouver le numéro de suivi. À l'œil, les lettres et la longueur suffisent souvent. `1Z` suivi de 16 lettres et chiffres, c'est UPS ; 18 chiffres qui commencent par `99`, c'est [La Poste suisse](carrier:swiss-post) ; 13 caractères construits comme `RR000000005FR` (deux lettres, neuf chiffres, deux lettres) viennent en général d'une poste nationale, et les deux dernières lettres donnent le pays qui a émis le numéro : ici la France, donc La Poste. Les numéros composés uniquement de chiffres sont plus délicats : 10, 12 ou 14 chiffres correspondent à plusieurs transporteurs.
@@ -134,6 +134,8 @@ Le numéro de commande est celui de la boutique, pas du transporteur : chez Coli
 
 Le champ du haut reconnaît trois numéros de commande souvent collés à la place, et te dit où est le numéro de suivi : Amazon (`000-0000000-0000000`, trois, sept et sept chiffres), Shein (`GSH` suivi de 12 lettres ou chiffres) et Temu (`PO-000-` suivi de 17 chiffres). Chez Temu, dans « Vos commandes », touche « Suivre » à côté de la commande ; plus de détails dans le [suivi de commande Temu](guide:temu-orders).
 
+Un numéro de conteneur maritime n'est pas non plus un numéro de suivi : trois lettres pour le propriétaire, un `U`, six chiffres et un chiffre de contrôle, comme `TEMU1234565` (inventé). Il désigne un conteneur de fret, pas un colis, et aucun transporteur ne s'en sert pour le suivi. Dans le registre des codes propriétaires de conteneurs tenu par le Bureau International des Containers (BIC), `TEMU` est celui du loueur de conteneurs Textainer, pas de la boutique Temu. Si tu en ajoutes un et qu'aucun transporteur ne répond, Peek affiche « On dirait un numéro de conteneur maritime. Le numéro de suivi figure dans l’e-mail d’expédition ou sur la page de la commande. » et te propose « Choisir le transporteur ».
+
 ## Pourquoi le numéro de suivi peut changer en route
 
 Un colis qui franchit une frontière passe souvent de main en main, et chaque société peut imprimer sa propre étiquette. L'UPU permet à la poste de destination d'ajouter son propre code-barres à côté de celui d'origine, à condition qu'il n'ait pas le format postal de 13 caractères. Sa norme en montre un exemple : `98.00.802077.23271453`, relié au numéro d'origine.
@@ -189,4 +191,8 @@ Un numéro « non reconnu » n'est pas forcément mal tapé. Chez Colis Privé, 
 - [4PX : Global Order Tracking (en anglais)](https://track.4px.com/) – 5 à 50 lettres et chiffres
 - [Cainiao : centre d'aide](https://global.cainiao.com/helpDoc.htm) – pas de suivi après la remise au transporteur local en livraison économique
 - [CTT : Encontrar o código de envio (en portugais)](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/encontrar-o-codigo-de-envio) – codes en PT pour des envois partis de l'étranger
+- [BIC : Container Identification Number (en anglais)](https://www.bic-code.org/identification-number/) – code du propriétaire, U pour les conteneurs de fret, numéro de série à six chiffres et chiffre de contrôle
+- [BIC : Registered BIC Code TEMU (en anglais)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (en anglais)](https://www.textainer.com/) – location de conteneurs
+- [Peek : Routing (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – numéro de conteneur auquel aucun transporteur ne répond : où est le numéro de suivi, choisir le transporteur
 :::

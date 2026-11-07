@@ -17,7 +17,7 @@ DHL Express calls its tracking number the waybill number. Look in the shop's shi
 | `1234567891` | The waybill: 10 digits, the number that tracks the whole shipment. The last digit is a check digit. |
 | `JD014600001234567890` | A piece number: `JD01` and 16 digits, printed as `(J)JD…` under the label's lower barcode. Each parcel in a shipment has its own, and it leads back to the waybill. |
 
-Ten digits also fit [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), [TIPSA](carrier:tipsa), Estafeta, [Packeta](carrier:packeta), [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and [DHL Paket](carrier:dhl), so check which carrier the shop's email names.
+Ten digits also fit [Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), Estafeta, [Packeta](carrier:packeta), [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and [DHL Paket](carrier:dhl), so check which carrier the shop's email names.
 
 DHL reuses waybill numbers: a number can come with an earlier shipment's scans, which Peek ignores.
 

@@ -4,7 +4,7 @@ description: Where to find your tracking number in a shipping email, order page 
 slug: how-to-find-tracking-number
 picture: A shipping email with the tracking number RR000000005CH highlighted in yellow, a barcode label beside it, and a smiling Pip.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 You'll usually find your tracking number in the shop's shipping email or text, or in your order on its website or app, one click past the order number. If you sent the parcel yourself, it's on your post office receipt. No carrier will track a package by your name or address, but a [missed-delivery card](guide:missed-delivery), some carriers' free accounts for incoming parcels, or the sender can still get you tracking.
@@ -116,6 +116,8 @@ No. DHL spells it out: an order number is assigned by your retailer, and it isn'
 :::
 
 To tell them apart: a number labelled "Order" is the shop's own and won't work on the carrier's site, while a tracking number comes with a carrier's name or a link to its tracking page. `1Z999AA10123456784` is a UPS number; many postal items carry the international 13-character format, like `RR000000005CH`. [Tracking number formats](guide:tracking-number-formats) shows which carrier a number belongs to.
+
+A shipping container's number isn't a parcel's either: three letters, U and seven digits, like `TEMU1234565` (made up). It names the steel box a ship carries, not your parcel. If no carrier knows a number of that shape, [Peek](/) says "This looks like a shipping container number. The tracking number is in the shipping email or on the order page." and offers "Choose the carrier".
 
 ## Why does my tracking number show nothing?
 

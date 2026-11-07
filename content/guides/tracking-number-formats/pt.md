@@ -123,6 +123,8 @@ Se tiver 13 caracteres e acabar em duas letras, como `CN`, está no formato post
 
 O número da encomenda na loja não funciona no site da transportadora (atenção: na DPD, o «número de encomenda» é o próprio número de seguimento, de 14 algarismos), e o PIN de um cacifo Locky ou de um Locker InPost só serve para o abrir. Onde está o número certo, e o que fazer se não tens nenhum: [onde encontrar o número de seguimento](guide:find-tracking-number).
 
+O número de um contentor marítimo também não é um número de seguimento: três letras do proprietário, um `U`, seis algarismos e um algarismo de controlo, como `TEMU1234565` (inventado). Identifica um contentor de carga, não uma encomenda, e nenhuma transportadora segue uma encomenda por ele. No registo de códigos de proprietários de contentores mantido pelo Bureau International des Containers (BIC), `TEMU` é da Textainer, uma empresa de aluguer de contentores, e não da loja Temu. Se adicionares um e nenhuma transportadora responder, o Peek diz «Isto parece o número de um contentor marítimo. O número de seguimento está no e-mail de envio ou na página do pedido.» e propõe «Escolher a transportadora».
+
 ## Porque é que o número de seguimento pode mudar pelo caminho
 
 Uma encomenda que atravessa uma fronteira muda muitas vezes de mãos, e cada empresa pode imprimir a sua etiqueta. A UPU permite que o operador postal que a recebe acrescente o seu próprio código de barras ao lado do original, desde que não seja no formato postal de 13 caracteres.
@@ -170,5 +172,8 @@ Um número que não dá resultados nem sempre está mal escrito. Os CTT dão dua
 - [Yanwen: YW Tracking](https://track.yw56.com.cn/en/index) – o seguimento da Yanwen, sem número de exemplo
 - [CTT Express: Localizador de envíos](https://www.cttexpress.com/localizador-de-envios/) – o código de envio
 - [USPS: Publication 199, Intelligent Mail package barcode](https://postalpro.usps.com/pub199) – 22 algarismos
-- [Peek: Routing (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – como o Peek confirma a transportadora de um número ambíguo: até cinco de cada vez, só encomendas recentes, escolha tua quando várias o conhecem
+- [Peek: Routing (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – como o Peek confirma a transportadora de um número ambíguo: até cinco de cada vez, só encomendas recentes, escolha tua quando várias o conhecem; número de contentor sem resposta de nenhuma transportadora: onde está o número de seguimento, escolher a transportadora
+- [BIC: Container Identification Number (em inglês)](https://www.bic-code.org/identification-number/) – código do proprietário, U para os contentores de carga, número de série de seis algarismos e algarismo de controlo
+- [BIC: Registered BIC Code TEMU (em inglês)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (em inglês)](https://www.textainer.com/) – aluguer de contentores
 :::

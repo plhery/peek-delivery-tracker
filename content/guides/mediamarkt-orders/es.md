@@ -49,7 +49,7 @@ Los números de los transportistas de MediaMarkt tienen esta forma (las cifras s
 | [Paack](carrier:paack) | `PK` y 18 cifras, como `PK123456789012345678` |
 | [Correos](carrier:correos-spain) | `PR`, 15 cifras y `C`, como `PR123456789012345C`, o 2 letras, 9 cifras y `ES`, como `RR000000005ES` |
 | [SEUR](carrier:seur) | 14 cifras, entre otras formas de solo cifras |
-| [TIPSA](carrier:tipsa) | 10 cifras, o 22 con un `0` en la primera y la séptima posición |
+| [TIPSA](carrier:tipsa) | 22 cifras, con un `0` en la primera y la séptima posición (no basta con el albarán de 10 cifras) |
 
 ¿No sabes de quién es? Escríbelo aquí:
 
@@ -118,7 +118,7 @@ Para los artículos de otro vendedor del marketplace, el plazo es de 30 días de
 
 ## ¿Puedo seguir un paquete de MediaMarkt en Peek?
 
-Sí, con el número del transportista. Cópialo del correo de envío o de la web del transportista y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Paack con `PK` y 18 cifras, y los de Correos de la tabla. Si una forma la usan varios transportistas, como las 14 cifras de SEUR, DPD y BRT o las 10 cifras de TIPSA, DHL y Mondial Relay, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que indica el correo de MediaMarkt.
+Sí, con el número del transportista. Cópialo del correo de envío o de la web del transportista y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Paack con `PK` y 18 cifras, y los de Correos de la tabla. Si una forma la usan varios transportistas, como las 14 cifras de SEUR, DPD y BRT o las 10 cifras de DHL y Mondial Relay, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que indica el correo de MediaMarkt.
 
 Si el pedido llega en varias expediciones, añade cada número. Un artículo de otro vendedor llega con el transportista que él elija: Peek lo detecta entre más de 3500. El número de pedido de MediaMarkt no es un número de seguimiento, y una recogida en tienda o un envío con Glovo no tienen número que Peek pueda seguir.
 

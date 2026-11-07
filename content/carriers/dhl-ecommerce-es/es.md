@@ -16,10 +16,10 @@ Estas son las formas que conoce el catálogo de Peek (ejemplos inventados):
 
 | Forma | Ejemplo | De quién puede ser |
 | --- | --- | --- |
-| 10 cifras | `1234567890` | DHL eCommerce Iberia, pero también Mondial Relay, Relais Colis, TIPSA, GLS Spain o, si cuadra su dígito de control, [DHL Express](carrier:dhl-express) |
+| 10 cifras | `1234567890` | DHL eCommerce Iberia, pero también Mondial Relay, Relais Colis, GLS Spain o, si cuadra su dígito de control, [DHL Express](carrier:dhl-express) |
 | Dos letras, 7 cifras y un `0` | `AB12345670` | DHL eCommerce Iberia |
 
-Si el correo de la tienda nombra a [Mondial Relay](carrier:mondial-relay), [TIPSA](carrier:tipsa) o [GLS Spain](carrier:gls-es) para un número de 10 cifras, el paquete es suyo, no de DHL. Dos letras, nueve cifras y `ES` es un número de [Correos](carrier:correos-spain), no de DHL.
+Si el correo de la tienda nombra a [Mondial Relay](carrier:mondial-relay) o [GLS Spain](carrier:gls-es) para un número de 10 cifras, el paquete es suyo, no de DHL. Dos letras, nueve cifras y `ES` es un número de [Correos](carrier:correos-spain), no de DHL.
 
 ## Estados de DHL eCommerce: qué significa cada uno
 
@@ -69,7 +69,7 @@ Busca los datos de contacto de DHL eCommerce en la web de DHL del país donde se
 
 ## Seguir un paquete DHL eCommerce Iberia con Peek
 
-Por los números de dos letras, 7 cifras y `0`, [Peek](/) pregunta a DHL eCommerce Iberia y también a TNT Italia, cuyas cartas de porte tienen la misma forma. Con 10 cifras pregunta a la vez a Relais Colis, TIPSA y DHL eCommerce Iberia, y antes a DHL Express si cuadra su dígito de control; si DHL Express también conoce el número, gana DHL Express. Si lo conocen transportistas de marcas distintas, o ninguno, eliges tú con «Cambiar transportista». Otros números (12 o 22 cifras, matrículas `JJD`, códigos `JVGL` o `3S`, números postales) solo funcionan después de elegir ahí «DHL eCommerce Iberia». No hace falta código postal.
+Por los números de dos letras, 7 cifras y `0`, [Peek](/) pregunta a DHL eCommerce Iberia y también a TNT Italia, cuyas cartas de porte tienen la misma forma. Con 10 cifras pregunta a la vez a DHL eCommerce Iberia, Packeta y BOX NOW, y antes a DHL Express si cuadra su dígito de control (y entonces también a ACS Courier y Geniki Taxydromiki, cuyos números pasan el mismo control); si DHL Express también conoce el número, gana DHL Express. Si lo conocen transportistas de marcas distintas, o ninguno, eliges tú con «Cambiar transportista». Otros números (12 o 22 cifras, matrículas `JJD`, códigos `JVGL` o `3S`, números postales) solo funcionan después de elegir ahí «DHL eCommerce Iberia». No hace falta código postal.
 
 También puedes pegar enlaces de envíos de la página de seguimiento de DHL eCommerce Iberia, en español, portugués o inglés (`/LiveTracking/ModificarEnvio/`, `ModificarMeuEnvio` o `ModifyMyShipment`). Indican DHL eCommerce Iberia directamente, sea cual sea el formato del número. Si el enlace lleva un código postal al final, Peek no lo usa, porque no le hace falta.
 

@@ -19,7 +19,7 @@ Un lien de suivi MyDHL+ contient aussi le numéro, après `id=`.
 | `1234567891` | Le bordereau : 10 chiffres, le numéro qui suit tout l'envoi. Le dernier chiffre est une clé de contrôle. |
 | `JD014600001234567890` | L'identifiant de pièce : `JD01` puis 16 chiffres, imprimé `(J)JD…` sous le code-barres du bas de l'étiquette. Chaque colis de l'envoi a le sien, qui renvoie au bordereau. |
 
-[Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), TIPSA, Estafeta, Packeta, DHL eCommerce Iberia et [DHL Paket](carrier:dhl) utilisent aussi des numéros à 10 chiffres : regarde quel transporteur nomme l'e-mail de la boutique.
+[Mondial Relay](carrier:mondial-relay), [Relais Colis](carrier:relais-colis), Estafeta, Packeta, DHL eCommerce Iberia et [DHL Paket](carrier:dhl) utilisent aussi des numéros à 10 chiffres : regarde quel transporteur nomme l'e-mail de la boutique.
 
 DHL réutilise ses numéros de bordereau : un numéro peut ramener les scans d'un envoi plus ancien, que Peek ignore.
 

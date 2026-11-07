@@ -4,7 +4,7 @@ description: Pega tu número de seguimiento y mira de qué empresa es tu paquete
 slug: que-empresa-es-numero-de-seguimiento
 picture: Tres etiquetas con números de seguimiento divididos en colores, una lupa sobre el código de país CH y Pip, curioso.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-07
 ---
 
 Pega tu número de seguimiento en la casilla de abajo y verás de qué empresa es: Peek reconoce al transportista por la forma del número, y con «Seguir tu paquete» ves dónde está. Si sale «Podría ser», esa forma la usan varias empresas, y la buena es la que nombra el correo de envío de la tienda; si pegas un número de pedido de Amazon, Shein o Temu, te dice dónde está el de seguimiento. A ojo, las letras y la longitud suelen bastar: `1Z` y 16 letras o cifras es UPS, `0000/00000000` es NACEX, y 13 caracteres como `RR000000005ES` (dos letras, nueve cifras, dos letras) son casi siempre un número postal, de Correos si acaba en `ES`. Los números que solo llevan cifras son el caso difícil: 12, 14 o 22 cifras encajan con varias empresas.
@@ -48,7 +48,7 @@ Esto es lo que dicen las empresas y la norma postal sobre los números que más 
 | Amazon | en los datos de transportistas de Peek, `ES` seguido de 10 cifras o `TBA` seguido de 12; se explican más abajo |
 | [Vinted Go](carrier:vinted-go) | no publica formato; según esos datos, `VGS` y 13 o 14 cifras, o 16 cifras que empiezan por `17` o `18`, la última de control. Si tu paquete de Vinted va con otra empresa, lleva el número de esa empresa: mira el [seguimiento de envío Vinted](guide:vinted-orders) |
 | [Sending](carrier:sending) | su buscador pide «el código de tu envío»; según esos datos, 12 cifras, la misma longitud que MRW, FedEx y otras |
-| [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (DHL Parcel) | según esos datos, 10 cifras, como DHL Express, GLS o TIPSA, o dos letras, 7 cifras y un `0` |
+| [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) (DHL Parcel) | según esos datos, 10 cifras, como DHL Express o GLS, o dos letras, 7 cifras y un `0` |
 | [UPS](carrier:ups) | `1Z` y 16 letras o cifras, 18 caracteres en total, como `1Z999AA10123456784`, un ejemplo con un dígito de control de UPS válido |
 | [FedEx](carrier:fedex) | según esos datos, 12 cifras, o 15, la última de control; las de 12 encajan también con MRW, Mondial Relay y Sending |
 | [DHL Express](carrier:dhl-express) | 10 cifras, nunca letras, según DHL Express en los Países Bajos |
@@ -129,6 +129,8 @@ El número de pedido es la referencia de la tienda, no la del transportista: DHL
 
 La casilla de arriba reconoce tres números de pedido que a menudo se confunden con el de seguimiento, y te dice dónde está este: Amazon (`000-0000000-0000000`, tres, siete y siete cifras), Shein (`GSH` y 12 letras o cifras) y Temu (`PO-000-` y 17 cifras). En Temu, toca «Rastrear» junto al pedido en «Tus pedidos»; más en [seguimiento de pedidos de Temu](guide:temu-orders).
 
+El número de un contenedor marítimo tampoco es un número de seguimiento: tres letras del propietario, una `U`, seis cifras y un dígito de control, como `TEMU1234565` (inventado). Identifica un contenedor de carga, no un paquete, y ningún transportista sigue un paquete con él. En el registro de códigos de propietario de contenedores que lleva el Bureau International des Containers (BIC), `TEMU` es de Textainer, una empresa de alquiler de contenedores, no de la tienda Temu. Si añades uno y ningún transportista responde, Peek dice «Parece el número de un contenedor marítimo. El número de seguimiento está en el correo de envío o en la página del pedido.» y te ofrece «Elegir transportista».
+
 ## Por qué el número de seguimiento puede cambiar por el camino
 
 Un paquete que cruza una frontera suele cambiar de manos, y cada empresa puede imprimir su propia etiqueta. La UPU permite que el operador postal de destino añada su propio código de barras junto al original, siempre que no tenga el formato postal de 13 caracteres.
@@ -183,4 +185,8 @@ Un número que no devuelve nada no siempre está mal escrito. Correos Express av
 - [Comisión Europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tasa de tramitación de 2 € desde el 1 de noviembre de 2026
 - [Agencia Tributaria: Envíos por un valor de hasta 150 euros](https://sede.agenciatributaria.gob.es/Sede/aduanas/comercio-electronico-pipe-envios-particulares/compras-internet-envios-particulares/envios-valor-hasta-150-euros.html) – tasa de 2 € por categoría de artículos, que suele cobrar la plataforma al comprar o, si no, el transportista antes de entregar
 - [Universal Parcel Scraper: catálogo de transportistas](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – las formas de Correos (`PR` y 15 cifras y `C`), Correos Express, SEUR, GLS, MRW, NACEX, CTT Express, InPost (`FV`), Ecoscooting, Vinted Go, Sending, DHL eCommerce Iberia, FedEx, Amazon, AliExpress y Cainiao (`CNG`, `AP`, `LP`), 4PX, Yanwen, YunExpress, YTO Express y Royal Mail en los datos de Peek
+- [BIC: Container Identification Number](https://www.bic-code.org/identification-number/) – código del propietario, U para los contenedores de carga, número de serie de seis cifras y dígito de control
+- [BIC: Registered BIC Code TEMU](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer](https://www.textainer.com/) – alquiler de contenedores
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – número de contenedor por el que no responde ningún transportista: dónde está el número de seguimiento, elegir transportista
 :::

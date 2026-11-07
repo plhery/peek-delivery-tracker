@@ -160,7 +160,7 @@ Tu peux, mais aucune des règles ci-dessus n'en fait une condition pour être re
 - [eBay.fr : Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – délais, preuve de livraison
 - [Etsy : L'ouverture d'un litige](https://help.etsy.com/hc/fr/articles/5745586898199-L-ouverture-d-un-litige) – 48 heures, 30 jours
 - [Vinted : Le colis n'a pas été livré](https://www.vinted.fr/help/726) – 2 jours, clôturer le litige
-- [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/658) – 14 jours avec un vendeur Pro
+- [Vinted : Termes et conditions de Vinted Pro](https://www.vinted.fr/pro-terms-and-conditions) – 14 jours calendaires avec un vendeur Pro
 - [Vinted : Politique de remboursement](https://www.vinted.fr/help/465) – « J'ai un problème », 2 jours calendaires
 - [Centre européen des consommateurs France : le chargeback](https://www.europe-consommateurs.eu/thematiques/argent/chargeback/) – réseaux, délais, pièces, opposition
 - [PayPal : Protection des Achats](https://www.paypal.com/fr/legalhub/paypal/buyer-protection) – délais, preuve, police

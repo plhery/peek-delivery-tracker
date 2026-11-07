@@ -22,7 +22,7 @@ Typed on its own, a Dachser number looks like many other carriers' numbers (digi
 
 | Number | What a tracker makes of it |
 | --- | --- |
-| `1234567890` | 10 digits: [DHL](carrier:dhl-express), Mondial Relay, TIPSA and others. |
+| `1234567890` | 10 digits: [DHL](carrier:dhl-express), Mondial Relay and others. |
 | `12345678901` | 11 digits: GLS and others. |
 | `123456789012` | 12 digits: [FedEx](carrier:fedex), MRW, BRT and others. |
 | `1234567890123` | 13 digits: [DPD France](carrier:dpd-fr), Delhivery and others. |

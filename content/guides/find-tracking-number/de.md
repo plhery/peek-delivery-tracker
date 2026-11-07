@@ -4,7 +4,7 @@ description: Wo die Sendungsnummer steht – in der Versandmail, auf der Quittun
 slug: sendungsnummer-finden-paket-ohne-nummer
 picture: Eine Versandmail, in der die Sendungsnummer RR000000005CH gelb markiert ist, daneben ein Etikett mit Strichcode, und Pip lächelt.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 Deine Sendungsnummer steht meist in der Versandmail oder SMS des Shops. Sonst findest du sie in deiner Bestellung auf der Website oder in der App des Shops, meist nur einen Klick von der Bestellnummer entfernt. Hast du das Paket selbst verschickt, steht sie auf der Quittung, die du bei der Abgabe bekommen hast. Nach deinem Namen oder deiner Adresse sucht kein Paketdienst. Weiterhelfen können dir aber eine Benachrichtigungskarte, das kostenlose Kundenkonto mancher Paketdienste oder der Absender.
@@ -119,6 +119,8 @@ Nein. DHL stellt klar: „Bitte beachten Sie, dass die Sendungsnummer keine Best
 :::
 
 So unterscheidest du sie: Eine Nummer, die mit „Bestellung“ oder „Bestellnummer“ beschriftet ist, gehört dem Shop und funktioniert auf der Seite des Paketdienstes nicht. Neben einer Sendungsnummer steht meist der Name eines Paketdienstes oder ein Link zu seiner Sendungsverfolgung. Eine DHL-Sendungsnummer ist 10 bis 39 Stellen lang, `1Z999AA10123456784` ist eine UPS-Nummer, und viele Postsendungen tragen das internationale Format mit 13 Zeichen, etwa `RR000000005CH`. Welcher Paketdienst hinter einer Nummer steckt, erklärt der Ratgeber [Sendungsnummern erkennen](guide:tracking-number-formats).
+
+Auch die Nummer eines Seecontainers gehört zu keinem Paket: drei Buchstaben, ein U und sieben Ziffern, etwa `TEMU1234565` (erfunden). Sie bezeichnet die Stahlkiste, die ein Schiff transportiert, nicht dein Paket. Kennt kein Paketdienst eine Nummer dieser Form, schreibt [Peek](/): „Das sieht nach einer Containernummer aus. Die Sendungsnummer steht in der Versandmail oder bei der Bestellung.“ Darunter bietet Peek „Paketdienst wählen“ an.
 
 ## Sendungsnummer zeigt nichts an: Ist es die richtige?
 

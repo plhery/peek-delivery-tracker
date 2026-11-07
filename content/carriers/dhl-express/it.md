@@ -17,7 +17,7 @@ Il numero di tracking di DHL Express è la lettera di vettura (in inglese «wayb
 | `1234567891` | La lettera di vettura: 10 cifre, il numero con cui segui tutta la spedizione. L'ultima è una cifra di controllo. |
 | `JD014600001234567890` | L'identificativo del collo: `JD01` più 16 cifre, stampato come `(J)JD…` sotto il codice a barre inferiore dell'etichetta. Ogni pacco della spedizione ha il suo, che riporta alla lettera di vettura. |
 
-Anche Mondial Relay, Relais Colis, TIPSA, Estafeta, Packeta, DHL eCommerce Iberia e [DHL Paket](carrier:dhl) usano numeri di 10 cifre, quindi guarda quale corriere nomina l'e-mail del negozio.
+Anche Mondial Relay, Relais Colis, Estafeta, Packeta, DHL eCommerce Iberia e [DHL Paket](carrier:dhl) usano numeri di 10 cifre, quindi guarda quale corriere nomina l'e-mail del negozio.
 
 DHL riusa i numeri di lettera di vettura: con un numero possono comparire scansioni di una spedizione precedente, che Peek ignora.
 

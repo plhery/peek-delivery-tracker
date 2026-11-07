@@ -4,7 +4,7 @@ description: Perché il numero d'ordine Temu non serve a tracciare il pacco, qua
 slug: tracciare-ordine-temu
 picture: Una pila di piccoli pacchi che esce dalla stiva di un aereo, un furgone e Pip che li conta.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 
 Il numero d'ordine Temu non serve a tracciare il pacco: ti serve il codice di tracciamento del corriere. Incollalo in [Peek](/), che trova il corriere dalla forma del codice e, se il primo corriere indica chi prende in carico il pacco in Italia, passa al nuovo. Se incolli il numero d'ordine, Peek ti avvisa che sembra un numero d'ordine Temu, non un codice di tracciamento.
@@ -19,6 +19,8 @@ Hai il codice ma non sai di quale corriere è? Scrivilo qui:
 :::
 
 Se incolli un intero messaggio con tutti e due i numeri, Peek prende il codice di tracciamento e lascia da parte il numero d'ordine. Dove cercare negli altri negozi: [trovare il codice di tracciamento](guide:find-tracking-number). Le forme dei codici: [riconoscere il corriere dal codice](guide:tracking-number-formats).
+
+Nemmeno un numero di tre lettere, una `U` e sette cifre, come `TEMU1234565` (inventato), è un codice di tracciamento: è quello di un container marittimo, e nessun corriere segue un pacco con quel numero. Il `TEMU` iniziale non c'entra con il negozio: nel registro dei codici dei proprietari di container tenuto dal Bureau International des Containers (BIC), `TEMU` è della società di noleggio di container Textainer. Se ne aggiungi uno e nessun corriere risponde, Peek scrive «Sembra il numero di un container marittimo. Il numero di tracciamento è nell’e-mail di spedizione o nella pagina dell’ordine.» e ti propone «Scegli il corriere».
 
 ## Chi consegna i pacchi Temu in Italia?
 
@@ -47,4 +49,8 @@ Peek vede quello che pubblicano i corrieri. Le segnalazioni e i rimborsi restano
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026
 - [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce doganale, 2 € per articolo
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei codici, corrieri che Peek riconosce
+- [BIC: Container Identification Number (in inglese)](https://www.bic-code.org/identification-number/) – codice del proprietario, U per i container da carico, numero di serie di sei cifre e cifra di controllo
+- [BIC: Registered BIC Code TEMU (in inglese)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer (in inglese)](https://www.textainer.com/) – noleggio di container
+- [Peek: Routing (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – numero di container per cui nessun corriere risponde: dov'è il codice, scegliere il corriere
 :::

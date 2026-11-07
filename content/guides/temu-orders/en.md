@@ -4,7 +4,7 @@ description: Track a Temu order with the carrier's tracking number, not the PO n
 slug: temu-order-tracking
 picture: A stack of small parcels leaving a plane's hold, a van, and Pip counting them.
 published: 2026-10-17
-updated: 2026-11-04
+updated: 2026-11-07
 ---
 
 To track a Temu order, you need the carrier's tracking number, not Temu's order number (PO and 20 digits). Paste it into [Peek](/): it works out the carrier among more than 3,500, from USPS to Royal Mail and Evri, then follows the local partner if the first carrier names one. A new number can show nothing for a day or two: the label exists before the carrier has the parcel.
@@ -17,6 +17,8 @@ No. Temu's order number is its own reference, not a tracking number: no carrier 
 :::
 
 Paste a whole message that holds both numbers, and Peek takes the tracking number and leaves the order number aside. Where other shops show it: [find your tracking number](guide:find-tracking-number).
+
+A number made of three letters, `U` and seven digits, such as `TEMU1234565` (made up), isn't a tracking number either: it's a shipping container's, and no carrier tracks a parcel by it. The `TEMU` at the start has nothing to do with the shop: in the register of container owner codes kept by the Bureau International des Containers (BIC), `TEMU` belongs to Textainer, a company that leases containers. If you add one and no carrier answers, Peek says "This looks like a shipping container number. The tracking number is in the shipping email or on the order page." and offers "Choose the carrier".
 
 ## Which carrier delivers my Temu parcel?
 
@@ -75,4 +77,8 @@ Peek shows what the carrier publishes. A claim or a refund stays in your Temu ac
 - [Revenue: Removal of the de minimis relief](https://www.revenue.ie/en/customs/individuals/relief-low-value-consignments/index.aspx) – €3 per item
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 fee, checkout price
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – number shapes, first statuses, what Peek checks
+- [BIC: Container Identification Number](https://www.bic-code.org/identification-number/) – owner code, U for freight containers, six-digit serial number and check digit
+- [BIC: Registered BIC Code TEMU](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
+- [Textainer](https://www.textainer.com/) – container leasing
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – a shipping container's number no carrier answered for: where the tracking number is, choosing the carrier
 :::

@@ -22,7 +22,7 @@ O localizador pede o «número de envio composto por 22 dígitos». O número ju
 | --- | --- |
 | `0100000100000000000000` | Os 22 algarismos completos. É este que serve. |
 | `010000 010000 0000000000` | O mesmo número com espaços. O Peek lê-o assim; no localizador da TIPSA, cujo campo só leva 22 carateres, escreve-o sem espaços. |
-| `0000000000` | Só o albarán, com 10 algarismos. O localizador pede os 22. |
+| `0000000000` | Só o albarán, com 10 algarismos. O localizador pede os 22, e o Peek não o toma por um número da TIPSA. |
 
 Sem número, também podes ligar para a TIPSA ou escrever para info@tip-sa.com. O localizador de envios pesquisa ainda pela «Referência» do envio, mas pede então um «Identificador» (agência + cliente), que terias de pedir ao remetente. Mais sítios onde procurar em [onde encontrar o número de seguimento](guide:find-tracking-number).
 
@@ -110,7 +110,7 @@ Como as páginas portuguesas da TIPSA os indicavam a 26 de outubro de 2026:
 
 Cola os 22 algarismos, com ou sem espaços, e o [Peek](/) consulta ao mesmo tempo a TIPSA e a Austrian Post: vês «a consultar …» e depois «TIPSA tem esta encomenda.» quando a TIPSA a conhece. Se os dois códigos de agência começarem por `00`, o Peek toma o número pela CTT Express; se a loja disse TIPSA, carrega em «Alterar» e escolhe a TIPSA. Com `00001000` no início, consulta a TIPSA, a CTT Express e a Austrian Post. Não precisas de código postal.
 
-Um albarán de 10 algarismos não dá para seguir na TIPSA, nem com «Alterar» nem numa ligação. Uma ligação do tip-sa.com com `id=` (`datos_env.php`, `datos_prestashop.php` ou `datos.php`) serve; as do localizador ou do tipsa-dinapaq.com não.
+Um albarán de 10 algarismos não dá para seguir na TIPSA, nem com «Alterar» nem numa ligação. O Peek não sugere a TIPSA para 10 algarismos nem a consulta sobre eles; se escolheres a TIPSA, avisa que a TIPSA «não emite números como este» e consulta serviços de seguimento. Procura os 22 algarismos, ou a ligação de seguimento, no e-mail ou SMS de envio, ou pede-os à loja. Uma ligação do tip-sa.com com `id=` (`datos_env.php`, `datos_prestashop.php` ou `datos.php`) serve; as do localizador ou do tipsa-dinapaq.com não.
 
 O Peek mostra o estado, o histórico com a localidade de cada leitura no mapa, o remetente quando a TIPSA não o esconde com asteriscos e o «Peso». Lê todas as horas como hora de Madrid, também as das agências portuguesas. Não mostra o destinatário, a morada, a referência, o número de volumes, o comprovativo de entrega nem a data prevista de entrega, e não segue a encomenda se ela passar para outra transportadora.
 
@@ -128,7 +128,7 @@ Depende do serviço que a loja contratou. O serviço PORTUGAL entrega em 24 hora
 
 ### Posso seguir uma encomenda TIPSA com 10 algarismos?
 
-Não. O localizador da TIPSA pede o número de 22 algarismos, e os 10 do fim são só o albarán. Se só tens esses, pede o número completo à loja.
+Não. O localizador da TIPSA pede o número de 22 algarismos, e os 10 do fim são só o albarán; o Peek também não toma 10 algarismos por um número da TIPSA. Se só tens esses, pede o número completo à loja.
 
 ### A TIPSA tem pontos de recolha em Portugal?
 

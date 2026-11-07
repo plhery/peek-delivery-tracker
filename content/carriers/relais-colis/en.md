@@ -15,8 +15,8 @@ Relais Colis's tracking form asks for a "numéro de colis" of 12 to 16 character
 | Shape (invented) | What to know |
 | --- | --- |
 | `CC1234567890` to `CC12345678901234` | `CC` and 10 to 14 digits: the form Relais Colis's own example takes. |
-| `1234567890` | 10 digits. Also fits DHL, [Mondial Relay](carrier:mondial-relay), [TIPSA](carrier:tipsa) and others. |
-| `19999999999980` | 14 digits. Also fits DPD, SEUR, BRT, [Ciblex](carrier:ciblex) and others. |
+| `1234567890` | 10 digits. Also fits DHL, [Mondial Relay](carrier:mondial-relay) and others. |
+| `19999999999980` | 14 digits. Fits DPD, SEUR, BRT, [Ciblex](carrier:ciblex) and others; Peek doesn't ask Relais Colis about it. |
 | `VD1234567890` | `VD` and 10 digits. Also fits [Colis Privé](carrier:colis-prive). |
 
 Between people, Relais Colis emails the recipient a confirmation to follow the parcel; for a shop order, look in the shop's shipping email or order page. No number? Relais Colis's "Je n'ai pas mon numéro de colis" search uses the recipient's email or phone and the shop's name; see also [how to find a tracking number](guide:find-tracking-number).
@@ -78,7 +78,7 @@ As listed on relaiscolis.com on 11 October 2026; everything is in French.
 
 ## Tracking Relais Colis parcels with Peek
 
-[Peek](/) recognises `CC` numbers as Relais Colis's at once. Other shapes are shared, so Peek asks the likely carriers and shows "asking…" first: for 10 digits it asks Relais Colis, TIPSA and [DHL eCommerce Spain](carrier:dhl-ecommerce-es) (and [DHL Express](carrier:dhl-express) first when the number passes DHL Express's check digit), and for `VD` numbers Colis Privé and Relais Colis. With 14 digits, Relais Colis is asked first only for readers in France; elsewhere it may not be asked at all. If several carriers know the number, or none does, press "Change" and pick Relais Colis. A relaiscolis.com tracking link works too. No postcode is needed.
+[Peek](/) recognises `CC` numbers as Relais Colis's at once. Other shapes are shared, so Peek asks the likely carriers and shows "asking…" first: for 10 digits it asks [DHL eCommerce Spain](carrier:dhl-ecommerce-es), Packeta and BOX NOW, not Relais Colis (and [DHL Express](carrier:dhl-express), ACS Courier and Geniki Taxydromiki first when the number passes DHL Express's check digit), and for `VD` numbers Colis Privé and Relais Colis. With 14 digits, it asks Chronopost, DPD and others, not Relais Colis, even for readers in France. If several carriers know the number, or none does, press "Change" and pick Relais Colis. A relaiscolis.com tracking link works too. No postcode is needed.
 
 Peek shows the status and history only: no place on the map, no expected delivery and no details of the relay holding the parcel; it drops those and your name and address. Wordings stay in French as Relais Colis writes them; only a few exact ones, such as `Livraison effectuée`, are replaced by Peek's own label ("Delivered"). Times are read as Paris time. When Relais Colis's latest status has no exact time, Peek takes the dated history from other tracking services and asks Relais Colis again every 6 hours. Otherwise it checks every 10 minutes, or every 2 from 6 a.m. local time on the day Relais Colis scans the parcel out for delivery, while Relais Colis's own tracker answers (through tracking services, every 15 minutes), and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 

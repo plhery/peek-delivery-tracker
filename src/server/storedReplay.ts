@@ -14,14 +14,16 @@
  * scan its adapter gave no stage. A scan its adapter gave the stage of the scan before it, with no
  * source of its own, keeps it whatever the map says of its code. A notice stored as one
  * keeps its stage, as do differences that come only from the order of the scans around a row:
- * the next check of the parcel settles those. Peek's own rows and the stage changes it saw without
+ * the next check of the parcel settles those. A wording Postal Ninja relays for a carrier whose map reads it
+ * whole is read with that map first (`relayedAnswer`), as its adapter reads it. Peek's own rows and the stage changes it saw without
  * a scan time are left out. It is a dry run: it lists the rows that would change, the parcels
  * that would step back with them, and the SQL that would change both, guarded on their stored
  * values; applying it is the operator's
  * ([docs/SCRAPER.md](../../docs/SCRAPER.md)).
  */
 import { classifyStage, type CarrierResult } from 'universal-parcel-scraper';
-import { statusMapAnswer } from 'universal-parcel-scraper/app';
+import * as scraperApp from 'universal-parcel-scraper/app';
+import { carrierIdFromName, statusMapAnswer, type StatusMapAnswer } from 'universal-parcel-scraper/app';
 import { carrierHomeZone, dateLocalClocks } from 'universal-parcel-scraper/places';
 import { STAGES } from '../generated/apiContract';
 import { scanStages } from './disputedDelivery';
@@ -97,6 +99,13 @@ const PROGRESS_STAGES = new Set<string>(STAGES.filter((stage) => stage !== 'pend
 const HELD_STAGES = new Set(['delivered', 'returned', 'exception']);
 
 const sourceOf = (scan: StoredScan) => scan.providerEventId.slice(0, Math.max(0, scan.providerEventId.indexOf(':')));
+/** The universal providers whose adapter stages a scan with the map of the carrier that reported it. */
+const RELAYING_PROVIDERS = new Set(['Postal Ninja']);
+/**
+ * A release before 0.1005.0, which `--from` replays with, reads no relayed wording: looked up, not imported, so
+ * the module still loads with it.
+ */
+const relayedWordingStage = (scraperApp as Partial<typeof scraperApp>).relayedWordingStage;
 const text = (value: unknown) => typeof value === 'string' ? value : null;
 const deduced = (scan: StoredScan, source: string) => text(scan.raw.local_time) !== null && DEDUCED.has(String(scan.raw.time_zone_basis))
   && !(scan.raw.time_zone_basis === 'carrier' && scan.raw.time_zone === carrierHomeZone(source));
@@ -114,6 +123,21 @@ function writerOf(parcel: StoredParcel, scan: StoredScan): string {
   const times = [scan.raw.time, scan.raw.local_time, scanDay(scan.raw)];
   if (times.some((time) => providerEventId(source, time, scan.location ?? '', scan.description) === scan.providerEventId)) return source;
   return unnamedRowCarrier(parcel.carriers ?? [], text(scan.raw.provider_code), scan.description) ?? source;
+}
+
+/**
+ * What the map of the carrier that reported a universal provider's scan says of its wording, as the provider's
+ * adapter reads it: Postal Ninja names the service behind each scan (`reporting_carrier`), and a carrier whose map
+ * reads such a wording whole stages it (`relayedWordingStage`). Null when no such map stages it, and for the other
+ * providers, which name a scan's carrier without staging it so.
+ */
+function relayedAnswer(scan: StoredScan): StatusMapAnswer | null {
+  const service = text(scan.raw.reporting_carrier);
+  const provider = text(scan.raw[UNIVERSAL_PROVIDER]);
+  if (!service || !provider || !RELAYING_PROVIDERS.has(provider)) return null;
+  const carrier = carrierIdFromName(service);
+  const stage = carrier && relayedWordingStage ? relayedWordingStage(carrier, scan.description) : undefined;
+  return stage ? { kind: 'mapped', stage } : null;
 }
 
 /** Every stored row of the parcel the installed release would write otherwise. */
@@ -175,7 +199,8 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
   // The stage the adapter gives the scan before, the one a notice keeps.
   let previous: string | null = null;
   for (const scan of ordered) {
-    const answer = statusMapAnswer({ carrier: source, providerCode: text(scan.raw.provider_code), description: scan.description });
+    const answer = relayedAnswer(scan)
+      ?? statusMapAnswer({ carrier: source, providerCode: text(scan.raw.provider_code), description: scan.description });
     const declared = VALID_STAGES.has(String(scan.raw.stage)) ? String(scan.raw.stage) : null;
     const wording = classifyStage(scan.description);
     let given: JsonObject = { ...(declared ? { stage: declared } : {}), stage_source: scan.raw.stage_source ?? null };

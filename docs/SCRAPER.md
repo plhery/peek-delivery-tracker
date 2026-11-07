@@ -215,7 +215,9 @@ rows together, a carrier's own or one universal provider's, as the sync read the
 that took over a universal provider's copy keeps the copy's identity, and replays with its carrier's
 rows. A deduced zone's wall clocks are dated again, except on the carrier's home clock, which an
 adapter can state itself, and a scan's stage is read again from its source's status map and the
-wording rules, a notice stored as the sync stores it. A scan its adapter gave the stage of the scan
+wording rules, a notice stored as the sync stores it. A wording Postal Ninja relays for the carrier it
+names (`reporting_carrier`) is read with that carrier's map first, when the map reads relayed wordings
+whole (PostNL's), as the adapter reads it. A scan its adapter gave the stage of the scan
 before it, with no source of its own (Chronopost's RB), keeps it.
 
 ```bash

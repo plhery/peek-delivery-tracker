@@ -44,6 +44,25 @@ describe('stored scan replay', () => {
     expect(changes).toEqual([expect.objectContaining({ row: 'read', from: 'in_transit', to: 'registered', reason: 'notice', stageSource: 'none' })]);
   });
 
+  it('reads a wording Postal Ninja relays for PostNL with PostNL\'s map, as its adapter does', () => {
+    const relayed = (id: string, stage: string, description: string, raw: JsonObject) => scan(id, 'unknown', `2026-11-0${id.length % 9}T10:00:00Z`,
+      stage, description, { universal_provider: 'Postal Ninja', stage, ...raw });
+    // PostNL's map stages a received shipment as accepted, which the shared reading of the providers' wording reads
+    // as in transit: the replay keeps the stage the adapter gave, and reads a row with PostNL's map as it now stands.
+    // A row stored before Postal Ninja named its service is read as before.
+    const changes = replayParcel(parcel(
+      relayed('kept', 'accepted', 'Shipment received by PostNL', { reporting_carrier: 'PostNL' }),
+      relayed('reread', 'in_transit', 'Driver is en route', { reporting_carrier: 'PostNL', stage_source: 'wording:provider' }),
+      relayed('unnamed', 'in_transit', 'Shipment received by PostNL', {}),
+    ));
+    // Another provider names the carrier without staging its wording with the carrier's map.
+    const other = replayParcel(parcel(scan('17track', 'unknown', '2026-11-01T10:00:00Z', 'in_transit', 'Shipment received by PostNL',
+      { universal_provider: '17TRACK', reporting_carrier: 'PostNL', stage: 'in_transit' })));
+
+    expect(changes).toEqual([expect.objectContaining({ row: 'reread', from: 'in_transit', to: 'out_for_delivery', reason: 'mapped', stageSource: 'carrier_map' })]);
+    expect(other).toEqual([]);
+  });
+
   it('stores a notice after the delivery round as the sync does, pending', () => {
     const changes = replayParcel(parcel(
       scan('delivered', 'dpd-de', '2026-10-18T10:00:00Z', 'delivered', 'Delivered', { provider_code: 'DELIVERED', stage: 'delivered' }),

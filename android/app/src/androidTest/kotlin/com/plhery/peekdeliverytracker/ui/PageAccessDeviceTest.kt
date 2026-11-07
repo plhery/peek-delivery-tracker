@@ -128,8 +128,6 @@ class PageAccessDeviceTest {
 
     private val delivered: Parcel get() = DemoCards.parcels().first { it.currentStage == TrackingStage.Delivered && it.archivedAt == null }
 
-    private fun fullName(parcel: Parcel): String = walk.identities.shown(parcel, walk.localizer).fullName
-
     /** The node `id` once `check` holds of it, as TalkBack reads it ([spoken]) or as it stands. */
     private fun awaitReading(id: String, what: String, check: (AccessibilityNodeInfo) -> Boolean): AccessibilityNodeInfo =
         tree.await("$id $what") { nodes -> nodes.firstOrNull { it.viewIdResourceName == id && check(it) } }
@@ -163,8 +161,10 @@ class PageAccessDeviceTest {
         val marks = tree.awaitId(PAGE_MARKS)
         assertTrue(marks.isButton)
         assertEquals("Nothing in the carrier's button is a stop of its own", 0, marks.childCount)
-        val from = walk.text("detail.changeCarrierFrom", "carrier" to fullName(lamp))
-        assertTrue(marks.spoken, marks.spoken.startsWith(from))
+        // Voice Access answers to the name the mark shows, which the label starts with.
+        val shown = walk.identities.shown(lamp, walk.localizer)
+        val from = walk.text("detail.changeCarrierFrom", "carrier" to shown.fullName)
+        assertTrue(marks.spoken, marks.spoken.startsWith("${shown.name}. $from"))
         for ((id, key) in listOf(PAGE_GLOBE to "map.open", PAGE_SHARE to "link.shareAria")) {
             val button = tree.awaitId(id)
             assertEquals(walk.text(key), button.spoken)

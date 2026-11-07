@@ -688,7 +688,8 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'xpress-freight-management'
   | 'yuexi-logistics'
   | 'dongdu'
-  | 'zecheng';
+  | 'zecheng'
+  | 'suhu';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

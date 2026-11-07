@@ -2001,7 +2001,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "aliases": [
       "myHermes",
-      "Hermes Germany GmbH"
+      "Hermes Germany GmbH",
+      "Hermes Borderguru"
     ],
     "countries": [
       "DE"
@@ -7395,7 +7396,8 @@ export const CARRIER_CAPABILITIES = {
       "Kuehne + Nagel",
       "Kühne + Nagel",
       "Kuehne Nagel",
-      "KN Road Logistics"
+      "KN Road Logistics",
+      "myKN"
     ],
     "countries": [
       "CH",

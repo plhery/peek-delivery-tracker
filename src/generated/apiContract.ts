@@ -2508,7 +2508,7 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "PostNord",
     "color": "#00a0d6",
     "selectable": true,
-    "timezone": "UTC",
+    "timezone": "Europe/Stockholm",
     "tracking": {
       "mode": "automatic",
       "adapter": "postnord",
@@ -2821,7 +2821,7 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "CTT Portugal",
     "color": "#df0024",
     "selectable": true,
-    "timezone": "UTC",
+    "timezone": "Europe/Lisbon",
     "tracking": {
       "mode": "automatic",
       "adapter": "ctt"
@@ -3591,7 +3591,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "UTC",
     "tracking": {
       "mode": "automatic",
-      "adapter": "landmark-global"
+      "adapter": "landmark-global",
+      "pageClock": true
     },
     "linkRules": [
       {
@@ -3797,7 +3798,7 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Correios Brazil",
     "color": "#ffd500",
     "selectable": true,
-    "timezone": "UTC",
+    "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
       "adapter": "correios-br"
@@ -4905,7 +4906,7 @@ export const CARRIER_CAPABILITIES = {
     "displayName": "Bring",
     "color": "#56b529",
     "selectable": true,
-    "timezone": "UTC",
+    "timezone": "Europe/Oslo",
     "tracking": {
       "mode": "automatic",
       "adapter": "bring-posten",
@@ -16180,6 +16181,11 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^ML[A-Z]{2}\\d{9}(?:R|EX)$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^ML[A-Z]{2}\\d{7}R$",
+        "confidence": "low",
+        "preferred": true
       },
       {
         "pattern": "^MMXQP\\d{9}[ENR]$",
@@ -38299,7 +38305,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Tokyo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "seino-super-express"
     },
     "trackingUrlTemplate": "https://inquire.trc.ssx.seino.co.jp/inquire/Main.jsp?uji.verbs=NAHS0010_find&uji.bean=com.seibu.bean.na.NAHS0010Bean&strDenpyoNo1={trackingNumber}",
     "linkRules": [
@@ -47972,7 +47978,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Qatar",
     "tracking": {
       "mode": "automatic",
-      "adapter": "qatar-post"
+      "adapter": "qatar-post",
+      "recognitionRank": 563
     },
     "trackingUrlTemplate": "https://www.qatarpost.qa/TrackAndTrace?trackingNumber={trackingNumber}",
     "linkRules": [
@@ -47987,7 +47994,14 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^EM\\d{9}QA$",
+        "confidence": "low",
+        "checksum": "s10",
+        "preferred": true
+      }
+    ],
     "trackingSearchUrl": "https://www.qatarpost.qa/TrackAndTrace"
   },
   "dpd-gr": {

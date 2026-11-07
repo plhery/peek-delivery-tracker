@@ -79343,6 +79343,18 @@
     ]
   },
   {
+    "input": "EM904826153QA",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "qatar-post",
+      "chronopost"
+    ]
+  },
+  {
     "input": "EM9999999999999980CA",
     "carrier": "unknown",
     "confidence": "low",
@@ -89056,6 +89068,22 @@
     "confidence": "high",
     "candidates": [
       "mailamericas"
+    ]
+  },
+  {
+    "input": "MLPE9999998R",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mailamericas",
+      "colis-prive"
+    ],
+    "preferred": [
+      "mailamericas"
+    ],
+    "asked": [
+      "mailamericas",
+      "colis-prive"
     ]
   },
   {

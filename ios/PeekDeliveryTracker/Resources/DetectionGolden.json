@@ -98215,6 +98215,12 @@
     "candidates": []
   },
   {
+    "input": "SUH0000000000002AB",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "SV0002203111",
     "carrier": "unknown",
     "confidence": "low",

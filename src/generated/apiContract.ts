@@ -49730,6 +49730,32 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://api.zecwl.com/index/tracknumber/track"
+  },
+  "suhu": {
+    "displayName": "Suhu Express",
+    "aliases": [
+      "suhu supply chain",
+      "SUHU",
+      "速虎",
+      "速虎速运",
+      "速虎物流"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#e8501a",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "suhu",
+      "recognitionRank": 721,
+      "recognitionPattern": "^[A-Z]{3}\\d{13}[A-Z]{2}$"
+    },
+    "trackingUrlTemplate": "https://www.suhusupplychain.com/",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.suhusupplychain.com/"
   }
 } as const;
 
@@ -51157,7 +51183,8 @@ export const CARRIER_IDS = [
   "xpress-freight-management",
   "yuexi-logistics",
   "dongdu",
-  "zecheng"
+  "zecheng",
+  "suhu"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

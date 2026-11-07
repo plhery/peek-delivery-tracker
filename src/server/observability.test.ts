@@ -93,6 +93,50 @@ describe('a number in a report', () => {
 });
 
 describe('why a lookup failed', () => {
+  const refused = (body?: string, read: 'complete' | 'truncated' | 'timed_out' = 'complete') => new UpstreamHttpError('Example carrier', 403, undefined, {
+    content_type: 'text/html', headers: {}, response_url: '', status_text: 'Forbidden', request_ids: {},
+    body_read: read, bytes_inspected: body?.length ?? 0, body_signals: ['access_denied'], body_excerpt: body,
+  });
+
+  it('logs the refused response from a wrapped error with identifiers and access values masked', () => {
+    const output = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const body = '<title>Site unavailable</title><style>.hidden { color: red }</style>'
+      + '<script>const token="scriptsecret"</script><svg>unhelpful image</svg>'
+      + '<p>Incident for AB123456789CD, AB&#49;23456789CD and AB%31%32%33%34%35%36%37%38%39CD.</p>'
+      + ' {"token":"bodysecret","api_key":"apikeysecret","number":"AB\\u003123456789CD"}'
+      + ' https://username:password@carrier.example/private-capability?session=secret';
+    const error = new Error('Carrier lookup failed', { cause: refused(body, 'truncated') });
+    logOperationalEvent('tracking_scrape', { carrier: 'example', phase: 'direct', ...errorDetails(error) });
+    const payload = JSON.parse(String(output.mock.calls[0]?.[0]));
+    expect(payload).toMatchObject({ upstream_status: 403, upstream_content_type: 'text/html',
+      upstream_body_read: 'truncated', upstream_body_signals: 'access_denied' });
+    expect(payload.upstream_body_excerpt).toContain('Site unavailable');
+    expect(payload.upstream_body_excerpt).toContain('[AB + 9 digits + CD]');
+    expect(payload.upstream_body_excerpt).toContain('[redacted]');
+    expect(payload.upstream_body_excerpt).toContain('https://carrier.example');
+    for (const hidden of ['AB123', '&#49;', '%31', '\\u0031', 'scriptsecret', 'bodysecret', 'apikeysecret',
+      'username', 'password', 'private-capability', 'session=secret', 'unhelpful image', '.hidden']) {
+      expect(payload.upstream_body_excerpt).not.toContain(hidden);
+    }
+  });
+
+  it('masks before the 500-character boundary and preserves failure metadata when no body was read', () => {
+    const details = errorDetails(refused('a'.repeat(490) + ' AB123456789CD rest'));
+    expect(String(details.upstream_body_excerpt)).toHaveLength(500);
+    expect(details.upstream_body_excerpt).not.toContain('AB123');
+    const unread = errorDetails(refused(undefined, 'timed_out'));
+    expect(unread).toMatchObject({ upstream_status: 403, upstream_body_read: 'timed_out' });
+    expect(unread).not.toHaveProperty('upstream_body_excerpt');
+  });
+
+  it('omits scripts whose closing tag was outside the transport prefix and masks authorization text', () => {
+    const details = errorDetails(refused('<title>Access denied</title> Authorization: Bearer privatetoken\n'
+      + '<script>secret_without_closing_tag'));
+    expect(details.upstream_body_excerpt).toContain('Access denied');
+    expect(details.upstream_body_excerpt).not.toContain('privatetoken');
+    expect(details.upstream_body_excerpt).not.toContain('secret_without_closing_tag');
+  });
+
   it('gives the reason, the wording and each cause, with no address query and no word that could be a number', () => {
     const cause = new TypeError('fetch failed for https://carrier.example/track/AB123456789CD?session=secret', {
       cause: new Error('socket hang up on 1234567'),

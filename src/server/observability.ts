@@ -309,12 +309,37 @@ function withoutNumbers(text: string): string {
   return scrubText(text).replace(NUMBER_LIKE, (word) => PROVIDER_NAMES.has(word.toLowerCase()) ? word : `[${numberPattern(word)}]`);
 }
 
+/** Readable refusal text, bounded like the other log fields and without identifiers or access values. */
+function refusalExcerpt(body: string): string {
+  const decoded = body.replace(/\\u([\da-f]{4})/gi, (_, code: string) => String.fromCharCode(Number.parseInt(code, 16)))
+    .replace(/&#(x[\da-f]+|\d+);/gi, (_, code: string) => {
+      const point = /^x/i.test(code) ? Number.parseInt(code.slice(1), 16) : Number(code);
+      return point <= 0x10ffff ? String.fromCodePoint(point) : '';
+    })
+    .replace(/&(amp|quot|apos|lt|gt|nbsp);/gi, (_, name: string) =>
+      ({ amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', nbsp: ' ' })[name.toLowerCase()]!)
+    .replace(/(?:%[\da-f]{2})+/gi, (encoded) => {
+      try { return decodeURIComponent(encoded); } catch { return '[encoded]'; }
+    });
+  const text = decoded.replace(/<(script|style|svg)\b[^>]*>[\s\S]*?(?:<\/\1\s*>|$)/gi, ' ')
+    .replace(/<[^>]*(?:>|$)/g, ' ')
+    .replace(/\b(?:Bearer|Basic)\s+[A-Za-z\d._~+\/-]+=*/gi, '[authorization]')
+    .replace(/(["']?(?:authorization|cookie|set-cookie|(?:access|refresh|guest)[_-]?token|token|session(?:id)?|password|secret|api[_-]?key|nonce)["']?\s*[:=]\s*)(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|[^\s,;<>]+)/gi,
+      '$1[redacted]')
+    .replace(ADDRESS, (address) => {
+      try { return new URL(address).origin; } catch { return '[address]'; }
+    });
+  // Mask before truncating: a number crossing the log's boundary must not leave a prefix behind.
+  return withoutNumbers(text).replace(/\s+/g, ' ').trim().slice(0, 500);
+}
+
 /**
  * Why a lookup failed, for a line that has no number to mask: the reason the carrier
  * gave, read through the causes, its wording, and the wording of each cause.
  */
 export function errorDetails(error: unknown): JsonObject {
   if (!(error instanceof Error)) return {};
+  const { upstreamStatus, upstreamHttp } = operationalErrorMetadata(error);
   const causes: string[] = [];
   const seen = new Set<Error>([error]);
   for (let cause = error.cause; cause instanceof Error && !seen.has(cause) && causes.length < 3; cause = cause.cause) {
@@ -325,6 +350,13 @@ export function errorDetails(error: unknown): JsonObject {
     error_reason: carrierErrorReason(error),
     error_message: withoutNumbers(error.message).slice(0, 200),
     error_cause: causes.length > 0 ? causes.join(' <- ') : undefined,
+    ...(upstreamStatus !== undefined ? { upstream_status: upstreamStatus } : {}),
+    ...(upstreamHttp ? {
+      upstream_content_type: upstreamHttp.content_type,
+      upstream_body_read: upstreamHttp.body_read,
+      upstream_body_signals: upstreamHttp.body_signals.join(','),
+      ...(upstreamHttp.body_excerpt ? { upstream_body_excerpt: refusalExcerpt(upstreamHttp.body_excerpt) } : {}),
+    } : {}),
   };
 }
 

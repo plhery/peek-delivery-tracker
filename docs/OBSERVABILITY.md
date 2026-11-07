@@ -50,6 +50,13 @@ in Postgres and Prometheus, for the hourly review in [Review signals](#review-si
 Metrics (Sentry and Prometheus) cover latency and fallback use. Sentry alerts on each new
 error; [Grafana alerts](#grafana-alerts) on what no single error shows.
 
+Failed `tracking_scrape` steps and totals keep an upstream HTTP refusal's status,
+content type, body-read outcome, recognized signals and a body-text excerpt when
+the transport supplied one. The excerpt omits markup, access values and URL paths,
+masks number-like words before truncation, and is limited to 500 characters.
+The transport's read limit still applies; a truncated or unreadable body remains
+labelled as such. Logging makes no additional request.
+
 **Privacy.** Logs keep original errors and upstream request/response details but no
 tracking number: a line names its parcel by the shape of its number (`number_pattern`,
 such as `MY + 10 digits + US`), its `package_id` or its check's `attempt_id`, and wherever

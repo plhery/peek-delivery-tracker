@@ -72867,6 +72867,14 @@
     ]
   },
   {
+    "input": "BR999999999999XSPXLM99999999",
+    "carrier": "spx-br",
+    "confidence": "high",
+    "candidates": [
+      "spx-br"
+    ]
+  },
+  {
     "input": "BSIC1064576117",
     "carrier": "ekart",
     "confidence": "high",

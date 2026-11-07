@@ -18382,6 +18382,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^BR\\d{12}[0-9A-Z]$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^BR\\d{12}[0-9A-Z]SPXLM\\d{8}$",
+        "confidence": "high"
       }
     ],
     "trackingSearchUrl": "https://spx.com.br/track",

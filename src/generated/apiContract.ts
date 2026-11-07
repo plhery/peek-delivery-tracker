@@ -33978,7 +33978,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Chicago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "costco-logistics"
     },
     "trackingUrlTemplate": "https://logistics.costco.com/tracking?id={trackingNumber}",
     "linkRules": [

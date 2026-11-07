@@ -30,6 +30,17 @@ describe('browser route configuration', () => {
   });
 });
 
+it('gives every environment of the process one fetcher per proxy setting, so lookups share the warmed DPD session', () => {
+  const routes = { TRACKING_PROXY_ROUTES: JSON.stringify({ 'api.paketnavigator.de': 'http://proxy.test:8080' }) };
+  const fetcher = hostAdapterEnvironment(routes).fetcher;
+  expect(fetcher).toBeTypeOf('function');
+  expect(hostAdapterEnvironment({ ...routes, FLARESOLVERR_URL: 'http://primary.test' }).fetcher).toBe(fetcher);
+  expect(hostAdapterEnvironment({ TRACKING_PROXY_ROUTES: JSON.stringify({ 'api.paketnavigator.de': 'http://other.test:8080' }) }).fetcher)
+    .not.toBe(fetcher);
+  expect(hostAdapterEnvironment({}).fetcher).toBeUndefined();
+  expect(() => hostAdapterEnvironment({ TRACKING_PROXY_ROUTES: '[]' })).toThrow(TypeError);
+});
+
 it('constructs an independent host-owned residential route', () => {
   const env = hostAdapterEnvironment({ FLARESOLVERR_URL: 'http://primary.test', FEDEX_RESIDENTIAL_TRAWL_URL: 'http://residential.test:8192' });
   expect(env.trawlRoutes?.['fedex-residential']).toBeInstanceOf(HostTrawlClient);

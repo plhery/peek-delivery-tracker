@@ -23,6 +23,21 @@ export class HostTrawlClient extends TrawlClient {
   }
 }
 
+const processFetchers = globalThis as typeof globalThis & { __deliveryTrackingFetchers?: Map<string, typeof fetch | undefined> };
+
+/**
+ * The process's tracking fetcher for these proxy settings, made once. The scraper keeps DPD's app session for each
+ * fetcher, so the lookups of every registry and tracker read DPD through the session `warmDpdSession` keeps open
+ * (instrumentation-node.ts), and each proxy route keeps its connections. On globalThis: route bundles load their
+ * own copy of this module.
+ */
+function hostFetcher(env: Record<string, string | undefined>): typeof fetch | undefined {
+  const key = JSON.stringify([env.TRACKING_US_PROXY_URL, env.TRACKING_US_PROXY_HOSTS, env.TRACKING_PROXY_ROUTES]);
+  const fetchers = processFetchers.__deliveryTrackingFetchers ??= new Map();
+  if (!fetchers.has(key)) fetchers.set(key, trackingProxyFetcher(env));
+  return fetchers.get(key);
+}
+
 /**
  * The environment this server hands to every carrier adapter: the private
  * browser service and local Chromium when configured, the telemetry sinks,
@@ -35,7 +50,7 @@ export function hostAdapterEnvironment(env: Record<string, string | undefined> =
   const datacenterUrl = env.FEDEX_DATACENTER_TRAWL_URL?.trim();
   const trialStore = datacenterUrl && residentialUrl ? hostRetryTrialStore(env) : null;
   return {
-    fetcher: trackingProxyFetcher(env),
+    fetcher: hostFetcher(env),
     trawlRoutes: residentialUrl || datacenterUrl ? {
       ...(residentialUrl ? { 'fedex-residential': new HostTrawlClient(residentialUrl) } : {}),
       ...(datacenterUrl ? { 'fedex-datacenter': new HostTrawlClient(datacenterUrl) } : {}),

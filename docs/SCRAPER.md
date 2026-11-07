@@ -28,8 +28,10 @@ DPD Germany and DPD Switzerland read through a session that takes tens of second
 A production server with `CANONICAL_ORIGIN` calls `warmDpdSession` with the same
 environment at start ([`instrumentation-node.ts`](../instrumentation-node.ts)), so the
 scraper keeps a session open in the background instead of the first DPD lookup after a
-deploy waiting for it. The production servers CI starts have no canonical origin, so they
-send DPD nothing.
+deploy waiting for it. The scraper keeps the session for each fetcher, so the process makes
+its proxy fetcher once ([`adapterRegistry.ts`](../src/server/adapterRegistry.ts)) and
+every lookup reads DPD through that session. The production servers CI starts have no
+canonical origin, so they send DPD nothing.
 
 The server also gives it a store in `dpd_app_sessions`
 ([`dpdSessions.ts`](../src/server/dpdSessions.ts)), service-role only. A deploy takes up

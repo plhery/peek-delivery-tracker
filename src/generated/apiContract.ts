@@ -3151,10 +3151,6 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^\\d{10}$",
-        "confidence": "low"
-      },
-      {
         "pattern": "^0\\d{5}0\\d{5}\\d{10}$",
         "confidence": "low",
         "preferred": true
@@ -49694,6 +49690,46 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.ddgyl.vip/"
+  },
+  "zecheng": {
+    "displayName": "Zecheng International Logistics",
+    "aliases": [
+      "ZHECHENG",
+      "择诚国际物流",
+      "深圳市择诚国际物流有限公司",
+      "Shenzhen Zecheng International Logistics Co., Ltd"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0b467e",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "zecheng",
+      "recognitionRank": 725,
+      "recognitionPattern": "^ZCGJ\\d{10}CN$"
+    },
+    "trackingUrlTemplate": "https://api.zecwl.com/index/tracknumber/track?nos={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "api.zecwl.com"
+        ],
+        "pathPattern": "^/index/tracknumber/track/?$",
+        "params": [
+          "nos"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^ZCGJ\\d{10}CN$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://api.zecwl.com/index/tracknumber/track"
   }
 } as const;
 
@@ -51120,7 +51156,8 @@ export const CARRIER_IDS = [
   "walker-logistics",
   "xpress-freight-management",
   "yuexi-logistics",
-  "dongdu"
+  "dongdu",
+  "zecheng"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

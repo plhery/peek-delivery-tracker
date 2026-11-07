@@ -23,6 +23,9 @@
  *   row showing that wall clock under another offset (DHL Express's mobile API
  *   and global portal). A scan its source restates with or without its
  *   milliseconds takes over the row of that second (Royal Mail's locker drop-off).
+ *   Whatever the policy, a carrier's scan a release reads on another clock,
+ *   its wall clock under another offset with the same wording, place and
+ *   stage, takes over the row stored under the old offset (`rezonedScans`).
  *   A scan that takes a row over by its wall clock under another offset never
  *   moves the row later than it was first stored: it keeps the row's time
  *   (`withHeldClocks`).
@@ -915,6 +918,36 @@ export function retimedScans(
     retimed.set(identity(scan), identity(row));
   }
   return retimed;
+}
+
+/**
+ * Maps the computed identity of each new scan of `source`, a carrier, to the stored row of that
+ * source a scraper release read on another clock: Huaya Express's US scans, read on Beijing time
+ * and then on the town's. The row shows the scan's date and time, to the second, under another
+ * offset, with the same wording, place and stage, codes that agree when both carry one
+ * (`sameWallClock`), and no scan of the answer carries it. Whatever the source's policy: a scan
+ * whose only change is its offset is the one stored, and a row of its own would announce it again.
+ * Scans and rows another rule matched, observations and universal or app rows are left out, and
+ * the match is one to one. With `held`, a scan dated past when the row was first stored keeps the
+ * row's time (`withHeldClocks`).
+ */
+export function rezonedScans(
+  events: readonly JsonObject[],
+  stored: readonly JsonObject[],
+  source: string,
+  matched: ReadonlyMap<string, string> = new Map(),
+  held?: Map<string, string>,
+): Map<string, string> {
+  const rezoned = new Map<string, string>();
+  if (source === '' || source === UNIVERSAL || source === 'app') return rezoned;
+  const own = (row: JsonObject) => sourceOf(identity(row)) === source && !observedOnly(row) && stageOf(row) !== '';
+  const storedIds = new Set(stored.map(identity));
+  const listed = new Set([...events.map(identity), ...matched.values()]);
+  const scans = events.filter((scan) => own(scan) && !storedIds.has(identity(scan)) && !matched.has(identity(scan)));
+  const rows = stored.filter((row) => own(row) && !listed.has(identity(row)));
+  matchLeft(rezoned, new Map([[0, scans]]), new Map([[0, rows]]),
+    (scan, row) => stageOf(scan) === stageOf(row) && sameWallClock(scan, row), held);
+  return rezoned;
 }
 
 /**

@@ -40,7 +40,7 @@ import {
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
 import { REDETECTION_PAGE, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
-import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { clockDay, datedObservations, filledPlaceholders, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
   askedForCheck,
@@ -2186,6 +2186,8 @@ export class TrackingSyncService {
         ? [sourceCarrierId, fetched.earlierCarrierId] : [sourceCarrierId];
       const held = new Map<string, string>();
       for (const policyCarrier of policyCarriers) adopt(sameInstantIdentities(events, stored, policyCarrier, held));
+      // Whatever the policy, a carrier's scan a release reads on another clock takes over the row of its old offset.
+      for (const policyCarrier of policyCarriers) adopt(rezonedScans(events, stored, policyCarrier, reworded, held));
       // Last, a scan its source reworded takes over the row of its old words once the source no longer lists them.
       adopt(rewordedScans(events, stored, reworded));
       // The earlier carrier's relay of a delivery scan stays its own row, at the same second or to the minute.

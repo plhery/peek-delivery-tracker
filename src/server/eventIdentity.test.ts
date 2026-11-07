@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { JsonObject } from './types';
-import { datedObservations, filledPlaceholders, misdatedCopies, placesConflict, placeWords, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
+import { datedObservations, filledPlaceholders, misdatedCopies, placesConflict, placeWords, requalifiedPlaces, restatedIdentities, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, sharedScans, strippedMarkup, relayedScans, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 
 // New events carry the sync's ISO spelling; stored rows come back from
 // PostgREST with an explicit +00:00 offset. Both name the same instant.
@@ -706,6 +706,45 @@ describe('a scan its source rewords', () => {
     expect(rewordedScans([out, { ...reworded, observed_without_provider_timestamp: true }], stored).size).toBe(0);
     const day = (row: JsonObject) => ({ ...row, occurred_at: '2026-10-27T00:00:00.000Z', raw_data: { time: '2026-10-27' } });
     expect(rewordedScans([out, day(reworded)], [out, day(missed)]).size).toBe(0);
+  });
+});
+
+describe('a scan a release reads on another clock', () => {
+  // A release reads a carrier's US scans on the town's clock, not Beijing's (synthetic place and times).
+  const at = (time: string, id: string, extra: JsonObject = {}) => ({
+    provider_event_id: id, occurred_at: new Date(time).toISOString(), stage: 'in_transit', description: 'Arrived at facility',
+    location: 'EXAMPLE TOWN, US', created_at: '2026-11-07T17:11:00Z', raw_data: { time }, ...extra,
+  });
+  const beijing = at('2026-11-06T08:42:39+08:00', 'huaya-express:beijing');
+  const town = at('2026-11-06T08:42:39-05:00', 'huaya-express:town');
+  const label = at('2026-11-01T10:00:00+08:00', 'huaya-express:label', { stage: 'registered', description: 'Label created' });
+
+  it('takes over the row of the old offset the answer no longer lists', () => {
+    expect([...rezonedScans([label, town], [label, beijing], 'huaya-express')]).toEqual([['huaya-express:town', 'huaya-express:beijing']]);
+  });
+
+  it('leaves a row the answer still lists, other wording, place or stage, another wall clock, and other sources', () => {
+    expect(rezonedScans([label, beijing, town], [label, beijing], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([{ ...town, description: 'Departed facility' }], [beijing], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([{ ...town, location: 'OTHER TOWN, US' }], [beijing], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([{ ...town, stage: 'out_for_delivery' }], [beijing], 'huaya-express').size).toBe(0);
+    expect(rezonedScans([at('2026-11-06T09:42:39-05:00', 'huaya-express:hour-on')], [beijing], 'huaya-express').size).toBe(0);
+    const universal = (row: JsonObject) => ({ ...row, provider_event_id: String(row.provider_event_id).replace('huaya-express:', 'unknown:') });
+    expect(rezonedScans([universal(town)], [universal(beijing)], 'unknown').size).toBe(0);
+    expect(rezonedScans([town], [beijing], 'yanwen').size).toBe(0);
+    expect(rezonedScans([town], [beijing], 'huaya-express', new Map([['huaya-express:other', 'huaya-express:beijing']])).size).toBe(0);
+  });
+
+  it('matches one to one', () => {
+    const twin = at('2026-11-06T08:42:39-06:00', 'huaya-express:twin');
+    expect(rezonedScans([town, twin], [beijing], 'huaya-express').size).toBe(0);
+  });
+
+  it('keeps the row\'s time when the scan is dated past when the row was first stored', () => {
+    const held = new Map<string, string>();
+    const late = { ...beijing, created_at: '2026-11-06T01:00:00Z' };
+    expect(rezonedScans([town], [late], 'huaya-express', new Map(), held).size).toBe(1);
+    expect([...held]).toEqual([['huaya-express:town', 'huaya-express:beijing']]);
   });
 });
 

@@ -7869,6 +7869,33 @@ describe('a USPS label read on another clock after it was stored', () => {
   });
 });
 
+describe('a carrier\'s scan a release reads on another clock', () => {
+  // A release reads a US partner's scan on the town's clock, not Beijing's: the same wall clock, wording,
+  // place and stage under another offset (synthetic number, place and times).
+  const arrival = (time: string): CarrierResult => ({ status: 'in_transit', current_stage: 'in_transit', last_update: time,
+    last_status_text: 'Arrived at facility', events: [
+      { time, stage: 'in_transit', description: 'Arrived at facility', location: 'EXAMPLE TOWN, US' },
+      { time: '2026-11-01T10:00:00+08:00', stage: 'registered', description: 'Label created', location: 'EXAMPLE CITY' }] });
+  const load = (store: ReturnType<typeof eventStore>) => ({ id: 'huaya-parcel', user_id: 'owner', carrier: 'huaya-express',
+    tracking_number: 'HYYT999999999980GZ', current_stage: 'in_transit', [STORED_EVENT_IDENTITIES]: store.identities() });
+  const rows = (store: ReturnType<typeof eventStore>) => [...store.rows.values()]
+    .map(({ id, provider_event_id, occurred_at, raw_data }) => ({ id, provider_event_id, occurred_at, time: (raw_data as JsonObject).time }));
+
+  it('updates the stored row in place, so it is not a new scan', async () => {
+    const store = eventStore();
+    const adapter = { fetch: vi.fn().mockResolvedValueOnce(arrival('2026-11-06T08:42:39+08:00')).mockResolvedValue(arrival('2026-11-06T08:42:39-05:00')) };
+    const service = new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-11-07T17:11:00Z'));
+    await service.syncPackage(load(store));
+    const [stored, label] = rows(store);
+    expect(stored).toMatchObject({ time: '2026-11-06T08:42:39+08:00' });
+    store.rows.get(stored!.provider_event_id as string)!.created_at = '2026-11-06T20:00:00Z';
+    await service.syncPackage(load(store));
+    await service.syncPackage(load(store));
+    expect(rows(store)).toEqual([{ ...stored, occurred_at: eventTimestamp('2026-11-06T08:42:39-05:00', 'UTC'), time: '2026-11-06T08:42:39-05:00' }, label]);
+  });
+});
+
 describe('reworded DPD scans', () => {
   // The fixtures' synthetic number: a DPD reply must name the parcel asked for.
   const NUMBER = '06080000000001';

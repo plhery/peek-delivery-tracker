@@ -62,7 +62,7 @@ Die Nummer hat der Absender. Lass dir von ihm sagen:
 - **Die Nummer, genau so, wie sie gedruckt ist.**
 - **Ob die Sendung überhaupt verfolgbar ist.** Für DHL Päckchen ist eine Sendungsverfolgung „grundsätzlich nicht möglich“, außer bei DHL Päckchen International mit dem Service „Versicherung“. Bei Briefen der Deutschen Post nennt DHL nur Einschreiben, Nachnahme, PRIO, Wert National und Briefmarken mit Matrixcode als verfolgbar. Bei der Schweizerischen Post lassen sich Briefe etwa als Einschreiben, A-Post Plus oder mit Letter ID verfolgen.
 
-Auf einem Marktplatz gekauft? Dann frag über die Plattform. Bei Amazon klärst du ein Lieferproblem zuerst mit dem Verkaufspartner. Gelingt das nicht, kannst du dich direkt an Amazon wenden und eine Rückerstattung beantragen. Bei eBay wählst du **Verkäufer kontaktieren** und bittest ihn, die Sendungsnummer hochzuladen. Und bei Vinted soll dir der Verkäufer die Nummer mitteilen, wenn er mit individuellem Versand verschickt hat.
+Auf einem Marktplatz gekauft? Dann frag über die Plattform. Bei Amazon klärst du ein Lieferproblem zuerst mit dem Verkaufspartner. Gelingt das nicht, kannst du dich direkt an Amazon wenden und eine Rückerstattung beantragen. Bei eBay wählst du **Verkäufer kontaktieren** und bittest ihn, die Sendungsnummer hochzuladen. Und bei Vinted gibt es eine Sendungsverfolgung nur für Artikel, die über den „Kaufen“-Button gekauft und nach den Anweisungen in der App verschickt wurden; Hilfe bekommst du, wenn du auf der Startseite des Hilfe-Centers die Bestellung auswählst.
 
 ### Lass dir ankommende Pakete vom Paketdienst anzeigen
 
@@ -156,7 +156,7 @@ Immer noch nichts? Dann frag den Absender, meist also den Online-Shop: Von ihm k
 - [About Amazon Deutschland: Amazon-Lieferung: einfache Bestellung und Verfolgung](https://www.aboutamazon.de/news/amazon-prime-und-shopping/amazon-lieferoptionen-sendung-verfolgen) – Meine Bestellungen, Lieferung verfolgen
 - [About Amazon Deutschland: Amazon A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – erst der Verkaufspartner, dann Amazon
 - [eBay: Sendung für Ihren Artikel nachverfolgen](https://www.ebay.de/help/buying/versand-lieferung/sendungsverfolgung?id=4027) – Mein eBay: Käufe, Gastkauf, Verkäufer kontaktieren
-- [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – Sendung verfolgen, individueller Versand
+- [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – Sendung verfolgen, Sendungsverfolgung nur mit „Kaufen“-Button und nach den Anweisungen in der App, Hilfe-Center
 - [Zalando: Wo ist mein Paket?](https://www.zalando.ch/faq/where-is-my-parcel.html) – Link in der Mail, Mein Konto
 - [Weltpostverein: S10-Standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – das internationale Format mit 13 Zeichen
 :::

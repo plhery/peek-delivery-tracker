@@ -43,7 +43,7 @@ Si además hay algo que pagar antes de la entrega, como los impuestos de un env�
 Desde la web o la app del propio transportista, o con el enlace de su SMS o email. Cada uno ofrece opciones distintas:
 
 - **Correos:** si el producto incluye dos intentos, no tienes que hacer nada: te avisa por SMS de un segundo intento en un plazo de 24 horas. Si no, el paquete te espera en la oficina. Correos Modify (otra dirección de tu provincia, una oficina o un Citypaq) se usa antes, desde el SMS o el email que te anuncia la fecha de entrega, y no deja hacer cambios una vez el envío está en reparto.
-- **GLS:** la nota de paso te dice dónde está el envío. Si con eso no basta, GLS atiende por WhatsApp y en el +34 91 080 62 29; ten a mano el número de seguimiento. Para cambiar la dirección, la tienda tiene que autorizarlo.
+- **GLS:** la nota de paso te dice dónde está el envío. Si con eso no basta, GLS atiende a través de su asistente virtual y en el +34 91 080 62 29; ten a mano el número de seguimiento. Para cambiar la dirección, la tienda tiene que autorizarlo.
 - **InPost:** su agencia de reparto se pone en contacto contigo para concertar una nueva cita.
 
 ¿Quieres que la próxima vez vaya a otro sitio? Mira [cómo cambiar la dirección de entrega de un paquete](guide:change-delivery-address).
@@ -114,7 +114,7 @@ Primero al transportista, por escrito, y guarda la referencia que te den. Si es 
 | Paso | Qué hacer |
 | --- | --- |
 | Correos | En su web, en una oficina o en el 915 197 197 o el 900 400 004 (de lunes a viernes de 8 a 20 h, sábados de 9 a 13 h). Responde en un mes como máximo en envíos nacionales |
-| Otros transportistas | Su propio canal: GLS, por ejemplo, atiende por WhatsApp y teléfono |
+| Otros transportistas | Su propio canal: GLS, por ejemplo, atiende por su asistente virtual y por teléfono |
 | Consumo | Sin respuesta en un mes, o si no te convence: la OMIC de tu ayuntamiento, la dirección de consumo de tu comunidad autónoma, una asociación de consumidores o una Junta Arbitral de Consumo |
 | Ministerio de Transportes | Solo para el servicio postal universal (paquetes de hasta 20 kg): en el mes siguiente a la respuesta (o al final del plazo para darla), si no has ido a una Junta Arbitral |
 
@@ -129,7 +129,7 @@ La CNMC no resuelve reclamaciones concretas entre usuarios y empresas: te remite
 - [Correos: Sigue tu paquete con el Localizador de Envíos](https://www.correos.es/es/es/actualidad/2023/sigue-tu-paquete-en-tiempo-real-con-nuestra-herramienta-de-local) – Realizado intento de entrega, por ejemplo por ausencia del destinatario
 - [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – no entregado por ausencia o cierre, nueva entrega, disponible en el punto SEUR Pickup
 - [Universal Parcel Scraper: estados de MRW](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/mrw/statuses.json) – Destinatario ausente o cerrado
-- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – nota de paso, intentos, 7 días naturales, Depositado en Parcel Shop, documento oficial, contacto
+- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – nota de paso, intentos, 7 días naturales, Depositado en Parcel Shop, documento oficial, contacto (asistente virtual «Consulta» y teléfono, leído el 7 de noviembre de 2026)
 - [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – nueva cita tras ausencia, 5 días naturales, documentos, autorización, PIN
 - [MRW: Condiciones generales del servicio nacional](https://www.mrw.es/uso_MRW_mensajeria/condiciones_venta/) – aviso al remitente y 15 días para decidir
 - [CNMC: Guía sobre los derechos de los usuarios postales](https://www.cnmc.es/sites/default/files/editor_contenidos/Postal/202412_STP_DTSP_070_24_Guia%20usuarios%20postales%20CNMC.pdf) – un mes, vías de consumo, Junta Arbitral, Ministerio de Transportes, 20 kg

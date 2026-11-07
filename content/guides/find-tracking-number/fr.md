@@ -55,7 +55,7 @@ Les transporteurs qui abordent le cas d'un numéro manquant te renvoient tous ve
 - **Le numéro tel qu'il est imprimé.**
 - **Si l'envoi est bien suivi.** Ce n'est pas toujours le cas : à La Poste suisse, une lettre ordinaire n'est pas suivie ; il faut par exemple un recommandé ou le Courrier A Plus. Chez bpost, un code-barres qui commence par « U » sert seulement à la douane : l'envoi voyage sans Track & Trace.
 
-Acheté sur une plateforme ? Passe par elle. Sur eBay, contacte le vendeur et demande-lui d'ajouter le numéro de suivi. Sur Vinted, un colis parti avec un mode d'envoi personnalisé ne se suit pas dans l'app : c'est au vendeur de te transmettre le numéro.
+Acheté sur une plateforme ? Passe par elle. Sur eBay, contacte le vendeur et demande-lui d'ajouter le numéro de suivi. Sur Vinted, le suivi n'existe que pour les articles achetés avec le bouton « Acheter » et envoyés selon les instructions de l'app ; pour de l'aide, va sur la page d'accueil du Centre d'aide et sélectionne ta commande.
 
 ### Laisse le transporteur lister les colis qui t'arrivent
 
@@ -139,7 +139,7 @@ Toujours rien ? Demande à l'expéditeur ou à la boutique. Pour comprendre chaq
 - [DHL : Sendungsverfolgung, Probleme und Lösungen (en allemand)](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – numéro de commande, numéro valide
 - [About Amazon France : Six conseils pratiques pour se protéger des tentatives d'arnaques par usurpation d'identité](https://www.aboutamazon.fr/actualites/nos-boutiques/six-conseils-pratiques-pour-se-proteger-des-tentatives-darnaques-par-usurpation-didentite) – historique des commandes sur le compte ou l'application
 - [eBay : Suivre l'acheminement d'un objet](https://www.ebay.fr/help/buying/livraison/suivre-objet?id=4027) – Historique des achats, envoi suivi, ajout du numéro par le vendeur
-- [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – conversation, 48 h, mode d'envoi personnalisé
+- [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – conversation, 48 h, suivi seulement avec le bouton « Acheter » et les instructions de l'app, Centre d'aide
 - [Zalando : Où se trouve mon colis ?](https://www.zalando.fr/faq/where-is-my-parcel.html) – lien de suivi
 - [UPU : norme S10 (en anglais)](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – format à 13 caractères
 :::

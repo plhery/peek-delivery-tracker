@@ -24,7 +24,7 @@ Laut DPD steht die Paketnummer in der Versandbestätigung des Shops oder in DPDs
 
 Das 15. Zeichen erklärt DPD nicht. Laut Peeks Code ist es ein Prüfzeichen, das auf Etiketten und Paketinfokarten hinter den 14 Ziffern steht. Zum Verfolgen reichen die 14 Ziffern. Eine Referenznummer hilft nicht: Laut DPD brauchst du immer die Paketnummer.
 
-Auch [DPD Schweiz](carrier:dpd-ch), DPD Frankreich, DPD UK, SEUR, BRT, Relais Colis und [Hermes](carrier:hermes-de) vergeben 14-stellige Nummern. Schau deshalb in der Versand-E-Mail des Shops nach, welchen Paketdienst sie nennt.
+Auch [DPD Schweiz](carrier:dpd-ch), DPD Frankreich, DPD UK, SEUR, BRT und [Hermes](carrier:hermes-de) vergeben 14-stellige Nummern. Schau deshalb in der Versand-E-Mail des Shops nach, welchen Paketdienst sie nennt.
 
 ## DPD Sendungsverfolgung: was die Status bedeuten
 

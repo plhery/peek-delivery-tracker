@@ -3,7 +3,7 @@ title: DPD Austria tracking: statuses, Pickup shops and contact
 description: Track a DPD parcel in Austria: the 14-digit parcel number and PIN, what myDPD's German and English statuses mean, Pickup deadlines and how to reach DPD.
 slug: dpd-austria-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-07
 ---
 
 DPD Austria is a private parcel company based in Leopoldsdorf. Within Austria, it usually delivers within one working day of getting the parcel from the shop. Track a parcel on [myDPD](https://www.mydpd.at/), DPD Austria's tracking site and app, with the 14-digit parcel number from the shop's shipping email, or paste the number in the box above.
@@ -36,6 +36,8 @@ myDPD shows each scan with the depot that made it, in German or English wordings
 | `Paket wurde in der Pickup Paketstation hinterlegt`, `Parcel was handed over to Pickup parcel shop`, `Takeover by Pickup parcel shop` | Waiting for you at a Pickup locker or shop. DPD sends a pickup code by email or SMS, with the address for a locker. |
 | `Paket durch Empfänger abgeholt` | Collected from the Pickup point. |
 | `Paket wurde erfolgreich abgestellt` | Left at the place you allowed with a deposit okay, such as your garage. |
+| `Parcel was not picked up` | Nobody collected it from the Pickup shop in time. The return to the sender usually starts the same minute. |
+| `Parcel will be returned to the sender.` | The parcel starts its way back to the sender. |
 | `Parcel was picked up by driver from Pickup parcel shop` | A driver took it from a Pickup shop: early on, the sender's drop-off; after it waited there for you, the way back to the sender. |
 
 ## DPD delivery in Austria: Predict, changes and Pickup points

@@ -19,7 +19,7 @@ Laut DPD bekommst du als Empfänger die Paketnummer in der Regel per E-Mail, oft
 
 Nicht verwechseln: Die Benachrichtigungsnummer auf der Paketinfokarte steht unterhalb des Barcodes und beginnt mit P00. Sie ist keine Paketnummer, mit ihr vereinbarst du eine neue Zustellung (mehr dazu unten).
 
-Findet myDPD nichts, nennt DPD drei Gründe: Das Paket wurde DPD noch nicht übergeben, die Nummer ist älter als 31 Tage und schon archiviert, oder sie ist falsch (DPD-Paketnummern haben immer 14 Ziffern). Auch [DPD Deutschland](carrier:dpd-de), DPD Frankreich, DPD UK, SEUR, BRT, Relais Colis und andere vergeben 14-stellige Nummern. Schau deshalb in der Versand-E-Mail des Shops nach, welchen Paketdienst sie nennt.
+Findet myDPD nichts, nennt DPD drei Gründe: Das Paket wurde DPD noch nicht übergeben, die Nummer ist älter als 31 Tage und schon archiviert, oder sie ist falsch (DPD-Paketnummern haben immer 14 Ziffern). Auch [DPD Deutschland](carrier:dpd-de), DPD Frankreich, DPD UK, SEUR, BRT und andere vergeben 14-stellige Nummern. Schau deshalb in der Versand-E-Mail des Shops nach, welchen Paketdienst sie nennt.
 
 ## DPD Sendungsverfolgung Schweiz: was die Status bedeuten
 

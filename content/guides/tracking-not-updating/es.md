@@ -71,7 +71,7 @@ Si pone «Entregado» y no tienes nada, mira [paquete entregado pero no recibido
 | Correos, envíos nacionales | Paq Premium: desde 3 días después de la admisión; Paq Estándar: desde 4; Paquete Azul: desde 6. Hasta 1 año (6 meses el Paquete Azul) | La indemnización es siempre para el remitente, salvo que autorice por escrito que la cobre el destinatario |
 | Correos, envíos al extranjero | Paquete Internacional Premium: desde 7 días, hasta 4 meses. Standard: desde 15 días; Económico: desde 25, ambos hasta 6 meses | Igual que en los nacionales |
 | InPost | Por demora: cuando el pedido tarda más de 5 días desde el aviso de envío. Como pérdida total: a los 30 días de ese aviso | Tú puedes reclamar. Si se pierde, InPost contacta con el remitente para indemnizarlo |
-| GLS | Su página de ayuda no da plazo de espera. Para una reclamación formal, su hoja de reclamaciones, con respuesta en 30 días | Puedes consultarle por WhatsApp, redes sociales o teléfono, con el número de seguimiento a mano |
+| GLS | Su página de ayuda no da plazo de espera. Para una reclamación formal, su hoja de reclamaciones, con respuesta en 30 días | Puedes consultarle a través de su asistente virtual, por redes sociales o por teléfono, con el número de seguimiento a mano |
 
 Si el paquete solo está parado, pide información a InPost con su formulario: trata las incidencias de transporte en un máximo de 15 días. Correos responde a las reclamaciones de envíos nacionales en un mes como mucho (10 días de media) y a las internacionales en dos.
 
@@ -135,7 +135,7 @@ Puede que el paquete aún no se haya escaneado, que el número sea de otro trans
 - [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – 1 y 2 meses
 - [Correos: Gestión aduanera](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera) – Canarias, Ceuta y Melilla
 - [InPost: Atención al cliente, contacto y ayuda](https://inpost.es/contacta-con-nosotros) – 5, 15 y 30 días, 3 y 3 a 6 días laborables, Locker y Punto Pack, reparto de lunes a viernes
-- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Etiqueta creada, centros de distribución, 24 horas, lunes a viernes, intentos, 7 días
+- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Etiqueta creada, centros de distribución, 24 horas, lunes a viernes, intentos, 7 días, asistente virtual «Consulta», redes sociales y teléfono
 - [GLS: Hoja de reclamaciones](https://gls-group.com/ES/es/hoja-de-reclamaciones/) – respuesta en 30 días
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – primera línea de UPS que lee Peek
 - [Zalando: ¿Dónde está mi pedido?](https://www.zalando.es/faq/where-is-my-parcel.html) – enlace sin activar hasta que el transportista tiene el paquete, 5-6 días laborables
@@ -146,6 +146,7 @@ Puede que el paquete aún no se haya escaneado, que el número sea de otro trans
 - [About Amazon España: Diez cosas de Amazon que no sabías, mejoran tu experiencia de compra y te ayudan a ahorrar cada día](https://www.aboutamazon.es/noticias/noticias-de-la-compania/diez-cosas-amazon-mejoran-tu-experiencia-compra-ahorrar-cada-dia) – Garantía de la A a la Z para vendedores externos, problemas con el tiempo de entrega
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – reembolso de Amazon si no se resuelve con el vendedor
 - [Vinted: El paquete no llega](https://www.vinted.es/help/658) – 7, 25, 21 y 2 días
+- [Vinted: Términos y condiciones de Vinted Pro](https://www.vinted.es/pro-terms-and-conditions) – 14 días naturales con vendedores Pro, «Tengo un problema», después se completa solo
 - [Vinted: Seguimiento del paquete](https://www.vinted.es/help/100) – 48 horas
 - [Vinted: La información de seguimiento no se actualiza](https://www.vinted.es/help/1368) – días laborables sin festivos
 - [Vinted: Política de reembolso](https://www.vinted.es/help/465) – 2 días naturales tras el aviso

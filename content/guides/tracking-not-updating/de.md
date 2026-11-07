@@ -138,7 +138,8 @@ Vielleicht wurde das Paket noch nicht gescannt (bei DHL Paket kann es bis zu 24 
 - [eBay.de: Grundsatz zum eBay-Käuferschutz](https://www.ebay.de/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – Ca.-Lieferdatum, 30 Kalendertage
 - [Vinted: Eine Sendung verfolgen](https://www.vinted.de/help/100) – bis zu 48 Stunden
 - [Zalando: Wo ist mein Paket?](https://www.zalando.ch/faq/where-is-my-parcel.html) – Link erst aktiv, wenn das Paket beim Zusteller ist
-- [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/658) – 5 und 7 Werktage, 25 und 21 Werktage, 2 und 14 Tage
+- [Vinted: Meine Sendung ist nicht angekommen](https://www.vinted.de/help/658) – 5 und 7 Werktage, 25 und 21 Werktage, 2 Tage
+- [Vinted: Allgemeine Geschäftsbedingungen für Vinted Pro](https://www.vinted.de/pro-terms-and-conditions) – 14 Kalendertage bei Pro-Verkäufern, automatischer Abschluss
 - [Vinted: Die Infos zur Sendungsverfolgung werden nicht aktualisiert](https://www.vinted.de/help/1368) – Werktage ohne Wochenenden und Feiertage
 - [Vinted: Rückerstattungsrichtlinien](https://www.vinted.de/help/465) – 2 Kalendertage nach dem Hinweis von Vinted
 - [Etsy: Einen Fall eröffnen](https://help.etsy.com/hc/de/articles/5745586898199) – 30 Tage

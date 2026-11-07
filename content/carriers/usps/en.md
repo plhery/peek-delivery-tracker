@@ -3,7 +3,7 @@ title: USPS tracking: numbers, statuses and missed deliveries
 description: Track a USPS parcel: where the tracking number is, what USPS's statuses mean, redelivery and Post Office pickup, lost parcels and how to reach USPS.
 slug: usps-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-07
 ---
 
 USPS, the U.S. Postal Service, delivers to every address in the United States, and tracking comes free with most of its domestic parcel services. Type the number into USPS Tracking on usps.com, text it to 28777 or paste it in the box above. The number comes from the sender, usually in the shop's shipping email.
@@ -44,7 +44,7 @@ USPS writes its tracking in English. These are the steps a parcel usually shows,
 | `Available for Pickup` | It can't be delivered: pick it up at your Post Office from the next business day. |
 | `Alert` | A delay, for example from weather or another event. |
 
-`Available for Pickup` sounds like an option, but USPS says no redelivery can be booked for it: you go and get it, with photo ID. `Notice Left (No Secure Location Available)` works like the signature notice: no second attempt by itself. `Insufficient Address` and `No Such Number` mean it is going back to the sender, who must send it again with new postage.
+`Available for Pickup` sounds like an option, but USPS says no redelivery can be booked for it: you go and get it, with photo ID. `Notice Left (No Secure Location Available)` works like the signature notice: no second attempt by itself. `Insufficient Address` and `No Such Number` mean it is going back to the sender, who must send it again with new postage. On mail sent to another country, `Held at Delivery Depot/Delivery Office` means the post there is holding it for you to collect; it shows minutes after the item reaches that office.
 
 ## Missed delivery: redelivery, Post Office pickup and lockers
 
@@ -123,5 +123,5 @@ No. It may give an expected delivery window of 2 hours, which isn't guaranteed, 
 - [USPS: Scams & Scheme Alerts](https://faq.usps.com/articles/Knowledge/Scams-Scheme-Alerts) – common lures, no redelivery fee
 - [U.S. Postal Inspection Service: Smishing](https://www.uspis.gov/news/scam-article/smishing/) – texts only on request, 7726
 - [USPS: Who we are](https://about.usps.com/who/profile/) – every address
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from USPS
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads from USPS, the pickup wording for mail sent abroad
 :::

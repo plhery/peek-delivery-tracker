@@ -53,7 +53,7 @@ Les numéros des transporteurs de Cdiscount ressemblent à ça :
 | La Poste / Colissimo | 13 caractères : un chiffre, une lettre et 11 chiffres ; ou 2 lettres, 9 chiffres et `FR` |
 | Chronopost | `XR`, `XT`, `XU`, `XW`, `XY` ou `PZ`, puis 9 chiffres et 2 lettres |
 | DPD France | `250` et 12 chiffres, ou 12 à 15 chiffres commençant par 0 ou 1 |
-| Relais Colis | `CC` et 10 à 14 chiffres, ou 10 ou 14 chiffres seulement |
+| Relais Colis | `CC` et 10 à 14 chiffres, ou 10 chiffres seulement |
 | Mondial Relay | 8, 10, 12 ou 26 chiffres |
 | C Chez Vous | 10 caractères : 4 lettres, 2 chiffres, puis 4 lettres ou chiffres |
 
@@ -145,7 +145,7 @@ La loi te donne au moins 14 jours pour changer d'avis après un achat en ligne ;
 
 Oui, avec le numéro du transporteur : copie-le depuis « Suivre ma livraison » ou l'e-mail d'expédition et colle-le dans [Peek](/). Peek reconnaît à leur seule forme les numéros Colissimo d'un chiffre, une lettre et 11 chiffres, les numéros Chronopost en `XR`, `XT`, `XU`, `XW`, `XY` ou `PZ`, les numéros Relais Colis en `CC`, les numéros DPD France en `250` suivis de 12 chiffres et les numéros C Chez Vous.
 
-Pour une forme partagée par plusieurs transporteurs, comme 8 chiffres chez Mondial Relay et d'autres, ou 14 chiffres chez DPD et Relais Colis, Peek interroge les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » et prends celui de l'e-mail d'expédition ; s'il en affiche un seul et que ce n'est pas le bon, appuie sur « Changer ».
+Pour une forme partagée par plusieurs transporteurs, comme 14 chiffres chez DPD et Chronopost, Peek interroge les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » et prends celui de l'e-mail d'expédition ; s'il en affiche un seul et que ce n'est pas le bon, appuie sur « Changer ». Avec 8, 10 ou 12 chiffres, Peek peut ne pas nommer Mondial Relay de lui-même : appuie alors sur « Changer » et choisis Mondial Relay.
 
 Si le colis d'un vendeur change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique du départ et passe au nouveau transporteur dès que son propre suivi avance. Peek affiche ce que publie le transporteur ; les déclarations, remboursements et retours restent dans ton Espace client.
 

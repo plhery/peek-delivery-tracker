@@ -145,7 +145,8 @@ A encomenda pode ainda não ter sido lida, o número pode ser de outra transport
 - [About Amazon España: Amazon amplía la Garantía de la A a la Z en España para incluir las reclamaciones por daños materiales y personales (em espanhol)](https://www.aboutamazon.es/noticias/politicas-publicas/amazon-amplia-la-garantia-de-la-a-a-la-z-en-espana-para-incluir-las-reclamaciones-por-danos-materiales-y-personales) – reclamar à Amazon quando o vendedor não resolve o problema
 - [eBay: Money Back Guarantee](https://www.ebay.co.uk/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 dias
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 30 dias
-- [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/658) – 5 e 7 dias úteis, 25, 21, 2 e 14 dias
+- [Vinted: A encomenda não foi entregue](https://www.vinted.pt/help/658) – 5 e 7 dias úteis, 25, 21 e 2 dias
+- [Vinted: Termos e Condições da Vinted Pro](https://www.vinted.pt/pro-terms-and-conditions) – 14 dias nas compras a uma Conta de Venda Pro, concluídas automaticamente ao fim desse prazo
 - [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – 48 horas
 - [Vinted: Política de Reembolso](https://www.vinted.pt/help/465) – 2 dias depois do aviso da Vinted
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 dias

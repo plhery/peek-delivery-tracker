@@ -32,7 +32,7 @@ Encontraste o e-mail, mas não sabes qual dos números é o certo? Cola-o inteir
 | Vinted | O ecrã da conversa com quem vende → **Acompanhar encomenda**, onde podes copiar o código |
 | Worten | A **área de cliente**, onde a Worten diz para acompanhares a encomenda. No Marketplace, quem envia é o vendedor parceiro |
 
-Não está lá número nenhum? Pode ainda não existir, ou nunca vir a existir. Na Vinted, só há seguimento para artigos comprados com o botão «Comprar agora» e enviados segundo as instruções da app.
+Não está lá número nenhum? Pode ainda não existir, ou nunca vir a existir. Na Vinted, só há seguimento para artigos comprados com o botão «Comprar» e enviados segundo as instruções da app.
 
 Quem entrega para cada loja e o que fazer quando o seguimento para: [Amazon](guide:amazon-orders), [eBay](guide:ebay-orders), [Etsy](guide:etsy-orders), [Vinted](guide:vinted-orders), [Zalando](guide:zalando-orders), [Allegro](guide:allegro-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [OTTO](guide:otto-orders), [MediaMarkt/Darty](guide:mediamarkt-orders), [Fnac](guide:fnac-orders), [El Corte Inglés](guide:el-corte-ingles-orders), [Cdiscount](guide:cdiscount-orders), [PcComponentes](guide:pccomponentes-orders), [Worten](guide:worten-orders), [Galaxus](guide:galaxus-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders), [Kaufland](guide:kaufland-orders) e [OLX](guide:second-hand-orders).
 
@@ -56,7 +56,7 @@ As transportadoras que explicam o que fazer sem número (os CTT e a InPost) mand
 - **O número tal como está impresso.**
 - **Se o envio tinha seguimento.** Os CTT avisam que alguns envios não têm código e que, nesses casos, não é possível acompanhar o percurso.
 
-Compraste num marketplace? Pergunta através da própria plataforma. Na Vinted, se o artigo seguiu pelo método de envio personalizado, é quem vende que te deve mandar o número por mensagem. No Marketplace da Worten, contacta o vendedor ou a Worten.
+Compraste num marketplace? Pergunta através da própria plataforma. Na Vinted, para pedires ajuda com o acompanhamento, vai à página inicial do Centro de Ajuda e seleciona o teu pedido. No Marketplace da Worten, contacta o vendedor ou a Worten.
 
 ### Deixa a transportadora mostrar-te o que vem a caminho
 
@@ -149,7 +149,7 @@ Continua sem nada? Pergunta ao remetente, como mandam os CTT. Para perceberes ca
 - [DHL: Sendungsverfolgung, Probleme und Lösungen](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/probleme-loesungen.html) – o número de envio não é um número de encomenda
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – números 1Z e o seu algarismo de controlo
 - [Shein Portugal: Como rastrear meu pedido](https://m.shein.com/pt/How-to-track-my-order-a-496.html) – Meus pedidos, Rastrear
-- [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – Acompanhar encomenda, até 48 horas, Comprar agora, envio personalizado
+- [Vinted: Acompanhar uma encomenda](https://www.vinted.pt/help/100) – Acompanhar encomenda, até 48 horas, botão «Comprar» e instruções da app, Centro de Ajuda
 - [Worten: Política de Entregas](https://www.worten.pt/worten-entregas/seguir-encomenda) – seguir na área de cliente, Marketplace, contactar o vendedor ou a Worten
 - [UPU: S10 standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – o formato postal de 13 caracteres, os espaços não fazem parte do número
 :::

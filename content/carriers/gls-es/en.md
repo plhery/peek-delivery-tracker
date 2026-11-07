@@ -67,9 +67,8 @@ For a parcel from outside the EU, GLS Spain or an authorised agent will probably
 GLS Spain's channels for recipients, as read on 11 October 2026 (its [English contact page](https://gls-group.com/ES/en/contact/) lists the same ones as the Spanish):
 
 - **Phone** +34 91 080 62 29, Monday to Friday, 9:00 to 14:00 and 16:00 to 19:00. GLS doesn't state what the call costs.
-- **WhatsApp** "Consulta" at [wa.me/34634750104](https://wa.me/34634750104), linked from GLS's FAQ.
 - **Private message** on Facebook (@GLSSpain), Instagram (@gls_spain) or X (@GLS_clientes), Monday to Friday, 09:00 to 18:00.
-- **Gisela**, GLS's [virtual assistant](https://gls-group.com/ES/es/asistente-virtual/), which also opens from "Make a claim".
+- **Gisela**, GLS's [virtual assistant](https://gls-group.com/ES/es/asistente-virtual/), a web chat that GLS's FAQ links as "Consulta" and that also opens from "Make a claim".
 
 GLS says 911 118 768 is a genuine number it uses only for quality calls.
 
@@ -104,7 +103,8 @@ GLS bought ASM: in April 2016 it announced the purchase of ASM Transporte Urgent
 - [GLS Spain: Frequently asked questions - Receiving parcels](https://gls-group.com/ES/en/faq/receiving-parcels/) – attempts, On delivery
 - [GLS Spain: Guide to understanding your parcel status step by step](https://gls-group.com/ES/en/blog/guide-to-understanding-your-parcel-status-step-by-step/) – status meanings, 7 days
 - [GLS Spain: Contact](https://gls-group.com/ES/en/contact/) – phone and hours in English
-- [GLS Spain: Preguntas frecuentes - Recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – number from the shop, statuses, attempts, ID, damage, WhatsApp, delivery times
+- [GLS Spain: Preguntas frecuentes - Recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – number from the shop, statuses, attempts, ID, damage, virtual assistant ("Consulta", read 7 November 2026), delivery times
+- [GLS Spain: Asistente virtual GLS](https://gls-group.com/ES/es/asistente-virtual/) – Gisela, web chat
 - [GLS Spain: Recibir paquetes](https://gls-group.com/ES/es/recibir-paquetes/) – nota de paso, 9 days, authorisation, Gisela
 - [GLS Spain: Seguimiento de envío](https://gls-group.com/ES/es/recibir-paquetes/seguimiento-envio/) – number and postcode, national or international, 10,500 points
 - [GLS Spain: Tracking form](https://www.gls-spain.es/es/recibir-paquetes/iframe-seguimiento-de-envio-cloned/) – field names, My GLS, postcode required

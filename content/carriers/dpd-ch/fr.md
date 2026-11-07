@@ -19,7 +19,7 @@ DPD l'appelle « numéro de colis ». Comme destinataire, tu le reçois en gén�
 
 Le numéro inscrit sous le code-barres de l'avis de passage, qui commence par P00, n'est pas le numéro de colis : c'est le numéro d'avis, qui sert à commander une nouvelle livraison.
 
-Si myDPD ne trouve rien, le colis n'a peut-être pas encore été remis à DPD, ou le numéro a plus de 31 jours et il est archivé, ou il est faux. Des numéros à 14 chiffres existent aussi chez DPD en Allemagne, en France et au Royaume-Uni, chez SEUR, BRT, Relais Colis et d'autres : regarde quel transporteur est cité dans l'e-mail de la boutique.
+Si myDPD ne trouve rien, le colis n'a peut-être pas encore été remis à DPD, ou le numéro a plus de 31 jours et il est archivé, ou il est faux. Des numéros à 14 chiffres existent aussi chez DPD en Allemagne, en France et au Royaume-Uni, chez SEUR, BRT et d'autres : regarde quel transporteur est cité dans l'e-mail de la boutique.
 
 ## Suivi colis DPD Suisse : ce que veulent dire les statuts
 

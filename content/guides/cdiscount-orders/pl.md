@@ -63,7 +63,7 @@ Numery przewoźników Cdiscount wyglądają tak:
 | La Poste / Colissimo | 13 znaków: cyfra, litera i 11 cyfr; albo 2 litery, 9 cyfr i `FR` |
 | Chronopost | `XR`, `XT`, `XU`, `XW`, `XY` albo `PZ`, potem 9 cyfr i 2 litery |
 | DPD France | `250` i 12 cyfr albo od 12 do 15 cyfr zaczynających się od 0 lub 1 |
-| Relais Colis | `CC` i od 10 do 14 cyfr albo samo 10 lub 14 cyfr |
+| Relais Colis | `CC` i od 10 do 14 cyfr albo samo 10 cyfr |
 | Mondial Relay | 8, 10, 12 albo 26 cyfr |
 | C Chez Vous | 10 znaków: 4 litery, 2 cyfry, potem 4 litery lub cyfry |
 
@@ -147,7 +147,7 @@ Przepisy UE dają ci 14 dni od dostawy na odstąpienie od zakupu przez internet,
 
 Tak, numerem przesyłki przewoźnika: skopiuj go z „Suivre ma livraison” albo z e-maila o wysyłce i wklej do [Peek](/). Po samym kształcie Peek rozpoznaje numery Colissimo z cyfrą, literą i 11 cyframi, numery Chronopost zaczynające się od `XR`, `XT`, `XU`, `XW`, `XY` albo `PZ`, numery Relais Colis z `CC`, numery DPD France z `250` i 12 cyframi oraz numery C Chez Vous.
 
-Gdy kilka firm ma numery tego samego kształtu, jak 8 cyfr u Mondial Relay i innych albo 14 cyfr u DPD i Relais Colis, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz” i wybierz tego z e-maila o wysyłce; jeśli Peek pokaże tylko jednego i to zły, naciśnij „Zmień”.
+Gdy kilka firm ma numery tego samego kształtu, jak 14 cyfr u DPD i Chronopost, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz” i wybierz tego z e-maila o wysyłce; jeśli Peek pokaże tylko jednego i to zły, naciśnij „Zmień”. Przy 8, 10 lub 12 cyfrach Peek może sam nie wskazać Mondial Relay: wtedy naciśnij „Zmień” i wybierz Mondial Relay.
 
 Jeśli paczka sprzedawcy zmieni po drodze przewoźnika, a pierwszy przewoźnik wskaże tego, który ją przejmuje, Peek zachowuje historię od początku i przełącza się, gdy ruszy śledzenie nowego przewoźnika. Peek pokazuje to, co publikuje przewoźnik; zgłoszenia, zwroty pieniędzy i zwroty towaru zostają na twoim koncie Cdiscount.
 

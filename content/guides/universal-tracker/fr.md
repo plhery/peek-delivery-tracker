@@ -84,7 +84,7 @@ La plupart procèdent en cinq étapes :
 :::steps
 - Tu colles | Un numéro de suivi, le lien du transporteur ou l'e-mail d'expédition. Le lien est le plus sûr : il nomme le transporteur.
 - Il examine le format | Lettres, longueur et chiffre de contrôle réduisent les possibilités. `1Z999AA10123456784` commence par le `1Z` d'UPS ; `RR000000005CH` a le format à 13 caractères commun aux postes nationales.
-- Il départage les candidats | Certains formats conviennent à plusieurs transporteurs : un numéro de 14 chiffres peut venir de DPD, [Relais Colis](carrier:relais-colis), [Ciblex](carrier:ciblex) ou SEUR, entre autres. Il en interroge plusieurs, ou te laisse choisir.
+- Il départage les candidats | Certains formats conviennent à plusieurs transporteurs : un numéro de 14 chiffres peut venir de DPD, [Ciblex](carrier:ciblex) ou SEUR, entre autres. Il en interroge plusieurs, ou te laisse choisir.
 - Il récupère les scans | Auprès du transporteur ou d'un autre service de suivi, dans un seul historique.
 - Il revérifie | À intervalles réguliers, et te prévient quand il y a du nouveau.
 :::

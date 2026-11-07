@@ -137,7 +137,8 @@ Peut-être que le colis n'a pas encore été scanné, que le numéro appartient 
 - [DHL : What does my international shipment status mean? (en anglais)](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – dédouanement en plusieurs jours ouvrables
 - [About Amazon France : Amazon étend les protections apportées par la Garantie A à Z en France](https://www.aboutamazon.fr/actualites/nos-boutiques/amazon-etend-les-protections-apportees-par-la-garantie-a-a-z-en-france) – vendeurs tiers, remboursement par Amazon si le problème de livraison n'est pas réglé avec le vendeur
 - [eBay.fr : Règlement de la Garantie client eBay](https://www.ebay.fr/help/policies/ebay-money-back-guarantee-policy/ebay-money-back-guarantee-policy?id=4210) – 30 jours calendaires
-- [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/658) – 5, 7, 21 et 25 jours ouvrés, 2 jours, vendeurs Pro
+- [Vinted : Le colis n'est pas arrivé](https://www.vinted.fr/help/658) – 5, 7, 21 et 25 jours ouvrés, 2 jours
+- [Vinted : Termes et conditions de Vinted Pro](https://www.vinted.fr/pro-terms-and-conditions) – 14 jours calendaires avec un vendeur Pro, puis finalisation automatique
 - [Vinted : Comment suivre un colis ?](https://www.vinted.fr/help/100) – 48 heures avant l'affichage du suivi, jours ouvrés hors week-ends et jours fériés
 - [Vinted : Politique de remboursement de Vinted](https://www.vinted.fr/help/465) – 2 jours calendaires après l'avis de Vinted
 - [Zalando : Où se trouve mon colis ?](https://www.zalando.fr/faq/where-is-my-parcel.html) – lien de suivi inactif avant la prise en charge

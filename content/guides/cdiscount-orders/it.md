@@ -63,7 +63,7 @@ I codici dei corrieri di Cdiscount hanno questa forma:
 | La Poste / Colissimo | 13 caratteri: una cifra, una lettera e 11 cifre; oppure 2 lettere, 9 cifre e `FR` |
 | Chronopost | `XR`, `XT`, `XU`, `XW`, `XY` o `PZ`, poi 9 cifre e 2 lettere |
 | DPD France | `250` e 12 cifre, oppure da 12 a 15 cifre che iniziano con 0 o 1 |
-| Relais Colis | `CC` e da 10 a 14 cifre, oppure solo 10 o 14 cifre |
+| Relais Colis | `CC` e da 10 a 14 cifre, oppure solo 10 cifre |
 | Mondial Relay | 8, 10, 12 o 26 cifre |
 | C Chez Vous | 10 caratteri: 4 lettere, 2 cifre, poi 4 lettere o cifre |
 
@@ -147,7 +147,7 @@ Le regole dell'UE ti danno 14 giorni dalla consegna per recedere da un acquisto 
 
 Sì, con il codice del corriere: copialo da «Suivre ma livraison» o dall'email di spedizione e incollalo in [Peek](/). Peek riconosce dalla sola forma i codici Colissimo di una cifra, una lettera e 11 cifre, quelli Chronopost che iniziano con `XR`, `XT`, `XU`, `XW`, `XY` o `PZ`, quelli Relais Colis che iniziano con `CC`, quelli DPD France di `250` e 12 cifre, e quelli C Chez Vous.
 
-Se una forma è usata da più corrieri, come le 8 cifre di Mondial Relay e altri o le 14 cifre di DPD e Relais Colis, Peek interroga i corrieri probabili e mostra quello che conosce il codice. Se lo conoscono in più di uno, premi «Scegli» e prendi quello dell'email di spedizione; se ne mostra solo uno ed è quello sbagliato, premi «Cambia».
+Se una forma è usata da più corrieri, come le 14 cifre di DPD e Chronopost, Peek interroga i corrieri probabili e mostra quello che conosce il codice. Se lo conoscono in più di uno, premi «Scegli» e prendi quello dell'email di spedizione; se ne mostra solo uno ed è quello sbagliato, premi «Cambia». Con 8, 10 o 12 cifre Peek potrebbe non indicare Mondial Relay da solo: in quel caso premi «Cambia» e scegli Mondial Relay.
 
 Se il pacco di un venditore cambia corriere durante il viaggio e il primo corriere indica quello che subentra, Peek conserva la cronologia dall'inizio e passa al nuovo corriere quando il suo tracciamento si muove. Peek mostra quello che pubblica il corriere; segnalazioni, rimborsi e resi restano nel tuo account Cdiscount.
 

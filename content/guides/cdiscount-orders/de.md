@@ -63,7 +63,7 @@ So sehen die Nummern der Paketdienste von Cdiscount aus:
 | La Poste / Colissimo | 13 Zeichen: eine Ziffer, ein Buchstabe und 11 Ziffern; oder 2 Buchstaben, 9 Ziffern und `FR` |
 | Chronopost | `XR`, `XT`, `XU`, `XW`, `XY` oder `PZ`, dann 9 Ziffern und 2 Buchstaben |
 | DPD France | `250` und 12 Ziffern, oder 12 bis 15 Ziffern, beginnend mit 0 oder 1 |
-| Relais Colis | `CC` und 10 bis 14 Ziffern, oder nur 10 oder 14 Ziffern |
+| Relais Colis | `CC` und 10 bis 14 Ziffern, oder nur 10 Ziffern |
 | Mondial Relay | 8, 10, 12 oder 26 Ziffern |
 | C Chez Vous | 10 Zeichen: 4 Buchstaben, 2 Ziffern, dann 4 Buchstaben oder Ziffern |
 
@@ -147,7 +147,7 @@ Nach französischem Recht hast du nach einem Online-Kauf mindestens 14 Tage, um 
 
 Ja, mit der Nummer des Paketdienstes: Kopiere sie aus „Suivre ma livraison“ oder der Versand-E-Mail und füge sie in [Peek](/) ein. Diese Nummern erkennt Peek allein an der Form: Colissimo-Nummern aus einer Ziffer, einem Buchstaben und 11 Ziffern, Chronopost-Nummern, die mit `XR`, `XT`, `XU`, `XW`, `XY` oder `PZ` beginnen, Relais-Colis-Nummern mit `CC`, DPD-France-Nummern aus `250` und 12 Ziffern sowie Nummern von C Chez Vous.
 
-Bei einer Form, die sich mehrere Dienste teilen, etwa 8 Ziffern bei Mondial Relay und anderen oder 14 Ziffern bei DPD und Relais Colis, fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“ und nimmst den aus der Versand-E-Mail; zeigt Peek nur einen und ist es der falsche, tippst du auf „Ändern“.
+Bei einer Form, die sich mehrere Dienste teilen, etwa 14 Ziffern bei DPD und Chronopost, fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“ und nimmst den aus der Versand-E-Mail; zeigt Peek nur einen und ist es der falsche, tippst du auf „Ändern“. Bei 8, 10 oder 12 Ziffern nennt Peek Mondial Relay womöglich nicht von selbst: Dann tippst du auf „Ändern“ und wählst Mondial Relay.
 
 Wechselt das Paket eines Verkäufers unterwegs den Paketdienst und nennt der erste Dienst den nächsten, behält Peek den Verlauf vom Start und wechselt, sobald die eigene Sendungsverfolgung des neuen Dienstes weitergeht. Peek zeigt, was der Paketdienst veröffentlicht; Meldungen, Erstattungen und Rücksendungen bleiben in deinem Cdiscount-Konto.
 

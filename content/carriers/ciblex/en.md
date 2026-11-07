@@ -21,7 +21,7 @@ The two shapes in use:
 
 On Ciblex's result page, the line above the history can add a shorter number and the sender's reference in brackets; neither is the tracking number.
 
-Fourteen digits also fit DPD, [Relais Colis](carrier:relais-colis), SEUR, BRT and DHL eCommerce UK, and 24 digits fit InPost and [bpost](carrier:bpost). If the number came in an email or SMS from Relais Colis or DPD, it belongs to that carrier. Ciblex's e-commerce page also says that orders for private customers go through Relais Colis, so a parcel from an online shop may be tracked there instead. More on telling shapes apart: [tracking number formats](guide:tracking-number-formats).
+Fourteen digits also fit DPD, SEUR, BRT and DHL eCommerce UK, and 24 digits fit InPost and [bpost](carrier:bpost). If the number came in an email or SMS from [Relais Colis](carrier:relais-colis) or DPD, it belongs to that carrier. Ciblex's e-commerce page also says that orders for private customers go through Relais Colis, so a parcel from an online shop may be tracked there instead. More on telling shapes apart: [tracking number formats](guide:tracking-number-formats).
 
 ## Ciblex tracking statuses: what the French words mean
 
@@ -76,7 +76,7 @@ The contact form on ciblex.eu is for companies' sales enquiries, not tracking qu
 
 ## Tracking a Ciblex parcel with Peek
 
-[Peek](/) knows Ciblex's 14- and 24-digit numbers, but other carriers share both shapes, so it asks the likely carriers at once. For 14 digits in France, it asks Relais Colis and Ciblex first, after DPD or DHL only when the number's start points to one of their networks; elsewhere Ciblex comes sixth or later and may only be asked after you save the parcel. For 24 digits it asks Ciblex, InPost and bpost. If two carriers know the number, you pick with "Change". Links from secure.extranet.ciblex.fr with `colis=` work too; ciblex.eu pages don't.
+[Peek](/) knows Ciblex's 14- and 24-digit numbers, but other carriers share both shapes, so it asks the likely carriers at once. For 14 digits in France, it asks Chronopost and Ciblex first, after DPD or DHL only when the number's start points to one of their networks; elsewhere Ciblex comes sixth or later and may only be asked after you save the parcel. For 24 digits it asks Ciblex, InPost and bpost. If two carriers know the number, you pick with "Change". Links from secure.extranet.ciblex.fr with `colis=` work too; ciblex.eu pages don't.
 
 It checks Ciblex every 10 minutes, and every 2 minutes from 6 a.m. Paris time on the day Ciblex scans the parcel out for delivery, while Ciblex's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status, the history with each scan's depot town on a map, and the delivery time, with times read on Paris time and shown in your device's time zone. Ciblex's French words never appear: each scan shows in plain words such as Delivered, Out for delivery, Ready for pickup, Delivery issue or "Parcel processed at a Ciblex facility", and other lines, `COLIS NON REMIS` and the 48-hour line included, as "Tracking update". It can notify you of every scan, important steps only or delivery day only.
 

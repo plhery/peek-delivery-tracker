@@ -65,7 +65,7 @@ Numbers from Cdiscount's carriers look like this:
 | La Poste / Colissimo | 13 characters: a digit, a letter and 11 digits; or 2 letters, 9 digits and `FR` |
 | Chronopost | `XR`, `XT`, `XU`, `XW`, `XY` or `PZ`, then 9 digits and 2 letters |
 | DPD France | `250` and 12 digits, or 12 to 15 digits starting with 0 or 1 |
-| Relais Colis | `CC` and 10 to 14 digits, or just 10 or 14 digits |
+| Relais Colis | `CC` and 10 to 14 digits, or just 10 digits |
 | Mondial Relay | 8, 10, 12 or 26 digits |
 | C Chez Vous | 10 characters: 4 letters, 2 digits, then 4 letters or digits |
 
@@ -149,7 +149,7 @@ French law gives you at least 14 days to change your mind after buying online; C
 
 Yes, with the carrier's number: copy it from "Suivre ma livraison" or the shipping email and paste it into [Peek](/). Peek recognises these by their shape alone: Colissimo numbers of a digit, a letter and 11 digits, Chronopost numbers starting `XR`, `XT`, `XU`, `XW`, `XY` or `PZ`, Relais Colis numbers starting `CC`, DPD France numbers of `250` and 12 digits, and C Chez Vous numbers.
 
-For a shape several carriers share, such as 8 digits at Mondial Relay and others, or 14 digits at DPD and Relais Colis, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose" and pick the one in the shipping email; if it shows just one and it's the wrong one, press "Change".
+For a shape several carriers share, such as 14 digits at DPD and Chronopost, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose" and pick the one in the shipping email; if it shows just one and it's the wrong one, press "Change". With 8, 10 or 12 digits, Peek may not name Mondial Relay on its own: press "Change" and pick it.
 
 If a seller's parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and switches once the new carrier's own tracking moves. Peek shows what the carrier publishes; reports, refunds and returns stay in your Cdiscount account.
 

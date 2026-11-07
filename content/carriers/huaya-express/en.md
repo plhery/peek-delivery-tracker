@@ -41,7 +41,7 @@ Huaya's tracker has a Chinese and an English version. The scan lines Peek knows 
 | `Customs import clearance completed, awaiting pickup by local carrier` | Your country's customs have let it through; the local carrier still has to collect it. |
 | `It has been handed over to the service provider.` | The local carrier has collected it. Huaya names neither that carrier nor its number, and the lines Peek knows after this one are a US carrier's scans: `Arrived at Origin Hub`, at its first hub, by Chicago's O'Hare airport, then `Departed Origin Hub`, `Arrived at Destination Hub` (its hub nearest you), `Departed Destination Hub` and `Arrived At Warehouse`, its warehouse before the delivery round. |
 
-Huaya's times come without a time zone: they're Beijing time, except on the DHL scans it copies, which keep the time of the place where DHL scanned the parcel. If the tracker has nothing for a number, its 参考号 (reference) column repeats the number and the rest of the row stays blank.
+Huaya's times come without a time zone: they're Beijing time, except on the DHL scans it copies and the US carrier's scans at a US town, which keep the time of the place where the parcel was scanned. If the tracker has nothing for a number, its 参考号 (reference) column repeats the number and the rest of the row stays blank.
 
 ## Who delivers Huaya Express parcels
 
@@ -72,7 +72,7 @@ The 关于我们 (about us) and 服务网点 (branches) pages hold nothing but a
 
 Paste an HYYT…GZ number, or a link to Huaya's tracker with it after `documentCode=`, and [Peek](/) files it under Huaya Express straight away: in Peek's catalog that layout belongs to Huaya alone. A shop's order reference looks like nothing in particular, but Peek follows more than 3,500 carriers: enter the reference, then pick Huaya Express under "Change" (华亚运通 or GZHY bring it up too). For a parcel you've added already, use "Change carrier". Peek then also shows the number Huaya tracks the order under. Peek drops dashes, though, so look up a reference with dashes on Huaya's own tracker.
 
-Peek gets its updates from Huaya's own tracker: each line in Huaya's own words with its place when it has one, plus the destination country. The label line shows as "Label created", the warehouse scan as "Received by carrier", the later lines above as "In transit". Times are converted from Beijing to your device's time zone (DHL's copied scans from the time where DHL scanned the parcel), and if Huaya's tracker shows a line whose time hasn't come yet in Beijing, Peek leaves it out until then. Huaya gives no delivery date, so Peek shows none.
+Peek gets its updates from Huaya's own tracker: each line in Huaya's own words with its place when it has one, plus the destination country. The label line shows as "Label created", the warehouse scan as "Received by carrier", the later lines above as "In transit". Times are converted from Beijing to your device's time zone (DHL's copied scans and the US carrier's scans at a US town from the time where the parcel was scanned), and if Huaya's tracker shows a line whose time hasn't come yet in Beijing, Peek leaves it out until then. Huaya gives no delivery date, so Peek shows none.
 
 Huaya's record gives Peek no delivering company or number to follow, so Peek stays with Huaya's tracker, whose history ends at the hand-over line or a few of a US carrier's scans after it; only on a line through DHL in Germany does it go on, with the DHL scans Huaya copies. To follow the rest, add the local carrier's number from the seller as a second parcel.
 
@@ -99,5 +99,5 @@ The shop you bought from: it's Huaya's customer for that parcel, and Huaya's cla
 - [Huaya Express: 投诉建议 (complaints and suggestions)](http://hyytgz.com/message.php) – the form's fields
 - [Huaya Express: 关于我们 (about us)](http://hyytgz.com/about.php) – no content
 - [Huaya Express: 服务网点 (branches)](http://hyytgz.com/outlets.php) – no content
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – English company name, tracker address and links, HYYT shape, scan wordings and meanings, Beijing clock, lines dated after a check, unknown-number answer, search by reference, no delivering carrier named, what Peek shows
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – English company name, tracker address and links, HYYT shape, scan wordings and meanings, Beijing clock (the local clock for DHL's copied scans and the US carrier's scans at a US town), lines dated after a check, unknown-number answer, search by reference, no delivering carrier named, what Peek shows
 :::

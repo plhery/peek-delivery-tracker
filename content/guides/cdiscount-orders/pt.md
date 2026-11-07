@@ -63,7 +63,7 @@ Os números das transportadoras da Cdiscount têm esta forma:
 | La Poste / Colissimo | 13 caracteres: um dígito, uma letra e 11 dígitos; ou 2 letras, 9 dígitos e `FR` |
 | Chronopost | `XR`, `XT`, `XU`, `XW`, `XY` ou `PZ`, depois 9 dígitos e 2 letras |
 | DPD France | `250` e 12 dígitos, ou de 12 a 15 dígitos começados por 0 ou 1 |
-| Relais Colis | `CC` e de 10 a 14 dígitos, ou só 10 ou 14 dígitos |
+| Relais Colis | `CC` e de 10 a 14 dígitos, ou só 10 dígitos |
 | Mondial Relay | 8, 10, 12 ou 26 dígitos |
 | C Chez Vous | 10 caracteres: 4 letras, 2 dígitos e depois 4 letras ou dígitos |
 
@@ -147,7 +147,7 @@ As regras da UE dão-te 14 dias a contar da entrega para desistires de uma compr
 
 Sim, com o número da transportadora: copia-o de «Suivre ma livraison» ou do e-mail de envio e cola-o no [Peek](/). O Peek reconhece só pela forma os números da Colissimo com um dígito, uma letra e 11 dígitos, os da Chronopost começados por `XR`, `XT`, `XU`, `XW`, `XY` ou `PZ`, os da Relais Colis começados por `CC`, os da DPD France com `250` e 12 dígitos, e os da C Chez Vous.
 
-Se várias transportadoras usarem a mesma forma, como os 8 dígitos da Mondial Relay e de outras ou os 14 dígitos da DPD e da Relais Colis, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher» e escolhe a do e-mail de envio; se mostrar só uma e for a errada, carrega em «Alterar».
+Se várias transportadoras usarem a mesma forma, como os 14 dígitos da DPD e da Chronopost, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher» e escolhe a do e-mail de envio; se mostrar só uma e for a errada, carrega em «Alterar». Com 8, 10 ou 12 dígitos, o Peek pode não indicar sozinho a Mondial Relay: nesse caso, carrega em «Alterar» e escolhe a Mondial Relay.
 
 Se a encomenda de um vendedor mudar de transportadora pelo caminho e a primeira indicar a que fica com ela, o Peek guarda o histórico desde o início e muda quando o seguimento da nova transportadora avança. O Peek mostra o que a transportadora publica; as reclamações, os reembolsos e as devoluções ficam na tua conta Cdiscount.
 

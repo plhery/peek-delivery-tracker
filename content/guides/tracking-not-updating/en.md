@@ -149,6 +149,7 @@ The parcel may not be scanned yet, the number may belong to another carrier, or 
 - [Etsy: How to open a case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 30 days
 - [Vinted: Tracking a parcel](https://www.vinted.co.uk/help/100-tracking-a-parcel) – 48 hours
 - [Vinted: Parcel didn't arrive](https://www.vinted.co.uk/help/658-package-didn-t-arrive) – 25, 21 and 2 days
+- [Vinted: Pro Terms and Conditions](https://www.vinted.co.uk/pro-terms-and-conditions) – 14 calendar days for Pro sellers, "I have an issue", then completed automatically
 - [Vinted: Refund Policy](https://www.vinted.co.uk/help/465-the-vinted-refund-policy) – 2 days after Vinted's notice
 - [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – 15 days
 - [legislation.gov.uk: Consumer Rights Act 2015, s. 29](https://www.legislation.gov.uk/ukpga/2015/15/section/29) – passing of risk

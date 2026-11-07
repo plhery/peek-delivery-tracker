@@ -60,7 +60,7 @@ Il codice ce l'ha lui. Chiedigli:
 - **Il codice esattamente com'è stampato.** Poste lo vuole «senza interruzioni e senza trattino».
 - **Se la spedizione era tracciata.** Non tutto lo è. Con Poste, una Posta1 o una Postapriority internazionale senza l'etichetta con il codice 2DComm non si può seguire. In Svizzera, tra le lettere si seguono per esempio la raccomandata e la Posta A Plus, mentre una normale lettera in Posta A o B non è nell'elenco degli invii tracciabili.
 
-Hai comprato su un marketplace? Chiedi da lì. Su Amazon.it, se l'articolo è di un venditore terzo, prova prima a risolvere il problema con lui; se non ci riesci, puoi chiedere un rimborso direttamente ad Amazon. Su eBay puoi chiedere al venditore di aggiungere il codice della spedizione. Su Vinted una spedizione personalizzata non si traccia nell'app: il numero dovrebbe mandartelo chi vende, con un messaggio.
+Hai comprato su un marketplace? Chiedi da lì. Su Amazon.it, se l'articolo è di un venditore terzo, prova prima a risolvere il problema con lui; se non ci riesci, puoi chiedere un rimborso direttamente ad Amazon. Su eBay puoi chiedere al venditore di aggiungere il codice della spedizione. Su Vinted il tracciamento c'è solo per gli articoli acquistati con il pulsante «Acquista subito» e spediti seguendo le istruzioni dell'app; per assistenza, vai alla home del Centro assistenza e seleziona l'ordine.
 
 ### Fatti mostrare dal corriere i pacchi in arrivo
 
@@ -159,7 +159,7 @@ Ancora niente? Chiedi al mittente o al negozio di ricontrollare codice e corrier
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – codici 1Z e la loro cifra di controllo, l'etichetta creata prima che UPS abbia il pacco
 - [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z per includere le richieste di risarcimento per danni alla proprietà e alle persone](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il partner di vendita, poi il rimborso da Amazon
 - [eBay.it: Controllare lo stato della spedizione dell'oggetto](https://www.ebay.it/help/buying/spedizione-consegna/tracciare-oggetto?id=4027) – Cronologia acquisti, Ordine confermato, codice non ancora caricato
-- [Vinted.it: Tracciare un pacco](https://www.vinted.it/help/100) – Traccia il pacco, fino a 48 ore, spedizione personalizzata
+- [Vinted.it: Tracciare un pacco](https://www.vinted.it/help/100) – Traccia il pacco, fino a 48 ore, tracciamento solo con «Acquista subito» e le istruzioni dell'app, Centro assistenza
 - [Zalando.it: Dov'è il mio pacco?](https://www.zalando.it/faq/where-is-my-parcel.html) – link nell'e-mail, Il mio account
 - [Shein Italia: Come tracciare il mio ordine](https://m.shein.com/it/How-to-track-my-order-a-496.html) – I miei ordini, Tracciare il mio ordine
 - [Shein: Where is my order?](https://m.shein.com/it/faq/detail?id=21338) – senza codice l'ordine è ancora in magazzino

@@ -18,7 +18,7 @@ DPD pisze o „14-znakowym numerze przesyłki” i nie wyjaśnia, z czego się s
 | `13000000000000` | 14 cyfr zaczynających się od 13: też numer DPD Polska. |
 | `123456789` | 9-znakowy kod nadania: służy nadawcy, na przykład przy automacie. |
 
-Czternaście cyfr mają też numery DPD w Niemczech, Szwajcarii, Wielkiej Brytanii i Francji oraz SEUR, BRT czy Relais Colis, więc sprawdź, którego przewoźnika wymienia e-mail ze sklepu. Jeśli strona DPD odpowiada `Wprowadzono błędny numer przesyłki`, numer jest błędny albo nie trafił jeszcze do systemu DPD: DPD prosi, by wpisać go ponownie następnego dnia po nadaniu, w godzinach porannych. Paczki Allegro Delivery widać tylko w narzędziach Allegro, nie w DPD Mobile.
+Czternaście cyfr mają też numery DPD w Niemczech, Szwajcarii, Wielkiej Brytanii i Francji oraz SEUR czy BRT, więc sprawdź, którego przewoźnika wymienia e-mail ze sklepu. Jeśli strona DPD odpowiada `Wprowadzono błędny numer przesyłki`, numer jest błędny albo nie trafił jeszcze do systemu DPD: DPD prosi, by wpisać go ponownie następnego dnia po nadaniu, w godzinach porannych. Paczki Allegro Delivery widać tylko w narzędziach Allegro, nie w DPD Mobile.
 
 ## Statusy DPD: co oznaczają
 

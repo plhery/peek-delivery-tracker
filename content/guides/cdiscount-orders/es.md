@@ -63,7 +63,7 @@ Los números de los transportistas de Cdiscount tienen esta forma:
 | La Poste / Colissimo | 13 caracteres: una cifra, una letra y 11 cifras; o 2 letras, 9 cifras y `FR` |
 | Chronopost | `XR`, `XT`, `XU`, `XW`, `XY` o `PZ`, luego 9 cifras y 2 letras |
 | DPD France | `250` y 12 cifras, o de 12 a 15 cifras que empiezan por 0 o 1 |
-| Relais Colis | `CC` y de 10 a 14 cifras, o solo 10 o 14 cifras |
+| Relais Colis | `CC` y de 10 a 14 cifras, o solo 10 cifras |
 | Mondial Relay | 8, 10, 12 o 26 cifras |
 | C Chez Vous | 10 caracteres: 4 letras, 2 cifras y luego 4 letras o cifras |
 
@@ -147,7 +147,7 @@ Las normas de la UE te dan 14 días desde la entrega para desistir de una compra
 
 Sí, con el número del transportista: cópialo de «Suivre ma livraison» o del correo de envío y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Colissimo de una cifra, una letra y 11 cifras, los de Chronopost que empiezan por `XR`, `XT`, `XU`, `XW`, `XY` o `PZ`, los de Relais Colis que empiezan por `CC`, los de DPD France de `250` y 12 cifras, y los de C Chez Vous.
 
-Si una forma la usan varios transportistas, como las 8 cifras de Mondial Relay y otros o las 14 cifras de DPD y Relais Colis, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir» y escoge el del correo de envío; si muestra solo uno y no es el bueno, pulsa «Cambiar».
+Si una forma la usan varios transportistas, como las 14 cifras de DPD y Chronopost, Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir» y escoge el del correo de envío; si muestra solo uno y no es el bueno, pulsa «Cambiar». Con 8, 10 o 12 cifras, puede que Peek no nombre a Mondial Relay por sí solo: pulsa «Cambiar» y elige Mondial Relay.
 
 Si el paquete de un vendedor cambia de transportista en el camino y el primero nombra al que toma el relevo, Peek conserva el historial desde el principio y cambia cuando se mueve el seguimiento del nuevo transportista. Peek muestra lo que publica el transportista; los avisos de problemas, los reembolsos y las devoluciones se quedan en tu cuenta de Cdiscount.
 

@@ -4254,7 +4254,10 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "trackingSearchUrl": "https://web.yundaex.com/infoInquiry"
+    "trackingSearchUrl": "https://web.yundaex.com/infoInquiry",
+    "aliases": [
+      "uda International"
+    ]
   },
   "yto": {
     "displayName": "YTO Express",

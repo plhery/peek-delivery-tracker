@@ -1828,6 +1828,10 @@ export class TrackingSyncService {
         throw new SupersededTrackingSync('Tracking configuration changed during the check');
       }
       if (typeof values.carrier === 'string') filed.carrier = values.carrier;
+      const saved = { ...parcel, ...values };
+      const routing = routingState(saved);
+      audit.filed(String(saved.carrier ?? '') || 'unknown',
+        routing.confirmed_number === saved.tracking_number ? routing.confirmed_carrier ?? null : null);
       if (consumeAddition) {
         parcel.carrier_data = values.carrier_data;
         consumeAddition = false;

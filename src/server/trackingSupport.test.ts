@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { CarrierResult } from 'universal-parcel-scraper';
-import { retainDetectionSupport, trackingSupportContext, trackingSupportEvidence } from './trackingSupport';
+import { retainDetectionSupport, trackingSupportContext, trackingSupportEvidence, trackingSupportGap, trackingSupportStart } from './trackingSupport';
 import { SupabaseServiceClient } from './supabase';
 
 // A UPS number its check digit confirms.
@@ -124,6 +124,16 @@ describe('tracking support context', () => {
     expect(trackingSupportContext('123456789012', 'fedex', 'dhl').reasons).toEqual(['ambiguous_shape']);
     expect(trackingSupportContext('HL123456789RV', 'dhl', 'dhl').reasons).toEqual(['ambiguous_shape']);
     expect(trackingSupportContext('zz-test 1234', 'ups', 'ups').reasons).toEqual(['unknown_shape']);
+  });
+
+  it('leaves an ambiguous shape to the end of the check, which opens it only when the filed carrier did not confirm the number', () => {
+    expect(trackingSupportStart('123456789012', 'fedex').reasons).toEqual([]);
+    expect(trackingSupportStart('HL123456789RV', 'dhl').reasons).toEqual(['carrier_mismatch']);
+    expect(trackingSupportGap('123456789012', 'fedex', 'fedex')).toEqual({});
+    expect(trackingSupportGap('123456789012', 'fedex', null)).toEqual({ support_gap_reason: 'ambiguous_shape' });
+    // A parcel left under no carrier keeps it, whoever confirmed the number.
+    expect(trackingSupportGap('123456789012', 'unknown', 'fedex')).toEqual({ support_gap_reason: 'ambiguous_shape' });
+    expect(trackingSupportGap('ZZTEST1234', 'unknown', null)).toEqual({});
   });
 
   it('keeps a generic postal match unresolved without assigning its issuer to a carrier', () => {

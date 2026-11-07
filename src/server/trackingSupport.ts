@@ -54,6 +54,23 @@ export function trackingSupportContext(trackingNumber: string, configuredCarrier
   };
 }
 
+/**
+ * The context a check records when it begins. Whether a shape several carriers issue leaves a gap
+ * depends on the check's answer, so that reason waits for its end (`trackingSupportGap`): a check whose
+ * carrier confirms the number opens no case.
+ */
+export function trackingSupportStart(trackingNumber: string, configuredCarrier: string, answeredBy: string | null = null): JsonObject {
+  const context = trackingSupportContext(trackingNumber, configuredCarrier, answeredBy);
+  context.reasons = (context.reasons as string[]).filter((reason) => reason !== 'ambiguous_shape');
+  return context;
+}
+
+/** The ambiguous shape a check leaves, from the carrier it filed the parcel under and the one that confirmed the number. */
+export function trackingSupportGap(trackingNumber: string, filedCarrier: string, answeredBy: string | null): JsonObject {
+  return (trackingSupportContext(trackingNumber, filedCarrier, answeredBy).reasons as string[]).includes('ambiguous_shape')
+    ? { support_gap_reason: 'ambiguous_shape' } : {};
+}
+
 /** Whether the Add sheet's recognition asks the carrier over plain HTTP; any other it asks through a browser, if at all. */
 function recognizedOverHttp(carrier: string): boolean {
   return CARRIER_DEFINITIONS[carrier as CarrierId]?.tracking.recognitionRank != null;

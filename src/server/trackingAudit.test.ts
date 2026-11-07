@@ -46,7 +46,7 @@ describe('tracking support audit persistence', () => {
           package_id: 'synthetic-package', configured_carrier: 'dhl', started_at: '2026-09-10T12:00:00.000Z',
           support_context: expect.objectContaining({
             tracking_number: 'HL123456789RV', configured_carrier: 'dhl',
-            reasons: ['ambiguous_shape', 'carrier_mismatch'],
+            reasons: ['carrier_mismatch'],
           }),
         }),
       },
@@ -58,7 +58,7 @@ describe('tracking support audit persistence', () => {
         p_steps: [expect.objectContaining({
           step: 'complete', status: 'succeeded', details: {
             outcome: 'updated', support_lookup_number: 'HL123456789RV',
-            support_provider: null, support_direct_progress: true, support_settled: false,
+            support_provider: null, support_direct_progress: true, support_settled: false, support_gap_reason: 'ambiguous_shape',
           },
         })],
       },
@@ -72,8 +72,27 @@ describe('tracking support audit persistence', () => {
       { trigger: 'package' }, new Date('2026-09-10T12:00:00Z'), 'chronopost');
     await audit.start();
     expect(request).toHaveBeenNthCalledWith(1, '/rest/v1/tracking_sync_attempts', expect.objectContaining({
-      body: expect.objectContaining({ support_context: expect.objectContaining({ reasons: ['ambiguous_shape'] }) }),
+      body: expect.objectContaining({ support_context: expect.objectContaining({ reasons: [] }) }),
     }));
+  });
+
+  it.each([
+    ['opens no case once the carrier the check filed the parcel under confirmed the number', 'gofo', 'gofo', []],
+    ['still opens one while no carrier confirmed it', 'gofo', null, ['ambiguous_shape']],
+    ['still opens one while the parcel stays under no carrier', 'unknown', 'gofo', ['ambiguous_shape']],
+  ])('for a shape several carriers issue, %s', async (_case, carrier, answeredBy, gap) => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValue(true);
+    // A parcel saved under no carrier, its number a shape GOFO and AliExpress both issue.
+    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'GFUS01234567890123', 'unknown', 'pending', { trigger: 'added' });
+    await audit.start();
+    audit.filed(carrier, answeredBy);
+    await audit.finish({ outcome: 'updated', sourceCarrier: 'gofo', evaluateHealth: false });
+    expect(request).toHaveBeenNthCalledWith(1, '/rest/v1/tracking_sync_attempts', expect.objectContaining({
+      body: expect.objectContaining({ support_context: expect.objectContaining({ configured_carrier: 'unknown', reasons: [] }) }),
+    }));
+    const [step] = (request.mock.calls[1][1] as { body: { p_steps: JsonObject[] } }).body.p_steps;
+    expect([step.step, (step.details as JsonObject).support_gap_reason]).toEqual(['complete', ...gap.length ? gap : [undefined]]);
   });
 
   it('records a fallback success without losing the unresolved detection context', async () => {
@@ -174,7 +193,7 @@ describe('a check of a number its carrier does not issue', () => {
       'synthetic-package', 'TEST1234', 'nacex', 'pending', { trigger: 'added' });
     await audit.finish({ outcome: 'error', sourceCarrier: 'nacex', providerFailures: failures });
     expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(audit.attemptId,
-      expect.objectContaining({ outcome: 'refused' }), [expect.objectContaining({ step: 'complete', details: { outcome: 'refused' } })]);
+      expect.objectContaining({ outcome: 'refused' }), [expect.objectContaining({ step: 'complete', details: expect.objectContaining({ outcome: 'refused' }) })]);
     expect(recordRefresh).toHaveBeenLastCalledWith('nacex', 'nacex', 'refused');
     expect(logOperationalEvent).toHaveBeenLastCalledWith('tracking_sync_completed', expect.objectContaining({ outcome: 'refused' }), 'info');
     // Another carrier's refusal leaves this one's failed check an error.

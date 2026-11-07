@@ -5921,8 +5921,29 @@ describe('TrackingSyncService', () => {
     const adapter: TrackingAdapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit', events: [] }) };
     await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter).syncPackage(parcel);
     expect(client.startSyncAttempt).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({
-      support_context: expect.objectContaining({ reasons: ['ambiguous_shape'] }),
+      support_context: expect.objectContaining({ reasons: [] }),
     }), undefined);
+  });
+
+  it.each([
+    ['opens no case once the filed carrier confirmed the number', {
+      status: 'in_transit', last_update: '2026-11-06T10:00:00Z',
+      events: [{ time: '2026-11-06T10:00:00Z', description: 'Synthetic departure', stage: 'in_transit' }],
+    }, undefined],
+    ['opens one when the check ends without its confirmation', new Error('Synthetic outage'), 'ambiguous_shape'],
+  ])('for a number of a shape several carriers issue, %s', async (_case, answer, gap) => {
+    // A shape GOFO and AliExpress both issue, filed under GOFO before GOFO answered for it.
+    const parcel = { id: 'package-gofo', carrier: 'gofo', tracking_number: 'GFUS01234567890123', current_stage: 'pending' };
+    const client = fakeClient([parcel]);
+    const adapter = { fetch: answer instanceof Error ? vi.fn().mockRejectedValue(answer) : vi.fn().mockResolvedValue(answer),
+      fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+    await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null,
+      () => new Date('2026-11-06T12:00:00Z')).syncPackage(parcel, { trigger: 'added' });
+    expect(client.startSyncAttempt).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({
+      support_context: expect.objectContaining({ detection_candidates: ['aliexpress', 'gofo'], reasons: [] }),
+    }), undefined);
+    const steps = client.completeSyncAttempt.mock.calls.at(-1)![2] as JsonObject[];
+    expect((steps.find((step) => step.step === 'complete')!.details as JsonObject).support_gap_reason).toBe(gap);
   });
 
   it('stores normalized events and advances the package stage', async () => {
@@ -5967,7 +5988,7 @@ describe('TrackingSyncService', () => {
       trigger: 'scheduled',
       configured_carrier: 'dpd',
       support_context: expect.objectContaining({
-        tracking_number: '06080000000002', reasons: ['ambiguous_shape'],
+        tracking_number: '06080000000002', reasons: [],
       }),
     }), undefined);
     expect(client.completeSyncAttempt).toHaveBeenCalledWith(

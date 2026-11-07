@@ -16,7 +16,7 @@ import { healthMessage, healthReviewSignal, observeTrackingHealth, type HealthSa
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
 import { ABSTAINED_REASONS, PLACEHOLDER_NUMBER, trackingFailureCode } from './trackingFailure';
-import { trackingSupportContext } from './trackingSupport';
+import { trackingSupportGap, trackingSupportStart } from './trackingSupport';
 
 /**
  * What began a check: the scheduled run, a scraper release's re-check, or a reader adding the
@@ -206,6 +206,8 @@ export class TrackingSyncAudit {
   readonly #steps: StoredStep[] = [];
   #reportedWriteFailure = false;
   #ended = false;
+  /** The carrier the check's last write filed the parcel under, and the one that confirmed its number; null before any write. */
+  #filed: { carrier: string; answeredBy: string | null } | null = null;
   readonly #healthSamples = new Map<string, HealthSample>();
   /** Routing signals reported during the check, once each, saved when it completes. */
   readonly #signals = new Map<string, RoutingSignal>();
@@ -286,6 +288,11 @@ export class TrackingSyncAudit {
     return this.#browser;
   }
 
+  /** What a write of the check saved: the parcel's carrier, and the carrier that confirmed its number, if any. */
+  filed(carrier: string, answeredBy: string | null): void {
+    this.#filed = { carrier, answeredBy };
+  }
+
   /** A routing decision taken after the fetch, such as a carrier correction, for this check. */
   reportRouting(code: string, context: Omit<Parameters<typeof reportRoutingEvent>[1], 'attemptId'>): void {
     withTrackingAttempt(this.attemptId, () => reportRoutingEvent(code, { ...context, attemptId: this.attemptId }), this.#signal);
@@ -301,7 +308,7 @@ export class TrackingSyncAudit {
         previous_stage: this.previousStage,
         previous_expected_delivery: this.previousExpectedDelivery?.trim().slice(0, 100) || null,
         started_at: this.#startedAtIso,
-        support_context: trackingSupportContext(this.trackingNumber, this.configuredCarrier, this.answeredBy),
+        support_context: trackingSupportStart(this.trackingNumber, this.configuredCarrier, this.answeredBy),
       }, this.context.lease);
     });
     logOperationalEvent('tracking_sync_started', this.logContext());
@@ -416,6 +423,8 @@ export class TrackingSyncAudit {
       this.record('complete', 'succeeded', elapsedMilliseconds(this.#startedAt), {
         outcome,
         ...completion.supportEvidence,
+        ...trackingSupportGap(this.trackingNumber, this.#filed?.carrier ?? this.configuredCarrier,
+          this.#filed ? this.#filed.answeredBy : this.answeredBy),
       });
     }
     const completedAt = new Date();
